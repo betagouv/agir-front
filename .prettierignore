@@ -1,0 +1,72 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+.idea/
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# local env files
+.env*.local
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+
+# Helios
+data_test
+data_set/.ssh
+sshd_config
+
+# Lighthouse CI
+.lighthouseci/
+lighthouse-ci-reports
+
+# Python
+.mypy_cache
+__pycache__/
+.ipynb_checkpoints/
+.coverage
+coverage.xml
+htmlcov
+.venv
+
+# stryker temp files
+.stryker-tmp
+jest-for-mutation-testing.json
+reports
+
+# yarn
+**/.yarn/*
+!**/.yarn/patches
+!**/.yarn/releases
+!**/.yarn/plugins
+!**/.yarn/sdks
+!**/.yarn/versions
+**/.pnp.*
+
+#public
+public
