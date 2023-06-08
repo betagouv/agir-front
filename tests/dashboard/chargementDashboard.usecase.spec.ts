@@ -1,15 +1,20 @@
 import { ChargementDashboardUsecase } from "../../src/dashboard/chargementDashboard.usecase";
-import { DashboardPresenterSpy } from "./dashboard.presenter.spy";
+import { ChargementDashboardPresenterImpl } from "../../src/dashboard/adapters/chargementDashboard.presenter.impl";
+import { DashboardRepositoryRetourneUneValeur } from "./dashboardRepository.retourneUneValeur";
 
 describe("Fichier de test du usecase de chargement du dashboard", () => {
-  it("en donnant un utilisateur valide doit me retourner de la data", () => {
+  it("en donnant un utilisateur valide doit me retourner de la data", async () => {
     // GIVEN
-    const chargementDashBoardUsecase = new ChargementDashboardUsecase();
-    const presenter = new DashboardPresenterSpy();
+    const chargementDashBoardUsecase = new ChargementDashboardUsecase(new DashboardRepositoryRetourneUneValeur(10));
+    const presenter = new ChargementDashboardPresenterImpl();
     // WHEN
-    chargementDashBoardUsecase.execute("dlamande", presenter);
+    await chargementDashBoardUsecase.execute("dlamande", presenter);
     // THEN
-    expect(presenter.consommationActuelle).toBe(10);
-    expect(presenter.utilisateur).toBe("dlamande");
+    expect(presenter.dashboardViewModel).toStrictEqual({
+      consommation: "10.0",
+      tendancePicto: "trend-icon--down",
+      texte: "Consommation en baisse",
+      utilisateur: "dlamande",
+    });
   });
 });
