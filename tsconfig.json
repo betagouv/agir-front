@@ -21,8 +21,8 @@
     "noFallthroughCasesInSwitch": true,
 
     "paths": {
-      "@/*": ["src/*"],
-      "@/tests/*": ["tests/*"]
+      "@/*": ["./src/*"],
+      "@/tests/*": ["./tests/*"]
     },
     "esModuleInterop": true
   },

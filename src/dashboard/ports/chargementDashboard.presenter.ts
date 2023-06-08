@@ -1,4 +1,4 @@
-import { Dashboard } from "@/dashboard/ports/dashboardRepository.ts";
+import { Dashboard } from "@/dashboard/ports/dashboardRepository";
 
 export interface DashboardViewModel {
   utilisateur: string;
