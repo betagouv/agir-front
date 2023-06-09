@@ -18,6 +18,7 @@ import { defineComponent, ref, onMounted } from "vue";
 import { ChargementDashboardUsecase } from "@/dashboard/chargementDashboard.usecase.ts";
 import { ChargementDashboardPresenterImpl } from "@/dashboard/adapters/chargementDashboard.presenter.impl.ts";
 import { DashboardRepositoryAxios } from "@/dashboard/adapters/dashboardRepository.axios.ts";
+import { DashboardViewModel } from "@/dashboard/ports/chargementDashboard.presenter.ts";
 
 export default defineComponent({
   name: "Dashboard",
@@ -27,16 +28,16 @@ export default defineComponent({
     const trendClass = ref<string>();
     const trendText = ref<string>();
 
+    function mapValues(dashboardViewModel: DashboardViewModel) {
+      consumptionValue.value = dashboardViewModel.consommation;
+      utilisateur.value = dashboardViewModel.utilisateur;
+      trendClass.value = dashboardViewModel.tendancePicto;
+      trendText.value = dashboardViewModel.texte;
+    }
+
     const updateConsumptionValue = async () => {
       const chargementDashboardUsecase = new ChargementDashboardUsecase(new DashboardRepositoryAxios());
-      const chargementDashboardPresenter = new ChargementDashboardPresenterImpl();
-
-      await chargementDashboardUsecase.execute("dodo", chargementDashboardPresenter);
-
-      consumptionValue.value = chargementDashboardPresenter.dashboardViewModel.consommation;
-      utilisateur.value = chargementDashboardPresenter.dashboardViewModel.utilisateur;
-      trendClass.value = chargementDashboardPresenter.dashboardViewModel.tendancePicto;
-      trendText.value = chargementDashboardPresenter.dashboardViewModel.texte;
+      await chargementDashboardUsecase.execute("dodo", new ChargementDashboardPresenterImpl(mapValues));
     };
 
     onMounted(updateConsumptionValue);
