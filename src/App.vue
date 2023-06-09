@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { computed, ref } from "vue";
 import Authentification from "@/components/Authentification.vue";
+import Dashboard from "@/components/Dashboard.vue";
 const routes = {
   authentification: Authentification,
-  toto: Authentification,
+  dashboard: Dashboard,
 };
 
 const currentPath = ref(window.location.pathname);
@@ -18,9 +19,6 @@ const currentView = computed(() => {
 </script>
 
 <template>
-  <div>
-    <a href="/authentification"> Authentification </a>
-  </div>
   <component :is="currentView" />
 </template>
 
