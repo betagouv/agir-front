@@ -14,7 +14,8 @@ window.addEventListener("hashchange", () => {
 });
 
 const currentView = computed(() => {
-  return routes[currentPath.value.slice(1)] || Authentification;
+  const path = currentPath.value.slice(1) as keyof typeof routes;
+  return routes[path] || Authentification;
 });
 </script>
 
