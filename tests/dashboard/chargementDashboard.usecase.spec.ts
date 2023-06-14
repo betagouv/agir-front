@@ -11,11 +11,26 @@ describe("Fichier de test du usecase de chargement du dashboard", () => {
     await chargementDashBoardUsecase.execute("dlamande", new ChargementDashboardPresenterImpl(expectation));
     // THEN
     function expectation(viewModel: DashboardViewModel) {
-      expect(viewModel).toStrictEqual({
-        consommation: "10.0",
-        tendancePicto: "trend-icon--down",
-        texte: "Consommation en baisse",
+      expect(viewModel).toStrictEqual<DashboardViewModel>({
         utilisateur: "dlamande",
+        compteur: {
+          tendancePicto: "trend-icon--down",
+          texte: "Consommation en baisse",
+          consommation: "10.0",
+          titre: "mon compteur",
+        },
+        quizz: [
+          {
+            id: 1,
+            titre: "mon super quizz",
+          },
+        ],
+        badges: [
+          {
+            titre: "mon super badge",
+            date: "14/06/2023",
+          },
+        ],
       });
     }
   });

@@ -10,9 +10,14 @@ export class ChargementDashboardPresenterImpl implements ChargementDashboardPres
   presenteDashboard(utilisateur: string, dashboard: Dashboard): void {
     this._dashboardViewModel({
       utilisateur,
-      consommation: dashboard.consommation.toFixed(1),
-      tendancePicto: dashboard.consommation > 50 ? "trend-icon--up" : "trend-icon--down",
-      texte: dashboard.consommation > 50 ? "Consommation en hausse" : "Consommation en baisse",
+      compteur: {
+        consommation: dashboard.compteur.valeur.toFixed(1),
+        tendancePicto: dashboard.compteur.valeur > 50 ? "trend-icon--up" : "trend-icon--down",
+        texte: dashboard.compteur.valeur > 50 ? "Consommation en hausse" : "Consommation en baisse",
+        titre: dashboard.compteur.titre,
+      },
+      quizz: dashboard.quizz,
+      badges: dashboard.badges,
     });
   }
 }

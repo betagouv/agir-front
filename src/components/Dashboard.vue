@@ -1,75 +1,74 @@
 <template>
-  <div class="dashboard">
-    <h2>Dashboard de {{ utilisateur }}</h2>
-    <div class="consumption">
-      <h3>Consommation:</h3>
-      <p>
-        <span class="visually-hidden">Consommation:</span>
-        <span>{{ consumptionValue }}</span>
-      </p>
-      <i :class="['trend-icon', trendClass]" aria-hidden="true"></i>
-      <span class="visually-hidden">{{ trendText }}</span>
+  <h1>Dashboard de {{ utilisateur }}</h1>
+  <div class="dashboard-container">
+    <div class="dashboard-item">
+      <Compteur v-if="compteurViewModel" :compteur-view-model="compteurViewModel" />
+    </div>
+    <div v-for="quiz in quizList" :key="quiz.id" class="dashboard-item">
+      <QuizzCarte id="1" :titre="quiz.titre"></QuizzCarte>
+    </div>
+    <div v-for="badge in badges" :key="badge.titre" class="dashboard-item">
+      <BadgeCarte :titre="badge.titre" :date="badge.date"></BadgeCarte>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, onMounted } from "vue";
+import { defineComponent, onMounted, ref } from "vue";
 import { ChargementDashboardUsecase } from "@/dashboard/chargementDashboard.usecase.ts";
 import { ChargementDashboardPresenterImpl } from "@/dashboard/adapters/chargementDashboard.presenter.impl.ts";
 import { DashboardRepositoryAxios } from "@/dashboard/adapters/dashboardRepository.axios.ts";
-import { DashboardViewModel } from "@/dashboard/ports/chargementDashboard.presenter.ts";
+import { BadgeViewModel, CompteurViewModel, DashboardViewModel, QuizzViewModel } from "@/dashboard/ports/chargementDashboard.presenter.ts";
+import Compteur from "@/components/Compteur.vue";
+import QuizzCarte from "@/components/QuizzCarte.vue";
+import BadgeCarte from "@/components/BadgeCarte.vue";
 
 export default defineComponent({
   name: "Dashboard",
+  components: { BadgeCarte, QuizzCarte, Compteur },
   setup() {
-    const consumptionValue = ref<string>();
     const utilisateur = ref<string>();
-    const trendClass = ref<string>();
-    const trendText = ref<string>();
+    const compteurViewModel = ref<CompteurViewModel>();
+    const badges = ref<BadgeViewModel[]>();
+    const quizList = ref<QuizzViewModel[]>();
 
     function mapValues(dashboardViewModel: DashboardViewModel) {
-      consumptionValue.value = dashboardViewModel.consommation;
       utilisateur.value = dashboardViewModel.utilisateur;
-      trendClass.value = dashboardViewModel.tendancePicto;
-      trendText.value = dashboardViewModel.texte;
+      compteurViewModel.value = dashboardViewModel.compteur;
+      badges.value = dashboardViewModel.badges;
+      quizList.value = dashboardViewModel.quizz;
     }
 
     const updateConsumptionValue = async () => {
       const chargementDashboardUsecase = new ChargementDashboardUsecase(new DashboardRepositoryAxios());
-      await chargementDashboardUsecase.execute("dodo", new ChargementDashboardPresenterImpl(mapValues));
+      await chargementDashboardUsecase.execute(window.history.state.utilisateur, new ChargementDashboardPresenterImpl(mapValues));
     };
 
     onMounted(updateConsumptionValue);
 
     return {
-      consumptionValue,
       utilisateur,
-      trendClass,
-      trendText,
+      badges,
+      quizList,
+      compteurViewModel,
     };
   },
 });
 </script>
 
 <style scoped>
-.dashboard {
+.dashboard-item {
   font-family: "Arial", sans-serif;
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   background-color: #3b3f41;
+  margin: 10px;
 }
 
 h2 {
   font-size: 24px;
   margin-bottom: 20px;
-}
-
-.consumption {
-  display: flex;
-  align-items: center;
-  margin-top: 20px;
 }
 
 h3 {
@@ -83,29 +82,7 @@ p {
   position: relative;
 }
 
-.visually-hidden {
-  position: absolute;
-  clip: rect(0 0 0 0);
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-}
-
-.trend-icon {
-  width: 24px;
-  height: 24px;
-  margin-left: 10px;
-  display: inline-block;
-  background-size: contain;
-  background-repeat: no-repeat;
-}
-
-.trend-icon--up {
-  background-image: url("@/assets/vers-le-haut.png");
-}
-
-.trend-icon--down {
-  background-image: url("@/assets/vers-le-bas.png");
+.dashboard-container {
+  display: flex;
 }
 </style>

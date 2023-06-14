@@ -30,7 +30,6 @@ debug.log*
 /.sonar
 /coverage
 /.nyc_output
-/public
 /npm-debug.log*
 /yarn-error.log*
 /_reports
@@ -46,3 +45,6 @@ debug.log*
 # Ignore package manager lock files
 yarn.lock
 package-lock.json
+
+# Env var
+/public/js/config.js

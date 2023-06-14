@@ -14,6 +14,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from "vue";
+import router from "@/router";
 
 export default defineComponent({
   setup() {
@@ -21,16 +22,7 @@ export default defineComponent({
     const error = ref("");
 
     const login = () => {
-      // Simulate login request
-      if (username.value === "dodo") {
-        // Successful login
-        error.value = "";
-        window.location.replace("/dashboard");
-        // Do something, such as redirecting to a different page
-      } else {
-        // Failed login
-        error.value = "Nom d'utilisateur invalide";
-      }
+      router.push({ name: "dashboard", state: { utilisateur: username.value } });
     };
 
     return {

@@ -1,15 +1,28 @@
-import axios from "axios";
 import { Dashboard, DashboardRepository } from "@/dashboard/ports/dashboardRepository.ts";
+import { AxiosFactory } from "@/axios.factory.ts";
 
 export class DashboardRepositoryAxios implements DashboardRepository {
   async getDashboard(utilisateur: string): Promise<Dashboard> {
     try {
-      const dashboardApiReponse = await axios.get("https://agir-back-dev.osc-fr1.scalingo.io/");
+      const axiosInstance = AxiosFactory.getAxios();
+      const response = await axiosInstance.get(`/dashboard/${utilisateur}`);
       console.log(utilisateur);
-      console.log(dashboardApiReponse);
+      console.log(response);
     } catch (e) {
       console.log(e);
     }
-    return { consommation: 10 };
+    return {
+      compteur: {
+        titre: "Mon super compteur",
+        valeur: 10,
+      },
+      quizz: [
+        {
+          id: 1,
+          titre: "Mon super quizz",
+        },
+      ],
+      badges: [],
+    };
   }
 }
