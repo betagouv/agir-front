@@ -425,6 +425,11 @@
   resolved "https://registry.yarnpkg.com/@esbuild/win32-x64/-/win32-x64-0.17.19.tgz#8cfaf2ff603e9aabb910e9c0558c26cf32744061"
   integrity sha512-lAhycmKnVOuRYNtRtatQR1LPQf2oYCkRGkSFnseDAKPl8lu5SOsK/e1sXe5a0Pc5kHIHe6P2I/ilntNv2xf3cA==
 
+"@gouvfr/dsfr@^1.9.3":
+  version "1.9.3"
+  resolved "https://registry.yarnpkg.com/@gouvfr/dsfr/-/dsfr-1.9.3.tgz#289148c79566f6332cc930230742c4fe509d96f2"
+  integrity sha512-toPM1nvzSxPAwpLhnIgf7a/TJV0WOUa6sDqYummvMhZ9PBolFPGuD+3r8e3vg0bR5BkYxOt9hFErOPDU1tU4sQ==
+
 "@istanbuljs/load-nyc-config@^1.0.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@istanbuljs/load-nyc-config/-/load-nyc-config-1.1.0.tgz#fd3db1d59ecf7cf121e80650bb86712f9b55eced"

@@ -1,14 +1,44 @@
 <template>
-  <div class="auth-container">
-    <h2>Authentification</h2>
-    <form class="auth-form" @submit.prevent="login">
-      <div class="form-group">
-        <label for="username" class="form-label">Nom d'utilisateur:</label>
-        <input type="text" id="username" v-model="username" class="form-input" required />
-      </div>
-      <button type="submit" class="form-button">Envoyer</button>
+  <div>
+    <form id="login-8199" @submit.prevent="login">
+      <fieldset class="fr-fieldset" id="login-8199-fieldset" aria-labelledby="login-8199-fieldset-legend login-8199-fieldset-messages">
+        <legend class="fr-fieldset__legend" id="login-8199-fieldset-legend">
+          <h5>Se connecter avec son compte</h5>
+        </legend>
+        <div class="fr-fieldset__element">
+          <fieldset class="fr-fieldset" id="credentials" aria-labelledby="credentials-legend credentials-messages">
+            <legend class="fr-sr-only" id="credentials-legend">identifiants</legend>
+            <div class="fr-fieldset__element">
+              <div class="fr-input-group" autocomplete="username" aria-required="true" autocapitalize="off" autocorrect="off" id="input-group-8201">
+                <label class="fr-label" for="username-8196"> Identifiant </label>
+                <input
+                  class="fr-input"
+                  autocomplete="username"
+                  aria-required="true"
+                  autocapitalize="off"
+                  autocorrect="off"
+                  id="username-8196"
+                  aria-describedby="username-8196-messages"
+                  name="username"
+                  type="text"
+                  v-model="username"
+                />
+                <div class="fr-messages-group" id="username-8196-messages" aria-live="assertive"></div>
+              </div>
+            </div>
+            <div class="fr-messages-group" id="credentials-messages" aria-live="assertive"></div>
+          </fieldset>
+        </div>
+        <div class="fr-fieldset__element">
+          <ul class="fr-btns-group">
+            <li>
+              <button class="fr-mt-2v fr-btn" id="button-8202">Se connecter</button>
+            </li>
+          </ul>
+        </div>
+        <div class="fr-messages-group" id="login-8199-fieldset-messages" aria-live="assertive"></div>
+      </fieldset>
     </form>
-    <p v-if="error" class="error">{{ error }}</p>
   </div>
 </template>
 

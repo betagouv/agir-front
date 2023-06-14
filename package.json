@@ -12,6 +12,7 @@
     "test:watch": "jest --watch"
   },
   "dependencies": {
+    "@gouvfr/dsfr": "^1.9.3",
     "axios": "^1.4.0",
     "vue": "^3.2.47",
     "vue-router": "4"
