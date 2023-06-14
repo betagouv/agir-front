@@ -4,11 +4,11 @@
     <div class="dashboard-item">
       <Compteur v-if="compteurViewModel" :compteur-view-model="compteurViewModel" />
     </div>
-    <div v-for="quiz in quizList" :key="quiz.id" class="dashboard-item">
-      <QuizzCarte id="1" :titre="quiz.titre"></QuizzCarte>
+    <div v-for="item in quizViewModel" :key="item.id" class="dashboard-item">
+      <QuizzCarte :quiz-view-model="item"></QuizzCarte>
     </div>
-    <div v-for="badge in badges" :key="badge.titre" class="dashboard-item">
-      <BadgeCarte :titre="badge.titre" :date="badge.date"></BadgeCarte>
+    <div v-if="badgeViewModel" v-for="item in badgeViewModel" :key="item.titre" class="dashboard-item">
+      <BadgeCarte :badge-view-model="item"></BadgeCarte>
     </div>
   </div>
 </template>
@@ -29,14 +29,14 @@ export default defineComponent({
   setup() {
     const utilisateur = ref<string>();
     const compteurViewModel = ref<CompteurViewModel>();
-    const badges = ref<BadgeViewModel[]>();
-    const quizList = ref<QuizzViewModel[]>();
+    const badgeViewModel = ref<BadgeViewModel[]>();
+    const quizViewModel = ref<QuizzViewModel[]>();
 
     function mapValues(dashboardViewModel: DashboardViewModel) {
       utilisateur.value = dashboardViewModel.utilisateur;
       compteurViewModel.value = dashboardViewModel.compteur;
-      badges.value = dashboardViewModel.badges;
-      quizList.value = dashboardViewModel.quizz;
+      badgeViewModel.value = dashboardViewModel.badges;
+      quizViewModel.value = dashboardViewModel.quizz;
     }
 
     const updateConsumptionValue = async () => {
@@ -48,8 +48,8 @@ export default defineComponent({
 
     return {
       utilisateur,
-      badges,
-      quizList,
+      badgeViewModel,
+      quizViewModel,
       compteurViewModel,
     };
   },

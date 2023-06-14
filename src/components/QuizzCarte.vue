@@ -1,15 +1,20 @@
 <template>
   <div class="consumption">
-    <h3>{{ titre }}</h3>
+    <h3>{{ quizViewModel.titre }}</h3>
     <a href="#">Commencer</a>
   </div>
 </template>
 <script lang="ts">
+import { QuizzViewModel } from "@/dashboard/ports/chargementDashboard.presenter.ts";
+
 export default {
   name: "QuizzCarte",
   props: {
-    titre: {},
-    id: {},
+    quizViewModel: {
+      type: Object as () => QuizzViewModel,
+      required: true,
+      default: undefined,
+    },
   },
 };
 </script>
