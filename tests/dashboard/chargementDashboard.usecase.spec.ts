@@ -17,7 +17,7 @@ describe("Fichier de test du usecase de chargement du dashboard", () => {
           {
             tendancePicto: "trend-icon--down",
             texte: "Consommation en baisse",
-            consommation: "10.0",
+            consommation: "10",
             titre: "mon compteur",
           },
         ],
