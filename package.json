@@ -15,7 +15,8 @@
     "@gouvfr/dsfr": "^1.9.3",
     "axios": "^1.4.0",
     "vue": "^3.2.47",
-    "vue-router": "4"
+    "vue-router": "4",
+    "vuex": "^4.0.2"
   },
   "devDependencies": {
     "@types/jest": "^29.5.2",

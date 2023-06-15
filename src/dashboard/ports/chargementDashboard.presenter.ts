@@ -18,7 +18,7 @@ export interface BadgeViewModel {
 }
 export interface DashboardViewModel {
   utilisateur: string;
-  compteur: CompteurViewModel;
+  compteurs: CompteurViewModel[];
   quizz: QuizzViewModel[];
   badges: BadgeViewModel[];
 }

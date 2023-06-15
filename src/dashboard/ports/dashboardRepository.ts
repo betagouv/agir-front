@@ -12,7 +12,7 @@ interface Badge {
   date: "14/06/2023";
 }
 export interface Dashboard {
-  compteur: Compteur;
+  compteurs: Compteur[];
   quizz: Quizz[];
   badges: Badge[];
 }

@@ -9,10 +9,12 @@ export class DashboardRepositoryRetourneUneValeur implements DashboardRepository
   async getDashboard(utilisateur: string): Promise<Dashboard> {
     console.log(utilisateur);
     return {
-      compteur: {
-        titre: "mon compteur",
-        valeur: this.valeur,
-      },
+      compteurs: [
+        {
+          titre: "mon compteur",
+          valeur: this.valeur,
+        },
+      ],
       quizz: [
         {
           id: 1,

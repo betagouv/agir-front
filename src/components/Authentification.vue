@@ -45,13 +45,16 @@
 <script lang="ts">
 import { defineComponent, ref } from "vue";
 import router from "@/router";
+import { useStore } from "vuex";
 
 export default defineComponent({
   setup() {
     const username = ref("");
     const error = ref("");
-
+    const store = useStore();
     const login = () => {
+      //store.commit("utilisateur/setUtilisateur", username.value);
+      store.commit("setUtilisateur", username.value);
       router.push({ name: "dashboard", state: { utilisateur: username.value } });
     };
 

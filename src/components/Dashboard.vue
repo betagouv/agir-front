@@ -1,13 +1,13 @@
 <template>
   <h1>Dashboard de {{ utilisateur }}</h1>
-  <div class="dashboard-container">
-    <div class="dashboard-item">
-      <Compteur v-if="compteurViewModel" :compteur-view-model="compteurViewModel" />
+  <div class="fr-grid-row fr-grid-row--gutters">
+    <div v-for="item in compteurViewModel" class="fr-col-12 fr-col-md-6 fr-col-lg-4">
+      <Compteur :compteur-view-model="item" />
     </div>
-    <div v-for="item in quizViewModel" :key="item.id" class="dashboard-item">
+    <div v-for="item in quizViewModel" :key="item.id" class="fr-col-12 fr-col-md-6 fr-col-lg-4">
       <QuizzCarte :quiz-view-model="item"></QuizzCarte>
     </div>
-    <div v-if="badgeViewModel" v-for="item in badgeViewModel" :key="item.titre" class="dashboard-item">
+    <div v-for="item in badgeViewModel" :key="item.titre" class="fr-col-12 fr-col-md-6 fr-col-lg-4">
       <BadgeCarte :badge-view-model="item"></BadgeCarte>
     </div>
   </div>
@@ -22,26 +22,30 @@ import { BadgeViewModel, CompteurViewModel, DashboardViewModel, QuizzViewModel }
 import Compteur from "@/components/Compteur.vue";
 import QuizzCarte from "@/components/QuizzCarte.vue";
 import BadgeCarte from "@/components/BadgeCarte.vue";
+import { useStore } from "vuex";
 
 export default defineComponent({
   name: "Dashboard",
   components: { BadgeCarte, QuizzCarte, Compteur },
   setup() {
     const utilisateur = ref<string>();
-    const compteurViewModel = ref<CompteurViewModel>();
+    const compteurViewModel = ref<CompteurViewModel[]>();
     const badgeViewModel = ref<BadgeViewModel[]>();
     const quizViewModel = ref<QuizzViewModel[]>();
 
     function mapValues(dashboardViewModel: DashboardViewModel) {
       utilisateur.value = dashboardViewModel.utilisateur;
-      compteurViewModel.value = dashboardViewModel.compteur;
+      compteurViewModel.value = dashboardViewModel.compteurs;
       badgeViewModel.value = dashboardViewModel.badges;
       quizViewModel.value = dashboardViewModel.quizz;
     }
 
     const updateConsumptionValue = async () => {
       const chargementDashboardUsecase = new ChargementDashboardUsecase(new DashboardRepositoryAxios());
-      await chargementDashboardUsecase.execute(window.history.state.utilisateur, new ChargementDashboardPresenterImpl(mapValues));
+      const store = useStore();
+      //const username = store.getters["utilisateur/getUtilisateur"];
+      const username = store.getters["getUtilisateur"];
+      await chargementDashboardUsecase.execute(username, new ChargementDashboardPresenterImpl(mapValues));
     };
 
     onMounted(updateConsumptionValue);

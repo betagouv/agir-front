@@ -13,12 +13,14 @@ describe("Fichier de test du usecase de chargement du dashboard", () => {
     function expectation(viewModel: DashboardViewModel) {
       expect(viewModel).toStrictEqual<DashboardViewModel>({
         utilisateur: "dlamande",
-        compteur: {
-          tendancePicto: "trend-icon--down",
-          texte: "Consommation en baisse",
-          consommation: "10.0",
-          titre: "mon compteur",
-        },
+        compteurs: [
+          {
+            tendancePicto: "trend-icon--down",
+            texte: "Consommation en baisse",
+            consommation: "10.0",
+            titre: "mon compteur",
+          },
+        ],
         quizz: [
           {
             id: 1,

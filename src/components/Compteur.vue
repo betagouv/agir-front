@@ -1,13 +1,19 @@
 <template>
-  <h2>{{ compteurViewModel?.titre }}</h2>
-  <div class="consumption">
-    <h3>Consommation:</h3>
-    <p>
-      <span class="visually-hidden">Consommation:</span>
-      <span>{{ compteurViewModel?.consommation }}</span>
-    </p>
-    <i :class="['trend-icon', compteurViewModel?.tendancePicto]" aria-hidden="true"></i>
-    <span class="visually-hidden">{{ compteurViewModel?.texte }}</span>
+  <div id="card-1197" class="fr-card item-card dashboard-card-container">
+    <div class="fr-card__body">
+      <div class="fr-card__content">
+        <h2 style="font-size:2vw;" class="fr-card__title">
+          {{ compteurViewModel?.titre }}
+        </h2>
+        <p class="fr-card__desc">
+          <p class="dashboard-item-desc">Consommation:</p>
+          <span class="visually-hidden">Consommation:</span>
+          <span>{{ compteurViewModel?.consommation }}</span>
+          <i :class="['trend-icon', compteurViewModel?.tendancePicto]" aria-hidden="true"></i>
+          <span class="visually-hidden">{{ compteurViewModel?.texte }}</span>
+        </p>
+      </div>
+    </div>
   </div>
 </template>
 <script lang="ts">
@@ -82,4 +88,14 @@ p {
 .trend-icon--down {
   background-image: url("@/assets/vers-le-bas.png");
 }
+
+.item-card {
+  border-radius: 5px;
+  border: 2px black solid;
+}
+
+.dashboard-item-desc {
+  font-size: 15px;
+}
+
 </style>
