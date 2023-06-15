@@ -1,26 +1,13 @@
 <script setup lang="ts">
-import { computed, ref } from "vue";
-import Authentification from "@/components/Authentification.vue";
-import Dashboard from "@/components/Dashboard.vue";
-const routes = {
-  authentification: Authentification,
-  dashboard: Dashboard,
-};
-
-const currentPath = ref(window.location.pathname);
-
-window.addEventListener("hashchange", () => {
-  currentPath.value = window.location.pathname;
-});
-
-const currentView = computed(() => {
-  const path = currentPath.value.slice(1) as keyof typeof routes;
-  return routes[path] || Authentification;
-});
+import HeaderSite from "@/components/Header.vue";
 </script>
 
 <template>
-  <component :is="currentView" />
+  <HeaderSite />
+
+  <div class="fr-p-5w">
+    <router-view />
+  </div>
 </template>
 
 <style scoped></style>

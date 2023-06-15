@@ -9,7 +9,24 @@ export class DashboardRepositoryRetourneUneValeur implements DashboardRepository
   async getDashboard(utilisateur: string): Promise<Dashboard> {
     console.log(utilisateur);
     return {
-      consommation: this.valeur,
+      compteurs: [
+        {
+          titre: "mon compteur",
+          valeur: this.valeur,
+        },
+      ],
+      quizz: [
+        {
+          id: 1,
+          titre: "mon super quizz",
+        },
+      ],
+      badges: [
+        {
+          titre: "mon super badge",
+          date: "14/06/2023",
+        },
+      ],
     };
   }
 }
