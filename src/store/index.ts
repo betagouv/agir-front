@@ -1,4 +1,6 @@
 import utilisateur from "./modules/utilisateur.ts";
+// TODO : fix me
+// @ts-ignore
 import { createStore } from "vuex";
 import VuexPersistence from "vuex-persist";
 

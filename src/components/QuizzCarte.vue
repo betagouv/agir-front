@@ -1,5 +1,5 @@
 <template>
-  <div id="card-1197" class="fr-card fr-enlarge-link item-card dashboard-card-container">
+  <div v-if="quizViewModel" id="card-1197" class="fr-card fr-enlarge-link item-card dashboard-card-container">
     <div class="fr-card__body">
       <div class="fr-card__content">
         <h2 class="fr-card__title">
