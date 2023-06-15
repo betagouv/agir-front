@@ -22,7 +22,7 @@ import { BadgeViewModel, CompteurViewModel, DashboardViewModel, QuizzViewModel }
 import Compteur from "@/components/Compteur.vue";
 import QuizzCarte from "@/components/QuizzCarte.vue";
 import BadgeCarte from "@/components/BadgeCarte.vue";
-import { useStore } from "vuex";
+import store from "@/store";
 
 export default defineComponent({
   name: "Dashboard",
@@ -42,9 +42,7 @@ export default defineComponent({
 
     const updateConsumptionValue = async () => {
       const chargementDashboardUsecase = new ChargementDashboardUsecase(new DashboardRepositoryAxios());
-      const store = useStore();
-      //const username = store.getters["utilisateur/getUtilisateur"];
-      const username = store.getters["getUtilisateur"];
+      const username = store.getters["utilisateur/getUtilisateur"];
       await chargementDashboardUsecase.execute(username, new ChargementDashboardPresenterImpl(mapValues));
     };
 

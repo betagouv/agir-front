@@ -1,9 +1,14 @@
-import { createStore, Store } from "vuex";
+import utilisateur from "./modules/utilisateur.ts";
+import { createStore } from "vuex";
+import VuexPersistence from "vuex-persist";
 
-/*const store: Store<any> = createStore({
+export default createStore({
   modules: {
-    utilisateur: utilisateurStore,
+    utilisateur: utilisateur,
   },
-});*/
-
-//export default store;
+  plugins: [
+    new VuexPersistence({
+      storage: window.sessionStorage,
+    }).plugin,
+  ],
+});
