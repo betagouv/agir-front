@@ -2,6 +2,7 @@ import { Quizz } from "@/quizz/ports/quizzRepository.ts";
 import { ChargementQuizzPresenter } from "@/quizz/ports/chargementQuizz.presenter.ts";
 
 interface QuestionViewModel {
+  id: number;
   intitule: string;
   reponsesPossibles: string[];
 }
@@ -23,6 +24,7 @@ export class ChargementQuizzPresenterImpl implements ChargementQuizzPresenter {
       titre: quizz.titre,
       questions: quizz.questions.map((question) => {
         return {
+          id: question.id,
           intitule: question.intitule,
           reponsesPossibles: question.reponsesPossibles,
         };

@@ -6,7 +6,7 @@
           <div class="fr-header__brand fr-enlarge-link">
             <div class="fr-header__brand-top">
               <div class="fr-header__logo">
-                <img src="/logo_fnv.png" />
+                <img alt="fnv-logo" src="/logo_fnv.png" />
               </div>
               <div class="fr-header__navbar">
                 <button class="fr-btn--menu fr-btn" data-fr-opened="false" aria-controls="modal-1935" aria-haspopup="menu" id="button-1936" title="Menu">
@@ -24,14 +24,14 @@
           <div class="fr-header__tools">
             <div class="fr-header__tools-links">
               <ul class="fr-btns-group">
-                <li>
+                <li v-if='!store.getters["utilisateur/getUtilisateur"]'>
                   <a class="fr-btn fr-icon-lock-line" id="button-1938" href="/"> Se connecter </a>
                 </li>
-                <li>
+                <li v-if='!store.getters["utilisateur/getUtilisateur"]'>
                   <a class="fr-btn fr-icon-account-line" id="button-1939" href="#[url - à modifier]"> S’enregistrer </a>
                 </li>
-                <li>
-                  <a class="fr-btn fr-icon-logout-box-r-line" id="button-1939" href="/"> Se déconnecter </a>
+                <li v-if='store.getters["utilisateur/getUtilisateur"]' @click="logout">
+                  <a class="fr-btn fr-icon-logout-box-r-line" href="#"> Se déconnecter </a>
                 </li>
               </ul>
             </div>
@@ -48,7 +48,30 @@
   </header>
 </template>
 <script lang="ts">
+import router from "@/router";
+import store from "@/store"
 export default {
   name: "Header",
+  computed: {
+    store() {
+      return store
+    }
+  },
+  props: {},
+  methods: {
+    logout() {
+      store.commit("utilisateur/removeUtilisateur");
+      router.replace("/");
+    },
+  },
 };
 </script>
+
+<style scoped>
+header {
+  position: sticky;
+  left: 0;
+  top: 0;
+  width: 100%;
+}
+</style>

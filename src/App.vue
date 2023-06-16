@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import HeaderSite from "@/components/Header.vue";
+import Header from "@/components/Header.vue";
 </script>
 
 <template>
-  <HeaderSite />
+  <Header />
 
   <div class="fr-p-5w">
     <router-view />

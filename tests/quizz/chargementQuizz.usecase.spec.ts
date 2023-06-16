@@ -7,6 +7,7 @@ class QuizzRepositoryForTest implements QuizzRepository {
     return {
       titre: `Mon super quizz ${id}`,
       questions: [{
+        id: 1,
         intitule: "Une question ?",
         reponsesPossibles: ["Reponse 1", "Reponse 2"]
       }],
@@ -28,6 +29,7 @@ describe("Fichier de test du usecase de chargement d'un quizz", () => {
         titre: "Mon super quizz 1",
         questions: [
           {
+            id: 1,
             intitule: "Une question ?",
             reponsesPossibles: ["Reponse 1", "Reponse 2"],
           },

@@ -1,4 +1,5 @@
 interface QuestionsQuizz {
+  id: number;
   intitule: string;
   reponsesPossibles: string[];
 }

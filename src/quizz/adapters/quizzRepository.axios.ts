@@ -2,6 +2,7 @@ import { AxiosFactory } from "@/axios.factory.ts";
 import { Quizz, QuizzRepository } from "@/quizz/ports/quizzRepository.ts";
 
 interface QuestionsQuizzApiModel {
+  id: number;
   libelle: string;
   propositions: string[];
 }
@@ -20,6 +21,7 @@ export class QuizzRepositoryAxios implements QuizzRepository {
         titre: response.data.titre,
         questions: response.data.questions.map((question) => {
           return {
+            id: question.id,
             intitule: question.libelle,
             reponsesPossibles: question.propositions,
           };
