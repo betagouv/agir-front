@@ -1,42 +1,44 @@
 <template>
   <div>
     <form id="login-8199" @submit.prevent="login">
-      <fieldset class="fr-fieldset" id="login-8199-fieldset" aria-labelledby="login-8199-fieldset-legend login-8199-fieldset-messages">
-        <legend class="fr-fieldset__legend" id="login-8199-fieldset-legend">
+      <fieldset id="login-8199-fieldset" aria-labelledby="login-8199-fieldset-legend login-8199-fieldset-messages"
+                class="fr-fieldset">
+        <legend id="login-8199-fieldset-legend" class="fr-fieldset__legend">
           <h5>Se connecter avec son compte</h5>
         </legend>
         <div class="fr-fieldset__element">
-          <fieldset class="fr-fieldset" id="credentials" aria-labelledby="credentials-legend credentials-messages">
-            <legend class="fr-sr-only" id="credentials-legend">identifiants</legend>
+          <fieldset id="credentials" aria-labelledby="credentials-legend credentials-messages" class="fr-fieldset">
+            <legend id="credentials-legend" class="fr-sr-only">identifiants</legend>
             <div class="fr-fieldset__element">
-              <div class="fr-input-group" autocomplete="username" aria-required="true" autocapitalize="off" autocorrect="off" id="input-group-8201">
+              <div id="input-group-8201" aria-required="true" autocapitalize="off" autocomplete="username"
+                   autocorrect="off" class="fr-input-group">
                 <label class="fr-label" for="username-8196"> Identifiant </label>
                 <input
-                  class="fr-input"
-                  autocomplete="username"
-                  aria-required="true"
-                  autocapitalize="off"
-                  autocorrect="off"
-                  id="username-8196"
-                  aria-describedby="username-8196-messages"
-                  name="username"
-                  type="text"
-                  v-model="username"
+                    id="username-8196"
+                    v-model="username"
+                    aria-describedby="username-8196-messages"
+                    aria-required="true"
+                    autocapitalize="off"
+                    autocomplete="username"
+                    autocorrect="off"
+                    class="fr-input"
+                    name="username"
+                    type="text"
                 />
-                <div class="fr-messages-group" id="username-8196-messages" aria-live="assertive"></div>
+                <div id="username-8196-messages" aria-live="assertive" class="fr-messages-group"></div>
               </div>
             </div>
-            <div class="fr-messages-group" id="credentials-messages" aria-live="assertive"></div>
+            <div id="credentials-messages" aria-live="assertive" class="fr-messages-group"></div>
           </fieldset>
         </div>
         <div class="fr-fieldset__element">
           <ul class="fr-btns-group">
             <li>
-              <button class="fr-mt-2v fr-btn" id="button-8202">Se connecter</button>
+              <button id="button-8202" class="fr-mt-2v fr-btn">Se connecter</button>
             </li>
           </ul>
         </div>
-        <div class="fr-messages-group" id="login-8199-fieldset-messages" aria-live="assertive"></div>
+        <div id="login-8199-fieldset-messages" aria-live="assertive" class="fr-messages-group"></div>
       </fieldset>
     </form>
   </div>
@@ -53,7 +55,7 @@ export default defineComponent({
     const error = ref("");
     const login = () => {
       store.commit("utilisateur/setUtilisateur", username.value);
-      router.push({ name: "dashboard", state: { utilisateur: username.value } });
+      router.push({name: "dashboard", state: {utilisateur: username.value}});
     };
 
     return {
