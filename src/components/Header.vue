@@ -60,7 +60,7 @@ export default {
   props: {},
   methods: {
     logout() {
-      store.commit("utilisateur/removeUtilisateur");
+      store.dispatch("utilisateur/reset")
       router.replace("/");
     },
   },
