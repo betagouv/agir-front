@@ -24,6 +24,6 @@ export default {
   actions: {
     reset({ commit }: { commit: Commit }) {
       commit("setUtilisateur", "");
-    }
-  }
+    },
+  },
 };

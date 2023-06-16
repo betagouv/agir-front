@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "vue-tsc && vite build",
     "preview": "vite preview",
-    "format:typescript": "prettier --write \"**/*.+(js|ts|json|tsx|jsx)\"",
+    "format:typescript": "prettier --write \"**/*.+(js|ts|json|tsx|jsx|vue)\"",
     "test": "jest",
     "test:watch": "jest --watch"
   },

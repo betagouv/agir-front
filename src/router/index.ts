@@ -6,7 +6,7 @@ import Quizz from "@/components/Quizz.vue";
 const routes = [
   { path: "/", component: Authentification },
   { path: "/dashboard", name: "dashboard", component: Dashboard },
-  { path: "/quiz", name: "quiz", component: Quizz },
+  { path: "/quiz/:id", name: "quiz", component: Quizz },
 ];
 const router = createRouter({
   history: createWebHistory(),
