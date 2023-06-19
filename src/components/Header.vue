@@ -6,10 +6,10 @@
           <div class="fr-header__brand fr-enlarge-link">
             <div class="fr-header__brand-top">
               <div class="fr-header__logo">
-                <a href="/" title="Accueil - Nom de l’entité (ministère, secrétariat d‘état, gouvernement)">
+                <a href="/dashboard" title="Accueil - Nom de l’entité (ministère, secrétariat d‘état, gouvernement)">
                   <p class="fr-logo">
                     République
-                    <br>Française
+                    <br />Française
                   </p>
                 </a>
               </div>
@@ -26,13 +26,13 @@
           <div class="fr-header__tools">
             <div class="fr-header__tools-links">
               <ul class="fr-btns-group">
-                <li v-if='!store.getters["utilisateur/getUtilisateur"]'>
+                <li v-if="!store.getters['utilisateur/getUtilisateur']">
                   <a class="fr-btn fr-icon-lock-line" id="button-1938" href="/"> Se connecter </a>
                 </li>
-                <li v-if='!store.getters["utilisateur/getUtilisateur"]'>
+                <li v-if="!store.getters['utilisateur/getUtilisateur']">
                   <a class="fr-btn fr-icon-account-line" id="button-1939" href="#[url - à modifier]"> S’enregistrer </a>
                 </li>
-                <li v-if='store.getters["utilisateur/getUtilisateur"]' @click="logout">
+                <li v-if="store.getters['utilisateur/getUtilisateur']" @click="logout">
                   <a class="fr-btn fr-icon-logout-box-r-line" href="#"> Se déconnecter </a>
                 </li>
               </ul>
@@ -48,15 +48,10 @@
       </div>
     </div>
 
-
-
-    <div v-if='store.getters["utilisateur/getUtilisateur"]' class="fr-header__menu fr-modal" id="modal-1918" aria-labelledby="button-1919">
+    <div v-if="store.getters['utilisateur/getUtilisateur']" class="fr-header__menu fr-modal" id="modal-1918" aria-labelledby="button-1919">
       <div class="fr-container">
-        <button class="fr-btn--close fr-btn" aria-controls="modal-1918" id="button-1921" title="Fermer">
-          Fermer
-        </button>
-        <div class="fr-header__menu-links">
-        </div>
+        <button class="fr-btn--close fr-btn" aria-controls="modal-1918" id="button-1921" title="Fermer">Fermer</button>
+        <div class="fr-header__menu-links"></div>
         <nav class="fr-nav" id="navigation-1922" role="navigation" aria-label="Menu principal">
           <ul class="fr-nav__list">
             <li class="fr-nav__item">
@@ -79,18 +74,18 @@
 </template>
 <script lang="ts">
 import router from "@/router";
-import store from "@/store"
+import store from "@/store";
 export default {
   name: "Header",
   computed: {
     store() {
-      return store
-    }
+      return store;
+    },
   },
   props: {},
   methods: {
     logout() {
-      store.dispatch("utilisateur/reset")
+      store.dispatch("utilisateur/reset");
       router.replace("/");
     },
   },

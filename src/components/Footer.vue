@@ -1,8 +1,8 @@
 <template>
   <footer v-if='store.getters["utilisateur/getUtilisateur"]' class="fr-footer" role="contentinfo" id="footer-5848">
-    <div class="fr-container">
+    <div>
       <div class="fr-footer__body">
-        <div class="fr-footer__brand fr-enlarge-link">
+        <div class="fr-footer__brand fr-enlarge-link footer-item-container">
           <a id="footer-operator" href="/dashboard" title="Retour à l’accueil du site - Nom de l’entité (ministère, secrétariat d‘état, gouvernement)">
             <p class="fr-logo">
               République
@@ -30,7 +30,7 @@
         </div>
       </div>
       <div class="fr-footer__bottom">
-        <ul class="fr-footer__bottom-list">
+        <ul class="fr-footer__bottom-list footer-item-container">
           <li class="fr-footer__bottom-item">
             <a class="fr-footer__bottom-link" id="footer__bottom-link-5853" href="#">Plan du site</a>
           </li>
@@ -47,7 +47,7 @@
             <a class="fr-footer__bottom-link" id="footer__bottom-link-5857" href="#">Gestion des cookies</a>
           </li>
         </ul>
-        <div class="fr-footer__bottom-copy">
+        <div class="fr-footer__bottom-copy footer-item-container">
           <p>Sauf mention explicite de propriété intellectuelle détenue par des tiers, les contenus de ce site sont proposés sous <a href="https://github.com/etalab/licence-ouverte/blob/master/LO.md" target="_blank">licence etalab-2.0</a>
           </p>
         </div>
@@ -57,6 +57,7 @@
 </template>
 <script lang="ts">
 import store from "@/store";
+import router from "@/router";
 
 export default {
   name: "Footer",
@@ -66,7 +67,12 @@ export default {
     }
   },
   props: {},
-  methods: {},
+  methods: {
+    logout() {
+      store.dispatch("utilisateur/reset")
+      router.replace("/");
+    },
+  },
 };
 </script>
 
@@ -78,5 +84,9 @@ footer {
   width: 100%;
   text-align: left;
   padding: 10px 0;
+}
+
+.footer-item-container {
+  margin: 0 0 0 50px;
 }
 </style>
