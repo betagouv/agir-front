@@ -7,7 +7,7 @@
 
 <script lang="ts">
 export default {
-  name: "QuizzGagne",
+  name: "QuizGagne",
 };
 </script>
 

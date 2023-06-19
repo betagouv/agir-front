@@ -1,5 +1,5 @@
-import { Quizz } from "@/quizz/ports/quizzRepository.ts";
+import { Quiz } from "@/quizz/ports/quizRepository.ts";
 
 export interface ChargementQuizzPresenter {
-  presenteQuizz(quizz: Quizz): void;
+  presenteQuiz(quizz: Quiz): void;
 }

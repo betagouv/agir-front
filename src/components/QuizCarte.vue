@@ -25,7 +25,7 @@
 import { QuizzViewModel } from "@/dashboard/ports/chargementDashboard.presenter.ts";
 
 export default {
-  name: "QuizzCarte",
+  name: "QuizCarte",
   props: {
     quizViewModel: {
       type: Object as () => QuizzViewModel,

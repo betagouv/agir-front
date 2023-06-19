@@ -1,25 +1,25 @@
 import { AxiosFactory } from "@/axios.factory.ts";
-import { Quizz, QuizzRepository } from "@/quizz/ports/quizzRepository.ts";
+import { Quiz, QuizRepository } from "@/quizz/ports/quizRepository.ts";
 
-interface EvaluerQuizzApiModel {
+interface EvaluerQuizApiModel {
   resultat: boolean;
 }
-interface QuestionsQuizzApiModel {
+interface QuestionsQuizApiModel {
   id: string;
   libelle: string;
   propositions: string[];
 }
 
-export interface QuizzApiModel {
+export interface QuizApiModel {
   titre: string;
-  questions: QuestionsQuizzApiModel[];
+  questions: QuestionsQuizApiModel[];
 }
 
-export class QuizzRepositoryAxios implements QuizzRepository {
-  async getQuizz(idQuizz: number): Promise<Quizz> {
+export class QuizRepositoryAxios implements QuizRepository {
+  async getQuiz(idQuizz: number): Promise<Quiz> {
     try {
       const axiosInstance = AxiosFactory.getAxios();
-      const response = await axiosInstance.get<QuizzApiModel>(`/quizz/${idQuizz}`);
+      const response = await axiosInstance.get<QuizApiModel>(`/quizz/${idQuizz}`);
       return {
         titre: response.data.titre,
         questions: response.data.questions.map((question) => {
@@ -36,11 +36,11 @@ export class QuizzRepositoryAxios implements QuizzRepository {
     }
   }
 
-  async evaluerQuizz(utilisateur: string, idQuizz: number, reponses: Map<string, string>): Promise<boolean> {
+  async evaluerQuiz(utilisateur: string, idQuizz: number, reponses: Map<string, string>): Promise<boolean> {
     const axiosInstance = AxiosFactory.getAxios();
     const array: Record<string, string>[] = Array.from(reponses, ([key, value]) => ({ [key]: value }));
 
-    const axiosResponse = await axiosInstance.post<EvaluerQuizzApiModel>(`/quizz/${idQuizz}/evaluer`, {
+    const axiosResponse = await axiosInstance.post<EvaluerQuizApiModel>(`/quizz/${idQuizz}/evaluer`, {
       utilisateur,
       reponses: array,
     });

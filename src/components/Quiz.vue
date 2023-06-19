@@ -33,36 +33,36 @@
 
 <script lang="ts">
 import { defineComponent, onMounted, ref } from "vue";
-import { ChargementQuizzUsecase } from "@/quizz/chargementQuizz.usecase.ts";
-import { QuizzRepositoryAxios } from "@/quizz/adapters/quizzRepository.axios.ts";
-import { ChargementQuizzPresenterImpl, QuizzViewModel } from "@/quizz/adapters/chargementQuizz.presenter.impl.ts";
+import { ChargementQuizUsecase } from "@/quizz/chargementQuizz.usecase.ts";
+import { QuizRepositoryAxios } from "@/quizz/adapters/quizRepositoryAxios.ts";
+import { ChargementQuizPresenterImpl, QuizViewModel } from "@/quizz/adapters/chargementQuizPresenterImpl.ts";
 import { useRoute } from "vue-router";
 import store from "@/store";
-import { EvaluerQuizzUsecase } from "@/quizz/evaluerQuizz.usecase.ts";
-import { EvaluerQuizzPresenterImpl, EvaluerQuizzViewModel } from "@/quizz/adapters/evaluerQuizz.presenter.impl.ts";
+import { EvaluerQuizUsecase } from "@/quizz/evaluerQuiz.usecase.ts";
+import { EvaluerQuizPresenterImpl, EvaluerQuizViewModel } from "@/quizz/adapters/evaluerQuizPresenterImpl.ts";
 import router from "@/router";
 
 export default defineComponent({
   name: "Quizz",
   setup() {
-    const quizzViewModel = ref<QuizzViewModel>();
+    const quizViewModel = ref<QuizViewModel>();
     const checkedResponses = new Map<string, string>();
 
-    let idQuizz: number = -1;
+    let idQuiz: number = -1;
     const route = useRoute();
     if (typeof route.params.id === 'string') {
-      idQuizz = parseInt(route.params.id, 10);
+      idQuiz = parseInt(route.params.id, 10);
     }
 
-    function mapValuesQuizz(viewModel: QuizzViewModel) {
-      quizzViewModel.value = viewModel;
+    function mapValuesQuiz(viewModel: QuizViewModel) {
+      quizViewModel.value = viewModel;
     }
 
-    function mapValuesEvaluer(viewModel: EvaluerQuizzViewModel) {
-      if (viewModel.quizzGagne) {
-        router.push({ name: "quizz-gagne" });
+    function mapValuesEvaluer(viewModel: EvaluerQuizViewModel) {
+      if (viewModel.quizGagne) {
+        router.push({ name: "quiz-gagne" });
       } else {
-        router.push({ name: "quizz-perdu", state: { quizzId: idQuizz } });
+        router.push({ name: "quiz-perdu", state: { quizId: idQuiz } });
       }
     }
 
@@ -71,23 +71,23 @@ export default defineComponent({
       checkedResponses.set(idQuestion, reponse);
     }
 
-    const quizzRepositoryAxios = new QuizzRepositoryAxios();
+    const quizzRepositoryAxios = new QuizRepositoryAxios();
 
     const chargementQuizz = () => {
-      const chargementQuizzUsecase = new ChargementQuizzUsecase(quizzRepositoryAxios);
-      chargementQuizzUsecase.execute(idQuizz, new ChargementQuizzPresenterImpl(mapValuesQuizz));
+      const chargementQuizzUsecase = new ChargementQuizUsecase(quizzRepositoryAxios);
+      chargementQuizzUsecase.execute(idQuiz, new ChargementQuizPresenterImpl(mapValuesQuiz));
     };
 
     onMounted(chargementQuizz);
 
     const evaluerQuizz = () => {
       const username = store.getters["utilisateur/getUtilisateur"];
-      const evaluerQuizzUsecase = new EvaluerQuizzUsecase(quizzRepositoryAxios);
-      evaluerQuizzUsecase.execute(username, idQuizz, checkedResponses, new EvaluerQuizzPresenterImpl(mapValuesEvaluer));
+      const evaluerQuizzUsecase = new EvaluerQuizUsecase(quizzRepositoryAxios);
+      evaluerQuizzUsecase.execute(username, idQuiz, checkedResponses, new EvaluerQuizPresenterImpl(mapValuesEvaluer));
     };
 
     return {
-      quizzViewModel,
+      quizzViewModel: quizViewModel,
       evaluerQuizz,
       handleReponse,
     };
