@@ -1,5 +1,8 @@
 {
   "compilerOptions": {
+    "noImplicitAny": false,
+    "allowJs": true,
+
     "target": "ES2020",
     "useDefineForClassFields": true,
     "module": "ESNext",
@@ -27,5 +30,9 @@
     "esModuleInterop": true
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
+  "exclude": [
+    "node_modules",
+    "dist",
+  ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

@@ -47,13 +47,18 @@ export default defineComponent({
   setup() {
     const quizzViewModel = ref<QuizzViewModel>();
     const checkedResponses = new Map<string, string>();
-    let idQuizz = useRoute().params.id as number;
+
+    let idQuizz: number = -1;
+    const route = useRoute();
+    if (typeof route.params.id === 'string') {
+      idQuizz = parseInt(route.params.id, 10);
+    }
+
     function mapValuesQuizz(viewModel: QuizzViewModel) {
       quizzViewModel.value = viewModel;
     }
 
     function mapValuesEvaluer(viewModel: EvaluerQuizzViewModel) {
-      if(!viewModel) {return;}
       if (viewModel.quizzGagne) {
         router.push({ name: "quizz-gagne" });
       } else {
@@ -61,12 +66,11 @@ export default defineComponent({
       }
     }
 
-    function handleReponse(event, idQuestion) {
-      const reponse = event.target.value;
-      console.log(event.target);
+    function handleReponse(event:Event, idQuestion: string) {
+      const reponse = (event.target as HTMLInputElement).value
       checkedResponses.set(idQuestion, reponse);
-      console.log(checkedResponses);
     }
+
     const quizzRepositoryAxios = new QuizzRepositoryAxios();
 
     const chargementQuizz = () => {

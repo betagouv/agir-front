@@ -36,7 +36,7 @@ export class QuizzRepositoryAxios implements QuizzRepository {
     }
   }
 
-  async evaluerQuizz(utilisateur: string, idQuizz: number, reponses: Map<string, string>): Promise<Boolean> {
+  async evaluerQuizz(utilisateur: string, idQuizz: number, reponses: Map<string, string>): Promise<boolean> {
     const axiosInstance = AxiosFactory.getAxios();
     const array: Record<string, string>[] = Array.from(reponses, ([key, value]) => ({ [key]: value }));
 
@@ -44,7 +44,6 @@ export class QuizzRepositoryAxios implements QuizzRepository {
       utilisateur,
       reponses: array,
     });
-    console.log(axiosResponse.data);
     return axiosResponse.data.resultat;
   }
 }

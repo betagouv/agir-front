@@ -66,7 +66,6 @@ export default {
       return store
     }
   },
-  props: {},
   methods: {
     logout() {
       store.dispatch("utilisateur/reset")

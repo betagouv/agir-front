@@ -5,24 +5,17 @@ import Footer from "@/components/Footer.vue";
 
 <template>
   <div class="container">
-
-  <header class="header">
     <Header />
-  </header>
 
-  <div class="fr-p-5w main-container">
-    <router-view />
-  </div>
+    <div class="fr-p-5w main-container">
+      <router-view />
+    </div>
 
-  <footer class="footer">
-    <Footer/>
-  </footer>
-
+    <Footer />
   </div>
 </template>
 
 <style scoped>
-
 .header {
 }
 .container {
@@ -34,7 +27,7 @@ import Footer from "@/components/Footer.vue";
   min-width: 1280px;
   margin: 0 auto;
   text-align: center;
-  flex:1;
+  flex: 1;
   overflow-y: auto;
 }
 

@@ -75,21 +75,21 @@
 <script lang="ts">
 import router from "@/router";
 import store from "@/store";
-export default {
+import {defineComponent} from "vue";
+export default defineComponent({
   name: "Header",
   computed: {
     store() {
       return store;
     },
   },
-  props: {},
   methods: {
     logout() {
       store.dispatch("utilisateur/reset");
       router.replace("/");
     },
   },
-};
+});
 </script>
 
 <style scoped>
