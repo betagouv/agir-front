@@ -1,6 +1,6 @@
-import { Quiz, QuizRepository } from "../../src/quizz/ports/quizRepository";
-import { ChargementQuizUsecase } from "../../src/quizz/chargementQuiz.usecase";
-import { ChargementQuizPresenterImpl, QuizViewModel } from "../../src/quizz/adapters/chargementQuiz.presenter.impl";
+import { Quiz, QuizRepository } from "../../src/quiz/ports/quizRepository";
+import { ChargementQuizUsecase } from "../../src/quiz/chargementQuiz.usecase";
+import { ChargementQuizPresenterImpl, QuizViewModel } from "../../src/quiz/adapters/chargementQuiz.presenter.impl";
 
 class QuizRepositoryForTest implements QuizRepository {
   async getQuiz(id: number): Promise<Quiz> {

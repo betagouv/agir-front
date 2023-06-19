@@ -1,5 +1,5 @@
-import { EvaluerQuizPresenter } from "@/quizz/ports/evaluerQuizPresenter.ts";
-import { QuizRepository } from "@/quizz/ports/quizRepository.ts";
+import { EvaluerQuizPresenter } from "@/quiz/ports/evaluerQuizPresenter.ts";
+import { QuizRepository } from "@/quiz/ports/quizRepository.ts";
 
 export class EvaluerQuizUsecase {
   private _quizzRepository: QuizRepository;

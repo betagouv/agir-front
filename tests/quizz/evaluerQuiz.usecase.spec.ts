@@ -1,6 +1,6 @@
 import { QuizRepositoryEvaluerAvecDesBonnesReponses } from "./quizRepositoryEvaluerAvecDesBonnesReponses";
-import { EvaluerQuizUsecase } from "../../src/quizz/evaluerQuiz.usecase";
-import { EvaluerQuizPresenterImpl, EvaluerQuizViewModel } from "../../src/quizz/adapters/evaluerQuiz.presenter.impl";
+import { EvaluerQuizUsecase } from "../../src/quiz/evaluerQuiz.usecase";
+import { EvaluerQuizPresenterImpl, EvaluerQuizViewModel } from "../../src/quiz/adapters/evaluerQuiz.presenter.impl";
 
 describe("Fichier de tests unitaire pour la correction des quiz", () => {
   it("En donnant une tableau de réponses doit et dans le cas de bonnes réponses doit me renvoyer un succes", async () => {

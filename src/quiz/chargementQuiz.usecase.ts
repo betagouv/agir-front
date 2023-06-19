@@ -1,5 +1,5 @@
-import { QuizRepository } from "@/quizz/ports/quizRepository.ts";
-import { ChargementQuizPresenterImpl } from "@/quizz/adapters/chargementQuiz.presenter.impl.ts";
+import { QuizRepository } from "@/quiz/ports/quizRepository.ts";
+import { ChargementQuizPresenterImpl } from "@/quiz/adapters/chargementQuiz.presenter.impl.ts";
 
 export class ChargementQuizUsecase {
   private _quizzRepository: QuizRepository;

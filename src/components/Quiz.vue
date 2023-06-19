@@ -33,13 +33,13 @@
 
 <script lang="ts">
 import { defineComponent, onMounted, ref } from "vue";
-import { ChargementQuizUsecase } from "@/quizz/chargementQuizz.usecase.ts";
-import { QuizRepositoryAxios } from "@/quizz/adapters/quizRepositoryAxios.ts";
-import { ChargementQuizPresenterImpl, QuizViewModel } from "@/quizz/adapters/chargementQuizPresenterImpl.ts";
+import { ChargementQuizUsecase } from "@/quiz/chargementQuiz.usecase.ts";
+import { QuizRepositoryAxios } from "@/quiz/adapters/quizRepositoryAxios.ts";
+import { ChargementQuizPresenterImpl, QuizViewModel } from "@/quiz/adapters/chargementQuiz.presenter.impl.ts";
 import { useRoute } from "vue-router";
 import store from "@/store";
-import { EvaluerQuizUsecase } from "@/quizz/evaluerQuiz.usecase.ts";
-import { EvaluerQuizPresenterImpl, EvaluerQuizViewModel } from "@/quizz/adapters/evaluerQuizPresenterImpl.ts";
+import { EvaluerQuizUsecase } from "@/quiz/evaluerQuiz.usecase.ts";
+import { EvaluerQuizPresenterImpl, EvaluerQuizViewModel } from "@/quiz/adapters/evaluerQuiz.presenter.impl.ts";
 import router from "@/router";
 
 export default defineComponent({
@@ -50,7 +50,7 @@ export default defineComponent({
 
     let idQuiz: number = -1;
     const route = useRoute();
-    if (typeof route.params.id === 'string') {
+    if (typeof route.params.id === "string") {
       idQuiz = parseInt(route.params.id, 10);
     }
 
@@ -66,8 +66,8 @@ export default defineComponent({
       }
     }
 
-    function handleReponse(event:Event, idQuestion: string) {
-      const reponse = (event.target as HTMLInputElement).value
+    function handleReponse(event: Event, idQuestion: string) {
+      const reponse = (event.target as HTMLInputElement).value;
       checkedResponses.set(idQuestion, reponse);
     }
 

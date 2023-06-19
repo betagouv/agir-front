@@ -1,4 +1,4 @@
-import { Quiz, QuizRepository } from "../../src/quizz/ports/quizRepository";
+import { Quiz, QuizRepository } from "../../src/quiz/ports/quizRepository";
 
 export class QuizRepositoryEvaluerAvecDesBonnesReponses implements QuizRepository {
   getQuiz(id: number): Promise<Quiz> {
