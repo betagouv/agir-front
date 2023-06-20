@@ -34,7 +34,7 @@
               </div>
             </div>
             <div class="fr-messages-group" :id="`radio-disabled-messages-${item.id}`" aria-live="assertive"></div>
-            <div class="stepper-actions">
+            <div class="stepper-actions" v-if="quizzViewModel">
               <button
                 v-if="currentStep < quizzViewModel?.questions.length"
                 @click="questionSuivante"
@@ -45,13 +45,13 @@
               </button>
               <span
                 @click="skipQuestion(item.id)"
-                v-if="currentStep < quizzViewModel?.questions.length"
+                v-if="currentStep < quizzViewModel?.questions?.length"
                 class="fr-btn stepper-actions-ignore-question"
                 title="Passer la question"
               >
                 Passer la question
               </span>
-              <button v-if="item.id == quizzViewModel?.questions.length" class="fr-btn valid-responses-button" id="button-2864" title="Envoyer le formulaire">
+              <button v-if="parseInt(item.id) == quizzViewModel?.questions?.length" class="fr-btn valid-responses-button" id="button-2864" title="Envoyer le formulaire">
                 Valider mes réponses
               </button>
             </div>
@@ -76,7 +76,7 @@ import router from "@/router";
 export default defineComponent({
   name: "Quizz",
   setup() {
-    const currentStep = ref<number>(1);
+    let currentStep = ref<number>(1);
     const quizViewModel = ref<QuizViewModel>();
     const checkedResponses = new Map<string, string>();
 
@@ -119,11 +119,11 @@ export default defineComponent({
     };
 
     function questionSuivante() {
-      this.currentStep = this.currentStep + 1;
+     currentStep.value = currentStep.value + 1;
     }
 
     function skipQuestion(idQuestion) {
-      this.currentStep = this.currentStep + 1;
+      currentStep.value = currentStep.value + 1;
       checkedResponses.set(idQuestion, "");
     }
 
