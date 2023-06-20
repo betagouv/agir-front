@@ -1,16 +1,18 @@
-import {ChargementQuizzUsecase} from "../../src/quizz/chargementQuizz.usecase";
-import {Quizz, QuizzRepository} from "../../src/quizz/ports/quizzRepository";
-import {ChargementQuizzPresenterImpl, QuizzViewModel} from "../../src/quizz/adapters/chargementQuizz.presenter.impl";
+import { ChargementQuizzUsecase } from "../../src/quizz/chargementQuizz.usecase";
+import { Quizz, QuizzRepository } from "../../src/quizz/ports/quizzRepository";
+import { ChargementQuizzPresenterImpl, QuizzViewModel } from "../../src/quizz/adapters/chargementQuizz.presenter.impl";
 
 class QuizzRepositoryForTest implements QuizzRepository {
   async getQuizz(id: number): Promise<Quizz> {
     return {
       titre: `Mon super quizz ${id}`,
-      questions: [{
-        id: 1,
-        intitule: "Une question ?",
-        reponsesPossibles: ["Reponse 1", "Reponse 2"]
-      }],
+      questions: [
+        {
+          id: 1,
+          intitule: "Une question ?",
+          reponsesPossibles: ["Reponse 1", "Reponse 2"],
+        },
+      ],
     };
   }
 }

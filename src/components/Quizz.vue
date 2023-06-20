@@ -1,5 +1,5 @@
 <template>
-  <h3>📒 {{ quizzViewModel?.titre}}</h3>
+  <h3>📒 {{ quizzViewModel?.titre }}</h3>
   <form>
     <fieldset v-for="item in quizzViewModel?.questions" :key="item.id" class="fr-fieldset" :id="`radio-disabled-${item.id}`" :aria-labelledby="`radio-${item.id}-legend radio-disabled-messages-${item}`">
       <div class="quiz-question-container">
@@ -29,6 +29,7 @@ import { defineComponent, onMounted, ref } from "vue";
 import { ChargementQuizzUsecase } from "@/quizz/chargementQuizz.usecase.ts";
 import { QuizzRepositoryAxios } from "@/quizz/adapters/quizzRepository.axios.ts";
 import { ChargementQuizzPresenterImpl, QuizzViewModel } from "@/quizz/adapters/chargementQuizz.presenter.impl.ts";
+import {useRoute} from "vue-router";
 
 export default defineComponent({
   name: "Quizz",
@@ -42,7 +43,7 @@ export default defineComponent({
 
     const chargementQuizz = () => {
       const chargementQuizzUsecase = new ChargementQuizzUsecase(new QuizzRepositoryAxios())
-      chargementQuizzUsecase.execute(1, new ChargementQuizzPresenterImpl(mapValues))
+      chargementQuizzUsecase.execute(useRoute().params.id as number, new ChargementQuizzPresenterImpl(mapValues))
     }
     onMounted(chargementQuizz);
     return {
@@ -50,17 +51,12 @@ export default defineComponent({
     }
   },
 
-
 })
 </script>
 
 <style scoped>
 .quiz-question-container {
   width: 100%;
-}
-
-.quiz-question-desc {
-  text-align: left;
 }
 
 </style>
