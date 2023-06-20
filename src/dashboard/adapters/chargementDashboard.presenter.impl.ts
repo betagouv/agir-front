@@ -19,6 +19,7 @@ export class ChargementDashboardPresenterImpl implements ChargementDashboardPres
         };
       }),
       quizz: dashboard.quizz,
+      empreinte: dashboard.empreinte,
       badges: dashboard.badges,
     });
   }

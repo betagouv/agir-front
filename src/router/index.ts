@@ -1,9 +1,11 @@
 import Authentification from "@/components/Authentification.vue";
 import Dashboard from "@/components/Dashboard.vue";
 import { createRouter, createWebHistory } from "vue-router";
+
 import Quiz from "@/components/Quiz.vue";
 import QuizGagne from "@/components/QuizGagne.vue";
 import QuizPerdu from "@/components/QuizPerdu.vue";
+import Empreinte from "@/components/Empreinte.vue";
 
 const routes = [
   { path: "/", component: Authentification },
@@ -11,6 +13,7 @@ const routes = [
   { path: "/quiz/:id", name: "quiz", component: Quiz },
   { path: "/quiz/quiz-gagne", name: "quiz-gagne", component: QuizGagne },
   { path: "/quiz/quiz-perdu", name: "quiz-perdu", component: QuizPerdu },
+  { path: "/empreinte", name: "empreinte", component: Empreinte },
 ];
 const router = createRouter({
   history: createWebHistory(),
