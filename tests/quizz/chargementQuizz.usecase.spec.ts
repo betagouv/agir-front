@@ -8,12 +8,17 @@ class QuizzRepositoryForTest implements QuizzRepository {
       titre: `Mon super quizz ${id}`,
       questions: [
         {
-          id: 1,
+          id: "1",
           intitule: "Une question ?",
           reponsesPossibles: ["Reponse 1", "Reponse 2"],
         },
       ],
     };
+  }
+
+  evaluerQuizz(utilisateur: string, quizzId: number, reponses: Map<string, string>): Promise<Boolean> {
+    console.log(utilisateur, quizzId, reponses);
+    throw Error;
   }
 }
 
@@ -31,7 +36,7 @@ describe("Fichier de test du usecase de chargement d'un quizz", () => {
         titre: "Mon super quizz 1",
         questions: [
           {
-            id: 1,
+            id: "1",
             intitule: "Une question ?",
             reponsesPossibles: ["Reponse 1", "Reponse 2"],
           },

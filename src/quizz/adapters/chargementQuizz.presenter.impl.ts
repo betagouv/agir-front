@@ -2,7 +2,7 @@ import { Quizz } from "@/quizz/ports/quizzRepository.ts";
 import { ChargementQuizzPresenter } from "@/quizz/ports/chargementQuizz.presenter.ts";
 
 interface QuestionViewModel {
-  id: number;
+  id: string;
   intitule: string;
   reponsesPossibles: string[];
 }

@@ -32,4 +32,15 @@ export class QuizzRepositoryAxios implements QuizzRepository {
       throw e;
     }
   }
+
+  async evaluerQuizz(utilisateur: string, idQuizz: number, reponses: Map<string, string>): Promise<Boolean> {
+    const axiosInstance = AxiosFactory.getAxios();
+    const array: Record<string, string>[] = Array.from(reponses, ([key, value]) => ({ [key]: value }));
+
+    await axiosInstance.post(`/quizz/${idQuizz}/evaluer`, {
+      utilisateur,
+      reponses: array,
+    });
+    return true;
+  }
 }

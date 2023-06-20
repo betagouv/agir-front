@@ -1,5 +1,6 @@
 <template>
   <footer v-if='store.getters["utilisateur/getUtilisateur"]' class="fr-footer" role="contentinfo" id="footer-5848">
+
     <div>
       <div class="fr-footer__body">
         <div class="fr-footer__brand fr-enlarge-link footer-item-container">
@@ -84,8 +85,11 @@ footer {
   text-align: left;
   padding: 10px 0;
 }
+<<<<<<< HEAD
 
 .footer-item-container {
   margin: 0 0 0 50px;
 }
+=======
+>>>>>>> b31e8b5 (evaluation du quizz)
 </style>
