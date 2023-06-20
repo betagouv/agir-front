@@ -1,8 +1,11 @@
 import { AxiosFactory } from "@/axios.factory.ts";
 import { Quizz, QuizzRepository } from "@/quizz/ports/quizzRepository.ts";
 
+interface EvaluerQuizzApiModel {
+  resultat: boolean;
+}
 interface QuestionsQuizzApiModel {
-  id: number;
+  id: string;
   libelle: string;
   propositions: string[];
 }
@@ -37,10 +40,11 @@ export class QuizzRepositoryAxios implements QuizzRepository {
     const axiosInstance = AxiosFactory.getAxios();
     const array: Record<string, string>[] = Array.from(reponses, ([key, value]) => ({ [key]: value }));
 
-    await axiosInstance.post(`/quizz/${idQuizz}/evaluer`, {
+    const axiosResponse = await axiosInstance.post<EvaluerQuizzApiModel>(`/quizz/${idQuizz}/evaluer`, {
       utilisateur,
       reponses: array,
     });
-    return true;
+    console.log(axiosResponse.data);
+    return axiosResponse.data.resultat;
   }
 }

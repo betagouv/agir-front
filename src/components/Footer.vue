@@ -58,7 +58,6 @@
 </template>
 <script lang="ts">
 import store from "@/store";
-import router from "@/router";
 
 export default {
   name: "Footer",
@@ -67,12 +66,8 @@ export default {
       return store
     }
   },
-  methods: {
-    logout() {
-      store.dispatch("utilisateur/reset")
-      router.replace("/");
-    },
-  },
+  props: {},
+  methods: {},
 };
 </script>
 
@@ -85,11 +80,4 @@ footer {
   text-align: left;
   padding: 10px 0;
 }
-<<<<<<< HEAD
-
-.footer-item-container {
-  margin: 0 0 0 50px;
-}
-=======
->>>>>>> b31e8b5 (evaluation du quizz)
 </style>

@@ -8,7 +8,7 @@ export class EvaluerQuizzUsecase {
   }
 
   async execute(utilisateur: string, quizzId: number, reponses: Map<string, string>, presenter: EvaluerQuizzPresenter) {
-    await this._quizzRepository.evaluerQuizz(utilisateur, quizzId, reponses);
-    presenter.presente(true);
+    const resultat = await this._quizzRepository.evaluerQuizz(utilisateur, quizzId, reponses);
+    presenter.presente(resultat);
   }
 }

@@ -14,7 +14,11 @@ import Footer from "@/components/Footer.vue";
 
   </div>
 
-  <Footer />
+  <footer class="footer">
+    <Footer/>
+  </footer>
+
+  </div>
 </template>
 
 <style scoped>
