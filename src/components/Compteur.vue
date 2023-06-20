@@ -2,7 +2,7 @@
   <div id="card-1197" class="fr-card item-card dashboard-card-container">
     <div class="fr-card__body">
       <div class="fr-card__content">
-        <h2 class="fr-card__title card-title">
+        <h2 class="fr-card__title">
           {{ compteurViewModel?.titre }}
         </h2>
         <p class="fr-card__desc">
@@ -18,7 +18,7 @@
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";
-import { CompteurViewModel } from "@/dashboard/ports/chargementDashboard.presenter.ts";
+import { CompteurViewModel } from "@/dashboard/ports/chargementDashboard.presenter";
 
 export default defineComponent({
   name: "Compteur",
@@ -96,9 +96,5 @@ p {
 
 .dashboard-item-desc {
   font-size: 15px;
-}
-
-.card-title {
-  font-size:1.8vw;
 }
 </style>

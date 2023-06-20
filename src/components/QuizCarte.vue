@@ -22,7 +22,7 @@
   </div>
 </template>
 <script lang="ts">
-import { QuizzViewModel } from "@/dashboard/ports/chargementDashboard.presenter.ts";
+import { QuizzViewModel } from "@/dashboard/ports/chargementDashboard.presenter";
 
 export default {
   name: "QuizCarte",

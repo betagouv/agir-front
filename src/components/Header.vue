@@ -1,7 +1,7 @@
 <template>
   <header role="banner" class="fr-header">
     <div class="fr-header__body">
-      <div class="fr-container">
+      <div class="header-container">
         <div class="fr-header__body-row">
           <div class="fr-header__brand fr-enlarge-link">
             <div class="fr-header__brand-top">
@@ -20,7 +20,7 @@
               </div>
             </div>
             <div class="fr-header__service">
-              <img width="50" alt="fnv-logo" src="/logo_fnv.png" />
+              <img width="70" alt="agir-logo" src="../../public/logo_agir.png" />
             </div>
           </div>
           <div class="fr-header__tools">
@@ -44,27 +44,46 @@
     <div class="fr-header__menu fr-modal" id="modal-1935" aria-labelledby="button-1936">
       <div class="fr-container">
         <button class="fr-btn--close fr-btn" aria-controls="modal-1935" id="button-1940" title="Fermer">Fermer</button>
-        <div class="fr-header__menu-links"></div>
+        <div @click="logout" class="fr-header__menu-links"></div>
       </div>
     </div>
-
     <div v-if="store.getters['utilisateur/getUtilisateur']" class="fr-header__menu fr-modal" id="modal-1918" aria-labelledby="button-1919">
-      <div class="fr-container">
+      <div class="header-container">
         <button class="fr-btn--close fr-btn" aria-controls="modal-1918" id="button-1921" title="Fermer">Fermer</button>
         <div class="fr-header__menu-links"></div>
-        <nav class="fr-nav" id="navigation-1922" role="navigation" aria-label="Menu principal">
+        <nav class="fr-nav" id="navigation" role="navigation" aria-label="Menu principal" data-fr-js-navigation="true">
           <ul class="fr-nav__list">
-            <li class="fr-nav__item">
-              <a class="fr-nav__link" href="#" target="test" id="nav-1923">Le coach</a>
+            <li class="fr-nav__item" data-fr-js-navigation-item="true">
+              <a v-if="currentPage && currentPage == '/coach'" class="fr-nav__link" href="/quiz" target="_self" aria-current="page">
+                Le coach
+              </a>
+              <a v-else class="fr-nav__link" href="/coach" target="_self">
+                Le coach
+              </a>
             </li>
-            <li class="fr-nav__item">
-              <a class="fr-nav__link" href="#" target="_self" id="nav-1924">Tableau de bord</a>
+            <li class="fr-nav__item" data-fr-js-navigation-item="true">
+              <a v-if="currentPage && currentPage == '/dashboard'" class="fr-nav__link" href="/dashboard" target="_self" aria-current="page">
+                Tableau de bord
+              </a>
+              <a v-else class="fr-nav__link" href="/dashboard" target="_self">
+                Tableau de bord
+              </a>
             </li>
-            <li class="fr-nav__item">
-              <a class="fr-nav__link" href="#" target="_self" id="nav-1925">Aides</a>
+            <li class="fr-nav__item" data-fr-js-navigation-item="true">
+              <a v-if="isAides" class="fr-nav__link" href="/aides" target="_self" aria-current="page">
+                Aides
+              </a>
+              <a v-else class="fr-nav__link" href="/aides" target="_self">
+                Aides
+              </a>
             </li>
-            <li class="fr-nav__item">
-              <a class="fr-nav__link" href="#" target="_self" id="nav-1926">Communauté</a>
+            <li class="fr-nav__item" data-fr-js-navigation-item="true">
+              <a v-if="currentPage && currentPage == '/communaute'" class="fr-nav__link" href="/communaute" target="_self" aria-current="page">
+                Communauté
+              </a>
+              <a v-else class="fr-nav__link" href="/communaute" target="_self">
+                Communauté
+              </a>
             </li>
           </ul>
         </nav>
@@ -75,29 +94,54 @@
 <script lang="ts">
 import router from "@/router";
 import store from "@/store";
-import {defineComponent} from "vue";
+import {computed, defineComponent, onMounted, ref} from "vue";
 export default defineComponent({
   name: "Header",
   computed: {
     store() {
       return store;
     },
+    isAides() {
+      return this.currentPage && this.currentPage == "/aides"
+    }
   },
-  methods: {
-    logout() {
+  setup() {
+    const currentPage = ref<string>('/dashboard');
+
+    function logout() {
       store.dispatch("utilisateur/reset");
       router.replace("/");
-    },
-  },
+    }
+
+    onMounted(() => {
+      currentPage.value = window.location.pathname;
+    })
+
+
+
+    return {
+      logout,
+      currentPage,
+    }
+  }
 });
 
 </script>
 
 <style scoped>
 header {
-  position: sticky;
   left: 0;
   top: 0;
   width: 100%;
+}
+
+.header-container {
+  margin: 0 0 0 50px;
+}
+
+@media only screen and (max-width: 1024px) {
+  .header-container {
+    margin: 0 0 0 5px;
+  }
 }
 </style>

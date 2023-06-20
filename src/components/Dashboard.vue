@@ -1,14 +1,16 @@
 <template>
-  <h1>Dashboard de {{ utilisateur }}</h1>
-  <div class="fr-grid-row fr-grid-row--gutters">
-    <div v-for="item in compteurViewModel" class="fr-col-12 fr-col-md-6 fr-col-lg-4">
-      <Compteur :compteur-view-model="item" />
-    </div>
-    <div v-for="item in quizViewModel" :key="item.id" class="fr-col-12 fr-col-md-6 fr-col-lg-4">
-      <QuizCarte :quiz-view-model="item"></QuizCarte>
-    </div>
-    <div v-for="item in badgeViewModel" :key="item.titre" class="fr-col-12 fr-col-md-6 fr-col-lg-4">
-      <BadgeCarte :badge-view-model="item"></BadgeCarte>
+  <div class="dashboard-container">
+    <h1>Dashboard de {{ utilisateur }}</h1>
+    <div class="fr-grid-row fr-grid-row--gutters">
+      <div v-for="item in compteurViewModel" class="fr-col-12 fr-col-md-6 fr-col-lg-4">
+        <Compteur :compteur-view-model="item" />
+      </div>
+      <div v-for="item in quizViewModel" :key="item.id" class="fr-col-12 fr-col-md-6 fr-col-lg-4">
+        <QuizCarte :quiz-view-model="item"></QuizCarte>
+      </div>
+      <div v-for="item in badgeViewModel" :key="item.titre" class="fr-col-12 fr-col-md-6 fr-col-lg-4">
+        <BadgeCarte :badge-view-model="item"></BadgeCarte>
+      </div>
     </div>
     <div id="card-1197" class="fr-card item-card dashboard-card-container">
     <div class="fr-card__body">
@@ -27,10 +29,10 @@
 
 <script lang="ts">
 import { defineComponent, onMounted, ref } from "vue";
-import { ChargementDashboardUsecase } from "@/dashboard/chargementDashboard.usecase.ts";
-import { ChargementDashboardPresenterImpl } from "@/dashboard/adapters/chargementDashboard.presenter.impl.ts";
-import { DashboardRepositoryAxios } from "@/dashboard/adapters/dashboardRepository.axios.ts";
-import { BadgeViewModel, CompteurViewModel, DashboardViewModel, QuizzViewModel, EmpreinteViewModel } from "@/dashboard/ports/chargementDashboard.presenter.ts";
+import { ChargementDashboardUsecase } from "@/dashboard/chargementDashboard.usecase";
+import { ChargementDashboardPresenterImpl } from "@/dashboard/adapters/chargementDashboard.presenter.impl";
+import { DashboardRepositoryAxios } from "@/dashboard/adapters/dashboardRepository.axios";
+import { BadgeViewModel, CompteurViewModel, DashboardViewModel, QuizzViewModel, EmpreinteViewModel } from "@/dashboard/ports/chargementDashboard.presenter";
 import Compteur from "@/components/Compteur.vue";
 import QuizCarte from "@/components/QuizCarte.vue";
 import BadgeCarte from "@/components/BadgeCarte.vue";
@@ -75,15 +77,6 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.dashboard-item {
-  font-family: "Arial", sans-serif;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  background-color: #3b3f41;
-  margin: 10px;
-}
-
 h2 {
   font-size: 24px;
   margin-bottom: 20px;
@@ -99,8 +92,7 @@ p {
   font-weight: bold;
   position: relative;
 }
-
 .dashboard-container {
-  display: flex;
+  margin: 20px;
 }
 </style>

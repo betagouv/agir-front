@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts">
-import { BadgeViewModel } from "@/dashboard/ports/chargementDashboard.presenter.ts";
+import { BadgeViewModel } from "@/dashboard/ports/chargementDashboard.presenter";
 
 export default {
   name: "BadgeCarte",

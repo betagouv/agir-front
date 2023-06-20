@@ -1,5 +1,5 @@
-import { ChargementDashboardPresenter, DashboardViewModel } from "@/dashboard/ports/chargementDashboard.presenter.ts";
-import { Dashboard } from "@/dashboard/ports/dashboardRepository.ts";
+import { ChargementDashboardPresenter, DashboardViewModel } from "@/dashboard/ports/chargementDashboard.presenter";
+import { Dashboard } from "@/dashboard/ports/dashboardRepository";
 
 export class ChargementDashboardPresenterImpl implements ChargementDashboardPresenter {
   constructor(dashboardViewModel: (viewmModel: DashboardViewModel) => void) {

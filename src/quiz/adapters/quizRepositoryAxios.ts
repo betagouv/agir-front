@@ -1,5 +1,5 @@
-import { AxiosFactory } from "@/axios.factory.ts";
-import { Quiz, QuizRepository } from "@/quiz/ports/quizRepository.ts";
+import { AxiosFactory } from "@/axios.factory";
+import { Quiz, QuizRepository } from "@/quiz/ports/quizRepository";
 
 interface EvaluerQuizApiModel {
   resultat: boolean;

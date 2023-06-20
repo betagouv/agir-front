@@ -4,38 +4,42 @@ import Footer from "@/components/Footer.vue";
 </script>
 
 <template>
-  <div class="container">
+  <div class="page-container">
     <Header />
-    <div class="fr-p-5w main-container">
+
+    <div class=" main-container">
       <router-view />
     </div>
 
-    <Footer />
-
+    <Footer class="footer-container"/>
   </div>
 </template>
 
 <style scoped>
-.header {
-}
-.container {
+.page-container {
   display: flex;
   flex-direction: column;
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
 }
 
 .main-container {
-  min-width: 1280px;
-  margin: 0 auto;
   text-align: center;
-  flex: 1;
-  overflow-y: auto;
+  padding-bottom: 18rem;
 }
 
-.footer {
-  height: auto;
-  background-color: #f5f5f5;
-  left: 0;
+.footer-container {
   bottom: 0;
+  text-align: left;
+  height: 18rem;
   width: 100%;
+  position: absolute;
+}
+
+@media only screen and (min-width: 1500px) {
+  .main-container {
+    min-width: 1280px;
+  }
 }
 </style>

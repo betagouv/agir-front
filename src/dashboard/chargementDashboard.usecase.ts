@@ -1,5 +1,5 @@
-import { ChargementDashboardPresenter } from "@/dashboard/ports/chargementDashboard.presenter.ts";
-import { DashboardRepository } from "@/dashboard/ports/dashboardRepository.ts";
+import { ChargementDashboardPresenter } from "@/dashboard/ports/chargementDashboard.presenter";
+import { DashboardRepository } from "@/dashboard/ports/dashboardRepository";
 
 export class ChargementDashboardUsecase {
   private dashboardRepository: DashboardRepository;
