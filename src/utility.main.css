@@ -1,7 +1,6 @@
 /*!
  * DSFR v1.9.3 | SPDX-License-Identifier: MIT | License-Filename: LICENSE.md | restricted use (see terms and conditions)
  */
-@charset "UTF-8";
 
 .fr-background-default--grey {
   background-color: var(--background-default-grey) !important;

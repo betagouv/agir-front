@@ -5,7 +5,7 @@
       <Compteur :compteur-view-model="item" />
     </div>
     <div v-for="item in quizViewModel" :key="item.id" class="fr-col-12 fr-col-md-6 fr-col-lg-4">
-      <QuizzCarte :quiz-view-model="item"></QuizzCarte>
+      <QuizCarte :quiz-view-model="item"></QuizCarte>
     </div>
     <div v-for="item in badgeViewModel" :key="item.titre" class="fr-col-12 fr-col-md-6 fr-col-lg-4">
       <BadgeCarte :badge-view-model="item"></BadgeCarte>
@@ -20,13 +20,13 @@ import { ChargementDashboardPresenterImpl } from "@/dashboard/adapters/chargemen
 import { DashboardRepositoryAxios } from "@/dashboard/adapters/dashboardRepository.axios.ts";
 import { BadgeViewModel, CompteurViewModel, DashboardViewModel, QuizzViewModel } from "@/dashboard/ports/chargementDashboard.presenter.ts";
 import Compteur from "@/components/Compteur.vue";
-import QuizzCarte from "@/components/QuizzCarte.vue";
+import QuizCarte from "@/components/QuizCarte.vue";
 import BadgeCarte from "@/components/BadgeCarte.vue";
 import store from "@/store";
 
 export default defineComponent({
   name: "Dashboard",
-  components: { BadgeCarte, QuizzCarte, Compteur },
+  components: { BadgeCarte, QuizCarte, Compteur },
   setup() {
     const utilisateur = ref<string>();
     const compteurViewModel = ref<CompteurViewModel[]>();

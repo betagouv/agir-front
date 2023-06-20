@@ -37,7 +37,7 @@ export class DashboardRepositoryAxios implements DashboardRepository {
             titre: quizz.titre,
           };
         }),
-        badges: [],
+        badges: response.data.badges,
       };
     } catch (e) {
       console.log(e);

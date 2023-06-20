@@ -1,8 +1,10 @@
+import { Commit } from "vuex";
+
 interface State {
   utilisateur: string;
 }
 
-const initialState: State = {
+export const initialState: State = {
   utilisateur: "",
 };
 
@@ -17,6 +19,11 @@ export default {
   mutations: {
     setUtilisateur(state: State, utilisateur: string) {
       state.utilisateur = utilisateur;
+    },
+  },
+  actions: {
+    reset({ commit }: { commit: Commit }) {
+      commit("setUtilisateur", "");
     },
   },
 };

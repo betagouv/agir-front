@@ -2,7 +2,7 @@
   <div id="card-1197" class="fr-card item-card dashboard-card-container">
     <div class="fr-card__body">
       <div class="fr-card__content">
-        <h2 style="font-size:2vw;" class="fr-card__title">
+        <h2 class="fr-card__title card-title">
           {{ compteurViewModel?.titre }}
         </h2>
         <p class="fr-card__desc">
@@ -98,4 +98,7 @@ p {
   font-size: 15px;
 }
 
+.card-title {
+  font-size:1.8vw;
+}
 </style>
