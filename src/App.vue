@@ -6,12 +6,18 @@ import Footer from "@/components/Footer.vue";
 <template>
   <div class="container">
     <Header />
-
     <div class="fr-p-5w main-container">
       <router-view />
     </div>
 
     <Footer />
+
+  </div>
+
+  <footer class="footer">
+    <Footer/>
+  </footer>
+
   </div>
 </template>
 

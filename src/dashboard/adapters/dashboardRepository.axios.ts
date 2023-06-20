@@ -18,6 +18,7 @@ interface DashboardApiModel {
   compteurs: CompteurApiModel[];
   quizz: QuizzApiModel[];
   badges: BadgeApiModel[];
+  bilan: string;
 }
 export class DashboardRepositoryAxios implements DashboardRepository {
   async getDashboard(utilisateur: string): Promise<Dashboard> {
@@ -38,6 +39,7 @@ export class DashboardRepositoryAxios implements DashboardRepository {
           };
         }),
         badges: response.data.badges,
+        empreinte: { bilan: response.data.bilan },
       };
     } catch (e) {
       console.log(e);

@@ -1,0 +1,15 @@
+import { EmpreinteRepository } from "@/empreinte/ports/empreinteRepository.ts";
+import { ChargementEmpreintePresenterImpl } from "@/empreinte/adapters/chargementEmpreinte.presenter.impl.ts";
+
+export class ChargementEmpreinteUsecase {
+  private _empreinteRepository: EmpreinteRepository;
+
+  constructor(empreinteRepository: EmpreinteRepository) {
+    this._empreinteRepository = empreinteRepository;
+  }
+
+  async execute(username: string, chargementEmpreintePresenterImpl: ChargementEmpreintePresenterImpl) {
+    const empreinte = await this._empreinteRepository.getEmpreinte(username);
+    chargementEmpreintePresenterImpl.presenteEmpreinte(empreinte);
+  }
+}

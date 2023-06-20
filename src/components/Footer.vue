@@ -1,5 +1,6 @@
 <template>
   <footer v-if='store.getters["utilisateur/getUtilisateur"]' class="fr-footer" role="contentinfo" id="footer-5848">
+
     <div>
       <div class="fr-footer__body">
         <div class="fr-footer__brand fr-enlarge-link footer-item-container">
@@ -57,7 +58,6 @@
 </template>
 <script lang="ts">
 import store from "@/store";
-import router from "@/router";
 
 export default {
   name: "Footer",
@@ -66,12 +66,8 @@ export default {
       return store
     }
   },
-  methods: {
-    logout() {
-      store.dispatch("utilisateur/reset")
-      router.replace("/");
-    },
-  },
+  props: {},
+  methods: {},
 };
 </script>
 
@@ -83,9 +79,5 @@ footer {
   width: 100%;
   text-align: left;
   padding: 10px 0;
-}
-
-.footer-item-container {
-  margin: 0 0 0 50px;
 }
 </style>

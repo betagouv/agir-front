@@ -10,6 +10,18 @@
     <div v-for="item in badgeViewModel" :key="item.titre" class="fr-col-12 fr-col-md-6 fr-col-lg-4">
       <BadgeCarte :badge-view-model="item"></BadgeCarte>
     </div>
+    <div id="card-1197" class="fr-card item-card dashboard-card-container">
+    <div class="fr-card__body">
+      <div class="fr-card__content">
+        <h2 class="fr-card__title card-title">
+          Mon enmpreinte carbone :
+        </h2>
+        <p class="fr-card__desc">
+          <span>{{ empreinteViewModel?.bilan }}</span>
+        </p>
+      </div>
+    </div>
+  </div>
   </div>
 </template>
 
@@ -18,7 +30,7 @@ import { defineComponent, onMounted, ref } from "vue";
 import { ChargementDashboardUsecase } from "@/dashboard/chargementDashboard.usecase.ts";
 import { ChargementDashboardPresenterImpl } from "@/dashboard/adapters/chargementDashboard.presenter.impl.ts";
 import { DashboardRepositoryAxios } from "@/dashboard/adapters/dashboardRepository.axios.ts";
-import { BadgeViewModel, CompteurViewModel, DashboardViewModel, QuizzViewModel } from "@/dashboard/ports/chargementDashboard.presenter.ts";
+import { BadgeViewModel, CompteurViewModel, DashboardViewModel, QuizzViewModel, EmpreinteViewModel } from "@/dashboard/ports/chargementDashboard.presenter.ts";
 import Compteur from "@/components/Compteur.vue";
 import QuizCarte from "@/components/QuizCarte.vue";
 import BadgeCarte from "@/components/BadgeCarte.vue";
@@ -32,12 +44,15 @@ export default defineComponent({
     const compteurViewModel = ref<CompteurViewModel[]>();
     const badgeViewModel = ref<BadgeViewModel[]>();
     const quizViewModel = ref<QuizzViewModel[]>();
+    const empreinteViewModel = ref<EmpreinteViewModel>()
 
     function mapValues(dashboardViewModel: DashboardViewModel) {
       utilisateur.value = dashboardViewModel.utilisateur;
       compteurViewModel.value = dashboardViewModel.compteurs;
       badgeViewModel.value = dashboardViewModel.badges;
       quizViewModel.value = dashboardViewModel.quizz;
+      quizViewModel.value = dashboardViewModel.quizz;
+      empreinteViewModel.value  = dashboardViewModel.empreinte;
     }
 
     const updateConsumptionValue = async () => {
@@ -53,6 +68,7 @@ export default defineComponent({
       badgeViewModel,
       quizViewModel,
       compteurViewModel,
+      empreinteViewModel,
     };
   },
 });
