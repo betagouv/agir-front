@@ -70,11 +70,11 @@
               </a>
             </li>
             <li class="fr-nav__item" data-fr-js-navigation-item="true">
-              <a v-if="isAides" class="fr-nav__link" href="/aides" target="_self" aria-current="page">
-                Aides
+              <a v-if="isAides" class="fr-nav__link" href="/mes-aides" target="_self" aria-current="page">
+                Mes Aides
               </a>
-              <a v-else class="fr-nav__link" href="/aides" target="_self">
-                Aides
+              <a v-else class="fr-nav__link" href="/mes-aides" target="_self">
+                Mes Aides
               </a>
             </li>
             <li class="fr-nav__item" data-fr-js-navigation-item="true">
