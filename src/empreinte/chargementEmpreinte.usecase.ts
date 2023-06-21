@@ -1,5 +1,5 @@
-import { EmpreinteRepository } from "@/empreinte/ports/empreinteRepository.ts";
-import { ChargementEmpreintePresenterImpl } from "@/empreinte/adapters/chargementEmpreinte.presenter.impl.ts";
+import { EmpreinteRepository } from "@/empreinte/ports/empreinteRepository";
+import { ChargementEmpreintePresenterImpl } from "@/empreinte/adapters/chargementEmpreinte.presenter.impl";
 
 export class ChargementEmpreinteUsecase {
   private _empreinteRepository: EmpreinteRepository;

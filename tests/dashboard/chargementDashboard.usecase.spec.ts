@@ -33,6 +33,9 @@ describe("Fichier de test du usecase de chargement du dashboard", () => {
             date: "14/06/2023",
           },
         ],
+        empreinte: {
+          bilan: "7932.9",
+        },
       });
     }
   });

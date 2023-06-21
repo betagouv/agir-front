@@ -27,6 +27,9 @@ export class DashboardRepositoryRetourneUneValeur implements DashboardRepository
           date: "14/06/2023",
         },
       ],
+      empreinte: {
+        bilan: "7932.9",
+      },
     };
   }
 }
