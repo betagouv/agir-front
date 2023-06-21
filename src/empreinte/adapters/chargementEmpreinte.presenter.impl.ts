@@ -1,5 +1,5 @@
-import { Empreinte } from "@/empreinte/ports/empreinteRepository.ts";
-import { ChargementEmpreintePresenter } from "@/empreinte/ports/chargementempreinte.presenter.ts";
+import { Empreinte } from "@/empreinte/ports/empreinteRepository";
+import { ChargementEmpreintePresenter } from "@/empreinte/ports/chargementEmpreinte.presenter";
 
 export interface EmpreinteViewModel {
   bilan: string;
