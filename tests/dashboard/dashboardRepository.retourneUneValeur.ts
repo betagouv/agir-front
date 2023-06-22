@@ -7,7 +7,6 @@ export class DashboardRepositoryRetourneUneValeur implements DashboardRepository
   }
 
   async getDashboard(utilisateur: string): Promise<Dashboard> {
-    console.log(utilisateur);
     return {
       compteurs: [
         {
@@ -24,7 +23,7 @@ export class DashboardRepositoryRetourneUneValeur implements DashboardRepository
       badges: [
         {
           titre: "mon super badge",
-          date: "14/06/2023",
+          date: "2023-06-20T13:16:15.408Z",
         },
       ],
       empreinte: {

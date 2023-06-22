@@ -13,6 +13,7 @@ export class SimulerAideRetrofitPresenterImpl implements SimulerAideRetrofitPres
         return {
           libelle: aide.libelle,
           montant: `${aide.montant} euros`,
+          enSavoirPlus: aide.lien,
         };
       })
     );

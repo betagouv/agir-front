@@ -4,6 +4,7 @@ import { SimulerAideRetrofitRepository } from "@/aides/ports/simulerAideRetrofit
 interface Aide {
   libelle: string;
   montant: string;
+  lien: string;
 }
 export interface SimulationRetrofit {
   aides: Aide[];

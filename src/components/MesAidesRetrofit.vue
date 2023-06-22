@@ -13,7 +13,10 @@
     <div v-if="simulationAidesRetrofitViewModel" class="resultats">
       Voici les aides dont vous pouvez bénéficier
       <ul>
-        <li v-for="aide in simulationAidesRetrofitViewModel" :key="aide.libelle">{{ aide.libelle }} : {{ aide.montant }}</li>
+        <li v-for="aide in simulationAidesRetrofitViewModel" :key="aide.libelle">
+          {{ aide.libelle }} : {{ aide.montant }}
+          <a title="en savoir plus - ouvre une nouvelle fenêtre" :href="aide.enSavoirPlus" target="_blank" rel="noopener">(en savoir plus)</a>
+        </li>
       </ul>
     </div>
   </div>
@@ -60,5 +63,6 @@ export default {
 
 .resultats {
   text-align: start;
+  margin: 1rem 5rem auto 5rem;
 }
 </style>
