@@ -86,7 +86,7 @@ export default defineComponent({
       return store;
     },
     isAides() {
-      return this.currentPage && this.currentPage == "/aides";
+      return this.currentPage && this.currentPage == "/mes-aides";
     },
     isCoach() {
       return this.currentPage && this.currentPage == "/coach";
