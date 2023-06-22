@@ -1,17 +1,15 @@
 <template>
-  <div id="card-1197" class="fr-card item-card dashboard-card-container">
-    <div class="fr-card__body">
-      <div class="fr-card__content">
-        <h2 class="fr-card__title">
-          {{ compteurViewModel?.titre }}
-        </h2>
-        <p class="fr-card__desc">
-          <p class="dashboard-item-desc">Consommation:</p>
-          <span class="visually-hidden">Consommation:</span>
-          <span>{{ compteurViewModel?.consommation }}</span>
-          <i :class="['trend-icon', compteurViewModel?.tendancePicto]" aria-hidden="true"></i>
-          <span class="visually-hidden">{{ compteurViewModel?.texte }}</span>
-        </p>
+  <div class="fr-tile fr-enlarge-link fr-tile--horizontal fr-tile--vertical-md dashboard-card-item" id="tile-6538">
+    <div class="fr-tile__body card-item-container">
+      <h3 class="fr-tile__desc">
+        {{ compteurViewModel?.titre }}
+      </h3>
+      <br />
+      <h4 class="fr-tile__title">Consommation :</h4>
+      <div class="fr-tile__title">
+        <span>{{ compteurViewModel?.consommation }}</span>
+        <i :class="['trend-icon', compteurViewModel?.tendancePicto]" aria-hidden="true"></i>
+        <span class="visually-hidden">{{ compteurViewModel?.texte }}</span>
       </div>
     </div>
   </div>
@@ -96,5 +94,15 @@ p {
 
 .dashboard-item-desc {
   font-size: 15px;
+}
+
+.card-item-container {
+  align-items: center;
+  text-align: center;
+}
+
+.dashboard-card-item {
+  border: 2px solid black;
+  border-radius: 2px;
 }
 </style>

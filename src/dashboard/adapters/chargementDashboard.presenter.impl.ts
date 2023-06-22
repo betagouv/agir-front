@@ -7,6 +7,7 @@ export class ChargementDashboardPresenterImpl implements ChargementDashboardPres
   }
 
   private _dashboardViewModel: (viewmModel: DashboardViewModel) => void;
+
   presenteDashboard(utilisateur: string, dashboard: Dashboard): void {
     this._dashboardViewModel({
       utilisateur,
@@ -20,7 +21,13 @@ export class ChargementDashboardPresenterImpl implements ChargementDashboardPres
       }),
       quizz: dashboard.quizz,
       empreinte: dashboard.empreinte,
-      badges: dashboard.badges,
+      badges: dashboard.badges.map((badge) => {
+        const date = new Date(badge.date);
+        return {
+          titre: badge.titre,
+          date: `Obtenu le ${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`,
+        };
+      }),
     });
   }
 }

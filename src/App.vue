@@ -7,11 +7,11 @@ import Footer from "@/components/Footer.vue";
   <div class="page-container">
     <Header />
 
-    <div class=" main-container">
+    <div class="main-container">
       <router-view />
     </div>
 
-    <Footer class="footer-container"/>
+    <Footer class="footer-container" />
   </div>
 </template>
 
@@ -22,6 +22,7 @@ import Footer from "@/components/Footer.vue";
   position: relative;
   min-height: 100vh;
   width: 100%;
+  overflow-x: hidden;
 }
 
 .main-container {

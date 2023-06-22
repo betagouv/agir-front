@@ -1,8 +1,7 @@
 <template>
-  <div>
+  <div class="login-container">
     <form id="login-8199" @submit.prevent="login">
-      <fieldset id="login-8199-fieldset" aria-labelledby="login-8199-fieldset-legend login-8199-fieldset-messages"
-                class="fr-fieldset">
+      <fieldset id="login-8199-fieldset" aria-labelledby="login-8199-fieldset-legend login-8199-fieldset-messages" class="fr-fieldset">
         <legend id="login-8199-fieldset-legend" class="fr-fieldset__legend">
           <h5>Se connecter avec son compte</h5>
         </legend>
@@ -10,20 +9,19 @@
           <fieldset id="credentials" aria-labelledby="credentials-legend credentials-messages" class="fr-fieldset">
             <legend id="credentials-legend" class="fr-sr-only">identifiants</legend>
             <div class="fr-fieldset__element">
-              <div id="input-group-8201" aria-required="true" autocapitalize="off" autocomplete="username"
-                   autocorrect="off" class="fr-input-group">
+              <div id="input-group-8201" aria-required="true" autocapitalize="off" autocomplete="username" autocorrect="off" class="fr-input-group">
                 <label class="fr-label" for="username-8196"> Identifiant </label>
                 <input
-                    id="username-8196"
-                    v-model="username"
-                    aria-describedby="username-8196-messages"
-                    aria-required="true"
-                    autocapitalize="off"
-                    autocomplete="username"
-                    autocorrect="off"
-                    class="fr-input"
-                    name="username"
-                    type="text"
+                  id="username-8196"
+                  v-model="username"
+                  aria-describedby="username-8196-messages"
+                  aria-required="true"
+                  autocapitalize="off"
+                  autocomplete="username"
+                  autocorrect="off"
+                  class="fr-input"
+                  name="username"
+                  type="text"
                 />
                 <div id="username-8196-messages" aria-live="assertive" class="fr-messages-group"></div>
               </div>
@@ -55,7 +53,7 @@ export default defineComponent({
     const error = ref("");
     const login = () => {
       store.commit("utilisateur/setUtilisateur", username.value);
-      router.push({name: "dashboard", state: {utilisateur: username.value}});
+      router.push({ name: "dashboard", state: { utilisateur: username.value } });
     };
 
     return {
@@ -68,57 +66,29 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.auth-container {
-  font-family: "Arial", sans-serif;
-  max-width: 400px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #3b3f41;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
 h2 {
   font-size: 24px;
   margin-bottom: 20px;
   text-align: center;
 }
 
-.auth-form {
-  display: flex;
-  flex-direction: column;
-}
-
-.form-group {
-  margin-bottom: 20px;
-}
-
-.form-label {
-  font-size: 18px;
-  margin-bottom: 15px;
-}
-
-.form-input {
-  padding: 10px;
-  font-size: 16px;
-  border-radius: 3px;
-  border: 1px solid #ccc;
-  margin-left: 16px;
-}
-
-.form-button {
-  padding: 10px 20px;
-  font-size: 16px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 3px;
-  cursor: pointer;
+.login-container {
+  width: 30vw;
+  text-align: center;
+  margin: 15vw auto 0 auto;
 }
 
 .error {
   color: red;
   margin-top: 10px;
   text-align: center;
+}
+
+@media only screen and (max-width: 900px) {
+  .login-container {
+    width: 80vw;
+    text-align: center;
+    margin: 50vw auto 0 auto;
+  }
 }
 </style>

@@ -1,15 +1,15 @@
 <template>
   <div>
     <h1>Mes aides - Retrofit</h1>
-    <form id="mes-aides-retrofit-8199" @submit.prevent="submitForm">
-      <div class="form-container">
+    <div class="form-container">
+      <form id="mes-aides-retrofit-8199" @submit.prevent="submitForm">
         <label class="fr-label" for="text-input-code-postal">Votre code postal</label>
         <input class="fr-input" v-model="codePostal" type="text" id="text-input-code-postal" name="text-input-text-code-postal" />
         <label class="fr--label" for="text-input-rfr">Revenu fiscal de référence</label>
         <input class="fr-input" v-model="revenuFiscal" type="text" id="text-input-rfr" name="text-input-text-rfr" />
-      </div>
-      <button id="button-8202" class="fr-mt-2v fr-btn">Valider</button>
-    </form>
+        <button id="button-8202" class="fr-mt-2v fr-btn">Valider</button>
+      </form>
+    </div>
     <div v-if="simulationAidesRetrofitViewModel" class="resultats">
       Voici les aides dont vous pouvez bénéficier
       <ul>
@@ -53,7 +53,9 @@ export default {
 
 <style scoped>
 .form-container {
-  text-align: left;
+  width: 30vw;
+  text-align: start;
+  margin: 0 auto 0 auto;
 }
 
 .resultats {
