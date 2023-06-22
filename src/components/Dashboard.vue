@@ -25,8 +25,10 @@
       </div>
     </div>
   </div>
-  <div v-else v-for="element in 5" class="fr-grid-row fr-grid-row--gutters dashboard-container">
-    <CarteSkeleton />
+  <div v-else class="fr-grid-row fr-grid-row--gutters dashboard-container">
+    <div v-for="item in 3" class="fr-col-12 fr-col-md-4 fr-col-lg-3">
+      <CarteSkeleton />
+    </div>
   </div>
 </template>
 
