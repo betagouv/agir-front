@@ -1,5 +1,5 @@
-import { Quiz } from "@/quiz/ports/quizRepository.ts";
-import { ChargementQuizzPresenter } from "@/quiz/ports/chargementQuizz.presenter.ts";
+import { Quiz } from "@/quiz/ports/quizRepository";
+import { ChargementQuizzPresenter } from "@/quiz/ports/chargementQuizz.presenter";
 
 interface QuestionViewModel {
   id: string;

@@ -1,5 +1,5 @@
-import { AxiosFactory } from "@/axios.factory.ts";
-import { Empreinte, EmpreinteRepository } from "@/empreinte/ports/empreinteRepository.ts";
+import { AxiosFactory } from "@/axios.factory";
+import { Empreinte, EmpreinteRepository } from "@/empreinte/ports/empreinteRepository";
 
 export interface EmpreinteApiModel {
   bilan: string;

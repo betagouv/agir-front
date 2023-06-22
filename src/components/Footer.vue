@@ -1,6 +1,5 @@
 <template>
   <footer v-if='store.getters["utilisateur/getUtilisateur"]' class="fr-footer" role="contentinfo" id="footer-5848">
-
     <div>
       <div class="fr-footer__body">
         <div class="fr-footer__brand fr-enlarge-link footer-item-container">
@@ -12,7 +11,8 @@
             </p>
           </a>
         </div>
-        <div class="fr-footer__content">
+        <div class="fr-footer__content footer-desc-container">
+          <p class="fr-footer__content-desc">Texte optionnel 3 lignes maximum.</p>
           <p class="fr-footer__content-desc">Lorem ipsum dolor sit amet, consectetur adipiscing, incididunt, ut labore et dolore magna aliqua. Vitae sapien pellentesque habitant morbi tristique senectus et. Diam maecenas sed enim ut</p>
           <ul class="fr-footer__content-list">
             <li class="fr-footer__content-item">
@@ -58,6 +58,7 @@
 </template>
 <script lang="ts">
 import store from "@/store";
+import router from "@/router";
 
 export default {
   name: "Footer",
@@ -66,18 +67,35 @@ export default {
       return store
     }
   },
-  props: {},
-  methods: {},
+  methods: {
+    logout() {
+      store.dispatch("utilisateur/reset")
+      router.replace("/");
+    },
+  },
 };
 </script>
 
 <style scoped>
-footer {
-  position: relative;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  text-align: left;
-  padding: 10px 0;
+.footer-item-container {
+  margin: 0 0 0 50px;
+}
+
+@media only screen and (max-width: 1024px) {
+  .footer-item-container {
+    margin: 0 0 0 10px;
+  }
+
+  .footer-desc-container {
+    margin: 0 0 0 10px;
+  }
+}
+
+#footer-5848 > div > div.fr-footer__bottom {
+  background-color: white;
+}
+
+#footer-5848 > div {
+  background-color: white;
 }
 </style>

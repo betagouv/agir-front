@@ -1,4 +1,4 @@
-import { EvaluerQuizPresenter } from "@/quiz/ports/evaluerQuizPresenter.ts";
+import { EvaluerQuizPresenter } from "@/quiz/ports/evaluerQuizPresenter";
 
 export interface EvaluerQuizViewModel {
   quizGagne: boolean;

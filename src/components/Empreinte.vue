@@ -6,13 +6,10 @@
 
 <script lang="ts">
 import { defineComponent, onMounted, ref } from "vue";
-import { ChargementEmpreinteUsecase } from "@/empreinte/chargementEmpreinte.usecase.ts";
-import { EmpreinteRepositoryAxios } from "@/empreinte/adapters/empreinteRepository.axios.ts";
-import { ChargementEmpreintePresenterImpl, EmpreinteViewModel } from "@/empreinte/adapters/chargementEmpreinte.presenter.impl.ts";
-//import {useRoute} from "vue-router";
+import { ChargementEmpreinteUsecase } from "@/empreinte/chargementEmpreinte.usecase";
+import { EmpreinteRepositoryAxios } from "@/empreinte/adapters/empreinteRepository.axios";
+import { ChargementEmpreintePresenterImpl, EmpreinteViewModel } from "@/empreinte/adapters/chargementEmpreinte.presenter.impl";
 import store from "@/store";
-import {EvaluerEmpreinteUsecase} from "@/empreinte/evaluerEmpreinte.usecase.ts";
-import {EvaluerEmpreintePresenterImpl, EvaluerEmpreinteViewModel} from "@/empreinte/adapters/evaluerEmpreinte.presenter.impl.ts";
 
 export default defineComponent({
   name: "Empreinte",
@@ -20,9 +17,6 @@ export default defineComponent({
 
     const empreinteViewModel = ref<EmpreinteViewModel>()
 
-    /*function mapValuesEvaluer(viewModel: EvaluerEmpreinteViewModel) {
-      console.log(viewModel);
-    }*/
     function mapValueBilan(viewModel: EmpreinteViewModel) {
       empreinteViewModel.value = viewModel;
     }
@@ -30,28 +24,15 @@ export default defineComponent({
     const empreinteRepositoryAxios = new EmpreinteRepositoryAxios();
 
     const chargementEmpreinte = () => {
+      const username = store.getters["utilisateur/getUtilisateur"];
       const chargementEmpreinteUsecase = new ChargementEmpreinteUsecase(empreinteRepositoryAxios)
-      chargementEmpreinteUsecase.execute('Denis', new ChargementEmpreintePresenterImpl(mapValueBilan))
+      chargementEmpreinteUsecase.execute(username, new ChargementEmpreintePresenterImpl(mapValueBilan))
     }
 
     onMounted(chargementEmpreinte);
 
-    /*const evaluerEmpreinte = () => {
-      const username = store.getters["utilisateur/getUtilisateur"];
-      const evaluerEmpreinteUsecase = new EvaluerEmpreinteUsecase(empreinteRepositoryAxios)
-      evaluerEmpreinteUsecase.execute(username,'', new EvaluerEmpreintePresenterImpl(mapValuesEvaluer))
-    };
-    function handleReponse(event) {
-      const reponse = event.target.value;
-      console.log(event.target);
-      checkedResponses.set(idQuestion, reponse)
-      console.log(checkedResponses);
-    }*/
-
     return {
       empreinteViewModel,
-      //evaluerEmpreinte,
-      //handleReponse
     }
   },
 
@@ -59,8 +40,5 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.quiz-question-container {
-  width: 100%;
-}
 
 </style>

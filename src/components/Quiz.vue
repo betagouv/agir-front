@@ -64,13 +64,13 @@
 
 <script lang="ts">
 import { defineComponent, onMounted, ref } from "vue";
-import { ChargementQuizUsecase } from "@/quiz/chargementQuiz.usecase.ts";
-import { QuizRepositoryAxios } from "@/quiz/adapters/quizRepositoryAxios.ts";
-import { ChargementQuizPresenterImpl, QuizViewModel } from "@/quiz/adapters/chargementQuiz.presenter.impl.ts";
+import { ChargementQuizUsecase } from "@/quiz/chargementQuiz.usecase";
+import { QuizRepositoryAxios } from "@/quiz/adapters/quizRepositoryAxios";
+import { ChargementQuizPresenterImpl, QuizViewModel } from "@/quiz/adapters/chargementQuiz.presenter.impl";
 import { useRoute } from "vue-router";
 import store from "@/store";
-import { EvaluerQuizUsecase } from "@/quiz/evaluerQuiz.usecase.ts";
-import { EvaluerQuizPresenterImpl, EvaluerQuizViewModel } from "@/quiz/adapters/evaluerQuiz.presenter.impl.ts";
+import { EvaluerQuizUsecase } from "@/quiz/evaluerQuiz.usecase";
+import { EvaluerQuizPresenterImpl, EvaluerQuizViewModel } from "@/quiz/adapters/evaluerQuiz.presenter.impl";
 import router from "@/router";
 
 export default defineComponent({
@@ -181,5 +181,10 @@ export default defineComponent({
 
 .quiz-stepper-sub-container {
   margin: 3em 3em 0 3em;
+}
+
+#app > div > div > div > div > form > div {
+  border-radius: 5px;
+  background-color: #000091;
 }
 </style>

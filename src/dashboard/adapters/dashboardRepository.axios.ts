@@ -1,5 +1,5 @@
-import { Dashboard, DashboardRepository } from "@/dashboard/ports/dashboardRepository.ts";
-import { AxiosFactory } from "@/axios.factory.ts";
+import { AxiosFactory } from "@/axios.factory";
+import { Dashboard, DashboardRepository } from "@/dashboard/ports/dashboardRepository";
 
 interface CompteurApiModel {
   titre: string;

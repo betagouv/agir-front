@@ -9,7 +9,7 @@ interface Quizz {
 
 interface Badge {
   titre: string;
-  date: "14/06/2023";
+  date: string;
 }
 
 interface Empreinte {

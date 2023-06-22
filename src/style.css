@@ -8,7 +8,6 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -28,10 +27,11 @@ a:hover {
 
 body {
   place-items: center;
-  min-width: 320px;
   min-height: 100vh;
   text-align: center;
-  margin: 0 auto;
+  margin: 0;
+  padding: 0;
+  width: 100%;
 }
 
 h1 {

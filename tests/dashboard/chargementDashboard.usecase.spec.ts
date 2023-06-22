@@ -30,9 +30,12 @@ describe("Fichier de test du usecase de chargement du dashboard", () => {
         badges: [
           {
             titre: "mon super badge",
-            date: "14/06/2023",
+            date: "Obtenu le 20/6/2023",
           },
         ],
+        empreinte: {
+          bilan: "7932.9",
+        },
       });
     }
   });

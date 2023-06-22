@@ -1,5 +1,5 @@
-import { QuizRepository } from "@/quiz/ports/quizRepository.ts";
-import { ChargementQuizPresenterImpl } from "@/quiz/adapters/chargementQuiz.presenter.impl.ts";
+import { QuizRepository } from "@/quiz/ports/quizRepository";
+import { ChargementQuizzPresenter } from "@/quiz/ports/chargementQuizz.presenter";
 
 export class ChargementQuizUsecase {
   private _quizzRepository: QuizRepository;
@@ -8,8 +8,8 @@ export class ChargementQuizUsecase {
     this._quizzRepository = quizRepository;
   }
 
-  async execute(quizId: number, chargementQuizPresenterImpl: ChargementQuizPresenterImpl) {
+  async execute(quizId: number, chargementQuizPresenter: ChargementQuizzPresenter) {
     const quiz = await this._quizzRepository.getQuiz(quizId);
-    chargementQuizPresenterImpl.presenteQuiz(quiz);
+    chargementQuizPresenter.presenteQuiz(quiz);
   }
 }
