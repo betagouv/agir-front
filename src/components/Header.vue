@@ -54,20 +54,26 @@
         <nav class="fr-nav" id="navigation" role="navigation" aria-label="Menu principal" data-fr-js-navigation="true">
           <ul class="fr-nav__list">
             <li class="fr-nav__item" data-fr-js-navigation-item="true">
-              <a v-if="isCoach" class="fr-nav__link" href="/quiz" target="_self" aria-current="page"> Le coach </a>
-              <a v-else class="fr-nav__link" href="/coach" target="_self"> Le coach </a>
+              <router-link v-if="isCoach" class="fr-nav__link" :to="{ name: 'coach' }" aria-current="page"> Le coach </router-link>
+              <router-link v-else class="fr-nav__link" :to="{ name: 'coach' }"> Le coach </router-link>
             </li>
             <li class="fr-nav__item" data-fr-js-navigation-item="true">
-              <a v-if="isDashboard" class="fr-nav__link" href="/dashboard" target="_self" aria-current="page"> Tableau de bord </a>
-              <a v-else class="fr-nav__link" href="/dashboard" target="_self"> Tableau de bord </a>
+              <router-link @click="resetCurrentHeaderTab" v-if="isDashboard" class="fr-nav__link" :to="{ name: 'dashboard' }" aria-current="page">
+                Tableau de bord
+              </router-link>
+              <router-link v-else class="fr-nav__link" :to="{ name: 'dashboard' }"> Tableau de bord </router-link>
             </li>
             <li class="fr-nav__item" data-fr-js-navigation-item="true">
-              <a v-if="isAides" class="fr-nav__link" href="/mes-aides" target="_self" aria-current="page"> Mes Aides </a>
-              <a v-else class="fr-nav__link" href="/mes-aides" target="_self"> Mes Aides </a>
+              <router-link @click="resetCurrentHeaderTab" v-if="isAides" class="fr-nav__link" :to="{ name: 'mes-aides' }" aria-current="page">
+                Mes Aides
+              </router-link>
+              <router-link v-else class="fr-nav__link" :to="{ name: 'mes-aides' }"> Mes Aides </router-link>
             </li>
             <li class="fr-nav__item" data-fr-js-navigation-item="true">
-              <a v-if="isCommunity" class="fr-nav__link" href="/communaute" target="_self" aria-current="page"> Communauté </a>
-              <a v-else class="fr-nav__link" href="/communaute" target="_self"> Communauté </a>
+              <router-link @click="resetCurrentHeaderTab" v-if="isCommunity" class="fr-nav__link" :to="{ name: 'communaute' }" aria-current="page">
+                Communauté
+              </router-link>
+              <router-link v-else class="fr-nav__link" :to="{ name: 'communaute' }"> Communauté </router-link>
             </li>
           </ul>
         </nav>
@@ -78,7 +84,7 @@
 <script lang="ts">
 import router from "@/router";
 import store from "@/store";
-import { computed, defineComponent, onMounted, ref } from "vue";
+import { defineComponent, onMounted, ref } from "vue";
 export default defineComponent({
   name: "Header",
   computed: {
@@ -97,9 +103,12 @@ export default defineComponent({
     isCommunity() {
       return this.currentPage && this.currentPage == "/communaute";
     },
+    resetCurrentHeaderTab() {
+      this.currentPage = "";
+    },
   },
   setup() {
-    const currentPage = ref<string>("/dashboard");
+    const currentPage = ref<string>("");
 
     function logout() {
       store.dispatch("utilisateur/reset");
