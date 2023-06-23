@@ -1,26 +1,43 @@
 <template>
-  <div v-if="!isLoading" class="fr-grid-row fr-grid-row--gutters dashboard-container">
-    <div class="fr-col-12 fr-col-md-4 fr-col-lg-3" v-for="item in compteurViewModel" :key="item.titre">
-      <Compteur :compteur-view-model="item" />
+  <div class="fr-grid-row">
+    <div :class="getDeviceType() == DeviceType.MOBILE ? 'fr-col-12' : 'fr-col-9'">
+      <div class="col-demo">
+        <div v-if="!isLoading" class="fr-grid-row fr-grid-row--gutters dashboard-container">
+          <div class="fr-col-12 fr-col-md-4 fr-col-lg-3" v-for="item in compteurViewModel" :key="item.titre">
+            <Compteur :compteur-view-model="item" />
+          </div>
+          <div class="fr-col-12 fr-col-md-4 fr-col-lg-3" v-for="item in quizViewModel" :key="item.id">
+            <QuizCarte :quiz-view-model="item" />
+          </div>
+        </div>
+        <div v-else class="fr-grid-row fr-grid-row--gutters dashboard-container">
+          <div class="fr-col-12 fr-col-md-4 fr-col-lg-3" v-for="item in 4" :key="item">
+            <CarteSkeleton />
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="fr-col-12 fr-col-md-4 fr-col-lg-3" v-for="item in quizViewModel" :key="item.id">
-      <QuizCarte :quiz-view-model="item" />
-    </div>
-    <div class="fr-col-12 fr-col-md-4 fr-col-lg-3" v-for="item in badgeViewModel" :key="item.titre">
-      <BadgeCarte :badge-view-model="item" />
-    </div>
-    <div class="fr-col-12 fr-col-md-4 fr-col-lg-3">
-      <BilanNosGestesClimat :get-impact-value="getImpactValue" />
-    </div>
-    <div class="fr-col-12 fr-col-md-4 fr-col-lg-3">
-      Votre score 10 <img src="../../public/leaf.svg" alt="" />
-
-      Badges obtenus
-    </div>
-  </div>
-  <div v-else class="fr-grid-row fr-grid-row--gutters dashboard-container">
-    <div v-for="item in 3" class="fr-col-12 fr-col-md-4 fr-col-lg-3">
-      <CarteSkeleton />
+    <div :class="getDeviceType() == DeviceType.MOBILE ? 'fr-col-12' : 'fr-col-3'">
+      <div v-if="!isLoading" class="col-demo">
+        <div class="fr-grid-row fr-grid-row--gutters card-item-list-container">
+          <div class="fr-col-12">
+            <BilanNosGestesClimat :get-impact-value="getImpactValue" />
+          </div>
+          <div class="fr-col-12">
+            <MesResultats v-if="badgeViewModel" :badge-view-model="badgeViewModel" :score-value="10" />
+          </div>
+        </div>
+      </div>
+      <div v-else class="col-demo">
+        <div class="fr-grid-row fr-grid-row--gutters card-item-list-container">
+          <div class="fr-col-12">
+            <CarteSkeleton />
+          </div>
+          <div class="fr-col-12">
+            <CarteSkeleton />
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -33,16 +50,21 @@ import { DashboardRepositoryAxios } from "@/dashboard/adapters/dashboardReposito
 import { BadgeViewModel, CompteurViewModel, DashboardViewModel, EmpreinteViewModel, QuizzViewModel } from "@/dashboard/ports/chargementDashboard.presenter";
 import Compteur from "@/components/Compteur.vue";
 import QuizCarte from "@/components/QuizCarte.vue";
-import BadgeCarte from "@/components/BadgeCarte.vue";
+import BadgeCarte from "@/components/BadgeContainer.vue";
 import store from "@/store";
 import Quizz from "@/components/Quiz.vue";
 import CarteSkeleton from "@/components/CarteSkeleton.vue";
 import BilanNosGestesClimat from "@/components/BilanNosGestesClimat.vue";
-
+import MesResultats from "@/components/MesResultats.vue";
+import { DeviceType, getDeviceType } from "@/DeviceType";
 export default defineComponent({
   name: "Coach",
-  components: { BilanNosGestesClimat, CarteSkeleton, Quizz, BadgeCarte, QuizCarte, Compteur },
+  methods: { getDeviceType },
+  components: { MesResultats, BilanNosGestesClimat, CarteSkeleton, Quizz, BadgesContainer: BadgeCarte, QuizCarte, Compteur },
   computed: {
+    DeviceType() {
+      return DeviceType;
+    },
     getImpactValue() {
       if (this.empreinteViewModel) {
         return parseFloat(this.empreinteViewModel.bilan).toFixed(2);
@@ -74,7 +96,6 @@ export default defineComponent({
     };
 
     onMounted(updateConsumptionValue);
-
     return {
       isLoading,
       utilisateur,
@@ -115,29 +136,14 @@ p {
   }
 }
 
-.card-item-container {
-  align-items: center;
-  text-align: center;
-}
-
-.dashboard-card-item {
-  border: 2px solid black;
-  border-radius: 2px;
-}
-
-.fr-tile {
-  box-shadow: unset;
-}
-
-.impact-value {
-  color: #161616;
-  font-size: 2rem;
-}
-
 .valeur {
   color: #161616;
   font-size: 1rem;
   font-weight: 700;
   line-height: 1.5rem;
+}
+
+.card-item-list-container {
+  margin: 15px;
 }
 </style>

@@ -105,4 +105,8 @@ p {
   border: 2px solid black;
   border-radius: 2px;
 }
+
+.fr-tile {
+  box-shadow: unset;
+}
 </style>

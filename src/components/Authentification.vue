@@ -53,7 +53,7 @@ export default defineComponent({
     const error = ref("");
     const login = () => {
       store.commit("utilisateur/setUtilisateur", username.value);
-      router.push({ name: "dashboard", state: { utilisateur: username.value } });
+      router.push({ name: "coach", state: { utilisateur: username.value } });
     };
 
     return {
