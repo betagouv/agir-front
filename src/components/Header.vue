@@ -12,7 +12,7 @@
               </div>
             </div>
             <div class="fr-header__service">
-              <img width="70" alt="agir-logo" src="../../public/logo_agir.png" />
+              <img width="70" alt="agir-logo" src="../../logo_agir.png" />
             </div>
           </div>
           <div class="fr-header__tools">
