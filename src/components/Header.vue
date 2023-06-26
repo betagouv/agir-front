@@ -5,14 +5,6 @@
         <div class="fr-header__body-row">
           <div class="fr-header__brand fr-enlarge-link">
             <div class="fr-header__brand-top">
-              <div class="fr-header__logo">
-                <a href="/dashboard" title="Accueil - Nom de l’entité (ministère, secrétariat d‘état, gouvernement)">
-                  <p class="fr-logo">
-                    République
-                    <br />Française
-                  </p>
-                </a>
-              </div>
               <div class="fr-header__navbar">
                 <button class="fr-btn--menu fr-btn" data-fr-opened="false" aria-controls="modal-1935" aria-haspopup="menu" id="button-1936" title="Menu">
                   Menu
@@ -33,6 +25,7 @@
                   <a class="fr-btn fr-icon-account-line" id="button-1939" href="#[url - à modifier]"> S’enregistrer </a>
                 </li>
                 <li v-if="store.getters['utilisateur/getUtilisateur']" @click="logout">
+                  {{ nomUtilisateur }}
                   <a class="fr-btn fr-icon-logout-box-r-line" href="#"> Se déconnecter </a>
                 </li>
               </ul>
@@ -90,6 +83,9 @@ export default defineComponent({
   computed: {
     store() {
       return store;
+    },
+    nomUtilisateur() {
+      return store.getters["utilisateur/getUtilisateur"];
     },
     isAides() {
       return this.currentPage && this.currentPage == "/mes-aides";

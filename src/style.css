@@ -62,6 +62,13 @@ button:focus-visible {
   padding: 2em;
 }
 
+.main-container {
+  background-color: #f7f8f8;
+}
+
+.fr-footer {
+  padding-top: 0;
+}
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;

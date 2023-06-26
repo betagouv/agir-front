@@ -52,8 +52,8 @@ p {
 }
 
 .dashboard-card-item {
-  border: 2px solid black;
-  border-radius: 2px;
+  border: 1px solid #e8e8e8;
+  border-radius: 3px;
 }
 
 .fr-tile {

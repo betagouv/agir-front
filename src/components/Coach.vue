@@ -2,13 +2,15 @@
   <div class="fr-grid-row">
     <div :class="getDeviceType() == DeviceType.MOBILE ? 'fr-col-12' : 'fr-col-9'">
       <div class="col-demo">
-        {{ interactionsViewModel }}
         <div v-if="!isLoading" class="fr-grid-row fr-grid-row--gutters dashboard-container">
           <div class="fr-col-12 fr-col-md-4 fr-col-lg-3" v-for="item in compteurViewModel" :key="item.titre">
             <Compteur :compteur-view-model="item" />
           </div>
           <div class="fr-col-12 fr-col-md-4 fr-col-lg-3" v-for="item in quizViewModel" :key="item.id">
             <QuizCarte :quiz-view-model="item" />
+          </div>
+          <div class="fr-col-12 fr-col-md-4 fr-col-lg-3" v-for="item in interactionsViewModel" :key="item.titre">
+            <InteractionCard :interaction-view-model="item" />
           </div>
         </div>
         <div v-else class="fr-grid-row fr-grid-row--gutters dashboard-container">
@@ -64,10 +66,11 @@ import { ChargementEmpreintePresenterImpl } from "@/bilan/adapters/chargementEmp
 import { ChargerInteractionsUsecase } from "@/interactions/chargerInteractions.usecase";
 import { InteractionsRepositoryInMemory } from "@/interactions/adapters/interactionsRepository.inMemory";
 import { InteractionsPresenterImpl, InteractionViewModel } from "@/interactions/adapters/interactions.presenter.impl";
+import InteractionCard from "@/components/InteractionCard.vue";
 export default defineComponent({
   name: "Coach",
   methods: { getDeviceType },
-  components: { MesResultats, BilanNosGestesClimat, CarteSkeleton, Quizz, BadgesContainer: BadgeCarte, QuizCarte, Compteur },
+  components: { InteractionCard, MesResultats, BilanNosGestesClimat, CarteSkeleton, Quizz, BadgesContainer: BadgeCarte, QuizCarte, Compteur },
   computed: {
     DeviceType() {
       return DeviceType;
