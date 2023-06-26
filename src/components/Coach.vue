@@ -2,6 +2,7 @@
   <div class="fr-grid-row" v-if="quizViewModel && interactionsViewModel">
     <div :class="getDeviceType() == DeviceType.MOBILE ? 'fr-col-12' : 'fr-col-9'">
       <div class="col-demo">
+        {{ interactionsViewModel }}
         <div v-if="!isLoading" class="fr-grid-row fr-grid-row--gutters dashboard-container">
           <div
             :class="getDeviceType() == DeviceType.TABLET ? ['fr-col-12', 'fr-col-md-6'] : ['fr-col-12', 'fr-col-md-4', 'fr-col-lg-3']"
@@ -98,23 +99,12 @@ export default defineComponent({
       empreinteViewModel.value = viewModel;
     }
 
-    function mapValuesInteractions(viewModel: InteractionViewModel[]) {
-      interactionsViewModel.value = viewModel;
-    }
-    const lancerChargementDesDonnees = () => {
+    const updateConsumptionValue = async () => {
       isLoading.value = true;
       const username = store.getters["utilisateur/getUtilisateur"];
       const chargementDashboardUsecase = new ChargementDashboardUsecase(new DashboardRepositoryAxios());
-      const chargementEmpreinteUseCase = new ChargementEmpreinteUsecase(new EmpreinteRepositoryAxios());
-      const chargerInteractionsUseCase = new ChargerInteractionsUsecase(new InteractionsRepositoryInMemory());
-
-      Promise.all([
-        chargementDashboardUsecase.execute(username, new ChargementDashboardPresenterImpl(mapValuesDashboard)),
-        chargementEmpreinteUseCase.execute(username, new ChargementEmpreintePresenterImpl(mapValueBilan)),
-        chargerInteractionsUseCase.execute(username, new InteractionsPresenterImpl(mapValuesInteractions)),
-      ]).then(() => {
-        isLoading.value = false;
-      });
+      const username = store.getters["utilisateur/getUtilisateur"];
+      await chargementDashboardUsecase.execute(username, new ChargementDashboardPresenterImpl(mapValues));
     };
 
     onMounted(lancerChargementDesDonnees);
