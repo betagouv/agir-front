@@ -2,6 +2,7 @@
   <div class="fr-grid-row">
     <div :class="getDeviceType() == DeviceType.MOBILE ? 'fr-col-12' : 'fr-col-9'">
       <div class="col-demo">
+        {{ interactionsViewModel }}
         <div v-if="!isLoading" class="fr-grid-row fr-grid-row--gutters dashboard-container">
           <div class="fr-col-12 fr-col-md-4 fr-col-lg-3" v-for="item in compteurViewModel" :key="item.titre">
             <Compteur :compteur-view-model="item" />
@@ -57,6 +58,12 @@ import CarteSkeleton from "@/components/CarteSkeleton.vue";
 import BilanNosGestesClimat from "@/components/BilanNosGestesClimat.vue";
 import MesResultats from "@/components/MesResultats.vue";
 import { DeviceType, getDeviceType } from "@/DeviceType";
+import { ChargementEmpreinteUsecase } from "@/bilan/chargementEmpreinte.usecase";
+import { EmpreinteRepositoryAxios } from "@/bilan/adapters/empreinteRepository.axios";
+import { ChargementEmpreintePresenterImpl } from "@/bilan/adapters/chargementEmpreinte.presenter.impl";
+import { ChargerInteractionsUsecase } from "@/interactions/chargerInteractions.usecase";
+import { InteractionsRepositoryInMemory } from "@/interactions/adapters/interactionsRepository.inMemory";
+import { InteractionsPresenterImpl, InteractionViewModel } from "@/interactions/adapters/interactions.presenter.impl";
 export default defineComponent({
   name: "Coach",
   methods: { getDeviceType },
@@ -77,25 +84,38 @@ export default defineComponent({
     const badgeViewModel = ref<BadgeViewModel[]>();
     const quizViewModel = ref<QuizzViewModel[]>();
     const empreinteViewModel = ref<EmpreinteViewModel>();
+    const interactionsViewModel = ref<InteractionViewModel[]>();
     const isLoading = ref<boolean>(true);
-    function mapValues(dashboardViewModel: DashboardViewModel) {
+    function mapValuesDashboard(dashboardViewModel: DashboardViewModel) {
       utilisateur.value = dashboardViewModel.utilisateur;
       compteurViewModel.value = dashboardViewModel.compteurs;
       badgeViewModel.value = dashboardViewModel.badges;
       quizViewModel.value = dashboardViewModel.quizz;
-      quizViewModel.value = dashboardViewModel.quizz;
-      empreinteViewModel.value = dashboardViewModel.empreinte;
-      isLoading.value = false;
     }
 
-    const updateConsumptionValue = async () => {
+    function mapValueBilan(viewModel: EmpreinteViewModel) {
+      empreinteViewModel.value = viewModel;
+    }
+
+    function mapValuesInteractions(viewModel: InteractionViewModel[]) {
+      interactionsViewModel.value = viewModel;
+    }
+    const lancerChargementDesDonnees = async () => {
       isLoading.value = true;
-      const chargementDashboardUsecase = new ChargementDashboardUsecase(new DashboardRepositoryAxios());
       const username = store.getters["utilisateur/getUtilisateur"];
-      await chargementDashboardUsecase.execute(username, new ChargementDashboardPresenterImpl(mapValues));
+      const chargementDashboardUsecase = new ChargementDashboardUsecase(new DashboardRepositoryAxios());
+      const chargementEmpreinteUseCase = new ChargementEmpreinteUsecase(new EmpreinteRepositoryAxios());
+      const chargerInteractionsUseCase = new ChargerInteractionsUsecase(new InteractionsRepositoryInMemory());
+
+      await Promise.all([
+        chargementDashboardUsecase.execute(username, new ChargementDashboardPresenterImpl(mapValuesDashboard)),
+        chargementEmpreinteUseCase.execute(username, new ChargementEmpreintePresenterImpl(mapValueBilan)),
+        chargerInteractionsUseCase.execute(username, new InteractionsPresenterImpl(mapValuesInteractions)),
+      ]);
+      isLoading.value = false;
     };
 
-    onMounted(updateConsumptionValue);
+    onMounted(lancerChargementDesDonnees);
     return {
       isLoading,
       utilisateur,
@@ -103,6 +123,7 @@ export default defineComponent({
       quizViewModel,
       compteurViewModel,
       empreinteViewModel,
+      interactionsViewModel,
     };
   },
 });

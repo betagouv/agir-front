@@ -1,7 +1,7 @@
 import { SimulerAideRetrofitRepository } from "@/aides/ports/simulerAideRetrofit.repository";
 import { SimulationRetrofit } from "@/aides/simulerAideRetrofit.usecase";
 import { AxiosFactory } from "@/axios.factory";
-import { EmpreinteApiModel } from "@/empreinte/adapters/empreinteRepository.axios";
+import { EmpreinteApiModel } from "@/bilan/adapters/empreinteRepository.axios";
 
 interface SimulerAideRetrofitApiModel {
   libelle: string;
