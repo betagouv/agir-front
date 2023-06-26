@@ -1,6 +1,6 @@
 <template>
-  <img src="../../public/award.svg" alt="award-logo" />
-  <p class="badge-container-desc">{{ badgeViewModel?.titre }}, {{ badgeViewModel?.date }}</p>
+  <img src="/award.svg" alt="award-logo" />
+  <p class="badge-container-desc">{{ badgeViewModel?.titre }} {{ badgeViewModel?.date }}</p>
 </template>
 
 <script lang="ts">

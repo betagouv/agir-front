@@ -1,11 +1,8 @@
 <template>
-  <div class="fr-grid-row">
+  <div class="fr-grid-row" v-if="quizViewModel && interactionsViewModel">
     <div :class="getDeviceType() == DeviceType.MOBILE ? 'fr-col-12' : 'fr-col-9'">
       <div class="col-demo">
         <div v-if="!isLoading" class="fr-grid-row fr-grid-row--gutters dashboard-container">
-          <div class="fr-col-12 fr-col-md-4 fr-col-lg-3" v-for="item in compteurViewModel" :key="item.titre">
-            <Compteur :compteur-view-model="item" />
-          </div>
           <div class="fr-col-12 fr-col-md-4 fr-col-lg-3" v-for="item in quizViewModel" :key="item.id">
             <QuizCarte :quiz-view-model="item" />
           </div>

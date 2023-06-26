@@ -34,6 +34,7 @@ describe("Fichier de tests pour charger les interactions", () => {
           miseEnAvant: "RECOMMANDÉ",
           type: "KYC",
           illustrationURL: "https://picsum.photos/356/213",
+          url: "/quiz/1",
         },
       ]);
     }

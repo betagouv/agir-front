@@ -25,7 +25,10 @@
                   <a class="fr-btn fr-icon-account-line" id="button-1939" href="#[url - à modifier]"> S’enregistrer </a>
                 </li>
                 <li v-if="store.getters['utilisateur/getUtilisateur']" @click="logout">
-                  {{ nomUtilisateur }}
+                  <div class="utilisateur">
+                    <img src="/ic_user.svg" alt="" />{{ nomUtilisateur }}
+                    <div class="score"><img src="/leaf.svg" alt="" />10</div>
+                  </div>
                   <a class="fr-btn fr-icon-logout-box-r-line" href="#"> Se déconnecter </a>
                 </li>
               </ul>
@@ -138,5 +141,22 @@ header {
   .header-container {
     margin: 0 0 0 5px;
   }
+}
+
+.score {
+  display: flex;
+  padding: 0.5rem;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 8px;
+  background: #f6f6f6;
+}
+
+.utilisateur {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1rem;
+  flex: 1 0 0;
 }
 </style>

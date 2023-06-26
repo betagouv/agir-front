@@ -9,6 +9,7 @@ export interface InteractionViewModel {
   miseEnAvant: string;
   type: string;
   illustrationURL: string;
+  url: string;
 }
 export class InteractionsPresenterImpl implements InteractionsPresenter {
   private _viewModels: (interactionViewModels: InteractionViewModel[]) => void;
@@ -26,7 +27,7 @@ export class InteractionsPresenterImpl implements InteractionsPresenter {
     const typeInverseMapping: { [key in InteractionType]: string } = {
       [InteractionType.KYC]: "KYC",
       [InteractionType.QUIZ]: "QUIZ",
-      [InteractionType.VIDEO]: "VIDEO",
+      [InteractionType.ARTICLE]: "VIDEO",
     };
 
     this._viewModels(
@@ -39,6 +40,7 @@ export class InteractionsPresenterImpl implements InteractionsPresenter {
           miseEnAvant: interaction.miseEnAvant,
           type: typeInverseMapping[interaction.type],
           illustrationURL: "https://picsum.photos/356/213",
+          url: "/quiz/1",
         };
       })
     );

@@ -26,7 +26,7 @@ export class InteractionsRepositoryInMemory implements InteractionsRepository {
         categorie: InteractionCategorie.CONSOMMATION,
         nombreDePointsAGagner: "+5",
         miseEnAvant: "",
-        type: InteractionType.VIDEO,
+        type: InteractionType.ARTICLE,
       },
     ];
   }

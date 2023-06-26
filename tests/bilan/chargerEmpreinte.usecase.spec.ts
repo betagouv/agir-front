@@ -22,7 +22,7 @@ describe("Fichier de tests pour le chargement d'une empreinte carbone", () => {
     // THEN
     function expectation(empreinteViewModel: EmpreinteViewModel) {
       expect(empreinteViewModel).toStrictEqual({
-        bilan: "1000",
+        bilan: "1.000",
       });
     }
   });

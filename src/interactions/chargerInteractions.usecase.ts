@@ -6,9 +6,9 @@ export enum InteractionCategorie {
   ALIMENTATION = "Alimentation",
 }
 export enum InteractionType {
-  QUIZ = "Quiz",
-  VIDEO = "Video",
-  KYC = "Kyc",
+  QUIZ = "QUIZ",
+  ARTICLE = "ARTICLE",
+  KYC = "KYC",
 }
 export interface Interaction {
   type: InteractionType;
