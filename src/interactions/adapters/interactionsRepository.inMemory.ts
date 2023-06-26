@@ -23,7 +23,7 @@ export class InteractionsRepositoryInMemory implements InteractionsRepository {
       {
         titre: "Que faire de vos déchets ?",
         sousTitre: "Vidéo de Julien Vidal",
-        categorie: InteractionCategorie.ENERGIE,
+        categorie: InteractionCategorie.CONSOMMATION,
         nombreDePointsAGagner: "+5",
         miseEnAvant: "",
         type: InteractionType.VIDEO,

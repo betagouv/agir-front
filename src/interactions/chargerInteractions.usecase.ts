@@ -2,6 +2,7 @@ import { InteractionsPresenter } from "@/interactions/ports/interactionsPresente
 import { InteractionsRepository } from "@/interactions/ports/interactionsRepository";
 export enum InteractionCategorie {
   ENERGIE = "Energie",
+  CONSOMMATION = "Consommation",
   ALIMENTATION = "Alimentation",
 }
 export enum InteractionType {

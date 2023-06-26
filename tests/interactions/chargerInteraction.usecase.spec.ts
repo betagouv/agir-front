@@ -29,10 +29,11 @@ describe("Fichier de tests pour charger les interactions", () => {
         {
           titre: "Faites le bilan du jour",
           sousTitre: "",
-          categorie: "Alimentation",
+          categorie: "🥦 Se nourrir - Activités",
           nombreDePointsAGagner: "+25",
           miseEnAvant: "RECOMMANDÉ",
           type: "KYC",
+          illustrationURL: "https://picsum.photos/356/213",
         },
       ]);
     }

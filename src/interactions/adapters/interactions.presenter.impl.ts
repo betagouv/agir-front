@@ -8,6 +8,7 @@ export interface InteractionViewModel {
   nombreDePointsAGagner: string;
   miseEnAvant: string;
   type: string;
+  illustrationURL: string;
 }
 export class InteractionsPresenterImpl implements InteractionsPresenter {
   private _viewModels: (interactionViewModels: InteractionViewModel[]) => void;
@@ -17,6 +18,7 @@ export class InteractionsPresenterImpl implements InteractionsPresenter {
 
   presente(interactions: Interaction[]) {
     const categorieInverseMapping: { [key in InteractionCategorie]: string } = {
+      [InteractionCategorie.CONSOMMATION]: "📱 Consommation",
       [InteractionCategorie.ENERGIE]: "⚡️ Énergie",
       [InteractionCategorie.ALIMENTATION]: "🥦 Se nourrir - Activités",
     };
@@ -36,6 +38,7 @@ export class InteractionsPresenterImpl implements InteractionsPresenter {
           nombreDePointsAGagner: interaction.nombreDePointsAGagner,
           miseEnAvant: interaction.miseEnAvant,
           type: typeInverseMapping[interaction.type],
+          illustrationURL: "https://picsum.photos/356/213",
         };
       })
     );
