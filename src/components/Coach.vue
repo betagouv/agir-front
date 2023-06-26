@@ -2,7 +2,6 @@
   <div class="fr-grid-row" v-if="quizViewModel && interactionsViewModel">
     <div :class="getDeviceType() == DeviceType.MOBILE ? 'fr-col-12' : 'fr-col-9'">
       <div class="col-demo">
-        {{ interactionsViewModel }}
         <div v-if="!isLoading" class="fr-grid-row fr-grid-row--gutters dashboard-container">
           <div
             :class="getDeviceType() == DeviceType.TABLET ? ['fr-col-12', 'fr-col-md-6'] : ['fr-col-12', 'fr-col-md-4', 'fr-col-lg-3']"
