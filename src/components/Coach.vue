@@ -12,13 +12,13 @@
           </div>
         </div>
         <div v-else class="fr-grid-row fr-grid-row--gutters dashboard-container">
-          <div class="fr-col-12 fr-col-md-4 fr-col-lg-3" v-for="item in 4" :key="item">
+          <div class="fr-col-12 fr-col-sm-6 fr-col-md-4 fr-col-lg-3" v-for="item in 4" :key="item">
             <CarteSkeleton />
           </div>
         </div>
       </div>
     </div>
-    <div :class="getDeviceType() == DeviceType.MOBILE ? 'fr-col-12' : 'fr-col-3'">
+    <div class="fr-col-12 fr-col-md-3">
       <div v-if="!isLoading" class="col-demo">
         <div class="fr-grid-row fr-grid-row--gutters card-item-list-container">
           <div class="fr-col-12">
