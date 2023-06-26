@@ -32,33 +32,5 @@ export default {
 };
 </script>
 <style scoped>
-h2 {
-  font-size: 24px;
-  margin-bottom: 20px;
-}
 
-h3 {
-  font-size: 18px;
-  margin-right: 10px;
-}
-
-p {
-  font-size: 24px;
-  font-weight: bold;
-  position: relative;
-}
-
-.card-item-container {
-  align-items: center;
-  text-align: center;
-}
-
-.dashboard-card-item {
-  border: 2px solid black;
-  border-radius: 2px;
-}
-
-.fr-tile {
-  box-shadow: unset;
-}
 </style>

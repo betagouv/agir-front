@@ -18,10 +18,6 @@
 <script setup lang="ts"></script>
 
 <style scoped>
-.card-item-container {
-  align-items: center;
-  text-align: center;
-}
 
 .skeleton {
   background-color: #3f3f3f;
@@ -43,12 +39,4 @@
   }
 }
 
-.dashboard-card-item {
-  //border: 2px solid black;
-  border-radius: 2px;
-}
-
-.fr-tile {
-  box-shadow: unset;
-}
 </style>

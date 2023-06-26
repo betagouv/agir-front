@@ -81,3 +81,31 @@ button:focus-visible {
     height: auto;
   }
 }
+
+
+/* factorisation from component */
+.dashboard-card-item {
+  border-radius: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.19);
+  background: #FFF;
+}
+.fr-tile {
+  box-shadow: unset;
+}
+.card-item-container {
+  align-items: flex-start;
+  text-align: left;
+}
+h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+h3 {
+  font-size: 18px;
+  margin-right: 10px;
+}
+p {
+  font-size: 24px;
+  font-weight: bold;
+  position: relative;
+}

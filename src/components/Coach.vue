@@ -121,21 +121,6 @@ export default defineComponent({
 </script>
 
 <style scoped>
-h2 {
-  font-size: 24px;
-  margin-bottom: 20px;
-}
-
-h3 {
-  font-size: 18px;
-  margin-right: 10px;
-}
-
-p {
-  font-size: 24px;
-  font-weight: bold;
-  position: relative;
-}
 
 .dashboard-container {
   margin: 20px;
