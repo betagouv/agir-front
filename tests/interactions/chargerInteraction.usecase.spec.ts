@@ -1,4 +1,4 @@
-import { ChargerInteractionsUsecase, Interaction } from "../../src/interactions/chargerInteractions.usecase";
+import { ChargerInteractionsUsecase, Interaction, InteractionCategorie, InteractionType } from "../../src/interactions/chargerInteractions.usecase";
 import { InteractionsPresenterImpl, InteractionViewModel } from "../../src/interactions/adapters/interactions.presenter.impl";
 import { InteractionsRepository } from "../../src/interactions/ports/interactionsRepository";
 
@@ -8,10 +8,10 @@ class InteractionsRepositoryForTest implements InteractionsRepository {
       {
         titre: "Faites le bilan du jour",
         sousTitre: "",
-        categorie: "Alimentation",
+        categorie: InteractionCategorie.ALIMENTATION,
         nombreDePointsAGagner: "+25",
         miseEnAvant: "RECOMMANDÉ",
-        type: "quiz",
+        type: InteractionType.KYC,
       },
     ];
   }
@@ -32,7 +32,7 @@ describe("Fichier de tests pour charger les interactions", () => {
           categorie: "Alimentation",
           nombreDePointsAGagner: "+25",
           miseEnAvant: "RECOMMANDÉ",
-          type: "quiz",
+          type: "KYC",
         },
       ]);
     }

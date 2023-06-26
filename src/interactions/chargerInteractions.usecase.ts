@@ -1,11 +1,19 @@
 import { InteractionsPresenter } from "@/interactions/ports/interactionsPresenter";
 import { InteractionsRepository } from "@/interactions/ports/interactionsRepository";
-
+export enum InteractionCategorie {
+  ENERGIE = "Energie",
+  ALIMENTATION = "Alimentation",
+}
+export enum InteractionType {
+  QUIZ = "Quiz",
+  VIDEO = "Video",
+  KYC = "Kyc",
+}
 export interface Interaction {
-  type: string;
+  type: InteractionType;
   titre: string;
   sousTitre: string;
-  categorie: string;
+  categorie: InteractionCategorie;
   nombreDePointsAGagner: string;
   miseEnAvant: string;
 }
