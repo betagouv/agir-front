@@ -3,10 +3,11 @@
     <div :class="getDeviceType() == DeviceType.MOBILE ? 'fr-col-12' : 'fr-col-9'">
       <div class="col-demo">
         <div v-if="!isLoading" class="fr-grid-row fr-grid-row--gutters dashboard-container">
-          <div class="fr-col-12 fr-col-md-4 fr-col-lg-3" v-for="item in quizViewModel" :key="item.id">
-            <QuizCarte :quiz-view-model="item" />
-          </div>
-          <div class="fr-col-12 fr-col-md-4 fr-col-lg-3" v-for="item in interactionsViewModel" :key="item.titre">
+          <div
+            :class="getDeviceType() == DeviceType.TABLET ? ['fr-col-12', 'fr-col-md-6'] : ['fr-col-12', 'fr-col-md-4', 'fr-col-lg-3']"
+            v-for="item in interactionsViewModel"
+            :key="item.titre"
+          >
             <InteractionCard :interaction-view-model="item" />
           </div>
         </div>
@@ -67,7 +68,7 @@ import InteractionCard from "@/components/InteractionCard.vue";
 export default defineComponent({
   name: "Coach",
   methods: { getDeviceType },
-  components: { InteractionCard, MesResultats, BilanNosGestesClimat, CarteSkeleton, Quizz, BadgesContainer: BadgeCarte, QuizCarte, Compteur },
+  components: { InteractionCard, MesResultats, BilanNosGestesClimat, CarteSkeleton, BadgesContainer: BadgeCarte, QuizCarte, Compteur },
   computed: {
     DeviceType() {
       return DeviceType;
@@ -100,19 +101,20 @@ export default defineComponent({
     function mapValuesInteractions(viewModel: InteractionViewModel[]) {
       interactionsViewModel.value = viewModel;
     }
-    const lancerChargementDesDonnees = async () => {
+    const lancerChargementDesDonnees = () => {
       isLoading.value = true;
       const username = store.getters["utilisateur/getUtilisateur"];
       const chargementDashboardUsecase = new ChargementDashboardUsecase(new DashboardRepositoryAxios());
       const chargementEmpreinteUseCase = new ChargementEmpreinteUsecase(new EmpreinteRepositoryAxios());
       const chargerInteractionsUseCase = new ChargerInteractionsUsecase(new InteractionsRepositoryInMemory());
 
-      await Promise.all([
+      Promise.all([
         chargementDashboardUsecase.execute(username, new ChargementDashboardPresenterImpl(mapValuesDashboard)),
         chargementEmpreinteUseCase.execute(username, new ChargementEmpreintePresenterImpl(mapValueBilan)),
         chargerInteractionsUseCase.execute(username, new InteractionsPresenterImpl(mapValuesInteractions)),
-      ]);
-      isLoading.value = false;
+      ]).then(() => {
+        isLoading.value = false;
+      });
     };
 
     onMounted(lancerChargementDesDonnees);

@@ -10,6 +10,7 @@ export interface InteractionViewModel {
   type: string;
   illustrationURL: string;
   url: string;
+  isUrlExterne: boolean;
 }
 export class InteractionsPresenterImpl implements InteractionsPresenter {
   private _viewModels: (interactionViewModels: InteractionViewModel[]) => void;
@@ -41,6 +42,7 @@ export class InteractionsPresenterImpl implements InteractionsPresenter {
           type: typeInverseMapping[interaction.type],
           illustrationURL: "https://picsum.photos/356/213",
           url: "/quiz/1",
+          isUrlExterne: false,
         };
       })
     );

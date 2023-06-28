@@ -6,7 +6,7 @@
         <p class="fr-badge fr-badge--sm badge-custom-container">{{ interactionViewModel?.categorie }}</p>
       </div>
       <h3 class="fr-tile__desc">
-        {{ interactionViewModel?.titre }}
+        {{ getDeviceType() == DeviceType.TABLET ? `${interactionViewModel?.titre.slice(0, 30)}...` : interactionViewModel?.titre }}
       </h3>
       <div class="fr-tile__desc grid-side-to-side-container">
         <div class="display-left">
@@ -26,9 +26,15 @@
 </template>
 <script lang="ts">
 import { InteractionViewModel } from "@/interactions/adapters/interactions.presenter.impl";
+import { DeviceType, getDeviceType } from "../DeviceType";
 
 export default {
   name: "InteractionCard",
+  computed: {
+    DeviceType() {
+      return DeviceType;
+    },
+  },
   props: {
     interactionViewModel: {
       type: Object as () => InteractionViewModel,
@@ -36,7 +42,7 @@ export default {
       default: undefined,
     },
   },
-  methods: {},
+  methods: { getDeviceType },
 };
 </script>
 <style scoped>
