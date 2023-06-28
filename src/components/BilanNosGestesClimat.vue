@@ -14,7 +14,11 @@
             <span class="fr-accordion__btn accordion-btn-area" aria-expanded="false" aria-controls="accordion-607">Voir le détail</span>
           </h3>
           <div class="fr-collapse" id="accordion-607">
-            <p class="accordion-area-desc">Ici on y ajoute des détails concernant la valeur de l'empreinte carbone</p>
+            <JaugeNosGestesClimat class="fr-mb-3v" libelle="🥦 Alimentation" valeur="3.4" couleur="#F28622" />
+            <JaugeNosGestesClimat class="fr-mb-3v" libelle="🚗 Transports" valeur="2" couleur="#474EFF" />
+            <JaugeNosGestesClimat class="fr-mb-3v" libelle="🏛️ Services sociétaux" valeur="2" couleur="#809769" />
+            <JaugeNosGestesClimat class="fr-mb-3v" libelle="🏡 Logement" valeur="0.5" couleur="#F8BE00" />
+            <JaugeNosGestesClimat class="fr-mb-3v" libelle="🛒 Consommation" valeur="0.5" couleur="#5C26D1" />
           </div>
         </section>
       </div>
@@ -22,18 +26,17 @@
   </div>
 </template>
 <script lang="ts">
+import JaugeNosGestesClimat from "@/components/JaugeNosGestesClimat.vue";
+
 export default {
   name: "BilanNosGestesClimat",
+  components: { JaugeNosGestesClimat },
   props: {
     getImpactValue: {},
   },
 };
 </script>
 <style scoped>
-
-
-
-
 .impact-value {
   color: #161616;
   font-size: 1.5rem;
