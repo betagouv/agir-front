@@ -1,5 +1,5 @@
-import { EvaluerEmpreintePresenter } from "@/empreinte/ports/evaluerEmpreinte.presenter";
-import { EmpreinteRepository } from "@/empreinte/ports/empreinteRepository";
+import { EvaluerEmpreintePresenter } from "@/bilan/ports/evaluerEmpreinte.presenter";
+import { EmpreinteRepository } from "@/bilan/ports/empreinteRepository";
 
 export class EvaluerEmpreinteUsecase {
   private _empreinteRepository: EmpreinteRepository;

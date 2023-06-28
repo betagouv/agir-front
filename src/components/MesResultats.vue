@@ -4,7 +4,7 @@
       <h3 class="fr-tile__desc">Votre score</h3>
       <ScoreContainer :score-value="scoreValue" />
       <br />
-      <h3 class="fr-tile__desc">badges obtenus</h3>
+      <h3 class="fr-tile__desc">Badges obtenus</h3>
       <div v-for="badge in badgeViewModel" :key="badge.titre" style="display: flex" class="fr-tile__desc">
         <BadgesContainer :badge-view-model="badge" />
       </div>
@@ -41,8 +41,8 @@ export default {
 }
 
 .dashboard-card-item {
-  border: 2px solid black;
-  border-radius: 2px;
+  border: 1px solid #e8e8e8;
+  border-radius: 3px;
 }
 
 .fr-tile {

@@ -4,7 +4,7 @@
       <h3 class="fr-tile__desc">Votre bilan carbone</h3>
       <br />
       <p class="valeur">
-        <span class="impact-value">{{ getImpactValue }}</span> <span class="impact-tonne">tonnes</span> de CO₂-e / an
+        <span class="impact-value">{{ getImpactValue }}</span> <span class="impact-tonne">tonnes de CO₂-e / an</span>
       </p>
       <br />
       <div class="fr-tile__desc">propulsé par <img src="/logo_ngc.png" alt="impact-logo" /></div>
@@ -52,8 +52,8 @@ p {
 }
 
 .dashboard-card-item {
-  border: 2px solid black;
-  border-radius: 2px;
+  border: 1px solid #e8e8e8;
+  border-radius: 3px;
 }
 
 .fr-tile {
@@ -65,10 +65,10 @@ p {
   font-size: 1.5rem;
 }
 
-.valeur {
+.impact-tonne {
   color: #161616;
   font-size: 1rem;
-  font-weight: 700;
+  font-weight: 300;
   line-height: 1.5rem;
 }
 

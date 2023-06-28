@@ -1,21 +1,20 @@
 <template>
   <h3>📒 {{ empreinteViewModel?.bilan }}</h3>
-  <br>
-  <br>
+  <br />
+  <br />
 </template>
 
 <script lang="ts">
 import { defineComponent, onMounted, ref } from "vue";
-import { ChargementEmpreinteUsecase } from "@/empreinte/chargementEmpreinte.usecase";
-import { EmpreinteRepositoryAxios } from "@/empreinte/adapters/empreinteRepository.axios";
-import { ChargementEmpreintePresenterImpl, EmpreinteViewModel } from "@/empreinte/adapters/chargementEmpreinte.presenter.impl";
+import { ChargementEmpreinteUsecase } from "@/bilan/chargementEmpreinte.usecase";
+import { EmpreinteRepositoryAxios } from "@/bilan/adapters/empreinteRepository.axios";
+import { ChargementEmpreintePresenterImpl, EmpreinteViewModel } from "@/bilan/adapters/chargementEmpreinte.presenter.impl";
 import store from "@/store";
 
 export default defineComponent({
   name: "Empreinte",
   setup() {
-
-    const empreinteViewModel = ref<EmpreinteViewModel>()
+    const empreinteViewModel = ref<EmpreinteViewModel>();
 
     function mapValueBilan(viewModel: EmpreinteViewModel) {
       empreinteViewModel.value = viewModel;
@@ -25,20 +24,17 @@ export default defineComponent({
 
     const chargementEmpreinte = () => {
       const username = store.getters["utilisateur/getUtilisateur"];
-      const chargementEmpreinteUsecase = new ChargementEmpreinteUsecase(empreinteRepositoryAxios)
-      chargementEmpreinteUsecase.execute(username, new ChargementEmpreintePresenterImpl(mapValueBilan))
-    }
+      const chargementEmpreinteUsecase = new ChargementEmpreinteUsecase(empreinteRepositoryAxios);
+      chargementEmpreinteUsecase.execute(username, new ChargementEmpreintePresenterImpl(mapValueBilan));
+    };
 
     onMounted(chargementEmpreinte);
 
     return {
       empreinteViewModel,
-    }
+    };
   },
-
-})
+});
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

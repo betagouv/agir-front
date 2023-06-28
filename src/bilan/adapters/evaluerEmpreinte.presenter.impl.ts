@@ -1,4 +1,4 @@
-import { EvaluerEmpreintePresenter } from "@/empreinte/ports/evaluerEmpreinte.presenter";
+import { EvaluerEmpreintePresenter } from "@/bilan/ports/evaluerEmpreinte.presenter";
 
 export interface EvaluerEmpreinteViewModel {
   resultat: string;
