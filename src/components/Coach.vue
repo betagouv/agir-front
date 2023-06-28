@@ -22,7 +22,7 @@
       <div v-if="!isLoading" class="col-demo">
         <div class="fr-grid-row fr-grid-row--gutters card-item-list-container">
           <div class="fr-col-12">
-            <BilanNosGestesClimat :get-impact-value="getImpactValue" />
+            <BilanNosGestesClimat :get-impact-value="empreinteViewModel?.bilan" />
           </div>
           <div class="fr-col-12">
             <MesResultats v-if="badgeViewModel" :badge-view-model="badgeViewModel" :score-value="10" />
@@ -73,11 +73,6 @@ export default defineComponent({
   computed: {
     DeviceType() {
       return DeviceType;
-    },
-    getImpactValue() {
-      if (this.empreinteViewModel) {
-        return parseFloat(this.empreinteViewModel.bilan).toFixed(2);
-      }
     },
   },
   setup() {

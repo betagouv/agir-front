@@ -1,6 +1,5 @@
 <template>
   <footer v-if="store.getters['utilisateur/getUtilisateur']" class="fr-footer" role="contentinfo" id="footer-5848">
-    <div style="background-color: #0a76f6; height: 1px"></div>
     <div>
       <div class="fr-footer__body">
         <div class="fr-footer__brand fr-enlarge-link footer-item-container">
