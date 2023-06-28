@@ -1,6 +1,6 @@
 <template>
   <div style="display: flex" class="fr-tile__desc">
-    <img src="../../leaf.svg" alt="leaf-logo" />
+    <img src="/leaf.svg" alt="leaf-logo" />
     <p style="font-size: 12px; margin-left: 5px">{{ scoreValue }} points</p>
   </div>
 </template>
