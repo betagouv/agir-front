@@ -22,17 +22,53 @@
             <form @submit.prevent="">
               <div v-if="etapeCourante" class="fr-stepper__steps" :data-fr-current-step="etapeCourante" :data-fr-steps="3" />
               <br />
+              <h3 v-if="etapeCourante" style="text-align: left; font-size: 25px">{{ getCurrentStepQuestion }}</h3>
               <fieldset class="fr-fieldset" id="checkbox" aria-labelledby="checkbox-legend checkbox-messages">
                 <div class="fr-fieldset__element">
-                  <div class="fr-checkbox-group">
+                  <div style="background-color: #f9f9f9; border-radius: 5px" class="fr-checkbox-group">
                     <input name="checkbox-1" id="checkbox-1" type="checkbox" aria-describedby="checkbox-1-messages" />
-                    <label class="fr-label" for="checkbox-1"> Pré-remplir avec ma réponse précédente </label>
+                    <label style="padding: 5px 5px 5px 5px" class="fr-label" for="checkbox-1"> Pré-remplir avec ma réponse précédente </label>
                     <div class="fr-messages-group" id="checkbox-1-messages" aria-live="assertive"></div>
                   </div>
                 </div>
                 <div class="fr-messages-group" id="checkbox-messages" aria-live="assertive"></div>
-              </fieldset>
 
+                <div class="fr-fieldset__element field-response-container">
+                  <div class="number-input-container" id="input-group-2843">
+                    <input min="0" value="0" class="fr-input" aria-describedby="text-1-messages" name="text" id="text-1" type="number" />
+                    <div class="fr-messages-group" id="text-1-messages" aria-live="assertive"></div>
+                  </div>
+                  <p class="field-response-desc">Repas avec viande rouge</p>
+                </div>
+                <div class="fr-fieldset__element field-response-container">
+                  <div class="number-input-container" id="input-group-2843">
+                    <input min="0" value="0" class="fr-input" aria-describedby="text-2-messages" name="text" id="text-2" type="number" />
+                    <div class="fr-messages-group" id="text-2-messages" aria-live="assertive"></div>
+                  </div>
+                  <p class="field-response-desc">Repas avec viande blanche</p>
+                </div>
+                <div class="fr-fieldset__element field-response-container">
+                  <div class="number-input-container" id="input-group-2843">
+                    <input min="0" value="0" class="fr-input" aria-describedby="text-3-messages" name="text" id="text-3" type="number" />
+                    <div class="fr-messages-group" id="text-3-messages" aria-live="assertive"></div>
+                  </div>
+                  <p class="field-response-desc">Repas avec poisson</p>
+                </div>
+                <div class="fr-fieldset__element field-response-container">
+                  <div class="number-input-container" id="input-group-2843">
+                    <input min="0" value="0" class="fr-input" aria-describedby="text-4-messages" name="text" id="text-4" type="number" />
+                    <div class="fr-messages-group" id="text-4-messages" aria-live="assertive"></div>
+                  </div>
+                  <p class="field-response-desc">Repas avec produit laitiers (lait, beurre, fromage)</p>
+                </div>
+                <div class="fr-fieldset__element field-response-container">
+                  <div class="number-input-container" id="input-group-2843">
+                    <input min="0" value="0" class="fr-input" aria-describedby="text-5-messages" name="text" id="text-5" type="number" />
+                    <div class="fr-messages-group" id="text-1-messages" aria-live="assertive"></div>
+                  </div>
+                  <p class="field-response-desc">Repas avec oeufs</p>
+                </div>
+              </fieldset>
               <div>
                 <span v-if="etapeCourante <= 3" @click="etapePrecedente" class="step-btn-actions">
                   <span class="fr-icon-arrow-left-line" aria-hidden="true"></span>
@@ -88,7 +124,15 @@ export default defineComponent({
       } else if (this.etapeCourante == 2) {
         return "🚗 Transport du quotidien";
       }
-      return "🔴 Autres";
+      return "Résultat du suivi";
+    },
+    getCurrentStepQuestion() {
+      if (this.etapeCourante == 1) {
+        return "Comptez combien de repas vous avez consommé avec les aliments suivants :";
+      } else if (this.etapeCourante == 2) {
+        return "Quels transports avez vous utilisé aujourd'hui ?";
+      }
+      return "";
     },
   },
   methods: { getDeviceType },
@@ -142,5 +186,29 @@ export default defineComponent({
 
 .step-btn-actions:hover {
   cursor: pointer;
+}
+
+.number-input-container {
+  width: 80px;
+  margin-bottom: 5px;
+}
+
+.field-response-container {
+  display: flex;
+  margin: 0 auto;
+}
+
+.field-response-desc {
+  margin: 10px;
+}
+
+.fr-input {
+  box-shadow: inset 0 -2px 0 0 #000091;
+}
+
+.fr-checkbox-group input[type="checkbox"] + label:before {
+  margin: 10px;
+  width: 15px;
+  height: 15px;
 }
 </style>
