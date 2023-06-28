@@ -1,6 +1,6 @@
 <template>
   <div class="fr-grid-row" v-if="quizViewModel && interactionsViewModel">
-    <div :class="getDeviceType() == DeviceType.MOBILE ? 'fr-col-12' : 'fr-col-9'">
+    <div class="fr-col-12 fr-col-md-9">
       <div class="col-demo">
         <div v-if="!isLoading" class="fr-grid-row fr-grid-row--gutters dashboard-container">
           <div

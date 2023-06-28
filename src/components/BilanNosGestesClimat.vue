@@ -30,35 +30,9 @@ export default {
 };
 </script>
 <style scoped>
-h2 {
-  font-size: 24px;
-  margin-bottom: 20px;
-}
 
-h3 {
-  font-size: 18px;
-  margin-right: 10px;
-}
 
-p {
-  font-size: 24px;
-  font-weight: bold;
-  position: relative;
-}
 
-.card-item-container {
-  align-items: flex-start;
-  text-align: left;
-}
-
-.dashboard-card-item {
-  border: 1px solid #e8e8e8;
-  border-radius: 3px;
-}
-
-.fr-tile {
-  box-shadow: unset;
-}
 
 .impact-value {
   color: #161616;

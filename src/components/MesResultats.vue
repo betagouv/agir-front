@@ -35,17 +35,5 @@ export default {
 </script>
 
 <style scoped>
-.card-item-container {
-  align-items: flex-start;
-  text-align: left;
-}
 
-.dashboard-card-item {
-  border: 1px solid #e8e8e8;
-  border-radius: 3px;
-}
-
-.fr-tile {
-  box-shadow: unset;
-}
 </style>
