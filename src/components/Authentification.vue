@@ -46,14 +46,19 @@
 import { defineComponent, ref } from "vue";
 import router from "@/router";
 import store from "@/store";
+import { AuthentifierUtilisateurUsecase } from "@/authentification/authentifierUtilisateur.usecase";
+import { UtilisateurRepositoryAxios } from "@/authentification/adapters/utilisateur.repository.axios";
+import { SessionRepositoryStore } from "@/authentification/adapters/session.repository.store";
 
 export default defineComponent({
   setup() {
     const username = ref("");
     const error = ref("");
-    const login = () => {
-      store.commit("utilisateur/setUtilisateur", username.value);
-      router.push({ name: "coach", state: { utilisateur: username.value } });
+    const login = async () => {
+      const usecase = new AuthentifierUtilisateurUsecase(new UtilisateurRepositoryAxios(), new SessionRepositoryStore());
+      usecase.execute(username.value).then(() => {
+        router.push({ name: "coach", state: { utilisateur: username.value } });
+      });
     };
 
     return {

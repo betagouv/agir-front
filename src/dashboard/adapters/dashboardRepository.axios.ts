@@ -21,10 +21,10 @@ interface DashboardApiModel {
   bilan: string;
 }
 export class DashboardRepositoryAxios implements DashboardRepository {
-  async getDashboard(utilisateur: string): Promise<Dashboard> {
+  async getDashboard(idUtilisateur: string): Promise<Dashboard> {
     try {
       const axiosInstance = AxiosFactory.getAxios();
-      const response = await axiosInstance.get<DashboardApiModel>(`/dashboard/${utilisateur}`);
+      const response = await axiosInstance.get<DashboardApiModel>(`/dashboards/${idUtilisateur}`);
       return {
         compteurs: response.data.compteurs.map((compteur) => {
           return {
