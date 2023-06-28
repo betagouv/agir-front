@@ -1,11 +1,14 @@
 import { Commit } from "vuex";
+import { Utilisateur } from "@/authentification/ports/utilisateur.repository";
 
 interface State {
   utilisateur: string;
+  id: string;
 }
 
 export const initialState: State = {
   utilisateur: "",
+  id: "",
 };
 
 export default {
@@ -15,15 +18,19 @@ export default {
     getUtilisateur(state: State): string {
       return state.utilisateur;
     },
+    getId(state: State): string {
+      return state.id;
+    },
   },
   mutations: {
-    setUtilisateur(state: State, utilisateur: string) {
-      state.utilisateur = utilisateur;
+    setUtilisateur(state: State, utilisateur: Utilisateur) {
+      state.utilisateur = utilisateur.nom;
+      state.id = utilisateur.id;
     },
   },
   actions: {
     reset({ commit }: { commit: Commit }) {
-      commit("setUtilisateur", "");
+      commit("setUtilisateur", { nom: "", id: "" });
     },
   },
 };

@@ -103,15 +103,15 @@ export default defineComponent({
     }
     const lancerChargementDesDonnees = () => {
       isLoading.value = true;
-      const username = store.getters["utilisateur/getUtilisateur"];
+      const idUtilisateur = store.getters["utilisateur/getId"];
       const chargementDashboardUsecase = new ChargementDashboardUsecase(new DashboardRepositoryAxios());
       const chargementEmpreinteUseCase = new ChargementEmpreinteUsecase(new EmpreinteRepositoryAxios());
       const chargerInteractionsUseCase = new ChargerInteractionsUsecase(new InteractionsRepositoryInMemory());
 
       Promise.all([
-        chargementDashboardUsecase.execute(username, new ChargementDashboardPresenterImpl(mapValuesDashboard)),
-        chargementEmpreinteUseCase.execute(username, new ChargementEmpreintePresenterImpl(mapValueBilan)),
-        chargerInteractionsUseCase.execute(username, new InteractionsPresenterImpl(mapValuesInteractions)),
+        chargementDashboardUsecase.execute(idUtilisateur, new ChargementDashboardPresenterImpl(mapValuesDashboard)),
+        chargementEmpreinteUseCase.execute(idUtilisateur, new ChargementEmpreintePresenterImpl(mapValueBilan)),
+        chargerInteractionsUseCase.execute(idUtilisateur, new InteractionsPresenterImpl(mapValuesInteractions)),
       ]).then(() => {
         isLoading.value = false;
       });

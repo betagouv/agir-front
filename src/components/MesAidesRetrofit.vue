@@ -25,7 +25,7 @@
 <script lang="ts">
 import { ref } from "vue";
 import SimulerAideRetrofitUsecase from "@/aides/simulerAideRetrofit.usecase";
-import { SimulerAideRetrofitRepositoryAxios } from "@/aides/adapters/simulerAideRetrofitRepository.axios";
+import { SimulerAideRetrofitRepositoryAxios } from "@/aides/adapters/simulerAideRetrofit.repository.axios";
 import { SimulerAideRetrofitPresenterImpl } from "@/aides/adapters/simulerAideRetrofit.presenter.impl";
 import { SimulationAidesRetrofitViewModel } from "@/aides/ports/simulerAideRetrofit.presenter";
 
