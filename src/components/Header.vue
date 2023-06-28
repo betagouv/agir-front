@@ -50,7 +50,9 @@
         <nav class="fr-nav" id="navigation" role="navigation" aria-label="Menu principal" data-fr-js-navigation="true">
           <ul class="fr-nav__list">
             <li class="fr-nav__item" data-fr-js-navigation-item="true">
-              <router-link v-if="isCoach" class="fr-nav__link" :to="{ name: 'coach' }" aria-current="page"> Le coach </router-link>
+              <router-link @click="resetCurrentHeaderTab" v-if="isCoach" class="fr-nav__link" :to="{ name: 'coach' }" aria-current="page">
+                Le coach
+              </router-link>
               <router-link v-else class="fr-nav__link" :to="{ name: 'coach' }"> Le coach </router-link>
             </li>
             <li class="fr-nav__item" data-fr-js-navigation-item="true">
@@ -94,7 +96,7 @@ export default defineComponent({
       return this.currentPage && this.currentPage == "/mes-aides";
     },
     isCoach() {
-      return this.currentPage && this.currentPage == "/coach";
+      return this.currentPage && this.currentPage.startsWith("/coach");
     },
     isDashboard() {
       return this.currentPage && this.currentPage == "/dashboard";
@@ -103,7 +105,7 @@ export default defineComponent({
       return this.currentPage && this.currentPage == "/communaute";
     },
     resetCurrentHeaderTab() {
-      this.currentPage = "";
+      this.currentPage = window.location.pathname;
     },
   },
   setup() {

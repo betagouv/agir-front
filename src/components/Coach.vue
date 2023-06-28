@@ -97,6 +97,7 @@ export default defineComponent({
 
     function mapValueBilan(viewModel: EmpreinteViewModel) {
       empreinteViewModel.value = viewModel;
+      store.commit("utilisateur/setValeurBilanCarbone", viewModel.bilan);
     }
 
     function mapValuesInteractions(viewModel: InteractionViewModel[]) {
