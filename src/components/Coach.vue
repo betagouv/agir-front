@@ -1,6 +1,6 @@
 <template>
   <div class="fr-grid-row" v-if="quizViewModel && interactionsViewModel">
-    <div :class="getDeviceType() == DeviceType.MOBILE ? 'fr-col-12' : 'fr-col-9'">
+    <div class="fr-col-12 fr-col-md-9">
       <div class="col-demo">
         <div v-if="!isLoading" class="fr-grid-row fr-grid-row--gutters dashboard-container">
           <div
@@ -12,13 +12,13 @@
           </div>
         </div>
         <div v-else class="fr-grid-row fr-grid-row--gutters dashboard-container">
-          <div class="fr-col-12 fr-col-sm-6 fr-col-md-4 fr-col-lg-3" v-for="item in 4" :key="item">
+          <div class="fr-col-12 fr-col-md-4 fr-col-lg-3" v-for="item in 4" :key="item">
             <CarteSkeleton />
           </div>
         </div>
       </div>
     </div>
-    <div class="fr-col-12 fr-col-md-3">
+    <div :class="getDeviceType() == DeviceType.MOBILE ? 'fr-col-12' : 'fr-col-3'">
       <div v-if="!isLoading" class="col-demo">
         <div class="fr-grid-row fr-grid-row--gutters card-item-list-container">
           <div class="fr-col-12">
@@ -98,12 +98,23 @@ export default defineComponent({
       empreinteViewModel.value = viewModel;
     }
 
-    const updateConsumptionValue = async () => {
+    function mapValuesInteractions(viewModel: InteractionViewModel[]) {
+      interactionsViewModel.value = viewModel;
+    }
+    const lancerChargementDesDonnees = () => {
       isLoading.value = true;
       const username = store.getters["utilisateur/getUtilisateur"];
       const chargementDashboardUsecase = new ChargementDashboardUsecase(new DashboardRepositoryAxios());
-      const username = store.getters["utilisateur/getUtilisateur"];
-      await chargementDashboardUsecase.execute(username, new ChargementDashboardPresenterImpl(mapValues));
+      const chargementEmpreinteUseCase = new ChargementEmpreinteUsecase(new EmpreinteRepositoryAxios());
+      const chargerInteractionsUseCase = new ChargerInteractionsUsecase(new InteractionsRepositoryInMemory());
+
+      Promise.all([
+        chargementDashboardUsecase.execute(username, new ChargementDashboardPresenterImpl(mapValuesDashboard)),
+        chargementEmpreinteUseCase.execute(username, new ChargementEmpreintePresenterImpl(mapValueBilan)),
+        chargerInteractionsUseCase.execute(username, new InteractionsPresenterImpl(mapValuesInteractions)),
+      ]).then(() => {
+        isLoading.value = false;
+      });
     };
 
     onMounted(lancerChargementDesDonnees);
@@ -121,6 +132,21 @@ export default defineComponent({
 </script>
 
 <style scoped>
+h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+h3 {
+  font-size: 18px;
+  margin-right: 10px;
+}
+
+p {
+  font-size: 24px;
+  font-weight: bold;
+  position: relative;
+}
 
 .dashboard-container {
   margin: 20px;
