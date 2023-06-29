@@ -22,7 +22,6 @@ import Footer from "@/components/Footer.vue";
   position: relative;
   min-height: 100vh;
   width: 100%;
-  overflow-x: hidden;
   background-color: #f7f8f8;
 }
 
