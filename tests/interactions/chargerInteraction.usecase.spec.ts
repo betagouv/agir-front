@@ -35,7 +35,7 @@ describe("Fichier de tests pour charger les interactions", () => {
         {
           titre: "titre",
           sousTitre: "sousTitre",
-          categorie: "🥦 Se nourrir - Activités",
+          categorie: "🥦 Alimentation",
           nombreDePointsAGagner: "nombreDePointsAGagner",
           miseEnAvant: "miseEnAvant",
           type: "QUIZ",
