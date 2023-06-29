@@ -2,7 +2,7 @@
   <div v-if="interactionViewModel" class="fr-tile fr-enlarge-link fr-tile--horizontal fr-tile--vertical-md dashboard-card-item" id="tile-6538">
     <div class="card-item-container card-custom-body">
       <div class="fr-tile__title">
-        <img class="interaction-logo-container" alt="interaction-item-logo" :src="interactionViewModel?.illustrationURL" />
+        <img class="interaction-logo-container" width="356" height="212" alt="interaction-item-logo" :src="interactionViewModel?.illustrationURL" />
         <p class="fr-badge fr-badge--sm badge-custom-container">{{ interactionViewModel?.categorie }}</p>
       </div>
       <h3 class="fr-tile__desc">
@@ -14,11 +14,11 @@
         </div>
         <div class="display-right">
           <img src="/leaf.svg" alt="leaf-logo" />
-          <p class="card-sub-title-points">{{ interactionViewModel?.nombreDePointsAGagner }} points</p>
+          <p class="card-sub-title-points">+ {{ interactionViewModel?.nombreDePointsAGagner }} points</p>
         </div>
       </div>
       <div class="interaction-footer">
-        <a :href="interactionViewModel?.url">Commencer</a>
+        <a :href="interactionViewModel?.url" :target="interactionViewModel?.isUrlExterne ? 'blank' : ''">Commencer</a>
         <span class="interaction-duration">5 min</span>
       </div>
     </div>
@@ -26,7 +26,7 @@
 </template>
 <script lang="ts">
 import { InteractionViewModel } from "@/interactions/adapters/interactions.presenter.impl";
-import { DeviceType, getDeviceType } from "../DeviceType";
+import { DeviceType, getDeviceType } from "@/DeviceType";
 
 export default {
   name: "InteractionCard",

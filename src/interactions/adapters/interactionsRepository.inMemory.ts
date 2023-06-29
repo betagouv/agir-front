@@ -2,8 +2,8 @@ import { InteractionsRepository } from "@/interactions/ports/interactionsReposit
 import { Interaction, InteractionCategorie, InteractionType } from "@/interactions/chargerInteractions.usecase";
 
 export class InteractionsRepositoryInMemory implements InteractionsRepository {
-  chargerInteractions(nomUtilisateur: string): Interaction[] {
-    return [
+  chargerInteractions(nomUtilisateur: string): Promise<Interaction[]> {
+    return Promise.resolve([
       {
         titre: "Faites le bilan du jour",
         sousTitre: "",
@@ -28,6 +28,6 @@ export class InteractionsRepositoryInMemory implements InteractionsRepository {
         miseEnAvant: "",
         type: InteractionType.ARTICLE,
       },
-    ];
+    ]);
   }
 }

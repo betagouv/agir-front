@@ -65,6 +65,7 @@ import { ChargerInteractionsUsecase } from "@/interactions/chargerInteractions.u
 import { InteractionsRepositoryInMemory } from "@/interactions/adapters/interactionsRepository.inMemory";
 import { InteractionsPresenterImpl, InteractionViewModel } from "@/interactions/adapters/interactions.presenter.impl";
 import InteractionCard from "@/components/InteractionCard.vue";
+import { InteractionsRepositoryAxios } from "@/interactions/adapters/interactionsRepository.axios";
 export default defineComponent({
   name: "Coach",
   methods: { getDeviceType },
@@ -106,7 +107,7 @@ export default defineComponent({
       const idUtilisateur = store.getters["utilisateur/getId"];
       const chargementDashboardUsecase = new ChargementDashboardUsecase(new DashboardRepositoryAxios());
       const chargementEmpreinteUseCase = new ChargementEmpreinteUsecase(new EmpreinteRepositoryAxios());
-      const chargerInteractionsUseCase = new ChargerInteractionsUsecase(new InteractionsRepositoryInMemory());
+      const chargerInteractionsUseCase = new ChargerInteractionsUsecase(new InteractionsRepositoryAxios());
 
       Promise.all([
         chargementDashboardUsecase.execute(idUtilisateur, new ChargementDashboardPresenterImpl(mapValuesDashboard)),
