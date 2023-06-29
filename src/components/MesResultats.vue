@@ -35,5 +35,7 @@ export default {
 </script>
 
 <style scoped>
-
+.card-item-container {
+  align-items: start;
+}
 </style>
