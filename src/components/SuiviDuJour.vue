@@ -210,7 +210,7 @@
                 <!-- ---------------------------- -->
               </fieldset>
               <div>
-                <span v-if="etapeCourante <= 3 && etapeCourante > 1" @click="etapePrecedente" class="step-btn-actions">
+                <span v-if="etapeCourante <= 2 && etapeCourante > 1" @click="etapePrecedente" class="step-btn-actions">
                   <span class="fr-icon-arrow-left-line" aria-hidden="true"></span>
                   {{ etapeCourante == 3 ? "Modifier vos réponses" : "Précédent" }}
                 </span>
@@ -219,7 +219,7 @@
                 </button>
                 <span v-if="etapeCourante < 3" @click="sauterEtape" class="step-btn-actions"> Passer la question </span>
                 <button style="margin-left: 10px" v-if="etapeCourante == 3" class="fr-btn fr-btn-not-rounded" id="button-2864" title="Envoyer le formulaire">
-                  Valider mes réponses
+                  Retour au coach
                 </button>
               </div>
               <br />
