@@ -22,61 +22,205 @@
             <form @submit.prevent="">
               <div v-if="etapeCourante" class="fr-stepper__steps" :data-fr-current-step="etapeCourante" :data-fr-steps="3" />
               <br />
-              <h3 v-if="etapeCourante" style="text-align: left; font-size: 25px">{{ getCurrentStepQuestion }}</h3>
               <fieldset class="fr-fieldset" id="checkbox" aria-labelledby="checkbox-legend checkbox-messages">
-                <div class="fr-fieldset__element">
-                  <div style="background-color: #f9f9f9; border-radius: 5px" class="fr-checkbox-group">
-                    <input name="checkbox-1" id="checkbox-1" type="checkbox" aria-describedby="checkbox-1-messages" />
-                    <label style="padding: 5px 5px 5px 5px" class="fr-label" for="checkbox-1"> Pré-remplir avec ma réponse précédente </label>
-                    <div class="fr-messages-group" id="checkbox-1-messages" aria-live="assertive"></div>
+                <!-- A sortir dans un component -->
+                <div v-if="etapeCourante == 1">
+                  <div class="fr-fieldset__element fill-response-checkbox-container">
+                    <div style="background-color: #f9f9f9; border-radius: 5px" class="fr-checkbox-group">
+                      <input name="checkbox-first-auto-fill" id="checkbox-1" type="checkbox" aria-describedby="checkbox-first-auto-fill-messages" />
+                      <label style="padding: 5px 5px 5px 5px" class="fr-label" for="checkbox-first-auto-fill"> Pré-remplir avec ma réponse précédente </label>
+                      <div class="fr-messages-group" id="checkbox-first-auto-fill-messages" aria-live="assertive"></div>
+                    </div>
+                  </div>
+                  <h3 v-if="etapeCourante" style="text-align: left; font-size: 25px; margin-left: 5px">{{ getCurrentStepQuestion }}</h3>
+                  <div class="fr-messages-group" id="checkbox-messages" aria-live="assertive"></div>
+                  <div class="fr-fieldset__element field-response-container">
+                    <div class="number-input-container" id="input-group-2843">
+                      <input min="0" value="0" class="fr-input" aria-describedby="text-1-messages" name="text" id="text-1" type="number" />
+                      <div class="fr-messages-group" id="text-1-messages" aria-live="assertive"></div>
+                    </div>
+                    <p class="field-response-desc">Repas avec viande rouge</p>
+                  </div>
+                  <div class="fr-fieldset__element field-response-container">
+                    <div class="number-input-container" id="input-group-2843">
+                      <input min="0" value="0" class="fr-input" aria-describedby="text-2-messages" name="text" id="text-2" type="number" />
+                      <div class="fr-messages-group" id="text-2-messages" aria-live="assertive"></div>
+                    </div>
+                    <p class="field-response-desc">Repas avec viande blanche</p>
+                  </div>
+                  <div class="fr-fieldset__element field-response-container">
+                    <div class="number-input-container" id="input-group-2843">
+                      <input min="0" value="0" class="fr-input" aria-describedby="text-3-messages" name="text" id="text-3" type="number" />
+                      <div class="fr-messages-group" id="text-3-messages" aria-live="assertive"></div>
+                    </div>
+                    <p class="field-response-desc">Repas avec poisson</p>
+                  </div>
+                  <div class="fr-fieldset__element field-response-container">
+                    <div class="number-input-container" id="input-group-2843">
+                      <input min="0" value="0" class="fr-input" aria-describedby="text-4-messages" name="text" id="text-4" type="number" />
+                      <div class="fr-messages-group" id="text-4-messages" aria-live="assertive"></div>
+                    </div>
+                    <p class="field-response-desc">Repas avec produit laitiers (lait, beurre, fromage)</p>
+                  </div>
+                  <div class="fr-fieldset__element field-response-container">
+                    <div class="number-input-container" id="input-group-2843">
+                      <input min="0" value="0" class="fr-input" aria-describedby="text-5-messages" name="text" id="text-5" type="number" />
+                      <div class="fr-messages-group" id="text-1-messages" aria-live="assertive"></div>
+                    </div>
+                    <p class="field-response-desc">Repas avec oeufs</p>
                   </div>
                 </div>
-                <div class="fr-messages-group" id="checkbox-messages" aria-live="assertive"></div>
-
-                <div class="fr-fieldset__element field-response-container">
-                  <div class="number-input-container" id="input-group-2843">
-                    <input min="0" value="0" class="fr-input" aria-describedby="text-1-messages" name="text" id="text-1" type="number" />
-                    <div class="fr-messages-group" id="text-1-messages" aria-live="assertive"></div>
+                <!-- ---------------------------- -->
+                <!-- A sortir dans un component -->
+                <div v-else-if="etapeCourante == 2">
+                  <div class="fr-fieldset__element fill-response-checkbox-container">
+                    <div style="background-color: #f9f9f9; border-radius: 5px" class="fr-checkbox-group">
+                      <input name="checkbox-first-auto-fill" id="checkbox-1" type="checkbox" aria-describedby="checkbox-first-auto-fill-messages" />
+                      <label style="padding: 5px 5px 5px 5px" class="fr-label" for="checkbox-first-auto-fill"> Pré-remplir avec ma réponse précédente </label>
+                      <div class="fr-messages-group" id="checkbox-first-auto-fill-messages" aria-live="assertive"></div>
+                    </div>
                   </div>
-                  <p class="field-response-desc">Repas avec viande rouge</p>
-                </div>
-                <div class="fr-fieldset__element field-response-container">
-                  <div class="number-input-container" id="input-group-2843">
-                    <input min="0" value="0" class="fr-input" aria-describedby="text-2-messages" name="text" id="text-2" type="number" />
-                    <div class="fr-messages-group" id="text-2-messages" aria-live="assertive"></div>
+                  <h3 v-if="etapeCourante" style="text-align: left; font-size: 25px; margin-left: 5px">{{ getCurrentStepQuestion }}</h3>
+                  <div class="transport-km-value-container">
+                    <div class="fr-fieldset__element">
+                      <div class="fr-checkbox-group">
+                        <input v-model="checkboxCar" name="checkbox-car" id="checkbox-car" type="checkbox" aria-describedby="checkbox-car-messages" />
+                        <label class="fr-label" for="checkbox-car"> Voiture </label>
+                        <div class="fr-messages-group" id="checkbox-car-messages" aria-live="assertive"></div>
+                      </div>
+                    </div>
+                    <div v-if="checkboxCar" class="fr-fieldset__element field-response-container">
+                      <div class="number-input-container" id="input-group-2843">
+                        <input min="0" value="0" class="fr-input" aria-describedby="text-car-messages" name="text" id="text-car" type="number" />
+                        <div class="fr-messages-group" id="text-car-messages" aria-live="assertive"></div>
+                      </div>
+                      <p class="field-response-desc">Km en voiture</p>
+                    </div>
                   </div>
-                  <p class="field-response-desc">Repas avec viande blanche</p>
-                </div>
-                <div class="fr-fieldset__element field-response-container">
-                  <div class="number-input-container" id="input-group-2843">
-                    <input min="0" value="0" class="fr-input" aria-describedby="text-3-messages" name="text" id="text-3" type="number" />
-                    <div class="fr-messages-group" id="text-3-messages" aria-live="assertive"></div>
+                  <div class="transport-km-value-container">
+                    <div class="fr-fieldset__element">
+                      <div class="fr-checkbox-group">
+                        <input
+                          v-model="checkboxMotorcycle"
+                          name="checkbox-motorcycle"
+                          id="checkbox-motorcycle"
+                          type="checkbox"
+                          aria-describedby="checkbox-motorcycle-messages"
+                        />
+                        <label class="fr-label" for="checkbox-motorcycle"> Moto / Scooter </label>
+                        <div class="fr-messages-group" id="checkbox-motorcycle-messages" aria-live="assertive"></div>
+                      </div>
+                    </div>
+                    <div v-if="checkboxMotorcycle" class="fr-fieldset__element field-response-container">
+                      <div class="number-input-container" id="input-group-2843">
+                        <input min="0" value="0" class="fr-input" aria-describedby="text-motorcycle-messages" name="text" id="text-motorcycle" type="number" />
+                        <div class="fr-messages-group" id="text-motorcycle-messages" aria-live="assertive"></div>
+                      </div>
+                      <p class="field-response-desc">Km en scooter</p>
+                    </div>
                   </div>
-                  <p class="field-response-desc">Repas avec poisson</p>
-                </div>
-                <div class="fr-fieldset__element field-response-container">
-                  <div class="number-input-container" id="input-group-2843">
-                    <input min="0" value="0" class="fr-input" aria-describedby="text-4-messages" name="text" id="text-4" type="number" />
-                    <div class="fr-messages-group" id="text-4-messages" aria-live="assertive"></div>
+                  <div class="transport-km-value-container">
+                    <div class="fr-fieldset__element">
+                      <div class="fr-checkbox-group">
+                        <input
+                          v-model="checkboxSubway"
+                          name="checkbox-subway"
+                          id="checkbox-subway"
+                          type="checkbox"
+                          aria-describedby="checkbox-subway-messages"
+                        />
+                        <label class="fr-label" for="checkbox-subway"> Métro / tramway </label>
+                        <div class="fr-messages-group" id="checkbox-subway-messages" aria-live="assertive"></div>
+                      </div>
+                    </div>
+                    <div v-if="checkboxSubway" class="fr-fieldset__element field-response-container">
+                      <div class="number-input-container" id="input-group-2843">
+                        <input min="0" value="0" class="fr-input" aria-describedby="text-subway-messages" name="text" id="text-subway" type="number" />
+                        <div class="fr-messages-group" id="text-subway-messages" aria-live="assertive"></div>
+                      </div>
+                      <p class="field-response-desc">Km métro</p>
+                    </div>
                   </div>
-                  <p class="field-response-desc">Repas avec produit laitiers (lait, beurre, fromage)</p>
-                </div>
-                <div class="fr-fieldset__element field-response-container">
-                  <div class="number-input-container" id="input-group-2843">
-                    <input min="0" value="0" class="fr-input" aria-describedby="text-5-messages" name="text" id="text-5" type="number" />
-                    <div class="fr-messages-group" id="text-1-messages" aria-live="assertive"></div>
+                  <div class="transport-km-value-container">
+                    <div class="fr-fieldset__element">
+                      <div class="fr-checkbox-group">
+                        <input v-model="checkboxTrain" name="checkbox-train" id="checkbox-train" type="checkbox" aria-describedby="checkbox-train-messages" />
+                        <label class="fr-label" for="checkbox-train"> Train </label>
+                        <div class="fr-messages-group" id="checkbox-train-messages" aria-live="assertive"></div>
+                      </div>
+                    </div>
+                    <div v-if="checkboxTrain" class="fr-fieldset__element field-response-container">
+                      <div class="number-input-container" id="input-group-2843">
+                        <input min="0" value="0" class="fr-input" aria-describedby="text-train-messages" name="text" id="text-train" type="number" />
+                        <div class="fr-messages-group" id="text-train-messages" aria-live="assertive"></div>
+                      </div>
+                      <p class="field-response-desc">Km en train</p>
+                    </div>
                   </div>
-                  <p class="field-response-desc">Repas avec oeufs</p>
+                  <div class="transport-km-value-container">
+                    <div class="fr-fieldset__element">
+                      <div class="fr-checkbox-group">
+                        <input
+                          v-model="checkboxBicycle"
+                          name="checkbox-bicycle"
+                          id="checkbox-bicycle"
+                          type="checkbox"
+                          aria-describedby="checkbox-bicycle-messages"
+                        />
+                        <label class="fr-label" for="checkbox-bicycle"> Vélo </label>
+                        <div class="fr-messages-group" id="checkbox-bicycle-messages" aria-live="assertive"></div>
+                      </div>
+                    </div>
+                    <div v-if="checkboxBicycle" class="fr-fieldset__element field-response-container">
+                      <div class="number-input-container" id="input-group-2843">
+                        <input min="0" value="0" class="fr-input" aria-describedby="text-bicycle-messages" name="text" id="text-bicycle" type="number" />
+                        <div class="fr-messages-group" id="text-bicycle-messages" aria-live="assertive"></div>
+                      </div>
+                      <p class="field-response-desc">Km en vélo</p>
+                    </div>
+                  </div>
+                  <div class="transport-km-value-container">
+                    <div class="fr-fieldset__element">
+                      <div class="fr-checkbox-group">
+                        <input v-model="checkboxBus" name="checkbox-bus" id="checkbox-bus" type="checkbox" aria-describedby="checkbox-bus-messages" />
+                        <label class="fr-label" for="checkbox-bus"> Bus </label>
+                        <div class="fr-messages-group" id="checkbox-bus-messages" aria-live="assertive"></div>
+                      </div>
+                    </div>
+                    <div v-if="checkboxBus" class="fr-fieldset__element field-response-container">
+                      <div class="number-input-container" id="input-group-2843">
+                        <input min="0" value="0" class="fr-input" aria-describedby="text-bus-messages" name="text" id="text-bus" type="number" />
+                        <div class="fr-messages-group" id="text-bus-messages" aria-live="assertive"></div>
+                      </div>
+                      <p class="field-response-desc">Km en bus</p>
+                    </div>
+                  </div>
                 </div>
+                <!-- ---------------------------- -->
+                <!-- A sortir dans un component -->
+                <div v-else>
+                  <button
+                    style="margin: 0 auto; background-color: white; color: #000091; border: 1px solid rgba(0, 0, 0, 0.19)"
+                    class="fr-btn continue-step-button fr-btn-not-rounded"
+                    title="Suivant"
+                  >
+                    Partager vos résultats
+                  </button>
+                </div>
+                <!-- ---------------------------- -->
               </fieldset>
               <div>
-                <span v-if="etapeCourante <= 3" @click="etapePrecedente" class="step-btn-actions">
+                <span v-if="etapeCourante <= 3 && etapeCourante > 1" @click="etapePrecedente" class="step-btn-actions">
                   <span class="fr-icon-arrow-left-line" aria-hidden="true"></span>
-                  Précédent
+                  {{ etapeCourante == 3 ? "Modifier vos réponses" : "Précédent" }}
                 </span>
-                <button v-if="etapeCourante < 3" @click="etapeSuivante" class="fr-btn continue-step-button" title="Suivant">Continuer</button>
+                <button v-if="etapeCourante < 3" @click="etapeSuivante" class="fr-btn continue-step-button fr-btn-not-rounded" title="Suivant">
+                  Continuer
+                </button>
                 <span v-if="etapeCourante < 3" @click="sauterEtape" class="step-btn-actions"> Passer la question </span>
-                <button v-if="etapeCourante == 3" class="fr-btn" id="button-2864" title="Envoyer le formulaire">Valider mes réponses</button>
+                <button style="margin-left: 10px" v-if="etapeCourante == 3" class="fr-btn fr-btn-not-rounded" id="button-2864" title="Envoyer le formulaire">
+                  Valider mes réponses
+                </button>
               </div>
               <br />
             </form>
@@ -111,6 +255,16 @@ import store from "@/store";
 export default defineComponent({
   name: "SuiviDuJour",
   components: { MesResultats, ImpactDuJour, BilanNosGestesClimat },
+  data() {
+    return {
+      checkboxCar: true,
+      checkboxMotorcycle: true,
+      checkboxSubway: false,
+      checkboxTrain: false,
+      checkboxBicycle: false,
+      checkboxBus: false,
+    };
+  },
   computed: {
     store() {
       return store;
@@ -206,9 +360,17 @@ export default defineComponent({
   box-shadow: inset 0 -2px 0 0 #000091;
 }
 
-.fr-checkbox-group input[type="checkbox"] + label:before {
+.fill-response-checkbox-container .fr-checkbox-group input[type="checkbox"] + label:before {
   margin: 10px;
   width: 15px;
   height: 15px;
+}
+
+.transport-km-value-container {
+  margin-bottom: 15px;
+}
+
+.fr-btn-not-rounded {
+  border-radius: 0;
 }
 </style>
