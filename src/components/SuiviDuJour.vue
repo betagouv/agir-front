@@ -19,56 +19,18 @@
         <div class="follow-up-stepper-container">
           <div class="follow-up-stepper-sub-container">
             <h3 v-if="etapeCourante" style="text-align: left; font-size: 25px">{{ getCurrentStepTitle }}</h3>
-            <form @submit.prevent="">
+            <form @submit.prevent="calculEmpreinteDuJour">
               <div v-if="etapeCourante" class="fr-stepper__steps" :data-fr-current-step="etapeCourante" :data-fr-steps="3" />
               <br />
               <fieldset class="fr-fieldset" id="checkbox" aria-labelledby="checkbox-legend checkbox-messages">
                 <!-- A sortir dans un component -->
                 <div v-if="etapeCourante == 1">
-                  <div class="fr-fieldset__element fill-response-checkbox-container">
-                    <div style="background-color: #f9f9f9; border-radius: 5px" class="fr-checkbox-group">
-                      <input name="checkbox-first-auto-fill" id="checkbox-1" type="checkbox" aria-describedby="checkbox-first-auto-fill-messages" />
-                      <label style="padding: 5px 5px 5px 5px" class="fr-label" for="checkbox-first-auto-fill"> Pré-remplir avec ma réponse précédente </label>
-                      <div class="fr-messages-group" id="checkbox-first-auto-fill-messages" aria-live="assertive"></div>
-                    </div>
-                  </div>
-                  <h3 v-if="etapeCourante" style="text-align: left; font-size: 25px; margin-left: 5px">{{ getCurrentStepQuestion }}</h3>
-                  <div class="fr-messages-group" id="checkbox-messages" aria-live="assertive"></div>
-                  <div class="fr-fieldset__element field-response-container">
-                    <div class="number-input-container" id="input-group-2843">
-                      <input min="0" value="0" class="fr-input" aria-describedby="text-1-messages" name="text" id="text-1" type="number" />
-                      <div class="fr-messages-group" id="text-1-messages" aria-live="assertive"></div>
-                    </div>
-                    <p class="field-response-desc">Repas avec viande rouge</p>
-                  </div>
-                  <div class="fr-fieldset__element field-response-container">
-                    <div class="number-input-container" id="input-group-2843">
-                      <input min="0" value="0" class="fr-input" aria-describedby="text-2-messages" name="text" id="text-2" type="number" />
-                      <div class="fr-messages-group" id="text-2-messages" aria-live="assertive"></div>
-                    </div>
-                    <p class="field-response-desc">Repas avec viande blanche</p>
-                  </div>
-                  <div class="fr-fieldset__element field-response-container">
-                    <div class="number-input-container" id="input-group-2843">
-                      <input min="0" value="0" class="fr-input" aria-describedby="text-3-messages" name="text" id="text-3" type="number" />
-                      <div class="fr-messages-group" id="text-3-messages" aria-live="assertive"></div>
-                    </div>
-                    <p class="field-response-desc">Repas avec poisson</p>
-                  </div>
-                  <div class="fr-fieldset__element field-response-container">
-                    <div class="number-input-container" id="input-group-2843">
-                      <input min="0" value="0" class="fr-input" aria-describedby="text-4-messages" name="text" id="text-4" type="number" />
-                      <div class="fr-messages-group" id="text-4-messages" aria-live="assertive"></div>
-                    </div>
-                    <p class="field-response-desc">Repas avec produit laitiers (lait, beurre, fromage)</p>
-                  </div>
-                  <div class="fr-fieldset__element field-response-container">
-                    <div class="number-input-container" id="input-group-2843">
-                      <input min="0" value="0" class="fr-input" aria-describedby="text-5-messages" name="text" id="text-5" type="number" />
-                      <div class="fr-messages-group" id="text-1-messages" aria-live="assertive"></div>
-                    </div>
-                    <p class="field-response-desc">Repas avec oeufs</p>
-                  </div>
+                  <SuiviDuJourPremiereEtape
+                    :get-current-step-question="getCurrentStepQuestion"
+                    :etape-courante="etapeCourante"
+                    @update:model-value="testSuivi"
+                    :model-value="suiviDuJourReponses"
+                  />
                 </div>
                 <!-- ---------------------------- -->
                 <!-- A sortir dans un component -->
@@ -91,7 +53,16 @@
                     </div>
                     <div v-if="checkboxCar" class="fr-fieldset__element field-response-container">
                       <div class="number-input-container" id="input-group-2843">
-                        <input min="0" value="0" class="fr-input" aria-describedby="text-car-messages" name="text" id="text-car" type="number" />
+                        <input
+                          @change="handleSuiviDuJourReponse($event, 'distanceVoiture')"
+                          min="0"
+                          value="0"
+                          class="fr-input"
+                          aria-describedby="text-car-messages"
+                          name="text"
+                          id="text-car"
+                          type="number"
+                        />
                         <div class="fr-messages-group" id="text-car-messages" aria-live="assertive"></div>
                       </div>
                       <p class="field-response-desc">Km en voiture</p>
@@ -113,7 +84,16 @@
                     </div>
                     <div v-if="checkboxMotorcycle" class="fr-fieldset__element field-response-container">
                       <div class="number-input-container" id="input-group-2843">
-                        <input min="0" value="0" class="fr-input" aria-describedby="text-motorcycle-messages" name="text" id="text-motorcycle" type="number" />
+                        <input
+                          @change="handleSuiviDuJourReponse($event, 'distanceScooter')"
+                          min="0"
+                          value="0"
+                          class="fr-input"
+                          aria-describedby="text-motorcycle-messages"
+                          name="text"
+                          id="text-motorcycle"
+                          type="number"
+                        />
                         <div class="fr-messages-group" id="text-motorcycle-messages" aria-live="assertive"></div>
                       </div>
                       <p class="field-response-desc">Km en scooter</p>
@@ -135,7 +115,16 @@
                     </div>
                     <div v-if="checkboxSubway" class="fr-fieldset__element field-response-container">
                       <div class="number-input-container" id="input-group-2843">
-                        <input min="0" value="0" class="fr-input" aria-describedby="text-subway-messages" name="text" id="text-subway" type="number" />
+                        <input
+                          @change="handleSuiviDuJourReponse($event, 'distanceMetroTramway')"
+                          min="0"
+                          value="0"
+                          class="fr-input"
+                          aria-describedby="text-subway-messages"
+                          name="text"
+                          id="text-subway"
+                          type="number"
+                        />
                         <div class="fr-messages-group" id="text-subway-messages" aria-live="assertive"></div>
                       </div>
                       <p class="field-response-desc">Km métro</p>
@@ -151,7 +140,16 @@
                     </div>
                     <div v-if="checkboxTrain" class="fr-fieldset__element field-response-container">
                       <div class="number-input-container" id="input-group-2843">
-                        <input min="0" value="0" class="fr-input" aria-describedby="text-train-messages" name="text" id="text-train" type="number" />
+                        <input
+                          @change="handleSuiviDuJourReponse($event, 'distanceTrain')"
+                          min="0"
+                          value="0"
+                          class="fr-input"
+                          aria-describedby="text-train-messages"
+                          name="text"
+                          id="text-train"
+                          type="number"
+                        />
                         <div class="fr-messages-group" id="text-train-messages" aria-live="assertive"></div>
                       </div>
                       <p class="field-response-desc">Km en train</p>
@@ -173,7 +171,16 @@
                     </div>
                     <div v-if="checkboxBicycle" class="fr-fieldset__element field-response-container">
                       <div class="number-input-container" id="input-group-2843">
-                        <input min="0" value="0" class="fr-input" aria-describedby="text-bicycle-messages" name="text" id="text-bicycle" type="number" />
+                        <input
+                          @change="handleSuiviDuJourReponse($event, 'distanceVelo')"
+                          min="0"
+                          value="0"
+                          class="fr-input"
+                          aria-describedby="text-bicycle-messages"
+                          name="text"
+                          id="text-bicycle"
+                          type="number"
+                        />
                         <div class="fr-messages-group" id="text-bicycle-messages" aria-live="assertive"></div>
                       </div>
                       <p class="field-response-desc">Km en vélo</p>
@@ -189,7 +196,16 @@
                     </div>
                     <div v-if="checkboxBus" class="fr-fieldset__element field-response-container">
                       <div class="number-input-container" id="input-group-2843">
-                        <input min="0" value="0" class="fr-input" aria-describedby="text-bus-messages" name="text" id="text-bus" type="number" />
+                        <input
+                          @change="handleSuiviDuJourReponse($event, 'distanceBus')"
+                          min="0"
+                          value="0"
+                          class="fr-input"
+                          aria-describedby="text-bus-messages"
+                          name="text"
+                          id="text-bus"
+                          type="number"
+                        />
                         <div class="fr-messages-group" id="text-bus-messages" aria-live="assertive"></div>
                       </div>
                       <p class="field-response-desc">Km en bus</p>
@@ -197,17 +213,9 @@
                   </div>
                 </div>
                 <!-- ---------------------------- -->
-                <!-- A sortir dans un component -->
-                <div v-else>
-                  <button
-                    style="margin: 0 auto; background-color: white; color: #000091; border: 1px solid rgba(0, 0, 0, 0.19)"
-                    class="fr-btn continue-step-button fr-btn-not-rounded"
-                    title="Suivant"
-                  >
-                    Partager vos résultats
-                  </button>
+                <div style="width: 100%" v-else>
+                  <SuiviDuJourResultats />
                 </div>
-                <!-- ---------------------------- -->
               </fieldset>
               <div>
                 <span v-if="etapeCourante <= 2 && etapeCourante > 1" @click="etapePrecedente" class="step-btn-actions">
@@ -218,9 +226,15 @@
                   Continuer
                 </button>
                 <span v-if="etapeCourante < 3" @click="sauterEtape" class="step-btn-actions"> Passer la question </span>
-                <button style="margin-left: 10px" v-if="etapeCourante == 3" class="fr-btn fr-btn-not-rounded" id="button-2864" title="Envoyer le formulaire">
+                <router-link
+                  v-if="etapeCourante == 3"
+                  class="fr-btn fr-btn-not-rounded redirect-coach-link"
+                  id="button-2864"
+                  title="Envoyer le formulaire"
+                  :to="{ name: 'coach' }"
+                >
                   Retour au coach
-                </button>
+                </router-link>
               </div>
               <br />
             </form>
@@ -251,10 +265,12 @@ import BilanNosGestesClimat from "@/components/BilanNosGestesClimat.vue";
 import ImpactDuJour from "@/components/ImpactDuJour.vue";
 import MesResultats from "@/components/MesResultats.vue";
 import store from "@/store";
+import SuiviDuJourResultats from "@/components/SuiviDuJourResultats.vue";
+import SuiviDuJourPremiereEtape from "@/components/SuiviDuJourPremiereEtape.vue";
 
 export default defineComponent({
   name: "SuiviDuJour",
-  components: { MesResultats, ImpactDuJour, BilanNosGestesClimat },
+  components: { SuiviDuJourPremiereEtape, SuiviDuJourResultats, MesResultats, ImpactDuJour, BilanNosGestesClimat },
   data() {
     return {
       checkboxCar: true,
@@ -292,6 +308,7 @@ export default defineComponent({
   methods: { getDeviceType },
   setup() {
     let etapeCourante = ref<number>(1);
+    let suiviDuJourReponses = new Map<string, string>();
 
     function etapeSuivante() {
       etapeCourante.value = etapeCourante.value + 1;
@@ -302,12 +319,31 @@ export default defineComponent({
     function sauterEtape() {
       etapeCourante.value = etapeCourante.value + 1;
     }
+    const calculEmpreinteDuJour = () => {
+      console.log("DATA FILLED HERE ----->", suiviDuJourReponses);
+    };
+
+    function handleSuiviDuJourReponse(event: Event, key: string) {
+      const reponse = (event.target as HTMLInputElement).value;
+      console.log("THE KEY HERE ----->", key);
+      console.log("THE EVENT HERE ---->", event.target);
+      suiviDuJourReponses.set(key, reponse);
+    }
+
+    function testSuivi(map: Map<string, string>) {
+      suiviDuJourReponses = map;
+      console.log(suiviDuJourReponses);
+    }
 
     return {
       etapeCourante,
       sauterEtape,
       etapeSuivante,
       etapePrecedente,
+      calculEmpreinteDuJour,
+      handleSuiviDuJourReponse,
+      suiviDuJourReponses,
+      testSuivi,
     };
   },
 });
@@ -370,7 +406,7 @@ export default defineComponent({
   margin-bottom: 15px;
 }
 
-.fr-btn-not-rounded {
-  border-radius: 0;
+.redirect-coach-link:hover {
+  color: white;
 }
 </style>

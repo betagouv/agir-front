@@ -4,11 +4,13 @@ export enum InteractionCategorie {
   ENERGIE = "Energie",
   CONSOMMATION = "Consommation",
   ALIMENTATION = "Nourriture",
+  GLOBAL = "Global",
 }
 export enum InteractionType {
   QUIZ = "quizz",
   ARTICLE = "article",
   KYC = "KYC",
+  SUIVIDUJOUR = "suivi-du-jour",
 }
 export interface Interaction {
   id: string;

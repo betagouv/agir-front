@@ -39,6 +39,17 @@ h1 {
   line-height: 1.1;
 }
 
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
 button:hover {
   border-color: #646cff;
 }
@@ -47,8 +58,8 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-.fr-footer {
-  padding-top: 0;
+.card {
+  padding: 2em;
 }
 
 @media (prefers-color-scheme: light) {
@@ -69,4 +80,29 @@ button:focus-visible {
     width: 40vh;
     height: auto;
   }
+}
+
+/* factorisation from component */
+.dashboard-card-item {
+  border-radius: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.19);
+  background: #fff;
+}
+.fr-tile {
+  box-shadow: unset;
+}
+.card-item-container {
+  align-items: flex-start;
+  text-align: left;
+}
+h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+h3 {
+  font-size: 18px;
+  margin-right: 10px;
+}
+.fr-btn-not-rounded {
+  border-radius: 0;
 }

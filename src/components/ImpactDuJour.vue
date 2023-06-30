@@ -10,9 +10,7 @@
       <div class="fr-tile__desc">
         <p class="current-day-impact-desc">Autant d'émissions que pour fabriquer</p>
         <div style="display: flex">
-          <!--TO DO : Replace with the right drop logo-->
           <span style="color: #b3b4f9" class="fr-icon-drop-fill" aria-hidden="true"></span>
-          <!--****************************************-->
           <p class="current-day-impact-equivalent">{{ equivalentEnLitres }}</p>
           <p class="current-day-impact-equivalent-desc">litres d'eau en bouteille</p>
         </div>
@@ -79,6 +77,8 @@ export default defineComponent({
 
 .current-day-impact-equivalent {
   margin-left: 5px;
+  font-size: 3vh;
+  font-weight: bold;
 }
 
 .current-day-impact-equivalent-desc {

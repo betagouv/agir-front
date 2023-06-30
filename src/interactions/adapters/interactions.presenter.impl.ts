@@ -23,12 +23,14 @@ export class InteractionsPresenterImpl implements InteractionsPresenter {
       [InteractionCategorie.CONSOMMATION]: "📱 Consommation",
       [InteractionCategorie.ENERGIE]: "⚡️ Énergie",
       [InteractionCategorie.ALIMENTATION]: "🥦 Alimentation",
+      [InteractionCategorie.GLOBAL]: "🌍 Global",
     };
 
     const typeInverseMapping: { [key in InteractionType]: string } = {
       [InteractionType.KYC]: "KYC",
       [InteractionType.QUIZ]: "QUIZ",
       [InteractionType.ARTICLE]: "VIDEO",
+      [InteractionType.SUIVIDUJOUR]: "SUIVI",
     };
 
     this._viewModels(
@@ -56,6 +58,8 @@ export class InteractionsPresenterImpl implements InteractionsPresenter {
         return "https://www.systeme-de-design.gouv.fr/elements-d-interface/composants/champ-de-saisie/";
       case InteractionType.KYC:
         return "";
+      case InteractionType.SUIVIDUJOUR:
+        return "/coach/suivi-du-jour";
     }
   }
 }
