@@ -10,9 +10,8 @@ export interface InteractionApiModel {
   categorie: string;
   tags: string[];
   duree: string;
-  frequence: null;
   image_url: string;
-  url: null;
+  url: string;
   seen: boolean;
   done: boolean;
   points: number;
@@ -33,6 +32,7 @@ export class InteractionsRepositoryAxios implements InteractionsRepository {
         nombreDePointsAGagner: apiModel.points.toString(),
         miseEnAvant: apiModel.reco_score.toString(),
         illustrationURL: apiModel.image_url,
+        url: apiModel.url || "",
       };
       return interaction;
     });

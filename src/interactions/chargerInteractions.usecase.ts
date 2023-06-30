@@ -21,6 +21,7 @@ export interface Interaction {
   nombreDePointsAGagner: string;
   miseEnAvant: string;
   illustrationURL: string;
+  url: string;
 }
 
 export class ChargerInteractionsUsecase {

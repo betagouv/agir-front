@@ -29,7 +29,7 @@ export class InteractionsPresenterImpl implements InteractionsPresenter {
     const typeInverseMapping: { [key in InteractionType]: string } = {
       [InteractionType.KYC]: "KYC",
       [InteractionType.QUIZ]: "QUIZ",
-      [InteractionType.ARTICLE]: "VIDEO",
+      [InteractionType.ARTICLE]: "ARTICLE",
       [InteractionType.SUIVIDUJOUR]: "SUIVI",
     };
 
@@ -43,19 +43,19 @@ export class InteractionsPresenterImpl implements InteractionsPresenter {
           miseEnAvant: interaction.miseEnAvant,
           type: typeInverseMapping[interaction.type],
           illustrationURL: interaction.illustrationURL,
-          url: this.determineUrl(interaction.type, interaction.id),
+          url: this.determineUrl(interaction),
           isUrlExterne: interaction.type === InteractionType.ARTICLE,
         };
       })
     );
   }
 
-  private determineUrl(type: InteractionType, interactionId: string) {
-    switch (type) {
+  private determineUrl(interaction: Interaction) {
+    switch (interaction.type) {
       case InteractionType.QUIZ:
-        return `/quiz/${interactionId}`;
+        return `/quiz/${interaction.id}`;
       case InteractionType.ARTICLE:
-        return "https://www.systeme-de-design.gouv.fr/elements-d-interface/composants/champ-de-saisie/";
+        return interaction.url;
       case InteractionType.KYC:
         return "";
       case InteractionType.SUIVIDUJOUR:
