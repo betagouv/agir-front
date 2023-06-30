@@ -37,4 +37,10 @@ export class InteractionsRepositoryAxios implements InteractionsRepository {
       return interaction;
     });
   }
+  interactionAEteCliquee(interactionId: string, utilisateurId: string): void {
+    const axiosInstance = AxiosFactory.getAxios();
+    axiosInstance.patch(`/utilisateurs/${utilisateurId}/interactions/${interactionId}`, {
+      clicked: true,
+    });
+  }
 }

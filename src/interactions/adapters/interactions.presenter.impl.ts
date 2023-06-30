@@ -2,6 +2,7 @@ import { Interaction, InteractionCategorie, InteractionType } from "@/interactio
 import { InteractionsPresenter } from "@/interactions/ports/interactionsPresenter";
 
 export interface InteractionViewModel {
+  id: string;
   titre: string;
   sousTitre: string;
   categorie: string;
@@ -36,6 +37,7 @@ export class InteractionsPresenterImpl implements InteractionsPresenter {
     this._viewModels(
       interactions.map((interaction) => {
         return {
+          id: interaction.id,
           titre: interaction.titre,
           sousTitre: interaction.sousTitre,
           categorie: categorieInverseMapping[interaction.categorie],

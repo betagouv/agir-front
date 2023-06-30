@@ -10,6 +10,8 @@ class InteractionsRepositoryForTest implements InteractionsRepository {
   chargerInteractions(nomUtilisateur: string): Promise<Interaction[]> {
     return Promise.resolve([this._interaction]);
   }
+
+  interactionAEteCliquee(interactionId: string, utilisateurId): void {}
 }
 
 describe("Fichier de tests pour charger les interactions", () => {
@@ -34,6 +36,7 @@ describe("Fichier de tests pour charger les interactions", () => {
     function expectation(interactionViewModels: InteractionViewModel[]) {
       expect(interactionViewModels).toStrictEqual<InteractionViewModel[]>([
         {
+          id: "id",
           titre: "titre",
           sousTitre: "sousTitre",
           categorie: "🥦 Alimentation",
@@ -68,6 +71,7 @@ describe("Fichier de tests pour charger les interactions", () => {
     function expectation(interactionViewModels: InteractionViewModel[]) {
       expect(interactionViewModels).toStrictEqual<InteractionViewModel[]>([
         {
+          id: "id",
           titre: "titre",
           sousTitre: "sousTitre",
           categorie: "📱 Consommation",
@@ -102,6 +106,7 @@ describe("Fichier de tests pour charger les interactions", () => {
     function expectation(interactionViewModels: InteractionViewModel[]) {
       expect(interactionViewModels).toStrictEqual<InteractionViewModel[]>([
         {
+          id: "id",
           titre: "titre",
           sousTitre: "sousTitre",
           categorie: "🌍 Global",
@@ -136,6 +141,7 @@ describe("Fichier de tests pour charger les interactions", () => {
     function expectation(interactionViewModels: InteractionViewModel[]) {
       expect(interactionViewModels).toStrictEqual<InteractionViewModel[]>([
         {
+          id: "id",
           titre: "titre",
           sousTitre: "sousTitre",
           categorie: "🌍 Global",
