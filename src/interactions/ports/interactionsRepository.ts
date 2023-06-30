@@ -1,5 +1,5 @@
 import { Interaction } from "@/interactions/chargerInteractions.usecase";
 
 export interface InteractionsRepository {
-  chargerInteractions(nomUtilisateur: string): Interaction[];
+  chargerInteractions(nomUtilisateur: string): Promise<Interaction[]>;
 }

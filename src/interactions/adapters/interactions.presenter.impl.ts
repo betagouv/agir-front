@@ -22,7 +22,7 @@ export class InteractionsPresenterImpl implements InteractionsPresenter {
     const categorieInverseMapping: { [key in InteractionCategorie]: string } = {
       [InteractionCategorie.CONSOMMATION]: "📱 Consommation",
       [InteractionCategorie.ENERGIE]: "⚡️ Énergie",
-      [InteractionCategorie.ALIMENTATION]: "🥦 Se nourrir - Activités",
+      [InteractionCategorie.ALIMENTATION]: "🥦 Alimentation",
     };
 
     const typeInverseMapping: { [key in InteractionType]: string } = {
@@ -40,11 +40,22 @@ export class InteractionsPresenterImpl implements InteractionsPresenter {
           nombreDePointsAGagner: interaction.nombreDePointsAGagner,
           miseEnAvant: interaction.miseEnAvant,
           type: typeInverseMapping[interaction.type],
-          illustrationURL: "https://picsum.photos/356/213",
-          url: "/quiz/1",
-          isUrlExterne: false,
+          illustrationURL: interaction.illustrationURL,
+          url: this.determineUrl(interaction.type, interaction.id),
+          isUrlExterne: interaction.type === InteractionType.ARTICLE,
         };
       })
     );
+  }
+
+  private determineUrl(type: InteractionType, interactionId: string) {
+    switch (type) {
+      case InteractionType.QUIZ:
+        return `/quiz/${interactionId}`;
+      case InteractionType.ARTICLE:
+        return "https://www.systeme-de-design.gouv.fr/elements-d-interface/composants/champ-de-saisie/";
+      case InteractionType.KYC:
+        return "";
+    }
   }
 }

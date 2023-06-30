@@ -3,20 +3,22 @@ import { InteractionsRepository } from "@/interactions/ports/interactionsReposit
 export enum InteractionCategorie {
   ENERGIE = "Energie",
   CONSOMMATION = "Consommation",
-  ALIMENTATION = "Alimentation",
+  ALIMENTATION = "Nourriture",
 }
 export enum InteractionType {
-  QUIZ = "QUIZ",
-  ARTICLE = "ARTICLE",
+  QUIZ = "quizz",
+  ARTICLE = "article",
   KYC = "KYC",
 }
 export interface Interaction {
+  id: string;
   type: InteractionType;
   titre: string;
   sousTitre: string;
   categorie: InteractionCategorie;
   nombreDePointsAGagner: string;
   miseEnAvant: string;
+  illustrationURL: string;
 }
 
 export class ChargerInteractionsUsecase {
@@ -26,9 +28,8 @@ export class ChargerInteractionsUsecase {
     this._interactionsRepository = interactionsRepository;
   }
 
-  execute(nomUtilisateur: string, presenter: InteractionsPresenter): Promise<void> {
-    const interactions = this._interactionsRepository.chargerInteractions(nomUtilisateur);
+  async execute(idUtilisateur: string, presenter: InteractionsPresenter): Promise<void> {
+    const interactions = await this._interactionsRepository.chargerInteractions(idUtilisateur);
     presenter.presente(interactions);
-    return Promise.resolve();
   }
 }
