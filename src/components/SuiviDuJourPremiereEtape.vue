@@ -1,18 +1,18 @@
 <template>
   <div class="fr-fieldset__element fill-response-checkbox-container">
-    <div style="background-color: #f9f9f9; border-radius: 5px" class="fr-checkbox-group">
-      <input name="checkbox-first-auto-fill" id="checkbox-1" type="checkbox" aria-describedby="checkbox-first-auto-fill-messages" />
-      <label style="padding: 5px 5px 5px 5px" class="fr-label" for="checkbox-first-auto-fill"> Pré-remplir avec ma réponse précédente </label>
+    <div class="fr-checkbox-group fr-custom-checkbox-group">
+      <input name="checkbox-first-auto-fill" id="checkbox-first-auto-fill" type="checkbox" aria-describedby="checkbox-first-auto-fill-messages" />
+      <label class="fr-label fr-custom-label" for="checkbox-first-auto-fill"> Pré-remplir avec ma réponse précédente </label>
       <div class="fr-messages-group" id="checkbox-first-auto-fill-messages" aria-live="assertive"></div>
     </div>
   </div>
-  <h3 v-if="etapeCourante" style="text-align: left; font-size: 25px; margin-left: 5px">{{ getCurrentStepQuestion }}</h3>
+  <h3 class="step-list-container">{{ currentStepQuestion }}</h3>
   <div class="fr-messages-group" id="checkbox-messages" aria-live="assertive"></div>
   <div class="fr-fieldset__element field-response-container">
     <div class="number-input-container" id="input-group-2843">
       <input
-        @input="maFonction(modelValue as Map<string, string>, $event, 'viande-rouge')"
-        value="0"
+        @input="handleReponse(modelValue as Map<string, string>, $event, 'viande-rouge')"
+        :value="(modelValue as Map<string, string>).get('viande-rouge') || '0'"
         min="0"
         class="fr-input"
         aria-describedby="text-viande-rouge-messages"
@@ -28,8 +28,8 @@
   <div class="fr-fieldset__element field-response-container">
     <div class="number-input-container" id="input-group-2843">
       <input
-        @input="maFonction(modelValue as Map<string, string>, $event, 'viande-blanche')"
-        value="0"
+        @input="handleReponse(modelValue as Map<string, string>, $event, 'viande-blanche')"
+        :value="(modelValue as Map<string, string>).get('viande-blanche') || '0'"
         min="0"
         class="fr-input"
         aria-describedby="text-viande-blanche-messages"
@@ -44,8 +44,8 @@
   <div class="fr-fieldset__element field-response-container">
     <div class="number-input-container" id="input-group-2843">
       <input
-        @input="maFonction(modelValue as Map<string, string>, $event, 'poisson')"
-        value="0"
+        @input="handleReponse(modelValue as Map<string, string>, $event, 'poisson')"
+        :value="(modelValue as Map<string, string>).get('poisson') || '0'"
         min="0"
         class="fr-input"
         aria-describedby="text-poisson-messages"
@@ -60,7 +60,7 @@
   <div class="fr-fieldset__element field-response-container">
     <div class="number-input-container" id="input-group-2843">
       <input
-        @input="maFonction(modelValue as Map<string, string>, $event, 'produits-laitier')"
+        @input="handleReponse(modelValue as Map<string, string>, $event, 'produits-laitier')"
         :value="(modelValue as Map<string, string>).get('produits-laitier') || '0'"
         min="0"
         class="fr-input"
@@ -76,8 +76,8 @@
   <div class="fr-fieldset__element field-response-container">
     <div class="number-input-container" id="input-group-2843">
       <input
-        @input="maFonction(modelValue as Map<string, string>, $event, 'oeufs')"
-        value="0"
+        @input="handleReponse(modelValue as Map<string, string>, $event, 'oeufs')"
+        :value="(modelValue as Map<string, string>).get('oeufs') || '0'"
         min="0"
         class="fr-input"
         aria-describedby="text-oeufs-messages"
@@ -95,12 +95,12 @@
 const props = defineProps({
   modelValue: Map,
   etapeCourante: Number,
-  getCurrentStepQuestion: String,
+  currentStepQuestion: String,
 });
 
 const emit = defineEmits(["update:modelValue"]);
 
-function maFonction(currentMap: Map<string, string>, event: Event, key: string) {
+function handleReponse(currentMap: Map<string, string>, event: Event, key: string) {
   const valeur = (event.target as HTMLInputElement).value;
   currentMap.set(key, valeur);
   emit("update:modelValue", currentMap);

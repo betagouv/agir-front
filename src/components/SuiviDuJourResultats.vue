@@ -1,69 +1,95 @@
 <template>
   <div class="fr-grid-row">
-    <div class="fr-col fr-col-daily-carbon-value">
-      <div class="col-demo">
-        <div class="fr-tile fr-enlarge-link fr-tile--horizontal fr-tile--vertical-md dashboard-daily-carbon-value" id="tile-6538">
-          <div class="card-custom-body">
-            <div class="fr-tile__title">
-              <p style="color: #b34001">Impact carbone du jour</p>
-            </div>
-            <div class="fr-tile__desc grid-side-to-side-container"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="fr-col fr-col-daily-carbon-value">
-      <div class="col-demo">
-        <div class="fr-tile fr-enlarge-link fr-tile--horizontal fr-tile--vertical-md daily-carbon-value-details" id="tile-6538">
-          <div class="card-custom-body">
-            <div class="fr-tile__title">
-              <p>Addition carbone du jour</p>
-            </div>
-            <div class="fr-tile__desc grid-side-to-side-container"></div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <CarteEmpreinteDuJourHaut v-if="impactCarbonDuJour.suiviDuJOur > 7" :impact-carbon-du-jour="impactCarbonDuJour" />
+    <CarteEmpreinteDuJourBas v-else :impact-carbon-du-jour="impactCarbonDuJour" />
+    <EmpreinteDuJourDetails :impact-carbon-du-jour="impactCarbonDuJour" />
   </div>
   <br />
-  <button
-    style="margin: 0 auto; background-color: white; color: #000091; border: 1px solid rgba(0, 0, 0, 0.19)"
-    class="fr-btn continue-step-button fr-btn-not-rounded"
-    title="Suivant"
-  >
-    Partager vos résultats
-  </button>
+  <div style="width: auto; height: 50vh">
+    <Line :data="graphData" :options="graphOptions" />
+  </div>
+  <br />
+  <button class="fr-btn continue-step-button fr-btn-not-rounded share-btn-container" title="partager">Partager vos résultats</button>
 </template>
 
 <script lang="ts">
+import { Line } from "vue-chartjs";
+import { CategoryScale, Chart as ChartJS, LinearScale, LineElement, PointElement, Title, Tooltip } from "chart.js";
+import CarteEmpreinteDuJourHaut from "@/components/CarteEmpreinteDuJourHaut.vue";
+import CarteEmpreinteDuJourBas from "@/components/CarteEmpreinteDuJourBas.vue";
+import { ImpactCarbonDuJour } from "@/suivi/ImpactCarbone";
+import EmpreinteDuJourDetails from "@/components/EmpreinteDuJourDetails.vue";
+
 export default {
   name: "SuiviDuJourResultats",
+  components: { CarteEmpreinteDuJourHaut, EmpreinteDuJourDetails, Line, CarteEmpreinteDuJourBas },
+  props: {
+    impactCarbonDuJour: {
+      type: Object as () => ImpactCarbonDuJour,
+      required: true,
+    },
+  },
+  setup() {
+    ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip);
+
+    const graphData = {
+      labels: ["01/04", "03/04", "06/04", "10/05", "24/06", "25/06", "26/06"],
+      datasets: [
+        {
+          label: "Suivi du jour",
+          backgroundColor: "#000091",
+          data: [28, 33, 22, 21, 14, 12, 13],
+          tension: 0,
+        },
+        {
+          label: "Data min",
+          backgroundColor: "#000091",
+          data: [11, 11, 11, 11, 11, 11, 11],
+          tension: 0,
+        },
+        {
+          label: "Data max",
+          backgroundColor: "#000091",
+          data: [21, 21, 21, 21, 21, 21, 21],
+          tension: 0,
+        },
+      ],
+    };
+
+    const graphOptions = {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        title: {
+          display: true,
+          text: "Évolution de votre impact carbone quotidien",
+        },
+      },
+      elements: {
+        point: {
+          pointStyle: false,
+        },
+        line: {
+          borderDashOffset: 1.5,
+          borderDash: [5, 15],
+          borderColor: "#000091",
+        },
+      },
+    };
+
+    return {
+      graphOptions,
+      graphData,
+    };
+  },
 };
 </script>
 
 <style scoped>
-.dashboard-daily-carbon-value {
-  border: 0;
-  border-radius: 3px;
-  width: 100%;
-  background-color: #ffe8e5;
-}
-
-.daily-carbon-value-details {
-  border: 0;
-  border-radius: 3px;
-  width: 100%;
-  background-color: #f6f6f6;
-}
-
-.card-custom-body {
-  align-items: baseline;
-  margin: 10px;
-  padding: 0;
-  text-align: left;
-}
-
-.fr-col-daily-carbon-value {
-  margin: 10px;
+.share-btn-container {
+  margin: 0 auto;
+  background-color: white;
+  color: #000091;
+  border: 1px solid rgba(0, 0, 0, 0.19);
 }
 </style>

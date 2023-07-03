@@ -14,11 +14,11 @@
             <span class="fr-accordion__btn accordion-btn-area" aria-expanded="false" aria-controls="accordion-607">Voir le détail</span>
           </h3>
           <div class="fr-collapse" id="accordion-607">
-            <JaugeNosGestesClimat class="fr-mb-3v" libelle="🥦 Alimentation" valeur="3.4" couleur="#F28622" />
-            <JaugeNosGestesClimat class="fr-mb-3v" libelle="🚗 Transports" valeur="2" couleur="#474EFF" />
-            <JaugeNosGestesClimat class="fr-mb-3v" libelle="🏛️ Services sociétaux" valeur="2" couleur="#809769" />
-            <JaugeNosGestesClimat class="fr-mb-3v" libelle="🏡 Logement" valeur="0.5" couleur="#F8BE00" />
-            <JaugeNosGestesClimat class="fr-mb-3v" libelle="🛒 Consommation" valeur="0.5" couleur="#5C26D1" />
+            <JaugeNosGestesClimat class="fr-mb-3v" libelle="🥦 Alimentation" :valeur="3.4" couleur="#F28622" />
+            <JaugeNosGestesClimat class="fr-mb-3v" libelle="🚗 Transports" :valeur="2" couleur="#474EFF" />
+            <JaugeNosGestesClimat class="fr-mb-3v" libelle="🏛️ Services sociétaux" :valeur="2" couleur="#809769" />
+            <JaugeNosGestesClimat class="fr-mb-3v" libelle="🏡 Logement" :valeur="0.5" couleur="#F8BE00" />
+            <JaugeNosGestesClimat class="fr-mb-3v" libelle="🛒 Consommation" :valeur="0.5" couleur="#5C26D1" />
           </div>
         </section>
       </div>

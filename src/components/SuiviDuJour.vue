@@ -18,203 +18,29 @@
       <div class="col-demo">
         <div class="follow-up-stepper-container">
           <div class="follow-up-stepper-sub-container">
-            <h3 v-if="etapeCourante" style="text-align: left; font-size: 25px">{{ getCurrentStepTitle }}</h3>
+            <h3 v-if="etapeCourante" class="step-title-container">{{ getCurrentStepTitle }}</h3>
             <form @submit.prevent="calculEmpreinteDuJour">
               <div v-if="etapeCourante" class="fr-stepper__steps" :data-fr-current-step="etapeCourante" :data-fr-steps="3" />
               <br />
               <fieldset class="fr-fieldset" id="checkbox" aria-labelledby="checkbox-legend checkbox-messages">
-                <!-- A sortir dans un component -->
                 <div v-if="etapeCourante == 1">
                   <SuiviDuJourPremiereEtape
-                    :get-current-step-question="getCurrentStepQuestion"
+                    current-step-question="Comptez combien de repas vous avez consommé avec les aliments suivants :"
                     :etape-courante="etapeCourante"
-                    @update:model-value="testSuivi"
+                    @update:model-value="miseAjourReponseSuiviDuJour"
                     :model-value="suiviDuJourReponses"
                   />
                 </div>
-                <!-- ---------------------------- -->
-                <!-- A sortir dans un component -->
                 <div v-else-if="etapeCourante == 2">
-                  <div class="fr-fieldset__element fill-response-checkbox-container">
-                    <div style="background-color: #f9f9f9; border-radius: 5px" class="fr-checkbox-group">
-                      <input name="checkbox-first-auto-fill" id="checkbox-1" type="checkbox" aria-describedby="checkbox-first-auto-fill-messages" />
-                      <label style="padding: 5px 5px 5px 5px" class="fr-label" for="checkbox-first-auto-fill"> Pré-remplir avec ma réponse précédente </label>
-                      <div class="fr-messages-group" id="checkbox-first-auto-fill-messages" aria-live="assertive"></div>
-                    </div>
-                  </div>
-                  <h3 v-if="etapeCourante" style="text-align: left; font-size: 25px; margin-left: 5px">{{ getCurrentStepQuestion }}</h3>
-                  <div class="transport-km-value-container">
-                    <div class="fr-fieldset__element">
-                      <div class="fr-checkbox-group">
-                        <input v-model="checkboxCar" name="checkbox-car" id="checkbox-car" type="checkbox" aria-describedby="checkbox-car-messages" />
-                        <label class="fr-label" for="checkbox-car"> Voiture </label>
-                        <div class="fr-messages-group" id="checkbox-car-messages" aria-live="assertive"></div>
-                      </div>
-                    </div>
-                    <div v-if="checkboxCar" class="fr-fieldset__element field-response-container">
-                      <div class="number-input-container" id="input-group-2843">
-                        <input
-                          @change="handleSuiviDuJourReponse($event, 'distanceVoiture')"
-                          min="0"
-                          value="0"
-                          class="fr-input"
-                          aria-describedby="text-car-messages"
-                          name="text"
-                          id="text-car"
-                          type="number"
-                        />
-                        <div class="fr-messages-group" id="text-car-messages" aria-live="assertive"></div>
-                      </div>
-                      <p class="field-response-desc">Km en voiture</p>
-                    </div>
-                  </div>
-                  <div class="transport-km-value-container">
-                    <div class="fr-fieldset__element">
-                      <div class="fr-checkbox-group">
-                        <input
-                          v-model="checkboxMotorcycle"
-                          name="checkbox-motorcycle"
-                          id="checkbox-motorcycle"
-                          type="checkbox"
-                          aria-describedby="checkbox-motorcycle-messages"
-                        />
-                        <label class="fr-label" for="checkbox-motorcycle"> Moto / Scooter </label>
-                        <div class="fr-messages-group" id="checkbox-motorcycle-messages" aria-live="assertive"></div>
-                      </div>
-                    </div>
-                    <div v-if="checkboxMotorcycle" class="fr-fieldset__element field-response-container">
-                      <div class="number-input-container" id="input-group-2843">
-                        <input
-                          @change="handleSuiviDuJourReponse($event, 'distanceScooter')"
-                          min="0"
-                          value="0"
-                          class="fr-input"
-                          aria-describedby="text-motorcycle-messages"
-                          name="text"
-                          id="text-motorcycle"
-                          type="number"
-                        />
-                        <div class="fr-messages-group" id="text-motorcycle-messages" aria-live="assertive"></div>
-                      </div>
-                      <p class="field-response-desc">Km en scooter</p>
-                    </div>
-                  </div>
-                  <div class="transport-km-value-container">
-                    <div class="fr-fieldset__element">
-                      <div class="fr-checkbox-group">
-                        <input
-                          v-model="checkboxSubway"
-                          name="checkbox-subway"
-                          id="checkbox-subway"
-                          type="checkbox"
-                          aria-describedby="checkbox-subway-messages"
-                        />
-                        <label class="fr-label" for="checkbox-subway"> Métro / tramway </label>
-                        <div class="fr-messages-group" id="checkbox-subway-messages" aria-live="assertive"></div>
-                      </div>
-                    </div>
-                    <div v-if="checkboxSubway" class="fr-fieldset__element field-response-container">
-                      <div class="number-input-container" id="input-group-2843">
-                        <input
-                          @change="handleSuiviDuJourReponse($event, 'distanceMetroTramway')"
-                          min="0"
-                          value="0"
-                          class="fr-input"
-                          aria-describedby="text-subway-messages"
-                          name="text"
-                          id="text-subway"
-                          type="number"
-                        />
-                        <div class="fr-messages-group" id="text-subway-messages" aria-live="assertive"></div>
-                      </div>
-                      <p class="field-response-desc">Km métro</p>
-                    </div>
-                  </div>
-                  <div class="transport-km-value-container">
-                    <div class="fr-fieldset__element">
-                      <div class="fr-checkbox-group">
-                        <input v-model="checkboxTrain" name="checkbox-train" id="checkbox-train" type="checkbox" aria-describedby="checkbox-train-messages" />
-                        <label class="fr-label" for="checkbox-train"> Train </label>
-                        <div class="fr-messages-group" id="checkbox-train-messages" aria-live="assertive"></div>
-                      </div>
-                    </div>
-                    <div v-if="checkboxTrain" class="fr-fieldset__element field-response-container">
-                      <div class="number-input-container" id="input-group-2843">
-                        <input
-                          @change="handleSuiviDuJourReponse($event, 'distanceTrain')"
-                          min="0"
-                          value="0"
-                          class="fr-input"
-                          aria-describedby="text-train-messages"
-                          name="text"
-                          id="text-train"
-                          type="number"
-                        />
-                        <div class="fr-messages-group" id="text-train-messages" aria-live="assertive"></div>
-                      </div>
-                      <p class="field-response-desc">Km en train</p>
-                    </div>
-                  </div>
-                  <div class="transport-km-value-container">
-                    <div class="fr-fieldset__element">
-                      <div class="fr-checkbox-group">
-                        <input
-                          v-model="checkboxBicycle"
-                          name="checkbox-bicycle"
-                          id="checkbox-bicycle"
-                          type="checkbox"
-                          aria-describedby="checkbox-bicycle-messages"
-                        />
-                        <label class="fr-label" for="checkbox-bicycle"> Vélo </label>
-                        <div class="fr-messages-group" id="checkbox-bicycle-messages" aria-live="assertive"></div>
-                      </div>
-                    </div>
-                    <div v-if="checkboxBicycle" class="fr-fieldset__element field-response-container">
-                      <div class="number-input-container" id="input-group-2843">
-                        <input
-                          @change="handleSuiviDuJourReponse($event, 'distanceVelo')"
-                          min="0"
-                          value="0"
-                          class="fr-input"
-                          aria-describedby="text-bicycle-messages"
-                          name="text"
-                          id="text-bicycle"
-                          type="number"
-                        />
-                        <div class="fr-messages-group" id="text-bicycle-messages" aria-live="assertive"></div>
-                      </div>
-                      <p class="field-response-desc">Km en vélo</p>
-                    </div>
-                  </div>
-                  <div class="transport-km-value-container">
-                    <div class="fr-fieldset__element">
-                      <div class="fr-checkbox-group">
-                        <input v-model="checkboxBus" name="checkbox-bus" id="checkbox-bus" type="checkbox" aria-describedby="checkbox-bus-messages" />
-                        <label class="fr-label" for="checkbox-bus"> Bus </label>
-                        <div class="fr-messages-group" id="checkbox-bus-messages" aria-live="assertive"></div>
-                      </div>
-                    </div>
-                    <div v-if="checkboxBus" class="fr-fieldset__element field-response-container">
-                      <div class="number-input-container" id="input-group-2843">
-                        <input
-                          @change="handleSuiviDuJourReponse($event, 'distanceBus')"
-                          min="0"
-                          value="0"
-                          class="fr-input"
-                          aria-describedby="text-bus-messages"
-                          name="text"
-                          id="text-bus"
-                          type="number"
-                        />
-                        <div class="fr-messages-group" id="text-bus-messages" aria-live="assertive"></div>
-                      </div>
-                      <p class="field-response-desc">Km en bus</p>
-                    </div>
-                  </div>
+                  <SuiviDuJourSecondeEtape
+                    current-step-question="Quels transports avez vous utilisé aujourd'hui ?"
+                    :etape-courante="etapeCourante"
+                    @update:model-value="miseAjourReponseSuiviDuJour"
+                    :model-value="suiviDuJourReponses"
+                  />
                 </div>
-                <!-- ---------------------------- -->
-                <div style="width: 100%" v-else>
-                  <SuiviDuJourResultats />
+                <div class="last-step-container" v-else>
+                  <SuiviDuJourResultats :impact-carbon-du-jour="impactCarbone" />
                 </div>
               </fieldset>
               <div>
@@ -267,20 +93,11 @@ import MesResultats from "@/components/MesResultats.vue";
 import store from "@/store";
 import SuiviDuJourResultats from "@/components/SuiviDuJourResultats.vue";
 import SuiviDuJourPremiereEtape from "@/components/SuiviDuJourPremiereEtape.vue";
+import SuiviDuJourSecondeEtape from "@/components/SuiviDuJourSecondeEtape.vue";
 
 export default defineComponent({
   name: "SuiviDuJour",
-  components: { SuiviDuJourPremiereEtape, SuiviDuJourResultats, MesResultats, ImpactDuJour, BilanNosGestesClimat },
-  data() {
-    return {
-      checkboxCar: true,
-      checkboxMotorcycle: true,
-      checkboxSubway: false,
-      checkboxTrain: false,
-      checkboxBicycle: false,
-      checkboxBus: false,
-    };
-  },
+  components: { SuiviDuJourSecondeEtape, SuiviDuJourPremiereEtape, SuiviDuJourResultats, MesResultats, ImpactDuJour, BilanNosGestesClimat },
   computed: {
     store() {
       return store;
@@ -296,19 +113,22 @@ export default defineComponent({
       }
       return "Résultat du suivi";
     },
-    getCurrentStepQuestion() {
-      if (this.etapeCourante == 1) {
-        return "Comptez combien de repas vous avez consommé avec les aliments suivants :";
-      } else if (this.etapeCourante == 2) {
-        return "Quels transports avez vous utilisé aujourd'hui ?";
-      }
-      return "";
-    },
   },
   methods: { getDeviceType },
   setup() {
     let etapeCourante = ref<number>(1);
     let suiviDuJourReponses = new Map<string, string>();
+    const impactCarbone = {
+      suiviDuJOur: 14,
+      details: {
+        voiture: { value: 20, equivalent: "8", comment: " de voiture", nature: "transport" },
+        moto: { value: 2, equivalent: "2", comment: "de moto", nature: "transport" },
+        viandeRouge: { value: 2, equivalent: "2", comment: "repas avec viande rouge", nature: "aliment" },
+        poisson: { value: 1, equivalent: "1", comment: "repas avec poisson", nature: "aliment" },
+        bus: { value: 0, equivalent: "0.5", comment: "Bus", nature: "transport" },
+        metro: { value: 0, equivalent: "0.5", comment: "Métro / Tramway", nature: "transport" },
+      },
+    };
 
     function etapeSuivante() {
       etapeCourante.value = etapeCourante.value + 1;
@@ -322,15 +142,7 @@ export default defineComponent({
     const calculEmpreinteDuJour = () => {
       console.log("DATA FILLED HERE ----->", suiviDuJourReponses);
     };
-
-    function handleSuiviDuJourReponse(event: Event, key: string) {
-      const reponse = (event.target as HTMLInputElement).value;
-      console.log("THE KEY HERE ----->", key);
-      console.log("THE EVENT HERE ---->", event.target);
-      suiviDuJourReponses.set(key, reponse);
-    }
-
-    function testSuivi(map: Map<string, string>) {
+    function miseAjourReponseSuiviDuJour(map: Map<string, string>) {
       suiviDuJourReponses = map;
       console.log(suiviDuJourReponses);
     }
@@ -341,9 +153,9 @@ export default defineComponent({
       etapeSuivante,
       etapePrecedente,
       calculEmpreinteDuJour,
-      handleSuiviDuJourReponse,
       suiviDuJourReponses,
-      testSuivi,
+      miseAjourReponseSuiviDuJour,
+      impactCarbone,
     };
   },
 });
@@ -378,35 +190,22 @@ export default defineComponent({
   cursor: pointer;
 }
 
-.number-input-container {
-  width: 80px;
-  margin-bottom: 5px;
-}
-
-.field-response-container {
-  display: flex;
-  margin: 0 auto;
-}
-
-.field-response-desc {
-  margin: 10px;
-}
-
-.fr-input {
-  box-shadow: inset 0 -2px 0 0 #000091;
-}
-
 .fill-response-checkbox-container .fr-checkbox-group input[type="checkbox"] + label:before {
   margin: 10px;
   width: 15px;
   height: 15px;
 }
 
-.transport-km-value-container {
-  margin-bottom: 15px;
-}
-
 .redirect-coach-link:hover {
   color: white;
+}
+
+.step-title-container {
+  text-align: left;
+  font-size: 25px;
+}
+
+.last-step-container {
+  width: 100%;
 }
 </style>
