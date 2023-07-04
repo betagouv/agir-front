@@ -11,8 +11,8 @@
   <div class="fr-fieldset__element field-response-container">
     <div class="number-input-container" id="input-group-2843">
       <input
-        @input="handleReponse(modelValue as Map<string, string>, $event, 'viande rouge')"
-        :value="(modelValue as Map<string, string>).get('viande rouge') || '0'"
+        @input="handleReponse(modelValue as Map<string, string>, $event, 'viande_rouge')"
+        :value="(modelValue as Map<string, string>).get('viande_rouge') || '0'"
         min="0"
         class="fr-input"
         aria-describedby="text-viande-rouge-messages"
@@ -27,8 +27,8 @@
   <div class="fr-fieldset__element field-response-container">
     <div class="number-input-container" id="input-group-2843">
       <input
-        @input="handleReponse(modelValue as Map<string, string>, $event, 'viande blanche')"
-        :value="(modelValue as Map<string, string>).get('viande blanche') || '0'"
+        @input="handleReponse(modelValue as Map<string, string>, $event, 'viande_blanche')"
+        :value="(modelValue as Map<string, string>).get('viande_blanche') || '0'"
         min="0"
         class="fr-input"
         aria-describedby="text-viande-blanche-messages"
@@ -43,8 +43,8 @@
   <div class="fr-fieldset__element field-response-container">
     <div class="number-input-container" id="input-group-2843">
       <input
-        @input="handleReponse(modelValue as Map<string, string>, $event, 'poisson rouge')"
-        :value="(modelValue as Map<string, string>).get('poisson rouge') || '0'"
+        @input="handleReponse(modelValue as Map<string, string>, $event, 'poisson_rouge')"
+        :value="(modelValue as Map<string, string>).get('poisson_rouge') || '0'"
         min="0"
         class="fr-input"
         aria-describedby="text-poisson-rouge-messages"
@@ -59,8 +59,8 @@
   <div class="fr-fieldset__element field-response-container">
     <div class="number-input-container" id="input-group-2843">
       <input
-        @input="handleReponse(modelValue as Map<string, string>, $event, 'poisson blanc')"
-        :value="(modelValue as Map<string, string>).get('poisson blanc') || '0'"
+        @input="handleReponse(modelValue as Map<string, string>, $event, 'poisson_blanc')"
+        :value="(modelValue as Map<string, string>).get('poissonblanc') || '0'"
         min="0"
         class="fr-input"
         aria-describedby="text-poisson-blanc-messages"
@@ -75,8 +75,8 @@
   <div class="fr-fieldset__element field-response-container">
     <div class="number-input-container" id="input-group-2843">
       <input
-        @input="handleReponse(modelValue as Map<string, string>, $event, 'legumes/produits laitier')"
-        :value="(modelValue as Map<string, string>).get('legumes/produits laitier') || '0'"
+        @input="handleReponse(modelValue as Map<string, string>, $event, 'legumes')"
+        :value="(modelValue as Map<string, string>).get('legumes') || '0'"
         min="0"
         class="fr-input"
         aria-describedby="text-laitier-messages"
@@ -91,8 +91,8 @@
   <div class="fr-fieldset__element field-response-container">
     <div class="number-input-container" id="input-group-2843">
       <input
-        @input="handleReponse(modelValue as Map<string, string>, $event, 'sans produit animal')"
-        :value="(modelValue as Map<string, string>).get('sans produit animal') || '0'"
+        @input="handleReponse(modelValue as Map<string, string>, $event, 'sans_produit_animal')"
+        :value="(modelValue as Map<string, string>).get('sans_produit_animal') || '0'"
         min="0"
         class="fr-input"
         aria-describedby="text-sans-produit-animal-messages"

@@ -48,11 +48,11 @@ export default {
   name: "EmptreinteDuJourDetails",
   props: {
     suiviDuJourAlimentation: {
-      type: Object as () => SuiviAlimentationInput,
+      type: Object as () => Map<string, string>,
       required: true,
     },
     suiviDuJourTransport: {
-      type: Object as () => SuiviTransportInput,
+      type: Object as () => Map<string, string>,
       required: true,
     },
   },

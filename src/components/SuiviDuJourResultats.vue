@@ -12,7 +12,6 @@
 <script lang="ts">
 import CarteEmpreinteDuJour from "@/components/CarteEmpreinteDuJour.vue";
 import EmpreinteDuJourDetails from "@/components/EmpreinteDuJourDetails.vue";
-import { SuiviAlimentationInput, SuiviTransportInput } from "@/suivi/envoyerSuiviDuJour.usecase";
 import { ImpactCarboneDuJourViewModel } from "@/suivi/adapters/suiviDuJour.presenter.impl";
 import GraphSuiviEmpreinteCarbone from "@/components/GraphSuiviEmpreinteCarbone.vue";
 
@@ -21,11 +20,11 @@ export default {
   components: { GraphSuiviEmpreinteCarbone, CarteEmpreinteDuJour, EmpreinteDuJourDetails },
   props: {
     suiviDuJourAlimentation: {
-      type: Object as () => SuiviAlimentationInput,
+      type: Object as () => Map<string, string>,
       required: true,
     },
     suiviDuJourTransport: {
-      type: Object as () => SuiviTransportInput,
+      type: Object as () => Map<string, string>,
       required: true,
     },
     empreinteCarboneDuJour: {

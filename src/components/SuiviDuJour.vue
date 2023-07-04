@@ -19,7 +19,7 @@
         <div class="follow-up-stepper-container">
           <div class="follow-up-stepper-sub-container">
             <h3 v-if="etapeCourante" class="step-title-container">{{ getCurrentStepTitle }}</h3>
-            <form @submit.prevent="calculEmpreinteDuJour">
+            <form @submit.prevent="etapeSuivante">
               <div v-if="etapeCourante" class="fr-stepper__steps" :data-fr-current-step="etapeCourante" :data-fr-steps="3" />
               <br />
               <fieldset class="fr-fieldset" id="checkbox" aria-labelledby="checkbox-legend checkbox-messages">
@@ -52,9 +52,7 @@
                   <span class="fr-icon-arrow-left-line" aria-hidden="true"></span>
                   {{ etapeCourante == 3 ? "Modifier vos réponses" : "Précédent" }}
                 </span>
-                <button v-if="etapeCourante < 3" @click="etapeSuivante" class="fr-btn continue-step-button fr-btn-not-rounded" title="Suivant">
-                  Continuer
-                </button>
+                <button v-if="etapeCourante < 3" class="fr-btn continue-step-button fr-btn-not-rounded" title="Suivant">Continuer</button>
                 <span v-if="etapeCourante < 3" @click="sauterEtape" class="step-btn-actions"> Passer la question </span>
                 <router-link
                   v-if="etapeCourante == 3"
@@ -101,6 +99,7 @@ import SuiviDuJourSecondeEtape from "@/components/SuiviDuJourSecondeEtape.vue";
 import { EnvoyerSuiviDuJourUsecase } from "@/suivi/envoyerSuiviDuJour.usecase";
 import { ImpactCarboneDuJourViewModel, SuiviDuJourPresenterImpl } from "@/suivi/adapters/suiviDuJour.presenter.impl";
 import { SuiviDuJourRepositoryInMemory } from "@/suivi/adapters/suiviDuJour.repository.inMemory";
+import { SuiviDuJourRepositoryAxios } from "@/suivi/adapters/suiviDuJour.repository.axios";
 
 export default defineComponent({
   name: "SuiviDuJour",
@@ -126,9 +125,15 @@ export default defineComponent({
     let etapeCourante = ref<number>(1);
     let suiviDuJourAlimentation = new Map<string, string>();
     let suiviDuJourTransport = new Map<string, string>();
-    const impactCarboneDuJourViewModel = ref<ImpactCarboneDuJourViewModel>();
+    const impactCarboneDuJourViewModel = ref<ImpactCarboneDuJourViewModel>({
+      valeur: "",
+      pictoSens: "",
+    });
 
     function etapeSuivante() {
+      if (etapeCourante.value == 2) {
+        calculEmpreinteDuJour();
+      }
       etapeCourante.value = etapeCourante.value + 1;
     }
     function etapePrecedente() {
@@ -138,7 +143,14 @@ export default defineComponent({
       etapeCourante.value = etapeCourante.value + 1;
     }
     const calculEmpreinteDuJour = () => {
-      console.log("DATA FILLED HERE (SDJA and SDJT) ----->", suiviDuJourAlimentation, suiviDuJourTransport);
+      const idUtilisateur = store.getters["utilisateur/getId"];
+      const envoyerSuiviDuJour = new EnvoyerSuiviDuJourUsecase(new SuiviDuJourRepositoryAxios());
+      envoyerSuiviDuJour.execute(
+        { valeurs: suiviDuJourAlimentation },
+        { valeurs: suiviDuJourTransport },
+        new SuiviDuJourPresenterImpl(mapImpactCarboneDuJour),
+        idUtilisateur
+      );
     };
 
     function miseAjourReponseSuiviDuJourAlimentation(map: Map<string, string>) {
@@ -151,13 +163,6 @@ export default defineComponent({
     function mapImpactCarboneDuJour(impactDuJourViewModel: ImpactCarboneDuJourViewModel) {
       impactCarboneDuJourViewModel.value = impactDuJourViewModel;
     }
-    const envoyerSuiviDuJour = () => {
-      const idUtilisateur = store.getters["utilisateur/getId"];
-      const envoyerSuiviDuJour = new EnvoyerSuiviDuJourUsecase(new SuiviDuJourRepositoryInMemory());
-      envoyerSuiviDuJour.execute(suiviDuJourAlimentation, suiviDuJourTransport, new SuiviDuJourPresenterImpl(mapImpactCarboneDuJour), idUtilisateur);
-    };
-
-    onMounted(envoyerSuiviDuJour);
 
     return {
       etapeCourante,
