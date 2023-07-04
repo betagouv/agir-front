@@ -9,7 +9,7 @@
           <br />
           <div class="fr-tile__desc">
             <div class="graph-schema">
-              <Line :data="graphData" :options="graphOptions" />
+              <LineChart :chartData="graphData" />
             </div>
           </div>
         </div>
@@ -18,27 +18,53 @@
   </div>
 </template>
 <script lang="ts">
-import { Line } from "vue-chartjs";
-import { CategoryScale, Chart as ChartJS, LinearScale, LineElement, PointElement, Title, Tooltip } from "chart.js";
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip);
+import { defineComponent } from "vue";
+import { LineChart } from "vue-chart-3";
+import { Chart, registerables } from "chart.js";
+Chart.register(...registerables);
 
-export default {
+export default defineComponent({
   name: "GraphSuiviEmpreinteCarbone",
-  components: { Line },
-  props: {
-    graphData: {
-      type: Object,
-      required: true,
-    },
-    graphOptions: {
-      type: Object,
-      required: true,
-    },
-  },
+  components: { LineChart },
   setup() {
-    ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip);
+    const graphData = {
+      labels: ["Paris", "Nîmes", "Toulon", "Perpignan", "Autre"],
+      datasets: [
+        {
+          label: "Suivi du jour",
+          backgroundColor: "#000091",
+          borderColor: "#000091",
+          pointStyle: "circle" as const,
+          data: [28, 33, 22, 21, 14, 12, 13],
+        },
+        {
+          label: "votre moyenne",
+          backgroundColor: "#000000",
+          borderColor: "#000000",
+          borderDash: [5, 5],
+          pointStyle: false as const,
+          data: [21, 21, 21, 21, 21, 21, 21],
+        },
+      ],
+    };
+
+    const graphOptions = {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        title: {
+          display: false,
+          text: "Évolution de votre impact carbone quotidien",
+        },
+      },
+    };
+
+    return {
+      graphData,
+      graphOptions,
+    };
   },
-};
+});
 </script>
 <style scoped>
 .graph-card-custom-body {

@@ -197,11 +197,7 @@ function handleReponse(currentMap: Map<string, string>, event: Event, key: strin
 }
 
 function handleTransportType(event: Event, currentStatus: boolean) {
-  console.log("HANDLE TRANSPORT DISTANCE ------->", checkboxCar);
-  console.log("CBV ", checkboxCar.value);
-  const valeur = (event.target as HTMLInputElement).value;
-  console.log("EVENT ", valeur);
-  this.checkboxCar.value = !currentStatus;
+  checkboxCar.value = !currentStatus;
 }
 </script>
 

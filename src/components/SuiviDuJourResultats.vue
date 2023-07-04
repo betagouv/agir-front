@@ -4,7 +4,7 @@
     <EmpreinteDuJourDetails :suivi-du-jour-alimentation="suiviDuJourAlimentation" :suivi-du-jour-transport="suiviDuJourTransport" />
   </div>
   <br />
-  <GraphSuiviEmpreinteCarbone :graph-data="graphData" :graph-options="graphOptions" />
+  <GraphSuiviEmpreinteCarbone />
   <br />
   <button class="fr-btn continue-step-button fr-btn-not-rounded share-btn-container" title="partager">Partager vos résultats</button>
 </template>

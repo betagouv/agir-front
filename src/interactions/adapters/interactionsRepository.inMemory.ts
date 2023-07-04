@@ -39,4 +39,6 @@ export class InteractionsRepositoryInMemory implements InteractionsRepository {
       },
     ]);
   }
+
+  interactionAEteCliquee(interactionId: string, utilisateurId): void {}
 }
