@@ -1,9 +1,9 @@
-import { Resultat, SuiviDuJourPresenter } from "@/suivi/envoyerSuiviDuJour.usecase";
+import { Resultat } from "@/suivi/envoyerSuiviDuJour.usecase";
+import { SuiviDuJourPresenter } from "@/suivi/ports/suiviDuJour.presenter";
 
 export interface ImpactCarboneDuJourViewModel {
   valeur: string;
   pictoSens: string;
-  backgroundColor: string;
 }
 export class SuiviDuJourPresenterImpl implements SuiviDuJourPresenter {
   private _viewModel: (impactDuJourViewModel: ImpactCarboneDuJourViewModel) => void;
@@ -15,8 +15,7 @@ export class SuiviDuJourPresenterImpl implements SuiviDuJourPresenter {
   presente(resultat: Resultat) {
     this._viewModel({
       valeur: resultat.valeur,
-      pictoSens: resultat.enHausse ? "up-red.svg" : "down-green.svg",
-      backgroundColor: resultat.enHausse ? "#FFE8E5" : "#B8FEC9",
+      pictoSens: resultat?.enHausse ? "fr-icon-arrow-right-up-circle-fill" : "fr-icon-arrow-right-down-circle-fill",
     });
   }
 }

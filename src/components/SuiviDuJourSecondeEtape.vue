@@ -25,9 +25,9 @@
     <div v-if="checkboxCar" class="fr-fieldset__element field-response-container">
       <div class="number-input-container" id="input-group-2843">
         <input
-          @input="handleReponse(modelValue as Map<string, string>, $event, 'distance-voiture')"
+          @input="handleReponse(modelValue as Map<string, string>, $event, 'voiture')"
           min="0"
-          :value="(modelValue as Map<string, string>).get('distance-voiture') || '0'"
+          :value="(modelValue as Map<string, string>).get('voiture') || '0'"
           class="fr-input"
           aria-describedby="text-car-messages"
           name="text"
@@ -56,9 +56,9 @@
     <div v-if="checkboxMotorcycle" class="fr-fieldset__element field-response-container">
       <div class="number-input-container" id="input-group-2843">
         <input
-          @input="handleReponse(modelValue as Map<string, string>, $event, 'distance-moto')"
+          @input="handleReponse(modelValue as Map<string, string>, $event, 'moto')"
           min="0"
-          :value="(modelValue as Map<string, string>).get('distance-moto') || '0'"
+          :value="(modelValue as Map<string, string>).get('moto') || '0'"
           class="fr-input"
           aria-describedby="text-motorcycle-messages"
           name="text"
@@ -81,9 +81,9 @@
     <div v-if="checkboxSubway" class="fr-fieldset__element field-response-container">
       <div class="number-input-container" id="input-group-2843">
         <input
-          @input="handleReponse(modelValue as Map<string, string>, $event, 'distance-metro-tramway')"
+          @input="handleReponse(modelValue as Map<string, string>, $event, 'metro/tramway')"
           min="0"
-          :value="(modelValue as Map<string, string>).get('distance-metro-tramway') || '0'"
+          :value="(modelValue as Map<string, string>).get('metro/tramway') || '0'"
           class="fr-input"
           aria-describedby="text-subway-messages"
           name="text"
@@ -106,9 +106,9 @@
     <div v-if="checkboxTrain" class="fr-fieldset__element field-response-container">
       <div class="number-input-container" id="input-group-2843">
         <input
-          @input="handleReponse(modelValue as Map<string, string>, $event, 'distance-train')"
+          @input="handleReponse(modelValue as Map<string, string>, $event, 'train')"
           min="0"
-          :value="(modelValue as Map<string, string>).get('distance-train') || '0'"
+          :value="(modelValue as Map<string, string>).get('train') || '0'"
           class="fr-input"
           aria-describedby="text-train-messages"
           name="text"
@@ -131,9 +131,9 @@
     <div v-if="checkboxBicycle" class="fr-fieldset__element field-response-container">
       <div class="number-input-container" id="input-group-2843">
         <input
-          @input="handleReponse(modelValue as Map<string, string>, $event, 'distance-velo')"
+          @input="handleReponse(modelValue as Map<string, string>, $event, 'velo')"
           min="0"
-          :value="(modelValue as Map<string, string>).get('distance-velo') || '0'"
+          :value="(modelValue as Map<string, string>).get('velo') || '0'"
           class="fr-input"
           aria-describedby="text-bicycle-messages"
           name="text"
@@ -156,9 +156,9 @@
     <div v-if="checkboxBus" class="fr-fieldset__element field-response-container">
       <div class="number-input-container" id="input-group-2843">
         <input
-          @input="handleReponse(modelValue as Map<string, string>, $event, 'distance-bus')"
+          @input="handleReponse(modelValue as Map<string, string>, $event, 'bus')"
           min="0"
-          :value="(modelValue as Map<string, string>).get('distance-bus') || '0'"
+          :value="(modelValue as Map<string, string>).get('bus') || '0'"
           class="fr-input"
           aria-describedby="text-bus-messages"
           name="text"
@@ -232,5 +232,9 @@ function handleTransportType(event: Event, currentStatus: boolean) {
   margin: 10px;
   width: 15px;
   height: 15px;
+}
+
+.fr-custom-label {
+  padding: 5px 5px 5px 5px;
 }
 </style>

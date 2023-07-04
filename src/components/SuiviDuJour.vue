@@ -27,20 +27,24 @@
                   <SuiviDuJourPremiereEtape
                     current-step-question="Comptez combien de repas vous avez consommé avec les aliments suivants :"
                     :etape-courante="etapeCourante"
-                    @update:model-value="miseAjourReponseSuiviDuJour"
-                    :model-value="suiviDuJourReponses"
+                    @update:model-value="miseAjourReponseSuiviDuJourAlimentation"
+                    :model-value="suiviDuJourAlimentation"
                   />
                 </div>
                 <div v-else-if="etapeCourante == 2">
                   <SuiviDuJourSecondeEtape
                     current-step-question="Quels transports avez vous utilisé aujourd'hui ?"
                     :etape-courante="etapeCourante"
-                    @update:model-value="miseAjourReponseSuiviDuJour"
-                    :model-value="suiviDuJourReponses"
+                    @update:model-value="miseAjourReponseSuiviDuJourTransport"
+                    :model-value="suiviDuJourTransport"
                   />
                 </div>
                 <div class="last-step-container" v-else>
-                  <SuiviDuJourResultats :impact-carbon-du-jour="impactCarbone" />
+                  <SuiviDuJourResultats
+                    :suivi-du-jour-alimentation="suiviDuJourAlimentation"
+                    :suivi-du-jour-transport="suiviDuJourTransport"
+                    :empreinte-carbone-du-jour="impactCarboneDuJourViewModel"
+                  />
                 </div>
               </fieldset>
               <div>
@@ -85,7 +89,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent, onMounted, ref } from "vue";
 import { DeviceType, getDeviceType } from "@/DeviceType";
 import BilanNosGestesClimat from "@/components/BilanNosGestesClimat.vue";
 import ImpactDuJour from "@/components/ImpactDuJour.vue";
@@ -94,6 +98,9 @@ import store from "@/store";
 import SuiviDuJourResultats from "@/components/SuiviDuJourResultats.vue";
 import SuiviDuJourPremiereEtape from "@/components/SuiviDuJourPremiereEtape.vue";
 import SuiviDuJourSecondeEtape from "@/components/SuiviDuJourSecondeEtape.vue";
+import { EnvoyerSuiviDuJourUsecase } from "@/suivi/envoyerSuiviDuJour.usecase";
+import { ImpactCarboneDuJourViewModel, SuiviDuJourPresenterImpl } from "@/suivi/adapters/suiviDuJour.presenter.impl";
+import { SuiviDuJourRepositoryInMemory } from "@/suivi/adapters/suiviDuJour.repository.inMemory";
 
 export default defineComponent({
   name: "SuiviDuJour",
@@ -117,18 +124,9 @@ export default defineComponent({
   methods: { getDeviceType },
   setup() {
     let etapeCourante = ref<number>(1);
-    let suiviDuJourReponses = new Map<string, string>();
-    const impactCarbone = {
-      suiviDuJOur: 14,
-      details: {
-        voiture: { value: 20, equivalent: "8", comment: " de voiture", nature: "transport" },
-        moto: { value: 2, equivalent: "2", comment: "de moto", nature: "transport" },
-        viandeRouge: { value: 2, equivalent: "2", comment: "repas avec viande rouge", nature: "aliment" },
-        poisson: { value: 1, equivalent: "1", comment: "repas avec poisson", nature: "aliment" },
-        bus: { value: 0, equivalent: "0.5", comment: "Bus", nature: "transport" },
-        metro: { value: 0, equivalent: "0.5", comment: "Métro / Tramway", nature: "transport" },
-      },
-    };
+    let suiviDuJourAlimentation = new Map<string, string>();
+    let suiviDuJourTransport = new Map<string, string>();
+    const impactCarboneDuJourViewModel = ref<ImpactCarboneDuJourViewModel>();
 
     function etapeSuivante() {
       etapeCourante.value = etapeCourante.value + 1;
@@ -140,12 +138,26 @@ export default defineComponent({
       etapeCourante.value = etapeCourante.value + 1;
     }
     const calculEmpreinteDuJour = () => {
-      console.log("DATA FILLED HERE ----->", suiviDuJourReponses);
+      console.log("DATA FILLED HERE (SDJA and SDJT) ----->", suiviDuJourAlimentation, suiviDuJourTransport);
     };
-    function miseAjourReponseSuiviDuJour(map: Map<string, string>) {
-      suiviDuJourReponses = map;
-      console.log(suiviDuJourReponses);
+
+    function miseAjourReponseSuiviDuJourAlimentation(map: Map<string, string>) {
+      suiviDuJourAlimentation = map;
     }
+    function miseAjourReponseSuiviDuJourTransport(map: Map<string, string>) {
+      suiviDuJourTransport = map;
+    }
+
+    function mapImpactCarboneDuJour(impactDuJourViewModel: ImpactCarboneDuJourViewModel) {
+      impactCarboneDuJourViewModel.value = impactDuJourViewModel;
+    }
+    const envoyerSuiviDuJour = () => {
+      const idUtilisateur = store.getters["utilisateur/getId"];
+      const envoyerSuiviDuJour = new EnvoyerSuiviDuJourUsecase(new SuiviDuJourRepositoryInMemory());
+      envoyerSuiviDuJour.execute(suiviDuJourAlimentation, suiviDuJourTransport, new SuiviDuJourPresenterImpl(mapImpactCarboneDuJour), idUtilisateur);
+    };
+
+    onMounted(envoyerSuiviDuJour);
 
     return {
       etapeCourante,
@@ -153,9 +165,11 @@ export default defineComponent({
       etapeSuivante,
       etapePrecedente,
       calculEmpreinteDuJour,
-      suiviDuJourReponses,
-      miseAjourReponseSuiviDuJour,
-      impactCarbone,
+      miseAjourReponseSuiviDuJourAlimentation,
+      miseAjourReponseSuiviDuJourTransport,
+      suiviDuJourAlimentation,
+      suiviDuJourTransport,
+      impactCarboneDuJourViewModel,
     };
   },
 });
@@ -207,5 +221,9 @@ export default defineComponent({
 
 .last-step-container {
   width: 100%;
+}
+
+.fr-btn-not-rounded {
+  border-radius: 0;
 }
 </style>

@@ -1,5 +1,6 @@
-import { EnvoyerSuiviDuJourUsecase, Resultat, SuiviRepository } from "../../src/suivi/envoyerSuiviDuJour.usecase";
+import { EnvoyerSuiviDuJourUsecase, Resultat } from "../../src/suivi/envoyerSuiviDuJour.usecase";
 import { ImpactCarboneDuJourViewModel, SuiviDuJourPresenterImpl } from "../../src/suivi/adapters/suiviDuJour.presenter.impl";
+import { SuiviRepository } from "../../src/suivi/ports/suivi.repository";
 
 class SpySuiviRepository implements SuiviRepository {
   private _resultat: Resultat;
@@ -24,6 +25,8 @@ class SpySuiviRepository implements SuiviRepository {
   recupererResultat(): Resultat {
     return this._resultat;
   }
+
+  recupererDernierSuivi(idUtilisateur: string, type: string) {}
 }
 
 describe("Fichier de tests de l'envoie du suivi du jour", () => {
@@ -43,15 +46,14 @@ describe("Fichier de tests de l'envoie du suivi du jour", () => {
       valeurs: mapSuiviTransport,
     };
     // WHEN
-    useCase.execute(suiviAlimentation, suiviTransport, new SuiviDuJourPresenterImpl(expectation));
+    useCase.execute(suiviAlimentation, suiviTransport, new SuiviDuJourPresenterImpl(expectation), "idUtilisateur");
     // THEN
     expect(repository.typeEnvoye).toStrictEqual(["alimentation", "transport"]);
     expect(repository.valeursEnvoyees).toStrictEqual([mapSuiviAlimentation, mapSuiviTransport]);
     function expectation(impactCarboneDuJour: ImpactCarboneDuJourViewModel) {
       expect(impactCarboneDuJour).toStrictEqual<ImpactCarboneDuJourViewModel>({
         valeur: "21",
-        pictoSens: "up-red.svg",
-        backgroundColor: "#FFE8E5",
+        pictoSens: "fr-icon-arrow-right-up-circle-fill",
       });
     }
   });

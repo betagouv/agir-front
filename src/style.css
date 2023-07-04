@@ -103,15 +103,9 @@ h3 {
   font-size: 18px;
   margin-right: 10px;
 }
-.fr-btn-not-rounded {
-  border-radius: 0;
-}
 .fr-custom-checkbox-group {
   background-color: #f9f9f9;
   border-radius: 5px;
-}
-.fr-custom-label {
-  padding: 5px 5px 5px 5px;
 }
 .step-list-container {
   text-align: left;
