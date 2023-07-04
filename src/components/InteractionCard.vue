@@ -1,22 +1,31 @@
 <template>
-  <div v-if="interactionViewModel" class="fr-tile fr-enlarge-link fr-tile--horizontal fr-tile--vertical-md dashboard-card-item" id="tile-6538">
-    <div class="card-item-container card-custom-body">
-      <div class="fr-tile__title">
-        <img class="interaction-logo-container" width="356" height="212" alt="interaction-item-logo" :src="interactionViewModel?.illustrationURL" />
-        <p class="fr-badge fr-badge--sm badge-custom-container">{{ interactionViewModel?.categorie }}</p>
-      </div>
-      <h3 class="fr-tile__desc">
-        {{ getDeviceType() == DeviceType.TABLET ? `${interactionViewModel?.titre.slice(0, 30)}...` : interactionViewModel?.titre }}
-      </h3>
-      <div class="fr-tile__desc grid-side-to-side-container">
-        <div class="display-left">
-          <p class="card-sub-title">{{ interactionViewModel?.sousTitre }}</p>
+  <div v-if="interactionViewModel" class="fr-card fr-enlarge-link fr-card--horizontal fr-card--horizontal-tier">
+    <div class="fr-card__body">
+      <div class="fr-card__content">
+        <h3 class="fr-card__title">
+            {{ getDeviceType() == DeviceType.TABLET ? `${interactionViewModel?.titre.slice(0, 30)}...` : interactionViewModel?.titre }}
+        </h3>
+        <!--<p class="fr-card__desc">{{ interactionViewModel?.sousTitre }}</p>-->
+        <div class="fr-card__start">
+          <span class="">{{ interactionViewModel?.categorie }}</span>
         </div>
-        <div class="display-right">
-          <img src="/leaf.svg" alt="leaf-logo" />
-          <p class="card-sub-title-points">+ {{ interactionViewModel?.nombreDePointsAGagner }} points</p>
+        <div class="fr-card__end">
+          <ul class="fr-tags-group">
+            <li>
+                <span class="fr-tag">
+                  <span class=" fr-icon-time-line fr-icon--sm"> 5 min</span>
+                </span>
+            </li>
+            <li class="no-tag">
+              <span class="fr-icon-leaf-line fr-icon--sm">+ {{ interactionViewModel?.nombreDePointsAGagner }} points</span>
+            </li>
+          </ul>
         </div>
+        <!--<div class="">
+          <a :href="interactionViewModel?.url" :target="interactionViewModel?.isUrlExterne ? 'blank' : ''">Commencer</a>
+        </div>-->
       </div>
+<!--
       <div class="interaction-footer">
         <a
           @click="interactionAEteCliquee(interactionViewModel.id)"
@@ -25,7 +34,14 @@
           >Commencer</a
         >
         <span class="interaction-duration">5 min</span>
-      </div>
+      </div>-->
+
+    </div>
+    <div class="fr-card__header">
+        <div class="fr-card__img">
+            <img class="fr-responsive-img" alt="interaction-item-logo" :src="interactionViewModel?.illustrationURL" />
+        </div>
+
     </div>
   </div>
 </template>
@@ -61,58 +77,51 @@ export default {
 };
 </script>
 <style scoped>
-.dashboard-card-item {
-  border: 1px solid #e8e8e8;
-  border-radius: 3px;
-  width: 100%;
-}
 
-.fr-tile {
-  box-shadow: unset;
+/* card dsfr mod */
+.fr-card__content{
+  padding: 1rem;
+  height: auto;
 }
+.fr-card__title{
+  text-align: left;
 
-.card-custom-body {
-  align-items: baseline;
-  margin: 10px;
-  padding: 0;
+}
+.fr-card__start, .fr-tags-group{
+  margin-bottom: 0;
   text-align: left;
 }
-
-.interaction-logo-container {
-  width: 100%;
-  border-radius: 3px;
+.fr-tags-group>li {
+  line-height: 22px;
+  height: 22px;
+  font-size: .75rem;
+    line-height: 1.25rem;
 }
-.badge-custom-container {
-  border-radius: 15px;
-}
-
-.grid-side-to-side-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.fr-tags-group>li.no-tag {
+  padding-top: 2px
 }
 
-.display-left {
-  float: left;
+.fr-card{
+  border-radius: 6px;
+}
+.fr-card__body{
+  padding: 0 1rem
+}
+.fr-card.fr-enlarge-link:not(.fr-card--no-icon) .fr-card__content{
+  padding-bottom: 0;
 }
 
-.display-right {
-  float: right;
-  display: flex;
+.fr-card--horizontal-tier .fr-card__header{
+  flex: 0 0 30%;
+}
+.fr-card__img img{
+  border-radius: 6px;
+  height: 120px;
+  width: 240px;
+  margin: 10px;
+  object-fit: cover;
 }
 
-.card-sub-title {
-  font-size: 0.5rem;
-}
+/* end card dsfr mod */
 
-.card-sub-title-points {
-  font-size: 10px;
-}
-
-.interaction-footer {
-  display: flex;
-  align-items: center;
-  margin-top: 10px;
-  justify-content: space-between;
-}
 </style>

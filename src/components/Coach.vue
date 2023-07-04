@@ -1,45 +1,47 @@
 <template>
-  <div class="fr-grid-row" v-if="interactionsViewModel">
-    <div class="fr-col-12 fr-col-md-9">
-      <div class="col-demo">
-        <div v-if="!isLoading" class="fr-grid-row fr-grid-row--gutters dashboard-container">
-          <div
-            :class="getDeviceType() == DeviceType.TABLET ? ['fr-col-12', 'fr-col-md-6'] : ['fr-col-12', 'fr-col-md-4', 'fr-col-lg-3']"
-            v-for="item in interactionsViewModel"
-            :key="item.titre"
-          >
-            <InteractionCard :interaction-view-model="item" />
+  <div class="fr-container-fluid" v-if="interactionsViewModel">
+    <div class="fr-grid-row fr-grid-row--gutters">
+      <div class="fr-col-xs-12 fr-col-9">
+        <div class="fr-container--fluid">
+          <div v-if="!isLoading" class="fr-grid-row fr-grid-row--gutters dashboard-container">
+            <div
+              class="fr-col-12"
+              v-for="item in interactionsViewModel"
+              :key="item.titre"
+            >
+              <InteractionCard :interaction-view-model="item" />
+            </div>
           </div>
-        </div>
-        <div v-else class="fr-grid-row fr-grid-row--gutters dashboard-container">
-          <div class="fr-col-12 fr-col-md-4 fr-col-lg-3" v-for="item in 4" :key="item">
-            <CarteSkeleton />
-          </div>
-        </div>
-      </div>
-    </div>
-    <div :class="getDeviceType() == DeviceType.MOBILE ? 'fr-col-12' : 'fr-col-3'">
-      <div v-if="!isLoading" class="col-demo">
-        <div class="fr-grid-row fr-grid-row--gutters card-item-list-container">
-          <div class="fr-col-12">
-            <BilanNosGestesClimat :get-impact-value="empreinteViewModel?.bilan" />
-          </div>
-          <div class="fr-col-12">
-            <MesResultats v-if="badgeViewModel" :badge-view-model="badgeViewModel" :score-value="10" />
+          <div v-else class="fr-grid-row fr-grid-row--gutters dashboard-container">
+            <div class="fr-col-12" v-for="item in 4" :key="item">
+              <CarteSkeleton />
+            </div>
           </div>
         </div>
       </div>
-      <div v-else class="col-demo">
-        <div class="fr-grid-row fr-grid-row--gutters card-item-list-container">
-          <div class="fr-col-12">
-            <CarteSkeleton />
+      <div class="fr-col-xs-12 fr-col-3">
+        <div v-if="!isLoading" >
+          <div class="fr-grid-row fr-grid-row--gutters card-item-list-container">
+            <div class="fr-col-12">
+              <BilanNosGestesClimat :get-impact-value="getImpactValue" />
+            </div>
+            <div class="fr-col-12">
+              <MesResultats v-if="badgeViewModel" :badge-view-model="badgeViewModel" :score-value="10" />
+            </div>
           </div>
-          <div class="fr-col-12">
-            <CarteSkeleton />
+        </div>
+        <div v-else>
+          <div class="fr-grid-row fr-grid-row--gutters card-item-list-container">
+            <div class="fr-col-12">
+              <CarteSkeleton />
+            </div>
+            <div class="fr-col-12">
+              <CarteSkeleton />
+            </div>
           </div>
         </div>
       </div>
-    </div>
+      </div>
   </div>
 </template>
 
@@ -138,14 +140,14 @@ p {
 }
 
 .dashboard-container {
-  margin: 20px;
+  margin: 20px 0 0 0;
 }
 
 /* Disposition des éléments du dashboard sur les écrans de petite taille */
 @media only screen and (max-width: 950px) {
-  .dashboard-container {
+  /*.dashboard-container {
     margin: 5px;
-  }
+  }*/
 }
 
 .valeur {
@@ -156,6 +158,6 @@ p {
 }
 
 .card-item-list-container {
-  margin: 15px;
+  margin-top: 20px;
 }
 </style>
