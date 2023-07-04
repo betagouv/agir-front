@@ -10,10 +10,12 @@ class InteractionsRepositoryForTest implements InteractionsRepository {
   chargerInteractions(nomUtilisateur: string): Promise<Interaction[]> {
     return Promise.resolve([this._interaction]);
   }
+
+  interactionAEteCliquee(interactionId: string, utilisateurId): void {}
 }
 
 describe("Fichier de tests pour charger les interactions", () => {
-  it("En donnant un id d'utilisateur et dans le cas d'un quiz", () => {
+  it("En donnant un id d'utilisateur et dans le cas d'un quiz", async () => {
     // GIVEN
     // WHEN
     const usecase = new ChargerInteractionsUsecase(
@@ -26,13 +28,15 @@ describe("Fichier de tests pour charger les interactions", () => {
         nombreDePointsAGagner: "nombreDePointsAGagner",
         miseEnAvant: "miseEnAvant",
         illustrationURL: "illustrationURL",
+        url: "/quiz/id",
       })
     );
-    usecase.execute("1", new InteractionsPresenterImpl(expectation));
+    await usecase.execute("1", new InteractionsPresenterImpl(expectation));
     // THEN
     function expectation(interactionViewModels: InteractionViewModel[]) {
       expect(interactionViewModels).toStrictEqual<InteractionViewModel[]>([
         {
+          id: "id",
           titre: "titre",
           sousTitre: "sousTitre",
           categorie: "🥦 Alimentation",
@@ -46,7 +50,7 @@ describe("Fichier de tests pour charger les interactions", () => {
       ]);
     }
   });
-  it("En donnant un id d'utilisateur et dans le cas d'un article", () => {
+  it("En donnant un id d'utilisateur et dans le cas d'un article", async () => {
     // GIVEN
     // WHEN
     const usecase = new ChargerInteractionsUsecase(
@@ -59,22 +63,94 @@ describe("Fichier de tests pour charger les interactions", () => {
         nombreDePointsAGagner: "nombreDePointsAGagner",
         miseEnAvant: "miseEnAvant",
         illustrationURL: "illustrationURL",
+        url: "url",
       })
     );
-    usecase.execute("1", new InteractionsPresenterImpl(expectation));
+    await usecase.execute("1", new InteractionsPresenterImpl(expectation));
     // THEN
     function expectation(interactionViewModels: InteractionViewModel[]) {
       expect(interactionViewModels).toStrictEqual<InteractionViewModel[]>([
         {
+          id: "id",
           titre: "titre",
           sousTitre: "sousTitre",
           categorie: "📱 Consommation",
           nombreDePointsAGagner: "nombreDePointsAGagner",
           miseEnAvant: "miseEnAvant",
-          type: "VIDEO",
+          type: "ARTICLE",
           illustrationURL: "illustrationURL",
-          url: "https://www.systeme-de-design.gouv.fr/elements-d-interface/composants/champ-de-saisie/",
+          url: "url",
           isUrlExterne: true,
+        },
+      ]);
+    }
+  });
+  it("En donnant un id d'utilisateur et dans le cas d'un suivi du jour", async () => {
+    // GIVEN
+    // WHEN
+    const usecase = new ChargerInteractionsUsecase(
+      new InteractionsRepositoryForTest({
+        id: "id",
+        type: InteractionType.SUIVIDUJOUR,
+        titre: "titre",
+        sousTitre: "sousTitre",
+        categorie: InteractionCategorie.GLOBAL,
+        nombreDePointsAGagner: "nombreDePointsAGagner",
+        miseEnAvant: "miseEnAvant",
+        illustrationURL: "illustrationURL",
+        url: "",
+      })
+    );
+    await usecase.execute("1", new InteractionsPresenterImpl(expectation));
+    // THEN
+    function expectation(interactionViewModels: InteractionViewModel[]) {
+      expect(interactionViewModels).toStrictEqual<InteractionViewModel[]>([
+        {
+          id: "id",
+          titre: "titre",
+          sousTitre: "sousTitre",
+          categorie: "🌍 Global",
+          nombreDePointsAGagner: "nombreDePointsAGagner",
+          miseEnAvant: "miseEnAvant",
+          type: "SUIVI",
+          illustrationURL: "illustrationURL",
+          url: "/coach/suivi-du-jour",
+          isUrlExterne: false,
+        },
+      ]);
+    }
+  });
+  it("En donnant un id d'utilisateur et dans le cas d'un suivi d'un kyc", async () => {
+    // GIVEN
+    // WHEN
+    const usecase = new ChargerInteractionsUsecase(
+      new InteractionsRepositoryForTest({
+        id: "id",
+        type: InteractionType.KYC,
+        titre: "titre",
+        sousTitre: "sousTitre",
+        categorie: InteractionCategorie.GLOBAL,
+        nombreDePointsAGagner: "nombreDePointsAGagner",
+        miseEnAvant: "miseEnAvant",
+        illustrationURL: "illustrationURL",
+        url: "",
+      })
+    );
+    await usecase.execute("1", new InteractionsPresenterImpl(expectation));
+    // THEN
+    function expectation(interactionViewModels: InteractionViewModel[]) {
+      expect(interactionViewModels).toStrictEqual<InteractionViewModel[]>([
+        {
+          id: "id",
+          titre: "titre",
+          sousTitre: "sousTitre",
+          categorie: "🌍 Global",
+          nombreDePointsAGagner: "nombreDePointsAGagner",
+          miseEnAvant: "miseEnAvant",
+          type: "KYC",
+          illustrationURL: "illustrationURL",
+          url: "",
+          isUrlExterne: false,
         },
       ]);
     }

@@ -50,7 +50,7 @@
         <nav class="fr-nav" id="navigation" role="navigation" aria-label="Menu principal" data-fr-js-navigation="true">
           <ul class="fr-nav__list">
             <li class="fr-nav__item" data-fr-js-navigation-item="true">
-              <router-link v-if="isCoach" class="fr-nav__link" :to="{ name: 'coach' }" aria-current="page"> Le coach </router-link>
+              <router-link v-if="isCoachActif" class="fr-nav__link" :to="{ name: 'coach' }" aria-current="page"> Le coach </router-link>
               <router-link v-else class="fr-nav__link" :to="{ name: 'coach' }"> Le coach </router-link>
             </li>
             <li class="fr-nav__item" data-fr-js-navigation-item="true">
@@ -81,6 +81,7 @@
 import router from "@/router";
 import store from "@/store";
 import { defineComponent, onMounted, ref } from "vue";
+import { RouteLocation } from "vue-router";
 export default defineComponent({
   name: "Header",
   computed: {
@@ -94,7 +95,7 @@ export default defineComponent({
       return this.currentPage && this.currentPage == "/mes-aides";
     },
     isCoach() {
-      return this.currentPage && this.currentPage == "/coach";
+      return this.currentPage && this.currentPage.startsWith("/coach");
     },
     isDashboard() {
       return this.currentPage && this.currentPage == "/dashboard";
@@ -103,12 +104,17 @@ export default defineComponent({
       return this.currentPage && this.currentPage == "/communaute";
     },
     resetCurrentHeaderTab() {
-      this.currentPage = "";
+      this.currentPage = window.location.pathname;
+    },
+  },
+  watch: {
+    $route(to: RouteLocation, from: RouteLocation) {
+      this.isCoachActif = to.fullPath.includes("/coach");
     },
   },
   setup() {
     const currentPage = ref<string>("");
-
+    const isCoachActif = ref<boolean>(false);
     function logout() {
       store.dispatch("utilisateur/reset");
       router.replace("/");
@@ -121,6 +127,7 @@ export default defineComponent({
     return {
       logout,
       currentPage,
+      isCoachActif,
     };
   },
 });

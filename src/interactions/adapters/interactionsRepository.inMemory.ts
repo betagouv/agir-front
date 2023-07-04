@@ -13,6 +13,7 @@ export class InteractionsRepositoryInMemory implements InteractionsRepository {
         miseEnAvant: "RECOMMANDÉ",
         type: InteractionType.KYC,
         illustrationURL: "illustrationURL",
+        url: "",
       },
       {
         id: "2",
@@ -23,6 +24,7 @@ export class InteractionsRepositoryInMemory implements InteractionsRepository {
         miseEnAvant: "NOUVEAU",
         type: InteractionType.QUIZ,
         illustrationURL: "illustrationURL",
+        url: "",
       },
       {
         id: "3",
@@ -33,7 +35,10 @@ export class InteractionsRepositoryInMemory implements InteractionsRepository {
         miseEnAvant: "",
         type: InteractionType.ARTICLE,
         illustrationURL: "illustrationURL",
+        url: "url",
       },
     ]);
   }
+
+  interactionAEteCliquee(interactionId: string, utilisateurId): void {}
 }

@@ -62,13 +62,6 @@ button:focus-visible {
   padding: 2em;
 }
 
-.main-container {
-  background-color: #f7f8f8;
-}
-
-.fr-footer {
-  padding-top: 0;
-}
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
@@ -87,4 +80,35 @@ button:focus-visible {
     width: 40vh;
     height: auto;
   }
+}
+
+/* factorisation from component */
+.dashboard-card-item {
+  border-radius: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.19);
+  background: #fff;
+}
+.fr-tile {
+  box-shadow: unset;
+}
+.card-item-container {
+  align-items: flex-start;
+  text-align: left;
+}
+h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+h3 {
+  font-size: 18px;
+  margin-right: 10px;
+}
+.fr-custom-checkbox-group {
+  background-color: #f9f9f9;
+  border-radius: 5px;
+}
+.step-list-container {
+  text-align: left;
+  font-size: 25px;
+  margin-left: 5px;
 }

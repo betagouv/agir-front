@@ -22,7 +22,7 @@ import Footer from "@/components/Footer.vue";
   position: relative;
   min-height: 100vh;
   width: 100%;
-  overflow-x: hidden;
+  background-color: #f7f8f8;
 }
 
 .main-container {
@@ -36,6 +36,7 @@ import Footer from "@/components/Footer.vue";
   height: 18rem;
   width: 100%;
   position: absolute;
+  background-color: white;
 }
 
 @media only screen and (min-width: 1500px) {

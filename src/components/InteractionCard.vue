@@ -18,7 +18,12 @@
         </div>
       </div>
       <div class="interaction-footer">
-        <a :href="interactionViewModel?.url" :target="interactionViewModel?.isUrlExterne ? 'blank' : ''">Commencer</a>
+        <a
+          @click="interactionAEteCliquee(interactionViewModel.id)"
+          :href="interactionViewModel?.url"
+          :target="interactionViewModel?.isUrlExterne ? 'blank' : ''"
+          >Commencer</a
+        >
         <span class="interaction-duration">5 min</span>
       </div>
     </div>
@@ -27,6 +32,9 @@
 <script lang="ts">
 import { InteractionViewModel } from "@/interactions/adapters/interactions.presenter.impl";
 import { DeviceType, getDeviceType } from "@/DeviceType";
+import { CliquerInteractionUsecase } from "@/interactions/cliquerInteraction.usecase";
+import { InteractionsRepositoryAxios } from "@/interactions/adapters/interactionsRepository.axios";
+import store from "@/store";
 
 export default {
   name: "InteractionCard",
@@ -42,7 +50,14 @@ export default {
       default: undefined,
     },
   },
-  methods: { getDeviceType },
+  methods: {
+    getDeviceType,
+    interactionAEteCliquee(interactionId: string) {
+      const idUtilisateur = store.getters["utilisateur/getId"];
+      const useCase = new CliquerInteractionUsecase(new InteractionsRepositoryAxios());
+      useCase.execute(idUtilisateur, interactionId);
+    },
+  },
 };
 </script>
 <style scoped>

@@ -10,6 +10,7 @@ import Coach from "@/components/Coach.vue";
 import MesAides from "@/components/MesAides.vue";
 import Communaute from "@/components/Communaute.vue";
 import Empreinte from "@/components/Empreinte.vue";
+import SuiviDuJour from "@/components/SuiviDuJour.vue";
 
 const routes = [
   { path: "/", component: Authentification },
@@ -18,6 +19,7 @@ const routes = [
   { path: "/quiz/quiz-gagne", name: "quiz-gagne", component: QuizGagne },
   { path: "/quiz/quiz-perdu", name: "quiz-perdu", component: QuizPerdu },
   { path: "/coach", name: "coach", component: Coach },
+  { path: "/coach/suivi-du-jour", name: "suivi-du-jour", component: SuiviDuJour },
   { path: "/mes-aides", name: "mes-aides", component: MesAides },
   { path: "/mes-aides/retrofit", name: "mes-aides-retrofit", component: MesAidesRetrofit },
   { path: "/communaute", name: "communaute", component: Communaute },
