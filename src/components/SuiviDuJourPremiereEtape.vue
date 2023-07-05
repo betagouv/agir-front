@@ -133,16 +133,14 @@ export default defineComponent({
     const isChecked = ref(false);
 
     watch(isChecked, (value) => {
-      if (value) {
-        // Case cochée, mettre à jour modelValue avec dernierSuiviDuJourViewModel.clefsEtValeurs
+      if (value && props.dernierSuiviDuJourViewModel) {
         const { clefsEtValeurs } = props.dernierSuiviDuJourViewModel;
-        props.modelValue.clear();
+        props.modelValue?.clear();
         for (const [key, value] of clefsEtValeurs) {
-          props.modelValue.set(key, value);
+          props.modelValue?.set(key, value);
         }
       } else {
-        // Case décochée, vider modelValue
-        props.modelValue.clear();
+        props.modelValue?.clear();
       }
       emit("update:modelValue", props.modelValue);
     });
