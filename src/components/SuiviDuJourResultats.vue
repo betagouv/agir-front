@@ -1,10 +1,13 @@
 <template>
   <div class="fr-grid-row">
-    <CarteEmpreinteDuJour :empreinte-carbone-du-jour="empreinteCarboneDuJour" />
+    <CarteEmpreinteDuJour :suivi-du-jour-resultats="suiviDuJourResultats" />
     <EmpreinteDuJourDetails :suivi-du-jour-alimentation="suiviDuJourAlimentation" :suivi-du-jour-transport="suiviDuJourTransport" />
   </div>
   <br />
-  <GraphSuiviEmpreinteCarbone />
+  <GraphSuiviEmpreinteCarbone
+    :dates-du-graph="suiviDuJourResultats.suivisPrecedent.datesDesSuivis"
+    :valeurs-carbone-du-graph="suiviDuJourResultats.suivisPrecedent.valeursDesSuivis"
+  />
   <br />
   <button class="fr-btn continue-step-button fr-btn-not-rounded share-btn-container" title="partager">Partager vos résultats</button>
 </template>
@@ -12,7 +15,7 @@
 <script lang="ts">
 import CarteEmpreinteDuJour from "@/components/CarteEmpreinteDuJour.vue";
 import EmpreinteDuJourDetails from "@/components/EmpreinteDuJourDetails.vue";
-import { ImpactCarboneDuJourViewModel } from "@/suivi/adapters/suiviDuJour.presenter.impl";
+import { SuiviDuJourResultatsViewModel } from "@/suivi/adapters/suiviDuJour.presenter.impl";
 import GraphSuiviEmpreinteCarbone from "@/components/GraphSuiviEmpreinteCarbone.vue";
 
 export default {
@@ -27,48 +30,10 @@ export default {
       type: Object as () => Map<string, string>,
       required: true,
     },
-    empreinteCarboneDuJour: {
-      type: Object as () => ImpactCarboneDuJourViewModel,
+    suiviDuJourResultats: {
+      type: Object as () => SuiviDuJourResultatsViewModel,
       required: true,
     },
-  },
-  setup() {
-    const graphData = {
-      labels: ["01/04", "03/04", "06/04", "10/05", "24/06", "25/06", "26/06"],
-      datasets: [
-        {
-          label: "Suivi du jour",
-          backgroundColor: "#000091",
-          borderColor: "#000091",
-          pointStyle: "circle",
-          data: [28, 33, 22, 21, 14, 12, 13],
-        },
-        {
-          label: "votre moyenne",
-          backgroundColor: "#000000",
-          borderColor: "#000000",
-          borderDash: [5, 5],
-          pointStyle: false,
-          data: [21, 21, 21, 21, 21, 21, 21],
-        },
-      ],
-    };
-
-    const graphOptions = {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        title: {
-          display: false,
-          text: "Évolution de votre impact carbone quotidien",
-        },
-      },
-    };
-
-    return {
-      graphOptions,
-      graphData,
-    };
   },
 };
 </script>

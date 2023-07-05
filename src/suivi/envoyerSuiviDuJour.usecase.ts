@@ -10,8 +10,14 @@ export interface SuiviTransportInput {
 }
 
 export interface Resultat {
-  valeur: string;
-  enHausse: boolean;
+  impactCarbonDuJour: {
+    valeur: string;
+    enHausse: boolean;
+  };
+  suivisPrecedent: {
+    datesDesSuivis: string[];
+    valeursDesSuivis: number[];
+  };
 }
 
 export class EnvoyerSuiviDuJourUsecase {

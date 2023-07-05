@@ -9,7 +9,7 @@
           <br />
           <div class="fr-tile__desc">
             <div class="graph-schema">
-              <LineChart :chartData="graphData" />
+              <LineChart :chartData="donneesDuGraph" :options="optionsDuGraph" />
             </div>
           </div>
         </div>
@@ -26,16 +26,26 @@ Chart.register(...registerables);
 export default defineComponent({
   name: "GraphSuiviEmpreinteCarbone",
   components: { LineChart },
-  setup() {
-    const graphData = {
-      labels: ["Paris", "Nîmes", "Toulon", "Perpignan", "Autre"],
+  props: {
+    datesDuGraph: {
+      type: Object as () => string[],
+      required: true,
+    },
+    valeursCarboneDuGraph: {
+      type: Object as () => number[],
+      required: true,
+    },
+  },
+  data() {
+    const donneesDuGraph = {
+      labels: this.datesDuGraph,
       datasets: [
         {
           label: "Suivi du jour",
           backgroundColor: "#000091",
           borderColor: "#000091",
           pointStyle: "circle" as const,
-          data: [28, 33, 22, 21, 14, 12, 13],
+          data: this.valeursCarboneDuGraph,
         },
         {
           label: "votre moyenne",
@@ -48,22 +58,19 @@ export default defineComponent({
       ],
     };
 
-    const graphOptions = {
+    const optionsDuGraph = {
       responsive: true,
       maintainAspectRatio: false,
       plugins: {
-        title: {
+        legend: {
           display: false,
-          text: "Évolution de votre impact carbone quotidien",
         },
       },
     };
 
-    return {
-      graphData,
-      graphOptions,
-    };
+    return { donneesDuGraph, optionsDuGraph };
   },
+  setup() {},
 });
 </script>
 <style scoped>

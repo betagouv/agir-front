@@ -44,7 +44,7 @@
                   <SuiviDuJourResultats
                     :suivi-du-jour-alimentation="suiviDuJourAlimentation"
                     :suivi-du-jour-transport="suiviDuJourTransport"
-                    :empreinte-carbone-du-jour="impactCarboneDuJourViewModel"
+                    :suivi-du-jour-resultats="suiviDuJourResultatsViewModel"
                   />
                 </div>
               </fieldset>
@@ -98,7 +98,12 @@ import SuiviDuJourResultats from "@/components/SuiviDuJourResultats.vue";
 import SuiviDuJourPremiereEtape from "@/components/SuiviDuJourPremiereEtape.vue";
 import SuiviDuJourSecondeEtape from "@/components/SuiviDuJourSecondeEtape.vue";
 import { EnvoyerSuiviDuJourUsecase } from "@/suivi/envoyerSuiviDuJour.usecase";
-import { ImpactCarboneDuJourViewModel, SuiviDuJourPresenterImpl } from "@/suivi/adapters/suiviDuJour.presenter.impl";
+import {
+  ImpactCarboneDuJourViewModel,
+  SuiviDuJourPresenterImpl,
+  SuiviDuJourResultatsViewModel,
+  SuivisPrecedentViewModel,
+} from "@/suivi/adapters/suiviDuJour.presenter.impl";
 import { SuiviDuJourRepositoryInMemory } from "@/suivi/adapters/suiviDuJour.repository.inMemory";
 import { SuiviDuJourRepositoryAxios } from "@/suivi/adapters/suiviDuJour.repository.axios";
 import { ObtenirDernierSuiviUsecase } from "@/suivi/obtenirDernierSuivi.usecase";
@@ -130,9 +135,9 @@ export default defineComponent({
     let suiviDuJourAlimentation = new Map<string, string>();
     let suiviDuJourTransport = new Map<string, string>();
     let dernierSuiviDuJourAlimentationViewmodel = ref<DernierSuiviDuJourViewModel>();
-    const impactCarboneDuJourViewModel = ref<ImpactCarboneDuJourViewModel>({
-      valeur: "",
-      pictoSens: "",
+    const suiviDuJourResultatsViewModel = ref<SuiviDuJourResultatsViewModel>({
+      impactCarbonDuJour: { valeur: "", pictoSens: "" },
+      suivisPrecedent: { valeursDesSuivis: [], datesDesSuivis: [] },
     });
 
     onMounted(() => {
@@ -183,8 +188,8 @@ export default defineComponent({
       suiviDuJourTransport = map;
     }
 
-    function mapImpactCarboneDuJour(impactDuJourViewModel: ImpactCarboneDuJourViewModel) {
-      impactCarboneDuJourViewModel.value = impactDuJourViewModel;
+    function mapImpactCarboneDuJour(impactDuJourViewModel: SuiviDuJourResultatsViewModel) {
+      suiviDuJourResultatsViewModel.value = impactDuJourViewModel;
     }
 
     return {
@@ -197,7 +202,7 @@ export default defineComponent({
       miseAjourReponseSuiviDuJourTransport,
       suiviDuJourAlimentation,
       suiviDuJourTransport,
-      impactCarboneDuJourViewModel,
+      suiviDuJourResultatsViewModel,
       dernierSuiviDuJourAlimentationViewmodel,
     };
   },

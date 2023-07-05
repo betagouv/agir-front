@@ -10,8 +10,14 @@ export class SuiviDuJourRepositoryInMemory implements SuiviRepository {
 
   recupererResultat(): Resultat {
     return {
-      valeur: "21",
-      enHausse: true,
+      impactCarbonDuJour: {
+        valeur: "14",
+        enHausse: true,
+      },
+      suivisPrecedent: {
+        datesDesSuivis: ["27/07", "28/07", "29/07", "30/07"],
+        valeursDesSuivis: [23000, 43000, 12000, 25000],
+      },
     };
   }
 
