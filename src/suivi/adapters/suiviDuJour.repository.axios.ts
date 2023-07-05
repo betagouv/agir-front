@@ -9,7 +9,11 @@ export class SuiviDuJourRepositoryAxios implements SuiviRepository {
     axiosInstance.post(`/utilisateurs/${utilisateurId}/suivis`, jsonObject, {});
   }
 
-  recupererDernierSuivi(idUtilisateur: string, type: string) {}
+  async recupererDernierSuivi(idUtilisateur: string, type: string): Promise<Map<string, string>> {
+    const axiosInstance = AxiosFactory.getAxios();
+    const data = await axiosInstance.get(`/utilisateurs/${idUtilisateur}/suivis/last?type=${type}`);
+    return new Map<string, string>(Object.entries(data.data));
+  }
 
   recupererResultat(): Resultat {
     return {

@@ -26,7 +26,9 @@ class SpySuiviRepository implements SuiviRepository {
     return this._resultat;
   }
 
-  recupererDernierSuivi(idUtilisateur: string, type: string) {}
+  recupererDernierSuivi(idUtilisateur: string, type: string): Promise<Map<string, string>> {
+    return Promise.resolve(new Map<string, string>());
+  }
 }
 
 describe("Fichier de tests de l'envoie du suivi du jour", () => {

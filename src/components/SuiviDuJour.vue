@@ -29,6 +29,7 @@
                     :etape-courante="etapeCourante"
                     @update:model-value="miseAjourReponseSuiviDuJourAlimentation"
                     :model-value="suiviDuJourAlimentation"
+                    :dernier-suivi-du-jour-view-model="dernierSuiviDuJourAlimentationViewmodel"
                   />
                 </div>
                 <div v-else-if="etapeCourante == 2">
@@ -100,6 +101,8 @@ import { EnvoyerSuiviDuJourUsecase } from "@/suivi/envoyerSuiviDuJour.usecase";
 import { ImpactCarboneDuJourViewModel, SuiviDuJourPresenterImpl } from "@/suivi/adapters/suiviDuJour.presenter.impl";
 import { SuiviDuJourRepositoryInMemory } from "@/suivi/adapters/suiviDuJour.repository.inMemory";
 import { SuiviDuJourRepositoryAxios } from "@/suivi/adapters/suiviDuJour.repository.axios";
+import { ObtenirDernierSuiviUsecase } from "@/suivi/obtenirDernierSuivi.usecase";
+import { DernierSuiviDuJourPresenterImpl, DernierSuiviDuJourViewModel } from "@/suivi/adapters/dernierSuiviDuJour.presenter.impl";
 
 export default defineComponent({
   name: "SuiviDuJour",
@@ -125,9 +128,23 @@ export default defineComponent({
     let etapeCourante = ref<number>(1);
     let suiviDuJourAlimentation = new Map<string, string>();
     let suiviDuJourTransport = new Map<string, string>();
+    let dernierSuiviDuJourAlimentationViewmodel = ref<DernierSuiviDuJourViewModel>();
     const impactCarboneDuJourViewModel = ref<ImpactCarboneDuJourViewModel>({
       valeur: "",
       pictoSens: "",
+    });
+
+    onMounted(() => {
+      const idUtilisateur = store.getters["utilisateur/getId"];
+
+      const chargerDernierSuiviAlimentation = new ObtenirDernierSuiviUsecase(new SuiviDuJourRepositoryAxios());
+
+      function mapSuiviAlimentation(dernierSuiviViewModel: DernierSuiviDuJourViewModel) {
+        console.log(dernierSuiviViewModel);
+        dernierSuiviDuJourAlimentationViewmodel.value = dernierSuiviViewModel;
+      }
+
+      chargerDernierSuiviAlimentation.execute(idUtilisateur, "alimentation", new DernierSuiviDuJourPresenterImpl(mapSuiviAlimentation));
     });
 
     function etapeSuivante() {
@@ -155,6 +172,7 @@ export default defineComponent({
 
     function miseAjourReponseSuiviDuJourAlimentation(map: Map<string, string>) {
       suiviDuJourAlimentation = map;
+      console.log(suiviDuJourAlimentation);
     }
     function miseAjourReponseSuiviDuJourTransport(map: Map<string, string>) {
       suiviDuJourTransport = map;
@@ -175,6 +193,7 @@ export default defineComponent({
       suiviDuJourAlimentation,
       suiviDuJourTransport,
       impactCarboneDuJourViewModel,
+      dernierSuiviDuJourAlimentationViewmodel,
     };
   },
 });
