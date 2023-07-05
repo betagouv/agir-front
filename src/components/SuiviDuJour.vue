@@ -103,6 +103,7 @@ import { SuiviDuJourRepositoryInMemory } from "@/suivi/adapters/suiviDuJour.repo
 import { SuiviDuJourRepositoryAxios } from "@/suivi/adapters/suiviDuJour.repository.axios";
 import { ObtenirDernierSuiviUsecase } from "@/suivi/obtenirDernierSuivi.usecase";
 import { DernierSuiviDuJourPresenterImpl, DernierSuiviDuJourViewModel } from "@/suivi/adapters/dernierSuiviDuJour.presenter.impl";
+import { DateTimeTypeScript } from "@/DateTime";
 
 export default defineComponent({
   name: "SuiviDuJour",
@@ -144,7 +145,11 @@ export default defineComponent({
         dernierSuiviDuJourAlimentationViewmodel.value = dernierSuiviViewModel;
       }
 
-      chargerDernierSuiviAlimentation.execute(idUtilisateur, "alimentation", new DernierSuiviDuJourPresenterImpl(mapSuiviAlimentation));
+      chargerDernierSuiviAlimentation.execute(
+        idUtilisateur,
+        "alimentation",
+        new DernierSuiviDuJourPresenterImpl(mapSuiviAlimentation, new DateTimeTypeScript())
+      );
     });
 
     function etapeSuivante() {

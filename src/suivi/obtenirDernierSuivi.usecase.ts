@@ -1,7 +1,7 @@
-import { SuiviRepository } from "@/suivi/ports/suivi.repository";
+import { DernierSuivi, SuiviRepository } from "@/suivi/ports/suivi.repository";
 
 export interface DernierSuiviPresenter {
-  presente(clefEtValeurs: Map<string, string>);
+  presente(suivi: DernierSuivi);
 }
 export class ObtenirDernierSuiviUsecase {
   private suiviRepository: SuiviRepository;

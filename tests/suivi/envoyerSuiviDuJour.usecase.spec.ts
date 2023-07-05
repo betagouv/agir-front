@@ -1,6 +1,6 @@
 import { EnvoyerSuiviDuJourUsecase, Resultat } from "../../src/suivi/envoyerSuiviDuJour.usecase";
 import { ImpactCarboneDuJourViewModel, SuiviDuJourPresenterImpl } from "../../src/suivi/adapters/suiviDuJour.presenter.impl";
-import { SuiviRepository } from "../../src/suivi/ports/suivi.repository";
+import { DernierSuivi, SuiviRepository } from "../../src/suivi/ports/suivi.repository";
 
 class SpySuiviRepository implements SuiviRepository {
   private _resultat: Resultat;
@@ -26,8 +26,11 @@ class SpySuiviRepository implements SuiviRepository {
     return this._resultat;
   }
 
-  recupererDernierSuivi(idUtilisateur: string, type: string): Promise<Map<string, string>> {
-    return Promise.resolve(new Map<string, string>());
+  recupererDernierSuivi(idUtilisateur: string, type: string): Promise<DernierSuivi> {
+    return Promise.resolve({
+      date: "",
+      valeurs: new Map<string, string>(),
+    });
   }
 }
 

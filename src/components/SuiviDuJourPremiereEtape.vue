@@ -9,7 +9,9 @@
         type="checkbox"
         aria-describedby="checkbox-first-auto-fill-messages"
       />
-      <label class="fr-label fr-custom-label" for="checkbox-first-auto-fill"> Pré-remplir avec ma réponse précédente </label>
+      <label class="fr-label fr-custom-label" for="checkbox-first-auto-fill">
+        Pré-remplir avec ma réponse précédente <span class="date fr-ml-1-5v">({{ dernierSuiviDuJourViewModel.date }})</span>
+      </label>
       <div class="fr-messages-group" id="checkbox-first-auto-fill-messages" aria-live="assertive"></div>
     </div>
   </div>
@@ -193,5 +195,13 @@ export default defineComponent({
 
 .fr-custom-label {
   padding: 5px 5px 5px 5px;
+}
+
+.date {
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.25rem;
+  color: #666;
 }
 </style>
