@@ -1,8 +1,17 @@
 <template>
   <div class="fr-fieldset__element fill-response-checkbox-container">
-    <div class="fr-checkbox-group fr-custom-checkbox-group">
-      <input name="checkbox-first-auto-fill" id="checkbox-first-auto-fill" type="checkbox" aria-describedby="checkbox-first-auto-fill-messages" />
-      <label class="fr-label fr-custom-label" for="checkbox-first-auto-fill"> Pré-remplir avec ma réponse précédente </label>
+    <div class="fr-checkbox-group fr-custom-checkbox-group" v-if="dernierSuiviDuJourViewModel">
+      <input
+        :checked="isChecked"
+        @change="handleCheckboxChange"
+        name="checkbox-first-auto-fill"
+        id="checkbox-first-auto-fill"
+        type="checkbox"
+        aria-describedby="checkbox-first-auto-fill-messages"
+      />
+      <label class="fr-label fr-custom-label" for="checkbox-first-auto-fill">
+        Pré-remplir avec ma réponse précédente <span class="date fr-ml-1-5v">({{ dernierSuiviDuJourViewModel.date }})</span>
+      </label>
       <div class="fr-messages-group" id="checkbox-first-auto-fill-messages" aria-live="assertive"></div>
     </div>
   </div>
@@ -106,20 +115,55 @@
   </div>
 </template>
 
-<script setup lang="ts">
-const props = defineProps({
-  modelValue: Map,
-  etapeCourante: Number,
-  currentStepQuestion: String,
+<script lang="ts">
+import { DernierSuiviDuJourViewModel } from "@/suivi/adapters/dernierSuiviDuJour.presenter.impl";
+import { defineComponent, getCurrentInstance, ref, watch } from "vue";
+
+export default defineComponent({
+  props: {
+    modelValue: Map,
+    etapeCourante: Number,
+    currentStepQuestion: String,
+    dernierSuiviDuJourViewModel: {
+      type: Object as () => DernierSuiviDuJourViewModel,
+    },
+  },
+
+  setup(props, { emit }) {
+    const isChecked = ref(false);
+
+    watch(isChecked, (value) => {
+      if (value && props.dernierSuiviDuJourViewModel) {
+        const { clefsEtValeurs } = props.dernierSuiviDuJourViewModel;
+        props.modelValue?.clear();
+        for (const [key, value] of clefsEtValeurs) {
+          props.modelValue?.set(key, value);
+        }
+      } else {
+        props.modelValue?.clear();
+      }
+      emit("update:modelValue", props.modelValue);
+    });
+    function handleReponse(currentMap: Map<string, string>, event: Event, key: string) {
+      const valeur = (event.target as HTMLInputElement).value;
+      currentMap.set(key, valeur);
+      emit("update:modelValue", currentMap);
+    }
+    const handleCheckboxChange = (): void => {
+      isChecked.value = !isChecked.value;
+      if (isChecked.value) {
+      } else {
+        console.log("La case est décochée");
+      }
+    };
+
+    return {
+      isChecked,
+      handleCheckboxChange,
+      handleReponse,
+    };
+  },
 });
-
-const emit = defineEmits(["update:modelValue"]);
-
-function handleReponse(currentMap: Map<string, string>, event: Event, key: string) {
-  const valeur = (event.target as HTMLInputElement).value;
-  currentMap.set(key, valeur);
-  emit("update:modelValue", currentMap);
-}
 </script>
 
 <style scoped>
@@ -149,5 +193,13 @@ function handleReponse(currentMap: Map<string, string>, event: Event, key: strin
 
 .fr-custom-label {
   padding: 5px 5px 5px 5px;
+}
+
+.date {
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.25rem;
+  color: #666;
 }
 </style>

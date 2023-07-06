@@ -1,5 +1,5 @@
 import { Resultat } from "@/suivi/envoyerSuiviDuJour.usecase";
-import { SuiviRepository } from "@/suivi/ports/suivi.repository";
+import { DernierSuivi, SuiviRepository } from "@/suivi/ports/suivi.repository";
 
 export class SuiviDuJourRepositoryInMemory implements SuiviRepository {
   ajouter(type: string, valeurs: Map<string, string>, utilisateurId: string) {
@@ -15,5 +15,10 @@ export class SuiviDuJourRepositoryInMemory implements SuiviRepository {
     };
   }
 
-  recupererDernierSuivi(idUtilisateur: string, type: string) {}
+  recupererDernierSuivi(idUtilisateur: string, type: string): Promise<DernierSuivi> {
+    return Promise.resolve({
+      date: "date",
+      valeurs: new Map<string, string>(),
+    });
+  }
 }
