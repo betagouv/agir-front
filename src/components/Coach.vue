@@ -1,5 +1,5 @@
 <template>
-  <div class="fr-grid-row" v-if="quizViewModel && interactionsViewModel">
+  <div class="fr-grid-row" v-if="interactionsViewModel">
     <div class="fr-col-12 fr-col-md-9">
       <div class="col-demo">
         <div v-if="!isLoading" class="fr-grid-row fr-grid-row--gutters dashboard-container">
@@ -83,12 +83,6 @@ export default defineComponent({
     const empreinteViewModel = ref<EmpreinteViewModel>();
     const interactionsViewModel = ref<InteractionViewModel[]>();
     const isLoading = ref<boolean>(true);
-    function mapValuesDashboard(dashboardViewModel: DashboardViewModel) {
-      utilisateur.value = dashboardViewModel.utilisateur;
-      compteurViewModel.value = dashboardViewModel.compteurs;
-      badgeViewModel.value = dashboardViewModel.badges;
-      quizViewModel.value = dashboardViewModel.quizz;
-    }
 
     function mapValueBilan(viewModel: EmpreinteViewModel) {
       empreinteViewModel.value = viewModel;
@@ -101,12 +95,10 @@ export default defineComponent({
     const lancerChargementDesDonnees = () => {
       isLoading.value = true;
       const idUtilisateur = store.getters["utilisateur/getId"];
-      const chargementDashboardUsecase = new ChargementDashboardUsecase(new DashboardRepositoryAxios());
       const chargementEmpreinteUseCase = new ChargementEmpreinteUsecase(new EmpreinteRepositoryAxios());
       const chargerInteractionsUseCase = new ChargerInteractionsUsecase(new InteractionsRepositoryAxios());
 
       Promise.all([
-        chargementDashboardUsecase.execute(idUtilisateur, new ChargementDashboardPresenterImpl(mapValuesDashboard)),
         chargementEmpreinteUseCase.execute(idUtilisateur, new ChargementEmpreintePresenterImpl(mapValueBilan)),
         chargerInteractionsUseCase.execute(idUtilisateur, new InteractionsPresenterImpl(mapValuesInteractions)),
       ]).then(() => {
