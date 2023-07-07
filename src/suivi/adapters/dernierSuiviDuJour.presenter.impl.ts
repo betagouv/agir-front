@@ -16,14 +16,20 @@ export class DernierSuiviDuJourPresenterImpl implements DernierSuiviPresenter {
   }
 
   presente(suivi: DernierSuivi) {
-    const currentDate = this._dateTime.now();
-    const lastFollowUpDate = this._dateTime.from(suivi.date);
-
-    const differenceInMilliseconds = currentDate.getTime() - lastFollowUpDate.getTime();
-    const differenceInDays = Math.floor(differenceInMilliseconds / (1000 * 60 * 60 * 24));
+    const differenceEnJours = this.calculerNombreDeJoursDepuisLeDernierSuivi(suivi);
     this._viewModel({
-      date: `Dernier suivi il y a ${differenceInDays} jours`,
+      date: `Dernier suivi il y a ${differenceEnJours} jours`,
       clefsEtValeurs: suivi.valeurs,
     });
+  }
+
+  private calculerNombreDeJoursDepuisLeDernierSuivi(dernierSuivi: DernierSuivi) {
+    const dateDuJour = this._dateTime.now();
+    const dateDuDernierSuivi = this._dateTime.from(dernierSuivi.date);
+    dateDuJour.setHours(0, 0, 0, 0);
+    dateDuDernierSuivi.setHours(0, 0, 0, 0);
+
+    const differenceEnMillisecondes = dateDuJour.getTime() - dateDuDernierSuivi.getTime();
+    return Math.floor(differenceEnMillisecondes / (1000 * 60 * 60 * 24));
   }
 }
