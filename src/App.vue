@@ -29,7 +29,6 @@ import Footer from "@/components/Footer.vue";
   text-align: left;
   height: 18rem;
   width: 100%;
-  position: absolute;
   background-color: white;
 }
 

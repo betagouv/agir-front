@@ -21,27 +21,20 @@
             </li>
           </ul>
         </div>
-        <!--<div class="">
-          <a :href="interactionViewModel?.url" :target="interactionViewModel?.isUrlExterne ? 'blank' : ''">Commencer</a>
-        </div>-->
       </div>
-<!--
-      <div class="interaction-footer">
+      <div class="fr-card__footer">
         <a
           @click="interactionAEteCliquee(interactionViewModel.id)"
           :href="interactionViewModel?.url"
           :target="interactionViewModel?.isUrlExterne ? 'blank' : ''"
-          >Commencer</a
+          >Commencer <span class="fr-icon-arrow-right-s-line" aria-hidden="true"></span></a
         >
-        <span class="interaction-duration">5 min</span>
-      </div>-->
-
+      </div>
     </div>
     <div class="fr-card__header">
         <div class="fr-card__img">
             <img class="fr-responsive-img" alt="interaction-item-logo" :src="interactionViewModel?.illustrationURL" />
         </div>
-
     </div>
   </div>
 </template>
@@ -104,6 +97,9 @@ export default {
 .fr-card{
   border-radius: 6px;
 }
+.fr-card:before{
+  content: none;
+}
 .fr-card__body{
   padding: 0 1rem
 }
@@ -120,6 +116,13 @@ export default {
   width: 240px;
   margin: 10px;
   object-fit: cover;
+}
+
+.fr-card__footer{
+  text-align: right;
+  margin: -1rem -1rem;
+  order: 2;
+  padding: 0.5rem 2rem 0rem;
 }
 
 /* end card dsfr mod */
