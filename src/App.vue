@@ -7,7 +7,7 @@ import Footer from "@/components/Footer.vue";
   <div class="page-container">
     <Header />
 
-    <div class="fr-container fr-px-2w">
+    <div class="fr-container fr-px-1w">
         <router-view />
     </div>
     

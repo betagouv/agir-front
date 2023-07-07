@@ -1,7 +1,7 @@
 <template>
-  <div class="fr-container-fluid" v-if="interactionsViewModel">
+  <div class="" v-if="interactionsViewModel">
     <div class="fr-grid-row fr-grid-row--gutters">
-      <div class="fr-col-xs-12 fr-col-lg-9">
+      <div class="fr-col-12 fr-col-lg-9">
         <div class="fr-container--fluid">
           <div v-if="!isLoading" class="fr-grid-row fr-grid-row--gutters dashboard-container">
             <div
@@ -19,7 +19,7 @@
           </div>
         </div>
       </div>
-      <div class="fr-col-xs-12 fr-col-3">
+      <div class="fr-col-12 fr-col-lg-3">
         <div v-if="!isLoading" >
           <div class="fr-grid-row fr-grid-row--gutters card-item-list-container">
             <div class="fr-col-12">

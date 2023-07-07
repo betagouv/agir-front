@@ -129,17 +129,36 @@ export default {
 .fr-card__footer{
   text-align: right;
   margin-left: auto;
-    margin-top: auto;
-    margin-bottom: auto;
-  order: 2;
+  margin-top: auto;
+  margin-bottom: auto;
   padding: 0.5rem 2rem 0rem;
 }
 
-/*@media only screen and (min-width : 768px) {
-  .fr-card__footer{
-    display:none;
+@media only screen and (max-width : 768px) {
+  .fr-card__footer {
+    width: 0%;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
   }
-}*/
+  .fr-card{
+    flex-direction: row;
+  }
+  /*.fr-card__header {
+    display: none
+  }*/
+
+}
+
+@media only screen and (max-width : 576px) {
+
+  .fr-card__header {
+    display: none
+  }
+  .fr-card{
+    padding-left: 1rem
+  }
+}
 
 /* end card dsfr mod */
 
