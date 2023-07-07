@@ -27,7 +27,7 @@
           @click="interactionAEteCliquee(interactionViewModel.id)"
           :href="interactionViewModel?.url"
           :target="interactionViewModel?.isUrlExterne ? 'blank' : ''"
-          >Commencer <span class="fr-icon-arrow-right-s-line" aria-hidden="true"></span></a
+          >Commencer <span class="fr-icon-arrow-right-s-line" aria-hidden="true">&nbsp;</span></a
         >
       </div>
     </div>
@@ -72,6 +72,10 @@ export default {
 <style scoped>
 
 /* card dsfr mod */
+
+.fr-card__body{
+  flex-direction: row;
+}
 .fr-card__content{
   padding: 1rem;
   height: auto;
@@ -107,23 +111,35 @@ export default {
   padding-bottom: 0;
 }
 
+
+/* card image */
 .fr-card--horizontal-tier .fr-card__header{
   flex: 0 0 30%;
 }
+.fr-card__img {
+  padding: 10px;
+}
 .fr-card__img img{
   border-radius: 6px;
-  height: 120px;
-  width: 240px;
-  margin: 10px;
+  max-height: 120px;
+  max-width: 240px;
   object-fit: cover;
 }
-
+/* bloc "commencer" */
 .fr-card__footer{
   text-align: right;
-  margin: -1rem -1rem;
+  margin-left: auto;
+    margin-top: auto;
+    margin-bottom: auto;
   order: 2;
   padding: 0.5rem 2rem 0rem;
 }
+
+/*@media only screen and (min-width : 768px) {
+  .fr-card__footer{
+    display:none;
+  }
+}*/
 
 /* end card dsfr mod */
 
