@@ -9,6 +9,11 @@ export interface SuiviTransportInput {
   valeurs: Map<string, string>;
 }
 
+export interface ElementSuiviCarbone {
+  titre: string;
+  valeur: number;
+  impactCarbone: number;
+}
 export interface Resultat {
   impactCarbonDuJour: {
     valeur: string;
@@ -17,7 +22,9 @@ export interface Resultat {
   suivisPrecedent: {
     datesDesSuivis: string[];
     valeursDesSuivis: number[];
+    moyenneDesSuivis: number;
   };
+  additionCarboneDuJour: ElementSuiviCarbone[];
 }
 
 export class EnvoyerSuiviDuJourUsecase {

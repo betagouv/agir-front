@@ -41,20 +41,19 @@
                   />
                 </div>
                 <div class="last-step-container" v-else>
-                  <SuiviDuJourResultats
-                    :suivi-du-jour-alimentation="suiviDuJourAlimentation"
-                    :suivi-du-jour-transport="suiviDuJourTransport"
-                    :suivi-du-jour-resultats="suiviDuJourResultatsViewModel"
-                  />
+                  <SuiviDuJourResultats :suivi-du-jour-resultats="suiviDuJourResultatsViewModel" />
                 </div>
               </fieldset>
-              <div>
+              <div style="text-align: left">
                 <span v-if="etapeCourante <= 2 && etapeCourante > 1" @click="etapePrecedente" class="step-btn-actions">
                   <span class="fr-icon-arrow-left-line" aria-hidden="true"></span>
-                  {{ etapeCourante == 3 ? "Modifier vos réponses" : "Précédent" }}
+                  Précédent
                 </span>
-                <button v-if="etapeCourante < 3" class="fr-btn continue-step-button fr-btn-not-rounded" title="Suivant">Continuer</button>
-                <span v-if="etapeCourante < 3" @click="sauterEtape" class="step-btn-actions"> Passer la question </span>
+                <button v-if="etapeCourante < 3" class="fr-btn fr-btn-not-rounded" title="Suivant">Continuer</button>
+                <span v-if="etapeCourante == 1" @click="sauterEtape" class="step-btn-actions"> Passer la question </span>
+
+                <button v-if="etapeCourante == 3" class="fr-btn-not-rounded share-btn-container" title="partager">Partager vos résultats</button>
+                <br />
                 <router-link
                   v-if="etapeCourante == 3"
                   class="fr-btn fr-btn-not-rounded redirect-coach-link"
@@ -78,6 +77,9 @@
           <div class="fr-col-12">
             <BilanNosGestesClimat :get-impact-value="store.getters['utilisateur/getValeurBilanCarbone']" />
           </div>
+          <div v-if="etapeCourante == 3" class="fr-col-12">
+            <NombreDePointsDuJour :nombre-de-points-du-jour="25" />
+          </div>
           <div class="fr-col-12">
             <ImpactDuJour :consommation-du-jour="'+ 7'" :equivalent-en-litres="'14'" />
           </div>
@@ -98,21 +100,25 @@ import SuiviDuJourResultats from "@/components/SuiviDuJourResultats.vue";
 import SuiviDuJourPremiereEtape from "@/components/SuiviDuJourPremiereEtape.vue";
 import SuiviDuJourSecondeEtape from "@/components/SuiviDuJourSecondeEtape.vue";
 import { EnvoyerSuiviDuJourUsecase } from "@/suivi/envoyerSuiviDuJour.usecase";
-import {
-  ImpactCarboneDuJourViewModel,
-  SuiviDuJourPresenterImpl,
-  SuiviDuJourResultatsViewModel,
-  SuivisPrecedentViewModel,
-} from "@/suivi/adapters/suiviDuJour.presenter.impl";
+import { ImpactCarboneDuJourViewModel, SuiviDuJourPresenterImpl, SuiviDuJourResultatsViewModel } from "@/suivi/adapters/suiviDuJour.presenter.impl";
 import { SuiviDuJourRepositoryInMemory } from "@/suivi/adapters/suiviDuJour.repository.inMemory";
 import { SuiviDuJourRepositoryAxios } from "@/suivi/adapters/suiviDuJour.repository.axios";
 import { ObtenirDernierSuiviUsecase } from "@/suivi/obtenirDernierSuivi.usecase";
 import { DernierSuiviDuJourPresenterImpl, DernierSuiviDuJourViewModel } from "@/suivi/adapters/dernierSuiviDuJour.presenter.impl";
 import { DateTimeTypeScript } from "@/DateTime";
+import NombreDePointsDuJour from "@/components/NombreDePointsDuJour.vue";
 
 export default defineComponent({
   name: "SuiviDuJour",
-  components: { SuiviDuJourSecondeEtape, SuiviDuJourPremiereEtape, SuiviDuJourResultats, MesResultats, ImpactDuJour, BilanNosGestesClimat },
+  components: {
+    NombreDePointsDuJour,
+    SuiviDuJourSecondeEtape,
+    SuiviDuJourPremiereEtape,
+    SuiviDuJourResultats,
+    MesResultats,
+    ImpactDuJour,
+    BilanNosGestesClimat,
+  },
   computed: {
     store() {
       return store;
@@ -202,8 +208,8 @@ export default defineComponent({
       miseAjourReponseSuiviDuJourTransport,
       suiviDuJourAlimentation,
       suiviDuJourTransport,
-      suiviDuJourResultatsViewModel,
       dernierSuiviDuJourAlimentationViewmodel,
+      suiviDuJourResultatsViewModel,
     };
   },
 });
@@ -223,10 +229,6 @@ export default defineComponent({
 
 .follow-up-stepper-sub-container {
   margin: 3em 3em 0 3em;
-}
-
-.continue-step-button {
-  margin: 20px;
 }
 
 .step-btn-actions {
@@ -255,6 +257,17 @@ export default defineComponent({
 
 .last-step-container {
   width: 100%;
+}
+
+.fr-btn-not-rounded {
+  border-radius: 0;
+}
+
+.share-btn-container {
+  margin: 10px auto;
+  background-color: white;
+  color: #000091;
+  border: 1px solid rgba(0, 0, 0, 0.19);
 }
 
 .fr-btn-not-rounded {

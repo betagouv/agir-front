@@ -39,7 +39,23 @@ describe("Fichier de tests de l'envoie du suivi du jour", () => {
     // GIVEN
     const resultat = {
       impactCarbonDuJour: { valeur: "21", enHausse: true },
-      suivisPrecedent: { datesDesSuivis: ["27/07", "28/07", "29/07", "30/07"], valeursDesSuivis: [23000, 43000, 12000, 25000] },
+      suivisPrecedent: {
+        datesDesSuivis: ["27/07", "28/07", "29/07", "30/07"],
+        valeursDesSuivis: [23000, 43000, 12000, 25000],
+        moyenneDesSuivis: 21000,
+      },
+      additionCarboneDuJour: [
+        { valeur: 2, impactCarbone: 2000, titre: "viande_rouge" },
+        { valeur: 20, impactCarbone: 8000, titre: "km_voiture" },
+        { valeur: 10, impactCarbone: 4000, titre: "km_metro" },
+        { valeur: 20, impactCarbone: 2000, titre: "km_velo" },
+        { valeur: 15, impactCarbone: 80000, titre: "km_train" },
+        { valeur: 40, impactCarbone: 16000, titre: "km_bus" },
+        { valeur: 1, impactCarbone: 1000, titre: "viande_blanche" },
+        { valeur: 1, impactCarbone: 1000, titre: "poisson_blanc" },
+        { valeur: 2, impactCarbone: 2000, titre: "oeufs" },
+        { valeur: 1, impactCarbone: 1000, titre: "poisson_rouge" },
+      ],
     } as Resultat;
     const repository = new SpySuiviRepository(resultat);
     const useCase = new EnvoyerSuiviDuJourUsecase(repository);
@@ -67,7 +83,60 @@ describe("Fichier de tests de l'envoie du suivi du jour", () => {
         suivisPrecedent: {
           datesDesSuivis: ["27/07", "28/07", "29/07", "30/07"],
           valeursDesSuivis: [23, 43, 12, 25],
+          moyenneDesSuivis: [21, 21, 21, 21],
         },
+        additionCarbone: [
+          {
+            impactCarbone: "+80 kg",
+            valeur: "15 km de train",
+            styleFont: "carbon-value-item-primary",
+          },
+          {
+            impactCarbone: "+16 kg",
+            valeur: "40 km de bus",
+            styleFont: "carbon-value-item-primary",
+          },
+          {
+            impactCarbone: "+8 kg",
+            valeur: "20 km de voiture",
+            styleFont: "carbon-value-item-primary",
+          },
+          {
+            impactCarbone: "+4 kg",
+            valeur: "10 km de metro",
+            styleFont: "carbon-value-item-secondary",
+          },
+          {
+            impactCarbone: "+2 kg",
+            valeur: "2 repas avec viande rouge",
+            styleFont: "carbon-value-item-secondary",
+          },
+          {
+            impactCarbone: "+2 kg",
+            valeur: "20 km de velo",
+            styleFont: "carbon-value-item-secondary",
+          },
+          {
+            impactCarbone: "+2 kg",
+            valeur: "2 repas avec oeufs",
+            styleFont: "carbon-value-item-secondary",
+          },
+          {
+            impactCarbone: "+1 kg",
+            valeur: "1 repas avec viande blanche",
+            styleFont: "carbon-value-item-secondary",
+          },
+          {
+            impactCarbone: "+1 kg",
+            valeur: "1 repas avec poisson blanc",
+            styleFont: "carbon-value-item-secondary",
+          },
+          {
+            impactCarbone: "+1 kg",
+            valeur: "1 repas avec poisson rouge",
+            styleFont: "carbon-value-item-secondary",
+          },
+        ],
       });
     }
   });

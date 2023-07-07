@@ -2,11 +2,11 @@
   <div class="fr-col fr-col-daily-carbon-value-card">
     <div class="col-demo">
       <div class="fr-tile fr-enlarge-link fr-tile--horizontal fr-tile--vertical-md dashboard-daily-carbon-value" id="tile-6538">
-        <div class="card-custom-body card-custom-body card-custom-body">
+        <div class="card-custom-body">
           <div class="fr-tile__title">
             <p class="daily-carbon-value-text">Impact carbone du jour</p>
           </div>
-          <div class="fr-tile__desc grid-side-to-side-container carbon-impact-value-container">
+          <div class="fr-tile__desc carbon-impact-value-container">
             <p style="font-weight: bold; font-size: 3.5vh">+{{ suiviDuJourResultats.impactCarbonDuJour.valeur }}</p>
             <p style="font-weight: bold">&nbsp;kg&nbsp;</p>
             <p>de CO₂-e</p>
