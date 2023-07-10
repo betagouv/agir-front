@@ -40,8 +40,8 @@ export class EnvoyerSuiviDuJourUsecase {
     presenter: SuiviDuJourPresenter,
     idUtilisateur: string
   ): Promise<void> {
-    this.suiviRepository.ajouter("alimentation", suiviAlimentation.valeurs, idUtilisateur);
-    this.suiviRepository.ajouter("transport", suiviTransport.valeurs, idUtilisateur);
+    await this.suiviRepository.ajouter("alimentation", suiviAlimentation.valeurs, idUtilisateur);
+    await this.suiviRepository.ajouter("transport", suiviTransport.valeurs, idUtilisateur);
     const resultat = await this.suiviRepository.recupererResultat(idUtilisateur);
     presenter.presente(resultat);
   }

@@ -56,10 +56,10 @@ function getValeursDesDates(listeDesAdditionsCarbone: SuiviDuJourGraphDataApiMod
 }
 
 export class SuiviDuJourRepositoryAxios implements SuiviRepository {
-  ajouter(type: string, valeurs: Map<string, string>, utilisateurId: string) {
+  async ajouter(type: string, valeurs: Map<string, string>, utilisateurId: string) {
     const axiosInstance = AxiosFactory.getAxios();
     const jsonObject = { type, ...Object.fromEntries(valeurs) };
-    axiosInstance.post(`/utilisateurs/${utilisateurId}/suivis`, jsonObject, {});
+    await axiosInstance.post(`/utilisateurs/${utilisateurId}/suivis`, jsonObject, {});
   }
 
   async recupererDernierSuivi(idUtilisateur: string, type: string): Promise<DernierSuivi> {
