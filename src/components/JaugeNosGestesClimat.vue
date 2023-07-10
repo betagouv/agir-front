@@ -48,7 +48,7 @@ export default defineComponent({
 
 .jauge-background {
   background-color: #f0f0f0;
-  width: 100%;
+  width: 40%;
   height: 100%;
   border-radius: 5px;
   max-width: 150px;
