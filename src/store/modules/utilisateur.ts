@@ -6,6 +6,7 @@ interface State {
   id: string;
   valeurBilanCarbone: string;
   interactionEnCours: string;
+  score: number;
 }
 
 export const initialState: State = {
@@ -13,6 +14,7 @@ export const initialState: State = {
   id: "",
   valeurBilanCarbone: "",
   interactionEnCours: "",
+  score: 0,
 };
 
 export default {
@@ -31,6 +33,9 @@ export default {
     getInteractionEnCours(state: State): string {
       return state.interactionEnCours;
     },
+    getScore(state: State): number {
+      return state.score;
+    },
   },
   mutations: {
     setUtilisateur(state: State, utilisateur: Utilisateur) {
@@ -43,12 +48,16 @@ export default {
     setInteractionEnCours(state: State, interactionEnCours: string) {
       state.interactionEnCours = interactionEnCours;
     },
+    setScore(state: State, score: number) {
+      state.score = score;
+    },
   },
   actions: {
     reset({ commit }: { commit: Commit }) {
       commit("setUtilisateur", { nom: "", id: "" });
       commit("setValeurBilanCarbone", "");
       commit("setInteractionEnCours", "");
+      commit("setScore", 0);
     },
   },
 };

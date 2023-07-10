@@ -1,4 +1,4 @@
-import { Dashboard } from "@/dashboard/ports/dashboardRepository";
+import { Score } from "@/score/ports/scoreRepository";
 
 export interface CompteurViewModel {
   consommation: string;
@@ -21,13 +21,11 @@ export interface EmpreinteViewModel {
   bilan: string;
 }
 
-export interface DashboardViewModel {
+export interface ScoreViewModel {
   utilisateur: string;
-  compteurs: CompteurViewModel[];
-  quizz: QuizzViewModel[];
   badges: BadgeViewModel[];
-  empreinte: EmpreinteViewModel;
+  score: number;
 }
-export interface ChargementDashboardPresenter {
-  presenteDashboard(utilisateur: string, dashboard: Dashboard): void;
+export interface ChargementScorePresenter {
+  presenteDashboard(utilisateur: string, dashboard: Score): void;
 }

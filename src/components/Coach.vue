@@ -4,11 +4,7 @@
       <div class="fr-col-12 fr-col-lg-9">
         <div class="fr-container--fluid">
           <div v-if="!isLoading" class="fr-grid-row fr-grid-row--gutters dashboard-container">
-            <div
-              class="fr-col-12"
-              v-for="item in interactionsViewModel"
-              :key="item.titre"
-            >
+            <div class="fr-col-12" v-for="item in interactionsViewModel" :key="item.titre">
               <InteractionCard :interaction-view-model="item" @refresh-interactions="lancerChargementDesDonnees" />
             </div>
           </div>
@@ -20,13 +16,13 @@
         </div>
       </div>
       <div class="fr-col-12 fr-col-lg-3">
-        <div v-if="!isLoading" >
+        <div v-if="!isLoading">
           <div class="fr-grid-row fr-grid-row--gutters card-item-list-container">
             <div class="fr-col-12">
               <BilanNosGestesClimat :get-impact-value="empreinteViewModel?.bilan" />
             </div>
             <div class="fr-col-12">
-              <MesResultats v-if="badgeViewModel" :badge-view-model="badgeViewModel" :score-value="10" />
+              <MesResultats v-if="scoreViewModel" :badge-view-model="scoreViewModel.badges" :score-value="scoreViewModel.score" />
             </div>
           </div>
         </div>
@@ -41,13 +37,13 @@
           </div>
         </div>
       </div>
-      </div>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, onMounted, ref } from "vue";
-import { BadgeViewModel, CompteurViewModel, EmpreinteViewModel, QuizzViewModel } from "@/dashboard/ports/chargementDashboard.presenter";
+import { ScoreViewModel, EmpreinteViewModel } from "@/score/ports/chargementScorePresenter";
 import Compteur from "@/components/Compteur.vue";
 import QuizCarte from "@/components/QuizCarte.vue";
 import BadgeCarte from "@/components/BadgeContainer.vue";
@@ -63,6 +59,9 @@ import { ChargerInteractionsUsecase } from "@/interactions/chargerInteractions.u
 import { InteractionsPresenterImpl, InteractionViewModel } from "@/interactions/adapters/interactions.presenter.impl";
 import InteractionCard from "@/components/InteractionCard.vue";
 import { InteractionsRepositoryAxios } from "@/interactions/adapters/interactionsRepository.axios";
+import { ChargementScoreUsecase } from "@/score/chargementScoreUsecase";
+import { ScoreRepositoryAxios } from "@/score/adapters/scoreRepository.axios";
+import { ChargementScorePresenterImpl } from "@/score/adapters/chargementScorePresenterImpl";
 export default defineComponent({
   name: "Coach",
   methods: { getDeviceType },
@@ -74,11 +73,9 @@ export default defineComponent({
   },
   setup() {
     const utilisateur = ref<string>();
-    const compteurViewModel = ref<CompteurViewModel[]>();
-    const badgeViewModel = ref<BadgeViewModel[]>();
-    const quizViewModel = ref<QuizzViewModel[]>();
     const empreinteViewModel = ref<EmpreinteViewModel>();
     const interactionsViewModel = ref<InteractionViewModel[]>();
+    const scoreViewModel = ref<ScoreViewModel>();
     const isLoading = ref<boolean>(true);
 
     function mapValueBilan(viewModel: EmpreinteViewModel) {
@@ -89,14 +86,20 @@ export default defineComponent({
     function mapValuesInteractions(viewModel: InteractionViewModel[]) {
       interactionsViewModel.value = viewModel;
     }
+
+    function mapValuesScore(viewModel: ScoreViewModel) {
+      scoreViewModel.value = viewModel;
+      store.commit("utilisateur/setScore", viewModel.score);
+    }
+
     const lancerChargementDesDonnees = () => {
-      console.log("toto");
       isLoading.value = true;
       const idUtilisateur = store.getters["utilisateur/getId"];
       const chargementEmpreinteUseCase = new ChargementEmpreinteUsecase(new EmpreinteRepositoryAxios());
       const chargerInteractionsUseCase = new ChargerInteractionsUsecase(new InteractionsRepositoryAxios());
-
+      const chargerScoreUseCase = new ChargementScoreUsecase(new ScoreRepositoryAxios());
       Promise.all([
+        chargerScoreUseCase.execute(idUtilisateur, new ChargementScorePresenterImpl(mapValuesScore)),
         chargementEmpreinteUseCase.execute(idUtilisateur, new ChargementEmpreintePresenterImpl(mapValueBilan)),
         chargerInteractionsUseCase.execute(idUtilisateur, new InteractionsPresenterImpl(mapValuesInteractions)),
       ]).then(() => {
@@ -108,12 +111,10 @@ export default defineComponent({
     return {
       isLoading,
       utilisateur,
-      badgeViewModel,
-      quizViewModel,
-      compteurViewModel,
       empreinteViewModel,
       interactionsViewModel,
       lancerChargementDesDonnees,
+      scoreViewModel,
     };
   },
 });

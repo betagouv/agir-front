@@ -18,7 +18,7 @@
   </div>
 </template>
 <script lang="ts">
-import { QuizzViewModel } from "@/dashboard/ports/chargementDashboard.presenter";
+import { QuizzViewModel } from "@/score/ports/chargementScorePresenter";
 
 export default {
   name: "QuizCarte",
@@ -31,6 +31,4 @@ export default {
   },
 };
 </script>
-<style scoped>
-
-</style>
+<style scoped></style>
