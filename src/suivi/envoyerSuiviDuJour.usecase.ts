@@ -47,7 +47,7 @@ export class EnvoyerSuiviDuJourUsecase {
     await this.suiviRepository.ajouter("alimentation", suiviAlimentation.valeurs, idUtilisateur);
     await this.suiviRepository.ajouter("transport", suiviTransport.valeurs, idUtilisateur);
     const resultat = await this.suiviRepository.recupererResultat(idUtilisateur);
-    await this.interactionRepository.interactionAEteTerminee(idUtilisateur, interactionId);
+    await this.interactionRepository.interactionAEteTerminee(interactionId, idUtilisateur);
     presenter.presente(resultat);
   }
 }
