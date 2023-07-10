@@ -117,7 +117,7 @@
 
 <script lang="ts">
 import { DernierSuiviDuJourViewModel } from "@/suivi/adapters/dernierSuiviDuJour.presenter.impl";
-import { defineComponent, getCurrentInstance, ref, watch } from "vue";
+import { defineComponent, ref, watch } from "vue";
 
 export default defineComponent({
   props: {

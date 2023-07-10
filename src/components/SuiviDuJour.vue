@@ -38,6 +38,7 @@
                     :etape-courante="etapeCourante"
                     @update:model-value="miseAjourReponseSuiviDuJourTransport"
                     :model-value="suiviDuJourTransport"
+                    :dernier-suivi-du-jour-view-model="dernierSuiviDuJourTransportViewmodel"
                   />
                 </div>
                 <div class="last-step-container" v-else>
@@ -141,6 +142,7 @@ export default defineComponent({
     let suiviDuJourAlimentation = new Map<string, string>();
     let suiviDuJourTransport = new Map<string, string>();
     let dernierSuiviDuJourAlimentationViewmodel = ref<DernierSuiviDuJourViewModel>();
+    let dernierSuiviDuJourTransportViewmodel = ref<DernierSuiviDuJourViewModel>();
     const suiviDuJourResultatsViewModel = ref<SuiviDuJourResultatsViewModel>({
       impactCarbonDuJour: { valeur: 0, pictoSens: "", commentaire: "", variation: 0 },
       suivisPrecedent: { valeursDesSuivis: [], datesDesSuivis: [], moyenneDesSuivis: [] },
@@ -153,8 +155,11 @@ export default defineComponent({
       const chargerDernierSuiviAlimentation = new ObtenirDernierSuiviUsecase(new SuiviDuJourRepositoryAxios());
 
       function mapSuiviAlimentation(dernierSuiviViewModel: DernierSuiviDuJourViewModel) {
-        console.log(dernierSuiviViewModel);
         dernierSuiviDuJourAlimentationViewmodel.value = dernierSuiviViewModel;
+      }
+      function mapSuiviTransport(dernierSuiviViewModel: DernierSuiviDuJourViewModel) {
+        dernierSuiviDuJourTransportViewmodel.value = dernierSuiviViewModel;
+        console.log("transport", dernierSuiviDuJourTransportViewmodel.value);
       }
 
       chargerDernierSuiviAlimentation.execute(
@@ -162,6 +167,7 @@ export default defineComponent({
         "alimentation",
         new DernierSuiviDuJourPresenterImpl(mapSuiviAlimentation, new DateTimeTypeScript())
       );
+      chargerDernierSuiviAlimentation.execute(idUtilisateur, "transport", new DernierSuiviDuJourPresenterImpl(mapSuiviTransport, new DateTimeTypeScript()));
     });
 
     function etapeSuivante() {
@@ -213,6 +219,7 @@ export default defineComponent({
       suiviDuJourAlimentation,
       suiviDuJourTransport,
       dernierSuiviDuJourAlimentationViewmodel,
+      dernierSuiviDuJourTransportViewmodel,
       suiviDuJourResultatsViewModel,
     };
   },
