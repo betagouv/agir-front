@@ -1,9 +1,16 @@
 import { ElementSuiviCarbone, Resultat } from "@/suivi/envoyerSuiviDuJour.usecase";
 import { SuiviDuJourPresenter } from "@/suivi/ports/suiviDuJour.presenter";
 
+export enum ImpactCarboneCategorie {
+  TRANSPORT = "transport",
+  ALIMENTATION = "alimentation",
+}
+
 export interface ImpactCarboneDuJourViewModel {
-  valeur: string;
+  valeur: number;
   pictoSens: string;
+  commentaire: string;
+  variation: number;
 }
 export interface SuivisPrecedentViewModel {
   datesDesSuivis: string[];
@@ -29,8 +36,26 @@ export class SuiviDuJourPresenterImpl implements SuiviDuJourPresenter {
     this._viewModel = viewModel;
   }
 
+  getImpactCarboneCategorie(impactCarboneNature: string): ImpactCarboneCategorie {
+    if (
+      impactCarboneNature.includes("km") ||
+      impactCarboneNature.includes("velo") ||
+      impactCarboneNature.includes("train") ||
+      impactCarboneNature.includes("pied") ||
+      impactCarboneNature.includes("metro") ||
+      impactCarboneNature.includes("bus")
+    ) {
+      return ImpactCarboneCategorie.TRANSPORT;
+    }
+    return ImpactCarboneCategorie.ALIMENTATION;
+  }
+
   getElementCarboneNature(valeur: string) {
-    return valeur.replace("_", " ");
+    const valeurFinale = valeur.replace("_", " ");
+    if (this.getImpactCarboneCategorie(valeur) == ImpactCarboneCategorie.ALIMENTATION) {
+      return valeurFinale.replace("vegetarien", "légumes").replace("vegetalien", "sans produits animaux");
+    }
+    return valeurFinale;
   }
 
   getAdditionCarbone(listDesValeurs: ElementSuiviCarbone[]): LigneCarbone[] {
@@ -40,17 +65,21 @@ export class SuiviDuJourPresenterImpl implements SuiviDuJourPresenter {
     for (let index = 0; index < listDesValeurs.length; index++) {
       const carboneValeur = listDesValeurs[index];
       const [debut, fin] = carboneValeur.titre.split("_");
-      resultats.push({
-        valeur: this.getValeur(carboneValeur, debut, fin),
-        impactCarbone: `+${carboneValeur.impactCarbone / 1000} kg`,
-        styleFont: this.getStyleFont(index),
-      });
+      if (carboneValeur.valeur > 0) {
+        resultats.push({
+          valeur: this.getValeur(carboneValeur, debut, fin),
+          impactCarbone: `+${carboneValeur.impactCarbone / 1000} kg`,
+          styleFont: this.getStyleFont(index),
+        });
+      }
     }
     return resultats;
   }
 
   private getValeur(carboneValeur: ElementSuiviCarbone, debut: string, fin: string): string {
-    return `${carboneValeur.valeur} ${debut == "km" ? "km de" : "repas avec"} ${debut == "km" ? fin : this.getElementCarboneNature(carboneValeur.titre)}`;
+    return `${carboneValeur.valeur} ${this.getImpactCarboneCategorie(carboneValeur.titre) == ImpactCarboneCategorie.TRANSPORT ? "km de" : "repas avec"} ${
+      debut == "km" ? fin : this.getElementCarboneNature(carboneValeur.titre)
+    }`;
   }
 
   private getStyleFont(index: number): string {
@@ -63,8 +92,10 @@ export class SuiviDuJourPresenterImpl implements SuiviDuJourPresenter {
   presente(resultat: Resultat) {
     this._viewModel({
       impactCarbonDuJour: {
-        valeur: resultat?.impactCarbonDuJour.valeur,
-        pictoSens: resultat?.impactCarbonDuJour.enHausse ? "fr-icon-arrow-right-up-circle-fill" : "fr-icon-arrow-right-down-circle-fill",
+        valeur: resultat?.impactCarbonDuJour.valeur / 1000,
+        pictoSens: resultat?.impactCarbonDuJour.variation > 0 ? "fr-icon-arrow-right-up-circle-fill" : "fr-icon-arrow-right-down-circle-fill",
+        commentaire: resultat?.impactCarbonDuJour.variation > 0 ? "En hausse" : "En baisse",
+        variation: resultat.impactCarbonDuJour.variation / 1000,
       },
       suivisPrecedent: {
         datesDesSuivis: resultat?.suivisPrecedent.datesDesSuivis,

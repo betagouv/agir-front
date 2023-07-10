@@ -1,8 +1,6 @@
 import { DernierSuivi, SuiviRepository } from "@/suivi/ports/suivi.repository";
-import { Resultat } from "@/suivi/envoyerSuiviDuJour.usecase";
+import { ElementSuiviCarbone, Resultat } from "@/suivi/envoyerSuiviDuJour.usecase";
 import { AxiosFactory } from "@/axios.factory";
-import { SuiviDuJourResultatsViewModel } from "@/suivi/adapters/suiviDuJour.presenter.impl";
-import impactDuJour from "@/components/ImpactDuJour.vue";
 
 export interface SuiviDuJourGraphDataApiModel {
   date: string;
@@ -15,6 +13,46 @@ export interface SuiviDuJourApiModel {
   dernier_suivi: Map<string, string>;
   moyenne: number;
   derniers_totaux: SuiviDuJourGraphDataApiModel[];
+}
+
+function extractedDetailsCarbone(data: Map<string, string>): ElementSuiviCarbone[] {
+  let derniersSuivisDetails: ElementSuiviCarbone[] = [];
+  delete data["total_impact"];
+
+  for (let i = 0; i < Object.keys(data).length; i += 2) {
+    const key1 = Object.keys(data)[i];
+    const key2 = Object.keys(data)[i + 1];
+    const value1 = data[key1];
+    const value2 = data[key2];
+
+    derniersSuivisDetails.push({
+      titre: key1,
+      valeur: value1,
+      impactCarbone: value2,
+    });
+  }
+  return derniersSuivisDetails;
+}
+
+function getValeursDesSuivis(listeDesAdditionsCarbone: SuiviDuJourGraphDataApiModel[]): number[] {
+  let valeurDesSuivis: number[] = [];
+
+  for (let index = 0; index < listeDesAdditionsCarbone.length; index++) {
+    const additionCarbon = listeDesAdditionsCarbone[index];
+    valeurDesSuivis.push(additionCarbon.valeur);
+  }
+  return valeurDesSuivis;
+}
+
+function getValeursDesDates(listeDesAdditionsCarbone: SuiviDuJourGraphDataApiModel[]): string[] {
+  let valeurDesDates: string[] = [];
+
+  for (let index = 0; index < listeDesAdditionsCarbone.length; index++) {
+    const additionCarbon = listeDesAdditionsCarbone[index];
+    const [dateDuSuivi, heureDuSuivi] = additionCarbon.date.split("T");
+    valeurDesDates.push(dateDuSuivi);
+  }
+  return valeurDesDates;
 }
 
 export class SuiviDuJourRepositoryAxios implements SuiviRepository {
@@ -38,26 +76,24 @@ export class SuiviDuJourRepositoryAxios implements SuiviRepository {
     };
   }
 
-  recupererResultat(): Resultat {
+  async recupererResultat(idUtilisateur: string): Promise<Resultat> {
+    const axiosInstance = AxiosFactory.getAxios();
+    const response = await axiosInstance.get<SuiviDuJourApiModel>(`/utilisateurs/${idUtilisateur}/suivi_dashboard`);
+    const responseData = response.data;
+    const dernierSuiviDetails = extractedDetailsCarbone(responseData.dernier_suivi);
+
     return {
-      impactCarbonDuJour: { valeur: "21", enHausse: true },
-      suivisPrecedent: {
-        datesDesSuivis: ["27/07", "28/07", "29/07", "30/07"],
-        valeursDesSuivis: [23000, 43000, 12000, 25000],
-        moyenneDesSuivis: 21000,
+      impactCarbonDuJour: {
+        valeur: responseData.impact_dernier_suivi,
+        enHausse: responseData.variation <= 0,
+        variation: responseData.variation,
       },
-      additionCarboneDuJour: [
-        { valeur: 2, impactCarbone: 2000, titre: "viande_rouge" },
-        { valeur: 20, impactCarbone: 8000, titre: "km_voiture" },
-        { valeur: 10, impactCarbone: 4000, titre: "km_metro" },
-        { valeur: 20, impactCarbone: 2000, titre: "km_velo" },
-        { valeur: 15, impactCarbone: 80000, titre: "km_train" },
-        { valeur: 40, impactCarbone: 16000, titre: "km_bus" },
-        { valeur: 1, impactCarbone: 1000, titre: "viande_blanche" },
-        { valeur: 1, impactCarbone: 1000, titre: "poisson_blanc" },
-        { valeur: 2, impactCarbone: 2000, titre: "oeufs" },
-        { valeur: 1, impactCarbone: 1000, titre: "poisson_rouge" },
-      ],
+      suivisPrecedent: {
+        datesDesSuivis: getValeursDesDates(responseData.derniers_totaux),
+        valeursDesSuivis: getValeursDesSuivis(responseData.derniers_totaux),
+        moyenneDesSuivis: responseData.moyenne,
+      },
+      additionCarboneDuJour: dernierSuiviDetails,
     };
   }
 }

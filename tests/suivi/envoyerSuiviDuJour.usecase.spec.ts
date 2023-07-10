@@ -1,5 +1,5 @@
-import { EnvoyerSuiviDuJourUsecase, Resultat, SuiviAlimentationInput } from "../../src/suivi/envoyerSuiviDuJour.usecase";
-import { ImpactCarboneDuJourViewModel, SuiviDuJourPresenterImpl, SuiviDuJourResultatsViewModel } from "../../src/suivi/adapters/suiviDuJour.presenter.impl";
+import { EnvoyerSuiviDuJourUsecase, Resultat } from "../../src/suivi/envoyerSuiviDuJour.usecase";
+import { SuiviDuJourPresenterImpl, SuiviDuJourResultatsViewModel } from "../../src/suivi/adapters/suiviDuJour.presenter.impl";
 import { DernierSuivi, SuiviRepository } from "../../src/suivi/ports/suivi.repository";
 
 class SpySuiviRepository implements SuiviRepository {
@@ -22,8 +22,8 @@ class SpySuiviRepository implements SuiviRepository {
     this._valeursEnvoyees.push(valeurs);
   }
 
-  recupererResultat(): Resultat {
-    return this._resultat;
+  recupererResultat(): Promise<Resultat> {
+    return Promise.resolve(this._resultat);
   }
 
   recupererDernierSuivi(idUtilisateur: string, type: string): Promise<DernierSuivi> {
@@ -38,7 +38,7 @@ describe("Fichier de tests de l'envoie du suivi du jour", () => {
   it("Après avoir envoyé le suivi du jour doit presenter un dashboard dans le cas d'un bilan en hausse", () => {
     // GIVEN
     const resultat = {
-      impactCarbonDuJour: { valeur: "21", enHausse: true },
+      impactCarbonDuJour: { valeur: 21000, enHausse: true, variation: 3000 },
       suivisPrecedent: {
         datesDesSuivis: ["27/07", "28/07", "29/07", "30/07"],
         valeursDesSuivis: [23000, 43000, 12000, 25000],
@@ -77,8 +77,10 @@ describe("Fichier de tests de l'envoie du suivi du jour", () => {
     function expectation(suiviDuJourResultat: SuiviDuJourResultatsViewModel) {
       expect(suiviDuJourResultat).toStrictEqual<SuiviDuJourResultatsViewModel>({
         impactCarbonDuJour: {
-          valeur: "21",
+          valeur: 21,
           pictoSens: "fr-icon-arrow-right-up-circle-fill",
+          commentaire: "En hausse",
+          variation: 3,
         },
         suivisPrecedent: {
           datesDesSuivis: ["27/07", "28/07", "29/07", "30/07"],

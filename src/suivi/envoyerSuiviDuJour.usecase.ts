@@ -16,8 +16,9 @@ export interface ElementSuiviCarbone {
 }
 export interface Resultat {
   impactCarbonDuJour: {
-    valeur: string;
+    valeur: number;
     enHausse: boolean;
+    variation: number;
   };
   suivisPrecedent: {
     datesDesSuivis: string[];
@@ -33,10 +34,15 @@ export class EnvoyerSuiviDuJourUsecase {
     this.suiviRepository = suiviRepository;
   }
 
-  execute(suiviAlimentation: SuiviAlimentationInput, suiviTransport: SuiviTransportInput, presenter: SuiviDuJourPresenter, idUtilisateur: string) {
+  async execute(
+    suiviAlimentation: SuiviAlimentationInput,
+    suiviTransport: SuiviTransportInput,
+    presenter: SuiviDuJourPresenter,
+    idUtilisateur: string
+  ): Promise<void> {
     this.suiviRepository.ajouter("alimentation", suiviAlimentation.valeurs, idUtilisateur);
     this.suiviRepository.ajouter("transport", suiviTransport.valeurs, idUtilisateur);
-    const resultat = this.suiviRepository.recupererResultat();
+    const resultat = await this.suiviRepository.recupererResultat(idUtilisateur);
     presenter.presente(resultat);
   }
 }

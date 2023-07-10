@@ -3,7 +3,7 @@
     <div class="col-demo">
       <div class="fr-tile fr-enlarge-link fr-tile--horizontal fr-tile--vertical-md graph-container" id="tile-6538">
         <div class="fr-grid-row">
-          <div :class="'fr-col-12'">
+          <div class="fr-col-11">
             <div class="col-demo">
               <div class="graph-card-custom-body">
                 <div class="fr-tile__title">
@@ -12,7 +12,7 @@
                 <br />
                 <div class="fr-tile__desc">
                   <div class="graph-schema">
-                    <LineChart :chartData="donneesDuGraph" :options="optionsDuGraph" />
+                    <LineChart :chartData="getDonneesDuGraph" :options="getOptionsDuGraph" />
                   </div>
                 </div>
               </div>
@@ -38,6 +38,66 @@ export default defineComponent({
     DeviceType() {
       return DeviceType;
     },
+    getDate() {
+      console.log("date du graph", this.datesDuGraph);
+
+      return this.datesDuGraph;
+    },
+
+    getDonneesDuGraph() {
+      return {
+        labels: this.datesDuGraph,
+        datasets: [
+          {
+            label: "Variation des suivis",
+            backgroundColor: "#000091",
+            borderColor: "#000091",
+            pointStyle: "circle" as const,
+            data: this.valeursCarboneDuGraph,
+          },
+          {
+            label: "Votre moyenne",
+            backgroundColor: "#f6f6f6",
+            borderColor: "#000000",
+            borderDash: [5, 5],
+            pointStyle: false as const,
+            data: this.moyenneDesSuivis,
+          },
+        ],
+      };
+    },
+    getOptionsDuGraph() {
+      return {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: true,
+            labels: {
+              font: {
+                size: 14,
+                weight: "bold",
+                family: "Marianne,arial,sans-serif",
+              },
+            },
+            position: "right",
+            align: "center",
+          },
+        },
+        scales: {
+          y: {
+            border: {
+              display: false,
+            },
+          },
+          x: {
+            grid: {
+              display: false,
+            },
+          },
+        },
+      };
+    },
   },
   components: { LineChart },
   props: {
@@ -53,64 +113,6 @@ export default defineComponent({
       type: Object as () => number[],
       required: true,
     },
-  },
-  data() {
-    const donneesDuGraph = {
-      labels: this.datesDuGraph,
-      datasets: [
-        {
-          label: "Variation des suivis par jour",
-          backgroundColor: "#000091",
-          borderColor: "#000091",
-          pointStyle: "circle" as const,
-          data: this.valeursCarboneDuGraph,
-        },
-        {
-          label: "Votre moyenne",
-          backgroundColor: "#f6f6f6",
-          borderColor: "#000000",
-          borderDash: [5, 5],
-          pointStyle: false as const,
-          data: this.moyenneDesSuivis,
-        },
-      ],
-    };
-
-    const optionsDuGraph = {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: {
-          display: true,
-          labels: {
-            font: {
-              size: 15,
-              weight: "bold",
-              family: "Marianne,arial,sans-serif",
-            },
-          },
-          position: "right",
-          align: "start",
-        },
-      },
-      scales: {
-        y: {
-          border: {
-            display: false,
-          },
-        },
-        x: {
-          grid: {
-            display: false,
-          },
-        },
-      },
-    };
-
-    return {
-      donneesDuGraph,
-      optionsDuGraph,
-    };
   },
 });
 </script>

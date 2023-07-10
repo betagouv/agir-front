@@ -81,7 +81,7 @@
             <NombreDePointsDuJour :nombre-de-points-du-jour="25" />
           </div>
           <div class="fr-col-12">
-            <ImpactDuJour :consommation-du-jour="'+ 7'" :equivalent-en-litres="'14'" />
+            <ImpactDuJour :consommation-du-jour="suiviDuJourResultatsViewModel.impactCarbonDuJour.valeur" :equivalent-en-litres="'14'" />
           </div>
         </div>
       </div>
@@ -100,13 +100,12 @@ import SuiviDuJourResultats from "@/components/SuiviDuJourResultats.vue";
 import SuiviDuJourPremiereEtape from "@/components/SuiviDuJourPremiereEtape.vue";
 import SuiviDuJourSecondeEtape from "@/components/SuiviDuJourSecondeEtape.vue";
 import { EnvoyerSuiviDuJourUsecase } from "@/suivi/envoyerSuiviDuJour.usecase";
-import { ImpactCarboneDuJourViewModel, SuiviDuJourPresenterImpl, SuiviDuJourResultatsViewModel } from "@/suivi/adapters/suiviDuJour.presenter.impl";
-import { SuiviDuJourRepositoryInMemory } from "@/suivi/adapters/suiviDuJour.repository.inMemory";
+import { SuiviDuJourPresenterImpl, SuiviDuJourResultatsViewModel } from "@/suivi/adapters/suiviDuJour.presenter.impl";
 import { SuiviDuJourRepositoryAxios } from "@/suivi/adapters/suiviDuJour.repository.axios";
 import { ObtenirDernierSuiviUsecase } from "@/suivi/obtenirDernierSuivi.usecase";
-import { DernierSuiviDuJourPresenterImpl, DernierSuiviDuJourViewModel } from "@/suivi/adapters/dernierSuiviDuJour.presenter.impl";
 import { DateTimeTypeScript } from "@/DateTime";
 import NombreDePointsDuJour from "@/components/NombreDePointsDuJour.vue";
+import { DernierSuiviDuJourPresenterImpl, DernierSuiviDuJourViewModel } from "@/suivi/adapters/dernierSuiviDuJour.presenter.impl";
 
 export default defineComponent({
   name: "SuiviDuJour",
@@ -142,8 +141,9 @@ export default defineComponent({
     let suiviDuJourTransport = new Map<string, string>();
     let dernierSuiviDuJourAlimentationViewmodel = ref<DernierSuiviDuJourViewModel>();
     const suiviDuJourResultatsViewModel = ref<SuiviDuJourResultatsViewModel>({
-      impactCarbonDuJour: { valeur: "", pictoSens: "" },
-      suivisPrecedent: { valeursDesSuivis: [], datesDesSuivis: [] },
+      impactCarbonDuJour: { valeur: 0, pictoSens: "", commentaire: "", variation: 0 },
+      suivisPrecedent: { valeursDesSuivis: [], datesDesSuivis: [], moyenneDesSuivis: [] },
+      additionCarbone: [],
     });
 
     onMounted(() => {
@@ -178,6 +178,7 @@ export default defineComponent({
     const calculEmpreinteDuJour = () => {
       const idUtilisateur = store.getters["utilisateur/getId"];
       const envoyerSuiviDuJour = new EnvoyerSuiviDuJourUsecase(new SuiviDuJourRepositoryAxios());
+
       envoyerSuiviDuJour.execute(
         { valeurs: suiviDuJourAlimentation },
         { valeurs: suiviDuJourTransport },
@@ -196,6 +197,7 @@ export default defineComponent({
 
     function mapImpactCarboneDuJour(impactDuJourViewModel: SuiviDuJourResultatsViewModel) {
       suiviDuJourResultatsViewModel.value = impactDuJourViewModel;
+      console.log(suiviDuJourResultatsViewModel);
     }
 
     return {

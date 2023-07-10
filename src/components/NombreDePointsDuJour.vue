@@ -15,7 +15,7 @@ export default {
   name: "NombreDePointsDuJour",
   props: {
     nombreDePointsDuJour: {
-      type: Object as () => number,
+      type: Number,
       required: true,
     },
   },
