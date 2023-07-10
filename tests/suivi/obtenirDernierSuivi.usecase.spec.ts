@@ -32,11 +32,8 @@ class MockSuiviRepository implements SuiviRepository {
     });
   }
 
-  recupererResultat(): Resultat {
-    return {
-      valeur: "valeur",
-      enHausse: false,
-    };
+  recupererResultat(): Promise<Resultat> {
+    throw Error;
   }
 }
 describe("Fichier de tests concernant la récupération du dernier suivi", () => {
