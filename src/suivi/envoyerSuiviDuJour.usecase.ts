@@ -43,11 +43,11 @@ export class EnvoyerSuiviDuJourUsecase {
     presenter: SuiviDuJourPresenter,
     idUtilisateur: string,
     interactionId: string
-  ): Promise<void>  {
+  ): Promise<void> {
     await this.suiviRepository.ajouter("alimentation", suiviAlimentation.valeurs, idUtilisateur);
     await this.suiviRepository.ajouter("transport", suiviTransport.valeurs, idUtilisateur);
-    const resultat = await this.suiviRepository.recupererResultat();
-    this.interactionRepository.interactionAEteTerminee(idUtilisateur, interactionId);
+    const resultat = await this.suiviRepository.recupererResultat(idUtilisateur);
+    await this.interactionRepository.interactionAEteTerminee(idUtilisateur, interactionId);
     presenter.presente(resultat);
   }
 }
