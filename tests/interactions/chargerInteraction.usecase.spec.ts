@@ -31,6 +31,7 @@ describe("Fichier de tests pour charger les interactions", () => {
       illustrationURL: "illustrationURL",
       url: "/quiz/id",
       aEteFaite: false,
+      idDuContenu: "idDuContenu",
     };
     const usecase = new ChargerInteractionsUsecase(new InteractionsRepositoryForTest([interactionQuizzAFaire]));
     await usecase.execute("1", new InteractionsPresenterImpl(expectation));
@@ -46,7 +47,7 @@ describe("Fichier de tests pour charger les interactions", () => {
           miseEnAvant: "miseEnAvant",
           type: "QUIZ",
           illustrationURL: "illustrationURL",
-          url: "/quiz/id",
+          url: "/quiz/idDuContenu",
           isUrlExterne: false,
         },
       ]);
@@ -68,6 +69,7 @@ describe("Fichier de tests pour charger les interactions", () => {
           illustrationURL: "illustrationURL",
           url: "url",
           aEteFaite: false,
+          idDuContenu: "id",
         },
       ])
     );
@@ -106,6 +108,7 @@ describe("Fichier de tests pour charger les interactions", () => {
           illustrationURL: "illustrationURL",
           url: "",
           aEteFaite: false,
+          idDuContenu: "id",
         },
       ])
     );
@@ -144,6 +147,7 @@ describe("Fichier de tests pour charger les interactions", () => {
           illustrationURL: "illustrationURL",
           url: "",
           aEteFaite: false,
+          idDuContenu: "id",
         },
       ])
     );
@@ -182,6 +186,7 @@ describe("Fichier de tests pour charger les interactions", () => {
           illustrationURL: "illustrationURL",
           url: "",
           aEteFaite: false,
+          idDuContenu: "id",
         },
         {
           id: "id2",
@@ -194,6 +199,7 @@ describe("Fichier de tests pour charger les interactions", () => {
           illustrationURL: "illustrationURL",
           url: "",
           aEteFaite: true,
+          idDuContenu: "id",
         },
       ])
     );

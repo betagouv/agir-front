@@ -16,6 +16,7 @@ export interface InteractionApiModel {
   done: boolean;
   points: number;
   reco_score: number;
+  content_id: string;
 }
 export class InteractionsRepositoryAxios implements InteractionsRepository {
   async chargerInteractions(idUtilisateur: string): Promise<Interaction[]> {
@@ -34,6 +35,7 @@ export class InteractionsRepositoryAxios implements InteractionsRepository {
         illustrationURL: apiModel.image_url,
         url: apiModel.url || "",
         aEteFaite: apiModel.done,
+        idDuContenu: apiModel.content_id,
       };
       return interaction;
     });

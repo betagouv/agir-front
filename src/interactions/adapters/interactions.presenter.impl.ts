@@ -58,7 +58,7 @@ export class InteractionsPresenterImpl implements InteractionsPresenter {
   private determineUrl(interaction: Interaction) {
     switch (interaction.type) {
       case InteractionType.QUIZ:
-        return `/quiz/${interaction.id}`;
+        return `/quiz/${interaction.idDuContenu}`;
       case InteractionType.ARTICLE:
         return interaction.url;
       case InteractionType.KYC:

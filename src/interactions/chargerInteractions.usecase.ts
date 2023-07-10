@@ -23,6 +23,7 @@ export interface Interaction {
   illustrationURL: string;
   url: string;
   aEteFaite: boolean;
+  idDuContenu: string;
 }
 
 export class ChargerInteractionsUsecase {
