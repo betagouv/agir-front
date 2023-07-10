@@ -25,9 +25,9 @@
     <div v-if="checkboxCar" class="fr-fieldset__element field-response-container">
       <div class="number-input-container" id="input-group-2843">
         <input
-          @input="handleReponse(modelValue as Map<string, string>, $event, 'voiture')"
+          @input="handleReponse(modelValue as Map<string, string>, $event, 'km_voiture')"
           min="0"
-          :value="(modelValue as Map<string, string>).get('voiture') || '0'"
+          :value="(modelValue as Map<string, string>).get('km_voiture') || '0'"
           class="fr-input"
           aria-describedby="text-car-messages"
           name="text"
@@ -56,9 +56,9 @@
     <div v-if="checkboxMotorcycle" class="fr-fieldset__element field-response-container">
       <div class="number-input-container" id="input-group-2843">
         <input
-          @input="handleReponse(modelValue as Map<string, string>, $event, 'moto')"
+          @input="handleReponse(modelValue as Map<string, string>, $event, 'km_scooter')"
           min="0"
-          :value="(modelValue as Map<string, string>).get('moto') || '0'"
+          :value="(modelValue as Map<string, string>).get('km_scooter') || '0'"
           class="fr-input"
           aria-describedby="text-motorcycle-messages"
           name="text"
@@ -81,9 +81,9 @@
     <div v-if="checkboxSubway" class="fr-fieldset__element field-response-container">
       <div class="number-input-container" id="input-group-2843">
         <input
-          @input="handleReponse(modelValue as Map<string, string>, $event, 'metro/tramway')"
+          @input="handleReponse(modelValue as Map<string, string>, $event, 'metro_tram')"
           min="0"
-          :value="(modelValue as Map<string, string>).get('metro/tramway') || '0'"
+          :value="(modelValue as Map<string, string>).get('metro_tram') || '0'"
           class="fr-input"
           aria-describedby="text-subway-messages"
           name="text"
@@ -92,7 +92,7 @@
         />
         <div class="fr-messages-group" id="text-subway-messages" aria-live="assertive"></div>
       </div>
-      <p class="field-response-desc">Km métro</p>
+      <p class="field-response-desc">Km métro/tramway</p>
     </div>
   </div>
   <div class="transport-km-value-container">

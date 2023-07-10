@@ -1,21 +1,108 @@
-import { Resultat } from "@/suivi/envoyerSuiviDuJour.usecase";
+import { ElementSuiviCarbone, Resultat } from "@/suivi/envoyerSuiviDuJour.usecase";
 import { SuiviDuJourPresenter } from "@/suivi/ports/suiviDuJour.presenter";
 
+export enum ImpactCarboneCategorie {
+  TRANSPORT = "transport",
+  ALIMENTATION = "alimentation",
+}
+
 export interface ImpactCarboneDuJourViewModel {
-  valeur: string;
+  valeur: number;
   pictoSens: string;
+  commentaire: string;
+  variation: number;
+}
+export interface SuivisPrecedentViewModel {
+  datesDesSuivis: string[];
+  valeursDesSuivis: number[];
+  moyenneDesSuivis: number[];
+}
+
+export interface LigneCarbone {
+  valeur: string;
+  impactCarbone: string;
+  styleFont: string;
+}
+
+export interface SuiviDuJourResultatsViewModel {
+  impactCarbonDuJour: ImpactCarboneDuJourViewModel;
+  suivisPrecedent: SuivisPrecedentViewModel;
+  additionCarbone: LigneCarbone[];
 }
 export class SuiviDuJourPresenterImpl implements SuiviDuJourPresenter {
-  private _viewModel: (impactDuJourViewModel: ImpactCarboneDuJourViewModel) => void;
+  private _viewModel: (suiviDuJourResultat: SuiviDuJourResultatsViewModel) => void;
 
-  constructor(viewModel: (impactCarboneDuJour: ImpactCarboneDuJourViewModel) => void) {
+  constructor(viewModel: (suiviDuJourResultat: SuiviDuJourResultatsViewModel) => void) {
     this._viewModel = viewModel;
   }
 
+  getImpactCarboneCategorie(impactCarboneNature: string): ImpactCarboneCategorie {
+    if (
+      impactCarboneNature.includes("km") ||
+      impactCarboneNature.includes("velo") ||
+      impactCarboneNature.includes("train") ||
+      impactCarboneNature.includes("pied") ||
+      impactCarboneNature.includes("metro") ||
+      impactCarboneNature.includes("bus")
+    ) {
+      return ImpactCarboneCategorie.TRANSPORT;
+    }
+    return ImpactCarboneCategorie.ALIMENTATION;
+  }
+
+  getElementCarboneNature(valeur: string) {
+    const valeurFinale = valeur.replace("_", " ");
+    if (this.getImpactCarboneCategorie(valeur) == ImpactCarboneCategorie.ALIMENTATION) {
+      return valeurFinale.replace("vegetarien", "légumes").replace("vegetalien", "sans produits animaux");
+    }
+    return valeurFinale;
+  }
+
+  getAdditionCarbone(listDesValeurs: ElementSuiviCarbone[]): LigneCarbone[] {
+    let resultats: LigneCarbone[] = [];
+    listDesValeurs.sort((element1, element2) => (element1.impactCarbone > element2.impactCarbone ? -1 : 1));
+
+    for (let index = 0; index < listDesValeurs.length; index++) {
+      const carboneValeur = listDesValeurs[index];
+      const [debut, fin] = carboneValeur.titre.split("_");
+      if (carboneValeur.valeur > 0) {
+        resultats.push({
+          valeur: this.getValeur(carboneValeur, debut, fin),
+          impactCarbone: `+${carboneValeur.impactCarbone / 1000} kg`,
+          styleFont: this.getStyleFont(index),
+        });
+      }
+    }
+    return resultats;
+  }
+
+  private getValeur(carboneValeur: ElementSuiviCarbone, debut: string, fin: string): string {
+    return `${carboneValeur.valeur} ${this.getImpactCarboneCategorie(carboneValeur.titre) == ImpactCarboneCategorie.TRANSPORT ? "km de" : "repas avec"} ${
+      debut == "km" ? fin : this.getElementCarboneNature(carboneValeur.titre)
+    }`;
+  }
+
+  private getStyleFont(index: number): string {
+    return index < 3 ? "carbon-value-item-primary" : "carbon-value-item-secondary";
+  }
+
+  private getMoyenneDesSuivis(resultat: Resultat): number[] {
+    return new Array(resultat?.suivisPrecedent.datesDesSuivis.length).fill(resultat.suivisPrecedent.moyenneDesSuivis / 1000);
+  }
   presente(resultat: Resultat) {
     this._viewModel({
-      valeur: resultat.valeur,
-      pictoSens: resultat?.enHausse ? "fr-icon-arrow-right-up-circle-fill" : "fr-icon-arrow-right-down-circle-fill",
+      impactCarbonDuJour: {
+        valeur: resultat?.impactCarbonDuJour.valeur / 1000,
+        pictoSens: resultat?.impactCarbonDuJour.variation > 0 ? "fr-icon-arrow-right-up-circle-fill" : "fr-icon-arrow-right-down-circle-fill",
+        commentaire: resultat?.impactCarbonDuJour.variation > 0 ? "En hausse" : "En baisse",
+        variation: resultat.impactCarbonDuJour.variation / 1000,
+      },
+      suivisPrecedent: {
+        datesDesSuivis: resultat?.suivisPrecedent.datesDesSuivis,
+        valeursDesSuivis: resultat?.suivisPrecedent.valeursDesSuivis.map((impactCarbon) => impactCarbon / 1000),
+        moyenneDesSuivis: this.getMoyenneDesSuivis(resultat),
+      },
+      additionCarbone: this.getAdditionCarbone(resultat?.additionCarboneDuJour),
     });
   }
 }

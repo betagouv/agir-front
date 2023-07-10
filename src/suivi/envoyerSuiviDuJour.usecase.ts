@@ -9,9 +9,23 @@ export interface SuiviTransportInput {
   valeurs: Map<string, string>;
 }
 
+export interface ElementSuiviCarbone {
+  titre: string;
+  valeur: number;
+  impactCarbone: number;
+}
 export interface Resultat {
-  valeur: string;
-  enHausse: boolean;
+  impactCarbonDuJour: {
+    valeur: number;
+    enHausse: boolean;
+    variation: number;
+  };
+  suivisPrecedent: {
+    datesDesSuivis: string[];
+    valeursDesSuivis: number[];
+    moyenneDesSuivis: number;
+  };
+  additionCarboneDuJour: ElementSuiviCarbone[];
 }
 
 export class EnvoyerSuiviDuJourUsecase {
@@ -20,10 +34,15 @@ export class EnvoyerSuiviDuJourUsecase {
     this.suiviRepository = suiviRepository;
   }
 
-  execute(suiviAlimentation: SuiviAlimentationInput, suiviTransport: SuiviTransportInput, presenter: SuiviDuJourPresenter, idUtilisateur: string) {
-    this.suiviRepository.ajouter("alimentation", suiviAlimentation.valeurs, idUtilisateur);
-    this.suiviRepository.ajouter("transport", suiviTransport.valeurs, idUtilisateur);
-    const resultat = this.suiviRepository.recupererResultat();
+  async execute(
+    suiviAlimentation: SuiviAlimentationInput,
+    suiviTransport: SuiviTransportInput,
+    presenter: SuiviDuJourPresenter,
+    idUtilisateur: string
+  ): Promise<void> {
+    await this.suiviRepository.ajouter("alimentation", suiviAlimentation.valeurs, idUtilisateur);
+    await this.suiviRepository.ajouter("transport", suiviTransport.valeurs, idUtilisateur);
+    const resultat = await this.suiviRepository.recupererResultat(idUtilisateur);
     presenter.presente(resultat);
   }
 }

@@ -84,8 +84,8 @@
   <div class="fr-fieldset__element field-response-container">
     <div class="number-input-container" id="input-group-2843">
       <input
-        @input="handleReponse(modelValue as Map<string, string>, $event, 'legumes')"
-        :value="(modelValue as Map<string, string>).get('legumes') || '0'"
+        @input="handleReponse(modelValue as Map<string, string>, $event, 'vegetarien')"
+        :value="(modelValue as Map<string, string>).get('vegetarien') || '0'"
         min="0"
         class="fr-input"
         aria-describedby="text-laitier-messages"
@@ -100,8 +100,8 @@
   <div class="fr-fieldset__element field-response-container">
     <div class="number-input-container" id="input-group-2843">
       <input
-        @input="handleReponse(modelValue as Map<string, string>, $event, 'sans_produit_animal')"
-        :value="(modelValue as Map<string, string>).get('sans_produit_animal') || '0'"
+        @input="handleReponse(modelValue as Map<string, string>, $event, 'vegetalien')"
+        :value="(modelValue as Map<string, string>).get('vegetalien') || '0'"
         min="0"
         class="fr-input"
         aria-describedby="text-sans-produit-animal-messages"

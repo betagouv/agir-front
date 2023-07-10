@@ -7,30 +7,18 @@
             <p style="font-size: 2.5vh">Addition carbone du jour</p>
           </div>
           <div class="fr-tile__desc grid-side-to-side-container">
-            <div class="fr-grid-row" v-for="[suiviCategorie, valeurDuSuivi] in new Map([...suiviDuJourAlimentation, ...suiviDuJourTransport])">
+            <div class="fr-grid-row" v-for="impactCarboneItem in suiviDuJourResultats.additionCarbone">
               <div class="fr-col-2">
                 <div class="col-demo">
-                  <p
-                    :class="
-                      getEquivalentCarbone(suiviCategorie.toString(), valeurDuSuivi.toString()) > 1
-                        ? ['carbon-value-item-primary']
-                        : ['carbon-value-item-secondary']
-                    "
-                  >
-                    +&nbsp;{{ getEquivalentCarbone(suiviCategorie.toString(), valeurDuSuivi.toString()) }} kg
+                  <p :class="impactCarboneItem.styleFont">
+                    {{ impactCarboneItem.impactCarbone }}
                   </p>
                 </div>
               </div>
               <div class="fr-col-10">
                 <div class="col-demo">
-                  <p
-                    :class="
-                      getEquivalentCarbone(suiviCategorie.toString(), valeurDuSuivi.toString()) > 1
-                        ? ['carbon-value-item-primary']
-                        : ['carbon-value-item-secondary']
-                    "
-                  >
-                    {{ valeurDuSuivi }} {{ getSuiviCategory(suiviCategorie.toString()) == "transport" ? "km de" : "repas de" }} {{ suiviCategorie }}
+                  <p :class="impactCarboneItem.styleFont">
+                    {{ impactCarboneItem.valeur }}
                   </p>
                 </div>
               </div>
@@ -42,17 +30,13 @@
   </div>
 </template>
 <script lang="ts">
-import { SuiviAlimentationInput, SuiviTransportInput } from "@/suivi/envoyerSuiviDuJour.usecase";
+import { SuiviDuJourResultatsViewModel } from "@/suivi/adapters/suiviDuJour.presenter.impl";
 
 export default {
   name: "EmptreinteDuJourDetails",
   props: {
-    suiviDuJourAlimentation: {
-      type: Object as () => Map<string, string>,
-      required: true,
-    },
-    suiviDuJourTransport: {
-      type: Object as () => Map<string, string>,
+    suiviDuJourResultats: {
+      type: Object as () => SuiviDuJourResultatsViewModel,
       required: true,
     },
   },

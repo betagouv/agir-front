@@ -41,20 +41,19 @@
                   />
                 </div>
                 <div class="last-step-container" v-else>
-                  <SuiviDuJourResultats
-                    :suivi-du-jour-alimentation="suiviDuJourAlimentation"
-                    :suivi-du-jour-transport="suiviDuJourTransport"
-                    :empreinte-carbone-du-jour="impactCarboneDuJourViewModel"
-                  />
+                  <SuiviDuJourResultats :suivi-du-jour-resultats="suiviDuJourResultatsViewModel" />
                 </div>
               </fieldset>
-              <div>
+              <div style="text-align: left">
                 <span v-if="etapeCourante <= 2 && etapeCourante > 1" @click="etapePrecedente" class="step-btn-actions">
                   <span class="fr-icon-arrow-left-line" aria-hidden="true"></span>
-                  {{ etapeCourante == 3 ? "Modifier vos réponses" : "Précédent" }}
+                  Précédent
                 </span>
-                <button v-if="etapeCourante < 3" class="fr-btn continue-step-button fr-btn-not-rounded" title="Suivant">Continuer</button>
-                <span v-if="etapeCourante < 3" @click="sauterEtape" class="step-btn-actions"> Passer la question </span>
+                <button v-if="etapeCourante < 3" class="fr-btn fr-btn-not-rounded" title="Suivant">Continuer</button>
+                <span v-if="etapeCourante == 1" @click="sauterEtape" class="step-btn-actions"> Passer la question </span>
+
+                <button v-if="etapeCourante == 3" class="fr-btn-not-rounded share-btn-container" title="partager">Partager vos résultats</button>
+                <br />
                 <router-link
                   v-if="etapeCourante == 3"
                   class="fr-btn fr-btn-not-rounded redirect-coach-link"
@@ -78,8 +77,11 @@
           <div class="fr-col-12">
             <BilanNosGestesClimat :get-impact-value="store.getters['utilisateur/getValeurBilanCarbone']" />
           </div>
+          <div v-if="etapeCourante == 3" class="fr-col-12">
+            <NombreDePointsDuJour :nombre-de-points-du-jour="25" />
+          </div>
           <div class="fr-col-12">
-            <ImpactDuJour :consommation-du-jour="'+ 7'" :equivalent-en-litres="'14'" />
+            <ImpactDuJour :consommation-du-jour="suiviDuJourResultatsViewModel.impactCarbonDuJour.valeur" :equivalent-en-litres="'14'" />
           </div>
         </div>
       </div>
@@ -98,16 +100,24 @@ import SuiviDuJourResultats from "@/components/SuiviDuJourResultats.vue";
 import SuiviDuJourPremiereEtape from "@/components/SuiviDuJourPremiereEtape.vue";
 import SuiviDuJourSecondeEtape from "@/components/SuiviDuJourSecondeEtape.vue";
 import { EnvoyerSuiviDuJourUsecase } from "@/suivi/envoyerSuiviDuJour.usecase";
-import { ImpactCarboneDuJourViewModel, SuiviDuJourPresenterImpl } from "@/suivi/adapters/suiviDuJour.presenter.impl";
-import { SuiviDuJourRepositoryInMemory } from "@/suivi/adapters/suiviDuJour.repository.inMemory";
+import { SuiviDuJourPresenterImpl, SuiviDuJourResultatsViewModel } from "@/suivi/adapters/suiviDuJour.presenter.impl";
 import { SuiviDuJourRepositoryAxios } from "@/suivi/adapters/suiviDuJour.repository.axios";
 import { ObtenirDernierSuiviUsecase } from "@/suivi/obtenirDernierSuivi.usecase";
-import { DernierSuiviDuJourPresenterImpl, DernierSuiviDuJourViewModel } from "@/suivi/adapters/dernierSuiviDuJour.presenter.impl";
 import { DateTimeTypeScript } from "@/DateTime";
+import NombreDePointsDuJour from "@/components/NombreDePointsDuJour.vue";
+import { DernierSuiviDuJourPresenterImpl, DernierSuiviDuJourViewModel } from "@/suivi/adapters/dernierSuiviDuJour.presenter.impl";
 
 export default defineComponent({
   name: "SuiviDuJour",
-  components: { SuiviDuJourSecondeEtape, SuiviDuJourPremiereEtape, SuiviDuJourResultats, MesResultats, ImpactDuJour, BilanNosGestesClimat },
+  components: {
+    NombreDePointsDuJour,
+    SuiviDuJourSecondeEtape,
+    SuiviDuJourPremiereEtape,
+    SuiviDuJourResultats,
+    MesResultats,
+    ImpactDuJour,
+    BilanNosGestesClimat,
+  },
   computed: {
     store() {
       return store;
@@ -130,9 +140,10 @@ export default defineComponent({
     let suiviDuJourAlimentation = new Map<string, string>();
     let suiviDuJourTransport = new Map<string, string>();
     let dernierSuiviDuJourAlimentationViewmodel = ref<DernierSuiviDuJourViewModel>();
-    const impactCarboneDuJourViewModel = ref<ImpactCarboneDuJourViewModel>({
-      valeur: "",
-      pictoSens: "",
+    const suiviDuJourResultatsViewModel = ref<SuiviDuJourResultatsViewModel>({
+      impactCarbonDuJour: { valeur: 0, pictoSens: "", commentaire: "", variation: 0 },
+      suivisPrecedent: { valeursDesSuivis: [], datesDesSuivis: [], moyenneDesSuivis: [] },
+      additionCarbone: [],
     });
 
     onMounted(() => {
@@ -167,6 +178,7 @@ export default defineComponent({
     const calculEmpreinteDuJour = () => {
       const idUtilisateur = store.getters["utilisateur/getId"];
       const envoyerSuiviDuJour = new EnvoyerSuiviDuJourUsecase(new SuiviDuJourRepositoryAxios());
+
       envoyerSuiviDuJour.execute(
         { valeurs: suiviDuJourAlimentation },
         { valeurs: suiviDuJourTransport },
@@ -183,8 +195,9 @@ export default defineComponent({
       suiviDuJourTransport = map;
     }
 
-    function mapImpactCarboneDuJour(impactDuJourViewModel: ImpactCarboneDuJourViewModel) {
-      impactCarboneDuJourViewModel.value = impactDuJourViewModel;
+    function mapImpactCarboneDuJour(impactDuJourViewModel: SuiviDuJourResultatsViewModel) {
+      suiviDuJourResultatsViewModel.value = impactDuJourViewModel;
+      console.log(suiviDuJourResultatsViewModel);
     }
 
     return {
@@ -197,8 +210,8 @@ export default defineComponent({
       miseAjourReponseSuiviDuJourTransport,
       suiviDuJourAlimentation,
       suiviDuJourTransport,
-      impactCarboneDuJourViewModel,
       dernierSuiviDuJourAlimentationViewmodel,
+      suiviDuJourResultatsViewModel,
     };
   },
 });
@@ -218,10 +231,6 @@ export default defineComponent({
 
 .follow-up-stepper-sub-container {
   margin: 3em 3em 0 3em;
-}
-
-.continue-step-button {
-  margin: 20px;
 }
 
 .step-btn-actions {
@@ -250,6 +259,17 @@ export default defineComponent({
 
 .last-step-container {
   width: 100%;
+}
+
+.fr-btn-not-rounded {
+  border-radius: 0;
+}
+
+.share-btn-container {
+  margin: 10px auto;
+  background-color: white;
+  color: #000091;
+  border: 1px solid rgba(0, 0, 0, 0.19);
 }
 
 .fr-btn-not-rounded {

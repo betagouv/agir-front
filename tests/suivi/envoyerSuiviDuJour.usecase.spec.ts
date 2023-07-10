@@ -1,5 +1,5 @@
 import { EnvoyerSuiviDuJourUsecase, Resultat } from "../../src/suivi/envoyerSuiviDuJour.usecase";
-import { ImpactCarboneDuJourViewModel, SuiviDuJourPresenterImpl } from "../../src/suivi/adapters/suiviDuJour.presenter.impl";
+import { SuiviDuJourPresenterImpl, SuiviDuJourResultatsViewModel } from "../../src/suivi/adapters/suiviDuJour.presenter.impl";
 import { DernierSuivi, SuiviRepository } from "../../src/suivi/ports/suivi.repository";
 
 class SpySuiviRepository implements SuiviRepository {
@@ -22,8 +22,8 @@ class SpySuiviRepository implements SuiviRepository {
     this._valeursEnvoyees.push(valeurs);
   }
 
-  recupererResultat(): Resultat {
-    return this._resultat;
+  recupererResultat(): Promise<Resultat> {
+    return Promise.resolve(this._resultat);
   }
 
   recupererDernierSuivi(idUtilisateur: string, type: string): Promise<DernierSuivi> {
@@ -35,9 +35,28 @@ class SpySuiviRepository implements SuiviRepository {
 }
 
 describe("Fichier de tests de l'envoie du suivi du jour", () => {
-  it("Après avoir envoyé le suivi du jour doit presenter un dashboard dans le cas d'un bilan en hausse", () => {
+  it("Après avoir envoyé le suivi du jour doit presenter un dashboard dans le cas d'un bilan en hausse", async () => {
     // GIVEN
-    const resultat = { valeur: "21", enHausse: true } as Resultat;
+    const resultat = {
+      impactCarbonDuJour: { valeur: 21000, enHausse: true, variation: 3000 },
+      suivisPrecedent: {
+        datesDesSuivis: ["27/07", "28/07", "29/07", "30/07"],
+        valeursDesSuivis: [23000, 43000, 12000, 25000],
+        moyenneDesSuivis: 21000,
+      },
+      additionCarboneDuJour: [
+        { valeur: 2, impactCarbone: 2000, titre: "viande_rouge" },
+        { valeur: 20, impactCarbone: 8000, titre: "km_voiture" },
+        { valeur: 10, impactCarbone: 4000, titre: "km_metro" },
+        { valeur: 20, impactCarbone: 2000, titre: "km_velo" },
+        { valeur: 15, impactCarbone: 80000, titre: "km_train" },
+        { valeur: 40, impactCarbone: 16000, titre: "km_bus" },
+        { valeur: 1, impactCarbone: 1000, titre: "viande_blanche" },
+        { valeur: 1, impactCarbone: 1000, titre: "poisson_blanc" },
+        { valeur: 2, impactCarbone: 2000, titre: "oeufs" },
+        { valeur: 1, impactCarbone: 1000, titre: "poisson_rouge" },
+      ],
+    } as Resultat;
     const repository = new SpySuiviRepository(resultat);
     const useCase = new EnvoyerSuiviDuJourUsecase(repository);
     const mapSuiviAlimentation = new Map<string, string>();
@@ -51,14 +70,75 @@ describe("Fichier de tests de l'envoie du suivi du jour", () => {
       valeurs: mapSuiviTransport,
     };
     // WHEN
-    useCase.execute(suiviAlimentation, suiviTransport, new SuiviDuJourPresenterImpl(expectation), "idUtilisateur");
+    await useCase.execute(suiviAlimentation, suiviTransport, new SuiviDuJourPresenterImpl(expectation), "idUtilisateur");
     // THEN
     expect(repository.typeEnvoye).toStrictEqual(["alimentation", "transport"]);
     expect(repository.valeursEnvoyees).toStrictEqual([mapSuiviAlimentation, mapSuiviTransport]);
-    function expectation(impactCarboneDuJour: ImpactCarboneDuJourViewModel) {
-      expect(impactCarboneDuJour).toStrictEqual<ImpactCarboneDuJourViewModel>({
-        valeur: "21",
-        pictoSens: "fr-icon-arrow-right-up-circle-fill",
+    function expectation(suiviDuJourResultat: SuiviDuJourResultatsViewModel) {
+      expect(suiviDuJourResultat).toStrictEqual<SuiviDuJourResultatsViewModel>({
+        impactCarbonDuJour: {
+          valeur: 21,
+          pictoSens: "fr-icon-arrow-right-up-circle-fill",
+          commentaire: "En hausse",
+          variation: 3,
+        },
+        suivisPrecedent: {
+          datesDesSuivis: ["27/07", "28/07", "29/07", "30/07"],
+          valeursDesSuivis: [23, 43, 12, 25],
+          moyenneDesSuivis: [21, 21, 21, 21],
+        },
+        additionCarbone: [
+          {
+            impactCarbone: "+80 kg",
+            valeur: "15 km de train",
+            styleFont: "carbon-value-item-primary",
+          },
+          {
+            impactCarbone: "+16 kg",
+            valeur: "40 km de bus",
+            styleFont: "carbon-value-item-primary",
+          },
+          {
+            impactCarbone: "+8 kg",
+            valeur: "20 km de voiture",
+            styleFont: "carbon-value-item-primary",
+          },
+          {
+            impactCarbone: "+4 kg",
+            valeur: "10 km de metro",
+            styleFont: "carbon-value-item-secondary",
+          },
+          {
+            impactCarbone: "+2 kg",
+            valeur: "2 repas avec viande rouge",
+            styleFont: "carbon-value-item-secondary",
+          },
+          {
+            impactCarbone: "+2 kg",
+            valeur: "20 km de velo",
+            styleFont: "carbon-value-item-secondary",
+          },
+          {
+            impactCarbone: "+2 kg",
+            valeur: "2 repas avec oeufs",
+            styleFont: "carbon-value-item-secondary",
+          },
+          {
+            impactCarbone: "+1 kg",
+            valeur: "1 repas avec viande blanche",
+            styleFont: "carbon-value-item-secondary",
+          },
+          {
+            impactCarbone: "+1 kg",
+            valeur: "1 repas avec poisson blanc",
+            styleFont: "carbon-value-item-secondary",
+          },
+          {
+            impactCarbone: "+1 kg",
+            valeur: "1 repas avec poisson rouge",
+            styleFont: "carbon-value-item-secondary",
+          },
+        ],
       });
     }
   });
