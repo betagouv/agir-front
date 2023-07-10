@@ -4,7 +4,7 @@
 </template>
 
 <script lang="ts">
-import { BadgeViewModel } from "@/dashboard/ports/chargementDashboard.presenter";
+import { BadgeViewModel } from "@/score/ports/chargementScorePresenter";
 
 export default {
   name: "BadgeContainer",

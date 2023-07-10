@@ -12,11 +12,6 @@
           </a>
         </div>
         <div class="fr-footer__content footer-desc-container">
-          <p class="fr-footer__content-desc">Texte optionnel 3 lignes maximum.</p>
-          <p class="fr-footer__content-desc">
-            Lorem ipsum dolor sit amet, consectetur adipiscing, incididunt, ut labore et dolore magna aliqua. Vitae sapien pellentesque habitant morbi tristique
-            senectus et. Diam maecenas sed enim ut
-          </p>
           <ul class="fr-footer__content-list">
             <li class="fr-footer__content-item">
               <a id="footer__content-link-5849" class="fr-footer__content-link" target="_blank" href="https://legifrance.gouv.fr">legifrance.gouv.fr</a>

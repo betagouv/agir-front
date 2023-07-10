@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts">
-import { BadgeViewModel } from "@/dashboard/ports/chargementDashboard.presenter";
+import { BadgeViewModel } from "@/score/ports/chargementScorePresenter";
 import BadgeContainer from "@/components/BadgeContainer.vue";
 import ScoreContainer from "@/components/ScoreContainer.vue";
 

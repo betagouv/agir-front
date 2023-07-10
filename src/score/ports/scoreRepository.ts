@@ -15,12 +15,10 @@ interface Badge {
 interface Empreinte {
   bilan: string;
 }
-export interface Dashboard {
-  compteurs: Compteur[];
-  quizz: Quizz[];
+export interface Score {
   badges: Badge[];
-  empreinte: Empreinte;
+  score: number;
 }
-export interface DashboardRepository {
-  getDashboard(utilisateur: string): Promise<Dashboard>;
+export interface ScoreRepository {
+  getScore(utilisateur: string): Promise<Score>;
 }

@@ -27,7 +27,7 @@
                 <li v-if="store.getters['utilisateur/getUtilisateur']" @click="logout">
                   <div class="utilisateur">
                     <img src="/ic_user.svg" alt="" />{{ nomUtilisateur }}
-                    <div class="score"><img src="/leaf.svg" alt="" />10</div>
+                    <div class="score"><img src="/leaf.svg" alt="" />{{ score }}</div>
                   </div>
                   <a class="fr-btn fr-icon-logout-box-r-line" href="#"> Se déconnecter </a>
                 </li>
@@ -87,6 +87,9 @@ export default defineComponent({
   computed: {
     store() {
       return store;
+    },
+    score() {
+      return store.getters["utilisateur/getScore"];
     },
     nomUtilisateur() {
       return store.getters["utilisateur/getUtilisateur"];

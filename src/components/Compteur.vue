@@ -16,7 +16,7 @@
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";
-import { CompteurViewModel } from "@/dashboard/ports/chargementDashboard.presenter";
+import { CompteurViewModel } from "@/score/ports/chargementScorePresenter";
 
 export default defineComponent({
   name: "Compteur",
@@ -30,8 +30,6 @@ export default defineComponent({
 });
 </script>
 <style scoped>
-
-
 .consumption {
   display: flex;
   align-items: center;
@@ -86,5 +84,4 @@ export default defineComponent({
   align-items: center;
   text-align: center;
 }
-
 </style>
