@@ -7,10 +7,10 @@ import Footer from "@/components/Footer.vue";
   <div class="page-container">
     <Header />
 
-    <div class="main-container">
-      <router-view />
+    <div class="fr-container fr-px-1w">
+        <router-view />
     </div>
-
+    
     <Footer class="footer-container" />
   </div>
 </template>
@@ -25,23 +25,11 @@ import Footer from "@/components/Footer.vue";
   background-color: #f7f8f8;
 }
 
-.main-container {
-  text-align: center;
-  padding-bottom: 18rem;
-}
-
 .footer-container {
-  bottom: 0;
   text-align: left;
   height: 18rem;
   width: 100%;
-  position: absolute;
   background-color: white;
 }
 
-@media only screen and (min-width: 1500px) {
-  .main-container {
-    min-width: 1280px;
-  }
-}
 </style>

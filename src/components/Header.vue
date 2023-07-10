@@ -1,7 +1,7 @@
 <template>
   <header role="banner" class="fr-header">
     <div class="fr-header__body">
-      <div class="header-container">
+      <div class="fr-container">
         <div class="fr-header__body-row">
           <div class="fr-header__brand fr-enlarge-link">
             <div class="fr-header__brand-top">
@@ -44,7 +44,7 @@
       </div>
     </div>
     <div v-if="store.getters['utilisateur/getUtilisateur']" class="fr-header__menu fr-modal" id="modal-1918" aria-labelledby="button-1919">
-      <div class="header-container">
+      <div class="fr-container">
         <button class="fr-btn--close fr-btn" aria-controls="modal-1918" id="button-1921" title="Fermer">Fermer</button>
         <div class="fr-header__menu-links"></div>
         <nav class="fr-nav" id="navigation" role="navigation" aria-label="Menu principal" data-fr-js-navigation="true">
@@ -139,17 +139,6 @@ header {
   top: 0;
   width: 100%;
 }
-
-.header-container {
-  margin: 0 0 0 50px;
-}
-
-@media only screen and (max-width: 1024px) {
-  .header-container {
-    margin: 0 0 0 5px;
-  }
-}
-
 .score {
   display: flex;
   padding: 0.5rem;
