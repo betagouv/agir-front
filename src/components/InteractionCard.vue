@@ -75,6 +75,7 @@ export default {
 
 .fr-card__body{
   flex-direction: row;
+  padding: 0 1rem
 }
 .fr-card__content{
   padding: 1rem;
@@ -87,6 +88,10 @@ export default {
 .fr-card__start, .fr-tags-group{
   margin-bottom: 0;
   text-align: left;
+}
+
+.fr-card__end{
+  display:inline-block
 }
 .fr-tags-group>li {
   line-height: 22px;
@@ -103,9 +108,6 @@ export default {
 }
 .fr-card:before{
   content: none;
-}
-.fr-card__body{
-  padding: 0 1rem
 }
 .fr-card.fr-enlarge-link:not(.fr-card--no-icon) .fr-card__content{
   padding-bottom: 0;
@@ -135,6 +137,9 @@ export default {
 }
 
 @media only screen and (max-width : 768px) {
+  .fr-card__body{
+    flex-direction: column;
+  }
   .fr-card__footer {
     width: 0%;
     padding: 0;
