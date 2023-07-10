@@ -35,7 +35,7 @@ class SpySuiviRepository implements SuiviRepository {
 }
 
 describe("Fichier de tests de l'envoie du suivi du jour", () => {
-  it("Après avoir envoyé le suivi du jour doit presenter un dashboard dans le cas d'un bilan en hausse", () => {
+  it("Après avoir envoyé le suivi du jour doit presenter un dashboard dans le cas d'un bilan en hausse", async () => {
     // GIVEN
     const resultat = {
       impactCarbonDuJour: { valeur: 21000, enHausse: true, variation: 3000 },
@@ -70,7 +70,7 @@ describe("Fichier de tests de l'envoie du suivi du jour", () => {
       valeurs: mapSuiviTransport,
     };
     // WHEN
-    useCase.execute(suiviAlimentation, suiviTransport, new SuiviDuJourPresenterImpl(expectation), "idUtilisateur");
+    await useCase.execute(suiviAlimentation, suiviTransport, new SuiviDuJourPresenterImpl(expectation), "idUtilisateur");
     // THEN
     expect(repository.typeEnvoye).toStrictEqual(["alimentation", "transport"]);
     expect(repository.valeursEnvoyees).toStrictEqual([mapSuiviAlimentation, mapSuiviTransport]);
