@@ -22,6 +22,8 @@ export interface Interaction {
   miseEnAvant: string;
   illustrationURL: string;
   url: string;
+  aEteFaite: boolean;
+  idDuContenu: string;
 }
 
 export class ChargerInteractionsUsecase {

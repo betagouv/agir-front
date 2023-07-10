@@ -5,12 +5,14 @@ interface State {
   utilisateur: string;
   id: string;
   valeurBilanCarbone: string;
+  interactionEnCours: string;
 }
 
 export const initialState: State = {
   utilisateur: "",
   id: "",
   valeurBilanCarbone: "",
+  interactionEnCours: "",
 };
 
 export default {
@@ -26,6 +28,9 @@ export default {
     getValeurBilanCarbone(state: State): string {
       return state.valeurBilanCarbone;
     },
+    getInteractionEnCours(state: State): string {
+      return state.interactionEnCours;
+    },
   },
   mutations: {
     setUtilisateur(state: State, utilisateur: Utilisateur) {
@@ -35,11 +40,15 @@ export default {
     setValeurBilanCarbone(state: State, valeurBilanCarbone: string) {
       state.valeurBilanCarbone = valeurBilanCarbone;
     },
+    setInteractionEnCours(state: State, interactionEnCours: string) {
+      state.interactionEnCours = interactionEnCours;
+    },
   },
   actions: {
     reset({ commit }: { commit: Commit }) {
       commit("setUtilisateur", { nom: "", id: "" });
       commit("setValeurBilanCarbone", "");
+      commit("setInteractionEnCours", "");
     },
   },
 };

@@ -24,7 +24,7 @@
       </div>
       <div class="fr-card__footer">
         <a
-          @click="interactionAEteCliquee(interactionViewModel.id)"
+          @click="interactionAEteCliquee(interactionViewModel.id, interactionViewModel.type)"
           :href="interactionViewModel?.url"
           :target="interactionViewModel?.isUrlExterne ? 'blank' : ''"
           >Commencer <span class="fr-icon-arrow-right-s-line" aria-hidden="true">&nbsp;</span></a
@@ -44,8 +44,9 @@ import { DeviceType, getDeviceType } from "@/DeviceType";
 import { CliquerInteractionUsecase } from "@/interactions/cliquerInteraction.usecase";
 import { InteractionsRepositoryAxios } from "@/interactions/adapters/interactionsRepository.axios";
 import store from "@/store";
+import { defineComponent } from "vue";
 
-export default {
+export default defineComponent({
   name: "InteractionCard",
   computed: {
     DeviceType() {
@@ -59,15 +60,21 @@ export default {
       default: undefined,
     },
   },
-  methods: {
-    getDeviceType,
-    interactionAEteCliquee(interactionId: string) {
+  setup(props, { emit }) {
+    const interactionAEteCliquee = (interactionId: string, interactionType: string) => {
       const idUtilisateur = store.getters["utilisateur/getId"];
       const useCase = new CliquerInteractionUsecase(new InteractionsRepositoryAxios());
-      useCase.execute(idUtilisateur, interactionId);
-    },
+      useCase.execute(idUtilisateur, interactionId, interactionType).then(() => {
+        emit("refreshInteractions");
+      });
+      store.commit("utilisateur/setInteractionEnCours", interactionId);
+    };
+    return { interactionAEteCliquee };
   },
-};
+  methods: {
+    getDeviceType,
+  },
+});
 </script>
 <style scoped>
 

@@ -9,7 +9,7 @@
               v-for="item in interactionsViewModel"
               :key="item.titre"
             >
-              <InteractionCard :interaction-view-model="item" />
+              <InteractionCard :interaction-view-model="item" @refresh-interactions="lancerChargementDesDonnees" />
             </div>
           </div>
           <div v-else class="fr-grid-row fr-grid-row--gutters dashboard-container">
@@ -47,15 +47,11 @@
 
 <script lang="ts">
 import { defineComponent, onMounted, ref } from "vue";
-import { ChargementDashboardUsecase } from "@/dashboard/chargementDashboard.usecase";
-import { ChargementDashboardPresenterImpl } from "@/dashboard/adapters/chargementDashboard.presenter.impl";
-import { DashboardRepositoryAxios } from "@/dashboard/adapters/dashboardRepository.axios";
-import { BadgeViewModel, CompteurViewModel, DashboardViewModel, EmpreinteViewModel, QuizzViewModel } from "@/dashboard/ports/chargementDashboard.presenter";
+import { BadgeViewModel, CompteurViewModel, EmpreinteViewModel, QuizzViewModel } from "@/dashboard/ports/chargementDashboard.presenter";
 import Compteur from "@/components/Compteur.vue";
 import QuizCarte from "@/components/QuizCarte.vue";
 import BadgeCarte from "@/components/BadgeContainer.vue";
 import store from "@/store";
-import Quizz from "@/components/Quiz.vue";
 import CarteSkeleton from "@/components/CarteSkeleton.vue";
 import BilanNosGestesClimat from "@/components/BilanNosGestesClimat.vue";
 import MesResultats from "@/components/MesResultats.vue";
@@ -64,7 +60,6 @@ import { ChargementEmpreinteUsecase } from "@/bilan/chargementEmpreinte.usecase"
 import { EmpreinteRepositoryAxios } from "@/bilan/adapters/empreinteRepository.axios";
 import { ChargementEmpreintePresenterImpl } from "@/bilan/adapters/chargementEmpreinte.presenter.impl";
 import { ChargerInteractionsUsecase } from "@/interactions/chargerInteractions.usecase";
-import { InteractionsRepositoryInMemory } from "@/interactions/adapters/interactionsRepository.inMemory";
 import { InteractionsPresenterImpl, InteractionViewModel } from "@/interactions/adapters/interactions.presenter.impl";
 import InteractionCard from "@/components/InteractionCard.vue";
 import { InteractionsRepositoryAxios } from "@/interactions/adapters/interactionsRepository.axios";
@@ -95,6 +90,7 @@ export default defineComponent({
       interactionsViewModel.value = viewModel;
     }
     const lancerChargementDesDonnees = () => {
+      console.log("toto");
       isLoading.value = true;
       const idUtilisateur = store.getters["utilisateur/getId"];
       const chargementEmpreinteUseCase = new ChargementEmpreinteUsecase(new EmpreinteRepositoryAxios());
@@ -117,6 +113,7 @@ export default defineComponent({
       compteurViewModel,
       empreinteViewModel,
       interactionsViewModel,
+      lancerChargementDesDonnees,
     };
   },
 });

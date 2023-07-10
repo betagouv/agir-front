@@ -1,7 +1,24 @@
 import { EnvoyerSuiviDuJourUsecase, Resultat } from "../../src/suivi/envoyerSuiviDuJour.usecase";
 import { SuiviDuJourPresenterImpl, SuiviDuJourResultatsViewModel } from "../../src/suivi/adapters/suiviDuJour.presenter.impl";
 import { DernierSuivi, SuiviRepository } from "../../src/suivi/ports/suivi.repository";
+import { InteractionsRepository } from "../../src/interactions/ports/interactionsRepository";
+import { Interaction } from "../../src/interactions/chargerInteractions.usecase";
 
+class SpyInteractionRepository implements InteractionsRepository {
+  get interactionAEteTermineeAEteAppelee(): boolean {
+    return this._interactionAEteTermineeAEteAppelee;
+  }
+  private _interactionAEteTermineeAEteAppelee: boolean = false;
+  chargerInteractions(nomUtilisateur: string): Promise<Interaction[]> {
+    return Promise.resolve([]);
+  }
+
+  interactionAEteCliquee(interactionId: string, utilisateurId): void {}
+
+  interactionAEteTerminee(interactionId: string, utilisateurId: string): void {
+    this._interactionAEteTermineeAEteAppelee = true;
+  }
+}
 class SpySuiviRepository implements SuiviRepository {
   private _resultat: Resultat;
 
@@ -35,7 +52,7 @@ class SpySuiviRepository implements SuiviRepository {
 }
 
 describe("Fichier de tests de l'envoie du suivi du jour", () => {
-  it("Après avoir envoyé le suivi du jour doit presenter un dashboard dans le cas d'un bilan en hausse", async () => {
+  it("Après avoir envoyé le suivi du jour doit dire que l'interaction est terminée et presenter un dashboard dans le cas d'un bilan en hausse", async () => {
     // GIVEN
     const resultat = {
       impactCarbonDuJour: { valeur: 21000, enHausse: true, variation: 3000 },
@@ -57,8 +74,9 @@ describe("Fichier de tests de l'envoie du suivi du jour", () => {
         { valeur: 1, impactCarbone: 1000, titre: "poisson_rouge" },
       ],
     } as Resultat;
-    const repository = new SpySuiviRepository(resultat);
-    const useCase = new EnvoyerSuiviDuJourUsecase(repository);
+    const spySuiviRepository = new SpySuiviRepository(resultat);
+    const spyInteractionRepository = new SpyInteractionRepository();
+    const useCase = new EnvoyerSuiviDuJourUsecase(spySuiviRepository, spyInteractionRepository);
     const mapSuiviAlimentation = new Map<string, string>();
     mapSuiviAlimentation.set("viande_rouge", "1");
     const suiviAlimentation = {
@@ -70,10 +88,11 @@ describe("Fichier de tests de l'envoie du suivi du jour", () => {
       valeurs: mapSuiviTransport,
     };
     // WHEN
-    await useCase.execute(suiviAlimentation, suiviTransport, new SuiviDuJourPresenterImpl(expectation), "idUtilisateur");
+    await useCase.execute(suiviAlimentation, suiviTransport, new SuiviDuJourPresenterImpl(expectation), "idUtilisateur", "idInteraction");
     // THEN
-    expect(repository.typeEnvoye).toStrictEqual(["alimentation", "transport"]);
-    expect(repository.valeursEnvoyees).toStrictEqual([mapSuiviAlimentation, mapSuiviTransport]);
+    expect(spySuiviRepository.typeEnvoye).toStrictEqual(["alimentation", "transport"]);
+    expect(spySuiviRepository.valeursEnvoyees).toStrictEqual([mapSuiviAlimentation, mapSuiviTransport]);
+    expect(spyInteractionRepository.interactionAEteTermineeAEteAppelee).toBeTruthy();
     function expectation(suiviDuJourResultat: SuiviDuJourResultatsViewModel) {
       expect(suiviDuJourResultat).toStrictEqual<SuiviDuJourResultatsViewModel>({
         impactCarbonDuJour: {
