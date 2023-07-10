@@ -34,8 +34,11 @@ export class InteractionsPresenterImpl implements InteractionsPresenter {
       [InteractionType.SUIVIDUJOUR]: "SUIVI",
     };
 
-    this._viewModels(
-      interactions.map((interaction) => {
+    const interactionNonFaites = interactions
+      .filter((i) => {
+        return !i.aEteFaite;
+      })
+      .map((interaction) => {
         return {
           id: interaction.id,
           titre: interaction.titre,
@@ -48,8 +51,8 @@ export class InteractionsPresenterImpl implements InteractionsPresenter {
           url: this.determineUrl(interaction),
           isUrlExterne: interaction.type === InteractionType.ARTICLE,
         };
-      })
-    );
+      });
+    this._viewModels(interactionNonFaites);
   }
 
   private determineUrl(interaction: Interaction) {

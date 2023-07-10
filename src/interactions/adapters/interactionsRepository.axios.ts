@@ -33,14 +33,22 @@ export class InteractionsRepositoryAxios implements InteractionsRepository {
         miseEnAvant: apiModel.reco_score.toString(),
         illustrationURL: apiModel.image_url,
         url: apiModel.url || "",
+        aEteFaite: apiModel.done,
       };
       return interaction;
     });
   }
-  interactionAEteCliquee(interactionId: string, utilisateurId: string): void {
+  async interactionAEteCliquee(interactionId: string, utilisateurId: string): Promise<void> {
     const axiosInstance = AxiosFactory.getAxios();
-    axiosInstance.patch(`/utilisateurs/${utilisateurId}/interactions/${interactionId}`, {
+    await axiosInstance.patch(`/utilisateurs/${utilisateurId}/interactions/${interactionId}`, {
       clicked: true,
+    });
+  }
+
+  async interactionAEteTerminee(interactionId: string, utilisateurId: string): Promise<void> {
+    const axiosInstance = AxiosFactory.getAxios();
+    await axiosInstance.patch(`/utilisateurs/${utilisateurId}/interactions/${interactionId}`, {
+      done: true,
     });
   }
 }

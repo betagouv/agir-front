@@ -1,5 +1,6 @@
 import { SuiviRepository } from "@/suivi/ports/suivi.repository";
 import { SuiviDuJourPresenter } from "@/suivi/ports/suiviDuJour.presenter";
+import { InteractionsRepository } from "@/interactions/ports/interactionsRepository";
 
 export interface SuiviAlimentationInput {
   valeurs: Map<string, string>;
@@ -30,19 +31,23 @@ export interface Resultat {
 
 export class EnvoyerSuiviDuJourUsecase {
   private suiviRepository: SuiviRepository;
-  constructor(suiviRepository: SuiviRepository) {
+  private interactionRepository: InteractionsRepository;
+  constructor(suiviRepository: SuiviRepository, interactionRepository: InteractionsRepository) {
     this.suiviRepository = suiviRepository;
+    this.interactionRepository = interactionRepository;
   }
 
   async execute(
     suiviAlimentation: SuiviAlimentationInput,
     suiviTransport: SuiviTransportInput,
     presenter: SuiviDuJourPresenter,
-    idUtilisateur: string
-  ): Promise<void> {
+    idUtilisateur: string,
+    interactionId: string
+  ): Promise<void>  {
     await this.suiviRepository.ajouter("alimentation", suiviAlimentation.valeurs, idUtilisateur);
     await this.suiviRepository.ajouter("transport", suiviTransport.valeurs, idUtilisateur);
-    const resultat = await this.suiviRepository.recupererResultat(idUtilisateur);
+    const resultat = await this.suiviRepository.recupererResultat();
+    this.interactionRepository.interactionAEteTerminee(idUtilisateur, interactionId);
     presenter.presente(resultat);
   }
 }
