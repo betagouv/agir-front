@@ -1,6 +1,7 @@
 <template>
+  <h3 style="margin: 0 0 0 0.5em" v-if="etapeCourante">{{ currentStepQuestion }}</h3>
   <div class="fr-fieldset__element fill-response-checkbox-container">
-    <div class="fr-checkbox-group fr-custom-checkbox-group" v-if="dernierSuiviDuJourViewModel">
+    <div style="background-color: #f6f6f6; border-radius: 5px" class="fr-checkbox-group fr-custom-checkbox-group" v-if="dernierSuiviDuJourViewModel">
       <input
         :checked="isChecked"
         @change="handleCheckboxChange"
@@ -15,102 +16,134 @@
       <div class="fr-messages-group" id="checkbox-first-auto-fill-messages" aria-live="assertive"></div>
     </div>
   </div>
-  <h3 v-if="etapeCourante" class="step-list-container">{{ currentStepQuestion }}</h3>
-  <div class="fr-fieldset__element field-response-container">
-    <div class="number-input-container" id="input-group-2843">
-      <input
-        @input="handleReponse(modelValue as Map<string, string>, $event, 'km_voiture')"
-        min="0"
-        :value="(modelValue as Map<string, string>).get('km_voiture') || '0'"
-        class="fr-input"
-        aria-describedby="text-car-messages"
-        name="text"
-        id="text-car"
-        type="number"
-      />
-      <div class="fr-messages-group" id="text-car-messages" aria-live="assertive"></div>
+  <div class="fr-grid-row">
+    <div class="fr-col">
+      <div class="col-demo">
+        <h3 style="margin: 0 0 0 0.5em">Transport Individuel</h3>
+        <div class="fr-fieldset__element field-response-container">
+          <div class="number-input-container" id="input-group-2843">
+            <input
+              @input="handleReponse(modelValue as Map<string, string>, $event, 'km_voiture')"
+              min="0"
+              :value="(modelValue as Map<string, string>).get('km_voiture') || '0'"
+              class="fr-input my-custom-input"
+              aria-describedby="text-car-messages"
+              name="text"
+              id="text-car"
+              type="number"
+              placeholder="0 km"
+            />
+            <div class="fr-messages-group" id="text-car-messages" aria-live="assertive"></div>
+          </div>
+          <p class="field-response-desc">Km en voiture</p>
+        </div>
+        <div class="fr-fieldset__element field-response-container">
+          <div class="number-input-container" id="input-group-2843">
+            <input
+              @input="handleReponse(modelValue as Map<string, string>, $event, 'km_scooter')"
+              min="0"
+              :value="(modelValue as Map<string, string>).get('km_scooter') || '0'"
+              class="fr-input"
+              aria-describedby="text-motorcycle-messages"
+              name="text"
+              id="text-motorcycle"
+              type="number"
+              placeholder="0 km"
+            />
+            <div class="fr-messages-group" id="text-motorcycle-messages" aria-live="assertive"></div>
+          </div>
+          <p class="field-response-desc">Km en scooter</p>
+        </div>
+        <div class="fr-fieldset__element field-response-container">
+          <div class="number-input-container" id="input-group-2843">
+            <input
+              @input="handleReponse(modelValue as Map<string, string>, $event, 'velo')"
+              min="0"
+              :value="(modelValue as Map<string, string>).get('velo') || '0'"
+              class="fr-input"
+              aria-describedby="text-bicycle-messages"
+              name="text"
+              id="text-bicycle"
+              type="number"
+              placeholder="0 km"
+            />
+            <div class="fr-messages-group" id="text-bicycle-messages" aria-live="assertive"></div>
+          </div>
+          <p class="field-response-desc">Km en vélo</p>
+        </div>
+        <div class="fr-fieldset__element field-response-container">
+          <div class="number-input-container" id="input-group-2843">
+            <input
+              @input="handleReponse(modelValue as Map<string, string>, $event, 'pied')"
+              min="0"
+              :value="(modelValue as Map<string, string>).get('pied') || '0'"
+              class="fr-input"
+              aria-describedby="text-foot-messages"
+              name="text"
+              id="text-foot"
+              type="number"
+              placeholder="0 km"
+            />
+            <div class="fr-messages-group" id="text-foot-messages" aria-live="assertive"></div>
+          </div>
+          <p class="field-response-desc">Km à pied</p>
+        </div>
+      </div>
     </div>
-    <p class="field-response-desc">Km en voiture</p>
-  </div>
-  <div class="fr-fieldset__element field-response-container">
-    <div class="number-input-container" id="input-group-2843">
-      <input
-        @input="handleReponse(modelValue as Map<string, string>, $event, 'km_scooter')"
-        min="0"
-        :value="(modelValue as Map<string, string>).get('km_scooter') || '0'"
-        class="fr-input"
-        aria-describedby="text-motorcycle-messages"
-        name="text"
-        id="text-motorcycle"
-        type="number"
-      />
-      <div class="fr-messages-group" id="text-motorcycle-messages" aria-live="assertive"></div>
+    <div class="fr-col">
+      <div class="col-demo">
+        <h3 style="margin: 0 0 0 0.5em">Transport en commun</h3>
+        <div class="fr-fieldset__element field-response-container">
+          <div class="number-input-container" id="input-group-2843">
+            <input
+              @input="handleReponse(modelValue as Map<string, string>, $event, 'metro_tram')"
+              :value="(modelValue as Map<string, string>).get('metro_tram') || 'hh:mm'"
+              class="fr-input"
+              aria-describedby="text-subway-messages"
+              name="text"
+              id="text-subway"
+              type="text"
+              placeholder="hh:mm"
+            />
+            <div class="fr-messages-group" id="text-subway-messages" aria-live="assertive"></div>
+          </div>
+          <p class="field-response-desc">Métro / Tramway</p>
+        </div>
+        <div class="fr-fieldset__element field-response-container">
+          <div class="number-input-container" id="input-group-2843">
+            <input
+              @input="handleReponse(modelValue as Map<string, string>, $event, 'train')"
+              min="0"
+              :value="(modelValue as Map<string, string>).get('train') || 'hh:mm'"
+              class="fr-input"
+              aria-describedby="text-train-messages"
+              name="text"
+              id="text-train"
+              type="text"
+              placeholder="hh:mm"
+            />
+            <div class="fr-messages-group" id="text-train-messages" aria-live="assertive"></div>
+          </div>
+          <p class="field-response-desc">Train</p>
+        </div>
+        <div class="fr-fieldset__element field-response-container">
+          <div class="number-input-container" id="input-group-2843">
+            <input
+              @input="handleReponse(modelValue as Map<string, string>, $event, 'bus')"
+              :value="(modelValue as Map<string, string>).get('bus') || 'hh:mm'"
+              class="fr-input"
+              aria-describedby="text-bus-messages"
+              name="text"
+              id="text-bus"
+              type="text"
+              placeholder="hh:mm"
+            />
+            <div class="fr-messages-group" id="text-bus-messages" aria-live="assertive"></div>
+          </div>
+          <p class="field-response-desc">Bus</p>
+        </div>
+      </div>
     </div>
-    <p class="field-response-desc">Km en scooter</p>
-  </div>
-  <div class="fr-fieldset__element field-response-container">
-    <div class="number-input-container" id="input-group-2843">
-      <input
-        @input="handleReponse(modelValue as Map<string, string>, $event, 'metro_tram')"
-        min="0"
-        :value="(modelValue as Map<string, string>).get('metro_tram') || '0'"
-        class="fr-input"
-        aria-describedby="text-subway-messages"
-        name="text"
-        id="text-subway"
-        type="number"
-      />
-      <div class="fr-messages-group" id="text-subway-messages" aria-live="assertive"></div>
-    </div>
-    <p class="field-response-desc">Km métro/tramway</p>
-  </div>
-  <div class="fr-fieldset__element field-response-container">
-    <div class="number-input-container" id="input-group-2843">
-      <input
-        @input="handleReponse(modelValue as Map<string, string>, $event, 'train')"
-        min="0"
-        :value="(modelValue as Map<string, string>).get('train') || '0'"
-        class="fr-input"
-        aria-describedby="text-train-messages"
-        name="text"
-        id="text-train"
-        type="number"
-      />
-      <div class="fr-messages-group" id="text-train-messages" aria-live="assertive"></div>
-    </div>
-    <p class="field-response-desc">Km en train</p>
-  </div>
-  <div class="fr-fieldset__element field-response-container">
-    <div class="number-input-container" id="input-group-2843">
-      <input
-        @input="handleReponse(modelValue as Map<string, string>, $event, 'velo')"
-        min="0"
-        :value="(modelValue as Map<string, string>).get('velo') || '0'"
-        class="fr-input"
-        aria-describedby="text-bicycle-messages"
-        name="text"
-        id="text-bicycle"
-        type="number"
-      />
-      <div class="fr-messages-group" id="text-bicycle-messages" aria-live="assertive"></div>
-    </div>
-    <p class="field-response-desc">Km en vélo</p>
-  </div>
-  <div class="fr-fieldset__element field-response-container">
-    <div class="number-input-container" id="input-group-2843">
-      <input
-        @input="handleReponse(modelValue as Map<string, string>, $event, 'bus')"
-        min="0"
-        :value="(modelValue as Map<string, string>).get('bus') || '0'"
-        class="fr-input"
-        aria-describedby="text-bus-messages"
-        name="text"
-        id="text-bus"
-        type="number"
-      />
-      <div class="fr-messages-group" id="text-bus-messages" aria-live="assertive"></div>
-    </div>
-    <p class="field-response-desc">Km en bus</p>
   </div>
 </template>
 
@@ -142,11 +175,13 @@ export default defineComponent({
       }
       emit("update:modelValue", props.modelValue);
     });
+
     function handleReponse(currentMap: Map<string, string>, event: Event, key: string) {
       const valeur = (event.target as HTMLInputElement).value;
       currentMap.set(key, valeur);
       emit("update:modelValue", currentMap);
     }
+
     const handleCheckboxChange = (): void => {
       isChecked.value = !isChecked.value;
       if (isChecked.value) {
@@ -166,13 +201,13 @@ export default defineComponent({
 
 <style scoped>
 .number-input-container {
-  width: 80px;
+  width: 100px;
   margin-bottom: 5px;
 }
 
 .field-response-container {
   display: flex;
-  margin: 0 auto;
+  margin: 10px auto;
 }
 
 .field-response-desc {

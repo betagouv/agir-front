@@ -1,6 +1,6 @@
 <template>
   <div class="fr-fieldset__element fill-response-checkbox-container">
-    <div class="fr-checkbox-group fr-custom-checkbox-group" v-if="dernierSuiviDuJourViewModel">
+    <div style="background-color: #f6f6f6; border-radius: 5px" class="fr-checkbox-group fr-custom-checkbox-group" v-if="dernierSuiviDuJourViewModel">
       <input
         :checked="isChecked"
         @change="handleCheckboxChange"
@@ -15,7 +15,7 @@
       <div class="fr-messages-group" id="checkbox-first-auto-fill-messages" aria-live="assertive"></div>
     </div>
   </div>
-  <h3 class="step-list-container">{{ currentStepQuestion }}</h3>
+  <h3 style="margin: 0 0 0 0.5em">{{ currentStepQuestion }}</h3>
   <div class="fr-messages-group" id="checkbox-messages" aria-live="assertive"></div>
   <div class="fr-fieldset__element field-response-container">
     <div class="number-input-container" id="input-group-2843">

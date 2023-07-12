@@ -54,22 +54,8 @@
               <router-link v-else class="fr-nav__link" :to="{ name: 'coach' }"> Le coach </router-link>
             </li>
             <li class="fr-nav__item" data-fr-js-navigation-item="true">
-              <router-link @click="resetCurrentHeaderTab" v-if="isDashboard" class="fr-nav__link" :to="{ name: 'dashboard' }" aria-current="page">
-                Tableau de bord
-              </router-link>
-              <router-link v-else class="fr-nav__link" :to="{ name: 'dashboard' }"> Tableau de bord </router-link>
-            </li>
-            <li class="fr-nav__item" data-fr-js-navigation-item="true">
-              <router-link @click="resetCurrentHeaderTab" v-if="isAides" class="fr-nav__link" :to="{ name: 'mes-aides' }" aria-current="page">
-                Mes Aides
-              </router-link>
+              <router-link v-if="isMesAidesActif" class="fr-nav__link" :to="{ name: 'mes-aides' }" aria-current="page"> Mes Aides </router-link>
               <router-link v-else class="fr-nav__link" :to="{ name: 'mes-aides' }"> Mes Aides </router-link>
-            </li>
-            <li class="fr-nav__item" data-fr-js-navigation-item="true">
-              <router-link @click="resetCurrentHeaderTab" v-if="isCommunity" class="fr-nav__link" :to="{ name: 'communaute' }" aria-current="page">
-                Communauté
-              </router-link>
-              <router-link v-else class="fr-nav__link" :to="{ name: 'communaute' }"> Communauté </router-link>
             </li>
           </ul>
         </nav>
@@ -94,30 +80,17 @@ export default defineComponent({
     nomUtilisateur() {
       return store.getters["utilisateur/getUtilisateur"];
     },
-    isAides() {
-      return this.currentPage && this.currentPage == "/mes-aides";
-    },
-    isCoach() {
-      return this.currentPage && this.currentPage.startsWith("/coach");
-    },
-    isDashboard() {
-      return this.currentPage && this.currentPage == "/dashboard";
-    },
-    isCommunity() {
-      return this.currentPage && this.currentPage == "/communaute";
-    },
-    resetCurrentHeaderTab() {
-      this.currentPage = window.location.pathname;
-    },
   },
   watch: {
     $route(to: RouteLocation, from: RouteLocation) {
       this.isCoachActif = to.fullPath.includes("/coach");
+      this.isMesAidesActif = to.fullPath.includes("/mes-aides");
     },
   },
   setup() {
     const currentPage = ref<string>("");
     const isCoachActif = ref<boolean>(false);
+    const isMesAidesActif = ref<boolean>(false);
     function logout() {
       store.dispatch("utilisateur/reset");
       router.replace("/");
@@ -131,6 +104,7 @@ export default defineComponent({
       logout,
       currentPage,
       isCoachActif,
+      isMesAidesActif,
     };
   },
 });

@@ -96,10 +96,10 @@ describe("Fichier de tests de l'envoie du suivi du jour", () => {
     function expectation(suiviDuJourResultat: SuiviDuJourResultatsViewModel) {
       expect(suiviDuJourResultat).toStrictEqual<SuiviDuJourResultatsViewModel>({
         impactCarbonDuJour: {
-          valeur: 21,
+          valeur: "21.0",
           pictoSens: "fr-icon-arrow-right-up-circle-fill",
           commentaire: "En hausse",
-          variation: 3,
+          variation: "3.0",
         },
         suivisPrecedent: {
           datesDesSuivis: ["27/07", "28/07", "29/07", "30/07"],

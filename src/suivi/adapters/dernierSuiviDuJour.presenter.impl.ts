@@ -15,11 +15,37 @@ export class DernierSuiviDuJourPresenterImpl implements DernierSuiviPresenter {
     this._dateTime = dateTime;
   }
 
+  convertiLesMinutesEnHeures(minutes: number): string {
+    const heures = Math.floor(minutes / 60);
+    const resultFinalDesHeures = String(heures).padStart(2, "0");
+    const minutesRestantes = minutes % 60;
+    const resultatFinalDesMinutes = String(minutesRestantes).padStart(2, "0");
+
+    return `${resultFinalDesHeures}:${resultatFinalDesMinutes}`;
+  }
+
+  isTransportEnCommun(valeur: string): boolean {
+    return valeur.includes("train") || valeur.includes("metro") || valeur.includes("bus");
+  }
+
+  formaterLesValeursDuSuivis(listeDesValeurs: Map<string, string>): Map<string, string> {
+    let resultat: Map<string, string> = new Map();
+
+    listeDesValeurs.forEach((value, key) => {
+      if (this.isTransportEnCommun(key)) {
+        resultat.set(key, this.convertiLesMinutesEnHeures(parseInt(value)));
+      } else {
+        resultat.set(key, value);
+      }
+    });
+    return resultat;
+  }
+
   presente(suivi: DernierSuivi) {
     const differenceEnJours = this.calculerNombreDeJoursDepuisLeDernierSuivi(suivi);
     this._viewModel({
       date: `Dernier suivi il y a ${differenceEnJours} jours`,
-      clefsEtValeurs: suivi.valeurs,
+      clefsEtValeurs: this.formaterLesValeursDuSuivis(suivi.valeurs),
     });
   }
 
