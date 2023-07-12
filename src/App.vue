@@ -1,17 +1,26 @@
 <script setup lang="ts">
 import Header from "@/components/Header.vue";
 import Footer from "@/components/Footer.vue";
+import { computed } from "vue";
+import { useRoute } from "vue-router";
+const afficherLeHeaderEtFooter = computed({
+  get() {
+    console.log(useRoute().name);
+    return useRoute().name !== "authentification";
+  },
+  set() {},
+});
 </script>
 
 <template>
   <div class="page-container">
-    <Header />
+    <Header v-if="afficherLeHeaderEtFooter" />
 
     <div class="fr-container fr-px-1w">
-        <router-view />
+      <router-view />
     </div>
-    
-    <Footer class="footer-container" />
+
+    <Footer v-if="afficherLeHeaderEtFooter" class="footer-container" />
   </div>
 </template>
 
@@ -31,5 +40,4 @@ import Footer from "@/components/Footer.vue";
   width: 100%;
   background-color: white;
 }
-
 </style>
