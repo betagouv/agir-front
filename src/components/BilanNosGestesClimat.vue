@@ -4,7 +4,7 @@
       <h3 class="fr-tile__desc">Votre bilan carbone</h3>
       <br />
       <p class="valeur">
-        <span class="impact-value">{{ getImpactValue }}</span> <span class="impact-tonne">tonnes de CO₂-e / an</span>
+        <span class="impact-value">{{ getImpactValue.bilan }}</span> <span class="impact-tonne">tonnes de CO₂-e / an</span>
       </p>
       <br />
       <div class="fr-tile__desc">propulsé par <img src="/logo_ngc.png" alt="impact-logo" /></div>
@@ -14,11 +14,11 @@
             <span class="fr-accordion__btn accordion-btn-area" aria-expanded="false" aria-controls="accordion-607">Voir le détail</span>
           </h3>
           <div class="fr-collapse" id="accordion-607">
-            <JaugeNosGestesClimat class="fr-mb-3v" libelle="🥦 Alimentation" :valeur="3.4" couleur="#F28622" />
-            <JaugeNosGestesClimat class="fr-mb-3v" libelle="🚗 Transports" :valeur="2" couleur="#474EFF" />
-            <JaugeNosGestesClimat class="fr-mb-3v" libelle="🏛️ Services sociétaux" :valeur="2" couleur="#809769" />
-            <JaugeNosGestesClimat class="fr-mb-3v" libelle="🏡 Logement" :valeur="0.5" couleur="#F8BE00" />
-            <JaugeNosGestesClimat class="fr-mb-3v" libelle="🛒 Consommation" :valeur="0.5" couleur="#5C26D1" />
+            <JaugeNosGestesClimat class="fr-mb-3v" libelle="🥦 Alimentation" :valeur="getImpactValue.detail.alimentation" couleur="#F28622" />
+            <JaugeNosGestesClimat class="fr-mb-3v" libelle="🚗 Transports" :valeur="getImpactValue.detail.transport" couleur="#474EFF" />
+            <JaugeNosGestesClimat class="fr-mb-3v" libelle="🏛️ Services sociétaux" :valeur="getImpactValue.detail.servicesSocietaux" couleur="#809769" />
+            <JaugeNosGestesClimat class="fr-mb-3v" libelle="🏡 Logement" :valeur="getImpactValue.detail.logement" couleur="#F8BE00" />
+            <JaugeNosGestesClimat class="fr-mb-3v" libelle="🛒 Consommation" :valeur="getImpactValue.detail.divers" couleur="#5C26D1" />
           </div>
         </section>
       </div>
@@ -27,12 +27,16 @@
 </template>
 <script lang="ts">
 import JaugeNosGestesClimat from "@/components/JaugeNosGestesClimat.vue";
+import { EmpreinteViewModel } from "@/bilan/adapters/chargementEmpreinte.presenter.impl";
 
 export default {
   name: "BilanNosGestesClimat",
   components: { JaugeNosGestesClimat },
   props: {
-    getImpactValue: {},
+    getImpactValue: {
+      type: Object as () => EmpreinteViewModel,
+      required: true,
+    },
   },
 };
 </script>

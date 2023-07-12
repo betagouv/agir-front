@@ -17,10 +17,6 @@ export interface BadgeViewModel {
   date: string;
 }
 
-export interface EmpreinteViewModel {
-  bilan: string;
-}
-
 export interface ScoreViewModel {
   utilisateur: string;
   badges: BadgeViewModel[];
