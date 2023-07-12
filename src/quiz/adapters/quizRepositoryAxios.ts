@@ -16,7 +16,7 @@ export interface QuizApiModel {
 }
 
 export class QuizRepositoryAxios implements QuizRepository {
-  async getQuiz(idQuizz: number): Promise<Quiz> {
+  async getQuiz(idQuizz: string): Promise<Quiz> {
     try {
       const axiosInstance = AxiosFactory.getAxios();
       const response = await axiosInstance.get<QuizApiModel>(`/quizz/${idQuizz}`);
@@ -36,7 +36,7 @@ export class QuizRepositoryAxios implements QuizRepository {
     }
   }
 
-  async evaluerQuiz(utilisateur: string, idQuizz: number, reponses: Map<string, string>): Promise<boolean> {
+  async evaluerQuiz(utilisateur: string, idQuizz: string, reponses: Map<string, string>): Promise<boolean> {
     const axiosInstance = AxiosFactory.getAxios();
     const array: Record<string, string>[] = Array.from(reponses, ([key, value]) => ({ [key]: value }));
 
