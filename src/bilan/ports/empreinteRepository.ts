@@ -1,5 +1,13 @@
+interface EmpreinteDetail {
+  alimentation: number;
+  divers: number;
+  logement: number;
+  servicesSocietaux: number;
+  transport: number;
+}
 export interface Empreinte {
-  bilan: string;
+  bilan: number;
+  detail: EmpreinteDetail;
 }
 
 export interface EmpreinteRepository {

@@ -19,7 +19,7 @@
         <div v-if="!isLoading">
           <div class="fr-grid-row fr-grid-row--gutters card-item-list-container">
             <div class="fr-col-12" v-if="empreinteViewModel">
-              <BilanNosGestesClimat :get-impact-value="empreinteViewModel.bilan" />
+              <BilanNosGestesClimat :get-impact-value="empreinteViewModel" />
             </div>
             <div class="fr-col-12">
               <MesResultats v-if="scoreViewModel" :badge-view-model="scoreViewModel.badges" :score-value="scoreViewModel.score" />
@@ -43,7 +43,7 @@
 
 <script lang="ts">
 import { defineComponent, onMounted, ref } from "vue";
-import { ScoreViewModel, EmpreinteViewModel } from "@/score/ports/chargementScorePresenter";
+import { ScoreViewModel } from "@/score/ports/chargementScorePresenter";
 import Compteur from "@/components/Compteur.vue";
 import QuizCarte from "@/components/QuizCarte.vue";
 import BadgeCarte from "@/components/BadgeContainer.vue";
@@ -54,7 +54,7 @@ import MesResultats from "@/components/MesResultats.vue";
 import { DeviceType, getDeviceType } from "@/DeviceType";
 import { ChargementEmpreinteUsecase } from "@/bilan/chargementEmpreinte.usecase";
 import { EmpreinteRepositoryAxios } from "@/bilan/adapters/empreinteRepository.axios";
-import { ChargementEmpreintePresenterImpl } from "@/bilan/adapters/chargementEmpreinte.presenter.impl";
+import { ChargementEmpreintePresenterImpl, EmpreinteViewModel } from "@/bilan/adapters/chargementEmpreinte.presenter.impl";
 import { ChargerInteractionsUsecase } from "@/interactions/chargerInteractions.usecase";
 import { InteractionsPresenterImpl, InteractionViewModel } from "@/interactions/adapters/interactions.presenter.impl";
 import InteractionCard from "@/components/InteractionCard.vue";
