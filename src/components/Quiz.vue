@@ -176,8 +176,6 @@ export default defineComponent({
 }
 
 .custom-button-next-quiz-question {
-  border-radius: 0;
-  background-color: #000091;
   margin: 0 0 0 0.5em;
 }
 </style>

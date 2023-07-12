@@ -13,7 +13,7 @@ import Empreinte from "@/components/Empreinte.vue";
 import SuiviDuJour from "@/components/SuiviDuJour.vue";
 
 const routes = [
-  { path: "/", component: Authentification },
+  { path: "/", name: "authentification", component: Authentification },
   { path: "/dashboard", name: "dashboard", component: Dashboard },
   { path: "/quiz/:id", name: "quiz", component: Quiz },
   { path: "/quiz/quiz-gagne", name: "quiz-gagne", component: QuizGagne },
