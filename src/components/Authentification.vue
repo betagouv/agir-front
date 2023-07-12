@@ -2,7 +2,7 @@
   <div class="main-container ">
     <div class="fr-container fr-m-auto">
       <div class="fr-grid-row fr-grid-row--gutters fr-grid-row--center fr-grid-row--middle">
-        <div class="fr-col-8 login-container fr-p-3w  fr-p-md-9w">
+        <div class="fr-col-10 fr-col-md-8 login-container fr-p-3w  fr-p-md-9w">
           <h1>Agir !</h1>
           <h2>L’accompagnement personnalisé pour réduire votre empreinte écologique</h2>
           <ul>
@@ -86,14 +86,7 @@ export default defineComponent({
 <style scoped>
 .login-container {
   text-align: left;
-  /*display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 4rem;*/
   box-shadow: 0 6px 18px 0 rgba(0, 0, 18, 0.16);
-  /*width: fit-content;
-  margin: 0 auto;
-  max-width: 60%;*/
 }
 
 .error {
@@ -103,10 +96,6 @@ export default defineComponent({
 }
 
 .main-container {
-  /*display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;*/
   text-align: left;
   display: flex;
   flex-direction: column;
