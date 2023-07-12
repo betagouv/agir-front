@@ -51,7 +51,12 @@
               >
                 Passer la question
               </span>
-              <button v-if="parseInt(item.id) == quizzViewModel?.questions?.length" class="fr-btn valid-responses-button" id="button-2864" title="Envoyer le formulaire">
+              <button
+                v-if="parseInt(item.id) == quizzViewModel?.questions?.length"
+                class="fr-btn valid-responses-button"
+                id="button-2864"
+                title="Envoyer le formulaire"
+              >
                 Valider mes réponses
               </button>
             </div>
@@ -80,10 +85,10 @@ export default defineComponent({
     const quizViewModel = ref<QuizViewModel>();
     const checkedResponses = new Map<string, string>();
 
-    let idQuiz: number = -1;
+    let idQuiz: string = "";
     const route = useRoute();
     if (typeof route.params.id === "string") {
-      idQuiz = parseInt(route.params.id, 10);
+      idQuiz = route.params.id;
     }
 
     function mapValuesQuiz(viewModel: QuizViewModel) {
@@ -113,13 +118,13 @@ export default defineComponent({
     onMounted(chargementQuizz);
 
     const evaluerQuizz = () => {
-      const username = store.getters["utilisateur/getUtilisateur"];
+      const utilisateurId = store.getters["utilisateur/getId"];
       const evaluerQuizzUsecase = new EvaluerQuizUsecase(quizzRepositoryAxios);
-      evaluerQuizzUsecase.execute(username, idQuiz, checkedResponses, new EvaluerQuizPresenterImpl(mapValuesEvaluer));
+      evaluerQuizzUsecase.execute(utilisateurId, idQuiz, checkedResponses, new EvaluerQuizPresenterImpl(mapValuesEvaluer));
     };
 
     function questionSuivante() {
-     currentStep.value = currentStep.value + 1;
+      currentStep.value = currentStep.value + 1;
     }
 
     function skipQuestion(idQuestion) {

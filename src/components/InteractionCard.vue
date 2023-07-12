@@ -1,40 +1,42 @@
 <template>
   <div v-if="interactionViewModel" class="fr-card fr-enlarge-link fr-card--horizontal fr-card--horizontal-tier">
+    <div class="interaction-locked" v-show="interactionViewModel.estBloquee" />
     <div class="fr-card__body">
       <div class="fr-card__content">
         <h3 class="fr-card__title">
-            {{ getDeviceType() == DeviceType.TABLET ? `${interactionViewModel?.titre.slice(0, 30)}...` : interactionViewModel?.titre }}
+          {{ getDeviceType() == DeviceType.TABLET ? `${interactionViewModel?.titre.slice(0, 30)}...` : interactionViewModel?.titre }}
         </h3>
-        <!--<p class="fr-card__desc">{{ interactionViewModel?.sousTitre }}</p>-->
         <div class="fr-card__start">
-          <span class="">{{ interactionViewModel?.categorie }}</span>
+          <span class="">{{ interactionViewModel.categorie }}</span>
         </div>
         <div class="fr-card__end">
           <ul class="fr-tags-group">
             <li>
-                <span class="fr-tag">
-                  <span class=" fr-icon-time-line fr-icon--sm"> 5 min</span>
-                </span>
+              <span class="fr-tag">
+                {{ interactionViewModel.duree }}
+              </span>
             </li>
-            <li class="no-tag">
-              <span class="fr-icon-leaf-line fr-icon--sm">+ {{ interactionViewModel?.nombreDePointsAGagner }} points</span>
+            <li class="no-tag fr-ml-1v">
+              <span class="fr-icon-leaf-line fr-icon--sm">+ {{ interactionViewModel.nombreDePointsAGagner }} points</span>
             </li>
           </ul>
         </div>
       </div>
       <div class="fr-card__footer">
         <a
+          v-if="!interactionViewModel.estBloquee"
           @click="interactionAEteCliquee(interactionViewModel.id, interactionViewModel.type)"
-          :href="interactionViewModel?.url"
-          :target="interactionViewModel?.isUrlExterne ? 'blank' : ''"
+          :href="interactionViewModel.url"
+          :target="interactionViewModel.isUrlExterne ? 'blank' : ''"
           >Commencer <span class="fr-icon-arrow-right-s-line" aria-hidden="true">&nbsp;</span></a
         >
+        <div v-else>À venir <span class="fr-icon-lock-line" aria-hidden="true">&nbsp;</span></div>
       </div>
     </div>
     <div class="fr-card__header">
-        <div class="fr-card__img">
-            <img class="fr-responsive-img" alt="interaction-item-logo" :src="interactionViewModel?.illustrationURL" />
-        </div>
+      <div class="fr-card__img">
+        <img class="fr-responsive-img" alt="interaction-item-logo" :src="interactionViewModel.illustrationURL" />
+      </div>
     </div>
   </div>
 </template>
@@ -77,65 +79,63 @@ export default defineComponent({
 });
 </script>
 <style scoped>
-
 /* card dsfr mod */
 
-.fr-card__body{
+.fr-card__body {
   flex-direction: row;
-  padding: 0 1rem
+  padding: 0 1rem;
 }
-.fr-card__content{
+.fr-card__content {
   padding: 1rem;
   height: auto;
 }
-.fr-card__title{
+.fr-card__title {
   text-align: left;
-
 }
-.fr-card__start, .fr-tags-group{
+.fr-card__start,
+.fr-tags-group {
   margin-bottom: 0;
   text-align: left;
 }
 
-.fr-card__end{
-  display:inline-block
+.fr-card__end {
+  display: inline-block;
 }
-.fr-tags-group>li {
+.fr-tags-group > li {
   line-height: 22px;
   height: 22px;
-  font-size: .75rem;
-    line-height: 1.25rem;
+  font-size: 0.75rem;
+  line-height: 1.25rem;
 }
-.fr-tags-group>li.no-tag {
-  padding-top: 2px
+.fr-tags-group > li.no-tag {
+  padding-top: 2px;
 }
 
-.fr-card{
+.fr-card {
   border-radius: 6px;
 }
-.fr-card:before{
+.fr-card:before {
   content: none;
 }
-.fr-card.fr-enlarge-link:not(.fr-card--no-icon) .fr-card__content{
+.fr-card.fr-enlarge-link:not(.fr-card--no-icon) .fr-card__content {
   padding-bottom: 0;
 }
 
-
 /* card image */
-.fr-card--horizontal-tier .fr-card__header{
+.fr-card--horizontal-tier .fr-card__header {
   flex: 0 0 30%;
 }
 .fr-card__img {
   padding: 10px;
 }
-.fr-card__img img{
+.fr-card__img img {
   border-radius: 6px;
   max-height: 120px;
   max-width: 240px;
   object-fit: cover;
 }
 /* bloc "commencer" */
-.fr-card__footer{
+.fr-card__footer {
   text-align: right;
   margin-left: auto;
   margin-top: auto;
@@ -143,8 +143,8 @@ export default defineComponent({
   padding: 0.5rem 2rem 0rem;
 }
 
-@media only screen and (max-width : 768px) {
-  .fr-card__body{
+@media only screen and (max-width: 768px) {
+  .fr-card__body {
     flex-direction: column;
   }
   .fr-card__footer {
@@ -153,25 +153,32 @@ export default defineComponent({
     margin: 0;
     overflow: hidden;
   }
-  .fr-card{
+  .fr-card {
     flex-direction: row;
   }
   /*.fr-card__header {
     display: none
   }*/
-
 }
 
-@media only screen and (max-width : 576px) {
-
+@media only screen and (max-width: 576px) {
   .fr-card__header {
-    display: none
+    display: none;
   }
-  .fr-card{
-    padding-left: 1rem
+  .fr-card {
+    padding-left: 1rem;
   }
 }
 
 /* end card dsfr mod */
 
+.interaction-locked {
+  border-radius: 0.375rem;
+  opacity: 0.6000000238418579;
+  background: #fff;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 1;
+}
 </style>

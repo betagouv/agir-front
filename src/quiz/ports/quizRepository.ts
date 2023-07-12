@@ -10,6 +10,6 @@ export interface Quiz {
 }
 
 export interface QuizRepository {
-  getQuiz(id: number): Promise<Quiz>;
-  evaluerQuiz(utilisateur: string, quizId: number, reponses: Map<string, string>): Promise<boolean>;
+  getQuiz(id: string): Promise<Quiz>;
+  evaluerQuiz(utilisateur: string, quizId: string, reponses: Map<string, string>): Promise<boolean>;
 }

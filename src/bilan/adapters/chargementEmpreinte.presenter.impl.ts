@@ -14,7 +14,7 @@ export class ChargementEmpreintePresenterImpl implements ChargementEmpreintePres
 
   presenteEmpreinte(empreinte: Empreinte): void {
     this._empreinteViewModel({
-      bilan: (parseFloat(empreinte.bilan) / 1000).toFixed(3),
+      bilan: (parseFloat(empreinte.bilan) / 1000).toFixed(1),
     });
   }
 }

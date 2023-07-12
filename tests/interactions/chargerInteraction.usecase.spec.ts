@@ -32,6 +32,8 @@ describe("Fichier de tests pour charger les interactions", () => {
       url: "/quiz/id",
       aEteFaite: false,
       idDuContenu: "idDuContenu",
+      duree: "",
+      estBloquee: false,
     };
     const usecase = new ChargerInteractionsUsecase(new InteractionsRepositoryForTest([interactionQuizzAFaire]));
     await usecase.execute("1", new InteractionsPresenterImpl(expectation));
@@ -49,6 +51,8 @@ describe("Fichier de tests pour charger les interactions", () => {
           illustrationURL: "illustrationURL",
           url: "/quiz/idDuContenu",
           isUrlExterne: false,
+          estBloquee: false,
+          duree: "",
         },
       ]);
     }
@@ -70,6 +74,8 @@ describe("Fichier de tests pour charger les interactions", () => {
           url: "url",
           aEteFaite: false,
           idDuContenu: "id",
+          duree: "",
+          estBloquee: false,
         },
       ])
     );
@@ -88,6 +94,8 @@ describe("Fichier de tests pour charger les interactions", () => {
           illustrationURL: "illustrationURL",
           url: "url",
           isUrlExterne: true,
+          estBloquee: false,
+          duree: "",
         },
       ]);
     }
@@ -109,6 +117,8 @@ describe("Fichier de tests pour charger les interactions", () => {
           url: "",
           aEteFaite: false,
           idDuContenu: "id",
+          duree: "",
+          estBloquee: false,
         },
       ])
     );
@@ -127,6 +137,8 @@ describe("Fichier de tests pour charger les interactions", () => {
           illustrationURL: "illustrationURL",
           url: "/coach/suivi-du-jour",
           isUrlExterne: false,
+          estBloquee: false,
+          duree: "",
         },
       ]);
     }
@@ -148,6 +160,8 @@ describe("Fichier de tests pour charger les interactions", () => {
           url: "",
           aEteFaite: false,
           idDuContenu: "id",
+          duree: "",
+          estBloquee: false,
         },
       ])
     );
@@ -166,6 +180,8 @@ describe("Fichier de tests pour charger les interactions", () => {
           illustrationURL: "illustrationURL",
           url: "",
           isUrlExterne: false,
+          estBloquee: false,
+          duree: "",
         },
       ]);
     }
@@ -187,6 +203,8 @@ describe("Fichier de tests pour charger les interactions", () => {
           url: "",
           aEteFaite: false,
           idDuContenu: "id",
+          duree: "",
+          estBloquee: false,
         },
         {
           id: "id2",
@@ -200,6 +218,8 @@ describe("Fichier de tests pour charger les interactions", () => {
           url: "",
           aEteFaite: true,
           idDuContenu: "id",
+          duree: "",
+          estBloquee: false,
         },
       ])
     );
@@ -218,6 +238,8 @@ describe("Fichier de tests pour charger les interactions", () => {
           illustrationURL: "illustrationURL",
           url: "",
           isUrlExterne: false,
+          estBloquee: false,
+          duree: "",
         },
       ]);
     }

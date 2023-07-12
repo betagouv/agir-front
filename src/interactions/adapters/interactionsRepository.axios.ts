@@ -17,6 +17,7 @@ export interface InteractionApiModel {
   points: number;
   reco_score: number;
   content_id: string;
+  locked: boolean;
 }
 export class InteractionsRepositoryAxios implements InteractionsRepository {
   async chargerInteractions(idUtilisateur: string): Promise<Interaction[]> {
@@ -36,6 +37,8 @@ export class InteractionsRepositoryAxios implements InteractionsRepository {
         url: apiModel.url || "",
         aEteFaite: apiModel.done,
         idDuContenu: apiModel.content_id,
+        duree: apiModel.duree,
+        estBloquee: apiModel.locked,
       };
       return interaction;
     });

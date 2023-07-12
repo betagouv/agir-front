@@ -1,12 +1,11 @@
 import { Quiz, QuizRepository } from "../../src/quiz/ports/quizRepository";
 
 export class QuizRepositoryEvaluerAvecDesBonnesReponses implements QuizRepository {
-  getQuiz(id: number): Promise<Quiz> {
-    console.log(id);
+  getQuiz(id: string): Promise<Quiz> {
     throw Error();
   }
 
-  evaluerQuiz(utilisateur: string, quizId: number, reponses: Map<string, string>): Promise<boolean> {
+  evaluerQuiz(utilisateur: string, quizId: string, reponses: Map<string, string>): Promise<boolean> {
     return Promise.resolve(true);
   }
 }

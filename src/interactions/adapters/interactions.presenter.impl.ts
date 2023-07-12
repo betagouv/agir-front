@@ -12,6 +12,8 @@ export interface InteractionViewModel {
   illustrationURL: string;
   url: string;
   isUrlExterne: boolean;
+  duree: string;
+  estBloquee: boolean;
 }
 export class InteractionsPresenterImpl implements InteractionsPresenter {
   private _viewModels: (interactionViewModels: InteractionViewModel[]) => void;
@@ -50,6 +52,8 @@ export class InteractionsPresenterImpl implements InteractionsPresenter {
           illustrationURL: interaction.illustrationURL,
           url: this.determineUrl(interaction),
           isUrlExterne: interaction.type === InteractionType.ARTICLE,
+          duree: interaction.duree,
+          estBloquee: interaction.estBloquee,
         };
       });
     this._viewModels(interactionNonFaites);

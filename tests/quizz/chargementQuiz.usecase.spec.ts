@@ -3,7 +3,7 @@ import { ChargementQuizUsecase } from "../../src/quiz/chargementQuiz.usecase";
 import { ChargementQuizPresenterImpl, QuizViewModel } from "../../src/quiz/adapters/chargementQuiz.presenter.impl";
 
 class QuizRepositoryForTest implements QuizRepository {
-  async getQuiz(id: number): Promise<Quiz> {
+  async getQuiz(id: string): Promise<Quiz> {
     return {
       titre: `Mon super quizz ${id}`,
       questions: [
@@ -16,7 +16,7 @@ class QuizRepositoryForTest implements QuizRepository {
     };
   }
 
-  evaluerQuiz(utilisateur: string, quizId: number, reponses: Map<string, string>): Promise<boolean> {
+  evaluerQuiz(utilisateur: string, quizId: string, reponses: Map<string, string>): Promise<boolean> {
     console.log(utilisateur, quizId, reponses);
     throw Error;
   }
@@ -28,7 +28,7 @@ describe("Fichier de test du usecase de chargement d'un quizz", () => {
     const chargementQuizzUsecase = new ChargementQuizUsecase(new QuizRepositoryForTest());
 
     // WHEN
-    chargementQuizzUsecase.execute(1, new ChargementQuizPresenterImpl(expectation));
+    chargementQuizzUsecase.execute("1", new ChargementQuizPresenterImpl(expectation));
 
     // THEN
     function expectation(quizzViewModel: QuizViewModel) {
