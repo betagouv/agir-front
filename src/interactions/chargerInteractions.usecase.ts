@@ -24,6 +24,8 @@ export interface Interaction {
   url: string;
   aEteFaite: boolean;
   idDuContenu: string;
+  duree: string;
+  estBloquee: boolean;
 }
 
 export class ChargerInteractionsUsecase {

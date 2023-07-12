@@ -14,15 +14,15 @@ class EmpreinteRepositoryForTest implements EmpreinteRepository {
   }
 }
 describe("Fichier de tests pour le chargement d'une empreinte carbone", () => {
-  it("En donnant un nom d'utilisateur doit retourner la valeur du bilan", () => {
+  it("En donnant un nom d'utilisateur doit retourner la valeur du bilan", async () => {
     // GIVEN
     // WHEN
     const useCase = new ChargementEmpreinteUsecase(new EmpreinteRepositoryForTest());
-    useCase.execute("Dorian", new ChargementEmpreintePresenterImpl(expectation));
+    await useCase.execute("Dorian", new ChargementEmpreintePresenterImpl(expectation));
     // THEN
     function expectation(empreinteViewModel: EmpreinteViewModel) {
       expect(empreinteViewModel).toStrictEqual({
-        bilan: "1.000",
+        bilan: "1.0",
       });
     }
   });

@@ -7,7 +7,7 @@ describe("Fichier de tests unitaire pour la correction des quiz", () => {
     // GIVEN
     // WHEN
     const useCase = new EvaluerQuizUsecase(new QuizRepositoryEvaluerAvecDesBonnesReponses());
-    const quizzId = 1;
+    const quizzId = "1";
     const reponses: Map<string, string> = new Map();
     reponses.set("1", "300m");
     reponses.set("2", "2700L");
