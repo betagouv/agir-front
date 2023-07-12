@@ -26,7 +26,7 @@ export default defineComponent({
   name: "ImpactDuJour",
   props: {
     consommationDuJour: {
-      type: Number as () => number,
+      type: String as () => string,
       required: true,
       default: "0",
     },

@@ -15,15 +15,47 @@ export class DernierSuiviDuJourPresenterImpl implements DernierSuiviPresenter {
     this._dateTime = dateTime;
   }
 
-  presente(suivi: DernierSuivi) {
-    const currentDate = this._dateTime.now();
-    const lastFollowUpDate = this._dateTime.from(suivi.date);
+  convertiLesMinutesEnHeures(minutes: number): string {
+    const heures = Math.floor(minutes / 60);
+    const resultFinalDesHeures = String(heures).padStart(2, "0");
+    const minutesRestantes = minutes % 60;
+    const resultatFinalDesMinutes = String(minutesRestantes).padStart(2, "0");
 
-    const differenceInMilliseconds = currentDate.getTime() - lastFollowUpDate.getTime();
-    const differenceInDays = Math.floor(differenceInMilliseconds / (1000 * 60 * 60 * 24));
-    this._viewModel({
-      date: `Dernier suivi il y a ${differenceInDays} jours`,
-      clefsEtValeurs: suivi.valeurs,
+    return `${resultFinalDesHeures}:${resultatFinalDesMinutes}`;
+  }
+
+  isTransportEnCommun(valeur: string): boolean {
+    return valeur.includes("train") || valeur.includes("metro") || valeur.includes("bus");
+  }
+
+  formaterLesValeursDuSuivis(listeDesValeurs: Map<string, string>): Map<string, string> {
+    let resultat: Map<string, string> = new Map();
+
+    listeDesValeurs.forEach((value, key) => {
+      if (this.isTransportEnCommun(key)) {
+        resultat.set(key, this.convertiLesMinutesEnHeures(parseInt(value)));
+      } else {
+        resultat.set(key, value);
+      }
     });
+    return resultat;
+  }
+
+  presente(suivi: DernierSuivi) {
+    const differenceEnJours = this.calculerNombreDeJoursDepuisLeDernierSuivi(suivi);
+    this._viewModel({
+      date: `Dernier suivi il y a ${differenceEnJours} jours`,
+      clefsEtValeurs: this.formaterLesValeursDuSuivis(suivi.valeurs),
+    });
+  }
+
+  private calculerNombreDeJoursDepuisLeDernierSuivi(dernierSuivi: DernierSuivi) {
+    const dateDuJour = this._dateTime.now();
+    const dateDuDernierSuivi = this._dateTime.from(dernierSuivi.date);
+    dateDuJour.setHours(0, 0, 0, 0);
+    dateDuDernierSuivi.setHours(0, 0, 0, 0);
+
+    const differenceEnMillisecondes = dateDuJour.getTime() - dateDuDernierSuivi.getTime();
+    return Math.floor(differenceEnMillisecondes / (1000 * 60 * 60 * 24));
   }
 }

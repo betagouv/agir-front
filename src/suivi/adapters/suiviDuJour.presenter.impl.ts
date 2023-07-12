@@ -2,15 +2,16 @@ import { ElementSuiviCarbone, Resultat } from "@/suivi/envoyerSuiviDuJour.usecas
 import { SuiviDuJourPresenter } from "@/suivi/ports/suiviDuJour.presenter";
 
 export enum ImpactCarboneCategorie {
-  TRANSPORT = "transport",
+  TRANSPORT_EN_COMMUN = "transport_en_commun",
+  TRANSPORT_INDIVIDUEL = "transport_individuel",
   ALIMENTATION = "alimentation",
 }
 
 export interface ImpactCarboneDuJourViewModel {
-  valeur: number;
+  valeur: string;
   pictoSens: string;
   commentaire: string;
-  variation: number;
+  variation: string;
 }
 export interface SuivisPrecedentViewModel {
   datesDesSuivis: string[];
@@ -36,21 +37,16 @@ export class SuiviDuJourPresenterImpl implements SuiviDuJourPresenter {
     this._viewModel = viewModel;
   }
 
-  getImpactCarboneCategorie(impactCarboneNature: string): ImpactCarboneCategorie {
-    if (
-      impactCarboneNature.includes("km") ||
-      impactCarboneNature.includes("velo") ||
-      impactCarboneNature.includes("train") ||
-      impactCarboneNature.includes("pied") ||
-      impactCarboneNature.includes("metro") ||
-      impactCarboneNature.includes("bus")
-    ) {
-      return ImpactCarboneCategorie.TRANSPORT;
+  private getImpactCarboneCategorie(impactCarboneNature: string): ImpactCarboneCategorie {
+    if (impactCarboneNature.includes("km") || impactCarboneNature.includes("velo") || impactCarboneNature.includes("pied")) {
+      return ImpactCarboneCategorie.TRANSPORT_INDIVIDUEL;
+    } else if (impactCarboneNature.includes("train") || impactCarboneNature.includes("metro") || impactCarboneNature.includes("bus")) {
+      return ImpactCarboneCategorie.TRANSPORT_EN_COMMUN;
     }
     return ImpactCarboneCategorie.ALIMENTATION;
   }
 
-  getElementCarboneNature(valeur: string) {
+  private getElementCarboneNature(valeur: string) {
     const valeurFinale = valeur.replace("_", " ");
     if (this.getImpactCarboneCategorie(valeur) == ImpactCarboneCategorie.ALIMENTATION) {
       return valeurFinale.replace("vegetarien", "légumes").replace("vegetalien", "sans produits animaux");
@@ -58,26 +54,17 @@ export class SuiviDuJourPresenterImpl implements SuiviDuJourPresenter {
     return valeurFinale;
   }
 
-  getAdditionCarbone(listDesValeurs: ElementSuiviCarbone[]): LigneCarbone[] {
-    let resultats: LigneCarbone[] = [];
-    listDesValeurs.sort((element1, element2) => (element1.impactCarbone > element2.impactCarbone ? -1 : 1));
-
-    for (let index = 0; index < listDesValeurs.length; index++) {
-      const carboneValeur = listDesValeurs[index];
-      const [debut, fin] = carboneValeur.titre.split("_");
-      if (carboneValeur.valeur > 0) {
-        resultats.push({
-          valeur: this.getValeur(carboneValeur, debut, fin),
-          impactCarbone: `+${carboneValeur.impactCarbone / 1000} kg`,
-          styleFont: this.getStyleFont(index),
-        });
-      }
+  private getValeurEmpreinteCarboneAvecLeFormatAttendu(titreDuDetail: string): string {
+    if (this.getImpactCarboneCategorie(titreDuDetail) == ImpactCarboneCategorie.ALIMENTATION) {
+      return "repas avec";
+    } else if (this.getImpactCarboneCategorie(titreDuDetail) == ImpactCarboneCategorie.TRANSPORT_INDIVIDUEL) {
+      return "km de";
     }
-    return resultats;
+    return "minutes de";
   }
 
-  private getValeur(carboneValeur: ElementSuiviCarbone, debut: string, fin: string): string {
-    return `${carboneValeur.valeur} ${this.getImpactCarboneCategorie(carboneValeur.titre) == ImpactCarboneCategorie.TRANSPORT ? "km de" : "repas avec"} ${
+  private getDetailEmpreinteCarbone(carboneValeur: ElementSuiviCarbone, debut: string, fin: string): string {
+    return `${carboneValeur.valeur} ${this.getValeurEmpreinteCarboneAvecLeFormatAttendu(carboneValeur.titre)} ${
       debut == "km" ? fin : this.getElementCarboneNature(carboneValeur.titre)
     }`;
   }
@@ -89,13 +76,32 @@ export class SuiviDuJourPresenterImpl implements SuiviDuJourPresenter {
   private getMoyenneDesSuivis(resultat: Resultat): number[] {
     return new Array(resultat?.suivisPrecedent.datesDesSuivis.length).fill(resultat.suivisPrecedent.moyenneDesSuivis / 1000);
   }
+
+  private getAdditionCarbone(listDesValeurs: ElementSuiviCarbone[]): LigneCarbone[] {
+    let resultats: LigneCarbone[] = [];
+    listDesValeurs.sort((element1, element2) => (element1.impactCarbone > element2.impactCarbone ? -1 : 1));
+
+    for (let index = 0; index < listDesValeurs.length; index++) {
+      const carboneValeur = listDesValeurs[index];
+      const [debut, fin] = carboneValeur.titre.split("_");
+      if (carboneValeur.valeur > 0) {
+        resultats.push({
+          valeur: this.getDetailEmpreinteCarbone(carboneValeur, debut, fin),
+          impactCarbone: `+${carboneValeur.impactCarbone / 1000} kg`,
+          styleFont: this.getStyleFont(index),
+        });
+      }
+    }
+    return resultats;
+  }
+
   presente(resultat: Resultat) {
     this._viewModel({
       impactCarbonDuJour: {
-        valeur: resultat?.impactCarbonDuJour.valeur / 1000,
+        valeur: (resultat?.impactCarbonDuJour.valeur / 1000).toFixed(1),
         pictoSens: resultat?.impactCarbonDuJour.variation > 0 ? "fr-icon-arrow-right-up-circle-fill" : "fr-icon-arrow-right-down-circle-fill",
         commentaire: resultat?.impactCarbonDuJour.variation > 0 ? "En hausse" : "En baisse",
-        variation: resultat.impactCarbonDuJour.variation / 1000,
+        variation: (resultat.impactCarbonDuJour.variation / 1000).toFixed(1),
       },
       suivisPrecedent: {
         datesDesSuivis: resultat?.suivisPrecedent.datesDesSuivis,

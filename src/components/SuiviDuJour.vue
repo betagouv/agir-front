@@ -23,7 +23,7 @@
               <div v-if="etapeCourante" class="fr-stepper__steps" :data-fr-current-step="etapeCourante" :data-fr-steps="3" />
               <br />
               <fieldset class="fr-fieldset" id="checkbox" aria-labelledby="checkbox-legend checkbox-messages">
-                <div v-if="etapeCourante == 1">
+                <div class="selected-step-container" v-if="etapeCourante == 1">
                   <SuiviDuJourPremiereEtape
                     current-step-question="Comptez combien de repas vous avez consommé avec les aliments suivants :"
                     :etape-courante="etapeCourante"
@@ -32,12 +32,13 @@
                     :dernier-suivi-du-jour-view-model="dernierSuiviDuJourAlimentationViewmodel"
                   />
                 </div>
-                <div v-else-if="etapeCourante == 2">
+                <div class="selected-step-container" v-else-if="etapeCourante == 2">
                   <SuiviDuJourSecondeEtape
                     current-step-question="Quels transports avez vous utilisé aujourd'hui ?"
                     :etape-courante="etapeCourante"
                     @update:model-value="miseAjourReponseSuiviDuJourTransport"
                     :model-value="suiviDuJourTransport"
+                    :dernier-suivi-du-jour-view-model="dernierSuiviDuJourTransportViewmodel"
                   />
                 </div>
                 <div class="last-step-container" v-else>
@@ -45,13 +46,12 @@
                 </div>
               </fieldset>
               <div style="text-align: left">
-                <span v-if="etapeCourante <= 2 && etapeCourante > 1" @click="etapePrecedente" class="step-btn-actions">
+                <span v-if="etapeCourante <= 2 && etapeCourante > 1" @click="etapePrecedente" class="step-btn-actions margin-between-buttons">
                   <span class="fr-icon-arrow-left-line" aria-hidden="true"></span>
                   Précédent
                 </span>
-                <button v-if="etapeCourante < 3" class="fr-btn fr-btn-not-rounded" title="Suivant">Continuer</button>
+                <button v-if="etapeCourante < 3" class="fr-btn fr-btn-not-rounded margin-between-buttons" title="Suivant">Continuer</button>
                 <span v-if="etapeCourante == 1" @click="sauterEtape" class="step-btn-actions"> Passer la question </span>
-
                 <button v-if="etapeCourante == 3" class="fr-btn-not-rounded share-btn-container" title="partager">Partager vos résultats</button>
                 <br />
                 <router-link
@@ -141,8 +141,9 @@ export default defineComponent({
     let suiviDuJourAlimentation = new Map<string, string>();
     let suiviDuJourTransport = new Map<string, string>();
     let dernierSuiviDuJourAlimentationViewmodel = ref<DernierSuiviDuJourViewModel>();
+    let dernierSuiviDuJourTransportViewmodel = ref<DernierSuiviDuJourViewModel>();
     const suiviDuJourResultatsViewModel = ref<SuiviDuJourResultatsViewModel>({
-      impactCarbonDuJour: { valeur: 0, pictoSens: "", commentaire: "", variation: 0 },
+      impactCarbonDuJour: { valeur: "0", pictoSens: "", commentaire: "", variation: "0" },
       suivisPrecedent: { valeursDesSuivis: [], datesDesSuivis: [], moyenneDesSuivis: [] },
       additionCarbone: [],
     });
@@ -153,8 +154,11 @@ export default defineComponent({
       const chargerDernierSuiviAlimentation = new ObtenirDernierSuiviUsecase(new SuiviDuJourRepositoryAxios());
 
       function mapSuiviAlimentation(dernierSuiviViewModel: DernierSuiviDuJourViewModel) {
-        console.log(dernierSuiviViewModel);
         dernierSuiviDuJourAlimentationViewmodel.value = dernierSuiviViewModel;
+      }
+      function mapSuiviTransport(dernierSuiviViewModel: DernierSuiviDuJourViewModel) {
+        dernierSuiviDuJourTransportViewmodel.value = dernierSuiviViewModel;
+        console.log("transport", dernierSuiviDuJourTransportViewmodel.value);
       }
 
       chargerDernierSuiviAlimentation.execute(
@@ -162,6 +166,7 @@ export default defineComponent({
         "alimentation",
         new DernierSuiviDuJourPresenterImpl(mapSuiviAlimentation, new DateTimeTypeScript())
       );
+      chargerDernierSuiviAlimentation.execute(idUtilisateur, "transport", new DernierSuiviDuJourPresenterImpl(mapSuiviTransport, new DateTimeTypeScript()));
     });
 
     function etapeSuivante() {
@@ -199,7 +204,6 @@ export default defineComponent({
 
     function mapImpactCarboneDuJour(impactDuJourViewModel: SuiviDuJourResultatsViewModel) {
       suiviDuJourResultatsViewModel.value = impactDuJourViewModel;
-      console.log(suiviDuJourResultatsViewModel);
     }
 
     return {
@@ -213,6 +217,7 @@ export default defineComponent({
       suiviDuJourAlimentation,
       suiviDuJourTransport,
       dernierSuiviDuJourAlimentationViewmodel,
+      dernierSuiviDuJourTransportViewmodel,
       suiviDuJourResultatsViewModel,
     };
   },
@@ -276,5 +281,14 @@ export default defineComponent({
 
 .fr-btn-not-rounded {
   border-radius: 0;
+}
+
+.selected-step-container {
+  width: 100%;
+  text-align: left;
+}
+
+.margin-between-buttons {
+  margin: 0 1em 0 0;
 }
 </style>

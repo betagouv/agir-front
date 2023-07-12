@@ -55,10 +55,38 @@ function getValeursDesDates(listeDesAdditionsCarbone: SuiviDuJourGraphDataApiMod
   return valeurDesDates;
 }
 
+function calculerTempsEnMinute(temps: string): number {
+  const timeParts = temps.split(":");
+  const heures = parseInt(timeParts[0]);
+  const minutes = parseInt(timeParts[1]);
+
+  if (!isNaN(heures) && !isNaN(minutes)) {
+    return heures * 60 + minutes;
+  }
+  return 0;
+}
+
+function isTransportEnCommun(valeur: string): boolean {
+  return valeur.includes("train") || valeur.includes("metro") || valeur.includes("bus");
+}
+
+function getToutesLesValeursDuSuivisAvecLeBonFormat(listeDesValeurs: Map<string, string>): Map<string, string> {
+  let listeFinaleDesValeurs: Map<string, string> = new Map();
+
+  listeDesValeurs.forEach((value, key) => {
+    if (isTransportEnCommun(key)) {
+      listeFinaleDesValeurs.set(key, calculerTempsEnMinute(value).toString());
+    } else {
+      listeFinaleDesValeurs.set(key, value);
+    }
+  });
+  return listeFinaleDesValeurs;
+}
+
 export class SuiviDuJourRepositoryAxios implements SuiviRepository {
   async ajouter(type: string, valeurs: Map<string, string>, utilisateurId: string) {
     const axiosInstance = AxiosFactory.getAxios();
-    const jsonObject = { type, ...Object.fromEntries(valeurs) };
+    const jsonObject = { type, ...Object.fromEntries(getToutesLesValeursDuSuivisAvecLeBonFormat(valeurs)) };
     await axiosInstance.post(`/utilisateurs/${utilisateurId}/suivis`, jsonObject, {});
   }
 

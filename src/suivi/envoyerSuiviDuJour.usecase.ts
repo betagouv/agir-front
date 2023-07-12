@@ -35,6 +35,11 @@ export class EnvoyerSuiviDuJourUsecase {
   constructor(suiviRepository: SuiviRepository, interactionRepository: InteractionsRepository) {
     this.suiviRepository = suiviRepository;
     this.interactionRepository = interactionRepository;
+    this.interactionRepository = interactionRepository;
+  }
+
+  private isListeDesValeursVide(listeDesValeurs: Map<string, string>): boolean {
+    return listeDesValeurs.size === 0;
   }
 
   async execute(
@@ -44,8 +49,12 @@ export class EnvoyerSuiviDuJourUsecase {
     idUtilisateur: string,
     interactionId: string
   ): Promise<void> {
-    await this.suiviRepository.ajouter("alimentation", suiviAlimentation.valeurs, idUtilisateur);
-    await this.suiviRepository.ajouter("transport", suiviTransport.valeurs, idUtilisateur);
+    if (!this.isListeDesValeursVide(suiviAlimentation.valeurs)) {
+      await this.suiviRepository.ajouter("alimentation", suiviAlimentation.valeurs, idUtilisateur);
+    }
+    if (!this.isListeDesValeursVide(suiviTransport.valeurs)) {
+      await this.suiviRepository.ajouter("transport", suiviTransport.valeurs, idUtilisateur);
+    }
     const resultat = await this.suiviRepository.recupererResultat(idUtilisateur);
     await this.interactionRepository.interactionAEteTerminee(interactionId, idUtilisateur);
     presenter.presente(resultat);

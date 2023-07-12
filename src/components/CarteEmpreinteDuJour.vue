@@ -12,12 +12,14 @@
             <p>de CO₂-e</p>
             <span style="margin-left: 5px" class="fr-icon-information-line" aria-hidden="true"></span>
           </div>
-          <div>
-            <div class="carbon-value-desc-text">
+          <div class="carbon-value-desc-text">
+            <div class="picto">
               <span :class="suiviDuJourResultats.impactCarbonDuJour.pictoSens" aria-hidden="true"></span>
-              <p style="margin-left: 5px; font-weight: bold">En hausse</p>
-              &nbsp;
-              <p>+7 kg CO₂-e par rapport au suivi précédent</p>
+            </div>
+            <div class="commentaire">
+              <p style="font-weight: bold">{{ suiviDuJourResultats.impactCarbonDuJour.commentaire }}</p>
+              <span style="font-weight: bold">{{ suiviDuJourResultats.impactCarbonDuJour.variation }}</span>
+              kg CO₂-e par rapport au suivi précédent
             </div>
           </div>
         </div>
@@ -78,5 +80,13 @@ export default {
   margin: 10px;
   padding: 0;
   text-align: left;
+}
+.picto {
+  display: flex;
+  align-items: center;
+}
+
+.commentaire {
+  margin-left: 5px;
 }
 </style>

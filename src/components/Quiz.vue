@@ -18,7 +18,7 @@
           :aria-labelledby="`radio-${item.id}-legend radio-disabled-messages-${item}`"
         >
           <div v-if="currentStep.toString() == item.id" class="quiz-question-container">
-            <h3 style="text-align: left">{{ item.intitule }}</h3>
+            <h3 style="text-align: left; margin: 0 0 0 0.5em">{{ item.intitule }}</h3>
             <div v-for="reponse in item.reponsesPossibles" class="fr-fieldset__element">
               <div class="fr-radio-group fr-radio-rich">
                 <input
@@ -38,7 +38,7 @@
               <button
                 v-if="currentStep < quizzViewModel?.questions.length"
                 @click="questionSuivante"
-                class="fr-btn stepper-actions-next-question valid-responses-button"
+                class="fr-btn custom-button-next-quiz-question"
                 title="Valider"
               >
                 Suivant
@@ -53,7 +53,7 @@
               </span>
               <button
                 v-if="parseInt(item.id) == quizzViewModel?.questions?.length"
-                class="fr-btn valid-responses-button"
+                class="fr-btn custom-button-next-quiz-question"
                 id="button-2864"
                 title="Envoyer le formulaire"
               >
@@ -146,6 +146,7 @@ export default defineComponent({
 
 <style scoped>
 .quiz-question-container {
+  text-align: left;
   width: 100%;
 }
 
@@ -153,29 +154,10 @@ export default defineComponent({
   cursor: pointer;
 }
 
-.stepper-actions-next-question {
-  margin: 10px;
-  border-radius: 3px;
-  background-color: black;
-}
-
 .stepper-actions-ignore-question {
   margin: 10px;
-  border-radius: 3px;
-  background-color: white;
-  color: black;
-  border: 1px solid black;
-}
-
-.valid-responses-button {
-  border-radius: 3px;
-  background-color: black;
-}
-
-.valid-responses-button:hover {
-  background-color: white;
-  color: black;
-  border-color: black;
+  background-color: #f6f6f6;
+  color: #000091;
 }
 
 .quiz-stepper-container {
@@ -191,5 +173,11 @@ export default defineComponent({
 #app > div > div > div > div > form > div {
   border-radius: 5px;
   background-color: #000091;
+}
+
+.custom-button-next-quiz-question {
+  border-radius: 0;
+  background-color: #000091;
+  margin: 0 0 0 0.5em;
 }
 </style>
