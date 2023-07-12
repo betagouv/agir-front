@@ -14,7 +14,6 @@ export class EmpreinteRepositoryAxios implements EmpreinteRepository {
         bilan: response.data.bilan,
       };
     } catch (e) {
-      console.log(e);
       throw e;
     }
   }

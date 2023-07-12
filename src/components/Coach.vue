@@ -18,8 +18,8 @@
       <div class="fr-col-12 fr-col-lg-4">
         <div v-if="!isLoading">
           <div class="fr-grid-row fr-grid-row--gutters card-item-list-container">
-            <div class="fr-col-12">
-              <BilanNosGestesClimat :get-impact-value="empreinteViewModel?.bilan" />
+            <div class="fr-col-12" v-if="empreinteViewModel">
+              <BilanNosGestesClimat :get-impact-value="empreinteViewModel.bilan" />
             </div>
             <div class="fr-col-12">
               <MesResultats v-if="scoreViewModel" :badge-view-model="scoreViewModel.badges" :score-value="scoreViewModel.score" />
@@ -102,9 +102,13 @@ export default defineComponent({
         chargerScoreUseCase.execute(idUtilisateur, new ChargementScorePresenterImpl(mapValuesScore)),
         chargementEmpreinteUseCase.execute(idUtilisateur, new ChargementEmpreintePresenterImpl(mapValueBilan)),
         chargerInteractionsUseCase.execute(idUtilisateur, new InteractionsPresenterImpl(mapValuesInteractions)),
-      ]).then(() => {
-        isLoading.value = false;
-      });
+      ])
+        .then(() => {
+          isLoading.value = false;
+        })
+        .catch(() => {
+          isLoading.value = false;
+        });
     };
 
     onMounted(lancerChargementDesDonnees);
