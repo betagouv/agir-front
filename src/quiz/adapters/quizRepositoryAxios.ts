@@ -8,6 +8,7 @@ interface QuestionsQuizApiModel {
   id: string;
   libelle: string;
   propositions: string[];
+  ordre: string;
 }
 
 export interface QuizApiModel {
@@ -27,6 +28,7 @@ export class QuizRepositoryAxios implements QuizRepository {
             id: question.id,
             intitule: question.libelle,
             reponsesPossibles: question.propositions,
+            ordre: question.ordre,
           };
         }),
       };

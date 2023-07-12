@@ -5,6 +5,7 @@ interface QuestionViewModel {
   id: string;
   intitule: string;
   reponsesPossibles: string[];
+  ordre: string;
 }
 
 export interface QuizViewModel {
@@ -27,6 +28,7 @@ export class ChargementQuizPresenterImpl implements ChargementQuizzPresenter {
           id: question.id,
           intitule: question.intitule,
           reponsesPossibles: question.reponsesPossibles,
+          ordre: question.ordre,
         };
       }),
     });

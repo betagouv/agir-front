@@ -9,6 +9,7 @@ class QuizRepositoryForTest implements QuizRepository {
       questions: [
         {
           id: "1",
+          ordre: "1",
           intitule: "Une question ?",
           reponsesPossibles: ["Reponse 1", "Reponse 2"],
         },
@@ -37,6 +38,7 @@ describe("Fichier de test du usecase de chargement d'un quizz", () => {
         questions: [
           {
             id: "1",
+            ordre: "1",
             intitule: "Une question ?",
             reponsesPossibles: ["Reponse 1", "Reponse 2"],
           },
