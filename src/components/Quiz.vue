@@ -12,12 +12,12 @@
         <br />
         <fieldset
           v-for="item in quizzViewModel?.questions"
-          :key="item.id"
+          :key="item.ordre"
           class="fr-fieldset"
-          :id="`radio-disabled-${item.id}`"
-          :aria-labelledby="`radio-${item.id}-legend radio-disabled-messages-${item}`"
+          :id="`radio-disabled-${item.ordre}`"
+          :aria-labelledby="`radio-${item.ordre}-legend radio-disabled-messages-${item}`"
         >
-          <div v-if="currentStep.toString() == item.id" class="quiz-question-container">
+          <div v-if="currentStep.toString() == item.ordre" class="quiz-question-container">
             <h3 style="text-align: left; margin: 0 0 0 0.5em">{{ item.intitule }}</h3>
             <div v-for="reponse in item.reponsesPossibles" class="fr-fieldset__element">
               <div class="fr-radio-group fr-radio-rich">
@@ -25,15 +25,15 @@
                   @change="handleReponse($event, item.id.toString())"
                   :value="`${reponse}`"
                   type="radio"
-                  :id="`radio-${item.id}-disabled-${reponse}`"
-                  :name="`radio-disabled-${item.id}`"
+                  :id="`radio-${item.ordre}-disabled-${reponse}`"
+                  :name="`radio-disabled-${item.ordre}`"
                 />
-                <label class="fr-label" :for="`radio-${item.id}-disabled-${reponse}`">
+                <label class="fr-label" :for="`radio-${item.ordre}-disabled-${reponse}`">
                   {{ reponse }}
                 </label>
               </div>
             </div>
-            <div class="fr-messages-group" :id="`radio-disabled-messages-${item.id}`" aria-live="assertive"></div>
+            <div class="fr-messages-group" :id="`radio-disabled-messages-${item.ordre}`" aria-live="assertive"></div>
             <div class="stepper-actions" v-if="quizzViewModel">
               <button
                 v-if="currentStep < quizzViewModel?.questions.length"
@@ -52,7 +52,7 @@
                 Passer la question
               </span>
               <button
-                v-if="parseInt(item.id) == quizzViewModel?.questions?.length"
+                v-if="parseInt(item.ordre) == quizzViewModel?.questions?.length"
                 class="fr-btn custom-button-next-quiz-question"
                 id="button-2864"
                 title="Envoyer le formulaire"
