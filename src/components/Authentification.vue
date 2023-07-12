@@ -1,52 +1,56 @@
 <template>
-  <div class="main-container">
-    <div class="login-container">
-      <h1>Agire !</h1>
-      <h2>L’accompagnement personnalisé pour réduire votre empreinte écologique</h2>
-      <ul>
-        <li>Mesurez les impacts de vos usages au quotidien</li>
-        <li>Simulez des aides pertinentes adaptées à votre situation</li>
-        <li>Testez vos connaissances</li>
-      </ul>
-      <form id="login-8199" @submit.prevent="login">
-        <fieldset id="login-8199-fieldset" aria-labelledby="login-8199-fieldset-legend login-8199-fieldset-messages" class="fr-fieldset">
-          <div class="fr-fieldset__element">
-            <fieldset id="credentials" aria-labelledby="credentials-legend credentials-messages" class="fr-fieldset">
-              <legend id="credentials-legend" class="fr-sr-only">identifiants</legend>
+  <div class="main-container ">
+    <div class="fr-container fr-m-auto">
+      <div class="fr-grid-row fr-grid-row--gutters fr-grid-row--center fr-grid-row--middle">
+        <div class="fr-col-8 login-container fr-p-3w  fr-p-md-9w">
+          <h1>Agir !</h1>
+          <h2>L’accompagnement personnalisé pour réduire votre empreinte écologique</h2>
+          <ul>
+            <li>Mesurez les impacts de vos usages au quotidien</li>
+            <li>Simulez des aides pertinentes adaptées à votre situation</li>
+            <li>Testez vos connaissances</li>
+          </ul>
+          <form id="login-8199" @submit.prevent="login">
+            <fieldset id="login-8199-fieldset" aria-labelledby="login-8199-fieldset-legend login-8199-fieldset-messages" class="fr-fieldset">
               <div class="fr-fieldset__element">
-                <div id="input-group-8201" aria-required="true" autocapitalize="off" autocomplete="username" autocorrect="off" class="fr-input-group fr-mt-5v">
-                  <label class="fr-label" for="username-8196">
-                    Identifiant
-                    <span class="fr-hint-text">Pour la démo (Dorian ou Livio)</span>
-                  </label>
-                  <input
-                    id="username-8196"
-                    v-model="username"
-                    aria-describedby="username-8196-messages"
-                    aria-required="true"
-                    autocapitalize="off"
-                    autocomplete="username"
-                    autocorrect="off"
-                    class="fr-input"
-                    name="username"
-                    type="text"
-                  />
-                  <div id="username-8196-messages" aria-live="assertive" class="fr-messages-group"></div>
-                </div>
+                <fieldset id="credentials" aria-labelledby="credentials-legend credentials-messages" class="fr-fieldset">
+                  <legend id="credentials-legend" class="fr-sr-only">identifiants</legend>
+                  <div class="fr-fieldset__element">
+                    <div id="input-group-8201" aria-required="true" autocapitalize="off" autocomplete="username" autocorrect="off" class="fr-input-group fr-mt-5v">
+                      <label class="fr-label" for="username-8196">
+                        Identifiant
+                        <span class="fr-hint-text">Pour la démo (Dorian ou Livio)</span>
+                      </label>
+                      <input
+                        id="username-8196"
+                        v-model="username"
+                        aria-describedby="username-8196-messages"
+                        aria-required="true"
+                        autocapitalize="off"
+                        autocomplete="username"
+                        autocorrect="off"
+                        class="fr-input"
+                        name="username"
+                        type="text"
+                      />
+                      <div id="username-8196-messages" aria-live="assertive" class="fr-messages-group"></div>
+                    </div>
+                  </div>
+                  <div id="credentials-messages" aria-live="assertive" class="fr-messages-group"></div>
+                </fieldset>
               </div>
-              <div id="credentials-messages" aria-live="assertive" class="fr-messages-group"></div>
+              <div class="fr-fieldset__element">
+                <ul class="fr-btns-group">
+                  <li>
+                    <button id="button-8202" class="fr-btn">Se connecter</button>
+                  </li>
+                </ul>
+              </div>
+              <div id="login-8199-fieldset-messages" aria-live="assertive" class="fr-messages-group"></div>
             </fieldset>
-          </div>
-          <div class="fr-fieldset__element">
-            <ul class="fr-btns-group">
-              <li>
-                <button id="button-8202" class="fr-btn">Se connecter</button>
-              </li>
-            </ul>
-          </div>
-          <div id="login-8199-fieldset-messages" aria-live="assertive" class="fr-messages-group"></div>
-        </fieldset>
-      </form>
+          </form>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -82,14 +86,14 @@ export default defineComponent({
 <style scoped>
 .login-container {
   text-align: left;
-  display: flex;
+  /*display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 4rem;
+  padding: 4rem;*/
   box-shadow: 0 6px 18px 0 rgba(0, 0, 18, 0.16);
-  width: fit-content;
+  /*width: fit-content;
   margin: 0 auto;
-  max-width: 60%;
+  max-width: 60%;*/
 }
 
 .error {
@@ -99,10 +103,17 @@ export default defineComponent({
 }
 
 .main-container {
-  display: flex;
+  /*display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 100vh;*/
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  background-color: #f7f8f8;
 }
 
 .fr-btn {
