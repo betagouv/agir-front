@@ -14,7 +14,7 @@ const afficherLeHeaderEtFooter = computed({
 router.beforeEach((to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
   const { title } = to.meta;
   if (title) {
-    document.title = title;
+    document.title = title as string;
   }
   next();
 });
