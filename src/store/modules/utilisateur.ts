@@ -1,10 +1,11 @@
 import { Commit } from "vuex";
 import { Utilisateur } from "@/authentification/ports/utilisateur.repository";
+import { EmpreinteViewModel } from "@/bilan/adapters/chargementEmpreinte.presenter.impl";
 
 interface State {
   utilisateur: string;
   id: string;
-  valeurBilanCarbone: string;
+  valeurBilanCarbone: EmpreinteViewModel;
   interactionEnCours: string;
   score: number;
 }
@@ -12,7 +13,16 @@ interface State {
 export const initialState: State = {
   utilisateur: "",
   id: "",
-  valeurBilanCarbone: "",
+  valeurBilanCarbone: {
+    bilan: "",
+    detail: {
+      alimentation: 0,
+      divers: 0,
+      logement: 0,
+      servicesSocietaux: 0,
+      transport: 0,
+    },
+  },
   interactionEnCours: "",
   score: 0,
 };
@@ -27,7 +37,7 @@ export default {
     getId(state: State): string {
       return state.id;
     },
-    getValeurBilanCarbone(state: State): string {
+    getValeurBilanCarbone(state: State): EmpreinteViewModel {
       return state.valeurBilanCarbone;
     },
     getInteractionEnCours(state: State): string {
@@ -42,7 +52,7 @@ export default {
       state.utilisateur = utilisateur.nom;
       state.id = utilisateur.id;
     },
-    setValeurBilanCarbone(state: State, valeurBilanCarbone: string) {
+    setValeurBilanCarbone(state: State, valeurBilanCarbone: EmpreinteViewModel) {
       state.valeurBilanCarbone = valeurBilanCarbone;
     },
     setInteractionEnCours(state: State, interactionEnCours: string) {
@@ -55,7 +65,16 @@ export default {
   actions: {
     reset({ commit }: { commit: Commit }) {
       commit("setUtilisateur", { nom: "", id: "" });
-      commit("setValeurBilanCarbone", "");
+      commit("setValeurBilanCarbone", {
+        bilan: "",
+        detail: {
+          alimentation: 0,
+          divers: 0,
+          logement: 0,
+          servicesSocietaux: 0,
+          transport: 0,
+        },
+      });
       commit("setInteractionEnCours", "");
       commit("setScore", 0);
     },

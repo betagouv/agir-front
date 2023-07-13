@@ -1,6 +1,6 @@
 <template>
-  <div style="margin: 20px" class="fr-grid-row">
-    <div :class="getDeviceType() == DeviceType.MOBILE ? 'fr-col-12' : 'fr-col-9'">
+  <div style="margin-top: 20px" class="fr-grid-row">
+    <div class="fr-col-12 fr-col-lg-8">
       <nav style="text-align: left; margin: 0 0 -15px 30px" role="navigation" class="fr-breadcrumb" aria-label="vous êtes ici :">
         <button class="fr-breadcrumb__button" aria-expanded="false" aria-controls="breadcrumb-2831">Voir le fil d’Ariane</button>
         <div class="fr-collapse" id="breadcrumb-2831">
@@ -70,7 +70,7 @@
         </div>
       </div>
     </div>
-    <div :class="getDeviceType() == DeviceType.MOBILE ? 'fr-col-12' : 'fr-col-3'">
+    <div class="fr-col-12 fr-col-lg-4">
       <div class="col-demo">
         <br />
         <div class="fr-grid-row fr-grid-row--gutters card-item-list-container">
