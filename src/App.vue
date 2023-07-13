@@ -2,13 +2,21 @@
 import Header from "@/components/Header.vue";
 import Footer from "@/components/Footer.vue";
 import { computed } from "vue";
-import { useRoute } from "vue-router";
+import { NavigationGuardNext, RouteLocationNormalized, RouteMeta, RouteRecord, useRoute } from "vue-router";
+import router from "@/router";
 const afficherLeHeaderEtFooter = computed({
   get() {
-    console.log(useRoute().name);
     return useRoute().name !== "authentification";
   },
   set() {},
+});
+
+router.beforeEach((to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
+  const { title } = to.meta;
+  if (title) {
+    document.title = title;
+  }
+  next();
 });
 </script>
 
