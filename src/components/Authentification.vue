@@ -1,8 +1,8 @@
 <template>
-  <div class="main-container ">
+  <div class="main-container">
     <div class="fr-container fr-m-auto">
       <div class="fr-grid-row fr-grid-row--gutters fr-grid-row--center fr-grid-row--middle">
-        <div class="fr-col-10 fr-col-md-8 login-container fr-p-3w  fr-p-md-9w">
+        <div class="fr-col-10 fr-col-md-8 login-container fr-p-3w fr-p-md-9w">
           <h1>Agir !</h1>
           <h2>L’accompagnement personnalisé pour réduire votre empreinte écologique</h2>
           <ul>
@@ -11,42 +11,32 @@
             <li>Testez vos connaissances</li>
           </ul>
           <form id="login-8199" @submit.prevent="login">
-            <fieldset id="login-8199-fieldset" aria-labelledby="login-8199-fieldset-legend login-8199-fieldset-messages" class="fr-fieldset">
-              <div class="fr-fieldset__element">
-                <fieldset id="credentials" aria-labelledby="credentials-legend credentials-messages" class="fr-fieldset">
+            <fieldset id="login-8199-fieldset" class="fr-fieldset">
+              <div class="fr-fieldset__element fr-mt-5v">
+                <fieldset id="credentials" class="fr-fieldset">
                   <legend id="credentials-legend" class="fr-sr-only">identifiants</legend>
                   <div class="fr-fieldset__element">
-                    <div id="input-group-8201" aria-required="true" autocapitalize="off" autocomplete="username" autocorrect="off" class="fr-input-group fr-mt-5v">
-                      <label class="fr-label" for="username-8196">
-                        Identifiant
-                        <span class="fr-hint-text">Pour la démo (Dorian ou Livio)</span>
-                      </label>
-                      <input
-                        id="username-8196"
-                        v-model="username"
-                        aria-describedby="username-8196-messages"
-                        aria-required="true"
-                        autocapitalize="off"
-                        autocomplete="username"
-                        autocorrect="off"
-                        class="fr-input"
-                        name="username"
-                        type="text"
-                      />
-                      <div id="username-8196-messages" aria-live="assertive" class="fr-messages-group"></div>
-                    </div>
+                    <label class="fr-label" for="username-8196">
+                      Identifiant
+                      <span class="fr-hint-text">Pour la démo (Dorian ou Livio)</span>
+                    </label>
+                    <input
+                      id="username-8196"
+                      v-model="username"
+                      aria-required="true"
+                      autocapitalize="off"
+                      autocomplete="username"
+                      autocorrect="off"
+                      class="fr-input"
+                      name="username"
+                      type="text"
+                    />
                   </div>
-                  <div id="credentials-messages" aria-live="assertive" class="fr-messages-group"></div>
                 </fieldset>
               </div>
               <div class="fr-fieldset__element">
-                <ul class="fr-btns-group">
-                  <li>
-                    <button id="button-8202" class="fr-btn">Se connecter</button>
-                  </li>
-                </ul>
+                <button id="button-8202" class="fr-btn">Se connecter</button>
               </div>
-              <div id="login-8199-fieldset-messages" aria-live="assertive" class="fr-messages-group"></div>
             </fieldset>
           </form>
         </div>
@@ -58,7 +48,6 @@
 <script lang="ts">
 import { defineComponent, ref } from "vue";
 import router from "@/router";
-import store from "@/store";
 import { AuthentifierUtilisateurUsecase } from "@/authentification/authentifierUtilisateur.usecase";
 import { UtilisateurRepositoryAxios } from "@/authentification/adapters/utilisateur.repository.axios";
 import { SessionRepositoryStore } from "@/authentification/adapters/session.repository.store";

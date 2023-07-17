@@ -9,7 +9,6 @@ import MesAidesRetrofit from "@/components/MesAidesRetrofit.vue";
 import Coach from "@/components/Coach.vue";
 import MesAides from "@/components/MesAides.vue";
 import Communaute from "@/components/Communaute.vue";
-import Empreinte from "@/components/Empreinte.vue";
 import SuiviDuJour from "@/components/SuiviDuJour.vue";
 const appName = "Agir ! -";
 const routes = [
@@ -65,7 +64,6 @@ const routes = [
   { path: "/mes-aides", name: "mes-aides", component: MesAides },
   { path: "/mes-aides/retrofit", name: "mes-aides-retrofit", component: MesAidesRetrofit },
   { path: "/communaute", name: "communaute", component: Communaute },
-  { path: "/empreinte", name: "empreinte", component: Empreinte },
 ];
 const router = createRouter({
   history: createWebHistory(),

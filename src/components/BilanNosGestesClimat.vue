@@ -1,7 +1,7 @@
 <template>
   <div class="fr-tile fr-enlarge-link fr-tile--horizontal fr-tile--vertical-md dashboard-card-item" id="tile-6538">
     <div class="fr-tile__body card-item-container">
-      <h3 class="fr-tile__desc">Votre bilan carbone</h3>
+      <h5 class="fr-tile__desc">Votre bilan carbone</h5>
       <br />
       <p class="valeur">
         <span class="impact-value">{{ getImpactValue.bilan }}</span> <span class="impact-tonne">tonnes de CO₂-e / an</span>
@@ -11,7 +11,12 @@
       <div class="accordion-container">
         <section class="fr-accordion">
           <h3 class="fr-accordion__title">
-            <span class="fr-accordion__btn accordion-btn-area" aria-expanded="false" aria-controls="accordion-607">Voir le détail</span>
+            <span
+              class="fr-accordion__btn fr-icon-arrow-down-s-line fr-text--md fr-text-label--blue-france fr-text--regular"
+              aria-expanded="false"
+              aria-controls="accordion-607"
+              >Voir le détail</span
+            >
           </h3>
           <div class="fr-collapse" id="accordion-607">
             <JaugeNosGestesClimat class="fr-mb-3v" libelle="🥦 Alimentation" :valeur="getImpactValue.detail.alimentation" couleur="#F28622" />
