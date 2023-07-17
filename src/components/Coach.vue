@@ -1,10 +1,11 @@
 <template>
   <div class="" v-if="interactionsViewModel">
-    <h1 class="fr-h2" style="text-align: left; margin-top: 24px">Les actions du jour</h1>
+    
     <div class="fr-grid-row fr-grid-row--gutters">
       <div class="fr-col-12 fr-col-lg-8">
         <div class="fr-container--fluid">
           <div v-if="!isLoading" class="fr-grid-row fr-grid-row--gutters dashboard-container">
+            <h1 class="fr-h2 fr-col-12 fr-m-0" id="titre-coach">Les actions du jour</h1>
             <div class="fr-col-12" v-for="item in interactionsViewModel" :key="item.titre">
               <InteractionCard :interaction-view-model="item" @refresh-interactions="lancerChargementDesDonnees" />
             </div>
@@ -144,6 +145,10 @@ p {
 
 .dashboard-container {
   margin: 20px 0 0 0;
+}
+
+#titre-coach{
+  text-align: left;
 }
 
 /* Disposition des éléments du dashboard sur les écrans de petite taille */
