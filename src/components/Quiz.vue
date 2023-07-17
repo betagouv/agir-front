@@ -64,6 +64,13 @@
         </fieldset>
       </form>
     </div>
+    <div class="fr-col-12 fr-col-lg-4">
+      <div class="fr-grid-row fr-grid-row--gutters card-item-list-container">
+        <div class="fr-col-12">
+          <BilanNosGestesClimat :get-impact-value="store.getters['utilisateur/getValeurBilanCarbone']" />
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 

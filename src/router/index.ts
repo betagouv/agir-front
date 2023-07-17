@@ -22,7 +22,7 @@ const routes = [
   },
   { path: "/dashboard", name: "dashboard", component: Dashboard },
   {
-    path: "/quiz/:id",
+    path: "/coach/quiz/:id",
     name: "quiz",
     component: Quiz,
     meta: {
@@ -30,7 +30,7 @@ const routes = [
     },
   },
   {
-    path: "/quiz/quiz-gagne",
+    path: "/coach/quiz/quiz-gagne",
     name: "quiz-gagne",
     component: QuizGagne,
     meta: {
@@ -38,7 +38,7 @@ const routes = [
     },
   },
   {
-    path: "/quiz/quiz-perdu",
+    path: "/coach/quiz/quiz-perdu",
     name: "quiz-perdu",
     component: QuizPerdu,
     meta: {
