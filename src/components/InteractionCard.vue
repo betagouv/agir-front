@@ -7,7 +7,7 @@
           {{ getDeviceType() == DeviceType.TABLET ? `${interactionViewModel?.titre.slice(0, 30)}...` : interactionViewModel?.titre }}
         </h3>
         <div class="fr-card__start">
-          <span class="">{{ interactionViewModel.categorie }}</span>
+          <span class="fr-text--sm fr-text--bold">{{ interactionViewModel.categorie }}</span>
         </div>
         <div class="fr-card__end">
           <ul class="fr-tags-group">
@@ -17,13 +17,14 @@
               </span>
             </li>
             <li class="no-tag fr-ml-1v">
-              <span class="fr-icon-leaf-line fr-icon--sm">+ {{ interactionViewModel.nombreDePointsAGagner }} points</span>
+              <span class="fr-icon-leaf-line fr-icon--sm">+ {{ interactionViewModel.nombreDePointsAGagner }} </span>
             </li>
           </ul>
         </div>
       </div>
       <div class="fr-card__footer">
         <a
+          class="fr-link"
           v-if="!interactionViewModel.estBloquee"
           @click="interactionAEteCliquee(interactionViewModel.id, interactionViewModel.type)"
           :href="interactionViewModel.url"

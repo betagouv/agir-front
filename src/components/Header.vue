@@ -24,12 +24,12 @@
                 <li v-if="!store.getters['utilisateur/getUtilisateur']">
                   <a class="fr-btn fr-icon-account-line" id="button-1939" href="#[url - à modifier]"> S’enregistrer </a>
                 </li>
-                <li v-if="store.getters['utilisateur/getUtilisateur']" @click="logout">
+                <li v-if="store.getters['utilisateur/getUtilisateur']">
                   <div class="utilisateur">
                     <img src="/ic_user.svg" alt="" />{{ nomUtilisateur }}
                     <div class="score"><img src="/leaf.svg" alt="" />{{ score }}</div>
                   </div>
-                  <a class="fr-btn fr-icon-logout-box-r-line" href="#"> Se déconnecter </a>
+                  <button class="fr-btn fr-btn--sm" @click="logout">Se déconnecter</button>
                 </li>
               </ul>
             </div>
