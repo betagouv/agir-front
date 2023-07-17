@@ -1,16 +1,20 @@
 <template>
-  <div class="mes-aides-container">
-    <h1>Retrouvez ici toutes les aides que vous pouvez obtenir</h1>
+  <div>
+    <h1 class="fr-h2" style="text-align: left; margin-top: 24px">Vos aides personnalisées</h1>
     <div class="fr-grid-row fr-grid-row--gutters">
-      <div class="fr-col-12 fr-col-md-6 fr-col-lg-4">
-        <div id="card-1197" class="fr-card item-card aide-card-item">
-          <div class="fr-card__body">
-            <div class="fr-card__content">
-              <h2 class="fr-card__title">Mes aides retrofit</h2>
-              <p class="fr-card__desc">
-                <router-link :to="{ name: 'mes-aides-retrofit' }">Simuler mes aides Retrofit</router-link>
-              </p>
+      <div class="fr-col-12 fr-col-lg-8">
+        <div class="fr-container--fluid">
+          <div class="fr-grid-row fr-grid-row--gutters dashboard-container">
+            <div class="fr-col-12">
+              <InteractionCard :interaction-view-model="aideRetrofitViewModel" />
             </div>
+          </div>
+        </div>
+      </div>
+      <div class="fr-col-12 fr-col-lg-4">
+        <div class="fr-grid-row fr-grid-row--gutters card-item-list-container">
+          <div class="fr-col-12">
+            <BilanNosGestesClimat :get-impact-value="store.getters['utilisateur/getValeurBilanCarbone']" />
           </div>
         </div>
       </div>
@@ -19,18 +23,44 @@
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";
+import InteractionCard from "@/components/InteractionCard.vue";
+import { InteractionViewModel } from "@/interactions/adapters/interactions.presenter.impl";
+import CarteSkeleton from "@/components/CarteSkeleton.vue";
+import MesResultats from "@/components/MesResultats.vue";
+import BilanNosGestesClimat from "@/components/BilanNosGestesClimat.vue";
+import store from "@/store";
 
 export default defineComponent({
   name: "MesAides",
+  computed: {
+    store() {
+      return store;
+    },
+  },
+  components: { BilanNosGestesClimat, MesResultats, CarteSkeleton, InteractionCard },
+  setup() {
+    const aideRetrofitViewModel: InteractionViewModel = {
+      id: "",
+      titre: "Simulez vos aides pour convertir votre voiture thermique en électrique",
+      sousTitre: "",
+      categorie: "🚗 Transport du quotidien",
+      nombreDePointsAGagner: "25",
+      miseEnAvant: "",
+      type: "AIDE",
+      illustrationURL: "https://picsum.photos/200/300",
+      url: "/mes-aides/retrofit",
+      isUrlExterne: false,
+      duree: "⏱️ 5 minutes",
+      estBloquee: false,
+    };
+    return {
+      aideRetrofitViewModel,
+    };
+  },
 });
 </script>
 <style scoped>
-.mes-aides-container {
-  margin: 20px;
-}
-
-.aide-card-item {
-  border: 2px solid black;
-  border-radius: 2px;
+.dashboard-container {
+  margin: 20px 0 0 0;
 }
 </style>

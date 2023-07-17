@@ -1,5 +1,6 @@
 <template>
   <div class="" v-if="interactionsViewModel">
+    <h1 class="fr-h2" style="text-align: left; margin-top: 24px">Les actions du jour</h1>
     <div class="fr-grid-row fr-grid-row--gutters">
       <div class="fr-col-12 fr-col-lg-8">
         <div class="fr-container--fluid">
