@@ -74,7 +74,6 @@ export default defineComponent({
 
 <style scoped>
 .login-container {
-  text-align: left;
   box-shadow: 0 6px 18px 0 rgba(0, 0, 18, 0.16);
 }
 
@@ -85,7 +84,6 @@ export default defineComponent({
 }
 
 .main-container {
-  text-align: left;
   display: flex;
   flex-direction: column;
   position: relative;

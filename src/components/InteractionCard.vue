@@ -90,18 +90,13 @@ export default defineComponent({
   padding: 1rem;
   height: auto;
 }
-.fr-card__title {
-  text-align: left;
-}
+
 .fr-card__start,
 .fr-tags-group {
   margin-bottom: 0;
-  text-align: left;
 }
 
-.fr-card__end {
-  display: inline-block;
-}
+
 .fr-tags-group > li {
   line-height: 22px;
   height: 22px;
@@ -119,7 +114,14 @@ export default defineComponent({
   content: none;
 }
 .fr-card.fr-enlarge-link:not(.fr-card--no-icon) .fr-card__content {
-  padding-bottom: 0;
+  padding-bottom: 15px;
+}
+.fr-card.fr-enlarge-link:not(.fr-card--no-icon) .fr-card__end {
+  display: inline-block;
+  position: absolute;
+  bottom: 10px;
+  height: 10px;
+  margin-bottom: 0 ;
 }
 
 /* card image */
@@ -141,7 +143,15 @@ export default defineComponent({
   margin-left: auto;
   margin-top: auto;
   margin-bottom: auto;
-  padding: 0.5rem 2rem 0rem;
+  margin-right: -0.5rem;
+  padding: 0;
+  text-wrap: nowrap;
+}
+
+@media only screen and (min-width: 769px) {
+  .fr-card__title {
+    margin-right: 25px;
+  }
 }
 
 @media only screen and (max-width: 768px) {

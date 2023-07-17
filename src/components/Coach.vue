@@ -1,6 +1,5 @@
 <template>
   <div class="" v-if="interactionsViewModel">
-    
     <div class="fr-grid-row fr-grid-row--gutters">
       <div class="fr-col-12 fr-col-lg-8">
         <div class="fr-container--fluid">
@@ -145,10 +144,6 @@ p {
 
 .dashboard-container {
   margin: 20px 0 0 0;
-}
-
-#titre-coach{
-  text-align: left;
 }
 
 /* Disposition des éléments du dashboard sur les écrans de petite taille */
