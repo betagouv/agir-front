@@ -18,12 +18,12 @@
       <div class="col-demo">
         <div class="follow-up-stepper-container">
           <div class="follow-up-stepper-sub-container">
-            <h3 v-if="etapeCourante" class="step-title-container">{{ getCurrentStepTitle }}</h3>
+            <h3 v-if="etapeCourante" class="step-title-container fr-mx-n1w">{{ getCurrentStepTitle }}</h3>
             <form @submit.prevent="etapeSuivante">
-              <div v-if="etapeCourante" class="fr-stepper__steps" :data-fr-current-step="etapeCourante" :data-fr-steps="3" />
+              <div v-if="etapeCourante" class="fr-stepper__steps fr-mx-n1w" :data-fr-current-step="etapeCourante" :data-fr-steps="3" />
               <br />
               <fieldset class="fr-fieldset" id="checkbox" aria-labelledby="checkbox-legend checkbox-messages">
-                <div class="selected-step-container" v-if="etapeCourante == 1">
+                <div class="selected-step-container fr-mx-n1w" v-if="etapeCourante == 1">
                   <SuiviDuJourPremiereEtape
                     current-step-question="Comptez combien de repas vous avez consommé avec les aliments suivants :"
                     :etape-courante="etapeCourante"
@@ -32,7 +32,7 @@
                     :dernier-suivi-du-jour-view-model="dernierSuiviDuJourAlimentationViewmodel"
                   />
                 </div>
-                <div class="selected-step-container" v-else-if="etapeCourante == 2">
+                <div class="selected-step-container fr-mx-n1w" v-else-if="etapeCourante == 2">
                   <SuiviDuJourSecondeEtape
                     current-step-question="Quels transports avez vous utilisé aujourd'hui ?"
                     :etape-courante="etapeCourante"
@@ -45,7 +45,7 @@
                   <SuiviDuJourResultats :suivi-du-jour-resultats="suiviDuJourResultatsViewModel" />
                 </div>
               </fieldset>
-              <div style="text-align: left">
+              <div style="text-align: left" class="fr-mx-n1w">
                 <span v-if="etapeCourante <= 2 && etapeCourante > 1" @click="etapePrecedente" class="step-btn-actions margin-between-buttons">
                   <span class="fr-icon-arrow-left-line" aria-hidden="true"></span>
                   Précédent
