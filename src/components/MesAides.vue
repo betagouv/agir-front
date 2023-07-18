@@ -3,7 +3,7 @@
     <div class="fr-grid-row fr-grid-row--gutters">
       <div class="fr-col-12 fr-col-lg-8">
         <div class="fr-container--fluid">
-          <div class="fr-grid-row fr-grid-row--gutters dashboard-container">
+          <div class="fr-grid-row fr-grid-row--gutters fr-mt-2w fr-mx-0">
             <h1 class="fr-h2 fr-col-12 fr-m-0" >Vos aides personnalisées</h1>
             <div class="fr-col-12">
               <InteractionCard :interaction-view-model="aideRetrofitViewModel" />
@@ -12,9 +12,11 @@
         </div>
       </div>
       <div class="fr-col-12 fr-col-lg-4">
-        <div class="fr-grid-row fr-grid-row--gutters card-item-list-container">
-          <div class="fr-col-12">
-            <BilanNosGestesClimat :get-impact-value="store.getters['utilisateur/getValeurBilanCarbone']" />
+        <div class="fr-container--fluid">
+          <div class="fr-grid-row fr-grid-row--gutters card-item-list-container fr-mt-10w">
+            <div class="fr-col-12">
+              <BilanNosGestesClimat :get-impact-value="store.getters['utilisateur/getValeurBilanCarbone']" />
+            </div>
           </div>
         </div>
       </div>

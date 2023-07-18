@@ -1,5 +1,5 @@
 <template>
-  <footer v-if="store.getters['utilisateur/getUtilisateur']" class="fr-footer" role="contentinfo" id="footer-5848">
+  <footer v-if="store.getters['utilisateur/getUtilisateur']" class="fr-footer fr-mt-10w" role="contentinfo" id="footer-5848">
     <div>
       <div class="fr-footer__body">
         <div class="fr-footer__brand fr-enlarge-link footer-item-container">
