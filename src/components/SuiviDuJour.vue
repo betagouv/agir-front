@@ -41,7 +41,7 @@
                     :dernier-suivi-du-jour-view-model="dernierSuiviDuJourTransportViewmodel"
                   />
                 </div>
-                <div class="last-step-container" v-else>
+                <div class="last-step-container fr-container--fluid" v-else>
                   <SuiviDuJourResultats :suivi-du-jour-resultats="suiviDuJourResultatsViewModel" />
                 </div>
               </fieldset>
@@ -51,7 +51,7 @@
                   Précédent
                 </span>
                 <button v-if="etapeCourante < 3" class="fr-btn fr-btn-not-rounded margin-between-buttons" title="Suivant">Continuer</button>
-                <span v-if="etapeCourante == 1" @click="sauterEtape" class="step-btn-actions"> Passer la question </span>
+                <!--<span v-if="etapeCourante == 1" @click="sauterEtape" class="step-btn-actions"> Passer la question </span>-->
                 <button v-if="etapeCourante == 3" class="fr-btn-not-rounded share-btn-container" title="partager">Partager vos résultats</button>
                 <br />
                 <router-link
@@ -237,7 +237,7 @@ export default defineComponent({
 }
 
 .follow-up-stepper-sub-container {
-  margin: 3em 3em 0 3em;
+  margin: 2em 2em 0 2em;
 }
 
 .step-btn-actions {
@@ -277,6 +277,9 @@ export default defineComponent({
   background-color: white;
   color: #000091;
   border: 1px solid rgba(0, 0, 0, 0.19);
+}
+a.fr-breadcrumb__link{
+  color: #666666
 }
 
 .fr-btn-not-rounded {

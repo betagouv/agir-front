@@ -1,21 +1,21 @@
 <template>
-  <div class="fr-col fr-col-daily-carbon-value">
+  <div class="fr-col-12 fr-col-md-6 fr-col-daily-carbon-value">
     <div class="col-demo">
-      <div class="fr-tile fr-enlarge-link fr-tile--horizontal fr-tile--vertical-md daily-carbon-value-details" id="tile-6538">
-        <div class="carbon-card-custom-body">
-          <div class="fr-tile__title">
+      <div class="fr-tile fr-enlarge-link daily-carbon-value-details" id="tile-6538">
+        <div class="carbon-card-custom-body fr-p-1w">
+          <div class="fr-tile__title fr-mb-md-2w">
             <p style="font-size: 2.5vh">Addition carbone du jour</p>
           </div>
           <div class="fr-tile__desc grid-side-to-side-container">
             <div class="fr-grid-row" v-for="impactCarboneItem in suiviDuJourResultats.additionCarbone">
-              <div class="fr-col-2">
+              <div class="fr-col-3">
                 <div class="col-demo">
                   <p :class="impactCarboneItem.styleFont">
                     {{ impactCarboneItem.impactCarbone }}
                   </p>
                 </div>
               </div>
-              <div class="fr-col-10">
+              <div class="fr-col-9">
                 <div class="col-demo">
                   <p :class="impactCarboneItem.styleFont">
                     {{ impactCarboneItem.valeur }}
@@ -73,19 +73,19 @@ export default {
   margin: 10px;
   padding: 0;
   text-align: left;
-  min-height: 18vh;
+  min-height: 17vh;
 }
 
 .fr-col-daily-carbon-value {
-  margin: 10px;
+  /*margin: 10px;*/
 }
 
 .carbon-value-item-primary {
-  font-size: 1.4vh;
+  font-size: 1.5vh;
   font-weight: bold;
 }
 
 .carbon-value-item-secondary {
-  font-size: 1.2vh;
+  font-size: 1.3vh;
 }
 </style>

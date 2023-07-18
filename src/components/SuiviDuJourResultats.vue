@@ -1,5 +1,5 @@
 <template>
-  <div class="fr-grid-row">
+  <div class="fr-grid-row fr-grid-row--gutters">
     <CarteEmpreinteDuJour :suivi-du-jour-resultats="suiviDuJourResultats" />
     <EmpreinteDuJourDetails :suivi-du-jour-resultats="suiviDuJourResultats" />
   </div>
