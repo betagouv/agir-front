@@ -2,8 +2,8 @@
   <div class="fr-col-12 fr-col-md-6 fr-col-daily-carbon-value-card">
     <div class="col-demo">
       <div class="fr-tile fr-enlarge-link fr-tile--horizontal fr-tile--vertical-md dashboard-daily-carbon-value" id="tile-6538">
-        <div class="card-custom-body">
-          <div class="fr-tile__title fr-mt-1w">
+        <div class="card-custom-body fr-p-md-2w fr-p-1w">
+          <div class="fr-tile__title ">
             <p class="daily-carbon-value-text">Impact carbone du jour</p>
           </div>
           <div class="fr-tile__desc carbon-impact-value-container">
@@ -50,7 +50,7 @@ export default {
 .carbon-value-desc-text {
   display: flex;
   text-align: left;
-  margin: 10px -5px 10px 10px;
+  /*margin: 10px -5px 10px 10px;*/
   line-height: 1rem;
   font-size: 0.8rem;
 }
@@ -62,25 +62,19 @@ export default {
   background-color: #e2e4fd;
 }
 
-.daily-carbon-value-text {
-  color: #000c91;
-  margin: 0 10px 10px 10px;
-  font-size: 2.5vh;
-}
-
 .card-custom-body {
   color: #000c91;
 }
 
 .carbon-impact-value-container {
   display: flex;
-  margin: 25px 10px;
+  margin: 25px 10px 25px 0;
   color: #000c91;
 }
 
 .card-custom-body {
   align-items: baseline;
-  margin: 10px;
+  /*margin: 10px;*/
   padding: 0;
   text-align: left;
 }
@@ -92,4 +86,16 @@ export default {
 .commentaire {
   margin-left: 5px;
 }
+.daily-carbon-value-text {
+  color: #000c91;
+  font-size: 1.2em;
+}
+
+@media only screen and (min-width: 768px) {
+  .daily-carbon-value-text {
+    font-size: 1.6em;
+  }
+}
+
+
 </style>
