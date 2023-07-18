@@ -3,7 +3,7 @@
     <div class="fr-grid-row fr-grid-row--gutters">
       <div class="fr-col-12 fr-col-lg-8">
         <div class="fr-container--fluid">
-          <div v-if="!isLoading" class="fr-grid-row fr-grid-row--gutters fr-mt-2w fr-mx-0">
+          <div v-if="!isLoading" class="fr-grid-row fr-grid-row--gutters fr-mt-2w fr-mx-0 fr-mb-0">
             <h1 class="fr-h2 fr-col-12 fr-m-0" id="titre-coach">Les actions du jour</h1>
             <div class="fr-col-12" v-for="item in interactionsViewModel" :key="item.titre">
               <InteractionCard :interaction-view-model="item" @refresh-interactions="lancerChargementDesDonnees" />
