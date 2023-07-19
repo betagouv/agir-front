@@ -25,7 +25,7 @@
               class="fr-stepper__steps"
               style="margin: -20px 0 0 0"
               :data-fr-current-step="`${etapeCourante.toString()}`"
-              :data-fr-steps="`${quizViewModel?.questions.length.toString()}`"
+              :data-fr-steps="`${quizViewModel?.steps}`"
             ></div>
             <br />
             <fieldset
@@ -35,13 +35,13 @@
               :id="`radio-disabled-${item.ordre}`"
               :aria-labelledby="`radio-${item.ordre}-legend radio-disabled-messages-${item}`"
             >
-              <div v-if="etapeCourante.toString() == item.ordre" class="quiz-question-container">
+              <div v-if="questionCourante.toString() == item.ordre" class="quiz-question-container">
                 <div v-if="laReponseEstElleIncorrecte">
-                  <QuizReponseIncorrecte :etape-courante="etapeCourante" :item="item" :quiz-view-model="quizViewModel!" />
+                  <QuizReponseIncorrecte :etape-courante="questionCourante" :item="item" :quiz-view-model="quizViewModel!" />
                 </div>
                 <div v-else-if="laReponseEstElleCorrecte" style="margin: 10px">
                   <QuizReponseCorrecte
-                    :etape-courante="etapeCourante"
+                    :etape-courante="questionCourante"
                     :etat-reponse-courante="getEtatDeLaReponseChoisie"
                     :get-score="getScore"
                     @question-suivante="passerALaQuestionSuivante"
@@ -54,7 +54,7 @@
                     @verifier-reponse="verificationDelaReponse"
                     :item="item"
                     :quiz-view-model="quizViewModel!"
-                    :etape-courante="etapeCourante"
+                    :etape-courante="questionCourante"
                     :valeur-des-reponses="checkedResponses"
                   />
                 </div>
@@ -121,6 +121,7 @@ export default defineComponent({
   },
   setup() {
     let etapeCourante = ref<number>(1);
+    let questionCourante = ref<number>(1);
     const quizViewModel = ref<QuizViewModel>();
     let checkedResponses = new Map<string, string>();
     let etatDeLaReponseChoisie = ref<EtatDeLaResponse>(EtatDeLaResponse.INITIAL);
@@ -163,6 +164,7 @@ export default defineComponent({
     }
 
     function verificationDelaReponse(responseDelaQuestion: string, questionId: string) {
+      etapeCourante.value++;
       if (responseDelaQuestion != checkedResponses.get(questionId)) {
         etatDeLaReponseChoisie.value = EtatDeLaResponse.REPONSE_INCORRECT;
       } else {
@@ -171,8 +173,9 @@ export default defineComponent({
     }
 
     function passerALaQuestionSuivante(nouvelleEtapeCourante: number, nouvelEtatDeLaReponseChoisie: EtatDeLaResponse) {
-      etapeCourante.value = nouvelleEtapeCourante;
+      questionCourante.value = nouvelleEtapeCourante;
       etatDeLaReponseChoisie.value = nouvelEtatDeLaReponseChoisie;
+      etapeCourante.value++;
     }
 
     return {
@@ -181,6 +184,7 @@ export default defineComponent({
       handleReponse,
       verificationDelaReponse,
       etapeCourante,
+      questionCourante,
       passerALaQuestionSuivante,
       etatDeLaReponseChoisie,
       checkedResponses,
