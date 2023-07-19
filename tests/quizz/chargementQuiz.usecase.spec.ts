@@ -12,6 +12,8 @@ class QuizRepositoryForTest implements QuizRepository {
           ordre: "1",
           intitule: "Une question ?",
           reponsesPossibles: ["Reponse 1", "Reponse 2"],
+          texteExplication: "Un texte d'explication",
+          solution: "Reponse 1",
         },
       ],
     };
@@ -41,6 +43,8 @@ describe("Fichier de test du usecase de chargement d'un quizz", () => {
             ordre: "1",
             intitule: "Une question ?",
             reponsesPossibles: ["Reponse 1", "Reponse 2"],
+            texteExplication: "Un texte d'explication",
+            solution: "Reponse 1",
           },
         ],
       });

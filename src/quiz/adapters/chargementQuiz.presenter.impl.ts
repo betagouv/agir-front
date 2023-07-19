@@ -6,6 +6,8 @@ interface QuestionViewModel {
   intitule: string;
   reponsesPossibles: string[];
   ordre: string;
+  texteExplication: string;
+  solution: string;
 }
 
 export interface QuizViewModel {
@@ -29,6 +31,8 @@ export class ChargementQuizPresenterImpl implements ChargementQuizzPresenter {
           intitule: question.intitule,
           reponsesPossibles: question.reponsesPossibles,
           ordre: question.ordre,
+          texteExplication: question.texteExplication,
+          solution: question.solution,
         };
       }),
     });

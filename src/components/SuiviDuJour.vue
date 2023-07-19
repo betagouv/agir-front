@@ -183,7 +183,7 @@ export default defineComponent({
     }
     const calculEmpreinteDuJour = () => {
       const idUtilisateur = store.getters["utilisateur/getId"];
-      const idInteraction = store.getters["utilisateur/getInteractionEnCours"];
+      const idInteraction = store.getters["utilisateur/getInteractionEnCours"].id;
       const envoyerSuiviDuJour = new EnvoyerSuiviDuJourUsecase(new SuiviDuJourRepositoryAxios(), new InteractionsRepositoryAxios());
       envoyerSuiviDuJour.execute(
         { valeurs: suiviDuJourAlimentation },
