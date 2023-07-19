@@ -3,7 +3,8 @@
     <div class="fr-grid-row fr-grid-row--gutters">
       <div class="fr-col-12 fr-col-lg-8">
         <div class="fr-container--fluid">
-          <div v-if="!isLoading" class="fr-grid-row fr-grid-row--gutters dashboard-container">
+          <div v-if="!isLoading" class="fr-grid-row fr-grid-row--gutters fr-mt-2w fr-mx-0 fr-mb-0">
+            <h1 class="fr-h2 fr-col-12 fr-m-0" id="titre-coach">Les actions du jour</h1>
             <div class="fr-col-12" v-for="item in interactionsViewModel" :key="item.titre">
               <InteractionCard :interaction-view-model="item" @refresh-interactions="lancerChargementDesDonnees" />
             </div>
@@ -16,23 +17,25 @@
         </div>
       </div>
       <div class="fr-col-12 fr-col-lg-4">
-        <div v-if="!isLoading">
-          <div class="fr-grid-row fr-grid-row--gutters card-item-list-container">
-            <div class="fr-col-12" v-if="empreinteViewModel">
-              <BilanNosGestesClimat :get-impact-value="empreinteViewModel" />
-            </div>
-            <div class="fr-col-12">
-              <MesResultats v-if="scoreViewModel" :badge-view-model="scoreViewModel.badges" :score-value="scoreViewModel.score" />
+        <div class="fr-container--fluid">
+          <div v-if="!isLoading" class="fr-mt-10w">
+            <div class="fr-grid-row fr-grid-row--gutters card-item-list-container">
+              <div class="fr-col-12" v-if="empreinteViewModel">
+                <BilanNosGestesClimat :get-impact-value="empreinteViewModel" />
+              </div>
+              <div class="fr-col-12">
+                <MesResultats v-if="scoreViewModel" :badge-view-model="scoreViewModel.badges" :score-value="scoreViewModel.score" />
+              </div>
             </div>
           </div>
-        </div>
-        <div v-else>
-          <div class="fr-grid-row fr-grid-row--gutters card-item-list-container">
-            <div class="fr-col-12">
-              <CarteSkeleton />
-            </div>
-            <div class="fr-col-12">
-              <CarteSkeleton />
+          <div v-else>
+            <div class="fr-grid-row fr-grid-row--gutters card-item-list-container">
+              <div class="fr-col-12">
+                <CarteSkeleton />
+              </div>
+              <div class="fr-col-12">
+                <CarteSkeleton />
+              </div>
             </div>
           </div>
         </div>

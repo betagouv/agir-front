@@ -1,21 +1,21 @@
 <template>
-  <div class="fr-col fr-col-daily-carbon-value">
+  <div class="fr-col-12 fr-col-md-6 fr-col-daily-carbon-value">
     <div class="col-demo">
-      <div class="fr-tile fr-enlarge-link fr-tile--horizontal fr-tile--vertical-md daily-carbon-value-details" id="tile-6538">
-        <div class="carbon-card-custom-body">
-          <div class="fr-tile__title">
-            <p style="font-size: 2.5vh">Addition carbone du jour</p>
+      <div class="fr-tile fr-enlarge-link daily-carbon-value-details" id="tile-6538">
+        <div class="carbon-card-custom-body fr-p-md-2w fr-p-1w">
+          <div class="fr-tile__title fr-mb-md-2w daily-carbon-value-text">
+            Addition carbone du jour
           </div>
           <div class="fr-tile__desc grid-side-to-side-container">
             <div class="fr-grid-row" v-for="impactCarboneItem in suiviDuJourResultats.additionCarbone">
-              <div class="fr-col-2">
+              <div class="fr-col-3">
                 <div class="col-demo">
                   <p :class="impactCarboneItem.styleFont">
                     {{ impactCarboneItem.impactCarbone }}
                   </p>
                 </div>
               </div>
-              <div class="fr-col-10">
+              <div class="fr-col-9">
                 <div class="col-demo">
                   <p :class="impactCarboneItem.styleFont">
                     {{ impactCarboneItem.valeur }}
@@ -70,22 +70,38 @@ export default {
 
 .carbon-card-custom-body {
   align-items: baseline;
-  margin: 10px;
+  /*margin: 10px;*/
   padding: 0;
   text-align: left;
-  min-height: 18vh;
+  min-height: 17vh;
 }
 
-.fr-col-daily-carbon-value {
-  margin: 10px;
-}
 
 .carbon-value-item-primary {
-  font-size: 1.4vh;
+  font-size: 0.8em;
   font-weight: bold;
 }
 
 .carbon-value-item-secondary {
-  font-size: 1.2vh;
+  font-size: 0.7em;
 }
+
+.daily-carbon-value-text {
+  font-size: 0.9em;
+
+}
+@media only screen and (min-width: 768px) {
+  .daily-carbon-value-text {
+    font-size: 1.6em;
+  }
+  .carbon-value-item-primary {
+    font-size: 0.9em;
+    font-weight: bold;
+  }
+
+  .carbon-value-item-secondary {
+    font-size: 0.8em;
+  }
+}
+
 </style>
