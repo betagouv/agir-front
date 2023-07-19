@@ -144,14 +144,6 @@ export default defineComponent({
       quizViewModel.value = viewModel;
     }
 
-    function mapValuesEvaluer(viewModel: EvaluerQuizViewModel) {
-      if (viewModel.quizGagne) {
-        router.push({ name: "quiz-gagne" });
-      } else {
-        router.push({ name: "quiz-perdu", state: { quizId: idQuiz } });
-      }
-    }
-
     const quizzRepositoryAxios = new QuizRepositoryAxios();
     const interactionsRepositoryAxios = new InteractionsRepositoryAxios();
 
@@ -166,7 +158,7 @@ export default defineComponent({
       const utilisateurId = store.getters["utilisateur/getId"];
       const interactionId = store.getters["utilisateur/getInteractionEnCours"].id;
       const evaluerQuizzUsecase = new EvaluerQuizUsecase(quizzRepositoryAxios, interactionsRepositoryAxios);
-      evaluerQuizzUsecase.execute(interactionId, utilisateurId, idQuiz, checkedResponses, new EvaluerQuizPresenterImpl(mapValuesEvaluer));
+      evaluerQuizzUsecase.execute(interactionId, utilisateurId, idQuiz, checkedResponses, new EvaluerQuizPresenterImpl(() => {}));
     };
 
     function handleReponse(listeDesReponses: Map<string, string>) {
@@ -180,6 +172,9 @@ export default defineComponent({
         leQuizAEtePerdu.value = true;
       } else {
         etatDeLaReponseChoisie.value = EtatDeLaResponse.REPONSE_CORRECT;
+      }
+      if (questionCourante.value === quizViewModel.value?.questions.length) {
+        evaluerQuizz();
       }
     }
 
