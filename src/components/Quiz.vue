@@ -77,6 +77,7 @@ import store from "@/store";
 import { EvaluerQuizUsecase } from "@/quiz/evaluerQuiz.usecase";
 import { EvaluerQuizPresenterImpl, EvaluerQuizViewModel } from "@/quiz/adapters/evaluerQuiz.presenter.impl";
 import router from "@/router";
+import { InteractionsRepositoryAxios } from "@/interactions/adapters/interactionsRepository.axios";
 
 export default defineComponent({
   name: "Quizz",
@@ -109,6 +110,7 @@ export default defineComponent({
     }
 
     const quizzRepositoryAxios = new QuizRepositoryAxios();
+    const interactionsRepositoryAxios = new InteractionsRepositoryAxios();
 
     const chargementQuizz = () => {
       const chargementQuizzUsecase = new ChargementQuizUsecase(quizzRepositoryAxios);
@@ -119,8 +121,9 @@ export default defineComponent({
 
     const evaluerQuizz = () => {
       const utilisateurId = store.getters["utilisateur/getId"];
-      const evaluerQuizzUsecase = new EvaluerQuizUsecase(quizzRepositoryAxios);
-      evaluerQuizzUsecase.execute(utilisateurId, idQuiz, checkedResponses, new EvaluerQuizPresenterImpl(mapValuesEvaluer));
+      const interactionId = store.getters["utilisateur/getInteractionEnCours"];
+      const evaluerQuizzUsecase = new EvaluerQuizUsecase(quizzRepositoryAxios, interactionsRepositoryAxios);
+      evaluerQuizzUsecase.execute(interactionId, utilisateurId, idQuiz, checkedResponses, new EvaluerQuizPresenterImpl(mapValuesEvaluer));
     };
 
     function questionSuivante() {
