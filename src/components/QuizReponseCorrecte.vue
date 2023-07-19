@@ -6,7 +6,7 @@
     <strong>Vous avez trouvé la bonne réponse.</strong>
   </div>
   <div v-if="etapeCourante == quizViewModel?.questions.length">
-    <div style="margin-top: 10px">
+    <div class="fr-mt-2v">
       <strong>Vous avez gagné</strong>
       <div style="display: flex; margin-top: 5px">
         <img src="/leaf.svg" alt="leaf-logo" />
@@ -14,9 +14,7 @@
       </div>
     </div>
     <br />
-    <router-link v-if="etapeCourante == quizViewModel?.questions.length" :to="{ name: 'coach' }" class="fr-btn fr-btn-not-rounded redirect-coach-link">
-      Revenir au coach
-    </router-link>
+    <router-link class="fr-link" v-if="etapeCourante == quizViewModel?.questions.length" :to="{ name: 'coach' }"> Revenir au coach </router-link>
   </div>
   <div v-else>
     <br />
@@ -24,13 +22,27 @@
   </div>
 </template>
 <script lang="ts">
+import { QuizViewModel } from "@/quiz/adapters/chargementQuiz.presenter.impl";
+
 export default {
   name: "QuizReponseCorrecte",
   props: {
-    etapeCourante: {},
-    getScore: {},
-    passerALaQuestionSuivante: {},
-    quizViewModel: {},
+    etapeCourante: {
+      type: Number,
+      required: true,
+    },
+    getScore: {
+      type: String,
+      required: true,
+    },
+    passerALaQuestionSuivante: {
+      type: Function,
+      required: true,
+    },
+    quizViewModel: {
+      type: Object as () => QuizViewModel,
+      required: true,
+    },
   },
 };
 </script>

@@ -35,48 +35,27 @@
               :id="`radio-disabled-${item.ordre}`"
               :aria-labelledby="`radio-${item.ordre}-legend radio-disabled-messages-${item}`"
             >
-              <div v-if="currentStep.toString() == item.ordre" class="quiz-question-container">
-                <h3 style="text-align: left; margin: 0 0 0.5em 0.5em">{{ item.intitule }}</h3>
-                <div v-for="reponse in item.reponsesPossibles" class="fr-fieldset__element">
-                  <div class="fr-radio-group">
-                    <input
-                      @change="handleReponse($event, item.id.toString())"
-                      :value="`${reponse}`"
-                      type="radio"
-                      :id="`radio-${item.ordre}-disabled-${reponse}`"
-                      :name="`radio-disabled-${item.ordre}`"
-                    />
-                    <label class="fr-label" :for="`radio-${item.ordre}-disabled-${reponse}`">
-                      {{ reponse }}
-                    </label>
-                  </div>
+              <div v-if="etapeCourante.toString() == item.ordre" class="quiz-question-container">
+                <div v-if="laReponseEstElleIncorrecte">
+                  <QuizReponseIncorrecte :etape-courante="etapeCourante" :item="item" :quiz-view-model="quizViewModel" />
                 </div>
-                <div class="fr-messages-group" :id="`radio-disabled-messages-${item.ordre}`" aria-live="assertive"></div>
-                <div class="stepper-actions" v-if="quizzViewModel">
-                  <button
-                    v-if="currentStep < quizzViewModel?.questions.length"
-                    @click="questionSuivante"
-                    class="fr-btn custom-button-next-quiz-question"
-                    title="Valider"
-                  >
-                    Suivant
-                  </button>
-                  <span
-                    @click="skipQuestion(item.id)"
-                    v-if="currentStep < quizzViewModel?.questions?.length"
-                    class="fr-btn stepper-actions-ignore-question"
-                    title="Passer la question"
-                  >
-                    Passer la question
-                  </span>
-                  <button
-                    v-if="parseInt(item.ordre) == quizzViewModel?.questions?.length"
-                    class="fr-btn custom-button-next-quiz-question"
-                    id="button-2864"
-                    title="Envoyer le formulaire"
-                  >
-                    Valider mes réponses
-                  </button>
+                <div v-else-if="laReponseEstElleCorrecte" style="margin: 10px">
+                  <QuizReponseCorrecte
+                    :etape-courante="etapeCourante"
+                    :get-score="getScore"
+                    :passer-a-la-question-suivante="passerALaQuestionSuivante"
+                    :quiz-view-model="quizViewModel"
+                  />
+                </div>
+                <div v-else>
+                  <QuestionDuQuiz
+                    @envoyer-reponse="handleReponse"
+                    @verifier-reponse="verificationDelaReponse"
+                    :item="item"
+                    :quiz-view-model="quizViewModel"
+                    :etape-courante="etapeCourante"
+                    :valeur-des-reponses="checkedResponses"
+                  />
                 </div>
               </div>
             </fieldset>
@@ -109,12 +88,9 @@ import BilanNosGestesClimat from "@/components/BilanNosGestesClimat.vue";
 import CarteSkeleton from "@/components/CarteSkeleton.vue";
 import QuizReponseCorrecte from "@/components/QuizReponseCorrecte.vue";
 import QuizReponseIncorrecte from "@/components/QuizReponseIncorrecte.vue";
+import QuestionDuQuiz from "@/components/QuestionDuQuiz.vue";
+import { EtatDeLaResponse } from "@/components/etatDeLaReponse";
 
-export enum EtatDeLaResponse {
-  INITIAL = "ETAT_INITIAL",
-  REPONSE_CORRECT = "REPONSE_CORRECTE",
-  REPONSE_INCORRECT = "REPONSE_INCORRECT",
-}
 export default defineComponent({
   name: "Quizz",
   computed: {
@@ -132,6 +108,7 @@ export default defineComponent({
     },
   },
   components: {
+    QuestionDuQuiz,
     QuizReponseIncorrecte,
     QuizReponseCorrecte,
     CarteSkeleton,
@@ -141,7 +118,7 @@ export default defineComponent({
   setup() {
     let etapeCourante = ref<number>(1);
     const quizViewModel = ref<QuizViewModel>();
-    const checkedResponses = new Map<string, string>();
+    let checkedResponses = new Map<string, string>();
     let etatDeLaReponseChoisie = ref<EtatDeLaResponse>(EtatDeLaResponse.INITIAL);
 
     let idQuiz: string = "";
@@ -162,11 +139,6 @@ export default defineComponent({
       }
     }
 
-    function handleReponse(event: Event, idQuestion: string) {
-      const reponse = (event.target as HTMLInputElement).value;
-      checkedResponses.set(idQuestion, reponse);
-    }
-
     const quizzRepositoryAxios = new QuizRepositoryAxios();
     const interactionsRepositoryAxios = new InteractionsRepositoryAxios();
 
@@ -183,6 +155,10 @@ export default defineComponent({
       const evaluerQuizzUsecase = new EvaluerQuizUsecase(quizzRepositoryAxios, interactionsRepositoryAxios);
       evaluerQuizzUsecase.execute(interactionId, utilisateurId, idQuiz, checkedResponses, new EvaluerQuizPresenterImpl(mapValuesEvaluer));
     };
+
+    function handleReponse(listeDesReponses: Map<string, string>) {
+      checkedResponses = listeDesReponses;
+    }
 
     function verificationDelaReponse(responseDelaQuestion: string, questionId: string) {
       if (responseDelaQuestion != checkedResponses.get(questionId)) {
@@ -205,6 +181,7 @@ export default defineComponent({
       etapeCourante,
       passerALaQuestionSuivante,
       etatDeLaReponseChoisie,
+      checkedResponses,
     };
   },
 });

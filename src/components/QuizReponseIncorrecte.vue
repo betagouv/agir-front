@@ -6,12 +6,22 @@
   </router-link>
 </template>
 <script lang="ts">
+import { QuestionViewModel, QuizViewModel } from "@/quiz/adapters/chargementQuiz.presenter.impl";
+
 export default {
   name: "QuizReponseIncorrecte",
   props: {
-    etapeCourante: {},
-    item: {},
-    quizViewModel: {},
+    etapeCourante: {
+      type: Number,
+    },
+    item: {
+      type: Object as () => QuestionViewModel,
+      required: true,
+    },
+    quizViewModel: {
+      type: Object as () => QuizViewModel,
+      required: true,
+    },
   },
 };
 </script>

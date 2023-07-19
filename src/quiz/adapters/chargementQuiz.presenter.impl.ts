@@ -1,7 +1,7 @@
 import { Quiz } from "@/quiz/ports/quizRepository";
 import { ChargementQuizzPresenter } from "@/quiz/ports/chargementQuizz.presenter";
 
-interface QuestionViewModel {
+export interface QuestionViewModel {
   id: string;
   intitule: string;
   reponsesPossibles: string[];
