@@ -1,18 +1,30 @@
 <template>
-  <div style="margin: 10px" v-html="item.texteExplication" />
-  <br />
-  <router-link v-if="etapeCourante == quizViewModel?.questions.length" :to="{ name: 'coach' }" class="fr-btn fr-btn-not-rounded redirect-coach-link">
-    Revenir au coach
-  </router-link>
+  <div class="fr-ml-2v" v-html="item.texteExplication" />
+  <div v-if="etapeCourante == quizViewModel?.questions.length && resultatFinalDuQuiz">
+    <div class="fr-mt-2v fr-ml-2v fr-text--bold">Désolé, Vous avez perdu !</div>
+    <router-link class="fr-btn link-as-btn fr-ml-2v fr-mt-5v" v-if="etapeCourante == quizViewModel?.questions.length" :to="{ name: 'coach' }">
+      Revenir au coach
+    </router-link>
+  </div>
+  <div v-else>
+    <button @click="versLaQuestionSuivante" class="fr-btn" title="Continuer">Continuer</button>
+  </div>
 </template>
 <script lang="ts">
 import { QuestionViewModel, QuizViewModel } from "@/quiz/adapters/chargementQuiz.presenter.impl";
+import { defineComponent, getCurrentInstance } from "vue";
+import { EtatDeLaResponse } from "@/components/etatDeLaReponse";
 
-export default {
+export default defineComponent({
   name: "QuizReponseIncorrecte",
   props: {
     etapeCourante: {
       type: Number,
+      required: true,
+    },
+    resultatFinalDuQuiz: {
+      type: Boolean,
+      required: true,
     },
     item: {
       type: Object as () => QuestionViewModel,
@@ -23,7 +35,20 @@ export default {
       required: true,
     },
   },
-};
+  emits: ["question-suivante"],
+  setup(props) {
+    const instance = getCurrentInstance();
+    function versLaQuestionSuivante() {
+      const miseAJourDeLetapeCourante = props.etapeCourante + 1;
+      const miseAJourDeLetatDeLaReponseCourante = EtatDeLaResponse.INITIAL;
+      instance?.emit("question-suivante", miseAJourDeLetapeCourante, miseAJourDeLetatDeLaReponseCourante);
+    }
+
+    return {
+      versLaQuestionSuivante,
+    };
+  },
+});
 </script>
 <style scoped>
 .stepper-actions span:hover {

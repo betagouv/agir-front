@@ -1,5 +1,5 @@
 <template>
-  <h3 style="text-align: left; margin: 0 0 0.5em 0.5em">{{ item.intitule }}</h3>
+  <h4 class="fr-ml-2v">{{ item.intitule }}</h4>
   <div v-for="reponse in item.reponsesPossibles" class="fr-fieldset__element">
     <div class="fr-radio-group">
       <input
@@ -19,7 +19,7 @@
     <button
       v-if="etapeCourante <= quizViewModel?.questions.length"
       @click="verifierLaReponse(item.solution, item.id)"
-      class="fr-btn custom-button-next-quiz-question"
+      class="fr-btn custom-button-next-quiz-question fr-mt-5v"
       title="Valider"
     >
       Valider

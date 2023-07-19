@@ -1,23 +1,28 @@
 <template>
-  <div>
-    <strong style="font-size: 20px">Bien joué !</strong>
+  <div class="fr-text--regular fr-text--bold fr-ml-2v">
+    <h4 class="fr-mb-0 fr-pb-3v">Bien joué !</h4>
+    Vous avez donné la bonne réponse.
   </div>
-  <div style="margin-top: 10px">
-    <strong>Vous avez trouvé la bonne réponse.</strong>
-  </div>
-  <div v-if="etapeCourante == quizViewModel?.questions.length">
-    <div class="fr-mt-2v">
-      <strong>Vous avez gagné</strong>
-      <div style="display: flex; margin-top: 5px">
-        <img src="/leaf.svg" alt="leaf-logo" />
-        <strong>+ {{ getScore }} points</strong>
+  <div v-if="etapeCourante == quizViewModel?.questions.length && !resultatFinalDuQuiz">
+    <div class="fr-mt-6v fr-ml-2v">
+      <h6 class="fr-mb-0">Vous avez gagné</h6>
+      <div class="fr-mt-2v fr-text--sm fr-text--bold fr-mb-0" style="display: flex">
+        <img src="/leaf.svg" alt="leaf-logo" class="fr-mr-2v" />
+        + {{ getScore }} points
       </div>
     </div>
     <br />
-    <router-link class="fr-link" v-if="etapeCourante == quizViewModel?.questions.length" :to="{ name: 'coach' }"> Revenir au coach </router-link>
+    <router-link class="fr-btn link-as-btn fr-ml-2v" v-if="etapeCourante == quizViewModel?.questions.length" :to="{ name: 'coach' }">
+      Revenir au coach
+    </router-link>
+  </div>
+  <div class="fr-ml-2v" v-else-if="etapeCourante == quizViewModel?.questions.length && resultatFinalDuQuiz">
+    <div class="fr-mt-2v">
+      <strong>Désolé, Vous avez perdu !</strong>
+    </div>
+    <router-link class="fr-btn link-as-btn" v-if="etapeCourante == quizViewModel?.questions.length" :to="{ name: 'coach' }"> Revenir au coach </router-link>
   </div>
   <div v-else>
-    <br />
     <button @click="versLaQuestionSuivante" class="fr-btn" title="Continuer">Continuer</button>
   </div>
 </template>
@@ -37,6 +42,10 @@ export default defineComponent({
       type: String,
       required: true,
     },
+    resultatFinalDuQuiz: {
+      type: Boolean,
+      required: true,
+    },
     quizViewModel: {
       type: Object as () => QuizViewModel,
       required: true,
@@ -48,12 +57,11 @@ export default defineComponent({
   },
   emits: ["question-suivante"],
   setup(props) {
-    console.log(props);
     const instance = getCurrentInstance();
     function versLaQuestionSuivante() {
-      const majetape = props.etapeCourante + 1;
-      const majetat = EtatDeLaResponse.INITIAL;
-      instance?.emit("question-suivante", majetape, majetat);
+      const miseAJourDeLetapeCourante = props.etapeCourante + 1;
+      const miseAJourDeLetatDeLaReponseCourante = EtatDeLaResponse.INITIAL;
+      instance?.emit("question-suivante", miseAJourDeLetapeCourante, miseAJourDeLetatDeLaReponseCourante);
     }
 
     return {

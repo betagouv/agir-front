@@ -1,33 +1,29 @@
 <template>
-  <div style="margin: 10px">
-    <nav style="text-align: left; margin: 0 0 -20px 30px" role="navigation" class="fr-breadcrumb" aria-label="vous êtes ici :">
-      <button class="fr-breadcrumb__button" aria-expanded="false" aria-controls="breadcrumb-2831">Voir le fil d’Ariane</button>
-      <div class="fr-collapse" id="breadcrumb-2831">
-        <ol class="fr-breadcrumb__list">
-          <li>
-            <a class="fr-breadcrumb__link" href="/coach">Coach</a>
-          </li>
-          <li>
-            <a class="fr-breadcrumb__link" aria-current="page">Quiz</a>
-          </li>
-        </ol>
-      </div>
-    </nav>
-  </div>
-  <div class="fr-grid-row fr-grid-row--gutters">
+  <nav role="navigation" class="fr-breadcrumb fil-ariane fr-mb-0 fr-p-1v" aria-label="vous êtes ici :">
+    <button class="fr-breadcrumb__button" aria-expanded="false" aria-controls="breadcrumb-2831">Voir le fil d’Ariane</button>
+    <div class="fr-collapse" id="breadcrumb-2831">
+      <ol class="fr-breadcrumb__list">
+        <li>
+          <a class="fr-breadcrumb__link" href="/coach">Coach</a>
+        </li>
+        <li>
+          <a class="fr-breadcrumb__link" aria-current="page">Quiz</a>
+        </li>
+      </ol>
+    </div>
+  </nav>
+  <div class="fr-grid-row fr-grid-row--gutters fr-mb-5v">
     <div class="fr-col-12 fr-col-lg-8">
-      <div class="dashboard-card-item container-of-quiz-steps">
-        <div class="quiz-stepper-sub-container">
+      <div class="dashboard-card-item">
+        <div class="quiz-stepper-sub-container fr-pt-5v fr-pr-5v fr-pl-5v">
           <form @submit.prevent="evaluerQuizz">
-            <h3>📒{{ quizViewModel?.titre }}</h3>
+            <h3 class="fr-mb-0">{{ getCategorie }}</h3>
             <div
               v-if="etapeCourante"
               class="fr-stepper__steps"
-              style="margin: -20px 0 0 0"
               :data-fr-current-step="`${etapeCourante.toString()}`"
               :data-fr-steps="`${quizViewModel?.steps}`"
             ></div>
-            <br />
             <fieldset
               v-for="item in quizViewModel?.questions"
               :key="item.ordre"
@@ -35,17 +31,24 @@
               :id="`radio-disabled-${item.ordre}`"
               :aria-labelledby="`radio-${item.ordre}-legend radio-disabled-messages-${item}`"
             >
-              <div v-if="questionCourante.toString() == item.ordre" class="quiz-question-container">
+              <div v-if="questionCourante.toString() == item.ordre" class="quiz-question-container fr-mt-5v">
                 <div v-if="laReponseEstElleIncorrecte">
-                  <QuizReponseIncorrecte :etape-courante="questionCourante" :item="item" :quiz-view-model="quizViewModel!" />
+                  <QuizReponseIncorrecte
+                    :etape-courante="questionCourante"
+                    :item="item"
+                    :quiz-view-model="quizViewModel!"
+                    :resultat-final-du-quiz="leQuizAEtePerdu"
+                    @question-suivante="passerALaQuestionSuivante"
+                  />
                 </div>
-                <div v-else-if="laReponseEstElleCorrecte" style="margin: 10px">
+                <div v-else-if="laReponseEstElleCorrecte">
                   <QuizReponseCorrecte
                     :etape-courante="questionCourante"
                     :etat-reponse-courante="getEtatDeLaReponseChoisie"
                     :get-score="getScore"
-                    @question-suivante="passerALaQuestionSuivante"
                     :quiz-view-model="quizViewModel!"
+                    :resultat-final-du-quiz="leQuizAEtePerdu"
+                    @question-suivante="passerALaQuestionSuivante"
                   />
                 </div>
                 <div v-else>
@@ -101,6 +104,9 @@ export default defineComponent({
     getScore(): string {
       return store.getters["utilisateur/getInteractionEnCours"].nombreDePointsAGagner;
     },
+    getCategorie(): string {
+      return store.getters["utilisateur/getInteractionEnCours"].categorie;
+    },
     getEtatDeLaReponseChoisie(): EtatDeLaResponse {
       return this.etatDeLaReponseChoisie;
     },
@@ -125,6 +131,7 @@ export default defineComponent({
     const quizViewModel = ref<QuizViewModel>();
     let checkedResponses = new Map<string, string>();
     let etatDeLaReponseChoisie = ref<EtatDeLaResponse>(EtatDeLaResponse.INITIAL);
+    let leQuizAEtePerdu = ref<boolean>(false);
 
     let idQuiz: string = "";
     const route = useRoute();
@@ -167,6 +174,7 @@ export default defineComponent({
       etapeCourante.value++;
       if (responseDelaQuestion != checkedResponses.get(questionId)) {
         etatDeLaReponseChoisie.value = EtatDeLaResponse.REPONSE_INCORRECT;
+        leQuizAEtePerdu.value = true;
       } else {
         etatDeLaReponseChoisie.value = EtatDeLaResponse.REPONSE_CORRECT;
       }
@@ -188,6 +196,7 @@ export default defineComponent({
       passerALaQuestionSuivante,
       etatDeLaReponseChoisie,
       checkedResponses,
+      leQuizAEtePerdu,
     };
   },
 });
@@ -205,7 +214,6 @@ export default defineComponent({
 }
 
 .quiz-stepper-sub-container {
-  margin: 0.5em 3em 0 3em;
   text-align: left;
 }
 
