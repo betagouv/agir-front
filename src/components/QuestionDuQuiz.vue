@@ -27,7 +27,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, getCurrentInstance } from "vue";
 import { QuestionViewModel, QuizViewModel } from "@/quiz/adapters/chargementQuiz.presenter.impl";
 
 export default defineComponent({
@@ -53,13 +53,15 @@ export default defineComponent({
   emits: ["envoyer-reponse", "verifier-reponse"],
 
   setup() {
+    const instance = getCurrentInstance();
+
     function envoyerLaReponse(event: Event, questionId: string, currentMap: Map<string, string>) {
       const reponse = (event.target as HTMLInputElement).value;
       currentMap.set(questionId, reponse);
-      this.$emit("envoyer-reponse", currentMap);
+      instance?.emit("envoyer-reponse", currentMap);
     }
     function verifierLaReponse(reponseChoisie: string, questionId: string) {
-      this.$emit("verifier-reponse", reponseChoisie, questionId);
+      instance?.emit("verifier-reponse", reponseChoisie, questionId);
     }
 
     return {

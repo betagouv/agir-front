@@ -18,13 +18,15 @@
   </div>
   <div v-else>
     <br />
-    <button @click="passerALaQuestionSuivante" class="fr-btn" title="Continuer">Continuer</button>
+    <button @click="versLaQuestionSuivante" class="fr-btn" title="Continuer">Continuer</button>
   </div>
 </template>
 <script lang="ts">
 import { QuizViewModel } from "@/quiz/adapters/chargementQuiz.presenter.impl";
+import { defineComponent, getCurrentInstance } from "vue";
+import { EtatDeLaResponse } from "@/components/etatDeLaReponse";
 
-export default {
+export default defineComponent({
   name: "QuizReponseCorrecte",
   props: {
     etapeCourante: {
@@ -35,16 +37,30 @@ export default {
       type: String,
       required: true,
     },
-    passerALaQuestionSuivante: {
-      type: Function,
-      required: true,
-    },
     quizViewModel: {
       type: Object as () => QuizViewModel,
       required: true,
     },
+    etatReponseCourante: {
+      type: String,
+      required: true,
+    },
   },
-};
+  emits: ["question-suivante"],
+  setup(props) {
+    console.log(props);
+    const instance = getCurrentInstance();
+    function versLaQuestionSuivante() {
+      const majetape = props.etapeCourante + 1;
+      const majetat = EtatDeLaResponse.INITIAL;
+      instance?.emit("question-suivante", majetape, majetat);
+    }
+
+    return {
+      versLaQuestionSuivante,
+    };
+  },
+});
 </script>
 <style scoped>
 .stepper-actions span:hover {
