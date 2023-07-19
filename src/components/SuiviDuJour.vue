@@ -278,9 +278,6 @@ export default defineComponent({
   color: #000091;
   border: 1px solid rgba(0, 0, 0, 0.19);
 }
-a.fr-breadcrumb__link{
-  color: #666666
-}
 
 .fr-btn-not-rounded {
   border-radius: 0;
