@@ -20,10 +20,12 @@
     <div class="fr-mt-2v">
       <strong>Désolé, Vous avez perdu !</strong>
     </div>
-    <router-link class="fr-btn link-as-btn" v-if="etapeCourante == quizViewModel?.questions.length" :to="{ name: 'coach' }"> Revenir au coach </router-link>
+    <router-link class="fr-btn link-as-btn fr-mt-5v" v-if="etapeCourante == quizViewModel?.questions.length" :to="{ name: 'coach' }">
+      Revenir au coach
+    </router-link>
   </div>
   <div v-else>
-    <button @click="versLaQuestionSuivante" class="fr-btn" title="Continuer">Continuer</button>
+    <button @click="versLaQuestionSuivante" class="fr-btn fr-mt-5v fr-ml-2v" title="Continuer">Continuer</button>
   </div>
 </template>
 <script lang="ts">

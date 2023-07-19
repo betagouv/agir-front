@@ -47,6 +47,7 @@ describe("Fichier de test du usecase de chargement d'un quizz", () => {
             solution: "Reponse 1",
           },
         ],
+        steps: "2",
       });
     }
   });

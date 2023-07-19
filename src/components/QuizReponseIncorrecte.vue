@@ -7,7 +7,7 @@
     </router-link>
   </div>
   <div v-else>
-    <button @click="versLaQuestionSuivante" class="fr-btn" title="Continuer">Continuer</button>
+    <button @click="versLaQuestionSuivante" class="fr-btn fr-ml-2v fr-mt-2v" title="Continuer">Continuer</button>
   </div>
 </template>
 <script lang="ts">

@@ -84,8 +84,7 @@ import { QuizRepositoryAxios } from "@/quiz/adapters/quizRepositoryAxios";
 import { ChargementQuizPresenterImpl, QuizViewModel } from "@/quiz/adapters/chargementQuiz.presenter.impl";
 import { useRoute } from "vue-router";
 import store from "@/store";
-import { EvaluerQuizPresenterImpl, EvaluerQuizViewModel } from "@/quiz/adapters/evaluerQuiz.presenter.impl";
-import router from "@/router";
+import { EvaluerQuizPresenterImpl } from "@/quiz/adapters/evaluerQuiz.presenter.impl";
 import MesResultats from "@/components/MesResultats.vue";
 import BilanNosGestesClimat from "@/components/BilanNosGestesClimat.vue";
 import CarteSkeleton from "@/components/CarteSkeleton.vue";
@@ -204,7 +203,6 @@ export default defineComponent({
 .quiz-question-container {
   text-align: left;
   width: 100%;
-  min-height: 13vh;
 }
 
 .stepper-actions span:hover {
@@ -213,9 +211,5 @@ export default defineComponent({
 
 .quiz-stepper-sub-container {
   text-align: left;
-}
-
-.container-of-quiz-steps {
-  margin-bottom: 10px;
 }
 </style>

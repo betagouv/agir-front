@@ -19,7 +19,7 @@
     <button
       v-if="etapeCourante <= quizViewModel?.questions.length"
       @click="verifierLaReponse(item.solution, item.id)"
-      class="fr-btn custom-button-next-quiz-question fr-mt-5v"
+      class="fr-btn fr-mt-2v fr-ml-2v"
       title="Valider"
     >
       Valider
@@ -74,9 +74,5 @@ export default defineComponent({
 <style scoped>
 .stepper-actions span:hover {
   cursor: pointer;
-}
-
-.custom-button-next-quiz-question {
-  margin: 0 0 0 0.5em;
 }
 </style>
