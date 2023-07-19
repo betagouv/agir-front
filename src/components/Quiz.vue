@@ -94,6 +94,7 @@ import QuizReponseIncorrecte from "@/components/QuizReponseIncorrecte.vue";
 import QuestionDuQuiz from "@/components/QuestionDuQuiz.vue";
 import { EtatDeLaResponse } from "@/components/etatDeLaReponse";
 import { EvaluerQuizUsecase } from "@/quiz/evaluerQuiz.usecase";
+import { InteractionsRepositoryAxios } from "@/interactions/adapters/interactionsRepository.axios";
 
 export default defineComponent({
   name: "Quizz",
@@ -152,6 +153,7 @@ export default defineComponent({
     }
 
     const quizzRepositoryAxios = new QuizRepositoryAxios();
+    const interactionsRepositoryAxios = new InteractionsRepositoryAxios();
 
     const chargementQuizz = () => {
       const chargementQuizzUsecase = new ChargementQuizUsecase(quizzRepositoryAxios);
@@ -162,8 +164,9 @@ export default defineComponent({
 
     const evaluerQuizz = () => {
       const utilisateurId = store.getters["utilisateur/getId"];
-      const evaluerQuizzUsecase = new EvaluerQuizUsecase(quizzRepositoryAxios);
-      evaluerQuizzUsecase.execute(utilisateurId, idQuiz, checkedResponses, new EvaluerQuizPresenterImpl(mapValuesEvaluer));
+      const interactionId = store.getters["utilisateur/getInteractionEnCours"].id;
+      const evaluerQuizzUsecase = new EvaluerQuizUsecase(quizzRepositoryAxios, interactionsRepositoryAxios);
+      evaluerQuizzUsecase.execute(interactionId, utilisateurId, idQuiz, checkedResponses, new EvaluerQuizPresenterImpl(mapValuesEvaluer));
     };
 
     function handleReponse(listeDesReponses: Map<string, string>) {
