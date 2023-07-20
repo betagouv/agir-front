@@ -1,4 +1,4 @@
-import QuizReponseIncorrecte from "@/components/QuizReponseIncorrecte.vue";
+import QuizReponseIncorrecte from "../../src/components/QuizReponseIncorrecte.vue";
 import { mount } from "@vue/test-utils";
 import router from "../../src/router";
 

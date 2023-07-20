@@ -1,10 +1,9 @@
 /// <reference types="vitest" />
 
-import Vue from "@vitejs/plugin-vue";
-import { defineConfig } from "vite";
+import { mergeConfig } from "vitest/config";
+import { viteConfig } from "./vite.config";
 
-export default defineConfig({
-  plugins: [Vue()],
+export default mergeConfig(viteConfig, {
   test: {
     globals: true,
     environment: "jsdom",
