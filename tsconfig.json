@@ -20,14 +20,14 @@
     /* Linting */
     "strict": true,
     "noFallthroughCasesInSwitch": true,
-
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"],
-      "@/tests/*": ["./tests/*"]
+      "@/*": ["./src/*"]
     },
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "types": ["vitest/globals"]
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "tests/components/*.ts"],
   "exclude": [
     "node_modules",
     "dist",
