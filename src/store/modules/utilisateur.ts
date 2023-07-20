@@ -1,12 +1,13 @@
 import { Commit } from "vuex";
 import { Utilisateur } from "@/authentification/ports/utilisateur.repository";
 import { EmpreinteViewModel } from "@/bilan/adapters/chargementEmpreinte.presenter.impl";
+import { InteractionViewModel } from "@/interactions/adapters/interactions.presenter.impl";
 
 interface State {
   utilisateur: string;
   id: string;
   valeurBilanCarbone: EmpreinteViewModel;
-  interactionEnCours: string;
+  interactionEnCours: InteractionViewModel | null;
   score: number;
 }
 
@@ -23,7 +24,7 @@ export const initialState: State = {
       transport: 0,
     },
   },
-  interactionEnCours: "",
+  interactionEnCours: null,
   score: 0,
 };
 
@@ -40,7 +41,8 @@ export default {
     getValeurBilanCarbone(state: State): EmpreinteViewModel {
       return state.valeurBilanCarbone;
     },
-    getInteractionEnCours(state: State): string {
+    getInteractionEnCours(state: State): InteractionViewModel {
+      if (state.interactionEnCours === null) throw Error;
       return state.interactionEnCours;
     },
     getScore(state: State): number {
@@ -55,7 +57,7 @@ export default {
     setValeurBilanCarbone(state: State, valeurBilanCarbone: EmpreinteViewModel) {
       state.valeurBilanCarbone = valeurBilanCarbone;
     },
-    setInteractionEnCours(state: State, interactionEnCours: string) {
+    setInteractionEnCours(state: State, interactionEnCours: InteractionViewModel) {
       state.interactionEnCours = interactionEnCours;
     },
     setScore(state: State, score: number) {
@@ -75,7 +77,7 @@ export default {
           transport: 0,
         },
       });
-      commit("setInteractionEnCours", "");
+      commit("setInteractionEnCours", {});
       commit("setScore", 0);
     },
   },

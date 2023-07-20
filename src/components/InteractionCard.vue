@@ -26,7 +26,7 @@
         <a
           class="fr-link"
           v-if="!interactionViewModel.estBloquee"
-          @click="interactionAEteCliquee(interactionViewModel.id, interactionViewModel.type)"
+          @click="interactionAEteCliquee(interactionViewModel)"
           :href="interactionViewModel.url"
           :target="interactionViewModel.isUrlExterne ? 'blank' : ''"
           >Commencer <span class="fr-icon-arrow-right-s-line" aria-hidden="true">&nbsp;</span></a
@@ -64,13 +64,13 @@ export default defineComponent({
     },
   },
   setup(props, { emit }) {
-    const interactionAEteCliquee = (interactionId: string, interactionType: string) => {
+    const interactionAEteCliquee = (interaction: InteractionViewModel) => {
       const idUtilisateur = store.getters["utilisateur/getId"];
       const useCase = new CliquerInteractionUsecase(new InteractionsRepositoryAxios());
-      useCase.execute(idUtilisateur, interactionId, interactionType).then(() => {
+      useCase.execute(idUtilisateur, interaction.id, interaction.type).then(() => {
         emit("refreshInteractions");
       });
-      store.commit("utilisateur/setInteractionEnCours", interactionId);
+      store.commit("utilisateur/setInteractionEnCours", interaction);
     };
     return { interactionAEteCliquee };
   },

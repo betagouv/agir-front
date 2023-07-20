@@ -3,6 +3,8 @@ interface QuestionsQuiz {
   id: string;
   intitule: string;
   reponsesPossibles: string[];
+  texteExplication: string;
+  solution: string;
 }
 
 export interface Quiz {

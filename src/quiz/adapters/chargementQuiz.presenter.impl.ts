@@ -1,16 +1,19 @@
 import { Quiz } from "@/quiz/ports/quizRepository";
 import { ChargementQuizzPresenter } from "@/quiz/ports/chargementQuizz.presenter";
 
-interface QuestionViewModel {
+export interface QuestionViewModel {
   id: string;
   intitule: string;
   reponsesPossibles: string[];
   ordre: string;
+  texteExplication: string;
+  solution: string;
 }
 
 export interface QuizViewModel {
   titre: string;
   questions: QuestionViewModel[];
+  steps: string;
 }
 
 export class ChargementQuizPresenterImpl implements ChargementQuizzPresenter {
@@ -22,6 +25,7 @@ export class ChargementQuizPresenterImpl implements ChargementQuizzPresenter {
 
   presenteQuiz(quiz: Quiz): void {
     this._quizViewModel({
+      steps: (quiz.questions.length * 2).toString(),
       titre: quiz.titre,
       questions: quiz.questions.map((question) => {
         return {
@@ -29,6 +33,8 @@ export class ChargementQuizPresenterImpl implements ChargementQuizzPresenter {
           intitule: question.intitule,
           reponsesPossibles: question.reponsesPossibles,
           ordre: question.ordre,
+          texteExplication: question.texteExplication,
+          solution: question.solution,
         };
       }),
     });

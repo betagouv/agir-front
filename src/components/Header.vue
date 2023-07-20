@@ -11,9 +11,9 @@
                 </button>
               </div>
             </div>
-            <div class="fr-header__service">
+            <router-link class="fr-header__service" :to="{ name: 'coach' }">
               <img width="70" alt="agir-logo" src="/logo_agir.png" />
-            </div>
+            </router-link>
           </div>
           <div class="fr-header__tools">
             <div class="fr-header__tools-links">

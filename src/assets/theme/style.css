@@ -44,6 +44,14 @@ h1 {
   line-height: 1.1;
 }
 
+.fil-ariane {
+  text-align: left;
+}
+
+.link-as-btn:hover {
+  background: #1212ff;
+  color: white;
+}
 button:hover {
   border-color: #646cff;
 }
@@ -75,7 +83,9 @@ button:focus-visible {
     height: auto;
   }
 }
-
+a.fr-breadcrumb__link {
+  color: #666666;
+}
 /* factorisation from component */
 .dashboard-card-item {
   border-radius: 6px;
