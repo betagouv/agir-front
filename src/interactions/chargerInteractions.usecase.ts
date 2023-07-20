@@ -3,7 +3,7 @@ import { InteractionsRepository } from "@/interactions/ports/interactionsReposit
 export enum InteractionCategorie {
   ENERGIE = "Energie",
   CONSOMMATION = "Consommation",
-  ALIMENTATION = "Nourriture",
+  ALIMENTATION = "Alimentation",
   GLOBAL = "Global",
   TRANSPORTS = "Transports",
 }
