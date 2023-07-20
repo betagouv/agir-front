@@ -7,6 +7,7 @@ import QuizGagne from "@/components/QuizGagne.vue";
 import Article from "@/components/Article.vue";
 import QuizPerdu from "@/components/QuizPerdu.vue";
 import MesAidesRetrofit from "@/components/MesAidesRetrofit.vue";
+import MesAidesVelo from "@/components/MesAidesVelo.vue";
 import Coach from "@/components/Coach.vue";
 import MesAides from "@/components/MesAides.vue";
 import Page404 from "@/components/pages/Page404.vue";
@@ -70,6 +71,7 @@ const routes = [
   },
   { path: "/mes-aides", name: "mes-aides", component: MesAides },
   { path: "/mes-aides/retrofit", name: "mes-aides-retrofit", component: MesAidesRetrofit },
+  { path: "/mes-aides/velo", name: "mes-aides-velo", component: MesAidesVelo },
   { path: "/communaute", name: "communaute", component: Communaute },
   {
     path: "/login-callback",
