@@ -27,6 +27,7 @@ export class InteractionsPresenterImpl implements InteractionsPresenter {
       [InteractionCategorie.ENERGIE]: "⚡️ Énergie",
       [InteractionCategorie.ALIMENTATION]: "🥦 Alimentation",
       [InteractionCategorie.GLOBAL]: "🌍 Global",
+      [InteractionCategorie.TRANSPORTS]: "🚲 Transports",
     };
 
     const typeInverseMapping: { [key in InteractionType]: string } = {
