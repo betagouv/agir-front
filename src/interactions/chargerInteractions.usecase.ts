@@ -5,6 +5,7 @@ export enum InteractionCategorie {
   CONSOMMATION = "Consommation",
   ALIMENTATION = "Nourriture",
   GLOBAL = "Global",
+  TRANSPORTS = "Transports",
 }
 export enum InteractionType {
   QUIZ = "quizz",

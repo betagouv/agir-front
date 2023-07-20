@@ -16,10 +16,7 @@
                 <fieldset id="credentials" class="fr-fieldset">
                   <legend id="credentials-legend" class="fr-sr-only">identifiants</legend>
                   <div class="fr-fieldset__element">
-                    <label class="fr-label" for="username-8196">
-                      Identifiant
-                      <span class="fr-hint-text">Pour la démo (Dorian ou Livio)</span>
-                    </label>
+                    <label class="fr-label" for="username-8196"> Identifiant </label>
                     <input
                       id="username-8196"
                       v-model="username"
