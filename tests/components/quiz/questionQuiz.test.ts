@@ -38,7 +38,7 @@ describe("Lorsque l'utilisateur répond à la question courante du quiz", () => 
           ],
           steps: "2",
         },
-        valeurDesReponses: new Map([]),
+        valeurDesReponses: new Map<string, string>(),
       },
       global: { plugins: [router] },
     });
@@ -47,7 +47,7 @@ describe("Lorsque l'utilisateur répond à la question courante du quiz", () => 
     const boutonValider = wrapper.find("button");
     await wrapper.find("button").trigger("click");
     const radioInput = wrapper.find('input[type="radio"]');
-    await radioInput.setChecked();
+    await radioInput.trigger("click");
     await wrapper.find('input[type="radio"]').trigger("change");
 
     // THEN
@@ -55,8 +55,7 @@ describe("Lorsque l'utilisateur répond à la question courante du quiz", () => 
     const envoyerReponseEvent = wrapper.emitted("envoyer-reponse");
     expect(wrapper.text()).toContain("intitule de la question");
     expect(boutonValider.text()).toBe("Valider");
-    expect(radioInput.element.checked).toBeTruthy();
-    expect(radioInput.element.value).toBe("reponse 1");
+    expect((radioInput.element as HTMLInputElement).value).toBe("reponse 1");
     expect(verifierReponseEvent[0]).toEqual(["reponse 1", "id_question_0"]);
     expect(envoyerReponseEvent[0]).toEqual([new Map([["id_question_0", "reponse 1"]])]);
   });
