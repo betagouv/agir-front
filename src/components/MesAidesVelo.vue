@@ -13,9 +13,16 @@
     <div v-if="simulationAidesVeloViewModel" class="resultats">
       Voici les aides dont vous pouvez bénéficier
       <ul>
-        <li v-for="aide in simulationAidesVeloViewModel" :key="aide.libelle">
-          {{ aide.libelle }} : {{ aide.montant }}
-          <a title="en savoir plus - ouvre une nouvelle fenêtre" :href="aide.enSavoirPlus" target="_blank" rel="noopener">(en savoir plus)</a>
+        <li v-for="(value, propertyName) in  simulationAidesVeloViewModel" v-bind:class="simulationAidesVeloViewModel" >
+          {{ propertyName }} 
+          <ul>
+            <li v-for="aide in value" :key="aide.libelle">
+              {{ aide.libelle }} :
+              {{ aide.description }}
+              {{ aide.montant }}
+              <a title="en savoir plus - ouvre une nouvelle fenêtre" :href="aide.enSavoirPlus" target="_blank" rel="noopener">(en savoir plus)</a>
+            </li>
+          </ul>
         </li>
       </ul>
     </div>
@@ -33,17 +40,16 @@ export default {
   setup() {
     const codePostal = ref("");
     const revenuFiscal = ref("");
-    const simulationAidesVeloViewModel = ref<SimulationAidesVeloViewModel[]>();
+    const simulationAidesVeloViewModel = ref<SimulationAidesVeloViewModel>();
     const submitForm = () => {
       const useCase = new SimulerAideVeloUsecase(new SimulerAideVeloRepositoryAxios());
 
-      function mapValues(viewModels: SimulationAidesVeloViewModel[]) {
+      function mapValues(viewModels: SimulationAidesVeloViewModel) {
         simulationAidesVeloViewModel.value = viewModels;
       }
 
       useCase.execute(codePostal.value, revenuFiscal.value, new SimulerAideVeloPresenterImpl(mapValues));
     };
-
     return {
       simulationAidesVeloViewModel,
       codePostal,

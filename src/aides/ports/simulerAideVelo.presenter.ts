@@ -1,9 +1,8 @@
 import { SimulationVelo } from "@/aides/simulerAideVelo.usecase";
 export interface SimulationAidesVeloViewModel {
-  libelle: string;
-  montant: string;
-  enSavoirPlus: string;
+  [key: string]: Object[];
 }
+
 export interface SimulerAideVeloPresenter {
   presente(simulationVelo: SimulationVelo): void;
 }
