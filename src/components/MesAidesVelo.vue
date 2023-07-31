@@ -17,10 +17,11 @@
           {{ propertyName }} 
           <ul>
             <li v-for="aide in value" :key="aide.libelle">
+              <img :src="aide.logo">
               {{ aide.libelle }} :
               {{ aide.description }}
               {{ aide.montant }}
-              <a title="en savoir plus - ouvre une nouvelle fenêtre" :href="aide.enSavoirPlus" target="_blank" rel="noopener">(en savoir plus)</a>
+              <a title="en savoir plus - ouvre une nouvelle fenêtre" :href="aide.lien" target="_blank" rel="noopener">(en savoir plus)</a>
             </li>
           </ul>
         </li>
