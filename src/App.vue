@@ -24,7 +24,7 @@ router.beforeEach((to: RouteLocationNormalized, from: RouteLocationNormalized, n
   <div class="page-container">
     <Header v-if="afficherLeHeaderEtFooter" />
 
-    <main class="fr-container fr-px-1w">
+    <main class="fr-container fr-px-1w fr-py-6w">
       <router-view />
     </main>
 
