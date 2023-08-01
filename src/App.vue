@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Header from "@/components/Header.vue";
-import Footer from "@/components/Footer.vue";
+import Footer from "@/components/dsfr/Footer.vue";
 import { computed } from "vue";
 import { NavigationGuardNext, RouteLocationNormalized, useRoute } from "vue-router";
 import router from "@/router";
