@@ -3,7 +3,7 @@ import { ChargementEmpreinteUsecase } from "../../src/bilan/chargementEmpreinte.
 import { Empreinte, EmpreinteRepository } from "../../src/bilan/ports/empreinteRepository";
 
 class EmpreinteRepositoryForTest implements EmpreinteRepository {
-  evaluerEmpreinte(utilisateur: string, situation: string): Promise<Boolean> {
+  evaluerEmpreinte(utilisateur: string, situation: string): Promise<boolean> {
     return Promise.resolve(false);
   }
 

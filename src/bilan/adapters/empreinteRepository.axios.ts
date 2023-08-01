@@ -33,7 +33,7 @@ export class EmpreinteRepositoryAxios implements EmpreinteRepository {
     }
   }
 
-  async evaluerEmpreinte(utilisateur: string, situation: string): Promise<Boolean> {
+  async evaluerEmpreinte(utilisateur: string, situation: string): Promise<boolean> {
     const axiosInstance = AxiosFactory.getAxios();
 
     await axiosInstance.post(`/bilan/evaluer`, {

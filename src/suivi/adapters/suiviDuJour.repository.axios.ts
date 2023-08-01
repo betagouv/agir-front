@@ -16,7 +16,7 @@ export interface SuiviDuJourApiModel {
 }
 
 function extractedDetailsCarbone(data: Map<string, string>): ElementSuiviCarbone[] {
-  let derniersSuivisDetails: ElementSuiviCarbone[] = [];
+  const derniersSuivisDetails: ElementSuiviCarbone[] = [];
   delete data["total_impact"];
 
   for (let i = 0; i < Object.keys(data).length; i += 2) {
@@ -35,7 +35,7 @@ function extractedDetailsCarbone(data: Map<string, string>): ElementSuiviCarbone
 }
 
 function getValeursDesSuivis(listeDesAdditionsCarbone: SuiviDuJourGraphDataApiModel[]): number[] {
-  let valeurDesSuivis: number[] = [];
+  const valeurDesSuivis: number[] = [];
 
   for (let index = 0; index < listeDesAdditionsCarbone.length; index++) {
     const additionCarbon = listeDesAdditionsCarbone[index];
@@ -45,7 +45,7 @@ function getValeursDesSuivis(listeDesAdditionsCarbone: SuiviDuJourGraphDataApiMo
 }
 
 function getValeursDesDates(listeDesAdditionsCarbone: SuiviDuJourGraphDataApiModel[]): string[] {
-  let valeurDesDates: string[] = [];
+  const valeurDesDates: string[] = [];
 
   for (let index = 0; index < listeDesAdditionsCarbone.length; index++) {
     const additionCarbon = listeDesAdditionsCarbone[index];
@@ -71,7 +71,7 @@ function isTransportEnCommun(valeur: string): boolean {
 }
 
 function getToutesLesValeursDuSuivisAvecLeBonFormat(listeDesValeurs: Map<string, string>): Map<string, string> {
-  let listeFinaleDesValeurs: Map<string, string> = new Map();
+  const listeFinaleDesValeurs: Map<string, string> = new Map();
 
   listeDesValeurs.forEach((value, key) => {
     if (isTransportEnCommun(key)) {
