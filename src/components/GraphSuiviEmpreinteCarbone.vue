@@ -32,7 +32,7 @@ export default defineComponent({
       return this.datesDuGraph;
     },
 
-    getDonneesDuGraph() {      
+    getDonneesDuGraph() {
       return {
         labels: this.datesDuGraph,
         datasets: [
