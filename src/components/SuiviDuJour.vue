@@ -58,10 +58,10 @@
                   v-if="etapeCourante == 3"
                   class="fr-btn fr-btn-not-rounded redirect-coach-link"
                   id="button-2864"
-                  title="Envoyer le formulaire"
+                  title="Retourner à la page coach"
                   :to="{ name: 'coach' }"
                 >
-                  Retour au coach
+                  Retour à mes actions
                 </router-link>
               </div>
               <br />
