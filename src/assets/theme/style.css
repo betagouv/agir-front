@@ -111,3 +111,7 @@ h3 {
 .text--center {
   text-align: center;
 }
+
+.background-gris {
+  background: var(--background-alt-grey);
+}

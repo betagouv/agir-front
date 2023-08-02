@@ -1,28 +1,16 @@
 <template>
-  <div class="fr-col-12">
-    <div class="col-demo">
-      <div class="fr-tile fr-enlarge-link fr-tile--horizontal fr-tile--vertical-md graph-container" id="tile-6538">
-        <div class="fr-grid-row">
-          <div class="fr-col-11">
-            <div class="col-demo">
-              <div class="graph-card-custom-body">
-                <div class="fr-tile__title">
-                  <p style="font-size: 2.5vh">Évolution de votre impact carbone</p>
-                </div>
-                <br />
-                <div class="fr-tile__desc">
-                  <div class="graph-schema">
-                    <LineChart :chartData="getDonneesDuGraph" :options="getOptionsDuGraph" />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+  <div class="fr-p-3w background-gris">
+    <h2 class="fr-h5">Évolution de votre impact carbone</h2>
+    <LineChart :chartData="getDonneesDuGraph" :options="getOptionsDuGraph" />
+    <div class="fr-grid-row fr-grid-row--center fr-grid-row--middle fr-mt-2w">
+      <span class="fr-text--sm fr-mb-0">Votre moyenne</span>
+      <div class="legende-graphique legende-graphique--blue"></div>
+      <div class="fr-text--sm fr-mb-0">Variation des suivis</div>
+      <div class="legende-graphique legende-graphique--dashed"></div>
     </div>
   </div>
 </template>
+
 <script lang="ts">
 import { defineComponent } from "vue";
 import { LineChart } from "vue-chart-3";
@@ -44,7 +32,7 @@ export default defineComponent({
       return this.datesDuGraph;
     },
 
-    getDonneesDuGraph() {
+    getDonneesDuGraph() {      
       return {
         labels: this.datesDuGraph,
         datasets: [
@@ -72,17 +60,8 @@ export default defineComponent({
         maintainAspectRatio: false,
         plugins: {
           legend: {
-            display: true,
-            labels: {
-              font: {
-                size: 14,
-                weight: "bold",
-                family: "Marianne,arial,sans-serif",
-              },
-            },
-            position: "right",
-            align: "center",
-          },
+            display: false,
+          }
         },
         scales: {
           y: {
@@ -116,33 +95,18 @@ export default defineComponent({
   },
 });
 </script>
+
 <style scoped>
-.graph-card-custom-body {
-  text-align: left;
-  margin: 20px 20px auto;
-  width: 100%;
-}
+  .legende-graphique {
+    width: 3rem;
+    height: 0;
+    margin: 0 1rem 0 .5rem;
+  }
+  .legende-graphique--blue {
+    border: 4px solid #000091;
+  }
 
-.graph-container {
-  background-color: #f6f6f6;
-  border-radius: 5px;
-}
-
-.graph-schema {
-  height: 50vh;
-}
-
-.legend-graph-container {
-  position: absolute;
-  left: 50%;
-  top: 59%;
-  transform: translate(-50%, -59%);
-  width: 80%;
-  font-weight: bold;
-  color: black;
-}
-
-.legend-graph-place {
-  position: relative;
-}
+  .legende-graphique--dashed {
+    border: 4px dashed #000000;
+  }
 </style>
