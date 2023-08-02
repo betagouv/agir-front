@@ -29,7 +29,7 @@ export class DernierSuiviDuJourPresenterImpl implements DernierSuiviPresenter {
   }
 
   formaterLesValeursDuSuivis(listeDesValeurs: Map<string, string>): Map<string, string> {
-    let resultat: Map<string, string> = new Map();
+    const resultat: Map<string, string> = new Map();
 
     listeDesValeurs.forEach((value, key) => {
       if (this.isTransportEnCommun(key)) {

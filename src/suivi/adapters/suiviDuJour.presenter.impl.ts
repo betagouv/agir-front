@@ -78,7 +78,7 @@ export class SuiviDuJourPresenterImpl implements SuiviDuJourPresenter {
   }
 
   private getAdditionCarbone(listDesValeurs: ElementSuiviCarbone[]): LigneCarbone[] {
-    let resultats: LigneCarbone[] = [];
+    const resultats: LigneCarbone[] = [];
     listDesValeurs.sort((element1, element2) => (element1.impactCarbone > element2.impactCarbone ? -1 : 1));
 
     for (let index = 0; index < listDesValeurs.length; index++) {
