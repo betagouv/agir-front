@@ -107,3 +107,7 @@ h3 {
   font-size: 18px;
   margin-right: 10px;
 }
+
+.text--center {
+  text-align: center;
+}

@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import Header from "@/components/Header.vue";
-import Footer from "@/components/Footer.vue";
+import Footer from "@/components/dsfr/Footer.vue";
 import { computed } from "vue";
-import { NavigationGuardNext, RouteLocationNormalized, RouteMeta, RouteRecord, useRoute } from "vue-router";
+import { NavigationGuardNext, RouteLocationNormalized, useRoute } from "vue-router";
 import router from "@/router";
 const afficherLeHeaderEtFooter = computed({
   get() {
@@ -24,28 +24,17 @@ router.beforeEach((to: RouteLocationNormalized, from: RouteLocationNormalized, n
   <div class="page-container">
     <Header v-if="afficherLeHeaderEtFooter" />
 
-    <div class="fr-container fr-px-1w">
+    <main class="fr-container fr-px-1w fr-py-6w">
       <router-view />
-    </div>
+    </main>
 
-    <Footer v-if="afficherLeHeaderEtFooter" class="footer-container" />
+    <Footer v-if="afficherLeHeaderEtFooter" />
   </div>
 </template>
 
 <style scoped>
-.page-container {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  min-height: 100vh;
-  width: 100%;
-  background-color: #f7f8f8;
-}
-
-.footer-container {
-  text-align: left;
-  height: 18rem;
-  width: 100%;
-  background-color: white;
-}
+  .page-container {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+  }
 </style>
