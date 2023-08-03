@@ -49,7 +49,6 @@ import { defineComponent, onMounted, ref } from "vue";
 import { ScoreViewModel } from "@/score/ports/chargementScorePresenter";
 import Compteur from "@/components/Compteur.vue";
 import QuizCarte from "@/components/QuizCarte.vue";
-import BadgeCarte from "@/components/BadgeContainer.vue";
 import store from "@/store";
 import CarteSkeleton from "@/components/CarteSkeleton.vue";
 import BilanNosGestesClimat from "@/components/BilanNosGestesClimat.vue";
@@ -68,7 +67,7 @@ import { ChargementScorePresenterImpl } from "@/score/adapters/chargementScorePr
 export default defineComponent({
   name: "Coach",
   methods: { getDeviceType },
-  components: { InteractionCard, MesResultats, BilanNosGestesClimat, CarteSkeleton, BadgesContainer: BadgeCarte, QuizCarte, Compteur },
+  components: { InteractionCard, MesResultats, BilanNosGestesClimat, CarteSkeleton, QuizCarte, Compteur },
   computed: {
     DeviceType() {
       return DeviceType;
