@@ -6,7 +6,7 @@
       url: '/coach'
     }]"
   />
-  <div class="fr-grid-row">
+  <div class="fr-grid-row fr-grid-row--gutters">
     <div class="fr-col-12 fr-col-lg-8">
       <div class="follow-up-stepper-container">
         <div class="follow-up-stepper-sub-container">
@@ -214,13 +214,12 @@ export default defineComponent({
   },
 });
 </script>
+
 <style scoped>
 .follow-up-stepper-container {
-  border: 1px solid #e8e8e8;
-  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.19);
+  border-radius: 6px;
   background-color: white;
-  margin-left: 20px;
-  margin-right: 20px;
 }
 
 .follow-up-stepper-sub-container {
