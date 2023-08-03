@@ -44,15 +44,18 @@ function getValeursDesSuivis(listeDesAdditionsCarbone: SuiviDuJourGraphDataApiMo
   return valeurDesSuivis;
 }
 
-function getValeursDesDates(listeDesAdditionsCarbone: SuiviDuJourGraphDataApiModel[]): string[] {
-  const valeurDesDates: string[] = [];
+function formateDate(date: string): string {
+  const inputDate = new Date(date);
 
-  for (let index = 0; index < listeDesAdditionsCarbone.length; index++) {
-    const additionCarbon = listeDesAdditionsCarbone[index];
-    const [dateDuSuivi, heureDuSuivi] = additionCarbon.date.split("T");
-    valeurDesDates.push(dateDuSuivi);
-  }
-  return valeurDesDates;
+  const day = String(inputDate.getUTCDate()).padStart(2, '0');
+  const month = String(inputDate.getUTCMonth() + 1).padStart(2, '0');
+  const year = String(inputDate.getUTCFullYear());
+
+  return `${day}/${month}/${year}`;
+}
+
+function getValeursDesDates(listeDesAdditionsCarbone: SuiviDuJourGraphDataApiModel[]): string[] {
+  return listeDesAdditionsCarbone.map(({ date }) => formateDate(date));
 }
 
 function calculerTempsEnMinute(temps: string): number {
