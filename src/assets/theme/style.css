@@ -115,3 +115,7 @@ h3 {
 .background-gris {
   background: var(--background-alt-grey);
 }
+
+.list-style-none {
+  list-style: none;
+}
