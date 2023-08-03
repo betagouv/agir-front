@@ -2,20 +2,19 @@
   <div v-if="interactionsViewModel">
     <h1 class="fr-h2">Les actions du jour</h1>
     <div class="fr-grid-row fr-grid-row--gutters">
-      <div class="fr-col-12 fr-col-lg-8">
+      <div class="fr-col fr-col-lg-8">
         <div v-if="!isLoading">
-          <div class="fr-mb-4w" v-for="item in interactionsViewModel" :key="item.titre">
-            <InteractionCard
-              :interaction-view-model="item"
-              @refresh-interactions="lancerChargementDesDonnees"
-            />
-          </div>
+          <InteractionCard
+            v-for="item in interactionsViewModel"
+            :key="item.titre"
+            class="fr-mb-4w"
+            :interaction-view-model="item"
+            @refresh-interactions="lancerChargementDesDonnees"
+          />
         </div>
-          <div v-else>
-            <div class="fr-mb-4w" v-for="item in 4" :key="item">
-              <CarteSkeleton />
-            </div>
-          </div>
+        <div v-else>
+          <CarteSkeleton class="fr-mb-4w" v-for="item in 4" :key="item" />
+        </div>
       </div>
       <div class="fr-col-12 fr-col-lg-4">
         <div v-if="!isLoading">
