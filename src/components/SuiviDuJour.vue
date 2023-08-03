@@ -1,20 +1,13 @@
 <template>
-  <div style="margin-top: 20px" class="fr-grid-row">
+  <FilDAriane
+    page-courante="Faire le suivi du jour"
+    :page-hierarchie="[{
+      label: 'Coach',
+      url: '/coach'
+    }]"
+  />
+  <div class="fr-grid-row">
     <div class="fr-col-12 fr-col-lg-8">
-      <nav style="text-align: left; margin: 0 0 -15px 30px" role="navigation" class="fr-breadcrumb" aria-label="vous êtes ici :">
-        <button class="fr-breadcrumb__button" aria-expanded="false" aria-controls="breadcrumb-2831">Voir le fil d’Ariane</button>
-        <div class="fr-collapse" id="breadcrumb-2831">
-          <ol class="fr-breadcrumb__list">
-            <li>
-              <a class="fr-breadcrumb__link" href="/coach">Coach</a>
-            </li>
-            <li>
-              <a class="fr-breadcrumb__link" aria-current="page">Faire le suivi du jour</a>
-            </li>
-          </ol>
-        </div>
-      </nav>
-      <br />
       <div class="col-demo">
         <div class="follow-up-stepper-container">
           <div class="follow-up-stepper-sub-container">
@@ -107,6 +100,7 @@ import { DateTimeTypeScript } from "@/DateTime";
 import { InteractionsRepositoryAxios } from "@/interactions/adapters/interactionsRepository.axios";
 import NombreDePointsDuJour from "@/components/NombreDePointsDuJour.vue";
 import { DernierSuiviDuJourPresenterImpl, DernierSuiviDuJourViewModel } from "@/suivi/adapters/dernierSuiviDuJour.presenter.impl";
+import FilDAriane from "@/components/dsfr/FilDAriane.vue";
 
 export default defineComponent({
   name: "SuiviDuJour",
@@ -118,7 +112,8 @@ export default defineComponent({
     MesResultats,
     ImpactDuJour,
     BilanNosGestesClimat,
-  },
+    FilDAriane
+},
   computed: {
     store() {
       return store;
