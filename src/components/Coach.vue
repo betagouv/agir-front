@@ -1,43 +1,38 @@
 <template>
-  <div class="" v-if="interactionsViewModel">
+  <div v-if="interactionsViewModel">
+    <h1 class="fr-h2">Les actions du jour</h1>
     <div class="fr-grid-row fr-grid-row--gutters">
       <div class="fr-col-12 fr-col-lg-8">
-        <div class="fr-container--fluid">
-          <div v-if="!isLoading" class="fr-grid-row fr-grid-row--gutters fr-mt-2w fr-mx-0 fr-mb-0">
-            <h1 class="fr-h2 fr-col-12 fr-m-0" id="titre-coach">Les actions du jour</h1>
-            <div class="fr-col-12" v-for="item in interactionsViewModel" :key="item.titre">
-              <InteractionCard :interaction-view-model="item" @refresh-interactions="lancerChargementDesDonnees" />
-            </div>
+        <div v-if="!isLoading">
+          <div class="fr-mb-4w" v-for="item in interactionsViewModel" :key="item.titre">
+            <InteractionCard
+              :interaction-view-model="item"
+              @refresh-interactions="lancerChargementDesDonnees"
+            />
           </div>
-          <div v-else class="fr-grid-row fr-grid-row--gutters dashboard-container">
-            <div class="fr-col-12" v-for="item in 4" :key="item">
+        </div>
+          <div v-else>
+            <div class="fr-mb-4w" v-for="item in 4" :key="item">
               <CarteSkeleton />
             </div>
           </div>
-        </div>
       </div>
       <div class="fr-col-12 fr-col-lg-4">
-        <div class="fr-container--fluid">
-          <div v-if="!isLoading" class="fr-mt-10w">
-            <div class="fr-grid-row fr-grid-row--gutters card-item-list-container">
-              <div class="fr-col-12" v-if="empreinteViewModel">
-                <BilanNosGestesClimat :get-impact-value="empreinteViewModel" />
-              </div>
-              <div class="fr-col-12">
-                <MesResultats v-if="scoreViewModel" :badge-view-model="scoreViewModel.badges" :score-value="scoreViewModel.score" />
-              </div>
-            </div>
-          </div>
-          <div v-else>
-            <div class="fr-grid-row fr-grid-row--gutters card-item-list-container">
-              <div class="fr-col-12">
-                <CarteSkeleton />
-              </div>
-              <div class="fr-col-12">
-                <CarteSkeleton />
-              </div>
-            </div>
-          </div>
+        <div v-if="!isLoading">
+          <BilanNosGestesClimat
+            v-if="empreinteViewModel"
+            class="fr-mb-3w"
+            :get-impact-value="empreinteViewModel"
+          />
+          <MesResultats
+            v-if="scoreViewModel"
+            :badge-view-model="scoreViewModel.badges"
+            :score-value="scoreViewModel.score"
+          />
+        </div>
+        <div v-else>
+          <CarteSkeleton class="fr-mb-3w" />
+          <CarteSkeleton />
         </div>
       </div>
     </div>
@@ -47,8 +42,6 @@
 <script lang="ts">
 import { defineComponent, onMounted, ref } from "vue";
 import { ScoreViewModel } from "@/score/ports/chargementScorePresenter";
-import Compteur from "@/components/Compteur.vue";
-import QuizCarte from "@/components/QuizCarte.vue";
 import store from "@/store";
 import CarteSkeleton from "@/components/CarteSkeleton.vue";
 import BilanNosGestesClimat from "@/components/BilanNosGestesClimat.vue";
@@ -67,7 +60,7 @@ import { ChargementScorePresenterImpl } from "@/score/adapters/chargementScorePr
 export default defineComponent({
   name: "Coach",
   methods: { getDeviceType },
-  components: { InteractionCard, MesResultats, BilanNosGestesClimat, CarteSkeleton, QuizCarte, Compteur },
+  components: { InteractionCard, MesResultats, BilanNosGestesClimat, CarteSkeleton },
   computed: {
     DeviceType() {
       return DeviceType;
@@ -125,43 +118,3 @@ export default defineComponent({
   },
 });
 </script>
-
-<style scoped>
-h2 {
-  font-size: 24px;
-  margin-bottom: 20px;
-}
-
-h3 {
-  font-size: 18px;
-  margin-right: 10px;
-}
-
-p {
-  font-size: 24px;
-  font-weight: bold;
-  position: relative;
-}
-
-.dashboard-container {
-  margin: 20px 0 0 0;
-}
-
-/* Disposition des éléments du dashboard sur les écrans de petite taille */
-@media only screen and (max-width: 950px) {
-  /*.dashboard-container {
-    margin: 5px;
-  }*/
-}
-
-.valeur {
-  color: #161616;
-  font-size: 1rem;
-  font-weight: 700;
-  line-height: 1.5rem;
-}
-
-.card-item-list-container {
-  margin-top: 20px;
-}
-</style>
