@@ -3,7 +3,7 @@
     <h4 class="fr-mb-0 fr-pb-3v">Bien joué !</h4>
     Vous avez donné la bonne réponse.
   </div>
-  <div v-if="etapeCourante == quizViewModel?.questions.length && !resultatFinalDuQuiz">
+  <div v-if="etapeCourante == quizViewModel?.questions.length && !leQuizContientAuMoinsUneReponseIncorrecte">
     <div class="fr-mt-6v fr-ml-2v">
       <h6 class="fr-mb-0">Vous avez gagné</h6>
       <div class="fr-mt-2v fr-text--sm fr-text--bold fr-mb-0" style="display: flex">
@@ -16,7 +16,7 @@
       Revenir au coach
     </router-link>
   </div>
-  <div class="fr-ml-2v" v-else-if="etapeCourante == quizViewModel?.questions.length && resultatFinalDuQuiz">
+  <div class="fr-ml-2v" v-else-if="etapeCourante == quizViewModel?.questions.length && leQuizContientAuMoinsUneReponseIncorrecte">
     <div class="fr-mt-2v">
       <strong>Désolé, Vous avez perdu !</strong>
     </div>
@@ -44,7 +44,7 @@ export default defineComponent({
       type: String,
       required: true,
     },
-    resultatFinalDuQuiz: {
+    leQuizContientAuMoinsUneReponseIncorrecte: {
       type: Boolean,
       required: true,
     },

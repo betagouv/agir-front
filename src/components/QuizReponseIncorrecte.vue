@@ -1,6 +1,6 @@
 <template>
   <div class="fr-ml-2v" v-html="item.texteExplication" />
-  <div v-if="etapeCourante == quizViewModel?.questions.length && resultatFinalDuQuiz">
+  <div v-if="etapeCourante == quizViewModel?.questions.length && leQuizContientAuMoinsUneReponseIncorrecte">
     <div class="fr-mt-2v fr-ml-2v fr-text--bold">Désolé, Vous avez perdu !</div>
     <router-link class="fr-btn link-as-btn fr-ml-2v fr-mt-5v" v-if="etapeCourante == quizViewModel?.questions.length" :to="{ name: 'coach' }">
       Revenir au coach
@@ -22,7 +22,7 @@ export default defineComponent({
       type: Number,
       required: true,
     },
-    resultatFinalDuQuiz: {
+    leQuizContientAuMoinsUneReponseIncorrecte: {
       type: Boolean,
       required: true,
     },

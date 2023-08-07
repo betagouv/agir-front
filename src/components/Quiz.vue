@@ -37,7 +37,7 @@
                     :etape-courante="questionCourante"
                     :item="item"
                     :quiz-view-model="quizViewModel!"
-                    :resultat-final-du-quiz="leQuizAEtePerdu"
+                    :le-quiz-contient-au-moins-une-reponse-incorrecte="leQuizContientAuMoinsUneReponseIncorrecte"
                     @question-suivante="passerALaQuestionSuivante"
                   />
                 </div>
@@ -47,7 +47,7 @@
                     :etat-reponse-courante="getEtatDeLaReponseChoisie"
                     :get-score="getScore"
                     :quiz-view-model="quizViewModel!"
-                    :resultat-final-du-quiz="leQuizAEtePerdu"
+                    :le-quiz-contient-au-moins-une-reponse-incorrecte="leQuizContientAuMoinsUneReponseIncorrecte"
                     @question-suivante="passerALaQuestionSuivante"
                   />
                 </div>
@@ -131,7 +131,7 @@ export default defineComponent({
     const quizViewModel = ref<QuizViewModel>();
     let checkedResponses = new Map<string, string>();
     let etatDeLaReponseChoisie = ref<EtatDeLaResponse>(EtatDeLaResponse.INITIAL);
-    let leQuizAEtePerdu = ref<boolean>(false);
+    let leQuizContientAuMoinsUneReponseIncorrecte = ref<boolean>(false);
 
     let idQuiz: string = "";
     const route = useRoute();
@@ -168,7 +168,7 @@ export default defineComponent({
       etapeCourante.value++;
       if (responseDelaQuestion != checkedResponses.get(questionId)) {
         etatDeLaReponseChoisie.value = EtatDeLaResponse.REPONSE_INCORRECT;
-        leQuizAEtePerdu.value = true;
+        leQuizContientAuMoinsUneReponseIncorrecte.value = true;
       } else {
         etatDeLaReponseChoisie.value = EtatDeLaResponse.REPONSE_CORRECT;
       }
@@ -193,7 +193,7 @@ export default defineComponent({
       passerALaQuestionSuivante,
       etatDeLaReponseChoisie,
       checkedResponses,
-      leQuizAEtePerdu,
+      leQuizContientAuMoinsUneReponseIncorrecte,
     };
   },
 });
