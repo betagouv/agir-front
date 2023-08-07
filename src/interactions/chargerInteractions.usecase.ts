@@ -11,7 +11,7 @@ export enum InteractionType {
   QUIZ = "quizz",
   ARTICLE = "article",
   KYC = "KYC",
-  SUIVIDUJOUR = "suivi-du-jour",
+  SUIVIDUJOUR = "suivi_du_jour",
 }
 export interface Interaction {
   id: string;
