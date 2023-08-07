@@ -1,25 +1,16 @@
 <template>
-  <div class="fr-tile fr-enlarge-link fr-tile--horizontal fr-tile--vertical-md dashboard-card-item" id="tile-6538">
-    <div style="align-items: flex-start; text-align: left" class="fr-tile__body">
-      <h3 class="fr-tile__desc">Vos points du jour</h3>
-      <div style="display: flex">
-        <img src="/leaf.svg" alt="leaf-logo" />
-        <p style="font-weight: bold; font-size: 1.5vh">+ {{ nombreDePointsDuJour }} points</p>
-      </div>
-    </div>
-  </div>
+  <CarteVierge>
+    <h3 class="fr-h6 fr-mb-0">Vos points du jour</h3>
+    <p class="fr-grid-row fr-grid-row--middle fr-m-0 fr-text--xs"><img src="/leaf.svg" alt="" class="fr-mr-1w" /> + {{ nombreDePointsDuJour }} points</p>
+  </CarteVierge>
 </template>
 
-<script lang="ts">
-export default {
-  name: "NombreDePointsDuJour",
-  props: {
-    nombreDePointsDuJour: {
-      type: Number,
-      required: true,
-    },
-  },
-};
+<script setup lang="ts">
+  import CarteVierge from "@/components//CarteVierge.vue";
+
+  defineProps<{
+    nombreDePointsDuJour: number
+  }>();
 </script>
 
 <style scoped></style>
