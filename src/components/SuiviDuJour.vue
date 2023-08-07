@@ -1,90 +1,79 @@
 <template>
-  <div style="margin-top: 20px" class="fr-grid-row">
+  <FilDAriane
+    page-courante="Faire le suivi du jour"
+    :page-hierarchie="[{
+      label: 'Coach',
+      url: '/coach'
+    }]"
+  />
+  <div class="fr-grid-row fr-grid-row--gutters">
     <div class="fr-col-12 fr-col-lg-8">
-      <nav style="text-align: left; margin: 0 0 -15px 30px" role="navigation" class="fr-breadcrumb" aria-label="vous êtes ici :">
-        <button class="fr-breadcrumb__button" aria-expanded="false" aria-controls="breadcrumb-2831">Voir le fil d’Ariane</button>
-        <div class="fr-collapse" id="breadcrumb-2831">
-          <ol class="fr-breadcrumb__list">
-            <li>
-              <a class="fr-breadcrumb__link" href="/coach">Coach</a>
-            </li>
-            <li>
-              <a class="fr-breadcrumb__link" aria-current="page">Faire le suivi du jour</a>
-            </li>
-          </ol>
-        </div>
-      </nav>
-      <br />
-      <div class="col-demo">
-        <div class="follow-up-stepper-container">
-          <div class="follow-up-stepper-sub-container">
-            <h3 v-if="etapeCourante" class="step-title-container fr-mx-n1w">{{ getCurrentStepTitle }}</h3>
-            <form @submit.prevent="etapeSuivante">
-              <div v-if="etapeCourante" class="fr-stepper__steps fr-mx-n1w" :data-fr-current-step="etapeCourante" :data-fr-steps="3" />
-              <br />
-              <fieldset class="fr-fieldset" id="checkbox" aria-labelledby="checkbox-legend checkbox-messages">
-                <div class="selected-step-container fr-mx-n1w" v-if="etapeCourante == 1">
-                  <SuiviDuJourPremiereEtape
-                    current-step-question="Comptez combien de repas vous avez consommé avec les aliments suivants :"
-                    :etape-courante="etapeCourante"
-                    @update:model-value="miseAjourReponseSuiviDuJourAlimentation"
-                    :model-value="suiviDuJourAlimentation"
-                    :dernier-suivi-du-jour-view-model="dernierSuiviDuJourAlimentationViewmodel"
-                  />
-                </div>
-                <div class="selected-step-container fr-mx-n1w" v-else-if="etapeCourante == 2">
-                  <SuiviDuJourSecondeEtape
-                    current-step-question="Quels transports avez vous utilisé aujourd'hui ?"
-                    :etape-courante="etapeCourante"
-                    @update:model-value="miseAjourReponseSuiviDuJourTransport"
-                    :model-value="suiviDuJourTransport"
-                    :dernier-suivi-du-jour-view-model="dernierSuiviDuJourTransportViewmodel"
-                  />
-                </div>
-                <div class="last-step-container fr-container--fluid" v-else>
-                  <SuiviDuJourResultats :suivi-du-jour-resultats="suiviDuJourResultatsViewModel" />
-                </div>
-              </fieldset>
-              <div style="text-align: left" class="fr-mx-n1w">
-                <span v-if="etapeCourante <= 2 && etapeCourante > 1" @click="etapePrecedente" class="step-btn-actions margin-between-buttons">
-                  <span class="fr-icon-arrow-left-line" aria-hidden="true"></span>
-                  Précédent
-                </span>
-                <button v-if="etapeCourante < 3" class="fr-btn fr-btn-not-rounded margin-between-buttons" title="Suivant">Continuer</button>
-                <!--<span v-if="etapeCourante == 1" @click="sauterEtape" class="step-btn-actions"> Passer la question </span>-->
-                <button v-if="etapeCourante == 3" class="fr-btn-not-rounded share-btn-container" title="partager">Partager vos résultats</button>
-                <br />
-                <router-link
-                  v-if="etapeCourante == 3"
-                  class="fr-btn fr-btn-not-rounded redirect-coach-link"
-                  id="button-2864"
-                  title="Retourner à la page coach"
-                  :to="{ name: 'coach' }"
-                >
-                  Retour à mes actions
-                </router-link>
+      <div class="follow-up-stepper-container">
+        <div class="follow-up-stepper-sub-container">
+          <h3 v-if="etapeCourante" class="step-title-container fr-mx-n1w">{{ getCurrentStepTitle }}</h3>
+          <form @submit.prevent="etapeSuivante">
+            <div v-if="etapeCourante" class="fr-stepper__steps fr-mx-n1w" :data-fr-current-step="etapeCourante" :data-fr-steps="3" />
+            <br />
+            <fieldset class="fr-fieldset" id="checkbox" aria-labelledby="checkbox-legend checkbox-messages">
+              <div class="selected-step-container fr-mx-n1w" v-if="etapeCourante == 1">
+                <SuiviDuJourPremiereEtape
+                  current-step-question="Comptez combien de repas vous avez consommé avec les aliments suivants :"
+                  :etape-courante="etapeCourante"
+                  @update:model-value="miseAjourReponseSuiviDuJourAlimentation"
+                  :model-value="suiviDuJourAlimentation"
+                  :dernier-suivi-du-jour-view-model="dernierSuiviDuJourAlimentationViewmodel"
+                />
               </div>
+              <div class="selected-step-container fr-mx-n1w" v-else-if="etapeCourante == 2">
+                <SuiviDuJourSecondeEtape
+                  current-step-question="Quels transports avez vous utilisé aujourd'hui ?"
+                  :etape-courante="etapeCourante"
+                  @update:model-value="miseAjourReponseSuiviDuJourTransport"
+                  :model-value="suiviDuJourTransport"
+                  :dernier-suivi-du-jour-view-model="dernierSuiviDuJourTransportViewmodel"
+                />
+              </div>
+              <div class="last-step-container fr-container--fluid" v-else>
+                <SuiviDuJourResultats :suivi-du-jour-resultats="suiviDuJourResultatsViewModel" />
+              </div>
+            </fieldset>
+            <div style="text-align: left" class="fr-mx-n1w">
+              <span v-if="etapeCourante <= 2 && etapeCourante > 1" @click="etapePrecedente" class="step-btn-actions margin-between-buttons">
+                <span class="fr-icon-arrow-left-line" aria-hidden="true"></span>
+                Précédent
+              </span>
+              <button v-if="etapeCourante < 3" class="fr-btn fr-btn-not-rounded margin-between-buttons" title="Suivant">Continuer</button>
+              <!--<span v-if="etapeCourante == 1" @click="sauterEtape" class="step-btn-actions"> Passer la question </span>-->
+              <button v-if="etapeCourante == 3" class="fr-btn-not-rounded share-btn-container" title="partager">Partager vos résultats</button>
               <br />
-            </form>
-          </div>
+              <router-link
+                v-if="etapeCourante == 3"
+                class="fr-btn fr-btn-not-rounded redirect-coach-link"
+                id="button-2864"
+                title="Retourner à la page coach"
+                :to="{ name: 'coach' }"
+              >
+                Retour à mes actions
+              </router-link>
+            </div>
+            <br />
+          </form>
         </div>
       </div>
     </div>
     <div class="fr-col-12 fr-col-lg-4">
-      <div class="col-demo">
-        <br />
-        <div class="fr-grid-row fr-grid-row--gutters card-item-list-container">
-          <div class="fr-col-12">
-            <BilanNosGestesClimat :get-impact-value="store.getters['utilisateur/getValeurBilanCarbone']" />
-          </div>
-          <div v-if="etapeCourante == 3" class="fr-col-12">
-            <NombreDePointsDuJour :nombre-de-points-du-jour="25" />
-          </div>
-          <div class="fr-col-12">
-            <ImpactDuJour :consommation-du-jour="suiviDuJourResultatsViewModel.impactCarbonDuJour.valeur" :equivalent-en-litres="'14'" />
-          </div>
-        </div>
-      </div>
+      <BilanNosGestesClimat
+        class="fr-mb-3w"
+        :get-impact-value="store.getters['utilisateur/getValeurBilanCarbone']"
+      />
+      <NombreDePointsDuJour
+        v-if="etapeCourante === 3"
+        class="fr-mb-3w"
+        :nombre-de-points-du-jour="25" />
+      <ImpactDuJour
+        :consommation-du-jour="suiviDuJourResultatsViewModel.impactCarbonDuJour.valeur"
+        :equivalent-en-litres="'14'"
+      />
     </div>
   </div>
 </template>
@@ -107,6 +96,7 @@ import { DateTimeTypeScript } from "@/DateTime";
 import { InteractionsRepositoryAxios } from "@/interactions/adapters/interactionsRepository.axios";
 import NombreDePointsDuJour from "@/components/NombreDePointsDuJour.vue";
 import { DernierSuiviDuJourPresenterImpl, DernierSuiviDuJourViewModel } from "@/suivi/adapters/dernierSuiviDuJour.presenter.impl";
+import FilDAriane from "@/components/dsfr/FilDAriane.vue";
 
 export default defineComponent({
   name: "SuiviDuJour",
@@ -118,7 +108,8 @@ export default defineComponent({
     MesResultats,
     ImpactDuJour,
     BilanNosGestesClimat,
-  },
+    FilDAriane
+},
   computed: {
     store() {
       return store;
@@ -223,17 +214,12 @@ export default defineComponent({
   },
 });
 </script>
-<style scoped>
-.card-item-list-container {
-  margin: 0 auto;
-}
 
+<style scoped>
 .follow-up-stepper-container {
-  border: 1px solid #e8e8e8;
-  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.19);
+  border-radius: 6px;
   background-color: white;
-  margin-left: 20px;
-  margin-right: 20px;
 }
 
 .follow-up-stepper-sub-container {

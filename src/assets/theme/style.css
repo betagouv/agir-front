@@ -108,8 +108,20 @@ h3 {
   margin-right: 10px;
 }
 
+.text--white {
+  color: #FFF;
+}
+
 .text--center {
   text-align: center;
+}
+
+.text--3xl {
+  font-size: 2rem;
+}
+
+.background-bleu {
+  background: var(--blue-france-main-525);
 }
 
 .background-gris {

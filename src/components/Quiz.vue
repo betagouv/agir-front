@@ -1,17 +1,11 @@
 <template>
-  <nav role="navigation" class="fr-breadcrumb fil-ariane fr-mb-0 fr-p-1v" aria-label="vous êtes ici :">
-    <button class="fr-breadcrumb__button" aria-expanded="false" aria-controls="breadcrumb-2831">Voir le fil d’Ariane</button>
-    <div class="fr-collapse" id="breadcrumb-2831">
-      <ol class="fr-breadcrumb__list">
-        <li>
-          <a class="fr-breadcrumb__link" href="/coach">Coach</a>
-        </li>
-        <li>
-          <a class="fr-breadcrumb__link" aria-current="page">Quiz</a>
-        </li>
-      </ol>
-    </div>
-  </nav>
+  <FilDAriane
+    page-courante="Quiz"
+    :page-hierarchie="[{
+      label: 'Coach',
+      url: '/coach'
+    }]"
+  />
   <div class="fr-grid-row fr-grid-row--gutters fr-mb-5v">
     <div class="fr-col-12 fr-col-lg-8">
       <div class="dashboard-card-item">
@@ -68,11 +62,7 @@
       </div>
     </div>
     <div class="fr-col-12 fr-col-lg-4">
-      <div class="fr-grid-row fr-grid-row--gutters card-item-list-container">
-        <div class="fr-col-12">
-          <BilanNosGestesClimat :get-impact-value="store.getters['utilisateur/getValeurBilanCarbone']" />
-        </div>
-      </div>
+      <BilanNosGestesClimat :get-impact-value="store.getters['utilisateur/getValeurBilanCarbone']" />
     </div>
   </div>
 </template>
@@ -85,15 +75,14 @@ import { ChargementQuizPresenterImpl, QuizViewModel } from "@/quiz/adapters/char
 import { useRoute } from "vue-router";
 import store from "@/store";
 import { EvaluerQuizPresenterImpl } from "@/quiz/adapters/evaluerQuiz.presenter.impl";
-import MesResultats from "@/components/MesResultats.vue";
 import BilanNosGestesClimat from "@/components/BilanNosGestesClimat.vue";
-import CarteSkeleton from "@/components/CarteSkeleton.vue";
 import QuizReponseCorrecte from "@/components/QuizReponseCorrecte.vue";
 import QuizReponseIncorrecte from "@/components/QuizReponseIncorrecte.vue";
 import QuestionDuQuiz from "@/components/QuestionDuQuiz.vue";
 import { EtatDeLaResponse } from "@/components/etatDeLaReponse";
 import { EvaluerQuizUsecase } from "@/quiz/evaluerQuiz.usecase";
 import { InteractionsRepositoryAxios } from "@/interactions/adapters/interactionsRepository.axios";
+import FilDAriane from "./dsfr/FilDAriane.vue";
 
 export default defineComponent({
   name: "Quizz",
@@ -121,10 +110,9 @@ export default defineComponent({
     QuestionDuQuiz,
     QuizReponseIncorrecte,
     QuizReponseCorrecte,
-    CarteSkeleton,
     BilanNosGestesClimat,
-    MesResultats,
-  },
+    FilDAriane
+},
   setup() {
     let etapeCourante = ref<number>(1);
     let questionCourante = ref<number>(1);
