@@ -1,6 +1,7 @@
 import { DernierSuivi, SuiviRepository } from "@/suivi/ports/suivi.repository";
 import { ElementSuiviCarbone, Resultat } from "@/suivi/envoyerSuiviDuJour.usecase";
 import { AxiosFactory } from "@/axios.factory";
+import axios, { AxiosError } from "axios";
 
 export interface SuiviDuJourGraphDataApiModel {
   date: string;
@@ -47,8 +48,8 @@ function getValeursDesSuivis(listeDesAdditionsCarbone: SuiviDuJourGraphDataApiMo
 function formateDate(date: string): string {
   const inputDate = new Date(date);
 
-  const day = String(inputDate.getUTCDate()).padStart(2, '0');
-  const month = String(inputDate.getUTCMonth() + 1).padStart(2, '0');
+  const day = String(inputDate.getUTCDate()).padStart(2, "0");
+  const month = String(inputDate.getUTCMonth() + 1).padStart(2, "0");
   const year = String(inputDate.getUTCFullYear());
 
   return `${day}/${month}/${year}`;
@@ -93,18 +94,30 @@ export class SuiviDuJourRepositoryAxios implements SuiviRepository {
     await axiosInstance.post(`/utilisateurs/${utilisateurId}/suivis`, jsonObject, {});
   }
 
-  async recupererDernierSuivi(idUtilisateur: string, type: string): Promise<DernierSuivi> {
+  async recupererDernierSuivi(idUtilisateur: string, type: string): Promise<DernierSuivi | null> {
     const axiosInstance = AxiosFactory.getAxios();
-    const data = await axiosInstance.get(`/utilisateurs/${idUtilisateur}/suivis/last?type=${type}`);
-
-    const mapWithFullValues = new Map<string, string>(Object.entries(data.data));
-    const mapWithoutAllValues = new Map<string, string>(Object.entries(data.data));
-    mapWithoutAllValues.delete("date");
-    const date = mapWithFullValues.get("date") || "";
-    return {
-      date: date,
-      valeurs: mapWithoutAllValues,
-    };
+    try {
+      const data = await axiosInstance.get(`/utilisateurs/${idUtilisateur}/suivis/last?type=${type}`);
+      const mapWithFullValues = new Map<string, string>(Object.entries(data.data));
+      const mapWithoutAllValues = new Map<string, string>(Object.entries(data.data));
+      mapWithoutAllValues.delete("date");
+      const date = mapWithFullValues.get("date") || "";
+      return {
+        date: date,
+        valeurs: mapWithoutAllValues,
+      };
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const axiosError = error as AxiosError;
+        if (axiosError.response && axiosError.response.status === 404) {
+          return null;
+        } else {
+          throw error;
+        }
+      } else {
+        throw error;
+      }
+    }
   }
 
   async recupererResultat(idUtilisateur: string): Promise<Resultat> {
