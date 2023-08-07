@@ -1,4 +1,4 @@
-import { ObtenirDernierSuiviUsecase } from "../../src/suivi/obtenirDernierSuivi.usecase";
+import { DernierSuiviPresenter, ObtenirDernierSuiviUsecase } from "../../src/suivi/obtenirDernierSuivi.usecase";
 import { DernierSuivi, SuiviRepository } from "../../src/suivi/ports/suivi.repository";
 import { Resultat } from "../../src/suivi/envoyerSuiviDuJour.usecase";
 import { DernierSuiviDuJourPresenterImpl, DernierSuiviDuJourViewModel } from "../../src/suivi/adapters/dernierSuiviDuJour.presenter.impl";
@@ -16,7 +16,7 @@ class MockDateTime implements DateTime {
 class MockSuiviRepository implements SuiviRepository {
   ajouter(type: string, valeurs: Map<string, string>, utilisateurId: string) {}
 
-  recupererDernierSuivi(idUtilisateur: string, type: string): Promise<DernierSuivi> {
+  recupererDernierSuivi(idUtilisateur: string, type: string): Promise<DernierSuivi | null> {
     return Promise.resolve({
       date: "03/07/2023",
       valeurs: new Map<string, string>([
@@ -30,6 +30,27 @@ class MockSuiviRepository implements SuiviRepository {
         ["legumes", "1"],
       ]),
     });
+  }
+
+  recupererResultat(): Promise<Resultat> {
+    throw Error;
+  }
+}
+
+class SpyDernierSuiviDuJourPresenterImpl implements DernierSuiviPresenter {
+  get aEteAppele(): boolean {
+    return this._aEteAppele;
+  }
+  private _aEteAppele = false;
+  presente(suivi: DernierSuivi) {
+    this._aEteAppele = true;
+  }
+}
+class AucunDernierSuiviRepository implements SuiviRepository {
+  ajouter(type: string, valeurs: Map<string, string>, utilisateurId: string) {}
+
+  recupererDernierSuivi(idUtilisateur: string, type: string): Promise<DernierSuivi | null> {
+    return Promise.resolve(null);
   }
 
   recupererResultat(): Promise<Resultat> {
@@ -58,5 +79,14 @@ describe("Fichier de tests concernant la récupération du dernier suivi", () =>
         ]),
       });
     }
+  });
+  it("Aucun suivi n'existe ne doit pas appeler le presenter", async () => {
+    // GIVEN
+    const useCase = new ObtenirDernierSuiviUsecase(new AucunDernierSuiviRepository());
+    // WHEN
+    const spyDernierSuiviDuJourPresenterImpl = new SpyDernierSuiviDuJourPresenterImpl();
+    await useCase.execute("idUtilisateur", "alimentation", spyDernierSuiviDuJourPresenterImpl);
+    // THEN
+    expect(spyDernierSuiviDuJourPresenterImpl.aEteAppele).toBeFalsy();
   });
 });

@@ -11,6 +11,8 @@ export class ObtenirDernierSuiviUsecase {
 
   async execute(idUtilisateur: string, typeDeSuivi: string, presenter: DernierSuiviPresenter): Promise<void> {
     const dernierSuivi = await this.suiviRepository.recupererDernierSuivi(idUtilisateur, typeDeSuivi);
-    presenter.presente(dernierSuivi);
+    if (dernierSuivi) {
+      presenter.presente(dernierSuivi);
+    }
   }
 }
