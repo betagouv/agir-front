@@ -57,6 +57,10 @@
               <router-link v-if="isMesAidesActif" class="fr-nav__link" :to="{ name: 'mes-aides' }" aria-current="page"> Mes Aides </router-link>
               <router-link v-else class="fr-nav__link" :to="{ name: 'mes-aides' }"> Mes Aides </router-link>
             </li>
+            <li class="fr-nav__item" data-fr-js-navigation-item="true">
+              <router-link v-if="isDashboardActif" class="fr-nav__link" :to="{ name: 'dashboard' }" aria-current="page"> Mon Tableau de Bord </router-link>
+              <router-link v-else class="fr-nav__link" :to="{ name: 'dashboard' }"> Mon Tableau de Bord </router-link>
+            </li>
           </ul>
         </nav>
       </div>
@@ -85,12 +89,14 @@ export default defineComponent({
     $route(to: RouteLocation, from: RouteLocation) {
       this.isCoachActif = to.fullPath.includes("/coach");
       this.isMesAidesActif = to.fullPath.includes("/mes-aides");
+      this.isDashboardActif = to.fullPath.includes("/mon-tableau-de-bord");
     },
   },
   setup() {
     const currentPage = ref<string>("");
     const isCoachActif = ref<boolean>(false);
     const isMesAidesActif = ref<boolean>(false);
+    const isDashboardActif = ref<boolean>(false);
     function logout() {
       store.dispatch("utilisateur/reset");
       router.replace("/");
@@ -105,6 +111,7 @@ export default defineComponent({
       currentPage,
       isCoachActif,
       isMesAidesActif,
+      isDashboardActif,
     };
   },
 });

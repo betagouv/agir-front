@@ -20,7 +20,7 @@ const routes = [
       title: `${appName} Authentification`,
     },
   },
-  { path: "/dashboard", name: "dashboard", component: Dashboard },
+  { path: "/mon-tableau-de-bord", name: "dashboard", component: Dashboard },
   {
     path: "/coach/quiz/:id",
     name: "quiz",

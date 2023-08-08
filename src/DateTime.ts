@@ -9,6 +9,6 @@ export class DateTimeTypeScript implements DateTime {
   }
 
   now(): Date {
-    return new Date();
+    return new Date(Date.now());
   }
 }
