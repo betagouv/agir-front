@@ -10,11 +10,13 @@ import { SuiviDuJourPresenterImpl, SuiviDuJourResultatsViewModel } from "@/suivi
 import { onMounted, ref } from "vue";
 import SuiviDuJourResultats from "@/components/SuiviDuJourResultats.vue";
 import store from "@/store";
+
 const _impactDuJourViewModel = ref<SuiviDuJourResultatsViewModel>();
+
 function mapImpactCarboneDuJour(impactDuJourViewModel: SuiviDuJourResultatsViewModel) {
   _impactDuJourViewModel.value = impactDuJourViewModel;
-  console.log(_impactDuJourViewModel);
 }
+
 onMounted(async () => {
   const resultatSuiviDuJourUsecase = new ResultatSuiviDuJourUsecase(new SuiviDuJourRepositoryAxios());
   await resultatSuiviDuJourUsecase.execute(new SuiviDuJourPresenterImpl(mapImpactCarboneDuJour), store.getters["utilisateur/getId"]);
