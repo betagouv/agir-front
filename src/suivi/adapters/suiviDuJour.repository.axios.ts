@@ -107,37 +107,45 @@ export class SuiviDuJourRepositoryAxios implements SuiviRepository {
         valeurs: mapWithoutAllValues,
       };
     } catch (error) {
-      if (axios.isAxiosError(error)) {
-        const axiosError = error as AxiosError;
-        if (axiosError.response && axiosError.response.status === 404) {
-          return null;
-        } else {
-          throw error;
-        }
-      } else {
-        throw error;
-      }
+      return this.handleAxiosError(error);
     }
   }
 
-  async recupererResultat(idUtilisateur: string): Promise<Resultat> {
+  async recupererResultat(idUtilisateur: string): Promise<Resultat | null> {
     const axiosInstance = AxiosFactory.getAxios();
-    const response = await axiosInstance.get<SuiviDuJourApiModel>(`/utilisateurs/${idUtilisateur}/suivi_dashboard`);
-    const responseData = response.data;
-    const dernierSuiviDetails = extractedDetailsCarbone(responseData.dernier_suivi);
+    try {
+      const response = await axiosInstance.get<SuiviDuJourApiModel>(`/utilisateurs/${idUtilisateur}/suivi_dashboard`);
+      const responseData = response.data;
+      const dernierSuiviDetails = extractedDetailsCarbone(responseData.dernier_suivi);
 
-    return {
-      impactCarbonDuJour: {
-        valeur: responseData.impact_dernier_suivi,
-        enHausse: responseData.variation <= 0,
-        variation: responseData.variation,
-      },
-      suivisPrecedent: {
-        datesDesSuivis: getValeursDesDates(responseData.derniers_totaux),
-        valeursDesSuivis: getValeursDesSuivis(responseData.derniers_totaux),
-        moyenneDesSuivis: responseData.moyenne,
-      },
-      additionCarboneDuJour: dernierSuiviDetails,
-    };
+      return {
+        impactCarbonDuJour: {
+          valeur: responseData.impact_dernier_suivi,
+          enHausse: responseData.variation <= 0,
+          variation: responseData.variation,
+        },
+        suivisPrecedent: {
+          datesDesSuivis: getValeursDesDates(responseData.derniers_totaux),
+          valeursDesSuivis: getValeursDesSuivis(responseData.derniers_totaux),
+          moyenneDesSuivis: responseData.moyenne,
+        },
+        additionCarboneDuJour: dernierSuiviDetails,
+      };
+    } catch (error) {
+      return this.handleAxiosError(error);
+    }
+  }
+
+  private handleAxiosError(error) {
+    if (axios.isAxiosError(error)) {
+      const axiosError = error as AxiosError;
+      if (axiosError.response && axiosError.response.status === 404) {
+        return null;
+      } else {
+        throw error;
+      }
+    } else {
+      throw error;
+    }
   }
 }

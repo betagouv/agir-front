@@ -6,6 +6,6 @@ export interface DernierSuivi {
 }
 export interface SuiviRepository {
   ajouter(type: string, valeurs: Map<string, string>, utilisateurId: string);
-  recupererResultat(utilisateurId: string): Promise<Resultat>;
+  recupererResultat(utilisateurId: string): Promise<Resultat | null>;
   recupererDernierSuivi(idUtilisateur: string, type: string): Promise<DernierSuivi | null>;
 }

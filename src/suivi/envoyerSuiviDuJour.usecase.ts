@@ -35,7 +35,6 @@ export class EnvoyerSuiviDuJourUsecase {
   constructor(suiviRepository: SuiviRepository, interactionRepository: InteractionsRepository) {
     this.suiviRepository = suiviRepository;
     this.interactionRepository = interactionRepository;
-    this.interactionRepository = interactionRepository;
   }
 
   private isListeDesValeursVide(listeDesValeurs: Map<string, string>): boolean {
@@ -57,6 +56,8 @@ export class EnvoyerSuiviDuJourUsecase {
     }
     const resultat = await this.suiviRepository.recupererResultat(idUtilisateur);
     await this.interactionRepository.interactionAEteTerminee(interactionId, idUtilisateur);
-    presenter.presente(resultat);
+    if (resultat) {
+      presenter.presente(resultat);
+    }
   }
 }

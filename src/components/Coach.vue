@@ -18,16 +18,8 @@
       </div>
       <div class="fr-col-12 fr-col-lg-4">
         <div v-if="!isLoading">
-          <BilanNosGestesClimat
-            v-if="empreinteViewModel"
-            class="fr-mb-3w"
-            :get-impact-value="empreinteViewModel"
-          />
-          <MesResultats
-            v-if="scoreViewModel"
-            :badge-view-model="scoreViewModel.badges"
-            :score-value="scoreViewModel.score"
-          />
+          <BilanNosGestesClimat v-if="empreinteViewModel" class="fr-mb-3w" :get-impact-value="empreinteViewModel" />
+          <MesResultats v-if="scoreViewModel" :badge-view-model="scoreViewModel.badges" :score-value="scoreViewModel.score" />
         </div>
         <div v-else>
           <CarteSkeleton class="fr-mb-3w" />
@@ -56,6 +48,7 @@ import { InteractionsRepositoryAxios } from "@/interactions/adapters/interaction
 import { ChargementScoreUsecase } from "@/score/chargementScoreUsecase";
 import { ScoreRepositoryAxios } from "@/score/adapters/scoreRepository.axios";
 import { ChargementScorePresenterImpl } from "@/score/adapters/chargementScorePresenterImpl";
+
 export default defineComponent({
   name: "Coach",
   methods: { getDeviceType },
