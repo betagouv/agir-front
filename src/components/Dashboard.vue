@@ -9,17 +9,17 @@ import { SuiviDuJourRepositoryAxios } from "@/suivi/adapters/suiviDuJour.reposit
 import { SuiviDuJourPresenterImpl, SuiviDuJourResultatsViewModel } from "@/suivi/adapters/suiviDuJour.presenter.impl";
 import { onMounted, ref } from "vue";
 import SuiviDuJourResultats from "@/components/SuiviDuJourResultats.vue";
-import store from "@/store";
+import { utilisateurStore } from "@/store/utilisateur";
 
 const _impactDuJourViewModel = ref<SuiviDuJourResultatsViewModel>();
-
+const store = utilisateurStore();
 function mapImpactCarboneDuJour(impactDuJourViewModel: SuiviDuJourResultatsViewModel) {
   _impactDuJourViewModel.value = impactDuJourViewModel;
 }
 
 onMounted(async () => {
   const resultatSuiviDuJourUsecase = new ResultatSuiviDuJourUsecase(new SuiviDuJourRepositoryAxios());
-  await resultatSuiviDuJourUsecase.execute(new SuiviDuJourPresenterImpl(mapImpactCarboneDuJour), store.getters["utilisateur/getId"]);
+  await resultatSuiviDuJourUsecase.execute(new SuiviDuJourPresenterImpl(mapImpactCarboneDuJour), store.id);
 });
 </script>
 <style scoped></style>

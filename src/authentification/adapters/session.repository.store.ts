@@ -1,9 +1,10 @@
 import { SessionRepository } from "@/authentification/authentifierUtilisateur.usecase";
 import { Utilisateur } from "@/authentification/ports/utilisateur.repository";
-import store from "@/store";
+import { utilisateurStore } from "@/store/utilisateur";
 
 export class SessionRepositoryStore implements SessionRepository {
   sauvegarderUtilisateur(utilisateur: Utilisateur) {
-    store.commit("utilisateur/setUtilisateur", utilisateur);
+    const store = utilisateurStore();
+    store.setUtilisateur(utilisateur);
   }
 }

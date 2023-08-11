@@ -1,5 +1,5 @@
 <template>
-  <footer v-if="store.getters['utilisateur/getUtilisateur']" class="fr-footer" role="contentinfo">
+  <footer v-if="getUtilisateur" class="fr-footer" role="contentinfo">
     <div class="fr-container">
       <div class="fr-footer__body">
         <div class="fr-footer__brand fr-enlarge-link">
@@ -58,19 +58,19 @@
 </template>
 
 <script lang="ts">
-import store from "@/store";
 import router from "@/router";
+import { utilisateurStore } from "@/store/utilisateur";
 
 export default {
   name: "Footer",
   computed: {
-    store() {
-      return store;
+    getUtilisateur() {
+      return utilisateurStore().utilisateur;
     },
   },
   methods: {
     logout() {
-      store.dispatch("utilisateur/reset");
+      utilisateurStore().reset();
       router.replace("/");
     },
   },
