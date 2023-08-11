@@ -46,8 +46,8 @@ import { InteractionViewModel } from "@/interactions/adapters/interactions.prese
 import { DeviceType, getDeviceType } from "@/DeviceType";
 import { CliquerInteractionUsecase } from "@/interactions/cliquerInteraction.usecase";
 import { InteractionsRepositoryAxios } from "@/interactions/adapters/interactionsRepository.axios";
-import store from "@/store";
 import { defineComponent } from "vue";
+import { utilisateurStore } from "@/store/utilisateur";
 
 export default defineComponent({
   name: "InteractionCard",
@@ -65,12 +65,13 @@ export default defineComponent({
   },
   setup(props, { emit }) {
     const interactionAEteCliquee = (interaction: InteractionViewModel) => {
-      const idUtilisateur = store.getters["utilisateur/getId"];
+      const store = utilisateurStore();
+      const idUtilisateur = store.id;
       const useCase = new CliquerInteractionUsecase(new InteractionsRepositoryAxios());
       useCase.execute(idUtilisateur, interaction.id, interaction.type).then(() => {
         emit("refreshInteractions");
       });
-      store.commit("utilisateur/setInteractionEnCours", interaction);
+      store.setInteractionEnCours(interaction);
     };
     return { interactionAEteCliquee };
   },
@@ -96,7 +97,6 @@ export default defineComponent({
   margin-bottom: 0;
 }
 
-
 .fr-tags-group > li {
   line-height: 22px;
   height: 22px;
@@ -121,7 +121,7 @@ export default defineComponent({
   position: absolute;
   bottom: 10px;
   height: 10px;
-  margin-bottom: 0 ;
+  margin-bottom: 0;
 }
 
 /* card image */

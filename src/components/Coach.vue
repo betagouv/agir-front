@@ -33,7 +33,6 @@
 <script lang="ts">
 import { defineComponent, onMounted, ref } from "vue";
 import { ScoreViewModel } from "@/score/ports/chargementScorePresenter";
-import store from "@/store";
 import CarteSkeleton from "@/components/CarteSkeleton.vue";
 import BilanNosGestesClimat from "@/components/BilanNosGestesClimat.vue";
 import MesResultats from "@/components/MesResultats.vue";
@@ -48,6 +47,7 @@ import { InteractionsRepositoryAxios } from "@/interactions/adapters/interaction
 import { ChargementScoreUsecase } from "@/score/chargementScoreUsecase";
 import { ScoreRepositoryAxios } from "@/score/adapters/scoreRepository.axios";
 import { ChargementScorePresenterImpl } from "@/score/adapters/chargementScorePresenterImpl";
+import { utilisateurStore } from "@/store/utilisateur";
 
 export default defineComponent({
   name: "Coach",
@@ -64,10 +64,10 @@ export default defineComponent({
     const interactionsViewModel = ref<InteractionViewModel[]>();
     const scoreViewModel = ref<ScoreViewModel>();
     const isLoading = ref<boolean>(true);
-
+    const store = utilisateurStore();
     function mapValueBilan(viewModel: EmpreinteViewModel) {
       empreinteViewModel.value = viewModel;
-      store.commit("utilisateur/setValeurBilanCarbone", viewModel);
+      store.setValeurBilanCarbone(viewModel);
     }
 
     function mapValuesInteractions(viewModel: InteractionViewModel[]) {
@@ -76,12 +76,12 @@ export default defineComponent({
 
     function mapValuesScore(viewModel: ScoreViewModel) {
       scoreViewModel.value = viewModel;
-      store.commit("utilisateur/setScore", viewModel.score);
+      store.setScore(viewModel.score);
     }
 
     const lancerChargementDesDonnees = () => {
       isLoading.value = true;
-      const idUtilisateur = store.getters["utilisateur/getId"];
+      const idUtilisateur = store.id;
       const chargementEmpreinteUseCase = new ChargementEmpreinteUsecase(new EmpreinteRepositoryAxios());
       const chargerInteractionsUseCase = new ChargerInteractionsUsecase(new InteractionsRepositoryAxios());
       const chargerScoreUseCase = new ChargementScoreUsecase(new ScoreRepositoryAxios());

@@ -1,17 +1,19 @@
 <template>
   <FilDAriane
     page-courante="Quiz"
-    :page-hierarchie="[{
-      label: 'Coach',
-      url: '/coach'
-    }]"
+    :page-hierarchie="[
+      {
+        label: 'Coach',
+        url: '/coach',
+      },
+    ]"
   />
   <div class="fr-grid-row fr-grid-row--gutters fr-mb-5v">
     <div class="fr-col-12 fr-col-lg-8">
       <div class="dashboard-card-item">
         <div class="quiz-stepper-sub-container fr-pt-5v fr-pr-5v fr-pl-5v">
           <form @submit.prevent="evaluerQuizz">
-            <h3 class="fr-mb-0">{{ getCategorie }}</h3>
+            <h3 class="fr-mb-0">{{ store.interactionEnCours!.categorie }}</h3>
             <div
               v-if="etapeCourante"
               class="fr-stepper__steps"
@@ -39,7 +41,7 @@
                   <QuizReponseCorrecte
                     :etape-courante="questionCourante"
                     :etat-reponse-courante="getEtatDeLaReponseChoisie"
-                    :get-score="getScore"
+                    :get-score="store.interactionEnCours!.nombreDePointsAGagner"
                     :quiz-view-model="quizViewModel!"
                     :le-quiz-contient-au-moins-une-reponse-incorrecte="leQuizContientAuMoinsUneReponseIncorrecte"
                     @question-suivante="passerALaQuestionSuivante"
@@ -62,7 +64,7 @@
       </div>
     </div>
     <div class="fr-col-12 fr-col-lg-4">
-      <BilanNosGestesClimat :get-impact-value="store.getters['utilisateur/getValeurBilanCarbone']" />
+      <BilanNosGestesClimat :get-impact-value="store.valeurBilanCarbone" />
     </div>
   </div>
 </template>
@@ -73,7 +75,6 @@ import { ChargementQuizUsecase } from "@/quiz/chargementQuiz.usecase";
 import { QuizRepositoryAxios } from "@/quiz/adapters/quizRepositoryAxios";
 import { ChargementQuizPresenterImpl, QuizViewModel } from "@/quiz/adapters/chargementQuiz.presenter.impl";
 import { useRoute } from "vue-router";
-import store from "@/store";
 import { EvaluerQuizPresenterImpl } from "@/quiz/adapters/evaluerQuiz.presenter.impl";
 import BilanNosGestesClimat from "@/components/BilanNosGestesClimat.vue";
 import QuizReponseCorrecte from "@/components/QuizReponseCorrecte.vue";
@@ -83,19 +84,11 @@ import { EtatDeLaResponse } from "@/components/etatDeLaReponse";
 import { EvaluerQuizUsecase } from "@/quiz/evaluerQuiz.usecase";
 import { InteractionsRepositoryAxios } from "@/interactions/adapters/interactionsRepository.axios";
 import FilDAriane from "./dsfr/FilDAriane.vue";
+import { utilisateurStore } from "@/store/utilisateur";
 
 export default defineComponent({
   name: "Quizz",
   computed: {
-    store() {
-      return store;
-    },
-    getScore(): string {
-      return store.getters["utilisateur/getInteractionEnCours"].nombreDePointsAGagner;
-    },
-    getCategorie(): string {
-      return store.getters["utilisateur/getInteractionEnCours"].categorie;
-    },
     getEtatDeLaReponseChoisie(): EtatDeLaResponse {
       return this.etatDeLaReponseChoisie;
     },
@@ -111,8 +104,8 @@ export default defineComponent({
     QuizReponseIncorrecte,
     QuizReponseCorrecte,
     BilanNosGestesClimat,
-    FilDAriane
-},
+    FilDAriane,
+  },
   setup() {
     let etapeCourante = ref<number>(1);
     let questionCourante = ref<number>(1);
@@ -120,7 +113,7 @@ export default defineComponent({
     let checkedResponses = new Map<string, string>();
     let etatDeLaReponseChoisie = ref<EtatDeLaResponse>(EtatDeLaResponse.INITIAL);
     let leQuizContientAuMoinsUneReponseIncorrecte = ref<boolean>(false);
-
+    const store = utilisateurStore();
     let idQuiz: string = "";
     const route = useRoute();
     if (typeof route.params.id === "string") {
@@ -142,8 +135,8 @@ export default defineComponent({
     onMounted(chargementQuizz);
 
     const evaluerQuizz = () => {
-      const utilisateurId = store.getters["utilisateur/getId"];
-      const interactionId = store.getters["utilisateur/getInteractionEnCours"].id;
+      const utilisateurId = store.id;
+      const interactionId = store.interactionEnCours!.id;
       const evaluerQuizzUsecase = new EvaluerQuizUsecase(quizzRepositoryAxios, interactionsRepositoryAxios);
       evaluerQuizzUsecase.execute(interactionId, utilisateurId, idQuiz, checkedResponses, new EvaluerQuizPresenterImpl(() => {}));
     };
@@ -182,6 +175,7 @@ export default defineComponent({
       etatDeLaReponseChoisie,
       checkedResponses,
       leQuizContientAuMoinsUneReponseIncorrecte,
+      store,
     };
   },
 });

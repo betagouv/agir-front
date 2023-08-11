@@ -1,10 +1,12 @@
 <template>
   <FilDAriane
     page-courante="Faire le suivi du jour"
-    :page-hierarchie="[{
-      label: 'Coach',
-      url: '/coach'
-    }]"
+    :page-hierarchie="[
+      {
+        label: 'Coach',
+        url: '/coach',
+      },
+    ]"
   />
   <div class="fr-grid-row fr-grid-row--gutters">
     <div class="fr-col-12 fr-col-lg-8">
@@ -62,18 +64,9 @@
       </div>
     </div>
     <div class="fr-col-12 fr-col-lg-4">
-      <BilanNosGestesClimat
-        class="fr-mb-3w"
-        :get-impact-value="store.getters['utilisateur/getValeurBilanCarbone']"
-      />
-      <NombreDePointsDuJour
-        v-if="etapeCourante === 3"
-        class="fr-mb-3w"
-        :nombre-de-points-du-jour="25" />
-      <ImpactDuJour
-        :consommation-du-jour="suiviDuJourResultatsViewModel.impactCarbonDuJour.valeur"
-        :equivalent-en-litres="'14'"
-      />
+      <BilanNosGestesClimat class="fr-mb-3w" :get-impact-value="store.valeurBilanCarbone" />
+      <NombreDePointsDuJour v-if="etapeCourante === 3" class="fr-mb-3w" :nombre-de-points-du-jour="25" />
+      <ImpactDuJour :consommation-du-jour="suiviDuJourResultatsViewModel.impactCarbonDuJour.valeur" :equivalent-en-litres="'14'" />
     </div>
   </div>
 </template>
@@ -84,7 +77,6 @@ import { DeviceType, getDeviceType } from "@/DeviceType";
 import BilanNosGestesClimat from "@/components/BilanNosGestesClimat.vue";
 import ImpactDuJour from "@/components/ImpactDuJour.vue";
 import MesResultats from "@/components/MesResultats.vue";
-import store from "@/store";
 import SuiviDuJourResultats from "@/components/SuiviDuJourResultats.vue";
 import SuiviDuJourPremiereEtape from "@/components/SuiviDuJourPremiereEtape.vue";
 import SuiviDuJourSecondeEtape from "@/components/SuiviDuJourSecondeEtape.vue";
@@ -97,6 +89,7 @@ import { InteractionsRepositoryAxios } from "@/interactions/adapters/interaction
 import NombreDePointsDuJour from "@/components/NombreDePointsDuJour.vue";
 import { DernierSuiviDuJourPresenterImpl, DernierSuiviDuJourViewModel } from "@/suivi/adapters/dernierSuiviDuJour.presenter.impl";
 import FilDAriane from "@/components/dsfr/FilDAriane.vue";
+import { utilisateurStore } from "@/store/utilisateur";
 
 export default defineComponent({
   name: "SuiviDuJour",
@@ -108,12 +101,9 @@ export default defineComponent({
     MesResultats,
     ImpactDuJour,
     BilanNosGestesClimat,
-    FilDAriane
-},
+    FilDAriane,
+  },
   computed: {
-    store() {
-      return store;
-    },
     DeviceType() {
       return DeviceType;
     },
@@ -138,9 +128,9 @@ export default defineComponent({
       suivisPrecedent: { valeursDesSuivis: [], datesDesSuivis: [], moyenneDesSuivis: [] },
       additionCarbone: [],
     });
-
+    const store = utilisateurStore();
     onMounted(() => {
-      const idUtilisateur = store.getters["utilisateur/getId"];
+      const idUtilisateur = store.id;
 
       const chargerDernierSuiviAlimentation = new ObtenirDernierSuiviUsecase(new SuiviDuJourRepositoryAxios());
 
@@ -173,8 +163,8 @@ export default defineComponent({
       etapeCourante.value = etapeCourante.value + 1;
     }
     const calculEmpreinteDuJour = () => {
-      const idUtilisateur = store.getters["utilisateur/getId"];
-      const idInteraction = store.getters["utilisateur/getInteractionEnCours"].id;
+      const idUtilisateur = store.id;
+      const idInteraction = store.interactionEnCours!.id;
       const envoyerSuiviDuJour = new EnvoyerSuiviDuJourUsecase(new SuiviDuJourRepositoryAxios(), new InteractionsRepositoryAxios());
       envoyerSuiviDuJour.execute(
         { valeurs: suiviDuJourAlimentation },
@@ -210,6 +200,7 @@ export default defineComponent({
       dernierSuiviDuJourAlimentationViewmodel,
       dernierSuiviDuJourTransportViewmodel,
       suiviDuJourResultatsViewModel,
+      store,
     };
   },
 });
