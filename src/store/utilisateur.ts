@@ -29,7 +29,7 @@ export const initialState: State = {
 };
 
 export const utilisateurStore = defineStore("utilisateur", {
-  state: (): State => initialState,
+  state: (): State => ({ ...initialState }),
   actions: {
     setUtilisateur(utilisateur: Utilisateur) {
       this.utilisateur = utilisateur.nom;
@@ -44,6 +44,7 @@ export const utilisateurStore = defineStore("utilisateur", {
     setScore(score: number) {
       this.score = score;
     },
+
     reset() {
       this.$reset();
     },

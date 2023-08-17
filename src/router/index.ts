@@ -23,6 +23,7 @@ const routes = [
     component: Authentification,
     meta: {
       title: `${appName} Authentification`,
+      estPublique: true,
     },
     beforeEnter: storeNgcID,
   },

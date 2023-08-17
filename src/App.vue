@@ -4,6 +4,7 @@ import Footer from "@/components/dsfr/Footer.vue";
 import { computed } from "vue";
 import { NavigationGuardNext, RouteLocationNormalized, useRoute } from "vue-router";
 import router from "@/router";
+import { utilisateurStore } from "@/store/utilisateur";
 const afficherLeHeaderEtFooter = computed({
   get() {
     return useRoute().name !== "authentification";
@@ -12,11 +13,18 @@ const afficherLeHeaderEtFooter = computed({
 });
 
 router.beforeEach((to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
-  const { title } = to.meta;
+  const { title, estPublique } = to.meta;
   if (title) {
     document.title = title as string;
   }
-  next();
+  if (estPublique || estPublique === true) {
+    next();
+  } else if (!utilisateurStore().utilisateur) {
+    next({ name: "authentification" });
+    sessionStorage.setItem("requestedRoute", to.fullPath);
+  } else {
+    next();
+  }
 });
 </script>
 
@@ -33,8 +41,8 @@ router.beforeEach((to: RouteLocationNormalized, from: RouteLocationNormalized, n
 </template>
 
 <style scoped>
-  .page-container {
-    display: grid;
-    grid-template-rows: auto 1fr auto;
-  }
+.page-container {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
 </style>
