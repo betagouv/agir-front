@@ -3,5 +3,6 @@ export interface Utilisateur {
   id: string;
 }
 export interface UtilisateurRepository {
-  getUtilisateur(nomUtilisateur: string): Promise<Utilisateur>;
+  getUtilisateurAvecLeNom(nomUtilisateur: string): Promise<Utilisateur>;
+  getUtilisateurAvecId(idUtilisateur: string): Promise<Utilisateur>;
 }
