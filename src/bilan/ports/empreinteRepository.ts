@@ -13,4 +13,5 @@ export interface Empreinte {
 export interface EmpreinteRepository {
   getEmpreinte(username: string): Promise<Empreinte>;
   evaluerEmpreinte(utilisateur: string, situation: string): Promise<boolean>;
+  importerSituationNGC(idNGC: string, utilisateurId: string): Promise<boolean>;
 }

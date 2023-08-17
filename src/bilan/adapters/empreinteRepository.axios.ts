@@ -33,6 +33,20 @@ export class EmpreinteRepositoryAxios implements EmpreinteRepository {
     }
   }
 
+  async importerSituationNGC(situationId: string, utilisateurId: string): Promise<boolean> {
+    const axiosInstance = AxiosFactory.getAxios();
+
+    try {
+      return await axiosInstance.post(`/bilan`, {
+        situationId,
+        utilisateurId,
+      });
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  // problament inutile désormais.
   async evaluerEmpreinte(utilisateur: string, situation: string): Promise<boolean> {
     const axiosInstance = AxiosFactory.getAxios();
 
