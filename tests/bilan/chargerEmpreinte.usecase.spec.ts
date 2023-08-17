@@ -3,10 +3,9 @@ import { ChargementEmpreinteUsecase } from "../../src/bilan/chargementEmpreinte.
 import { Empreinte, EmpreinteRepository } from "../../src/bilan/ports/empreinteRepository";
 
 class EmpreinteRepositoryForTest implements EmpreinteRepository {
-  evaluerEmpreinte(utilisateur: string, situation: string): Promise<boolean> {
-    return Promise.resolve(false);
+  importerSituationNGC(idNGC: string, utilisateurId: string): Promise<boolean> {
+    throw new Error("Method not implemented.");
   }
-
   getEmpreinte(username: string): Promise<Empreinte> {
     return Promise.resolve({
       bilan: 6770.336671393776,
@@ -19,7 +18,11 @@ class EmpreinteRepositoryForTest implements EmpreinteRepository {
       },
     });
   }
+  importSituationNGC(situationId: string, utilisateurId: string): Promise<boolean> {
+    return Promise.resolve(true);
+  }
 }
+
 describe("Fichier de tests pour le chargement d'une empreinte carbone", () => {
   it("En donnant un nom d'utilisateur doit retourner la valeur du bilan", async () => {
     // GIVEN

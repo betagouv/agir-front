@@ -10,8 +10,8 @@ import Coach from "@/components/Coach.vue";
 import MesAides from "@/components/MesAides.vue";
 import Communaute from "@/components/Communaute.vue";
 import SuiviDuJour from "@/components/SuiviDuJour.vue";
-import storeNgcID from "../bilan/middleware/storeNgcID";
-import sendNgcID from "../bilan/middleware/sendNgcID";
+import storeNgcID from "@/bilan/middleware/storeNgcID";
+import sendNgcID from "@/bilan/middleware/sendNgcID";
 const appName = "Agir ! -";
 const routes = [
   {

@@ -5,7 +5,7 @@ export default function ImportNGCMiddleware(to, from, next) {
   const importNGC = to.query?.importNGC;
 
   if (importNGC) {
-    localStorage.setItem("storedImportNGC", importNGC);
+    sessionStorage.setItem("storedImportNGC", importNGC);
   }
 
   next();
