@@ -10,6 +10,8 @@ import Coach from "@/components/Coach.vue";
 import MesAides from "@/components/MesAides.vue";
 import Communaute from "@/components/Communaute.vue";
 import SuiviDuJour from "@/components/SuiviDuJour.vue";
+import FranceConnectCallBack from "@/components/FranceConnectCallBack.vue";
+
 const appName = "Agir ! -";
 const routes = [
   {
@@ -64,6 +66,7 @@ const routes = [
   { path: "/mes-aides", name: "mes-aides", component: MesAides },
   { path: "/mes-aides/retrofit", name: "mes-aides-retrofit", component: MesAidesRetrofit },
   { path: "/communaute", name: "communaute", component: Communaute },
+  { path: "/login-callback", name: "retour-auth-france-connect", component: FranceConnectCallBack },
 ];
 const router = createRouter({
   history: createWebHistory(),

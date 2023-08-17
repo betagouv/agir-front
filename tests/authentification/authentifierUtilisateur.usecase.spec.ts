@@ -2,11 +2,15 @@ import { AuthentifierUtilisateurUsecase, SessionRepository } from "../../src/aut
 import { Utilisateur, UtilisateurRepository } from "../../src/authentification/ports/utilisateur.repository";
 
 class UtilisateurRepositoryForTest implements UtilisateurRepository {
-  getUtilisateur(nomUtilisateur: string): Promise<Utilisateur> {
+  getUtilisateurAvecLeNom(nomUtilisateur: string): Promise<Utilisateur> {
     return Promise.resolve<Utilisateur>({
       id: "1",
       nom: "Dorian",
     });
+  }
+
+  getUtilisateurAvecId(idUtilisateur: string): Promise<Utilisateur> {
+    throw Error;
   }
 }
 
