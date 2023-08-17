@@ -8,6 +8,10 @@ class UtilisateurRepositoryForTest implements UtilisateurRepository {
       nom: "Dorian",
     });
   }
+
+  getUtilisateurAvecId(idUtilisateur: string): Promise<Utilisateur> {
+    throw Error;
+  }
 }
 
 class SpySessionRepository implements SessionRepository {
