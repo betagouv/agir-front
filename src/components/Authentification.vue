@@ -58,7 +58,9 @@ export default defineComponent({
     const login = async () => {
       const usecase = new AuthentifierUtilisateurUsecase(new UtilisateurRepositoryAxios(), new SessionRepositoryStore());
       usecase.execute(username.value).then(() => {
-        router.push({ name: "coach", state: { utilisateur: username.value } });
+        const requestedRoute = sessionStorage.getItem("requestedRoute");
+        sessionStorage.removeItem("requestedRoute");
+        router.push(requestedRoute || { name: "coach", state: { utilisateur: username.value } });
       });
     };
 

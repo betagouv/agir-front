@@ -14,11 +14,12 @@ onMounted(async () => {
   if (typeof route.query.token === "string") {
     token = route.query.token;
   }
-  console.log(token);
   const usecase = new AuthentifierUtilisateurFranceConnectUsecase(new UtilisateurRepositoryAxios(), new SessionRepositoryStore());
   const store = utilisateurStore();
   usecase.execute(token).then(() => {
-    router.push({ name: "coach", state: { utilisateur: store.utilisateur } });
+    const requestedRoute = sessionStorage.getItem("requestedRoute");
+    sessionStorage.removeItem("requestedRoute");
+    router.push(requestedRoute || { name: "coach", state: { utilisateur: store.utilisateur } });
   });
 });
 </script>
