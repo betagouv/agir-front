@@ -17,13 +17,11 @@ router.beforeEach((to: RouteLocationNormalized, from: RouteLocationNormalized, n
   if (title) {
     document.title = title as string;
   }
-  if (estPublique || estPublique === true) {
+  if (estPublique || utilisateurStore().utilisateur) {
     next();
-  } else if (!utilisateurStore().utilisateur) {
+  } else {
     next({ name: "authentification" });
     sessionStorage.setItem("requestedRoute", to.fullPath);
-  } else {
-    next();
   }
 });
 </script>
