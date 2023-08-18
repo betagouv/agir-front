@@ -7,6 +7,7 @@ interface AidesVelo {
   lien: string;
   collectivite: Collectivite;
   descritpion?: string;
+  logo: string;
 }
 
 interface Collectivite {

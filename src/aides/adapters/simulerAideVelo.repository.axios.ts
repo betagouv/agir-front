@@ -9,6 +9,7 @@ interface AidesVelo {
   lien: string;
   collectivite: Collectivite;
   descritpion?: string;
+  logo: string;
 }
 
 interface Collectivite {
@@ -28,7 +29,6 @@ export class SimulerAideVeloRepositoryAxios implements SimulerAideVeloRepository
     try {
       const axiosInstance = AxiosFactory.getAxios();
       const response = await axiosInstance.get<AidesVeloParType>(`aides/Velo?codePostal=${codePostal}&revenuFiscalDeReference=${revenuFiscalDeReference}`);
-      console.log(response);
       return response.data;
     } catch (e) {
       console.log(e);
