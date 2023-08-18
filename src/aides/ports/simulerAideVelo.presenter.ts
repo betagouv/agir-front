@@ -3,11 +3,12 @@ import { SimulationVelo } from "@/aides/simulerAideVelo.usecase";
 export interface SimulationAidesVeloViewModel {
   [key: string]: {
     libelle: string;
-    montant: string;
-    logo: string;
-    collectivite: Collectivite;
-    description?: string;
+    montant: number;
+    plafond: number;
     lien: string;
+    collectivite: Collectivite;
+    descritpion?: string;
+    logo: string;
   }[];
 }
 

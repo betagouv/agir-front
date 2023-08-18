@@ -5,7 +5,8 @@ import { EmpreinteApiModel } from "@/bilan/adapters/empreinteRepository.axios";
 
 interface AidesVelo {
   libelle: string;
-  montant: string;
+  montant: number;
+  plafond: number;
   lien: string;
   collectivite: Collectivite;
   descritpion?: string;
@@ -28,7 +29,7 @@ export class SimulerAideVeloRepositoryAxios implements SimulerAideVeloRepository
   async getSimulation(codePostal: string, revenuFiscalDeReference: string): Promise<SimulationVelo> {
     try {
       const axiosInstance = AxiosFactory.getAxios();
-      const response = await axiosInstance.get<AidesVeloParType>(`aides/Velo?codePostal=${codePostal}&revenuFiscalDeReference=${revenuFiscalDeReference}`);
+      const response = await axiosInstance.get<AidesVeloParType>(`aides/velos?codePostal=${codePostal}&revenuFiscalDeReference=${revenuFiscalDeReference}`);
       return response.data;
     } catch (e) {
       console.log(e);

@@ -3,7 +3,8 @@ import { SimulerAideVeloRepository } from "@/aides/ports/simulerAideVelo.reposit
 
 interface AidesVelo {
   libelle: string;
-  montant: string;
+  montant: number;
+  plafond: number;
   lien: string;
   collectivite: Collectivite;
   descritpion?: string;
