@@ -14,7 +14,6 @@ import storeNgcID from "@/bilan/middleware/storeNgcID";
 import sendNgcID from "@/bilan/middleware/sendNgcID";
 import FranceConnectCallBack from "@/components/FranceConnectCallBack.vue";
 
-
 const appName = "Agir ! -";
 const routes = [
   {
@@ -59,7 +58,6 @@ const routes = [
     meta: {
       title: `${appName} Coach`,
     },
-    beforeEnter: sendNgcID,
   },
   {
     path: "/coach/suivi-du-jour",

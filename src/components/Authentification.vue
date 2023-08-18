@@ -50,6 +50,9 @@ import router from "@/router";
 import { AuthentifierUtilisateurUsecase } from "@/authentification/authentifierUtilisateur.usecase";
 import { UtilisateurRepositoryAxios } from "@/authentification/adapters/utilisateur.repository.axios";
 import { SessionRepositoryStore } from "@/authentification/adapters/session.repository.store";
+import { importEmpreinteUsecase } from "@/bilan/importEmpreinte.usecase";
+import { EmpreinteRepositoryAxios } from "@/bilan/adapters/empreinteRepository.axios";
+import { utilisateurStore } from "@/store/utilisateur";
 
 export default defineComponent({
   setup() {
@@ -61,6 +64,13 @@ export default defineComponent({
         const requestedRoute = sessionStorage.getItem("requestedRoute");
         sessionStorage.removeItem("requestedRoute");
         router.push(requestedRoute || { name: "coach", state: { utilisateur: username.value } });
+        
+        const storedImportNGC = sessionStorage.getItem("storedImportNGC");
+        if (storedImportNGC){
+          const utilisateur = utilisateurStore();
+          const importNGC = new importEmpreinteUsecase(new EmpreinteRepositoryAxios());
+          importNGC.execute(storedImportNGC, utilisateur.id).then(()=>sessionStorage.removeItem("storedImportNGC"))
+        }
       });
     };
 
