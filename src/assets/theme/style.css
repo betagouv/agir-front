@@ -112,6 +112,14 @@ h3 {
   color: #FFF;
 }
 
+.text--bleu {
+  color: var(--blue-france-sun-113-625)
+}
+
+.text--gris {
+  color: var(--text-default-grey)
+}
+
 .text--center {
   text-align: center;
 }
@@ -120,8 +128,20 @@ h3 {
   font-size: 2rem;
 }
 
+.text--4xl	{
+  font-size: 2.5rem;
+}
+
+.text--bold {
+  font-weight: 700;
+}
+
 .background-bleu {
   background: var(--blue-france-main-525);
+}
+
+.background-bleu-light {
+  background: var(--blue-france-925-125)
 }
 
 .background-gris {
@@ -130,4 +150,8 @@ h3 {
 
 .list-style-none {
   list-style: none;
+}
+
+.border-radius-md {
+  border-radius: 6px;
 }
