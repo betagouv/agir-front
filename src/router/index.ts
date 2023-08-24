@@ -4,6 +4,7 @@ import { createRouter, createWebHistory } from "vue-router";
 
 import Quiz from "@/components/Quiz.vue";
 import QuizGagne from "@/components/QuizGagne.vue";
+import Article from "@/components/Article.vue";
 import QuizPerdu from "@/components/QuizPerdu.vue";
 import MesAidesRetrofit from "@/components/MesAidesRetrofit.vue";
 import Coach from "@/components/Coach.vue";
@@ -79,6 +80,11 @@ const routes = [
     meta: {
       estPublique: true,
     },
+  },
+  {
+    path: '/article/:id',
+    name: 'article',
+    component: Article
   },
   {
     path: '/:catchAll(.*)',
