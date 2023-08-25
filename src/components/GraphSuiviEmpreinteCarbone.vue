@@ -1,5 +1,5 @@
 <template>
-  <div class="fr-p-3w background-gris">
+  <div class="fr-p-3w background-gris fr-mb-4w">
     <h2 class="fr-h5">Évolution de votre impact carbone</h2>
     <LineChart :chartData="getDonneesDuGraph" :options="getOptionsDuGraph" />
     <div class="fr-grid-row fr-grid-row--center fr-grid-row--middle fr-mt-2w">
@@ -9,6 +9,12 @@
       <div class="legende-graphique legende-graphique--dashed"></div>
     </div>
   </div>
+  <Transcription
+    id="transcription-graphique-evolution-impact-carbone"
+    titre="Transcription du graphique évolution de votre impact carbone"
+  >
+    <Tableau :toto="getDonneesDuGraph" />
+  </Transcription>
 </template>
 
 <script lang="ts">
@@ -16,6 +22,8 @@ import { defineComponent } from "vue";
 import { LineChart } from "vue-chart-3";
 import { Chart, registerables } from "chart.js";
 import { DeviceType, getDeviceType } from "@/DeviceType";
+import Transcription from "./dsfr/Transcription.vue";
+import Tableau from "./dsfr/Table.vue";
 
 Chart.register(...registerables);
 
@@ -78,7 +86,7 @@ export default defineComponent({
       };
     },
   },
-  components: { LineChart },
+  components: { LineChart, Transcription, Tableau },
   props: {
     datesDuGraph: {
       type: Object as () => string[],
@@ -93,7 +101,8 @@ export default defineComponent({
       required: true,
     },
   },
-});
+})
+
 </script>
 
 <style scoped>
