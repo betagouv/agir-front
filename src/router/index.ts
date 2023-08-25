@@ -8,6 +8,7 @@ import QuizPerdu from "@/components/QuizPerdu.vue";
 import MesAidesRetrofit from "@/components/MesAidesRetrofit.vue";
 import Coach from "@/components/Coach.vue";
 import MesAides from "@/components/MesAides.vue";
+import Page404 from "@/components/pages/Page404.vue";
 import Communaute from "@/components/Communaute.vue";
 import SuiviDuJour from "@/components/SuiviDuJour.vue";
 import storeNgcID from "@/bilan/middleware/storeNgcID";
@@ -79,6 +80,10 @@ const routes = [
       estPublique: true,
     },
   },
+  {
+    path: '/:catchAll(.*)',
+    component: Page404,
+  }
 ];
 const router = createRouter({
   history: createWebHistory(),
