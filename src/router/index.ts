@@ -88,6 +88,7 @@ const routes = [
   },
   {
     path: '/:catchAll(.*)',
+    name: 'not-found',
     component: Page404,
   }
 ];

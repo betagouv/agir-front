@@ -2,18 +2,20 @@ import { AxiosFactory } from "@/axios.factory";
 import { Article, ArticleRepository } from "../ports/article.repository";
 
 interface ArticleApiModel {
-  title: string,
-  content: string
+  titre: string,
+  contenu: string
 }
 
 export class ArticleRepositoryAxios implements ArticleRepository {
-  async recupererParId(idArticle: number): Promise<Article> {
+  async recupererParId(idArticle: number): Promise<Article | null> {
     const axiosInstance = AxiosFactory.getAxios();
     const response = await axiosInstance.get<ArticleApiModel>(`/articles/${idArticle}`);
 
+    if (response.data.titre !== '') return null;
+
     return ({
-      title: response.data.title,
-      content: response.data.content
+      titre: response.data.titre,
+      contenu: response.data.contenu
     });
   }
 }

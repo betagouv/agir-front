@@ -1,8 +1,8 @@
 export interface Article {
-  title: string;
-  content: string;
+  titre: string;
+  contenu: string;
 }
 
 export interface ArticleRepository {
-  recupererParId(idArticle: number): Promise<Article>
+  recupererParId(idArticle: number): Promise<Article | null>
 }

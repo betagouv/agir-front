@@ -1,7 +1,7 @@
 <template>
   <div class="fr-container">
     <FilDAriane
-      :page-courante="`Article: ${article.title}`"
+      :page-courante="`Article: ${article.titre}`"
       :page-hierarchie="[
         {
           label: 'Coach',
@@ -9,10 +9,10 @@
         },
       ]"
     />
-    <h1>{{ article.title }}</h1>
+    <h1>{{ article.titre }}</h1>
     <div class="fr-grid-row fr-grid-row--gutters">
       <div class="fr-col-12 fr-col-md-8">
-        <div class="article fr-p-6v" v-html="article.content" />
+        <div class="article fr-p-6v" v-html="article.contenu" />
       </div>
       <div class="fr-col-12 fr-col-md-4">
         <BilanNosGestesClimat :get-impact-value="store.valeurBilanCarbone" />
@@ -29,20 +29,27 @@
   import { ObtenirArticleUsecase } from '@/article/obtenirArticle.usecase'
   import { ArticleRepositoryAxios } from '@/article/adapters/articleRepository.axios';
   import { Article } from '@/article/ports/article.repository';
-  import { useRoute } from 'vue-router';
+  import { useRoute, useRouter } from 'vue-router';
 
   const store = utilisateurStore();
   const route = useRoute();
+  const router = useRouter();
+
   const idArticle = Number(route.params.id);
 
   const article = ref<Article>({
-    title: '',
-    content: '',
+    titre: '',
+    contenu: '',
   });
 
   onMounted(async () => {
-    const articleUsecase = await new ObtenirArticleUsecase(new ArticleRepositoryAxios()).execute(idArticle);
-    article.value = articleUsecase;
+    const articleUsecase = await new ObtenirArticleUsecase(new ArticleRepositoryAxios()).execute(idArticle);    
+    
+    if (articleUsecase) {
+      article.value = articleUsecase;
+    } else {
+      router.push('/not-found'); 
+    }
   });
 </script>
 
