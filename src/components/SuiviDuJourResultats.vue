@@ -1,7 +1,11 @@
 <template>
   <div class="fr-grid-row fr-grid-row--gutters fr-mb-2w" v-if="!voirSeulementLevolution">
-    <CarteEmpreinteDuJour :suivi-du-jour-resultats="suiviDuJourResultats!" />
-    <EmpreinteDuJourDetails :suivi-du-jour-resultats="suiviDuJourResultats!" />
+    <div class="fr-col-12 fr-col-md-6">
+      <CarteEmpreinteDuJour :suivi-du-jour-resultats="suiviDuJourResultats!" />
+    </div>
+    <div class="fr-col-12 fr-col-md-6">
+      <EmpreinteDuJourDetails :suivi-du-jour-resultats="suiviDuJourResultats!" />
+    </div>
   </div>
   <GraphSuiviEmpreinteCarbone
     :dates-du-graph="suiviDuJourResultats!.suivisPrecedent.datesDesSuivis"
@@ -11,18 +15,18 @@
 </template>
 
 <script setup lang="ts">
-import CarteEmpreinteDuJour from "@/components/CarteEmpreinteDuJour.vue";
-import EmpreinteDuJourDetails from "@/components/EmpreinteDuJourDetails.vue";
-import { SuiviDuJourResultatsViewModel } from "@/suivi/adapters/suiviDuJour.presenter.impl";
-import GraphSuiviEmpreinteCarbone from "@/components/GraphSuiviEmpreinteCarbone.vue";
+  import CarteEmpreinteDuJour from "@/components/CarteEmpreinteDuJour.vue";
+  import EmpreinteDuJourDetails from "@/components/EmpreinteDuJourDetails.vue";
+  import { SuiviDuJourResultatsViewModel } from "@/suivi/adapters/suiviDuJour.presenter.impl";
+  import GraphSuiviEmpreinteCarbone from "@/components/GraphSuiviEmpreinteCarbone.vue";
 
-interface Props {
-  suiviDuJourResultats?: SuiviDuJourResultatsViewModel | null;
-  voirSeulementLevolution: boolean;
-}
+  interface Props {
+    suiviDuJourResultats?: SuiviDuJourResultatsViewModel | null;
+    voirSeulementLevolution: boolean;
+  }
 
-const props = withDefaults(defineProps<Props>(), {
-  suiviDuJourResultats: null,
-  voirSeulementLevolution: false,
-});
+  withDefaults(defineProps<Props>(), {
+    suiviDuJourResultats: null,
+    voirSeulementLevolution: false,
+  });
 </script>

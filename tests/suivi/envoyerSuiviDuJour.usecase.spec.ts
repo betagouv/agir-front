@@ -110,52 +110,42 @@ describe("Fichier de tests de l'envoie du suivi du jour", () => {
           {
             impactCarbone: "+80 kg",
             valeur: "15 km de train",
-            styleFont: "carbon-value-item-primary",
           },
           {
             impactCarbone: "+16 kg",
             valeur: "40 km de bus",
-            styleFont: "carbon-value-item-primary",
           },
           {
             impactCarbone: "+8 kg",
             valeur: "20 km de voiture",
-            styleFont: "carbon-value-item-primary",
           },
           {
             impactCarbone: "+4 kg",
             valeur: "10 km de metro",
-            styleFont: "carbon-value-item-secondary",
           },
           {
             impactCarbone: "+2 kg",
             valeur: "2 repas avec viande rouge",
-            styleFont: "carbon-value-item-secondary",
           },
           {
             impactCarbone: "+2 kg",
             valeur: "20 km de velo",
-            styleFont: "carbon-value-item-secondary",
           },
           {
             impactCarbone: "+2 kg",
             valeur: "2 repas avec oeufs",
-            styleFont: "carbon-value-item-secondary",
           },
           {
             impactCarbone: "+1 kg",
             valeur: "1 repas avec viande blanche",
-            styleFont: "carbon-value-item-secondary",
           },
           {
             impactCarbone: "+1 kg",
             valeur: "1 repas avec poisson blanc",
-            styleFont: "carbon-value-item-secondary",
           },
           {
             impactCarbone: "+1 kg",
             valeur: "1 repas avec poisson rouge",
-            styleFont: "carbon-value-item-secondary",
           },
         ],
       });
