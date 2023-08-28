@@ -27,7 +27,7 @@ router.beforeEach((to: RouteLocationNormalized, from: RouteLocationNormalized, n
 </script>
 
 <template>
-  <div class="page-container">
+  <div class="page-container background--gris">
     <Header v-if="afficherLeHeaderEtFooter" />
 
     <main class="fr-container fr-px-1w fr-py-6w">
@@ -42,5 +42,6 @@ router.beforeEach((to: RouteLocationNormalized, from: RouteLocationNormalized, n
 .page-container {
   display: grid;
   grid-template-rows: auto 1fr auto;
+  min-height: 100vh;
 }
 </style>
