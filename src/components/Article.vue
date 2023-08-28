@@ -12,7 +12,7 @@
     <h1>{{ article.titre }}</h1>
     <div class="fr-grid-row fr-grid-row--gutters">
       <div class="fr-col-12 fr-col-md-8">
-        <div class="article fr-p-6v" v-html="article.contenu" />
+        <div class="article fr-p-6v background--white" v-html="article.contenu" />
       </div>
       <div class="fr-col-12 fr-col-md-4">
         <BilanNosGestesClimat :get-impact-value="store.valeurBilanCarbone" />
@@ -35,7 +35,7 @@
   const route = useRoute();
   const router = useRouter();
 
-  const idArticle = Number(route.params.id);
+  const idArticle = Array.isArray(route.params.id) ? route.params.id[0] : route.params.id;
 
   const article = ref<Article>({
     titre: '',
@@ -43,7 +43,7 @@
   });
 
   onMounted(async () => {
-    const articleUsecase = await new ObtenirArticleUsecase(new ArticleRepositoryAxios()).execute(idArticle);    
+    const articleUsecase = await new ObtenirArticleUsecase(new ArticleRepositoryAxios()).execute(idArticle);
     
     if (articleUsecase) {
       article.value = articleUsecase;

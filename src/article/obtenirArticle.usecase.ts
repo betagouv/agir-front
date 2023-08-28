@@ -7,8 +7,9 @@ export class ObtenirArticleUsecase {
     this.articleRepository = articleRepository;
   }
 
-  async execute(idArticle: number): Promise<Article | null> {
+  async execute(idArticle: string): Promise<Article | null> {
     const article = await this.articleRepository.recupererParId(idArticle);
+
     return article;
   }
 }

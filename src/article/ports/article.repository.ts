@@ -4,5 +4,5 @@ export interface Article {
 }
 
 export interface ArticleRepository {
-  recupererParId(idArticle: number): Promise<Article | null>
+  recupererParId(idArticle: string): Promise<Article | null>
 }
