@@ -9,7 +9,6 @@ interface ArticleApiModel {
 export class ArticleRepositoryAxios implements ArticleRepository {
   async recupererParId(idArticle: string): Promise<Article | null> {
     const axiosInstance = AxiosFactory.getAxios();
-    
     const response = await axiosInstance.get<ArticleApiModel>(`/articles/${idArticle}`);        
 
     if (!response.data.titre && !response.data.contenu) return null;
