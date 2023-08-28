@@ -1,60 +1,27 @@
-<template lang="">
+<template>
   <div class="fr-table">
-    <p>{{ toto }}</p>
     <table>
-      <caption>Résumé du tableau (accessibilité)</caption>
+      <caption>{{ titre }}</caption>
       <thead>
         <tr>
-          <th scope="col">Titre</th>
-          <th scope="col">Titre</th>
-          <th scope="col">Titre</th>
-          <th scope="col">Titre</th>
-          <th scope="col">Titre</th>
+          <th v-for="(titreColonne) in titresDonnees" :key="titreColonne" scope="col">{{ titreColonne }}</th>
         </tr>
       </thead>
-        <tbody>
-            <tr>
-                <td>Donnée</td>
-                <td>Donnée</td>
-                <td>Donnée</td>
-                <td>Donnée</td>
-                <td>Donnée</td>
-            </tr>
-            <tr>
-                <td>Donnée</td>
-                <td>Donnée</td>
-                <td>Donnée</td>
-                <td>Donnée</td>
-                <td>Donnée</td>
-            </tr>
-            <tr>
-                <td>Donnée</td>
-                <td>Donnée</td>
-                <td>Donnée</td>
-                <td>Donnée</td>
-                <td>Donnée</td>
-            </tr>
-            <tr>
-                <td>Donnée</td>
-                <td>Donnée</td>
-                <td>Donnée</td>
-                <td>Donnée</td>
-                <td>Donnée</td>
-            </tr>
-            <tr>
-                <td>Donnée</td>
-                <td>Donnée</td>
-                <td>Donnée</td>
-                <td>Donnée</td>
-                <td>Donnée</td>
-            </tr>
-        </tbody>
+      <tbody>
+        <tr v-for="(donnee, index) in donnees" :key="index">
+          <td v-for="(data, index2) in donnee" :key="index2">
+            {{data}}
+          </td>
+        </tr>
+      </tbody>
     </table>
-</div>
+  </div>
 </template>
 
 <script setup lang="ts">
   defineProps<{
-    toto: unknown
+    titre: string
+    titresDonnees: string[]
+    donnees: (string | number)[][]
   }>();
 </script>
