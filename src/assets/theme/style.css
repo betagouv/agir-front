@@ -144,8 +144,12 @@ h3 {
   background: var(--blue-france-925-125)
 }
 
-.background-gris {
+.background--gris {
   background: var(--background-alt-grey);
+}
+
+.background--white {
+  background: #FFF;
 }
 
 .list-style-none {

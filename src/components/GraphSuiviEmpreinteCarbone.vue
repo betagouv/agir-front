@@ -1,5 +1,5 @@
 <template>
-  <div class="fr-p-3w background-gris fr-mb-4w">
+  <div class="fr-p-3w background--white fr-mb-4w">
     <h2 class="fr-h5">{{ titreDuGraphique }}</h2>
     <LineChart :chartData="getDonneesDuGraph()" :options="getOptionsDuGraph()" />
     <div class="fr-grid-row fr-grid-row--center fr-grid-row--middle fr-mt-2w">
