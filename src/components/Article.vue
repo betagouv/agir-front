@@ -12,7 +12,7 @@
     <h1>{{ article.titre }}</h1>
     <div class="fr-grid-row fr-grid-row--gutters">
       <div class="fr-col-12 fr-col-md-8">
-        <div class="article fr-p-6v background--white border-radius-md" v-html="article.contenu" />
+        <div class="article fr-p-6v background--white border-radius--md" v-html="article.contenu" />
       </div>
       <div class="fr-col-12 fr-col-md-4">
         <BilanNosGestesClimat :get-impact-value="store.valeurBilanCarbone" />

@@ -1,5 +1,5 @@
 <template>
-  <div class="background-gris fr-p-3w border-radius-md">
+  <div class="background--gris fr-p-3w border-radius--md">
     <h3 class="fr-h4 text--gris">Addition carbone du jour</h3>
     <ul class="fr-m-0 fr-p-0">
       <li

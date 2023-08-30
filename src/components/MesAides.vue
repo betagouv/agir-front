@@ -13,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-  import InteractionCard from "@/components/InteractionCard.vue";
+  import InteractionCard from "@/components/custom/InteractionCard.vue";
   import BilanNosGestesClimat from "@/components/BilanNosGestesClimat.vue";
   import { InteractionViewModel } from "@/interactions/adapters/interactions.presenter.impl";
   import { utilisateurStore } from "@/store/utilisateur";

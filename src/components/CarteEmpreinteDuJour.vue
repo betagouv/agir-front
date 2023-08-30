@@ -1,5 +1,5 @@
 <template>
-  <div class="background-bleu-light text--bleu fr-p-3w border-radius-md">
+  <div class="background-bleu-light text--bleu fr-p-3w border-radius--md">
     <h3 class="fr-h4 text--bleu">Impact carbone du jour</h3>
     <p>
       <span class="text--bold text--4xl">+{{ suiviDuJourResultats.impactCarbonDuJour.valeur }}</span>
