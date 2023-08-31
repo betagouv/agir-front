@@ -1,5 +1,5 @@
 <template>
-  <div class="fr-transcription">
+  <div class="fr-transcription background--white">
     <button class="fr-transcription__btn" aria-expanded="false" :aria-controls="id">{{ titre }}</button>
     <div class="fr-collapse" :id="id">
       <dialog :id="`${id}-modal`" class="fr-modal" role="dialog" :aria-labelledby="`${id}-transcription-title`">

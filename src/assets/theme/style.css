@@ -113,15 +113,23 @@ h3 {
 }
 
 .text--bleu {
-  color: var(--blue-france-sun-113-625)
+  color: var(--blue-france-sun-113-625);
 }
 
 .text--gris {
-  color: var(--text-default-grey)
+  color: var(--text-default-grey);
+}
+
+.text--black-light {
+  color: var(--grey-50-1000);
 }
 
 .text--center {
   text-align: center;
+}
+
+.text-right {
+  text-align: right;
 }
 
 .text--3xl {
@@ -156,6 +164,6 @@ h3 {
   list-style: none;
 }
 
-.border-radius-md {
+.border-radius--md {
   border-radius: 6px;
 }
