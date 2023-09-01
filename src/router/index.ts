@@ -2,7 +2,7 @@ import Authentification from "@/components/Authentification.vue";
 import Dashboard from "@/components/Dashboard.vue";
 import { createRouter, createWebHistory } from "vue-router";
 
-import PageQuiz from "@/components/PageQuiz.vue";
+import PageQuiz from "@/components/pages/PageQuiz.vue";
 import Article from "@/components/Article.vue";
 import MesAidesRetrofit from "@/components/MesAidesRetrofit.vue";
 import MesAidesVelo from "@/components/MesAidesVelo.vue";
