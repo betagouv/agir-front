@@ -2,9 +2,8 @@ import Authentification from "@/components/Authentification.vue";
 import Dashboard from "@/components/Dashboard.vue";
 import { createRouter, createWebHistory } from "vue-router";
 
-import Quiz from "@/components/Quiz.vue";
+import PageQuiz from "@/components/PageQuiz.vue";
 import Article from "@/components/Article.vue";
-import QuizPerdu from "@/components/QuizPerdu.vue";
 import MesAidesRetrofit from "@/components/MesAidesRetrofit.vue";
 import MesAidesVelo from "@/components/MesAidesVelo.vue";
 import Coach from "@/components/Coach.vue";
@@ -32,15 +31,7 @@ const routes = [
   {
     path: "/coach/quiz/:id",
     name: "quiz",
-    component: Quiz,
-    meta: {
-      title: `${appName} Quiz`,
-    },
-  },
-  {
-    path: "/coach/quiz/quiz-perdu",
-    name: "quiz-perdu",
-    component: QuizPerdu,
+    component: PageQuiz,
     meta: {
       title: `${appName} Quiz`,
     },
