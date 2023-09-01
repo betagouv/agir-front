@@ -120,6 +120,10 @@ h3 {
   color: var(--text-default-grey);
 }
 
+.text--rouge-erreur {
+  color: var(--error-425-625);
+}
+
 .text--black-light {
   color: var(--grey-50-1000);
 }
@@ -150,6 +154,14 @@ h3 {
 
 .background-bleu-light {
   background: var(--blue-france-925-125)
+}
+
+.background--bleu-info {
+  background-color: var(--info-950-100);
+}
+
+.background--rouge-erreur {
+  background-color: var(--error-950-100);
 }
 
 .background--gris {
