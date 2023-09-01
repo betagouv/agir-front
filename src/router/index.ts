@@ -3,7 +3,6 @@ import Dashboard from "@/components/Dashboard.vue";
 import { createRouter, createWebHistory } from "vue-router";
 
 import Quiz from "@/components/Quiz.vue";
-import QuizGagne from "@/components/QuizGagne.vue";
 import Article from "@/components/Article.vue";
 import QuizPerdu from "@/components/QuizPerdu.vue";
 import MesAidesRetrofit from "@/components/MesAidesRetrofit.vue";
@@ -34,14 +33,6 @@ const routes = [
     path: "/coach/quiz/:id",
     name: "quiz",
     component: Quiz,
-    meta: {
-      title: `${appName} Quiz`,
-    },
-  },
-  {
-    path: "/coach/quiz/quiz-gagne",
-    name: "quiz-gagne",
-    component: QuizGagne,
     meta: {
       title: `${appName} Quiz`,
     },
