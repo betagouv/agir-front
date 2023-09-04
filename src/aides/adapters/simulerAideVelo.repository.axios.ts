@@ -9,7 +9,7 @@ interface AidesVelo {
   plafond: number;
   lien: string;
   collectivite: Collectivite;
-  descritpion?: string;
+  description?: string;
   logo: string;
 }
 
