@@ -50,6 +50,7 @@ import router from "@/router";
 import { AuthentifierUtilisateurUsecase } from "@/authentification/authentifierUtilisateur.usecase";
 import { UtilisateurRepositoryAxios } from "@/authentification/adapters/utilisateur.repository.axios";
 import { SessionRepositoryStore } from "@/authentification/adapters/session.repository.store";
+import { sendIdNGC } from "@/bilan/middleware/pendingSimulation";
 
 export default defineComponent({
   setup() {
@@ -61,6 +62,7 @@ export default defineComponent({
         const requestedRoute = sessionStorage.getItem("requestedRoute");
         sessionStorage.removeItem("requestedRoute");
         router.push(requestedRoute || { name: "coach", state: { utilisateur: username.value } });
+        sendIdNGC();
       });
     };
 

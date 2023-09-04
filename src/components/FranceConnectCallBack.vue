@@ -7,6 +7,7 @@ import { UtilisateurRepositoryAxios } from "@/authentification/adapters/utilisat
 import { SessionRepositoryStore } from "@/authentification/adapters/session.repository.store";
 import router from "@/router";
 import { utilisateurStore } from "@/store/utilisateur";
+import { sendIdNGC } from "@/bilan/middleware/pendingSimulation";
 
 onMounted(async () => {
   const route = useRoute();
@@ -20,6 +21,7 @@ onMounted(async () => {
     const requestedRoute = sessionStorage.getItem("requestedRoute");
     sessionStorage.removeItem("requestedRoute");
     router.push(requestedRoute || { name: "coach", state: { utilisateur: store.utilisateur } });
+    sendIdNGC();
   });
 });
 </script>

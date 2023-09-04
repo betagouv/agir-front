@@ -12,8 +12,7 @@ import MesAides from "@/components/MesAides.vue";
 import Page404 from "@/components/pages/Page404.vue";
 import Communaute from "@/components/Communaute.vue";
 import SuiviDuJour from "@/components/SuiviDuJour.vue";
-import storeNgcID from "@/bilan/middleware/storeNgcID";
-import sendNgcID from "@/bilan/middleware/sendNgcID";
+import { storeIdNGC } from "@/bilan/middleware/pendingSimulation";
 import FranceConnectCallBack from "@/components/FranceConnectCallBack.vue";
 
 const appName = "Agir ! -";
@@ -26,7 +25,7 @@ const routes = [
       title: `${appName} Authentification`,
       estPublique: true,
     },
-    beforeEnter: storeNgcID,
+    beforeEnter: storeIdNGC,
   },
   { path: "/mon-tableau-de-bord", name: "dashboard", component: Dashboard },
   {
@@ -60,7 +59,6 @@ const routes = [
     meta: {
       title: `${appName} Coach`,
     },
-    beforeEnter: sendNgcID,
   },
   {
     path: "/coach/suivi-du-jour",
