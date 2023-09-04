@@ -29,7 +29,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import InteractionCard from "@/components/InteractionCard.vue";
+import InteractionCard from "@/components/custom/InteractionCard.vue";
 import { InteractionViewModel } from "@/interactions/adapters/interactions.presenter.impl";
 import CarteSkeleton from "@/components/CarteSkeleton.vue";
 import MesResultats from "@/components/MesResultats.vue";
