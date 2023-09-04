@@ -47,7 +47,10 @@
   const reponseCorrecte = ref<boolean>();
   const emit = defineEmits(['etapeSuivante']);
 
-  watch(() => props.item, () => isValider.value = false);
+  watch(() => props.item, () => {
+    isValider.value = false,
+    valueInput.value = ''
+  });
 
   const handleValueChange = (value) => valueInput.value = value;
 
