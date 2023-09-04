@@ -112,22 +112,58 @@ h3 {
   color: #FFF;
 }
 
+.text--bleu {
+  color: var(--blue-france-sun-113-625);
+}
+
+.text--gris {
+  color: var(--text-default-grey);
+}
+
+.text--black-light {
+  color: var(--grey-50-1000);
+}
+
 .text--center {
   text-align: center;
+}
+
+.text-right {
+  text-align: right;
 }
 
 .text--3xl {
   font-size: 2rem;
 }
 
+.text--4xl	{
+  font-size: 2.5rem;
+}
+
+.text--bold {
+  font-weight: 700;
+}
+
 .background-bleu {
   background: var(--blue-france-main-525);
 }
 
-.background-gris {
+.background-bleu-light {
+  background: var(--blue-france-925-125)
+}
+
+.background--gris {
   background: var(--background-alt-grey);
+}
+
+.background--white {
+  background: #FFF;
 }
 
 .list-style-none {
   list-style: none;
+}
+
+.border-radius--md {
+  border-radius: 6px;
 }

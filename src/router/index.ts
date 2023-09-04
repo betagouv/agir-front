@@ -4,10 +4,12 @@ import { createRouter, createWebHistory } from "vue-router";
 
 import Quiz from "@/components/Quiz.vue";
 import QuizGagne from "@/components/QuizGagne.vue";
+import Article from "@/components/Article.vue";
 import QuizPerdu from "@/components/QuizPerdu.vue";
 import MesAidesRetrofit from "@/components/MesAidesRetrofit.vue";
 import Coach from "@/components/Coach.vue";
 import MesAides from "@/components/MesAides.vue";
+import Page404 from "@/components/pages/Page404.vue";
 import Communaute from "@/components/Communaute.vue";
 import SuiviDuJour from "@/components/SuiviDuJour.vue";
 import { storeIdNGC } from "@/bilan/middleware/pendingSimulation";
@@ -69,7 +71,24 @@ const routes = [
   { path: "/mes-aides", name: "mes-aides", component: MesAides },
   { path: "/mes-aides/retrofit", name: "mes-aides-retrofit", component: MesAidesRetrofit },
   { path: "/communaute", name: "communaute", component: Communaute },
-  { path: "/login-callback", name: "retour-auth-france-connect", component: FranceConnectCallBack },
+  {
+    path: "/login-callback",
+    name: "retour-auth-france-connect",
+    component: FranceConnectCallBack,
+    meta: {
+      estPublique: true,
+    },
+  },
+  {
+    path: '/article/:id',
+    name: 'article',
+    component: Article
+  },
+  {
+    path: '/:catchAll(.*)',
+    name: 'not-found',
+    component: Page404,
+  }
 ];
 const router = createRouter({
   history: createWebHistory(),

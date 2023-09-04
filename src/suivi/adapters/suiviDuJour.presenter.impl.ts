@@ -22,7 +22,6 @@ export interface SuivisPrecedentViewModel {
 export interface LigneCarbone {
   valeur: string;
   impactCarbone: string;
-  styleFont: string;
 }
 
 export interface SuiviDuJourResultatsViewModel {
@@ -69,10 +68,6 @@ export class SuiviDuJourPresenterImpl implements SuiviDuJourPresenter {
     }`;
   }
 
-  private getStyleFont(index: number): string {
-    return index < 3 ? "carbon-value-item-primary" : "carbon-value-item-secondary";
-  }
-
   private getMoyenneDesSuivis(resultat: Resultat): number[] {
     return new Array(resultat?.suivisPrecedent.datesDesSuivis.length).fill(resultat.suivisPrecedent.moyenneDesSuivis / 1000);
   }
@@ -88,7 +83,6 @@ export class SuiviDuJourPresenterImpl implements SuiviDuJourPresenter {
         resultats.push({
           valeur: this.getDetailEmpreinteCarbone(carboneValeur, debut, fin),
           impactCarbone: `+${carboneValeur.impactCarbone / 1000} kg`,
-          styleFont: this.getStyleFont(index),
         });
       }
     }
