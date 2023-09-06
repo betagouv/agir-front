@@ -15,6 +15,7 @@ import Communaute from "@/components/Communaute.vue";
 import SuiviDuJour from "@/components/SuiviDuJour.vue";
 import { storeIdNGC } from "@/bilan/middleware/pendingSimulation";
 import FranceConnectCallBack from "@/components/FranceConnectCallBack.vue";
+import PageCompte from "@/components/pages/PageCompte.vue";
 
 const appName = "Agir ! -";
 const routes = [
@@ -82,15 +83,20 @@ const routes = [
     },
   },
   {
-    path: '/article/:id',
-    name: 'article',
-    component: Article
+    path: "/article/:id",
+    name: "article",
+    component: Article,
   },
   {
-    path: '/:catchAll(.*)',
-    name: 'not-found',
+    path: "/mon-compte",
+    name: "mon-compte",
+    component: PageCompte,
+  },
+  {
+    path: "/:catchAll(.*)",
+    name: "not-found",
     component: Page404,
-  }
+  },
 ];
 const router = createRouter({
   history: createWebHistory(),
