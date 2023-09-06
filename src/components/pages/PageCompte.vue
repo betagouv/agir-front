@@ -1,10 +1,8 @@
 <template>
-  <div>
-    <h1 class="fr-h2">Mon Compte</h1>
-    <div class="fr-grid-row fr-grid-row--gutters">
-      <div class="fr-col fr-col-lg-8">
-        <PageCompteFormulaire :compte-utlisateur-view-model="compteUtlisateurViewModel" />
-      </div>
+  <h1 class="fr-h2">Mon Compte</h1>
+  <div class="fr-grid-row fr-grid-row--center fr-grid-row--gutters">
+    <div class="fr-col fr-col-lg-8">
+      <PageCompteFormulaire :compte-utlisateur-view-model="compteUtlisateurViewModel" />
     </div>
   </div>
 </template>
