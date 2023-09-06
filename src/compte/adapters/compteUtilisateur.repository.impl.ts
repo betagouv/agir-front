@@ -2,22 +2,28 @@ import { CompteUtilisateur, CompteUtilisateurRepository } from "@/compte/ports/c
 import { AxiosFactory } from "@/axios.factory";
 
 interface CompteUtilisateurApiModel {
-  id: string;
   name: string;
   email?: string;
-  codePostal?: string;
+  code_postal?: string;
 }
 export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurRepository {
   async getCompteUtilisateur(idUtilisateur: string): Promise<CompteUtilisateur> {
     const axiosInstance = AxiosFactory.getAxios();
-    const response = await axiosInstance.get<CompteUtilisateurApiModel>(`/utilisateurs/${idUtilisateur}`);
+    const response = await axiosInstance.get<CompteUtilisateurApiModel>(`/utilisateurs/${idUtilisateur}/profile`);
     return {
       nom: response.data.name,
-      id: response.data.id,
+      id: idUtilisateur,
       mail: response.data.email || "",
       codePostal: response.data.codePostal || "",
     };
   }
 
-  mettreAjour(compteUtilisateur: CompteUtilisateur) {}
+  async mettreAjour(compteUtilisateur: CompteUtilisateur) {
+    const axiosInstance = AxiosFactory.getAxios();
+    await axiosInstance.patch(`/utilisateurs/${compteUtilisateur.id}/profile`, {
+      name: compteUtilisateur.nom,
+      email: compteUtilisateur.mail,
+      code_postal: compteUtilisateur.codePostal,
+    });
+  }
 }

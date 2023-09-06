@@ -66,12 +66,15 @@
 </template>
 <script setup lang="ts">
 import { CompteUtlisateurViewModel } from "@/compte/adapters/compteUtilisateur.presenter.impl";
+import { CompteUtilisateurRepositoryImpl } from "@/compte/adapters/compteUtilisateur.repository.impl";
+import { MettreAJourCompteUtilisateurUsecase } from "@/compte/mettreAJourCompteUtilisateur.usecase";
 
 const props = defineProps<{
   compteUtlisateurViewModel: CompteUtlisateurViewModel;
 }>();
 
 function modifierInformation() {
-  console.log(props.compteUtlisateurViewModel);
+  const usecase = new MettreAJourCompteUtilisateurUsecase(new CompteUtilisateurRepositoryImpl());
+  usecase.execute(props.compteUtlisateurViewModel);
 }
 </script>
