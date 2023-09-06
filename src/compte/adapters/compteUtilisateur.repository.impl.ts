@@ -1,5 +1,6 @@
 import { CompteUtilisateur, CompteUtilisateurRepository } from "@/compte/ports/compteUtilisateur.repository";
 import { AxiosFactory } from "@/axios.factory";
+import { AxiosResponse } from "axios";
 
 interface CompteUtilisateurApiModel {
   name: string;
@@ -9,12 +10,12 @@ interface CompteUtilisateurApiModel {
 export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurRepository {
   async getCompteUtilisateur(idUtilisateur: string): Promise<CompteUtilisateur> {
     const axiosInstance = AxiosFactory.getAxios();
-    const response = await axiosInstance.get<CompteUtilisateurApiModel>(`/utilisateurs/${idUtilisateur}/profile`);
+    const response: AxiosResponse<CompteUtilisateurApiModel> = await axiosInstance.get(`/utilisateurs/${idUtilisateur}/profile`);
     return {
       nom: response.data.name,
       id: idUtilisateur,
       mail: response.data.email || "",
-      codePostal: response.data.codePostal || "",
+      codePostal: response.data.code_postal || "",
     };
   }
 
