@@ -18,6 +18,10 @@ class SpyInteractionRepository implements InteractionsRepository {
   interactionAEteTerminee(interactionId: string, utilisateurId: string): void {
     this._interactionAEteTermineeAEteAppelee = true;
   }
+
+  interactionAvecDonneesAEteTerminee<T>(utilisateurId: string, interactionId: string, payload: T) {
+    return Promise.resolve(true);
+  }
 }
 class SpySuiviRepository implements SuiviRepository {
   private _resultat: Resultat;

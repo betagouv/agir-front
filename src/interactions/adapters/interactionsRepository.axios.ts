@@ -60,10 +60,15 @@ export class InteractionsRepositoryAxios implements InteractionsRepository {
 
   async interactionAvecDonneesAEteTerminee<T>(utilisateurId: string, interactionId: string, payload: T) {
     const axiosInstance = AxiosFactory.getAxios();
-    await axiosInstance.patch(`utilisateurs/${utilisateurId}/interactions/${interactionId}`, {
+    const reponse = await axiosInstance.patch(`utilisateurs/${utilisateurId}/interactions/${interactionId}`, {
       seen: 0,
       clicked: true,
       done: true,
       ...payload
-    });}
+    });
+  
+    if (reponse) return true;
+
+    return false;
+  }
 }

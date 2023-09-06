@@ -14,6 +14,10 @@ class InteractionsRepositoryForTest implements InteractionsRepository {
   interactionAEteCliquee(interactionId: string, utilisateurId): void {}
 
   interactionAEteTerminee(interactionId: string, utilisateurId: string): void {}
+
+  interactionAvecDonneesAEteTerminee<T>(utilisateurId: string, interactionId: string, payload: T) {
+    return Promise.resolve(true);
+  }
 }
 
 describe("Fichier de tests pour charger les interactions", () => {
