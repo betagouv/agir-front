@@ -20,6 +20,7 @@ let compteUtlisateurViewModel = ref<CompteUtlisateurViewModel>({
   id: "",
   nom: "",
   mail: "",
+  codePostal: "",
 });
 function mapValueCompte(viewModel: CompteUtlisateurViewModel) {
   compteUtlisateurViewModel.value = viewModel;
