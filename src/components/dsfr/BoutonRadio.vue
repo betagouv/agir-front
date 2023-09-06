@@ -5,7 +5,7 @@
     </legend>
     <div class="fr-fieldset__element" v-for="(item, index) in options" :key="index">
       <div class="fr-radio-group">
-        <input type="radio" :id="`${name}-${index}`" :name="name" :value="item" @change="onInputChange">
+        <input type="radio" :id="`${name}-${index}`" :name="name" :value="item" @change.prevent="onInputChange">
         <label class="fr-label" :for="`${name}-${index}`">
           {{ item }}
         </label>
