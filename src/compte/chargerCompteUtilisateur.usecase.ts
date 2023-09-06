@@ -8,7 +8,7 @@ export class ChargerCompteUtilisateurUsecase {
     this._compteUtilisateuRepository = compteUtilisateuRepository;
   }
 
-  execute(utilisateurId: string, compteUtilisateurPresenter: CompteUtilisateurPresenter) {
+  async execute(utilisateurId: string, compteUtilisateurPresenter: CompteUtilisateurPresenter): Promise<void> {
     this._compteUtilisateuRepository.getCompteUtilisateur(utilisateurId).then((compte) => compteUtilisateurPresenter.presente(compte));
   }
 }

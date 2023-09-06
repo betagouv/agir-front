@@ -21,7 +21,7 @@ class ChargeCompteUtilisateurAvecMailRepository implements CompteUtilisateurRepo
       nom: "Dorian",
       id: "1",
       mail: "mail@exemple.com",
-      codePostal: "7500",
+      codePostal: "75000",
     });
   }
 
@@ -32,7 +32,7 @@ describe("Fichier de tests concernant le chargement du compte utilisateur", () =
     // GIVEN
     // WHEN
     const usecase = new ChargerCompteUtilisateurUsecase(new ChargeCompteUtilisateurSansInfosOptionnellesRepository());
-    usecase.execute("1", new CompteUtilisateurPresenterImpl(expectation));
+    await usecase.execute("1", new CompteUtilisateurPresenterImpl(expectation));
     // THEN
     function expectation(compteUtilisateurViewModel: CompteUtlisateurViewModel) {
       expect(compteUtilisateurViewModel).toStrictEqual<CompteUtlisateurViewModel>({
@@ -47,7 +47,7 @@ describe("Fichier de tests concernant le chargement du compte utilisateur", () =
     // GIVEN
     // WHEN
     const usecase = new ChargerCompteUtilisateurUsecase(new ChargeCompteUtilisateurAvecMailRepository());
-    usecase.execute("1", new CompteUtilisateurPresenterImpl(expectation));
+    await usecase.execute("1", new CompteUtilisateurPresenterImpl(expectation));
     // THEN
     function expectation(compteUtilisateurViewModel: CompteUtlisateurViewModel) {
       expect(compteUtilisateurViewModel).toStrictEqual<CompteUtlisateurViewModel>({
