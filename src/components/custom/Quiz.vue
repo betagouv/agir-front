@@ -30,7 +30,7 @@
   import IndicateurDEtape from '@/components/dsfr/IndicateurDEtapes.vue'
   import QuestionDuQuiz from "@/components/custom/QuestionDuQuiz.vue";
   import { QuizViewModel } from '@/quiz/adapters/chargementQuiz.presenter.impl';
-  import { EnvoyerDonneesInteractionUsecase } from '@/interactions/envoyerDonneesInteraction.usecase';
+  import { EnvoyerDonneesQuizInteractionUsecase } from '@/interactions/envoyerDonneesQuizInteraction.usecase';
   import { InteractionsRepositoryAxios } from '@/interactions/adapters/interactionsRepository.axios';
 
   const props = defineProps<{
@@ -60,9 +60,9 @@
 
     if (value) nombreDeBonnesReponses.value++;
     
-    if(etapeCourante.value > props.quizViewModel.questions.length) {
+    if (etapeCourante.value > props.quizViewModel.questions.length) {
       const pourcentageDeReussite = nombreDeBonnesReponses.value / props.quizViewModel.questions.length * 100;
-      await new EnvoyerDonneesInteractionUsecase(new InteractionsRepositoryAxios()).execute(props.idUtilisateur, props.idInteraction, pourcentageDeReussite);      
+      await new EnvoyerDonneesQuizInteractionUsecase(new InteractionsRepositoryAxios()).execute(props.idUtilisateur, props.idInteraction, pourcentageDeReussite);      
     }
   }
 </script>

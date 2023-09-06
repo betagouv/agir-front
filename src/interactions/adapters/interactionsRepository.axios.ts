@@ -19,6 +19,7 @@ export interface InteractionApiModel {
   content_id: string;
   locked: boolean;
 }
+
 export class InteractionsRepositoryAxios implements InteractionsRepository {
   async chargerInteractions(idUtilisateur: string): Promise<Interaction[]> {
     const axiosInstance = AxiosFactory.getAxios();
@@ -57,17 +58,12 @@ export class InteractionsRepositoryAxios implements InteractionsRepository {
     });
   }
 
-  async interactionAvecDonneesAEteTerminee(utilisateurId: string, interactionId: string, score: number): Promise<boolean> {
+  async interactionAvecDonneesAEteTerminee<T>(utilisateurId: string, interactionId: string, payload: T) {
     const axiosInstance = AxiosFactory.getAxios();
-    const axiosResponse = await axiosInstance.post(`utilisateurs/${utilisateurId}/interactions/${interactionId}`, {
+    await axiosInstance.patch(`utilisateurs/${utilisateurId}/interactions/${interactionId}`, {
       seen: 0,
       clicked: true,
       done: true,
-      quizz_score: score
-    });
-    
-    if (axiosResponse) { return true; }
-
-    return false;
-  }
+      ...payload
+    });}
 }

@@ -5,7 +5,7 @@
     v-else :quiz-view-model="quizViewModel"
     :nombreDePointsAGagner="store.interactionEnCours ? store.interactionEnCours.nombreDePointsAGagner : '0'"
     :valeurBilanCarbone="store.valeurBilanCarbone"
-    :id-utilisateur="store.utilisateur"
+    :id-utilisateur="store.id"
     :id-interaction="store.interactionEnCours.id"
   />
 </template>
