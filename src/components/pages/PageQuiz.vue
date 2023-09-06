@@ -1,10 +1,12 @@
 <template>
   <div v-if="isLoading">Chargement...</div>
-  <div v-else-if="!quizViewModel">Une erreur est survenue</div>
+  <div v-else-if="(!quizViewModel || !store.interactionEnCours)">Une erreur est survenue</div>
   <PageQuizComposant
     v-else :quiz-view-model="quizViewModel"
     :nombreDePointsAGagner="store.interactionEnCours ? store.interactionEnCours.nombreDePointsAGagner : '0'"
     :valeurBilanCarbone="store.valeurBilanCarbone"
+    :id-utilisateur="store.utilisateur"
+    :id-interaction="store.interactionEnCours.id"
   />
 </template>
 
@@ -20,7 +22,7 @@
   const quizViewModel = ref<QuizViewModel>();
   const store = utilisateurStore();
   const route = useRoute();
-  const isLoading = ref<boolean>(false);
+  const isLoading = ref<boolean>(false);  
   
   const mapValuesQuiz = (viewModel: QuizViewModel) => {
     quizViewModel.value = viewModel;

@@ -56,4 +56,18 @@ export class InteractionsRepositoryAxios implements InteractionsRepository {
       done: true,
     });
   }
+
+  async interactionAvecDonneesAEteTerminee(utilisateurId: string, interactionId: string, score: number): Promise<boolean> {
+    const axiosInstance = AxiosFactory.getAxios();
+    const axiosResponse = await axiosInstance.post(`utilisateurs/${utilisateurId}/interactions/${interactionId}`, {
+      seen: 0,
+      clicked: true,
+      done: true,
+      quizz_score: score
+    });
+    
+    if (axiosResponse) { return true; }
+
+    return false;
+  }
 }

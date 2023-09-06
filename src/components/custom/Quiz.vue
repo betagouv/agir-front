@@ -6,7 +6,7 @@
       :etape-courante="etapeCourante"
       :etape-total="quizViewModel.questions.length+1"  
     />
-    <form @submit.prevent="evaluerQuizz">
+    <form>
       <QuestionDuQuiz v-if="etapeCourante <= quizViewModel.questions.length"
         :item="quizViewModel.questions[etapeCourante-1]"
         @etapeSuivante="verifierLaReponse"
@@ -30,10 +30,14 @@
   import IndicateurDEtape from '@/components/dsfr/IndicateurDEtapes.vue'
   import QuestionDuQuiz from "@/components/custom/QuestionDuQuiz.vue";
   import { QuizViewModel } from '@/quiz/adapters/chargementQuiz.presenter.impl';
+  import { EnvoyerDonneesInteractionUsecase } from '@/interactions/envoyerDonneesInteraction.usecase';
+  import { InteractionsRepositoryAxios } from '@/interactions/adapters/interactionsRepository.axios';
 
-  defineProps<{
+  const props = defineProps<{
     quizViewModel: QuizViewModel
     nombreDePointsAGagner: string,
+    idUtilisateur: string,
+    idInteraction: string
   }>();
 
   const nombreDeBonnesReponses = ref<number>(0);
@@ -49,16 +53,16 @@
     if (etapeCourante.value+1 > nombreEtape) return 'Fin du quizz';
 
     return `Question ${etapeCourante.value+1} sur ${nombreEtape}`
-  }  
+  }
   
-  const evaluerQuizz = () => {
-    // create usecase avec nombreDeBonnesReponses
-    return;
-  };
-
-  const verifierLaReponse = (value) => {
+  const verifierLaReponse = async (value) => {
     etapeCourante.value++;
 
     if (value) nombreDeBonnesReponses.value++;
+    
+    if(etapeCourante.value > props.quizViewModel.questions.length) {
+      const pourcentageDeReussite = nombreDeBonnesReponses.value / props.quizViewModel.questions.length * 100;
+      await new EnvoyerDonneesInteractionUsecase(new InteractionsRepositoryAxios()).execute(props.idUtilisateur, props.idInteraction, pourcentageDeReussite);      
+    }
   }
 </script>

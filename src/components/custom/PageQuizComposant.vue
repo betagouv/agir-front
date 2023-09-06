@@ -11,6 +11,8 @@
       <Quiz
         :nombre-de-points-a-gagner="nombreDePointsAGagner"
         :quiz-view-model="quizViewModel"
+        :id-interaction="idInteraction"
+        :id-utilisateur="idUtilisateur"
       />
     </div>
     <div class="fr-col-12 fr-col-lg-4">
@@ -29,6 +31,8 @@
   defineProps<{
     quizViewModel: QuizViewModel
     nombreDePointsAGagner: string,
-    valeurBilanCarbone: EmpreinteViewModel
+    valeurBilanCarbone: EmpreinteViewModel,
+    idUtilisateur: string,
+    idInteraction: string
   }>();
 </script>
