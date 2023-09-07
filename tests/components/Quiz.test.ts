@@ -1,14 +1,15 @@
 import { render, fireEvent } from '@testing-library/vue';
 import Quiz from "../../src/components/custom/Quiz.vue"
+import { QuizViewModel } from '../../src/quiz/adapters/chargementQuiz.presenter.impl' 
 
-const quizzViewModelMock = {
+const quizzViewModelMock: QuizViewModel = {
   titre: "Titre du quizz",
   questions: [
     {
       id: "id_question_0",
       intitule: "Intitulé de la question 1",
       reponsesPossibles: ["reponse 1", "reponse 2"],
-      ordre: 1,
+      ordre: '1',
       texteExplication: "Texte explication question 1",
       solution: "reponse 1",
     },
@@ -16,22 +17,25 @@ const quizzViewModelMock = {
       id: "id_question_1",
       intitule: "Intitulé de la question 2",
       reponsesPossibles: ["reponse a", "reponse b"],
-      ordre: 2,
+      ordre: '2',
       texteExplication: "Texte explication question 2",
       solution: "reponse a",
     },
   ],
+  steps: '',
 };
+
+const props = {
+  quizViewModel: quizzViewModelMock,
+  nombreDePointsAGagner: "10",
+  idUtilisateur: 'idUtilisateur',
+  idInteraction: 'idInteraction',
+}
 
 describe("Quizz", () => {
   it("affiche l'étape 1 avec la question, les réponses et le bouton 'Valider' disable", () => {
     // GIVEN
-    const { getByRole, getAllByRole } = render(Quiz, {
-      props: {
-        quizViewModel: quizzViewModelMock,
-        nombreDePointsAGagner: "10",
-      },
-    });
+    const { getByRole, getAllByRole } = render(Quiz, { props });
 
     // WHEN
     const titreEtape = getByRole('heading', { level: 2, name: 'Étape 1 sur 3 Question 1 sur 2' });
@@ -49,12 +53,7 @@ describe("Quizz", () => {
   describe('quand je clique sur une réponse', () => {
     it("le bouton 'Valider' devient enable", async () => {
       // GIVEN
-      const { getByRole, getAllByRole } = render(Quiz, {
-        props: {
-          quizViewModel: quizzViewModelMock,
-          nombreDePointsAGagner: "10",
-        },
-      });
+      const { getByRole, getAllByRole } = render(Quiz, { props });
 
       // WHEN
       const radios = getAllByRole('radio');
@@ -68,12 +67,7 @@ describe("Quizz", () => {
     describe("quand je clique sur le bouton Valider", () => {
       it("affiche la réponse et le bouton 'Passer à l'étape suivante'", async () => {
         // GIVEN
-        const { getByRole, getAllByRole, getByText } = render(Quiz, {
-          props: {
-            quizViewModel: quizzViewModelMock,
-            nombreDePointsAGagner: "10",
-          },
-        });
+        const { getByRole, getAllByRole, getByText } = render(Quiz, { props });
   
         // WHEN
         const radios = getAllByRole('radio');
@@ -92,12 +86,7 @@ describe("Quizz", () => {
       describe('quand la réponse est incorrect', () => {
         it("affiche un message d'erreur et le bouton 'Passer à l'étape suivante'", async () => {
           // GIVEN
-          const { getByRole, getAllByRole, getByText } = render(Quiz, {
-            props: {
-              quizViewModel: quizzViewModelMock,
-              nombreDePointsAGagner: "10",
-            },
-          });
+          const { getByRole, getAllByRole, getByText } = render(Quiz, { props });
 
           // WHEN
           const radios = getAllByRole('radio');
@@ -122,12 +111,7 @@ describe("Quizz", () => {
   describe("quand je passe à l'étape suivante", () => {
     it("affiche l'étape 2 avec la question, les réponses et le bouton 'Valider' disable", async () => {
       // GIVEN
-      const { getByRole, getAllByRole } = render(Quiz, {
-        props: {
-          quizViewModel: quizzViewModelMock,
-          nombreDePointsAGagner: "10",
-        },
-      });
+      const { getByRole, getAllByRole } = render(Quiz, { props });
   
       // WHEN
       const radios = getAllByRole('radio');
@@ -152,12 +136,7 @@ describe("Quizz", () => {
     describe('quand toutes les réponses sont corrects', () => {
       it('affiche un message de succès', async () => {
         // GIVEN
-        const { getByRole, getAllByRole, getByText } = render(Quiz, {
-          props: {
-            quizViewModel: quizzViewModelMock,
-            nombreDePointsAGagner: "10",
-          },
-        });
+        const { getByRole, getAllByRole, getByText } = render(Quiz, { props });
     
         // WHEN
         const radios = getAllByRole('radio');
@@ -185,12 +164,7 @@ describe("Quizz", () => {
     describe("quand au moins une réponse est incorrecte", () => {
       it("affiche un message d'échec", async () => {
         // GIVEN
-        const { getByRole, getAllByRole, getByText } = render(Quiz, {
-          props: {
-            quizViewModel: quizzViewModelMock,
-            nombreDePointsAGagner: "10",
-          },
-        });
+        const { getByRole, getAllByRole, getByText } = render(Quiz, { props });
 
         // WHEN
         const radios = getAllByRole('radio');
@@ -215,6 +189,4 @@ describe("Quizz", () => {
       });
     });
   });
-
-  // tester si appel back
 });
