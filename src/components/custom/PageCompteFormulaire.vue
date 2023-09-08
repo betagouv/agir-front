@@ -1,10 +1,10 @@
 <template>
   <form class="fr-mb-0 background--white fr-p-4w border border-radius--md" @submit.prevent="modifierInformation">
     <fieldset class="fr-mb-0 fr-fieldset">
-      <legend class="fr-fieldset__legend" id="identity-fieldset-legend">
+      <legend class="fr-fieldset__legend fr-px-0 fr-mx-0" id="identity-fieldset-legend">
         <h6>Identité personnelle</h6>
       </legend>
-      <div class="fr-fieldset__element">
+      <div class="fr-col-12">
         <fieldset class="fr-fieldset">
           <div class="fr-fieldset__element">
             <div class="fr-input-group">
@@ -22,7 +22,7 @@
           </div>
         </fieldset>
       </div>
-      <div class="fr-fieldset__element">
+      <div class="fr-col-12">
         <fieldset class="fr-fieldset">
           <div class="fr-fieldset__element">
             <div class="fr-input-group">
@@ -40,7 +40,7 @@
           </div>
         </fieldset>
       </div>
-      <div class="fr-fieldset__element">
+      <div class="fr-col-12">
         <fieldset class="fr-fieldset">
           <div class="fr-fieldset__element">
             <div class="fr-input-group">
@@ -58,7 +58,7 @@
           </div>
         </fieldset>
       </div>
-      <div class="fr-fieldset__element">
+      <div class="fr-col-12">
         <button class="fr-btn" type="submit">Mettre à jour</button>
       </div>
     </fieldset>
