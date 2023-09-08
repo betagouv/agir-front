@@ -1,9 +1,6 @@
 import { AxiosFactory } from "@/axios.factory";
 import { Quiz, QuizRepository } from "@/quiz/ports/quizRepository";
 
-interface EvaluerQuizApiModel {
-  resultat: boolean;
-}
 interface QuestionsQuizApiModel {
   id: string;
   libelle: string;
@@ -40,16 +37,5 @@ export class QuizRepositoryAxios implements QuizRepository {
       console.log(e);
       throw e;
     }
-  }
-
-  async evaluerQuiz(utilisateur: string, idQuizz: string, reponses: Map<string, string>): Promise<boolean> {
-    const axiosInstance = AxiosFactory.getAxios();
-    const array: Record<string, string>[] = Array.from(reponses, ([key, value]) => ({ [key]: value }));
-
-    const axiosResponse = await axiosInstance.post<EvaluerQuizApiModel>(`/quizz/${idQuizz}/evaluer`, {
-      utilisateur,
-      reponses: array,
-    });
-    return axiosResponse.data.resultat;
   }
 }

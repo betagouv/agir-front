@@ -16,6 +16,10 @@ class SpyInteractionCliqueeRepository implements InteractionsRepository {
   }
 
   interactionAEteTerminee(interactionId: string, utilisateurId: string): void {}
+
+  interactionAvecDonneesAEteTerminee<T>(utilisateurId: string, interactionId: string, payload: T) {
+    return Promise.resolve(true);
+  }
 }
 describe("Fichier de tests concernant le clique sur une interaction", () => {
   it("Au clique sur une interaction on doit prevenir que celle-ci vient d'être cliquée", async () => {
