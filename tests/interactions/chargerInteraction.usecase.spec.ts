@@ -57,6 +57,7 @@ describe("Fichier de tests pour charger les interactions", () => {
           isUrlExterne: false,
           estBloquee: false,
           duree: "",
+          idDuContenu: "idDuContenu",
         },
       ]);
     }
@@ -96,10 +97,11 @@ describe("Fichier de tests pour charger les interactions", () => {
           miseEnAvant: "miseEnAvant",
           type: "ARTICLE",
           illustrationURL: "illustrationURL",
-          url: "url",
-          isUrlExterne: true,
+          url: "/article/titre",
+          isUrlExterne: false,
           estBloquee: false,
           duree: "",
+          idDuContenu: "id",
         },
       ]);
     }
@@ -120,7 +122,7 @@ describe("Fichier de tests pour charger les interactions", () => {
           illustrationURL: "illustrationURL",
           url: "",
           aEteFaite: false,
-          idDuContenu: "id",
+          idDuContenu: "",
           duree: "",
           estBloquee: false,
         },
@@ -143,6 +145,7 @@ describe("Fichier de tests pour charger les interactions", () => {
           isUrlExterne: false,
           estBloquee: false,
           duree: "",
+          idDuContenu: "",
         },
       ]);
     }
@@ -163,7 +166,7 @@ describe("Fichier de tests pour charger les interactions", () => {
           illustrationURL: "illustrationURL",
           url: "",
           aEteFaite: false,
-          idDuContenu: "id",
+          idDuContenu: "",
           duree: "",
           estBloquee: false,
         },
@@ -186,6 +189,7 @@ describe("Fichier de tests pour charger les interactions", () => {
           isUrlExterne: false,
           estBloquee: false,
           duree: "",
+          idDuContenu: "",
         },
       ]);
     }
@@ -206,7 +210,7 @@ describe("Fichier de tests pour charger les interactions", () => {
           illustrationURL: "illustrationURL",
           url: "",
           aEteFaite: false,
-          idDuContenu: "id",
+          idDuContenu: "",
           duree: "",
           estBloquee: false,
         },
@@ -221,7 +225,7 @@ describe("Fichier de tests pour charger les interactions", () => {
           illustrationURL: "illustrationURL",
           url: "",
           aEteFaite: true,
-          idDuContenu: "id",
+          idDuContenu: "",
           duree: "",
           estBloquee: false,
         },
@@ -244,6 +248,7 @@ describe("Fichier de tests pour charger les interactions", () => {
           isUrlExterne: false,
           estBloquee: false,
           duree: "",
+          idDuContenu: "",
         },
       ]);
     }

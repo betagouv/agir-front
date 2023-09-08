@@ -14,6 +14,7 @@ export interface InteractionViewModel {
   isUrlExterne: boolean;
   duree: string;
   estBloquee: boolean;
+  idDuContenu: string;
 }
 export class InteractionsPresenterImpl implements InteractionsPresenter {
   private _viewModels: (interactionViewModels: InteractionViewModel[]) => void;
@@ -52,9 +53,10 @@ export class InteractionsPresenterImpl implements InteractionsPresenter {
           type: typeInverseMapping[interaction.type],
           illustrationURL: interaction.illustrationURL,
           url: this.determineUrl(interaction),
-          isUrlExterne: interaction.type === InteractionType.ARTICLE,
+          isUrlExterne: false,
           duree: interaction.duree,
           estBloquee: interaction.estBloquee,
+          idDuContenu: interaction.idDuContenu,
         };
       });
     this._viewModels(interactionNonFaites);
@@ -65,7 +67,7 @@ export class InteractionsPresenterImpl implements InteractionsPresenter {
       case InteractionType.QUIZ:
         return `/coach/quiz/${interaction.idDuContenu}`;
       case InteractionType.ARTICLE:
-        return interaction.url;
+        return `/article/${interaction.titre}`;
       case InteractionType.KYC:
         return "";
       case InteractionType.SUIVIDUJOUR:
