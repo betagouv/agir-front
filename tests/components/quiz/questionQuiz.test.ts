@@ -1,6 +1,7 @@
 import QuestionDuQuiz from "../../../src/components/QuestionDuQuiz.vue";
 import { mount } from "@vue/test-utils";
 import router from "../../../src/router";
+import { vitest } from "vitest";
 
 describe("Lorsque l'utilisateur répond à la question courante du quiz", () => {
   test("on envoie les données de la réponse choisie", async () => {
