@@ -54,6 +54,7 @@ export default defineComponent({
       isUrlExterne: false,
       duree: "⏱️ 5 minutes",
       estBloquee: false,
+      idDuContenu: "",
     };
     const aideVeloViewModel: InteractionViewModel = {
       id: "",
@@ -68,6 +69,7 @@ export default defineComponent({
       isUrlExterne: false,
       duree: "⏱️ 5 minutes",
       estBloquee: false,
+      idDuContenu: "",
     };
     return {
       aideVeloViewModel,

@@ -27,7 +27,7 @@ import BilanNosGestesClimat from "./BilanNosGestesClimat.vue";
 import FilDAriane from "./dsfr/FilDAriane.vue";
 import { utilisateurStore } from "@/store/utilisateur";
 import { useRouter } from "vue-router";
-import { ArticleCMS, ChargerContenuCms } from "@/cms/ChargerContenuCms";
+import { ArticleCMS, ChargerContenuCms } from "@/cms/chargerContenuCms";
 
 const store = utilisateurStore();
 const router = useRouter();
