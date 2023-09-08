@@ -220,7 +220,7 @@ describe("Quizz", () => {
       await fireEvent.click(boutonEtapeSuivante2);
 
       // THEN
-      expect(envoyerDonneesQuizInteractionMock).toHaveBeenNthCalledWith(1, "idUtilisateur", "idInteraction", 50);
+      expect(envoyerDonneesQuizInteractionMock).toHaveBeenNthCalledWith(1, "idUtilisateur", "idInteraction", 1, 2);
     });
   });
 });

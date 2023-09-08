@@ -23,7 +23,7 @@ describe("Fichier de tests pour envoyer le resultat d'un quizz", () => {
     // GIVEN
     // WHEN
     const usecase = new EnvoyerDonneesQuizInteractionUsecase(new InteractionsRepositoryForTest());
-    const resultat = await usecase.execute('1', '2', 40);
+    const resultat = await usecase.execute('1', '2', 2, 5);
 
     // THEN
     expect(resultat).toBeTruthy();
@@ -33,7 +33,7 @@ describe("Fichier de tests pour envoyer le resultat d'un quizz", () => {
     // GIVEN
     // WHEN
     const usecase = new EnvoyerDonneesQuizInteractionUsecase(new InteractionsRepositoryForTest());
-    const resultat = await usecase.execute('mauvais_id', '2', 40);
+    const resultat = await usecase.execute('mauvais_id', '2', 2, 5);
 
     // THEN
     expect(resultat).toBeFalsy();

@@ -31,8 +31,7 @@
   const chargementQuizz = async () => {
     isLoading.value = true;
     const idQuiz = Array.isArray(route.params.id) ? route.params.id[0] : route.params.id;
-    const quizzRepositoryAxios = new QuizRepositoryAxios();
-    const chargementQuizzUsecase = new ChargementQuizUsecase(quizzRepositoryAxios);
+    const chargementQuizzUsecase = new ChargementQuizUsecase(new QuizRepositoryAxios());
     await chargementQuizzUsecase.execute(idQuiz, new ChargementQuizPresenterImpl(mapValuesQuiz));
     isLoading.value = false;
   };

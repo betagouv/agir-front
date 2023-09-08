@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!isValider">
+  <div v-if="!isValide">
     <BoutonRadio
       :options="item.reponsesPossibles"
       :legende="item.intitule"
@@ -43,19 +43,19 @@
   }>();
   
   const valueInput = ref<string>('');
-  const isValider = ref<boolean>(false);
+  const isValide = ref<boolean>(false);
   const reponseCorrecte = ref<boolean>();
   const emit = defineEmits(['etapeSuivante']);
 
   watch(() => props.item, () => {
-    isValider.value = false,
+    isValide.value = false,
     valueInput.value = ''
   });
 
   const handleValueChange = (value) => valueInput.value = value;
 
   const submitReponse = () => {
-    isValider.value = true;
+    isValide.value = true;
     reponseCorrecte.value = valueInput.value === props.item.solution;
   }
   

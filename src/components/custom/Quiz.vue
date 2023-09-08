@@ -61,8 +61,7 @@
     if (value) nombreDeBonnesReponses.value++;
     
     if (etapeCourante.value > props.quizViewModel.questions.length) {
-      const pourcentageDeReussite = nombreDeBonnesReponses.value / props.quizViewModel.questions.length * 100;
-      await new EnvoyerDonneesQuizInteractionUsecase(new InteractionsRepositoryAxios()).execute(props.idUtilisateur, props.idInteraction, pourcentageDeReussite);      
+      await new EnvoyerDonneesQuizInteractionUsecase(new InteractionsRepositoryAxios()).execute(props.idUtilisateur, props.idInteraction, nombreDeBonnesReponses.value, props.quizViewModel.questions.length);      
     }
   }
 </script>
