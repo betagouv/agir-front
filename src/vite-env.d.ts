@@ -10,6 +10,8 @@ interface ImportMetaEnv {
   readonly VITE_API_URL: string;
   readonly VITE_API_URL_CMS: string;
   readonly VITE_API_TOKEN_CMS: string;
+  readonly VITE_MATOMO_URL: string;
+  readonly VITE_MATOMO_SITE_ID: string;
 }
 
 interface ImportMeta {
