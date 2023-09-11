@@ -14,18 +14,28 @@ import SuiviDuJour from "@/components/SuiviDuJour.vue";
 import { storeIdNGC } from "@/bilan/middleware/pendingSimulation";
 import FranceConnectCallBack from "@/components/FranceConnectCallBack.vue";
 import PageCompte from "@/components/pages/PageCompte.vue";
+import PageAccueil from "@/components/pages/PageAccueil.vue";
 
 const appName = "Agir ! -";
 const routes = [
   {
     path: "/",
+    name: "accueil",
+    component: PageAccueil,
+    meta: {
+      title: `${appName} Accueil`,
+      estPublique: true,
+    },
+    beforeEnter: storeIdNGC,
+  },
+  {
+    path: "/authentification",
     name: "authentification",
     component: Authentification,
     meta: {
       title: `${appName} Authentification`,
       estPublique: true,
     },
-    beforeEnter: storeIdNGC,
   },
   { path: "/mon-tableau-de-bord", name: "dashboard", component: Dashboard },
   {
