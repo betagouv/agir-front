@@ -5,7 +5,7 @@
       <span class="fr-h3 fr-text--bold">{{ getImpactValue.bilan }}</span> tonnes de CO₂-e / an
     </p>
     <p class="fr-mb-2v">propulsé par <img src="/logo_ngc.png" alt="Nos gestes climat" /></p>
-    <Accordeon nameId="accordeonBilan">
+    <Accordeon nameId="accordeonBilan" label="Voir le détail">
       <JaugeNosGestesClimat class="fr-mb-3v" libelle="🥦 Alimentation" :valeur="getImpactValue.detail.alimentation" couleur="#F28622" />
       <JaugeNosGestesClimat class="fr-mb-3v" libelle="🚗 Transports" :valeur="getImpactValue.detail.transport" couleur="#474EFF" />
       <JaugeNosGestesClimat class="fr-mb-3v" libelle="🏛️ Services sociétaux" :valeur="getImpactValue.detail.servicesSocietaux" couleur="#809769" />
