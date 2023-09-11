@@ -19,7 +19,7 @@
             <div class="fr-header__tools-links">
               <ul class="fr-btns-group">
                 <li v-if="!nomUtilisateur">
-                  <a class="fr-btn fr-icon-lock-line" id="button-1938" href="/"> Se connecter </a>
+                  <a class="fr-btn fr-icon-lock-line" id="button-1938" href="/authentification"> Se connecter </a>
                 </li>
                 <li v-if="!nomUtilisateur">
                   <a class="fr-btn fr-icon-account-line" id="button-1939" href="#[url - à modifier]"> S’enregistrer </a>
