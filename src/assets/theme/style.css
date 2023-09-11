@@ -132,7 +132,7 @@ h3 {
   text-align: center;
 }
 
-.text-right {
+.text--right {
   text-align: right;
 }
 
@@ -178,6 +178,10 @@ h3 {
 
 .border {
   border: 1px solid rgba(0, 0, 0, 0.19);
+}
+
+.border--bleu {
+  border: 1px solid var(--blue-france-main-525);
 }
 
 .border-radius--md {

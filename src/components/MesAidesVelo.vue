@@ -1,5 +1,6 @@
 <template>
-  <div>
+  
+  <!-- <div>
     <h1>Mes aides - Vélo</h1>
     <div class="form-container">
       <form id="mes-aides-velo-8199" @submit.prevent="submitForm">
@@ -27,7 +28,7 @@
         </li>
       </ul>
     </div>
-  </div>
+  </div> -->
 </template>
 
 <script lang="ts">
@@ -38,26 +39,24 @@ import { SimulerAideVeloPresenterImpl } from "@/aides/adapters/simulerAideVelo.p
 import { SimulationAidesVeloViewModel } from "@/aides/ports/simulerAideVelo.presenter";
 
 export default {
-  setup() {
-    const codePostal = ref("");
-    const revenuFiscal = ref("");
-    const simulationAidesVeloViewModel = ref<SimulationAidesVeloViewModel>();
-    const submitForm = () => {
-      const useCase = new SimulerAideVeloUsecase(new SimulerAideVeloRepositoryAxios());
-
-      function mapValues(viewModels: SimulationAidesVeloViewModel) {
-        simulationAidesVeloViewModel.value = viewModels;
-      }
-
-      useCase.execute(codePostal.value, revenuFiscal.value, new SimulerAideVeloPresenterImpl(mapValues));
-    };
-    return {
-      simulationAidesVeloViewModel,
-      codePostal,
-      revenuFiscal,
-      submitForm,
-    };
-  },
+    setup() {
+        const codePostal = ref("");
+        const revenuFiscal = ref("");
+        const simulationAidesVeloViewModel = ref<SimulationAidesVeloViewModel>();
+        const submitForm = () => {
+            const useCase = new SimulerAideVeloUsecase(new SimulerAideVeloRepositoryAxios());
+            function mapValues(viewModels: SimulationAidesVeloViewModel) {
+                simulationAidesVeloViewModel.value = viewModels;
+            }
+            useCase.execute(codePostal.value, revenuFiscal.value, new SimulerAideVeloPresenterImpl(mapValues));
+        };
+        return {
+            simulationAidesVeloViewModel,
+            codePostal,
+            revenuFiscal,
+            submitForm,
+        };
+    },
 };
 </script>
 
