@@ -1,8 +1,8 @@
 <template>
-  <h1 class="fr-h2">Acheter un vélo</h1>
+  <h1 class="fr-h2">{{ titre }}</h1>
   <div class="fr-grid-row fr-grid-row--gutters">
     <aside class="fr-col-lg-4 fr-col-12">
-      <FormulaireAideVelo @submit-simulation="submitSimulation" />
+      <slot />
     </aside>
     <div class="fr-col-lg-8 fr-col-12">
       <div class="background--white border border-radius--md fr-p-3w">
@@ -30,17 +30,15 @@
 </template>
 
 <script setup lang="ts">
-  import { ref } from 'vue';
   import Accordeon from '@/components/dsfr/Accordeon.vue';
   import AideDetail from '@/components/custom/AideDetail.vue';
-  import FormulaireAideVelo from './FormulaireAideVelo.vue';
   import { SimulationAidesVeloViewModel } from '@/aides/ports/simulerAideVelo.presenter';
-  
-  const simulationAidesVeloViewModel = ref<SimulationAidesVeloViewModel | null>(null);
 
-  const submitSimulation = (data: SimulationAidesVeloViewModel) => {
-    simulationAidesVeloViewModel.value = data;
-  };
+  defineProps<{
+    titre: string
+    simulationAidesVeloViewModel: SimulationAidesVeloViewModel | null
+  }>();
+ 
 </script>
 
 <style scoped>
