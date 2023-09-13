@@ -16,15 +16,6 @@
   -webkit-text-size-adjust: 100%;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
 body {
   place-items: center;
   min-height: 100vh;
@@ -109,7 +100,7 @@ h3 {
 }
 
 .text--white {
-  color: #FFF;
+  color: #fff;
 }
 
 .text--bleu {
@@ -140,7 +131,7 @@ h3 {
   font-size: 2rem;
 }
 
-.text--4xl	{
+.text--4xl {
   font-size: 2.5rem;
 }
 
@@ -153,7 +144,7 @@ h3 {
 }
 
 .background-bleu-light {
-  background: var(--blue-france-925-125)
+  background: var(--blue-france-925-125);
 }
 
 .background--bleu-info {
@@ -169,7 +160,7 @@ h3 {
 }
 
 .background--white {
-  background: #FFF;
+  background: #fff;
 }
 
 .list-style-none {

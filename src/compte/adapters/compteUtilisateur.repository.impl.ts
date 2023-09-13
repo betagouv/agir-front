@@ -3,6 +3,7 @@ import { AxiosFactory } from "@/axios.factory";
 import { AxiosResponse } from "axios";
 
 interface CompteUtilisateurApiModel {
+  id: string;
   name: string;
   email?: string;
   code_postal?: string;
@@ -26,5 +27,19 @@ export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurReposit
       email: compteUtilisateur.mail,
       code_postal: compteUtilisateur.codePostal,
     });
+  }
+
+  async creerCompteUtilisateur(nom: string, email: string): Promise<CompteUtilisateur> {
+    const axiosInstance = AxiosFactory.getAxios();
+    const response: AxiosResponse<CompteUtilisateurApiModel> = await axiosInstance.post(`/utilisateurs/`, {
+      name: nom,
+      email: email,
+    });
+    return {
+      nom: response.data.name,
+      id: response.data.id,
+      mail: response.data.email || "",
+      codePostal: response.data.code_postal || "",
+    };
   }
 }
