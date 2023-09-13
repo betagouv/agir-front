@@ -1,21 +1,20 @@
-import { SimulationAidesRetrofitViewModel, SimulerAideRetrofitPresenter } from "@/aides/ports/simulerAideRetrofit.presenter";
+import { SimulerAideRetrofitPresenter } from "@/aides/ports/simulerAideRetrofit.presenter";
 import { SimulationRetrofit } from "@/aides/simulerAideRetrofit.usecase";
+import { SimulationAideResultatViewModel, AideResultat } from "../ports/simulationAideResultat";
 
 export class SimulerAideRetrofitPresenterImpl implements SimulerAideRetrofitPresenter {
-  private _viewModel: (simulationAidesRetrofitViewModel: SimulationAidesRetrofitViewModel[]) => void;
-  constructor(viewModel: (simulationAidesRetrofitViewModel: SimulationAidesRetrofitViewModel[]) => void) {
-    this._viewModel = viewModel;
-  }
+  constructor(private _viewModel: (simulationAideResultatViewModel: SimulationAideResultatViewModel) => void) { }
 
-  presente(simulationRetrofit: SimulationRetrofit): void {
-    this._viewModel(
-      simulationRetrofit.aides.map((aide) => {
-        return {
-          libelle: aide.libelle,
-          montant: `${aide.montant} euros`,
-          enSavoirPlus: aide.lien,
-        };
-      })
-    );
+  presente(simulationRetrofit: SimulationRetrofit): void {    
+    const aidesResultatRetrofit: AideResultat[] = simulationRetrofit.aides.map(aide => ({
+      libelle: aide.libelle,
+      montant: Number(aide.montant),
+      lien: aide.lien,
+      logo: 'to define'
+    }));
+    
+    this._viewModel({
+      'Prime au retrofit': aidesResultatRetrofit
+    });
   }
 }
