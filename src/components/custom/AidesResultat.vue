@@ -7,8 +7,8 @@
     <div class="fr-col-lg-8 fr-col-12">
       <div class="background--white border border-radius--md fr-p-3w">
         <h2 class="fr-h4">Vous pouvez bénéficier des aides vélo suivantes :</h2>
-        <p v-if="!simulationAidesVeloViewModel">Veuillez remplir le formulaire pour accèder à vos aides.</p>
-        <div v-else v-for="(aides, index) in simulationAidesVeloViewModel" :key="index">
+        <p v-if="!simulationAidesViewModel">Veuillez remplir le formulaire pour accèder à vos aides.</p>
+        <div v-else v-for="(aides, index) in simulationAidesViewModel" :key="index">
           <Accordeon v-if="aides.length" :label="`Acheter un vélo ${index}`" :nameId="`aides-${index}`">
             <ul class="list-style-none fr-m-0 fr-p-0">
               <li v-for="(aide, index) in aides" :key="index">
@@ -32,11 +32,11 @@
 <script setup lang="ts">
   import Accordeon from '@/components/dsfr/Accordeon.vue';
   import AideDetail from '@/components/custom/AideDetail.vue';
-  import { SimulationAidesVeloViewModel } from '@/aides/ports/simulerAideVelo.presenter';
+  import { SimulationAideResultatViewModel } from '@/aides/ports/simulationAideResultat';
 
   defineProps<{
     titre: string
-    simulationAidesVeloViewModel: SimulationAidesVeloViewModel | null
+    simulationAidesViewModel: SimulationAideResultatViewModel | null
   }>();
  
 </script>

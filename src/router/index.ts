@@ -4,8 +4,8 @@ import { createRouter, createWebHistory } from "vue-router";
 
 import PageQuiz from "@/components/pages/PageQuiz.vue";
 import Article from "@/components/Article.vue";
-import MesAidesRetrofit from "@/components/MesAidesRetrofit.vue";
-import PageAidesResultat from "@/components/pages/PageAidesResultat.vue";
+import PageAidesRetrofit from "@/components/pages/PageAidesRetrofit.vue";
+import PageAidesVelo from "@/components/pages/PageAidesVelo.vue";
 import Coach from "@/components/Coach.vue";
 import MesAides from "@/components/MesAides.vue";
 import Page404 from "@/components/pages/Page404.vue";
@@ -53,8 +53,8 @@ const routes = [
     },
   },
   { path: "/mes-aides", name: "mes-aides", component: MesAides },
-  { path: "/mes-aides/retrofit", name: "mes-aides-retrofit", component: MesAidesRetrofit },
-  { path: "/mes-aides/velo", name: "mes-aides-velo", component: PageAidesResultat },
+  { path: "/mes-aides/retrofit", name: "mes-aides-retrofit", component: PageAidesRetrofit },
+  { path: "/mes-aides/velo", name: "mes-aides-velo", component: PageAidesVelo },
   { path: "/communaute", name: "communaute", component: Communaute },
   {
     path: "/login-callback",

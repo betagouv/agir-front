@@ -3,7 +3,7 @@
     :page-courante="titrePage"
     :page-hierarchie="[{label: 'Aides fincancières', url: 'mes-aides'}]"
   />
-  <AidesResultat :simulationAidesVeloViewModel="simulationAidesVeloViewModel" :titre="titrePage">
+  <AidesResultat :simulation-aides-view-model="simulationAidesVeloViewModel" :titre="titrePage">
     <FormulaireAideVelo @submit-simulation="submitSimulation" />
   </AidesResultat>
 </template>
@@ -12,13 +12,13 @@
   import { ref } from 'vue';
   import FilDAriane from "@/components/dsfr/FilDAriane.vue";
   import AidesResultat from "@/components/custom/AidesResultat.vue";
-  import { SimulationAidesVeloViewModel } from '@/aides/ports/simulerAideVelo.presenter';
   import FormulaireAideVelo from '@/components/custom/FormulaireAideVelo.vue';
+  import { SimulationAideResultatViewModel } from '@/aides/ports/simulationAideResultat';
   
-  const titrePage = "Acheter un vélo"
-  const simulationAidesVeloViewModel = ref<SimulationAidesVeloViewModel | null>(null);
+  const titrePage = "Acheter un vélo";
+  const simulationAidesVeloViewModel = ref<SimulationAideResultatViewModel | null>(null);
 
-  const submitSimulation = (data: SimulationAidesVeloViewModel) => {
+  const submitSimulation = (data: SimulationAideResultatViewModel) => {
     simulationAidesVeloViewModel.value = data;
   };
 

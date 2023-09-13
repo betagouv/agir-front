@@ -17,36 +17,26 @@
       <button class="fr-mt-2v fr-btn">Valider</button>
     </form>
   </div>
-  <CarteInfo>
-    <p class="fr-text--bold">
-      <span class="fr-icon-information-line" aria-hidden="true"></span>
-      Pouquoi ces questions ?
-    </p>
-    <p>Adapter les résultats au plus près de votre situation</p>
-    <p>Votre <strong>code postal</strong> permet de consulter les aides locales.</p>
-    <p>Votre <strong>revenu fiscal de référence</strong> et le <strong>nombre de parts</strong> permettent d’afficher les aides en fonction de vos ressources.</p>
-  </CarteInfo>
 </template>
-
+  
 <script setup lang="ts">
   import { ref } from 'vue';
-  import CarteInfo from '@/components/custom/CarteInfo.vue';
-  import { SimulerAideVeloPresenterImpl } from '@/aides/adapters/simulerAideVelo.presenter.impl';
-  import { SimulerAideVeloRepositoryAxios } from '@/aides/adapters/simulerAideVelo.repository.axios';
-  import SimulerAideVeloUsecase from '@/aides/simulerAideVelo.usecase';
-import { SimulationAideResultatViewModel } from '@/aides/ports/simulationAideResultat';
+  import { SimulerAideRetrofitPresenterImpl } from '@/aides/adapters/simulerAideRetrofit.presenter.impl';
+  import { SimulerAideRetrofitRepositoryAxios } from '@/aides/adapters/simulerAideRetrofit.repository.axios';
+  import SimulerAideRetrofitUsecase from '@/aides/simulerAideRetrofit.usecase';
+  import { SimulationAideResultatViewModel } from '@/aides/ports/simulationAideResultat';
 
   const emit = defineEmits(['submit-simulation'])
   const codePostal = ref("");
   const revenuFiscal = ref("");
 
   const submitForm = () => {
-    const useCase = new SimulerAideVeloUsecase(new SimulerAideVeloRepositoryAxios());
+    const useCase = new SimulerAideRetrofitUsecase(new SimulerAideRetrofitRepositoryAxios());
 
     function mapValues(viewModels: SimulationAideResultatViewModel) {
       emit('submit-simulation', viewModels);
     }
 
-    useCase.execute(codePostal.value, revenuFiscal.value, new SimulerAideVeloPresenterImpl(mapValues));
+    useCase.execute(codePostal.value, revenuFiscal.value, new SimulerAideRetrofitPresenterImpl(mapValues));
   };
 </script>
