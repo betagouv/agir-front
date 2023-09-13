@@ -1,7 +1,7 @@
 import { SimulerAideRetrofitRepository } from "../../src/aides/ports/simulerAideRetrofit.repository";
 import { SimulerAideRetrofitPresenterImpl } from "../../src/aides/adapters/simulerAideRetrofit.presenter.impl";
-import { SimulationAidesRetrofitViewModel } from "../../src/aides/ports/simulerAideRetrofit.presenter";
 import SimulerAideRetrofitUsecase, { SimulationRetrofit } from "../../src/aides/simulerAideRetrofit.usecase";
+import { SimulationAideResultatViewModel } from "../../src/aides/ports/simulationAideResultat";
 
 class SimulerAideRetrofitRepositoryForTest implements SimulerAideRetrofitRepository {
   getSimulation(codePostal: string, revenuFiscalDeReference: string): Promise<SimulationRetrofit> {
@@ -25,14 +25,18 @@ describe("Fichier de tests pour simuler une aide retrofit", () => {
     await useCase.execute("codePostal", "revenuFiscalDeReference", new SimulerAideRetrofitPresenterImpl(expectation));
 
     // THEN
-    function expectation(simulationAidesRetrofitViewModel: SimulationAidesRetrofitViewModel[]) {
-      expect(simulationAidesRetrofitViewModel).toStrictEqual([
+    function expectation(simulationAidesRetrofitViewModel: SimulationAideResultatViewModel) {
+      expect(simulationAidesRetrofitViewModel).toStrictEqual(
         {
-          libelle: "Aide de votre région",
-          montant: "1000 euros",
-          enSavoirPlus: "https://www.grandlyon.com/fileadmin/user_upload/media/pdf/deplacements/zfe/20220624_zfe_aides-particuliers_reglement.pdf",
-        },
-      ]);
+          "Prime au retrofit":
+          [{
+            libelle: "Aide de votre région",
+            montant: 1000,
+            lien: "https://www.grandlyon.com/fileadmin/user_upload/media/pdf/deplacements/zfe/20220624_zfe_aides-particuliers_reglement.pdf",
+            logo: 'to define'
+          },
+        ]}
+      );
     }
   });
 });
