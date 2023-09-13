@@ -13,6 +13,10 @@ class ChargeCompteUtilisateurSansInfosOptionnellesRepository implements CompteUt
   }
 
   mettreAjour(compteUtilisateur: CompteUtilisateur) {}
+
+  creerCompteUtilisateur(nom: string, email: string): Promise<CompteUtilisateur> {
+    throw Error;
+  }
 }
 
 class ChargeCompteUtilisateurAvecMailRepository implements CompteUtilisateurRepository {
@@ -26,6 +30,10 @@ class ChargeCompteUtilisateurAvecMailRepository implements CompteUtilisateurRepo
   }
 
   mettreAjour(compteUtilisateur: CompteUtilisateur) {}
+
+  creerCompteUtilisateur(nom: string, email: string): Promise<CompteUtilisateur> {
+    throw Error;
+  }
 }
 describe("Fichier de tests concernant le chargement du compte utilisateur", () => {
   it("Compte utilisateur sans email", async () => {
