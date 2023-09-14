@@ -34,7 +34,7 @@
     const useCase = new SimulerAideRetrofitUsecase(new SimulerAideRetrofitRepositoryAxios());
 
     function mapValues(viewModels: SimulationAideResultatViewModel) {
-      emit('submit-simulation', viewModels);
+      emit('submit-simulation', viewModels, codePostal.value, revenuFiscal.value);
     }
 
     useCase.execute(codePostal.value, revenuFiscal.value, new SimulerAideRetrofitPresenterImpl(mapValues));

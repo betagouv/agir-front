@@ -8,7 +8,7 @@
       <FormulaireAideVelo @submit-simulation="submitSimulation" />
     </template>
     <template v-slot:asideResultatAides>
-      <AsideAideVelo @reset-simulation="resetSimulation" :code-postal="codePostal" :revenu-fiscal="revenuFiscal"/>
+      <AsideAideVelo @reset-simulation="resetSimulation" :code-postal="codePostal" :revenu-fiscal="revenuFiscal" />
     </template>
   </AidesResultat>
 </template>
