@@ -1,7 +1,7 @@
 import { SimulerAideVeloRepository } from "../../src/aides/ports/simulerAideVelo.repository";
 import { SimulerAideVeloPresenterImpl } from "../../src/aides/adapters/simulerAideVelo.presenter.impl";
-import { SimulationAidesVeloViewModel } from "../../src/aides/ports/simulerAideVelo.presenter";
 import SimulerAideVeloUsecase, { SimulationVelo } from "../../src/aides/simulerAideVelo.usecase";
+import { SimulationAideResultatViewModel } from "../../src/aides/ports/simulationAideResultat";
 
 class SimulerAideRetrofitRepositoryForTest implements SimulerAideVeloRepository {
   getSimulation(codePostal: string, revenuFiscalDeReference: string): Promise<SimulationVelo> {
@@ -242,7 +242,7 @@ describe("Fichier de tests pour simuler une aide velo", () => {
     await useCase.execute("codePostal", "revenuFiscalDeReference", new SimulerAideVeloPresenterImpl(expectation));
 
     // THEN
-    function expectation(simulationAidesVeloViewModel: SimulationAidesVeloViewModel) {
+    function expectation(simulationAidesVeloViewModel: SimulationAideResultatViewModel) {
       expect(simulationAidesVeloViewModel).toStrictEqual({
         "mécanique simple": [
           {

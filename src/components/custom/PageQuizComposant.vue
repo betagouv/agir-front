@@ -3,7 +3,7 @@
     :page-courante="`Quiz ${quizViewModel.titre}`"
     :page-hierarchie="[{
       label: 'Coach',
-      url: '/coach',
+      url: 'coach',
     }]"
   />
   <div class="fr-grid-row fr-grid-row--gutters">

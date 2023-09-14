@@ -7,7 +7,7 @@
       <Badge :label="interactionViewModel.duree" class="fr-mr-1w" />
       <span class="fr-icon-leaf-line fr-icon--sm fr-text--xs text--black-light">+{{ interactionViewModel.nombreDePointsAGagner }}</span>
     </div>
-    <span class="fr-col-2 text-right fr-hidden fr-unhidden-md">
+    <span class="fr-col-2 text--right fr-hidden fr-unhidden-md">
       <span v-if="!interactionViewModel.estBloquee" class="text--bleu">Commencer<span class="fr-icon-arrow-right-s-line" aria-hidden="true">&nbsp;</span></span>
       <span v-else class="text--gris">À venir <span class="fr-icon-lock-line" aria-hidden="true">&nbsp;</span></span>
     </span>

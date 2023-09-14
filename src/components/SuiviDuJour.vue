@@ -4,7 +4,7 @@
     :page-hierarchie="[
       {
         label: 'Coach',
-        url: '/coach',
+        url: 'coach',
       },
     ]"
   />

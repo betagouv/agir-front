@@ -1,11 +1,9 @@
-import { SimulationAidesVeloViewModel, SimulerAideVeloPresenter } from "@/aides/ports/simulerAideVelo.presenter";
+import { SimulerAideVeloPresenter } from "@/aides/ports/simulerAideVelo.presenter";
 import { SimulationVelo } from "@/aides/simulerAideVelo.usecase";
+import { SimulationAideResultatViewModel } from "@/aides//ports/simulationAideResultat";
 
 export class SimulerAideVeloPresenterImpl implements SimulerAideVeloPresenter {
-  private _viewModel: (simulationAidesVeloViewModel: SimulationAidesVeloViewModel) => void;
-  constructor(viewModel: (simulationAidesVeloViewModel: SimulationAidesVeloViewModel) => void) {
-    this._viewModel = viewModel;
-  }
+  constructor(private _viewModel: (simulationAideResultatViewModel: SimulationAideResultatViewModel) => void) { }
 
   presente(simulationVelo: SimulationVelo): void {
     this._viewModel(simulationVelo);
