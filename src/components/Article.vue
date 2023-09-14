@@ -12,7 +12,10 @@
     <h1>{{ article.titre }}</h1>
     <div class="fr-grid-row fr-grid-row--gutters">
       <div class="fr-col-12 fr-col-md-8">
-        <div class="article fr-p-6v background--white border-radius--md" v-html="article.texte" />
+        <div class="article fr-p-6v background--white border-radius--md">
+          <h2 class="fr-h3">{{ article.sousTitre }}</h2>
+          <div v-html="article.texte" />
+        </div>
       </div>
       <div class="fr-col-12 fr-col-md-4">
         <BilanNosGestesClimat :get-impact-value="store.valeurBilanCarbone" />
@@ -35,6 +38,7 @@ const router = useRouter();
 const article = ref<ArticleCMS>({
   titre: "",
   texte: "",
+  sousTitre: ""
 });
 
 onMounted(async () => {
