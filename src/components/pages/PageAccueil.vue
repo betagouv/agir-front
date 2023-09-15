@@ -11,8 +11,8 @@
         </ul>
 
         <div v-if="!isAuthentifie">
-          <router-link :to="{ name: 'authentification' }">Commencer !</router-link>
-          <p class="fr-mt-3w">Déjà un compte ? <router-link :to="{ name: 'authentification' }">Se connecter !</router-link></p>
+          <router-link class="fr-link" :to="{ name: 'creation-compte' }">Commencer !</router-link>
+          <p class="fr-mt-3w">Déjà un compte ? <router-link class="fr-link" :to="{ name: 'authentification' }">Se connecter !</router-link></p>
         </div>
       </div>
     </div>

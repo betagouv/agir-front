@@ -25,6 +25,10 @@ class SypCompteUtilisateurRepository implements CompteUtilisateurRepository {
     this._aEteAppelee = true;
     this._compteUtilisateur = compteUtilisateur;
   }
+
+  creerCompteUtilisateur(nom: string, email: string): Promise<CompteUtilisateur> {
+    throw Error();
+  }
 }
 
 describe("Fichier de tests concernant la mise à jour du compte utilisateur", () => {

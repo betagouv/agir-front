@@ -15,6 +15,7 @@ import { storeIdNGC } from "@/bilan/middleware/pendingSimulation";
 import FranceConnectCallBack from "@/components/FranceConnectCallBack.vue";
 import PageCompte from "@/components/pages/PageCompte.vue";
 import PageAccueil from "@/components/pages/PageAccueil.vue";
+import PageCreationCompte from "@/components/pages/PageCreationCompte.vue";
 
 const appName = "Agir ! -";
 const routes = [
@@ -83,6 +84,15 @@ const routes = [
     path: "/mon-compte",
     name: "mon-compte",
     component: PageCompte,
+  },
+  {
+    path: "/creation-compte",
+    name: "creation-compte",
+    component: PageCreationCompte,
+    meta: {
+      title: `${appName} Création du compte`,
+      estPublique: true,
+    },
   },
   {
     path: "/:catchAll(.*)",
