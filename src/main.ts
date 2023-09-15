@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { createApp } from "vue";
 import "./assets/theme/style.css";
 import App from "@/App.vue";
@@ -8,7 +9,7 @@ import VueMatomo from "vue-matomo";
 
 declare global {
   interface Window {
-    _paq: unknown;
+    _paq: any;
   }
 }
 
