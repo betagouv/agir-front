@@ -41,7 +41,8 @@ export class QuizRepositoryCMSAxios implements QuizRepository {
             intitule: question.libelle,
             reponsesPossibles: question.reponses.map((r) => r.reponse),
             ordre: (index + 1).toString(),
-            texteExplication: question.explicationKO,
+            texteExplicationOK: question.explicationOk,
+            texteExplicationKO: question.explicationKO,
             solution: question.reponses.filter((r) => r.exact)[0].reponse,
           };
         }),

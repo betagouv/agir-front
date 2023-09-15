@@ -10,15 +10,17 @@
     <span class="fr-icon-check-line" aria-hidden="true"></span>
     La bonne réponse est: {{ solution }}
   </p>
-  <div v-html="texteExplication"></div>
+  <div v-if="reponseCorrecte" v-html="texteExplicationOK"></div>
+  <div v-else v-html="texteExplicationKO"></div>
 </template>
 
 <script setup lang="ts">
-  defineProps<{
-    question: string,
-    solution: string,
-    texteExplication: string,
-    reponseCorrecte?: boolean,
-    reponse: string
-  }>();
+defineProps<{
+  question: string;
+  solution: string;
+  texteExplicationKO: string;
+  texteExplicationOK: string;
+  reponseCorrecte?: boolean;
+  reponse: string;
+}>();
 </script>

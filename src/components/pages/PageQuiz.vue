@@ -27,7 +27,6 @@ const isLoading = ref<boolean>(false);
 
 const mapValuesQuiz = (viewModel: QuizViewModel) => {
   quizViewModel.value = viewModel;
-  console.log(quizViewModel.value);
 };
 
 const chargementQuizz = async () => {
