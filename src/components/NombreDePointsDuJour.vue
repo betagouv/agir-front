@@ -6,11 +6,9 @@
 </template>
 
 <script setup lang="ts">
-  import CarteVierge from "@/components//CarteVierge.vue";
+  import CarteVierge from "@/components/CarteVierge.vue";
 
   defineProps<{
     nombreDePointsDuJour: number
   }>();
 </script>
-
-<style scoped></style>

@@ -1,7 +1,6 @@
 import { SimulerAideVeloRepository } from "@/aides/ports/simulerAideVelo.repository";
 import { SimulationVelo } from "@/aides/simulerAideVelo.usecase";
 import { AxiosFactory } from "@/axios.factory";
-import { EmpreinteApiModel } from "@/bilan/adapters/empreinteRepository.axios";
 
 interface AidesVelo {
   libelle: string;

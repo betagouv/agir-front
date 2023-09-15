@@ -13,7 +13,7 @@
 
 <script setup lang="ts">
   import { BadgeViewModel } from "@/score/ports/chargementScorePresenter";
-  import CarteVierge from "@/components//CarteVierge.vue";
+  import CarteVierge from "@/components/CarteVierge.vue";
 
   interface MesResultatsProps {
     badgeViewModel?: BadgeViewModel[]
