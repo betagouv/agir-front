@@ -6,11 +6,7 @@
     >
   </p>
 </template>
-<script lang="ts">
-export default {
-  name: "BoutonFranceConnect",
-};
-</script>
+<script setup lang="ts"></script>
 <style scoped>
 .france-connect-particulier {
   display: inline-block;
