@@ -17,6 +17,10 @@ class ChargeCompteUtilisateurSansInfosOptionnellesRepository implements CompteUt
   creerCompteUtilisateur(nom: string, email: string): Promise<CompteUtilisateur> {
     throw Error;
   }
+
+  supprimerCompteUtilisateur(idUtilisateur: string): Promise<void> {
+    throw Error;
+  }
 }
 
 class ChargeCompteUtilisateurAvecMailRepository implements CompteUtilisateurRepository {
@@ -32,6 +36,10 @@ class ChargeCompteUtilisateurAvecMailRepository implements CompteUtilisateurRepo
   mettreAjour(compteUtilisateur: CompteUtilisateur) {}
 
   creerCompteUtilisateur(nom: string, email: string): Promise<CompteUtilisateur> {
+    throw Error;
+  }
+
+  supprimerCompteUtilisateur(idUtilisateur: string): Promise<void> {
     throw Error;
   }
 }

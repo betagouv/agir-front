@@ -29,6 +29,10 @@ class SypCompteUtilisateurRepository implements CompteUtilisateurRepository {
   creerCompteUtilisateur(nom: string, email: string): Promise<CompteUtilisateur> {
     throw Error();
   }
+
+  supprimerCompteUtilisateur(idUtilisateur: string): Promise<void> {
+    throw Error();
+  }
 }
 
 describe("Fichier de tests concernant la mise à jour du compte utilisateur", () => {

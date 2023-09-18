@@ -31,6 +31,10 @@ class CompteUtilisateurForTest implements CompteUtilisateurRepository {
   }
 
   mettreAjour(compteUtilisateur: CompteUtilisateur) {}
+
+  supprimerCompteUtilisateur(idUtilisateur: string): Promise<void> {
+    throw Error();
+  }
 }
 describe("Fichier de tests concernant la creation du compte utilisateur", () => {
   it("doit creer un compte et le sauvegarder en session", async () => {

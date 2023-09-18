@@ -8,4 +8,5 @@ export interface CompteUtilisateurRepository {
   getCompteUtilisateur(idUtilisateur: string): Promise<CompteUtilisateur>;
   mettreAjour(compteUtilisateur: CompteUtilisateur);
   creerCompteUtilisateur(nom: string, email: string): Promise<CompteUtilisateur>;
+  supprimerCompteUtilisateur(idUtilisateur: string): Promise<void>;
 }
