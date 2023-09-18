@@ -1,15 +1,6 @@
 import { AxiosFactory } from "@/axios.factory";
 import { Score, ScoreRepository } from "@/score/ports/scoreRepository";
 
-interface CompteurApiModel {
-  titre: string;
-  valeur: number;
-}
-interface QuizzApiModel {
-  id: number;
-  titre: string;
-}
-
 interface BadgeApiModel {
   titre: string;
   date: "14/06/2023";

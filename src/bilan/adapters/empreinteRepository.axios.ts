@@ -29,6 +29,7 @@ export class EmpreinteRepositoryAxios implements EmpreinteRepository {
         },
       };
     } catch (e) {
+      console.log(e);
       throw e;
     }
   }

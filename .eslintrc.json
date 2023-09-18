@@ -18,5 +18,9 @@
     "vue"
   ],
   "rules": {
-  }
+  },
+  "ignorePatterns": [
+    "tests*",
+    "dsfr*"
+  ]
 }

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { createApp } from "vue";
 import "./assets/theme/style.css";
 import App from "@/App.vue";
