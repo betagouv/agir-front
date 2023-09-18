@@ -26,7 +26,10 @@
                 </li>
                 <li v-if="nomUtilisateur">
                   <div class="utilisateur">
-                    <img src="/ic_user.svg" alt="" /><router-link title="accéder à mon compte" :to="{ name: 'mon-compte' }">{{ nomUtilisateur }}</router-link>
+                    <router-link title="accéder à mon compte" :to="{ name: 'mon-compte' }">
+                      <img src="/ic_user.svg" class="fr-mr-1v fr-mb-n1v" alt="" />
+                      {{ nomUtilisateur }}</router-link
+                    >
                     <div class="score"><img src="/leaf.svg" alt="" />{{ score }}</div>
                   </div>
                   <button class="fr-btn fr-btn--sm" @click="logout">Se déconnecter</button>
