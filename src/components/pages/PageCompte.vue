@@ -3,9 +3,7 @@
   <div class="fr-grid-row fr-grid-row--center fr-grid-row--gutters">
     <div class="fr-col fr-col-lg-8">
       <PageCompteFormulaire :compte-utlisateur-view-model="compteUtlisateurViewModel" />
-      <div class="fr-mt-2w">
-        <PageCompteSuppression />
-      </div>
+      <PageCompteSuppression class="fr-mt-2w" />
     </div>
   </div>
 </template>
