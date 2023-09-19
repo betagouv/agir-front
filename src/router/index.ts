@@ -17,7 +17,6 @@ import PageAccueil from "@/components/pages/PageAccueil.vue";
 import PageCreationCompte from "@/components/pages/PageCreationCompte.vue";
 import PageArticle from "@/components/pages/PageArticle.vue";
 import PagePrevisualisationArticle from "@/components/pages/PagePrevisualisationArticle.vue";
-import PageArticleComposant from "@/components/PageArticleComposant.vue";
 
 const appName = "Agir ! -";
 const routes = [
