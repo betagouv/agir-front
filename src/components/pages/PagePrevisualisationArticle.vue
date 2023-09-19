@@ -21,10 +21,8 @@ onMounted(async () => {
   const articleUsecase = await new ChargerContenuCms().charger(idArticle);
   if (articleUsecase) {
     article.value = articleUsecase;
-    console.log(article);
   } else {
     await router.push("/not-found");
   }
 });
 </script>
-<style scoped></style>
