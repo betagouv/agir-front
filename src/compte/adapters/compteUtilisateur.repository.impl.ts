@@ -42,4 +42,9 @@ export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurReposit
       codePostal: response.data.code_postal || "",
     };
   }
+
+  async supprimerCompteUtilisateur(idUtilisateur: string): Promise<void> {
+    const axiosInstance = AxiosFactory.getAxios();
+    await axiosInstance.delete(`/utilisateurs/${idUtilisateur}`);
+  }
 }

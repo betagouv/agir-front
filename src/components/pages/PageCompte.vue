@@ -3,6 +3,7 @@
   <div class="fr-grid-row fr-grid-row--center fr-grid-row--gutters">
     <div class="fr-col fr-col-lg-8">
       <PageCompteFormulaire :compte-utlisateur-view-model="compteUtlisateurViewModel" />
+      <PageCompteSuppression class="fr-mt-2w" />
     </div>
   </div>
 </template>
@@ -13,6 +14,7 @@ import { CompteUtilisateurPresenterImpl, CompteUtlisateurViewModel } from "@/com
 import { onMounted, ref } from "vue";
 import { utilisateurStore } from "@/store/utilisateur";
 import PageCompteFormulaire from "@/components/custom/PageCompteFormulaire.vue";
+import PageCompteSuppression from "@/components/pages/PageCompteSuppression.vue";
 
 let compteUtlisateurViewModel = ref<CompteUtlisateurViewModel>({
   id: "",
