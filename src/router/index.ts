@@ -16,6 +16,9 @@ import FranceConnectCallBack from "@/components/FranceConnectCallBack.vue";
 import PageCompte from "@/components/pages/PageCompte.vue";
 import PageAccueil from "@/components/pages/PageAccueil.vue";
 import PageCreationCompte from "@/components/pages/PageCreationCompte.vue";
+import PageArticle from "@/components/pages/PageArticle.vue";
+import PagePrevisualisationArticle from "@/components/pages/PagePrevisualisationArticle.vue";
+import PageArticleComposant from "@/components/PageArticleComposant.vue";
 
 const appName = "Agir ! -";
 const routes = [
@@ -76,9 +79,22 @@ const routes = [
     },
   },
   {
-    path: "/article/:titre",
+    path: "/article",
     name: "article",
-    component: Article,
+    children: [
+      {
+        path: "/:titre",
+        component: PageArticle,
+        // anybody can read a post
+        meta: { estPublique: false },
+      },
+      {
+        path: "previsualisation/:id",
+        component: PagePrevisualisationArticle,
+        // anybody can read a post
+        meta: { estPublique: true },
+      },
+    ],
   },
   {
     path: "/mon-compte",
