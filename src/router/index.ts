@@ -3,7 +3,6 @@ import Dashboard from "@/components/Dashboard.vue";
 import { createRouter, createWebHistory } from "vue-router";
 
 import PageQuiz from "@/components/pages/PageQuiz.vue";
-import Article from "@/components/Article.vue";
 import PageAidesRetrofit from "@/components/pages/PageAidesRetrofit.vue";
 import PageAidesVelo from "@/components/pages/PageAidesVelo.vue";
 import Coach from "@/components/Coach.vue";
