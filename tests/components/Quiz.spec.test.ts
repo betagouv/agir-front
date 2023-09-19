@@ -1,8 +1,8 @@
-import { render, fireEvent } from '@testing-library/vue';
-import Quiz from "../../src/components/custom/Quiz.vue"
-import { QuizViewModel } from '../../src/quiz/adapters/chargementQuiz.presenter.impl';
-import { vi, describe, it, SpyInstance } from 'vitest';
-import { EnvoyerDonneesQuizInteractionUsecase } from '../../src/interactions/envoyerDonneesQuizInteraction.usecase'
+import { render, fireEvent } from "@testing-library/vue";
+import Quiz from "../../src/components/custom/Quiz.vue";
+import { QuizViewModel } from "../../src/quiz/adapters/chargementQuiz.presenter.impl";
+import { vi, describe, it, SpyInstance } from "vitest";
+import { EnvoyerDonneesQuizInteractionUsecase } from "../../src/interactions/envoyerDonneesQuizInteraction.usecase";
 
 const quizzViewModelMock: QuizViewModel = {
   titre: "Titre du quizz",
@@ -11,47 +11,49 @@ const quizzViewModelMock: QuizViewModel = {
       id: "id_question_0",
       intitule: "Intitulé de la question 1",
       reponsesPossibles: ["reponse 1", "reponse 2"],
-      ordre: '1',
-      texteExplication: "Texte explication question 1",
+      ordre: "1",
+      texteExplicationOK: "Texte explication question 1 OK",
+      texteExplicationKO: "Texte explication question 1 KO",
       solution: "reponse 1",
     },
     {
       id: "id_question_1",
       intitule: "Intitulé de la question 2",
       reponsesPossibles: ["reponse a", "reponse b"],
-      ordre: '2',
-      texteExplication: "Texte explication question 2",
+      ordre: "2",
+      texteExplicationOK: "Texte explication question 2 OK",
+      texteExplicationKO: "Texte explication question 2 KO",
       solution: "reponse a",
     },
   ],
-  steps: '',
+  steps: "",
 };
 
 const props = {
   quizViewModel: quizzViewModelMock,
   nombreDePointsAGagner: "10",
-  idUtilisateur: 'idUtilisateur',
-  idInteraction: 'idInteraction',
+  idUtilisateur: "idUtilisateur",
+  idInteraction: "idInteraction",
 };
 
 describe("Quizz", () => {
   let envoyerDonneesQuizInteractionMock: SpyInstance<[utilisateurId: string, interactionId: string, score: number], Promise<boolean>>;
 
   beforeEach(() => {
-    envoyerDonneesQuizInteractionMock = vi.spyOn(EnvoyerDonneesQuizInteractionUsecase.prototype, 'execute')
+    envoyerDonneesQuizInteractionMock = vi
+      .spyOn(EnvoyerDonneesQuizInteractionUsecase.prototype, "execute")
       .mockImplementation((_utilisateurId: string, _interactionId: string, _score: number) => Promise.resolve(true));
-});
-
+  });
 
   it("affiche l'étape 1 avec la question, les réponses et le bouton 'Valider' disable", () => {
     // GIVEN
     const { getByRole, getAllByRole } = render(Quiz, { props });
 
     // WHEN
-    const titreEtape = getByRole('heading', { level: 2, name: 'Étape 1 sur 3 Question 1 sur 2' });
-    const intituleQuestion1 = getByRole('group', { name: 'Intitulé de la question 1' });
-    const radios = getAllByRole('radio');
-    const boutonValider = getByRole<HTMLButtonElement>('button', { name: 'Valider' });
+    const titreEtape = getByRole("heading", { level: 2, name: "Étape 1 sur 3 Question 1 sur 2" });
+    const intituleQuestion1 = getByRole("group", { name: "Intitulé de la question 1" });
+    const radios = getAllByRole("radio");
+    const boutonValider = getByRole<HTMLButtonElement>("button", { name: "Valider" });
 
     // THEN
     expect(intituleQuestion1).toBeDefined();
@@ -60,15 +62,15 @@ describe("Quizz", () => {
     expect(radios).toHaveLength(2);
   });
 
-  describe('quand je clique sur une réponse', () => {
+  describe("quand je clique sur une réponse", () => {
     it("le bouton 'Valider' devient enable", async () => {
       // GIVEN
       const { getByRole, getAllByRole } = render(Quiz, { props });
 
       // WHEN
-      const radios = getAllByRole('radio');
+      const radios = getAllByRole("radio");
       await fireEvent.click(radios[0]);
-      const boutonValider = getByRole<HTMLButtonElement>('button', { name: 'Valider' });
+      const boutonValider = getByRole<HTMLButtonElement>("button", { name: "Valider" });
 
       // THEN
       expect(boutonValider.disabled).toBeFalsy();
@@ -78,43 +80,42 @@ describe("Quizz", () => {
       it("affiche la réponse et le bouton 'Passer à l'étape suivante'", async () => {
         // GIVEN
         const { getByRole, getAllByRole, getByText } = render(Quiz, { props });
-  
+
         // WHEN
-        const radios = getAllByRole('radio');
+        const radios = getAllByRole("radio");
         const BONNE_REPONSE = radios[0];
         await fireEvent.click(BONNE_REPONSE);
-        const boutonValider = getByRole('button', { name: 'Valider' });
+        const boutonValider = getByRole("button", { name: "Valider" });
         await fireEvent.click(boutonValider);
-        const explication = getByText('Texte explication question 1')
-        const boutonEtapeSuivante = getByRole('button', { name: "Passer à l'étape suivante" });
-  
+        const explication = getByText("Texte explication question 1 OK");
+        const boutonEtapeSuivante = getByRole("button", { name: "Passer à l'étape suivante" });
+
         // THEN
         expect(explication).toBeDefined();
         expect(boutonEtapeSuivante).toBeDefined();
       });
 
-      describe('quand la réponse est incorrect', () => {
+      describe("quand la réponse est incorrect", () => {
         it("affiche un message d'erreur et le bouton 'Passer à l'étape suivante'", async () => {
           // GIVEN
           const { getByRole, getAllByRole, getByText } = render(Quiz, { props });
 
           // WHEN
-          const radios = getAllByRole('radio');
+          const radios = getAllByRole("radio");
           const MAUVAISE_REPONSE = radios[1];
           await fireEvent.click(MAUVAISE_REPONSE);
-          const boutonValider = getByRole('button', { name: 'Valider' });
+          const boutonValider = getByRole("button", { name: "Valider" });
           await fireEvent.click(boutonValider);
-          const messageErreur = getByText('Votre réponse: reponse 2');
-          const explication = getByText('Texte explication question 1')
-          const boutonEtapeSuivante = getByRole('button', { name: "Passer à l'étape suivante" });
-  
+          const messageErreur = getByText("Votre réponse: reponse 2");
+          const explication = getByText("Texte explication question 1 KO");
+          const boutonEtapeSuivante = getByRole("button", { name: "Passer à l'étape suivante" });
+
           // THEN
           expect(explication).toBeDefined();
           expect(messageErreur).toBeDefined();
           expect(boutonEtapeSuivante).toBeDefined();
-
         });
-      })
+      });
     });
   });
 
@@ -122,18 +123,18 @@ describe("Quizz", () => {
     it("affiche l'étape 2 avec la question, les réponses et le bouton 'Valider' disable", async () => {
       // GIVEN
       const { getByRole, getAllByRole } = render(Quiz, { props });
-  
+
       // WHEN
-      const radios = getAllByRole('radio');
+      const radios = getAllByRole("radio");
       await fireEvent.click(radios[1]);
-      const boutonValider = getByRole<HTMLButtonElement>('button', { name: 'Valider' });
+      const boutonValider = getByRole<HTMLButtonElement>("button", { name: "Valider" });
       await fireEvent.click(boutonValider);
-      const boutonEtapeSuivante = getByRole('button', { name: "Passer à l'étape suivante" });
+      const boutonEtapeSuivante = getByRole("button", { name: "Passer à l'étape suivante" });
       await fireEvent.click(boutonEtapeSuivante);
-      const titreEtape = getByRole('heading', {level: 2, name: 'Étape 2 sur 3 Question 2 sur 2'});
-      const boutonValider2 = getByRole<HTMLButtonElement>('button', { name: 'Valider' });
-      const intituleQuestion = getByRole('group', { name: 'Intitulé de la question 2' });
-  
+      const titreEtape = getByRole("heading", { level: 2, name: "Étape 2 sur 3 Question 2 sur 2" });
+      const boutonValider2 = getByRole<HTMLButtonElement>("button", { name: "Valider" });
+      const intituleQuestion = getByRole("group", { name: "Intitulé de la question 2" });
+
       // THEN
       expect(titreEtape).toBeDefined();
       expect(boutonValider2.disabled).toBeTruthy();
@@ -143,29 +144,29 @@ describe("Quizz", () => {
   });
 
   describe("quand j'arrive à la dernière étape", () => {
-    describe('quand toutes les réponses sont corrects', () => {
-      it('affiche un message de succès', async () => {
+    describe("quand toutes les réponses sont corrects", () => {
+      it("affiche un message de succès", async () => {
         // GIVEN
         const { getByRole, getAllByRole, getByText } = render(Quiz, { props });
-    
+
         // WHEN
-        const radios = getAllByRole('radio');
+        const radios = getAllByRole("radio");
         const BONNE_REPONSE_1 = radios[0];
         await fireEvent.click(BONNE_REPONSE_1);
-        const boutonValider = getByRole<HTMLButtonElement>('button', { name: 'Valider' });
+        const boutonValider = getByRole<HTMLButtonElement>("button", { name: "Valider" });
         await fireEvent.click(boutonValider);
-        const boutonEtapeSuivante = getByRole('button', { name: "Passer à l'étape suivante" });
+        const boutonEtapeSuivante = getByRole("button", { name: "Passer à l'étape suivante" });
         await fireEvent.click(boutonEtapeSuivante);
-        const radios2 = getAllByRole('radio');
+        const radios2 = getAllByRole("radio");
         const BONNE_REPONSE_2 = radios2[0];
         await fireEvent.click(BONNE_REPONSE_2);
-        const boutonValider2 = getByRole<HTMLButtonElement>('button', { name: 'Valider' });
+        const boutonValider2 = getByRole<HTMLButtonElement>("button", { name: "Valider" });
         await fireEvent.click(boutonValider2);
-        const boutonEtapeSuivante2 = getByRole('button', { name: "Passer à l'étape suivante" });
+        const boutonEtapeSuivante2 = getByRole("button", { name: "Passer à l'étape suivante" });
         await fireEvent.click(boutonEtapeSuivante2);
 
-        const messageSuccès = getByText('Bravo, vous avez réussi le quiz !', {exact: false});
-    
+        const messageSuccès = getByText("Bravo, vous avez réussi le quiz !", { exact: false });
+
         // THEN
         expect(messageSuccès).toBeDefined();
       });
@@ -177,22 +178,22 @@ describe("Quizz", () => {
         const { getByRole, getAllByRole, getByText } = render(Quiz, { props });
 
         // WHEN
-        const radios = getAllByRole('radio');
+        const radios = getAllByRole("radio");
         const BONNE_REPONSE = radios[0];
         await fireEvent.click(BONNE_REPONSE);
-        const boutonValider = getByRole<HTMLButtonElement>('button', { name: 'Valider' });
+        const boutonValider = getByRole<HTMLButtonElement>("button", { name: "Valider" });
         await fireEvent.click(boutonValider);
-        const boutonEtapeSuivante = getByRole('button', { name: "Passer à l'étape suivante" });
+        const boutonEtapeSuivante = getByRole("button", { name: "Passer à l'étape suivante" });
         await fireEvent.click(boutonEtapeSuivante);
-        const radios2 = getAllByRole('radio');
+        const radios2 = getAllByRole("radio");
         const MAUVAUSE_REPONSE = radios2[1];
         await fireEvent.click(MAUVAUSE_REPONSE);
-        const boutonValider2 = getByRole<HTMLButtonElement>('button', { name: 'Valider' });
+        const boutonValider2 = getByRole<HTMLButtonElement>("button", { name: "Valider" });
         await fireEvent.click(boutonValider2);
-        const boutonEtapeSuivante2 = getByRole('button', { name: "Passer à l'étape suivante" });
+        const boutonEtapeSuivante2 = getByRole("button", { name: "Passer à l'étape suivante" });
         await fireEvent.click(boutonEtapeSuivante2);
 
-        const messageSuccès = getByText('Désolé, Vous avez perdu !');
+        const messageSuccès = getByText("Désolé, Vous avez perdu !");
 
         // THEN
         expect(messageSuccès).toBeDefined();
@@ -204,19 +205,19 @@ describe("Quizz", () => {
       const { getByRole, getAllByRole } = render(Quiz, { props });
 
       // WHEN
-      const radios = getAllByRole('radio');
+      const radios = getAllByRole("radio");
       const BONNE_REPONSE = radios[0];
       await fireEvent.click(BONNE_REPONSE);
-      const boutonValider = getByRole<HTMLButtonElement>('button', { name: 'Valider' });
+      const boutonValider = getByRole<HTMLButtonElement>("button", { name: "Valider" });
       await fireEvent.click(boutonValider);
-      const boutonEtapeSuivante = getByRole('button', { name: "Passer à l'étape suivante" });
+      const boutonEtapeSuivante = getByRole("button", { name: "Passer à l'étape suivante" });
       await fireEvent.click(boutonEtapeSuivante);
-      const radios2 = getAllByRole('radio');
+      const radios2 = getAllByRole("radio");
       const MAUVAUSE_REPONSE = radios2[1];
       await fireEvent.click(MAUVAUSE_REPONSE);
-      const boutonValider2 = getByRole<HTMLButtonElement>('button', { name: 'Valider' });
+      const boutonValider2 = getByRole<HTMLButtonElement>("button", { name: "Valider" });
       await fireEvent.click(boutonValider2);
-      const boutonEtapeSuivante2 = getByRole('button', { name: "Passer à l'étape suivante" });
+      const boutonEtapeSuivante2 = getByRole("button", { name: "Passer à l'étape suivante" });
       await fireEvent.click(boutonEtapeSuivante2);
 
       // THEN

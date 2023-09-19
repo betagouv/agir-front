@@ -28,7 +28,8 @@ export class QuizRepositoryAxios implements QuizRepository {
             intitule: question.libelle,
             reponsesPossibles: question.propositions,
             ordre: question.ordre,
-            texteExplication: question.texte_riche_explication,
+            texteExplicationOK: question.texte_riche_explication,
+            texteExplicationKO: question.texte_riche_explication,
             solution: question.solution,
           };
         }),

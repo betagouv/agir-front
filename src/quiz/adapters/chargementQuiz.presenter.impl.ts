@@ -6,7 +6,8 @@ export interface QuestionViewModel {
   intitule: string;
   reponsesPossibles: string[];
   ordre: string;
-  texteExplication: string;
+  texteExplicationOK: string;
+  texteExplicationKO: string;
   solution: string;
 }
 
@@ -33,7 +34,8 @@ export class ChargementQuizPresenterImpl implements ChargementQuizzPresenter {
           intitule: question.intitule,
           reponsesPossibles: question.reponsesPossibles,
           ordre: question.ordre,
-          texteExplication: question.texteExplication,
+          texteExplicationOK: question.texteExplicationOK,
+          texteExplicationKO: question.texteExplicationKO,
           solution: question.solution,
         };
       }),

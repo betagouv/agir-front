@@ -3,7 +3,8 @@ interface QuestionsQuiz {
   id: string;
   intitule: string;
   reponsesPossibles: string[];
-  texteExplication: string;
+  texteExplicationOK: string;
+  texteExplicationKO: string;
   solution: string;
 }
 
