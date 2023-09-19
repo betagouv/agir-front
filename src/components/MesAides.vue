@@ -6,11 +6,14 @@
   <h1 class="fr-h2">Vos aides personnalisées</h1>
   <div class="fr-grid-row fr-grid-row--gutters">
     <div class="fr-col-12 fr-col-lg-8">
-      <InteractionCard class="fr-mb-2w" :interaction-view-model="aideVeloViewModel" />
-      <InteractionCard :interaction-view-model="aideRetrofitViewModel" />
+      <InteractionCard
+        v-for="aide in aides" :key="aide.id"
+        class="fr-mb-2w"
+        :interaction-view-model="aide"
+      />
     </div>
     <div class="fr-col-12 fr-col-lg-4">
-      <BilanNosGestesClimat :get-impact-value="store.valeurBilanCarbone" />
+      <BilanNosGestesClimat :get-impact-value="valeurBilanCarbone" />
     </div>
   </div>
 </template>
@@ -19,38 +22,11 @@
   import FilDAriane from "@/components/dsfr/FilDAriane.vue";
   import InteractionCard from "@/components/custom/InteractionCard.vue";
   import BilanNosGestesClimat from "@/components/BilanNosGestesClimat.vue";
-  import { utilisateurStore } from "@/store/utilisateur";
   import { InteractionViewModel } from "@/interactions/adapters/interactions.presenter.impl";
+  import { EmpreinteViewModel } from "@/bilan/adapters/chargementEmpreinte.presenter.impl";
 
-  const store = utilisateurStore();
-  const aideRetrofitViewModel: InteractionViewModel = {
-    id: "",
-    titre: "Simulez vos aides pour convertir votre voiture thermique en électrique",
-    sousTitre: "",
-    categorie: "🚗 Transport du quotidien",
-    nombreDePointsAGagner: "25",
-    miseEnAvant: "",
-    type: "AIDE",
-    illustrationURL: "https://picsum.photos/200/300",
-    url: "/mes-aides/retrofit",
-    isUrlExterne: false,
-    duree: "⏱️ 5 minutes",
-    estBloquee: false,
-    idDuContenu: "",
-  };
-  const aideVeloViewModel: InteractionViewModel = {
-    id: "",
-    titre: "Simulez vos aides pour l'achat d'un vélo",
-    sousTitre: "",
-    categorie: "🚗 Transport du quotidien",
-    nombreDePointsAGagner: "25",
-    miseEnAvant: "",
-    type: "AIDE",
-    illustrationURL: "https://picsum.photos/200/300",
-    url: "/mes-aides/velo",
-    isUrlExterne: false,
-    duree: "⏱️ 5 minutes",
-    estBloquee: false,
-    idDuContenu: "",
-  };
+  defineProps<{
+    aides: InteractionViewModel[]
+    valeurBilanCarbone: EmpreinteViewModel
+  }>();  
 </script>
