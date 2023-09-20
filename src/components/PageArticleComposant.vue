@@ -18,38 +18,19 @@
         </div>
       </div>
       <div class="fr-col-12 fr-col-md-4">
-        <BilanNosGestesClimat :get-impact-value="store.valeurBilanCarbone" />
+        <slot />
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
-import BilanNosGestesClimat from "./BilanNosGestesClimat.vue";
 import FilDAriane from "./dsfr/FilDAriane.vue";
-import { utilisateurStore } from "@/store/utilisateur";
-import { useRouter } from "vue-router";
-import { ArticleCMS, ChargerContenuCms } from "@/cms/chargerContenuCms";
+import { ArticleCMS } from "@/cms/chargerContenuCms";
 
-const store = utilisateurStore();
-const router = useRouter();
-
-const article = ref<ArticleCMS>({
-  titre: "",
-  texte: "",
-  sousTitre: ""
-});
-
-onMounted(async () => {
-  const articleUsecase = await new ChargerContenuCms().charger(store.interactionEnCours!.idDuContenu);
-  if (articleUsecase) {
-    article.value = articleUsecase;
-    console.log(article);
-  } else {
-    await router.push("/not-found");
-  }
-});
+defineProps<{
+  article: ArticleCMS;
+}>();
 </script>
 
 <style>

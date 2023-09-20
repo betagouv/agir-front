@@ -3,7 +3,6 @@ import Dashboard from "@/components/Dashboard.vue";
 import { createRouter, createWebHistory } from "vue-router";
 
 import PageQuiz from "@/components/pages/PageQuiz.vue";
-import Article from "@/components/Article.vue";
 import PageAidesRetrofit from "@/components/pages/PageAidesRetrofit.vue";
 import PageAidesVelo from "@/components/pages/PageAidesVelo.vue";
 import Coach from "@/components/Coach.vue";
@@ -16,6 +15,8 @@ import FranceConnectCallBack from "@/components/FranceConnectCallBack.vue";
 import PageCompte from "@/components/pages/PageCompte.vue";
 import PageAccueil from "@/components/pages/PageAccueil.vue";
 import PageCreationCompte from "@/components/pages/PageCreationCompte.vue";
+import PageArticle from "@/components/pages/PageArticle.vue";
+import PagePrevisualisationArticle from "@/components/pages/PagePrevisualisationArticle.vue";
 
 const appName = "Agir ! -";
 const routes = [
@@ -76,9 +77,22 @@ const routes = [
     },
   },
   {
-    path: "/article/:titre",
+    path: "/article",
     name: "article",
-    component: Article,
+    children: [
+      {
+        path: "/:titre",
+        component: PageArticle,
+        // anybody can read a post
+        meta: { estPublique: false },
+      },
+      {
+        path: "previsualisation/:id",
+        component: PagePrevisualisationArticle,
+        // anybody can read a post
+        meta: { estPublique: true },
+      },
+    ],
   },
   {
     path: "/mon-compte",
