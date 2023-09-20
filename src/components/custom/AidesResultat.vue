@@ -11,19 +11,22 @@
       <div class="background--white border border-radius--md fr-p-3w">
         <h2 class="fr-h4">Vous pouvez bénéficier des aides vélo suivantes :</h2>
         <div v-for="(aides, index) in simulationAidesViewModel" :key="index">
-          <Accordeon v-if="aides.length" :label="`Acheter un vélo ${index}`" :nameId="`aides-${index}`">
-            <ul class="list-style-none fr-m-0 fr-p-0">
-              <li v-for="(aide, index) in aides" :key="index">
-                <AideDetail
-                  :titre="aide.libelle"
-                  label-du-badge="A définir"
-                  :description="aide.description"
-                  :url-externe="aide.lien"
-                  :valeur-aide="aide.montant"
-                  :url-logo="aide.logo"
-                />
-              </li>
-            </ul>
+          <Accordeon v-if="aides.length" :nameId="`aides-${index}`">
+            <template v-slot:titre>Acheter un vélo {{ index }}</template>
+            <template v-slot:contenu>
+              <ul class="list-style-none fr-m-0 fr-p-0">
+                <li v-for="(aide, index) in aides" :key="index">
+                  <AideDetail
+                    :titre="aide.libelle"
+                    label-du-badge="A définir"
+                    :description="aide.description"
+                    :url-externe="aide.lien"
+                    :valeur-aide="aide.montant"
+                    :url-logo="aide.logo"
+                  />
+                </li>
+              </ul>
+            </template>
           </Accordeon>
         </div>
       </div>

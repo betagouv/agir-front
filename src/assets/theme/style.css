@@ -123,6 +123,11 @@ h3 {
   border: 1px solid rgba(0, 0, 0, 0.19);
 }
 
+.border-x {
+  border-right: 1px solid rgba(0, 0, 0, 0.19);
+  border-left: 1px solid rgba(0, 0, 0, 0.19);
+}
+
 .border--bleu {
   border: 1px solid var(--blue-france-main-525);
 }
