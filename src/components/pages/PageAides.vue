@@ -1,45 +1,26 @@
 <template>
-  <MesAides
-    :aides="aides"
-    :valeurBilanCarbone="store.valeurBilanCarbone"
-  />
+  <div v-if="isLoading">Chargement ...</div>
+  <div v-else-if="!aides">Une erreur est survenue</div>
+  <MesAides v-else :aidesGroupesParCategorie="aides" />
 </template>
 
 <script setup lang="ts">
-  import { utilisateurStore } from '@/store/utilisateur';
+  import { onMounted, ref } from 'vue';
+  import { ChargementAidesPresenterImpl } from '@/aides/adapters/chargementAides.presenter.impl';
+  import { ChargementAidesInMemoryRepository } from '@/aides/adapters/chargementAidesInMemory.repository';
+  import ChargementAidesUsecase from '@/aides/chargementAides.usecase';
+  import { AidesViewModel } from '@/aides/ports/chargementAides.presenter';
   import MesAides from '@/components/MesAides.vue';
 
-  const store = utilisateurStore();
-  const aides = [
-    {
-      id: "",
-      titre: "Simulez vos aides pour l'achat d'un vélo",
-      sousTitre: "",
-      categorie: "🚗 Transport du quotidien",
-      nombreDePointsAGagner: "25",
-      miseEnAvant: "",
-      type: "AIDE",
-      illustrationURL: "https://picsum.photos/200/300",
-      url: "/mes-aides/velo",
-      isUrlExterne: false,
-      duree: "⏱️ 5 minutes",
-      estBloquee: false,
-      idDuContenu: "",
-    },
-    {
-      id: "",
-      titre: "Simulez vos aides pour convertir votre voiture thermique en électrique",
-      sousTitre: "",
-      categorie: "🚗 Transport du quotidien",
-      nombreDePointsAGagner: "25",
-      miseEnAvant: "",
-      type: "AIDE",
-      illustrationURL: "https://picsum.photos/200/300",
-      url: "/mes-aides/retrofit",
-      isUrlExterne: false,
-      duree: "⏱️ 5 minutes",
-      estBloquee: false,
-      idDuContenu: "",
-    }
-  ]
+  const aides = ref<AidesViewModel>();
+  const isLoading = ref<boolean>(true);
+
+  function mapAides(aidesViewModel: AidesViewModel) {
+    aides.value = aidesViewModel;
+  }
+
+  onMounted(async () => {
+    await new ChargementAidesUsecase(new ChargementAidesInMemoryRepository()).execute(new ChargementAidesPresenterImpl(mapAides));
+    isLoading.value = false;
+  });
 </script>
