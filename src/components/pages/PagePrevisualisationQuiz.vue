@@ -1,15 +1,13 @@
 <template>
   <div v-if="isLoading">Chargement...</div>
-  <div v-else-if="!quizViewModel || !store.interactionEnCours">Une erreur est survenue</div>
   <PageQuizComposant
-    v-else
+    v-if="quizViewModel"
     :quiz-view-model="quizViewModel"
-    :nombreDePointsAGagner="store.interactionEnCours ? store.interactionEnCours.nombreDePointsAGagner : '0'"
-    :id-utilisateur="store.id"
-    :id-interaction="store.interactionEnCours.id"
-    :is-mode-previsualisation="false"
+    nombreDePointsAGagner="0"
+    id-utilisateur="1"
+    id-interaction="0"
+    :is-mode-previsualisation="true"
   >
-    <BilanNosGestesClimat :get-impact-value="store.valeurBilanCarbone" />
   </PageQuizComposant>
 </template>
 
@@ -18,14 +16,10 @@ import { onMounted, ref } from "vue";
 import { useRoute } from "vue-router";
 import { ChargementQuizUsecase } from "@/quiz/chargementQuiz.usecase";
 import { ChargementQuizPresenterImpl, QuizViewModel } from "@/quiz/adapters/chargementQuiz.presenter.impl";
-import { utilisateurStore } from "@/store/utilisateur";
 import PageQuizComposant from "@/components/custom/PageQuizComposant.vue";
 import { QuizRepositoryCMSAxios } from "@/quiz/adapters/quizRepositoryCMSAxios";
-import BilanNosGestesClimat from "@/components/BilanNosGestesClimat.vue";
 
 const quizViewModel = ref<QuizViewModel>();
-const store = utilisateurStore();
-const route = useRoute();
 const isLoading = ref<boolean>(false);
 
 const mapValuesQuiz = (viewModel: QuizViewModel) => {
@@ -33,6 +27,7 @@ const mapValuesQuiz = (viewModel: QuizViewModel) => {
 };
 
 const chargementQuizz = async () => {
+  const route = useRoute();
   isLoading.value = true;
   const idQuiz = Array.isArray(route.params.id) ? route.params.id[0] : route.params.id;
   const chargementQuizzUsecase = new ChargementQuizUsecase(new QuizRepositoryCMSAxios());
