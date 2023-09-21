@@ -31,7 +31,7 @@
   const optionsSelectionnees = ref<string[]>([]);
 
   onMounted(() => {
-    optionsSelectionnees.value = props.options.filter(({checked}) => checked).map(({id}) => id);    
+    optionsSelectionnees.value = props.options.filter(({checked}) => checked).map(({id}) => id);
   });
 
   const onInputChange = (event: Event) => {
