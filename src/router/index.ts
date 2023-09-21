@@ -17,6 +17,7 @@ import PageAccueil from "@/components/pages/PageAccueil.vue";
 import PageCreationCompte from "@/components/pages/PageCreationCompte.vue";
 import PageArticle from "@/components/pages/PageArticle.vue";
 import PagePrevisualisationArticle from "@/components/pages/PagePrevisualisationArticle.vue";
+import PagePrevisualisationQuiz from "@/components/pages/PagePrevisualisationQuiz.vue";
 
 const appName = "Agir ! -";
 const routes = [
@@ -46,6 +47,15 @@ const routes = [
     component: PageQuiz,
     meta: {
       title: `${appName} Quiz`,
+    },
+  },
+  {
+    path: "/coach/quiz/previsualisation/:id",
+    name: "quiz-previsualisation",
+    component: PagePrevisualisationQuiz,
+    meta: {
+      title: `${appName} Quiz`,
+      estPublique: true,
     },
   },
   {
@@ -83,13 +93,11 @@ const routes = [
       {
         path: "/:titre",
         component: PageArticle,
-        // anybody can read a post
         meta: { estPublique: false },
       },
       {
         path: "previsualisation/:id",
         component: PagePrevisualisationArticle,
-        // anybody can read a post
         meta: { estPublique: true },
       },
     ],

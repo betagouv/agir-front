@@ -34,6 +34,7 @@ const props = {
   nombreDePointsAGagner: "10",
   idUtilisateur: "idUtilisateur",
   idInteraction: "idInteraction",
+  isModePrevisualisation: false,
 };
 
 describe("Quizz", () => {
@@ -200,8 +201,15 @@ describe("Quizz", () => {
       });
     });
 
-    it("appel le usecase envoyer les donnees du quizz à l'intéraction avec l'id de l'utilisateur, l'id de l'interaction et son pourcentage de bonnes réponses", async () => {
+    it("appel le usecase envoyer les donnees du quizz à l'intéraction avec l'id de l'utilisateur, l'id de l'interaction et son pourcentage de bonnes réponses si le quiz n'est pas en mode preview", async () => {
       // GIVEN
+      const props = {
+        quizViewModel: quizzViewModelMock,
+        nombreDePointsAGagner: "10",
+        idUtilisateur: "idUtilisateur",
+        idInteraction: "idInteraction",
+        isModePrevisualisation: false,
+      };
       const { getByRole, getAllByRole } = render(Quiz, { props });
 
       // WHEN
@@ -222,6 +230,36 @@ describe("Quizz", () => {
 
       // THEN
       expect(envoyerDonneesQuizInteractionMock).toHaveBeenNthCalledWith(1, "idUtilisateur", "idInteraction", 1, 2);
+    });
+    it("si le quizz est en mode preview ne doit pas appeler le usecase d'envoi des données du quizz", async () => {
+      // GIVEN
+      const props = {
+        quizViewModel: quizzViewModelMock,
+        nombreDePointsAGagner: "10",
+        idUtilisateur: "idUtilisateur",
+        idInteraction: "idInteraction",
+        isModePrevisualisation: true,
+      };
+      const { getByRole, getAllByRole } = render(Quiz, { props });
+
+      // WHEN
+      const radios = getAllByRole("radio");
+      const BONNE_REPONSE = radios[0];
+      await fireEvent.click(BONNE_REPONSE);
+      const boutonValider = getByRole<HTMLButtonElement>("button", { name: "Valider" });
+      await fireEvent.click(boutonValider);
+      const boutonEtapeSuivante = getByRole("button", { name: "Passer à l'étape suivante" });
+      await fireEvent.click(boutonEtapeSuivante);
+      const radios2 = getAllByRole("radio");
+      const MAUVAUSE_REPONSE = radios2[1];
+      await fireEvent.click(MAUVAUSE_REPONSE);
+      const boutonValider2 = getByRole<HTMLButtonElement>("button", { name: "Valider" });
+      await fireEvent.click(boutonValider2);
+      const boutonEtapeSuivante2 = getByRole("button", { name: "Passer à l'étape suivante" });
+      await fireEvent.click(boutonEtapeSuivante2);
+
+      // THEN
+      expect(envoyerDonneesQuizInteractionMock).not.toHaveBeenCalledWith(1, "idUtilisateur", "idInteraction", 1, 2);
     });
   });
 });
