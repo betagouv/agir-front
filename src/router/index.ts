@@ -42,22 +42,28 @@ const routes = [
   },
   { path: "/mon-tableau-de-bord", name: "dashboard", component: Dashboard },
   {
-    path: "/coach/quiz/:id",
-    name: "quiz",
-    component: PageQuiz,
-    meta: {
-      title: `${appName} Quiz`,
-    },
+    path: "/coach/quiz/",
+    children: [
+      {
+        path: ":id",
+        name: "quiz",
+        component: PageQuiz,
+        meta: {
+          title: `${appName} Quiz`,
+        },
+      },
+      {
+        path: "previsualisation/:id",
+        name: "quiz-previsualisation",
+        component: PagePrevisualisationQuiz,
+        meta: {
+          title: `${appName} Quiz`,
+          estPublique: true,
+        },
+      },
+    ],
   },
-  {
-    path: "/coach/quiz/previsualisation/:id",
-    name: "quiz-previsualisation",
-    component: PagePrevisualisationQuiz,
-    meta: {
-      title: `${appName} Quiz`,
-      estPublique: true,
-    },
-  },
+
   {
     path: "/coach",
     name: "coach",
