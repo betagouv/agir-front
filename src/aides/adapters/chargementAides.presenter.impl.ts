@@ -17,7 +17,7 @@ export class ChargementAidesPresenterImpl implements ChargementAidesPresenter {
         titre: element.titre,
         categorie: element.categorie,
         contenu: element.contenu,
-        isSimulateur: true,
+        isSimulateur: element.isSimulateur,
         url: element.url
       }
 

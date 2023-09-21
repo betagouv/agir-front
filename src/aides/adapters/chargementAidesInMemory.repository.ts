@@ -17,6 +17,7 @@ export class ChargementAidesInMemoryRepository implements ChargementAidesReposit
         isUrlExterne: false,
         contenu: "<h3>Titre test</h3><p>lorem ipsum dolor test</p><ul><li>Item 1</li><li>Item 2</li></ul>",
         idDuContenu: "",
+        isSimulateur: true,
       },
       {
         id: "id-2",
@@ -31,6 +32,7 @@ export class ChargementAidesInMemoryRepository implements ChargementAidesReposit
         isUrlExterne: false,
         contenu: "<h3>Titre test</h3><p>lorem ipsum dolor test</p>",
         idDuContenu: "",
+        isSimulateur: false
       },
       {
         id: "id-3",
@@ -45,6 +47,7 @@ export class ChargementAidesInMemoryRepository implements ChargementAidesReposit
         isUrlExterne: false,
         contenu: "<h3>Titre test</h3><p>lorem ipsum dolor test</p>",
         idDuContenu: "",
+        isSimulateur: true
       }
     ]);
   }

@@ -14,11 +14,11 @@ export interface Aides {
   url: string,
   isUrlExterne: boolean,
   idDuContenu: string,
+  isSimulateur: boolean
 }
 
 export default class ChargementAidesUsecase {
   constructor(private chargementAidesRepositoryRepository: ChargementAidesRepository) { }
-
 
   async execute(presenter: ChargementAidesPresenter) {
     const reponse = await this.chargementAidesRepositoryRepository.getAides();
