@@ -35,8 +35,14 @@
                 </span>
               </template>
               <template v-slot:contenu>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Perferendis, adipisci consequatur? Temporibus accusantium similique fugiat, nam nihil, voluptatibus dolor odit magnam delectus rem sapiente consequuntur repellendus eligendi nesciunt voluptatum exercitationem!</p>
-                <a :href="aide.url" class="fr-btn fr-btn--icon-left fr-icon-arrow-right-line">Estimer le montant des aides</a>
+                <div v-html="aide.contenu" />
+                <router-link
+                  v-if="aide.isSimulateur"
+                  :to="{ name: aide.url}"
+                  class="fr-btn fr-btn--icon-left fr-icon-arrow-right-line"
+                >
+                  Estimer le montant des aides
+                </router-link>
               </template>
             </Accordeon>
           </div>

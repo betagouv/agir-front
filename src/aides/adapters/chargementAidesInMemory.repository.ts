@@ -13,10 +13,9 @@ export class ChargementAidesInMemoryRepository implements ChargementAidesReposit
         miseEnAvant: "",
         type: "AIDE",
         illustrationURL: "https://picsum.photos/200/300",
-        url: "/mes-aides/velo",
+        url: "mes-aides-velo",
         isUrlExterne: false,
-        duree: "⏱️ 5 minutes",
-        estBloquee: false,
+        contenu: "<h3>Titre test</h3><p>lorem ipsum dolor test</p><ul><li>Item 1</li><li>Item 2</li></ul>",
         idDuContenu: "",
       },
       {
@@ -28,10 +27,9 @@ export class ChargementAidesInMemoryRepository implements ChargementAidesReposit
         miseEnAvant: "",
         type: "AIDE",
         illustrationURL: "https://picsum.photos/200/300",
-        url: "/mes-aides/retrofit",
+        url: "mes-aides-retrofit",
         isUrlExterne: false,
-        duree: "⏱️ 5 minutes",
-        estBloquee: false,
+        contenu: "<h3>Titre test</h3><p>lorem ipsum dolor test</p>",
         idDuContenu: "",
       },
       {
@@ -43,10 +41,9 @@ export class ChargementAidesInMemoryRepository implements ChargementAidesReposit
         miseEnAvant: "",
         type: "AIDE",
         illustrationURL: "https://picsum.photos/200/300",
-        url: "/mes-aides/retrofit",
+        url: "mes-aides-velo",
         isUrlExterne: false,
-        duree: "⏱️ 5 minutes",
-        estBloquee: false,
+        contenu: "<h3>Titre test</h3><p>lorem ipsum dolor test</p>",
         idDuContenu: "",
       }
     ]);

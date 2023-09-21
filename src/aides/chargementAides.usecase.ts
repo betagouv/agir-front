@@ -6,14 +6,13 @@ export interface Aides {
   titre: string,
   sousTitre: string,
   categorie: string,
+  contenu: string,
   nombreDePointsAGagner: string,
   miseEnAvant: string,
   type: string,
   illustrationURL: string,
   url: string,
   isUrlExterne: boolean,
-  duree: string,
-  estBloquee: boolean,
   idDuContenu: string,
 }
 

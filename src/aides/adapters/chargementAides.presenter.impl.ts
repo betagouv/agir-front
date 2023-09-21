@@ -1,5 +1,5 @@
 import { Aides } from "@/aides/chargementAides.usecase";
-import { ChargementAidesPresenter, AidesViewModel } from "@/aides/ports/chargementAides.presenter";
+import { ChargementAidesPresenter, AideViewModel, AidesViewModel } from "@/aides/ports/chargementAides.presenter";
 
 export class ChargementAidesPresenterImpl implements ChargementAidesPresenter {
   constructor(private _viewModel: (AidesViewModel: AidesViewModel) => void) { }
@@ -11,7 +11,17 @@ export class ChargementAidesPresenterImpl implements ChargementAidesPresenter {
       if (!map[element.categorie]) {
         map[element.categorie] = [];
       }
-      map[element.categorie].push(element);
+
+      const elementToPush: AideViewModel = {
+        id: element.id,
+        titre: element.titre,
+        categorie: element.categorie,
+        contenu: element.contenu,
+        isSimulateur: true,
+        url: element.url
+      }
+
+      map[element.categorie].push(elementToPush);
     });
 
     return map;
