@@ -1,7 +1,7 @@
-import axios, { AxiosInstance } from "axios";
+import axios from "redaxios";
 
 export class AxiosFactory {
-  public static getAxios(): AxiosInstance {
+  public static getAxios() {
     return axios.create({
       baseURL: import.meta.env.VITE_API_URL,
       headers: {
@@ -11,7 +11,7 @@ export class AxiosFactory {
     });
   }
 
-  public static getCMSAxios(): AxiosInstance {
+  public static getCMSAxios() {
     return axios.create({
       baseURL: import.meta.env.VITE_API_URL_CMS,
       headers: {

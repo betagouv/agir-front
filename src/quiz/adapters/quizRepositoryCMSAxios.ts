@@ -1,6 +1,6 @@
 import { AxiosFactory } from "@/axios.factory";
 import { Quiz, QuizRepository } from "@/quiz/ports/quizRepository";
-import { AxiosResponse } from "axios";
+import { Response } from "redaxios";
 
 interface ReponsesQuizCMSModel {
   id: string;
@@ -30,9 +30,7 @@ export class QuizRepositoryCMSAxios implements QuizRepository {
   async getQuiz(idQuizz: string): Promise<Quiz> {
     try {
       const axiosInstance = AxiosFactory.getCMSAxios();
-      const response: AxiosResponse<QuizCMSModel> = await axiosInstance.get<QuizCMSModel>(
-        `quizzes/${idQuizz}?populate[0]=questions&populate[1]=questions.reponses`
-      );
+      const response: Response<QuizCMSModel> = await axiosInstance.get<QuizCMSModel>(`quizzes/${idQuizz}?populate[0]=questions&populate[1]=questions.reponses`);
       return {
         titre: response.data.data.attributes.titre,
         questions: response.data.data.attributes.questions.map((question, index) => {
