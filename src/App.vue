@@ -2,12 +2,12 @@
 import Header from "@/components/Header.vue";
 import Footer from "@/components/dsfr/Footer.vue";
 import { computed } from "vue";
-import { NavigationGuardNext, RouteLocationNormalized, useRoute } from "vue-router";
+import { NavigationGuardNext, RouteLocationNormalized } from "vue-router";
 import router from "@/router";
 import { utilisateurStore } from "@/store/utilisateur";
 const afficherLeHeaderEtFooter = computed({
   get() {
-    return useRoute().name !== "authentification";
+    return true;
   },
   set() {},
 });
