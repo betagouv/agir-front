@@ -9,21 +9,19 @@
         <BoutonFranceConnect />
       </div>
       <div class="separateur fr-mb-2v">ou</div>
-      <h3>Vous avez déjà un compte</h3>
       <div class="fr-col-12">
-        <div class="fr-col-12 fr-col-lg-5">
-          <fieldset class="fr-fieldset">
-            <div class="fr-fieldset__element">
-              <div class="fr-input-group">
-                <label class="fr-label" for="user-name-1829"> Nom d'utilisateur </label>
-                <input class="fr-input" spellcheck="false" autocomplete="user-name" name="user-name" id="user-name-1829" type="text" v-model="username" />
-              </div>
+        <h2 class="text--center">Vous avez déjà un compte</h2>
+        <fieldset class="fr-fieldset">
+          <div class="fr-fieldset__element">
+            <div class="fr-input-group">
+              <label class="fr-label" for="user-name-1829"> Nom d'utilisateur </label>
+              <input class="fr-input" spellcheck="false" autocomplete="user-name" name="user-name" id="user-name-1829" type="text" v-model="username" />
             </div>
-          </fieldset>
-        </div>
+          </div>
+        </fieldset>
+        <button class="fr-btn display-block text--center full-width" type="submit">Se connecter</button>
       </div>
       <div class="fr-col-12">
-        <button class="fr-btn" type="submit">Se connecter</button>
         <div class="separateur--full fr-mt-4w"></div>
         <h2 class="text--center fr-mt-6w">Première visite ?</h2>
         <ul class="fr-btns-group">
