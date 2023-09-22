@@ -6,7 +6,7 @@ import PageQuiz from "@/components/pages/PageQuiz.vue";
 import PageAidesRetrofit from "@/components/pages/PageAidesRetrofit.vue";
 import PageAidesVelo from "@/components/pages/PageAidesVelo.vue";
 import Coach from "@/components/Coach.vue";
-import MesAides from "@/components/MesAides.vue";
+import PageAides from "@/components/pages/PageAides.vue";
 import Page404 from "@/components/pages/Page404.vue";
 import Communaute from "@/components/Communaute.vue";
 import SuiviDuJour from "@/components/SuiviDuJour.vue";
@@ -80,7 +80,7 @@ const routes = [
       title: `${appName} Suivi du jour`,
     },
   },
-  { path: "/mes-aides", name: "mes-aides", component: MesAides },
+  { path: "/mes-aides", name: "mes-aides", component: PageAides },
   { path: "/mes-aides/retrofit", name: "mes-aides-retrofit", component: PageAidesRetrofit },
   { path: "/mes-aides/velo", name: "mes-aides-velo", component: PageAidesVelo },
   { path: "/communaute", name: "communaute", component: Communaute },

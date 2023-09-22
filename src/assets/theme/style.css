@@ -24,71 +24,22 @@ body {
   width: 100%;
 }
 
-.contain {
-  width: 100%;
-  max-width: 1200px;
-  margin: auto;
-}
-
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
 }
-
-.fil-ariane {
-  text-align: left;
-}
-
 .link-as-btn:hover {
   background: #1212ff;
   color: white;
 }
-button:hover {
-  border-color: #646cff;
-}
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-.card {
-  padding: 2em;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-}
-
-@media only screen and (min-width: 1000px) {
-  .dashboard-card-container {
-    width: 40vh;
-    height: auto;
-  }
-}
 a.fr-breadcrumb__link {
   color: #666666;
-}
-/* factorisation from component */
-.dashboard-card-item {
-  border-radius: 6px;
-  border: 1px solid rgba(0, 0, 0, 0.19);
-  background: #fff;
-}
-.fr-tile {
-  box-shadow: unset;
-}
-.card-item-container {
-  align-items: flex-start;
-  text-align: left;
 }
 h2 {
   font-size: 24px;
@@ -98,6 +49,7 @@ h3 {
   font-size: 18px;
   margin-right: 10px;
 }
+
 
 .text--white {
   color: #fff;
@@ -169,6 +121,11 @@ h3 {
 
 .border {
   border: 1px solid rgba(0, 0, 0, 0.19);
+}
+
+.border-x {
+  border-right: 1px solid rgba(0, 0, 0, 0.19);
+  border-left: 1px solid rgba(0, 0, 0, 0.19);
 }
 
 .border--bleu {

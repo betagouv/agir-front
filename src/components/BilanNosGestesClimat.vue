@@ -5,12 +5,15 @@
       <span class="fr-h3 fr-text--bold">{{ getImpactValue.bilan }}</span> tonnes de CO₂-e / an
     </p>
     <p class="fr-mb-2v">propulsé par <img src="/logo_ngc.png" alt="Nos gestes climat" /></p>
-    <Accordeon nameId="accordeonBilan" label="Voir le détail">
-      <JaugeNosGestesClimat class="fr-mb-3v" libelle="🥦 Alimentation" :valeur="getImpactValue.detail.alimentation" couleur="#F28622" />
-      <JaugeNosGestesClimat class="fr-mb-3v" libelle="🚗 Transports" :valeur="getImpactValue.detail.transport" couleur="#474EFF" />
-      <JaugeNosGestesClimat class="fr-mb-3v" libelle="🏛️ Services sociétaux" :valeur="getImpactValue.detail.servicesSocietaux" couleur="#809769" />
-      <JaugeNosGestesClimat class="fr-mb-3v" libelle="🏡 Logement" :valeur="getImpactValue.detail.logement" couleur="#F8BE00" />
-      <JaugeNosGestesClimat class="fr-mb-3v" libelle="🛒 Consommation" :valeur="getImpactValue.detail.divers" couleur="#5C26D1" />
+    <Accordeon nameId="accordeonBilan">
+      <template v-slot:titre>Voir le détail</template>
+      <template v-slot:contenu>
+        <JaugeNosGestesClimat class="fr-mb-3v" libelle="🥦 Alimentation" :valeur="getImpactValue.detail.alimentation" couleur="#F28622" />
+        <JaugeNosGestesClimat class="fr-mb-3v" libelle="🚗 Transports" :valeur="getImpactValue.detail.transport" couleur="#474EFF" />
+        <JaugeNosGestesClimat class="fr-mb-3v" libelle="🏛️ Services sociétaux" :valeur="getImpactValue.detail.servicesSocietaux" couleur="#809769" />
+        <JaugeNosGestesClimat class="fr-mb-3v" libelle="🏡 Logement" :valeur="getImpactValue.detail.logement" couleur="#F8BE00" />
+        <JaugeNosGestesClimat class="fr-mb-3v" libelle="🛒 Consommation" :valeur="getImpactValue.detail.divers" couleur="#5C26D1" />
+      </template>
     </Accordeon>
   </CarteVierge>
 </template>
