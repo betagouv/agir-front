@@ -1,8 +1,18 @@
 <template>
-  <form
-    class="fr-col-12 fr-col-lg-6 fr-mx-auto fr-mb-0 background--white fr-p-4w border border-radius--md"
-    @submit.prevent="performCreerCompteUtilisateur"
-  >
+  <div class="fr-grid-row fr-grid-row--gutters">
+    <div class="fr-col-12 fr-col-lg-7">
+      <h1 class="inscription__titre">
+        <img alt="Plateforme Agir :" src="/logo_agir.png" class="fr-mb-3w display-block"/>
+        Devenez acteur de la transition écologique !
+      </h1>
+      <ul class="fr-text--lg">
+        <li>Un accompagnement personnalisé adapté en fonction de vos revenus, là où vous habitez et vos goûts</li>
+        <li>Un suivi au quotidien</li>
+        <li>Des articles pour apprendre de nouvelles choses</li>
+      </ul>
+      <p class="fr-h2">+ de 200 000 acteurs déjà inscrits</p>
+    </div>
+  <form class="fr-col-12 fr-col-lg-5 fr-mx-auto fr-mb-0 background--white fr-p-4w border border-radius--md" @submit.prevent="performCreerCompteUtilisateur">
     <fieldset class="fr-mb-0 fr-fieldset">
       <legend class="fr-fieldset__legend fr-px-0 fr-mx-0" id="identity-fieldset-legend">
         <h2>Création de compte sur Agir</h2>
@@ -56,6 +66,8 @@
       </div>
     </fieldset>
   </form>
+</div>
+
 </template>
 
 <script setup lang="ts">
@@ -93,10 +105,17 @@
   };
 </script>
 <style scoped>
-  .separateur {
-    position: relative;
-    text-align: center;
-    width: 100%;
+
+@media (min-width: 62rem) {
+  .inscription__titre {
+    margin-top: 6.25rem;
+  }
+
+}
+.separateur {
+  position: relative;
+  text-align: center;
+  width: 100%;
 
     &&:before,
     &&:after {
