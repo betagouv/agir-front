@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import PageHeader from "@/components/Header.vue";
+import PageHeader from "@/components/PageHeader.vue";
 import Footer from "@/components/dsfr/Footer.vue";
 import { computed } from "vue";
 import { NavigationGuardNext, RouteLocationNormalized } from "vue-router";

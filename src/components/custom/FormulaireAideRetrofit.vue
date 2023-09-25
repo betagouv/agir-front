@@ -10,13 +10,13 @@
         <label class="fr-label" for="text-input-rfr"> Revenu fiscal de référence </label>
         <input class="fr-input" v-model="revenuFiscal" name="code-postal" id="text-input-rfr" type="text" />
       </div>
-      <button class="fr-mt-2v fr-btn">Valider</button>
+      <button class="fr-mt-2v fr-btn" :disabled="isDisabled">Valider</button>
     </form>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { SimulerAideRetrofitPresenterImpl } from "@/aides/adapters/simulerAideRetrofit.presenter.impl";
 import { SimulerAideRetrofitRepositoryAxios } from "@/aides/adapters/simulerAideRetrofit.repository.axios";
 import SimulerAideRetrofitUsecase from "@/aides/simulerAideRetrofit.usecase";
@@ -28,6 +28,9 @@ const emit = defineEmits(["submit-simulation"]);
 const codePostal = ref(store.utilisateur.codePostal);
 const revenuFiscal = ref("");
 
+const isDisabled = computed(() => {
+  return codePostal.value.trim() === "" || revenuFiscal.value.trim() === "";
+});
 const submitForm = () => {
   const useCase = new SimulerAideRetrofitUsecase(new SimulerAideRetrofitRepositoryAxios());
 
