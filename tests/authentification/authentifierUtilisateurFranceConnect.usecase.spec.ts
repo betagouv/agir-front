@@ -18,6 +18,7 @@ class UtilisateurRepositoryForTest implements UtilisateurRepository {
     return Promise.resolve({
       id: "4df5cd01-ae3e-46fa-99d4-9c18f696b6ba",
       nom: "DUBOIS",
+      codePostal: "75000",
     });
   }
 }
@@ -27,7 +28,7 @@ class SpySessionRepository implements SessionRepository {
     return this._utilisateur;
   }
 
-  private _utilisateur: Utilisateur = { id: "", nom: "" };
+  private _utilisateur: Utilisateur = { id: "", nom: "", codePostal: "" };
 
   sauvegarderUtilisateur(utilisateur: Utilisateur) {
     this._utilisateur = utilisateur;
@@ -46,9 +47,10 @@ describe("Fichier de tests concernant l'authentification France Connect", () => 
     );
     // THEN
     expect(utilisateurRepositoryForTest.idUtilisateur).toStrictEqual("4df5cd01-ae3e-46fa-99d4-9c18f696b6ba");
-    expect(spySessionRepository.utilisateur).toStrictEqual({
+    expect(spySessionRepository.utilisateur).toStrictEqual<Utilisateur>({
       id: "4df5cd01-ae3e-46fa-99d4-9c18f696b6ba",
       nom: "DUBOIS",
+      codePostal: "75000",
     });
   });
 });

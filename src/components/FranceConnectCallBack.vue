@@ -1,4 +1,6 @@
-<template></template>
+<template>
+  <div />
+</template>
 <script setup lang="ts">
 import { onMounted } from "vue";
 import { useRoute } from "vue-router";
@@ -20,7 +22,7 @@ onMounted(async () => {
   usecase.execute(token).then(() => {
     const requestedRoute = sessionStorage.getItem("requestedRoute");
     sessionStorage.removeItem("requestedRoute");
-    router.push(requestedRoute || { name: "coach", state: { utilisateur: store.utilisateur } });
+    router.push(requestedRoute || { name: "coach", state: { utilisateur: store.utilisateur.nom } });
     sendIdNGC();
   });
 });

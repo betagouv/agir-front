@@ -4,16 +4,18 @@ import { InteractionViewModel } from "@/interactions/adapters/interactions.prese
 import { defineStore } from "pinia";
 
 interface State {
-  utilisateur: string;
-  id: string;
+  utilisateur: Utilisateur;
   valeurBilanCarbone: EmpreinteViewModel;
   interactionEnCours: InteractionViewModel | null;
   score: number;
 }
 
 export const initialState: State = {
-  utilisateur: "",
-  id: "",
+  utilisateur: {
+    id: "",
+    nom: "",
+    codePostal: "",
+  },
   valeurBilanCarbone: {
     bilan: "",
     detail: {
@@ -32,8 +34,7 @@ export const utilisateurStore = defineStore("utilisateur", {
   state: (): State => ({ ...initialState }),
   actions: {
     setUtilisateur(utilisateur: Utilisateur) {
-      this.utilisateur = utilisateur.nom;
-      this.id = utilisateur.id;
+      this.utilisateur = utilisateur;
     },
     setValeurBilanCarbone(valeurBilanCarbone: EmpreinteViewModel) {
       this.valeurBilanCarbone = valeurBilanCarbone;

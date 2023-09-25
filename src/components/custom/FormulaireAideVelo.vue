@@ -5,16 +5,12 @@
         <h2 class="fr-h5">Quelques questions pour calculer les aides vélo adaptées</h2>
         <form @submit.prevent="submitForm">
           <div class="fr-input-group">
-            <label class="fr-label" for="text-input-code-postal">
-              Votre code postal
-            </label>
-            <input class="fr-input" v-model="codePostal" name="code-postal" id="text-input-code-postal" type="text">
+            <label class="fr-label" for="text-input-code-postal"> Votre code postal </label>
+            <input class="fr-input" v-model="codePostal" name="code-postal" id="text-input-code-postal" type="text" />
           </div>
           <div class="fr-input-group">
-            <label class="fr-label" for="text-input-rfr">
-              Revenu fiscal de référence
-            </label>
-            <input class="fr-input" v-model="revenuFiscal" name="code-postal" id="text-input-rfr" type="text">
+            <label class="fr-label" for="text-input-rfr"> Revenu fiscal de référence </label>
+            <input class="fr-input" v-model="revenuFiscal" name="code-postal" id="text-input-rfr" type="text" />
           </div>
           <button class="fr-mt-2v fr-btn">Valider</button>
         </form>
@@ -28,31 +24,36 @@
         </p>
         <p>Adapter les résultats au plus près de votre situation</p>
         <p>Votre <strong>code postal</strong> permet de consulter les aides locales.</p>
-        <p>Votre <strong>revenu fiscal de référence</strong> et le <strong>nombre de parts</strong> permettent d’afficher les aides en fonction de vos ressources.</p>
+        <p>
+          Votre <strong>revenu fiscal de référence</strong> et le <strong>nombre de parts</strong> permettent d’afficher les aides en fonction de vos
+          ressources.
+        </p>
       </CarteInfo>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-  import { ref } from 'vue';
-  import CarteInfo from '@/components/custom/CarteInfo.vue';
-  import { SimulerAideVeloPresenterImpl } from '@/aides/adapters/simulerAideVelo.presenter.impl';
-  import { SimulerAideVeloRepositoryAxios } from '@/aides/adapters/simulerAideVelo.repository.axios';
-  import SimulerAideVeloUsecase from '@/aides/simulerAideVelo.usecase';
-  import { SimulationAideResultatViewModel } from '@/aides/ports/simulationAideResultat';
+import { ref } from "vue";
+import CarteInfo from "@/components/custom/CarteInfo.vue";
+import { SimulerAideVeloPresenterImpl } from "@/aides/adapters/simulerAideVelo.presenter.impl";
+import { SimulerAideVeloRepositoryAxios } from "@/aides/adapters/simulerAideVelo.repository.axios";
+import SimulerAideVeloUsecase from "@/aides/simulerAideVelo.usecase";
+import { SimulationAideResultatViewModel } from "@/aides/ports/simulationAideResultat";
+import { utilisateurStore } from "@/store/utilisateur";
 
-  const emit = defineEmits(['submit-simulation'])
-  const codePostal = ref("");
-  const revenuFiscal = ref("");
+const store = utilisateurStore();
+const emit = defineEmits(["submit-simulation"]);
+const codePostal = ref(store.utilisateur.codePostal);
+const revenuFiscal = ref("");
 
-  const submitForm = () => {
-    const useCase = new SimulerAideVeloUsecase(new SimulerAideVeloRepositoryAxios());
+const submitForm = () => {
+  const useCase = new SimulerAideVeloUsecase(new SimulerAideVeloRepositoryAxios());
 
-    function mapValues(viewModels: SimulationAideResultatViewModel) {
-      emit('submit-simulation', viewModels, codePostal.value, revenuFiscal.value);
-    }
+  function mapValues(viewModels: SimulationAideResultatViewModel) {
+    emit("submit-simulation", viewModels, codePostal.value, revenuFiscal.value);
+  }
 
-    useCase.execute(codePostal.value, revenuFiscal.value, new SimulerAideVeloPresenterImpl(mapValues));
-  };
+  useCase.execute(codePostal.value, revenuFiscal.value, new SimulerAideVeloPresenterImpl(mapValues));
+};
 </script>

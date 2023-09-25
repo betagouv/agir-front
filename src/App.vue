@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Header from "@/components/Header.vue";
+import PageHeader from "@/components/Header.vue";
 import Footer from "@/components/dsfr/Footer.vue";
 import { computed } from "vue";
 import { NavigationGuardNext, RouteLocationNormalized } from "vue-router";
@@ -28,7 +28,7 @@ router.beforeEach((to: RouteLocationNormalized, from: RouteLocationNormalized, n
 
 <template>
   <div class="page-container background--gris">
-    <Header v-if="afficherLeHeaderEtFooter" />
+    <PageHeader v-if="afficherLeHeaderEtFooter" />
 
     <main class="fr-container fr-px-1w fr-py-6w">
       <router-view />

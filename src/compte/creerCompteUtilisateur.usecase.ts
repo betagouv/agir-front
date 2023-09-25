@@ -19,6 +19,7 @@ export class CreerCompteUtilisateurUsecase {
     this._sessionRepository.sauvegarderUtilisateur({
       nom: utilisateurCree.nom,
       id: utilisateurCree.id,
+      codePostal: utilisateurCree.codePostal,
     });
   }
 }

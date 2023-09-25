@@ -19,7 +19,7 @@ function mapImpactCarboneDuJour(impactDuJourViewModel: SuiviDuJourResultatsViewM
 
 onMounted(async () => {
   const resultatSuiviDuJourUsecase = new ResultatSuiviDuJourUsecase(new SuiviDuJourRepositoryAxios());
-  await resultatSuiviDuJourUsecase.execute(new SuiviDuJourPresenterImpl(mapImpactCarboneDuJour), store.id);
+  await resultatSuiviDuJourUsecase.execute(new SuiviDuJourPresenterImpl(mapImpactCarboneDuJour), store.utilisateur.id);
 });
 </script>
 <style scoped></style>

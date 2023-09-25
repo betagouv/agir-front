@@ -15,8 +15,8 @@ export function storeIdNGC(to, from, next) {
 export function sendIdNGC() {
   const storedImportNGC = sessionStorage.getItem(storedtNGC);
   if (storedImportNGC) {
-    const utilisateur = utilisateurStore();
+    const utilisateurId: string = utilisateurStore().utilisateur.id;
     const importNGC = new importEmpreinteUsecase(new EmpreinteRepositoryAxios());
-    importNGC.execute(storedImportNGC, utilisateur.id).then(() => sessionStorage.removeItem(storedImportNGC));
+    importNGC.execute(storedImportNGC, utilisateurId).then(() => sessionStorage.removeItem(storedImportNGC));
   }
 }

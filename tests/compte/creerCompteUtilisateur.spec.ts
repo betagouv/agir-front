@@ -10,6 +10,7 @@ class SessionRepositoryForTest implements SessionRepository {
   private _utilisateur: Utilisateur = {
     id: "",
     nom: "",
+    codePostal: "",
   };
   sauvegarderUtilisateur(utilisateur: Utilisateur) {
     this._utilisateur = utilisateur;
@@ -22,7 +23,7 @@ class CompteUtilisateurForTest implements CompteUtilisateurRepository {
       id: "id",
       nom: nom,
       mail: email,
-      codePostal: "77650",
+      codePostal: "",
     });
   }
 
@@ -54,6 +55,7 @@ describe("Fichier de tests concernant la creation du compte utilisateur", () => 
     expect(sessionRepository.utilisateur).toStrictEqual<Utilisateur>({
       id: "id",
       nom: "John",
+      codePostal: "",
     });
   });
 });

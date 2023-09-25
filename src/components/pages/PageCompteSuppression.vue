@@ -41,7 +41,7 @@ import router from "@/router";
 const supprimerLeCompte = () => {
   const usecase = new SupprimerCompteUtilisateurUsecase(new CompteUtilisateurRepositoryImpl());
   const store = utilisateurStore();
-  const idUtilisateur = store.id;
+  const idUtilisateur = store.utilisateur.id;
   usecase.execute(idUtilisateur);
   utilisateurStore().reset();
   router.replace("/");

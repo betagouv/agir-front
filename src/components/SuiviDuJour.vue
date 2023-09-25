@@ -76,7 +76,6 @@ import { defineComponent, onMounted, ref } from "vue";
 import { DeviceType, getDeviceType } from "@/DeviceType";
 import BilanNosGestesClimat from "@/components/BilanNosGestesClimat.vue";
 import ImpactDuJour from "@/components/ImpactDuJour.vue";
-import MesResultats from "@/components/MesResultats.vue";
 import SuiviDuJourResultats from "@/components/SuiviDuJourResultats.vue";
 import SuiviDuJourPremiereEtape from "@/components/SuiviDuJourPremiereEtape.vue";
 import SuiviDuJourSecondeEtape from "@/components/SuiviDuJourSecondeEtape.vue";
@@ -98,7 +97,6 @@ export default defineComponent({
     SuiviDuJourSecondeEtape,
     SuiviDuJourPremiereEtape,
     SuiviDuJourResultats,
-    MesResultats,
     ImpactDuJour,
     BilanNosGestesClimat,
     FilDAriane,
@@ -130,7 +128,7 @@ export default defineComponent({
     });
     const store = utilisateurStore();
     onMounted(() => {
-      const idUtilisateur = store.id;
+      const idUtilisateur = store.utilisateur.id;
 
       const chargerDernierSuiviAlimentation = new ObtenirDernierSuiviUsecase(new SuiviDuJourRepositoryAxios());
 
@@ -163,7 +161,7 @@ export default defineComponent({
       etapeCourante.value = etapeCourante.value + 1;
     }
     const calculEmpreinteDuJour = () => {
-      const idUtilisateur = store.id;
+      const idUtilisateur = store.utilisateur.id;
       const idInteraction = store.interactionEnCours!.id;
       const envoyerSuiviDuJour = new EnvoyerSuiviDuJourUsecase(new SuiviDuJourRepositoryAxios(), new InteractionsRepositoryAxios());
       envoyerSuiviDuJour.execute(

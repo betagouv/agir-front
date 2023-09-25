@@ -5,7 +5,7 @@
     v-else
     :quiz-view-model="quizViewModel"
     :nombreDePointsAGagner="store.interactionEnCours ? store.interactionEnCours.nombreDePointsAGagner : '0'"
-    :id-utilisateur="store.id"
+    :id-utilisateur="store.utilisateur.id"
     :id-interaction="store.interactionEnCours.id"
     :is-mode-previsualisation="false"
   >

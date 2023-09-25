@@ -76,16 +76,17 @@ import { defineComponent, onMounted, ref } from "vue";
 import { RouteLocation } from "vue-router";
 import { utilisateurStore } from "@/store/utilisateur";
 export default defineComponent({
-  name: "Header",
+  name: "PageHeader",
   computed: {
     score() {
       return utilisateurStore().score;
     },
     nomUtilisateur() {
-      return utilisateurStore().utilisateur;
+      return utilisateurStore().utilisateur.nom;
     },
   },
   watch: {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     $route(to: RouteLocation, from: RouteLocation) {
       this.isCoachActif = to.fullPath.includes("/coach");
       this.isMesAidesActif = to.fullPath.includes("/mes-aides");

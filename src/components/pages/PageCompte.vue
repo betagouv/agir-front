@@ -28,7 +28,7 @@ function mapValueCompte(viewModel: CompteUtlisateurViewModel) {
 onMounted(async () => {
   const usecase = new ChargerCompteUtilisateurUsecase(new CompteUtilisateurRepositoryImpl());
   const store = utilisateurStore();
-  const idUtilisateur = store.id;
+  const idUtilisateur = store.utilisateur.id;
   usecase.execute(idUtilisateur, new CompteUtilisateurPresenterImpl(mapValueCompte));
 });
 </script>
