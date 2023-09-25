@@ -1,47 +1,37 @@
 <template>
-  <div class="main-container">
-    <div class="fr-container fr-m-auto">
-      <div class="fr-grid-row fr-grid-row--gutters fr-grid-row--center fr-grid-row--middle">
-        <div class="fr-col-10 fr-col-md-8 login-container fr-p-3w fr-p-md-9w">
-          <h1>Agir !</h1>
-          <h2>L’accompagnement personnalisé pour réduire votre empreinte écologique</h2>
-          <ul>
-            <li>Mesurez les impacts de vos usages au quotidien</li>
-            <li>Simulez des aides pertinentes adaptées à votre situation</li>
-            <li>Testez vos connaissances</li>
-          </ul>
-          <form id="login-8199" @submit.prevent="login">
-            <fieldset id="login-8199-fieldset" class="fr-fieldset">
-              <div class="fr-fieldset__element fr-mt-5v">
-                <fieldset id="credentials" class="fr-fieldset">
-                  <legend id="credentials-legend" class="fr-sr-only">identifiants</legend>
-                  <div class="fr-fieldset__element">
-                    <label class="fr-label" for="username-8196"> Identifiant </label>
-                    <input
-                      id="username-8196"
-                      v-model="username"
-                      aria-required="true"
-                      autocapitalize="off"
-                      autocomplete="username"
-                      autocorrect="off"
-                      class="fr-input"
-                      name="username"
-                      type="text"
-                    />
-                  </div>
-                </fieldset>
-              </div>
-              <div class="fr-fieldset__element">
-                <button id="button-8202" class="fr-btn">Se connecter</button>
-              </div>
-            </fieldset>
-          </form>
-
-          <BoutonFranceConnect />
-        </div>
+  <form class="fr-col-12 fr-col-lg-6 fr-mx-auto fr-mb-0 background--white fr-p-4w border border-radius--md" @submit.prevent="login">
+    <fieldset class="fr-mb-0 fr-fieldset">
+      <legend class="fr-fieldset__legend fr-px-0 fr-mx-0 text--center" id="identity-fieldset-legend">
+        <h2>Utilisez FranceConnect pour vous connecter ou créer votre compte</h2>
+      </legend>
+      <p>FranceConnect est la solution proposée par l’État pour sécuriser et simplifier la connexion aux services en ligne.</p>
+      <div class="fr-col-12 text--center">
+        <BoutonFranceConnect />
       </div>
-    </div>
-  </div>
+      <div class="separateur fr-mb-2v">ou</div>
+      <div class="fr-col-12">
+        <h2 class="text--center">Vous avez déjà un compte</h2>
+        <fieldset class="fr-fieldset">
+          <div class="fr-fieldset__element">
+            <div class="fr-input-group">
+              <label class="fr-label" for="user-name-1829"> Nom d'utilisateur </label>
+              <input class="fr-input" spellcheck="false" autocomplete="user-name" name="user-name" id="user-name-1829" type="text" v-model="username" />
+            </div>
+          </div>
+        </fieldset>
+        <button class="fr-btn display-block text--center full-width" type="submit">Se connecter</button>
+      </div>
+      <div class="fr-col-12">
+        <div class="separateur--full fr-mt-4w"></div>
+        <h2 class="text--center fr-mt-6w">Première visite ?</h2>
+        <ul class="fr-btns-group">
+          <li>
+            <button class="fr-btn fr-btn--secondary" @click="goToCreerUnCompte">Créer un compte</button>
+          </li>
+        </ul>
+      </div>
+    </fieldset>
+  </form>
 </template>
 
 <script lang="ts">
@@ -68,36 +58,66 @@ export default defineComponent({
       });
     };
 
+    const goToCreerUnCompte = async () => {
+      await router.push({ name: "creation-compte" });
+    };
+
     return {
       username,
       error,
       login,
+      goToCreerUnCompte,
     };
   },
 });
 </script>
 
 <style scoped>
-.login-container {
-  box-shadow: 0 6px 18px 0 rgba(0, 0, 18, 0.16);
-}
-
-.error {
-  color: red;
-  margin-top: 10px;
-  text-align: center;
-}
-
-.main-container {
-  display: flex;
-  flex-direction: column;
+.separateur {
   position: relative;
-  min-height: 100vh;
+  text-align: center;
   width: 100%;
-  background-color: #f7f8f8;
+
+  &&:before,
+  &&:after {
+    content: "";
+    position: absolute;
+    height: 1px;
+    width: 45%;
+    background-color: #dddddd;
+    top: 50%;
+  }
+
+  &&:before {
+    left: 0;
+  }
+
+  &&:after {
+    right: 0;
+  }
 }
 
-.fr-btn {
-  width: auto;
+.separateur--full {
+  position: relative;
+  text-align: center;
+  width: 100%;
+
+  &&:before,
+  &&:after {
+    content: "";
+    position: absolute;
+    height: 1px;
+    width: 100%;
+    background-color: #dddddd;
+    top: 50%;
+  }
+
+  &&:before {
+    left: 0;
+  }
+
+  &&:after {
+    right: 0;
+  }
 }
 </style>
