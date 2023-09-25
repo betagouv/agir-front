@@ -7,7 +7,7 @@
 <script setup lang="ts">
   import { onMounted, ref } from 'vue';
   import { ChargementAidesPresenterImpl } from '@/aides/adapters/chargementAides.presenter.impl';
-  import { ChargementAidesInMemoryRepository } from '@/aides/adapters/chargementAidesInMemory.repository';
+  import { chargementAidesAxiosCmsRepository } from '@/aides/adapters/chargementAidesAxiosCms.repository';
   import ChargementAidesUsecase from '@/aides/chargementAides.usecase';
   import { AidesViewModel } from '@/aides/ports/chargementAides.presenter';
   import MesAides from '@/components/MesAides.vue';
@@ -20,7 +20,7 @@
   }
 
   onMounted(async () => {
-    await new ChargementAidesUsecase(new ChargementAidesInMemoryRepository()).execute(new ChargementAidesPresenterImpl(mapAides));
+    await new ChargementAidesUsecase(new chargementAidesAxiosCmsRepository()).execute(new ChargementAidesPresenterImpl(mapAides));
     isLoading.value = false;
   });
 </script>

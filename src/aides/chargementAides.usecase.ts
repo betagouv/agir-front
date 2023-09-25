@@ -4,16 +4,9 @@ import { ChargementAidesPresenter } from "@/aides/ports/chargementAides.presente
 export interface Aides {
   id: string,
   titre: string,
-  sousTitre: string,
   categorie: string,
   contenu: string,
-  nombreDePointsAGagner: string,
-  miseEnAvant: string,
-  type: string,
-  illustrationURL: string,
   url: string,
-  isUrlExterne: boolean,
-  idDuContenu: string,
   isSimulateur: boolean
 }
 

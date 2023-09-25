@@ -7,21 +7,21 @@ export class ChargementAidesPresenterImpl implements ChargementAidesPresenter {
   private groupeParCategorie = (aides: Aides[]): AidesViewModel => {
     const map: AidesViewModel = {};
 
-    aides.forEach(element => {
-      if (!map[element.categorie]) {
-        map[element.categorie] = [];
+    aides.forEach(aide => {
+      if (!map[aide.categorie]) {
+        map[aide.categorie] = [];
       }
 
-      const elementToPush: AideViewModel = {
-        id: element.id,
-        titre: element.titre,
-        categorie: element.categorie,
-        contenu: element.contenu,
-        isSimulateur: element.isSimulateur,
-        url: element.url
+      const aideToPush: AideViewModel = {
+        id: aide.id,
+        titre: aide.titre,
+        categorie: aide.categorie,
+        contenu: aide.contenu,
+        isSimulateur: aide.isSimulateur,
+        url: aide.url
       }
 
-      map[element.categorie].push(elementToPush);
+      map[aide.categorie].push(aideToPush);
     });
 
     return map;
