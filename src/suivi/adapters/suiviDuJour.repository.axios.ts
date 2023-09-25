@@ -1,7 +1,6 @@
 import { DernierSuivi, SuiviRepository } from "@/suivi/ports/suivi.repository";
 import { ElementSuiviCarbone, Resultat } from "@/suivi/envoyerSuiviDuJour.usecase";
 import { AxiosFactory } from "@/axios.factory";
-import axios, { AxiosError } from "axios";
 
 export interface SuiviDuJourGraphDataApiModel {
   date: string;
@@ -137,13 +136,8 @@ export class SuiviDuJourRepositoryAxios implements SuiviRepository {
   }
 
   private handleAxiosError(error) {
-    if (axios.isAxiosError(error)) {
-      const axiosError = error as AxiosError;
-      if (axiosError.response && axiosError.response.status === 404) {
-        return null;
-      } else {
-        throw error;
-      }
+    if (error && error.status === 404) {
+      return null;
     } else {
       throw error;
     }
