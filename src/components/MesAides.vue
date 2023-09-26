@@ -32,7 +32,7 @@
                 <div v-html="aide.contenu" />
                 <router-link
                   v-if="aide.isSimulateur"
-                  :to="{ name: aide.url }"
+                  :to="{ path: aide.url }"
                   class="fr-btn fr-btn--icon-left fr-icon-arrow-right-line"
                 >
                   Estimer le montant des aides

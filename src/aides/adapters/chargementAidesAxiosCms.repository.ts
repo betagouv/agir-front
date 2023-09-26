@@ -44,7 +44,7 @@ export class chargementAidesAxiosCmsRepository implements ChargementAidesReposit
         titre: attributes.titre,
         categorie: attributes.thematiques.data[0].attributes.titre,
         contenu: attributes.description,
-        url: attributes.url_source,
+        url: attributes.url_detail_front,
         isSimulateur: attributes.is_simulation,
       }));
     } catch (e) {

@@ -96,7 +96,7 @@
         return utilisateurStore().score;
       },
       nomUtilisateur() {
-        return utilisateurStore().utilisateur.nom;
+        return utilisateurStore().utilisateur?.nom;
       },
     },
     watch: {
