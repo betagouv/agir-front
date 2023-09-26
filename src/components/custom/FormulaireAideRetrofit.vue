@@ -4,11 +4,18 @@
     <form @submit.prevent="submitForm">
       <div class="fr-input-group">
         <label class="fr-label" for="text-input-code-postal"> Votre code postal </label>
-        <input class="fr-input" v-model="codePostal" name="code-postal" id="text-input-code-postal" type="text" />
+        <input
+          required
+          class="fr-input"
+          v-model="codePostal"
+          name="code-postal"
+          id="text-input-code-postal"
+          type="text"
+        />
       </div>
       <div class="fr-input-group">
         <label class="fr-label" for="text-input-rfr"> Revenu fiscal de référence </label>
-        <input class="fr-input" v-model="revenuFiscal" name="code-postal" id="text-input-rfr" type="text" />
+        <input required class="fr-input" v-model="revenuFiscal" name="code-postal" id="text-input-rfr" type="text" />
       </div>
       <button class="fr-mt-2v fr-btn" :disabled="isDisabled">Valider</button>
     </form>
