@@ -24,6 +24,7 @@
     nom: '',
     mail: '',
     codePostal: '',
+    prenom: '',
   });
   function mapValueCompte(viewModel: CompteUtlisateurViewModel) {
     compteUtlisateurViewModel.value = viewModel;
@@ -35,4 +36,3 @@
     usecase.execute(idUtilisateur, new CompteUtilisateurPresenterImpl(mapValueCompte));
   });
 </script>
-<style scoped></style>

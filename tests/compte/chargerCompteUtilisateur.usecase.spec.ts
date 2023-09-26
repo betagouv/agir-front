@@ -9,6 +9,7 @@ class ChargeCompteUtilisateurSansInfosOptionnellesRepository implements CompteUt
       id: "1",
       mail: "",
       codePostal: "",
+      prenom: "John"
     });
   }
 
@@ -30,6 +31,7 @@ class ChargeCompteUtilisateurAvecMailRepository implements CompteUtilisateurRepo
       id: "1",
       mail: "mail@exemple.com",
       codePostal: "75000",
+      prenom: "John"
     });
   }
 
@@ -56,6 +58,7 @@ describe("Fichier de tests concernant le chargement du compte utilisateur", () =
         nom: "Dorian",
         mail: "",
         codePostal: "",
+        prenom: 'John'
       });
     }
   });
@@ -71,6 +74,7 @@ describe("Fichier de tests concernant le chargement du compte utilisateur", () =
         nom: "Dorian",
         mail: "mail@exemple.com",
         codePostal: "75000",
+        prenom: 'John'
       });
     }
   });

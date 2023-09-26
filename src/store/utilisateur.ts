@@ -15,6 +15,7 @@ export const initialState: State = {
     id: '',
     nom: '',
     codePostal: '',
+    prenom: '',
   },
   valeurBilanCarbone: {
     bilan: '',

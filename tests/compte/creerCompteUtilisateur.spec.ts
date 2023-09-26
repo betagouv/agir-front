@@ -11,6 +11,7 @@ class SessionRepositoryForTest implements SessionRepository {
     id: "",
     nom: "",
     codePostal: "",
+    prenom: ""
   };
   sauvegarderUtilisateur(utilisateur: Utilisateur) {
     this._utilisateur = utilisateur;
@@ -18,12 +19,13 @@ class SessionRepositoryForTest implements SessionRepository {
 }
 
 class CompteUtilisateurForTest implements CompteUtilisateurRepository {
-  creerCompteUtilisateur(nom: string, email: string): Promise<CompteUtilisateur> {
+  creerCompteUtilisateur(nom: string, email: string, prenom): Promise<CompteUtilisateur> {
     return Promise.resolve({
       id: "id",
       nom: nom,
       mail: email,
       codePostal: "",
+      prenom: prenom,
     });
   }
 
@@ -45,6 +47,7 @@ describe("Fichier de tests concernant la creation du compte utilisateur", () => 
       id: "",
       mail: "john@skynet.com",
       codePostal: "",
+      prenom: "Doe"
     };
     const sessionRepository = new SessionRepositoryForTest();
     const compteUtilisateurRepository = new CompteUtilisateurForTest();
@@ -56,6 +59,7 @@ describe("Fichier de tests concernant la creation du compte utilisateur", () => 
       id: "id",
       nom: "John",
       codePostal: "",
+      prenom: "Doe"
     });
   });
 });
