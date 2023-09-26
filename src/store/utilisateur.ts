@@ -4,14 +4,18 @@ import { InteractionViewModel } from '@/interactions/adapters/interactions.prese
 import { defineStore } from 'pinia';
 
 interface State {
-  utilisateur: Utilisateur | null;
+  utilisateur: Utilisateur;
   valeurBilanCarbone: EmpreinteViewModel;
   interactionEnCours: InteractionViewModel | null;
   score: number;
 }
 
 export const initialState: State = {
-  utilisateur: null,
+  utilisateur: {
+    id: '',
+    nom: '',
+    codePostal: '',
+  },
   valeurBilanCarbone: {
     bilan: '',
     detail: {

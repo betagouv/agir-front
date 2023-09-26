@@ -29,6 +29,6 @@
   import { computed } from 'vue';
 
   const isAuthentifie = computed(() => {
-    return utilisateurStore().utilisateur;
+    return utilisateurStore().utilisateur.nom.length > 0;
   });
 </script>

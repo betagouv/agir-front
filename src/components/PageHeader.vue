@@ -25,13 +25,13 @@
           <div class="fr-header__tools">
             <div class="fr-header__tools-links">
               <ul class="fr-btns-group">
-                <li v-if="!nomUtilisateur">
+                <li v-if="!estConnecte">
                   <a class="fr-btn fr-icon-lock-line" id="button-1938" href="/authentification"> Se connecter </a>
                 </li>
-                <li v-if="!nomUtilisateur">
+                <li v-if="!estConnecte">
                   <a class="fr-btn fr-icon-account-line" id="button-1939" href="#[url - à modifier]"> S’enregistrer </a>
                 </li>
-                <li v-if="nomUtilisateur">
+                <li v-if="estConnecte">
                   <div class="utilisateur">
                     <router-link title="accéder à mon compte" :to="{ name: 'mon-compte' }">
                       <img src="/ic_user.svg" class="fr-mr-1v fr-mb-n1v" alt="" />
@@ -96,7 +96,11 @@
         return utilisateurStore().score;
       },
       nomUtilisateur() {
-        return utilisateurStore().utilisateur?.nom;
+        return utilisateurStore().utilisateur.nom;
+      },
+      estConnecte() {
+        console.log(utilisateurStore().utilisateur.nom.length > 0);
+        return utilisateurStore().utilisateur.nom.length > 0;
       },
     },
     watch: {
