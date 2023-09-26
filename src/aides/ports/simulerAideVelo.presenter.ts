@@ -1,4 +1,4 @@
-import { SimulationVelo } from "@/aides/simulerAideVelo.usecase";
+import { SimulationVelo } from '@/aides/simulerAideVelo.usecase';
 
 export interface SimulationAidesVeloViewModel {
   [key: string]: {

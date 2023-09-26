@@ -15,73 +15,73 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent } from "vue";
-import { CompteurViewModel } from "@/score/ports/chargementScorePresenter";
+  import { defineComponent } from 'vue';
+  import { CompteurViewModel } from '@/score/ports/chargementScorePresenter';
 
-export default defineComponent({
-  name: "Compteur",
-  props: {
-    compteurViewModel: {
-      type: Object as () => CompteurViewModel,
-      required: true,
-      default: undefined,
+  export default defineComponent({
+    name: 'Compteur',
+    props: {
+      compteurViewModel: {
+        type: Object as () => CompteurViewModel,
+        required: true,
+        default: undefined,
+      },
     },
-  },
-});
+  });
 </script>
 <style scoped>
-.consumption {
-  display: flex;
-  align-items: center;
-  margin-top: 20px;
-}
+  .consumption {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+  }
 
-.visually-hidden {
-  position: absolute;
-  clip: rect(0 0 0 0);
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-}
+  .visually-hidden {
+    position: absolute;
+    clip: rect(0 0 0 0);
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+  }
 
-.trend-icon {
-  width: 24px;
-  height: 24px;
-  margin-left: 10px;
-  display: inline-block;
-  background-size: contain;
-  background-repeat: no-repeat;
-}
+  .trend-icon {
+    width: 24px;
+    height: 24px;
+    margin-left: 10px;
+    display: inline-block;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
 
-.visually-hidden {
-  position: absolute;
-  clip: rect(0 0 0 0);
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-}
+  .visually-hidden {
+    position: absolute;
+    clip: rect(0 0 0 0);
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+  }
 
-.trend-icon--up {
-  background-image: url("@/assets/vers-le-haut.png");
-}
+  .trend-icon--up {
+    background-image: url('@/assets/vers-le-haut.png');
+  }
 
-.trend-icon--down {
-  background-image: url("@/assets/vers-le-bas.png");
-}
+  .trend-icon--down {
+    background-image: url('@/assets/vers-le-bas.png');
+  }
 
-.item-card {
-  border-radius: 5px;
-  border: 2px black solid;
-}
+  .item-card {
+    border-radius: 5px;
+    border: 2px black solid;
+  }
 
-.dashboard-item-desc {
-  font-size: 15px;
-}
+  .dashboard-item-desc {
+    font-size: 15px;
+  }
 
-.card-item-container {
-  align-items: center;
-  text-align: center;
-}
+  .card-item-container {
+    align-items: center;
+    text-align: center;
+  }
 </style>

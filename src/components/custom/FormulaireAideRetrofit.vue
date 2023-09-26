@@ -16,28 +16,28 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from "vue";
-import { SimulerAideRetrofitPresenterImpl } from "@/aides/adapters/simulerAideRetrofit.presenter.impl";
-import { SimulerAideRetrofitRepositoryAxios } from "@/aides/adapters/simulerAideRetrofit.repository.axios";
-import SimulerAideRetrofitUsecase from "@/aides/simulerAideRetrofit.usecase";
-import { SimulationAideResultatViewModel } from "@/aides/ports/simulationAideResultat";
-import { utilisateurStore } from "@/store/utilisateur";
+  import { computed, ref } from 'vue';
+  import { SimulerAideRetrofitPresenterImpl } from '@/aides/adapters/simulerAideRetrofit.presenter.impl';
+  import { SimulerAideRetrofitRepositoryAxios } from '@/aides/adapters/simulerAideRetrofit.repository.axios';
+  import SimulerAideRetrofitUsecase from '@/aides/simulerAideRetrofit.usecase';
+  import { SimulationAideResultatViewModel } from '@/aides/ports/simulationAideResultat';
+  import { utilisateurStore } from '@/store/utilisateur';
 
-const store = utilisateurStore();
-const emit = defineEmits(["submit-simulation"]);
-const codePostal = ref(store.utilisateur.codePostal);
-const revenuFiscal = ref("");
+  const store = utilisateurStore();
+  const emit = defineEmits(['submit-simulation']);
+  const codePostal = ref(store.utilisateur.codePostal);
+  const revenuFiscal = ref('');
 
-const isDisabled = computed(() => {
-  return codePostal.value.trim() === "" || revenuFiscal.value.trim() === "";
-});
-const submitForm = () => {
-  const useCase = new SimulerAideRetrofitUsecase(new SimulerAideRetrofitRepositoryAxios());
+  const isDisabled = computed(() => {
+    return codePostal.value.trim() === '' || revenuFiscal.value.trim() === '';
+  });
+  const submitForm = () => {
+    const useCase = new SimulerAideRetrofitUsecase(new SimulerAideRetrofitRepositoryAxios());
 
-  function mapValues(viewModels: SimulationAideResultatViewModel) {
-    emit("submit-simulation", viewModels, codePostal.value, revenuFiscal.value);
-  }
+    function mapValues(viewModels: SimulationAideResultatViewModel) {
+      emit('submit-simulation', viewModels, codePostal.value, revenuFiscal.value);
+    }
 
-  useCase.execute(codePostal.value, revenuFiscal.value, new SimulerAideRetrofitPresenterImpl(mapValues));
-};
+    useCase.execute(codePostal.value, revenuFiscal.value, new SimulerAideRetrofitPresenterImpl(mapValues));
+  };
 </script>

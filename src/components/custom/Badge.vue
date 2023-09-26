@@ -4,7 +4,7 @@
 
 <script setup lang="ts">
   defineProps<{
-    label: string
+    label: string;
   }>();
 </script>
 

@@ -1,4 +1,4 @@
-import { EvaluerEmpreintePresenter } from "@/bilan/ports/evaluerEmpreinte.presenter";
+import { EvaluerEmpreintePresenter } from '@/bilan/ports/evaluerEmpreinte.presenter';
 
 export interface EvaluerEmpreinteViewModel {
   resultat: string;
@@ -10,7 +10,7 @@ export class EvaluerEmpreintePresenterImpl implements EvaluerEmpreintePresenter 
   }
   presente(succes: boolean): void {
     this._evaluerEmpreinteViewModel({
-      resultat: succes ? "Bravo" : "Perdu",
+      resultat: succes ? 'Bravo' : 'Perdu',
     });
   }
 }

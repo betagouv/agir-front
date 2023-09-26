@@ -1,4 +1,4 @@
-import { Utilisateur, UtilisateurRepository } from "@/authentification/ports/utilisateur.repository";
+import { Utilisateur, UtilisateurRepository } from '@/authentification/ports/utilisateur.repository';
 
 export interface SessionRepository {
   sauvegarderUtilisateur(utilisateur: Utilisateur);

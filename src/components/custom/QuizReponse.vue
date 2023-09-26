@@ -15,12 +15,12 @@
 </template>
 
 <script setup lang="ts">
-defineProps<{
-  question: string;
-  solution: string;
-  texteExplicationKO: string;
-  texteExplicationOK: string;
-  reponseCorrecte?: boolean;
-  reponse: string;
-}>();
+  defineProps<{
+    question: string;
+    solution: string;
+    texteExplicationKO: string;
+    texteExplicationOK: string;
+    reponseCorrecte?: boolean;
+    reponse: string;
+  }>();
 </script>

@@ -17,9 +17,9 @@
 <script setup lang="ts">
   defineProps<{
     pageHierarchie: {
-      label: string,
-      url: string
-    }[]
-    pageCourante: string
-  }>()
+      label: string;
+      url: string;
+    }[];
+    pageCourante: string;
+  }>();
 </script>

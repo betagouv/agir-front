@@ -1,5 +1,5 @@
-import { AxiosFactory } from "@/axios.factory";
-import { Empreinte, EmpreinteRepository } from "@/bilan/ports/empreinteRepository";
+import { AxiosFactory } from '@/axios.factory';
+import { Empreinte, EmpreinteRepository } from '@/bilan/ports/empreinteRepository';
 
 interface EmpreinteDetailApiModel {
   alimentation: number;

@@ -1,5 +1,5 @@
-import { CompteUtilisateurRepository } from "@/compte/ports/compteUtilisateur.repository";
-import { CompteUtlisateurViewModel } from "@/compte/adapters/compteUtilisateur.presenter.impl";
+import { CompteUtilisateurRepository } from '@/compte/ports/compteUtilisateur.repository';
+import { CompteUtlisateurViewModel } from '@/compte/adapters/compteUtilisateur.presenter.impl';
 
 export class MettreAJourCompteUtilisateurUsecase {
   private _compteUtilisateuRepository: CompteUtilisateurRepository;

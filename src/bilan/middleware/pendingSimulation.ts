@@ -1,8 +1,8 @@
-import { importEmpreinteUsecase } from "@/bilan/importEmpreinte.usecase";
-import { EmpreinteRepositoryAxios } from "@/bilan/adapters/empreinteRepository.axios";
-import { utilisateurStore } from "@/store/utilisateur";
+import { importEmpreinteUsecase } from '@/bilan/importEmpreinte.usecase';
+import { EmpreinteRepositoryAxios } from '@/bilan/adapters/empreinteRepository.axios';
+import { utilisateurStore } from '@/store/utilisateur';
 
-const storedtNGC = "storedImportNGC";
+const storedtNGC = 'storedImportNGC';
 
 export function storeIdNGC(to, from, next) {
   const importNGC = to.query?.importNGC;

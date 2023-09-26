@@ -1,4 +1,4 @@
-import { Aides } from "@/aides/chargementAides.usecase";
+import { Aides } from '@/aides/chargementAides.usecase';
 
 export interface ChargementAidesRepository {
   getAides(): Promise<Aides[]>;

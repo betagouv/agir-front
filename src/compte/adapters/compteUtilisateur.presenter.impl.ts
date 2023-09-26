@@ -1,5 +1,5 @@
-import { CompteUtilisateurPresenter } from "@/compte/ports/compteUtilisateur.presenter";
-import { CompteUtilisateur } from "@/compte/ports/compteUtilisateur.repository";
+import { CompteUtilisateurPresenter } from '@/compte/ports/compteUtilisateur.presenter';
+import { CompteUtilisateur } from '@/compte/ports/compteUtilisateur.repository';
 
 export interface CompteUtlisateurViewModel {
   nom: string;

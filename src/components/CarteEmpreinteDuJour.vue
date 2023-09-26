@@ -19,9 +19,9 @@
 </template>
 
 <script setup lang="ts">
-  import { SuiviDuJourResultatsViewModel } from "@/suivi/adapters/suiviDuJour.presenter.impl";
+  import { SuiviDuJourResultatsViewModel } from '@/suivi/adapters/suiviDuJour.presenter.impl';
 
   defineProps<{
-    suiviDuJourResultats: SuiviDuJourResultatsViewModel
+    suiviDuJourResultats: SuiviDuJourResultatsViewModel;
   }>();
 </script>

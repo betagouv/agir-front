@@ -2,9 +2,9 @@
 // https://www.systeme-de-design.gouv.fr/elements-d-interface/fondamentaux-techniques/grille-et-points-de-rupture
 
 export enum DeviceType {
-  MOBILE = "MOBILE",
-  TABLET = "TABLET",
-  DESKTOP = "DESKTOP",
+  MOBILE = 'MOBILE',
+  TABLET = 'TABLET',
+  DESKTOP = 'DESKTOP',
 }
 export function getDeviceType() {
   const innerWidth = window.innerWidth;

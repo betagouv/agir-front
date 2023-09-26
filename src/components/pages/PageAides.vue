@@ -20,7 +20,9 @@
   }
 
   onMounted(async () => {
-    await new ChargementAidesUsecase(new chargementAidesAxiosCmsRepository()).execute(new ChargementAidesPresenterImpl(mapAides));
+    await new ChargementAidesUsecase(new chargementAidesAxiosCmsRepository()).execute(
+      new ChargementAidesPresenterImpl(mapAides)
+    );
     isLoading.value = false;
   });
 </script>

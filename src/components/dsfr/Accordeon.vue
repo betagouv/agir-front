@@ -13,12 +13,12 @@
 
 <script setup lang="ts">
   defineProps<{
-    nameId: string
-  }>()
+    nameId: string;
+  }>();
 </script>
 
 <style scoped>
   .fr-accordion__btn {
-    background-color: #FFF;
+    background-color: #fff;
   }
 </style>

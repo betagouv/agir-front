@@ -1,6 +1,6 @@
-import { DernierSuivi, SuiviRepository } from "@/suivi/ports/suivi.repository";
-import { ElementSuiviCarbone, Resultat } from "@/suivi/envoyerSuiviDuJour.usecase";
-import { AxiosFactory } from "@/axios.factory";
+import { DernierSuivi, SuiviRepository } from '@/suivi/ports/suivi.repository';
+import { ElementSuiviCarbone, Resultat } from '@/suivi/envoyerSuiviDuJour.usecase';
+import { AxiosFactory } from '@/axios.factory';
 
 export interface SuiviDuJourGraphDataApiModel {
   date: string;
@@ -17,7 +17,7 @@ export interface SuiviDuJourApiModel {
 
 function extractedDetailsCarbone(data: Map<string, string>): ElementSuiviCarbone[] {
   const derniersSuivisDetails: ElementSuiviCarbone[] = [];
-  delete data["total_impact"];
+  delete data['total_impact'];
 
   for (let i = 0; i < Object.keys(data).length; i += 2) {
     const key1 = Object.keys(data)[i];
@@ -47,8 +47,8 @@ function getValeursDesSuivis(listeDesAdditionsCarbone: SuiviDuJourGraphDataApiMo
 function formateDate(date: string): string {
   const inputDate = new Date(date);
 
-  const day = String(inputDate.getUTCDate()).padStart(2, "0");
-  const month = String(inputDate.getUTCMonth() + 1).padStart(2, "0");
+  const day = String(inputDate.getUTCDate()).padStart(2, '0');
+  const month = String(inputDate.getUTCMonth() + 1).padStart(2, '0');
   const year = String(inputDate.getUTCFullYear());
 
   return `${day}/${month}/${year}`;
@@ -59,7 +59,7 @@ function getValeursDesDates(listeDesAdditionsCarbone: SuiviDuJourGraphDataApiMod
 }
 
 function calculerTempsEnMinute(temps: string): number {
-  const timeParts = temps.split(":");
+  const timeParts = temps.split(':');
   const heures = parseInt(timeParts[0]);
   const minutes = parseInt(timeParts[1]);
 
@@ -70,7 +70,7 @@ function calculerTempsEnMinute(temps: string): number {
 }
 
 function isTransportEnCommun(valeur: string): boolean {
-  return valeur.includes("train") || valeur.includes("metro") || valeur.includes("bus");
+  return valeur.includes('train') || valeur.includes('metro') || valeur.includes('bus');
 }
 
 function getToutesLesValeursDuSuivisAvecLeBonFormat(listeDesValeurs: Map<string, string>): Map<string, string> {
@@ -99,8 +99,8 @@ export class SuiviDuJourRepositoryAxios implements SuiviRepository {
       const data = await axiosInstance.get(`/utilisateurs/${idUtilisateur}/suivis/last?type=${type}`);
       const mapWithFullValues = new Map<string, string>(Object.entries(data.data));
       const mapWithoutAllValues = new Map<string, string>(Object.entries(data.data));
-      mapWithoutAllValues.delete("date");
-      const date = mapWithFullValues.get("date") || "";
+      mapWithoutAllValues.delete('date');
+      const date = mapWithFullValues.get('date') || '';
       return {
         date: date,
         valeurs: mapWithoutAllValues,

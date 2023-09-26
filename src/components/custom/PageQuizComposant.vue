@@ -25,15 +25,15 @@
 </template>
 
 <script setup lang="ts">
-import { QuizViewModel } from "@/quiz/adapters/chargementQuiz.presenter.impl";
-import FilDAriane from "@/components/dsfr/FilDAriane.vue";
-import Quiz from "@/components/custom/Quiz.vue";
+  import { QuizViewModel } from '@/quiz/adapters/chargementQuiz.presenter.impl';
+  import FilDAriane from '@/components/dsfr/FilDAriane.vue';
+  import Quiz from '@/components/custom/Quiz.vue';
 
-defineProps<{
-  quizViewModel: QuizViewModel;
-  nombreDePointsAGagner: string;
-  idUtilisateur: string;
-  idInteraction: string;
-  isModePrevisualisation: boolean;
-}>();
+  defineProps<{
+    quizViewModel: QuizViewModel;
+    nombreDePointsAGagner: string;
+    idUtilisateur: string;
+    idInteraction: string;
+    isModePrevisualisation: boolean;
+  }>();
 </script>

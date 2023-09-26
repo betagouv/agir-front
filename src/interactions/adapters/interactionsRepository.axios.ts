@@ -1,6 +1,6 @@
-import { InteractionsRepository } from "@/interactions/ports/interactionsRepository";
-import { Interaction, InteractionCategorie, InteractionType } from "@/interactions/chargerInteractions.usecase";
-import { AxiosFactory } from "@/axios.factory";
+import { InteractionsRepository } from '@/interactions/ports/interactionsRepository';
+import { Interaction, InteractionCategorie, InteractionType } from '@/interactions/chargerInteractions.usecase';
+import { AxiosFactory } from '@/axios.factory';
 
 export interface InteractionApiModel {
   id: string;
@@ -35,7 +35,7 @@ export class InteractionsRepositoryAxios implements InteractionsRepository {
         nombreDePointsAGagner: apiModel.points.toString(),
         miseEnAvant: apiModel.reco_score.toString(),
         illustrationURL: apiModel.image_url,
-        url: apiModel.url || "",
+        url: apiModel.url || '',
         aEteFaite: apiModel.done,
         idDuContenu: apiModel.content_id,
         duree: apiModel.duree,
@@ -64,9 +64,9 @@ export class InteractionsRepositoryAxios implements InteractionsRepository {
       seen: 0,
       clicked: true,
       done: true,
-      ...payload
+      ...payload,
     });
-  
+
     if (reponse) return true;
 
     return false;

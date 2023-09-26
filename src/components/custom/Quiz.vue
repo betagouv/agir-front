@@ -25,48 +25,48 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
-import IndicateurDEtape from "@/components/dsfr/IndicateurDEtapes.vue";
-import QuestionDuQuiz from "@/components/custom/QuestionDuQuiz.vue";
-import { QuizViewModel } from "@/quiz/adapters/chargementQuiz.presenter.impl";
-import { EnvoyerDonneesQuizInteractionUsecase } from "@/interactions/envoyerDonneesQuizInteraction.usecase";
-import { InteractionsRepositoryAxios } from "@/interactions/adapters/interactionsRepository.axios";
+  import { ref } from 'vue';
+  import IndicateurDEtape from '@/components/dsfr/IndicateurDEtapes.vue';
+  import QuestionDuQuiz from '@/components/custom/QuestionDuQuiz.vue';
+  import { QuizViewModel } from '@/quiz/adapters/chargementQuiz.presenter.impl';
+  import { EnvoyerDonneesQuizInteractionUsecase } from '@/interactions/envoyerDonneesQuizInteraction.usecase';
+  import { InteractionsRepositoryAxios } from '@/interactions/adapters/interactionsRepository.axios';
 
-const props = defineProps<{
-  quizViewModel: QuizViewModel;
-  nombreDePointsAGagner: string;
-  idUtilisateur: string;
-  idInteraction: string;
-  isModePrevisualisation: boolean;
-}>();
+  const props = defineProps<{
+    quizViewModel: QuizViewModel;
+    nombreDePointsAGagner: string;
+    idUtilisateur: string;
+    idInteraction: string;
+    isModePrevisualisation: boolean;
+  }>();
 
-const nombreDeBonnesReponses = ref<number>(0);
-const etapeCourante = ref<number>(1);
+  const nombreDeBonnesReponses = ref<number>(0);
+  const etapeCourante = ref<number>(1);
 
-const getTitreEtape = (nombreEtape: number) => {
-  if (etapeCourante.value > nombreEtape) return "Fin du quizz";
+  const getTitreEtape = (nombreEtape: number) => {
+    if (etapeCourante.value > nombreEtape) return 'Fin du quizz';
 
-  return `Question ${etapeCourante.value} sur ${nombreEtape}`;
-};
+    return `Question ${etapeCourante.value} sur ${nombreEtape}`;
+  };
 
-const getTitreEtapeSuivante = (nombreEtape: number) => {
-  if (etapeCourante.value + 1 > nombreEtape) return "Fin du quizz";
+  const getTitreEtapeSuivante = (nombreEtape: number) => {
+    if (etapeCourante.value + 1 > nombreEtape) return 'Fin du quizz';
 
-  return `Question ${etapeCourante.value + 1} sur ${nombreEtape}`;
-};
+    return `Question ${etapeCourante.value + 1} sur ${nombreEtape}`;
+  };
 
-const verifierLaReponse = async (value) => {
-  etapeCourante.value++;
+  const verifierLaReponse = async value => {
+    etapeCourante.value++;
 
-  if (value) nombreDeBonnesReponses.value++;
+    if (value) nombreDeBonnesReponses.value++;
 
-  if (etapeCourante.value > props.quizViewModel.questions.length && !props.isModePrevisualisation) {
-    await new EnvoyerDonneesQuizInteractionUsecase(new InteractionsRepositoryAxios()).execute(
-      props.idUtilisateur,
-      props.idInteraction,
-      nombreDeBonnesReponses.value,
-      props.quizViewModel.questions.length
-    );
-  }
-};
+    if (etapeCourante.value > props.quizViewModel.questions.length && !props.isModePrevisualisation) {
+      await new EnvoyerDonneesQuizInteractionUsecase(new InteractionsRepositoryAxios()).execute(
+        props.idUtilisateur,
+        props.idInteraction,
+        nombreDeBonnesReponses.value,
+        props.quizViewModel.questions.length
+      );
+    }
+  };
 </script>

@@ -11,27 +11,31 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
-import FilDAriane from "@/components/dsfr/FilDAriane.vue";
-import AidesResultat from "@/components/custom/AidesResultat.vue";
-import FormulaireAideRetrofit from "@/components/custom/FormulaireAideRetrofit.vue";
-import AsideAideRetrofit from "@/components/custom/AsideAideRetrofit.vue";
-import { SimulationAideResultatViewModel } from "@/aides/ports/simulationAideResultat";
+  import { ref } from 'vue';
+  import FilDAriane from '@/components/dsfr/FilDAriane.vue';
+  import AidesResultat from '@/components/custom/AidesResultat.vue';
+  import FormulaireAideRetrofit from '@/components/custom/FormulaireAideRetrofit.vue';
+  import AsideAideRetrofit from '@/components/custom/AsideAideRetrofit.vue';
+  import { SimulationAideResultatViewModel } from '@/aides/ports/simulationAideResultat';
 
-const titrePage = "Mes aides - Retrofit";
-const simulationAidesRetrofitViewModel = ref<SimulationAideResultatViewModel | null>(null);
-const codePostal = ref<string>("");
-const revenuFiscal = ref<string>("");
+  const titrePage = 'Mes aides - Retrofit';
+  const simulationAidesRetrofitViewModel = ref<SimulationAideResultatViewModel | null>(null);
+  const codePostal = ref<string>('');
+  const revenuFiscal = ref<string>('');
 
-const submitSimulation = (data: SimulationAideResultatViewModel, dataCodePostal: string, dataRevenuFiscal: string) => {
-  codePostal.value = dataCodePostal;
-  revenuFiscal.value = dataRevenuFiscal;
-  simulationAidesRetrofitViewModel.value = data;
-};
+  const submitSimulation = (
+    data: SimulationAideResultatViewModel,
+    dataCodePostal: string,
+    dataRevenuFiscal: string
+  ) => {
+    codePostal.value = dataCodePostal;
+    revenuFiscal.value = dataRevenuFiscal;
+    simulationAidesRetrofitViewModel.value = data;
+  };
 
-const resetSimulation = () => (simulationAidesRetrofitViewModel.value = null);
+  const resetSimulation = () => (simulationAidesRetrofitViewModel.value = null);
 
-defineProps<{
-  titre: string;
-}>();
+  defineProps<{
+    titre: string;
+  }>();
 </script>

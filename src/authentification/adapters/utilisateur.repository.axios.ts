@@ -1,5 +1,5 @@
-import { Utilisateur, UtilisateurRepository } from "@/authentification/ports/utilisateur.repository";
-import { AxiosFactory } from "@/axios.factory";
+import { Utilisateur, UtilisateurRepository } from '@/authentification/ports/utilisateur.repository';
+import { AxiosFactory } from '@/axios.factory';
 
 interface UtilisateurApiModel {
   name: string;

@@ -1,5 +1,5 @@
-import { SimulerAideVeloPresenter } from "@/aides/ports/simulerAideVelo.presenter";
-import { SimulerAideVeloRepository } from "@/aides/ports/simulerAideVelo.repository";
+import { SimulerAideVeloPresenter } from '@/aides/ports/simulerAideVelo.presenter';
+import { SimulerAideVeloRepository } from '@/aides/ports/simulerAideVelo.repository';
 
 interface AidesVelo {
   libelle: string;
@@ -17,7 +17,7 @@ interface Collectivite {
   code?: string;
 }
 
-type TypeVelos = "mécanique simple" | "électrique" | "cargo" | "cargo électrique" | "pliant" | "motorisation";
+type TypeVelos = 'mécanique simple' | 'électrique' | 'cargo' | 'cargo électrique' | 'pliant' | 'motorisation';
 
 export type SimulationVelo = {
   [category in TypeVelos]: AidesVelo[];

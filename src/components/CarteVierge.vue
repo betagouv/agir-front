@@ -6,7 +6,7 @@
 
 <style scoped>
   aside {
-    background-color: #FFF;
+    background-color: #fff;
     border-radius: 6px;
     border: 1px solid rgba(0, 0, 0, 0.19);
   }

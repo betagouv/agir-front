@@ -5,9 +5,12 @@
         <div class="fr-py-0 fr-col-12 fr-col-md-6">
           <h1>Page non trouvée</h1>
           <p class="fr-text--sm fr-mb-3w">Erreur 404</p>
-          <p class="fr-text--lead fr-mb-3w">La page que vous cherchez est introuvable. Excusez-nous pour la gène occasionnée.</p>
+          <p class="fr-text--lead fr-mb-3w">
+            La page que vous cherchez est introuvable. Excusez-nous pour la gène occasionnée.
+          </p>
           <p class="fr-text--sm fr-mb-5w">
-            Si vous avez tapé l'adresse web dans le navigateur, vérifiez qu'elle est correcte. La page n’est peut-être plus disponible.<br>
+            Si vous avez tapé l'adresse web dans le navigateur, vérifiez qu'elle est correcte. La page n’est peut-être
+            plus disponible.<br />
             Dans ce cas, pour continuer votre visite vous pouvez consulter notre page d’accueil.
           </p>
           <a class="fr-btn" href="/coach">Page d'accueil</a>

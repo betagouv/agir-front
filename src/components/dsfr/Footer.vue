@@ -14,7 +14,9 @@
         <div class="fr-footer__content">
           <ul class="fr-footer__content-list">
             <li class="fr-footer__content-item">
-              <a class="fr-footer__content-link" target="_blank" href="https://legifrance.gouv.fr">legifrance.gouv.fr</a>
+              <a class="fr-footer__content-link" target="_blank" href="https://legifrance.gouv.fr"
+                >legifrance.gouv.fr</a
+              >
             </li>
             <li class="fr-footer__content-item">
               <a class="fr-footer__content-link" target="_blank" href="https://gouvernement.fr">gouvernement.fr</a>
@@ -48,7 +50,8 @@
         </ul>
         <div class="fr-footer__bottom-copy">
           <p>
-            Sauf mention explicite de propriété intellectuelle détenue par des tiers, les contenus de ce site sont proposés sous
+            Sauf mention explicite de propriété intellectuelle détenue par des tiers, les contenus de ce site sont
+            proposés sous
             <a href="https://github.com/etalab/licence-ouverte/blob/master/LO.md" target="_blank">licence etalab-2.0</a>
           </p>
         </div>
@@ -58,21 +61,21 @@
 </template>
 
 <script lang="ts">
-import router from "@/router";
-import { utilisateurStore } from "@/store/utilisateur";
+  import router from '@/router';
+  import { utilisateurStore } from '@/store/utilisateur';
 
-export default {
-  name: "Footer",
-  computed: {
-    getUtilisateur() {
-      return utilisateurStore().utilisateur;
+  export default {
+    name: 'Footer',
+    computed: {
+      getUtilisateur() {
+        return utilisateurStore().utilisateur;
+      },
     },
-  },
-  methods: {
-    logout() {
-      utilisateurStore().reset();
-      router.replace("/");
+    methods: {
+      logout() {
+        utilisateurStore().reset();
+        router.replace('/');
+      },
     },
-  },
-};
+  };
 </script>

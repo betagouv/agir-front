@@ -1,5 +1,5 @@
-import { Interaction, InteractionCategorie, InteractionType } from "@/interactions/chargerInteractions.usecase";
-import { InteractionsPresenter } from "@/interactions/ports/interactionsPresenter";
+import { Interaction, InteractionCategorie, InteractionType } from '@/interactions/chargerInteractions.usecase';
+import { InteractionsPresenter } from '@/interactions/ports/interactionsPresenter';
 
 export interface InteractionViewModel {
   id: string;
@@ -24,25 +24,25 @@ export class InteractionsPresenterImpl implements InteractionsPresenter {
 
   presente(interactions: Interaction[]) {
     const categorieInverseMapping: { [key in InteractionCategorie]: string } = {
-      [InteractionCategorie.CONSOMMATION]: "📱 Consommation",
-      [InteractionCategorie.ENERGIE]: "⚡️ Énergie",
-      [InteractionCategorie.ALIMENTATION]: "🥦 Alimentation",
-      [InteractionCategorie.GLOBAL]: "🌍 Global",
-      [InteractionCategorie.TRANSPORTS]: "🚲 Transports",
+      [InteractionCategorie.CONSOMMATION]: '📱 Consommation',
+      [InteractionCategorie.ENERGIE]: '⚡️ Énergie',
+      [InteractionCategorie.ALIMENTATION]: '🥦 Alimentation',
+      [InteractionCategorie.GLOBAL]: '🌍 Global',
+      [InteractionCategorie.TRANSPORTS]: '🚲 Transports',
     };
 
     const typeInverseMapping: { [key in InteractionType]: string } = {
-      [InteractionType.KYC]: "KYC",
-      [InteractionType.QUIZ]: "QUIZ",
-      [InteractionType.ARTICLE]: "ARTICLE",
-      [InteractionType.SUIVIDUJOUR]: "SUIVI",
+      [InteractionType.KYC]: 'KYC',
+      [InteractionType.QUIZ]: 'QUIZ',
+      [InteractionType.ARTICLE]: 'ARTICLE',
+      [InteractionType.SUIVIDUJOUR]: 'SUIVI',
     };
 
     const interactionNonFaites = interactions
-      .filter((i) => {
+      .filter(i => {
         return !i.aEteFaite;
       })
-      .map((interaction) => {
+      .map(interaction => {
         return {
           id: interaction.id,
           titre: interaction.titre,
@@ -69,9 +69,9 @@ export class InteractionsPresenterImpl implements InteractionsPresenter {
       case InteractionType.ARTICLE:
         return `/article/${interaction.titre}`;
       case InteractionType.KYC:
-        return "";
+        return '';
       case InteractionType.SUIVIDUJOUR:
-        return "/coach/suivi-du-jour";
+        return '/coach/suivi-du-jour';
     }
   }
 }

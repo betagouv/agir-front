@@ -25,8 +25,8 @@
         <p>Adapter les résultats au plus près de votre situation</p>
         <p>Votre <strong>code postal</strong> permet de consulter les aides locales.</p>
         <p>
-          Votre <strong>revenu fiscal de référence</strong> et le <strong>nombre de parts</strong> permettent d’afficher les aides en fonction de vos
-          ressources.
+          Votre <strong>revenu fiscal de référence</strong> et le <strong>nombre de parts</strong> permettent d’afficher
+          les aides en fonction de vos ressources.
         </p>
       </CarteInfo>
     </div>
@@ -34,30 +34,30 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from "vue";
-import CarteInfo from "@/components/custom/CarteInfo.vue";
-import { SimulerAideVeloPresenterImpl } from "@/aides/adapters/simulerAideVelo.presenter.impl";
-import { SimulerAideVeloRepositoryAxios } from "@/aides/adapters/simulerAideVelo.repository.axios";
-import SimulerAideVeloUsecase from "@/aides/simulerAideVelo.usecase";
-import { SimulationAideResultatViewModel } from "@/aides/ports/simulationAideResultat";
-import { utilisateurStore } from "@/store/utilisateur";
+  import { computed, ref } from 'vue';
+  import CarteInfo from '@/components/custom/CarteInfo.vue';
+  import { SimulerAideVeloPresenterImpl } from '@/aides/adapters/simulerAideVelo.presenter.impl';
+  import { SimulerAideVeloRepositoryAxios } from '@/aides/adapters/simulerAideVelo.repository.axios';
+  import SimulerAideVeloUsecase from '@/aides/simulerAideVelo.usecase';
+  import { SimulationAideResultatViewModel } from '@/aides/ports/simulationAideResultat';
+  import { utilisateurStore } from '@/store/utilisateur';
 
-const store = utilisateurStore();
-const emit = defineEmits(["submit-simulation"]);
-const codePostal = ref(store.utilisateur.codePostal);
-const revenuFiscal = ref("");
+  const store = utilisateurStore();
+  const emit = defineEmits(['submit-simulation']);
+  const codePostal = ref(store.utilisateur.codePostal);
+  const revenuFiscal = ref('');
 
-const isDisabled = computed(() => {
-  return codePostal.value.trim() === "" || revenuFiscal.value.trim() === "";
-});
+  const isDisabled = computed(() => {
+    return codePostal.value.trim() === '' || revenuFiscal.value.trim() === '';
+  });
 
-const submitForm = () => {
-  const useCase = new SimulerAideVeloUsecase(new SimulerAideVeloRepositoryAxios());
+  const submitForm = () => {
+    const useCase = new SimulerAideVeloUsecase(new SimulerAideVeloRepositoryAxios());
 
-  function mapValues(viewModels: SimulationAideResultatViewModel) {
-    emit("submit-simulation", viewModels, codePostal.value, revenuFiscal.value);
-  }
+    function mapValues(viewModels: SimulationAideResultatViewModel) {
+      emit('submit-simulation', viewModels, codePostal.value, revenuFiscal.value);
+    }
 
-  useCase.execute(codePostal.value, revenuFiscal.value, new SimulerAideVeloPresenterImpl(mapValues));
-};
+    useCase.execute(codePostal.value, revenuFiscal.value, new SimulerAideVeloPresenterImpl(mapValues));
+  };
 </script>

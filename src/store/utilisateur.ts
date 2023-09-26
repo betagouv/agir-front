@@ -1,7 +1,7 @@
-import { Utilisateur } from "@/authentification/ports/utilisateur.repository";
-import { EmpreinteViewModel } from "@/bilan/adapters/chargementEmpreinte.presenter.impl";
-import { InteractionViewModel } from "@/interactions/adapters/interactions.presenter.impl";
-import { defineStore } from "pinia";
+import { Utilisateur } from '@/authentification/ports/utilisateur.repository';
+import { EmpreinteViewModel } from '@/bilan/adapters/chargementEmpreinte.presenter.impl';
+import { InteractionViewModel } from '@/interactions/adapters/interactions.presenter.impl';
+import { defineStore } from 'pinia';
 
 interface State {
   utilisateur: Utilisateur;
@@ -12,12 +12,12 @@ interface State {
 
 export const initialState: State = {
   utilisateur: {
-    id: "",
-    nom: "",
-    codePostal: "",
+    id: '',
+    nom: '',
+    codePostal: '',
   },
   valeurBilanCarbone: {
-    bilan: "",
+    bilan: '',
     detail: {
       alimentation: 0,
       divers: 0,
@@ -30,7 +30,7 @@ export const initialState: State = {
   score: 0,
 };
 
-export const utilisateurStore = defineStore("utilisateur", {
+export const utilisateurStore = defineStore('utilisateur', {
   state: (): State => ({ ...initialState }),
   actions: {
     setUtilisateur(utilisateur: Utilisateur) {

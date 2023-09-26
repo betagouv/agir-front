@@ -15,10 +15,10 @@
 </template>
 
 <script setup lang="ts">
-  import CarteEmpreinteDuJour from "@/components/CarteEmpreinteDuJour.vue";
-  import EmpreinteDuJourDetails from "@/components/EmpreinteDuJourDetails.vue";
-  import { SuiviDuJourResultatsViewModel } from "@/suivi/adapters/suiviDuJour.presenter.impl";
-  import GraphSuiviEmpreinteCarbone from "@/components/GraphSuiviEmpreinteCarbone.vue";
+  import CarteEmpreinteDuJour from '@/components/CarteEmpreinteDuJour.vue';
+  import EmpreinteDuJourDetails from '@/components/EmpreinteDuJourDetails.vue';
+  import { SuiviDuJourResultatsViewModel } from '@/suivi/adapters/suiviDuJour.presenter.impl';
+  import GraphSuiviEmpreinteCarbone from '@/components/GraphSuiviEmpreinteCarbone.vue';
 
   interface Props {
     suiviDuJourResultats?: SuiviDuJourResultatsViewModel | null;

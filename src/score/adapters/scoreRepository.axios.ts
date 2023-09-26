@@ -1,9 +1,9 @@
-import { AxiosFactory } from "@/axios.factory";
-import { Score, ScoreRepository } from "@/score/ports/scoreRepository";
+import { AxiosFactory } from '@/axios.factory';
+import { Score, ScoreRepository } from '@/score/ports/scoreRepository';
 
 interface BadgeApiModel {
   titre: string;
-  date: "14/06/2023";
+  date: '14/06/2023';
 }
 
 interface ScoreApiModel {

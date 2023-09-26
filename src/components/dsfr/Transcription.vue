@@ -8,9 +8,7 @@
             <div class="fr-col-12 fr-col-md-10 fr-col-lg-8">
               <div class="fr-modal__body">
                 <div class="fr-modal__header">
-                  <button class="fr-btn--close fr-btn" :aria-controls="`${id}-modal`" title="Fermer">
-                    Fermer
-                  </button>
+                  <button class="fr-btn--close fr-btn" :aria-controls="`${id}-modal`" title="Fermer">Fermer</button>
                 </div>
                 <div class="fr-modal__content">
                   <h1 :id="`${id}-transcription-title`" class="fr-modal__title">
@@ -20,7 +18,12 @@
                 </div>
                 <div class="fr-transcription__footer">
                   <div class="fr-transcription__actions-group">
-                    <button class="fr-btn fr-btn--fullscreen" :aria-controls="`${id}-modal`" data-fr-opened="false" title="">
+                    <button
+                      class="fr-btn fr-btn--fullscreen"
+                      :aria-controls="`${id}-modal`"
+                      data-fr-opened="false"
+                      title=""
+                    >
                       Agrandir
                     </button>
                   </div>
@@ -36,7 +39,7 @@
 
 <script setup lang="ts">
   defineProps<{
-    id: string,
-    titre: string
+    id: string;
+    titre: string;
   }>();
 </script>
