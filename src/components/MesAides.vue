@@ -25,6 +25,9 @@
                       {{ aide.titre }}
                     </span>
                     <span class="fr-h6 text--gris">Jusqu'à 1700euros</span>
+                    <p v-show="aide.isSimulateur" class="fr-tag fr-icon-money-euro-circle-line fr-tag--icon-left">
+                      Simulateur disponible
+                    </p>
                   </span>
                 </span>
               </template>
