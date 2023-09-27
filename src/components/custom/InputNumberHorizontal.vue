@@ -7,8 +7,9 @@
       type="number"
       :id="name"
       :name="name"
-      :value="value"
+      @input="updateValue"
       min="0"
+      value="0"
     />
     <label class="fr-label fr-col-11" :for="name">
       {{ label }}
@@ -20,6 +21,14 @@
   defineProps<{
     label: string;
     name: string;
-    value: string;
   }>();
+
+  const emit = defineEmits<{
+    (e: 'update:modelValue', value: string): void;
+  }>();
+
+  const updateValue = (event: Event) => {
+    const inputElement = event.target as HTMLInputElement;
+    emit('update:modelValue', inputElement.value);
+  };
 </script>

@@ -5,7 +5,7 @@
     </legend>
     <div class="fr-fieldset__element" v-for="option in options" :key="option.id">
       <div class="fr-checkbox-group checkbox-group--custom fr-p-2w border">
-        <input :name="option.id" :id="option.id" type="checkbox" />
+        <input :id="option.id" :value="option.id" type="checkbox" v-model="checkedNames" @input="updateValue" />
         <label class="fr-label" :for="option.id">{{ option.label }}</label>
       </div>
     </div>
@@ -13,12 +13,24 @@
 </template>
 
 <script setup lang="ts">
+  import { ref } from 'vue';
+
   defineProps<{
     options: {
       id: string;
       label: string;
     }[];
   }>();
+
+  const checkedNames = ref<string[]>([]);
+
+  const emit = defineEmits<{
+    (e: 'update:modelValue', value: string[]): void;
+  }>();
+
+  const updateValue = () => {
+    emit('update:modelValue', checkedNames.value);
+  };
 </script>
 
 <style scoped>
