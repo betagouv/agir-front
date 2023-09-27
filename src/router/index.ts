@@ -93,11 +93,11 @@ const routes = [
     },
   },
   {
-    path: '/article',
+    path: '/article/',
     name: 'article',
     children: [
       {
-        path: '/:titre',
+        path: ':titre',
         component: PageArticle,
         meta: { estPublique: false },
       },
