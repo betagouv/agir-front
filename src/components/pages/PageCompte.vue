@@ -23,7 +23,6 @@
   import PageCompteSuppression from '@/components/pages/PageCompteSuppression.vue';
 
   const compteUtlisateurViewModel = ref<CompteUtlisateurViewModel | null>(null);
-
   function mapValueCompte(viewModel: CompteUtlisateurViewModel) {
     compteUtlisateurViewModel.value = viewModel;
   }

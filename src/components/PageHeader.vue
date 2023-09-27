@@ -99,7 +99,6 @@
         return utilisateurStore().utilisateur.nom;
       },
       estConnecte() {
-        console.log(utilisateurStore().utilisateur.nom.length > 0);
         return utilisateurStore().utilisateur.nom.length > 0;
       },
     },

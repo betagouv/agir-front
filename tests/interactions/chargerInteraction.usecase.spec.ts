@@ -1,6 +1,13 @@
-import { ChargerInteractionsUsecase, Interaction, InteractionCategorie, InteractionType } from "../../src/interactions/chargerInteractions.usecase";
-import { InteractionsPresenterImpl, InteractionViewModel } from "../../src/interactions/adapters/interactions.presenter.impl";
-import { InteractionsRepository } from "../../src/interactions/ports/interactionsRepository";
+import {
+  ChargerInteractionsUsecase,
+  Interaction,
+  InteractionType,
+} from '../../src/interactions/chargerInteractions.usecase';
+import {
+  InteractionsPresenterImpl,
+  InteractionViewModel,
+} from '../../src/interactions/adapters/interactions.presenter.impl';
+import { InteractionsRepository } from '../../src/interactions/ports/interactionsRepository';
 
 class InteractionsRepositoryForTest implements InteractionsRepository {
   private readonly _interaction: Interaction[];
@@ -20,44 +27,44 @@ class InteractionsRepositoryForTest implements InteractionsRepository {
   }
 }
 
-describe("Fichier de tests pour charger les interactions", () => {
+describe('Fichier de tests pour charger les interactions', () => {
   it("En donnant un id d'utilisateur et dans le cas d'un quiz", async () => {
     // GIVEN
     // WHEN
     const interactionQuizzAFaire = {
-      id: "id",
+      id: 'id',
       type: InteractionType.QUIZ,
-      titre: "titre",
-      sousTitre: "sousTitre",
-      categorie: InteractionCategorie.ALIMENTATION,
-      nombreDePointsAGagner: "nombreDePointsAGagner",
-      miseEnAvant: "miseEnAvant",
-      illustrationURL: "illustrationURL",
-      url: "/coach/quiz/id",
+      titre: 'titre',
+      sousTitre: 'sousTitre',
+      categorie: '🥦 Alimentation',
+      nombreDePointsAGagner: 'nombreDePointsAGagner',
+      miseEnAvant: 'miseEnAvant',
+      illustrationURL: 'illustrationURL',
+      url: '/coach/quiz/id',
       aEteFaite: false,
-      idDuContenu: "idDuContenu",
-      duree: "",
+      idDuContenu: 'idDuContenu',
+      duree: '',
       estBloquee: false,
     };
     const usecase = new ChargerInteractionsUsecase(new InteractionsRepositoryForTest([interactionQuizzAFaire]));
-    await usecase.execute("1", new InteractionsPresenterImpl(expectation));
+    await usecase.execute('1', new InteractionsPresenterImpl(expectation));
     // THEN
     function expectation(interactionViewModels: InteractionViewModel[]) {
       expect(interactionViewModels).toStrictEqual<InteractionViewModel[]>([
         {
-          id: "id",
-          titre: "titre",
-          sousTitre: "sousTitre",
-          categorie: "🥦 Alimentation",
-          nombreDePointsAGagner: "nombreDePointsAGagner",
-          miseEnAvant: "miseEnAvant",
-          type: "QUIZ",
-          illustrationURL: "illustrationURL",
-          url: "/coach/quiz/idDuContenu",
+          id: 'id',
+          titre: 'titre',
+          sousTitre: 'sousTitre',
+          categorie: '🥦 Alimentation',
+          nombreDePointsAGagner: 'nombreDePointsAGagner',
+          miseEnAvant: 'miseEnAvant',
+          type: 'QUIZ',
+          illustrationURL: 'illustrationURL',
+          url: '/coach/quiz/idDuContenu',
           isUrlExterne: false,
           estBloquee: false,
-          duree: "",
-          idDuContenu: "idDuContenu",
+          duree: '',
+          idDuContenu: 'idDuContenu',
         },
       ]);
     }
@@ -68,40 +75,40 @@ describe("Fichier de tests pour charger les interactions", () => {
     const usecase = new ChargerInteractionsUsecase(
       new InteractionsRepositoryForTest([
         {
-          id: "id",
+          id: 'id',
           type: InteractionType.ARTICLE,
-          titre: "titre",
-          sousTitre: "sousTitre",
-          categorie: InteractionCategorie.CONSOMMATION,
-          nombreDePointsAGagner: "nombreDePointsAGagner",
-          miseEnAvant: "miseEnAvant",
-          illustrationURL: "illustrationURL",
-          url: "url",
+          titre: 'titre',
+          sousTitre: 'sousTitre',
+          categorie: '📱 Consommation',
+          nombreDePointsAGagner: 'nombreDePointsAGagner',
+          miseEnAvant: 'miseEnAvant',
+          illustrationURL: 'illustrationURL',
+          url: 'url',
           aEteFaite: false,
-          idDuContenu: "id",
-          duree: "",
+          idDuContenu: 'id',
+          duree: '',
           estBloquee: false,
         },
       ])
     );
-    await usecase.execute("1", new InteractionsPresenterImpl(expectation));
+    await usecase.execute('1', new InteractionsPresenterImpl(expectation));
     // THEN
     function expectation(interactionViewModels: InteractionViewModel[]) {
       expect(interactionViewModels).toStrictEqual<InteractionViewModel[]>([
         {
-          id: "id",
-          titre: "titre",
-          sousTitre: "sousTitre",
-          categorie: "📱 Consommation",
-          nombreDePointsAGagner: "nombreDePointsAGagner",
-          miseEnAvant: "miseEnAvant",
-          type: "ARTICLE",
-          illustrationURL: "illustrationURL",
-          url: "/article/titre",
+          id: 'id',
+          titre: 'titre',
+          sousTitre: 'sousTitre',
+          categorie: '📱 Consommation',
+          nombreDePointsAGagner: 'nombreDePointsAGagner',
+          miseEnAvant: 'miseEnAvant',
+          type: 'ARTICLE',
+          illustrationURL: 'illustrationURL',
+          url: '/article/titre',
           isUrlExterne: false,
           estBloquee: false,
-          duree: "",
-          idDuContenu: "id",
+          duree: '',
+          idDuContenu: 'id',
         },
       ]);
     }
@@ -112,40 +119,40 @@ describe("Fichier de tests pour charger les interactions", () => {
     const usecase = new ChargerInteractionsUsecase(
       new InteractionsRepositoryForTest([
         {
-          id: "id",
+          id: 'id',
           type: InteractionType.SUIVIDUJOUR,
-          titre: "titre",
-          sousTitre: "sousTitre",
-          categorie: InteractionCategorie.GLOBAL,
-          nombreDePointsAGagner: "nombreDePointsAGagner",
-          miseEnAvant: "miseEnAvant",
-          illustrationURL: "illustrationURL",
-          url: "",
+          titre: 'titre',
+          sousTitre: 'sousTitre',
+          categorie: '🌍 Global',
+          nombreDePointsAGagner: 'nombreDePointsAGagner',
+          miseEnAvant: 'miseEnAvant',
+          illustrationURL: 'illustrationURL',
+          url: '',
           aEteFaite: false,
-          idDuContenu: "",
-          duree: "",
+          idDuContenu: '',
+          duree: '',
           estBloquee: false,
         },
       ])
     );
-    await usecase.execute("1", new InteractionsPresenterImpl(expectation));
+    await usecase.execute('1', new InteractionsPresenterImpl(expectation));
     // THEN
     function expectation(interactionViewModels: InteractionViewModel[]) {
       expect(interactionViewModels).toStrictEqual<InteractionViewModel[]>([
         {
-          id: "id",
-          titre: "titre",
-          sousTitre: "sousTitre",
-          categorie: "🌍 Global",
-          nombreDePointsAGagner: "nombreDePointsAGagner",
-          miseEnAvant: "miseEnAvant",
-          type: "SUIVI",
-          illustrationURL: "illustrationURL",
-          url: "/coach/suivi-du-jour",
+          id: 'id',
+          titre: 'titre',
+          sousTitre: 'sousTitre',
+          categorie: '🌍 Global',
+          nombreDePointsAGagner: 'nombreDePointsAGagner',
+          miseEnAvant: 'miseEnAvant',
+          type: 'SUIVI',
+          illustrationURL: 'illustrationURL',
+          url: '/coach/suivi-du-jour',
           isUrlExterne: false,
           estBloquee: false,
-          duree: "",
-          idDuContenu: "",
+          duree: '',
+          idDuContenu: '',
         },
       ]);
     }
@@ -156,99 +163,99 @@ describe("Fichier de tests pour charger les interactions", () => {
     const usecase = new ChargerInteractionsUsecase(
       new InteractionsRepositoryForTest([
         {
-          id: "id",
+          id: 'id',
           type: InteractionType.KYC,
-          titre: "titre",
-          sousTitre: "sousTitre",
-          categorie: InteractionCategorie.GLOBAL,
-          nombreDePointsAGagner: "nombreDePointsAGagner",
-          miseEnAvant: "miseEnAvant",
-          illustrationURL: "illustrationURL",
-          url: "",
+          titre: 'titre',
+          sousTitre: 'sousTitre',
+          categorie: '🌍 Global',
+          nombreDePointsAGagner: 'nombreDePointsAGagner',
+          miseEnAvant: 'miseEnAvant',
+          illustrationURL: 'illustrationURL',
+          url: '',
           aEteFaite: false,
-          idDuContenu: "",
-          duree: "",
+          idDuContenu: '',
+          duree: '',
           estBloquee: false,
         },
       ])
     );
-    await usecase.execute("1", new InteractionsPresenterImpl(expectation));
+    await usecase.execute('1', new InteractionsPresenterImpl(expectation));
     // THEN
     function expectation(interactionViewModels: InteractionViewModel[]) {
       expect(interactionViewModels).toStrictEqual<InteractionViewModel[]>([
         {
-          id: "id",
-          titre: "titre",
-          sousTitre: "sousTitre",
-          categorie: "🌍 Global",
-          nombreDePointsAGagner: "nombreDePointsAGagner",
-          miseEnAvant: "miseEnAvant",
-          type: "KYC",
-          illustrationURL: "illustrationURL",
-          url: "",
+          id: 'id',
+          titre: 'titre',
+          sousTitre: 'sousTitre',
+          categorie: '🌍 Global',
+          nombreDePointsAGagner: 'nombreDePointsAGagner',
+          miseEnAvant: 'miseEnAvant',
+          type: 'KYC',
+          illustrationURL: 'illustrationURL',
+          url: '',
           isUrlExterne: false,
           estBloquee: false,
-          duree: "",
-          idDuContenu: "",
+          duree: '',
+          idDuContenu: '',
         },
       ]);
     }
   });
-  it("Dans le cas de plusieurs interactions faites et à faire on ne doit presenter que les interactions faites", async () => {
+  it('Dans le cas de plusieurs interactions faites et à faire on ne doit presenter que les interactions faites', async () => {
     // GIVEN
     // WHEN
     const usecase = new ChargerInteractionsUsecase(
       new InteractionsRepositoryForTest([
         {
-          id: "id",
+          id: 'id',
           type: InteractionType.KYC,
-          titre: "titre",
-          sousTitre: "sousTitre",
-          categorie: InteractionCategorie.TRANSPORTS,
-          nombreDePointsAGagner: "nombreDePointsAGagner",
-          miseEnAvant: "miseEnAvant",
-          illustrationURL: "illustrationURL",
-          url: "",
+          titre: 'titre',
+          sousTitre: 'sousTitre',
+          categorie: '🚲 Transports',
+          nombreDePointsAGagner: 'nombreDePointsAGagner',
+          miseEnAvant: 'miseEnAvant',
+          illustrationURL: 'illustrationURL',
+          url: '',
           aEteFaite: false,
-          idDuContenu: "",
-          duree: "",
+          idDuContenu: '',
+          duree: '',
           estBloquee: false,
         },
         {
-          id: "id2",
+          id: 'id2',
           type: InteractionType.KYC,
-          titre: "titre",
-          sousTitre: "sousTitre",
-          categorie: InteractionCategorie.GLOBAL,
-          nombreDePointsAGagner: "nombreDePointsAGagner",
-          miseEnAvant: "miseEnAvant",
-          illustrationURL: "illustrationURL",
-          url: "",
+          titre: 'titre',
+          sousTitre: 'sousTitre',
+          categorie: '🌍 Global',
+          nombreDePointsAGagner: 'nombreDePointsAGagner',
+          miseEnAvant: 'miseEnAvant',
+          illustrationURL: 'illustrationURL',
+          url: '',
           aEteFaite: true,
-          idDuContenu: "",
-          duree: "",
+          idDuContenu: '',
+          duree: '',
           estBloquee: false,
         },
       ])
     );
-    await usecase.execute("1", new InteractionsPresenterImpl(expectation));
+    await usecase.execute('1', new InteractionsPresenterImpl(expectation));
     // THEN
     function expectation(interactionViewModels: InteractionViewModel[]) {
       expect(interactionViewModels).toStrictEqual<InteractionViewModel[]>([
         {
-          id: "id",
-          titre: "titre",
-          sousTitre: "sousTitre",
-          categorie: "🚲 Transports",
-          nombreDePointsAGagner: "nombreDePointsAGagner",
-          miseEnAvant: "miseEnAvant",
-          type: "KYC",
-          illustrationURL: "illustrationURL",
-          url: "",
+          id: 'id',
+          titre: 'titre',
+          sousTitre: 'sousTitre',
+          categorie: '🚲 Transports',
+          nombreDePointsAGagner: 'nombreDePointsAGagner',
+          miseEnAvant: 'miseEnAvant',
+          type: 'KYC',
+          illustrationURL: 'illustrationURL',
+          url: '',
           isUrlExterne: false,
           estBloquee: false,
-          duree: "",
-          idDuContenu: "",
+          duree: '',
+          idDuContenu: '',
         },
       ]);
     }
