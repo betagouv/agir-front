@@ -7,7 +7,7 @@ export interface InteractionApiModel {
   type: string;
   titre: string;
   soustitre: string;
-  thematique_gamification: string;
+  thematique_gamification_titre: string;
   tags: string[];
   duree: string;
   image_url: string;
@@ -31,7 +31,7 @@ export class InteractionsRepositoryAxios implements InteractionsRepository {
         type: apiModel.type as InteractionType,
         titre: apiModel.titre,
         sousTitre: apiModel.soustitre,
-        categorie: apiModel.thematique_gamification,
+        categorie: apiModel.thematique_gamification_titre,
         nombreDePointsAGagner: apiModel.points.toString(),
         miseEnAvant: apiModel.reco_score.toString(),
         illustrationURL: apiModel.image_url,
