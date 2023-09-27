@@ -5,7 +5,7 @@
     </legend>
     <div class="fr-fieldset__element" v-for="option in options" :key="option.id">
       <div class="fr-checkbox-group checkbox-group--custom fr-p-2w border">
-        <input :id="option.id" :value="option.id" type="checkbox" v-model="checkedNames" @input="updateValue" />
+        <input :id="option.id" :value="option.id" type="checkbox" v-model="checkedNames" @change="updateValue" />
         <label class="fr-label" :for="option.id">{{ option.label }}</label>
       </div>
     </div>

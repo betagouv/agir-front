@@ -9,7 +9,7 @@
           :titre-etape="etapesOnboarding[etapeCourante]"
           :titre-etape-suivante="etapesOnboarding[etapeCourante + 1]"
         />
-        <button class="fr-btn" @click="submitEtape">Continuer</button>
+        <OnboardingEtapeTransport v-if="etapeCourante === 0" @submitEtape="submitEtape" />
       </div>
     </div>
     <div class="fr-col-3">
@@ -30,10 +30,10 @@
 <script setup lang="ts">
   import { ref } from 'vue';
   import IndicateurDEtapes from '@/components/dsfr/IndicateurDEtapes.vue';
-  import CarteInfo from '../custom/CarteInfo.vue';
+  import OnboardingEtapeTransport from '@/components/custom/OnboardingEtapeTransport.vue';
+  import CarteInfo from '@/components/custom/CarteInfo.vue';
 
   const etapeCourante = ref<number>(0);
-
   const etapesOnboarding = ['Transports', 'Logement', 'Alimentation'];
 
   const submitEtape = () => {
