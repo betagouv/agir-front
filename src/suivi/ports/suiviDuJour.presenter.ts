@@ -1,4 +1,4 @@
-import { Resultat } from "@/suivi/envoyerSuiviDuJour.usecase";
+import { Resultat } from '@/suivi/envoyerSuiviDuJour.usecase';
 
 export interface SuiviDuJourPresenter {
   presente(resultat: Resultat);

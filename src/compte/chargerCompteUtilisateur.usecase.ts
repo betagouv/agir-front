@@ -1,5 +1,5 @@
-import { CompteUtilisateurRepository } from "@/compte/ports/compteUtilisateur.repository";
-import { CompteUtilisateurPresenter } from "@/compte/ports/compteUtilisateur.presenter";
+import { CompteUtilisateurRepository } from '@/compte/ports/compteUtilisateur.repository';
+import { CompteUtilisateurPresenter } from '@/compte/ports/compteUtilisateur.presenter';
 
 export class ChargerCompteUtilisateurUsecase {
   private _compteUtilisateuRepository: CompteUtilisateurRepository;
@@ -9,6 +9,8 @@ export class ChargerCompteUtilisateurUsecase {
   }
 
   async execute(utilisateurId: string, compteUtilisateurPresenter: CompteUtilisateurPresenter): Promise<void> {
-    this._compteUtilisateuRepository.getCompteUtilisateur(utilisateurId).then((compte) => compteUtilisateurPresenter.presente(compte));
+    this._compteUtilisateuRepository
+      .getCompteUtilisateur(utilisateurId)
+      .then(compte => compteUtilisateurPresenter.presente(compte));
   }
 }

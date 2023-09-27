@@ -1,5 +1,5 @@
-import { EmpreinteRepository } from "@/bilan/ports/empreinteRepository";
-import { ChargementEmpreintePresenterImpl } from "@/bilan/adapters/chargementEmpreinte.presenter.impl";
+import { EmpreinteRepository } from '@/bilan/ports/empreinteRepository';
+import { ChargementEmpreintePresenterImpl } from '@/bilan/adapters/chargementEmpreinte.presenter.impl';
 
 export class ChargementEmpreinteUsecase {
   private _empreinteRepository: EmpreinteRepository;

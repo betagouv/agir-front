@@ -6,7 +6,14 @@
           <div class="fr-header__brand fr-enlarge-link">
             <div class="fr-header__brand-top">
               <div class="fr-header__navbar">
-                <button class="fr-btn--menu fr-btn" data-fr-opened="false" aria-controls="modal-1935" aria-haspopup="menu" id="button-1936" title="Menu">
+                <button
+                  class="fr-btn--menu fr-btn"
+                  data-fr-opened="false"
+                  aria-controls="modal-1935"
+                  aria-haspopup="menu"
+                  id="button-1936"
+                  title="Menu"
+                >
                   Menu
                 </button>
               </div>
@@ -18,18 +25,18 @@
           <div class="fr-header__tools">
             <div class="fr-header__tools-links">
               <ul class="fr-btns-group">
-                <li v-if="!nomUtilisateur">
+                <li v-if="!estConnecte">
                   <a class="fr-btn fr-icon-lock-line" id="button-1938" href="/authentification"> Se connecter </a>
                 </li>
-                <li v-if="!nomUtilisateur">
+                <li v-if="!estConnecte">
                   <a class="fr-btn fr-icon-account-line" id="button-1939" href="#[url - à modifier]"> S’enregistrer </a>
                 </li>
-                <li v-if="nomUtilisateur">
+                <li v-if="estConnecte">
                   <div class="utilisateur">
                     <router-link title="accéder à mon compte" :to="{ name: 'mon-compte' }">
                       <img src="/ic_user.svg" class="fr-mr-1v fr-mb-n1v" alt="" />
-                      {{ nomUtilisateur }}</router-link
-                    >
+                      {{ nomUtilisateur }}
+                    </router-link>
                     <div class="score"><img src="/leaf.svg" alt="" />{{ score }}</div>
                   </div>
                   <button class="fr-btn fr-btn--sm" @click="logout">Se déconnecter</button>
@@ -53,15 +60,21 @@
         <nav class="fr-nav" id="navigation" role="navigation" aria-label="Menu principal" data-fr-js-navigation="true">
           <ul class="fr-nav__list">
             <li class="fr-nav__item" data-fr-js-navigation-item="true">
-              <router-link v-if="isCoachActif" class="fr-nav__link" :to="{ name: 'coach' }" aria-current="page"> Le coach </router-link>
+              <router-link v-if="isCoachActif" class="fr-nav__link" :to="{ name: 'coach' }" aria-current="page">
+                Le coach
+              </router-link>
               <router-link v-else class="fr-nav__link" :to="{ name: 'coach' }"> Le coach </router-link>
             </li>
             <li class="fr-nav__item" data-fr-js-navigation-item="true">
-              <router-link v-if="isMesAidesActif" class="fr-nav__link" :to="{ name: 'mes-aides' }" aria-current="page"> Mes Aides </router-link>
+              <router-link v-if="isMesAidesActif" class="fr-nav__link" :to="{ name: 'mes-aides' }" aria-current="page">
+                Mes Aides
+              </router-link>
               <router-link v-else class="fr-nav__link" :to="{ name: 'mes-aides' }"> Mes Aides </router-link>
             </li>
             <li class="fr-nav__item" data-fr-js-navigation-item="true">
-              <router-link v-if="isDashboardActif" class="fr-nav__link" :to="{ name: 'dashboard' }" aria-current="page"> Mon Tableau de Bord </router-link>
+              <router-link v-if="isDashboardActif" class="fr-nav__link" :to="{ name: 'dashboard' }" aria-current="page">
+                Mon Tableau de Bord
+              </router-link>
               <router-link v-else class="fr-nav__link" :to="{ name: 'dashboard' }"> Mon Tableau de Bord </router-link>
             </li>
           </ul>
@@ -71,72 +84,80 @@
   </header>
 </template>
 <script lang="ts">
-import router from "@/router";
-import { defineComponent, onMounted, ref } from "vue";
-import { RouteLocation } from "vue-router";
-import { utilisateurStore } from "@/store/utilisateur";
-export default defineComponent({
-  name: "Header",
-  computed: {
-    score() {
-      return utilisateurStore().score;
-    },
-    nomUtilisateur() {
-      return utilisateurStore().utilisateur;
-    },
-  },
-  watch: {
-    $route(to: RouteLocation, from: RouteLocation) {
-      this.isCoachActif = to.fullPath.includes("/coach");
-      this.isMesAidesActif = to.fullPath.includes("/mes-aides");
-      this.isDashboardActif = to.fullPath.includes("/mon-tableau-de-bord");
-    },
-  },
-  setup() {
-    const currentPage = ref<string>("");
-    const isCoachActif = ref<boolean>(false);
-    const isMesAidesActif = ref<boolean>(false);
-    const isDashboardActif = ref<boolean>(false);
-    function logout() {
-      utilisateurStore().reset();
-      router.replace("/");
-    }
+  import router from '@/router';
+  import { defineComponent, onMounted, ref } from 'vue';
+  import { RouteLocation } from 'vue-router';
+  import { utilisateurStore } from '@/store/utilisateur';
 
-    onMounted(() => {
-      currentPage.value = window.location.pathname;
-    });
+  export default defineComponent({
+    name: 'PageHeader',
+    computed: {
+      score() {
+        return utilisateurStore().score;
+      },
+      nomUtilisateur() {
+        return utilisateurStore().utilisateur.nom;
+      },
+      estConnecte() {
+        console.log(utilisateurStore().utilisateur.nom.length > 0);
+        return utilisateurStore().utilisateur.nom.length > 0;
+      },
+    },
+    watch: {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      $route(to: RouteLocation, from: RouteLocation) {
+        this.isCoachActif = to.fullPath.includes('/coach');
+        this.isMesAidesActif = to.fullPath.includes('/mes-aides');
+        this.isDashboardActif = to.fullPath.includes('/mon-tableau-de-bord');
+      },
+    },
+    setup() {
+      const currentPage = ref<string>('');
+      const isCoachActif = ref<boolean>(false);
+      const isMesAidesActif = ref<boolean>(false);
+      const isDashboardActif = ref<boolean>(false);
 
-    return {
-      logout,
-      currentPage,
-      isCoachActif,
-      isMesAidesActif,
-      isDashboardActif,
-    };
-  },
-});
+      function logout() {
+        utilisateurStore().reset();
+        router.replace('/');
+      }
+
+      onMounted(() => {
+        currentPage.value = window.location.pathname;
+      });
+
+      return {
+        logout,
+        currentPage,
+        isCoachActif,
+        isMesAidesActif,
+        isDashboardActif,
+      };
+    },
+  });
 </script>
 
 <style scoped>
-header {
-  left: 0;
-  top: 0;
-  width: 100%;
-}
-.score {
-  display: flex;
-  padding: 0.5rem;
-  align-items: center;
-  gap: 0.5rem;
-  border-radius: 8px;
-  background: #f6f6f6;
-}
+  header {
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
 
-.utilisateur {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 1rem;
-  flex: 1 0 0;
-}
+  .score {
+    display: flex;
+    padding: 0.5rem;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 8px;
+    background: #f6f6f6;
+  }
+
+  .utilisateur {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1rem;
+    flex: 1 0 0;
+  }
 </style>

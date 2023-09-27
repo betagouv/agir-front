@@ -1,6 +1,6 @@
-import { SuiviRepository } from "@/suivi/ports/suivi.repository";
-import { SuiviDuJourPresenter } from "@/suivi/ports/suiviDuJour.presenter";
-import { InteractionsRepository } from "@/interactions/ports/interactionsRepository";
+import { SuiviRepository } from '@/suivi/ports/suivi.repository';
+import { SuiviDuJourPresenter } from '@/suivi/ports/suiviDuJour.presenter';
+import { InteractionsRepository } from '@/interactions/ports/interactionsRepository';
 
 export interface SuiviAlimentationInput {
   valeurs: Map<string, string>;
@@ -49,10 +49,10 @@ export class EnvoyerSuiviDuJourUsecase {
     interactionId: string
   ): Promise<void> {
     if (!this.isListeDesValeursVide(suiviAlimentation.valeurs)) {
-      await this.suiviRepository.ajouter("alimentation", suiviAlimentation.valeurs, idUtilisateur);
+      await this.suiviRepository.ajouter('alimentation', suiviAlimentation.valeurs, idUtilisateur);
     }
     if (!this.isListeDesValeursVide(suiviTransport.valeurs)) {
-      await this.suiviRepository.ajouter("transport", suiviTransport.valeurs, idUtilisateur);
+      await this.suiviRepository.ajouter('transport', suiviTransport.valeurs, idUtilisateur);
     }
     const resultat = await this.suiviRepository.recupererResultat(idUtilisateur);
     await this.interactionRepository.interactionAEteTerminee(interactionId, idUtilisateur);

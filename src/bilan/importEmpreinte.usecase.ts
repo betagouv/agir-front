@@ -1,4 +1,4 @@
-import { EmpreinteRepository } from "@/bilan/ports/empreinteRepository";
+import { EmpreinteRepository } from '@/bilan/ports/empreinteRepository';
 
 export class importEmpreinteUsecase {
   private _empreinteRepository: EmpreinteRepository;

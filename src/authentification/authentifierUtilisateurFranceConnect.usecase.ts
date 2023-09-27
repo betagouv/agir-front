@@ -1,5 +1,5 @@
-import { Utilisateur, UtilisateurRepository } from "@/authentification/ports/utilisateur.repository";
-import jwt_decode from "jwt-decode";
+import { Utilisateur, UtilisateurRepository } from '@/authentification/ports/utilisateur.repository';
+import jwt_decode from 'jwt-decode';
 
 export interface SessionRepository {
   sauvegarderUtilisateur(utilisateur: Utilisateur);

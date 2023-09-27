@@ -6,6 +6,7 @@ class UtilisateurRepositoryForTest implements UtilisateurRepository {
     return Promise.resolve<Utilisateur>({
       id: "1",
       nom: "Dorian",
+      codePostal: "77650",
     });
   }
 
@@ -19,7 +20,7 @@ class SpySessionRepository implements SessionRepository {
     return this._utilisateur;
   }
 
-  private _utilisateur: Utilisateur = { id: "", nom: "" };
+  private _utilisateur: Utilisateur = { id: "", nom: "", codePostal: "" };
 
   sauvegarderUtilisateur(utilisateur: Utilisateur) {
     this._utilisateur = utilisateur;
@@ -37,6 +38,7 @@ describe("Fichier de tests concernant l'authentification ", () => {
     expect(spySessionRepository.utilisateur).toStrictEqual({
       id: "1",
       nom: "Dorian",
+      codePostal: "77650",
     });
   });
 });

@@ -5,7 +5,13 @@
     </legend>
     <div class="fr-fieldset__element" v-for="option in options" :key="option.id">
       <div class="fr-checkbox-group">
-        <input :name="option.id" :id="option.id" type="checkbox" @change.prevent="onInputChange" :checked="option.checked">
+        <input
+          :name="option.id"
+          :id="option.id"
+          type="checkbox"
+          @change.prevent="onInputChange"
+          :checked="option.checked"
+        />
         <label class="fr-label" :for="option.id">
           {{ option.label }}
         </label>
@@ -18,20 +24,20 @@
   import { ref, onMounted } from 'vue';
 
   const props = defineProps<{
-    id: string
-    label: string
+    id: string;
+    label: string;
     options: {
-      id: string
-      label: string
-      checked?: boolean
-    }[]
+      id: string;
+      label: string;
+      checked?: boolean;
+    }[];
   }>();
 
   const emit = defineEmits(['update']);
   const optionsSelectionnees = ref<string[]>([]);
 
   onMounted(() => {
-    optionsSelectionnees.value = props.options.filter(({checked}) => checked).map(({id}) => id);
+    optionsSelectionnees.value = props.options.filter(({ checked }) => checked).map(({ id }) => id);
   });
 
   const onInputChange = (event: Event) => {

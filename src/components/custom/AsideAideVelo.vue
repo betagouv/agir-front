@@ -8,7 +8,12 @@
       <li>Code postal: {{ codePostal }}</li>
       <li>Revenu fiscal de référence : {{ revenuFiscal }}</li>
     </ul>
-    <button class="fr-link fr-icon-arrow-right-line fr-link--icon-right text--black-light" @click="resetSimulationAides">Modifier ces données</button>
+    <button
+      class="fr-link fr-icon-arrow-right-line fr-link--icon-right text--black-light"
+      @click="resetSimulationAides"
+    >
+      Modifier ces données
+    </button>
   </CarteInfo>
 </template>
 
@@ -16,8 +21,8 @@
   import CarteInfo from '@/components/custom/CarteInfo.vue';
 
   defineProps<{
-    codePostal: string
-    revenuFiscal: string
+    codePostal: string;
+    revenuFiscal: string;
   }>();
 
   const emit = defineEmits(['reset-simulation']);

@@ -8,11 +8,36 @@
     <Accordeon nameId="accordeonBilan">
       <template v-slot:titre>Voir le détail</template>
       <template v-slot:contenu>
-        <JaugeNosGestesClimat class="fr-mb-3v" libelle="🥦 Alimentation" :valeur="getImpactValue.detail.alimentation" couleur="#F28622" />
-        <JaugeNosGestesClimat class="fr-mb-3v" libelle="🚗 Transports" :valeur="getImpactValue.detail.transport" couleur="#474EFF" />
-        <JaugeNosGestesClimat class="fr-mb-3v" libelle="🏛️ Services sociétaux" :valeur="getImpactValue.detail.servicesSocietaux" couleur="#809769" />
-        <JaugeNosGestesClimat class="fr-mb-3v" libelle="🏡 Logement" :valeur="getImpactValue.detail.logement" couleur="#F8BE00" />
-        <JaugeNosGestesClimat class="fr-mb-3v" libelle="🛒 Consommation" :valeur="getImpactValue.detail.divers" couleur="#5C26D1" />
+        <JaugeNosGestesClimat
+          class="fr-mb-3v"
+          libelle="🥦 Alimentation"
+          :valeur="getImpactValue.detail.alimentation"
+          couleur="#F28622"
+        />
+        <JaugeNosGestesClimat
+          class="fr-mb-3v"
+          libelle="🚗 Transports"
+          :valeur="getImpactValue.detail.transport"
+          couleur="#474EFF"
+        />
+        <JaugeNosGestesClimat
+          class="fr-mb-3v"
+          libelle="🏛️ Services sociétaux"
+          :valeur="getImpactValue.detail.servicesSocietaux"
+          couleur="#809769"
+        />
+        <JaugeNosGestesClimat
+          class="fr-mb-3v"
+          libelle="🏡 Logement"
+          :valeur="getImpactValue.detail.logement"
+          couleur="#F8BE00"
+        />
+        <JaugeNosGestesClimat
+          class="fr-mb-3v"
+          libelle="🛒 Consommation"
+          :valeur="getImpactValue.detail.divers"
+          couleur="#5C26D1"
+        />
       </template>
     </Accordeon>
   </CarteVierge>
@@ -21,10 +46,10 @@
 <script setup lang="ts">
   import Accordeon from '@/components/dsfr/Accordeon.vue';
   import CarteVierge from '@/components/CarteVierge.vue';
-  import JaugeNosGestesClimat from "@/components/JaugeNosGestesClimat.vue";
-  import { EmpreinteViewModel } from "@/bilan/adapters/chargementEmpreinte.presenter.impl";
+  import JaugeNosGestesClimat from '@/components/JaugeNosGestesClimat.vue';
+  import { EmpreinteViewModel } from '@/bilan/adapters/chargementEmpreinte.presenter.impl';
 
   defineProps<{
-    getImpactValue: EmpreinteViewModel
+    getImpactValue: EmpreinteViewModel;
   }>();
 </script>

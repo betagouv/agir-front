@@ -1,17 +1,17 @@
-import { InteractionsPresenter } from "@/interactions/ports/interactionsPresenter";
-import { InteractionsRepository } from "@/interactions/ports/interactionsRepository";
+import { InteractionsPresenter } from '@/interactions/ports/interactionsPresenter';
+import { InteractionsRepository } from '@/interactions/ports/interactionsRepository';
 export enum InteractionCategorie {
-  ENERGIE = "Energie",
-  CONSOMMATION = "Consommation",
-  ALIMENTATION = "Alimentation",
-  GLOBAL = "Global",
-  TRANSPORTS = "Transports",
+  ENERGIE = 'Energie',
+  CONSOMMATION = 'Consommation',
+  ALIMENTATION = 'Alimentation',
+  GLOBAL = 'Global',
+  TRANSPORTS = 'Transports',
 }
 export enum InteractionType {
-  QUIZ = "quizz",
-  ARTICLE = "article",
-  KYC = "KYC",
-  SUIVIDUJOUR = "suivi_du_jour",
+  QUIZ = 'quizz',
+  ARTICLE = 'article',
+  KYC = 'KYC',
+  SUIVIDUJOUR = 'suivi_du_jour',
 }
 export interface Interaction {
   id: string;

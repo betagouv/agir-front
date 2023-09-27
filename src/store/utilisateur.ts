@@ -1,21 +1,23 @@
-import { Utilisateur } from "@/authentification/ports/utilisateur.repository";
-import { EmpreinteViewModel } from "@/bilan/adapters/chargementEmpreinte.presenter.impl";
-import { InteractionViewModel } from "@/interactions/adapters/interactions.presenter.impl";
-import { defineStore } from "pinia";
+import { Utilisateur } from '@/authentification/ports/utilisateur.repository';
+import { EmpreinteViewModel } from '@/bilan/adapters/chargementEmpreinte.presenter.impl';
+import { InteractionViewModel } from '@/interactions/adapters/interactions.presenter.impl';
+import { defineStore } from 'pinia';
 
 interface State {
-  utilisateur: string;
-  id: string;
+  utilisateur: Utilisateur;
   valeurBilanCarbone: EmpreinteViewModel;
   interactionEnCours: InteractionViewModel | null;
   score: number;
 }
 
 export const initialState: State = {
-  utilisateur: "",
-  id: "",
+  utilisateur: {
+    id: '',
+    nom: '',
+    codePostal: '',
+  },
   valeurBilanCarbone: {
-    bilan: "",
+    bilan: '',
     detail: {
       alimentation: 0,
       divers: 0,
@@ -28,12 +30,11 @@ export const initialState: State = {
   score: 0,
 };
 
-export const utilisateurStore = defineStore("utilisateur", {
+export const utilisateurStore = defineStore('utilisateur', {
   state: (): State => ({ ...initialState }),
   actions: {
     setUtilisateur(utilisateur: Utilisateur) {
-      this.utilisateur = utilisateur.nom;
-      this.id = utilisateur.id;
+      this.utilisateur = utilisateur;
     },
     setValeurBilanCarbone(valeurBilanCarbone: EmpreinteViewModel) {
       this.valeurBilanCarbone = valeurBilanCarbone;

@@ -1,9 +1,11 @@
-<template></template>
+<template>
+  <div />
+</template>
 <script lang="ts">
-import { defineComponent } from "vue";
+  import { defineComponent } from 'vue';
 
-export default defineComponent({
-  name: "Communaute",
-});
+  export default defineComponent({
+    name: 'Communaute',
+  });
 </script>
 <style scoped></style>

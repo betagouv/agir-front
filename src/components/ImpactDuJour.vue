@@ -7,7 +7,7 @@
       de CO₂-e
     </p>
     <p class="fr-text--bold fr-text--sm fr-mb-2w">Autant d'émissions que pour fabriquer</p>
-    <p class="fr-grid-row fr-grid-row--middle  fr-text--bold fr-mb-0">
+    <p class="fr-grid-row fr-grid-row--middle fr-text--bold fr-mb-0">
       <span class="fr-icon-drop-fill fr-mr-2v" aria-hidden="true"></span>
       <span class="text--3xl fr-mr-2v">{{ equivalentEnLitres }}</span> litres d'eau en bouteille
     </p>
@@ -16,13 +16,13 @@
 
 <script setup lang="ts">
   interface ImpactDuJourProps {
-    consommationDuJour: string
-    equivalentEnLitres: string
+    consommationDuJour: string;
+    equivalentEnLitres: string;
   }
 
   withDefaults(defineProps<ImpactDuJourProps>(), {
     consommationDuJour: '0',
-    equivalentEnLitres: '0'
+    equivalentEnLitres: '0',
   });
 </script>
 
@@ -33,6 +33,6 @@
   }
 
   .fr-icon-drop-fill {
-    color: #b3b4f9
+    color: #b3b4f9;
   }
 </style>

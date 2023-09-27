@@ -1,5 +1,5 @@
-import { Quiz } from "@/quiz/ports/quizRepository";
-import { ChargementQuizzPresenter } from "@/quiz/ports/chargementQuizz.presenter";
+import { Quiz } from '@/quiz/ports/quizRepository';
+import { ChargementQuizzPresenter } from '@/quiz/ports/chargementQuizz.presenter';
 
 export interface QuestionViewModel {
   id: string;
@@ -28,7 +28,7 @@ export class ChargementQuizPresenterImpl implements ChargementQuizzPresenter {
     this._quizViewModel({
       steps: (quiz.questions.length * 2).toString(),
       titre: quiz.titre,
-      questions: quiz.questions.map((question) => {
+      questions: quiz.questions.map(question => {
         return {
           id: question.id,
           intitule: question.intitule,

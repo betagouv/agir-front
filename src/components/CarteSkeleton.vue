@@ -14,7 +14,7 @@
   .skeleton {
     height: 1.25rem;
     border-radius: 4px;
-    background-color: #3F3F3F;
+    background-color: #3f3f3f;
     animation: loadingAnimation 1.5s ease-in-out infinite;
   }
 

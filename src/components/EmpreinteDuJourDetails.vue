@@ -6,13 +6,13 @@
         v-for="(impactCarboneItem, index) in suiviDuJourResultats.additionCarbone"
         :key="impactCarboneItem.valeur"
         class="fr-grid-row fr-text--xs"
-        :class="[{'text--bold fr-text--sm': index < 3}]"
+        :class="[{ 'text--bold fr-text--sm': index < 3 }]"
       >
         <span class="fr-col-3">
           {{ impactCarboneItem.impactCarbone }}
         </span>
-        <span class="fr-col-9" >
-            {{ impactCarboneItem.valeur }}
+        <span class="fr-col-9">
+          {{ impactCarboneItem.valeur }}
         </span>
       </li>
     </ul>
@@ -20,9 +20,9 @@
 </template>
 
 <script setup lang="ts">
-  import { SuiviDuJourResultatsViewModel } from "@/suivi/adapters/suiviDuJour.presenter.impl";
+  import { SuiviDuJourResultatsViewModel } from '@/suivi/adapters/suiviDuJour.presenter.impl';
 
   defineProps<{
-    suiviDuJourResultats: SuiviDuJourResultatsViewModel
+    suiviDuJourResultats: SuiviDuJourResultatsViewModel;
   }>();
 </script>

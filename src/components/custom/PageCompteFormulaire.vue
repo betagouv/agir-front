@@ -65,16 +65,19 @@
   </form>
 </template>
 <script setup lang="ts">
-import { CompteUtlisateurViewModel } from "@/compte/adapters/compteUtilisateur.presenter.impl";
-import { CompteUtilisateurRepositoryImpl } from "@/compte/adapters/compteUtilisateur.repository.impl";
-import { MettreAJourCompteUtilisateurUsecase } from "@/compte/mettreAJourCompteUtilisateur.usecase";
+  import { CompteUtlisateurViewModel } from '@/compte/adapters/compteUtilisateur.presenter.impl';
+  import { CompteUtilisateurRepositoryImpl } from '@/compte/adapters/compteUtilisateur.repository.impl';
+  import { MettreAJourCompteUtilisateurUsecase } from '@/compte/mettreAJourCompteUtilisateur.usecase';
+  import { ref } from 'vue';
 
-const props = defineProps<{
-  compteUtlisateurViewModel: CompteUtlisateurViewModel;
-}>();
+  const props = defineProps<{
+    compteUtlisateurViewModel: CompteUtlisateurViewModel;
+  }>();
 
-function modifierInformation() {
-  const usecase = new MettreAJourCompteUtilisateurUsecase(new CompteUtilisateurRepositoryImpl());
-  usecase.execute(props.compteUtlisateurViewModel);
-}
+  const compteUtlisateurViewModel = ref<CompteUtlisateurViewModel>(props.compteUtlisateurViewModel);
+
+  function modifierInformation() {
+    const usecase = new MettreAJourCompteUtilisateurUsecase(new CompteUtilisateurRepositoryImpl());
+    usecase.execute(props.compteUtlisateurViewModel);
+  }
 </script>

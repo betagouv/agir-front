@@ -25,16 +25,16 @@
 </template>
 
 <script setup lang="ts">
-import FilDAriane from "./dsfr/FilDAriane.vue";
-import { ArticleCMS } from "@/cms/chargerContenuCms";
+  import FilDAriane from './dsfr/FilDAriane.vue';
+  import { ArticleCMS } from '@/cms/chargerContenuCms';
 
-defineProps<{
-  article: ArticleCMS;
-}>();
+  defineProps<{
+    article: ArticleCMS;
+  }>();
 </script>
 
 <style>
-.article {
-  border: 1px solid rgba(0, 0, 0, 0.19);
-}
+  .article {
+    border: 1px solid rgba(0, 0, 0, 0.19);
+  }
 </style>

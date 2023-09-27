@@ -1,4 +1,4 @@
-import { InteractionsRepository } from "@/interactions/ports/interactionsRepository";
+import { InteractionsRepository } from '@/interactions/ports/interactionsRepository';
 
 export class CliquerInteractionUsecase {
   private _interactionRepository: InteractionsRepository;
@@ -7,7 +7,7 @@ export class CliquerInteractionUsecase {
   }
 
   async execute(utilisateurId: string, interactionId: string, interactionType: string): Promise<void> {
-    if (interactionType === "ARTICLE") {
+    if (interactionType === 'ARTICLE') {
       await this._interactionRepository.interactionAEteTerminee(interactionId, utilisateurId);
     }
     await this._interactionRepository.interactionAEteCliquee(interactionId, utilisateurId);

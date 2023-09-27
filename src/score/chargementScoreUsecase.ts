@@ -1,5 +1,5 @@
-import { ChargementScorePresenter } from "@/score/ports/chargementScorePresenter";
-import { ScoreRepository } from "@/score/ports/scoreRepository";
+import { ChargementScorePresenter } from '@/score/ports/chargementScorePresenter';
+import { ScoreRepository } from '@/score/ports/scoreRepository';
 
 export class ChargementScoreUsecase {
   private dashboardRepository: ScoreRepository;

@@ -1,5 +1,5 @@
-import { Empreinte } from "@/bilan/ports/empreinteRepository";
-import { ChargementEmpreintePresenter } from "@/bilan/ports/chargementEmpreinte.presenter";
+import { Empreinte } from '@/bilan/ports/empreinteRepository';
+import { ChargementEmpreintePresenter } from '@/bilan/ports/chargementEmpreinte.presenter';
 
 interface DetailEmpreinteViewModel {
   alimentation: number;

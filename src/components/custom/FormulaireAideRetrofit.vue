@@ -3,33 +3,41 @@
     <h2 class="fr-h5">Paramètres</h2>
     <form @submit.prevent="submitForm">
       <div class="fr-input-group">
-        <label class="fr-label" for="text-input-code-postal">
-          Votre code postal
-        </label>
-        <input class="fr-input" v-model="codePostal" name="code-postal" id="text-input-code-postal" type="text">
+        <label class="fr-label" for="text-input-code-postal"> Votre code postal </label>
+        <input
+          required
+          class="fr-input"
+          v-model="codePostal"
+          name="code-postal"
+          id="text-input-code-postal"
+          type="text"
+        />
       </div>
       <div class="fr-input-group">
-        <label class="fr-label" for="text-input-rfr">
-          Revenu fiscal de référence
-        </label>
-        <input class="fr-input" v-model="revenuFiscal" name="code-postal" id="text-input-rfr" type="text">
+        <label class="fr-label" for="text-input-rfr"> Revenu fiscal de référence </label>
+        <input required class="fr-input" v-model="revenuFiscal" name="code-postal" id="text-input-rfr" type="text" />
       </div>
-      <button class="fr-mt-2v fr-btn">Valider</button>
+      <button class="fr-mt-2v fr-btn" :disabled="isDisabled">Valider</button>
     </form>
   </div>
 </template>
-  
+
 <script setup lang="ts">
-  import { ref } from 'vue';
+  import { computed, ref } from 'vue';
   import { SimulerAideRetrofitPresenterImpl } from '@/aides/adapters/simulerAideRetrofit.presenter.impl';
   import { SimulerAideRetrofitRepositoryAxios } from '@/aides/adapters/simulerAideRetrofit.repository.axios';
   import SimulerAideRetrofitUsecase from '@/aides/simulerAideRetrofit.usecase';
   import { SimulationAideResultatViewModel } from '@/aides/ports/simulationAideResultat';
+  import { utilisateurStore } from '@/store/utilisateur';
 
-  const emit = defineEmits(['submit-simulation'])
-  const codePostal = ref("");
-  const revenuFiscal = ref("");
+  const store = utilisateurStore();
+  const emit = defineEmits(['submit-simulation']);
+  const codePostal = ref(store.utilisateur.codePostal);
+  const revenuFiscal = ref('');
 
+  const isDisabled = computed(() => {
+    return codePostal.value.trim() === '' || revenuFiscal.value.trim() === '';
+  });
   const submitForm = () => {
     const useCase = new SimulerAideRetrofitUsecase(new SimulerAideRetrofitRepositoryAxios());
 

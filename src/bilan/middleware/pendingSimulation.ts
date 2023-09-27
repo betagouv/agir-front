@@ -1,8 +1,8 @@
-import { importEmpreinteUsecase } from "@/bilan/importEmpreinte.usecase";
-import { EmpreinteRepositoryAxios } from "@/bilan/adapters/empreinteRepository.axios";
-import { utilisateurStore } from "@/store/utilisateur";
+import { importEmpreinteUsecase } from '@/bilan/importEmpreinte.usecase';
+import { EmpreinteRepositoryAxios } from '@/bilan/adapters/empreinteRepository.axios';
+import { utilisateurStore } from '@/store/utilisateur';
 
-const storedtNGC = "storedImportNGC";
+const storedtNGC = 'storedImportNGC';
 
 export function storeIdNGC(to, from, next) {
   const importNGC = to.query?.importNGC;
@@ -15,8 +15,8 @@ export function storeIdNGC(to, from, next) {
 export function sendIdNGC() {
   const storedImportNGC = sessionStorage.getItem(storedtNGC);
   if (storedImportNGC) {
-    const utilisateur = utilisateurStore();
+    const utilisateurId: string = utilisateurStore().utilisateur.id;
     const importNGC = new importEmpreinteUsecase(new EmpreinteRepositoryAxios());
-    importNGC.execute(storedImportNGC, utilisateur.id).then(() => sessionStorage.removeItem(storedImportNGC));
+    importNGC.execute(storedImportNGC, utilisateurId).then(() => sessionStorage.removeItem(storedImportNGC));
   }
 }

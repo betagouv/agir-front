@@ -1,4 +1,4 @@
-import { Score } from "@/score/ports/scoreRepository";
+import { Score } from '@/score/ports/scoreRepository';
 
 export interface CompteurViewModel {
   consommation: string;

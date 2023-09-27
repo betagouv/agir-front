@@ -1,6 +1,6 @@
-import { CompteUtilisateurRepository } from "@/compte/ports/compteUtilisateur.repository";
-import { CompteUtlisateurViewModel } from "@/compte/adapters/compteUtilisateur.presenter.impl";
-import { SessionRepository } from "@/authentification/authentifierUtilisateur.usecase";
+import { CompteUtilisateurRepository } from '@/compte/ports/compteUtilisateur.repository';
+import { CompteUtlisateurViewModel } from '@/compte/adapters/compteUtilisateur.presenter.impl';
+import { SessionRepository } from '@/authentification/authentifierUtilisateur.usecase';
 
 export class CreerCompteUtilisateurUsecase {
   private _compteUtilisateuRepository: CompteUtilisateurRepository;
@@ -19,6 +19,7 @@ export class CreerCompteUtilisateurUsecase {
     this._sessionRepository.sauvegarderUtilisateur({
       nom: utilisateurCree.nom,
       id: utilisateurCree.id,
+      codePostal: utilisateurCree.codePostal,
     });
   }
 }

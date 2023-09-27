@@ -20,7 +20,11 @@
       <div class="fr-col-12 fr-col-lg-4">
         <div v-if="!isLoading">
           <BilanNosGestesClimat v-if="empreinteViewModel" class="fr-mb-3w" :get-impact-value="empreinteViewModel" />
-          <MesResultats v-if="scoreViewModel" :badge-view-model="scoreViewModel.badges" :score-value="scoreViewModel.score" />
+          <MesResultats
+            v-if="scoreViewModel"
+            :badge-view-model="scoreViewModel.badges"
+            :score-value="scoreViewModel.score"
+          />
         </div>
         <div v-else>
           <CarteSkeleton class="fr-mb-3w" />
@@ -32,23 +36,26 @@
 </template>
 
 <script setup lang="ts">
-  import { onMounted, ref } from "vue";
-  import { ScoreViewModel } from "@/score/ports/chargementScorePresenter";
-  import CarteSkeleton from "@/components/CarteSkeleton.vue";
-  import BilanNosGestesClimat from "@/components/BilanNosGestesClimat.vue";
-  import MesResultats from "@/components/MesResultats.vue";
-  import { ChargementEmpreinteUsecase } from "@/bilan/chargementEmpreinte.usecase";
-  import { EmpreinteRepositoryAxios } from "@/bilan/adapters/empreinteRepository.axios";
-  import { ChargementEmpreintePresenterImpl, EmpreinteViewModel } from "@/bilan/adapters/chargementEmpreinte.presenter.impl";
-  import { ChargerInteractionsUsecase } from "@/interactions/chargerInteractions.usecase";
-  import { InteractionsPresenterImpl, InteractionViewModel } from "@/interactions/adapters/interactions.presenter.impl";
-  import InteractionCard from "@/components/custom/InteractionCard.vue";
-  import { InteractionsRepositoryAxios } from "@/interactions/adapters/interactionsRepository.axios";
-  import { ChargementScoreUsecase } from "@/score/chargementScoreUsecase";
-  import { ScoreRepositoryAxios } from "@/score/adapters/scoreRepository.axios";
-  import { ChargementScorePresenterImpl } from "@/score/adapters/chargementScorePresenterImpl";
-  import { utilisateurStore } from "@/store/utilisateur";
-  import { CliquerInteractionUsecase } from "@/interactions/cliquerInteraction.usecase";
+  import { onMounted, ref } from 'vue';
+  import { ScoreViewModel } from '@/score/ports/chargementScorePresenter';
+  import CarteSkeleton from '@/components/CarteSkeleton.vue';
+  import BilanNosGestesClimat from '@/components/BilanNosGestesClimat.vue';
+  import MesResultats from '@/components/MesResultats.vue';
+  import { ChargementEmpreinteUsecase } from '@/bilan/chargementEmpreinte.usecase';
+  import { EmpreinteRepositoryAxios } from '@/bilan/adapters/empreinteRepository.axios';
+  import {
+    ChargementEmpreintePresenterImpl,
+    EmpreinteViewModel,
+  } from '@/bilan/adapters/chargementEmpreinte.presenter.impl';
+  import { ChargerInteractionsUsecase } from '@/interactions/chargerInteractions.usecase';
+  import { InteractionsPresenterImpl, InteractionViewModel } from '@/interactions/adapters/interactions.presenter.impl';
+  import InteractionCard from '@/components/custom/InteractionCard.vue';
+  import { InteractionsRepositoryAxios } from '@/interactions/adapters/interactionsRepository.axios';
+  import { ChargementScoreUsecase } from '@/score/chargementScoreUsecase';
+  import { ScoreRepositoryAxios } from '@/score/adapters/scoreRepository.axios';
+  import { ChargementScorePresenterImpl } from '@/score/adapters/chargementScorePresenterImpl';
+  import { utilisateurStore } from '@/store/utilisateur';
+  import { CliquerInteractionUsecase } from '@/interactions/cliquerInteraction.usecase';
 
   const empreinteViewModel = ref<EmpreinteViewModel>();
   const interactionsViewModel = ref<InteractionViewModel[]>();
@@ -57,7 +64,7 @@
   const store = utilisateurStore();
 
   const emit = defineEmits<{
-    (event: 'refreshInteractions'): void
+    (event: 'refreshInteractions'): void;
   }>();
 
   function mapValueBilan(viewModel: EmpreinteViewModel) {
@@ -76,17 +83,17 @@
 
   const interactionAEteCliquee = (interaction: InteractionViewModel) => {
     const store = utilisateurStore();
-    const idUtilisateur = store.id;
+    const idUtilisateur = store.utilisateur.id;
     const useCase = new CliquerInteractionUsecase(new InteractionsRepositoryAxios());
     useCase.execute(idUtilisateur, interaction.id, interaction.type).then(() => {
-      emit("refreshInteractions");
+      emit('refreshInteractions');
     });
     store.setInteractionEnCours(interaction);
   };
 
   const lancerChargementDesDonnees = () => {
     isLoading.value = true;
-    const idUtilisateur = store.id;
+    const idUtilisateur = store.utilisateur.id;
     const chargementEmpreinteUseCase = new ChargementEmpreinteUsecase(new EmpreinteRepositoryAxios());
     const chargerInteractionsUseCase = new ChargerInteractionsUsecase(new InteractionsRepositoryAxios());
     const chargerScoreUseCase = new ChargementScoreUsecase(new ScoreRepositoryAxios());

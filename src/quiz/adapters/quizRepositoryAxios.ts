@@ -1,5 +1,5 @@
-import { AxiosFactory } from "@/axios.factory";
-import { Quiz, QuizRepository } from "@/quiz/ports/quizRepository";
+import { AxiosFactory } from '@/axios.factory';
+import { Quiz, QuizRepository } from '@/quiz/ports/quizRepository';
 
 interface QuestionsQuizApiModel {
   id: string;
@@ -22,7 +22,7 @@ export class QuizRepositoryAxios implements QuizRepository {
       const response = await axiosInstance.get<QuizApiModel>(`/quizz/${idQuizz}`);
       return {
         titre: response.data.titre,
-        questions: response.data.questions.map((question) => {
+        questions: response.data.questions.map(question => {
           return {
             id: question.id,
             intitule: question.libelle,

@@ -1,4 +1,4 @@
-import { DernierSuivi, SuiviRepository } from "@/suivi/ports/suivi.repository";
+import { DernierSuivi, SuiviRepository } from '@/suivi/ports/suivi.repository';
 
 export interface DernierSuiviPresenter {
   presente(suivi: DernierSuivi);

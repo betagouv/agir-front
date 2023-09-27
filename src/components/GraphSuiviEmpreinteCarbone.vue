@@ -22,10 +22,10 @@
 </template>
 
 <script setup lang="ts">
-  import { LineChart } from "vue-chart-3";
-  import { Chart, registerables } from "chart.js";
-  import Transcription from "./dsfr/Transcription.vue";
-  import Tableau from "./dsfr/Table.vue";
+  import { LineChart } from 'vue-chart-3';
+  import { Chart, registerables } from 'chart.js';
+  import Transcription from './dsfr/Transcription.vue';
+  import Tableau from './dsfr/Table.vue';
 
   const titreDuGraphique = 'Évolution de votre impact carbone';
   const titreVariationDesSuivis = 'Variation des suivis';
@@ -33,33 +33,33 @@
   Chart.register(...registerables);
 
   const donneesGraphique = defineProps<{
-    datesDuGraph: string[],
-    valeursCarboneDuGraph: number[],
-    moyenneDesSuivis: number[],
+    datesDuGraph: string[];
+    valeursCarboneDuGraph: number[];
+    moyenneDesSuivis: number[];
   }>();
 
-  const getDonneesDuGraph = () => {        
+  const getDonneesDuGraph = () => {
     return {
       labels: donneesGraphique.datesDuGraph,
       datasets: [
         {
           label: titreVariationDesSuivis,
-          backgroundColor: "#000091",
-          borderColor: "#000091",
-          pointStyle: "circle" as const,
+          backgroundColor: '#000091',
+          borderColor: '#000091',
+          pointStyle: 'circle' as const,
           data: donneesGraphique.valeursCarboneDuGraph,
         },
         {
-          label: "Votre moyenne",
-          backgroundColor: "#f6f6f6",
-          borderColor: "#000000",
+          label: 'Votre moyenne',
+          backgroundColor: '#f6f6f6',
+          borderColor: '#000000',
           borderDash: [5, 5],
           pointStyle: false as const,
           data: donneesGraphique.moyenneDesSuivis,
         },
       ],
     };
-  }
+  };
 
   const getOptionsDuGraph = () => {
     return {
@@ -68,7 +68,7 @@
       plugins: {
         legend: {
           display: false,
-        }
+        },
       },
       scales: {
         y: {
@@ -83,21 +83,20 @@
         },
       },
     };
-  }
+  };
 
   const getDonneesDuTableau = (tableau1: (string | number)[], tableau2: (string | number)[]): (string | number)[][] => {
     const tableauCombiné = tableau1.map((value, index) => [value, tableau2[index]]);
-    
-    return tableauCombiné;
-  }
 
+    return tableauCombiné;
+  };
 </script>
 
 <style scoped>
   .legende-graphique {
     width: 3rem;
     height: 0;
-    margin: 0 1rem 0 .5rem;
+    margin: 0 1rem 0 0.5rem;
   }
   .legende-graphique--blue {
     border: 4px solid #000091;

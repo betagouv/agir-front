@@ -1,16 +1,16 @@
-import { Aides } from "@/aides/chargementAides.usecase";
+import { Aides } from '@/aides/chargementAides.usecase';
 
 export interface AideViewModel {
-  id: string,
-  titre: string,
-  categorie: string,
-  contenu: string,
-  isSimulateur: boolean,
-  url: string
+  id: string;
+  titre: string;
+  categorie: string;
+  contenu: string;
+  isSimulateur: boolean;
+  url: string;
 }
 
 export interface AidesViewModel {
-  [key: AideViewModel['categorie']]: AideViewModel[]
+  [key: AideViewModel['categorie']]: AideViewModel[];
 }
 
 export interface ChargementAidesPresenter {

@@ -1,8 +1,8 @@
-import { Aides } from "@/aides/chargementAides.usecase";
-import { ChargementAidesPresenter, AideViewModel, AidesViewModel } from "@/aides/ports/chargementAides.presenter";
+import { Aides } from '@/aides/chargementAides.usecase';
+import { ChargementAidesPresenter, AideViewModel, AidesViewModel } from '@/aides/ports/chargementAides.presenter';
 
 export class ChargementAidesPresenterImpl implements ChargementAidesPresenter {
-  constructor(private _viewModel: (AidesViewModel: AidesViewModel) => void) { }
+  constructor(private _viewModel: (AidesViewModel: AidesViewModel) => void) {}
 
   private groupeParCategorie = (aides: Aides[]): AidesViewModel => {
     const map: AidesViewModel = {};
@@ -18,8 +18,8 @@ export class ChargementAidesPresenterImpl implements ChargementAidesPresenter {
         categorie: aide.categorie,
         contenu: aide.contenu,
         isSimulateur: aide.isSimulateur,
-        url: aide.url
-      }
+        url: aide.url,
+      };
 
       map[aide.categorie].push(aideToPush);
     });
@@ -27,9 +27,9 @@ export class ChargementAidesPresenterImpl implements ChargementAidesPresenter {
     return map;
   };
 
-  presente(aides: Aides[]): void {  
+  presente(aides: Aides[]): void {
     const viewModel = this.groupeParCategorie(aides);
-  
+
     this._viewModel(viewModel);
   }
 }

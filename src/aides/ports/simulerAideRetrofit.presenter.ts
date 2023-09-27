@@ -1,4 +1,4 @@
-import { SimulationRetrofit } from "@/aides/simulerAideRetrofit.usecase";
+import { SimulationRetrofit } from '@/aides/simulerAideRetrofit.usecase';
 export interface SimulationAidesRetrofitViewModel {
   libelle: string;
   montant: string;

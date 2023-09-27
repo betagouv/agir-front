@@ -1,9 +1,9 @@
 <template>
   <h1 class="fr-h2">{{ titre }}</h1>
-  <div v-if="!simulationAidesViewModel">
+  <div v-show="!simulationAidesViewModel">
     <slot name="formulaire"></slot>
   </div>
-  <div v-else class="fr-grid-row fr-grid-row--gutters">
+  <div v-if="simulationAidesViewModel" class="fr-grid-row fr-grid-row--gutters">
     <div class="fr-col-lg-4 fr-col-12">
       <slot name="asideResultatAides"></slot>
     </div>
@@ -39,8 +39,8 @@
   import AideDetail from '@/components/custom/AideDetail.vue';
   import { SimulationAideResultatViewModel } from '@/aides/ports/simulationAideResultat';
   defineProps<{
-    titre: string
-    simulationAidesViewModel: SimulationAideResultatViewModel | null
+    titre: string;
+    simulationAidesViewModel: SimulationAideResultatViewModel | null;
   }>();
 </script>
 
@@ -48,7 +48,7 @@
   li {
     padding-bottom: 1.5rem;
     margin-bottom: 1.5rem;
-    border-bottom: 1px solid rgba(0, 0, 0, .2);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   }
 
   li:last-child {

@@ -1,6 +1,6 @@
-import { DernierSuiviPresenter } from "@/suivi/obtenirDernierSuivi.usecase";
-import { DateTime } from "@/DateTime";
-import { DernierSuivi } from "@/suivi/ports/suivi.repository";
+import { DernierSuiviPresenter } from '@/suivi/obtenirDernierSuivi.usecase';
+import { DateTime } from '@/DateTime';
+import { DernierSuivi } from '@/suivi/ports/suivi.repository';
 
 export interface DernierSuiviDuJourViewModel {
   date: string;
@@ -17,15 +17,15 @@ export class DernierSuiviDuJourPresenterImpl implements DernierSuiviPresenter {
 
   convertiLesMinutesEnHeures(minutes: number): string {
     const heures = Math.floor(minutes / 60);
-    const resultFinalDesHeures = String(heures).padStart(2, "0");
+    const resultFinalDesHeures = String(heures).padStart(2, '0');
     const minutesRestantes = minutes % 60;
-    const resultatFinalDesMinutes = String(minutesRestantes).padStart(2, "0");
+    const resultatFinalDesMinutes = String(minutesRestantes).padStart(2, '0');
 
     return `${resultFinalDesHeures}:${resultatFinalDesMinutes}`;
   }
 
   isTransportEnCommun(valeur: string): boolean {
-    return valeur.includes("train") || valeur.includes("metro") || valeur.includes("bus");
+    return valeur.includes('train') || valeur.includes('metro') || valeur.includes('bus');
   }
 
   formaterLesValeursDuSuivis(listeDesValeurs: Map<string, string>): Map<string, string> {

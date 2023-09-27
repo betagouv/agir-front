@@ -1,5 +1,5 @@
-import { SuiviRepository } from "@/suivi/ports/suivi.repository";
-import { SuiviDuJourPresenter } from "@/suivi/ports/suiviDuJour.presenter";
+import { SuiviRepository } from '@/suivi/ports/suivi.repository';
+import { SuiviDuJourPresenter } from '@/suivi/ports/suiviDuJour.presenter';
 
 export class ResultatSuiviDuJourUsecase {
   private suiviRepository: SuiviRepository;
