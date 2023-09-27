@@ -1,61 +1,50 @@
 <template>
-  <form
-    class="fr-col-12 fr-col-lg-6 fr-mx-auto fr-mb-0 background--white fr-p-4w border border-radius--md"
-    @submit.prevent="performCreerCompteUtilisateur"
-  >
-    <fieldset class="fr-mb-0 fr-fieldset">
-      <legend class="fr-fieldset__legend fr-px-0 fr-mx-0" id="identity-fieldset-legend">
-        <h2>Création de compte sur Agir</h2>
-      </legend>
-      <h3>Créer un compte avec FranceConnect</h3>
-      <div class="fr-col-12 text--center">
-        <BoutonFranceConnect />
-      </div>
-      <div class="separateur fr-mb-2v">ou</div>
-      <h3>Créer un compte en choisissant un identifiant</h3>
-      <div class="fr-col-12">
-        <div class="fr-col-12 fr-col-lg-5">
-          <fieldset class="fr-fieldset">
-            <div class="fr-fieldset__element">
-              <div class="fr-input-group">
-                <label class="fr-label" for="family-name-1829"> Nom </label>
-                <input
-                  class="fr-input"
-                  spellcheck="false"
-                  autocomplete="family-name"
-                  name="family-name"
-                  id="family-name-1829"
-                  type="text"
-                  v-model="compteUtlisateurViewModel.nom"
-                />
-              </div>
-            </div>
-          </fieldset>
+  <div class="fr-grid-row fr-grid-row--gutters">
+    <div class="fr-col-12 fr-col-lg-7">
+      <h1 class="inscription__titre">
+        <img alt="Plateforme Agir :" src="/logo_agir.png" class="fr-mb-3w display-block" />
+        Devenez acteur de la transition écologique !
+      </h1>
+      <ul class="fr-text--lg">
+        <li>Un accompagnement personnalisé adapté en fonction de vos revenus, là où vous habitez et vos goûts</li>
+        <li>Un suivi au quotidien</li>
+        <li>Des articles pour apprendre de nouvelles choses</li>
+      </ul>
+      <p class="fr-h2">+ de 200 000 acteurs déjà inscrits</p>
+    </div>
+    <form
+      class="fr-col-12 fr-col-lg-5 fr-mx-auto fr-mb-0 background--white fr-p-4w border border-radius--md"
+      @submit.prevent="performCreerCompteUtilisateur"
+    >
+      <fieldset class="fr-mb-0 fr-fieldset">
+        <legend class="fr-fieldset__legend fr-px-0 fr-mx-0" id="identity-fieldset-legend">
+          <h2>Création de compte sur Agir</h2>
+        </legend>
+        <h3>Créer un compte avec FranceConnect</h3>
+        <div class="fr-col-12 text--center">
+          <BoutonFranceConnect />
         </div>
-        <div class="fr-col-12 fr-col-lg-5">
-          <fieldset class="fr-fieldset">
+        <div class="separateur fr-mb-2v">ou</div>
+        <h3>Créer un compte en choisissant un identifiant</h3>
+        <div class="fr-grid-row fr-grid-row--gutters">
+          <div class="fr-col-12 fr-py-0">
+            <InputMail label="Adresse électronique" id="utilisateur-mail" v-model="compteUtlisateurViewModel.mail" />
+          </div>
+          <div class="fr-col-12 fr-col-lg-6">
             <div class="fr-fieldset__element">
-              <div class="fr-input-group">
-                <label class="fr-label" for="mail-1829"> Adresse électronique </label>
-                <input
-                  class="fr-input"
-                  spellcheck="false"
-                  autocomplete="mail-name"
-                  name="mail"
-                  id="mail-1829"
-                  type="email"
-                  v-model="compteUtlisateurViewModel.mail"
-                />
-              </div>
+              <InputText label="Nom" name="utilisateur-nom" v-model="compteUtlisateurViewModel.nom" />
             </div>
-          </fieldset>
+          </div>
+          <div class="fr-col-12 fr-col-lg-6">
+            <div class="fr-fieldset__element">
+              <InputText label="Prénom" name="utilisateur-prenom" v-model="compteUtlisateurViewModel.prenom" />
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="fr-col-12">
-        <button class="fr-btn" type="submit">Créer mon compte</button>
-      </div>
-    </fieldset>
-  </form>
+        <button class="fr-btn display-block fr-col-12 fr-mt-2w fr-mx-1w" type="submit">Créer mon compte</button>
+      </fieldset>
+    </form>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -67,12 +56,15 @@
   import router from '@/router';
   import { utilisateurStore } from '@/store/utilisateur';
   import BoutonFranceConnect from '@/components/BoutonFranceConnect.vue';
+  import InputMail from '@/components/dsfr/InputMail.vue';
+  import InputText from '@/components/dsfr/InputText.vue';
 
   let compteUtlisateurViewModel = ref<CompteUtlisateurViewModel>({
     id: '',
     nom: '',
     mail: '',
     codePostal: '',
+    prenom: '',
   });
 
   utilisateurStore().reset();
@@ -92,7 +84,13 @@
       });
   };
 </script>
+
 <style scoped>
+  @media (min-width: 62rem) {
+    .inscription__titre {
+      margin-top: 6.25rem;
+    }
+  }
   .separateur {
     position: relative;
     text-align: center;

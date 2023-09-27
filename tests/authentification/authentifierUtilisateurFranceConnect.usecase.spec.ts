@@ -19,6 +19,7 @@ class UtilisateurRepositoryForTest implements UtilisateurRepository {
       id: "4df5cd01-ae3e-46fa-99d4-9c18f696b6ba",
       nom: "DUBOIS",
       codePostal: "75000",
+      prenom: "John"
     });
   }
 }
@@ -28,7 +29,7 @@ class SpySessionRepository implements SessionRepository {
     return this._utilisateur;
   }
 
-  private _utilisateur: Utilisateur = { id: "", nom: "", codePostal: "" };
+  private _utilisateur: Utilisateur = { id: "", nom: "", codePostal: "",  prenom: "" };
 
   sauvegarderUtilisateur(utilisateur: Utilisateur) {
     this._utilisateur = utilisateur;
@@ -51,6 +52,7 @@ describe("Fichier de tests concernant l'authentification France Connect", () => 
       id: "4df5cd01-ae3e-46fa-99d4-9c18f696b6ba",
       nom: "DUBOIS",
       codePostal: "75000",
+      prenom: 'John'
     });
   });
 });

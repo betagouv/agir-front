@@ -5,8 +5,9 @@ class UtilisateurRepositoryForTest implements UtilisateurRepository {
   getUtilisateurAvecLeNom(nomUtilisateur: string): Promise<Utilisateur> {
     return Promise.resolve<Utilisateur>({
       id: "1",
-      nom: "Dorian",
+      nom: "Doe",
       codePostal: "77650",
+      prenom: 'John'
     });
   }
 
@@ -20,7 +21,7 @@ class SpySessionRepository implements SessionRepository {
     return this._utilisateur;
   }
 
-  private _utilisateur: Utilisateur = { id: "", nom: "", codePostal: "" };
+  private _utilisateur: Utilisateur = { id: "", nom: "", codePostal: "", prenom: "" };
 
   sauvegarderUtilisateur(utilisateur: Utilisateur) {
     this._utilisateur = utilisateur;
@@ -37,8 +38,9 @@ describe("Fichier de tests concernant l'authentification ", () => {
     // THEN
     expect(spySessionRepository.utilisateur).toStrictEqual({
       id: "1",
-      nom: "Dorian",
+      nom: "Doe",
       codePostal: "77650",
+      prenom: "John"
     });
   });
 });

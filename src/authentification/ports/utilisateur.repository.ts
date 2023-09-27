@@ -2,6 +2,7 @@ export interface Utilisateur {
   nom: string;
   codePostal: string;
   id: string;
+  prenom: string;
 }
 
 export interface UtilisateurRepository {

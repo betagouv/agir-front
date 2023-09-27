@@ -2,6 +2,7 @@ import { Utilisateur, UtilisateurRepository } from '@/authentification/ports/uti
 import { AxiosFactory } from '@/axios.factory';
 
 interface UtilisateurApiModel {
+  prenom: string
   name: string;
   id: string;
   code_postal: string;
@@ -14,6 +15,7 @@ export class UtilisateurRepositoryAxios implements UtilisateurRepository {
       nom: response.data[0].name,
       id: response.data[0].id,
       codePostal: response.data[0].code_postal,
+      prenom: response.data[0].prenom
     };
   }
 
@@ -24,6 +26,7 @@ export class UtilisateurRepositoryAxios implements UtilisateurRepository {
       nom: response.data.name,
       id: response.data.id,
       codePostal: response.data.code_postal,
+      prenom: response.data.prenom
     };
   }
 }

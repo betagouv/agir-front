@@ -14,12 +14,15 @@ export class CreerCompteUtilisateurUsecase {
   async execute(compteUtlisateurACreerViewModel: CompteUtlisateurViewModel): Promise<void> {
     const utilisateurCree = await this._compteUtilisateuRepository.creerCompteUtilisateur(
       compteUtlisateurACreerViewModel.nom,
-      compteUtlisateurACreerViewModel.mail
+      compteUtlisateurACreerViewModel.mail,
+      compteUtlisateurACreerViewModel.prenom
     );
+
     this._sessionRepository.sauvegarderUtilisateur({
       nom: utilisateurCree.nom,
       id: utilisateurCree.id,
       codePostal: utilisateurCree.codePostal,
+      prenom: utilisateurCree.prenom,
     });
   }
 }

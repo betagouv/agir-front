@@ -59,7 +59,7 @@
         </fieldset>
       </div>
       <div class="fr-col-12">
-        <button class="fr-btn" type="submit">Mettre à jour</button>
+        <button class="fr-btn">Mettre à jour</button>
       </div>
     </fieldset>
   </form>

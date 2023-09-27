@@ -7,6 +7,7 @@ interface CompteUtilisateurApiModel {
   name: string;
   email?: string;
   code_postal?: string;
+  prenom: string;
 }
 export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurRepository {
   async getCompteUtilisateur(idUtilisateur: string): Promise<CompteUtilisateur> {
@@ -19,6 +20,7 @@ export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurReposit
       id: idUtilisateur,
       mail: response.data.email || '',
       codePostal: response.data.code_postal || '',
+      prenom: response.data.prenom || '',
     };
   }
 
@@ -42,6 +44,7 @@ export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurReposit
       id: response.data.id,
       mail: response.data.email || '',
       codePostal: response.data.code_postal || '',
+      prenom: response.data.prenom || '',
     };
   }
 

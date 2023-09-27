@@ -6,6 +6,7 @@ export interface CompteUtlisateurViewModel {
   id: string;
   mail: string;
   codePostal: string;
+  prenom: string;
 }
 export class CompteUtilisateurPresenterImpl implements CompteUtilisateurPresenter {
   private _compteUtlisateurViewModel: (viewModel: CompteUtlisateurViewModel) => void;
@@ -20,6 +21,7 @@ export class CompteUtilisateurPresenterImpl implements CompteUtilisateurPresente
       id: compteUtilisateur.id,
       mail: compteUtilisateur.mail,
       codePostal: compteUtilisateur.codePostal,
+      prenom: compteUtilisateur.prenom,
     });
   }
 }

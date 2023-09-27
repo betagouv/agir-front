@@ -16,6 +16,7 @@ class SypCompteUtilisateurRepository implements CompteUtilisateurRepository {
     nom: "",
     mail: "",
     codePostal: "",
+    prenom: ""
   };
   getCompteUtilisateur(idUtilisateur: string): Promise<CompteUtilisateur> {
     throw Error();
@@ -46,6 +47,7 @@ describe("Fichier de tests concernant la mise à jour du compte utilisateur", ()
       nom: "Dorian",
       mail: "mail@exemple.com",
       codePostal: "75000",
+      prenom: 'John'
     };
     usecase.execute(viewModelInput);
     // THEN
@@ -55,6 +57,7 @@ describe("Fichier de tests concernant la mise à jour du compte utilisateur", ()
       nom: "Dorian",
       mail: "mail@exemple.com",
       codePostal: "75000",
+      prenom: 'John'
     });
   });
 });
