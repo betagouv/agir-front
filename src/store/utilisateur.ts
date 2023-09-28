@@ -35,7 +35,6 @@ export const utilisateurStore = defineStore('utilisateur', {
   }),
   actions: {
     setUtilisateur(utilisateur: Utilisateur) {
-      console.log('store' + utilisateur);
       this.utilisateur = utilisateur;
     },
     setValeurBilanCarbone(valeurBilanCarbone: EmpreinteViewModel) {
