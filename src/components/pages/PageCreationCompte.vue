@@ -65,6 +65,7 @@
     mail: '',
     codePostal: '',
     prenom: '',
+    revenuFiscal: '',
   });
 
   utilisateurStore().reset();

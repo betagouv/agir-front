@@ -69,6 +69,7 @@
   import { ref } from 'vue';
   import { MettreAJourCompteUtilisateurUsecase } from '@/compte/mettreAJourCompteUtilisateur.usecase';
   import { CompteUtilisateurRepositoryImpl } from '@/compte/adapters/compteUtilisateur.repository.impl';
+  import { SessionRepositoryStore } from '@/authentification/adapters/session.repository.store';
 
   const props = defineProps<{
     compteUtlisateurViewModel: CompteUtlisateurViewModel;
@@ -77,7 +78,10 @@
   const compteUtlisateurViewModel = ref<CompteUtlisateurViewModel>(props.compteUtlisateurViewModel);
 
   function modifierInformation() {
-    const usecase = new MettreAJourCompteUtilisateurUsecase(new CompteUtilisateurRepositoryImpl());
+    const usecase = new MettreAJourCompteUtilisateurUsecase(
+      new CompteUtilisateurRepositoryImpl(),
+      new SessionRepositoryStore()
+    );
     usecase.execute(props.compteUtlisateurViewModel);
   }
 </script>
