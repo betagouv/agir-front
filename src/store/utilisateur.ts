@@ -10,29 +10,27 @@ interface State {
   score: number;
 }
 
-export const initialState: State = {
-  utilisateur: {
-    id: '',
-    nom: '',
-    codePostal: '',
-    prenom: '',
-  },
-  valeurBilanCarbone: {
-    bilan: '',
-    detail: {
-      alimentation: 0,
-      divers: 0,
-      logement: 0,
-      servicesSocietaux: 0,
-      transport: 0,
-    },
-  },
-  interactionEnCours: null,
-  score: 0,
-};
-
 export const utilisateurStore = defineStore('utilisateur', {
-  state: (): State => ({ ...initialState }),
+  state: (): State => ({
+    utilisateur: {
+      id: '',
+      nom: '',
+      codePostal: '',
+      prenom: '',
+    },
+    valeurBilanCarbone: {
+      bilan: '',
+      detail: {
+        alimentation: 0,
+        divers: 0,
+        logement: 0,
+        servicesSocietaux: 0,
+        transport: 0,
+      },
+    },
+    interactionEnCours: null,
+    score: 0,
+  }),
   actions: {
     setUtilisateur(utilisateur: Utilisateur) {
       this.utilisateur = utilisateur;

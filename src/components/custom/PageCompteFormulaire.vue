@@ -66,9 +66,9 @@
 </template>
 <script setup lang="ts">
   import { CompteUtlisateurViewModel } from '@/compte/adapters/compteUtilisateur.presenter.impl';
-  import { CompteUtilisateurRepositoryImpl } from '@/compte/adapters/compteUtilisateur.repository.impl';
-  import { MettreAJourCompteUtilisateurUsecase } from '@/compte/mettreAJourCompteUtilisateur.usecase';
   import { ref } from 'vue';
+  import { MettreAJourCompteUtilisateurUsecase } from '@/compte/mettreAJourCompteUtilisateur.usecase';
+  import { CompteUtilisateurRepositoryImpl } from '@/compte/adapters/compteUtilisateur.repository.impl';
 
   const props = defineProps<{
     compteUtlisateurViewModel: CompteUtlisateurViewModel;

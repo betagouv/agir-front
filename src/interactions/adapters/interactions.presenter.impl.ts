@@ -1,4 +1,4 @@
-import { Interaction, InteractionCategorie, InteractionType } from '@/interactions/chargerInteractions.usecase';
+import { Interaction, InteractionType } from '@/interactions/chargerInteractions.usecase';
 import { InteractionsPresenter } from '@/interactions/ports/interactionsPresenter';
 
 export interface InteractionViewModel {
@@ -23,14 +23,6 @@ export class InteractionsPresenterImpl implements InteractionsPresenter {
   }
 
   presente(interactions: Interaction[]) {
-    const categorieInverseMapping: { [key in InteractionCategorie]: string } = {
-      [InteractionCategorie.CONSOMMATION]: '📱 Consommation',
-      [InteractionCategorie.ENERGIE]: '⚡️ Énergie',
-      [InteractionCategorie.ALIMENTATION]: '🥦 Alimentation',
-      [InteractionCategorie.GLOBAL]: '🌍 Global',
-      [InteractionCategorie.TRANSPORTS]: '🚲 Transports',
-    };
-
     const typeInverseMapping: { [key in InteractionType]: string } = {
       [InteractionType.KYC]: 'KYC',
       [InteractionType.QUIZ]: 'QUIZ',
@@ -47,7 +39,7 @@ export class InteractionsPresenterImpl implements InteractionsPresenter {
           id: interaction.id,
           titre: interaction.titre,
           sousTitre: interaction.sousTitre,
-          categorie: categorieInverseMapping[interaction.categorie],
+          categorie: interaction.categorie,
           nombreDePointsAGagner: interaction.nombreDePointsAGagner,
           miseEnAvant: interaction.miseEnAvant,
           type: typeInverseMapping[interaction.type],
