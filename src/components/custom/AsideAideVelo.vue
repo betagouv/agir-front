@@ -8,12 +8,12 @@
       <li>Code postal: {{ codePostal }}</li>
       <li>Revenu fiscal de référence : {{ revenuFiscal }}</li>
     </ul>
-    <button
+    <router-link
       class="fr-link fr-icon-arrow-right-line fr-link--icon-right text--black-light"
-      @click="resetSimulationAides"
+      :to="{ name: 'mon-compte' }"
     >
       Modifier ces données
-    </button>
+    </router-link>
   </CarteInfo>
 </template>
 
@@ -24,9 +24,6 @@
     codePostal: string;
     revenuFiscal: string;
   }>();
-
-  const emit = defineEmits(['reset-simulation']);
-  const resetSimulationAides = () => emit('reset-simulation');
 </script>
 
 <style scoped>

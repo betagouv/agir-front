@@ -23,6 +23,8 @@ export class CreerCompteUtilisateurUsecase {
       id: utilisateurCree.id,
       codePostal: utilisateurCree.codePostal,
       prenom: utilisateurCree.prenom,
+      mail: utilisateurCree.mail,
+      revenuFiscal: utilisateurCree.revenuFiscal,
     });
   }
 }

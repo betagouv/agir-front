@@ -3,6 +3,8 @@ export interface Utilisateur {
   codePostal: string;
   id: string;
   prenom: string;
+  mail: string;
+  revenuFiscal: string;
 }
 
 export interface UtilisateurRepository {

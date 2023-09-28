@@ -1,14 +1,22 @@
 import { CompteUtilisateurRepository } from '@/compte/ports/compteUtilisateur.repository';
 import { CompteUtlisateurViewModel } from '@/compte/adapters/compteUtilisateur.presenter.impl';
+import { SessionRepository } from '@/authentification/authentifierUtilisateur.usecase';
 
 export class MettreAJourCompteUtilisateurUsecase {
-  private _compteUtilisateuRepository: CompteUtilisateurRepository;
-
-  constructor(compteUtilisateuRepository: CompteUtilisateurRepository) {
-    this._compteUtilisateuRepository = compteUtilisateuRepository;
-  }
+  constructor(
+    private compteUtilisateuRepository: CompteUtilisateurRepository,
+    private sessionRepository: SessionRepository
+  ) {}
 
   execute(compteUtilisateurInput: CompteUtlisateurViewModel) {
-    this._compteUtilisateuRepository.mettreAjour(compteUtilisateurInput);
+    this.compteUtilisateuRepository.mettreAjour(compteUtilisateurInput);
+    this.sessionRepository.sauvegarderUtilisateur({
+      nom: compteUtilisateurInput.nom,
+      codePostal: compteUtilisateurInput.codePostal,
+      id: compteUtilisateurInput.id,
+      prenom: compteUtilisateurInput.prenom,
+      mail: compteUtilisateurInput.mail,
+      revenuFiscal: compteUtilisateurInput.revenuFiscal,
+    });
   }
 }

@@ -3,7 +3,8 @@ export interface CompteUtilisateur {
   nom: string;
   mail: string;
   codePostal: string;
-  prenom: string
+  prenom: string;
+  revenuFiscal: string;
 }
 export interface CompteUtilisateurRepository {
   getCompteUtilisateur(idUtilisateur: string): Promise<CompteUtilisateur>;
