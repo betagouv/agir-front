@@ -9,7 +9,7 @@
       :name="name"
       @input="updateValue"
       min="0"
-      value="0"
+      :value="defaultValue"
     />
     <label class="fr-label fr-col-11" :for="name">
       {{ label }}
@@ -21,6 +21,7 @@
   defineProps<{
     label: string;
     name: string;
+    defaultValue?: string;
   }>();
 
   const emit = defineEmits<{

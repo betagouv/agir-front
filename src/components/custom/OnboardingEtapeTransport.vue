@@ -1,15 +1,16 @@
 <template>
   <form @submit.prevent="submitEtapetransport">
     <h3 class="fr-h4">Quels sont vos principaux moyens de transport du quotidien ?</h3>
-    <InputCheckbox :options="options" v-model="viewModel.typeTransports" />
+    <InputCheckbox :options="options" v-model="viewModel.transports" :default-values="viewModel.transports" />
     <h3 class="fr-h4">Combien de vols en avion avez-vous fait dernièrement ?</h3>
     <InputNumberHorizontal
       label="Vols en avion sur les 12 derniers mois"
       name="nombre-vol-avion"
       class="fr-mb-2w"
-      v-model="viewModel.nombreVols"
+      v-model="viewModel.avion"
+      :default-value="viewModel.avion"
     />
-    <button class="fr-btn" :disabled="!(viewModel.typeTransports.length > 0) || !(viewModel.nombreVols.length > 0)">
+    <button class="fr-btn" :disabled="!(viewModel.transports.length > 0) || !(viewModel.avion.length > 0)">
       Continuer
     </button>
   </form>
@@ -19,13 +20,16 @@
   import { ref } from 'vue';
   import InputCheckbox from '@/components/custom/InputCheckbox.vue';
   import InputNumberHorizontal from '@/components/custom/InputNumberHorizontal.vue';
+  import { onboardingStore } from '@/store/onboarding';
+
+  const onBoardingStore = onboardingStore();
 
   const viewModel = ref<{
-    nombreVols: string;
-    typeTransports: string[];
+    avion: string;
+    transports: string[];
   }>({
-    nombreVols: '0',
-    typeTransports: [],
+    avion: onBoardingStore.etapeTransport.avion.toString(),
+    transports: onBoardingStore.etapeTransport.transports,
   });
 
   const options = [
@@ -39,7 +43,12 @@
   const emit = defineEmits(['submitEtape']);
 
   const submitEtapetransport = () => {
-    console.log(viewModel.value); // value to setOnBoardingStore
+    onBoardingStore.setEtapeTransport({
+      avion: Number(viewModel.value.avion),
+      transports: viewModel.value.transports,
+      done: true,
+    });
+
     emit('submitEtape');
   };
 </script>

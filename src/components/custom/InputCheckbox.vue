@@ -15,14 +15,15 @@
 <script setup lang="ts">
   import { ref } from 'vue';
 
-  defineProps<{
+  const props = defineProps<{
     options: {
       id: string;
       label: string;
     }[];
+    defaultValues?: string[];
   }>();
 
-  const checkedNames = ref<string[]>([]);
+  const checkedNames = ref<string[]>(props.defaultValues || []);
 
   const emit = defineEmits<{
     (e: 'update:modelValue', value: string[]): void;
