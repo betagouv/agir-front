@@ -10,19 +10,12 @@
           :titre-etape-suivante="etapesOnboarding[etapeCourante + 1]"
         />
         <OnboardingEtapeTransport v-if="etapeCourante === 0" @submitEtape="submitEtape" />
+        <OnboardingEtapeLogement v-if="etapeCourante === 1" @retourEtapePrecedente="retourEtapePrecedente" />
       </div>
     </div>
     <div class="fr-col-3">
-      <CarteInfo>
-        <p class="fr-text--bold">
-          <span class="fr-icon-information-line" aria-hidden="true"></span>
-          Pouquoi ces questions ?
-        </p>
-        <p class="fr-text--sm">Les transports sont un des principaux postes de notre empreinte écologique.</p>
-        <p class="fr-text--sm">
-          Par exemple, ils représentent XX% des émissions de gaz à effet de serre moyenne des ménages français.
-        </p>
-      </CarteInfo>
+      <AsideOnboardingEtapeTransport v-if="etapeCourante === 0" />
+      <AsideOnboardingEtapeLogement v-if="etapeCourante === 1" />
     </div>
   </div>
 </template>
@@ -31,12 +24,18 @@
   import { ref } from 'vue';
   import IndicateurDEtapes from '@/components/dsfr/IndicateurDEtapes.vue';
   import OnboardingEtapeTransport from '@/components/custom/OnboardingEtapeTransport.vue';
-  import CarteInfo from '@/components/custom/CarteInfo.vue';
+  import OnboardingEtapeLogement from '../custom/OnboardingEtapeLogement.vue';
+  import AsideOnboardingEtapeTransport from '@/components/custom/AsideOnboardingEtapeTransport.vue';
+  import AsideOnboardingEtapeLogement from '@/components/custom/AsideOnboardingEtapeLogement.vue';
 
   const etapeCourante = ref<number>(0);
   const etapesOnboarding = ['Transports', 'Logement', 'Alimentation'];
 
   const submitEtape = () => {
     etapeCourante.value++;
+  };
+
+  const retourEtapePrecedente = () => {
+    etapeCourante.value--;
   };
 </script>
