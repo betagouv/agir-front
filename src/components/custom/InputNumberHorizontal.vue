@@ -1,7 +1,7 @@
 <template>
   <div class="fr-grid-row fr-grid-row--gutters fr-grid-row--middle fr-mx-0">
     <input
-      class="fr-input fr-col-1"
+      class="fr-input fr-col"
       pattern="[0-9]*"
       inputmode="numeric"
       type="number"
@@ -11,7 +11,7 @@
       min="0"
       :value="defaultValue"
     />
-    <label class="fr-label fr-col-11" :for="name">
+    <label class="fr-label fr-col" :for="name">
       {{ label }}
     </label>
   </div>
@@ -33,3 +33,9 @@
     emit('update:modelValue', inputElement.value);
   };
 </script>
+
+<style scoped>
+  input {
+    max-width: 5rem;
+  }
+</style>
