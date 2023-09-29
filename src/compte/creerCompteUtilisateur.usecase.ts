@@ -11,7 +11,9 @@ export class CreerCompteUtilisateurUsecase {
     this._sessionRepository = sessionRepository;
   }
 
-  async execute(compteUtlisateurACreerViewModel: CompteUtlisateurViewModel): Promise<void> {
+  async execute(
+    compteUtlisateurACreerViewModel: Omit<CompteUtlisateurViewModel, 'id' | 'codePostal' | 'revenuFiscal'>
+  ): Promise<void> {
     const utilisateurCree = await this._compteUtilisateuRepository.creerCompteUtilisateur(
       compteUtlisateurACreerViewModel.nom,
       compteUtlisateurACreerViewModel.mail,

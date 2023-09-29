@@ -28,16 +28,16 @@
         <h3>Créer un compte en choisissant un identifiant</h3>
         <div class="fr-grid-row fr-grid-row--gutters">
           <div class="fr-col-12 fr-py-0">
-            <InputMail label="Adresse électronique" id="utilisateur-mail" v-model="compteUtlisateurViewModel.mail" />
+            <InputMail label="Adresse électronique" id="utilisateur-mail" v-model="compteUtilisateurInput.mail" />
           </div>
           <div class="fr-col-12 fr-col-lg-6">
             <div class="fr-fieldset__element">
-              <InputText label="Nom" name="utilisateur-nom" v-model="compteUtlisateurViewModel.nom" />
+              <InputText label="Nom" name="utilisateur-nom" v-model="compteUtilisateurInput.nom" />
             </div>
           </div>
           <div class="fr-col-12 fr-col-lg-6">
             <div class="fr-fieldset__element">
-              <InputText label="Prénom" name="utilisateur-prenom" v-model="compteUtlisateurViewModel.prenom" />
+              <InputText label="Prénom" name="utilisateur-prenom" v-model="compteUtilisateurInput.prenom" />
             </div>
           </div>
         </div>
@@ -59,13 +59,11 @@
   import InputMail from '@/components/dsfr/InputMail.vue';
   import InputText from '@/components/dsfr/InputText.vue';
 
-  let compteUtlisateurViewModel = ref<CompteUtlisateurViewModel>({
-    id: '',
+  type UserInput = Omit<CompteUtlisateurViewModel, 'id' | 'codePostal' | 'revenuFiscal'>;
+  let compteUtilisateurInput = ref<UserInput>({
     nom: '',
     mail: '',
-    codePostal: '',
     prenom: '',
-    revenuFiscal: '',
   });
 
   utilisateurStore().reset();
@@ -76,10 +74,10 @@
       new SessionRepositoryStore()
     );
     creeCompteUseCase
-      .execute(compteUtlisateurViewModel.value)
+      .execute(compteUtilisateurInput.value)
       .then(() => {
         router.push({ name: 'coach' });
-      }, undefined)
+      }, null)
       .catch(erreur => {
         console.log("Une erreur s'est produite lors de la création du compte :", erreur);
       });
