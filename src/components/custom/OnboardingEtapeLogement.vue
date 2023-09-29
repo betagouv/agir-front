@@ -29,7 +29,7 @@
         { label: 'Une maison', value: 'maison' },
         { label: 'Un appartement', value: 'appartement' },
       ]"
-      col="fr-col-4"
+      col="fr-col-sm-4"
       v-model="viewModel.residence"
       :default-value="viewModel.residence"
     />
@@ -42,7 +42,7 @@
         { label: 'Entre 50 et 100 m²', value: 'moyen' },
         { label: 'Plus de 100 m²', value: 'grand' },
       ]"
-      col="fr-col-4"
+      col="fr-col-sm-4"
       v-model="viewModel.superficie"
       :default-value="viewModel.superficie"
     />
@@ -58,7 +58,7 @@
         { label: 'Autre', value: 'autre' },
         { label: 'Je ne sais pas', value: '?' },
       ]"
-      col="fr-col-4"
+      col="fr-col-sm-4"
       v-model="viewModel.chauffage"
       :default-value="viewModel.chauffage"
     />
