@@ -31,7 +31,10 @@
       </div>
     </div>
     <div class="fr-col-lg-4">
-      <CarteInfoExplicationsAidesLocales />
+      <CarteInfoExplicationsAidesLocales
+        :afficher-explication-code-postal="demanderCodePostal"
+        :afficher-explication-revenu-fiscal="demanderRevenu"
+      />
     </div>
   </div>
 </template>
