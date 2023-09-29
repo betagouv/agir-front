@@ -10,7 +10,11 @@
           :titre-etape-suivante="etapesOnboarding[etapeCourante + 1]"
         />
         <OnboardingEtapeTransport v-if="etapeCourante === 0" @submitEtape="submitEtape" />
-        <OnboardingEtapeLogement v-if="etapeCourante === 1" @retourEtapePrecedente="retourEtapePrecedente" />
+        <OnboardingEtapeLogement
+          v-if="etapeCourante === 1"
+          @retourEtapePrecedente="retourEtapePrecedente"
+          @submitEtape="submitEtape"
+        />
       </div>
     </div>
     <div class="fr-col-3">

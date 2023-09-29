@@ -4,11 +4,18 @@
       {{ legende }}
     </legend>
     <div class="fr-grid-row full-width">
-      <div :class="`fr-fieldset__element ${col}`" v-for="(item, index) in options" :key="index">
+      <div :class="`fr-fieldset__element ${col}`" v-for="option in options" :key="option.label">
         <div class="fr-radio-group border fr-p-2w fr-col">
-          <input type="radio" :id="`${name}-${index}`" :name="name" :value="item" @change.prevent="onInputChange" />
-          <label class="fr-label" :for="`${name}-${index}`">
-            {{ item }}
+          <input
+            type="radio"
+            :id="`${option.label}`"
+            :name="name"
+            :value="option.value"
+            @change.prevent="onInputChange"
+            :checked="option.value === defaultValue"
+          />
+          <label class="fr-label" :for="`${option.label}`">
+            {{ option.label }}
           </label>
         </div>
       </div>
@@ -20,15 +27,16 @@
   defineProps<{
     legende: string;
     name: string;
-    options: string[];
+    options: { label: string; value: string }[];
     col: string;
+    defaultValue?: string;
   }>();
 
-  const emit = defineEmits(['update']);
+  const emit = defineEmits(['update:modelValue']);
 
   const onInputChange = (event: Event) => {
     const input = event.target as HTMLInputElement;
-    emit('update', input.value);
+    emit('update:modelValue', input.value);
   };
 </script>
 
