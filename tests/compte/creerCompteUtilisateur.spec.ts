@@ -1,17 +1,19 @@
-import { CreerCompteUtilisateurUsecase } from "../../src/compte/creerCompteUtilisateur.usecase";
-import { SessionRepository } from "../../src/authentification/authentifierUtilisateur.usecase";
-import { Utilisateur } from "../../src/authentification/ports/utilisateur.repository";
-import { CompteUtilisateur, CompteUtilisateurRepository } from "../../src/compte/ports/compteUtilisateur.repository";
+import { CreerCompteUtilisateurUsecase } from '../../src/compte/creerCompteUtilisateur.usecase';
+import { SessionRepository } from '../../src/authentification/authentifierUtilisateur.usecase';
+import { Utilisateur } from '../../src/authentification/ports/utilisateur.repository';
+import { CompteUtilisateur, CompteUtilisateurRepository } from '../../src/compte/ports/compteUtilisateur.repository';
 
 class SessionRepositoryForTest implements SessionRepository {
   get utilisateur(): Utilisateur {
     return this._utilisateur;
   }
   private _utilisateur: Utilisateur = {
-    id: "",
-    nom: "",
-    codePostal: "",
-    prenom: ""
+    id: '',
+    nom: '',
+    codePostal: '',
+    prenom: '',
+    mail: '',
+    revenuFiscal: '',
   };
   sauvegarderUtilisateur(utilisateur: Utilisateur) {
     this._utilisateur = utilisateur;
@@ -21,11 +23,12 @@ class SessionRepositoryForTest implements SessionRepository {
 class CompteUtilisateurForTest implements CompteUtilisateurRepository {
   creerCompteUtilisateur(nom: string, email: string, prenom): Promise<CompteUtilisateur> {
     return Promise.resolve({
-      id: "id",
+      id: 'id',
       nom: nom,
       mail: email,
-      codePostal: "",
+      codePostal: '',
       prenom: prenom,
+      revenuFiscal: '',
     });
   }
 
@@ -39,15 +42,16 @@ class CompteUtilisateurForTest implements CompteUtilisateurRepository {
     throw Error();
   }
 }
-describe("Fichier de tests concernant la creation du compte utilisateur", () => {
-  it("doit creer un compte et le sauvegarder en session", async () => {
+describe('Fichier de tests concernant la creation du compte utilisateur', () => {
+  it('doit creer un compte et le sauvegarder en session', async () => {
     // GIVEN
     const compteACreer = {
-      nom: "John",
-      id: "",
-      mail: "john@skynet.com",
-      codePostal: "",
-      prenom: "Doe"
+      nom: 'John',
+      id: '',
+      mail: 'john@skynet.com',
+      codePostal: '',
+      prenom: 'Doe',
+      revenuFiscal: '',
     };
     const sessionRepository = new SessionRepositoryForTest();
     const compteUtilisateurRepository = new CompteUtilisateurForTest();
@@ -56,10 +60,12 @@ describe("Fichier de tests concernant la creation du compte utilisateur", () => 
     await usecase.execute(compteACreer);
     // THEN
     expect(sessionRepository.utilisateur).toStrictEqual<Utilisateur>({
-      id: "id",
-      nom: "John",
-      codePostal: "",
-      prenom: "Doe"
+      id: 'id',
+      nom: 'John',
+      codePostal: '',
+      prenom: 'Doe',
+      mail: 'john@skynet.com',
+      revenuFiscal: '',
     });
   });
 });
