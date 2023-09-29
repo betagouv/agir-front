@@ -15,6 +15,8 @@
   </CarteInfo>
 </template>
 <script setup lang="ts">
+  import CarteInfo from '@/components/custom/CarteInfo.vue';
+
   const props = defineProps<{
     afficherExplicationCodePostal: boolean;
     afficherExplicationRevenuFiscal: boolean;
