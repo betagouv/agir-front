@@ -20,12 +20,18 @@
           @retourEtapePrecedente="retourEtapePrecedente"
           @submitEtape="submitEtape"
         />
+        <OnboardingEtapeConsommation
+          v-if="etapeCourante === 3"
+          @retourEtapePrecedente="retourEtapePrecedente"
+          @submitEtape="submitEtape"
+        />
       </div>
     </div>
     <div class="fr-col-lg-3 fr-col-12">
       <AsideOnboardingEtapeTransport v-if="etapeCourante === 0" />
       <AsideOnboardingEtapeLogement v-if="etapeCourante === 1" />
       <AsideOnboardingEtapeAlimentation v-if="etapeCourante === 2" />
+      <AsideOnboardingEtapeConsommation v-if="etapeCourante === 3" />
     </div>
   </div>
 </template>
@@ -36,12 +42,14 @@
   import OnboardingEtapeTransport from '@/components/custom/OnboardingEtapeTransport.vue';
   import OnboardingEtapeLogement from '@/components/custom/OnboardingEtapeLogement.vue';
   import OnboardingEtapeAlimentation from '@/components/custom/OnboardingEtapeAlimentation.vue';
+  import OnboardingEtapeConsommation from '@/components/custom/OnboardingEtapeConsommation.vue';
   import AsideOnboardingEtapeTransport from '@/components/custom/AsideOnboardingEtapeTransport.vue';
   import AsideOnboardingEtapeLogement from '@/components/custom/AsideOnboardingEtapeLogement.vue';
   import AsideOnboardingEtapeAlimentation from '@/components/custom/AsideOnboardingEtapeAlimentation.vue';
+  import AsideOnboardingEtapeConsommation from '@/components/custom/AsideOnboardingEtapeConsommation.vue';
 
   const etapeCourante = ref<number>(0);
-  const etapesOnboarding = ['Transports', 'Logement', 'Alimentation'];
+  const etapesOnboarding = ['Transports', 'Logement', 'Alimentation', 'Consommation'];
 
   const submitEtape = () => {
     etapeCourante.value++;

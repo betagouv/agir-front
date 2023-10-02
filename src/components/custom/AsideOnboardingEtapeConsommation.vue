@@ -4,10 +4,7 @@
       <span class="fr-icon-information-line" aria-hidden="true"></span>
       Pouquoi ces questions ?
     </p>
-    <p class="fr-text--sm fr-mb-0">
-      Votre alimentation participe à votre impact.<br />
-      Elle représente en moyenne XX% des émissions de gaz à effets de serre des Français
-    </p>
+    <p class="fr-text--sm fr-mb-0">Contenu à prévoir</p>
   </CarteInfo>
   <div class="background--gris-dark border border-radius--md fr-p-2w">
     <p class="fr-text--bold">
