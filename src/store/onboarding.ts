@@ -38,7 +38,7 @@ export const onboardingStore = defineStore('onboarding', {
   state: (): OnboardingState => ({
     etapeTransport: {
       transports: [],
-      avion: -1,
+      avion: 0,
       done: false,
     },
     etapeLogement: {
