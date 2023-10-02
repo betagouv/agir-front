@@ -1,5 +1,10 @@
 import { defineStore } from 'pinia';
 
+interface EtapeAlimentation {
+  repas: string;
+  done: boolean;
+}
+
 interface EtapeLogement {
   code_postal: string;
   adultes: number;
@@ -20,6 +25,7 @@ interface EtapeTransportState {
 interface OnboardingState {
   etapeTransport: EtapeTransportState;
   etapeLogement: EtapeLogement;
+  etapeAlimentation: EtapeAlimentation;
 }
 
 export const onboardingStore = defineStore('onboarding', {
@@ -39,6 +45,10 @@ export const onboardingStore = defineStore('onboarding', {
       chauffage: '',
       done: false,
     },
+    etapeAlimentation: {
+      repas: '',
+      done: false,
+    },
   }),
 
   actions: {
@@ -47,6 +57,9 @@ export const onboardingStore = defineStore('onboarding', {
     },
     setEtapeLogement(etapeLogement: EtapeLogement) {
       this.etapeLogement = etapeLogement;
+    },
+    setEtapeAlimentation(etapeAlimentation: EtapeAlimentation) {
+      this.etapeAlimentation = etapeAlimentation;
     },
     reset() {
       this.$reset();
