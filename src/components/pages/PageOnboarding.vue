@@ -37,7 +37,8 @@
 </template>
 
 <script setup lang="ts">
-  import { ref } from 'vue';
+  import { onMounted, ref } from 'vue';
+  import { useRouter } from 'vue-router';
   import IndicateurDEtapes from '@/components/dsfr/IndicateurDEtapes.vue';
   import OnboardingEtapeTransport from '@/components/custom/OnboardingEtapeTransport.vue';
   import OnboardingEtapeLogement from '@/components/custom/OnboardingEtapeLogement.vue';
@@ -48,6 +49,7 @@
   import AsideOnboardingEtapeAlimentation from '@/components/custom/AsideOnboardingEtapeAlimentation.vue';
   import AsideOnboardingEtapeConsommation from '@/components/custom/AsideOnboardingEtapeConsommation.vue';
 
+  const router = useRouter();
   const etapeCourante = ref<number>(0);
   const etapesOnboarding = ['Transports', 'Logement', 'Alimentation', 'Consommation'];
 
@@ -60,4 +62,10 @@
     window.scrollTo(0, 0);
     etapeCourante.value--;
   };
+
+  onMounted(() => {
+    window.addEventListener('popstate', () => {
+      router.push({ name: 'onboarding' });
+    });
+  });
 </script>
