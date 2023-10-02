@@ -52,10 +52,12 @@
   const etapesOnboarding = ['Transports', 'Logement', 'Alimentation', 'Consommation'];
 
   const submitEtape = () => {
+    window.scrollTo(0, 0);
     etapeCourante.value++;
   };
 
   const retourEtapePrecedente = () => {
+    window.scrollTo(0, 0);
     etapeCourante.value--;
   };
 </script>
