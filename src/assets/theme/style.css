@@ -111,11 +111,15 @@ h3 {
 }
 
 .background--gris {
-  background: var(--background-alt-grey);
+  background-color: var(--background-alt-grey);
+}
+
+.background--gris-dark {
+  background-color: var(--background-alt-grey-hover);
 }
 
 .background--white {
-  background: #fff;
+  background-color: #fff;
 }
 
 .list-style-none {
