@@ -8,6 +8,7 @@ export interface Aides {
   contenu: string;
   url: string;
   isSimulateur: boolean;
+  montantMaximum?: number;
 }
 
 export default class ChargementAidesUsecase {

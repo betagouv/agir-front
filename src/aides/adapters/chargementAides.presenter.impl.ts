@@ -19,6 +19,7 @@ export class ChargementAidesPresenterImpl implements ChargementAidesPresenter {
         contenu: aide.contenu,
         isSimulateur: aide.isSimulateur,
         url: aide.url,
+        montantMaximum: aide.montantMaximum ? this.formatMontantMaximum(aide.montantMaximum) : undefined,
       };
 
       map[aide.categorie].push(aideToPush);
@@ -26,6 +27,14 @@ export class ChargementAidesPresenterImpl implements ChargementAidesPresenter {
 
     return map;
   };
+
+  private formatMontantMaximum(montantMaximum: number) {
+    return `Jusqu'à ${new Intl.NumberFormat('fr-FR', {
+      style: 'currency',
+      currency: 'EUR',
+      maximumSignificantDigits: 4,
+    }).format(montantMaximum)}`;
+  }
 
   presente(aides: Aides[]): void {
     const viewModel = this.groupeParCategorie(aides);

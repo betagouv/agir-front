@@ -22,6 +22,7 @@ interface AidesCMSAttributesModel {
   url_detail_front: string;
   url_source: string;
   thematiques: AidesThematiqueDataCMSModel;
+  montantMaximum?: string;
 }
 
 interface AidesCMSDataModel {
@@ -46,6 +47,7 @@ export class chargementAidesAxiosCmsRepository implements ChargementAidesReposit
         contenu: attributes.description,
         url: attributes.url_detail_front,
         isSimulateur: attributes.is_simulation,
+        montantMaximum: attributes.montantMaximum ? parseFloat(attributes.montantMaximum) : undefined,
       }));
     } catch (e) {
       console.log(e);
