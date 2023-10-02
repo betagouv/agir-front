@@ -5,7 +5,7 @@ interface EtapeLogement {
   adultes: number;
   enfants: number;
   residence: string;
-  propriétaire: boolean;
+  proprietaire: boolean;
   superficie: string;
   chauffage: string;
   done: boolean;
@@ -34,7 +34,7 @@ export const onboardingStore = defineStore('onboarding', {
       adultes: 0,
       enfants: 0,
       residence: '',
-      propriétaire: false,
+      proprietaire: false,
       superficie: '',
       chauffage: '',
       done: false,

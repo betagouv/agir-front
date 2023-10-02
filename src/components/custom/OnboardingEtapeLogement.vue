@@ -22,7 +22,7 @@
       />
     </div>
     <BoutonRadio
-      class="fr-mb-4w"
+      class="fr-mb-2w"
       legende="Votre résidence principale est ..."
       name="residence"
       :options="[
@@ -33,6 +33,10 @@
       v-model="viewModel.residence"
       :default-value="viewModel.residence"
     />
+    <div class="fr-checkbox-group fr-mb-4w">
+      <input name="proprietaire" id="proprietaire" type="checkbox" v-model="viewModel.proprietaire" />
+      <label class="fr-label" for="proprietaire"> Vous êtes propriétaire de votre logement </label>
+    </div>
     <BoutonRadio
       class="fr-mb-4w"
       legende="Quelle en est la superficie ?"
@@ -68,6 +72,7 @@
     <button class="fr-btn" :disabled="isButtonDisabled">Continuer</button>
   </form>
 </template>
+
 <script setup lang="ts">
   import { computed, ref } from 'vue';
   import InputCodePostal from '@/components/dsfr/InputCodePostal.vue';
@@ -84,6 +89,7 @@
     residence: string;
     superficie: string;
     chauffage: string;
+    proprietaire: boolean;
   }>({
     codePostal: onBoardingStore.etapeLogement.code_postal,
     adultes: onBoardingStore.etapeLogement.adultes.toString(),
@@ -91,12 +97,19 @@
     residence: onBoardingStore.etapeLogement.residence,
     superficie: onBoardingStore.etapeLogement.superficie,
     chauffage: onBoardingStore.etapeLogement.chauffage,
+    proprietaire: onBoardingStore.etapeLogement.proprietaire,
   });
 
   const emit = defineEmits(['submitEtape', 'retourEtapePrecedente']);
 
   const isButtonDisabled = computed(() => {
-    return Object.values(viewModel.value).some(value => !value);
+    return Object.values(viewModel.value).some(value => {
+      if (typeof value === 'boolean') {
+        return false;
+      }
+
+      return !value;
+    });
   });
 
   const submitEtapeLogement = () => {
@@ -105,7 +118,7 @@
       adultes: Number(viewModel.value.adultes),
       enfants: Number(viewModel.value.enfants),
       residence: viewModel.value.residence,
-      propriétaire: true,
+      proprietaire: viewModel.value.proprietaire,
       superficie: viewModel.value.superficie,
       chauffage: viewModel.value.chauffage,
       done: true,
