@@ -31,25 +31,16 @@
       </div>
     </div>
     <div class="fr-col-lg-4">
-      <CarteInfo>
-        <p class="fr-text--bold">
-          <span class="fr-icon-information-line" aria-hidden="true"></span>
-          Pouquoi ces questions ?
-        </p>
-        <p>Adapter les résultats au plus près de votre situation</p>
-        <p>Votre <strong>code postal</strong> permet de consulter les aides locales.</p>
-        <p>
-          Votre <strong>revenu fiscal de référence</strong> et le <strong>nombre de parts</strong> permettent d’afficher
-          les aides en fonction de vos ressources.
-        </p>
-      </CarteInfo>
+      <CarteInfoExplicationsAidesLocales
+        :afficher-explication-code-postal="demanderCodePostal"
+        :afficher-explication-revenu-fiscal="demanderRevenu"
+      />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
   import { computed, ref } from 'vue';
-  import CarteInfo from '@/components/custom/CarteInfo.vue';
   import { SimulerAideVeloPresenterImpl } from '@/aides/adapters/simulerAideVelo.presenter.impl';
   import { SimulerAideVeloRepositoryAxios } from '@/aides/adapters/simulerAideVelo.repository.axios';
   import SimulerAideVeloUsecase from '@/aides/simulerAideVelo.usecase';
@@ -58,6 +49,7 @@
   import { MettreAJourCompteUtilisateurUsecase } from '@/compte/mettreAJourCompteUtilisateur.usecase';
   import { CompteUtilisateurRepositoryImpl } from '@/compte/adapters/compteUtilisateur.repository.impl';
   import { SessionRepositoryStore } from '@/authentification/adapters/session.repository.store';
+  import CarteInfoExplicationsAidesLocales from '@/components/custom/CarteInfoExplicationsAidesLocales.vue';
 
   const store = utilisateurStore();
   const emit = defineEmits(['submit-simulation']);
