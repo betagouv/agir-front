@@ -42,6 +42,10 @@
           </div>
         </div>
         <button class="fr-btn display-block fr-col-12 fr-mt-2w fr-mx-1w" type="submit">Créer mon compte</button>
+        <div v-show="creationDeCompteEnErreur" class="fr-alert fr-alert--error fr-col-12 fr-mt-2w fr-mx-1w">
+          <h3 class="fr-alert__title">Erreur lors de la création du compte</h3>
+          <p>Impossible de créer le compte</p>
+        </div>
       </fieldset>
     </form>
   </div>
@@ -65,7 +69,7 @@
     mail: '',
     prenom: '',
   });
-
+  let creationDeCompteEnErreur = ref<boolean>(false);
   utilisateurStore().reset();
 
   const performCreerCompteUtilisateur = () => {
@@ -77,10 +81,9 @@
       .execute(compteUtilisateurInput.value)
       .then(() => {
         router.push({ name: 'coach' });
+        creationDeCompteEnErreur.value = false;
       }, null)
-      .catch(erreur => {
-        console.log("Une erreur s'est produite lors de la création du compte :", erreur);
-      });
+      .catch(() => (creationDeCompteEnErreur.value = true));
   };
 </script>
 
