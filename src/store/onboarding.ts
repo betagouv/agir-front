@@ -1,38 +1,11 @@
 import { defineStore } from 'pinia';
-
-interface EtapeConsommation {
-  consommation: string;
-  done: boolean;
-}
-
-interface EtapeAlimentation {
-  repas: string;
-  done: boolean;
-}
-
-interface EtapeLogement {
-  code_postal: string;
-  adultes: number;
-  enfants: number;
-  residence: string;
-  proprietaire: boolean;
-  superficie: string;
-  chauffage: string;
-  done: boolean;
-}
-
-interface EtapeTransportState {
-  transports: string[];
-  avion: number;
-  done: boolean;
-}
-
-interface OnboardingState {
-  etapeTransport: EtapeTransportState;
-  etapeLogement: EtapeLogement;
-  etapeAlimentation: EtapeAlimentation;
-  etapeConsommation: EtapeConsommation;
-}
+import {
+  EtapeAlimentation,
+  EtapeConsommation,
+  EtapeLogement,
+  EtapeTransportState,
+  OnboardingState,
+} from '@/onboarding/evaluerOnboarding.usecase';
 
 export const onboardingStore = defineStore('onboarding', {
   state: (): OnboardingState => ({

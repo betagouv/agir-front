@@ -19,6 +19,7 @@ import PageArticle from '@/components/pages/PageArticle.vue';
 import PagePrevisualisationArticle from '@/components/pages/PagePrevisualisationArticle.vue';
 import PagePrevisualisationQuiz from '@/components/pages/PagePrevisualisationQuiz.vue';
 import PageOnboardingVue from '@/components/pages/PageOnboarding.vue';
+import PageBilanOnboarding from '@/components/pages/PageBilanOnboarding.vue';
 
 const appName = 'Agir ! -';
 const routes = [
@@ -36,6 +37,11 @@ const routes = [
     path: '/onboarding',
     name: 'onboarding',
     component: PageOnboardingVue,
+  },
+  {
+    path: '/onboarding/bilan',
+    name: 'bilan-onboarding',
+    component: PageBilanOnboarding,
   },
   {
     path: '/authentification',
