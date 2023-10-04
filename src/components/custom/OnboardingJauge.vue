@@ -2,35 +2,27 @@
   <div class="jauge-container">
     <div class="jauge-libelle text--bold">{{ libelle }}</div>
     <div class="jauge-background fr-ml-5v">
-      <div
-        class="jauge-remplissage"
-        :style="{ position: 'static', backgroundColor: couleur, width: valeurToWidth(valeur) + '%' }"
-      ></div>
+      <div class="jauge-remplissage" :style="{ position: 'static', width: valeurToWidth(valeur) + '%' }"></div>
     </div>
   </div>
 </template>
 
-<script>
-  import { defineComponent } from 'vue';
-
-  export default defineComponent({
-    props: {
-      valeur: {
-        type: Number,
-        required: true,
-        validator: value => value >= 0 && value <= 4,
-      },
-      libelle: {
-        type: String,
-        required: true,
-      },
+<script setup lang="ts">
+  defineProps({
+    valeur: {
+      type: Number,
+      required: true,
+      validator: value => value >= 0 && value <= 4,
     },
-    methods: {
-      valeurToWidth(valeur) {
-        return (valeur / 4) * 100;
-      },
+    libelle: {
+      type: String,
+      required: true,
     },
   });
+
+  function valeurToWidth(valeur) {
+    return (valeur / 4) * 100;
+  }
 </script>
 
 <style scoped>
