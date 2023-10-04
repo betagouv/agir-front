@@ -1,8 +1,15 @@
 <template>
-  <div class="jauge-container">
+  <div class="jauge-container" :aria-label="`Jauge de ${libelle} - ${valeurToWidth(valeur)} rempli`">
     <div class="fr-text--sm fr-mb-0 fr-text--bold">{{ libelle }}</div>
     <div class="jauge-background fr-ml-5v">
-      <div class="jauge-remplissage" :style="{ position: 'static', width: valeurToWidth(valeur) + '%' }"></div>
+      <div
+        class="jauge-remplissage"
+        aria-hidden="true"
+        :aria-valuenow="valeurToWidth(valeur)"
+        aria-valuemin="0"
+        aria-valuemax="100"
+        :style="{ position: 'static', width: valeurToWidth(valeur) + '%' }"
+      ></div>
     </div>
   </div>
 </template>
