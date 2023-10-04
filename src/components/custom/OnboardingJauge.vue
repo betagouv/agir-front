@@ -1,6 +1,6 @@
 <template>
   <div class="jauge-container">
-    <div class="jauge-libelle text--bold">{{ libelle }}</div>
+    <div class="fr-text--sm fr-mb-0 fr-text--bold">{{ libelle }}</div>
     <div class="jauge-background fr-ml-5v">
       <div class="jauge-remplissage" :style="{ position: 'static', width: valeurToWidth(valeur) + '%' }"></div>
     </div>
@@ -27,32 +27,23 @@
 
 <style scoped>
   .jauge-container {
-    position: relative;
     display: flex;
     align-items: center;
-    height: 20px;
+    justify-content: space-between;
   }
 
   .jauge-background {
     background: linear-gradient(0deg, #dddddd, #dddddd), linear-gradient(0deg, #d9d9d9, #d9d9d9);
     width: 100%;
-    height: 100%;
+    height: 20px;
     border-radius: 10px;
-    max-width: 330px;
+    max-width: var(--widthJaugeOnboarding);
   }
 
   .jauge-remplissage {
     background: linear-gradient(270deg, #e42313 0%, #000091 100%), linear-gradient(0deg, #ffffff, #ffffff);
-    position: absolute;
-    top: 0;
-    left: 0;
     height: 100%;
     border-radius: 10px;
     border: 2px solid rgba(255, 255, 255, 1);
-  }
-
-  .jauge-libelle {
-    font-size: 0.8rem;
-    min-width: 120px;
   }
 </style>

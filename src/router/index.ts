@@ -37,11 +37,17 @@ const routes = [
     path: '/onboarding',
     name: 'onboarding',
     component: PageOnboardingVue,
+    meta: {
+      estPublique: true,
+    },
   },
   {
     path: '/onboarding/bilan',
     name: 'bilan-onboarding',
     component: PageBilanOnboarding,
+    meta: {
+      estPublique: true,
+    },
   },
   {
     path: '/authentification',

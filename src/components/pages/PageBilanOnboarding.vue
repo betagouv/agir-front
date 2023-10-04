@@ -4,6 +4,10 @@
   <div class="fr-grid-row fr-grid-row--gutters">
     <div class="fr-col-lg-6 fr-col-12">
       <CarteVierge>
+        <div class="legende fr-text--sm fr-text--bold">
+          <span class="fr-pl-2w">Impact faible</span>
+          <span class="fr-pr-2w">Impact fort</span>
+        </div>
         <div v-for="item in onboardingResultatViewModel" :key="item.libelle">
           <OnboardingJauge class="fr-mb-5v" :libelle="item.libelle" :valeur="item.valeur" />
         </div>
@@ -39,3 +43,33 @@
     })
   );
 </script>
+
+<style scoped>
+  .legende {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    margin-left: auto;
+    max-width: var(--widthJaugeOnboarding);
+  }
+
+  .legende span::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 11px;
+    width: 11px;
+    border-radius: 50%;
+  }
+
+  .legende span:first-child::before {
+    left: 0;
+    background: var(--blue-france-sun-113-625);
+  }
+
+  .legende span:nth-child(2)::before {
+    right: 0;
+    background-color: #e32416;
+  }
+</style>
