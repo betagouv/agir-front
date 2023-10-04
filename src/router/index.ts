@@ -18,8 +18,9 @@ import PageCreationCompte from '@/components/pages/PageCreationCompte.vue';
 import PageArticle from '@/components/pages/PageArticle.vue';
 import PagePrevisualisationArticle from '@/components/pages/PagePrevisualisationArticle.vue';
 import PagePrevisualisationQuiz from '@/components/pages/PagePrevisualisationQuiz.vue';
-import PageOnboardingVue from '@/components/pages/PageOnboarding.vue';
 import PageBilanOnboarding from '@/components/pages/PageBilanOnboarding.vue';
+import PageOnboarding from '@/components/pages/PageOnboarding.vue';
+import PagePreOnboarding from '@/components/pages/PagePreOnboarding.vue';
 
 const appName = 'Agir ! -';
 const routes = [
@@ -34,9 +35,17 @@ const routes = [
     beforeEnter: storeIdNGC,
   },
   {
+    path: '/pre-onboarding',
+    name: 'pre-onboarding',
+    component: PagePreOnboarding,
+    meta: {
+      estPublique: true,
+    },
+  },
+  {
     path: '/onboarding',
     name: 'onboarding',
-    component: PageOnboardingVue,
+    component: PageOnboarding,
     meta: {
       estPublique: true,
     },
