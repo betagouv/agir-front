@@ -56,6 +56,7 @@
     left: 0;
     height: 100%;
     border-radius: 10px;
+    border: 2px solid rgba(255, 255, 255, 1);
   }
 
   .jauge-libelle {
