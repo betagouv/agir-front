@@ -13,9 +13,9 @@ class OnboardingRespoitoryForTest implements OnboardingRepository {
   envoyer(onboarding: OnboardingState): Promise<OnboardingResultat> {
     return Promise.resolve({
       transports: 4,
-      consommation: 4,
-      logement: 4,
-      alimentation: 4,
+      consommation: 1,
+      logement: 2,
+      alimentation: 3,
     });
   }
 }
@@ -58,16 +58,16 @@ describe("Fichier de tests concernant l'evaluation de l'onboarding", () => {
             valeur: 4,
           },
           {
+            libelle: '🥦 Alimentation',
+            valeur: 3,
+          },
+          {
             libelle: '🏡 Logement',
-            valeur: 4,
+            valeur: 2,
           },
           {
             libelle: '🛒 Consommation',
-            valeur: 4,
-          },
-          {
-            libelle: '🥦 Alimentation',
-            valeur: 4,
+            valeur: 1,
           },
         ]);
       })
