@@ -19,7 +19,7 @@
     valeur: {
       type: Number,
       required: true,
-      validator: value => value >= 0 && value <= 4,
+      validator: (value: number) => value >= 0 && value <= 4,
     },
     libelle: {
       type: String,
