@@ -52,6 +52,14 @@ export const onboardingStore = defineStore('onboarding', {
     },
   },
 
+  getters: {
+    estComplet: state =>
+      state.etapeAlimentation.done &&
+      state.etapeConsommation.done &&
+      state.etapeLogement.done &&
+      state.etapeTransport.done,
+  },
+
   persist: {
     storage: sessionStorage,
   },

@@ -21,6 +21,7 @@ import PagePrevisualisationQuiz from '@/components/pages/PagePrevisualisationQui
 import PageBilanOnboarding from '@/components/pages/PageBilanOnboarding.vue';
 import PageOnboarding from '@/components/pages/PageOnboarding.vue';
 import PagePreOnboarding from '@/components/pages/PagePreOnboarding.vue';
+import { onboardingStore } from '@/store/onboarding';
 
 const appName = 'Agir ! -';
 const routes = [
@@ -144,6 +145,13 @@ const routes = [
     path: '/creation-compte',
     name: 'creation-compte',
     component: PageCreationCompte,
+    beforeEnter: (to, from, next) => {
+      if (!onboardingStore().estComplet) {
+        router.replace({ name: 'pre-onboarding' });
+      } else {
+        next();
+      }
+    },
     meta: {
       title: `${appName} Création du compte`,
       estPublique: true,

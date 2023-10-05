@@ -1,4 +1,8 @@
-import { CompteUtilisateur, CompteUtilisateurRepository } from '@/compte/ports/compteUtilisateur.repository';
+import {
+  CompteUtilisateur,
+  CompteUtilisateurACreer,
+  CompteUtilisateurRepository,
+} from '@/compte/ports/compteUtilisateur.repository';
 import { AxiosFactory } from '@/axios.factory';
 import { Response } from 'redaxios';
 
@@ -13,9 +17,7 @@ interface CompteUtilisateurApiModel {
 export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurRepository {
   async getCompteUtilisateur(idUtilisateur: string): Promise<CompteUtilisateur> {
     const axiosInstance = AxiosFactory.getAxios();
-    const response: Response<CompteUtilisateurApiModel> = await axiosInstance.get(
-      `/utilisateurs/${idUtilisateur}/profile`
-    );
+    const response: Response<CompteUtilisateurApiModel> = await axiosInstance.get(`/utilisateurs/${idUtilisateur}`);
     return {
       nom: response.data.name,
       id: idUtilisateur,
@@ -36,11 +38,13 @@ export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurReposit
     });
   }
 
-  async creerCompteUtilisateur(nom: string, email: string): Promise<CompteUtilisateur> {
+  async creerCompteUtilisateur(compteUtilisateurACreer: CompteUtilisateurACreer): Promise<CompteUtilisateur> {
     const axiosInstance = AxiosFactory.getAxios();
     const response: Response<CompteUtilisateurApiModel> = await axiosInstance.post(`/utilisateurs/`, {
-      name: nom,
-      email: email,
+      nom: compteUtilisateurACreer.nom,
+      prenom: compteUtilisateurACreer.prenom,
+      email: compteUtilisateurACreer.email,
+      onboardingData: compteUtilisateurACreer.onboarding,
     });
     return {
       nom: response.data.name,

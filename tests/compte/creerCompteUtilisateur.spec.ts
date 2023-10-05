@@ -2,6 +2,7 @@ import { CreerCompteUtilisateurUsecase } from '../../src/compte/creerCompteUtili
 import { SessionRepository } from '../../src/authentification/authentifierUtilisateur.usecase';
 import { Utilisateur } from '../../src/authentification/ports/utilisateur.repository';
 import { CompteUtilisateur, CompteUtilisateurRepository } from '../../src/compte/ports/compteUtilisateur.repository';
+import { OnboardingState } from '../../src/onboarding/evaluerOnboarding.usecase';
 
 class SessionRepositoryForTest implements SessionRepository {
   get utilisateur(): Utilisateur {
@@ -21,13 +22,13 @@ class SessionRepositoryForTest implements SessionRepository {
 }
 
 class CompteUtilisateurForTest implements CompteUtilisateurRepository {
-  creerCompteUtilisateur(nom: string, email: string, prenom): Promise<CompteUtilisateur> {
+  creerCompteUtilisateur(compteUtilisateurACreer): Promise<CompteUtilisateur> {
     return Promise.resolve({
       id: 'id',
-      nom: nom,
-      mail: email,
+      nom: compteUtilisateurACreer.nom,
+      mail: compteUtilisateurACreer.email,
       codePostal: '',
-      prenom: prenom,
+      prenom: compteUtilisateurACreer.prenom,
       revenuFiscal: '',
     });
   }
@@ -53,11 +54,37 @@ describe('Fichier de tests concernant la creation du compte utilisateur', () => 
       prenom: 'Doe',
       revenuFiscal: '',
     };
+
+    const onboardingState: OnboardingState = {
+      etapeTransport: {
+        transports: [],
+        avion: 0,
+        done: true,
+      },
+      etapeLogement: {
+        code_postal: '',
+        adultes: 0,
+        enfants: 0,
+        residence: '',
+        proprietaire: false,
+        superficie: '',
+        chauffage: '',
+        done: true,
+      },
+      etapeAlimentation: {
+        repas: '',
+        done: true,
+      },
+      etapeConsommation: {
+        consommation: '',
+        done: true,
+      },
+    };
     const sessionRepository = new SessionRepositoryForTest();
     const compteUtilisateurRepository = new CompteUtilisateurForTest();
     // WHEN
     const usecase = new CreerCompteUtilisateurUsecase(compteUtilisateurRepository, sessionRepository);
-    await usecase.execute(compteACreer);
+    await usecase.execute(compteACreer, onboardingState);
     // THEN
     expect(sessionRepository.utilisateur).toStrictEqual<Utilisateur>({
       id: 'id',

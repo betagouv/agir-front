@@ -62,6 +62,7 @@
   import BoutonFranceConnect from '@/components/BoutonFranceConnect.vue';
   import InputMail from '@/components/dsfr/InputMail.vue';
   import InputText from '@/components/dsfr/InputText.vue';
+  import { onboardingStore } from '@/store/onboarding';
 
   type UserInput = Omit<CompteUtlisateurViewModel, 'id' | 'codePostal' | 'revenuFiscal'>;
   let compteUtilisateurInput = ref<UserInput>({
@@ -79,7 +80,7 @@
       new SessionRepositoryStore()
     );
     creeCompteUseCase
-      .execute(compteUtilisateurInput.value)
+      .execute(compteUtilisateurInput.value, onboardingStore().$state)
       .then(() => {
         router.push({ name: 'coach' });
         creationDeCompteEnErreur.value = false;

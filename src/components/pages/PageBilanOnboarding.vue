@@ -16,7 +16,9 @@
     <div class="fr-col-lg-6 fr-col-12 text--center">
       <img alt="Plateforme Agir :" src="/logo_agir.png" class="fr-mb-3w" />
       <h2>Devenez acteur de votre transition écologique !</h2>
-      <button class="fr-btn fr-btn--icon-left fr-icon-arrow-right-line">S'inscrire</button>
+      <router-link class="fr-btn fr-btn--icon-left fr-icon-arrow-right-line" :to="{ name: 'creation-compte' }">
+        S'inscrire
+      </router-link>
     </div>
   </div>
 </template>

@@ -1,3 +1,5 @@
+import { OnboardingState } from '@/onboarding/evaluerOnboarding.usecase';
+
 export interface CompteUtilisateur {
   id: string;
   nom: string;
@@ -6,9 +8,16 @@ export interface CompteUtilisateur {
   prenom: string;
   revenuFiscal: string;
 }
+
+export interface CompteUtilisateurACreer {
+  nom: string;
+  email: string;
+  prenom: string;
+  onboarding: OnboardingState;
+}
 export interface CompteUtilisateurRepository {
   getCompteUtilisateur(idUtilisateur: string): Promise<CompteUtilisateur>;
   mettreAjour(compteUtilisateur: CompteUtilisateur);
-  creerCompteUtilisateur(nom: string, email: string, prenom: string): Promise<CompteUtilisateur>;
+  creerCompteUtilisateur(compteUtilisateurACreer: CompteUtilisateurACreer): Promise<CompteUtilisateur>;
   supprimerCompteUtilisateur(idUtilisateur: string): Promise<void>;
 }
