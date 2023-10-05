@@ -15,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-  defineProps({
+  const props = defineProps({
     valeur: {
       type: Number,
       required: true,
@@ -28,11 +28,35 @@
   });
 
   function valeurToWidth(valeur) {
-    return (valeur / 4) * 100;
+    switch (valeur) {
+      case 1:
+        return 6;
+      case 2:
+        return 35;
+      case 3:
+        return 70;
+      case 4:
+        return 100;
+    }
+  }
+
+  function valeurToColor(valeur) {
+    switch (valeur) {
+      case 1:
+        return '#2B126C';
+      case 2:
+        return '#6C1E4E';
+      case 3:
+        return '#962B44';
+      case 4:
+        return '#E32416';
+    }
   }
 </script>
 
 <style scoped>
+  :root {
+  }
   .jauge-container {
     display: flex;
     align-items: center;
@@ -48,7 +72,8 @@
   }
 
   .jauge-remplissage {
-    background: linear-gradient(270deg, #e42313 0%, #000091 100%), linear-gradient(0deg, #ffffff, #ffffff);
+    --jauge-color: v-bind(valeurToColor(props.valeur));
+    background: linear-gradient(270deg, var(--jauge-color) 0%, #000091 100%), linear-gradient(0deg, #ffffff, #ffffff);
     height: 100%;
     border-radius: 10px;
     border: 2px solid rgba(255, 255, 255, 1);
