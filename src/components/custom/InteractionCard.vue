@@ -50,6 +50,7 @@
 <style scoped>
   .interaction-card {
     border: 1px solid rgba(0, 0, 0, 0.19);
+    background-image: none;
   }
 
   .interaction-card__img {

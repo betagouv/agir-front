@@ -24,10 +24,15 @@
                     <span class="fr-h4 text--gris">
                       {{ aide.titre }}
                     </span>
-                    <span class="fr-h6 text--gris">Jusqu'à 1700euros</span>
-                    <p v-show="aide.isSimulateur" class="fr-tag fr-icon-money-euro-circle-line fr-tag--icon-left">
-                      Simulateur disponible
-                    </p>
+                    <div v-if="aide.isSimulateur || aide.montantMaximum" class="fr-grid-row">
+                      <span
+                        v-if="aide.isSimulateur"
+                        class="fr-tag fr-mr-1w fr-icon-money-euro-circle-line fr-tag--icon-left"
+                      >
+                        Simulateur disponible
+                      </span>
+                      <span v-if="aide.montantMaximum" class="fr-tag">{{ aide.montantMaximum }}</span>
+                    </div>
                   </span>
                 </span>
               </template>

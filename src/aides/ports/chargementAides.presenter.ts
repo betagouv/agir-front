@@ -7,6 +7,7 @@ export interface AideViewModel {
   contenu: string;
   isSimulateur: boolean;
   url: string;
+  montantMaximum?: string;
 }
 
 export interface AidesViewModel {

@@ -18,7 +18,7 @@
                 </button>
               </div>
             </div>
-            <router-link class="fr-header__service" :to="{ name: 'coach' }">
+            <router-link class="fr-header__service" :to="{ name: estConnecte ? 'coach' : '' }">
               <img width="70" alt="agir-logo" src="/logo_agir.png" />
             </router-link>
           </div>
