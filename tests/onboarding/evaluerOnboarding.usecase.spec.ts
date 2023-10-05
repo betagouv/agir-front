@@ -20,7 +20,7 @@ class OnboardingRespoitoryForTest implements OnboardingRepository {
   }
 }
 describe("Fichier de tests concernant l'evaluation de l'onboarding", () => {
-  it("En donnant des données d'onboarding doit presenter un resultat", async () => {
+  it("En donnant des données d'onboarding doit presenter un resultat trié par valeur décroissante", async () => {
     // GIVEN
     const onboardingState = {
       etapeTransport: {
