@@ -24,9 +24,9 @@
                     <span class="fr-h4 text--gris">
                       {{ aide.titre }}
                     </span>
-                    <div class="fr-grid-row">
+                    <div v-if="aide.isSimulateur || aide.montantMaximum" class="fr-grid-row">
                       <span
-                        v-show="aide.isSimulateur"
+                        v-if="aide.isSimulateur"
                         class="fr-tag fr-mr-1w fr-icon-money-euro-circle-line fr-tag--icon-left"
                       >
                         Simulateur disponible
