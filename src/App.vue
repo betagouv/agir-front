@@ -17,7 +17,7 @@
     if (title) {
       document.title = title as string;
     }
-    if (estPublique || utilisateurStore().utilisateur) {
+    if (estPublique || utilisateurStore().utilisateur.id.length > 0) {
       next();
     } else {
       next({ name: 'authentification' });

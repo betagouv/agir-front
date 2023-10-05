@@ -34,8 +34,8 @@
 
   const options = [
     { id: 'voiture', label: '🚙 Voiture' },
-    { id: 'scooter', label: '🛵 Scooter ou moto' },
-    { id: 'marche', label: '🚶🏻 Marche à pied' },
+    { id: 'moto', label: '🛵 Scooter ou moto' },
+    { id: 'pied', label: '🚶🏻 Marche à pied' },
     { id: 'velo', label: '🚴 Vélo' },
     { id: 'transport', label: '🚃 Métro, train, bus' },
   ];

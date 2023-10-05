@@ -42,7 +42,7 @@
       legende="Quelle en est la superficie ?"
       name="superficieLogement"
       :options="[
-        { label: 'Moins de 50 m²', value: 'petite' },
+        { label: 'Moins de 50 m²', value: 'petit' },
         { label: 'Entre 50 et 100 m²', value: 'moyen' },
         { label: 'Plus de 100 m²', value: 'grand' },
       ]"

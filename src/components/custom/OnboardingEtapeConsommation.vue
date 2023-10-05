@@ -20,6 +20,7 @@
   import { computed, ref } from 'vue';
   import BoutonRadio from '@/components/custom/BoutonRadio.vue';
   import { onboardingStore } from '@/store/onboarding';
+  import router from '@/router';
 
   const onBoardingStore = onboardingStore();
   const options = [
@@ -49,8 +50,7 @@
       consommation: viewModel.value.consommation,
       done: true,
     });
-
-    emit('submitEtape');
+    router.push({ name: 'bilan-onboarding' });
   };
 
   const retourEtapePrecedente = () => {
