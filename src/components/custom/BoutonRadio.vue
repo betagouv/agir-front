@@ -5,7 +5,11 @@
     </legend>
     <div class="fr-grid-row full-width">
       <div :class="`fr-fieldset__element ${col}`" v-for="option in options" :key="option.label">
-        <div class="fr-radio-group border fr-p-2w fr-col">
+        <div
+          :class="`fr-radio-group border fr-p-2w fr-col ${
+            option.value === defaultValue ? 'fr-text--bold border--bleu-dark' : ''
+          }`"
+        >
           <input
             type="radio"
             :id="`${option.label}`"
@@ -39,10 +43,3 @@
     emit('update:modelValue', input.value);
   };
 </script>
-
-<style scoped>
-  .fr-radio-group:has(input:checked) {
-    border-color: var(--blue-france-sun-113-625);
-    font-weight: bold;
-  }
-</style>
