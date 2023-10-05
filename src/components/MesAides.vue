@@ -24,10 +24,15 @@
                     <span class="fr-h4 text--gris">
                       {{ aide.titre }}
                     </span>
-                    <span v-if="aide.montantMaximum" class="fr-h6 text--gris">{{ aide.montantMaximum }}</span>
-                    <p v-show="aide.isSimulateur" class="fr-tag fr-icon-money-euro-circle-line fr-tag--icon-left">
-                      Simulateur disponible
-                    </p>
+                    <div class="fr-grid-row">
+                      <span
+                        v-show="aide.isSimulateur"
+                        class="fr-tag fr-mr-1w fr-icon-money-euro-circle-line fr-tag--icon-left"
+                      >
+                        Simulateur disponible
+                      </span>
+                      <span v-if="aide.montantMaximum" class="fr-tag">{{ aide.montantMaximum }}</span>
+                    </div>
                   </span>
                 </span>
               </template>
