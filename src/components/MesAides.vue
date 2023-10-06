@@ -15,7 +15,7 @@
       <div v-for="(aides, index) in props.aidesGroupesParCategorie" :key="index">
         <div v-if="categoriesActives.includes(`${index}`)">
           <h2 class="fr-h4">{{ index }}</h2>
-          <div class="background--white fr-mb-2w border-x" v-for="aide in aides" :key="aide.id">
+          <div class="fr-mb-2w" v-for="aide in aides" :key="aide.id">
             <Accordeon :label="aide.titre" :name-id="aide.id">
               <template v-slot:titre>
                 <span class="fr-col-12 fr-pr-2w">
@@ -88,6 +88,7 @@
 
   .aide__titre {
     display: flex;
+    padding-right: 1rem;
     justify-content: space-between;
     align-items: center;
     width: 100%;
