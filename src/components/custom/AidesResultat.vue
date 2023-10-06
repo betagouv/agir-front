@@ -35,7 +35,7 @@
 </template>
 
 <script setup lang="ts">
-  import Accordeon from '@/components/dsfr/Accordeon.vue';
+  import Accordeon from '@/components/custom/Accordeon.vue';
   import AideDetail from '@/components/custom/AideDetail.vue';
   import { SimulationAideResultatViewModel } from '@/aides/ports/simulationAideResultat';
   defineProps<{

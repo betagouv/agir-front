@@ -57,9 +57,9 @@
 <script setup lang="ts">
   import { ref } from 'vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
-  import Accordeon from './dsfr/Accordeon.vue';
+  import Accordeon from '@/components/custom/Accordeon.vue';
   import { AidesViewModel } from '@/aides/ports/chargementAides.presenter';
-  import InputCheckbox from './dsfr/InputCheckbox.vue';
+  import InputCheckbox from '@/components/dsfr/InputCheckbox.vue';
 
   const props = defineProps<{
     aidesGroupesParCategorie: AidesViewModel;

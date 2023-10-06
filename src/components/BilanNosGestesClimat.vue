@@ -23,7 +23,7 @@
 </template>
 
 <script setup lang="ts">
-  import Accordeon from '@/components/dsfr/Accordeon.vue';
+  import Accordeon from '@/components/custom/Accordeon.vue';
   import CarteVierge from '@/components/CarteVierge.vue';
   import JaugeNosGestesClimat from '@/components/JaugeNosGestesClimat.vue';
   import { EmpreinteViewModel } from '@/bilan/adapters/chargementEmpreinte.presenter.impl';
