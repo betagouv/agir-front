@@ -15,6 +15,7 @@ const compteUtlisateurViewModel: CompteUtlisateurViewModel = {
 const props = { compteUtlisateurViewModel };
 
 describe('Compte - Formulaire', () => {
+  let titre: HTMLElement;
   let inputNom: HTMLInputElement;
   let inputEmail: HTMLInputElement;
   let inputCodePostal: HTMLInputElement;
@@ -25,14 +26,16 @@ describe('Compte - Formulaire', () => {
     const { getByRole } = render(PageCompteFormulaire, { props });
 
     inputNom = getByRole('textbox', { name: 'Nom' });
-    inputEmail = getByRole('textbox', { name: 'Adresse électronique' });
-    inputCodePostal = getByRole('textbox', { name: 'Code Postal' });
+    inputEmail = getByRole('textbox', { name: /Adresse électronique/i });
+    inputCodePostal = getByRole('textbox', { name: 'Code postal' });
     submitBouton = getByRole('button', { name: 'Mettre à jour' });
+    titre = getByRole('heading', { level: 2, name: 'Identité personnelle' });
   });
 
   it("pré-remplit et affiche les champs associés au compte de l'utilisateur", () => {
     // WHEN
     // THEN
+    expect(titre).toBeDefined();
     expect(inputNom).toBeDefined();
     expect(inputNom.value).toBe('Claude');
     expect(inputEmail).toBeDefined();
