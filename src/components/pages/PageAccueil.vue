@@ -13,7 +13,7 @@
         </ul>
 
         <div v-if="!isAuthentifie">
-          <router-link class="fr-link" :to="{ name: 'onboarding' }">Commencer !</router-link>
+          <router-link class="fr-link" :to="{ name: 'pre-onboarding' }">Commencer !</router-link>
           <p class="fr-mt-3w">
             Déjà un compte ?
             <router-link class="fr-link" :to="{ name: 'authentification' }">Se connecter !</router-link>

@@ -1,11 +1,15 @@
-import { CompteUtilisateur, CompteUtilisateurRepository } from "../../src/compte/ports/compteUtilisateur.repository";
-import { SupprimerCompteUtilisateurUsecase } from "../../src/compte/supprimerCompteUtilisateur.usecase";
+import {
+  CompteUtilisateur,
+  CompteUtilisateurACreer,
+  CompteUtilisateurRepository,
+} from '../../src/compte/ports/compteUtilisateur.repository';
+import { SupprimerCompteUtilisateurUsecase } from '../../src/compte/supprimerCompteUtilisateur.usecase';
 
 class SypCompteUtilisateurRepository implements CompteUtilisateurRepository {
   get idUtilisateur(): string {
     return this._idUtilisateur;
   }
-  private _idUtilisateur: string = "";
+  private _idUtilisateur: string = '';
   get aEteAppelee(): boolean {
     return this._aEteAppelee;
   }
@@ -18,7 +22,7 @@ class SypCompteUtilisateurRepository implements CompteUtilisateurRepository {
     throw Error();
   }
 
-  creerCompteUtilisateur(nom: string, email: string): Promise<CompteUtilisateur> {
+  creerCompteUtilisateur(compteUtilisateurACreer: CompteUtilisateurACreer): Promise<CompteUtilisateur> {
     throw Error();
   }
 
@@ -29,15 +33,15 @@ class SypCompteUtilisateurRepository implements CompteUtilisateurRepository {
   }
 }
 
-describe("Fichier de tests concernant la suppression du compte utilisateur", () => {
-  it("La suppression doit appeler le repository", async () => {
+describe('Fichier de tests concernant la suppression du compte utilisateur', () => {
+  it('La suppression doit appeler le repository', async () => {
     // GIVEN
     // WHEN
     const repository = new SypCompteUtilisateurRepository();
     const usecase = new SupprimerCompteUtilisateurUsecase(repository);
-    usecase.execute("utlisateurId");
+    usecase.execute('utlisateurId');
     // THEN
     expect(repository.aEteAppelee).toBeTruthy();
-    expect(repository.idUtilisateur).toStrictEqual("utlisateurId");
+    expect(repository.idUtilisateur).toStrictEqual('utlisateurId');
   });
 });

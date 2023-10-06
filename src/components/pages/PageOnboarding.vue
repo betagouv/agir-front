@@ -62,10 +62,4 @@
     window.scrollTo(0, 0);
     etapeCourante.value--;
   };
-
-  onMounted(() => {
-    window.addEventListener('popstate', () => {
-      router.push({ name: 'onboarding' });
-    });
-  });
 </script>

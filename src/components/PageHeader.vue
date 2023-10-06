@@ -18,7 +18,7 @@
                 </button>
               </div>
             </div>
-            <router-link class="fr-header__service" :to="{ name: estConnecte ? 'coach' : '' }">
+            <router-link class="fr-header__service" :to="{ name: estConnecte ? 'coach' : 'accueil' }">
               <img width="70" alt="agir-logo" src="/logo_agir.png" />
             </router-link>
           </div>
@@ -27,9 +27,6 @@
               <ul class="fr-btns-group">
                 <li v-if="!estConnecte">
                   <a class="fr-btn fr-icon-lock-line" id="button-1938" href="/authentification"> Se connecter </a>
-                </li>
-                <li v-if="!estConnecte">
-                  <a class="fr-btn fr-icon-account-line" id="button-1939" href="#[url - à modifier]"> S’enregistrer </a>
                 </li>
                 <li v-if="estConnecte">
                   <div class="utilisateur">
@@ -96,7 +93,7 @@
         return utilisateurStore().score;
       },
       nomUtilisateur() {
-        return utilisateurStore().utilisateur.nom;
+        return utilisateurStore().utilisateur.prenom;
       },
       estConnecte() {
         return utilisateurStore().utilisateur.nom.length > 0;

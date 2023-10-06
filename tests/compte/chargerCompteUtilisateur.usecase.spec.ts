@@ -3,7 +3,11 @@ import {
   CompteUtlisateurViewModel,
 } from '../../src/compte/adapters/compteUtilisateur.presenter.impl';
 import { ChargerCompteUtilisateurUsecase } from '../../src/compte/chargerCompteUtilisateur.usecase';
-import { CompteUtilisateur, CompteUtilisateurRepository } from '../../src/compte/ports/compteUtilisateur.repository';
+import {
+  CompteUtilisateur,
+  CompteUtilisateurACreer,
+  CompteUtilisateurRepository,
+} from '../../src/compte/ports/compteUtilisateur.repository';
 
 class ChargeCompteUtilisateurSansInfosOptionnellesRepository implements CompteUtilisateurRepository {
   getCompteUtilisateur(idUtilisateur: string): Promise<CompteUtilisateur> {
@@ -19,7 +23,7 @@ class ChargeCompteUtilisateurSansInfosOptionnellesRepository implements CompteUt
 
   mettreAjour(compteUtilisateur: CompteUtilisateur) {}
 
-  creerCompteUtilisateur(nom: string, email: string): Promise<CompteUtilisateur> {
+  creerCompteUtilisateur(compteUtilisateurACreer: CompteUtilisateurACreer): Promise<CompteUtilisateur> {
     throw Error;
   }
 
@@ -42,7 +46,7 @@ class ChargeCompteUtilisateurAvecMailRepository implements CompteUtilisateurRepo
 
   mettreAjour(compteUtilisateur: CompteUtilisateur) {}
 
-  creerCompteUtilisateur(nom: string, email: string): Promise<CompteUtilisateur> {
+  creerCompteUtilisateur(compteUtilisateurACreer: CompteUtilisateurACreer): Promise<CompteUtilisateur> {
     throw Error;
   }
 

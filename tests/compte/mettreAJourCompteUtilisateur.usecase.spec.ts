@@ -1,5 +1,9 @@
 import { CompteUtlisateurViewModel } from '../../src/compte/adapters/compteUtilisateur.presenter.impl';
-import { CompteUtilisateur, CompteUtilisateurRepository } from '../../src/compte/ports/compteUtilisateur.repository';
+import {
+  CompteUtilisateur,
+  CompteUtilisateurACreer,
+  CompteUtilisateurRepository,
+} from '../../src/compte/ports/compteUtilisateur.repository';
 import { MettreAJourCompteUtilisateurUsecase } from '../../src/compte/mettreAJourCompteUtilisateur.usecase';
 import { SessionRepository } from '../../src/authentification/authentifierUtilisateur.usecase';
 import { Utilisateur } from '../../src/authentification/ports/utilisateur.repository';
@@ -29,7 +33,7 @@ class SypCompteUtilisateurRepository implements CompteUtilisateurRepository {
     this._compteUtilisateur = compteUtilisateur;
   }
 
-  creerCompteUtilisateur(nom: string, email: string): Promise<CompteUtilisateur> {
+  creerCompteUtilisateur(compteUtilisateurACreer: CompteUtilisateurACreer): Promise<CompteUtilisateur> {
     throw Error();
   }
 

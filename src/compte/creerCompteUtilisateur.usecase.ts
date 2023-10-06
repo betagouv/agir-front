@@ -1,6 +1,7 @@
 import { CompteUtilisateurRepository } from '@/compte/ports/compteUtilisateur.repository';
 import { CompteUtlisateurViewModel } from '@/compte/adapters/compteUtilisateur.presenter.impl';
 import { SessionRepository } from '@/authentification/authentifierUtilisateur.usecase';
+import { OnboardingState } from '@/onboarding/evaluerOnboarding.usecase';
 
 export class CreerCompteUtilisateurUsecase {
   private _compteUtilisateuRepository: CompteUtilisateurRepository;
@@ -12,13 +13,15 @@ export class CreerCompteUtilisateurUsecase {
   }
 
   async execute(
-    compteUtlisateurACreerViewModel: Omit<CompteUtlisateurViewModel, 'id' | 'codePostal' | 'revenuFiscal'>
+    compteUtlisateurACreerViewModel: Omit<CompteUtlisateurViewModel, 'id' | 'codePostal' | 'revenuFiscal'>,
+    onboarding: OnboardingState
   ): Promise<void> {
-    const utilisateurCree = await this._compteUtilisateuRepository.creerCompteUtilisateur(
-      compteUtlisateurACreerViewModel.nom,
-      compteUtlisateurACreerViewModel.mail,
-      compteUtlisateurACreerViewModel.prenom
-    );
+    const utilisateurCree = await this._compteUtilisateuRepository.creerCompteUtilisateur({
+      nom: compteUtlisateurACreerViewModel.nom,
+      email: compteUtlisateurACreerViewModel.mail,
+      prenom: compteUtlisateurACreerViewModel.prenom,
+      onboarding: onboarding,
+    });
 
     this._sessionRepository.sauvegarderUtilisateur({
       nom: utilisateurCree.nom,
