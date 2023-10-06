@@ -1,10 +1,13 @@
-import { ChargementEmpreintePresenterImpl, EmpreinteViewModel } from "../../src/bilan/adapters/chargementEmpreinte.presenter.impl";
-import { ChargementEmpreinteUsecase } from "../../src/bilan/chargementEmpreinte.usecase";
-import { Empreinte, EmpreinteRepository } from "../../src/bilan/ports/empreinteRepository";
+import {
+  ChargementEmpreintePresenterImpl,
+  EmpreinteViewModel,
+} from '../../src/bilan/adapters/chargementEmpreinte.presenter.impl';
+import { ChargementEmpreinteUsecase } from '../../src/bilan/chargementEmpreinte.usecase';
+import { Empreinte, EmpreinteRepository } from '../../src/bilan/ports/empreinteRepository';
 
 class EmpreinteRepositoryForTest implements EmpreinteRepository {
   importerSituationNGC(idNGC: string, utilisateurId: string): Promise<boolean> {
-    throw new Error("Method not implemented.");
+    throw new Error('Method not implemented.');
   }
   getEmpreinte(username: string): Promise<Empreinte> {
     return Promise.resolve({
@@ -28,18 +31,40 @@ describe("Fichier de tests pour le chargement d'une empreinte carbone", () => {
     // GIVEN
     // WHEN
     const useCase = new ChargementEmpreinteUsecase(new EmpreinteRepositoryForTest());
-    await useCase.execute("Dorian", new ChargementEmpreintePresenterImpl(expectation));
+    await useCase.execute('Dorian', new ChargementEmpreintePresenterImpl(expectation));
+
     // THEN
     function expectation(empreinteViewModel: EmpreinteViewModel) {
       expect(empreinteViewModel).toStrictEqual({
-        bilan: "6.8",
-        detail: {
-          alimentation: 2,
-          divers: 0.9,
-          logement: 1.4,
-          servicesSocietaux: 1.6,
-          transport: 0.9,
-        },
+        bilan: '6.8',
+        details: [
+          {
+            couleur: '#F28622',
+            libelle: '🥦 Alimentation',
+            valeur: 2,
+          },
+          {
+            couleur: '#474EFF',
+            libelle: '🚗 Transports',
+            valeur: 0.9,
+          },
+          {
+            couleur: '#809769',
+            libelle: '🏛️ Services sociétaux',
+            valeur: 1.6,
+          },
+          {
+            couleur: '#F8BE00',
+            libelle: '🏡 Logement',
+            valeur: 1.4,
+          },
+          {
+            couleur: '#5C26D1',
+            libelle: '🛒 Consommation',
+            valeur: 0.9,
+          },
+        ],
+        valeurMax: 2,
       });
     }
   });

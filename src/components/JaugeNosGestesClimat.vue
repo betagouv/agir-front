@@ -23,16 +23,19 @@
       valeur: {
         type: Number,
         required: true,
-        validator: value => value >= 0 && value <= 5,
       },
       libelle: {
         type: String,
         required: true,
       },
+      valeurMax: {
+        type: Number,
+        required: true,
+      },
     },
     methods: {
       valeurToWidth(valeur) {
-        return (valeur / 5) * 100;
+        return (valeur / this.valeurMax) * 100;
       },
       formatValeur(valeur) {
         return valeur.toLocaleString(undefined, { minimumFractionDigits: 1 }) + ' t';
@@ -69,6 +72,7 @@
     margin-right: 10px;
     margin-left: 10px;
     font-weight: bold;
+    min-width: 40px;
   }
 
   .jauge-libelle {

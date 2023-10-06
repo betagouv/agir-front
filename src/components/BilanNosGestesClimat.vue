@@ -8,36 +8,15 @@
     <Accordeon nameId="accordeonBilan">
       <template v-slot:titre>Voir le détail</template>
       <template v-slot:contenu>
-        <JaugeNosGestesClimat
-          class="fr-mb-3v"
-          libelle="🥦 Alimentation"
-          :valeur="getImpactValue.detail.alimentation"
-          couleur="#F28622"
-        />
-        <JaugeNosGestesClimat
-          class="fr-mb-3v"
-          libelle="🚗 Transports"
-          :valeur="getImpactValue.detail.transport"
-          couleur="#474EFF"
-        />
-        <JaugeNosGestesClimat
-          class="fr-mb-3v"
-          libelle="🏛️ Services sociétaux"
-          :valeur="getImpactValue.detail.servicesSocietaux"
-          couleur="#809769"
-        />
-        <JaugeNosGestesClimat
-          class="fr-mb-3v"
-          libelle="🏡 Logement"
-          :valeur="getImpactValue.detail.logement"
-          couleur="#F8BE00"
-        />
-        <JaugeNosGestesClimat
-          class="fr-mb-3v"
-          libelle="🛒 Consommation"
-          :valeur="getImpactValue.detail.divers"
-          couleur="#5C26D1"
-        />
+        <div v-for="detail in getImpactValue.details" :key="detail.libelle">
+          <JaugeNosGestesClimat
+            class="fr-mb-3v"
+            :libelle="detail.libelle"
+            :valeur="detail.valeur"
+            :couleur="detail.couleur"
+            :valeur-max="getImpactValue.valeurMax"
+          />
+        </div>
       </template>
     </Accordeon>
   </CarteVierge>
