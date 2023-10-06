@@ -11,37 +11,33 @@
   </div>
 </template>
 
-<script>
-  import { defineComponent } from 'vue';
-
-  export default defineComponent({
-    props: {
-      couleur: {
-        type: String,
-        required: true,
-      },
-      valeur: {
-        type: Number,
-        required: true,
-      },
-      libelle: {
-        type: String,
-        required: true,
-      },
-      valeurMax: {
-        type: Number,
-        required: true,
-      },
+<script setup lang="ts">
+  const props = defineProps({
+    couleur: {
+      type: String,
+      required: true,
     },
-    methods: {
-      valeurToWidth(valeur) {
-        return (valeur / this.valeurMax) * 100;
-      },
-      formatValeur(valeur) {
-        return valeur.toLocaleString(undefined, { minimumFractionDigits: 1 }) + ' t';
-      },
+    valeur: {
+      type: Number,
+      required: true,
+    },
+    libelle: {
+      type: String,
+      required: true,
+    },
+    valeurMax: {
+      type: Number,
+      required: true,
     },
   });
+
+  function valeurToWidth(valeur) {
+    return (valeur / props.valeurMax) * 100;
+  }
+
+  function formatValeur(valeur) {
+    return `${valeur.toLocaleString()} t`;
+  }
 </script>
 
 <style scoped>
