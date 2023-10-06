@@ -12,24 +12,12 @@
 </template>
 
 <script setup lang="ts">
-  const props = defineProps({
-    couleur: {
-      type: String,
-      required: true,
-    },
-    valeur: {
-      type: Number,
-      required: true,
-    },
-    libelle: {
-      type: String,
-      required: true,
-    },
-    valeurMax: {
-      type: Number,
-      required: true,
-    },
-  });
+  const props = defineProps<{
+    couleur: string;
+    valeur: number;
+    libelle: string;
+    valeurMax: number;
+  }>();
 
   function valeurToWidth(valeur) {
     return (valeur / props.valeurMax) * 100;
