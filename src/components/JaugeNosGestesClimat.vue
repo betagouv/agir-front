@@ -11,34 +11,21 @@
   </div>
 </template>
 
-<script>
-  import { defineComponent } from 'vue';
+<script setup lang="ts">
+  const props = defineProps<{
+    couleur: string;
+    valeur: number;
+    libelle: string;
+    valeurMax: number;
+  }>();
 
-  export default defineComponent({
-    props: {
-      couleur: {
-        type: String,
-        required: true,
-      },
-      valeur: {
-        type: Number,
-        required: true,
-        validator: value => value >= 0 && value <= 5,
-      },
-      libelle: {
-        type: String,
-        required: true,
-      },
-    },
-    methods: {
-      valeurToWidth(valeur) {
-        return (valeur / 5) * 100;
-      },
-      formatValeur(valeur) {
-        return valeur.toLocaleString(undefined, { minimumFractionDigits: 1 }) + ' t';
-      },
-    },
-  });
+  function valeurToWidth(valeur) {
+    return (valeur / props.valeurMax) * 100;
+  }
+
+  function formatValeur(valeur) {
+    return `${valeur.toLocaleString()} t`;
+  }
 </script>
 
 <style scoped>
@@ -69,6 +56,7 @@
     margin-right: 10px;
     margin-left: 10px;
     font-weight: bold;
+    min-width: 40px;
   }
 
   .jauge-libelle {

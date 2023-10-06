@@ -2,15 +2,14 @@ import { Empreinte } from '@/bilan/ports/empreinteRepository';
 import { ChargementEmpreintePresenter } from '@/bilan/ports/chargementEmpreinte.presenter';
 
 interface DetailEmpreinteViewModel {
-  alimentation: number;
-  divers: number;
-  logement: number;
-  servicesSocietaux: number;
-  transport: number;
+  libelle: string;
+  valeur: number;
+  couleur: string;
 }
 export interface EmpreinteViewModel {
   bilan: string;
-  detail: DetailEmpreinteViewModel;
+  details: DetailEmpreinteViewModel[];
+  valeurMax: number;
 }
 
 export class ChargementEmpreintePresenterImpl implements ChargementEmpreintePresenter {
@@ -28,15 +27,37 @@ export class ChargementEmpreintePresenterImpl implements ChargementEmpreintePres
       return parseFloat((valeur / 1000).toFixed(1));
     }
 
+    const details = [
+      {
+        libelle: '🥦 Alimentation',
+        valeur: transformerEnKiloEtArrondirAUn(empreinte.detail.alimentation),
+        couleur: '#F28622',
+      },
+      {
+        libelle: '🚗 Transports',
+        valeur: transformerEnKiloEtArrondirAUn(empreinte.detail.transport),
+        couleur: '#474EFF',
+      },
+      {
+        libelle: '🏛️ Services sociétaux',
+        valeur: transformerEnKiloEtArrondirAUn(empreinte.detail.servicesSocietaux),
+        couleur: '#809769',
+      },
+      {
+        libelle: '🏡 Logement',
+        valeur: transformerEnKiloEtArrondirAUn(empreinte.detail.logement),
+        couleur: '#F8BE00',
+      },
+      {
+        libelle: '🛒 Consommation',
+        valeur: transformerEnKiloEtArrondirAUn(empreinte.detail.divers),
+        couleur: '#5C26D1',
+      },
+    ];
     this._empreinteViewModel({
       bilan: transformerEnKiloPuisPasserEnString(empreinte.bilan),
-      detail: {
-        alimentation: transformerEnKiloEtArrondirAUn(empreinte.detail.alimentation),
-        divers: transformerEnKiloEtArrondirAUn(empreinte.detail.divers),
-        logement: transformerEnKiloEtArrondirAUn(empreinte.detail.logement),
-        servicesSocietaux: transformerEnKiloEtArrondirAUn(empreinte.detail.servicesSocietaux),
-        transport: transformerEnKiloEtArrondirAUn(empreinte.detail.transport),
-      },
+      details: Object.assign([], details),
+      valeurMax: details.sort((a, b) => b.valeur - a.valeur)[0].valeur,
     });
   }
 }
