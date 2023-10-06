@@ -1,5 +1,5 @@
 import PageCompteFormulaire from '../../src/components/custom/PageCompteFormulaire.vue';
-import { describe, it } from 'vitest';
+import { beforeEach, describe, it } from 'vitest';
 import { fireEvent, render } from '@testing-library/vue';
 import { CompteUtlisateurViewModel } from '../../src/compte/adapters/compteUtilisateur.presenter.impl';
 
@@ -15,16 +15,23 @@ const compteUtlisateurViewModel: CompteUtlisateurViewModel = {
 const props = { compteUtlisateurViewModel };
 
 describe('Compte - Formulaire', () => {
-  it("pré-remplit et affiche les champs associés au compte de l'utilisateur", () => {
+  let inputNom: HTMLInputElement;
+  let inputEmail: HTMLInputElement;
+  let inputCodePostal: HTMLInputElement;
+  let submitBouton: HTMLInputElement;
+
+  beforeEach(() => {
     // GIVEN
     const { getByRole } = render(PageCompteFormulaire, { props });
 
-    // WHEN
-    const inputNom = getByRole<HTMLInputElement>('textbox', { name: 'Nom' });
-    const inputEmail = getByRole<HTMLInputElement>('textbox', { name: 'Adresse électronique' });
-    const inputCodePostal = getByRole<HTMLInputElement>('textbox', { name: 'Code Postal' });
-    const submitBouton = getByRole<HTMLInputElement>('button', { name: 'Mettre à jour' });
+    inputNom = getByRole('textbox', { name: 'Nom' });
+    inputEmail = getByRole('textbox', { name: 'Adresse électronique' });
+    inputCodePostal = getByRole('textbox', { name: 'Code Postal' });
+    submitBouton = getByRole('button', { name: 'Mettre à jour' });
+  });
 
+  it("pré-remplit et affiche les champs associés au compte de l'utilisateur", () => {
+    // WHEN
     // THEN
     expect(inputNom).toBeDefined();
     expect(inputNom.value).toBe('Claude');
@@ -37,14 +44,7 @@ describe('Compte - Formulaire', () => {
 
   describe('quand je mets à jour mes informations', () => {
     it('la valeur des champs est modifiée', async () => {
-      // GIVEN
-      const { getByRole } = render(PageCompteFormulaire, { props });
-
       // WHEN
-      const inputNom = getByRole<HTMLInputElement>('textbox', { name: 'Nom' });
-      const inputEmail = getByRole<HTMLInputElement>('textbox', { name: 'Adresse électronique' });
-      const inputCodePostal = getByRole<HTMLInputElement>('textbox', { name: 'Code Postal' });
-
       await fireEvent.change(inputNom, { target: { value: 'John' } });
       await fireEvent.change(inputEmail, { target: { value: 'john-dubois@exemple.com' } });
       await fireEvent.change(inputCodePostal, { target: { value: '75002' } });
