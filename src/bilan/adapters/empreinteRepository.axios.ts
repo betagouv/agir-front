@@ -15,23 +15,18 @@ export interface EmpreinteApiModel {
 
 export class EmpreinteRepositoryAxios implements EmpreinteRepository {
   async getEmpreinte(utilisateurId: string): Promise<Empreinte> {
-    try {
-      const axiosInstance = AxiosFactory.getAxios();
-      const response = await axiosInstance.get<EmpreinteApiModel>(`/utilisateur/${utilisateurId}/bilans/last`);
-      return {
-        bilan: response.data.bilan_carbone_annuel,
-        detail: {
-          alimentation: response.data.details.alimentation,
-          divers: response.data.details.divers,
-          logement: response.data.details.logement,
-          servicesSocietaux: response.data.details.services_societaux,
-          transport: response.data.details.transport,
-        },
-      };
-    } catch (e) {
-      console.log(e);
-      throw e;
-    }
+    const axiosInstance = AxiosFactory.getAxios();
+    const response = await axiosInstance.get<EmpreinteApiModel>(`/utilisateur/${utilisateurId}/bilans/last`);
+    return {
+      bilan: response.data.bilan_carbone_annuel,
+      detail: {
+        alimentation: response.data.details.alimentation,
+        divers: response.data.details.divers,
+        logement: response.data.details.logement,
+        servicesSocietaux: response.data.details.services_societaux,
+        transport: response.data.details.transport,
+      },
+    };
   }
 
   async importSituationNGC(situationId: string, utilisateurId: string): Promise<boolean> {

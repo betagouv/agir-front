@@ -28,28 +28,23 @@ export interface QuizCMSModel {
 }
 export class QuizRepositoryCMSAxios implements QuizRepository {
   async getQuiz(idQuizz: string): Promise<Quiz> {
-    try {
-      const axiosInstance = AxiosFactory.getCMSAxios();
-      const response: Response<QuizCMSModel> = await axiosInstance.get<QuizCMSModel>(
-        `quizzes/${idQuizz}?populate[0]=questions&populate[1]=questions.reponses`
-      );
-      return {
-        titre: response.data.data.attributes.titre,
-        questions: response.data.data.attributes.questions.map((question, index) => {
-          return {
-            id: question.id,
-            intitule: question.libelle,
-            reponsesPossibles: question.reponses.map(r => r.reponse),
-            ordre: (index + 1).toString(),
-            texteExplicationOK: question.explicationOk,
-            texteExplicationKO: question.explicationKO,
-            solution: question.reponses.filter(r => r.exact)[0].reponse,
-          };
-        }),
-      };
-    } catch (e) {
-      console.log(e);
-      throw e;
-    }
+    const axiosInstance = AxiosFactory.getCMSAxios();
+    const response: Response<QuizCMSModel> = await axiosInstance.get<QuizCMSModel>(
+      `quizzes/${idQuizz}?populate[0]=questions&populate[1]=questions.reponses`
+    );
+    return {
+      titre: response.data.data.attributes.titre,
+      questions: response.data.data.attributes.questions.map((question, index) => {
+        return {
+          id: question.id,
+          intitule: question.libelle,
+          reponsesPossibles: question.reponses.map(r => r.reponse),
+          ordre: (index + 1).toString(),
+          texteExplicationOK: question.explicationOk,
+          texteExplicationKO: question.explicationKO,
+          solution: question.reponses.filter(r => r.exact)[0].reponse,
+        };
+      }),
+    };
   }
 }

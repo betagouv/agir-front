@@ -26,15 +26,10 @@ type AidesVeloParType = {
 
 export class SimulerAideVeloRepositoryAxios implements SimulerAideVeloRepository {
   async getSimulation(codePostal: string, revenuFiscalDeReference: string): Promise<SimulationVelo> {
-    try {
-      const axiosInstance = AxiosFactory.getAxios();
-      const response = await axiosInstance.get<AidesVeloParType>(
-        `aides/velos?codePostal=${codePostal}&revenuFiscalDeReference=${revenuFiscalDeReference}`
-      );
-      return response.data;
-    } catch (e) {
-      console.log(e);
-      throw e;
-    }
+    const axiosInstance = AxiosFactory.getAxios();
+    const response = await axiosInstance.get<AidesVeloParType>(
+      `aides/velos?codePostal=${codePostal}&revenuFiscalDeReference=${revenuFiscalDeReference}`
+    );
+    return response.data;
   }
 }
