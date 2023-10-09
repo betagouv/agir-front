@@ -44,11 +44,6 @@ describe("Fichier de tests pour le chargement d'une empreinte carbone", () => {
             valeur: 2,
           },
           {
-            couleur: '#474EFF',
-            libelle: '🚗 Transports',
-            valeur: 0.9,
-          },
-          {
             couleur: '#809769',
             libelle: '🏛️ Services sociétaux',
             valeur: 1.6,
@@ -57,6 +52,11 @@ describe("Fichier de tests pour le chargement d'une empreinte carbone", () => {
             couleur: '#F8BE00',
             libelle: '🏡 Logement',
             valeur: 1.4,
+          },
+          {
+            couleur: '#474EFF',
+            libelle: '🚗 Transports',
+            valeur: 0.9,
           },
           {
             couleur: '#5C26D1',
