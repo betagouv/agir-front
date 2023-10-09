@@ -1,28 +1,26 @@
 <template>
-  <div class="fr-fieldset__element">
-    <div class="fr-input-group">
-      <label class="fr-label" :for="id">
-        {{ label }}
-        <span class="fr-hint-text">Format attendu : nom@domaine.fr</span>
-      </label>
-      <input
-        :id="id"
-        :value="modelValue"
-        @input="updateValue"
-        class="fr-input"
-        name="email"
-        autocomplete="on"
-        type="email"
-      >
-    </div>
+  <div class="fr-input-group">
+    <label class="fr-label" :for="name">
+      {{ label }}
+      <span class="fr-hint-text">Format attendu : nom@domaine.fr</span>
+    </label>
+    <input
+      :id="name"
+      :value="modelValue"
+      @input="updateValue"
+      class="fr-input"
+      :name="name"
+      autocomplete="on"
+      type="email"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
   defineProps<{
-    id: string,
-    label: string,
-    modelValue: string
+    name: string;
+    label: string;
+    modelValue: string;
   }>();
 
   const emit = defineEmits<{

@@ -28,20 +28,16 @@
         <h3>Créer un compte en choisissant un identifiant</h3>
         <div class="fr-grid-row fr-grid-row--gutters">
           <div class="fr-col-12 fr-py-0">
-            <InputMail label="Adresse électronique" id="utilisateur-mail" v-model="compteUtilisateurInput.mail" />
+            <InputMail label="Adresse électronique" name="utilisateur-mail" v-model="compteUtilisateurInput.mail" />
           </div>
           <div class="fr-col-12 fr-col-lg-6">
-            <div class="fr-fieldset__element">
-              <InputText label="Nom" name="utilisateur-nom" v-model="compteUtilisateurInput.nom" />
-            </div>
+            <InputText label="Nom" name="utilisateur-nom" v-model="compteUtilisateurInput.nom" />
           </div>
           <div class="fr-col-12 fr-col-lg-6">
-            <div class="fr-fieldset__element">
-              <InputText label="Prénom" name="utilisateur-prenom" v-model="compteUtilisateurInput.prenom" />
-            </div>
+            <InputText label="Prénom" name="utilisateur-prenom" v-model="compteUtilisateurInput.prenom" />
           </div>
         </div>
-        <button class="fr-btn display-block fr-col-12 fr-mt-2w fr-mx-1w" type="submit">Créer mon compte</button>
+        <button class="fr-btn display-block fr-col-12 fr-mt-2w" type="submit">Créer mon compte</button>
         <div v-show="creationDeCompteEnErreur" class="fr-alert fr-alert--error fr-col-12 fr-mt-2w fr-mx-1w">
           <h3 class="fr-alert__title">Erreur lors de la création du compte</h3>
           <p>{{ creationDeCompteMessageErreur }}</p>
