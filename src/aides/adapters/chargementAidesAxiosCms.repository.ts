@@ -41,7 +41,7 @@ export class chargementAidesAxiosCmsRepository implements ChargementAidesReposit
       const aides = await axiosCMS.get<AidesCMSModel>('/aides?populate=thematiques');
 
       return aides.data.data.map(({ id, attributes }) => ({
-        id: id,
+        id: id.toString(),
         titre: attributes.titre,
         categorie: attributes.thematiques.data[0].attributes.titre,
         contenu: attributes.description,

@@ -6,7 +6,9 @@ import router from '@/router';
 import { createPinia } from 'pinia';
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate';
 import VueMatomo from 'vue-matomo';
-
+import '@gouvfr/dsfr/dist/dsfr.min.css';
+import '@gouvfr/dsfr/dist/utility/utility.min.css';
+import '@gouvfr/dsfr/dist/dsfr.module.min.js';
 declare global {
   interface Window {
     _paq: any;

@@ -467,10 +467,10 @@
   resolved "https://registry.yarnpkg.com/@eslint/js/-/js-8.49.0.tgz#86f79756004a97fa4df866835093f1df3d03c333"
   integrity sha512-1S8uAY/MTJqVx0SC4epBq+N2yhuwtNwLbJYNZyhL2pO1ZVKn5HFXav5T41Ryzy9K9V7ZId2JB2oy/W4aCd9/2w==
 
-"@gouvfr/dsfr@^1.9.3":
-  version "1.10.0"
-  resolved "https://registry.yarnpkg.com/@gouvfr/dsfr/-/dsfr-1.10.0.tgz#a3f4939c728e35d8c9ecf06f7a62369ae46256db"
-  integrity sha512-fHqGCvc8jGtkX2AKRCWi9o3jf/kirP/BeeZ2FBVGwS9Oxd8KsG22xk/6Tls8nA+qPaI+2ZkZQxATBV8KlhwNhQ==
+"@gouvfr/dsfr@^1.10.1":
+  version "1.10.1"
+  resolved "https://registry.yarnpkg.com/@gouvfr/dsfr/-/dsfr-1.10.1.tgz#a8470374d1f52d4195bd7c3c2b218fe3aaddac90"
+  integrity sha512-epBjsV9zmaOev+Sv2rrV9jgKfcs0U+gOVirthfG7EymeKUVX0eLQit+ra9yrDzLgk4mm7ZkWfy/6FekOuNgj1w==
 
 "@humanwhocodes/config-array@^0.11.11":
   version "0.11.11"
