@@ -43,3 +43,9 @@
     emit('update:modelValue', input.value);
   };
 </script>
+
+<style scoped>
+  .fr-radio-group {
+    max-width: none;
+  }
+</style>
