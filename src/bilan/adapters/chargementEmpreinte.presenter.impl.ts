@@ -53,11 +53,12 @@ export class ChargementEmpreintePresenterImpl implements ChargementEmpreintePres
         valeur: transformerEnKiloEtArrondirAUn(empreinte.detail.divers),
         couleur: '#5C26D1',
       },
-    ];
+    ].sort((a, b) => b.valeur - a.valeur);
+
     this._empreinteViewModel({
       bilan: transformerEnKiloPuisPasserEnString(empreinte.bilan),
-      details: Object.assign([], details),
-      valeurMax: details.sort((a, b) => b.valeur - a.valeur)[0].valeur,
+      details: details,
+      valeurMax: details[0].valeur,
     });
   }
 }
