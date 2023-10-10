@@ -38,7 +38,11 @@
           </div>
         </div>
         <button class="fr-btn display-block fr-col-12 fr-mt-2w" type="submit">Créer mon compte</button>
-        <div v-show="creationDeCompteEnErreur" class="fr-alert fr-alert--error fr-col-12 fr-mt-2w fr-mx-1w">
+        <div
+          role="alert"
+          v-show="creationDeCompteEnErreur"
+          class="fr-alert background--white fr-alert--error fr-col-12 fr-mt-2w"
+        >
           <h3 class="fr-alert__title">Erreur lors de la création du compte</h3>
           <p>{{ creationDeCompteMessageErreur }}</p>
         </div>

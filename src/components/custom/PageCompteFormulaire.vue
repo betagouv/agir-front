@@ -1,20 +1,26 @@
 <template>
-  <form class="fr-mb-0 background--white fr-p-4w border border-radius--md" @submit.prevent="modifierInformation">
-    <fieldset class="fr-mb-0 fr-fieldset" aria-labelledby="identité-fieldset-legend">
-      <legend class="fr-fieldset__legend fr-px-0 fr-mx-0" id="identité-fieldset-legend">
-        <h2>Identité personnelle</h2>
-      </legend>
-      <div class="fr-col-12">
-        <InputText label="Nom" name="nom" v-model="compteUtlisateurViewModel.nom" />
-        <InputMail label="Adresse électronique" v-model="compteUtlisateurViewModel.mail" name="mail" />
-        <InputCodePostal
-          v-model="compteUtlisateurViewModel.codePostal"
-          :defaultValue="compteUtlisateurViewModel.codePostal"
-        />
-        <button class="fr-btn fr-mt-4w">Mettre à jour</button>
-      </div>
-    </fieldset>
-  </form>
+  <div>
+    <form class="fr-mb-0 background--white fr-p-4w border border-radius--md" @submit.prevent="modifierInformation">
+      <fieldset class="fr-mb-0 fr-fieldset" aria-labelledby="identité-fieldset-legend">
+        <legend class="fr-fieldset__legend fr-px-0 fr-mx-0" id="identité-fieldset-legend">
+          <h2>Identité personnelle</h2>
+        </legend>
+        <div class="fr-col-12">
+          <InputText label="Nom" name="nom" v-model="compteUtlisateurViewModel.nom" />
+          <InputMail label="Adresse électronique" v-model="compteUtlisateurViewModel.mail" name="mail" />
+          <InputCodePostal
+            v-model="compteUtlisateurViewModel.codePostal"
+            :defaultValue="compteUtlisateurViewModel.codePostal"
+          />
+          <button class="fr-btn fr-mt-4w">Mettre à jour</button>
+        </div>
+      </fieldset>
+    </form>
+    <div role="alert" v-show="success" class="fr-alert background--white fr-alert--success fr-col-12 fr-mt-2w">
+      <h3 class="fr-alert__title">Succès</h3>
+      <p>Compte correctement mis à jour.</p>
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -30,14 +36,15 @@
   const props = defineProps<{
     compteUtlisateurViewModel: CompteUtlisateurViewModel;
   }>();
-
+  let success = ref(false);
   const compteUtlisateurViewModel = ref<CompteUtlisateurViewModel>(props.compteUtlisateurViewModel);
 
-  function modifierInformation() {
+  async function modifierInformation() {
     const usecase = new MettreAJourCompteUtilisateurUsecase(
       new CompteUtilisateurRepositoryImpl(),
       new SessionRepositoryStore()
     );
-    usecase.execute(compteUtlisateurViewModel.value);
+    await usecase.execute(compteUtlisateurViewModel.value);
+    success.value = true;
   }
 </script>
