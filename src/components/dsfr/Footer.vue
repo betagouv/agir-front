@@ -1,5 +1,5 @@
 <template>
-  <footer v-if="getUtilisateur" class="fr-footer" role="contentinfo">
+  <footer v-if="getUtilisateur" class="fr-footer background--white" role="contentinfo">
     <div class="fr-container">
       <div class="fr-footer__body">
         <div class="fr-footer__brand fr-enlarge-link">
