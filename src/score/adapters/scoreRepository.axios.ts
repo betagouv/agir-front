@@ -12,16 +12,11 @@ interface ScoreApiModel {
 }
 export class ScoreRepositoryAxios implements ScoreRepository {
   async getScore(idUtilisateur: string): Promise<Score> {
-    try {
-      const axiosInstance = AxiosFactory.getAxios();
-      const response = await axiosInstance.get<ScoreApiModel>(`/utilisateurs/${idUtilisateur}`);
-      return {
-        badges: response.data.badges,
-        score: response.data.points,
-      };
-    } catch (e) {
-      console.log(e);
-      throw e;
-    }
+    const axiosInstance = AxiosFactory.getAxios();
+    const response = await axiosInstance.get<ScoreApiModel>(`/utilisateurs/${idUtilisateur}`);
+    return {
+      badges: response.data.badges,
+      score: response.data.points,
+    };
   }
 }

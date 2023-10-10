@@ -17,26 +17,21 @@ export interface QuizApiModel {
 
 export class QuizRepositoryAxios implements QuizRepository {
   async getQuiz(idQuizz: string): Promise<Quiz> {
-    try {
-      const axiosInstance = AxiosFactory.getAxios();
-      const response = await axiosInstance.get<QuizApiModel>(`/quizz/${idQuizz}`);
-      return {
-        titre: response.data.titre,
-        questions: response.data.questions.map(question => {
-          return {
-            id: question.id,
-            intitule: question.libelle,
-            reponsesPossibles: question.propositions,
-            ordre: question.ordre,
-            texteExplicationOK: question.texte_riche_explication,
-            texteExplicationKO: question.texte_riche_explication,
-            solution: question.solution,
-          };
-        }),
-      };
-    } catch (e) {
-      console.log(e);
-      throw e;
-    }
+    const axiosInstance = AxiosFactory.getAxios();
+    const response = await axiosInstance.get<QuizApiModel>(`/quizz/${idQuizz}`);
+    return {
+      titre: response.data.titre,
+      questions: response.data.questions.map(question => {
+        return {
+          id: question.id,
+          intitule: question.libelle,
+          reponsesPossibles: question.propositions,
+          ordre: question.ordre,
+          texteExplicationOK: question.texte_riche_explication,
+          texteExplicationKO: question.texte_riche_explication,
+          solution: question.solution,
+        };
+      }),
+    };
   }
 }
