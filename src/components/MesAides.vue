@@ -12,7 +12,8 @@
       />
     </div>
     <div class="fr-col-12 fr-col-lg-9">
-      <div v-for="(aides, index) in props.aidesGroupesParCategorie" :key="index">
+      <p v-if="!(categoriesActives.length > 0)">Sélectionnez une catégorie pour voir les aides associées</p>
+      <div v-else v-for="(aides, index) in props.aidesGroupesParCategorie" :key="index">
         <div v-if="categoriesActives.includes(`${index}`)">
           <h2 class="fr-h4">{{ index }}</h2>
           <div class="fr-mb-2w" v-for="aide in aides" :key="aide.id">
