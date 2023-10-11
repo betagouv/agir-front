@@ -1,6 +1,10 @@
 <template>
   <FilDAriane :page-courante="titrePage" :page-hierarchie="[{ label: 'Aides fincancières', url: 'mes-aides' }]" />
-  <AidesResultat :simulation-aides-view-model="simulationAidesRetrofitViewModel" :titre="titrePage">
+  <AidesResultat
+    :simulation-aides-view-model="simulationAidesRetrofitViewModel"
+    :titre="titrePage"
+    :sous-titre="sousTitre"
+  >
     <template v-slot:formulaire>
       <FormulaireAideRetrofit @submit-simulation="submitSimulation" />
     </template>
@@ -19,6 +23,7 @@
   import { SimulationAideResultatViewModel } from '@/aides/ports/simulationAideResultat';
 
   const titrePage = 'Mes aides - Retrofit';
+  const sousTitre = 'Vous pouvez bénéficier des aides Retrofit suivantes :';
   const simulationAidesRetrofitViewModel = ref<SimulationAideResultatViewModel | null>(null);
   const codePostal = ref<string>('');
   const revenuFiscal = ref<string>('');

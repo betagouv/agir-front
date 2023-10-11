@@ -9,7 +9,7 @@
     </div>
     <div class="fr-col-lg-8 fr-col-12">
       <div class="background--white border border-radius--md fr-p-3w">
-        <h2 class="fr-h4">Vous pouvez bénéficier des aides vélo suivantes :</h2>
+        <h2 class="fr-h4">{{ sousTitre }}</h2>
         <div v-for="(aides, index) in simulationAidesViewModel" :key="index">
           <Accordeon v-if="aides.length" :nameId="`aides-${index}`">
             <template v-slot:titre>Acheter un vélo {{ index }}</template>
@@ -40,6 +40,7 @@
   import { SimulationAideResultatViewModel } from '@/aides/ports/simulationAideResultat';
   defineProps<{
     titre: string;
+    sousTitre: string;
     simulationAidesViewModel: SimulationAideResultatViewModel | null;
   }>();
 </script>
