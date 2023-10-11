@@ -1,20 +1,29 @@
 <template>
-  <form class="fr-mb-0 background--white fr-p-4w border border-radius--md" @submit.prevent="modifierInformation">
-    <fieldset class="fr-mb-0 fr-fieldset" aria-labelledby="identité-fieldset-legend">
-      <legend class="fr-fieldset__legend fr-px-0 fr-mx-0" id="identité-fieldset-legend">
-        <h2>Identité personnelle</h2>
-      </legend>
-      <div class="fr-col-12">
-        <InputText label="Nom" name="nom" v-model="compteUtlisateurViewModel.nom" />
-        <InputMail label="Adresse électronique" v-model="compteUtlisateurViewModel.mail" name="mail" />
-        <InputCodePostal
-          v-model="compteUtlisateurViewModel.codePostal"
-          :defaultValue="compteUtlisateurViewModel.codePostal"
-        />
-        <button class="fr-btn fr-mt-4w">Mettre à jour</button>
-      </div>
-    </fieldset>
-  </form>
+  <div>
+    <form class="fr-mb-0 background--white fr-p-4w border border-radius--md" @submit.prevent="modifierInformation">
+      <fieldset class="fr-mb-0 fr-fieldset" aria-labelledby="identité-fieldset-legend">
+        <legend class="fr-fieldset__legend fr-px-0 fr-mx-0" id="identité-fieldset-legend">
+          <h2>Identité personnelle</h2>
+        </legend>
+        <div class="fr-col-12">
+          <InputText label="Nom" name="nom" v-model="compteUtlisateurViewModel.nom" />
+          <InputMail label="Adresse électronique" v-model="compteUtlisateurViewModel.mail" name="mail" />
+          <InputCodePostal
+            v-model="compteUtlisateurViewModel.codePostal"
+            :defaultValue="compteUtlisateurViewModel.codePostal"
+          />
+          <button class="fr-btn fr-mt-4w">Mettre à jour</button>
+        </div>
+      </fieldset>
+    </form>
+    <Alert
+      v-if="success"
+      class="fr-col-12 fr-mt-2w"
+      type="success"
+      titre="Succès"
+      message="Compte correctement mis à jour."
+    />
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -26,18 +35,20 @@
   import InputText from '@/components/dsfr/InputText.vue';
   import InputMail from '@/components/dsfr/InputMail.vue';
   import InputCodePostal from '@/components/dsfr/InputCodePostal.vue';
+  import Alert from '@/components/custom/Alert.vue';
 
   const props = defineProps<{
     compteUtlisateurViewModel: CompteUtlisateurViewModel;
   }>();
-
+  let success = ref(false);
   const compteUtlisateurViewModel = ref<CompteUtlisateurViewModel>(props.compteUtlisateurViewModel);
 
-  function modifierInformation() {
+  async function modifierInformation() {
     const usecase = new MettreAJourCompteUtilisateurUsecase(
       new CompteUtilisateurRepositoryImpl(),
       new SessionRepositoryStore()
     );
-    usecase.execute(compteUtlisateurViewModel.value);
+    await usecase.execute(compteUtlisateurViewModel.value);
+    success.value = true;
   }
 </script>

@@ -38,10 +38,13 @@
           </div>
         </div>
         <button class="fr-btn display-block fr-col-12 fr-mt-2w" type="submit">Créer mon compte</button>
-        <div v-show="creationDeCompteEnErreur" class="fr-alert fr-alert--error fr-col-12 fr-mt-2w fr-mx-1w">
-          <h3 class="fr-alert__title">Erreur lors de la création du compte</h3>
-          <p>{{ creationDeCompteMessageErreur }}</p>
-        </div>
+        <Alert
+          v-if="creationDeCompteEnErreur"
+          class="fr-col-12 fr-mt-2w"
+          type="error"
+          titre="Erreur lors de la création du compte"
+          :message="creationDeCompteMessageErreur"
+        />
       </fieldset>
     </form>
   </div>
@@ -59,6 +62,7 @@
   import InputMail from '@/components/dsfr/InputMail.vue';
   import InputText from '@/components/dsfr/InputText.vue';
   import { onboardingStore } from '@/store/onboarding';
+  import Alert from '@/components/custom/Alert.vue';
 
   type UserInput = Omit<CompteUtlisateurViewModel, 'id' | 'codePostal' | 'revenuFiscal'>;
   let compteUtilisateurInput = ref<UserInput>({
@@ -94,6 +98,7 @@
       margin-top: 6.25rem;
     }
   }
+
   .separateur {
     position: relative;
     text-align: center;

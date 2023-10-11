@@ -37,7 +37,7 @@
     { id: 'moto', label: '🛵 Scooter ou moto' },
     { id: 'pied', label: '🚶🏻 Marche à pied' },
     { id: 'velo', label: '🚴 Vélo' },
-    { id: 'transport', label: '🚃 Métro, train, bus' },
+    { id: 'commun', label: '🚃 Métro, train, bus' },
   ];
 
   const emit = defineEmits(['submitEtape']);
