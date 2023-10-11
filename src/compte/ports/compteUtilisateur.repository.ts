@@ -13,6 +13,7 @@ export interface CompteUtilisateurACreer {
   nom: string;
   email: string;
   prenom: string;
+  motDePasse: string;
   onboarding: OnboardingState;
 }
 export interface CompteUtilisateurRepository {

@@ -17,11 +17,12 @@ export class CreerCompteUtilisateurUsecase {
     this._sessionRepository = sessionRepository;
   }
 
-  async execute(compteUtlisateurACreerViewModel: UserInput, onboarding: OnboardingState): Promise<void> {
+  async execute(compteUtilisateurACreerInput: UserInput, onboarding: OnboardingState): Promise<void> {
     const utilisateurCree = await this._compteUtilisateuRepository.creerCompteUtilisateur({
-      nom: compteUtlisateurACreerViewModel.nom,
-      email: compteUtlisateurACreerViewModel.mail,
-      prenom: compteUtlisateurACreerViewModel.prenom,
+      nom: compteUtilisateurACreerInput.nom,
+      email: compteUtilisateurACreerInput.mail,
+      prenom: compteUtilisateurACreerInput.prenom,
+      motDePasse: compteUtilisateurACreerInput.motDePasse,
       onboarding: onboarding,
     });
 

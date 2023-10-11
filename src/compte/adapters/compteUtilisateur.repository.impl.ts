@@ -8,7 +8,7 @@ import { Response } from 'redaxios';
 
 interface CompteUtilisateurApiModel {
   id: string;
-  name: string;
+  nom: string;
   email?: string;
   code_postal?: string;
   prenom: string;
@@ -19,7 +19,7 @@ export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurReposit
     const axiosInstance = AxiosFactory.getAxios();
     const response: Response<CompteUtilisateurApiModel> = await axiosInstance.get(`/utilisateurs/${idUtilisateur}`);
     return {
-      nom: response.data.name,
+      nom: response.data.nom,
       id: idUtilisateur,
       mail: response.data.email || '',
       codePostal: response.data.code_postal || '',
@@ -44,10 +44,11 @@ export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurReposit
       nom: compteUtilisateurACreer.nom,
       prenom: compteUtilisateurACreer.prenom,
       email: compteUtilisateurACreer.email,
+      mot_de_passe: compteUtilisateurACreer.motDePasse,
       onboardingData: compteUtilisateurACreer.onboarding,
     });
     return {
-      nom: response.data.name,
+      nom: response.data.nom,
       id: response.data.id,
       mail: response.data.email || '',
       codePostal: response.data.code_postal || '',
