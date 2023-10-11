@@ -16,10 +16,7 @@
         </div>
       </fieldset>
     </form>
-    <div role="alert" v-show="success" class="fr-alert background--white fr-alert--success fr-col-12 fr-mt-2w">
-      <h3 class="fr-alert__title">Succès</h3>
-      <p>Compte correctement mis à jour.</p>
-    </div>
+    <Alert :show="success" type="success" titre="Succès" message="Compte correctement mis à jour." />
   </div>
 </template>
 
@@ -32,6 +29,7 @@
   import InputText from '@/components/dsfr/InputText.vue';
   import InputMail from '@/components/dsfr/InputMail.vue';
   import InputCodePostal from '@/components/dsfr/InputCodePostal.vue';
+  import Alert from '@/components/custom/Alert.vue';
 
   const props = defineProps<{
     compteUtlisateurViewModel: CompteUtlisateurViewModel;
