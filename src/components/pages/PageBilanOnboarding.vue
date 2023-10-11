@@ -60,6 +60,15 @@
       </div>
     </div>
   </section>
+  <section class="fr-grid fr-grid-row fr-grid-row--middle flex-column fr-pt-16w fr-pb-8w">
+    <img alt="" src="/logo_agir.png" class="fr-mb-3w" />
+    <h2 class="fr-h1 text--center fr-col-lg-9">
+      Réduisez votre empreinte écologique selon vos moyens, vos lieux de vie et vos envies
+    </h2>
+    <router-link class="fr-btn fr-btn--icon-left fr-icon-arrow-right-line" :to="{ name: 'creation-compte' }">
+      S'inscrire
+    </router-link>
+  </section>
 </template>
 
 <script setup lang="ts">
