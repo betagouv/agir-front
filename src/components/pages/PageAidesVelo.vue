@@ -1,6 +1,6 @@
 <template>
   <FilDAriane :page-courante="titrePage" :page-hierarchie="[{ label: 'Aides fincancières', url: 'mes-aides' }]" />
-  <AidesResultat :simulation-aides-view-model="simulationAidesVeloViewModel" :titre="titrePage">
+  <AidesResultat :simulation-aides-view-model="simulationAidesVeloViewModel" :titre="titrePage" :sous-titre="sousTitre">
     <template v-slot:formulaire>
       <FormulaireAideVelo @submit-simulation="submitSimulation" />
     </template>
@@ -19,6 +19,7 @@
   import { SimulationAideResultatViewModel } from '@/aides/ports/simulationAideResultat';
 
   const titrePage = 'Acheter un vélo';
+  const sousTitre = 'Vous pouvez bénéficier des aides vélo suivantes :';
   const simulationAidesVeloViewModel = ref<SimulationAideResultatViewModel | null>(null);
   const codePostal = ref<string>('');
   const revenuFiscal = ref<string>('');
