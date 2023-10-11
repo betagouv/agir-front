@@ -47,6 +47,10 @@ h3 {
   margin-right: 10px;
 }
 
+.flex-column {
+  flex-direction: column;
+}
+
 .display-block {
   display: block;
 }
@@ -81,6 +85,10 @@ h3 {
 
 .text--right {
   text-align: right;
+}
+
+.text--left {
+  text-align: left;
 }
 
 .text--3xl {
