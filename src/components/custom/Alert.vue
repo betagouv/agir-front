@@ -1,5 +1,5 @@
 <template>
-  <div role="alert" v-show="show" :class="`fr-alert--${type}`" class="fr-alert background--white fr-col-12 fr-mt-2w">
+  <div role="alert" :class="`fr-alert--${type}`" class="fr-alert background--white">
     <h3 class="fr-alert__title">{{ titre }}</h3>
     <p>{{ message }}</p>
   </div>
@@ -9,6 +9,5 @@
     titre: string;
     message: string;
     type: 'success' | 'error';
-    show: boolean;
   }>();
 </script>

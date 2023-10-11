@@ -39,7 +39,8 @@
         </div>
         <button class="fr-btn display-block fr-col-12 fr-mt-2w" type="submit">Créer mon compte</button>
         <Alert
-          :show="creationDeCompteEnErreur"
+          v-if="creationDeCompteEnErreur"
+          class="fr-col-12 fr-mt-2w"
           type="error"
           titre="Erreur lors de la création du compte"
           :message="creationDeCompteMessageErreur"
@@ -97,6 +98,7 @@
       margin-top: 6.25rem;
     }
   }
+
   .separateur {
     position: relative;
     text-align: center;

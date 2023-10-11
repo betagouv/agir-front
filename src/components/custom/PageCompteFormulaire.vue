@@ -16,7 +16,13 @@
         </div>
       </fieldset>
     </form>
-    <Alert :show="success" type="success" titre="Succès" message="Compte correctement mis à jour." />
+    <Alert
+      v-if="success"
+      class="fr-col-12 fr-mt-2w"
+      type="success"
+      titre="Succès"
+      message="Compte correctement mis à jour."
+    />
   </div>
 </template>
 
