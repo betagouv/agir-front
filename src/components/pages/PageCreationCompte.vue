@@ -25,8 +25,7 @@
           <BoutonFranceConnect />
         </div>
         <div class="separateur fr-mb-2v">ou</div>
-        <h3>Créer un compte en choisissant un identifiant</h3>
-        <div class="fr-grid-row fr-grid-row--gutters">
+        <div class="fr-grid-row fr-mt-1w fr-grid-row--gutters">
           <div class="fr-col-12 fr-py-0">
             <InputMail label="Adresse électronique" name="utilisateur-mail" v-model="compteUtilisateurInput.mail" />
           </div>
@@ -36,8 +35,16 @@
           <div class="fr-col-12 fr-col-lg-6">
             <InputText label="Prénom" name="utilisateur-prenom" v-model="compteUtilisateurInput.prenom" />
           </div>
+          <div class="fr-col-12 fr-py-0 fr-mb-4w">
+            <InputPassword
+              v-model="compteUtilisateurInput.motDePasse"
+              @update:mot-de-passe-valide="onMotDePasseValideChanged"
+            />
+          </div>
         </div>
-        <button class="fr-btn display-block fr-col-12 fr-mt-2w" type="submit">Créer mon compte</button>
+        <button class="fr-btn fr-grid-row--center fr-col-12 fr-mt-2w" :disabled="!formulaireValide" type="submit">
+          Créer votre compte
+        </button>
         <Alert
           v-if="creationDeCompteEnErreur"
           class="fr-col-12 fr-mt-2w"
@@ -51,9 +58,8 @@
 </template>
 
 <script setup lang="ts">
-  import { CreerCompteUtilisateurUsecase } from '@/compte/creerCompteUtilisateur.usecase';
+  import { CreerCompteUtilisateurUsecase, UserInput } from '@/compte/creerCompteUtilisateur.usecase';
   import { ref } from 'vue';
-  import { CompteUtlisateurViewModel } from '@/compte/adapters/compteUtilisateur.presenter.impl';
   import { SessionRepositoryStore } from '@/authentification/adapters/session.repository.store';
   import { CompteUtilisateurRepositoryImpl } from '@/compte/adapters/compteUtilisateur.repository.impl';
   import router from '@/router';
@@ -62,17 +68,23 @@
   import InputMail from '@/components/dsfr/InputMail.vue';
   import InputText from '@/components/dsfr/InputText.vue';
   import { onboardingStore } from '@/store/onboarding';
+  import InputPassword from '@/components/pages/InputPassword.vue';
   import Alert from '@/components/custom/Alert.vue';
 
-  type UserInput = Omit<CompteUtlisateurViewModel, 'id' | 'codePostal' | 'revenuFiscal'>;
   let compteUtilisateurInput = ref<UserInput>({
     nom: '',
     mail: '',
     prenom: '',
+    motDePasse: '',
   });
   let creationDeCompteEnErreur = ref<boolean>(false);
   let creationDeCompteMessageErreur = ref<string>('');
+  let formulaireValide = ref<boolean>(false);
   utilisateurStore().reset();
+
+  function onMotDePasseValideChanged(isMotDePasseValide: boolean) {
+    formulaireValide.value = isMotDePasseValide;
+  }
 
   const performCreerCompteUtilisateur = () => {
     const creeCompteUseCase = new CreerCompteUtilisateurUsecase(
