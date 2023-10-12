@@ -1,7 +1,9 @@
 <template>
-  <div v-if="isLoading">Chargement ...</div>
-  <div v-else-if="!aides">Une erreur est survenue</div>
-  <MesAides v-else :aidesGroupesParCategorie="aides" />
+  <div class="fr-container">
+    <div v-if="isLoading">Chargement ...</div>
+    <div v-else-if="!aides">Une erreur est survenue</div>
+    <MesAides v-else :aidesGroupesParCategorie="aides" />
+  </div>
 </template>
 
 <script setup lang="ts">
