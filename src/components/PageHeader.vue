@@ -85,6 +85,7 @@
   import { defineComponent, onMounted, ref } from 'vue';
   import { RouteLocation } from 'vue-router';
   import { utilisateurStore } from '@/store/utilisateur';
+  import { AxiosFactory } from '@/axios.factory';
 
   export default defineComponent({
     name: 'PageHeader',
@@ -115,6 +116,7 @@
 
       function logout() {
         utilisateurStore().reset();
+        AxiosFactory.setBearer('');
         router.replace('/');
       }
 

@@ -9,7 +9,7 @@ class UtilisateurRepositoryForTest implements UtilisateurRepository {
 
   private _idUtilisateur: string = '';
 
-  getUtilisateurAvecLeNom(nomUtilisateur: string): Promise<Utilisateur> {
+  authentifierUtilisateur(nomUtilisateur: string): Promise<Utilisateur> {
     throw Error;
   }
 
