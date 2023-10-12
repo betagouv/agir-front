@@ -1,10 +1,6 @@
-import { beforeEach } from 'vitest';
 import { render } from '@testing-library/vue';
-import InputPassword from '../../src/components/pages/InputPassword.vue';
+import InputPassword from '../../src/components/custom/InputPassword.vue';
 
-beforeEach(() => {
-  // GIVEN
-});
 describe('InputPassword', () => {
   describe('au moins 1 chiffre', () => {
     it('Si le mot de passe ne contient pas de chiffre doit avoir la classe fr-message--error', () => {

@@ -68,7 +68,7 @@
   import InputMail from '@/components/dsfr/InputMail.vue';
   import InputText from '@/components/dsfr/InputText.vue';
   import { onboardingStore } from '@/store/onboarding';
-  import InputPassword from '@/components/pages/InputPassword.vue';
+  import InputPassword from '@/components/custom/InputPassword.vue';
   import Alert from '@/components/custom/Alert.vue';
 
   let compteUtilisateurInput = ref<UserInput>({
