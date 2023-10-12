@@ -53,6 +53,7 @@ describe('Fichier de tests concernant la creation du compte utilisateur', () => 
       codePostal: '',
       prenom: 'Doe',
       revenuFiscal: '',
+      motDePasse: 'motDePasse',
     };
 
     const onboardingState: OnboardingState = {

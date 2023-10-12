@@ -1,8 +1,13 @@
 import { CompteUtilisateurRepository } from '@/compte/ports/compteUtilisateur.repository';
-import { CompteUtlisateurViewModel } from '@/compte/adapters/compteUtilisateur.presenter.impl';
 import { SessionRepository } from '@/authentification/authentifierUtilisateur.usecase';
 import { OnboardingState } from '@/onboarding/evaluerOnboarding.usecase';
 
+export interface UserInput {
+  nom: string;
+  mail: string;
+  prenom: string;
+  motDePasse: string;
+}
 export class CreerCompteUtilisateurUsecase {
   private _compteUtilisateuRepository: CompteUtilisateurRepository;
   private _sessionRepository: SessionRepository;
@@ -12,14 +17,12 @@ export class CreerCompteUtilisateurUsecase {
     this._sessionRepository = sessionRepository;
   }
 
-  async execute(
-    compteUtlisateurACreerViewModel: Omit<CompteUtlisateurViewModel, 'id' | 'codePostal' | 'revenuFiscal'>,
-    onboarding: OnboardingState
-  ): Promise<void> {
+  async execute(compteUtilisateurACreerInput: UserInput, onboarding: OnboardingState): Promise<void> {
     const utilisateurCree = await this._compteUtilisateuRepository.creerCompteUtilisateur({
-      nom: compteUtlisateurACreerViewModel.nom,
-      email: compteUtlisateurACreerViewModel.mail,
-      prenom: compteUtlisateurACreerViewModel.prenom,
+      nom: compteUtilisateurACreerInput.nom,
+      email: compteUtilisateurACreerInput.mail,
+      prenom: compteUtilisateurACreerInput.prenom,
+      motDePasse: compteUtilisateurACreerInput.motDePasse,
       onboarding: onboarding,
     });
 
