@@ -1,23 +1,36 @@
 <template>
-  <h1>Votre 1er bilan</h1>
-  <h2>Quels sont les impacts de vos usages ?</h2>
+  <h1>Premiers résultats</h1>
   <section class="fr-grid-row fr-grid-row--gutters fr-pb-6w">
     <div class="fr-col-lg-6 fr-col-12">
-      <CarteVierge>
-        <div class="legende fr-text--sm fr-text--bold">
-          <span class="fr-pl-2w">Impact faible</span>
-          <span class="fr-pr-2w">Impact fort</span>
+      <div class="background--white border border-radius--lg fr-p-4w shadow">
+        <h2 class="fr-h2">Nos usages ont de l’effet sur l’environnement</h2>
+        <p class="fr-text--lg">
+          Voici une <strong>1ère estimation de vos impacts.</strong><br />
+          Nous aurons l’occasion de l’affiner ensemble par la suite !
+        </p>
+        <div class="legende fr-text--sm fr-text--bold fr-mb-1v">
+          <span class="fr-pl-2w">Impact très faible</span>
+          <span class="fr-pr-2w">Impact très fort</span>
+        </div>
+        <div class="legende--jauge fr-grid-row fr-text--sm fr-mb-1w">
+          <span>1</span>
+          <span>2</span>
+          <span>3</span>
+          <span>4</span>
         </div>
         <div v-for="item in onboardingResultatViewModel" :key="item.libelle">
           <OnboardingJauge class="fr-mb-5v" :libelle="item.libelle" :valeur="item.valeur" />
         </div>
-      </CarteVierge>
+      </div>
     </div>
     <div class="fr-col-lg-6 fr-col-12 text--center">
       <img alt="Plateforme Agir :" src="/logo_agir.png" class="fr-mb-3w" />
-      <h2>Devenez acteur de votre transition écologique !</h2>
+      <h2 class="fr-px-4w">Nous avons tous les moyens d’agir à notre échelle !</h2>
+      <span class="badge--bleu display-block fr-h4 fr-mx-auto background-bleu-light fr-p-2w"
+        >Déjà + de XXX inscrits</span
+      >
       <router-link class="fr-btn fr-btn--icon-left fr-icon-arrow-right-line" :to="{ name: 'creation-compte' }">
-        S'inscrire
+        Rejoindre Agir
       </router-link>
     </div>
   </section>
@@ -81,7 +94,6 @@
   } from '@/onboarding/adapters/onboarding.presenter.impl';
   import OnboardingJauge from '@/components/custom/OnboardingJauge.vue';
   import { ref } from 'vue';
-  import CarteVierge from '@/components/CarteVierge.vue';
 
   const onBoardingStore = onboardingStore();
   let onboardingResultatViewModel = ref<OnboardingResultatViewModel[]>();
@@ -103,6 +115,12 @@
     max-width: var(--widthJaugeOnboarding);
   }
 
+  .legende--jauge {
+    justify-content: space-between;
+    margin-left: auto;
+    max-width: var(--widthJaugeOnboarding);
+  }
+
   .legende span::before {
     content: '';
     position: absolute;
@@ -115,12 +133,18 @@
 
   .legende span:first-child::before {
     left: 0;
-    background: var(--blue-france-sun-113-625);
+    background: #a3a3cd;
   }
 
   .legende span:nth-child(2)::before {
     right: 0;
-    background-color: #e32416;
+    background-color: var(--blue-france-sun-113-625);
+  }
+
+  .badge--bleu {
+    width: fit-content;
+    border-radius: 3rem;
+    color: var(--blue-france-sun-113-625);
   }
 
   .graph-legend span::before {

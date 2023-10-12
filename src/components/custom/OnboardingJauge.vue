@@ -1,7 +1,7 @@
 <template>
   <div class="jauge-container" :aria-label="`Jauge de ${libelle} - ${valeurToWidth(valeur)} rempli`">
-    <div class="fr-text--sm fr-mb-0 fr-text--bold">{{ libelle }}</div>
-    <div class="jauge-background fr-ml-5v">
+    <div class="fr-text--sm fr-mb-0 fr-text--bold fr-mr-5v">{{ libelle }}</div>
+    <div class="jauge-background">
       <div
         class="jauge-remplissage"
         aria-hidden="true"
@@ -43,28 +43,34 @@
   function valeurToColor(valeur) {
     switch (valeur) {
       case 1:
-        return '#2B126C';
+        return '#A3A3CD';
       case 2:
-        return '#6C1E4E';
+        return '#8080BC';
       case 3:
-        return '#962B44';
+        return '#5C5CAB';
       case 4:
-        return '#E32416';
+        return '#000091';
     }
   }
 </script>
 
 <style scoped>
-  :root {
-  }
   .jauge-container {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: left;
     justify-content: space-between;
   }
 
+  @media (min-width: 768px) {
+    .jauge-container {
+      flex-direction: row;
+      align-items: center;
+    }
+  }
+
   .jauge-background {
-    background: linear-gradient(0deg, #dddddd, #dddddd), linear-gradient(0deg, #d9d9d9, #d9d9d9);
+    background-color: #dddddd;
     width: 100%;
     height: 20px;
     border-radius: 10px;
@@ -73,9 +79,9 @@
 
   .jauge-remplissage {
     --jauge-color: v-bind(valeurToColor(props.valeur));
-    background: linear-gradient(270deg, var(--jauge-color) 0%, #000091 100%), linear-gradient(0deg, #ffffff, #ffffff);
+    background-color: var(--jauge-color);
     height: 100%;
     border-radius: 10px;
-    border: 2px solid rgba(255, 255, 255, 1);
+    border: 2px solid #fff;
   }
 </style>
