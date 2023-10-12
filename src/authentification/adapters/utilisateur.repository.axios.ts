@@ -12,7 +12,7 @@ interface UtilisateurApiModel {
 export class UtilisateurRepositoryAxios implements UtilisateurRepository {
   async getUtilisateurAvecLeNom(nomUtilisateur: string): Promise<Utilisateur> {
     const axiosInstance = AxiosFactory.getAxios();
-    const response = await axiosInstance.get<UtilisateurApiModel[]>(`/utilisateurs?name=${nomUtilisateur}`);
+    const response = await axiosInstance.get<UtilisateurApiModel[]>(`/utilisateurs?nom=${nomUtilisateur}`);
     return {
       nom: response.data[0].nom,
       id: response.data[0].id,
