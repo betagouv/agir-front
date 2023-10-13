@@ -7,6 +7,7 @@ interface OnboardingResultatApiModel {
   consommation: number;
   logement: number;
   alimentation: number;
+  phrase: string;
 }
 export class OnboardingRepositoryAxios implements OnboardingRepository {
   async envoyer(onboarding: OnboardingState): Promise<OnboardingResultat> {
@@ -30,6 +31,7 @@ export class OnboardingRepositoryAxios implements OnboardingRepository {
       consommation: response.data.consommation,
       logement: response.data.logement,
       alimentation: response.data.alimentation,
+      phrase: response.data.phrase,
     };
   }
 }

@@ -1,7 +1,7 @@
 <template>
   <div class="fr-container">
     <h1>Premiers résultats</h1>
-    <section class="fr-grid-row fr-grid-row--gutters fr-pb-6w">
+    <section class="fr-grid-row fr-grid-row--gutters fr-grid-row--middle fr-pb-6w">
       <div class="fr-col-lg-6 fr-col-12">
         <div class="background--white border border-radius--lg fr-p-4w shadow">
           <h2 class="fr-h2">Nos usages ont de l’effet sur l’environnement</h2>
@@ -19,9 +19,10 @@
             <span>3</span>
             <span>4</span>
           </div>
-          <div v-for="item in onboardingResultatViewModel" :key="item.libelle">
+          <div v-for="item in onboardingResultatViewModel?.resultat" :key="item.libelle">
             <OnboardingJauge class="fr-mb-5v" :libelle="item.libelle" :valeur="item.valeur" />
           </div>
+          <p v-html="onboardingResultatViewModel?.phrase" class="fr-mb-0 fr-text--sm" />
         </div>
       </div>
       <div class="fr-col-lg-6 fr-col-12 text--center">
@@ -103,11 +104,11 @@
   import { ref } from 'vue';
 
   const onBoardingStore = onboardingStore();
-  let onboardingResultatViewModel = ref<OnboardingResultatViewModel[]>();
+  let onboardingResultatViewModel = ref<OnboardingResultatViewModel>();
   const evaluerOnboarding = new EvaluerOnboardingUsecase(new OnboardingRepositoryAxios());
   evaluerOnboarding.execute(
     onBoardingStore.$state,
-    new OnboardingResultatPresenterImpl((resultat: OnboardingResultatViewModel[]) => {
+    new OnboardingResultatPresenterImpl((resultat: OnboardingResultatViewModel) => {
       onboardingResultatViewModel.value = resultat;
     })
   );
