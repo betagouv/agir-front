@@ -11,8 +11,8 @@ export class AuthentifierUtilisateurUsecase {
     this._sessionRepository = sessionRepository;
   }
 
-  async execute(nomUtilisateur: string): Promise<void> {
-    const utilisateur = await this._utilisateurRepository.getUtilisateurAvecLeNom(nomUtilisateur);
+  async execute(email: string, password: string): Promise<void> {
+    const utilisateur = await this._utilisateurRepository.authentifierUtilisateur(email, password);
     this._sessionRepository.sauvegarderUtilisateur(utilisateur);
   }
 }

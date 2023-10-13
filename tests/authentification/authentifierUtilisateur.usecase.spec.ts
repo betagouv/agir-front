@@ -5,7 +5,7 @@ import {
 import { Utilisateur, UtilisateurRepository } from '../../src/authentification/ports/utilisateur.repository';
 
 class UtilisateurRepositoryForTest implements UtilisateurRepository {
-  getUtilisateurAvecLeNom(nomUtilisateur: string): Promise<Utilisateur> {
+  authentifierUtilisateur(nomUtilisateur: string): Promise<Utilisateur> {
     return Promise.resolve<Utilisateur>({
       id: '1',
       nom: 'Doe',
@@ -34,12 +34,12 @@ class SpySessionRepository implements SessionRepository {
 }
 
 describe("Fichier de tests concernant l'authentification ", () => {
-  it("Lorsque je passe un nom d'utilisateur doit sauvegarder le nom et l'id", async () => {
+  it("Lorsque je passe un email et un mot de passe doit authentifer et sauvegarder l'utilisateur en session", async () => {
     // GIVEN
     const spySessionRepository = new SpySessionRepository();
     const usecase = new AuthentifierUtilisateurUsecase(new UtilisateurRepositoryForTest(), spySessionRepository);
     // WHEN
-    await usecase.execute('Dorian');
+    await usecase.execute('Dorian', '123');
     // THEN
     expect(spySessionRepository.utilisateur).toStrictEqual({
       id: '1',

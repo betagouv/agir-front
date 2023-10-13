@@ -9,17 +9,27 @@ interface UtilisateurApiModel {
   email: string;
   revenu_fiscal: string;
 }
+
+interface LoginApiModel {
+  utilisateur: UtilisateurApiModel;
+  token: string;
+}
 export class UtilisateurRepositoryAxios implements UtilisateurRepository {
-  async getUtilisateurAvecLeNom(nomUtilisateur: string): Promise<Utilisateur> {
+  async authentifierUtilisateur(mail: string, password: string): Promise<Utilisateur> {
     const axiosInstance = AxiosFactory.getAxios();
-    const response = await axiosInstance.get<UtilisateurApiModel[]>(`/utilisateurs?nom=${nomUtilisateur}`);
+    const response = await axiosInstance.post<LoginApiModel>(`/utilisateurs/login`, {
+      email: mail,
+      mot_de_passe: password,
+    });
+    AxiosFactory.setBearer(response.data.token);
+
     return {
-      nom: response.data[0].nom,
-      id: response.data[0].id,
-      codePostal: response.data[0].code_postal || '',
-      prenom: response.data[0].prenom || '',
-      mail: response.data[0].email,
-      revenuFiscal: response.data[0].revenu_fiscal || '',
+      nom: response.data.utilisateur.nom,
+      id: response.data.utilisateur.id,
+      codePostal: response.data.utilisateur.code_postal || '',
+      prenom: response.data.utilisateur.prenom || '',
+      mail: response.data.utilisateur.email,
+      revenuFiscal: response.data.utilisateur.revenu_fiscal || '',
     };
   }
 

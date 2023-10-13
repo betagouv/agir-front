@@ -8,6 +8,6 @@ export interface Utilisateur {
 }
 
 export interface UtilisateurRepository {
-  getUtilisateurAvecLeNom(nomUtilisateur: string): Promise<Utilisateur>;
+  authentifierUtilisateur(email: string, motDePasse: string): Promise<Utilisateur>;
   getUtilisateurAvecId(idUtilisateur: string): Promise<Utilisateur>;
 }

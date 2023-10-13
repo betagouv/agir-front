@@ -17,24 +17,17 @@
       <div class="separateur fr-mb-2v">ou</div>
       <div class="fr-col-12">
         <h2 class="text--center">Vous avez déjà un compte</h2>
-        <fieldset class="fr-fieldset">
-          <div class="fr-fieldset__element">
-            <div class="fr-input-group">
-              <label class="fr-label" for="user-name-1829"> Nom d'utilisateur </label>
-              <input
-                class="fr-input"
-                spellcheck="false"
-                autocomplete="user-name"
-                name="user-name"
-                id="user-name-1829"
-                type="text"
-                v-model="username"
-              />
-            </div>
-          </div>
-        </fieldset>
+        <InputMail label="Adresse électronique" v-model="email" name="email" />
+        <InputPasswordLogin v-model="password" />
         <button class="fr-btn display-block text--center full-width" type="submit">Se connecter</button>
       </div>
+      <Alert
+        v-if="loginEnErreur"
+        class="fr-col-12 fr-mt-2w"
+        type="error"
+        titre="Erreur lors de l'authentification"
+        :message="loginMessageErreur"
+      />
       <div class="fr-col-12">
         <div class="separateur--full fr-mt-4w"></div>
         <h2 class="text--center fr-mt-6w">Première visite ?</h2>
@@ -48,45 +41,42 @@
   </form>
 </template>
 
-<script lang="ts">
-  import { defineComponent, ref } from 'vue';
+<script setup lang="ts">
+  import { ref } from 'vue';
   import router from '@/router';
   import { AuthentifierUtilisateurUsecase } from '@/authentification/authentifierUtilisateur.usecase';
   import { UtilisateurRepositoryAxios } from '@/authentification/adapters/utilisateur.repository.axios';
   import { SessionRepositoryStore } from '@/authentification/adapters/session.repository.store';
   import { sendIdNGC } from '@/bilan/middleware/pendingSimulation';
   import BoutonFranceConnect from '@/components/BoutonFranceConnect.vue';
+  import InputMail from '@/components/dsfr/InputMail.vue';
+  import InputPasswordLogin from '@/components/custom/InputPasswordLogin.vue';
+  import Alert from '@/components/custom/Alert.vue';
 
-  export default defineComponent({
-    components: { BoutonFranceConnect },
-    setup() {
-      const username = ref('');
-      const error = ref('');
-      const login = async () => {
-        const usecase = new AuthentifierUtilisateurUsecase(
-          new UtilisateurRepositoryAxios(),
-          new SessionRepositoryStore()
-        );
-        usecase.execute(username.value).then(() => {
-          const requestedRoute = sessionStorage.getItem('requestedRoute');
-          sessionStorage.removeItem('requestedRoute');
-          router.push(requestedRoute || { name: 'coach', state: { utilisateur: username.value } });
-          sendIdNGC();
-        });
-      };
+  const email = ref<string>('');
+  const password = ref<string>('');
+  const loginEnErreur = ref<boolean>(false);
+  const loginMessageErreur = ref<string>('');
+  const login = async () => {
+    const usecase = new AuthentifierUtilisateurUsecase(new UtilisateurRepositoryAxios(), new SessionRepositoryStore());
+    usecase
+      .execute(email.value, password.value)
+      .then(() => {
+        loginEnErreur.value = false;
+        const requestedRoute = sessionStorage.getItem('requestedRoute');
+        sessionStorage.removeItem('requestedRoute');
+        router.push(requestedRoute || { name: 'coach' });
+        sendIdNGC();
+      })
+      .catch(reason => {
+        loginMessageErreur.value = reason.data.message;
+        loginEnErreur.value = true;
+      });
+  };
 
-      const goToCreerUnCompte = async () => {
-        await router.push({ name: 'creation-compte' });
-      };
-
-      return {
-        username,
-        error,
-        login,
-        goToCreerUnCompte,
-      };
-    },
-  });
+  const goToCreerUnCompte = async () => {
+    await router.push({ name: 'creation-compte' });
+  };
 </script>
 
 <style scoped>
