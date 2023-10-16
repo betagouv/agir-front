@@ -3,7 +3,7 @@ import {
   CompteUtilisateurACreer,
   CompteUtilisateurRepository,
 } from '@/compte/ports/compteUtilisateur.repository';
-import { AxiosFactory } from '@/axios.factory';
+import { AxiosFactory, intercept401 } from '@/axios.factory';
 import { Response } from 'redaxios';
 
 interface CompteUtilisateurApiModel {
@@ -15,6 +15,7 @@ interface CompteUtilisateurApiModel {
   revenu_fiscal: string;
 }
 export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurRepository {
+  @intercept401()
   async getCompteUtilisateur(idUtilisateur: string): Promise<CompteUtilisateur> {
     const axiosInstance = AxiosFactory.getAxios();
     const response: Response<CompteUtilisateurApiModel> = await axiosInstance.get(`/utilisateurs/${idUtilisateur}`);
@@ -28,6 +29,7 @@ export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurReposit
     };
   }
 
+  @intercept401()
   async mettreAjour(compteUtilisateur: CompteUtilisateur) {
     const axiosInstance = AxiosFactory.getAxios();
     await axiosInstance.patch(`/utilisateurs/${compteUtilisateur.id}/profile`, {
@@ -39,6 +41,7 @@ export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurReposit
     });
   }
 
+  @intercept401()
   async creerCompteUtilisateur(compteUtilisateurACreer: CompteUtilisateurACreer): Promise<CompteUtilisateur> {
     const axiosInstance = AxiosFactory.getAxios();
     const response: Response<CompteUtilisateurApiModel> = await axiosInstance.post(`/utilisateurs/`, {

@@ -1,6 +1,6 @@
 import { InteractionsRepository } from '@/interactions/ports/interactionsRepository';
 import { Interaction, InteractionType } from '@/interactions/chargerInteractions.usecase';
-import { AxiosFactory } from '@/axios.factory';
+import { AxiosFactory, intercept401 } from '@/axios.factory';
 
 export interface InteractionApiModel {
   id: string;
@@ -21,6 +21,7 @@ export interface InteractionApiModel {
 }
 
 export class InteractionsRepositoryAxios implements InteractionsRepository {
+  @intercept401()
   async chargerInteractions(idUtilisateur: string): Promise<Interaction[]> {
     const axiosInstance = AxiosFactory.getAxios();
     const response = await axiosInstance.get<InteractionApiModel[]>(`/utilisateurs/${idUtilisateur}/interactions`);
@@ -44,6 +45,8 @@ export class InteractionsRepositoryAxios implements InteractionsRepository {
       return interaction;
     });
   }
+
+  @intercept401()
   async interactionAEteCliquee(interactionId: string, utilisateurId: string): Promise<void> {
     const axiosInstance = AxiosFactory.getAxios();
     await axiosInstance.patch(`/utilisateurs/${utilisateurId}/interactions/${interactionId}`, {
@@ -51,6 +54,7 @@ export class InteractionsRepositoryAxios implements InteractionsRepository {
     });
   }
 
+  @intercept401()
   async interactionAEteTerminee(interactionId: string, utilisateurId: string): Promise<void> {
     const axiosInstance = AxiosFactory.getAxios();
     await axiosInstance.patch(`/utilisateurs/${utilisateurId}/interactions/${interactionId}`, {
@@ -58,6 +62,7 @@ export class InteractionsRepositoryAxios implements InteractionsRepository {
     });
   }
 
+  @intercept401()
   async interactionAvecDonneesAEteTerminee<T>(utilisateurId: string, interactionId: string, payload: T) {
     const axiosInstance = AxiosFactory.getAxios();
     const reponse = await axiosInstance.patch(`utilisateurs/${utilisateurId}/interactions/${interactionId}`, {

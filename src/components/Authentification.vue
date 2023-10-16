@@ -28,7 +28,7 @@
         titre="Erreur lors de l'authentification"
         :message="loginMessageErreur"
       />
-      <div class="fr-col-12">
+      <div class="fr-col-12" v-if="premiereConnexion">
         <div class="separateur--full fr-mt-4w"></div>
         <h2 class="text--center fr-mt-6w">Première visite ?</h2>
         <ul class="fr-btns-group">
@@ -53,10 +53,17 @@
   import InputPasswordLogin from '@/components/custom/InputPasswordLogin.vue';
   import Alert from '@/components/custom/Alert.vue';
 
+  defineProps({
+    premiereConnexion: {
+      type: Boolean,
+      default: true,
+    },
+  });
   const email = ref<string>('');
   const password = ref<string>('');
   const loginEnErreur = ref<boolean>(false);
   const loginMessageErreur = ref<string>('');
+
   const login = async () => {
     const usecase = new AuthentifierUtilisateurUsecase(new UtilisateurRepositoryAxios(), new SessionRepositoryStore());
     usecase
