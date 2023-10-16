@@ -31,7 +31,8 @@ export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurReposit
   async mettreAjour(compteUtilisateur: CompteUtilisateur) {
     const axiosInstance = AxiosFactory.getAxios();
     await axiosInstance.patch(`/utilisateurs/${compteUtilisateur.id}/profile`, {
-      name: compteUtilisateur.nom,
+      nom: compteUtilisateur.nom,
+      prenom: compteUtilisateur.prenom,
       email: compteUtilisateur.mail,
       code_postal: compteUtilisateur.codePostal,
       revenu_fiscal: compteUtilisateur.revenuFiscal,
