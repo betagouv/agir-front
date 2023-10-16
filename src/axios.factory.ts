@@ -1,5 +1,4 @@
 import axios from 'redaxios';
-import router from '@/router';
 
 export class AxiosFactory {
   private static bearer = '';
@@ -52,7 +51,7 @@ export function intercept401() {
           } catch (exception) {
             //Session Expired
             if ((exception as AxiosError).status === 401) {
-              await router.push({ name: 'session-expiree' });
+              window.location.href = '/session-expiree';
             }
           }
         }

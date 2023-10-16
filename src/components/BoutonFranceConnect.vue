@@ -1,6 +1,6 @@
 <template>
   <div class="fr-connect-group">
-    <button class="fr-connect" @click.prevent="loginFranceConnect">
+    <button class="fr-connect" type="button" @click.prevent="loginFranceConnect">
       <span class="fr-connect__login">S’identifier avec</span>
       <span class="fr-connect__brand">FranceConnect</span>
     </button>
