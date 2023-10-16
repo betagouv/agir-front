@@ -1,4 +1,5 @@
 import axios from 'redaxios';
+import router from '@/router';
 
 export class AxiosFactory {
   private static bearer = '';
@@ -31,6 +32,7 @@ export class AxiosFactory {
 interface AxiosError {
   status: number;
 }
+
 export function intercept401() {
   return (
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -41,7 +43,6 @@ export function intercept401() {
   ) => {
     if (descriptor) {
       const originalMethod = descriptor.value;
-
       descriptor.value = async function (...args: unknown[]) {
         const method = originalMethod.apply(this, args);
         if (method instanceof Promise) {
@@ -51,7 +52,7 @@ export function intercept401() {
           } catch (exception) {
             //Session Expired
             if ((exception as AxiosError).status === 401) {
-              window.location.href = '/session-expiree';
+              await router.push({ name: 'session-expiree' });
             }
           }
         }

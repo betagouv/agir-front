@@ -18,8 +18,7 @@ export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurReposit
   @intercept401()
   async getCompteUtilisateur(idUtilisateur: string): Promise<CompteUtilisateur> {
     const axiosInstance = AxiosFactory.getAxios();
-    //const response: Response<CompteUtilisateurApiModel> = await axiosInstance.get(`/utilisateurs/${idUtilisateur}`);
-    const response: Response<CompteUtilisateurApiModel> = await axiosInstance.get(`/error_401`);
+    const response: Response<CompteUtilisateurApiModel> = await axiosInstance.get(`/utilisateurs/${idUtilisateur}`);
     return {
       nom: response.data.nom,
       id: idUtilisateur,
