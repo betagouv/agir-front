@@ -119,6 +119,10 @@ h3 {
   background: var(--blue-france-925-125);
 }
 
+.background--bleu-dark {
+  background: var(--blue-france-sun-113-625);
+}
+
 .background--bleu-info {
   background-color: var(--info-950-100);
 }
