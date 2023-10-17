@@ -7,6 +7,7 @@
         </legend>
         <div class="fr-col-12">
           <InputText label="Nom" name="nom" v-model="compteUtlisateurViewModel.nom" />
+          <InputText label="Prénom" name="prenom" v-model="compteUtlisateurViewModel.prenom" />
           <InputMail label="Adresse électronique" v-model="compteUtlisateurViewModel.mail" name="mail" />
           <InputCodePostal
             v-model="compteUtlisateurViewModel.codePostal"
