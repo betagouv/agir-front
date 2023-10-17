@@ -61,6 +61,7 @@ export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurReposit
     };
   }
 
+  @intercept401()
   async supprimerCompteUtilisateur(idUtilisateur: string): Promise<void> {
     const axiosInstance = AxiosFactory.getAxios();
     await axiosInstance.delete(`/utilisateurs/${idUtilisateur}`);
