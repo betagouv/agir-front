@@ -66,4 +66,11 @@ export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurReposit
     const axiosInstance = AxiosFactory.getAxios();
     await axiosInstance.delete(`/utilisateurs/${idUtilisateur}`);
   }
+
+  async mettreAJourLeMotDePasse(idUtilisateur: string, nouveauMotDePasse: string): Promise<void> {
+    const axiosInstance = AxiosFactory.getAxios();
+    await axiosInstance.patch(`/utilisateurs/${idUtilisateur}/profile`, {
+      mot_de_passe: nouveauMotDePasse,
+    });
+  }
 }
