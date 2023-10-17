@@ -1,7 +1,7 @@
 <template>
   <form
     class="fr-col-12 fr-col-lg-5 fr-mx-auto fr-mb-0 background--white fr-p-4w border border-radius--md"
-    @submit.prevent="mettreAJourLeMotDePass"
+    @submit.prevent="mettreAJourLeMotDePasse"
   >
     <fieldset class="fr-mb-0 fr-fieldset">
       <legend class="fr-fieldset__legend fr-px-0 fr-mx-0" id="identity-fieldset-legend">
@@ -45,7 +45,7 @@
     formulaireValide.value = isMotDePasseValide;
   }
 
-  function mettreAJourLeMotDePass() {
+  function mettreAJourLeMotDePasse() {
     const utilisateurId: string = utilisateurStore().utilisateur.id;
     const usecase = new ChangerMotDePasseDepuisLeCompteUsecase(new CompteUtilisateurRepositoryImpl());
     usecase

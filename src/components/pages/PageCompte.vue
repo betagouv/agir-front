@@ -8,9 +8,9 @@
           :compte-utlisateur-view-model="compteUtlisateurViewModel"
         />
         <div class="fr-mt-2w">
-        <router-link :to="{ name: 'modifier-mot-de-passe' }">Modifier mon mot de passe</router-link>
-      </div>
-      <PageCompteSuppression class="fr-mt-4w" />
+          <router-link :to="{ name: 'modifier-mot-de-passe' }">Modifier mon mot de passe</router-link>
+        </div>
+        <PageCompteSuppression class="fr-mt-4w" />
       </div>
     </div>
   </div>
@@ -28,6 +28,7 @@
   import PageCompteSuppression from '@/components/pages/PageCompteSuppression.vue';
 
   const compteUtlisateurViewModel = ref<CompteUtlisateurViewModel | null>(null);
+
   function mapValueCompte(viewModel: CompteUtlisateurViewModel) {
     compteUtlisateurViewModel.value = viewModel;
   }

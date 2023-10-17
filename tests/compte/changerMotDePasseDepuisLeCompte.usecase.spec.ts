@@ -34,7 +34,7 @@ class CompteUtilisateurRepositoryForTest implements CompteUtilisateurRepository 
     return Promise.resolve(undefined);
   }
 }
-describe('Fichier de tests concernant le chargement du mot passe utilisateur', () => {
+describe('Fichier de tests concernant le changement du mot passe utilisateur', () => {
   it('Quand un utilisateur est connecté, il doit pouvoir changer son mot de passe', () => {
     // GIVEN
     // WHEN
