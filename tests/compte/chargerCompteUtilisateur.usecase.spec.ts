@@ -30,6 +30,10 @@ class ChargeCompteUtilisateurSansInfosOptionnellesRepository implements CompteUt
   supprimerCompteUtilisateur(idUtilisateur: string): Promise<void> {
     throw Error;
   }
+
+  mettreAJourLeMotDePasse(idUtilisateur: string, nouveauMotDePasse: string): Promise<void> {
+    return Promise.resolve(undefined);
+  }
 }
 
 class ChargeCompteUtilisateurAvecMailRepository implements CompteUtilisateurRepository {
@@ -52,6 +56,10 @@ class ChargeCompteUtilisateurAvecMailRepository implements CompteUtilisateurRepo
 
   supprimerCompteUtilisateur(idUtilisateur: string): Promise<void> {
     throw Error;
+  }
+
+  mettreAJourLeMotDePasse(idUtilisateur: string, nouveauMotDePasse: string): Promise<void> {
+    return Promise.resolve(undefined);
   }
 }
 describe('Fichier de tests concernant le chargement du compte utilisateur', () => {

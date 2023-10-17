@@ -22,6 +22,7 @@ import PageBilanOnboarding from '@/components/pages/PageBilanOnboarding.vue';
 import PageOnboarding from '@/components/pages/PageOnboarding.vue';
 import PagePreOnboarding from '@/components/pages/PagePreOnboarding.vue';
 import { onboardingStore } from '@/store/onboarding';
+import PageModificationMotDePasse from '@/components/pages/PageModificationMotDePasse.vue';
 import PageSessionExpiree from '@/components/pages/PageSessionExpiree.vue';
 
 const appName = 'Agir ! -';
@@ -150,6 +151,11 @@ const routes = [
     path: '/mon-compte',
     name: 'mon-compte',
     component: PageCompte,
+  },
+  {
+    path: '/mon-compte/changer-de-mot-de-passe',
+    name: 'modifier-mot-de-passe',
+    component: PageModificationMotDePasse,
   },
   {
     path: '/creation-compte',

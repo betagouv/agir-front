@@ -21,4 +21,5 @@ export interface CompteUtilisateurRepository {
   mettreAjour(compteUtilisateur: CompteUtilisateur);
   creerCompteUtilisateur(compteUtilisateurACreer: CompteUtilisateurACreer): Promise<CompteUtilisateur>;
   supprimerCompteUtilisateur(idUtilisateur: string): Promise<void>;
+  mettreAJourLeMotDePasse(idUtilisateur: string, nouveauMotDePasse: string): Promise<void>;
 }
