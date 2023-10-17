@@ -6,7 +6,7 @@ export enum EventBusEvents {
 
 export class NavigationBus {
   private static instance: NavigationBus | null = null;
-  private router: Router;
+  private router: Router | null = null;
   private constructor() {}
 
   static getInstance() {
@@ -21,7 +21,7 @@ export class NavigationBus {
   }
   on(eventName: EventBusEvents) {
     if (eventName === EventBusEvents.SESSION_EXPIREE) {
-      return this.router.push({ name: 'session-expiree' });
+      return this.router?.push({ name: 'session-expiree' });
     }
   }
 }
