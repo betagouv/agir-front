@@ -1,13 +1,19 @@
 <template>
-  <FilDAriane :page-courante="titrePage" :page-hierarchie="[{ label: 'Aides fincancières', url: 'mes-aides' }]" />
-  <AidesResultat :simulation-aides-view-model="simulationAidesVeloViewModel" :titre="titrePage" :sous-titre="sousTitre">
-    <template v-slot:formulaire>
-      <FormulaireAideVelo @submit-simulation="submitSimulation" />
-    </template>
-    <template v-slot:asideResultatAides>
-      <AsideAideVelo @reset-simulation="resetSimulation" :code-postal="codePostal" :revenu-fiscal="revenuFiscal" />
-    </template>
-  </AidesResultat>
+  <div class="fr-container">
+    <FilDAriane :page-courante="titrePage" :page-hierarchie="[{ label: 'Aides fincancières', url: 'mes-aides' }]" />
+    <AidesResultat
+      :simulation-aides-view-model="simulationAidesVeloViewModel"
+      :titre="titrePage"
+      :sous-titre="sousTitre"
+    >
+      <template v-slot:formulaire>
+        <FormulaireAideVelo @submit-simulation="submitSimulation" />
+      </template>
+      <template v-slot:asideResultatAides>
+        <AsideAideVelo @reset-simulation="resetSimulation" :code-postal="codePostal" :revenu-fiscal="revenuFiscal" />
+      </template>
+    </AidesResultat>
+  </div>
 </template>
 
 <script setup lang="ts">

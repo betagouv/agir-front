@@ -27,10 +27,10 @@
 </script>
 
 <template>
-  <div class="page-container background--gris">
+  <div class="page-container">
     <PageHeader v-if="afficherLeHeaderEtFooter" />
 
-    <main class="fr-container fr-px-1w fr-py-6w">
+    <main class="background--gris fr-py-6w">
       <router-view />
     </main>
 

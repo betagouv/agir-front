@@ -40,6 +40,7 @@ export interface OnboardingResultat {
   consommation: number;
   logement: number;
   alimentation: number;
+  phrase: string;
 }
 export class EvaluerOnboardingUsecase {
   constructor(private onboardinRepository: OnboardingRepository) {}

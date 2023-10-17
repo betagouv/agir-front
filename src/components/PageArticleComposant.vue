@@ -14,7 +14,7 @@
       <div class="fr-col-12 fr-col-md-8">
         <div class="article fr-p-6v background--white border-radius--md">
           <h2 class="fr-h3">{{ article.sousTitre }}</h2>
-          <div v-html="article.texte" />
+          <div class="article--content" v-html="article.texte" />
         </div>
       </div>
       <div class="fr-col-12 fr-col-md-4">
@@ -36,5 +36,9 @@
 <style>
   .article {
     border: 1px solid rgba(0, 0, 0, 0.19);
+  }
+
+  .article--content ul p {
+    margin-bottom: 0;
   }
 </style>

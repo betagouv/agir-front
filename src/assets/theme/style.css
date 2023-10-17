@@ -47,6 +47,10 @@ h3 {
   margin-right: 10px;
 }
 
+.flex-column {
+  flex-direction: column;
+}
+
 .display-block {
   display: block;
 }
@@ -81,6 +85,10 @@ h3 {
 
 .text--right {
   text-align: right;
+}
+
+.text--left {
+  text-align: left;
 }
 
 .text--3xl {
@@ -141,4 +149,16 @@ h3 {
 
 .border-radius--md {
   border-radius: 6px;
+}
+
+.border-radius--lg {
+  border-radius: 24px;
+}
+
+.img-object-fit-contain {
+  object-fit: contain;
+}
+
+.shadow {
+  box-shadow: 0 6px 18px 0 rgba(0, 0, 18, 0.16);
 }

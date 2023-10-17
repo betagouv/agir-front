@@ -1,5 +1,5 @@
 <template>
-  <div v-if="_impactDuJourViewModel">
+  <div v-if="_impactDuJourViewModel" class="fr-container">
     <SuiviDuJourResultats :voir-seulement-levolution="true" :suivi-du-jour-resultats="_impactDuJourViewModel" />
   </div>
 </template>

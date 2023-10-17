@@ -1,29 +1,53 @@
 <template>
-  <h1>Votre 1er bilan</h1>
-  <h2>Quels sont les impacts de vos usages ?</h2>
-  <div class="fr-grid-row fr-grid-row--gutters">
-    <div class="fr-col-lg-6 fr-col-12">
-      <CarteVierge>
-        <div class="legende fr-text--sm fr-text--bold">
-          <span class="fr-pl-2w">Impact faible</span>
-          <span class="fr-pr-2w">Impact fort</span>
-        </div>
-        <div v-for="item in onboardingResultatViewModel" :key="item.libelle">
-          <OnboardingJauge class="fr-mb-5v" :libelle="item.libelle" :valeur="item.valeur" />
-        </div>
-      </CarteVierge>
+  <div class="fr-container">
+    <h1>Premiers résultats</h1>
+    <section class="fr-grid-row fr-grid-row--gutters fr-grid-row--middle fr-pb-6w">
+      <div class="fr-col-lg-6 fr-col-12">
+        <BilanOnboardingEstimation
+          :phrase="onboardingResultatViewModel?.phrase"
+          :resultat="onboardingResultatViewModel?.resultat"
+        />
+      </div>
+      <div class="fr-col-lg-6 fr-col-12 text--center">
+        <img alt="Plateforme Agir :" src="/logo_agir.png" class="fr-mb-3w" />
+        <h2 class="fr-px-4w">Nous avons tous les moyens d’agir à notre échelle !</h2>
+        <span class="badge--bleu display-block fr-h4 fr-mx-auto background-bleu-light fr-p-2w"
+          >Déjà + de XXX inscrits</span
+        >
+        <router-link class="fr-btn fr-btn--icon-left fr-icon-arrow-right-line" :to="{ name: 'creation-compte' }">
+          Rejoindre Agir
+        </router-link>
+      </div>
+    </section>
+  </div>
+  <section class="background--white fr-py-6w">
+    <div class="fr-container text--center">
+      <BilanOnboardingStatFrance />
     </div>
-    <div class="fr-col-lg-6 fr-col-12 text--center">
-      <img alt="Plateforme Agir :" src="/logo_agir.png" class="fr-mb-3w" />
-      <h2>Devenez acteur de votre transition écologique !</h2>
+  </section>
+  <section class="fr-container fr-py-6w fr-px-2w">
+    <h2 class="fr-h2">Qu’est-ce que le coach a pour vous ?</h2>
+  </section>
+  <section class="background--white fr-py-6w">
+    <div class="fr-container">
+      <BilanOnboardingTemoignage />
+    </div>
+  </section>
+  <section class="fr-container">
+    <div class="fr-grid fr-grid-row fr-grid-row--middle flex-column fr-pt-16w fr-pb-8w">
+      <img alt="" src="/logo_agir.png" class="fr-mb-3w" />
+      <h2 class="fr-h1 text--center fr-col-lg-9">
+        Réduisez votre empreinte écologique selon vos moyens, vos lieux de vie et vos envies
+      </h2>
       <router-link class="fr-btn fr-btn--icon-left fr-icon-arrow-right-line" :to="{ name: 'creation-compte' }">
         S'inscrire
       </router-link>
     </div>
-  </div>
+  </section>
 </template>
 
 <script setup lang="ts">
+  import { ref } from 'vue';
   import { onboardingStore } from '@/store/onboarding';
   import { EvaluerOnboardingUsecase } from '@/onboarding/evaluerOnboarding.usecase';
   import { OnboardingRepositoryAxios } from '@/onboarding/adapters/onboarding.repository.axios';
@@ -31,47 +55,26 @@
     OnboardingResultatPresenterImpl,
     OnboardingResultatViewModel,
   } from '@/onboarding/adapters/onboarding.presenter.impl';
-  import OnboardingJauge from '@/components/custom/OnboardingJauge.vue';
-  import { ref } from 'vue';
-  import CarteVierge from '@/components/CarteVierge.vue';
+
+  import BilanOnboardingEstimation from '@/components/custom/BilanOnboarding/BilanOnboardingEstimation.vue';
+  import BilanOnboardingStatFrance from '@/components/custom/BilanOnboarding/BilanOnboardingStatFrance.vue';
+  import BilanOnboardingTemoignage from '@/components/custom/BilanOnboarding/BilanOnboardingTemoignage.vue';
 
   const onBoardingStore = onboardingStore();
-  let onboardingResultatViewModel = ref<OnboardingResultatViewModel[]>();
+  let onboardingResultatViewModel = ref<OnboardingResultatViewModel>();
   const evaluerOnboarding = new EvaluerOnboardingUsecase(new OnboardingRepositoryAxios());
   evaluerOnboarding.execute(
     onBoardingStore.$state,
-    new OnboardingResultatPresenterImpl((resultat: OnboardingResultatViewModel[]) => {
+    new OnboardingResultatPresenterImpl((resultat: OnboardingResultatViewModel) => {
       onboardingResultatViewModel.value = resultat;
     })
   );
 </script>
 
 <style scoped>
-  .legende {
-    position: relative;
-    display: flex;
-    justify-content: space-between;
-    margin-left: auto;
-    max-width: var(--widthJaugeOnboarding);
-  }
-
-  .legende span::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    height: 11px;
-    width: 11px;
-    border-radius: 50%;
-  }
-
-  .legende span:first-child::before {
-    left: 0;
-    background: var(--blue-france-sun-113-625);
-  }
-
-  .legende span:nth-child(2)::before {
-    right: 0;
-    background-color: #e32416;
+  .badge--bleu {
+    width: fit-content;
+    border-radius: 3rem;
+    color: var(--blue-france-sun-113-625);
   }
 </style>

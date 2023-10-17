@@ -1,12 +1,14 @@
 <template>
-  <h1 class="fr-h2">Mon Compte</h1>
-  <div class="fr-grid-row fr-grid-row--center fr-grid-row--gutters">
-    <div class="fr-col fr-col-lg-8">
-      <PageCompteFormulaire
-        v-if="compteUtlisateurViewModel"
-        :compte-utlisateur-view-model="compteUtlisateurViewModel"
-      />
-      <PageCompteSuppression class="fr-mt-2w" />
+  <div class="fr-container">
+    <h1 class="fr-h2">Mon Compte</h1>
+    <div class="fr-grid-row fr-grid-row--center fr-grid-row--gutters">
+      <div class="fr-col fr-col-lg-8">
+        <PageCompteFormulaire
+          v-if="compteUtlisateurViewModel"
+          :compte-utlisateur-view-model="compteUtlisateurViewModel"
+        />
+        <PageCompteSuppression class="fr-mt-2w" />
+      </div>
     </div>
   </div>
 </template>

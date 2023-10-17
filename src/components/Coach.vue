@@ -1,34 +1,36 @@
 <template>
-  <div v-if="interactionsViewModel">
-    <h1 class="fr-h2">Les actions du jour</h1>
-    <div class="fr-grid-row fr-grid-row--gutters">
-      <div class="fr-col fr-col-lg-8">
-        <ul v-if="!isLoading" class="list-style-none fr-p-0 fr-m-0">
-          <li v-for="item in interactionsViewModel" :key="item.titre" class="fr-mb-2w">
-            <InteractionCard
-              :key="item.titre"
-              :interaction-view-model="item"
-              :on-interaction-click="interactionAEteCliquee"
-              @refresh-interactions="lancerChargementDesDonnees"
+  <div class="fr-container">
+    <div v-if="interactionsViewModel">
+      <h1 class="fr-h2">Les actions du jour</h1>
+      <div class="fr-grid-row fr-grid-row--gutters">
+        <div class="fr-col fr-col-lg-8">
+          <ul v-if="!isLoading" class="list-style-none fr-p-0 fr-m-0">
+            <li v-for="item in interactionsViewModel" :key="item.titre" class="fr-mb-2w">
+              <InteractionCard
+                :key="item.titre"
+                :interaction-view-model="item"
+                :on-interaction-click="interactionAEteCliquee"
+                @refresh-interactions="lancerChargementDesDonnees"
+              />
+            </li>
+          </ul>
+          <div v-else>
+            <CarteSkeleton class="fr-mb-4w" v-for="item in 4" :key="item" />
+          </div>
+        </div>
+        <div class="fr-col-12 fr-col-lg-4">
+          <div v-if="!isLoading">
+            <BilanNosGestesClimat v-if="empreinteViewModel" class="fr-mb-3w" :get-impact-value="empreinteViewModel" />
+            <MesResultats
+              v-if="scoreViewModel"
+              :badge-view-model="scoreViewModel.badges"
+              :score-value="scoreViewModel.score"
             />
-          </li>
-        </ul>
-        <div v-else>
-          <CarteSkeleton class="fr-mb-4w" v-for="item in 4" :key="item" />
-        </div>
-      </div>
-      <div class="fr-col-12 fr-col-lg-4">
-        <div v-if="!isLoading">
-          <BilanNosGestesClimat v-if="empreinteViewModel" class="fr-mb-3w" :get-impact-value="empreinteViewModel" />
-          <MesResultats
-            v-if="scoreViewModel"
-            :badge-view-model="scoreViewModel.badges"
-            :score-value="scoreViewModel.score"
-          />
-        </div>
-        <div v-else>
-          <CarteSkeleton class="fr-mb-3w" />
-          <CarteSkeleton />
+          </div>
+          <div v-else>
+            <CarteSkeleton class="fr-mb-3w" />
+            <CarteSkeleton />
+          </div>
         </div>
       </div>
     </div>

@@ -16,6 +16,7 @@ class OnboardingRespoitoryForTest implements OnboardingRepository {
       consommation: 1,
       logement: 2,
       alimentation: 3,
+      phrase: 'Hello world !',
     });
   }
 }
@@ -52,24 +53,27 @@ describe("Fichier de tests concernant l'evaluation de l'onboarding", () => {
     await usecase.execute(
       onboardingState,
       new OnboardingResultatPresenterImpl(resultat => {
-        expect(resultat).toStrictEqual<OnboardingResultatViewModel[]>([
-          {
-            libelle: '🚗 Transports',
-            valeur: 4,
-          },
-          {
-            libelle: '🥦 Alimentation',
-            valeur: 3,
-          },
-          {
-            libelle: '🏡 Logement',
-            valeur: 2,
-          },
-          {
-            libelle: '🛒 Consommation',
-            valeur: 1,
-          },
-        ]);
+        expect(resultat).toStrictEqual<OnboardingResultatViewModel>({
+          resultat: [
+            {
+              libelle: '🚗 Transports',
+              valeur: 4,
+            },
+            {
+              libelle: '🥦 Alimentation',
+              valeur: 3,
+            },
+            {
+              libelle: '🏡 Logement',
+              valeur: 2,
+            },
+            {
+              libelle: '🛒 Consommation',
+              valeur: 1,
+            },
+          ],
+          phrase: 'Hello world !',
+        });
       })
     );
   });

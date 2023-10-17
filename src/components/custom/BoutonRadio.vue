@@ -48,4 +48,8 @@
   .fr-radio-group {
     max-width: none;
   }
+
+  .fr-radio-group input[type='radio'] + label:before {
+    top: auto;
+  }
 </style>

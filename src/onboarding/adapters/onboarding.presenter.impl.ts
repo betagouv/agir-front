@@ -2,14 +2,17 @@ import { OnboardingResultatPresenter } from '@/onboarding/ports/onboardingResult
 import { OnboardingResultat } from '@/onboarding/evaluerOnboarding.usecase';
 
 export interface OnboardingResultatViewModel {
-  libelle: string;
-  valeur: number;
+  resultat: {
+    libelle: string;
+    valeur: number;
+  }[];
+  phrase: string;
 }
 export class OnboardingResultatPresenterImpl implements OnboardingResultatPresenter {
-  constructor(private viewModel: (onboardingResultatViewModel: OnboardingResultatViewModel[]) => void) {}
+  constructor(private viewModel: (onboardingResultatViewModel: OnboardingResultatViewModel) => void) {}
   presente(resultat: OnboardingResultat) {
-    this.viewModel(
-      [
+    this.viewModel({
+      resultat: [
         {
           libelle: '🚗 Transports',
           valeur: resultat.transports,
@@ -26,7 +29,8 @@ export class OnboardingResultatPresenterImpl implements OnboardingResultatPresen
           libelle: '🥦 Alimentation',
           valeur: resultat.alimentation,
         },
-      ].sort((a, b) => b.valeur - a.valeur)
-    );
+      ].sort((a, b) => b.valeur - a.valeur),
+      phrase: resultat.phrase,
+    });
   }
 }
