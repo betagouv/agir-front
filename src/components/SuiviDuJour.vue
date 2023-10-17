@@ -61,7 +61,6 @@
                 >
                   Continuer
                 </button>
-                <!--<span v-if="etapeCourante == 1" @click="sauterEtape" class="step-btn-actions"> Passer la question </span>-->
                 <button v-if="etapeCourante == 3" class="fr-btn-not-rounded share-btn-container" title="partager">
                   Partager vos résultats
                 </button>
