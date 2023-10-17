@@ -59,6 +59,10 @@ h3 {
   width: 100%;
 }
 
+.max-full-width {
+  max-width: 100%;
+}
+
 .text--white {
   color: #fff;
 }
@@ -157,6 +161,10 @@ h3 {
 
 .border-radius--lg {
   border-radius: 24px;
+}
+
+.border-radius--full {
+  border-radius: 50%;
 }
 
 .img-object-fit-contain {
