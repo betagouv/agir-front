@@ -1,5 +1,5 @@
 import axios from 'redaxios';
-import router from '@/router';
+import { Router } from 'vue-router';
 
 export class AxiosFactory {
   private static bearer = '';
@@ -29,6 +29,9 @@ export class AxiosFactory {
   }
 }
 
+export class Context {
+  public static router: Router;
+}
 interface AxiosError {
   status: number;
 }
@@ -52,7 +55,7 @@ export function intercept401() {
           } catch (exception) {
             //Session Expired
             if ((exception as AxiosError).status === 401) {
-              await router.push({ name: 'session-expiree' });
+              await Context.router.push({ name: 'session-expiree' });
             }
           }
         }
