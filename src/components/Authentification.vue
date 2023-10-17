@@ -53,11 +53,8 @@
   import InputPasswordLogin from '@/components/custom/InputPasswordLogin.vue';
   import Alert from '@/components/custom/Alert.vue';
 
-  defineProps({
-    premiereConnexion: {
-      type: Boolean,
-      default: true,
-    },
+  withDefaults(defineProps<{ premiereConnexion: boolean }>(), {
+    premiereConnexion: true,
   });
   const email = ref<string>('');
   const password = ref<string>('');
