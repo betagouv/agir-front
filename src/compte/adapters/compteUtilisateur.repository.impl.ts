@@ -67,6 +67,7 @@ export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurReposit
     await axiosInstance.delete(`/utilisateurs/${idUtilisateur}`);
   }
 
+  @intercept401()
   async mettreAJourLeMotDePasse(idUtilisateur: string, nouveauMotDePasse: string): Promise<void> {
     const axiosInstance = AxiosFactory.getAxios();
     await axiosInstance.patch(`/utilisateurs/${idUtilisateur}/profile`, {
