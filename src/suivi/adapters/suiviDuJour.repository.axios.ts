@@ -1,6 +1,6 @@
 import { DernierSuivi, SuiviRepository } from '@/suivi/ports/suivi.repository';
 import { ElementSuiviCarbone, Resultat } from '@/suivi/envoyerSuiviDuJour.usecase';
-import { AxiosFactory } from '@/axios.factory';
+import { AxiosFactory, intercept401 } from '@/axios.factory';
 
 export interface SuiviDuJourGraphDataApiModel {
   date: string;
@@ -87,12 +87,14 @@ function getToutesLesValeursDuSuivisAvecLeBonFormat(listeDesValeurs: Map<string,
 }
 
 export class SuiviDuJourRepositoryAxios implements SuiviRepository {
+  @intercept401()
   async ajouter(type: string, valeurs: Map<string, string>, utilisateurId: string) {
     const axiosInstance = AxiosFactory.getAxios();
     const jsonObject = { type, ...Object.fromEntries(getToutesLesValeursDuSuivisAvecLeBonFormat(valeurs)) };
     await axiosInstance.post(`/utilisateurs/${utilisateurId}/suivis`, jsonObject, {});
   }
 
+  @intercept401()
   async recupererDernierSuivi(idUtilisateur: string, type: string): Promise<DernierSuivi | null> {
     const axiosInstance = AxiosFactory.getAxios();
     try {
@@ -110,6 +112,7 @@ export class SuiviDuJourRepositoryAxios implements SuiviRepository {
     }
   }
 
+  @intercept401()
   async recupererResultat(idUtilisateur: string): Promise<Resultat | null> {
     const axiosInstance = AxiosFactory.getAxios();
     try {

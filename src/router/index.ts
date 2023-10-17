@@ -22,6 +22,7 @@ import PageBilanOnboarding from '@/components/pages/PageBilanOnboarding.vue';
 import PageOnboarding from '@/components/pages/PageOnboarding.vue';
 import PagePreOnboarding from '@/components/pages/PagePreOnboarding.vue';
 import { onboardingStore } from '@/store/onboarding';
+import PageSessionExpiree from '@/components/pages/PageSessionExpiree.vue';
 
 const appName = 'Agir ! -';
 const routes = [
@@ -63,6 +64,15 @@ const routes = [
     path: '/authentification',
     name: 'authentification',
     component: Authentification,
+    meta: {
+      title: `${appName} Authentification`,
+      estPublique: true,
+    },
+  },
+  {
+    path: '/session-expiree',
+    name: 'session-expiree',
+    component: PageSessionExpiree,
     meta: {
       title: `${appName} Authentification`,
       estPublique: true,

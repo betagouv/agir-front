@@ -1,4 +1,4 @@
-import { AxiosFactory } from '@/axios.factory';
+import { AxiosFactory, intercept401 } from '@/axios.factory';
 import { Empreinte, EmpreinteRepository } from '@/bilan/ports/empreinteRepository';
 
 interface EmpreinteDetailApiModel {
@@ -14,6 +14,7 @@ export interface EmpreinteApiModel {
 }
 
 export class EmpreinteRepositoryAxios implements EmpreinteRepository {
+  @intercept401()
   async getEmpreinte(utilisateurId: string): Promise<Empreinte> {
     const axiosInstance = AxiosFactory.getAxios();
     const response = await axiosInstance.get<EmpreinteApiModel>(`/utilisateur/${utilisateurId}/bilans/last`);
@@ -29,6 +30,7 @@ export class EmpreinteRepositoryAxios implements EmpreinteRepository {
     };
   }
 
+  @intercept401()
   async importSituationNGC(situationId: string, utilisateurId: string): Promise<boolean> {
     const axiosInstance = AxiosFactory.getAxios();
     try {
