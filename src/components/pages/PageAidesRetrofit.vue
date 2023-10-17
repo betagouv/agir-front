@@ -2,6 +2,7 @@
   <div class="fr-container">
     <FilDAriane :page-courante="titrePage" :page-hierarchie="[{ label: 'Aides fincancières', url: 'mes-aides' }]" />
     <AidesResultat
+      titre-categorie-aide=""
       :simulation-aides-view-model="simulationAidesRetrofitViewModel"
       :titre="titrePage"
       :sous-titre="sousTitre"
