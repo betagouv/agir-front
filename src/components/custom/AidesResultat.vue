@@ -12,7 +12,7 @@
         <h2 class="fr-h4">{{ sousTitre }}</h2>
         <div v-for="(aides, index) in simulationAidesViewModel" :key="index">
           <Accordeon v-if="aides.length" :nameId="`aides-${index}`">
-            <template v-slot:titre>Acheter un vélo {{ index }}</template>
+            <template v-slot:titre>{{ titreCategorieAide }} {{ index }}</template>
             <template v-slot:contenu>
               <ul class="list-style-none fr-m-0 fr-p-0">
                 <li v-for="(aide, index) in aides" :key="index">
@@ -42,6 +42,7 @@
     titre: string;
     sousTitre: string;
     simulationAidesViewModel: SimulationAideResultatViewModel | null;
+    titreCategorieAide: string;
   }>();
 </script>
 
