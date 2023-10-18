@@ -11,7 +11,7 @@
           'Des articles pour apprendre de nouvelles choses',
           '...',
         ]"
-        class="fr-col-6"
+        class="fr-col-md-6 fr-col-11"
       />
       <LandingCarouselItem
         titre="Le coach"
@@ -22,7 +22,7 @@
           'Des articles pour apprendre de nouvelles choses',
           '...',
         ]"
-        class="fr-col-6"
+        class="fr-col-md-6 fr-col-11"
       />
       <LandingCarouselItem
         titre="Des aides financières"
@@ -33,7 +33,7 @@
           'Des articles pour apprendre de nouvelles choses',
           '...',
         ]"
-        class="fr-col-6"
+        class="fr-col-md-6 fr-col-11"
       />
     </div>
     <div class="dots">
@@ -66,20 +66,33 @@
 
     return `translateX(${pourcentageScroll}%)`;
   };
+
+  const getTransformMobile = (index: number) => {
+    const pourcentageScroll = -(index * (11 / 12) * 100);
+
+    return `translateX(${pourcentageScroll}%)`;
+  };
 </script>
 
 <style scoped>
   .carousel {
-    position: relative;
     overflow: hidden;
     width: 100%;
     margin: auto;
   }
 
   .carousel__container {
+    width: calc(100vw - 1rem);
     flex-wrap: nowrap;
     transition: ease-in-out 0.3s;
-    transform: v-bind(getTransform(activeSlide));
+    transform: v-bind(getTransformMobile(activeSlide));
+  }
+
+  @media (min-width: 768px) {
+    .carousel__container {
+      width: 100%;
+      transform: v-bind(getTransform(activeSlide));
+    }
   }
 
   .dots {
