@@ -1,13 +1,13 @@
 import {
   CompteUtilisateurPresenterImpl,
   CompteUtlisateurViewModel,
-} from '../../src/compte/adapters/compteUtilisateur.presenter.impl';
-import { ChargerCompteUtilisateurUsecase } from '../../src/compte/chargerCompteUtilisateur.usecase';
+} from '@/compte/adapters/compteUtilisateur.presenter.impl';
+import { ChargerCompteUtilisateurUsecase } from '@/compte/chargerCompteUtilisateur.usecase';
 import {
   CompteUtilisateur,
   CompteUtilisateurACreer,
   CompteUtilisateurRepository,
-} from '../../src/compte/ports/compteUtilisateur.repository';
+} from '@/compte/ports/compteUtilisateur.repository';
 
 class ChargeCompteUtilisateurSansInfosOptionnellesRepository implements CompteUtilisateurRepository {
   getCompteUtilisateur(idUtilisateur: string): Promise<CompteUtilisateur> {
@@ -32,7 +32,11 @@ class ChargeCompteUtilisateurSansInfosOptionnellesRepository implements CompteUt
   }
 
   mettreAJourLeMotDePasse(idUtilisateur: string, nouveauMotDePasse: string): Promise<void> {
-    return Promise.resolve(undefined);
+    throw Error();
+  }
+
+  validerCompteUtilisateur(email: string, code: string): Promise<CompteUtilisateur> {
+    throw Error();
   }
 }
 
@@ -59,7 +63,11 @@ class ChargeCompteUtilisateurAvecMailRepository implements CompteUtilisateurRepo
   }
 
   mettreAJourLeMotDePasse(idUtilisateur: string, nouveauMotDePasse: string): Promise<void> {
-    return Promise.resolve(undefined);
+    throw Error();
+  }
+
+  validerCompteUtilisateur(email: string, code: string): Promise<CompteUtilisateur> {
+    throw Error();
   }
 }
 describe('Fichier de tests concernant le chargement du compte utilisateur', () => {

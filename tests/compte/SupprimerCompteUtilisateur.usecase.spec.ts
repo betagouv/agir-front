@@ -31,6 +31,14 @@ class SypCompteUtilisateurRepository implements CompteUtilisateurRepository {
     this._idUtilisateur = idUtilisateur;
     return Promise.resolve();
   }
+
+  mettreAJourLeMotDePasse(idUtilisateur: string, nouveauMotDePasse: string): Promise<void> {
+    throw Error();
+  }
+
+  validerCompteUtilisateur(email: string, code: string): Promise<CompteUtilisateur> {
+    throw Error();
+  }
 }
 
 describe('Fichier de tests concernant la suppression du compte utilisateur', () => {

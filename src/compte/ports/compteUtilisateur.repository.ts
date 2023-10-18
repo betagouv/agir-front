@@ -9,6 +9,10 @@ export interface CompteUtilisateur {
   revenuFiscal: string;
 }
 
+export interface CompteTemporaire {
+  mail: string;
+}
+
 export interface CompteUtilisateurACreer {
   nom: string;
   email: string;
@@ -19,7 +23,8 @@ export interface CompteUtilisateurACreer {
 export interface CompteUtilisateurRepository {
   getCompteUtilisateur(idUtilisateur: string): Promise<CompteUtilisateur>;
   mettreAjour(compteUtilisateur: CompteUtilisateur);
-  creerCompteUtilisateur(compteUtilisateurACreer: CompteUtilisateurACreer): Promise<CompteUtilisateur>;
+  creerCompteUtilisateur(compteUtilisateurACreer: CompteUtilisateurACreer): Promise<CompteTemporaire>;
   supprimerCompteUtilisateur(idUtilisateur: string): Promise<void>;
   mettreAJourLeMotDePasse(idUtilisateur: string, nouveauMotDePasse: string): Promise<void>;
+  validerCompteUtilisateur(email: string, code: string): Promise<CompteUtilisateur>;
 }

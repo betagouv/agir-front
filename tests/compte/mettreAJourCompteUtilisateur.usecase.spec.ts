@@ -1,12 +1,12 @@
-import { CompteUtlisateurViewModel } from '../../src/compte/adapters/compteUtilisateur.presenter.impl';
+import { CompteUtlisateurViewModel } from '@/compte/adapters/compteUtilisateur.presenter.impl';
 import {
   CompteUtilisateur,
   CompteUtilisateurACreer,
   CompteUtilisateurRepository,
-} from '../../src/compte/ports/compteUtilisateur.repository';
-import { MettreAJourCompteUtilisateurUsecase } from '../../src/compte/mettreAJourCompteUtilisateur.usecase';
-import { SessionRepository } from '../../src/authentification/authentifierUtilisateur.usecase';
-import { Utilisateur } from '../../src/authentification/ports/utilisateur.repository';
+} from '@/compte/ports/compteUtilisateur.repository';
+import { MettreAJourCompteUtilisateurUsecase } from '@/compte/mettreAJourCompteUtilisateur.usecase';
+import { SessionRepository } from '@/authentification/authentifierUtilisateur.usecase';
+import { Utilisateur } from '@/authentification/ports/utilisateur.repository';
 
 class SypCompteUtilisateurRepository implements CompteUtilisateurRepository {
   get compteUtilisateur(): CompteUtilisateur {
@@ -38,6 +38,14 @@ class SypCompteUtilisateurRepository implements CompteUtilisateurRepository {
   }
 
   supprimerCompteUtilisateur(idUtilisateur: string): Promise<void> {
+    throw Error();
+  }
+
+  mettreAJourLeMotDePasse(idUtilisateur: string, nouveauMotDePasse: string): Promise<void> {
+    throw Error();
+  }
+
+  validerCompteUtilisateur(email: string, code: string): Promise<CompteUtilisateur> {
     throw Error();
   }
 }

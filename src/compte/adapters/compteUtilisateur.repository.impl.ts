@@ -1,4 +1,5 @@
 import {
+  CompteTemporaire,
   CompteUtilisateur,
   CompteUtilisateurACreer,
   CompteUtilisateurRepository,
@@ -41,8 +42,7 @@ export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurReposit
     });
   }
 
-  @intercept401()
-  async creerCompteUtilisateur(compteUtilisateurACreer: CompteUtilisateurACreer): Promise<CompteUtilisateur> {
+  async creerCompteUtilisateur(compteUtilisateurACreer: CompteUtilisateurACreer): Promise<CompteTemporaire> {
     const axiosInstance = AxiosFactory.getAxios();
     const response: Response<CompteUtilisateurApiModel> = await axiosInstance.post(`/utilisateurs/`, {
       nom: compteUtilisateurACreer.nom,
@@ -52,12 +52,7 @@ export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurReposit
       onboardingData: compteUtilisateurACreer.onboarding,
     });
     return {
-      nom: response.data.nom,
-      id: response.data.id,
       mail: response.data.email || '',
-      codePostal: response.data.code_postal || '',
-      prenom: response.data.prenom || '',
-      revenuFiscal: response.data.revenu_fiscal || '',
     };
   }
 
@@ -73,5 +68,21 @@ export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurReposit
     await axiosInstance.patch(`/utilisateurs/${idUtilisateur}/profile`, {
       mot_de_passe: nouveauMotDePasse,
     });
+  }
+
+  async validerCompteUtilisateur(email: string, code: string): Promise<CompteUtilisateur> {
+    const axiosInstance = AxiosFactory.getAxios();
+    const compteUtilisateur = await axiosInstance.post<CompteUtilisateurApiModel>(`/utilisateurs/valider`, {
+      email,
+      code,
+    });
+    return {
+      nom: compteUtilisateur.data.nom,
+      id: compteUtilisateur.data.id,
+      mail: compteUtilisateur.data.email || '',
+      codePostal: compteUtilisateur.data.code_postal || '',
+      prenom: compteUtilisateur.data.prenom || '',
+      revenuFiscal: compteUtilisateur.data.revenu_fiscal || '',
+    };
   }
 }

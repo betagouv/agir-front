@@ -1,8 +1,8 @@
-import { CreerCompteUtilisateurUsecase } from '../../src/compte/creerCompteUtilisateur.usecase';
-import { SessionRepository } from '../../src/authentification/authentifierUtilisateur.usecase';
-import { Utilisateur } from '../../src/authentification/ports/utilisateur.repository';
-import { CompteUtilisateur, CompteUtilisateurRepository } from '../../src/compte/ports/compteUtilisateur.repository';
-import { OnboardingState } from '../../src/onboarding/evaluerOnboarding.usecase';
+import { CreerCompteUtilisateurUsecase } from '@/compte/creerCompteUtilisateur.usecase';
+import { SessionRepository } from '@/authentification/authentifierUtilisateur.usecase';
+import { Utilisateur } from '@/authentification/ports/utilisateur.repository';
+import { CompteUtilisateur, CompteUtilisateurRepository } from '@/compte/ports/compteUtilisateur.repository';
+import { OnboardingState } from '@/onboarding/evaluerOnboarding.usecase';
 
 class SessionRepositoryForTest implements SessionRepository {
   get utilisateur(): Utilisateur {
@@ -42,9 +42,17 @@ class CompteUtilisateurForTest implements CompteUtilisateurRepository {
   supprimerCompteUtilisateur(idUtilisateur: string): Promise<void> {
     throw Error();
   }
+
+  mettreAJourLeMotDePasse(idUtilisateur: string, nouveauMotDePasse: string): Promise<void> {
+    throw Error();
+  }
+
+  validerCompteUtilisateur(email: string, code: string): Promise<CompteUtilisateur> {
+    throw Error();
+  }
 }
 describe('Fichier de tests concernant la creation du compte utilisateur', () => {
-  it('doit creer un compte et le sauvegarder en session', async () => {
+  it('doit creer un compte temporaire et sauvegarder uniquement le mail en session', async () => {
     // GIVEN
     const compteACreer = {
       nom: 'John',
@@ -88,10 +96,10 @@ describe('Fichier de tests concernant la creation du compte utilisateur', () => 
     await usecase.execute(compteACreer, onboardingState);
     // THEN
     expect(sessionRepository.utilisateur).toStrictEqual<Utilisateur>({
-      id: 'id',
-      nom: 'John',
+      id: '',
+      nom: '',
       codePostal: '',
-      prenom: 'Doe',
+      prenom: '',
       mail: 'john@skynet.com',
       revenuFiscal: '',
     });

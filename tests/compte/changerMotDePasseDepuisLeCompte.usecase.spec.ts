@@ -9,17 +9,17 @@ class CompteUtilisateurRepositoryForTest implements CompteUtilisateurRepository 
   get nouveauMotDePasse(): string {
     return this._nouveauMotDePasse;
   }
-  private _nouveauMotDePasse: string;
+  private _nouveauMotDePasse: string = '';
   get idUtilisateur(): string {
     return this._idUtilisateur;
   }
-  private _idUtilisateur: string;
+  private _idUtilisateur: string = '';
   creerCompteUtilisateur(compteUtilisateurACreer: CompteUtilisateurACreer): Promise<CompteUtilisateur> {
-    return Promise.resolve(undefined);
+    throw Error();
   }
 
   getCompteUtilisateur(idUtilisateur: string): Promise<CompteUtilisateur> {
-    return Promise.resolve(undefined);
+    throw Error();
   }
 
   mettreAJourLeMotDePasse(idUtilisateur: string, nouveauMotDePasse: string): Promise<void> {
@@ -31,7 +31,11 @@ class CompteUtilisateurRepositoryForTest implements CompteUtilisateurRepository 
   mettreAjour(compteUtilisateur: CompteUtilisateur) {}
 
   supprimerCompteUtilisateur(idUtilisateur: string): Promise<void> {
-    return Promise.resolve(undefined);
+    throw Error();
+  }
+
+  validerCompteUtilisateur(email: string, code: string): Promise<CompteUtilisateur> {
+    throw Error();
   }
 }
 describe('Fichier de tests concernant le changement du mot passe utilisateur', () => {
