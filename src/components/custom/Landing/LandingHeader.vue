@@ -9,7 +9,7 @@
         Commencer
       </router-link>
     </div>
-    <div class="fr-col-md-5">
+    <div class="fr-col-md-5 fr-hidden fr-unhidden-md">
       <img src="/landing-header.jpg" class="border-radius--full max-full-width" alt="" />
     </div>
   </div>

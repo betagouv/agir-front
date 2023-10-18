@@ -38,7 +38,7 @@
     </div>
     <div class="dots">
       <button
-        v-for="index in slides"
+        v-for="(_, index) in slides"
         :key="index"
         :class="{ active: index === activeSlide }"
         @click="setActiveSlide(index)"
