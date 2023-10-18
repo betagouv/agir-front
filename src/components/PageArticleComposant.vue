@@ -41,4 +41,11 @@
   .article--content ul p {
     margin-bottom: 0;
   }
+  
+  .article--content  img {
+    max-width: 100%;
+    object-fit: contain;
+    height: auto;
+  }
+
 </style>
