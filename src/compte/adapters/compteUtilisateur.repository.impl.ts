@@ -69,20 +69,4 @@ export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurReposit
       mot_de_passe: nouveauMotDePasse,
     });
   }
-
-  async validerCompteUtilisateur(email: string, code: string): Promise<CompteUtilisateur> {
-    const axiosInstance = AxiosFactory.getAxios();
-    const compteUtilisateur = await axiosInstance.post<CompteUtilisateurApiModel>(`/utilisateurs/valider`, {
-      email,
-      code,
-    });
-    return {
-      nom: compteUtilisateur.data.nom,
-      id: compteUtilisateur.data.id,
-      mail: compteUtilisateur.data.email || '',
-      codePostal: compteUtilisateur.data.code_postal || '',
-      prenom: compteUtilisateur.data.prenom || '',
-      revenuFiscal: compteUtilisateur.data.revenu_fiscal || '',
-    };
-  }
 }

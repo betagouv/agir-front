@@ -23,10 +23,11 @@
   import InputText from '@/components/dsfr/InputText.vue';
   import { ValiderCompteUtilisateurUsecase } from '@/compte/validerCompteUtilisateur.usecase';
   import { SessionRepositoryStore } from '@/authentification/adapters/session.repository.store';
-  import { CompteUtilisateurRepositoryImpl } from '@/compte/adapters/compteUtilisateur.repository.impl';
   import { utilisateurStore } from '@/store/utilisateur';
   import router from '@/router';
   import Alert from '@/components/custom/Alert.vue';
+  import { sendIdNGC } from '@/bilan/middleware/pendingSimulation';
+  import { UtilisateurRepositoryAxios } from '@/authentification/adapters/utilisateur.repository.axios';
   const code = ref('');
   let validationDeCompteEnErreur = ref<boolean>(false);
   let validationDeCompteMessageErreur = ref<string>('');
@@ -34,13 +35,17 @@
 
   const validerCode = async () => {
     const validerCompteUtilisateurUsecase = new ValiderCompteUtilisateurUsecase(
-      new CompteUtilisateurRepositoryImpl(),
+      new UtilisateurRepositoryAxios(),
       new SessionRepositoryStore()
     );
-    await validerCompteUtilisateurUsecase
+    validerCompteUtilisateurUsecase
       .execute(email, code.value)
       .then(() => {
-        router.push({ name: 'coach' });
+        validationDeCompteEnErreur.value = false;
+        const requestedRoute = sessionStorage.getItem('requestedRoute');
+        sessionStorage.removeItem('requestedRoute');
+        router.push(requestedRoute || { name: 'coach' });
+        sendIdNGC();
       })
       .catch(reason => {
         validationDeCompteMessageErreur.value = reason.data.message;

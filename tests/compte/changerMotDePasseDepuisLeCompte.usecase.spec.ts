@@ -33,10 +33,6 @@ class CompteUtilisateurRepositoryForTest implements CompteUtilisateurRepository 
   supprimerCompteUtilisateur(idUtilisateur: string): Promise<void> {
     throw Error();
   }
-
-  validerCompteUtilisateur(email: string, code: string): Promise<CompteUtilisateur> {
-    throw Error();
-  }
 }
 describe('Fichier de tests concernant le changement du mot passe utilisateur', () => {
   it('Quand un utilisateur est connecté, il doit pouvoir changer son mot de passe', () => {

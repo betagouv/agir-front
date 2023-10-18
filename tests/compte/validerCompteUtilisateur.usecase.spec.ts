@@ -1,11 +1,6 @@
-import { ValiderCompteUtilisateurUsecase } from '../../src/compte/validerCompteUtilisateur.usecase';
-import { SessionRepository } from '../../src/authentification/authentifierUtilisateur.usecase';
-import { Utilisateur } from '../../src/authentification/ports/utilisateur.repository';
-import {
-  CompteUtilisateur,
-  CompteUtilisateurACreer,
-  CompteUtilisateurRepository,
-} from '../../src/compte/ports/compteUtilisateur.repository';
+import { ValiderCompteUtilisateurUsecase } from '@/compte/validerCompteUtilisateur.usecase';
+import { SessionRepository } from '@/authentification/authentifierUtilisateur.usecase';
+import { Utilisateur, UtilisateurRepository } from '@/authentification/ports/utilisateur.repository';
 
 class SpySessionRepository implements SessionRepository {
   get utilisateur(): Utilisateur {
@@ -19,40 +14,24 @@ class SpySessionRepository implements SessionRepository {
   }
 }
 
-class SpyValiderCompteUtilisateurRepository implements CompteUtilisateurRepository {
-  get compteUtilisateur(): CompteUtilisateur {
-    return this._compteUtilisateur;
-  }
-  private _compteUtilisateur: CompteUtilisateur = {
-    id: '',
-    nom: '',
-    mail: '',
-    codePostal: '',
-    prenom: '',
-    revenuFiscal: '',
-  };
-  getCompteUtilisateur(idUtilisateur: string): Promise<CompteUtilisateur> {
+class SpyValiderCompteUtilisateurRepository implements UtilisateurRepository {
+  authentifierUtilisateur(email: string, motDePasse: string): Promise<Utilisateur> {
     throw Error();
   }
 
-  mettreAjour(compteUtilisateur: CompteUtilisateur) {
+  getUtilisateurAvecId(idUtilisateur: string): Promise<Utilisateur> {
     throw Error();
   }
 
-  creerCompteUtilisateur(compteUtilisateurACreer: CompteUtilisateurACreer): Promise<CompteUtilisateur> {
-    throw Error();
-  }
-
-  supprimerCompteUtilisateur(idUtilisateur: string): Promise<void> {
-    throw Error();
-  }
-
-  mettreAJourLeMotDePasse(idUtilisateur: string, nouveauMotDePasse: string): Promise<void> {
-    throw Error();
-  }
-
-  validerCompteUtilisateur(email: string, code: string): Promise<CompteUtilisateur> {
-    return Promise.resolve({ ...this._compteUtilisateur, mail: email });
+  validerCompteUtilisateur(email: string, code: string): Promise<Utilisateur> {
+    return Promise.resolve({
+      id: '',
+      nom: '',
+      codePostal: '',
+      prenom: '',
+      mail: email,
+      revenuFiscal: '',
+    });
   }
 }
 describe('Fichier de tests concernant la validation du compte utilisateur', () => {

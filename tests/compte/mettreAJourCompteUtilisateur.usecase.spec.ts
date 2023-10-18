@@ -8,7 +8,7 @@ import { MettreAJourCompteUtilisateurUsecase } from '@/compte/mettreAJourCompteU
 import { SessionRepository } from '@/authentification/authentifierUtilisateur.usecase';
 import { Utilisateur } from '@/authentification/ports/utilisateur.repository';
 
-class SypCompteUtilisateurRepository implements CompteUtilisateurRepository {
+class SpyCompteUtilisateurRepository implements CompteUtilisateurRepository {
   get compteUtilisateur(): CompteUtilisateur {
     return this._compteUtilisateur;
   }
@@ -44,10 +44,6 @@ class SypCompteUtilisateurRepository implements CompteUtilisateurRepository {
   mettreAJourLeMotDePasse(idUtilisateur: string, nouveauMotDePasse: string): Promise<void> {
     throw Error();
   }
-
-  validerCompteUtilisateur(email: string, code: string): Promise<CompteUtilisateur> {
-    throw Error();
-  }
 }
 class SpySessionRepository implements SessionRepository {
   get utlisateur(): Utilisateur {
@@ -62,7 +58,7 @@ describe('Fichier de tests concernant la mise à jour du compte utilisateur', ()
   it('La mise à jour doit appeler le repository et mettre à jour la session', async () => {
     // GIVEN
     // WHEN
-    const repository = new SypCompteUtilisateurRepository();
+    const repository = new SpyCompteUtilisateurRepository();
     const sessionRepository = new SpySessionRepository();
     const usecase = new MettreAJourCompteUtilisateurUsecase(repository, sessionRepository);
     const viewModelInput: CompteUtlisateurViewModel = {

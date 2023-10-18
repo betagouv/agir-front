@@ -26,5 +26,4 @@ export interface CompteUtilisateurRepository {
   creerCompteUtilisateur(compteUtilisateurACreer: CompteUtilisateurACreer): Promise<CompteTemporaire>;
   supprimerCompteUtilisateur(idUtilisateur: string): Promise<void>;
   mettreAJourLeMotDePasse(idUtilisateur: string, nouveauMotDePasse: string): Promise<void>;
-  validerCompteUtilisateur(email: string, code: string): Promise<CompteUtilisateur>;
 }

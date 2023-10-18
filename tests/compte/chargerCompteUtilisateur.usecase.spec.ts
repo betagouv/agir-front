@@ -65,10 +65,6 @@ class ChargeCompteUtilisateurAvecMailRepository implements CompteUtilisateurRepo
   mettreAJourLeMotDePasse(idUtilisateur: string, nouveauMotDePasse: string): Promise<void> {
     throw Error();
   }
-
-  validerCompteUtilisateur(email: string, code: string): Promise<CompteUtilisateur> {
-    throw Error();
-  }
 }
 describe('Fichier de tests concernant le chargement du compte utilisateur', () => {
   it('Compte utilisateur sans email', async () => {

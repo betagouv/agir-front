@@ -46,10 +46,6 @@ class CompteUtilisateurForTest implements CompteUtilisateurRepository {
   mettreAJourLeMotDePasse(idUtilisateur: string, nouveauMotDePasse: string): Promise<void> {
     throw Error();
   }
-
-  validerCompteUtilisateur(email: string, code: string): Promise<CompteUtilisateur> {
-    throw Error();
-  }
 }
 describe('Fichier de tests concernant la creation du compte utilisateur', () => {
   it('doit creer un compte temporaire et sauvegarder uniquement le mail en session', async () => {

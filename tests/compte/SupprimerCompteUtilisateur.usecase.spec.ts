@@ -2,10 +2,10 @@ import {
   CompteUtilisateur,
   CompteUtilisateurACreer,
   CompteUtilisateurRepository,
-} from '../../src/compte/ports/compteUtilisateur.repository';
-import { SupprimerCompteUtilisateurUsecase } from '../../src/compte/supprimerCompteUtilisateur.usecase';
+} from '@/compte/ports/compteUtilisateur.repository';
+import { SupprimerCompteUtilisateurUsecase } from '@/compte/supprimerCompteUtilisateur.usecase';
 
-class SypCompteUtilisateurRepository implements CompteUtilisateurRepository {
+class SpyCompteUtilisateurRepository implements CompteUtilisateurRepository {
   get idUtilisateur(): string {
     return this._idUtilisateur;
   }
@@ -35,17 +35,13 @@ class SypCompteUtilisateurRepository implements CompteUtilisateurRepository {
   mettreAJourLeMotDePasse(idUtilisateur: string, nouveauMotDePasse: string): Promise<void> {
     throw Error();
   }
-
-  validerCompteUtilisateur(email: string, code: string): Promise<CompteUtilisateur> {
-    throw Error();
-  }
 }
 
 describe('Fichier de tests concernant la suppression du compte utilisateur', () => {
   it('La suppression doit appeler le repository', async () => {
     // GIVEN
     // WHEN
-    const repository = new SypCompteUtilisateurRepository();
+    const repository = new SpyCompteUtilisateurRepository();
     const usecase = new SupprimerCompteUtilisateurUsecase(repository);
     usecase.execute('utlisateurId');
     // THEN
