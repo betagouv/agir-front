@@ -9,7 +9,7 @@ import VueMatomo from 'vue-matomo';
 import '@gouvfr/dsfr/dist/dsfr.min.css';
 import '@gouvfr/dsfr/dist/utility/utility.min.css';
 import '@gouvfr/dsfr/dist/dsfr.module.min.js';
-import { Context } from '@/axios.factory';
+import { NavigationBus } from '@/navigationBus';
 declare global {
   interface Window {
     _paq: any;
@@ -19,7 +19,7 @@ declare global {
 const app = createApp(App);
 const pinia = createPinia();
 pinia.use(piniaPluginPersistedstate);
-Context.router = router;
+NavigationBus.getInstance().setRouter(router);
 app.use(router);
 app.use(pinia);
 app.use(VueMatomo, {
