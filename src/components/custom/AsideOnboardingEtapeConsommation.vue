@@ -4,15 +4,10 @@
       <span class="fr-icon-information-line" aria-hidden="true"></span>
       Pouquoi ces questions ?
     </p>
-    <p class="fr-text--sm fr-mb-0">Contenu à prévoir</p>
-  </CarteInfo>
-  <div class="background--gris-dark border border-radius--md fr-p-2w">
-    <p class="fr-text--bold">
-      <span class="fr-icon-lightbulb-line" aria-hidden="true"></span>
-      Pour vous donner une idée
+    <p class="fr-text--sm fr-mb-0">
+      Nos achats ont de l’impact !<br />En moyenne, ils représentent 15% de nos émissions de gaz à effet de serre.
     </p>
-    <p class="fr-text--sm fr-mb-0">Contenu à prévoir</p>
-  </div>
+  </CarteInfo>
 </template>
 
 <script setup lang="ts">

@@ -91,6 +91,10 @@ h3 {
   text-align: left;
 }
 
+.text--xs {
+  font-size: 0.75rem;
+}
+
 .text--3xl {
   font-size: 2rem;
 }
