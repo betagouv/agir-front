@@ -1,5 +1,5 @@
 <template>
-  <div class="fr-container">
+  <div class="fr-container fr-py-6w">
     <div class="fr-grid-row fr-grid-row--gutters">
       <div class="fr-col-12 fr-col-lg-7">
         <h1 class="inscription__titre">

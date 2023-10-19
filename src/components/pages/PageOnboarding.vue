@@ -1,5 +1,5 @@
 <template>
-  <div class="fr-container">
+  <div class="fr-container fr-py-6w">
     <h1>Quelques questions pour apprendre à se connaître</h1>
     <div class="fr-grid-row fr-grid-row--gutters">
       <div class="fr-col-lg-9 fr-col-12">

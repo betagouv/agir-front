@@ -1,5 +1,5 @@
 <template>
-  <div class="fr-container">
+  <div class="fr-container fr-pt-6w">
     <h1>Premiers résultats</h1>
     <section class="fr-grid-row fr-grid-row--gutters fr-grid-row--middle fr-pb-6w">
       <div class="fr-col-lg-6 fr-col-12">
