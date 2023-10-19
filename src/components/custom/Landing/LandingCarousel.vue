@@ -6,54 +6,22 @@
       aria-label="Liste des fonctionnalités du site"
     >
       <LandingCarouselItem
-        titre="Le coach"
-        :liste="[
-          'Un accompagnement personnalisé',
-          'Adapté en fonction de vos revenus, où vous vivez et vos goûts',
-          'Un suivi au quotidien',
-          'Des articles pour apprendre de nouvelles choses',
-          '...',
-        ]"
+        v-for="(slide, index) in slides"
+        :key="index"
+        :titre="slide.titre"
+        :liste="slide.liste"
         class="fr-col-md-6 fr-col-11"
         aria-roledescription="slide"
-        :aria-current="0 === activeSlide"
-        :aria-hidden="0 !== activeSlide"
-      />
-      <LandingCarouselItem
-        titre="Le coach"
-        :liste="[
-          'Un accompagnement personnalisé',
-          'Adapté en fonction de vos revenus, où vous vivez et vos goûts',
-          'Un suivi au quotidien',
-          'Des articles pour apprendre de nouvelles choses',
-          '...',
-        ]"
-        class="fr-col-md-6 fr-col-11"
-        aria-roledescription="slide"
-        :aria-current="1 === activeSlide"
-        :aria-hidden="1 !== activeSlide"
-      />
-      <LandingCarouselItem
-        titre="Des aides financières"
-        :liste="[
-          'Un accompagnement personnalisé',
-          'Adapté en fonction de vos revenus, où vous vivez et vos goûts',
-          'Un suivi au quotidien',
-          'Des articles pour apprendre de nouvelles choses',
-          '...',
-        ]"
-        class="fr-col-md-6 fr-col-11"
-        aria-roledescription="slide"
-        :aria-current="2 === activeSlide"
-        :aria-hidden="2 !== activeSlide"
+        :aria-current="index === activeSlide"
+        :aria-hidden="index !== activeSlide"
       />
     </ul>
     <ul class="dots list-style-none fr-pl-0" aria-label="indicateurs">
-      <li v-for="(_, index) in slides" :key="index" :aria-current="index === activeSlide">
+      <li v-for="(slide, index) in slides" :key="index" :aria-current="index === activeSlide">
         <button
           :class="{ active: index === activeSlide }"
           @click="setActiveSlide(index)"
-          :title="`Aller à la slide ${index + 1} sur ${slides.length}`"
+          :title="`Aller à la slide : ${slide.titre} (${index + 1}/${slides.length})`"
         >
           <span></span>
         </button>
@@ -66,7 +34,38 @@
   import { ref } from 'vue';
   import LandingCarouselItem from '@/components/custom/Landing/LandingCarouselItem.vue';
 
-  const slides = [1, 2, 3];
+  const slides = [
+    {
+      titre: 'Le coach',
+      liste: [
+        'Un accompagnement personnalisé',
+        'Adapté en fonction de vos revenus, où vous vivez et vos goûts',
+        'Un suivi au quotidien',
+        'Des articles pour apprendre de nouvelles choses',
+        '...',
+      ],
+    },
+    {
+      titre: 'Le coach',
+      liste: [
+        'Un accompagnement personnalisé',
+        'Adapté en fonction de vos revenus, où vous vivez et vos goûts',
+        'Un suivi au quotidien',
+        'Des articles pour apprendre de nouvelles choses',
+        '...',
+      ],
+    },
+    {
+      titre: 'Des aides financières',
+      liste: [
+        'Un accompagnement personnalisé',
+        'Adapté en fonction de vos revenus, où vous vivez et vos goûts',
+        'Un suivi au quotidien',
+        'Des articles pour apprendre de nouvelles choses',
+        '...',
+      ],
+    },
+  ];
   const activeSlide = ref(1);
 
   const setActiveSlide = (index: number) => {
@@ -100,7 +99,7 @@
     transform: v-bind(getTransformMobile(activeSlide));
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 48rem) {
     .carousel__container {
       width: 100%;
       transform: v-bind(getTransform(activeSlide));
