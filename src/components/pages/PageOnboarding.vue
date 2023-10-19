@@ -41,14 +41,14 @@
 <script setup lang="ts">
   import { ref } from 'vue';
   import IndicateurDEtapes from '@/components/dsfr/IndicateurDEtapes.vue';
-  import OnboardingEtapeTransport from '@/components/custom/OnboardingEtapeTransport.vue';
-  import OnboardingEtapeLogement from '@/components/custom/OnboardingEtapeLogement.vue';
-  import OnboardingEtapeAlimentation from '@/components/custom/OnboardingEtapeAlimentation.vue';
-  import OnboardingEtapeConsommation from '@/components/custom/OnboardingEtapeConsommation.vue';
-  import AsideOnboardingEtapeTransport from '@/components/custom/AsideOnboardingEtapeTransport.vue';
-  import AsideOnboardingEtapeLogement from '@/components/custom/AsideOnboardingEtapeLogement.vue';
-  import AsideOnboardingEtapeAlimentation from '@/components/custom/AsideOnboardingEtapeAlimentation.vue';
-  import AsideOnboardingEtapeConsommation from '@/components/custom/AsideOnboardingEtapeConsommation.vue';
+  import OnboardingEtapeTransport from '@/components/custom/Onboarding/OnboardingEtapeTransport.vue';
+  import OnboardingEtapeLogement from '@/components/custom/Onboarding/OnboardingEtapeLogement.vue';
+  import OnboardingEtapeAlimentation from '@/components/custom/Onboarding/OnboardingEtapeAlimentation.vue';
+  import OnboardingEtapeConsommation from '@/components/custom/Onboarding/OnboardingEtapeConsommation.vue';
+  import AsideOnboardingEtapeTransport from '@/components/custom/Onboarding/AsideOnboardingEtapeTransport.vue';
+  import AsideOnboardingEtapeLogement from '@/components/custom/Onboarding/AsideOnboardingEtapeLogement.vue';
+  import AsideOnboardingEtapeAlimentation from '@/components/custom/Onboarding/AsideOnboardingEtapeAlimentation.vue';
+  import AsideOnboardingEtapeConsommation from '@/components/custom/Onboarding/AsideOnboardingEtapeConsommation.vue';
 
   const etapeCourante = ref<number>(0);
   const etapesOnboarding = ['Transports', 'Logement', 'Alimentation', 'Consommation'];
