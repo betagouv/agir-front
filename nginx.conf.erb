@@ -1,8 +1,8 @@
 root /app/dist;
 
-set $SCRIPT "script-src 'self' 'unsafe-inline'";
+set $SCRIPT "script-src 'self' 'unsafe-inline' stats.beta.gouv.fr";
 set $STYLE "style-src 'self' 'unsafe-inline'";
-set $IMG "img-src 'self' data: blob: res.cloudinary.com";
+set $IMG "img-src 'self' data: blob: res.cloudinary.com images.unsplash.com picsum.photos";
 set $FONT "font-src 'self' data:";
 set $DEFAULT "default-src 'self'";
 set $CONNECT "connect-src 'self' <%= ENV['VITE_API_URL'] %> <%= ENV['VITE_API_URL_CMS'] %> <%= ENV['VITE_MATOMO_URL'] %>";
