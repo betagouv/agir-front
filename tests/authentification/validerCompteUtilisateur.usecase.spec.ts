@@ -1,4 +1,4 @@
-import { ValiderCompteUtilisateurUsecase } from '@/compte/validerCompteUtilisateur.usecase';
+import { ValiderCompteUtilisateurUsecase } from '@/authentification/validerCompteUtilisateur.usecase';
 import { SessionRepository } from '@/authentification/authentifierUtilisateur.usecase';
 import { Utilisateur, UtilisateurRepository } from '@/authentification/ports/utilisateur.repository';
 
