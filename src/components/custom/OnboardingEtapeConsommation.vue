@@ -2,7 +2,7 @@
   <form @submit.prevent="submitEtapeConsommation">
     <BoutonRadio
       class="fr-mb-2w"
-      legende="Parmi ces choix, pour les objets du quotidien (électroménager, éléctronique, vêtements...), vous êtes plutôt..."
+      legende="Parmi ces choix, pour les objets du quotidien (vêtements, objets de décoration, éléctronique, etc.), vous êtes plutôt…"
       name="consommation"
       :options="options"
       col=""

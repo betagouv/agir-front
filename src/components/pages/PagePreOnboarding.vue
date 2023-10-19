@@ -4,8 +4,10 @@
       <h1>👋 Bonjour et bienvenue !</h1>
       <h2 class="fr-h4">Obtenez une 1ère estimation de votre impact en moins d’1 minute !</h2>
       <p>
-        [Contenu à réécrire] En quelques questions vous pourrez avoir une estimation approximative afin de savoir où
-        vous en êtes et nous permettre de vous accompagner en fonction de vos habitudes et équipements.
+        Pour pouvoir vous accompagner, commençons par un tour d’horizon des usages qui ont un fort impact
+        environnemental.<br />
+        C’est une estimation très large que nous aurons l’occasion d’affiner plus tard.<br />
+        Mais il faut bien commencer quelque part !
       </p>
       <router-link :to="{ name: 'onboarding' }" class="fr-btn fr-mb-2w">Commencer l'estimation</router-link>
       <p class="fr-text--sm fr-mb-0">

@@ -10,12 +10,11 @@
       </div>
       <div class="fr-col-lg-6 fr-col-12 text--center">
         <img alt="Plateforme Agir :" src="/logo_agir.png" class="fr-mb-3w" />
-        <h2 class="fr-px-4w">Nous avons tous les moyens d’agir à notre échelle !</h2>
-        <span class="badge--bleu display-block fr-h4 fr-mx-auto background-bleu-light fr-p-2w"
-          >Déjà + de XXX inscrits</span
-        >
+        <h2 class="fr-px-4w">
+          Toutes les solutions pour réduire votre empreinte écologique selon vos moyens, vos lieux de vie et vos envie
+        </h2>
         <router-link class="fr-btn fr-btn--icon-left fr-icon-arrow-right-line" :to="{ name: 'creation-compte' }">
-          Rejoindre Agir
+          Je m’inscris
         </router-link>
       </div>
     </section>
@@ -37,10 +36,10 @@
     <div class="fr-grid fr-grid-row fr-grid-row--middle flex-column fr-pt-16w fr-pb-8w">
       <img alt="" src="/logo_agir.png" class="fr-mb-3w" />
       <h2 class="fr-h1 text--center fr-col-lg-9">
-        Réduisez votre empreinte écologique selon vos moyens, vos lieux de vie et vos envies
+        Toutes les solutions pour réduire votre empreinte écologique selon vos moyens, vos lieux de vie et vos envie
       </h2>
       <router-link class="fr-btn fr-btn--icon-left fr-icon-arrow-right-line" :to="{ name: 'creation-compte' }">
-        S'inscrire
+        Je m’inscris
       </router-link>
     </div>
   </section>
@@ -70,11 +69,3 @@
     })
   );
 </script>
-
-<style scoped>
-  .badge--bleu {
-    width: fit-content;
-    border-radius: 3rem;
-    color: var(--blue-france-sun-113-625);
-  }
-</style>

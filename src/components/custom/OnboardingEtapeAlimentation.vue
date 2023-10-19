@@ -2,10 +2,10 @@
   <form @submit.prevent="submitEtapeAlimentation">
     <BoutonRadio
       class="fr-mb-2w"
-      legende="En règle générale, aux repas, vous êtes plutôt"
+      legende="En règle générale, vous mangez plutôt"
       name="repas"
       :options="[
-        { label: 'Un peu de tout : Viande 1 ou 2 fois par semaine', value: 'tout' },
+        { label: 'De la viande et/ou du poisson 4 à 5 fois par semaine', value: 'tout' },
         { label: 'Végétarien : Sans produits laitiers, c’est dur', value: 'vege' },
         { label: 'J’adore la viande : Un repas sans viande, ce n’est pas un repas', value: 'viande' },
         { label: 'Végan : Rien d’animal dans mon assiette', value: 'vegan' },
