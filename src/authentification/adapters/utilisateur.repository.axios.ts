@@ -1,5 +1,6 @@
 import { Utilisateur, UtilisateurRepository } from '@/authentification/ports/utilisateur.repository';
 import { AxiosFactory } from '@/axios.factory';
+import Cookies from 'js-cookie';
 
 interface UtilisateurApiModel {
   prenom: string;
@@ -21,7 +22,8 @@ export class UtilisateurRepositoryAxios implements UtilisateurRepository {
       email: mail,
       mot_de_passe: password,
     });
-    AxiosFactory.setBearer(response.data.token);
+
+    this.setBearerInCookie(response.data.token);
 
     return {
       nom: response.data.utilisateur.nom,
@@ -31,6 +33,12 @@ export class UtilisateurRepositoryAxios implements UtilisateurRepository {
       mail: response.data.utilisateur.email,
       revenuFiscal: response.data.utilisateur.revenu_fiscal || '',
     };
+  }
+
+  private setBearerInCookie(token: string) {
+    Cookies.set('bearer', token, {
+      secure: true,
+    });
   }
 
   async getUtilisateurAvecId(idUtilisateur: string): Promise<Utilisateur> {
@@ -52,7 +60,7 @@ export class UtilisateurRepositoryAxios implements UtilisateurRepository {
       code,
     });
 
-    AxiosFactory.setBearer(response.data.token);
+    this.setBearerInCookie(response.data.token);
 
     return {
       nom: response.data.utilisateur.nom,

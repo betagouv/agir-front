@@ -6,7 +6,7 @@
 <script setup lang="ts">
   import Authentification from '@/components/Authentification.vue';
   import { utilisateurStore } from '@/store/utilisateur';
-  import { AxiosFactory } from '@/axios.factory';
+  import Cookies from 'js-cookie';
   utilisateurStore().reset();
-  AxiosFactory.setBearer('');
+  Cookies.remove('bearer');
 </script>

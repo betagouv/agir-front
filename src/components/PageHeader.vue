@@ -85,7 +85,7 @@
   import { defineComponent, onMounted, ref } from 'vue';
   import { RouteLocation } from 'vue-router';
   import { utilisateurStore } from '@/store/utilisateur';
-  import { AxiosFactory } from '@/axios.factory';
+  import Cookies from 'js-cookie';
 
   export default defineComponent({
     name: 'PageHeader',
@@ -116,7 +116,7 @@
 
       function logout() {
         utilisateurStore().reset();
-        AxiosFactory.setBearer('');
+        Cookies.remove('bearer');
         router.replace('/');
       }
 
