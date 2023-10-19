@@ -24,6 +24,10 @@ class UtilisateurRepositoryForTest implements UtilisateurRepository {
       revenuFiscal: '',
     });
   }
+
+  validerCompteUtilisateur(email: string, code: string): Promise<Utilisateur> {
+    throw Error;
+  }
 }
 
 class SpySessionRepository implements SessionRepository {

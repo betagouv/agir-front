@@ -38,10 +38,7 @@ const props = {
 };
 
 describe('Quizz', () => {
-  let envoyerDonneesQuizInteractionMock: SpyInstance<
-    [utilisateurId: string, interactionId: string, score: number],
-    Promise<boolean>
-  >;
+  let envoyerDonneesQuizInteractionMock: SpyInstance<[string, string, number, number], Promise<boolean>>;
 
   beforeEach(() => {
     envoyerDonneesQuizInteractionMock = vi

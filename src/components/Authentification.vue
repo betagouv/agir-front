@@ -75,6 +75,9 @@
       .catch(reason => {
         loginMessageErreur.value = reason.data.message;
         loginEnErreur.value = true;
+        if (reason.data.message === 'Utilisateur non actif') {
+          router.push({ name: 'validation-compte', query: { email: email.value } });
+        }
       });
   };
 

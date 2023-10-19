@@ -4,18 +4,12 @@
       <span class="fr-icon-information-line" aria-hidden="true"></span>
       Pouquoi ces questions ?
     </p>
-    <p class="fr-text--sm fr-mb-0">
+    <p class="fr-text--sm">
       Votre alimentation participe à votre impact.<br />
-      Elle représente en moyenne XX% des émissions de gaz à effets de serre des Français
+      Elle représente en moyenne 24% des émissions de gaz à effets de serre du français moyen.
     </p>
+    <span class="text--xs">Source: carbone 4</span>
   </CarteInfo>
-  <div class="background--gris-dark border border-radius--md fr-p-2w">
-    <p class="fr-text--bold">
-      <span class="fr-icon-lightbulb-line" aria-hidden="true"></span>
-      Pour vous donner une idée
-    </p>
-    <p class="fr-text--sm fr-mb-0">Contenu à prévoir</p>
-  </div>
 </template>
 
 <script setup lang="ts">

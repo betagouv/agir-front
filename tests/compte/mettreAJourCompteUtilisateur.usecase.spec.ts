@@ -1,14 +1,14 @@
-import { CompteUtlisateurViewModel } from '../../src/compte/adapters/compteUtilisateur.presenter.impl';
+import { CompteUtlisateurViewModel } from '@/compte/adapters/compteUtilisateur.presenter.impl';
 import {
   CompteUtilisateur,
   CompteUtilisateurACreer,
   CompteUtilisateurRepository,
-} from '../../src/compte/ports/compteUtilisateur.repository';
-import { MettreAJourCompteUtilisateurUsecase } from '../../src/compte/mettreAJourCompteUtilisateur.usecase';
-import { SessionRepository } from '../../src/authentification/authentifierUtilisateur.usecase';
-import { Utilisateur } from '../../src/authentification/ports/utilisateur.repository';
+} from '@/compte/ports/compteUtilisateur.repository';
+import { MettreAJourCompteUtilisateurUsecase } from '@/compte/mettreAJourCompteUtilisateur.usecase';
+import { SessionRepository } from '@/authentification/authentifierUtilisateur.usecase';
+import { Utilisateur } from '@/authentification/ports/utilisateur.repository';
 
-class SypCompteUtilisateurRepository implements CompteUtilisateurRepository {
+class SpyCompteUtilisateurRepository implements CompteUtilisateurRepository {
   get compteUtilisateur(): CompteUtilisateur {
     return this._compteUtilisateur;
   }
@@ -40,6 +40,10 @@ class SypCompteUtilisateurRepository implements CompteUtilisateurRepository {
   supprimerCompteUtilisateur(idUtilisateur: string): Promise<void> {
     throw Error();
   }
+
+  mettreAJourLeMotDePasse(idUtilisateur: string, nouveauMotDePasse: string): Promise<void> {
+    throw Error();
+  }
 }
 class SpySessionRepository implements SessionRepository {
   get utlisateur(): Utilisateur {
@@ -54,7 +58,7 @@ describe('Fichier de tests concernant la mise à jour du compte utilisateur', ()
   it('La mise à jour doit appeler le repository et mettre à jour la session', async () => {
     // GIVEN
     // WHEN
-    const repository = new SypCompteUtilisateurRepository();
+    const repository = new SpyCompteUtilisateurRepository();
     const sessionRepository = new SpySessionRepository();
     const usecase = new MettreAJourCompteUtilisateurUsecase(repository, sessionRepository);
     const viewModelInput: CompteUtlisateurViewModel = {

@@ -1,7 +1,9 @@
 <template>
   <form @submit.prevent="submitEtapetransport">
     <h3 class="fr-h4">Quels sont vos principaux moyens de transport du quotidien ?</h3>
-    <InputCheckbox :options="options" v-model="viewModel.transports" :default-values="viewModel.transports" />
+    <div class="fr-col-md-5">
+      <InputCheckbox :options="options" v-model="viewModel.transports" :default-values="viewModel.transports" />
+    </div>
     <h3 class="fr-h4">Combien de vols en avion avez-vous fait dernièrement ?</h3>
     <InputNumberHorizontal
       label="Vols en avion sur les 12 derniers mois"

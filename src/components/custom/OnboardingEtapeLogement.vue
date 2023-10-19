@@ -42,9 +42,11 @@
       legende="Quelle en est la superficie ?"
       name="superficieLogement"
       :options="[
-        { label: 'Moins de 50 m²', value: 'petit' },
-        { label: 'Entre 50 et 100 m²', value: 'moyen' },
-        { label: 'Plus de 100 m²', value: 'grand' },
+        { label: 'Moins de 35 m²', value: 'superficie_35' },
+        { label: 'Entre 35 et 70 m²', value: 'superficie_70' },
+        { label: 'Entre 70 et 100 m²', value: 'superficie_100' },
+        { label: 'Entre 70 et 150 m²', value: 'superficie_150' },
+        { label: 'Plus de 150 m²', value: 'superficie_150_et_plus' },
       ]"
       col="fr-col-sm-4"
       v-model="viewModel.superficie"
@@ -59,8 +61,7 @@
         { label: 'Bois / Pellet', value: 'bois' },
         { label: 'Fioul', value: 'fioul' },
         { label: 'Gaz', value: 'gaz' },
-        { label: 'Autre', value: 'autre' },
-        { label: 'Je ne sais pas', value: '?' },
+        { label: 'Autre / Je ne sais pas', value: 'autre' },
       ]"
       col="fr-col-sm-4"
       v-model="viewModel.chauffage"

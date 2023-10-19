@@ -19,6 +19,10 @@ class UtilisateurRepositoryForTest implements UtilisateurRepository {
   getUtilisateurAvecId(idUtilisateur: string): Promise<Utilisateur> {
     throw Error;
   }
+
+  validerCompteUtilisateur(email: string, code: string): Promise<Utilisateur> {
+    throw Error;
+  }
 }
 
 class SpySessionRepository implements SessionRepository {
