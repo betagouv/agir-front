@@ -23,6 +23,10 @@ class UtilisateurRepositoryForTest implements UtilisateurRepository {
   validerCompteUtilisateur(email: string, code: string): Promise<Utilisateur> {
     throw Error;
   }
+
+  renvoyerCodeOTP(email: string): Promise<void> {
+    throw Error;
+  }
 }
 
 class SpySessionRepository implements SessionRepository {

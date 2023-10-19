@@ -5,7 +5,7 @@ class SpyUtilisateurRepository implements UtilisateurRepository {
   get email(): string {
     return this._email;
   }
-  private _email: string;
+  private _email: string = '';
   authentifierUtilisateur(email: string, motDePasse: string): Promise<Utilisateur> {
     throw Error;
   }
