@@ -45,4 +45,22 @@ export class UtilisateurRepositoryAxios implements UtilisateurRepository {
       revenuFiscal: response.data.revenu_fiscal,
     };
   }
+  async validerCompteUtilisateur(email: string, code: string): Promise<Utilisateur> {
+    const axiosInstance = AxiosFactory.getAxios();
+    const response = await axiosInstance.post<LoginApiModel>(`/utilisateurs/valider`, {
+      email,
+      code,
+    });
+
+    AxiosFactory.setBearer(response.data.token);
+
+    return {
+      nom: response.data.utilisateur.nom,
+      id: response.data.utilisateur.id,
+      mail: response.data.utilisateur.email || '',
+      codePostal: response.data.utilisateur.code_postal || '',
+      prenom: response.data.utilisateur.prenom || '',
+      revenuFiscal: response.data.utilisateur.revenu_fiscal || '',
+    };
+  }
 }

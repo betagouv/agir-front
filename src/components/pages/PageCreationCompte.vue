@@ -96,7 +96,7 @@
     creeCompteUseCase
       .execute(compteUtilisateurInput.value, onboardingStore().$state)
       .then(() => {
-        router.push({ name: 'coach' });
+        router.push({ name: 'validation-compte' });
         creationDeCompteEnErreur.value = false;
       }, null)
       .catch(reason => {

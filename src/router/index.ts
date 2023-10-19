@@ -24,6 +24,7 @@ import PagePreOnboarding from '@/components/pages/PagePreOnboarding.vue';
 import { onboardingStore } from '@/store/onboarding';
 import PageModificationMotDePasse from '@/components/pages/PageModificationMotDePasse.vue';
 import PageSessionExpiree from '@/components/pages/PageSessionExpiree.vue';
+import PageValidationCompte from '@/components/pages/PageValidationCompte.vue';
 
 const appName = 'Agir ! -';
 const routes = [
@@ -170,6 +171,15 @@ const routes = [
     },
     meta: {
       title: `${appName} Création du compte`,
+      estPublique: true,
+    },
+  },
+  {
+    path: '/validation-compte',
+    name: 'validation-compte',
+    component: PageValidationCompte,
+    meta: {
+      title: `${appName} Validation du compte`,
       estPublique: true,
     },
   },

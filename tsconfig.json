@@ -27,11 +27,10 @@
     "esModuleInterop": true,
     "types": ["vitest/globals"]
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "tests/components/*.ts"],
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "tests/components/*.ts", "tests/*/*.ts"],
   "exclude": [
     "node_modules",
     "dist",
-    "tests"
   ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
