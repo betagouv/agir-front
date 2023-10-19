@@ -1,7 +1,10 @@
 <template>
   <h2 class="text--center">Qu’est-ce que vous y trouverez</h2>
-  <div class="carousel" role="region" aria-roledescription="carousel" aria-label="Liste des fonctionnalités du site">
-    <div class="fr-grid-row fr-grid-row--gutters carousel__container fr-mb-4w">
+  <div class="carousel" role="region" aria-roledescription="carousel">
+    <ul
+      class="fr-grid-row fr-grid-row--gutters carousel__container fr-mb-4w list-style-none"
+      aria-label="Liste des fonctionnalités du site"
+    >
       <LandingCarouselItem
         titre="Le coach"
         :liste="[
@@ -12,6 +15,9 @@
           '...',
         ]"
         class="fr-col-md-6 fr-col-11"
+        aria-roledescription="slide"
+        :aria-current="0 === activeSlide"
+        :aria-hidden="0 !== activeSlide"
       />
       <LandingCarouselItem
         titre="Le coach"
@@ -23,6 +29,9 @@
           '...',
         ]"
         class="fr-col-md-6 fr-col-11"
+        aria-roledescription="slide"
+        :aria-current="1 === activeSlide"
+        :aria-hidden="1 !== activeSlide"
       />
       <LandingCarouselItem
         titre="Des aides financières"
@@ -34,19 +43,22 @@
           '...',
         ]"
         class="fr-col-md-6 fr-col-11"
+        aria-roledescription="slide"
+        :aria-current="2 === activeSlide"
+        :aria-hidden="2 !== activeSlide"
       />
-    </div>
-    <div class="dots">
-      <button
-        v-for="(_, index) in slides"
-        :key="index"
-        :class="{ active: index === activeSlide }"
-        @click="setActiveSlide(index)"
-        aria-label="Aller à la slide {{ index + 1 }}"
-      >
-        <span></span>
-      </button>
-    </div>
+    </ul>
+    <ul class="dots list-style-none fr-pl-0" aria-label="indicateurs">
+      <li v-for="(_, index) in slides" :key="index" :aria-current="index === activeSlide">
+        <button
+          :class="{ active: index === activeSlide }"
+          @click="setActiveSlide(index)"
+          :title="`Aller à la slide ${index + 1} sur ${slides.length}`"
+        >
+          <span></span>
+        </button>
+      </li>
+    </ul>
   </div>
 </template>
 

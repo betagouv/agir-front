@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <li>
     <div class="border">
       <div class="background--white fr-p-5w">
         <h3>{{ titre }}</h3>
@@ -9,7 +9,7 @@
         <p class="fr-text--lg fr-text--bold fr-mb-0">Plus de 340 actions à réaliser</p>
       </div>
     </div>
-  </div>
+  </li>
 </template>
 
 <script setup lang="ts">
