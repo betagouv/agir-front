@@ -1,52 +1,32 @@
 <template>
   <h2 class="text--center">Qu’est-ce que vous y trouverez</h2>
-  <div class="carousel" role="region" aria-roledescription="carousel" aria-label="Liste des fonctionnalités du site">
-    <div class="fr-grid-row fr-grid-row--gutters carousel__container fr-mb-4w">
+  <div class="carousel" role="region" aria-roledescription="carousel">
+    <ul
+      class="fr-grid-row fr-grid-row--gutters carousel__container fr-mb-4w list-style-none"
+      aria-label="Liste des fonctionnalités du site"
+    >
       <LandingCarouselItem
-        titre="Le coach"
-        :liste="[
-          'Un accompagnement personnalisé',
-          'Adapté en fonction de vos revenus, où vous vivez et vos goûts',
-          'Un suivi au quotidien',
-          'Des articles pour apprendre de nouvelles choses',
-          '...',
-        ]"
-        class="fr-col-md-6 fr-col-11"
-      />
-      <LandingCarouselItem
-        titre="Le coach"
-        :liste="[
-          'Un accompagnement personnalisé',
-          'Adapté en fonction de vos revenus, où vous vivez et vos goûts',
-          'Un suivi au quotidien',
-          'Des articles pour apprendre de nouvelles choses',
-          '...',
-        ]"
-        class="fr-col-md-6 fr-col-11"
-      />
-      <LandingCarouselItem
-        titre="Des aides financières"
-        :liste="[
-          'Un accompagnement personnalisé',
-          'Adapté en fonction de vos revenus, où vous vivez et vos goûts',
-          'Un suivi au quotidien',
-          'Des articles pour apprendre de nouvelles choses',
-          '...',
-        ]"
-        class="fr-col-md-6 fr-col-11"
-      />
-    </div>
-    <div class="dots">
-      <button
-        v-for="(_, index) in slides"
+        v-for="(slide, index) in slides"
         :key="index"
-        :class="{ active: index === activeSlide }"
-        @click="setActiveSlide(index)"
-        aria-label="Aller à la slide {{ index + 1 }}"
-      >
-        <span></span>
-      </button>
-    </div>
+        :titre="slide.titre"
+        :liste="slide.liste"
+        class="fr-col-md-6 fr-col-11"
+        aria-roledescription="slide"
+        :aria-current="index === activeSlide"
+        :aria-hidden="index !== activeSlide"
+      />
+    </ul>
+    <ul class="dots list-style-none fr-pl-0" aria-label="indicateurs">
+      <li v-for="(slide, index) in slides" :key="index" :aria-current="index === activeSlide">
+        <button
+          :class="{ active: index === activeSlide }"
+          @click="setActiveSlide(index)"
+          :title="`Aller à la slide : ${slide.titre} (${index + 1}/${slides.length})`"
+        >
+          <span></span>
+        </button>
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -54,7 +34,38 @@
   import { ref } from 'vue';
   import LandingCarouselItem from '@/components/custom/Landing/LandingCarouselItem.vue';
 
-  const slides = [1, 2, 3];
+  const slides = [
+    {
+      titre: 'Le coach',
+      liste: [
+        'Un accompagnement personnalisé',
+        'Adapté en fonction de vos revenus, où vous vivez et vos goûts',
+        'Un suivi au quotidien',
+        'Des articles pour apprendre de nouvelles choses',
+        '...',
+      ],
+    },
+    {
+      titre: 'Le coach',
+      liste: [
+        'Un accompagnement personnalisé',
+        'Adapté en fonction de vos revenus, où vous vivez et vos goûts',
+        'Un suivi au quotidien',
+        'Des articles pour apprendre de nouvelles choses',
+        '...',
+      ],
+    },
+    {
+      titre: 'Des aides financières',
+      liste: [
+        'Un accompagnement personnalisé',
+        'Adapté en fonction de vos revenus, où vous vivez et vos goûts',
+        'Un suivi au quotidien',
+        'Des articles pour apprendre de nouvelles choses',
+        '...',
+      ],
+    },
+  ];
   const activeSlide = ref(1);
 
   const setActiveSlide = (index: number) => {
@@ -88,7 +99,7 @@
     transform: v-bind(getTransformMobile(activeSlide));
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 48rem) {
     .carousel__container {
       width: 100%;
       transform: v-bind(getTransform(activeSlide));
