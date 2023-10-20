@@ -24,9 +24,9 @@
 <script setup lang="ts">
   import { ref } from 'vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
-  import AidesResultat from '@/components/custom/AidesResultat.vue';
-  import FormulaireAideRetrofit from '@/components/custom/FormulaireAideRetrofit.vue';
-  import AsideAideRetrofit from '@/components/custom/AsideAideRetrofit.vue';
+  import AidesResultat from '@/components/custom/Aides/AidesResultat.vue';
+  import FormulaireAideRetrofit from '@/components/custom/Aides/AidesRetrofitFormulaire.vue';
+  import AsideAideRetrofit from '@/components/custom/Aides/AidesRetrofitAside.vue';
   import { SimulationAideResultatViewModel } from '@/aides/ports/simulationAideResultat';
 
   const titrePage = 'Mes aides - Retrofit';
