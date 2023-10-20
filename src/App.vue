@@ -30,7 +30,7 @@
   <div class="page-container">
     <PageHeader v-if="afficherLeHeaderEtFooter" />
 
-    <main class="background--gris fr-py-6w">
+    <main class="background--gris">
       <router-view />
     </main>
 

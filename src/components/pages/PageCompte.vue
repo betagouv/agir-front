@@ -1,8 +1,17 @@
 <template>
-  <div class="fr-container">
-    <h1 class="fr-h2">Mon Compte</h1>
+  <div class="fr-container fr-pb-6w">
+    <FilDAriane
+      page-courante="Mon Compte"
+      :page-hierarchie="[
+        {
+          label: 'Coach',
+          url: 'coach',
+        },
+      ]"
+    />
     <div class="fr-grid-row fr-grid-row--center fr-grid-row--gutters">
       <div class="fr-col fr-col-lg-8">
+        <h1 class="fr-h2">Mon Compte</h1>
         <PageCompteFormulaire
           v-if="compteUtlisateurViewModel"
           :compte-utlisateur-view-model="compteUtlisateurViewModel"
@@ -15,6 +24,7 @@
     </div>
   </div>
 </template>
+
 <script setup lang="ts">
   import { ChargerCompteUtilisateurUsecase } from '@/compte/chargerCompteUtilisateur.usecase';
   import { CompteUtilisateurRepositoryImpl } from '@/compte/adapters/compteUtilisateur.repository.impl';
@@ -26,6 +36,7 @@
   import { utilisateurStore } from '@/store/utilisateur';
   import PageCompteFormulaire from '@/components/custom/PageCompteFormulaire.vue';
   import PageCompteSuppression from '@/components/pages/PageCompteSuppression.vue';
+  import FilDAriane from '@/components/dsfr/FilDAriane.vue';
 
   const compteUtlisateurViewModel = ref<CompteUtlisateurViewModel | null>(null);
 

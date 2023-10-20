@@ -1,5 +1,5 @@
 <template>
-  <h1 class="text--center">Votre session a expiré veuillez vous reconnecter</h1>
+  <h1 class="text--center fr-mt-4w">Votre session a expiré veuillez vous reconnecter</h1>
   <Authentification :premiere-connexion="false" />
 </template>
 

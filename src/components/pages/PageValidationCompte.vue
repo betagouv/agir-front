@@ -1,21 +1,23 @@
 <template>
-  <div class="fr-col-12 fr-col-lg-5 fr-mx-auto fr-mb-0 background--white fr-p-4w border border-radius--md">
-    <h1>Je valide mon compte</h1>
-    <p>
-      Un code à usage unique vous a été envoyé à l'adresse <strong>{{ email }}</strong>
-    </p>
-    <form @submit.prevent="validerCode">
-      <InputText class="fr-col-md-5" v-model="code" name="code" label="Code à usage unique" />
-      <button class="fr-btn fr-mr-4w" :disabled="code.length == 0">Valider</button>
-      <button class="fr-btn fr-btn--secondary" type="button">Renvoyer le code</button>
-      <Alert
-        v-if="validationDeCompteEnErreur"
-        class="fr-col-12 fr-mt-2w"
-        type="error"
-        titre="Erreur lors de la validation du compte"
-        :message="validationDeCompteMessageErreur"
-      />
-    </form>
+  <div class="fr-container fr-py-6w">
+    <div class="fr-col-12 fr-col-lg-6 fr-mx-auto fr-mb-0 background--white fr-p-4w border border-radius--md">
+      <h1>Je valide mon compte</h1>
+      <p>
+        Un code à usage unique vous a été envoyé à l'adresse <strong>{{ email }}</strong>
+      </p>
+      <form @submit.prevent="validerCode">
+        <InputText class="fr-col-md-5" v-model="code" name="code" label="Code à usage unique" />
+        <button class="fr-btn fr-mr-4w" :disabled="code.length == 0">Valider</button>
+        <button class="fr-btn fr-btn--secondary" type="button">Renvoyer le code</button>
+        <Alert
+          v-if="validationDeCompteEnErreur"
+          class="fr-col-12 fr-mt-2w"
+          type="error"
+          titre="Erreur lors de la validation du compte"
+          :message="validationDeCompteMessageErreur"
+        />
+      </form>
+    </div>
   </div>
 </template>
 <script setup lang="ts">

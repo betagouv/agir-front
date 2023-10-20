@@ -1,5 +1,5 @@
 <template>
-  <div class="fr-container">
+  <div class="fr-container fr-py-6w">
     <div class="background--white border border-radius--md fr-col-lg-6 fr-p-3w fr-mx-auto">
       <h1>👋 Bonjour et bienvenue !</h1>
       <h2 class="fr-h4">Obtenez une 1ère estimation de votre impact en moins d’1 minute !</h2>

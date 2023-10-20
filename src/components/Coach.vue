@@ -1,5 +1,5 @@
 <template>
-  <div class="fr-container">
+  <div class="fr-container fr-py-6w">
     <div v-if="interactionsViewModel">
       <h1 class="fr-h2">Les actions du jour</h1>
       <div class="fr-grid-row fr-grid-row--gutters">
