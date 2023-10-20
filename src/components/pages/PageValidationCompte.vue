@@ -15,13 +15,13 @@
           type="error"
           titre="Erreur lors de la validation du compte"
           :message="validationDeCompteMessageErreur"
-      />
-      <Alert
-        v-if="codeRenvoye"
-        class="fr-col-12 fr-mt-2w"
-        type="info"
-        titre="Code renvoyé"
-        message="Le code a bien été renvoyé"
+        />
+        <Alert
+          v-if="codeRenvoye"
+          class="fr-col-12 fr-mt-2w"
+          type="info"
+          titre="Code renvoyé"
+          message="Le code a bien été renvoyé"
         />
       </form>
     </div>
