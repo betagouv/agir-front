@@ -8,7 +8,6 @@ import PageAidesVelo from '@/components/pages/PageAidesVelo.vue';
 import Coach from '@/components/Coach.vue';
 import PageAides from '@/components/pages/PageAides.vue';
 import Page404 from '@/components/pages/Page404.vue';
-import Communaute from '@/components/Communaute.vue';
 import SuiviDuJour from '@/components/SuiviDuJour.vue';
 import { storeIdNGC } from '@/bilan/middleware/pendingSimulation';
 import FranceConnectCallBack from '@/components/FranceConnectCallBack.vue';
@@ -123,7 +122,6 @@ const routes = [
   { path: '/mes-aides', name: 'mes-aides', component: PageAides },
   { path: '/mes-aides/retrofit', name: 'mes-aides-retrofit', component: PageAidesRetrofit },
   { path: '/mes-aides/velo', name: 'mes-aides-velo', component: PageAidesVelo },
-  { path: '/communaute', name: 'communaute', component: Communaute },
   {
     path: '/login-callback',
     name: 'retour-auth-france-connect',
