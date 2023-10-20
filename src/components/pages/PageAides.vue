@@ -2,7 +2,7 @@
   <div class="fr-container">
     <div v-if="isLoading">Chargement ...</div>
     <div v-else-if="!aides">Une erreur est survenue</div>
-    <MesAides v-else :aidesGroupesParCategorie="aides" />
+    <Aides v-else :aidesGroupesParCategorie="aides" />
   </div>
 </template>
 
@@ -12,7 +12,7 @@
   import { chargementAidesAxiosCmsRepository } from '@/aides/adapters/chargementAidesAxiosCms.repository';
   import ChargementAidesUsecase from '@/aides/chargementAides.usecase';
   import { AidesViewModel } from '@/aides/ports/chargementAides.presenter';
-  import MesAides from '@/components/MesAides.vue';
+  import Aides from '@/components/custom/Aides/Aides.vue';
 
   const aides = ref<AidesViewModel>();
   const isLoading = ref<boolean>(true);

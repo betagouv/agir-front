@@ -20,9 +20,9 @@
 <script setup lang="ts">
   import { ref } from 'vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
-  import AidesResultat from '@/components/custom/AidesResultat.vue';
-  import FormulaireAideVelo from '@/components/custom/FormulaireAideVelo.vue';
-  import AsideAideVelo from '@/components/custom/AsideAideVelo.vue';
+  import AidesResultat from '@/components/custom/Aides/AidesResultat.vue';
+  import FormulaireAideVelo from '@/components/custom/Aides/AidesVeloFormulaire.vue';
+  import AsideAideVelo from '@/components/custom/Aides/AidesVeloAside.vue';
   import { SimulationAideResultatViewModel } from '@/aides/ports/simulationAideResultat';
 
   const titrePage = 'Acheter un vélo';

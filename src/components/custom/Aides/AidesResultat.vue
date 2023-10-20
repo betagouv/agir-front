@@ -16,7 +16,7 @@
             <template v-slot:contenu>
               <ul class="list-style-none fr-m-0 fr-p-0">
                 <li v-for="(aide, index) in aides" :key="index">
-                  <AideDetail
+                  <AidesDetail
                     :titre="aide.libelle"
                     label-du-badge="A définir"
                     :description="aide.description"
@@ -36,7 +36,7 @@
 
 <script setup lang="ts">
   import Accordeon from '@/components/custom/Accordeon.vue';
-  import AideDetail from '@/components/custom/AideDetail.vue';
+  import AidesDetail from '@/components/custom/Aides/AidesDetail.vue';
   import { SimulationAideResultatViewModel } from '@/aides/ports/simulationAideResultat';
   defineProps<{
     titre: string;
