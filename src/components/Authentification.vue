@@ -46,7 +46,7 @@
   import InputPasswordLogin from '@/components/custom/InputPasswordLogin.vue';
   import Alert from '@/components/custom/Alert.vue';
 
-  withDefaults(defineProps<{ premiereConnexion: boolean }>(), {
+  withDefaults(defineProps<{ premiereConnexion?: boolean }>(), {
     premiereConnexion: true,
   });
 

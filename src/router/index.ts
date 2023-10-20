@@ -24,6 +24,8 @@ import { onboardingStore } from '@/store/onboarding';
 import PageModificationMotDePasse from '@/components/pages/PageModificationMotDePasse.vue';
 import PageSessionExpiree from '@/components/pages/PageSessionExpiree.vue';
 import PageValidationCompte from '@/components/pages/PageValidationCompte.vue';
+import PageMotDePasseOublie from '@/components/pages/PageMotDePasseOublie.vue';
+import PageMotDePasseOublieRedefinirMotDePasse from '@/components/pages/PageMotDePasseOublieRedefinirMotDePasse.vue';
 
 const appName = 'Agir ! -';
 const routes = [
@@ -75,7 +77,7 @@ const routes = [
     name: 'session-expiree',
     component: PageSessionExpiree,
     meta: {
-      title: `${appName} Authentification`,
+      title: `${appName} Session expirée`,
       estPublique: true,
     },
   },
@@ -102,7 +104,6 @@ const routes = [
       },
     ],
   },
-
   {
     path: '/coach',
     name: 'coach',
@@ -180,6 +181,29 @@ const routes = [
       title: `${appName} Validation du compte`,
       estPublique: true,
     },
+  },
+  {
+    path: '/mot-de-passe-oublie',
+    children: [
+      {
+        path: '/mot-de-passe-oublie',
+        name: 'mot-de-passe-oublie',
+        component: PageMotDePasseOublie,
+        meta: {
+          title: `${appName} Mot de passe oublié`,
+          estPublique: true,
+        },
+      },
+      {
+        path: 'redefinir-mot-de-passe',
+        name: 'redefinir-mot-de-passe',
+        component: PageMotDePasseOublieRedefinirMotDePasse,
+        meta: {
+          title: `${appName} Redéfinir mot de passe`,
+          estPublique: true,
+        },
+      },
+    ],
   },
   {
     path: '/:catchAll(.*)',

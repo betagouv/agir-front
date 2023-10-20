@@ -27,6 +27,10 @@ class UtilisateurRepositoryForTest implements UtilisateurRepository {
   renvoyerCodeOTP(email: string): Promise<void> {
     throw Error;
   }
+
+  commencerRedefinirMotDePasse(email: string): void {
+    throw Error;
+  }
 }
 
 class SpySessionRepository implements SessionRepository {
