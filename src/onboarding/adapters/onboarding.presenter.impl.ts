@@ -1,12 +1,18 @@
 import { OnboardingResultatPresenter } from '@/onboarding/ports/onboardingResultat.presenter';
 import { OnboardingResultat } from '@/onboarding/evaluerOnboarding.usecase';
 
+interface OnboardingPhraseCoachResultatViewModel {
+  icon: string;
+  phrase: string;
+}
+
 export interface OnboardingResultatViewModel {
   resultat: {
     libelle: string;
     valeur: number;
   }[];
   phrase: string;
+  phrases: OnboardingPhraseCoachResultatViewModel[];
 }
 export class OnboardingResultatPresenterImpl implements OnboardingResultatPresenter {
   constructor(private viewModel: (onboardingResultatViewModel: OnboardingResultatViewModel) => void) {}
@@ -31,6 +37,7 @@ export class OnboardingResultatPresenterImpl implements OnboardingResultatPresen
         },
       ].sort((a, b) => b.valeur - a.valeur),
       phrase: resultat.phrase,
+      phrases: [resultat.phrase_1, resultat.phrase_2, resultat.phrase_3, resultat.phrase_4],
     });
   }
 }

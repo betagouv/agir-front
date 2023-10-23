@@ -2,12 +2,21 @@ import { OnboardingRepository } from '@/onboarding/ports/onboardingRepository';
 import { OnboardingResultat, OnboardingState } from '@/onboarding/evaluerOnboarding.usecase';
 import { AxiosFactory } from '@/axios.factory';
 
+interface OnboardingPhraseCoachResultatApiModel {
+  icon: string;
+  phrase: string;
+}
+
 interface OnboardingResultatApiModel {
   transports: number;
   consommation: number;
   logement: number;
   alimentation: number;
   phrase: string;
+  phrase_1: OnboardingPhraseCoachResultatApiModel;
+  phrase_2: OnboardingPhraseCoachResultatApiModel;
+  phrase_3: OnboardingPhraseCoachResultatApiModel;
+  phrase_4: OnboardingPhraseCoachResultatApiModel;
 }
 export class OnboardingRepositoryAxios implements OnboardingRepository {
   async envoyer(onboarding: OnboardingState): Promise<OnboardingResultat> {
@@ -32,6 +41,10 @@ export class OnboardingRepositoryAxios implements OnboardingRepository {
       logement: response.data.logement,
       alimentation: response.data.alimentation,
       phrase: response.data.phrase,
+      phrase_1: response.data.phrase_1,
+      phrase_2: response.data.phrase_2,
+      phrase_3: response.data.phrase_3,
+      phrase_4: response.data.phrase_4,
     };
   }
 }

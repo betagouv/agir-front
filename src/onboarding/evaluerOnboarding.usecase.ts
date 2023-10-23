@@ -35,12 +35,21 @@ export interface OnboardingState {
   etapeConsommation: EtapeConsommation;
 }
 
+interface OnboardingPhraseCoachResultat {
+  icon: string;
+  phrase: string;
+}
+
 export interface OnboardingResultat {
   transports: number;
   consommation: number;
   logement: number;
   alimentation: number;
   phrase: string;
+  phrase_1: OnboardingPhraseCoachResultat;
+  phrase_2: OnboardingPhraseCoachResultat;
+  phrase_3: OnboardingPhraseCoachResultat;
+  phrase_4: OnboardingPhraseCoachResultat;
 }
 export class EvaluerOnboardingUsecase {
   constructor(private onboardinRepository: OnboardingRepository) {}
