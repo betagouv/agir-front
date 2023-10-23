@@ -24,8 +24,8 @@
       <BilanOnboardingStatFrance />
     </div>
   </section>
-  <section class="fr-container fr-py-6w fr-px-2w">
-    <h2 class="fr-h2">Qu’est-ce que le coach a pour vous ?</h2>
+  <section v-if="onboardingResultatViewModel?.phrases" class="fr-container fr-py-6w fr-px-2w">
+    <BilanOnboardingPhrasesCoach :phrases="onboardingResultatViewModel.phrases" />
   </section>
   <section class="background--white fr-py-6w">
     <div class="fr-container">
@@ -58,6 +58,7 @@
   import BilanOnboardingEstimation from '@/components/custom/BilanOnboarding/BilanOnboardingEstimation.vue';
   import BilanOnboardingStatFrance from '@/components/custom/BilanOnboarding/BilanOnboardingStatFrance.vue';
   import BilanOnboardingTemoignage from '@/components/custom/BilanOnboarding/BilanOnboardingTemoignage.vue';
+  import BilanOnboardingPhrasesCoach from '@/components/custom/BilanOnboarding/BilanOnboardingPhrasesCoach.vue';
 
   const onBoardingStore = onboardingStore();
   let onboardingResultatViewModel = ref<OnboardingResultatViewModel>();
