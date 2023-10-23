@@ -1,5 +1,5 @@
 <template>
-  <h2 class="text--center">Qu’est-ce que vous y trouverez</h2>
+  <h2 class="text--center">De nombreux services pour naviguer dans la transition écologique</h2>
   <div class="carousel" role="region" aria-roledescription="carousel">
     <ul
       class="fr-grid-row fr-grid-row--gutters carousel__container fr-mb-4w list-style-none"
@@ -10,6 +10,8 @@
         :key="index"
         :titre="slide.titre"
         :liste="slide.liste"
+        :accroche="slide.accroche"
+        :imgUrl="slide.imgUrl"
         class="fr-col-md-6 fr-col-11"
         aria-roledescription="slide"
         :aria-current="index === activeSlide"
@@ -36,34 +38,35 @@
 
   const slides = [
     {
-      titre: 'Le coach',
+      titre: 'Un accompagnement personnalisé',
       liste: [
-        'Un accompagnement personnalisé',
-        'Adapté en fonction de vos revenus, où vous vivez et vos goûts',
-        'Un suivi au quotidien',
-        'Des articles pour apprendre de nouvelles choses',
-        '...',
+        'tous les outils pour comprendre vos usages, vos moyens et vos envies et faire des recommandations adaptées',
+        'des solutions pour toutes les situations',
+        'une bibliothèque de contenus pour trouver les réponses à vos questions',
+        'une approche ludique et pas à pas pour aller à votre rythme',
       ],
+      accroche: "Plus de 1000 façons d'interagir avec Agir",
+      imgUrl: '/OB-Coach.png',
     },
     {
-      titre: 'Le coach',
+      titre: 'Toutes les aides à la transition écologique',
       liste: [
-        'Un accompagnement personnalisé',
-        'Adapté en fonction de vos revenus, où vous vivez et vos goûts',
-        'Un suivi au quotidien',
-        'Des articles pour apprendre de nouvelles choses',
-        '...',
+        'De nombreuses aides sont disponibles pour vous accompagner dans la transition écologique : vélo, rénovation, logement, consommation durable...',
+        "Pas facile de s'y retrouver entre les aides nationales, de la ville, de la région etc.",
+        'Agir est là pour vous accompagner : toutes les aides et des simulateurs pour vérifier votre élligibilité et les montants associés.',
       ],
+      accroche: "Jusqu'à 30 aides disponibles dans certaines communes !",
+      imgUrl: '/OB-aide.png',
     },
     {
-      titre: 'Des aides financières',
+      titre: 'Des solutions éprouvées et partagées avec d’autres citoyens',
       liste: [
-        'Un accompagnement personnalisé',
-        'Adapté en fonction de vos revenus, où vous vivez et vos goûts',
-        'Un suivi au quotidien',
-        'Des articles pour apprendre de nouvelles choses',
-        '...',
+        'de nombreuses opportunités d’échanger les bonnes pratiques entre citoyens ayant les mêmes contraintes',
+        'l’actualité de votre zone de vie pour connaître les événements et les nouvelles infrastructures',
+        'des groupes thématiques pour avancer ensemble',
       ],
+      accroche: 'Déjà 180 groupes locaux créés dans Agir',
+      imgUrl: '/OB-Suivi.png',
     },
   ];
   const activeSlide = ref(1);
