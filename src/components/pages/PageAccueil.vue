@@ -5,8 +5,8 @@
     </div>
   </section>
   <section class="fr-py-8w">
-    <div class="fr-container">
-      <LandingCarousel />
+    <div class="fr-container--fluid fr-px-2w fr-px-md-6w">
+      <LandingServices />
     </div>
   </section>
   <section class="background--bleu-dark fr-py-8w">
@@ -25,5 +25,5 @@
   import LandingHeader from '@/components/custom/Landing/LandingHeader.vue';
   import LandingPourQui from '@/components/custom/Landing/LandingPourQui.vue';
   import LandingParQui from '@/components/custom/Landing/LandingParQui.vue';
-  import LandingCarousel from '@/components/custom/Landing/LandingCarousel.vue';
+  import LandingServices from '@/components/custom/Landing/LandingServices.vue';
 </script>

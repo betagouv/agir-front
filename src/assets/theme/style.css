@@ -51,6 +51,10 @@ h3 {
   flex-direction: column;
 }
 
+.flex-grow {
+  flex-grow: 1;
+}
+
 .display-block {
   display: block;
 }
@@ -61,6 +65,10 @@ h3 {
 
 .max-full-width {
   max-width: 100%;
+}
+
+.full-height {
+  height: 100%;
 }
 
 .text--white {
