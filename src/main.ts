@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { createApp } from 'vue';
-import './assets/theme/style.css';
 import App from '@/App.vue';
 import router from '@/router';
 import { createPinia } from 'pinia';
@@ -9,6 +8,7 @@ import VueMatomo from 'vue-matomo';
 import '@gouvfr/dsfr/dist/dsfr.min.css';
 import '@gouvfr/dsfr/dist/utility/utility.min.css';
 import '@gouvfr/dsfr/dist/dsfr.module.min.js';
+import './assets/theme/style.css';
 import { NavigationBus } from '@/navigationBus';
 declare global {
   interface Window {
