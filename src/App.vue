@@ -14,6 +14,8 @@
 
   router.beforeEach((to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
     const { title, estPublique } = to.meta;
+    window.scrollTo(0, 0);
+
     if (title) {
       document.title = title as string;
     }
