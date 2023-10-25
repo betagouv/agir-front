@@ -4,7 +4,7 @@
     <li v-for="(phrase, index) in phrases" :key="index" class="fr-col-md-6 fr-col-12">
       <p class="phrase background--white border-radius--lg fr-p-4w shadow">
         <span class="text--3xl">{{ phrase.icon }}</span>
-        <span class="fr-text--xl fr-mb-0">{{ phrase.phrase }}</span>
+        <span class="fr-text--xl fr-mb-0" v-html="phrase.phrase" />
       </p>
     </li>
   </ul>
