@@ -21,6 +21,10 @@ class SpyUtilisateurRepository implements UtilisateurRepository {
   validerCompteUtilisateur(email: string, code: string): Promise<Utilisateur> {
     throw Error;
   }
+
+  terminerRedefinirMotDePasse(email: string, motDePasse: string, code: string): Promise<void> {
+    throw Error;
+  }
 }
 describe('Fichier de tests concernant la réinitialisation du mot de passe', () => {
   test('Commencer la réinitialisation du mot de passe avec succès', async () => {

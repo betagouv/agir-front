@@ -85,4 +85,13 @@ export class UtilisateurRepositoryAxios implements UtilisateurRepository {
       email,
     });
   }
+
+  async terminerRedefinirMotDePasse(email: string, motDePasse: string, code: string): Promise<void> {
+    const axiosInstance = AxiosFactory.getAxios();
+    await axiosInstance.post(`/utilisateurs/modifier_mot_de_passe`, {
+      email,
+      mot_de_passe: motDePasse,
+      code,
+    });
+  }
 }

@@ -41,6 +41,10 @@ class SpyValiderCompteUtilisateurRepository implements UtilisateurRepository {
   commencerRedefinirMotDePasse(email: string): void {
     throw Error;
   }
+
+  terminerRedefinirMotDePasse(email: string, motDePasse: string, code: string): Promise<void> {
+    throw Error;
+  }
 }
 describe('Fichier de tests concernant la validation du compte utilisateur', () => {
   it('En donnant un mail et un code doit valider le compte', async () => {

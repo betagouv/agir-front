@@ -25,6 +25,13 @@
           >
             Valider
           </button>
+          <Alert
+            v-if="erreur"
+            class="fr-col-12 fr-mt-2w"
+            type="error"
+            titre="Erreur lors de la modification du mot de passe"
+            :message="messageErreur"
+          />
         </div>
       </fieldset>
     </form>
@@ -36,6 +43,10 @@
   import InputPassword from '@/components/custom/InputPassword.vue';
   import InputText from '@/components/dsfr/InputText.vue';
   import { useRoute } from 'vue-router';
+  import { UtilisateurRepositoryAxios } from '@/authentification/adapters/utilisateur.repository.axios';
+  import { TerminerRedefinirMotDePasseUsecase } from '@/authentification/terminerRedefinirMotDePasse.usecase';
+  import router from '@/router';
+  import Alert from '@/components/custom/Alert.vue';
 
   const route = useRoute();
 
@@ -43,8 +54,22 @@
   const code = ref<string>('');
   const motDePasse = ref<string>('');
   const motDePasseValide = ref(false);
+  const erreur = ref<boolean>(false);
+  const messageErreur = ref<string>('');
+
   const onMotDePasseValideChanged = (value: boolean) => {
     motDePasseValide.value = value;
   };
-  const definirMotDePasse = () => {};
+  const definirMotDePasse = () => {
+    const terminerRedefinirMotDePasse = new TerminerRedefinirMotDePasseUsecase(new UtilisateurRepositoryAxios());
+    terminerRedefinirMotDePasse
+      .execute(email.value, motDePasse.value, code.value)
+      .then(() => {
+        router.push({ name: 'authentification' });
+      })
+      .catch(reason => {
+        erreur.value = true;
+        messageErreur.value = reason.data.message;
+      });
+  };
 </script>

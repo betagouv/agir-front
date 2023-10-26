@@ -1,6 +1,6 @@
-import { SessionRepository } from '../../src/authentification/authentifierUtilisateur.usecase';
-import { Utilisateur, UtilisateurRepository } from '../../src/authentification/ports/utilisateur.repository';
-import { AuthentifierUtilisateurFranceConnectUsecase } from '../../src/authentification/authentifierUtilisateurFranceConnect.usecase';
+import { SessionRepository } from '@/authentification/authentifierUtilisateur.usecase';
+import { Utilisateur, UtilisateurRepository } from '@/authentification/ports/utilisateur.repository';
+import { AuthentifierUtilisateurFranceConnectUsecase } from '@/authentification/authentifierUtilisateurFranceConnect.usecase';
 
 class UtilisateurRepositoryForTest implements UtilisateurRepository {
   get idUtilisateur(): string {
@@ -34,6 +34,10 @@ class UtilisateurRepositoryForTest implements UtilisateurRepository {
   }
 
   commencerRedefinirMotDePasse(email: string): void {
+    throw Error;
+  }
+
+  terminerRedefinirMotDePasse(email: string, motDePasse: string, code: string): Promise<void> {
     throw Error;
   }
 }
