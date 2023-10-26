@@ -13,7 +13,7 @@ interface CompteUtilisateurApiModel {
   email?: string;
   code_postal?: string;
   prenom: string;
-  revenu_fiscal: string;
+  revenu_fiscal: number;
 }
 export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurRepository {
   @intercept401()
@@ -26,7 +26,7 @@ export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurReposit
       mail: response.data.email || '',
       codePostal: response.data.code_postal || '',
       prenom: response.data.prenom || '',
-      revenuFiscal: response.data.revenu_fiscal || '',
+      revenuFiscal: response.data.revenu_fiscal.toString() || '',
     };
   }
 
@@ -38,7 +38,7 @@ export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurReposit
       prenom: compteUtilisateur.prenom,
       email: compteUtilisateur.mail,
       code_postal: compteUtilisateur.codePostal,
-      revenu_fiscal: compteUtilisateur.revenuFiscal,
+      revenu_fiscal: Number(compteUtilisateur.revenuFiscal),
     });
   }
 

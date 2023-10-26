@@ -4,7 +4,7 @@ export interface Utilisateur {
   id: string;
   prenom: string;
   mail: string;
-  revenuFiscal: string;
+  revenuFiscal: number;
 }
 
 export interface UtilisateurRepository {

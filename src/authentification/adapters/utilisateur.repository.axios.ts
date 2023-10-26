@@ -8,7 +8,7 @@ interface UtilisateurApiModel {
   id: string;
   code_postal: string;
   email: string;
-  revenu_fiscal: string;
+  revenu_fiscal: number;
 }
 
 interface LoginApiModel {
@@ -31,7 +31,7 @@ export class UtilisateurRepositoryAxios implements UtilisateurRepository {
       codePostal: response.data.utilisateur.code_postal || '',
       prenom: response.data.utilisateur.prenom || '',
       mail: response.data.utilisateur.email,
-      revenuFiscal: response.data.utilisateur.revenu_fiscal || '',
+      revenuFiscal: response.data.utilisateur.revenu_fiscal,
     };
   }
 
@@ -68,7 +68,7 @@ export class UtilisateurRepositoryAxios implements UtilisateurRepository {
       mail: response.data.utilisateur.email || '',
       codePostal: response.data.utilisateur.code_postal || '',
       prenom: response.data.utilisateur.prenom || '',
-      revenuFiscal: response.data.utilisateur.revenu_fiscal || '',
+      revenuFiscal: response.data.utilisateur.revenu_fiscal,
     };
   }
 
