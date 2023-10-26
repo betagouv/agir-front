@@ -71,4 +71,11 @@ export class UtilisateurRepositoryAxios implements UtilisateurRepository {
       revenuFiscal: response.data.utilisateur.revenu_fiscal || '',
     };
   }
+
+  async renvoyerCodeOTP(email: string): Promise<void> {
+    const axiosInstance = AxiosFactory.getAxios();
+    await axiosInstance.post(`/utilisateurs/renvoyer_code`, {
+      email,
+    });
+  }
 }

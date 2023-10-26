@@ -1,4 +1,4 @@
-import { ValiderCompteUtilisateurUsecase } from '@/compte/validerCompteUtilisateur.usecase';
+import { ValiderCompteUtilisateurUsecase } from '@/authentification/validerCompteUtilisateur.usecase';
 import { SessionRepository } from '@/authentification/authentifierUtilisateur.usecase';
 import { Utilisateur, UtilisateurRepository } from '@/authentification/ports/utilisateur.repository';
 
@@ -32,6 +32,10 @@ class SpyValiderCompteUtilisateurRepository implements UtilisateurRepository {
       mail: email,
       revenuFiscal: '',
     });
+  }
+
+  renvoyerCodeOTP(email: string): Promise<void> {
+    throw Error;
   }
 }
 describe('Fichier de tests concernant la validation du compte utilisateur', () => {

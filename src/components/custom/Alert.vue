@@ -8,6 +8,6 @@
   defineProps<{
     titre: string;
     message: string;
-    type: 'success' | 'error';
+    type: 'success' | 'error' | 'info';
   }>();
 </script>
