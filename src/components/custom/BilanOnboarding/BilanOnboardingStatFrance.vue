@@ -1,6 +1,6 @@
 <template>
   <h2 class="fr-h2">Où en est-on ?</h2>
-  <p class="fr-text--lg">La France s’engage à réduire ses émissions de gaz à effet de serre de XX% d’ici 2030</p>
+  <p class="fr-text--lg">La France s’engage à réduire ses émissions de gaz à effet de serre de 55% d’ici 2030</p>
   <div class="fr-grid-row fr-grid-row--center fr-grid-row--middle fr-mb-2w fr-text--lg text--left">
     <img src="/graph-bilan-onboarding.svg" class="fr-mr-3w" alt="" />
     <div class="fr-grid-row flex-column graph-legend">
