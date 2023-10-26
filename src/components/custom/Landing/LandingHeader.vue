@@ -5,6 +5,9 @@
       <p class="fr-text--xl">
         Faîtes un premier en estimant les principaux impacts de vos usages en moins d’une minute !
       </p>
+      <router-link :to="{ name: 'authentification' }" class="fr-btn fr-btn--secondary fr-mr-2w">
+        Se connecter
+      </router-link>
       <router-link :to="{ name: 'pre-onboarding' }" class="fr-btn fr-btn--icon-right fr-icon-arrow-right-line">
         Commencer
       </router-link>
@@ -14,5 +17,3 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts"></script>
