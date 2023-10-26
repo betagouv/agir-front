@@ -13,7 +13,7 @@
         </p>
         <div class="fr-fieldset__element">
           <InputPassword
-            class="fr-col-md-11 fr-mt-2w"
+            class="fr-mt-2w"
             v-model="motDePasse"
             @update:mot-de-passe-valide="onMotDePasseValideChanged"
           />
