@@ -22,6 +22,14 @@ class SpyUtilisateurRepository implements UtilisateurRepository {
   validerCompteUtilisateur(email: string, code: string): Promise<Utilisateur> {
     throw Error;
   }
+
+  commencerRedefinirMotDePasse(email: string): void {
+    throw Error;
+  }
+
+  terminerRedefinirMotDePasse(email: string, motDePasse: string, code: string): Promise<void> {
+    throw Error;
+  }
 }
 describe('Fichier de tests concernant le renvoie du code OTP', () => {
   it("On doit s'assurer que la méthode de renvoie d'OTP est appelée", async () => {
