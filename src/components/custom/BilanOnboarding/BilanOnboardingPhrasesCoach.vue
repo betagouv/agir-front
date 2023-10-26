@@ -2,9 +2,9 @@
   <h2 class="fr-h2">Qu’est-ce que le coach a pour vous ?</h2>
   <ul class="fr-grid-row fr-grid-row--gutters list-style-none">
     <li v-for="(phrase, index) in phrases" :key="index" class="fr-col-md-6 fr-col-12">
-      <p class="phrase background--white border-radius--lg fr-p-4w shadow">
-        <span class="text--3xl">{{ phrase.icon }}</span>
-        <span class="fr-text--xl fr-mb-0" v-html="phrase.phrase" />
+      <p class="fr-grid-row fr-grid-row--middle fr-p-4w background--white border-radius--lg shadow full-height">
+        <span class="text--3xl fr-mr-3w">{{ phrase.icon }}</span>
+        <span class="fr-text--xl fr-mb-0 fr-col" v-html="phrase.phrase" />
       </p>
     </li>
   </ul>
@@ -18,12 +18,3 @@
     }[];
   }>();
 </script>
-
-<style>
-  .phrase {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-    height: 100%;
-  }
-</style>

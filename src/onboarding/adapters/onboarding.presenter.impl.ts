@@ -14,6 +14,7 @@ export interface OnboardingResultatViewModel {
   phrase: string;
   phrases: OnboardingPhraseCoachResultatViewModel[];
 }
+
 export class OnboardingResultatPresenterImpl implements OnboardingResultatPresenter {
   constructor(private viewModel: (onboardingResultatViewModel: OnboardingResultatViewModel) => void) {}
   presente(resultat: OnboardingResultat) {
@@ -37,7 +38,7 @@ export class OnboardingResultatPresenterImpl implements OnboardingResultatPresen
         },
       ].sort((a, b) => b.valeur - a.valeur),
       phrase: resultat.phrase,
-      phrases: [resultat.phrase_1, resultat.phrase_2, resultat.phrase_3, resultat.phrase_4],
+      phrases: resultat.phrases,
     });
   }
 }

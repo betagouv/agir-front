@@ -17,22 +17,24 @@ class OnboardingRespoitoryForTest implements OnboardingRepository {
       logement: 2,
       alimentation: 3,
       phrase: 'Hello world !',
-      phrase_1: {
-        icon: 'icon1',
-        phrase: 'phrase 1',
-      },
-      phrase_2: {
-        icon: 'icon2',
-        phrase: 'phrase 2',
-      },
-      phrase_3: {
-        icon: 'icon3',
-        phrase: 'phrase 3',
-      },
-      phrase_4: {
-        icon: 'icon4',
-        phrase: 'phrase 4',
-      },
+      phrases: [
+        {
+          icon: 'icon1',
+          phrase: 'phrase 1',
+        },
+        {
+          icon: 'icon2',
+          phrase: 'phrase 2',
+        },
+        {
+          icon: 'icon3',
+          phrase: 'phrase 3',
+        },
+        {
+          icon: 'icon4',
+          phrase: 'phrase 4',
+        },
+      ],
     });
   }
 }

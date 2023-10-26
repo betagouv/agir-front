@@ -41,10 +41,7 @@ export class OnboardingRepositoryAxios implements OnboardingRepository {
       logement: response.data.logement,
       alimentation: response.data.alimentation,
       phrase: response.data.phrase,
-      phrase_1: response.data.phrase_1,
-      phrase_2: response.data.phrase_2,
-      phrase_3: response.data.phrase_3,
-      phrase_4: response.data.phrase_4,
+      phrases: [response.data.phrase_1, response.data.phrase_2, response.data.phrase_3, response.data.phrase_4],
     };
   }
 }
