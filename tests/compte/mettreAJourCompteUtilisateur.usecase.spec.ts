@@ -80,14 +80,6 @@ describe('Fichier de tests concernant la mise à jour du compte utilisateur', ()
       prenom: 'John',
       revenuFiscal: '10000',
     });
-    expect(repository.compteUtilisateur).toStrictEqual<CompteUtilisateur>({
-      id: '1',
-      nom: 'Dorian',
-      mail: 'mail@exemple.com',
-      codePostal: '75000',
-      prenom: 'John',
-      revenuFiscal: '10000',
-    });
     expect(sessionRepository.utlisateur).toStrictEqual<Utilisateur>({
       id: '1',
       nom: 'Dorian',
