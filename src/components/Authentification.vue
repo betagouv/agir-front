@@ -11,8 +11,11 @@
           </div>
           <div class="fr-fieldset__element">
             <InputPasswordLogin v-model="password" />
+            <router-link :to="{ name: 'mot-de-passe-oublie' }" class="fr-link fr-mt-1v">
+              Mot de passe oublié ?
+            </router-link>
           </div>
-          <div class="fr-fieldset__element">
+          <div class="fr-fieldset__element fr-mt-2w">
             <button class="fr-btn display-block full-width" type="submit">Se connecter</button>
           </div>
           <Alert
@@ -46,7 +49,7 @@
   import InputPasswordLogin from '@/components/custom/InputPasswordLogin.vue';
   import Alert from '@/components/custom/Alert.vue';
 
-  withDefaults(defineProps<{ premiereConnexion: boolean }>(), {
+  withDefaults(defineProps<{ premiereConnexion?: boolean }>(), {
     premiereConnexion: true,
   });
 

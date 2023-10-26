@@ -1,8 +1,5 @@
-import {
-  AuthentifierUtilisateurUsecase,
-  SessionRepository,
-} from '../../src/authentification/authentifierUtilisateur.usecase';
-import { Utilisateur, UtilisateurRepository } from '../../src/authentification/ports/utilisateur.repository';
+import { AuthentifierUtilisateurUsecase, SessionRepository } from '@/authentification/authentifierUtilisateur.usecase';
+import { Utilisateur, UtilisateurRepository } from '@/authentification/ports/utilisateur.repository';
 
 class UtilisateurRepositoryForTest implements UtilisateurRepository {
   authentifierUtilisateur(nomUtilisateur: string): Promise<Utilisateur> {
@@ -25,6 +22,14 @@ class UtilisateurRepositoryForTest implements UtilisateurRepository {
   }
 
   renvoyerCodeOTP(email: string): Promise<void> {
+    throw Error;
+  }
+
+  commencerRedefinirMotDePasse(email: string): void {
+    throw Error;
+  }
+
+  terminerRedefinirMotDePasse(email: string, motDePasse: string, code: string): Promise<void> {
     throw Error;
   }
 }

@@ -12,4 +12,6 @@ export interface UtilisateurRepository {
   getUtilisateurAvecId(idUtilisateur: string): Promise<Utilisateur>;
   validerCompteUtilisateur(email: string, code: string): Promise<Utilisateur>;
   renvoyerCodeOTP(email: string): Promise<void>;
+  commencerRedefinirMotDePasse(email: string): void;
+  terminerRedefinirMotDePasse(email: string, motDePasse: string, code: string): Promise<void>;
 }
