@@ -6,7 +6,7 @@ export interface CompteUtilisateur {
   mail: string;
   codePostal: string;
   prenom: string;
-  revenuFiscal: string;
+  revenuFiscal: number | null;
 }
 
 export interface CompteTemporaire {

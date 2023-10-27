@@ -23,7 +23,7 @@ export class CompteUtilisateurPresenterImpl implements CompteUtilisateurPresente
       mail: compteUtilisateur.mail,
       codePostal: compteUtilisateur.codePostal,
       prenom: compteUtilisateur.prenom,
-      revenuFiscal: compteUtilisateur.revenuFiscal.toString(),
+      revenuFiscal: compteUtilisateur.revenuFiscal ? compteUtilisateur.revenuFiscal.toString() : '',
     });
   }
 }

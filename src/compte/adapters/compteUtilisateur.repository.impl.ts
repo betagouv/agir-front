@@ -10,10 +10,10 @@ import { Response } from 'redaxios';
 interface CompteUtilisateurApiModel {
   id: string;
   nom: string;
-  email?: string;
-  code_postal?: string;
+  email: string;
+  code_postal: string;
   prenom: string;
-  revenu_fiscal: number;
+  revenu_fiscal: number | null;
 }
 export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurRepository {
   @intercept401()
@@ -26,7 +26,7 @@ export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurReposit
       mail: response.data.email || '',
       codePostal: response.data.code_postal || '',
       prenom: response.data.prenom || '',
-      revenuFiscal: response.data.revenu_fiscal.toString() || '',
+      revenuFiscal: response.data.revenu_fiscal,
     };
   }
 
@@ -38,7 +38,7 @@ export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurReposit
       prenom: compteUtilisateur.prenom,
       email: compteUtilisateur.mail,
       code_postal: compteUtilisateur.codePostal,
-      revenu_fiscal: Number(compteUtilisateur.revenuFiscal),
+      revenu_fiscal: compteUtilisateur.revenuFiscal,
     });
   }
 

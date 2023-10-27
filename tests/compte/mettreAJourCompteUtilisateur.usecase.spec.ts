@@ -22,7 +22,7 @@ class SpyCompteUtilisateurRepository implements CompteUtilisateurRepository {
     mail: '',
     codePostal: '',
     prenom: '',
-    revenuFiscal: '',
+    revenuFiscal: null,
   };
   getCompteUtilisateur(idUtilisateur: string): Promise<CompteUtilisateur> {
     throw Error();
@@ -54,6 +54,7 @@ class SpySessionRepository implements SessionRepository {
     this._utlisateur = utilisateur;
   }
 }
+
 describe('Fichier de tests concernant la mise à jour du compte utilisateur', () => {
   it('La mise à jour doit appeler le repository et mettre à jour la session', async () => {
     // GIVEN

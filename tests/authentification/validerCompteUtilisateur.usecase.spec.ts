@@ -13,7 +13,7 @@ class SpySessionRepository implements SessionRepository {
     codePostal: '',
     prenom: '',
     mail: '',
-    revenuFiscal: undefined,
+    revenuFiscal: null,
   };
 
   sauvegarderUtilisateur(utilisateur: Utilisateur) {
@@ -37,7 +37,7 @@ class SpyValiderCompteUtilisateurRepository implements UtilisateurRepository {
       codePostal: '',
       prenom: '',
       mail: email,
-      revenuFiscal: undefined,
+      revenuFiscal: null,
     });
   }
 
@@ -70,7 +70,7 @@ describe('Fichier de tests concernant la validation du compte utilisateur', () =
       codePostal: '',
       prenom: '',
       mail: 'john@exemple.com',
-      revenuFiscal: undefined,
+      revenuFiscal: null,
     });
   });
 });

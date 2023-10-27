@@ -21,7 +21,7 @@ class UtilisateurRepositoryForTest implements UtilisateurRepository {
       codePostal: '75000',
       prenom: 'John',
       mail: '',
-      revenuFiscal: undefined,
+      revenuFiscal: null,
     });
   }
 
@@ -53,7 +53,7 @@ class SpySessionRepository implements SessionRepository {
     codePostal: '',
     prenom: '',
     mail: '',
-    revenuFiscal: undefined,
+    revenuFiscal: null,
   };
 
   sauvegarderUtilisateur(utilisateur: Utilisateur) {
@@ -79,7 +79,7 @@ describe("Fichier de tests concernant l'authentification France Connect", () => 
       codePostal: '75000',
       prenom: 'John',
       mail: '',
-      revenuFiscal: undefined,
+      revenuFiscal: null,
     });
   });
 });
