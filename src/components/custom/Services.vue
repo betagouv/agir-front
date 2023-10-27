@@ -1,23 +1,24 @@
 <template>
-  <div
-    class="fr-grid-row fr-grid-row--gutters fr-grid-row--middle text--center fr-background-action-high--blue-france text--white fr-p-3w"
+  <nav
+    class="fr-grid-row fr-grid-row--gutters fr-grid-row--middle fr-mt-0 fr-background-action-high--blue-france fr-p-3w"
   >
-    <span class="text--center text--bold fr-mr-4w">Aujourd'hui</span>
+    <span class="text--white text--bold fr-mr-4w">Aujourd'hui</span>
     <div class="fr-col fr-px-1v" v-for="service in services" :key="service.label">
       <a
         role="link"
         :href="service.url"
         :target="service.isUrlExterne ? '_blank' : '_self'"
-        class="service__link fr-text--xs fr-text--bold text--black-light fr-grid-row fr-grid-row--middle background--white border-radius--md fr-mr-2w fr-px-2v fr-p-1v"
+        class="service__link fr-text--xs fr-text--bold text--black-light background--white border-radius--md fr-mr-2w fr-p-1v"
       >
         {{ service.label }}
       </a>
     </div>
-    <router-link class="fr-text--sm fr-m-0 text--center" :to="{ name: 'coach' }">
+    <router-link class="fr-mb-0 fr-text--sm text--white" :to="{ name: 'coach' }">
       + Ajouter d'autres services
     </router-link>
-  </div>
+  </nav>
 </template>
+
 <script setup lang="ts">
   interface ServiceViewModel {
     label: string;
@@ -43,6 +44,7 @@
     },
   ];
 </script>
+
 <style scoped>
   .service__link {
     background-image: none;
