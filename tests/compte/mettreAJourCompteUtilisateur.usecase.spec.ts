@@ -86,7 +86,7 @@ describe('Fichier de tests concernant la mise à jour du compte utilisateur', ()
       mail: 'mail@exemple.com',
       codePostal: '75000',
       prenom: 'John',
-      revenuFiscal: '10000',
+      revenuFiscal: 10000,
     });
   });
 });

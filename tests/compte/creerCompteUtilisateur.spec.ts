@@ -14,7 +14,7 @@ class SessionRepositoryForTest implements SessionRepository {
     codePostal: '',
     prenom: '',
     mail: '',
-    revenuFiscal: '',
+    revenuFiscal: undefined,
   };
   sauvegarderUtilisateur(utilisateur: Utilisateur) {
     this._utilisateur = utilisateur;
@@ -97,7 +97,7 @@ describe('Fichier de tests concernant la creation du compte utilisateur', () => 
       codePostal: '',
       prenom: '',
       mail: 'john@skynet.com',
-      revenuFiscal: '',
+      revenuFiscal: undefined,
     });
   });
 });

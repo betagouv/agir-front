@@ -8,7 +8,7 @@ interface UtilisateurApiModel {
   id: string;
   code_postal: string;
   email: string;
-  revenu_fiscal: number;
+  revenu_fiscal?: number;
 }
 
 interface LoginApiModel {

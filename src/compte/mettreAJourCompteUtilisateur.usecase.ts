@@ -16,7 +16,7 @@ export class MettreAJourCompteUtilisateurUsecase {
       id: compteUtilisateurInput.id,
       prenom: compteUtilisateurInput.prenom,
       mail: compteUtilisateurInput.mail,
-      revenuFiscal: compteUtilisateurInput.revenuFiscal,
+      revenuFiscal: Number(compteUtilisateurInput.revenuFiscal),
     });
   }
 }

@@ -18,7 +18,7 @@ export const utilisateurStore = defineStore('utilisateur', {
       codePostal: '',
       prenom: '',
       mail: '',
-      revenuFiscal: '',
+      revenuFiscal: undefined,
     },
     valeurBilanCarbone: {
       bilan: '',
