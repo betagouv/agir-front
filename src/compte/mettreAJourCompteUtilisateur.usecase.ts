@@ -15,7 +15,7 @@ export class MettreAJourCompteUtilisateurUsecase {
       mail: compteUtilisateurInput.mail,
       codePostal: compteUtilisateurInput.codePostal,
       prenom: compteUtilisateurInput.prenom,
-      revenuFiscal: Number(compteUtilisateurInput.revenuFiscal),
+      revenuFiscal: compteUtilisateurInput.revenuFiscal !== '' ? Number(compteUtilisateurInput.revenuFiscal) : null,
     });
     this.sessionRepository.sauvegarderUtilisateur({
       nom: compteUtilisateurInput.nom,
@@ -23,7 +23,7 @@ export class MettreAJourCompteUtilisateurUsecase {
       id: compteUtilisateurInput.id,
       prenom: compteUtilisateurInput.prenom,
       mail: compteUtilisateurInput.mail,
-      revenuFiscal: Number(compteUtilisateurInput.revenuFiscal),
+      revenuFiscal: compteUtilisateurInput.revenuFiscal !== '' ? Number(compteUtilisateurInput.revenuFiscal) : null,
     });
   }
 }

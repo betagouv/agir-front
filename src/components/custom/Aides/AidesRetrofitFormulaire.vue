@@ -56,7 +56,7 @@
   const codePostal = ref(store.utilisateur.codePostal);
   const revenuFiscal = ref(store.utilisateur.revenuFiscal);
 
-  const demanderRevenu = revenuFiscal.value === undefined;
+  const demanderRevenu = revenuFiscal.value === null;
   const demanderCodePostal = codePostal.value.trim() === '';
 
   const simulerAideRetrofit = () => {
@@ -102,6 +102,6 @@
   };
 
   const isDisabled = computed(() => {
-    return codePostal.value.trim() === '' || demanderRevenu;
+    return codePostal.value.trim() === '' || revenuFiscal.value === null || revenuFiscal.value.toString() === '';
   });
 </script>
