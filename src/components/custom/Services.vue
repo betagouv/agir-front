@@ -2,20 +2,24 @@
   <nav
     class="fr-grid-row fr-grid-row--gutters fr-grid-row--middle fr-mt-0 fr-background-action-high--blue-france fr-p-3w"
   >
-    <span class="text--white text--bold fr-mr-4w">Aujourd'hui</span>
-    <div class="fr-col fr-px-1v" v-for="service in services" :key="service.label">
-      <a
-        role="link"
-        :href="service.url"
-        :target="service.isUrlExterne ? '_blank' : '_self'"
-        class="service__link fr-text--xs fr-text--bold text--black-light background--white border-radius--md fr-mr-2w fr-p-1v"
-      >
-        {{ service.label }}
-      </a>
-    </div>
-    <router-link class="fr-mb-0 fr-text--sm text--white" :to="{ name: 'coach' }">
-      + Ajouter d'autres services
-    </router-link>
+    <span class="text--white text--bold fr-col-12 fr-col-md-1">Aujourd'hui</span>
+    <ul class="fr-grid-row service__list fr-col-10 list-style-none fr-p-0">
+      <li class="fr-px-1v fr-py-0 fr-col" v-for="service in services" :key="service.label">
+        <a
+          role="link"
+          :href="service.url"
+          :target="service.isUrlExterne ? '_blank' : '_self'"
+          class="service__link fr-text--xs fr-text--bold text--black-light background--white border-radius--md fr-p-1v fr-mb-0"
+        >
+          {{ service.label }}
+        </a>
+      </li>
+      <li>
+        <router-link class="fr-mb-0 fr-text--sm text--white" :to="{ name: 'coach' }">
+          + Ajouter d'autres services
+        </router-link>
+      </li>
+    </ul>
   </nav>
 </template>
 
@@ -55,5 +59,9 @@
   }
   .fr-col {
     flex: none;
+  }
+
+  .service__list {
+    gap: 1rem;
   }
 </style>
