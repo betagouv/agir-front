@@ -10,27 +10,45 @@ import { Utilisateur } from '@/authentification/ports/utilisateur.repository';
 
 class SpyCompteUtilisateurRepository implements CompteUtilisateurRepository {
   get compteUtilisateur(): CompteUtilisateur {
-    return this._compteUtilisateur;
+    return {
+      id: this._compteUtilisateur.id,
+      nom: this._compteUtilisateur.nom,
+      mail: this._compteUtilisateur.mail,
+      codePostal: this._compteUtilisateur.codePostal,
+      prenom: this._compteUtilisateur.prenom,
+      revenuFiscal: 10000,
+    };
   }
+
   get aEteAppelee(): boolean {
     return this._aEteAppelee;
   }
+
   private _aEteAppelee: boolean = false;
-  private _compteUtilisateur: CompteUtilisateur = {
+
+  private _compteUtilisateur: CompteUtlisateurViewModel = {
     id: '',
     nom: '',
     mail: '',
     codePostal: '',
     prenom: '',
-    revenuFiscal: null,
+    revenuFiscal: '',
   };
+
   getCompteUtilisateur(idUtilisateur: string): Promise<CompteUtilisateur> {
     throw Error();
   }
 
   mettreAjour(compteUtilisateur: CompteUtilisateur) {
     this._aEteAppelee = true;
-    this._compteUtilisateur = compteUtilisateur;
+    this._compteUtilisateur = {
+      id: compteUtilisateur.id,
+      nom: compteUtilisateur.nom,
+      mail: compteUtilisateur.mail,
+      codePostal: compteUtilisateur.codePostal,
+      prenom: compteUtilisateur.prenom,
+      revenuFiscal: compteUtilisateur.revenuFiscal ? compteUtilisateur.revenuFiscal.toString() : '',
+    };
   }
 
   creerCompteUtilisateur(compteUtilisateurACreer: CompteUtilisateurACreer): Promise<CompteUtilisateur> {
@@ -79,7 +97,7 @@ describe('Fichier de tests concernant la mise à jour du compte utilisateur', ()
       mail: 'mail@exemple.com',
       codePostal: '75000',
       prenom: 'John',
-      revenuFiscal: '10000',
+      revenuFiscal: 10000,
     });
     expect(sessionRepository.utlisateur).toStrictEqual<Utilisateur>({
       id: '1',

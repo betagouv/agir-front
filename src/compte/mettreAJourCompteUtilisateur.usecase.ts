@@ -9,7 +9,14 @@ export class MettreAJourCompteUtilisateurUsecase {
   ) {}
 
   execute(compteUtilisateurInput: CompteUtlisateurViewModel) {
-    this.compteUtilisateuRepository.mettreAjour(compteUtilisateurInput);
+    this.compteUtilisateuRepository.mettreAjour({
+      id: compteUtilisateurInput.id,
+      nom: compteUtilisateurInput.nom,
+      mail: compteUtilisateurInput.mail,
+      codePostal: compteUtilisateurInput.codePostal,
+      prenom: compteUtilisateurInput.prenom,
+      revenuFiscal: Number(compteUtilisateurInput.revenuFiscal),
+    });
     this.sessionRepository.sauvegarderUtilisateur({
       nom: compteUtilisateurInput.nom,
       codePostal: compteUtilisateurInput.codePostal,
