@@ -1,7 +1,8 @@
 import PageCompteFormulaire from '../../src/components/custom/PageCompteFormulaire.vue';
-import { beforeEach, describe, it } from 'vitest';
+import { SpyInstance, beforeEach, describe, it } from 'vitest';
 import { fireEvent, render } from '@testing-library/vue';
 import { CompteUtlisateurViewModel } from '../../src/compte/adapters/compteUtilisateur.presenter.impl';
+import { ChargementCommunesUsecase } from '../../src/communes/chargementCommunesUsecase';
 
 const compteUtlisateurViewModel: CompteUtlisateurViewModel = {
   id: 'idUser',
@@ -23,6 +24,12 @@ describe('Compte - Formulaire', () => {
 
   beforeEach(() => {
     // GIVEN
+    let chargementCommunesUsecaseMock: SpyInstance<[string], Promise<string[]>>;
+
+    chargementCommunesUsecaseMock = vi
+      .spyOn(ChargementCommunesUsecase.prototype, 'execute')
+      .mockImplementation((_codePostal: string) => Promise.resolve([]));
+
     const { getByRole } = render(PageCompteFormulaire, { props });
 
     inputNom = getByRole('textbox', { name: 'Nom' });
