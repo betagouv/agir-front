@@ -25,7 +25,7 @@
 </template>
 
 <script setup lang="ts">
-  import OnboardingJauge from '@/components/custom/OnboardingJauge.vue';
+  import OnboardingJauge from '@/components/custom/Onboarding/OnboardingJauge.vue';
 
   defineProps<{
     resultat?: {

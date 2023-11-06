@@ -9,9 +9,9 @@
                 <button
                   class="fr-btn--menu fr-btn"
                   data-fr-opened="false"
-                  aria-controls="modal-1935"
+                  aria-controls="modal-menu"
                   aria-haspopup="menu"
-                  id="button-1936"
+                  id="button-menu"
                   title="Menu"
                 >
                   Menu
@@ -26,7 +26,7 @@
             <div class="fr-header__tools-links">
               <ul class="fr-btns-group">
                 <li v-if="!estConnecte">
-                  <a class="fr-btn fr-icon-lock-line" id="button-1938" href="/authentification"> Se connecter </a>
+                  <a class="fr-btn fr-icon-lock-line" href="/authentification"> Se connecter </a>
                 </li>
                 <li v-if="estConnecte">
                   <div class="utilisateur">
@@ -44,17 +44,18 @@
         </div>
       </div>
     </div>
-    <div class="fr-header__menu fr-modal" id="modal-1935" aria-labelledby="button-1936">
+    <div class="fr-header__menu fr-modal" id="modal-menu" aria-labelledby="button-menu">
       <div class="fr-container">
-        <button class="fr-btn--close fr-btn" aria-controls="modal-1935" id="button-1940" title="Fermer">Fermer</button>
+        <button class="fr-btn--close fr-btn" aria-controls="modal-menu" id="button-menu" title="Fermer">Fermer</button>
         <div @click="logout" class="fr-header__menu-links"></div>
-      </div>
-    </div>
-    <div v-if="nomUtilisateur" class="fr-header__menu fr-modal" id="modal-1918" aria-labelledby="button-1919">
-      <div class="fr-container">
-        <button class="fr-btn--close fr-btn" aria-controls="modal-1918" id="button-1921" title="Fermer">Fermer</button>
-        <div class="fr-header__menu-links"></div>
-        <nav class="fr-nav" id="navigation" role="navigation" aria-label="Menu principal" data-fr-js-navigation="true">
+        <nav
+          v-if="nomUtilisateur"
+          class="fr-nav"
+          id="navigation"
+          role="navigation"
+          aria-label="Menu principal"
+          data-fr-js-navigation="true"
+        >
           <ul class="fr-nav__list">
             <li class="fr-nav__item" data-fr-js-navigation-item="true">
               <router-link v-if="isCoachActif" class="fr-nav__link" :to="{ name: 'coach' }" aria-current="page">
@@ -85,7 +86,7 @@
   import { defineComponent, onMounted, ref } from 'vue';
   import { RouteLocation } from 'vue-router';
   import { utilisateurStore } from '@/store/utilisateur';
-  import { AxiosFactory } from '@/axios.factory';
+  import Cookies from 'js-cookie';
 
   export default defineComponent({
     name: 'PageHeader',
@@ -116,7 +117,7 @@
 
       function logout() {
         utilisateurStore().reset();
-        AxiosFactory.setBearer('');
+        Cookies.remove('bearer');
         router.replace('/');
       }
 
@@ -136,12 +137,6 @@
 </script>
 
 <style scoped>
-  header {
-    left: 0;
-    top: 0;
-    width: 100%;
-  }
-
   .score {
     display: flex;
     padding: 0.5rem;
@@ -153,7 +148,6 @@
 
   .utilisateur {
     display: flex;
-    justify-content: flex-end;
     align-items: center;
     gap: 1rem;
     flex: 1 0 0;

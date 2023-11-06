@@ -1,5 +1,5 @@
 <template>
-  <div class="fr-container">
+  <div class="fr-container- fr-mb-6w">
     <FilDAriane
       :page-courante="`Article: ${article.titre}`"
       :page-hierarchie="[
@@ -41,11 +41,10 @@
   .article--content ul p {
     margin-bottom: 0;
   }
-  
-  .article--content  img {
+
+  .article--content img {
     max-width: 100%;
     object-fit: contain;
     height: auto;
   }
-
 </style>

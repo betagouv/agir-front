@@ -1,4 +1,4 @@
-import { ValiderCompteUtilisateurUsecase } from '@/compte/validerCompteUtilisateur.usecase';
+import { ValiderCompteUtilisateurUsecase } from '@/authentification/validerCompteUtilisateur.usecase';
 import { SessionRepository } from '@/authentification/authentifierUtilisateur.usecase';
 import { Utilisateur, UtilisateurRepository } from '@/authentification/ports/utilisateur.repository';
 
@@ -7,7 +7,14 @@ class SpySessionRepository implements SessionRepository {
     return this._utilisateur;
   }
 
-  private _utilisateur: Utilisateur = { id: '', nom: '', codePostal: '', prenom: '', mail: '', revenuFiscal: '' };
+  private _utilisateur: Utilisateur = {
+    id: '',
+    nom: '',
+    codePostal: '',
+    prenom: '',
+    mail: '',
+    revenuFiscal: null,
+  };
 
   sauvegarderUtilisateur(utilisateur: Utilisateur) {
     this._utilisateur = utilisateur;
@@ -30,8 +37,20 @@ class SpyValiderCompteUtilisateurRepository implements UtilisateurRepository {
       codePostal: '',
       prenom: '',
       mail: email,
-      revenuFiscal: '',
+      revenuFiscal: null,
     });
+  }
+
+  renvoyerCodeOTP(email: string): Promise<void> {
+    throw Error;
+  }
+
+  commencerRedefinirMotDePasse(email: string): void {
+    throw Error;
+  }
+
+  terminerRedefinirMotDePasse(email: string, motDePasse: string, code: string): Promise<void> {
+    throw Error;
   }
 }
 describe('Fichier de tests concernant la validation du compte utilisateur', () => {
@@ -51,7 +70,7 @@ describe('Fichier de tests concernant la validation du compte utilisateur', () =
       codePostal: '',
       prenom: '',
       mail: 'john@exemple.com',
-      revenuFiscal: '',
+      revenuFiscal: null,
     });
   });
 });

@@ -1,5 +1,5 @@
 <template>
-  <div class="fr-container">
+  <div class="fr-container fr-pb-6w">
     <FilDAriane :page-courante="titrePage" :page-hierarchie="[{ label: 'Aides fincancières', url: 'mes-aides' }]" />
     <AidesResultat
       titre-categorie-aide="Acheter un vélo"
@@ -20,9 +20,9 @@
 <script setup lang="ts">
   import { ref } from 'vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
-  import AidesResultat from '@/components/custom/AidesResultat.vue';
-  import FormulaireAideVelo from '@/components/custom/FormulaireAideVelo.vue';
-  import AsideAideVelo from '@/components/custom/AsideAideVelo.vue';
+  import AidesResultat from '@/components/custom/Aides/AidesResultat.vue';
+  import FormulaireAideVelo from '@/components/custom/Aides/AidesVeloFormulaire.vue';
+  import AsideAideVelo from '@/components/custom/Aides/AidesVeloAside.vue';
   import { SimulationAideResultatViewModel } from '@/aides/ports/simulationAideResultat';
 
   const titrePage = 'Acheter un vélo';

@@ -1,5 +1,6 @@
 import { Utilisateur, UtilisateurRepository } from '@/authentification/ports/utilisateur.repository';
 import { AxiosFactory } from '@/axios.factory';
+import Cookies from 'js-cookie';
 
 interface UtilisateurApiModel {
   prenom: string;
@@ -7,7 +8,7 @@ interface UtilisateurApiModel {
   id: string;
   code_postal: string;
   email: string;
-  revenu_fiscal: string;
+  revenu_fiscal: number | null;
 }
 
 interface LoginApiModel {
@@ -21,7 +22,8 @@ export class UtilisateurRepositoryAxios implements UtilisateurRepository {
       email: mail,
       mot_de_passe: password,
     });
-    AxiosFactory.setBearer(response.data.token);
+
+    this.setBearerInCookie(response.data.token);
 
     return {
       nom: response.data.utilisateur.nom,
@@ -29,8 +31,14 @@ export class UtilisateurRepositoryAxios implements UtilisateurRepository {
       codePostal: response.data.utilisateur.code_postal || '',
       prenom: response.data.utilisateur.prenom || '',
       mail: response.data.utilisateur.email,
-      revenuFiscal: response.data.utilisateur.revenu_fiscal || '',
+      revenuFiscal: response.data.utilisateur.revenu_fiscal,
     };
+  }
+
+  private setBearerInCookie(token: string) {
+    Cookies.set('bearer', token, {
+      secure: true,
+    });
   }
 
   async getUtilisateurAvecId(idUtilisateur: string): Promise<Utilisateur> {
@@ -45,6 +53,7 @@ export class UtilisateurRepositoryAxios implements UtilisateurRepository {
       revenuFiscal: response.data.revenu_fiscal,
     };
   }
+
   async validerCompteUtilisateur(email: string, code: string): Promise<Utilisateur> {
     const axiosInstance = AxiosFactory.getAxios();
     const response = await axiosInstance.post<LoginApiModel>(`/utilisateurs/valider`, {
@@ -52,7 +61,7 @@ export class UtilisateurRepositoryAxios implements UtilisateurRepository {
       code,
     });
 
-    AxiosFactory.setBearer(response.data.token);
+    this.setBearerInCookie(response.data.token);
 
     return {
       nom: response.data.utilisateur.nom,
@@ -60,7 +69,30 @@ export class UtilisateurRepositoryAxios implements UtilisateurRepository {
       mail: response.data.utilisateur.email || '',
       codePostal: response.data.utilisateur.code_postal || '',
       prenom: response.data.utilisateur.prenom || '',
-      revenuFiscal: response.data.utilisateur.revenu_fiscal || '',
+      revenuFiscal: response.data.utilisateur.revenu_fiscal,
     };
+  }
+
+  async renvoyerCodeOTP(email: string): Promise<void> {
+    const axiosInstance = AxiosFactory.getAxios();
+    await axiosInstance.post(`/utilisateurs/renvoyer_code`, {
+      email,
+    });
+  }
+
+  async commencerRedefinirMotDePasse(email: string): Promise<void> {
+    const axiosInstance = AxiosFactory.getAxios();
+    await axiosInstance.post(`/utilisateurs/oubli_mot_de_passe`, {
+      email,
+    });
+  }
+
+  async terminerRedefinirMotDePasse(email: string, motDePasse: string, code: string): Promise<void> {
+    const axiosInstance = AxiosFactory.getAxios();
+    await axiosInstance.post(`/utilisateurs/modifier_mot_de_passe`, {
+      email,
+      mot_de_passe: motDePasse,
+      code,
+    });
   }
 }

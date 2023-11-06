@@ -63,6 +63,7 @@
 <script lang="ts">
   import router from '@/router';
   import { utilisateurStore } from '@/store/utilisateur';
+  import Cookies from 'js-cookie';
 
   export default {
     name: 'Footer',
@@ -74,6 +75,7 @@
     methods: {
       logout() {
         utilisateurStore().reset();
+        Cookies.remove('bearer');
         router.replace('/');
       },
     },

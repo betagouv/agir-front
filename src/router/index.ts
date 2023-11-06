@@ -8,7 +8,6 @@ import PageAidesVelo from '@/components/pages/PageAidesVelo.vue';
 import Coach from '@/components/Coach.vue';
 import PageAides from '@/components/pages/PageAides.vue';
 import Page404 from '@/components/pages/Page404.vue';
-import Communaute from '@/components/Communaute.vue';
 import SuiviDuJour from '@/components/SuiviDuJour.vue';
 import { storeIdNGC } from '@/bilan/middleware/pendingSimulation';
 import FranceConnectCallBack from '@/components/FranceConnectCallBack.vue';
@@ -25,6 +24,8 @@ import { onboardingStore } from '@/store/onboarding';
 import PageModificationMotDePasse from '@/components/pages/PageModificationMotDePasse.vue';
 import PageSessionExpiree from '@/components/pages/PageSessionExpiree.vue';
 import PageValidationCompte from '@/components/pages/PageValidationCompte.vue';
+import PageMotDePasseOublie from '@/components/pages/PageMotDePasseOublie.vue';
+import PageMotDePasseOublieRedefinirMotDePasse from '@/components/pages/PageMotDePasseOublieRedefinirMotDePasse.vue';
 
 const appName = 'Agir ! -';
 const routes = [
@@ -76,7 +77,7 @@ const routes = [
     name: 'session-expiree',
     component: PageSessionExpiree,
     meta: {
-      title: `${appName} Authentification`,
+      title: `${appName} Session expirée`,
       estPublique: true,
     },
   },
@@ -103,7 +104,6 @@ const routes = [
       },
     ],
   },
-
   {
     path: '/coach',
     name: 'coach',
@@ -123,7 +123,6 @@ const routes = [
   { path: '/mes-aides', name: 'mes-aides', component: PageAides },
   { path: '/mes-aides/retrofit', name: 'mes-aides-retrofit', component: PageAidesRetrofit },
   { path: '/mes-aides/velo', name: 'mes-aides-velo', component: PageAidesVelo },
-  { path: '/communaute', name: 'communaute', component: Communaute },
   {
     path: '/login-callback',
     name: 'retour-auth-france-connect',
@@ -182,6 +181,29 @@ const routes = [
       title: `${appName} Validation du compte`,
       estPublique: true,
     },
+  },
+  {
+    path: '/mot-de-passe-oublie',
+    children: [
+      {
+        path: '/mot-de-passe-oublie',
+        name: 'mot-de-passe-oublie',
+        component: PageMotDePasseOublie,
+        meta: {
+          title: `${appName} Mot de passe oublié`,
+          estPublique: true,
+        },
+      },
+      {
+        path: 'redefinir-mot-de-passe',
+        name: 'redefinir-mot-de-passe',
+        component: PageMotDePasseOublieRedefinirMotDePasse,
+        meta: {
+          title: `${appName} Redéfinir mot de passe`,
+          estPublique: true,
+        },
+      },
+    ],
   },
   {
     path: '/:catchAll(.*)',

@@ -1,12 +1,12 @@
 <template>
-  <h1 class="text--center">Votre session a expiré veuillez vous reconnecter</h1>
+  <h1 class="text--center fr-mt-4w">Votre session a expiré veuillez vous reconnecter</h1>
   <Authentification :premiere-connexion="false" />
 </template>
 
 <script setup lang="ts">
   import Authentification from '@/components/Authentification.vue';
   import { utilisateurStore } from '@/store/utilisateur';
-  import { AxiosFactory } from '@/axios.factory';
+  import Cookies from 'js-cookie';
   utilisateurStore().reset();
-  AxiosFactory.setBearer('');
+  Cookies.remove('bearer');
 </script>

@@ -12,7 +12,7 @@
   const personnas: { imageUrl: string; text: string }[] = [
     {
       imageUrl: '/personna-1.jpg',
-      text: 'Je veux agir, mais je ne sais par où commencer ?',
+      text: 'Je veux agir, mais je ne sais par où commencer',
     },
     {
       imageUrl: '/personna-2.jpg',
@@ -20,10 +20,10 @@
     },
     {
       imageUrl: '/personna-3.jpg',
-      text: 'Je veux aller encore plus loin dans ma transition',
+      text: 'Je fais déjà plein de choses mais je veux aller encore plus loin',
     },
     {
-      imageUrl: '/personna-3.jpg',
+      imageUrl: '/personna-4.jpg',
       text: 'Je veux trouver une communauté pour faire la différence ensemble !',
     },
   ];

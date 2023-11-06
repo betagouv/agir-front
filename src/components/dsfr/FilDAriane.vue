@@ -4,7 +4,7 @@
     <div class="fr-collapse" id="breadcrumb">
       <ol class="fr-breadcrumb__list">
         <li v-for="page in pageHierarchie" :key="page.label">
-          <a class="fr-breadcrumb__link" :href="`/${page.url}`">{{ page.label }}</a>
+          <router-link class="fr-breadcrumb__link" :to="`/${page.url}`">{{ page.label }}</router-link>
         </li>
         <li>
           <a class="fr-breadcrumb__link" aria-current="page">{{ pageCourante }}</a>

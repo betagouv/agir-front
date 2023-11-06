@@ -1,139 +1,19 @@
 <template>
-  <div class="fr-container">
-    <div class="fr-grid-row fr-grid-row--gutters">
+  <div class="fr-container fr-py-6w">
+    <div class="fr-grid-row fr-grid-row--gutters fr-grid-row--middle">
       <div class="fr-col-12 fr-col-lg-7">
-        <h1 class="inscription__titre">
-          <img alt="Plateforme Agir :" src="/logo_agir.png" class="fr-mb-3w display-block" />
-          Devenez acteur de la transition écologique !
-        </h1>
-        <ul class="fr-text--lg">
-          <li>Un accompagnement personnalisé adapté en fonction de vos revenus, là où vous habitez et vos goûts</li>
-          <li>Un suivi au quotidien</li>
-          <li>Des articles pour apprendre de nouvelles choses</li>
-        </ul>
-        <p class="fr-h2">+ de 200 000 acteurs déjà inscrits</p>
+        <CreationCompteAccroche />
       </div>
-      <form
-        class="fr-col-12 fr-col-lg-5 fr-mx-auto fr-mb-0 background--white fr-p-4w border border-radius--md"
-        @submit.prevent="performCreerCompteUtilisateur"
-      >
-        <fieldset class="fr-mb-0 fr-fieldset">
-          <legend class="fr-fieldset__legend fr-px-0 fr-mx-0" id="identity-fieldset-legend">
-            <h2>Création de compte sur Agir</h2>
-          </legend>
-          <h3>Créer un compte avec FranceConnect</h3>
-          <div class="fr-col-12 text--center">
-            <BoutonFranceConnect />
-          </div>
-          <div class="separateur fr-mb-2v">ou</div>
-          <div class="fr-grid-row fr-mt-1w fr-grid-row--gutters">
-            <div class="fr-col-12 fr-py-0">
-              <InputMail label="Adresse électronique" name="utilisateur-mail" v-model="compteUtilisateurInput.mail" />
-            </div>
-            <div class="fr-col-12 fr-col-lg-6">
-              <InputText label="Nom" name="utilisateur-nom" v-model="compteUtilisateurInput.nom" />
-            </div>
-            <div class="fr-col-12 fr-col-lg-6">
-              <InputText label="Prénom" name="utilisateur-prenom" v-model="compteUtilisateurInput.prenom" />
-            </div>
-            <div class="fr-col-12 fr-py-0 fr-mb-4w">
-              <InputPassword
-                v-model="compteUtilisateurInput.motDePasse"
-                @update:mot-de-passe-valide="onMotDePasseValideChanged"
-              />
-            </div>
-          </div>
-          <button class="fr-btn fr-grid-row--center fr-col-12 fr-mt-2w" :disabled="!formulaireValide" type="submit">
-            Créer votre compte
-          </button>
-          <Alert
-            v-if="creationDeCompteEnErreur"
-            class="fr-col-12 fr-mt-2w"
-            type="error"
-            titre="Erreur lors de la création du compte"
-            :message="creationDeCompteMessageErreur"
-          />
-        </fieldset>
-      </form>
+      <div class="fr-col-12 fr-col-lg-5">
+        <div class="fr-mb-0 background--white fr-p-3w border border-radius--md">
+          <CreationCompteFormulaire />
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-  import { CreerCompteUtilisateurUsecase, UserInput } from '@/compte/creerCompteUtilisateur.usecase';
-  import { ref } from 'vue';
-  import { SessionRepositoryStore } from '@/authentification/adapters/session.repository.store';
-  import { CompteUtilisateurRepositoryImpl } from '@/compte/adapters/compteUtilisateur.repository.impl';
-  import router from '@/router';
-  import { utilisateurStore } from '@/store/utilisateur';
-  import BoutonFranceConnect from '@/components/BoutonFranceConnect.vue';
-  import InputMail from '@/components/dsfr/InputMail.vue';
-  import InputText from '@/components/dsfr/InputText.vue';
-  import { onboardingStore } from '@/store/onboarding';
-  import InputPassword from '@/components/custom/InputPassword.vue';
-  import Alert from '@/components/custom/Alert.vue';
-
-  let compteUtilisateurInput = ref<UserInput>({
-    nom: '',
-    mail: '',
-    prenom: '',
-    motDePasse: '',
-  });
-  let creationDeCompteEnErreur = ref<boolean>(false);
-  let creationDeCompteMessageErreur = ref<string>('');
-  let formulaireValide = ref<boolean>(false);
-  utilisateurStore().reset();
-
-  function onMotDePasseValideChanged(isMotDePasseValide: boolean) {
-    formulaireValide.value = isMotDePasseValide;
-  }
-
-  const performCreerCompteUtilisateur = () => {
-    const creeCompteUseCase = new CreerCompteUtilisateurUsecase(
-      new CompteUtilisateurRepositoryImpl(),
-      new SessionRepositoryStore()
-    );
-    creeCompteUseCase
-      .execute(compteUtilisateurInput.value, onboardingStore().$state)
-      .then(() => {
-        router.push({ name: 'validation-compte' });
-        creationDeCompteEnErreur.value = false;
-      }, null)
-      .catch(reason => {
-        creationDeCompteMessageErreur.value = reason.data.message;
-        creationDeCompteEnErreur.value = true;
-      });
-  };
+  import CreationCompteFormulaire from '@/components/custom/CreationCompte/CreationCompteFormulaire.vue';
+  import CreationCompteAccroche from '@/components/custom/CreationCompte/CreationCompteAccroche.vue';
 </script>
-
-<style scoped>
-  @media (min-width: 62rem) {
-    .inscription__titre {
-      margin-top: 6.25rem;
-    }
-  }
-
-  .separateur {
-    position: relative;
-    text-align: center;
-    width: 100%;
-
-    &&:before,
-    &&:after {
-      content: '';
-      position: absolute;
-      height: 1px;
-      width: 45%;
-      background-color: #dddddd;
-      top: 50%;
-    }
-
-    &&:before {
-      left: 0;
-    }
-
-    &&:after {
-      right: 0;
-    }
-  }
-</style>

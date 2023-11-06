@@ -1,6 +1,6 @@
 <template>
-  <div class="fr-password" id="password-1138">
-    <label class="fr-label" for="password-1138-input"> Mot de passe </label>
+  <div class="fr-password">
+    <label class="fr-label" for="password"> Mot de passe </label>
     <div class="fr-input-wrap">
       <input
         class="fr-password__input fr-input"
@@ -8,7 +8,7 @@
         aria-required="true"
         name="password"
         autocomplete="new-password"
-        id="password-input"
+        id="password"
         type="password"
         :value="modelValue"
         @input="updateValue"

@@ -32,7 +32,7 @@ export class CreerCompteUtilisateurUsecase {
       codePostal: '',
       prenom: '',
       mail: utilisateurCree.mail,
-      revenuFiscal: '',
+      revenuFiscal: null,
     });
   }
 }

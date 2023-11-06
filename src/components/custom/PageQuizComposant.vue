@@ -1,25 +1,27 @@
 <template>
-  <FilDAriane
-    :page-courante="`Quiz ${quizViewModel.titre}`"
-    :page-hierarchie="[
-      {
-        label: 'Coach',
-        url: 'coach',
-      },
-    ]"
-  />
-  <div class="fr-grid-row fr-grid-row--gutters">
-    <div class="fr-col-12 fr-col-lg-8">
-      <Quiz
-        :nombre-de-points-a-gagner="nombreDePointsAGagner"
-        :quiz-view-model="quizViewModel"
-        :id-interaction="idInteraction"
-        :id-utilisateur="idUtilisateur"
-        :is-mode-previsualisation="isModePrevisualisation"
-      />
-    </div>
-    <div class="fr-col-12 fr-col-lg-4">
-      <slot />
+  <div class="fr-container fr-mb-6w">
+    <FilDAriane
+      :page-courante="`Quiz ${quizViewModel.titre}`"
+      :page-hierarchie="[
+        {
+          label: 'Coach',
+          url: 'coach',
+        },
+      ]"
+    />
+    <div class="fr-grid-row fr-grid-row--gutters">
+      <div class="fr-col-12 fr-col-lg-8">
+        <Quiz
+          :nombre-de-points-a-gagner="nombreDePointsAGagner"
+          :quiz-view-model="quizViewModel"
+          :id-interaction="idInteraction"
+          :id-utilisateur="idUtilisateur"
+          :is-mode-previsualisation="isModePrevisualisation"
+        />
+      </div>
+      <div class="fr-col-12 fr-col-lg-4">
+        <slot />
+      </div>
     </div>
   </div>
 </template>

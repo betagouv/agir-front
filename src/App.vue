@@ -14,6 +14,8 @@
 
   router.beforeEach((to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
     const { title, estPublique } = to.meta;
+    window.scrollTo(0, 0);
+
     if (title) {
       document.title = title as string;
     }
@@ -30,7 +32,7 @@
   <div class="page-container">
     <PageHeader v-if="afficherLeHeaderEtFooter" />
 
-    <main class="background--gris fr-py-6w">
+    <main class="background--gris">
       <router-view />
     </main>
 

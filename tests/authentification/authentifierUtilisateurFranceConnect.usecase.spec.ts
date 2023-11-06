@@ -1,6 +1,6 @@
-import { SessionRepository } from '../../src/authentification/authentifierUtilisateur.usecase';
-import { Utilisateur, UtilisateurRepository } from '../../src/authentification/ports/utilisateur.repository';
-import { AuthentifierUtilisateurFranceConnectUsecase } from '../../src/authentification/authentifierUtilisateurFranceConnect.usecase';
+import { SessionRepository } from '@/authentification/authentifierUtilisateur.usecase';
+import { Utilisateur, UtilisateurRepository } from '@/authentification/ports/utilisateur.repository';
+import { AuthentifierUtilisateurFranceConnectUsecase } from '@/authentification/authentifierUtilisateurFranceConnect.usecase';
 
 class UtilisateurRepositoryForTest implements UtilisateurRepository {
   get idUtilisateur(): string {
@@ -21,11 +21,23 @@ class UtilisateurRepositoryForTest implements UtilisateurRepository {
       codePostal: '75000',
       prenom: 'John',
       mail: '',
-      revenuFiscal: '',
+      revenuFiscal: null,
     });
   }
 
   validerCompteUtilisateur(email: string, code: string): Promise<Utilisateur> {
+    throw Error;
+  }
+
+  renvoyerCodeOTP(email: string): Promise<void> {
+    throw Error;
+  }
+
+  commencerRedefinirMotDePasse(email: string): void {
+    throw Error;
+  }
+
+  terminerRedefinirMotDePasse(email: string, motDePasse: string, code: string): Promise<void> {
     throw Error;
   }
 }
@@ -35,7 +47,14 @@ class SpySessionRepository implements SessionRepository {
     return this._utilisateur;
   }
 
-  private _utilisateur: Utilisateur = { id: '', nom: '', codePostal: '', prenom: '', mail: '', revenuFiscal: '' };
+  private _utilisateur: Utilisateur = {
+    id: '',
+    nom: '',
+    codePostal: '',
+    prenom: '',
+    mail: '',
+    revenuFiscal: null,
+  };
 
   sauvegarderUtilisateur(utilisateur: Utilisateur) {
     this._utilisateur = utilisateur;
@@ -60,7 +79,7 @@ describe("Fichier de tests concernant l'authentification France Connect", () => 
       codePostal: '75000',
       prenom: 'John',
       mail: '',
-      revenuFiscal: '',
+      revenuFiscal: null,
     });
   });
 });
