@@ -18,6 +18,7 @@ class ChargeCompteUtilisateurSansInfosOptionnellesRepository implements CompteUt
       codePostal: '',
       prenom: 'John',
       revenuFiscal: null,
+      commune: '',
     });
   }
 
@@ -46,7 +47,8 @@ class ChargeCompteUtilisateurAvecMailRepository implements CompteUtilisateurRepo
       nom: 'Doe',
       id: '1',
       mail: 'mail@exemple.com',
-      codePostal: '75000',
+      codePostal: '75001',
+      commune: 'PARIS 01',
       prenom: 'John',
       revenuFiscal: null,
     });
@@ -79,6 +81,7 @@ describe('Fichier de tests concernant le chargement du compte utilisateur', () =
         nom: 'Doe',
         mail: '',
         codePostal: '',
+        commune: '',
         prenom: 'John',
         revenuFiscal: '',
       });
@@ -95,7 +98,8 @@ describe('Fichier de tests concernant le chargement du compte utilisateur', () =
         id: '1',
         nom: 'Doe',
         mail: 'mail@exemple.com',
-        codePostal: '75000',
+        codePostal: '75001',
+        commune: 'PARIS 01',
         prenom: 'John',
         revenuFiscal: '',
       });

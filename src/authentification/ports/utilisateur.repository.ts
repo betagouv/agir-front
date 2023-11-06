@@ -1,6 +1,7 @@
 export interface Utilisateur {
   nom: string;
   codePostal: string;
+  commune: string;
   id: string;
   prenom: string;
   mail: string;

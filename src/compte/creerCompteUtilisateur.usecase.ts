@@ -30,6 +30,7 @@ export class CreerCompteUtilisateurUsecase {
       nom: '',
       id: '',
       codePostal: '',
+      commune: '',
       prenom: '',
       mail: utilisateurCree.mail,
       revenuFiscal: null,

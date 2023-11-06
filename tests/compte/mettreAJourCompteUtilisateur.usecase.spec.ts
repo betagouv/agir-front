@@ -16,7 +16,8 @@ class SpyCompteUtilisateurRepository implements CompteUtilisateurRepository {
       mail: this._compteUtilisateur.mail,
       codePostal: this._compteUtilisateur.codePostal,
       prenom: this._compteUtilisateur.prenom,
-      revenuFiscal: 10000,
+      revenuFiscal: Number(this._compteUtilisateur.revenuFiscal),
+      commune: this._compteUtilisateur.commune,
     };
   }
 
@@ -33,6 +34,7 @@ class SpyCompteUtilisateurRepository implements CompteUtilisateurRepository {
     codePostal: '',
     prenom: '',
     revenuFiscal: '',
+    commune: '',
   };
 
   getCompteUtilisateur(idUtilisateur: string): Promise<CompteUtilisateur> {
@@ -46,6 +48,7 @@ class SpyCompteUtilisateurRepository implements CompteUtilisateurRepository {
       nom: compteUtilisateur.nom,
       mail: compteUtilisateur.mail,
       codePostal: compteUtilisateur.codePostal,
+      commune: compteUtilisateur.commune,
       prenom: compteUtilisateur.prenom,
       revenuFiscal: compteUtilisateur.revenuFiscal ? compteUtilisateur.revenuFiscal.toString() : '',
     };
@@ -84,7 +87,8 @@ describe('Fichier de tests concernant la mise à jour du compte utilisateur', ()
       id: '1',
       nom: 'Dorian',
       mail: 'mail@exemple.com',
-      codePostal: '75000',
+      codePostal: '75001',
+      commune: 'PARIS 01',
       prenom: 'John',
       revenuFiscal: '10000',
     };
@@ -95,7 +99,8 @@ describe('Fichier de tests concernant la mise à jour du compte utilisateur', ()
       id: '1',
       nom: 'Dorian',
       mail: 'mail@exemple.com',
-      codePostal: '75000',
+      codePostal: '75001',
+      commune: 'PARIS 01',
       prenom: 'John',
       revenuFiscal: 10000,
     });
@@ -103,7 +108,8 @@ describe('Fichier de tests concernant la mise à jour du compte utilisateur', ()
       id: '1',
       nom: 'Dorian',
       mail: 'mail@exemple.com',
-      codePostal: '75000',
+      codePostal: '75001',
+      commune: 'PARIS 01',
       prenom: 'John',
       revenuFiscal: 10000,
     });

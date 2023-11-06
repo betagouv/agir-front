@@ -12,6 +12,7 @@ interface CompteUtilisateurApiModel {
   nom: string;
   email: string;
   code_postal: string;
+  commune: string;
   prenom: string;
   revenu_fiscal: number | null;
 }
@@ -26,6 +27,7 @@ export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurReposit
       mail: response.data.email || '',
       codePostal: response.data.code_postal || '',
       prenom: response.data.prenom || '',
+      commune: response.data.commune || '',
       revenuFiscal: response.data.revenu_fiscal,
     };
   }
@@ -38,6 +40,7 @@ export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurReposit
       prenom: compteUtilisateur.prenom,
       email: compteUtilisateur.mail,
       code_postal: compteUtilisateur.codePostal,
+      commune: compteUtilisateur.commune,
       revenu_fiscal: compteUtilisateur.revenuFiscal,
     });
   }
