@@ -11,13 +11,11 @@ export class ServicePresenterImpl implements ServicePresenter {
   constructor(private serviceViewModels: (services: ServiceViewModel[]) => void) {}
   present(services: Service[]): void {
     this.serviceViewModels(
-      services.map(service => {
-        return {
-          label: service.label,
-          url: service.url,
-          isUrlExterne: service.isUrlExterne,
-        };
-      })
+      services.map(service => ({
+        label: service.label,
+        url: service.url,
+        isUrlExterne: service.isUrlExterne,
+      }))
     );
   }
 }
