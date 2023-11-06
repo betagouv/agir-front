@@ -5,11 +5,10 @@
   import { NavigationGuardNext, RouteLocationNormalized } from 'vue-router';
   import router from '@/router';
   import { utilisateurStore } from '@/store/utilisateur';
-  const afficherLeHeaderEtFooter = computed({
-    get() {
-      return true;
-    },
-    set() {},
+  import Services from '@/components/custom/Services.vue';
+
+  const utilisateurConnecte = computed(() => {
+    return utilisateurStore().utilisateur.id.length > 0;
   });
 
   router.beforeEach((to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
@@ -30,13 +29,13 @@
 
 <template>
   <div class="page-container">
-    <PageHeader v-if="afficherLeHeaderEtFooter" />
-
+    <PageHeader />
     <main class="background--gris">
+      <Services v-if="utilisateurConnecte" />
       <router-view />
     </main>
 
-    <Footer v-if="afficherLeHeaderEtFooter" />
+    <Footer />
   </div>
 </template>
 
