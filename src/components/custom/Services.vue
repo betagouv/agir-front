@@ -1,10 +1,11 @@
 <template>
   <nav
+    v-if="servicesViewModels && servicesViewModels.length > 0"
     class="fr-grid-row fr-grid-row--gutters fr-grid-row--middle fr-mt-0 fr-background-action-high--blue-france fr-p-3w"
   >
     <span class="text--white text--bold fr-col-12 fr-col-md-1">Aujourd'hui</span>
     <ul class="fr-grid-row service__list fr-col-10 list-style-none fr-p-0">
-      <li class="fr-px-1v fr-py-0 fr-col" v-for="service in services" :key="service.label">
+      <li class="fr-px-1v fr-py-0 fr-col" v-for="service in servicesViewModels" :key="service.label">
         <a
           role="link"
           :href="service.url"
@@ -24,29 +25,19 @@
 </template>
 
 <script setup lang="ts">
-  interface ServiceViewModel {
-    label: string;
-    url: string;
-    isUrlExterne: boolean;
-  }
+  import { ServicePresenterImpl, ServiceViewModel } from '@/services/adapters/service.presenter.impl';
+  import { RecupererServiceActifsUsecase } from '@/services/recupererServiceActifs.usecase';
+  import { ServiceRepositoryAxios } from '@/services/adapters/service.repository.axios';
+  import { ref } from 'vue';
+  import { utilisateurStore } from '@/store/utilisateur';
+  const servicesViewModels = ref<ServiceViewModel[]>();
 
-  const services: ServiceViewModel[] = [
-    {
-      label: '🥦 Recette gratin de brocoli !',
-      url: '/',
-      isUrlExterne: false,
-    },
-    {
-      label: '⚡️ 58 kW consommé',
-      url: '/',
-      isUrlExterne: true,
-    },
-    {
-      label: '🚗 Suivi du jour transport (à faire)',
-      url: '/coach/suivi-du-jour',
-      isUrlExterne: false,
-    },
-  ];
+  const mapValuesServicesViewmodel = (services: ServiceViewModel[]) => {
+    servicesViewModels.value = services;
+  };
+  const utilisateurId: string = utilisateurStore().utilisateur.id;
+  const recupererServicesActifs = new RecupererServiceActifsUsecase(new ServiceRepositoryAxios());
+  recupererServicesActifs.execute(utilisateurId, new ServicePresenterImpl(mapValuesServicesViewmodel));
 </script>
 
 <style scoped>
