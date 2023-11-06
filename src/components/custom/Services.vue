@@ -9,7 +9,7 @@
           role="link"
           :href="service.url"
           :target="service.isUrlExterne ? '_blank' : '_self'"
-          class="service__link fr-text--xs fr-text--bold text--black-light background--white border-radius--md fr-p-1v fr-mb-0"
+          class="service__link fr-text--xs fr-text--bold text--black-light background--white border-radius--md fr-p-2v fr-mb-0"
         >
           {{ service.label }}
         </a>
