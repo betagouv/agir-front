@@ -33,6 +33,7 @@
             <InputCodePostal
               v-model="compteUtlisateurViewModel.codePostal"
               :defaultValue="compteUtlisateurViewModel.codePostal"
+              @update:selectedCommune="compteUtlisateurViewModel.commune = $event"
             />
             <CarteInfo class="fr-ml-md-4w fr-mt-3w">
               <p class="fr-icon-information-line fr-m-0">
@@ -69,6 +70,7 @@
   const props = defineProps<{
     compteUtlisateurViewModel: CompteUtlisateurViewModel;
   }>();
+
   let success = ref(false);
   const compteUtlisateurViewModel = ref<CompteUtlisateurViewModel>(props.compteUtlisateurViewModel);
 

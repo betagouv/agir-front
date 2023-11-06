@@ -6,6 +6,7 @@ export interface CompteUtlisateurViewModel {
   id: string;
   mail: string;
   codePostal: string;
+  commune?: string;
   prenom: string;
   revenuFiscal: string;
 }
