@@ -9,6 +9,11 @@
           <InputText label="Nom" name="nom" v-model="compteUtlisateurViewModel.nom" />
           <InputText label="Prénom" name="prenom" v-model="compteUtlisateurViewModel.prenom" />
           <InputMail label="Adresse électronique" v-model="compteUtlisateurViewModel.mail" name="mail" />
+          <InputText
+            label="Revenu fiscal de référence"
+            name="revenu-fiscal"
+            v-model="compteUtlisateurViewModel.revenuFiscal"
+          />
           <InputCodePostal
             v-model="compteUtlisateurViewModel.codePostal"
             :defaultValue="compteUtlisateurViewModel.codePostal"

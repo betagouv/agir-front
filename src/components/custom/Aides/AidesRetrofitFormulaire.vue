@@ -56,7 +56,7 @@
   const codePostal = ref(store.utilisateur.codePostal);
   const revenuFiscal = ref(store.utilisateur.revenuFiscal);
 
-  const demanderRevenu = revenuFiscal.value.trim() === '';
+  const demanderRevenu = revenuFiscal.value === null;
   const demanderCodePostal = codePostal.value.trim() === '';
 
   const simulerAideRetrofit = () => {
@@ -66,7 +66,11 @@
       emit('submit-simulation', viewModels, codePostal.value, revenuFiscal.value);
     }
 
-    useCase.execute(codePostal.value, revenuFiscal.value, new SimulerAideRetrofitPresenterImpl(mapValues));
+    useCase.execute(
+      codePostal.value,
+      revenuFiscal.value?.toString() || '',
+      new SimulerAideRetrofitPresenterImpl(mapValues)
+    );
   };
 
   if (!demanderRevenu && !demanderCodePostal) {
@@ -86,7 +90,7 @@
         mail: utilisateur.mail,
         codePostal: codePostal.value,
         prenom: utilisateur.prenom,
-        revenuFiscal: revenuFiscal.value,
+        revenuFiscal: revenuFiscal.value?.toString() || '',
       };
       usecase.execute(donneeAMettreAjour);
     }
@@ -98,6 +102,6 @@
   };
 
   const isDisabled = computed(() => {
-    return codePostal.value.trim() === '' || revenuFiscal.value.trim() === '';
+    return codePostal.value.trim() === '' || revenuFiscal.value === null || revenuFiscal.value.toString() === '';
   });
 </script>

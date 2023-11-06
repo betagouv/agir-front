@@ -7,7 +7,14 @@ class SpySessionRepository implements SessionRepository {
     return this._utilisateur;
   }
 
-  private _utilisateur: Utilisateur = { id: '', nom: '', codePostal: '', prenom: '', mail: '', revenuFiscal: '' };
+  private _utilisateur: Utilisateur = {
+    id: '',
+    nom: '',
+    codePostal: '',
+    prenom: '',
+    mail: '',
+    revenuFiscal: null,
+  };
 
   sauvegarderUtilisateur(utilisateur: Utilisateur) {
     this._utilisateur = utilisateur;
@@ -30,7 +37,7 @@ class SpyValiderCompteUtilisateurRepository implements UtilisateurRepository {
       codePostal: '',
       prenom: '',
       mail: email,
-      revenuFiscal: '',
+      revenuFiscal: null,
     });
   }
 
@@ -63,7 +70,7 @@ describe('Fichier de tests concernant la validation du compte utilisateur', () =
       codePostal: '',
       prenom: '',
       mail: 'john@exemple.com',
-      revenuFiscal: '',
+      revenuFiscal: null,
     });
   });
 });

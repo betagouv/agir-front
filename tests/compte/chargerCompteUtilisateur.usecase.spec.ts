@@ -17,7 +17,7 @@ class ChargeCompteUtilisateurSansInfosOptionnellesRepository implements CompteUt
       mail: '',
       codePostal: '',
       prenom: 'John',
-      revenuFiscal: '',
+      revenuFiscal: null,
     });
   }
 
@@ -48,7 +48,7 @@ class ChargeCompteUtilisateurAvecMailRepository implements CompteUtilisateurRepo
       mail: 'mail@exemple.com',
       codePostal: '75000',
       prenom: 'John',
-      revenuFiscal: '',
+      revenuFiscal: null,
     });
   }
 

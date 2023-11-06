@@ -9,7 +9,7 @@ class UtilisateurRepositoryForTest implements UtilisateurRepository {
       codePostal: '77650',
       prenom: 'John',
       mail: '',
-      revenuFiscal: '',
+      revenuFiscal: null,
     });
   }
 
@@ -39,7 +39,14 @@ class SpySessionRepository implements SessionRepository {
     return this._utilisateur;
   }
 
-  private _utilisateur: Utilisateur = { id: '', nom: '', codePostal: '', prenom: '', mail: '', revenuFiscal: '' };
+  private _utilisateur: Utilisateur = {
+    id: '',
+    nom: '',
+    codePostal: '',
+    prenom: '',
+    mail: '',
+    revenuFiscal: null,
+  };
 
   sauvegarderUtilisateur(utilisateur: Utilisateur) {
     this._utilisateur = utilisateur;
@@ -60,7 +67,7 @@ describe("Fichier de tests concernant l'authentification ", () => {
       codePostal: '77650',
       prenom: 'John',
       mail: '',
-      revenuFiscal: '',
+      revenuFiscal: null,
     });
   });
 });

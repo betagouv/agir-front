@@ -14,7 +14,7 @@ class SessionRepositoryForTest implements SessionRepository {
     codePostal: '',
     prenom: '',
     mail: '',
-    revenuFiscal: '',
+    revenuFiscal: null,
   };
   sauvegarderUtilisateur(utilisateur: Utilisateur) {
     this._utilisateur = utilisateur;
@@ -29,7 +29,7 @@ class CompteUtilisateurForTest implements CompteUtilisateurRepository {
       mail: compteUtilisateurACreer.email,
       codePostal: '',
       prenom: compteUtilisateurACreer.prenom,
-      revenuFiscal: '',
+      revenuFiscal: null,
     });
   }
 
@@ -97,7 +97,7 @@ describe('Fichier de tests concernant la creation du compte utilisateur', () => 
       codePostal: '',
       prenom: '',
       mail: 'john@skynet.com',
-      revenuFiscal: '',
+      revenuFiscal: null,
     });
   });
 });
