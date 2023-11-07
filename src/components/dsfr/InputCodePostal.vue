@@ -17,7 +17,9 @@
       @change="updateSelectedCommune"
     >
       <option value="" selected disabled hidden>Selectionnez une option</option>
-      <option :value="commune" v-for="commune in communes" :key="commune">{{ commune }}</option>
+      <option :value="commune" :selected="defaultSelectValue === commune" v-for="commune in communes" :key="commune">
+        {{ commune }}
+      </option>
     </select>
   </div>
 </template>
@@ -29,6 +31,7 @@
 
   const props = defineProps<{
     defaultValue?: string;
+    defaultSelectValue?: string;
   }>();
 
   const communes = ref<string[]>([]);

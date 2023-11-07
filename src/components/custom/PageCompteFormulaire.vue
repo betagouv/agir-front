@@ -33,6 +33,7 @@
             <InputCodePostal
               v-model="compteUtlisateurViewModel.codePostal"
               :defaultValue="compteUtlisateurViewModel.codePostal"
+              :defaultSelectValue="compteUtlisateurViewModel.commune"
               @update:selectedCommune="compteUtlisateurViewModel.commune = $event"
             />
             <CarteInfo class="fr-ml-md-4w fr-mt-3w">
