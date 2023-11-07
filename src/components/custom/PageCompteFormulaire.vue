@@ -1,7 +1,7 @@
 <template>
   <div>
     <form class="fr-mb-0 background--white fr-p-4w border border-radius--md" @submit.prevent="modifierInformation">
-      <fieldset class="fr-mb-0 fr-fieldset" aria-labelledby="identité-fieldset-legend">
+      <fieldset class="fr-mb-5v fr-fieldset" aria-labelledby="identité-fieldset-legend">
         <legend class="fr-fieldset__legend fr-px-0 fr-mx-0" id="identité-fieldset-legend">
           <h2>Identité personnelle</h2>
         </legend>
@@ -9,15 +9,37 @@
           <InputText label="Nom" name="nom" v-model="compteUtlisateurViewModel.nom" />
           <InputText label="Prénom" name="prenom" v-model="compteUtlisateurViewModel.prenom" />
           <InputMail label="Adresse électronique" v-model="compteUtlisateurViewModel.mail" name="mail" />
-          <InputText
-            label="Revenu fiscal de référence"
-            name="revenu-fiscal"
-            v-model="compteUtlisateurViewModel.revenuFiscal"
-          />
-          <InputCodePostal
-            v-model="compteUtlisateurViewModel.codePostal"
-            :defaultValue="compteUtlisateurViewModel.codePostal"
-          />
+        </div>
+      </fieldset>
+      <fieldset class="fr-mb-0 fr-fieldset" aria-labelledby="donnee-fieldset-legend">
+        <legend class="fr-fieldset__legend fr-px-0 fr-mx-0" id="donnee-fieldset-legend">
+          <h2>Données personnelles</h2>
+        </legend>
+        <div class="fr-col-12">
+          <div class="fr-grid-row">
+            <InputText
+              label="Revenu fiscal de référence"
+              name="revenu-fiscal"
+              v-model="compteUtlisateurViewModel.revenuFiscal"
+            />
+            <CarteInfo class="fr-ml-md-4w fr-col-md-8">
+              <p class="fr-icon-information-line fr-m-0">
+                Votre <strong>revenu fiscal de référence</strong> permet d’afficher les aides en fonction de vos
+                ressources.
+              </p>
+            </CarteInfo>
+          </div>
+          <div class="fr-grid-row">
+            <InputCodePostal
+              v-model="compteUtlisateurViewModel.codePostal"
+              :defaultValue="compteUtlisateurViewModel.codePostal"
+            />
+            <CarteInfo class="fr-ml-md-4w fr-mt-3w">
+              <p class="fr-icon-information-line fr-m-0">
+                Votre <strong>code postal</strong> permet de consulter les aides locales.
+              </p>
+            </CarteInfo>
+          </div>
           <button class="fr-btn fr-mt-4w">Mettre à jour</button>
         </div>
       </fieldset>
@@ -42,6 +64,7 @@
   import InputMail from '@/components/dsfr/InputMail.vue';
   import InputCodePostal from '@/components/dsfr/InputCodePostal.vue';
   import Alert from '@/components/custom/Alert.vue';
+  import CarteInfo from '@/components/custom/CarteInfo.vue';
 
   const props = defineProps<{
     compteUtlisateurViewModel: CompteUtlisateurViewModel;

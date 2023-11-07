@@ -1,6 +1,8 @@
 <template>
-  <label class="fr-label" for="codePostal">Code postal</label>
-  <input class="fr-input" name="codePostal" id="codePostal" type="text" @input="updateValue" :value="defaultValue" />
+  <div>
+    <label class="fr-label" for="codePostal">Code postal</label>
+    <input class="fr-input" name="codePostal" id="codePostal" type="text" @input="updateValue" :value="defaultValue" />
+  </div>
 </template>
 
 <script setup lang="ts">
