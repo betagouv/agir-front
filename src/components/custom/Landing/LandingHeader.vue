@@ -3,7 +3,7 @@
     <div class="fr-col-md-7">
       <h1>Comment réduire notre empreinte écologique selon nos moyens, nos lieux de vie et nos envies</h1>
       <p class="fr-text--xl">
-        Faîtes un premier en estimant les principaux impacts de vos usages en moins d’une minute !
+        Faîtes un premier pas en estimant les principaux impacts de vos usages en moins d’une minute !
       </p>
       <router-link :to="{ name: 'authentification' }" class="fr-btn fr-btn--secondary fr-mr-2w">
         Se connecter

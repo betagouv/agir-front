@@ -15,12 +15,6 @@
       <div class="fr-col-md-2 fr-col">
         <img src="/logo_fnv.png" alt="France Nation Verte" />
       </div>
-      <div class="fr-col-md-6 fr-col-12">
-        <p class="fr-mb-0">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua. Ut enim ad minim veniam
-        </p>
-      </div>
     </div>
   </div>
 </template>
