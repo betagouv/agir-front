@@ -15,35 +15,37 @@
         <legend class="fr-fieldset__legend fr-px-0 fr-mx-0" id="donnee-fieldset-legend">
           <h2>Données personnelles</h2>
         </legend>
-        <div class="fr-col-12">
-          <div class="fr-grid-row">
+        <div class="fr-grid-row fr-grid-row--gutters">
+          <div class="fr-col-4">
             <InputText
               label="Revenu fiscal de référence"
               name="revenu-fiscal"
               v-model="compteUtlisateurViewModel.revenuFiscal"
             />
-            <CarteInfo class="fr-ml-md-4w fr-col-md-8">
+          </div>
+          <div class="fr-col-8">
+            <CarteInfo>
               <p class="fr-icon-information-line fr-m-0">
                 Votre <strong>revenu fiscal de référence</strong> permet d’afficher les aides en fonction de vos
                 ressources.
               </p>
             </CarteInfo>
           </div>
-          <div class="fr-grid-row">
-            <InputCodePostal
-              v-model="compteUtlisateurViewModel.codePostal"
-              :defaultValue="compteUtlisateurViewModel.codePostal"
-              :defaultSelectValue="compteUtlisateurViewModel.commune"
-              @update:selectedCommune="compteUtlisateurViewModel.commune = $event"
-            />
-            <CarteInfo class="fr-ml-md-4w fr-mt-3w">
-              <p class="fr-icon-information-line fr-m-0">
-                Votre <strong>code postal</strong> permet de consulter les aides locales.
-              </p>
-            </CarteInfo>
-          </div>
-          <button class="fr-btn fr-mt-4w">Mettre à jour</button>
         </div>
+        <div class="fr-col-12">
+          <InputCodePostal
+            v-model="compteUtlisateurViewModel.codePostal"
+            :defaultValue="compteUtlisateurViewModel.codePostal"
+            :defaultSelectValue="compteUtlisateurViewModel.commune"
+            @update:selectedCommune="compteUtlisateurViewModel.commune = $event"
+          />
+          <CarteInfo class="fr-mt-3w">
+            <p class="fr-icon-information-line fr-m-0">
+              Votre <strong>code postal</strong> permet de consulter les aides locales.
+            </p>
+          </CarteInfo>
+        </div>
+        <button class="fr-btn fr-mt-4w">Mettre à jour</button>
       </fieldset>
     </form>
     <Alert
