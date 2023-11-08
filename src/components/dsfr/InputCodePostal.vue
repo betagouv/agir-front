@@ -1,7 +1,7 @@
 <template>
   <div class="fr-grid fr-grid-row fr-grid-row--gutters">
     <div class="fr-col-md-3 fr-col-12">
-      <div class="fr-input-group">
+      <div :class="`fr-input-group ${!codePostalValide && 'fr-input-group--error'}`">
         <label class="fr-label" for="codePostal"
           >Code postal
           <span class="fr-hint-text">Format 5 chiffres</span>
@@ -10,10 +10,15 @@
           class="fr-input"
           name="codePostal"
           id="codePostal"
+          required
+          aria-describedby="text-input-error-desc-error"
           type="text"
           @input="updateValue"
           :value="defaultValue"
         />
+        <p v-if="!codePostalValide" id="text-input-error-desc-error" class="fr-error-text">
+          Ce code postal n'est pas valide
+        </p>
       </div>
     </div>
     <div class="fr-col-md-9 fr-col-12">
@@ -55,6 +60,7 @@
   }>();
 
   const communes = ref<string[]>([]);
+  const codePostalValide = ref<boolean>(true);
   const usecase = new ChargementCommunesUsecase(new CommuneRepositoryAxios());
 
   onMounted(async () => {
@@ -73,8 +79,11 @@
 
     if (inputElement.value.length === 5) {
       communes.value = await usecase.execute(inputElement.value);
+      codePostalValide.value = communes.value.length !== 0;
+      emit('update:selectedCommune', communes.value[0]);
     } else {
       communes.value = [];
+      emit('update:selectedCommune', '');
     }
 
     emit('update:modelValue', inputElement.value);

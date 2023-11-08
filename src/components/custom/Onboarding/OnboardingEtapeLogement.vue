@@ -5,6 +5,7 @@
       <InputCodePostal
         v-model="viewModel.codePostal"
         :default-value="viewModel.codePostal"
+        :default-select-value="viewModel.commune"
         @update:selectedCommune="viewModel.commune = $event"
       />
     </div>

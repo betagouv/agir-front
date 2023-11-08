@@ -35,7 +35,7 @@ describe('Compte - Formulaire', () => {
 
     inputNom = getByRole('textbox', { name: 'Nom' });
     inputEmail = getByRole('textbox', { name: /Adresse électronique/i });
-    inputCodePostal = getByRole('textbox', { name: 'Code postal' });
+    inputCodePostal = getByRole('textbox', { name: /Code postal/i });
     submitBouton = getByRole('button', { name: 'Mettre à jour' });
     titre = getByRole('heading', { level: 2, name: 'Identité personnelle' });
   });

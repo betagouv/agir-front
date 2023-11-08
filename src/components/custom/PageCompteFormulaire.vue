@@ -53,6 +53,7 @@
       titre="Succès"
       message="Compte correctement mis à jour."
     />
+    <Alert v-if="error.isActif" class="fr-col-12 fr-mt-2w" type="error" titre="Erreur" :message="error.message" />
   </div>
 </template>
 
@@ -73,14 +74,30 @@
   }>();
 
   let success = ref(false);
+  let error = ref<{
+    isActif: boolean;
+    message: string;
+  }>({
+    isActif: false,
+    message: '',
+  });
   const compteUtlisateurViewModel = ref<CompteUtlisateurViewModel>(props.compteUtlisateurViewModel);
 
   async function modifierInformation() {
+    if (compteUtlisateurViewModel.value.commune === '') {
+      success.value = false;
+      error.value.isActif = true;
+      error.value.message = 'Veuillez renseigner un code postal et une commune valide';
+      return;
+    }
+
     const usecase = new MettreAJourCompteUtilisateurUsecase(
       new CompteUtilisateurRepositoryImpl(),
       new SessionRepositoryStore()
     );
+
     await usecase.execute(compteUtlisateurViewModel.value);
+    error.value.isActif = false;
     success.value = true;
   }
 </script>
