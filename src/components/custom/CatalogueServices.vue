@@ -2,7 +2,7 @@
   <FilDAriane page-courante="Services" :page-hierarchie="[{ label: 'Coach', url: 'coach' }]" />
   <div class="fr-grid-row fr-grid-row--gutters">
     <div class="fr-col-12 fr-col-lg-3">
-      <h2 class="fr-h4">Filtres</h2>
+      <span class="fr-h4">Filtres</span>
       <p class="text--bold">Catégories affichées</p>
     </div>
     <div class="fr-col-12 fr-col-lg-9">
@@ -26,15 +26,15 @@
               <span
                 v-for="thematique in serviceCatalogueViewModel.thematiques"
                 :key="thematique"
-                class="fr-mr-1w fr-text--bold"
+                class="fr-mr-1w fr-text--bold text--xs"
               >
                 {{ thematique }}
               </span>
             </div>
-            <p class="fr-m-0 fr-text--bold fr-text--xl">{{ serviceCatalogueViewModel.titre }}</p>
-            <p class="fr-m-0 fr-text--xs fr-text-mention--grey fr-icon-group-line fr-icon--xs">
+            <h2 class="fr-m-0 fr-text--bold fr-text--xl">{{ serviceCatalogueViewModel.titre }}</h2>
+            <span class="fr-m-0 fr-text--xs fr-text-mention--grey fr-icon-group-line fr-icon--xs">
               {{ serviceCatalogueViewModel.nombreInstallation }}
-            </p>
+            </span>
           </div>
         </div>
 
