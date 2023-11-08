@@ -1,6 +1,7 @@
 import { RecupererServiceActifsUsecase } from '@/services/recupererServiceActifs.usecase';
 import { ServiceRepository } from '@/services/ports/service.repository';
 import { ServicePresenterImpl, ServiceViewModel } from '@/services/adapters/service.presenter.impl';
+import { ServiceCatalogue } from '@/services/recupererCatalogueServices.usecase';
 
 class ServiceRepositoryMock implements ServiceRepository {
   async recupererServicesActifs(utilisateurId: string) {
@@ -21,6 +22,10 @@ class ServiceRepositoryMock implements ServiceRepository {
         isUrlExterne: false,
       },
     ]);
+  }
+
+  recupererCatalogueServices(utilisateurId: string): Promise<ServiceCatalogue[]> {
+    throw Error;
   }
 }
 

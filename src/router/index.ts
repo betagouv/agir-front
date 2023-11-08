@@ -26,6 +26,7 @@ import PageSessionExpiree from '@/components/pages/PageSessionExpiree.vue';
 import PageValidationCompte from '@/components/pages/PageValidationCompte.vue';
 import PageMotDePasseOublie from '@/components/pages/PageMotDePasseOublie.vue';
 import PageMotDePasseOublieRedefinirMotDePasse from '@/components/pages/PageMotDePasseOublieRedefinirMotDePasse.vue';
+import PageCatalogueServices from '@/components/pages/PageCatalogueServices.vue';
 
 const appName = 'Agir ! -';
 const routes = [
@@ -83,46 +84,76 @@ const routes = [
   },
   { path: '/mon-tableau-de-bord', name: 'dashboard', component: Dashboard },
   {
-    path: '/coach/quiz/',
+    path: '/coach',
     children: [
       {
-        path: ':id',
-        name: 'quiz',
-        component: PageQuiz,
+        path: '/coach',
+        name: 'coach',
+        component: Coach,
         meta: {
-          title: `${appName} Quiz`,
+          title: `${appName} Coach`,
         },
       },
       {
-        path: 'previsualisation/:id',
-        name: 'quiz-previsualisation',
-        component: PagePrevisualisationQuiz,
+        path: 'services',
+        name: 'services',
+        component: PageCatalogueServices,
         meta: {
-          title: `${appName} Quiz`,
-          estPublique: true,
+          title: `${appName} Catalogue de services`,
         },
+      },
+      {
+        path: 'suivi-du-jour',
+        name: 'suivi-du-jour',
+        component: SuiviDuJour,
+        meta: {
+          title: `${appName} Suivi du jour`,
+        },
+      },
+      {
+        path: 'quiz',
+        children: [
+          {
+            path: ':id',
+            name: 'quiz',
+            component: PageQuiz,
+            meta: {
+              title: `${appName} Quiz`,
+            },
+          },
+          {
+            path: 'previsualisation/:id',
+            name: 'quiz-previsualisation',
+            component: PagePrevisualisationQuiz,
+            meta: {
+              title: `${appName} Quiz`,
+              estPublique: true,
+            },
+          },
+        ],
       },
     ],
   },
   {
-    path: '/coach',
-    name: 'coach',
-    component: Coach,
-    meta: {
-      title: `${appName} Coach`,
-    },
+    path: '/mes-aides',
+    children: [
+      {
+        path: '/mes-aides',
+        name: 'mes-aides',
+        component: PageAides,
+      },
+      {
+        path: '/mes-aides/retrofit',
+        name: 'mes-aides-retrofit',
+        component: PageAidesRetrofit,
+      },
+      {
+        path: '/mes-aides/velo',
+        name: 'mes-aides-velo',
+        component: PageAidesVelo,
+      },
+    ],
   },
-  {
-    path: '/coach/suivi-du-jour',
-    name: 'suivi-du-jour',
-    component: SuiviDuJour,
-    meta: {
-      title: `${appName} Suivi du jour`,
-    },
-  },
-  { path: '/mes-aides', name: 'mes-aides', component: PageAides },
-  { path: '/mes-aides/retrofit', name: 'mes-aides-retrofit', component: PageAidesRetrofit },
-  { path: '/mes-aides/velo', name: 'mes-aides-velo', component: PageAidesVelo },
   {
     path: '/login-callback',
     name: 'retour-auth-france-connect',
