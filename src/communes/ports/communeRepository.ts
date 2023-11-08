@@ -1,3 +1,5 @@
+export type Communes = string[];
+
 export interface CommuneRepository {
-  getCommunes(codePostal: string): Promise<string[]>;
+  getCommunes(codePostal: string): Promise<Communes>;
 }

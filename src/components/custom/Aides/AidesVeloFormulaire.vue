@@ -59,7 +59,7 @@
         id: utilisateur.id,
         mail: utilisateur.mail,
         commune: utilisateur.commune,
-        codePostal: store.utilisateur.codePostal,
+        codePostal: utilisateur.codePostal,
         prenom: utilisateur.prenom,
         revenuFiscal: revenuFiscal.value ? revenuFiscal.value.toString() : '',
       };
