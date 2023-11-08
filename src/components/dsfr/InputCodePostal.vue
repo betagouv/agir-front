@@ -1,26 +1,46 @@
 <template>
-  <div class="fr-input-group">
-    <label class="fr-label" for="codePostal">Code postal</label>
-    <input class="fr-input" name="codePostal" id="codePostal" type="text" @input="updateValue" :value="defaultValue" />
-  </div>
-
-  <div class="fr-select-group">
-    <label class="fr-label" for="selectCommune">
-      Sélection d'une commune
-      <span class="fr-hint-text">Veuillez remplir un code postal valide</span>
-    </label>
-    <select
-      class="fr-select"
-      id="selectCommune"
-      name="selectCommune"
-      :disabled="communes.length === 0"
-      @change="updateSelectedCommune"
-    >
-      <option value="" selected disabled hidden>Selectionnez une option</option>
-      <option :value="commune" :selected="defaultSelectValue === commune" v-for="commune in communes" :key="commune">
-        {{ commune }}
-      </option>
-    </select>
+  <div class="fr-grid fr-grid-row fr-grid-row--gutters">
+    <div class="fr-col-md-3 fr-col-12">
+      <div class="fr-input-group">
+        <label class="fr-label" for="codePostal"
+          >Code postal
+          <span class="fr-hint-text">Format 5 chiffres</span>
+        </label>
+        <input
+          class="fr-input"
+          name="codePostal"
+          id="codePostal"
+          type="text"
+          @input="updateValue"
+          :value="defaultValue"
+        />
+      </div>
+    </div>
+    <div class="fr-col-md-9 fr-col-12">
+      <div class="fr-select-group">
+        <label class="fr-label" for="selectCommune">
+          Sélection d'une commune
+          <span class="fr-hint-text">Veuillez remplir un code postal valide</span>
+        </label>
+        <select
+          class="fr-select"
+          id="selectCommune"
+          name="selectCommune"
+          :disabled="communes.length === 0"
+          @change="updateSelectedCommune"
+        >
+          <option value="" selected disabled hidden>Selectionnez une option</option>
+          <option
+            :value="commune"
+            :selected="defaultSelectValue === commune"
+            v-for="commune in communes"
+            :key="commune"
+          >
+            {{ commune }}
+          </option>
+        </select>
+      </div>
+    </div>
   </div>
 </template>
 
