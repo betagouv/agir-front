@@ -1,9 +1,10 @@
 <template>
-  <div role="alert" :class="`fr-alert--${type}`" class="fr-alert background--white">
+  <div role="alert" :class="`fr-alert fr-alert--${type} background--white`">
     <h3 class="fr-alert__title">{{ titre }}</h3>
     <p>{{ message }}</p>
   </div>
 </template>
+
 <script setup lang="ts">
   defineProps<{
     titre: string;
