@@ -38,7 +38,7 @@
                 </span>
               </template>
               <template v-slot:contenu>
-                <div v-html="aide.contenu" />
+                <div class="cms__content" v-html="aide.contenu" />
                 <router-link
                   v-if="aide.isSimulateur"
                   :to="{ path: aide.url }"
