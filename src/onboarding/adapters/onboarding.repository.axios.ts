@@ -25,6 +25,7 @@ export class OnboardingRepositoryAxios implements OnboardingRepository {
       transports: onboarding.etapeTransport.transports,
       avion: onboarding.etapeTransport.avion,
       code_postal: onboarding.etapeLogement.code_postal,
+      commune: onboarding.etapeLogement.commune,
       adultes: onboarding.etapeLogement.adultes,
       enfants: onboarding.etapeLogement.enfants,
       residence: onboarding.etapeLogement.residence,

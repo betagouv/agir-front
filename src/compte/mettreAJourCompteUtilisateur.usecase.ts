@@ -14,12 +14,14 @@ export class MettreAJourCompteUtilisateurUsecase {
       nom: compteUtilisateurInput.nom,
       mail: compteUtilisateurInput.mail,
       codePostal: compteUtilisateurInput.codePostal,
+      commune: compteUtilisateurInput.commune,
       prenom: compteUtilisateurInput.prenom,
       revenuFiscal: compteUtilisateurInput.revenuFiscal !== '' ? Number(compteUtilisateurInput.revenuFiscal) : null,
     });
     this.sessionRepository.sauvegarderUtilisateur({
       nom: compteUtilisateurInput.nom,
       codePostal: compteUtilisateurInput.codePostal,
+      commune: compteUtilisateurInput.commune,
       id: compteUtilisateurInput.id,
       prenom: compteUtilisateurInput.prenom,
       mail: compteUtilisateurInput.mail,

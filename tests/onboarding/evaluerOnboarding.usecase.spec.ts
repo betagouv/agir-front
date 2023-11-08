@@ -41,7 +41,7 @@ class OnboardingRespoitoryForTest implements OnboardingRepository {
 describe("Fichier de tests concernant l'evaluation de l'onboarding", () => {
   it("En donnant des données d'onboarding doit presenter un resultat trié par valeur décroissante", async () => {
     // GIVEN
-    const onboardingState = {
+    const onboardingState: OnboardingState = {
       etapeTransport: {
         transports: [],
         avion: 0,
@@ -49,6 +49,7 @@ describe("Fichier de tests concernant l'evaluation de l'onboarding", () => {
       },
       etapeLogement: {
         code_postal: '',
+        commune: '',
         adultes: 0,
         enfants: 0,
         residence: '',
@@ -95,7 +96,7 @@ describe("Fichier de tests concernant l'evaluation de l'onboarding", () => {
 
   it("En donnant des données d'onboarding doit presenter les phrases personnalisées par le coach", async () => {
     // GIVEN
-    const onboardingState = {
+    const onboardingState: OnboardingState = {
       etapeTransport: {
         transports: [],
         avion: 0,
@@ -103,6 +104,7 @@ describe("Fichier de tests concernant l'evaluation de l'onboarding", () => {
       },
       etapeLogement: {
         code_postal: '',
+        commune: '',
         adultes: 0,
         enfants: 0,
         residence: '',

@@ -13,6 +13,7 @@ export interface EtapeAlimentation {
 
 export interface EtapeLogement {
   code_postal: string;
+  commune: string;
   adultes: number;
   enfants: number;
   residence: string;

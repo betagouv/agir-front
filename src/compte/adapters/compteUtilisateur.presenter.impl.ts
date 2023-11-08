@@ -6,6 +6,7 @@ export interface CompteUtlisateurViewModel {
   id: string;
   mail: string;
   codePostal: string;
+  commune: string;
   prenom: string;
   revenuFiscal: string;
 }
@@ -22,6 +23,7 @@ export class CompteUtilisateurPresenterImpl implements CompteUtilisateurPresente
       id: compteUtilisateur.id,
       mail: compteUtilisateur.mail,
       codePostal: compteUtilisateur.codePostal,
+      commune: compteUtilisateur.commune,
       prenom: compteUtilisateur.prenom,
       revenuFiscal: compteUtilisateur.revenuFiscal ? compteUtilisateur.revenuFiscal.toString() : '',
     });

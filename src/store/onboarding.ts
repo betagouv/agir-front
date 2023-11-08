@@ -16,6 +16,7 @@ export const onboardingStore = defineStore('onboarding', {
     },
     etapeLogement: {
       code_postal: '',
+      commune: '',
       adultes: 0,
       enfants: 0,
       residence: '',

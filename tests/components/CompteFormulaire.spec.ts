@@ -1,7 +1,8 @@
 import PageCompteFormulaire from '../../src/components/custom/PageCompteFormulaire.vue';
-import { beforeEach, describe, it } from 'vitest';
+import { SpyInstance, beforeEach, describe, it } from 'vitest';
 import { fireEvent, render } from '@testing-library/vue';
 import { CompteUtlisateurViewModel } from '../../src/compte/adapters/compteUtilisateur.presenter.impl';
+import { ChargementCommunesUsecase } from '../../src/communes/chargementCommunesUsecase';
 
 const compteUtlisateurViewModel: CompteUtlisateurViewModel = {
   id: 'idUser',
@@ -9,6 +10,7 @@ const compteUtlisateurViewModel: CompteUtlisateurViewModel = {
   prenom: 'Dubois',
   mail: 'claud-dubois@exemple.com',
   codePostal: '75001',
+  commune: 'PARIS 01',
   revenuFiscal: '123456',
 };
 
@@ -23,11 +25,17 @@ describe('Compte - Formulaire', () => {
 
   beforeEach(() => {
     // GIVEN
+    let chargementCommunesUsecaseMock: SpyInstance<[string], Promise<string[]>>;
+
+    chargementCommunesUsecaseMock = vi
+      .spyOn(ChargementCommunesUsecase.prototype, 'execute')
+      .mockImplementation((_codePostal: string) => Promise.resolve([]));
+
     const { getByRole } = render(PageCompteFormulaire, { props });
 
     inputNom = getByRole('textbox', { name: 'Nom' });
     inputEmail = getByRole('textbox', { name: /Adresse électronique/i });
-    inputCodePostal = getByRole('textbox', { name: 'Code postal' });
+    inputCodePostal = getByRole('textbox', { name: /Code postal/i });
     submitBouton = getByRole('button', { name: 'Mettre à jour' });
     titre = getByRole('heading', { level: 2, name: 'Identité personnelle' });
   });

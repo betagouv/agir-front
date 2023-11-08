@@ -2,7 +2,12 @@
   <form @submit.prevent="submitEtapeLogement">
     <h3 class="fr-h4">Où habitez-vous ?</h3>
     <div class="fr-col-8 fr-mb-4w">
-      <InputCodePostal v-model="viewModel.codePostal" :default-value="viewModel.codePostal" />
+      <InputCodePostal
+        v-model="viewModel.codePostal"
+        :default-value="viewModel.codePostal"
+        :default-select-value="viewModel.commune"
+        @update:selectedCommune="viewModel.commune = $event"
+      />
     </div>
     <h3 class="fr-h4">Combien êtes-vous dans votre logement (vous inclus) ?</h3>
     <div class="fr-grid-row fr-mb-4w">
@@ -85,6 +90,7 @@
 
   const viewModel = ref<{
     codePostal: string;
+    commune: string;
     adultes: string;
     enfants: string;
     residence: string;
@@ -93,6 +99,7 @@
     proprietaire: boolean;
   }>({
     codePostal: onBoardingStore.etapeLogement.code_postal,
+    commune: onBoardingStore.etapeLogement.commune,
     adultes: onBoardingStore.etapeLogement.adultes.toString(),
     enfants: onBoardingStore.etapeLogement.enfants.toString(),
     residence: onBoardingStore.etapeLogement.residence,
@@ -116,6 +123,7 @@
   const submitEtapeLogement = () => {
     onBoardingStore.setEtapeLogement({
       code_postal: viewModel.value.codePostal,
+      commune: viewModel.value.commune,
       adultes: Number(viewModel.value.adultes),
       enfants: Number(viewModel.value.enfants),
       residence: viewModel.value.residence,

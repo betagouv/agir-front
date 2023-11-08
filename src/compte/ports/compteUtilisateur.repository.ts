@@ -5,6 +5,7 @@ export interface CompteUtilisateur {
   nom: string;
   mail: string;
   codePostal: string;
+  commune: string;
   prenom: string;
   revenuFiscal: number | null;
 }

@@ -16,6 +16,7 @@ export const utilisateurStore = defineStore('utilisateur', {
       id: '',
       nom: '',
       codePostal: '',
+      commune: '',
       prenom: '',
       mail: '',
       revenuFiscal: null,
