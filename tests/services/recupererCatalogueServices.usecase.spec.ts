@@ -4,6 +4,7 @@ import { Service } from '@/services/recupererServiceActifs.usecase';
 import {
   ServiceCataloguePresenterImpl,
   ServiceCatalogueViewModel,
+  ServiceCatalogueViewModelItem,
 } from '@/services/adapters/serviceCatalogue.presenter.impl';
 import { expect } from 'vitest';
 
@@ -18,7 +19,8 @@ class ServiceRepositoryMock implements ServiceRepository {
         sousDescription: 'sousDescription',
         estInstalle: true,
         nombreInstallation: 1,
-        thematiques: ['thematiques'],
+        thematiques: ['thematique1', 'thematique3'],
+        image: 'image',
       },
       {
         id: 'id2',
@@ -28,7 +30,8 @@ class ServiceRepositoryMock implements ServiceRepository {
         sousDescription: 'sousDescription',
         estInstalle: false,
         nombreInstallation: 1,
-        thematiques: ['thematiques'],
+        thematiques: ['thematique1', 'thematique2'],
+        image: 'image',
       },
     ]);
   }
@@ -48,29 +51,34 @@ describe('Fichier de tests concernant la recuperations des services dans le cata
     await usecase.execute(utilisateurId, new ServiceCataloguePresenterImpl(expectation));
 
     // THEN
-    function expectation(serviceCatalogueViewModels: ServiceCatalogueViewModel[]) {
-      expect(serviceCatalogueViewModels).toStrictEqual<ServiceCatalogueViewModel[]>([
-        {
-          description: 'description',
-          estInstalle: true,
-          icon: 'icon',
-          id: 'id',
-          nombreInstallation: ' 1 ont installé ce service',
-          sousDescription: 'sousDescription',
-          thematiques: ['thematiques'],
-          titre: 'titre',
-        },
-        {
-          description: 'description',
-          estInstalle: false,
-          icon: 'icon',
-          id: 'id2',
-          nombreInstallation: ' 1 ont installé ce service',
-          sousDescription: 'sousDescription',
-          thematiques: ['thematiques'],
-          titre: 'titre',
-        },
-      ]);
+    function expectation(catalogueViewModel: ServiceCatalogueViewModel) {
+      expect(catalogueViewModel).toStrictEqual<ServiceCatalogueViewModel>({
+        catalogue: [
+          {
+            description: 'description',
+            estInstalle: true,
+            icon: 'icon',
+            id: 'id',
+            nombreInstallation: ' 1 ont installé ce service',
+            sousDescription: 'sousDescription',
+            thematiques: ['thematique1', 'thematique3'],
+            titre: 'titre',
+            image: 'image',
+          },
+          {
+            description: 'description',
+            estInstalle: false,
+            icon: 'icon',
+            id: 'id2',
+            nombreInstallation: ' 1 ont installé ce service',
+            sousDescription: 'sousDescription',
+            thematiques: ['thematique1', 'thematique2'],
+            titre: 'titre',
+            image: 'image',
+          },
+        ],
+        filtreThematiques: ['thematique1', 'thematique2', 'thematique3'],
+      });
     }
   });
 });
