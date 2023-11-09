@@ -13,7 +13,7 @@ export class ServicePresenterImpl implements ServicePresenter {
     this.serviceViewModels(
       services.map(service => ({
         label: service.label,
-        url: service.url,
+        url: service.isUrlExterne ? service.url : `/${service.url}`,
         isUrlExterne: service.isUrlExterne,
       }))
     );

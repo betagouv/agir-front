@@ -9,6 +9,7 @@ export interface ServiceCatalogue {
   estInstalle: boolean;
   nombreInstallation: number;
   thematiques: string[];
+  image: string;
 }
 export class RecupererCatalogueServicesUseCase {
   constructor(private serviceRepository: ServiceRepository) {}

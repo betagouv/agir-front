@@ -16,7 +16,7 @@
         </a>
       </li>
       <li>
-        <router-link class="fr-mb-0 fr-text--sm text--white" :to="{ name: 'coach' }">
+        <router-link class="fr-mb-0 fr-text--sm text--white" :to="{ name: 'services' }">
           + Ajouter d'autres services
         </router-link>
       </li>

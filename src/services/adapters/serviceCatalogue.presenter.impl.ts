@@ -2,6 +2,10 @@ import { ServiceCataloguePresenter } from '@/services/ports/serviceCatalogue.pre
 import { ServiceCatalogue } from '@/services/recupererCatalogueServices.usecase';
 
 export interface ServiceCatalogueViewModel {
+  catalogue: ServiceCatalogueViewModelItem[];
+  filtreThematiques: string[];
+}
+export interface ServiceCatalogueViewModelItem {
   id: string;
   icon: string;
   titre: string;
@@ -10,13 +14,14 @@ export interface ServiceCatalogueViewModel {
   estInstalle: boolean;
   nombreInstallation: string;
   thematiques: string[];
+  image: string;
 }
 export class ServiceCataloguePresenterImpl implements ServiceCataloguePresenter {
-  constructor(private serviceCatelogueViewModels: (services: ServiceCatalogueViewModel[]) => void) {}
+  constructor(private serviceCatelogueViewModels: (services: ServiceCatalogueViewModel) => void) {}
 
   present(services: ServiceCatalogue[]): void {
-    this.serviceCatelogueViewModels(
-      services.map(service => ({
+    this.serviceCatelogueViewModels({
+      catalogue: services.map(service => ({
         id: service.id,
         icon: service.icon,
         titre: service.titre,
@@ -25,7 +30,17 @@ export class ServiceCataloguePresenterImpl implements ServiceCataloguePresenter 
         estInstalle: service.estInstalle,
         nombreInstallation: ` ${service.nombreInstallation} ont installé ce service`,
         thematiques: service.thematiques,
-      }))
-    );
+        image: service.image,
+      })),
+      filtreThematiques: this.recupererLesThematiquesDeFaconUnique(services),
+    });
+  }
+
+  private recupererLesThematiquesDeFaconUnique(services: ServiceCatalogue[]) {
+    return services
+      .map(service => service.thematiques)
+      .flat()
+      .filter((value, index, self) => self.indexOf(value) === index)
+      .sort();
   }
 }

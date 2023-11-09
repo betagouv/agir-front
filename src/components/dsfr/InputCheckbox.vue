@@ -1,6 +1,6 @@
 <template>
   <fieldset class="fr-fieldset" :id="id" :aria-labelledby="`${id}-checkboxes-legend`">
-    <legend class="fr-fieldset__legend--regular fr-fieldset__legend" :id="`${id}-checkboxes-legend`">
+    <legend class="fr-fieldset__legend--regular fr-fieldset__legend text--bold" :id="`${id}-checkboxes-legend`">
       {{ label }}
     </legend>
     <div class="fr-fieldset__element" v-for="option in options" :key="option.id">

@@ -20,8 +20,8 @@
   const utilisateurId: string = utilisateurStore().utilisateur.id;
   const isLoading = ref<boolean>(true);
 
-  const serviceCatalogueViewModels = ref<ServiceCatalogueViewModel[]>();
-  function mapServiceCatalogueViewModel(services: ServiceCatalogueViewModel[]) {
+  const serviceCatalogueViewModels = ref<ServiceCatalogueViewModel>();
+  function mapServiceCatalogueViewModel(services: ServiceCatalogueViewModel) {
     serviceCatalogueViewModels.value = services;
     isLoading.value = false;
   }
