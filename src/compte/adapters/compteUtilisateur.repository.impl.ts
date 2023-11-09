@@ -52,7 +52,19 @@ export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurReposit
       prenom: compteUtilisateurACreer.prenom,
       email: compteUtilisateurACreer.email,
       mot_de_passe: compteUtilisateurACreer.motDePasse,
-      onboardingData: compteUtilisateurACreer.onboarding,
+      onboardingData: {
+        transports: compteUtilisateurACreer.onboarding.etapeTransport.transports,
+        avion: compteUtilisateurACreer.onboarding.etapeTransport.avion,
+        code_postal: compteUtilisateurACreer.onboarding.etapeLogement.code_postal,
+        adultes: compteUtilisateurACreer.onboarding.etapeLogement.adultes,
+        enfants: compteUtilisateurACreer.onboarding.etapeLogement.enfants,
+        residence: compteUtilisateurACreer.onboarding.etapeLogement.residence,
+        proprietaire: compteUtilisateurACreer.onboarding.etapeLogement.proprietaire,
+        superficie: compteUtilisateurACreer.onboarding.etapeLogement.superficie,
+        chauffage: compteUtilisateurACreer.onboarding.etapeLogement.chauffage,
+        repas: compteUtilisateurACreer.onboarding.etapeAlimentation.repas,
+        consommation: compteUtilisateurACreer.onboarding.etapeConsommation.consommation,
+      },
     });
     return {
       mail: response.data.email || '',
