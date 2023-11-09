@@ -56,6 +56,7 @@ export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurReposit
         transports: compteUtilisateurACreer.onboarding.etapeTransport.transports,
         avion: compteUtilisateurACreer.onboarding.etapeTransport.avion,
         code_postal: compteUtilisateurACreer.onboarding.etapeLogement.code_postal,
+        commune: compteUtilisateurACreer.onboarding.etapeLogement.commune,
         adultes: compteUtilisateurACreer.onboarding.etapeLogement.adultes,
         enfants: compteUtilisateurACreer.onboarding.etapeLogement.enfants,
         residence: compteUtilisateurACreer.onboarding.etapeLogement.residence,
