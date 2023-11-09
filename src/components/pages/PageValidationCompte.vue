@@ -10,23 +10,17 @@
         <button class="fr-btn fr-mr-4w" :disabled="code.length == 0">Valider</button>
         <button class="fr-btn fr-btn--secondary" type="button" @click="renvoyerCode">Renvoyer le code</button>
         <Alert
-          v-if="validationDeCompteEnErreur"
+          v-if="alerte.isActive"
           class="fr-col-12 fr-mt-2w"
-          type="error"
-          titre="Erreur lors de la validation du compte"
-          :message="validationDeCompteMessageErreur"
-        />
-        <Alert
-          v-if="codeRenvoye"
-          class="fr-col-12 fr-mt-2w"
-          type="info"
-          titre="Code renvoyé"
-          message="Le code a bien été renvoyé"
+          :type="alerte.type"
+          :titre="alerte.titre"
+          :message="alerte.message"
         />
       </form>
     </div>
   </div>
 </template>
+
 <script setup lang="ts">
   import { ref } from 'vue';
   import InputText from '@/components/dsfr/InputText.vue';
@@ -38,11 +32,11 @@
   import { sendIdNGC } from '@/bilan/middleware/pendingSimulation';
   import { UtilisateurRepositoryAxios } from '@/authentification/adapters/utilisateur.repository.axios';
   import { RenvoyerCoteOTPUsecase } from '@/authentification/renvoyerCoteOTPUsecase';
+  import { useAlerte } from '@/composables/useAlerte';
+
   const code = ref('');
-  let validationDeCompteEnErreur = ref<boolean>(false);
-  let validationDeCompteMessageErreur = ref<string>('');
-  let codeRenvoye = ref<boolean>(false);
   const email = utilisateurStore().utilisateur.mail || new URLSearchParams(window.location.search).get('email') || '';
+  const { alerte, afficherAlerte } = useAlerte();
 
   const validerCode = async () => {
     const validerCompteUtilisateurUsecase = new ValiderCompteUtilisateurUsecase(
@@ -52,32 +46,25 @@
     validerCompteUtilisateurUsecase
       .execute(email, code.value)
       .then(() => {
-        validationDeCompteEnErreur.value = false;
         const requestedRoute = sessionStorage.getItem('requestedRoute');
         sessionStorage.removeItem('requestedRoute');
         router.push(requestedRoute || { name: 'coach' });
         sendIdNGC();
       })
       .catch(reason => {
-        validationDeCompteMessageErreur.value = reason.data.message;
-        validationDeCompteEnErreur.value = true;
+        afficherAlerte('error', 'Erreur lors de la validation du compte', reason.data.message);
       });
   };
 
   const renvoyerCode = async () => {
-    codeRenvoye.value = false;
-    validationDeCompteEnErreur.value = false;
-
     const usecase = new RenvoyerCoteOTPUsecase(new UtilisateurRepositoryAxios());
     usecase
       .execute(email)
       .then(() => {
-        codeRenvoye.value = true;
+        afficherAlerte('info', 'Code renvoyé', 'Le code a bien été renvoyé');
       })
       .catch(reason => {
-        codeRenvoye.value = false;
-        validationDeCompteMessageErreur.value = reason.data.message;
-        validationDeCompteEnErreur.value = true;
+        afficherAlerte('error', 'Erreur lors de la validation du compte', reason.data.message);
       });
   };
 </script>

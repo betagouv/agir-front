@@ -49,13 +49,12 @@
       </fieldset>
     </form>
     <Alert
-      v-if="success"
+      v-if="alerte.isActive"
       class="fr-col-12 fr-mt-2w"
-      type="success"
-      titre="Succès"
-      message="Compte correctement mis à jour."
+      :type="alerte.type"
+      :titre="alerte.titre"
+      :message="alerte.message"
     />
-    <Alert v-if="error.isActif" class="fr-col-12 fr-mt-2w" type="error" titre="Erreur" :message="error.message" />
   </div>
 </template>
 
@@ -70,26 +69,19 @@
   import InputCodePostal from '@/components/dsfr/InputCodePostal.vue';
   import Alert from '@/components/custom/Alert.vue';
   import CarteInfo from '@/components/custom/CarteInfo.vue';
+  import { useAlerte } from '@/composables/useAlerte';
 
   const props = defineProps<{
     compteUtlisateurViewModel: CompteUtlisateurViewModel;
   }>();
 
-  let success = ref(false);
-  let error = ref<{
-    isActif: boolean;
-    message: string;
-  }>({
-    isActif: false,
-    message: '',
-  });
+  const { alerte, afficherAlerte } = useAlerte();
+
   const compteUtlisateurViewModel = ref<CompteUtlisateurViewModel>(props.compteUtlisateurViewModel);
 
   async function modifierInformation() {
     if (compteUtlisateurViewModel.value.commune === '') {
-      success.value = false;
-      error.value.isActif = true;
-      error.value.message = 'Veuillez renseigner un code postal et une commune valide';
+      afficherAlerte('error', 'Erreur', 'Veuillez renseigner un code postal et une commune valide');
       return;
     }
 
@@ -99,7 +91,6 @@
     );
 
     await usecase.execute(compteUtlisateurViewModel.value);
-    error.value.isActif = false;
-    success.value = true;
+    afficherAlerte('success', 'Succès', 'Compte correctement mis à jour.');
   }
 </script>
