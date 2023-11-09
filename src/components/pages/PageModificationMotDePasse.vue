@@ -27,18 +27,11 @@
         </div>
         <button :disabled="!formulaireValide" class="fr-btn">Mettre à jour</button>
         <Alert
+          v-if="alerte.isActive"
           class="fr-col-12 fr-mt-2w"
-          v-if="success"
-          titre="Changement de mot de passe"
-          message="votre mot de passe a été changé"
-          type="success"
-        />
-        <Alert
-          class="fr-col-12 fr-mt-2w"
-          v-if="success != null && !success"
-          titre="Changement de mot de passe"
-          :message="errorMessage"
-          type="error"
+          :type="alerte.type"
+          :titre="alerte.titre"
+          :message="alerte.message"
         />
       </fieldset>
     </form>
@@ -52,11 +45,14 @@
   import { CompteUtilisateurRepositoryImpl } from '@/compte/adapters/compteUtilisateur.repository.impl';
   import Alert from '@/components/custom/Alert.vue';
   import { utilisateurStore } from '@/store/utilisateur';
-  import FilDAriane from '../dsfr/FilDAriane.vue';
+  import FilDAriane from '@/components/dsfr/FilDAriane.vue';
+  import { useAlerte } from '@/composables/useAlerte';
+
   const motDePasse = ref('');
   const formulaireValide = ref(false);
-  const success = ref<boolean | null>(null);
-  const errorMessage = ref<string>('');
+
+  const { alerte, afficherAlerte } = useAlerte();
+
   function onMotDePasseValideChanged(isMotDePasseValide: boolean) {
     formulaireValide.value = isMotDePasseValide;
   }
@@ -67,11 +63,10 @@
     usecase
       .execute(utilisateurId, motDePasse.value)
       .then(() => {
-        success.value = true;
+        afficherAlerte('success', 'Changement de mot de passe', 'Votre mot de passe a été changé');
       })
       .catch(reason => {
-        errorMessage.value = reason.data.message;
-        success.value = false;
+        afficherAlerte('error', 'Changement de mot de passe', reason.data.message);
       });
   }
 </script>
