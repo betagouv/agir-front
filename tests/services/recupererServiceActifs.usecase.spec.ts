@@ -53,7 +53,7 @@ describe("Fichier de tests concernant la récupérations des services actifs d'u
         {
           isUrlExterne: false,
           label: "Suivez l'impact de vos trajets quotidiens",
-          url: 'coach/suivi-du-jour',
+          url: '/coach/suivi-du-jour',
         },
       ]);
     }
