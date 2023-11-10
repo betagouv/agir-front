@@ -2,7 +2,11 @@
   <div class="fr-container">
     <div v-if="isLoading">Chargement ...</div>
     <div v-else-if="!serviceCatalogueViewModels">Une erreur est survenue</div>
-    <CatalogueServices v-else :service-catalogue-view-models="serviceCatalogueViewModels" />
+    <CatalogueServices
+      v-else
+      @refresh-catalogue-services="refreshCatalogueServices"
+      :service-catalogue-view-models="serviceCatalogueViewModels"
+    />
   </div>
 </template>
 
@@ -25,9 +29,14 @@
     serviceCatalogueViewModels.value = services;
     isLoading.value = false;
   }
+  const usecase = new RecupererCatalogueServicesUseCase(new ServiceRepositoryAxios());
+  const serviceCataloguePresenterImpl = new ServiceCataloguePresenterImpl(mapServiceCatalogueViewModel);
 
+  function refreshCatalogueServices() {
+    isLoading.value = true;
+    usecase.execute(utilisateurId, serviceCataloguePresenterImpl);
+  }
   onMounted(() => {
-    const usecase = new RecupererCatalogueServicesUseCase(new ServiceRepositoryAxios());
-    usecase.execute(utilisateurId, new ServiceCataloguePresenterImpl(mapServiceCatalogueViewModel));
+    refreshCatalogueServices();
   });
 </script>

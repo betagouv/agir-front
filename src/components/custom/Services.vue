@@ -28,8 +28,9 @@
   import { ServicePresenterImpl, ServiceViewModel } from '@/services/adapters/service.presenter.impl';
   import { RecupererServiceActifsUsecase } from '@/services/recupererServiceActifs.usecase';
   import { ServiceRepositoryAxios } from '@/services/adapters/service.repository.axios';
-  import { ref } from 'vue';
+  import { onMounted, ref } from 'vue';
   import { utilisateurStore } from '@/store/utilisateur';
+  import { ServiceEvent, ServiceEventBusImpl } from '@/services/serviceEventBusImpl';
   const servicesViewModels = ref<ServiceViewModel[]>();
 
   const mapValuesServicesViewmodel = (services: ServiceViewModel[]) => {
@@ -37,7 +38,17 @@
   };
   const utilisateurId: string = utilisateurStore().utilisateur.id;
   const recupererServicesActifs = new RecupererServiceActifsUsecase(new ServiceRepositoryAxios());
-  recupererServicesActifs.execute(utilisateurId, new ServicePresenterImpl(mapValuesServicesViewmodel));
+  const servicePresenterImpl = new ServicePresenterImpl(mapValuesServicesViewmodel);
+  recupererServicesActifs.execute(utilisateurId, servicePresenterImpl);
+  onMounted(() => {
+    ServiceEventBusImpl.getInstance().subscribe(ServiceEvent.SERVICE_SUPPRIME, () => {
+      recupererServicesActifs.execute(utilisateurId, servicePresenterImpl);
+    });
+
+    ServiceEventBusImpl.getInstance().subscribe(ServiceEvent.SERVICE_INSTALLE, () => {
+      recupererServicesActifs.execute(utilisateurId, servicePresenterImpl);
+    });
+  });
 </script>
 
 <style scoped>
