@@ -55,7 +55,11 @@
               >
                 Enlever
               </button>
-              <button v-else class="fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-download-line fr-btn--sm">
+              <button
+                v-else
+                class="fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-download-line fr-btn--sm"
+                @click="installerServiceActif(serviceCatalogueViewModel.id)"
+              >
                 Installer
               </button>
             </div>
@@ -86,6 +90,7 @@
   import { EnleverServiceActifUsecase } from '@/services/enleverServiceActif.usecase';
   import { ServiceRepositoryAxios } from '@/services/adapters/service.repository.axios';
   import { utilisateurStore } from '@/store/utilisateur';
+  import { InstallerServiceActifUsecase } from '@/services/installerServiceActif.usecase';
 
   const props = defineProps<{
     serviceCatalogueViewModels: ServiceCatalogueViewModel;
@@ -110,6 +115,13 @@
 
   async function enleverServiceActif(serviceId: string) {
     const useCase = new EnleverServiceActifUsecase(new ServiceRepositoryAxios(), ServiceEventBusImpl.getInstance());
+    const utilisateurId = utilisateurStore().utilisateur.id;
+    await useCase.execute(utilisateurId, serviceId);
+    emit('refreshCatalogueServices');
+  }
+
+  async function installerServiceActif(serviceId: string) {
+    const useCase = new InstallerServiceActifUsecase(new ServiceRepositoryAxios(), ServiceEventBusImpl.getInstance());
     const utilisateurId = utilisateurStore().utilisateur.id;
     await useCase.execute(utilisateurId, serviceId);
     emit('refreshCatalogueServices');

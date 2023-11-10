@@ -1,9 +1,9 @@
 import { ServiceEvent, ServiceEventBus } from '@/services/serviceEventBusImpl';
-import { EnleverServiceActifUsecase } from '@/services/enleverServiceActif.usecase';
 import { ServiceRepository } from '@/services/ports/service.repository';
 import { ServiceCatalogue } from '@/services/recupererCatalogueServices.usecase';
 import { Service } from '@/services/recupererServiceActifs.usecase';
 import { expect } from 'vitest';
+import { InstallerServiceActifUsecase } from '@/services/installerServiceActif.usecase';
 
 class ServiceEventBusSpy implements ServiceEventBus {
   get eventName(): ServiceEvent | null {
@@ -19,13 +19,12 @@ class ServiceEventBusSpy implements ServiceEventBus {
 }
 
 class ServiceRepositoryMock implements ServiceRepository {
-  get enleverServiceActifAEteAppele(): boolean {
-    return this._enleverServiceActifAEteAppele;
+  get installerServiceActifAEteAppele(): boolean {
+    return this._installerServiceActifAEteAppele;
   }
-  private _enleverServiceActifAEteAppele: boolean = false;
+  private _installerServiceActifAEteAppele: boolean = false;
   enleverServiceActif(utilisateurId, serviceId): Promise<void> {
-    this._enleverServiceActifAEteAppele = true;
-    return Promise.resolve();
+    throw Error;
   }
 
   recupererCatalogueServices(utilisateurId: string): Promise<ServiceCatalogue[]> {
@@ -37,20 +36,21 @@ class ServiceRepositoryMock implements ServiceRepository {
   }
 
   installerServiceActif(utilisateurId, serviceId): Promise<void> {
-    throw Error;
+    this._installerServiceActifAEteAppele = true;
+    return Promise.resolve();
   }
 }
 
-describe("Fichier de tests concernant la suppression d'un service actif", () => {
-  it('Quand on enleve un service actif doit appeler le repos et publier un evenenement SERVICE_SUPPRIME', async () => {
+describe("Fichier de tests concernant l'installation d'un service actif", () => {
+  it('Quand on installer un service actif doit appeler le repos et publier un evenenement SERVICE_INSTALLE', async () => {
     // GIVEN
     const serviceEventBusSpy = new ServiceEventBusSpy();
     const serviceRepositoryMock = new ServiceRepositoryMock();
-    const enleverServiceActifUsecase = new EnleverServiceActifUsecase(serviceRepositoryMock, serviceEventBusSpy);
+    const installerServiceActifUsecase = new InstallerServiceActifUsecase(serviceRepositoryMock, serviceEventBusSpy);
     // WHEN
-    await enleverServiceActifUsecase.execute('utilisateurId', 'serviceId');
+    await installerServiceActifUsecase.execute('utilisateurId', 'serviceId');
     // THEN
-    expect(serviceRepositoryMock.enleverServiceActifAEteAppele).toBe(true);
-    expect(serviceEventBusSpy.eventName).toBe(ServiceEvent.SERVICE_SUPPRIME);
+    expect(serviceRepositoryMock.installerServiceActifAEteAppele).toBe(true);
+    expect(serviceEventBusSpy.eventName).toBe(ServiceEvent.SERVICE_INSTALLE);
   });
 });

@@ -5,4 +5,5 @@ export interface ServiceRepository {
   recupererServicesActifs(utilisateurId: string): Promise<Service[]>;
   recupererCatalogueServices(utilisateurId: string): Promise<ServiceCatalogue[]>;
   enleverServiceActif(utilisateurId, serviceId): Promise<void>;
+  installerServiceActif(utilisateurId, serviceId): Promise<void>;
 }

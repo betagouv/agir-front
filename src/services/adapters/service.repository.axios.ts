@@ -54,4 +54,12 @@ export class ServiceRepositoryAxios implements ServiceRepository {
     const axiosInstance = AxiosFactory.getAxios();
     await axiosInstance.delete(`/utilisateurs/${utilisateurId}/services/${serviceId}`);
   }
+
+  @intercept401()
+  async installerServiceActif(utilisateurId: string, serviceId: string): Promise<void> {
+    const axiosInstance = AxiosFactory.getAxios();
+    await axiosInstance.post(`/utilisateurs/${utilisateurId}/services`, {
+      service_definition_id: serviceId,
+    });
+  }
 }
