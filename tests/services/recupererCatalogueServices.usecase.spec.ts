@@ -4,7 +4,6 @@ import { Service } from '@/services/recupererServiceActifs.usecase';
 import {
   ServiceCataloguePresenterImpl,
   ServiceCatalogueViewModel,
-  ServiceCatalogueViewModelItem,
 } from '@/services/adapters/serviceCatalogue.presenter.impl';
 import { expect } from 'vitest';
 
