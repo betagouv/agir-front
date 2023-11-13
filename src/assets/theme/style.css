@@ -123,6 +123,10 @@ h3 {
   font-weight: 700;
 }
 
+.text--underline {
+  text-decoration: underline;
+}
+
 .background-bleu {
   background: var(--blue-france-main-525);
 }
@@ -161,6 +165,10 @@ h3 {
 
 .border {
   border: 1px solid rgba(0, 0, 0, 0.19);
+}
+
+.border--white {
+  border: 1px solid #fff;
 }
 
 .border--bleu {
