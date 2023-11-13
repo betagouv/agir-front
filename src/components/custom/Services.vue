@@ -2,8 +2,7 @@
   <nav
     class="fr-grid-row fr-grid-row--gutters fr-grid-row--middle fr-mt-0 fr-background-action-high--blue-france fr-p-3w"
   >
-    <div class="fr-icon-layout-grid-fill"></div>
-    <span class="text--white text--bold fr-col-12 fr-col-md-1">Vos services</span>
+    <span class="fr-icon-layout-grid-fill text--white text--bold fr-col-12 fr-col-md-2">Vos services</span>
     <ul class="fr-grid-row service__list fr-col-10 list-style-none fr-p-0">
       <li class="fr-px-1v fr-py-0 fr-col" v-for="service in servicesViewModels" :key="service.label">
         <a
@@ -69,8 +68,13 @@
 
   .add__service {
     border: 1px solid white;
-    padding: 6px;
+    padding: 6px 8px;
     text-decoration: none;
     background-image: none;
+  }
+
+  .fr-icon-layout-grid-fill:before {
+    opacity: 0.5;
+    margin-right: 1rem;
   }
 </style>
