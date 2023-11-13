@@ -1,9 +1,9 @@
 <template>
   <nav
-    v-if="servicesViewModels && servicesViewModels.length > 0"
     class="fr-grid-row fr-grid-row--gutters fr-grid-row--middle fr-mt-0 fr-background-action-high--blue-france fr-p-3w"
   >
-    <span class="text--white text--bold fr-col-12 fr-col-md-1">Aujourd'hui</span>
+    <div class="fr-icon-layout-grid-fill"></div>
+    <span class="text--white text--bold fr-col-12 fr-col-md-1">Vos services</span>
     <ul class="fr-grid-row service__list fr-col-10 list-style-none fr-p-0">
       <li class="fr-px-1v fr-py-0 fr-col" v-for="service in servicesViewModels" :key="service.label">
         <a
@@ -16,7 +16,7 @@
         </a>
       </li>
       <li>
-        <router-link class="fr-mb-0 fr-text--sm text--white" :to="{ name: 'services' }">
+        <router-link class="fr-mb-0 add__service fr-text--sm text--white" :to="{ name: 'services' }">
           + Ajouter d'autres services
         </router-link>
       </li>
@@ -65,5 +65,12 @@
 
   .service__list {
     gap: 1rem;
+  }
+
+  .add__service {
+    border: 1px solid white;
+    padding: 6px;
+    text-decoration: none;
+    background-image: none;
   }
 </style>
