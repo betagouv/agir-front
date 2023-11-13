@@ -18,6 +18,8 @@ interface ServiceCatalogueApiModel {
   icon_url: string;
   image_url: string;
   is_installed: boolean;
+  description: string;
+  sous_description: string;
 }
 export class ServiceRepositoryAxios implements ServiceRepository {
   @intercept401()
@@ -42,8 +44,8 @@ export class ServiceRepositoryAxios implements ServiceRepository {
       thematiques: service.thematiques,
       nombreInstallation: service.nombre_installation,
       icon: service.icon_url,
-      description: '',
-      sousDescription: '',
+      description: service.description,
+      sousDescription: service.sous_description,
       estInstalle: service.is_installed,
       image: service.image_url,
     }));

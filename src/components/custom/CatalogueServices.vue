@@ -70,9 +70,9 @@
               <img class="img-illustration" :src="serviceCatalogueViewModel.image" alt="" />
             </div>
             <div class="fr-col-5 fr-ml-2w">
-              <p class="fr-text--bold">Ecowatt aide les Français à mieux consommer l’électricité.</p>
+              <p class="fr-text--bold">{{ serviceCatalogueViewModel.description }}</p>
               <p>
-                Véritable météo de l’électricité, Ecowatt qualifie en temps réel le niveau de consommation des Français.
+                {{ serviceCatalogueViewModel.sousDescription }}
               </p>
             </div>
           </div>
