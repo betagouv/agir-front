@@ -50,11 +50,16 @@
             <div class="fr-grid-row--top fr-grid-row--right fr-grid-row fr-ml-auto">
               <button
                 v-if="serviceCatalogueViewModel.estInstalle"
-                class="fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-remove-line fr-btn--sm"
+                class="fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-close-line fr-btn--sm"
+                @click="enleverServiceActif(serviceCatalogueViewModel.id)"
               >
                 Enlever
               </button>
-              <button v-else class="fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-download-line fr-btn--sm">
+              <button
+                v-else
+                class="fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-download-line fr-btn--sm"
+                @click="installerServiceActif(serviceCatalogueViewModel.id)"
+              >
                 Installer
               </button>
             </div>
@@ -81,9 +86,18 @@
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import InputCheckbox from '@/components/dsfr/InputCheckbox.vue';
   import { ref } from 'vue';
+  import { ServiceEventBusImpl } from '@/services/serviceEventBusImpl';
+  import { EnleverServiceActifUsecase } from '@/services/enleverServiceActif.usecase';
+  import { ServiceRepositoryAxios } from '@/services/adapters/service.repository.axios';
+  import { utilisateurStore } from '@/store/utilisateur';
+  import { InstallerServiceActifUsecase } from '@/services/installerServiceActif.usecase';
 
   const props = defineProps<{
     serviceCatalogueViewModels: ServiceCatalogueViewModel;
+  }>();
+
+  const emit = defineEmits<{
+    (event: 'refreshCatalogueServices'): void;
   }>();
 
   const optionsCheckbox = props.serviceCatalogueViewModels.filtreThematiques.map(option => ({
@@ -98,6 +112,20 @@
   const handleValueChange = value => {
     categoriesActives.value = value;
   };
+
+  async function enleverServiceActif(serviceId: string) {
+    const useCase = new EnleverServiceActifUsecase(new ServiceRepositoryAxios(), ServiceEventBusImpl.getInstance());
+    const utilisateurId = utilisateurStore().utilisateur.id;
+    await useCase.execute(utilisateurId, serviceId);
+    emit('refreshCatalogueServices');
+  }
+
+  async function installerServiceActif(serviceId: string) {
+    const useCase = new InstallerServiceActifUsecase(new ServiceRepositoryAxios(), ServiceEventBusImpl.getInstance());
+    const utilisateurId = utilisateurStore().utilisateur.id;
+    await useCase.execute(utilisateurId, serviceId);
+    emit('refreshCatalogueServices');
+  }
 </script>
 <style scoped>
   .img-icon-rounded {

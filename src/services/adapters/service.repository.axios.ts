@@ -17,6 +17,7 @@ interface ServiceCatalogueApiModel {
   nombre_installation: number;
   icon_url: string;
   image_url: string;
+  is_installed: boolean;
 }
 export class ServiceRepositoryAxios implements ServiceRepository {
   @intercept401()
@@ -30,6 +31,7 @@ export class ServiceRepositoryAxios implements ServiceRepository {
     }));
   }
 
+  @intercept401()
   async recupererCatalogueServices(utilisateurId: string): Promise<ServiceCatalogue[]> {
     const axiosInstance = AxiosFactory.getAxios();
     const reponse = await axiosInstance.get<ServiceCatalogueApiModel[]>(`/services?utilisateurId=${utilisateurId}`);
@@ -42,8 +44,22 @@ export class ServiceRepositoryAxios implements ServiceRepository {
       icon: service.icon_url,
       description: '',
       sousDescription: '',
-      estInstalle: false,
+      estInstalle: service.is_installed,
       image: service.image_url,
     }));
+  }
+
+  @intercept401()
+  async enleverServiceActif(utilisateurId: string, serviceId: string): Promise<void> {
+    const axiosInstance = AxiosFactory.getAxios();
+    await axiosInstance.delete(`/utilisateurs/${utilisateurId}/services/${serviceId}`);
+  }
+
+  @intercept401()
+  async installerServiceActif(utilisateurId: string, serviceId: string): Promise<void> {
+    const axiosInstance = AxiosFactory.getAxios();
+    await axiosInstance.post(`/utilisateurs/${utilisateurId}/services`, {
+      service_definition_id: serviceId,
+    });
   }
 }

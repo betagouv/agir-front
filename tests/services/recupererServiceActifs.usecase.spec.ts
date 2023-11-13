@@ -27,6 +27,14 @@ class ServiceRepositoryMock implements ServiceRepository {
   recupererCatalogueServices(utilisateurId: string): Promise<ServiceCatalogue[]> {
     throw Error;
   }
+
+  enleverServiceActif(utilisateurId, serviceId): Promise<void> {
+    throw Error;
+  }
+
+  installerServiceActif(utilisateurId, serviceId): Promise<void> {
+    throw Error;
+  }
 }
 
 describe("Fichier de tests concernant la récupérations des services actifs d'un utilisateur", () => {
