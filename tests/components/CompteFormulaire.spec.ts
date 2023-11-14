@@ -46,6 +46,7 @@ describe('Compte - Formulaire', () => {
   });
   afterEach(() => {
     vi.resetAllMocks();
+    vi.resetConfig();
   });
   describe('quand je charge le formulaire', () => {
     it("pré-rempli et affiche les champs associés au compte de l'utilisateur", () => {
@@ -70,8 +71,8 @@ describe('Compte - Formulaire', () => {
   describe('quand je mets à jour mes informations', () => {
     it('la valeur des champs est modifiée', async () => {
       // WHEN
-      await fireEvent.update(inputNom, 'John');
       await fireEvent.update(inputPrenom, 'Smith');
+      await fireEvent.update(inputNom, 'John');
       await fireEvent.update(inputEmail, 'john-smith@exemple.com');
       await fireEvent.update(inputRevenuFiscal, '654321');
       await fireEvent.update(inputCodePostal, '75001');
