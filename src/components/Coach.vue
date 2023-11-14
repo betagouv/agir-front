@@ -1,6 +1,6 @@
 <template>
   <div class="fr-container fr-py-6w">
-    <div v-if="interactionsViewModel">
+    <div>
       <h1 class="fr-h2">Les actions du jour</h1>
       <div class="fr-grid-row fr-grid-row--gutters">
         <div class="fr-col fr-col-lg-8">
@@ -20,15 +20,13 @@
         </div>
         <div class="fr-col-12 fr-col-lg-4">
           <div v-if="!isLoading">
-            <BilanNosGestesClimat v-if="empreinteViewModel" class="fr-mb-3w" :get-impact-value="empreinteViewModel" />
-            <MesResultats
-              v-if="scoreViewModel"
-              :badge-view-model="scoreViewModel.badges"
-              :score-value="scoreViewModel.score"
-            />
+            <div class="fr-grid-row flex-space-between fr-mb-1w">
+              <CarteScore class="fr-mr-3w" :value="1" type="niveau" />
+              <CarteScore v-if="scoreViewModel" :value="scoreViewModel.score" type="score" />
+            </div>
+            <ProgressionNiveauJauge class="fr-mb-1w" :objectif="24" :valeur="12" />
           </div>
           <div v-else>
-            <CarteSkeleton class="fr-mb-3w" />
             <CarteSkeleton />
           </div>
         </div>
@@ -46,14 +44,6 @@
   import { onMounted, ref } from 'vue';
   import { ScoreViewModel } from '@/score/ports/chargementScorePresenter';
   import CarteSkeleton from '@/components/CarteSkeleton.vue';
-  import BilanNosGestesClimat from '@/components/BilanNosGestesClimat.vue';
-  import MesResultats from '@/components/MesResultats.vue';
-  import { ChargementEmpreinteUsecase } from '@/bilan/chargementEmpreinte.usecase';
-  import { EmpreinteRepositoryAxios } from '@/bilan/adapters/empreinteRepository.axios';
-  import {
-    ChargementEmpreintePresenterImpl,
-    EmpreinteViewModel,
-  } from '@/bilan/adapters/chargementEmpreinte.presenter.impl';
   import { ChargerInteractionsUsecase } from '@/interactions/chargerInteractions.usecase';
   import { InteractionsPresenterImpl, InteractionViewModel } from '@/interactions/adapters/interactions.presenter.impl';
   import InteractionCard from '@/components/custom/InteractionCard.vue';
@@ -64,8 +54,9 @@
   import { utilisateurStore } from '@/store/utilisateur';
   import { CliquerInteractionUsecase } from '@/interactions/cliquerInteraction.usecase';
   import CoachChangementSituation from '@/components/custom/Coach/CoachChangementSituation.vue';
+  import CarteScore from '@/components/custom/Progression/CarteScore.vue';
+  import ProgressionNiveauJauge from '@/components/custom/Progression/ProgressionNiveauJauge.vue';
 
-  const empreinteViewModel = ref<EmpreinteViewModel>();
   const interactionsViewModel = ref<InteractionViewModel[]>();
   const scoreViewModel = ref<ScoreViewModel>();
   const isLoading = ref<boolean>(true);
@@ -74,11 +65,6 @@
   const emit = defineEmits<{
     (event: 'refreshInteractions'): void;
   }>();
-
-  function mapValueBilan(viewModel: EmpreinteViewModel) {
-    empreinteViewModel.value = viewModel;
-    store.setValeurBilanCarbone(viewModel);
-  }
 
   function mapValuesInteractions(viewModel: InteractionViewModel[]) {
     interactionsViewModel.value = viewModel;
@@ -100,14 +86,11 @@
   };
 
   const lancerChargementDesDonnees = () => {
-    isLoading.value = true;
     const idUtilisateur = store.utilisateur.id;
-    const chargementEmpreinteUseCase = new ChargementEmpreinteUsecase(new EmpreinteRepositoryAxios());
     const chargerInteractionsUseCase = new ChargerInteractionsUsecase(new InteractionsRepositoryAxios());
     const chargerScoreUseCase = new ChargementScoreUsecase(new ScoreRepositoryAxios());
     Promise.all([
       chargerScoreUseCase.execute(idUtilisateur, new ChargementScorePresenterImpl(mapValuesScore)),
-      chargementEmpreinteUseCase.execute(idUtilisateur, new ChargementEmpreintePresenterImpl(mapValueBilan)),
       chargerInteractionsUseCase.execute(idUtilisateur, new InteractionsPresenterImpl(mapValuesInteractions)),
     ])
       .then(() => {
