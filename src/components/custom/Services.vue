@@ -1,11 +1,10 @@
 <template>
   <nav
-    v-if="servicesViewModels && servicesViewModels.length > 0"
     class="fr-grid-row fr-grid-row--gutters fr-grid-row--middle fr-mt-0 fr-background-action-high--blue-france fr-p-3w"
   >
-    <span class="text--white text--bold fr-col-12 fr-col-md-1">Aujourd'hui</span>
+    <span class="fr-icon-layout-grid-fill text--white text--bold fr-col">Vos services</span>
     <ul class="fr-grid-row service__list fr-col-10 list-style-none fr-p-0">
-      <li class="fr-px-1v fr-py-0 fr-col" v-for="service in servicesViewModels" :key="service.label">
+      <li class="fr-p-0 fr-col" v-for="service in servicesViewModels" :key="service.label">
         <a
           role="link"
           :href="service.url"
@@ -15,8 +14,8 @@
           {{ service.label }}
         </a>
       </li>
-      <li>
-        <router-link class="fr-mb-0 fr-text--sm text--white" :to="{ name: 'services' }">
+      <li class="fr-p-0">
+        <router-link class="fr-mb-0 add__service fr-text--sm text--white" :to="{ name: 'services' }">
           + Ajouter d'autres services
         </router-link>
       </li>
@@ -54,6 +53,7 @@
 <style scoped>
   .service__link {
     background-image: none;
+    display: block;
   }
   .service__link:hover {
     background-color: white;
@@ -65,5 +65,18 @@
 
   .service__list {
     gap: 1rem;
+  }
+
+  .add__service {
+    display: block;
+    border: 1px solid white;
+    padding: 6px 8px;
+    text-decoration: none;
+    background-image: none;
+  }
+
+  .fr-icon-layout-grid-fill:before {
+    opacity: 0.5;
+    margin-right: 1rem;
   }
 </style>
