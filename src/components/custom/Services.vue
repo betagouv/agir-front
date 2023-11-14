@@ -4,7 +4,7 @@
   >
     <span class="fr-icon-layout-grid-fill text--white text--bold fr-col">Vos services</span>
     <ul class="fr-grid-row service__list fr-col-10 list-style-none fr-p-0">
-      <li class="fr-px-1v fr-py-0 fr-col" v-for="service in servicesViewModels" :key="service.label">
+      <li class="fr-p-0 fr-col" v-for="service in servicesViewModels" :key="service.label">
         <a
           role="link"
           :href="service.url"
@@ -14,7 +14,7 @@
           {{ service.label }}
         </a>
       </li>
-      <li>
+      <li class="fr-p-0">
         <router-link class="fr-mb-0 add__service fr-text--sm text--white" :to="{ name: 'services' }">
           + Ajouter d'autres services
         </router-link>
@@ -53,6 +53,7 @@
 <style scoped>
   .service__link {
     background-image: none;
+    display: block;
   }
   .service__link:hover {
     background-color: white;
@@ -67,6 +68,7 @@
   }
 
   .add__service {
+    display: block;
     border: 1px solid white;
     padding: 6px 8px;
     text-decoration: none;
