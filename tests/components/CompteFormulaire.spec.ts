@@ -1,4 +1,4 @@
-import { describe, it, beforeEach } from 'vitest';
+import { describe, it, beforeEach, afterEach } from 'vitest';
 import { fireEvent, render } from '@testing-library/vue';
 import PageCompteFormulaire from '@/components/custom/PageCompteFormulaire.vue';
 import { CompteUtlisateurViewModel } from '@/compte/adapters/compteUtilisateur.presenter.impl';
@@ -15,8 +15,6 @@ const compteUtlisateurViewModel: CompteUtlisateurViewModel = {
   revenuFiscal: '123456',
 };
 
-const props = { compteUtlisateurViewModel };
-
 describe('Compte - Formulaire', () => {
   let titre: HTMLElement;
   let inputNom: HTMLInputElement;
@@ -29,6 +27,8 @@ describe('Compte - Formulaire', () => {
 
   beforeEach(() => {
     // GIVEN
+    const props = { compteUtlisateurViewModel };
+
     vi.spyOn(ChargementCommunesUsecase.prototype, 'execute').mockImplementation((_codePostal: string) =>
       Promise.resolve(['PARIS 01', 'PARIS 02'])
     );
@@ -44,26 +44,29 @@ describe('Compte - Formulaire', () => {
     submitBouton = getByRole('button', { name: 'Mettre à jour' });
     titre = getByRole('heading', { level: 2, name: 'Identité personnelle' });
   });
-
-  it("pré-rempli et affiche les champs associés au compte de l'utilisateur", () => {
-    // WHEN
-    // THEN
-    expect(titre).toBeDefined();
-    expect(inputNom).toBeDefined();
-    expect(inputNom.value).toBe('Claude');
-    expect(inputPrenom).toBeDefined();
-    expect(inputPrenom.value).toBe('Dubois');
-    expect(inputEmail).toBeDefined();
-    expect(inputEmail.value).toBe('claud-dubois@exemple.com');
-    expect(inputCodePostal).toBeDefined();
-    expect(inputCodePostal.value).toBe('75002');
-    expect(selectCommune).toBeDefined();
-    expect(selectCommune.value).toBe('PARIS 02');
-    expect(inputRevenuFiscal).toBeDefined();
-    expect(inputRevenuFiscal.value).toBe('123456');
-    expect(submitBouton).toBeDefined();
+  afterEach(() => {
+    vi.resetAllMocks();
   });
-
+  describe('quand je charge le formulaire', () => {
+    it("pré-rempli et affiche les champs associés au compte de l'utilisateur", () => {
+      // WHEN
+      // THEN
+      expect(titre).toBeDefined();
+      expect(inputNom).toBeDefined();
+      expect(inputNom.value).toBe('Claude');
+      expect(inputPrenom).toBeDefined();
+      expect(inputPrenom.value).toBe('Dubois');
+      expect(inputEmail).toBeDefined();
+      expect(inputEmail.value).toBe('claud-dubois@exemple.com');
+      expect(inputCodePostal).toBeDefined();
+      expect(inputCodePostal.value).toBe('75002');
+      expect(selectCommune).toBeDefined();
+      expect(selectCommune.value).toBe('PARIS 02');
+      expect(inputRevenuFiscal).toBeDefined();
+      expect(inputRevenuFiscal.value).toBe('123456');
+      expect(submitBouton).toBeDefined();
+    });
+  });
   describe('quand je mets à jour mes informations', () => {
     it('la valeur des champs est modifiée', async () => {
       // WHEN
