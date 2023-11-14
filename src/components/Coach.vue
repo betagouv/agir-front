@@ -35,6 +35,11 @@
       </div>
     </div>
   </div>
+  <section class="fr-py-6w background--bleu-dark">
+    <div class="fr-container">
+      <CoachChangementSituation />
+    </div>
+  </section>
 </template>
 
 <script setup lang="ts">
@@ -58,6 +63,7 @@
   import { ChargementScorePresenterImpl } from '@/score/adapters/chargementScorePresenterImpl';
   import { utilisateurStore } from '@/store/utilisateur';
   import { CliquerInteractionUsecase } from '@/interactions/cliquerInteraction.usecase';
+  import CoachChangementSituation from '@/components/custom/Coach/CoachChangementSituation.vue';
 
   const empreinteViewModel = ref<EmpreinteViewModel>();
   const interactionsViewModel = ref<InteractionViewModel[]>();
