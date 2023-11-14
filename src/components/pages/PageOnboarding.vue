@@ -8,7 +8,6 @@
             :etape-courante="etapeCourante + 1"
             :etape-total="etapesOnboarding.length"
             :titre-etape="etapesOnboarding[etapeCourante]"
-            :titre-etape-suivante="etapesOnboarding[etapeCourante + 1]"
           />
           <OnboardingEtapeTransport v-if="etapeCourante === 0" @submitEtape="submitEtape" />
           <OnboardingEtapeLogement
@@ -51,7 +50,7 @@
   import AsideOnboardingEtapeConsommation from '@/components/custom/Onboarding/AsideOnboardingEtapeConsommation.vue';
 
   const etapeCourante = ref<number>(0);
-  const etapesOnboarding = ['Transports', 'Logement', 'Alimentation', 'Consommation'];
+  const etapesOnboarding = ['🚗 Transports', '🏠 Logement', '🥦 Alimentation', '🛒 Consommation'];
 
   const submitEtape = () => {
     window.scrollTo(0, 0);

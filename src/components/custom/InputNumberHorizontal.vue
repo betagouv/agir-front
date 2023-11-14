@@ -1,14 +1,14 @@
 <template>
-  <div class="fr-grid-row fr-grid-row--gutters fr-grid-row--middle fr-mx-0">
+  <div class="fr-grid-row fr-grid-row--middle fr-mx-0">
     <input
-      class="fr-input fr-col"
+      class="fr-input fr-col fr-mr-1w"
       pattern="[0-9]*"
       inputmode="numeric"
       type="number"
       :id="name"
       :name="name"
       @input="updateValue"
-      min="0"
+      :min="minValue"
       :value="defaultValue"
     />
     <label class="fr-label fr-col" :for="name">
@@ -21,6 +21,7 @@
   defineProps<{
     label: string;
     name: string;
+    minValue: string;
     defaultValue?: string;
   }>();
 

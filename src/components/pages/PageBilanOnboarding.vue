@@ -9,11 +9,14 @@
         />
       </div>
       <div class="fr-col-lg-6 fr-col-12 text--center">
-        <img alt="Plateforme Agir :" src="/logo_agir.png" class="fr-mb-3w" />
+        <img alt="Plateforme Agir :" src="/logo.svg" class="fr-mb-3w logo" />
         <h2 class="fr-px-4w">
           Toutes les solutions pour réduire votre empreinte écologique selon vos moyens, vos lieux de vie et vos envie
         </h2>
-        <router-link class="fr-btn fr-btn--icon-left fr-icon-arrow-right-line" :to="{ name: 'creation-compte' }">
+        <router-link
+          class="fr-btn fr-btn--lg fr-btn--icon-left fr-icon-arrow-right-line"
+          :to="{ name: 'creation-compte' }"
+        >
           Je m’inscris
         </router-link>
       </div>
@@ -34,11 +37,14 @@
   </section>
   <section class="fr-container">
     <div class="fr-grid fr-grid-row fr-grid-row--middle flex-column fr-pt-16w fr-pb-8w">
-      <img alt="" src="/logo_agir.png" class="fr-mb-3w" />
+      <img alt="Plateforme Agir :" src="/logo.svg" class="fr-mb-3w logo" />
       <h2 class="fr-h1 text--center fr-col-lg-9">
         Toutes les solutions pour réduire votre empreinte écologique selon vos moyens, vos lieux de vie et vos envie
       </h2>
-      <router-link class="fr-btn fr-btn--icon-left fr-icon-arrow-right-line" :to="{ name: 'creation-compte' }">
+      <router-link
+        class="fr-btn fr-btn--lg fr-btn--icon-left fr-icon-arrow-right-line"
+        :to="{ name: 'creation-compte' }"
+      >
         Je m’inscris
       </router-link>
     </div>
@@ -70,3 +76,9 @@
     })
   );
 </script>
+
+<style>
+  .logo {
+    width: 14rem;
+  }
+</style>

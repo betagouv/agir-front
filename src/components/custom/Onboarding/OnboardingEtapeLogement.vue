@@ -17,6 +17,7 @@
         class="fr-mr-8w fr-mb-2w"
         v-model="viewModel.adultes"
         :default-value="viewModel.adultes"
+        min-value="1"
       />
       <InputNumberHorizontal
         label="Enfant(s)"
@@ -24,6 +25,7 @@
         class="fr-mb-2w"
         v-model="viewModel.enfants"
         :default-value="viewModel.enfants"
+        min-value="0"
       />
     </div>
     <BoutonRadio

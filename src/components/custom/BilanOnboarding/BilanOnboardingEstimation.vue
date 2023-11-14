@@ -1,5 +1,5 @@
 <template>
-  <div class="background--white border border-radius--lg fr-p-4w shadow">
+  <div class="background--white border-radius--lg fr-p-4w shadow">
     <h2 class="fr-h2">Nos usages ont de l’effet sur l’environnement</h2>
     <p class="fr-text--lg">
       Voici une <strong>1ère estimation de vos impacts.</strong><br />
@@ -9,15 +9,15 @@
       <span class="fr-pl-2w">Impact très faible</span>
       <span class="fr-pr-2w">Impact très fort</span>
     </div>
-    <div class="legende--jauge fr-grid-row fr-text--sm fr-mb-1w">
+    <div class="legende--jauge fr-grid-row fr-text--sm">
       <span>1</span>
       <span>2</span>
       <span>3</span>
       <span>4</span>
     </div>
-    <div v-if="resultat">
+    <div v-if="resultat" class="fr-mb-3w">
       <div v-for="item in resultat" :key="item.libelle">
-        <OnboardingJauge class="fr-mb-5v" :libelle="item.libelle" :valeur="item.valeur" />
+        <OnboardingJauge class="fr-mb-1w" :libelle="item.libelle" :valeur="item.valeur" />
       </div>
     </div>
     <p v-if="phrase" v-html="phrase" class="fr-mb-0 fr-text--sm" />

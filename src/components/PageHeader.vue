@@ -20,7 +20,7 @@
             </div>
             <div class="fr-col-12 fr-grid-row fr-grid-row--middle">
               <router-link class="fr-header__service" :to="{ name: estConnecte ? 'coach' : 'accueil' }">
-                <img height="50" alt="agir-logo" src="/logo_agir_beta.png" />
+                <img :alt="`${estConnecte ? 'Revenir à la page coach' : 'Revenir à l\'accueil'}`" src="/logo.svg" />
               </router-link>
             </div>
           </div>
@@ -164,5 +164,11 @@
   .fr-header__service {
     box-shadow: none;
     width: auto;
+  }
+
+  @media (min-width: 62em) {
+    .fr-header__body-row {
+      padding: 1rem 0;
+    }
   }
 </style>
