@@ -135,12 +135,15 @@ const routes = [
     ],
   },
   {
-    path: '/mes-aides',
+    path: '/vos-aides',
     children: [
       {
-        path: '/mes-aides',
+        path: '/vos-aides',
         name: 'mes-aides',
         component: PageAides,
+        meta: {
+          title: `${appName} Vos aides`,
+        },
       },
       {
         path: '/mes-aides/retrofit',

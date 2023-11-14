@@ -72,9 +72,9 @@
             </li>
             <li class="fr-nav__item" data-fr-js-navigation-item="true">
               <router-link v-if="isMesAidesActif" class="fr-nav__link" :to="{ name: 'mes-aides' }" aria-current="page">
-                Mes Aides
+                Vos Aides
               </router-link>
-              <router-link v-else class="fr-nav__link" :to="{ name: 'mes-aides' }"> Mes Aides </router-link>
+              <router-link v-else class="fr-nav__link" :to="{ name: 'mes-aides' }"> Vos Aides </router-link>
             </li>
           </ul>
         </nav>

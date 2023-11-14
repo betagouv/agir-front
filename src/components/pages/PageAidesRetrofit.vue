@@ -29,7 +29,7 @@
   import AsideAideRetrofit from '@/components/custom/Aides/AidesRetrofitAside.vue';
   import { SimulationAideResultatViewModel } from '@/aides/ports/simulationAideResultat';
 
-  const titrePage = 'Mes aides - Retrofit';
+  const titrePage = 'Vos aides - Retrofit';
   const sousTitre = 'Vous pouvez bénéficier des aides Retrofit suivantes :';
   const simulationAidesRetrofitViewModel = ref<SimulationAideResultatViewModel | null>(null);
   const codePostal = ref<string>('');
