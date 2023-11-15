@@ -34,7 +34,12 @@
                       <img src="/ic_user.svg" class="fr-mr-1v fr-mb-n1v" alt="" />
                       {{ nomUtilisateur }}
                     </router-link>
-                    <div class="score"><img src="/leaf.svg" alt="" />{{ score }}</div>
+                    <div class="tag__progression niveau fr-text--bold">
+                      1 <img width="16" src="/ic_star.svg" alt="niveau" />
+                    </div>
+                    <div class="tag__progression score fr-text--bold">
+                      {{ score }} <img width="16" src="/ic_score.svg" alt="score" />
+                    </div>
                   </div>
                   <button class="fr-btn fr-btn--sm" @click="logout">Se déconnecter</button>
                 </li>
@@ -137,13 +142,20 @@
 </script>
 
 <style scoped>
-  .score {
+  .tag__progression {
     display: flex;
     padding: 0.5rem;
     align-items: center;
     gap: 0.5rem;
     border-radius: 8px;
-    background: #f6f6f6;
+  }
+
+  .tag__progression.score {
+    background: rgba(104, 165, 50, 0.1);
+  }
+
+  .tag__progression.niveau {
+    background: rgba(237, 142, 0, 0.1);
   }
 
   .utilisateur {
