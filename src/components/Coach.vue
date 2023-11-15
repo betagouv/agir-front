@@ -33,6 +33,11 @@
       </div>
     </div>
   </div>
+  <section class="fr-py-6w">
+    <div class="fr-container">
+      <CoachRecommandations />
+    </div>
+  </section>
   <section class="fr-py-6w background--bleu-dark">
     <div class="fr-container">
       <CoachChangementSituation />
@@ -56,6 +61,7 @@
   import CoachChangementSituation from '@/components/custom/Coach/CoachChangementSituation.vue';
   import CarteScore from '@/components/custom/Progression/CarteScore.vue';
   import ProgressionNiveauJauge from '@/components/custom/Progression/ProgressionNiveauJauge.vue';
+  import CoachRecommandations from './custom/Coach/CoachRecommandations.vue';
 
   const interactionsViewModel = ref<InteractionViewModel[]>();
   const scoreViewModel = ref<ScoreViewModel>();
