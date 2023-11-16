@@ -1,8 +1,6 @@
 <template>
-  <nav
-    class="fr-grid-row fr-grid-row--gutters fr-grid-row--middle fr-mt-0 fr-background-action-high--blue-france fr-p-2w"
-  >
-    <span class="fr-icon-layout-grid-fill text--white text--bold fr-col">Vos services</span>
+  <nav class="fr-grid-row fr-grid-row--middle fr-mt-0 fr-background-action-high--blue-france fr-p-2w">
+    <span class="fr-icon-layout-grid-fill text--white text--bold fr-col fr-mr-2w">Vos services</span>
     <ul class="fr-grid-row service__list fr-col-10 list-style-none fr-p-0">
       <li class="fr-p-0 fr-col" v-for="service in servicesViewModels" :key="service.label">
         <a
