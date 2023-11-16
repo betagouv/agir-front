@@ -26,21 +26,7 @@
 <script setup lang="ts">
   import CoachCardRecommandationHighlight from '@/components/custom/Coach/CoachCardRecommandationHighlight.vue';
   import CoachCardRecommandations from '@/components/custom/Coach/CoachCardRecommandations.vue';
+  import { RecommandationPersonnaliseeViewModel } from '@/recommandationsPersonnalisees/adapters/recommandationsPersonnalisees.presenter.impl';
 
-  interface RecommandationsViewModel {
-    recommandationHighlight: {
-      titre: string;
-      image: string;
-      description: string;
-      url: string;
-    };
-    recommandationsList: {
-      thematique: string;
-      titre: string;
-      image: string;
-      url: string;
-    }[];
-  }
-
-  defineProps<{ recommandations: RecommandationsViewModel }>();
+  defineProps<{ recommandations: RecommandationPersonnaliseeViewModel }>();
 </script>

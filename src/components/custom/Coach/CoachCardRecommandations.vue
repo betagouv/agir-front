@@ -3,7 +3,7 @@
     <div class="fr-p-3w">
       <span class="fr-text--bold fr-text--xs text--black">{{ thematique }}</span>
       <h3 class="card-recommandation__titre fr-text--xl fr-mb-0 text--gris-dark">
-        <router-link :to="url" class="card-recommandation__link" :title="titre">{{ titre }}</router-link>
+        <a :href="url" class="card-recommandation__link" :title="titre">{{ titre }}</a>
       </h3>
     </div>
     <img :src="image" alt="" class="card-recommandation__image" />

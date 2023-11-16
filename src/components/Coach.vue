@@ -1,23 +1,9 @@
 <template>
   <div class="fr-container fr-py-6w">
     <div>
-      <h1 class="fr-h2">Les actions du jour</h1>
+      <h1 class="fr-h2">Le coach</h1>
       <div class="fr-grid-row fr-grid-row--gutters">
-        <div class="fr-col fr-col-lg-8">
-          <ul v-if="!isLoading" class="list-style-none fr-p-0 fr-m-0">
-            <li v-for="item in interactionsViewModel" :key="item.titre" class="fr-mb-2w">
-              <InteractionCard
-                :key="item.titre"
-                :interaction-view-model="item"
-                :on-interaction-click="interactionAEteCliquee"
-                @refresh-interactions="lancerChargementDesDonnees"
-              />
-            </li>
-          </ul>
-          <div v-else>
-            <CarteSkeleton class="fr-mb-4w" v-for="item in 4" :key="item" />
-          </div>
-        </div>
+        <div class="fr-col fr-col-lg-8">Mission Agir !</div>
         <div class="fr-col-12 fr-col-lg-4">
           <div v-if="!isLoading">
             <div class="fr-grid-row flex-space-between fr-mb-1w">
@@ -34,8 +20,8 @@
     </div>
   </div>
   <section class="fr-py-6w">
-    <div class="fr-container">
-      <CoachRecommandations :recommandations="recommandations" />
+    <div class="fr-container" v-if="recommandationsPersonnaliseesViewModel">
+      <CoachRecommandations :recommandations="recommandationsPersonnaliseesViewModel" />
     </div>
   </section>
   <section class="fr-py-6w background--bleu-dark">
@@ -49,31 +35,28 @@
   import { onMounted, ref } from 'vue';
   import { ScoreViewModel } from '@/score/ports/chargementScorePresenter';
   import CarteSkeleton from '@/components/CarteSkeleton.vue';
-  import { ChargerInteractionsUsecase } from '@/interactions/chargerInteractions.usecase';
-  import { InteractionsPresenterImpl, InteractionViewModel } from '@/interactions/adapters/interactions.presenter.impl';
-  import InteractionCard from '@/components/custom/InteractionCard.vue';
-  import { InteractionsRepositoryAxios } from '@/interactions/adapters/interactionsRepository.axios';
   import { ChargementScoreUsecase } from '@/score/chargementScoreUsecase';
   import { ScoreRepositoryAxios } from '@/score/adapters/scoreRepository.axios';
   import { ChargementScorePresenterImpl } from '@/score/adapters/chargementScorePresenterImpl';
   import { utilisateurStore } from '@/store/utilisateur';
-  import { CliquerInteractionUsecase } from '@/interactions/cliquerInteraction.usecase';
   import CoachChangementSituation from '@/components/custom/Coach/CoachChangementSituation.vue';
   import CarteScore from '@/components/custom/Progression/CarteScore.vue';
   import ProgressionNiveauJauge from '@/components/custom/Progression/ProgressionNiveauJauge.vue';
   import CoachRecommandations from './custom/Coach/CoachRecommandations.vue';
+  import { RecommandationsPersonnaliseesUsecase } from '@/recommandationsPersonnalisees/recommandationsPersonnalisees.usecase';
+  import { RecommandationsPersonnaliseesRepositoryAxios } from '@/recommandationsPersonnalisees/adapters/recommandationsPersonnalisees.repository.axios';
+  import {
+    RecommandationPersonnaliseeViewModel,
+    RecommandationsPersonnaliseesPresenterImpl,
+  } from '@/recommandationsPersonnalisees/adapters/recommandationsPersonnalisees.presenter.impl';
 
-  const interactionsViewModel = ref<InteractionViewModel[]>();
   const scoreViewModel = ref<ScoreViewModel>();
   const isLoading = ref<boolean>(true);
   const store = utilisateurStore();
+  const recommandationsPersonnaliseesViewModel = ref<RecommandationPersonnaliseeViewModel>();
 
-  const emit = defineEmits<{
-    (event: 'refreshInteractions'): void;
-  }>();
-
-  function mapValuesInteractions(viewModel: InteractionViewModel[]) {
-    interactionsViewModel.value = viewModel;
+  function mapValuesInteractions(viewModel: RecommandationPersonnaliseeViewModel) {
+    recommandationsPersonnaliseesViewModel.value = viewModel;
   }
 
   function mapValuesScore(viewModel: ScoreViewModel) {
@@ -81,23 +64,18 @@
     store.setScore(viewModel.score);
   }
 
-  const interactionAEteCliquee = (interaction: InteractionViewModel) => {
-    const store = utilisateurStore();
-    const idUtilisateur = store.utilisateur.id;
-    const useCase = new CliquerInteractionUsecase(new InteractionsRepositoryAxios());
-    useCase.execute(idUtilisateur, interaction.id, interaction.type).then(() => {
-      emit('refreshInteractions');
-    });
-    store.setInteractionEnCours(interaction);
-  };
-
   const lancerChargementDesDonnees = () => {
     const idUtilisateur = store.utilisateur.id;
-    const chargerInteractionsUseCase = new ChargerInteractionsUsecase(new InteractionsRepositoryAxios());
+    const chargerRecommandationsPersonnaliseesUsecase = new RecommandationsPersonnaliseesUsecase(
+      new RecommandationsPersonnaliseesRepositoryAxios()
+    );
     const chargerScoreUseCase = new ChargementScoreUsecase(new ScoreRepositoryAxios());
     Promise.all([
       chargerScoreUseCase.execute(idUtilisateur, new ChargementScorePresenterImpl(mapValuesScore)),
-      chargerInteractionsUseCase.execute(idUtilisateur, new InteractionsPresenterImpl(mapValuesInteractions)),
+      chargerRecommandationsPersonnaliseesUsecase.execute(
+        idUtilisateur,
+        new RecommandationsPersonnaliseesPresenterImpl(mapValuesInteractions)
+      ),
     ])
       .then(() => {
         isLoading.value = false;
@@ -108,34 +86,4 @@
   };
 
   onMounted(lancerChargementDesDonnees);
-
-  const recommandations = {
-    recommandationHighlight: {
-      titre: '10 trucs et astuces pour rénover votre maison',
-      image: 'https://picsum.photos/600/600',
-      url: '#',
-      description:
-        'Hello world Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque illo fuga perferendis earum aliquid, doloribus ut distinctio impedit incidunt deleniti fugit vel voluptatibus adipisci iste eos, totam aspernatur? Nulla, repellendus.',
-    },
-    recommandationsList: [
-      {
-        thematique: '🌍 Global',
-        titre: 'Quiz avion',
-        image: 'https://picsum.photos/400/200',
-        url: 'google.com',
-      },
-      {
-        thematique: '🏡 Logement',
-        titre: 'Qu’est-ce que c’est 1 tonne CO₂-e',
-        image: 'https://picsum.photos/400/800',
-        url: 'google.com',
-      },
-      {
-        thematique: '🛒 Consommation',
-        titre: 'Calculez l’empreinte de votre foyer',
-        image: 'https://picsum.photos/500/500',
-        url: 'google.com',
-      },
-    ],
-  };
 </script>

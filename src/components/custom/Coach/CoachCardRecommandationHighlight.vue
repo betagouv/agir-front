@@ -12,9 +12,7 @@
         <span class="fr-text--bold">L'article à lire !</span>
         <h3 class="fr-h4 text--gris-dark">{{ titre }}</h3>
         <p>{{ description }}</p>
-        <router-link :to="url" class="fr-link fr-icon-arrow-right-line fr-link--icon-right">
-          Continuer la lecture
-        </router-link>
+        <a :href="url" class="fr-link fr-icon-arrow-right-line fr-link--icon-right"> Continuer la lecture </a>
       </div>
     </div>
   </div>
