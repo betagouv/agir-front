@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import PageHeader from '@/components/PageHeader.vue';
+  import Header from '@/components/dsfr/Header.vue';
   import Footer from '@/components/dsfr/Footer.vue';
   import { computed } from 'vue';
   import { NavigationGuardNext, RouteLocationNormalized } from 'vue-router';
@@ -29,7 +29,7 @@
 
 <template>
   <div class="page-container">
-    <PageHeader />
+    <Header />
     <main class="background--gris">
       <Services v-if="utilisateurConnecte" />
       <router-view />

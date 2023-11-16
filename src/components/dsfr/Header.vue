@@ -86,7 +86,7 @@
 </template>
 
 <script setup lang="ts">
-  import { computed, onMounted, ref, watch } from 'vue';
+  import { computed, ref, watch } from 'vue';
   import { useRoute } from 'vue-router';
   import router from '@/router';
   import { utilisateurStore } from '@/store/utilisateur';
@@ -95,7 +95,6 @@
   const route = useRoute();
   const store = utilisateurStore();
 
-  const currentPage = ref<string>('');
   const isCoachActif = ref(false);
   const isMesAidesActif = ref(false);
 
@@ -116,10 +115,6 @@
       isMesAidesActif.value = newPath.includes('/vos-aides');
     }
   );
-
-  onMounted(() => {
-    currentPage.value = window.location.pathname;
-  });
 </script>
 
 <style scoped>
