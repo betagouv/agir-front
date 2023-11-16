@@ -2,8 +2,8 @@
   <div class="card-recommandation shadow">
     <div class="fr-p-3w">
       <span class="fr-text--bold fr-text--xs text--black">{{ thematique }}</span>
-      <h3 class="fr-text--xl fr-mb-0 text--gris-dark">
-        <a :href="url" class="card-recommandation__link">{{ titre }}</a>
+      <h3 class="card-recommandation__titre fr-text--xl fr-mb-0 text--gris-dark">
+        <router-link :to="url" class="card-recommandation__link" :title="titre">{{ titre }}</router-link>
       </h3>
     </div>
     <img :src="image" alt="" class="card-recommandation__image" />
@@ -28,8 +28,13 @@
     background-color: white;
   }
 
+  .card-recommandation__titre {
+    text-overflow: ellipsis;
+    overflow-x: hidden;
+    white-space: nowrap;
+  }
+
   .card-recommandation__link {
-    text-decoration: none;
     background: none;
   }
 
@@ -40,6 +45,7 @@
     top: 0;
     right: 0;
     bottom: 0;
+    z-index: 2;
   }
 
   .card-recommandation__image {
@@ -60,9 +66,10 @@
     height: 3rem;
     width: 3rem;
     border-radius: 50%;
+    cursor: pointer;
   }
 
-  .card-recommandation:hover .card-recommandation__picto {
+  .card-recommandation:hover .card-recommandation__picto::before {
     animation: slide1 1s ease-in-out infinite;
   }
 
