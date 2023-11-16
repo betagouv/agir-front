@@ -27,7 +27,7 @@ describe('Compte - Formulaire', () => {
 
   beforeEach(() => {
     // GIVEN
-    const props = { compteUtlisateurViewModel };
+    const props = { compteUtlisateurViewModel: { ...compteUtlisateurViewModel } };
 
     vi.spyOn(ChargementCommunesUsecase.prototype, 'execute').mockImplementation((_codePostal: string) =>
       Promise.resolve(['PARIS 01', 'PARIS 02'])
@@ -44,10 +44,12 @@ describe('Compte - Formulaire', () => {
     submitBouton = getByRole('button', { name: 'Mettre à jour' });
     titre = getByRole('heading', { level: 2, name: 'Identité personnelle' });
   });
+
   afterEach(() => {
     vi.resetAllMocks();
     vi.resetConfig();
   });
+
   describe('quand je charge le formulaire', () => {
     it("pré-rempli et affiche les champs associés au compte de l'utilisateur", () => {
       // WHEN
@@ -68,6 +70,7 @@ describe('Compte - Formulaire', () => {
       expect(submitBouton).toBeDefined();
     });
   });
+
   describe('quand je mets à jour mes informations', () => {
     it('la valeur des champs est modifiée', async () => {
       // WHEN
