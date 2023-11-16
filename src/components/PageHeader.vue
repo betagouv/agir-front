@@ -3,7 +3,7 @@
     <div class="fr-header__body">
       <div class="fr-container">
         <div class="fr-header__body-row">
-          <div class="fr-header__brand fr-enlarge-link">
+          <div class="fr-header__brand">
             <div class="fr-header__brand-top">
               <div class="fr-header__navbar">
                 <button
@@ -18,9 +18,11 @@
                 </button>
               </div>
             </div>
-            <router-link class="fr-header__service" :to="{ name: estConnecte ? 'coach' : 'accueil' }">
-              <img width="70" alt="agir-logo" src="/logo_agir.png" />
-            </router-link>
+            <div class="fr-col-12 fr-grid-row fr-grid-row--middle">
+              <router-link class="fr-header__service" :to="{ name: estConnecte ? 'coach' : 'accueil' }">
+                <img :alt="`${estConnecte ? 'Revenir à la page coach' : 'Revenir à l\'accueil'}`" src="/logo.svg" />
+              </router-link>
+            </div>
           </div>
           <div class="fr-header__tools">
             <div class="fr-header__tools-links">
@@ -70,15 +72,9 @@
             </li>
             <li class="fr-nav__item" data-fr-js-navigation-item="true">
               <router-link v-if="isMesAidesActif" class="fr-nav__link" :to="{ name: 'mes-aides' }" aria-current="page">
-                Mes Aides
+                Vos Aides
               </router-link>
-              <router-link v-else class="fr-nav__link" :to="{ name: 'mes-aides' }"> Mes Aides </router-link>
-            </li>
-            <li class="fr-nav__item" data-fr-js-navigation-item="true">
-              <router-link v-if="isDashboardActif" class="fr-nav__link" :to="{ name: 'dashboard' }" aria-current="page">
-                Mon Tableau de Bord
-              </router-link>
-              <router-link v-else class="fr-nav__link" :to="{ name: 'dashboard' }"> Mon Tableau de Bord </router-link>
+              <router-link v-else class="fr-nav__link" :to="{ name: 'mes-aides' }"> Vos Aides </router-link>
             </li>
           </ul>
         </nav>
@@ -163,5 +159,16 @@
     align-items: center;
     gap: 1rem;
     flex: 1 0 0;
+  }
+
+  .fr-header__service {
+    box-shadow: none;
+    width: auto;
+  }
+
+  @media (min-width: 62em) {
+    .fr-header__body-row {
+      padding: 1rem 0;
+    }
   }
 </style>

@@ -8,7 +8,7 @@
       Votre alimentation participe à votre impact.<br />
       Elle représente en moyenne 24% des émissions de gaz à effets de serre du français moyen.
     </p>
-    <span class="text--xs">Source: carbone 4</span>
+    <span class="text--xs">Source : carbone 4</span>
   </CarteInfo>
 </template>
 

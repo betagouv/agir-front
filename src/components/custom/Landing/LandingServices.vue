@@ -1,5 +1,5 @@
 <template>
-  <h2 class="text--center">De nombreux services pour naviguer dans la transition écologique</h2>
+  <h2 class="fr-h2 text--center">De nombreux services pour naviguer dans la transition écologique</h2>
   <ul class="fr-grid-row fr-grid-row--gutters list-style-none">
     <li v-for="(service, index) in services" :key="index" class="fr-col-md-4 fr-col-12">
       <div class="border background--white full-height fr-grid-row flex-column">
@@ -21,10 +21,10 @@
     {
       titre: 'Un accompagnement personnalisé',
       liste: [
-        'tous les outils pour comprendre vos usages, vos moyens et vos envies et faire des recommandations adaptées',
-        'des solutions pour toutes les situations',
-        'une bibliothèque de contenus pour trouver les réponses à vos questions',
-        'une approche ludique et pas à pas pour aller à votre rythme',
+        'Tous les outils pour comprendre vos usages, vos moyens et vos envies et faire des recommandations adaptées',
+        'Des solutions pour toutes les situations',
+        'Une bibliothèque de contenus pour trouver les réponses à vos questions',
+        'Une approche ludique et pas à pas pour aller à votre rythme',
       ],
       accroche: "Plus de 1000 façons d'interagir avec Agir",
       imgUrl: '/OB-Coach.png',
@@ -42,9 +42,9 @@
     {
       titre: 'Des solutions éprouvées et partagées avec d’autres citoyens',
       liste: [
-        'de nombreuses opportunités d’échanger les bonnes pratiques entre citoyens ayant les mêmes contraintes',
-        'l’actualité de votre zone de vie pour connaître les événements et les nouvelles infrastructures',
-        'des groupes thématiques pour avancer ensemble',
+        'De nombreuses opportunités d’échanger les bonnes pratiques entre citoyens ayant les mêmes contraintes',
+        'L’actualité de votre zone de vie pour connaître les événements et les nouvelles infrastructures',
+        'Des groupes thématiques pour avancer ensemble',
       ],
       accroche: 'Déjà 180 groupes locaux créés dans Agir',
       imgUrl: '/OB-Suivi.png',

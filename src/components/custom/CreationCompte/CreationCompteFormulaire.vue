@@ -1,5 +1,5 @@
 <template>
-  <form aria-labelledby="identity-fieldset-legend" @submit.prevent="performCreerCompteUtilisateur">
+  <form aria-labelledby="identity-fieldset-legend" @submit.prevent="performCreerCompteUtilisateur" class="fr-mb-4w">
     <fieldset class="fr-fieldset fr-mb-0">
       <legend class="fr-fieldset__legend" id="identity-fieldset-legend">
         <h2>Création de compte sur Agir</h2>
@@ -26,7 +26,7 @@
         />
       </div>
       <div class="fr-fieldset__element fr-mb-0">
-        <button class="fr-btn display-block full-width" :disabled="!formulaireValide" type="submit">
+        <button class="fr-btn fr-btn--lg display-block full-width" :disabled="!formulaireValide" type="submit">
           Créer votre compte
         </button>
       </div>
@@ -41,6 +41,10 @@
       </div>
     </fieldset>
   </form>
+  <hr class="fr-pb-4w" />
+  <router-link :to="{ name: 'authentification' }" class="fr-btn fr-btn--lg fr-btn--tertiary full-width flex-center">
+    J'ai déjà un compte
+  </router-link>
 </template>
 
 <script setup lang="ts">

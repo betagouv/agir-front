@@ -1,6 +1,6 @@
 <template>
   <fieldset class="fr-fieldset" :id="name" aria-labelledby="radio-legend">
-    <legend class="fr-fieldset__legend--regular fr-fieldset__legend fr-h4" id="radio-legend">
+    <legend class="fr-fieldset__legend--regular fr-fieldset__legend fr-h4 fr-pb-0" id="radio-legend">
       {{ legende }}
     </legend>
     <div class="fr-grid-row full-width">

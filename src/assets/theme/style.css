@@ -59,6 +59,10 @@ h3 {
   justify-content: space-between;
 }
 
+.flex-center {
+  justify-content: center;
+}
+
 .display-block {
   display: block;
 }

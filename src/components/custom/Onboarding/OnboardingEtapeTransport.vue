@@ -11,6 +11,7 @@
       class="fr-mb-2w"
       v-model="viewModel.avion"
       :default-value="viewModel.avion"
+      min-value="0"
     />
     <button class="fr-btn" :disabled="!(viewModel.transports.length > 0) || !(viewModel.avion.length > 0)">
       Continuer
