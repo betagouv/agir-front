@@ -1,5 +1,5 @@
 <template>
-  <div class="fr-container- fr-mb-6w">
+  <div class="fr-container fr-mb-6w">
     <FilDAriane
       :page-courante="`Article: ${article.titre}`"
       :page-hierarchie="[
