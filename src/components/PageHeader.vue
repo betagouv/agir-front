@@ -65,16 +65,18 @@
         >
           <ul class="fr-nav__list">
             <li class="fr-nav__item" data-fr-js-navigation-item="true">
-              <router-link v-if="isCoachActif" class="fr-nav__link" :to="{ name: 'coach' }" aria-current="page">
+              <router-link class="fr-nav__link" :to="{ name: 'coach' }" :aria-current="isCoachActif ? 'page' : null">
                 Le coach
               </router-link>
-              <router-link v-else class="fr-nav__link" :to="{ name: 'coach' }"> Le coach </router-link>
             </li>
             <li class="fr-nav__item" data-fr-js-navigation-item="true">
-              <router-link v-if="isMesAidesActif" class="fr-nav__link" :to="{ name: 'mes-aides' }" aria-current="page">
+              <router-link
+                class="fr-nav__link"
+                :to="{ name: 'mes-aides' }"
+                :aria-current="isMesAidesActif ? 'page' : null"
+              >
                 Vos Aides
               </router-link>
-              <router-link v-else class="fr-nav__link" :to="{ name: 'mes-aides' }"> Vos Aides </router-link>
             </li>
           </ul>
         </nav>
@@ -82,58 +84,41 @@
     </div>
   </header>
 </template>
-<script lang="ts">
+
+<script setup lang="ts">
+  import { computed, onMounted, ref, watch } from 'vue';
+  import { useRoute } from 'vue-router';
   import router from '@/router';
-  import { defineComponent, onMounted, ref } from 'vue';
-  import { RouteLocation } from 'vue-router';
   import { utilisateurStore } from '@/store/utilisateur';
   import Cookies from 'js-cookie';
 
-  export default defineComponent({
-    name: 'PageHeader',
-    computed: {
-      score() {
-        return utilisateurStore().score;
-      },
-      nomUtilisateur() {
-        return utilisateurStore().utilisateur.prenom;
-      },
-      estConnecte() {
-        return utilisateurStore().utilisateur.nom.length > 0;
-      },
-    },
-    watch: {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      $route(to: RouteLocation, from: RouteLocation) {
-        this.isCoachActif = to.fullPath.includes('/coach');
-        this.isMesAidesActif = to.fullPath.includes('/mes-aides');
-        this.isDashboardActif = to.fullPath.includes('/mon-tableau-de-bord');
-      },
-    },
-    setup() {
-      const currentPage = ref<string>('');
-      const isCoachActif = ref<boolean>(false);
-      const isMesAidesActif = ref<boolean>(false);
-      const isDashboardActif = ref<boolean>(false);
+  const route = useRoute();
+  const store = utilisateurStore();
 
-      function logout() {
-        utilisateurStore().reset();
-        Cookies.remove('bearer');
-        router.replace('/');
-      }
+  const currentPage = ref<string>('');
+  const isCoachActif = ref(false);
+  const isMesAidesActif = ref(false);
 
-      onMounted(() => {
-        currentPage.value = window.location.pathname;
-      });
+  const score = computed(() => store.score);
+  const nomUtilisateur = computed(() => store.utilisateur.prenom);
+  const estConnecte = computed(() => store.utilisateur.nom.length > 0);
 
-      return {
-        logout,
-        currentPage,
-        isCoachActif,
-        isMesAidesActif,
-        isDashboardActif,
-      };
-    },
+  const logout = () => {
+    store.reset();
+    Cookies.remove('bearer');
+    router.replace('/');
+  };
+
+  watch(
+    () => route.path,
+    newPath => {
+      isCoachActif.value = newPath.includes('/coach');
+      isMesAidesActif.value = newPath.includes('/vos-aides');
+    }
+  );
+
+  onMounted(() => {
+    currentPage.value = window.location.pathname;
   });
 </script>
 
