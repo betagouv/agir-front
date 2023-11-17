@@ -63,7 +63,7 @@ export class RecommandationsPersonnaliseesPresenterImpl implements Recommandatio
   private determineUrl(recommandationPersonnalisee: RecommandationPersonnalisee) {
     switch (recommandationPersonnalisee.type) {
       case InteractionType.AIDE:
-        return '/coach/vos-aides';
+        return '/vos-aides';
       case InteractionType.QUIZ:
         return `/coach/quiz/${recommandationPersonnalisee.idDuContenu}`;
       case InteractionType.ARTICLE:
