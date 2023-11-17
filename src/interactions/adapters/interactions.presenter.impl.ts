@@ -28,6 +28,7 @@ export class InteractionsPresenterImpl implements InteractionsPresenter {
       [InteractionType.QUIZ]: 'QUIZ',
       [InteractionType.ARTICLE]: 'ARTICLE',
       [InteractionType.SUIVIDUJOUR]: 'SUIVI',
+      [InteractionType.AIDE]: 'AIDE',
     };
 
     const interactionNonFaites = interactions
@@ -56,6 +57,8 @@ export class InteractionsPresenterImpl implements InteractionsPresenter {
 
   private determineUrl(interaction: Interaction) {
     switch (interaction.type) {
+      case InteractionType.AIDE:
+        return '/vos-aides';
       case InteractionType.QUIZ:
         return `/coach/quiz/${interaction.idDuContenu}`;
       case InteractionType.ARTICLE:

@@ -83,11 +83,19 @@ h3 {
   color: #fff;
 }
 
+.text--black {
+  color: #000;
+}
+
 .text--bleu {
   color: var(--blue-france-sun-113-625);
 }
 
 .text--gris {
+  color: var(--text-default-grey);
+}
+
+.text--gris-dark {
   color: var(--text-default-grey);
 }
 
