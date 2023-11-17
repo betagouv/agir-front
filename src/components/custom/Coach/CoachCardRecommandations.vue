@@ -18,28 +18,14 @@
 </template>
 
 <script setup lang="ts">
-  import { utilisateurStore } from '@/store/utilisateur';
-  import { CliquerInteractionUsecase } from '@/interactions/cliquerInteraction.usecase';
-  import { InteractionsRepositoryAxios } from '@/interactions/adapters/interactionsRepository.axios';
-  import { interactionEnCoursStore } from '@/store/interaction';
   import { RecommandationViewModel } from '@/recommandationsPersonnalisees/adapters/recommandationsPersonnalisees.presenter.impl';
+  import { useInteraction } from '@/composables/recommandationAEteCliquee';
 
   const props = defineProps<{
     recommandation: RecommandationViewModel;
   }>();
 
-  function interactionAEteCliquee(): void {
-    const store = utilisateurStore();
-    const idUtilisateur = store.utilisateur.id;
-    const useCase = new CliquerInteractionUsecase(new InteractionsRepositoryAxios());
-    useCase.execute(idUtilisateur, props.recommandation.id, props.recommandation.type).then(() => {});
-    interactionEnCoursStore().setInteractionEnCours({
-      id: props.recommandation.id,
-      type: props.recommandation.type,
-      nombreDePointsAGagner: props.recommandation.nombreDePointsAGagner,
-      idDuContenu: props.recommandation.contentId,
-    });
-  }
+  const { interactionAEteCliquee } = useInteraction(props.recommandation);
 </script>
 
 <style scoped>
