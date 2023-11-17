@@ -1,12 +1,12 @@
 <template>
   <div v-if="isLoading">Chargement...</div>
-  <div v-else-if="!quizViewModel || !store.interactionEnCours">Une erreur est survenue</div>
+  <div v-else-if="!quizViewModel || !interactionEnCours">Une erreur est survenue</div>
   <PageQuizComposant
     v-else
     :quiz-view-model="quizViewModel"
-    :nombreDePointsAGagner="store.interactionEnCours ? store.interactionEnCours.nombreDePointsAGagner : '0'"
+    :nombreDePointsAGagner="interactionEnCours ? interactionEnCours.nombreDePointsAGagner : '0'"
     :id-utilisateur="store.utilisateur.id"
-    :id-interaction="store.interactionEnCours.id"
+    :id-interaction="interactionEnCours ? interactionEnCours.id : ''"
     :is-mode-previsualisation="false"
   >
     <BilanNosGestesClimat :get-impact-value="store.valeurBilanCarbone" />
@@ -19,12 +19,14 @@
   import { ChargementQuizUsecase } from '@/quiz/chargementQuiz.usecase';
   import { ChargementQuizPresenterImpl, QuizViewModel } from '@/quiz/adapters/chargementQuiz.presenter.impl';
   import { utilisateurStore } from '@/store/utilisateur';
+  import { interactionEnCoursStore } from '@/store/interaction';
   import PageQuizComposant from '@/components/custom/PageQuizComposant.vue';
   import { QuizRepositoryCMSAxios } from '@/quiz/adapters/quizRepositoryCMSAxios';
   import BilanNosGestesClimat from '@/components/BilanNosGestesClimat.vue';
 
   const quizViewModel = ref<QuizViewModel>();
   const store = utilisateurStore();
+  const interactionEnCours = interactionEnCoursStore().interactionEnCours;
   const route = useRoute();
   const isLoading = ref<boolean>(false);
 

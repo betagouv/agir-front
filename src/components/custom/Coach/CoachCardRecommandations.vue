@@ -1,23 +1,45 @@
 <template>
   <div class="card-recommandation shadow">
     <div class="fr-p-3w">
-      <span class="fr-text--bold fr-text--xs text--black">{{ thematique }}</span>
+      <span class="fr-text--bold fr-text--xs text--black">{{ props.recommandation.thematique }}</span>
       <h3 class="card-recommandation__titre fr-text--xl fr-mb-0 text--gris-dark">
-        <a :href="url" class="card-recommandation__link" :title="titre">{{ titre }}</a>
+        <a
+          :href="props.recommandation.url"
+          class="card-recommandation__link"
+          :title="props.recommandation.titre"
+          @click="interactionAEteCliquee"
+          >{{ props.recommandation.titre }}</a
+        >
       </h3>
     </div>
-    <img :src="image" alt="" class="card-recommandation__image" />
+    <img :src="props.recommandation.image" alt="" class="card-recommandation__image" />
     <span class="fr-icon-arrow-right-line card-recommandation__picto text--bleu shadow" aria-hidden="true"></span>
   </div>
 </template>
 
 <script setup lang="ts">
-  defineProps<{
-    thematique: string;
-    titre: string;
-    image: string;
-    url: string;
+  import { utilisateurStore } from '@/store/utilisateur';
+  import { CliquerInteractionUsecase } from '@/interactions/cliquerInteraction.usecase';
+  import { InteractionsRepositoryAxios } from '@/interactions/adapters/interactionsRepository.axios';
+  import { interactionEnCoursStore } from '@/store/interaction';
+  import { RecommandationViewModel } from '@/recommandationsPersonnalisees/adapters/recommandationsPersonnalisees.presenter.impl';
+
+  const props = defineProps<{
+    recommandation: RecommandationViewModel;
   }>();
+
+  function interactionAEteCliquee(): void {
+    const store = utilisateurStore();
+    const idUtilisateur = store.utilisateur.id;
+    const useCase = new CliquerInteractionUsecase(new InteractionsRepositoryAxios());
+    useCase.execute(idUtilisateur, props.recommandation.id, props.recommandation.type).then(() => {});
+    interactionEnCoursStore().setInteractionEnCours({
+      id: props.recommandation.id,
+      type: props.recommandation.type,
+      nombreDePointsAGagner: props.recommandation.nombreDePointsAGagner,
+      idDuContenu: props.recommandation.contentId,
+    });
+  }
 </script>
 
 <style scoped>

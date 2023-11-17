@@ -7,7 +7,7 @@ export class CliquerInteractionUsecase {
   }
 
   async execute(utilisateurId: string, interactionId: string, interactionType: string): Promise<void> {
-    if (interactionType === 'ARTICLE') {
+    if (interactionType === 'article') {
       await this._interactionRepository.interactionAEteTerminee(interactionId, utilisateurId);
     }
     await this._interactionRepository.interactionAEteCliquee(interactionId, utilisateurId);

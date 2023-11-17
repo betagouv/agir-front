@@ -49,6 +49,12 @@
     RecommandationPersonnaliseeViewModel,
     RecommandationsPersonnaliseesPresenterImpl,
   } from '@/recommandationsPersonnalisees/adapters/recommandationsPersonnalisees.presenter.impl';
+  import {
+    ChargementEmpreintePresenterImpl,
+    EmpreinteViewModel,
+  } from '@/bilan/adapters/chargementEmpreinte.presenter.impl';
+  import { ChargementEmpreinteUsecase } from '@/bilan/chargementEmpreinte.usecase';
+  import { EmpreinteRepositoryAxios } from '@/bilan/adapters/empreinteRepository.axios';
 
   const scoreViewModel = ref<ScoreViewModel>();
   const isLoading = ref<boolean>(true);
@@ -64,14 +70,21 @@
     store.setScore(viewModel.score);
   }
 
+  function mapValueBilan(viewModel: EmpreinteViewModel) {
+    store.setValeurBilanCarbone(viewModel);
+  }
+
   const lancerChargementDesDonnees = () => {
     const idUtilisateur = store.utilisateur.id;
     const chargerRecommandationsPersonnaliseesUsecase = new RecommandationsPersonnaliseesUsecase(
       new RecommandationsPersonnaliseesRepositoryAxios()
     );
     const chargerScoreUseCase = new ChargementScoreUsecase(new ScoreRepositoryAxios());
+    const chargementEmpreinteUseCase = new ChargementEmpreinteUsecase(new EmpreinteRepositoryAxios());
+
     Promise.all([
       chargerScoreUseCase.execute(idUtilisateur, new ChargementScorePresenterImpl(mapValuesScore)),
+      chargementEmpreinteUseCase.execute(idUtilisateur, new ChargementEmpreintePresenterImpl(mapValueBilan)),
       chargerRecommandationsPersonnaliseesUsecase.execute(
         idUtilisateur,
         new RecommandationsPersonnaliseesPresenterImpl(mapValuesInteractions)

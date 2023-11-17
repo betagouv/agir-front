@@ -2,21 +2,20 @@ import { RecommandationPersonnalisee } from '@/recommandationsPersonnalisees/rec
 import { InteractionType } from '@/interactions/chargerInteractions.usecase';
 import { RecommandationsPersonnaliseesPresenter } from '@/recommandationsPersonnalisees/ports/recommandationsPersonnalisees.presenter';
 
+export interface RecommandationViewModel {
+  id: string;
+  titre: string;
+  image: string;
+  description: string;
+  url: string;
+  contentId: string;
+  nombreDePointsAGagner: string;
+  type: string;
+  thematique: string;
+}
 export interface RecommandationPersonnaliseeViewModel {
-  recommandationHighlight: {
-    titre: string;
-    image: string;
-    description: string;
-    url: string;
-    contentId: string;
-  };
-  recommandationsList: {
-    thematique: string;
-    titre: string;
-    image: string;
-    url: string;
-    contentId: string;
-  }[];
+  recommandationHighlight: RecommandationViewModel;
+  recommandationsList: RecommandationViewModel[];
 }
 
 export class RecommandationsPersonnaliseesPresenterImpl implements RecommandationsPersonnaliseesPresenter {
@@ -31,21 +30,29 @@ export class RecommandationsPersonnaliseesPresenterImpl implements Recommandatio
     if (recommandationHighlight) {
       this.viewModel({
         recommandationHighlight: {
+          id: recommandationHighlight.id,
           titre: recommandationHighlight.titre,
           image: recommandationHighlight.illustrationURL,
           description: recommandationHighlight.sousTitre,
           url: this.determineUrl(recommandationHighlight),
           contentId: recommandationHighlight.idDuContenu,
+          nombreDePointsAGagner: recommandationHighlight.nombreDePointsAGagner,
+          type: recommandationHighlight.type,
+          thematique: recommandationHighlight.categorie,
         },
         recommandationsList: recommandationsPersonnalisees
           .filter(reco => reco.id !== recommandationHighlight.id)
           .map(recommandationPersonnalisee => {
             return {
+              id: recommandationPersonnalisee.id,
               thematique: recommandationPersonnalisee.categorie,
               titre: recommandationPersonnalisee.titre,
               image: recommandationPersonnalisee.illustrationURL,
               url: this.determineUrl(recommandationPersonnalisee),
               contentId: recommandationPersonnalisee.idDuContenu,
+              nombreDePointsAGagner: recommandationPersonnalisee.nombreDePointsAGagner,
+              type: recommandationPersonnalisee.type,
+              description: recommandationPersonnalisee.sousTitre,
             };
           })
           .slice(0, 3),
@@ -55,6 +62,8 @@ export class RecommandationsPersonnaliseesPresenterImpl implements Recommandatio
 
   private determineUrl(recommandationPersonnalisee: RecommandationPersonnalisee) {
     switch (recommandationPersonnalisee.type) {
+      case InteractionType.AIDE:
+        return '/coach/vos-aides';
       case InteractionType.QUIZ:
         return `/coach/quiz/${recommandationPersonnalisee.idDuContenu}`;
       case InteractionType.ARTICLE:
