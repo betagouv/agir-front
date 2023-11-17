@@ -113,6 +113,7 @@
   } from '@/suivi/adapters/dernierSuiviDuJour.presenter.impl';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import { utilisateurStore } from '@/store/utilisateur';
+  import { interactionEnCoursStore } from '@/store/interaction';
 
   export default defineComponent({
     name: 'SuiviDuJour',
@@ -189,7 +190,7 @@
       }
       const calculEmpreinteDuJour = () => {
         const idUtilisateur = store.utilisateur.id;
-        const idInteraction = store.interactionEnCours!.id;
+        const idInteraction = interactionEnCoursStore().interactionEnCours!.id;
         const envoyerSuiviDuJour = new EnvoyerSuiviDuJourUsecase(
           new SuiviDuJourRepositoryAxios(),
           new InteractionsRepositoryAxios()
