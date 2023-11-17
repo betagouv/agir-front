@@ -23,6 +23,9 @@
     <div class="fr-container" v-if="recommandationsPersonnaliseesViewModel">
       <CoachRecommandations :recommandations="recommandationsPersonnaliseesViewModel" />
     </div>
+    <div class="fr-container" v-else>
+      <CarteSkeleton />
+    </div>
   </section>
   <section class="fr-py-6w background--bleu-dark">
     <div class="fr-container">
