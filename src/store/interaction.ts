@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 
-interface InteractionEnCours {
+export interface InteractionEnCours {
   id: string;
   nombreDePointsAGagner: string;
   type: string;
