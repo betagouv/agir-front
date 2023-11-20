@@ -3,7 +3,9 @@
     <div>
       <h1 class="fr-h2">Le coach</h1>
       <div class="fr-grid-row fr-grid-row--gutters">
-        <div class="fr-col fr-col-lg-8">Mission Agir !</div>
+        <div class="fr-col fr-col-lg-8">
+          <CoachToDo />
+        </div>
         <div class="fr-col-12 fr-col-lg-4">
           <div v-if="!isLoading">
             <div class="fr-grid-row flex-space-between fr-mb-1w">
@@ -58,6 +60,7 @@
   } from '@/bilan/adapters/chargementEmpreinte.presenter.impl';
   import { ChargementEmpreinteUsecase } from '@/bilan/chargementEmpreinte.usecase';
   import { EmpreinteRepositoryAxios } from '@/bilan/adapters/empreinteRepository.axios';
+  import CoachToDo from './custom/Coach/CoachToDo.vue';
 
   const scoreViewModel = ref<ScoreViewModel>();
   const isLoading = ref<boolean>(true);

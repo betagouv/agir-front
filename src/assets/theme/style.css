@@ -95,8 +95,16 @@ h3 {
   color: var(--text-default-grey);
 }
 
+.text-disabled-grey {
+  color: var(--text-disabled-grey);
+}
+
 .text--gris-dark {
   color: var(--text-default-grey);
+}
+
+.text--success {
+  color: var(--success-425-625);
 }
 
 .text--rouge-erreur {
