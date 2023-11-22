@@ -19,13 +19,18 @@
 
 <script setup lang="ts">
   import { RecommandationViewModel } from '@/recommandationsPersonnalisees/adapters/recommandationsPersonnalisees.presenter.impl';
-  import { useInteraction } from '@/composables/recommandationAEteCliquee';
+  import { useInteraction } from '@/composables/interactionAEteCliquee';
 
   const props = defineProps<{
     recommandation: RecommandationViewModel;
   }>();
 
-  const { interactionAEteCliquee } = useInteraction(props.recommandation);
+  const { interactionAEteCliquee } = useInteraction({
+    id: props.recommandation.id,
+    type: props.recommandation.type,
+    nombreDePointsAGagner: props.recommandation.nombreDePointsAGagner,
+    idDuContenu: props.recommandation.contentId,
+  });
 </script>
 
 <style scoped>
