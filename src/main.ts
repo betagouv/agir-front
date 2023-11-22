@@ -30,7 +30,7 @@ app.use(VueMatomo, {
 
 Sentry.init({
   app,
-  dsn: 'https://fbc3449644ae48659f66a87005cc31bd@sentry.incubateur.net/128',
+  dsn: import.meta.env.VITE_SENTRY_DSN,
   integrations: [
     new Sentry.BrowserTracing({
       routingInstrumentation: Sentry.vueRouterInstrumentation(router),
