@@ -5,7 +5,7 @@
 </template>
 <script setup lang="ts">
   import PageArticleComposant from '@/components/PageArticleComposant.vue';
-  import { useRouter } from 'vue-router';
+  import { useRoute, useRouter } from 'vue-router';
   import { onMounted, ref } from 'vue';
   import { ArticleCMS, ChargerContenuCms } from '@/cms/chargerContenuCms';
   import BilanNosGestesClimat from '@/components/BilanNosGestesClimat.vue';
@@ -22,7 +22,10 @@
   });
 
   onMounted(async () => {
-    const articleUsecase = await new ChargerContenuCms().charger(store.interactionEnCours!.idDuContenu);
+    const route = useRoute();
+    const idArticle = route.params.id ? route.params.id.toString() : store.interactionEnCours!.idDuContenu;
+    const articleUsecase = await new ChargerContenuCms().charger(idArticle);
+
     if (articleUsecase) {
       article.value = articleUsecase;
     } else {

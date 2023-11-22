@@ -173,7 +173,15 @@ const routes = [
         path: ':titre',
         component: PageArticle,
         meta: { estPublique: false },
+        children: [
+          {
+            path: '::id',
+            component: PageArticle,
+            meta: { estPublique: false },
+          },
+        ],
       },
+
       {
         path: 'previsualisation/:id',
         component: PagePrevisualisationArticle,
