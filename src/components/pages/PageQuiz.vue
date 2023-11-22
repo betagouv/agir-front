@@ -21,7 +21,7 @@
   import { utilisateurStore } from '@/store/utilisateur';
   import { interactionEnCoursStore } from '@/store/interaction';
   import PageQuizComposant from '@/components/custom/PageQuizComposant.vue';
-  import { QuizRepositoryCMSAxios } from '@/quiz/adapters/quizRepositoryCMSAxios';
+  import { QuizRepositoryAxios } from '@/quiz/adapters/quizRepository.axios';
   import BilanNosGestesClimat from '@/components/BilanNosGestesClimat.vue';
 
   const quizViewModel = ref<QuizViewModel>();
@@ -36,8 +36,10 @@
 
   const chargementQuizz = async () => {
     isLoading.value = true;
-    const idQuiz = Array.isArray(route.params.id) ? route.params.id[0] : route.params.id;
-    const chargementQuizzUsecase = new ChargementQuizUsecase(new QuizRepositoryCMSAxios());
+    const idQuiz = route.params.id
+      ? route.params.id.toString()
+      : interactionEnCoursStore().interactionEnCours!.idDuContenu;
+    const chargementQuizzUsecase = new ChargementQuizUsecase(new QuizRepositoryAxios());
     await chargementQuizzUsecase.execute(idQuiz, new ChargementQuizPresenterImpl(mapValuesQuiz));
     isLoading.value = false;
   };

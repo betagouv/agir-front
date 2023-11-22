@@ -1,6 +1,6 @@
-import { Quiz, QuizRepository } from '../../src/quiz/ports/quizRepository';
-import { ChargementQuizUsecase } from '../../src/quiz/chargementQuiz.usecase';
-import { ChargementQuizPresenterImpl, QuizViewModel } from '../../src/quiz/adapters/chargementQuiz.presenter.impl';
+import { Quiz, QuizRepository } from '@/quiz/ports/quizRepository';
+import { ChargementQuizUsecase } from '@/quiz/chargementQuiz.usecase';
+import { ChargementQuizPresenterImpl, QuizViewModel } from '@/quiz/adapters/chargementQuiz.presenter.impl';
 
 class QuizRepositoryForTest implements QuizRepository {
   async getQuiz(id: string): Promise<Quiz> {
@@ -19,10 +19,8 @@ class QuizRepositoryForTest implements QuizRepository {
       ],
     };
   }
-
-  evaluerQuiz(utilisateur: string, quizId: string, reponses: Map<string, string>): Promise<boolean> {
-    console.log(utilisateur, quizId, reponses);
-    throw Error;
+  async terminerQuiz(idUtilisateur: string, idInteraction: string, score: number): Promise<void> {
+    return Promise.resolve();
   }
 }
 

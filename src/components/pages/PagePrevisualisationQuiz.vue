@@ -17,7 +17,7 @@
   import { ChargementQuizUsecase } from '@/quiz/chargementQuiz.usecase';
   import { ChargementQuizPresenterImpl, QuizViewModel } from '@/quiz/adapters/chargementQuiz.presenter.impl';
   import PageQuizComposant from '@/components/custom/PageQuizComposant.vue';
-  import { QuizRepositoryCMSAxios } from '@/quiz/adapters/quizRepositoryCMSAxios';
+  import { QuizRepositoryAxios } from '@/quiz/adapters/quizRepository.axios';
 
   const quizViewModel = ref<QuizViewModel>();
   const isLoading = ref<boolean>(false);
@@ -30,7 +30,7 @@
     const route = useRoute();
     isLoading.value = true;
     const idQuiz = Array.isArray(route.params.id) ? route.params.id[0] : route.params.id;
-    const chargementQuizzUsecase = new ChargementQuizUsecase(new QuizRepositoryCMSAxios());
+    const chargementQuizzUsecase = new ChargementQuizUsecase(new QuizRepositoryAxios());
     await chargementQuizzUsecase.execute(idQuiz, new ChargementQuizPresenterImpl(mapValuesQuiz));
     isLoading.value = false;
   };

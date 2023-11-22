@@ -29,8 +29,8 @@
   import IndicateurDEtape from '@/components/dsfr/IndicateurDEtapes.vue';
   import QuestionDuQuiz from '@/components/custom/QuestionDuQuiz.vue';
   import { QuizViewModel } from '@/quiz/adapters/chargementQuiz.presenter.impl';
-  import { EnvoyerDonneesQuizInteractionUsecase } from '@/interactions/envoyerDonneesQuizInteraction.usecase';
-  import { InteractionsRepositoryAxios } from '@/interactions/adapters/interactionsRepository.axios';
+  import { EnvoyerDonneesQuizInteractionUsecase } from '@/quiz/envoyerDonneesQuizInteraction.usecase';
+  import { QuizRepositoryAxios } from '@/quiz/adapters/quizRepository.axios';
 
   const props = defineProps<{
     quizViewModel: QuizViewModel;
@@ -61,7 +61,7 @@
     if (value) nombreDeBonnesReponses.value++;
 
     if (etapeCourante.value > props.quizViewModel.questions.length && !props.isModePrevisualisation) {
-      await new EnvoyerDonneesQuizInteractionUsecase(new InteractionsRepositoryAxios()).execute(
+      await new EnvoyerDonneesQuizInteractionUsecase(new QuizRepositoryAxios()).execute(
         props.idUtilisateur,
         props.idInteraction,
         nombreDeBonnesReponses.value,
