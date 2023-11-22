@@ -1,5 +1,5 @@
 <template>
-  <PageArticleComposant :article="article">
+  <PageArticleComposant :article="articleAAfficher">
     <BilanNosGestesClimat :get-impact-value="utilisateurStore().valeurBilanCarbone" />
   </PageArticleComposant>
 </template>
@@ -7,15 +7,17 @@
   import PageArticleComposant from '@/components/PageArticleComposant.vue';
   import { useRoute, useRouter } from 'vue-router';
   import { onMounted, ref } from 'vue';
-  import { ArticleCMS, ChargerContenuCms } from '@/cms/chargerContenuCms';
   import BilanNosGestesClimat from '@/components/BilanNosGestesClimat.vue';
   import { utilisateurStore } from '@/store/utilisateur';
   import { interactionEnCoursStore } from '@/store/interaction';
+  import { Article, RecupererArticleUsecase } from '@/article/recupererArticle.usecase';
+  import { ArticleRepositoryAxios } from '@/article/adapters/article.repository.axios';
+  import { PasserUnArticleCommeLuUsecase } from '@/article/passerUnArticleCommeLu.usecase';
 
   const store = interactionEnCoursStore();
   const router = useRouter();
 
-  const article = ref<ArticleCMS>({
+  const articleAAfficher = ref<Article>({
     titre: '',
     texte: '',
     sousTitre: '',
@@ -24,12 +26,20 @@
   onMounted(async () => {
     const route = useRoute();
     const idArticle = route.params.id ? route.params.id.toString() : store.interactionEnCours!.idDuContenu;
-    const articleUsecase = await new ChargerContenuCms().charger(idArticle);
-
-    if (articleUsecase) {
-      article.value = articleUsecase;
-    } else {
-      await router.push('/not-found');
-    }
+    const articleRepositoryAxios = new ArticleRepositoryAxios();
+    new RecupererArticleUsecase(articleRepositoryAxios)
+      .execute(idArticle)
+      .then(async article => {
+        articleAAfficher.value = article;
+        if (!route.params.id) {
+          await new PasserUnArticleCommeLuUsecase(articleRepositoryAxios).execute(
+            utilisateurStore().utilisateur.id,
+            store.interactionEnCours!.id
+          );
+        }
+      })
+      .catch(async () => {
+        await router.push('/not-found');
+      });
   });
 </script>
