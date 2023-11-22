@@ -1,5 +1,5 @@
 import { ToDoListRepository } from '@/toDoList/ports/toDoList.repository';
-import { TodoList } from '@/toDoList/recupererToDoListUsecase';
+import { TodoList } from '@/toDoList/recupererToDoList.usecase';
 import { AxiosFactory, intercept401 } from '@/axios.factory';
 
 interface ToDoListApiModel {

@@ -3,7 +3,7 @@
     <div>
       <h1 class="fr-h2">Le coach</h1>
       <div class="fr-grid-row fr-grid-row--gutters">
-        <div class="fr-col fr-col-lg-7">
+        <div v-if="todoList" class="fr-col fr-col-lg-7">
           <CoachToDo :todoList="todoList" />
         </div>
         <div class="fr-col-12 fr-col-lg-4 fr-col-offset-lg-1">
@@ -60,10 +60,14 @@
   } from '@/bilan/adapters/chargementEmpreinte.presenter.impl';
   import { ChargementEmpreinteUsecase } from '@/bilan/chargementEmpreinte.usecase';
   import { EmpreinteRepositoryAxios } from '@/bilan/adapters/empreinteRepository.axios';
-  import CoachToDo from './custom/Coach/CoachToDo.vue';
+  import CoachToDo from '@/components/custom/Coach/CoachToDo.vue';
+  import { ToDoListRepositoryAxios } from '@/toDoList/adapters/toDoList.repository.axios';
+  import { ToDoListPresenterImpl, TodoListViewModel } from '@/toDoList/adapters/toDoList.presenter.impl';
+  import { RecupererToDoListUsecase } from '@/toDoList/recupererToDoList.usecase';
 
   const scoreViewModel = ref<ScoreViewModel>();
   const isLoading = ref<boolean>(true);
+  const todoList = ref<TodoListViewModel>();
   const store = utilisateurStore();
   const recommandationsPersonnaliseesViewModel = ref<RecommandationPersonnaliseeViewModel>();
 
@@ -80,6 +84,10 @@
     store.setValeurBilanCarbone(viewModel);
   }
 
+  function mapValueTodo(viewModel: TodoListViewModel) {
+    todoList.value = viewModel;
+  }
+
   const lancerChargementDesDonnees = () => {
     const idUtilisateur = store.utilisateur.id;
     const chargerRecommandationsPersonnaliseesUsecase = new RecommandationsPersonnaliseesUsecase(
@@ -87,6 +95,7 @@
     );
     const chargerScoreUseCase = new ChargementScoreUsecase(new ScoreRepositoryAxios());
     const chargementEmpreinteUseCase = new ChargementEmpreinteUsecase(new EmpreinteRepositoryAxios());
+    const chargerTodoListUsecase = new RecupererToDoListUsecase(new ToDoListRepositoryAxios());
 
     Promise.all([
       chargerScoreUseCase.execute(idUtilisateur, new ChargementScorePresenterImpl(mapValuesScore)),
@@ -95,6 +104,7 @@
         idUtilisateur,
         new RecommandationsPersonnaliseesPresenterImpl(mapValuesInteractions)
       ),
+      chargerTodoListUsecase.execute(idUtilisateur, new ToDoListPresenterImpl(mapValueTodo)),
     ])
       .then(() => {
         isLoading.value = false;
@@ -105,68 +115,4 @@
   };
 
   onMounted(lancerChargementDesDonnees);
-
-  const todoList = {
-    todo: [
-      {
-        id: 'test',
-        titre: 'Réussir 1 quiz “Environnement et climat” Très Facile',
-        url: 'test',
-        contentId: 'test',
-        progession: {
-          etapeCourante: 2,
-          etapeTotal: 3,
-        },
-        nombreDePointsAGagner: 25,
-        type: 'test',
-        thematique: 'quizz',
-        pointAEteRecolte: false,
-      },
-      {
-        id: 'test 2',
-        titre: 'test 2',
-        url: 'test 2',
-        contentId: 'test 2',
-        progession: {
-          etapeCourante: 7,
-          etapeTotal: 10,
-        },
-        nombreDePointsAGagner: 25,
-        type: 'test 2',
-        thematique: 'quizz',
-        pointAEteRecolte: false,
-      },
-    ],
-    done: [
-      {
-        id: 'test 2',
-        titre: 'Bonjour je suis un titre trèèèèèès trèèèèèès trèèèèèès trèèèèèès trèèèèèès long ',
-        url: 'test 2',
-        contentId: 'test 2',
-        progession: {
-          etapeCourante: 7,
-          etapeTotal: 10,
-        },
-        nombreDePointsAGagner: 12,
-        type: 'test 2',
-        thematique: 'quizz',
-        pointAEteRecolte: false,
-      },
-
-      {
-        id: 'test 2',
-        titre: 'test 2',
-        url: 'test 2',
-        contentId: 'test 2',
-        progession: {
-          etapeCourante: 7,
-          etapeTotal: 10,
-        },
-        nombreDePointsAGagner: 12,
-        type: 'test 2',
-        thematique: 'quizz',
-        pointAEteRecolte: true,
-      },
-    ],
-  };
 </script>

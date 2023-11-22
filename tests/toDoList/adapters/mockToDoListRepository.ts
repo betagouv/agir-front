@@ -1,6 +1,6 @@
 import { InteractionType } from '@/interactions/chargerInteractions.usecase';
 import { ToDoListRepository } from '@/toDoList/ports/toDoList.repository';
-import { TodoList } from '@/toDoList/recupererToDoListUsecase';
+import { TodoList } from '@/toDoList/recupererToDoList.usecase';
 
 export class MockToDoListRepository implements ToDoListRepository {
   recupererToDoList(idUtilisateur: string): Promise<TodoList> {

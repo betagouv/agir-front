@@ -1,6 +1,6 @@
 import { InteractionType } from '@/interactions/chargerInteractions.usecase';
 import { MockToDoListRepository } from './adapters/mockToDoListRepository';
-import { RecupererToDoListUsecase } from '@/toDoList/recupererToDoListUsecase';
+import { RecupererToDoListUsecase } from '@/toDoList/recupererToDoList.usecase';
 import { ToDoListPresenterImpl, TodoListViewModel } from '@/toDoList/adapters/toDoList.presenter.impl';
 
 describe('Fichier de tests concernant la récupération de la ToDo List', () => {
