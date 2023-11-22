@@ -8,6 +8,7 @@ import VueMatomo from 'vue-matomo';
 import '@gouvfr/dsfr/dist/dsfr.min.css';
 import '@gouvfr/dsfr/dist/utility/utility.min.css';
 import '@gouvfr/dsfr/dist/dsfr.module.min.js';
+import { createSentry } from './sentry/sentry';
 import './assets/theme/style.css';
 import { NavigationBus } from '@/navigationBus';
 declare global {
@@ -26,6 +27,8 @@ app.use(VueMatomo, {
   host: import.meta.env.VITE_MATOMO_URL,
   siteId: import.meta.env.VITE_MATOMO_SITE_ID,
 });
+createSentry(app, router);
+
 app.mount('#app');
 
 window._paq.push(['trackPageView']);
