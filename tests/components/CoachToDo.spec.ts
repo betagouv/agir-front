@@ -1,5 +1,6 @@
 import { render } from '@testing-library/vue';
 import CoachToDo from '@/components/custom/Coach/CoachToDo.vue';
+import { TodoListViewModel } from '@/toDoList/adapters/toDoList.presenter.impl';
 
 const todoExemple1 = {
   id: 'test',
@@ -60,11 +61,11 @@ const todoDoneNonRecupererExemple2 = {
 
 describe('Coach - Section ToDo', () => {
   describe('quand il y a seulement des tâches à faire', () => {
-    it('affiche uniquement la liste des tâches à faire sous forme de liens', () => {
-      const props = {
+    it('affiche uniquement la liste des tâches à faire', () => {
+      const props: { todoList: TodoListViewModel } = {
         todoList: {
-          todo: [todoExemple1, todoExemple2],
-          done: [],
+          aFaire: [todoExemple1, todoExemple2],
+          fait: [],
         },
       };
 
@@ -77,9 +78,6 @@ describe('Coach - Section ToDo', () => {
 
       expect(getByRole('heading', { name: 'Tâche exemple 1', level: 4 })).toBeDefined();
       expect(getByRole('heading', { name: 'Tâche exemple 2', level: 4 })).toBeDefined();
-
-      expect(getByRole('link', { name: 'Tâche exemple 1' })).toBeDefined();
-      expect(getByRole('link', { name: 'Tâche exemple 2' })).toBeDefined();
     });
   });
 
@@ -87,8 +85,8 @@ describe('Coach - Section ToDo', () => {
     it('affiche uniquement la liste des tâches terminées', () => {
       const props = {
         todoList: {
-          todo: [],
-          done: [todoDoneRecupererExemple1, todoDoneNonRecupererExemple2],
+          aFaire: [],
+          fait: [todoDoneRecupererExemple1, todoDoneNonRecupererExemple2],
         },
       };
 
@@ -107,8 +105,8 @@ describe('Coach - Section ToDo', () => {
       it('affiche un bouton avec le nombre de points à récolter', () => {
         const props = {
           todoList: {
-            todo: [],
-            done: [todoDoneNonRecupererExemple2],
+            aFaire: [],
+            fait: [todoDoneNonRecupererExemple2],
           },
         };
 
@@ -123,8 +121,8 @@ describe('Coach - Section ToDo', () => {
       it('affiche un bouton désactivé avec le nombre de points à récolter', () => {
         const props = {
           todoList: {
-            todo: [],
-            done: [todoDoneRecupererExemple1],
+            aFaire: [],
+            fait: [todoDoneRecupererExemple1],
           },
         };
 
@@ -140,8 +138,8 @@ describe('Coach - Section ToDo', () => {
     it('affiche toutes les tâches', () => {
       const props = {
         todoList: {
-          todo: [todoExemple1, todoExemple2],
-          done: [todoDoneRecupererExemple1, todoDoneNonRecupererExemple2],
+          aFaire: [todoExemple1, todoExemple2],
+          fait: [todoDoneRecupererExemple1, todoDoneNonRecupererExemple2],
         },
       };
 
@@ -154,9 +152,6 @@ describe('Coach - Section ToDo', () => {
 
       expect(getByRole('heading', { name: 'Tâche exemple 1', level: 4 })).toBeDefined();
       expect(getByRole('heading', { name: 'Tâche exemple 2', level: 4 })).toBeDefined();
-
-      expect(getByRole('link', { name: 'Tâche exemple 1' })).toBeDefined();
-      expect(getByRole('link', { name: 'Tâche exemple 2' })).toBeDefined();
 
       expect(getByRole('heading', { name: 'Tâche complétée exemple 1', level: 4 })).toBeDefined();
       expect(getByRole('heading', { name: 'Tâche complétée exemple 2', level: 4 })).toBeDefined();

@@ -21,7 +21,7 @@
       </div>
     </div>
   </div>
-  <section class="fr-py-6w background--gris-dark7">
+  <section class="fr-py-6w background--gris-dark">
     <div class="fr-container" v-if="recommandationsPersonnaliseesViewModel">
       <CoachRecommandations :recommandations="recommandationsPersonnaliseesViewModel" />
     </div>
