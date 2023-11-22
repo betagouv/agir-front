@@ -12,7 +12,11 @@
         />
       </div>
     </div>
-    <button class="fr-btn fr-btn--secondary fr-text--md todo__bouton fr-ml-auto" :disabled="pointAEteRecolte">
+    <button
+      class="fr-btn fr-btn--secondary fr-text--md todo__bouton fr-ml-auto"
+      @click="recupererPointsTodo"
+      :disabled="pointAEteRecolte"
+    >
       Récolter vos {{ nombrePoints }} <img src="/ic_score.svg" alt="points" width="16" class="fr-ml-1v" />
     </button>
   </div>
@@ -20,13 +24,26 @@
 
 <script setup lang="ts">
   import CoachCardTodoProgression from '@/components/custom/Coach/CoachCardTodoProgression.vue';
+  import { utilisateurStore } from '@/store/utilisateur';
+  import { ToDoListRepositoryAxios } from '@/toDoList/adapters/toDoList.repository.axios';
+  import { RecupererPointsToDoUsecase } from '@/toDoList/recupererPointsToDo.usecase';
 
-  defineProps<{
+  const props = defineProps<{
     titre: string;
     value: number;
     nombrePoints: number;
     pointAEteRecolte: boolean;
+    elementId: string;
   }>();
+
+  const recupererPointsTodo = async () => {
+    const utilisateurId: string = utilisateurStore().utilisateur.id;
+    const recupererPointsToDoUsecase = new RecupererPointsToDoUsecase(new ToDoListRepositoryAxios());
+
+    recupererPointsToDoUsecase.execute(utilisateurId, props.elementId).then(() => {
+      //emit
+    });
+  };
 </script>
 
 <style scoped>

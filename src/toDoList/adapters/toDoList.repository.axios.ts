@@ -12,6 +12,7 @@ interface ToDoListApiModel {
       type: string;
       content_id: string;
       interaction_id: string;
+      id: string;
       points: number;
       sont_points_en_poche: boolean;
       progression: {
@@ -27,6 +28,7 @@ interface ToDoListApiModel {
       type: string;
       content_id: string;
       interaction_id: string;
+      id: string;
       points: number;
       sont_points_en_poche: boolean;
       progression: {
@@ -42,9 +44,11 @@ export class ToDoListRepositoryAxios implements ToDoListRepository {
   async recupererToDoList(idUtilisateur: string): Promise<TodoList> {
     const axiosInstance = AxiosFactory.getAxios();
     const response = await axiosInstance.get<ToDoListApiModel>(`/utilisateurs/${idUtilisateur}/todo`);
+
     return {
       aFaire: response.data.todo.map(todo => ({
-        id: todo.interaction_id,
+        id: todo.id,
+        interactionId: todo.interaction_id,
         titre: todo.titre,
         contentId: todo.content_id,
         progession: {
@@ -57,7 +61,8 @@ export class ToDoListRepositoryAxios implements ToDoListRepository {
         pointAEteRecolte: todo.sont_points_en_poche,
       })),
       fait: response.data.done.map(todo => ({
-        id: todo.interaction_id,
+        id: todo.id,
+        interactionId: todo.interaction_id,
         titre: todo.titre,
         contentId: todo.content_id,
         progession: {
@@ -70,5 +75,11 @@ export class ToDoListRepositoryAxios implements ToDoListRepository {
         pointAEteRecolte: todo.sont_points_en_poche,
       })),
     };
+  }
+
+  @intercept401()
+  async recupererPointsToDo(idUtilisateur: string, elementId: string): Promise<void> {
+    const axiosInstance = AxiosFactory.getAxios();
+    await axiosInstance.post<boolean>(`/utilisateurs/${idUtilisateur}/todo/${elementId}/gagner_points`);
   }
 }

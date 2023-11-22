@@ -16,6 +16,7 @@ describe('Fichier de tests concernant la récupération de la ToDo List', () => 
         aFaire: [
           {
             id: 'id',
+            interactionId: 'interactionId',
             titre: 'Premier Quiz',
             url: '/coach/quiz/',
             contentId: '',
@@ -32,6 +33,7 @@ describe('Fichier de tests concernant la récupération de la ToDo List', () => 
         fait: [
           {
             id: 'id2',
+            interactionId: 'interactionId2',
             titre: 'Article qui doit être en avant',
             url: '/article/Article qui doit être en avant',
             contentId: '',
