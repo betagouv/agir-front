@@ -1,16 +1,18 @@
 <template>
-  <div class="todo shadow fr-p-2w">
+  <div class="todo background--white fr-p-2w">
     <span class="fr-icon-checkbox-circle-line todo__picto text--success" aria-hidden="true"></span>
-    <div class="fr-col fr-col-md-8">
-      <span class="fr-text--bold fr-text--lg text--success text--underline fr-mb-2w display-block">{{ titre }}</span>
-      <CoachCardTodoProgression
-        :value="value"
-        :value-max="value"
-        label="Barre de progression: tâche terminé"
-        couleur="#18753C"
-      />
+    <div class="fr-col fr-col-md-7">
+      <h4 class="fr-text--bold fr-text--lg text--success fr-mb-0 display-block">{{ titre }}</h4>
+      <div class="fr-col-6">
+        <CoachCardTodoProgression
+          :value="value"
+          :value-max="value"
+          label="Barre de progression: tâche terminé"
+          couleur="#18753C"
+        />
+      </div>
     </div>
-    <button class="fr-btn fr-btn--secondary fr-text--md todo__bouton" :disabled="pointAEteRecolte">
+    <button class="fr-btn fr-btn--secondary fr-text--md todo__bouton fr-ml-auto" :disabled="pointAEteRecolte">
       Récolter vos {{ nombrePoints }} <img src="/ic_score.svg" alt="points" width="16" class="fr-ml-1v" />
     </button>
   </div>

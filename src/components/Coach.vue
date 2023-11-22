@@ -3,10 +3,10 @@
     <div>
       <h1 class="fr-h2">Le coach</h1>
       <div class="fr-grid-row fr-grid-row--gutters">
-        <div class="fr-col fr-col-lg-8">
-          <CoachToDo />
+        <div class="fr-col fr-col-lg-7">
+          <CoachToDo :todoList="todoList" />
         </div>
-        <div class="fr-col-12 fr-col-lg-4">
+        <div class="fr-col-12 fr-col-lg-4 fr-col-offset-lg-1">
           <div v-if="!isLoading">
             <div class="fr-grid-row flex-space-between fr-mb-1w">
               <CarteScore class="fr-mr-3w" :value="1" type="niveau" />
@@ -21,7 +21,7 @@
       </div>
     </div>
   </div>
-  <section class="fr-py-6w">
+  <section class="fr-py-6w background--gris-dark7">
     <div class="fr-container" v-if="recommandationsPersonnaliseesViewModel">
       <CoachRecommandations :recommandations="recommandationsPersonnaliseesViewModel" />
     </div>
@@ -105,4 +105,68 @@
   };
 
   onMounted(lancerChargementDesDonnees);
+
+  const todoList = {
+    todo: [
+      {
+        id: 'test',
+        titre: 'Réussir 1 quiz “Environnement et climat” Très Facile',
+        url: 'test',
+        contentId: 'test',
+        progession: {
+          etapeCourante: 2,
+          etapeTotal: 3,
+        },
+        nombreDePointsAGagner: 25,
+        type: 'test',
+        thematique: 'quizz',
+        pointAEteRecolte: false,
+      },
+      {
+        id: 'test 2',
+        titre: 'test 2',
+        url: 'test 2',
+        contentId: 'test 2',
+        progession: {
+          etapeCourante: 7,
+          etapeTotal: 10,
+        },
+        nombreDePointsAGagner: 25,
+        type: 'test 2',
+        thematique: 'quizz',
+        pointAEteRecolte: false,
+      },
+    ],
+    done: [
+      {
+        id: 'test 2',
+        titre: 'Bonjour je suis un titre trèèèèèès trèèèèèès trèèèèèès trèèèèèès trèèèèèès long ',
+        url: 'test 2',
+        contentId: 'test 2',
+        progession: {
+          etapeCourante: 7,
+          etapeTotal: 10,
+        },
+        nombreDePointsAGagner: 12,
+        type: 'test 2',
+        thematique: 'quizz',
+        pointAEteRecolte: false,
+      },
+
+      {
+        id: 'test 2',
+        titre: 'test 2',
+        url: 'test 2',
+        contentId: 'test 2',
+        progession: {
+          etapeCourante: 7,
+          etapeTotal: 10,
+        },
+        nombreDePointsAGagner: 12,
+        type: 'test 2',
+        thematique: 'quizz',
+        pointAEteRecolte: true,
+      },
+    ],
+  };
 </script>

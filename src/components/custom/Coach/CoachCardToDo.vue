@@ -1,14 +1,18 @@
 <template>
-  <div class="todo shadow fr-p-2w">
+  <div class="todo background--white shadow fr-p-2w">
     <span class="fr-icon-play-circle-line todo__picto text--bleu" aria-hidden="true"></span>
-    <div class="fr-col fr-col-md-8">
-      <a href="#" class="todo__link display-block fr-text--bold fr-text--lg text--bleu fr-mb-2w"> {{ titre }}</a>
-      <CoachCardTodoProgression
-        :value="value"
-        :value-max="valueMax"
-        label="Barre de progression: tâche à faire"
-        couleur="#000091"
-      />
+    <div class="fr-col fr-col-md-9">
+      <h4 class="fr-m-0">
+        <a href="#" class="todo__link display-block fr-text--bold fr-text--lg text--bleu fr-mb-0"> {{ titre }}</a>
+      </h4>
+      <div class="fr-col-6">
+        <CoachCardTodoProgression
+          :value="value"
+          :value-max="valueMax"
+          label="Barre de progression: tâche à faire"
+          couleur="#000091"
+        />
+      </div>
     </div>
     <span class="fr-icon-arrow-right-line todo__picto text--bleu fr-ml-auto" aria-hidden="true"></span>
   </div>
@@ -31,6 +35,11 @@
     gap: 1rem;
     align-items: center;
     border-radius: 8px;
+    transition: box-shadow 0.3s ease;
+  }
+
+  .todo:hover {
+    box-shadow: 0 10px 30px 0 rgba(0, 0, 18, 0.3);
   }
 
   .todo__link {

@@ -14,9 +14,10 @@
         :style="{ position: 'static', width: valeurToWidth() + '%' }"
       />
     </div>
-    <div class="fr-grid-row">
-      <span class="fr-text--bold">{{ valeur }}</span>
-      <span>/ {{ objectif }}</span>
+    <div class="fr-grid-row fr-grid-row fr-text--xs">
+      <span class="fr-text--bold">{{ valeur }} </span>
+      <img src="/ic_score.svg" alt="points" width="16" />
+      <span>/{{ objectif }}</span>
     </div>
   </div>
 </template>
