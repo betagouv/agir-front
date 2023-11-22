@@ -3,8 +3,10 @@
     <div>
       <h1 class="fr-h2">Le coach</h1>
       <div class="fr-grid-row fr-grid-row--gutters">
-        <div class="fr-col fr-col-lg-8">Mission Agir !</div>
-        <div class="fr-col-12 fr-col-lg-4">
+        <div v-if="todoList" class="fr-col fr-col-lg-7">
+          <CoachToDo :todoList="todoList" />
+        </div>
+        <div class="fr-col-12 fr-col-lg-4 fr-col-offset-lg-1">
           <div v-if="!isLoading">
             <div class="fr-grid-row flex-space-between fr-mb-1w">
               <CarteScore class="fr-mr-3w" :value="1" type="niveau" />
@@ -19,7 +21,7 @@
       </div>
     </div>
   </div>
-  <section class="fr-py-6w">
+  <section class="fr-py-6w background--gris-dark">
     <div class="fr-container" v-if="recommandationsPersonnaliseesViewModel">
       <CoachRecommandations :recommandations="recommandationsPersonnaliseesViewModel" />
     </div>
@@ -58,9 +60,14 @@
   } from '@/bilan/adapters/chargementEmpreinte.presenter.impl';
   import { ChargementEmpreinteUsecase } from '@/bilan/chargementEmpreinte.usecase';
   import { EmpreinteRepositoryAxios } from '@/bilan/adapters/empreinteRepository.axios';
+  import CoachToDo from '@/components/custom/Coach/CoachToDo.vue';
+  import { ToDoListRepositoryAxios } from '@/toDoList/adapters/toDoList.repository.axios';
+  import { ToDoListPresenterImpl, TodoListViewModel } from '@/toDoList/adapters/toDoList.presenter.impl';
+  import { RecupererToDoListUsecase } from '@/toDoList/recupererToDoList.usecase';
 
   const scoreViewModel = ref<ScoreViewModel>();
   const isLoading = ref<boolean>(true);
+  const todoList = ref<TodoListViewModel>();
   const store = utilisateurStore();
   const recommandationsPersonnaliseesViewModel = ref<RecommandationPersonnaliseeViewModel>();
 
@@ -77,6 +84,10 @@
     store.setValeurBilanCarbone(viewModel);
   }
 
+  function mapValueTodo(viewModel: TodoListViewModel) {
+    todoList.value = viewModel;
+  }
+
   const lancerChargementDesDonnees = () => {
     const idUtilisateur = store.utilisateur.id;
     const chargerRecommandationsPersonnaliseesUsecase = new RecommandationsPersonnaliseesUsecase(
@@ -84,6 +95,7 @@
     );
     const chargerScoreUseCase = new ChargementScoreUsecase(new ScoreRepositoryAxios());
     const chargementEmpreinteUseCase = new ChargementEmpreinteUsecase(new EmpreinteRepositoryAxios());
+    const chargerTodoListUsecase = new RecupererToDoListUsecase(new ToDoListRepositoryAxios());
 
     Promise.all([
       chargerScoreUseCase.execute(idUtilisateur, new ChargementScorePresenterImpl(mapValuesScore)),
@@ -92,6 +104,7 @@
         idUtilisateur,
         new RecommandationsPersonnaliseesPresenterImpl(mapValuesInteractions)
       ),
+      chargerTodoListUsecase.execute(idUtilisateur, new ToDoListPresenterImpl(mapValueTodo)),
     ])
       .then(() => {
         isLoading.value = false;

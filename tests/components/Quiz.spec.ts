@@ -1,8 +1,8 @@
 import { render, fireEvent } from '@testing-library/vue';
 import Quiz from '../../src/components/custom/Quiz.vue';
-import { QuizViewModel } from '../../src/quiz/adapters/chargementQuiz.presenter.impl';
+import { QuizViewModel } from '@/quiz/adapters/chargementQuiz.presenter.impl';
 import { vi, describe, it, SpyInstance } from 'vitest';
-import { EnvoyerDonneesQuizInteractionUsecase } from '../../src/interactions/envoyerDonneesQuizInteraction.usecase';
+import { EnvoyerDonneesQuizInteractionUsecase } from '@/quiz/envoyerDonneesQuizInteraction.usecase';
 
 const quizzViewModelMock: QuizViewModel = {
   titre: 'Titre du quizz',
@@ -38,12 +38,15 @@ const props = {
 };
 
 describe('Quizz', () => {
-  let envoyerDonneesQuizInteractionMock: SpyInstance<[string, string, number, number], Promise<boolean>>;
+  let envoyerDonneesQuizInteractionMock: SpyInstance<[string, string, number, number], Promise<void>>;
 
   beforeEach(() => {
     envoyerDonneesQuizInteractionMock = vi
       .spyOn(EnvoyerDonneesQuizInteractionUsecase.prototype, 'execute')
-      .mockImplementation((_utilisateurId: string, _interactionId: string, _score: number) => Promise.resolve(true));
+      .mockImplementation(
+        (_utilisateurId: string, _interactionId: string, _nombreDeBonnesReponses: number, _nombreDeQuestions: number) =>
+          Promise.resolve()
+      );
   });
 
   it("affiche l'étape 1 avec la question, les réponses et le bouton 'Valider' disable", () => {

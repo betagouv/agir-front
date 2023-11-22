@@ -1,4 +1,4 @@
-import { AxiosFactory } from '@/axios.factory';
+import { AxiosFactory, intercept401 } from '@/axios.factory';
 import { Quiz, QuizRepository } from '@/quiz/ports/quizRepository';
 import { Response } from 'redaxios';
 
@@ -26,7 +26,7 @@ export interface QuizCMSDataModel {
 export interface QuizCMSModel {
   data: QuizCMSDataModel;
 }
-export class QuizRepositoryCMSAxios implements QuizRepository {
+export class QuizRepositoryAxios implements QuizRepository {
   async getQuiz(idQuizz: string): Promise<Quiz> {
     const axiosInstance = AxiosFactory.getCMSAxios();
     const response: Response<QuizCMSModel> = await axiosInstance.get<QuizCMSModel>(
@@ -46,5 +46,15 @@ export class QuizRepositoryCMSAxios implements QuizRepository {
         };
       }),
     };
+  }
+
+  @intercept401()
+  async terminerQuiz(idUtilisateur: string, idInteraction: string, score: number): Promise<void> {
+    const axiosInstance = AxiosFactory.getAxios();
+    await axiosInstance.post(`/utilisateurs/${idUtilisateur}/events`, {
+      type: 'quizz_score',
+      interaction_id: idInteraction,
+      number_value: score,
+    });
   }
 }

@@ -28,7 +28,7 @@
             <div class="fr-header__tools-links">
               <ul class="fr-btns-group">
                 <li v-if="!estConnecte">
-                  <a class="fr-btn fr-icon-lock-line" href="/authentification"> Se connecter </a>
+                  <a class="fr-btn fr-btn--secondary fr-icon-lock-line" href="/authentification"> Se connecter </a>
                 </li>
                 <li v-if="estConnecte">
                   <div class="utilisateur">

@@ -15,8 +15,9 @@ export class ScoreRepositoryAxios implements ScoreRepository {
   async getScore(idUtilisateur: string): Promise<Score> {
     const axiosInstance = AxiosFactory.getAxios();
     const response = await axiosInstance.get<ScoreApiModel>(`/utilisateurs/${idUtilisateur}`);
+
     return {
-      badges: response.data.badges,
+      badges: response.data.badges || [],
       score: response.data.points,
     };
   }
