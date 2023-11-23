@@ -1,7 +1,6 @@
-import { RecupererArticleUsecase } from '@/article/recupererArticle.usecase';
-import { MockArticleRepository, SpyArticleRepository } from './adapters/article.repository.mock';
 import { expect } from 'vitest';
 import { PasserUnArticleCommeLuUsecase } from '@/article/passerUnArticleCommeLu.usecase';
+import { SpyArticleRepository } from './adapters/article.repository.spy';
 
 describe("Fichier de tests concernant le marquage d'un Article comme lu", () => {
   it("En donnant un id d'interaction et un utilisateur id doit appeler la méthode marquerCommeLu", async () => {
