@@ -1,11 +1,8 @@
-import { EnvoyerSuiviDuJourUsecase, Resultat } from '../../src/suivi/envoyerSuiviDuJour.usecase';
-import {
-  SuiviDuJourPresenterImpl,
-  SuiviDuJourResultatsViewModel,
-} from '../../src/suivi/adapters/suiviDuJour.presenter.impl';
-import { DernierSuivi, SuiviRepository } from '../../src/suivi/ports/suivi.repository';
-import { InteractionsRepository } from '../../src/interactions/ports/interactionsRepository';
-import { Interaction } from '@/interactions/interaction';
+import { EnvoyerSuiviDuJourUsecase, Resultat } from '@/suivi/envoyerSuiviDuJour.usecase';
+import { SuiviDuJourPresenterImpl, SuiviDuJourResultatsViewModel } from '@/suivi/adapters/suiviDuJour.presenter.impl';
+import { DernierSuivi, SuiviRepository } from '@/suivi/ports/suivi.repository';
+import { InteractionsRepository } from '@/interactions/ports/interactionsRepository';
+import { Interaction } from '@/interactions/chargerInteractions.usecase';
 
 class SpyInteractionRepository implements InteractionsRepository {
   get interactionAEteTermineeAEteAppelee(): boolean {
@@ -82,8 +79,7 @@ describe("Fichier de tests de l'envoie du suivi du jour", () => {
       ],
     } as Resultat;
     const spySuiviRepository = new SpySuiviRepository(resultat);
-    const spyInteractionRepository = new SpyInteractionRepository();
-    const useCase = new EnvoyerSuiviDuJourUsecase(spySuiviRepository, spyInteractionRepository);
+    const useCase = new EnvoyerSuiviDuJourUsecase(spySuiviRepository);
     const mapSuiviAlimentation = new Map<string, string>();
     mapSuiviAlimentation.set('viande_rouge', '1');
     const suiviAlimentation = {
@@ -99,13 +95,11 @@ describe("Fichier de tests de l'envoie du suivi du jour", () => {
       suiviAlimentation,
       suiviTransport,
       new SuiviDuJourPresenterImpl(expectation),
-      'idUtilisateur',
-      'idInteraction'
+      'idUtilisateur'
     );
     // THEN
     expect(spySuiviRepository.typeEnvoye).toStrictEqual(['alimentation', 'transport']);
     expect(spySuiviRepository.valeursEnvoyees).toStrictEqual([mapSuiviAlimentation, mapSuiviTransport]);
-    expect(spyInteractionRepository.interactionAEteTermineeAEteAppelee).toBeTruthy();
     function expectation(suiviDuJourResultat: SuiviDuJourResultatsViewModel) {
       expect(suiviDuJourResultat).toStrictEqual<SuiviDuJourResultatsViewModel>({
         impactCarbonDuJour: {

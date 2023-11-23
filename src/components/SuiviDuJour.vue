@@ -104,7 +104,6 @@
   import { SuiviDuJourRepositoryAxios } from '@/suivi/adapters/suiviDuJour.repository.axios';
   import { ObtenirDernierSuiviUsecase } from '@/suivi/obtenirDernierSuivi.usecase';
   import { DateTimeTypeScript } from '@/DateTime';
-  import { InteractionsRepositoryAxios } from '@/interactions/adapters/interactionsRepository.axios';
   import NombreDePointsDuJour from '@/components/NombreDePointsDuJour.vue';
   import {
     DernierSuiviDuJourPresenterImpl,
@@ -112,7 +111,6 @@
   } from '@/suivi/adapters/dernierSuiviDuJour.presenter.impl';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import { utilisateurStore } from '@/store/utilisateur';
-  import { interactionEnCoursStore } from '@/store/interaction';
 
   export default defineComponent({
     name: 'SuiviDuJour',
@@ -185,17 +183,12 @@
       }
       const calculEmpreinteDuJour = () => {
         const idUtilisateur = store.utilisateur.id;
-        const idInteraction = interactionEnCoursStore().interactionEnCours!.id;
-        const envoyerSuiviDuJour = new EnvoyerSuiviDuJourUsecase(
-          new SuiviDuJourRepositoryAxios(),
-          new InteractionsRepositoryAxios()
-        );
+        const envoyerSuiviDuJour = new EnvoyerSuiviDuJourUsecase(new SuiviDuJourRepositoryAxios());
         envoyerSuiviDuJour.execute(
           { valeurs: suiviDuJourAlimentation },
           { valeurs: suiviDuJourTransport },
           new SuiviDuJourPresenterImpl(mapImpactCarboneDuJour),
-          idUtilisateur,
-          idInteraction
+          idUtilisateur
         );
       };
 
