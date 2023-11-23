@@ -3,11 +3,16 @@ import { ToDoListRepository } from '@/toDoList/ports/toDoList.repository';
 import { TodoList } from '@/toDoList/recupererToDoList.usecase';
 
 export class MockToDoListRepository implements ToDoListRepository {
+  async recupererPointsToDo(idUtilisateur: string, elementId: string): Promise<void> {
+    throw new Error('Method not implemented.');
+  }
+
   recupererToDoList(idUtilisateur: string): Promise<TodoList> {
     return Promise.resolve({
       fait: [
         {
           id: 'id2',
+          interactionId: 'interactionId2',
           titre: 'Article qui doit être en avant',
           url: '/article/Article qui doit être en avant',
           contentId: '',
@@ -24,6 +29,7 @@ export class MockToDoListRepository implements ToDoListRepository {
       aFaire: [
         {
           id: 'id',
+          interactionId: 'interactionId',
           titre: 'Premier Quiz',
           url: '/coach/quiz/',
           contentId: '',

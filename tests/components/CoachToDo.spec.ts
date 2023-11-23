@@ -4,6 +4,7 @@ import { TodoListViewModel } from '@/toDoList/adapters/toDoList.presenter.impl';
 
 const todoExemple1 = {
   id: 'test',
+  interactionId: 'interactionId1',
   titre: 'Tâche exemple 1',
   url: 'test',
   contentId: 'test',
@@ -18,6 +19,7 @@ const todoExemple1 = {
 };
 const todoExemple2 = {
   id: 'test 2',
+  interactionId: 'interactionId2',
   titre: 'Tâche exemple 2',
   url: 'test 2',
   contentId: 'test 2',
@@ -32,6 +34,7 @@ const todoExemple2 = {
 };
 const todoDoneRecupererExemple1 = {
   id: 'test',
+  interactionId: 'interactionId3',
   titre: 'Tâche complétée exemple 1',
   url: 'test',
   contentId: 'test',
@@ -46,6 +49,7 @@ const todoDoneRecupererExemple1 = {
 };
 const todoDoneNonRecupererExemple2 = {
   id: 'test 2',
+  interactionId: 'interactionId4',
   titre: 'Tâche complétée exemple 2',
   url: 'test 2',
   contentId: 'test 2',
