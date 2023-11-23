@@ -1,6 +1,5 @@
 import { SuiviRepository } from '@/suivi/ports/suivi.repository';
 import { SuiviDuJourPresenter } from '@/suivi/ports/suiviDuJour.presenter';
-import { InteractionsRepository } from '@/interactions/ports/interactionsRepository';
 
 export interface SuiviAlimentationInput {
   valeurs: Map<string, string>;
@@ -30,12 +29,7 @@ export interface Resultat {
 }
 
 export class EnvoyerSuiviDuJourUsecase {
-  private suiviRepository: SuiviRepository;
-  private interactionRepository: InteractionsRepository;
-  constructor(suiviRepository: SuiviRepository, interactionRepository: InteractionsRepository) {
-    this.suiviRepository = suiviRepository;
-    this.interactionRepository = interactionRepository;
-  }
+  constructor(private suiviRepository: SuiviRepository) {}
 
   private isListeDesValeursVide(listeDesValeurs: Map<string, string>): boolean {
     return listeDesValeurs.size === 0;
@@ -45,8 +39,7 @@ export class EnvoyerSuiviDuJourUsecase {
     suiviAlimentation: SuiviAlimentationInput,
     suiviTransport: SuiviTransportInput,
     presenter: SuiviDuJourPresenter,
-    idUtilisateur: string,
-    interactionId: string
+    idUtilisateur: string
   ): Promise<void> {
     if (!this.isListeDesValeursVide(suiviAlimentation.valeurs)) {
       await this.suiviRepository.ajouter('alimentation', suiviAlimentation.valeurs, idUtilisateur);
@@ -55,7 +48,6 @@ export class EnvoyerSuiviDuJourUsecase {
       await this.suiviRepository.ajouter('transport', suiviTransport.valeurs, idUtilisateur);
     }
     const resultat = await this.suiviRepository.recupererResultat(idUtilisateur);
-    await this.interactionRepository.interactionAEteTerminee(interactionId, idUtilisateur);
     if (resultat) {
       presenter.presente(resultat);
     }
