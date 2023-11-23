@@ -94,7 +94,6 @@
 
 <script lang="ts">
   import { defineComponent, onMounted, ref } from 'vue';
-  import { DeviceType, getDeviceType } from '@/DeviceType';
   import BilanNosGestesClimat from '@/components/BilanNosGestesClimat.vue';
   import ImpactDuJour from '@/components/ImpactDuJour.vue';
   import SuiviDuJourResultats from '@/components/SuiviDuJourResultats.vue';
@@ -127,9 +126,6 @@
       FilDAriane,
     },
     computed: {
-      DeviceType() {
-        return DeviceType;
-      },
       getCurrentStepTitle() {
         if (this.etapeCourante == 1) {
           return '🥦 Alimentation';
@@ -139,7 +135,6 @@
         return 'Résultat du suivi';
       },
     },
-    methods: { getDeviceType },
     setup() {
       let etapeCourante = ref<number>(1);
       let suiviDuJourAlimentation = new Map<string, string>();

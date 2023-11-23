@@ -1,7 +1,7 @@
 import { RecommandationsPersonnaliseesRepository } from '@/recommandationsPersonnalisees/ports/recommandationsPersonnalisees.repository';
 import { RecommandationPersonnalisee } from '@/recommandationsPersonnalisees/recommandationsPersonnalisees.usecase';
 import { AxiosFactory, intercept401 } from '@/axios.factory';
-import { Interaction, InteractionType } from '@/interactions/chargerInteractions.usecase';
+import { Interaction, InteractionType } from '@/interactions/interaction';
 import { InteractionApiModel } from '@/interactions/adapters/interactionsRepository.axios';
 
 export class RecommandationsPersonnaliseesRepositoryAxios implements RecommandationsPersonnaliseesRepository {
