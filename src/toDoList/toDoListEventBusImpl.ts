@@ -1,0 +1,35 @@
+export enum ToDoListEvent {
+  TODO_POINTS_ONT_ETE_RECUPERE,
+}
+
+export interface ToDoListEventBus {
+  publish(eventName: ToDoListEvent): void;
+  subscribe(eventName: ToDoListEvent, callback: () => void): void;
+}
+
+export class ToDoListEventBusImpl implements ToDoListEventBus {
+  private static instance: ToDoListEventBusImpl | null = null;
+  private eventSubscribers: Record<ToDoListEvent, (() => void)[]> = {
+    [ToDoListEvent.TODO_POINTS_ONT_ETE_RECUPERE]: [],
+  };
+  private constructor() {}
+
+  static getInstance() {
+    if (!this.instance) {
+      this.instance = new ToDoListEventBusImpl();
+    }
+    return this.instance;
+  }
+
+  publish(eventName: ToDoListEvent) {
+    const subscribers = this.eventSubscribers[eventName] || [];
+    subscribers.forEach(callback => callback());
+  }
+
+  subscribe(eventName: ToDoListEvent, callback: () => void) {
+    if (!this.eventSubscribers[eventName]) {
+      this.eventSubscribers[eventName] = [];
+    }
+    this.eventSubscribers[eventName].push(callback);
+  }
+}

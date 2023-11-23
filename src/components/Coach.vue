@@ -67,6 +67,7 @@
   import { ToDoListRepositoryAxios } from '@/toDoList/adapters/toDoList.repository.axios';
   import { ToDoListPresenterImpl, TodoListViewModel } from '@/toDoList/adapters/toDoList.presenter.impl';
   import { RecupererToDoListUsecase } from '@/toDoList/recupererToDoList.usecase';
+  import { ToDoListEvent, ToDoListEventBusImpl } from '@/toDoList/toDoListEventBusImpl';
 
   const scoreViewModel = ref<ScoreViewModel>();
   const isLoading = ref<boolean>(true);
@@ -117,5 +118,14 @@
       });
   };
 
-  onMounted(lancerChargementDesDonnees);
+  onMounted(() => {
+    lancerChargementDesDonnees();
+
+    ToDoListEventBusImpl.getInstance().subscribe(ToDoListEvent.TODO_POINTS_ONT_ETE_RECUPERE, () => {
+      const chargerTodoListUsecase = new RecupererToDoListUsecase(new ToDoListRepositoryAxios());
+      const idUtilisateur = store.utilisateur.id;
+
+      chargerTodoListUsecase.execute(idUtilisateur, new ToDoListPresenterImpl(mapValueTodo));
+    });
+  });
 </script>

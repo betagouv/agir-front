@@ -27,6 +27,7 @@
   import { utilisateurStore } from '@/store/utilisateur';
   import { ToDoListRepositoryAxios } from '@/toDoList/adapters/toDoList.repository.axios';
   import { RecupererPointsToDoUsecase } from '@/toDoList/recupererPointsToDo.usecase';
+  import { ToDoListEventBusImpl } from '@/toDoList/toDoListEventBusImpl';
 
   const props = defineProps<{
     titre: string;
@@ -38,11 +39,10 @@
 
   const recupererPointsTodo = async () => {
     const utilisateurId: string = utilisateurStore().utilisateur.id;
-    const recupererPointsToDoUsecase = new RecupererPointsToDoUsecase(new ToDoListRepositoryAxios());
-
-    recupererPointsToDoUsecase.execute(utilisateurId, props.elementId).then(() => {
-      //emit
-    });
+    new RecupererPointsToDoUsecase(new ToDoListRepositoryAxios(), ToDoListEventBusImpl.getInstance()).execute(
+      utilisateurId,
+      props.elementId
+    );
   };
 </script>
 
