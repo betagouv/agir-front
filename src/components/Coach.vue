@@ -101,6 +101,10 @@
     const chargementEmpreinteUseCase = new ChargementEmpreinteUsecase(new EmpreinteRepositoryAxios());
     const chargerTodoListUsecase = new RecupererToDoListUsecase(new ToDoListRepositoryAxios());
 
+    ToDoListEventBusImpl.getInstance().subscribe(ToDoListEvent.TODO_POINTS_ONT_ETE_RECUPERE, () => {
+      chargerTodoListUsecase.execute(idUtilisateur, new ToDoListPresenterImpl(mapValueTodo));
+    });
+
     Promise.all([
       chargerScoreUseCase.execute(idUtilisateur, new ChargementScorePresenterImpl(mapValuesScore)),
       chargementEmpreinteUseCase.execute(idUtilisateur, new ChargementEmpreintePresenterImpl(mapValueBilan)),
@@ -118,14 +122,5 @@
       });
   };
 
-  onMounted(() => {
-    lancerChargementDesDonnees();
-
-    ToDoListEventBusImpl.getInstance().subscribe(ToDoListEvent.TODO_POINTS_ONT_ETE_RECUPERE, () => {
-      const chargerTodoListUsecase = new RecupererToDoListUsecase(new ToDoListRepositoryAxios());
-      const idUtilisateur = store.utilisateur.id;
-
-      chargerTodoListUsecase.execute(idUtilisateur, new ToDoListPresenterImpl(mapValueTodo));
-    });
-  });
+  onMounted(lancerChargementDesDonnees);
 </script>
