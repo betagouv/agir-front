@@ -2,7 +2,7 @@ import {
   RecommandationPersonnalisee,
   RecommandationsPersonnaliseesUsecase,
 } from '@/recommandationsPersonnalisees/recommandationsPersonnalisees.usecase';
-import { InteractionType } from '@/interactions/interaction';
+import { InteractionType } from '@/shell/interactionType';
 import {
   RecommandationPersonnaliseeViewModel,
   RecommandationsPersonnaliseesPresenterImpl,
@@ -19,7 +19,6 @@ class MockRecommandationsPersonnaliseesRepository implements RecommandationsPers
         sousTitre: 'sousTitre',
         categorie: '🚲 Transports',
         nombreDePointsAGagner: 'nombreDePointsAGagner',
-        miseEnAvant: 'miseEnAvant',
         illustrationURL: 'illustrationURL',
         url: '',
         aEteFaite: false,
@@ -34,7 +33,6 @@ class MockRecommandationsPersonnaliseesRepository implements RecommandationsPers
         sousTitre: 'sousTitre',
         categorie: '🌍 Global',
         nombreDePointsAGagner: 'nombreDePointsAGagner',
-        miseEnAvant: 'miseEnAvant',
         illustrationURL: 'illustrationURL',
         url: '',
         aEteFaite: true,
@@ -49,7 +47,6 @@ class MockRecommandationsPersonnaliseesRepository implements RecommandationsPers
         sousTitre: 'sousTitre',
         categorie: '🌍 Global',
         nombreDePointsAGagner: 'nombreDePointsAGagner',
-        miseEnAvant: 'miseEnAvant',
         illustrationURL: 'illustrationURL',
         url: '',
         aEteFaite: true,
@@ -64,7 +61,6 @@ class MockRecommandationsPersonnaliseesRepository implements RecommandationsPers
         sousTitre: 'sousTitre',
         categorie: '🌍 Global',
         nombreDePointsAGagner: 'nombreDePointsAGagner',
-        miseEnAvant: 'miseEnAvant',
         illustrationURL: 'illustrationURL',
         url: '',
         aEteFaite: true,

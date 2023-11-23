@@ -1,5 +1,5 @@
 import { RecommandationPersonnalisee } from '@/recommandationsPersonnalisees/recommandationsPersonnalisees.usecase';
-import { InteractionType } from '@/interactions/interaction';
+import { InteractionType } from '@/shell/interactionType';
 import { RecommandationsPersonnaliseesPresenter } from '@/recommandationsPersonnalisees/ports/recommandationsPersonnalisees.presenter';
 
 export interface RecommandationViewModel {

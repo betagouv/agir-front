@@ -1,28 +1,7 @@
 import { EnvoyerSuiviDuJourUsecase, Resultat } from '@/suivi/envoyerSuiviDuJour.usecase';
 import { SuiviDuJourPresenterImpl, SuiviDuJourResultatsViewModel } from '@/suivi/adapters/suiviDuJour.presenter.impl';
 import { DernierSuivi, SuiviRepository } from '@/suivi/ports/suivi.repository';
-import { InteractionsRepository } from '@/interactions/ports/interactionsRepository';
-import { Interaction } from '@/interactions/chargerInteractions.usecase';
 
-class SpyInteractionRepository implements InteractionsRepository {
-  get interactionAEteTermineeAEteAppelee(): boolean {
-    return this._interactionAEteTermineeAEteAppelee;
-  }
-  private _interactionAEteTermineeAEteAppelee: boolean = false;
-  chargerInteractions(nomUtilisateur: string): Promise<Interaction[]> {
-    return Promise.resolve([]);
-  }
-
-  interactionAEteCliquee(interactionId: string, utilisateurId): void {}
-
-  interactionAEteTerminee(interactionId: string, utilisateurId: string): void {
-    this._interactionAEteTermineeAEteAppelee = true;
-  }
-
-  interactionAvecDonneesAEteTerminee<T>(utilisateurId: string, interactionId: string, payload: T) {
-    return Promise.resolve(true);
-  }
-}
 class SpySuiviRepository implements SuiviRepository {
   private _resultat: Resultat;
 

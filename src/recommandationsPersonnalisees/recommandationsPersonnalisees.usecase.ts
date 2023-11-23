@@ -1,4 +1,4 @@
-import { InteractionType } from '@/interactions/interaction';
+import { InteractionType } from '@/shell/interactionType';
 import { RecommandationsPersonnaliseesRepository } from '@/recommandationsPersonnalisees/ports/recommandationsPersonnalisees.repository';
 import { RecommandationsPersonnaliseesPresenter } from '@/recommandationsPersonnalisees/ports/recommandationsPersonnalisees.presenter';
 
@@ -9,7 +9,6 @@ export interface RecommandationPersonnalisee {
   sousTitre: string;
   categorie: string;
   nombreDePointsAGagner: string;
-  miseEnAvant: string;
   illustrationURL: string;
   url: string;
   aEteFaite: boolean;

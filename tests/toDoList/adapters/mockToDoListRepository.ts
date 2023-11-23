@@ -1,4 +1,4 @@
-import { InteractionType } from '@/interactions/interaction';
+import { InteractionType } from '@/shell/interactionType';
 import { ToDoListRepository } from '@/toDoList/ports/toDoList.repository';
 import { TodoList } from '@/toDoList/recupererToDoList.usecase';
 
