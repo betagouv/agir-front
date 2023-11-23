@@ -7,7 +7,7 @@ export class ArticleRepositoryAxios implements ArticleRepository {
     const axios = AxiosFactory.getAxios();
     await axios.post(`/utilisateurs/${utilisateurId}/events`, {
       type: 'article_lu',
-      interaction_id: utilisateurId,
+      interaction_id: interactionId,
     });
   }
 

@@ -33,8 +33,8 @@
         articleAAfficher.value = article;
         if (!route.params.id) {
           await new PasserUnArticleCommeLuUsecase(articleRepositoryAxios).execute(
-            utilisateurStore().utilisateur.id,
-            store.interactionEnCours!.id
+            store.interactionEnCours!.id,
+            utilisateurStore().utilisateur.id
           );
         }
       })
