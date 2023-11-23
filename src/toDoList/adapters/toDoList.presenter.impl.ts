@@ -1,6 +1,6 @@
 import { ToDoListPresenter } from '@/toDoList/ports/toDoList.presenter';
 import { TodoList, TodoListItem } from '@/toDoList/recupererToDoList.usecase';
-import { InteractionType } from '@/interactions/chargerInteractions.usecase';
+import { InteractionType } from '@/interactions/interaction';
 
 interface TodoViewModel {
   id: string;

@@ -1,4 +1,4 @@
-import { InteractionType } from '@/interactions/chargerInteractions.usecase';
+import { InteractionType } from '@/interactions/interaction';
 import { RecommandationsPersonnaliseesRepository } from '@/recommandationsPersonnalisees/ports/recommandationsPersonnalisees.repository';
 import { RecommandationsPersonnaliseesPresenter } from '@/recommandationsPersonnalisees/ports/recommandationsPersonnalisees.presenter';
 

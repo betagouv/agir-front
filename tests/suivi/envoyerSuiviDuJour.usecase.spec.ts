@@ -1,8 +1,11 @@
-import { EnvoyerSuiviDuJourUsecase, Resultat } from "../../src/suivi/envoyerSuiviDuJour.usecase";
-import { SuiviDuJourPresenterImpl, SuiviDuJourResultatsViewModel } from "../../src/suivi/adapters/suiviDuJour.presenter.impl";
-import { DernierSuivi, SuiviRepository } from "../../src/suivi/ports/suivi.repository";
-import { InteractionsRepository } from "../../src/interactions/ports/interactionsRepository";
-import { Interaction } from "../../src/interactions/chargerInteractions.usecase";
+import { EnvoyerSuiviDuJourUsecase, Resultat } from '../../src/suivi/envoyerSuiviDuJour.usecase';
+import {
+  SuiviDuJourPresenterImpl,
+  SuiviDuJourResultatsViewModel,
+} from '../../src/suivi/adapters/suiviDuJour.presenter.impl';
+import { DernierSuivi, SuiviRepository } from '../../src/suivi/ports/suivi.repository';
+import { InteractionsRepository } from '../../src/interactions/ports/interactionsRepository';
+import { Interaction } from '@/interactions/interaction';
 
 class SpyInteractionRepository implements InteractionsRepository {
   get interactionAEteTermineeAEteAppelee(): boolean {
@@ -49,7 +52,7 @@ class SpySuiviRepository implements SuiviRepository {
 
   recupererDernierSuivi(idUtilisateur: string, type: string): Promise<DernierSuivi> {
     return Promise.resolve({
-      date: "",
+      date: '',
       valeurs: new Map<string, string>(),
     });
   }
@@ -61,95 +64,101 @@ describe("Fichier de tests de l'envoie du suivi du jour", () => {
     const resultat = {
       impactCarbonDuJour: { valeur: 21000, enHausse: true, variation: 3000 },
       suivisPrecedent: {
-        datesDesSuivis: ["27/07", "28/07", "29/07", "30/07"],
+        datesDesSuivis: ['27/07', '28/07', '29/07', '30/07'],
         valeursDesSuivis: [23000, 43000, 12000, 25000],
         moyenneDesSuivis: 21000,
       },
       additionCarboneDuJour: [
-        { valeur: 2, impactCarbone: 2000, titre: "viande_rouge" },
-        { valeur: 20, impactCarbone: 8000, titre: "km_voiture" },
-        { valeur: 10, impactCarbone: 4000, titre: "km_metro" },
-        { valeur: 20, impactCarbone: 2000, titre: "km_velo" },
-        { valeur: 15, impactCarbone: 80000, titre: "km_train" },
-        { valeur: 40, impactCarbone: 16000, titre: "km_bus" },
-        { valeur: 1, impactCarbone: 1000, titre: "viande_blanche" },
-        { valeur: 1, impactCarbone: 1000, titre: "poisson_blanc" },
-        { valeur: 2, impactCarbone: 2000, titre: "oeufs" },
-        { valeur: 1, impactCarbone: 1000, titre: "poisson_rouge" },
+        { valeur: 2, impactCarbone: 2000, titre: 'viande_rouge' },
+        { valeur: 20, impactCarbone: 8000, titre: 'km_voiture' },
+        { valeur: 10, impactCarbone: 4000, titre: 'km_metro' },
+        { valeur: 20, impactCarbone: 2000, titre: 'km_velo' },
+        { valeur: 15, impactCarbone: 80000, titre: 'km_train' },
+        { valeur: 40, impactCarbone: 16000, titre: 'km_bus' },
+        { valeur: 1, impactCarbone: 1000, titre: 'viande_blanche' },
+        { valeur: 1, impactCarbone: 1000, titre: 'poisson_blanc' },
+        { valeur: 2, impactCarbone: 2000, titre: 'oeufs' },
+        { valeur: 1, impactCarbone: 1000, titre: 'poisson_rouge' },
       ],
     } as Resultat;
     const spySuiviRepository = new SpySuiviRepository(resultat);
     const spyInteractionRepository = new SpyInteractionRepository();
     const useCase = new EnvoyerSuiviDuJourUsecase(spySuiviRepository, spyInteractionRepository);
     const mapSuiviAlimentation = new Map<string, string>();
-    mapSuiviAlimentation.set("viande_rouge", "1");
+    mapSuiviAlimentation.set('viande_rouge', '1');
     const suiviAlimentation = {
       valeurs: mapSuiviAlimentation,
     };
     const mapSuiviTransport = new Map<string, string>();
-    mapSuiviTransport.set("voiture", "1");
+    mapSuiviTransport.set('voiture', '1');
     const suiviTransport = {
       valeurs: mapSuiviTransport,
     };
     // WHEN
-    await useCase.execute(suiviAlimentation, suiviTransport, new SuiviDuJourPresenterImpl(expectation), "idUtilisateur", "idInteraction");
+    await useCase.execute(
+      suiviAlimentation,
+      suiviTransport,
+      new SuiviDuJourPresenterImpl(expectation),
+      'idUtilisateur',
+      'idInteraction'
+    );
     // THEN
-    expect(spySuiviRepository.typeEnvoye).toStrictEqual(["alimentation", "transport"]);
+    expect(spySuiviRepository.typeEnvoye).toStrictEqual(['alimentation', 'transport']);
     expect(spySuiviRepository.valeursEnvoyees).toStrictEqual([mapSuiviAlimentation, mapSuiviTransport]);
     expect(spyInteractionRepository.interactionAEteTermineeAEteAppelee).toBeTruthy();
     function expectation(suiviDuJourResultat: SuiviDuJourResultatsViewModel) {
       expect(suiviDuJourResultat).toStrictEqual<SuiviDuJourResultatsViewModel>({
         impactCarbonDuJour: {
-          valeur: "21.0",
-          pictoSens: "fr-icon-arrow-right-up-circle-fill",
-          commentaire: "En hausse",
-          variation: "3.0",
+          valeur: '21.0',
+          pictoSens: 'fr-icon-arrow-right-up-circle-fill',
+          commentaire: 'En hausse',
+          variation: '3.0',
         },
         suivisPrecedent: {
-          datesDesSuivis: ["27/07", "28/07", "29/07", "30/07"],
+          datesDesSuivis: ['27/07', '28/07', '29/07', '30/07'],
           valeursDesSuivis: [23, 43, 12, 25],
           moyenneDesSuivis: [21, 21, 21, 21],
         },
         additionCarbone: [
           {
-            impactCarbone: "+80 kg",
-            valeur: "15 km de train",
+            impactCarbone: '+80 kg',
+            valeur: '15 km de train',
           },
           {
-            impactCarbone: "+16 kg",
-            valeur: "40 km de bus",
+            impactCarbone: '+16 kg',
+            valeur: '40 km de bus',
           },
           {
-            impactCarbone: "+8 kg",
-            valeur: "20 km de voiture",
+            impactCarbone: '+8 kg',
+            valeur: '20 km de voiture',
           },
           {
-            impactCarbone: "+4 kg",
-            valeur: "10 km de metro",
+            impactCarbone: '+4 kg',
+            valeur: '10 km de metro',
           },
           {
-            impactCarbone: "+2 kg",
-            valeur: "2 repas avec viande rouge",
+            impactCarbone: '+2 kg',
+            valeur: '2 repas avec viande rouge',
           },
           {
-            impactCarbone: "+2 kg",
-            valeur: "20 km de velo",
+            impactCarbone: '+2 kg',
+            valeur: '20 km de velo',
           },
           {
-            impactCarbone: "+2 kg",
-            valeur: "2 repas avec oeufs",
+            impactCarbone: '+2 kg',
+            valeur: '2 repas avec oeufs',
           },
           {
-            impactCarbone: "+1 kg",
-            valeur: "1 repas avec viande blanche",
+            impactCarbone: '+1 kg',
+            valeur: '1 repas avec viande blanche',
           },
           {
-            impactCarbone: "+1 kg",
-            valeur: "1 repas avec poisson blanc",
+            impactCarbone: '+1 kg',
+            valeur: '1 repas avec poisson blanc',
           },
           {
-            impactCarbone: "+1 kg",
-            valeur: "1 repas avec poisson rouge",
+            impactCarbone: '+1 kg',
+            valeur: '1 repas avec poisson rouge',
           },
         ],
       });

@@ -26,10 +26,10 @@
 
 <script setup lang="ts">
   import FilDAriane from './dsfr/FilDAriane.vue';
-  import { ArticleCMS } from '@/cms/chargerContenuCms';
+  import { Article } from '@/article/recupererArticle.usecase';
 
   defineProps<{
-    article: ArticleCMS;
+    article: Article;
   }>();
 </script>
 

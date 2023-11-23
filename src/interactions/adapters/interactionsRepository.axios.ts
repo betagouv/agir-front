@@ -1,5 +1,5 @@
 import { InteractionsRepository } from '@/interactions/ports/interactionsRepository';
-import { Interaction, InteractionType } from '@/interactions/chargerInteractions.usecase';
+import { Interaction, InteractionType } from '@/interactions/interaction';
 import { AxiosFactory, intercept401 } from '@/axios.factory';
 
 export interface InteractionApiModel {

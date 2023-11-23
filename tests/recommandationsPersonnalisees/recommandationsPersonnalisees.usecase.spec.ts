@@ -2,7 +2,7 @@ import {
   RecommandationPersonnalisee,
   RecommandationsPersonnaliseesUsecase,
 } from '@/recommandationsPersonnalisees/recommandationsPersonnalisees.usecase';
-import { InteractionType } from '@/interactions/chargerInteractions.usecase';
+import { InteractionType } from '@/interactions/interaction';
 import {
   RecommandationPersonnaliseeViewModel,
   RecommandationsPersonnaliseesPresenterImpl,

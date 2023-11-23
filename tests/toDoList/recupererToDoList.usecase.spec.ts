@@ -1,4 +1,4 @@
-import { InteractionType } from '@/interactions/chargerInteractions.usecase';
+import { InteractionType } from '@/interactions/interaction';
 import { MockToDoListRepository } from './adapters/mockToDoListRepository';
 import { RecupererToDoListUsecase } from '@/toDoList/recupererToDoList.usecase';
 import { ToDoListPresenterImpl, TodoListViewModel } from '@/toDoList/adapters/toDoList.presenter.impl';
