@@ -4,6 +4,8 @@ export interface ServiceCatalogue {
   id: string;
   icon: string;
   titre: string;
+  isUrlExterne: string;
+  url: string;
   description: string;
   sousDescription: string;
   estInstalle: boolean;
