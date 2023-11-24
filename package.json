@@ -20,33 +20,33 @@
     "chart.js": "^4.3.0",
     "js-cookie": "^3.0.5",
     "jwt-decode": "^3.1.2",
-    "pinia": "^2.1.6",
+    "pinia": "^2.1.7",
     "pinia-plugin-persistedstate": "^3.2.0",
     "redaxios": "^0.5.1",
-    "vue": "^3.2.47",
+    "vue": "^3.3.8",
     "vue-chart-3": "^3.1.8",
     "vue-matomo": "^4.2.0",
-    "vue-router": "4"
+    "vue-router": "^4.2.5"
   },
   "devDependencies": {
     "@testing-library/vue": "^7.0.0",
-    "@typescript-eslint/eslint-plugin": "^6.2.0",
-    "@typescript-eslint/parser": "^6.2.0",
+    "@typescript-eslint/eslint-plugin": "^6.12.0",
+    "@typescript-eslint/parser": "^6.12.0",
     "@vitejs/plugin-vue": "^4.1.0",
     "@vitest/coverage-v8": "^0.34.6",
-    "@vue/test-utils": "^2.4.0",
+    "@vue/test-utils": "^2.4.2",
     "eslint": "^8.49.0",
-    "eslint-plugin-vue": "^9.15.1",
+    "eslint-plugin-vue": "^9.18.1",
     "husky": "^8.0.3",
     "jsdom": "^22.1.0",
     "jsdom-global": "^3.0.2",
     "lint-staged": "^14.0.1",
-    "prettier": "^2.8.2",
+    "prettier": "^2.8.8",
     "ts-node": "^10.9.1",
-    "typescript": "^5.0.2",
+    "typescript": "^5.3.2",
     "vite": "^5.0.2",
     "vitest": "^0.33.0",
-    "vue-tsc": "^1.4.2"
+    "vue-tsc": "^1.8.21"
   },
   "resolutions": {
     "semver": "7.5.3"
