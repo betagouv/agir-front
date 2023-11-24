@@ -12,13 +12,13 @@
         <span class="fr-text--bold">L'article à lire !</span>
         <h3 class="fr-h4 text--gris-dark">{{ props.recommandation.titre }}</h3>
         <p>{{ props.recommandation.description }}</p>
-        <a
-          :href="props.recommandation.url"
+        <router-link
+          :to="props.recommandation.url"
           class="fr-link fr-icon-arrow-right-line fr-link--icon-right"
           @click="interactionAEteCliquee"
         >
           Continuer la lecture
-        </a>
+        </router-link>
       </div>
     </div>
   </div>
