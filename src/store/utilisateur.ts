@@ -1,11 +1,12 @@
 import { Utilisateur } from '@/authentification/ports/utilisateur.repository';
 import { EmpreinteViewModel } from '@/bilan/adapters/chargementEmpreinte.presenter.impl';
 import { defineStore } from 'pinia';
+import { ScoreViewModel } from '@/score/ports/chargementScore.presenter';
 
 interface State {
   utilisateur: Utilisateur;
   valeurBilanCarbone: EmpreinteViewModel;
-  score: number;
+  score: ScoreViewModel;
 }
 
 export const utilisateurStore = defineStore('utilisateur', {
@@ -24,7 +25,12 @@ export const utilisateurStore = defineStore('utilisateur', {
       details: [],
       valeurMax: 0,
     },
-    score: 0,
+    score: {
+      points: 0,
+      niveau: 0,
+      nombreDePointsDansLeNiveau: 0,
+      nombreDePointsDuNiveau: 0,
+    },
   }),
   actions: {
     setUtilisateur(utilisateur: Utilisateur) {
@@ -33,8 +39,8 @@ export const utilisateurStore = defineStore('utilisateur', {
     setValeurBilanCarbone(valeurBilanCarbone: EmpreinteViewModel) {
       this.valeurBilanCarbone = valeurBilanCarbone;
     },
-    setScore(score: number) {
-      this.score = score;
+    setScore(scoreViewModel: ScoreViewModel) {
+      this.score = scoreViewModel;
     },
 
     reset() {

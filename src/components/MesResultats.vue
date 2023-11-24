@@ -16,7 +16,7 @@
 </template>
 
 <script setup lang="ts">
-  import { BadgeViewModel } from '@/score/ports/chargementScorePresenter';
+  import { BadgeViewModel } from '@/score/ports/chargementScore.presenter';
   import CarteVierge from '@/components/CarteVierge.vue';
 
   interface MesResultatsProps {

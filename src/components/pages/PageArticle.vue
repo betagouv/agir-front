@@ -13,6 +13,7 @@
   import { Article, RecupererArticleUsecase } from '@/article/recupererArticle.usecase';
   import { ArticleRepositoryAxios } from '@/article/adapters/article.repository.axios';
   import { PasserUnArticleCommeLuUsecase } from '@/article/passerUnArticleCommeLu.usecase';
+  import { ToDoListEventBusImpl } from '@/toDoList/toDoListEventBusImpl';
 
   const store = interactionEnCoursStore();
   const router = useRouter();
@@ -32,7 +33,7 @@
       .then(async article => {
         articleAAfficher.value = article;
         if (!route.params.id) {
-          await new PasserUnArticleCommeLuUsecase(articleRepositoryAxios).execute(
+          await new PasserUnArticleCommeLuUsecase(articleRepositoryAxios, new ToDoListEventBusImpl()).execute(
             store.interactionEnCours!.id,
             utilisateurStore().utilisateur.id
           );

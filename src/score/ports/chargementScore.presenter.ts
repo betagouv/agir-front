@@ -1,4 +1,4 @@
-import { Score } from '@/score/ports/scoreRepository';
+import { Score } from '@/score/ports/score.repository';
 
 export interface CompteurViewModel {
   consommation: string;
@@ -18,10 +18,11 @@ export interface BadgeViewModel {
 }
 
 export interface ScoreViewModel {
-  utilisateur: string;
-  badges: BadgeViewModel[];
-  score: number;
+  points: number;
+  niveau: number;
+  nombreDePointsDansLeNiveau: number;
+  nombreDePointsDuNiveau: number;
 }
 export interface ChargementScorePresenter {
-  presenteDashboard(utilisateur: string, dashboard: Score): void;
+  presenteScore(score: Score): void;
 }

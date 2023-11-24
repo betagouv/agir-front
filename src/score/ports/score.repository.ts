@@ -1,11 +1,8 @@
-interface Badge {
-  titre: string;
-  date: string;
-}
-
 export interface Score {
-  badges: Badge[];
-  score: number;
+  points: number;
+  niveau: number;
+  nombreDePointsDansLeNiveau: number;
+  nombreDePointsDuNiveau: number;
 }
 export interface ScoreRepository {
   getScore(utilisateur: string): Promise<Score>;

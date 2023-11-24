@@ -1,5 +1,6 @@
 export enum ToDoListEvent {
   TODO_POINTS_ONT_ETE_RECUPERE,
+  TODO_ARTICLE_A_ETE_LU,
 }
 
 export interface ToDoListEventBus {
@@ -11,6 +12,7 @@ export class ToDoListEventBusImpl implements ToDoListEventBus {
   private static instance: ToDoListEventBusImpl | null = null;
   private eventSubscribers: Record<ToDoListEvent, (() => void)[]> = {
     [ToDoListEvent.TODO_POINTS_ONT_ETE_RECUPERE]: [],
+    [ToDoListEvent.TODO_ARTICLE_A_ETE_LU]: [],
   };
   private constructor() {}
 
@@ -31,5 +33,9 @@ export class ToDoListEventBusImpl implements ToDoListEventBus {
       this.eventSubscribers[eventName] = [];
     }
     this.eventSubscribers[eventName].push(callback);
+  }
+
+  unsubscribe(eventName: ToDoListEvent) {
+    this.eventSubscribers[eventName] = [];
   }
 }

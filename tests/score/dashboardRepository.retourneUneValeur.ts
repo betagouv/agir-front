@@ -1,4 +1,4 @@
-import { Score, ScoreRepository } from "../../src/score/ports/scoreRepository";
+import { Score, ScoreRepository } from '@/score/ports/score.repository';
 
 export class ScoreRepositoryRetourneUneValeur implements ScoreRepository {
   private valeur: number = 0;
@@ -10,11 +10,11 @@ export class ScoreRepositoryRetourneUneValeur implements ScoreRepository {
     return {
       badges: [
         {
-          titre: "mon super badge",
-          date: "2023-06-20T13:16:15.408Z",
+          titre: 'mon super badge',
+          date: '2023-06-20T13:16:15.408Z',
         },
       ],
-      score: this.valeur,
+      points: this.valeur,
     };
   }
 }
