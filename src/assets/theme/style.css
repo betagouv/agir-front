@@ -139,10 +139,25 @@ h3 {
   font-size: 2.5rem;
 }
 
+.text--normal {
+  font-weight: 400;
+}
+
 .text--bold {
   font-weight: 700;
 }
 
+<<<<<<< HEAD
+=======
+.text--underline {
+  text-decoration: underline;
+}
+
+.text--uppercase {
+  text-transform: uppercase;
+}
+
+>>>>>>> 7360975 (feature: ouverte de modale manuelle)
 .background-bleu {
   background: var(--blue-france-main-525);
 }

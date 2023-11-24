@@ -11,9 +11,16 @@ import '@gouvfr/dsfr/dist/dsfr.module.min.js';
 import { createSentry } from './sentry/sentry';
 import './assets/theme/style.css';
 import { NavigationBus } from '@/navigationBus';
+
 declare global {
   interface Window {
     _paq: any;
+    dsfr(element: HTMLElement | null): {
+      modal: {
+        conceal(): void;
+        disclose(): void;
+      };
+    };
   }
 }
 
