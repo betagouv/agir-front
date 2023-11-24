@@ -21,7 +21,7 @@
       </div>
     </div>
   </div>
-  <section class="fr-py-6w background--gris-dark">
+  <section class="fr-py-6w fr-background-contrast--grey">
     <div class="fr-container" v-if="!isLoading">
       <CoachRecommandations
         v-if="recommandationsPersonnaliseesViewModel"
