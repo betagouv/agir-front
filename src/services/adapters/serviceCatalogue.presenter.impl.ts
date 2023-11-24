@@ -9,7 +9,7 @@ export interface ServiceCatalogueViewModelItem {
   id: string;
   icon: string;
   titre: string;
-  isUrlExterne: string;
+  isUrlExterne: boolean;
   url: string;
   description: string;
   sousDescription: string;

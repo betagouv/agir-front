@@ -16,7 +16,7 @@ interface ServiceCatalogueApiModel {
   thematiques: string[];
   nombre_installation: number;
   icon_url: string;
-  is_url_externe: string;
+  is_url_externe: boolean;
   image_url: string;
   is_installed: boolean;
   description: string;

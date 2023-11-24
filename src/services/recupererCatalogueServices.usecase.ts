@@ -4,7 +4,7 @@ export interface ServiceCatalogue {
   id: string;
   icon: string;
   titre: string;
-  isUrlExterne: string;
+  isUrlExterne: boolean;
   url: string;
   description: string;
   sousDescription: string;
