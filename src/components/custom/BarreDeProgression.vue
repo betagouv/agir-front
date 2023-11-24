@@ -32,12 +32,14 @@
     width: 100%;
     height: 0.75rem;
     border-radius: 10px;
+    overflow: hidden;
   }
 
   .jauge-remplissage {
     position: static;
     background-color: var(--jauge-color);
     height: 100%;
+    min-width: 8%;
     border-radius: 10px;
     border: 2px solid #fff;
   }
