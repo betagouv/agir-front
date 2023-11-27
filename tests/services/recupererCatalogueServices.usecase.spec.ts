@@ -12,6 +12,8 @@ class ServiceRepositoryMock implements ServiceRepository {
     return Promise.resolve([
       {
         id: 'id',
+        url: 'url1',
+        isUrlExterne: true,
         icon: 'icon',
         titre: 'titre',
         description: 'description',
@@ -23,6 +25,8 @@ class ServiceRepositoryMock implements ServiceRepository {
       },
       {
         id: 'id2',
+        url: 'url2',
+        isUrlExterne: false,
         icon: 'icon',
         titre: 'titre',
         description: 'description',
@@ -66,6 +70,8 @@ describe('Fichier de tests concernant la recuperations des services dans le cata
             estInstalle: true,
             icon: 'icon',
             id: 'id',
+            url: 'url1',
+            isUrlExterne: true,
             nombreInstallation: ' 1 ont installé ce service',
             sousDescription: 'sousDescription',
             thematiques: ['thematique1', 'thematique3'],
@@ -77,6 +83,8 @@ describe('Fichier de tests concernant la recuperations des services dans le cata
             estInstalle: false,
             icon: 'icon',
             id: 'id2',
+            url: 'url2',
+            isUrlExterne: false,
             nombreInstallation: ' 1 ont installé ce service',
             sousDescription: 'sousDescription',
             thematiques: ['thematique1', 'thematique2'],

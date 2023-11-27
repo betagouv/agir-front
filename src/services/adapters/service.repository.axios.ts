@@ -16,6 +16,7 @@ interface ServiceCatalogueApiModel {
   thematiques: string[];
   nombre_installation: number;
   icon_url: string;
+  is_url_externe: boolean;
   image_url: string;
   is_installed: boolean;
   description: string;
@@ -37,11 +38,13 @@ export class ServiceRepositoryAxios implements ServiceRepository {
   async recupererCatalogueServices(utilisateurId: string): Promise<ServiceCatalogue[]> {
     const axiosInstance = AxiosFactory.getAxios();
     const reponse = await axiosInstance.get<ServiceCatalogueApiModel[]>(`/services?utilisateurId=${utilisateurId}`);
+
     return reponse.data.map(service => ({
       id: service.id,
       titre: service.titre,
       url: service.url,
       thematiques: service.thematiques,
+      isUrlExterne: service.is_url_externe,
       nombreInstallation: service.nombre_installation,
       icon: service.icon_url,
       description: service.description,

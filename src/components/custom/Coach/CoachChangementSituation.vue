@@ -6,7 +6,7 @@
         Le coach vous conseille et vous accompagne à tout moment avec des conseils et actions adaptées à vos
         changements.
       </p>
-      <ul class="fr-m-0 text--underline fr-text--xl text--white">
+      <ul class="fr-m-0 fr-text--xl text--white">
         <li>Vous attendez un enfant</li>
         <li>Vous déménagez</li>
         <li>Vous changez d’emploi</li>

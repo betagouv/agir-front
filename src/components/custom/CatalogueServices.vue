@@ -50,18 +50,30 @@
             <div class="fr-grid-row--top fr-grid-row--right fr-grid-row fr-ml-auto">
               <button
                 v-if="serviceCatalogueViewModel.estInstalle"
-                class="fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-close-line fr-btn--sm"
+                class="fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-close-line fr-btn--sm fr-mr-1w"
                 @click="enleverServiceActif(serviceCatalogueViewModel.id)"
               >
                 Enlever
               </button>
               <button
                 v-else
-                class="fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-download-line fr-btn--sm"
+                class="fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-download-line fr-btn--sm fr-mr-1w"
                 @click="installerServiceActif(serviceCatalogueViewModel.id)"
               >
                 Installer
               </button>
+              <a
+                v-if="serviceCatalogueViewModel.isUrlExterne"
+                role="link"
+                :href="serviceCatalogueViewModel.url"
+                target="_blank"
+                class="fr-btn fr-btn--secondary fr-btn--sm"
+              >
+                Ouvrir le service
+              </a>
+              <router-link v-else :to="serviceCatalogueViewModel.url" class="fr-btn fr-btn--secondary fr-btn--sm">
+                Ouvrir le service
+              </router-link>
             </div>
           </div>
 

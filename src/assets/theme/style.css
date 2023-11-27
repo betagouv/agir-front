@@ -143,10 +143,6 @@ h3 {
   font-weight: 700;
 }
 
-.text--underline {
-  text-decoration: underline;
-}
-
 .background-bleu {
   background: var(--blue-france-main-525);
 }
