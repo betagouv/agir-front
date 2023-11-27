@@ -62,18 +62,6 @@
               >
                 Installer
               </button>
-              <a
-                v-if="serviceCatalogueViewModel.isUrlExterne"
-                role="link"
-                :href="serviceCatalogueViewModel.url"
-                target="_blank"
-                class="fr-btn fr-btn--secondary fr-btn--sm"
-              >
-                Ouvrir le service
-              </a>
-              <router-link v-else :to="serviceCatalogueViewModel.url" class="fr-btn fr-btn--secondary fr-btn--sm">
-                Ouvrir le service
-              </router-link>
             </div>
           </div>
 
