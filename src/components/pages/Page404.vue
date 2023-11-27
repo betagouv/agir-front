@@ -12,7 +12,7 @@
           plus disponible.<br />
           Dans ce cas, pour continuer votre visite vous pouvez consulter notre page d’accueil.
         </p>
-        <a class="fr-btn" href="/coach">Page d'accueil</a>
+        <router-link class="fr-btn" to="/coach">Page d'accueil</router-link>
       </div>
     </div>
   </div>

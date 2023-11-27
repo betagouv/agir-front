@@ -28,7 +28,9 @@
             <div class="fr-header__tools-links">
               <ul class="fr-btns-group">
                 <li v-if="!estConnecte">
-                  <a class="fr-btn fr-btn--secondary fr-icon-lock-line" href="/authentification"> Se connecter </a>
+                  <router-link to="/authentification" class="fr-btn fr-btn--secondary fr-icon-lock-line">
+                    Se connecter
+                  </router-link>
                 </li>
                 <li v-if="estConnecte">
                   <div class="utilisateur">

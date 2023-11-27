@@ -3,13 +3,14 @@
     <div class="fr-p-3w">
       <span class="fr-text--bold fr-text--xs text--black">{{ props.recommandation.thematique }}</span>
       <h3 class="card-recommandation__titre fr-text--xl fr-mb-0 text--gris-dark">
-        <a
-          :href="props.recommandation.url"
+        <router-link
+          :to="props.recommandation.url"
           class="card-recommandation__link"
           :title="props.recommandation.titre"
           @click="interactionAEteCliquee"
-          >{{ props.recommandation.titre }}</a
         >
+          {{ props.recommandation.titre }}
+        </router-link>
       </h3>
     </div>
     <img :src="props.recommandation.image" alt="" class="card-recommandation__image" />

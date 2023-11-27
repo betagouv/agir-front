@@ -4,13 +4,21 @@
     <ul class="fr-grid-row service__list fr-col-10 list-style-none fr-p-0">
       <li class="fr-p-0 fr-col" v-for="service in servicesViewModels" :key="service.label">
         <a
+          v-if="service.isUrlExterne"
           role="link"
           :href="service.url"
-          :target="service.isUrlExterne ? '_blank' : '_self'"
+          target="_blank"
           class="service__link fr-text--xs fr-text--bold text--black-light background--white border-radius--md fr-p-2v fr-mb-0"
         >
           {{ service.label }}
         </a>
+        <router-link
+          v-else
+          :to="service.url"
+          class="service__link fr-text--xs fr-text--bold text--black-light background--white border-radius--md fr-p-2v fr-mb-0"
+        >
+          {{ service.label }}
+        </router-link>
       </li>
       <li class="fr-p-0">
         <router-link class="fr-mb-0 add__service fr-text--sm text--white" :to="{ name: 'services' }">
