@@ -33,7 +33,7 @@
       .then(async article => {
         articleAAfficher.value = article;
         if (!route.params.id) {
-          await new PasserUnArticleCommeLuUsecase(articleRepositoryAxios, new ToDoListEventBusImpl()).execute(
+          await new PasserUnArticleCommeLuUsecase(articleRepositoryAxios, ToDoListEventBusImpl.getInstance()).execute(
             store.interactionEnCours!.id,
             utilisateurStore().utilisateur.id
           );
