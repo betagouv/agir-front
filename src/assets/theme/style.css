@@ -139,8 +139,20 @@ h3 {
   font-size: 2.5rem;
 }
 
+.text--normal {
+  font-weight: 400;
+}
+
 .text--bold {
   font-weight: 700;
+}
+
+.text--underline {
+  text-decoration: underline;
+}
+
+.text--uppercase {
+  text-transform: uppercase;
 }
 
 .background-bleu {
