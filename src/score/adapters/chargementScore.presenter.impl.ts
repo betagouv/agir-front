@@ -2,7 +2,7 @@ import { ChargementScorePresenter, ScoreViewModel } from '@/score/ports/chargeme
 import { Score } from '@/score/ports/score.repository';
 
 export class ChargementScorePresenterImpl implements ChargementScorePresenter {
-  constructor(private scoreViewModel: (viewmModel: ScoreViewModel) => void) {}
+  constructor(private scoreViewModel: (viewModel: ScoreViewModel) => void) {}
 
   presenteScore(score: Score): void {
     this.scoreViewModel({
