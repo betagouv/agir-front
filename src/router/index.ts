@@ -8,7 +8,7 @@ import PageAidesVelo from '@/components/pages/PageAidesVelo.vue';
 import Coach from '@/components/Coach.vue';
 import PageAides from '@/components/pages/PageAides.vue';
 import Page404 from '@/components/pages/Page404.vue';
-import SuiviDuJour from '@/components/SuiviDuJour.vue';
+import PageSuiviDuJour from '@/components/pages/PageSuiviDuJour.vue';
 import { storeIdNGC } from '@/bilan/middleware/pendingSimulation';
 import FranceConnectCallBack from '@/components/FranceConnectCallBack.vue';
 import PageCompte from '@/components/pages/PageCompte.vue';
@@ -105,7 +105,7 @@ const routes = [
       {
         path: 'suivi-du-jour',
         name: 'suivi-du-jour',
-        component: SuiviDuJour,
+        component: PageSuiviDuJour,
         meta: {
           title: `${appName} Suivi du jour`,
         },
