@@ -1,13 +1,10 @@
 <template>
-  <PageArticleComposant :article="articleAAfficher">
-    <BilanNosGestesClimat :get-impact-value="utilisateurStore().valeurBilanCarbone" />
-  </PageArticleComposant>
+  <PageArticleComposant :article="articleAAfficher"> </PageArticleComposant>
 </template>
 <script setup lang="ts">
   import PageArticleComposant from '@/components/PageArticleComposant.vue';
   import { useRoute, useRouter } from 'vue-router';
   import { onMounted, ref } from 'vue';
-  import BilanNosGestesClimat from '@/components/BilanNosGestesClimat.vue';
   import { utilisateurStore } from '@/store/utilisateur';
   import { interactionEnCoursStore } from '@/store/interaction';
   import { Article, RecupererArticleUsecase } from '@/article/recupererArticle.usecase';
