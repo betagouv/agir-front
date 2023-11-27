@@ -37,8 +37,6 @@
       <CoachChangementSituation />
     </div>
   </section>
-  <!-- Exemple utilisation bouton modale -->
-  <!-- <button class="fr-btn" data-fr-opened="false" aria-controls="passageDeNiveau">Modale avec zone d'action</button> -->
   <Teleport to="body">
     <Modale titre="Passage de niveau" label="Modale de passage de niveau" id="passageDeNiveau">
       <CarteScore :value="1" type="niveau" class="fr-mb-2w" />
@@ -48,6 +46,9 @@
         </button>
       </div>
     </Modale>
+    <button class="fr-btn fr-hidden" data-fr-opened="false" aria-controls="passageDeNiveau">
+      Modale avec zone d'action
+    </button>
   </Teleport>
 </template>
 
@@ -80,7 +81,8 @@
   import { ToDoListPresenterImpl, TodoListViewModel } from '@/toDoList/adapters/toDoList.presenter.impl';
   import { RecupererToDoListUsecase } from '@/toDoList/recupererToDoList.usecase';
   import { ToDoListEvent, ToDoListEventBusImpl } from '@/toDoList/toDoListEventBusImpl';
-  import Modale from '@/components/custom/Modale.vue';
+  import Modale from '@/components/custom/Modale/Modale.vue';
+  // import ModaleActions from '@/components/custom/Modale/ModaleActions';
 
   const scoreViewModel = ref<ScoreViewModel>();
   const isLoading = ref<boolean>(true);
@@ -135,9 +137,8 @@
       });
 
     // TO USE LATER
-    // window.addEventListener('DOMContentLoaded', _ => {
-    //   const dialog = document.querySelector('dialog');
-    //   window.dsfr(dialog).modal.disclose();
+    // window.addEventListener('DOMContentLoaded', () => {
+    //   new ModaleActions('passageDeNiveau').open();
     // });
   };
 

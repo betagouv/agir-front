@@ -147,8 +147,6 @@ h3 {
   font-weight: 700;
 }
 
-<<<<<<< HEAD
-=======
 .text--underline {
   text-decoration: underline;
 }
@@ -157,7 +155,6 @@ h3 {
   text-transform: uppercase;
 }
 
->>>>>>> 7360975 (feature: ouverte de modale manuelle)
 .background-bleu {
   background: var(--blue-france-main-525);
 }
