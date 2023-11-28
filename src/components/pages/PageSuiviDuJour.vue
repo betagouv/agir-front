@@ -7,5 +7,5 @@
 
 <script setup lang="ts">
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
-  import SuiviDuJour from '@/components/SuiviDuJour.vue';
+  import SuiviDuJour from '@/components/custom/SuiviDuJour/SuiviDuJour.vue';
 </script>

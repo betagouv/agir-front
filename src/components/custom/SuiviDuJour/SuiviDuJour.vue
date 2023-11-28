@@ -72,9 +72,9 @@
   import { computed, onMounted, ref } from 'vue';
   import BilanNosGestesClimat from '@/components/BilanNosGestesClimat.vue';
   import ImpactDuJour from '@/components/ImpactDuJour.vue';
-  import SuiviDuJourResultats from '@/components/SuiviDuJourResultats.vue';
-  import SuiviDuJourPremiereEtape from '@/components/SuiviDuJourPremiereEtape.vue';
-  import SuiviDuJourSecondeEtape from '@/components/SuiviDuJourSecondeEtape.vue';
+  import SuiviDuJourResultats from '@/components/custom/SuiviDuJour/SuiviDuJourResultats.vue';
+  import SuiviDuJourPremiereEtape from '@/components/custom/SuiviDuJour/SuiviDuJourPremiereEtape.vue';
+  import SuiviDuJourSecondeEtape from '@/components/custom/SuiviDuJour/SuiviDuJourSecondeEtape.vue';
   import { EnvoyerSuiviDuJourUsecase } from '@/suivi/envoyerSuiviDuJour.usecase';
   import { SuiviDuJourPresenterImpl, SuiviDuJourResultatsViewModel } from '@/suivi/adapters/suiviDuJour.presenter.impl';
   import { SuiviDuJourRepositoryAxios } from '@/suivi/adapters/suiviDuJour.repository.axios';

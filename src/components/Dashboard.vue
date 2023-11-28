@@ -8,7 +8,7 @@
   import { SuiviDuJourRepositoryAxios } from '@/suivi/adapters/suiviDuJour.repository.axios';
   import { SuiviDuJourPresenterImpl, SuiviDuJourResultatsViewModel } from '@/suivi/adapters/suiviDuJour.presenter.impl';
   import { onMounted, ref } from 'vue';
-  import SuiviDuJourResultats from '@/components/SuiviDuJourResultats.vue';
+  import SuiviDuJourResultats from '@/components/custom/SuiviDuJour/SuiviDuJourResultats.vue';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const _impactDuJourViewModel = ref<SuiviDuJourResultatsViewModel>();
