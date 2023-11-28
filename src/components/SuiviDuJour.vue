@@ -81,7 +81,6 @@
         </div>
       </div>
       <div class="fr-col-12 fr-col-lg-4">
-        <BilanNosGestesClimat class="fr-mb-3w" :get-impact-value="store.valeurBilanCarbone" />
         <NombreDePointsDuJour v-if="etapeCourante === 3" class="fr-mb-3w" :nombre-de-points-du-jour="25" />
         <ImpactDuJour
           :consommation-du-jour="suiviDuJourResultatsViewModel.impactCarbonDuJour.valeur"
@@ -94,7 +93,6 @@
 
 <script lang="ts">
   import { defineComponent, onMounted, ref } from 'vue';
-  import BilanNosGestesClimat from '@/components/BilanNosGestesClimat.vue';
   import ImpactDuJour from '@/components/ImpactDuJour.vue';
   import SuiviDuJourResultats from '@/components/SuiviDuJourResultats.vue';
   import SuiviDuJourPremiereEtape from '@/components/SuiviDuJourPremiereEtape.vue';
@@ -120,7 +118,6 @@
       SuiviDuJourPremiereEtape,
       SuiviDuJourResultats,
       ImpactDuJour,
-      BilanNosGestesClimat,
       FilDAriane,
     },
     computed: {

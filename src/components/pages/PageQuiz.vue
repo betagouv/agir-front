@@ -9,7 +9,6 @@
     :id-interaction="interactionEnCours ? interactionEnCours.id : ''"
     :is-mode-previsualisation="false"
   >
-    <BilanNosGestesClimat :get-impact-value="store.valeurBilanCarbone" />
   </PageQuizComposant>
 </template>
 
@@ -22,7 +21,6 @@
   import { interactionEnCoursStore } from '@/store/interaction';
   import PageQuizComposant from '@/components/custom/PageQuizComposant.vue';
   import { QuizRepositoryAxios } from '@/quiz/adapters/quizRepository.axios';
-  import BilanNosGestesClimat from '@/components/BilanNosGestesClimat.vue';
 
   const quizViewModel = ref<QuizViewModel>();
   const store = utilisateurStore();
