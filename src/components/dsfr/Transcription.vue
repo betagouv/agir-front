@@ -2,7 +2,7 @@
   <div class="fr-transcription background--white">
     <button class="fr-transcription__btn" aria-expanded="false" :aria-controls="id">{{ titre }}</button>
     <div class="fr-collapse" :id="id">
-      <Modale :titre="titre" :label="`${id}-transcription-title`" :id="`${id}-modal`">
+      <Modale :titre="titre" :label="`${id}-transcription-title`" :id="`${id}-modal`" size="m">
         <slot />
       </Modale>
       <div class="fr-transcription__footer">
