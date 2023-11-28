@@ -9,8 +9,6 @@ export interface ServiceCatalogueViewModelItem {
   id: string;
   icon: string;
   titre: string;
-  isUrlExterne: boolean;
-  url: string;
   description: string;
   sousDescription: string;
   estInstalle: boolean;
@@ -26,8 +24,6 @@ export class ServiceCataloguePresenterImpl implements ServiceCataloguePresenter 
       catalogue: services.map(service => ({
         id: service.id,
         icon: service.icon,
-        isUrlExterne: service.isUrlExterne,
-        url: service.url,
         titre: service.titre,
         description: service.description,
         sousDescription: service.sousDescription,

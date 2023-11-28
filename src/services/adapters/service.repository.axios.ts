@@ -12,11 +12,9 @@ interface ServiceApiModel {
 interface ServiceCatalogueApiModel {
   id: string;
   titre: string;
-  url: string;
   thematiques: string[];
   nombre_installation: number;
   icon_url: string;
-  is_url_externe: boolean;
   image_url: string;
   is_installed: boolean;
   description: string;
@@ -42,9 +40,7 @@ export class ServiceRepositoryAxios implements ServiceRepository {
     return reponse.data.map(service => ({
       id: service.id,
       titre: service.titre,
-      url: service.url,
       thematiques: service.thematiques,
-      isUrlExterne: service.is_url_externe,
       nombreInstallation: service.nombre_installation,
       icon: service.icon_url,
       description: service.description,
