@@ -9,10 +9,14 @@
         <div class="fr-col-12 fr-col-lg-4 fr-col-offset-lg-1">
           <div v-if="!isLoading">
             <div class="fr-grid-row flex-space-between fr-mb-1w">
-              <CarteScore class="fr-mr-3w" :value="1" type="niveau" />
-              <CarteScore v-if="scoreViewModel" :value="scoreViewModel.score" type="score" />
+              <CarteScore class="fr-mr-3w" :value="utilisateurStore().score.niveau" type="niveau" />
+              <CarteScore :value="utilisateurStore().score.points" type="score" />
             </div>
-            <ProgressionNiveauJauge class="fr-mb-1w" :objectif="24" :valeur="12" />
+            <ProgressionNiveauJauge
+              class="fr-mb-1w"
+              :objectif="utilisateurStore().score.nombreDePointsDuNiveau"
+              :valeur="utilisateurStore().score.nombreDePointsDansLeNiveau"
+            />
           </div>
           <div v-else>
             <CarteSkeleton />
@@ -53,12 +57,8 @@
 </template>
 
 <script setup lang="ts">
-  import { onMounted, ref } from 'vue';
-  import { ScoreViewModel } from '@/score/ports/chargementScorePresenter';
+  import { onMounted, onUnmounted, ref } from 'vue';
   import CarteSkeleton from '@/components/CarteSkeleton.vue';
-  import { ChargementScoreUsecase } from '@/score/chargementScoreUsecase';
-  import { ScoreRepositoryAxios } from '@/score/adapters/scoreRepository.axios';
-  import { ChargementScorePresenterImpl } from '@/score/adapters/chargementScorePresenterImpl';
   import { utilisateurStore } from '@/store/utilisateur';
   import CoachChangementSituation from '@/components/custom/Coach/CoachChangementSituation.vue';
   import CarteScore from '@/components/custom/Progression/CarteScore.vue';
@@ -84,7 +84,6 @@
   import Modale from '@/components/custom/Modale/Modale.vue';
   // import ModaleActions from '@/components/custom/Modale/ModaleActions';
 
-  const scoreViewModel = ref<ScoreViewModel>();
   const isLoading = ref<boolean>(true);
   const todoList = ref<TodoListViewModel>();
   const store = utilisateurStore();
@@ -92,11 +91,6 @@
 
   function mapValuesInteractions(viewModel: RecommandationPersonnaliseeViewModel) {
     recommandationsPersonnaliseesViewModel.value = viewModel;
-  }
-
-  function mapValuesScore(viewModel: ScoreViewModel) {
-    scoreViewModel.value = viewModel;
-    store.setScore(viewModel.score);
   }
 
   function mapValueBilan(viewModel: EmpreinteViewModel) {
@@ -112,7 +106,6 @@
     const chargerRecommandationsPersonnaliseesUsecase = new RecommandationsPersonnaliseesUsecase(
       new RecommandationsPersonnaliseesRepositoryAxios()
     );
-    const chargerScoreUseCase = new ChargementScoreUsecase(new ScoreRepositoryAxios());
     const chargementEmpreinteUseCase = new ChargementEmpreinteUsecase(new EmpreinteRepositoryAxios());
     const chargerTodoListUsecase = new RecupererToDoListUsecase(new ToDoListRepositoryAxios());
 
@@ -121,7 +114,6 @@
     });
 
     Promise.all([
-      chargerScoreUseCase.execute(idUtilisateur, new ChargementScorePresenterImpl(mapValuesScore)),
       chargementEmpreinteUseCase.execute(idUtilisateur, new ChargementEmpreintePresenterImpl(mapValueBilan)),
       chargerRecommandationsPersonnaliseesUsecase.execute(
         idUtilisateur,
@@ -143,4 +135,7 @@
   };
 
   onMounted(lancerChargementDesDonnees);
+  onUnmounted(() => {
+    ToDoListEventBusImpl.getInstance().unsubscribe(ToDoListEvent.TODO_POINTS_ONT_ETE_RECUPERE);
+  });
 </script>
