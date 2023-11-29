@@ -12,7 +12,8 @@
               v-model="revenuFiscal"
               name="revenu-fiscal"
               id="text-input-rfr"
-              type="text"
+              inputmode="numeric"
+              type="number"
             />
           </div>
           <div class="fr-input-parts" v-if="demanderPartsFiscales">
@@ -23,7 +24,8 @@
               v-model="nombreDePartsFiscales"
               name="nombre-de-parts"
               id="text-input-parts"
-              type="text"
+              inputmode="numeric"
+              type="number"
             />
           </div>
           <button class="fr-mt-2v fr-btn" :disabled="isDisabled">Sauvegarder et continuer</button>
