@@ -1,17 +1,28 @@
 <template>
-  <div class="fr-grid-row fr-grid-row--gutters" v-if="demanderRevenu">
+  <div class="fr-grid-row fr-grid-row--gutters" v-if="demanderRevenu || demanderPartsFiscales">
     <div class="fr-col-lg-8">
       <div class="background--white border border-radius--md fr-p-3w fr-mb-4w">
         <h2 class="fr-h5">Nous avons besoin d'information(s) pour calculer les aides vélo adaptées</h2>
         <form @submit.prevent="mettreAJourEtLancerLaSimulation">
           <div class="fr-input-group" v-if="demanderRevenu">
-            <label class="fr-label" for="text-input-rfr"> Revenu fiscal de référence </label>
+            <label class="fr-label" for="text-input-rfr">Revenu fiscal de référence </label>
             <input
               required
               class="fr-input"
               v-model="revenuFiscal"
               name="revenu-fiscal"
               id="text-input-rfr"
+              type="text"
+            />
+          </div>
+          <div class="fr-input-parts" v-if="demanderPartsFiscales">
+            <label class="fr-label" for="text-input-parts">Nombre de parts fisacles</label>
+            <input
+              required
+              class="fr-input"
+              v-model="nombreDePartsFiscales"
+              name="nombre-de-parts"
+              id="text-input-parts"
               type="text"
             />
           </div>
@@ -40,10 +51,10 @@
   const store = utilisateurStore();
   const emit = defineEmits(['submit-simulation']);
   const revenuFiscal = ref(store.utilisateur.revenuFiscal);
-
+  const nombreDePartsFiscales = ref(store.utilisateur.nombreDePartsFiscales);
   const demanderRevenu = revenuFiscal.value === null;
-
-  if (!demanderRevenu) {
+  const demanderPartsFiscales = nombreDePartsFiscales.value === null;
+  if (!demanderRevenu && !demanderPartsFiscales) {
     simulerAideVelo();
   }
 
@@ -62,13 +73,20 @@
         codePostal: utilisateur.codePostal,
         prenom: utilisateur.prenom,
         revenuFiscal: revenuFiscal.value ? revenuFiscal.value.toString() : '',
+        nombreDePartsFiscales: nombreDePartsFiscales.value ? nombreDePartsFiscales.value.toString() : '',
       };
       usecase.execute(donneeAMettreAjour);
     }
   }
 
   function mapResultatAidesVelo(viewModels: SimulationAideResultatViewModel) {
-    emit('submit-simulation', viewModels, store.utilisateur.codePostal, revenuFiscal.value);
+    emit(
+      'submit-simulation',
+      viewModels,
+      store.utilisateur.codePostal,
+      revenuFiscal.value,
+      nombreDePartsFiscales.value
+    );
   }
 
   function simulerAideVelo() {

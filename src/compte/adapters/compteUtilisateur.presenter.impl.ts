@@ -9,6 +9,7 @@ export interface CompteUtlisateurViewModel {
   commune: string;
   prenom: string;
   revenuFiscal: string;
+  nombreDePartsFiscales: string;
 }
 export class CompteUtilisateurPresenterImpl implements CompteUtilisateurPresenter {
   private _compteUtlisateurViewModel: (viewModel: CompteUtlisateurViewModel) => void;
@@ -26,6 +27,9 @@ export class CompteUtilisateurPresenterImpl implements CompteUtilisateurPresente
       commune: compteUtilisateur.commune,
       prenom: compteUtilisateur.prenom,
       revenuFiscal: compteUtilisateur.revenuFiscal ? compteUtilisateur.revenuFiscal.toString() : '',
+      nombreDePartsFiscales: compteUtilisateur.nombreDePartsFiscales
+        ? compteUtilisateur.nombreDePartsFiscales.toString()
+        : '',
     });
   }
 }

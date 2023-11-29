@@ -17,6 +17,10 @@ export class MettreAJourCompteUtilisateurUsecase {
       commune: compteUtilisateurInput.commune,
       prenom: compteUtilisateurInput.prenom,
       revenuFiscal: compteUtilisateurInput.revenuFiscal !== '' ? Number(compteUtilisateurInput.revenuFiscal) : null,
+      nombreDePartsFiscales:
+        compteUtilisateurInput.nombreDePartsFiscales !== ''
+          ? Number(compteUtilisateurInput.nombreDePartsFiscales)
+          : null,
     });
     this.sessionRepository.sauvegarderUtilisateur({
       nom: compteUtilisateurInput.nom,
@@ -26,6 +30,10 @@ export class MettreAJourCompteUtilisateurUsecase {
       prenom: compteUtilisateurInput.prenom,
       mail: compteUtilisateurInput.mail,
       revenuFiscal: compteUtilisateurInput.revenuFiscal !== '' ? Number(compteUtilisateurInput.revenuFiscal) : null,
+      nombreDePartsFiscales:
+        compteUtilisateurInput.nombreDePartsFiscales !== ''
+          ? Number(compteUtilisateurInput.nombreDePartsFiscales)
+          : null,
     });
   }
 }

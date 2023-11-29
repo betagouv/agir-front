@@ -11,6 +11,7 @@ class UtilisateurRepositoryForTest implements UtilisateurRepository {
       prenom: 'John',
       mail: '',
       revenuFiscal: null,
+      nombreDePartsFiscales: null,
     });
   }
 
@@ -48,6 +49,7 @@ class SpySessionRepository implements SessionRepository {
     prenom: '',
     mail: '',
     revenuFiscal: null,
+    nombreDePartsFiscales: null,
   };
 
   sauvegarderUtilisateur(utilisateur: Utilisateur) {
@@ -71,6 +73,7 @@ describe("Fichier de tests concernant l'authentification ", () => {
       prenom: 'John',
       mail: '',
       revenuFiscal: null,
+      nombreDePartsFiscales: null,
     });
   });
 });

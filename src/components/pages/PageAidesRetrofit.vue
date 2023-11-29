@@ -1,6 +1,6 @@
 <template>
   <div class="fr-container fr-pb-6w">
-    <FilDAriane :page-courante="titrePage" :page-hierarchie="[{ label: 'Aides fincancières', url: 'mes-aides' }]" />
+    <FilDAriane :page-courante="titrePage" :page-hierarchie="[{ label: 'Aides fincancières', url: 'vos-aides' }]" />
     <AidesResultat
       titre-categorie-aide=""
       :simulation-aides-view-model="simulationAidesRetrofitViewModel"

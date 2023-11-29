@@ -10,6 +10,7 @@ interface UtilisateurApiModel {
   commune: string;
   email: string;
   revenu_fiscal: number | null;
+  nombre_de_parts_fiscales: number | null;
 }
 
 interface LoginApiModel {
@@ -34,6 +35,9 @@ export class UtilisateurRepositoryAxios implements UtilisateurRepository {
       prenom: response.data.utilisateur.prenom || '',
       mail: response.data.utilisateur.email,
       revenuFiscal: response.data.utilisateur.revenu_fiscal,
+      nombreDePartsFiscales: response.data.utilisateur.nombre_de_parts_fiscales
+        ? response.data.utilisateur.nombre_de_parts_fiscales
+        : null,
     };
   }
 
@@ -54,6 +58,7 @@ export class UtilisateurRepositoryAxios implements UtilisateurRepository {
       prenom: response.data.prenom,
       mail: response.data.email,
       revenuFiscal: response.data.revenu_fiscal,
+      nombreDePartsFiscales: response.data.nombre_de_parts_fiscales,
     };
   }
 
@@ -74,6 +79,7 @@ export class UtilisateurRepositoryAxios implements UtilisateurRepository {
       commune: response.data.utilisateur.commune || '',
       prenom: response.data.utilisateur.prenom || '',
       revenuFiscal: response.data.utilisateur.revenu_fiscal,
+      nombreDePartsFiscales: response.data.utilisateur.nombre_de_parts_fiscales,
     };
   }
 

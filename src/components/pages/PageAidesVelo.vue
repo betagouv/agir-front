@@ -1,6 +1,6 @@
 <template>
   <div class="fr-container fr-pb-6w">
-    <FilDAriane :page-courante="titrePage" :page-hierarchie="[{ label: 'Aides fincancières', url: 'mes-aides' }]" />
+    <FilDAriane :page-courante="titrePage" :page-hierarchie="[{ label: 'Aides fincancières', url: 'vos-aides' }]" />
     <AidesResultat
       titre-categorie-aide="Acheter un vélo"
       :simulation-aides-view-model="simulationAidesVeloViewModel"
@@ -11,7 +11,12 @@
         <FormulaireAideVelo @submit-simulation="submitSimulation" />
       </template>
       <template v-slot:asideResultatAides>
-        <AsideAideVelo @reset-simulation="resetSimulation" :code-postal="codePostal" :revenu-fiscal="revenuFiscal" />
+        <AsideAideVelo
+          @reset-simulation="resetSimulation"
+          :code-postal="codePostal"
+          :revenu-fiscal="revenuFiscal"
+          :nombre-de-parts-fiscales="nombreDePartsFiscales"
+        />
       </template>
     </AidesResultat>
   </div>
@@ -30,14 +35,17 @@
   const simulationAidesVeloViewModel = ref<SimulationAideResultatViewModel | null>(null);
   const codePostal = ref<string>('');
   const revenuFiscal = ref<string>('');
+  const nombreDePartsFiscales = ref<string>('');
 
   const submitSimulation = (
     data: SimulationAideResultatViewModel,
     dataCodePostal: string,
-    dataRevenuFiscal: string
+    dataRevenuFiscal: string,
+    dataNombreDePartsFiscales: string
   ) => {
     codePostal.value = dataCodePostal;
     revenuFiscal.value = dataRevenuFiscal;
+    nombreDePartsFiscales.value = dataNombreDePartsFiscales;
     simulationAidesVeloViewModel.value = data;
   };
 

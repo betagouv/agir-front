@@ -15,23 +15,31 @@
         <legend class="fr-fieldset__legend fr-px-0 fr-mx-0" id="donnee-fieldset-legend">
           <h2>Données personnelles</h2>
         </legend>
-        <div class="fr-grid-row fr-grid-row--gutters">
-          <div class="fr-col-4">
+        <div class="fr-grid fr-grid-row fr-grid-row--gutters">
+          <div class="fr-col-md-6 fr-col-12">
             <InputText
               label="Revenu fiscal de référence"
               name="revenu-fiscal"
               v-model="compteUtlisateurViewModel.revenuFiscal"
             />
           </div>
-          <div class="fr-col-8">
-            <CarteInfo>
-              <p class="fr-icon-information-line fr-m-0">
-                Votre <strong>revenu fiscal de référence</strong> permet d’afficher les aides en fonction de vos
-                ressources.
-              </p>
-            </CarteInfo>
+          <div class="fr-col-md-6 fr-col-12">
+            <InputText
+              label="Nombre de parts fiscales"
+              name="parts-fiscales"
+              v-model="compteUtlisateurViewModel.nombreDePartsFiscales"
+            />
           </div>
         </div>
+        <div class="fr-col-12 fr-mt-3w">
+          <CarteInfo>
+            <p class="fr-icon-information-line fr-m-0">
+              Votre <strong>revenu fiscal de référence</strong> et le <strong>nombre de parts</strong> permettent
+              d’afficher les aides en fonction de vos ressources.
+            </p>
+          </CarteInfo>
+        </div>
+
         <div class="fr-col-12">
           <InputCodePostal
             v-model="compteUtlisateurViewModel.codePostal"

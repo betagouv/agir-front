@@ -7,6 +7,7 @@
     <ul>
       <li>Code postal: {{ codePostal }}</li>
       <li>Revenu fiscal de référence : {{ revenuFiscal }}</li>
+      <li>Nombre de parts fiscales : {{ nombreDePartsFiscales }}</li>
     </ul>
     <router-link
       class="fr-link fr-icon-arrow-right-line fr-link--icon-right text--black-light"
@@ -23,6 +24,7 @@
   defineProps<{
     codePostal: string;
     revenuFiscal: string;
+    nombreDePartsFiscales: string;
   }>();
 </script>
 

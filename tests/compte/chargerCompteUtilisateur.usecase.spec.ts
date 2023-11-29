@@ -19,6 +19,7 @@ class ChargeCompteUtilisateurSansInfosOptionnellesRepository implements CompteUt
       prenom: 'John',
       revenuFiscal: null,
       commune: '',
+      nombreDePartsFiscales: null,
     });
   }
 
@@ -35,10 +36,6 @@ class ChargeCompteUtilisateurSansInfosOptionnellesRepository implements CompteUt
   mettreAJourLeMotDePasse(idUtilisateur: string, nouveauMotDePasse: string): Promise<void> {
     throw Error();
   }
-
-  validerCompteUtilisateur(email: string, code: string): Promise<CompteUtilisateur> {
-    throw Error();
-  }
 }
 
 class ChargeCompteUtilisateurAvecMailRepository implements CompteUtilisateurRepository {
@@ -51,6 +48,7 @@ class ChargeCompteUtilisateurAvecMailRepository implements CompteUtilisateurRepo
       commune: 'PARIS 01',
       prenom: 'John',
       revenuFiscal: null,
+      nombreDePartsFiscales: null,
     });
   }
 
@@ -84,6 +82,7 @@ describe('Fichier de tests concernant le chargement du compte utilisateur', () =
         commune: '',
         prenom: 'John',
         revenuFiscal: '',
+        nombreDePartsFiscales: '',
       });
     }
   });
@@ -102,6 +101,7 @@ describe('Fichier de tests concernant le chargement du compte utilisateur', () =
         commune: 'PARIS 01',
         prenom: 'John',
         revenuFiscal: '',
+        nombreDePartsFiscales: '',
       });
     }
   });
