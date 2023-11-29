@@ -12,6 +12,9 @@
     :valeurs-carbone-du-graph="suiviDuJourResultats!.suivisPrecedent.valeursDesSuivis"
     :moyenne-des-suivis="suiviDuJourResultats!.suivisPrecedent.moyenneDesSuivis"
   />
+  <router-link class="fr-btn fr-mt-2w" title="Retourner à la page coach" :to="{ name: 'coach' }">
+    Retour à mes actions
+  </router-link>
 </template>
 
 <script setup lang="ts">
