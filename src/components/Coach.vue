@@ -135,7 +135,4 @@
   };
 
   onMounted(lancerChargementDesDonnees);
-  onUnmounted(() => {
-    ToDoListEventBusImpl.getInstance().unsubscribe(ToDoListEvent.TODO_POINTS_ONT_ETE_RECUPERE);
-  });
 </script>

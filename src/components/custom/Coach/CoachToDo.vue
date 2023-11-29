@@ -3,7 +3,7 @@
     <h2 class="fr-mb-0">Vos missions</h2>
     <p class="fr-text--xl">Un pas après l’autre</p>
     <div v-if="todoList.fait.length > 0">
-      <h3 class="todoList__title fr-mb-0 fr-text--xs text-disabled-grey fr-mb-1w">déjà fait</h3>
+      <h3 class="text--uppercase fr-mb-0 fr-text--xs text-disabled-grey fr-mb-1w">déjà fait</h3>
       <ul class="list-style-none fr-p-0 fr-m-0">
         <li v-for="todo in todoList.fait" :key="todo.titre" class="fr-mb-2w">
           <CoachCardDone
@@ -17,7 +17,7 @@
       </ul>
     </div>
     <div v-if="todoList.aFaire.length > 0">
-      <h3 class="todoList__title fr-mb-0 fr-text--xs text-disabled-grey fr-mb-1w">à faire</h3>
+      <h3 class="text--uppercase fr-mb-0 fr-text--xs text-disabled-grey fr-mb-1w">à faire</h3>
       <ul class="list-style-none fr-p-0 fr-m-0">
         <li v-for="todo in todoList.aFaire" :key="todo.titre" class="fr-mb-2w">
           <CoachCardToDo
@@ -33,6 +33,15 @@
         </li>
       </ul>
     </div>
+    <div>
+      <h3 class="text--uppercase fr-mb-0 fr-text--xs text-disabled-grey fr-mb-1w">Bonus débolqué !</h3>
+      <button
+        class="fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-gift-fill fr-text--lg border-radius--md"
+        :disabled="false"
+      >
+        Découvrir le bonus
+      </button>
+    </div>
   </div>
 </template>
 
@@ -43,9 +52,3 @@
 
   defineProps<{ todoList: TodoListViewModel }>();
 </script>
-
-<style scoped>
-  .todoList__title {
-    text-transform: uppercase;
-  }
-</style>
