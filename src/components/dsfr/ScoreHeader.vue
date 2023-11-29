@@ -19,7 +19,6 @@
     mettreAJourLeScore();
 
     function sauvegarderLeScoreEnLocal(viewModel: ScoreViewModel) {
-      console.log(viewModel);
       utilisateurStore().setScore(viewModel);
     }
 
