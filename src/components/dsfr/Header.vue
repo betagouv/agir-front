@@ -83,17 +83,12 @@
 </template>
 
 <script setup lang="ts">
-  import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
+  import { computed, ref, watch } from 'vue';
   import { useRoute } from 'vue-router';
   import router from '@/router';
   import { utilisateurStore } from '@/store/utilisateur';
   import Cookies from 'js-cookie';
-  import { ScoreViewModel } from '@/score/ports/chargementScore.presenter';
-  import { ChargementScoreUsecase } from '@/score/chargementScore.usecase';
-  import { ScoreRepositoryAxios } from '@/score/adapters/score.repository.axios';
-  import { ChargementScorePresenterImpl } from '@/score/adapters/chargementScore.presenter.impl';
-  import { ToDoListEvent, ToDoListEventBusImpl } from '@/toDoList/toDoListEventBusImpl';
-  import ScoreHeader from '@/components/dsfr/ScoreHeader.vue';
+  import ScoreHeader from '@/components/custom/ScoreHeader.vue';
 
   const route = useRoute();
   const store = utilisateurStore();

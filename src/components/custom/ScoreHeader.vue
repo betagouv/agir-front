@@ -39,7 +39,6 @@
   });
 
   onUnmounted(() => {
-    console.log('onUnmounted');
     ToDoListEventBusImpl.getInstance().unsubscribe(ToDoListEvent.TODO_POINTS_ONT_ETE_RECUPERE);
     ToDoListEventBusImpl.getInstance().unsubscribe(ToDoListEvent.TODO_ARTICLE_A_ETE_LU);
   });
@@ -59,8 +58,5 @@
 
   .tag__progression.niveau {
     background: rgba(237, 142, 0, 0.1);
-  }
-
-  @media (min-width: 62em) {
   }
 </style>
