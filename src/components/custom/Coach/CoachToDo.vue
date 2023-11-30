@@ -64,6 +64,7 @@
   import { TerminerToDoListUsecase } from '@/toDoList/terminerToDoList.usecase';
   import { utilisateurStore } from '@/store/utilisateur';
   import { ToDoListRepositoryAxios } from '@/toDoList/adapters/toDoList.repository.axios';
+  import { ToDoListEventBusImpl } from '@/toDoList/toDoListEventBusImpl';
 
   const props = defineProps<{ todoList: TodoListViewModel }>();
 
@@ -85,6 +86,9 @@
 
   const recupererPointsTodo = async () => {
     const utilisateurId = utilisateurStore().utilisateur.id;
-    new TerminerToDoListUsecase(new ToDoListRepositoryAxios()).execute(utilisateurId);
+    new TerminerToDoListUsecase(new ToDoListRepositoryAxios(), ToDoListEventBusImpl.getInstance()).execute(
+      utilisateurId
+    );
+    bonusFinalRecupere.value = false;
   };
 </script>
