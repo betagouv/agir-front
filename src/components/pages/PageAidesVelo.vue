@@ -8,15 +8,29 @@
       :sous-titre="sousTitre"
     >
       <template v-slot:formulaire>
-        <FormulaireAideVelo @submit-simulation="submitSimulation" />
+        <FormulaireAideVelo @infos-mises-a-jour="simulerAideVelo" />
       </template>
       <template v-slot:asideResultatAides>
+        <div>
+          <form>
+            <InputNumberHorizontal
+              v-model="prixDuVelo"
+              :default-value="prixDuVelo"
+              class="fr-mb-3w"
+              :min-value="0"
+              name="prix-du-velo"
+              label="Prix du velo (en euros)"
+              size="md"
+            />
+            <button class="fr-btn fr-btn--lg fr-mb-3w display-block full-width" @click.prevent="simulerAideVelo">
+              Relancer la simulation
+            </button>
+          </form>
+        </div>
         <AsideAideVelo
-          @submit-simulation="submitSimulation"
           :code-postal="codePostal"
-          :revenu-fiscal="revenuFiscal"
-          :nombre-de-parts-fiscales="nombreDePartsFiscales"
-          :prix-du-velo="prixDuVelo"
+          :revenu-fiscal="utilisateurStore().utilisateur.revenuFiscal!"
+          :nombre-de-parts-fiscales="utilisateurStore().utilisateur.nombreDePartsFiscales!"
         />
       </template>
     </AidesResultat>
@@ -30,26 +44,31 @@
   import FormulaireAideVelo from '@/components/custom/Aides/AidesVeloFormulaire.vue';
   import AsideAideVelo from '@/components/custom/Aides/AidesVeloAside.vue';
   import { SimulationAideResultatViewModel } from '@/aides/ports/simulationAideResultat';
+  import SimulerAideVeloUsecase from '@/aides/simulerAideVelo.usecase';
+  import { SimulerAideVeloRepositoryAxios } from '@/aides/adapters/simulerAideVelo.repository.axios';
+  import { utilisateurStore } from '@/store/utilisateur';
+  import { SimulerAideVeloPresenterImpl } from '@/aides/adapters/simulerAideVelo.presenter.impl';
+  import InputNumberHorizontal from '@/components/custom/InputNumberHorizontal.vue';
 
   const titrePage = 'Acheter un vélo';
   const sousTitre = 'Vous pouvez bénéficier des aides vélo suivantes :';
   const simulationAidesVeloViewModel = ref<SimulationAideResultatViewModel | null>(null);
-  const codePostal = ref<number>(0);
-  const revenuFiscal = ref<number>(0);
-  const nombreDePartsFiscales = ref<number>(0);
+  const codePostal = ref<string>(utilisateurStore().utilisateur.codePostal!);
   const prixDuVelo = ref<number>(1000);
 
-  const submitSimulation = (
-    data: SimulationAideResultatViewModel,
-    dataCodePostal: number,
-    dataRevenuFiscal: number,
-    dataNombreDePartsFiscales: number,
-    dataPrixDuVelo: number
-  ) => {
-    codePostal.value = dataCodePostal;
-    revenuFiscal.value = dataRevenuFiscal;
-    nombreDePartsFiscales.value = dataNombreDePartsFiscales;
-    simulationAidesVeloViewModel.value = data;
-    prixDuVelo.value = dataPrixDuVelo | 1000;
+  function mapResultatAidesVelo(viewModels: SimulationAideResultatViewModel) {
+    simulationAidesVeloViewModel.value = viewModels;
+  }
+
+  const simulerAideVeloPresenterImpl = new SimulerAideVeloPresenterImpl(mapResultatAidesVelo);
+  const simulerAideVeloRepositoryAxios = new SimulerAideVeloRepositoryAxios();
+
+  const simulerAideVelo = () => {
+    if (utilisateurStore().utilisateur.revenuFiscal && utilisateurStore().utilisateur.nombreDePartsFiscales) {
+      const useCase = new SimulerAideVeloUsecase(simulerAideVeloRepositoryAxios);
+      useCase.execute(prixDuVelo.value, utilisateurStore().utilisateur.id, simulerAideVeloPresenterImpl);
+    }
   };
+
+  simulerAideVelo();
 </script>

@@ -24,8 +24,8 @@
               v-model="nombreDePartsFiscales"
               name="nombre-de-parts"
               id="text-input-parts"
-              inputmode="numeric"
-              type="number"
+              inputmode="decimal"
+              type="text"
             />
           </div>
           <button class="fr-mt-2v fr-btn" :disabled="isDisabled">Sauvegarder et continuer</button>
@@ -40,10 +40,6 @@
 
 <script setup lang="ts">
   import { computed, ref } from 'vue';
-  import { SimulerAideVeloPresenterImpl } from '@/aides/adapters/simulerAideVelo.presenter.impl';
-  import { SimulerAideVeloRepositoryAxios } from '@/aides/adapters/simulerAideVelo.repository.axios';
-  import SimulerAideVeloUsecase from '@/aides/simulerAideVelo.usecase';
-  import { SimulationAideResultatViewModel } from '@/aides/ports/simulationAideResultat';
   import { utilisateurStore } from '@/store/utilisateur';
   import { MettreAJourCompteUtilisateurUsecase } from '@/compte/mettreAJourCompteUtilisateur.usecase';
   import { CompteUtilisateurRepositoryImpl } from '@/compte/adapters/compteUtilisateur.repository.impl';
@@ -51,17 +47,15 @@
   import CarteInfoExplicationsAidesLocales from '@/components/custom/CarteInfoExplicationsAidesLocales.vue';
 
   const store = utilisateurStore();
-  const emit = defineEmits(['submit-simulation']);
   const revenuFiscal = ref(store.utilisateur.revenuFiscal);
   const nombreDePartsFiscales = ref(store.utilisateur.nombreDePartsFiscales);
   const demanderRevenu = revenuFiscal.value === null;
   const demanderPartsFiscales = nombreDePartsFiscales.value === null;
-  const prixDuVelos = ref(1000);
-  if (!demanderRevenu && !demanderPartsFiscales) {
-    simulerAideVelo();
-  }
 
-  function mettreAJourLesInfos() {
+  const emit = defineEmits<{
+    (e: 'infos-mises-a-jour'): void;
+  }>();
+  async function mettreAJourLesInfos() {
     {
       const usecase = new MettreAJourCompteUtilisateurUsecase(
         new CompteUtilisateurRepositoryImpl(),
@@ -78,32 +72,13 @@
         revenuFiscal: revenuFiscal.value ? revenuFiscal.value.toString() : '',
         nombreDePartsFiscales: nombreDePartsFiscales.value ? nombreDePartsFiscales.value.toString() : '',
       };
-      usecase.execute(donneeAMettreAjour);
+      await usecase.execute(donneeAMettreAjour);
+      emit('infos-mises-a-jour');
     }
-  }
-
-  function mapResultatAidesVelo(viewModels: SimulationAideResultatViewModel) {
-    emit(
-      'submit-simulation',
-      viewModels,
-      store.utilisateur.codePostal,
-      revenuFiscal.value,
-      nombreDePartsFiscales.value
-    );
-  }
-
-  function simulerAideVelo() {
-    const useCase = new SimulerAideVeloUsecase(new SimulerAideVeloRepositoryAxios());
-    useCase.execute(
-      prixDuVelos.value,
-      utilisateurStore().utilisateur.id,
-      new SimulerAideVeloPresenterImpl(mapResultatAidesVelo)
-    );
   }
 
   const mettreAJourEtLancerLaSimulation = () => {
     mettreAJourLesInfos();
-    simulerAideVelo();
   };
 
   const isDisabled = computed(() => {
