@@ -16,6 +16,6 @@ describe("Fichier de tests concernant la fin d'une Todo List", () => {
 
     // THEN
     expect(spyToDoListRepository.terminerToDoAEteAppele).toBeTruthy();
-    expect(spyToDoListEventBus.eventName).toBe(ToDoListEvent.TODO_POINTS_ONT_ETE_RECUPERE);
+    expect(spyToDoListEventBus.eventName).toBe(ToDoListEvent.TODO_A_ETE_TERMINEE);
   });
 });
