@@ -12,7 +12,7 @@
       </template>
       <template v-slot:asideResultatAides>
         <AsideAideVelo
-          @reset-simulation="resetSimulation"
+          @submit-simulation="submitSimulation"
           :code-postal="codePostal"
           :revenu-fiscal="revenuFiscal"
           :nombre-de-parts-fiscales="nombreDePartsFiscales"
@@ -34,15 +34,15 @@
   const titrePage = 'Acheter un vélo';
   const sousTitre = 'Vous pouvez bénéficier des aides vélo suivantes :';
   const simulationAidesVeloViewModel = ref<SimulationAideResultatViewModel | null>(null);
-  const codePostal = ref<string>('');
-  const revenuFiscal = ref<string>('');
-  const nombreDePartsFiscales = ref<number>();
+  const codePostal = ref<number>(0);
+  const revenuFiscal = ref<number>(0);
+  const nombreDePartsFiscales = ref<number>(0);
   const prixDuVelo = ref<number>(1000);
 
   const submitSimulation = (
     data: SimulationAideResultatViewModel,
-    dataCodePostal: string,
-    dataRevenuFiscal: string,
+    dataCodePostal: number,
+    dataRevenuFiscal: number,
     dataNombreDePartsFiscales: number,
     dataPrixDuVelo: number
   ) => {
@@ -52,6 +52,4 @@
     simulationAidesVeloViewModel.value = data;
     prixDuVelo.value = dataPrixDuVelo | 1000;
   };
-
-  const resetSimulation = () => (simulationAidesVeloViewModel.value = null);
 </script>

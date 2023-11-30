@@ -50,6 +50,6 @@
 
 <style scoped>
   input {
-    max-width: 5rem;
+    max-width: 8rem;
   }
 </style>
