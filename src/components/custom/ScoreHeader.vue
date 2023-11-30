@@ -1,5 +1,7 @@
 <template>
-  <div class="tag__progression niveau fr-text--bold">1 <img width="16" src="/ic_star.svg" alt="niveau" /></div>
+  <div class="tag__progression niveau fr-text--bold">
+    {{ score.niveau }} <img width="16" src="/ic_star.svg" alt="niveau" />
+  </div>
   <div class="tag__progression score fr-text--bold">
     {{ score.points }} <img width="16" src="/ic_score.svg" alt="score" />
   </div>
