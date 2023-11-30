@@ -57,7 +57,7 @@
 </template>
 
 <script setup lang="ts">
-  import { onMounted, onUnmounted, ref } from 'vue';
+  import { onMounted, ref } from 'vue';
   import CarteSkeleton from '@/components/CarteSkeleton.vue';
   import { utilisateurStore } from '@/store/utilisateur';
   import CoachChangementSituation from '@/components/custom/Coach/CoachChangementSituation.vue';
@@ -110,6 +110,10 @@
     const chargerTodoListUsecase = new RecupererToDoListUsecase(new ToDoListRepositoryAxios());
 
     ToDoListEventBusImpl.getInstance().subscribe(ToDoListEvent.TODO_POINTS_ONT_ETE_RECUPERE, () => {
+      chargerTodoListUsecase.execute(idUtilisateur, new ToDoListPresenterImpl(mapValueTodo));
+    });
+
+    ToDoListEventBusImpl.getInstance().subscribe(ToDoListEvent.TODO_A_ETE_TERMINEE, () => {
       chargerTodoListUsecase.execute(idUtilisateur, new ToDoListPresenterImpl(mapValueTodo));
     });
 

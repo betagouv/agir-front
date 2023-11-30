@@ -6,6 +6,6 @@ export class TerminerToDoListUsecase {
 
   async execute(idUtilisateur: string): Promise<void> {
     await this.toDoListRepository.terminerToDo(idUtilisateur);
-    this.toDoListEventBus.publish(ToDoListEvent.TODO_POINTS_ONT_ETE_RECUPERE);
+    this.toDoListEventBus.publish(ToDoListEvent.TODO_A_ETE_TERMINEE);
   }
 }
