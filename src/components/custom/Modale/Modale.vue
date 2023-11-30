@@ -26,7 +26,7 @@
       id: string;
       titre: string;
       label: string;
-      size: 's' | 'm';
+      size?: 's' | 'm';
     }>(),
     {
       size: 's',
