@@ -38,12 +38,7 @@
                       <img src="/ic_user.svg" class="fr-mr-1v fr-mb-n1v" alt="" />
                       {{ nomUtilisateur }}
                     </router-link>
-                    <div class="tag__progression niveau fr-text--bold">
-                      1 <img width="16" src="/ic_star.svg" alt="niveau" />
-                    </div>
-                    <div class="tag__progression score fr-text--bold">
-                      {{ score.points }} <img width="16" src="/ic_score.svg" alt="score" />
-                    </div>
+                    <ScoreHeader />
                   </div>
                   <button class="fr-btn fr-btn--sm" @click="logout">Se déconnecter</button>
                 </li>
@@ -88,16 +83,12 @@
 </template>
 
 <script setup lang="ts">
-  import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
+  import { computed, ref, watch } from 'vue';
   import { useRoute } from 'vue-router';
   import router from '@/router';
   import { utilisateurStore } from '@/store/utilisateur';
   import Cookies from 'js-cookie';
-  import { ScoreViewModel } from '@/score/ports/chargementScore.presenter';
-  import { ChargementScoreUsecase } from '@/score/chargementScore.usecase';
-  import { ScoreRepositoryAxios } from '@/score/adapters/score.repository.axios';
-  import { ChargementScorePresenterImpl } from '@/score/adapters/chargementScore.presenter.impl';
-  import { ToDoListEvent, ToDoListEventBusImpl } from '@/toDoList/toDoListEventBusImpl';
+  import ScoreHeader from '@/components/custom/ScoreHeader.vue';
 
   const route = useRoute();
   const store = utilisateurStore();
@@ -105,7 +96,6 @@
   const isCoachActif = ref(false);
   const isMesAidesActif = ref(false);
 
-  const score = computed(() => store.score);
   const nomUtilisateur = computed(() => store.utilisateur.prenom);
   const estConnecte = computed(() => store.utilisateur.nom.length > 0);
 
@@ -122,35 +112,6 @@
       isMesAidesActif.value = newPath.includes('/vos-aides');
     }
   );
-
-  onMounted(() => {
-    mettreAJourLeScore();
-
-    function sauvegarderLeScoreEnLocal(viewModel: ScoreViewModel) {
-      console.log(viewModel);
-      utilisateurStore().setScore(viewModel);
-    }
-
-    function mettreAJourLeScore() {
-      if (estConnecte.value) {
-        const chargerScoreUseCase = new ChargementScoreUsecase(new ScoreRepositoryAxios());
-        chargerScoreUseCase.execute(store.utilisateur.id, new ChargementScorePresenterImpl(sauvegarderLeScoreEnLocal));
-      }
-    }
-
-    ToDoListEventBusImpl.getInstance().subscribe(ToDoListEvent.TODO_POINTS_ONT_ETE_RECUPERE, () => {
-      mettreAJourLeScore();
-    });
-    ToDoListEventBusImpl.getInstance().subscribe(ToDoListEvent.TODO_ARTICLE_A_ETE_LU, () => {
-      mettreAJourLeScore();
-    });
-  });
-
-  onUnmounted(() => {
-    console.log('onUnmounted');
-    ToDoListEventBusImpl.getInstance().unsubscribe(ToDoListEvent.TODO_POINTS_ONT_ETE_RECUPERE);
-    ToDoListEventBusImpl.getInstance().unsubscribe(ToDoListEvent.TODO_ARTICLE_A_ETE_LU);
-  });
 </script>
 
 <style scoped>
