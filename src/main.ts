@@ -37,7 +37,7 @@ app.use(VueMatomo, {
 });
 app.use(VueHotjar, {
   id: import.meta.env.VITE_HOTJAR_ID,
-  isProduction: import.meta.env.VITE_HOTJAR_IS_PRODUCTION,
+  isProduction: import.meta.env.VITE_ENV === 'production',
   snippetVersion: import.meta.env.VITE_HOTJAR_SNIPPET_VERSION,
 });
 createSentry(app, router);
