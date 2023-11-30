@@ -7,6 +7,10 @@ export class MockToDoListRepository implements ToDoListRepository {
     throw new Error('Method not implemented.');
   }
 
+  async terminerToDo(idUtilisateur: string): Promise<void> {
+    throw new Error('Method not implemented.');
+  }
+
   recupererToDoList(idUtilisateur: string): Promise<TodoList> {
     return Promise.resolve({
       fait: [

@@ -82,4 +82,10 @@ export class ToDoListRepositoryAxios implements ToDoListRepository {
     const axiosInstance = AxiosFactory.getAxios();
     await axiosInstance.post<boolean>(`/utilisateurs/${idUtilisateur}/todo/${elementId}/gagner_points`);
   }
+
+  @intercept401()
+  async terminerToDo(idUtilisateur: string): Promise<void> {
+    const axiosInstance = AxiosFactory.getAxios();
+    await axiosInstance.post<boolean>(`/utilisateurs/${idUtilisateur}/todo/gagner_points`);
+  }
 }
