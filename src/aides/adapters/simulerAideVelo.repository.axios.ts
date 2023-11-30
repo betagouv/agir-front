@@ -25,11 +25,11 @@ type AidesVeloParType = {
 };
 
 export class SimulerAideVeloRepositoryAxios implements SimulerAideVeloRepository {
-  async getSimulation(codePostal: string, revenuFiscalDeReference: string): Promise<SimulationVelo> {
+  async getSimulation(prixDuVelo: number, utilisateurId: string): Promise<SimulationVelo> {
     const axiosInstance = AxiosFactory.getAxios();
-    const response = await axiosInstance.get<AidesVeloParType>(
-      `aides/velos?codePostal=${codePostal}&revenuFiscalDeReference=${revenuFiscalDeReference}`
-    );
+    const response = await axiosInstance.post<AidesVeloParType>(`/utilisateurs/${utilisateurId}/simulerAideVelo`, {
+      prix_du_velo: prixDuVelo,
+    });
     return response.data;
   }
 }

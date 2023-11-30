@@ -16,6 +16,7 @@
           :code-postal="codePostal"
           :revenu-fiscal="revenuFiscal"
           :nombre-de-parts-fiscales="nombreDePartsFiscales"
+          :prix-du-velo="prixDuVelo"
         />
       </template>
     </AidesResultat>
@@ -35,23 +36,22 @@
   const simulationAidesVeloViewModel = ref<SimulationAideResultatViewModel | null>(null);
   const codePostal = ref<string>('');
   const revenuFiscal = ref<string>('');
-  const nombreDePartsFiscales = ref<string>('');
+  const nombreDePartsFiscales = ref<number>();
+  const prixDuVelo = ref<number>(1000);
 
   const submitSimulation = (
     data: SimulationAideResultatViewModel,
     dataCodePostal: string,
     dataRevenuFiscal: string,
-    dataNombreDePartsFiscales: string
+    dataNombreDePartsFiscales: number,
+    dataPrixDuVelo: number
   ) => {
     codePostal.value = dataCodePostal;
     revenuFiscal.value = dataRevenuFiscal;
     nombreDePartsFiscales.value = dataNombreDePartsFiscales;
     simulationAidesVeloViewModel.value = data;
+    prixDuVelo.value = dataPrixDuVelo | 1000;
   };
 
   const resetSimulation = () => (simulationAidesVeloViewModel.value = null);
-
-  defineProps<{
-    titre: string;
-  }>();
 </script>

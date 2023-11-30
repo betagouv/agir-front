@@ -56,6 +56,7 @@
   const nombreDePartsFiscales = ref(store.utilisateur.nombreDePartsFiscales);
   const demanderRevenu = revenuFiscal.value === null;
   const demanderPartsFiscales = nombreDePartsFiscales.value === null;
+  const prixDuVelos = ref(1000);
   if (!demanderRevenu && !demanderPartsFiscales) {
     simulerAideVelo();
   }
@@ -94,8 +95,8 @@
   function simulerAideVelo() {
     const useCase = new SimulerAideVeloUsecase(new SimulerAideVeloRepositoryAxios());
     useCase.execute(
-      store.utilisateur.codePostal,
-      revenuFiscal.value ? revenuFiscal.value.toString() : '',
+      prixDuVelos.value,
+      utilisateurStore().utilisateur.id,
       new SimulerAideVeloPresenterImpl(mapResultatAidesVelo)
     );
   }

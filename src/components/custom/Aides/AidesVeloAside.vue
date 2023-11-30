@@ -1,4 +1,13 @@
 <template>
+  <InputNumberHorizontal
+    :default-value="prixDuVelo"
+    class="fr-mb-3w"
+    :min-value="0"
+    name="prix-du-velo"
+    label="Prix du velo"
+    size="md"
+  />
+  <button class="fr-btn fr-btn--lg fr-mb-3w display-block full-width" type="submit">Relancer la simulation</button>
   <CarteInfo>
     <p class="fr-text--bold">
       <span class="fr-icon-information-line" aria-hidden="true"></span>
@@ -20,21 +29,14 @@
 
 <script setup lang="ts">
   import CarteInfo from '@/components/custom/CarteInfo.vue';
+  import InputNumberHorizontal from '@/components/custom/InputNumberHorizontal.vue';
 
   defineProps<{
     codePostal: string;
-    revenuFiscal: string;
-    nombreDePartsFiscales: string;
+    revenuFiscal: number;
+    nombreDePartsFiscales: number;
+    prixDuVelo: number;
   }>();
 </script>
 
-<style scoped>
-  button {
-    background: none;
-    text-decoration: underline;
-  }
-
-  button:hover {
-    background: none;
-  }
-</style>
+<style scoped></style>
