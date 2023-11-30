@@ -76,6 +76,7 @@
         codePostal: utilisateur.codePostal,
         prenom: utilisateur.prenom,
         revenuFiscal: revenuFiscal.value?.toString() || '',
+        nombreDePartsFiscales: utilisateur.nombreDePartsFiscales?.toString() || '',
       };
       usecase.execute(donneeAMettreAjour);
     }

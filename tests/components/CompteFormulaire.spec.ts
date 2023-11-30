@@ -13,6 +13,7 @@ const compteUtlisateurViewModel: CompteUtlisateurViewModel = {
   codePostal: '75002',
   commune: 'PARIS 02',
   revenuFiscal: '123456',
+  nombreDePartsFiscales: '1',
 };
 
 describe('Compte - Formulaire', () => {
@@ -23,6 +24,7 @@ describe('Compte - Formulaire', () => {
   let inputCodePostal: HTMLInputElement;
   let selectCommune: HTMLSelectElement;
   let inputRevenuFiscal: HTMLInputElement;
+  let nombreDePartsFiscales: HTMLInputElement;
   let submitBouton: HTMLInputElement;
 
   beforeEach(() => {
@@ -41,6 +43,7 @@ describe('Compte - Formulaire', () => {
     inputCodePostal = getByRole('textbox', { name: /Code postal/i });
     selectCommune = getByRole('combobox', { name: /Sélection d'une commune/i });
     inputRevenuFiscal = getByRole('textbox', { name: 'Revenu fiscal de référence' });
+    nombreDePartsFiscales = getByRole('textbox', { name: 'Nombre de parts fiscales' });
     submitBouton = getByRole('button', { name: 'Mettre à jour' });
     titre = getByRole('heading', { level: 2, name: 'Identité personnelle' });
   });
@@ -67,6 +70,8 @@ describe('Compte - Formulaire', () => {
       expect(selectCommune.value).toBe('PARIS 02');
       expect(inputRevenuFiscal).toBeDefined();
       expect(inputRevenuFiscal.value).toBe('123456');
+      expect(nombreDePartsFiscales).toBeDefined();
+      expect(nombreDePartsFiscales.value).toBe('1');
       expect(submitBouton).toBeDefined();
     });
   });
@@ -80,6 +85,7 @@ describe('Compte - Formulaire', () => {
       await fireEvent.update(inputRevenuFiscal, '654321');
       await fireEvent.update(inputCodePostal, '75001');
       await fireEvent.update(selectCommune, 'PARIS 01');
+      await fireEvent.update(nombreDePartsFiscales, '2');
 
       // THEN
       expect(inputNom.value).toBe('John');
@@ -88,6 +94,7 @@ describe('Compte - Formulaire', () => {
       expect(inputRevenuFiscal.value).toBe('654321');
       expect(inputCodePostal.value).toBe('75001');
       expect(selectCommune.value).toBe('PARIS 01');
+      expect(nombreDePartsFiscales.value).toBe('2');
     });
 
     describe("quand l'utilisateur soumet ses modifications", () => {
@@ -104,6 +111,7 @@ describe('Compte - Formulaire', () => {
           await fireEvent.update(inputRevenuFiscal, '654321');
           await fireEvent.update(inputCodePostal, '75001');
           await fireEvent.update(selectCommune, 'PARIS 01');
+          await fireEvent.update(nombreDePartsFiscales, '2');
           await fireEvent.click(submitBouton);
 
           expect(mettreAJourCompteUtilisateurUsecaseMock).toHaveBeenNthCalledWith(1, {
@@ -114,6 +122,7 @@ describe('Compte - Formulaire', () => {
             revenuFiscal: '654321',
             codePostal: '75001',
             commune: 'PARIS 01',
+            nombreDePartsFiscales: '2',
           });
         });
 

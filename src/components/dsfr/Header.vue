@@ -72,7 +72,7 @@
                 :to="{ name: 'mes-aides' }"
                 :aria-current="isMesAidesActif ? 'page' : null"
               >
-                Vos Aides
+                Vos aides
               </router-link>
             </li>
           </ul>

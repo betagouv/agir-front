@@ -10,15 +10,7 @@ import { Utilisateur } from '@/authentification/ports/utilisateur.repository';
 
 class SpyCompteUtilisateurRepository implements CompteUtilisateurRepository {
   get compteUtilisateur(): CompteUtilisateur {
-    return {
-      id: this._compteUtilisateur.id,
-      nom: this._compteUtilisateur.nom,
-      mail: this._compteUtilisateur.mail,
-      codePostal: this._compteUtilisateur.codePostal,
-      prenom: this._compteUtilisateur.prenom,
-      revenuFiscal: Number(this._compteUtilisateur.revenuFiscal),
-      commune: this._compteUtilisateur.commune,
-    };
+    return this._compteUtilisateur;
   }
 
   get aEteAppelee(): boolean {
@@ -27,13 +19,14 @@ class SpyCompteUtilisateurRepository implements CompteUtilisateurRepository {
 
   private _aEteAppelee: boolean = false;
 
-  private _compteUtilisateur: CompteUtlisateurViewModel = {
+  private _compteUtilisateur: CompteUtilisateur = {
     id: '',
     nom: '',
     mail: '',
     codePostal: '',
     prenom: '',
-    revenuFiscal: '',
+    revenuFiscal: 0,
+    nombreDePartsFiscales: 0,
     commune: '',
   };
 
@@ -43,15 +36,7 @@ class SpyCompteUtilisateurRepository implements CompteUtilisateurRepository {
 
   mettreAjour(compteUtilisateur: CompteUtilisateur) {
     this._aEteAppelee = true;
-    this._compteUtilisateur = {
-      id: compteUtilisateur.id,
-      nom: compteUtilisateur.nom,
-      mail: compteUtilisateur.mail,
-      codePostal: compteUtilisateur.codePostal,
-      commune: compteUtilisateur.commune,
-      prenom: compteUtilisateur.prenom,
-      revenuFiscal: compteUtilisateur.revenuFiscal ? compteUtilisateur.revenuFiscal.toString() : '',
-    };
+    this._compteUtilisateur = compteUtilisateur;
   }
 
   creerCompteUtilisateur(compteUtilisateurACreer: CompteUtilisateurACreer): Promise<CompteUtilisateur> {
@@ -91,6 +76,7 @@ describe('Fichier de tests concernant la mise à jour du compte utilisateur', ()
       commune: 'PARIS 01',
       prenom: 'John',
       revenuFiscal: '10000',
+      nombreDePartsFiscales: '1',
     };
     usecase.execute(viewModelInput);
     // THEN
@@ -103,6 +89,7 @@ describe('Fichier de tests concernant la mise à jour du compte utilisateur', ()
       commune: 'PARIS 01',
       prenom: 'John',
       revenuFiscal: 10000,
+      nombreDePartsFiscales: 1,
     });
     expect(sessionRepository.utlisateur).toStrictEqual<Utilisateur>({
       id: '1',
@@ -112,6 +99,7 @@ describe('Fichier de tests concernant la mise à jour du compte utilisateur', ()
       commune: 'PARIS 01',
       prenom: 'John',
       revenuFiscal: 10000,
+      nombreDePartsFiscales: 1,
     });
   });
 });

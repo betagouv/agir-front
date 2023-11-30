@@ -15,6 +15,7 @@ interface CompteUtilisateurApiModel {
   commune: string;
   prenom: string;
   revenu_fiscal: number | null;
+  nombre_de_parts_fiscales: number | null;
 }
 export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurRepository {
   @intercept401()
@@ -29,6 +30,7 @@ export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurReposit
       prenom: response.data.prenom || '',
       commune: response.data.commune || '',
       revenuFiscal: response.data.revenu_fiscal,
+      nombreDePartsFiscales: response.data.nombre_de_parts_fiscales,
     };
   }
 
@@ -42,6 +44,7 @@ export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurReposit
       code_postal: compteUtilisateur.codePostal,
       commune: compteUtilisateur.commune,
       revenu_fiscal: compteUtilisateur.revenuFiscal,
+      nombre_de_parts_fiscales: compteUtilisateur.nombreDePartsFiscales,
     });
   }
 

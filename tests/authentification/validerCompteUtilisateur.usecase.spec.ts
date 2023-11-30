@@ -15,6 +15,7 @@ class SpySessionRepository implements SessionRepository {
     prenom: '',
     mail: '',
     revenuFiscal: null,
+    nombreDePartsFiscales: null,
   };
 
   sauvegarderUtilisateur(utilisateur: Utilisateur) {
@@ -40,6 +41,7 @@ class SpyValiderCompteUtilisateurRepository implements UtilisateurRepository {
       prenom: '',
       mail: email,
       revenuFiscal: null,
+      nombreDePartsFiscales: null,
     });
   }
 
@@ -66,7 +68,7 @@ describe('Fichier de tests concernant la validation du compte utilisateur', () =
     );
     await usecase.execute('john@exemple.com', '123456');
     // THEN
-    expect(spySessionRepository.utilisateur).toEqual({
+    expect(spySessionRepository.utilisateur).toStrictEqual<Utilisateur>({
       id: '',
       nom: '',
       codePostal: '',
@@ -74,6 +76,7 @@ describe('Fichier de tests concernant la validation du compte utilisateur', () =
       prenom: '',
       mail: 'john@exemple.com',
       revenuFiscal: null,
+      nombreDePartsFiscales: null,
     });
   });
 });

@@ -6,6 +6,7 @@ export interface Utilisateur {
   prenom: string;
   mail: string;
   revenuFiscal: number | null;
+  nombreDePartsFiscales: number | null;
 }
 
 export interface UtilisateurRepository {
