@@ -1,16 +1,10 @@
 <template>
   <div class="fr-checkbox-group fr-checkbox-group--sm">
-    <input
-      name="checkboxes-hint-el-sm-1"
-      id="checkboxes-hint-el-sm-1"
-      type="checkbox"
-      aria-describedby="checkboxes-hint-el-sm-1-messages"
-    />
-    <label class="fr-label" for="checkboxes-hint-el-sm-1">
+    <input :name="id" :id="id" type="checkbox" @input="updateValue" />
+    <label class="fr-label" :for="id">
       {{ label }}
       <span v-if="description" class="fr-hint-text">{{ description }}</span>
     </label>
-    <div class="fr-messages-group" id="checkboxes-hint-el-sm-1-messages" aria-live="assertive"></div>
   </div>
 </template>
 
@@ -20,4 +14,12 @@
     label: string;
     description?: string;
   }>();
+
+  const emit = defineEmits(['update']);
+
+  const updateValue = (event: Event) => {
+    const inputElement = event.target as HTMLInputElement;
+
+    emit('update', inputElement.checked);
+  };
 </script>
