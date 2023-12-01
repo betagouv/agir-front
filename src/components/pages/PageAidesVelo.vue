@@ -2,7 +2,7 @@
   <div class="fr-container fr-pb-6w">
     <FilDAriane :page-courante="titrePage" :page-hierarchie="[{ label: 'Aides fincancières', url: 'vos-aides' }]" />
     <AidesResultat
-      titre-categorie-aide="Acheter un vélo"
+      titre-categorie-aide="Acheter un vélo neuf"
       :simulation-aides-view-model="simulationAidesVeloViewModel"
       :titre="titrePage"
       :sous-titre="sousTitre"
@@ -11,21 +11,28 @@
         <FormulaireAideVelo @infos-mises-a-jour="simulerAideVelo" />
       </template>
       <template v-slot:asideResultatAides>
-        <div>
-          <form>
-            <InputNumberHorizontal
-              v-model="prixDuVelo"
-              :default-value="prixDuVelo"
-              class="fr-mb-3w"
-              :min-value="0"
-              name="prix-du-velo"
-              label="Prix du velo (en euros)"
-              size="md"
-            />
-            <button class="fr-btn fr-btn--lg fr-mb-3w display-block full-width" @click.prevent="simulerAideVelo">
-              Relancer la simulation
-            </button>
+        <div class="background--white border border-radius--md fr-p-3w fr-mb-3w">
+          <h2 class="fr-h5">Paramètres</h2>
+          <form class="fr-mb-1w">
+            <div class="fr-grid-row align-items--end">
+              <InputNumberVertical
+                v-model="prixDuVelo"
+                :default-value="prixDuVelo"
+                :min-value="0"
+                name="prix-du-velo"
+                label="Prix du velo"
+                size="md"
+              />
+              <button class="fr-btn fr-btn--secondary" @click.prevent="simulerAideVelo">Valider</button>
+            </div>
           </form>
+          <span class="fr-text--sm fr-text--bold">À titre indicatif, voici quelques prix moyens</span>
+          <ul class="fr-text--sm fr-m-0 fr-mt-1v">
+            <li class="fr-p-0">Vélo mécanique : <u>250 €</u></li>
+            <li class="fr-p-0">Vélo pliant standard : <u>500 €</u></li>
+            <li class="fr-p-0">Vélo électrique standard : <u>2 000 €</u></li>
+            <li class="fr-p-0">Vélo cargo électrique : <u>7 000 €</u></li>
+          </ul>
         </div>
         <AsideAideVelo
           :code-postal="codePostal"
@@ -48,10 +55,10 @@
   import { SimulerAideVeloRepositoryAxios } from '@/aides/adapters/simulerAideVelo.repository.axios';
   import { utilisateurStore } from '@/store/utilisateur';
   import { SimulerAideVeloPresenterImpl } from '@/aides/adapters/simulerAideVelo.presenter.impl';
-  import InputNumberHorizontal from '@/components/custom/InputNumberHorizontal.vue';
+  import InputNumberVertical from '@/components/custom/InputNumberVertical.vue';
 
   const titrePage = 'Acheter un vélo';
-  const sousTitre = 'Vous pouvez bénéficier des aides vélo suivantes :';
+  const sousTitre = 'Voici les aides vélo disponibles (en fonction de votre situation)';
   const simulationAidesVeloViewModel = ref<SimulationAideResultatViewModel | null>(null);
   const codePostal = ref<string>(utilisateurStore().utilisateur.codePostal!);
   const prixDuVelo = ref<number>(1000);
