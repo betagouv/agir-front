@@ -30,8 +30,8 @@ export default class SimulerAideVeloUsecase {
     this._simulationAideVeloRepository = simulationAideVeloRepository;
   }
 
-  async execute(codePostal: string, revenuFiscalDeReference: string, presenter: SimulerAideVeloPresenter) {
-    const reponse = await this._simulationAideVeloRepository.getSimulation(codePostal, revenuFiscalDeReference);
+  async execute(prixDuVelo: number, utilisateurId: string, presenter: SimulerAideVeloPresenter) {
+    const reponse = await this._simulationAideVeloRepository.getSimulation(prixDuVelo, utilisateurId);
     presenter.presente(reponse);
   }
 }

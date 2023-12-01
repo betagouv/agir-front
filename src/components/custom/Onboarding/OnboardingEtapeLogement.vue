@@ -17,7 +17,7 @@
         class="fr-mr-8w fr-mb-2w"
         v-model="viewModel.adultes"
         :default-value="viewModel.adultes"
-        min-value="1"
+        :min-value="1"
       />
       <InputNumberHorizontal
         label="Enfant(s)"
@@ -25,7 +25,7 @@
         class="fr-mb-2w"
         v-model="viewModel.enfants"
         :default-value="viewModel.enfants"
-        min-value="0"
+        :min-value="0"
       />
     </div>
     <BoutonRadio
@@ -93,8 +93,8 @@
   const viewModel = ref<{
     codePostal: string;
     commune: string;
-    adultes: string;
-    enfants: string;
+    adultes: number;
+    enfants: number;
     residence: string;
     superficie: string;
     chauffage: string;
@@ -102,8 +102,8 @@
   }>({
     codePostal: onBoardingStore.etapeLogement.code_postal,
     commune: onBoardingStore.etapeLogement.commune,
-    adultes: onBoardingStore.etapeLogement.adultes.toString(),
-    enfants: onBoardingStore.etapeLogement.enfants.toString(),
+    adultes: onBoardingStore.etapeLogement.adultes,
+    enfants: onBoardingStore.etapeLogement.enfants,
     residence: onBoardingStore.etapeLogement.residence,
     superficie: onBoardingStore.etapeLogement.superficie,
     chauffage: onBoardingStore.etapeLogement.chauffage,
