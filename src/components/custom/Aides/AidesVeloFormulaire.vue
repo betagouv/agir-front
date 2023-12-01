@@ -28,6 +28,13 @@
               type="text"
             />
           </div>
+          <h2 class="fr-h4">Abonnements et cartes</h2>
+          <InputCheckboxUnitaire
+            id="abonnement-transport"
+            label="En tant qu’habitant d’Angers Loire Métropole, êtes-vous abonnés du TER Pays de la Loire ?"
+            description="Sont éligibles Tutti illimité ou combiné / Métrocéane mensuel / annuel Loire-Atlantique et Sarthe / mensuel réseaux Mayenne et Vendée (hors scolaire)"
+            v-model="abonnementTransport"
+          />
           <button class="fr-mt-2v fr-btn" :disabled="!revenuFiscal || !nombreDePartsFiscales">
             Sauvegarder et continuer
           </button>
@@ -49,12 +56,14 @@
   import { CompteUtilisateurRepositoryImpl } from '@/compte/adapters/compteUtilisateur.repository.impl';
   import { SessionRepositoryStore } from '@/authentification/adapters/session.repository.store';
   import CarteInfoExplicationsAidesLocales from '@/components/custom/CarteInfoExplicationsAidesLocales.vue';
+  import InputCheckboxUnitaire from '@/components/dsfr/InputCheckboxUnitaire.vue';
 
   const store = utilisateurStore();
   const revenuFiscal = ref(store.utilisateur.revenuFiscal);
   const nombreDePartsFiscales = ref(store.utilisateur.nombreDePartsFiscales);
   const demanderRevenu = revenuFiscal.value === null;
   const demanderPartsFiscales = nombreDePartsFiscales.value === null;
+  const abonnementTransport = ref(false);
 
   const emit = defineEmits<{
     (e: 'infos-mises-a-jour'): void;
