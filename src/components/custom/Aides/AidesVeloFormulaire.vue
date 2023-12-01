@@ -28,18 +28,22 @@
               type="text"
             />
           </div>
-          <button class="fr-mt-2v fr-btn" :disabled="isDisabled">Sauvegarder et continuer</button>
+          <button class="fr-mt-2v fr-btn" :disabled="!revenuFiscal || !nombreDePartsFiscales">
+            Sauvegarder et continuer
+          </button>
         </form>
       </div>
     </div>
     <div class="fr-col-lg-4">
-      <CarteInfoExplicationsAidesLocales :afficher-explication-revenu-fiscal="demanderRevenu" />
+      <CarteInfoExplicationsAidesLocales
+        :afficher-explication-revenu-fiscal="demanderRevenu || demanderPartsFiscales"
+      />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-  import { computed, ref } from 'vue';
+  import { ref } from 'vue';
   import { utilisateurStore } from '@/store/utilisateur';
   import { MettreAJourCompteUtilisateurUsecase } from '@/compte/mettreAJourCompteUtilisateur.usecase';
   import { CompteUtilisateurRepositoryImpl } from '@/compte/adapters/compteUtilisateur.repository.impl';
@@ -80,8 +84,4 @@
   const mettreAJourEtLancerLaSimulation = () => {
     mettreAJourLesInfos();
   };
-
-  const isDisabled = computed(() => {
-    return revenuFiscal.value === null || revenuFiscal.value.toString() === '';
-  });
 </script>
