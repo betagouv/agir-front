@@ -23,18 +23,9 @@
 
   defineProps<{
     codePostal: string;
-    revenuFiscal: string;
-    nombreDePartsFiscales: string;
+    revenuFiscal: number;
+    nombreDePartsFiscales: number;
   }>();
 </script>
 
-<style scoped>
-  button {
-    background: none;
-    text-decoration: underline;
-  }
-
-  button:hover {
-    background: none;
-  }
-</style>
+<style scoped></style>
