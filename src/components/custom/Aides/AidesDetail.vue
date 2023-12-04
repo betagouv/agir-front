@@ -15,7 +15,6 @@
 <script setup lang="ts">
   defineProps<{
     titre: string;
-    labelDuBadge: string;
     description?: string;
     urlExterne: string;
     valeurAide: number;

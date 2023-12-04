@@ -3,18 +3,31 @@ import { SimulationRetrofit } from '@/aides/simulerAideRetrofit.usecase';
 import { SimulationAideResultatViewModel, AideResultat } from '@/aides/ports/simulationAideResultat';
 
 export class SimulerAideRetrofitPresenterImpl implements SimulerAideRetrofitPresenter {
-  constructor(private _viewModel: (simulationAideResultatViewModel: SimulationAideResultatViewModel) => void) {}
+  constructor(private _viewModel: (simulationAideResultatViewModel: SimulationAideResultatViewModel[]) => void) {}
 
-  presente(simulationRetrofit: SimulationRetrofit): void {
-    const aidesResultatRetrofit: AideResultat[] = simulationRetrofit.aides.map(aide => ({
-      libelle: aide.libelle,
-      montant: Number(aide.montant),
-      lien: aide.lien,
-      logo: 'to define',
-    }));
+  presente(simulationVelo: SimulationRetrofit): void {
+    const simulationAideResultatViewModel: SimulationAideResultatViewModel[] = [];
 
-    this._viewModel({
-      'Prime au retrofit': aidesResultatRetrofit,
-    });
+    for (const category in simulationVelo) {
+      const aides: AideResultat[] = simulationVelo[category].map(aide => {
+        return {
+          libelle: aide.libelle,
+          description: aide.description,
+          lien: aide.lien,
+          montant: Number(aide.montant),
+          logo: aide.logo,
+        };
+      });
+
+      const simulationAideResultat: SimulationAideResultatViewModel = {
+        titre: `Prime au retrofit`,
+        montantTotal: aides.reduce((total, aide) => total + aide.montant, 0),
+        aides: aides,
+      };
+
+      simulationAideResultatViewModel.push(simulationAideResultat);
+    }
+
+    this._viewModel(simulationAideResultatViewModel);
   }
 }

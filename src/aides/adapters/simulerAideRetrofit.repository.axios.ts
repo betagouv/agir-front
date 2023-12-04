@@ -4,7 +4,7 @@ import { AxiosFactory } from '@/axios.factory';
 
 interface SimulerAideRetrofitApiModel {
   libelle: string;
-  montant: string;
+  montant: number;
   lien: string;
 }
 
