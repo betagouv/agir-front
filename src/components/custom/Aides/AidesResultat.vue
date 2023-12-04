@@ -13,9 +13,11 @@
         <div v-for="(aides, index) in simulationAidesViewModel" :key="index">
           <Accordeon v-if="aides.aides.length" :nameId="`aides-${index}`">
             <template v-slot:titre>
-              <div class="fr-grid-row flex-space-between fr-grid-row--gutters">
+              <div class="fr-grid-row flex-space-between fr-grid-row--gutters full-width fr-pr-4w">
                 <span>{{ aides.titre }}</span>
-                <span class="fr-ml-4w">Éligible à {{ aides.montantTotal }} €</span>
+                <span class="fr-ml-4w text--normal text--black-light">
+                  Éligible à <span class="text--bold">{{ aides.montantTotal }} €</span>
+                </span>
               </div>
             </template>
             <template v-slot:contenu>
