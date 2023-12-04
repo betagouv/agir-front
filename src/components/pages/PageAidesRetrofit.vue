@@ -31,12 +31,12 @@
 
   const titrePage = 'Vos aides - Retrofit';
   const sousTitre = 'Vous pouvez bénéficier des aides Retrofit suivantes :';
-  const simulationAidesRetrofitViewModel = ref<SimulationAideResultatViewModel | null>(null);
+  const simulationAidesRetrofitViewModel = ref<SimulationAideResultatViewModel[] | null>(null);
   const codePostal = ref<string>('');
   const revenuFiscal = ref<string>('');
 
   const submitSimulation = (
-    data: SimulationAideResultatViewModel,
+    data: SimulationAideResultatViewModel[],
     dataCodePostal: string,
     dataRevenuFiscal: string
   ) => {

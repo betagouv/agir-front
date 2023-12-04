@@ -7,5 +7,7 @@ export interface AideResultat {
 }
 
 export interface SimulationAideResultatViewModel {
-  [key: string]: AideResultat[];
+  titre: string;
+  montantTotal: number;
+  aides: AideResultat[];
 }

@@ -238,3 +238,7 @@ h3 {
 .text--lh-1 {
   line-height: 1 !important;
 }
+
+.align-items--end {
+  align-items: flex-end;
+}

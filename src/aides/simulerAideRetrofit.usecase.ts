@@ -3,7 +3,7 @@ import { SimulerAideRetrofitRepository } from '@/aides/ports/simulerAideRetrofit
 
 interface Aide {
   libelle: string;
-  montant: string;
+  montant: number;
   lien: string;
 }
 export interface SimulationRetrofit {

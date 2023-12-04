@@ -3,7 +3,6 @@
     <img class="fr-col-2" :src="urlLogo" alt="" />
     <div class="fr-col-8">
       <h4 class="fr-text--md fr-mb-1w">{{ titre }}</h4>
-      <Badge :label="labelDuBadge" class="fr-mb-1w" />
       <p v-if="description" class="fr-my-2w">{{ description }}</p>
       <a :title="`Consultez ${titre} - ouvre une nouvelle fenêtre`" :href="urlExterne" target="_blank" rel="noopener">
         En savoir plus
@@ -14,11 +13,8 @@
 </template>
 
 <script setup lang="ts">
-  import Badge from '@/components/custom/Badge.vue';
-
   defineProps<{
     titre: string;
-    labelDuBadge: string;
     description?: string;
     urlExterne: string;
     valeurAide: number;
