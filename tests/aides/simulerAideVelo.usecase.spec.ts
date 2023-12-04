@@ -267,7 +267,7 @@ describe('Fichier de tests pour simuler une aide velo', () => {
             },
           ],
           montantTotal: 250,
-          titre: 'Acheter un mécanique simple',
+          titre: 'Acheter un vélo mécanique simple',
         },
         {
           aides: [
@@ -304,7 +304,7 @@ describe('Fichier de tests pour simuler une aide velo', () => {
             },
           ],
           montantTotal: 3300,
-          titre: 'Acheter un électrique',
+          titre: 'Acheter un vélo électrique',
         },
         {
           aides: [
@@ -333,7 +333,7 @@ describe('Fichier de tests pour simuler une aide velo', () => {
             },
           ],
           montantTotal: 3100,
-          titre: 'Acheter un cargo',
+          titre: 'Acheter un vélo cargo',
         },
         {
           aides: [
@@ -370,7 +370,7 @@ describe('Fichier de tests pour simuler une aide velo', () => {
             },
           ],
           montantTotal: 5200,
-          titre: 'Acheter un cargo électrique',
+          titre: 'Acheter un vélo cargo électrique',
         },
         {
           aides: [
@@ -391,7 +391,7 @@ describe('Fichier de tests pour simuler une aide velo', () => {
             },
           ],
           montantTotal: 2500,
-          titre: 'Acheter un pliant',
+          titre: 'Acheter un vélo pliant',
         },
         {
           aides: [
@@ -413,7 +413,7 @@ describe('Fichier de tests pour simuler une aide velo', () => {
             },
           ],
           montantTotal: 600,
-          titre: 'Acheter un motorisation',
+          titre: 'Acheter un vélo motorisation',
         },
       ]);
     }
