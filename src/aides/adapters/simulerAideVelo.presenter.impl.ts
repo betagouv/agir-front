@@ -9,15 +9,13 @@ export class SimulerAideVeloPresenterImpl implements SimulerAideVeloPresenter {
     const simulationAideResultatViewModel: SimulationAideResultatViewModel[] = [];
 
     for (const category in simulationVelo) {
-      const aides: AideResultat[] = simulationVelo[category].map(aide => {
-        return {
-          libelle: aide.libelle,
-          description: aide.description,
-          lien: aide.lien,
-          montant: aide.montant,
-          logo: aide.logo,
-        };
-      });
+      const aides: AideResultat[] = simulationVelo[category].map(aide => ({
+        libelle: aide.libelle,
+        description: aide.description,
+        lien: aide.lien,
+        montant: aide.montant,
+        logo: aide.logo,
+      }));
 
       const simulationAideResultat: SimulationAideResultatViewModel = {
         titre: `Acheter un ${category}`,

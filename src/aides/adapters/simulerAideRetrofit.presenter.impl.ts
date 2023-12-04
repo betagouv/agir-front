@@ -5,19 +5,17 @@ import { SimulationAideResultatViewModel, AideResultat } from '@/aides/ports/sim
 export class SimulerAideRetrofitPresenterImpl implements SimulerAideRetrofitPresenter {
   constructor(private _viewModel: (simulationAideResultatViewModel: SimulationAideResultatViewModel[]) => void) {}
 
-  presente(simulationVelo: SimulationRetrofit): void {
+  presente(simulationRetrofit: SimulationRetrofit): void {
     const simulationAideResultatViewModel: SimulationAideResultatViewModel[] = [];
 
-    for (const category in simulationVelo) {
-      const aides: AideResultat[] = simulationVelo[category].map(aide => {
-        return {
-          libelle: aide.libelle,
-          description: aide.description,
-          lien: aide.lien,
-          montant: Number(aide.montant),
-          logo: aide.logo,
-        };
-      });
+    for (const category in simulationRetrofit) {
+      const aides: AideResultat[] = simulationRetrofit[category].map(aide => ({
+        libelle: aide.libelle,
+        description: aide.description,
+        lien: aide.lien,
+        montant: Number(aide.montant),
+        logo: aide.logo,
+      }));
 
       const simulationAideResultat: SimulationAideResultatViewModel = {
         titre: `Prime au retrofit`,
