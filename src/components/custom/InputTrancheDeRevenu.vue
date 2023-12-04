@@ -5,7 +5,7 @@
     </label>
     <input
       required
-      class="fr-input fr-col-2"
+      class="fr-input fr-col-md-2 fr-col-4"
       name="revenu-fiscal"
       id="text-input-rfr"
       inputmode="numeric"
@@ -15,7 +15,14 @@
       min="1"
     />
   </div>
-  <BoutonRadio legende="toto" name="string" :options="seuilRevenuFiscalDeReference" col="fr-col-4" />
+  <BoutonRadio
+    legende="Revenu fiscal de référence de votre foyer"
+    legende-size="m"
+    name="string"
+    orientation="horizontal"
+    :options="seuilRevenuFiscalDeReference"
+    col="fr-col-md-4 fr-col-12"
+  />
 </template>
 
 <script setup lang="ts">
@@ -23,8 +30,13 @@
   import BoutonRadio from '@/components/custom/BoutonRadio.vue';
 
   const nombreDeParts = ref(1);
+  const seuilRevenuFiscalDeReference = ref(calculerSeuils(nombreDeParts.value));
 
-  const calculerSeuils = (nombreDeParts: number) => {
+  watch(nombreDeParts, nouvelleValeur => {
+    seuilRevenuFiscalDeReference.value = calculerSeuils(nouvelleValeur);
+  });
+
+  function calculerSeuils(nombreDeParts: number) {
     const revenuMin = nombreDeParts * 6358;
     const revenuMax = nombreDeParts * 14089;
 
@@ -42,15 +54,5 @@
         value: `${revenuMax}`,
       },
     ];
-  };
-  const seuilRevenuFiscalDeReference = ref<
-    {
-      label: string;
-      value: string;
-    }[]
-  >(calculerSeuils(nombreDeParts.value));
-
-  watch(nombreDeParts, nouvelleValeur => {
-    seuilRevenuFiscalDeReference.value = calculerSeuils(nouvelleValeur);
-  });
+  }
 </script>
