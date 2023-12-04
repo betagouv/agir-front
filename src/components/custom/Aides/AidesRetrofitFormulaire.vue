@@ -46,7 +46,7 @@
   const simulerAideRetrofit = () => {
     const useCase = new SimulerAideRetrofitUsecase(new SimulerAideRetrofitRepositoryAxios());
 
-    function mapValues(viewModels: SimulationAideResultatViewModel) {
+    function mapValues(viewModels: SimulationAideResultatViewModel[]) {
       emit('submit-simulation', viewModels, store.utilisateur.codePostal, revenuFiscal.value);
     }
 

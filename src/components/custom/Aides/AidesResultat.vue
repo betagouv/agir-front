@@ -47,7 +47,7 @@
   defineProps<{
     titre: string;
     sousTitre: string;
-    simulationAidesViewModel: SimulationAideResultatViewModel[];
+    simulationAidesViewModel: SimulationAideResultatViewModel[] | null;
     titreCategorieAide: string;
   }>();
 </script>

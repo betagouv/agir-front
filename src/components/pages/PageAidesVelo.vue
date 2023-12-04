@@ -59,11 +59,11 @@
 
   const titrePage = 'Acheter un vélo';
   const sousTitre = 'Voici les aides vélo disponibles (en fonction de votre situation)';
-  const simulationAidesVeloViewModel = ref<SimulationAideResultatViewModel | null>(null);
+  const simulationAidesVeloViewModel = ref<SimulationAideResultatViewModel[] | null>(null);
   const codePostal = ref<string>(utilisateurStore().utilisateur.codePostal!);
   const prixDuVelo = ref<number>(1000);
 
-  function mapResultatAidesVelo(viewModels: SimulationAideResultatViewModel) {
+  function mapResultatAidesVelo(viewModels: SimulationAideResultatViewModel[]) {
     simulationAidesVeloViewModel.value = viewModels;
   }
 
