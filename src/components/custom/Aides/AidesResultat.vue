@@ -18,7 +18,6 @@
                 <li v-for="(aide, index) in aides" :key="index">
                   <AidesDetail
                     :titre="aide.libelle"
-                    label-du-badge="A définir"
                     :description="aide.description"
                     :url-externe="aide.lien"
                     :valeur-aide="aide.montant"
