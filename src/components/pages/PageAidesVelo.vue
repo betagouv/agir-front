@@ -28,10 +28,10 @@
           </form>
           <span class="fr-text--sm fr-text--bold">À titre indicatif, voici quelques prix moyens</span>
           <ul class="fr-text--sm fr-m-0 fr-mt-1v">
-            <li class="fr-p-0">Vélo mécanique : <u>250 €</u></li>
-            <li class="fr-p-0">Vélo pliant standard : <u>500 €</u></li>
-            <li class="fr-p-0">Vélo électrique standard : <u>2 000 €</u></li>
-            <li class="fr-p-0">Vélo cargo électrique : <u>7 000 €</u></li>
+            <li class="fr-p-0">Vélo mécanique : <span class="text--underline">250 €</span></li>
+            <li class="fr-p-0">Vélo pliant standard : <span class="text--underline">500 €</span></li>
+            <li class="fr-p-0">Vélo électrique standard : <span class="text--underline">2 000 €</span></li>
+            <li class="fr-p-0">Vélo cargo électrique : <span class="text--underline">7 000 €</span></li>
           </ul>
         </div>
         <AsideAideVelo
