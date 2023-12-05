@@ -20,6 +20,7 @@ class ChargeCompteUtilisateurSansInfosOptionnellesRepository implements CompteUt
       revenuFiscal: null,
       commune: '',
       nombreDePartsFiscales: null,
+      abonnementTransport: false,
     });
   }
 
@@ -49,6 +50,7 @@ class ChargeCompteUtilisateurAvecMailRepository implements CompteUtilisateurRepo
       prenom: 'John',
       revenuFiscal: null,
       nombreDePartsFiscales: null,
+      abonnementTransport: false,
     });
   }
 
@@ -83,6 +85,7 @@ describe('Fichier de tests concernant le chargement du compte utilisateur', () =
         prenom: 'John',
         revenuFiscal: '',
         nombreDePartsFiscales: '',
+        abonnementTransport: false,
       });
     }
   });
@@ -102,6 +105,7 @@ describe('Fichier de tests concernant le chargement du compte utilisateur', () =
         prenom: 'John',
         revenuFiscal: '',
         nombreDePartsFiscales: '',
+        abonnementTransport: false,
       });
     }
   });

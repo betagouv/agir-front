@@ -17,6 +17,7 @@ class SessionRepositoryForTest implements SessionRepository {
     mail: '',
     revenuFiscal: null,
     nombreDePartsFiscales: null,
+    abonnementTransport: false,
   };
   sauvegarderUtilisateur(utilisateur: Utilisateur) {
     this._utilisateur = utilisateur;
@@ -34,6 +35,7 @@ class CompteUtilisateurForTest implements CompteUtilisateurRepository {
       prenom: compteUtilisateurACreer.prenom,
       revenuFiscal: null,
       nombreDePartsFiscales: null,
+      abonnementTransport: false,
     });
   }
 
@@ -105,6 +107,7 @@ describe('Fichier de tests concernant la creation du compte utilisateur', () => 
       mail: 'john@skynet.com',
       revenuFiscal: null,
       nombreDePartsFiscales: null,
+      abonnementTransport: false,
     });
   });
 });

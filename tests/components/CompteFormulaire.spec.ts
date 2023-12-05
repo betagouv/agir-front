@@ -14,6 +14,7 @@ const compteUtlisateurViewModel: CompteUtlisateurViewModel = {
   commune: 'PARIS 02',
   revenuFiscal: '123456',
   nombreDePartsFiscales: '1',
+  abonnementTransport: false,
 };
 
 describe.skip('Compte - Formulaire', () => {

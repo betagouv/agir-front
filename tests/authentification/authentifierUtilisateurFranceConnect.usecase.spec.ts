@@ -24,6 +24,7 @@ class UtilisateurRepositoryForTest implements UtilisateurRepository {
       mail: '',
       revenuFiscal: null,
       nombreDePartsFiscales: null,
+      abonnementTransport: false,
     });
   }
 
@@ -58,6 +59,7 @@ class SpySessionRepository implements SessionRepository {
     mail: '',
     revenuFiscal: null,
     nombreDePartsFiscales: null,
+    abonnementTransport: false,
   };
 
   sauvegarderUtilisateur(utilisateur: Utilisateur) {
@@ -86,6 +88,7 @@ describe("Fichier de tests concernant l'authentification France Connect", () => 
       mail: '',
       revenuFiscal: null,
       nombreDePartsFiscales: null,
+      abonnementTransport: false,
     });
   });
 });

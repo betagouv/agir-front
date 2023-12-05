@@ -11,6 +11,7 @@ export class MettreAJourCompteUtilisateurUsecase {
   execute(compteUtilisateurInput: CompteUtlisateurViewModel) {
     this.compteUtilisateuRepository.mettreAjour({
       id: compteUtilisateurInput.id,
+      abonnementTransport: compteUtilisateurInput.abonnementTransport,
       nom: compteUtilisateurInput.nom,
       mail: compteUtilisateurInput.mail,
       codePostal: compteUtilisateurInput.codePostal,
@@ -27,6 +28,7 @@ export class MettreAJourCompteUtilisateurUsecase {
       codePostal: compteUtilisateurInput.codePostal,
       commune: compteUtilisateurInput.commune,
       id: compteUtilisateurInput.id,
+      abonnementTransport: compteUtilisateurInput.abonnementTransport,
       prenom: compteUtilisateurInput.prenom,
       mail: compteUtilisateurInput.mail,
       revenuFiscal: compteUtilisateurInput.revenuFiscal !== '' ? Number(compteUtilisateurInput.revenuFiscal) : null,

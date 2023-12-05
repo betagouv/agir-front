@@ -10,6 +10,7 @@ export interface CompteUtlisateurViewModel {
   prenom: string;
   revenuFiscal: string;
   nombreDePartsFiscales: string;
+  abonnementTransport: boolean;
 }
 export class CompteUtilisateurPresenterImpl implements CompteUtilisateurPresenter {
   private _compteUtlisateurViewModel: (viewModel: CompteUtlisateurViewModel) => void;
@@ -25,6 +26,7 @@ export class CompteUtilisateurPresenterImpl implements CompteUtilisateurPresente
       mail: compteUtilisateur.mail,
       codePostal: compteUtilisateur.codePostal,
       commune: compteUtilisateur.commune,
+      abonnementTransport: compteUtilisateur.abonnementTransport,
       prenom: compteUtilisateur.prenom,
       revenuFiscal: compteUtilisateur.revenuFiscal ? compteUtilisateur.revenuFiscal.toString() : '',
       nombreDePartsFiscales: compteUtilisateur.nombreDePartsFiscales

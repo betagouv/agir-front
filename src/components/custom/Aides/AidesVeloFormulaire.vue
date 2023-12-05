@@ -63,6 +63,7 @@
         commune: utilisateur.commune,
         codePostal: utilisateur.codePostal,
         prenom: utilisateur.prenom,
+        abonnementTransport: abonnementTransport.value,
         revenuFiscal: revenuFiscal.value ? revenuFiscal.value.toString() : '',
         nombreDePartsFiscales: nombreDePartsFiscales.value ? nombreDePartsFiscales.value.toString() : '',
       };
