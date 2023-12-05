@@ -1,4 +1,4 @@
-# agir-front
+# agir-front \o/
 
 ## Installation
 
@@ -15,4 +15,3 @@ $ yarn build
 ```bash
 $ yarn dev
 ```
-
