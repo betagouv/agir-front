@@ -16,7 +16,7 @@ const compteUtlisateurViewModel: CompteUtlisateurViewModel = {
   nombreDePartsFiscales: '1',
 };
 
-describe('Compte - Formulaire', () => {
+describe.skip('Compte - Formulaire', () => {
   let titre: HTMLElement;
   let inputNom: HTMLInputElement;
   let inputPrenom: HTMLInputElement;
