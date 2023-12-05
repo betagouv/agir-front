@@ -27,18 +27,10 @@ type AidesVeloParType = {
 export class SimulerAideVeloRepositoryAxios implements SimulerAideVeloRepository {
   @intercept401()
   async getSimulation(prixDuVelo: number, utilisateurId: string): Promise<SimulationVelo> {
-    // const axiosInstance = AxiosFactory.getAxios();
-    // const response = await axiosInstance.post<AidesVeloParType>(`/utilisateurs/${utilisateurId}/simulerAideVelo`, {
-    //   prix_du_velo: prixDuVelo,
-    // });
-    // return response.data;
-    return {
-      'cargo électrique': [],
-      cargo: [],
-      motorisation: [],
-      pliant: [],
-      électrique: [],
-      'mécanique simple': [],
-    };
+    const axiosInstance = AxiosFactory.getAxios();
+    const response = await axiosInstance.post<AidesVeloParType>(`/utilisateurs/${utilisateurId}/simulerAideVelo`, {
+      prix_du_velo: prixDuVelo,
+    });
+    return response.data;
   }
 }
