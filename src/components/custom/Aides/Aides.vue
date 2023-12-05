@@ -1,6 +1,6 @@
 <template>
   <FilDAriane page-courante="Vos aides" :page-hierarchie="[{ label: 'Coach', url: 'coach' }]" />
-  <h1 class="fr-h2">Aides financières disponibles</h1>
+  <h1 class="fr-h2">Vos aides disponibles</h1>
   <div class="fr-grid-row fr-grid-row--gutters">
     <div class="fr-col-12 fr-col-lg-3">
       <h2 class="fr-h4">Filtres</h2>
