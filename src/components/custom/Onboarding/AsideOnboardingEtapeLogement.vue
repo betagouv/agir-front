@@ -2,7 +2,7 @@
   <CarteInfo class="fr-mb-3w">
     <p class="fr-text--bold">
       <span class="fr-icon-information-line" aria-hidden="true"></span>
-      Pouquoi ces questions ?
+      Pourquoi ces questions ?
     </p>
     <p class="fr-text--sm">
       Le logement, et en particulier les modes de chauffage, représentent 19% des émissions de gaz à effet de serre du

@@ -17,7 +17,7 @@
     </p>
     <p class="fr-text--bold">
       <span class="fr-icon-information-line" aria-hidden="true"></span>
-      Pouquoi ces questions ?
+      Pourquoi ces questions ?
     </p>
     <p class="fr-mb-0">
       Votre <strong>revenu fiscal de référence</strong> et le <strong>nombre de parts</strong> permettent d’afficher les
