@@ -21,6 +21,8 @@
         <slot />
       </div>
     </div>
+
+    <router-link class="fr-btn fr-mt-5v" :to="{ name: 'coach' }"> Revenir au coach </router-link>
   </div>
 </template>
 
