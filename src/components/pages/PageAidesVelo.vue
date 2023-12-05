@@ -1,6 +1,6 @@
 <template>
   <div class="fr-container fr-pb-6w">
-    <FilDAriane :page-courante="titrePage" :page-hierarchie="[{ label: 'Aides fincancières', url: 'vos-aides' }]" />
+    <FilDAriane :page-courante="titrePage" :page-hierarchie="[{ label: 'Vos aides', url: 'vos-aides' }]" />
     <AidesResultat
       titre-categorie-aide="Acheter un vélo neuf"
       :simulation-aides-view-model="simulationAidesVeloViewModel"
