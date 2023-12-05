@@ -102,8 +102,8 @@
   }>({
     codePostal: onBoardingStore.etapeLogement.code_postal,
     commune: onBoardingStore.etapeLogement.commune,
-    adultes: onBoardingStore.etapeLogement.adultes,
-    enfants: onBoardingStore.etapeLogement.enfants,
+    adultes: onBoardingStore.etapeLogement.adultes | 1,
+    enfants: onBoardingStore.etapeLogement.enfants | 0,
     residence: onBoardingStore.etapeLogement.residence,
     superficie: onBoardingStore.etapeLogement.superficie,
     chauffage: onBoardingStore.etapeLogement.chauffage,
@@ -113,13 +113,15 @@
   const emit = defineEmits(['submitEtape', 'retourEtapePrecedente']);
 
   const isButtonDisabled = computed(() => {
-    return Object.values(viewModel.value).some(value => {
-      if (typeof value === 'boolean') {
-        return false;
-      }
-
-      return !value;
-    });
+    return Object.keys(viewModel.value)
+      .filter(key => key !== 'enfants')
+      .some(key => {
+        const value = viewModel.value[key];
+        if (typeof value === 'boolean') {
+          return false;
+        }
+        return !value;
+      });
   });
 
   const submitEtapeLogement = () => {
