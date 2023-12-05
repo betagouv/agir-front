@@ -5,7 +5,8 @@
     aria-labelledby="radio-legend"
   >
     <legend
-      :class="`fr-fieldset__legend--regular fr-fieldset__legend fr-pb-0 ${legendeSize === 'l' ? 'fr-h4' : 'fr-mb-1w'}`"
+      class="fr-fieldset__legend--regular fr-fieldset__legend fr-pb-0"
+      :class="legendeSize === 'l' ? 'fr-h4' : 'fr-mb-1w'"
       id="radio-legend"
     >
       {{ legende }}
