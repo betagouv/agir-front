@@ -15,31 +15,17 @@
         <legend class="fr-fieldset__legend fr-px-0 fr-mx-0" id="donnee-fieldset-legend">
           <h2>Données personnelles</h2>
         </legend>
-        <div class="fr-grid fr-grid-row fr-grid-row--gutters">
-          <div class="fr-col-md-6 fr-col-12">
-            <InputText
-              label="Revenu fiscal de référence"
-              name="revenu-fiscal"
-              v-model="compteUtlisateurViewModel.revenuFiscal"
-            />
-          </div>
-          <div class="fr-col-md-6 fr-col-12">
-            <InputText
-              label="Nombre de parts fiscales"
-              name="parts-fiscales"
-              v-model="compteUtlisateurViewModel.nombreDePartsFiscales"
-            />
+        <div class="fr-grid fr-grid-row">
+          <div class="fr-col-12">
+            <InputTrancheDeRevenu @update:part-et-revenu="updatePartEtRevenu" />
+            <CarteInfo>
+              <p class="fr-icon-information-line fr-m-0">
+                Votre <strong>revenu fiscal de référence</strong> et le <strong>nombre de parts</strong> permettent
+                d’afficher les aides en fonction de vos ressources.
+              </p>
+            </CarteInfo>
           </div>
         </div>
-        <div class="fr-col-12 fr-mt-3w">
-          <CarteInfo>
-            <p class="fr-icon-information-line fr-m-0">
-              Votre <strong>revenu fiscal de référence</strong> et le <strong>nombre de parts</strong> permettent
-              d’afficher les aides en fonction de vos ressources.
-            </p>
-          </CarteInfo>
-        </div>
-
         <div class="fr-col-12">
           <InputCodePostal
             v-model="compteUtlisateurViewModel.codePostal"
@@ -77,6 +63,7 @@
   import InputCodePostal from '@/components/dsfr/InputCodePostal.vue';
   import Alert from '@/components/custom/Alert.vue';
   import CarteInfo from '@/components/custom/CarteInfo.vue';
+  import InputTrancheDeRevenu from '@/components/custom/InputTrancheDeRevenu.vue';
   import { useAlerte } from '@/composables/useAlerte';
 
   const props = defineProps<{
@@ -101,4 +88,9 @@
     await usecase.execute(compteUtlisateurViewModel.value);
     afficherAlerte('success', 'Succès', 'Compte correctement mis à jour.');
   }
+
+  const updatePartEtRevenu = (data: { nombreDeParts: number; revenuFiscalDeReference: number | null }) => {
+    compteUtlisateurViewModel.value.nombreDePartsFiscales = data.nombreDeParts.toString();
+    compteUtlisateurViewModel.value.revenuFiscal = data.revenuFiscalDeReference?.toString() || '0';
+  };
 </script>

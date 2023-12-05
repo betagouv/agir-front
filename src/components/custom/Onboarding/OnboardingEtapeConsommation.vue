@@ -4,6 +4,8 @@
       class="fr-mb-2w"
       legende="Parmi ces choix, pour les objets du quotidien (vêtements, objets de décoration, éléctronique, etc.), vous êtes plutôt…"
       name="consommation"
+      legende-size="l"
+      orientation="vertical"
       :options="options"
       col=""
       v-model="viewModel.consommation"

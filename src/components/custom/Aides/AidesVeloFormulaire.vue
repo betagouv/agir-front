@@ -5,31 +5,7 @@
         <h2 class="fr-h3">Quelques questions nécessaires à l’estimation des aides</h2>
         <form @submit.prevent="mettreAJourEtLancerLaSimulation">
           <h3 class="fr-h4">Quelle est votre tranche de revenus ?</h3>
-          <InputTrancheDeRevenu />
-          <!-- <div class="fr-input-group" v-if="demanderRevenu">
-            <label class="fr-label" for="text-input-rfr">Revenu fiscal de référence </label>
-            <input
-              required
-              class="fr-input"
-              v-model="revenuFiscal"
-              name="revenu-fiscal"
-              id="text-input-rfr"
-              inputmode="numeric"
-              type="number"
-            />
-          </div> -->
-          <!-- <div class="fr-input-parts" v-if="demanderPartsFiscales">
-            <label class="fr-label" for="text-input-parts">Nombre de parts fisacles</label>
-            <input
-              required
-              class="fr-input"
-              v-model="nombreDePartsFiscales"
-              name="nombre-de-parts"
-              id="text-input-parts"
-              inputmode="decimal"
-              type="text"
-            />
-          </div> -->
+          <InputTrancheDeRevenu @update:part-et-revenu="updatePartEtRevenu" />
           <h3 class="fr-h4">Abonnements et cartes</h3>
           <InputCheckboxUnitaire
             id="abonnement-transport"
@@ -67,6 +43,11 @@
   const emit = defineEmits<{
     (e: 'infos-mises-a-jour'): void;
   }>();
+
+  const updatePartEtRevenu = (data: { nombreDeParts: number; revenuFiscalDeReference: number | null }) => {
+    nombreDePartsFiscales.value = data.nombreDeParts;
+    revenuFiscal.value = data.revenuFiscalDeReference;
+  };
 
   async function mettreAJourLesInfos() {
     {

@@ -4,6 +4,8 @@
       class="fr-mb-2w"
       legende="En règle générale, vous mangez plutôt"
       name="repas"
+      legende-size="l"
+      orientation="vertical"
       :options="[
         { label: 'De la viande et/ou du poisson 4 à 5 fois par semaine', value: 'tout' },
         { label: 'Végétarien : Sans produits laitiers, c’est dur', value: 'vege' },
