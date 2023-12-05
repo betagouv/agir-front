@@ -1,53 +1,54 @@
 <template>
-  <h2 class="fr-h2 text--center">De nombreux services pour naviguer dans la transition écologique</h2>
-  <ul class="fr-grid-row fr-grid-row--gutters list-style-none">
-    <li v-for="(service, index) in services" :key="index" class="fr-col-md-4 fr-col-12">
-      <div class="border background--white full-height fr-grid-row flex-column">
-        <img :src="service.imgUrl" alt="" class="img-object-fit-contain full-width" />
-        <div class="fr-p-4w fr-grid-row flex-column flex-grow">
-          <h3>{{ service.titre }}</h3>
-          <ul>
-            <li v-for="(item, index) in service.liste" :key="index">{{ item }}</li>
-          </ul>
-          <p class="fr-text--lg fr-text--bold fr-mb-0 fr-mt-auto">{{ service.accroche }}</p>
-        </div>
-      </div>
-    </li>
-  </ul>
+  <h2 class="fr-h2">Ce que le coach vous propose</h2>
+  <div
+    v-for="(service, index) in services"
+    :key="index"
+    class="fr-grid-row fr-grid-row--middle fr-grid-row--gutters fr-mb-4w"
+  >
+    <div class="fr-col-md-7" :class="index % 2 && 'reverse'">
+      <h3 class="fr-h3">{{ service.titre }}</h3>
+      <p class="fr-text--lg fr-mb-0">{{ service.description }}</p>
+    </div>
+    <div class="fr-col-md-5">
+      <img :src="service.imgUrl" alt="" class="img-object-fit-contain full-width shadow border-radius--md" />
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
   const services = [
     {
-      titre: 'Un accompagnement personnalisé',
-      liste: [
-        'Tous les outils pour comprendre vos usages, vos moyens et vos envies et faire des recommandations adaptées',
-        'Des solutions pour toutes les situations',
-        'Une bibliothèque de contenus pour trouver les réponses à vos questions',
-        'Une approche ludique et pas à pas pour aller à votre rythme',
-      ],
-      accroche: "Plus de 1000 façons d'interagir avec Agir",
+      titre: 'Comprendre les enjeux et tester vos connaissances',
+      description: 'Comprendre les enjeux et tester vos connaissances',
       imgUrl: '/OB-Coach.png',
     },
     {
-      titre: 'Toutes les aides à la transition écologique',
-      liste: [
-        'De nombreuses aides sont disponibles pour vous accompagner dans la transition écologique : vélo, rénovation, logement, consommation durable...',
-        "Pas facile de s'y retrouver entre les aides nationales, de la ville, de la région etc.",
-        'Agir est là pour vous accompagner : toutes les aides et des simulateurs pour vérifier votre élligibilité et les montants associés.',
-      ],
-      accroche: "Jusqu'à 30 aides disponibles dans certaines communes !",
+      titre: 'Découvrir toutes les aides auxquelles vous avez droit',
+      description: 'Disponibles à l’échelle nationale, votre région, de votre commune',
       imgUrl: '/OB-aide.png',
     },
     {
-      titre: 'Des solutions éprouvées et partagées avec d’autres citoyens',
-      liste: [
-        'De nombreuses opportunités d’échanger les bonnes pratiques entre citoyens ayant les mêmes contraintes',
-        'L’actualité de votre zone de vie pour connaître les événements et les nouvelles infrastructures',
-        'Des groupes thématiques pour avancer ensemble',
-      ],
-      accroche: 'Déjà 180 groupes locaux créés dans Agir',
+      titre: 'Accéder rapidement à des services utiles au quotidien',
+      description: 'Comprendre les enjeux et tester vos connaissances',
+      imgUrl: '/OB-Suivi.png',
+    },
+    {
+      titre: 'Calculer vos impacts de vos usages',
+      description: 'Comprendre les enjeux et tester vos connaissances',
+      imgUrl: '/OB-aide.png',
+    },
+    {
+      titre: 'Obtenir des recommandations adaptées à vous',
+      description: 'Comprendre les enjeux et tester vos connaissances',
       imgUrl: '/OB-Suivi.png',
     },
   ];
 </script>
+
+<style scoped>
+  @media (min-width: 48em) {
+    .reverse {
+      order: 1;
+    }
+  }
+</style>

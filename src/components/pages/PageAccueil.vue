@@ -5,7 +5,7 @@
     </div>
   </section>
   <section class="fr-py-8w">
-    <div class="fr-container--fluid fr-px-2w fr-px-md-6w">
+    <div class="fr-container">
       <LandingServices />
     </div>
   </section>
