@@ -2,11 +2,6 @@ name: Mise en production
 
 on:
   workflow_dispatch:
-    inputs:
-      purge_cloudflare_cache:
-        description: 'Faut-il vider le cache Cloudflare après le déploiement ?'
-        type: boolean
-        default: false
 
 jobs:
   scalingo:
