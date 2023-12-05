@@ -1,0 +1,27 @@
+name: Mise en production
+
+on:
+  workflow_dispatch:
+    inputs:
+      purge_cloudflare_cache:
+        description: 'Faut-il vider le cache Cloudflare après le déploiement ?'
+        type: boolean
+        default: false
+
+jobs:
+  scalingo:
+    name: Déployer le code sur Scalingo
+    runs-on: ubuntu-latest
+    environment:
+      name: scalingo-production
+      url: https://agir.beta.gouv.fr
+    steps:
+      - name: Configurer la CLI Scalingo
+        uses: scalingo-community/setup-scalingo@v0.1.1
+        with:
+          api_token: ${{ secrets.SCALINGO_API_TOKEN }}
+          region: osc-secnum-fr1
+          app_name: agir-front-prod
+      - name: Déployer le code sur Scalingo
+        run: |
+          scalingo integration-link-manual-deploy main
