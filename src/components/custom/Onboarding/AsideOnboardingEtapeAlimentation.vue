@@ -6,10 +6,44 @@
     </p>
     <p class="fr-text--sm">
       Votre alimentation participe à votre impact.<br />
-      Elle représente en moyenne 24% des émissions de gaz à effets de serre du français moyen.
+      Elle représente en moyenne 24% des émissions de gaz à effets de serre du Français moyen.
     </p>
-    <span class="text--xs">Source : carbone 4</span>
+    <p class="fr-mb-0">
+      <span class="text--xs text--bold">Source :</span>
+      <a
+        href="https://www.carbone4.com/"
+        target="_blank"
+        rel="noopener"
+        class="fr-link text--xs"
+        title="Carbone 4 - ouvre une nouvelle fenêtre"
+      >
+        Carbone 4
+      </a>
+    </p>
   </CarteInfo>
+  <div class="background-color--gris-image border border-radius--md fr-p-2w">
+    <p class="fr-text--bold">
+      <span class="fr-icon-lightbulb-line" aria-hidden="true"></span>
+      Pour vous donner une idée
+    </p>
+    <img
+      alt="Vélo ou marche : 0kg co2e; Métro : 0.01kg co2e; Scooter ou moto : 0.4kg co2e; Bus : 0.6kg co2e; Voiture: 1.1kg co2e"
+      class="fr-col-12"
+      src="/impact-co2.png"
+    />
+    <span class="text--xs">
+      Source :
+      <a
+        href="https://impactco2.fr/"
+        target="_blank"
+        rel="noopener"
+        title="Site impact CO2 - ouvre une nouvelle fenêtre"
+        class="fr-mb-0"
+      >
+        Impact CO2
+      </a>
+    </span>
+  </div>
 </template>
 
 <script setup lang="ts">

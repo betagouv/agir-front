@@ -45,9 +45,3 @@
 <script setup lang="ts">
   import CarteInfo from '@/components/custom/CarteInfo.vue';
 </script>
-
-<style scoped>
-  .background-color--gris-image {
-    background-color: #eeeeee;
-  }
-</style>
