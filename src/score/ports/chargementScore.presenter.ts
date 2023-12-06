@@ -22,6 +22,12 @@ export interface ScoreViewModel {
   niveau: number;
   nombreDePointsDansLeNiveau: number;
   nombreDePointsDuNiveau: number;
+  celebration: {
+    id: string;
+    type: 'niveau';
+    titre: string;
+    new_niveau: number;
+  } | null;
 }
 export interface ChargementScorePresenter {
   presenteScore(score: Score): void;
