@@ -31,6 +31,7 @@
   import { QuizViewModel } from '@/quiz/adapters/chargementQuiz.presenter.impl';
   import { EnvoyerDonneesQuizInteractionUsecase } from '@/quiz/envoyerDonneesQuizInteraction.usecase';
   import { QuizRepositoryAxios } from '@/quiz/adapters/quizRepository.axios';
+  import { ToDoListEventBusImpl } from '@/toDoList/toDoListEventBusImpl';
 
   const props = defineProps<{
     quizViewModel: QuizViewModel;
@@ -61,7 +62,10 @@
     if (value) nombreDeBonnesReponses.value++;
 
     if (etapeCourante.value > props.quizViewModel.questions.length && !props.isModePrevisualisation) {
-      await new EnvoyerDonneesQuizInteractionUsecase(new QuizRepositoryAxios()).execute(
+      await new EnvoyerDonneesQuizInteractionUsecase(
+        new QuizRepositoryAxios(),
+        ToDoListEventBusImpl.getInstance()
+      ).execute(
         props.idUtilisateur,
         props.idInteraction,
         nombreDeBonnesReponses.value,
