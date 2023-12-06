@@ -18,7 +18,7 @@
   <BoutonRadio
     legende="Revenu fiscal de référence de votre foyer"
     legende-size="m"
-    name="string"
+    name="seuil-revenu-fiscal-de-reference"
     orientation="horizontal"
     :options="seuilRevenuFiscalDeReference"
     col="fr-col-md-4 fr-col-12"
@@ -31,10 +31,11 @@
   import { ref, watch } from 'vue';
   import BoutonRadio from '@/components/custom/BoutonRadio.vue';
   import { utilisateurStore } from '@/store/utilisateur';
+  import { calculerSeuils } from '@/shell/calculerSeuils';
 
   const store = utilisateurStore();
   const nombreDeParts = ref(store.utilisateur.nombreDePartsFiscales || 1);
-  const revenuFiscalDeReference = ref(store.utilisateur.revenuFiscal);
+  const revenuFiscalDeReference = ref(store.utilisateur.revenuFiscal || 0);
   const seuilRevenuFiscalDeReference = ref(calculerSeuils(nombreDeParts.value));
 
   const emit = defineEmits<{
@@ -42,7 +43,7 @@
       event: 'update:partEtRevenu',
       data: {
         nombreDeParts: number;
-        revenuFiscalDeReference: number | null;
+        revenuFiscalDeReference: number | 0;
       }
     ): void;
   }>();
@@ -63,24 +64,4 @@
       revenuFiscalDeReference: nouvelleValeur,
     });
   });
-
-  function calculerSeuils(nombreDeParts: number) {
-    const revenuMin = Math.floor(nombreDeParts * 6358);
-    const revenuMax = Math.floor(nombreDeParts * 14089);
-
-    return [
-      {
-        label: `Moins de ${revenuMin} €`,
-        value: '0',
-      },
-      {
-        label: `De ${revenuMin} à ${revenuMax} €`,
-        value: `${revenuMin}`,
-      },
-      {
-        label: `Plus de ${revenuMax} €`,
-        value: `${revenuMax}`,
-      },
-    ];
-  }
 </script>

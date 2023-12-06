@@ -15,7 +15,7 @@ interface CompteUtilisateurApiModel {
   commune: string;
   prenom: string;
   revenu_fiscal: number | null;
-  nombre_de_parts_fiscales: number | null;
+  nombre_de_parts_fiscales: number;
   abonnementTransport: boolean;
 }
 export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurRepository {

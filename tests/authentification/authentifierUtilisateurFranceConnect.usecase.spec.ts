@@ -23,7 +23,7 @@ class UtilisateurRepositoryForTest implements UtilisateurRepository {
       prenom: 'John',
       mail: '',
       revenuFiscal: null,
-      nombreDePartsFiscales: null,
+      nombreDePartsFiscales: 1,
       abonnementTransport: false,
     });
   }
@@ -58,7 +58,7 @@ class SpySessionRepository implements SessionRepository {
     prenom: '',
     mail: '',
     revenuFiscal: null,
-    nombreDePartsFiscales: null,
+    nombreDePartsFiscales: 1,
     abonnementTransport: false,
   };
 
@@ -87,7 +87,7 @@ describe("Fichier de tests concernant l'authentification France Connect", () => 
       prenom: 'John',
       mail: '',
       revenuFiscal: null,
-      nombreDePartsFiscales: null,
+      nombreDePartsFiscales: 1,
       abonnementTransport: false,
     });
   });

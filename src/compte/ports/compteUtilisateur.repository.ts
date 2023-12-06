@@ -8,7 +8,7 @@ export interface CompteUtilisateur {
   commune: string;
   prenom: string;
   revenuFiscal: number | null;
-  nombreDePartsFiscales: number | null;
+  nombreDePartsFiscales: number;
   abonnementTransport: boolean;
 }
 

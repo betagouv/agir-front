@@ -19,7 +19,7 @@ class ChargeCompteUtilisateurSansInfosOptionnellesRepository implements CompteUt
       prenom: 'John',
       revenuFiscal: null,
       commune: '',
-      nombreDePartsFiscales: null,
+      nombreDePartsFiscales: 1,
       abonnementTransport: false,
     });
   }
@@ -49,7 +49,7 @@ class ChargeCompteUtilisateurAvecMailRepository implements CompteUtilisateurRepo
       commune: 'PARIS 01',
       prenom: 'John',
       revenuFiscal: null,
-      nombreDePartsFiscales: null,
+      nombreDePartsFiscales: 1,
       abonnementTransport: false,
     });
   }
@@ -83,8 +83,8 @@ describe('Fichier de tests concernant le chargement du compte utilisateur', () =
         codePostal: '',
         commune: '',
         prenom: 'John',
-        revenuFiscal: '',
-        nombreDePartsFiscales: '',
+        revenuFiscal: 0,
+        nombreDePartsFiscales: 1,
         abonnementTransport: false,
       });
     }
@@ -103,8 +103,8 @@ describe('Fichier de tests concernant le chargement du compte utilisateur', () =
         codePostal: '75001',
         commune: 'PARIS 01',
         prenom: 'John',
-        revenuFiscal: '',
-        nombreDePartsFiscales: '',
+        revenuFiscal: 0,
+        nombreDePartsFiscales: 1,
         abonnementTransport: false,
       });
     }

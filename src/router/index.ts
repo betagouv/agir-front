@@ -27,6 +27,7 @@ import PageValidationCompte from '@/components/pages/PageValidationCompte.vue';
 import PageMotDePasseOublie from '@/components/pages/PageMotDePasseOublie.vue';
 import PageMotDePasseOublieRedefinirMotDePasse from '@/components/pages/PageMotDePasseOublieRedefinirMotDePasse.vue';
 import PageCatalogueServices from '@/components/pages/PageCatalogueServices.vue';
+import AidesVeloFormulaire from '@/components/pages/PageAidesVeloFormulaire.vue';
 
 const appName = 'Agir ! -';
 const routes = [
@@ -154,6 +155,11 @@ const routes = [
         path: '/mes-aides/velo',
         name: 'mes-aides-velo',
         component: PageAidesVelo,
+      },
+      {
+        path: '/mes-aides/velo/formulaire',
+        name: 'mes-aides-velo-formulaire',
+        component: AidesVeloFormulaire,
       },
     ],
   },
