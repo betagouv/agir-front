@@ -21,6 +21,29 @@
       </a>
     </p>
   </CarteInfo>
+  <div class="background-color--gris-image border border-radius--md fr-p-2w">
+    <p class="fr-text--bold">
+      <span class="fr-icon-lightbulb-line" aria-hidden="true"></span>
+      Pour vous donner une idée
+    </p>
+    <img
+      alt="Vélo ou marche : 0kg co2e; Métro : 0.01kg co2e; Scooter ou moto : 0.4kg co2e; Bus : 0.6kg co2e; Voiture: 1.1kg co2e"
+      class="fr-col-12"
+      src="/impact-co2.png"
+    />
+    <span class="text--xs">
+      Source :
+      <a
+        href="https://impactco2.fr/"
+        target="_blank"
+        rel="noopener"
+        title="Site impact CO2 - ouvre une nouvelle fenêtre"
+        class="fr-mb-0"
+      >
+        Impact CO2
+      </a>
+    </span>
+  </div>
 </template>
 
 <script setup lang="ts">
