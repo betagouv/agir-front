@@ -35,6 +35,7 @@ export class CreerCompteUtilisateurUsecase {
       mail: utilisateurCree.mail,
       revenuFiscal: null,
       nombreDePartsFiscales: null,
+      abonnementTransport: false,
     });
   }
 }

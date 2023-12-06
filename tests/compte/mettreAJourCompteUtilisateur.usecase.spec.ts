@@ -28,6 +28,7 @@ class SpyCompteUtilisateurRepository implements CompteUtilisateurRepository {
     revenuFiscal: 0,
     nombreDePartsFiscales: 0,
     commune: '',
+    abonnementTransport: false,
   };
 
   getCompteUtilisateur(idUtilisateur: string): Promise<CompteUtilisateur> {
@@ -77,6 +78,7 @@ describe('Fichier de tests concernant la mise à jour du compte utilisateur', ()
       prenom: 'John',
       revenuFiscal: '10000',
       nombreDePartsFiscales: '1',
+      abonnementTransport: false,
     };
     usecase.execute(viewModelInput);
     // THEN
@@ -90,6 +92,7 @@ describe('Fichier de tests concernant la mise à jour du compte utilisateur', ()
       prenom: 'John',
       revenuFiscal: 10000,
       nombreDePartsFiscales: 1,
+      abonnementTransport: false,
     });
     expect(sessionRepository.utlisateur).toStrictEqual<Utilisateur>({
       id: '1',
@@ -100,6 +103,7 @@ describe('Fichier de tests concernant la mise à jour du compte utilisateur', ()
       prenom: 'John',
       revenuFiscal: 10000,
       nombreDePartsFiscales: 1,
+      abonnementTransport: false,
     });
   });
 });

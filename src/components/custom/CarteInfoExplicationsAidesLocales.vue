@@ -2,7 +2,7 @@
   <CarteInfo>
     <p class="fr-text--bold">
       <span class="fr-icon-information-line" aria-hidden="true"></span>
-      Pouquoi ces questions ?
+      Pourquoi ces questions ?
     </p>
     <p>Adapter les résultats au plus près de votre situation</p>
     <p v-show="props.afficherExplicationRevenuFiscal">

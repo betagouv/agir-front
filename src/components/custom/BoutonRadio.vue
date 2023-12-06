@@ -1,6 +1,14 @@
 <template>
-  <fieldset class="fr-fieldset" :id="name" aria-labelledby="radio-legend">
-    <legend class="fr-fieldset__legend--regular fr-fieldset__legend fr-h4 fr-pb-0" id="radio-legend">
+  <fieldset
+    :class="`fr-fieldset ${orientation === 'horizontal' && 'boutonRadio--horizontal'}`"
+    :id="name"
+    aria-labelledby="radio-legend"
+  >
+    <legend
+      class="fr-fieldset__legend--regular fr-fieldset__legend fr-pb-0"
+      :class="legendeSize === 'l' ? 'fr-h4' : 'fr-mb-1w'"
+      id="radio-legend"
+    >
       {{ legende }}
     </legend>
     <div class="fr-grid-row full-width">
@@ -30,6 +38,8 @@
 <script setup lang="ts">
   defineProps<{
     legende: string;
+    legendeSize: 'm' | 'l';
+    orientation: 'vertical' | 'horizontal';
     name: string;
     options: { label: string; value: string }[];
     col: string;
@@ -51,5 +61,9 @@
 
   .fr-radio-group input[type='radio'] + label:before {
     top: auto;
+  }
+
+  .boutonRadio--horizontal .fr-fieldset__element {
+    flex: auto;
   }
 </style>

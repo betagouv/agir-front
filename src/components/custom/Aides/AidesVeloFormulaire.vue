@@ -2,42 +2,23 @@
   <div class="fr-grid-row fr-grid-row--gutters" v-if="demanderRevenu || demanderPartsFiscales">
     <div class="fr-col-lg-8">
       <div class="background--white border border-radius--md fr-p-3w fr-mb-4w">
-        <h2 class="fr-h5">Nous avons besoin d'information(s) pour calculer les aides vélo adaptées</h2>
+        <h2 class="fr-h3">Quelques questions nécessaires à l’estimation des aides</h2>
         <form @submit.prevent="mettreAJourEtLancerLaSimulation">
-          <div class="fr-input-group" v-if="demanderRevenu">
-            <label class="fr-label" for="text-input-rfr">Revenu fiscal de référence </label>
-            <input
-              required
-              class="fr-input"
-              v-model="revenuFiscal"
-              name="revenu-fiscal"
-              id="text-input-rfr"
-              inputmode="numeric"
-              type="number"
-            />
-          </div>
-          <div class="fr-input-parts" v-if="demanderPartsFiscales">
-            <label class="fr-label" for="text-input-parts">Nombre de parts fisacles</label>
-            <input
-              required
-              class="fr-input"
-              v-model="nombreDePartsFiscales"
-              name="nombre-de-parts"
-              id="text-input-parts"
-              inputmode="decimal"
-              type="text"
-            />
-          </div>
-          <button class="fr-mt-2v fr-btn" :disabled="!revenuFiscal || !nombreDePartsFiscales">
-            Sauvegarder et continuer
-          </button>
+          <h3 class="fr-h4">Quelle est votre tranche de revenus ?</h3>
+          <InputTrancheDeRevenu @update:part-et-revenu="updatePartEtRevenu" />
+          <h3 class="fr-h4">Abonnements et cartes</h3>
+          <InputCheckboxUnitaire
+            id="abonnement-transport"
+            label="En tant qu’habitant d’Angers Loire Métropole, êtes-vous abonnés du TER Pays de la Loire ?"
+            description="Sont éligibles Tutti illimité ou combiné / Métrocéane mensuel / annuel Loire-Atlantique et Sarthe / mensuel réseaux Mayenne et Vendée (hors scolaire)"
+            v-model="abonnementTransport"
+          />
+          <button class="fr-mt-2w fr-btn" :disabled="!revenuFiscal || !nombreDePartsFiscales">Valider</button>
         </form>
       </div>
     </div>
     <div class="fr-col-lg-4">
-      <CarteInfoExplicationsAidesLocales
-        :afficher-explication-revenu-fiscal="demanderRevenu || demanderPartsFiscales"
-      />
+      <AidesVeloFormulaireAside />
     </div>
   </div>
 </template>
@@ -48,17 +29,26 @@
   import { MettreAJourCompteUtilisateurUsecase } from '@/compte/mettreAJourCompteUtilisateur.usecase';
   import { CompteUtilisateurRepositoryImpl } from '@/compte/adapters/compteUtilisateur.repository.impl';
   import { SessionRepositoryStore } from '@/authentification/adapters/session.repository.store';
-  import CarteInfoExplicationsAidesLocales from '@/components/custom/CarteInfoExplicationsAidesLocales.vue';
+  import InputCheckboxUnitaire from '@/components/dsfr/InputCheckboxUnitaire.vue';
+  import AidesVeloFormulaireAside from '@/components/custom/Aides/AidesVeloFormulaireAside.vue';
+  import InputTrancheDeRevenu from '@/components/custom/InputTrancheDeRevenu.vue';
 
   const store = utilisateurStore();
   const revenuFiscal = ref(store.utilisateur.revenuFiscal);
   const nombreDePartsFiscales = ref(store.utilisateur.nombreDePartsFiscales);
   const demanderRevenu = revenuFiscal.value === null;
   const demanderPartsFiscales = nombreDePartsFiscales.value === null;
+  const abonnementTransport = ref(false);
 
   const emit = defineEmits<{
     (e: 'infos-mises-a-jour'): void;
   }>();
+
+  const updatePartEtRevenu = (data: { nombreDeParts: number; revenuFiscalDeReference: number | null }) => {
+    nombreDePartsFiscales.value = data.nombreDeParts;
+    revenuFiscal.value = data.revenuFiscalDeReference;
+  };
+
   async function mettreAJourLesInfos() {
     {
       const usecase = new MettreAJourCompteUtilisateurUsecase(
@@ -73,6 +63,7 @@
         commune: utilisateur.commune,
         codePostal: utilisateur.codePostal,
         prenom: utilisateur.prenom,
+        abonnementTransport: abonnementTransport.value,
         revenuFiscal: revenuFiscal.value ? revenuFiscal.value.toString() : '',
         nombreDePartsFiscales: nombreDePartsFiscales.value ? nombreDePartsFiscales.value.toString() : '',
       };

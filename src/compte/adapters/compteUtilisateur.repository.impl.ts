@@ -16,6 +16,7 @@ interface CompteUtilisateurApiModel {
   prenom: string;
   revenu_fiscal: number | null;
   nombre_de_parts_fiscales: number | null;
+  abonnementTransport: boolean;
 }
 export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurRepository {
   @intercept401()
@@ -31,6 +32,7 @@ export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurReposit
       commune: response.data.commune || '',
       revenuFiscal: response.data.revenu_fiscal,
       nombreDePartsFiscales: response.data.nombre_de_parts_fiscales,
+      abonnementTransport: response.data.abonnementTransport,
     };
   }
 

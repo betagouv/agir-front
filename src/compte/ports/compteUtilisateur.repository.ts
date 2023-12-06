@@ -9,6 +9,7 @@ export interface CompteUtilisateur {
   prenom: string;
   revenuFiscal: number | null;
   nombreDePartsFiscales: number | null;
+  abonnementTransport: boolean;
 }
 
 export interface CompteTemporaire {

@@ -7,6 +7,7 @@ export interface Utilisateur {
   mail: string;
   revenuFiscal: number | null;
   nombreDePartsFiscales: number | null;
+  abonnementTransport: boolean;
 }
 
 export interface UtilisateurRepository {

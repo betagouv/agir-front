@@ -31,6 +31,8 @@
     <BoutonRadio
       class="fr-mb-2w"
       legende="Votre résidence principale est ..."
+      legende-size="l"
+      orientation="vertical"
       name="residence"
       :options="[
         { label: 'Une maison', value: 'maison' },
@@ -47,7 +49,9 @@
     <BoutonRadio
       class="fr-mb-4w"
       legende="Quelle en est la superficie ?"
+      legende-size="l"
       name="superficieLogement"
+      orientation="vertical"
       :options="[
         { label: 'Moins de 35 m²', value: 'superficie_35' },
         { label: 'Entre 35 et 70 m²', value: 'superficie_70' },
@@ -61,6 +65,8 @@
     />
     <BoutonRadio
       class="fr-mb-4w"
+      legende-size="l"
+      orientation="vertical"
       legende="Quelle est votre mode de chauffage principal ?"
       name="modeDeChauffage"
       :options="[

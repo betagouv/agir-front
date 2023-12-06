@@ -77,6 +77,7 @@
         prenom: utilisateur.prenom,
         revenuFiscal: revenuFiscal.value?.toString() || '',
         nombreDePartsFiscales: utilisateur.nombreDePartsFiscales?.toString() || '',
+        abonnementTransport: false,
       };
       usecase.execute(donneeAMettreAjour);
     }
