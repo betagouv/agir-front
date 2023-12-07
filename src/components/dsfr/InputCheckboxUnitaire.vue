@@ -16,7 +16,7 @@
     modelValue: boolean;
   }>();
 
-  const emit = defineEmits(['update']);
+  const emit = defineEmits(['update:modelValue']);
 
   const updateValue = (event: Event) => {
     const inputElement = event.target as HTMLInputElement;
