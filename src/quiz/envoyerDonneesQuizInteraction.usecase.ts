@@ -1,8 +1,9 @@
 import { QuizRepository } from '@/quiz/ports/quizRepository';
-import { ToDoListEvent, ToDoListEventBus } from '@/toDoList/toDoListEventBusImpl';
+import { ToDoListEvent } from '@/toDoList/toDoListEventBusImpl';
+import { EventBus } from '@/shell/eventBus';
 
 export class EnvoyerDonneesQuizInteractionUsecase {
-  constructor(private quizRepository: QuizRepository, private todoListEventBus: ToDoListEventBus) {}
+  constructor(private quizRepository: QuizRepository, private todoListEventBus: EventBus<ToDoListEvent>) {}
 
   async execute(
     utilisateurId: string,

@@ -1,8 +1,9 @@
 import { ToDoListRepository } from '@/toDoList/ports/toDoList.repository';
-import { ToDoListEvent, ToDoListEventBus } from '@/toDoList/toDoListEventBusImpl';
+import { ToDoListEvent } from '@/toDoList/toDoListEventBusImpl';
+import { EventBus } from '@/shell/eventBus';
 
 export class RecupererPointsToDoUsecase {
-  constructor(private toDoListRepository: ToDoListRepository, private toDoListEventBus: ToDoListEventBus) {}
+  constructor(private toDoListRepository: ToDoListRepository, private toDoListEventBus: EventBus<ToDoListEvent>) {}
 
   async execute(idUtilisateur: string, elementId: string): Promise<void> {
     await this.toDoListRepository.recupererPointsToDo(idUtilisateur, elementId);

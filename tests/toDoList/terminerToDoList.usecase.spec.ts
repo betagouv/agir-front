@@ -1,6 +1,6 @@
 import { TerminerToDoListUsecase } from '@/toDoList/terminerToDoList.usecase';
 import { SpyToDoListRepository } from './adapters/spyTodoListRepository';
-import { SpyToDoListEventBus } from './adapters/spyTodoListEventBus';
+import { SpyToDoListEventBus } from './spyTodoListEventBus';
 import { ToDoListEvent } from '@/toDoList/toDoListEventBusImpl';
 
 describe("Fichier de tests concernant la fin d'une Todo List", () => {

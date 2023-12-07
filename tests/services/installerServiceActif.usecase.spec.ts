@@ -1,22 +1,10 @@
-import { ServiceEvent, ServiceEventBus } from '@/services/serviceEventBusImpl';
+import { ServiceEvent } from '@/services/serviceEventBusImpl';
 import { ServiceRepository } from '@/services/ports/service.repository';
 import { ServiceCatalogue } from '@/services/recupererCatalogueServices.usecase';
 import { Service } from '@/services/recupererServiceActifs.usecase';
 import { expect } from 'vitest';
 import { InstallerServiceActifUsecase } from '@/services/installerServiceActif.usecase';
-
-class ServiceEventBusSpy implements ServiceEventBus {
-  get eventName(): ServiceEvent | null {
-    return this._eventName;
-  }
-  private _eventName: ServiceEvent | null = null;
-
-  publish(eventName: ServiceEvent): void {
-    this._eventName = eventName;
-  }
-
-  subscribe(eventName: ServiceEvent, callback: () => void): void {}
-}
+import { ServiceEventBusSpy } from './serviceEventBusSpy';
 
 class ServiceRepositoryMock implements ServiceRepository {
   get installerServiceActifAEteAppele(): boolean {
