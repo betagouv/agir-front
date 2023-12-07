@@ -38,11 +38,19 @@
     ToDoListEventBusImpl.getInstance().subscribe(ToDoListEvent.TODO_ARTICLE_A_ETE_LU, () => {
       mettreAJourLeScore();
     });
+    ToDoListEventBusImpl.getInstance().subscribe(ToDoListEvent.TODO_A_ETE_TERMINEE, () => {
+      mettreAJourLeScore();
+    });
+    ToDoListEventBusImpl.getInstance().subscribe(ToDoListEvent.TODO_QUIZ_ETE_TERMINE, () => {
+      mettreAJourLeScore();
+    });
   });
 
   onUnmounted(() => {
     ToDoListEventBusImpl.getInstance().unsubscribe(ToDoListEvent.TODO_POINTS_ONT_ETE_RECUPERE);
     ToDoListEventBusImpl.getInstance().unsubscribe(ToDoListEvent.TODO_ARTICLE_A_ETE_LU);
+    ToDoListEventBusImpl.getInstance().unsubscribe(ToDoListEvent.TODO_A_ETE_TERMINEE);
+    ToDoListEventBusImpl.getInstance().unsubscribe(ToDoListEvent.TODO_QUIZ_ETE_TERMINE);
   });
 </script>
 <style scoped>

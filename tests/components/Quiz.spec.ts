@@ -110,7 +110,7 @@ describe('Quizz', () => {
           await fireEvent.click(MAUVAISE_REPONSE);
           const boutonValider = getByRole('button', { name: 'Valider' });
           await fireEvent.click(boutonValider);
-          const messageErreur = getByText('Votre réponse: reponse 2');
+          const messageErreur = getByText('Votre réponse : reponse 2');
           const explication = getByText('Texte explication question 1 KO');
           const boutonEtapeSuivante = getByRole('button', { name: "Passer à l'étape suivante" });
 
