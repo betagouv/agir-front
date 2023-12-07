@@ -1,6 +1,6 @@
 <template>
   <div class="fr-checkbox-group fr-checkbox-group--sm">
-    <input :name="id" :id="id" type="checkbox" @input="updateValue" />
+    <input :name="id" :id="id" type="checkbox" :checked="modelValue" @input="updateValue" />
     <label class="fr-label" :for="id">
       {{ label }}
       <span v-if="description" class="fr-hint-text">{{ description }}</span>
@@ -13,13 +13,14 @@
     id: string;
     label: string;
     description?: string;
+    modelValue: boolean;
   }>();
 
-  const emit = defineEmits(['update']);
+  const emit = defineEmits(['update:modelValue']);
 
   const updateValue = (event: Event) => {
     const inputElement = event.target as HTMLInputElement;
 
-    emit('update', inputElement.checked);
+    emit('update:modelValue', inputElement.checked);
   };
 </script>
