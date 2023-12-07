@@ -2,14 +2,12 @@
   <div class="fr-container fr-pb-6w">
     <FilDAriane :page-courante="titrePage" :page-hierarchie="[{ label: 'Vos aides', url: 'vos-aides' }]" />
     <AidesResultat
+      :is-loading="isLoading"
       titre-categorie-aide="Acheter un vélo neuf"
       :simulation-aides-view-model="simulationAidesVeloViewModel"
       :titre="titrePage"
       :sous-titre="sousTitre"
     >
-      <template v-slot:formulaire>
-        <FormulaireAideVelo @infos-mises-a-jour="simulerAideVelo" />
-      </template>
       <template v-slot:asideResultatAides>
         <div class="background--white border border-radius--md fr-p-3w fr-mb-3w">
           <h2 class="fr-h5">Paramètres</h2>
@@ -36,6 +34,7 @@
         </div>
         <AsideAideVelo
           :code-postal="codePostal"
+          :ville="utilisateurStore().utilisateur.commune"
           :revenu-fiscal="utilisateurStore().utilisateur.revenuFiscal!"
           :nombre-de-parts-fiscales="utilisateurStore().utilisateur.nombreDePartsFiscales!"
         />
@@ -48,7 +47,6 @@
   import { ref } from 'vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import AidesResultat from '@/components/custom/Aides/AidesResultat.vue';
-  import FormulaireAideVelo from '@/components/custom/Aides/AidesVeloFormulaire.vue';
   import AsideAideVelo from '@/components/custom/Aides/AidesVeloAside.vue';
   import { SimulationAideResultatViewModel } from '@/aides/ports/simulationAideResultat';
   import SimulerAideVeloUsecase from '@/aides/simulerAideVelo.usecase';
@@ -62,19 +60,19 @@
   const simulationAidesVeloViewModel = ref<SimulationAideResultatViewModel[] | null>(null);
   const codePostal = ref<string>(utilisateurStore().utilisateur.codePostal!);
   const prixDuVelo = ref<number>(1000);
-
+  const isLoading = ref<boolean>(false);
   function mapResultatAidesVelo(viewModels: SimulationAideResultatViewModel[]) {
     simulationAidesVeloViewModel.value = viewModels;
+    isLoading.value = false;
   }
 
   const simulerAideVeloPresenterImpl = new SimulerAideVeloPresenterImpl(mapResultatAidesVelo);
   const simulerAideVeloRepositoryAxios = new SimulerAideVeloRepositoryAxios();
 
   const simulerAideVelo = () => {
-    if (utilisateurStore().utilisateur.revenuFiscal && utilisateurStore().utilisateur.nombreDePartsFiscales) {
-      const useCase = new SimulerAideVeloUsecase(simulerAideVeloRepositoryAxios);
-      useCase.execute(prixDuVelo.value, utilisateurStore().utilisateur.id, simulerAideVeloPresenterImpl);
-    }
+    isLoading.value = true;
+    const useCase = new SimulerAideVeloUsecase(simulerAideVeloRepositoryAxios);
+    useCase.execute(prixDuVelo.value, utilisateurStore().utilisateur.id, simulerAideVeloPresenterImpl);
   };
 
   simulerAideVelo();

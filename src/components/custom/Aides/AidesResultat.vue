@@ -3,12 +3,12 @@
   <div v-show="!simulationAidesViewModel">
     <slot name="formulaire"></slot>
   </div>
-  <div v-if="simulationAidesViewModel" class="fr-grid-row fr-grid-row--gutters">
+  <div class="fr-grid-row fr-grid-row--gutters">
     <div class="fr-col-lg-4 fr-col-12">
       <slot name="asideResultatAides"></slot>
     </div>
     <div class="fr-col-lg-8 fr-col-12">
-      <div class="background--white border border-radius--md fr-p-3w">
+      <div v-if="!isLoading" class="background--white border border-radius--md fr-p-3w">
         <h2 class="fr-h4">{{ sousTitre }}</h2>
         <div v-for="(aides, index) in simulationAidesViewModel" :key="index">
           <Accordeon v-if="aides.aides.length" :nameId="`aides-${index}`">
@@ -36,6 +36,7 @@
           </Accordeon>
         </div>
       </div>
+      <CarteSkeleton v-else />
     </div>
   </div>
 </template>
@@ -44,7 +45,9 @@
   import Accordeon from '@/components/custom/Accordeon.vue';
   import AidesDetail from '@/components/custom/Aides/AidesDetail.vue';
   import { SimulationAideResultatViewModel } from '@/aides/ports/simulationAideResultat';
+  import CarteSkeleton from '@/components/CarteSkeleton.vue';
   defineProps<{
+    isLoading: boolean;
     titre: string;
     sousTitre: string;
     simulationAidesViewModel: SimulationAideResultatViewModel[] | null;

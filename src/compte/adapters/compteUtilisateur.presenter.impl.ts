@@ -8,8 +8,8 @@ export interface CompteUtlisateurViewModel {
   codePostal: string;
   commune: string;
   prenom: string;
-  revenuFiscal: string;
-  nombreDePartsFiscales: string;
+  revenuFiscal: number;
+  nombreDePartsFiscales: number;
   abonnementTransport: boolean;
 }
 export class CompteUtilisateurPresenterImpl implements CompteUtilisateurPresenter {
@@ -28,10 +28,8 @@ export class CompteUtilisateurPresenterImpl implements CompteUtilisateurPresente
       commune: compteUtilisateur.commune,
       abonnementTransport: compteUtilisateur.abonnementTransport,
       prenom: compteUtilisateur.prenom,
-      revenuFiscal: compteUtilisateur.revenuFiscal ? compteUtilisateur.revenuFiscal.toString() : '',
-      nombreDePartsFiscales: compteUtilisateur.nombreDePartsFiscales
-        ? compteUtilisateur.nombreDePartsFiscales.toString()
-        : '',
+      revenuFiscal: compteUtilisateur.revenuFiscal || 0,
+      nombreDePartsFiscales: compteUtilisateur.nombreDePartsFiscales,
     });
   }
 }

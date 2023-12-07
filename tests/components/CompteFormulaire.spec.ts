@@ -12,8 +12,8 @@ const compteUtlisateurViewModel: CompteUtlisateurViewModel = {
   mail: 'claud-dubois@exemple.com',
   codePostal: '75002',
   commune: 'PARIS 02',
-  revenuFiscal: '123456',
-  nombreDePartsFiscales: '1',
+  revenuFiscal: 0,
+  nombreDePartsFiscales: 1,
   abonnementTransport: false,
 };
 

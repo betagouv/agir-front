@@ -16,7 +16,7 @@ class SessionRepositoryForTest implements SessionRepository {
     prenom: '',
     mail: '',
     revenuFiscal: null,
-    nombreDePartsFiscales: null,
+    nombreDePartsFiscales: 1,
     abonnementTransport: false,
   };
   sauvegarderUtilisateur(utilisateur: Utilisateur) {
@@ -34,7 +34,7 @@ class CompteUtilisateurForTest implements CompteUtilisateurRepository {
       commune: '',
       prenom: compteUtilisateurACreer.prenom,
       revenuFiscal: null,
-      nombreDePartsFiscales: null,
+      nombreDePartsFiscales: 1,
       abonnementTransport: false,
     });
   }
@@ -106,7 +106,7 @@ describe('Fichier de tests concernant la creation du compte utilisateur', () => 
       prenom: '',
       mail: 'john@skynet.com',
       revenuFiscal: null,
-      nombreDePartsFiscales: null,
+      nombreDePartsFiscales: 1,
       abonnementTransport: false,
     });
   });

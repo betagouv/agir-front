@@ -2,6 +2,7 @@
   <div class="fr-container fr-pb-6w">
     <FilDAriane :page-courante="titrePage" :page-hierarchie="[{ label: 'Vos aides', url: 'vos-aides' }]" />
     <AidesResultat
+      :is-loading="simulationAidesRetrofitViewModel === null"
       titre-categorie-aide=""
       :simulation-aides-view-model="simulationAidesRetrofitViewModel"
       :titre="titrePage"

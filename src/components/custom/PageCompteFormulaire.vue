@@ -90,7 +90,7 @@
   }
 
   const updatePartEtRevenu = (data: { nombreDeParts: number; revenuFiscalDeReference: number | null }) => {
-    compteUtlisateurViewModel.value.nombreDePartsFiscales = data.nombreDeParts.toString();
-    compteUtlisateurViewModel.value.revenuFiscal = data.revenuFiscalDeReference?.toString() || '0';
+    compteUtlisateurViewModel.value.nombreDePartsFiscales = data.nombreDeParts;
+    compteUtlisateurViewModel.value.revenuFiscal = data.revenuFiscalDeReference || 0;
   };
 </script>

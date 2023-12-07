@@ -15,7 +15,7 @@ class SpySessionRepository implements SessionRepository {
     prenom: '',
     mail: '',
     revenuFiscal: null,
-    nombreDePartsFiscales: null,
+    nombreDePartsFiscales: 1,
     abonnementTransport: false,
   };
 
@@ -42,7 +42,7 @@ class SpyValiderCompteUtilisateurRepository implements UtilisateurRepository {
       prenom: '',
       mail: email,
       revenuFiscal: null,
-      nombreDePartsFiscales: null,
+      nombreDePartsFiscales: 1,
       abonnementTransport: false,
     });
   }
@@ -78,7 +78,7 @@ describe('Fichier de tests concernant la validation du compte utilisateur', () =
       prenom: '',
       mail: 'john@exemple.com',
       revenuFiscal: null,
-      nombreDePartsFiscales: null,
+      nombreDePartsFiscales: 1,
       abonnementTransport: false,
     });
   });

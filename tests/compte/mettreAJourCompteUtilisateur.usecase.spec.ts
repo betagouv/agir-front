@@ -76,8 +76,8 @@ describe('Fichier de tests concernant la mise à jour du compte utilisateur', ()
       codePostal: '75001',
       commune: 'PARIS 01',
       prenom: 'John',
-      revenuFiscal: '10000',
-      nombreDePartsFiscales: '1',
+      revenuFiscal: 10000,
+      nombreDePartsFiscales: 1,
       abonnementTransport: false,
     };
     usecase.execute(viewModelInput);

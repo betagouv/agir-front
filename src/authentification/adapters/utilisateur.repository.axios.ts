@@ -10,7 +10,7 @@ interface UtilisateurApiModel {
   commune: string;
   email: string;
   revenu_fiscal: number | null;
-  nombre_de_parts_fiscales: number | null;
+  nombre_de_parts_fiscales: number;
   abonnement_transport: boolean;
 }
 
@@ -38,9 +38,7 @@ export class UtilisateurRepositoryAxios implements UtilisateurRepository {
       abonnementTransport: response.data.utilisateur.abonnement_transport,
 
       revenuFiscal: response.data.utilisateur.revenu_fiscal,
-      nombreDePartsFiscales: response.data.utilisateur.nombre_de_parts_fiscales
-        ? response.data.utilisateur.nombre_de_parts_fiscales
-        : null,
+      nombreDePartsFiscales: response.data.utilisateur.nombre_de_parts_fiscales,
     };
   }
 

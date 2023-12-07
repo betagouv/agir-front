@@ -36,6 +36,7 @@
   import { CompteUtilisateurRepositoryImpl } from '@/compte/adapters/compteUtilisateur.repository.impl';
   import { SessionRepositoryStore } from '@/authentification/adapters/session.repository.store';
   import CarteInfoExplicationsAidesLocales from '@/components/custom/CarteInfoExplicationsAidesLocales.vue';
+  import { CompteUtlisateurViewModel } from '@/compte/adapters/compteUtilisateur.presenter.impl';
 
   const store = utilisateurStore();
   const emit = defineEmits(['submit-simulation']);
@@ -68,16 +69,16 @@
         new SessionRepositoryStore()
       );
       const utilisateur = utilisateurStore().utilisateur;
-      const donneeAMettreAjour = {
+      const donneeAMettreAjour: CompteUtlisateurViewModel = {
         nom: utilisateur.nom,
         id: utilisateur.id,
         mail: utilisateur.mail,
         commune: utilisateur.commune,
         codePostal: utilisateur.codePostal,
         prenom: utilisateur.prenom,
-        revenuFiscal: revenuFiscal.value?.toString() || '',
-        nombreDePartsFiscales: utilisateur.nombreDePartsFiscales?.toString() || '',
-        abonnementTransport: false,
+        abonnementTransport: utilisateur.abonnementTransport,
+        revenuFiscal: revenuFiscal.value!,
+        nombreDePartsFiscales: utilisateur.nombreDePartsFiscales,
       };
       usecase.execute(donneeAMettreAjour);
     }
