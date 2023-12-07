@@ -16,7 +16,7 @@ interface CompteUtilisateurApiModel {
   prenom: string;
   revenu_fiscal: number | null;
   nombre_de_parts_fiscales: number;
-  abonnementTransport: boolean;
+  abonnement_ter_loire: boolean;
 }
 export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurRepository {
   @intercept401()
@@ -32,7 +32,7 @@ export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurReposit
       commune: response.data.commune || '',
       revenuFiscal: response.data.revenu_fiscal,
       nombreDePartsFiscales: response.data.nombre_de_parts_fiscales,
-      abonnementTransport: response.data.abonnementTransport,
+      abonnementTransport: response.data.abonnement_ter_loire,
     };
   }
 
@@ -47,6 +47,7 @@ export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurReposit
       commune: compteUtilisateur.commune,
       revenu_fiscal: compteUtilisateur.revenuFiscal,
       nombre_de_parts_fiscales: compteUtilisateur.nombreDePartsFiscales,
+      abonnement_ter_loire: compteUtilisateur.abonnementTransport,
     });
   }
 

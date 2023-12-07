@@ -6,7 +6,14 @@
         <div class="background--white border border-radius--md fr-p-3w fr-mb-4w">
           <h2 class="fr-h3">Quelques questions nécessaires à l’estimation des aides</h2>
           <form @submit.prevent="mettreAJourLesInfos">
-            <h3 class="fr-h4">Quelle est votre tranche de revenus ?</h3>
+            <h3 class="fr-h4">Où habitez-vous ?</h3>
+            <InputCodePostal
+              v-model="codePostal"
+              :defaultValue="codePostal"
+              :defaultSelectValue="commune"
+              @update:selectedCommune="commune = $event"
+            />
+            <h3 class="fr-h4 fr-mt-3w">Quelle est votre tranche de revenus ?</h3>
             <InputTrancheDeRevenu @update:part-et-revenu="updatePartEtRevenu" />
             <h3 class="fr-h4">Abonnements et cartes</h3>
             <InputCheckboxUnitaire
@@ -38,11 +45,14 @@
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import router from '@/router';
   import { CompteUtlisateurViewModel } from '@/compte/adapters/compteUtilisateur.presenter.impl';
+  import InputCodePostal from '@/components/dsfr/InputCodePostal.vue';
 
   const store = utilisateurStore();
   const revenuFiscal = ref(store.utilisateur.revenuFiscal ? store.utilisateur.revenuFiscal : 0);
   const nombreDePartsFiscales = ref(store.utilisateur.nombreDePartsFiscales);
-  const abonnementTransport = ref(false);
+  const abonnementTransport = ref(store.utilisateur.abonnementTransport);
+  const codePostal = ref(store.utilisateur.codePostal);
+  const commune = ref(store.utilisateur.commune);
   const updatePartEtRevenu = (data: { nombreDeParts: number; revenuFiscalDeReference: number | 0 }) => {
     nombreDePartsFiscales.value = data.nombreDeParts;
     revenuFiscal.value = data.revenuFiscalDeReference;
@@ -59,8 +69,8 @@
         nom: utilisateur.nom,
         id: utilisateur.id,
         mail: utilisateur.mail,
-        commune: utilisateur.commune,
-        codePostal: utilisateur.codePostal,
+        commune: commune.value,
+        codePostal: codePostal.value,
         prenom: utilisateur.prenom,
         abonnementTransport: abonnementTransport.value,
         revenuFiscal: revenuFiscal.value,
