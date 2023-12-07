@@ -5,7 +5,22 @@
   <div class="tag__progression score fr-text--bold">
     {{ score.points }} <img width="16" src="/ic_score.svg" alt="score" />
   </div>
+
+  <Teleport to="body">
+    <Modale titre="Passage de niveau" label="Modale de passage de niveau" id="passageDeNiveau">
+      <CarteScore :value="utilisateurStore().score.niveau" type="niveau" class="fr-mb-2w" />
+      <div class="text--center">
+        <button class="fr-btn fr-btn--icon-right fr-icon-arrow-right-line" aria-controls="passageDeNiveau">
+          Continuer
+        </button>
+      </div>
+    </Modale>
+    <button class="fr-btn fr-hidden" data-fr-opened="false" aria-controls="passageDeNiveau">
+      Modale avec zone d'action
+    </button>
+  </Teleport>
 </template>
+
 <script setup lang="ts">
   import { computed, onMounted, onUnmounted } from 'vue';
   import { utilisateurStore } from '@/store/utilisateur';
@@ -14,6 +29,11 @@
   import { ScoreRepositoryAxios } from '@/score/adapters/score.repository.axios';
   import { ChargementScorePresenterImpl } from '@/score/adapters/chargementScore.presenter.impl';
   import { ToDoListEvent, ToDoListEventBusImpl } from '@/toDoList/toDoListEventBusImpl';
+  import Modale from '@/components/custom/Modale/Modale.vue';
+  import CarteScore from '@/components/custom/Progression/CarteScore.vue';
+  import ModaleActions from '@/components/custom/Modale/ModaleActions';
+  import { ValiderCelebrationUsecase } from '@/celebration/validerCelebration.usecase';
+  import { CelebrationRepositoryAxios } from '@/celebration/adapters/celebration.repository.axios';
 
   const score = computed(() => utilisateurStore().score);
 
@@ -24,11 +44,26 @@
       utilisateurStore().setScore(viewModel);
     }
 
+    function declencherCelebration(celebrationId: string) {
+      new ModaleActions('passageDeNiveau').open();
+
+      new ValiderCelebrationUsecase(new CelebrationRepositoryAxios()).execute(
+        utilisateurStore().utilisateur.id,
+        celebrationId
+      );
+    }
+
     function mettreAJourLeScore() {
       const chargerScoreUseCase = new ChargementScoreUsecase(new ScoreRepositoryAxios());
       chargerScoreUseCase.execute(
         utilisateurStore().utilisateur.id,
-        new ChargementScorePresenterImpl(sauvegarderLeScoreEnLocal)
+        new ChargementScorePresenterImpl(async viewModel => {
+          sauvegarderLeScoreEnLocal(viewModel);
+
+          if (viewModel.celebration) {
+            declencherCelebration(viewModel.celebration.id);
+          }
+        })
       );
     }
 
@@ -53,6 +88,7 @@
     ToDoListEventBusImpl.getInstance().unsubscribe(ToDoListEvent.TODO_QUIZ_ETE_TERMINE);
   });
 </script>
+
 <style scoped>
   .tag__progression {
     display: flex;

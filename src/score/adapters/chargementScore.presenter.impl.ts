@@ -10,6 +10,7 @@ export class ChargementScorePresenterImpl implements ChargementScorePresenter {
       niveau: score.niveau,
       nombreDePointsDansLeNiveau: score.nombreDePointsDansLeNiveau,
       nombreDePointsDuNiveau: score.nombreDePointsDuNiveau,
+      celebration: score.celebration,
     });
   }
 }

@@ -6,7 +6,14 @@ interface ScoreApiModel {
   niveau: 0;
   current_points_in_niveau: 0;
   point_target_in_niveau: 0;
+  celebrations: {
+    id: string;
+    type: 'niveau';
+    titre: string;
+    new_niveau: number;
+  }[];
 }
+
 export class ScoreRepositoryAxios implements ScoreRepository {
   @intercept401()
   async getScore(idUtilisateur: string): Promise<Score> {
@@ -18,6 +25,7 @@ export class ScoreRepositoryAxios implements ScoreRepository {
       niveau: response.data.niveau,
       nombreDePointsDansLeNiveau: response.data.current_points_in_niveau,
       nombreDePointsDuNiveau: response.data.point_target_in_niveau,
+      celebration: response.data.celebrations[0] ? response.data.celebrations[0] : null,
     };
   }
 }
