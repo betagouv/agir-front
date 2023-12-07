@@ -1,7 +1,8 @@
 import { EnvoyerDonneesQuizInteractionUsecase } from '@/quiz/envoyerDonneesQuizInteraction.usecase';
 import { Quiz, QuizRepository } from '@/quiz/ports/quizRepository';
-import { ToDoListEvent, ToDoListEventBus } from '@/toDoList/toDoListEventBusImpl';
+import { ToDoListEvent } from '@/toDoList/toDoListEventBusImpl';
 import { expect } from 'vitest';
+import { SpyToDoListEventBus } from '../toDoList/spyTodoListEventBus';
 
 class SpyQuizRepository implements QuizRepository {
   get score(): number {
@@ -25,18 +26,6 @@ class SpyQuizRepository implements QuizRepository {
     this._score = score;
     return Promise.resolve();
   }
-}
-export class SpyToDoListEventBus implements ToDoListEventBus {
-  get eventName(): ToDoListEvent | null {
-    return this._eventName;
-  }
-  private _eventName: ToDoListEvent | null = null;
-
-  publish(eventName: ToDoListEvent): void {
-    this._eventName = eventName;
-  }
-
-  subscribe(eventName: ToDoListEvent, callback: () => void): void {}
 }
 
 describe("Fichier de tests pour envoyer le resultat d'un quizz", () => {

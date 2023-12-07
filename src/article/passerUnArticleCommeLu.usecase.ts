@@ -1,10 +1,11 @@
 import { ArticleRepository } from '@/article/ports/article.repository';
-import { ToDoListEvent, ToDoListEventBus } from '@/toDoList/toDoListEventBusImpl';
+import { ToDoListEvent } from '@/toDoList/toDoListEventBusImpl';
+import { EventBus } from '@/shell/eventBus';
 
 export class PasserUnArticleCommeLuUsecase {
   constructor(
     private readonly articleRepository: ArticleRepository,
-    private readonly todoListEventBus: ToDoListEventBus
+    private readonly todoListEventBus: EventBus<ToDoListEvent>
   ) {}
 
   async execute(interactionId: string, utilisateurId: string): Promise<void> {

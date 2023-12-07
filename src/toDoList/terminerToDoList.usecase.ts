@@ -1,8 +1,9 @@
 import { ToDoListRepository } from '@/toDoList/ports/toDoList.repository';
-import { ToDoListEvent, ToDoListEventBus } from './toDoListEventBusImpl';
+import { ToDoListEvent } from './toDoListEventBusImpl';
+import { EventBus } from '@/shell/eventBus';
 
 export class TerminerToDoListUsecase {
-  constructor(private toDoListRepository: ToDoListRepository, private toDoListEventBus: ToDoListEventBus) {}
+  constructor(private toDoListRepository: ToDoListRepository, private toDoListEventBus: EventBus<ToDoListEvent>) {}
 
   async execute(idUtilisateur: string): Promise<void> {
     await this.toDoListRepository.terminerToDo(idUtilisateur);
