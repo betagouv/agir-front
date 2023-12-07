@@ -23,7 +23,9 @@ describe('Fichier de test du usecase de chargement du score', () => {
 
   it("en donnant un utilisateur valide doit me retourner de le score et les célébrations s'il y en a", async () => {
     // GIVEN
-    const chargementScoreUsecase = new ChargementScoreUsecase(new MockScoreRepository());
+    const chargementScoreUsecase = new ChargementScoreUsecase(
+      new MockScoreRepository({ id: 'celebrationID', type: 'niveau', titre: 'celebrationTitre', new_niveau: 4 })
+    );
     // WHEN
     await chargementScoreUsecase.execute('userAvecCelebration', new ChargementScorePresenterImpl(expectation));
     // THEN
