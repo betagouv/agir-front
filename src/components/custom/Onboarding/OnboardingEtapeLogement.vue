@@ -56,7 +56,7 @@
         { label: 'Moins de 35 m²', value: 'superficie_35' },
         { label: 'Entre 35 et 70 m²', value: 'superficie_70' },
         { label: 'Entre 70 et 100 m²', value: 'superficie_100' },
-        { label: 'Entre 70 et 150 m²', value: 'superficie_150' },
+        { label: 'Entre 100 et 150 m²', value: 'superficie_150' },
         { label: 'Plus de 150 m²', value: 'superficie_150_et_plus' },
       ]"
       col="fr-col-sm-4"
