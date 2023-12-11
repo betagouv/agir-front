@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/betagouv/agir-front/compare/v1.0.0...v1.0.1) (2023-12-11)
+
+
+### 🐛 Corrections de bogues
+
+* modification du wording des étapes de l'onboarding ([#192](https://github.com/betagouv/agir-front/issues/192)) ([269f8bb](https://github.com/betagouv/agir-front/commit/269f8bb5ff7bba8ba1565d81838139769ee54b41))
+
 ## 1.0.0 (2023-12-11)
 
 
