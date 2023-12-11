@@ -28,6 +28,7 @@ import PageMotDePasseOublie from '@/components/pages/PageMotDePasseOublie.vue';
 import PageMotDePasseOublieRedefinirMotDePasse from '@/components/pages/PageMotDePasseOublieRedefinirMotDePasse.vue';
 import PageCatalogueServices from '@/components/pages/PageCatalogueServices.vue';
 import AidesVeloFormulaire from '@/components/pages/PageAidesVeloFormulaire.vue';
+import PageAidesRetrofitFormulaire from '@/components/pages/PageAidesRetrofitFormulaire.vue';
 
 const appName = 'Agir ! -';
 const routes = [
@@ -150,6 +151,11 @@ const routes = [
         path: '/mes-aides/retrofit',
         name: 'mes-aides-retrofit',
         component: PageAidesRetrofit,
+      },
+      {
+        path: '/mes-aides/retrofit/formulaire',
+        name: 'mes-aides-retrofit-formulaire',
+        component: PageAidesRetrofitFormulaire,
       },
       {
         path: '/mes-aides/velo',

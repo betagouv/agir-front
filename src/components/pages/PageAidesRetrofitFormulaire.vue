@@ -1,6 +1,6 @@
 <template>
   <div class="fr-container fr-pb-6w">
-    <FilDAriane page-courante="Acheter un vélo" :page-hierarchie="[{ label: 'Vos aides', url: 'vos-aides' }]" />
+    <FilDAriane page-courante="Prime au retrofit" :page-hierarchie="[{ label: 'Vos aides', url: 'vos-aides' }]" />
     <div class="fr-grid-row fr-grid-row--gutters">
       <div class="fr-col-lg-8">
         <div class="background--white border border-radius--md fr-p-3w fr-mb-4w">
@@ -15,13 +15,6 @@
             />
             <h3 class="fr-h4 fr-mt-3w">Quelle est votre tranche de revenus ?</h3>
             <InputTrancheDeRevenu @update:part-et-revenu="updatePartEtRevenu" />
-            <h3 class="fr-h4">Abonnements et cartes</h3>
-            <InputCheckboxUnitaire
-              id="abonnement-transport"
-              label="En tant qu’habitant d’Angers Loire Métropole, êtes-vous abonnés du TER Pays de la Loire ?"
-              description="Sont éligibles Tutti illimité ou combiné / Métrocéane mensuel / annuel Loire-Atlantique et Sarthe / mensuel réseaux Mayenne et Vendée (hors scolaire)"
-              v-model="abonnementTransport"
-            />
             <button class="fr-mt-2w fr-btn">Valider</button>
           </form>
         </div>
@@ -39,18 +32,16 @@
   import { MettreAJourCompteUtilisateurUsecase } from '@/compte/mettreAJourCompteUtilisateur.usecase';
   import { CompteUtilisateurRepositoryImpl } from '@/compte/adapters/compteUtilisateur.repository.impl';
   import { SessionRepositoryStore } from '@/authentification/adapters/session.repository.store';
-  import InputCheckboxUnitaire from '@/components/dsfr/InputCheckboxUnitaire.vue';
-  import AidesVeloFormulaireAside from '@/components/custom/Aides/AidesInfosUtilisationDesDonnees.vue';
-  import InputTrancheDeRevenu from '@/components/custom/InputTrancheDeRevenu.vue';
-  import FilDAriane from '@/components/dsfr/FilDAriane.vue';
-  import router from '@/router';
   import { CompteUtlisateurViewModel } from '@/compte/adapters/compteUtilisateur.presenter.impl';
+  import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import InputCodePostal from '@/components/dsfr/InputCodePostal.vue';
+  import InputTrancheDeRevenu from '@/components/custom/InputTrancheDeRevenu.vue';
+  import router from '@/router';
+  import AidesVeloFormulaireAside from '@/components/custom/Aides/AidesInfosUtilisationDesDonnees.vue';
 
   const store = utilisateurStore();
   const revenuFiscal = ref(store.utilisateur.revenuFiscal ? store.utilisateur.revenuFiscal : 0);
   const nombreDePartsFiscales = ref(store.utilisateur.nombreDePartsFiscales);
-  const abonnementTransport = ref(store.utilisateur.abonnementTransport);
   const codePostal = ref(store.utilisateur.codePostal);
   const commune = ref(store.utilisateur.commune);
   const updatePartEtRevenu = (data: { nombreDeParts: number; revenuFiscalDeReference: number | 0 }) => {
@@ -72,12 +63,12 @@
         commune: commune.value,
         codePostal: codePostal.value,
         prenom: utilisateur.prenom,
-        abonnementTransport: abonnementTransport.value,
+        abonnementTransport: utilisateur.abonnementTransport,
         revenuFiscal: revenuFiscal.value,
         nombreDePartsFiscales: nombreDePartsFiscales.value,
       };
       await usecase.execute(donneeAMettreAjour);
-      await router.push({ name: 'mes-aides-velo' });
+      await router.push({ name: 'mes-aides-retrofit' });
     }
   }
 </script>
