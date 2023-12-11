@@ -2,7 +2,7 @@
   <form @submit.prevent="submitEtapeAlimentation">
     <BoutonRadio
       class="fr-mb-2w"
-      legende="En règle générale, vous mangez plutôt"
+      legende="Combien de fois par semaine mangez-vous de la viande ou du poisson ?"
       name="repas"
       legende-size="l"
       orientation="vertical"
