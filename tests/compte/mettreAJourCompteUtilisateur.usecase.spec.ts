@@ -79,6 +79,7 @@ describe('Fichier de tests concernant la mise à jour du compte utilisateur', ()
       revenuFiscal: 10000,
       nombreDePartsFiscales: 1,
       abonnementTransport: false,
+      fonctionnalitesDebloquees: [],
     };
     usecase.execute(viewModelInput);
     // THEN
@@ -104,6 +105,7 @@ describe('Fichier de tests concernant la mise à jour du compte utilisateur', ()
       revenuFiscal: 10000,
       nombreDePartsFiscales: 1,
       abonnementTransport: false,
+      fonctionnalitesDebloquees: [],
     });
   });
 });

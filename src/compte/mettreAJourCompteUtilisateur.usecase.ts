@@ -30,6 +30,7 @@ export class MettreAJourCompteUtilisateurUsecase {
       mail: compteUtilisateurInput.mail,
       revenuFiscal: compteUtilisateurInput.revenuFiscal,
       nombreDePartsFiscales: compteUtilisateurInput.nombreDePartsFiscales,
+      fonctionnalitesDebloquees: compteUtilisateurInput.fonctionnalitesDebloquees,
     });
   }
 }

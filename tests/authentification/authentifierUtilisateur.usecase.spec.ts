@@ -13,6 +13,7 @@ class UtilisateurRepositoryForTest implements UtilisateurRepository {
       revenuFiscal: null,
       nombreDePartsFiscales: 1,
       abonnementTransport: false,
+      fonctionnalitesDebloquees: [],
     });
   }
 
@@ -52,6 +53,7 @@ class SpySessionRepository implements SessionRepository {
     revenuFiscal: null,
     nombreDePartsFiscales: 1,
     abonnementTransport: false,
+    fonctionnalitesDebloquees: [],
   };
 
   sauvegarderUtilisateur(utilisateur: Utilisateur) {
@@ -67,7 +69,7 @@ describe("Fichier de tests concernant l'authentification ", () => {
     // WHEN
     await usecase.execute('Dorian', '123');
     // THEN
-    expect(spySessionRepository.utilisateur).toStrictEqual({
+    expect(spySessionRepository.utilisateur).toStrictEqual<Utilisateur>({
       id: '1',
       nom: 'Doe',
       codePostal: '77650',
@@ -77,6 +79,7 @@ describe("Fichier de tests concernant l'authentification ", () => {
       revenuFiscal: null,
       nombreDePartsFiscales: 1,
       abonnementTransport: false,
+      fonctionnalitesDebloquees: [],
     });
   });
 });

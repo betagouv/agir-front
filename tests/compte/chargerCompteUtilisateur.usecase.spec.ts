@@ -86,6 +86,7 @@ describe('Fichier de tests concernant le chargement du compte utilisateur', () =
         revenuFiscal: 0,
         nombreDePartsFiscales: 1,
         abonnementTransport: false,
+        fonctionnalitesDebloquees: [],
       });
     }
   });
@@ -106,6 +107,7 @@ describe('Fichier de tests concernant le chargement du compte utilisateur', () =
         revenuFiscal: 0,
         nombreDePartsFiscales: 1,
         abonnementTransport: false,
+        fonctionnalitesDebloquees: [],
       });
     }
   });
