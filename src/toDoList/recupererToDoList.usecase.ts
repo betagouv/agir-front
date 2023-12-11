@@ -2,6 +2,7 @@ import { ToDoListRepository } from '@/toDoList/ports/toDoList.repository';
 import { ToDoListPresenter } from '@/toDoList/ports/toDoList.presenter';
 
 export interface TodoList {
+  titre: string;
   fait: TodoListItem[];
   aFaire: TodoListItem[];
 }

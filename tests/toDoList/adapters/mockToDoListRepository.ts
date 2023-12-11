@@ -13,6 +13,7 @@ export class MockToDoListRepository implements ToDoListRepository {
 
   recupererToDoList(idUtilisateur: string): Promise<TodoList> {
     return Promise.resolve({
+      titre: 'Ma ToDo List',
       fait: [
         {
           id: 'id2',

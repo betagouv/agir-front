@@ -13,6 +13,7 @@ describe('Fichier de tests concernant la récupération de la ToDo List', () => 
     // THEN
     function expectation(toDoList: TodoListViewModel) {
       expect(toDoList).toStrictEqual<TodoListViewModel>({
+        titre: 'Ma ToDo List',
         aFaire: [
           {
             id: 'id',
