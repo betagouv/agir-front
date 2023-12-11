@@ -7,10 +7,10 @@
       legende-size="l"
       orientation="vertical"
       :options="[
-        { label: 'De la viande et/ou du poisson 4 à 5 fois par semaine', value: 'tout' },
-        { label: 'Végétarien : Sans produits laitiers, c’est dur', value: 'vege' },
-        { label: 'J’adore la viande : Un repas sans viande, ce n’est pas un repas', value: 'viande' },
-        { label: 'Végan : Rien d’animal dans mon assiette', value: 'vegan' },
+        { label: 'Aucun', value: 'vegan' },
+        { label: 'Entre 1 et 3 fois par semaine', value: 'vege' },
+        { label: 'Entre 4 à 6 fois par semaine', value: 'tout' },
+        { label: 'Au moins 7 fois par semaine (au moins 1 repas sur 2)', value: 'viande' },
       ]"
       col=""
       v-model="viewModel.repas"
