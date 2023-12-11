@@ -21,10 +21,20 @@ describe('Fichier de test du usecase de chargement du score', () => {
     }
   });
 
-  it("en donnant un utilisateur valide doit me retourner de le score et les célébrations s'il y en a", async () => {
+  it("en donnant un utilisateur valide doit me retourner de le score et les célébrations/reveal s'il y en a", async () => {
     // GIVEN
     const chargementScoreUsecase = new ChargementScoreUsecase(
-      new MockScoreRepository({ id: 'celebrationID', type: 'niveau', titre: 'celebrationTitre', new_niveau: 4 })
+      new MockScoreRepository({
+        id: 'celebrationID',
+        type: 'niveau',
+        titre: 'celebrationTitre',
+        new_niveau: 4,
+        reveal: {
+          description: 'En fonction de votre situation et de où vous en êtes !',
+          titre: 'Vos aides',
+          url: '/vos-aides',
+        },
+      })
     );
     // WHEN
     await chargementScoreUsecase.execute('userAvecCelebration', new ChargementScorePresenterImpl(expectation));
@@ -35,7 +45,17 @@ describe('Fichier de test du usecase de chargement du score', () => {
         niveau: 1,
         nombreDePointsDansLeNiveau: 25,
         nombreDePointsDuNiveau: 100,
-        celebration: { id: 'celebrationID', type: 'niveau', titre: 'celebrationTitre', new_niveau: 4 },
+        celebration: {
+          id: 'celebrationID',
+          type: 'niveau',
+          titre: 'celebrationTitre',
+          new_niveau: 4,
+          reveal: {
+            description: 'En fonction de votre situation et de où vous en êtes !',
+            titre: 'Vos aides',
+            url: '/vos-aides',
+          },
+        },
       });
     }
   });

@@ -27,6 +27,11 @@ export interface ScoreViewModel {
     type: 'niveau';
     titre: string;
     new_niveau: number;
+    reveal: {
+      titre: string;
+      description: string;
+      url: string;
+    };
   } | null;
 }
 export interface ChargementScorePresenter {

@@ -8,6 +8,7 @@ export interface Utilisateur {
   revenuFiscal: number | null;
   nombreDePartsFiscales: number;
   abonnementTransport: boolean;
+  fonctionnalitesDebloquees: string[];
 }
 
 export interface UtilisateurRepository {

@@ -31,7 +31,9 @@
   <div class="page-container">
     <Header />
     <main class="background--gris">
-      <Services v-if="utilisateurConnecte" />
+      <Services
+        v-if="utilisateurConnecte && utilisateurStore().utilisateur.fonctionnalitesDebloquees.includes('services')"
+      />
       <router-view />
     </main>
 

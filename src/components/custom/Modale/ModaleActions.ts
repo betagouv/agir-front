@@ -5,4 +5,9 @@ export default class ModaleActions {
     const dialog = document.getElementById(this.modaleId);
     window.dsfr(dialog).modal.disclose();
   }
+
+  close() {
+    const dialog = document.getElementById(this.modaleId);
+    window.dsfr(dialog).modal.conceal();
+  }
 }

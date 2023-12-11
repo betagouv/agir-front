@@ -66,7 +66,11 @@
                 Le coach
               </router-link>
             </li>
-            <li class="fr-nav__item" data-fr-js-navigation-item="true">
+            <li
+              v-if="utilisateurStore().utilisateur.fonctionnalitesDebloquees.includes('aides')"
+              class="fr-nav__item"
+              data-fr-js-navigation-item="true"
+            >
               <router-link
                 class="fr-nav__link"
                 :to="{ name: 'mes-aides' }"

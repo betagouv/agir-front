@@ -10,9 +10,23 @@
     <Modale titre="Passage de niveau" label="Modale de passage de niveau" id="passageDeNiveau">
       <CarteScore :value="utilisateurStore().score.niveau" type="niveau" class="fr-mb-2w" />
       <div class="text--center">
-        <button class="fr-btn fr-btn--icon-right fr-icon-arrow-right-line" aria-controls="passageDeNiveau">
-          Continuer
-        </button>
+        <div class="" v-if="utilisateurStore().score.celebration?.reveal">
+          <p class="fr-m-0 text--uppercase fr-text--xs text--bold text--gris-light">Section débloquée</p>
+          <h4 class="fr-h2 fr-my-0">{{ utilisateurStore().score.celebration?.reveal.titre }}</h4>
+          <p class="fr-text--sm">{{ utilisateurStore().score.celebration?.reveal.description }}</p>
+          <router-link
+            class="fr-btn fr-btn--icon-right fr-icon-arrow-right-line"
+            :to="utilisateurStore().score.celebration?.reveal.url"
+            @click.prevent="modaleActions?.close()"
+          >
+            Découvrir la fonctionnalité
+          </router-link>
+        </div>
+        <div v-else>
+          <button class="fr-btn fr-btn--icon-right fr-icon-arrow-right-line" aria-controls="passageDeNiveau">
+            Continuer
+          </button>
+        </div>
       </div>
     </Modale>
     <button class="fr-btn fr-hidden" data-fr-opened="false" aria-controls="passageDeNiveau">
@@ -36,7 +50,7 @@
   import { CelebrationRepositoryAxios } from '@/celebration/adapters/celebration.repository.axios';
 
   const score = computed(() => utilisateurStore().score);
-
+  let modaleActions: ModaleActions | null;
   onMounted(() => {
     mettreAJourLeScore();
 
@@ -45,7 +59,8 @@
     }
 
     function declencherCelebration(celebrationId: string) {
-      new ModaleActions('passageDeNiveau').open();
+      modaleActions = new ModaleActions('passageDeNiveau');
+      modaleActions.open();
 
       new ValiderCelebrationUsecase(new CelebrationRepositoryAxios()).execute(
         utilisateurStore().utilisateur.id,
