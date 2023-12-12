@@ -75,6 +75,7 @@
         abonnementTransport: abonnementTransport.value,
         revenuFiscal: revenuFiscal.value,
         nombreDePartsFiscales: nombreDePartsFiscales.value,
+        fonctionnalitesDebloquees: utilisateur.fonctionnalitesDebloquees,
       };
       await usecase.execute(donneeAMettreAjour);
       await router.push({ name: 'mes-aides-velo' });

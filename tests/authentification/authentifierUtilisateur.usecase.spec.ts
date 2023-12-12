@@ -59,6 +59,8 @@ class SpySessionRepository implements SessionRepository {
   sauvegarderUtilisateur(utilisateur: Utilisateur) {
     this._utilisateur = utilisateur;
   }
+
+  nouvelleFeatureDebloquee(featureDebloquee: string): void {}
 }
 
 describe("Fichier de tests concernant l'authentification ", () => {

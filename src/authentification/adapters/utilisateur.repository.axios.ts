@@ -40,7 +40,7 @@ export class UtilisateurRepositoryAxios implements UtilisateurRepository {
 
       revenuFiscal: response.data.utilisateur.revenu_fiscal,
       nombreDePartsFiscales: response.data.utilisateur.nombre_de_parts_fiscales,
-      fonctionnalitesDebloquees: response.data.utilisateur.fonctionnalites_debloquees || ['aides'],
+      fonctionnalitesDebloquees: response.data.utilisateur.fonctionnalites_debloquees,
     };
   }
 

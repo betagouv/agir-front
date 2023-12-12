@@ -12,7 +12,8 @@ export interface Score {
       titre: string;
       description: string;
       url: string;
-    };
+      feature: string;
+    } | null;
   } | null;
 }
 export interface ScoreRepository {

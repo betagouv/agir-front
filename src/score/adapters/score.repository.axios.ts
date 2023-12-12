@@ -15,6 +15,7 @@ interface ScoreApiModel {
       titre: string;
       description: string;
       url: string;
+      feature: string;
     };
   }[];
 }

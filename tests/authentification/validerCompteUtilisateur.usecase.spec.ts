@@ -23,6 +23,8 @@ class SpySessionRepository implements SessionRepository {
   sauvegarderUtilisateur(utilisateur: Utilisateur) {
     this._utilisateur = utilisateur;
   }
+
+  nouvelleFeatureDebloquee(featureDebloquee: string): void {}
 }
 
 class SpyValiderCompteUtilisateurRepository implements UtilisateurRepository {

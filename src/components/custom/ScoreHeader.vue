@@ -10,13 +10,13 @@
     <Modale titre="Passage de niveau" label="Modale de passage de niveau" id="passageDeNiveau">
       <CarteScore :value="utilisateurStore().score.niveau" type="niveau" class="fr-mb-2w" />
       <div class="text--center">
-        <div class="" v-if="utilisateurStore().score.celebration?.reveal">
+        <div v-if="utilisateurStore().score.celebration?.reveal">
           <p class="fr-m-0 text--uppercase fr-text--xs text--bold text--gris-light">Section débloquée</p>
-          <h4 class="fr-h2 fr-my-0">{{ utilisateurStore().score.celebration?.reveal.titre }}</h4>
-          <p class="fr-text--sm">{{ utilisateurStore().score.celebration?.reveal.description }}</p>
+          <h4 class="fr-h2 fr-my-0">{{ utilisateurStore().score.celebration!.reveal!.titre }}</h4>
+          <p class="fr-text--sm">{{ utilisateurStore().score.celebration!.reveal!.description }}</p>
           <router-link
             class="fr-btn fr-btn--icon-right fr-icon-arrow-right-line"
-            :to="utilisateurStore().score.celebration!.reveal.url"
+            :to="utilisateurStore().score.celebration!.reveal!.url"
             @click.prevent="modaleActions?.close()"
           >
             Découvrir la fonctionnalité
@@ -48,6 +48,7 @@
   import ModaleActions from '@/components/custom/Modale/ModaleActions';
   import { ValiderCelebrationUsecase } from '@/celebration/validerCelebration.usecase';
   import { CelebrationRepositoryAxios } from '@/celebration/adapters/celebration.repository.axios';
+  import { SessionRepositoryStore } from '@/authentification/adapters/session.repository.store';
 
   const score = computed(() => utilisateurStore().score);
   let modaleActions: ModaleActions | null;
@@ -69,7 +70,7 @@
     }
 
     function mettreAJourLeScore() {
-      const chargerScoreUseCase = new ChargementScoreUsecase(new ScoreRepositoryAxios());
+      const chargerScoreUseCase = new ChargementScoreUsecase(new ScoreRepositoryAxios(), new SessionRepositoryStore());
       chargerScoreUseCase.execute(
         utilisateurStore().utilisateur.id,
         new ChargementScorePresenterImpl(async viewModel => {

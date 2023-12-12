@@ -60,6 +60,8 @@ class SpySessionRepository implements SessionRepository {
   sauvegarderUtilisateur(utilisateur: Utilisateur) {
     this._utlisateur = utilisateur;
   }
+
+  nouvelleFeatureDebloquee(featureDebloquee: string): void {}
 }
 
 describe('Fichier de tests concernant la mise à jour du compte utilisateur', () => {

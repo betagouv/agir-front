@@ -2,6 +2,7 @@ import { Utilisateur, UtilisateurRepository } from '@/authentification/ports/uti
 
 export interface SessionRepository {
   sauvegarderUtilisateur(utilisateur: Utilisateur);
+  nouvelleFeatureDebloquee(featureDebloquee: string): void;
 }
 export class AuthentifierUtilisateurUsecase {
   private _utilisateurRepository: UtilisateurRepository;

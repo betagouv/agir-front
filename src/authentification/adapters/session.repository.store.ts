@@ -7,4 +7,8 @@ export class SessionRepositoryStore implements SessionRepository {
     const store = utilisateurStore();
     store.setUtilisateur(utilisateur);
   }
+
+  nouvelleFeatureDebloquee(featureDebloquee: string): void {
+    utilisateurStore().utilisateur.fonctionnalitesDebloquees.push(featureDebloquee);
+  }
 }
