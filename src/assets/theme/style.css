@@ -254,3 +254,7 @@ h3 {
 .align-items--end {
   align-items: flex-end;
 }
+
+.nowrap {
+  white-space: nowrap;
+}

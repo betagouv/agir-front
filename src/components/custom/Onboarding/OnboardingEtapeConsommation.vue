@@ -14,7 +14,7 @@
     <button class="fr-link fr-icon-arrow-left-line fr-link--icon-left fr-mr-4w" @click="retourEtapePrecedente">
       Précédent
     </button>
-    <button class="fr-btn" :disabled="isButtonDisabled">Continuer</button>
+    <button class="fr-btn fr-btn--lg" :disabled="isButtonDisabled">Continuer</button>
   </form>
 </template>
 
