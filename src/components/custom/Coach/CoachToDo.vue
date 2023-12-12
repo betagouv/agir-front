@@ -1,6 +1,6 @@
 <template>
   <div v-if="!bonusFinalRecupere">
-    <h2 class="fr-mb-0">Vos missions</h2>
+    <h2 class="fr-mb-0">{{ todoList.titre }}</h2>
     <p class="fr-text--xl">Un pas après l’autre</p>
     <div v-if="todoList.fait.length > 0">
       <h3 class="text--uppercase fr-mb-0 fr-text--xs text-disabled-grey fr-mb-1w">déjà fait</h3>

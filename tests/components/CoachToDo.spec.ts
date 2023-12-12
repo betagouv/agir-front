@@ -68,6 +68,7 @@ describe('Coach - Section ToDo', () => {
     it('affiche uniquement la liste des tâches à faire', () => {
       const props: { todoList: TodoListViewModel } = {
         todoList: {
+          titre: 'Ma ToDo List',
           aFaire: [todoExemple1, todoExemple2],
           fait: [],
         },

@@ -5,6 +5,7 @@ import { AxiosFactory, intercept401 } from '@/axios.factory';
 interface ToDoListApiModel {
   numero_todo: number;
   points_todo: number;
+  titre: string;
   todo: [
     {
       thematiques: string[];
@@ -46,6 +47,7 @@ export class ToDoListRepositoryAxios implements ToDoListRepository {
     const response = await axiosInstance.get<ToDoListApiModel>(`/utilisateurs/${idUtilisateur}/todo`);
 
     return {
+      titre: response.data.titre,
       aFaire: response.data.todo.map(todo => ({
         id: todo.id,
         interactionId: todo.interaction_id,
