@@ -28,7 +28,10 @@
   <section class="fr-py-6w fr-background-contrast--grey">
     <div class="fr-container" v-if="!isLoading">
       <CoachRecommandations
-        v-if="recommandationsPersonnaliseesViewModel"
+        v-if="
+          recommandationsPersonnaliseesViewModel &&
+          store.utilisateur.fonctionnalitesDebloquees.includes('recommandations')
+        "
         :recommandations="recommandationsPersonnaliseesViewModel"
       />
     </div>
