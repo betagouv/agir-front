@@ -42,7 +42,10 @@
     </fieldset>
   </form>
   <hr class="fr-pb-4w" />
-  <router-link :to="{ name: 'authentification' }" class="fr-btn fr-btn--lg fr-btn--tertiary full-width flex-center">
+  <router-link
+    :to="{ name: 'authentification' }"
+    class="fr-btn fr-btn--lg fr-btn--tertiary-no-outline full-width flex-center"
+  >
     J'ai déjà un compte
   </router-link>
 </template>

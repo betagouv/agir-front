@@ -8,7 +8,18 @@
     <p class="fr-text--sm">
       Par exemple, ils représentent 27% des émissions de gaz à effet de serre d’un français moyen.
     </p>
-    <span class="text--xs">Source : carbone 4</span>
+    <p class="fr-mb-0">
+      <span class="text--xs text--bold">Source :</span>
+      <a
+        href="https://www.carbone4.com/"
+        target="_blank"
+        rel="noopener"
+        class="fr-link text--xs"
+        title="Carbone 4 - ouvre une nouvelle fenêtre"
+      >
+        Carbone 4
+      </a>
+    </p>
   </CarteInfo>
   <div class="background-color--gris-image border border-radius--md fr-p-2w">
     <p class="fr-text--bold">

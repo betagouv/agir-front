@@ -2,13 +2,13 @@
   <form @submit.prevent="submitEtapeAlimentation">
     <BoutonRadio
       class="fr-mb-2w"
-      legende="Combien de fois par semaine mangez-vous de la viande ou du poisson ?"
+      legende="Combien de repas faites-vous avec de la viande ou du poisson par semaine ?"
       name="repas"
       legende-size="l"
       orientation="vertical"
       :options="[
         { label: 'Aucun', value: 'vegan' },
-        { label: 'Entre 1 et 3 fois par semaine', value: 'vege' },
+        { label: 'Entre 1 à 3 fois par semaine', value: 'vege' },
         { label: 'Entre 4 à 6 fois par semaine', value: 'tout' },
         { label: 'Au moins 7 fois par semaine (au moins 1 repas sur 2)', value: 'viande' },
       ]"

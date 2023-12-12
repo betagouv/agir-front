@@ -11,7 +11,7 @@
             </p>
           </router-link>
         </div>
-        <div class="fr-footer__content">
+        <!-- <div class="fr-footer__content">
           <ul class="fr-footer__content-list">
             <li class="fr-footer__content-item">
               <a class="fr-footer__content-link" target="_blank" href="https://legifrance.gouv.fr"
@@ -28,17 +28,17 @@
               <a class="fr-footer__content-link" target="_blank" href="https://data.gouv.fr">data.gouv.fr</a>
             </li>
           </ul>
-        </div>
+        </div> -->
       </div>
       <div class="fr-footer__bottom">
         <ul class="fr-footer__bottom-list">
-          <li class="fr-footer__bottom-item">
+          <!-- <li class="fr-footer__bottom-item">
             <a class="fr-footer__bottom-link" href="#">Plan du site</a>
-          </li>
+          </li> -->
           <li class="fr-footer__bottom-item">
-            <a class="fr-footer__bottom-link" href="#">Accessibilité : non/partiellement/totalement conforme</a>
+            <a class="fr-footer__bottom-link" href="#">Accessibilité : non conforme</a>
           </li>
-          <li class="fr-footer__bottom-item">
+          <!-- <li class="fr-footer__bottom-item">
             <a class="fr-footer__bottom-link" href="#">Mentions légales</a>
           </li>
           <li class="fr-footer__bottom-item">
@@ -46,7 +46,7 @@
           </li>
           <li class="fr-footer__bottom-item">
             <a class="fr-footer__bottom-link" href="#">Gestion des cookies</a>
-          </li>
+          </li> -->
         </ul>
         <div class="fr-footer__bottom-copy">
           <p>

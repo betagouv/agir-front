@@ -16,7 +16,7 @@
             </router-link>
           </div>
           <div class="fr-fieldset__element fr-mt-2w">
-            <button class="fr-btn display-block full-width" type="submit">Se connecter</button>
+            <button class="fr-btn fr-btn--lg display-block full-width" type="submit">Se connecter</button>
           </div>
           <Alert
             v-if="loginEnErreur"
@@ -30,7 +30,10 @@
       <div class="text--center" v-if="premiereConnexion">
         <hr />
         <h2>Première visite ?</h2>
-        <router-link :to="{ name: 'creation-compte' }" class="fr-btn fr-btn--secondary display-block full-width">
+        <router-link
+          :to="{ name: 'creation-compte' }"
+          class="fr-btn fr-btn--lg fr-btn--secondary display-block full-width"
+        >
           Créer un compte
         </router-link>
       </div>

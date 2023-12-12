@@ -17,7 +17,7 @@
           class="fr-btn fr-btn--lg fr-btn--icon-left fr-icon-arrow-right-line"
           :to="{ name: 'creation-compte' }"
         >
-          Je m’inscris
+          Inscrivez-vous !
         </router-link>
       </div>
     </section>
@@ -30,13 +30,13 @@
   <section v-if="onboardingResultatViewModel?.phrases" class="fr-container fr-py-6w fr-px-2w">
     <BilanOnboardingPhrasesCoach :phrases="onboardingResultatViewModel.phrases" />
   </section>
-  <section class="background--white fr-py-6w">
+  <!-- <section class="background--white fr-py-6w">
     <div class="fr-container">
       <BilanOnboardingTemoignage />
     </div>
-  </section>
+  </section> -->
   <section class="fr-container">
-    <div class="fr-grid fr-grid-row fr-grid-row--middle flex-column fr-pt-16w fr-pb-8w">
+    <div class="fr-grid fr-grid-row fr-grid-row--middle flex-column fr-pt-8w fr-pb-12w">
       <img alt="Plateforme Agir :" src="/logo.svg" class="fr-mb-3w logo" />
       <h2 class="fr-h1 text--center fr-col-lg-9">
         Toutes les solutions pour réduire votre empreinte écologique selon vos moyens, vos lieux de vie et vos envie
@@ -45,7 +45,7 @@
         class="fr-btn fr-btn--lg fr-btn--icon-left fr-icon-arrow-right-line"
         :to="{ name: 'creation-compte' }"
       >
-        Je m’inscris
+        S'inscrire
       </router-link>
     </div>
   </section>
@@ -63,7 +63,6 @@
 
   import BilanOnboardingEstimation from '@/components/custom/BilanOnboarding/BilanOnboardingEstimation.vue';
   import BilanOnboardingStatFrance from '@/components/custom/BilanOnboarding/BilanOnboardingStatFrance.vue';
-  import BilanOnboardingTemoignage from '@/components/custom/BilanOnboarding/BilanOnboardingTemoignage.vue';
   import BilanOnboardingPhrasesCoach from '@/components/custom/BilanOnboarding/BilanOnboardingPhrasesCoach.vue';
 
   const onBoardingStore = onboardingStore();
