@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.2](https://github.com/betagouv/agir-front/compare/v1.0.1...v1.0.2) (2023-12-12)
+
+
+### 🐛 Corrections de bogues
+
+* formate les revenus fiscaux de référence ([#196](https://github.com/betagouv/agir-front/issues/196)) ([345cb0e](https://github.com/betagouv/agir-front/commit/345cb0e4c5cee5b2673b817ea3077448233740f6))
+* modification des labels onboarding étape consommation ([#197](https://github.com/betagouv/agir-front/issues/197)) ([fe9719c](https://github.com/betagouv/agir-front/commit/fe9719ca7850ad20e900f3b4dd6383389cf3745a))
+
 ## [1.0.1](https://github.com/betagouv/agir-front/compare/v1.0.0...v1.0.1) (2023-12-11)
 
 
