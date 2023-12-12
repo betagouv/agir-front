@@ -20,7 +20,7 @@
     </p>
     <img
       alt="Vélo ou marche : 0kg co2e; Métro : 0.01kg co2e; Scooter ou moto : 0.4kg co2e; Bus : 0.6kg co2e; Voiture: 1.1kg co2e"
-      class="fr-col-12"
+      class="fr-col-12 width--auto"
       src="/impact-co2.png"
     />
     <p class="text--xs">

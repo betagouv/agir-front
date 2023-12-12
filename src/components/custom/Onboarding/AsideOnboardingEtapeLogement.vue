@@ -26,13 +26,13 @@
     </p>
   </CarteInfo>
   <div class="background-color--gris-image border border-radius--md fr-p-2w">
-    <p class="fr-text--bold">
+    <p class="fr-text--bold fr-mb-0">
       <span class="fr-icon-lightbulb-line" aria-hidden="true"></span>
       Pour vous donner une idée
     </p>
     <img
       alt="Chauffage électrique : 6kg co2e; Chauffage au gaz : 38kg co2e; Chauffage au fioul : 53kg co2e;"
-      class="fr-col-12"
+      class="fr-col-12 width--auto"
       src="/impact-co2-logement.png"
     />
     <p class="text--xs fr-mb-0">

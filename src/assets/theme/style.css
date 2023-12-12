@@ -67,6 +67,10 @@ h3 {
   display: block;
 }
 
+.width--auto {
+  width: auto;
+}
+
 .full-width {
   width: 100%;
 }

@@ -21,6 +21,29 @@
       </a>
     </p>
   </CarteInfo>
+  <div class="background-color--gris-image border border-radius--md fr-p-2w">
+    <p class="fr-text--bold fr-mb-0">
+      <span class="fr-icon-lightbulb-line" aria-hidden="true"></span>
+      Pour vous donner une idée
+    </p>
+    <img
+      alt="T-shirt : 6kg co2e; Jeans : 25kg co2e; Manteau : 101kg co2e;"
+      class="fr-col-12 width--auto"
+      src="/impact-co2-alimentation.png"
+    />
+    <p class="text--xs fr-mb-0">
+      <span class="fr-text--bold">Source :</span>
+      <a
+        href="https://impactco2.fr/"
+        target="_blank"
+        rel="noopener"
+        title="Site impact CO2 - ouvre une nouvelle fenêtre"
+        class="fr-link text--xs"
+      >
+        Impact CO2
+      </a>
+    </p>
+  </div>
 </template>
 
 <script setup lang="ts">
