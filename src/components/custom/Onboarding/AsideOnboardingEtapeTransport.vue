@@ -16,7 +16,7 @@
       Pour vous donner une idée
     </p>
     <p class="fr-text--sm">
-      Pour 5 kms, voici les émissions de gaz à effet de serre selon les moyens de transport utilisés en kg CO2e*
+      Pour 5 km, voici les émissions de gaz à effet de serre selon les moyens de transport utilisés en kg CO2e*
     </p>
     <img
       alt="Vélo ou marche : 0kg co2e; Métro : 0.01kg co2e; Scooter ou moto : 0.4kg co2e; Bus : 0.6kg co2e; Voiture: 1.1kg co2e"
