@@ -28,7 +28,10 @@
   <section class="fr-py-6w fr-background-contrast--grey">
     <div class="fr-container" v-if="!isLoading">
       <CoachRecommandations
-        v-if="recommandationsPersonnaliseesViewModel"
+        v-if="
+          recommandationsPersonnaliseesViewModel &&
+          store.utilisateur.fonctionnalitesDebloquees.includes(Fonctionnalites.RECOMMANDATIONS)
+        "
         :recommandations="recommandationsPersonnaliseesViewModel"
       />
     </div>
@@ -68,6 +71,7 @@
   import { ToDoListPresenterImpl, TodoListViewModel } from '@/toDoList/adapters/toDoList.presenter.impl';
   import { RecupererToDoListUsecase } from '@/toDoList/recupererToDoList.usecase';
   import { ToDoListEvent, ToDoListEventBusImpl } from '@/toDoList/toDoListEventBusImpl';
+  import { Fonctionnalites } from '@/shell/fonctionnalitesEnum';
 
   const isLoading = ref<boolean>(true);
   const todoList = ref<TodoListViewModel>();

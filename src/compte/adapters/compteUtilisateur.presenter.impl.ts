@@ -11,6 +11,7 @@ export interface CompteUtlisateurViewModel {
   revenuFiscal: number;
   nombreDePartsFiscales: number;
   abonnementTransport: boolean;
+  fonctionnalitesDebloquees: string[];
 }
 export class CompteUtilisateurPresenterImpl implements CompteUtilisateurPresenter {
   private _compteUtlisateurViewModel: (viewModel: CompteUtlisateurViewModel) => void;
@@ -30,6 +31,7 @@ export class CompteUtilisateurPresenterImpl implements CompteUtilisateurPresente
       prenom: compteUtilisateur.prenom,
       revenuFiscal: compteUtilisateur.revenuFiscal || 0,
       nombreDePartsFiscales: compteUtilisateur.nombreDePartsFiscales,
+      fonctionnalitesDebloquees: [],
     });
   }
 }

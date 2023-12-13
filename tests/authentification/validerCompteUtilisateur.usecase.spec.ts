@@ -17,11 +17,14 @@ class SpySessionRepository implements SessionRepository {
     revenuFiscal: null,
     nombreDePartsFiscales: 1,
     abonnementTransport: false,
+    fonctionnalitesDebloquees: [],
   };
 
   sauvegarderUtilisateur(utilisateur: Utilisateur) {
     this._utilisateur = utilisateur;
   }
+
+  nouvelleFeatureDebloquee(featureDebloquee: string): void {}
 }
 
 class SpyValiderCompteUtilisateurRepository implements UtilisateurRepository {
@@ -44,6 +47,7 @@ class SpyValiderCompteUtilisateurRepository implements UtilisateurRepository {
       revenuFiscal: null,
       nombreDePartsFiscales: 1,
       abonnementTransport: false,
+      fonctionnalitesDebloquees: [],
     });
   }
 
@@ -80,6 +84,7 @@ describe('Fichier de tests concernant la validation du compte utilisateur', () =
       revenuFiscal: null,
       nombreDePartsFiscales: 1,
       abonnementTransport: false,
+      fonctionnalitesDebloquees: [],
     });
   });
 });

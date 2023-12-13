@@ -36,6 +36,7 @@ export class CreerCompteUtilisateurUsecase {
       revenuFiscal: null,
       nombreDePartsFiscales: 1,
       abonnementTransport: false,
+      fonctionnalitesDebloquees: [],
     });
   }
 }

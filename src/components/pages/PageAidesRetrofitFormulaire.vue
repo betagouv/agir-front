@@ -66,6 +66,7 @@
         abonnementTransport: utilisateur.abonnementTransport,
         revenuFiscal: revenuFiscal.value,
         nombreDePartsFiscales: nombreDePartsFiscales.value,
+        fonctionnalitesDebloquees: utilisateur.fonctionnalitesDebloquees,
       };
       await usecase.execute(donneeAMettreAjour);
       await router.push({ name: 'mes-aides-retrofit' });

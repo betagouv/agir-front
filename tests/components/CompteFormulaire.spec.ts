@@ -15,6 +15,7 @@ const compteUtlisateurViewModel: CompteUtlisateurViewModel = {
   revenuFiscal: 0,
   nombreDePartsFiscales: 1,
   abonnementTransport: false,
+  fonctionnalitesDebloquees: [],
 };
 
 describe.skip('Compte - Formulaire', () => {
