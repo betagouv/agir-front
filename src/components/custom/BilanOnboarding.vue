@@ -1,8 +1,15 @@
 <template>
   <div class="fr-p-3w background--white border-radius--lg">
-    <div class="legende fr-text--sm fr-text--bold fr-mb-1v">
-      <span class="fr-pl-2w">Faible</span>
-      <span class="fr-pr-2w">Très fort</span>
+    <div class="fr-grid-row">
+      <div class="fr-col-5">
+        <span class="fr-text--bold">Votre impact</span>
+      </div>
+      <div class="fr-col-7">
+        <div class="legende fr-text--sm fr-text--bold fr-mb-1v">
+          <span class="fr-pl-2w">Faible</span>
+          <span class="fr-pr-2w">Très fort</span>
+        </div>
+      </div>
     </div>
     <div class="fr-col-7 fr-ml-auto">
       <div class="legende--jauge fr-grid-row fr-text--sm">
@@ -12,25 +19,16 @@
         <span>4</span>
       </div>
     </div>
-    <div
-      v-for="item in [
-        { label: '🛒 Consommation', value: 1 },
-        { label: '🛒 Consommation', value: 2 },
-        { label: '🛒 Consommation', value: 3 },
-        { label: '🛒 Consommation', value: 4 },
-      ]"
-      :key="item.label"
-      class="fr-grid-row fr-grid-row--middle"
-    >
+    <div v-for="item in onboardingBilanViewModel?.resultat" :key="item.libelle" class="fr-grid-row fr-grid-row--middle">
       <div class="fr-col-5">
-        <span class="text--xs fr-text--bold">{{ item.label }}</span>
+        <span class="text--xs fr-text--bold">{{ item.libelle }}</span>
       </div>
       <div class="fr-col-7">
         <BarreDeProgression
-          :label="item.label"
-          :value="item.value"
+          :label="item.libelle"
+          :value="item.valeur"
           :valueMax="4"
-          :couleur="calculerCouleurJauge(item.value)"
+          :couleur="calculerCouleurJauge(item.valeur)"
         />
       </div>
     </div>
@@ -38,8 +36,31 @@
 </template>
 
 <script setup lang="ts">
+  import { UtilisateurRepositoryAxios } from '@/authentification/adapters/utilisateur.repository.axios';
   import BarreDeProgression from '@/components/custom/BarreDeProgression.vue';
+  import {
+    OnboardingBilanPresenterImpl,
+    OnboardingBilanViewModel,
+  } from '@/onboarding/adapters/onboardingBilan.presenter.impl';
+  import { ChargerBilanOnboardingUsecase } from '@/onboarding/chargerBilanOnboarding.usecase';
   import { calculerCouleurJauge } from '@/shell/calculerCouleurJauge';
+  import { utilisateurStore } from '@/store/utilisateur';
+  import { onMounted, ref } from 'vue';
+
+  const onboardingBilanViewModel = ref<OnboardingBilanViewModel | null>(null);
+
+  function maponboardingBilan(viewModel: OnboardingBilanViewModel) {
+    onboardingBilanViewModel.value = viewModel;
+  }
+
+  onMounted(async () => {
+    const utilisateurId = utilisateurStore().utilisateur.id;
+
+    await new ChargerBilanOnboardingUsecase(new UtilisateurRepositoryAxios()).execute(
+      utilisateurId,
+      new OnboardingBilanPresenterImpl(maponboardingBilan)
+    );
+  });
 </script>
 
 <style scoped>
@@ -77,4 +98,3 @@
     background-color: var(--blue-france-sun-113-625);
   }
 </style>
-y
