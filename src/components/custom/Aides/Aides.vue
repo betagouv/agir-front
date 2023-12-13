@@ -1,6 +1,6 @@
 <template>
-  <FilDAriane page-courante="Mes aides" :page-hierarchie="[{ label: 'Coach', url: 'coach' }]" />
-  <h1 class="fr-h2">Aides financières disponibles</h1>
+  <FilDAriane page-courante="Vos aides" :page-hierarchie="[{ label: 'Coach', url: 'coach' }]" />
+  <h1 class="fr-h2">Vos aides disponibles</h1>
   <div class="fr-grid-row fr-grid-row--gutters">
     <div class="fr-col-12 fr-col-lg-3">
       <h2 class="fr-h4">Filtres</h2>
@@ -38,7 +38,7 @@
                 </span>
               </template>
               <template v-slot:contenu>
-                <div v-html="aide.contenu" />
+                <div class="cms__content" v-html="aide.contenu" />
                 <router-link
                   v-if="aide.isSimulateur"
                   :to="{ path: aide.url }"

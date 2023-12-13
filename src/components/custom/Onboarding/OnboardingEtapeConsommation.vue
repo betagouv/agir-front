@@ -2,8 +2,10 @@
   <form @submit.prevent="submitEtapeConsommation">
     <BoutonRadio
       class="fr-mb-2w"
-      legende="Parmi ces choix, pour les objets du quotidien (vêtements, objets de décoration, éléctronique, etc.), vous êtes plutôt…"
+      legende="À quelle fréquence achetez-vous des objets du quotidien (vêtements, objets de décoration, électronique, etc.) ?"
       name="consommation"
+      legende-size="l"
+      orientation="vertical"
       :options="options"
       col=""
       v-model="viewModel.consommation"
@@ -24,13 +26,10 @@
 
   const onBoardingStore = onboardingStore();
   const options = [
-    { label: "J'achète raisonnablement selon mes besoins et me fais plaisir de temps en temps", value: 'raisonnable' },
-    { label: "Je chine : l'essentiel de mes achats, c'est de la seconde main", value: 'secondemain' },
-    {
-      label: "J'adore le shopping : Il me faut absolument le dernier téléphone qui vient de sortir",
-      value: 'shopping',
-    },
-    { label: "Je n'achète presque jamais et rarement neuf", value: 'jamais' },
+    { label: 'Je n’achète presque jamais et rarement neuf', value: 'jamais' },
+    { label: 'J’achète essentiellement des produits de seconde main', value: 'secondemain' },
+    { label: 'J’achète raisonnablement des produits neufs', value: 'raisonnable' },
+    { label: 'J’achète fréquemment des produits neufs', value: 'shopping' },
   ];
 
   const viewModel = ref<{

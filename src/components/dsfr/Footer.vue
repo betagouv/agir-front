@@ -3,13 +3,13 @@
     <div class="fr-container">
       <div class="fr-footer__body">
         <div class="fr-footer__brand fr-enlarge-link">
-          <a href="/dashboard" title="Retour à l’accueil du site">
+          <router-link to="/coach" title="Retour à l’accueil du site">
             <p class="fr-logo">
               République
               <br />
               française
             </p>
-          </a>
+          </router-link>
         </div>
         <div class="fr-footer__content">
           <ul class="fr-footer__content-list">

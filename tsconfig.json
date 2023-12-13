@@ -25,7 +25,8 @@
       "@/*": ["./src/*"]
     },
     "esModuleInterop": true,
-    "types": ["vitest/globals"]
+    "types": ["vitest/globals"],
+    "experimentalDecorators": true,
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "tests/components/*.ts", "tests/*/*.ts"],
   "exclude": [

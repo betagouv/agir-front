@@ -6,8 +6,11 @@ export interface CompteUtlisateurViewModel {
   id: string;
   mail: string;
   codePostal: string;
+  commune: string;
   prenom: string;
-  revenuFiscal: string;
+  revenuFiscal: number;
+  nombreDePartsFiscales: number;
+  abonnementTransport: boolean;
 }
 export class CompteUtilisateurPresenterImpl implements CompteUtilisateurPresenter {
   private _compteUtlisateurViewModel: (viewModel: CompteUtlisateurViewModel) => void;
@@ -22,8 +25,11 @@ export class CompteUtilisateurPresenterImpl implements CompteUtilisateurPresente
       id: compteUtilisateur.id,
       mail: compteUtilisateur.mail,
       codePostal: compteUtilisateur.codePostal,
+      commune: compteUtilisateur.commune,
+      abonnementTransport: compteUtilisateur.abonnementTransport,
       prenom: compteUtilisateur.prenom,
-      revenuFiscal: compteUtilisateur.revenuFiscal ? compteUtilisateur.revenuFiscal.toString() : '',
+      revenuFiscal: compteUtilisateur.revenuFiscal || 0,
+      nombreDePartsFiscales: compteUtilisateur.nombreDePartsFiscales,
     });
   }
 }

@@ -55,6 +55,14 @@ h3 {
   flex-grow: 1;
 }
 
+.flex-space-between {
+  justify-content: space-between;
+}
+
+.flex-center {
+  justify-content: center;
+}
+
 .display-block {
   display: block;
 }
@@ -75,12 +83,28 @@ h3 {
   color: #fff;
 }
 
+.text--black {
+  color: #000;
+}
+
 .text--bleu {
   color: var(--blue-france-sun-113-625);
 }
 
 .text--gris {
   color: var(--text-default-grey);
+}
+
+.text-disabled-grey {
+  color: var(--text-disabled-grey);
+}
+
+.text--gris-dark {
+  color: var(--text-default-grey);
+}
+
+.text--success {
+  color: var(--success-425-625);
 }
 
 .text--rouge-erreur {
@@ -115,8 +139,20 @@ h3 {
   font-size: 2.5rem;
 }
 
+.text--normal {
+  font-weight: 400;
+}
+
 .text--bold {
   font-weight: 700;
+}
+
+.text--underline {
+  text-decoration: underline;
+}
+
+.text--uppercase {
+  text-transform: uppercase;
 }
 
 .background-bleu {
@@ -147,6 +183,10 @@ h3 {
   background-color: var(--background-alt-grey-hover);
 }
 
+.background-color--gris-image {
+  background-color: #eeeeee;
+}
+
 .background--white {
   background-color: #fff;
 }
@@ -157,6 +197,10 @@ h3 {
 
 .border {
   border: 1px solid rgba(0, 0, 0, 0.19);
+}
+
+.border--white {
+  border: 1px solid #fff;
 }
 
 .border--bleu {
@@ -185,4 +229,20 @@ h3 {
 
 .shadow {
   box-shadow: 0 6px 18px 0 rgba(0, 0, 18, 0.16);
+}
+
+.cms__content ul p {
+  margin-bottom: 0;
+}
+
+.text--lh-0 {
+  line-height: 0 !important;
+}
+
+.text--lh-1 {
+  line-height: 1 !important;
+}
+
+.align-items--end {
+  align-items: flex-end;
 }

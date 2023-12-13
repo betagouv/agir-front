@@ -1,41 +1,55 @@
 <template>
-  <div class="fr-grid-row fr-grid-row--gutters fr-grid-row--middle fr-mx-0">
+  <div class="fr-grid-row fr-grid-row--middle fr-mx-0">
     <input
-      class="fr-input fr-col"
+      :class="inputSize()"
+      class="fr-input fr-mr-1w"
       pattern="[0-9]*"
       inputmode="numeric"
       type="number"
       :id="name"
       :name="name"
       @input="updateValue"
-      min="0"
+      :min="minValue"
       :value="defaultValue"
     />
-    <label class="fr-label fr-col" :for="name">
+    <label :class="inputSize()" class="fr-label" :for="name">
       {{ label }}
     </label>
   </div>
 </template>
 
 <script setup lang="ts">
-  defineProps<{
+  const props = defineProps<{
     label: string;
     name: string;
-    defaultValue?: string;
+    minValue: number;
+    defaultValue?: number;
+    size?: 'sm' | 'md';
   }>();
 
+  const inputSize = () => {
+    switch (props.size) {
+      case 'sm':
+        return 'fr-col';
+      case 'md':
+        return 'fr-col-6';
+      default:
+        return 'fr-col';
+    }
+  };
+
   const emit = defineEmits<{
-    (e: 'update:modelValue', value: string): void;
+    (e: 'update:modelValue', value: number): void;
   }>();
 
   const updateValue = (event: Event) => {
     const inputElement = event.target as HTMLInputElement;
-    emit('update:modelValue', inputElement.value);
+    emit('update:modelValue', Number(inputElement.value));
   };
 </script>
 
 <style scoped>
   input {
-    max-width: 5rem;
+    max-width: 8rem;
   }
 </style>

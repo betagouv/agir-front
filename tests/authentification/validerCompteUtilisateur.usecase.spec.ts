@@ -11,9 +11,12 @@ class SpySessionRepository implements SessionRepository {
     id: '',
     nom: '',
     codePostal: '',
+    commune: '',
     prenom: '',
     mail: '',
     revenuFiscal: null,
+    nombreDePartsFiscales: 1,
+    abonnementTransport: false,
   };
 
   sauvegarderUtilisateur(utilisateur: Utilisateur) {
@@ -35,9 +38,12 @@ class SpyValiderCompteUtilisateurRepository implements UtilisateurRepository {
       id: '',
       nom: '',
       codePostal: '',
+      commune: '',
       prenom: '',
       mail: email,
       revenuFiscal: null,
+      nombreDePartsFiscales: 1,
+      abonnementTransport: false,
     });
   }
 
@@ -64,13 +70,16 @@ describe('Fichier de tests concernant la validation du compte utilisateur', () =
     );
     await usecase.execute('john@exemple.com', '123456');
     // THEN
-    expect(spySessionRepository.utilisateur).toEqual({
+    expect(spySessionRepository.utilisateur).toStrictEqual<Utilisateur>({
       id: '',
       nom: '',
       codePostal: '',
+      commune: '',
       prenom: '',
       mail: 'john@exemple.com',
       revenuFiscal: null,
+      nombreDePartsFiscales: 1,
+      abonnementTransport: false,
     });
   });
 });

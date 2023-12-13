@@ -7,8 +7,11 @@ interface UtilisateurApiModel {
   nom: string;
   id: string;
   code_postal: string;
+  commune: string;
   email: string;
   revenu_fiscal: number | null;
+  nombre_de_parts_fiscales: number;
+  abonnement_transport: boolean;
 }
 
 interface LoginApiModel {
@@ -29,9 +32,13 @@ export class UtilisateurRepositoryAxios implements UtilisateurRepository {
       nom: response.data.utilisateur.nom,
       id: response.data.utilisateur.id,
       codePostal: response.data.utilisateur.code_postal || '',
+      commune: response.data.utilisateur.commune || '',
       prenom: response.data.utilisateur.prenom || '',
       mail: response.data.utilisateur.email,
+      abonnementTransport: response.data.utilisateur.abonnement_transport,
+
       revenuFiscal: response.data.utilisateur.revenu_fiscal,
+      nombreDePartsFiscales: response.data.utilisateur.nombre_de_parts_fiscales,
     };
   }
 
@@ -48,9 +55,12 @@ export class UtilisateurRepositoryAxios implements UtilisateurRepository {
       nom: response.data.nom,
       id: response.data.id,
       codePostal: response.data.code_postal,
+      commune: response.data.commune,
       prenom: response.data.prenom,
       mail: response.data.email,
       revenuFiscal: response.data.revenu_fiscal,
+      nombreDePartsFiscales: response.data.nombre_de_parts_fiscales,
+      abonnementTransport: response.data.abonnement_transport,
     };
   }
 
@@ -68,8 +78,11 @@ export class UtilisateurRepositoryAxios implements UtilisateurRepository {
       id: response.data.utilisateur.id,
       mail: response.data.utilisateur.email || '',
       codePostal: response.data.utilisateur.code_postal || '',
+      commune: response.data.utilisateur.commune || '',
       prenom: response.data.utilisateur.prenom || '',
       revenuFiscal: response.data.utilisateur.revenu_fiscal,
+      nombreDePartsFiscales: response.data.utilisateur.nombre_de_parts_fiscales,
+      abonnementTransport: response.data.utilisateur.abonnement_transport,
     };
   }
 

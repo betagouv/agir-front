@@ -8,7 +8,7 @@ import PageAidesVelo from '@/components/pages/PageAidesVelo.vue';
 import Coach from '@/components/Coach.vue';
 import PageAides from '@/components/pages/PageAides.vue';
 import Page404 from '@/components/pages/Page404.vue';
-import SuiviDuJour from '@/components/SuiviDuJour.vue';
+import PageSuiviDuJour from '@/components/pages/PageSuiviDuJour.vue';
 import { storeIdNGC } from '@/bilan/middleware/pendingSimulation';
 import FranceConnectCallBack from '@/components/FranceConnectCallBack.vue';
 import PageCompte from '@/components/pages/PageCompte.vue';
@@ -26,6 +26,9 @@ import PageSessionExpiree from '@/components/pages/PageSessionExpiree.vue';
 import PageValidationCompte from '@/components/pages/PageValidationCompte.vue';
 import PageMotDePasseOublie from '@/components/pages/PageMotDePasseOublie.vue';
 import PageMotDePasseOublieRedefinirMotDePasse from '@/components/pages/PageMotDePasseOublieRedefinirMotDePasse.vue';
+import PageCatalogueServices from '@/components/pages/PageCatalogueServices.vue';
+import AidesVeloFormulaire from '@/components/pages/PageAidesVeloFormulaire.vue';
+import PageAidesRetrofitFormulaire from '@/components/pages/PageAidesRetrofitFormulaire.vue';
 
 const appName = 'Agir ! -';
 const routes = [
@@ -83,46 +86,89 @@ const routes = [
   },
   { path: '/mon-tableau-de-bord', name: 'dashboard', component: Dashboard },
   {
-    path: '/coach/quiz/',
+    path: '/coach',
     children: [
       {
-        path: ':id',
-        name: 'quiz',
-        component: PageQuiz,
+        path: '/coach',
+        name: 'coach',
+        component: Coach,
         meta: {
-          title: `${appName} Quiz`,
+          title: `${appName} Coach`,
         },
       },
       {
-        path: 'previsualisation/:id',
-        name: 'quiz-previsualisation',
-        component: PagePrevisualisationQuiz,
+        path: 'services',
+        name: 'services',
+        component: PageCatalogueServices,
         meta: {
-          title: `${appName} Quiz`,
-          estPublique: true,
+          title: `${appName} Catalogue de services`,
         },
+      },
+      {
+        path: 'suivi-du-jour',
+        name: 'suivi-du-jour',
+        component: PageSuiviDuJour,
+        meta: {
+          title: `${appName} Suivi du jour`,
+        },
+      },
+      {
+        path: 'quiz',
+        children: [
+          {
+            path: ':id',
+            name: 'quiz',
+            component: PageQuiz,
+            meta: {
+              title: `${appName} Quiz`,
+            },
+          },
+          {
+            path: 'previsualisation/:id',
+            name: 'quiz-previsualisation',
+            component: PagePrevisualisationQuiz,
+            meta: {
+              title: `${appName} Quiz`,
+              estPublique: true,
+            },
+          },
+        ],
       },
     ],
   },
   {
-    path: '/coach',
-    name: 'coach',
-    component: Coach,
-    meta: {
-      title: `${appName} Coach`,
-    },
+    path: '/vos-aides',
+    children: [
+      {
+        path: '/vos-aides',
+        name: 'mes-aides',
+        component: PageAides,
+        meta: {
+          title: `${appName} Vos aides`,
+        },
+      },
+      {
+        path: '/mes-aides/retrofit',
+        name: 'mes-aides-retrofit',
+        component: PageAidesRetrofit,
+      },
+      {
+        path: '/mes-aides/retrofit/formulaire',
+        name: 'mes-aides-retrofit-formulaire',
+        component: PageAidesRetrofitFormulaire,
+      },
+      {
+        path: '/mes-aides/velo',
+        name: 'mes-aides-velo',
+        component: PageAidesVelo,
+      },
+      {
+        path: '/mes-aides/velo/formulaire',
+        name: 'mes-aides-velo-formulaire',
+        component: AidesVeloFormulaire,
+      },
+    ],
   },
-  {
-    path: '/coach/suivi-du-jour',
-    name: 'suivi-du-jour',
-    component: SuiviDuJour,
-    meta: {
-      title: `${appName} Suivi du jour`,
-    },
-  },
-  { path: '/mes-aides', name: 'mes-aides', component: PageAides },
-  { path: '/mes-aides/retrofit', name: 'mes-aides-retrofit', component: PageAidesRetrofit },
-  { path: '/mes-aides/velo', name: 'mes-aides-velo', component: PageAidesVelo },
   {
     path: '/login-callback',
     name: 'retour-auth-france-connect',
@@ -139,7 +185,15 @@ const routes = [
         path: ':titre',
         component: PageArticle,
         meta: { estPublique: false },
+        children: [
+          {
+            path: '::id',
+            component: PageArticle,
+            meta: { estPublique: false },
+          },
+        ],
       },
+
       {
         path: 'previsualisation/:id',
         component: PagePrevisualisationArticle,

@@ -3,15 +3,15 @@
     <h2 class="fr-h5">{{ titreDuGraphique }}</h2>
     <LineChart :chartData="getDonneesDuGraph()" :options="getOptionsDuGraph()" />
     <div class="fr-grid-row fr-grid-row--center fr-grid-row--middle fr-mt-2w">
-      <span class="fr-text--sm fr-mb-0">Votre moyenne</span>
+      <span class="fr-text--sm fr-mb-0">{{ titreVariationDesSuivis }}</span>
       <div class="legende-graphique legende-graphique--blue"></div>
-      <div class="fr-text--sm fr-mb-0">{{ titreVariationDesSuivis }}</div>
+      <div class="fr-text--sm fr-mb-0">Votre moyenne</div>
       <div class="legende-graphique legende-graphique--dashed"></div>
     </div>
   </div>
   <Transcription
     id="transcription-graphique-evolution-impact-carbone"
-    titre="Transcription du graphique évolution de votre impact carbone"
+    titre="Transcription du graphique évolution de votre impact du jour (kg de CO2-e)"
   >
     <Tableau
       :titre="titreDuGraphique"
@@ -27,7 +27,7 @@
   import Transcription from './dsfr/Transcription.vue';
   import Tableau from './dsfr/Table.vue';
 
-  const titreDuGraphique = 'Évolution de votre impact carbone';
+  const titreDuGraphique = 'Impact du jour (kg de CO2-e)';
   const titreVariationDesSuivis = 'Variation des suivis';
 
   Chart.register(...registerables);
@@ -85,8 +85,8 @@
     };
   };
 
-  const getDonneesDuTableau = (tableau1: (string | number)[], tableau2: (string | number)[]): (string | number)[][] => {
-    const tableauCombiné = tableau1.map((value, index) => [value, tableau2[index]]);
+  const getDonneesDuTableau = (tableau1: (string | number)[], tableau2: number[]): (string | number)[][] => {
+    const tableauCombiné = tableau1.map((value, index) => [value, tableau2[index].toFixed(1)]);
 
     return tableauCombiné;
   };

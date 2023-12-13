@@ -12,8 +12,11 @@ interface CompteUtilisateurApiModel {
   nom: string;
   email: string;
   code_postal: string;
+  commune: string;
   prenom: string;
   revenu_fiscal: number | null;
+  nombre_de_parts_fiscales: number;
+  abonnement_ter_loire: boolean;
 }
 export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurRepository {
   @intercept401()
@@ -26,7 +29,10 @@ export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurReposit
       mail: response.data.email || '',
       codePostal: response.data.code_postal || '',
       prenom: response.data.prenom || '',
+      commune: response.data.commune || '',
       revenuFiscal: response.data.revenu_fiscal,
+      nombreDePartsFiscales: response.data.nombre_de_parts_fiscales,
+      abonnementTransport: response.data.abonnement_ter_loire,
     };
   }
 
@@ -38,7 +44,10 @@ export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurReposit
       prenom: compteUtilisateur.prenom,
       email: compteUtilisateur.mail,
       code_postal: compteUtilisateur.codePostal,
+      commune: compteUtilisateur.commune,
       revenu_fiscal: compteUtilisateur.revenuFiscal,
+      nombre_de_parts_fiscales: compteUtilisateur.nombreDePartsFiscales,
+      abonnement_ter_loire: compteUtilisateur.abonnementTransport,
     });
   }
 
@@ -49,7 +58,20 @@ export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurReposit
       prenom: compteUtilisateurACreer.prenom,
       email: compteUtilisateurACreer.email,
       mot_de_passe: compteUtilisateurACreer.motDePasse,
-      onboardingData: compteUtilisateurACreer.onboarding,
+      onboardingData: {
+        transports: compteUtilisateurACreer.onboarding.etapeTransport.transports,
+        avion: compteUtilisateurACreer.onboarding.etapeTransport.avion,
+        code_postal: compteUtilisateurACreer.onboarding.etapeLogement.code_postal,
+        commune: compteUtilisateurACreer.onboarding.etapeLogement.commune,
+        adultes: compteUtilisateurACreer.onboarding.etapeLogement.adultes,
+        enfants: compteUtilisateurACreer.onboarding.etapeLogement.enfants,
+        residence: compteUtilisateurACreer.onboarding.etapeLogement.residence,
+        proprietaire: compteUtilisateurACreer.onboarding.etapeLogement.proprietaire,
+        superficie: compteUtilisateurACreer.onboarding.etapeLogement.superficie,
+        chauffage: compteUtilisateurACreer.onboarding.etapeLogement.chauffage,
+        repas: compteUtilisateurACreer.onboarding.etapeAlimentation.repas,
+        consommation: compteUtilisateurACreer.onboarding.etapeConsommation.consommation,
+      },
     });
     return {
       mail: response.data.email || '',

@@ -18,10 +18,13 @@ class UtilisateurRepositoryForTest implements UtilisateurRepository {
     return Promise.resolve({
       id: '4df5cd01-ae3e-46fa-99d4-9c18f696b6ba',
       nom: 'DUBOIS',
-      codePostal: '75000',
+      codePostal: '75001',
+      commune: 'PARIS 01',
       prenom: 'John',
       mail: '',
       revenuFiscal: null,
+      nombreDePartsFiscales: 1,
+      abonnementTransport: false,
     });
   }
 
@@ -51,9 +54,12 @@ class SpySessionRepository implements SessionRepository {
     id: '',
     nom: '',
     codePostal: '',
+    commune: '',
     prenom: '',
     mail: '',
     revenuFiscal: null,
+    nombreDePartsFiscales: 1,
+    abonnementTransport: false,
   };
 
   sauvegarderUtilisateur(utilisateur: Utilisateur) {
@@ -76,10 +82,13 @@ describe("Fichier de tests concernant l'authentification France Connect", () => 
     expect(spySessionRepository.utilisateur).toStrictEqual<Utilisateur>({
       id: '4df5cd01-ae3e-46fa-99d4-9c18f696b6ba',
       nom: 'DUBOIS',
-      codePostal: '75000',
+      codePostal: '75001',
+      commune: 'PARIS 01',
       prenom: 'John',
       mail: '',
       revenuFiscal: null,
+      nombreDePartsFiscales: 1,
+      abonnementTransport: false,
     });
   });
 });

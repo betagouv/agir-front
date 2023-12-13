@@ -2,13 +2,12 @@
   <div class="fr-container fr-py-6w">
     <h1>Quelques questions pour apprendre à se connaître</h1>
     <div class="fr-grid-row fr-grid-row--gutters">
-      <div class="fr-col-lg-9 fr-col-12">
+      <div class="fr-col-lg-8 fr-col-12">
         <div class="background--white border border-radius--md fr-p-3w">
           <IndicateurDEtapes
             :etape-courante="etapeCourante + 1"
             :etape-total="etapesOnboarding.length"
             :titre-etape="etapesOnboarding[etapeCourante]"
-            :titre-etape-suivante="etapesOnboarding[etapeCourante + 1]"
           />
           <OnboardingEtapeTransport v-if="etapeCourante === 0" @submitEtape="submitEtape" />
           <OnboardingEtapeLogement
@@ -28,7 +27,7 @@
           />
         </div>
       </div>
-      <div class="fr-col-lg-3 fr-col-12">
+      <div class="fr-col-lg-4 fr-col-12">
         <AsideOnboardingEtapeTransport v-if="etapeCourante === 0" />
         <AsideOnboardingEtapeLogement v-if="etapeCourante === 1" />
         <AsideOnboardingEtapeAlimentation v-if="etapeCourante === 2" />
@@ -51,7 +50,7 @@
   import AsideOnboardingEtapeConsommation from '@/components/custom/Onboarding/AsideOnboardingEtapeConsommation.vue';
 
   const etapeCourante = ref<number>(0);
-  const etapesOnboarding = ['Transports', 'Logement', 'Alimentation', 'Consommation'];
+  const etapesOnboarding = ['🚗 Transports', '🏠 Logement', '🥦 Alimentation', '🛒 Consommation'];
 
   const submitEtape = () => {
     window.scrollTo(0, 0);

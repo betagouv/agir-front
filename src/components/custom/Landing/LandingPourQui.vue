@@ -1,5 +1,5 @@
 <template>
-  <h2 class="text--white">À qui ça s’adresse ?</h2>
+  <h2 class="fr-h2 text--white">À qui ça s’adresse ?</h2>
   <div class="fr-grid-row fr-grid-row--gutters">
     <div class="fr-col-md-3 fr-col-12 text--center" v-for="personna in personnas" :key="personna.text">
       <img :src="personna.imageUrl" class="border-radius--full fr-mb-2w" alt="" />

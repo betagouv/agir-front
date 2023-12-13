@@ -3,22 +3,28 @@
   <div v-show="!simulationAidesViewModel">
     <slot name="formulaire"></slot>
   </div>
-  <div v-if="simulationAidesViewModel" class="fr-grid-row fr-grid-row--gutters">
+  <div class="fr-grid-row fr-grid-row--gutters">
     <div class="fr-col-lg-4 fr-col-12">
       <slot name="asideResultatAides"></slot>
     </div>
     <div class="fr-col-lg-8 fr-col-12">
-      <div class="background--white border border-radius--md fr-p-3w">
+      <div v-if="!isLoading" class="background--white border border-radius--md fr-p-3w">
         <h2 class="fr-h4">{{ sousTitre }}</h2>
         <div v-for="(aides, index) in simulationAidesViewModel" :key="index">
-          <Accordeon v-if="aides.length" :nameId="`aides-${index}`">
-            <template v-slot:titre>{{ titreCategorieAide }} {{ index }}</template>
+          <Accordeon v-if="aides.aides.length" :nameId="`aides-${index}`">
+            <template v-slot:titre>
+              <div class="fr-grid-row flex-space-between full-width fr-pr-4w">
+                <span>{{ aides.titre }}</span>
+                <span class="fr-ml-4w text--normal text--black-light">
+                  Éligible à <span class="text--bold">{{ aides.montantTotal }} €</span>
+                </span>
+              </div>
+            </template>
             <template v-slot:contenu>
               <ul class="list-style-none fr-m-0 fr-p-0">
-                <li v-for="(aide, index) in aides" :key="index">
+                <li v-for="(aide, index) in aides.aides" :key="index">
                   <AidesDetail
                     :titre="aide.libelle"
-                    label-du-badge="A définir"
                     :description="aide.description"
                     :url-externe="aide.lien"
                     :valeur-aide="aide.montant"
@@ -30,6 +36,7 @@
           </Accordeon>
         </div>
       </div>
+      <CarteSkeleton v-else />
     </div>
   </div>
 </template>
@@ -38,10 +45,12 @@
   import Accordeon from '@/components/custom/Accordeon.vue';
   import AidesDetail from '@/components/custom/Aides/AidesDetail.vue';
   import { SimulationAideResultatViewModel } from '@/aides/ports/simulationAideResultat';
+  import CarteSkeleton from '@/components/CarteSkeleton.vue';
   defineProps<{
+    isLoading: boolean;
     titre: string;
     sousTitre: string;
-    simulationAidesViewModel: SimulationAideResultatViewModel | null;
+    simulationAidesViewModel: SimulationAideResultatViewModel[] | null;
     titreCategorieAide: string;
   }>();
 </script>

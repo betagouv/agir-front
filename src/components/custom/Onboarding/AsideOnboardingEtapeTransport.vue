@@ -8,7 +8,7 @@
     <p class="fr-text--sm">
       Par exemple, ils représentent 27% des émissions de gaz à effet de serre d’un français moyen.
     </p>
-    <span class="text--xs">Source: carbone 4</span>
+    <span class="text--xs">Source : carbone 4</span>
   </CarteInfo>
   <div class="background-color--gris-image border border-radius--md fr-p-2w">
     <p class="fr-text--bold">
@@ -27,30 +27,21 @@
       *kg CO2e : kilogramme d’équivalent dioxyde de carbone (masse de tous les gaz à effet de serre rapportée au dioxyde
       de carbone)
     </p>
-    <a
-      href="https://impactco2.fr/"
-      target="_blank"
-      rel="noopener"
-      title="Site impact CO2 - ouvre une nouvelle fenêtre"
-      class="lien-impact-co2 fr-text--sm fr-mb-0"
-    >
-      Propulsé par
-      <img src="/logo_impact_CO2.png" alt="impact CO2" class="fr-ml-1v" />
-    </a>
+    <span class="text--xs">
+      Source :
+      <a
+        href="https://impactco2.fr/"
+        target="_blank"
+        rel="noopener"
+        title="Site impact CO2 - ouvre une nouvelle fenêtre"
+        class="fr-mb-0"
+      >
+        Impact CO2
+      </a>
+    </span>
   </div>
 </template>
 
 <script setup lang="ts">
   import CarteInfo from '@/components/custom/CarteInfo.vue';
 </script>
-
-<style scoped>
-  .background-color--gris-image {
-    background-color: #eeeeee;
-  }
-
-  .lien-impact-co2 {
-    display: inline-flex;
-    align-items: center;
-  }
-</style>

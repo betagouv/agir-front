@@ -1,13 +1,12 @@
 import { Utilisateur } from '@/authentification/ports/utilisateur.repository';
 import { EmpreinteViewModel } from '@/bilan/adapters/chargementEmpreinte.presenter.impl';
-import { InteractionViewModel } from '@/interactions/adapters/interactions.presenter.impl';
 import { defineStore } from 'pinia';
+import { ScoreViewModel } from '@/score/ports/chargementScore.presenter';
 
 interface State {
   utilisateur: Utilisateur;
   valeurBilanCarbone: EmpreinteViewModel;
-  interactionEnCours: InteractionViewModel | null;
-  score: number;
+  score: ScoreViewModel;
 }
 
 export const utilisateurStore = defineStore('utilisateur', {
@@ -16,17 +15,25 @@ export const utilisateurStore = defineStore('utilisateur', {
       id: '',
       nom: '',
       codePostal: '',
+      commune: '',
       prenom: '',
       mail: '',
       revenuFiscal: null,
+      nombreDePartsFiscales: 1,
+      abonnementTransport: false,
     },
     valeurBilanCarbone: {
       bilan: '',
       details: [],
       valeurMax: 0,
     },
-    interactionEnCours: null,
-    score: 0,
+    score: {
+      points: 0,
+      niveau: 0,
+      nombreDePointsDansLeNiveau: 0,
+      nombreDePointsDuNiveau: 0,
+      celebration: null,
+    },
   }),
   actions: {
     setUtilisateur(utilisateur: Utilisateur) {
@@ -35,11 +42,8 @@ export const utilisateurStore = defineStore('utilisateur', {
     setValeurBilanCarbone(valeurBilanCarbone: EmpreinteViewModel) {
       this.valeurBilanCarbone = valeurBilanCarbone;
     },
-    setInteractionEnCours(interactionEnCours: InteractionViewModel) {
-      this.interactionEnCours = interactionEnCours;
-    },
-    setScore(score: number) {
-      this.score = score;
+    setScore(scoreViewModel: ScoreViewModel) {
+      this.score = scoreViewModel;
     },
 
     reset() {

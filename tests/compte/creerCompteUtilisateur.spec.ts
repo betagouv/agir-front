@@ -12,9 +12,12 @@ class SessionRepositoryForTest implements SessionRepository {
     id: '',
     nom: '',
     codePostal: '',
+    commune: '',
     prenom: '',
     mail: '',
     revenuFiscal: null,
+    nombreDePartsFiscales: 1,
+    abonnementTransport: false,
   };
   sauvegarderUtilisateur(utilisateur: Utilisateur) {
     this._utilisateur = utilisateur;
@@ -28,8 +31,11 @@ class CompteUtilisateurForTest implements CompteUtilisateurRepository {
       nom: compteUtilisateurACreer.nom,
       mail: compteUtilisateurACreer.email,
       codePostal: '',
+      commune: '',
       prenom: compteUtilisateurACreer.prenom,
       revenuFiscal: null,
+      nombreDePartsFiscales: 1,
+      abonnementTransport: false,
     });
   }
 
@@ -68,6 +74,7 @@ describe('Fichier de tests concernant la creation du compte utilisateur', () => 
       },
       etapeLogement: {
         code_postal: '',
+        commune: '',
         adultes: 0,
         enfants: 0,
         residence: '',
@@ -95,9 +102,12 @@ describe('Fichier de tests concernant la creation du compte utilisateur', () => 
       id: '',
       nom: '',
       codePostal: '',
+      commune: '',
       prenom: '',
       mail: 'john@skynet.com',
       revenuFiscal: null,
+      nombreDePartsFiscales: 1,
+      abonnementTransport: false,
     });
   });
 });

@@ -7,9 +7,12 @@ class UtilisateurRepositoryForTest implements UtilisateurRepository {
       id: '1',
       nom: 'Doe',
       codePostal: '77650',
+      commune: 'NOM COMMUNE',
       prenom: 'John',
       mail: '',
       revenuFiscal: null,
+      nombreDePartsFiscales: 1,
+      abonnementTransport: false,
     });
   }
 
@@ -43,9 +46,12 @@ class SpySessionRepository implements SessionRepository {
     id: '',
     nom: '',
     codePostal: '',
+    commune: '',
     prenom: '',
     mail: '',
     revenuFiscal: null,
+    nombreDePartsFiscales: 1,
+    abonnementTransport: false,
   };
 
   sauvegarderUtilisateur(utilisateur: Utilisateur) {
@@ -65,9 +71,12 @@ describe("Fichier de tests concernant l'authentification ", () => {
       id: '1',
       nom: 'Doe',
       codePostal: '77650',
+      commune: 'NOM COMMUNE',
       prenom: 'John',
       mail: '',
       revenuFiscal: null,
+      nombreDePartsFiscales: 1,
+      abonnementTransport: false,
     });
   });
 });

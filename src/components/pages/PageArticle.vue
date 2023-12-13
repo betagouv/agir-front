@@ -1,31 +1,43 @@
 <template>
-  <PageArticleComposant :article="article">
-    <BilanNosGestesClimat :get-impact-value="store.valeurBilanCarbone" />
-  </PageArticleComposant>
+  <PageArticleComposant :article="articleAAfficher"> </PageArticleComposant>
 </template>
 <script setup lang="ts">
   import PageArticleComposant from '@/components/PageArticleComposant.vue';
-  import { utilisateurStore } from '@/store/utilisateur';
-  import { useRouter } from 'vue-router';
+  import { useRoute, useRouter } from 'vue-router';
   import { onMounted, ref } from 'vue';
-  import { ArticleCMS, ChargerContenuCms } from '@/cms/chargerContenuCms';
-  import BilanNosGestesClimat from '@/components/BilanNosGestesClimat.vue';
+  import { utilisateurStore } from '@/store/utilisateur';
+  import { interactionEnCoursStore } from '@/store/interaction';
+  import { Article, RecupererArticleUsecase } from '@/article/recupererArticle.usecase';
+  import { ArticleRepositoryAxios } from '@/article/adapters/article.repository.axios';
+  import { PasserUnArticleCommeLuUsecase } from '@/article/passerUnArticleCommeLu.usecase';
+  import { ToDoListEventBusImpl } from '@/toDoList/toDoListEventBusImpl';
 
-  const store = utilisateurStore();
+  const store = interactionEnCoursStore();
   const router = useRouter();
 
-  const article = ref<ArticleCMS>({
+  const articleAAfficher = ref<Article>({
     titre: '',
     texte: '',
     sousTitre: '',
   });
 
   onMounted(async () => {
-    const articleUsecase = await new ChargerContenuCms().charger(store.interactionEnCours!.idDuContenu);
-    if (articleUsecase) {
-      article.value = articleUsecase;
-    } else {
-      await router.push('/not-found');
-    }
+    const route = useRoute();
+    const idArticle = route.params.id ? route.params.id.toString() : store.interactionEnCours!.idDuContenu;
+    const articleRepositoryAxios = new ArticleRepositoryAxios();
+    new RecupererArticleUsecase(articleRepositoryAxios)
+      .execute(idArticle)
+      .then(async article => {
+        articleAAfficher.value = article;
+        if (!route.params.id) {
+          await new PasserUnArticleCommeLuUsecase(articleRepositoryAxios, ToDoListEventBusImpl.getInstance()).execute(
+            store.interactionEnCours!.id,
+            utilisateurStore().utilisateur.id
+          );
+        }
+      })
+      .catch(async () => {
+        await router.push('/not-found');
+      });
   });
 </script>
