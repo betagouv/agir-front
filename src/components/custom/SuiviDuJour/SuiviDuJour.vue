@@ -1,6 +1,6 @@
 <template>
   <div class="fr-grid-row fr-grid-row--gutters">
-    <div class="fr-col-12 fr-col-lg-8">
+    <div class="fr-col-12">
       <div class="border border-radius--md background--white">
         <div class="fr-p-4w">
           <h3 v-if="etapeCourante" class="fr-mx-n1w">{{ currentStepTitle }}</h3>
@@ -57,21 +57,11 @@
         </div>
       </div>
     </div>
-    <div class="fr-col-12 fr-col-lg-4">
-      <BilanNosGestesClimat class="fr-mb-3w" :get-impact-value="store.valeurBilanCarbone" />
-      <NombreDePointsDuJour v-if="etapeCourante === 3" class="fr-mb-3w" :nombre-de-points-du-jour="25" />
-      <ImpactDuJour
-        :consommation-du-jour="suiviDuJourResultatsViewModel.impactCarbonDuJour.valeur"
-        :equivalent-en-litres="'14'"
-      />
-    </div>
   </div>
 </template>
 
 <script setup lang="ts">
   import { computed, onMounted, ref } from 'vue';
-  import BilanNosGestesClimat from '@/components/BilanNosGestesClimat.vue';
-  import ImpactDuJour from '@/components/ImpactDuJour.vue';
   import SuiviDuJourResultats from '@/components/custom/SuiviDuJour/SuiviDuJourResultats.vue';
   import SuiviDuJourPremiereEtape from '@/components/custom/SuiviDuJour/SuiviDuJourPremiereEtape.vue';
   import SuiviDuJourSecondeEtape from '@/components/custom/SuiviDuJour/SuiviDuJourSecondeEtape.vue';
@@ -80,7 +70,6 @@
   import { SuiviDuJourRepositoryAxios } from '@/suivi/adapters/suiviDuJour.repository.axios';
   import { ObtenirDernierSuiviUsecase } from '@/suivi/obtenirDernierSuivi.usecase';
   import { DateTimeTypeScript } from '@/DateTime';
-  import NombreDePointsDuJour from '@/components/NombreDePointsDuJour.vue';
   import {
     DernierSuiviDuJourPresenterImpl,
     DernierSuiviDuJourViewModel,
