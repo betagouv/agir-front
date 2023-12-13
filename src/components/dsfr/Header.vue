@@ -66,7 +66,11 @@
                 Le coach
               </router-link>
             </li>
-            <li class="fr-nav__item" data-fr-js-navigation-item="true">
+            <li
+              v-if="utilisateurStore().utilisateur.fonctionnalitesDebloquees.includes(Fonctionnalites.AIDES)"
+              class="fr-nav__item"
+              data-fr-js-navigation-item="true"
+            >
               <router-link
                 class="fr-nav__link"
                 :to="{ name: 'mes-aides' }"
@@ -89,6 +93,7 @@
   import { utilisateurStore } from '@/store/utilisateur';
   import Cookies from 'js-cookie';
   import ScoreHeader from '@/components/custom/ScoreHeader.vue';
+  import { Fonctionnalites } from '@/shell/fonctionnalitesEnum';
 
   const route = useRoute();
   const store = utilisateurStore();

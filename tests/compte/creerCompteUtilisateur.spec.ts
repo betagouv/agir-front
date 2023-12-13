@@ -18,10 +18,13 @@ class SessionRepositoryForTest implements SessionRepository {
     revenuFiscal: null,
     nombreDePartsFiscales: 1,
     abonnementTransport: false,
+    fonctionnalitesDebloquees: [],
   };
   sauvegarderUtilisateur(utilisateur: Utilisateur) {
     this._utilisateur = utilisateur;
   }
+
+  nouvelleFeatureDebloquee(featureDebloquee: string): void {}
 }
 
 class CompteUtilisateurForTest implements CompteUtilisateurRepository {
@@ -108,6 +111,7 @@ describe('Fichier de tests concernant la creation du compte utilisateur', () => 
       revenuFiscal: null,
       nombreDePartsFiscales: 1,
       abonnementTransport: false,
+      fonctionnalitesDebloquees: [],
     });
   });
 });

@@ -103,6 +103,10 @@ h3 {
   color: var(--text-default-grey);
 }
 
+.text--gris-light {
+  color: var(--text-mention-grey);
+}
+
 .text--success {
   color: var(--success-425-625);
 }

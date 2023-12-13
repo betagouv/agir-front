@@ -21,6 +21,7 @@ export const utilisateurStore = defineStore('utilisateur', {
       revenuFiscal: null,
       nombreDePartsFiscales: 1,
       abonnementTransport: false,
+      fonctionnalitesDebloquees: [],
     },
     valeurBilanCarbone: {
       bilan: '',
