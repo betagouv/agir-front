@@ -67,6 +67,10 @@ h3 {
   display: block;
 }
 
+.width--auto {
+  width: auto;
+}
+
 .full-width {
   width: 100%;
 }
@@ -239,6 +243,12 @@ h3 {
   margin-bottom: 0;
 }
 
+.cms__content img {
+  max-width: 100%;
+  object-fit: contain;
+  height: auto;
+}
+
 .text--lh-0 {
   line-height: 0 !important;
 }
@@ -249,4 +259,8 @@ h3 {
 
 .align-items--end {
   align-items: flex-end;
+}
+
+.nowrap {
+  white-space: nowrap;
 }

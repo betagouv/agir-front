@@ -13,7 +13,7 @@
       :default-value="viewModel.avion"
       :min-value="0"
     />
-    <button class="fr-btn" :disabled="!(viewModel.transports.length > 0)">Continuer</button>
+    <button class="fr-btn fr-btn--lg" :disabled="!(viewModel.transports.length > 0)">Continuer</button>
   </form>
 </template>
 
