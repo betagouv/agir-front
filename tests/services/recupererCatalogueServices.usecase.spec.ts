@@ -20,6 +20,7 @@ class ServiceRepositoryMock implements ServiceRepository {
         nombreInstallation: 1,
         thematiques: ['thematique1', 'thematique3'],
         image: 'image',
+        estEnConstruction: false,
       },
       {
         id: 'id2',
@@ -31,6 +32,7 @@ class ServiceRepositoryMock implements ServiceRepository {
         nombreInstallation: 1,
         thematiques: ['thematique1', 'thematique2'],
         image: 'image',
+        estEnConstruction: false,
       },
     ]);
   }
@@ -71,6 +73,7 @@ describe('Fichier de tests concernant la recuperations des services dans le cata
             thematiques: ['thematique1', 'thematique3'],
             titre: 'titre',
             image: 'image',
+            estEnConstruction: false,
           },
           {
             description: 'description',
@@ -82,6 +85,7 @@ describe('Fichier de tests concernant la recuperations des services dans le cata
             thematiques: ['thematique1', 'thematique2'],
             titre: 'titre',
             image: 'image',
+            estEnConstruction: false,
           },
         ],
         filtreThematiques: ['thematique1', 'thematique2', 'thematique3'],

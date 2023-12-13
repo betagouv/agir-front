@@ -15,6 +15,7 @@ export interface ServiceCatalogueViewModelItem {
   nombreInstallation: string;
   thematiques: string[];
   image: string;
+  estEnConstruction: boolean;
 }
 export class ServiceCataloguePresenterImpl implements ServiceCataloguePresenter {
   constructor(private serviceCatelogueViewModels: (services: ServiceCatalogueViewModel) => void) {}
@@ -31,6 +32,7 @@ export class ServiceCataloguePresenterImpl implements ServiceCataloguePresenter 
         nombreInstallation: ` ${service.nombreInstallation} ont installé ce service`,
         thematiques: service.thematiques,
         image: service.image,
+        estEnConstruction: service.estEnConstruction,
       })),
       filtreThematiques: this.recupererLesThematiquesDeFaconUnique(services),
     });
