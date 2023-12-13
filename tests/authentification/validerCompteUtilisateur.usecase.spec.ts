@@ -38,6 +38,10 @@ class SpyValiderCompteUtilisateurRepository implements UtilisateurRepository {
   terminerRedefinirMotDePasse(email: string, motDePasse: string, code: string): Promise<void> {
     throw Error;
   }
+
+  recupererBilanOnboarding(utilisateurId: string): Promise<BilanOnboardingUtilisateur> {
+    throw Error;
+  }
 }
 describe('Fichier de tests concernant la validation du compte utilisateur', () => {
   it('En donnant un mail et un code doit valider le compte', async () => {

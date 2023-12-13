@@ -1,4 +1,8 @@
-import { Utilisateur, UtilisateurRepository } from '@/authentification/ports/utilisateur.repository';
+import {
+  BilanOnboardingUtilisateur,
+  Utilisateur,
+  UtilisateurRepository,
+} from '@/authentification/ports/utilisateur.repository';
 import { RenvoyerCoteOTPUsecase } from '@/authentification/renvoyerCoteOTPUsecase';
 
 class SpyUtilisateurRepository implements UtilisateurRepository {
@@ -28,6 +32,10 @@ class SpyUtilisateurRepository implements UtilisateurRepository {
   }
 
   terminerRedefinirMotDePasse(email: string, motDePasse: string, code: string): Promise<void> {
+    throw Error;
+  }
+
+  recupererBilanOnboarding(utilisateurId: string): Promise<BilanOnboardingUtilisateur> {
     throw Error;
   }
 }
