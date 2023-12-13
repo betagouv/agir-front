@@ -6,12 +6,12 @@
     </p>
     <p class="fr-text--sm">
       Votre alimentation participe à votre impact.<br />
-      Elle représente en moyenne 24% des émissions de gaz à effets de serre du Français moyen.
+      Elle représente en moyenne 24% des émissions de gaz à effets de serre de chaque Français.
     </p>
     <p class="fr-mb-0">
       <span class="text--xs text--bold">Source :</span>
       <a
-        href="https://www.carbone4.com/"
+        href="https://www.carbone4.com/analyse-myco2-empreinte-carbone-moyenne-2021"
         target="_blank"
         rel="noopener"
         class="fr-link text--xs"
@@ -34,7 +34,7 @@
     <p class="text--xs fr-mb-0">
       <span class="fr-text--bold">Source :</span>
       <a
-        href="https://impactco2.fr/"
+        href="https://impactco2.fr/repas"
         target="_blank"
         rel="noopener"
         title="Site impact CO2 - ouvre une nouvelle fenêtre"

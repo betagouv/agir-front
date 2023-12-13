@@ -20,7 +20,7 @@
         :min-value="1"
       />
       <InputNumberHorizontal
-        label="Enfant(s)"
+        label="Enfant(s) - moins de 18 ans"
         name="nombre-enfant"
         class="fr-mb-2w"
         v-model="viewModel.enfants"
@@ -73,7 +73,7 @@
       name="modeDeChauffage"
       :options="[
         { label: 'Électricité', value: 'electricite' },
-        { label: 'Bois / Pellet', value: 'bois' },
+        { label: 'Bois / Pellets', value: 'bois' },
         { label: 'Fioul', value: 'fioul' },
         { label: 'Gaz', value: 'gaz' },
         { label: 'Autre / Je ne sais pas', value: 'autre' },

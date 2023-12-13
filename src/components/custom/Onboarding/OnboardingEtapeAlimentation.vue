@@ -8,8 +8,8 @@
       orientation="vertical"
       :options="[
         { label: 'Aucun', value: 'vegan' },
-        { label: 'Entre 1 à 3 fois par semaine', value: 'vege' },
-        { label: 'Entre 4 à 6 fois par semaine', value: 'tout' },
+        { label: 'Entre 1 et 3 fois par semaine', value: 'vege' },
+        { label: 'Entre 4 et 6 fois par semaine', value: 'tout' },
         { label: 'Au moins 7 fois par semaine (au moins 1 repas sur 2)', value: 'viande' },
       ]"
       col=""

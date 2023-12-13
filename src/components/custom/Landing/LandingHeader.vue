@@ -8,7 +8,7 @@
       <div class="fr-grid fr-grid-row fr-grid-row--middle">
         <router-link
           :to="{ name: 'authentification' }"
-          class="fr-btn fr-btn--icon-left fr-icon-user-line fr-btn--lg fr-btn--secondary fr-mr-2w fr-mb-2w fr-mb-md-0"
+          class="fr-btn fr-btn--lg fr-btn--secondary fr-mr-2w fr-mb-2w fr-mb-md-0"
         >
           Se connecter
         </router-link>

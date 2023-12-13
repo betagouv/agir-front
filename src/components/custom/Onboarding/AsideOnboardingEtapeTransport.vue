@@ -6,12 +6,12 @@
     </p>
     <p class="fr-text--sm">Les transports sont un des principaux postes de notre empreinte écologique.</p>
     <p class="fr-text--sm">
-      Par exemple, ils représentent 27% des émissions de gaz à effet de serre d’un français moyen.
+      Par exemple, ils représentent en moyenne 27% des émissions de gaz à effet de serre de chaque Français.
     </p>
     <p class="fr-mb-0">
       <span class="text--xs text--bold">Source :</span>
       <a
-        href="https://www.carbone4.com/"
+        href="https://www.carbone4.com/analyse-myco2-empreinte-carbone-moyenne-2021"
         target="_blank"
         rel="noopener"
         class="fr-link text--xs"
@@ -42,7 +42,7 @@
     <span class="text--xs">
       Source :
       <a
-        href="https://impactco2.fr/"
+        href=" https://impactco2.fr/transport"
         target="_blank"
         rel="noopener"
         title="Site impact CO2 - ouvre une nouvelle fenêtre"
