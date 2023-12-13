@@ -30,6 +30,24 @@
           </ul>
         </div> -->
       </div>
+      <div class="fr-footer__partners">
+        <h4 class="fr-footer__partners-title">Nos partenaires</h4>
+        <div class="fr-footer__partners-logos">
+          <div class="fr-footer__partners-main">
+            <ul class="fr-grid-row fr-grid-row--gutters fr-grid-row--middle">
+              <li class="fr-col">
+                <img class="fr-footer__logo" src="/logo_ademe.png" alt="Agence de la transition écologique à Paris" />
+              </li>
+              <li class="fr-col">
+                <img class="fr-footer__logo" src="/logo_fnv.png" alt="France Nation Verte" />
+              </li>
+              <li class="fr-col">
+                <img class="fr-footer__logo" src="/logo-betagouvfr.svg" alt="Beta gouv" />
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
       <div class="fr-footer__bottom">
         <ul class="fr-footer__bottom-list">
           <!-- <li class="fr-footer__bottom-item">

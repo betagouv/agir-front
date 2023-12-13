@@ -243,6 +243,12 @@ h3 {
   margin-bottom: 0;
 }
 
+.cms__content img {
+  max-width: 100%;
+  object-fit: contain;
+  height: auto;
+}
+
 .text--lh-0 {
   line-height: 0 !important;
 }

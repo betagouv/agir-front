@@ -39,10 +39,4 @@
   .article {
     border: 1px solid rgba(0, 0, 0, 0.19);
   }
-
-  .article--content img {
-    max-width: 100%;
-    object-fit: contain;
-    height: auto;
-  }
 </style>
