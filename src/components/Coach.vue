@@ -30,7 +30,7 @@
       <CoachRecommandations
         v-if="
           recommandationsPersonnaliseesViewModel &&
-          store.utilisateur.fonctionnalitesDebloquees.includes('recommandations')
+          store.utilisateur.fonctionnalitesDebloquees.includes(Fonctionnalites.RECOMMANDATIONS)
         "
         :recommandations="recommandationsPersonnaliseesViewModel"
       />
@@ -71,6 +71,7 @@
   import { ToDoListPresenterImpl, TodoListViewModel } from '@/toDoList/adapters/toDoList.presenter.impl';
   import { RecupererToDoListUsecase } from '@/toDoList/recupererToDoList.usecase';
   import { ToDoListEvent, ToDoListEventBusImpl } from '@/toDoList/toDoListEventBusImpl';
+  import { Fonctionnalites } from '@/shell/fonctionnalitesEnum';
 
   const isLoading = ref<boolean>(true);
   const todoList = ref<TodoListViewModel>();

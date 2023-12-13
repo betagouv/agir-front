@@ -6,6 +6,7 @@
   import router from '@/router';
   import { utilisateurStore } from '@/store/utilisateur';
   import Services from '@/components/custom/Services.vue';
+  import { Fonctionnalites } from '@/shell/fonctionnalitesEnum';
 
   const utilisateurConnecte = computed(() => {
     return utilisateurStore().utilisateur.id.length > 0;
@@ -32,7 +33,10 @@
     <Header />
     <main class="background--gris">
       <Services
-        v-if="utilisateurConnecte && utilisateurStore().utilisateur.fonctionnalitesDebloquees.includes('services')"
+        v-if="
+          utilisateurConnecte &&
+          utilisateurStore().utilisateur.fonctionnalitesDebloquees.includes(Fonctionnalites.SERVICES)
+        "
       />
       <router-view />
     </main>

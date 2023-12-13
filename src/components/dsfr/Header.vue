@@ -67,7 +67,7 @@
               </router-link>
             </li>
             <li
-              v-if="utilisateurStore().utilisateur.fonctionnalitesDebloquees.includes('aides')"
+              v-if="utilisateurStore().utilisateur.fonctionnalitesDebloquees.includes(Fonctionnalites.AIDES)"
               class="fr-nav__item"
               data-fr-js-navigation-item="true"
             >
@@ -93,6 +93,7 @@
   import { utilisateurStore } from '@/store/utilisateur';
   import Cookies from 'js-cookie';
   import ScoreHeader from '@/components/custom/ScoreHeader.vue';
+  import { Fonctionnalites } from '@/shell/fonctionnalitesEnum';
 
   const route = useRoute();
   const store = utilisateurStore();
