@@ -13,7 +13,9 @@
       </div>
     </div>
     <div class="todo__boutonContainer">
-      <span class="text--uppercase fr-mb-0 fr-text--xs text-disabled-grey fr-text--bold">Objectif réalisé</span>
+      <span v-if="!pointAEteRecolte" class="text--uppercase fr-mb-0 fr-text--xs text-disabled-grey fr-text--bold"
+        >Objectif réalisé</span
+      >
       <button
         class="fr-btn fr-btn--secondary fr-text--md todo__bouton"
         @click="recupererPointsTodo"
