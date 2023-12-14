@@ -52,6 +52,6 @@ export const utilisateurStore = defineStore('utilisateur', {
     },
   },
   persist: {
-    storage: sessionStorage,
+    storage: localStorage,
   },
 });

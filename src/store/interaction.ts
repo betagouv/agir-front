@@ -24,6 +24,6 @@ export const interactionEnCoursStore = defineStore('interaction', {
     },
   },
   persist: {
-    storage: sessionStorage,
+    storage: localStorage,
   },
 });
