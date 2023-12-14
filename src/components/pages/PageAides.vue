@@ -13,6 +13,8 @@
   import ChargementAidesUsecase from '@/aides/chargementAides.usecase';
   import { AidesViewModel } from '@/aides/ports/chargementAides.presenter';
   import Aides from '@/components/custom/Aides/Aides.vue';
+  import { utilisateurStore } from '@/store/utilisateur';
+  import { PublierEvenemntRepositoryAxios } from '@/shell/adapters/publierEvenemnt.repository.axios';
 
   const aides = ref<AidesViewModel>();
   const isLoading = ref<boolean>(true);
@@ -22,9 +24,10 @@
   }
 
   onMounted(async () => {
-    await new ChargementAidesUsecase(new chargementAidesAxiosCmsRepository()).execute(
-      new ChargementAidesPresenterImpl(mapAides)
-    );
+    await new ChargementAidesUsecase(
+      new chargementAidesAxiosCmsRepository(),
+      new PublierEvenemntRepositoryAxios()
+    ).execute(utilisateurStore().utilisateur!.id, new ChargementAidesPresenterImpl(mapAides));
     isLoading.value = false;
   });
 </script>
