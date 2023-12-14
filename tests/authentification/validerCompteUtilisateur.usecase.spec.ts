@@ -1,31 +1,7 @@
 import { ValiderCompteUtilisateurUsecase } from '@/authentification/validerCompteUtilisateur.usecase';
 import { SessionRepository } from '@/authentification/authentifierUtilisateur.usecase';
 import { Utilisateur, UtilisateurRepository } from '@/authentification/ports/utilisateur.repository';
-
-class SpySessionRepository implements SessionRepository {
-  get utilisateur(): Utilisateur {
-    return this._utilisateur;
-  }
-
-  private _utilisateur: Utilisateur = {
-    id: '',
-    nom: '',
-    codePostal: '',
-    commune: '',
-    prenom: '',
-    mail: '',
-    revenuFiscal: null,
-    nombreDePartsFiscales: 1,
-    abonnementTransport: false,
-    fonctionnalitesDebloquees: [],
-  };
-
-  sauvegarderUtilisateur(utilisateur: Utilisateur) {
-    this._utilisateur = utilisateur;
-  }
-
-  nouvelleFeatureDebloquee(featureDebloquee: string): void {}
-}
+import { SpySauvegarderUtilisateurSessionRepository } from '../compte/sessionRepository.sauvegarderUtilisateur.spy';
 
 class SpyValiderCompteUtilisateurRepository implements UtilisateurRepository {
   authentifierUtilisateur(email: string, motDePasse: string): Promise<Utilisateur> {
@@ -67,7 +43,7 @@ describe('Fichier de tests concernant la validation du compte utilisateur', () =
   it('En donnant un mail et un code doit valider le compte', async () => {
     // GIVEN
     // WHEN
-    const spySessionRepository = new SpySessionRepository();
+    const spySessionRepository = new SpySauvegarderUtilisateurSessionRepository();
     const usecase = new ValiderCompteUtilisateurUsecase(
       new SpyValiderCompteUtilisateurRepository(),
       spySessionRepository

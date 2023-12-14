@@ -5,8 +5,8 @@ import {
   CompteUtilisateurRepository,
 } from '@/compte/ports/compteUtilisateur.repository';
 import { MettreAJourCompteUtilisateurUsecase } from '@/compte/mettreAJourCompteUtilisateur.usecase';
-import { SessionRepository } from '@/authentification/authentifierUtilisateur.usecase';
 import { Utilisateur } from '@/authentification/ports/utilisateur.repository';
+import { SpySauvegarderUtilisateurSessionRepository } from './sessionRepository.sauvegarderUtilisateur.spy';
 
 class SpyCompteUtilisateurRepository implements CompteUtilisateurRepository {
   get compteUtilisateur(): CompteUtilisateur {
@@ -29,6 +29,7 @@ class SpyCompteUtilisateurRepository implements CompteUtilisateurRepository {
     nombreDePartsFiscales: 0,
     commune: '',
     abonnementTransport: false,
+    fonctionnalitesDebloquees: [],
   };
 
   getCompteUtilisateur(idUtilisateur: string): Promise<CompteUtilisateur> {
@@ -52,24 +53,13 @@ class SpyCompteUtilisateurRepository implements CompteUtilisateurRepository {
     throw Error();
   }
 }
-class SpySessionRepository implements SessionRepository {
-  get utlisateur(): Utilisateur {
-    return this._utlisateur!;
-  }
-  private _utlisateur: Utilisateur | null = null;
-  sauvegarderUtilisateur(utilisateur: Utilisateur) {
-    this._utlisateur = utilisateur;
-  }
-
-  nouvelleFeatureDebloquee(featureDebloquee: string): void {}
-}
 
 describe('Fichier de tests concernant la mise à jour du compte utilisateur', () => {
   it('La mise à jour doit appeler le repository et mettre à jour la session', async () => {
     // GIVEN
     // WHEN
     const repository = new SpyCompteUtilisateurRepository();
-    const sessionRepository = new SpySessionRepository();
+    const sessionRepository = new SpySauvegarderUtilisateurSessionRepository();
     const usecase = new MettreAJourCompteUtilisateurUsecase(repository, sessionRepository);
     const viewModelInput: CompteUtlisateurViewModel = {
       id: '1',
@@ -96,8 +86,9 @@ describe('Fichier de tests concernant la mise à jour du compte utilisateur', ()
       revenuFiscal: 10000,
       nombreDePartsFiscales: 1,
       abonnementTransport: false,
+      fonctionnalitesDebloquees: [],
     });
-    expect(sessionRepository.utlisateur).toStrictEqual<Utilisateur>({
+    expect(sessionRepository.utilisateur).toStrictEqual<Utilisateur>({
       id: '1',
       nom: 'Dorian',
       mail: 'mail@exemple.com',

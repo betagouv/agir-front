@@ -1,31 +1,8 @@
 import { CreerCompteUtilisateurUsecase } from '@/compte/creerCompteUtilisateur.usecase';
-import { SessionRepository } from '@/authentification/authentifierUtilisateur.usecase';
 import { Utilisateur } from '@/authentification/ports/utilisateur.repository';
 import { CompteUtilisateur, CompteUtilisateurRepository } from '@/compte/ports/compteUtilisateur.repository';
 import { OnboardingState } from '@/onboarding/evaluerOnboarding.usecase';
-
-class SessionRepositoryForTest implements SessionRepository {
-  get utilisateur(): Utilisateur {
-    return this._utilisateur;
-  }
-  private _utilisateur: Utilisateur = {
-    id: '',
-    nom: '',
-    codePostal: '',
-    commune: '',
-    prenom: '',
-    mail: '',
-    revenuFiscal: null,
-    nombreDePartsFiscales: 1,
-    abonnementTransport: false,
-    fonctionnalitesDebloquees: [],
-  };
-  sauvegarderUtilisateur(utilisateur: Utilisateur) {
-    this._utilisateur = utilisateur;
-  }
-
-  nouvelleFeatureDebloquee(featureDebloquee: string): void {}
-}
+import { SpySauvegarderUtilisateurSessionRepository } from './sessionRepository.sauvegarderUtilisateur.spy';
 
 class CompteUtilisateurForTest implements CompteUtilisateurRepository {
   creerCompteUtilisateur(compteUtilisateurACreer): Promise<CompteUtilisateur> {
@@ -39,6 +16,7 @@ class CompteUtilisateurForTest implements CompteUtilisateurRepository {
       revenuFiscal: null,
       nombreDePartsFiscales: 1,
       abonnementTransport: false,
+      fonctionnalitesDebloquees: [],
     });
   }
 
@@ -95,7 +73,7 @@ describe('Fichier de tests concernant la creation du compte utilisateur', () => 
         done: true,
       },
     };
-    const sessionRepository = new SessionRepositoryForTest();
+    const sessionRepository = new SpySauvegarderUtilisateurSessionRepository();
     const compteUtilisateurRepository = new CompteUtilisateurForTest();
     // WHEN
     const usecase = new CreerCompteUtilisateurUsecase(compteUtilisateurRepository, sessionRepository);
