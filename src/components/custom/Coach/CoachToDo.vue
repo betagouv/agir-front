@@ -83,7 +83,9 @@
     if (props.todoList.aFaire.length > 0) {
       // eslint-disable-next-line no-console
       console.log('isDisableBonusFinDeToDo', true)
-      hotjar.event('debrief')
+      if(hotjar && Object.prototype.hasOwnProperty.call(hotjar, 'event')){
+        hotjar.event('debrief')
+      }
       
       return true;
     }
