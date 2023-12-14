@@ -3,10 +3,10 @@ root /app/dist;
 set $SCRIPT "script-src 'self' 'unsafe-inline' <%= ENV['VITE_CSP_SCRIPT'] %>";
 set $STYLE "style-src 'self' 'unsafe-inline'";
 set $IMG "img-src 'self' data: blob: <%= ENV['VITE_CSP_IMAGE'] %>";
-set $FONT "font-src 'self' data:";
+set $FONT "font-src 'self' data:  <%= ENV['VITE_CSP_FONT'] %>";
 set $DEFAULT "default-src 'self'";
 set $CONNECT "connect-src 'self' <%= ENV['VITE_CSP_CONNECT'] %>";
-set $FRAME "frame-src 'self' www.youtube.com";
+set $FRAME "frame-src 'self' <%= ENV['VITE_CSP_FRAME'] %>";
 
 location / {
   try_files $uri $uri/ /index.html =404;
