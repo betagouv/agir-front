@@ -252,6 +252,11 @@
   resolved "https://registry.yarnpkg.com/@gouvfr/dsfr/-/dsfr-1.10.2.tgz#364916777d6e2a54e991c9883d63516918759e20"
   integrity sha512-twPj+VFMTOKUfI9vbBnK8fH1iDpXuDVWeMJzgmmQ5LKjRtZdUsvSbHNlp7HWcDvhWxDGNHxSboErC7UB3oskYQ==
 
+"@hotjar/browser@^1.0.9":
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/@hotjar/browser/-/browser-1.0.9.tgz#769b4ded3fa7b9557b785c107f0cd76d3f83789a"
+  integrity sha512-n9akDMod8BLGpYEQCrHwlYWWd63c1HlhUSXNIDfClZtKYXbUjIUOFlNZNNcUxgHTCsi4l2i+SWKsGsO0t93S8w==
+
 "@humanwhocodes/config-array@^0.11.13":
   version "0.11.13"
   resolved "https://registry.yarnpkg.com/@humanwhocodes/config-array/-/config-array-0.11.13.tgz#075dc9684f40a531d9b26b0822153c1e832ee297"

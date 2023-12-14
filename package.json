@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@gouvfr/dsfr": "^1.10.2",
+    "@hotjar/browser": "^1.0.9",
     "@sentry/vue": "^7.81.1",
     "chart.js": "^4.3.0",
     "js-cookie": "^3.0.5",
