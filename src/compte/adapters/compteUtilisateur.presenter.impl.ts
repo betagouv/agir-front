@@ -31,7 +31,7 @@ export class CompteUtilisateurPresenterImpl implements CompteUtilisateurPresente
       prenom: compteUtilisateur.prenom,
       revenuFiscal: compteUtilisateur.revenuFiscal || 0,
       nombreDePartsFiscales: compteUtilisateur.nombreDePartsFiscales,
-      fonctionnalitesDebloquees: [],
+      fonctionnalitesDebloquees: compteUtilisateur.fonctionnalitesDebloquees,
     });
   }
 }

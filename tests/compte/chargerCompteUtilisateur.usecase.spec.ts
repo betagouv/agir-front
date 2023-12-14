@@ -8,36 +8,9 @@ import {
   CompteUtilisateurACreer,
   CompteUtilisateurRepository,
 } from '@/compte/ports/compteUtilisateur.repository';
-
-class ChargeCompteUtilisateurSansInfosOptionnellesRepository implements CompteUtilisateurRepository {
-  getCompteUtilisateur(idUtilisateur: string): Promise<CompteUtilisateur> {
-    return Promise.resolve({
-      nom: 'Doe',
-      id: '1',
-      mail: '',
-      codePostal: '',
-      prenom: 'John',
-      revenuFiscal: null,
-      commune: '',
-      nombreDePartsFiscales: 1,
-      abonnementTransport: false,
-    });
-  }
-
-  mettreAjour(compteUtilisateur: CompteUtilisateur) {}
-
-  creerCompteUtilisateur(compteUtilisateurACreer: CompteUtilisateurACreer): Promise<CompteUtilisateur> {
-    throw Error;
-  }
-
-  supprimerCompteUtilisateur(idUtilisateur: string): Promise<void> {
-    throw Error;
-  }
-
-  mettreAJourLeMotDePasse(idUtilisateur: string, nouveauMotDePasse: string): Promise<void> {
-    throw Error();
-  }
-}
+import { Utilisateur } from '@/authentification/ports/utilisateur.repository';
+import { expect } from 'vitest';
+import { SpySauvegarderUtilisateurSessionRepository } from './sessionRepository.sauvegarderUtilisateur.spy';
 
 class ChargeCompteUtilisateurAvecMailRepository implements CompteUtilisateurRepository {
   getCompteUtilisateur(idUtilisateur: string): Promise<CompteUtilisateur> {
@@ -51,6 +24,7 @@ class ChargeCompteUtilisateurAvecMailRepository implements CompteUtilisateurRepo
       revenuFiscal: null,
       nombreDePartsFiscales: 1,
       abonnementTransport: false,
+      fonctionnalitesDebloquees: [],
     });
   }
 
@@ -68,32 +42,16 @@ class ChargeCompteUtilisateurAvecMailRepository implements CompteUtilisateurRepo
     throw Error();
   }
 }
+
 describe('Fichier de tests concernant le chargement du compte utilisateur', () => {
-  it('Compte utilisateur sans email', async () => {
+  it("Doit aller chercher les infos à partir de l'utilisateurId et doit stocker le resultat en session", async () => {
     // GIVEN
+    const spySessionRepository = new SpySauvegarderUtilisateurSessionRepository();
     // WHEN
-    const usecase = new ChargerCompteUtilisateurUsecase(new ChargeCompteUtilisateurSansInfosOptionnellesRepository());
-    await usecase.execute('1', new CompteUtilisateurPresenterImpl(expectation));
-    // THEN
-    function expectation(compteUtilisateurViewModel: CompteUtlisateurViewModel) {
-      expect(compteUtilisateurViewModel).toStrictEqual<CompteUtlisateurViewModel>({
-        id: '1',
-        nom: 'Doe',
-        mail: '',
-        codePostal: '',
-        commune: '',
-        prenom: 'John',
-        revenuFiscal: 0,
-        nombreDePartsFiscales: 1,
-        abonnementTransport: false,
-        fonctionnalitesDebloquees: [],
-      });
-    }
-  });
-  it('Compte utilisateur avec email', async () => {
-    // GIVEN
-    // WHEN
-    const usecase = new ChargerCompteUtilisateurUsecase(new ChargeCompteUtilisateurAvecMailRepository());
+    const usecase = new ChargerCompteUtilisateurUsecase(
+      new ChargeCompteUtilisateurAvecMailRepository(),
+      spySessionRepository
+    );
     await usecase.execute('1', new CompteUtilisateurPresenterImpl(expectation));
     // THEN
     function expectation(compteUtilisateurViewModel: CompteUtlisateurViewModel) {
@@ -110,5 +68,17 @@ describe('Fichier de tests concernant le chargement du compte utilisateur', () =
         fonctionnalitesDebloquees: [],
       });
     }
+    expect(spySessionRepository.utilisateur).toStrictEqual<Utilisateur>({
+      id: '1',
+      nom: 'Doe',
+      mail: 'mail@exemple.com',
+      codePostal: '75001',
+      commune: 'PARIS 01',
+      prenom: 'John',
+      revenuFiscal: 0,
+      nombreDePartsFiscales: 1,
+      abonnementTransport: false,
+      fonctionnalitesDebloquees: [],
+    });
   });
 });

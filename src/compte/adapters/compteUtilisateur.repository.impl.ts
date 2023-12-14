@@ -17,6 +17,7 @@ interface CompteUtilisateurApiModel {
   revenu_fiscal: number | null;
   nombre_de_parts_fiscales: number;
   abonnement_ter_loire: boolean;
+  fonctionnalites_debloquees: string[];
 }
 export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurRepository {
   @intercept401()
@@ -33,6 +34,7 @@ export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurReposit
       revenuFiscal: response.data.revenu_fiscal,
       nombreDePartsFiscales: response.data.nombre_de_parts_fiscales,
       abonnementTransport: response.data.abonnement_ter_loire,
+      fonctionnalitesDebloquees: response.data.fonctionnalites_debloquees,
     };
   }
 

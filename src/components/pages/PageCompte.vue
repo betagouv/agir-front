@@ -37,6 +37,7 @@
   import PageCompteFormulaire from '@/components/custom/PageCompteFormulaire.vue';
   import PageCompteSuppression from '@/components/pages/PageCompteSuppression.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
+  import { SessionRepositoryStore } from '@/authentification/adapters/session.repository.store';
 
   const compteUtlisateurViewModel = ref<CompteUtlisateurViewModel | null>(null);
 
@@ -45,7 +46,10 @@
   }
 
   onMounted(async () => {
-    const usecase = new ChargerCompteUtilisateurUsecase(new CompteUtilisateurRepositoryImpl());
+    const usecase = new ChargerCompteUtilisateurUsecase(
+      new CompteUtilisateurRepositoryImpl(),
+      new SessionRepositoryStore()
+    );
     const store = utilisateurStore();
     const idUtilisateur = store.utilisateur.id;
     await usecase.execute(idUtilisateur, new CompteUtilisateurPresenterImpl(mapValueCompte));

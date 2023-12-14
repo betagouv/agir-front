@@ -10,6 +10,7 @@ export interface CompteUtilisateur {
   revenuFiscal: number | null;
   nombreDePartsFiscales: number;
   abonnementTransport: boolean;
+  fonctionnalitesDebloquees: string[];
 }
 
 export interface CompteTemporaire {
