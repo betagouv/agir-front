@@ -12,13 +12,16 @@
         />
       </div>
     </div>
-    <button
-      class="fr-btn fr-btn--secondary fr-text--md todo__bouton fr-ml-auto"
-      @click="recupererPointsTodo"
-      :disabled="pointAEteRecolte"
-    >
-      Récolter vos {{ nombrePoints }} <img src="/ic_score.svg" alt="points" width="16" class="fr-ml-1v" />
-    </button>
+    <div class="todo__boutonContainer">
+      <span class="text--uppercase fr-mb-0 fr-text--xs text-disabled-grey fr-text--bold">Objectif réalisé</span>
+      <button
+        class="fr-btn fr-btn--secondary fr-text--md todo__bouton"
+        @click="recupererPointsTodo"
+        :disabled="pointAEteRecolte"
+      >
+        Récolter vos {{ nombrePoints }} <img src="/ic_score.svg" alt="points" width="16" class="fr-ml-1v" />
+      </button>
+    </div>
   </div>
 </template>
 
@@ -52,10 +55,16 @@
     gap: 1rem;
     align-items: center;
     border-radius: 8px;
+    justify-content: space-between;
   }
 
   .todo__picto::before {
     --icon-size: 2rem;
+  }
+
+  .todo__boutonContainer {
+    display: grid;
+    text-align: center;
   }
 
   .todo__bouton:not([disabled]) {

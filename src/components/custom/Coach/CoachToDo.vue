@@ -34,14 +34,17 @@
       </ul>
     </div>
     <div>
-      <h3 class="text--uppercase fr-mb-0 fr-text--xs text-disabled-grey fr-mb-1w">Bonus débolqué !</h3>
-      <button
-        class="fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-gift-fill fr-text--lg border-radius--md background--white"
-        :disabled="isDisableBonusFinDeToDo()"
-        @click="showBonus"
-      >
-        Découvrir le bonus
-      </button>
+      <div v-if="isDisableBonusFinDeToDo()">todo</div>
+      <div v-else>
+        <h3 class="text--uppercase fr-mb-0 fr-text--xs text-disabled-grey fr-mb-1w">Bonus débolqué !</h3>
+        <button
+          class="fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-gift-fill fr-text--lg border-radius--md background--white"
+          :disabled="isDisableBonusFinDeToDo()"
+          @click="showBonus"
+        >
+          Découvrir le bonus
+        </button>
+      </div>
     </div>
   </div>
   <div
