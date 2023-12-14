@@ -1,8 +1,4 @@
-import {
-  BilanOnboardingUtilisateur,
-  Utilisateur,
-  UtilisateurRepository,
-} from '@/authentification/ports/utilisateur.repository';
+import { Utilisateur, UtilisateurRepository } from '@/authentification/ports/utilisateur.repository';
 import { CommencerRedefinirMotDePasseUsecase } from '@/authentification/commencerRedefinirMotDePasse.usecase';
 
 class SpyUtilisateurRepository implements UtilisateurRepository {
@@ -33,12 +29,7 @@ class SpyUtilisateurRepository implements UtilisateurRepository {
   renvoyerCodeOTP(email: string): Promise<void> {
     throw Error;
   }
-
-  recupererBilanOnboarding(utilisateurId: string): Promise<BilanOnboardingUtilisateur> {
-    throw Error;
-  }
 }
-
 describe('Fichier de tests concernant la réinitialisation du mot de passe', () => {
   test('Commencer la réinitialisation du mot de passe avec succès', async () => {
     // GIVEN

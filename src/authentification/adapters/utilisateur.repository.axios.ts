@@ -1,10 +1,5 @@
-import {
-  BilanOnboardingUtilisateur,
-  Utilisateur,
-  UtilisateurRepository,
-} from '@/authentification/ports/utilisateur.repository';
-import { AxiosFactory, intercept401 } from '@/axios.factory';
-import { onboardingBilanStore } from '@/store/onboardingBilan';
+import { Utilisateur, UtilisateurRepository } from '@/authentification/ports/utilisateur.repository';
+import { AxiosFactory } from '@/axios.factory';
 import Cookies from 'js-cookie';
 
 interface UtilisateurApiModel {
@@ -24,16 +19,6 @@ interface LoginApiModel {
   utilisateur: UtilisateurApiModel;
   token: string;
 }
-
-interface ProfileApiModel {
-  onboarding_result: {
-    alimentation: number;
-    transports: number;
-    logement: number;
-    consommation: number;
-  };
-}
-
 export class UtilisateurRepositoryAxios implements UtilisateurRepository {
   async authentifierUtilisateur(mail: string, password: string): Promise<Utilisateur> {
     const axiosInstance = AxiosFactory.getAxios();
@@ -126,18 +111,5 @@ export class UtilisateurRepositoryAxios implements UtilisateurRepository {
       mot_de_passe: motDePasse,
       code,
     });
-  }
-
-  @intercept401()
-  async recupererBilanOnboarding(utilisateurId: string): Promise<BilanOnboardingUtilisateur> {
-    const store = onboardingBilanStore();
-    if (store.bilan) return store.bilan;
-
-    const axiosInstance = AxiosFactory.getAxios();
-    const response = await axiosInstance.get<ProfileApiModel>(`/utilisateurs/${utilisateurId}/profile`);
-
-    store.setBilan(response.data.onboarding_result);
-
-    return response.data.onboarding_result;
   }
 }

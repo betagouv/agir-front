@@ -1,5 +1,5 @@
 import { OnboardingResultat } from '@/onboarding/evaluerOnboarding.usecase';
-import { OnboardingBilanPresenter } from '@/onboarding/ports/onboardingBilan.presenter';
+import { BilanOnboardingPresenter } from '@/bilanOnboarding/ports/bilanOnboarding.presenter';
 
 export interface OnboardingBilanViewModel {
   resultat: {
@@ -8,7 +8,7 @@ export interface OnboardingBilanViewModel {
   }[];
 }
 
-export class OnboardingBilanPresenterImpl implements OnboardingBilanPresenter {
+export class BilanOnboardingPresenterImpl implements BilanOnboardingPresenter {
   constructor(private viewModel: (onboardingBilanViewModel: OnboardingBilanViewModel) => void) {}
   presente(resultat: OnboardingResultat) {
     this.viewModel({

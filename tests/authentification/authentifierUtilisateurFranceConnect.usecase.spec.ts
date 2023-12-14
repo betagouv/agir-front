@@ -1,9 +1,5 @@
 import { SessionRepository } from '@/authentification/authentifierUtilisateur.usecase';
-import {
-  BilanOnboardingUtilisateur,
-  Utilisateur,
-  UtilisateurRepository,
-} from '@/authentification/ports/utilisateur.repository';
+import { Utilisateur, UtilisateurRepository } from '@/authentification/ports/utilisateur.repository';
 import { AuthentifierUtilisateurFranceConnectUsecase } from '@/authentification/authentifierUtilisateurFranceConnect.usecase';
 import { SpySauvegarderUtilisateurSessionRepository } from '../compte/sessionRepository.sauvegarderUtilisateur.spy';
 
@@ -47,10 +43,6 @@ class UtilisateurRepositoryForTest implements UtilisateurRepository {
   }
 
   terminerRedefinirMotDePasse(email: string, motDePasse: string, code: string): Promise<void> {
-    throw Error;
-  }
-
-  recupererBilanOnboarding(utilisateurId: string): Promise<BilanOnboardingUtilisateur> {
     throw Error;
   }
 }
