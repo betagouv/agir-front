@@ -67,6 +67,9 @@
   import { ToDoListRepositoryAxios } from '@/toDoList/adapters/toDoList.repository.axios';
   import { ToDoListEventBusImpl } from '@/toDoList/toDoListEventBusImpl';
   import { inject } from 'vue';
+  const hotjar = inject('Hotjar') as  {
+        event: (eventName: string) => void;
+      }
 
   const props = defineProps<{ todoList: TodoListViewModel }>();
 
@@ -80,10 +83,8 @@
     if (props.todoList.aFaire.length > 0) {
       // eslint-disable-next-line no-console
       console.log('isDisableBonusFinDeToDo', true)
-      const hotjar = inject('Hotjar') as  {
-        event: (eventName: string) => void;
-      }
       hotjar.event('debrief')
+      
       return true;
     }
     const todoARecolter = props.todoList.fait.find(elem => !elem.pointAEteRecolte);
