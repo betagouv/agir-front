@@ -41,10 +41,10 @@ app.use(VueMatomo, {
   isProduction: import.meta.env.VITE_ENV !== 'local',
   snippetVersion: import.meta.env.VITE_HOTJAR_SNIPPET_VERSION,
 });*/
-const hotjar = Hotjar.init(import.meta.env.VITE_HOTJAR_ID, import.meta.env.VITE_HOTJAR_SNIPPET_VERSION, {
+Hotjar.init(import.meta.env.VITE_HOTJAR_ID, import.meta.env.VITE_HOTJAR_SNIPPET_VERSION, {
   debug: true,
 });
-app.provide('Hotjar', hotjar);
+app.provide('Hotjar', Hotjar);
 
 createSentry(app, router);
 
