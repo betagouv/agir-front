@@ -50,9 +50,11 @@
   import AsideOnboardingEtapeConsommation from '@/components/custom/Onboarding/AsideOnboardingEtapeConsommation.vue';
   import { inject } from 'vue'
 
-const hotjar = inject('Hotjar')
+const hotjar = inject('Hotjar') as  {
+  event: (eventName: string) => void;
+}
 hotjar.event('debrief')
-  
+
   const etapeCourante = ref<number>(0);
   const etapesOnboarding = ['🚗 Transports', '🏠 Logement', '🥦 Alimentation', '🛒 Consommation'];
 
