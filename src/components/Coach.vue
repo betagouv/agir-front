@@ -13,10 +13,11 @@
               <CarteScore :value="utilisateurStore().score.points" type="score" />
             </div>
             <ProgressionNiveauJauge
-              class="fr-mb-1w"
+              class="fr-mb-3w"
               :objectif="utilisateurStore().score.nombreDePointsDuNiveau"
               :valeur="utilisateurStore().score.nombreDePointsDansLeNiveau"
             />
+            <BilanOnboarding />
           </div>
           <div v-else>
             <CarteSkeleton />
@@ -72,6 +73,7 @@
   import { RecupererToDoListUsecase } from '@/toDoList/recupererToDoList.usecase';
   import { ToDoListEvent, ToDoListEventBusImpl } from '@/toDoList/toDoListEventBusImpl';
   import { Fonctionnalites } from '@/shell/fonctionnalitesEnum';
+  import BilanOnboarding from '@/components/custom/BilanOnboarding.vue';
 
   const isLoading = ref<boolean>(true);
   const todoList = ref<TodoListViewModel>();
