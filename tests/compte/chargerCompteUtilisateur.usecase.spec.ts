@@ -11,6 +11,8 @@ import {
 import { Utilisateur } from '@/authentification/ports/utilisateur.repository';
 import { expect } from 'vitest';
 import { SpySauvegarderUtilisateurSessionRepository } from './sessionRepository.sauvegarderUtilisateur.spy';
+import { PublierEvenementRepositorySpy } from '../shell/publierEvenement.repository.spy';
+import { Evenemement } from '@/shell/ports/publierEvenement.repository';
 
 class ChargeCompteUtilisateurAvecMailRepository implements CompteUtilisateurRepository {
   getCompteUtilisateur(idUtilisateur: string): Promise<CompteUtilisateur> {
@@ -47,10 +49,12 @@ describe('Fichier de tests concernant le chargement du compte utilisateur', () =
   it("Doit aller chercher les infos à partir de l'utilisateurId et doit stocker le resultat en session", async () => {
     // GIVEN
     const spySessionRepository = new SpySauvegarderUtilisateurSessionRepository();
+    const spyPublierEvenement = new PublierEvenementRepositorySpy();
     // WHEN
     const usecase = new ChargerCompteUtilisateurUsecase(
       new ChargeCompteUtilisateurAvecMailRepository(),
-      spySessionRepository
+      spySessionRepository,
+      spyPublierEvenement
     );
     await usecase.execute('1', new CompteUtilisateurPresenterImpl(expectation));
     // THEN
@@ -80,5 +84,6 @@ describe('Fichier de tests concernant le chargement du compte utilisateur', () =
       abonnementTransport: false,
       fonctionnalitesDebloquees: [],
     });
+    expect(spyPublierEvenement.evenementPublie).toStrictEqual(Evenemement.COMPTE_CONSULTE);
   });
 });

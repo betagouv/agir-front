@@ -38,6 +38,7 @@
   import PageCompteSuppression from '@/components/pages/PageCompteSuppression.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import { SessionRepositoryStore } from '@/authentification/adapters/session.repository.store';
+  import { PublierEvenemntRepositoryAxios } from '@/shell/adapters/publierEvenemnt.repository.axios';
 
   const compteUtlisateurViewModel = ref<CompteUtlisateurViewModel | null>(null);
 
@@ -48,7 +49,8 @@
   onMounted(async () => {
     const usecase = new ChargerCompteUtilisateurUsecase(
       new CompteUtilisateurRepositoryImpl(),
-      new SessionRepositoryStore()
+      new SessionRepositoryStore(),
+      new PublierEvenemntRepositoryAxios()
     );
     const store = utilisateurStore();
     const idUtilisateur = store.utilisateur.id;

@@ -1,15 +1,18 @@
 import { CompteUtilisateurRepository } from '@/compte/ports/compteUtilisateur.repository';
 import { CompteUtilisateurPresenter } from '@/compte/ports/compteUtilisateur.presenter';
 import { SessionRepository } from '@/authentification/authentifierUtilisateur.usecase';
+import { Evenemement, PublierEvenementRepository } from '@/shell/ports/publierEvenement.repository';
 
 export class ChargerCompteUtilisateurUsecase {
   constructor(
     private compteUtilisateuRepository: CompteUtilisateurRepository,
-    private sessionRepository: SessionRepository
+    private sessionRepository: SessionRepository,
+    private publierEvenementRepository: PublierEvenementRepository
   ) {}
 
   async execute(utilisateurId: string, compteUtilisateurPresenter: CompteUtilisateurPresenter): Promise<void> {
     this.compteUtilisateuRepository.getCompteUtilisateur(utilisateurId).then(compte => {
+      this.publierEvenementRepository.publierEvenement(utilisateurId, Evenemement.COMPTE_CONSULTE);
       compteUtilisateurPresenter.presente(compte);
       this.sessionRepository.sauvegarderUtilisateur({
         nom: compte.nom,

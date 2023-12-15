@@ -4,4 +4,5 @@ export enum InteractionType {
   KYC = 'KYC',
   SUIVIDUJOUR = 'suivi_du_jour',
   AIDE = 'aide',
+  COMPTE = 'profile',
 }

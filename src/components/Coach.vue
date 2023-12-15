@@ -40,7 +40,7 @@
       <CarteSkeleton />
     </div>
   </section>
-  <section class="fr-py-6w background--bleu-dark">
+  <section class="fr-py-6w background--image--coach">
     <div class="fr-container">
       <CoachChangementSituation />
     </div>

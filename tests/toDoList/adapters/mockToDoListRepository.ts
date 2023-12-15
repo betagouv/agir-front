@@ -33,6 +33,21 @@ export class MockToDoListRepository implements ToDoListRepository {
       ],
       aFaire: [
         {
+          id: 'id3',
+          interactionId: 'interactionId3',
+          titre: 'Consulter votre profile',
+          url: '',
+          contentId: '',
+          progession: {
+            etapeCourante: 1,
+            etapeTotal: 1,
+          },
+          nombreDePointsAGagner: 10,
+          type: InteractionType.COMPTE,
+          thematique: '🌍 Global',
+          pointAEteRecolte: false,
+        },
+        {
           id: 'id',
           interactionId: 'interactionId',
           titre: 'Premier Quiz',

@@ -65,6 +65,8 @@ export class ToDoListPresenterImpl implements ToDoListPresenter {
         return '';
       case InteractionType.SUIVIDUJOUR:
         return '/coach/suivi-du-jour';
+      case InteractionType.COMPTE:
+        return '/mon-compte';
       default:
         return '';
     }

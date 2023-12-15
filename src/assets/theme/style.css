@@ -264,3 +264,8 @@ h3 {
 .nowrap {
   white-space: nowrap;
 }
+
+.background--image--coach {
+  background-image: url('/bg_changement_situation.jpg');
+  background-size: cover;
+}
