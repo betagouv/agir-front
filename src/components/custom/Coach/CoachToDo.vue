@@ -33,15 +33,19 @@
         </li>
       </ul>
     </div>
-    <div>
-      <h3 class="text--uppercase fr-mb-0 fr-text--xs text-disabled-grey fr-mb-1w">Bonus débolqué !</h3>
-      <button
-        class="fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-gift-fill fr-text--lg border-radius--md background--white"
-        :disabled="isDisableBonusFinDeToDo()"
-        @click="showBonus"
-      >
-        Découvrir le bonus
-      </button>
+    <div class="fr-py-1w">
+      <h3 class="text--uppercase fr-mb-0 fr-text--xs text-disabled-grey fr-mb-1w before--path">
+        <span class="fr-icon-gift-fill" aria-hidden="true"></span>
+        Bonus de fin de mission
+      </h3>
+      <div v-if="!isDisableBonusFinDeToDo()">
+        <button
+          class="fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-gift-fill fr-text--lg background--white"
+          @click="showBonus"
+        >
+          Découvrir le bonus
+        </button>
+      </div>
     </div>
   </div>
   <div
@@ -92,3 +96,20 @@
     bonusFinalRecupere.value = false;
   };
 </script>
+
+<style scoped>
+  .before--path {
+    position: relative;
+  }
+
+  .before--path::before {
+    content: '';
+    position: absolute;
+    top: -22px;
+    left: 10px;
+    display: block;
+    width: 0;
+    height: 20px;
+    border: 1px dashed var(--text-disabled-grey);
+  }
+</style>
