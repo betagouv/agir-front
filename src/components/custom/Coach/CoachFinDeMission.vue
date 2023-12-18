@@ -36,7 +36,7 @@
 
 <style scoped>
   .card-fin-mission {
-    background-image: url('/background-fin-de-mission.jpg');
+    background-image: url('/bg_fin-de-mission.jpg');
     background-size: cover;
     background-position: center;
   }
