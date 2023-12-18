@@ -6,6 +6,7 @@ interface ToDoListApiModel {
   numero_todo: number;
   points_todo: number;
   titre: string;
+  is_last: boolean;
   todo: [
     {
       thematiques: string[];
@@ -49,6 +50,7 @@ export class ToDoListRepositoryAxios implements ToDoListRepository {
     return {
       titre: response.data.titre,
       pointFinDeMission: response.data.points_todo,
+      derniere: response.data.is_last,
       aFaire: response.data.todo.map(todo => ({
         id: todo.id,
         interactionId: todo.interaction_id,

@@ -36,11 +36,6 @@ app.use(VueMatomo, {
   host: import.meta.env.VITE_MATOMO_URL,
   siteId: import.meta.env.VITE_MATOMO_SITE_ID,
 });
-/*app.use(VueHotjar, {
-  id: import.meta.env.VITE_HOTJAR_ID,
-  isProduction: import.meta.env.VITE_ENV !== 'local',
-  snippetVersion: import.meta.env.VITE_HOTJAR_SNIPPET_VERSION,
-});*/
 Hotjar.init(import.meta.env.VITE_HOTJAR_ID, import.meta.env.VITE_HOTJAR_SNIPPET_VERSION, {
   debug: true,
 });

@@ -77,24 +77,16 @@
 
   const showBonus = () => {
     bonusFinalRecupere.value = true;
+    if(hotjar && props.todoList && props.todoList.derniere){
+        hotjar.event('debrief')
+    }
   };
 
   const isDisableBonusFinDeToDo = () => {
-    if (props.todoList.aFaire.length > 0) {
-      // eslint-disable-next-line no-console
-      console.log('isDisableBonusFinDeToDo', true)
-      if(hotjar && Object.prototype.hasOwnProperty.call(hotjar, 'event')){
-        hotjar.event('debrief')
-      }
-      
-      return true;
-    }
+    if (props.todoList.aFaire.length > 0) return true;
     const todoARecolter = props.todoList.fait.find(elem => !elem.pointAEteRecolte);
 
     if (todoARecolter) return true;
-
-    // eslint-disable-next-line no-console
-    console.log('isDisableBonusFinDeToDo', false)
 
     return false;
   };

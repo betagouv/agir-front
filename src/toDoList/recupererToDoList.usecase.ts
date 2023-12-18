@@ -4,6 +4,7 @@ import { ToDoListPresenter } from '@/toDoList/ports/toDoList.presenter';
 export interface TodoList {
   titre: string;
   pointFinDeMission: number;
+  derniere: boolean;
   fait: TodoListItem[];
   aFaire: TodoListItem[];
 }
