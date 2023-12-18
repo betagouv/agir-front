@@ -11,7 +11,6 @@ import '@gouvfr/dsfr/dist/dsfr.module.min.js';
 import { createSentry } from './sentry/sentry';
 import './assets/theme/style.css';
 import { NavigationBus } from '@/navigationBus';
-//import VueHotjar from 'vue-hotjar-next';
 import Hotjar from '@hotjar/browser';
 
 declare global {

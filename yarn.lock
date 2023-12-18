@@ -4355,11 +4355,6 @@ vue-eslint-parser@^9.3.1:
     lodash "^4.17.21"
     semver "^7.3.6"
 
-vue-hotjar-next@^1.4.0:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/vue-hotjar-next/-/vue-hotjar-next-1.4.0.tgz#596b11f249d49306485b6f7cea2ac8dd0118ec44"
-  integrity sha512-ZWLkTClEHDThzNQjiPZ3ooNiJqL+Z8MeBboA02iaNm+kdSFi0pxT7XXM7ehI+ddliHoHGv9yXWD3evA8NOOUMQ==
-
 vue-matomo@^4.2.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/vue-matomo/-/vue-matomo-4.2.0.tgz#d65e369e4ead1d95ef790bef3627512cac3d25e9"
