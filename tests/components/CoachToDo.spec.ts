@@ -69,6 +69,7 @@ describe('Coach - Section ToDo', () => {
       const props: { todoList: TodoListViewModel } = {
         todoList: {
           titre: 'Ma ToDo List',
+          pointFinDeMission: 30,
           aFaire: [todoExemple1, todoExemple2],
           fait: [],
         },

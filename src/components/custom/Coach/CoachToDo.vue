@@ -48,7 +48,11 @@
       </div>
     </div>
   </div>
-  <CoachFinDeMission v-else @recuperer-points-todo="recupererPointsTodo" />
+  <CoachFinDeMission
+    v-else
+    @recuperer-points-todo="recupererPointsTodo"
+    :nombreDePointsAGagner="todoList.pointFinDeMission"
+  />
 </template>
 
 <script setup lang="ts">
