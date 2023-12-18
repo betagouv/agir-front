@@ -2,7 +2,8 @@ import { ServicePresenter } from '@/services/ports/service.presenter';
 import { ServiceRepository } from '@/services/ports/service.repository';
 
 export interface Service {
-  label: string;
+  titre: string;
+  contenu: string;
   url: string;
   isUrlExterne: boolean;
 }
