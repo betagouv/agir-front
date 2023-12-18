@@ -1,12 +1,12 @@
-import { inject } from 'vue';
-
 export enum HotjarEvenement {
   DEBRIEF = 'debrief',
 }
 
-export function publierEvenementHotjar(eventName: HotjarEvenement) {
-  const hotjar = inject('Hotjar') as {
+export function publierEvenementHotjar(
+  hotjar: {
     event: (eventName: string) => void;
-  };
+  },
+  eventName: HotjarEvenement
+) {
   hotjar.event(eventName.toString());
 }
