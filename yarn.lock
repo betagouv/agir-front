@@ -252,6 +252,11 @@
   resolved "https://registry.yarnpkg.com/@gouvfr/dsfr/-/dsfr-1.10.2.tgz#364916777d6e2a54e991c9883d63516918759e20"
   integrity sha512-twPj+VFMTOKUfI9vbBnK8fH1iDpXuDVWeMJzgmmQ5LKjRtZdUsvSbHNlp7HWcDvhWxDGNHxSboErC7UB3oskYQ==
 
+"@hotjar/browser@^1.0.9":
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/@hotjar/browser/-/browser-1.0.9.tgz#769b4ded3fa7b9557b785c107f0cd76d3f83789a"
+  integrity sha512-n9akDMod8BLGpYEQCrHwlYWWd63c1HlhUSXNIDfClZtKYXbUjIUOFlNZNNcUxgHTCsi4l2i+SWKsGsO0t93S8w==
+
 "@humanwhocodes/config-array@^0.11.13":
   version "0.11.13"
   resolved "https://registry.yarnpkg.com/@humanwhocodes/config-array/-/config-array-0.11.13.tgz#075dc9684f40a531d9b26b0822153c1e832ee297"
@@ -4349,11 +4354,6 @@ vue-eslint-parser@^9.3.1:
     esquery "^1.4.0"
     lodash "^4.17.21"
     semver "^7.3.6"
-
-vue-hotjar-next@^1.4.0:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/vue-hotjar-next/-/vue-hotjar-next-1.4.0.tgz#596b11f249d49306485b6f7cea2ac8dd0118ec44"
-  integrity sha512-ZWLkTClEHDThzNQjiPZ3ooNiJqL+Z8MeBboA02iaNm+kdSFi0pxT7XXM7ehI+ddliHoHGv9yXWD3evA8NOOUMQ==
 
 vue-matomo@^4.2.0:
   version "4.2.0"

@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@gouvfr/dsfr": "^1.10.2",
+    "@hotjar/browser": "^1.0.9",
     "@sentry/vue": "^7.81.1",
     "chart.js": "^4.3.0",
     "js-cookie": "^3.0.5",
@@ -25,7 +26,6 @@
     "redaxios": "^0.5.1",
     "vue": "^3.3.8",
     "vue-chart-3": "^3.1.8",
-    "vue-hotjar-next": "^1.4.0",
     "vue-matomo": "^4.2.0",
     "vue-router": "^4.2.5"
   },

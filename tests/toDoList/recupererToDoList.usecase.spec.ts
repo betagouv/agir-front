@@ -15,6 +15,7 @@ describe('Fichier de tests concernant la récupération de la ToDo List', () => 
       expect(toDoList).toStrictEqual<TodoListViewModel>({
         titre: 'Ma ToDo List',
         pointFinDeMission: 30,
+        derniere: false,
         aFaire: [
           {
             id: 'id3',

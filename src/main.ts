@@ -11,7 +11,7 @@ import '@gouvfr/dsfr/dist/dsfr.module.min.js';
 import { createSentry } from './sentry/sentry';
 import './assets/theme/style.css';
 import { NavigationBus } from '@/navigationBus';
-import VueHotjar from 'vue-hotjar-next';
+import Hotjar from '@hotjar/browser';
 
 declare global {
   interface Window {
@@ -35,11 +35,11 @@ app.use(VueMatomo, {
   host: import.meta.env.VITE_MATOMO_URL,
   siteId: import.meta.env.VITE_MATOMO_SITE_ID,
 });
-app.use(VueHotjar, {
-  id: import.meta.env.VITE_HOTJAR_ID,
-  isProduction: import.meta.env.VITE_ENV !== 'local',
-  snippetVersion: import.meta.env.VITE_HOTJAR_SNIPPET_VERSION,
+Hotjar.init(import.meta.env.VITE_HOTJAR_ID, import.meta.env.VITE_HOTJAR_SNIPPET_VERSION, {
+  debug: false,
 });
+app.provide('Hotjar', Hotjar);
+
 createSentry(app, router);
 
 app.mount('#app');
