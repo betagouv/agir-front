@@ -40,6 +40,7 @@
       </h3>
       <div v-if="!isDisableBonusFinDeToDo()">
         <button
+          id="btn-bonus"
           class="fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-gift-fill fr-text--lg background--white"
           @click="showBonus"
         >
