@@ -261,10 +261,6 @@ h3 {
   align-items: flex-end;
 }
 
-.align-items--center {
-  align-items: center;
-}
-
 .nowrap {
   white-space: nowrap;
 }
