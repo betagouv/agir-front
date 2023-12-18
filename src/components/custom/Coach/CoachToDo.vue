@@ -71,19 +71,18 @@
         event: (eventName: string) => void;
       }
 
+  if(hotjar && props.todoList && props.todoList.derniere){
+      // eslint-disable-next-line no-console
+        console.log('derniere')
+        hotjar.event('debrief')
+  }
+
   const props = defineProps<{ todoList: TodoListViewModel }>();
 
   const bonusFinalRecupere = ref(false);
 
   const showBonus = () => {
     bonusFinalRecupere.value = true;
-    // eslint-disable-next-line no-console
-    console.log('showBonus')
-    if(hotjar && props.todoList && props.todoList.derniere){
-      // eslint-disable-next-line no-console
-        console.log('derniere')
-        hotjar.event('debrief')
-    }
   };
 
   const isDisableBonusFinDeToDo = () => {
