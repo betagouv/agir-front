@@ -69,6 +69,7 @@
   import { ToDoListEventBusImpl } from '@/toDoList/toDoListEventBusImpl';
   import {publierEvenementHotjar, HotjarEvenement} from '@/shell/publierEvenementHotjar';
   import { inject } from 'vue';
+  
   const hotjar = inject('Hotjar') as {
     event: (eventName: string) => void;
   };

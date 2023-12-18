@@ -36,7 +36,7 @@ app.use(VueMatomo, {
   siteId: import.meta.env.VITE_MATOMO_SITE_ID,
 });
 Hotjar.init(import.meta.env.VITE_HOTJAR_ID, import.meta.env.VITE_HOTJAR_SNIPPET_VERSION, {
-  debug: true,
+  debug: false,
 });
 app.provide('Hotjar', Hotjar);
 
