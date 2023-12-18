@@ -15,6 +15,7 @@ export interface QuizViewModel {
   titre: string;
   questions: QuestionViewModel[];
   steps: string;
+  thematique: string;
 }
 
 export class ChargementQuizPresenterImpl implements ChargementQuizzPresenter {
@@ -26,6 +27,7 @@ export class ChargementQuizPresenterImpl implements ChargementQuizzPresenter {
 
   presenteQuiz(quiz: Quiz): void {
     this._quizViewModel({
+      thematique: quiz.thematique,
       steps: (quiz.questions.length * 2).toString(),
       titre: quiz.titre,
       questions: quiz.questions.map(question => {

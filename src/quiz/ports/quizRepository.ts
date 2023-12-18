@@ -11,6 +11,7 @@ interface QuestionsQuiz {
 export interface Quiz {
   titre: string;
   questions: QuestionsQuiz[];
+  thematique: string;
 }
 
 export interface QuizRepository {
