@@ -51,7 +51,8 @@
   <CoachFinDeMission
     v-else
     @recuperer-points-todo="recupererPointsTodo"
-    :nombreDePointsAGagner="todoList.pointFinDeMission"
+    :nombre-de-points-a-gagner="todoList.pointFinDeMission"
+    :titre-de-mission="todoList.titre"
   />
 </template>
 

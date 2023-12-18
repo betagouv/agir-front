@@ -5,7 +5,7 @@
       <span class="fr-icon-flag-fill" aria-hidden="true"></span>
       <span class="fr-icon-flag-fill" aria-hidden="true"></span>
     </div>
-    <span class="text--bleu text--3xl">Votre 1ère mission</span>
+    <span class="text--bleu text--3xl">{{ titreDeMission }}</span>
     <span class="fr-display--xs fr-mt-1w text--uppercase fr-mb-2w">Accomplie !</span>
     <span class="fr-text--lead fr-text--bold">
       Votre bonus : +{{ nombreDePointsAGagner }} <img src="/ic_score.svg" alt="points" width="24" />
@@ -21,7 +21,11 @@
 
 <script setup lang="ts">
   import { defineEmits } from 'vue';
-  defineProps<{ nombreDePointsAGagner: number }>();
+
+  defineProps<{
+    titreDeMission: string;
+    nombreDePointsAGagner: number;
+  }>();
 
   const emit = defineEmits(['recuperer-points-todo']);
 
