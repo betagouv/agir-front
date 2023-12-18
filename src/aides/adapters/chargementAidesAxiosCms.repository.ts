@@ -35,9 +35,11 @@ interface AidesCMSModel {
 }
 
 export class chargementAidesAxiosCmsRepository implements ChargementAidesRepository {
-  async getAides(): Promise<Aides[]> {
+  async getAides(codePostal: string): Promise<Aides[]> {
     const axiosCMS = AxiosFactory.getCMSAxios();
-    const aides = await axiosCMS.get<AidesCMSModel>('/aides?populate=thematiques');
+    const aides = await axiosCMS.get<AidesCMSModel>(
+      `/aides?populate=thematiques&filters[$or][0][codes_postaux][$contains]=${codePostal}&filters[$or][1][codes_postaux][$null]=true`
+    );
 
     return aides.data.data.map(({ id, attributes }) => ({
       id: id.toString(),

@@ -66,7 +66,7 @@ describe('Fichier de tests pour charger toutes les aides', () => {
 
     // WHEN
     const useCase = new ChargementAidesUsecase(new ChargementAidesRepositoryForTest(), spyPublierEvenemntRepository);
-    await useCase.execute('utilisateurId', new ChargementAidesPresenterImpl(expectation));
+    await useCase.execute('utilisateurId', 'codePostal', new ChargementAidesPresenterImpl(expectation));
 
     // THEN
     function expectation(aidesViewModel: AidesViewModel) {
