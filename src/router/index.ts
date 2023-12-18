@@ -29,6 +29,7 @@ import PageMotDePasseOublieRedefinirMotDePasse from '@/components/pages/PageMotD
 import PageCatalogueServices from '@/components/pages/PageCatalogueServices.vue';
 import AidesVeloFormulaire from '@/components/pages/PageAidesVeloFormulaire.vue';
 import PageAidesRetrofitFormulaire from '@/components/pages/PageAidesRetrofitFormulaire.vue';
+import { utilisateurStore } from '@/store/utilisateur';
 
 const appName = 'Agir ! -';
 const routes = [
@@ -40,7 +41,12 @@ const routes = [
       title: `${appName} Accueil`,
       estPublique: true,
     },
-    beforeEnter: storeIdNGC,
+    beforeEnter: () => {
+      storeIdNGC;
+      if (utilisateurStore().utilisateur.id.length > 0) {
+        router.replace({ name: 'coach' });
+      }
+    },
   },
   {
     path: '/pre-onboarding',
