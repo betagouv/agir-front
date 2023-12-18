@@ -6,6 +6,8 @@ import { EnvoyerDonneesQuizInteractionUsecase } from '@/quiz/envoyerDonneesQuizI
 
 const quizzViewModelMock: QuizViewModel = {
   titre: 'Titre du quizz',
+  difficulte: 'Difficulté du quizz',
+  thematique: 'Thématique du quizz',
   questions: [
     {
       id: 'id_question_0',
@@ -197,7 +199,7 @@ describe('Quizz', () => {
         const boutonEtapeSuivante2 = getByRole('button', { name: "Passer à l'étape suivante" });
         await fireEvent.click(boutonEtapeSuivante2);
 
-        const messageSuccès = getByText('Désolé, Vous avez perdu !');
+        const messageSuccès = getByText('Dommage !');
 
         // THEN
         expect(messageSuccès).toBeDefined();

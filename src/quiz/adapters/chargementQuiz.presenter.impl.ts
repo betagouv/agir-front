@@ -1,4 +1,4 @@
-import { Quiz } from '@/quiz/ports/quizRepository';
+import { Quiz, QuizDifficulte } from '@/quiz/ports/quizRepository';
 import { ChargementQuizzPresenter } from '@/quiz/ports/chargementQuizz.presenter';
 
 export interface QuestionViewModel {
@@ -16,6 +16,7 @@ export interface QuizViewModel {
   questions: QuestionViewModel[];
   steps: string;
   thematique: string;
+  difficulte: string;
 }
 
 export class ChargementQuizPresenterImpl implements ChargementQuizzPresenter {
@@ -27,6 +28,7 @@ export class ChargementQuizPresenterImpl implements ChargementQuizzPresenter {
 
   presenteQuiz(quiz: Quiz): void {
     this._quizViewModel({
+      difficulte: this.determinerDifficulte(quiz),
       thematique: quiz.thematique,
       steps: (quiz.questions.length * 2).toString(),
       titre: quiz.titre,
@@ -42,5 +44,20 @@ export class ChargementQuizPresenterImpl implements ChargementQuizzPresenter {
         };
       }),
     });
+  }
+
+  private determinerDifficulte(quiz: Quiz) {
+    switch (quiz.difficulte) {
+      case QuizDifficulte.TRES_FACILE:
+        return 'très facile';
+      case QuizDifficulte.FACILE:
+        return 'facile';
+      case QuizDifficulte.MOYEN:
+        return 'moyen/intermédiaire';
+      case QuizDifficulte.DIFFICILE:
+        return 'difficile';
+      case QuizDifficulte.TRES_DIFFICILE:
+        return 'tres difficile';
+    }
   }
 }
