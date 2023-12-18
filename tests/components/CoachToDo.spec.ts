@@ -71,6 +71,7 @@ describe('Coach - Section ToDo', () => {
           titre: 'Ma ToDo List',
           pointFinDeMission: 30,
           aFaire: [todoExemple1, todoExemple2],
+          derniere: false,
           fait: [],
         },
       };

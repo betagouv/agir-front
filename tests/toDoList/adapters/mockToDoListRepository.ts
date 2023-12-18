@@ -15,6 +15,7 @@ export class MockToDoListRepository implements ToDoListRepository {
     return Promise.resolve({
       titre: 'Ma ToDo List',
       pointFinDeMission: 30,
+      derniere: false,
       fait: [
         {
           id: 'id2',
