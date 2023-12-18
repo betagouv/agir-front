@@ -6,6 +6,8 @@ import { EnvoyerDonneesQuizInteractionUsecase } from '@/quiz/envoyerDonneesQuizI
 
 const quizzViewModelMock: QuizViewModel = {
   titre: 'Titre du quizz',
+  difficulte: 'Difficulté du quizz',
+  thematique: 'Thématique du quizz',
   questions: [
     {
       id: 'id_question_0',
@@ -169,10 +171,12 @@ describe('Quizz', () => {
         const boutonEtapeSuivante2 = getByRole('button', { name: "Passer à l'étape suivante" });
         await fireEvent.click(boutonEtapeSuivante2);
 
-        const messageSuccès = getByText('Bravo, vous avez réussi le quiz !', { exact: false });
+        const messageSucces = getByText('Bien joué !');
+        const paragrapheSucces = getByText('Toutes les réponses sont correctes');
 
         // THEN
-        expect(messageSuccès).toBeDefined();
+        expect(messageSucces).toBeDefined();
+        expect(paragrapheSucces).toBeDefined();
       });
     });
 
@@ -197,10 +201,12 @@ describe('Quizz', () => {
         const boutonEtapeSuivante2 = getByRole('button', { name: "Passer à l'étape suivante" });
         await fireEvent.click(boutonEtapeSuivante2);
 
-        const messageSuccès = getByText('Désolé, Vous avez perdu !');
+        const messageEchec = getByText('Dommage !');
+        const paragrapheEchec = getByText('Au moins 1 mauvaise réponse');
 
         // THEN
-        expect(messageSuccès).toBeDefined();
+        expect(messageEchec).toBeDefined();
+        expect(paragrapheEchec).toBeDefined();
       });
     });
 

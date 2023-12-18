@@ -11,7 +11,10 @@
     />
     <div class="fr-grid-row fr-grid-row--gutters">
       <div class="fr-col-12 fr-col-lg-8">
+        <span class="fr-h2">Quiz</span>
+        <span class="fr-ml-1w fr-h3">{{ quizViewModel.thematique }} - {{ quizViewModel.difficulte }}</span>
         <Quiz
+          class="fr-mt-4w"
           :nombre-de-points-a-gagner="nombreDePointsAGagner"
           :quiz-view-model="quizViewModel"
           :id-interaction="idInteraction"

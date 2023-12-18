@@ -5,6 +5,8 @@ import { ChargementQuizPresenterImpl, QuizViewModel } from '@/quiz/adapters/char
 class QuizRepositoryForTest implements QuizRepository {
   async getQuiz(id: string): Promise<Quiz> {
     return {
+      difficulte: 1,
+      thematique: '🛒 Consommation durable',
       titre: `Mon super quizz ${id}`,
       questions: [
         {
@@ -35,6 +37,8 @@ describe("Fichier de test du usecase de chargement d'un quizz", () => {
     // THEN
     function expectation(quizzViewModel: QuizViewModel) {
       expect(quizzViewModel).toStrictEqual<QuizViewModel>({
+        difficulte: 'très facile',
+        thematique: '🛒 Consommation durable',
         titre: 'Mon super quizz 1',
         questions: [
           {

@@ -18,9 +18,19 @@ interface QuestionsQuizCMSModel {
 export interface QuiCMSAttributesModel {
   titre: string;
   questions: QuestionsQuizCMSModel[];
+  thematique_gamification: ThematiqueGamificationCMSModel;
+  difficulty: number;
 }
 export interface QuizCMSDataModel {
   attributes: QuiCMSAttributesModel;
+}
+
+export interface ThematiqueGamificationCMSModel {
+  data: {
+    attributes: {
+      titre: string;
+    };
+  };
 }
 
 export interface QuizCMSModel {
@@ -30,7 +40,7 @@ export class QuizRepositoryAxios implements QuizRepository {
   async getQuiz(idQuizz: string): Promise<Quiz> {
     const axiosInstance = AxiosFactory.getCMSAxios();
     const response: Response<QuizCMSModel> = await axiosInstance.get<QuizCMSModel>(
-      `quizzes/${idQuizz}?populate[0]=questions&populate[1]=questions.reponses`
+      `quizzes/${idQuizz}?populate[0]=questions&populate[1]=questions.reponses&populate[2]=thematique_gamification`
     );
     return {
       titre: response.data.data.attributes.titre,
@@ -45,6 +55,8 @@ export class QuizRepositoryAxios implements QuizRepository {
           solution: question.reponses.filter(r => r.exact)[0].reponse,
         };
       }),
+      thematique: response.data.data.attributes.thematique_gamification.data.attributes.titre,
+      difficulte: response.data.data.attributes.difficulty,
     };
   }
 

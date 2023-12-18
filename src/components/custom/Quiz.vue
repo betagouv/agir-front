@@ -13,12 +13,11 @@
         @etapeSuivante="verifierLaReponse"
       />
       <div v-else>
-        <div v-if="nombreDeBonnesReponses === quizViewModel.questions.length" class="fr-text--bold">
-          Bravo, vous avez réussi le quiz !<br />
-          <img src="/leaf.svg" alt="leaf-logo" class="fr-mr-2v" />Vous avez gagné {{ nombreDePointsAGagner }} points
-        </div>
-        <div v-else class="fr-text--bold">Désolé, Vous avez perdu !</div>
-        <router-link class="fr-btn fr-mt-5v" :to="{ name: 'coach' }"> Revenir au coach </router-link>
+        <QuizFinSuccess
+          v-if="nombreDeBonnesReponses === quizViewModel.questions.length"
+          :nombre-de-points-a-gagner="nombreDePointsAGagner"
+        />
+        <QuizFinError v-else />
       </div>
     </form>
   </div>
@@ -28,6 +27,8 @@
   import { ref } from 'vue';
   import IndicateurDEtape from '@/components/dsfr/IndicateurDEtapes.vue';
   import QuestionDuQuiz from '@/components/custom/QuestionDuQuiz.vue';
+  import QuizFinError from '@/components/custom/Quiz/QuizFinError.vue';
+  import QuizFinSuccess from '@/components/custom/Quiz/QuizFinSuccess.vue';
   import { QuizViewModel } from '@/quiz/adapters/chargementQuiz.presenter.impl';
   import { EnvoyerDonneesQuizInteractionUsecase } from '@/quiz/envoyerDonneesQuizInteraction.usecase';
   import { QuizRepositoryAxios } from '@/quiz/adapters/quizRepository.axios';
