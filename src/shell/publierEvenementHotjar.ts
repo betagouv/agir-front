@@ -9,5 +9,5 @@ const hotjar = inject('Hotjar') as {
 };
 
 export function publierEvenementHotjar(eventName: HotjarEvenement) {
-  hotjar.event(eventName);
+  hotjar.event(eventName.toString());
 }
