@@ -4,10 +4,9 @@ export enum HotjarEvenement {
   DEBRIEF = 'debrief',
 }
 
-const hotjar = inject('Hotjar') as {
-  event: (eventName: string) => void;
-};
-
 export function publierEvenementHotjar(eventName: HotjarEvenement) {
+  const hotjar = inject('Hotjar') as {
+    event: (eventName: string) => void;
+  };
   hotjar.event(eventName.toString());
 }
