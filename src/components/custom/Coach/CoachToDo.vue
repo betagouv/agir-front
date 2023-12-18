@@ -67,10 +67,7 @@
   import { utilisateurStore } from '@/store/utilisateur';
   import { ToDoListRepositoryAxios } from '@/toDoList/adapters/toDoList.repository.axios';
   import { ToDoListEventBusImpl } from '@/toDoList/toDoListEventBusImpl';
-  import { inject } from 'vue';
-  const hotjar = inject('Hotjar') as  {
-        event: (eventName: string) => void;
-      }
+  import {publierEvenementHotjar, HotjarEvenement} from '@/shell/publierEvenementHotjar';
 
   const props = defineProps<{ todoList: TodoListViewModel }>();
 
@@ -78,8 +75,8 @@
 
   const showBonus = () => {
     bonusFinalRecupere.value = true;
-    if(hotjar && props.todoList && props.todoList.derniere){
-      hotjar.event('debrief')
+    if(props.todoList && props.todoList.derniere){
+      publierEvenementHotjar(HotjarEvenement.DEBRIEF)
     }
   };
 
