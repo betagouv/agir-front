@@ -8,7 +8,7 @@
           role="link"
           :href="service.url"
           target="_blank"
-          class="service__link fr-text--xs text--black-light background--white border-radius--md fr-p-2v fr-mb-0"
+          class="service__link service__link--externe fr-text--xs text--black-light background--white border-radius--md fr-p-2v fr-mb-0"
         >
           <div class="fr-grid-row flex-column">
             {{ service.titre }}
@@ -71,6 +71,19 @@
     background-color: white;
     color: var(--blue-france-sun-113-625);
   }
+
+  .service__link--externe {
+    position: relative;
+    padding-right: 2rem !important;
+  }
+
+  .service__link--externe::after {
+    position: absolute;
+    right: 0.5rem;
+    top: 50%;
+    margin-top: -0.5rem;
+  }
+
   .fr-col {
     flex: none;
   }
