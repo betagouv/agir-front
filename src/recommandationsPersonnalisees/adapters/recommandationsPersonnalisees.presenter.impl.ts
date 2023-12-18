@@ -72,6 +72,8 @@ export class RecommandationsPersonnaliseesPresenterImpl implements Recommandatio
         return '';
       case InteractionType.SUIVIDUJOUR:
         return '/coach/suivi-du-jour';
+      default:
+        return '';
     }
   }
 }

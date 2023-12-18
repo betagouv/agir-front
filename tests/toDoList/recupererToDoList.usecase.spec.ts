@@ -16,6 +16,22 @@ describe('Fichier de tests concernant la récupération de la ToDo List', () => 
         titre: 'Ma ToDo List',
         aFaire: [
           {
+            id: 'id3',
+            interactionId: 'interactionId3',
+            titre: 'Consulter votre profile',
+            url: '/mon-compte',
+            contentId: '',
+            progession: {
+              etapeCourante: 1,
+              etapeTotal: 1,
+            },
+            nombreDePointsAGagner: 10,
+            type: InteractionType.COMPTE,
+            thematique: '🌍 Global',
+            pointAEteRecolte: false,
+          },
+
+          {
             id: 'id',
             interactionId: 'interactionId',
             titre: 'Premier Quiz',

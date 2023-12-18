@@ -32,10 +32,16 @@
                 </li>
                 <li v-if="estConnecte">
                   <div class="utilisateur">
-                    <router-link title="accéder à mon compte" :to="{ name: 'mon-compte' }">
-                      <img src="/ic_user.svg" class="fr-mr-1v fr-mb-n1v" alt="" />
-                      {{ nomUtilisateur }}
-                    </router-link>
+                    <div class="fr-icon-user-fill fr-icon--sm fr-text-label--blue-france">
+                      <router-link
+                        class="fr-text-label--blue-france fr-text--bold fr-ml-1w"
+                        title="accéder à mon compte"
+                        :to="{ name: 'mon-compte' }"
+                      >
+                        {{ nomUtilisateur }}
+                      </router-link>
+                    </div>
+
                     <ScoreHeader />
                   </div>
                   <button class="fr-btn fr-btn--sm" @click="logout">Se déconnecter</button>
