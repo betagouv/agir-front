@@ -63,6 +63,21 @@ export class MockToDoListRepository implements ToDoListRepository {
           thematique: '🚲 Transports',
           pointAEteRecolte: false,
         },
+        {
+          id: 'id3',
+          interactionId: 'interactionId3',
+          titre: 'Installer un service',
+          url: '',
+          contentId: '',
+          progession: {
+            etapeCourante: 1,
+            etapeTotal: 1,
+          },
+          nombreDePointsAGagner: 10,
+          type: InteractionType.SERVICE,
+          thematique: '🌍 Global',
+          pointAEteRecolte: false,
+        },
       ],
     });
   }

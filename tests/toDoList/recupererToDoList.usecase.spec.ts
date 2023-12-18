@@ -47,6 +47,21 @@ describe('Fichier de tests concernant la récupération de la ToDo List', () => 
             thematique: '🚲 Transports',
             pointAEteRecolte: false,
           },
+          {
+            contentId: '',
+            id: 'id3',
+            interactionId: 'interactionId3',
+            nombreDePointsAGagner: 10,
+            pointAEteRecolte: false,
+            progession: {
+              etapeCourante: 1,
+              etapeTotal: 1,
+            },
+            thematique: '🌍 Global',
+            titre: 'Installer un service',
+            type: 'service',
+            url: '/coach/services',
+          },
         ],
         fait: [
           {

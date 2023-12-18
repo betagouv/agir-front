@@ -15,14 +15,13 @@
         <div class="article fr-p-6v background--white border-radius--md">
           <h2 class="fr-h3">{{ article.sousTitre }}</h2>
           <div class="cms__content" v-html="article.texte" />
+          <router-link class="fr-btn fr-mt-5v" :to="{ name: 'coach' }"> Revenir au coach </router-link>
         </div>
       </div>
       <div class="fr-col-12 fr-col-md-4">
         <slot />
       </div>
     </div>
-
-    <router-link class="fr-btn fr-mt-5v" :to="{ name: 'coach' }"> Revenir au coach </router-link>
   </div>
 </template>
 

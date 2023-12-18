@@ -12,12 +12,7 @@
       />
     </div>
     <div class="fr-col-12 fr-col-lg-9">
-      <h1 class="fr-h2">Services</h1>
-      <p>Transformez vos trajets en actes éco-responsables pour préserver la planète.</p>
-      <p>
-        Rejoignez notre programme d'amélioration de l'impact environnemental sur vos déplacements quotidiens et soyez un
-        héros pour l'environnement !
-      </p>
+      <h1 class="fr-h2">Liste des services</h1>
       <div
         v-for="serviceCatalogueViewModel in serviceCatalogueViewModels.catalogue"
         :key="serviceCatalogueViewModel.id"
