@@ -16,7 +16,7 @@
 </template>
 
 <script setup lang="ts">
-  defineProps<{ nombreDePointsAGagner: number }>();
+  defineProps<{ nombreDePointsAGagner: string }>();
 </script>
 
 <style scoped>

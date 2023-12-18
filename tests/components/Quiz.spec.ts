@@ -171,10 +171,12 @@ describe('Quizz', () => {
         const boutonEtapeSuivante2 = getByRole('button', { name: "Passer à l'étape suivante" });
         await fireEvent.click(boutonEtapeSuivante2);
 
-        const messageSuccès = getByText('Bravo, vous avez réussi le quiz !', { exact: false });
+        const messageSucces = getByText('Bien joué !');
+        const paragrapheSucces = getByText('Toutes les réponses sont correctes');
 
         // THEN
-        expect(messageSuccès).toBeDefined();
+        expect(messageSucces).toBeDefined();
+        expect(paragrapheSucces).toBeDefined();
       });
     });
 
@@ -199,10 +201,12 @@ describe('Quizz', () => {
         const boutonEtapeSuivante2 = getByRole('button', { name: "Passer à l'étape suivante" });
         await fireEvent.click(boutonEtapeSuivante2);
 
-        const messageSuccès = getByText('Dommage !');
+        const messageEchec = getByText('Dommage !');
+        const paragrapheEchec = getByText('Au moins 1 mauvaise réponse');
 
         // THEN
-        expect(messageSuccès).toBeDefined();
+        expect(messageEchec).toBeDefined();
+        expect(paragrapheEchec).toBeDefined();
       });
     });
 
