@@ -48,6 +48,7 @@ export class ToDoListRepositoryAxios implements ToDoListRepository {
 
     return {
       titre: response.data.titre,
+      pointFinDeMission: response.data.points_todo,
       aFaire: response.data.todo.map(todo => ({
         id: todo.id,
         interactionId: todo.interaction_id,

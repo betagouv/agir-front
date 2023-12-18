@@ -48,22 +48,19 @@
       </div>
     </div>
   </div>
-  <div
+  <CoachFinDeMission
     v-else
-    class="fr-grid-row fr-grid-row--center fr-grid-row--middle fr-grid-row--gutters background--white fr-py-10w border-radius--lg"
-  >
-    <span class="fr-h1 fr-mb-0">🎉</span>
-    <span class="fr-h4 fr-mb-0 fr-px-4w">Bonus !</span>
-    <button class="fr-btn fr-btn--secondary fr-text--md" @click="recupererPointsTodo">
-      Récolter vos 20 <img src="/ic_score.svg" alt="points" width="16" class="fr-ml-1v" />
-    </button>
-  </div>
+    @recuperer-points-todo="recupererPointsTodo"
+    :nombre-de-points-a-gagner="todoList.pointFinDeMission"
+    :titre-de-mission="todoList.titre"
+  />
 </template>
 
 <script setup lang="ts">
   import { ref } from 'vue';
   import CoachCardDone from '@/components/custom/Coach/CoachCardDone.vue';
   import CoachCardToDo from '@/components/custom/Coach/CoachCardToDo.vue';
+  import CoachFinDeMission from '@/components/custom/Coach/CoachFinDeMission.vue';
   import { TodoListViewModel } from '@/toDoList/adapters/toDoList.presenter.impl';
   import { TerminerToDoListUsecase } from '@/toDoList/terminerToDoList.usecase';
   import { utilisateurStore } from '@/store/utilisateur';
