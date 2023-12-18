@@ -5,4 +5,5 @@ export enum InteractionType {
   SUIVIDUJOUR = 'suivi_du_jour',
   AIDE = 'aide',
   COMPTE = 'profile',
+  SERVICE = 'service',
 }

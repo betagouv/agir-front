@@ -69,6 +69,8 @@ export class ToDoListPresenterImpl implements ToDoListPresenter {
         return '/coach/suivi-du-jour';
       case InteractionType.COMPTE:
         return '/mon-compte';
+      case InteractionType.SERVICE:
+        return '/coach/services';
       default:
         return '';
     }

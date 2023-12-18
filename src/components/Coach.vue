@@ -26,13 +26,13 @@
       </div>
     </div>
   </div>
-  <section class="fr-py-6w fr-background-contrast--grey">
+  <section
+    v-if="store.utilisateur.fonctionnalitesDebloquees.includes(Fonctionnalites.RECOMMANDATIONS)"
+    class="fr-py-6w fr-background-contrast--grey"
+  >
     <div class="fr-container" v-if="!isLoading">
       <CoachRecommandations
-        v-if="
-          recommandationsPersonnaliseesViewModel &&
-          store.utilisateur.fonctionnalitesDebloquees.includes(Fonctionnalites.RECOMMANDATIONS)
-        "
+        v-if="recommandationsPersonnaliseesViewModel"
         :recommandations="recommandationsPersonnaliseesViewModel"
       />
     </div>
