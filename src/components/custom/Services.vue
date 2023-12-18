@@ -2,25 +2,31 @@
   <nav class="fr-grid-row fr-grid-row--middle fr-mt-0 fr-background-action-high--blue-france fr-p-2w">
     <span class="fr-icon-layout-grid-fill text--white text--bold fr-col fr-mr-2w">Vos services</span>
     <ul class="fr-grid-row service__list fr-col-10 list-style-none fr-p-0">
-      <li class="fr-p-0 fr-col" v-for="service in servicesViewModels" :key="service.label">
+      <li class="fr-p-0 fr-col" v-for="service in servicesViewModels" :key="service.contenu">
         <a
           v-if="service.isUrlExterne"
           role="link"
           :href="service.url"
           target="_blank"
-          class="service__link fr-text--xs fr-text--bold text--black-light background--white border-radius--md fr-p-2v fr-mb-0"
+          class="service__link service__link--externe fr-text--xs text--black-light background--white border-radius--md fr-p-2v fr-mb-0"
         >
-          {{ service.label }}
+          <div class="fr-grid-row flex-column">
+            {{ service.titre }}
+            <span class="fr-text--bold">{{ service.contenu }}</span>
+          </div>
         </a>
         <router-link
           v-else
           :to="service.url"
-          class="service__link fr-text--xs fr-text--bold text--black-light background--white border-radius--md fr-p-2v fr-mb-0"
+          class="service__link fr-text--xs text--black-light background--white border-radius--md fr-p-2v fr-mb-0"
         >
-          {{ service.label }}
+          <div class="fr-grid-row flex-column">
+            {{ service.titre }}
+            <span class="fr-text--bold">{{ service.contenu }}</span>
+          </div>
         </router-link>
       </li>
-      <li class="fr-p-0">
+      <li class="fr-grid-row fr-grid-row--middle fr-p-0">
         <router-link class="fr-mb-0 add__service fr-text--sm text--white" :to="{ name: 'services' }">
           + Ajouter des services
         </router-link>
@@ -65,6 +71,19 @@
     background-color: white;
     color: var(--blue-france-sun-113-625);
   }
+
+  .service__link--externe {
+    position: relative;
+    padding-right: 2rem !important;
+  }
+
+  .service__link--externe::after {
+    position: absolute;
+    right: 0.5rem;
+    top: 50%;
+    margin-top: -0.5rem;
+  }
+
   .fr-col {
     flex: none;
   }
