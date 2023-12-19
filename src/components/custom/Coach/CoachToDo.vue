@@ -47,7 +47,6 @@
           >
             Découvrir le bonus
           </button>
-          <div id="container-survey"></div>
         </div>
       </div>
     </div>
@@ -71,12 +70,6 @@
   import { utilisateurStore } from '@/store/utilisateur';
   import { ToDoListRepositoryAxios } from '@/toDoList/adapters/toDoList.repository.axios';
   import { ToDoListEventBusImpl } from '@/toDoList/toDoListEventBusImpl';
-  import { publierEvenementHotjar, HotjarEvenement } from '@/shell/publierEvenementHotjar';
-  import { inject } from 'vue';
-
-  const hotjar = inject('Hotjar') as {
-    event: (eventName: string) => void;
-  };
 
   const props = defineProps<{ todoList: TodoListViewModel }>();
 
@@ -84,9 +77,6 @@
 
   const showBonus = () => {
     bonusFinalRecupere.value = true;
-    if (hotjar && props.todoList && props.todoList.derniere) {
-      publierEvenementHotjar(hotjar, HotjarEvenement.DEBRIEF);
-    }
   };
 
   const isDisableBonusFinDeToDo = () => {
