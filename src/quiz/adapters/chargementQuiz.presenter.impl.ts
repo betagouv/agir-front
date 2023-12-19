@@ -17,6 +17,7 @@ export interface QuizViewModel {
   steps: string;
   thematique: string;
   difficulte: string;
+  nombreDePointsAGagner: string;
 }
 
 export class ChargementQuizPresenterImpl implements ChargementQuizzPresenter {
@@ -28,6 +29,7 @@ export class ChargementQuizPresenterImpl implements ChargementQuizzPresenter {
 
   presenteQuiz(quiz: Quiz): void {
     this._quizViewModel({
+      nombreDePointsAGagner: quiz.nombreDePointsAGagner.toString(),
       difficulte: this.determinerDifficulte(quiz),
       thematique: quiz.thematique,
       steps: (quiz.questions.length * 2).toString(),

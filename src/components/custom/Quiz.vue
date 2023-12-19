@@ -15,7 +15,7 @@
       <div v-else>
         <QuizFinSuccess
           v-if="nombreDeBonnesReponses === quizViewModel.questions.length"
-          :nombre-de-points-a-gagner="nombreDePointsAGagner"
+          :nombre-de-points-a-gagner="quizViewModel.nombreDePointsAGagner"
         />
         <QuizFinError v-else />
       </div>
@@ -36,7 +36,6 @@
 
   const props = defineProps<{
     quizViewModel: QuizViewModel;
-    nombreDePointsAGagner: string;
     idUtilisateur: string;
     idInteraction: string;
     isModePrevisualisation: boolean;

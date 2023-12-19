@@ -15,7 +15,6 @@
         <span class="fr-ml-1w fr-h3">{{ quizViewModel.thematique }} - {{ quizViewModel.difficulte }}</span>
         <Quiz
           class="fr-mt-4w"
-          :nombre-de-points-a-gagner="nombreDePointsAGagner"
           :quiz-view-model="quizViewModel"
           :id-interaction="idInteraction"
           :id-utilisateur="idUtilisateur"

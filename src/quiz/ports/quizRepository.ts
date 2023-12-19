@@ -20,6 +20,7 @@ export interface Quiz {
   difficulte: QuizDifficulte;
   questions: QuestionsQuiz[];
   thematique: string;
+  nombreDePointsAGagner: number;
 }
 
 export interface QuizRepository {

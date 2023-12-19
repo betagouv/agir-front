@@ -20,6 +20,7 @@ export interface QuiCMSAttributesModel {
   questions: QuestionsQuizCMSModel[];
   thematique_gamification: ThematiqueGamificationCMSModel;
   difficulty: number;
+  points: number;
 }
 export interface QuizCMSDataModel {
   attributes: QuiCMSAttributesModel;
@@ -57,6 +58,7 @@ export class QuizRepositoryAxios implements QuizRepository {
       }),
       thematique: response.data.data.attributes.thematique_gamification.data.attributes.titre,
       difficulte: response.data.data.attributes.difficulty,
+      nombreDePointsAGagner: response.data.data.attributes.points,
     };
   }
 
