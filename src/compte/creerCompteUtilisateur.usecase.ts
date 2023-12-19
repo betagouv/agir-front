@@ -1,6 +1,8 @@
 import { CompteUtilisateurRepository } from '@/compte/ports/compteUtilisateur.repository';
 import { SessionRepository } from '@/authentification/authentifierUtilisateur.usecase';
 import { OnboardingState } from '@/onboarding/evaluerOnboarding.usecase';
+import { RepositoryError } from '@/shell/repositoryError';
+import { CreerComptePresenter } from '@/compte/ports/creerComptePresenter';
 
 export interface UserInput {
   nom: string;
@@ -9,34 +11,44 @@ export interface UserInput {
   motDePasse: string;
 }
 export class CreerCompteUtilisateurUsecase {
-  private _compteUtilisateuRepository: CompteUtilisateurRepository;
-  private _sessionRepository: SessionRepository;
+  constructor(
+    private compteUtilisateuRepository: CompteUtilisateurRepository,
+    private sessionRepository: SessionRepository
+  ) {}
 
-  constructor(compteUtilisateuRepository: CompteUtilisateurRepository, sessionRepository: SessionRepository) {
-    this._compteUtilisateuRepository = compteUtilisateuRepository;
-    this._sessionRepository = sessionRepository;
-  }
+  async execute(
+    creerComptePresenter: CreerComptePresenter,
+    compteUtilisateurACreerInput: UserInput,
+    onboarding: OnboardingState
+  ): Promise<void> {
+    try {
+      const utilisateurCree = await this.compteUtilisateuRepository.creerCompteUtilisateur({
+        nom: compteUtilisateurACreerInput.nom,
+        email: compteUtilisateurACreerInput.mail,
+        prenom: compteUtilisateurACreerInput.prenom,
+        motDePasse: compteUtilisateurACreerInput.motDePasse,
+        onboarding: onboarding,
+      });
 
-  async execute(compteUtilisateurACreerInput: UserInput, onboarding: OnboardingState): Promise<void> {
-    const utilisateurCree = await this._compteUtilisateuRepository.creerCompteUtilisateur({
-      nom: compteUtilisateurACreerInput.nom,
-      email: compteUtilisateurACreerInput.mail,
-      prenom: compteUtilisateurACreerInput.prenom,
-      motDePasse: compteUtilisateurACreerInput.motDePasse,
-      onboarding: onboarding,
-    });
-
-    this._sessionRepository.sauvegarderUtilisateur({
-      nom: '',
-      id: '',
-      codePostal: '',
-      commune: '',
-      prenom: '',
-      mail: utilisateurCree.mail,
-      revenuFiscal: null,
-      nombreDePartsFiscales: 1,
-      abonnementTransport: false,
-      fonctionnalitesDebloquees: [],
-    });
+      this.sessionRepository.sauvegarderUtilisateur({
+        nom: '',
+        id: '',
+        codePostal: '',
+        commune: '',
+        prenom: '',
+        mail: utilisateurCree.mail,
+        revenuFiscal: null,
+        nombreDePartsFiscales: 1,
+        abonnementTransport: false,
+        fonctionnalitesDebloquees: [],
+      });
+      creerComptePresenter.present();
+    } catch (e) {
+      if ((e as RepositoryError) && (e as RepositoryError).code === '023') {
+        creerComptePresenter.presentError(e as RepositoryError);
+      } else {
+        throw e;
+      }
+    }
   }
 }
