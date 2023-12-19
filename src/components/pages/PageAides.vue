@@ -24,10 +24,11 @@
   }
 
   onMounted(async () => {
+    const utilisateur = utilisateurStore().utilisateur!;
     await new ChargementAidesUsecase(
       new chargementAidesAxiosCmsRepository(),
       new PublierEvenemntRepositoryAxios()
-    ).execute(utilisateurStore().utilisateur!.id, new ChargementAidesPresenterImpl(mapAides));
+    ).execute(utilisateur.id, utilisateur.codePostal, new ChargementAidesPresenterImpl(mapAides));
     isLoading.value = false;
   });
 </script>

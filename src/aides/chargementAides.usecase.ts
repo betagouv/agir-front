@@ -18,8 +18,8 @@ export default class ChargementAidesUsecase {
     private publierEvenementRepository: PublierEvenementRepository
   ) {}
 
-  async execute(utilisateurId: string, presenter: ChargementAidesPresenter) {
-    const reponse = await this.chargementAidesRepositoryRepository.getAides();
+  async execute(utilisateurId: string, codePostal: string, presenter: ChargementAidesPresenter) {
+    const reponse = await this.chargementAidesRepositoryRepository.getAides(codePostal);
     await this.publierEvenementRepository.publierEvenement(utilisateurId, Evenemement.AIDES_CONSULTEES);
     presenter.presente(reponse);
   }
