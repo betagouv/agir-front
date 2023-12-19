@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.1](https://github.com/betagouv/agir-front/compare/v1.1.0...v1.1.1) (2023-12-19)
+
+
+### 🐛 Corrections de bogues
+
+* le nombre de points à gagner doit venir du quiz et non pas de l'objectif de la mission ([#221](https://github.com/betagouv/agir-front/issues/221)) ([f785125](https://github.com/betagouv/agir-front/commit/f785125c8615e8e71ec36d974b3ab6d134d13572))
+* transforme le rfr en number avant de l'envoyer au back ([#222](https://github.com/betagouv/agir-front/issues/222)) ([91d07f7](https://github.com/betagouv/agir-front/commit/91d07f7f99b0da065ff03208a5201c87f6ceae85))
+
 ## [1.1.0](https://github.com/betagouv/agir-front/compare/v1.0.2...v1.1.0) (2023-12-19)
 
 
