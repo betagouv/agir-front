@@ -1,7 +1,7 @@
 <template>
   <div class="fr-container fr-py-6w">
     <div>
-      <h1 class="fr-h2">Le coach</h1>
+      <h1 class="fr-h1">Agir !</h1>
       <div class="fr-grid-row fr-grid-row--gutters">
         <div v-if="todoList" class="fr-col fr-col-lg-7">
           <CoachToDo :todoList="todoList" />
