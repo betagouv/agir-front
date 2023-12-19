@@ -3,7 +3,7 @@
   <div v-else>
     <div v-if="!bonusFinalRecupere">
       <h2 class="fr-mb-0">{{ todoList.titre }}</h2>
-      <p class="fr-text--xl">Un pas après l’autre</p>
+      <p class="fr-text--xl">Un objectif après l’autre</p>
       <div v-if="todoList.fait.length > 0">
         <h3 class="text--uppercase fr-mb-0 fr-text--xs text-disabled-grey fr-mb-1w">déjà fait</h3>
         <ul class="list-style-none fr-p-0 fr-m-0">
