@@ -54,14 +54,14 @@
 
     emit('update:partEtRevenu', {
       nombreDeParts: nombreDeParts.value,
-      revenuFiscalDeReference: revenuFiscalDeReference.value,
+      revenuFiscalDeReference: Number(revenuFiscalDeReference.value),
     });
   });
 
   watch(revenuFiscalDeReference, nouvelleValeur => {
     emit('update:partEtRevenu', {
       nombreDeParts: nombreDeParts.value,
-      revenuFiscalDeReference: nouvelleValeur,
+      revenuFiscalDeReference: Number(nouvelleValeur),
     });
   });
 </script>
