@@ -5,6 +5,7 @@ import { vi, describe, it, SpyInstance } from 'vitest';
 import { EnvoyerDonneesQuizInteractionUsecase } from '@/quiz/envoyerDonneesQuizInteraction.usecase';
 
 const quizzViewModelMock: QuizViewModel = {
+  nombreDePointsAGagner: '10',
   titre: 'Titre du quizz',
   difficulte: 'Difficulté du quizz',
   thematique: 'Thématique du quizz',
