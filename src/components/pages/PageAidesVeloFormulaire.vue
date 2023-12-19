@@ -78,7 +78,7 @@
         fonctionnalitesDebloquees: utilisateur.fonctionnalitesDebloquees,
       };
       await usecase.execute(donneeAMettreAjour);
-      await router.push({ name: 'mes-aides-velo' });
+      await router.push({ name: 'vos-aides-velo' });
     }
   }
 </script>

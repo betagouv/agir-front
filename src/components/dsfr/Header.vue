@@ -77,7 +77,7 @@
             >
               <router-link
                 class="fr-nav__link"
-                :to="{ name: 'mes-aides' }"
+                :to="{ name: 'vos-aides' }"
                 :aria-current="isMesAidesActif ? 'page' : null"
               >
                 Vos aides

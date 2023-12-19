@@ -69,7 +69,7 @@
         fonctionnalitesDebloquees: utilisateur.fonctionnalitesDebloquees,
       };
       await usecase.execute(donneeAMettreAjour);
-      await router.push({ name: 'mes-aides-retrofit' });
+      await router.push({ name: 'vos-aides-retrofit' });
     }
   }
 </script>

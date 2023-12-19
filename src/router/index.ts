@@ -157,30 +157,30 @@ const routes = [
     children: [
       {
         path: '/vos-aides',
-        name: 'mes-aides',
+        name: 'vos-aides',
         component: PageAides,
         meta: {
           title: `${appName} Vos aides`,
         },
       },
       {
-        path: '/mes-aides/retrofit',
-        name: 'mes-aides-retrofit',
+        path: '/vos-aides/retrofit',
+        name: 'vos-aides-retrofit',
         component: PageAidesRetrofit,
       },
       {
-        path: '/mes-aides/retrofit/formulaire',
-        name: 'mes-aides-retrofit-formulaire',
+        path: '/vos-aides/retrofit/formulaire',
+        name: 'vos-aides-retrofit-formulaire',
         component: PageAidesRetrofitFormulaire,
       },
       {
-        path: '/mes-aides/velo',
-        name: 'mes-aides-velo',
+        path: '/vos-aides/velo',
+        name: 'vos-aides-velo',
         component: PageAidesVelo,
       },
       {
-        path: '/mes-aides/velo/formulaire',
-        name: 'mes-aides-velo-formulaire',
+        path: '/vos-aides/velo/formulaire',
+        name: 'vos-aides-velo-formulaire',
         component: AidesVeloFormulaire,
       },
     ],
