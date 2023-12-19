@@ -1,5 +1,41 @@
 # Changelog
 
+## [1.1.0](https://github.com/betagouv/agir-front/compare/v1.0.2...v1.1.0) (2023-12-19)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* affiche une enquête à la fin des missions ([#207](https://github.com/betagouv/agir-front/issues/207)) ([eeb0d92](https://github.com/betagouv/agir-front/commit/eeb0d92fd3c78feb9ebced2c9df023abeda19572))
+* ajout de la mention 'service bientôt disponible' sur les services en cours de construction ([#202](https://github.com/betagouv/agir-front/issues/202)) ([5b90bf5](https://github.com/betagouv/agir-front/commit/5b90bf51dec50f044cbdd3c4141088ef47a7df0e))
+* ajout du mécanisme de reveal d'une fonctionnalité ([#193](https://github.com/betagouv/agir-front/issues/193)) ([7bda6c7](https://github.com/betagouv/agir-front/commit/7bda6c72f988375b79425a110dcb7689f136236d))
+* ajouter le bilan de l'onboarding à la page coach ([#203](https://github.com/betagouv/agir-front/issues/203)) ([2e51abf](https://github.com/betagouv/agir-front/commit/2e51abf9e2163d7e506f410356307ba6a1a82f85))
+* ajouter un écran quand toutes les missions sont terminées ([#216](https://github.com/betagouv/agir-front/issues/216)) ([d2bc36b](https://github.com/betagouv/agir-front/commit/d2bc36b12733593597c7c4916f78d744a612544e))
+* installer un service peut maintenant faire parti d'un objectif ([#211](https://github.com/betagouv/agir-front/issues/211)) ([4b0d623](https://github.com/betagouv/agir-front/commit/4b0d623ccb20a0a9aecad2b072273423402daf46))
+* la consultation des aides peut être maintenant un objectif de mission ([#204](https://github.com/betagouv/agir-front/issues/204)) ([d184cdb](https://github.com/betagouv/agir-front/commit/d184cdb13b3157c0100149d9ebb96ad474778e94))
+* la consultation du profile (compte) peut maintenant être un objectif de todo ([#209](https://github.com/betagouv/agir-front/issues/209)) ([d2ae71e](https://github.com/betagouv/agir-front/commit/d2ae71e292d4d581c58979e62b1a59ee000b234d))
+* les services actifs affichent plus de contenu ([#213](https://github.com/betagouv/agir-front/issues/213)) ([900fcc5](https://github.com/betagouv/agir-front/commit/900fcc5f89c76c009c5a13811c69785c7a367146))
+* lister les aides en fonction du code postal de l'usagé ([#215](https://github.com/betagouv/agir-front/issues/215)) ([1080203](https://github.com/betagouv/agir-front/commit/1080203ddf9825e4d6dbae8070c15ec7d78963c9))
+* modification de la section onboarding stats france ([#220](https://github.com/betagouv/agir-front/issues/220)) ([836a6a2](https://github.com/betagouv/agir-front/commit/836a6a2d3989376f197781b8090a51284e8a8d30))
+* modification des écrans de fin quiz ([#214](https://github.com/betagouv/agir-front/issues/214)) ([5d7fad5](https://github.com/betagouv/agir-front/commit/5d7fad59e3e8ddb43c54a91a510f6650b75bf3ac))
+* modification du style du bouton de bonus de fin de mission ([#208](https://github.com/betagouv/agir-front/issues/208)) ([c432d05](https://github.com/betagouv/agir-front/commit/c432d059541039aa77206a08768a18ea16a6d407))
+* modification ui de l'écran fin de mission ([#212](https://github.com/betagouv/agir-front/issues/212)) ([1568b14](https://github.com/betagouv/agir-front/commit/1568b14108336be14e6ac3d55af63e1f1ad3fbf6))
+* page dedie à la beta fermée ([#217](https://github.com/betagouv/agir-front/issues/217)) ([97be9bc](https://github.com/betagouv/agir-front/commit/97be9bc06e6290555e2696041cec4b2f9aa6d66e))
+* un titre est maintenant visible pour les todo-list à place de 'Vos Missions' ([#195](https://github.com/betagouv/agir-front/issues/195)) ([e44b630](https://github.com/betagouv/agir-front/commit/e44b630c02a47457c21dee7950f2adb6fa7ba154))
+
+
+### 🐛 Corrections de bogues
+
+* modification du wording et des images de l'onboarding ([#201](https://github.com/betagouv/agir-front/issues/201)) ([f103f2c](https://github.com/betagouv/agir-front/commit/f103f2c94e2d03535c0baff3bf96e26b52661057))
+* prendre en compte le nombre de parts fiscales depuis la route /utilisateurs/id et sauvegarde le resultat en session ([#206](https://github.com/betagouv/agir-front/issues/206)) ([3faa10d](https://github.com/betagouv/agir-front/commit/3faa10dac83aa885a484d9078ec1cdf4945570ec))
+* rediriger vers /coach si l'utilisateur se rend sur la page d'acc… ([#210](https://github.com/betagouv/agir-front/issues/210)) ([e8cebfb](https://github.com/betagouv/agir-front/commit/e8cebfbdb10e48b5ce09e5d327bd4317a7241f63))
+
+
+### 👷 Autres changements
+
+* move hotjar event triggering in finDesMissions compoenent ([#218](https://github.com/betagouv/agir-front/issues/218)) ([d40ae64](https://github.com/betagouv/agir-front/commit/d40ae6440d171fafe782f59928e879a27a214120))
+* nettoyage suivi du jour ([#199](https://github.com/betagouv/agir-front/issues/199)) ([5000f81](https://github.com/betagouv/agir-front/commit/5000f817238325bf1cb72812909a5c04ef5f1de4))
+* passage de toutes les url mes-aides en vos-aides ([#219](https://github.com/betagouv/agir-front/issues/219)) ([befc110](https://github.com/betagouv/agir-front/commit/befc1109231f1948fc7d1ce03c9bcc25d165741d))
+
 ## [1.0.2](https://github.com/betagouv/agir-front/compare/v1.0.1...v1.0.2) (2023-12-12)
 
 
