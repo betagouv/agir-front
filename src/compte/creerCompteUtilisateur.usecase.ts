@@ -44,8 +44,9 @@ export class CreerCompteUtilisateurUsecase {
       });
       creerComptePresenter.present();
     } catch (e) {
-      if ((e as RepositoryError) && (e as RepositoryError).code === '023') {
-        creerComptePresenter.presentError(e as RepositoryError);
+      const repositoryError = e as RepositoryError;
+      if (repositoryError && repositoryError.code === '023') {
+        creerComptePresenter.presentError(repositoryError);
       } else {
         throw e;
       }
