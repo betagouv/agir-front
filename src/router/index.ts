@@ -30,6 +30,7 @@ import PageCatalogueServices from '@/components/pages/PageCatalogueServices.vue'
 import AidesVeloFormulaire from '@/components/pages/PageAidesVeloFormulaire.vue';
 import PageAidesRetrofitFormulaire from '@/components/pages/PageAidesRetrofitFormulaire.vue';
 import { utilisateurStore } from '@/store/utilisateur';
+import PageBetaFermee from '@/components/pages/PageBetaFermee.vue';
 
 const appName = 'Agir ! -';
 const routes = [
@@ -46,6 +47,15 @@ const routes = [
       if (utilisateurStore().utilisateur.id.length > 0) {
         router.replace({ name: 'coach' });
       }
+    },
+  },
+  {
+    path: '/beta-fermee',
+    name: 'beta-fermee',
+    component: PageBetaFermee,
+    meta: {
+      title: `${appName} Bêta fermée`,
+      estPublique: true,
     },
   },
   {

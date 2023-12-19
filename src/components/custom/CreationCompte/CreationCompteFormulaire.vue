@@ -62,6 +62,7 @@
   import { onboardingStore } from '@/store/onboarding';
   import InputPassword from '@/components/custom/InputPassword.vue';
   import Alert from '@/components/custom/Alert.vue';
+  import { CreerComptePresenterImpl } from '@/compte/adapters/creerComptePresenterImpl';
 
   let compteUtilisateurInput = ref<UserInput>({
     nom: '',
@@ -84,13 +85,15 @@
       new SessionRepositoryStore()
     );
     creeCompteUseCase
-      .execute(compteUtilisateurInput.value, onboardingStore().$state)
-      .then(() => {
-        router.push({ name: 'validation-compte' });
-        creationDeCompteEnErreur.value = false;
-      }, null)
+      .execute(
+        new CreerComptePresenterImpl(viewModel => {
+          router.push({ name: viewModel.route });
+        }),
+        compteUtilisateurInput.value,
+        onboardingStore().$state
+      )
       .catch(reason => {
-        creationDeCompteMessageErreur.value = reason.data.message;
+        creationDeCompteMessageErreur.value = reason.message;
         creationDeCompteEnErreur.value = true;
       });
   };
