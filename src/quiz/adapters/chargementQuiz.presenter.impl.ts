@@ -57,7 +57,7 @@ export class ChargementQuizPresenterImpl implements ChargementQuizzPresenter {
       case QuizDifficulte.DIFFICILE:
         return 'difficile';
       case QuizDifficulte.TRES_DIFFICILE:
-        return 'tres difficile';
+        return 'très difficile';
     }
   }
 }

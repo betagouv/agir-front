@@ -23,7 +23,7 @@
     </section>
   </div>
   <section class="background--white fr-py-6w">
-    <div class="fr-container text--center">
+    <div class="fr-container">
       <BilanOnboardingStatFrance />
     </div>
   </section>
