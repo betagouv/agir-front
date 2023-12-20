@@ -1,5 +1,6 @@
 import PageArticle from '@/components/pages/PageArticle.vue';
 import PagePrevisualisationArticle from '@/components/pages/PagePrevisualisationArticle.vue';
+import { RouteRecordRaw } from 'vue-router';
 
 enum RouteArticlePath {
   ARTICLE = '/article/',
@@ -12,7 +13,7 @@ enum RouteArticleName {
   ARTICLE = 'article',
 }
 
-const articlesRoutes = [
+const articlesRoutes: RouteRecordRaw[] = [
   {
     path: RouteArticlePath.ARTICLE,
     name: RouteArticleName.ARTICLE,

@@ -3,6 +3,7 @@ import PageCatalogueServices from '@/components/pages/PageCatalogueServices.vue'
 import PageSuiviDuJour from '@/components/pages/PageSuiviDuJour.vue';
 import PageQuiz from '@/components/pages/PageQuiz.vue';
 import PagePrevisualisationQuiz from '@/components/pages/PagePrevisualisationQuiz.vue';
+import { RouteRecordRaw } from 'vue-router';
 enum RouteCoachPath {
   COACH = '/coach/',
   SERVICES = 'services',
@@ -19,7 +20,7 @@ export enum RouteCoachName {
   QUIZ = 'quiz',
   QUIZ_PREVISUALISATION = 'quiz-previsualisation',
 }
-const coachRoutes = [
+const coachRoutes: RouteRecordRaw[] = [
   {
     path: RouteCoachPath.COACH,
     children: [

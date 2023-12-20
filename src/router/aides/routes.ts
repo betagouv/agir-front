@@ -3,6 +3,7 @@ import PageAides from '@/components/pages/PageAides.vue';
 import PageAidesRetrofit from '@/components/pages/PageAidesRetrofit.vue';
 import PageAidesRetrofitFormulaire from '@/components/pages/PageAidesRetrofitFormulaire.vue';
 import PageAidesVeloFormulaire from '@/components/pages/PageAidesVeloFormulaire.vue';
+import { RouteRecordRaw } from 'vue-router';
 
 enum RouteAidesPath {
   VOS_AIDES = '/vos-aides/',
@@ -19,7 +20,7 @@ export enum RouteAidesName {
   VELO_FORMULAIRE = 'vos-aides-velo-formulaire',
 }
 
-const aidesRoutes = [
+const aidesRoutes: RouteRecordRaw[] = [
   {
     path: RouteAidesPath.VOS_AIDES,
     children: [
