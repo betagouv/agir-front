@@ -187,6 +187,10 @@ h3 {
   background-color: var(--error-950-100);
 }
 
+.background--vert--success {
+  background-color: var(--success-950-100);
+}
+
 .background--gris {
   background-color: var(--background-alt-grey);
 }
