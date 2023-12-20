@@ -48,7 +48,7 @@
 </template>
 
 <script setup lang="ts">
-  import { onMounted, ref } from 'vue';
+  import { onMounted, onUnmounted, ref } from 'vue';
   import CarteSkeleton from '@/components/CarteSkeleton.vue';
   import { utilisateurStore } from '@/store/utilisateur';
   import CoachChangementSituation from '@/components/custom/Coach/CoachChangementSituation.vue';
@@ -125,4 +125,9 @@
   };
 
   onMounted(lancerChargementDesDonnees);
+
+  onUnmounted(() => {
+    ToDoListEventBusImpl.getInstance().unsubscribe(ToDoListEvent.TODO_POINTS_ONT_ETE_RECUPERE);
+    ToDoListEventBusImpl.getInstance().unsubscribe(ToDoListEvent.TODO_A_ETE_TERMINEE);
+  });
 </script>
