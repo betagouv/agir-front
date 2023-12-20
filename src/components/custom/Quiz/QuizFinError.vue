@@ -19,6 +19,6 @@
     background-size: cover;
   }
 </style>
-<script setup>
-  import { RouteCoachName } from '@/router/coach/routes.js';
+<script setup lang="ts">
+  import { RouteCoachName } from '@/router/coach/routes';
 </script>
