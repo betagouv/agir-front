@@ -9,7 +9,7 @@
     <form>
       <QuestionDuQuiz
         v-if="etapeCourante <= quizViewModel.questions.length"
-        :item="quizViewModel.questions[etapeCourante - 1]"
+        :question="quizViewModel.questions[etapeCourante - 1]"
         @etapeSuivante="verifierLaReponse"
       />
       <div v-else>

@@ -1,28 +1,28 @@
 <template>
   <div v-if="!isValide">
     <BoutonRadio
-      :options="listDesReponses"
-      :legende="item.intitule"
+      :options="listeDesReponses"
+      :legende="question.intitule"
       legende-size="l"
       col=""
       orientation="vertical"
-      name="name"
+      name="questionDuQuiz"
       v-model="valueInput"
     />
-    <button @click="submitReponse" class="fr-btn fr-btn--lg" title="Valider" :disabled="valueInput === ''">
+    <button @click="validerLaReponse" class="fr-btn fr-btn--lg" title="Valider" :disabled="valueInput === ''">
       Valider
     </button>
   </div>
   <div v-else>
     <QuizReponse
-      :question="item.intitule"
-      :solution="item.solution"
-      :texte-explication-o-k="item.texteExplicationOK"
-      :texte-explication-k-o="item.texteExplicationKO"
+      :question="question.intitule"
+      :solution="question.solution"
+      :texte-explication-o-k="question.texteExplicationOK"
+      :texte-explication-k-o="question.texteExplicationKO"
       :reponseCorrecte="reponseCorrecte"
       :reponse="valueInput"
     />
-    <button @click="handleClick" class="fr-btn fr-mt-2w">Passer à l'étape suivante</button>
+    <button @click="passerEtapeSuivante" class="fr-btn fr-btn--lg">Passer à l'étape suivante</button>
   </div>
 </template>
 
@@ -32,29 +32,29 @@
   import BoutonRadio from '@/components/custom/BoutonRadio.vue';
   import QuizReponse from '@/components/custom/QuizReponse.vue';
 
-  const props = defineProps<{ item: QuestionViewModel }>();
+  const props = defineProps<{ question: QuestionViewModel }>();
 
   const valueInput = ref<string>('');
   const isValide = ref<boolean>(false);
-  const reponseCorrecte = ref<boolean>();
-  const emit = defineEmits(['etapeSuivante']);
+  const reponseCorrecte = ref<boolean>(false);
 
-  const listDesReponses = props.item.reponsesPossibles.map(item => ({
-    label: item,
-    value: item,
+  const listeDesReponses = props.question.reponsesPossibles.map(reponse => ({
+    label: reponse,
+    value: reponse,
   }));
 
   watch(
-    () => props.item,
+    () => props.question,
     () => {
       (isValide.value = false), (valueInput.value = '');
     }
   );
 
-  const submitReponse = () => {
+  const validerLaReponse = () => {
     isValide.value = true;
-    reponseCorrecte.value = valueInput.value === props.item.solution;
+    reponseCorrecte.value = valueInput.value === props.question.solution;
   };
 
-  const handleClick = () => emit('etapeSuivante', reponseCorrecte.value);
+  const emit = defineEmits(['etapeSuivante']);
+  const passerEtapeSuivante = () => emit('etapeSuivante', reponseCorrecte.value);
 </script>

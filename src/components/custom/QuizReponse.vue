@@ -7,7 +7,7 @@
       <span class="fr-icon-check-line" aria-hidden="true"></span>
       Bonne réponse : {{ solution }}
     </p>
-    <div v-html="texteExplicationOK"></div>
+    <div v-html="texteExplicationOK" />
   </div>
   <div v-else>
     <p class="background--rouge-erreur fr-p-1v fr-text--bold text--rouge-erreur fr-mb-1w">
@@ -18,7 +18,7 @@
       <span class="fr-icon-check-line" aria-hidden="true"></span>
       La bonne réponse est : {{ solution }}
     </p>
-    <div v-html="texteExplicationKO"></div>
+    <div v-html="texteExplicationKO" />
   </div>
 </template>
 
@@ -28,7 +28,7 @@
     solution: string;
     texteExplicationKO: string;
     texteExplicationOK: string;
-    reponseCorrecte?: boolean;
+    reponseCorrecte: boolean;
     reponse: string;
   }>();
 </script>
