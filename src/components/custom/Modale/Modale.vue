@@ -8,9 +8,6 @@
               <button class="fr-btn--close fr-btn" :aria-controls="id">Fermer</button>
             </div>
             <div class="fr-modal__content">
-              <h1 :id="label" class="fr-modal__title text--center text--uppercase fr-text--sm text--normal text--gris">
-                {{ titre }}
-              </h1>
               <slot />
             </div>
           </div>
@@ -24,7 +21,6 @@
   const props = withDefaults(
     defineProps<{
       id: string;
-      titre: string;
       label: string;
       size?: 's' | 'm';
     }>(),

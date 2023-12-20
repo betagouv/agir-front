@@ -1,21 +1,21 @@
 <template>
-  <div class="modalePassageDeNiveau text--center">
-    <div class="modalePassageDeNiveau--picto fr-mb-1w">
+  <div class="modalePassageDeNiveau text--center fr-p-3w">
+    <div class="modalePassageDeNiveau--picto text--orange fr-mb-1w">
       <span class="fr-icon-star-fill" aria-hidden="true"></span>
       <span class="fr-icon-star-fill" aria-hidden="true"></span>
       <span class="fr-icon-star-fill" aria-hidden="true"></span>
     </div>
-    <h1>Bien joué !</h1>
-    <h2>Vous passez au niveau suivant !</h2>
-    <p>
+    <h1 :id="modaleId" class="fr-h2 fr-modal__title text--uppercase fr-mb-1w">Bien joué !</h1>
+    <h2 class="fr-text--lead text--orange text--normal fr-mb-1w">Vous passez au niveau suivant !</h2>
+    <p class="fr-grid-row flex-column text--uppercase text--bold text--gris-light">
       <span>Niveau</span>
-      <span>{{ niveau }}</span>
+      <span class="fr-h2 fr-mb-0">{{ niveau }}</span>
     </p>
   </div>
 </template>
 
 <script setup lang="ts">
-  defineProps<{ niveau: number }>();
+  defineProps<{ modaleId: string; niveau: number }>();
 </script>
 
 <style scoped>
@@ -27,7 +27,6 @@
     display: flex;
     justify-content: center;
     align-items: end;
-    color: #ed8e00;
   }
 
   .modalePassageDeNiveau--picto span:nth-child(2)::before {
