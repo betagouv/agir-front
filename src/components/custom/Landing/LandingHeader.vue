@@ -25,7 +25,7 @@
     </div>
   </div>
 </template>
-<script setup>
-  import { RouteCommuneName } from '@/router/index.js';
-  import { RouteOnboardingName } from '@/router/onboarding/routes.js';
+<script setup lang="ts">
+  import { RouteOnboardingName } from '@/router/onboarding/routes';
+  import { RouteCommuneName } from '@/router';
 </script>
