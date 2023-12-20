@@ -19,7 +19,10 @@
               </div>
             </div>
             <div class="fr-col-12 fr-grid-row fr-grid-row--middle">
-              <router-link class="fr-header__service" :to="{ name: estConnecte ? 'coach' : 'accueil' }">
+              <router-link
+                class="fr-header__service"
+                :to="{ name: estConnecte ? RouteCoachName.COACH : RouteCommuneName.ACCUEIL }"
+              >
                 <img :alt="`${estConnecte ? 'Revenir à la page coach' : 'Revenir à l\'accueil'}`" src="/logo.svg" />
               </router-link>
             </div>
