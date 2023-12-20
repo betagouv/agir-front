@@ -46,6 +46,7 @@
   import router from '@/router';
   import { CompteUtlisateurViewModel } from '@/compte/adapters/compteUtilisateur.presenter.impl';
   import InputCodePostal from '@/components/dsfr/InputCodePostal.vue';
+  import { RouteAidesName } from '@/router/aides/routes';
 
   const store = utilisateurStore();
   const revenuFiscal = ref(store.utilisateur.revenuFiscal ? store.utilisateur.revenuFiscal : 0);
@@ -78,7 +79,7 @@
         fonctionnalitesDebloquees: utilisateur.fonctionnalitesDebloquees,
       };
       await usecase.execute(donneeAMettreAjour);
-      await router.push({ name: 'vos-aides-velo' });
+      await router.push({ name: RouteAidesName.VELO });
     }
   }
 </script>

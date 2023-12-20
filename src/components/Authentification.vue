@@ -11,7 +11,7 @@
           </div>
           <div class="fr-fieldset__element">
             <InputPasswordLogin v-model="password" />
-            <router-link :to="{ name: 'mot-de-passe-oublie' }" class="fr-link fr-mt-1v">
+            <router-link :to="{ name: RouteCompteName.MOT_DE_PASSE_OUBLIE }" class="fr-link fr-mt-1v">
               Mot de passe oublié ?
             </router-link>
           </div>
@@ -51,6 +51,8 @@
   import InputMail from '@/components/dsfr/InputMail.vue';
   import InputPasswordLogin from '@/components/custom/InputPasswordLogin.vue';
   import Alert from '@/components/custom/Alert.vue';
+  import { RouteCoachName } from '@/router/coach/routes';
+  import { RouteCompteName } from '@/router/compte/routes';
 
   withDefaults(defineProps<{ premiereConnexion?: boolean }>(), {
     premiereConnexion: true,
@@ -69,14 +71,14 @@
         loginEnErreur.value = false;
         const requestedRoute = sessionStorage.getItem('requestedRoute');
         sessionStorage.removeItem('requestedRoute');
-        router.push(requestedRoute || { name: 'coach' });
+        router.push(requestedRoute || { name: RouteCoachName.COACH });
         sendIdNGC();
       })
       .catch(reason => {
         loginMessageErreur.value = reason.data.message;
         loginEnErreur.value = true;
         if (reason.data.message === 'Utilisateur non actif') {
-          router.push({ name: 'validation-compte', query: { email: email.value } });
+          router.push({ name: RouteCompteName.VALIDATION_COMPTE, query: { email: email.value } });
         }
       });
   };

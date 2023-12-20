@@ -7,6 +7,7 @@
   import { onMounted, ref } from 'vue';
   import { Article, RecupererArticleUsecase } from '@/article/recupererArticle.usecase';
   import { ArticleRepositoryAxios } from '@/article/adapters/article.repository.axios';
+  import { RouteCommuneName } from '@/router';
 
   const router = useRouter();
 
@@ -24,7 +25,7 @@
     if (articleRecupere) {
       article.value = articleRecupere;
     } else {
-      await router.push('/not-found');
+      await router.push({ name: RouteCommuneName.NOT_FOUND });
     }
   });
 </script>

@@ -28,7 +28,9 @@
             <div class="fr-header__tools-links">
               <ul class="fr-btns-group">
                 <li v-if="!estConnecte">
-                  <router-link to="/authentification" class="fr-btn fr-btn--secondary"> Se connecter </router-link>
+                  <router-link :to="{ name: RouteCommuneName.AUTHENTIFICATION }" class="fr-btn fr-btn--secondary">
+                    Se connecter
+                  </router-link>
                 </li>
                 <li v-if="estConnecte">
                   <div class="utilisateur">
@@ -36,7 +38,7 @@
                       <router-link
                         class="fr-text-label--blue-france fr-text--bold fr-ml-1w"
                         title="accéder à mon compte"
-                        :to="{ name: 'mon-compte' }"
+                        :to="{ name: RouteCompteName.MON_COMPTE }"
                       >
                         {{ nomUtilisateur }}
                       </router-link>
@@ -66,7 +68,11 @@
         >
           <ul class="fr-nav__list">
             <li class="fr-nav__item" data-fr-js-navigation-item="true">
-              <router-link class="fr-nav__link" :to="{ name: 'coach' }" :aria-current="isCoachActif ? 'page' : null">
+              <router-link
+                class="fr-nav__link"
+                :to="{ name: RouteCoachName.COACH }"
+                :aria-current="isCoachActif ? 'page' : null"
+              >
                 Le coach
               </router-link>
             </li>
@@ -77,7 +83,7 @@
             >
               <router-link
                 class="fr-nav__link"
-                :to="{ name: 'vos-aides' }"
+                :to="{ name: RouteAidesName.VOS_AIDES }"
                 :aria-current="isMesAidesActif ? 'page' : null"
               >
                 Vos aides
@@ -93,11 +99,14 @@
 <script setup lang="ts">
   import { computed, ref, watch } from 'vue';
   import { useRoute } from 'vue-router';
-  import router from '@/router';
+  import router, { RouteCommuneName } from '@/router';
   import { utilisateurStore } from '@/store/utilisateur';
   import Cookies from 'js-cookie';
   import ScoreHeader from '@/components/custom/ScoreHeader.vue';
   import { Fonctionnalites } from '@/shell/fonctionnalitesEnum';
+  import { RouteCompteName } from '@/router/compte/routes';
+  import { RouteCoachName } from '@/router/coach/routes';
+  import { RouteAidesName } from '@/router/aides/routes';
 
   const route = useRoute();
   const store = utilisateurStore();

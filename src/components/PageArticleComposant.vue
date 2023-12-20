@@ -19,7 +19,7 @@
             <span class="fr-m-0 fr-text--bold fr-text--md">Comment avez-vous trouvé cet article ?</span>
             <Notation @rated="noterLarticle" />
           </div>
-          <router-link class="fr-btn fr-mt-5v" :to="{ name: 'coach' }"> Revenir au coach </router-link>
+          <router-link class="fr-btn fr-mt-5v" :to="{ name: RouteCoachName.COACH }"> Revenir au coach </router-link>
         </div>
       </div>
       <div class="fr-col-12 fr-col-md-4">
@@ -32,6 +32,7 @@
 <script setup lang="ts">
   import FilDAriane from './dsfr/FilDAriane.vue';
   import { Article } from '@/article/recupererArticle.usecase';
+  import { RouteCoachName } from '@/router/coach/routes';
   import Notation from '@/components/Notation.vue';
   import { ArticleRepositoryAxios } from '@/article/adapters/article.repository.axios';
   import { utilisateurStore } from '@/store/utilisateur';

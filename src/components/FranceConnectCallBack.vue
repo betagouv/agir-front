@@ -10,6 +10,7 @@
   import router from '@/router';
   import { utilisateurStore } from '@/store/utilisateur';
   import { sendIdNGC } from '@/bilan/middleware/pendingSimulation';
+  import { RouteCoachName } from '@/router/coach/routes';
 
   onMounted(async () => {
     const route = useRoute();
@@ -25,7 +26,7 @@
     usecase.execute(token).then(() => {
       const requestedRoute = sessionStorage.getItem('requestedRoute');
       sessionStorage.removeItem('requestedRoute');
-      router.push(requestedRoute || { name: 'coach', state: { utilisateur: store.utilisateur.nom } });
+      router.push(requestedRoute || { name: RouteCoachName.COACH, state: { utilisateur: store.utilisateur.nom } });
       sendIdNGC();
     });
   });

@@ -3,7 +3,7 @@
     <div class="fr-container">
       <div class="fr-footer__body">
         <div class="fr-footer__brand fr-enlarge-link">
-          <router-link to="/coach" title="Retour à l’accueil du site">
+          <router-link :to="{ name: RouteCoachName.COACH }" title="Retour à l’accueil du site">
             <p class="fr-logo">
               République
               <br />
@@ -82,10 +82,14 @@
   import router from '@/router';
   import { utilisateurStore } from '@/store/utilisateur';
   import Cookies from 'js-cookie';
+  import { RouteCoachName } from '@/router/coach/routes';
 
   export default {
     name: 'Footer',
     computed: {
+      RouteCoachName() {
+        return RouteCoachName;
+      },
       getUtilisateur() {
         return utilisateurStore().utilisateur;
       },

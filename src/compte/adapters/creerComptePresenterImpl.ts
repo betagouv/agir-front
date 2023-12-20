@@ -1,5 +1,7 @@
 import { RepositoryError } from '@/shell/repositoryError';
 import { CreerComptePresenter } from '@/compte/ports/creerComptePresenter';
+import { RouteCommuneName } from '@/router';
+import { RouteCompteName } from '@/router/compte/routes';
 
 interface CreerCompteViewModel {
   route: string;
@@ -9,14 +11,14 @@ export class CreerComptePresenterImpl implements CreerComptePresenter {
   presentError(error: RepositoryError) {
     if (error?.code === '023') {
       this.creerCompteViewModel({
-        route: 'beta-fermee',
+        route: RouteCommuneName.BETA_FERMEE,
       });
     }
   }
 
   present() {
     this.creerCompteViewModel({
-      route: 'validation-compte',
+      route: RouteCompteName.VALIDATION_COMPTE,
     });
   }
 }

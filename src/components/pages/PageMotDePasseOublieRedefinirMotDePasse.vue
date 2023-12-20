@@ -51,7 +51,7 @@
   import { useRoute } from 'vue-router';
   import { UtilisateurRepositoryAxios } from '@/authentification/adapters/utilisateur.repository.axios';
   import { TerminerRedefinirMotDePasseUsecase } from '@/authentification/terminerRedefinirMotDePasse.usecase';
-  import router from '@/router';
+  import router, { RouteCommuneName } from '@/router';
   import Alert from '@/components/custom/Alert.vue';
 
   const route = useRoute();
@@ -71,7 +71,7 @@
     terminerRedefinirMotDePasse
       .execute(email.value, motDePasse.value, code.value)
       .then(() => {
-        router.push({ name: 'authentification' });
+        router.push({ name: RouteCommuneName.AUTHENTIFICATION });
       })
       .catch(reason => {
         erreur.value = true;

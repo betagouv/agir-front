@@ -33,6 +33,7 @@
   import { UtilisateurRepositoryAxios } from '@/authentification/adapters/utilisateur.repository.axios';
   import { RenvoyerCoteOTPUsecase } from '@/authentification/renvoyerCoteOTPUsecase';
   import { useAlerte } from '@/composables/useAlerte';
+  import { RouteCoachName } from '@/router/coach/routes';
 
   const code = ref('');
   const email = utilisateurStore().utilisateur.mail || new URLSearchParams(window.location.search).get('email') || '';
@@ -48,7 +49,7 @@
       .then(() => {
         const requestedRoute = sessionStorage.getItem('requestedRoute');
         sessionStorage.removeItem('requestedRoute');
-        router.push(requestedRoute || { name: 'coach' });
+        router.push(requestedRoute || { name: RouteCoachName.COACH });
         sendIdNGC();
       })
       .catch(reason => {
