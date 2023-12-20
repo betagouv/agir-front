@@ -5,7 +5,7 @@ import { onboardingStore } from '@/store/onboarding';
 import PageValidationCompte from '@/components/pages/PageValidationCompte.vue';
 import PageMotDePasseOublie from '@/components/pages/PageMotDePasseOublie.vue';
 import PageMotDePasseOublieRedefinirMotDePasse from '@/components/pages/PageMotDePasseOublieRedefinirMotDePasse.vue';
-import router from '@/router';
+import { RouteRecordRaw } from 'vue-router';
 
 enum RouteComptePath {
   MON_COMPTE = '/mon-compte/',
@@ -25,7 +25,7 @@ export enum RouteCompteName {
   REDEFINIR_MOT_DE_PASSE = 'redefinir-mot-de-passe',
 }
 
-const compteRoutes = [
+const compteRoutes: RouteRecordRaw[] = [
   {
     path: RouteComptePath.MON_COMPTE,
     children: [
@@ -47,7 +47,7 @@ const compteRoutes = [
     component: PageCreationCompte,
     beforeEnter: (to, from, next) => {
       if (!onboardingStore().estComplet) {
-        router.replace({ name: 'pre-onboarding' });
+        next({ name: 'pre-onboarding' });
       } else {
         next();
       }

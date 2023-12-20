@@ -1,5 +1,5 @@
 import Authentification from '@/components/Authentification.vue';
-import { createRouter, createWebHistory } from 'vue-router';
+import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 
 import Page404 from '@/components/pages/Page404.vue';
 import { storeIdNGC } from '@/bilan/middleware/pendingSimulation';
@@ -31,12 +31,12 @@ enum RouteCommunePath {
   LOGIN_CALLBACK = '/login-callback',
 }
 
-const routes = [
-  ...aidesRoutes,
-  ...articlesRoutes,
+const routes: RouteRecordRaw[] = [
   ...compteRoutes,
-  ...onboardingRoutes,
   ...coachRoutes,
+  ...articlesRoutes,
+  ...onboardingRoutes,
+  ...aidesRoutes,
   {
     path: '/',
     name: RouteCommuneName.ACCUEIL,
