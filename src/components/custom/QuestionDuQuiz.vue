@@ -19,7 +19,7 @@
       :solution="question.solution"
       :texte-explication-o-k="question.texteExplicationOK"
       :texte-explication-k-o="question.texteExplicationKO"
-      :reponseCorrecte="reponseCorrecte"
+      :reponse-correcte="reponseCorrecte"
       :reponse="valueInput"
     />
     <button @click="passerEtapeSuivante" class="fr-btn fr-btn--lg">Passer à l'étape suivante</button>
@@ -38,15 +38,22 @@
   const isValide = ref<boolean>(false);
   const reponseCorrecte = ref<boolean>(false);
 
-  const listeDesReponses = props.question.reponsesPossibles.map(reponse => ({
-    label: reponse,
-    value: reponse,
-  }));
+  const listeDesReponses = ref(
+    props.question.reponsesPossibles.map(reponse => ({
+      label: reponse,
+      value: reponse,
+    }))
+  );
 
   watch(
     () => props.question,
     () => {
-      (isValide.value = false), (valueInput.value = '');
+      isValide.value = false;
+      valueInput.value = '';
+      listeDesReponses.value = props.question.reponsesPossibles.map(reponse => ({
+        label: reponse,
+        value: reponse,
+      }));
     }
   );
 
@@ -56,5 +63,5 @@
   };
 
   const emit = defineEmits(['etapeSuivante']);
-  const passerEtapeSuivante = () => emit('etapeSuivante', reponseCorrecte.value);
+  const passerEtapeSuivante = () => emit('etapeSuivante', valueInput.value === props.question.solution);
 </script>
