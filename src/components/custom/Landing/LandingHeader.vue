@@ -7,13 +7,13 @@
       </p>
       <div class="fr-grid fr-grid-row fr-grid-row--middle">
         <router-link
-          :to="{ name: 'authentification' }"
+          :to="{ name: RouteCommuneName.AUTHENTIFICATION }"
           class="fr-btn fr-btn--lg fr-btn--secondary fr-mr-2w fr-mb-2w fr-mb-md-0"
         >
           Se connecter
         </router-link>
         <router-link
-          :to="{ name: 'pre-onboarding' }"
+          :to="{ name: RouteOnboardingName.ONBOARDING }"
           class="fr-btn fr-btn--lg fr-btn--icon-right fr-icon-arrow-right-line"
         >
           Commencer
@@ -25,3 +25,7 @@
     </div>
   </div>
 </template>
+<script setup>
+  import { RouteCommuneName } from '@/router/index.js';
+  import { RouteOnboardingName } from '@/router/onboarding/routes.js';
+</script>

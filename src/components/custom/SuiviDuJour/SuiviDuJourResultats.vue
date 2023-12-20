@@ -12,7 +12,7 @@
     :valeurs-carbone-du-graph="suiviDuJourResultats!.suivisPrecedent.valeursDesSuivis"
     :moyenne-des-suivis="suiviDuJourResultats!.suivisPrecedent.moyenneDesSuivis"
   />
-  <router-link class="fr-btn fr-mt-2w" title="Retourner à la page coach" :to="{ name: 'coach' }">
+  <router-link class="fr-btn fr-mt-2w" title="Retourner à la page coach" :to="{ name: RouteCoachName.COACH }">
     Retour à mes actions
   </router-link>
 </template>
@@ -22,6 +22,7 @@
   import EmpreinteDuJourDetails from '@/components/EmpreinteDuJourDetails.vue';
   import { SuiviDuJourResultatsViewModel } from '@/suivi/adapters/suiviDuJour.presenter.impl';
   import GraphSuiviEmpreinteCarbone from '@/components/GraphSuiviEmpreinteCarbone.vue';
+  import { RouteCoachName } from '@/router/coach/routes';
 
   interface Props {
     suiviDuJourResultats?: SuiviDuJourResultatsViewModel | null;

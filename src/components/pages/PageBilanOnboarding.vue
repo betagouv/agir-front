@@ -15,7 +15,7 @@
         </h2>
         <router-link
           class="fr-btn fr-btn--lg fr-btn--icon-left fr-icon-arrow-right-line"
-          :to="{ name: 'creation-compte' }"
+          :to="{ name: RouteCompteName.CREATION_COMPTE }"
         >
           Inscrivez-vous !
         </router-link>
@@ -43,7 +43,7 @@
       </h2>
       <router-link
         class="fr-btn fr-btn--lg fr-btn--icon-left fr-icon-arrow-right-line"
-        :to="{ name: 'creation-compte' }"
+        :to="{ name: RouteCompteName.CREATION_COMPTE }"
       >
         S'inscrire
       </router-link>
@@ -64,6 +64,7 @@
   import BilanOnboardingEstimation from '@/components/custom/BilanOnboarding/BilanOnboardingEstimation.vue';
   import BilanOnboardingStatFrance from '@/components/custom/BilanOnboarding/BilanOnboardingStatFrance.vue';
   import BilanOnboardingPhrasesCoach from '@/components/custom/BilanOnboarding/BilanOnboardingPhrasesCoach.vue';
+  import { RouteCompteName } from '@/router/compte/routes';
 
   const onBoardingStore = onboardingStore();
   let onboardingResultatViewModel = ref<OnboardingResultatViewModel>();

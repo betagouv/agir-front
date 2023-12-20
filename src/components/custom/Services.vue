@@ -27,7 +27,7 @@
         </router-link>
       </li>
       <li class="fr-grid-row fr-grid-row--middle fr-p-0">
-        <router-link class="fr-mb-0 add__service fr-text--sm text--white" :to="{ name: 'services' }">
+        <router-link class="fr-mb-0 add__service fr-text--sm text--white" :to="{ name: RouteCoachName.SERVICES }">
           + Ajouter des services
         </router-link>
       </li>
@@ -42,6 +42,7 @@
   import { onMounted, onUnmounted, ref } from 'vue';
   import { utilisateurStore } from '@/store/utilisateur';
   import { ServiceEvent, ServiceEventBusImpl } from '@/services/serviceEventBusImpl';
+  import { RouteCoachName } from '@/router/coach/routes';
   const servicesViewModels = ref<ServiceViewModel[]>();
 
   const mapValuesServicesViewmodel = (services: ServiceViewModel[]) => {

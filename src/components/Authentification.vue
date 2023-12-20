@@ -31,7 +31,7 @@
         <hr />
         <h2>Première visite ?</h2>
         <router-link
-          :to="{ name: 'creation-compte' }"
+          :to="{ name: RouteCompteName.CREATION_COMPTE }"
           class="fr-btn fr-btn--lg fr-btn--secondary display-block full-width"
         >
           Créer un compte

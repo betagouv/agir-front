@@ -18,14 +18,14 @@
     </ul>
     <div class="fr-grid-row flex-center" v-if="revenuFiscal === null">
       <span class="fr-text--bold">Pour estimer vos aides</span>
-      <router-link class="fr-btn display-block text--center full-width" :to="{ name: 'vos-aides-velo-formulaire' }">
+      <router-link class="fr-btn display-block text--center full-width" :to="{ name: RouteAidesName.VELO_FORMULAIRE }">
         Compléter vos données
       </router-link>
     </div>
     <router-link
       v-else
       class="fr-link fr-icon-arrow-right-line fr-link--icon-right text--black-light"
-      :to="{ name: 'vos-aides-velo-formulaire' }"
+      :to="{ name: RouteAidesName.VELO_FORMULAIRE }"
     >
       Modifier ces données
     </router-link>
@@ -36,6 +36,7 @@
   import CarteInfo from '@/components/custom/CarteInfo.vue';
   import { calculerSeuils } from '@/shell/calculerSeuils';
   import { ref } from 'vue';
+  import { RouteAidesName } from '@/router/aides/routes';
 
   const props = defineProps<{
     codePostal: string;
