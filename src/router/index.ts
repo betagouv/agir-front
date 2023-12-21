@@ -32,10 +32,8 @@ enum RouteCommunePath {
 }
 
 const routes: RouteRecordRaw[] = [
-  ...compteRoutes,
-  ...coachRoutes,
-  ...articlesRoutes,
   ...onboardingRoutes,
+  ...articlesRoutes,
   ...aidesRoutes,
   {
     path: '/',
@@ -87,13 +85,15 @@ const routes: RouteRecordRaw[] = [
       estPublique: true,
     },
   },
-
   {
     path: '/:catchAll(.*)',
     name: RouteCommuneName.NOT_FOUND,
     component: Page404,
   },
 ];
+
+compteRoutes?.forEach(route => routes.push(route));
+coachRoutes?.forEach(route => routes.push(route));
 
 const router = createRouter({
   history: createWebHistory(),
