@@ -7,7 +7,7 @@ export default mergeConfig(viteConfig, {
   test: {
     globals: true,
     environment: 'jsdom',
-    include: ['**/*.spec.ts'],
+    include: ['tests/**/*.spec.ts'],
     sequence: { shuffle: true },
   },
   resolve: {
