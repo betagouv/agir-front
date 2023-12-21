@@ -12,7 +12,8 @@ import aidesRoutes from '@/router/aides/routes';
 import articlesRoutes from '@/router/articles/routes';
 import compteRoutes from '@/router/compte/routes';
 import onboardingRoutes from '@/router/onboarding/routes';
-import coachRoutes, { RouteCoachName } from '@/router/coach/routes';
+import coachRoutes from '@/router/coach/routes';
+import { RouteCoachName } from '@/router/coach/routeCoachName';
 
 export enum RouteCommuneName {
   ACCUEIL = 'accueil',
@@ -32,6 +33,8 @@ enum RouteCommunePath {
 }
 
 const routes: RouteRecordRaw[] = [
+  ...compteRoutes,
+  ...coachRoutes,
   ...onboardingRoutes,
   ...articlesRoutes,
   ...aidesRoutes,
@@ -91,9 +94,6 @@ const routes: RouteRecordRaw[] = [
     component: Page404,
   },
 ];
-
-compteRoutes?.forEach(route => routes.push(route));
-coachRoutes?.forEach(route => routes.push(route));
 
 const router = createRouter({
   history: createWebHistory(),

@@ -22,7 +22,8 @@
   import EmpreinteDuJourDetails from '@/components/EmpreinteDuJourDetails.vue';
   import { SuiviDuJourResultatsViewModel } from '@/suivi/adapters/suiviDuJour.presenter.impl';
   import GraphSuiviEmpreinteCarbone from '@/components/GraphSuiviEmpreinteCarbone.vue';
-  import { RouteCoachName } from '@/router/coach/routes';
+
+  import { RouteCoachName } from '@/router/coach/routeCoachName';
 
   interface Props {
     suiviDuJourResultats?: SuiviDuJourResultatsViewModel | null;

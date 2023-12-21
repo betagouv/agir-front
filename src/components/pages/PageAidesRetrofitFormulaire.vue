@@ -38,7 +38,8 @@
   import InputTrancheDeRevenu from '@/components/custom/InputTrancheDeRevenu.vue';
   import router from '@/router';
   import AidesVeloFormulaireAside from '@/components/custom/Aides/AidesInfosUtilisationDesDonnees.vue';
-  import { RouteAidesName } from '@/router/aides/routes';
+
+  import { RouteAidesName } from '@/router/aides/routeAidesName';
 
   const store = utilisateurStore();
   const revenuFiscal = ref(store.utilisateur.revenuFiscal ? store.utilisateur.revenuFiscal : 0);

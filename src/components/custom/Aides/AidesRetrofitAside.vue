@@ -39,7 +39,8 @@
   import CarteInfo from '@/components/custom/CarteInfo.vue';
   import { calculerSeuils } from '@/shell/calculerSeuils';
   import { ref } from 'vue';
-  import { RouteAidesName } from '@/router/aides/routes';
+
+  import { RouteAidesName } from '@/router/aides/routeAidesName';
 
   const props = defineProps<{
     codePostal: string;

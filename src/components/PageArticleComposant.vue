@@ -32,7 +32,8 @@
 <script setup lang="ts">
   import FilDAriane from './dsfr/FilDAriane.vue';
   import { Article } from '@/article/recupererArticle.usecase';
-  import { RouteCoachName } from '@/router/coach/routes';
+
+  import { RouteCoachName } from '@/router/coach/routeCoachName';
   import Notation from '@/components/Notation.vue';
   import { ArticleRepositoryAxios } from '@/article/adapters/article.repository.axios';
   import { utilisateurStore } from '@/store/utilisateur';

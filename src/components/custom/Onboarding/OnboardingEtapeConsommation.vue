@@ -32,7 +32,8 @@
   import BoutonRadio from '@/components/custom/BoutonRadio.vue';
   import { onboardingStore } from '@/store/onboarding';
   import router from '@/router';
-  import { RouteOnboardingName } from '@/router/onboarding/routes';
+
+  import { RouteOnboardingName } from '@/router/onboarding/routeOnboardingName';
 
   const onBoardingStore = onboardingStore();
   const options = [

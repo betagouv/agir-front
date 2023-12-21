@@ -39,7 +39,8 @@
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import { SessionRepositoryStore } from '@/authentification/adapters/session.repository.store';
   import { PublierEvenemntRepositoryAxios } from '@/shell/adapters/publierEvenemnt.repository.axios';
-  import { RouteCompteName } from '@/router/compte/routes';
+
+  import { RouteCompteName } from '@/router/compte/routeCompteName';
 
   const compteUtlisateurViewModel = ref<CompteUtlisateurViewModel | null>(null);
 

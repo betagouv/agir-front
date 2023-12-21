@@ -10,7 +10,8 @@
   import router from '@/router';
   import { utilisateurStore } from '@/store/utilisateur';
   import { sendIdNGC } from '@/bilan/middleware/pendingSimulation';
-  import { RouteCoachName } from '@/router/coach/routes';
+
+  import { RouteCoachName } from '@/router/coach/routeCoachName';
 
   onMounted(async () => {
     const route = useRoute();

@@ -107,9 +107,9 @@
   import Cookies from 'js-cookie';
   import ScoreHeader from '@/components/custom/ScoreHeader.vue';
   import { Fonctionnalites } from '@/shell/fonctionnalitesEnum';
-  import { RouteCompteName } from '@/router/compte/routes';
-  import { RouteCoachName } from '@/router/coach/routes';
-  import { RouteAidesName } from '@/router/aides/routes';
+  import { RouteCoachName } from '@/router/coach/routeCoachName';
+  import { RouteCompteName } from '@/router/compte/routeCompteName';
+  import { RouteAidesName } from '@/router/aides/routeAidesName';
 
   const route = useRoute();
   const store = utilisateurStore();

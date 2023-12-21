@@ -64,7 +64,8 @@
   import BilanOnboardingEstimation from '@/components/custom/BilanOnboarding/BilanOnboardingEstimation.vue';
   import BilanOnboardingStatFrance from '@/components/custom/BilanOnboarding/BilanOnboardingStatFrance.vue';
   import BilanOnboardingPhrasesCoach from '@/components/custom/BilanOnboarding/BilanOnboardingPhrasesCoach.vue';
-  import { RouteCompteName } from '@/router/compte/routes';
+
+  import { RouteCompteName } from '@/router/compte/routeCompteName';
 
   const onBoardingStore = onboardingStore();
   let onboardingResultatViewModel = ref<OnboardingResultatViewModel>();

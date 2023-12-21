@@ -4,6 +4,8 @@ import PageSuiviDuJour from '@/components/pages/PageSuiviDuJour.vue';
 import PageQuiz from '@/components/pages/PageQuiz.vue';
 import PagePrevisualisationQuiz from '@/components/pages/PagePrevisualisationQuiz.vue';
 import { RouteRecordRaw } from 'vue-router';
+import { RouteCoachName } from '@/router/coach/routeCoachName';
+
 enum RouteCoachPath {
   COACH = '/coach/',
   SERVICES = 'services',
@@ -13,13 +15,6 @@ enum RouteCoachPath {
   QUIZ_PREVISUALISATION = 'previsualisation/:id',
 }
 
-export enum RouteCoachName {
-  COACH = 'coach',
-  SERVICES = 'services',
-  SUIVI_DU_JOUR = 'suivi-du-jour',
-  QUIZ = 'quiz',
-  QUIZ_PREVISUALISATION = 'quiz-previsualisation',
-}
 const coachRoutes: RouteRecordRaw[] = [
   {
     path: RouteCoachPath.COACH,

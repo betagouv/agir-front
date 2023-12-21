@@ -18,5 +18,5 @@
   </div>
 </template>
 <script setup lang="ts">
-  import { RouteCompteName } from '@/router/compte/routes';
+  import { RouteCompteName } from '@/router/compte/routeCompteName';
 </script>

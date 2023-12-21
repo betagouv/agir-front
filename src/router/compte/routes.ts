@@ -6,6 +6,7 @@ import PageValidationCompte from '@/components/pages/PageValidationCompte.vue';
 import PageMotDePasseOublie from '@/components/pages/PageMotDePasseOublie.vue';
 import PageMotDePasseOublieRedefinirMotDePasse from '@/components/pages/PageMotDePasseOublieRedefinirMotDePasse.vue';
 import { RouteRecordRaw } from 'vue-router';
+import { RouteCompteName } from '@/router/compte/routeCompteName';
 
 enum RouteComptePath {
   MON_COMPTE = '/mon-compte/',
@@ -14,15 +15,6 @@ enum RouteComptePath {
   VALIDATION_COMPTE = '/validation-compte',
   MOT_DE_PASSE_OUBLIE = '/mot-de-passe-oublie',
   REDEFINIR_MOT_DE_PASSE = '/mot-de-passe-oublie/redefinir-mot-de-passe',
-}
-
-export enum RouteCompteName {
-  MON_COMPTE = 'mon-compte',
-  MODIFIER_MOT_DE_PASSE = 'modifier-mot-de-passe',
-  CREATION_COMPTE = 'creation-compte',
-  VALIDATION_COMPTE = 'validation-compte',
-  MOT_DE_PASSE_OUBLIE = 'mot-de-passe-oublie',
-  REDEFINIR_MOT_DE_PASSE = 'redefinir-mot-de-passe',
 }
 
 const compteRoutes: RouteRecordRaw[] = [

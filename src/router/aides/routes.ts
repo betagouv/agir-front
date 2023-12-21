@@ -4,20 +4,13 @@ import PageAidesRetrofit from '@/components/pages/PageAidesRetrofit.vue';
 import PageAidesRetrofitFormulaire from '@/components/pages/PageAidesRetrofitFormulaire.vue';
 import PageAidesVeloFormulaire from '@/components/pages/PageAidesVeloFormulaire.vue';
 import { RouteRecordRaw } from 'vue-router';
+import { RouteAidesName } from '@/router/aides/routeAidesName';
 
 enum RouteAidesPath {
   VOS_AIDES = '/vos-aides/',
   RETROFIT = 'retrofit',
   FORMULAIRE = 'formulaire',
   VELO = 'velo',
-}
-
-export enum RouteAidesName {
-  VOS_AIDES = 'vos-aides',
-  RETROFIT = 'vos-aides-retrofit',
-  RETROFIT_FORMULAIRE = 'vos-aides-retrofit-formulaire',
-  VELO = 'vos-aides-velo',
-  VELO_FORMULAIRE = 'vos-aides-velo-formulaire',
 }
 
 const aidesRoutes: RouteRecordRaw[] = [

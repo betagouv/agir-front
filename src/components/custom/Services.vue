@@ -42,7 +42,8 @@
   import { onMounted, onUnmounted, ref } from 'vue';
   import { utilisateurStore } from '@/store/utilisateur';
   import { ServiceEvent, ServiceEventBusImpl } from '@/services/serviceEventBusImpl';
-  import { RouteCoachName } from '@/router/coach/routes';
+
+  import { RouteCoachName } from '@/router/coach/routeCoachName';
   const servicesViewModels = ref<ServiceViewModel[]>();
 
   const mapValuesServicesViewmodel = (services: ServiceViewModel[]) => {

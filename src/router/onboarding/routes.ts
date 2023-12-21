@@ -2,17 +2,12 @@ import PagePreOnboarding from '@/components/pages/PagePreOnboarding.vue';
 import PageOnboarding from '@/components/pages/PageOnboarding.vue';
 import PageBilanOnboarding from '@/components/pages/PageBilanOnboarding.vue';
 import { RouteRecordRaw } from 'vue-router';
+import { RouteOnboardingName } from '@/router/onboarding/routeOnboardingName';
 
 enum RouteOnboardingPath {
   PRE_ONBOARDING = '/pre-onboarding',
   ONBOARDING = '/onboarding',
   BILAN_ONBOARDING = 'bilan',
-}
-
-export enum RouteOnboardingName {
-  PRE_ONBOARDING = 'pre-onboarding',
-  ONBOARDING = 'onboarding',
-  BILAN_ONBOARDING = 'bilan-onboarding',
 }
 
 const onboardingRoutes: RouteRecordRaw[] = [

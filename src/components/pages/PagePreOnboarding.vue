@@ -16,5 +16,5 @@
   </div>
 </template>
 <script setup lang="ts">
-  import { RouteOnboardingName } from '@/router/onboarding/routes';
+  import { RouteOnboardingName } from '@/router/onboarding/routeOnboardingName';
 </script>

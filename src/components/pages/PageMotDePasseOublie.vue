@@ -25,7 +25,8 @@
   import router from '@/router';
   import { CommencerRedefinirMotDePasseUsecase } from '@/authentification/commencerRedefinirMotDePasse.usecase';
   import { UtilisateurRepositoryAxios } from '@/authentification/adapters/utilisateur.repository.axios';
-  import { RouteCompteName } from '@/router/compte/routes';
+
+  import { RouteCompteName } from '@/router/compte/routeCompteName';
 
   const email = ref('');
 

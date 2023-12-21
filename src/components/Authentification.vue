@@ -51,8 +51,8 @@
   import InputMail from '@/components/dsfr/InputMail.vue';
   import InputPasswordLogin from '@/components/custom/InputPasswordLogin.vue';
   import Alert from '@/components/custom/Alert.vue';
-  import { RouteCoachName } from '@/router/coach/routes';
-  import { RouteCompteName } from '@/router/compte/routes';
+  import { RouteCoachName } from '@/router/coach/routeCoachName';
+  import { RouteCompteName } from '@/router/compte/routeCompteName';
 
   withDefaults(defineProps<{ premiereConnexion?: boolean }>(), {
     premiereConnexion: true,

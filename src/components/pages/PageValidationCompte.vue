@@ -33,7 +33,8 @@
   import { UtilisateurRepositoryAxios } from '@/authentification/adapters/utilisateur.repository.axios';
   import { RenvoyerCoteOTPUsecase } from '@/authentification/renvoyerCoteOTPUsecase';
   import { useAlerte } from '@/composables/useAlerte';
-  import { RouteCoachName } from '@/router/coach/routes';
+
+  import { RouteCoachName } from '@/router/coach/routeCoachName';
 
   const code = ref('');
   const email = utilisateurStore().utilisateur.mail || new URLSearchParams(window.location.search).get('email') || '';

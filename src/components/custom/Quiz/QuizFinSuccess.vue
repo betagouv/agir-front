@@ -16,7 +16,7 @@
 </template>
 
 <script setup lang="ts">
-  import { RouteCoachName } from '@/router/coach/routes';
+  import { RouteCoachName } from '@/router/coach/routeCoachName';
 
   defineProps<{ nombreDePointsAGagner: string }>();
 </script>

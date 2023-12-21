@@ -82,7 +82,8 @@
   import router from '@/router';
   import { utilisateurStore } from '@/store/utilisateur';
   import Cookies from 'js-cookie';
-  import { RouteCoachName } from '@/router/coach/routes';
+
+  import { RouteCoachName } from '@/router/coach/routeCoachName';
 
   export default {
     name: 'Footer',
