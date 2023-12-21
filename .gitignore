@@ -48,3 +48,7 @@ package-lock.json
 
 # Env var
 /public/js/config.js
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
