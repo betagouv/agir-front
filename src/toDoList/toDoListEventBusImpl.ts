@@ -10,7 +10,7 @@ export enum ToDoListEvent {
 export class ToDoListEventBusImpl extends EventBus<ToDoListEvent> {
   private static instance: ToDoListEventBusImpl | null = null;
 
-  eventSubscribers: Record<ToDoListEvent, (() => void)[]> = {
+  protected eventSubscribers: Record<ToDoListEvent, { subscriberName: string; callback: () => void }[]> = {
     [ToDoListEvent.TODO_POINTS_ONT_ETE_RECUPERE]: [],
     [ToDoListEvent.TODO_ARTICLE_A_ETE_LU]: [],
     [ToDoListEvent.TODO_A_ETE_TERMINEE]: [],
