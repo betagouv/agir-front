@@ -115,6 +115,10 @@ h3 {
   color: var(--success-425-625);
 }
 
+.text--orange {
+  color: #ed8e00;
+}
+
 .text--rouge-erreur {
   color: var(--error-425-625);
 }

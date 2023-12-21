@@ -7,9 +7,9 @@
   </div>
 
   <Teleport to="body">
-    <Modale titre="Passage de niveau" label="Modale de passage de niveau" id="passageDeNiveau">
-      <CarteScore :value="utilisateurStore().score.niveau" type="niveau" class="fr-mb-2w" />
-      <div class="text--center">
+    <Modale label="Modale de passage de niveau" id="passageDeNiveau">
+      <ModalePassageDeNiveau :niveau="utilisateurStore().score.niveau" modale-id="passageDeNiveau" />
+      <div class="text--center fr-mt-3w">
         <div v-if="utilisateurStore().score.celebration?.reveal">
           <p class="fr-m-0 text--uppercase fr-text--xs text--bold text--gris-light">Section débloquée</p>
           <h4 class="fr-h2 fr-my-0">{{ utilisateurStore().score.celebration!.reveal!.titre }}</h4>
@@ -44,11 +44,11 @@
   import { ChargementScorePresenterImpl } from '@/score/adapters/chargementScore.presenter.impl';
   import { ToDoListEvent, ToDoListEventBusImpl } from '@/toDoList/toDoListEventBusImpl';
   import Modale from '@/components/custom/Modale/Modale.vue';
-  import CarteScore from '@/components/custom/Progression/CarteScore.vue';
   import ModaleActions from '@/components/custom/Modale/ModaleActions';
   import { ValiderCelebrationUsecase } from '@/celebration/validerCelebration.usecase';
   import { CelebrationRepositoryAxios } from '@/celebration/adapters/celebration.repository.axios';
   import { SessionRepositoryStore } from '@/authentification/adapters/session.repository.store';
+  import ModalePassageDeNiveau from './Modale/ModalePassageDeNiveau.vue';
 
   const score = computed(() => utilisateurStore().score);
   let modaleActions: ModaleActions | null;
