@@ -35,10 +35,14 @@ app.use(VueMatomo, {
   host: import.meta.env.VITE_MATOMO_URL,
   siteId: import.meta.env.VITE_MATOMO_SITE_ID,
 });
-Hotjar.init(import.meta.env.VITE_HOTJAR_ID, import.meta.env.VITE_HOTJAR_SNIPPET_VERSION, {
-  debug: false,
-});
-app.provide('Hotjar', Hotjar);
+if (import.meta.env.VITE_ENV === 'production') {
+  Hotjar.init(import.meta.env.VITE_HOTJAR_ID, import.meta.env.VITE_HOTJAR_SNIPPET_VERSION, {
+    debug: false,
+  });
+  app.provide('Hotjar', Hotjar);
+} else {
+  app.provide('Hotjar', null);
+}
 
 createSentry(app, router);
 
