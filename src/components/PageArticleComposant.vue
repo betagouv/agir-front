@@ -15,6 +15,10 @@
         <div class="article fr-p-6v background--white border-radius--md">
           <h2 class="fr-h3">{{ article.sousTitre }}</h2>
           <div class="cms__content" v-html="article.texte" />
+          <div class="fr-grid-row fr-grid-row--middle flex-space-between border border-radius--md fr-p-2w">
+            <span class="fr-m-0 fr-text--bold fr-text--md">Comment avez-vous trouvé cet article ?</span>
+            <Notation @rated="noterLarticle" />
+          </div>
           <router-link class="fr-btn fr-mt-5v" :to="{ name: 'coach' }"> Revenir au coach </router-link>
         </div>
       </div>
@@ -28,10 +32,19 @@
 <script setup lang="ts">
   import FilDAriane from './dsfr/FilDAriane.vue';
   import { Article } from '@/article/recupererArticle.usecase';
+  import Notation from '@/components/Notation.vue';
+  import { ArticleRepositoryAxios } from '@/article/adapters/article.repository.axios';
+  import { utilisateurStore } from '@/store/utilisateur';
+  import { EvaluerArticleUsecase } from '@/article/evaluerArticle.usecase';
 
-  defineProps<{
+  const props = defineProps<{
     article: Article;
   }>();
+
+  const noterLarticle = note => {
+    const noterArticleUseCase = new EvaluerArticleUsecase(new ArticleRepositoryAxios());
+    noterArticleUseCase.execute(props.article.id, utilisateurStore().utilisateur.id, note);
+  };
 </script>
 
 <style scoped>

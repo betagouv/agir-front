@@ -4,6 +4,7 @@ export interface Article {
   texte: string;
   titre: string;
   sousTitre: string;
+  id: string;
 }
 export class RecupererArticleUsecase {
   constructor(private readonly articleRepository: ArticleRepository) {}

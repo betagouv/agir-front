@@ -95,6 +95,10 @@ h3 {
   color: var(--blue-france-sun-113-625);
 }
 
+.text--mention-grey {
+  color: var(--text-mention-grey);
+}
+
 .text--gris {
   color: var(--text-default-grey);
 }

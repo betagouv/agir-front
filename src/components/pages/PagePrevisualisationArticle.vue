@@ -11,6 +11,7 @@
   const router = useRouter();
 
   const article = ref<Article>({
+    id: '',
     titre: '',
     texte: '',
     sousTitre: '',
@@ -19,9 +20,9 @@
   onMounted(async () => {
     const route = useRoute();
     const idArticle = Array.isArray(route.params.id) ? route.params.id[0] : route.params.id;
-    const articleUsecase = await new RecupererArticleUsecase(new ArticleRepositoryAxios()).execute(idArticle);
-    if (articleUsecase) {
-      article.value = articleUsecase;
+    const articleRecupere = await new RecupererArticleUsecase(new ArticleRepositoryAxios()).execute(idArticle);
+    if (articleRecupere) {
+      article.value = articleRecupere;
     } else {
       await router.push('/not-found');
     }
