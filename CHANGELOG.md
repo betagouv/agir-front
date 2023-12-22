@@ -1,5 +1,25 @@
 # Changelog
 
+## [1.2.0](https://github.com/betagouv/agir-front/compare/v1.1.1...v1.2.0) (2023-12-22)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* ajout du favicon ([#227](https://github.com/betagouv/agir-front/issues/227)) ([5819592](https://github.com/betagouv/agir-front/commit/58195923fd9aa47093e4c452b832d0d861af856c))
+
+
+### 🐛 Corrections de bogues
+
+* correction des cas où le score ne se mettait pas toujours à jour ([#232](https://github.com/betagouv/agir-front/issues/232)) ([d5dd87b](https://github.com/betagouv/agir-front/commit/d5dd87bf51d4e0ed5541a22c284577f239a03927))
+* nombre d'apel à la route /todo ([#224](https://github.com/betagouv/agir-front/issues/224)) ([6b5afe5](https://github.com/betagouv/agir-front/commit/6b5afe5e369f87fa64719d6379e4a4bcd1afcf79))
+* retours UI du quiz ([#225](https://github.com/betagouv/agir-front/issues/225)) ([730ff5a](https://github.com/betagouv/agir-front/commit/730ff5ab6568bf94f98da64c31cf1b0a11b24903))
+* retours UI modale passage niveau ([#230](https://github.com/betagouv/agir-front/issues/230)) ([8a16d1f](https://github.com/betagouv/agir-front/commit/8a16d1f1c40078bb4ddde7c1f990edcc43d5f083))
+
+
+### 👷 Autres changements
+
+* activation de hotjar seulement en production ([#226](https://github.com/betagouv/agir-front/issues/226)) ([b9d9ba3](https://github.com/betagouv/agir-front/commit/b9d9ba32fed37c33c202cac7d09055214c136bd9))
+
 ## [1.1.1](https://github.com/betagouv/agir-front/compare/v1.1.0...v1.1.1) (2023-12-19)
 
 
