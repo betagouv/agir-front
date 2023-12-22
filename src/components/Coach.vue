@@ -92,6 +92,7 @@
     todoList.value = viewModel;
   }
 
+  const subscriberName = 'Coach';
   const lancerChargementDesDonnees = () => {
     const idUtilisateur = store.utilisateur.id;
     const chargerRecommandationsPersonnaliseesUsecase = new RecommandationsPersonnaliseesUsecase(
@@ -100,11 +101,11 @@
     const chargementEmpreinteUseCase = new ChargementEmpreinteUsecase(new EmpreinteRepositoryAxios());
     const chargerTodoListUsecase = new RecupererToDoListUsecase(new ToDoListRepositoryAxios());
 
-    ToDoListEventBusImpl.getInstance().subscribe(ToDoListEvent.TODO_POINTS_ONT_ETE_RECUPERE, () => {
+    ToDoListEventBusImpl.getInstance().subscribe(subscriberName, ToDoListEvent.TODO_POINTS_ONT_ETE_RECUPERE, () => {
       chargerTodoListUsecase.execute(idUtilisateur, new ToDoListPresenterImpl(mapValueTodo));
     });
 
-    ToDoListEventBusImpl.getInstance().subscribe(ToDoListEvent.TODO_A_ETE_TERMINEE, () => {
+    ToDoListEventBusImpl.getInstance().subscribe(subscriberName, ToDoListEvent.TODO_A_ETE_TERMINEE, () => {
       chargerTodoListUsecase.execute(idUtilisateur, new ToDoListPresenterImpl(mapValueTodo));
     });
 
@@ -127,7 +128,7 @@
   onMounted(lancerChargementDesDonnees);
 
   onUnmounted(() => {
-    ToDoListEventBusImpl.getInstance().unsubscribe(ToDoListEvent.TODO_POINTS_ONT_ETE_RECUPERE);
-    ToDoListEventBusImpl.getInstance().unsubscribe(ToDoListEvent.TODO_A_ETE_TERMINEE);
+    ToDoListEventBusImpl.getInstance().unsubscribe(subscriberName, ToDoListEvent.TODO_POINTS_ONT_ETE_RECUPERE);
+    ToDoListEventBusImpl.getInstance().unsubscribe(subscriberName, ToDoListEvent.TODO_A_ETE_TERMINEE);
   });
 </script>

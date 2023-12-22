@@ -7,10 +7,11 @@ export enum ServiceEvent {
 
 export class ServiceEventBusImpl extends EventBus<ServiceEvent> {
   private static instance: ServiceEventBusImpl | null = null;
-  eventSubscribers: Record<ServiceEvent, (() => void)[]> = {
+  eventSubscribers: Record<ServiceEvent, { subscriberName: string; callback: () => void }[]> = {
     [ServiceEvent.SERVICE_SUPPRIME]: [],
     [ServiceEvent.SERVICE_INSTALLE]: [],
   };
+
   private constructor() {
     super();
   }

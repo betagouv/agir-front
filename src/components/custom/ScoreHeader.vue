@@ -52,6 +52,7 @@
 
   const score = computed(() => utilisateurStore().score);
   let modaleActions: ModaleActions | null;
+  const subscriberName = 'ScoreHeader';
   onMounted(() => {
     mettreAJourLeScore();
 
@@ -83,25 +84,25 @@
       );
     }
 
-    ToDoListEventBusImpl.getInstance().subscribe(ToDoListEvent.TODO_POINTS_ONT_ETE_RECUPERE, () => {
+    ToDoListEventBusImpl.getInstance().subscribe(subscriberName, ToDoListEvent.TODO_POINTS_ONT_ETE_RECUPERE, () => {
       mettreAJourLeScore();
     });
-    ToDoListEventBusImpl.getInstance().subscribe(ToDoListEvent.TODO_ARTICLE_A_ETE_LU, () => {
+    ToDoListEventBusImpl.getInstance().subscribe(subscriberName, ToDoListEvent.TODO_ARTICLE_A_ETE_LU, () => {
       mettreAJourLeScore();
     });
-    ToDoListEventBusImpl.getInstance().subscribe(ToDoListEvent.TODO_A_ETE_TERMINEE, () => {
+    ToDoListEventBusImpl.getInstance().subscribe(subscriberName, ToDoListEvent.TODO_A_ETE_TERMINEE, () => {
       mettreAJourLeScore();
     });
-    ToDoListEventBusImpl.getInstance().subscribe(ToDoListEvent.TODO_QUIZ_ETE_TERMINE, () => {
+    ToDoListEventBusImpl.getInstance().subscribe(subscriberName, ToDoListEvent.TODO_QUIZ_ETE_TERMINE, () => {
       mettreAJourLeScore();
     });
   });
 
   onUnmounted(() => {
-    ToDoListEventBusImpl.getInstance().unsubscribe(ToDoListEvent.TODO_POINTS_ONT_ETE_RECUPERE);
-    ToDoListEventBusImpl.getInstance().unsubscribe(ToDoListEvent.TODO_ARTICLE_A_ETE_LU);
-    ToDoListEventBusImpl.getInstance().unsubscribe(ToDoListEvent.TODO_A_ETE_TERMINEE);
-    ToDoListEventBusImpl.getInstance().unsubscribe(ToDoListEvent.TODO_QUIZ_ETE_TERMINE);
+    ToDoListEventBusImpl.getInstance().unsubscribe(subscriberName, ToDoListEvent.TODO_POINTS_ONT_ETE_RECUPERE);
+    ToDoListEventBusImpl.getInstance().unsubscribe(subscriberName, ToDoListEvent.TODO_ARTICLE_A_ETE_LU);
+    ToDoListEventBusImpl.getInstance().unsubscribe(subscriberName, ToDoListEvent.TODO_A_ETE_TERMINEE);
+    ToDoListEventBusImpl.getInstance().unsubscribe(subscriberName, ToDoListEvent.TODO_QUIZ_ETE_TERMINE);
   });
 </script>
 

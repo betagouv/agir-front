@@ -39,7 +39,7 @@
   import { ServicePresenterImpl, ServiceViewModel } from '@/services/adapters/service.presenter.impl';
   import { RecupererServiceActifsUsecase } from '@/services/recupererServiceActifs.usecase';
   import { ServiceRepositoryAxios } from '@/services/adapters/service.repository.axios';
-  import { onMounted, ref } from 'vue';
+  import { onMounted, onUnmounted, ref } from 'vue';
   import { utilisateurStore } from '@/store/utilisateur';
   import { ServiceEvent, ServiceEventBusImpl } from '@/services/serviceEventBusImpl';
   const servicesViewModels = ref<ServiceViewModel[]>();
@@ -51,14 +51,20 @@
   const recupererServicesActifs = new RecupererServiceActifsUsecase(new ServiceRepositoryAxios());
   const servicePresenterImpl = new ServicePresenterImpl(mapValuesServicesViewmodel);
   recupererServicesActifs.execute(utilisateurId, servicePresenterImpl);
+  const subscriberName = 'Services';
   onMounted(() => {
-    ServiceEventBusImpl.getInstance().subscribe(ServiceEvent.SERVICE_SUPPRIME, () => {
+    ServiceEventBusImpl.getInstance().subscribe(subscriberName, ServiceEvent.SERVICE_SUPPRIME, () => {
       recupererServicesActifs.execute(utilisateurId, servicePresenterImpl);
     });
 
-    ServiceEventBusImpl.getInstance().subscribe(ServiceEvent.SERVICE_INSTALLE, () => {
+    ServiceEventBusImpl.getInstance().subscribe(subscriberName, ServiceEvent.SERVICE_INSTALLE, () => {
       recupererServicesActifs.execute(utilisateurId, servicePresenterImpl);
     });
+  });
+
+  onUnmounted(() => {
+    ServiceEventBusImpl.getInstance().unsubscribe(subscriberName, ServiceEvent.SERVICE_SUPPRIME);
+    ServiceEventBusImpl.getInstance().unsubscribe(subscriberName, ServiceEvent.SERVICE_INSTALLE);
   });
 </script>
 
