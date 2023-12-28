@@ -38,6 +38,15 @@ export interface QuizCMSModel {
   data: QuizCMSDataModel;
 }
 export class QuizRepositoryAxios implements QuizRepository {
+  async noterQuiz(quizId: string, utilisateurId: string, note: 1 | 2 | 3 | 4): Promise<void> {
+    const axios = AxiosFactory.getAxios();
+    await axios.post(`/utilisateurs/${utilisateurId}/events`, {
+      type: 'like',
+      number_value: note,
+      content_id: quizId,
+      content_type: 'quizz',
+    });
+  }
   async getQuiz(idQuizz: string): Promise<Quiz> {
     const axiosInstance = AxiosFactory.getCMSAxios();
     const response: Response<QuizCMSModel> = await axiosInstance.get<QuizCMSModel>(

@@ -34,7 +34,7 @@
   import { Article } from '@/article/recupererArticle.usecase';
 
   import { RouteCoachName } from '@/router/coach/routeCoachName';
-  import Notation from '@/components/Notation.vue';
+  import Notation from '@/components/custom/Notation.vue';
   import { ArticleRepositoryAxios } from '@/article/adapters/article.repository.axios';
   import { utilisateurStore } from '@/store/utilisateur';
   import { EvaluerArticleUsecase } from '@/article/evaluerArticle.usecase';

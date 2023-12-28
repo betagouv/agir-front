@@ -8,6 +8,7 @@
     :id-utilisateur="store.utilisateur.id"
     :id-interaction="interactionEnCours ? interactionEnCours.id : ''"
     :is-mode-previsualisation="false"
+    :id-quiz="interactionEnCours ? interactionEnCours.idDuContenu : ''"
   >
   </PageQuizComposant>
 </template>

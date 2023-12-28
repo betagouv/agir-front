@@ -3,6 +3,9 @@ import { ChargementQuizUsecase } from '@/quiz/chargementQuiz.usecase';
 import { ChargementQuizPresenterImpl, QuizViewModel } from '@/quiz/adapters/chargementQuiz.presenter.impl';
 
 class QuizRepositoryForTest implements QuizRepository {
+  noterQuiz(quizId: any, utilisateurId: any, note: any): Promise<void> {
+    throw new Error('Method not implemented.');
+  }
   async getQuiz(id: string): Promise<Quiz> {
     return {
       nombreDePointsAGagner: 10,

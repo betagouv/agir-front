@@ -7,6 +7,7 @@
     id-utilisateur="1"
     id-interaction="0"
     :is-mode-previsualisation="true"
+    id-quiz="0"
   >
   </PageQuizComposant>
 </template>
