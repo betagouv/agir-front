@@ -16,6 +16,7 @@
   const router = useRouter();
 
   const articleAAfficher = ref<Article>({
+    id: '',
     titre: '',
     texte: '',
     sousTitre: '',

@@ -9,6 +9,7 @@ describe("Fichier de tests concernant la récupération d'un Article", () => {
     const article = await new RecupererArticleUsecase(new MockArticleRepository()).execute('id');
     // THEN
     expect(article).toStrictEqual({
+      id: 'id',
       texte: 'texte',
       titre: 'titre',
       sousTitre: 'sousTitre',
