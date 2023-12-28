@@ -8,6 +8,8 @@ jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+    env:
+      VITE_API_URL: ${{ secrets.VITE_API_URL_DEV }}
     steps:
     - uses: actions/checkout@v3
     - uses: actions/setup-node@v3
