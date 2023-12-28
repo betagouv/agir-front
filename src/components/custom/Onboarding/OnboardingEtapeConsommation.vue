@@ -33,6 +33,8 @@
   import { onboardingStore } from '@/store/onboarding';
   import router from '@/router';
 
+  import { RouteOnboardingName } from '@/router/onboarding/routeOnboardingName';
+
   const onBoardingStore = onboardingStore();
   const options = [
     { label: 'Je n’achète presque jamais et rarement neuf', value: 'jamais' },
@@ -58,7 +60,7 @@
       consommation: viewModel.value.consommation,
       done: true,
     });
-    router.push({ name: 'bilan-onboarding' });
+    router.push({ name: RouteOnboardingName.BILAN_ONBOARDING });
   };
 
   const retourEtapePrecedente = () => {

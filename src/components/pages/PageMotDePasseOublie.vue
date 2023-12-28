@@ -26,12 +26,14 @@
   import { CommencerRedefinirMotDePasseUsecase } from '@/authentification/commencerRedefinirMotDePasse.usecase';
   import { UtilisateurRepositoryAxios } from '@/authentification/adapters/utilisateur.repository.axios';
 
+  import { RouteCompteName } from '@/router/compte/routeCompteName';
+
   const email = ref('');
 
   const recupererMotDePasse = () => {
     const commencerRedefinirMotDePasse = new CommencerRedefinirMotDePasseUsecase(new UtilisateurRepositoryAxios());
     commencerRedefinirMotDePasse.execute(email.value).then(() => {
-      router.push({ name: 'redefinir-mot-de-passe', query: { email: email.value } });
+      router.push({ name: RouteCompteName.REDEFINIR_MOT_DE_PASSE, query: { email: email.value } });
     });
   };
 </script>

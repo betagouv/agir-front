@@ -9,7 +9,12 @@
         C’est une estimation très large que nous aurons l’occasion d’affiner plus tard.<br />
         Mais il faut bien commencer quelque part !
       </p>
-      <router-link :to="{ name: 'onboarding' }" class="fr-btn fr-btn--lg">Commencer l'estimation</router-link>
+      <router-link :to="{ name: RouteOnboardingName.ONBOARDING }" class="fr-btn fr-btn--lg"
+        >Commencer l'estimation</router-link
+      >
     </div>
   </div>
 </template>
+<script setup lang="ts">
+  import { RouteOnboardingName } from '@/router/onboarding/routeOnboardingName';
+</script>

@@ -34,6 +34,8 @@
   import { RenvoyerCoteOTPUsecase } from '@/authentification/renvoyerCoteOTPUsecase';
   import { useAlerte } from '@/composables/useAlerte';
 
+  import { RouteCoachName } from '@/router/coach/routeCoachName';
+
   const code = ref('');
   const email = utilisateurStore().utilisateur.mail || new URLSearchParams(window.location.search).get('email') || '';
   const { alerte, afficherAlerte } = useAlerte();
@@ -48,7 +50,7 @@
       .then(() => {
         const requestedRoute = sessionStorage.getItem('requestedRoute');
         sessionStorage.removeItem('requestedRoute');
-        router.push(requestedRoute || { name: 'coach' });
+        router.push(requestedRoute || { name: RouteCoachName.COACH });
         sendIdNGC();
       })
       .catch(reason => {

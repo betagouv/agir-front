@@ -8,7 +8,7 @@
     </span>
     <router-link
       class="fr-btn fr-btn--lg fr-btn--primary fr-btn--icon-right fr-icon-arrow-right-line"
-      :to="{ name: 'coach' }"
+      :to="{ name: RouteCoachName.COACH }"
     >
       Continuer
     </router-link>
@@ -16,6 +16,8 @@
 </template>
 
 <script setup lang="ts">
+  import { RouteCoachName } from '@/router/coach/routeCoachName';
+
   defineProps<{ nombreDePointsAGagner: string }>();
 </script>
 

@@ -11,6 +11,7 @@
   import { ArticleRepositoryAxios } from '@/article/adapters/article.repository.axios';
   import { PasserUnArticleCommeLuUsecase } from '@/article/passerUnArticleCommeLu.usecase';
   import { ToDoListEventBusImpl } from '@/toDoList/toDoListEventBusImpl';
+  import { RouteCommuneName } from '@/router';
 
   const store = interactionEnCoursStore();
   const router = useRouter();
@@ -38,7 +39,7 @@
         }
       })
       .catch(async () => {
-        await router.push('/not-found');
+        await router.push({ name: RouteCommuneName.NOT_FOUND });
       });
   });
 </script>

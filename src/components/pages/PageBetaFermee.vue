@@ -14,11 +14,13 @@
       >
 
       <div class="fr-grid-row">
-        <router-link class="fr-btn fr-mt-5v" :to="{ name: 'creation-compte' }">
+        <router-link class="fr-btn fr-mt-5v" :to="{ name: RouteCompteName.CREATION_COMPTE }">
           Se connecter avec une autre adresse électronique
         </router-link>
       </div>
     </div>
   </div>
 </template>
-<script setup lang="ts"></script>
+<script setup lang="ts">
+  import { RouteCompteName } from '@/router/compte/routeCompteName';
+</script>

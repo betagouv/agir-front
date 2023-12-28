@@ -17,7 +17,7 @@
           :compte-utlisateur-view-model="compteUtlisateurViewModel"
         />
         <div class="fr-mt-2w">
-          <router-link :to="{ name: 'modifier-mot-de-passe' }">Modifier mon mot de passe</router-link>
+          <router-link :to="{ name: RouteCompteName.MODIFIER_MOT_DE_PASSE }">Modifier mon mot de passe</router-link>
         </div>
         <PageCompteSuppression class="fr-mt-4w" />
       </div>
@@ -39,6 +39,8 @@
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import { SessionRepositoryStore } from '@/authentification/adapters/session.repository.store';
   import { PublierEvenemntRepositoryAxios } from '@/shell/adapters/publierEvenemnt.repository.axios';
+
+  import { RouteCompteName } from '@/router/compte/routeCompteName';
 
   const compteUtlisateurViewModel = ref<CompteUtlisateurViewModel | null>(null);
 

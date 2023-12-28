@@ -5,7 +5,7 @@
     <span class="fr-text--lead fr-text--bold">Vous pourrez tenter à nouveau !</span>
     <router-link
       class="fr-btn fr-btn--lg fr-btn--primary fr-btn--icon-right fr-icon-arrow-right-line"
-      :to="{ name: 'coach' }"
+      :to="{ name: RouteCoachName.COACH }"
     >
       Continuer
     </router-link>
@@ -19,3 +19,6 @@
     background-size: cover;
   }
 </style>
+<script setup lang="ts">
+  import { RouteCoachName } from '@/router/coach/routeCoachName';
+</script>

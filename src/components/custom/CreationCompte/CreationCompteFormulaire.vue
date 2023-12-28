@@ -43,7 +43,7 @@
   </form>
   <hr class="fr-pb-4w" />
   <router-link
-    :to="{ name: 'authentification' }"
+    :to="{ name: RouteCommuneName.AUTHENTIFICATION }"
     class="fr-btn fr-btn--lg fr-btn--tertiary-no-outline full-width flex-center"
   >
     J'ai déjà un compte
@@ -55,7 +55,7 @@
   import { ref } from 'vue';
   import { SessionRepositoryStore } from '@/authentification/adapters/session.repository.store';
   import { CompteUtilisateurRepositoryImpl } from '@/compte/adapters/compteUtilisateur.repository.impl';
-  import router from '@/router';
+  import router, { RouteCommuneName } from '@/router';
   import { utilisateurStore } from '@/store/utilisateur';
   import InputMail from '@/components/dsfr/InputMail.vue';
   import InputText from '@/components/dsfr/InputText.vue';

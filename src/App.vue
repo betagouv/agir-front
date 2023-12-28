@@ -12,12 +12,13 @@
     return utilisateurStore().utilisateur.id.length > 0;
   });
 
+  const appName = 'Agir ! -';
   router.beforeEach((to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
     const { title, estPublique } = to.meta;
     window.scrollTo(0, 0);
 
     if (title) {
-      document.title = title as string;
+      document.title = `${appName} ${title as string}`;
     }
     if (estPublique || utilisateurStore().utilisateur.id.length > 0) {
       next();
