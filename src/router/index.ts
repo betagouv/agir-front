@@ -14,6 +14,7 @@ import compteRoutes from '@/router/compte/routes';
 import onboardingRoutes from '@/router/onboarding/routes';
 import coachRoutes from '@/router/coach/routes';
 import { RouteCoachName } from '@/router/coach/routeCoachName';
+import kycRoutes from '@/router/kyc/routes';
 
 export enum RouteCommuneName {
   ACCUEIL = 'accueil',
@@ -33,6 +34,7 @@ enum RouteCommunePath {
 }
 
 const routes: RouteRecordRaw[] = [
+  ...kycRoutes,
   ...compteRoutes,
   ...coachRoutes,
   ...onboardingRoutes,
