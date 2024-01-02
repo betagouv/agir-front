@@ -9,7 +9,7 @@ export interface QuestionViewModel {
 }
 export class QuestionPresenterImpl implements QuestionPresenter {
   constructor(private readonly questionViewModel: (viewModel: QuestionViewModel) => void) {}
-  present(question: Question) {
+  presente(question: Question) {
     this.questionViewModel({
       id: question.id,
       libelle: question.libelle,

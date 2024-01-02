@@ -9,32 +9,31 @@
         },
       ]"
     />
-    <div class="fr-grid-row fr-grid-row--gutters">
-      <div class="fr-col-12 fr-col-lg-8">
-        <span class="fr-h2">Question</span>
-      </div>
-      <div class="fr-col-12 fr-mt-4w background--white border fr-p-2w border-radius--md">
-        <form @submit.prevent="validerLaReponse">
-          <p class="fr-h4 fr-mb-2w">
-            {{ questionViewModel?.libelle }}
-          </p>
-          <div class="fr-input-group">
-            <label class="fr-label" for="reponse"> Votre réponse </label>
-            <textarea class="fr-input" v-model="reponse" id="reponse" name="reponse"></textarea>
-          </div>
-          <button class="fr-btn fr-btn--lg" title="Valider" :disabled="reponse === ''">Valider</button>
-        </form>
-      </div>
+    <h1 class="fr-h2">Question</h1>
+    <div class="background--white border fr-p-4w border-radius--md">
+      <form @submit.prevent="validerLaReponse">
+        <h3 class="fr-h4 fr-mb-2w">
+          {{ questionViewModel?.libelle }}
+        </h3>
+        <div class="fr-input-group">
+          <label class="fr-label" for="reponse"> Votre réponse </label>
+          <textarea class="fr-input" v-model="reponse" id="reponse" name="reponse" />
+        </div>
+        <button class="fr-btn fr-btn--lg" title="Valider" :disabled="reponse === ''">Valider</button>
+      </form>
     </div>
   </div>
 </template>
+
 <script setup lang="ts">
+  import { ref } from 'vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import { RecupererQuestionUsecase } from '@/kyc/recupererQuestionUsecase';
   import { QuestionRepositoryAxios } from '@/kyc/adapters/question.repository.axios';
   import { QuestionPresenterImpl, QuestionViewModel } from '@/kyc/adapters/question.presenter.impl';
-  import { ref } from 'vue';
   import { utilisateurStore } from '@/store/utilisateur';
+  import { EnvoyerReponseUsecase } from '@/kyc/envoyerReponseUsecase';
+
   const questionViewModel = ref<QuestionViewModel>();
   const reponse = ref<string>('');
   const recupereQuestionUsecase = new RecupererQuestionUsecase(new QuestionRepositoryAxios());
@@ -45,5 +44,9 @@
       questionViewModel.value = viewModel;
     })
   );
-  const validerLaReponse = () => {};
+
+  const validerLaReponse = async () => {
+    const envoyerReponseUsecase = new EnvoyerReponseUsecase(new QuestionRepositoryAxios());
+    envoyerReponseUsecase.execute(utilisateurStore().utilisateur.id, '1', 'toto');
+  };
 </script>

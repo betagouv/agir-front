@@ -13,6 +13,6 @@ export class RecupererQuestionUsecase {
 
   async execute(questionId: string, utilisateurId: string, questionPresenter: QuestionPresenter): Promise<void> {
     const question = await this.questionRepository.recupererQuestion(questionId, utilisateurId);
-    questionPresenter.present(question);
+    questionPresenter.presente(question);
   }
 }

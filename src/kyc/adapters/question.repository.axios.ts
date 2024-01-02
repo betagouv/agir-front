@@ -23,4 +23,10 @@ export class QuestionRepositoryAxios implements QuestionRepository {
       choix: response.data.choix,
     };
   }
+
+  @intercept401()
+  async envoyerReponse(utilisateurId: string, questionId: string, reponse: string): Promise<void> {
+    const axios = AxiosFactory.getAxios();
+    await axios.put(`/utilisateurs/${utilisateurId}/questionsKYC/${questionId}`, { reponse });
+  }
 }
