@@ -1,6 +1,6 @@
 <template>
   <div>
-    <form class="fr-mb-0 background--white fr-p-4w border border-radius--md" @submit.prevent="modifierInformation">
+    <form class="fr-mb-0" @submit.prevent="modifierInformation">
       <fieldset class="fr-mb-5v fr-fieldset" aria-labelledby="identité-fieldset-legend">
         <legend class="fr-fieldset__legend fr-px-0 fr-mx-0" id="identité-fieldset-legend">
           <h2>Identité personnelle</h2>
