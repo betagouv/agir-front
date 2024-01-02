@@ -12,5 +12,10 @@ describe("Fichier de tests pour envoyer la réponse d'une question KYC", () => {
 
     // THEN
     expect(questionRepository.envoyerQuestionAEteAppele).toBeTruthy();
+    expect(questionRepository.envoyerQuestionArgs).toStrictEqual({
+      utilisateurId: 'utilisateurId',
+      questionId: 'questionId',
+      reponse: 'Ma réponse, lorem ipsum dolor',
+    });
   });
 });

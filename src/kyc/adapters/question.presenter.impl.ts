@@ -7,8 +7,10 @@ export interface QuestionViewModel {
   type: 'ouvert' | 'choix_multiple' | 'choix_unique';
   choix: string[];
 }
+
 export class QuestionPresenterImpl implements QuestionPresenter {
   constructor(private readonly questionViewModel: (viewModel: QuestionViewModel) => void) {}
+
   presente(question: Question) {
     this.questionViewModel({
       id: question.id,

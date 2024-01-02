@@ -12,9 +12,9 @@
     <h1 class="fr-h2">Question</h1>
     <div class="background--white border fr-p-4w border-radius--md">
       <form @submit.prevent="validerLaReponse">
-        <h3 class="fr-h4 fr-mb-2w">
+        <h2 class="fr-h4 fr-mb-2w">
           {{ questionViewModel?.libelle }}
-        </h3>
+        </h2>
         <div class="fr-input-group">
           <label class="fr-label" for="reponse"> Votre réponse </label>
           <textarea class="fr-input" v-model="reponse" id="reponse" name="reponse" />
@@ -36,10 +36,11 @@
 
   const questionViewModel = ref<QuestionViewModel>();
   const reponse = ref<string>('');
+  const utilisateurId = utilisateurStore().utilisateur.id;
   const recupereQuestionUsecase = new RecupererQuestionUsecase(new QuestionRepositoryAxios());
   recupereQuestionUsecase.execute(
     '1',
-    utilisateurStore().utilisateur.id,
+    utilisateurId,
     new QuestionPresenterImpl((viewModel: QuestionViewModel) => {
       questionViewModel.value = viewModel;
     })
@@ -47,6 +48,6 @@
 
   const validerLaReponse = async () => {
     const envoyerReponseUsecase = new EnvoyerReponseUsecase(new QuestionRepositoryAxios());
-    envoyerReponseUsecase.execute(utilisateurStore().utilisateur.id, '1', 'toto');
+    envoyerReponseUsecase.execute(utilisateurId, '1', reponse.value);
   };
 </script>
