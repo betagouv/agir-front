@@ -17,21 +17,21 @@
     <div class="fr-messages-group" id="password-input-messages" aria-live="assertive">
       <p class="fr-message" id="password-input-message">Votre mot de passe doit contenir :</p>
       <p
-        :class="auMoinsDouzeCaracteres(modelValue) ? 'fr-message--valid' : 'fr-message--error'"
+        :class="auMoinsDouzeCaracteres(modelValue) ? 'fr-message--valid' : 'fr-message--info'"
         class="fr-message"
         id="password-input-message-info"
       >
         12 caractères minimum
       </p>
       <p
-        :class="auMoinsUnCaractereSpecial(modelValue) ? 'fr-message--valid' : 'fr-message--error'"
+        :class="auMoinsUnCaractereSpecial(modelValue) ? 'fr-message--valid' : 'fr-message--info'"
         class="fr-message"
         id="password-input-message-info-1"
       >
         1 caractère spécial minimum
       </p>
       <p
-        :class="auMoinsUnChiffre(modelValue) ? 'fr-message--valid' : 'fr-message--error'"
+        :class="auMoinsUnChiffre(modelValue) ? 'fr-message--valid' : 'fr-message--info'"
         class="fr-message"
         id="password-input-message-info-2"
       >
