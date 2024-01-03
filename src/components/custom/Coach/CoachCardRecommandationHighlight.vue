@@ -14,7 +14,7 @@
         <p>{{ props.recommandation.description }}</p>
         <router-link
           :to="props.recommandation.url"
-          class="fr-link fr-icon-arrow-right-line fr-link--icon-right"
+          class="card-recommandation-highlight__link fr-link"
           @click="interactionAEteCliquee"
         >
           Continuer la lecture
@@ -42,6 +42,7 @@
 
 <style scoped>
   .card-recommandation-highlight {
+    position: relative;
     border-radius: 8px;
     background: #fff;
   }
@@ -52,5 +53,15 @@
     background-repeat: no-repeat;
     background-position: center;
     border-radius: 8px;
+  }
+
+  .card-recommandation-highlight__link::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
   }
 </style>
