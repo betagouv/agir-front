@@ -27,6 +27,7 @@
 
 <script setup lang="ts">
   import { ref } from 'vue';
+  import { useRoute } from 'vue-router';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import { RecupererQuestionUsecase } from '@/kyc/recupererQuestionUsecase';
   import { QuestionRepositoryAxios } from '@/kyc/adapters/question.repository.axios';
@@ -34,12 +35,16 @@
   import { utilisateurStore } from '@/store/utilisateur';
   import { EnvoyerReponseUsecase } from '@/kyc/envoyerReponseUsecase';
 
+  const route = useRoute();
+  const questionId = Array.isArray(route.params.id) ? route.params.id[0] : route.params.id;
+
   const questionViewModel = ref<QuestionViewModel>();
   const reponse = ref<string>('');
+
   const utilisateurId = utilisateurStore().utilisateur.id;
   const recupereQuestionUsecase = new RecupererQuestionUsecase(new QuestionRepositoryAxios());
   recupereQuestionUsecase.execute(
-    '1',
+    questionId,
     utilisateurId,
     new QuestionPresenterImpl((viewModel: QuestionViewModel) => {
       questionViewModel.value = viewModel;
@@ -48,6 +53,6 @@
 
   const validerLaReponse = async () => {
     const envoyerReponseUsecase = new EnvoyerReponseUsecase(new QuestionRepositoryAxios());
-    envoyerReponseUsecase.execute(utilisateurId, '1', reponse.value);
+    envoyerReponseUsecase.execute(utilisateurId, questionId, reponse.value);
   };
 </script>
