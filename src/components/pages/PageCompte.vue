@@ -9,13 +9,18 @@
         },
       ]"
     />
+    <div class="background--white fr-p-4w border border-radius--md">
+      <div class="fr-grid-row fr-mb-4w">
+        <h1 class="fr-h2 fr-mb-0 fr-col">Votre profil</h1>
+        <button class="fr-btn fr-btn--lg fr-mr-auto" @click="logout">Se déconnecter</button>
+      </div>
+      <PageCompteFormulaire
+        v-if="compteUtlisateurViewModel"
+        :compte-utlisateur-view-model="compteUtlisateurViewModel"
+      />
+    </div>
     <div class="fr-grid-row fr-grid-row--center fr-grid-row--gutters">
-      <div class="fr-col fr-col-lg-8">
-        <h1 class="fr-h2">Mon Compte</h1>
-        <PageCompteFormulaire
-          v-if="compteUtlisateurViewModel"
-          :compte-utlisateur-view-model="compteUtlisateurViewModel"
-        />
+      <div class="fr-col">
         <div class="fr-mt-2w">
           <router-link :to="{ name: RouteCompteName.MODIFIER_MOT_DE_PASSE }">Modifier mon mot de passe</router-link>
         </div>
@@ -33,16 +38,18 @@
     CompteUtlisateurViewModel,
   } from '@/compte/adapters/compteUtilisateur.presenter.impl';
   import { onMounted, ref } from 'vue';
+  import router from '@/router';
   import { utilisateurStore } from '@/store/utilisateur';
   import PageCompteFormulaire from '@/components/custom/PageCompteFormulaire.vue';
   import PageCompteSuppression from '@/components/pages/PageCompteSuppression.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import { SessionRepositoryStore } from '@/authentification/adapters/session.repository.store';
   import { PublierEvenemntRepositoryAxios } from '@/shell/adapters/publierEvenemnt.repository.axios';
-
+  import Cookies from 'js-cookie';
   import { RouteCompteName } from '@/router/compte/routeCompteName';
 
   const compteUtlisateurViewModel = ref<CompteUtlisateurViewModel | null>(null);
+  const store = utilisateurStore();
 
   function mapValueCompte(viewModel: CompteUtlisateurViewModel) {
     compteUtlisateurViewModel.value = viewModel;
@@ -54,8 +61,13 @@
       new SessionRepositoryStore(),
       new PublierEvenemntRepositoryAxios()
     );
-    const store = utilisateurStore();
     const idUtilisateur = store.utilisateur.id;
     await usecase.execute(idUtilisateur, new CompteUtilisateurPresenterImpl(mapValueCompte));
   });
+
+  const logout = () => {
+    store.reset();
+    Cookies.remove('bearer');
+    router.replace('/');
+  };
 </script>

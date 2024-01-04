@@ -49,7 +49,6 @@
 
                     <ScoreHeader />
                   </div>
-                  <button class="fr-btn fr-btn--sm" @click="logout">Se déconnecter</button>
                 </li>
               </ul>
             </div>
@@ -60,7 +59,6 @@
     <div class="fr-header__menu fr-modal" id="modal-menu" aria-labelledby="button-menu">
       <div class="fr-container">
         <button class="fr-btn--close fr-btn" aria-controls="modal-menu" id="button-menu" title="Fermer">Fermer</button>
-        <div @click="logout" class="fr-header__menu-links"></div>
         <nav
           v-if="nomUtilisateur"
           class="fr-nav"
@@ -102,9 +100,8 @@
 <script setup lang="ts">
   import { computed, ref, watch } from 'vue';
   import { useRoute } from 'vue-router';
-  import router, { RouteCommuneName } from '@/router';
+  import { RouteCommuneName } from '@/router';
   import { utilisateurStore } from '@/store/utilisateur';
-  import Cookies from 'js-cookie';
   import ScoreHeader from '@/components/custom/ScoreHeader.vue';
   import { Fonctionnalites } from '@/shell/fonctionnalitesEnum';
   import { RouteCoachName } from '@/router/coach/routeCoachName';
@@ -119,12 +116,6 @@
 
   const nomUtilisateur = computed(() => store.utilisateur.prenom);
   const estConnecte = computed(() => store.utilisateur.nom.length > 0);
-
-  const logout = () => {
-    store.reset();
-    Cookies.remove('bearer');
-    router.replace('/');
-  };
 
   watch(
     () => route.path,
