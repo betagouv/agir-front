@@ -5,7 +5,7 @@
     </legend>
     <div class="fr-fieldset__element" v-for="option in options" :key="option.id">
       <div
-        :class="`fr-checkbox-group checkbox-group--custom fr-p-2w border ${
+        :class="`fr-checkbox-group checkbox-group--custom border ${
           checkedNames.includes(option.id) ? 'fr-text--bold border--bleu-dark' : ''
         }`"
       >
@@ -37,3 +37,16 @@
     emit('update:modelValue', checkedNames.value);
   };
 </script>
+
+<style scoped>
+  .fr-checkbox-group input[type='checkbox'] + label {
+    padding: 1rem;
+    margin-left: 0;
+    padding-left: 3rem;
+  }
+
+  .fr-checkbox-group input[type='checkbox'] + label::before {
+    left: 1rem;
+    top: 1rem;
+  }
+</style>
