@@ -14,7 +14,7 @@
     <div class="fr-grid-row full-width">
       <div :class="`fr-fieldset__element ${col}`" v-for="option in options" :key="option.label">
         <div
-          :class="`fr-radio-group border fr-p-2w fr-col ${
+          :class="`fr-radio-group border fr-col ${
             option.value === defaultValue ? 'fr-text--bold border--bleu-dark' : ''
           }`"
         >
@@ -59,8 +59,14 @@
     max-width: none;
   }
 
+  .fr-radio-group input[type='radio'] + label {
+    padding: 1rem 1rem 1rem 3rem;
+    background-position: 1rem;
+  }
+
   .fr-radio-group input[type='radio'] + label:before {
-    top: auto;
+    top: 1rem;
+    left: calc(3rem + 3px);
   }
 
   .boutonRadio--horizontal .fr-fieldset__element {
