@@ -2,7 +2,7 @@
   <form aria-labelledby="identity-fieldset-legend" @submit.prevent="performCreerCompteUtilisateur" class="fr-mb-4w">
     <fieldset class="fr-fieldset fr-mb-0">
       <legend class="fr-fieldset__legend" id="identity-fieldset-legend">
-        <h2>Création de compte sur Agir</h2>
+        <h2 class="fr-h4 text--center">Inscrivez-vous</h2>
       </legend>
       <div class="fr-fieldset__element">
         <InputMail label="Adresse électronique" name="utilisateur-mail" v-model="compteUtilisateurInput.mail" />
