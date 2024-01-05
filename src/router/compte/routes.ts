@@ -1,5 +1,4 @@
 import PageCompte from '@/components/pages/PageCompte.vue';
-import PageModificationMotDePasse from '@/components/pages/PageModificationMotDePasse.vue';
 import PageCreationCompte from '@/components/pages/PageCreationCompte.vue';
 import { onboardingStore } from '@/store/onboarding';
 import PageValidationCompte from '@/components/pages/PageValidationCompte.vue';
@@ -32,11 +31,6 @@ const compteRoutes: RouteRecordRaw[] = [
         path: RouteComptePath.OPTIONS_AVANCEES,
         name: RouteCompteName.OPTIONS_AVANCEES,
         component: PageCompteOptionsAvancees,
-      },
-      {
-        path: RouteComptePath.MODIFIER_MOT_DE_PASSE,
-        name: RouteCompteName.MODIFIER_MOT_DE_PASSE,
-        component: PageModificationMotDePasse,
       },
     ],
   },
