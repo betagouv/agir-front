@@ -123,6 +123,10 @@ h3 {
   color: #ed8e00;
 }
 
+.text-warning {
+  color: var(--warning-425-625);
+}
+
 .text--rouge-erreur {
   color: var(--error-425-625);
 }
@@ -229,6 +233,10 @@ h3 {
 
 .border--bleu-dark {
   border: 1px solid var(--blue-france-sun-113-625);
+}
+
+.border--warning {
+  border: 1px solid var(--warning-425-625);
 }
 
 .border-radius--md {
