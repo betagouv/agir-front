@@ -6,13 +6,13 @@
           <h2>Identité personnelle</h2>
         </legend>
         <div class="fr-grid-row fr-grid-row--gutters">
-          <div class="fr-col-6">
+          <div class="fr-col-lg-6 fr-col-12">
             <InputText label="Prénom" name="prenom" v-model="compteUtlisateurViewModel.prenom" />
           </div>
-          <div class="fr-col-6">
+          <div class="fr-col-lg-6 fr-col-12">
             <InputText label="Nom" name="nom" v-model="compteUtlisateurViewModel.nom" />
           </div>
-          <div class="fr-col-6">
+          <div class="fr-col-lg-6 fr-col-12">
             <InputMail label="Adresse électronique" v-model="compteUtlisateurViewModel.mail" name="mail" />
           </div>
         </div>

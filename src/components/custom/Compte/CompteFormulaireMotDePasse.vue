@@ -1,6 +1,6 @@
 <template>
   <form class="background--white fr-p-2w border border-radius--md" @submit.prevent="mettreAJourLeMotDePasse">
-    <div class="fr-col-6">
+    <div class="fr-col-lg-6 fr-col-12">
       <h3 class="fr-h6">Changer votre mot de passe</h3>
       <div class="fr-col-12 fr-py-0 fr-mb-4w">
         <InputPassword v-model="motDePasse" @update:mot-de-passe-valide="onMotDePasseValideChanged" />
