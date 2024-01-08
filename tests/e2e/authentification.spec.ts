@@ -6,7 +6,6 @@ test('has title', async () => {
   const page = await context.newPage();
 
   await page.route('https://agir-back-dev.osc-fr1.scalingo.io/utilisateurs/login', route => {
-    // Envoyer une réponse simulée
     route.fulfill({
       status: 200,
       contentType: 'application/json',
@@ -56,19 +55,16 @@ test('has title', async () => {
         token:
           'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dGlsaXNhdGV1cklkIjoid29qdGVrIiwiaWF0IjoxNzAzMTU1MzM2LCJleHAiOjE3MDU3NDczMzZ9.bJOxx98NUoYDq3e0mXKgv-YjAq-ZfSRc4S05bgwvKdA',
       }),
-    }); // Réponse simulée
+    });
   });
 
-  // Naviguer vers votre page ou composant contenant l'appel Axios
-  await page.goto('/authentification'); // Ou tout autre URL locale
+  await page.goto('/authentification');
 
-  // Sélectionnez et remplissez les champs utilisateur et mot de passe
   await page.fill('#email', 'exemple@domaine.com');
   await page.fill('#password-input', '');
 
-  // Cliquez sur le bouton de connexion
-  await page.click('#app > div > main > div > div > form > fieldset > div.fr-fieldset__element.fr-mt-2w > button');
-  // Expect a title "to contain" a substring.
-  await page.waitForURL('/coach');
+  await page.getByRole('button', { name: 'Se connecter' }).click();
+  await page.waitForURL('/coach/');
+
   await expect(page).toHaveTitle('Agir ! - Coach');
 });
