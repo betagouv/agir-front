@@ -26,4 +26,5 @@ export interface Quiz {
 export interface QuizRepository {
   getQuiz(id: string): Promise<Quiz>;
   terminerQuiz(idUtilisateur: string, idInteraction: string, score: number): Promise<void>;
+  noterQuiz(quizId, utilisateurId, note): Promise<void>;
 }

@@ -19,6 +19,7 @@
           :id-interaction="idInteraction"
           :id-utilisateur="idUtilisateur"
           :is-mode-previsualisation="isModePrevisualisation"
+          :id-quiz="idQuiz"
         />
       </div>
       <div class="fr-col-12 fr-col-lg-4">
@@ -39,5 +40,6 @@
     idUtilisateur: string;
     idInteraction: string;
     isModePrevisualisation: boolean;
+    idQuiz: string;
   }>();
 </script>
