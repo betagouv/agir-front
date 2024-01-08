@@ -6,6 +6,7 @@ export interface Question {
   libelle: string;
   type: 'libre' | 'choix_multiple' | 'choix_unique';
   reponses_possibles: string[];
+  points: number;
 }
 
 export class RecupererQuestionUsecase {

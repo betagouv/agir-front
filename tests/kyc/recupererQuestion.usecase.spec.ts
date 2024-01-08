@@ -10,6 +10,7 @@ describe('Fichier de tests pour récuperer une question KYC', () => {
       libelle: 'Une question',
       type: 'libre',
       reponses_possibles: [],
+      points: 10,
     });
 
     // WHEN
@@ -23,9 +24,11 @@ describe('Fichier de tests pour récuperer une question KYC', () => {
         libelle: 'Une question',
         type: 'libre',
         reponses_possibles: [],
+        points: 'Récoltez vos + 10 points',
       });
     }
   });
+
   it("En donnant un id d'utilisateur et l'id de la question KYC doit appeler le back pour récuperer la question pour un type choix_multiple", async () => {
     // GIVEN
     const questionRepository = new MockQuestionRepository({
@@ -33,6 +36,7 @@ describe('Fichier de tests pour récuperer une question KYC', () => {
       libelle: 'Une question',
       type: 'choix_multiple',
       reponses_possibles: ['1', '2', '3'],
+      points: 10,
     });
 
     // WHEN
@@ -45,6 +49,7 @@ describe('Fichier de tests pour récuperer une question KYC', () => {
         id: 'questionId',
         libelle: 'Une question',
         type: 'choix_multiple',
+        points: 'Récoltez vos + 10 points',
         reponses_possibles: [
           {
             id: '1',
@@ -69,6 +74,7 @@ describe('Fichier de tests pour récuperer une question KYC', () => {
       libelle: 'Une question',
       type: 'choix_unique',
       reponses_possibles: ['1', '2', '3'],
+      points: 10,
     });
 
     // WHEN
@@ -80,6 +86,7 @@ describe('Fichier de tests pour récuperer une question KYC', () => {
       expect(viewModel).toStrictEqual<QuestionViewModel>({
         id: 'questionId',
         libelle: 'Une question',
+        points: 'Récoltez vos + 10 points',
         type: 'choix_unique',
         reponses_possibles: [
           {

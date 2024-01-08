@@ -10,6 +10,7 @@ export interface QuestionViewModel {
   libelle: string;
   type: 'libre' | 'choix_multiple' | 'choix_unique';
   reponses_possibles: ReponsePossible[];
+  points: string;
 }
 
 export class QuestionPresenterImpl implements QuestionPresenter {
@@ -20,6 +21,7 @@ export class QuestionPresenterImpl implements QuestionPresenter {
       id: question.id,
       libelle: question.libelle,
       type: question.type,
+      points: `Récoltez vos + ${question.points} points`,
       reponses_possibles: question.reponses_possibles.map(reponse => ({
         id: reponse,
         label: reponse,

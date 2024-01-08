@@ -7,6 +7,7 @@ interface QuestionApiModel {
   question: string;
   type: 'libre' | 'choix_multiple' | 'choix_unique';
   reponses_possibles: string[];
+  points: number;
 }
 
 export class QuestionRepositoryAxios implements QuestionRepository {
@@ -21,6 +22,7 @@ export class QuestionRepositoryAxios implements QuestionRepository {
       libelle: response.data.question,
       type: response.data.type,
       reponses_possibles: response.data.reponses_possibles || [],
+      points: response.data.points,
     };
   }
 
