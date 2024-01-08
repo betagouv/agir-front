@@ -1,6 +1,6 @@
 <template>
   <CompteSkeleton page-courante="Mon Compte">
-    <PageCompteFormulaire v-if="compteUtlisateurViewModel" :compte-utlisateur-view-model="compteUtlisateurViewModel" />
+    <CompteFormulaire v-if="compteUtlisateurViewModel" :compte-utlisateur-view-model="compteUtlisateurViewModel" />
   </CompteSkeleton>
 </template>
 
@@ -14,7 +14,7 @@
     CompteUtlisateurViewModel,
   } from '@/compte/adapters/compteUtilisateur.presenter.impl';
   import { utilisateurStore } from '@/store/utilisateur';
-  import PageCompteFormulaire from '@/components/custom/PageCompteFormulaire.vue';
+  import CompteFormulaire from '@/components/custom/Compte/CompteFormulaire.vue';
   import { SessionRepositoryStore } from '@/authentification/adapters/session.repository.store';
   import { PublierEvenemntRepositoryAxios } from '@/shell/adapters/publierEvenemnt.repository.axios';
 
