@@ -4,8 +4,8 @@ import { QuestionRepository } from '@/kyc/ports/question.repository';
 export interface Question {
   id: string;
   libelle: string;
-  type: 'ouvert' | 'choix_multiple' | 'choix_unique';
-  choix: string[];
+  type: 'libre' | 'choix_multiple' | 'choix_unique';
+  reponses_possibles: string[];
 }
 
 export class RecupererQuestionUsecase {

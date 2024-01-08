@@ -2,16 +2,12 @@ import { QuestionRepository } from '@/kyc/ports/question.repository';
 import { Question } from '@/kyc/recupererQuestionUsecase';
 
 export class MockQuestionRepository implements QuestionRepository {
+  constructor(private questionARetourner: Question) {}
   recupererQuestion(_questionId: string, _utilisateurId: string): Promise<Question> {
-    return Promise.resolve({
-      id: 'questionId',
-      libelle: 'Une question',
-      type: 'ouvert',
-      choix: ['choix 1', 'choix 2'],
-    });
+    return Promise.resolve(this.questionARetourner);
   }
 
-  envoyerReponse(_questionId: string, _utilisateurId: string, _reponse: string): Promise<void> {
+  envoyerReponse(_questionId: string, _utilisateurId: string, _reponse: string[]): Promise<void> {
     throw new Error('Method not implemented.');
   }
 }

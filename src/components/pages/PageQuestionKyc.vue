@@ -15,9 +15,20 @@
         <h2 class="fr-h4 fr-mb-2w">
           {{ questionViewModel?.libelle }}
         </h2>
-        <div class="fr-input-group">
+        <div v-if="questionViewModel?.type === 'libre'" class="fr-input-group">
           <label class="fr-label" for="reponse"> Votre réponse </label>
           <textarea class="fr-input" v-model="reponse" id="reponse" name="reponse" />
+        </div>
+        <div v-if="questionViewModel?.type === 'choix_multiple'" class="fr-input-group">
+          <InputCheckbox :options="questionViewModel.reponses_possibles" v-model="reponse" />
+        </div>
+        <div v-if="questionViewModel?.type === 'choix_unique'" class="fr-input-group">
+          <BoutonRadio
+            :options="
+              questionViewModel.reponses_possibles.map((reponsePossible:ReponsePossible) => ({ label: reponsePossible.label, value: reponsePossible.id }))
+            "
+            v-model="reponse"
+          />
         </div>
         <button class="fr-btn fr-btn--lg" title="Valider" :disabled="reponse === ''">Valider</button>
       </form>
@@ -31,9 +42,11 @@
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import { RecupererQuestionUsecase } from '@/kyc/recupererQuestionUsecase';
   import { QuestionRepositoryAxios } from '@/kyc/adapters/question.repository.axios';
-  import { QuestionPresenterImpl, QuestionViewModel } from '@/kyc/adapters/question.presenter.impl';
+  import { QuestionPresenterImpl, QuestionViewModel, ReponsePossible } from '@/kyc/adapters/question.presenter.impl';
   import { utilisateurStore } from '@/store/utilisateur';
   import { EnvoyerReponseUsecase } from '@/kyc/envoyerReponseUsecase';
+  import InputCheckbox from '@/components/custom/InputCheckbox.vue';
+  import BoutonRadio from '@/components/custom/BoutonRadio.vue';
 
   const route = useRoute();
   const questionId = Array.isArray(route.params.id) ? route.params.id[0] : route.params.id;
@@ -53,6 +66,6 @@
 
   const validerLaReponse = async () => {
     const envoyerReponseUsecase = new EnvoyerReponseUsecase(new QuestionRepositoryAxios());
-    envoyerReponseUsecase.execute(utilisateurId, questionId, reponse.value);
+    envoyerReponseUsecase.execute(utilisateurId, questionId, [reponse.value].flat());
   };
 </script>

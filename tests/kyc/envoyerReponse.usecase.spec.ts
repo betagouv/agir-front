@@ -8,14 +8,14 @@ describe("Fichier de tests pour envoyer la réponse d'une question KYC", () => {
 
     // WHEN
     const usecase = new EnvoyerReponseUsecase(questionRepository);
-    await usecase.execute('utilisateurId', 'questionId', 'Ma réponse, lorem ipsum dolor');
+    await usecase.execute('utilisateurId', 'questionId', ['Ma réponse, lorem ipsum dolor']);
 
     // THEN
     expect(questionRepository.envoyerQuestionAEteAppele).toBeTruthy();
     expect(questionRepository.envoyerQuestionArgs).toStrictEqual({
       utilisateurId: 'utilisateurId',
       questionId: 'questionId',
-      reponse: 'Ma réponse, lorem ipsum dolor',
+      reponse: ['Ma réponse, lorem ipsum dolor'],
     });
   });
 });

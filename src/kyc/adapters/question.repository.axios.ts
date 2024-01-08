@@ -5,8 +5,8 @@ import { Question } from '@/kyc/recupererQuestionUsecase';
 interface QuestionApiModel {
   id: string;
   question: string;
-  type: 'ouvert' | 'choix_multiple' | 'choix_unique';
-  choix: string[];
+  type: 'libre' | 'choix_multiple' | 'choix_unique';
+  reponses_possibles: string[];
 }
 
 export class QuestionRepositoryAxios implements QuestionRepository {
@@ -20,12 +20,12 @@ export class QuestionRepositoryAxios implements QuestionRepository {
       id: response.data.id,
       libelle: response.data.question,
       type: response.data.type,
-      choix: response.data.choix,
+      reponses_possibles: response.data.reponses_possibles || [],
     };
   }
 
   @intercept401()
-  async envoyerReponse(utilisateurId: string, questionId: string, reponse: string): Promise<void> {
+  async envoyerReponse(utilisateurId: string, questionId: string, reponse: string[]): Promise<void> {
     const axios = AxiosFactory.getAxios();
     await axios.put(`/utilisateurs/${utilisateurId}/questionsKYC/${questionId}`, { reponse });
   }

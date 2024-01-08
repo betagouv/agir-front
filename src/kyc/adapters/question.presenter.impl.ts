@@ -1,11 +1,15 @@
 import { QuestionPresenter } from '@/kyc/ports/question.presenter';
 import { Question } from '@/kyc/recupererQuestionUsecase';
 
+export interface ReponsePossible {
+  id: string;
+  label: string;
+}
 export interface QuestionViewModel {
   id: string;
   libelle: string;
-  type: 'ouvert' | 'choix_multiple' | 'choix_unique';
-  choix: string[];
+  type: 'libre' | 'choix_multiple' | 'choix_unique';
+  reponses_possibles: ReponsePossible[];
 }
 
 export class QuestionPresenterImpl implements QuestionPresenter {
@@ -16,7 +20,10 @@ export class QuestionPresenterImpl implements QuestionPresenter {
       id: question.id,
       libelle: question.libelle,
       type: question.type,
-      choix: question.choix,
+      reponses_possibles: question.reponses_possibles.map(reponse => ({
+        id: reponse,
+        label: reponse,
+      })),
     });
   }
 }
