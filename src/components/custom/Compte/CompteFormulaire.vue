@@ -5,27 +5,22 @@
         <legend class="fr-fieldset__legend fr-px-0 fr-mx-0" id="identité-fieldset-legend">
           <h2>Identité personnelle</h2>
         </legend>
-        <div class="fr-col-12">
-          <InputText label="Nom" name="nom" v-model="compteUtlisateurViewModel.nom" />
-          <InputText label="Prénom" name="prenom" v-model="compteUtlisateurViewModel.prenom" />
-          <InputMail label="Adresse électronique" v-model="compteUtlisateurViewModel.mail" name="mail" />
+        <div class="fr-grid-row fr-grid-row--gutters">
+          <div class="fr-col-lg-6 fr-col-12">
+            <InputText label="Prénom" name="prenom" v-model="compteUtlisateurViewModel.prenom" />
+          </div>
+          <div class="fr-col-lg-6 fr-col-12">
+            <InputText label="Nom" name="nom" v-model="compteUtlisateurViewModel.nom" />
+          </div>
+          <div class="fr-col-lg-6 fr-col-12">
+            <InputMail label="Adresse électronique" v-model="compteUtlisateurViewModel.mail" name="mail" />
+          </div>
         </div>
       </fieldset>
       <fieldset class="fr-mb-0 fr-fieldset" aria-labelledby="donnee-fieldset-legend">
         <legend class="fr-fieldset__legend fr-px-0 fr-mx-0" id="donnee-fieldset-legend">
           <h2>Données personnelles</h2>
         </legend>
-        <div class="fr-grid fr-grid-row">
-          <div class="fr-col-12">
-            <InputTrancheDeRevenu @update:part-et-revenu="updatePartEtRevenu" />
-            <CarteInfo>
-              <p class="fr-icon-information-line fr-m-0">
-                Votre <strong>revenu fiscal de référence</strong> et le <strong>nombre de parts</strong> permettent
-                d’afficher les aides en fonction de vos ressources.
-              </p>
-            </CarteInfo>
-          </div>
-        </div>
         <div class="fr-col-12">
           <InputCodePostal
             v-model="compteUtlisateurViewModel.codePostal"
@@ -39,7 +34,20 @@
             </p>
           </CarteInfo>
         </div>
-        <button class="fr-btn fr-mt-4w">Mettre à jour</button>
+        <div class="fr-grid fr-grid-row">
+          <div class="fr-col-12">
+            <InputTrancheDeRevenu @update:part-et-revenu="updatePartEtRevenu" />
+            <CarteInfo>
+              <p class="fr-icon-information-line fr-m-0">
+                Votre <strong>revenu fiscal de référence</strong> et le <strong>nombre de parts</strong> permettent
+                d’afficher les aides en fonction de vos ressources.
+              </p>
+            </CarteInfo>
+          </div>
+        </div>
+        <button class="fr-btn fr-btn--secondary fr-btn--icon-left fr-mt-4w fr-icon-save-3-fill">
+          Mettre à jour vos informations
+        </button>
       </fieldset>
     </form>
     <Alert

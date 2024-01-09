@@ -1,16 +1,17 @@
 import PageCompte from '@/components/pages/PageCompte.vue';
-import PageModificationMotDePasse from '@/components/pages/PageModificationMotDePasse.vue';
 import PageCreationCompte from '@/components/pages/PageCreationCompte.vue';
 import { onboardingStore } from '@/store/onboarding';
 import PageValidationCompte from '@/components/pages/PageValidationCompte.vue';
 import PageMotDePasseOublie from '@/components/pages/PageMotDePasseOublie.vue';
 import PageMotDePasseOublieRedefinirMotDePasse from '@/components/pages/PageMotDePasseOublieRedefinirMotDePasse.vue';
+import PageCompteOptionsAvancees from '@/components/pages/PageCompteOptionsAvancees.vue';
 import { RouteRecordRaw } from 'vue-router';
 import { RouteCompteName } from '@/router/compte/routeCompteName';
 
 enum RouteComptePath {
   MON_COMPTE = '/mon-compte/',
   MODIFIER_MOT_DE_PASSE = '/mon-compte/changer-de-mot-de-passe',
+  OPTIONS_AVANCEES = '/mon-compte/options-avancees',
   CREATION_COMPTE = '/creation-compte',
   VALIDATION_COMPTE = '/validation-compte',
   MOT_DE_PASSE_OUBLIE = '/mot-de-passe-oublie',
@@ -27,9 +28,9 @@ const compteRoutes: RouteRecordRaw[] = [
         component: PageCompte,
       },
       {
-        path: RouteComptePath.MODIFIER_MOT_DE_PASSE,
-        name: RouteCompteName.MODIFIER_MOT_DE_PASSE,
-        component: PageModificationMotDePasse,
+        path: RouteComptePath.OPTIONS_AVANCEES,
+        name: RouteCompteName.OPTIONS_AVANCEES,
+        component: PageCompteOptionsAvancees,
       },
     ],
   },

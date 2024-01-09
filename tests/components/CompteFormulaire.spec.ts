@@ -1,6 +1,6 @@
 import { describe, it, beforeEach, afterEach } from 'vitest';
 import { fireEvent, render } from '@testing-library/vue';
-import PageCompteFormulaire from '@/components/custom/PageCompteFormulaire.vue';
+import CompteFormulaire from '@/components/custom/Compte/CompteFormulaire.vue';
 import { CompteUtlisateurViewModel } from '@/compte/adapters/compteUtilisateur.presenter.impl';
 import { ChargementCommunesUsecase } from '@/communes/chargementCommunesUsecase';
 import { MettreAJourCompteUtilisateurUsecase } from '@/compte/mettreAJourCompteUtilisateur.usecase';
@@ -37,7 +37,7 @@ describe.skip('Compte - Formulaire', () => {
       Promise.resolve(['PARIS 01', 'PARIS 02'])
     );
 
-    const { getByRole } = render(PageCompteFormulaire, { props });
+    const { getByRole } = render(CompteFormulaire, { props });
 
     inputNom = getByRole('textbox', { name: 'Nom' });
     inputPrenom = getByRole('textbox', { name: 'Prénom' });
