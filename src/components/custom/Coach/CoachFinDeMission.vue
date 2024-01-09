@@ -20,8 +20,6 @@
 </template>
 
 <script setup lang="ts">
-  import { defineEmits } from 'vue';
-
   defineProps<{
     titreDeMission: string;
     nombreDePointsAGagner: number;
