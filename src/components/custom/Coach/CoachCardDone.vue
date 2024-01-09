@@ -12,7 +12,7 @@
         />
       </div>
     </div>
-    <div class="todo__boutonContainer">
+    <div class="todo__boutonContainer fr-ml-auto">
       <span v-if="!pointAEteRecolte" class="text--uppercase fr-mb-0 fr-text--xs text-disabled-grey fr-text--bold"
         >Objectif réalisé</span
       >
@@ -57,7 +57,6 @@
     gap: 1rem;
     align-items: center;
     border-radius: 8px;
-    justify-content: space-between;
   }
 
   .todo__picto::before {
