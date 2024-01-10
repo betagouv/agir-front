@@ -22,6 +22,9 @@ export function createSentry(app: App, router: Router) {
       if (import.meta.env.VITE_ENV === 'local') {
         return null;
       }
+      if (event.transaction && event.transaction === 'session-expiree') {
+        return null;
+      }
       return event;
     },
   });
