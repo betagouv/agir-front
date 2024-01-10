@@ -1,5 +1,28 @@
 # Changelog
 
+## [1.3.0](https://github.com/betagouv/agir-front/compare/v1.2.0...v1.3.0) (2024-01-09)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* ajout d'une question personnalisée ([#236](https://github.com/betagouv/agir-front/issues/236)) ([2d000b1](https://github.com/betagouv/agir-front/commit/2d000b1b7d664f93579989d24a28b33af7fe9324))
+* ameliorer l'interface du formulaire aide velo ([#239](https://github.com/betagouv/agir-front/issues/239)) ([509df40](https://github.com/betagouv/agir-front/commit/509df40e4f69099ce3d6e973e058c785ab282f7c))
+* deplacer le bouton de deconnexion dans le profil ([#237](https://github.com/betagouv/agir-front/issues/237)) ([b4d015f](https://github.com/betagouv/agir-front/commit/b4d015f1e35575e6b67f54849b7080fb533a9c71))
+* il maintenant possible d'évaluer un article ([#233](https://github.com/betagouv/agir-front/issues/233)) ([5ef5d9a](https://github.com/betagouv/agir-front/commit/5ef5d9a4d7f30ef8f8b6c086414a9667d9afb48a))
+* il maintenant possible d'évaluer un quiz ([#235](https://github.com/betagouv/agir-front/issues/235)) ([6774c7e](https://github.com/betagouv/agir-front/commit/6774c7e2321fe32f5bd7cbc01f2b33f5688ec348))
+* mise à jour UI du profil avec menu latéral ([#243](https://github.com/betagouv/agir-front/issues/243)) ([537d708](https://github.com/betagouv/agir-front/commit/537d7088300062bbc5323ce9045258a0ccb8e64b))
+
+
+### 👷 Autres changements
+
+* ajout de tests avec playwrite ([#231](https://github.com/betagouv/agir-front/issues/231)) ([2faa8c2](https://github.com/betagouv/agir-front/commit/2faa8c2f29dbc73046af1d6bc9c71a68d909f802))
+* ajout type tech a release-please ([#244](https://github.com/betagouv/agir-front/issues/244)) ([ed75a44](https://github.com/betagouv/agir-front/commit/ed75a4449a668912c74a4fb0a882bd249f176201))
+* mise à jour de l'ui du formulaire d'inscription ([#238](https://github.com/betagouv/agir-front/issues/238)) ([2060b0b](https://github.com/betagouv/agir-front/commit/2060b0bbb7adbdfcf688c7c797037798d5f0df77))
+* passage des urls et noms techniques des urls en variables ([#228](https://github.com/betagouv/agir-front/issues/228)) ([7d349c5](https://github.com/betagouv/agir-front/commit/7d349c5e66db872a14578656cc06beb1dd210917))
+* rendre entierement cliquable la zone des boutons radios ([#242](https://github.com/betagouv/agir-front/issues/242)) ([965e78a](https://github.com/betagouv/agir-front/commit/965e78a55a5cd0688cf11990cf60f4929a8b5b7c))
+* rendre la zone des checkboxes entierement cliquable ([#241](https://github.com/betagouv/agir-front/issues/241)) ([2d82e8c](https://github.com/betagouv/agir-front/commit/2d82e8cbe17f4bc81ccec07df4336efa4831c3f5))
+* rendre toute la carte recommandation mise en avant cliquable ([#240](https://github.com/betagouv/agir-front/issues/240)) ([45996be](https://github.com/betagouv/agir-front/commit/45996be45ee811e614d0b132343fa021f92b78d6))
+
 ## [1.2.0](https://github.com/betagouv/agir-front/compare/v1.1.1...v1.2.0) (2023-12-22)
 
 
