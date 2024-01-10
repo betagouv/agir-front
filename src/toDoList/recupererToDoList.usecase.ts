@@ -11,7 +11,6 @@ export interface TodoList {
 
 export interface TodoListItem {
   id: string;
-  interactionId: string;
   titre: string;
   contentId: string;
   progession: {

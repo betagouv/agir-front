@@ -19,7 +19,6 @@ describe('Fichier de tests concernant la récupération de la ToDo List', () => 
         aFaire: [
           {
             id: 'id3',
-            interactionId: 'interactionId3',
             titre: 'Consulter votre profile',
             url: '/mon-compte',
             contentId: '',
@@ -35,7 +34,6 @@ describe('Fichier de tests concernant la récupération de la ToDo List', () => 
 
           {
             id: 'id',
-            interactionId: 'interactionId',
             titre: 'Premier Quiz',
             url: '/coach/quiz/',
             contentId: '',
@@ -51,7 +49,6 @@ describe('Fichier de tests concernant la récupération de la ToDo List', () => 
           {
             contentId: '',
             id: 'id3',
-            interactionId: 'interactionId3',
             nombreDePointsAGagner: 10,
             pointAEteRecolte: false,
             progession: {
@@ -67,7 +64,6 @@ describe('Fichier de tests concernant la récupération de la ToDo List', () => 
         fait: [
           {
             id: 'id2',
-            interactionId: 'interactionId2',
             titre: 'Article qui doit être en avant',
             url: '/article/Article qui doit être en avant',
             contentId: '',

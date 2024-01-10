@@ -33,7 +33,6 @@
   }>();
 
   const { interactionAEteCliquee } = useInteraction({
-    id: props.recommandation.id,
     type: props.recommandation.type,
     nombreDePointsAGagner: props.recommandation.nombreDePointsAGagner,
     idDuContenu: props.recommandation.contentId,

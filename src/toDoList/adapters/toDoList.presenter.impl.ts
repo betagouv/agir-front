@@ -4,7 +4,6 @@ import { InteractionType } from '@/shell/interactionType';
 
 interface TodoViewModel {
   id: string;
-  interactionId: string;
   titre: string;
   url: string;
   contentId: string;
@@ -42,7 +41,6 @@ export class ToDoListPresenterImpl implements ToDoListPresenter {
   private mapToListItemToViewModel(todo: TodoListItem): TodoViewModel {
     return {
       id: todo.id,
-      interactionId: todo.interactionId,
       titre: todo.titre,
       url: this.determineUrl(todo),
       contentId: todo.contentId,

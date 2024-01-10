@@ -35,10 +35,7 @@ export class RecommandationsPersonnaliseesRepositoryAxios implements Recommandat
         nombreDePointsAGagner: apiModel.points.toString(),
         illustrationURL: apiModel.image_url,
         url: apiModel.url || '',
-        aEteFaite: apiModel.done,
         idDuContenu: apiModel.content_id,
-        duree: apiModel.duree,
-        estBloquee: apiModel.locked,
       };
       return recommandationPersonnalisee;
     });

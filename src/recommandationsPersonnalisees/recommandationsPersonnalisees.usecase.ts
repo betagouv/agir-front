@@ -11,10 +11,7 @@ export interface RecommandationPersonnalisee {
   nombreDePointsAGagner: string;
   illustrationURL: string;
   url: string;
-  aEteFaite: boolean;
   idDuContenu: string;
-  duree: string;
-  estBloquee: boolean;
 }
 
 export class RecommandationsPersonnaliseesUsecase {
