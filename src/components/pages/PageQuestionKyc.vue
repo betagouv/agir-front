@@ -55,6 +55,7 @@
   import InputCheckbox from '@/components/custom/InputCheckbox.vue';
   import BoutonRadio from '@/components/custom/BoutonRadio.vue';
   import KYCFin from '@/components/custom/KYC/KYCFin.vue';
+  import { ToDoListEventBusImpl } from '@/toDoList/toDoListEventBusImpl';
 
   const route = useRoute();
   const questionId = Array.isArray(route.params.id) ? route.params.id[0] : route.params.id;
@@ -74,7 +75,10 @@
   );
 
   const validerLaReponse = async () => {
-    const envoyerReponseUsecase = new EnvoyerReponseUsecase(new QuestionRepositoryAxios());
+    const envoyerReponseUsecase = new EnvoyerReponseUsecase(
+      new QuestionRepositoryAxios(),
+      ToDoListEventBusImpl.getInstance()
+    );
     envoyerReponseUsecase.execute(utilisateurId, questionId, [reponse.value].flat());
     reponseAEteDonnee.value = true;
   };

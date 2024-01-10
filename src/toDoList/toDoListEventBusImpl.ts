@@ -5,6 +5,7 @@ export enum ToDoListEvent {
   TODO_ARTICLE_A_ETE_LU,
   TODO_A_ETE_TERMINEE,
   TODO_QUIZ_ETE_TERMINE,
+  TODO_KYC_A_ETE_REPONDU,
 }
 
 export class ToDoListEventBusImpl extends EventBus<ToDoListEvent> {
@@ -15,6 +16,7 @@ export class ToDoListEventBusImpl extends EventBus<ToDoListEvent> {
     [ToDoListEvent.TODO_ARTICLE_A_ETE_LU]: [],
     [ToDoListEvent.TODO_A_ETE_TERMINEE]: [],
     [ToDoListEvent.TODO_QUIZ_ETE_TERMINE]: [],
+    [ToDoListEvent.TODO_KYC_A_ETE_REPONDU]: [],
   };
   private constructor() {
     super();
