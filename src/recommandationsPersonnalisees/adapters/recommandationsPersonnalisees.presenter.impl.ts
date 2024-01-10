@@ -3,7 +3,6 @@ import { InteractionType } from '@/shell/interactionType';
 import { RecommandationsPersonnaliseesPresenter } from '@/recommandationsPersonnalisees/ports/recommandationsPersonnalisees.presenter';
 
 export interface RecommandationViewModel {
-  id: string;
   titre: string;
   image: string;
   description: string;
@@ -30,7 +29,6 @@ export class RecommandationsPersonnaliseesPresenterImpl implements Recommandatio
     if (recommandationHighlight) {
       this.viewModel({
         recommandationHighlight: {
-          id: recommandationHighlight.id,
           titre: recommandationHighlight.titre,
           image: recommandationHighlight.illustrationURL,
           description: recommandationHighlight.sousTitre,
@@ -41,10 +39,9 @@ export class RecommandationsPersonnaliseesPresenterImpl implements Recommandatio
           thematique: recommandationHighlight.categorie,
         },
         recommandationsList: recommandationsPersonnalisees
-          .filter(reco => reco.id !== recommandationHighlight.id)
+          .filter(reco => reco !== recommandationHighlight)
           .map(recommandationPersonnalisee => {
             return {
-              id: recommandationPersonnalisee.id,
               thematique: recommandationPersonnalisee.categorie,
               titre: recommandationPersonnalisee.titre,
               image: recommandationPersonnalisee.illustrationURL,

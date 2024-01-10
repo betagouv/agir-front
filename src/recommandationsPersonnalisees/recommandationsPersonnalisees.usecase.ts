@@ -3,14 +3,12 @@ import { RecommandationsPersonnaliseesRepository } from '@/recommandationsPerson
 import { RecommandationsPersonnaliseesPresenter } from '@/recommandationsPersonnalisees/ports/recommandationsPersonnalisees.presenter';
 
 export interface RecommandationPersonnalisee {
-  id: string;
   type: InteractionType;
   titre: string;
   sousTitre: string;
   categorie: string;
   nombreDePointsAGagner: string;
   illustrationURL: string;
-  url: string;
   idDuContenu: string;
 }
 
