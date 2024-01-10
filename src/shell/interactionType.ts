@@ -1,7 +1,7 @@
 export enum InteractionType {
   QUIZ = 'quizz',
   ARTICLE = 'article',
-  KYC = 'KYC',
+  KYC = 'kyc',
   SUIVIDUJOUR = 'suivi_du_jour',
   AIDE = 'aide',
   COMPTE = 'profile',

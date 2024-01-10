@@ -64,7 +64,7 @@ export class ToDoListPresenterImpl implements ToDoListPresenter {
       case InteractionType.ARTICLE:
         return `/article/${todo.titre}`;
       case InteractionType.KYC:
-        return '';
+        return `/kyc/${todo.contentId}`;
       case InteractionType.SUIVIDUJOUR:
         return '/coach/suivi-du-jour';
       case InteractionType.COMPTE:
