@@ -29,7 +29,6 @@
   import { useInteraction } from '@/composables/interactionAEteCliquee';
 
   const props = defineProps<{
-    interactionId: string;
     type: string;
     idDuContenu: string;
     nombreDePointsAGagner: number;
@@ -40,7 +39,6 @@
   }>();
 
   const { interactionAEteCliquee } = useInteraction({
-    id: props.interactionId,
     type: props.type,
     idDuContenu: props.idDuContenu,
     nombreDePointsAGagner: props.nombreDePointsAGagner.toString(),

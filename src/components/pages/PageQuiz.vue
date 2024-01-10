@@ -6,7 +6,6 @@
     :quiz-view-model="quizViewModel"
     :nombreDePointsAGagner="interactionEnCours ? interactionEnCours.nombreDePointsAGagner : '0'"
     :id-utilisateur="store.utilisateur.id"
-    :id-interaction="interactionEnCours ? interactionEnCours.id : ''"
     :is-mode-previsualisation="false"
     :id-quiz="interactionEnCours ? interactionEnCours.idDuContenu : ''"
   >

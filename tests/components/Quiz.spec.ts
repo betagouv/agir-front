@@ -36,8 +36,8 @@ const props = {
   quizViewModel: quizzViewModelMock,
   nombreDePointsAGagner: '10',
   idUtilisateur: 'idUtilisateur',
-  idInteraction: 'idInteraction',
   isModePrevisualisation: false,
+  idQuiz: 'idQuiz',
 };
 
 describe('Quizz', () => {
@@ -217,8 +217,8 @@ describe('Quizz', () => {
         quizViewModel: quizzViewModelMock,
         nombreDePointsAGagner: '10',
         idUtilisateur: 'idUtilisateur',
-        idInteraction: 'idInteraction',
         isModePrevisualisation: false,
+        idQuiz: 'idQuiz',
       };
       const { getByRole, getAllByRole } = render(Quiz, { props });
 
@@ -239,7 +239,7 @@ describe('Quizz', () => {
       await fireEvent.click(boutonEtapeSuivante2);
 
       // THEN
-      expect(envoyerDonneesQuizInteractionMock).toHaveBeenNthCalledWith(1, 'idUtilisateur', 'idInteraction', 1, 2);
+      expect(envoyerDonneesQuizInteractionMock).toHaveBeenNthCalledWith(1, 'idUtilisateur', 'idQuiz', 1, 2);
     });
     it("si le quizz est en mode preview ne doit pas appeler le usecase d'envoi des données du quizz", async () => {
       // GIVEN
@@ -249,6 +249,7 @@ describe('Quizz', () => {
         idUtilisateur: 'idUtilisateur',
         idInteraction: 'idInteraction',
         isModePrevisualisation: true,
+        idQuiz: 'idQuiz',
       };
       const { getByRole, getAllByRole } = render(Quiz, { props });
 
@@ -269,7 +270,7 @@ describe('Quizz', () => {
       await fireEvent.click(boutonEtapeSuivante2);
 
       // THEN
-      expect(envoyerDonneesQuizInteractionMock).not.toHaveBeenCalledWith(1, 'idUtilisateur', 'idInteraction', 1, 2);
+      expect(envoyerDonneesQuizInteractionMock).not.toHaveBeenCalledWith(1, 'idUtilisateur', 'idQuiz', 1, 2);
     });
   });
 });

@@ -13,7 +13,6 @@ interface ToDoListApiModel {
       titre: string;
       type: string;
       content_id: string;
-      interaction_id: string;
       id: string;
       points: number;
       sont_points_en_poche: boolean;
@@ -29,7 +28,6 @@ interface ToDoListApiModel {
       titre: string;
       type: string;
       content_id: string;
-      interaction_id: string;
       id: string;
       points: number;
       sont_points_en_poche: boolean;
@@ -53,9 +51,8 @@ export class ToDoListRepositoryAxios implements ToDoListRepository {
       derniere: response.data.is_last,
       aFaire: response.data.todo.map(todo => ({
         id: todo.id,
-        interactionId: todo.interaction_id,
         titre: todo.titre,
-        contentId: todo.content_id,
+        contentId: todo.content_id || '',
         progession: {
           etapeCourante: todo.progression.current,
           etapeTotal: todo.progression.target,
@@ -67,7 +64,6 @@ export class ToDoListRepositoryAxios implements ToDoListRepository {
       })),
       fait: response.data.done.map(todo => ({
         id: todo.id,
-        interactionId: todo.interaction_id,
         titre: todo.titre,
         contentId: todo.content_id,
         progession: {

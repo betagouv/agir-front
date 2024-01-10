@@ -16,7 +16,6 @@
         <Quiz
           class="fr-mt-4w"
           :quiz-view-model="quizViewModel"
-          :id-interaction="idInteraction"
           :id-utilisateur="idUtilisateur"
           :is-mode-previsualisation="isModePrevisualisation"
           :id-quiz="idQuiz"
@@ -38,7 +37,6 @@
     quizViewModel: QuizViewModel;
     nombreDePointsAGagner: string;
     idUtilisateur: string;
-    idInteraction: string;
     isModePrevisualisation: boolean;
     idQuiz: string;
   }>();

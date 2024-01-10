@@ -72,11 +72,11 @@ export class QuizRepositoryAxios implements QuizRepository {
   }
 
   @intercept401()
-  async terminerQuiz(idUtilisateur: string, idInteraction: string, score: number): Promise<void> {
+  async terminerQuiz(idUtilisateur: string, idQuiz: string, score: number): Promise<void> {
     const axiosInstance = AxiosFactory.getAxios();
     await axiosInstance.post(`/utilisateurs/${idUtilisateur}/events`, {
       type: 'quizz_score',
-      interaction_id: idInteraction,
+      content_id: idQuiz,
       number_value: score,
     });
   }

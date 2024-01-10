@@ -47,7 +47,6 @@
   const props = defineProps<{
     quizViewModel: QuizViewModel;
     idUtilisateur: string;
-    idInteraction: string;
     isModePrevisualisation: boolean;
     idQuiz: string;
   }>();
@@ -76,12 +75,7 @@
       await new EnvoyerDonneesQuizInteractionUsecase(
         new QuizRepositoryAxios(),
         ToDoListEventBusImpl.getInstance()
-      ).execute(
-        props.idUtilisateur,
-        props.idInteraction,
-        nombreDeBonnesReponses.value,
-        props.quizViewModel.questions.length
-      );
+      ).execute(props.idUtilisateur, props.idQuiz, nombreDeBonnesReponses.value, props.quizViewModel.questions.length);
     }
   };
 

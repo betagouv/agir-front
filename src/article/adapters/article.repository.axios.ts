@@ -14,11 +14,11 @@ export class ArticleRepositoryAxios implements ArticleRepository {
   }
 
   @intercept401()
-  async marquerCommeLu(interactionId: string, utilisateurId: string): Promise<void> {
+  async marquerCommeLu(articleId: string, utilisateurId: string): Promise<void> {
     const axios = AxiosFactory.getAxios();
     await axios.post(`/utilisateurs/${utilisateurId}/events`, {
       type: 'article_lu',
-      interaction_id: interactionId,
+      content_id: articleId,
     });
   }
 

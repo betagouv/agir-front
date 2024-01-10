@@ -33,7 +33,7 @@
         articleAAfficher.value = article;
         if (!route.params.id) {
           await new PasserUnArticleCommeLuUsecase(articleRepositoryAxios, ToDoListEventBusImpl.getInstance()).execute(
-            store.interactionEnCours!.id,
+            idArticle,
             utilisateurStore().utilisateur.id
           );
         }

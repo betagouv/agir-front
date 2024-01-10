@@ -23,7 +23,6 @@
         <ul class="list-style-none fr-p-0 fr-m-0">
           <li v-for="todo in todoList.aFaire" :key="todo.titre" class="fr-mb-2w">
             <CoachCardToDo
-              :interactionId="todo.interactionId"
               :id-du-contenu="todo.contentId"
               :type="todo.type"
               :nombre-de-points-a-gagner="todo.nombreDePointsAGagner"
