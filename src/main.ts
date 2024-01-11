@@ -24,8 +24,7 @@ declare global {
     };
   }
 }
-// eslint-disable-next-line no-console
-console.log('coucou', __APP_VERSION__);
+
 const app = createApp(App);
 const pinia = createPinia();
 pinia.use(piniaPluginPersistedstate);
