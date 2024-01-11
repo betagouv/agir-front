@@ -3,7 +3,6 @@ import PageCreationCompte from '@/components/pages/PageCreationCompte.vue';
 import { onboardingStore } from '@/store/onboarding';
 import PageValidationCompte from '@/components/pages/PageValidationCompte.vue';
 import PageMotDePasseOublie from '@/components/pages/PageMotDePasseOublie.vue';
-import PageMotDePasseOublieRedefinirMotDePasse from '@/components/pages/PageMotDePasseOublieRedefinirMotDePasse.vue';
 import PageCompteOptionsAvancees from '@/components/pages/PageCompteOptionsAvancees.vue';
 import { RouteRecordRaw } from 'vue-router';
 import { RouteCompteName } from '@/router/compte/routeCompteName';
@@ -15,7 +14,6 @@ enum RouteComptePath {
   CREATION_COMPTE = '/creation-compte',
   VALIDATION_COMPTE = '/validation-compte',
   MOT_DE_PASSE_OUBLIE = '/mot-de-passe-oublie',
-  REDEFINIR_MOT_DE_PASSE = '/mot-de-passe-oublie/redefinir-mot-de-passe',
 }
 
 const compteRoutes: RouteRecordRaw[] = [
@@ -68,15 +66,6 @@ const compteRoutes: RouteRecordRaw[] = [
         component: PageMotDePasseOublie,
         meta: {
           title: 'Mot de passe oublié',
-          estPublique: true,
-        },
-      },
-      {
-        path: RouteComptePath.REDEFINIR_MOT_DE_PASSE,
-        name: RouteCompteName.REDEFINIR_MOT_DE_PASSE,
-        component: PageMotDePasseOublieRedefinirMotDePasse,
-        meta: {
-          title: 'Redéfinir mot de passe',
           estPublique: true,
         },
       },
