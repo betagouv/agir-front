@@ -16,20 +16,24 @@
   </div>
 
   <Teleport to="body">
-    <Modale label="Modale de suppression de compte" :id="modaleId">
-      <h1 :id="modaleId" class="fr-h4 fr-modal__title">Veuillez confirmer la suppression du compte</h1>
-      <p>Voulez-vous vraiment supprimer votre compte ainsi que les données associées ?</p>
-      <p><strong>Attention : Aucune donnée ne pourra être récupérée.</strong></p>
-      <ul
-        class="fr-btns-group fr-btns-group--right fr-btns-group--inline-reverse fr-btns-group--inline-lg fr-btns-group--icon-left"
-      >
-        <li>
-          <button class="fr-btn fr-icon-warning-line" @click="supprimerLeCompte">Confirmer</button>
-        </li>
-        <li>
-          <button class="fr-btn fr-btn--secondary" :aria-controls="modaleId">Annuler</button>
-        </li>
-      </ul>
+    <Modale label="Modale de suppression de compte" :id="modaleId" :radius="false" :is-footer-actions="true">
+      <template v-slot:contenu>
+        <h1 :id="modaleId" class="fr-h4 fr-modal__title">Veuillez confirmer la suppression du compte</h1>
+        <p>Voulez-vous vraiment supprimer votre compte ainsi que les données associées ?</p>
+        <p><strong>Attention : Aucune donnée ne pourra être récupérée.</strong></p>
+      </template>
+      <template v-slot:footer>
+        <ul
+          class="fr-btns-group fr-btns-group--right fr-btns-group--inline-reverse fr-btns-group--inline-lg fr-btns-group--icon-left"
+        >
+          <li>
+            <button class="fr-btn fr-icon-warning-line" @click="supprimerLeCompte">Confirmer</button>
+          </li>
+          <li>
+            <button class="fr-btn fr-btn--secondary" :aria-controls="modaleId">Annuler</button>
+          </li>
+        </ul>
+      </template>
     </Modale>
   </Teleport>
 </template>

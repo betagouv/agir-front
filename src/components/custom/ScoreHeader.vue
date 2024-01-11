@@ -7,27 +7,29 @@
   </div>
 
   <Teleport to="body">
-    <Modale label="Modale de passage de niveau" id="passageDeNiveau">
-      <ModalePassageDeNiveau :niveau="utilisateurStore().score.niveau" modale-id="passageDeNiveau" />
-      <div class="text--center fr-mt-3w">
-        <div v-if="utilisateurStore().score.celebration?.reveal">
-          <p class="fr-m-0 text--uppercase fr-text--xs text--bold text--gris-light">Section débloquée</p>
-          <h4 class="fr-h2 fr-my-0">{{ utilisateurStore().score.celebration!.reveal!.titre }}</h4>
-          <p class="fr-text--sm">{{ utilisateurStore().score.celebration!.reveal!.description }}</p>
-          <router-link
-            class="fr-btn fr-btn--icon-right fr-icon-arrow-right-line"
-            :to="utilisateurStore().score.celebration!.reveal!.url"
-            @click.prevent="modaleActions?.close()"
-          >
-            Découvrir la fonctionnalité
-          </router-link>
+    <Modale label="Modale de passage de niveau" id="passageDeNiveau" :radius="true" :is-footer-actions="false">
+      <template v-slot:contenu>
+        <ModalePassageDeNiveau :niveau="utilisateurStore().score.niveau" modale-id="passageDeNiveau" />
+        <div class="text--center fr-my-3w">
+          <div v-if="utilisateurStore().score.celebration?.reveal">
+            <p class="fr-m-0 text--uppercase fr-text--xs text--bold text--gris-light">Section débloquée</p>
+            <h4 class="fr-h2 fr-my-0">{{ utilisateurStore().score.celebration!.reveal!.titre }}</h4>
+            <p class="fr-text--sm">{{ utilisateurStore().score.celebration!.reveal!.description }}</p>
+            <router-link
+              class="fr-btn fr-btn--icon-right fr-icon-arrow-right-line"
+              :to="utilisateurStore().score.celebration!.reveal!.url"
+              @click.prevent="modaleActions?.close()"
+            >
+              Découvrir la fonctionnalité
+            </router-link>
+          </div>
+          <div v-else>
+            <button class="fr-btn fr-btn--icon-right fr-icon-arrow-right-line" aria-controls="passageDeNiveau">
+              Continuer
+            </button>
+          </div>
         </div>
-        <div v-else>
-          <button class="fr-btn fr-btn--icon-right fr-icon-arrow-right-line" aria-controls="passageDeNiveau">
-            Continuer
-          </button>
-        </div>
-      </div>
+      </template>
     </Modale>
     <button class="fr-btn fr-hidden" data-fr-opened="false" aria-controls="passageDeNiveau">
       Modale avec zone d'action
