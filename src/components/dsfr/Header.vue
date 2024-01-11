@@ -68,7 +68,22 @@
           aria-label="Menu principal"
           data-fr-js-navigation="true"
         >
-          <ul class="fr-nav__list">
+          <ul
+            class="fr-nav__list"
+            v-tour-step:1="{
+              tour: aideTour,
+              options: {
+                attachTo: { on: 'bottom' },
+                text: 'Test2',
+                buttons: [
+                  {
+                    text: 'Stop',
+                    action: aideTour.cancel,
+                  },
+                ],
+              },
+            }"
+          >
             <li class="fr-nav__item" data-fr-js-navigation-item="true">
               <router-link
                 class="fr-nav__link"
@@ -108,6 +123,9 @@
   import { RouteCoachName } from '@/router/coach/routeCoachName';
   import { RouteCompteName } from '@/router/compte/routeCompteName';
   import { RouteAidesName } from '@/router/aides/routeAidesName';
+  import { useReveal } from '@/composables/useReveal';
+
+  const { aideTour } = useReveal();
 
   const route = useRoute();
   const store = utilisateurStore();

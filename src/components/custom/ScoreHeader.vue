@@ -18,7 +18,7 @@
             <router-link
               class="fr-btn fr-btn--icon-right fr-icon-arrow-right-line"
               :to="utilisateurStore().score.celebration!.reveal!.url"
-              @click.prevent="modaleActions?.close()"
+              @click.prevent="revealFonctionnalite"
             >
               Découvrir la fonctionnalité
             </router-link>
@@ -38,7 +38,7 @@
 </template>
 
 <script setup lang="ts">
-  import { computed, onMounted, onUnmounted } from 'vue';
+  import { computed, onMounted, onUnmounted, ref } from 'vue';
   import { utilisateurStore } from '@/store/utilisateur';
   import { ScoreViewModel } from '@/score/ports/chargementScore.presenter';
   import { ChargementScoreUsecase } from '@/score/chargementScore.usecase';
@@ -51,10 +51,23 @@
   import { CelebrationRepositoryAxios } from '@/celebration/adapters/celebration.repository.axios';
   import { SessionRepositoryStore } from '@/authentification/adapters/session.repository.store';
   import ModalePassageDeNiveau from './Modale/ModalePassageDeNiveau.vue';
+  import { Fonctionnalites } from '@/shell/fonctionnalitesEnum';
+  import { useReveal } from '@/composables/useReveal';
+
+  const { selectionnerReveal } = useReveal();
+  const fonctionnaliteDebloque = ref<string>();
+
+  function revealFonctionnalite() {
+    modaleActions?.close();
+
+    const tour = selectionnerReveal(fonctionnaliteDebloque.value as Fonctionnalites);
+    tour.start();
+  }
 
   const score = computed(() => utilisateurStore().score);
   let modaleActions: ModaleActions | null;
   const subscriberName = 'ScoreHeader';
+
   onMounted(() => {
     mettreAJourLeScore();
 
@@ -81,6 +94,7 @@
 
           if (viewModel.celebration) {
             declencherCelebration(viewModel.celebration.id);
+            fonctionnaliteDebloque.value = viewModel.celebration.reveal?.feature;
           }
         })
       );

@@ -12,6 +12,8 @@ import { createSentry } from './sentry/sentry';
 import './assets/theme/style.css';
 import { NavigationBus } from '@/navigationBus';
 import Hotjar from '@hotjar/browser';
+import Vue3DirectiveShepherd from 'vue3-directive-shepherd';
+import 'shepherd.js/dist/css/shepherd.css';
 
 declare global {
   interface Window {
@@ -31,6 +33,23 @@ pinia.use(piniaPluginPersistedstate);
 NavigationBus.getInstance().setRouter(router);
 app.use(router);
 app.use(pinia);
+
+const options = {
+  router,
+  tourMap: {
+    serviceTour: {
+      useModalOverlay: true,
+    },
+    aideTour: {
+      useModalOverlay: true,
+    },
+    recommandationTour: {
+      useModalOverlay: true,
+    },
+  },
+};
+
+app.use(Vue3DirectiveShepherd, options);
 app.use(VueMatomo, {
   host: import.meta.env.VITE_MATOMO_URL,
   siteId: import.meta.env.VITE_MATOMO_SITE_ID,

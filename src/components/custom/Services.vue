@@ -1,5 +1,20 @@
 <template>
-  <nav class="fr-grid-row fr-grid-row--middle fr-mt-0 fr-background-action-high--blue-france fr-p-2w">
+  <nav
+    class="fr-grid-row fr-grid-row--middle fr-mt-0 fr-background-action-high--blue-france fr-p-2w"
+    v-tour-step:1="{
+      tour: serviceTour,
+      options: {
+        attachTo: { on: 'bottom' },
+        text: 'Test2',
+        buttons: [
+          {
+            text: 'Stop',
+            action: serviceTour.cancel,
+          },
+        ],
+      },
+    }"
+  >
     <span class="fr-icon-layout-grid-fill text--white text--bold fr-col fr-mr-2w">Vos services</span>
     <ul class="fr-grid-row service__list fr-col-10 list-style-none fr-p-0">
       <li class="fr-p-0 fr-col" v-for="service in servicesViewModels" :key="service.contenu">
@@ -42,8 +57,9 @@
   import { onMounted, onUnmounted, ref } from 'vue';
   import { utilisateurStore } from '@/store/utilisateur';
   import { ServiceEvent, ServiceEventBusImpl } from '@/services/serviceEventBusImpl';
-
   import { RouteCoachName } from '@/router/coach/routeCoachName';
+  import { useReveal } from '@/composables/useReveal';
+
   const servicesViewModels = ref<ServiceViewModel[]>();
 
   const mapValuesServicesViewmodel = (services: ServiceViewModel[]) => {
@@ -54,6 +70,9 @@
   const servicePresenterImpl = new ServicePresenterImpl(mapValuesServicesViewmodel);
   recupererServicesActifs.execute(utilisateurId, servicePresenterImpl);
   const subscriberName = 'Services';
+
+  const { serviceTour } = useReveal();
+
   onMounted(() => {
     ServiceEventBusImpl.getInstance().subscribe(subscriberName, ServiceEvent.SERVICE_SUPPRIME, () => {
       recupererServicesActifs.execute(utilisateurId, servicePresenterImpl);
