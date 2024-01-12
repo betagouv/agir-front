@@ -29,6 +29,21 @@
   <section
     v-if="store.utilisateur.fonctionnalitesDebloquees.includes(Fonctionnalites.RECOMMANDATIONS)"
     class="fr-py-6w fr-background-contrast--grey"
+    v-tour-step:1="{
+      tour: recommandationTour,
+      options: {
+        attachTo: { on: 'top' },
+        title: 'Recommandations débloquées',
+        text: 'Retrouvez ici toutes vos recommandations personnalisées !',
+        buttons: [
+          {
+            text: 'Fermer',
+            action: recommandationTour.cancel,
+            classes: 'fr-btn fr-btn--icon-left',
+          },
+        ],
+      },
+    }"
   >
     <div class="fr-container" v-if="!isLoading">
       <CoachRecommandations
@@ -74,6 +89,9 @@
   import { ToDoListEvent, ToDoListEventBusImpl } from '@/toDoList/toDoListEventBusImpl';
   import { Fonctionnalites } from '@/shell/fonctionnalitesEnum';
   import BilanOnboarding from '@/components/custom/BilanOnboarding.vue';
+  import { useReveal } from '@/composables/useReveal';
+
+  const { recommandationTour } = useReveal();
 
   const isLoading = ref<boolean>(true);
   const todoList = ref<TodoListViewModel>();

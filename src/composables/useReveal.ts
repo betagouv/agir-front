@@ -5,6 +5,7 @@ import Shepherd from 'shepherd.js';
 export const useReveal = () => {
   const aideTour: Shepherd.Tour = inject('aideTour')!;
   const serviceTour: Shepherd.Tour = inject('serviceTour')!;
+  const recommandationTour: Shepherd.Tour = inject('recommandationTour')!;
 
   function selectionnerReveal(fonctionnalite: Fonctionnalites): Shepherd.Tour {
     switch (fonctionnalite) {
@@ -12,10 +13,12 @@ export const useReveal = () => {
         return serviceTour;
       case Fonctionnalites.AIDES:
         return aideTour;
+      case Fonctionnalites.RECOMMANDATIONS:
+        return recommandationTour;
       default:
         return aideTour;
     }
   }
 
-  return { serviceTour, aideTour, selectionnerReveal };
+  return { aideTour, serviceTour, recommandationTour, selectionnerReveal };
 };

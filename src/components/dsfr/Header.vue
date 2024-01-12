@@ -56,7 +56,26 @@
         </div>
       </div>
     </div>
-    <div class="fr-header__menu fr-modal" id="modal-menu" aria-labelledby="button-menu">
+    <div
+      class="fr-header__menu fr-modal"
+      id="modal-menu"
+      aria-labelledby="button-menu"
+      v-tour-step:1="{
+        tour: aideTour,
+        options: {
+          attachTo: { on: 'bottom' },
+          title: 'Aides débloquées',
+          text: 'Retrouvez ici toutes vos aides !',
+          buttons: [
+            {
+              text: 'Voir les aides',
+              action: aideTour.cancel,
+              classes: 'fr-btn fr-btn--icon-left fr-icon-list-unordered',
+            },
+          ],
+        },
+      }"
+    >
       <div class="fr-container">
         <button class="fr-btn--close fr-btn" aria-controls="modal-menu" id="button-menu" title="Fermer">Fermer</button>
         <div class="fr-header__menu-links"></div>
@@ -68,22 +87,7 @@
           aria-label="Menu principal"
           data-fr-js-navigation="true"
         >
-          <ul
-            class="fr-nav__list"
-            v-tour-step:1="{
-              tour: aideTour,
-              options: {
-                attachTo: { on: 'bottom' },
-                text: 'Test2',
-                buttons: [
-                  {
-                    text: 'Stop',
-                    action: aideTour.cancel,
-                  },
-                ],
-              },
-            }"
-          >
+          <ul class="fr-nav__list">
             <li class="fr-nav__item" data-fr-js-navigation-item="true">
               <router-link
                 class="fr-nav__link"

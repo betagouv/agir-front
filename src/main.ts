@@ -5,6 +5,7 @@ import router from '@/router';
 import { createPinia } from 'pinia';
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate';
 import VueMatomo from 'vue-matomo';
+import 'shepherd.js/dist/css/shepherd.css';
 import '@gouvfr/dsfr/dist/dsfr.min.css';
 import '@gouvfr/dsfr/dist/utility/utility.min.css';
 import '@gouvfr/dsfr/dist/dsfr.module.min.js';
@@ -13,7 +14,6 @@ import './assets/theme/style.css';
 import { NavigationBus } from '@/navigationBus';
 import Hotjar from '@hotjar/browser';
 import Vue3DirectiveShepherd from 'vue3-directive-shepherd';
-import 'shepherd.js/dist/css/shepherd.css';
 
 declare global {
   interface Window {
@@ -39,12 +39,21 @@ const options = {
   tourMap: {
     serviceTour: {
       useModalOverlay: true,
+      defaultStepOptions: {
+        scrollTo: true,
+      },
     },
     aideTour: {
       useModalOverlay: true,
+      defaultStepOptions: {
+        scrollTo: true,
+      },
     },
     recommandationTour: {
       useModalOverlay: true,
+      defaultStepOptions: {
+        scrollTo: true,
+      },
     },
   },
 };
