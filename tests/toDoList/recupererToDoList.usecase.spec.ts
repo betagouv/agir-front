@@ -35,7 +35,7 @@ describe('Fichier de tests concernant la récupération de la ToDo List', () => 
           {
             id: 'id',
             titre: 'Premier Quiz',
-            url: '/coach/quiz/',
+            url: '/agir/quiz/',
             contentId: '',
             progession: {
               etapeCourante: 1,
@@ -58,7 +58,7 @@ describe('Fichier de tests concernant la récupération de la ToDo List', () => 
             thematique: '🌍 Global',
             titre: 'Installer un service',
             type: 'service',
-            url: '/coach/services',
+            url: '/agir/services',
           },
         ],
         fait: [

@@ -4,8 +4,8 @@
       page-courante="Question pour mieux vous connaître"
       :page-hierarchie="[
         {
-          label: 'Coach',
-          url: 'coach',
+          label: 'Agir',
+          url: 'agir',
         },
       ]"
     />

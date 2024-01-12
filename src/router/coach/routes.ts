@@ -7,7 +7,7 @@ import { RouteRecordRaw } from 'vue-router';
 import { RouteCoachName } from '@/router/coach/routeCoachName';
 
 enum RouteCoachPath {
-  COACH = '/coach/',
+  COACH = '/agir/',
   SERVICES = 'services',
   SUIVI_DU_JOUR = 'suivi-du-jour',
   QUIZ = 'quiz',
@@ -24,7 +24,7 @@ const coachRoutes: RouteRecordRaw[] = [
         name: RouteCoachName.COACH,
         component: Coach,
         meta: {
-          title: 'Coach',
+          title: 'Agir',
         },
       },
       {

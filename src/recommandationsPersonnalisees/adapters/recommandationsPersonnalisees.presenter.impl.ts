@@ -62,13 +62,13 @@ export class RecommandationsPersonnaliseesPresenterImpl implements Recommandatio
       case InteractionType.AIDE:
         return '/vos-aides';
       case InteractionType.QUIZ:
-        return `/coach/quiz/${recommandationPersonnalisee.idDuContenu}`;
+        return `/agir/quiz/${recommandationPersonnalisee.idDuContenu}`;
       case InteractionType.ARTICLE:
         return `/article/${recommandationPersonnalisee.titre}`;
       case InteractionType.KYC:
         return '';
       case InteractionType.SUIVIDUJOUR:
-        return '/coach/suivi-du-jour';
+        return '/agir/suivi-du-jour';
       default:
         return '';
     }
