@@ -4,5 +4,5 @@ import { connecterUtilisateur } from './utils/connecterUtilisateurs';
 test('has title', async () => {
   const page = await connecterUtilisateur();
 
-  await expect(page).toHaveTitle('Agir ! - Coach');
+  await expect(page).toHaveTitle('Agir ! - Agir');
 });
