@@ -1,25 +1,21 @@
 import { ValiderCompteUtilisateurUsecase } from '@/authentification/validerCompteUtilisateur.usecase';
 import { SessionRepository } from '@/authentification/authentifierUtilisateur.usecase';
-import { Utilisateur, UtilisateurRepository } from '@/authentification/ports/utilisateur.repository';
+import { IdUtilisateur, Utilisateur, UtilisateurRepository } from '@/authentification/ports/utilisateur.repository';
 import { SpySauvegarderUtilisateurSessionRepository } from '../compte/sessionRepository.sauvegarderUtilisateur.spy';
 
-class SpyValiderCompteUtilisateurRepository implements UtilisateurRepository {
+class MockUtilisateurRepository implements UtilisateurRepository {
   authentifierUtilisateur(email: string, motDePasse: string): Promise<Utilisateur> {
     throw Error();
   }
 
   getUtilisateurAvecId(idUtilisateur: string): Promise<Utilisateur> {
-    throw Error();
-  }
-
-  validerCompteUtilisateur(email: string, code: string): Promise<Utilisateur> {
     return Promise.resolve({
-      id: '',
+      id: idUtilisateur,
       nom: '',
       codePostal: '',
       commune: '',
       prenom: '',
-      mail: email,
+      mail: 'john@exemple.com',
       revenuFiscal: null,
       nombreDePartsFiscales: 1,
       abonnementTransport: false,
@@ -38,20 +34,21 @@ class SpyValiderCompteUtilisateurRepository implements UtilisateurRepository {
   terminerRedefinirMotDePasse(email: string, motDePasse: string, code: string): Promise<void> {
     throw Error;
   }
+
+  validerCompteUtilisateur(email: string, code: string): Promise<IdUtilisateur> {
+    return Promise.resolve('utilisateurId');
+  }
 }
 describe('Fichier de tests concernant la validation du compte utilisateur', () => {
-  it('En donnant un mail et un code doit valider le compte', async () => {
+  it('En donnant un mail et un code doit valider le compte puis le sauvegarder en session', async () => {
     // GIVEN
     // WHEN
     const spySessionRepository = new SpySauvegarderUtilisateurSessionRepository();
-    const usecase = new ValiderCompteUtilisateurUsecase(
-      new SpyValiderCompteUtilisateurRepository(),
-      spySessionRepository
-    );
+    const usecase = new ValiderCompteUtilisateurUsecase(new MockUtilisateurRepository(), spySessionRepository);
     await usecase.execute('john@exemple.com', '123456');
     // THEN
     expect(spySessionRepository.utilisateur).toStrictEqual<Utilisateur>({
-      id: '',
+      id: 'utilisateurId',
       nom: '',
       codePostal: '',
       commune: '',

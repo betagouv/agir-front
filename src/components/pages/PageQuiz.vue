@@ -7,7 +7,7 @@
     :nombreDePointsAGagner="interactionEnCours ? interactionEnCours.nombreDePointsAGagner : '0'"
     :id-utilisateur="store.utilisateur.id"
     :is-mode-previsualisation="false"
-    :id-quiz="interactionEnCours ? interactionEnCours.idDuContenu : ''"
+    :id-quiz="idQuiz"
   >
   </PageQuizComposant>
 </template>
@@ -27,6 +27,7 @@
   const interactionEnCours = interactionEnCoursStore().interactionEnCours;
   const route = useRoute();
   const isLoading = ref<boolean>(false);
+  const idQuiz = route.params.id.toString();
 
   const mapValuesQuiz = (viewModel: QuizViewModel) => {
     quizViewModel.value = viewModel;
@@ -34,9 +35,6 @@
 
   const chargementQuizz = async () => {
     isLoading.value = true;
-    const idQuiz = route.params.id
-      ? route.params.id.toString()
-      : interactionEnCoursStore().interactionEnCours!.idDuContenu;
     const chargementQuizzUsecase = new ChargementQuizUsecase(new QuizRepositoryAxios());
     await chargementQuizzUsecase.execute(idQuiz, new ChargementQuizPresenterImpl(mapValuesQuiz));
     isLoading.value = false;

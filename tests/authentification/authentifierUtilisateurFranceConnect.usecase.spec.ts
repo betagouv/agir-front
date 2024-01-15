@@ -1,5 +1,5 @@
 import { SessionRepository } from '@/authentification/authentifierUtilisateur.usecase';
-import { Utilisateur, UtilisateurRepository } from '@/authentification/ports/utilisateur.repository';
+import { IdUtilisateur, Utilisateur, UtilisateurRepository } from '@/authentification/ports/utilisateur.repository';
 import { AuthentifierUtilisateurFranceConnectUsecase } from '@/authentification/authentifierUtilisateurFranceConnect.usecase';
 import { SpySauvegarderUtilisateurSessionRepository } from '../compte/sessionRepository.sauvegarderUtilisateur.spy';
 
@@ -30,7 +30,7 @@ class UtilisateurRepositoryForTest implements UtilisateurRepository {
     });
   }
 
-  validerCompteUtilisateur(email: string, code: string): Promise<Utilisateur> {
+  validerCompteUtilisateur(email: string, code: string): Promise<IdUtilisateur> {
     throw Error;
   }
 
