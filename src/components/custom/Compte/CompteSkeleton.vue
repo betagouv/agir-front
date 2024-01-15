@@ -4,8 +4,8 @@
       :page-courante="pageCourante"
       :page-hierarchie="[
         {
-          label: 'Coach',
-          url: 'coach',
+          label: 'Agir',
+          url: 'agir',
         },
       ]"
     />

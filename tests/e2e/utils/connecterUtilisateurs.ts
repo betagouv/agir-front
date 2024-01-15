@@ -63,7 +63,7 @@ export const connecterUtilisateur: () => Promise<Page> = async () => {
   await page.fill('#password-input', '');
 
   await page.getByRole('button', { name: 'Se connecter' }).click();
-  await page.waitForURL('/coach/');
+  await page.waitForURL('/agir/');
 
   return page;
 };

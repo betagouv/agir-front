@@ -4,8 +4,8 @@
       :page-courante="`Article: ${article.titre}`"
       :page-hierarchie="[
         {
-          label: 'Coach',
-          url: 'coach',
+          label: 'Agir',
+          url: 'agir',
         },
       ]"
     />
@@ -19,7 +19,7 @@
             <span class="fr-m-0 fr-text--bold fr-text--md">Comment avez-vous trouvé cet article ?</span>
             <Notation @rated="noterLarticle" />
           </div>
-          <router-link class="fr-btn fr-mt-5v" :to="{ name: RouteCoachName.COACH }"> Revenir au coach </router-link>
+          <router-link class="fr-btn fr-mt-5v" :to="{ name: RouteCoachName.COACH }"> Revenir à l'accueil </router-link>
         </div>
       </div>
       <div class="fr-col-12 fr-col-md-4">

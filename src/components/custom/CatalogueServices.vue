@@ -1,5 +1,5 @@
 <template>
-  <FilDAriane page-courante="Services" :page-hierarchie="[{ label: 'Coach', url: 'coach' }]" />
+  <FilDAriane page-courante="Services" :page-hierarchie="[{ label: 'Agir', url: 'agir' }]" />
   <div class="fr-grid-row fr-grid-row--gutters">
     <div class="fr-col-12 fr-col-lg-3">
       <span class="fr-h4">Filtres</span>

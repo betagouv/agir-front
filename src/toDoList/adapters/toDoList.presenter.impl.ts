@@ -60,17 +60,17 @@ export class ToDoListPresenterImpl implements ToDoListPresenter {
       case InteractionType.AIDE:
         return '/vos-aides';
       case InteractionType.QUIZ:
-        return `/coach/quiz/${todo.contentId}`;
+        return `/agir/quiz/${todo.contentId}`;
       case InteractionType.ARTICLE:
         return `/article/${todo.titre}`;
       case InteractionType.KYC:
         return `/kyc/${todo.contentId}`;
       case InteractionType.SUIVIDUJOUR:
-        return '/coach/suivi-du-jour';
+        return '/agir/suivi-du-jour';
       case InteractionType.COMPTE:
         return '/mon-compte';
       case InteractionType.SERVICE:
-        return '/coach/services';
+        return '/agir/services';
       default:
         return '';
     }

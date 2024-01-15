@@ -23,7 +23,7 @@
                 class="fr-header__service"
                 :to="{ name: estConnecte ? RouteCoachName.COACH : RouteCommuneName.ACCUEIL }"
               >
-                <img :alt="`${estConnecte ? 'Revenir à la page coach' : 'Revenir à l\'accueil'}`" src="/logo.svg" />
+                <img alt="Revenir à l'accueil" src="/logo.svg" />
               </router-link>
             </div>
           </div>
@@ -75,7 +75,7 @@
                 :to="{ name: RouteCoachName.COACH }"
                 :aria-current="isCoachActif ? 'page' : null"
               >
-                Le coach
+                Agir
               </router-link>
             </li>
             <li
@@ -121,7 +121,7 @@
   watch(
     () => route.path,
     newPath => {
-      isCoachActif.value = newPath.includes('/coach');
+      isCoachActif.value = newPath.includes('/agir');
       isMesAidesActif.value = newPath.includes('/vos-aides');
     }
   );
