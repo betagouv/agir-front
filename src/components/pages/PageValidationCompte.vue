@@ -1,22 +1,25 @@
 <template>
   <div class="fr-container fr-py-6w">
-    <div class="fr-col-12 fr-col-lg-6 fr-mx-auto fr-mb-0 background--white fr-p-4w border border-radius--md">
-      <h1>Je valide mon compte</h1>
-      <p>
-        Un code à usage unique vous a été envoyé à l'adresse <strong>{{ email }}</strong>
+    <div class="fr-col-12 fr-col-lg-5 fr-mx-auto fr-mb-0 background--white fr-p-4w border border-radius--md">
+      <h1 class="fr-h4">Validez votre compte</h1>
+      <p class="fr-text--lg">
+        Un code à usage unique vous a été envoyé à l’adresse suivante : <strong>{{ email }}</strong>
       </p>
       <form @submit.prevent="validerCode">
         <InputText class="fr-col-md-5" v-model="code" name="code" label="Code à usage unique" />
         <button class="fr-btn fr-mr-4w" :disabled="code.length == 0">Valider</button>
-        <button class="fr-btn fr-btn--secondary" type="button" @click="renvoyerCode">Renvoyer le code</button>
-        <Alert
-          v-if="alerte.isActive"
-          class="fr-col-12 fr-mt-2w"
-          :type="alerte.type"
-          :titre="alerte.titre"
-          :message="alerte.message"
-        />
       </form>
+      <p class="fr-mt-4w fr-mb-0">Vous n’avez pas reçu de code ?</p>
+      <button class="fr-link fr-icon-mail-line fr-link--icon-left text--underline" @click="renvoyerCode">
+        Renvoyer le code
+      </button>
+      <Alert
+        v-if="alerte.isActive"
+        class="fr-col-12 fr-mt-2w"
+        :type="alerte.type"
+        :titre="alerte.titre"
+        :message="alerte.message"
+      />
     </div>
   </div>
 </template>
@@ -33,7 +36,6 @@
   import { UtilisateurRepositoryAxios } from '@/authentification/adapters/utilisateur.repository.axios';
   import { RenvoyerCoteOTPUsecase } from '@/authentification/renvoyerCoteOTPUsecase';
   import { useAlerte } from '@/composables/useAlerte';
-
   import { RouteCoachName } from '@/router/coach/routeCoachName';
 
   const code = ref('');
