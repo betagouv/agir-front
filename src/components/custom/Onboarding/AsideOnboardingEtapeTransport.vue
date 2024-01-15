@@ -21,11 +21,7 @@
       </a>
     </p>
   </CarteInfo>
-  <div class="background-color--gris-image border border-radius--md fr-p-2w">
-    <p class="fr-text--bold">
-      <span class="fr-icon-lightbulb-line" aria-hidden="true"></span>
-      Pour vous donner une idée
-    </p>
+  <CarteExplication>
     <p class="fr-text--sm">
       Pour 5 km, voici les émissions de gaz à effet de serre selon les moyens de transport utilisés en
       <span class="nowrap">kg CO<sub>2</sub>-e* </span>
@@ -51,9 +47,10 @@
         Impact CO2
       </a>
     </span>
-  </div>
+  </CarteExplication>
 </template>
 
 <script setup lang="ts">
   import CarteInfo from '@/components/custom/CarteInfo.vue';
+  import CarteExplication from '@/components/custom/CarteExplication.vue';
 </script>
