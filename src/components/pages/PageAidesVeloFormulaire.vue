@@ -1,6 +1,6 @@
 <template>
   <div class="fr-container fr-pb-6w">
-    <FilDAriane page-courante="Acheter un vélo" :page-hierarchie="[{ label: 'Vos aides', url: 'vos-aides' }]" />
+    <FilDAriane page-courante="Acheter un vélo" />
     <div class="fr-grid-row fr-grid-row--gutters">
       <div class="fr-col-lg-8">
         <div class="background--white border border-radius--md fr-p-3w fr-mb-4w">

@@ -1,14 +1,6 @@
 <template>
   <div class="fr-container fr-pb-6w">
-    <FilDAriane
-      :page-courante="pageCourante"
-      :page-hierarchie="[
-        {
-          label: 'Agir',
-          url: 'agir',
-        },
-      ]"
-    />
+    <FilDAriane :page-courante="pageCourante" />
     <div class="background--white fr-p-4w border border-radius--md">
       <div class="fr-grid-row fr-mb-4w">
         <h1 class="fr-h2 fr-mb-0 fr-col">Votre profil</h1>

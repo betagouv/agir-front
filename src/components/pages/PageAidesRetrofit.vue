@@ -1,6 +1,6 @@
 <template>
   <div class="fr-container fr-pb-6w">
-    <FilDAriane :page-courante="titrePage" :page-hierarchie="[{ label: 'Vos aides', url: 'vos-aides' }]" />
+    <FilDAriane :page-courante="titrePage" />
     <AidesResultat
       :is-loading="isLoading"
       titre-categorie-aide="Prime au retrofit"

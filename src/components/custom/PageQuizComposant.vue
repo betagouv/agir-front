@@ -1,14 +1,6 @@
 <template>
   <div class="fr-container fr-mb-6w">
-    <FilDAriane
-      :page-courante="`Quiz ${quizViewModel.titre}`"
-      :page-hierarchie="[
-        {
-          label: 'Agir',
-          url: 'agir',
-        },
-      ]"
-    />
+    <FilDAriane :page-courante="`Quiz ${quizViewModel.titre}`" />
     <div class="fr-grid-row fr-grid-row--gutters">
       <div class="fr-col-12 fr-col-lg-8">
         <span class="fr-h2">Quiz</span>

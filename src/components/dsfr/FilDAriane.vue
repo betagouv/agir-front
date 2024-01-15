@@ -3,6 +3,9 @@
     <button class="fr-breadcrumb__button" aria-expanded="false" aria-controls="breadcrumb">Voir le fil d’Ariane</button>
     <div class="fr-collapse" id="breadcrumb">
       <ol class="fr-breadcrumb__list">
+        <li>
+          <router-link class="fr-breadcrumb__link" to="/agir">Accueil</router-link>
+        </li>
         <li v-for="page in pageHierarchie" :key="page.label">
           <router-link class="fr-breadcrumb__link" :to="`/${page.url}`">{{ page.label }}</router-link>
         </li>
@@ -16,7 +19,7 @@
 
 <script setup lang="ts">
   defineProps<{
-    pageHierarchie: {
+    pageHierarchie?: {
       label: string;
       url: string;
     }[];
