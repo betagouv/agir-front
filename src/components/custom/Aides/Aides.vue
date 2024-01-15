@@ -1,5 +1,4 @@
 <template>
-  <FilDAriane page-courante="Vos aides" />
   <h1 class="fr-h2">Vos aides disponibles</h1>
   <div class="fr-grid-row fr-grid-row--gutters">
     <div class="fr-col-12 fr-col-lg-3">
@@ -57,7 +56,6 @@
 
 <script setup lang="ts">
   import { ref } from 'vue';
-  import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import Accordeon from '@/components/custom/Accordeon.vue';
   import { AidesViewModel } from '@/aides/ports/chargementAides.presenter';
   import InputCheckbox from '@/components/dsfr/InputCheckbox.vue';
