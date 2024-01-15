@@ -5,6 +5,7 @@ import router from '@/router';
 import { createPinia } from 'pinia';
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate';
 import VueMatomo from 'vue-matomo';
+// ordre des css important
 import 'shepherd.js/dist/css/shepherd.css';
 import '@gouvfr/dsfr/dist/dsfr.min.css';
 import '@gouvfr/dsfr/dist/utility/utility.min.css';
@@ -41,18 +42,21 @@ const options = {
       useModalOverlay: true,
       defaultStepOptions: {
         scrollTo: true,
+        classes: 'fr-text--bold',
       },
     },
     aideTour: {
       useModalOverlay: true,
       defaultStepOptions: {
         scrollTo: true,
+        classes: 'fr-text--bold',
       },
     },
     recommandationTour: {
       useModalOverlay: true,
       defaultStepOptions: {
         scrollTo: true,
+        classes: 'fr-text--bold',
       },
     },
   },

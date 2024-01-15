@@ -62,6 +62,17 @@
 
     const tour = selectionnerReveal(fonctionnaliteDebloque.value as Fonctionnalites);
     tour.start();
+
+    // Ajout d'un écouteur pour fermer le tour lors du clic sur l'overlay
+    setTimeout(() => {
+      document.addEventListener(
+        'click',
+        function () {
+          tour.cancel();
+        },
+        { once: true }
+      );
+    }, 0);
   }
 
   const score = computed(() => utilisateurStore().score);

@@ -1,22 +1,5 @@
 <template>
-  <nav
-    class="fr-grid-row fr-grid-row--middle fr-mt-0 fr-background-action-high--blue-france fr-p-2w"
-    v-tour-step:1="{
-      tour: serviceTour,
-      options: {
-        attachTo: { on: 'bottom' },
-        title: 'Services débloqués',
-        text: 'Retrouvez ici tous vos services du quotidien !',
-        buttons: [
-          {
-            text: 'Voir le catalogue',
-            action: serviceTour.cancel,
-            classes: 'fr-btn fr-btn--icon-left fr-icon-list-unordered',
-          },
-        ],
-      },
-    }"
-  >
+  <nav class="fr-grid-row fr-grid-row--middle fr-mt-0 fr-background-action-high--blue-france fr-p-2w">
     <span class="fr-icon-layout-grid-fill text--white text--bold fr-col fr-mr-2w">Vos services</span>
     <ul class="fr-grid-row service__list fr-col-10 list-style-none fr-p-0">
       <li class="fr-p-0 fr-col" v-for="service in servicesViewModels" :key="service.contenu">
@@ -43,7 +26,24 @@
           </div>
         </router-link>
       </li>
-      <li class="fr-grid-row fr-grid-row--middle fr-p-0">
+      <li
+        class="fr-grid-row fr-grid-row--middle fr-p-0"
+        v-tour-step:1="{
+          tour: serviceTour,
+          options: {
+            attachTo: { on: 'bottom' },
+            title: 'Services débloqués',
+            text: 'Retrouvez ici tous vos services du quotidien !',
+            buttons: [
+              {
+                text: 'Voir le catalogue',
+                action: serviceTour.cancel,
+                classes: 'fr-btn fr-btn--icon-left fr-icon-list-unordered',
+              },
+            ],
+          },
+        }"
+      >
         <router-link class="fr-mb-0 add__service fr-text--sm text--white" :to="{ name: RouteCoachName.SERVICES }">
           + Ajouter des services
         </router-link>
