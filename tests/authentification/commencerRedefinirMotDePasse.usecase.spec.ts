@@ -1,4 +1,4 @@
-import { Utilisateur, UtilisateurRepository } from '@/authentification/ports/utilisateur.repository';
+import { IdUtilisateur, Utilisateur, UtilisateurRepository } from '@/authentification/ports/utilisateur.repository';
 import { CommencerRedefinirMotDePasseUsecase } from '@/authentification/commencerRedefinirMotDePasse.usecase';
 
 class SpyUtilisateurRepository implements UtilisateurRepository {
@@ -18,7 +18,7 @@ class SpyUtilisateurRepository implements UtilisateurRepository {
     throw Error;
   }
 
-  validerCompteUtilisateur(email: string, code: string): Promise<Utilisateur> {
+  validerCompteUtilisateur(email: string, code: string): Promise<IdUtilisateur> {
     throw Error;
   }
 
