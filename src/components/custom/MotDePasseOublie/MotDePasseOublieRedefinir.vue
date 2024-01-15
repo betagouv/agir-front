@@ -10,13 +10,17 @@
       Valider
     </button>
   </form>
+  <p class="fr-mt-4w fr-mb-0">Vous n’avez pas reçu de code ?</p>
+  <button class="fr-link fr-icon-mail-line fr-link--icon-left text--underline" @click="renvoyerCode">
+    Renvoyer le code
+  </button>
   <div class="fr-messages-group">
     <Alert
-      v-if="erreur"
+      v-if="alerte.isActive"
       class="fr-col-12 fr-mt-2w"
-      type="error"
-      titre="Erreur lors de la modification du mot de passe"
-      :message="messageErreur"
+      :type="alerte.type"
+      :titre="alerte.titre"
+      :message="alerte.message"
     />
   </div>
 </template>
@@ -29,17 +33,20 @@
   import { TerminerRedefinirMotDePasseUsecase } from '@/authentification/terminerRedefinirMotDePasse.usecase';
   import router, { RouteCommuneName } from '@/router';
   import Alert from '@/components/custom/Alert.vue';
+  import { CommencerRedefinirMotDePasseUsecase } from '@/authentification/commencerRedefinirMotDePasse.usecase';
+  import { useAlerte } from '@/composables/useAlerte';
 
   const props = defineProps<{ email: string }>();
   const code = ref<string>('');
   const motDePasse = ref<string>('');
   const motDePasseValide = ref(false);
-  const erreur = ref<boolean>(false);
-  const messageErreur = ref<string>('');
+
+  const { alerte, afficherAlerte } = useAlerte();
 
   const onMotDePasseValideChanged = (value: boolean) => {
     motDePasseValide.value = value;
   };
+
   const definirMotDePasse = () => {
     const terminerRedefinirMotDePasse = new TerminerRedefinirMotDePasseUsecase(new UtilisateurRepositoryAxios());
     terminerRedefinirMotDePasse
@@ -48,8 +55,14 @@
         router.push({ name: RouteCommuneName.AUTHENTIFICATION });
       })
       .catch(reason => {
-        erreur.value = true;
-        messageErreur.value = reason.data.message;
+        afficherAlerte('error', 'Erreur lors de la modification du mot de passe', reason.data.message);
       });
+  };
+
+  const renvoyerCode = () => {
+    const commencerRedefinirMotDePasse = new CommencerRedefinirMotDePasseUsecase(new UtilisateurRepositoryAxios());
+    commencerRedefinirMotDePasse.execute(props.email).then(() => {
+      afficherAlerte('success', 'Code envoyé', `Le code a été envoyé à l'adresse ${props.email}`);
+    });
   };
 </script>
