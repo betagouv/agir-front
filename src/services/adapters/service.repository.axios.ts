@@ -40,7 +40,7 @@ export class ServiceRepositoryAxios implements ServiceRepository {
     const axiosInstance = AxiosFactory.getAxios();
     const reponse = await axiosInstance.get<ServiceCatalogueApiModel[]>(`/services?utilisateurId=${utilisateurId}`);
 
-    return reponse.data.map(service => ({
+    const map = reponse.data.map(service => ({
       id: service.id,
       titre: service.titre,
       thematiques: service.thematiques,
@@ -51,7 +51,24 @@ export class ServiceRepositoryAxios implements ServiceRepository {
       estInstalle: service.is_installed,
       image: service.image_url,
       estEnConstruction: service.en_construction,
+      parametrageRequis: false,
     }));
+    map.push({
+      id: 'linky',
+      titre: 'Votre conso élec au jour le jour',
+      icon: 'https://www.gwa.fr/actualites/media/compteur-linky.jpg',
+      image:
+        'https://www.maison-travaux.fr/wp-content/uploads/sites/8/2022/10/multiprise-electricite-incendie-dangers.png',
+      description: 'Votre suivi consommation, sans rien faire',
+      sousDescription:
+        "Surveillez en un click l'évolution quotidienne de votre consommation électrique, comprenez vos habitudes, chassez toutes les pertes inutiles !!",
+      estEnConstruction: false,
+      thematiques: ['🏡 Logement'],
+      nombreInstallation: 2,
+      estInstalle: true,
+      parametrageRequis: true,
+    });
+    return map;
   }
 
   @intercept401()
@@ -65,6 +82,14 @@ export class ServiceRepositoryAxios implements ServiceRepository {
     const axiosInstance = AxiosFactory.getAxios();
     await axiosInstance.post(`/utilisateurs/${utilisateurId}/services`, {
       service_definition_id: serviceId,
+    });
+  }
+
+  @intercept401()
+  async parametrerService(utilisateurId: string, serviceId: string, parametres: string[]): Promise<void> {
+    const axiosInstance = AxiosFactory.getAxios();
+    await axiosInstance.post(`/utilisateurs/${utilisateurId}/services/${serviceId}/parametres`, {
+      parametres: parametres,
     });
   }
 }
