@@ -1,14 +1,6 @@
 <template>
   <div class="fr-container fr-mb-6w">
-    <FilDAriane
-      page-courante="Question pour mieux vous connaître"
-      :page-hierarchie="[
-        {
-          label: 'Agir',
-          url: 'agir',
-        },
-      ]"
-    />
+    <FilDAriane page-courante="Question pour mieux vous connaître" />
     <h1 class="fr-h2">Question pour mieux vous connaître</h1>
     <div class="background--white border fr-p-4w border-radius--md">
       <form @submit.prevent="validerLaReponse" v-if="!reponseAEteDonnee">

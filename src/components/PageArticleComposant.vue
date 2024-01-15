@@ -1,14 +1,6 @@
 <template>
   <div class="fr-container fr-mb-6w">
-    <FilDAriane
-      :page-courante="`Article: ${article.titre}`"
-      :page-hierarchie="[
-        {
-          label: 'Agir',
-          url: 'agir',
-        },
-      ]"
-    />
+    <FilDAriane :page-courante="`Article: ${article.titre}`" />
     <h1>{{ article.titre }}</h1>
     <div class="fr-grid-row fr-grid-row--gutters">
       <div class="fr-col-12 fr-col-md-8">
