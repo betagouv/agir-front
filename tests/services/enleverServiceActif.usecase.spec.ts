@@ -1,48 +1,20 @@
-import { ServiceEvent } from '@/services/serviceEventBusImpl';
 import { EnleverServiceActifUsecase } from '@/services/enleverServiceActif.usecase';
-import { ServiceRepository } from '@/services/ports/service.repository';
-import { ServiceCatalogue } from '@/services/recupererCatalogueServices.usecase';
-import { Service } from '@/services/recupererServiceActifs.usecase';
-import { expect } from 'vitest';
+import { SpyServiceRepository } from './adapters/service.repository.spy';
 import { ServiceEventBusSpy } from './serviceEventBusSpy';
-
-class ServiceRepositoryMock implements ServiceRepository {
-  get enleverServiceActifAEteAppele(): boolean {
-    return this._enleverServiceActifAEteAppele;
-  }
-  private _enleverServiceActifAEteAppele: boolean = false;
-  enleverServiceActif(utilisateurId, serviceId): Promise<void> {
-    this._enleverServiceActifAEteAppele = true;
-    return Promise.resolve();
-  }
-
-  recupererCatalogueServices(utilisateurId: string): Promise<ServiceCatalogue[]> {
-    throw Error;
-  }
-
-  recupererServicesActifs(utilisateurId: string): Promise<Service[]> {
-    throw Error;
-  }
-
-  installerServiceActif(utilisateurId, serviceId): Promise<void> {
-    throw Error;
-  }
-
-  parametrerService(utilisateurId: string, serviceId: string, parametres: string[]): Promise<void> {
-    throw Error;
-  }
-}
+import { ServiceEvent } from '@/services/serviceEventBusImpl';
 
 describe("Fichier de tests concernant la suppression d'un service actif", () => {
   it('Quand on enleve un service actif doit appeler le repos et publier un evenenement SERVICE_SUPPRIME', async () => {
     // GIVEN
     const serviceEventBusSpy = new ServiceEventBusSpy();
-    const serviceRepositoryMock = new ServiceRepositoryMock();
-    const enleverServiceActifUsecase = new EnleverServiceActifUsecase(serviceRepositoryMock, serviceEventBusSpy);
+    const serviceRepositorySpy = new SpyServiceRepository();
+    const enleverServiceActifUsecase = new EnleverServiceActifUsecase(serviceRepositorySpy, serviceEventBusSpy);
+
     // WHEN
     await enleverServiceActifUsecase.execute('utilisateurId', 'serviceId');
+
     // THEN
-    expect(serviceRepositoryMock.enleverServiceActifAEteAppele).toBe(true);
+    expect(serviceRepositorySpy.enleverServiceActifAEteAppele).toBeTruthy();
     expect(serviceEventBusSpy.eventName).toBe(ServiceEvent.SERVICE_SUPPRIME);
   });
 });
