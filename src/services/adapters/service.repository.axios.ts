@@ -92,6 +92,6 @@ export class ServiceRepositoryAxios implements ServiceRepository {
     parametres: { [key: string]: string }
   ): Promise<void> {
     const axiosInstance = AxiosFactory.getAxios();
-    await axiosInstance.post(`/utilisateurs/${utilisateurId}/services/${serviceId}/parametres`, parametres);
+    await axiosInstance.put(`/utilisateurs/${utilisateurId}/services/${serviceId}/configuration`, parametres);
   }
 }
