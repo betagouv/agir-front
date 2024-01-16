@@ -25,11 +25,7 @@
       si vous êtes proriétaire (bailleur ou occupant).
     </p>
   </CarteInfo>
-  <div class="background-color--gris-image border border-radius--md fr-p-2w">
-    <p class="fr-text--bold fr-mb-0">
-      <span class="fr-icon-lightbulb-line" aria-hidden="true"></span>
-      Pour vous donner une idée
-    </p>
+  <CarteExplication>
     <img
       alt="Chauffage électrique : 6kg co2e; Chauffage au gaz : 38kg co2e; Chauffage au fioul : 53kg co2e;"
       class="fr-col-12 width--auto"
@@ -47,9 +43,10 @@
         Impact CO2
       </a>
     </p>
-  </div>
+  </CarteExplication>
 </template>
 
 <script setup lang="ts">
   import CarteInfo from '@/components/custom/CarteInfo.vue';
+  import CarteExplication from '@/components/custom/CarteExplication.vue';
 </script>
