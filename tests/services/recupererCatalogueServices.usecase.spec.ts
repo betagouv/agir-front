@@ -21,6 +21,7 @@ class ServiceRepositoryMock implements ServiceRepository {
         thematiques: ['thematique1', 'thematique3'],
         image: 'image',
         estEnConstruction: false,
+        parametrageRequis: false,
       },
       {
         id: 'id2',
@@ -33,8 +34,13 @@ class ServiceRepositoryMock implements ServiceRepository {
         thematiques: ['thematique1', 'thematique2'],
         image: 'image',
         estEnConstruction: false,
+        parametrageRequis: true,
       },
     ]);
+  }
+
+  parametrerService(utilisateurId: string, serviceId: string, parametres: string[]): Promise<void> {
+    throw Error;
   }
 
   recupererServicesActifs(utilisateurId: string): Promise<Service[]> {
@@ -74,6 +80,7 @@ describe('Fichier de tests concernant la recuperations des services dans le cata
             titre: 'titre',
             image: 'image',
             estEnConstruction: false,
+            parametrageRequis: false,
           },
           {
             description: 'description',
@@ -86,6 +93,7 @@ describe('Fichier de tests concernant la recuperations des services dans le cata
             titre: 'titre',
             image: 'image',
             estEnConstruction: false,
+            parametrageRequis: true,
           },
         ],
         filtreThematiques: ['thematique1', 'thematique2', 'thematique3'],

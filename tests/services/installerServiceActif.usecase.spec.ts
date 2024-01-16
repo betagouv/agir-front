@@ -27,6 +27,10 @@ class ServiceRepositoryMock implements ServiceRepository {
     this._installerServiceActifAEteAppele = true;
     return Promise.resolve();
   }
+
+  parametrerService(utilisateurId: string, serviceId: string, parametres: string[]): Promise<void> {
+    throw Error;
+  }
 }
 
 describe("Fichier de tests concernant l'installation d'un service actif", () => {

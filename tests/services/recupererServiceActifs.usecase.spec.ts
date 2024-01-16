@@ -38,6 +38,10 @@ class ServiceRepositoryMock implements ServiceRepository {
   installerServiceActif(utilisateurId, serviceId): Promise<void> {
     throw Error;
   }
+
+  parametrerService(utilisateurId: string, serviceId: string, parametres: string[]): Promise<void> {
+    throw Error;
+  }
 }
 
 describe("Fichier de tests concernant la récupérations des services actifs d'un utilisateur", () => {
