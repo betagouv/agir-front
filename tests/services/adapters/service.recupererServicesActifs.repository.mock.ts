@@ -9,7 +9,7 @@ export class MockRecupererServicesActifsRepository implements ServiceRepository 
     throw Error;
   }
 
-  parametrerService(utilisateurId: string, serviceId: string, parametres: string[]): Promise<void> {
+  parametrerService(utilisateurId: string, serviceId: string, parametres: { [key: string]: string }): Promise<void> {
     throw Error;
   }
 

@@ -39,7 +39,7 @@ export class SpyServiceRepository implements ServiceRepository {
     return Promise.resolve();
   }
 
-  parametrerService(_utilisateurId: string, _serviceId: string, _parametres: string[]): Promise<void> {
+  parametrerService(_utilisateurId: string, _serviceId: string, _parametres: { [key: string]: string }): Promise<void> {
     this._parametrerServiceAEteAppele = true;
     return Promise.resolve();
   }

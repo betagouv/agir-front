@@ -86,10 +86,12 @@ export class ServiceRepositoryAxios implements ServiceRepository {
   }
 
   @intercept401()
-  async parametrerService(utilisateurId: string, serviceId: string, parametres: string[]): Promise<void> {
+  async parametrerService(
+    utilisateurId: string,
+    serviceId: string,
+    parametres: { [key: string]: string }
+  ): Promise<void> {
     const axiosInstance = AxiosFactory.getAxios();
-    await axiosInstance.post(`/utilisateurs/${utilisateurId}/services/${serviceId}/parametres`, {
-      parametres: parametres,
-    });
+    await axiosInstance.post(`/utilisateurs/${utilisateurId}/services/${serviceId}/parametres`, parametres);
   }
 }

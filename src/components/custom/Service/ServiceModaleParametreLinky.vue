@@ -50,8 +50,11 @@
 
   const parametrerLeService = (serviceId: string) => {
     const parametrerService = new ParametrerServiceUsecase(new ServiceRepositoryAxios());
-    parametrerService.execute(utilisateurStore().utilisateur.id, serviceId, [parametreDuService.value]).then(() => {
-      new ModaleActions(serviceId).close();
-    });
+
+    parametrerService
+      .execute(utilisateurStore().utilisateur.id, serviceId, { prm: parametreDuService.value })
+      .then(() => {
+        new ModaleActions(serviceId).close();
+      });
   };
 </script>
