@@ -10,6 +10,9 @@ import {
 import { RecommandationsPersonnaliseesRepository } from '@/recommandationsPersonnalisees/ports/recommandationsPersonnalisees.repository';
 
 class MockRecommandationsPersonnaliseesRepository implements RecommandationsPersonnaliseesRepository {
+  recommandationAEteCliquee(idUtilisateur: string): Promise<void> {
+    throw new Error('Method not implemented.');
+  }
   chargerRecommandationsPersonnalisees(idUtilisateur: string): Promise<RecommandationPersonnalisee[]> {
     return Promise.resolve([
       {

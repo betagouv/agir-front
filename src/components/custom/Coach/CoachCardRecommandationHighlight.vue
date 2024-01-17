@@ -4,18 +4,18 @@
       <div class="fr-col-4">
         <div
           class="card-recommandation-highlight__image"
-          :style="`background-image: url('${props.recommandation.image}')`"
+          :style="`background-image: url('${recommandation.image}')`"
           aria-hidden="true"
         ></div>
       </div>
       <div class="fr-col-8">
         <span class="fr-text--bold">L'article à lire !</span>
-        <h3 class="fr-h4 text--gris-dark">{{ props.recommandation.titre }}</h3>
-        <p>{{ props.recommandation.description }}</p>
+        <h3 class="fr-h4 text--gris-dark">{{ recommandation.titre }}</h3>
+        <p>{{ recommandation.description }}</p>
         <router-link
-          :to="props.recommandation.url"
+          @click="recommandationAEteCliquee"
+          :to="recommandation.url"
           class="card-recommandation-highlight__link fr-link"
-          @click="interactionAEteCliquee"
         >
           Continuer la lecture
         </router-link>
@@ -26,17 +26,22 @@
 
 <script setup lang="ts">
   import { RecommandationViewModel } from '@/recommandationsPersonnalisees/adapters/recommandationsPersonnalisees.presenter.impl';
-  import { useInteraction } from '@/composables/interactionAEteCliquee';
+  import { RecommandationPersonnaliseAEteCliqueeUsecase } from '@/recommandationsPersonnalisees/recommandationPersonnaliseAEteCliquee.usecase';
+  import { RecommandationsPersonnaliseesRepositoryAxios } from '@/recommandationsPersonnalisees/adapters/recommandationsPersonnalisees.repository.axios';
+  import { ToDoListEventBusImpl } from '@/toDoList/toDoListEventBusImpl';
+  import { utilisateurStore } from '@/store/utilisateur';
 
-  const props = defineProps<{
+  defineProps<{
     recommandation: RecommandationViewModel;
   }>();
 
-  const { interactionAEteCliquee } = useInteraction({
-    type: props.recommandation.type,
-    nombreDePointsAGagner: props.recommandation.nombreDePointsAGagner,
-    idDuContenu: props.recommandation.contentId,
-  });
+  const recommandationAEteCliquee = () => {
+    const recommandationPersonnaliseAEteCliqueeUsecase = new RecommandationPersonnaliseAEteCliqueeUsecase(
+      new RecommandationsPersonnaliseesRepositoryAxios(),
+      ToDoListEventBusImpl.getInstance()
+    );
+    recommandationPersonnaliseAEteCliqueeUsecase.execute(utilisateurStore().utilisateur.id);
+  };
 </script>
 
 <style scoped>
