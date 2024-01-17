@@ -35,13 +35,6 @@
         attachTo: { on: 'top' },
         title: 'Recommandations débloquées',
         text: 'Retrouvez ici toutes vos recommandations personnalisées !',
-        buttons: [
-          {
-            text: 'Fermer',
-            action: recommandationTour.cancel,
-            classes: 'fr-btn fr-btn--icon-left',
-          },
-        ],
       },
     }"
   >

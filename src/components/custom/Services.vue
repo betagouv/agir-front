@@ -34,13 +34,6 @@
             attachTo: { on: 'bottom' },
             title: 'Services débloqués',
             text: 'Retrouvez ici tous vos services du quotidien !',
-            buttons: [
-              {
-                text: 'Voir le catalogue',
-                action: serviceTour.cancel,
-                classes: 'fr-btn fr-btn--icon-left fr-icon-list-unordered',
-              },
-            ],
           },
         }"
       >

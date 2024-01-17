@@ -88,13 +88,6 @@
                   attachTo: { on: 'bottom' },
                   title: 'Aides débloquées',
                   text: 'Retrouvez ici toutes vos aides !',
-                  buttons: [
-                    {
-                      text: 'Voir les aides',
-                      action: aideTour.cancel,
-                      classes: 'fr-btn fr-btn--icon-left fr-icon-list-unordered',
-                    },
-                  ],
                 },
               }"
             >
