@@ -65,8 +65,8 @@ describe('Fichier de tests concernant la récupération de la ToDo List', () => 
           {
             id: 'id2',
             titre: 'Article qui doit être en avant',
-            url: '/article/Article qui doit être en avant',
-            contentId: '',
+            url: '/article/Article qui doit être en avant/1',
+            contentId: '1',
             progession: {
               etapeCourante: 1,
               etapeTotal: 1,

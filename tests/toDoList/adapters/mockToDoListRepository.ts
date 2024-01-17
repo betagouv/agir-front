@@ -21,8 +21,8 @@ export class MockToDoListRepository implements ToDoListRepository {
           id: 'id2',
           interactionId: 'interactionId2',
           titre: 'Article qui doit être en avant',
-          url: '/article/Article qui doit être en avant',
-          contentId: '',
+          url: '/article/Article qui doit être en avant/1',
+          contentId: '1',
           progession: {
             etapeCourante: 1,
             etapeTotal: 1,
