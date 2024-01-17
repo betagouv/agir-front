@@ -24,17 +24,16 @@
   onMounted(async () => {
     const route = useRoute();
     const idArticle = route.params.id.toString();
+
     const articleRepositoryAxios = new ArticleRepositoryAxios();
     new RecupererArticleUsecase(articleRepositoryAxios)
       .execute(idArticle)
       .then(async article => {
         articleAAfficher.value = article;
-        if (!route.params.id) {
-          await new PasserUnArticleCommeLuUsecase(articleRepositoryAxios, ToDoListEventBusImpl.getInstance()).execute(
-            idArticle,
-            utilisateurStore().utilisateur.id
-          );
-        }
+        await new PasserUnArticleCommeLuUsecase(articleRepositoryAxios, ToDoListEventBusImpl.getInstance()).execute(
+          idArticle,
+          utilisateurStore().utilisateur.id
+        );
       })
       .catch(async () => {
         await router.push({ name: RouteCommuneName.NOT_FOUND });
