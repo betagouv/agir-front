@@ -82,6 +82,14 @@
               v-if="utilisateurStore().utilisateur.fonctionnalitesDebloquees.includes(Fonctionnalites.AIDES)"
               class="fr-nav__item"
               data-fr-js-navigation-item="true"
+              v-tour-step:1="{
+                tour: aideTour,
+                options: {
+                  attachTo: { on: 'bottom' },
+                  title: 'Aides débloquées',
+                  text: 'Retrouvez ici toutes vos aides !',
+                },
+              }"
             >
               <router-link
                 class="fr-nav__link"
@@ -108,6 +116,9 @@
   import { RouteCoachName } from '@/router/coach/routeCoachName';
   import { RouteCompteName } from '@/router/compte/routeCompteName';
   import { RouteAidesName } from '@/router/aides/routeAidesName';
+  import { useReveal } from '@/composables/useReveal';
+
+  const { aideTour } = useReveal();
 
   const route = useRoute();
   const store = utilisateurStore();

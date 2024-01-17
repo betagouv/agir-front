@@ -5,6 +5,8 @@ import router from '@/router';
 import { createPinia } from 'pinia';
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate';
 import VueMatomo from 'vue-matomo';
+// ordre des css important
+import 'shepherd.js/dist/css/shepherd.css';
 import '@gouvfr/dsfr/dist/dsfr.min.css';
 import '@gouvfr/dsfr/dist/utility/utility.min.css';
 import '@gouvfr/dsfr/dist/dsfr.module.min.js';
@@ -12,6 +14,7 @@ import { createSentry } from './sentry/sentry';
 import './assets/theme/style.css';
 import { NavigationBus } from '@/navigationBus';
 import Hotjar from '@hotjar/browser';
+import Vue3DirectiveShepherd from 'vue3-directive-shepherd';
 
 declare global {
   interface Window {
@@ -31,6 +34,35 @@ pinia.use(piniaPluginPersistedstate);
 NavigationBus.getInstance().setRouter(router);
 app.use(router);
 app.use(pinia);
+
+const options = {
+  router,
+  tourMap: {
+    serviceTour: {
+      useModalOverlay: true,
+      defaultStepOptions: {
+        scrollTo: true,
+        classes: 'fr-text--bold',
+      },
+    },
+    aideTour: {
+      useModalOverlay: true,
+      defaultStepOptions: {
+        scrollTo: true,
+        classes: 'fr-text--bold',
+      },
+    },
+    recommandationTour: {
+      useModalOverlay: true,
+      defaultStepOptions: {
+        scrollTo: true,
+        classes: 'fr-text--bold',
+      },
+    },
+  },
+};
+
+app.use(Vue3DirectiveShepherd, options);
 app.use(VueMatomo, {
   host: import.meta.env.VITE_MATOMO_URL,
   siteId: import.meta.env.VITE_MATOMO_SITE_ID,

@@ -26,7 +26,17 @@
           </div>
         </router-link>
       </li>
-      <li class="fr-grid-row fr-grid-row--middle fr-p-0">
+      <li
+        class="fr-grid-row fr-grid-row--middle fr-p-0"
+        v-tour-step:1="{
+          tour: serviceTour,
+          options: {
+            attachTo: { on: 'bottom' },
+            title: 'Services débloqués',
+            text: 'Retrouvez ici tous vos services du quotidien !',
+          },
+        }"
+      >
         <router-link class="fr-mb-0 add__service fr-text--sm text--white" :to="{ name: RouteCoachName.SERVICES }">
           + Ajouter des services
         </router-link>
@@ -42,8 +52,9 @@
   import { onMounted, onUnmounted, ref } from 'vue';
   import { utilisateurStore } from '@/store/utilisateur';
   import { ServiceEvent, ServiceEventBusImpl } from '@/services/serviceEventBusImpl';
-
   import { RouteCoachName } from '@/router/coach/routeCoachName';
+  import { useReveal } from '@/composables/useReveal';
+
   const servicesViewModels = ref<ServiceViewModel[]>();
 
   const mapValuesServicesViewmodel = (services: ServiceViewModel[]) => {
@@ -54,6 +65,9 @@
   const servicePresenterImpl = new ServicePresenterImpl(mapValuesServicesViewmodel);
   recupererServicesActifs.execute(utilisateurId, servicePresenterImpl);
   const subscriberName = 'Services';
+
+  const { serviceTour } = useReveal();
+
   onMounted(() => {
     ServiceEventBusImpl.getInstance().subscribe(subscriberName, ServiceEvent.SERVICE_SUPPRIME, () => {
       recupererServicesActifs.execute(utilisateurId, servicePresenterImpl);
