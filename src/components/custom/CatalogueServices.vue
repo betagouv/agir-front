@@ -48,6 +48,27 @@
               </p>
               <div v-else>
                 <button
+                  v-if="serviceCatalogueViewModel.parametrageRequis"
+                  data-fr-opened="false"
+                  :aria-controls="serviceCatalogueViewModel.id"
+                  class="fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-settings-5-fill fr-btn--sm fr-mr-1w"
+                >
+                  Configurer
+                  <Teleport to="body">
+                    <Modale
+                      :label="`Modale de paramétrage du service ${serviceCatalogueViewModel.titre}`"
+                      :id="serviceCatalogueViewModel.id"
+                      :radius="false"
+                      :is-footer-actions="false"
+                      size="m"
+                    >
+                      <template v-slot:contenu>
+                        <ServiceModaleParametreLinky :service-id="serviceCatalogueViewModel.id" />
+                      </template>
+                    </Modale>
+                  </Teleport>
+                </button>
+                <button
                   v-if="serviceCatalogueViewModel.estInstalle"
                   class="fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-close-line fr-btn--sm fr-mr-1w"
                   @click="enleverServiceActif(serviceCatalogueViewModel.id)"
@@ -91,6 +112,8 @@
   import { ServiceRepositoryAxios } from '@/services/adapters/service.repository.axios';
   import { utilisateurStore } from '@/store/utilisateur';
   import { InstallerServiceActifUsecase } from '@/services/installerServiceActif.usecase';
+  import Modale from '@/components/custom/Modale/Modale.vue';
+  import ServiceModaleParametreLinky from '@/components/custom/Service/ServiceModaleParametreLinky.vue';
 
   const props = defineProps<{
     serviceCatalogueViewModels: ServiceCatalogueViewModel;
@@ -127,6 +150,7 @@
     emit('refreshCatalogueServices');
   }
 </script>
+
 <style scoped>
   .img-icon-rounded {
     display: block;

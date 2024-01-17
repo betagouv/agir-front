@@ -1,51 +1,35 @@
-import { RecupererServiceActifsUsecase, Service } from '@/services/recupererServiceActifs.usecase';
-import { ServiceRepository } from '@/services/ports/service.repository';
+import { RecupererServiceActifsUsecase } from '@/services/recupererServiceActifs.usecase';
+import { MockRecupererServicesActifsRepository } from './adapters/service.recupererServicesActifs.repository.mock';
 import { ServicePresenterImpl, ServiceViewModel } from '@/services/adapters/service.presenter.impl';
-import { ServiceCatalogue } from '@/services/recupererCatalogueServices.usecase';
-
-class ServiceRepositoryMock implements ServiceRepository {
-  async recupererServicesActifs(utilisateurId: string) {
-    return Promise.resolve<Service[]>([
-      {
-        titre: 'Votre conso élec au jour le jour',
-        contenu: '42 kWh',
-        url: 'https://www.enedis.fr/le-compteur-linky-un-outil-pour-la-transition-ecologique',
-        isUrlExterne: true,
-      },
-      {
-        titre: 'La recette du jour, de saison !',
-        contenu: "La raclette c'est chouette",
-        url: 'https://cuisine-facile.com/index.php',
-        isUrlExterne: true,
-      },
-      {
-        titre: "Suivez l'impact de vos trajets quotidiens",
-        contenu: 'Faîtes votre suivi du jour',
-        url: 'coach/suivi-du-jour',
-        isUrlExterne: false,
-      },
-    ]);
-  }
-
-  recupererCatalogueServices(utilisateurId: string): Promise<ServiceCatalogue[]> {
-    throw Error;
-  }
-
-  enleverServiceActif(utilisateurId, serviceId): Promise<void> {
-    throw Error;
-  }
-
-  installerServiceActif(utilisateurId, serviceId): Promise<void> {
-    throw Error;
-  }
-}
 
 describe("Fichier de tests concernant la récupérations des services actifs d'un utilisateur", () => {
   it("En donnant l'id d'utilisateur doit recupérer ses services actifs", async () => {
     // GIVEN
     const utilisateurId = 'id';
+
     // WHEN
-    const usecase = new RecupererServiceActifsUsecase(new ServiceRepositoryMock());
+    const usecase = new RecupererServiceActifsUsecase(
+      new MockRecupererServicesActifsRepository([
+        {
+          titre: 'Votre conso élec au jour le jour',
+          contenu: '42 kWh',
+          url: 'https://www.enedis.fr/le-compteur-linky-un-outil-pour-la-transition-ecologique',
+          isUrlExterne: true,
+        },
+        {
+          titre: 'La recette du jour, de saison !',
+          contenu: "La raclette c'est chouette",
+          url: 'https://cuisine-facile.com/index.php',
+          isUrlExterne: true,
+        },
+        {
+          titre: "Suivez l'impact de vos trajets quotidiens",
+          contenu: 'Faîtes votre suivi du jour',
+          url: 'coach/suivi-du-jour',
+          isUrlExterne: false,
+        },
+      ])
+    );
     await usecase.execute(utilisateurId, new ServicePresenterImpl(expectation));
 
     // THEN

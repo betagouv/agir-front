@@ -51,6 +51,7 @@ export class ServiceRepositoryAxios implements ServiceRepository {
       estInstalle: service.is_installed,
       image: service.image_url,
       estEnConstruction: service.en_construction,
+      parametrageRequis: false,
     }));
   }
 
@@ -66,5 +67,15 @@ export class ServiceRepositoryAxios implements ServiceRepository {
     await axiosInstance.post(`/utilisateurs/${utilisateurId}/services`, {
       service_definition_id: serviceId,
     });
+  }
+
+  @intercept401()
+  async parametrerService(
+    utilisateurId: string,
+    serviceId: string,
+    parametres: { [key: string]: string }
+  ): Promise<void> {
+    const axiosInstance = AxiosFactory.getAxios();
+    await axiosInstance.put(`/utilisateurs/${utilisateurId}/services/${serviceId}/configuration`, parametres);
   }
 }
