@@ -20,6 +20,7 @@
     "@hotjar/browser": "^1.0.9",
     "@sentry/vue": "^7.81.1",
     "chart.js": "^4.3.0",
+    "dotenv": "^16.3.1",
     "js-cookie": "^3.0.5",
     "jwt-decode": "^3.1.2",
     "pinia": "^2.1.7",
