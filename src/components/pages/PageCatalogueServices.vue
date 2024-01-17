@@ -1,7 +1,6 @@
 <template>
   <div class="fr-container">
-    <div v-if="isLoading">Chargement ...</div>
-    <div v-else-if="!serviceCatalogueViewModels">Une erreur est survenue</div>
+    <div v-if="!serviceCatalogueViewModels">Une erreur est survenue</div>
     <CatalogueServices
       v-else
       @refresh-catalogue-services="refreshCatalogueServices"
@@ -33,7 +32,6 @@
   const serviceCataloguePresenterImpl = new ServiceCataloguePresenterImpl(mapServiceCatalogueViewModel);
 
   function refreshCatalogueServices() {
-    isLoading.value = true;
     usecase.execute(utilisateurId, serviceCataloguePresenterImpl);
   }
   onMounted(() => {

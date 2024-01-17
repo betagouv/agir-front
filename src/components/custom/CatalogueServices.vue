@@ -148,6 +148,7 @@
     const utilisateurId = utilisateurStore().utilisateur.id;
     await useCase.execute(utilisateurId, serviceId);
     emit('refreshCatalogueServices');
+    window.scrollTo(0, 0);
   }
 </script>
 
