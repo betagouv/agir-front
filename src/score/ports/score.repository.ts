@@ -11,7 +11,6 @@ export interface Score {
     reveal: {
       titre: string;
       description: string;
-      url: string;
       feature: string;
     } | null;
   } | null;

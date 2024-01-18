@@ -18,7 +18,7 @@ export interface ScoreViewModel {
     reveal: {
       titre: string;
       description: string;
-      url: string;
+      routeName: string;
       feature: string;
     } | null;
   } | null;

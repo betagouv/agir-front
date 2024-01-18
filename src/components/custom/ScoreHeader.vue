@@ -17,7 +17,7 @@
             <p class="fr-text--sm">{{ utilisateurStore().score.celebration!.reveal!.description }}</p>
             <router-link
               class="fr-btn fr-btn--icon-right fr-icon-arrow-right-line"
-              :to="utilisateurStore().score.celebration!.reveal!.url"
+              :to="{name:utilisateurStore().score.celebration!.reveal!.routeName}"
               @click.prevent="revealFonctionnalite"
             >
               Découvrir la fonctionnalité
