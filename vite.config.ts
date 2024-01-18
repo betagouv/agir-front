@@ -21,7 +21,11 @@ export const viteConfig = {
       // https://rollupjs.org/guide/en/#outputmanualchunks
       output: {
         manualChunks: {
-          components: ['./src/components/custom/BoutonRadio.vue'],
+          components: [
+            './src/components/custom/BoutonRadio.vue',
+            './src/components/custom/InputNumberHorizontal.vue',
+            './src/components/custom/CarteExplication.vue',
+          ],
           shell: [
             './src/shell/repositoryError.ts',
             './src/shell/ports/publierEvenement.repository.ts',
@@ -38,10 +42,19 @@ export const viteConfig = {
             './src/store/onboardingBilan.ts',
             './src/store/utilisateur.ts',
           ],
+          accueil: ['./src/components/pages/PageAccueil.vue'],
           onboarding: [
             './src/components/pages/PagePreOnboarding.vue',
             './src/components/pages/PageOnboarding.vue',
             './src/components/pages/PageBilanOnboarding.vue',
+            './src/components/custom/Onboarding/AsideOnboardingEtapeAlimentation.vue',
+            './src/components/custom/Onboarding/AsideOnboardingEtapeConsommation.vue',
+            './src/components/custom/Onboarding/AsideOnboardingEtapeLogement.vue',
+            './src/components/custom/Onboarding/AsideOnboardingEtapeTransport.vue',
+            './src/components/custom/Onboarding/OnboardingEtapeAlimentation.vue',
+            './src/components/custom/Onboarding/OnboardingEtapeConsommation.vue',
+            './src/components/custom/Onboarding/OnboardingEtapeTransport.vue',
+            './src/components/custom/Onboarding/OnboardingJauge.vue',
           ],
         },
       },
