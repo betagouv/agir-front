@@ -1,7 +1,5 @@
 import { Page, chromium } from '@playwright/test';
-import loadEnv from './loadEnv';
 
-loadEnv();
 export const connecterUtilisateur: () => Promise<Page> = async () => {
   const browser = await chromium.launch();
   const context = await browser.newContext();

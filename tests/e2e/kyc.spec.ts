@@ -1,8 +1,5 @@
 import { test, expect, Page } from '@playwright/test';
 import { connecterUtilisateur } from './utils/connecterUtilisateurs';
-import loadEnv from './utils/loadEnv';
-
-loadEnv();
 
 let page: Page;
 
