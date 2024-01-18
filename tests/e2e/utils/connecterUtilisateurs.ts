@@ -5,7 +5,7 @@ export const connecterUtilisateur: () => Promise<Page> = async () => {
   const context = await browser.newContext();
   const page = await context.newPage();
 
-  await page.route('https://agir-back-dev.osc-fr1.scalingo.io/utilisateurs/login', route => {
+  await page.route(`${process.env.VITE_API_URL}/utilisateurs/login`, route => {
     route.fulfill({
       status: 200,
       contentType: 'application/json',

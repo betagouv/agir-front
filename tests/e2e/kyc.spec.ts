@@ -6,7 +6,7 @@ let page: Page;
 test.beforeAll(async () => {
   page = await connecterUtilisateur();
 
-  await page.route('https://agir-back-dev.osc-fr1.scalingo.io/kyc/1', route => {
+  await page.route(`${process.env.VITE_API_URL}/kyc/1`, route => {
     route.fulfill({
       status: 200,
       contentType: 'application/json',
