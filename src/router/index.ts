@@ -8,12 +8,12 @@ import onboardingRoutes from '@/router/onboarding/routes';
 import coachRoutes from '@/router/coach/routes';
 import kycRoutes from '@/router/kyc/routes';
 import { RouteCoachName } from '@/router/coach/routeCoachName';
-const Authentification = import('@/components/Authentification.vue');
-const Page404 = import('@/components/pages/Page404.vue');
-const FranceConnectCallBack = import('@/components/FranceConnectCallBack.vue');
-const PageAccueil = import('@/components/pages/PageAccueil.vue');
-const PageSessionExpiree = import('@/components/pages/PageSessionExpiree.vue');
-const PageBetaFermee = import('@/components/pages/PageBetaFermee.vue');
+const Authentification = () => import('@/components/Authentification.vue');
+const Page404 = () => import('@/components/pages/Page404.vue');
+const FranceConnectCallBack = () => import('@/components/FranceConnectCallBack.vue');
+const PageAccueil = () => import('@/components/pages/PageAccueil.vue');
+const PageSessionExpiree = () => import('@/components/pages/PageSessionExpiree.vue');
+const PageBetaFermee = () => import('@/components/pages/PageBetaFermee.vue');
 
 export enum RouteCommuneName {
   ACCUEIL = 'accueil',

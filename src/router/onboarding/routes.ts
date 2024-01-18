@@ -1,6 +1,6 @@
-const PagePreOnboarding = import('@/components/pages/PagePreOnboarding.vue');
-const PageOnboarding = import('@/components/pages/PageOnboarding.vue');
-const PageBilanOnboarding = import('@/components/pages/PageBilanOnboarding.vue');
+const PagePreOnboarding = () => import('@/components/pages/PagePreOnboarding.vue');
+const PageOnboarding = () => import('@/components/pages/PageOnboarding.vue');
+const PageBilanOnboarding = () => import('@/components/pages/PageBilanOnboarding.vue');
 import { RouteRecordRaw } from 'vue-router';
 import { RouteOnboardingName } from '@/router/onboarding/routeOnboardingName';
 

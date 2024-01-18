@@ -1,8 +1,8 @@
-const Coach = import('@/components/Coach.vue');
-const PageCatalogueServices = import('@/components/pages/PageCatalogueServices.vue');
-const PageSuiviDuJour = import('@/components/pages/PageSuiviDuJour.vue');
-const PageQuiz = import('@/components/pages/PageQuiz.vue');
-const PagePrevisualisationQuiz = import('@/components/pages/PagePrevisualisationQuiz.vue');
+const Coach = () => import('@/components/Coach.vue');
+const PageCatalogueServices = () => import('@/components/pages/PageCatalogueServices.vue');
+const PageSuiviDuJour = () => import('@/components/pages/PageSuiviDuJour.vue');
+const PageQuiz = () => import('@/components/pages/PageQuiz.vue');
+const PagePrevisualisationQuiz = () => import('@/components/pages/PagePrevisualisationQuiz.vue');
 import { RouteRecordRaw } from 'vue-router';
 import { RouteCoachName } from '@/router/coach/routeCoachName';
 

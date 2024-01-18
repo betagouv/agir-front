@@ -1,8 +1,8 @@
-const PageAidesVelo = import('@/components/pages/PageAidesVelo.vue');
-const PageAides = import('@/components/pages/PageAides.vue');
-const PageAidesRetrofit = import('@/components/pages/PageAidesRetrofit.vue');
-const PageAidesRetrofitFormulaire = import('@/components/pages/PageAidesRetrofitFormulaire.vue');
-const PageAidesVeloFormulaire = import('@/components/pages/PageAidesVeloFormulaire.vue');
+const PageAidesVelo = () => import('@/components/pages/PageAidesVelo.vue');
+const PageAides = () => import('@/components/pages/PageAides.vue');
+const PageAidesRetrofit = () => import('@/components/pages/PageAidesRetrofit.vue');
+const PageAidesRetrofitFormulaire = () => import('@/components/pages/PageAidesRetrofitFormulaire.vue');
+const PageAidesVeloFormulaire = () => import('@/components/pages/PageAidesVeloFormulaire.vue');
 import { RouteRecordRaw } from 'vue-router';
 import { RouteAidesName } from '@/router/aides/routeAidesName';
 
