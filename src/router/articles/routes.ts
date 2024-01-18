@@ -1,5 +1,5 @@
-import PageArticle from '@/components/pages/PageArticle.vue';
-import PagePrevisualisationArticle from '@/components/pages/PagePrevisualisationArticle.vue';
+const PageArticle = import('@/components/pages/PageArticle.vue');
+const PagePrevisualisationArticle = import('@/components/pages/PagePrevisualisationArticle.vue');
 import { RouteRecordRaw } from 'vue-router';
 
 enum RouteArticlePath {
