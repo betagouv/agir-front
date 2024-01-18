@@ -6,5 +6,5 @@ export enum InteractionType {
   AIDE = 'aide',
   COMPTE = 'profile',
   SERVICE = 'service',
-  RECOMMANDATION = 'recommandation',
+  RECOMMANDATION = 'recommandations',
 }

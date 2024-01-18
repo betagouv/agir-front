@@ -15,6 +15,7 @@ interface TodoViewModel {
   type: string;
   thematique: string;
   pointAEteRecolte: boolean;
+  hash?: string;
 }
 
 export interface TodoListViewModel {
@@ -52,6 +53,7 @@ export class ToDoListPresenterImpl implements ToDoListPresenter {
       type: todo.type,
       thematique: todo.thematique,
       pointAEteRecolte: todo.pointAEteRecolte,
+      hash: todo.type === InteractionType.RECOMMANDATION ? '#recommandations' : undefined,
     };
   }
 

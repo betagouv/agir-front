@@ -38,7 +38,7 @@
       },
     }"
   >
-    <div class="fr-container" v-if="!isLoading">
+    <div id="recommandations" class="fr-container" v-if="!isLoading">
       <CoachRecommandations
         v-if="recommandationsPersonnaliseesViewModel"
         :recommandations="recommandationsPersonnaliseesViewModel"

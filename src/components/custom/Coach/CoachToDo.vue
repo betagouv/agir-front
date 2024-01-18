@@ -30,6 +30,7 @@
               :value="todo.progession.etapeCourante"
               :value-max="todo.progession.etapeTotal"
               :url="todo.url"
+              :hash="todo.hash"
             />
           </li>
         </ul>

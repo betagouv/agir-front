@@ -1,4 +1,3 @@
-import { InteractionType } from '@/shell/interactionType';
 import { MockToDoListRepository } from './adapters/mockToDoListRepository';
 import { RecupererToDoListUsecase } from '@/toDoList/recupererToDoList.usecase';
 import { ToDoListPresenterImpl, TodoListViewModel } from '@/toDoList/adapters/toDoList.presenter.impl';
@@ -13,41 +12,40 @@ describe('Fichier de tests concernant la récupération de la ToDo List', () => 
     // THEN
     function expectation(toDoList: TodoListViewModel) {
       expect(toDoList).toStrictEqual<TodoListViewModel>({
-        titre: 'Ma ToDo List',
-        pointFinDeMission: 30,
-        derniere: false,
         aFaire: [
           {
-            id: 'id3',
-            titre: 'Consulter votre profile',
-            url: '/mon-compte',
             contentId: '',
+            hash: '#recommandations',
+            id: 'id3',
+            nombreDePointsAGagner: 10,
+            pointAEteRecolte: false,
             progession: {
               etapeCourante: 1,
               etapeTotal: 1,
             },
-            nombreDePointsAGagner: 10,
-            type: InteractionType.COMPTE,
             thematique: '🌍 Global',
-            pointAEteRecolte: false,
+            titre: 'Consulter une recommandation',
+            type: 'recommandations',
+            url: '/agir',
           },
-
           {
-            id: 'id',
-            titre: 'Premier Quiz',
-            url: '/agir/quiz/',
             contentId: '',
+            hash: undefined,
+            id: 'id',
+            nombreDePointsAGagner: 10,
+            pointAEteRecolte: false,
             progession: {
               etapeCourante: 1,
               etapeTotal: 2,
             },
-            nombreDePointsAGagner: 10,
-            type: InteractionType.QUIZ,
             thematique: '🚲 Transports',
-            pointAEteRecolte: false,
+            titre: 'Premier Quiz',
+            type: 'quizz',
+            url: '/agir/quiz/',
           },
           {
             contentId: '',
+            hash: undefined,
             id: 'id3',
             nombreDePointsAGagner: 10,
             pointAEteRecolte: false,
@@ -60,23 +58,42 @@ describe('Fichier de tests concernant la récupération de la ToDo List', () => 
             type: 'service',
             url: '/agir/services',
           },
-        ],
-        fait: [
           {
-            id: 'id2',
-            titre: 'Article qui doit être en avant',
-            url: '/article/Article qui doit être en avant/1',
-            contentId: '1',
+            contentId: '',
+            hash: undefined,
+            id: 'id4',
+            nombreDePointsAGagner: 10,
+            pointAEteRecolte: false,
             progession: {
               etapeCourante: 1,
               etapeTotal: 1,
             },
-            nombreDePointsAGagner: 10,
-            type: InteractionType.ARTICLE,
             thematique: '🌍 Global',
-            pointAEteRecolte: true,
+            titre: 'Installer un service',
+            type: 'service',
+            url: '/agir/services',
           },
         ],
+        derniere: false,
+        fait: [
+          {
+            contentId: '1',
+            hash: undefined,
+            id: 'id2',
+            nombreDePointsAGagner: 10,
+            pointAEteRecolte: true,
+            progession: {
+              etapeCourante: 1,
+              etapeTotal: 1,
+            },
+            thematique: '🌍 Global',
+            titre: 'Article qui doit être en avant',
+            type: 'article',
+            url: '/article/Article qui doit être en avant/1',
+          },
+        ],
+        pointFinDeMission: 30,
+        titre: 'Ma ToDo List',
       });
     }
   });

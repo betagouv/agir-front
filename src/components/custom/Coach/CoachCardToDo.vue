@@ -3,7 +3,10 @@
     <span class="fr-icon-play-circle-line todo__picto text--bleu" aria-hidden="true"></span>
     <div class="fr-col fr-col-md-9">
       <h4 class="fr-m-0">
-        <router-link :to="{ path: url }" class="todo__link display-block fr-text--bold fr-text--lg text--bleu fr-mb-0">
+        <router-link
+          :to="{ path: url, hash: hash }"
+          class="todo__link display-block fr-text--bold fr-text--lg text--bleu fr-mb-0"
+        >
           {{ titre }}
         </router-link>
       </h4>
@@ -31,6 +34,7 @@
     value: number;
     valueMax: number;
     url: string;
+    hash?: string;
   }>();
 </script>
 
