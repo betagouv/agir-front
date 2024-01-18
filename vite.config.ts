@@ -13,23 +13,39 @@ export const viteConfig = {
       '@': path.resolve(__dirname, 'src'),
     },
   },
+  define: {
+    __APP_VERSION__: JSON.stringify(process.env.npm_package_version),
+  },
   build: {
     rollupOptions: {
       // https://rollupjs.org/guide/en/#outputmanualchunks
       output: {
         manualChunks: {
-          aides: ['./src/components/pages/PageAides.vue'],
-          services: ['./src/components/pages/PageCatalogueServices.vue'],
-          quiz: ['./src/components/pages/PageQuiz.vue'],
-          compte: ['./src/components/pages/PageCompte.vue'],
-          onboarding: ['./src/components/pages/PagePreOnboarding.vue', './src/components/pages/PageOnboarding.vue'],
-          accueil: ['./src/components/pages/PageAccueil.vue'],
+          components: ['./src/components/custom/BoutonRadio.vue'],
+          shell: [
+            './src/shell/repositoryError.ts',
+            './src/shell/ports/publierEvenement.repository.ts',
+            './src/shell/adapters/publierEvenemnt.repository.axios.ts',
+            './src/shell/publierEvenementHotjar.ts',
+            './src/router/index.ts',
+            './src/shell/calculerCouleurJauge.ts',
+            './src/shell/calculerSeuils.ts',
+            './public/logo.svg',
+          ],
+          stores: [
+            './src/store/interaction.ts',
+            './src/store/onboarding.ts',
+            './src/store/onboardingBilan.ts',
+            './src/store/utilisateur.ts',
+          ],
+          onboarding: [
+            './src/components/pages/PagePreOnboarding.vue',
+            './src/components/pages/PageOnboarding.vue',
+            './src/components/pages/PageBilanOnboarding.vue',
+          ],
         },
       },
     },
-  },
-  define: {
-    __APP_VERSION__: JSON.stringify(process.env.npm_package_version),
   },
 };
 export default defineConfig(viteConfig);
