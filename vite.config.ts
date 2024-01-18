@@ -20,42 +20,28 @@ export const viteConfig = {
     rollupOptions: {
       // https://rollupjs.org/guide/en/#outputmanualchunks
       output: {
-        manualChunks: {
-          components: [
-            './src/components/custom/BoutonRadio.vue',
-            './src/components/custom/InputNumberHorizontal.vue',
-            './src/components/custom/CarteExplication.vue',
-          ],
-          shell: [
-            './src/shell/repositoryError.ts',
-            './src/shell/ports/publierEvenement.repository.ts',
-            './src/shell/adapters/publierEvenemnt.repository.axios.ts',
-            './src/shell/publierEvenementHotjar.ts',
-            './src/router/index.ts',
-            './src/shell/calculerCouleurJauge.ts',
-            './src/shell/calculerSeuils.ts',
-            './public/logo.svg',
-          ],
-          stores: [
-            './src/store/interaction.ts',
-            './src/store/onboarding.ts',
-            './src/store/onboardingBilan.ts',
-            './src/store/utilisateur.ts',
-          ],
-          accueil: ['./src/components/pages/PageAccueil.vue'],
-          onboarding: [
-            './src/components/pages/PagePreOnboarding.vue',
-            './src/components/pages/PageOnboarding.vue',
-            './src/components/pages/PageBilanOnboarding.vue',
-            './src/components/custom/Onboarding/AsideOnboardingEtapeAlimentation.vue',
-            './src/components/custom/Onboarding/AsideOnboardingEtapeConsommation.vue',
-            './src/components/custom/Onboarding/AsideOnboardingEtapeLogement.vue',
-            './src/components/custom/Onboarding/AsideOnboardingEtapeTransport.vue',
-            './src/components/custom/Onboarding/OnboardingEtapeAlimentation.vue',
-            './src/components/custom/Onboarding/OnboardingEtapeConsommation.vue',
-            './src/components/custom/Onboarding/OnboardingEtapeTransport.vue',
-            './src/components/custom/Onboarding/OnboardingJauge.vue',
-          ],
+        manualChunks(id: string) {
+          if (id.includes('/components/custom/') && !id.includes('/custom/Onboarding')) {
+            return 'components';
+          }
+
+          if (id.includes('/shell/') || id.includes('/router/') || id.includes('/public/')) {
+            return 'shell';
+          }
+          if (id.includes('/store/')) {
+            return 'stores';
+          }
+          if (id.includes('/pages/PageAccueil.vue')) {
+            return 'accueil';
+          }
+          if (
+            id.includes('/pages/PagePreOnboarding.vue') ||
+            id.includes('/pages/PageOnboarding.vue') ||
+            id.includes('/pages/PageBilanOnboarding.vue') ||
+            id.includes('/custom/Onboarding')
+          ) {
+            return 'onboarding';
+          }
         },
       },
     },
