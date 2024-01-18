@@ -1,5 +1,37 @@
 # Changelog
 
+## [1.4.0](https://github.com/betagouv/agir-front/compare/v1.3.0...v1.4.0) (2024-01-18)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* ajout d'une animation au reveal d'une nouvelle fonctionnalité ([#254](https://github.com/betagouv/agir-front/issues/254)) ([fda3601](https://github.com/betagouv/agir-front/commit/fda3601ed49423e4f34c7f7d18054bdbd64eee67))
+* ajout et paramétrage du service linky ([#259](https://github.com/betagouv/agir-front/issues/259)) ([8c2289d](https://github.com/betagouv/agir-front/commit/8c2289de58392e8316a7af982c4e59ff6be7decc))
+* il est possible maintenant de poser des questions personnelles aux usagés via les missions ([#246](https://github.com/betagouv/agir-front/issues/246)) ([3fa9519](https://github.com/betagouv/agir-front/commit/3fa951927685b1cd6bb5c6e1ec44e128a6dbae97))
+* modification ui de la page validation de compte ([#258](https://github.com/betagouv/agir-front/issues/258)) ([8b2a537](https://github.com/betagouv/agir-front/commit/8b2a537928bb0744ee53777c30bb22151bdac2fc))
+
+
+### 🐛 Corrections de bogues
+
+* ajuste la balise meta langage en français ([#262](https://github.com/betagouv/agir-front/issues/262)) ([0919396](https://github.com/betagouv/agir-front/commit/09193962203c3a9b521a2080da5fe7c96c27bfa3))
+* alignement du titre mission terminee ([#245](https://github.com/betagouv/agir-front/issues/245)) ([1e17891](https://github.com/betagouv/agir-front/commit/1e17891bae765536f6ee8613399914da85311f73))
+* retour ui modale ([#247](https://github.com/betagouv/agir-front/issues/247)) ([8b52beb](https://github.com/betagouv/agir-front/commit/8b52beb5e587a3eb09277a8689b7f357f2f7b4a9))
+
+
+### 👷 Autres changements
+
+* ajout de l'attribut ignoreTransactions dans la configuration sentry ([#253](https://github.com/betagouv/agir-front/issues/253)) ([53f79e4](https://github.com/betagouv/agir-front/commit/53f79e453ba363ddcc58fcc2d9a2bed7856e7cbd))
+* ajout du numéro de version dans la configuration vite ([#251](https://github.com/betagouv/agir-front/issues/251)) ([4545040](https://github.com/betagouv/agir-front/commit/4545040e9f52aceb26819f60a9502fc861c5fd45))
+* ajoute par defaut le lien vers l'accueil dans le composant fil d'arianne ([#257](https://github.com/betagouv/agir-front/issues/257)) ([8544c3f](https://github.com/betagouv/agir-front/commit/8544c3f2ecff21c4f2d0b79d91d8dc3241040718))
+* création d'un composant carte explication ([#260](https://github.com/betagouv/agir-front/issues/260)) ([eb84b36](https://github.com/betagouv/agir-front/commit/eb84b3665e96734b7f385a827ce14202b901df1a))
+* la validation de compte ne renvoie plus qu'un token ([#256](https://github.com/betagouv/agir-front/issues/256)) ([8c75324](https://github.com/betagouv/agir-front/commit/8c75324c06899a15377cc2aba9b2723b289d8ae8))
+* mini refacto page aides ([#261](https://github.com/betagouv/agir-front/issues/261)) ([1682783](https://github.com/betagouv/agir-front/commit/16827837f05475256eff713456d27e88f10e653e))
+* mise à jour ui de la page mot de passe oublié ([#255](https://github.com/betagouv/agir-front/issues/255)) ([3c9b854](https://github.com/betagouv/agir-front/commit/3c9b854caec3639b655a9fb7359d1781754d4af8))
+* ne pas remonter les erreurs session-expiree sur sentry ([#249](https://github.com/betagouv/agir-front/issues/249)) ([54ae823](https://github.com/betagouv/agir-front/commit/54ae823c8ebdb55ea62d0995a4e143bbbd75301d))
+* ne plus utiliser le champ url concernant les découvertes de fonctionnalités ([#263](https://github.com/betagouv/agir-front/issues/263)) ([cd95ea5](https://github.com/betagouv/agir-front/commit/cd95ea52bbbc6cc711e63f80eb5ea76acf988d56))
+* renommage de coach en agir ([#252](https://github.com/betagouv/agir-front/issues/252)) ([3b3a451](https://github.com/betagouv/agir-front/commit/3b3a451cce3507fdd60c55098606dae9a62fa285))
+* suppression des id d'interaction ([#248](https://github.com/betagouv/agir-front/issues/248)) ([50e5c51](https://github.com/betagouv/agir-front/commit/50e5c5135761b3f70539b2c69a4addb1c4942488))
+
 ## [1.3.0](https://github.com/betagouv/agir-front/compare/v1.2.0...v1.3.0) (2024-01-09)
 
 
