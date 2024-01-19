@@ -1,5 +1,5 @@
 import { RouteRecordRaw } from 'vue-router';
-import PageQuestionKyc from '@/components/pages/PageQuestionKyc.vue';
+const PageQuestionKyc = () => import('@/components/pages/PageQuestionKyc.vue');
 
 export enum RouteKycName {
   KYC = 'kyc',

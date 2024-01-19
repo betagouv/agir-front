@@ -1,9 +1,9 @@
-import PageCompte from '@/components/pages/PageCompte.vue';
-import PageCreationCompte from '@/components/pages/PageCreationCompte.vue';
+const PageCompte = () => import('@/components/pages/PageCompte.vue');
+const PageCreationCompte = () => import('@/components/pages/PageCreationCompte.vue');
+const PageValidationCompte = () => import('@/components/pages/PageValidationCompte.vue');
+const PageMotDePasseOublie = () => import('@/components/pages/PageMotDePasseOublie.vue');
+const PageCompteOptionsAvancees = () => import('@/components/pages/PageCompteOptionsAvancees.vue');
 import { onboardingStore } from '@/store/onboarding';
-import PageValidationCompte from '@/components/pages/PageValidationCompte.vue';
-import PageMotDePasseOublie from '@/components/pages/PageMotDePasseOublie.vue';
-import PageCompteOptionsAvancees from '@/components/pages/PageCompteOptionsAvancees.vue';
 import { RouteRecordRaw } from 'vue-router';
 import { RouteCompteName } from '@/router/compte/routeCompteName';
 

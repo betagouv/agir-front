@@ -1,20 +1,19 @@
-import Authentification from '@/components/Authentification.vue';
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
-
-import Page404 from '@/components/pages/Page404.vue';
 import { storeIdNGC } from '@/bilan/middleware/pendingSimulation';
-import FranceConnectCallBack from '@/components/FranceConnectCallBack.vue';
-import PageAccueil from '@/components/pages/PageAccueil.vue';
-import PageSessionExpiree from '@/components/pages/PageSessionExpiree.vue';
 import { utilisateurStore } from '@/store/utilisateur';
-import PageBetaFermee from '@/components/pages/PageBetaFermee.vue';
-import aidesRoutes from '@/router/aides/routes';
 import articlesRoutes from '@/router/articles/routes';
+import aidesRoutes from '@/router/aides/routes';
 import compteRoutes from '@/router/compte/routes';
 import onboardingRoutes from '@/router/onboarding/routes';
 import coachRoutes from '@/router/coach/routes';
-import { RouteCoachName } from '@/router/coach/routeCoachName';
 import kycRoutes from '@/router/kyc/routes';
+import { RouteCoachName } from '@/router/coach/routeCoachName';
+const Authentification = () => import('@/components/Authentification.vue');
+const Page404 = () => import('@/components/pages/Page404.vue');
+const FranceConnectCallBack = () => import('@/components/FranceConnectCallBack.vue');
+const PageAccueil = () => import('@/components/pages/PageAccueil.vue');
+const PageSessionExpiree = () => import('@/components/pages/PageSessionExpiree.vue');
+const PageBetaFermee = () => import('@/components/pages/PageBetaFermee.vue');
 
 export enum RouteCommuneName {
   ACCUEIL = 'accueil',
