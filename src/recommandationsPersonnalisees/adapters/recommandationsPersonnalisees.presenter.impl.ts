@@ -64,7 +64,7 @@ export class RecommandationsPersonnaliseesPresenterImpl implements Recommandatio
       case InteractionType.QUIZ:
         return `/agir/quiz/${recommandationPersonnalisee.idDuContenu}`;
       case InteractionType.ARTICLE:
-        return `/article/${recommandationPersonnalisee.titre}`;
+        return `/article/${recommandationPersonnalisee.titre}/${recommandationPersonnalisee.idDuContenu}`;
       case InteractionType.KYC:
         return '';
       case InteractionType.SUIVIDUJOUR:
