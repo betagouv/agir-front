@@ -21,8 +21,8 @@ export class MockToDoListRepository implements ToDoListRepository {
           id: 'id2',
           interactionId: 'interactionId2',
           titre: 'Article qui doit être en avant',
-          url: '/article/Article qui doit être en avant',
-          contentId: '',
+          url: '/article/Article qui doit être en avant/1',
+          contentId: '1',
           progession: {
             etapeCourante: 1,
             etapeTotal: 1,
@@ -37,7 +37,7 @@ export class MockToDoListRepository implements ToDoListRepository {
         {
           id: 'id3',
           interactionId: 'interactionId3',
-          titre: 'Consulter votre profile',
+          titre: 'Consulter une recommandation',
           url: '',
           contentId: '',
           progession: {
@@ -45,7 +45,7 @@ export class MockToDoListRepository implements ToDoListRepository {
             etapeTotal: 1,
           },
           nombreDePointsAGagner: 10,
-          type: InteractionType.COMPTE,
+          type: InteractionType.RECOMMANDATION,
           thematique: '🌍 Global',
           pointAEteRecolte: false,
         },
@@ -67,6 +67,21 @@ export class MockToDoListRepository implements ToDoListRepository {
         {
           id: 'id3',
           interactionId: 'interactionId3',
+          titre: 'Installer un service',
+          url: '',
+          contentId: '',
+          progession: {
+            etapeCourante: 1,
+            etapeTotal: 1,
+          },
+          nombreDePointsAGagner: 10,
+          type: InteractionType.SERVICE,
+          thematique: '🌍 Global',
+          pointAEteRecolte: false,
+        },
+        {
+          id: 'id4',
+          interactionId: 'interactionId4',
           titre: 'Installer un service',
           url: '',
           contentId: '',

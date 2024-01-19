@@ -15,6 +15,7 @@ interface TodoViewModel {
   type: string;
   thematique: string;
   pointAEteRecolte: boolean;
+  hash?: string;
 }
 
 export interface TodoListViewModel {
@@ -52,6 +53,7 @@ export class ToDoListPresenterImpl implements ToDoListPresenter {
       type: todo.type,
       thematique: todo.thematique,
       pointAEteRecolte: todo.pointAEteRecolte,
+      hash: todo.type === InteractionType.RECOMMANDATION ? '#recommandations' : undefined,
     };
   }
 
@@ -62,7 +64,7 @@ export class ToDoListPresenterImpl implements ToDoListPresenter {
       case InteractionType.QUIZ:
         return `/agir/quiz/${todo.contentId}`;
       case InteractionType.ARTICLE:
-        return `/article/${todo.titre}`;
+        return `/article/${todo.titre}/${todo.contentId}`;
       case InteractionType.KYC:
         return `/kyc/${todo.contentId}`;
       case InteractionType.SUIVIDUJOUR:
@@ -71,6 +73,8 @@ export class ToDoListPresenterImpl implements ToDoListPresenter {
         return '/mon-compte';
       case InteractionType.SERVICE:
         return '/agir/services';
+      case InteractionType.RECOMMANDATION:
+        return '/agir';
       default:
         return '';
     }

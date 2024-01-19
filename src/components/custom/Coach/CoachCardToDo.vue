@@ -4,8 +4,7 @@
     <div class="fr-col fr-col-md-9">
       <h4 class="fr-m-0">
         <router-link
-          :to="{ path: url }"
-          @click="interactionAEteCliquee"
+          :to="{ path: url, hash: hash }"
           class="todo__link display-block fr-text--bold fr-text--lg text--bleu fr-mb-0"
         >
           {{ titre }}
@@ -26,9 +25,8 @@
 
 <script setup lang="ts">
   import CoachCardTodoProgression from '@/components/custom/Coach/CoachCardTodoProgression.vue';
-  import { useInteraction } from '@/composables/interactionAEteCliquee';
 
-  const props = defineProps<{
+  defineProps<{
     type: string;
     idDuContenu: string;
     nombreDePointsAGagner: number;
@@ -36,13 +34,8 @@
     value: number;
     valueMax: number;
     url: string;
+    hash?: string;
   }>();
-
-  const { interactionAEteCliquee } = useInteraction({
-    type: props.type,
-    idDuContenu: props.idDuContenu,
-    nombreDePointsAGagner: props.nombreDePointsAGagner.toString(),
-  });
 </script>
 
 <style scoped>

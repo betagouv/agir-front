@@ -6,14 +6,12 @@
   import { useRoute, useRouter } from 'vue-router';
   import { onMounted, ref } from 'vue';
   import { utilisateurStore } from '@/store/utilisateur';
-  import { interactionEnCoursStore } from '@/store/interaction';
   import { Article, RecupererArticleUsecase } from '@/article/recupererArticle.usecase';
   import { ArticleRepositoryAxios } from '@/article/adapters/article.repository.axios';
   import { PasserUnArticleCommeLuUsecase } from '@/article/passerUnArticleCommeLu.usecase';
   import { ToDoListEventBusImpl } from '@/toDoList/toDoListEventBusImpl';
   import { RouteCommuneName } from '@/router';
 
-  const store = interactionEnCoursStore();
   const router = useRouter();
 
   const articleAAfficher = ref<Article>({
@@ -25,18 +23,17 @@
 
   onMounted(async () => {
     const route = useRoute();
-    const idArticle = route.params.id ? route.params.id.toString() : store.interactionEnCours!.idDuContenu;
+    const idArticle = route.params.id.toString();
+
     const articleRepositoryAxios = new ArticleRepositoryAxios();
     new RecupererArticleUsecase(articleRepositoryAxios)
       .execute(idArticle)
       .then(async article => {
         articleAAfficher.value = article;
-        if (!route.params.id) {
-          await new PasserUnArticleCommeLuUsecase(articleRepositoryAxios, ToDoListEventBusImpl.getInstance()).execute(
-            idArticle,
-            utilisateurStore().utilisateur.id
-          );
-        }
+        await new PasserUnArticleCommeLuUsecase(articleRepositoryAxios, ToDoListEventBusImpl.getInstance()).execute(
+          idArticle,
+          utilisateurStore().utilisateur.id
+        );
       })
       .catch(async () => {
         await router.push({ name: RouteCommuneName.NOT_FOUND });

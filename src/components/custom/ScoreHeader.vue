@@ -126,6 +126,13 @@
     ToDoListEventBusImpl.getInstance().subscribe(subscriberName, ToDoListEvent.TODO_KYC_A_ETE_REPONDU, () => {
       mettreAJourLeScore();
     });
+    ToDoListEventBusImpl.getInstance().subscribe(
+      subscriberName,
+      ToDoListEvent.TODO_RECOMMANDATION_A_ETE_CLIQUEE,
+      () => {
+        mettreAJourLeScore();
+      }
+    );
   });
 
   onUnmounted(() => {
@@ -134,6 +141,7 @@
     ToDoListEventBusImpl.getInstance().unsubscribe(subscriberName, ToDoListEvent.TODO_A_ETE_TERMINEE);
     ToDoListEventBusImpl.getInstance().unsubscribe(subscriberName, ToDoListEvent.TODO_QUIZ_ETE_TERMINE);
     ToDoListEventBusImpl.getInstance().unsubscribe(subscriberName, ToDoListEvent.TODO_KYC_A_ETE_REPONDU);
+    ToDoListEventBusImpl.getInstance().unsubscribe(subscriberName, ToDoListEvent.TODO_RECOMMANDATION_A_ETE_CLIQUEE);
   });
 </script>
 

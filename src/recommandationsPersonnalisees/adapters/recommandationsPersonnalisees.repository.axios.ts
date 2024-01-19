@@ -2,6 +2,7 @@ import { RecommandationsPersonnaliseesRepository } from '@/recommandationsPerson
 import { RecommandationPersonnalisee } from '@/recommandationsPersonnalisees/recommandationsPersonnalisees.usecase';
 import { AxiosFactory, intercept401 } from '@/axios.factory';
 import { InteractionType } from '@/shell/interactionType';
+import axios from 'redaxios';
 
 interface InteractionApiModel {
   type: string;
@@ -14,6 +15,12 @@ interface InteractionApiModel {
   content_id: string;
 }
 export class RecommandationsPersonnaliseesRepositoryAxios implements RecommandationsPersonnaliseesRepository {
+  @intercept401()
+  async recommandationAEteCliquee(idUtilisateur: string): Promise<void> {
+    await axios.post(`/utilisateurs/${idUtilisateur}/events`, {
+      type: 'reco_clickée',
+    });
+  }
   @intercept401()
   async chargerRecommandationsPersonnalisees(idUtilisateur: string): Promise<RecommandationPersonnalisee[]> {
     const axiosInstance = AxiosFactory.getAxios();

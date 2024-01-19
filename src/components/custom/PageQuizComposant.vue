@@ -27,7 +27,6 @@
 
   defineProps<{
     quizViewModel: QuizViewModel;
-    nombreDePointsAGagner: string;
     idUtilisateur: string;
     isModePrevisualisation: boolean;
     idQuiz: string;

@@ -1,36 +1,41 @@
 <template>
   <div class="card-recommandation shadow">
     <div class="fr-p-3w">
-      <span class="fr-text--bold fr-text--xs text--black">{{ props.recommandation.thematique }}</span>
+      <span class="fr-text--bold fr-text--xs text--black">{{ recommandation.thematique }}</span>
       <h3 class="card-recommandation__titre fr-text--xl fr-mb-0 text--gris-dark">
         <router-link
-          :to="props.recommandation.url"
+          :to="recommandation.url"
           class="card-recommandation__link"
-          :title="props.recommandation.titre"
-          @click="interactionAEteCliquee"
+          :title="recommandation.titre"
+          @click="recommandationAEteCliquee"
         >
-          {{ props.recommandation.titre }}
+          {{ recommandation.titre }}
         </router-link>
       </h3>
     </div>
-    <img :src="props.recommandation.image" alt="" class="card-recommandation__image" />
+    <img :src="recommandation.image" alt="" class="card-recommandation__image" />
     <span class="fr-icon-arrow-right-line card-recommandation__picto text--bleu shadow" aria-hidden="true"></span>
   </div>
 </template>
 
 <script setup lang="ts">
   import { RecommandationViewModel } from '@/recommandationsPersonnalisees/adapters/recommandationsPersonnalisees.presenter.impl';
-  import { useInteraction } from '@/composables/interactionAEteCliquee';
+  import { RecommandationPersonnaliseAEteCliqueeUsecase } from '@/recommandationsPersonnalisees/recommandationPersonnaliseAEteCliquee.usecase';
+  import { RecommandationsPersonnaliseesRepositoryAxios } from '@/recommandationsPersonnalisees/adapters/recommandationsPersonnalisees.repository.axios';
+  import { ToDoListEventBusImpl } from '@/toDoList/toDoListEventBusImpl';
+  import { utilisateurStore } from '@/store/utilisateur';
 
-  const props = defineProps<{
+  defineProps<{
     recommandation: RecommandationViewModel;
   }>();
 
-  const { interactionAEteCliquee } = useInteraction({
-    type: props.recommandation.type,
-    nombreDePointsAGagner: props.recommandation.nombreDePointsAGagner,
-    idDuContenu: props.recommandation.contentId,
-  });
+  const recommandationAEteCliquee = () => {
+    const recommandationPersonnaliseAEteCliqueeUsecase = new RecommandationPersonnaliseAEteCliqueeUsecase(
+      new RecommandationsPersonnaliseesRepositoryAxios(),
+      ToDoListEventBusImpl.getInstance()
+    );
+    recommandationPersonnaliseAEteCliqueeUsecase.execute(utilisateurStore().utilisateur.id);
+  };
 </script>
 
 <style scoped>
