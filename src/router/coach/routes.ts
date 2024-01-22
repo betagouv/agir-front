@@ -3,12 +3,15 @@ const PageCatalogueServices = () => import('@/components/pages/PageCatalogueServ
 const PageSuiviDuJour = () => import('@/components/pages/PageSuiviDuJour.vue');
 const PageQuiz = () => import('@/components/pages/PageQuiz.vue');
 const PagePrevisualisationQuiz = () => import('@/components/pages/PagePrevisualisationQuiz.vue');
+const PageLinky = () => import('@/components/pages/PageLinky.vue');
+
 import { RouteRecordRaw } from 'vue-router';
 import { RouteCoachName } from '@/router/coach/routeCoachName';
 
 enum RouteCoachPath {
   COACH = '/agir/',
   SERVICES = 'services',
+  SERVICES_LINKY = '/agir/services/linky',
   SUIVI_DU_JOUR = 'suivi-du-jour',
   QUIZ = 'quiz',
   QUIZ_ID = ':id',
@@ -33,6 +36,14 @@ const coachRoutes: RouteRecordRaw[] = [
         component: PageCatalogueServices,
         meta: {
           title: 'Catalogue de services',
+        },
+      },
+      {
+        path: RouteCoachPath.SERVICES_LINKY,
+        name: RouteCoachName.SERVICES_LINKY,
+        component: PageLinky,
+        meta: {
+          title: 'Service Linky',
         },
       },
       {
