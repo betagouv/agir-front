@@ -43,31 +43,10 @@
               </span>
             </div>
             <div class="fr-grid-row--top fr-grid-row--right fr-grid-row fr-ml-auto">
-              <p class="fr-badge fr-badge--info fr-mr-1w" v-if="serviceCatalogueViewModel.estEnConstruction">
+              <p v-if="serviceCatalogueViewModel.estEnConstruction" class="fr-badge fr-badge--info fr-mr-1w">
                 SERVICE BIENTÔT DISPONIBLE
               </p>
               <div v-else>
-                <button
-                  v-if="serviceCatalogueViewModel.parametrageRequis"
-                  data-fr-opened="false"
-                  :aria-controls="serviceCatalogueViewModel.id"
-                  class="fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-settings-5-fill fr-btn--sm fr-mr-1w"
-                >
-                  Configurer
-                  <Teleport to="body">
-                    <Modale
-                      :label="`Modale de paramétrage du service ${serviceCatalogueViewModel.titre}`"
-                      :id="serviceCatalogueViewModel.id"
-                      :radius="false"
-                      :is-footer-actions="false"
-                      size="m"
-                    >
-                      <template v-slot:contenu>
-                        <ServiceModaleParametreLinky :service-id="serviceCatalogueViewModel.id" />
-                      </template>
-                    </Modale>
-                  </Teleport>
-                </button>
                 <button
                   v-if="serviceCatalogueViewModel.estInstalle"
                   class="fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-close-line fr-btn--sm fr-mr-1w"
@@ -75,13 +54,37 @@
                 >
                   Enlever
                 </button>
-                <button
-                  v-else
-                  class="fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-download-line fr-btn--sm fr-mr-1w"
-                  @click="installerServiceActif(serviceCatalogueViewModel.id)"
-                >
-                  Installer
-                </button>
+                <div v-else>
+                  <button
+                    v-if="serviceCatalogueViewModel.parametrageRequis"
+                    data-fr-opened="false"
+                    :aria-controls="serviceCatalogueViewModel.id"
+                    class="fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-download-line fr-btn--sm fr-mr-1w"
+                    @click="installerServiceActif(serviceCatalogueViewModel.id)"
+                  >
+                    Installer
+                    <Teleport to="body">
+                      <Modale
+                        :label="`Modale de paramétrage du service ${serviceCatalogueViewModel.titre}`"
+                        :id="serviceCatalogueViewModel.id"
+                        :radius="false"
+                        :is-footer-actions="false"
+                        size="m"
+                      >
+                        <template v-slot:contenu>
+                          <ServiceModaleParametreLinky :service-id="serviceCatalogueViewModel.id" />
+                        </template>
+                      </Modale>
+                    </Teleport>
+                  </button>
+                  <button
+                    v-else
+                    class="fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-download-line fr-btn--sm fr-mr-1w"
+                    @click="installerServiceActif(serviceCatalogueViewModel.id)"
+                  >
+                    Installer
+                  </button>
+                </div>
               </div>
             </div>
           </div>

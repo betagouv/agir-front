@@ -9,6 +9,7 @@
           :id="`${segment.value}-id`"
           :name="name"
           :checked="segment.checked"
+          @change="emitChange(segment.value)"
         />
         <label class="fr-label" :for="`${segment.value}-id`">{{ segment.libelle }}</label>
       </div>
@@ -26,4 +27,10 @@
       checked?: boolean;
     }[];
   }>();
+
+  const emit = defineEmits(['update:value']);
+
+  const emitChange = (value: string) => {
+    emit('update:value', value);
+  };
 </script>

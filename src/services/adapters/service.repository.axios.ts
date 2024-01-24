@@ -21,6 +21,7 @@ interface ServiceCatalogueApiModel {
   description: string;
   sous_description: string;
   en_construction: boolean;
+  parametrage_requis: boolean;
 }
 export class ServiceRepositoryAxios implements ServiceRepository {
   @intercept401()
@@ -51,7 +52,7 @@ export class ServiceRepositoryAxios implements ServiceRepository {
       estInstalle: service.is_installed,
       image: service.image_url,
       estEnConstruction: service.en_construction,
-      parametrageRequis: false,
+      parametrageRequis: service.parametrage_requis,
     }));
   }
 

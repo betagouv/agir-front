@@ -6,10 +6,10 @@
     />
     <h1 class="fr-h2">Ma consommation électrique</h1>
     <div class="fr-grid-row fr-grid-row--gutters">
-      <div class="fr-col-9">
+      <div class="fr-col-md-9 fr-col-12">
         <LinkyGraphique />
       </div>
-      <div class="fr-col-3">
+      <div class="fr-col-md-3 fr-col-12">
         <LinkyAside />
       </div>
     </div>
