@@ -56,29 +56,6 @@
                 </button>
                 <div v-else>
                   <button
-                    v-if="serviceCatalogueViewModel.parametrageRequis"
-                    data-fr-opened="false"
-                    :aria-controls="serviceCatalogueViewModel.id"
-                    class="fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-download-line fr-btn--sm fr-mr-1w"
-                    @click="installerServiceActif(serviceCatalogueViewModel.id)"
-                  >
-                    Installer
-                    <Teleport to="body">
-                      <Modale
-                        :label="`Modale de paramétrage du service ${serviceCatalogueViewModel.titre}`"
-                        :id="serviceCatalogueViewModel.id"
-                        :radius="false"
-                        :is-footer-actions="false"
-                        size="m"
-                      >
-                        <template v-slot:contenu>
-                          <ServiceModaleParametreLinky :service-id="serviceCatalogueViewModel.id" />
-                        </template>
-                      </Modale>
-                    </Teleport>
-                  </button>
-                  <button
-                    v-else
                     class="fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-download-line fr-btn--sm fr-mr-1w"
                     @click="installerServiceActif(serviceCatalogueViewModel.id)"
                   >
@@ -115,8 +92,7 @@
   import { ServiceRepositoryAxios } from '@/services/adapters/service.repository.axios';
   import { utilisateurStore } from '@/store/utilisateur';
   import { InstallerServiceActifUsecase } from '@/services/installerServiceActif.usecase';
-  import Modale from '@/components/custom/Modale/Modale.vue';
-  import ServiceModaleParametreLinky from '@/components/custom/Service/ServiceModaleParametreLinky.vue';
+  import ModaleActions from '@/components/custom/Modale/ModaleActions';
 
   const props = defineProps<{
     serviceCatalogueViewModels: ServiceCatalogueViewModel;
@@ -152,6 +128,9 @@
     await useCase.execute(utilisateurId, serviceId);
     emit('refreshCatalogueServices');
     window.scrollTo(0, 0);
+
+    const modaleActions = new ModaleActions(serviceId);
+    modaleActions.open();
   }
 </script>
 
