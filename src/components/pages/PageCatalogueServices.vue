@@ -19,7 +19,9 @@
         <ServiceModaleParametreLinky service-id="linky" />
       </template>
     </Modale>
-    <button class="fr-btn fr-hidden" data-fr-opened="false" aria-controls="linky">Modale avec zone d'action</button>
+    <button class="fr-btn fr-hidden" data-fr-opened="false" aria-controls="linky">
+      Modale paramétrage du service linky
+    </button>
   </Teleport>
 </template>
 
@@ -34,7 +36,7 @@
   import { onMounted, ref } from 'vue';
   import CatalogueServices from '@/components/custom/CatalogueServices.vue';
   import Modale from '@/components/custom/Modale/Modale.vue';
-  import ServiceModaleParametreLinky from '@/components/custom/Service/ServiceModaleParametreLinky.vue';
+  import ServiceModaleParametreLinky from '@/components/custom/Linky/ServiceModaleParametreLinky.vue';
 
   const utilisateurId: string = utilisateurStore().utilisateur.id;
   const isLoading = ref<boolean>(true);
