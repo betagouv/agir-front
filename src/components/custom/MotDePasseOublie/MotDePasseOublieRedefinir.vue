@@ -4,8 +4,8 @@
     <strong>{{ email }}</strong>
   </p>
   <form @submit.prevent="definirMotDePasse">
-    <InputPassword class="fr-mt-4w" v-model="motDePasse" @update:mot-de-passe-valide="onMotDePasseValideChanged" />
     <InputText class="fr-col-md-5 fr-mt-2w" v-model="code" name="code" label="Code à usage unique" />
+    <InputPassword class="fr-my-2w" v-model="motDePasse" @update:mot-de-passe-valide="onMotDePasseValideChanged" />
     <button class="fr-btn display-block text--center" :disabled="!motDePasseValide || code.length === 0" type="submit">
       Valider
     </button>
@@ -20,6 +20,7 @@
       class="fr-col-12 fr-mt-2w"
       :type="alerte.type"
       :titre="alerte.titre"
+      fr-mb-2w
       :message="alerte.message"
     />
   </div>
