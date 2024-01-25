@@ -2,7 +2,7 @@ import { ref } from 'vue';
 
 interface Alerte {
   isActive: boolean;
-  type: 'success' | 'error' | 'info';
+  type: 'success' | 'error';
   titre: string;
   message: string;
 }

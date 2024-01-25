@@ -65,7 +65,7 @@
     usecase
       .execute(email)
       .then(() => {
-        afficherAlerte('info', 'Code renvoyé', 'Le code a bien été renvoyé');
+        afficherAlerte('success', 'Code renvoyé', 'Le code a bien été renvoyé');
       })
       .catch(reason => {
         afficherAlerte('error', 'Erreur lors de la validation du compte', reason.data.message);
