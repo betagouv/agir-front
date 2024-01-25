@@ -1,19 +1,21 @@
 <template>
   <p class="fr-text--lg">
-    Définissez votre nouveau mot de passe et saisissez le code envoyé à l’adresse suivante :
+    Saisissez le code envoyé à l’adresse suivante :
     <strong>{{ email }}</strong>
   </p>
   <form @submit.prevent="definirMotDePasse">
     <InputText class="fr-col-md-5 fr-mt-2w" v-model="code" name="code" label="Code à usage unique" />
+    <p class="fr-mt-4w fr-mb-0">Vous n’avez pas reçu de code ?</p>
+    <button class="fr-link fr-icon-mail-line fr-link--icon-left text--underline fr-mb-2w" @click="renvoyerCode">
+      Renvoyer le code
+    </button>
+    <p class="fr-text--lg fr-mb-0">Définissez votre nouveau mot de passe</p>
     <InputPassword class="fr-my-2w" v-model="motDePasse" @update:mot-de-passe-valide="onMotDePasseValideChanged" />
     <button class="fr-btn display-block text--center" :disabled="!motDePasseValide || code.length === 0" type="submit">
       Valider
     </button>
   </form>
-  <p class="fr-mt-4w fr-mb-0">Vous n’avez pas reçu de code ?</p>
-  <button class="fr-link fr-icon-mail-line fr-link--icon-left text--underline" @click="renvoyerCode">
-    Renvoyer le code
-  </button>
+
   <div class="fr-messages-group">
     <Alert
       v-if="alerte.isActive"
