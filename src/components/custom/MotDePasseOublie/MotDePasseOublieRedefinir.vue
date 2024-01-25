@@ -15,14 +15,12 @@
       Valider
     </button>
   </form>
-
   <div class="fr-messages-group">
     <Alert
       v-if="alerte.isActive"
       class="fr-col-12 fr-mt-2w"
       :type="alerte.type"
       :titre="alerte.titre"
-      fr-mb-2w
       :message="alerte.message"
     />
   </div>
