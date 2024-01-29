@@ -3,8 +3,6 @@ import { test, expect, Page, Browser } from '@playwright/test';
 import { chromium, BrowserContext } from '@playwright/test';
 import E2EMailbox from 'e2e-mailbox';
 
-import { getCodeFromEmail } from './utils/codeValidation';
-
 let page: Page;
 const browser = await chromium.launch({
   headless: false,
