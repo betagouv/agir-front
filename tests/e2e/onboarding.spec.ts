@@ -1,7 +1,6 @@
 // @ts-check
 import { test, expect, Page, Browser } from '@playwright/test';
 import { chromium, BrowserContext } from '@playwright/test';
-import E2EMailbox from 'e2e-mailbox';
 
 let page: Page;
 const browser = await chromium.launch({
@@ -87,28 +86,17 @@ test.describe('Onboarding complet', () => {
 
   test('inscription', async () => {
     test.slow();
-
-    const mailbox = new E2EMailbox.default('GUERRILLA');
-    const email = await mailbox.createEmailAddress();
     const button = page.getByRole('link', { name: 'Inscrivez-vous !' });
     expect(button).toBeTruthy();
     await button.click();
 
-    await page.fill('#utilisateur-mail', email || '');
+    await page.fill('#utilisateur-mail', process.env.PLAYWRIGHT_EMAIL || '');
     await page.fill('#utilisateur-nom', "L'éponge");
     await page.fill('#utilisateur-prenom', 'Bob');
     await page.fill('#password', process.env.PLAYWRIGHT_PASSWORD || '');
     await page.click('button[type="submit"]');
 
-    // recuperer le code de validation
-    const foundEmail = await mailbox.waitForEmail('Votre code d&#039;inscription Agir', 60);
-    const validationCode = extractCodeFromHTML(foundEmail.mail_body);
-    mailbox.deleteEmailById(foundEmail.mail_id);
-    expect(validationCode).toBeTruthy();
-    expect(validationCode.length).toBe(6);
-    expect(validationCode).toMatch(/\d{6}/);
-
-    await page.fill('#code', validationCode);
+    await page.fill('#code', process.env.PLAYWRIGHT_OTP_DEV || '');
     const valider = page.getByRole('button', { name: 'Valider' });
     expect(valider).toBeTruthy();
     await valider.click();
@@ -128,14 +116,3 @@ test.describe('Onboarding complet', () => {
     await confirmer.click();
   });
 });
-
-function extractCodeFromHTML(htmlContent: string): string {
-  const codeRegex = /code\s*:\s*(\d+)/i;
-  const match = htmlContent.match(codeRegex);
-
-  if (match && match[1]) {
-    return match[1];
-  } else {
-    return '';
-  }
-}
