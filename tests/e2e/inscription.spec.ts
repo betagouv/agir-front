@@ -4,7 +4,7 @@ import { chromium, BrowserContext } from '@playwright/test';
 
 let page: Page;
 const browser = await chromium.launch({
-  headless: false,
+  headless: true,
 });
 const context = await browser.newContext();
 
