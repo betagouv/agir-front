@@ -129,8 +129,10 @@
     emit('refreshCatalogueServices');
     window.scrollTo(0, 0);
 
-    const modaleActions = new ModaleActions(serviceId);
-    modaleActions.open();
+    if (serviceId === 'linky') {
+      const modaleActions = new ModaleActions(serviceId);
+      modaleActions.open();
+    }
   }
 </script>
 

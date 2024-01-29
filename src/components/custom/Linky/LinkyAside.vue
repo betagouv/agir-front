@@ -1,7 +1,9 @@
 <template>
   <CarteVierge class="fr-mb-2w">
     <h2 class="fr-h4">Paramétrage</h2>
-    <p class="fr-mb-0">Pour plus d'informations ou paramètrer son compteur: lorem lien</p>
+    <p class="fr-mb-0">
+      <button class="fr-link" data-fr-opened="false" aria-controls="linky">Paramétrer le service linky</button>
+    </p>
   </CarteVierge>
   <CarteExplication>
     <LinkyExplicationAleatoire class="fr-mt-2w" />

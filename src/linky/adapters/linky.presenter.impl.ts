@@ -3,8 +3,8 @@ import { LinkyPresenter } from '@/linky/ports/linky.presenter';
 
 export interface ConsommationElectriqueViewModel {
   libelles: string[];
-  valeur_kWh: number[];
-  valeur_kWh_ajustée_temperature: number[];
+  valeur_courante: number[];
+  valeur_precedente: number[];
 }
 
 export class LinkyPresenterImpl implements LinkyPresenter {
@@ -13,14 +13,17 @@ export class LinkyPresenterImpl implements LinkyPresenter {
   presente(consommationElectrique: ConsommationElectrique[]): void {
     const consommationElectriqueViewModel: ConsommationElectriqueViewModel = {
       libelles: [],
-      valeur_kWh: [],
-      valeur_kWh_ajustée_temperature: [],
+      valeur_courante: [],
+      valeur_precedente: [],
     };
 
-    consommationElectrique.forEach(consommation => {
-      consommationElectriqueViewModel.libelles.push(consommation.date.toString());
-      consommationElectriqueViewModel.valeur_kWh.push(consommation.valeur_kWh);
-      consommationElectriqueViewModel.valeur_kWh_ajustée_temperature.push(consommation.valeur_kWh_ajustée_temperature);
+    consommationElectrique.forEach((consommation, index) => {
+      if (index % 2 === 0) {
+        consommationElectriqueViewModel.libelles.push(consommation.mois);
+        consommationElectriqueViewModel.valeur_courante.push(consommation.valeur);
+      } else {
+        consommationElectriqueViewModel.valeur_precedente.push(consommation.valeur);
+      }
     });
 
     this.viewModel(consommationElectriqueViewModel);

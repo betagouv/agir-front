@@ -4,6 +4,7 @@ import { AxiosFactory, intercept401 } from '@/axios.factory';
 import { ServiceCatalogue } from '@/services/recupererCatalogueServices.usecase';
 
 interface ServiceApiModel {
+  id: string;
   titre: string;
   label: string;
   url: string;
@@ -29,6 +30,7 @@ export class ServiceRepositoryAxios implements ServiceRepository {
     const axiosInstance = AxiosFactory.getAxios();
     const reponse = await axiosInstance.get<ServiceApiModel[]>(`/utilisateurs/${utilisateurId}/services`);
     return reponse.data.map(service => ({
+      id: service.id,
       titre: service.titre,
       contenu: service.label,
       url: service.url,

@@ -43,10 +43,10 @@
   import { ServiceRepositoryAxios } from '@/services/adapters/service.repository.axios';
   import ModaleActions from '@/components/custom/Modale/ModaleActions';
 
-  defineProps<{ serviceId: string }>();
+  const props = withDefaults(defineProps<{ serviceId: string; prm?: string }>(), { prm: '' });
 
   const acceptationCGU = ref<boolean>(false);
-  const parametreDuService = ref<string>('');
+  const parametreDuService = ref<string>(props.prm);
 
   const parametrerLeService = (serviceId: string) => {
     const parametrerService = new ParametrerServiceUsecase(new ServiceRepositoryAxios());

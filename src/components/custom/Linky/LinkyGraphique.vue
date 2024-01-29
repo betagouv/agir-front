@@ -11,9 +11,8 @@
         name="controle-segmente-selection-range-data"
         @update:value="handleValueChange"
         :segments="[
-          { libelle: 'dernière semaine', value: 'jour', checked: true },
-          { libelle: 'dernier mois', value: 'semaine' },
-          { libelle: '3 derniers mois', value: 'mois' },
+          { libelle: 'comparaison annuelle', value: 'jour', checked: true },
+          { libelle: 'en cours ...', value: 'semaine' },
         ]"
       />
     </div>
@@ -33,8 +32,8 @@
       :data="{
         labels: consos.libelles,
         datasets: [
-          { label: 'consomation', backgroundColor: '#000091', data: consos.valeur_kWh },
-          { label: 'consomation recalculée', backgroundColor: '#6a6af4', data: consos.valeur_kWh_ajustée_temperature },
+          { label: 'consomation 2022', backgroundColor: '#6a6af4', data: consos.valeur_courante },
+          { label: 'consomation 2023', backgroundColor: '#000091', data: consos.valeur_precedente },
         ],
       }"
     />
@@ -55,27 +54,18 @@
 
   const consos = ref<ConsommationElectriqueViewModel>();
 
-  function mapValuesInteractions(viewModel: ConsommationElectriqueViewModel) {
+  function mapValuesConsommation(viewModel: ConsommationElectriqueViewModel) {
     consos.value = viewModel;
   }
+
   const idUtilisateur = utilisateurStore().utilisateur.id;
   const obtenirConsommationElectriqueUsecase = new ObtenirConsommationElectriqueUsecase(new LinkyRepositoryAxios());
 
-  async function handleValueChange(value) {
-    await obtenirConsommationElectriqueUsecase.execute(
-      idUtilisateur,
-      value,
-      7,
-      new LinkyPresenterImpl(mapValuesInteractions)
-    );
+  async function handleValueChange() {
+    await obtenirConsommationElectriqueUsecase.execute(idUtilisateur, new LinkyPresenterImpl(mapValuesConsommation));
   }
 
   onMounted(async () => {
-    await obtenirConsommationElectriqueUsecase.execute(
-      idUtilisateur,
-      'jour',
-      7,
-      new LinkyPresenterImpl(mapValuesInteractions)
-    );
+    await obtenirConsommationElectriqueUsecase.execute(idUtilisateur, new LinkyPresenterImpl(mapValuesConsommation));
   });
 </script>
