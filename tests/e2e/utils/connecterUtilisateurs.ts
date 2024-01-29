@@ -1,7 +1,7 @@
 import { Page, chromium } from '@playwright/test';
 
 export const connecterUtilisateur: () => Promise<Page> = async () => {
-  const browser = await chromium.launch();
+  const browser = await chromium.launch({ headless: true });
   const context = await browser.newContext();
   const page = await context.newPage();
 
@@ -49,11 +49,11 @@ export const connecterUtilisateur: () => Promise<Page> = async () => {
               isCompleted: false,
             },
           },
-          created_at: '2023-12-20T16:28:07.766Z',
+          created_at: '2024-01-20T16:28:07.766Z',
           fonctionnalites_debloquees: ['aides', 'services', 'recommandations'],
         },
         token:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dGlsaXNhdGV1cklkIjoid29qdGVrIiwiaWF0IjoxNzAzMTU1MzM2LCJleHAiOjE3MDU3NDczMzZ9.bJOxx98NUoYDq3e0mXKgv-YjAq-ZfSRc4S05bgwvKdA',
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dGlsaXNhdGV1cklkIjoiNzFkODM5MTQtY2NiNi00N2M4LTg5NmMtMTU2ZGI0NTQ5NTc0IiwiaWF0IjoxNzA1OTMyNzE5LCJleHAiOjE3MDg1MjQ3MTl9.chHFo8pmUrCIg_r4dNtQcnCN5Sb1IQ8srqRwsqo5sYM',
       }),
     });
   });

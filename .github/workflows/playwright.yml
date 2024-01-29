@@ -10,6 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       VITE_API_URL: ${{ secrets.VITE_API_URL_DEV }}
+      PLAYWRIGHT_PASSWORD: ${{ secrets.PLAYWRIGHT_PASSWORD }}
     steps:
     - uses: actions/checkout@v3
     - uses: actions/setup-node@v3
