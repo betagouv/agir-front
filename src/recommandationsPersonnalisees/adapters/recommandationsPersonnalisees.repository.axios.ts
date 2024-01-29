@@ -4,7 +4,7 @@ import { AxiosFactory, intercept401 } from '@/axios.factory';
 import { InteractionType } from '@/shell/interactionType';
 import axios from 'redaxios';
 
-interface InteractionApiModel {
+interface RecommandationApiModel {
   type: string;
   titre: string;
   soustitre: string;
@@ -24,9 +24,11 @@ export class RecommandationsPersonnaliseesRepositoryAxios implements Recommandat
   @intercept401()
   async chargerRecommandationsPersonnalisees(idUtilisateur: string): Promise<RecommandationPersonnalisee[]> {
     const axiosInstance = AxiosFactory.getAxios();
-    const response = await axiosInstance.get<InteractionApiModel[]>(`/utilisateurs/${idUtilisateur}/interactions`);
+    const response = await axiosInstance.get<RecommandationApiModel[]>(
+      `/utilisateurs/${idUtilisateur}/recommandations`
+    );
 
-    return response.data.map((apiModel: InteractionApiModel) => {
+    return response.data.map((apiModel: RecommandationApiModel) => {
       const recommandationPersonnalisee: RecommandationPersonnalisee = {
         type: apiModel.type as InteractionType,
         titre: apiModel.titre,
