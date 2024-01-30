@@ -20,7 +20,7 @@ test.describe('Onboarding complet', () => {
     await expect(page).toHaveTitle('Agir ! - Accueil');
     // clique sur le bouton "commencer"
     await expect(page).toHaveURL('/onboarding');
-    // vérifier que le step 1 est affiché, .fr-stepper__state
+
     const name = await page.innerText('.fr-stepper__state');
     expect(name).toBe('Étape 1 sur 4');
   });
