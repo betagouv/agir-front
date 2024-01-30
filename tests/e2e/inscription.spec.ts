@@ -1,6 +1,5 @@
-// @ts-check
-import { test, expect, Page, Browser } from '@playwright/test';
-import { chromium, BrowserContext } from '@playwright/test';
+import { test, expect, Page } from '@playwright/test';
+import { chromium } from '@playwright/test';
 
 let page: Page;
 const browser = await chromium.launch({
@@ -65,5 +64,8 @@ test.describe('Inscription - connexion - suppression', () => {
     const confirmer = page.getByRole('button', { name: 'Confirmer' });
     expect(confirmer).toBeTruthy();
     await confirmer.click();
+
+    // vérifier que l'utilisateur est bien redirigé vers la page d'accueil
+    await expect(page).toHaveTitle('Agir ! - Accueil');
   });
 });

@@ -1,6 +1,5 @@
-// @ts-check
-import { test, expect, Page, Browser } from '@playwright/test';
-import { chromium, BrowserContext } from '@playwright/test';
+import { test, expect, Page } from '@playwright/test';
+import { chromium } from '@playwright/test';
 
 let page: Page;
 const browser = await chromium.launch({

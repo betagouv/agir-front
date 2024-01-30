@@ -37,7 +37,7 @@ export const creerUtilisateurConnecte: () => Promise<Page> = async () => {
   await page.fill('#password', process.env.PLAYWRIGHT_PASSWORD || '');
   await page.click('button[type="submit"]');
 
-  await page.getByRole('heading', { name: 'Validez votre compte' });
+  page.getByRole('heading', { name: 'Validez votre compte' });
   await page.fill('#code', process.env.PLAYWRIGHT_OTP_DEV || '');
   await page.getByRole('button', { name: 'Valider' }).click();
 
