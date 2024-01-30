@@ -53,10 +53,9 @@ test.describe('Inscription - connexion - suppression', () => {
     await expect(page).toHaveTitle('Agir ! - Agir');
   });
 
-  // suppression du compte
   test('suppression du compte', async () => {
     await page.goto('mon-compte/options-avancees');
-    // cliquer sur le bouton supprimer mon compte
+
     const supprimer = page.getByRole('button', { name: 'Supprimer votre Compte' });
     expect(supprimer).toBeTruthy();
     await supprimer.click();

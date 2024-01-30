@@ -15,27 +15,25 @@ test.describe('Onboarding complet', () => {
   test("Aller sur l'onboarding", async () => {
     await page.goto('/');
     await page.click('text="Commencer"');
-    // TODO : le title devrait peut être changer
+
     await expect(page).toHaveTitle('Agir ! - Accueil');
-    // clique sur le bouton "commencer"
+
     await expect(page).toHaveURL('/onboarding');
 
     const name = await page.innerText('.fr-stepper__state');
     expect(name).toBe('Étape 1 sur 4');
   });
   test('onboarding - step 1', async () => {
-    // click sur une checkbox
+    // click sur une checkbox, voir pourquoi on ne peut pas utiliser le role
     const moto = await page.getByText('🛵 Scooter ou moto').click();
     expect(await page.isChecked('#moto')).toBeTruthy();
 
-    // vérifier que le bouton "suivant" est affiché
     const button = page.getByRole('button', { name: 'Continuer' });
     expect(button).toBeTruthy();
     await button.click();
   });
 
   test('onboarding - step 2', async () => {
-    // vérifier que le step 2 est affiché
     const name2 = await page.innerText('.fr-stepper__state');
     expect(name2).toBe('Étape 2 sur 4');
 
