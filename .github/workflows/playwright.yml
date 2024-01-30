@@ -10,6 +10,9 @@ jobs:
     runs-on: ubuntu-latest
     env:
       VITE_API_URL: ${{ secrets.VITE_API_URL_DEV }}
+      PLAYWRIGHT_PASSWORD: ${{ secrets.PLAYWRIGHT_PASSWORD }}
+      PLAYWRIGHT_EMAIL: ${{ secrets.PLAYWRIGHT_EMAIL }}
+      PLAYWRIGHT_OTP_DEV: ${{ secrets.PLAYWRIGHT_OTP_DEV }}
     steps:
     - uses: actions/checkout@v3
     - uses: actions/setup-node@v3
