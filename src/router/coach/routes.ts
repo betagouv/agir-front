@@ -1,5 +1,6 @@
 const Coach = () => import('@/components/Coach.vue');
 const PageCatalogueServices = () => import('@/components/pages/PageCatalogueServices.vue');
+const PageBibliotheque = () => import('@/components/pages/PageBibliotheque.vue');
 const PageSuiviDuJour = () => import('@/components/pages/PageSuiviDuJour.vue');
 const PageQuiz = () => import('@/components/pages/PageQuiz.vue');
 const PagePrevisualisationQuiz = () => import('@/components/pages/PagePrevisualisationQuiz.vue');
@@ -16,6 +17,7 @@ enum RouteCoachPath {
   QUIZ = 'quiz',
   QUIZ_ID = ':id',
   QUIZ_PREVISUALISATION = 'previsualisation/:id',
+  BIBLIOTHEQUE = 'bibliotheque',
 }
 
 const coachRoutes: RouteRecordRaw[] = [
@@ -44,6 +46,14 @@ const coachRoutes: RouteRecordRaw[] = [
         component: PageLinky,
         meta: {
           title: 'Service Linky',
+        },
+      },
+      {
+        path: RouteCoachPath.BIBLIOTHEQUE,
+        name: RouteCoachName.BIBLIOTHEQUE,
+        component: PageBibliotheque,
+        meta: {
+          title: 'Bibliothèque - Agir !',
         },
       },
       {
