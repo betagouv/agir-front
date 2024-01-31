@@ -16,7 +16,7 @@ enum RouteComptePath {
   CREATION_COMPTE = '/creation-compte',
   VALIDATION_COMPTE = '/validation-compte',
   MOT_DE_PASSE_OUBLIE = '/mot-de-passe-oublie',
-  MIEUX_VOUS_CONNAITRE = '/mieux-vous-connaitre',
+  MIEUX_VOUS_CONNAITRE = '/mon-compte/mieux-vous-connaitre',
 }
 
 const compteRoutes: RouteRecordRaw[] = [

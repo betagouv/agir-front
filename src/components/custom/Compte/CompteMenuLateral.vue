@@ -2,8 +2,8 @@
   <MenuLateral
     :liens="[
       { label: 'Vos informations', url: RouteCompteName.MON_COMPTE },
-      { label: 'Options avancées', url: RouteCompteName.OPTIONS_AVANCEES },
       { label: 'Mieux vous connaître', url: RouteCompteName.MIEUX_VOUS_CONNAITRE },
+      { label: 'Options avancées', url: RouteCompteName.OPTIONS_AVANCEES },
     ]"
   />
 </template>
