@@ -53,7 +53,7 @@ const coachRoutes: RouteRecordRaw[] = [
         name: RouteCoachName.BIBLIOTHEQUE,
         component: PageBibliotheque,
         meta: {
-          title: 'Bibliothèque - Agir !',
+          title: 'Bibliothèque',
         },
       },
       {
