@@ -8,21 +8,21 @@
         <InputCheckbox
           id="thematiqueArticle"
           label="Thématiques"
-          :options="optionsCheckbox"
+          :options="bibliothequeViewModel.filtres"
           @update="updateThematique"
         />
       </div>
       <div class="fr-col-md-8 fr-col-12">
         <h2 class="fr-h4">124 articles</h2>
         <div class="fr-grid-row fr-grid-row--gutters">
-          <div class="fr-col-6" v-for="article in items">
+          <div class="fr-col-6" v-for="article in bibliothequeViewModel.articles">
             <BibliothequeCard
-              :key="article.contentId"
+              :key="article.titre"
               :titre="article.titre"
               :image="article.image"
               :description="article.description"
               :thematique="article.thematique"
-              :content-id="article.contentId"
+              :url="article.url"
             />
           </div>
         </div>
@@ -36,54 +36,70 @@
   import InputCheckbox from '@/components/dsfr/InputCheckbox.vue';
   import BibliothequeCard from '@/components/custom/Bibliotheque/BibliothequeCard.vue';
 
-  const items = [
-    {
-      titre: 'Par où commencer la rénovation de sa maison ?',
-      thematique: '🌍 Global',
-      description: 'lorem ipsum dolor description un peu longue hello',
-      contentId: '1',
-      image: 'https://picsum.photos/300/200',
-    },
-    {
-      titre: 'Le coût carbone d’un t-shirt',
-      thematique: '🌍 Global',
-      description: 'lorem ipsum dolor description un peu longue hello',
-      contentId: '1',
-      image: 'https://picsum.photos/400/400',
-    },
-    {
-      titre: 'C’est quoi 5 tonnes de CO2e ?',
-      thematique: '🌍 Global',
-      description: 'lorem ipsum dolor description un peu longue hello',
-      contentId: '1',
-      image: 'https://picsum.photos/400/400',
-    },
-    {
-      titre: 'Quelle est la mission de l’ADEME ?',
-      thematique: '🌍 Global',
-      description: 'lorem ipsum dolor description un peu longue hello',
-      contentId: '1',
-      image: 'https://picsum.photos/300/200',
-    },
-  ];
+  interface BibliothequeViewModel {
+    articles: {
+      titre: string;
+      thematique: string;
+      description: string;
+      url: string;
+      image: string;
+    }[];
+    filtres: {
+      id: string;
+      label: string;
+      checked: boolean;
+    }[];
+  }
 
-  const optionsCheckbox = [
-    {
-      id: 'id',
-      label: '🛒 Consommation',
-      checked: true,
-    },
-    {
-      id: 'id2',
-      label: '🏠 Logement',
-      checked: true,
-    },
-    {
-      id: 'id3',
-      label: '🚲 Transports',
-      checked: true,
-    },
-  ];
+  const bibliothequeViewModel: BibliothequeViewModel = {
+    articles: [
+      {
+        titre: 'Par où commencer la rénovation de sa maison ?',
+        thematique: '🌍 Global',
+        description: 'lorem ipsum dolor description un peu longue hello',
+        url: '1',
+        image: 'https://picsum.photos/300/200',
+      },
+      {
+        titre: 'Le coût carbone d’un t-shirt',
+        thematique: '🌍 Global',
+        description: 'lorem ipsum dolor description un peu longue hello',
+        url: '1',
+        image: 'https://picsum.photos/400/400',
+      },
+      {
+        titre: 'C’est quoi 5 tonnes de CO2e ?',
+        thematique: '🌍 Global',
+        description: 'lorem ipsum dolor description un peu longue hello',
+        url: '1',
+        image: 'https://picsum.photos/400/400',
+      },
+      {
+        titre: 'Quelle est la mission de l’ADEME ?',
+        thematique: '🌍 Global',
+        description: 'lorem ipsum dolor description un peu longue hello',
+        url: '1',
+        image: 'https://picsum.photos/300/200',
+      },
+    ],
+    filtres: [
+      {
+        id: 'id',
+        label: '🛒 Consommation',
+        checked: true,
+      },
+      {
+        id: 'id2',
+        label: '🏠 Logement',
+        checked: true,
+      },
+      {
+        id: 'id3',
+        label: '🚲 Transports',
+        checked: true,
+      },
+    ],
+  };
 
   const updateThematique = () => {
     //appel du usecase
