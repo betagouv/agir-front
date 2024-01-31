@@ -11,7 +11,7 @@ export interface QuestionViewModel {
   type: 'libre' | 'choix_multiple' | 'choix_unique';
   reponses_possibles: ReponsePossible[];
   points: string;
-  reponses: string | string[];
+  reponses: string[];
 }
 
 export class QuestionPresenterImpl implements QuestionPresenter {

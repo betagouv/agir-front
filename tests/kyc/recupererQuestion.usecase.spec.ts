@@ -24,6 +24,7 @@ describe('Fichier de tests pour récuperer une question KYC', () => {
         id: 'questionId',
         libelle: 'Une question',
         type: 'libre',
+        reponses: [],
         reponses_possibles: [],
         points: 'Récoltez vos + 10 points',
       });
@@ -52,6 +53,7 @@ describe('Fichier de tests pour récuperer une question KYC', () => {
         libelle: 'Une question',
         type: 'choix_multiple',
         points: 'Récoltez vos + 10 points',
+        reponses: [],
         reponses_possibles: [
           {
             id: '1',
@@ -91,6 +93,7 @@ describe('Fichier de tests pour récuperer une question KYC', () => {
         libelle: 'Une question',
         points: 'Récoltez vos + 10 points',
         type: 'choix_unique',
+        reponses: [],
         reponses_possibles: [
           {
             id: '1',
