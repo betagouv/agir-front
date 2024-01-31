@@ -12,6 +12,7 @@ interface QuestionApiModel {
 }
 
 export class QuestionRepositoryAxios implements QuestionRepository {
+  @intercept401()
   async recupererListeQuestions(utilisateurId: string): Promise<Question[]> {
     const response = await AxiosFactory.getAxios().get<QuestionApiModel[]>(
       `utilisateurs/${utilisateurId}/questionsKYC`
