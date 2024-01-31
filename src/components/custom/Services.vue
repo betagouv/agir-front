@@ -3,8 +3,18 @@
     <span class="fr-icon-layout-grid-fill text--white text--bold fr-col fr-mr-2w">Vos services</span>
     <ul class="fr-grid-row service__list fr-col-10 list-style-none fr-p-0">
       <li class="fr-p-0 fr-col" v-for="service in servicesViewModels" :key="service.contenu">
+        <router-link
+          v-if="service.id === 'linky'"
+          :to="{ name: RouteCoachName.SERVICES_LINKY }"
+          class="service__link fr-text--xs text--black-light background--white border-radius--md fr-p-2v fr-mb-0"
+        >
+          <div class="fr-grid-row flex-column">
+            {{ service.titre }}
+            <span class="fr-text--bold">{{ service.contenu }}</span>
+          </div>
+        </router-link>
         <a
-          v-if="service.isUrlExterne"
+          v-else
           role="link"
           :href="service.url"
           target="_blank"
@@ -15,16 +25,6 @@
             <span class="fr-text--bold">{{ service.contenu }}</span>
           </div>
         </a>
-        <router-link
-          v-else
-          :to="service.url"
-          class="service__link fr-text--xs text--black-light background--white border-radius--md fr-p-2v fr-mb-0"
-        >
-          <div class="fr-grid-row flex-column">
-            {{ service.titre }}
-            <span class="fr-text--bold">{{ service.contenu }}</span>
-          </div>
-        </router-link>
       </li>
       <li
         class="fr-grid-row fr-grid-row--middle fr-p-0"

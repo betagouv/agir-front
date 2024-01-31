@@ -267,10 +267,10 @@
     "@octokit/types" "^9.0.0"
     minimatch "^5.1.0"
 
-"@gouvfr/dsfr@^1.10.2":
-  version "1.10.2"
-  resolved "https://registry.yarnpkg.com/@gouvfr/dsfr/-/dsfr-1.10.2.tgz#364916777d6e2a54e991c9883d63516918759e20"
-  integrity sha512-twPj+VFMTOKUfI9vbBnK8fH1iDpXuDVWeMJzgmmQ5LKjRtZdUsvSbHNlp7HWcDvhWxDGNHxSboErC7UB3oskYQ==
+"@gouvfr/dsfr@^1.11.0":
+  version "1.11.0"
+  resolved "https://registry.yarnpkg.com/@gouvfr/dsfr/-/dsfr-1.11.0.tgz#79d1ce472b91468659256cf2cd5cdb1f8272ecf2"
+  integrity sha512-RD+kUk9iJJ4B7xFdAFCNQz0LRqYiMy9dajlKfgnmDPSrYHm+JCJpYCzXhNjYyp4FJggMafRd1ZqJJ6KW6aM0Jw==
 
 "@hotjar/browser@^1.0.9":
   version "1.0.9"
@@ -1376,10 +1376,10 @@ chalk@^4.0.0, chalk@^4.1.0:
     ansi-styles "^4.1.0"
     supports-color "^7.1.0"
 
-chart.js@^4.3.0:
-  version "4.4.0"
-  resolved "https://registry.yarnpkg.com/chart.js/-/chart.js-4.4.0.tgz#df843fdd9ec6bd88d7f07e2b95348d221bd2698c"
-  integrity sha512-vQEj6d+z0dcsKLlQvbKIMYFHd3t8W/7L2vfJIbYcfyPcRx92CsHqECpueN8qVGNlKyDcr5wBrYAYKnfu/9Q1hQ==
+chart.js@^4.4.1:
+  version "4.4.1"
+  resolved "https://registry.yarnpkg.com/chart.js/-/chart.js-4.4.1.tgz#ac5dc0e69a7758909158a96fe80ce43b3bb96a9f"
+  integrity sha512-C74QN1bxwV1v2PEujhmKjOZ7iUM4w6BWs23Md/6aOZZSlwMzeCIDGuZay++rBgChYru7/+QFeoQW0fQoP534Dg==
   dependencies:
     "@kurkle/color" "^0.3.0"
 
@@ -4391,6 +4391,11 @@ vue-chart-3@^3.1.8:
     "@vue/runtime-dom" latest
     csstype latest
     lodash-es latest
+
+vue-chartjs@^5.3.0:
+  version "5.3.0"
+  resolved "https://registry.yarnpkg.com/vue-chartjs/-/vue-chartjs-5.3.0.tgz#59920a07d72f37a2375d495256e486b92813bf6e"
+  integrity sha512-8XqX0JU8vFZ+WA2/knz4z3ThClduni2Nm0BMe2u0mXgTfd9pXrmJ07QBI+WAij5P/aPmPMX54HCE1seWL37ZdQ==
 
 vue-component-type-helpers@1.8.4:
   version "1.8.4"
