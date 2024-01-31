@@ -32,8 +32,8 @@
       :data="{
         labels: consos.libelles,
         datasets: [
-          { label: 'consomation 2022', backgroundColor: '#6a6af4', data: consos.valeur_courante },
-          { label: 'consomation 2023', backgroundColor: '#000091', data: consos.valeur_precedente },
+          { label: 'année précédente', backgroundColor: '#6a6af4', data: consos.valeur_courante },
+          { label: 'année courante', backgroundColor: '#000091', data: consos.valeur_precedente },
         ],
       }"
     />

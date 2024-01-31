@@ -11,6 +11,6 @@ export class ObtenirInformationCompteurUsecase {
   constructor(private linkyRepository: LinkyRepository) {}
 
   async execute(idUtilsateur: string) {
-    return this.linkyRepository.recupererInformationCompteur(idUtilsateur);
+    return await this.linkyRepository.recupererInformationCompteur(idUtilsateur);
   }
 }

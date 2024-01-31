@@ -33,6 +33,7 @@ export class LinkyRepositoryAxios implements LinkyRepository {
     }));
   }
 
+  @intercept401()
   async recupererInformationCompteur(idUtilsateur: string): Promise<InformationCompteur> {
     const axiosInstance = AxiosFactory.getAxios();
     const reponse = await axiosInstance.get<InformationCompteurApiModel>(
