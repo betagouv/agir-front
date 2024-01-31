@@ -5,7 +5,12 @@
     <div class="fr-grid-row">
       <div class="fr-col-md-4 fr-col-12">
         <h2 class="fr-h4">Filtres</h2>
-        <h3>Thématiques</h3>
+        <InputCheckbox
+          id="thematiqueArticle"
+          label="Thématiques"
+          :options="optionsCheckbox"
+          @update="updateThematique"
+        />
       </div>
       <div class="fr-col-md-8 fr-col-12">
         <h2 class="fr-h4">124 articles</h2>
@@ -28,6 +33,7 @@
 
 <script setup lang="ts">
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
+  import InputCheckbox from '@/components/dsfr/InputCheckbox.vue';
   import BibliothequeCard from '@/components/custom/Bibliotheque/BibliothequeCard.vue';
 
   const items = [
@@ -60,4 +66,26 @@
       image: 'https://picsum.photos/300/200',
     },
   ];
+
+  const optionsCheckbox = [
+    {
+      id: 'id',
+      label: '🛒 Consommation',
+      checked: true,
+    },
+    {
+      id: 'id2',
+      label: '🏠 Logement',
+      checked: true,
+    },
+    {
+      id: 'id3',
+      label: '🚲 Transports',
+      checked: true,
+    },
+  ];
+
+  const updateThematique = () => {
+    //appel du usecase
+  };
 </script>
