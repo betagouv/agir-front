@@ -11,6 +11,7 @@ describe('Fichier de tests pour récuperer une question KYC', () => {
       type: 'libre',
       reponses_possibles: [],
       points: 10,
+      reponse: [],
     });
 
     // WHEN
@@ -37,6 +38,7 @@ describe('Fichier de tests pour récuperer une question KYC', () => {
       type: 'choix_multiple',
       reponses_possibles: ['1', '2', '3'],
       points: 10,
+      reponse: [],
     });
 
     // WHEN
@@ -75,6 +77,7 @@ describe('Fichier de tests pour récuperer une question KYC', () => {
       type: 'choix_unique',
       reponses_possibles: ['1', '2', '3'],
       points: 10,
+      reponse: [],
     });
 
     // WHEN

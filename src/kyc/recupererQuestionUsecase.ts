@@ -7,6 +7,7 @@ export interface Question {
   type: 'libre' | 'choix_multiple' | 'choix_unique';
   reponses_possibles: string[];
   points: number;
+  reponse: string[];
 }
 
 export class RecupererQuestionUsecase {

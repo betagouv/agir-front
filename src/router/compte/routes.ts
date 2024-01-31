@@ -3,6 +3,8 @@ const PageCreationCompte = () => import('@/components/pages/PageCreationCompte.v
 const PageValidationCompte = () => import('@/components/pages/PageValidationCompte.vue');
 const PageMotDePasseOublie = () => import('@/components/pages/PageMotDePasseOublie.vue');
 const PageCompteOptionsAvancees = () => import('@/components/pages/PageCompteOptionsAvancees.vue');
+const PageCompteMieuxVousConnaitre = () => import('@/components/pages/PageCompteMieuxVousConnaitre.vue');
+
 import { onboardingStore } from '@/store/onboarding';
 import { RouteRecordRaw } from 'vue-router';
 import { RouteCompteName } from '@/router/compte/routeCompteName';
@@ -14,6 +16,7 @@ enum RouteComptePath {
   CREATION_COMPTE = '/creation-compte',
   VALIDATION_COMPTE = '/validation-compte',
   MOT_DE_PASSE_OUBLIE = '/mot-de-passe-oublie',
+  MIEUX_VOUS_CONNAITRE = '/mieux-vous-connaitre',
 }
 
 const compteRoutes: RouteRecordRaw[] = [
@@ -29,6 +32,11 @@ const compteRoutes: RouteRecordRaw[] = [
         path: RouteComptePath.OPTIONS_AVANCEES,
         name: RouteCompteName.OPTIONS_AVANCEES,
         component: PageCompteOptionsAvancees,
+      },
+      {
+        path: RouteComptePath.MIEUX_VOUS_CONNAITRE,
+        name: RouteCompteName.MIEUX_VOUS_CONNAITRE,
+        component: PageCompteMieuxVousConnaitre,
       },
     ],
   },
