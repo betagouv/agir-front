@@ -15,7 +15,11 @@
           <h2 class="fr-h4 fr-mb-2w">
             {{ questionViewModel?.libelle }}
           </h2>
-          <InputCheckbox :options="questionViewModel.reponses_possibles" v-model="reponse" />
+          <InputCheckbox
+            :options="questionViewModel.reponses_possibles"
+            v-model="reponse"
+            :default-values="reponse as string[]"
+          />
         </div>
         <div v-if="questionViewModel?.type === 'choix_unique'" class="fr-input-group">
           <BoutonRadio
@@ -26,6 +30,7 @@
             orientation="vertical"
             :options=" questionViewModel.reponses_possibles.map((reponsePossible:ReponsePossible) => ({ label: reponsePossible.label, value: reponsePossible.id })) "
             v-model="reponse"
+            :default-value="reponse.toString()"
           />
         </div>
         <button class="fr-btn fr-btn--lg" title="Valider" :disabled="reponse === ''">Valider</button>
@@ -53,7 +58,7 @@
   const questionId = Array.isArray(route.params.id) ? route.params.id[0] : route.params.id;
 
   const questionViewModel = ref<QuestionViewModel>();
-  const reponse = ref<string>('');
+  const reponse = ref<string | string[]>('');
   const reponseAEteDonnee = ref<boolean>(false);
 
   const utilisateurId = utilisateurStore().utilisateur.id;
@@ -63,6 +68,7 @@
     utilisateurId,
     new QuestionPresenterImpl((viewModel: QuestionViewModel) => {
       questionViewModel.value = viewModel;
+      reponse.value = viewModel.reponses;
     })
   );
 

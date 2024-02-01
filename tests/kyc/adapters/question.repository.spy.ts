@@ -2,6 +2,9 @@ import { Question } from '@/kyc/recupererQuestionUsecase';
 import { QuestionRepository } from '@/kyc/ports/question.repository';
 
 export class SpyQuestionRepository implements QuestionRepository {
+  recupererListeQuestions(utilisateurId: string): Promise<Question[]> {
+    throw new Error('Method not implemented.');
+  }
   private _envoyerQuestionAEteAppele: boolean = false;
 
   private _envoyerQuestionArgs: { questionId: string; utilisateurId: string; reponse: string[] } = {
