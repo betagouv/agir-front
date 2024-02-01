@@ -1,14 +1,13 @@
 import { test, expect, Page } from '@playwright/test';
 import { creerUtilisateurConnecte } from './utils/creerUtilisateurConnecte';
 import supprimerUtilisateur from './utils/supprimerUtilisateur';
-import { clipArea } from 'chart.js/helpers';
 
 let page: Page;
 
 test.beforeAll(async () => {
   page = await creerUtilisateurConnecte();
 });
-//await expect(page).toHaveTitle('Agir ! - Agir');
+
 test.describe('Mission 1', async () => {
   test('Objectif 1 - récolter ses premiers points', async () => {
     await expect(page).toHaveTitle('Agir ! - Agir');
@@ -86,6 +85,7 @@ test.describe('Mission 1', async () => {
   });
   test('Mission 2', async () => {
     await expect(page.locator('#app').getByText('Mission 2')).toBeVisible();
+    // lire un article et passer de niveau
   });
 });
 
