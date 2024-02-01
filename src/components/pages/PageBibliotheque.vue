@@ -2,7 +2,7 @@
   <div class="fr-container fr-pb-6w">
     <FilDAriane page-courante="Bibliothèque" />
     <h1 class="fr-h2">Base de connaissance</h1>
-    <div class="fr-grid-row">
+    <div v-if="bibliothequeViewModel" class="fr-grid-row">
       <div class="fr-col-md-4 fr-col-12">
         <h2 class="fr-h4">Filtres</h2>
         <InputCheckbox
@@ -10,14 +10,14 @@
           label="Thématiques"
           :options="bibliothequeViewModel.filtres"
           @update="updateThematique"
+          v-model="bibliothequeViewModel.filtres"
         />
       </div>
       <div class="fr-col-md-8 fr-col-12">
-        <h2 class="fr-h4">124 articles</h2>
+        <h2 class="fr-h4">{{ bibliothequeViewModel.articles.length }} articles</h2>
         <div class="fr-grid-row fr-grid-row--gutters">
-          <div class="fr-col-6" v-for="article in bibliothequeViewModel.articles">
+          <div class="fr-col-6" v-for="article in bibliothequeViewModel.articles" :key="article.titre">
             <BibliothequeCard
-              :key="article.titre"
               :titre="article.titre"
               :image="article.image"
               :description="article.description"
@@ -28,6 +28,7 @@
         </div>
       </div>
     </div>
+    <div v-else>Chargement en cours ...</div>
   </div>
 </template>
 
@@ -35,73 +36,23 @@
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import InputCheckbox from '@/components/dsfr/InputCheckbox.vue';
   import BibliothequeCard from '@/components/custom/Bibliotheque/BibliothequeCard.vue';
+  import { BibliothequeViewModel } from '@/bibliotheque/ports/bibliotheque.presenter';
+  import { ref } from 'vue';
+  import { ChargerBibliothequeUsecase } from '@/bibliotheque/chargerBibliotheque.usecase';
+  import { BibliothequeRepositoryInmemory } from '@/bibliotheque/adapters/bibliotheque.repository.inmemory';
+  import { utilisateurStore } from '@/store/utilisateur';
+  import { BibliothequePresenterImpl } from '@/bibliotheque/adapters/bibliotheque.presenter.impl';
 
-  interface BibliothequeViewModel {
-    articles: {
-      titre: string;
-      thematique: string;
-      description: string;
-      url: string;
-      image: string;
-    }[];
-    filtres: {
-      id: string;
-      label: string;
-      checked: boolean;
-    }[];
-  }
+  const bibliothequeViewModel = ref<BibliothequeViewModel>();
 
-  const bibliothequeViewModel: BibliothequeViewModel = {
-    articles: [
-      {
-        titre: 'Par où commencer la rénovation de sa maison ?',
-        thematique: '🌍 Global',
-        description: 'lorem ipsum dolor description un peu longue hello',
-        url: '1',
-        image: 'https://picsum.photos/300/200',
-      },
-      {
-        titre: 'Le coût carbone d’un t-shirt',
-        thematique: '🌍 Global',
-        description: 'lorem ipsum dolor description un peu longue hello',
-        url: '1',
-        image: 'https://picsum.photos/400/400',
-      },
-      {
-        titre: 'C’est quoi 5 tonnes de CO2e ?',
-        thematique: '🌍 Global',
-        description: 'lorem ipsum dolor description un peu longue hello',
-        url: '1',
-        image: 'https://picsum.photos/400/400',
-      },
-      {
-        titre: 'Quelle est la mission de l’ADEME ?',
-        thematique: '🌍 Global',
-        description: 'lorem ipsum dolor description un peu longue hello',
-        url: '1',
-        image: 'https://picsum.photos/300/200',
-      },
-    ],
-    filtres: [
-      {
-        id: 'id',
-        label: '🛒 Consommation',
-        checked: true,
-      },
-      {
-        id: 'id2',
-        label: '🏠 Logement',
-        checked: true,
-      },
-      {
-        id: 'id3',
-        label: '🚲 Transports',
-        checked: true,
-      },
-    ],
-  };
+  const chargerBibliothequeUsecase = new ChargerBibliothequeUsecase(new BibliothequeRepositoryInmemory());
+  const bibliothequePresenterImpl = new BibliothequePresenterImpl(
+    viewModel => (bibliothequeViewModel.value = viewModel)
+  );
+  chargerBibliothequeUsecase.execute(utilisateurStore().utilisateur.id, [], bibliothequePresenterImpl);
 
-  const updateThematique = () => {
+  const updateThematique = values => {
     //appel du usecase
+    chargerBibliothequeUsecase.execute(utilisateurStore().utilisateur.id, values || [], bibliothequePresenterImpl);
   };
 </script>
