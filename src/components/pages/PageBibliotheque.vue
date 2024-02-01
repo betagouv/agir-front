@@ -39,7 +39,7 @@
   import { BibliothequeViewModel } from '@/bibliotheque/ports/bibliotheque.presenter';
   import { onMounted, ref } from 'vue';
   import { ChargerBibliothequeUsecase } from '@/bibliotheque/chargerBibliotheque.usecase';
-  import { BibliothequeRepositoryInmemory } from '@/bibliotheque/adapters/bibliotheque.repository.inmemory';
+  import { BibliothequeRepositoryAxios } from '@/bibliotheque/adapters/bibliotheque.repository.axios';
   import { utilisateurStore } from '@/store/utilisateur';
   import { BibliothequePresenterImpl } from '@/bibliotheque/adapters/bibliotheque.presenter.impl';
 
@@ -47,7 +47,7 @@
 
   const bibliothequeViewModel = ref<BibliothequeViewModel>();
 
-  const chargerBibliothequeUsecase = new ChargerBibliothequeUsecase(new BibliothequeRepositoryInmemory());
+  const chargerBibliothequeUsecase = new ChargerBibliothequeUsecase(new BibliothequeRepositoryAxios());
   const bibliothequePresenterImpl = new BibliothequePresenterImpl(
     viewModel => (bibliothequeViewModel.value = viewModel)
   );
