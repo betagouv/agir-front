@@ -1,7 +1,7 @@
 <template>
   <div class="fr-container fr-pb-6w">
     <FilDAriane page-courante="Bibliothèque" />
-    <h1 class="fr-h2">Base de connaissance</h1>
+    <h1 class="fr-h2">Base de connaissances</h1>
     <div v-if="bibliothequeViewModel" class="fr-grid-row">
       <div class="fr-col-md-4 fr-col-12">
         <h2 class="fr-h4">Filtres</h2>
@@ -37,11 +37,13 @@
   import InputCheckbox from '@/components/dsfr/InputCheckbox.vue';
   import BibliothequeCard from '@/components/custom/Bibliotheque/BibliothequeCard.vue';
   import { BibliothequeViewModel } from '@/bibliotheque/ports/bibliotheque.presenter';
-  import { ref } from 'vue';
+  import { onMounted, ref } from 'vue';
   import { ChargerBibliothequeUsecase } from '@/bibliotheque/chargerBibliotheque.usecase';
   import { BibliothequeRepositoryInmemory } from '@/bibliotheque/adapters/bibliotheque.repository.inmemory';
   import { utilisateurStore } from '@/store/utilisateur';
   import { BibliothequePresenterImpl } from '@/bibliotheque/adapters/bibliotheque.presenter.impl';
+
+  const { id: utilisateurId } = utilisateurStore().utilisateur;
 
   const bibliothequeViewModel = ref<BibliothequeViewModel>();
 
@@ -49,10 +51,12 @@
   const bibliothequePresenterImpl = new BibliothequePresenterImpl(
     viewModel => (bibliothequeViewModel.value = viewModel)
   );
-  chargerBibliothequeUsecase.execute(utilisateurStore().utilisateur.id, [], bibliothequePresenterImpl);
+
+  onMounted(() => {
+    chargerBibliothequeUsecase.execute(utilisateurId, [], bibliothequePresenterImpl);
+  });
 
   const updateThematique = values => {
-    //appel du usecase
-    chargerBibliothequeUsecase.execute(utilisateurStore().utilisateur.id, values || [], bibliothequePresenterImpl);
+    chargerBibliothequeUsecase.execute(utilisateurId, values || [], bibliothequePresenterImpl);
   };
 </script>
