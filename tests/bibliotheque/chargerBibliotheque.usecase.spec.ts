@@ -3,13 +3,14 @@ import { BibliothequePresenterImpl } from '@/bibliotheque/adapters/bibliotheque.
 import { BibliothequeRepositoryMock } from './adapters/bibliotheque.repository.mock';
 
 describe('Fichier de tests concernant le chargement de la bibliotheque', () => {
-  it("En donnant l'id utilisateur et une liste de filtres de thématique doit charger la bibliotheque", async () => {
+  it("En donnant l'id utilisateur, une liste de filtres de thématique et un titre doit charger la bibliotheque", async () => {
     // GIVEN
     // WHEN
     const bibliothequeUsecase = new ChargerBibliothequeUsecase(new BibliothequeRepositoryMock());
     await bibliothequeUsecase.execute(
       '1',
       [],
+      '',
       new BibliothequePresenterImpl(viewModel => {
         expect(viewModel.articles).toStrictEqual([
           {
