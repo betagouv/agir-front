@@ -1,6 +1,7 @@
 import { RecommandationPersonnalisee } from '@/recommandationsPersonnalisees/recommandationsPersonnalisees.usecase';
 import { InteractionType } from '@/shell/interactionType';
 import { RecommandationsPersonnaliseesPresenter } from '@/recommandationsPersonnalisees/ports/recommandationsPersonnalisees.presenter';
+import { buildUrl } from '@/shell/buildUrl';
 
 export interface RecommandationViewModel {
   titre: string;
@@ -64,7 +65,7 @@ export class RecommandationsPersonnaliseesPresenterImpl implements Recommandatio
       case InteractionType.QUIZ:
         return `/agir/quiz/${recommandationPersonnalisee.idDuContenu}`;
       case InteractionType.ARTICLE:
-        return `/article/${recommandationPersonnalisee.titre}/${recommandationPersonnalisee.idDuContenu}`;
+        return `/article/${buildUrl(recommandationPersonnalisee.titre)}/${recommandationPersonnalisee.idDuContenu}`;
       case InteractionType.KYC:
         return '';
       case InteractionType.SUIVIDUJOUR:
