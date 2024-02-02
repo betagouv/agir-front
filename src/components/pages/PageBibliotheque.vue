@@ -2,8 +2,15 @@
   <div class="fr-container fr-pb-6w">
     <FilDAriane page-courante="Bibliothèque" />
     <h1 class="fr-h2">Base de connaissances</h1>
-    <div v-if="bibliothequeViewModel" class="fr-grid-row">
+    <div v-if="bibliothequeViewModel" class="fr-grid-row fr-grid-row--gutters">
       <div class="fr-col-md-4 fr-col-12">
+        <InputSearchBar
+          id="rechercheParTitre"
+          name="titreRessource"
+          placeholder="Rechercher par titre"
+          class="fr-mb-2w"
+          @submit="rechercherParTitre"
+        />
         <h2 class="fr-h4">Filtres</h2>
         <InputCheckbox
           id="thematiqueArticle"
@@ -42,6 +49,7 @@
   import { BibliothequeRepositoryAxios } from '@/bibliotheque/adapters/bibliotheque.repository.axios';
   import { utilisateurStore } from '@/store/utilisateur';
   import { BibliothequePresenterImpl } from '@/bibliotheque/adapters/bibliotheque.presenter.impl';
+  import InputSearchBar from '../dsfr/InputSearchBar.vue';
 
   const { id: utilisateurId } = utilisateurStore().utilisateur;
 
@@ -58,5 +66,9 @@
 
   const updateThematique = values => {
     chargerBibliothequeUsecase.execute(utilisateurId, values || [], bibliothequePresenterImpl);
+  };
+
+  const rechercherParTitre = value => {
+    console.log({ value });
   };
 </script>
