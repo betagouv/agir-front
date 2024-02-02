@@ -21,7 +21,7 @@ export class BibliothequeRepositoryAxios implements BibliothequeRepository {
   async chargerBibliotheque(
     utilisateurId: string,
     filtreThematiquesIds: string[],
-    titre?: string
+    titre: string
   ): Promise<Bibliotheque> {
     const axiosInstance = AxiosFactory.getAxios();
 

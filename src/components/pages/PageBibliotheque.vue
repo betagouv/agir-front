@@ -54,8 +54,8 @@
   const { id: utilisateurId } = utilisateurStore().utilisateur;
 
   const bibliothequeViewModel = ref<BibliothequeViewModel>();
-  const searchTitre = ref<string>();
-  const filtresThematiques = ref<string[]>();
+  const searchTitre = ref<string>('');
+  const filtresThematiques = ref<string[]>([]);
 
   const chargerBibliothequeUsecase = new ChargerBibliothequeUsecase(new BibliothequeRepositoryAxios());
   const bibliothequePresenterImpl = new BibliothequePresenterImpl(
@@ -63,28 +63,25 @@
   );
 
   onMounted(async () => {
-    await chargerBibliothequeUsecase.execute(utilisateurId, [], bibliothequePresenterImpl);
+    await lancerLaRecherche();
   });
 
   const updateThematique = async thematiques => {
     filtresThematiques.value = thematiques;
-
-    await chargerBibliothequeUsecase.execute(
-      utilisateurId,
-      thematiques || [],
-      bibliothequePresenterImpl,
-      searchTitre.value
-    );
+    await lancerLaRecherche();
   };
 
   const rechercherParTitre = async titre => {
     searchTitre.value = titre;
+    await lancerLaRecherche();
+  };
 
+  const lancerLaRecherche = async () => {
     await chargerBibliothequeUsecase.execute(
       utilisateurId,
-      filtresThematiques.value || [],
-      bibliothequePresenterImpl,
-      titre
+      filtresThematiques.value,
+      searchTitre.value,
+      bibliothequePresenterImpl
     );
   };
 </script>

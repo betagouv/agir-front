@@ -7,8 +7,8 @@ export class ChargerBibliothequeUsecase {
   async execute(
     utilisateurId: string,
     filtresThematiques: string[],
-    presenter: BibliothequePresenter,
-    titre?: string
+    titre: string,
+    presenter: BibliothequePresenter
   ): Promise<void> {
     const bibliotheque = await this.bibliothequeRepository.chargerBibliotheque(
       utilisateurId,
