@@ -16,7 +16,7 @@
       <div class="fr-col-md-8 fr-col-12">
         <h2 class="fr-h4">{{ bibliothequeViewModel.articles.length }} articles</h2>
         <div class="fr-grid-row fr-grid-row--gutters">
-          <div class="fr-col-6" v-for="article in bibliothequeViewModel.articles" :key="article.titre">
+          <div class="fr-col-md-6 fr-col-12" v-for="article in bibliothequeViewModel.articles" :key="article.titre">
             <BibliothequeCard
               :titre="article.titre"
               :image="article.image"
