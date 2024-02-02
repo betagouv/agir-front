@@ -18,8 +18,7 @@
   }>();
 
   const search = ref<string>('');
-
-  const emit = defineEmits(['submit']);
+  const emit = defineEmits<{ (event: 'submit', value: string): void }>();
 
   const submitSearch = () => emit('submit', search.value);
 </script>

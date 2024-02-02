@@ -49,26 +49,42 @@
   import { BibliothequeRepositoryAxios } from '@/bibliotheque/adapters/bibliotheque.repository.axios';
   import { utilisateurStore } from '@/store/utilisateur';
   import { BibliothequePresenterImpl } from '@/bibliotheque/adapters/bibliotheque.presenter.impl';
-  import InputSearchBar from '../dsfr/InputSearchBar.vue';
+  import InputSearchBar from '@/components/dsfr/InputSearchBar.vue';
 
   const { id: utilisateurId } = utilisateurStore().utilisateur;
 
   const bibliothequeViewModel = ref<BibliothequeViewModel>();
+  const searchTitre = ref<string>();
+  const filtresThematiques = ref<string[]>();
 
   const chargerBibliothequeUsecase = new ChargerBibliothequeUsecase(new BibliothequeRepositoryAxios());
   const bibliothequePresenterImpl = new BibliothequePresenterImpl(
     viewModel => (bibliothequeViewModel.value = viewModel)
   );
 
-  onMounted(() => {
-    chargerBibliothequeUsecase.execute(utilisateurId, [], bibliothequePresenterImpl);
+  onMounted(async () => {
+    await chargerBibliothequeUsecase.execute(utilisateurId, [], bibliothequePresenterImpl);
   });
 
-  const updateThematique = values => {
-    chargerBibliothequeUsecase.execute(utilisateurId, values || [], bibliothequePresenterImpl);
+  const updateThematique = async thematiques => {
+    filtresThematiques.value = thematiques;
+
+    await chargerBibliothequeUsecase.execute(
+      utilisateurId,
+      thematiques || [],
+      bibliothequePresenterImpl,
+      searchTitre.value
+    );
   };
 
-  const rechercherParTitre = value => {
-    console.log({ value });
+  const rechercherParTitre = async titre => {
+    searchTitre.value = titre;
+
+    await chargerBibliothequeUsecase.execute(
+      utilisateurId,
+      filtresThematiques.value || [],
+      bibliothequePresenterImpl,
+      titre
+    );
   };
 </script>
