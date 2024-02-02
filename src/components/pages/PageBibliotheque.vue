@@ -2,7 +2,8 @@
   <div class="fr-container fr-pb-6w">
     <FilDAriane page-courante="Bibliothèque" />
     <h1 class="fr-h2">Base de connaissances</h1>
-    <div v-if="bibliothequeViewModel" class="fr-grid-row fr-grid-row--gutters">
+    <div v-if="isLoading">Chargement en cours ...</div>
+    <div v-else-if="!isLoading && bibliothequeViewModel" class="fr-grid-row fr-grid-row--gutters">
       <div class="fr-col-md-4 fr-col-12">
         <InputSearchBar
           id="rechercheParTitre"
@@ -35,7 +36,7 @@
         </div>
       </div>
     </div>
-    <div v-else>Chargement en cours ...</div>
+    <div v-else>Problème de chargement de donées</div>
   </div>
 </template>
 
@@ -53,6 +54,7 @@
 
   const { id: utilisateurId } = utilisateurStore().utilisateur;
 
+  const isLoading = ref<boolean>(true);
   const bibliothequeViewModel = ref<BibliothequeViewModel>();
   const searchTitre = ref<string>('');
   const filtresThematiques = ref<string[]>([]);
@@ -64,16 +66,19 @@
 
   onMounted(async () => {
     await lancerLaRecherche();
+    isLoading.value = false;
   });
 
   const updateThematique = async thematiques => {
     filtresThematiques.value = thematiques;
     await lancerLaRecherche();
+    isLoading.value = false;
   };
 
   const rechercherParTitre = async titre => {
     searchTitre.value = titre;
     await lancerLaRecherche();
+    isLoading.value = false;
   };
 
   const lancerLaRecherche = async () => {
