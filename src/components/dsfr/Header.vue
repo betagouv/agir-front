@@ -73,7 +73,7 @@
               <router-link
                 class="fr-nav__link"
                 :to="{ name: RouteCoachName.COACH }"
-                :aria-current="isCoachActif ? 'page' : null"
+                :aria-current="route.name === RouteCoachName.COACH ? 'page' : null"
               >
                 Agir
               </router-link>
@@ -94,9 +94,18 @@
               <router-link
                 class="fr-nav__link"
                 :to="{ name: RouteAidesName.VOS_AIDES }"
-                :aria-current="isMesAidesActif ? 'page' : null"
+                :aria-current="route.name === RouteAidesName.VOS_AIDES ? 'page' : null"
               >
                 Vos aides
+              </router-link>
+            </li>
+            <li class="fr-nav__item" data-fr-js-navigation-item="true">
+              <router-link
+                class="fr-nav__link"
+                :to="{ name: RouteCoachName.BIBLIOTHEQUE }"
+                :aria-current="route.name === RouteCoachName.BIBLIOTHEQUE ? 'page' : null"
+              >
+                Bibliothèque
               </router-link>
             </li>
           </ul>
@@ -107,7 +116,7 @@
 </template>
 
 <script setup lang="ts">
-  import { computed, ref, watch } from 'vue';
+  import { computed } from 'vue';
   import { useRoute } from 'vue-router';
   import { RouteCommuneName } from '@/router';
   import { utilisateurStore } from '@/store/utilisateur';
@@ -123,38 +132,11 @@
   const route = useRoute();
   const store = utilisateurStore();
 
-  const isCoachActif = ref(false);
-  const isMesAidesActif = ref(false);
-
   const nomUtilisateur = computed(() => store.utilisateur.prenom);
   const estConnecte = computed(() => store.utilisateur.nom.length > 0);
-
-  watch(
-    () => route.path,
-    newPath => {
-      isCoachActif.value = newPath.includes('/agir');
-      isMesAidesActif.value = newPath.includes('/vos-aides');
-    }
-  );
 </script>
 
 <style scoped>
-  .tag__progression {
-    display: flex;
-    padding: 0.5rem;
-    align-items: center;
-    gap: 0.5rem;
-    border-radius: 8px;
-  }
-
-  .tag__progression.score {
-    background: rgba(104, 165, 50, 0.1);
-  }
-
-  .tag__progression.niveau {
-    background: rgba(237, 142, 0, 0.1);
-  }
-
   .utilisateur {
     display: flex;
     align-items: center;
