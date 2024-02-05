@@ -63,6 +63,7 @@ async function recolterPoints(page: Page) {
   for (const bouton of await page.getByRole('button', { name: 'Récolter vos' }).all()) {
     await expect(bouton).toBeVisible();
     await bouton.click({ force: true });
+    await page.waitForTimeout(500);
     await expect(bouton).toBeDisabled();
     if (await page.locator('dialog#passageDeNiveau').isVisible()) {
       await checkPassageNiveau(page);
