@@ -51,8 +51,8 @@ test.describe('Mission 2', async () => {
     await cliqueTodo(page);
     await expect(page.locator('#app').getByText('Mission 2')).toBeVisible();
     await recolterPoints(page);
-  });
-});*/
+  });*/
+});
 
 test.afterAll(async () => {
   await supprimerUtilisateur(page);
