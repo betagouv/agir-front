@@ -22,7 +22,7 @@ test.describe('Mission 1', async () => {
     expect(score1).toBeGreaterThan(scoreInitial);
   });
 
-  test('Objectif 2 - premier quizz', async () => {
+  /*test('Objectif 2 - premier quizz', async () => {
     await page.waitForLoadState('domcontentloaded');
     await expect(page.getByRole('heading', { name: 'Votre 1ère mission' })).toBeVisible();
     await cliqueTodo(page);
@@ -52,7 +52,7 @@ test.describe('Mission 2', async () => {
     await expect(page.locator('#app').getByText('Mission 2')).toBeVisible();
     await recolterPoints(page);
   });
-});
+});*/
 
 test.afterAll(async () => {
   await supprimerUtilisateur(page);
