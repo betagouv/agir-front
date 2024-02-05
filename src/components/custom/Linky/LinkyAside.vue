@@ -2,7 +2,7 @@
   <CarteVierge class="fr-mb-2w">
     <h2 class="fr-h4">Paramétrage</h2>
     <p class="fr-mb-0">
-      <button class="fr-link" data-fr-opened="false" aria-controls="linky">Paramétrer le service linky</button>
+      <button class="fr-link" data-fr-opened="false" aria-controls="linky">Paramétrer le service Linky</button>
     </p>
   </CarteVierge>
   <CarteExplication>

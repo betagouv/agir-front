@@ -32,7 +32,7 @@
       </template>
     </Modale>
     <button class="fr-btn fr-hidden" data-fr-opened="false" aria-controls="linky">
-      Modale configuration compteur linky
+      Modale configuration compteur Linky
     </button>
   </Teleport>
 </template>
