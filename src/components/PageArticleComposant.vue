@@ -7,11 +7,16 @@
         <div class="article fr-p-6v background--white border-radius--md">
           <h2 class="fr-h3">{{ article.sousTitre }}</h2>
           <div class="cms__content" v-html="article.texte" />
-          <div class="fr-grid-row fr-grid-row--middle flex-space-between border border-radius--md fr-p-2w">
+          <div class="print-hidden fr-grid-row fr-grid-row--middle flex-space-between border border-radius--md fr-p-2w">
             <span class="fr-m-0 fr-text--bold fr-text--md">Comment avez-vous trouvé cet article ?</span>
             <Notation @rated="noterLarticle" />
           </div>
-          <router-link class="fr-btn fr-mt-5v" :to="{ name: RouteCoachName.COACH }"> Revenir à l'accueil </router-link>
+          <div class="print-hidden fr-grid-row fr-mt-5v fr-grid-row--middle flex-space-between">
+            <router-link class="fr-btn" :to="{ name: RouteCoachName.COACH }"> Revenir à l'accueil </router-link>
+            <button class="fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-printer-fill" @click="imprimer">
+              Imprimer
+            </button>
+          </div>
         </div>
       </div>
       <div class="fr-col-12 fr-col-md-4">
@@ -38,6 +43,9 @@
   const noterLarticle = note => {
     const noterArticleUseCase = new EvaluerArticleUsecase(new ArticleRepositoryAxios());
     noterArticleUseCase.execute(props.article.id, utilisateurStore().utilisateur.id, note);
+  };
+  const imprimer = () => {
+    window.print();
   };
 </script>
 

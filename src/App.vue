@@ -30,7 +30,7 @@
 
 <template>
   <div class="page-container">
-    <Header />
+    <Header class="print-hidden" />
     <main class="background--gris">
       <Services
         v-if="
@@ -41,7 +41,7 @@
       <router-view />
     </main>
 
-    <Footer />
+    <Footer class="print-hidden" />
   </div>
 </template>
 

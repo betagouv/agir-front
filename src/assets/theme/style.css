@@ -290,3 +290,9 @@ h3 {
   background-image: url('/bg_changement_situation.jpg');
   background-size: cover;
 }
+
+@media print {
+  .print-hidden {
+    display: none;
+  }
+}

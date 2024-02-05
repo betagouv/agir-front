@@ -89,7 +89,7 @@ describe('Fichier de tests concernant la récupération de la ToDo List', () => 
             thematique: '🌍 Global',
             titre: 'Article qui doit être en avant',
             type: 'article',
-            url: '/article/Article qui doit être en avant/1',
+            url: '/article/article-qui-doit-etre-en-avant/1',
           },
         ],
         pointFinDeMission: 30,
