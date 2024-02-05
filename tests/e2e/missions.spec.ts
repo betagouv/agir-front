@@ -78,7 +78,7 @@ async function checkPassageNiveau(page: Page) {
 }
 
 async function cliqueTodo(page: Page) {
-  const nextTodo = await page.locator('h3:text("À faire") ~ ul li:first-child a');
+  const nextTodo = page.locator('h3:text("À faire") ~ ul li:first-child a');
   const nextTodoUrl = (await nextTodo.getAttribute('href')) || '';
   if (nextTodoUrl.includes('article')) {
     await lireArticle(nextTodo, page);
@@ -110,6 +110,7 @@ async function repondreQuiz(linkElement: Locator, page: Page): Promise<Page> {
     return exactTrueResponse ? exactTrueResponse.reponse : null;
   });
 
+  await page.waitForLoadState('domcontentloaded');
   // vérifie que l'on est sur la page du quiz
   await expect(page).toHaveTitle('Agir ! - Quiz');
   // vérification que le contenu est bien chargé et affiché
