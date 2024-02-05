@@ -2,15 +2,13 @@
   <div class="fr-container fr-pb-6w">
     <FilDAriane page-courante="Bibliothèque" />
     <h1 class="fr-h2">Base de connaissances</h1>
-    <div v-if="bibliothequeViewModel" class="fr-grid-row">
+    <div v-if="isLoading">Chargement en cours ...</div>
+    <div v-else-if="!isLoading && bibliothequeViewModel" class="fr-grid-row fr-grid-row--gutters">
       <div class="fr-col-md-4 fr-col-12">
-        <h2 class="fr-h4">Filtres</h2>
-        <InputCheckbox
-          id="thematiqueArticle"
-          label="Thématiques"
-          :options="bibliothequeViewModel.filtres"
-          @update="updateThematique"
-          v-model="bibliothequeViewModel.filtres"
+        <BibliothequeFiltres
+          @rechercher-par-titre="rechercherParTitre"
+          @update-thematiques="updateThematiques"
+          :filtres="bibliothequeViewModel.filtres"
         />
       </div>
       <div class="fr-col-md-8 fr-col-12">
@@ -28,35 +26,56 @@
         </div>
       </div>
     </div>
-    <div v-else>Chargement en cours ...</div>
+    <div v-else>Problème de chargement de donées</div>
   </div>
 </template>
 
 <script setup lang="ts">
-  import FilDAriane from '@/components/dsfr/FilDAriane.vue';
-  import InputCheckbox from '@/components/dsfr/InputCheckbox.vue';
-  import BibliothequeCard from '@/components/custom/Bibliotheque/BibliothequeCard.vue';
-  import { BibliothequeViewModel } from '@/bibliotheque/ports/bibliotheque.presenter';
   import { onMounted, ref } from 'vue';
+  import FilDAriane from '@/components/dsfr/FilDAriane.vue';
+  import BibliothequeFiltres from '@/components/custom/Bibliotheque/BibliothequeFiltres.vue';
+  import BibliothequeCard from '@/components/custom/Bibliotheque/BibliothequeCard.vue';
+  import { utilisateurStore } from '@/store/utilisateur';
   import { ChargerBibliothequeUsecase } from '@/bibliotheque/chargerBibliotheque.usecase';
   import { BibliothequeRepositoryAxios } from '@/bibliotheque/adapters/bibliotheque.repository.axios';
-  import { utilisateurStore } from '@/store/utilisateur';
   import { BibliothequePresenterImpl } from '@/bibliotheque/adapters/bibliotheque.presenter.impl';
+  import { BibliothequeViewModel } from '@/bibliotheque/ports/bibliotheque.presenter';
 
   const { id: utilisateurId } = utilisateurStore().utilisateur;
 
+  const isLoading = ref<boolean>(true);
   const bibliothequeViewModel = ref<BibliothequeViewModel>();
+  const searchTitre = ref<string>('');
+  const filtresThematiques = ref<string[]>([]);
 
   const chargerBibliothequeUsecase = new ChargerBibliothequeUsecase(new BibliothequeRepositoryAxios());
   const bibliothequePresenterImpl = new BibliothequePresenterImpl(
     viewModel => (bibliothequeViewModel.value = viewModel)
   );
 
-  onMounted(() => {
-    chargerBibliothequeUsecase.execute(utilisateurId, [], bibliothequePresenterImpl);
+  onMounted(async () => {
+    await lancerLaRecherche();
+    isLoading.value = false;
   });
 
-  const updateThematique = values => {
-    chargerBibliothequeUsecase.execute(utilisateurId, values || [], bibliothequePresenterImpl);
+  const updateThematiques = async thematiques => {
+    filtresThematiques.value = thematiques;
+    await lancerLaRecherche();
+    isLoading.value = false;
+  };
+
+  const rechercherParTitre = async titre => {
+    searchTitre.value = titre;
+    await lancerLaRecherche();
+    isLoading.value = false;
+  };
+
+  const lancerLaRecherche = async () => {
+    await chargerBibliothequeUsecase.execute(
+      utilisateurId,
+      filtresThematiques.value,
+      searchTitre.value,
+      bibliothequePresenterImpl
+    );
   };
 </script>

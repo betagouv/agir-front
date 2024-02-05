@@ -4,8 +4,17 @@ import { BibliothequePresenter } from '@/bibliotheque/ports/bibliotheque.present
 export class ChargerBibliothequeUsecase {
   constructor(private readonly bibliothequeRepository: BibliothequeRepository) {}
 
-  async execute(utilisateurId: string, filtresThematiques: string[], presenter: BibliothequePresenter): Promise<void> {
-    const bibliotheque = await this.bibliothequeRepository.chargerBibliotheque(utilisateurId, filtresThematiques);
+  async execute(
+    utilisateurId: string,
+    filtresThematiques: string[],
+    titre: string,
+    presenter: BibliothequePresenter
+  ): Promise<void> {
+    const bibliotheque = await this.bibliothequeRepository.chargerBibliotheque(
+      utilisateurId,
+      filtresThematiques,
+      titre
+    );
     presenter.presente(bibliotheque);
   }
 }
