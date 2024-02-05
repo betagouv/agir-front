@@ -25,19 +25,7 @@ export class BibliothequeRepositoryAxios implements BibliothequeRepository {
   ): Promise<Bibliotheque> {
     const axiosInstance = AxiosFactory.getAxios();
 
-    const thematiquesParam =
-      filtreThematiquesIds.length > 0 ? `filtre_thematiques=${filtreThematiquesIds.join(',')}` : null;
-    const titreParam = titre ? `titre=${titre}` : null;
-
-    const paramsArray: string[] = [];
-    if (thematiquesParam) {
-      paramsArray.push(thematiquesParam);
-    }
-    if (titreParam) {
-      paramsArray.push(titreParam);
-    }
-
-    const params = paramsArray.length > 0 ? `?${paramsArray.join('&')}` : '';
+    const params = this.buildFiltres(filtreThematiquesIds, titre);
 
     const response = await axiosInstance.get<BibliothequeApiModel>(
       `/utilisateurs/${utilisateurId}/bibliotheque${params}`
@@ -57,5 +45,21 @@ export class BibliothequeRepositoryAxios implements BibliothequeRepository {
         checked: filtre.selected,
       })),
     };
+  }
+
+  private buildFiltres(filtreThematiquesIds: string[], titre: string) {
+    const thematiquesParam =
+      filtreThematiquesIds.length > 0 ? `filtre_thematiques=${filtreThematiquesIds.join(',')}` : null;
+    const titreParam = titre ? `titre=${titre}` : null;
+
+    const paramsArray: string[] = [];
+    if (thematiquesParam) {
+      paramsArray.push(thematiquesParam);
+    }
+    if (titreParam) {
+      paramsArray.push(titreParam);
+    }
+
+    return paramsArray.length > 0 ? `?${paramsArray.join('&')}` : '';
   }
 }
