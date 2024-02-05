@@ -1,7 +1,7 @@
 import { ToDoListPresenter } from '@/toDoList/ports/toDoList.presenter';
 import { TodoList, TodoListItem } from '@/toDoList/recupererToDoList.usecase';
 import { InteractionType } from '@/shell/interactionType';
-import { stringUtils } from '@/shell/stringUtils';
+import { buildUrl } from '@/shell/buildUrl';
 
 interface TodoViewModel {
   id: string;
@@ -65,7 +65,7 @@ export class ToDoListPresenterImpl implements ToDoListPresenter {
       case InteractionType.QUIZ:
         return `/agir/quiz/${todo.contentId}`;
       case InteractionType.ARTICLE:
-        return `/article/${stringUtils(todo.titre)}/${todo.contentId}`;
+        return `/article/${buildUrl(todo.titre)}/${todo.contentId}`;
       case InteractionType.KYC:
         return `/kyc/${todo.contentId}`;
       case InteractionType.SUIVIDUJOUR:

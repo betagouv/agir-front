@@ -1,6 +1,6 @@
 import { BibliothequePresenter, BibliothequeViewModel } from '@/bibliotheque/ports/bibliotheque.presenter';
 import { Bibliotheque } from '../ports/bibliotheque.repository';
-import { stringUtils } from '@/shell/stringUtils';
+import { buildUrl } from '@/shell/buildUrl';
 
 export class BibliothequePresenterImpl implements BibliothequePresenter {
   constructor(private readonly bibliothequeViewModel: (viewModel: BibliothequeViewModel) => void) {}
@@ -11,7 +11,7 @@ export class BibliothequePresenterImpl implements BibliothequePresenter {
         titre: ressource.titre,
         thematique: ressource.thematique,
         description: ressource.description,
-        url: `/article/${stringUtils(ressource.titre)}/${ressource.contentId}`,
+        url: `/article/${buildUrl(ressource.titre)}/${ressource.contentId}`,
         image: ressource.image,
         favoris: ressource.favoris,
       })),
