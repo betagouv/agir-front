@@ -22,13 +22,13 @@ test.describe('Mission 1', async () => {
     expect(score1).toBeGreaterThan(scoreInitial);
   });
 
-  /*test('Objectif 2 - premier quizz', async () => {
+  test('Objectif 2 - premier quizz', async () => {
     await page.waitForLoadState('domcontentloaded');
     await expect(page.getByRole('heading', { name: 'Votre 1ère mission' })).toBeVisible();
     await cliqueTodo(page);
   });
 
-  test('récolte et bonus', async () => {
+  /*test('récolte et bonus', async () => {
     await page.waitForLoadState('domcontentloaded');
     await page.waitForSelector('.utilisateur .score');
     await expect(page).toHaveTitle('Agir ! - Agir');
@@ -131,7 +131,7 @@ async function repondreQuiz(linkElement: Locator, page: Page): Promise<Page> {
   // cliquer sur le bouton suivant
   const continuer = page.getByRole('link', { name: 'Continuer' });
   await expect(continuer).toBeVisible();
-  continuer.click({ force: true });
+  await continuer.click({ force: true });
 
   return page;
 }
