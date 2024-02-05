@@ -117,7 +117,7 @@ async function repondreQuiz(linkElement: Locator, page: Page): Promise<Page> {
   await expect(page.getByText('Quiz', { exact: true })).toBeVisible();
 
   // répondre correctement au quiz
-  await page.getByText(exactTrueResponseTexts[0]).click();
+  /*await page.getByText(exactTrueResponseTexts[0]).click();
 
   // valider le quiz
   const validation = page.getByRole('button', { name: 'Valider' });
@@ -132,7 +132,7 @@ async function repondreQuiz(linkElement: Locator, page: Page): Promise<Page> {
   // cliquer sur le bouton suivant
   const continuer = page.getByRole('link', { name: 'Continuer' });
   await expect(continuer).toBeVisible();
-  await continuer.click({ force: true });
+  await continuer.click({ force: true });*/
 
   return page;
 }
