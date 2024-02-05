@@ -13,6 +13,20 @@
           </div>
           <div class="print-hidden fr-grid-row fr-mt-5v fr-grid-row--middle flex-space-between">
             <router-link class="fr-btn" :to="{ name: RouteCoachName.COACH }"> Revenir à l'accueil </router-link>
+            <button
+              v-if="!article.estEnFavori"
+              class="fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-heart-fill"
+              @click="ajouterAuxFavoris"
+            >
+              Ajouter aux favoris
+            </button>
+            <button
+              v-else
+              class="fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-heart-fill"
+              @click="retirerDesFavoris"
+            >
+              Retirer des favoris
+            </button>
             <button class="fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-printer-fill" @click="imprimer">
               Imprimer
             </button>
@@ -35,9 +49,14 @@
   import { ArticleRepositoryAxios } from '@/article/adapters/article.repository.axios';
   import { utilisateurStore } from '@/store/utilisateur';
   import { EvaluerArticleUsecase } from '@/article/evaluerArticle.usecase';
+  import { AjouterAuxFavorisUsecase } from '@/article/ajouterAuxFavoris.usecase';
 
   const props = defineProps<{
     article: Article;
+  }>();
+
+  const emit = defineEmits<{
+    (e: 'update:articleModifie', value: Article): void;
   }>();
 
   const noterLarticle = note => {
@@ -46,6 +65,16 @@
   };
   const imprimer = () => {
     window.print();
+  };
+
+  const ajouterAuxFavoris = async () => {
+    const ajouterAuxFavorisUsecase = new AjouterAuxFavorisUsecase(new ArticleRepositoryAxios());
+    await ajouterAuxFavorisUsecase.execute(props.article.id, utilisateurStore().utilisateur.id);
+    emit('update:articleModifie', { ...props.article, estEnFavori: true });
+  };
+
+  const retirerDesFavoris = () => {
+    emit('update:articleModifie', { ...props.article, estEnFavori: false });
   };
 </script>
 

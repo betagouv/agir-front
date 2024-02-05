@@ -5,9 +5,10 @@
   import PageArticleComposant from '@/components/PageArticleComposant.vue';
   import { useRoute, useRouter } from 'vue-router';
   import { onMounted, ref } from 'vue';
-  import { Article, RecupererArticleUsecase } from '@/article/recupererArticle.usecase';
+  import { Article } from '@/article/recupererArticle.usecase';
   import { ArticleRepositoryAxios } from '@/article/adapters/article.repository.axios';
   import { RouteCommuneName } from '@/router';
+  import { PrevisualiserArticleUsecase } from '@/article/previsualiserArticle.usecase';
 
   const router = useRouter();
 
@@ -16,12 +17,13 @@
     titre: '',
     texte: '',
     sousTitre: '',
+    estEnFavori: false,
   });
 
   onMounted(async () => {
     const route = useRoute();
     const idArticle = Array.isArray(route.params.id) ? route.params.id[0] : route.params.id;
-    const articleRecupere = await new RecupererArticleUsecase(new ArticleRepositoryAxios()).execute(idArticle);
+    const articleRecupere = await new PrevisualiserArticleUsecase(new ArticleRepositoryAxios()).execute(idArticle);
     if (articleRecupere) {
       article.value = articleRecupere;
     } else {

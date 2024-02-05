@@ -4,6 +4,7 @@ export interface Ressource {
   contentId: string;
   thematique: string;
   image: string;
+  favoris: boolean;
 }
 
 export interface Filtre {

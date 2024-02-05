@@ -5,11 +5,12 @@ export interface Article {
   titre: string;
   sousTitre: string;
   id: string;
+  estEnFavori: boolean;
 }
 export class RecupererArticleUsecase {
   constructor(private readonly articleRepository: ArticleRepository) {}
 
-  async execute(articleId: string): Promise<Article> {
-    return this.articleRepository.recuperer(articleId);
+  async execute(utilisateurId: string, articleId: string): Promise<Article> {
+    return this.articleRepository.recuperer(utilisateurId, articleId);
   }
 }

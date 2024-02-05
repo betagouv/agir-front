@@ -8,6 +8,7 @@ interface BibliothequeApiModel {
     image_url: string;
     thematique_principale_label: string;
     content_id: string;
+    favoris: boolean;
   }[];
   filtres: {
     code: string;
@@ -34,10 +35,11 @@ export class BibliothequeRepositoryAxios implements BibliothequeRepository {
     return {
       ressources: response.data.contenu.map(ressource => ({
         titre: ressource.titre,
-        description: ressource.soustitre,
+        description: ressource.soustitre || '',
         contentId: ressource.content_id,
         thematique: ressource.thematique_principale_label,
         image: ressource.image_url,
+        favoris: ressource.favoris,
       })),
       filtresThematiques: response.data.filtres.map(filtre => ({
         id: filtre.code,

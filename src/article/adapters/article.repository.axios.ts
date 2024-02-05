@@ -3,6 +3,25 @@ import { Article } from '@/article/recupererArticle.usecase';
 import { AxiosFactory, intercept401 } from '@/axios.factory';
 
 export class ArticleRepositoryAxios implements ArticleRepository {
+  @intercept401()
+  async ajouterAuxFavoris(articleId: string, utilisateurId: string): Promise<void> {
+    const axios = AxiosFactory.getAxios();
+    await axios.post(`/utilisateurs/${utilisateurId}/events`, {
+      type: 'article_favoris',
+      content_id: articleId,
+    });
+  }
+
+  @intercept401()
+  async retirerDesFavoris(articleId: string, utilisateurId: string): Promise<void> {
+    const axios = AxiosFactory.getAxios();
+    await axios.post(`/utilisateurs/${utilisateurId}/events`, {
+      type: 'article_non_favoris',
+      content_id: articleId,
+    });
+  }
+
+  @intercept401()
   async noterArticle(articleId: string, utilisateurId: string, note: 1 | 2 | 3 | 4): Promise<void> {
     const axios = AxiosFactory.getAxios();
     await axios.post(`/utilisateurs/${utilisateurId}/events`, {
@@ -22,15 +41,31 @@ export class ArticleRepositoryAxios implements ArticleRepository {
     });
   }
 
-  async recuperer(articleId: string): Promise<Article> {
+  @intercept401()
+  async recuperer(utilisateurId: string, articleId: string): Promise<Article> {
     const axiosCMS = AxiosFactory.getCMSAxios();
     const article = await axiosCMS.get(`/articles/${articleId}`);
 
+    const axios = AxiosFactory.getAxios();
+    const articleMetaData = await axios.get(`/utilisateurs/${utilisateurId}/bibliotheque/articles/${articleId}`);
     return {
       id: articleId,
       texte: article.data.data.attributes.contenu,
       titre: article.data.data.attributes.titre,
       sousTitre: article.data.data.attributes.sousTitre,
+      estEnFavori: articleMetaData.data.favoris,
+    };
+  }
+
+  async previsualiser(articleId: string): Promise<Article> {
+    const axiosCMS = AxiosFactory.getCMSAxios();
+    const article = await axiosCMS.get(`/articles/${articleId}`);
+    return {
+      id: articleId,
+      texte: article.data.data.attributes.contenu,
+      titre: article.data.data.attributes.titre,
+      sousTitre: article.data.data.attributes.sousTitre,
+      estEnFavori: false,
     };
   }
 }

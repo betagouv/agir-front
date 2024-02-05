@@ -6,6 +6,7 @@ export const useReveal = () => {
   const aideTour: Shepherd.Tour = inject('aideTour')!;
   const serviceTour: Shepherd.Tour = inject('serviceTour')!;
   const recommandationTour: Shepherd.Tour = inject('recommandationTour')!;
+  const bibliothequeTour: Shepherd.Tour = inject('bibliothequeTour')!;
 
   function selectionnerReveal(fonctionnalite: Fonctionnalites): Shepherd.Tour {
     switch (fonctionnalite) {
@@ -15,10 +16,12 @@ export const useReveal = () => {
         return aideTour;
       case Fonctionnalites.RECOMMANDATIONS:
         return recommandationTour;
+      case Fonctionnalites.BIBLIOTHEQUE:
+        return bibliothequeTour;
       default:
         return aideTour;
     }
   }
 
-  return { aideTour, serviceTour, recommandationTour, selectionnerReveal };
+  return { aideTour, serviceTour, recommandationTour, bibliothequeTour, selectionnerReveal };
 };

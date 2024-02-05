@@ -1,4 +1,4 @@
-export function buildUrl(text: string): string {
+function removeSpecialChars(text: string): string {
   const map: { [key: string]: string } = {
     '-': ' ',
     a: 'àáâäæãåā',
@@ -19,6 +19,11 @@ export function buildUrl(text: string): string {
   Object.keys(map).forEach(pattern => {
     text = text.replace(new RegExp('[' + map[pattern] + ']', 'g'), pattern);
   });
+
+  return text;
+}
+export function stringUtils(text: string): string {
+  removeSpecialChars(text);
 
   return text
     .toLowerCase()
