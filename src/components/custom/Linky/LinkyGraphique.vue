@@ -59,8 +59,8 @@
   ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale);
 
   enum VueGraphique {
-    EN_CE_MOMENT = 1,
-    MOIS_PAR_MOIS = 2,
+    EN_CE_MOMENT = '1',
+    MOIS_PAR_MOIS = '2',
   }
 
   const consos = ref<ConsommationElectriqueViewModel>();
