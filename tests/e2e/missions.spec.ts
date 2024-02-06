@@ -21,14 +21,12 @@ test.describe('Mission 1', async () => {
     const score1 = parseInt(await page.innerText('.utilisateur .score'));
     expect(score1).toBeGreaterThan(scoreInitial);
   });
-
   test('Objectif 2 - premier quizz', async () => {
     await page.waitForLoadState('domcontentloaded');
     await expect(page.getByRole('heading', { name: 'Votre 1ère mission' })).toBeVisible();
     await cliqueTodo(page);
   });
-
-  /*test('récolte et bonus', async () => {
+  test('récolte et bonus', async () => {
     await page.waitForLoadState('domcontentloaded');
     await page.waitForSelector('.utilisateur .score');
     await expect(page).toHaveTitle('Agir ! - Agir');
@@ -51,7 +49,7 @@ test.describe('Mission 2', async () => {
     await cliqueTodo(page);
     await expect(page.locator('#app').getByText('Mission 2')).toBeVisible();
     await recolterPoints(page);
-  });*/
+  });
 });
 
 test.afterAll(async () => {
