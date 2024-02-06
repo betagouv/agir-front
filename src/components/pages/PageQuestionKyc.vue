@@ -2,7 +2,8 @@
   <div class="fr-container fr-mb-6w">
     <FilDAriane page-courante="Question pour mieux vous connaître" />
     <h1 class="fr-h2">Question pour mieux vous connaître</h1>
-    <div class="background--white border fr-p-4w border-radius--md">
+    <div v-if="isLoading">Chargement en cours ...</div>
+    <div v-else-if="!isLoading && questionViewModel" class="background--white border fr-p-4w border-radius--md">
       <form @submit.prevent="validerLaReponse" v-if="!reponseAEteDonnee">
         <div v-if="questionViewModel?.type === 'libre'" class="fr-input-group">
           <h2 class="fr-h4 fr-mb-2w">
@@ -35,13 +36,14 @@
         </div>
         <button class="fr-btn fr-btn--lg" title="Valider" :disabled="reponse === ''">Valider</button>
       </form>
-      <KYCFin v-else :phrase-point-a-gagner="questionViewModel!.points" />
+      <KYCFin v-else :phrase-point-a-gagner="questionViewModel!.points" :a-deja-repondu="aDejaRepondu" />
     </div>
+    <div v-else>Problème de chargement de donées</div>
   </div>
 </template>
 
 <script setup lang="ts">
-  import { ref } from 'vue';
+  import { onMounted, ref } from 'vue';
   import { useRoute } from 'vue-router';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import { RecupererQuestionUsecase } from '@/kyc/recupererQuestionUsecase';
@@ -57,20 +59,26 @@
   const route = useRoute();
   const questionId = Array.isArray(route.params.id) ? route.params.id[0] : route.params.id;
 
+  const isLoading = ref<boolean>(true);
   const questionViewModel = ref<QuestionViewModel>();
   const reponse = ref<string | string[]>('');
   const reponseAEteDonnee = ref<boolean>(false);
+  const aDejaRepondu = ref<boolean>(false);
 
   const utilisateurId = utilisateurStore().utilisateur.id;
-  const recupereQuestionUsecase = new RecupererQuestionUsecase(new QuestionRepositoryAxios());
-  recupereQuestionUsecase.execute(
-    questionId,
-    utilisateurId,
-    new QuestionPresenterImpl((viewModel: QuestionViewModel) => {
-      questionViewModel.value = viewModel;
-      reponse.value = viewModel.reponses;
-    })
-  );
+
+  onMounted(async () => {
+    const recupereQuestionUsecase = new RecupererQuestionUsecase(new QuestionRepositoryAxios());
+    await recupereQuestionUsecase.execute(
+      questionId,
+      utilisateurId,
+      new QuestionPresenterImpl((viewModel: QuestionViewModel) => {
+        questionViewModel.value = viewModel;
+        reponse.value = viewModel.reponses;
+      })
+    );
+    isLoading.value = false;
+  });
 
   const validerLaReponse = async () => {
     const envoyerReponseUsecase = new EnvoyerReponseUsecase(
@@ -78,6 +86,10 @@
       ToDoListEventBusImpl.getInstance()
     );
     envoyerReponseUsecase.execute(utilisateurId, questionId, [reponse.value].flat());
+
+    if (questionViewModel.value?.reponses) {
+      aDejaRepondu.value = true;
+    }
     reponseAEteDonnee.value = true;
   };
 </script>
