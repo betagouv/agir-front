@@ -65,7 +65,11 @@ async function recolterPoints(page: Page) {
     await bouton.click({ force: true });
     await page.waitForTimeout(500);
     await expect(bouton).toBeDisabled();
-    if (await page.locator('dialog#passageDeNiveau').isVisible()) {
+    const passageNiveau = await page
+      .waitForSelector('dialog#passageDeNiveau', { timeout: 500 })
+      .then(() => true)
+      .catch(() => false);
+    if (passageNiveau) {
       await checkPassageNiveau(page);
       const nouveauNiveau = parseInt(await page.innerText('.utilisateur .niveau'));
       expect(nouveauNiveau).toBeGreaterThan(niveauInitial);
