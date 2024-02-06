@@ -8,7 +8,7 @@
         >
           <span class="text--3xl fr-py-1w">8.9</span>
           <span>tonnes de</span>
-          <span>kg CO<sub>2</sub>-e*</span>
+          <span>CO<sub>2</sub>-e*</span>
         </div>
         <p class="fr-col fr-text--lg fr-text--bold fr-pl-2w fr-m-0">
           Empreinte carbone moyenne annuelle de chaque Français
