@@ -1,7 +1,7 @@
 <template>
   <div class="kyc-fin fr-grid-row fr-grid-row--middle flex-column fr-py-8w">
     <span class="fr-display--xs fr-mb-2w">Merci pour votre réponse !</span>
-    <span class="fr-text--lead fr-text--bold">
+    <span class="fr-text--lead fr-text--bold" v-if="!aDejaRepondu">
       {{ phrasePointAGagner }}
       <img src="/ic_score.svg" width="24" alt="points" />
     </span>
@@ -17,7 +17,10 @@
 <script setup lang="ts">
   import { RouteCoachName } from '@/router/coach/routeCoachName';
 
-  defineProps<{ phrasePointAGagner: string }>();
+  defineProps<{
+    aDejaRepondu: boolean;
+    phrasePointAGagner: string;
+  }>();
 </script>
 
 <style scoped>
