@@ -58,30 +58,28 @@ test.afterAll(async () => {
   await supprimerUtilisateur(page);
 });
 
-async function recolterPoints(page: Page) {
+async function recolterPoints(page: Page): Promise<Page> {
   const niveauInitial = parseInt(await page.innerText('.utilisateur .niveau'));
-  for (const bouton of await page.getByRole('button', { name: 'Récolter vos' }).all()) {
+  for await (const bouton of await page.getByRole('button', { name: 'Récolter vos' }).all()) {
     await expect(bouton).toBeVisible();
     await bouton.click({ force: true });
-    await page.waitForTimeout(500);
     await expect(bouton).toBeDisabled();
-    const passageNiveau = await page
-      .waitForSelector('dialog#passageDeNiveau', { timeout: 500 })
-      .then(() => true)
-      .catch(() => false);
+    const passageNiveau = await page.locator('dialog#passageDeNiveau').isVisible();
     if (passageNiveau) {
       await checkPassageNiveau(page);
       const nouveauNiveau = parseInt(await page.innerText('.utilisateur .niveau'));
       expect(nouveauNiveau).toBeGreaterThan(niveauInitial);
     }
   }
+  return page;
 }
 
-async function checkPassageNiveau(page: Page) {
+async function checkPassageNiveau(page: Page): Promise<Page> {
   await page.locator('dialog#passageDeNiveau').getByText('Fermer').click({ force: true });
+  return page;
 }
 
-async function cliqueTodo(page: Page) {
+async function cliqueTodo(page: Page): Promise<Page> {
   const nextTodo = await page.locator('h3:text("À faire") ~ ul li:first-child a');
   const nextTodoUrl = (await nextTodo.getAttribute('href')) || '';
   if (nextTodoUrl.includes('article')) {
@@ -89,6 +87,7 @@ async function cliqueTodo(page: Page) {
   } else if (nextTodoUrl.includes('quiz')) {
     await repondreQuiz(nextTodo, page);
   }
+  return page;
 }
 
 async function lireArticle(linkElement: Locator, page: Page): Promise<Page> {
