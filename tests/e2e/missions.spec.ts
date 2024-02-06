@@ -21,11 +21,13 @@ test.describe('Mission 1', async () => {
     const score1 = parseInt(await page.innerText('.utilisateur .score'));
     expect(score1).toBeGreaterThan(scoreInitial);
   });
+
   test('Objectif 2 - premier quizz', async () => {
     await page.waitForLoadState('domcontentloaded');
     await expect(page.getByRole('heading', { name: 'Votre 1ère mission' })).toBeVisible();
     await cliqueTodo(page);
   });
+
   test('récolte et bonus', async () => {
     await page.waitForLoadState('domcontentloaded');
     await page.waitForSelector('.utilisateur .score');
@@ -76,7 +78,7 @@ async function checkPassageNiveau(page: Page) {
 }
 
 async function cliqueTodo(page: Page) {
-  const nextTodo = page.locator('h3:text("À faire") ~ ul li:first-child a');
+  const nextTodo = await page.locator('h3:text("À faire") ~ ul li:first-child a');
   const nextTodoUrl = (await nextTodo.getAttribute('href')) || '';
   if (nextTodoUrl.includes('article')) {
     await lireArticle(nextTodo, page);
@@ -108,7 +110,6 @@ async function repondreQuiz(linkElement: Locator, page: Page): Promise<Page> {
     return exactTrueResponse ? exactTrueResponse.reponse : null;
   });
 
-  await page.waitForLoadState('domcontentloaded');
   // vérifie que l'on est sur la page du quiz
   await expect(page).toHaveTitle('Agir ! - Quiz');
   // vérification que le contenu est bien chargé et affiché
@@ -130,7 +131,7 @@ async function repondreQuiz(linkElement: Locator, page: Page): Promise<Page> {
   // cliquer sur le bouton suivant
   const continuer = page.getByRole('link', { name: 'Continuer' });
   await expect(continuer).toBeVisible();
-  await continuer.click({ force: true });
+  continuer.click({ force: true });
 
   return page;
 }
