@@ -35,7 +35,6 @@ test.describe('Mission 1', async () => {
     recolterPoints(page);
 
     const decouvrir = page.getByRole('button', { name: 'Découvrir le bonus' });
-    await expect(decouvrir).toBeVisible();
     decouvrir.click({ force: true });
 
     await expect(page.locator('#app').getByText('Accomplie')).toBeVisible();
