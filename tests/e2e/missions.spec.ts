@@ -1,7 +1,6 @@
 import { test, expect, Page, Locator } from '@playwright/test';
 import { creerUtilisateurConnecte } from './utils/creerUtilisateurConnecte';
 import supprimerUtilisateur from './utils/supprimerUtilisateur';
-import { waitFor } from '@testing-library/vue';
 
 let page: Page;
 
@@ -11,6 +10,7 @@ test.beforeAll(async () => {
 
 test.describe('Mission 1', async () => {
   test('Objectif 1 - récolter ses premiers points', async () => {
+    await page.waitForLoadState('domcontentloaded');
     await expect(page).toHaveTitle('Agir ! - Agir');
     const scoreInitial = parseInt(await page.innerText('.utilisateur .score'));
     expect(scoreInitial).toEqual(0);
@@ -64,27 +64,17 @@ async function recolterPoints(page: Page, clickedTodo: string): Promise<Page> {
     .locator('h3:text("DÉJÀ FAIT") ~ ul li')
     .filter({ has: page.locator(`h4:text("${clickedTodo}")`) })
     .locator('button');
-  //const bouton = page.locator(`li:text("${clickedTodo.substring(0, 20)}") button`); //page.locator(`h3:text("DÉJÀ FAIT") ~ ul li h4:text("${clickedTodo}")`).locator('..').locator('button'); //page.getByRole('button', { name: 'Récolter vos', disabled: false });
-  await bouton.click({ force: true }); //{ hasNot: page.locator'[disabled]' }
+
+  await bouton.click({ force: true });
   await page.waitForTimeout(1000);
-  //await clickedTodo.locator('button[disabled]'); //page.waitForSelector('h3:text("DÉJÀ FAIT") ~ ul li:first-child button[disabled]');
+
   const passageNiveau = await page.locator('dialog#passageDeNiveau').isVisible();
   if (passageNiveau) {
     await checkPassageNiveau(page);
     const nouveauNiveau = parseInt(await page.innerText('.utilisateur .niveau'));
     expect(nouveauNiveau).toBeGreaterThan(niveauInitial);
   }
-  /*for await (const bouton of await page.getByRole('button', { name: 'Récolter vos' }).all()) {
-    await expect(bouton).toBeVisible();
-    await bouton.click({ force: true });
-    await expect(bouton).toBeDisabled();
-    const passageNiveau = await page.locator('dialog#passageDeNiveau').isVisible();
-    if (passageNiveau) {
-      await checkPassageNiveau(page);
-      const nouveauNiveau = parseInt(await page.innerText('.utilisateur .niveau'));
-      expect(nouveauNiveau).toBeGreaterThan(niveauInitial);
-    }
-  }*/
+
   return page;
 }
 
@@ -152,5 +142,6 @@ async function repondreQuiz(linkElement: Locator, page: Page): Promise<Page> {
   await expect(continuer).toBeVisible();
   continuer.click({ force: true });
   await page.waitForTimeout(1000);
+
   return page;
 }
