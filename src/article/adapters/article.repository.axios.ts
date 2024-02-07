@@ -60,7 +60,7 @@ export class ArticleRepositoryAxios implements ArticleRepository {
           label: source.libelle,
           url: source.lien,
         })) || null,
-      partenaire: article.data.data.attributes.partenaire
+      partenaire: article.data.data.attributes.partenaire.data
         ? {
             id: article.data.data.attributes.partenaire.data.attributes.id,
             nom: article.data.data.attributes.partenaire.data.attributes.nom,
