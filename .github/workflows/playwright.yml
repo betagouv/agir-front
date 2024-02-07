@@ -6,7 +6,7 @@ on:
     branches: [ main ]
 jobs:
   test:
-    timeout-minutes: 10
+    timeout-minutes: 2
     runs-on: ubuntu-latest
     env:
       VITE_API_URL: ${{ secrets.VITE_API_URL_DEV }}

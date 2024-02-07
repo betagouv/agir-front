@@ -1,6 +1,7 @@
 import { test, expect, Page, Locator } from '@playwright/test';
 import { creerUtilisateurConnecte } from './utils/creerUtilisateurConnecte';
 import supprimerUtilisateur from './utils/supprimerUtilisateur';
+import { waitFor } from '@testing-library/vue';
 
 let page: Page;
 
@@ -15,8 +16,8 @@ test.describe('Mission 1', async () => {
     expect(scoreInitial).toEqual(0);
 
     await expect(page.getByRole('heading', { name: 'Votre 1ère mission' })).toBeVisible();
-
-    await recolterPoints(page);
+    const clickedTodo = await page.locator('h3:text("DÉJÀ FAIT") ~ ul li:first-child h4').innerText();
+    await recolterPoints(page, clickedTodo);
 
     const score1 = parseInt(await page.innerText('.utilisateur .score'));
     expect(score1).toBeGreaterThan(scoreInitial);
@@ -25,32 +26,30 @@ test.describe('Mission 1', async () => {
   test('Objectif 2 - premier quizz', async () => {
     await page.waitForLoadState('domcontentloaded');
     await expect(page.getByRole('heading', { name: 'Votre 1ère mission' })).toBeVisible();
-    await cliqueTodo(page);
-  });
-
-  test('récolte et bonus', async () => {
+    const clickedTodo = await cliqueTodo(page);
     await page.waitForLoadState('domcontentloaded');
     await page.waitForSelector('.utilisateur .score');
     await expect(page).toHaveTitle('Agir ! - Agir');
-    await recolterPoints(page);
+    await recolterPoints(page, clickedTodo);
 
     const decouvrir = page.getByRole('button', { name: 'Découvrir le bonus' });
     await expect(decouvrir).toBeVisible();
-    decouvrir.click({ force: true });
+    await decouvrir.click({ force: true });
 
     await expect(page.locator('#app').getByText('Accomplie')).toBeVisible();
     await page.getByRole('button', { name: 'Continuer' }).click({ force: true });
+    await page.waitForLoadState('domcontentloaded');
   });
 });
 test.describe('Mission 2', async () => {
   test('Mission 2 - début', async () => {
     await expect(page.locator('#app').getByText('Mission 2')).toBeVisible();
-    await cliqueTodo(page);
+    const clickedTodo = await cliqueTodo(page);
     await expect(page.locator('#app').getByText('Mission 2')).toBeVisible();
-    await recolterPoints(page);
-    await cliqueTodo(page);
+    await recolterPoints(page, clickedTodo);
+    const clickedTod2 = await cliqueTodo(page);
     await expect(page.locator('#app').getByText('Mission 2')).toBeVisible();
-    await recolterPoints(page);
+    await recolterPoints(page, clickedTod2);
   });
 });
 
@@ -58,9 +57,24 @@ test.afterAll(async () => {
   await supprimerUtilisateur(page);
 });
 
-async function recolterPoints(page: Page): Promise<Page> {
+async function recolterPoints(page: Page, clickedTodo: string): Promise<Page> {
   const niveauInitial = parseInt(await page.innerText('.utilisateur .niveau'));
-  for await (const bouton of await page.getByRole('button', { name: 'Récolter vos' }).all()) {
+  console.log(clickedTodo);
+  const bouton = page
+    .locator('h3:text("DÉJÀ FAIT") ~ ul li')
+    .filter({ has: page.locator(`h4:text("${clickedTodo}")`) })
+    .locator('button');
+  //const bouton = page.locator(`li:text("${clickedTodo.substring(0, 20)}") button`); //page.locator(`h3:text("DÉJÀ FAIT") ~ ul li h4:text("${clickedTodo}")`).locator('..').locator('button'); //page.getByRole('button', { name: 'Récolter vos', disabled: false });
+  await bouton.click({ force: true }); //{ hasNot: page.locator'[disabled]' }
+  await page.waitForTimeout(1000);
+  //await clickedTodo.locator('button[disabled]'); //page.waitForSelector('h3:text("DÉJÀ FAIT") ~ ul li:first-child button[disabled]');
+  const passageNiveau = await page.locator('dialog#passageDeNiveau').isVisible();
+  if (passageNiveau) {
+    await checkPassageNiveau(page);
+    const nouveauNiveau = parseInt(await page.innerText('.utilisateur .niveau'));
+    expect(nouveauNiveau).toBeGreaterThan(niveauInitial);
+  }
+  /*for await (const bouton of await page.getByRole('button', { name: 'Récolter vos' }).all()) {
     await expect(bouton).toBeVisible();
     await bouton.click({ force: true });
     await expect(bouton).toBeDisabled();
@@ -70,7 +84,7 @@ async function recolterPoints(page: Page): Promise<Page> {
       const nouveauNiveau = parseInt(await page.innerText('.utilisateur .niveau'));
       expect(nouveauNiveau).toBeGreaterThan(niveauInitial);
     }
-  }
+  }*/
   return page;
 }
 
@@ -79,15 +93,17 @@ async function checkPassageNiveau(page: Page): Promise<Page> {
   return page;
 }
 
-async function cliqueTodo(page: Page): Promise<Page> {
-  const nextTodo = await page.locator('h3:text("À faire") ~ ul li:first-child a');
-  const nextTodoUrl = (await nextTodo.getAttribute('href')) || '';
+async function cliqueTodo(page: Page): Promise<string> {
+  const nextTodo = await page.locator('h3:text("À faire") ~ ul li').first();
+  const nextTodoLink = nextTodo.locator('a');
+  const nextTodoTitle = nextTodo.locator('h4').innerText();
+  const nextTodoUrl = (await nextTodoLink.getAttribute('href')) || '';
   if (nextTodoUrl.includes('article')) {
     await lireArticle(nextTodo, page);
   } else if (nextTodoUrl.includes('quiz')) {
-    await repondreQuiz(nextTodo, page);
+    await repondreQuiz(nextTodoLink, page);
   }
-  return page;
+  return nextTodoTitle;
 }
 
 async function lireArticle(linkElement: Locator, page: Page): Promise<Page> {
@@ -135,6 +151,6 @@ async function repondreQuiz(linkElement: Locator, page: Page): Promise<Page> {
   const continuer = page.getByRole('link', { name: 'Continuer' });
   await expect(continuer).toBeVisible();
   continuer.click({ force: true });
-
+  await page.waitForTimeout(1000);
   return page;
 }
