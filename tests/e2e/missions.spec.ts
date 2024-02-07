@@ -4,6 +4,8 @@ import supprimerUtilisateur from './utils/supprimerUtilisateur';
 
 let page: Page;
 
+test.describe.configure({ mode: 'serial' });
+
 test.beforeAll(async () => {
   page = await creerUtilisateurConnecte();
 });
