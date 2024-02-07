@@ -99,7 +99,19 @@
                 Vos aides
               </router-link>
             </li>
-            <li class="fr-nav__item" data-fr-js-navigation-item="true">
+            <li
+              v-if="utilisateurStore().utilisateur.fonctionnalitesDebloquees.includes(Fonctionnalites.BIBLIOTHEQUE)"
+              class="fr-nav__item"
+              data-fr-js-navigation-item="true"
+              v-tour-step:1="{
+                tour: bibliothequeTour,
+                options: {
+                  attachTo: { on: 'bottom' },
+                  title: 'Bibliothèque débloquée',
+                  text: 'Retrouvez ici tous les articles consultés !',
+                },
+              }"
+            >
               <router-link
                 class="fr-nav__link"
                 :to="{ name: RouteCoachName.BIBLIOTHEQUE }"
@@ -127,7 +139,7 @@
   import { RouteAidesName } from '@/router/aides/routeAidesName';
   import { useReveal } from '@/composables/useReveal';
 
-  const { aideTour } = useReveal();
+  const { aideTour, bibliothequeTour } = useReveal();
 
   const route = useRoute();
   const store = utilisateurStore();

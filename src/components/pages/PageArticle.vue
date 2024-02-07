@@ -1,5 +1,5 @@
 <template>
-  <PageArticleComposant :article="articleAAfficher"> </PageArticleComposant>
+  <PageArticleComposant :article="articleAAfficher" @update:article-modifie="onArticleModifie"> </PageArticleComposant>
 </template>
 <script setup lang="ts">
   import PageArticleComposant from '@/components/PageArticleComposant.vue';
@@ -19,24 +19,31 @@
     titre: '',
     texte: '',
     sousTitre: '',
+    estEnFavori: false,
   });
 
-  onMounted(async () => {
+  onMounted(() => {
     const route = useRoute();
     const idArticle = route.params.id.toString();
 
     const articleRepositoryAxios = new ArticleRepositoryAxios();
+    const utilisateurId = utilisateurStore().utilisateur.id;
+
     new RecupererArticleUsecase(articleRepositoryAxios)
-      .execute(idArticle)
+      .execute(utilisateurId, idArticle)
       .then(async article => {
         articleAAfficher.value = article;
         await new PasserUnArticleCommeLuUsecase(articleRepositoryAxios, ToDoListEventBusImpl.getInstance()).execute(
           idArticle,
-          utilisateurStore().utilisateur.id
+          utilisateurId
         );
       })
       .catch(async () => {
         await router.push({ name: RouteCommuneName.NOT_FOUND });
       });
   });
+
+  const onArticleModifie = (article: Article) => {
+    articleAAfficher.value = article;
+  };
 </script>

@@ -11,6 +11,7 @@ export interface BibliothequeViewModel {
     description: string;
     url: string;
     image: string;
+    favoris: boolean;
   }[];
   filtres: {
     id: string;

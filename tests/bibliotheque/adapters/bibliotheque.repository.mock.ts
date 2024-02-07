@@ -10,6 +10,7 @@ export class BibliothequeRepositoryMock implements BibliothequeRepository {
           description: 'lorem ipsum dolor description un peu longue hello',
           contentId: '1',
           image: 'https://picsum.photos/300/200',
+          favoris: false,
         },
         {
           titre: 'Le coût carbone d’un t-shirt',
@@ -17,6 +18,7 @@ export class BibliothequeRepositoryMock implements BibliothequeRepository {
           description: 'lorem ipsum dolor description un peu longue hello',
           contentId: '1',
           image: 'https://picsum.photos/400/400',
+          favoris: false,
         },
         {
           titre: 'C’est quoi 5 tonnes de CO2e ?',
@@ -24,6 +26,7 @@ export class BibliothequeRepositoryMock implements BibliothequeRepository {
           description: 'lorem ipsum dolor description un peu longue hello',
           contentId: '1',
           image: 'https://picsum.photos/400/400',
+          favoris: false,
         },
         {
           titre: 'Quelle est la mission de l’ADEME ?',
@@ -31,6 +34,7 @@ export class BibliothequeRepositoryMock implements BibliothequeRepository {
           description: 'lorem ipsum dolor description un peu longue hello',
           contentId: '1',
           image: 'https://picsum.photos/300/200',
+          favoris: false,
         },
       ],
       filtresThematiques: [

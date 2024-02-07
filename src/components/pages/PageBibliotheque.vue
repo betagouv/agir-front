@@ -21,6 +21,7 @@
               :description="article.description"
               :thematique="article.thematique"
               :url="article.url"
+              :favoris="article.favoris"
             />
           </div>
         </div>
