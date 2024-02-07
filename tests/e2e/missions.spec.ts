@@ -59,7 +59,7 @@ test.afterAll(async () => {
 
 async function recolterPoints(page: Page, clickedTodo: string): Promise<Page> {
   const niveauInitial = parseInt(await page.innerText('.utilisateur .niveau'));
-
+  await page.waitForTimeout(1000);
   const bouton = page
     .locator('h3:text("DÉJÀ FAIT") ~ ul li')
     .filter({ has: page.locator(`h4:text("${clickedTodo}")`) })
