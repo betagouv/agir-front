@@ -31,7 +31,7 @@ describe('Fichier de test du usecase du chargement des données linky', () => {
     );
 
     // WHEN
-    obtenirConsommationElectriqueUsecase.execute('idUtilisateur', new LinkyPresenterImpl(expectation));
+    obtenirConsommationElectriqueUsecase.execute('idUtilisateur', true, new LinkyPresenterImpl(expectation));
 
     // THEN
     function expectation(viewModel: ConsommationElectriqueViewModel) {

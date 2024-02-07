@@ -20,10 +20,13 @@ interface InformationCompteurApiModel {
 
 export class LinkyRepositoryAxios implements LinkyRepository {
   @intercept401()
-  async recupererConsommationElectrique(idUtilsateur: string): Promise<ConsommationElectrique[]> {
+  async recupererConsommationElectrique(
+    idUtilsateur: string,
+    comparaisonParAnnee: boolean = true
+  ): Promise<ConsommationElectrique[]> {
     const axiosInstance = AxiosFactory.getAxios();
     const reponse = await axiosInstance.get<ConsommationElectriqueApiModel[]>(
-      `/utilisateurs/${idUtilsateur}/linky?compare_annees=true`
+      `/utilisateurs/${idUtilsateur}/linky?compare_annees=${comparaisonParAnnee}`
     );
 
     return reponse.data.map(donneeConsommation => ({

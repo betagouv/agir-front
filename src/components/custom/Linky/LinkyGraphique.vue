@@ -75,11 +75,20 @@
 
   async function handleValueChange(value) {
     vueGraphique.value = value;
+    const comparaisonParAnnee = vueGraphique.value === VueGraphique.MOIS_PAR_MOIS;
 
-    await obtenirConsommationElectriqueUsecase.execute(idUtilisateur, new LinkyPresenterImpl(mapValuesConsommation));
+    await obtenirConsommationElectriqueUsecase.execute(
+      idUtilisateur,
+      comparaisonParAnnee,
+      new LinkyPresenterImpl(mapValuesConsommation)
+    );
   }
 
   onMounted(async () => {
-    await obtenirConsommationElectriqueUsecase.execute(idUtilisateur, new LinkyPresenterImpl(mapValuesConsommation));
+    await obtenirConsommationElectriqueUsecase.execute(
+      idUtilisateur,
+      true,
+      new LinkyPresenterImpl(mapValuesConsommation)
+    );
   });
 </script>

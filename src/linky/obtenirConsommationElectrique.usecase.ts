@@ -10,8 +10,8 @@ export interface ConsommationElectrique {
 export class ObtenirConsommationElectriqueUsecase {
   constructor(private linkyRepository: LinkyRepository) {}
 
-  async execute(idUtilsateur: string, presenter: LinkyPresenter) {
-    const response = await this.linkyRepository.recupererConsommationElectrique(idUtilsateur);
+  async execute(idUtilsateur: string, comparaisonParAnnee: boolean = true, presenter: LinkyPresenter) {
+    const response = await this.linkyRepository.recupererConsommationElectrique(idUtilsateur, comparaisonParAnnee);
     presenter.presente(response);
   }
 }
