@@ -50,6 +50,7 @@
   import { utilisateurStore } from '@/store/utilisateur';
   import { EvaluerArticleUsecase } from '@/article/evaluerArticle.usecase';
   import { AjouterAuxFavorisUsecase } from '@/article/ajouterAuxFavoris.usecase';
+  import { RetirerDesFavorisUsecase } from '@/article/retirerDesFavoris.usecase';
 
   const props = defineProps<{
     article: Article;
@@ -73,7 +74,9 @@
     emit('update:articleModifie', { ...props.article, estEnFavori: true });
   };
 
-  const retirerDesFavoris = () => {
+  const retirerDesFavoris = async () => {
+    const retirerDesFavorisUsecase = new RetirerDesFavorisUsecase(new ArticleRepositoryAxios());
+    await retirerDesFavorisUsecase.execute(props.article.id, utilisateurStore().utilisateur.id);
     emit('update:articleModifie', { ...props.article, estEnFavori: false });
   };
 </script>
