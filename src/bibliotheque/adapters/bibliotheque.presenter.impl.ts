@@ -18,7 +18,7 @@ export class BibliothequePresenterImpl implements BibliothequePresenter {
       filtres: bibliotheque.filtresThematiques.map(filtre => ({
         id: filtre.id,
         label: filtre.label,
-        checked: filtre.checked,
+        checked: false,
       })),
     });
   }
