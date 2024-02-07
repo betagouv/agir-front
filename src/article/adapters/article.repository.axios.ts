@@ -74,6 +74,8 @@ export class ArticleRepositoryAxios implements ArticleRepository {
       titre: article.data.data.attributes.titre,
       sousTitre: article.data.data.attributes.sousTitre,
       estEnFavori: false,
+      source: null,
+      partenaire: null,
     };
   }
 }
