@@ -29,6 +29,7 @@ export class BibliothequeRepositoryAxios implements BibliothequeRepository {
         contentId: ressource.content_id,
         thematique: ressource.thematique_principale_label,
         image: ressource.image_url,
+        favoris: ressource.favoris,
       })),
       filtresThematiques: response.data.filtres.map(filtre => ({
         id: filtre.code,
