@@ -8,10 +8,22 @@
         <div class="article fr-p-6v background--white border-radius--md">
           <h2 class="fr-h3">{{ article.sousTitre }}</h2>
           <div class="cms__content" v-html="article.texte" />
-          <p v-if="article.source" class="fr-mb-4w fr-text--xs print-hidden">
-            <span class="fr-mr-1w">Source :</span>
-            <a :href="article.source" target="_blank" rel="noopener noreferrer">test</a>
-          </p>
+          <div v-if="article.sources" class="fr-mb-4w print-hidden">
+            <p v-if="article.sources.length === 1" class="fr-text--xs">
+              <span class="fr-mr-1w">Source :</span>
+              <a :href="article.sources[0].url" target="_blank" rel="noopener noreferrer">{{
+                article.sources[0].label
+              }}</a>
+            </p>
+            <div v-else class="fr-text--xs">
+              <span class="fr-mr-1w">Sources :</span>
+              <ul>
+                <li v-for="source in article.sources" :key="source">
+                  <a :href="source.url" target="_blank" rel="noopener noreferrer">{{ source.label }}</a>
+                </li>
+              </ul>
+            </div>
+          </div>
           <div class="print-hidden fr-grid-row fr-grid-row--middle flex-space-between border border-radius--md fr-p-2w">
             <span class="fr-m-0 fr-text--bold fr-text--md">Comment avez-vous trouvé cet article ?</span>
             <Notation @rated="noterLarticle" />

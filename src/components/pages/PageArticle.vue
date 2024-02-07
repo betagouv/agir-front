@@ -25,7 +25,7 @@
       nom: '',
       logo: '',
     },
-    source: '',
+    sources: [],
   });
 
   onMounted(() => {

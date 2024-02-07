@@ -5,13 +5,17 @@ export interface Partenaire {
   nom: string;
   logo: string;
 }
+export interface Source {
+  label: string;
+  url: string;
+}
 export interface Article {
   texte: string;
   titre: string;
   sousTitre: string;
   id: string;
   estEnFavori: boolean;
-  source: string | null;
+  sources: Source[] | null;
   partenaire: Partenaire | null;
 }
 export class RecupererArticleUsecase {
