@@ -24,6 +24,8 @@ jobs:
       run: yarn install
     - name: Install Playwright Browsers
       run: yarn playwright install --with-deps
+    - name: Create playwright-report directory
+      run: mkdir playwright-report  
     - name: Run Playwright tests
       run: yarn test:e2e
     - uses: actions/upload-artifact@v3
