@@ -14,6 +14,8 @@ describe("Fichier de tests concernant la récupération d'un Article", () => {
       titre: 'titre',
       sousTitre: 'sousTitre',
       estEnFavori: false,
+      source: null,
+      partenaire: null,
     });
   });
 });

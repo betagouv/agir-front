@@ -1,5 +1,5 @@
 import { ArticleRepository } from '@/article/ports/article.repository';
-import { Article } from '@/article/recupererArticle.usecase';
+import { Article } from "@/article/recupererArticle.usecase";
 
 export class MockArticleRepository implements ArticleRepository {
   recuperer(utilisateurId: string, articleId: string): Promise<Article> {
@@ -8,6 +8,8 @@ export class MockArticleRepository implements ArticleRepository {
       texte: 'texte',
       titre: 'titre',
       sousTitre: 'sousTitre',
+      source: null,
+      partenaire: null,
       estEnFavori: false,
     });
   }

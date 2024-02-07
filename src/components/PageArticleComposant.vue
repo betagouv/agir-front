@@ -2,11 +2,16 @@
   <div class="fr-container fr-mb-6w">
     <FilDAriane :page-courante="`Article: ${article.titre}`" />
     <h1>{{ article.titre }}</h1>
+
     <div class="fr-grid-row fr-grid-row--gutters">
       <div class="fr-col-12 fr-col-md-8">
         <div class="article fr-p-6v background--white border-radius--md">
           <h2 class="fr-h3">{{ article.sousTitre }}</h2>
           <div class="cms__content" v-html="article.texte" />
+          <p v-if="article.source" class="fr-mb-4w fr-text--xs print-hidden">
+            <span class="fr-mr-1w">Source :</span>
+            <a :href="article.source" target="_blank" rel="noopener noreferrer">test</a>
+          </p>
           <div class="print-hidden fr-grid-row fr-grid-row--middle flex-space-between border border-radius--md fr-p-2w">
             <span class="fr-m-0 fr-text--bold fr-text--md">Comment avez-vous trouvé cet article ?</span>
             <Notation @rated="noterLarticle" />
@@ -33,8 +38,14 @@
           </div>
         </div>
       </div>
-      <div class="fr-col-12 fr-col-md-4">
-        <slot />
+      <div class="fr-col-12 fr-col-md-4 print-hidden">
+        <div
+          v-if="article.partenaire"
+          class="fr-grid-row fr-grid-row--left flex-column fr-mb-5w background--white border border-radius--md fr-p-2w"
+        >
+          <span>Proposé par</span>
+          <img class="img-partenaire fr-mt-5v" :src="article.partenaire.logo" :alt="article.partenaire.nom" />
+        </div>
       </div>
     </div>
   </div>
@@ -84,5 +95,9 @@
 <style scoped>
   .article {
     border: 1px solid rgba(0, 0, 0, 0.19);
+  }
+
+  .img-partenaire {
+    width: fit-content;
   }
 </style>

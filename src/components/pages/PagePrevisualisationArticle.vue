@@ -18,6 +18,12 @@
     texte: '',
     sousTitre: '',
     estEnFavori: false,
+    partenaire: {
+      id: '',
+      nom: '',
+      logo: '',
+    },
+    source: '',
   });
 
   onMounted(async () => {
