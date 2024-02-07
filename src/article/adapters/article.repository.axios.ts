@@ -44,7 +44,9 @@ export class ArticleRepositoryAxios implements ArticleRepository {
   @intercept401()
   async recuperer(utilisateurId: string, articleId: string): Promise<Article> {
     const axiosCMS = AxiosFactory.getCMSAxios();
-    const article = await axiosCMS.get(`/articles/${articleId}`);
+    const article = await axiosCMS.get(
+      `/articles/${articleId}?populate[0]=partenaire,partenaire.logo.media&populate[1]=sources`
+    );
 
     const axios = AxiosFactory.getAxios();
     const articleMetaData = await axios.get(`/utilisateurs/${utilisateurId}/bibliotheque/articles/${articleId}`);
@@ -53,6 +55,18 @@ export class ArticleRepositoryAxios implements ArticleRepository {
       texte: article.data.data.attributes.contenu,
       titre: article.data.data.attributes.titre,
       sousTitre: article.data.data.attributes.sousTitre,
+      sources:
+        article.data.data.attributes.sources?.map(source => ({
+          label: source.libelle,
+          url: source.lien,
+        })) || null,
+      partenaire: article.data.data.attributes.partenaire.data
+        ? {
+            id: article.data.data.attributes.partenaire.data.attributes.id,
+            nom: article.data.data.attributes.partenaire.data.attributes.nom,
+            logo: article.data.data.attributes.partenaire.data.attributes.logo.data[0].attributes.url,
+          }
+        : null,
       estEnFavori: articleMetaData.data.favoris,
     };
   }
@@ -66,6 +80,8 @@ export class ArticleRepositoryAxios implements ArticleRepository {
       titre: article.data.data.attributes.titre,
       sousTitre: article.data.data.attributes.sousTitre,
       estEnFavori: false,
+      sources: [],
+      partenaire: null,
     };
   }
 }

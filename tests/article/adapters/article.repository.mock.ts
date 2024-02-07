@@ -8,6 +8,8 @@ export class MockArticleRepository implements ArticleRepository {
       texte: 'texte',
       titre: 'titre',
       sousTitre: 'sousTitre',
+      sources: null,
+      partenaire: null,
       estEnFavori: false,
     });
   }

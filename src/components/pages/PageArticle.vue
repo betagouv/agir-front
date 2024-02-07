@@ -20,6 +20,12 @@
     texte: '',
     sousTitre: '',
     estEnFavori: false,
+    partenaire: {
+      id: '',
+      nom: '',
+      logo: '',
+    },
+    sources: [],
   });
 
   onMounted(() => {

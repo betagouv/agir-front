@@ -14,6 +14,8 @@ export class SpyArticleRepository implements ArticleRepository {
       titre: 'titre',
       sousTitre: 'sousTitre',
       estEnFavori: false,
+      sources: null,
+      partenaire: null,
     });
   }
   get retirerDesFavorisAEteAppele(): boolean {
