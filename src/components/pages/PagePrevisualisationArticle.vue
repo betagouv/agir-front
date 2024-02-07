@@ -23,7 +23,7 @@
       nom: '',
       logo: '',
     },
-    source: '',
+    sources: null,
   });
 
   onMounted(async () => {

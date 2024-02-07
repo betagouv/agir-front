@@ -18,7 +18,7 @@
             <div v-else class="fr-text--xs">
               <span class="fr-mr-1w">Sources :</span>
               <ul>
-                <li v-for="source in article.sources" :key="source">
+                <li v-for="source in article.sources" :key="source.label">
                   <a :href="source.url" target="_blank" rel="noopener noreferrer">{{ source.label }}</a>
                 </li>
               </ul>
