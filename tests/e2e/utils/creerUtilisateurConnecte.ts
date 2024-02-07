@@ -44,7 +44,7 @@ async function creerUtilisateurOuSupprimmer(page: Page): Promise<Page> {
   const [response] = await Promise.all([page.waitForResponse('**/utilisateurs/'), page.click('button[type="submit"]')]);
 
   const res = await response.json();
-  console.log(res);
+
   if (response.status() === 400 && res.code === '022') {
     // se connecter
     await page.getByText('Se connecter').first().click();
