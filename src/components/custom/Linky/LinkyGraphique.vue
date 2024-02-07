@@ -10,8 +10,8 @@
         name="controle-segmente-selection-range-data"
         @update:value="handleValueChange"
         :segments="[
-          { libelle: 'En ce moment', value: VueGraphique.EN_CE_MOMENT, checked: true },
-          { libelle: 'Mois par mois', value: VueGraphique.MOIS_PAR_MOIS },
+          { libelle: 'En ce moment', value: VueGraphique.EN_CE_MOMENT },
+          { libelle: 'Mois par mois', value: VueGraphique.MOIS_PAR_MOIS, checked: true },
         ]"
       />
     </div>

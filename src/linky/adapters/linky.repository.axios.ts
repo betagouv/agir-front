@@ -25,8 +25,9 @@ export class LinkyRepositoryAxios implements LinkyRepository {
     comparaisonParAnnee: boolean = true
   ): Promise<ConsommationElectrique[]> {
     const axiosInstance = AxiosFactory.getAxios();
+    const parametre = comparaisonParAnnee ? 'compare_annees=true' : 'compare_mois_sem_jour=true';
     const reponse = await axiosInstance.get<ConsommationElectriqueApiModel[]>(
-      `/utilisateurs/${idUtilsateur}/linky?compare_annees=${comparaisonParAnnee}`
+      `/utilisateurs/${idUtilsateur}/linky?${parametre}`
     );
 
     return reponse.data.map(donneeConsommation => ({
