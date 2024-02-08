@@ -3,17 +3,11 @@
   <div class="fr-grid-row fr-grid-row--gutters">
     <div class="fr-col-12 fr-col-lg-3">
       <h2 class="fr-h4">Filtres</h2>
-      <InputCheckbox
-        id="categoriesAides"
-        label="Catégories affichées"
-        :options="optionsCheckbox"
-        @update="handleValueChange"
-      />
+      <InputCheckbox id="categoriesAides" label="Catégories" :options="optionsCheckbox" @update="handleValueChange" />
     </div>
     <div class="fr-col-12 fr-col-lg-9">
-      <p v-if="!(categoriesActives.length > 0)">Sélectionnez une catégorie pour voir les aides associées</p>
-      <div v-else v-for="(aides, index) in props.aidesGroupesParCategorie" :key="index">
-        <div v-if="categoriesActives.includes(`${index}`)">
+      <div v-for="(aides, index) in props.aidesGroupesParCategorie" :key="index">
+        <div v-if="categoriesActives.length === 0 || categoriesActives.includes(`${index}`)">
           <h2 class="fr-h4">{{ index }}</h2>
           <div class="fr-mb-2w" v-for="aide in aides" :key="aide.id">
             <Accordeon :label="aide.titre" :name-id="aide.id">
@@ -67,7 +61,7 @@
   const optionsCheckbox = Object.keys(props.aidesGroupesParCategorie).map(option => ({
     id: option,
     label: option,
-    checked: true,
+    checked: false,
   }));
 
   const categoriesActives = ref<string[]>([]);

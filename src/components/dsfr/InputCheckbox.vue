@@ -33,7 +33,8 @@
     }[];
   }>();
 
-  const emit = defineEmits(['update']);
+  const emit = defineEmits<{ (event: 'update', optionsSelectionnees: string[]): void }>();
+
   const optionsSelectionnees = ref<string[]>([]);
 
   onMounted(() => {

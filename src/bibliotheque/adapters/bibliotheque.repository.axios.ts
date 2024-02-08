@@ -13,13 +13,33 @@ interface BibliothequeApiModel {
   filtres: {
     code: string;
     label: string;
-    selected: boolean;
   }[];
 }
 
 export class BibliothequeRepositoryAxios implements BibliothequeRepository {
   @intercept401()
-  async chargerBibliotheque(
+  async chargerBibliotheque(utilisateurId: string): Promise<Bibliotheque> {
+    const axiosInstance = AxiosFactory.getAxios();
+    const response = await axiosInstance.get<BibliothequeApiModel>(`/utilisateurs/${utilisateurId}/bibliotheque`);
+
+    return {
+      ressources: response.data.contenu.map(ressource => ({
+        titre: ressource.titre,
+        description: ressource.soustitre,
+        contentId: ressource.content_id,
+        thematique: ressource.thematique_principale_label,
+        image: ressource.image_url,
+        favoris: ressource.favoris,
+      })),
+      filtresThematiques: response.data.filtres.map(filtre => ({
+        id: filtre.code,
+        label: filtre.label,
+      })),
+    };
+  }
+
+  @intercept401()
+  async filtrerBibliotheque(
     utilisateurId: string,
     filtreThematiquesIds: string[],
     titre: string
@@ -44,7 +64,6 @@ export class BibliothequeRepositoryAxios implements BibliothequeRepository {
       filtresThematiques: response.data.filtres.map(filtre => ({
         id: filtre.code,
         label: filtre.label,
-        checked: filtre.selected,
       })),
     };
   }

@@ -41,6 +41,7 @@
   import { BibliothequeRepositoryAxios } from '@/bibliotheque/adapters/bibliotheque.repository.axios';
   import { BibliothequePresenterImpl } from '@/bibliotheque/adapters/bibliotheque.presenter.impl';
   import { BibliothequeViewModel } from '@/bibliotheque/ports/bibliotheque.presenter';
+  import { FiltrerBibliothequeUsecase } from '@/bibliotheque/filtrerBibliotheque.usecase';
 
   const { id: utilisateurId } = utilisateurStore().utilisateur;
 
@@ -49,30 +50,33 @@
   const searchTitre = ref<string>('');
   const filtresThematiques = ref<string[]>([]);
 
-  const chargerBibliothequeUsecase = new ChargerBibliothequeUsecase(new BibliothequeRepositoryAxios());
   const bibliothequePresenterImpl = new BibliothequePresenterImpl(
     viewModel => (bibliothequeViewModel.value = viewModel)
   );
 
   onMounted(async () => {
-    await lancerLaRecherche();
+    const chargerBibliothequeUsecase = new ChargerBibliothequeUsecase(new BibliothequeRepositoryAxios());
+    await chargerBibliothequeUsecase.execute(utilisateurId, bibliothequePresenterImpl);
     isLoading.value = false;
   });
 
   const updateThematiques = async thematiques => {
+    isLoading.value = true;
     filtresThematiques.value = thematiques;
     await lancerLaRecherche();
     isLoading.value = false;
   };
 
   const rechercherParTitre = async titre => {
+    isLoading.value = true;
     searchTitre.value = titre;
     await lancerLaRecherche();
     isLoading.value = false;
   };
 
   const lancerLaRecherche = async () => {
-    await chargerBibliothequeUsecase.execute(
+    const filterBibliothequeUsecase = new FiltrerBibliothequeUsecase(new BibliothequeRepositoryAxios());
+    await filterBibliothequeUsecase.execute(
       utilisateurId,
       filtresThematiques.value,
       searchTitre.value,
