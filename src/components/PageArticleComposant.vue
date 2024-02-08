@@ -51,7 +51,10 @@
         </div>
       </div>
       <div class="fr-col-12 fr-col-md-4 print-hidden">
-        <div v-if="article.partenaire" class="background--white border border-radius--md fr-p-2w">
+        <div
+          v-if="article.partenaire"
+          class="fr-grid-row flex-column background--white border border-radius--md fr-p-2w"
+        >
           <span>Proposé par</span>
           <img class="img-partenaire fr-mt-5v" :src="article.partenaire.logo" :alt="article.partenaire.nom" />
         </div>
