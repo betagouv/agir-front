@@ -73,15 +73,27 @@ export class ArticleRepositoryAxios implements ArticleRepository {
 
   async previsualiser(articleId: string): Promise<Article> {
     const axiosCMS = AxiosFactory.getCMSAxios();
-    const article = await axiosCMS.get(`/articles/${articleId}`);
+    const article = await axiosCMS.get(
+      `/articles/${articleId}?populate[0]=partenaire,partenaire.logo.media&populate[1]=sources`
+    );
     return {
       id: articleId,
       texte: article.data.data.attributes.contenu,
       titre: article.data.data.attributes.titre,
       sousTitre: article.data.data.attributes.sousTitre,
       estEnFavori: false,
-      sources: [],
-      partenaire: null,
+      sources:
+        article.data.data.attributes.sources?.map(source => ({
+          label: source.libelle,
+          url: source.lien,
+        })) || null,
+      partenaire: article.data.data.attributes.partenaire.data
+        ? {
+            id: article.data.data.attributes.partenaire.data.attributes.id,
+            nom: article.data.data.attributes.partenaire.data.attributes.nom,
+            logo: article.data.data.attributes.partenaire.data.attributes.logo.data[0].attributes.url,
+          }
+        : null,
     };
   }
 }
