@@ -42,11 +42,12 @@ export class BibliothequeRepositoryAxios implements BibliothequeRepository {
   async filtrerBibliotheque(
     utilisateurId: string,
     filtreThematiquesIds: string[],
-    titre: string
+    titre: string,
+    filtreFavoris: boolean
   ): Promise<Bibliotheque> {
     const axiosInstance = AxiosFactory.getAxios();
 
-    const params = this.buildFiltres(filtreThematiquesIds, titre);
+    const params = this.buildFiltres(filtreThematiquesIds, titre, filtreFavoris);
 
     const response = await axiosInstance.get<BibliothequeApiModel>(
       `/utilisateurs/${utilisateurId}/bibliotheque${params}`
@@ -68,7 +69,7 @@ export class BibliothequeRepositoryAxios implements BibliothequeRepository {
     };
   }
 
-  private buildFiltres(filtreThematiquesIds: string[], titre: string) {
+  private buildFiltres(filtreThematiquesIds: string[], titre: string, filtreFavoris: boolean) {
     const thematiquesParam =
       filtreThematiquesIds.length > 0 ? `filtre_thematiques=${filtreThematiquesIds.join(',')}` : null;
     const titreParam = titre ? `titre=${titre}` : null;
@@ -79,6 +80,9 @@ export class BibliothequeRepositoryAxios implements BibliothequeRepository {
     }
     if (titreParam) {
       paramsArray.push(titreParam);
+    }
+    if (filtreFavoris) {
+      paramsArray.push('favoris=true');
     }
 
     return paramsArray.length > 0 ? `?${paramsArray.join('&')}` : '';

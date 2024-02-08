@@ -17,5 +17,10 @@ export interface Bibliotheque {
 }
 export interface BibliothequeRepository {
   chargerBibliotheque(utilisateurId: string): Promise<Bibliotheque>;
-  filtrerBibliotheque(utilisateurId: string, filtreThematiquesIds: string[], titre: string): Promise<Bibliotheque>;
+  filtrerBibliotheque(
+    utilisateurId: string,
+    filtreThematiquesIds: string[],
+    titre: string,
+    filtreFavoris: boolean
+  ): Promise<Bibliotheque>;
 }

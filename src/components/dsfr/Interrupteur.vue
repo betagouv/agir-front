@@ -1,12 +1,6 @@
 <template>
   <div class="fr-toggle">
-    <input
-      type="checkbox"
-      class="fr-toggle__input"
-      aria-describedby="toggle-698-hint-text"
-      :id="id"
-      @change.prevent="onInputChange"
-    />
+    <input type="checkbox" class="fr-toggle__input" :id="id" @change.prevent="onInputChange" />
     <label class="fr-toggle__label" :for="id">
       {{ label }}
     </label>
