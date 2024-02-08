@@ -16,6 +16,7 @@
         <div class="fr-grid-row fr-grid-row--gutters">
           <div class="fr-col-md-6 fr-col-12" v-for="article in bibliothequeViewModel.articles" :key="article.titre">
             <BibliothequeCard
+              :id="article.contentId"
               :titre="article.titre"
               :image="article.image"
               :description="article.description"
