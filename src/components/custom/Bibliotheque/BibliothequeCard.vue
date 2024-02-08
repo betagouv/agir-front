@@ -7,16 +7,16 @@
         <button
           v-if="estFavoris"
           @click="retirerDesFavoris"
-          class="fr-btn fr-btn--sm fr-btn--tertiary-no-outline fr-icon-heart-fill fr-btn--icon-right fr-pr-0 icon-favoris"
+          class="fr-btn fr-btn--sm fr-text--xs fr-text--bold fr-btn--tertiary-no-outline text--gris-dark fr-icon-heart-fill fr-btn--icon-right fr-pr-0 icon-favoris--on"
         >
           Retirer des favoris
         </button>
         <button
           v-else
           @click="ajouterAuxFavoris"
-          class="fr-btn fr-btn--sm fr-btn--tertiary-no-outline fr-icon-heart-line fr-btn--icon-right fr-pr-0"
+          class="fr-btn fr-btn--sm fr-text--xs fr-text--bold fr-btn--tertiary-no-outline text--gris-dark fr-icon-heart-line fr-btn--icon-right fr-pr-0 icon-favoris--off"
         >
-          Mettre en favoris
+          Mettre en favori
         </button>
       </div>
       <h3 class="fr-h4 text--bleu fr-mt-1w fr-mb-2w">{{ titre }}</h3>
@@ -72,7 +72,11 @@
     width: 100%;
   }
 
-  .icon-favoris::after {
+  .icon-favoris--on::after {
     color: var(--red-marianne-main-472);
+  }
+
+  .icon-favoris--off::after {
+    color: var(--blue-france-sun-113-625);
   }
 </style>

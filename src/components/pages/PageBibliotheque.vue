@@ -8,6 +8,7 @@
         <BibliothequeFiltres
           @rechercher-par-titre="rechercherParTitre"
           @update-thematiques="updateThematiques"
+          @rechercher-par-favoris=""
           :filtres="bibliothequeViewModel.filtres"
         />
       </div>
