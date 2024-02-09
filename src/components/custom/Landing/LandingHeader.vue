@@ -5,7 +5,7 @@
       <p class="fr-text--xl">
         Faîtes un premier pas en estimant les principaux impacts de vos usages en moins d’une minute !
       </p>
-      <div class="fr-grid fr-grid-row fr-grid-row--middle">
+      <div class="fr-grid fr-grid-row fr-grid-row--top">
         <router-link
           :to="{ name: RouteCommuneName.AUTHENTIFICATION }"
           class="fr-btn fr-btn--lg fr-btn--secondary fr-mr-2w fr-mb-2w fr-mb-md-0"
