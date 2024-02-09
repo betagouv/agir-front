@@ -34,13 +34,17 @@
   const optionsThematiqueCheckbox = props.serviceCatalogueViewModels.filtreThematiques.map(option => ({
     id: option,
     label: option,
-    checked: true,
+    checked: false,
   }));
 
   const categoriesActives = ref<string[]>([]);
   categoriesActives.value = optionsThematiqueCheckbox.filter(({ checked }) => checked).map(({ id }) => id);
 
   const servicesFiltres = computed(() => {
+    if (categoriesActives.value.length === 0) {
+      return props.serviceCatalogueViewModels.catalogue;
+    }
+
     return props.serviceCatalogueViewModels.catalogue.filter(service =>
       service.thematiques.some(thematique => categoriesActives.value.includes(thematique))
     );
