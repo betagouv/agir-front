@@ -1,7 +1,7 @@
 <template>
   <div class="fr-container">
     <div v-if="!serviceCatalogueViewModels">Une erreur est survenue</div>
-    <CatalogueServices v-else :service-catalogue-view-models="serviceCatalogueViewModels" />
+    <ServiceCatalogue v-else :service-catalogue-view-models="serviceCatalogueViewModels" />
   </div>
   <Teleport to="body">
     <Modale
@@ -30,7 +30,7 @@
     ServiceCatalogueViewModel,
   } from '@/services/adapters/serviceCatalogue.presenter.impl';
   import { onMounted, ref } from 'vue';
-  import CatalogueServices from '@/components/custom/CatalogueServices.vue';
+  import ServiceCatalogue from '@/components/custom/Service/ServiceCatalogue.vue';
   import Modale from '@/components/custom/Modale/Modale.vue';
   import ServiceModaleParametreLinky from '@/components/custom/Linky/ServiceModaleParametreLinky.vue';
 
