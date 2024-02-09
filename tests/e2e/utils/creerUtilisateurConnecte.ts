@@ -1,10 +1,15 @@
 import { Page, chromium } from '@playwright/test';
+import supprimerUtilisateur from './supprimerUtilisateur';
 
 export const creerUtilisateurConnecte: () => Promise<Page> = async () => {
   const browser = await chromium.launch({ headless: true });
   const context = await browser.newContext();
-  const page = await context.newPage();
+  let page = await context.newPage();
+  page = await creerUtilisateurOuSupprimmer(page);
+  return page;
+};
 
+async function creerUtilisateurOuSupprimmer(page: Page): Promise<Page> {
   await page.goto('/onboarding');
   await page.evaluate(() => {
     localStorage.setItem(
@@ -35,11 +40,27 @@ export const creerUtilisateurConnecte: () => Promise<Page> = async () => {
   await page.fill('#utilisateur-nom', "L'éponge");
   await page.fill('#utilisateur-prenom', 'Bob');
   await page.fill('#password', process.env.PLAYWRIGHT_PASSWORD || '');
-  await page.click('button[type="submit"]');
 
+  const [response] = await Promise.all([page.waitForResponse('**/utilisateurs/'), page.click('button[type="submit"]')]);
+
+  const res = await response.json();
+
+  if (response.status() === 400 && res.code === '022') {
+    // se connecter
+    await page.getByText('Se connecter').first().click();
+    await page.fill('#email', process.env.PLAYWRIGHT_EMAIL || '');
+    await page.fill('#password-input', process.env.PLAYWRIGHT_PASSWORD || '');
+    await page.getByRole('button', { name: 'Se connecter' }).first().click();
+
+    await page.waitForTimeout(1000);
+    await page.waitForLoadState('domcontentloaded');
+    await supprimerUtilisateur(page);
+    page = await creerUtilisateurOuSupprimmer(page);
+  }
+  // user created
   page.getByRole('heading', { name: 'Validez votre compte' });
   await page.fill('#code', process.env.PLAYWRIGHT_OTP_DEV || '');
   await page.getByRole('button', { name: 'Valider' }).click();
 
   return page;
-};
+}
