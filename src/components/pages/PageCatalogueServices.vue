@@ -3,9 +3,10 @@
     <FilDAriane page-courante="Services" />
     <h1 class="fr-h2">Liste des services</h1>
     <div v-if="isLoading">Chargement en cours ...</div>
-    <ServiceCatalogue
+    <CatalogueDeServices
       v-else-if="serviceCatalogueViewModels"
       :service-catalogue-view-models="serviceCatalogueViewModels"
+      @update:est-installe="updateServiceEstInstalle"
     />
     <p v-else>Une erreur est survenue</p>
   </div>
@@ -35,14 +36,23 @@
   import {
     ServiceCataloguePresenterImpl,
     ServiceCatalogueViewModel,
+    ServiceCatalogueViewModelItem,
   } from '@/services/adapters/serviceCatalogue.presenter.impl';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
-  import ServiceCatalogue from '@/components/custom/Service/ServiceCatalogue.vue';
+  import CatalogueDeServices from '@/components/custom/CatalogueDeServices/CatalogueDeServices.vue';
   import Modale from '@/components/custom/Modale/Modale.vue';
   import ServiceModaleParametreLinky from '@/components/custom/Linky/ServiceModaleParametreLinky.vue';
 
   const isLoading = ref<boolean>(true);
   const serviceCatalogueViewModels = ref<ServiceCatalogueViewModel>();
+
+  const updateServiceEstInstalle = (service: ServiceCatalogueViewModelItem) => {
+    if (!serviceCatalogueViewModels.value) return;
+
+    const index = serviceCatalogueViewModels.value.catalogue.findIndex(({ id }) => id === service.id);
+    serviceCatalogueViewModels.value.catalogue[index].estInstalle = service.estInstalle;
+    serviceCatalogueViewModels.value = { ...serviceCatalogueViewModels.value };
+  };
 
   onMounted(async () => {
     const usecase = new RecupererCatalogueServicesUseCase(new ServiceRepositoryAxios());
