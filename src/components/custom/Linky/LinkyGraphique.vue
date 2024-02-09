@@ -4,24 +4,7 @@
       Évolution de votre consommation électrique
       <span class="fr-text--md">(sur la base des relevés quotidiens de votre compteur Linky)</span>
     </h2>
-    <div class="fr-grid-row flex-center fr-mb-3w">
-      <ControleSegmente
-        legende="Choix de la date de récupération des données"
-        name="controle-segmente-selection-range-data"
-        @update:value="handleValueChange"
-        :segments="[
-          { libelle: 'En ce moment', value: VueGraphique.EN_CE_MOMENT, checked: true },
-          { libelle: 'Mois par mois', value: VueGraphique.MOIS_PAR_MOIS },
-        ]"
-      />
-    </div>
-    <p v-if="vueGraphique === VueGraphique.MOIS_PAR_MOIS">
-      Suivi de votre consommation électrique mois par mois en comparant l'année courante à l'année précédente. ⚡
-    </p>
-    <p v-if="vueGraphique === VueGraphique.EN_CE_MOMENT">
-      Comparaison de votre consommation électrique pour la journée d'hier, le mois en cours et l'année en cours par
-      rapport à l'année précédente. ⚡
-    </p>
+    <p>Suivi de votre consommation électrique mois par mois en comparant l'année courante à l'année précédente. ⚡</p>
     <Bar
       v-if="consos"
       id="graphique-consommation-electrique"
@@ -48,7 +31,6 @@
 
 <script setup lang="ts">
   import { onMounted, ref } from 'vue';
-  import ControleSegmente from '@/components/dsfr/ControleSegmente.vue';
   import { Bar } from 'vue-chartjs';
   import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js';
   import { ObtenirConsommationElectriqueUsecase } from '@/linky/obtenirConsommationElectrique.usecase';
@@ -58,13 +40,7 @@
 
   ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale);
 
-  enum VueGraphique {
-    EN_CE_MOMENT = '1',
-    MOIS_PAR_MOIS = '2',
-  }
-
   const consos = ref<ConsommationElectriqueViewModel>();
-  const vueGraphique = ref<VueGraphique>(VueGraphique.EN_CE_MOMENT);
 
   function mapValuesConsommation(viewModel: ConsommationElectriqueViewModel) {
     consos.value = viewModel;
@@ -72,12 +48,6 @@
 
   const idUtilisateur = utilisateurStore().utilisateur.id;
   const obtenirConsommationElectriqueUsecase = new ObtenirConsommationElectriqueUsecase(new LinkyRepositoryAxios());
-
-  async function handleValueChange(value) {
-    vueGraphique.value = value;
-
-    await obtenirConsommationElectriqueUsecase.execute(idUtilisateur, new LinkyPresenterImpl(mapValuesConsommation));
-  }
 
   onMounted(async () => {
     await obtenirConsommationElectriqueUsecase.execute(idUtilisateur, new LinkyPresenterImpl(mapValuesConsommation));
