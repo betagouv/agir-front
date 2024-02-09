@@ -1,5 +1,44 @@
 # Changelog
 
+## [1.5.0](https://github.com/betagouv/agir-front/compare/v1.4.0...v1.5.0) (2024-02-09)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* ajout de la barre de recherche à la bibliothèque ([#282](https://github.com/betagouv/agir-front/issues/282)) ([72fdb2d](https://github.com/betagouv/agir-front/commit/72fdb2d1e3be10fea3384456c77941f933602cd8))
+* ajout des sources et partenaires sur les articles ([#286](https://github.com/betagouv/agir-front/issues/286)) ([2744db8](https://github.com/betagouv/agir-front/commit/2744db8889d557e0432c11d1ae9ed1112ffe459e))
+* ajouter système de filtre des favoris dans la bibliotheque ([#289](https://github.com/betagouv/agir-front/issues/289)) ([75ff482](https://github.com/betagouv/agir-front/commit/75ff48293a1041700a02912e0ea31f426e4c1814))
+* création de la page compteur linky ([#271](https://github.com/betagouv/agir-front/issues/271)) ([78fb025](https://github.com/betagouv/agir-front/commit/78fb025322ab34e1e75577e245af22a04537550d))
+* création du composant PageBibliotheque ([#278](https://github.com/betagouv/agir-front/issues/278)) ([f8d5f3b](https://github.com/betagouv/agir-front/commit/f8d5f3beace5d8d077086aa9935b448dea6ebc2f))
+* il est maintenant possible d'ajouter un article dans les favoris ([#283](https://github.com/betagouv/agir-front/issues/283)) ([0f8bd01](https://github.com/betagouv/agir-front/commit/0f8bd0155771a7bded909dc9d597a15b9171a8f8))
+* il est maintenant possible d'imprimer un article ([#281](https://github.com/betagouv/agir-front/issues/281)) ([60f2241](https://github.com/betagouv/agir-front/commit/60f224103cccb1b0802419c89349836f16991273))
+* le clique sur une recommandation personnalisée peut être un objectif de mission ([#265](https://github.com/betagouv/agir-front/issues/265)) ([a1ea44c](https://github.com/betagouv/agir-front/commit/a1ea44c1f8f95b114f88464f6ec916579f51e756))
+* mise à jour du wording de la page Linky ([#280](https://github.com/betagouv/agir-front/issues/280)) ([d8739f8](https://github.com/betagouv/agir-front/commit/d8739f8aa0660b8e3a829832aae613a9c066977b))
+* possibilité de voir les réponses aux kyc dans le compte ([#277](https://github.com/betagouv/agir-front/issues/277)) ([0034e20](https://github.com/betagouv/agir-front/commit/0034e204c30dd612e62f6ef267dbcc49ef9ab773))
+
+
+### 🐛 Corrections de bogues
+
+* ajustement couleur alerte renvoyer code inscription ([#272](https://github.com/betagouv/agir-front/issues/272)) ([17bb0e7](https://github.com/betagouv/agir-front/commit/17bb0e74df31b609cefdad71ae996f8d31b764f5))
+* ajustement UI et wording de la page mot de passe oublie ([#273](https://github.com/betagouv/agir-front/issues/273)) ([010fc19](https://github.com/betagouv/agir-front/commit/010fc1935b053e7725c4c2d47cf2bb1adecd631f))
+* la consultation d'un article depuis les recommandations est de nouveau opérationnelle ([#269](https://github.com/betagouv/agir-front/issues/269)) ([2bd2746](https://github.com/betagouv/agir-front/commit/2bd2746677cedb0abffecadbbff61af3fe83a66f))
+* ne pas afficher le gain de points si question kyc deja repondu ([#285](https://github.com/betagouv/agir-front/issues/285)) ([a1040c2](https://github.com/betagouv/agir-front/commit/a1040c21947971638bbf3a80369835c5c5a06900))
+* reinitialiser la bibliotheque quand on vide la barre de recherche ([#290](https://github.com/betagouv/agir-front/issues/290)) ([3950ca2](https://github.com/betagouv/agir-front/commit/3950ca21c679027481eea7097d7fb084de634cb5))
+* systeme de filtre par checkbox page aide et bibliotheque ([#287](https://github.com/betagouv/agir-front/issues/287)) ([4d6585d](https://github.com/betagouv/agir-front/commit/4d6585d1a21528b93d28bf788b9cb2a840f33be1))
+* typographie onboarding ([#284](https://github.com/betagouv/agir-front/issues/284)) ([41d8047](https://github.com/betagouv/agir-front/commit/41d8047b8bb1c3d9c8744beba9e8ba55e3998af2))
+
+
+### 👷 Autres changements
+
+* branchement des tests e2e vers le back-office de dev ([#274](https://github.com/betagouv/agir-front/issues/274)) ([05bf0a6](https://github.com/betagouv/agir-front/commit/05bf0a6abb853a4457dc0b1e6af6cc9b504400c6))
+* Bump vite from 5.0.5 to 5.0.12 ([#270](https://github.com/betagouv/agir-front/issues/270)) ([392a083](https://github.com/betagouv/agir-front/commit/392a08386d67becce8812029dfa16915f6ca9ba7))
+* changement dans les tests e2e ([#267](https://github.com/betagouv/agir-front/issues/267)) ([6925dd3](https://github.com/betagouv/agir-front/commit/6925dd3324ea3b64c75fe3110e84e555cde4c306))
+* eviter le scintillement à l'installation d'un service depuis le catalogue ([#266](https://github.com/betagouv/agir-front/issues/266)) ([2bf803d](https://github.com/betagouv/agir-front/commit/2bf803d3d0af2eddbc3e2500ff48e33a7c9df6f6))
+* optimisation du chargement de l'application ([#264](https://github.com/betagouv/agir-front/issues/264)) ([6273409](https://github.com/betagouv/agir-front/commit/62734092c12eda406fa74a78dd78419320dce416))
+* refacto de la page service ([#291](https://github.com/betagouv/agir-front/issues/291)) ([8928ccd](https://github.com/betagouv/agir-front/commit/8928ccd31e55b6d7ac071269119e5d44147d88a7))
+* suppression de la route interactions remplacer par recommandations ([#276](https://github.com/betagouv/agir-front/issues/276)) ([f4ba0d3](https://github.com/betagouv/agir-front/commit/f4ba0d3b17585c3d4e9876fe11cbd8a422926163))
+* tests e2e sur les missions ([#279](https://github.com/betagouv/agir-front/issues/279)) ([9a05927](https://github.com/betagouv/agir-front/commit/9a059277df947b66910740efb27b117fe77c65be))
+
 ## [1.4.0](https://github.com/betagouv/agir-front/compare/v1.3.0...v1.4.0) (2024-01-18)
 
 
