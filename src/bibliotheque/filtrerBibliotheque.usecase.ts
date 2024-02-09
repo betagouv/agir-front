@@ -8,12 +8,14 @@ export class FiltrerBibliothequeUsecase {
     utilisateurId: string,
     filtresThematiques: string[],
     titre: string,
+    filtreFavoris: boolean,
     presenter: BibliothequePresenter
   ): Promise<void> {
     const bibliotheque = await this.bibliothequeRepository.filtrerBibliotheque(
       utilisateurId,
       filtresThematiques,
-      titre
+      titre,
+      filtreFavoris
     );
     presenter.presente(bibliotheque);
   }

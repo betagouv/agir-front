@@ -2,15 +2,22 @@
   <article class="bibliotheque-card background--white border-radius--md shadow">
     <img :src="image" class="bibliotheque-card__image" alt="" />
     <div class="fr-px-3w fr-py-2w">
-      <div class="fr-grid-row flex-space-between">
+      <div class="fr-grid-row flex-space-between fr-grid-row--middle">
         <span class="fr-text--xs fr-text--bold fr-m-0">{{ thematique }}</span>
-        <div v-if="favoris">
-          <span class="fr-text--xs fr-text--bold fr-m-0">Favoris</span>
-          <span
-            class="fr-icon-heart-fill fr-text-label--red-marianne fr-text--xs fr-text--bold fr-ml-2v fr-m-0"
-            aria-hidden="true"
-          ></span>
-        </div>
+        <button
+          v-if="estFavoris"
+          @click="retirerDesFavoris"
+          class="fr-btn fr-btn--sm fr-text--xs fr-text--bold fr-btn--tertiary-no-outline text--gris-dark fr-icon-heart-fill fr-btn--icon-right fr-pr-0 icon-favoris--on"
+        >
+          Retirer des favoris
+        </button>
+        <button
+          v-else
+          @click="ajouterAuxFavoris"
+          class="fr-btn fr-btn--sm fr-text--xs fr-text--bold fr-btn--tertiary-no-outline text--gris-dark fr-icon-heart-line fr-btn--icon-right fr-pr-0 icon-favoris--off"
+        >
+          Mettre en favori
+        </button>
       </div>
       <h3 class="fr-h4 text--bleu fr-mt-1w fr-mb-2w">{{ titre }}</h3>
       <p class="fr-text--md text--gris-dark fr-mb-2w">{{ description }}</p>
@@ -22,7 +29,14 @@
 </template>
 
 <script setup lang="ts">
-  defineProps<{
+  import { ref } from 'vue';
+  import { utilisateurStore } from '@/store/utilisateur';
+  import { ArticleRepositoryAxios } from '@/article/adapters/article.repository.axios';
+  import { AjouterAuxFavorisUsecase } from '@/article/ajouterAuxFavoris.usecase';
+  import { RetirerDesFavorisUsecase } from '@/article/retirerDesFavoris.usecase';
+
+  const props = defineProps<{
+    id: string;
     image: string;
     thematique: string;
     titre: string;
@@ -30,6 +44,20 @@
     url: string;
     favoris: boolean;
   }>();
+
+  const estFavoris = ref(props.favoris);
+
+  const ajouterAuxFavoris = async () => {
+    estFavoris.value = true;
+    const ajouterAuxFavorisUsecase = new AjouterAuxFavorisUsecase(new ArticleRepositoryAxios());
+    await ajouterAuxFavorisUsecase.execute(props.id, utilisateurStore().utilisateur.id);
+  };
+
+  const retirerDesFavoris = async () => {
+    estFavoris.value = false;
+    const retirerDesFavorisUsecase = new RetirerDesFavorisUsecase(new ArticleRepositoryAxios());
+    await retirerDesFavorisUsecase.execute(props.id, utilisateurStore().utilisateur.id);
+  };
 </script>
 
 <style scoped>
@@ -42,5 +70,13 @@
     display: block;
     object-fit: cover;
     width: 100%;
+  }
+
+  .icon-favoris--on::after {
+    color: var(--red-marianne-main-472);
+  }
+
+  .icon-favoris--off::after {
+    color: var(--blue-france-sun-113-625);
   }
 </style>
