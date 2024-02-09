@@ -15,25 +15,22 @@
           {{ nombreInstallation }}
         </span>
       </div>
-      <div class="fr-grid-row--top fr-grid-row--right fr-grid-row fr-ml-auto">
+      <div class="fr-grid-row--top fr-ml-auto">
         <span v-if="estEnConstruction" class="fr-badge fr-badge--info">SERVICE BIENTÔT DISPONIBLE</span>
-        <div v-else>
-          <button
-            v-if="estInstalle"
-            class="fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-close-line fr-btn--sm fr-mr-1w"
-            @click="enleverServiceActif(id)"
-          >
-            Enlever
-          </button>
-          <div v-else>
-            <button
-              class="fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-download-line fr-btn--sm fr-mr-1w"
-              @click="installerServiceActif(id)"
-            >
-              Installer
-            </button>
-          </div>
-        </div>
+        <button
+          v-else-if="estInstalle"
+          class="fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-close-line fr-btn--sm"
+          @click="enleverServiceActif(id)"
+        >
+          Enlever
+        </button>
+        <button
+          v-else
+          class="fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-download-line fr-btn--sm"
+          @click="installerServiceActif(id)"
+        >
+          Installer
+        </button>
       </div>
     </div>
     <div class="fr-grid-row fr-grid-row--gutters fr-mt-2w">
@@ -103,6 +100,6 @@
     width: 100%;
     border-radius: 10px;
     object-fit: cover;
-    max-height: 300px;
+    max-height: 19rem;
   }
 </style>
