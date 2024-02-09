@@ -1,8 +1,9 @@
 <template>
   <FilDAriane page-courante="Services" />
+  <h1 class="fr-h2">Liste des services</h1>
   <div class="fr-grid-row fr-grid-row--gutters">
     <div class="fr-col-12 fr-col-lg-3">
-      <span class="fr-h4">Filtres</span>
+      <h2 class="fr-h4">Filtres</h2>
       <InputCheckbox
         class="fr-mt-1w"
         id="thematiques"
@@ -12,7 +13,6 @@
       />
     </div>
     <div class="fr-col-12 fr-col-lg-9">
-      <h1 class="fr-h2">Liste des services</h1>
       <div v-for="service in serviceCatalogueViewModels.catalogue" :key="service.id">
         <div v-if="service.thematiques.some(thematique => categoriesActives.includes(thematique))">
           <ServiceCard
@@ -27,6 +27,7 @@
             :description="service.description"
             :sousDescription="service.sousDescription"
             @refresh-catalogue-services="refreshCatalogueServices"
+            class="fr-mb-2w"
           />
         </div>
       </div>

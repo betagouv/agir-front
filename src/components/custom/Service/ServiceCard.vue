@@ -1,5 +1,5 @@
 <template>
-  <div class="fr-p-2w fr-mb-2w background--white border border-radius--md">
+  <div class="fr-p-2w background--white border border-radius--md">
     <div class="fr-grid-row fr-col-12">
       <div class="fr-hidden fr-unhidden-md fr-mr-1w">
         <img class="img-icon-rounded" :src="icon" alt="" width="70" height="70" />
@@ -10,13 +10,13 @@
             {{ thematique }}
           </span>
         </div>
-        <span class="fr-mb-1v fr-m-md-0 fr-text--bold fr-text--xl text--lh-1">{{ titre }}</span>
+        <h2 class="fr-mb-1v fr-m-md-0 fr-text--bold fr-text--xl text--lh-1">{{ titre }}</h2>
         <span class="fr-m-md-0 fr-text--xs fr-text-mention--grey fr-icon-group-line fr-icon--xs">
           {{ nombreInstallation }}
         </span>
       </div>
       <div class="fr-grid-row--top fr-grid-row--right fr-grid-row fr-ml-auto">
-        <p v-if="estEnConstruction" class="fr-badge fr-badge--info fr-mr-1w">SERVICE BIENTÔT DISPONIBLE</p>
+        <span v-if="estEnConstruction" class="fr-badge fr-badge--info">SERVICE BIENTÔT DISPONIBLE</span>
         <div v-else>
           <button
             v-if="estInstalle"
@@ -36,16 +36,13 @@
         </div>
       </div>
     </div>
-
-    <div class="fr-grid-row fr-col-12 fr-mt-2w">
+    <div class="fr-grid-row fr-grid-row--gutters fr-mt-2w">
       <div class="fr-col-6">
         <img class="img-illustration" :src="image" alt="" />
       </div>
-      <div class="fr-col-5 fr-ml-2w">
-        <p class="fr-text--bold">{{ description }}</p>
-        <p>
-          {{ sousDescription }}
-        </p>
+      <div class="fr-col-6">
+        <h3 class="fr-text--bold fr-text--md text--gris">{{ description }}</h3>
+        <p>{{ sousDescription }}</p>
       </div>
     </div>
   </div>
