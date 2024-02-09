@@ -7,7 +7,7 @@
       v-else-if="serviceCatalogueViewModels"
       :service-catalogue-view-models="serviceCatalogueViewModels"
     />
-    <div v-else>Une erreur est survenue</div>
+    <p v-else>Une erreur est survenue</p>
   </div>
   <Teleport to="body">
     <Modale
