@@ -9,6 +9,6 @@ export class SessionRepositoryStore implements SessionRepository {
   }
 
   nouvelleFeatureDebloquee(featureDebloquee: string): void {
-    utilisateurStore().utilisateur?.fonctionnalitesDebloquees?.push(featureDebloquee);
+    utilisateurStore().utilisateur.fonctionnalitesDebloquees.push(featureDebloquee);
   }
 }
