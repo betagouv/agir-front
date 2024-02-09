@@ -1,11 +1,7 @@
 <template>
   <div class="fr-container">
     <div v-if="!serviceCatalogueViewModels">Une erreur est survenue</div>
-    <CatalogueServices
-      v-else
-      @refresh-catalogue-services="refreshCatalogueServices"
-      :service-catalogue-view-models="serviceCatalogueViewModels"
-    />
+    <CatalogueServices v-else :service-catalogue-view-models="serviceCatalogueViewModels" />
   </div>
   <Teleport to="body">
     <Modale
@@ -42,17 +38,15 @@
   const isLoading = ref<boolean>(true);
 
   const serviceCatalogueViewModels = ref<ServiceCatalogueViewModel>();
+
   function mapServiceCatalogueViewModel(services: ServiceCatalogueViewModel) {
     serviceCatalogueViewModels.value = services;
     isLoading.value = false;
   }
-  const usecase = new RecupererCatalogueServicesUseCase(new ServiceRepositoryAxios());
-  const serviceCataloguePresenterImpl = new ServiceCataloguePresenterImpl(mapServiceCatalogueViewModel);
 
-  function refreshCatalogueServices() {
-    usecase.execute(utilisateurId, serviceCataloguePresenterImpl);
-  }
   onMounted(() => {
-    refreshCatalogueServices();
+    const usecase = new RecupererCatalogueServicesUseCase(new ServiceRepositoryAxios());
+    const serviceCataloguePresenterImpl = new ServiceCataloguePresenterImpl(mapServiceCatalogueViewModel);
+    usecase.execute(utilisateurId, serviceCataloguePresenterImpl);
   });
 </script>

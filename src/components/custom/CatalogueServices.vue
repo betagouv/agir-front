@@ -26,7 +26,6 @@
             :nombreInstallation="service.nombreInstallation"
             :description="service.description"
             :sousDescription="service.sousDescription"
-            @refresh-catalogue-services="refreshCatalogueServices"
             class="fr-mb-2w"
           />
         </div>
@@ -42,12 +41,6 @@
   import ServiceCard from '@/components/custom/Service/ServiceCard.vue';
 
   const props = defineProps<{ serviceCatalogueViewModels: ServiceCatalogueViewModel }>();
-
-  const emit = defineEmits<{
-    (event: 'refreshCatalogueServices'): void;
-  }>();
-
-  const refreshCatalogueServices = () => emit('refreshCatalogueServices');
 
   const optionsCheckbox = props.serviceCatalogueViewModels.filtreThematiques.map(option => ({
     id: option,

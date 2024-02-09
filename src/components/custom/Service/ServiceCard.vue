@@ -18,7 +18,7 @@
       <div class="fr-grid-row--top fr-ml-auto">
         <span v-if="estEnConstruction" class="fr-badge fr-badge--info">SERVICE BIENTÔT DISPONIBLE</span>
         <button
-          v-else-if="estInstalle"
+          v-else-if="estInstalleState"
           class="fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-close-line fr-btn--sm"
           @click="enleverServiceActif(id)"
         >
@@ -46,6 +46,7 @@
 </template>
 
 <script setup lang="ts">
+  import { ref } from 'vue';
   import { ServiceEventBusImpl } from '@/services/serviceEventBusImpl';
   import { EnleverServiceActifUsecase } from '@/services/enleverServiceActif.usecase';
   import { ServiceRepositoryAxios } from '@/services/adapters/service.repository.axios';
@@ -53,7 +54,7 @@
   import { InstallerServiceActifUsecase } from '@/services/installerServiceActif.usecase';
   import ModaleActions from '@/components/custom/Modale/ModaleActions';
 
-  defineProps<{
+  const props = defineProps<{
     id: string;
     icon: string;
     image: string;
@@ -66,20 +67,20 @@
     sousDescription: string;
   }>();
 
-  const emit = defineEmits<{ (event: 'refreshCatalogueServices'): void }>();
+  const estInstalleState = ref<boolean>(props.estInstalle);
 
   async function enleverServiceActif(serviceId: string) {
     const useCase = new EnleverServiceActifUsecase(new ServiceRepositoryAxios(), ServiceEventBusImpl.getInstance());
     const utilisateurId = utilisateurStore().utilisateur.id;
     await useCase.execute(utilisateurId, serviceId);
-    emit('refreshCatalogueServices');
+    estInstalleState.value = false;
   }
 
   async function installerServiceActif(serviceId: string) {
     const useCase = new InstallerServiceActifUsecase(new ServiceRepositoryAxios(), ServiceEventBusImpl.getInstance());
     const utilisateurId = utilisateurStore().utilisateur.id;
     await useCase.execute(utilisateurId, serviceId);
-    emit('refreshCatalogueServices');
+    estInstalleState.value = true;
     window.scrollTo(0, 0);
 
     if (serviceId === 'linky') {
