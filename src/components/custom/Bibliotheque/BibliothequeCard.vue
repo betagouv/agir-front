@@ -48,13 +48,13 @@
   const estFavoris = ref(props.favoris);
 
   const ajouterAuxFavoris = async () => {
-    estFavoris.value = !estFavoris.value;
+    estFavoris.value = true;
     const ajouterAuxFavorisUsecase = new AjouterAuxFavorisUsecase(new ArticleRepositoryAxios());
     await ajouterAuxFavorisUsecase.execute(props.id, utilisateurStore().utilisateur.id);
   };
 
   const retirerDesFavoris = async () => {
-    estFavoris.value = !estFavoris.value;
+    estFavoris.value = false;
     const retirerDesFavorisUsecase = new RetirerDesFavorisUsecase(new ArticleRepositoryAxios());
     await retirerDesFavorisUsecase.execute(props.id, utilisateurStore().utilisateur.id);
   };
