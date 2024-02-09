@@ -31,16 +31,7 @@ export class CreerCompteUtilisateurUsecase {
       });
 
       this.sessionRepository.sauvegarderUtilisateur({
-        nom: '',
-        id: '',
-        codePostal: '',
-        commune: '',
-        prenom: '',
         mail: utilisateurCree.mail,
-        revenuFiscal: null,
-        nombreDePartsFiscales: 1,
-        abonnementTransport: false,
-        fonctionnalitesDebloquees: [],
       });
       creerComptePresenter.present();
     } catch (e) {
