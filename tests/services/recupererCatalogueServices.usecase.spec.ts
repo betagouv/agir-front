@@ -74,7 +74,11 @@ describe('Fichier de tests concernant la recuperations des services dans le cata
             parametrageRequis: true,
           },
         ],
-        filtreThematiques: ['thematique1', 'thematique2', 'thematique3'],
+        filtreThematiques: [
+          { id: 'thematique1', label: 'thematique1', checked: false },
+          { id: 'thematique2', label: 'thematique2', checked: false },
+          { id: 'thematique3', label: 'thematique3', checked: false },
+        ],
       });
     }
   });
