@@ -3,7 +3,11 @@ import { ServiceCatalogue } from '@/services/recupererCatalogueServices.usecase'
 
 export interface ServiceCatalogueViewModel {
   catalogue: ServiceCatalogueViewModelItem[];
-  filtreThematiques: string[];
+  filtreThematiques: {
+    id: string;
+    label: string;
+    checked: boolean;
+  }[];
 }
 export interface ServiceCatalogueViewModelItem {
   id: string;
@@ -45,6 +49,11 @@ export class ServiceCataloguePresenterImpl implements ServiceCataloguePresenter 
       .map(service => service.thematiques)
       .flat()
       .filter((value, index, self) => self.indexOf(value) === index)
-      .sort();
+      .sort()
+      .map(serviceFiltrer => ({
+        id: serviceFiltrer,
+        label: serviceFiltrer,
+        checked: false,
+      }));
   }
 }

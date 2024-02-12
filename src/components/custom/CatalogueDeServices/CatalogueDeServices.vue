@@ -6,7 +6,7 @@
         class="fr-mt-1w"
         id="thematiques"
         label="Catégories affichées"
-        :options="optionsThematiqueCheckbox"
+        :options="serviceCatalogueViewModels.filtreThematiques"
         @update="handleValueChange"
       />
     </div>
@@ -31,14 +31,7 @@
 
   const props = defineProps<{ serviceCatalogueViewModels: ServiceCatalogueViewModel }>();
 
-  const optionsThematiqueCheckbox = props.serviceCatalogueViewModels.filtreThematiques.map(option => ({
-    id: option,
-    label: option,
-    checked: false,
-  }));
-
   const categoriesActives = ref<string[]>([]);
-  categoriesActives.value = optionsThematiqueCheckbox.filter(({ checked }) => checked).map(({ id }) => id);
 
   const servicesFiltres = computed(() => {
     if (categoriesActives.value.length === 0) {
