@@ -9,7 +9,7 @@ export const creerUtilisateurConnecte: () => Promise<Page> = async () => {
   return page;
 };
 
-async function creerUtilisateurOuSupprimmer(page: Page): Promise<Page> {
+export async function creerUtilisateurOuSupprimmer(page: Page): Promise<Page> {
   await page.goto('/onboarding');
   await page.evaluate(() => {
     localStorage.setItem(
