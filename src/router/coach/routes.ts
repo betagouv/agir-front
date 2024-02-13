@@ -1,7 +1,6 @@
 const Coach = () => import('@/components/Coach.vue');
 const PageCatalogueServices = () => import('@/components/pages/PageCatalogueServices.vue');
 const PageBibliotheque = () => import('@/components/pages/PageBibliotheque.vue');
-const PageSuiviDuJour = () => import('@/components/pages/PageSuiviDuJour.vue');
 const PageQuiz = () => import('@/components/pages/PageQuiz.vue');
 const PagePrevisualisationQuiz = () => import('@/components/pages/PagePrevisualisationQuiz.vue');
 const PageLinky = () => import('@/components/pages/PageLinky.vue');
@@ -54,14 +53,6 @@ const coachRoutes: RouteRecordRaw[] = [
         component: PageBibliotheque,
         meta: {
           title: 'Bibliothèque',
-        },
-      },
-      {
-        path: RouteCoachPath.SUIVI_DU_JOUR,
-        name: RouteCoachName.SUIVI_DU_JOUR,
-        component: PageSuiviDuJour,
-        meta: {
-          title: 'Suivi du jour',
         },
       },
       {
