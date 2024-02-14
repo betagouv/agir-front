@@ -8,6 +8,8 @@
 </template>
 
 <script setup lang="ts">
+  import '@gouvfr/dsfr/dist/component/toggle/toggle.min.css';
+
   defineProps<{ label: string; id: string }>();
 
   const emit = defineEmits<{ (event: 'rechercherParFavoris', value: boolean): void }>();

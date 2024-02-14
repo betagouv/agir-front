@@ -18,6 +18,7 @@
 
 <script setup lang="ts">
   import { ref } from 'vue';
+  import '@gouvfr/dsfr/dist/component/search/search.min.css';
 
   defineProps<{
     id: string;

@@ -128,6 +128,8 @@
 </template>
 
 <script setup lang="ts">
+  import '@gouvfr/dsfr/dist/component/header/header.min.css';
+  import '@gouvfr/dsfr/dist/component/navigation/navigation.min.css';
   import { computed } from 'vue';
   import { useRoute } from 'vue-router';
   import { RouteCommuneName } from '@/router';

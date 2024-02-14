@@ -50,7 +50,10 @@
     </div>
   </div>
 </template>
+
 <script setup lang="ts">
+  import '@gouvfr/dsfr/dist/component/password/password.min.css';
+
   defineProps<{
     modelValue: string;
   }>();

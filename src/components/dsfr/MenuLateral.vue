@@ -30,6 +30,7 @@
 
 <script setup lang="ts">
   import { useRoute } from 'vue-router';
+  import '@gouvfr/dsfr/dist/component/sidemenu/sidemenu.min.css';
 
   defineProps<{
     liens: {
