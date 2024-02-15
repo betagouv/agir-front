@@ -5,7 +5,7 @@
       <span class="fr-icon-star-fill" aria-hidden="true"></span>
       <span class="fr-icon-star-fill" aria-hidden="true"></span>
     </div>
-    <h1 :id="modaleId" class="fr-h2 fr-modal__title text--uppercase fr-mb-1w">Bien joué !</h1>
+    <h1 :id="labelTitle" class="fr-h2 fr-modal__title text--uppercase fr-mb-1w">Bien joué !</h1>
     <h2 class="fr-text--lead text--orange text--normal fr-mb-1w">Vous passez au niveau suivant !</h2>
     <p class="fr-grid-row flex-column text--uppercase text--bold text--gris-light">
       <span>Niveau</span>
@@ -15,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-  defineProps<{ modaleId: string; niveau: number }>();
+  defineProps<{ labelTitle: string; niveau: number }>();
 </script>
 
 <style scoped>

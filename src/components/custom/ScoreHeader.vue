@@ -9,7 +9,7 @@
   <Teleport to="body">
     <Modale label="Modale de passage de niveau" id="passageDeNiveau" :radius="true" :is-footer-actions="false">
       <template v-slot:contenu>
-        <ModalePassageDeNiveau :niveau="utilisateurStore().score.niveau" modale-id="passageDeNiveau" />
+        <ModalePassageDeNiveau :niveau="utilisateurStore().score.niveau" label-title="Modale de passage de niveau" />
         <div class="text--center fr-my-3w">
           <div v-if="utilisateurStore().score.celebration?.reveal">
             <p class="fr-m-0 text--uppercase fr-text--xs text--bold text--gris-light">Section débloquée</p>
@@ -50,7 +50,7 @@
   import { ValiderCelebrationUsecase } from '@/celebration/validerCelebration.usecase';
   import { CelebrationRepositoryAxios } from '@/celebration/adapters/celebration.repository.axios';
   import { SessionRepositoryStore } from '@/authentification/adapters/session.repository.store';
-  import ModalePassageDeNiveau from './Modale/ModalePassageDeNiveau.vue';
+  import ModalePassageDeNiveau from '@/components/custom/Modale/ModalePassageDeNiveau.vue';
   import { Fonctionnalites } from '@/shell/fonctionnalitesEnum';
   import { useReveal } from '@/composables/useReveal';
 
