@@ -58,7 +58,7 @@
     </div>
     <div class="fr-header__menu fr-modal" id="modal-menu" aria-labelledby="button-menu">
       <div class="fr-container">
-        <button class="fr-btn--close fr-btn" aria-controls="modal-menu" id="button-menu" title="Fermer">Fermer</button>
+        <button class="fr-btn--close fr-btn" aria-controls="modal-menu" title="Fermer">Fermer</button>
         <div class="fr-header__menu-links"></div>
         <nav
           v-if="nomUtilisateur"
