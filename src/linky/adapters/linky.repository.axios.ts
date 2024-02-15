@@ -4,9 +4,12 @@ import { ConsommationElectrique } from '@/linky/obtenirConsommationElectrique.us
 import { InformationCompteur } from '@/linky/obtenirInformationCompteur.usecase';
 
 interface ConsommationElectriqueApiModel {
-  valeur: number;
-  mois: string;
-  annee: string;
+  commentaires: string;
+  data: {
+    valeur: number;
+    mois: string;
+    annee: string;
+  }[];
 }
 
 interface InformationCompteurApiModel {
@@ -22,11 +25,11 @@ export class LinkyRepositoryAxios implements LinkyRepository {
   @intercept401()
   async recupererConsommationElectrique(idUtilsateur: string): Promise<ConsommationElectrique[]> {
     const axiosInstance = AxiosFactory.getAxios();
-    const reponse = await axiosInstance.get<ConsommationElectriqueApiModel[]>(
+    const reponse = await axiosInstance.get<ConsommationElectriqueApiModel>(
       `/utilisateurs/${idUtilsateur}/linky?compare_annees=true`
     );
 
-    return reponse.data.map(donneeConsommation => ({
+    return reponse.data.data.map(donneeConsommation => ({
       mois: donneeConsommation.mois,
       annee: donneeConsommation.annee,
       valeur: donneeConsommation.valeur,
