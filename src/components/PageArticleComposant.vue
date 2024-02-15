@@ -32,14 +32,14 @@
             <router-link class="fr-btn" :to="{ name: RouteCoachName.COACH }"> Revenir à l'accueil </router-link>
             <button
               v-if="!article.estEnFavori"
-              class="fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-heart-fill"
+              class="fr-btn fr-btn--secondary fr-icon-heart-line fr-btn--icon-right icon-favoris--off"
               @click="ajouterAuxFavoris"
             >
               Ajouter aux favoris
             </button>
             <button
               v-else
-              class="fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-heart-fill"
+              class="fr-btn fr-btn--secondary fr-icon-heart-fill fr-btn--icon-right icon-favoris--on"
               @click="retirerDesFavoris"
             >
               Retirer des favoris
@@ -111,5 +111,13 @@
 
   .img-partenaire {
     width: fit-content;
+  }
+
+  .icon-favoris--on::after {
+    color: var(--red-marianne-main-472);
+  }
+
+  .icon-favoris--off::after {
+    color: var(--blue-france-sun-113-625);
   }
 </style>
