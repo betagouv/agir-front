@@ -1,13 +1,13 @@
 <template>
-  <div class="jauge-background" :aria-label="label">
-    <div
-      class="jauge-remplissage"
-      aria-hidden="true"
-      :aria-valuenow="value"
-      aria-valuemin="0"
-      :aria-valuemax="valueMax"
-      :style="{ width: `${valeurToWidth()}%` }"
-    />
+  <div
+    class="jauge-background"
+    :aria-label="label"
+    role="progressbar"
+    :aria-valuenow="value"
+    aria-valuemin="0"
+    :aria-valuemax="valueMax"
+  >
+    <div class="jauge-remplissage" aria-hidden="true" :style="{ width: `${valeurToWidth()}%` }" />
   </div>
 </template>
 
