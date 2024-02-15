@@ -2,10 +2,9 @@
   <div class="fr-container fr-mb-6w">
     <FilDAriane :page-courante="`Article: ${article.titre}`" />
     <h1>{{ article.titre }}</h1>
-
     <div class="fr-grid-row fr-grid-row--gutters">
       <div class="fr-col-12 fr-col-md-8">
-        <div class="article fr-p-6v background--white border-radius--md">
+        <div class="border fr-p-6v background--white border-radius--md">
           <h2 class="fr-h3">{{ article.sousTitre }}</h2>
           <div class="cms__content" v-html="article.texte" />
           <div v-if="article.sources && article.sources.length > 0" class="fr-mb-4w print-hidden">
@@ -56,7 +55,7 @@
           class="fr-grid-row flex-column background--white border border-radius--md fr-p-2w"
         >
           <span>Proposé par</span>
-          <img class="img-partenaire fr-mt-5v" :src="article.partenaire.logo" :alt="article.partenaire.nom" />
+          <img class="max-full-width fr-mt-5v" :src="article.partenaire.logo" :alt="article.partenaire.nom" />
         </div>
       </div>
     </div>
@@ -64,9 +63,8 @@
 </template>
 
 <script setup lang="ts">
-  import FilDAriane from './dsfr/FilDAriane.vue';
+  import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import { Article } from '@/article/recupererArticle.usecase';
-
   import { RouteCoachName } from '@/router/coach/routeCoachName';
   import Notation from '@/components/custom/Notation.vue';
   import { ArticleRepositoryAxios } from '@/article/adapters/article.repository.axios';
@@ -105,14 +103,6 @@
 </script>
 
 <style scoped>
-  .article {
-    border: 1px solid rgba(0, 0, 0, 0.19);
-  }
-
-  .img-partenaire {
-    width: fit-content;
-  }
-
   .icon-favoris--on::after {
     color: var(--red-marianne-main-472);
   }
