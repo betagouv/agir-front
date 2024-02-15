@@ -108,17 +108,8 @@ describe('Fichier de tests concernant la creation du compte utilisateur', () => 
       onboardingState
     );
     // THEN
-    expect(sessionRepository.utilisateur).toStrictEqual<Utilisateur>({
-      id: '',
-      nom: '',
-      codePostal: '',
-      commune: '',
-      prenom: '',
+    expect(sessionRepository.utilisateur).toStrictEqual<Partial<Utilisateur>>({
       mail: 'john@skynet.com',
-      revenuFiscal: null,
-      nombreDePartsFiscales: 1,
-      abonnementTransport: false,
-      fonctionnalitesDebloquees: [],
     });
   });
   it("si le repository renvoie une erreur avec un code d'erreur 023 doit naviguer vers la page de beta fermée", async () => {
