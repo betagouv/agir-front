@@ -7,10 +7,18 @@ import piniaPluginPersistedstate from 'pinia-plugin-persistedstate';
 import VueMatomo from 'vue-matomo';
 // ordre des css important
 import 'shepherd.js/dist/css/shepherd.css';
-import '@gouvfr/dsfr/dist/dsfr.min.css';
+import '@gouvfr/dsfr/dist/core/core.min.css';
 import '@gouvfr/dsfr/dist/utility/utility.min.css';
+import '@gouvfr/dsfr/dist/component/button/button.min.css';
+import '@gouvfr/dsfr/dist/component/input/input.min.css';
+import '@gouvfr/dsfr/dist/component/logo/logo.min.css';
+import '@gouvfr/dsfr/dist/component/link/link.min.css';
+import '@gouvfr/dsfr/dist/component/form/form.min.css';
+import '@gouvfr/dsfr/dist/component/checkbox/checkbox.min.css';
+import '@gouvfr/dsfr/dist/component/radio/radio.min.css';
 import '@gouvfr/dsfr/dist/dsfr.module.min.js';
 import { createSentry } from './sentry/sentry';
+
 import './assets/theme/style.css';
 import { NavigationBus } from '@/navigationBus';
 import Hotjar from '@hotjar/browser';

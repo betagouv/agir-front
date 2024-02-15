@@ -9,6 +9,8 @@
 </template>
 
 <script setup lang="ts">
+  import '@gouvfr/dsfr/dist/component/stepper/stepper.min.css';
+
   defineProps<{
     titreEtape: string;
     etapeCourante: number;

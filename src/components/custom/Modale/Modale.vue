@@ -21,6 +21,8 @@
 </template>
 
 <script setup lang="ts">
+  import '@gouvfr/dsfr/dist/component/modal/modal.min.css';
+
   const props = withDefaults(
     defineProps<{
       id: string;

@@ -18,6 +18,8 @@
 </template>
 
 <script setup lang="ts">
+  import '@gouvfr/dsfr/dist/component/breadcrumb/breadcrumb.min.css';
+
   defineProps<{
     pageHierarchie?: {
       label: string;

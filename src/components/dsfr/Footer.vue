@@ -79,6 +79,7 @@
 </template>
 
 <script lang="ts">
+  import '@gouvfr/dsfr/dist/component/footer/footer.min.css';
   import router from '@/router';
   import { utilisateurStore } from '@/store/utilisateur';
   import Cookies from 'js-cookie';

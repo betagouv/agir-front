@@ -43,6 +43,7 @@
 
 <script setup lang="ts">
   import { ref } from 'vue';
+  import '@gouvfr/dsfr/dist/component/password/password.min.css';
   import router from '@/router';
   import { AuthentifierUtilisateurUsecase } from '@/authentification/authentifierUtilisateur.usecase';
   import { UtilisateurRepositoryAxios } from '@/authentification/adapters/utilisateur.repository.axios';
