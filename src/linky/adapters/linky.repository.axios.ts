@@ -4,7 +4,7 @@ import { ConsommationElectrique } from '@/linky/obtenirConsommationElectrique.us
 import { InformationCompteur } from '@/linky/obtenirInformationCompteur.usecase';
 
 interface ConsommationElectriqueApiModel {
-  commentaires: string;
+  commentaires: [];
   data: {
     valeur: number;
     mois: string;
@@ -34,6 +34,16 @@ export class LinkyRepositoryAxios implements LinkyRepository {
       annee: donneeConsommation.annee,
       valeur: donneeConsommation.valeur,
     }));
+  }
+
+  @intercept401()
+  async recupererConsommationElectriqueDerniersJours(idUtilsateur: string): Promise<void> {
+    const axiosInstance = AxiosFactory.getAxios();
+    const reponse = await axiosInstance.get<ConsommationElectriqueApiModel>(
+      `/utilisateurs/${idUtilsateur}/linky?derniers_14_jours=true`
+    );
+
+    console.log(reponse.data);
   }
 
   @intercept401()
