@@ -1,5 +1,26 @@
 <template>
   <h1 :id="serviceId" class="fr-h4 fr-modal__title">Configurer le service “Votre conso élec au jour le jour”</h1>
+  <div class="fr-grid-row fr-grid-row--gutters">
+    <div class="fr-col-md-7 fr-col-12">
+      <h2 class="fr-h6 fr-mb-0">Pour quoi faire ?</h2>
+      <ul>
+        <li>Suivre sa consommation électrique au quotidien</li>
+        <li>Détecter des anomalies</li>
+        <li>Réduire sa facture énergétique</li>
+      </ul>
+    </div>
+    <div class="fr-col-md-5 fr-col-12">
+      <img src="/graphique-linky-exemple.png" class="max-full-width" alt="" />
+    </div>
+  </div>
+  <h2 class="fr-h6 fr-mb-0">Quelles données sont utilisées ?</h2>
+  <p class="fr-mb-0">
+    L’historique de votre consommation d’électricité quotidienne (en KWh) sur les 2 dernières années (36 mois maximum),
+    fourni par Enedis (gestionnaire du réseau électrique français)
+  </p>
+  <p class="fr-text--bold">
+    Important : vos données sont protégées, elles ne sont en aucun partagées avec des services tiers
+  </p>
   <form @submit.prevent="parametrerLeService(serviceId)">
     <InputText
       name="prm"
@@ -7,17 +28,19 @@
       label="Numéro de PRM"
       description="Il s’agit d’une suite de 14 chiffres qui identifie le logement sur le réseau électrique."
     />
-    <p class="fr-mb-0 fr-text--bold">
+    <p class="fr-text--bold">
       <span class="fr-icon-question-line fr-text--bold" aria-hidden="true"></span>
       Comment trouver ce numéro ?
     </p>
-    <ul class="fr-pl-7v">
-      <li>Sur votre facture</li>
-      <li>
+    <div class="fr-grid-row fr-grid-row--gutters fr-mb-2w">
+      <img src="/facture-linky-exemple.png" class="fr-col-md-3 max-full-width" alt="" />
+      <p class="fr-col-md-3 fr-mb-0 fr-text--sm">Sur votre facture</p>
+      <img src="/compteur-linky-exemple.jpg" class="fr-col-md-3 max-full-width" alt="" />
+      <p class="fr-col-md-3 fr-mb-0 fr-text--sm">
         Sur votre compteur Linky<br />
         Faire défiler les affichages du compteur (appui sur la touche +) jusqu’à lire la valeur du « numéro de PRM ».
-      </li>
-    </ul>
+      </p>
+    </div>
     <InputCheckboxUnitaire
       class="fr-pl-1v"
       id="cgu"
