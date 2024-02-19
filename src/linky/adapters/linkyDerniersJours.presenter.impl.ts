@@ -1,14 +1,5 @@
-import { LinkyPresenter } from '@/linky/ports/linky.presenter';
+import { ConsommationElectriqueViewModel, LinkyPresenter } from '@/linky/ports/linky.presenter';
 import { ConsommationElectrique } from '@/linky/ports/linkyRepository.repository';
-
-export interface ConsommationElectriqueViewModel {
-  commentaires: string[];
-  graphique: {
-    libelles: string[];
-    valeur_courante: number[];
-    valeur_precedente: number[];
-  };
-}
 
 export class LinkyPresenterDerniersJoursImpl implements LinkyPresenter {
   constructor(private viewModel: (consommationElectriqueViewModel: ConsommationElectriqueViewModel) => void) {}

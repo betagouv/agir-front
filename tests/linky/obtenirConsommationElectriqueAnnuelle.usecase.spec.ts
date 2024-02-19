@@ -1,9 +1,7 @@
 import { ObtenirConsommationElectriqueAnnuelleUsecase } from '@/linky/obtenirConsommationElectriqueAnnuelle.usecase';
-import {
-  ConsommationElectriqueViewModel,
-  LinkyPresenterAnnuelleImpl,
-} from '@/linky/adapters/linkyAnnuelle.presenter.impl';
+import { LinkyPresenterAnnuelleImpl } from '@/linky/adapters/linkyAnnuelle.presenter.impl';
 import { MockLinkyRepository } from './adapters/linky.repository.mock';
+import { ConsommationElectriqueViewModel } from '@/linky/ports/linky.presenter';
 
 describe('Fichier de test du usecase du chargement des données annuelle linky', () => {
   it('en donnant un utilisateur valide doit me retourner ses données de consommation electrique annuelle formatées pour le graphique et les commentaires associés', () => {
@@ -48,7 +46,7 @@ describe('Fichier de test du usecase du chargement des données annuelle linky',
       expect(viewModel).toStrictEqual<ConsommationElectriqueViewModel>({
         commentaires: ['commentaire 1', 'commentaire 2'],
         graphique: {
-          libelles: ['1 janvier', '1fevrier'],
+          libelles: ['janvier', 'fevrier'],
           valeur_courante: [1, 2],
           valeur_precedente: [1, 2],
         },

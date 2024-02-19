@@ -1,9 +1,7 @@
 import { ObtenirConsommationElectriqueDerniersJoursUsecase } from '@/linky/obtenirConsommationElectriqueDerniersJours.usecase';
 import { MockLinkyRepository } from './adapters/linky.repository.mock';
-import {
-  ConsommationElectriqueViewModel,
-  LinkyPresenterDerniersJoursImpl,
-} from '@/linky/adapters/linkyDerniersJours.presenter.impl';
+import { LinkyPresenterDerniersJoursImpl } from '@/linky/adapters/linkyDerniersJours.presenter.impl';
+import { ConsommationElectriqueViewModel } from '@/linky/ports/linky.presenter';
 
 describe('Fichier de test du usecase du chargement des données des 14 derniers jours linky', () => {
   it('en donnant un utilisateur valide doit me retourner ses données de consommation electrique des 14 derniers jours formatées pour le graphique et les commentaires associés', () => {
