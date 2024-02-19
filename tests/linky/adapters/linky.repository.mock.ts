@@ -5,15 +5,15 @@ import { InformationCompteur } from '@/linky/obtenirInformationCompteur.usecase'
 export class MockLinkyRepository implements LinkyRepository {
   constructor(private consommationElectrique: ConsommationElectrique) {}
 
-  recupererConsommationElectriqueAnnuelle(idUtilsateur: string): Promise<ConsommationElectrique> {
+  recupererConsommationElectriqueAnnuelle(_idUtilsateur: string): Promise<ConsommationElectrique> {
     return Promise.resolve(this.consommationElectrique);
   }
 
-  recupererConsommationElectriqueDerniersJours(idUtilsateur: string): Promise<ConsommationElectrique> {
-    throw new Error('Method not implemented.');
+  recupererConsommationElectriqueDerniersJours(_idUtilsateur: string): Promise<ConsommationElectrique> {
+    return Promise.resolve(this.consommationElectrique);
   }
 
-  recupererInformationCompteur(idUtilsateur: string): Promise<InformationCompteur> {
+  recupererInformationCompteur(_idUtilsateur: string): Promise<InformationCompteur> {
     throw new Error('Method not implemented.');
   }
 }

@@ -1,10 +1,6 @@
 import { LinkyRepository } from '@/linky/ports/linkyRepository.repository';
 import { LinkyPresenter } from '@/linky/ports/linky.presenter';
 
-export interface ConsommationElectrique {
-  valeur: number;
-}
-
 export class ObtenirConsommationElectriqueDerniersJoursUsecase {
   constructor(private linkyRepository: LinkyRepository) {}
 

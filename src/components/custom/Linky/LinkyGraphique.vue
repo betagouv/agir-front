@@ -55,7 +55,7 @@
   import { Bar } from 'vue-chartjs';
   import ControleSegmente from '@/components/dsfr/ControleSegmente.vue';
   import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js';
-  import { ObtenirConsommationElectriqueUsecaseAnnuelle } from '@/linky/obtenirConsommationElectriqueAnnuelle.usecase';
+  import { ObtenirConsommationElectriqueAnnuelleUsecase } from '@/linky/obtenirConsommationElectriqueAnnuelle.usecase';
   import { LinkyRepositoryAxios } from '@/linky/adapters/linky.repository.axios';
   import { utilisateurStore } from '@/store/utilisateur';
   import { ConsommationElectriqueViewModel, LinkyPresenterAnnuelleImpl } from '@/linky/adapters/linkyAnnuelle.presenter.impl';
@@ -77,7 +77,7 @@ import { LinkyPresenterDerniersJoursImpl } from '@/linky/adapters/linkyDerniersJ
   }
 
   const idUtilisateur = utilisateurStore().utilisateur.id;
-  const obtenirConsommationElectriqueUsecaseAnnuelle = new ObtenirConsommationElectriqueUsecaseAnnuelle(new LinkyRepositoryAxios());
+  const obtenirConsommationElectriqueUsecaseAnnuelle = new ObtenirConsommationElectriqueAnnuelleUsecase(new LinkyRepositoryAxios());
   const obtenirConsommationElectriqueUsecaseDerniersJours = new ObtenirConsommationElectriqueDerniersJoursUsecase(
     new LinkyRepositoryAxios()
   );
