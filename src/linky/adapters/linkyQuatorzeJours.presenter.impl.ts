@@ -7,6 +7,8 @@ export class LinkyPresenterQuatorzeJoursImpl implements LinkyPresenter {
   presente(consommationElectrique: ConsommationElectrique): void {
     const consommationElectriqueViewModel: ConsommationElectriqueViewModel = {
       description: 'Suivi de votre consommation électrique de vos 14 derniers jours :',
+      couleurValeur1: '#68A532',
+      couleurValeur2: '#447049',
       commentaires: consommationElectrique.commentaires,
       graphique: {
         libelles: [],

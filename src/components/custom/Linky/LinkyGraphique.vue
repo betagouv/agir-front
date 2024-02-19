@@ -38,12 +38,12 @@
         datasets: [
           {
             label: 'année précédente',
-            backgroundColor: `${vueGraphique === VueGraphique.MOIS_PAR_MOIS ? '#6a6af4' : '#68A532'}`,
+            backgroundColor: consos.couleurValeur1,
             data: consos?.graphique.valeur_courante,
           },
           {
             label: 'année courante',
-            backgroundColor: `${vueGraphique === VueGraphique.MOIS_PAR_MOIS ? '#000091' : '#447049'}`,
+            backgroundColor: consos.couleurValeur2,
             data: consos?.graphique.valeur_precedente,
           },
         ],
@@ -109,4 +109,3 @@
     );
   });
 </script>
-@/linky/adapters/linkyQuatorzeJours.presenter.impl
