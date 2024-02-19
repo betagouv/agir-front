@@ -55,10 +55,10 @@
 
         <div
           v-if="article.partenaire"
-          class="fr-mt-2w fr-grid-row flex-column background--white border border-radius--md fr-p-2w"
+          class="max-full-width fr-mt-2w background--white border border-radius--md fr-p-2w"
         >
-          <span>Proposé par</span>
-          <img class="max-full-width fr-mt-5v" :src="article.partenaire.logo" :alt="article.partenaire.nom" />
+          <p class="fr-mb-0">Proposé par</p>
+          <img class="fr-mt-5v" :src="article.partenaire.logo" :alt="article.partenaire.nom" />
         </div>
       </div>
     </div>
