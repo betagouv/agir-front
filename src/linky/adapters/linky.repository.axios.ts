@@ -1,6 +1,6 @@
 import { AxiosFactory, intercept401 } from '@/axios.factory';
 import { LinkyRepository } from '@/linky/ports/linkyRepository.repository';
-import { ConsommationElectrique } from '@/linky/obtenirConsommationElectrique.usecase';
+import { ConsommationElectrique } from '@/linky/obtenirConsommationElectriqueAnnuelle.usecase';
 import { InformationCompteur } from '@/linky/obtenirInformationCompteur.usecase';
 
 interface ConsommationElectriqueApiModel {
@@ -9,6 +9,7 @@ interface ConsommationElectriqueApiModel {
     valeur: number;
     mois: string;
     annee: string;
+    date: string;
   }[];
 }
 
@@ -23,27 +24,41 @@ interface InformationCompteurApiModel {
 
 export class LinkyRepositoryAxios implements LinkyRepository {
   @intercept401()
-  async recupererConsommationElectrique(idUtilsateur: string): Promise<ConsommationElectrique[]> {
+  async recupererConsommationElectriqueAnnuelle(idUtilsateur: string): Promise<ConsommationElectrique> {
     const axiosInstance = AxiosFactory.getAxios();
     const reponse = await axiosInstance.get<ConsommationElectriqueApiModel>(
       `/utilisateurs/${idUtilsateur}/linky?compare_annees=true`
     );
 
-    return reponse.data.data.map(donneeConsommation => ({
-      mois: donneeConsommation.mois,
-      annee: donneeConsommation.annee,
-      valeur: donneeConsommation.valeur,
-    }));
+    return {
+      commentaires: reponse.data.commentaires,
+      data: reponse.data.data.map(donneeConsommation => ({
+        mois: donneeConsommation.mois,
+        annee: donneeConsommation.annee,
+        valeur: donneeConsommation.valeur,
+        date: donneeConsommation.date,
+      })),
+    };
   }
 
   @intercept401()
-  async recupererConsommationElectriqueDerniersJours(idUtilsateur: string): Promise<void> {
+  async recupererConsommationElectriqueDerniersJours(idUtilsateur: string): Promise<ConsommationElectrique> {
     const axiosInstance = AxiosFactory.getAxios();
     const reponse = await axiosInstance.get<ConsommationElectriqueApiModel>(
       `/utilisateurs/${idUtilsateur}/linky?derniers_14_jours=true`
     );
 
     console.log(reponse.data);
+
+    return {
+      commentaires: reponse.data.commentaires,
+      data: reponse.data.data.map(donneeConsommation => ({
+        mois: donneeConsommation.mois,
+        annee: donneeConsommation.annee,
+        valeur: donneeConsommation.valeur,
+        date: donneeConsommation.date,
+      })),
+    };
   }
 
   @intercept401()

@@ -1,5 +1,5 @@
-import { ConsommationElectrique } from '@/linky/obtenirConsommationElectrique.usecase';
+import { ConsommationElectrique } from '@/linky/obtenirConsommationElectriqueAnnuelle.usecase';
 
 export interface LinkyPresenter {
-  presente(consommationElectrique: ConsommationElectrique[]): void;
+  presente(consommationElectrique: ConsommationElectrique): void;
 }
