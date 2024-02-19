@@ -41,7 +41,7 @@ export class LinkyRepositoryAxios implements LinkyRepository {
   }
 
   @intercept401()
-  async recupererConsommationElectriqueDerniersJours(idUtilsateur: string): Promise<ConsommationElectrique> {
+  async recupererConsommationElectriqueQuatorzeJours(idUtilsateur: string): Promise<ConsommationElectrique> {
     const axiosInstance = AxiosFactory.getAxios();
     const reponse = await axiosInstance.get<ConsommationElectriqueApiModel>(
       `/utilisateurs/${idUtilsateur}/linky?derniers_14_jours=true`

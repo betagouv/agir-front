@@ -12,6 +12,6 @@ export interface ConsommationElectrique {
 
 export interface LinkyRepository {
   recupererConsommationElectriqueAnnuelle(idUtilsateur: string): Promise<ConsommationElectrique>;
-  recupererConsommationElectriqueDerniersJours(idUtilsateur: string): Promise<ConsommationElectrique>;
+  recupererConsommationElectriqueQuatorzeJours(idUtilsateur: string): Promise<ConsommationElectrique>;
   recupererInformationCompteur(idUtilsateur: string): Promise<InformationCompteur>;
 }

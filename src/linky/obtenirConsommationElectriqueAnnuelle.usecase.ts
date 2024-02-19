@@ -5,7 +5,9 @@ export class ObtenirConsommationElectriqueAnnuelleUsecase {
   constructor(private linkyRepository: LinkyRepository) {}
 
   async execute(idUtilsateur: string, presenter: LinkyPresenter) {
-    const response = await this.linkyRepository.recupererConsommationElectriqueAnnuelle(idUtilsateur);
-    presenter.presente(response);
+    const consommationElectriqueAnnuelle = await this.linkyRepository.recupererConsommationElectriqueAnnuelle(
+      idUtilsateur
+    );
+    presenter.presente(consommationElectriqueAnnuelle);
   }
 }

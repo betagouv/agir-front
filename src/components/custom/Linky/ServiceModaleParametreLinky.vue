@@ -66,7 +66,7 @@
   import { ServiceRepositoryAxios } from '@/services/adapters/service.repository.axios';
   import ModaleActions from '@/components/custom/Modale/ModaleActions';
 
-  defineProps<{ serviceId: string; prm?: string }>();
+  defineProps<{ serviceId: string; prm: string }>();
 
   const acceptationCGU = ref<boolean>(false);
   const parametreDuService = defineModel<string>('prm', { default: '' });

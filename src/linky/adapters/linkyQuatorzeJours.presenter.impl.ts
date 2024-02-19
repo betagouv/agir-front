@@ -1,7 +1,7 @@
 import { ConsommationElectriqueViewModel, LinkyPresenter } from '@/linky/ports/linky.presenter';
 import { ConsommationElectrique } from '@/linky/ports/linkyRepository.repository';
 
-export class LinkyPresenterDerniersJoursImpl implements LinkyPresenter {
+export class LinkyPresenterQuatorzeJoursImpl implements LinkyPresenter {
   constructor(private viewModel: (consommationElectriqueViewModel: ConsommationElectriqueViewModel) => void) {}
 
   presente(consommationElectrique: ConsommationElectrique): void {

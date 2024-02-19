@@ -4,7 +4,7 @@ import { MockLinkyRepository } from './adapters/linky.repository.mock';
 import { ConsommationElectriqueViewModel } from '@/linky/ports/linky.presenter';
 
 describe('Fichier de test du usecase du chargement des données annuelle linky', () => {
-  it('en donnant un utilisateur valide doit me retourner ses données de consommation electrique annuelle formatées pour le graphique et les commentaires associés', () => {
+  it('en donnant un utilisateur valide doit me retourner ses données de consommation electrique annuelle formatées pour le graphique et les commentaires associés', async () => {
     // GIVEN
     const obtenirConsommationElectriqueUsecase = new ObtenirConsommationElectriqueAnnuelleUsecase(
       new MockLinkyRepository({
@@ -39,7 +39,7 @@ describe('Fichier de test du usecase du chargement des données annuelle linky',
     );
 
     // WHEN
-    obtenirConsommationElectriqueUsecase.execute('idUtilisateur', new LinkyPresenterAnnuelleImpl(expectation));
+    await obtenirConsommationElectriqueUsecase.execute('idUtilisateur', new LinkyPresenterAnnuelleImpl(expectation));
 
     // THEN
     function expectation(viewModel: ConsommationElectriqueViewModel) {

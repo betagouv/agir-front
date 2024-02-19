@@ -10,18 +10,16 @@
         name="controle-segmente-selection-range-data"
         @update:value="handleValueChange"
         :segments="[
-          { libelle: '15 derniers jours', value: VueGraphique.EN_CE_MOMENT, checked: true },
+          { libelle: '14 derniers jours', value: VueGraphique.QUATORZE_JOURS, checked: true },
           { libelle: 'Mois par mois', value: VueGraphique.MOIS_PAR_MOIS },
         ]"
       />
     </div>
     <p v-if="vueGraphique === VueGraphique.MOIS_PAR_MOIS">
-      <p>
-        Suivi de votre consommation électrique mois par mois en comparant l'année courante à l'année précédente :
-      </p>
+      Suivi de votre consommation électrique mois par mois en comparant l'année courante à l'année précédente :
     </p>
-    <p v-if="vueGraphique === VueGraphique.EN_CE_MOMENT">
-      Suivi de votre consommation électrique de vos 15 derniers jours :
+    <p v-if="vueGraphique === VueGraphique.QUATORZE_JOURS">
+      Suivi de votre consommation électrique de vos 14 derniers jours :
     </p>
     <ul>
       <li v-for="(item, index) in consos?.commentaires" :key="index" v-html="item" />
@@ -42,8 +40,16 @@
       :data="{
         labels: consos?.graphique.libelles,
         datasets: [
-          { label: 'année précédente', backgroundColor:  `${vueGraphique === VueGraphique.MOIS_PAR_MOIS ? '#6a6af4' : '#68A532'}` , data: consos?.graphique.valeur_courante },
-          { label: 'année courante', backgroundColor: `${vueGraphique === VueGraphique.MOIS_PAR_MOIS ? '#000091' : '#447049'}`, data: consos?.graphique.valeur_precedente },
+          {
+            label: 'année précédente',
+            backgroundColor: `${vueGraphique === VueGraphique.MOIS_PAR_MOIS ? '#6a6af4' : '#68A532'}`,
+            data: consos?.graphique.valeur_courante,
+          },
+          {
+            label: 'année courante',
+            backgroundColor: `${vueGraphique === VueGraphique.MOIS_PAR_MOIS ? '#000091' : '#447049'}`,
+            data: consos?.graphique.valeur_precedente,
+          },
         ],
       }"
     />
@@ -58,43 +64,53 @@
   import { ObtenirConsommationElectriqueAnnuelleUsecase } from '@/linky/obtenirConsommationElectriqueAnnuelle.usecase';
   import { LinkyRepositoryAxios } from '@/linky/adapters/linky.repository.axios';
   import { utilisateurStore } from '@/store/utilisateur';
-  import { ConsommationElectriqueViewModel, LinkyPresenterAnnuelleImpl } from '@/linky/adapters/linkyAnnuelle.presenter.impl';
-  import { ObtenirConsommationElectriqueDerniersJoursUsecase } from '@/linky/obtenirConsommationElectriqueDerniersJours.usecase';
-import { LinkyPresenterDerniersJoursImpl } from '@/linky/adapters/linkyDerniersJours.presenter.impl';
+  import { LinkyPresenterAnnuelleImpl } from '@/linky/adapters/linkyAnnuelle.presenter.impl';
+  import { ConsommationElectriqueViewModel } from '@/linky/ports/linky.presenter';
+  import { ObtenirConsommationElectriqueQuatorzeJoursUsecase } from '@/linky/obtenirConsommationElectriqueQuatorzeJours.usecase';
+  import { LinkyPresenterQuatorzeJoursImpl } from '@/linky/adapters/linkyQuatorzeJours.presenter.impl';
 
   ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale);
 
   enum VueGraphique {
-    EN_CE_MOMENT = '1',
+    QUATORZE_JOURS = '1',
     MOIS_PAR_MOIS = '2',
   }
 
   const consos = ref<ConsommationElectriqueViewModel>();
-  const vueGraphique = ref<VueGraphique>(VueGraphique.EN_CE_MOMENT);
+  const vueGraphique = ref<VueGraphique>(VueGraphique.QUATORZE_JOURS);
 
   function mapValuesConsommation(viewModel: ConsommationElectriqueViewModel) {
     consos.value = viewModel;
   }
 
   const idUtilisateur = utilisateurStore().utilisateur.id;
-  const obtenirConsommationElectriqueUsecaseAnnuelle = new ObtenirConsommationElectriqueAnnuelleUsecase(new LinkyRepositoryAxios());
-  const obtenirConsommationElectriqueUsecaseDerniersJours = new ObtenirConsommationElectriqueDerniersJoursUsecase(
+  const obtenirConsommationElectriqueUsecaseAnnuelle = new ObtenirConsommationElectriqueAnnuelleUsecase(
+    new LinkyRepositoryAxios()
+  );
+  const obtenirConsommationElectriqueQuatorzeJoursUsecase = new ObtenirConsommationElectriqueQuatorzeJoursUsecase(
     new LinkyRepositoryAxios()
   );
 
   async function handleValueChange(value) {
     vueGraphique.value = value;
-    if (value === VueGraphique.EN_CE_MOMENT) {
-      await obtenirConsommationElectriqueUsecaseDerniersJours.execute(
+    if (value === VueGraphique.QUATORZE_JOURS) {
+      await obtenirConsommationElectriqueQuatorzeJoursUsecase.execute(
         idUtilisateur,
-        new LinkyPresenterDerniersJoursImpl(mapValuesConsommation)
+        new LinkyPresenterQuatorzeJoursImpl(mapValuesConsommation)
       );
     } else {
-      await obtenirConsommationElectriqueUsecaseAnnuelle.execute(idUtilisateur, new LinkyPresenterAnnuelleImpl(mapValuesConsommation));
+      await obtenirConsommationElectriqueUsecaseAnnuelle.execute(
+        idUtilisateur,
+        new LinkyPresenterAnnuelleImpl(mapValuesConsommation)
+      );
     }
   }
 
   onMounted(async () => {
-    await obtenirConsommationElectriqueUsecaseDerniersJours.execute(idUtilisateur, new LinkyPresenterDerniersJoursImpl(mapValuesConsommation));
+    await obtenirConsommationElectriqueQuatorzeJoursUsecase.execute(
+      idUtilisateur,
+      new LinkyPresenterQuatorzeJoursImpl(mapValuesConsommation)
+    );
   });
 </script>
+@/linky/adapters/linkyQuatorzeJours.presenter.impl

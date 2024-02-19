@@ -1,12 +1,12 @@
-import { ObtenirConsommationElectriqueDerniersJoursUsecase } from '@/linky/obtenirConsommationElectriqueDerniersJours.usecase';
+import { ObtenirConsommationElectriqueQuatorzeJoursUsecase } from '@/linky/obtenirConsommationElectriqueQuatorzeJours.usecase';
 import { MockLinkyRepository } from './adapters/linky.repository.mock';
-import { LinkyPresenterDerniersJoursImpl } from '@/linky/adapters/linkyDerniersJours.presenter.impl';
 import { ConsommationElectriqueViewModel } from '@/linky/ports/linky.presenter';
+import { LinkyPresenterQuatorzeJoursImpl } from '@/linky/adapters/linkyQuatorzeJours.presenter.impl';
 
 describe('Fichier de test du usecase du chargement des données des 14 derniers jours linky', () => {
-  it('en donnant un utilisateur valide doit me retourner ses données de consommation electrique des 14 derniers jours formatées pour le graphique et les commentaires associés', () => {
+  it('en donnant un utilisateur valide doit me retourner ses données de consommation electrique des 14 derniers jours formatées pour le graphique et les commentaires associés', async () => {
     // GIVEN
-    const obtenirConsommationElectriqueUsecase = new ObtenirConsommationElectriqueDerniersJoursUsecase(
+    const obtenirConsommationElectriqueUsecase = new ObtenirConsommationElectriqueQuatorzeJoursUsecase(
       new MockLinkyRepository({
         commentaires: ['commentaire 1', 'commentaire 2'],
         data: [
@@ -39,7 +39,10 @@ describe('Fichier de test du usecase du chargement des données des 14 derniers 
     );
 
     // WHEN
-    obtenirConsommationElectriqueUsecase.execute('idUtilisateur', new LinkyPresenterDerniersJoursImpl(expectation));
+    await obtenirConsommationElectriqueUsecase.execute(
+      'idUtilisateur',
+      new LinkyPresenterQuatorzeJoursImpl(expectation)
+    );
 
     // THEN
     function expectation(viewModel: ConsommationElectriqueViewModel) {

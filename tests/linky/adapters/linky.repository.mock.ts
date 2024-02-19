@@ -8,7 +8,7 @@ export class MockLinkyRepository implements LinkyRepository {
     return Promise.resolve(this.consommationElectrique);
   }
 
-  recupererConsommationElectriqueDerniersJours(_idUtilsateur: string): Promise<ConsommationElectrique> {
+  recupererConsommationElectriqueQuatorzeJours(_idUtilsateur: string): Promise<ConsommationElectrique> {
     return Promise.resolve(this.consommationElectrique);
   }
 
