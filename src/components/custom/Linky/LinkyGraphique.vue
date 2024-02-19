@@ -15,12 +15,8 @@
         ]"
       />
     </div>
-    <p v-if="vueGraphique === VueGraphique.MOIS_PAR_MOIS">
-      Suivi de votre consommation électrique mois par mois en comparant l'année courante à l'année précédente :
-    </p>
-    <p v-if="vueGraphique === VueGraphique.QUATORZE_JOURS">
-      Suivi de votre consommation électrique de vos 14 derniers jours :
-    </p>
+
+    <p>{{ consos?.description }}</p>
     <ul>
       <li v-for="(item, index) in consos?.commentaires" :key="index" v-html="item" />
     </ul>

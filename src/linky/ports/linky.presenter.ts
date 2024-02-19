@@ -1,6 +1,7 @@
 import { ConsommationElectrique } from '@/linky/ports/linkyRepository.repository';
 
 export interface ConsommationElectriqueViewModel {
+  description: string;
   commentaires: string[];
   graphique: {
     libelles: string[];
