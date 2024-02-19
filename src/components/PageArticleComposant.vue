@@ -29,30 +29,33 @@
           </div>
           <div class="print-hidden fr-grid-row fr-mt-5v fr-grid-row--middle flex-space-between">
             <router-link class="fr-btn" :to="{ name: RouteCoachName.COACH }"> Revenir à l'accueil </router-link>
-            <button
-              v-if="!article.estEnFavori"
-              class="fr-btn fr-btn--secondary fr-icon-heart-line fr-btn--icon-right icon-favoris--off"
-              @click="ajouterAuxFavoris"
-            >
-              Ajouter aux favoris
-            </button>
-            <button
-              v-else
-              class="fr-btn fr-btn--secondary fr-icon-heart-fill fr-btn--icon-right icon-favoris--on"
-              @click="retirerDesFavoris"
-            >
-              Retirer des favoris
-            </button>
-            <button class="fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-printer-fill" @click="imprimer">
-              Imprimer
-            </button>
           </div>
         </div>
       </div>
       <div class="fr-col-12 fr-col-md-4 print-hidden">
+        <div class="fr-grid-row flex-center background--white border border-radius--md fr-p-2w">
+          <button
+            v-if="!article.estEnFavori"
+            class="fr-btn fr-btn--tertiary fr-icon-heart-line fr-btn--icon-right icon-favoris--off"
+            @click="ajouterAuxFavoris"
+          >
+            Ajouter aux favoris
+          </button>
+          <button
+            v-else
+            class="fr-btn fr-btn--tertiary fr-icon-heart-fill fr-btn--icon-right icon-favoris--on"
+            @click="retirerDesFavoris"
+          >
+            Retirer des favoris
+          </button>
+          <button class="fr-btn fr-btn--tertiary fr-btn--icon-left fr-icon-printer-fill fr-ml-1w" @click="imprimer">
+            Imprimer
+          </button>
+        </div>
+
         <div
           v-if="article.partenaire"
-          class="fr-grid-row flex-column background--white border border-radius--md fr-p-2w"
+          class="fr-mt-2w fr-grid-row flex-column background--white border border-radius--md fr-p-2w"
         >
           <span>Proposé par</span>
           <img class="max-full-width fr-mt-5v" :src="article.partenaire.logo" :alt="article.partenaire.nom" />
