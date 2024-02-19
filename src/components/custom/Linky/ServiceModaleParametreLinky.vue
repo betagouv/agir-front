@@ -28,22 +28,18 @@
       label="Numéro de PRM"
       description="Il s’agit d’une suite de 14 chiffres qui identifie le logement sur le réseau électrique."
     />
-    <p class="fr-mb-0 fr-text--bold">
+    <p class="fr-text--bold">
       <span class="fr-icon-question-line fr-text--bold" aria-hidden="true"></span>
       Comment trouver ce numéro ?
     </p>
-    <div class="fr-grid-row fr-grid-row--gutters">
-      <div class="fr-col-12 fr-col-md-6">
-        <p class="fr-mb-0 fr-text--sm">Sur votre facture</p>
-        <img src="/facture-linky-exemple.png" class="max-full-width" alt="" />
-      </div>
-      <div class="fr-col-12 fr-col-md-6">
-        <p class="fr-mb-0 fr-text--sm">
-          Sur votre compteur Linky<br />
-          Faire défiler les affichages du compteur (appui sur la touche +) jusqu’à lire la valeur du « numéro de PRM ».
-        </p>
-        <img src="/compteur-linky-exemple.jpg" class="max-full-width" alt="" />
-      </div>
+    <div class="fr-grid-row fr-grid-row--gutters fr-mb-2w">
+      <img src="/facture-linky-exemple.png" class="fr-col-md-3 max-full-width" alt="" />
+      <p class="fr-col-md-3 fr-mb-0 fr-text--sm">Sur votre facture</p>
+      <img src="/compteur-linky-exemple.jpg" class="fr-col-md-3 max-full-width" alt="" />
+      <p class="fr-col-md-3 fr-mb-0 fr-text--sm">
+        Sur votre compteur Linky<br />
+        Faire défiler les affichages du compteur (appui sur la touche +) jusqu’à lire la valeur du « numéro de PRM ».
+      </p>
     </div>
     <InputCheckboxUnitaire
       class="fr-pl-1v"
