@@ -4,7 +4,7 @@ import { ConsommationElectriqueViewModel } from '@/linky/ports/linky.presenter';
 import { LinkyPresenterQuatorzeJoursImpl } from '@/linky/adapters/linkyQuatorzeJours.presenter.impl';
 
 describe('Fichier de test du usecase du chargement des données des 14 derniers jours linky', () => {
-  it('en donnant un utilisateur valide doit me retourner ses données de consommation electrique des 14 derniers jours formatées pour le graphique et les commentaires associés', async () => {
+  it('en donnant un utilisateur valide doit me retourner ses données de consommation electrique des 14 derniers jours formatées pour le graphique avec une description et des commentaires associés', async () => {
     // GIVEN
     const obtenirConsommationElectriqueUsecase = new ObtenirConsommationElectriqueQuatorzeJoursUsecase(
       new MockLinkyRepository({
@@ -48,6 +48,9 @@ describe('Fichier de test du usecase du chargement des données des 14 derniers 
     function expectation(viewModel: ConsommationElectriqueViewModel) {
       expect(viewModel).toStrictEqual<ConsommationElectriqueViewModel>({
         commentaires: ['commentaire 1', 'commentaire 2'],
+        couleurValeur1: '#68A532',
+        couleurValeur2: '#447049',
+        description: 'Suivi de votre consommation électrique de vos 14 derniers jours :',
         graphique: {
           libelles: ['1 janvier', '2 janvier'],
           valeur_courante: [1, 2],
