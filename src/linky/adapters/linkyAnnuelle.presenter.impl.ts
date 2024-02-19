@@ -1,5 +1,5 @@
-import { ConsommationElectrique } from '@/linky/obtenirConsommationElectriqueAnnuelle.usecase';
 import { LinkyPresenter } from '@/linky/ports/linky.presenter';
+import { ConsommationElectrique } from '@/linky/ports/linkyRepository.repository';
 
 export interface ConsommationElectriqueViewModel {
   commentaires: string[];

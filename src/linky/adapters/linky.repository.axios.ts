@@ -1,6 +1,5 @@
 import { AxiosFactory, intercept401 } from '@/axios.factory';
-import { LinkyRepository } from '@/linky/ports/linkyRepository.repository';
-import { ConsommationElectrique } from '@/linky/obtenirConsommationElectriqueAnnuelle.usecase';
+import { ConsommationElectrique, LinkyRepository } from '@/linky/ports/linkyRepository.repository';
 import { InformationCompteur } from '@/linky/obtenirInformationCompteur.usecase';
 
 interface ConsommationElectriqueApiModel {
@@ -47,8 +46,6 @@ export class LinkyRepositoryAxios implements LinkyRepository {
     const reponse = await axiosInstance.get<ConsommationElectriqueApiModel>(
       `/utilisateurs/${idUtilsateur}/linky?derniers_14_jours=true`
     );
-
-    console.log(reponse.data);
 
     return {
       commentaires: reponse.data.commentaires,
