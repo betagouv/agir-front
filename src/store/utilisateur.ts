@@ -37,8 +37,11 @@ export const utilisateurStore = defineStore('utilisateur', {
     },
   }),
   actions: {
-    setUtilisateur(utilisateur: Utilisateur) {
-      this.utilisateur = utilisateur;
+    setUtilisateur(utilisateur: Partial<Utilisateur>) {
+      this.utilisateur = {
+        ...this.utilisateur,
+        ...utilisateur,
+      };
     },
     setValeurBilanCarbone(valeurBilanCarbone: EmpreinteViewModel) {
       this.valeurBilanCarbone = valeurBilanCarbone;
@@ -52,6 +55,6 @@ export const utilisateurStore = defineStore('utilisateur', {
     },
   },
   persist: {
-    storage: sessionStorage,
+    storage: localStorage,
   },
 });

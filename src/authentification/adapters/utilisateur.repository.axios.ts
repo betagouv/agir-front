@@ -1,6 +1,7 @@
-import { Utilisateur, UtilisateurRepository } from '@/authentification/ports/utilisateur.repository';
+import { IdUtilisateur, Utilisateur, UtilisateurRepository } from '@/authentification/ports/utilisateur.repository';
 import { AxiosFactory } from '@/axios.factory';
 import Cookies from 'js-cookie';
+import jwt_decode from 'jwt-decode';
 
 interface UtilisateurApiModel {
   prenom: string;
@@ -17,6 +18,10 @@ interface UtilisateurApiModel {
 
 interface LoginApiModel {
   utilisateur: UtilisateurApiModel;
+  token: string;
+}
+
+interface ValiderCompteApiModel {
   token: string;
 }
 export class UtilisateurRepositoryAxios implements UtilisateurRepository {
@@ -67,27 +72,18 @@ export class UtilisateurRepositoryAxios implements UtilisateurRepository {
     };
   }
 
-  async validerCompteUtilisateur(email: string, code: string): Promise<Utilisateur> {
+  async validerCompteUtilisateur(email: string, code: string): Promise<IdUtilisateur> {
     const axiosInstance = AxiosFactory.getAxios();
-    const response = await axiosInstance.post<LoginApiModel>(`/utilisateurs/valider`, {
+    const response = await axiosInstance.post<ValiderCompteApiModel>(`/utilisateurs/valider`, {
       email,
       code,
     });
-
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    const utilisateurId = jwt_decode(response.data.token).utilisateurId as string;
     this.setBearerInCookie(response.data.token);
 
-    return {
-      nom: response.data.utilisateur.nom,
-      id: response.data.utilisateur.id,
-      mail: response.data.utilisateur.email || '',
-      codePostal: response.data.utilisateur.code_postal || '',
-      commune: response.data.utilisateur.commune || '',
-      prenom: response.data.utilisateur.prenom || '',
-      revenuFiscal: response.data.utilisateur.revenu_fiscal,
-      nombreDePartsFiscales: response.data.utilisateur.nombre_de_parts_fiscales,
-      abonnementTransport: response.data.utilisateur.abonnement_transport,
-      fonctionnalitesDebloquees: response.data.utilisateur.fonctionnalites_debloquees || ['aides'],
-    };
+    return utilisateurId;
   }
 
   async renvoyerCodeOTP(email: string): Promise<void> {

@@ -13,7 +13,7 @@ export class ServiceEventBusSpy extends EventBus<ServiceEvent> {
     this._eventName = eventName;
   }
 
-  eventSubscribers: Record<ServiceEvent, (() => void)[]> = {
+  eventSubscribers: Record<ServiceEvent, { subscriberName: string; callback: () => void }[]> = {
     [ServiceEvent.SERVICE_SUPPRIME]: [],
     [ServiceEvent.SERVICE_INSTALLE]: [],
   };

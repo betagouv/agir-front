@@ -2,7 +2,7 @@
   <form aria-labelledby="identity-fieldset-legend" @submit.prevent="performCreerCompteUtilisateur" class="fr-mb-4w">
     <fieldset class="fr-fieldset fr-mb-0">
       <legend class="fr-fieldset__legend" id="identity-fieldset-legend">
-        <h2>Création de compte sur Agir</h2>
+        <h2 class="fr-h4 text--center">Inscrivez-vous</h2>
       </legend>
       <div class="fr-fieldset__element">
         <InputMail label="Adresse électronique" name="utilisateur-mail" v-model="compteUtilisateurInput.mail" />
@@ -42,7 +42,10 @@
     </fieldset>
   </form>
   <hr class="fr-pb-4w" />
-  <router-link :to="{ name: 'authentification' }" class="fr-btn fr-btn--lg fr-btn--tertiary full-width flex-center">
+  <router-link
+    :to="{ name: RouteCommuneName.AUTHENTIFICATION }"
+    class="fr-btn fr-btn--lg fr-btn--tertiary-no-outline full-width flex-center"
+  >
     J'ai déjà un compte
   </router-link>
 </template>
@@ -52,13 +55,14 @@
   import { ref } from 'vue';
   import { SessionRepositoryStore } from '@/authentification/adapters/session.repository.store';
   import { CompteUtilisateurRepositoryImpl } from '@/compte/adapters/compteUtilisateur.repository.impl';
-  import router from '@/router';
+  import router, { RouteCommuneName } from '@/router';
   import { utilisateurStore } from '@/store/utilisateur';
   import InputMail from '@/components/dsfr/InputMail.vue';
   import InputText from '@/components/dsfr/InputText.vue';
   import { onboardingStore } from '@/store/onboarding';
   import InputPassword from '@/components/custom/InputPassword.vue';
   import Alert from '@/components/custom/Alert.vue';
+  import { CreerComptePresenterImpl } from '@/compte/adapters/creerComptePresenterImpl';
 
   let compteUtilisateurInput = ref<UserInput>({
     nom: '',
@@ -81,13 +85,15 @@
       new SessionRepositoryStore()
     );
     creeCompteUseCase
-      .execute(compteUtilisateurInput.value, onboardingStore().$state)
-      .then(() => {
-        router.push({ name: 'validation-compte' });
-        creationDeCompteEnErreur.value = false;
-      }, null)
+      .execute(
+        new CreerComptePresenterImpl(viewModel => {
+          router.push({ name: viewModel.route });
+        }),
+        compteUtilisateurInput.value,
+        onboardingStore().$state
+      )
       .catch(reason => {
-        creationDeCompteMessageErreur.value = reason.data.message;
+        creationDeCompteMessageErreur.value = reason.message;
         creationDeCompteEnErreur.value = true;
       });
   };

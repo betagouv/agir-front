@@ -3,8 +3,14 @@ import { ChargementQuizUsecase } from '@/quiz/chargementQuiz.usecase';
 import { ChargementQuizPresenterImpl, QuizViewModel } from '@/quiz/adapters/chargementQuiz.presenter.impl';
 
 class QuizRepositoryForTest implements QuizRepository {
+  noterQuiz(quizId: any, utilisateurId: any, note: any): Promise<void> {
+    throw new Error('Method not implemented.');
+  }
   async getQuiz(id: string): Promise<Quiz> {
     return {
+      nombreDePointsAGagner: 10,
+      difficulte: 1,
+      thematique: '🛒 Consommation durable',
       titre: `Mon super quizz ${id}`,
       questions: [
         {
@@ -35,6 +41,9 @@ describe("Fichier de test du usecase de chargement d'un quizz", () => {
     // THEN
     function expectation(quizzViewModel: QuizViewModel) {
       expect(quizzViewModel).toStrictEqual<QuizViewModel>({
+        nombreDePointsAGagner: '10',
+        difficulte: 'très facile',
+        thematique: '🛒 Consommation durable',
         titre: 'Mon super quizz 1',
         questions: [
           {

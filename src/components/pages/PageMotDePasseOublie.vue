@@ -1,37 +1,37 @@
 <template>
   <div class="fr-container fr-py-6w">
-    <form
-      class="fr-col-12 fr-col-lg-6 fr-mx-auto fr-mb-0 background--white fr-p-4w border border-radius--md"
-      @submit.prevent="recupererMotDePasse"
-    >
-      <fieldset class="fr-mb-0 fr-fieldset" aria-labelledby="legend-email-forgot">
-        <legend class="fr-fieldset__legend fr-px-0 fr-mx-0 text--center" id="legend-email-forgot">
-          <h1 class="fr-text--xl">Saisissez votre adresse électronique pour pouvoir redéfinir un mot de passe</h1>
-        </legend>
-        <div class="fr-fieldset__element">
-          <InputMail label="Adresse électronique" v-model="email" name="email" />
-        </div>
-        <div class="fr-fieldset__element">
-          <button class="fr-btn display-block text--center" :disabled="!email" type="submit">Valider</button>
-        </div>
-      </fieldset>
-    </form>
+    <div class="fr-col-12 fr-col-lg-5 fr-mx-auto fr-mb-0 background--white fr-p-4w border border-radius--md">
+      <button
+        v-if="etape === Etapes.ETAPE_REDEFINIR"
+        class="fr-btn fr-btn--tertiary-no-outline fr-btn--icon-left fr-icon-arrow-left-line fr-pl-0"
+        @click="retourEtapeFormulaire"
+      >
+        Retour
+      </button>
+      <h1 class="fr-h4">Mot de passe oublié - {{ etape }}/2</h1>
+      <MotDePasseOublieFormulaire v-if="etape === Etapes.ETAPE_FORMULAIRE" @update:email="submitFormulaire" />
+      <MotDePasseOublieRedefinir v-if="etape === Etapes.ETAPE_REDEFINIR" :email="email" />
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-  import InputMail from '@/components/dsfr/InputMail.vue';
   import { ref } from 'vue';
-  import router from '@/router';
-  import { CommencerRedefinirMotDePasseUsecase } from '@/authentification/commencerRedefinirMotDePasse.usecase';
-  import { UtilisateurRepositoryAxios } from '@/authentification/adapters/utilisateur.repository.axios';
+  import MotDePasseOublieRedefinir from '@/components/custom/MotDePasseOublie/MotDePasseOublieRedefinir.vue';
+  import MotDePasseOublieFormulaire from '@/components/custom/MotDePasseOublie/MotDePasseOublieFormulaire.vue';
 
-  const email = ref('');
+  enum Etapes {
+    ETAPE_FORMULAIRE = 1,
+    ETAPE_REDEFINIR = 2,
+  }
 
-  const recupererMotDePasse = () => {
-    const commencerRedefinirMotDePasse = new CommencerRedefinirMotDePasseUsecase(new UtilisateurRepositoryAxios());
-    commencerRedefinirMotDePasse.execute(email.value).then(() => {
-      router.push({ name: 'redefinir-mot-de-passe', query: { email: email.value } });
-    });
+  const etape = ref<Etapes>(Etapes.ETAPE_FORMULAIRE);
+  const email = ref<string>('');
+
+  const submitFormulaire = emailValue => {
+    etape.value = Etapes.ETAPE_REDEFINIR;
+    email.value = emailValue;
   };
+
+  const retourEtapeFormulaire = () => (etape.value = Etapes.ETAPE_FORMULAIRE);
 </script>

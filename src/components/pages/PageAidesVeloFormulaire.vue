@@ -1,6 +1,6 @@
 <template>
   <div class="fr-container fr-pb-6w">
-    <FilDAriane page-courante="Acheter un vélo" :page-hierarchie="[{ label: 'Vos aides', url: 'vos-aides' }]" />
+    <FilDAriane page-courante="Acheter un vélo" />
     <div class="fr-grid-row fr-grid-row--gutters">
       <div class="fr-col-lg-8">
         <div class="background--white border border-radius--md fr-p-3w fr-mb-4w">
@@ -47,6 +47,8 @@
   import { CompteUtlisateurViewModel } from '@/compte/adapters/compteUtilisateur.presenter.impl';
   import InputCodePostal from '@/components/dsfr/InputCodePostal.vue';
 
+  import { RouteAidesName } from '@/router/aides/routeAidesName';
+
   const store = utilisateurStore();
   const revenuFiscal = ref(store.utilisateur.revenuFiscal ? store.utilisateur.revenuFiscal : 0);
   const nombreDePartsFiscales = ref(store.utilisateur.nombreDePartsFiscales);
@@ -78,7 +80,7 @@
         fonctionnalitesDebloquees: utilisateur.fonctionnalitesDebloquees,
       };
       await usecase.execute(donneeAMettreAjour);
-      await router.push({ name: 'mes-aides-velo' });
+      await router.push({ name: RouteAidesName.VELO });
     }
   }
 </script>

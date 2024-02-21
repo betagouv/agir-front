@@ -86,7 +86,6 @@ describe('Fichier de test du usecase de chargement du score', () => {
         reveal: {
           description: 'En fonction de votre situation et de où vous en êtes !',
           titre: 'Vos aides',
-          url: '/vos-aides',
           feature: 'aides',
         },
       }),
@@ -109,7 +108,7 @@ describe('Fichier de test du usecase de chargement du score', () => {
           reveal: {
             description: 'En fonction de votre situation et de où vous en êtes !',
             titre: 'Vos aides',
-            url: '/vos-aides',
+            routeName: 'vos-aides',
             feature: 'aides',
           },
         },

@@ -1,6 +1,7 @@
 import { SessionRepository } from '@/authentification/authentifierUtilisateur.usecase';
-import { Utilisateur, UtilisateurRepository } from '@/authentification/ports/utilisateur.repository';
+import { IdUtilisateur, Utilisateur, UtilisateurRepository } from '@/authentification/ports/utilisateur.repository';
 import { AuthentifierUtilisateurFranceConnectUsecase } from '@/authentification/authentifierUtilisateurFranceConnect.usecase';
+import { SpySauvegarderUtilisateurSessionRepository } from '../compte/sessionRepository.sauvegarderUtilisateur.spy';
 
 class UtilisateurRepositoryForTest implements UtilisateurRepository {
   get idUtilisateur(): string {
@@ -29,7 +30,7 @@ class UtilisateurRepositoryForTest implements UtilisateurRepository {
     });
   }
 
-  validerCompteUtilisateur(email: string, code: string): Promise<Utilisateur> {
+  validerCompteUtilisateur(email: string, code: string): Promise<IdUtilisateur> {
     throw Error;
   }
 
@@ -46,35 +47,10 @@ class UtilisateurRepositoryForTest implements UtilisateurRepository {
   }
 }
 
-class SpySessionRepository implements SessionRepository {
-  get utilisateur(): Utilisateur {
-    return this._utilisateur;
-  }
-
-  private _utilisateur: Utilisateur = {
-    id: '',
-    nom: '',
-    codePostal: '',
-    commune: '',
-    prenom: '',
-    mail: '',
-    revenuFiscal: null,
-    nombreDePartsFiscales: 1,
-    abonnementTransport: false,
-    fonctionnalitesDebloquees: [],
-  };
-
-  sauvegarderUtilisateur(utilisateur: Utilisateur) {
-    this._utilisateur = utilisateur;
-  }
-
-  nouvelleFeatureDebloquee(featureDebloquee: string): void {}
-}
-
 describe("Fichier de tests concernant l'authentification France Connect", () => {
   it("Lorsque je passe un token doit sauvegarder le nom et l'id", async () => {
     // GIVEN
-    const spySessionRepository = new SpySessionRepository();
+    const spySessionRepository = new SpySauvegarderUtilisateurSessionRepository();
     const utilisateurRepositoryForTest = new UtilisateurRepositoryForTest();
     const usecase = new AuthentifierUtilisateurFranceConnectUsecase(utilisateurRepositoryForTest, spySessionRepository);
     // WHEN

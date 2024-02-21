@@ -1,7 +1,7 @@
 <template>
   <div class="fr-container fr-py-6w">
     <div>
-      <h1 class="fr-h2">Le coach</h1>
+      <h1 class="fr-h2">Agir</h1>
       <div class="fr-grid-row fr-grid-row--gutters">
         <div v-if="todoList" class="fr-col fr-col-lg-7">
           <CoachToDo :todoList="todoList" />
@@ -13,10 +13,11 @@
               <CarteScore :value="utilisateurStore().score.points" type="score" />
             </div>
             <ProgressionNiveauJauge
-              class="fr-mb-1w"
+              class="fr-mb-3w"
               :objectif="utilisateurStore().score.nombreDePointsDuNiveau"
               :valeur="utilisateurStore().score.nombreDePointsDansLeNiveau"
             />
+            <BilanOnboarding />
           </div>
           <div v-else>
             <CarteSkeleton />
@@ -25,13 +26,21 @@
       </div>
     </div>
   </div>
-  <section class="fr-py-6w fr-background-contrast--grey">
-    <div class="fr-container" v-if="!isLoading">
+  <section
+    v-if="store.utilisateur.fonctionnalitesDebloquees.includes(Fonctionnalites.RECOMMANDATIONS)"
+    class="fr-py-6w fr-background-contrast--grey"
+    v-tour-step:1="{
+      tour: recommandationTour,
+      options: {
+        attachTo: { on: 'top' },
+        title: 'Recommandations débloquées',
+        text: 'Retrouvez ici toutes vos recommandations personnalisées !',
+      },
+    }"
+  >
+    <div id="recommandations" class="fr-container" v-if="!isLoading">
       <CoachRecommandations
-        v-if="
-          recommandationsPersonnaliseesViewModel &&
-          store.utilisateur.fonctionnalitesDebloquees.includes(Fonctionnalites.RECOMMANDATIONS)
-        "
+        v-if="recommandationsPersonnaliseesViewModel"
         :recommandations="recommandationsPersonnaliseesViewModel"
       />
     </div>
@@ -39,7 +48,7 @@
       <CarteSkeleton />
     </div>
   </section>
-  <section class="fr-py-6w background--bleu-dark">
+  <section class="fr-py-6w background--image--coach">
     <div class="fr-container">
       <CoachChangementSituation />
     </div>
@@ -47,7 +56,7 @@
 </template>
 
 <script setup lang="ts">
-  import { onMounted, ref } from 'vue';
+  import { onMounted, onUnmounted, ref } from 'vue';
   import CarteSkeleton from '@/components/CarteSkeleton.vue';
   import { utilisateurStore } from '@/store/utilisateur';
   import CoachChangementSituation from '@/components/custom/Coach/CoachChangementSituation.vue';
@@ -72,6 +81,10 @@
   import { RecupererToDoListUsecase } from '@/toDoList/recupererToDoList.usecase';
   import { ToDoListEvent, ToDoListEventBusImpl } from '@/toDoList/toDoListEventBusImpl';
   import { Fonctionnalites } from '@/shell/fonctionnalitesEnum';
+  import BilanOnboarding from '@/components/custom/BilanOnboarding.vue';
+  import { useReveal } from '@/composables/useReveal';
+
+  const { recommandationTour } = useReveal();
 
   const isLoading = ref<boolean>(true);
   const todoList = ref<TodoListViewModel>();
@@ -90,6 +103,7 @@
     todoList.value = viewModel;
   }
 
+  const subscriberName = 'Coach';
   const lancerChargementDesDonnees = () => {
     const idUtilisateur = store.utilisateur.id;
     const chargerRecommandationsPersonnaliseesUsecase = new RecommandationsPersonnaliseesUsecase(
@@ -98,11 +112,11 @@
     const chargementEmpreinteUseCase = new ChargementEmpreinteUsecase(new EmpreinteRepositoryAxios());
     const chargerTodoListUsecase = new RecupererToDoListUsecase(new ToDoListRepositoryAxios());
 
-    ToDoListEventBusImpl.getInstance().subscribe(ToDoListEvent.TODO_POINTS_ONT_ETE_RECUPERE, () => {
+    ToDoListEventBusImpl.getInstance().subscribe(subscriberName, ToDoListEvent.TODO_POINTS_ONT_ETE_RECUPERE, () => {
       chargerTodoListUsecase.execute(idUtilisateur, new ToDoListPresenterImpl(mapValueTodo));
     });
 
-    ToDoListEventBusImpl.getInstance().subscribe(ToDoListEvent.TODO_A_ETE_TERMINEE, () => {
+    ToDoListEventBusImpl.getInstance().subscribe(subscriberName, ToDoListEvent.TODO_A_ETE_TERMINEE, () => {
       chargerTodoListUsecase.execute(idUtilisateur, new ToDoListPresenterImpl(mapValueTodo));
     });
 
@@ -123,4 +137,9 @@
   };
 
   onMounted(lancerChargementDesDonnees);
+
+  onUnmounted(() => {
+    ToDoListEventBusImpl.getInstance().unsubscribe(subscriberName, ToDoListEvent.TODO_POINTS_ONT_ETE_RECUPERE);
+    ToDoListEventBusImpl.getInstance().unsubscribe(subscriberName, ToDoListEvent.TODO_A_ETE_TERMINEE);
+  });
 </script>

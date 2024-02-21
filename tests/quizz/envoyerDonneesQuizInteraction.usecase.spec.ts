@@ -1,32 +1,8 @@
 import { EnvoyerDonneesQuizInteractionUsecase } from '@/quiz/envoyerDonneesQuizInteraction.usecase';
-import { Quiz, QuizRepository } from '@/quiz/ports/quizRepository';
 import { ToDoListEvent } from '@/toDoList/toDoListEventBusImpl';
 import { expect } from 'vitest';
 import { SpyToDoListEventBus } from '../toDoList/spyTodoListEventBus';
-
-class SpyQuizRepository implements QuizRepository {
-  get score(): number {
-    return this._score;
-  }
-
-  private _score: number = 0;
-
-  get termineQuizAEteAppele(): boolean {
-    return this._termineQuizAEteAppele;
-  }
-
-  private _termineQuizAEteAppele: boolean = false;
-
-  getQuiz(id: string): Promise<Quiz> {
-    throw Error;
-  }
-
-  terminerQuiz(idUtilisateur: string, idInteraction: string, score: number): Promise<void> {
-    this._termineQuizAEteAppele = true;
-    this._score = score;
-    return Promise.resolve();
-  }
-}
+import { SpyQuizRepository } from './adapters/spyQuizRepository';
 
 describe("Fichier de tests pour envoyer le resultat d'un quizz", () => {
   it("En donnant un id d'utilisateur, l'id d'une interaction valide dans le cas d'un quiz doit calucler le score  doit appeler le back pour prevenir que l'interaction a été faite et publier un evenement QUIZ_A_ETE_TERMINE pour mettre à jour le score", async () => {

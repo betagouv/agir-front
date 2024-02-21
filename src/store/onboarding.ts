@@ -62,6 +62,6 @@ export const onboardingStore = defineStore('onboarding', {
   },
 
   persist: {
-    storage: sessionStorage,
+    storage: localStorage,
   },
 });

@@ -9,16 +9,22 @@
     <form>
       <QuestionDuQuiz
         v-if="etapeCourante <= quizViewModel.questions.length"
-        :item="quizViewModel.questions[etapeCourante - 1]"
+        :question="quizViewModel.questions[etapeCourante - 1]"
         @etapeSuivante="verifierLaReponse"
       />
       <div v-else>
-        <div v-if="nombreDeBonnesReponses === quizViewModel.questions.length" class="fr-text--bold">
-          Bravo, vous avez réussi le quiz !<br />
-          <img src="/leaf.svg" alt="leaf-logo" class="fr-mr-2v" />Vous avez gagné {{ nombreDePointsAGagner }} points
+        <QuizFinSuccess
+          v-if="nombreDeBonnesReponses === quizViewModel.questions.length"
+          :nombre-de-points-a-gagner="quizViewModel.nombreDePointsAGagner"
+        />
+        <QuizFinError v-else />
+        <div
+          v-if="!isModePrevisualisation"
+          class="fr-grid-row fr-grid-row--middle flex-space-between border border-radius--md fr-p-2w"
+        >
+          <span class="fr-m-0 fr-text--bold fr-text--md">Comment avez-vous trouvé ce quiz ?</span>
+          <Notation @rated="noterLeQuiz" />
         </div>
-        <div v-else class="fr-text--bold">Désolé, Vous avez perdu !</div>
-        <router-link class="fr-btn fr-mt-5v" :to="{ name: 'coach' }"> Revenir au coach </router-link>
       </div>
     </form>
   </div>
@@ -28,17 +34,21 @@
   import { ref } from 'vue';
   import IndicateurDEtape from '@/components/dsfr/IndicateurDEtapes.vue';
   import QuestionDuQuiz from '@/components/custom/QuestionDuQuiz.vue';
+  import QuizFinError from '@/components/custom/Quiz/QuizFinError.vue';
+  import QuizFinSuccess from '@/components/custom/Quiz/QuizFinSuccess.vue';
   import { QuizViewModel } from '@/quiz/adapters/chargementQuiz.presenter.impl';
   import { EnvoyerDonneesQuizInteractionUsecase } from '@/quiz/envoyerDonneesQuizInteraction.usecase';
   import { QuizRepositoryAxios } from '@/quiz/adapters/quizRepository.axios';
   import { ToDoListEventBusImpl } from '@/toDoList/toDoListEventBusImpl';
+  import Notation from '@/components/custom/Notation.vue';
+  import { utilisateurStore } from '@/store/utilisateur';
+  import { EvaluerQuizUsecase } from '@/quiz/evaluerQuiz.usecase';
 
   const props = defineProps<{
     quizViewModel: QuizViewModel;
-    nombreDePointsAGagner: string;
     idUtilisateur: string;
-    idInteraction: string;
     isModePrevisualisation: boolean;
+    idQuiz: string;
   }>();
 
   const nombreDeBonnesReponses = ref<number>(0);
@@ -65,12 +75,12 @@
       await new EnvoyerDonneesQuizInteractionUsecase(
         new QuizRepositoryAxios(),
         ToDoListEventBusImpl.getInstance()
-      ).execute(
-        props.idUtilisateur,
-        props.idInteraction,
-        nombreDeBonnesReponses.value,
-        props.quizViewModel.questions.length
-      );
+      ).execute(props.idUtilisateur, props.idQuiz, nombreDeBonnesReponses.value, props.quizViewModel.questions.length);
     }
+  };
+
+  const noterLeQuiz = note => {
+    const evaluerQuizUsecase = new EvaluerQuizUsecase(new QuizRepositoryAxios());
+    evaluerQuizUsecase.execute(props.idQuiz, utilisateurStore().utilisateur.id, note);
   };
 </script>

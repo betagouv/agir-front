@@ -67,6 +67,10 @@ h3 {
   display: block;
 }
 
+.width--auto {
+  width: auto;
+}
+
 .full-width {
   width: 100%;
 }
@@ -91,6 +95,10 @@ h3 {
   color: var(--blue-france-sun-113-625);
 }
 
+.text--mention-grey {
+  color: var(--text-mention-grey);
+}
+
 .text--gris {
   color: var(--text-default-grey);
 }
@@ -109,6 +117,14 @@ h3 {
 
 .text--success {
   color: var(--success-425-625);
+}
+
+.text--orange {
+  color: #ed8e00;
+}
+
+.text-warning {
+  color: var(--warning-425-625);
 }
 
 .text--rouge-erreur {
@@ -179,6 +195,10 @@ h3 {
   background-color: var(--error-950-100);
 }
 
+.background--vert--success {
+  background-color: var(--success-950-100);
+}
+
 .background--gris {
   background-color: var(--background-alt-grey);
 }
@@ -215,6 +235,10 @@ h3 {
   border: 1px solid var(--blue-france-sun-113-625);
 }
 
+.border--warning {
+  border: 1px solid var(--warning-425-625);
+}
+
 .border-radius--md {
   border-radius: 6px;
 }
@@ -235,8 +259,15 @@ h3 {
   box-shadow: 0 6px 18px 0 rgba(0, 0, 18, 0.16);
 }
 
-.cms__content ul p {
+.cms__content ul p,
+.cms__content ol p {
   margin-bottom: 0;
+}
+
+.cms__content img {
+  max-width: 100%;
+  object-fit: contain;
+  height: auto;
 }
 
 .text--lh-0 {
@@ -249,4 +280,19 @@ h3 {
 
 .align-items--end {
   align-items: flex-end;
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
+.background--image--coach {
+  background-image: url('/bg_changement_situation.jpg');
+  background-size: cover;
+}
+
+@media print {
+  .print-hidden {
+    display: none;
+  }
 }

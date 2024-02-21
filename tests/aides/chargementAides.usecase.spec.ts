@@ -1,7 +1,10 @@
 import ChargementAidesUsecase, { Aides } from '../../src/aides/chargementAides.usecase';
-import { ChargementAidesRepository } from '../../src/aides/ports/chargementAides.repository';
-import { ChargementAidesPresenterImpl } from '../../src/aides/adapters/chargementAides.presenter.impl';
-import { AidesViewModel } from '../../src/aides/ports/chargementAides.presenter';
+import { ChargementAidesRepository } from '@/aides/ports/chargementAides.repository';
+import { ChargementAidesPresenterImpl } from '@/aides/adapters/chargementAides.presenter.impl';
+import { AidesViewModel } from '@/aides/ports/chargementAides.presenter';
+import { PublierEvenementRepositorySpy } from '../shell/publierEvenement.repository.spy';
+import { expect } from 'vitest';
+import { Evenemement } from '@/shell/ports/publierEvenement.repository';
 
 class ChargementAidesRepositoryForTest implements ChargementAidesRepository {
   getAides(): Promise<Aides[]> {
@@ -15,7 +18,7 @@ class ChargementAidesRepositoryForTest implements ChargementAidesRepository {
         miseEnAvant: '',
         type: 'AIDE',
         illustrationURL: 'https://picsum.photos/200/300',
-        url: 'mes-aides-velo',
+        url: 'vos-aides-velo',
         isUrlExterne: false,
         contenu: '<h3>Titre test</h3><p>lorem ipsum dolor test</p><ul><li>Item 1</li><li>Item 2</li></ul>',
         idDuContenu: '',
@@ -31,7 +34,7 @@ class ChargementAidesRepositoryForTest implements ChargementAidesRepository {
         miseEnAvant: '',
         type: 'AIDE',
         illustrationURL: 'https://picsum.photos/200/300',
-        url: 'mes-aides-retrofit',
+        url: 'vos-aides-retrofit',
         isUrlExterne: true,
         contenu: '<h3>Titre test</h3><p>lorem ipsum dolor test</p>',
         idDuContenu: '',
@@ -46,7 +49,7 @@ class ChargementAidesRepositoryForTest implements ChargementAidesRepository {
         miseEnAvant: '',
         type: 'AIDE',
         illustrationURL: 'https://picsum.photos/200/300',
-        url: 'mes-aides-velo',
+        url: 'vos-aides-velo',
         isUrlExterne: false,
         contenu: '<h3>Titre test</h3><p>lorem ipsum dolor test</p>',
         idDuContenu: '',
@@ -57,10 +60,13 @@ class ChargementAidesRepositoryForTest implements ChargementAidesRepository {
 }
 
 describe('Fichier de tests pour charger toutes les aides', () => {
-  it('Renvoie toutes les aides groupés par catégorie', async () => {
+  it('Renvoie toutes les aides groupés par catégorie et doit prevenir le back que le catalogue a été consulté', async () => {
+    // GIVEN
+    const spyPublierEvenemntRepository = new PublierEvenementRepositorySpy();
+
     // WHEN
-    const useCase = new ChargementAidesUsecase(new ChargementAidesRepositoryForTest());
-    await useCase.execute(new ChargementAidesPresenterImpl(expectation));
+    const useCase = new ChargementAidesUsecase(new ChargementAidesRepositoryForTest(), spyPublierEvenemntRepository);
+    await useCase.execute('utilisateurId', 'codePostal', new ChargementAidesPresenterImpl(expectation));
 
     // THEN
     function expectation(aidesViewModel: AidesViewModel) {
@@ -72,7 +78,7 @@ describe('Fichier de tests pour charger toutes les aides', () => {
             id: 'id-1',
             isSimulateur: true,
             titre: "Simulez vos aides pour l'achat d'un vélo",
-            url: 'mes-aides-velo',
+            url: 'vos-aides-velo',
             montantMaximum: "Jusqu'à 15 000 €",
           },
           {
@@ -81,7 +87,7 @@ describe('Fichier de tests pour charger toutes les aides', () => {
             id: 'id-2',
             isSimulateur: false,
             titre: 'Simulez vos aides pour convertir votre voiture thermique en électrique',
-            url: 'mes-aides-retrofit',
+            url: 'vos-aides-retrofit',
             montantMaximum: undefined,
           },
         ],
@@ -92,11 +98,12 @@ describe('Fichier de tests pour charger toutes les aides', () => {
             id: 'id-3',
             isSimulateur: true,
             titre: 'Aide test',
-            url: 'mes-aides-velo',
+            url: 'vos-aides-velo',
             montantMaximum: undefined,
           },
         ],
       });
     }
+    expect(spyPublierEvenemntRepository.evenementPublie).toStrictEqual(Evenemement.AIDES_CONSULTEES);
   });
 });

@@ -1,5 +1,5 @@
 import { Aides } from '@/aides/chargementAides.usecase';
 
 export interface ChargementAidesRepository {
-  getAides(): Promise<Aides[]>;
+  getAides(codePostal: string): Promise<Aides[]>;
 }

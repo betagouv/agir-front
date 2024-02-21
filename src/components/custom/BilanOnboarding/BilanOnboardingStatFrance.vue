@@ -1,36 +1,78 @@
 <template>
-  <h2 class="fr-h2">Où en est-on ?</h2>
-  <p class="fr-text--lg">La France s’engage à réduire ses émissions de gaz à effet de serre de 55% d’ici 2030</p>
-  <div class="fr-grid-row fr-grid-row--center fr-grid-row--middle fr-mb-2w fr-text--lg text--left">
-    <img src="/graph-bilan-onboarding.svg" class="fr-mr-3w" alt="" />
-    <div class="fr-grid-row flex-column graph-legend">
-      <span class="fr-text--bold text--bleu">25% Particuliers (c’est nous !)</span>
-      <span>50% Entreprises</span>
-      <span>25% État et collectivités territoriales</span>
+  <h2 class="fr-h2">Chiffres clés</h2>
+  <div class="fr-grid-row fr-grid-row--gutters fr-grid-row--middle">
+    <div class="fr-col-md-6 fr-col-12">
+      <div class="fr-grid-row fr-grid-row--middle">
+        <div
+          class="background--bleu-dark text--white fr-grid-row flex-column fr-p-3w border-radius--lg text--center fr-text--bold"
+        >
+          <span class="text--3xl fr-py-1w">8.9</span>
+          <span>tonnes de</span>
+          <span>CO<sub>2</sub>-e*</span>
+        </div>
+        <p class="fr-col fr-text--lg fr-text--bold fr-pl-2w fr-m-0">
+          Empreinte carbone moyenne annuelle de chaque Français
+        </p>
+      </div>
+    </div>
+    <div class="fr-col-md-6 fr-col-12">
+      <h3 class="fr-text--lg">Répartition thématique de l’empreinte moyenne des Français</h3>
+      <div class="fr-grid-row fr-grid-row--center fr-grid-row--middle">
+        <div class="fr-col-5 fr-hidden fr-unhidden-md">
+          <img src="/camembert-onboarding.svg" alt="" />
+        </div>
+        <div class="fr-col-md-5 fr-col-11">
+          <ul class="graph-legend list-style-none fr-text--bold fr-text--lg">
+            <li class="fr-grid-row flex-space-between fr-mb-1v"><span>🚗 Transports </span><span>27%</span></li>
+            <li class="fr-grid-row flex-space-between fr-mb-1v"><span>🥦 Alimentation</span> 25%</li>
+            <li class="fr-grid-row flex-space-between fr-mb-1v"><span>🏡 Logement</span> 19%</li>
+            <li class="fr-grid-row flex-space-between fr-mb-1v"><span>🛒 Consommation</span> 16%</li>
+            <li class="fr-grid-row flex-space-between fr-mb-1v"><span>🏛️ Services publics</span> 13%</li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
-  <p class="fr-text--bold fr-mb-0">Répartition des efforts à engager dans le cadre de la planification écologique</p>
+  <p class="fr-mt-2w fr-mb-0 fr-text--sm">
+    Source : Ministère de la Transition Écologique et de la Cohésion des Territoires (2021), Carbone 4 (2021)<br />
+    *<span class="nowrap">kg CO<sub>2</sub>-e</span> : kilogramme d’équivalent dioxyde de carbone (masse de tous les gaz
+    à effet de serre rapportée au dioxyde de carbone)
+  </p>
 </template>
 
 <style scoped>
-  .graph-legend span::before {
+  .graph-legend li {
+    position: relative;
+  }
+
+  .graph-legend li::before {
     content: '';
-    display: inline-block;
+    display: block;
+    position: absolute;
+    left: -2rem;
+    bottom: calc(50% - 0.5rem);
     width: 1rem;
     height: 1rem;
     border-radius: 50%;
-    margin-right: 0.25rem;
   }
 
-  .graph-legend span:first-child::before {
-    background: var(--blue-france-sun-113-625);
+  .graph-legend li:first-child::before {
+    background: rgba(0, 0, 145, 1);
   }
 
-  .graph-legend span:nth-child(2)::before {
-    background: #919191;
+  .graph-legend li:nth-child(2)::before {
+    background: rgba(0, 0, 145, 0.6);
   }
 
-  .graph-legend span:nth-child(3)::before {
-    background: #353535;
+  .graph-legend li:nth-child(3)::before {
+    background: rgba(0, 0, 145, 0.4);
+  }
+
+  .graph-legend li:nth-child(4)::before {
+    background: rgba(0, 0, 145, 0.2);
+  }
+
+  .graph-legend li:nth-child(5)::before {
+    background: rgba(0, 0, 145, 0.1);
   }
 </style>

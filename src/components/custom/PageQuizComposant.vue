@@ -1,22 +1,16 @@
 <template>
   <div class="fr-container fr-mb-6w">
-    <FilDAriane
-      :page-courante="`Quiz ${quizViewModel.titre}`"
-      :page-hierarchie="[
-        {
-          label: 'Coach',
-          url: 'coach',
-        },
-      ]"
-    />
+    <FilDAriane :page-courante="`Quiz ${quizViewModel.titre}`" />
     <div class="fr-grid-row fr-grid-row--gutters">
       <div class="fr-col-12 fr-col-lg-8">
+        <span class="fr-h2">Quiz</span>
+        <span class="fr-ml-1w fr-h3">{{ quizViewModel.thematique }} - {{ quizViewModel.difficulte }}</span>
         <Quiz
-          :nombre-de-points-a-gagner="nombreDePointsAGagner"
+          class="fr-mt-4w"
           :quiz-view-model="quizViewModel"
-          :id-interaction="idInteraction"
           :id-utilisateur="idUtilisateur"
           :is-mode-previsualisation="isModePrevisualisation"
+          :id-quiz="idQuiz"
         />
       </div>
       <div class="fr-col-12 fr-col-lg-4">
@@ -33,9 +27,8 @@
 
   defineProps<{
     quizViewModel: QuizViewModel;
-    nombreDePointsAGagner: string;
     idUtilisateur: string;
-    idInteraction: string;
     isModePrevisualisation: boolean;
+    idQuiz: string;
   }>();
 </script>

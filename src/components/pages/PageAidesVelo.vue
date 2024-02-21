@@ -1,6 +1,6 @@
 <template>
   <div class="fr-container fr-pb-6w">
-    <FilDAriane :page-courante="titrePage" :page-hierarchie="[{ label: 'Vos aides', url: 'vos-aides' }]" />
+    <FilDAriane :page-courante="titrePage" />
     <AidesResultat
       :is-loading="isLoading"
       titre-categorie-aide="Acheter un vélo neuf"
@@ -26,10 +26,22 @@
           </form>
           <span class="fr-text--sm fr-text--bold">À titre indicatif, voici quelques prix moyens</span>
           <ul class="fr-text--sm fr-m-0 fr-mt-1v">
-            <li class="fr-p-0">Vélo mécanique : <span class="text--underline">250 €</span></li>
-            <li class="fr-p-0">Vélo pliant standard : <span class="text--underline">500 €</span></li>
-            <li class="fr-p-0">Vélo électrique standard : <span class="text--underline">2 000 €</span></li>
-            <li class="fr-p-0">Vélo cargo électrique : <span class="text--underline">7 000 €</span></li>
+            <li class="fr-p-0">
+              Vélo mécanique :
+              <button class="text--underline" @click="updatePrixDuVelo(250)">250 €</button>
+            </li>
+            <li class="fr-p-0">
+              Vélo pliant standard :
+              <button class="text--underline" @click="updatePrixDuVelo(500)">500 €</button>
+            </li>
+            <li class="fr-p-0">
+              Vélo électrique standard :
+              <button class="text--underline" @click="updatePrixDuVelo(2000)">2 000 €</button>
+            </li>
+            <li class="fr-p-0">
+              Vélo cargo électrique :
+              <button class="text--underline" @click="updatePrixDuVelo(7000)">7 000 €</button>
+            </li>
           </ul>
         </div>
         <AsideAideVelo
@@ -61,10 +73,15 @@
   const codePostal = ref<string>(utilisateurStore().utilisateur.codePostal!);
   const prixDuVelo = ref<number>(1000);
   const isLoading = ref<boolean>(false);
+
   function mapResultatAidesVelo(viewModels: SimulationAideResultatViewModel[]) {
     simulationAidesVeloViewModel.value = viewModels;
     isLoading.value = false;
   }
+
+  const updatePrixDuVelo = (prix: number) => {
+    prixDuVelo.value = prix;
+  };
 
   const simulerAideVeloPresenterImpl = new SimulerAideVeloPresenterImpl(mapResultatAidesVelo);
   const simulerAideVeloRepositoryAxios = new SimulerAideVeloRepositoryAxios();

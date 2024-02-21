@@ -3,12 +3,14 @@ import { ToDoListPresenter } from '@/toDoList/ports/toDoList.presenter';
 
 export interface TodoList {
   titre: string;
+  pointFinDeMission: number;
+  derniere: boolean;
   fait: TodoListItem[];
   aFaire: TodoListItem[];
 }
+
 export interface TodoListItem {
   id: string;
-  interactionId: string;
   titre: string;
   contentId: string;
   progession: {
@@ -20,6 +22,7 @@ export interface TodoListItem {
   thematique: string;
   pointAEteRecolte: boolean;
 }
+
 export class RecupererToDoListUsecase {
   constructor(private toDoListRepository: ToDoListRepository) {}
 

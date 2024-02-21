@@ -24,8 +24,8 @@
     <div class="fr-col-md-9 fr-col-12">
       <div class="fr-select-group">
         <label class="fr-label" for="selectCommune">
-          Sélection d'une commune
-          <span class="fr-hint-text">Veuillez remplir un code postal valide</span>
+          Commune
+          <span class="fr-hint-text">Veuillez choisir votre commune</span>
         </label>
         <select
           class="fr-select"
@@ -50,6 +50,7 @@
 </template>
 
 <script setup lang="ts">
+  import '@gouvfr/dsfr/dist/component/select/select.min.css';
   import { ChargementCommunesUsecase } from '@/communes/chargementCommunesUsecase';
   import { CommuneRepositoryAxios } from '@/communes/adapters/communeRepositoryAxios';
   import { onMounted, ref } from 'vue';

@@ -11,10 +11,19 @@
       v-model="viewModel.consommation"
       :default-value="viewModel.consommation"
     />
-    <button class="fr-link fr-icon-arrow-left-line fr-link--icon-left fr-mr-4w" @click="retourEtapePrecedente">
-      Précédent
-    </button>
-    <button class="fr-btn" :disabled="isButtonDisabled">Continuer</button>
+    <ul class="fr-btns-group fr-btns-group--lg fr-btns-group--icon-left fr-btns-group--inline">
+      <li>
+        <button
+          class="fr-btn fr-btn--icon-left fr-icon-arrow-left-line fr-btn--tertiary-no-outline"
+          @click="retourEtapePrecedente"
+        >
+          Précédent
+        </button>
+      </li>
+      <li>
+        <button class="fr-btn" :disabled="isButtonDisabled">Continuer</button>
+      </li>
+    </ul>
   </form>
 </template>
 
@@ -23,6 +32,8 @@
   import BoutonRadio from '@/components/custom/BoutonRadio.vue';
   import { onboardingStore } from '@/store/onboarding';
   import router from '@/router';
+
+  import { RouteOnboardingName } from '@/router/onboarding/routeOnboardingName';
 
   const onBoardingStore = onboardingStore();
   const options = [
@@ -49,7 +60,7 @@
       consommation: viewModel.value.consommation,
       done: true,
     });
-    router.push({ name: 'bilan-onboarding' });
+    router.push({ name: RouteOnboardingName.BILAN_ONBOARDING });
   };
 
   const retourEtapePrecedente = () => {

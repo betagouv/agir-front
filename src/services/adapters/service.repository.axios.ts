@@ -4,6 +4,8 @@ import { AxiosFactory, intercept401 } from '@/axios.factory';
 import { ServiceCatalogue } from '@/services/recupererCatalogueServices.usecase';
 
 interface ServiceApiModel {
+  id: string;
+  titre: string;
   label: string;
   url: string;
   is_url_externe: boolean;
@@ -19,6 +21,8 @@ interface ServiceCatalogueApiModel {
   is_installed: boolean;
   description: string;
   sous_description: string;
+  en_construction: boolean;
+  parametrage_requis: boolean;
 }
 export class ServiceRepositoryAxios implements ServiceRepository {
   @intercept401()
@@ -26,7 +30,9 @@ export class ServiceRepositoryAxios implements ServiceRepository {
     const axiosInstance = AxiosFactory.getAxios();
     const reponse = await axiosInstance.get<ServiceApiModel[]>(`/utilisateurs/${utilisateurId}/services`);
     return reponse.data.map(service => ({
-      label: service.label,
+      id: service.id,
+      titre: service.titre,
+      contenu: service.label,
       url: service.url,
       isUrlExterne: service.is_url_externe,
     }));
@@ -47,6 +53,8 @@ export class ServiceRepositoryAxios implements ServiceRepository {
       sousDescription: service.sous_description,
       estInstalle: service.is_installed,
       image: service.image_url,
+      estEnConstruction: service.en_construction,
+      parametrageRequis: service.parametrage_requis,
     }));
   }
 
@@ -62,5 +70,15 @@ export class ServiceRepositoryAxios implements ServiceRepository {
     await axiosInstance.post(`/utilisateurs/${utilisateurId}/services`, {
       service_definition_id: serviceId,
     });
+  }
+
+  @intercept401()
+  async parametrerService(
+    utilisateurId: string,
+    serviceId: string,
+    parametres: { [key: string]: string }
+  ): Promise<void> {
+    const axiosInstance = AxiosFactory.getAxios();
+    await axiosInstance.put(`/utilisateurs/${utilisateurId}/services/${serviceId}/configuration`, parametres);
   }
 }

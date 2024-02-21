@@ -1,5 +1,6 @@
 import { ChargementAidesRepository } from '@/aides/ports/chargementAides.repository';
 import { ChargementAidesPresenter } from '@/aides/ports/chargementAides.presenter';
+import { Evenemement, PublierEvenementRepository } from '@/shell/ports/publierEvenement.repository';
 
 export interface Aides {
   id: string;
@@ -12,10 +13,14 @@ export interface Aides {
 }
 
 export default class ChargementAidesUsecase {
-  constructor(private chargementAidesRepositoryRepository: ChargementAidesRepository) {}
+  constructor(
+    private chargementAidesRepositoryRepository: ChargementAidesRepository,
+    private publierEvenementRepository: PublierEvenementRepository
+  ) {}
 
-  async execute(presenter: ChargementAidesPresenter) {
-    const reponse = await this.chargementAidesRepositoryRepository.getAides();
+  async execute(utilisateurId: string, codePostal: string, presenter: ChargementAidesPresenter) {
+    const reponse = await this.chargementAidesRepositoryRepository.getAides(codePostal);
+    await this.publierEvenementRepository.publierEvenement(utilisateurId, Evenemement.AIDES_CONSULTEES);
     presenter.presente(reponse);
   }
 }

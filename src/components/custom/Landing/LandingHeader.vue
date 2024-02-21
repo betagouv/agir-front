@@ -5,15 +5,15 @@
       <p class="fr-text--xl">
         Faîtes un premier pas en estimant les principaux impacts de vos usages en moins d’une minute !
       </p>
-      <div class="fr-grid fr-grid-row fr-grid-row--middle">
+      <div class="fr-grid fr-grid-row fr-grid-row--top">
         <router-link
-          :to="{ name: 'authentification' }"
-          class="fr-btn fr-btn--icon-left fr-icon-user-line fr-btn--lg fr-btn--secondary fr-mr-2w fr-mb-2w fr-mb-md-0"
+          :to="{ name: RouteCommuneName.AUTHENTIFICATION }"
+          class="fr-btn fr-btn--lg fr-btn--secondary fr-mr-2w fr-mb-2w fr-mb-md-0"
         >
           Se connecter
         </router-link>
         <router-link
-          :to="{ name: 'pre-onboarding' }"
+          :to="{ name: RouteOnboardingName.ONBOARDING }"
           class="fr-btn fr-btn--lg fr-btn--icon-right fr-icon-arrow-right-line"
         >
           Commencer
@@ -25,3 +25,7 @@
     </div>
   </div>
 </template>
+<script setup lang="ts">
+  import { RouteCommuneName } from '@/router';
+  import { RouteOnboardingName } from '@/router/onboarding/routeOnboardingName';
+</script>

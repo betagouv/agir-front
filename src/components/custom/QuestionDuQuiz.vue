@@ -1,51 +1,67 @@
 <template>
   <div v-if="!isValide">
-    <BoutonRadio :options="item.reponsesPossibles" :legende="item.intitule" name="name" @update="handleValueChange" />
-    <button @click="submitReponse" class="fr-btn fr-mt-2w" title="Valider" :disabled="valueInput === ''">
+    <BoutonRadio
+      :options="listeDesReponses"
+      :legende="question.intitule"
+      legende-size="l"
+      col=""
+      orientation="vertical"
+      name="questionDuQuiz"
+      v-model="valueInput"
+    />
+    <button @click="validerLaReponse" class="fr-btn fr-btn--lg" title="Valider" :disabled="valueInput === ''">
       Valider
     </button>
   </div>
   <div v-else>
     <QuizReponse
-      :question="item.intitule"
-      :solution="item.solution"
-      :texte-explication-o-k="item.texteExplicationOK"
-      :texte-explication-k-o="item.texteExplicationKO"
-      :reponseCorrecte="reponseCorrecte"
+      :question="question.intitule"
+      :solution="question.solution"
+      :texte-explication-o-k="question.texteExplicationOK"
+      :texte-explication-k-o="question.texteExplicationKO"
+      :reponse-correcte="reponseCorrecte"
       :reponse="valueInput"
     />
-    <button @click="handleClick" class="fr-btn fr-mt-2w">Passer à l'étape suivante</button>
+    <button @click="passerEtapeSuivante" class="fr-btn fr-btn--lg">Passer à l'étape suivante</button>
   </div>
 </template>
 
 <script setup lang="ts">
   import { ref, watch } from 'vue';
   import { QuestionViewModel } from '@/quiz/adapters/chargementQuiz.presenter.impl';
-  import BoutonRadio from '@/components/dsfr/BoutonRadio.vue';
+  import BoutonRadio from '@/components/custom/BoutonRadio.vue';
   import QuizReponse from '@/components/custom/QuizReponse.vue';
 
-  const props = defineProps<{
-    item: QuestionViewModel;
-  }>();
+  const props = defineProps<{ question: QuestionViewModel }>();
 
   const valueInput = ref<string>('');
   const isValide = ref<boolean>(false);
-  const reponseCorrecte = ref<boolean>();
-  const emit = defineEmits(['etapeSuivante']);
+  const reponseCorrecte = ref<boolean>(false);
+
+  const listeDesReponses = ref(
+    props.question.reponsesPossibles.map(reponse => ({
+      label: reponse,
+      value: reponse,
+    }))
+  );
 
   watch(
-    () => props.item,
+    () => props.question,
     () => {
-      (isValide.value = false), (valueInput.value = '');
+      isValide.value = false;
+      valueInput.value = '';
+      listeDesReponses.value = props.question.reponsesPossibles.map(reponse => ({
+        label: reponse,
+        value: reponse,
+      }));
     }
   );
 
-  const handleValueChange = value => (valueInput.value = value);
-
-  const submitReponse = () => {
+  const validerLaReponse = () => {
     isValide.value = true;
-    reponseCorrecte.value = valueInput.value === props.item.solution;
+    reponseCorrecte.value = valueInput.value === props.question.solution;
   };
 
-  const handleClick = () => emit('etapeSuivante', reponseCorrecte.value);
+  const emit = defineEmits(['etapeSuivante']);
+  const passerEtapeSuivante = () => emit('etapeSuivante', valueInput.value === props.question.solution);
 </script>

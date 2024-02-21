@@ -1,9 +1,9 @@
 import { RecommandationPersonnalisee } from '@/recommandationsPersonnalisees/recommandationsPersonnalisees.usecase';
 import { InteractionType } from '@/shell/interactionType';
 import { RecommandationsPersonnaliseesPresenter } from '@/recommandationsPersonnalisees/ports/recommandationsPersonnalisees.presenter';
+import { buildUrl } from '@/shell/buildUrl';
 
 export interface RecommandationViewModel {
-  id: string;
   titre: string;
   image: string;
   description: string;
@@ -30,7 +30,6 @@ export class RecommandationsPersonnaliseesPresenterImpl implements Recommandatio
     if (recommandationHighlight) {
       this.viewModel({
         recommandationHighlight: {
-          id: recommandationHighlight.id,
           titre: recommandationHighlight.titre,
           image: recommandationHighlight.illustrationURL,
           description: recommandationHighlight.sousTitre,
@@ -41,10 +40,9 @@ export class RecommandationsPersonnaliseesPresenterImpl implements Recommandatio
           thematique: recommandationHighlight.categorie,
         },
         recommandationsList: recommandationsPersonnalisees
-          .filter(reco => reco.id !== recommandationHighlight.id)
+          .filter(reco => reco !== recommandationHighlight)
           .map(recommandationPersonnalisee => {
             return {
-              id: recommandationPersonnalisee.id,
               thematique: recommandationPersonnalisee.categorie,
               titre: recommandationPersonnalisee.titre,
               image: recommandationPersonnalisee.illustrationURL,
@@ -65,13 +63,15 @@ export class RecommandationsPersonnaliseesPresenterImpl implements Recommandatio
       case InteractionType.AIDE:
         return '/vos-aides';
       case InteractionType.QUIZ:
-        return `/coach/quiz/${recommandationPersonnalisee.idDuContenu}`;
+        return `/agir/quiz/${recommandationPersonnalisee.idDuContenu}`;
       case InteractionType.ARTICLE:
-        return `/article/${recommandationPersonnalisee.titre}`;
+        return `/article/${buildUrl(recommandationPersonnalisee.titre)}/${recommandationPersonnalisee.idDuContenu}`;
       case InteractionType.KYC:
         return '';
       case InteractionType.SUIVIDUJOUR:
-        return '/coach/suivi-du-jour';
+        return '/agir/suivi-du-jour';
+      default:
+        return '';
     }
   }
 }

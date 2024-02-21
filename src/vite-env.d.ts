@@ -14,6 +14,8 @@ interface ImportMetaEnv {
   readonly VITE_MATOMO_SITE_ID: string;
 }
 
+declare const __APP_VERSION__: string;
+
 interface ImportMeta {
   readonly env: ImportMetaEnv;
 }

@@ -13,5 +13,8 @@ export const viteConfig = {
       '@': path.resolve(__dirname, 'src'),
     },
   },
+  define: {
+    __APP_VERSION__: JSON.stringify(process.env.npm_package_version),
+  },
 };
 export default defineConfig(viteConfig);

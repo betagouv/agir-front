@@ -5,7 +5,10 @@ import { vi, describe, it, SpyInstance } from 'vitest';
 import { EnvoyerDonneesQuizInteractionUsecase } from '@/quiz/envoyerDonneesQuizInteraction.usecase';
 
 const quizzViewModelMock: QuizViewModel = {
+  nombreDePointsAGagner: '10',
   titre: 'Titre du quizz',
+  difficulte: 'Difficulté du quizz',
+  thematique: 'Thématique du quizz',
   questions: [
     {
       id: 'id_question_0',
@@ -33,8 +36,8 @@ const props = {
   quizViewModel: quizzViewModelMock,
   nombreDePointsAGagner: '10',
   idUtilisateur: 'idUtilisateur',
-  idInteraction: 'idInteraction',
   isModePrevisualisation: false,
+  idQuiz: 'idQuiz',
 };
 
 describe('Quizz', () => {
@@ -169,10 +172,12 @@ describe('Quizz', () => {
         const boutonEtapeSuivante2 = getByRole('button', { name: "Passer à l'étape suivante" });
         await fireEvent.click(boutonEtapeSuivante2);
 
-        const messageSuccès = getByText('Bravo, vous avez réussi le quiz !', { exact: false });
+        const messageSucces = getByText('Bien joué !');
+        const paragrapheSucces = getByText('Toutes les réponses sont correctes');
 
         // THEN
-        expect(messageSuccès).toBeDefined();
+        expect(messageSucces).toBeDefined();
+        expect(paragrapheSucces).toBeDefined();
       });
     });
 
@@ -197,10 +202,12 @@ describe('Quizz', () => {
         const boutonEtapeSuivante2 = getByRole('button', { name: "Passer à l'étape suivante" });
         await fireEvent.click(boutonEtapeSuivante2);
 
-        const messageSuccès = getByText('Désolé, Vous avez perdu !');
+        const messageEchec = getByText('Dommage !');
+        const paragrapheEchec = getByText('Au moins 1 mauvaise réponse');
 
         // THEN
-        expect(messageSuccès).toBeDefined();
+        expect(messageEchec).toBeDefined();
+        expect(paragrapheEchec).toBeDefined();
       });
     });
 
@@ -210,8 +217,8 @@ describe('Quizz', () => {
         quizViewModel: quizzViewModelMock,
         nombreDePointsAGagner: '10',
         idUtilisateur: 'idUtilisateur',
-        idInteraction: 'idInteraction',
         isModePrevisualisation: false,
+        idQuiz: 'idQuiz',
       };
       const { getByRole, getAllByRole } = render(Quiz, { props });
 
@@ -232,7 +239,7 @@ describe('Quizz', () => {
       await fireEvent.click(boutonEtapeSuivante2);
 
       // THEN
-      expect(envoyerDonneesQuizInteractionMock).toHaveBeenNthCalledWith(1, 'idUtilisateur', 'idInteraction', 1, 2);
+      expect(envoyerDonneesQuizInteractionMock).toHaveBeenNthCalledWith(1, 'idUtilisateur', 'idQuiz', 1, 2);
     });
     it("si le quizz est en mode preview ne doit pas appeler le usecase d'envoi des données du quizz", async () => {
       // GIVEN
@@ -242,6 +249,7 @@ describe('Quizz', () => {
         idUtilisateur: 'idUtilisateur',
         idInteraction: 'idInteraction',
         isModePrevisualisation: true,
+        idQuiz: 'idQuiz',
       };
       const { getByRole, getAllByRole } = render(Quiz, { props });
 
@@ -262,7 +270,7 @@ describe('Quizz', () => {
       await fireEvent.click(boutonEtapeSuivante2);
 
       // THEN
-      expect(envoyerDonneesQuizInteractionMock).not.toHaveBeenCalledWith(1, 'idUtilisateur', 'idInteraction', 1, 2);
+      expect(envoyerDonneesQuizInteractionMock).not.toHaveBeenCalledWith(1, 'idUtilisateur', 'idQuiz', 1, 2);
     });
   });
 });

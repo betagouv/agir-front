@@ -1,52 +1,36 @@
 <template>
-  <div class="fr-container fr-pb-6w">
-    <FilDAriane
-      page-courante="Mon Compte"
-      :page-hierarchie="[
-        {
-          label: 'Coach',
-          url: 'coach',
-        },
-      ]"
-    />
-    <div class="fr-grid-row fr-grid-row--center fr-grid-row--gutters">
-      <div class="fr-col fr-col-lg-8">
-        <h1 class="fr-h2">Mon Compte</h1>
-        <PageCompteFormulaire
-          v-if="compteUtlisateurViewModel"
-          :compte-utlisateur-view-model="compteUtlisateurViewModel"
-        />
-        <div class="fr-mt-2w">
-          <router-link :to="{ name: 'modifier-mot-de-passe' }">Modifier mon mot de passe</router-link>
-        </div>
-        <PageCompteSuppression class="fr-mt-4w" />
-      </div>
-    </div>
-  </div>
+  <CompteSkeleton page-courante="Mon Compte">
+    <CompteFormulaire v-if="compteUtlisateurViewModel" :compte-utlisateur-view-model="compteUtlisateurViewModel" />
+  </CompteSkeleton>
 </template>
 
 <script setup lang="ts">
+  import { onMounted, ref } from 'vue';
+  import CompteSkeleton from '@/components/custom/Compte/CompteSkeleton.vue';
   import { ChargerCompteUtilisateurUsecase } from '@/compte/chargerCompteUtilisateur.usecase';
   import { CompteUtilisateurRepositoryImpl } from '@/compte/adapters/compteUtilisateur.repository.impl';
   import {
     CompteUtilisateurPresenterImpl,
     CompteUtlisateurViewModel,
   } from '@/compte/adapters/compteUtilisateur.presenter.impl';
-  import { onMounted, ref } from 'vue';
   import { utilisateurStore } from '@/store/utilisateur';
-  import PageCompteFormulaire from '@/components/custom/PageCompteFormulaire.vue';
-  import PageCompteSuppression from '@/components/pages/PageCompteSuppression.vue';
-  import FilDAriane from '@/components/dsfr/FilDAriane.vue';
+  import CompteFormulaire from '@/components/custom/Compte/CompteFormulaire.vue';
+  import { SessionRepositoryStore } from '@/authentification/adapters/session.repository.store';
+  import { PublierEvenemntRepositoryAxios } from '@/shell/adapters/publierEvenemnt.repository.axios';
 
   const compteUtlisateurViewModel = ref<CompteUtlisateurViewModel | null>(null);
+  const store = utilisateurStore();
 
   function mapValueCompte(viewModel: CompteUtlisateurViewModel) {
     compteUtlisateurViewModel.value = viewModel;
   }
 
   onMounted(async () => {
-    const usecase = new ChargerCompteUtilisateurUsecase(new CompteUtilisateurRepositoryImpl());
-    const store = utilisateurStore();
+    const usecase = new ChargerCompteUtilisateurUsecase(
+      new CompteUtilisateurRepositoryImpl(),
+      new SessionRepositoryStore(),
+      new PublierEvenemntRepositoryAxios()
+    );
     const idUtilisateur = store.utilisateur.id;
     await usecase.execute(idUtilisateur, new CompteUtilisateurPresenterImpl(mapValueCompte));
   });

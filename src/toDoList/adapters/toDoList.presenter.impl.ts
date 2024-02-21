@@ -1,10 +1,10 @@
 import { ToDoListPresenter } from '@/toDoList/ports/toDoList.presenter';
 import { TodoList, TodoListItem } from '@/toDoList/recupererToDoList.usecase';
 import { InteractionType } from '@/shell/interactionType';
+import { buildUrl } from '@/shell/buildUrl';
 
 interface TodoViewModel {
   id: string;
-  interactionId: string;
   titre: string;
   url: string;
   contentId: string;
@@ -16,10 +16,13 @@ interface TodoViewModel {
   type: string;
   thematique: string;
   pointAEteRecolte: boolean;
+  hash?: string;
 }
 
 export interface TodoListViewModel {
   titre: string;
+  pointFinDeMission: number;
+  derniere: boolean;
   aFaire: TodoViewModel[];
   fait: TodoViewModel[];
 }
@@ -30,6 +33,8 @@ export class ToDoListPresenterImpl implements ToDoListPresenter {
   presente(toDoList: TodoList): void {
     this.todoListView({
       titre: toDoList.titre,
+      pointFinDeMission: toDoList.pointFinDeMission,
+      derniere: toDoList.derniere,
       aFaire: toDoList.aFaire.map(todo => this.mapToListItemToViewModel(todo)),
       fait: toDoList.fait.map(todo => this.mapToListItemToViewModel(todo)),
     });
@@ -38,7 +43,6 @@ export class ToDoListPresenterImpl implements ToDoListPresenter {
   private mapToListItemToViewModel(todo: TodoListItem): TodoViewModel {
     return {
       id: todo.id,
-      interactionId: todo.interactionId,
       titre: todo.titre,
       url: this.determineUrl(todo),
       contentId: todo.contentId,
@@ -50,6 +54,7 @@ export class ToDoListPresenterImpl implements ToDoListPresenter {
       type: todo.type,
       thematique: todo.thematique,
       pointAEteRecolte: todo.pointAEteRecolte,
+      hash: todo.type === InteractionType.RECOMMANDATION ? '#recommandations' : undefined,
     };
   }
 
@@ -58,13 +63,19 @@ export class ToDoListPresenterImpl implements ToDoListPresenter {
       case InteractionType.AIDE:
         return '/vos-aides';
       case InteractionType.QUIZ:
-        return `/coach/quiz/${todo.contentId}`;
+        return `/agir/quiz/${todo.contentId}`;
       case InteractionType.ARTICLE:
-        return `/article/${todo.titre}`;
+        return `/article/${buildUrl(todo.titre)}/${todo.contentId}`;
       case InteractionType.KYC:
-        return '';
+        return `/kyc/${todo.contentId}`;
       case InteractionType.SUIVIDUJOUR:
-        return '/coach/suivi-du-jour';
+        return '/agir/suivi-du-jour';
+      case InteractionType.COMPTE:
+        return '/mon-compte';
+      case InteractionType.SERVICE:
+        return '/agir/services';
+      case InteractionType.RECOMMANDATION:
+        return '/agir';
       default:
         return '';
     }

@@ -1,0 +1,34 @@
+name: Playwright Tests
+on:
+  pull_request:
+    branches: [ main ]
+jobs:
+  test:
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
+    env:
+      VITE_API_URL: ${{ secrets.VITE_API_URL_DEV }}
+      VITE_API_URL_CMS: ${{ secrets.VITE_API_URL_CMS }}
+      VITE_API_TOKEN_CMS: ${{ secrets.VITE_API_TOKEN_CMS }}
+      PLAYWRIGHT_PASSWORD: ${{ secrets.PLAYWRIGHT_PASSWORD }}
+      PLAYWRIGHT_EMAIL: ${{ secrets.PLAYWRIGHT_EMAIL }}
+      PLAYWRIGHT_OTP_DEV: ${{ secrets.PLAYWRIGHT_OTP_DEV }}
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 18
+    - name: Install dependencies
+      run: yarn install
+    - name: Install Playwright Browsers
+      run: yarn playwright install --with-deps
+    - name: Create playwright-report directory
+      run: mkdir playwright-report  
+    - name: Run Playwright tests
+      run: yarn test:e2e
+    - uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: playwright-report
+        path: playwright-report/
+        retention-days: 30

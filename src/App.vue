@@ -12,12 +12,12 @@
     return utilisateurStore().utilisateur.id.length > 0;
   });
 
+  const appName = 'Agir ! -';
   router.beforeEach((to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
     const { title, estPublique } = to.meta;
-    window.scrollTo(0, 0);
 
     if (title) {
-      document.title = title as string;
+      document.title = `${appName} ${title as string}`;
     }
     if (estPublique || utilisateurStore().utilisateur.id.length > 0) {
       next();
@@ -30,7 +30,7 @@
 
 <template>
   <div class="page-container">
-    <Header />
+    <Header class="print-hidden" />
     <main class="background--gris">
       <Services
         v-if="
@@ -41,7 +41,7 @@
       <router-view />
     </main>
 
-    <Footer />
+    <Footer class="print-hidden" />
   </div>
 </template>
 

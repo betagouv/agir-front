@@ -12,10 +12,12 @@ export class SpyToDoListEventBus extends EventBus<ToDoListEvent> {
     this._eventName = eventName;
   }
 
-  eventSubscribers: Record<ToDoListEvent, (() => void)[]> = {
+  eventSubscribers: Record<ToDoListEvent, { subscriberName: string; callback: () => void }[]> = {
     [ToDoListEvent.TODO_POINTS_ONT_ETE_RECUPERE]: [],
     [ToDoListEvent.TODO_ARTICLE_A_ETE_LU]: [],
     [ToDoListEvent.TODO_A_ETE_TERMINEE]: [],
     [ToDoListEvent.TODO_QUIZ_ETE_TERMINE]: [],
+    [ToDoListEvent.TODO_KYC_A_ETE_REPONDU]: [],
+    [ToDoListEvent.TODO_RECOMMANDATION_A_ETE_CLIQUEE]: [],
   };
 }

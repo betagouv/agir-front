@@ -7,27 +7,29 @@
   </div>
 
   <Teleport to="body">
-    <Modale titre="Passage de niveau" label="Modale de passage de niveau" id="passageDeNiveau">
-      <CarteScore :value="utilisateurStore().score.niveau" type="niveau" class="fr-mb-2w" />
-      <div class="text--center">
-        <div v-if="utilisateurStore().score.celebration?.reveal">
-          <p class="fr-m-0 text--uppercase fr-text--xs text--bold text--gris-light">Section débloquée</p>
-          <h4 class="fr-h2 fr-my-0">{{ utilisateurStore().score.celebration!.reveal!.titre }}</h4>
-          <p class="fr-text--sm">{{ utilisateurStore().score.celebration!.reveal!.description }}</p>
-          <router-link
-            class="fr-btn fr-btn--icon-right fr-icon-arrow-right-line"
-            :to="utilisateurStore().score.celebration!.reveal!.url"
-            @click.prevent="modaleActions?.close()"
-          >
-            Découvrir la fonctionnalité
-          </router-link>
+    <Modale label="Modale de passage de niveau" id="passageDeNiveau" :radius="true" :is-footer-actions="false">
+      <template v-slot:contenu>
+        <ModalePassageDeNiveau :niveau="utilisateurStore().score.niveau" label-title="Modale de passage de niveau" />
+        <div class="text--center fr-my-3w">
+          <div v-if="utilisateurStore().score.celebration?.reveal">
+            <p class="fr-m-0 text--uppercase fr-text--xs text--bold text--gris-light">Section débloquée</p>
+            <h4 class="fr-h2 fr-my-0">{{ utilisateurStore().score.celebration!.reveal!.titre }}</h4>
+            <p class="fr-text--sm">{{ utilisateurStore().score.celebration!.reveal!.description }}</p>
+            <router-link
+              class="fr-btn fr-btn--icon-right fr-icon-arrow-right-line"
+              :to="{name:utilisateurStore().score.celebration!.reveal!.routeName}"
+              @click.prevent="revealFonctionnalite"
+            >
+              Découvrir la fonctionnalité
+            </router-link>
+          </div>
+          <div v-else>
+            <button class="fr-btn fr-btn--icon-right fr-icon-arrow-right-line" aria-controls="passageDeNiveau">
+              Continuer
+            </button>
+          </div>
         </div>
-        <div v-else>
-          <button class="fr-btn fr-btn--icon-right fr-icon-arrow-right-line" aria-controls="passageDeNiveau">
-            Continuer
-          </button>
-        </div>
-      </div>
+      </template>
     </Modale>
     <button class="fr-btn fr-hidden" data-fr-opened="false" aria-controls="passageDeNiveau">
       Modale avec zone d'action
@@ -36,7 +38,7 @@
 </template>
 
 <script setup lang="ts">
-  import { computed, onMounted, onUnmounted } from 'vue';
+  import { computed, onMounted, onUnmounted, ref } from 'vue';
   import { utilisateurStore } from '@/store/utilisateur';
   import { ScoreViewModel } from '@/score/ports/chargementScore.presenter';
   import { ChargementScoreUsecase } from '@/score/chargementScore.usecase';
@@ -44,14 +46,39 @@
   import { ChargementScorePresenterImpl } from '@/score/adapters/chargementScore.presenter.impl';
   import { ToDoListEvent, ToDoListEventBusImpl } from '@/toDoList/toDoListEventBusImpl';
   import Modale from '@/components/custom/Modale/Modale.vue';
-  import CarteScore from '@/components/custom/Progression/CarteScore.vue';
   import ModaleActions from '@/components/custom/Modale/ModaleActions';
   import { ValiderCelebrationUsecase } from '@/celebration/validerCelebration.usecase';
   import { CelebrationRepositoryAxios } from '@/celebration/adapters/celebration.repository.axios';
   import { SessionRepositoryStore } from '@/authentification/adapters/session.repository.store';
+  import ModalePassageDeNiveau from '@/components/custom/Modale/ModalePassageDeNiveau.vue';
+  import { Fonctionnalites } from '@/shell/fonctionnalitesEnum';
+  import { useReveal } from '@/composables/useReveal';
+
+  const { selectionnerReveal } = useReveal();
+  const fonctionnaliteDebloque = ref<string>();
+
+  function revealFonctionnalite() {
+    modaleActions?.close();
+
+    const tour = selectionnerReveal(fonctionnaliteDebloque.value as Fonctionnalites);
+    tour.start();
+
+    // Ajout d'un écouteur pour fermer le tour lors du clic sur l'overlay
+    setTimeout(() => {
+      document.addEventListener(
+        'click',
+        function () {
+          tour.cancel();
+        },
+        { once: true }
+      );
+    }, 0);
+  }
 
   const score = computed(() => utilisateurStore().score);
   let modaleActions: ModaleActions | null;
+  const subscriberName = 'ScoreHeader';
+
   onMounted(() => {
     mettreAJourLeScore();
 
@@ -78,30 +105,43 @@
 
           if (viewModel.celebration) {
             declencherCelebration(viewModel.celebration.id);
+            fonctionnaliteDebloque.value = viewModel.celebration.reveal?.feature;
           }
         })
       );
     }
 
-    ToDoListEventBusImpl.getInstance().subscribe(ToDoListEvent.TODO_POINTS_ONT_ETE_RECUPERE, () => {
+    ToDoListEventBusImpl.getInstance().subscribe(subscriberName, ToDoListEvent.TODO_POINTS_ONT_ETE_RECUPERE, () => {
       mettreAJourLeScore();
     });
-    ToDoListEventBusImpl.getInstance().subscribe(ToDoListEvent.TODO_ARTICLE_A_ETE_LU, () => {
+    ToDoListEventBusImpl.getInstance().subscribe(subscriberName, ToDoListEvent.TODO_ARTICLE_A_ETE_LU, () => {
       mettreAJourLeScore();
     });
-    ToDoListEventBusImpl.getInstance().subscribe(ToDoListEvent.TODO_A_ETE_TERMINEE, () => {
+    ToDoListEventBusImpl.getInstance().subscribe(subscriberName, ToDoListEvent.TODO_A_ETE_TERMINEE, () => {
       mettreAJourLeScore();
     });
-    ToDoListEventBusImpl.getInstance().subscribe(ToDoListEvent.TODO_QUIZ_ETE_TERMINE, () => {
+    ToDoListEventBusImpl.getInstance().subscribe(subscriberName, ToDoListEvent.TODO_QUIZ_ETE_TERMINE, () => {
       mettreAJourLeScore();
     });
+    ToDoListEventBusImpl.getInstance().subscribe(subscriberName, ToDoListEvent.TODO_KYC_A_ETE_REPONDU, () => {
+      mettreAJourLeScore();
+    });
+    ToDoListEventBusImpl.getInstance().subscribe(
+      subscriberName,
+      ToDoListEvent.TODO_RECOMMANDATION_A_ETE_CLIQUEE,
+      () => {
+        mettreAJourLeScore();
+      }
+    );
   });
 
   onUnmounted(() => {
-    ToDoListEventBusImpl.getInstance().unsubscribe(ToDoListEvent.TODO_POINTS_ONT_ETE_RECUPERE);
-    ToDoListEventBusImpl.getInstance().unsubscribe(ToDoListEvent.TODO_ARTICLE_A_ETE_LU);
-    ToDoListEventBusImpl.getInstance().unsubscribe(ToDoListEvent.TODO_A_ETE_TERMINEE);
-    ToDoListEventBusImpl.getInstance().unsubscribe(ToDoListEvent.TODO_QUIZ_ETE_TERMINE);
+    ToDoListEventBusImpl.getInstance().unsubscribe(subscriberName, ToDoListEvent.TODO_POINTS_ONT_ETE_RECUPERE);
+    ToDoListEventBusImpl.getInstance().unsubscribe(subscriberName, ToDoListEvent.TODO_ARTICLE_A_ETE_LU);
+    ToDoListEventBusImpl.getInstance().unsubscribe(subscriberName, ToDoListEvent.TODO_A_ETE_TERMINEE);
+    ToDoListEventBusImpl.getInstance().unsubscribe(subscriberName, ToDoListEvent.TODO_QUIZ_ETE_TERMINE);
+    ToDoListEventBusImpl.getInstance().unsubscribe(subscriberName, ToDoListEvent.TODO_KYC_A_ETE_REPONDU);
+    ToDoListEventBusImpl.getInstance().unsubscribe(subscriberName, ToDoListEvent.TODO_RECOMMANDATION_A_ETE_CLIQUEE);
   });
 </script>
 

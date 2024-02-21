@@ -1,6 +1,6 @@
 <template>
   <div class="fr-container fr-pb-6w">
-    <FilDAriane page-courante="Prime au retrofit" :page-hierarchie="[{ label: 'Vos aides', url: 'vos-aides' }]" />
+    <FilDAriane page-courante="Prime au retrofit" />
     <div class="fr-grid-row fr-grid-row--gutters">
       <div class="fr-col-lg-8">
         <div class="background--white border border-radius--md fr-p-3w fr-mb-4w">
@@ -39,6 +39,8 @@
   import router from '@/router';
   import AidesVeloFormulaireAside from '@/components/custom/Aides/AidesInfosUtilisationDesDonnees.vue';
 
+  import { RouteAidesName } from '@/router/aides/routeAidesName';
+
   const store = utilisateurStore();
   const revenuFiscal = ref(store.utilisateur.revenuFiscal ? store.utilisateur.revenuFiscal : 0);
   const nombreDePartsFiscales = ref(store.utilisateur.nombreDePartsFiscales);
@@ -69,7 +71,7 @@
         fonctionnalitesDebloquees: utilisateur.fonctionnalitesDebloquees,
       };
       await usecase.execute(donneeAMettreAjour);
-      await router.push({ name: 'mes-aides-retrofit' });
+      await router.push({ name: RouteAidesName.RETROFIT });
     }
   }
 </script>

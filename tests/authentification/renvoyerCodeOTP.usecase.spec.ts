@@ -1,4 +1,4 @@
-import { Utilisateur, UtilisateurRepository } from '@/authentification/ports/utilisateur.repository';
+import { IdUtilisateur, Utilisateur, UtilisateurRepository } from '@/authentification/ports/utilisateur.repository';
 import { RenvoyerCoteOTPUsecase } from '@/authentification/renvoyerCoteOTPUsecase';
 
 class SpyUtilisateurRepository implements UtilisateurRepository {
@@ -19,7 +19,7 @@ class SpyUtilisateurRepository implements UtilisateurRepository {
     return Promise.resolve();
   }
 
-  validerCompteUtilisateur(email: string, code: string): Promise<Utilisateur> {
+  validerCompteUtilisateur(email: string, code: string): Promise<IdUtilisateur> {
     throw Error;
   }
 

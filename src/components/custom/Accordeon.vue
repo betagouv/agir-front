@@ -17,9 +17,9 @@
 </template>
 
 <script setup lang="ts">
-  defineProps<{
-    nameId: string;
-  }>();
+  import '@gouvfr/dsfr/dist/component/accordion/accordion.min.css';
+
+  defineProps<{ nameId: string }>();
 </script>
 
 <style scoped>

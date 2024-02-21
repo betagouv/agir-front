@@ -1,273 +1,116 @@
-import Authentification from '@/components/Authentification.vue';
-import Dashboard from '@/components/Dashboard.vue';
-import { createRouter, createWebHistory } from 'vue-router';
-
-import PageQuiz from '@/components/pages/PageQuiz.vue';
-import PageAidesRetrofit from '@/components/pages/PageAidesRetrofit.vue';
-import PageAidesVelo from '@/components/pages/PageAidesVelo.vue';
-import Coach from '@/components/Coach.vue';
-import PageAides from '@/components/pages/PageAides.vue';
-import Page404 from '@/components/pages/Page404.vue';
-import PageSuiviDuJour from '@/components/pages/PageSuiviDuJour.vue';
+import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import { storeIdNGC } from '@/bilan/middleware/pendingSimulation';
-import FranceConnectCallBack from '@/components/FranceConnectCallBack.vue';
-import PageCompte from '@/components/pages/PageCompte.vue';
-import PageAccueil from '@/components/pages/PageAccueil.vue';
-import PageCreationCompte from '@/components/pages/PageCreationCompte.vue';
-import PageArticle from '@/components/pages/PageArticle.vue';
-import PagePrevisualisationArticle from '@/components/pages/PagePrevisualisationArticle.vue';
-import PagePrevisualisationQuiz from '@/components/pages/PagePrevisualisationQuiz.vue';
-import PageBilanOnboarding from '@/components/pages/PageBilanOnboarding.vue';
-import PageOnboarding from '@/components/pages/PageOnboarding.vue';
-import PagePreOnboarding from '@/components/pages/PagePreOnboarding.vue';
-import { onboardingStore } from '@/store/onboarding';
-import PageModificationMotDePasse from '@/components/pages/PageModificationMotDePasse.vue';
-import PageSessionExpiree from '@/components/pages/PageSessionExpiree.vue';
-import PageValidationCompte from '@/components/pages/PageValidationCompte.vue';
-import PageMotDePasseOublie from '@/components/pages/PageMotDePasseOublie.vue';
-import PageMotDePasseOublieRedefinirMotDePasse from '@/components/pages/PageMotDePasseOublieRedefinirMotDePasse.vue';
-import PageCatalogueServices from '@/components/pages/PageCatalogueServices.vue';
-import AidesVeloFormulaire from '@/components/pages/PageAidesVeloFormulaire.vue';
-import PageAidesRetrofitFormulaire from '@/components/pages/PageAidesRetrofitFormulaire.vue';
+import { utilisateurStore } from '@/store/utilisateur';
+import articlesRoutes from '@/router/articles/routes';
+import aidesRoutes from '@/router/aides/routes';
+import compteRoutes from '@/router/compte/routes';
+import onboardingRoutes from '@/router/onboarding/routes';
+import coachRoutes from '@/router/coach/routes';
+import kycRoutes from '@/router/kyc/routes';
+import { RouteCoachName } from '@/router/coach/routeCoachName';
+const Authentification = () => import('@/components/Authentification.vue');
+const Page404 = () => import('@/components/pages/Page404.vue');
+const FranceConnectCallBack = () => import('@/components/FranceConnectCallBack.vue');
+const PageAccueil = () => import('@/components/pages/PageAccueil.vue');
+const PageSessionExpiree = () => import('@/components/pages/PageSessionExpiree.vue');
+const PageBetaFermee = () => import('@/components/pages/PageBetaFermee.vue');
 
-const appName = 'Agir ! -';
-const routes = [
+export enum RouteCommuneName {
+  ACCUEIL = 'accueil',
+  AUTHENTIFICATION = 'authentification',
+  SESSION_EXPIREE = 'session-expiree',
+  DASHBOARD = 'dashboard',
+  BETA_FERMEE = 'beta-fermee',
+  NOT_FOUND = 'not-found',
+  RETOUR_AUTH_FRANCE_CONNECT = 'retour-auth-france-connect',
+}
+
+enum RouteCommunePath {
+  BETA_FERMEE = '/beta-fermee',
+  AUTHENTIFICATION = '/authentification',
+  SESSION_EXPIREE = '/session-expiree',
+  LOGIN_CALLBACK = '/login-callback',
+}
+
+const routes: RouteRecordRaw[] = [
+  ...kycRoutes,
+  ...compteRoutes,
+  ...coachRoutes,
+  ...onboardingRoutes,
+  ...articlesRoutes,
+  ...aidesRoutes,
   {
     path: '/',
-    name: 'accueil',
+    name: RouteCommuneName.ACCUEIL,
     component: PageAccueil,
     meta: {
-      title: `${appName} Accueil`,
+      title: 'Accueil',
       estPublique: true,
     },
-    beforeEnter: storeIdNGC,
+    beforeEnter: () => {
+      storeIdNGC;
+      if (utilisateurStore().utilisateur.id.length > 0) {
+        router.replace({ name: RouteCoachName.COACH });
+      }
+    },
   },
   {
-    path: '/pre-onboarding',
-    name: 'pre-onboarding',
-    component: PagePreOnboarding,
+    path: RouteCommunePath.BETA_FERMEE,
+    name: RouteCommuneName.BETA_FERMEE,
+    component: PageBetaFermee,
     meta: {
+      title: 'Bêta fermée',
       estPublique: true,
     },
   },
   {
-    path: '/onboarding',
-    name: 'onboarding',
-    component: PageOnboarding,
-    meta: {
-      estPublique: true,
-    },
-  },
-  {
-    path: '/onboarding/bilan',
-    name: 'bilan-onboarding',
-    component: PageBilanOnboarding,
-    meta: {
-      estPublique: true,
-    },
-  },
-  {
-    path: '/authentification',
-    name: 'authentification',
+    path: RouteCommunePath.AUTHENTIFICATION,
+    name: RouteCommuneName.AUTHENTIFICATION,
     component: Authentification,
     meta: {
-      title: `${appName} Authentification`,
+      title: 'Authentification',
       estPublique: true,
     },
   },
   {
-    path: '/session-expiree',
-    name: 'session-expiree',
+    path: RouteCommunePath.SESSION_EXPIREE,
+    name: RouteCommuneName.SESSION_EXPIREE,
     component: PageSessionExpiree,
     meta: {
-      title: `${appName} Session expirée`,
+      title: 'Session expirée',
       estPublique: true,
     },
   },
-  { path: '/mon-tableau-de-bord', name: 'dashboard', component: Dashboard },
   {
-    path: '/coach',
-    children: [
-      {
-        path: '/coach',
-        name: 'coach',
-        component: Coach,
-        meta: {
-          title: `${appName} Coach`,
-        },
-      },
-      {
-        path: 'services',
-        name: 'services',
-        component: PageCatalogueServices,
-        meta: {
-          title: `${appName} Catalogue de services`,
-        },
-      },
-      {
-        path: 'suivi-du-jour',
-        name: 'suivi-du-jour',
-        component: PageSuiviDuJour,
-        meta: {
-          title: `${appName} Suivi du jour`,
-        },
-      },
-      {
-        path: 'quiz',
-        children: [
-          {
-            path: ':id',
-            name: 'quiz',
-            component: PageQuiz,
-            meta: {
-              title: `${appName} Quiz`,
-            },
-          },
-          {
-            path: 'previsualisation/:id',
-            name: 'quiz-previsualisation',
-            component: PagePrevisualisationQuiz,
-            meta: {
-              title: `${appName} Quiz`,
-              estPublique: true,
-            },
-          },
-        ],
-      },
-    ],
-  },
-  {
-    path: '/vos-aides',
-    children: [
-      {
-        path: '/vos-aides',
-        name: 'mes-aides',
-        component: PageAides,
-        meta: {
-          title: `${appName} Vos aides`,
-        },
-      },
-      {
-        path: '/mes-aides/retrofit',
-        name: 'mes-aides-retrofit',
-        component: PageAidesRetrofit,
-      },
-      {
-        path: '/mes-aides/retrofit/formulaire',
-        name: 'mes-aides-retrofit-formulaire',
-        component: PageAidesRetrofitFormulaire,
-      },
-      {
-        path: '/mes-aides/velo',
-        name: 'mes-aides-velo',
-        component: PageAidesVelo,
-      },
-      {
-        path: '/mes-aides/velo/formulaire',
-        name: 'mes-aides-velo-formulaire',
-        component: AidesVeloFormulaire,
-      },
-    ],
-  },
-  {
-    path: '/login-callback',
-    name: 'retour-auth-france-connect',
+    path: RouteCommunePath.LOGIN_CALLBACK,
+    name: RouteCommuneName.RETOUR_AUTH_FRANCE_CONNECT,
     component: FranceConnectCallBack,
     meta: {
       estPublique: true,
     },
   },
   {
-    path: '/article/',
-    name: 'article',
-    children: [
-      {
-        path: ':titre',
-        component: PageArticle,
-        meta: { estPublique: false },
-        children: [
-          {
-            path: '::id',
-            component: PageArticle,
-            meta: { estPublique: false },
-          },
-        ],
-      },
-
-      {
-        path: 'previsualisation/:id',
-        component: PagePrevisualisationArticle,
-        meta: { estPublique: true },
-      },
-    ],
-  },
-  {
-    path: '/mon-compte',
-    name: 'mon-compte',
-    component: PageCompte,
-  },
-  {
-    path: '/mon-compte/changer-de-mot-de-passe',
-    name: 'modifier-mot-de-passe',
-    component: PageModificationMotDePasse,
-  },
-  {
-    path: '/creation-compte',
-    name: 'creation-compte',
-    component: PageCreationCompte,
-    beforeEnter: (to, from, next) => {
-      if (!onboardingStore().estComplet) {
-        router.replace({ name: 'pre-onboarding' });
-      } else {
-        next();
-      }
-    },
-    meta: {
-      title: `${appName} Création du compte`,
-      estPublique: true,
-    },
-  },
-  {
-    path: '/validation-compte',
-    name: 'validation-compte',
-    component: PageValidationCompte,
-    meta: {
-      title: `${appName} Validation du compte`,
-      estPublique: true,
-    },
-  },
-  {
-    path: '/mot-de-passe-oublie',
-    children: [
-      {
-        path: '/mot-de-passe-oublie',
-        name: 'mot-de-passe-oublie',
-        component: PageMotDePasseOublie,
-        meta: {
-          title: `${appName} Mot de passe oublié`,
-          estPublique: true,
-        },
-      },
-      {
-        path: 'redefinir-mot-de-passe',
-        name: 'redefinir-mot-de-passe',
-        component: PageMotDePasseOublieRedefinirMotDePasse,
-        meta: {
-          title: `${appName} Redéfinir mot de passe`,
-          estPublique: true,
-        },
-      },
-    ],
-  },
-  {
     path: '/:catchAll(.*)',
-    name: 'not-found',
+    name: RouteCommuneName.NOT_FOUND,
     component: Page404,
   },
 ];
+
 const router = createRouter({
   history: createWebHistory(),
   routes,
+  scrollBehavior: (to, from, savedPosition) => {
+    if (to.hash) {
+      return {
+        el: to.hash,
+        behavior: 'smooth',
+      };
+    } else if (savedPosition) {
+      return savedPosition;
+    } else {
+      return { left: 0, top: 0 };
+    }
+  },
 });
 
 export default router;

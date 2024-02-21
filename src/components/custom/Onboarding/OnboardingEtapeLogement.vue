@@ -20,7 +20,7 @@
         :min-value="1"
       />
       <InputNumberHorizontal
-        label="Enfant(s)"
+        label="Enfant(s) - moins de 18 ans"
         name="nombre-enfant"
         class="fr-mb-2w"
         v-model="viewModel.enfants"
@@ -44,7 +44,9 @@
     />
     <div class="fr-checkbox-group fr-mb-4w">
       <input name="proprietaire" id="proprietaire" type="checkbox" v-model="viewModel.proprietaire" />
-      <label class="fr-label" for="proprietaire"> Vous êtes propriétaire de votre logement </label>
+      <label class="fr-label" for="proprietaire">
+        <span>Vous êtes <strong>propriétaire</strong> de votre logement </span>
+      </label>
     </div>
     <BoutonRadio
       class="fr-mb-4w"
@@ -71,7 +73,7 @@
       name="modeDeChauffage"
       :options="[
         { label: 'Électricité', value: 'electricite' },
-        { label: 'Bois / Pellet', value: 'bois' },
+        { label: 'Bois / Pellets', value: 'bois' },
         { label: 'Fioul', value: 'fioul' },
         { label: 'Gaz', value: 'gaz' },
         { label: 'Autre / Je ne sais pas', value: 'autre' },
@@ -80,10 +82,19 @@
       v-model="viewModel.chauffage"
       :default-value="viewModel.chauffage"
     />
-    <button class="fr-link fr-icon-arrow-left-line fr-link--icon-left fr-mr-4w" @click="retourEtapePrecedente">
-      Précédent
-    </button>
-    <button class="fr-btn" :disabled="isButtonDisabled">Continuer</button>
+    <ul class="fr-btns-group fr-btns-group--lg fr-btns-group--icon-left fr-btns-group--inline">
+      <li>
+        <button
+          class="fr-btn fr-btn--icon-left fr-icon-arrow-left-line fr-btn--tertiary-no-outline"
+          @click="retourEtapePrecedente"
+        >
+          Précédent
+        </button>
+      </li>
+      <li>
+        <button class="fr-btn" :disabled="isButtonDisabled">Continuer</button>
+      </li>
+    </ul>
   </form>
 </template>
 

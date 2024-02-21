@@ -10,6 +10,8 @@ export interface ServiceCatalogue {
   nombreInstallation: number;
   thematiques: string[];
   image: string;
+  estEnConstruction: boolean;
+  parametrageRequis: boolean;
 }
 export class RecupererCatalogueServicesUseCase {
   constructor(private serviceRepository: ServiceRepository) {}

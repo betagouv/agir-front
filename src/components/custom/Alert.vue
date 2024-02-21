@@ -6,9 +6,11 @@
 </template>
 
 <script setup lang="ts">
+  import '@gouvfr/dsfr/dist/component/alert/alert.min.css';
+
   defineProps<{
     titre: string;
     message: string;
-    type: 'success' | 'error' | 'info';
+    type: 'success' | 'error';
   }>();
 </script>
