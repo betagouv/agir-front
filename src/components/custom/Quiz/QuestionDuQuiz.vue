@@ -1,22 +1,18 @@
 <template>
-  <BoutonRadio
-    :options="listeDesReponses"
-    :legende="question.intitule"
-    legende-size="l"
-    col=""
-    orientation="vertical"
-    name="questionDuQuiz"
-    v-model="valueInput"
-  />
-  <button
-    v-if="!isValide"
-    @click.prevent="validerLaReponse"
-    class="fr-btn fr-btn--lg"
-    title="Valider"
-    :disabled="valueInput === ''"
-  >
-    Valider
-  </button>
+  <form @submit.prevent="validerLaReponse">
+    <BoutonRadio
+      :options="listeDesReponses"
+      :legende="question.intitule"
+      legende-size="l"
+      col=""
+      orientation="vertical"
+      name="questionDuQuiz"
+      v-model="valueInput"
+    />
+    <button v-if="!isValide" class="fr-btn fr-btn--lg" title="Valider" type="submit" :disabled="valueInput === ''">
+      Valider
+    </button>
+  </form>
   <div v-if="isValide">
     <QuizReponse
       :question="question.intitule"
@@ -82,6 +78,12 @@
   const validerLaReponse = () => {
     isValide.value = true;
     reponseCorrecte.value = valueInput.value === props.question.solution;
+    listeDesReponses.value = props.question.reponsesPossibles.map(reponse => ({
+      label: reponse,
+      value: reponse,
+      disabled: true,
+      customClass: props.question.solution === valueInput.value ? 'text--bleu' : 'text--success',
+    }));
     emit('quizTermine', reponseCorrecte.value);
   };
 
