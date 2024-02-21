@@ -1,17 +1,11 @@
 import { LinkyRepository } from '@/linky/ports/linkyRepository.repository';
 import { LinkyPresenter } from '@/linky/ports/linky.presenter';
 
-export interface ConsommationElectrique {
-  valeur: number;
-  mois: string;
-  annee: string;
-}
-
-export class ObtenirConsommationElectriqueUsecase {
+export class ObtenirConsommationElectriqueQuatorzeJoursUsecase {
   constructor(private linkyRepository: LinkyRepository) {}
 
   async execute(idUtilsateur: string, presenter: LinkyPresenter) {
-    const response = await this.linkyRepository.recupererConsommationElectrique(idUtilsateur);
+    const response = await this.linkyRepository.recupererConsommationElectriqueQuatorzeJours(idUtilsateur);
     presenter.presente(response);
   }
 }

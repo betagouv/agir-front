@@ -1,7 +1,17 @@
-import { ConsommationElectrique } from '@/linky/obtenirConsommationElectrique.usecase';
 import { InformationCompteur } from '@/linky/obtenirInformationCompteur.usecase';
 
+export interface ConsommationElectrique {
+  commentaires: string[];
+  data: {
+    valeur: number;
+    mois: string;
+    annee: string;
+    date: string;
+  }[];
+}
+
 export interface LinkyRepository {
-  recupererConsommationElectrique(idUtilsateur: string): Promise<ConsommationElectrique[]>;
+  recupererConsommationElectriqueAnnuelle(idUtilsateur: string): Promise<ConsommationElectrique>;
+  recupererConsommationElectriqueQuatorzeJours(idUtilsateur: string): Promise<ConsommationElectrique>;
   recupererInformationCompteur(idUtilsateur: string): Promise<InformationCompteur>;
 }

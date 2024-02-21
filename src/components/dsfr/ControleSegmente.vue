@@ -18,6 +18,8 @@
 </template>
 
 <script setup lang="ts">
+  import '@gouvfr/dsfr/dist/component/segmented/segmented.min.css';
+
   defineProps<{
     legende: string;
     name: string;
