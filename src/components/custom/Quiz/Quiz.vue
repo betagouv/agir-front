@@ -1,15 +1,12 @@
 <template>
   <div class="background--white border fr-p-2w border-radius--md">
-    <form>
-      <QuestionDuQuiz
-        :article-associe="articleAssocie"
-        :quiz-id="idQuiz"
-        :question="quizViewModel.questions[0]"
-        :points="quizViewModel.nombreDePointsAGagner"
-        @quizTermine="verifierLaReponse"
-      />
-      <div></div>
-    </form>
+    <QuestionDuQuiz
+      :article-associe="articleAssocie"
+      :quiz-id="idQuiz"
+      :question="quizViewModel.questions[0]"
+      :points="quizViewModel.nombreDePointsAGagner"
+      @quizTermine="verifierLaReponse"
+    />
   </div>
 </template>
 

@@ -14,9 +14,10 @@
     <div class="fr-grid-row full-width">
       <div :class="`fr-fieldset__element ${col}`" v-for="option in options" :key="option.label">
         <div
-          :class="`fr-radio-group border fr-col ${
-            option.value === defaultValue ? 'fr-text--bold border--bleu-dark' : ''
-          }`"
+          :class="`fr-radio-group border fr-col
+          ${option.value === defaultValue ? 'fr-text--bold border--bleu-dark' : ''}
+          ${option.customClass}
+          `"
         >
           <input
             type="radio"
@@ -25,6 +26,7 @@
             :value="option.value"
             @change.prevent="onInputChange"
             :checked="option.value === defaultValue"
+            :disabled="option.disabled"
           />
           <label class="fr-label" :for="`${option.label}`">
             {{ option.label }}
@@ -41,7 +43,7 @@
     legendeSize: 'm' | 'l';
     orientation: 'vertical' | 'horizontal';
     name: string;
-    options: { label: string; value: string }[];
+    options: { label: string; value: string; disabled?: boolean; customClass?: string }[];
     col: string;
     defaultValue?: string;
   }>();
