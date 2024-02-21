@@ -1,6 +1,9 @@
 <template>
   <p class="fr-h4 fr-mb-2w">Pourquoi ?</p>
-  <div v-if="reponseCorrecte"><span> Bien joué ! </span> Vous récoltez + {{ points }}</div>
+  <div v-if="reponseCorrecte" class="quiz-reponse__gagne fr-text--xl">
+    <span class="fr-text--bold"> Bien joué ! </span> Vous récoltez <span class="fr-text--bold">+{{ points }}</span>
+    <img width="32" src="/ic_score.svg" alt="points" />
+  </div>
   <div v-html="texteExplication" />
 </template>
 
@@ -27,3 +30,18 @@
     }
   });
 </script>
+
+<style scoped>
+  .quiz-reponse__gagne {
+    display: flex;
+    width: 100%;
+    margin: 0 auto;
+    align-items: middle;
+    justify-content: center;
+    padding: 1rem 0;
+    gap: 0.5rem;
+    background-image: url('/article-quiz-gagne.png');
+    background-size: contain;
+    background-position: center;
+  }
+</style>

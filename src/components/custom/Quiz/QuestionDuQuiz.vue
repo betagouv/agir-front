@@ -8,6 +8,7 @@
       orientation="vertical"
       name="questionDuQuiz"
       v-model="valueInput"
+      :defaultValue="valueInput"
     />
     <button v-if="!isValide" class="fr-btn fr-btn--lg" title="Valider" type="submit" :disabled="valueInput === ''">
       Valider
@@ -82,13 +83,20 @@
       label: reponse,
       value: reponse,
       disabled: true,
-      customClass: props.question.solution === valueInput.value ? 'text--bleu' : 'text--success',
+      customClass: buildCustomClass(props.question.solution, valueInput.value, reponse),
     }));
+
     emit('quizTermine', reponseCorrecte.value);
   };
 
   const noterLeQuiz = note => {
     const evaluerQuizUsecase = new EvaluerQuizUsecase(new QuizRepositoryAxios());
     evaluerQuizUsecase.execute(props.quizId, utilisateurStore().utilisateur.id, note);
+  };
+
+  const buildCustomClass = (reponseCorrect: string, reponseDonnee: string, reponsePossible: string) => {
+    if (reponsePossible === reponseCorrect) return 'quiz-article-bien-repondu';
+    if (reponseDonnee !== reponseCorrecte && reponsePossible === reponseDonnee) return 'quiz-article-erreur';
+    if (reponsePossible !== reponseDonnee) return '';
   };
 </script>
