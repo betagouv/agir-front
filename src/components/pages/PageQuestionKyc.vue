@@ -34,7 +34,7 @@
             :default-value="reponse.toString()"
           />
         </div>
-        <button class="fr-btn fr-btn--lg" title="Valider" :disabled="reponse === ''">Valider</button>
+        <button class="fr-btn fr-btn--lg" title="Valider" :disabled="isButtonDisabled">Valider</button>
       </form>
       <KYCFin v-else :phrase-point-a-gagner="questionViewModel!.points" :a-deja-repondu="aDejaRepondu" />
     </div>
@@ -43,7 +43,7 @@
 </template>
 
 <script setup lang="ts">
-  import { onMounted, ref } from 'vue';
+  import { computed, onMounted, ref } from 'vue';
   import { useRoute } from 'vue-router';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import { RecupererQuestionUsecase } from '@/kyc/recupererQuestionUsecase';
@@ -66,6 +66,13 @@
   const aDejaRepondu = ref<boolean>(false);
 
   const utilisateurId = utilisateurStore().utilisateur.id;
+
+  const isButtonDisabled = computed(() => {
+    if (!reponse.value) return true;
+    if (reponse.value === '') return true;
+    if (reponse.value.length < 1) return true;
+    return false;
+  });
 
   onMounted(async () => {
     const recupereQuestionUsecase = new RecupererQuestionUsecase(new QuestionRepositoryAxios());
