@@ -5,7 +5,7 @@
       <h2 class="fr-mb-0">{{ todoList.titre }}</h2>
       <p class="fr-text--xl">Un objectif après l’autre</p>
       <div v-if="todoList.fait.length > 0">
-        <h3 class="text--uppercase fr-mb-0 fr-text--xs text-disabled-grey fr-mb-1w">déjà fait</h3>
+        <h3 class="text--uppercase fr-mb-0 fr-text--xs text--gris-dark fr-mb-1w">déjà fait</h3>
         <ul class="list-style-none fr-p-0 fr-m-0">
           <li v-for="todo in todoList.fait" :key="todo.titre" class="fr-mb-2w">
             <CoachCardDone
@@ -19,7 +19,7 @@
         </ul>
       </div>
       <div v-if="todoList.aFaire.length > 0">
-        <h3 class="text--uppercase fr-mb-0 fr-text--xs text-disabled-grey fr-mb-1w">à faire</h3>
+        <h3 class="text--uppercase fr-mb-0 fr-text--xs text--gris-dark fr-mb-1w">à faire</h3>
         <ul class="list-style-none fr-p-0 fr-m-0">
           <li v-for="todo in todoList.aFaire" :key="todo.titre" class="fr-mb-2w">
             <CoachCardToDo
@@ -36,7 +36,7 @@
         </ul>
       </div>
       <div class="fr-py-1w">
-        <h3 class="text--uppercase fr-mb-0 fr-text--xs text-disabled-grey fr-mb-1w before--path">
+        <h3 class="text--uppercase fr-mb-0 fr-text--xs text--gris-dark fr-mb-1w before--path">
           <span class="fr-icon-gift-fill" aria-hidden="true"></span>
           Bonus de fin de mission
         </h3>
