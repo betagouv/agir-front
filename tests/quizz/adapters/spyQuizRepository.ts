@@ -1,6 +1,14 @@
 import { Quiz, QuizRepository } from '@/quiz/ports/quizRepository';
 
 export class SpyQuizRepository implements QuizRepository {
+  get marquerLeQuizArticleCommeLuAEteAppele(): boolean {
+    return this._marquerLeQuizArticleCommeLuAEteAppele;
+  }
+  private _marquerLeQuizArticleCommeLuAEteAppele: boolean = false;
+  marquerLeQuizArticleCommeLu(utilisateurId: string, articleId: string): Promise<void> {
+    this._marquerLeQuizArticleCommeLuAEteAppele = true;
+    return Promise.resolve();
+  }
   get noterQuizAEteAppele(): boolean {
     return this._noterQuizAEteAppele;
   }

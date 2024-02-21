@@ -15,16 +15,23 @@ export enum QuizDifficulte {
   DIFFICILE = 4,
   TRES_DIFFICILE = 5,
 }
+
+export interface ArticleDuQuiz {
+  id: string;
+  contenu: string;
+}
 export interface Quiz {
   titre: string;
   difficulte: QuizDifficulte;
   questions: QuestionsQuiz[];
   thematique: string;
   nombreDePointsAGagner: number;
+  articleAssocie: ArticleDuQuiz | null;
 }
 
 export interface QuizRepository {
   getQuiz(id: string): Promise<Quiz>;
   terminerQuiz(idUtilisateur: string, idQuiz: string, score: number): Promise<void>;
-  noterQuiz(quizId, utilisateurId, note): Promise<void>;
+  noterQuiz(quizId: string, utilisateurId: string, note: 1 | 2 | 3 | 4): Promise<void>;
+  marquerLeQuizArticleCommeLu(utilisateurId: string, articleId: string): Promise<void>;
 }

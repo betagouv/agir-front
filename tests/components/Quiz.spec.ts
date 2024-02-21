@@ -1,8 +1,9 @@
 import { render, fireEvent } from '@testing-library/vue';
-import Quiz from '../../src/components/custom/Quiz.vue';
+import Quiz from '@/components/custom/Quiz/Quiz.vue';
 import { QuizViewModel } from '@/quiz/adapters/chargementQuiz.presenter.impl';
 import { vi, describe, it, SpyInstance } from 'vitest';
 import { EnvoyerDonneesQuizInteractionUsecase } from '@/quiz/envoyerDonneesQuizInteraction.usecase';
+import { MockInstance } from '@vitest/spy';
 
 const quizzViewModelMock: QuizViewModel = {
   nombreDePointsAGagner: '10',
@@ -19,17 +20,8 @@ const quizzViewModelMock: QuizViewModel = {
       texteExplicationKO: 'Texte explication question 1 KO',
       solution: 'reponse 1',
     },
-    {
-      id: 'id_question_1',
-      intitule: 'Intitulé de la question 2',
-      reponsesPossibles: ['reponse a', 'reponse b'],
-      ordre: '2',
-      texteExplicationOK: 'Texte explication question 2 OK',
-      texteExplicationKO: 'Texte explication question 2 KO',
-      solution: 'reponse a',
-    },
   ],
-  steps: '',
+  articleAssocie: null,
 };
 
 const props = {
@@ -41,14 +33,19 @@ const props = {
 };
 
 describe('Quizz', () => {
-  let envoyerDonneesQuizInteractionMock: SpyInstance<[string, string, number, number], Promise<void>>;
+  let envoyerDonneesQuizInteractionMock: MockInstance<[string, string, number, number, string | null], Promise<void>>;
 
   beforeEach(() => {
     envoyerDonneesQuizInteractionMock = vi
       .spyOn(EnvoyerDonneesQuizInteractionUsecase.prototype, 'execute')
       .mockImplementation(
-        (_utilisateurId: string, _interactionId: string, _nombreDeBonnesReponses: number, _nombreDeQuestions: number) =>
-          Promise.resolve()
+        (
+          _utilisateurId: string,
+          _interactionId: string,
+          _nombreDeBonnesReponses: number,
+          _nombreDeQuestions: number,
+          _articleId: string | null
+        ) => Promise.resolve()
       );
   });
 

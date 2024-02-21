@@ -7,6 +7,7 @@
     :id-utilisateur="store.utilisateur.id"
     :is-mode-previsualisation="false"
     :id-quiz="idQuiz"
+    :article-associe="quizViewModel.articleAssocie"
   >
   </PageQuizComposant>
 </template>
@@ -17,7 +18,7 @@
   import { ChargementQuizUsecase } from '@/quiz/chargementQuiz.usecase';
   import { ChargementQuizPresenterImpl, QuizViewModel } from '@/quiz/adapters/chargementQuiz.presenter.impl';
   import { utilisateurStore } from '@/store/utilisateur';
-  import PageQuizComposant from '@/components/custom/PageQuizComposant.vue';
+  import PageQuizComposant from '@/components/custom/Quiz/PageQuizComposant.vue';
   import { QuizRepositoryAxios } from '@/quiz/adapters/quizRepository.axios';
 
   const quizViewModel = ref<QuizViewModel>();

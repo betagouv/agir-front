@@ -3,6 +3,9 @@ import { ChargementQuizUsecase } from '@/quiz/chargementQuiz.usecase';
 import { ChargementQuizPresenterImpl, QuizViewModel } from '@/quiz/adapters/chargementQuiz.presenter.impl';
 
 class QuizRepositoryForTest implements QuizRepository {
+  marquerLeQuizArticleCommeLu(utilisateurId: string, articleId: string): Promise<void> {
+    throw new Error('Method not implemented.');
+  }
   noterQuiz(quizId: any, utilisateurId: any, note: any): Promise<void> {
     throw new Error('Method not implemented.');
   }
@@ -23,6 +26,7 @@ class QuizRepositoryForTest implements QuizRepository {
           solution: 'Reponse 1',
         },
       ],
+      articleAssocie: null,
     };
   }
   async terminerQuiz(idUtilisateur: string, idInteraction: string, score: number): Promise<void> {
@@ -56,7 +60,7 @@ describe("Fichier de test du usecase de chargement d'un quizz", () => {
             solution: 'Reponse 1',
           },
         ],
-        steps: '2',
+        articleAssocie: null,
       });
     }
   });

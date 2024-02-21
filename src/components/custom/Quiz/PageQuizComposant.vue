@@ -11,6 +11,7 @@
           :id-utilisateur="idUtilisateur"
           :is-mode-previsualisation="isModePrevisualisation"
           :id-quiz="idQuiz"
+          :article-associe="articleAssocie"
         />
       </div>
       <div class="fr-col-12 fr-col-lg-4">
@@ -23,12 +24,14 @@
 <script setup lang="ts">
   import { QuizViewModel } from '@/quiz/adapters/chargementQuiz.presenter.impl';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
-  import Quiz from '@/components/custom/Quiz.vue';
+  import Quiz from '@/components/custom/Quiz/Quiz.vue';
+  import { ArticleDuQuiz } from '@/quiz/ports/quizRepository';
 
   defineProps<{
     quizViewModel: QuizViewModel;
     idUtilisateur: string;
     isModePrevisualisation: boolean;
     idQuiz: string;
+    articleAssocie: ArticleDuQuiz | null;
   }>();
 </script>
