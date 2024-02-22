@@ -1,9 +1,9 @@
 <template>
-  <p class="fr-h4 fr-mb-2w">Pourquoi ?</p>
   <div v-if="reponseCorrecte" class="quiz-reponse__gagne fr-text--xl">
     <span class="fr-text--bold"> Bien joué ! </span> Vous récoltez <span class="fr-text--bold">+{{ points }}</span>
     <img width="32" src="/ic_score.svg" alt="points" />
   </div>
+  <h2 class="fr-h4 fr-mb-2w">Pourquoi ?</h2>
   <div v-html="texteExplication" />
 </template>
 
@@ -12,12 +12,9 @@
   import { ArticleDuQuiz } from '@/quiz/ports/quizRepository';
 
   const props = defineProps<{
-    question: string;
-    solution: string;
     texteExplicationKO: string;
     texteExplicationOK: string;
     reponseCorrecte: boolean;
-    reponse: string;
     articleAssocie: ArticleDuQuiz | null;
     points: string;
   }>();
