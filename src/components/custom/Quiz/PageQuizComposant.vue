@@ -1,22 +1,22 @@
 <template>
   <div class="fr-container fr-mb-6w">
-    <FilDAriane :page-courante="`Quiz ${quizViewModel.titre}`" />
+    <FilDAriane :page-courante="`Question : ${quizViewModel.titre}`" />
     <div class="fr-grid-row fr-grid-row--gutters">
       <div class="fr-col-12 fr-col-lg-8">
-        <p>
-          <span class="fr-h2">Quiz</span>
+        <h1>
+          <span class="fr-h2">Une question sur la thématique </span>
           <span class="fr-h3">{{ quizViewModel.thematique }}</span>
-        </p>
+        </h1>
         <div class="background--white border fr-p-2w border-radius--md">
           <QuizQuestion
             :questions="listeDesReponses"
-            :question="quizViewModel.questions[0].intitule"
+            :question="quizViewModel.question.intitule"
             @quiz-termine="verifierLaReponse"
           />
           <QuizArticle
             v-if="isValide"
-            :texte-explication-o-k="quizViewModel.questions[0].texteExplicationOK"
-            :texte-explication-k-o="quizViewModel.questions[0].texteExplicationKO"
+            :texte-explication-o-k="quizViewModel.question.texteExplicationOK"
+            :texte-explication-k-o="quizViewModel.question.texteExplicationKO"
             :reponse-correcte="estBienRepondu"
             :article-associe="articleAssocie"
             :points="quizViewModel.nombreDePointsAGagner"
@@ -54,7 +54,7 @@
   const nombreDeBonnesReponses = ref<number>(0);
   const estBienRepondu = ref<boolean>(false);
   const listeDesReponses = ref(
-    props.quizViewModel.questions[0].reponsesPossibles.map(reponse => ({
+    props.quizViewModel.question.reponsesPossibles.map(reponse => ({
       label: reponse,
       value: reponse,
     }))
@@ -62,26 +62,25 @@
 
   const verifierLaReponse = async value => {
     isValide.value = true;
-    estBienRepondu.value = props.quizViewModel.questions[0].solution === value;
+    estBienRepondu.value = props.quizViewModel.question.solution === value;
 
     if (value) nombreDeBonnesReponses.value++;
 
-    listeDesReponses.value = props.quizViewModel.questions[0].reponsesPossibles.map(reponse => ({
+    listeDesReponses.value = props.quizViewModel.question.reponsesPossibles.map(reponse => ({
       label: reponse,
       value: reponse,
       disabled: true,
-      customClass: buildCustomClass(props.quizViewModel.questions[0].solution, value, reponse),
+      customClass: buildCustomClass(props.quizViewModel.question.solution, value, reponse),
     }));
 
-    if (props.quizViewModel.questions.length && !props.isModePrevisualisation) {
+    if (!props.isModePrevisualisation) {
       await new EnvoyerDonneesQuizInteractionUsecase(
         new QuizRepositoryAxios(),
         ToDoListEventBusImpl.getInstance()
       ).execute(
         props.idUtilisateur,
         props.idQuiz,
-        nombreDeBonnesReponses.value,
-        props.quizViewModel.questions.length,
+        estBienRepondu.value ? 100 : 0,
         props.articleAssocie ? props.articleAssocie.id : null
       );
     }

@@ -13,7 +13,7 @@ export interface QuestionViewModel {
 
 export interface QuizViewModel {
   titre: string;
-  questions: QuestionViewModel[];
+  question: QuestionViewModel;
   thematique: string;
   difficulte: string;
   nombreDePointsAGagner: string;
@@ -33,17 +33,15 @@ export class ChargementQuizPresenterImpl implements ChargementQuizzPresenter {
       difficulte: this.determinerDifficulte(quiz),
       thematique: quiz.thematique,
       titre: quiz.titre,
-      questions: quiz.questions.map(question => {
-        return {
-          id: question.id,
-          intitule: question.intitule,
-          reponsesPossibles: question.reponsesPossibles,
-          ordre: question.ordre,
-          texteExplicationOK: question.texteExplicationOK,
-          texteExplicationKO: question.texteExplicationKO,
-          solution: question.solution,
-        };
-      }),
+      question: {
+        id: '0',
+        intitule: quiz.questions[0].intitule,
+        reponsesPossibles: quiz.questions[0].reponsesPossibles,
+        ordre: quiz.questions[0].ordre,
+        texteExplicationOK: quiz.questions[0].texteExplicationOK,
+        texteExplicationKO: quiz.questions[0].texteExplicationKO,
+        solution: quiz.questions[0].solution,
+      },
       articleAssocie: quiz.articleAssocie,
     });
   }
