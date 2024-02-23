@@ -24,9 +24,6 @@
           />
         </div>
       </div>
-      <div class="fr-col-12 fr-col-lg-4">
-        <slot />
-      </div>
     </div>
   </div>
 </template>
