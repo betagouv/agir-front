@@ -3,12 +3,14 @@ import { ChargementQuizUsecase } from '@/quiz/chargementQuiz.usecase';
 import { ChargementQuizPresenterImpl, QuizViewModel } from '@/quiz/adapters/chargementQuiz.presenter.impl';
 
 class QuizRepositoryForTest implements QuizRepository {
-  marquerLeQuizArticleCommeLu(utilisateurId: string, articleId: string): Promise<void> {
+  marquerLeQuizArticleCommeLu(_utilisateurId: string, _articleId: string): Promise<void> {
     throw new Error('Method not implemented.');
   }
-  noterQuiz(quizId: any, utilisateurId: any, note: any): Promise<void> {
+
+  noterQuiz(_quizId: any, _utilisateurId: any, _note: any): Promise<void> {
     throw new Error('Method not implemented.');
   }
+
   async getQuiz(id: string): Promise<Quiz> {
     return {
       nombreDePointsAGagner: 10,
@@ -49,17 +51,16 @@ describe("Fichier de test du usecase de chargement d'un quizz", () => {
         difficulte: 'très facile',
         thematique: '🛒 Consommation durable',
         titre: 'Mon super quizz 1',
-        questions: [
-          {
-            id: '1',
-            ordre: '1',
-            intitule: 'Une question ?',
-            reponsesPossibles: ['Reponse 1', 'Reponse 2'],
-            texteExplicationKO: "Un texte d'explication KO",
-            texteExplicationOK: "Un texte d'explication OK",
-            solution: 'Reponse 1',
-          },
-        ],
+        question: {
+          id: '0',
+          ordre: '1',
+          intitule: 'Une question ?',
+          reponsesPossibles: ['Reponse 1', 'Reponse 2'],
+          texteExplicationKO: "Un texte d'explication KO",
+          texteExplicationOK: "Un texte d'explication OK",
+          solution: 'Reponse 1',
+        },
+
         articleAssocie: null,
       });
     }
