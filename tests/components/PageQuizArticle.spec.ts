@@ -2,6 +2,7 @@ import { fireEvent, render } from '@testing-library/vue';
 import PageQuizComposant from '@/components/custom/Quiz/PageQuizComposant.vue';
 import { QuizViewModel } from '@/quiz/adapters/chargementQuiz.presenter.impl';
 import { ArticleDuQuiz } from '@/quiz/ports/quizRepository';
+import { EnvoyerDonneesQuizInteractionUsecase } from '@/quiz/envoyerDonneesQuizInteraction.usecase';
 
 const quizViewModel: QuizViewModel = {
   titre: 'A quoi ça sert de manger bio ?',
@@ -60,10 +61,24 @@ describe('Page Quiz Article', () => {
     });
 
     describe("quand je clique sur le bouton 'Valider'", () => {
-      it.todo('les radios deviennents disable et affiche un bouton pour retourner au coach', () => {});
+      it("les radios deviennent disable et affiche un bouton pour retourner à l'accueil", async () => {
+        const { getAllByRole, getByRole, getByText } = render(PageQuizComposant, { props: pageQuizComposantprops });
+        const radiosButton = getAllByRole<HTMLInputElement>('radio');
+        const boutonValider = getByRole<HTMLButtonElement>('button', { name: 'Valider' });
+        const reponseUn = getByRole('radio', { name: '1' });
+
+        await fireEvent.click(reponseUn);
+        await fireEvent.click(boutonValider);
+
+        radiosButton.forEach(radio => {
+          expect(radio.disabled).toBeTruthy();
+        });
+
+        expect(getByText("Revenir à l'accueil")).toBeDefined();
+      });
 
       describe('quand la réponse est correcte', () => {
-        it('affiche un message de félicitations et la description reponse OK', async () => {
+        it('affiche un message de félicitations, le gain de points et la description reponse OK', async () => {
           const { getByRole, getByText, getByAltText } = render(PageQuizComposant, { props: pageQuizComposantprops });
           const boutonValider = getByRole<HTMLButtonElement>('button', { name: 'Valider' });
           const reponseUn = getByRole('radio', { name: '1' });
@@ -79,9 +94,26 @@ describe('Page Quiz Article', () => {
           expect(getByText('Lorem texte explication OK')).toBeDefined();
         });
 
-        it.todo('todo class success', () => {});
+        it('appel le usecase EnvoyerDonneesQuizInteractionUsecase avec les bonnes données', async () => {
+          const envoyerDonneesQuizInteractionUsecaseMock = vi
+            .spyOn(EnvoyerDonneesQuizInteractionUsecase.prototype, 'execute')
+            .mockImplementation(() => Promise.resolve());
 
-        it.todo('appel le usecase EnvoyerDonneesQuizInteractionUsecase avec les bonnes données', () => {});
+          const { getByRole } = render(PageQuizComposant, { props: pageQuizComposantprops });
+          const boutonValider = getByRole<HTMLButtonElement>('button', { name: 'Valider' });
+          const reponseUn = getByRole('radio', { name: '1' });
+
+          await fireEvent.click(reponseUn);
+          await fireEvent.click(boutonValider);
+
+          expect(envoyerDonneesQuizInteractionUsecaseMock).toHaveBeenNthCalledWith(
+            1,
+            'idUtilisateur',
+            'idQuiz',
+            100,
+            null
+          );
+        });
       });
 
       describe('quand la réponse est incorrecte', () => {
@@ -97,9 +129,26 @@ describe('Page Quiz Article', () => {
           expect(getByText('Lorem texte explication KO')).toBeDefined();
         });
 
-        it.todo('todo class error', () => {});
+        it('appel le usecase EnvoyerDonneesQuizInteractionUsecase avec les bonnes données', async () => {
+          const envoyerDonneesQuizInteractionUsecaseMock = vi
+            .spyOn(EnvoyerDonneesQuizInteractionUsecase.prototype, 'execute')
+            .mockImplementation(() => Promise.resolve());
 
-        it.todo('appel le usecase EnvoyerDonneesQuizInteractionUsecase avec les bonnes données', () => {});
+          const { getByRole } = render(PageQuizComposant, { props: pageQuizComposantprops });
+          const boutonValider = getByRole<HTMLButtonElement>('button', { name: 'Valider' });
+          const reponseUn = getByRole('radio', { name: '2' });
+
+          await fireEvent.click(reponseUn);
+          await fireEvent.click(boutonValider);
+
+          expect(envoyerDonneesQuizInteractionUsecaseMock).toHaveBeenNthCalledWith(
+            1,
+            'idUtilisateur',
+            'idQuiz',
+            0,
+            null
+          );
+        });
       });
     });
   });
