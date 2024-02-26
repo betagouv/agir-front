@@ -124,7 +124,7 @@ async function repondreQuiz(linkElement: Locator, page: Page): Promise<Page> {
   // vérifie que l'on est sur la page du quiz
   await expect(page).toHaveTitle('Agir ! - Quiz');
   // vérification que le contenu est bien chargé et affiché
-  await expect(page.getByText('Quiz', { exact: true })).toBeVisible();
+  await expect(page.getByText('Une question sur la thématique ☀️  Climat', { exact: true })).toBeVisible();
 
   // répondre correctement au quiz
   await page.getByText(exactTrueResponseTexts[0]).click();
@@ -134,15 +134,12 @@ async function repondreQuiz(linkElement: Locator, page: Page): Promise<Page> {
   await expect(validation).toBeVisible();
   validation.click({ force: true });
 
-  const suivant = page.getByRole('button', { name: "Passer à l'étape suivante" });
-  await expect(suivant).toBeVisible();
-  suivant.click({ force: true });
   // vérifier que l'on est bien sur la page de fin du quiz
   await expect(page.locator('#app').getByText('Bien joué !')).toBeVisible();
-  // cliquer sur le bouton suivant
-  const continuer = page.getByRole('link', { name: 'Continuer' });
-  await expect(continuer).toBeVisible();
-  continuer.click({ force: true });
+
+  const retourAccueil = page.getByText("Revenir à l'accueil");
+  await expect(retourAccueil).toBeVisible();
+  retourAccueil.click({ force: true });
   await page.waitForTimeout(1000);
 
   return page;
