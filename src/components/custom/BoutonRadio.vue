@@ -14,9 +14,10 @@
     <div class="fr-grid-row full-width">
       <div :class="`fr-fieldset__element ${col}`" v-for="option in options" :key="option.label">
         <div
-          :class="`fr-radio-group border fr-col ${
-            option.value === defaultValue ? 'fr-text--bold border--bleu-dark' : ''
-          }`"
+          :class="`fr-radio-group border fr-col
+          ${option.value === defaultValue ? 'fr-text--bold border--bleu-dark' : ''}
+          ${option.customClass}
+          `"
         >
           <input
             type="radio"
@@ -25,6 +26,7 @@
             :value="option.value"
             @change.prevent="onInputChange"
             :checked="option.value === defaultValue"
+            :disabled="option.disabled"
           />
           <label class="fr-label" :for="`${option.label}`">
             {{ option.label }}
@@ -41,7 +43,7 @@
     legendeSize: 'm' | 'l';
     orientation: 'vertical' | 'horizontal';
     name: string;
-    options: { label: string; value: string }[];
+    options: { label: string; value: string; disabled?: boolean; customClass?: string }[];
     col: string;
     defaultValue?: string;
   }>();
@@ -71,5 +73,29 @@
 
   .boutonRadio--horizontal .fr-fieldset__element {
     flex: auto;
+  }
+
+  .quiz-article-bien-repondu {
+    background-color: var(--success-950-100);
+  }
+
+  .quiz-article-erreur {
+    background-color: var(--error-950-100);
+  }
+
+  .quiz-article-bien-repondu .fr-label,
+  .quiz-article-erreur .fr-label {
+    color: inherit;
+  }
+
+  .quiz-article-bien-repondu.fr-radio-group input[type='radio']:checked:disabled + label,
+  .quiz-article-erreur.fr-radio-group input[type='radio']:checked:disabled + label {
+    background-image: radial-gradient(transparent 10px, var(--border-active-blue-france) 11px, transparent 12px),
+      radial-gradient(var(--background-active-blue-france) 5px, transparent 6px);
+  }
+
+  .quiz-article-bien-repondu.fr-radio-group input[type='radio']:disabled + label,
+  .quiz-article-erreur.fr-radio-group input[type='radio']:disabled + label {
+    background-image: radial-gradient(transparent 10px, var(--border-action-high-blue-france) 11px, transparent 12px);
   }
 </style>

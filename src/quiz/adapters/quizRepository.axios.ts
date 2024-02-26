@@ -21,6 +21,16 @@ export interface QuiCMSAttributesModel {
   thematique_gamification: ThematiqueGamificationCMSModel;
   difficulty: number;
   points: number;
+  articles: {
+    data: [
+      {
+        attributes: {
+          contenu: string;
+        };
+        id: string;
+      }
+    ];
+  };
 }
 export interface QuizCMSDataModel {
   attributes: QuiCMSAttributesModel;
@@ -38,6 +48,7 @@ export interface QuizCMSModel {
   data: QuizCMSDataModel;
 }
 export class QuizRepositoryAxios implements QuizRepository {
+  @intercept401()
   async noterQuiz(quizId: string, utilisateurId: string, note: 1 | 2 | 3 | 4): Promise<void> {
     const axios = AxiosFactory.getAxios();
     await axios.post(`/utilisateurs/${utilisateurId}/events`, {
@@ -50,7 +61,7 @@ export class QuizRepositoryAxios implements QuizRepository {
   async getQuiz(idQuizz: string): Promise<Quiz> {
     const axiosInstance = AxiosFactory.getCMSAxios();
     const response: Response<QuizCMSModel> = await axiosInstance.get<QuizCMSModel>(
-      `quizzes/${idQuizz}?populate[0]=questions&populate[1]=questions.reponses&populate[2]=thematique_gamification`
+      `quizzes/${idQuizz}?populate[0]=questions&populate[1]=questions.reponses&populate[2]=thematique_gamification&populate[3]=articles`
     );
     return {
       titre: response.data.data.attributes.titre,
@@ -68,6 +79,13 @@ export class QuizRepositoryAxios implements QuizRepository {
       thematique: response.data.data.attributes.thematique_gamification.data.attributes.titre,
       difficulte: response.data.data.attributes.difficulty,
       nombreDePointsAGagner: response.data.data.attributes.points,
+      articleAssocie:
+        response.data.data.attributes.articles.data.length > 0
+          ? {
+              id: response.data.data.attributes.articles.data[0].id.toString(),
+              contenu: response.data.data.attributes.articles.data[0].attributes.contenu,
+            }
+          : null,
     };
   }
 
@@ -78,6 +96,15 @@ export class QuizRepositoryAxios implements QuizRepository {
       type: 'quizz_score',
       content_id: idQuiz,
       number_value: score,
+    });
+  }
+
+  @intercept401()
+  async marquerLeQuizArticleCommeLu(utilisateurId: string, articleId: string): Promise<void> {
+    const axios = AxiosFactory.getAxios();
+    await axios.post(`/utilisateurs/${utilisateurId}/events`, {
+      type: 'article_lu',
+      content_id: articleId,
     });
   }
 }

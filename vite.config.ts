@@ -15,6 +15,7 @@ export const viteConfig = {
   },
   define: {
     __APP_VERSION__: JSON.stringify(process.env.npm_package_version),
+    __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: false,
   },
 };
 export default defineConfig(viteConfig);

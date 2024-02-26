@@ -17,7 +17,7 @@
   import { useRoute } from 'vue-router';
   import { ChargementQuizUsecase } from '@/quiz/chargementQuiz.usecase';
   import { ChargementQuizPresenterImpl, QuizViewModel } from '@/quiz/adapters/chargementQuiz.presenter.impl';
-  import PageQuizComposant from '@/components/custom/PageQuizComposant.vue';
+  import PageQuizComposant from '@/components/custom/Quiz/PageQuizComposant.vue';
   import { QuizRepositoryAxios } from '@/quiz/adapters/quizRepository.axios';
 
   const quizViewModel = ref<QuizViewModel>();

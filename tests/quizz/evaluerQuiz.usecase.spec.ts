@@ -16,5 +16,6 @@ describe("Fichier de test concernant l'évaluation d'un quiz", () => {
       utilisateurId: 'utilisateurId',
       note: 3,
     });
+    expect(spyQuizRepository.marquerLeQuizArticleCommeLuAEteAppele).toBe(false);
   });
 });
