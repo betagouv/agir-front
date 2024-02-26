@@ -54,6 +54,7 @@
   import Alert from '@/components/custom/Alert.vue';
   import { RouteCoachName } from '@/router/coach/routeCoachName';
   import { RouteCompteName } from '@/router/compte/routeCompteName';
+  import { RenvoyerCoteOTPUsecase } from '@/authentification/renvoyerCoteOTPUsecase';
 
   withDefaults(defineProps<{ premiereConnexion?: boolean }>(), {
     premiereConnexion: true,
@@ -79,6 +80,8 @@
         loginMessageErreur.value = reason.data.message;
         loginEnErreur.value = true;
         if (reason.data.message === 'Utilisateur non actif') {
+          const usecase = new RenvoyerCoteOTPUsecase(new UtilisateurRepositoryAxios());
+          usecase.execute(email.value);
           router.push({ name: RouteCompteName.VALIDATION_COMPTE, query: { email: email.value } });
         }
       });
