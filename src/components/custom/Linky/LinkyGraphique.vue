@@ -15,7 +15,6 @@
         ]"
       />
     </div>
-
     <p>{{ consos?.description }}</p>
     <ul>
       <li v-for="(item, index) in consos?.commentaires" :key="index" v-html="item" />

@@ -48,7 +48,7 @@ describe('Fichier de test du usecase du chargement des données annuelle linky',
         couleurValeur1: '#6a6af4',
         couleurValeur2: '#000091',
         description:
-          "Suivi de votre consommation électrique mois par mois en comparant l'année courante à l'année précédente :",
+          "Suivi de votre consommation électrique mois par mois en comparant l'année courante à l'année précédente (mois en cours exclu) :",
         graphique: {
           libelles: ['janvier', 'fevrier'],
           valeur_courante: [1, 2],
