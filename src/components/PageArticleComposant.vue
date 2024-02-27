@@ -53,12 +53,9 @@
           </button>
         </div>
 
-        <div
-          v-if="article.partenaire"
-          class="max-full-width fr-mt-2w background--white border border-radius--md fr-p-2w"
-        >
+        <div v-if="article.partenaire" class="fr-mt-2w background--white border border-radius--md fr-p-2w">
           <p class="fr-mb-0">Proposé par</p>
-          <img class="fr-mt-5v" :src="article.partenaire.logo" :alt="article.partenaire.nom" />
+          <img class="fr-mt-5v max-full-width" :src="article.partenaire.logo" :alt="article.partenaire.nom" />
         </div>
       </div>
     </div>
