@@ -19,5 +19,6 @@ export class SpyToDoListEventBus extends EventBus<ToDoListEvent> {
     [ToDoListEvent.TODO_QUIZ_ETE_TERMINE]: [],
     [ToDoListEvent.TODO_KYC_A_ETE_REPONDU]: [],
     [ToDoListEvent.TODO_RECOMMANDATION_A_ETE_CLIQUEE]: [],
+    [ToDoListEvent.TODO_LINKY_A_ETE_CONSULTE]: [],
   };
 }

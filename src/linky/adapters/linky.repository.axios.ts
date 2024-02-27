@@ -23,6 +23,13 @@ interface InformationCompteurApiModel {
 
 export class LinkyRepositoryAxios implements LinkyRepository {
   @intercept401()
+  async marqueLeServiceCommeConsulte(idUtilsateur: string): Promise<void> {
+    const axios = AxiosFactory.getAxios();
+    await axios.post(`/utilisateurs/${idUtilsateur}/events`, {
+      type: 'access_conf_link',
+    });
+  }
+  @intercept401()
   async recupererConsommationElectriqueAnnuelle(idUtilsateur: string): Promise<ConsommationElectrique> {
     const axiosInstance = AxiosFactory.getAxios();
     const reponse = await axiosInstance.get<ConsommationElectriqueApiModel>(
