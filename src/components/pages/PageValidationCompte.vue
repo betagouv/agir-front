@@ -32,11 +32,12 @@
   import { utilisateurStore } from '@/store/utilisateur';
   import router from '@/router';
   import Alert from '@/components/custom/Alert.vue';
-  import { sendIdNGC } from '@/bilan/middleware/pendingSimulation';
   import { UtilisateurRepositoryAxios } from '@/authentification/adapters/utilisateur.repository.axios';
   import { RenvoyerCoteOTPUsecase } from '@/authentification/renvoyerCoteOTPUsecase';
   import { useAlerte } from '@/composables/useAlerte';
   import { RouteCoachName } from '@/router/coach/routeCoachName';
+  import { onboardingStore } from '@/store/onboarding';
+  import { onboardingBilanStore } from '@/store/onboardingBilan';
 
   const code = ref('');
   const email = utilisateurStore().utilisateur.mail || new URLSearchParams(window.location.search).get('email') || '';
@@ -50,10 +51,9 @@
     validerCompteUtilisateurUsecase
       .execute(email, code.value)
       .then(() => {
-        const requestedRoute = sessionStorage.getItem('requestedRoute');
-        sessionStorage.removeItem('requestedRoute');
-        router.push(requestedRoute || { name: RouteCoachName.COACH });
-        sendIdNGC();
+        onboardingStore().reset();
+        onboardingBilanStore().reset();
+        router.push({ name: RouteCoachName.COACH });
       })
       .catch(reason => {
         afficherAlerte('error', 'Erreur lors de la validation du compte', reason.data.message);
