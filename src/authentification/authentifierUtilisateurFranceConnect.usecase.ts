@@ -1,5 +1,5 @@
 import { Utilisateur, UtilisateurRepository } from '@/authentification/ports/utilisateur.repository';
-import jwt_decode from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 
 export interface SessionRepository {
   sauvegarderUtilisateur(utilisateur: Utilisateur);
@@ -15,7 +15,7 @@ export class AuthentifierUtilisateurFranceConnectUsecase {
   async execute(token: string): Promise<void> {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    const utilisateurId = jwt_decode(token).utilisateurId as string;
+    const utilisateurId = jwtDecode(token).utilisateurId as string;
     const utilisateur = await this._utilisateurRepository.getUtilisateurAvecId(utilisateurId);
     this._sessionRepository.sauvegarderUtilisateur(utilisateur);
   }
