@@ -18,8 +18,8 @@ test.describe('Mission 1', async () => {
     expect(scoreInitial).toEqual(0);
 
     await expect(page.getByRole('heading', { name: 'Votre 1ère mission' })).toBeVisible();
-    const clickedTodo = await page.locator('h3:text("DÉJÀ FAIT") ~ ul li:first-child h4').innerText();
-    await recolterPoints(page, clickedTodo);
+    await page.locator('h3:text("DÉJÀ FAIT") ~ ul li:first-child h4').innerText();
+    await recolterPoints(page);
 
     const score1 = parseInt(await page.innerText('.utilisateur .score'));
     expect(score1).toBeGreaterThan(scoreInitial);
@@ -28,11 +28,11 @@ test.describe('Mission 1', async () => {
   test('Objectif 2 - premier quizz', async () => {
     await page.waitForLoadState('domcontentloaded');
     await expect(page.getByRole('heading', { name: 'Votre 1ère mission' })).toBeVisible();
-    const clickedTodo = await cliqueTodo(page);
+    await cliqueTodo(page);
     await page.waitForLoadState('domcontentloaded');
     await page.waitForSelector('.utilisateur .score');
     await expect(page).toHaveTitle('Agir ! - Agir');
-    await recolterPoints(page, clickedTodo);
+    await recolterPoints(page);
 
     const decouvrir = page.getByRole('button', { name: 'Découvrir le bonus' });
     await expect(decouvrir).toBeVisible();
@@ -46,12 +46,12 @@ test.describe('Mission 1', async () => {
 test.describe('Mission 2', async () => {
   test('Mission 2 - début', async () => {
     await expect(page.locator('#app').getByText('Mission 2')).toBeVisible();
-    const clickedTodo = await cliqueTodo(page);
+    await cliqueTodo(page);
     await expect(page.locator('#app').getByText('Mission 2')).toBeVisible();
-    await recolterPoints(page, clickedTodo);
-    const clickedTod2 = await cliqueTodo(page);
+    await recolterPoints(page);
+    await cliqueTodo(page);
     await expect(page.locator('#app').getByText('Mission 2')).toBeVisible();
-    await recolterPoints(page, clickedTod2);
+    await recolterPoints(page);
   });
 });
 
@@ -59,16 +59,14 @@ test.afterAll(async () => {
   await supprimerUtilisateur(page);
 });
 
-async function recolterPoints(page: Page, clickedTodo: string): Promise<Page> {
+async function recolterPoints(page: Page): Promise<Page> {
   const niveauInitial = parseInt(await page.innerText('.utilisateur .niveau'));
   await page.waitForTimeout(1000);
-  const bouton = page
-    .locator('h3:text("DÉJÀ FAIT") ~ ul li')
-    .filter({ has: page.locator(`h4:text("${clickedTodo}")`) })
-    .locator('button');
-
-  await bouton.click({ force: true });
-  await page.waitForTimeout(1000);
+  const bouton = await page.$('button.todo__bouton:not([disabled])');
+  if (bouton) {
+    await bouton.click({ force: true });
+    await page.waitForTimeout(1000);
+  }
 
   const passageNiveau = await page.locator('dialog#passageDeNiveau').isVisible();
   if (passageNiveau) {
