@@ -62,11 +62,11 @@ test.afterAll(async () => {
 async function recolterPoints(page: Page): Promise<Page> {
   const niveauInitial = parseInt(await page.innerText('.utilisateur .niveau'));
   await page.waitForTimeout(1000);
-  const bouton = await page.$('button.todo__bouton:not([disabled])');
-  if (bouton) {
+  const boutons = await page.$$('button.todo__bouton');
+  for (const bouton of boutons) {
     await bouton.click({ force: true });
-    await page.waitForTimeout(1000);
   }
+  await page.waitForTimeout(1000);
 
   const passageNiveau = await page.locator('dialog#passageDeNiveau').isVisible();
   if (passageNiveau) {
