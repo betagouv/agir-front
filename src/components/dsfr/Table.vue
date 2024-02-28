@@ -1,5 +1,5 @@
 <template>
-  <div class="fr-table">
+  <div :class="`fr-table ${tableauDoubleLegende && 'tableauDoubleLegende'}`">
     <table>
       <caption>
         {{
@@ -23,9 +23,18 @@
 </template>
 
 <script setup lang="ts">
+  import '@gouvfr/dsfr/dist/component/table/table.min.css';
+
   defineProps<{
     titre: string;
     titresDonnees: string[];
     donnees: (string | number)[][];
+    tableauDoubleLegende?: boolean;
   }>();
 </script>
+
+<style scoped>
+  .tableauDoubleLegende td:first-child {
+    font-weight: 700;
+  }
+</style>

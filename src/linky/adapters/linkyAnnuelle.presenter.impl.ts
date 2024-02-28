@@ -21,9 +21,9 @@ export class LinkyPresenterAnnuelleImpl implements LinkyPresenter {
     consommationElectrique.data.forEach((consommation, index) => {
       if (index % 2 === 0) {
         consommationElectriqueViewModel.graphique.libelles.push(consommation.mois);
-        consommationElectriqueViewModel.graphique.valeur_courante.push(consommation.valeur);
+        consommationElectriqueViewModel.graphique.valeur_courante.push(Number(consommation.valeur.toFixed(1)));
       } else {
-        consommationElectriqueViewModel.graphique.valeur_precedente.push(consommation.valeur);
+        consommationElectriqueViewModel.graphique.valeur_precedente.push(Number(consommation.valeur.toFixed(1)));
       }
     });
 

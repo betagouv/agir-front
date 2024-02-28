@@ -6,11 +6,10 @@
     />
     <h1 class="fr-h2">Ma consommation électrique</h1>
     <div v-if="isLoading">Chargement ...</div>
-    <div v-else-if="!estConfigure" />
-    <div v-else-if="!estActif">
-      <p>Service en cours de connexion. Revenez plus tard pour consulter vos données</p>
-    </div>
-    <div v-else class="fr-grid-row fr-grid-row--gutters">
+    <p v-else-if="!estConfigure">Service en cours de connexion. Revenez plus tard pour consulter vos données</p>
+    <p v-else-if="!estActif">Récupération des données en cours. Revenez plus tard pour les consulter.</p>
+    <p v-else-if="!estFonctionnel">Récupération des données en cours. Revenez plus tard pour les consulter.</p>
+    <div v-else-if="estFonctionnel" class="fr-grid-row fr-grid-row--gutters">
       <div class="fr-col-md-9 fr-col-12">
         <LinkyGraphique />
       </div>
@@ -54,6 +53,7 @@
   const prm = ref<string>('');
   const estConfigure = ref<boolean>();
   const estActif = ref<boolean>();
+  const estFonctionnel = ref<boolean>();
 
   onMounted(async () => {
     const obtenirInformationCompteurUsecase = new ObtenirInformationCompteurUsecase(new LinkyRepositoryAxios());
@@ -62,6 +62,7 @@
     prm.value = informationCompteur.prm;
     estConfigure.value = informationCompteur.estConfigure;
     estActif.value = informationCompteur.estActif;
+    estFonctionnel.value = informationCompteur.estFonctionnel;
 
     isLoading.value = false;
 
