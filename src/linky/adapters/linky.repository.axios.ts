@@ -23,10 +23,17 @@ interface InformationCompteurApiModel {
 
 export class LinkyRepositoryAxios implements LinkyRepository {
   @intercept401()
+  async marqueLeServiceCommeConsulte(idUtilsateur: string): Promise<void> {
+    const axios = AxiosFactory.getAxios();
+    await axios.post(`/utilisateurs/${idUtilsateur}/events`, {
+      type: 'access_conf_linky',
+    });
+  }
+  @intercept401()
   async recupererConsommationElectriqueAnnuelle(idUtilsateur: string): Promise<ConsommationElectrique> {
     const axiosInstance = AxiosFactory.getAxios();
     const reponse = await axiosInstance.get<ConsommationElectriqueApiModel>(
-      `/utilisateurs/${idUtilsateur}/linky?compare_annees=true`
+      `/utilisateurs/${idUtilsateur}/linky?compare_annees=true`,
     );
 
     return {
@@ -44,7 +51,7 @@ export class LinkyRepositoryAxios implements LinkyRepository {
   async recupererConsommationElectriqueQuatorzeJours(idUtilsateur: string): Promise<ConsommationElectrique> {
     const axiosInstance = AxiosFactory.getAxios();
     const reponse = await axiosInstance.get<ConsommationElectriqueApiModel>(
-      `/utilisateurs/${idUtilsateur}/linky?derniers_14_jours=true`
+      `/utilisateurs/${idUtilsateur}/linky?derniers_14_jours=true`,
     );
 
     return {
@@ -62,7 +69,7 @@ export class LinkyRepositoryAxios implements LinkyRepository {
   async recupererInformationCompteur(idUtilsateur: string): Promise<InformationCompteur> {
     const axiosInstance = AxiosFactory.getAxios();
     const reponse = await axiosInstance.get<InformationCompteurApiModel>(
-      `/utilisateurs/${idUtilsateur}/services/linky`
+      `/utilisateurs/${idUtilsateur}/services/linky`,
     );
 
     return {
