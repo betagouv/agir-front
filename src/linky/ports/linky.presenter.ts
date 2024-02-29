@@ -9,6 +9,8 @@ export interface ConsommationElectriqueViewModel {
     libelles: string[];
     valeur_courante: number[];
     valeur_precedente: number[];
+    valeur_courante_transcription: string[];
+    valeur_precedente_transcription: string[];
   };
 }
 

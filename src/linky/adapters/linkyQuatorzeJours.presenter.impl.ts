@@ -14,15 +14,21 @@ export class LinkyPresenterQuatorzeJoursImpl implements LinkyPresenter {
         libelles: [],
         valeur_courante: [],
         valeur_precedente: [],
+        valeur_courante_transcription: [],
+        valeur_precedente_transcription: [],
       },
     };
 
     consommationElectrique.data.forEach((consommation, index) => {
+      const valeurFormatee = consommation.valeur.toFixed(1);
+
       if (index % 2 === 0) {
         consommationElectriqueViewModel.graphique.libelles.push(this.buildDate(consommation.date));
-        consommationElectriqueViewModel.graphique.valeur_courante.push(Number(consommation.valeur.toFixed(1)));
+        consommationElectriqueViewModel.graphique.valeur_precedente.push(Number(valeurFormatee));
+        consommationElectriqueViewModel.graphique.valeur_precedente_transcription.push(`${valeurFormatee} kWh`);
       } else {
-        consommationElectriqueViewModel.graphique.valeur_precedente.push(Number(consommation.valeur.toFixed(1)));
+        consommationElectriqueViewModel.graphique.valeur_courante.push(Number(valeurFormatee));
+        consommationElectriqueViewModel.graphique.valeur_courante_transcription.push(`${valeurFormatee} kWh`);
       }
     });
 

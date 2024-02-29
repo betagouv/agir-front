@@ -5,6 +5,7 @@ export interface InformationCompteur {
   estConfigure: boolean;
   estActif: boolean;
   estFonctionnel: boolean;
+  codeErreur: string;
 }
 
 export class ObtenirInformationCompteurUsecase {

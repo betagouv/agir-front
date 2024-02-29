@@ -39,12 +39,12 @@
             {
               label: 'année précédente',
               backgroundColor: consos.couleurValeur1,
-              data: consos?.graphique.valeur_courante,
+              data: consos?.graphique.valeur_precedente,
             },
             {
               label: 'année courante',
               backgroundColor: consos.couleurValeur2,
-              data: consos?.graphique.valeur_precedente,
+              data: consos?.graphique.valeur_courante,
             },
           ],
         }"
@@ -55,8 +55,8 @@
           titre="Transcription du graphique linky"
           :titres-donnees="['', ...consos?.graphique.libelles]"
           :donnees="[
-            ['Année précédente', ...consos?.graphique.valeur_courante],
-            ['Année courante', ...consos?.graphique.valeur_precedente],
+            ['Année précédente', ...consos?.graphique.valeur_precedente_transcription],
+            ['Année courante', ...consos?.graphique.valeur_courante_transcription],
           ]"
         />
       </Transcription>

@@ -6,12 +6,12 @@
     />
     <h1 class="fr-h2">Ma consommation électrique</h1>
     <div v-if="isLoading">Chargement ...</div>
-    <p v-else-if="!estConfigure">Service en cours de connexion. Revenez plus tard pour consulter vos données</p>
-    <p v-else-if="!estActif">Récupération des données en cours. Revenez plus tard pour les consulter.</p>
-    <p v-else-if="!estFonctionnel">Récupération des données en cours. Revenez plus tard pour les consulter.</p>
-    <div v-else-if="estFonctionnel" class="fr-grid-row fr-grid-row--gutters">
+    <div v-else class="fr-grid-row fr-grid-row--gutters">
       <div class="fr-col-md-9 fr-col-12">
-        <LinkyGraphique />
+        <p v-if="!estConfigure">Service en cours de connexion. Revenez plus tard pour consulter vos données</p>
+        <p v-else-if="!estActif">Récupération des données en cours. Revenez plus tard pour les consulter.</p>
+        <p v-else-if="!estFonctionnel">Récupération des données en cours. Revenez plus tard pour les consulter.</p>
+        <LinkyGraphique v-else-if="estFonctionnel" />
       </div>
       <div class="fr-col-md-3 fr-col-12">
         <LinkyAside :est-actif="estActif" />
@@ -66,7 +66,7 @@
 
     isLoading.value = false;
 
-    if (!estConfigure.value) {
+    if (!estConfigure.value || informationCompteur.codeErreur === '032') {
       const modaleActions = new ModaleActions('linky');
       modaleActions.open();
     }
