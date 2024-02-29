@@ -42,6 +42,7 @@ let mauvaiseReponse: HTMLInputElement;
 
 describe('Page Quiz Article', () => {
   beforeEach(() => {
+    vi.spyOn(EnvoyerDonneesQuizInteractionUsecase.prototype, 'execute').mockImplementation(() => Promise.resolve());
     page = render(PageQuizComposant, { props: pageQuizComposantprops });
     boutonValider = page.getByRole('button', { name: 'Valider' });
     bonneReponse = page.getByRole('radio', { name: '1' });
@@ -93,6 +94,7 @@ describe('Page Quiz Article', () => {
       describe('quand la réponse est correcte', () => {
         it('affiche un message de félicitations, le gain de points et la description reponse OK', async () => {
           // WHEN
+
           // THEN
           await fireEvent.click(bonneReponse);
           await fireEvent.click(boutonValider);
@@ -131,6 +133,9 @@ describe('Page Quiz Article', () => {
         it('affiche la description reponse KO', async () => {
           // WHEN
           // THEN
+          vi.spyOn(EnvoyerDonneesQuizInteractionUsecase.prototype, 'execute').mockImplementation(() =>
+            Promise.resolve()
+          );
           await fireEvent.click(mauvaiseReponse);
           await fireEvent.click(boutonValider);
 
