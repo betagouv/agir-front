@@ -50,6 +50,8 @@ export function intercept401() {
             //Session Expired
             if ((exception as AxiosError).status === 401) {
               await NavigationBus.getInstance().on(EventBusEvents.SESSION_EXPIREE);
+            } else {
+              throw exception;
             }
           }
         }

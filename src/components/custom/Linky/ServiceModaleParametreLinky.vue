@@ -48,8 +48,15 @@
       description="Les données récupérées ne seront pas conservées"
       label="J’autorise le service “Agir !” à récupérer les données me concernant auprès du GRD ENEDIS (consommation annuelle sur 36 mois maximum, puissance souscrite, Numéro PRM)"
     />
+    <Alert
+      v-if="prmEnErreur"
+      class="fr-col-12 fr-mt-2w"
+      type="error"
+      titre="Erreur lors de la validation du PRM"
+      :message="prmMesageErreur"
+    />
     <div class="fr-grid-row fr-grid-row--right fr-pt-6w fr-pb-4w">
-      <button class="fr-btn fr-btn--secondary" :aria-controls="serviceId">Annuler</button>
+      <button class="fr-btn fr-btn--secondary" type="button" :aria-controls="serviceId">Annuler</button>
       <button type="submit" class="fr-btn fr-ml-2w" :disabled="!acceptationCGU || parametreDuService.length != 14">
         Valider
       </button>
@@ -68,19 +75,26 @@
   import { MarquerLeServiceCommeConsulteUsecase } from '@/linky/marquerLeServiceCommeConsulte.usecase';
   import { LinkyRepositoryAxios } from '@/linky/adapters/linky.repository.axios';
   import { ToDoListEventBusImpl } from '@/toDoList/toDoListEventBusImpl';
+  import Alert from '@/components/custom/Alert.vue';
 
   defineProps<{ serviceId: string; prm: string }>();
 
   const acceptationCGU = ref<boolean>(false);
   const parametreDuService = defineModel<string>('prm', { default: '' });
-
-  const parametrerLeService = (serviceId: string) => {
+  const prmEnErreur = ref<boolean>(false);
+  const prmMesageErreur = ref<string>('');
+  const parametrerLeService = async (serviceId: string) => {
     const parametrerService = new ParametrerServiceUsecase(new ServiceRepositoryAxios());
 
     parametrerService
       .execute(utilisateurStore().utilisateur.id, serviceId, { prm: parametreDuService.value })
       .then(() => {
+        prmEnErreur.value = false;
         new ModaleActions(serviceId).close();
+      })
+      .catch(error => {
+        prmEnErreur.value = true;
+        prmMesageErreur.value = error.data.message;
       });
   };
 
