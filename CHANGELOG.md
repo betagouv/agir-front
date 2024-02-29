@@ -1,5 +1,40 @@
 # Changelog
 
+## [1.6.0](https://github.com/betagouv/agir-front/compare/v1.5.0...v1.6.0) (2024-02-28)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* ajout des quiz article ([#308](https://github.com/betagouv/agir-front/issues/308)) ([af33922](https://github.com/betagouv/agir-front/commit/af339223dec832a036cf9fec1b001bd5136b563e))
+* ajout description à la modale service linky ([#301](https://github.com/betagouv/agir-front/issues/301)) ([0cc403d](https://github.com/betagouv/agir-front/commit/0cc403d943a6663f489f1d1794e53d5df91c398d))
+* ajout graphique linky 14 derniers jours ([#304](https://github.com/betagouv/agir-front/issues/304)) ([d20639a](https://github.com/betagouv/agir-front/commit/d20639a8c2c019ce106437a00a5507ef12f8d6b8))
+* harmonisation systeme de filtre service ([#294](https://github.com/betagouv/agir-front/issues/294)) ([8fe611a](https://github.com/betagouv/agir-front/commit/8fe611aa029f83f2a7bbb364b072d41540aa3637))
+* harmonisation ui du bouton favoris ([#298](https://github.com/betagouv/agir-front/issues/298)) ([f99b913](https://github.com/betagouv/agir-front/commit/f99b9130d676dca0332693e22b48c30c90a704b6))
+* la consultation de la configuration du service linky peut être maintenant proposé en tant que mission ([#316](https://github.com/betagouv/agir-front/issues/316)) ([de14a35](https://github.com/betagouv/agir-front/commit/de14a35c5596bbdecf160345fb5492b3f6d111f5))
+* les actions d'articles sont maintenant placées à droite ([#305](https://github.com/betagouv/agir-front/issues/305)) ([52104cd](https://github.com/betagouv/agir-front/commit/52104cd3274a3fa563366dd9b13b011088230ae3))
+* suppression des donnees locales d'onbarding après la création du compte ([#312](https://github.com/betagouv/agir-front/issues/312)) ([77971e4](https://github.com/betagouv/agir-front/commit/77971e465613b872356e1abec86045747fb794e5))
+
+
+### 🐛 Corrections de bogues
+
+* a11y contraste couleur de fond page accueil ([#307](https://github.com/betagouv/agir-front/issues/307)) ([19f69bc](https://github.com/betagouv/agir-front/commit/19f69bc435f7c02b4bab75879f0459db5bab074f))
+* a11y duplication des id ([#303](https://github.com/betagouv/agir-front/issues/303)) ([476516d](https://github.com/betagouv/agir-front/commit/476516d426aee792a27d9a712e0a4c6a81d104cd))
+* appel du fichier css composant tag ([#306](https://github.com/betagouv/agir-front/issues/306)) ([966e435](https://github.com/betagouv/agir-front/commit/966e435528b14b3674394adad7f4ae829cbb0c0b))
+* rendre reponse kyc obligatoire ([#310](https://github.com/betagouv/agir-front/issues/310)) ([39fc3b5](https://github.com/betagouv/agir-front/commit/39fc3b5f74e5eec166664f59c213ab13cd205866))
+* taille image sponsor article ([#314](https://github.com/betagouv/agir-front/issues/314)) ([4d3dd69](https://github.com/betagouv/agir-front/commit/4d3dd690f6023fa8aa71bf8414966caed9ec148e))
+* taille image sponsor page article ([#297](https://github.com/betagouv/agir-front/issues/297)) ([af6c26e](https://github.com/betagouv/agir-front/commit/af6c26e1af7f4725b25b84eba5aeedec799e327d))
+* wording et contenu aléatoire des actions quotidiennes ([#311](https://github.com/betagouv/agir-front/issues/311)) ([c143c2d](https://github.com/betagouv/agir-front/commit/c143c2d4dc710ab48641b38f9c71527781ce9e69))
+* wording graphique linky mensuel ([#315](https://github.com/betagouv/agir-front/issues/315)) ([0cde9d4](https://github.com/betagouv/agir-front/commit/0cde9d4f2a57bb34e18c6033df5c3ad9602e6e81))
+
+
+### 👷 Autres changements
+
+* bump vue from 3.3.8 to 3.4.18 ([#293](https://github.com/betagouv/agir-front/issues/293)) ([fa8649f](https://github.com/betagouv/agir-front/commit/fa8649f1ee9bf1b25e828a03000ef3d13f01ada9))
+* module l'appel des css du dsfr ([#300](https://github.com/betagouv/agir-front/issues/300)) ([a41e28f](https://github.com/betagouv/agir-front/commit/a41e28f05e1ad48f1499d708aac81b82c0589813))
+* refacto création de compte utilisateur ([#292](https://github.com/betagouv/agir-front/issues/292)) ([a014805](https://github.com/betagouv/agir-front/commit/a0148056beafb7157baeab2a406d726d4aa8902a))
+* suppression du suivi du jour ([#299](https://github.com/betagouv/agir-front/issues/299)) ([42a1040](https://github.com/betagouv/agir-front/commit/42a1040655686678064039e6ff7e4d96dcc8cd5c))
+* test page quiz article ([#313](https://github.com/betagouv/agir-front/issues/313)) ([77732ad](https://github.com/betagouv/agir-front/commit/77732ad22c2c9f99f82a9ca8f52a9ef3ab521102))
+
 ## [1.5.0](https://github.com/betagouv/agir-front/compare/v1.4.0...v1.5.0) (2024-02-09)
 
 
