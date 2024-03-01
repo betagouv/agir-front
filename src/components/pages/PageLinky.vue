@@ -66,7 +66,7 @@
 
     isLoading.value = false;
 
-    if (!estConfigure.value || informationCompteur.codeErreur === '032') {
+    if (!estConfigure.value || informationCompteur.codeErreur === '032' || informationCompteur.codeErreur === '039') {
       const modaleActions = new ModaleActions('linky');
       modaleActions.open();
     }
