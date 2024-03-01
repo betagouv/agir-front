@@ -1,7 +1,7 @@
 import { IdUtilisateur, Utilisateur, UtilisateurRepository } from '@/authentification/ports/utilisateur.repository';
 import { AxiosFactory } from '@/axios.factory';
 import Cookies from 'js-cookie';
-import jwt_decode from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 
 interface UtilisateurApiModel {
   prenom: string;
@@ -80,7 +80,7 @@ export class UtilisateurRepositoryAxios implements UtilisateurRepository {
     });
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    const utilisateurId = jwt_decode(response.data.token).utilisateurId as string;
+    const utilisateurId = jwtDecode(response.data.token).utilisateurId as string;
     this.setBearerInCookie(response.data.token);
 
     return utilisateurId;
