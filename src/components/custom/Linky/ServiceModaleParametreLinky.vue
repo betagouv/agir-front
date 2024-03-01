@@ -21,6 +21,19 @@
   <p class="fr-text--bold">
     Important : vos données sont protégées, elles ne sont en aucun partagées avec des services tiers
   </p>
+  <p class="fr-text--bold">
+    <span class="fr-icon-question-line fr-text--bold" aria-hidden="true"></span>
+    Comment trouver ce numéro ?
+  </p>
+  <div class="fr-grid-row fr-grid-row--gutters fr-mb-2w">
+    <img src="/facture-linky-exemple.png" class="fr-col-md-3 max-full-width" alt="" />
+    <p class="fr-col-md-3 fr-mb-0 fr-text--sm">Sur votre facture</p>
+    <img src="/compteur-linky-exemple.jpg" class="fr-col-md-3 max-full-width" alt="" />
+    <p class="fr-col-md-3 fr-mb-0 fr-text--sm">
+      Sur votre compteur Linky<br />
+      Faire défiler les affichages du compteur (appui sur la touche +) jusqu’à lire la valeur du « numéro de PRM ».
+    </p>
+  </div>
   <form @submit.prevent="parametrerLeService(serviceId)">
     <InputText
       name="prm"
@@ -35,25 +48,11 @@
       :titre="alerte.titre"
       :message="alerte.message"
     />
-    <p class="fr-text--bold">
-      <span class="fr-icon-question-line fr-text--bold" aria-hidden="true"></span>
-      Comment trouver ce numéro ?
-    </p>
-    <div class="fr-grid-row fr-grid-row--gutters fr-mb-2w">
-      <img src="/facture-linky-exemple.png" class="fr-col-md-3 max-full-width" alt="" />
-      <p class="fr-col-md-3 fr-mb-0 fr-text--sm">Sur votre facture</p>
-      <img src="/compteur-linky-exemple.jpg" class="fr-col-md-3 max-full-width" alt="" />
-      <p class="fr-col-md-3 fr-mb-0 fr-text--sm">
-        Sur votre compteur Linky<br />
-        Faire défiler les affichages du compteur (appui sur la touche +) jusqu’à lire la valeur du « numéro de PRM ».
-      </p>
-    </div>
     <InputCheckboxUnitaire
       class="fr-pl-1v"
       id="cgu"
       v-model="acceptationCGU"
-      description="Les données récupérées ne seront pas conservées"
-      label="J’autorise le service “Agir !” à récupérer les données me concernant auprès du GRD ENEDIS (consommation annuelle sur 36 mois maximum, puissance souscrite, Numéro PRM)"
+      label="Je déclare sur l'honneur être titulaire du point ou être mandaté par celui-ci et j'accepte qu'Agir ait accès à mes données des 2 ans passés et pour les 3 ans à venir. Je peux changer d'avis à tout moment sur mon compte Enedis."
     />
     <div class="fr-grid-row fr-grid-row--right fr-pt-6w fr-pb-4w">
       <button class="fr-btn fr-btn--secondary" type="button" :aria-controls="serviceId">Annuler</button>
