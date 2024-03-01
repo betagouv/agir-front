@@ -28,6 +28,13 @@
       label="Numéro de PRM"
       description="Il s’agit d’une suite de 14 chiffres qui identifie le logement sur le réseau électrique."
     />
+    <Alert
+      v-if="alerte.isActive"
+      class="fr-col-12 fr-my-2w"
+      :type="alerte.type"
+      :titre="alerte.titre"
+      :message="alerte.message"
+    />
     <p class="fr-text--bold">
       <span class="fr-icon-question-line fr-text--bold" aria-hidden="true"></span>
       Comment trouver ce numéro ?
@@ -47,13 +54,6 @@
       v-model="acceptationCGU"
       description="Les données récupérées ne seront pas conservées"
       label="J’autorise le service “Agir !” à récupérer les données me concernant auprès du GRD ENEDIS (consommation annuelle sur 36 mois maximum, puissance souscrite, Numéro PRM)"
-    />
-    <Alert
-      v-if="prmEnErreur"
-      class="fr-col-12 fr-mt-2w"
-      type="error"
-      titre="Erreur lors de la validation du PRM"
-      :message="prmMesageErreur"
     />
     <div class="fr-grid-row fr-grid-row--right fr-pt-6w fr-pb-4w">
       <button class="fr-btn fr-btn--secondary" type="button" :aria-controls="serviceId">Annuler</button>
@@ -76,26 +76,22 @@
   import { LinkyRepositoryAxios } from '@/linky/adapters/linky.repository.axios';
   import { ToDoListEventBusImpl } from '@/toDoList/toDoListEventBusImpl';
   import Alert from '@/components/custom/Alert.vue';
+  import { useAlerte } from '@/composables/useAlerte';
 
   defineProps<{ serviceId: string; prm: string }>();
 
   const acceptationCGU = ref<boolean>(false);
   const parametreDuService = defineModel<string>('prm', { default: '' });
-  const prmEnErreur = ref<boolean>(false);
-  const prmMesageErreur = ref<string>('');
+
+  const { alerte, afficherAlerte } = useAlerte();
+
   const parametrerLeService = async (serviceId: string) => {
     const parametrerService = new ParametrerServiceUsecase(new ServiceRepositoryAxios());
 
     parametrerService
       .execute(utilisateurStore().utilisateur.id, serviceId, { prm: parametreDuService.value })
-      .then(() => {
-        prmEnErreur.value = false;
-        new ModaleActions(serviceId).close();
-      })
-      .catch(error => {
-        prmEnErreur.value = true;
-        prmMesageErreur.value = error.data.message;
-      });
+      .then(() => new ModaleActions(serviceId).close())
+      .catch(error => afficherAlerte('error', 'Erreur', error.data.message));
   };
 
   onMounted(() => {
