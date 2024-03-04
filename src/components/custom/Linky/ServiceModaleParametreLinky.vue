@@ -73,6 +73,7 @@
   import ModaleActions from '@/components/custom/Modale/ModaleActions';
   import Alert from '@/components/custom/Alert.vue';
   import { useAlerte } from '@/composables/useAlerte';
+  import { ServiceEvent, ServiceEventBusImpl } from '@/services/serviceEventBusImpl';
 
   defineProps<{ serviceId: string; prm: string }>();
 
@@ -86,7 +87,10 @@
 
     parametrerService
       .execute(utilisateurStore().utilisateur.id, serviceId, { prm: parametreDuService.value })
-      .then(() => new ModaleActions(serviceId).close())
+      .then(() => {
+        new ModaleActions(serviceId).close();
+        ServiceEventBusImpl.getInstance().publish(ServiceEvent.SERVICE_INSTALLE); // todo : à sortir dans le usecase
+      })
       .catch(error => afficherAlerte('error', 'Erreur', error.data.message));
   };
 </script>
