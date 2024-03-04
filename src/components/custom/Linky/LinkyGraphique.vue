@@ -49,10 +49,10 @@
           ],
         }"
       />
-      <Transcription titre="Transcription du graphique linky" id="graphique-linky" :est-ouvert="false">
+      <Transcription titre="Transcription du graphique" id="graphique-linky" :est-ouvert="false">
         <Table
           :tableau-double-legende="true"
-          titre="Transcription du graphique linky"
+          :titre="`${consos.titre}`"
           :titres-donnees="['', ...consos?.graphique.libelles]"
           :donnees="[
             ['Année précédente', ...consos?.graphique.valeur_precedente_transcription],

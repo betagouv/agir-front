@@ -47,6 +47,7 @@ describe('Fichier de test du usecase du chargement des données des 14 derniers 
     // THEN
     function expectation(viewModel: ConsommationElectriqueViewModel) {
       expect(viewModel).toStrictEqual<ConsommationElectriqueViewModel>({
+        titre: '14 derniers jours',
         commentaires: ['commentaire 1', 'commentaire 2'],
         couleurValeur1: '#68A532',
         couleurValeur2: '#447049',

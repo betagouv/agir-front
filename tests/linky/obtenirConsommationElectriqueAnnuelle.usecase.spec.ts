@@ -44,6 +44,7 @@ describe('Fichier de test du usecase du chargement des données annuelle linky',
     // THEN
     function expectation(viewModel: ConsommationElectriqueViewModel) {
       expect(viewModel).toStrictEqual<ConsommationElectriqueViewModel>({
+        titre: 'Mois par mois',
         commentaires: ['commentaire 1', 'commentaire 2'],
         couleurValeur1: '#6a6af4',
         couleurValeur2: '#000091',

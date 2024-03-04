@@ -6,6 +6,7 @@ export class LinkyPresenterAnnuelleImpl implements LinkyPresenter {
 
   presente(consommationElectrique: ConsommationElectrique): void {
     const consommationElectriqueViewModel: ConsommationElectriqueViewModel = {
+      titre: 'Mois par mois',
       description:
         "Suivi de votre consommation électrique mois par mois en comparant l'année courante à l'année précédente (mois en cours exclu) :",
       couleurValeur1: '#6a6af4',
