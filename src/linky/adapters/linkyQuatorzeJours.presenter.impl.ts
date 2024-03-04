@@ -20,7 +20,7 @@ export class LinkyPresenterQuatorzeJoursImpl implements LinkyPresenter {
     };
 
     consommationElectrique.data.forEach((consommation, index) => {
-      const valeurFormatee = consommation.valeur.toFixed(1);
+      const valeurFormatee = Math.round(consommation.valeur);
 
       if (index % 2 === 0) {
         consommationElectriqueViewModel.graphique.libelles.push(this.buildDate(consommation.date));

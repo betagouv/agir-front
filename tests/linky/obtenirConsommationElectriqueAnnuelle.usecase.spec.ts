@@ -35,7 +35,7 @@ describe('Fichier de test du usecase du chargement des données annuelle linky',
             date: '2024-02-01T12:00:00.000Z',
           },
         ],
-      })
+      }),
     );
 
     // WHEN
@@ -53,8 +53,8 @@ describe('Fichier de test du usecase du chargement des données annuelle linky',
           libelles: ['janvier', 'fevrier'],
           valeur_courante: [1, 2],
           valeur_precedente: [1, 2],
-          valeur_courante_transcription: ['1.0 kWh', '2.0 kWh'],
-          valeur_precedente_transcription: ['1.0 kWh', '2.0 kWh'],
+          valeur_courante_transcription: ['1 kWh', '2 kWh'],
+          valeur_precedente_transcription: ['1 kWh', '2 kWh'],
         },
       });
     }

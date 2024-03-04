@@ -35,13 +35,13 @@ describe('Fichier de test du usecase du chargement des données des 14 derniers 
             date: '2024-01-02T12:00:00.000Z',
           },
         ],
-      })
+      }),
     );
 
     // WHEN
     await obtenirConsommationElectriqueUsecase.execute(
       'idUtilisateur',
-      new LinkyPresenterQuatorzeJoursImpl(expectation)
+      new LinkyPresenterQuatorzeJoursImpl(expectation),
     );
 
     // THEN
@@ -55,8 +55,8 @@ describe('Fichier de test du usecase du chargement des données des 14 derniers 
           libelles: ['1 janvier', '2 janvier'],
           valeur_courante: [1, 2],
           valeur_precedente: [1, 2],
-          valeur_courante_transcription: ['1.0 kWh', '2.0 kWh'],
-          valeur_precedente_transcription: ['1.0 kWh', '2.0 kWh'],
+          valeur_courante_transcription: ['1 kWh', '2 kWh'],
+          valeur_precedente_transcription: ['1 kWh', '2 kWh'],
         },
       });
     }
