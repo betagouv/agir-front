@@ -13,7 +13,7 @@ describe('Fichier de test du usecase du chargement informations du compteur', ()
           estConfigure: false,
           estActif: false,
           estFonctionnel: false,
-          codeErreur: '',
+          configurationEnErreur: true,
         }),
       );
 
@@ -28,7 +28,7 @@ describe('Fichier de test du usecase du chargement informations du compteur', ()
   });
 
   describe("quand l'utilisateur a mal configuré son service", () => {
-    it("doit retrouner ses infomations et prévient l'ouverture de la modale", async () => {
+    it("doit retourner ses infomations et prévient l'ouverture de la modale", async () => {
       // GIVEN
       const obtenirInformationCompteurUsecase = new ObtenirInformationCompteurUsecase(
         new MockLinkyInformationRepository({
@@ -36,7 +36,30 @@ describe('Fichier de test du usecase du chargement informations du compteur', ()
           estConfigure: false,
           estActif: false,
           estFonctionnel: false,
-          codeErreur: '',
+          configurationEnErreur: true,
+        }),
+      );
+
+      // WHEN
+      await obtenirInformationCompteurUsecase.execute('idUtilisateur', new LinkyPresenterInformationImpl(expectation));
+
+      // THEN
+      function expectation(viewModel: InformationCompteurViewModel) {
+        expect(viewModel.doitOuvrirLaModaleDeConfiguration).toBeTruthy();
+      }
+    });
+  });
+
+  describe('quand linky retourne une configuration en erreur', () => {
+    it("doit retourner les infomations de l'utilisateur et prévient l'ouverture de la modale", async () => {
+      // GIVEN
+      const obtenirInformationCompteurUsecase = new ObtenirInformationCompteurUsecase(
+        new MockLinkyInformationRepository({
+          prm: '123456',
+          estConfigure: true,
+          estActif: true,
+          estFonctionnel: true,
+          configurationEnErreur: true,
         }),
       );
 
@@ -59,7 +82,7 @@ describe('Fichier de test du usecase du chargement informations du compteur', ()
           estConfigure: true,
           estActif: true,
           estFonctionnel: true,
-          codeErreur: '',
+          configurationEnErreur: false,
         }),
       );
 

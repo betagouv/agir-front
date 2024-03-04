@@ -10,10 +10,7 @@ export class LinkyPresenterInformationImpl implements LinkyInformationPresenter 
       estConfigure: informationCompteur.estConfigure,
       estActif: informationCompteur.estActif,
       estFonctionnel: informationCompteur.estFonctionnel,
-      doitOuvrirLaModaleDeConfiguration:
-        !informationCompteur.estConfigure ||
-        informationCompteur.codeErreur === '032' ||
-        informationCompteur.codeErreur === '039',
+      doitOuvrirLaModaleDeConfiguration: !informationCompteur.estConfigure || informationCompteur.configurationEnErreur,
     };
 
     this.viewModel(informationCompteurViewModel);
