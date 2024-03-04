@@ -2,14 +2,14 @@
   <div class="fr-transcription" :id="id">
     <button
       class="fr-transcription__btn"
-      aria-expanded="true"
+      :aria-expanded="estOuvert"
       :aria-controls="`fr-transcription-collapse-${id}`"
       data-fr-js-collapse-button="true"
     >
       Transcription
     </button>
     <div
-      class="fr-collapse fr-collapse--expanded"
+      :class="`fr-collapse ${estOuvert && 'fr-collapse--expanded'}`"
       :id="`fr-transcription-collapse-${id}`"
       data-fr-js-collapse="true"
       style="--collapse-max-height: none; --collapse: -210px"
@@ -68,5 +68,6 @@
   defineProps<{
     id: string;
     titre: string;
+    estOuvert: boolean;
   }>();
 </script>

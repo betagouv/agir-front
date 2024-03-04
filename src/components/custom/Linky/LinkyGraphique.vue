@@ -49,7 +49,7 @@
           ],
         }"
       />
-      <Transcription titre="Transcription du graphique linky" id="graphique-linky">
+      <Transcription titre="Transcription du graphique linky" id="graphique-linky" :est-ouvert="false">
         <Table
           :tableau-double-legende="true"
           titre="Transcription du graphique linky"
@@ -95,10 +95,10 @@
 
   const idUtilisateur = utilisateurStore().utilisateur.id;
   const obtenirConsommationElectriqueUsecaseAnnuelle = new ObtenirConsommationElectriqueAnnuelleUsecase(
-    new LinkyRepositoryAxios()
+    new LinkyRepositoryAxios(),
   );
   const obtenirConsommationElectriqueQuatorzeJoursUsecase = new ObtenirConsommationElectriqueQuatorzeJoursUsecase(
-    new LinkyRepositoryAxios()
+    new LinkyRepositoryAxios(),
   );
 
   async function handleValueChange(value) {
@@ -106,12 +106,12 @@
     if (value === VueGraphique.QUATORZE_JOURS) {
       await obtenirConsommationElectriqueQuatorzeJoursUsecase.execute(
         idUtilisateur,
-        new LinkyPresenterQuatorzeJoursImpl(mapValuesConsommation)
+        new LinkyPresenterQuatorzeJoursImpl(mapValuesConsommation),
       );
     } else {
       await obtenirConsommationElectriqueUsecaseAnnuelle.execute(
         idUtilisateur,
-        new LinkyPresenterAnnuelleImpl(mapValuesConsommation)
+        new LinkyPresenterAnnuelleImpl(mapValuesConsommation),
       );
     }
   }
@@ -119,7 +119,7 @@
   onMounted(async () => {
     await obtenirConsommationElectriqueQuatorzeJoursUsecase.execute(
       idUtilisateur,
-      new LinkyPresenterQuatorzeJoursImpl(mapValuesConsommation)
+      new LinkyPresenterQuatorzeJoursImpl(mapValuesConsommation),
     );
   });
 </script>
