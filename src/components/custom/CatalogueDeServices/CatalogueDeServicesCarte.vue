@@ -57,6 +57,9 @@
   import { InstallerServiceActifUsecase } from '@/services/installerServiceActif.usecase';
   import ModaleActions from '@/components/custom/Modale/ModaleActions';
   import { ServiceCatalogueViewModelItem } from '@/services/adapters/serviceCatalogue.presenter.impl';
+  import { MarquerLeServiceCommeConsulteUsecase } from '@/linky/marquerLeServiceCommeConsulte.usecase';
+  import { LinkyRepositoryAxios } from '@/linky/adapters/linky.repository.axios';
+  import { ToDoListEventBusImpl } from '@/toDoList/toDoListEventBusImpl';
 
   const props = defineProps<{ service: ServiceCatalogueViewModelItem }>();
 
@@ -79,6 +82,11 @@
     if (serviceId === 'linky') {
       const modaleActions = new ModaleActions(serviceId);
       modaleActions.open();
+      const marquerLeServiceCommeConsulteUsecase = new MarquerLeServiceCommeConsulteUsecase(
+        new LinkyRepositoryAxios(),
+        ToDoListEventBusImpl.getInstance(),
+      );
+      await marquerLeServiceCommeConsulteUsecase.execute(utilisateurStore().utilisateur.id);
     }
   }
 </script>

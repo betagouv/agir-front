@@ -64,16 +64,13 @@
 </template>
 
 <script setup lang="ts">
-  import { onMounted, ref, defineModel } from 'vue';
+  import { ref, defineModel } from 'vue';
   import InputText from '@/components/dsfr/InputText.vue';
   import InputCheckboxUnitaire from '@/components/dsfr/InputCheckboxUnitaire.vue';
   import { utilisateurStore } from '@/store/utilisateur';
   import { ParametrerServiceUsecase } from '@/services/parametrerService.usecase';
   import { ServiceRepositoryAxios } from '@/services/adapters/service.repository.axios';
   import ModaleActions from '@/components/custom/Modale/ModaleActions';
-  import { MarquerLeServiceCommeConsulteUsecase } from '@/linky/marquerLeServiceCommeConsulte.usecase';
-  import { LinkyRepositoryAxios } from '@/linky/adapters/linky.repository.axios';
-  import { ToDoListEventBusImpl } from '@/toDoList/toDoListEventBusImpl';
   import Alert from '@/components/custom/Alert.vue';
   import { useAlerte } from '@/composables/useAlerte';
 
@@ -92,12 +89,4 @@
       .then(() => new ModaleActions(serviceId).close())
       .catch(error => afficherAlerte('error', 'Erreur', error.data.message));
   };
-
-  onMounted(() => {
-    const marquerLeServiceCommeConsulteUsecase = new MarquerLeServiceCommeConsulteUsecase(
-      new LinkyRepositoryAxios(),
-      ToDoListEventBusImpl.getInstance()
-    );
-    marquerLeServiceCommeConsulteUsecase.execute(utilisateurStore().utilisateur.id);
-  });
 </script>

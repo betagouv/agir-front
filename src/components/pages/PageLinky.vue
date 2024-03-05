@@ -15,7 +15,7 @@
         <LinkyGraphique />
       </div>
       <div class="fr-col-md-3 fr-col-12">
-        <LinkyAside />
+        <LinkyAside :est-actif="estActif" />
       </div>
     </div>
   </div>
