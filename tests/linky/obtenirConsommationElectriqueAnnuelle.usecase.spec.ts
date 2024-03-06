@@ -4,7 +4,7 @@ import { MockLinkyRepository } from './adapters/linky.repository.mock';
 import { ConsommationElectriqueViewModel } from '@/linky/ports/linky.presenter';
 
 describe('Fichier de test du usecase du chargement des données annuelle linky', () => {
-  it('en donnant un utilisateur valide doit me retourner ses données de consommation electrique annuelle formatées pour le graphique avec une description et des commentaires associés', async () => {
+  it('en donnant un utilisateur valide doit me retourner ses données de consommation electrique annuelle formatées pour le graphique avec une description, des commentaires associés  et les valeurs de la transcription', async () => {
     // GIVEN
     const obtenirConsommationElectriqueUsecase = new ObtenirConsommationElectriqueAnnuelleUsecase(
       new MockLinkyRepository({
@@ -35,7 +35,7 @@ describe('Fichier de test du usecase du chargement des données annuelle linky',
             date: '2024-02-01T12:00:00.000Z',
           },
         ],
-      })
+      }),
     );
 
     // WHEN
@@ -44,6 +44,7 @@ describe('Fichier de test du usecase du chargement des données annuelle linky',
     // THEN
     function expectation(viewModel: ConsommationElectriqueViewModel) {
       expect(viewModel).toStrictEqual<ConsommationElectriqueViewModel>({
+        titre: 'Mois par mois',
         commentaires: ['commentaire 1', 'commentaire 2'],
         couleurValeur1: '#6a6af4',
         couleurValeur2: '#000091',
@@ -53,6 +54,8 @@ describe('Fichier de test du usecase du chargement des données annuelle linky',
           libelles: ['janvier', 'fevrier'],
           valeur_courante: [1, 2],
           valeur_precedente: [1, 2],
+          valeur_courante_transcription: ['1 kWh', '2 kWh'],
+          valeur_precedente_transcription: ['1 kWh', '2 kWh'],
         },
       });
     }

@@ -7,7 +7,7 @@
       @click="selectionnerInfoAleatoire"
       class="fr-btn fr-btn--tertiary-no-outline fr-btn--icon-left fr-icon-refresh-line"
     >
-      Rafraîchir
+      Autre idée
     </button>
   </div>
 </template>
@@ -30,7 +30,7 @@
   const selectionnerInfoAleatoire = () => {
     afficherAction.value = false;
     const infoActionsQuotidienneSansCelleAffichee = infosActionsQuotidiennes.filter(
-      i => i !== infoActionQuotidienneAffichee.value
+      i => i !== infoActionQuotidienneAffichee.value,
     );
     const randomIndex = Math.floor(Math.random() * infoActionsQuotidienneSansCelleAffichee.length);
     infoActionQuotidienneAffichee.value = infoActionsQuotidienneSansCelleAffichee[randomIndex];

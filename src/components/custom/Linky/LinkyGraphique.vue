@@ -19,35 +19,48 @@
     <ul>
       <li v-for="(item, index) in consos?.commentaires" :key="index" v-html="item" />
     </ul>
-    <Bar
-      v-if="consos?.graphique"
-      id="graphique-consommation-electrique"
-      :options="{
-        responsive: true,
-        scales: {
-          y: {
-            ticks: {
-              callback: value => `${value} kWh`,
+    <div v-if="consos?.graphique">
+      <Bar
+        id="graphique-consommation-electrique"
+        class="fr-mb-4w"
+        :options="{
+          responsive: true,
+          scales: {
+            y: {
+              ticks: {
+                callback: value => `${value} kWh`,
+              },
             },
           },
-        },
-      }"
-      :data="{
-        labels: consos?.graphique.libelles,
-        datasets: [
-          {
-            label: 'année précédente',
-            backgroundColor: consos.couleurValeur1,
-            data: consos?.graphique.valeur_courante,
-          },
-          {
-            label: 'année courante',
-            backgroundColor: consos.couleurValeur2,
-            data: consos?.graphique.valeur_precedente,
-          },
-        ],
-      }"
-    />
+        }"
+        :data="{
+          labels: consos?.graphique.libelles,
+          datasets: [
+            {
+              label: 'année précédente',
+              backgroundColor: consos.couleurValeur1,
+              data: consos?.graphique.valeur_precedente,
+            },
+            {
+              label: 'année courante',
+              backgroundColor: consos.couleurValeur2,
+              data: consos?.graphique.valeur_courante,
+            },
+          ],
+        }"
+      />
+      <Transcription titre="Transcription du graphique" id="graphique-linky" :est-ouvert="false">
+        <Table
+          :tableau-double-legende="true"
+          :titre="`${consos.titre}`"
+          :titres-donnees="['', ...consos?.graphique.libelles]"
+          :donnees="[
+            ['Année précédente', ...consos?.graphique.valeur_precedente_transcription],
+            ['Année courante', ...consos?.graphique.valeur_courante_transcription],
+          ]"
+        />
+      </Transcription>
+    </div>
   </div>
 </template>
 
@@ -63,6 +76,8 @@
   import { ConsommationElectriqueViewModel } from '@/linky/ports/linky.presenter';
   import { ObtenirConsommationElectriqueQuatorzeJoursUsecase } from '@/linky/obtenirConsommationElectriqueQuatorzeJours.usecase';
   import { LinkyPresenterQuatorzeJoursImpl } from '@/linky/adapters/linkyQuatorzeJours.presenter.impl';
+  import Transcription from '@/components/dsfr/Transcription.vue';
+  import Table from '@/components/dsfr/Table.vue';
 
   ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale);
 
@@ -80,10 +95,10 @@
 
   const idUtilisateur = utilisateurStore().utilisateur.id;
   const obtenirConsommationElectriqueUsecaseAnnuelle = new ObtenirConsommationElectriqueAnnuelleUsecase(
-    new LinkyRepositoryAxios()
+    new LinkyRepositoryAxios(),
   );
   const obtenirConsommationElectriqueQuatorzeJoursUsecase = new ObtenirConsommationElectriqueQuatorzeJoursUsecase(
-    new LinkyRepositoryAxios()
+    new LinkyRepositoryAxios(),
   );
 
   async function handleValueChange(value) {
@@ -91,12 +106,12 @@
     if (value === VueGraphique.QUATORZE_JOURS) {
       await obtenirConsommationElectriqueQuatorzeJoursUsecase.execute(
         idUtilisateur,
-        new LinkyPresenterQuatorzeJoursImpl(mapValuesConsommation)
+        new LinkyPresenterQuatorzeJoursImpl(mapValuesConsommation),
       );
     } else {
       await obtenirConsommationElectriqueUsecaseAnnuelle.execute(
         idUtilisateur,
-        new LinkyPresenterAnnuelleImpl(mapValuesConsommation)
+        new LinkyPresenterAnnuelleImpl(mapValuesConsommation),
       );
     }
   }
@@ -104,7 +119,7 @@
   onMounted(async () => {
     await obtenirConsommationElectriqueQuatorzeJoursUsecase.execute(
       idUtilisateur,
-      new LinkyPresenterQuatorzeJoursImpl(mapValuesConsommation)
+      new LinkyPresenterQuatorzeJoursImpl(mapValuesConsommation),
     );
   });
 </script>

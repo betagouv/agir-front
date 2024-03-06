@@ -6,16 +6,21 @@
     />
     <h1 class="fr-h2">Ma consommation électrique</h1>
     <div v-if="isLoading">Chargement ...</div>
-    <div v-else-if="!estConfigure" />
-    <div v-else-if="!estActif">
-      <p>Service en cours de connexion. Revenez plus tard pour consulter vos données</p>
-    </div>
-    <div v-else class="fr-grid-row fr-grid-row--gutters">
+    <div v-else-if="informationCompteurViewModel" class="fr-grid-row fr-grid-row--gutters">
       <div class="fr-col-md-9 fr-col-12">
-        <LinkyGraphique />
+        <p v-if="!informationCompteurViewModel.estConfigure">
+          Service en cours de connexion. Revenez plus tard pour consulter vos données
+        </p>
+        <p v-else-if="!informationCompteurViewModel.estActif">
+          Récupération des données en cours. Revenez plus tard pour les consulter.
+        </p>
+        <p v-else-if="!informationCompteurViewModel.estFonctionnel">
+          Récupération des données en cours. Revenez plus tard pour les consulter.
+        </p>
+        <LinkyGraphique v-else-if="informationCompteurViewModel.estFonctionnel" />
       </div>
       <div class="fr-col-md-3 fr-col-12">
-        <LinkyAside :est-actif="estActif" />
+        <LinkyAside :est-actif="informationCompteurViewModel.estActif" />
       </div>
     </div>
   </div>
@@ -28,7 +33,10 @@
       size="m"
     >
       <template v-slot:contenu>
-        <ServiceModaleParametreLinky service-id="linky" :prm="prm" />
+        <ServiceModaleParametreLinky
+          service-id="linky"
+          :prm="informationCompteurViewModel && informationCompteurViewModel.prm"
+        />
       </template>
     </Modale>
     <button class="fr-btn fr-hidden" data-fr-opened="false" aria-controls="linky">
@@ -48,24 +56,27 @@
   import ModaleActions from '@/components/custom/Modale/ModaleActions';
   import Modale from '@/components/custom/Modale/Modale.vue';
   import ServiceModaleParametreLinky from '@/components/custom/Linky/ServiceModaleParametreLinky.vue';
+  import { InformationCompteurViewModel } from '@/linky/ports/linky.information.presenter';
+  import { LinkyPresenterInformationImpl } from '@/linky/adapters/linkyInformation.presenter.impl';
 
   const isLoading = ref(true);
 
-  const prm = ref<string>('');
-  const estConfigure = ref<boolean>();
-  const estActif = ref<boolean>();
+  const informationCompteurViewModel = ref<InformationCompteurViewModel>();
+
+  function mapValuesInformation(viewModel: InformationCompteurViewModel) {
+    informationCompteurViewModel.value = viewModel;
+  }
 
   onMounted(async () => {
     const obtenirInformationCompteurUsecase = new ObtenirInformationCompteurUsecase(new LinkyRepositoryAxios());
-    const informationCompteur = await obtenirInformationCompteurUsecase.execute(utilisateurStore().utilisateur.id);
-
-    prm.value = informationCompteur.prm;
-    estConfigure.value = informationCompteur.estConfigure;
-    estActif.value = informationCompteur.estActif;
+    await obtenirInformationCompteurUsecase.execute(
+      utilisateurStore().utilisateur.id,
+      new LinkyPresenterInformationImpl(mapValuesInformation),
+    );
 
     isLoading.value = false;
 
-    if (!estConfigure.value) {
+    if (informationCompteurViewModel.value?.doitOuvrirLaModaleDeConfiguration) {
       const modaleActions = new ModaleActions('linky');
       modaleActions.open();
     }
