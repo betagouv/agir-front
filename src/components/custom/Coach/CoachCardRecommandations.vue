@@ -1,7 +1,14 @@
 <template>
   <div class="card-recommandation shadow">
     <div class="fr-p-3w">
-      <span class="fr-text--bold fr-text--xs text--black">{{ recommandation.thematique }}</span>
+      <div class="fr-grid-row flex-space-between fr-grid-row--middle fr-mb-1w">
+        <span class="fr-text--bold fr-text--xs text--black fr-mb-0 align-items--middle">
+          {{ recommandation.thematique }}
+        </span>
+        <span class="fr-tag text--bleu background-bleu-light fr-text--xs">
+          {{ recommandation.type }}
+        </span>
+      </div>
       <h3 class="card-recommandation__titre fr-text--xl fr-mb-0 text--gris-dark">
         <router-link
           :to="recommandation.url"
@@ -32,7 +39,7 @@
   const recommandationAEteCliquee = () => {
     const recommandationPersonnaliseAEteCliqueeUsecase = new RecommandationPersonnaliseAEteCliqueeUsecase(
       new RecommandationsPersonnaliseesRepositoryAxios(),
-      ToDoListEventBusImpl.getInstance()
+      ToDoListEventBusImpl.getInstance(),
     );
     recommandationPersonnaliseAEteCliqueeUsecase.execute(utilisateurStore().utilisateur.id);
   };
