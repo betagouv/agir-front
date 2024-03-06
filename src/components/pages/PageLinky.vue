@@ -20,7 +20,7 @@
         <LinkyGraphique v-else-if="informationCompteurViewModel.estFonctionnel" />
       </div>
       <div class="fr-col-md-3 fr-col-12">
-        <LinkyAside :est-actif="estActif" />
+        <LinkyAside :est-actif="informationCompteurViewModel.estActif" />
       </div>
     </div>
   </div>
