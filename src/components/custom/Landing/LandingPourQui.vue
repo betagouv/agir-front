@@ -1,8 +1,8 @@
 <template>
   <h2 class="fr-h2 text--white">On a tous une bonne raison d'Agir !</h2>
   <div class="fr-grid-row fr-grid-row--gutters">
-    <div class="fr-col-md-3 fr-col-12 text--center" v-for="personna in personnas" :key="personna.text">
-      <img :src="personna.imageUrl" class="border-radius--full fr-mb-2w" alt="" />
+    <div class="fr-col-md-3 fr-col-12 text--center" v-for="(personna, index) in personnas" :key="personna.text">
+      <img :src="personna.imageUrl" class="border-radius--full fr-mb-2w" :alt="`Témoignage ${index + 1} :`" />
       <p class="fr-text--lg fr-mb-0 text--white">{{ personna.text }}</p>
     </div>
   </div>
