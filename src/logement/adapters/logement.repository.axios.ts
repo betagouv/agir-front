@@ -7,12 +7,12 @@ interface LogementApiModel {
   nombre_enfants: number;
   code_postal: string;
   commune: string;
-  type: string;
-  superficie: string;
+  type: 'maison' | 'appartement';
+  superficie: 'superficie_35' | 'superficie_70' | 'superficie_100' | 'superficie_150' | 'superficie_150_et_plus';
   proprietaire: boolean;
-  chauffage: string;
+  chauffage: 'electricite' | 'bois' | 'fioul' | 'gaz' | 'autre';
   plus_de_15_ans: boolean;
-  dpe: string;
+  dpe: 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G';
 }
 
 export class LogementRepositoryAxios implements LogementRepository {
