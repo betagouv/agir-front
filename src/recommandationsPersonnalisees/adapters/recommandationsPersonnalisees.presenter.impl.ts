@@ -2,6 +2,7 @@ import { RecommandationPersonnalisee } from '@/recommandationsPersonnalisees/rec
 import { InteractionType } from '@/shell/interactionType';
 import { RecommandationsPersonnaliseesPresenter } from '@/recommandationsPersonnalisees/ports/recommandationsPersonnalisees.presenter';
 import { buildUrl } from '@/shell/buildUrl';
+import { pascalCase } from '@/shell/pascalCase';
 
 export interface RecommandationViewModel {
   titre: string;
@@ -20,11 +21,11 @@ export interface RecommandationPersonnaliseeViewModel {
 
 export class RecommandationsPersonnaliseesPresenterImpl implements RecommandationsPersonnaliseesPresenter {
   constructor(
-    private viewModel: (recommandationPersonnaliseeViewModels: RecommandationPersonnaliseeViewModel) => void
+    private viewModel: (recommandationPersonnaliseeViewModels: RecommandationPersonnaliseeViewModel) => void,
   ) {}
   presente(recommandationsPersonnalisees: RecommandationPersonnalisee[]): void {
     const recommandationHighlight = recommandationsPersonnalisees.find(
-      recommandationPersonnalisee => recommandationPersonnalisee.type === InteractionType.ARTICLE
+      recommandationPersonnalisee => recommandationPersonnalisee.type === InteractionType.ARTICLE,
     );
 
     if (recommandationHighlight) {
@@ -49,7 +50,7 @@ export class RecommandationsPersonnaliseesPresenterImpl implements Recommandatio
               url: this.determineUrl(recommandationPersonnalisee),
               contentId: recommandationPersonnalisee.idDuContenu,
               nombreDePointsAGagner: recommandationPersonnalisee.nombreDePointsAGagner,
-              type: recommandationPersonnalisee.type,
+              type: pascalCase(recommandationPersonnalisee.type),
               description: recommandationPersonnalisee.sousTitre,
             };
           })

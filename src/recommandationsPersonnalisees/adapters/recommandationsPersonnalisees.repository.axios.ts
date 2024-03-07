@@ -8,7 +8,7 @@ interface RecommandationApiModel {
   type: string;
   titre: string;
   soustitre: string;
-  thematique_gamification_titre: string;
+  thematique_gamification: string;
   duree: string;
   image_url: string;
   points: number;
@@ -25,7 +25,7 @@ export class RecommandationsPersonnaliseesRepositoryAxios implements Recommandat
   async chargerRecommandationsPersonnalisees(idUtilisateur: string): Promise<RecommandationPersonnalisee[]> {
     const axiosInstance = AxiosFactory.getAxios();
     const response = await axiosInstance.get<RecommandationApiModel[]>(
-      `/utilisateurs/${idUtilisateur}/recommandations`
+      `/utilisateurs/${idUtilisateur}/recommandations`,
     );
 
     return response.data.map((apiModel: RecommandationApiModel) => {
@@ -33,7 +33,7 @@ export class RecommandationsPersonnaliseesRepositoryAxios implements Recommandat
         type: apiModel.type as InteractionType,
         titre: apiModel.titre,
         sousTitre: apiModel.soustitre,
-        categorie: apiModel.thematique_gamification_titre,
+        categorie: apiModel.thematique_gamification,
         nombreDePointsAGagner: apiModel.points.toString(),
         illustrationURL: apiModel.image_url,
         idDuContenu: apiModel.content_id,
