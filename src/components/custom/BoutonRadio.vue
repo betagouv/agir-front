@@ -11,7 +11,7 @@
     >
       {{ legende }}
     </legend>
-    <div class="fr-grid-row full-width">
+    <div class="fr-grid-row">
       <div :class="`fr-fieldset__element ${col}`" v-for="option in options" :key="option.label">
         <div
           :class="`fr-radio-group border fr-col

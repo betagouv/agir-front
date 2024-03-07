@@ -29,9 +29,9 @@
           class="fr-mb-2w fr-col-12"
           legende="Votre résidence principale est ..."
           legende-size="l"
-          orientation="vertical"
+          orientation="horizontal"
           name="residence"
-          col="fr-col-4"
+          col="fr-col"
           :options="logementViewModel.residence.reponsesPossibles"
           :default-value="logementViewModel.residence.valeur"
           v-model="logementViewModel.residence.valeur"
@@ -40,20 +40,20 @@
           class="fr-mb-2w fr-col-12"
           legende="Vous êtes propriétaire de votre logement ?"
           legende-size="l"
-          orientation="vertical"
+          orientation="horizontal"
           name="proprietaire"
-          col="fr-col-4"
+          col="fr-col"
           :options="logementViewModel.proprietaire.reponsesPossibles"
           :default-value="logementViewModel.proprietaire.valeur"
           v-model="logementViewModel.proprietaire.valeur"
         />
         <BoutonRadio
-          class="fr-mb-4w"
+          class="fr-mb-4w fr-col-12"
           legende="Quelle en est la superficie ?"
           legende-size="l"
           name="superficie"
-          orientation="vertical"
-          col="fr-col-sm-4"
+          orientation="horizontal"
+          col="fr-col"
           :options="logementViewModel.superficie.reponsesPossibles"
           :default-value="logementViewModel.superficie.valeur"
           v-model="logementViewModel.superficie.valeur"
@@ -63,8 +63,8 @@
           legende="Quelle est votre mode de chauffage principal ?"
           legende-size="l"
           name="chauffage"
-          orientation="vertical"
-          col="fr-col-sm-4"
+          orientation="horizontal"
+          col="fr-col"
           :options="logementViewModel.modeDeChauffage.reponsesPossibles"
           :default-value="logementViewModel.modeDeChauffage.valeur"
           v-model="logementViewModel.modeDeChauffage.valeur"
@@ -74,19 +74,19 @@
           legende="Votre logement a-t-il plus de 15 ans ?"
           legende-size="l"
           name="anciennete"
-          orientation="vertical"
-          col="fr-col-sm-4"
+          orientation="horizontal"
+          col="fr-col"
           :options="logementViewModel.plusDeQuinzeAns.reponsesPossibles"
           :default-value="logementViewModel.plusDeQuinzeAns.valeur"
           v-model="logementViewModel.plusDeQuinzeAns.valeur"
         />
         <BoutonRadio
-          class="fr-mb-4w fr-col-12"
+          class="fr-mb-4w"
           legende="Quel est le DPE actuel de votre logement ?"
           legende-size="l"
           name="dpe"
           orientation="vertical"
-          col="fr-col-sm-4"
+          col="fr-col"
           :options="logementViewModel.dpe.reponsesPossibles"
           :default-value="logementViewModel.dpe.valeur"
           v-model="logementViewModel.dpe.valeur"
@@ -98,6 +98,7 @@
     </form>
   </div>
 </template>
+
 <script setup lang="ts">
   import { LogementViewModel } from '@/logement/recupererInformationLogement.usecase';
   import InputCodePostal from '@/components/dsfr/InputCodePostal.vue';
