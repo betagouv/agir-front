@@ -91,7 +91,7 @@
           :default-value="logementViewModel.dpe.valeur"
           v-model="logementViewModel.dpe.valeur"
         />
-        <button class="fr-btn fr-btn--secondary fr-btn--icon-left fr-mt-4w fr-icon-save-3-fill">
+        <button class="fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-save-3-fill">
           Mettre à jour vos informations
         </button>
       </div>
