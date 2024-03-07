@@ -1,36 +1,35 @@
-import {
-  RecupererInformationLogementPresenterImpl,
-  RecupererInformationLogementUseCase,
-} from '@/logement/recupererInformationLogement.usecase';
+import { LogementPresenterImpl } from '@/logement/adapters/logement.presenter.impl';
+import { RecupererInformationLogementUseCase } from '@/logement/recupererInformationLogement.usecase';
+import { MockLogementRepository } from './adapters/logement.repository.mock';
 
 describe('Fichier de tests concernant la récuperations des informations du logement', () => {
   it('Doit recupérer les informations', () => {
     // GIVEN
+    const usecase = new RecupererInformationLogementUseCase(
+      new MockLogementRepository({
+        codePostal: '75001',
+        commune: 'PARIS 01',
+        adultes: 2,
+        enfants: 1,
+        residence: 'appartement',
+        proprietaire: 'oui',
+        superficie: 'superficie_100',
+        modeDeChauffage: 'gaz',
+        plusDeQuinzeAns: 'oui',
+        dpe: 'dpe_b',
+      }),
+    );
 
     // WHEN // THEN
-    const usecase = new RecupererInformationLogementUseCase();
     usecase.execute(
       'idUtilisateur',
-      new RecupererInformationLogementPresenterImpl(viewModel => {
+      new LogementPresenterImpl(viewModel => {
         expect(viewModel).toEqual({
-          codePostal: {
-            idKYC: 1,
-            valeur: '75001',
-          },
-          commune: {
-            idKYC: 2,
-            valeur: 'PARIS 01',
-          },
-          adultes: {
-            idKYC: 3,
-            valeur: 2,
-          },
-          enfants: {
-            idKYC: 4,
-            valeur: 1,
-          },
+          codePostal: '75001',
+          commune: 'PARIS 01',
+          adultes: 2,
+          enfants: 1,
           residence: {
-            idKYC: 5,
             valeur: 'appartement',
             reponsesPossibles: [
               {
@@ -44,7 +43,6 @@ describe('Fichier de tests concernant la récuperations des informations du loge
             ],
           },
           proprietaire: {
-            idKYC: 6,
             valeur: 'oui',
             reponsesPossibles: [
               {
@@ -58,7 +56,6 @@ describe('Fichier de tests concernant la récuperations des informations du loge
             ],
           },
           superficie: {
-            idKYC: 7,
             valeur: 'superficie_100',
             reponsesPossibles: [
               { label: 'Moins de 35 m²', value: 'superficie_35' },
@@ -69,16 +66,16 @@ describe('Fichier de tests concernant la récuperations des informations du loge
             ],
           },
           modeDeChauffage: {
-            idKYC: 8,
             valeur: 'gaz',
             reponsesPossibles: [
+              { label: 'Électricité', value: 'electricite' },
+              { label: 'Bois / Pellets', value: 'bois' },
+              { label: 'Fioul', value: 'fioul' },
               { label: 'Gaz', value: 'gaz' },
-              { label: 'Electrique', value: 'electrique' },
-              { label: 'Autre', value: 'autre' },
+              { label: 'Autre / Je ne sais pas', value: 'autre' },
             ],
           },
           plusDeQuinzeAns: {
-            idKYC: 9,
             valeur: 'oui',
             reponsesPossibles: [
               {
@@ -92,7 +89,6 @@ describe('Fichier de tests concernant la récuperations des informations du loge
             ],
           },
           dpe: {
-            idKYC: 10,
             valeur: 'dpe_b',
             reponsesPossibles: [
               { label: 'A', value: 'dpe_a' },

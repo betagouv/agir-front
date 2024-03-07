@@ -5,8 +5,8 @@
       <div class="fr-mb-4w">
         <h3 class="fr-h4">Où habitez-vous ?</h3>
         <InputCodePostal
-          :default-value="logementViewModel.codePostal.valeur"
-          :default-select-value="logementViewModel.commune.valeur"
+          :default-value="logementViewModel.codePostal"
+          :default-select-value="logementViewModel.commune"
         />
       </div>
       <h3 class="fr-h4">Combien êtes-vous dans votre logement (vous inclus) ?</h3>
@@ -16,14 +16,14 @@
           name="nombre-adulte"
           class="fr-mr-8w fr-mb-2w"
           :min-value="1"
-          :default-value="logementViewModel.adultes.valeur"
+          :default-value="logementViewModel.adultes"
         />
         <InputNumberHorizontal
           label="Enfant(s) - moins de 18 ans"
           name="nombre-enfant"
           class="fr-mb-2w"
           :min-value="0"
-          :default-value="logementViewModel.enfants.valeur"
+          :default-value="logementViewModel.enfants"
         />
         <BoutonRadio
           class="fr-mb-2w fr-col-12"
@@ -100,10 +100,10 @@
 </template>
 
 <script setup lang="ts">
-  import { LogementViewModel } from '@/logement/recupererInformationLogement.usecase';
   import InputCodePostal from '@/components/dsfr/InputCodePostal.vue';
   import InputNumberHorizontal from '@/components/custom/InputNumberHorizontal.vue';
   import BoutonRadio from '@/components/custom/BoutonRadio.vue';
+  import { LogementViewModel } from '@/logement/ports/logement.presenter';
 
   defineModel<LogementViewModel>('logementViewModel', {
     type: Object,
