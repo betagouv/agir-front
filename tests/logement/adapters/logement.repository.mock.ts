@@ -7,4 +7,8 @@ export class MockLogementRepository implements LogementRepository {
   recupererInformation(_utilisateurId: string): Promise<Logement> {
     return Promise.resolve(this.logement);
   }
+
+  enregistrerLesInformations(utilisateurId: string, logement: Logement): Promise<void> {
+    throw new Error('Method not implemented.');
+  }
 }

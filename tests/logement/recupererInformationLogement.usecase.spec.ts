@@ -95,15 +95,15 @@ describe('Fichier de tests concernant la récuperations des informations du loge
             ],
           },
           dpe: {
-            valeur: 'dpe_b',
+            valeur: 'B',
             reponsesPossibles: [
-              { label: 'A', value: 'dpe_a' },
-              { label: 'B', value: 'dpe_b' },
-              { label: 'C', value: 'dpe_c' },
-              { label: 'D', value: 'dpe_d' },
-              { label: 'E', value: 'dpe_e' },
-              { label: 'F', value: 'dpe_f' },
-              { label: 'G', value: 'dpe_g' },
+              { label: 'A', value: 'A' },
+              { label: 'B', value: 'B' },
+              { label: 'C', value: 'C' },
+              { label: 'D', value: 'D' },
+              { label: 'E', value: 'E' },
+              { label: 'F', value: 'F' },
+              { label: 'G', value: 'G' },
             ],
           },
         });
