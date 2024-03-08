@@ -1,0 +1,17 @@
+root /app/dist;
+
+set $SCRIPT "script-src 'self' 'unsafe-inline' <%= ENV['CSP_SCRIPT'] %>";
+set $STYLE "style-src 'self' 'unsafe-inline'";
+set $IMG "img-src 'self' data: blob: <%= ENV['CSP_IMAGE'] %>";
+set $FONT "font-src 'self' data:  <%= ENV['CSP_FONT'] %>";
+set $DEFAULT "default-src 'self'";
+set $CONNECT "connect-src 'self' <%= ENV['CSP_CONNECT'] %>";
+set $FRAME "frame-src 'self' <%= ENV['CSP_FRAME'] %>";
+
+location / {
+  try_files $uri $uri/ /index.html =404;
+  add_header X-Frame-Options SAMEORIGIN;
+  add_header X-Content-Type-Options nosniff;
+  add_header X-XSS-Protection "1; mode=block";
+  add_header Content-Security-Policy "${SCRIPT}; ${STYLE}; ${IMG}; ${FONT}; ${DEFAULT}; ${CONNECT}; ${FRAME}";
+}
