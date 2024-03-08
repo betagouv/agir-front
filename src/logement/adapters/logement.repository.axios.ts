@@ -24,13 +24,13 @@ export enum ChauffageLogementApiModel {
 }
 
 export enum DPELogementApiModel {
-  A = 'dpe_a',
-  B = 'dpe_b',
-  C = 'dpe_c',
-  D = 'dpe_d',
-  E = 'dpe_e',
-  F = 'dpe_f',
-  G = 'dpe_g',
+  A = 'A',
+  B = 'B',
+  C = 'C',
+  D = 'D',
+  E = 'E',
+  F = 'F',
+  G = 'G',
 }
 
 export interface LogementApiModel {
@@ -40,13 +40,29 @@ export interface LogementApiModel {
   commune: string;
   type: TypeLogementApiModel;
   superficie: SuperficieLogementApiModel;
-  proprietaire: boolean;
+  proprietaire: 'oui' | 'non';
   chauffage: ChauffageLogementApiModel;
-  plus_de_15_ans: boolean;
+  plus_de_15_ans: 'oui' | 'non';
   dpe: DPELogementApiModel;
 }
 
 export class LogementRepositoryAxios implements LogementRepository {
+  @intercept401()
+  async enregistrerLesInformations(utilisateurId: string, logement: Logement): Promise<void> {
+    await AxiosFactory.getAxios().patch<LogementApiModel>(`utilisateurs/${utilisateurId}/logement`, {
+      code_postal: logement.codePostal,
+      commune: logement.commune,
+      nombre_adultes: logement.adultes,
+      nombre_enfants: logement.enfants,
+      type: logement.residence,
+      proprietaire: logement.proprietaire,
+      superficie: logement.superficie,
+      chauffage: logement.modeDeChauffage,
+      plus_de_15_ans: logement.plusDeQuinzeAns,
+      dpe: logement.dpe,
+    });
+  }
+
   @intercept401()
   async recupererInformation(utilisateurId: string): Promise<Logement> {
     const reponse = await AxiosFactory.getAxios().get<LogementApiModel>(`utilisateurs/${utilisateurId}/logement`);
@@ -57,10 +73,10 @@ export class LogementRepositoryAxios implements LogementRepository {
       adultes: reponse.data.nombre_adultes,
       enfants: reponse.data.nombre_enfants,
       residence: reponse.data.type,
-      proprietaire: reponse.data.proprietaire ? 'oui' : 'non',
+      proprietaire: reponse.data.proprietaire,
       superficie: reponse.data.superficie,
       modeDeChauffage: reponse.data.chauffage,
-      plusDeQuinzeAns: reponse.data.plus_de_15_ans ? 'oui' : 'non',
+      plusDeQuinzeAns: reponse.data.plus_de_15_ans,
       dpe: reponse.data.dpe,
     };
   }

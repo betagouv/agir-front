@@ -1,13 +1,14 @@
 <template>
   <div>
     <h2 class="fr-h2">Votre logement</h2>
-    <form>
+    <form @submit.prevent="enregistrerLesInformations">
       <div class="fr-mb-4w">
         <h3 class="fr-h4">Où habitez-vous ?</h3>
         <InputCodePostal
           :default-value="logementViewModel.codePostal"
           :default-select-value="logementViewModel.commune"
           v-model="logementViewModel.codePostal"
+          @update:selectedCommune="logementViewModel.commune = $event"
         />
       </div>
       <h3 class="fr-h4">Combien êtes-vous dans votre logement (vous inclus) ?</h3>
@@ -18,6 +19,7 @@
           class="fr-mr-8w fr-mb-2w"
           :min-value="1"
           :default-value="logementViewModel.adultes"
+          v-model="logementViewModel.adultes"
         />
         <InputNumberHorizontal
           label="Enfant(s) - moins de 18 ans"
@@ -25,6 +27,7 @@
           class="fr-mb-2w"
           :min-value="0"
           :default-value="logementViewModel.enfants"
+          v-model="logementViewModel.enfants"
         />
         <BoutonRadio
           class="fr-mb-2w fr-col-12"
@@ -92,9 +95,16 @@
           :default-value="logementViewModel.dpe.valeur"
           v-model="logementViewModel.dpe.valeur"
         />
-        <button class="fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-save-3-fill">
+        <button type="submit" class="fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-save-3-fill">
           Mettre à jour vos informations
         </button>
+        <Alert
+          v-if="alerte.isActive"
+          class="fr-col-12 fr-mt-2w"
+          :type="alerte.type"
+          :titre="alerte.titre"
+          :message="alerte.message"
+        />
       </div>
     </form>
   </div>
@@ -105,9 +115,34 @@
   import InputNumberHorizontal from '@/components/custom/InputNumberHorizontal.vue';
   import BoutonRadio from '@/components/custom/BoutonRadio.vue';
   import { LogementViewModel } from '@/logement/ports/logement.presenter';
+  import { EnregistrerInformationsLogementUsecase } from '@/logement/enregistrerInformationLogement.usecase';
+  import { LogementRepositoryAxios } from '@/logement/adapters/logement.repository.axios';
+  import { utilisateurStore } from '@/store/utilisateur';
+  import Alert from '@/components/custom/Alert.vue';
+  import { useAlerte } from '@/composables/useAlerte';
 
-  defineModel<LogementViewModel>('logementViewModel', {
+  const props = defineModel<LogementViewModel>('logementViewModel', {
     type: Object,
     required: true,
   });
+
+  const { alerte, afficherAlerte } = useAlerte();
+
+  const enregistrerLesInformations = () => {
+    const usecase = new EnregistrerInformationsLogementUsecase(new LogementRepositoryAxios());
+    usecase.execute(utilisateurStore().utilisateur.id, {
+      adultes: props.value.adultes,
+      enfants: props.value.enfants,
+      codePostal: props.value.codePostal,
+      commune: props.value.commune,
+      residence: props.value.residence.valeur,
+      superficie: props.value.superficie.valeur,
+      proprietaire: props.value.proprietaire.valeur,
+      modeDeChauffage: props.value.modeDeChauffage.valeur,
+      plusDeQuinzeAns: props.value.plusDeQuinzeAns.valeur,
+      dpe: props.value.dpe.valeur,
+    });
+
+    afficherAlerte('success', 'Succès', 'Vos informations ont été correctement mises à jour.');
+  };
 </script>
