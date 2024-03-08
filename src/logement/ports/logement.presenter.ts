@@ -1,10 +1,11 @@
 import { Logement } from '@/logement/recupererInformationLogement.usecase';
+import { LogementApiModel } from '@/logement/adapters/logement.repository.axios';
 
-interface LogementPlusieursReponsesPossiblesViewModel {
-  valeur: string;
+interface LogementPlusieursReponsesPossiblesViewModel<T> {
+  valeur: T;
   reponsesPossibles: {
     label: string;
-    value: string;
+    value: T;
   }[];
 }
 
@@ -13,12 +14,12 @@ export interface LogementViewModel {
   commune: string;
   adultes: number;
   enfants: number;
-  residence: LogementPlusieursReponsesPossiblesViewModel;
-  proprietaire: LogementPlusieursReponsesPossiblesViewModel;
-  superficie: LogementPlusieursReponsesPossiblesViewModel;
-  modeDeChauffage: LogementPlusieursReponsesPossiblesViewModel;
-  plusDeQuinzeAns: LogementPlusieursReponsesPossiblesViewModel;
-  dpe: LogementPlusieursReponsesPossiblesViewModel;
+  residence: LogementPlusieursReponsesPossiblesViewModel<LogementApiModel['type']>;
+  proprietaire: LogementPlusieursReponsesPossiblesViewModel<'oui' | 'non'>;
+  superficie: LogementPlusieursReponsesPossiblesViewModel<LogementApiModel['superficie']>;
+  modeDeChauffage: LogementPlusieursReponsesPossiblesViewModel<LogementApiModel['chauffage']>;
+  plusDeQuinzeAns: LogementPlusieursReponsesPossiblesViewModel<'oui' | 'non'>;
+  dpe: LogementPlusieursReponsesPossiblesViewModel<LogementApiModel['dpe']>;
 }
 
 export interface LogementPresenter {

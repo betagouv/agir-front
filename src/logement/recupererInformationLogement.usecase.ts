@@ -1,17 +1,18 @@
 import { LogementRepository } from '@/logement/ports/logement.repository';
 import { LogementPresenter } from '@/logement/ports/logement.presenter';
+import { LogementApiModel } from '@/logement/adapters/logement.repository.axios';
 
 export interface Logement {
   codePostal: string;
   commune: string;
   adultes: number;
   enfants: number;
-  residence: string;
-  proprietaire: string;
-  superficie: string;
-  modeDeChauffage: string;
-  plusDeQuinzeAns: string;
-  dpe: string;
+  residence: LogementApiModel['type'];
+  proprietaire: 'oui' | 'non';
+  superficie: LogementApiModel['superficie'];
+  modeDeChauffage: LogementApiModel['chauffage'];
+  plusDeQuinzeAns: 'oui' | 'non';
+  dpe: LogementApiModel['dpe'];
 }
 
 export class RecupererInformationLogementUseCase {

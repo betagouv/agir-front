@@ -1,6 +1,12 @@
 import { LogementPresenterImpl } from '@/logement/adapters/logement.presenter.impl';
 import { RecupererInformationLogementUseCase } from '@/logement/recupererInformationLogement.usecase';
 import { MockLogementRepository } from './adapters/logement.repository.mock';
+import {
+  ChauffageLogementApiModel,
+  DPELogementApiModel,
+  SuperficieLogementApiModel,
+  TypeLogementApiModel,
+} from '../../src/logement/adapters/logement.repository.axios';
 
 describe('Fichier de tests concernant la récuperations des informations du logement', () => {
   it('Doit recupérer les informations', () => {
@@ -11,12 +17,12 @@ describe('Fichier de tests concernant la récuperations des informations du loge
         commune: 'PARIS 01',
         adultes: 2,
         enfants: 1,
-        residence: 'appartement',
+        residence: TypeLogementApiModel.Appartement,
         proprietaire: 'oui',
-        superficie: 'superficie_100',
-        modeDeChauffage: 'gaz',
+        superficie: SuperficieLogementApiModel.Superficie_100,
+        modeDeChauffage: ChauffageLogementApiModel.Gaz,
         plusDeQuinzeAns: 'oui',
-        dpe: 'dpe_b',
+        dpe: DPELogementApiModel.B,
       }),
     );
 

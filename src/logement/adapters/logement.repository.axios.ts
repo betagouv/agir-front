@@ -2,17 +2,48 @@ import { Logement } from '@/logement/recupererInformationLogement.usecase';
 import { LogementRepository } from '@/logement/ports/logement.repository';
 import { AxiosFactory, intercept401 } from '@/axios.factory';
 
-interface LogementApiModel {
+export enum TypeLogementApiModel {
+  Maison = 'maison',
+  Appartement = 'appartement',
+}
+
+export enum SuperficieLogementApiModel {
+  Superficie_35 = 'superficie_35',
+  Superficie_70 = 'superficie_70',
+  Superficie_100 = 'superficie_100',
+  Superficie_150 = 'superficie_150',
+  Superficie_150_Et_Plus = 'superficie_150_et_plus',
+}
+
+export enum ChauffageLogementApiModel {
+  Electricite = 'electricite',
+  Bois = 'bois',
+  Fioul = 'fioul',
+  Gaz = 'gaz',
+  Autre = 'autre',
+}
+
+export enum DPELogementApiModel {
+  A = 'dpe_a',
+  B = 'dpe_b',
+  C = 'dpe_c',
+  D = 'dpe_d',
+  E = 'dpe_e',
+  F = 'dpe_f',
+  G = 'dpe_g',
+}
+
+export interface LogementApiModel {
   nombre_adultes: number;
   nombre_enfants: number;
   code_postal: string;
   commune: string;
-  type: 'maison' | 'appartement';
-  superficie: 'superficie_35' | 'superficie_70' | 'superficie_100' | 'superficie_150' | 'superficie_150_et_plus';
+  type: TypeLogementApiModel;
+  superficie: SuperficieLogementApiModel;
   proprietaire: boolean;
-  chauffage: 'electricite' | 'bois' | 'fioul' | 'gaz' | 'autre';
+  chauffage: ChauffageLogementApiModel;
   plus_de_15_ans: boolean;
-  dpe: 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G';
+  dpe: DPELogementApiModel;
 }
 
 export class LogementRepositoryAxios implements LogementRepository {

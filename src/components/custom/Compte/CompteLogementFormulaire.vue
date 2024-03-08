@@ -7,6 +7,7 @@
         <InputCodePostal
           :default-value="logementViewModel.codePostal"
           :default-select-value="logementViewModel.commune"
+          v-model="logementViewModel.codePostal"
         />
       </div>
       <h3 class="fr-h4">Combien êtes-vous dans votre logement (vous inclus) ?</h3>
