@@ -15,11 +15,11 @@ export interface Aides {
 export default class ChargementAidesUsecase {
   constructor(
     private chargementAidesRepositoryRepository: ChargementAidesRepository,
-    private publierEvenementRepository: PublierEvenementRepository
+    private publierEvenementRepository: PublierEvenementRepository,
   ) {}
 
-  async execute(utilisateurId: string, codePostal: string, presenter: ChargementAidesPresenter) {
-    const reponse = await this.chargementAidesRepositoryRepository.getAides(codePostal);
+  async execute(utilisateurId: string, presenter: ChargementAidesPresenter) {
+    const reponse = await this.chargementAidesRepositoryRepository.getAides(utilisateurId);
     await this.publierEvenementRepository.publierEvenement(utilisateurId, Evenemement.AIDES_CONSULTEES);
     presenter.presente(reponse);
   }

@@ -11,7 +11,7 @@
   import { onMounted, ref } from 'vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import { ChargementAidesPresenterImpl } from '@/aides/adapters/chargementAides.presenter.impl';
-  import { chargementAidesAxiosCmsRepository } from '@/aides/adapters/chargementAidesAxiosCms.repository';
+  import { chargementAidesAxiosRepository } from '@/aides/adapters/chargementAidesAxiosRepository';
   import ChargementAidesUsecase from '@/aides/chargementAides.usecase';
   import { AidesViewModel } from '@/aides/ports/chargementAides.presenter';
   import Aides from '@/components/custom/Aides/Aides.vue';
@@ -22,15 +22,14 @@
   const isLoading = ref<boolean>(true);
 
   onMounted(async () => {
-    const { id: utilisateurId, codePostal: utilisateurCodePostal } = utilisateurStore().utilisateur;
+    const { id: utilisateurId } = utilisateurStore().utilisateur;
     const usecase = new ChargementAidesUsecase(
-      new chargementAidesAxiosCmsRepository(),
-      new PublierEvenemntRepositoryAxios()
+      new chargementAidesAxiosRepository(),
+      new PublierEvenemntRepositoryAxios(),
     );
     await usecase.execute(
       utilisateurId,
-      utilisateurCodePostal,
-      new ChargementAidesPresenterImpl(aidesViewModel => (aides.value = aidesViewModel))
+      new ChargementAidesPresenterImpl(aidesViewModel => (aides.value = aidesViewModel)),
     );
     isLoading.value = false;
   });
