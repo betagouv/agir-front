@@ -2,16 +2,16 @@
   <fieldset
     :class="`fr-fieldset ${orientation === 'horizontal' && 'boutonRadio--horizontal'}`"
     :id="name"
-    aria-labelledby="radio-legend"
+    :aria-labelledby="`radio-legend-${name}`"
   >
     <legend
       class="fr-fieldset__legend--regular fr-fieldset__legend fr-pb-0"
       :class="legendeSize === 'l' ? 'fr-h4' : 'fr-mb-1w'"
-      id="radio-legend"
+      :id="`radio-legend-${name}`"
     >
       {{ legende }}
     </legend>
-    <div class="fr-grid-row full-width">
+    <div class="fr-grid-row">
       <div :class="`fr-fieldset__element ${col}`" v-for="option in options" :key="option.label">
         <div
           :class="`fr-radio-group border fr-col
@@ -21,14 +21,14 @@
         >
           <input
             type="radio"
-            :id="`${option.label}`"
+            :id="`${option.value}-${name}`"
             :name="name"
             :value="option.value"
             @change.prevent="onInputChange"
             :checked="option.value === defaultValue"
             :disabled="option.disabled"
           />
-          <label class="fr-label" :for="`${option.label}`">
+          <label class="fr-label" :for="`${option.value}-${name}`">
             {{ option.label }}
           </label>
         </div>

@@ -21,7 +21,7 @@
     name="seuil-revenu-fiscal-de-reference"
     orientation="horizontal"
     :options="seuilRevenuFiscalDeReference"
-    col="fr-col-md-4 fr-col-12"
+    col="fr-col"
     v-model="revenuFiscalDeReference"
     :default-value="revenuFiscalDeReference?.toString() || '0'"
   />
@@ -44,7 +44,7 @@
       data: {
         nombreDeParts: number;
         revenuFiscalDeReference: number | 0;
-      }
+      },
     ): void;
   }>();
 

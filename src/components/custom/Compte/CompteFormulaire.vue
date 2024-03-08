@@ -21,19 +21,6 @@
         <legend class="fr-fieldset__legend fr-px-0 fr-mx-0" id="donnee-fieldset-legend">
           <h2>Données personnelles</h2>
         </legend>
-        <div class="fr-col-12">
-          <InputCodePostal
-            v-model="compteUtlisateurViewModel.codePostal"
-            :defaultValue="compteUtlisateurViewModel.codePostal"
-            :defaultSelectValue="compteUtlisateurViewModel.commune"
-            @update:selectedCommune="compteUtlisateurViewModel.commune = $event"
-          />
-          <CarteInfo class="fr-mt-3w">
-            <p class="fr-icon-information-line fr-m-0">
-              Votre <strong>code postal</strong> permet de consulter les aides locales.
-            </p>
-          </CarteInfo>
-        </div>
         <div class="fr-grid fr-grid-row">
           <div class="fr-col-12">
             <InputTrancheDeRevenu @update:part-et-revenu="updatePartEtRevenu" />
@@ -68,7 +55,6 @@
   import { SessionRepositoryStore } from '@/authentification/adapters/session.repository.store';
   import InputText from '@/components/dsfr/InputText.vue';
   import InputMail from '@/components/dsfr/InputMail.vue';
-  import InputCodePostal from '@/components/dsfr/InputCodePostal.vue';
   import Alert from '@/components/custom/Alert.vue';
   import CarteInfo from '@/components/custom/CarteInfo.vue';
   import InputTrancheDeRevenu from '@/components/custom/InputTrancheDeRevenu.vue';
@@ -90,7 +76,7 @@
 
     const usecase = new MettreAJourCompteUtilisateurUsecase(
       new CompteUtilisateurRepositoryImpl(),
-      new SessionRepositoryStore()
+      new SessionRepositoryStore(),
     );
 
     await usecase.execute(compteUtlisateurViewModel.value);
