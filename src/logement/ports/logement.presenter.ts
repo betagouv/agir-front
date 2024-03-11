@@ -15,10 +15,10 @@ export interface LogementViewModel {
   adultes: number;
   enfants: number;
   residence: LogementPlusieursReponsesPossiblesViewModel<LogementApiModel['type']>;
-  proprietaire: LogementPlusieursReponsesPossiblesViewModel<'oui' | 'non'>;
+  proprietaire: LogementPlusieursReponsesPossiblesViewModel<boolean>;
   superficie: LogementPlusieursReponsesPossiblesViewModel<LogementApiModel['superficie']>;
   modeDeChauffage: LogementPlusieursReponsesPossiblesViewModel<LogementApiModel['chauffage']>;
-  plusDeQuinzeAns: LogementPlusieursReponsesPossiblesViewModel<'oui' | 'non'>;
+  plusDeQuinzeAns: LogementPlusieursReponsesPossiblesViewModel<boolean>;
   dpe: LogementPlusieursReponsesPossiblesViewModel<LogementApiModel['dpe']>;
 }
 

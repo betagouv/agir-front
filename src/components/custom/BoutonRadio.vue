@@ -43,16 +43,26 @@
     legendeSize: 'm' | 'l';
     orientation: 'vertical' | 'horizontal';
     name: string;
-    options: { label: string; value: string; disabled?: boolean; customClass?: string }[];
+    options: { label: string; value: string | boolean; disabled?: boolean; customClass?: string }[];
     col: string;
-    defaultValue?: string;
+    defaultValue?: string | boolean;
   }>();
 
   const emit = defineEmits(['update:modelValue']);
 
   const onInputChange = (event: Event) => {
     const input = event.target as HTMLInputElement;
-    emit('update:modelValue', input.value);
+    let valueToUpdate;
+
+    if (input.value === 'true') {
+      valueToUpdate = true;
+    } else if (input.value === 'false') {
+      valueToUpdate = false;
+    } else {
+      valueToUpdate = input.value;
+    }
+
+    emit('update:modelValue', valueToUpdate);
   };
 </script>
 
