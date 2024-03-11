@@ -15,7 +15,7 @@ export class QuestionRepositoryAxios implements QuestionRepository {
   @intercept401()
   async recupererListeQuestions(utilisateurId: string): Promise<Question[]> {
     const response = await AxiosFactory.getAxios().get<QuestionApiModel[]>(
-      `utilisateurs/${utilisateurId}/questionsKYC`
+      `utilisateurs/${utilisateurId}/questionsKYC`,
     );
     return response.data.map(question => ({
       id: question.id,
@@ -30,7 +30,7 @@ export class QuestionRepositoryAxios implements QuestionRepository {
   @intercept401()
   async recupererQuestion(questionId: string, utilisateurId: string): Promise<Question> {
     const response = await AxiosFactory.getAxios().get<QuestionApiModel>(
-      `utilisateurs/${utilisateurId}/questionsKYC/${questionId}`
+      `utilisateurs/${utilisateurId}/questionsKYC/${questionId}`,
     );
 
     return {

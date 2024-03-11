@@ -29,9 +29,14 @@
             :legende="questionViewModel.libelle"
             name="toto"
             orientation="vertical"
-            :options=" questionViewModel.reponses_possibles.map((reponsePossible:ReponsePossible) => ({ label: reponsePossible.label, value: reponsePossible.id })) "
+            :options="
+              questionViewModel.reponses_possibles.map((reponsePossible: ReponsePossible) => ({
+                label: reponsePossible.label,
+                value: reponsePossible.id,
+              }))
+            "
             v-model="reponse"
-            :default-value="reponse.toString()"
+            :default-value="reponse ? reponse.toString() : undefined"
           />
         </div>
         <button class="fr-btn fr-btn--lg" title="Valider" :disabled="isButtonDisabled">Valider</button>
@@ -82,7 +87,7 @@
       new QuestionPresenterImpl((viewModel: QuestionViewModel) => {
         questionViewModel.value = viewModel;
         reponse.value = viewModel.reponses;
-      })
+      }),
     );
     isLoading.value = false;
   });
@@ -90,7 +95,7 @@
   const validerLaReponse = async () => {
     const envoyerReponseUsecase = new EnvoyerReponseUsecase(
       new QuestionRepositoryAxios(),
-      ToDoListEventBusImpl.getInstance()
+      ToDoListEventBusImpl.getInstance(),
     );
     envoyerReponseUsecase.execute(utilisateurId, questionId, [reponse.value].flat());
 
