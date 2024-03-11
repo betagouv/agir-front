@@ -78,7 +78,9 @@ export class LinkyRepositoryAxios implements LinkyRepository {
       estConfigure: reponse.data.is_configured,
       estActif: reponse.data.is_activated,
       estFonctionnel: reponse.data.is_fully_running,
-      configurationEnErreur: reponse.data.configuration.error_code !== '' ? true : false,
+      configurationEnErreur: reponse.data.configuration.error_code
+        ? reponse.data.configuration.error_code !== '0'
+        : false,
     };
   }
 }
