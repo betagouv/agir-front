@@ -8,10 +8,10 @@ export interface Logement {
   adultes: number;
   enfants: number;
   residence: LogementApiModel['type'];
-  proprietaire: 'oui' | 'non';
+  proprietaire: boolean;
   superficie: LogementApiModel['superficie'];
   modeDeChauffage: LogementApiModel['chauffage'];
-  plusDeQuinzeAns: 'oui' | 'non';
+  plusDeQuinzeAns: boolean;
   dpe: LogementApiModel['dpe'];
 }
 

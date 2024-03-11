@@ -18,10 +18,10 @@ describe('Fichier de tests concernant la récuperations des informations du loge
         adultes: 2,
         enfants: 1,
         residence: TypeLogementApiModel.Appartement,
-        proprietaire: 'oui',
+        proprietaire: true,
         superficie: SuperficieLogementApiModel.Superficie_100,
         modeDeChauffage: ChauffageLogementApiModel.Gaz,
-        plusDeQuinzeAns: 'oui',
+        plusDeQuinzeAns: true,
         dpe: DPELogementApiModel.B,
       }),
     );
@@ -49,15 +49,15 @@ describe('Fichier de tests concernant la récuperations des informations du loge
             ],
           },
           proprietaire: {
-            valeur: 'oui',
+            valeur: true,
             reponsesPossibles: [
               {
                 label: 'Oui',
-                value: 'oui',
+                value: true,
               },
               {
                 label: 'Non',
-                value: 'non',
+                value: false,
               },
             ],
           },
@@ -82,15 +82,15 @@ describe('Fichier de tests concernant la récuperations des informations du loge
             ],
           },
           plusDeQuinzeAns: {
-            valeur: 'oui',
+            valeur: true,
             reponsesPossibles: [
               {
                 label: 'Oui',
-                value: 'oui',
+                value: true,
               },
               {
                 label: 'Non',
-                value: 'non',
+                value: false,
               },
             ],
           },

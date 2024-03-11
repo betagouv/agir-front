@@ -34,11 +34,11 @@ export class LogementPresenterImpl {
         reponsesPossibles: [
           {
             label: 'Oui',
-            value: 'oui',
+            value: true,
           },
           {
             label: 'Non',
-            value: 'non',
+            value: false,
           },
         ],
       },
@@ -67,11 +67,11 @@ export class LogementPresenterImpl {
         reponsesPossibles: [
           {
             label: 'Oui',
-            value: 'oui',
+            value: true,
           },
           {
             label: 'Non',
-            value: 'non',
+            value: false,
           },
         ],
       },
