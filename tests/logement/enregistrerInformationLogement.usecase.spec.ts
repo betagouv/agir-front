@@ -18,9 +18,9 @@ describe("Fichier de tests concernant l'enregistrement des informations du logem
       commune: 'PARIS 01',
       residence: TypeLogementApiModel.Appartement,
       superficie: SuperficieLogementApiModel.Superficie_150_Et_Plus,
-      proprietaire: 'oui',
+      proprietaire: true,
       modeDeChauffage: ChauffageLogementApiModel.Bois,
-      plusDeQuinzeAns: 'non',
+      plusDeQuinzeAns: false,
       dpe: DPELogementApiModel.B,
     };
     const spyLogementRepository = new LogementRepositorySpy();
@@ -38,9 +38,9 @@ describe("Fichier de tests concernant l'enregistrement des informations du logem
       commune: 'PARIS 01',
       residence: TypeLogementApiModel.Appartement,
       superficie: SuperficieLogementApiModel.Superficie_150_Et_Plus,
-      proprietaire: 'oui',
+      proprietaire: true,
       modeDeChauffage: ChauffageLogementApiModel.Bois,
-      plusDeQuinzeAns: 'non',
+      plusDeQuinzeAns: false,
       dpe: DPELogementApiModel.B,
     });
   });
