@@ -120,6 +120,7 @@
   import { utilisateurStore } from '@/store/utilisateur';
   import Alert from '@/components/custom/Alert.vue';
   import { useAlerte } from '@/composables/useAlerte';
+  import { SessionRepositoryStore } from '@/authentification/adapters/session.repository.store';
 
   const props = defineModel<LogementViewModel>('logementViewModel', {
     type: Object,
@@ -129,7 +130,10 @@
   const { alerte, afficherAlerte } = useAlerte();
 
   const enregistrerLesInformations = () => {
-    const usecase = new EnregistrerInformationsLogementUsecase(new LogementRepositoryAxios());
+    const usecase = new EnregistrerInformationsLogementUsecase(
+      new LogementRepositoryAxios(),
+      new SessionRepositoryStore(),
+    );
     usecase.execute(utilisateurStore().utilisateur.id, {
       adultes: props.value.adultes,
       enfants: props.value.enfants,
