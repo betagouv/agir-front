@@ -8,6 +8,7 @@ import onboardingRoutes from '@/router/onboarding/routes';
 import coachRoutes from '@/router/coach/routes';
 import kycRoutes from '@/router/kyc/routes';
 import { RouteCoachName } from '@/router/coach/routeCoachName';
+import defiRoutes from '@/router/defis/routes';
 const Authentification = () => import('@/components/Authentification.vue');
 const Page404 = () => import('@/components/pages/Page404.vue');
 const FranceConnectCallBack = () => import('@/components/FranceConnectCallBack.vue');
@@ -33,6 +34,7 @@ enum RouteCommunePath {
 }
 
 const routes: RouteRecordRaw[] = [
+  ...defiRoutes,
   ...kycRoutes,
   ...compteRoutes,
   ...coachRoutes,

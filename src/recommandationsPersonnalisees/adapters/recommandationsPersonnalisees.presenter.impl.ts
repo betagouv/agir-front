@@ -3,6 +3,10 @@ import { InteractionType } from '@/shell/interactionType';
 import { RecommandationsPersonnaliseesPresenter } from '@/recommandationsPersonnalisees/ports/recommandationsPersonnalisees.presenter';
 import { buildUrl } from '@/shell/buildUrl';
 import { pascalCase } from '@/shell/pascalCase';
+import { RouteAidesPath } from '@/router/aides/routes';
+import { RouteCoachPath } from '@/router/coach/routes';
+import { RouteArticlePath } from '@/router/articles/routes';
+import { RouteDefiPath } from '@/router/defis/routes';
 
 export interface RecommandationViewModel {
   titre: string;
@@ -50,7 +54,10 @@ export class RecommandationsPersonnaliseesPresenterImpl implements Recommandatio
               url: this.determineUrl(recommandationPersonnalisee),
               contentId: recommandationPersonnalisee.idDuContenu,
               nombreDePointsAGagner: recommandationPersonnalisee.nombreDePointsAGagner,
-              type: pascalCase(recommandationPersonnalisee.type),
+              type:
+                recommandationPersonnalisee.type === InteractionType.DEFIS
+                  ? 'Défi'
+                  : pascalCase(recommandationPersonnalisee.type),
               description: recommandationPersonnalisee.sousTitre,
             };
           })
@@ -62,15 +69,17 @@ export class RecommandationsPersonnaliseesPresenterImpl implements Recommandatio
   private determineUrl(recommandationPersonnalisee: RecommandationPersonnalisee) {
     switch (recommandationPersonnalisee.type) {
       case InteractionType.AIDE:
-        return '/vos-aides';
+        return RouteAidesPath.VOS_AIDES;
       case InteractionType.QUIZ:
-        return `/agir/quiz/${recommandationPersonnalisee.idDuContenu}`;
+        return `${RouteCoachPath.COACH + RouteCoachPath.QUIZ}/${recommandationPersonnalisee.idDuContenu}`;
       case InteractionType.ARTICLE:
-        return `/article/${buildUrl(recommandationPersonnalisee.titre)}/${recommandationPersonnalisee.idDuContenu}`;
+        return `${RouteArticlePath.ARTICLE}${buildUrl(recommandationPersonnalisee.titre)}/${recommandationPersonnalisee.idDuContenu}`;
       case InteractionType.KYC:
         return '';
       case InteractionType.SUIVIDUJOUR:
         return '/agir/suivi-du-jour';
+      case InteractionType.DEFIS:
+        return `${RouteDefiPath.DEFI + recommandationPersonnalisee.idDuContenu}`;
       default:
         return '';
     }

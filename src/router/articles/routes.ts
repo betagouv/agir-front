@@ -2,7 +2,7 @@ const PageArticle = () => import('@/components/pages/PageArticle.vue');
 const PagePrevisualisationArticle = () => import('@/components/pages/PagePrevisualisationArticle.vue');
 import { RouteRecordRaw } from 'vue-router';
 
-enum RouteArticlePath {
+export enum RouteArticlePath {
   ARTICLE = '/article/',
   ARTICLE_TITRE = ':titre',
   ARTICLE_ID = '::id',

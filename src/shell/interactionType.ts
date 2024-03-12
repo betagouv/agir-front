@@ -7,4 +7,5 @@ export enum InteractionType {
   COMPTE = 'profile',
   SERVICE = 'service',
   RECOMMANDATION = 'recommandations',
+  DEFIS = 'defi',
 }

@@ -37,8 +37,8 @@ export class MockRecommandationsPersonnaliseesRepository implements Recommandati
         idDuContenu: '1',
       },
       {
-        type: InteractionType.ARTICLE,
-        titre: 'un autre article',
+        type: InteractionType.DEFIS,
+        titre: 'Un défi',
         sousTitre: 'sousTitre',
         categorie: '🌍 Global',
         nombreDePointsAGagner: 'nombreDePointsAGagner',
