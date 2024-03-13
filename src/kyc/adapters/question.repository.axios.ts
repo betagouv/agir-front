@@ -9,6 +9,7 @@ interface QuestionApiModel {
   reponses_possibles: string[];
   points: number;
   reponse: string[];
+  categorie: string;
 }
 
 export class QuestionRepositoryAxios implements QuestionRepository {
@@ -17,14 +18,16 @@ export class QuestionRepositoryAxios implements QuestionRepository {
     const response = await AxiosFactory.getAxios().get<QuestionApiModel[]>(
       `utilisateurs/${utilisateurId}/questionsKYC`,
     );
-    return response.data.map(question => ({
-      id: question.id,
-      libelle: question.question,
-      type: question.type,
-      reponses_possibles: question.reponses_possibles || [],
-      points: question.points,
-      reponse: question.reponse,
-    }));
+    return response.data
+      .filter(question => question.categorie !== 'defi')
+      .map(question => ({
+        id: question.id,
+        libelle: question.question,
+        type: question.type,
+        reponses_possibles: question.reponses_possibles || [],
+        points: question.points,
+        reponse: question.reponse,
+      }));
   }
 
   @intercept401()
