@@ -5,7 +5,7 @@ const PageMotDePasseOublie = () => import('@/components/pages/PageMotDePasseOubl
 const PageCompteOptionsAvancees = () => import('@/components/pages/PageCompteOptionsAvancees.vue');
 const PageCompteMieuxVousConnaitre = () => import('@/components/pages/PageCompteMieuxVousConnaitre.vue');
 const PageCompteLogement = () => import('@/components/pages/PageCompteLogement.vue');
-
+const PageCompteVosDefis = () => import('@/components/pages/PageCompteVosDefis.vue');
 import { onboardingStore } from '@/store/onboarding';
 import { RouteRecordRaw } from 'vue-router';
 import { RouteCompteName } from '@/router/compte/routeCompteName';
@@ -19,6 +19,7 @@ enum RouteComptePath {
   MOT_DE_PASSE_OUBLIE = '/mot-de-passe-oublie',
   MIEUX_VOUS_CONNAITRE = '/mon-compte/mieux-vous-connaitre',
   LOGEMENT = '/mon-compte/logement',
+  DEFIS = '/mon-compte/vos-defis',
 }
 
 const compteRoutes: RouteRecordRaw[] = [
@@ -44,6 +45,11 @@ const compteRoutes: RouteRecordRaw[] = [
         path: RouteComptePath.LOGEMENT,
         name: RouteCompteName.LOGEMENT,
         component: PageCompteLogement,
+      },
+      {
+        path: RouteComptePath.DEFIS,
+        name: RouteCompteName.DEFIS,
+        component: PageCompteVosDefis,
       },
     ],
   },

@@ -7,4 +7,5 @@ export enum RouteCompteName {
   VALIDATION_COMPTE = 'validation-compte',
   MOT_DE_PASSE_OUBLIE = 'mot-de-passe-oublie',
   LOGEMENT = 'logement',
+  DEFIS = 'vos-defis',
 }
