@@ -8,7 +8,7 @@ const PageLinky = () => import('@/components/pages/PageLinky.vue');
 import { RouteRecordRaw } from 'vue-router';
 import { RouteCoachName } from '@/router/coach/routeCoachName';
 
-enum RouteCoachPath {
+export enum RouteCoachPath {
   COACH = '/agir/',
   SERVICES = 'services',
   SERVICES_LINKY = '/agir/services/linky',

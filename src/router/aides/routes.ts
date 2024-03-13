@@ -6,7 +6,7 @@ const PageAidesVeloFormulaire = () => import('@/components/pages/PageAidesVeloFo
 import { RouteRecordRaw } from 'vue-router';
 import { RouteAidesName } from '@/router/aides/routeAidesName';
 
-enum RouteAidesPath {
+export enum RouteAidesPath {
   VOS_AIDES = '/vos-aides/',
   RETROFIT = 'retrofit',
   FORMULAIRE = 'formulaire',

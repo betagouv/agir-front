@@ -51,10 +51,10 @@ describe('Fichier de tests concernant le chargement des recommandations personna
           {
             image: 'illustrationURL',
             thematique: '🌍 Global',
-            titre: 'un autre article',
-            url: '/article/un-autre-article/1',
+            titre: 'Un défi',
+            type: 'Défi',
+            url: '/defi/1',
             contentId: '1',
-            type: 'Article',
             nombreDePointsAGagner: 'nombreDePointsAGagner',
             description: 'sousTitre',
           },
