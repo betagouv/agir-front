@@ -1,7 +1,7 @@
 import { Utilisateur, UtilisateurRepository } from '@/authentification/ports/utilisateur.repository';
 
 export interface SessionRepository {
-  sauvegarderUtilisateur(utilisateur: Partial<Utilisateur>);
+  sauvegarderUtilisateur(utilisateur: Partial<Utilisateur>): void;
   nouvelleFeatureDebloquee(featureDebloquee: string): void;
 }
 export class AuthentifierUtilisateurUsecase {
