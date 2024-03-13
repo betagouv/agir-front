@@ -95,6 +95,19 @@
           :default-value="logementViewModel.dpe.valeur"
           v-model="logementViewModel.dpe.valeur"
         />
+        <CarteInfo>
+          <p class="fr-text--bold">
+            <span class="fr-icon-question-line" aria-hidden="true"></span>
+            Qu'est-ce qu'un DPE ?
+          </p>
+          <p class="fr-m-0">
+            Le DPE, c'est le <strong>Diagnostic de Performance Énergétique de votre logement</strong>. Il mesure d'un
+            côté l'énergie nécessaire pour y maintenir une température standard, et de l'autre l'empreinte climat
+            associée. Le DPE est exprimé comme une note de A (très bon) à G (passoire thermique). Vous pouvez obtenir
+            une estimation de votre DPE en 2 clics avec le service
+            <a href="https://particulier.gorenove.fr" target="_blank" rel="noreferrer">Go Renov</a>.
+          </p>
+        </CarteInfo>
         <button type="submit" class="fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-save-3-fill">
           Mettre à jour vos informations
         </button>
@@ -120,6 +133,7 @@
   import { utilisateurStore } from '@/store/utilisateur';
   import Alert from '@/components/custom/Alert.vue';
   import { useAlerte } from '@/composables/useAlerte';
+  import CarteInfo from '@/components/custom/CarteInfo.vue';
   import { SessionRepositoryStore } from '@/authentification/adapters/session.repository.store';
 
   const props = defineModel<LogementViewModel>('logementViewModel', {
