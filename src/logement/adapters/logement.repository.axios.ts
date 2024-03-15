@@ -73,10 +73,10 @@ export class LogementRepositoryAxios implements LogementRepository {
       adultes: reponse.data.nombre_adultes,
       enfants: reponse.data.nombre_enfants,
       residence: reponse.data.type,
-      proprietaire: false, // reponse.data.proprietaire,
+      proprietaire: reponse.data.proprietaire,
       superficie: reponse.data.superficie,
       modeDeChauffage: reponse.data.chauffage,
-      plusDeQuinzeAns: true, //reponse.data.plus_de_15_ans,
+      plusDeQuinzeAns: reponse.data.plus_de_15_ans,
       dpe: reponse.data.dpe,
     };
   }
