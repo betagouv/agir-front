@@ -1,6 +1,8 @@
 import { Logement } from '@/logement/recupererInformationLogement.usecase';
 import { LogementRepository } from '@/logement/ports/logement.repository';
 import { AxiosFactory, intercept401 } from '@/axios.factory';
+import { Cachable, cache, removeCache } from '@/shell/cache/cacheDecorator';
+import { sessionAppRawDataStorage } from '@/shell/cache/appRawDataStorage';
 
 export enum TypeLogementApiModel {
   Maison = 'maison',
@@ -46,8 +48,15 @@ export interface LogementApiModel {
   dpe: DPELogementApiModel;
 }
 
-export class LogementRepositoryAxios implements LogementRepository {
+export class LogementRepositoryAxios extends Cachable implements LogementRepository {
+  private static LOGEMENT_CACHE_KEY = 'logement';
+
+  constructor() {
+    super(sessionAppRawDataStorage);
+  }
+
   @intercept401()
+  @removeCache({ key: LogementRepositoryAxios.LOGEMENT_CACHE_KEY })
   async enregistrerLesInformations(utilisateurId: string, logement: Logement): Promise<void> {
     await AxiosFactory.getAxios().patch(`utilisateurs/${utilisateurId}/logement`, {
       code_postal: logement.codePostal,
@@ -64,6 +73,7 @@ export class LogementRepositoryAxios implements LogementRepository {
   }
 
   @intercept401()
+  @cache({ key: LogementRepositoryAxios.LOGEMENT_CACHE_KEY })
   async recupererInformation(utilisateurId: string): Promise<Logement> {
     const reponse = await AxiosFactory.getAxios().get<LogementApiModel>(`utilisateurs/${utilisateurId}/logement`);
 
@@ -73,10 +83,10 @@ export class LogementRepositoryAxios implements LogementRepository {
       adultes: reponse.data.nombre_adultes,
       enfants: reponse.data.nombre_enfants,
       residence: reponse.data.type,
-      proprietaire: false, // reponse.data.proprietaire,
+      proprietaire: reponse.data.proprietaire,
       superficie: reponse.data.superficie,
       modeDeChauffage: reponse.data.chauffage,
-      plusDeQuinzeAns: true, //reponse.data.plus_de_15_ans,
+      plusDeQuinzeAns: reponse.data.plus_de_15_ans,
       dpe: reponse.data.dpe,
     };
   }

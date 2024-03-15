@@ -51,6 +51,9 @@ export const onboardingStore = defineStore('onboarding', {
     reset() {
       this.$reset();
     },
+    remove() {
+      localStorage.removeItem('onboarding');
+    },
   },
 
   getters: {
