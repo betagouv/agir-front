@@ -1,5 +1,5 @@
 <template>
-  <div class="fr-grid-row border-radius--md full-height background--white">
+  <div class="fr-grid-row border-radius--md full-height background--white shadow">
     <img class="fr-col-4 border-radius--md img-object-fit-cover" :src="recommandation.image" alt="" />
     <div class="fr-col-8 fr-p-3w">
       <div class="fr-mb-2w">
@@ -15,7 +15,7 @@
       <router-link
         :to="recommandation.bouton.url"
         :class="`fr-btn ${recommandation.bouton.style}`"
-        :title="recommandation.titre"
+        :title="`${recommandation.bouton.libelle} : ${recommandation.titre}`"
       >
         {{ recommandation.bouton.libelle }}
       </router-link>
