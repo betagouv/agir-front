@@ -23,15 +23,17 @@
   import CompteMenuLateral from '@/components/custom/Compte/CompteMenuLateral.vue';
   import { utilisateurStore } from '@/store/utilisateur';
   import Cookies from 'js-cookie';
-  import router from '@/router';
+  import router, { RouteCommuneName } from '@/router';
+  import { sessionAppRawDataStorage } from '@/shell/cache/appRawDataStorage';
 
   const store = utilisateurStore();
 
   defineProps<{ pageCourante: string }>();
 
-  const logout = () => {
+  const logout = async () => {
+    sessionAppRawDataStorage.clearAllItems();
     store.reset();
     Cookies.remove('bearer');
-    router.replace('/');
+    await router.replace({ name: RouteCommuneName.ACCUEIL });
   };
 </script>

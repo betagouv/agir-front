@@ -7,6 +7,8 @@ import {
 import { AxiosFactory, intercept401 } from '@/axios.factory';
 import { Response } from 'redaxios';
 import { RepositoryError } from '@/shell/repositoryError';
+import { Cachable, cache, removeCache } from '@/shell/cache/cacheDecorator';
+import { sessionAppRawDataStorage } from '@/shell/cache/appRawDataStorage';
 
 interface CompteUtilisateurApiModel {
   id: string;
@@ -20,8 +22,13 @@ interface CompteUtilisateurApiModel {
   abonnement_ter_loire: boolean;
   fonctionnalites_debloquees: string[];
 }
-export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurRepository {
+export class CompteUtilisateurRepositoryImpl extends Cachable implements CompteUtilisateurRepository {
+  private static COMPTE_CACHE_KEY = 'compte';
+  constructor() {
+    super(sessionAppRawDataStorage);
+  }
   @intercept401()
+  @cache({ key: CompteUtilisateurRepositoryImpl.COMPTE_CACHE_KEY })
   async getCompteUtilisateur(idUtilisateur: string): Promise<CompteUtilisateur> {
     const axiosInstance = AxiosFactory.getAxios();
     const response: Response<CompteUtilisateurApiModel> = await axiosInstance.get(`/utilisateurs/${idUtilisateur}`);
@@ -40,6 +47,7 @@ export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurReposit
   }
 
   @intercept401()
+  @removeCache({ key: CompteUtilisateurRepositoryImpl.COMPTE_CACHE_KEY })
   async mettreAjour(compteUtilisateur: CompteUtilisateur) {
     const axiosInstance = AxiosFactory.getAxios();
     await axiosInstance.patch(`/utilisateurs/${compteUtilisateur.id}/profile`, {

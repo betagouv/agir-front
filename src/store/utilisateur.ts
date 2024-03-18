@@ -53,6 +53,10 @@ export const utilisateurStore = defineStore('utilisateur', {
     reset() {
       this.$reset();
     },
+
+    remove() {
+      localStorage.removeItem('utilisateur');
+    },
   },
   persist: {
     storage: localStorage,

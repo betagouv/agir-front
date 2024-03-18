@@ -7,6 +7,8 @@
   import Authentification from '@/components/Authentification.vue';
   import { utilisateurStore } from '@/store/utilisateur';
   import Cookies from 'js-cookie';
-  utilisateurStore().reset();
+  import { sessionAppRawDataStorage } from '@/shell/cache/appRawDataStorage';
+  utilisateurStore().remove();
   Cookies.remove('bearer');
+  sessionAppRawDataStorage.clearAllItems();
 </script>

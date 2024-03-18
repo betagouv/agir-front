@@ -1,6 +1,8 @@
 import { AxiosFactory, intercept401 } from '@/axios.factory';
 import { BilanOnboardingRepository, BilanOnboarding } from '@/bilanOnboarding/ports/bilanOnboarding.repository';
+import { Cachable, cache } from '@/shell/cache/cacheDecorator';
 import { onboardingBilanStore } from '@/store/onboardingBilan';
+import { sessionAppRawDataStorage } from '@/shell/cache/appRawDataStorage';
 
 interface BilanOnboardingApiModel {
   onboarding_result: {
@@ -11,8 +13,15 @@ interface BilanOnboardingApiModel {
   };
 }
 
-export class BilanOnboardingRepositoryAxios implements BilanOnboardingRepository {
+export class BilanOnboardingRepositoryAxios extends Cachable implements BilanOnboardingRepository {
+  private static BILAN_CACHE_KEY = 'bilan';
+
+  constructor() {
+    super(sessionAppRawDataStorage);
+  }
+
   @intercept401()
+  @cache({ key: BilanOnboardingRepositoryAxios.BILAN_CACHE_KEY })
   async recupererBilanOnboarding(utilisateurId: string): Promise<BilanOnboarding> {
     const store = onboardingBilanStore();
     if (store.bilan) return store.bilan;

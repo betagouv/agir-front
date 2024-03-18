@@ -44,6 +44,8 @@
   import { utilisateurStore } from '@/store/utilisateur';
   import { SupprimerCompteUtilisateurUsecase } from '@/compte/supprimerCompteUtilisateur.usecase';
   import { CompteUtilisateurRepositoryImpl } from '@/compte/adapters/compteUtilisateur.repository.impl';
+  import { sessionAppRawDataStorage } from '@/shell/cache/appRawDataStorage';
+  import Cookies from 'js-cookie';
 
   const modaleId = 'modale-suppression-compte';
 
@@ -55,6 +57,8 @@
     usecase.execute(idUtilisateur);
 
     utilisateurStore().reset();
+    sessionAppRawDataStorage.clearAllItems();
+    Cookies.remove('bearer');
     router.replace('/');
   };
 </script>
