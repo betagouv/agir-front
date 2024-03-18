@@ -28,8 +28,8 @@ export class MockRecommandationsPersonnaliseesRepository implements Recommandati
         idDuContenu: '2',
       },
       {
-        type: InteractionType.QUIZ,
-        titre: 'Un autre Quiz',
+        type: InteractionType.AIDE,
+        titre: 'Aide vélo',
         sousTitre: 'sousTitre',
         categorie: '🌍 Global',
         nombreDePointsAGagner: 'nombreDePointsAGagner',

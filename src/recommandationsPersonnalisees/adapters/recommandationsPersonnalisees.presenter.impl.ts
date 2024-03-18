@@ -2,24 +2,33 @@ import { RecommandationPersonnalisee } from '@/recommandationsPersonnalisees/rec
 import { InteractionType } from '@/shell/interactionType';
 import { RecommandationsPersonnaliseesPresenter } from '@/recommandationsPersonnalisees/ports/recommandationsPersonnalisees.presenter';
 import { buildUrl } from '@/shell/buildUrl';
-import { pascalCase } from '@/shell/pascalCase';
 import { RouteAidesPath } from '@/router/aides/routes';
 import { RouteCoachPath } from '@/router/coach/routes';
 import { RouteArticlePath } from '@/router/articles/routes';
 import { RouteDefiPath } from '@/router/defis/routes';
 
+interface TagViewModel {
+  libelle: string;
+  style: string;
+}
+
+interface BoutonViewModel {
+  libelle: string;
+  style: string;
+  url: string;
+}
+
 export interface RecommandationViewModel {
   titre: string;
   image: string;
   description: string;
-  url: string;
+  bouton: BoutonViewModel;
   contentId: string;
   nombreDePointsAGagner: string;
-  type: string;
+  type: TagViewModel;
   thematique: string;
 }
 export interface RecommandationPersonnaliseeViewModel {
-  recommandationHighlight: RecommandationViewModel;
   recommandationsList: RecommandationViewModel[];
 }
 
@@ -28,60 +37,86 @@ export class RecommandationsPersonnaliseesPresenterImpl implements Recommandatio
     private viewModel: (recommandationPersonnaliseeViewModels: RecommandationPersonnaliseeViewModel) => void,
   ) {}
   presente(recommandationsPersonnalisees: RecommandationPersonnalisee[]): void {
-    const recommandationHighlight = recommandationsPersonnalisees.find(
-      recommandationPersonnalisee => recommandationPersonnalisee.type === InteractionType.ARTICLE,
-    );
+    this.viewModel({
+      recommandationsList: recommandationsPersonnalisees
+        .map(recommandationPersonnalisee => {
+          return {
+            thematique: recommandationPersonnalisee.categorie,
+            titre: recommandationPersonnalisee.titre,
+            image: recommandationPersonnalisee.illustrationURL,
+            bouton: this.determineBouton(recommandationPersonnalisee),
+            contentId: recommandationPersonnalisee.idDuContenu,
+            nombreDePointsAGagner: recommandationPersonnalisee.nombreDePointsAGagner,
+            type: this.determineTypeTag(recommandationPersonnalisee.type),
+            description: recommandationPersonnalisee.sousTitre,
+          };
+        })
+        .slice(0, 6),
+    });
+  }
 
-    if (recommandationHighlight) {
-      this.viewModel({
-        recommandationHighlight: {
-          titre: recommandationHighlight.titre,
-          image: recommandationHighlight.illustrationURL,
-          description: recommandationHighlight.sousTitre,
-          url: this.determineUrl(recommandationHighlight),
-          contentId: recommandationHighlight.idDuContenu,
-          nombreDePointsAGagner: recommandationHighlight.nombreDePointsAGagner,
-          type: recommandationHighlight.type,
-          thematique: recommandationHighlight.categorie,
-        },
-        recommandationsList: recommandationsPersonnalisees
-          .filter(reco => reco !== recommandationHighlight)
-          .map(recommandationPersonnalisee => {
-            return {
-              thematique: recommandationPersonnalisee.categorie,
-              titre: recommandationPersonnalisee.titre,
-              image: recommandationPersonnalisee.illustrationURL,
-              url: this.determineUrl(recommandationPersonnalisee),
-              contentId: recommandationPersonnalisee.idDuContenu,
-              nombreDePointsAGagner: recommandationPersonnalisee.nombreDePointsAGagner,
-              type:
-                recommandationPersonnalisee.type === InteractionType.DEFIS
-                  ? 'Défi'
-                  : pascalCase(recommandationPersonnalisee.type),
-              description: recommandationPersonnalisee.sousTitre,
-            };
-          })
-          .slice(0, 3),
-      });
+  private determineBouton(recommandationPersonnalisee: RecommandationPersonnalisee): BoutonViewModel {
+    switch (recommandationPersonnalisee.type) {
+      case InteractionType.AIDE:
+        return {
+          libelle: "Simuler l'aide",
+          url: RouteAidesPath.VOS_AIDES,
+          style: 'fr-btn--secondary',
+        };
+      case InteractionType.QUIZ:
+        return {
+          libelle: 'Répondre au quiz',
+          url: `${RouteCoachPath.COACH + RouteCoachPath.QUIZ}/${recommandationPersonnalisee.idDuContenu}`,
+          style: 'fr-btn--secondary fr-btn--icon-left fr-icon-question-line',
+        };
+      case InteractionType.ARTICLE:
+        return {
+          libelle: "Lire l'article",
+          url: `${RouteArticlePath.ARTICLE}${buildUrl(recommandationPersonnalisee.titre)}/${recommandationPersonnalisee.idDuContenu}`,
+          style: 'fr-btn--secondary fr-btn--icon-left fr-icon-newspaper-line',
+        };
+      case InteractionType.DEFIS:
+        return {
+          libelle: 'Relever le défi',
+          url: `${RouteDefiPath.DEFI + recommandationPersonnalisee.idDuContenu}`,
+          style: 'fr-btn--icon-left fr-icon-check-line',
+        };
+      default:
+        return {
+          libelle: '',
+          url: '',
+          style: '',
+        };
     }
   }
 
-  private determineUrl(recommandationPersonnalisee: RecommandationPersonnalisee) {
-    switch (recommandationPersonnalisee.type) {
+  private determineTypeTag(type: InteractionType): TagViewModel {
+    switch (type) {
       case InteractionType.AIDE:
-        return RouteAidesPath.VOS_AIDES;
+        return {
+          libelle: 'Aide',
+          style: 'background--yellow',
+        };
       case InteractionType.QUIZ:
-        return `${RouteCoachPath.COACH + RouteCoachPath.QUIZ}/${recommandationPersonnalisee.idDuContenu}`;
+        return {
+          libelle: 'Quiz',
+          style: 'background--vert--bourgeon',
+        };
       case InteractionType.ARTICLE:
-        return `${RouteArticlePath.ARTICLE}${buildUrl(recommandationPersonnalisee.titre)}/${recommandationPersonnalisee.idDuContenu}`;
-      case InteractionType.KYC:
-        return '';
-      case InteractionType.SUIVIDUJOUR:
-        return '/agir/suivi-du-jour';
+        return {
+          libelle: 'Article',
+          style: 'background--caramel',
+        };
       case InteractionType.DEFIS:
-        return `${RouteDefiPath.DEFI + recommandationPersonnalisee.idDuContenu}`;
+        return {
+          libelle: 'Action',
+          style: 'background-bleu text--white',
+        };
       default:
-        return '';
+        return {
+          libelle: '',
+          style: '',
+        };
     }
   }
 }
