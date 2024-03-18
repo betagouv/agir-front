@@ -15,7 +15,7 @@ interface QuestionApiModel {
 export class QuestionRepositoryAxios implements QuestionRepository {
   @intercept401()
   async recupererListeQuestions(utilisateurId: string): Promise<Question[]> {
-    const response = await AxiosFactory.getAxios().get<QuestionApiModel[]>(
+    const response = await AxiosFactory.getInstance().axiosBack.get<QuestionApiModel[]>(
       `utilisateurs/${utilisateurId}/questionsKYC`,
     );
     return response.data
@@ -32,7 +32,7 @@ export class QuestionRepositoryAxios implements QuestionRepository {
 
   @intercept401()
   async recupererQuestion(questionId: string, utilisateurId: string): Promise<Question> {
-    const response = await AxiosFactory.getAxios().get<QuestionApiModel>(
+    const response = await AxiosFactory.getInstance().axiosBack.get<QuestionApiModel>(
       `utilisateurs/${utilisateurId}/questionsKYC/${questionId}`,
     );
 
@@ -48,7 +48,7 @@ export class QuestionRepositoryAxios implements QuestionRepository {
 
   @intercept401()
   async envoyerReponse(utilisateurId: string, questionId: string, reponse: string[]): Promise<void> {
-    const axios = AxiosFactory.getAxios();
+    const axios = AxiosFactory.getInstance().axiosBack;
     await axios.put(`/utilisateurs/${utilisateurId}/questionsKYC/${questionId}`, { reponse });
   }
 }

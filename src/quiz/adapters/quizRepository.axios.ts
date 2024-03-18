@@ -28,7 +28,7 @@ export interface QuiCMSAttributesModel {
           contenu: string;
         };
         id: string;
-      }
+      },
     ];
   };
 }
@@ -50,7 +50,7 @@ export interface QuizCMSModel {
 export class QuizRepositoryAxios implements QuizRepository {
   @intercept401()
   async noterQuiz(quizId: string, utilisateurId: string, note: 1 | 2 | 3 | 4): Promise<void> {
-    const axios = AxiosFactory.getAxios();
+    const axios = AxiosFactory.getInstance().axiosBack;
     await axios.post(`/utilisateurs/${utilisateurId}/events`, {
       type: 'like',
       number_value: note,
@@ -59,9 +59,9 @@ export class QuizRepositoryAxios implements QuizRepository {
     });
   }
   async getQuiz(idQuizz: string): Promise<Quiz> {
-    const axiosInstance = AxiosFactory.getCMSAxios();
+    const axiosInstance = AxiosFactory.getInstance().axiosCMS;
     const response: Response<QuizCMSModel> = await axiosInstance.get<QuizCMSModel>(
-      `quizzes/${idQuizz}?populate[0]=questions&populate[1]=questions.reponses&populate[2]=thematique_gamification&populate[3]=articles`
+      `quizzes/${idQuizz}?populate[0]=questions&populate[1]=questions.reponses&populate[2]=thematique_gamification&populate[3]=articles`,
     );
     return {
       titre: response.data.data.attributes.titre,
@@ -91,7 +91,7 @@ export class QuizRepositoryAxios implements QuizRepository {
 
   @intercept401()
   async terminerQuiz(idUtilisateur: string, idQuiz: string, score: number): Promise<void> {
-    const axiosInstance = AxiosFactory.getAxios();
+    const axiosInstance = AxiosFactory.getInstance().axiosBack;
     await axiosInstance.post(`/utilisateurs/${idUtilisateur}/events`, {
       type: 'quizz_score',
       content_id: idQuiz,
@@ -101,7 +101,7 @@ export class QuizRepositoryAxios implements QuizRepository {
 
   @intercept401()
   async marquerLeQuizArticleCommeLu(utilisateurId: string, articleId: string): Promise<void> {
-    const axios = AxiosFactory.getAxios();
+    const axios = AxiosFactory.getInstance().axiosBack;
     await axios.post(`/utilisateurs/${utilisateurId}/events`, {
       type: 'article_lu',
       content_id: articleId,

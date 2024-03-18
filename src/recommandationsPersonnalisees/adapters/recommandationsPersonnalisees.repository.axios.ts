@@ -23,7 +23,7 @@ export class RecommandationsPersonnaliseesRepositoryAxios implements Recommandat
   }
   @intercept401()
   async chargerRecommandationsPersonnalisees(idUtilisateur: string): Promise<RecommandationPersonnalisee[]> {
-    const axiosInstance = AxiosFactory.getAxios();
+    const axiosInstance = AxiosFactory.getInstance().axiosBack;
     const response = await axiosInstance.get<RecommandationApiModel[]>(
       `/utilisateurs/${idUtilisateur}/recommandations`,
     );

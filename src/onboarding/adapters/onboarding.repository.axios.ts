@@ -20,7 +20,7 @@ interface OnboardingResultatApiModel {
 }
 export class OnboardingRepositoryAxios implements OnboardingRepository {
   async envoyer(onboarding: OnboardingState): Promise<OnboardingResultat> {
-    const axiosInstance = AxiosFactory.getAxios();
+    const axiosInstance = AxiosFactory.getInstance().axiosBack;
     const response = await axiosInstance.post<OnboardingResultatApiModel>(`/utilisateurs/evaluate-onboarding`, {
       transports: onboarding.etapeTransport.transports,
       avion: onboarding.etapeTransport.avion,

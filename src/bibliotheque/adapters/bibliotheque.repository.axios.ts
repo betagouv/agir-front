@@ -19,7 +19,7 @@ interface BibliothequeApiModel {
 export class BibliothequeRepositoryAxios implements BibliothequeRepository {
   @intercept401()
   async chargerBibliotheque(utilisateurId: string): Promise<Bibliotheque> {
-    const axiosInstance = AxiosFactory.getAxios();
+    const axiosInstance = AxiosFactory.getInstance().axiosBack;
     const response = await axiosInstance.get<BibliothequeApiModel>(`/utilisateurs/${utilisateurId}/bibliotheque`);
 
     return {
@@ -43,14 +43,14 @@ export class BibliothequeRepositoryAxios implements BibliothequeRepository {
     utilisateurId: string,
     filtreThematiquesIds: string[],
     titre: string,
-    filtreFavoris: boolean
+    filtreFavoris: boolean,
   ): Promise<Bibliotheque> {
-    const axiosInstance = AxiosFactory.getAxios();
+    const axiosInstance = AxiosFactory.getInstance().axiosBack;
 
     const params = this.buildFiltres(filtreThematiquesIds, titre, filtreFavoris);
 
     const response = await axiosInstance.get<BibliothequeApiModel>(
-      `/utilisateurs/${utilisateurId}/bibliotheque${params}`
+      `/utilisateurs/${utilisateurId}/bibliotheque${params}`,
     );
 
     return {

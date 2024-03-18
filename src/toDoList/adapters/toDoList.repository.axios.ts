@@ -20,7 +20,7 @@ interface ToDoListApiModel {
         current: number;
         target: number;
       };
-    }
+    },
   ];
   done: [
     {
@@ -35,14 +35,14 @@ interface ToDoListApiModel {
         current: number;
         target: number;
       };
-    }
+    },
   ];
 }
 
 export class ToDoListRepositoryAxios implements ToDoListRepository {
   @intercept401()
   async recupererToDoList(idUtilisateur: string): Promise<TodoList> {
-    const axiosInstance = AxiosFactory.getAxios();
+    const axiosInstance = AxiosFactory.getInstance().axiosBack;
     const response = await axiosInstance.get<ToDoListApiModel>(`/utilisateurs/${idUtilisateur}/todo`);
 
     return {
@@ -80,13 +80,13 @@ export class ToDoListRepositoryAxios implements ToDoListRepository {
 
   @intercept401()
   async recupererPointsToDo(idUtilisateur: string, elementId: string): Promise<void> {
-    const axiosInstance = AxiosFactory.getAxios();
+    const axiosInstance = AxiosFactory.getInstance().axiosBack;
     await axiosInstance.post<boolean>(`/utilisateurs/${idUtilisateur}/todo/${elementId}/gagner_points`);
   }
 
   @intercept401()
   async terminerToDo(idUtilisateur: string): Promise<void> {
-    const axiosInstance = AxiosFactory.getAxios();
+    const axiosInstance = AxiosFactory.getInstance().axiosBack;
     await axiosInstance.post<boolean>(`/utilisateurs/${idUtilisateur}/todo/gagner_points`);
   }
 }

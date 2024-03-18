@@ -27,7 +27,7 @@ interface ServiceCatalogueApiModel {
 export class ServiceRepositoryAxios implements ServiceRepository {
   @intercept401()
   async recupererServicesActifs(utilisateurId: string): Promise<Service[]> {
-    const axiosInstance = AxiosFactory.getAxios();
+    const axiosInstance = AxiosFactory.getInstance().axiosBack;
     const reponse = await axiosInstance.get<ServiceApiModel[]>(`/utilisateurs/${utilisateurId}/services`);
     return reponse.data.map(service => ({
       id: service.id,
@@ -40,7 +40,7 @@ export class ServiceRepositoryAxios implements ServiceRepository {
 
   @intercept401()
   async recupererCatalogueServices(utilisateurId: string): Promise<ServiceCatalogue[]> {
-    const axiosInstance = AxiosFactory.getAxios();
+    const axiosInstance = AxiosFactory.getInstance().axiosBack;
     const reponse = await axiosInstance.get<ServiceCatalogueApiModel[]>(`/services?utilisateurId=${utilisateurId}`);
 
     return reponse.data.map(service => ({
@@ -60,13 +60,13 @@ export class ServiceRepositoryAxios implements ServiceRepository {
 
   @intercept401()
   async enleverServiceActif(utilisateurId: string, serviceId: string): Promise<void> {
-    const axiosInstance = AxiosFactory.getAxios();
+    const axiosInstance = AxiosFactory.getInstance().axiosBack;
     await axiosInstance.delete(`/utilisateurs/${utilisateurId}/services/${serviceId}`);
   }
 
   @intercept401()
   async installerServiceActif(utilisateurId: string, serviceId: string): Promise<void> {
-    const axiosInstance = AxiosFactory.getAxios();
+    const axiosInstance = AxiosFactory.getInstance().axiosBack;
     await axiosInstance.post(`/utilisateurs/${utilisateurId}/services`, {
       service_definition_id: serviceId,
     });
@@ -76,9 +76,9 @@ export class ServiceRepositoryAxios implements ServiceRepository {
   async parametrerService(
     utilisateurId: string,
     serviceId: string,
-    parametres: { [key: string]: string }
+    parametres: { [key: string]: string },
   ): Promise<void> {
-    const axiosInstance = AxiosFactory.getAxios();
+    const axiosInstance = AxiosFactory.getInstance().axiosBack;
     await axiosInstance.put(`/utilisateurs/${utilisateurId}/services/${serviceId}/configuration`, parametres);
   }
 }

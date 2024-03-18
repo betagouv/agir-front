@@ -3,8 +3,17 @@ import { NavigationBus, EventBusEvents } from '@/navigationBus';
 import Cookies from 'js-cookie';
 
 export class AxiosFactory {
-  public static getAxios() {
-    return axios.create({
+  get axiosCMS(): typeof axios {
+    return this._axiosCMS;
+  }
+  get axiosBack(): typeof axios {
+    return this._axiosBack;
+  }
+  private static axiosInstance: AxiosFactory;
+  private readonly _axiosBack: typeof axios;
+  private readonly _axiosCMS: typeof axios;
+  private constructor() {
+    this._axiosBack = axios.create({
       baseURL: import.meta.env.VITE_API_URL,
       headers: {
         Accept: 'application/json',
@@ -12,10 +21,8 @@ export class AxiosFactory {
         Authorization: `Bearer ${Cookies.get('bearer')}`,
       },
     });
-  }
 
-  public static getCMSAxios() {
-    return axios.create({
+    this._axiosCMS = axios.create({
       baseURL: import.meta.env.VITE_API_URL_CMS,
       headers: {
         Accept: 'application/json',
@@ -23,6 +30,20 @@ export class AxiosFactory {
         Authorization: `Bearer ${import.meta.env.VITE_API_TOKEN_CMS}`,
       },
     });
+  }
+
+  public static getInstance(): AxiosFactory {
+    if (!AxiosFactory.axiosInstance) {
+      AxiosFactory.axiosInstance = new AxiosFactory();
+    }
+    return AxiosFactory.axiosInstance;
+  }
+
+  public updateBearer(newBearer: string): void {
+    this._axiosBack.defaults.headers = {
+      ...this._axiosBack.defaults.headers,
+      Authorization: `Bearer ${newBearer}`,
+    };
   }
 }
 
@@ -36,7 +57,7 @@ export function intercept401() {
     target: any,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     propertyKey: any,
-    descriptor?: PropertyDescriptor
+    descriptor?: PropertyDescriptor,
   ) => {
     if (descriptor) {
       const originalMethod = descriptor.value;

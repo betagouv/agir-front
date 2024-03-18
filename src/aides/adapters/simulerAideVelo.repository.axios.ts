@@ -27,7 +27,7 @@ type AidesVeloParType = {
 export class SimulerAideVeloRepositoryAxios implements SimulerAideVeloRepository {
   @intercept401()
   async getSimulation(prixDuVelo: number, utilisateurId: string): Promise<SimulationVelo> {
-    const axiosInstance = AxiosFactory.getAxios();
+    const axiosInstance = AxiosFactory.getInstance().axiosBack;
     const response = await axiosInstance.post<AidesVeloParType>(`/utilisateurs/${utilisateurId}/simulerAideVelo`, {
       prix_du_velo: prixDuVelo,
     });

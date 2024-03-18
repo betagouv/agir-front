@@ -10,9 +10,9 @@ interface SimulerAideRetrofitApiModel {
 
 export class SimulerAideRetrofitRepositoryAxios implements SimulerAideRetrofitRepository {
   async getSimulation(codePostal: string, revenuFiscalDeReference: string): Promise<SimulationRetrofit> {
-    const axiosInstance = AxiosFactory.getAxios();
+    const axiosInstance = AxiosFactory.getInstance().axiosBack;
     const response = await axiosInstance.get<SimulerAideRetrofitApiModel[]>(
-      `aides/retrofit?codePostal=${codePostal}&revenuFiscalDeReference=${revenuFiscalDeReference}`
+      `aides/retrofit?codePostal=${codePostal}&revenuFiscalDeReference=${revenuFiscalDeReference}`,
     );
     return {
       aides: response.data,

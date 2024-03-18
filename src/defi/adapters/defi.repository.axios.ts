@@ -15,12 +15,12 @@ interface QuestionApiModel {
 export class DefiRepositoryAxios implements DefiRepository {
   @intercept401()
   async envoyerReponse(utilisateurId: string, defiId: string, reponse: string[]): Promise<void> {
-    const axios = AxiosFactory.getAxios();
+    const axios = AxiosFactory.getInstance().axiosBack;
     await axios.put(`/utilisateurs/${utilisateurId}/questionsKYC/${defiId}`, { reponse });
   }
   @intercept401()
   async recupererDefi(defiId: string, utilisateurId: string): Promise<Defi> {
-    const response = await AxiosFactory.getAxios().get<QuestionApiModel>(
+    const response = await AxiosFactory.getInstance().axiosBack.get<QuestionApiModel>(
       `utilisateurs/${utilisateurId}/questionsKYC/${defiId}`,
     );
 
@@ -35,7 +35,7 @@ export class DefiRepositoryAxios implements DefiRepository {
   }
   @intercept401()
   async recupererDefis(utilisateurId: string): Promise<Defi[]> {
-    const response = await AxiosFactory.getAxios().get<QuestionApiModel[]>(
+    const response = await AxiosFactory.getInstance().axiosBack.get<QuestionApiModel[]>(
       `utilisateurs/${utilisateurId}/questionsKYC`,
     );
     return response.data

@@ -26,13 +26,14 @@ interface ValiderCompteApiModel {
 }
 export class UtilisateurRepositoryAxios implements UtilisateurRepository {
   async authentifierUtilisateur(mail: string, password: string): Promise<Utilisateur> {
-    const axiosInstance = AxiosFactory.getAxios();
+    const axiosInstance = AxiosFactory.getInstance().axiosBack;
     const response = await axiosInstance.post<LoginApiModel>(`/utilisateurs/login`, {
       email: mail,
       mot_de_passe: password,
     });
 
     this.setBearerInCookie(response.data.token);
+    AxiosFactory.getInstance().updateBearer(response.data.token);
 
     return {
       nom: response.data.utilisateur.nom,
@@ -56,7 +57,7 @@ export class UtilisateurRepositoryAxios implements UtilisateurRepository {
   }
 
   async getUtilisateurAvecId(idUtilisateur: string): Promise<Utilisateur> {
-    const axiosInstance = AxiosFactory.getAxios();
+    const axiosInstance = AxiosFactory.getInstance().axiosBack;
     const response = await axiosInstance.get<UtilisateurApiModel>(`/utilisateurs/${idUtilisateur}`);
     return {
       nom: response.data.nom,
@@ -73,7 +74,7 @@ export class UtilisateurRepositoryAxios implements UtilisateurRepository {
   }
 
   async validerCompteUtilisateur(email: string, code: string): Promise<IdUtilisateur> {
-    const axiosInstance = AxiosFactory.getAxios();
+    const axiosInstance = AxiosFactory.getInstance().axiosBack;
     const response = await axiosInstance.post<ValiderCompteApiModel>(`/utilisateurs/valider`, {
       email,
       code,
@@ -82,26 +83,26 @@ export class UtilisateurRepositoryAxios implements UtilisateurRepository {
     // @ts-ignore
     const utilisateurId = jwtDecode(response.data.token).utilisateurId as string;
     this.setBearerInCookie(response.data.token);
-
+    AxiosFactory.getInstance().updateBearer(response.data.token);
     return utilisateurId;
   }
 
   async renvoyerCodeOTP(email: string): Promise<void> {
-    const axiosInstance = AxiosFactory.getAxios();
+    const axiosInstance = AxiosFactory.getInstance().axiosBack;
     await axiosInstance.post(`/utilisateurs/renvoyer_code`, {
       email,
     });
   }
 
   async commencerRedefinirMotDePasse(email: string): Promise<void> {
-    const axiosInstance = AxiosFactory.getAxios();
+    const axiosInstance = AxiosFactory.getInstance().axiosBack;
     await axiosInstance.post(`/utilisateurs/oubli_mot_de_passe`, {
       email,
     });
   }
 
   async terminerRedefinirMotDePasse(email: string, motDePasse: string, code: string): Promise<void> {
-    const axiosInstance = AxiosFactory.getAxios();
+    const axiosInstance = AxiosFactory.getInstance().axiosBack;
     await axiosInstance.post(`/utilisateurs/modifier_mot_de_passe`, {
       email,
       mot_de_passe: motDePasse,

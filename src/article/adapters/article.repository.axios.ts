@@ -5,7 +5,7 @@ import { AxiosFactory, intercept401 } from '@/axios.factory';
 export class ArticleRepositoryAxios implements ArticleRepository {
   @intercept401()
   async ajouterAuxFavoris(articleId: string, utilisateurId: string): Promise<void> {
-    const axios = AxiosFactory.getAxios();
+    const axios = AxiosFactory.getInstance().axiosBack;
     await axios.post(`/utilisateurs/${utilisateurId}/events`, {
       type: 'article_favoris',
       content_id: articleId,
@@ -14,7 +14,7 @@ export class ArticleRepositoryAxios implements ArticleRepository {
 
   @intercept401()
   async retirerDesFavoris(articleId: string, utilisateurId: string): Promise<void> {
-    const axios = AxiosFactory.getAxios();
+    const axios = AxiosFactory.getInstance().axiosBack;
     await axios.post(`/utilisateurs/${utilisateurId}/events`, {
       type: 'article_non_favoris',
       content_id: articleId,
@@ -23,7 +23,7 @@ export class ArticleRepositoryAxios implements ArticleRepository {
 
   @intercept401()
   async noterArticle(articleId: string, utilisateurId: string, note: 1 | 2 | 3 | 4): Promise<void> {
-    const axios = AxiosFactory.getAxios();
+    const axios = AxiosFactory.getInstance().axiosBack;
     await axios.post(`/utilisateurs/${utilisateurId}/events`, {
       type: 'like',
       number_value: note,
@@ -34,7 +34,7 @@ export class ArticleRepositoryAxios implements ArticleRepository {
 
   @intercept401()
   async marquerCommeLu(articleId: string, utilisateurId: string): Promise<void> {
-    const axios = AxiosFactory.getAxios();
+    const axios = AxiosFactory.getInstance().axiosBack;
     await axios.post(`/utilisateurs/${utilisateurId}/events`, {
       type: 'article_lu',
       content_id: articleId,
@@ -43,12 +43,12 @@ export class ArticleRepositoryAxios implements ArticleRepository {
 
   @intercept401()
   async recuperer(utilisateurId: string, articleId: string): Promise<Article> {
-    const axiosCMS = AxiosFactory.getCMSAxios();
+    const axiosCMS = AxiosFactory.getInstance().axiosCMS;
     const article = await axiosCMS.get(
-      `/articles/${articleId}?populate[0]=partenaire,partenaire.logo.media&populate[1]=sources`
+      `/articles/${articleId}?populate[0]=partenaire,partenaire.logo.media&populate[1]=sources`,
     );
 
-    const axios = AxiosFactory.getAxios();
+    const axios = AxiosFactory.getInstance().axiosBack;
     const articleMetaData = await axios.get(`/utilisateurs/${utilisateurId}/bibliotheque/articles/${articleId}`);
     return {
       id: articleId,
@@ -72,9 +72,9 @@ export class ArticleRepositoryAxios implements ArticleRepository {
   }
 
   async previsualiser(articleId: string): Promise<Article> {
-    const axiosCMS = AxiosFactory.getCMSAxios();
+    const axiosCMS = AxiosFactory.getInstance().axiosCMS;
     const article = await axiosCMS.get(
-      `/articles/${articleId}?populate[0]=partenaire,partenaire.logo.media&populate[1]=sources`
+      `/articles/${articleId}?populate[0]=partenaire,partenaire.logo.media&populate[1]=sources`,
     );
     return {
       id: articleId,
