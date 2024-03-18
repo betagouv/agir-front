@@ -4,7 +4,7 @@ import { CelebrationRepository } from '@/celebration/ports/celebration.repositor
 export class CelebrationRepositoryAxios implements CelebrationRepository {
   @intercept401()
   async valider(utilisateurId: string, celebrationId: string): Promise<void> {
-    const axios = AxiosFactory.getAxios();
+    const axios = AxiosFactory.getInstance().axiosBack;
     await axios.post(`/utilisateurs/${utilisateurId}/events`, {
       type: 'celebration',
       celebration_id: celebrationId,

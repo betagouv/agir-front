@@ -49,7 +49,7 @@ export interface LogementApiModel {
 export class LogementRepositoryAxios implements LogementRepository {
   @intercept401()
   async enregistrerLesInformations(utilisateurId: string, logement: Logement): Promise<void> {
-    await AxiosFactory.getAxios().patch(`utilisateurs/${utilisateurId}/logement`, {
+    await AxiosFactory.getInstance().axiosBack.patch(`utilisateurs/${utilisateurId}/logement`, {
       code_postal: logement.codePostal,
       commune: logement.commune,
       nombre_adultes: logement.adultes,
@@ -65,7 +65,9 @@ export class LogementRepositoryAxios implements LogementRepository {
 
   @intercept401()
   async recupererInformation(utilisateurId: string): Promise<Logement> {
-    const reponse = await AxiosFactory.getAxios().get<LogementApiModel>(`utilisateurs/${utilisateurId}/logement`);
+    const reponse = await AxiosFactory.getInstance().axiosBack.get<LogementApiModel>(
+      `utilisateurs/${utilisateurId}/logement`,
+    );
 
     return {
       codePostal: reponse.data.code_postal,

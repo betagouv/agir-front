@@ -23,8 +23,9 @@ interface ScoreApiModel {
 export class ScoreRepositoryAxios implements ScoreRepository {
   @intercept401()
   async getScore(idUtilisateur: string): Promise<Score> {
-    const axiosInstance = AxiosFactory.getAxios();
-    const response = await axiosInstance.get<ScoreApiModel>(`/utilisateurs/${idUtilisateur}/gamification`);
+    const response = await AxiosFactory.getInstance().axiosBack.get<ScoreApiModel>(
+      `/utilisateurs/${idUtilisateur}/gamification`,
+    );
 
     return {
       points: response.data.points,

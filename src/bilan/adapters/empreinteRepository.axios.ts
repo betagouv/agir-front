@@ -16,7 +16,7 @@ export interface EmpreinteApiModel {
 export class EmpreinteRepositoryAxios implements EmpreinteRepository {
   @intercept401()
   async getEmpreinte(utilisateurId: string): Promise<Empreinte> {
-    const axiosInstance = AxiosFactory.getAxios();
+    const axiosInstance = AxiosFactory.getInstance().axiosBack;
     const response = await axiosInstance.get<EmpreinteApiModel>(`/utilisateur/${utilisateurId}/bilans/last`);
     return {
       bilan: response.data.bilan_carbone_annuel,
@@ -32,7 +32,7 @@ export class EmpreinteRepositoryAxios implements EmpreinteRepository {
 
   @intercept401()
   async importSituationNGC(situationId: string, utilisateurId: string): Promise<boolean> {
-    const axiosInstance = AxiosFactory.getAxios();
+    const axiosInstance = AxiosFactory.getInstance().axiosBack;
     try {
       await axiosInstance.post(`/utilisateurs/${utilisateurId}/bilans/${situationId}`, {});
       return true;

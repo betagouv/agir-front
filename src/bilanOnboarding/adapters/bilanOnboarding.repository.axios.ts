@@ -17,7 +17,7 @@ export class BilanOnboardingRepositoryAxios implements BilanOnboardingRepository
     const store = onboardingBilanStore();
     if (store.bilan) return store.bilan;
 
-    const axiosInstance = AxiosFactory.getAxios();
+    const axiosInstance = AxiosFactory.getInstance().axiosBack;
     const response = await axiosInstance.get<BilanOnboardingApiModel>(`/utilisateurs/${utilisateurId}/profile`);
 
     store.setBilan(response.data.onboarding_result);

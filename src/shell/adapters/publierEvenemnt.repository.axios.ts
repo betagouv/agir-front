@@ -4,7 +4,7 @@ import { Evenemement, PublierEvenementRepository } from '@/shell/ports/publierEv
 export class PublierEvenemntRepositoryAxios implements PublierEvenementRepository {
   @intercept401()
   async publierEvenement(utilisateurId: string, evenement: Evenemement) {
-    const axiosInstance = AxiosFactory.getAxios();
+    const axiosInstance = AxiosFactory.getInstance().axiosBack;
     await axiosInstance.post(`/utilisateurs/${utilisateurId}/events`, { type: evenement });
   }
 }

@@ -15,8 +15,8 @@ interface AideApiModel {
 export class chargementAidesAxiosRepository implements ChargementAidesRepository {
   @intercept401()
   async getAides(utilisateurId: string): Promise<Aides[]> {
-    const axiosCMS = AxiosFactory.getAxios();
-    const aides = await axiosCMS.get<AideApiModel[]>(`/utilisateurs/${utilisateurId}/aides`);
+    const axios = AxiosFactory.getInstance().axiosBack;
+    const aides = await axios.get<AideApiModel[]>(`/utilisateurs/${utilisateurId}/aides`);
 
     return aides.data.map(aide => ({
       id: aide.content_id,

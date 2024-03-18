@@ -23,7 +23,7 @@ interface CompteUtilisateurApiModel {
 export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurRepository {
   @intercept401()
   async getCompteUtilisateur(idUtilisateur: string): Promise<CompteUtilisateur> {
-    const axiosInstance = AxiosFactory.getAxios();
+    const axiosInstance = AxiosFactory.getInstance().axiosBack;
     const response: Response<CompteUtilisateurApiModel> = await axiosInstance.get(`/utilisateurs/${idUtilisateur}`);
     return {
       nom: response.data.nom,
@@ -41,7 +41,7 @@ export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurReposit
 
   @intercept401()
   async mettreAjour(compteUtilisateur: CompteUtilisateur) {
-    const axiosInstance = AxiosFactory.getAxios();
+    const axiosInstance = AxiosFactory.getInstance().axiosBack;
     await axiosInstance.patch(`/utilisateurs/${compteUtilisateur.id}/profile`, {
       nom: compteUtilisateur.nom,
       prenom: compteUtilisateur.prenom,
@@ -56,7 +56,7 @@ export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurReposit
 
   async creerCompteUtilisateur(compteUtilisateurACreer: CompteUtilisateurACreer): Promise<CompteTemporaire> {
     try {
-      const axiosInstance = AxiosFactory.getAxios();
+      const axiosInstance = AxiosFactory.getInstance().axiosBack;
       const response: Response<CompteUtilisateurApiModel> = await axiosInstance.post(`/utilisateurs/`, {
         nom: compteUtilisateurACreer.nom,
         prenom: compteUtilisateurACreer.prenom,
@@ -92,13 +92,13 @@ export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurReposit
 
   @intercept401()
   async supprimerCompteUtilisateur(idUtilisateur: string): Promise<void> {
-    const axiosInstance = AxiosFactory.getAxios();
+    const axiosInstance = AxiosFactory.getInstance().axiosBack;
     await axiosInstance.delete(`/utilisateurs/${idUtilisateur}`);
   }
 
   @intercept401()
   async mettreAJourLeMotDePasse(idUtilisateur: string, nouveauMotDePasse: string): Promise<void> {
-    const axiosInstance = AxiosFactory.getAxios();
+    const axiosInstance = AxiosFactory.getInstance().axiosBack;
     await axiosInstance.patch(`/utilisateurs/${idUtilisateur}/profile`, {
       mot_de_passe: nouveauMotDePasse,
     });
