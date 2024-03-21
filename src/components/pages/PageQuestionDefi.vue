@@ -5,12 +5,12 @@
     <div v-if="isLoading">Chargement en cours ...</div>
     <div class="fr-grid-row fr-grid-row--gutters" v-else-if="!isLoading && defiViewModel">
       <div class="fr-col-8">
-        <div class="background--white border fr-p-4w border-radius--md">
+        <div v-if="!reponseAEteDonnee" class="background--white border fr-p-4w border-radius--md">
           <span class="display-block fr-mb-2w fr-mr-1w fr-tag background-bleu text--white">Action</span>
           <span class="display-block fr-text--bold fr-mb-1w fr-text--sm text--black">{{
             defiViewModel.thematique
           }}</span>
-          <form @submit.prevent="validerLaReponse" v-if="!reponseAEteDonnee">
+          <form @submit.prevent="validerLaReponse">
             <BoutonRadio
               col=""
               legende-size="l"
@@ -29,8 +29,13 @@
             />
             <button class="fr-btn fr-btn--lg" title="Valider" :disabled="isButtonDisabled">Valider</button>
           </form>
-          <KYCFin v-else :phrase-point-a-gagner="defiViewModel!.points" :a-deja-repondu="aDejaRepondu" />
         </div>
+        <KYCFin
+          v-else
+          :phrase-point-a-gagner="defiViewModel!.points"
+          :a-deja-repondu="aDejaRepondu"
+          class="border-radius--md"
+        />
       </div>
       <div class="fr-col-4">
         <CarteInfo>
