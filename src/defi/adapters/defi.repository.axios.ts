@@ -41,6 +41,7 @@ export class DefiRepositoryAxios implements DefiRepository {
       thematique: response.data.thematique_label,
       description: response.data.sous_titre,
       astuces: response.data.astuces,
+      pourquoi: response.data.pourquoi,
     };
   }
   @intercept401()
@@ -59,6 +60,7 @@ export class DefiRepositoryAxios implements DefiRepository {
         thematique: question.categorie,
         description: '',
         astuces: '',
+        pourquoi: '',
       }));
   }
 }

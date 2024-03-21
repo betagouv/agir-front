@@ -14,6 +14,7 @@ export interface DefiViewModel {
   description: string;
   reponse: string;
   astuces: string;
+  pourquoi: string;
 }
 
 export class DefiPresenterImpl implements DefiPresenter {
@@ -29,6 +30,7 @@ export class DefiPresenterImpl implements DefiPresenter {
       description: defi.description,
       reponse: defi.status,
       astuces: defi.astuces,
+      pourquoi: defi.pourquoi,
     });
   }
 

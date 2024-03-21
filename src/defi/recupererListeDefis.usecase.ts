@@ -9,6 +9,7 @@ export interface Defi {
   points: number;
   status: 'todo' | 'en_cours' | 'pas_envie' | 'deja_fait' | 'abondon' | 'fait';
   astuces: string;
+  pourquoi: string;
 }
 
 export class RecupererListeDefisUsecase {
