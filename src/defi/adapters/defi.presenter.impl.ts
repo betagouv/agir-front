@@ -1,5 +1,5 @@
-import { Question } from '@/kyc/recupererQuestionUsecase';
 import { DefiPresenter } from '@/defi/ports/defi.presenter';
+import { Defi } from '@/defi/recupererListeDefis.usecase';
 
 export interface ReponsePossible {
   id: string;
@@ -8,26 +8,46 @@ export interface ReponsePossible {
 export interface DefiViewModel {
   id: string;
   libelle: string;
-  type: 'libre' | 'choix_multiple' | 'choix_unique';
   reponses_possibles: ReponsePossible[];
   points: string;
-  reponses: string[];
+  thematique: string;
+  description: string;
+  reponse: string;
+  astuces: string;
 }
 
 export class DefiPresenterImpl implements DefiPresenter {
   constructor(private readonly questionViewModel: (viewModel: DefiViewModel) => void) {}
 
-  presente(question: Question) {
+  presente(defi: Defi) {
     this.questionViewModel({
-      id: question.id,
-      libelle: question.libelle,
-      type: question.type,
-      points: `Récoltez vos + ${question.points} points`,
-      reponses_possibles: question.reponses_possibles.map(reponse => ({
-        id: reponse,
-        label: reponse,
-      })),
-      reponses: question.reponse,
+      id: defi.id,
+      libelle: defi.libelle,
+      points: `Récoltez vos + ${defi.points} points`,
+      reponses_possibles: this.determinerReponsesPossible(defi.status),
+      thematique: defi.thematique,
+      description: defi.description,
+      reponse: defi.status,
+      astuces: defi.astuces,
     });
+  }
+
+  private determinerReponsesPossible(
+    status: 'todo' | 'en_cours' | 'pas_envie' | 'deja_fait' | 'abondon' | 'fait',
+  ): ReponsePossible[] {
+    if (status === 'en_cours') {
+      return [
+        { id: 'abondon', label: '❌ Abandonner' },
+        { id: 'fait', label: '✅ Défi réalisé' },
+      ];
+    } else if (status === 'fait') {
+      return [{ id: 'deja_fait', label: '✅ Déjà fait' }];
+    }
+
+    return [
+      { id: 'en_cours', label: '👍 Défi accepté' },
+      { id: 'pas_envie', label: '👎 Pas envie' },
+      { id: 'deja_fait', label: '✅ Déjà fait' },
+    ];
   }
 }

@@ -11,26 +11,36 @@ interface QuestionApiModel {
   reponse: string[];
   categorie: string;
 }
+interface DefiApiModel {
+  id: string;
+  astuces: string;
+  jours_restants: number;
+  points: number;
+  pourquoi: string;
+  sous_titre: string;
+  status: 'todo' | 'en_cours' | 'pas_envie' | 'deja_fait' | 'abondon' | 'fait';
+  thematique_label: string;
+  titre: string;
+}
 
 export class DefiRepositoryAxios implements DefiRepository {
   @intercept401()
   async envoyerReponse(utilisateurId: string, defiId: string, reponse: string[]): Promise<void> {
     const axios = AxiosFactory.getAxios();
-    await axios.put(`/utilisateurs/${utilisateurId}/questionsKYC/${defiId}`, { reponse });
+    await axios.patch(`/utilisateurs/${utilisateurId}/defis/${defiId}`, { reponse });
   }
   @intercept401()
   async recupererDefi(defiId: string, utilisateurId: string): Promise<Defi> {
-    const response = await AxiosFactory.getAxios().get<QuestionApiModel>(
-      `utilisateurs/${utilisateurId}/questionsKYC/${defiId}`,
-    );
+    const response = await AxiosFactory.getAxios().get<DefiApiModel>(`/utilisateurs/${utilisateurId}/defis/${defiId}`);
 
     return {
       id: response.data.id,
-      libelle: response.data.question,
-      type: response.data.type,
-      reponses_possibles: response.data.reponses_possibles || [],
+      libelle: response.data.titre,
       points: response.data.points,
-      reponse: response.data.reponse,
+      status: response.data.status,
+      thematique: response.data.thematique_label,
+      description: response.data.sous_titre,
+      astuces: response.data.astuces,
     };
   }
   @intercept401()
@@ -43,10 +53,12 @@ export class DefiRepositoryAxios implements DefiRepository {
       .map(question => ({
         id: question.id,
         libelle: question.question,
-        type: question.type,
-        reponses_possibles: question.reponses_possibles || [],
         points: question.points,
+        status: question.reponse.length > 0 ? 'en_cours' : 'todo',
         reponse: question.reponse,
+        thematique: question.categorie,
+        description: '',
+        astuces: '',
       }));
   }
 }

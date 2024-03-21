@@ -2,12 +2,13 @@ import { DefiRepository } from '@/defi/ports/defi.repository';
 import { ListeDefisPresenter } from '@/defi/ports/listeDefis.presenter';
 
 export interface Defi {
+  description: string;
+  thematique: string;
   id: string;
   libelle: string;
-  type: 'libre' | 'choix_multiple' | 'choix_unique';
-  reponses_possibles: string[];
   points: number;
-  reponse: string[];
+  status: 'todo' | 'en_cours' | 'pas_envie' | 'deja_fait' | 'abondon' | 'fait';
+  astuces: string;
 }
 
 export class RecupererListeDefisUsecase {
@@ -15,6 +16,6 @@ export class RecupererListeDefisUsecase {
 
   async execute(utilisateurId: string, presenter: ListeDefisPresenter): Promise<void> {
     const defis = await this.defiRepository.recupererDefis(utilisateurId);
-    presenter.presente(defis.filter(defi => defi.reponse?.length > 0));
+    presenter.presente(defis);
   }
 }
