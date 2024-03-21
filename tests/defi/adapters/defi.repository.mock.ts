@@ -3,6 +3,7 @@ import { Defi } from '@/defi/recupererListeDefis.usecase';
 
 export class MockDefiRepository implements DefiRepository {
   constructor(private defiARetourner: Defi) {}
+
   recupererDefis(_utilisateurId: string): Promise<Defi[]> {
     throw new Error('Method not implemented.');
   }
