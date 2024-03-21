@@ -95,6 +95,10 @@ h3 {
   color: var(--blue-france-sun-113-625);
 }
 
+.text--bleu-minor {
+  color: var(--artwork-minor-blue-france);
+}
+
 .text--mention-grey {
   color: var(--text-mention-grey);
 }
@@ -178,9 +182,12 @@ h3 {
 .background-bleu {
   background: var(--blue-france-main-525);
 }
-
 .background-bleu-light {
   background: var(--blue-france-925-125);
+}
+
+.background-bleu-alt-light {
+  background-color: var(--background-alt-blue-france);
 }
 
 .background--bleu-dark {

@@ -24,7 +24,7 @@ export class DefiPresenterImpl implements DefiPresenter {
     this.questionViewModel({
       id: defi.id,
       libelle: defi.libelle,
-      points: `Récoltez vos + ${defi.points} points`,
+      points: defi.points.toLocaleString(),
       reponses_possibles: this.determinerReponsesPossible(defi.status),
       thematique: defi.thematique,
       description: defi.description,
