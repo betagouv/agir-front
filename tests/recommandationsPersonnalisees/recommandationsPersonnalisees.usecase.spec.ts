@@ -1,5 +1,4 @@
 import { RecommandationsPersonnaliseesUsecase } from '@/recommandationsPersonnalisees/recommandationsPersonnalisees.usecase';
-import { InteractionType } from '@/shell/interactionType';
 import {
   RecommandationPersonnaliseeViewModel,
   RecommandationsPersonnaliseesPresenterImpl,
@@ -7,7 +6,7 @@ import {
 import { MockRecommandationsPersonnaliseesRepository } from './adapters/recommandationsPersonnalisees.repository.mock';
 
 describe('Fichier de tests concernant le chargement des recommandations personnalisees', () => {
-  it('En donnant un id utilisateur doit charger 1 article mis en avant et 3 recommandations personnalisees secondaires', async () => {
+  it('En donnant un id utilisateur doit charger et mettre en forme les recommandations personnalisées suivant leur type', async () => {
     // GIVEN
     const usecase = new RecommandationsPersonnaliseesUsecase(new MockRecommandationsPersonnaliseesRepository());
 
@@ -17,34 +16,55 @@ describe('Fichier de tests concernant le chargement des recommandations personna
     // THEN
     function expectation(recommandationsPersonnaliseesViewModel: RecommandationPersonnaliseeViewModel) {
       expect(recommandationsPersonnaliseesViewModel).toStrictEqual<RecommandationPersonnaliseeViewModel>({
-        recommandationHighlight: {
-          description: 'sousTitre',
-          image: 'illustrationURL',
-          titre: 'Article qui doit être en avant',
-          url: '/article/article-qui-doit-etre-en-avant/2',
-          contentId: '2',
-          type: InteractionType.ARTICLE,
-          nombreDePointsAGagner: 'nombreDePointsAGagner',
-          thematique: '🌍 Global',
-        },
         recommandationsList: [
           {
             image: 'illustrationURL',
             thematique: '🚲 Transports',
             titre: 'Premier Quiz',
-            url: '/agir/quiz/2',
+            bouton: {
+              libelle: 'Répondre au quiz',
+              style: 'fr-btn--secondary fr-btn--icon-left fr-icon-question-line',
+              url: '/agir/quiz/2',
+            },
             contentId: '2',
-            type: 'Quizz',
+            type: {
+              libelle: 'Quiz',
+              style: 'background--vert--bourgeon',
+            },
             nombreDePointsAGagner: 'nombreDePointsAGagner',
             description: 'sousTitre',
           },
           {
+            bouton: {
+              libelle: "Lire l'article",
+              style: 'fr-btn--secondary fr-btn--icon-left fr-icon-newspaper-line',
+              url: '/article/article-qui-doit-etre-en-avant/2',
+            },
+            contentId: '2',
+            description: 'sousTitre',
+            image: 'illustrationURL',
+            nombreDePointsAGagner: 'nombreDePointsAGagner',
+            thematique: '🌍 Global',
+            titre: 'Article qui doit être en avant',
+            type: {
+              libelle: 'Article',
+              style: 'background--caramel',
+            },
+          },
+          {
             image: 'illustrationURL',
             thematique: '🌍 Global',
-            titre: 'Un autre Quiz',
+            titre: 'Aide vélo',
             contentId: '1',
-            url: '/agir/quiz/1',
-            type: 'Quizz',
+            bouton: {
+              libelle: "Simuler l'aide",
+              style: 'fr-btn--secondary',
+              url: '/vos-aides/',
+            },
+            type: {
+              libelle: 'Aide',
+              style: 'background--yellow',
+            },
             nombreDePointsAGagner: 'nombreDePointsAGagner',
             description: 'sousTitre',
           },
@@ -52,8 +72,15 @@ describe('Fichier de tests concernant le chargement des recommandations personna
             image: 'illustrationURL',
             thematique: '🌍 Global',
             titre: 'Un défi',
-            type: 'Défi',
-            url: '/defi/1',
+            type: {
+              libelle: 'Action',
+              style: 'background-bleu text--white',
+            },
+            bouton: {
+              libelle: 'Relever le défi',
+              style: 'fr-btn--icon-left fr-icon-check-line',
+              url: '/defi/1',
+            },
             contentId: '1',
             nombreDePointsAGagner: 'nombreDePointsAGagner',
             description: 'sousTitre',
