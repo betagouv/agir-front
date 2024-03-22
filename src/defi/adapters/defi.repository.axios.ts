@@ -2,15 +2,6 @@ import { DefiRepository } from '@/defi/ports/defi.repository';
 import { Defi } from '../recupererListeDefis.usecase';
 import { AxiosFactory, intercept401 } from '@/axios.factory';
 
-interface QuestionApiModel {
-  id: string;
-  question: string;
-  type: 'libre' | 'choix_multiple' | 'choix_unique';
-  reponses_possibles: string[];
-  points: number;
-  reponse: string[];
-  categorie: string;
-}
 interface DefiApiModel {
   id: string;
   astuces: string;
@@ -27,7 +18,7 @@ export class DefiRepositoryAxios implements DefiRepository {
   @intercept401()
   async envoyerReponse(utilisateurId: string, defiId: string, reponse: string): Promise<void> {
     const axios = AxiosFactory.getAxios();
-    await axios.patch(`/utilisateurs/${utilisateurId}/defis/${defiId}`, { reponse });
+    await axios.patch(`/utilisateurs/${utilisateurId}/defis/${defiId}`, { status: reponse });
   }
   @intercept401()
   async recupererDefi(defiId: string, utilisateurId: string): Promise<Defi> {
@@ -46,21 +37,16 @@ export class DefiRepositoryAxios implements DefiRepository {
   }
   @intercept401()
   async recupererDefis(utilisateurId: string): Promise<Defi[]> {
-    const response = await AxiosFactory.getAxios().get<QuestionApiModel[]>(
-      `utilisateurs/${utilisateurId}/questionsKYC`,
-    );
-    return response.data
-      .filter(question => question.categorie === 'defi')
-      .map(question => ({
-        id: question.id,
-        libelle: question.question,
-        points: question.points,
-        status: question.reponse.length > 0 ? 'en_cours' : 'todo',
-        reponse: question.reponse,
-        thematique: question.categorie,
-        description: '',
-        astuces: '',
-        pourquoi: '',
-      }));
+    const response = await AxiosFactory.getAxios().get<DefiApiModel[]>(`/utilisateurs/${utilisateurId}/defis`);
+    return response.data.map(defi => ({
+      id: defi.id,
+      libelle: defi.titre,
+      points: defi.points,
+      status: defi.status,
+      thematique: defi.thematique_label,
+      description: defi.sous_titre,
+      astuces: defi.astuces,
+      pourquoi: defi.pourquoi,
+    }));
   }
 }

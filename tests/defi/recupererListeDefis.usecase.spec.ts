@@ -1,4 +1,3 @@
-import { ListeQuestionsPresenterImpl } from '@/kyc/adapters/listeQuestions.presenter.impl';
 import { MockListeDefisRepository } from './adapters/listedefis.repository.mock';
 import { RecupererListeDefisUsecase } from '@/defi/recupererListeDefis.usecase';
 import { ListeDefisPresenterImpl } from '@/defi/adapters/listeDefis.presenter.impl';
@@ -15,7 +14,7 @@ describe('Fichier de tests concernant la récupération des défis en cours', ()
           thematique: 'transport',
           libelle: 'Defi1 libelle',
           points: 10,
-          status: 'fait',
+          status: 'en_cours',
           astuces: 'Defi1 astuce',
           pourquoi: 'Défi pourquoi',
         },
@@ -25,7 +24,7 @@ describe('Fichier de tests concernant la récupération des défis en cours', ()
           thematique: 'transport',
           libelle: 'Defi2 libelle',
           points: 10,
-          status: 'fait',
+          status: 'deja_fait',
           astuces: 'Defi2 astuce',
           pourquoi: 'Défi2 pourquoi',
         },
@@ -35,7 +34,7 @@ describe('Fichier de tests concernant la récupération des défis en cours', ()
           thematique: 'transport',
           libelle: 'Defi3 libelle',
           points: 10,
-          status: 'fait',
+          status: 'pas_envie',
           astuces: 'Defi3 astuce',
           pourquoi: 'Défi3 pourquoi',
         },
@@ -49,17 +48,17 @@ describe('Fichier de tests concernant la récupération des défis en cours', ()
           {
             id: 'defiId1',
             libelle: 'Defi1 libelle',
-            reponse: '',
+            reponse: '⏳ Défi en cours',
           },
           {
             id: 'defiId2',
             libelle: 'Defi2 libelle',
-            reponse: '',
+            reponse: '✅ Déjà fait',
           },
           {
             id: 'defiId3',
             libelle: 'Defi3 libelle',
-            reponse: '',
+            reponse: '👎 Pas envie',
           },
         ]);
       }),

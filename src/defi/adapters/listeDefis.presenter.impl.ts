@@ -6,11 +6,21 @@ export class ListeDefisPresenterImpl implements ListeDefisPresenter {
 
   presente(defis: Defi[]): void {
     this.defisViewModel(
-      defis.map(question => ({
-        id: question.id,
-        libelle: question.libelle,
-        reponse: '',
+      defis.map(defi => ({
+        id: defi.id,
+        libelle: defi.libelle,
+        reponse: this.determinerReponse(defi.status),
       })),
     );
+  }
+
+  private determinerReponse(status: 'todo' | 'en_cours' | 'pas_envie' | 'deja_fait' | 'abondon' | 'fait'): string {
+    if (status === 'en_cours') {
+      return '⏳ Défi en cours';
+    } else if (status === 'deja_fait') {
+      return '✅ Déjà fait';
+    } else {
+      return '👎 Pas envie';
+    }
   }
 }
