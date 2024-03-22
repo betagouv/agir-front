@@ -13,7 +13,7 @@
       </div>
     </div>
     <div class="todo__boutonContainer fr-ml-auto">
-      <span v-if="!pointAEteRecolte" class="text--uppercase fr-mb-0 fr-text--xs text-disabled-grey fr-text--bold"
+      <span v-if="!pointAEteRecolte" class="text--uppercase fr-mb-0 fr-text--xs text--gris-dark fr-text--bold"
         >Objectif réalisé</span
       >
       <button
@@ -46,7 +46,7 @@
     const utilisateurId: string = utilisateurStore().utilisateur.id;
     new RecupererPointsToDoUsecase(new ToDoListRepositoryAxios(), ToDoListEventBusImpl.getInstance()).execute(
       utilisateurId,
-      props.elementId
+      props.elementId,
     );
   };
 </script>

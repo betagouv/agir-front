@@ -11,14 +11,14 @@ describe("Fichier de tests pour envoyer la réponse d'un défi", () => {
     const spyEventBus = new SpyToDoListEventBus();
     // WHEN
     const usecase = new EnvoyerReponseDefiUsecase(questionRepository, spyEventBus);
-    await usecase.execute('utilisateurId', 'questionId', ['Ma réponse, lorem ipsum dolor']);
+    await usecase.execute('utilisateurId', 'questionId', 'Ma réponse, lorem ipsum dolor');
 
     // THEN
     expect(questionRepository.envoyerReponseAEteAppele).toBeTruthy();
     expect(questionRepository.envoyerReponseArgs).toStrictEqual({
       utilisateurId: 'utilisateurId',
       questionId: 'questionId',
-      reponse: ['Ma réponse, lorem ipsum dolor'],
+      reponse: 'Ma réponse, lorem ipsum dolor',
     });
     expect(spyEventBus.eventName).toEqual(ToDoListEvent.TODO_KYC_A_ETE_REPONDU);
   });

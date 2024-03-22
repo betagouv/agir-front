@@ -3,83 +3,17 @@ import { RecupererDefiUsecase } from '@/defi/recupererDefiUsecase';
 import { DefiPresenterImpl, DefiViewModel } from '@/defi/adapters/defi.presenter.impl';
 
 describe('Fichier de tests pour récuperer un défi', () => {
-  it("En donnant un id d'utilisateur et l'id du défi doit appeler le back pour récuperer la question pour un type libre", async () => {
-    // GIVEN
-    const mockDefiRepository = new MockDefiRepository({
-      id: 'defiId',
-      libelle: 'Un defi',
-      type: 'libre',
-      reponses_possibles: [],
-      points: 10,
-      reponse: [],
-    });
-
-    // WHEN
-    const usecase = new RecupererDefiUsecase(mockDefiRepository);
-    await usecase.execute('defiId', 'utilisateurId', new DefiPresenterImpl(expectation));
-
-    // THEN
-    function expectation(viewModel: DefiViewModel) {
-      expect(viewModel).toStrictEqual<DefiViewModel>({
-        id: 'defiId',
-        libelle: 'Un defi',
-        type: 'libre',
-        reponses: [],
-        reponses_possibles: [],
-        points: 'Récoltez vos + 10 points',
-      });
-    }
-  });
-
-  it("En donnant un id d'utilisateur et l'id de la question du défi doit appeler le back pour récuperer la question pour un type choix_multiple", async () => {
-    // GIVEN
-    const mockDefiRepository = new MockDefiRepository({
-      id: 'defiId',
-      libelle: 'Un defi',
-      type: 'choix_multiple',
-      reponses_possibles: ['1', '2', '3'],
-      points: 10,
-      reponse: [],
-    });
-
-    // WHEN
-    const usecase = new RecupererDefiUsecase(mockDefiRepository);
-    await usecase.execute('defiId', 'utilisateurId', new DefiPresenterImpl(expectation));
-
-    // THEN
-    function expectation(viewModel: DefiViewModel) {
-      expect(viewModel).toStrictEqual<DefiViewModel>({
-        id: 'defiId',
-        libelle: 'Un defi',
-        type: 'choix_multiple',
-        points: 'Récoltez vos + 10 points',
-        reponses: [],
-        reponses_possibles: [
-          {
-            id: '1',
-            label: '1',
-          },
-          {
-            id: '2',
-            label: '2',
-          },
-          {
-            id: '3',
-            label: '3',
-          },
-        ],
-      });
-    }
-  });
-  it("En donnant un id d'utilisateur et l'id de la question du défi doit appeler le back pour récuperer la question pour un type choix_unique", async () => {
+  it("En donnant un id d'utilisateur et l'id de la question du défi non répondu doit appeler le back et présenter le défi", async () => {
     // GIVEN
     const questionRepository = new MockDefiRepository({
       id: 'defiId',
-      libelle: 'Un defi',
-      type: 'choix_unique',
-      reponses_possibles: ['1', '2', '3'],
+      description: 'Defi description',
+      thematique: 'transport',
+      libelle: 'Defi libelle',
       points: 10,
-      reponse: [],
+      status: 'todo',
+      astuces: 'Defi astuce',
+      pourquoi: 'Défi pourquoi',
     });
 
     // WHEN
@@ -89,25 +23,97 @@ describe('Fichier de tests pour récuperer un défi', () => {
     // THEN
     function expectation(viewModel: DefiViewModel) {
       expect(viewModel).toStrictEqual<DefiViewModel>({
+        astuces: 'Defi astuce',
+        description: 'Defi description',
         id: 'defiId',
-        libelle: 'Un defi',
-        points: 'Récoltez vos + 10 points',
-        type: 'choix_unique',
-        reponses: [],
+        libelle: 'Defi libelle',
+        points: '10',
+        pourquoi: 'Défi pourquoi',
+        reponse: 'todo',
         reponses_possibles: [
           {
-            id: '1',
-            label: '1',
+            id: 'en_cours',
+            label: '👍 Défi accepté',
           },
           {
-            id: '2',
-            label: '2',
+            id: 'pas_envie',
+            label: '👎 Pas envie',
           },
           {
-            id: '3',
-            label: '3',
+            id: 'deja_fait',
+            label: '✅ Déjà fait',
           },
         ],
+        thematique: 'transport',
+      });
+    }
+  });
+
+  it("En donnant un id d'utilisateur et l'id de la question du défi en cours doit appeler le back et présenter le défi", async () => {
+    // GIVEN
+    const questionRepository = new MockDefiRepository({
+      id: 'defiId',
+      description: 'Defi description',
+      thematique: 'transport',
+      libelle: 'Defi libelle',
+      points: 10,
+      status: 'en_cours',
+      astuces: 'Defi astuce',
+      pourquoi: 'Défi pourquoi',
+    });
+
+    // WHEN
+    const usecase = new RecupererDefiUsecase(questionRepository);
+    await usecase.execute('defiId', 'utilisateurId', new DefiPresenterImpl(expectation));
+
+    // THEN
+    function expectation(viewModel: DefiViewModel) {
+      expect(viewModel).toStrictEqual<DefiViewModel>({
+        astuces: 'Defi astuce',
+        description: 'Defi description',
+        id: 'defiId',
+        libelle: 'Defi libelle',
+        points: '10',
+        pourquoi: 'Défi pourquoi',
+        reponse: 'en_cours',
+        reponses_possibles: [
+          { id: 'abondon', label: '❌ Abandonner' },
+          { id: 'fait', label: '✅ Défi réalisé' },
+        ],
+        thematique: 'transport',
+      });
+    }
+  });
+
+  it("En donnant un id d'utilisateur et l'id de la question du défi déjà réalisé doit appeler le back et présenter le défi", async () => {
+    // GIVEN
+    const questionRepository = new MockDefiRepository({
+      id: 'defiId',
+      description: 'Defi description',
+      thematique: 'transport',
+      libelle: 'Defi libelle',
+      points: 10,
+      status: 'fait',
+      astuces: 'Defi astuce',
+      pourquoi: 'Défi pourquoi',
+    });
+
+    // WHEN
+    const usecase = new RecupererDefiUsecase(questionRepository);
+    await usecase.execute('defiId', 'utilisateurId', new DefiPresenterImpl(expectation));
+
+    // THEN
+    function expectation(viewModel: DefiViewModel) {
+      expect(viewModel).toStrictEqual<DefiViewModel>({
+        astuces: 'Defi astuce',
+        description: 'Defi description',
+        id: 'defiId',
+        libelle: 'Defi libelle',
+        points: '10',
+        pourquoi: 'Défi pourquoi',
+        reponse: 'fait',
+        reponses_possibles: [{ id: 'deja_fait', label: '✅ Déjà fait' }],
+        thematique: 'transport',
       });
     }
   });

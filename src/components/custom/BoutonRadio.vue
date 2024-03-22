@@ -10,6 +10,7 @@
       :id="`radio-legend-${name}`"
     >
       {{ legende }}
+      <span v-if="description" class="fr-hint-text">{{ description }}</span>
     </legend>
     <div class="fr-grid-row">
       <div :class="`fr-fieldset__element ${col}`" v-for="option in options" :key="option.label">
@@ -46,6 +47,7 @@
     options: { label: string; value: string | boolean; disabled?: boolean; customClass?: string }[];
     col: string;
     defaultValue?: string | boolean;
+    description?: string;
   }>();
 
   const emit = defineEmits(['update:modelValue']);
