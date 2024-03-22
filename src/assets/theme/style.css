@@ -127,8 +127,8 @@ h3 {
   color: #ed8e00;
 }
 
-.text-warning {
-  color: var(--warning-425-625);
+.text--warning {
+  color: var(--text-default-warning);
 }
 
 .text--rouge-erreur {
@@ -200,6 +200,10 @@ h3 {
 
 .background--rouge-erreur {
   background-color: var(--error-950-100);
+}
+
+.background--contrast-warning {
+  background-color: var(--background-contrast-warning);
 }
 
 .background--vert--success {

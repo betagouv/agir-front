@@ -4,6 +4,9 @@
     <div class="fr-col-8 fr-p-3w">
       <div class="fr-mb-2w">
         <span :class="`fr-mr-1w fr-tag ${recommandation.type.style}`">{{ recommandation.type.libelle }}</span>
+        <span v-if="recommandation.joursRestants" class="fr-tag text--warning background--contrast-warning">
+          {{ recommandation.joursRestants }}
+        </span>
       </div>
       <span class="fr-text--bold fr-text--sm text--black">
         {{ recommandation.thematique }}

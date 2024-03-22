@@ -3,7 +3,7 @@ import { RecommandationPersonnalisee } from '@/recommandationsPersonnalisees/rec
 import { InteractionType } from '@/shell/interactionType';
 
 export class MockRecommandationsPersonnaliseesRepository implements RecommandationsPersonnaliseesRepository {
-  recommandationAEteCliquee(idUtilisateur: string): Promise<void> {
+  recommandationAEteCliquee(_idUtilisateur: string): Promise<void> {
     throw new Error('Method not implemented.');
   }
 
@@ -17,6 +17,7 @@ export class MockRecommandationsPersonnaliseesRepository implements Recommandati
         nombreDePointsAGagner: 'nombreDePointsAGagner',
         illustrationURL: 'illustrationURL',
         idDuContenu: '2',
+        joursRestants: null,
       },
       {
         type: InteractionType.ARTICLE,
@@ -26,6 +27,7 @@ export class MockRecommandationsPersonnaliseesRepository implements Recommandati
         nombreDePointsAGagner: 'nombreDePointsAGagner',
         illustrationURL: 'illustrationURL',
         idDuContenu: '2',
+        joursRestants: null,
       },
       {
         type: InteractionType.AIDE,
@@ -35,6 +37,7 @@ export class MockRecommandationsPersonnaliseesRepository implements Recommandati
         nombreDePointsAGagner: 'nombreDePointsAGagner',
         illustrationURL: 'illustrationURL',
         idDuContenu: '1',
+        joursRestants: null,
       },
       {
         type: InteractionType.DEFIS,
@@ -44,6 +47,7 @@ export class MockRecommandationsPersonnaliseesRepository implements Recommandati
         nombreDePointsAGagner: 'nombreDePointsAGagner',
         illustrationURL: 'illustrationURL',
         idDuContenu: '1',
+        joursRestants: 7,
       },
     ]);
   }

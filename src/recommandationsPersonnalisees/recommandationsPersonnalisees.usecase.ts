@@ -10,6 +10,7 @@ export interface RecommandationPersonnalisee {
   nombreDePointsAGagner: string;
   illustrationURL: string;
   idDuContenu: string;
+  joursRestants: number | null;
 }
 
 export class RecommandationsPersonnaliseesUsecase {
