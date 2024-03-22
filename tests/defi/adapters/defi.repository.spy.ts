@@ -8,17 +8,17 @@ export class SpyDefiRepository implements DefiRepository {
   }
   private _envoyerReponseAEteAppele: boolean = false;
 
-  private _envoyerReponseArgs: { questionId: string; utilisateurId: string; reponse: string[] } = {
+  private _envoyerReponseArgs: { questionId: string; utilisateurId: string; reponse: string } = {
     questionId: '',
     utilisateurId: '',
-    reponse: [],
+    reponse: '',
   };
 
   recupererDefi(_defiId: string, _utilisateurId: string): Promise<Defi> {
     throw new Error('Method not implemented.');
   }
 
-  envoyerReponse(_utilisateurId: string, _defiId: string, _reponse: string[]): Promise<void> {
+  envoyerReponse(_utilisateurId: string, _defiId: string, _reponse: string): Promise<void> {
     this._envoyerReponseAEteAppele = true;
     this._envoyerReponseArgs = {
       questionId: _defiId,

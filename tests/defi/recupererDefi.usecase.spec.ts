@@ -27,7 +27,7 @@ describe('Fichier de tests pour récuperer un défi', () => {
         description: 'Defi description',
         id: 'defiId',
         libelle: 'Defi libelle',
-        points: 'Récoltez vos + 10 points',
+        points: '10',
         pourquoi: 'Défi pourquoi',
         reponse: 'todo',
         reponses_possibles: [
@@ -73,7 +73,7 @@ describe('Fichier de tests pour récuperer un défi', () => {
         description: 'Defi description',
         id: 'defiId',
         libelle: 'Defi libelle',
-        points: 'Récoltez vos + 10 points',
+        points: '10',
         pourquoi: 'Défi pourquoi',
         reponse: 'en_cours',
         reponses_possibles: [
@@ -109,7 +109,7 @@ describe('Fichier de tests pour récuperer un défi', () => {
         description: 'Defi description',
         id: 'defiId',
         libelle: 'Defi libelle',
-        points: 'Récoltez vos + 10 points',
+        points: '10',
         pourquoi: 'Défi pourquoi',
         reponse: 'fait',
         reponses_possibles: [{ id: 'deja_fait', label: '✅ Déjà fait' }],

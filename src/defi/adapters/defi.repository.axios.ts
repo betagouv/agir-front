@@ -25,7 +25,7 @@ interface DefiApiModel {
 
 export class DefiRepositoryAxios implements DefiRepository {
   @intercept401()
-  async envoyerReponse(utilisateurId: string, defiId: string, reponse: string[]): Promise<void> {
+  async envoyerReponse(utilisateurId: string, defiId: string, reponse: string): Promise<void> {
     const axios = AxiosFactory.getAxios();
     await axios.patch(`/utilisateurs/${utilisateurId}/defis/${defiId}`, { reponse });
   }
