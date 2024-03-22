@@ -36,7 +36,7 @@
             </div>
             <button class="fr-btn fr-btn--lg" title="Valider" :disabled="isButtonDisabled">Valider</button>
           </form>
-          <DefiFin v-else :defi="defiViewModel" />
+          <DefiFin v-else :defi="defiViewModel" :reponse="reponse" />
         </div>
       </div>
       <div class="fr-col-4">
@@ -72,7 +72,7 @@
 
   const isLoading = ref<boolean>(true);
   const defiViewModel = ref<DefiViewModel>();
-  const reponse = ref<string | string[]>('');
+  const reponse = ref<string>('');
   const reponseAEteDonnee = ref<boolean>(false);
   const aDejaRepondu = ref<boolean>(false);
 
@@ -102,7 +102,7 @@
       new DefiRepositoryAxios(),
       ToDoListEventBusImpl.getInstance(),
     );
-    await envoyerReponseUsecase.execute(utilisateurId, questionId, [reponse.value].flat());
+    await envoyerReponseUsecase.execute(utilisateurId, questionId, reponse.value);
 
     if (defiViewModel.value?.reponse) {
       aDejaRepondu.value = true;
