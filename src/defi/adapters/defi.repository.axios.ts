@@ -38,15 +38,17 @@ export class DefiRepositoryAxios implements DefiRepository {
   @intercept401()
   async recupererDefis(utilisateurId: string): Promise<Defi[]> {
     const response = await AxiosFactory.getAxios().get<DefiApiModel[]>(`/utilisateurs/${utilisateurId}/defis`);
-    return response.data.map(defi => ({
-      id: defi.id,
-      libelle: defi.titre,
-      points: defi.points,
-      status: defi.status,
-      thematique: defi.thematique_label,
-      description: defi.sous_titre,
-      astuces: defi.astuces,
-      pourquoi: defi.pourquoi,
-    }));
+    return response.data
+      .filter(defi => defi.status === 'en_cours' || defi.status === 'fait' || defi.status === 'deja_fait')
+      .map(defi => ({
+        id: defi.id,
+        libelle: defi.titre,
+        points: defi.points,
+        status: defi.status,
+        thematique: defi.thematique_label,
+        description: defi.sous_titre,
+        astuces: defi.astuces,
+        pourquoi: defi.pourquoi,
+      }));
   }
 }
