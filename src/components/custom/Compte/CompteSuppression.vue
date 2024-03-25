@@ -1,13 +1,13 @@
 <template>
   <h2 class="fr-h2">Options avancées</h2>
-  <div class="fr-p-2w fr-mb-2w text-warning border--warning">
-    <h3 class="fr-h6 fr-mb-1w text-warning">Supprimer votre compte</h3>
+  <div class="fr-p-2w fr-mb-2w text--warning border--warning">
+    <h3 class="fr-h6 fr-mb-1w text--warning">Supprimer votre compte</h3>
     <p class="fr-mb-1w">
       Vous pouvez à tous moments choisir de supprimer votre compte ainsi que l’ensemble des données qui y sont
       associées. <strong>Attention, aucune donnée ne pourra être récupérée.</strong>
     </p>
     <button
-      class="fr-btn fr-btn--sm fr-btn--warning fr-btn--icon-left fr-icon-warning-line text-warning border--warning background--white"
+      class="fr-btn fr-btn--sm fr-btn--warning fr-btn--icon-left fr-icon-warning-line text--warning border--warning background--white"
       data-fr-opened="false"
       :aria-controls="modaleId"
     >
