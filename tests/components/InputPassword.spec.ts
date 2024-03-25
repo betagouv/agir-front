@@ -88,4 +88,40 @@ describe('InputPassword', () => {
       expect(messageElement.className).toContain('fr-message--valid');
     });
   });
+
+  describe('au moins 1 majuscule et 1 minuscule', () => {
+    it('Si le mot de passe ne contient pas de majuscule doit avoir la classe fr-message--info', () => {
+      const { getByText } = render(InputPassword, {
+        props: {
+          modelValue: 'password',
+        },
+      });
+
+      const messageElement = getByText('Au moins 1 majuscule et 1 minuscule');
+
+      expect(messageElement.className).toContain('fr-message--info');
+    });
+    it('Si le mot de passe ne contient pas de minuscule doit avoir la classe fr-message--info', () => {
+      const { getByText } = render(InputPassword, {
+        props: {
+          modelValue: '123PASSWORD!',
+        },
+      });
+
+      const messageElement = getByText('Au moins 1 majuscule et 1 minuscule');
+
+      expect(messageElement.className).toContain('fr-message--info');
+    });
+    it('Si le mot de passe contient au moins une majuscule et une minuscule doit avoir la classe fr-message--valid', () => {
+      const { getByText } = render(InputPassword, {
+        props: {
+          modelValue: 'Password',
+        },
+      });
+
+      const messageElement = getByText('Au moins 1 majuscule et 1 minuscule');
+
+      expect(messageElement.className).toContain('fr-message--valid');
+    });
+  });
 });
