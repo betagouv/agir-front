@@ -24,6 +24,13 @@
         12 caractères minimum
       </p>
       <p
+        :class="auMoinsUneMajusculeEtUneMinuscule(modelValue) ? 'fr-message--valid' : 'fr-message--info'"
+        class="fr-message"
+        id="password-input-message-info"
+      >
+        Au moins 1 majuscule et 1 minuscule
+      </p>
+      <p
         :class="auMoinsUnCaractereSpecial(modelValue) ? 'fr-message--valid' : 'fr-message--info'"
         class="fr-message"
         id="password-input-message-info-1"
@@ -85,6 +92,12 @@
     return password ? regexp.test(password) : false;
   }
 
+  function auMoinsUneMajusculeEtUneMinuscule(password: string | null): boolean {
+    if (password === null) return false;
+    const contientUneMajuscule = /[A-Z]/.test(password);
+    const contientUneMinuscule = /[a-z]/.test(password);
+    return contientUneMajuscule && contientUneMinuscule;
+  }
   function verifierMotDePasseValide(motDePasse: string) {
     return auMoinsUnCaractereSpecial(motDePasse) && auMoinsDouzeCaracteres(motDePasse) && auMoinsUnChiffre(motDePasse);
   }
