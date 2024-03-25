@@ -1,8 +1,9 @@
 <template>
   <CompteSkeleton page-courante="Mon Compte - Vos défis">
     <h2 class="fr-h2">Vos défis</h2>
-    <div v-if="defisViewModel.length > 0">
-      <div v-for="defiViewModel in defisViewModel" :key="defiViewModel.id" class="fr-mb-4w">
+    <div v-if="defisViewModel?.enCours && defisViewModel.enCours.length > 0">
+      <h3 class="fr-h3">Vos défis en cours</h3>
+      <div v-for="defiViewModel in defisViewModel.enCours" :key="defiViewModel.id" class="fr-mb-4w">
         <h3 class="fr-h4 fr-mb-2w">
           {{ defiViewModel.libelle }}
         </h3>
@@ -14,7 +15,18 @@
         </div>
       </div>
     </div>
-    <p v-else>Vous n'avez pas encore de défis en cours</p>
+    <div v-if="defisViewModel?.termine && defisViewModel.termine.length > 0">
+      <h3 class="fr-h3">Vos défis terminés</h3>
+      <div v-for="defiViewModel in defisViewModel?.termine" :key="defiViewModel.id" class="fr-mb-4w">
+        <h3 class="fr-h4 fr-mb-2w">
+          {{ defiViewModel.libelle }}
+        </h3>
+        <div class="fr-grid-row flex-column fr-grid-row--top">
+          {{ defiViewModel.reponse }}
+        </div>
+      </div>
+    </div>
+    <p v-if="defisViewModel?.pasDeDefi">Vous n'avez pas encore de défis en cours</p>
   </CompteSkeleton>
 </template>
 
@@ -26,9 +38,9 @@
   import { RecupererListeDefisUsecase } from '@/defi/recupererListeDefis.usecase';
   import { DefiRepositoryAxios } from '@/defi/adapters/defi.repository.axios';
   import { ListeDefisPresenterImpl } from '@/defi/adapters/listeDefis.presenter.impl';
-  import { DefiQuestionViewModel } from '@/defi/ports/listeDefis.presenter';
+  import { DefisQuestionViewModel } from '@/defi/ports/listeDefis.presenter';
 
-  const defisViewModel = ref<DefiQuestionViewModel[]>([]);
+  const defisViewModel = ref<DefisQuestionViewModel>();
 
   new RecupererListeDefisUsecase(new DefiRepositoryAxios()).execute(
     utilisateurStore().utilisateur.id,
