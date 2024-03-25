@@ -32,7 +32,7 @@
                 <span class="fr-icon-arrow-right-s-last-line text--bleu-minor" aria-hidden="true"></span>
                 Bonnes astuces pour réaliser ce défi
               </h3>
-              <p class="fr-mb-0">{{ defiViewModel.astuces }}</p>
+              <p class="fr-mb-0 cms__content" v-html="defiViewModel.astuces"></p>
             </div>
             <button class="fr-btn fr-btn--lg" title="Valider" :disabled="isButtonDisabled">Valider</button>
           </form>
@@ -45,7 +45,7 @@
             <span class="fr-icon-question-line" aria-hidden="true"></span>
             Pourquoi ce défi ?
           </p>
-          <p class="fr-mb-0">{{ defiViewModel.pourquoi }}</p>
+          <p class="fr-mb-0 cms__content" v-html="defiViewModel.pourquoi"></p>
         </CarteInfo>
       </div>
     </div>
