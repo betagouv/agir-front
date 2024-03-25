@@ -41,6 +41,15 @@
     message.description =
       'Merci pour votre réponse et bravo ! N’oubliez pas de mettre à jour le défi en cours quand vous l’avez réalisé sur la page d’accueil';
     message.gainDePoint = true;
+  } else if (props.reponse === 'fait') {
+    message.titre = '🏆 Défi realisé ';
+    message.description =
+      'Félicitations, chaque geste compte ! Retrouvez l’ensemble des actions que vous avez réalisé dans votre profil et de nouveaux défis à relever sur la page d’accueil';
+    message.gainDePoint = true;
+  } else if (props.reponse === 'abondon') {
+    message.titre = "❌ J'abandonne";
+    message.description = 'Découvrez sur la page d’accueil d’autres défis recommandés pour vous';
+    message.gainDePoint = false;
   }
 </script>
 

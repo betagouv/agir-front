@@ -9,7 +9,7 @@ interface RecommandationApiModel {
   titre: string;
   soustitre: string;
   thematique_gamification: string;
-  duree: string;
+  jours_restants: number | null;
   image_url: string;
   points: number;
   content_id: string;
@@ -37,7 +37,9 @@ export class RecommandationsPersonnaliseesRepositoryAxios implements Recommandat
         nombreDePointsAGagner: apiModel.points.toString(),
         illustrationURL: apiModel.image_url,
         idDuContenu: apiModel.content_id,
+        joursRestants: apiModel.jours_restants,
       };
+
       return recommandationPersonnalisee;
     });
   }

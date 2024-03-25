@@ -39,8 +39,9 @@ export class DefiPresenterImpl implements DefiPresenter {
   ): ReponsePossible[] {
     if (status === 'en_cours') {
       return [
+        { id: 'fait', label: '🏆 Défi réalisé' },
+        { id: 'en_cours', label: '⏱️ Je relance le défi' },
         { id: 'abondon', label: '❌ Abandonner' },
-        { id: 'fait', label: '✅ Défi réalisé' },
       ];
     } else if (status === 'fait') {
       return [{ id: 'deja_fait', label: '✅ Déjà fait' }];

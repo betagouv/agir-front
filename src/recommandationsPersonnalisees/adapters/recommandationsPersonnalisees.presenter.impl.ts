@@ -27,6 +27,7 @@ export interface RecommandationViewModel {
   nombreDePointsAGagner: string;
   type: TagViewModel;
   thematique: string;
+  joursRestants: string | null;
 }
 export interface RecommandationPersonnaliseeViewModel {
   recommandationsList: RecommandationViewModel[];
@@ -49,6 +50,9 @@ export class RecommandationsPersonnaliseesPresenterImpl implements Recommandatio
             nombreDePointsAGagner: recommandationPersonnalisee.nombreDePointsAGagner,
             type: this.determineTypeTag(recommandationPersonnalisee.type),
             description: recommandationPersonnalisee.sousTitre,
+            joursRestants: recommandationPersonnalisee.joursRestants
+              ? `Plus que ${recommandationPersonnalisee.joursRestants} jours`
+              : null,
           };
         })
         .slice(0, 6),

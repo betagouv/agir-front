@@ -77,8 +77,12 @@ describe('Fichier de tests pour récuperer un défi', () => {
         pourquoi: 'Défi pourquoi',
         reponse: 'en_cours',
         reponses_possibles: [
+          {
+            id: 'fait',
+            label: '🏆 Défi réalisé',
+          },
+          { id: 'en_cours', label: '⏱️ Je relance le défi' },
           { id: 'abondon', label: '❌ Abandonner' },
-          { id: 'fait', label: '✅ Défi réalisé' },
         ],
         thematique: 'transport',
       });

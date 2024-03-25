@@ -21,6 +21,7 @@ describe('Fichier de tests concernant le chargement des recommandations personna
             image: 'illustrationURL',
             thematique: '🚲 Transports',
             titre: 'Premier Quiz',
+            joursRestants: null,
             bouton: {
               libelle: 'Répondre au quiz',
               style: 'fr-btn--secondary fr-btn--icon-left fr-icon-question-line',
@@ -42,6 +43,7 @@ describe('Fichier de tests concernant le chargement des recommandations personna
             },
             contentId: '2',
             description: 'sousTitre',
+            joursRestants: null,
             image: 'illustrationURL',
             nombreDePointsAGagner: 'nombreDePointsAGagner',
             thematique: '🌍 Global',
@@ -55,6 +57,7 @@ describe('Fichier de tests concernant le chargement des recommandations personna
             image: 'illustrationURL',
             thematique: '🌍 Global',
             titre: 'Aide vélo',
+            joursRestants: null,
             contentId: '1',
             bouton: {
               libelle: "Simuler l'aide",
@@ -72,6 +75,7 @@ describe('Fichier de tests concernant le chargement des recommandations personna
             image: 'illustrationURL',
             thematique: '🌍 Global',
             titre: 'Un défi',
+            joursRestants: 'Plus que 7 jours',
             type: {
               libelle: 'Action',
               style: 'background-bleu text--white',
