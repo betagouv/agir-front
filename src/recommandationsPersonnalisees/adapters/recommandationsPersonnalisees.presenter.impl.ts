@@ -6,6 +6,7 @@ import { RouteAidesPath } from '@/router/aides/routes';
 import { RouteCoachPath } from '@/router/coach/routes';
 import { RouteArticlePath } from '@/router/articles/routes';
 import { RouteDefiPath } from '@/router/defis/routes';
+import { RouteKycPath } from '@/router/kyc/routes';
 
 interface TagViewModel {
   libelle: string;
@@ -85,6 +86,13 @@ export class RecommandationsPersonnaliseesPresenterImpl implements Recommandatio
           url: `${RouteDefiPath.DEFI + recommandationPersonnalisee.idDuContenu}`,
           style: 'fr-btn--icon-left fr-icon-check-line',
         };
+      case InteractionType.KYC: {
+        return {
+          libelle: 'Répondre à la question',
+          url: `${RouteKycPath.KYC + recommandationPersonnalisee.idDuContenu}`,
+          style: 'fr-btn--icon-left fr-icon-arrow-right-line',
+        };
+      }
       default:
         return {
           libelle: '',
@@ -115,6 +123,11 @@ export class RecommandationsPersonnaliseesPresenterImpl implements Recommandatio
         return {
           libelle: 'Action',
           style: 'background-bleu text--white',
+        };
+      case InteractionType.KYC:
+        return {
+          libelle: 'Mieux vous connaître',
+          style: 'background--pink',
         };
       default:
         return {
