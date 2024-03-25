@@ -27,6 +27,7 @@
     </div>
   </div>
   <section
+    id="recommandations"
     v-if="store.utilisateur.fonctionnalitesDebloquees.includes(Fonctionnalites.RECOMMANDATIONS)"
     class="fr-py-6w fr-background-contrast--grey"
     v-tour-step:1="{
@@ -38,7 +39,7 @@
       },
     }"
   >
-    <div id="recommandations" class="fr-container" v-if="!isLoading">
+    <div class="fr-container" v-if="!isLoading">
       <CoachRecommandations
         v-if="recommandationsPersonnaliseesViewModel"
         :recommandations="recommandationsPersonnaliseesViewModel"
@@ -107,7 +108,7 @@
   const lancerChargementDesDonnees = () => {
     const idUtilisateur = store.utilisateur.id;
     const chargerRecommandationsPersonnaliseesUsecase = new RecommandationsPersonnaliseesUsecase(
-      new RecommandationsPersonnaliseesRepositoryAxios()
+      new RecommandationsPersonnaliseesRepositoryAxios(),
     );
     const chargementEmpreinteUseCase = new ChargementEmpreinteUsecase(new EmpreinteRepositoryAxios());
     const chargerTodoListUsecase = new RecupererToDoListUsecase(new ToDoListRepositoryAxios());
@@ -124,7 +125,7 @@
       chargementEmpreinteUseCase.execute(idUtilisateur, new ChargementEmpreintePresenterImpl(mapValueBilan)),
       chargerRecommandationsPersonnaliseesUsecase.execute(
         idUtilisateur,
-        new RecommandationsPersonnaliseesPresenterImpl(mapValuesInteractions)
+        new RecommandationsPersonnaliseesPresenterImpl(mapValuesInteractions),
       ),
       chargerTodoListUsecase.execute(idUtilisateur, new ToDoListPresenterImpl(mapValueTodo)),
     ])

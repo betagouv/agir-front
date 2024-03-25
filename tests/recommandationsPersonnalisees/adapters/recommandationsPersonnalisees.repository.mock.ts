@@ -7,7 +7,7 @@ export class MockRecommandationsPersonnaliseesRepository implements Recommandati
     throw new Error('Method not implemented.');
   }
 
-  chargerRecommandationsPersonnalisees(idUtilisateur: string): Promise<RecommandationPersonnalisee[]> {
+  chargerRecommandationsPersonnalisees(_idUtilisateur: string): Promise<RecommandationPersonnalisee[]> {
     return Promise.resolve([
       {
         type: InteractionType.QUIZ,
@@ -50,8 +50,18 @@ export class MockRecommandationsPersonnaliseesRepository implements Recommandati
         joursRestants: 7,
       },
       {
-        type: InteractionType.KYC,
         titre: 'Un KYC',
+        type: InteractionType.KYC,
+        sousTitre: 'sousTitre',
+        categorie: '🌍 Global',
+        nombreDePointsAGagner: 'nombreDePointsAGagner',
+        illustrationURL: 'illustrationURL',
+        idDuContenu: '1',
+        joursRestants: null,
+      },
+      {
+        type: InteractionType.DEFIS,
+        titre: 'Un autre défi',
         sousTitre: 'sousTitre',
         categorie: '🌍 Global',
         nombreDePointsAGagner: 'nombreDePointsAGagner',

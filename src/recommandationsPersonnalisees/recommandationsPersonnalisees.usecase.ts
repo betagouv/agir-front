@@ -5,7 +5,6 @@ import { RecommandationsPersonnaliseesPresenter } from '@/recommandationsPersonn
 export interface RecommandationPersonnalisee {
   type: InteractionType;
   titre: string;
-  sousTitre: string;
   categorie: string;
   nombreDePointsAGagner: string;
   illustrationURL: string;
