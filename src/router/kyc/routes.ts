@@ -4,6 +4,10 @@ const PageQuestionKyc = () => import('@/components/pages/PageQuestionKyc.vue');
 export enum RouteKycName {
   KYC = 'kyc',
 }
+
+export enum RouteKycPath {
+  KYC = '/kyc/',
+}
 const kycRoutes: RouteRecordRaw[] = [
   {
     path: '/kyc/:id',

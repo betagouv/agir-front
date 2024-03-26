@@ -89,6 +89,24 @@ describe('Fichier de tests concernant le chargement des recommandations personna
             nombreDePointsAGagner: 'nombreDePointsAGagner',
             description: 'sousTitre',
           },
+          {
+            bouton: {
+              libelle: 'Répondre à la question',
+              style: 'fr-btn--icon-left fr-icon-arrow-right-line',
+              url: '/kyc/1',
+            },
+            contentId: '1',
+            description: 'sousTitre',
+            image: 'illustrationURL',
+            joursRestants: null,
+            nombreDePointsAGagner: 'nombreDePointsAGagner',
+            thematique: '🌍 Global',
+            titre: 'Un KYC',
+            type: {
+              libelle: 'Mieux vous connaître',
+              style: 'background--pink',
+            },
+          },
         ],
       });
     }

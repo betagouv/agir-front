@@ -49,6 +49,16 @@ export class MockRecommandationsPersonnaliseesRepository implements Recommandati
         idDuContenu: '1',
         joursRestants: 7,
       },
+      {
+        type: InteractionType.KYC,
+        titre: 'Un KYC',
+        sousTitre: 'sousTitre',
+        categorie: '🌍 Global',
+        nombreDePointsAGagner: 'nombreDePointsAGagner',
+        illustrationURL: 'illustrationURL',
+        idDuContenu: '1',
+        joursRestants: null,
+      },
     ]);
   }
 }

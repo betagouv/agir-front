@@ -218,6 +218,10 @@ h3 {
   background-color: var(--brown-caramel-925-125);
 }
 
+.background--pink {
+  background-color: var(--pink-tuile-925-125);
+}
+
 .background--yellow {
   background-color: var(--yellow-tournesol-925-125);
 }
