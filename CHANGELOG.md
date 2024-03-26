@@ -1,5 +1,40 @@
 # Changelog
 
+## [1.7.0](https://github.com/betagouv/agir-front/compare/v1.6.0...v1.7.0) (2024-03-26)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* affichage des defis dans le compte ([#334](https://github.com/betagouv/agir-front/issues/334)) ([5491e35](https://github.com/betagouv/agir-front/commit/5491e351a6a737fa0e0ebacfe87c4ce55ec35141))
+* affichage des kyc logement dans le compte ([#323](https://github.com/betagouv/agir-front/issues/323)) ([a671911](https://github.com/betagouv/agir-front/commit/a671911e62fb245248e9229339943cd26b4706d0))
+* ajout des defis et mise à jour du style des recommandations personnalisées ([#338](https://github.com/betagouv/agir-front/issues/338)) ([b9ff3e8](https://github.com/betagouv/agir-front/commit/b9ff3e8a27ae91cb9c8fb96914a3b9f04c8a501d))
+* ajout du type de recommandations ([#324](https://github.com/betagouv/agir-front/issues/324)) ([649d5d5](https://github.com/betagouv/agir-front/commit/649d5d507da3dce0836191126145efe6154d13dc))
+* ajout information dpe ([#333](https://github.com/betagouv/agir-front/issues/333)) ([b1c13a7](https://github.com/betagouv/agir-front/commit/b1c13a7071ae524ef097d85b12607f821ae38aaf))
+* ajoute le tag du nombre de jours restants à un défi accepté ([#340](https://github.com/betagouv/agir-front/issues/340)) ([1d0c56f](https://github.com/betagouv/agir-front/commit/1d0c56f5f958abfb629ec8e7cef05e6357c07b80))
+* creation du usecase enregistrer les informations du logement ([#327](https://github.com/betagouv/agir-front/issues/327)) ([deff7e6](https://github.com/betagouv/agir-front/commit/deff7e6a2df61a2e356728c121851870ff02b921))
+* gestion affichage des défis dans le compte ([#343](https://github.com/betagouv/agir-front/issues/343)) ([02e2bb3](https://github.com/betagouv/agir-front/commit/02e2bb336ed5713fbcb126096769f66b52b4ee29))
+* kyc dans les recommandations ([#345](https://github.com/betagouv/agir-front/issues/345)) ([9ae2fec](https://github.com/betagouv/agir-front/commit/9ae2fec260f2e225f992a3e75eae2f65d0b90bf8))
+* le mot de passe doit contenir au moins 1 majuscule et 1 minuscule ([#341](https://github.com/betagouv/agir-front/issues/341)) ([f311742](https://github.com/betagouv/agir-front/commit/f31174284b38dc98a114fa23d3511c30515159e6))
+* les defis sont décorrelés des kyc ([#339](https://github.com/betagouv/agir-front/issues/339)) ([36c68a5](https://github.com/betagouv/agir-front/commit/36c68a5a2784ec2210277ae63b1f1480946251de))
+
+
+### 🐛 Corrections de bogues
+
+* affichage des kyc à choix unique ([#328](https://github.com/betagouv/agir-front/issues/328)) ([6a84847](https://github.com/betagouv/agir-front/commit/6a84847b0fda8f6f3b2a42ee03f621ca9437ba3d))
+* ajout alt aux témoignages de la page d'acceuil ([#325](https://github.com/betagouv/agir-front/issues/325)) ([e48738a](https://github.com/betagouv/agir-front/commit/e48738aaee50069c0d7066efeed449ae0eb019a8))
+* couleur du bloc suppression de compte ([#344](https://github.com/betagouv/agir-front/issues/344)) ([0064100](https://github.com/betagouv/agir-front/commit/0064100acef412920d166a72d209861daac5d4c7))
+* la commune et le logement n'était pas mis à jour dans la session après modification ([#331](https://github.com/betagouv/agir-front/issues/331)) ([c1e4265](https://github.com/betagouv/agir-front/commit/c1e4265d5f61e8ec370ecccf46c05fdccfa8fe47))
+* la fenêtre de parametrage s'ouvrait tout le temps ([#329](https://github.com/betagouv/agir-front/issues/329)) ([e95b92f](https://github.com/betagouv/agir-front/commit/e95b92f8e1848b740a1ff3cba904713abdf33f95))
+* ordre bloc modale linky ([#320](https://github.com/betagouv/agir-front/issues/320)) ([5d9aa7b](https://github.com/betagouv/agir-front/commit/5d9aa7bdc7859f89446897194d8f2a1801d5a1ce))
+
+
+### 👷 Autres changements
+
+* affichage message erreur configuration linky ([#318](https://github.com/betagouv/agir-front/issues/318)) ([60a5ec0](https://github.com/betagouv/agir-front/commit/60a5ec04643628ccfe25de178d6389403350b543))
+* aides sont en provenance du backend au lieu du CMS ([#326](https://github.com/betagouv/agir-front/issues/326)) ([9564e67](https://github.com/betagouv/agir-front/commit/9564e6758c9683396f99cebbf458de99e9b61344))
+* ajout transcription graphique linky ([#319](https://github.com/betagouv/agir-front/issues/319)) ([751576b](https://github.com/betagouv/agir-front/commit/751576ba8b064ec4c8459803f367abdca79515ab))
+* mise à jour des dépendances ([#317](https://github.com/betagouv/agir-front/issues/317)) ([086521f](https://github.com/betagouv/agir-front/commit/086521f7929579928f8b9b034ad83dd71aaf819d))
+
 ## [1.6.0](https://github.com/betagouv/agir-front/compare/v1.5.0...v1.6.0) (2024-02-28)
 
 
