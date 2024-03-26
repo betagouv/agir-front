@@ -69,7 +69,7 @@ describe('Fichier de tests concernant le chargement des recommandations personna
             nombreDePointsAGagner: 'nombreDePointsAGagner',
           },
           {
-            image: 'illustrationURL',
+            image: '/ic_defi.svg',
             thematique: '🌍 Global',
             titre: 'Un défi',
             joursRestants: 'Plus que 7 jours',
@@ -93,7 +93,7 @@ describe('Fichier de tests concernant le chargement des recommandations personna
               url: '/kyc/1',
             },
             contentId: '1',
-            image: 'illustrationURL',
+            image: '/ic_kyc.svg',
             joursRestants: null,
             nombreDePointsAGagner: 'nombreDePointsAGagner',
             thematique: '🌍 Global',
@@ -104,7 +104,7 @@ describe('Fichier de tests concernant le chargement des recommandations personna
             },
           },
           {
-            image: 'illustrationURL',
+            image: '/ic_defi.svg',
             thematique: '🌍 Global',
             titre: 'Un autre défi',
             joursRestants: null,

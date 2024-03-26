@@ -44,7 +44,7 @@ export class RecommandationsPersonnaliseesPresenterImpl implements Recommandatio
           return {
             thematique: recommandationPersonnalisee.categorie,
             titre: recommandationPersonnalisee.titre,
-            image: recommandationPersonnalisee.illustrationURL,
+            image: this.determineImage(recommandationPersonnalisee),
             bouton: this.determineBouton(recommandationPersonnalisee),
             contentId: recommandationPersonnalisee.idDuContenu,
             nombreDePointsAGagner: recommandationPersonnalisee.nombreDePointsAGagner,
@@ -132,6 +132,17 @@ export class RecommandationsPersonnaliseesPresenterImpl implements Recommandatio
           libelle: '',
           style: '',
         };
+    }
+  }
+
+  private determineImage(recommandationPersonnalisee: RecommandationPersonnalisee) {
+    switch (recommandationPersonnalisee.type) {
+      case InteractionType.DEFIS:
+        return '/ic_defi.svg';
+      case InteractionType.KYC:
+        return '/ic_kyc.svg';
+      default:
+        return recommandationPersonnalisee.illustrationURL;
     }
   }
 }
