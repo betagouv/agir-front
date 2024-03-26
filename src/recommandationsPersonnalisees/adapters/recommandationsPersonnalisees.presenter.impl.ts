@@ -22,7 +22,6 @@ interface BoutonViewModel {
 export interface RecommandationViewModel {
   titre: string;
   image: string;
-  description: string;
   bouton: BoutonViewModel;
   contentId: string;
   nombreDePointsAGagner: string;
@@ -50,7 +49,6 @@ export class RecommandationsPersonnaliseesPresenterImpl implements Recommandatio
             contentId: recommandationPersonnalisee.idDuContenu,
             nombreDePointsAGagner: recommandationPersonnalisee.nombreDePointsAGagner,
             type: this.determineTypeTag(recommandationPersonnalisee.type),
-            description: recommandationPersonnalisee.sousTitre,
             joursRestants: recommandationPersonnalisee.joursRestants
               ? `Plus que ${recommandationPersonnalisee.joursRestants} jours`
               : null,
@@ -82,7 +80,7 @@ export class RecommandationsPersonnaliseesPresenterImpl implements Recommandatio
         };
       case InteractionType.DEFIS:
         return {
-          libelle: 'Relever le défi',
+          libelle: recommandationPersonnalisee.joursRestants ? 'Faire le suivi' : 'Relever le défi',
           url: `${RouteDefiPath.DEFI + recommandationPersonnalisee.idDuContenu}`,
           style: 'fr-btn--icon-left fr-icon-check-line',
         };

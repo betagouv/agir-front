@@ -12,9 +12,6 @@
         {{ recommandation.thematique }}
       </span>
       <h3 class="fr-h6 fr-my-1w">{{ recommandation.titre }}</h3>
-      <p v-if="recommandation.description" class="fr-text--md text--gris">
-        {{ recommandation.description }}
-      </p>
       <router-link
         :to="recommandation.bouton.url"
         :class="`fr-btn ${recommandation.bouton.style}`"

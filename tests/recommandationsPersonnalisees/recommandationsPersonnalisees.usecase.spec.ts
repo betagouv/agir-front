@@ -33,7 +33,6 @@ describe('Fichier de tests concernant le chargement des recommandations personna
               style: 'background--vert--bourgeon',
             },
             nombreDePointsAGagner: 'nombreDePointsAGagner',
-            description: 'sousTitre',
           },
           {
             bouton: {
@@ -42,7 +41,6 @@ describe('Fichier de tests concernant le chargement des recommandations personna
               url: '/article/article-qui-doit-etre-en-avant/2',
             },
             contentId: '2',
-            description: 'sousTitre',
             joursRestants: null,
             image: 'illustrationURL',
             nombreDePointsAGagner: 'nombreDePointsAGagner',
@@ -69,7 +67,6 @@ describe('Fichier de tests concernant le chargement des recommandations personna
               style: 'background--yellow',
             },
             nombreDePointsAGagner: 'nombreDePointsAGagner',
-            description: 'sousTitre',
           },
           {
             image: 'illustrationURL',
@@ -81,14 +78,14 @@ describe('Fichier de tests concernant le chargement des recommandations personna
               style: 'background-bleu text--white',
             },
             bouton: {
-              libelle: 'Relever le défi',
+              libelle: 'Faire le suivi',
               style: 'fr-btn--icon-left fr-icon-check-line',
               url: '/defi/1',
             },
             contentId: '1',
             nombreDePointsAGagner: 'nombreDePointsAGagner',
-            description: 'sousTitre',
           },
+
           {
             bouton: {
               libelle: 'Répondre à la question',
@@ -96,7 +93,6 @@ describe('Fichier de tests concernant le chargement des recommandations personna
               url: '/kyc/1',
             },
             contentId: '1',
-            description: 'sousTitre',
             image: 'illustrationURL',
             joursRestants: null,
             nombreDePointsAGagner: 'nombreDePointsAGagner',
@@ -106,6 +102,23 @@ describe('Fichier de tests concernant le chargement des recommandations personna
               libelle: 'Mieux vous connaître',
               style: 'background--pink',
             },
+          },
+          {
+            image: 'illustrationURL',
+            thematique: '🌍 Global',
+            titre: 'Un autre défi',
+            joursRestants: null,
+            type: {
+              libelle: 'Action',
+              style: 'background-bleu text--white',
+            },
+            bouton: {
+              libelle: 'Relever le défi',
+              style: 'fr-btn--icon-left fr-icon-check-line',
+              url: '/defi/1',
+            },
+            contentId: '1',
+            nombreDePointsAGagner: 'nombreDePointsAGagner',
           },
         ],
       });

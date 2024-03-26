@@ -7,7 +7,6 @@ import axios from 'redaxios';
 interface RecommandationApiModel {
   type: string;
   titre: string;
-  soustitre: string;
   thematique_gamification: string;
   jours_restants: number | null;
   image_url: string;
@@ -32,7 +31,6 @@ export class RecommandationsPersonnaliseesRepositoryAxios implements Recommandat
       const recommandationPersonnalisee: RecommandationPersonnalisee = {
         type: apiModel.type as InteractionType,
         titre: apiModel.titre,
-        sousTitre: apiModel.soustitre,
         categorie: apiModel.thematique_gamification,
         nombreDePointsAGagner: apiModel.points.toString(),
         illustrationURL: apiModel.image_url,
