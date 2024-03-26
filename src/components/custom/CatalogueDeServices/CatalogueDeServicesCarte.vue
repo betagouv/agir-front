@@ -60,6 +60,7 @@
   import { MarquerLeServiceCommeConsulteUsecase } from '@/linky/marquerLeServiceCommeConsulte.usecase';
   import { LinkyRepositoryAxios } from '@/linky/adapters/linky.repository.axios';
   import { ToDoListEventBusImpl } from '@/toDoList/toDoListEventBusImpl';
+  import '@gouvfr/dsfr/dist/component/badge/badge.min.css';
 
   const props = defineProps<{ service: ServiceCatalogueViewModelItem }>();
 
