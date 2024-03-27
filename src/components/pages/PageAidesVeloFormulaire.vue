@@ -15,13 +15,15 @@
             />
             <h3 class="fr-h4 fr-mt-3w">Quelle est votre tranche de revenus ?</h3>
             <InputTrancheDeRevenu @update:part-et-revenu="updatePartEtRevenu" />
-            <h3 class="fr-h4">Abonnements et cartes</h3>
-            <InputCheckboxUnitaire
-              id="abonnement-transport"
-              label="En tant qu’habitant d’Angers Loire Métropole, êtes-vous abonnés du TER Pays de la Loire ?"
-              description="Sont éligibles Tutti illimité ou combiné / Métrocéane mensuel / annuel Loire-Atlantique et Sarthe / mensuel réseaux Mayenne et Vendée (hors scolaire)"
-              v-model="abonnementTransport"
-            />
+            <div v-if="afficherAbonnement">
+              <h3 class="fr-h4">Abonnements et cartes</h3>
+              <InputCheckboxUnitaire
+                id="abonnement-transport"
+                label="En tant qu’habitant d’Angers Loire Métropole, êtes-vous abonnés du TER Pays de la Loire ?"
+                description="Sont éligibles Tutti illimité ou combiné / Métrocéane mensuel / annuel Loire-Atlantique et Sarthe / mensuel réseaux Mayenne et Vendée (hors scolaire)"
+                v-model="abonnementTransport"
+              />
+            </div>
             <button class="fr-mt-2w fr-btn">Valider</button>
           </form>
         </div>
@@ -34,7 +36,7 @@
 </template>
 
 <script setup lang="ts">
-  import { ref } from 'vue';
+  import { computed, ref } from 'vue';
   import { utilisateurStore } from '@/store/utilisateur';
   import { MettreAJourCompteUtilisateurUsecase } from '@/compte/mettreAJourCompteUtilisateur.usecase';
   import { CompteUtilisateurRepositoryImpl } from '@/compte/adapters/compteUtilisateur.repository.impl';
@@ -60,11 +62,22 @@
     revenuFiscal.value = data.revenuFiscalDeReference;
   };
 
+  const afficherAbonnement = computed(() => {
+    return (
+      codePostal.value.length === 5 &&
+      (codePostal.value.startsWith('49') ||
+        codePostal.value.startsWith('44') ||
+        codePostal.value.startsWith('53') ||
+        codePostal.value.startsWith('72') ||
+        codePostal.value.startsWith('85'))
+    );
+  });
+
   async function mettreAJourLesInfos() {
     {
       const usecase = new MettreAJourCompteUtilisateurUsecase(
         new CompteUtilisateurRepositoryImpl(),
-        new SessionRepositoryStore()
+        new SessionRepositoryStore(),
       );
       const utilisateur = utilisateurStore().utilisateur;
       const donneeAMettreAjour: CompteUtlisateurViewModel = {
