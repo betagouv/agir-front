@@ -1,5 +1,5 @@
-import { BibliothequePresenter, BibliothequeViewModel } from '@/bibliotheque/ports/bibliotheque.presenter';
 import { Bibliotheque } from '../ports/bibliotheque.repository';
+import { BibliothequePresenter, BibliothequeViewModel } from '@/bibliotheque/ports/bibliotheque.presenter';
 import { buildUrl } from '@/shell/buildUrl';
 
 export class BibliothequePresenterImpl implements BibliothequePresenter {

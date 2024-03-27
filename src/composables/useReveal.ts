@@ -1,6 +1,6 @@
-import { Fonctionnalites } from '@/shell/fonctionnalitesEnum';
-import { inject } from 'vue';
 import Shepherd from 'shepherd.js';
+import { inject } from 'vue';
+import { Fonctionnalites } from '@/shell/fonctionnalitesEnum';
 
 export const useReveal = () => {
   const aideTour: Shepherd.Tour = inject('aideTour')!;

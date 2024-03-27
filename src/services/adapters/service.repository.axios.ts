@@ -1,7 +1,7 @@
-import { ServiceRepository } from '@/services/ports/service.repository';
-import { Service } from '@/services/recupererServiceActifs.usecase';
 import { AxiosFactory, intercept401 } from '@/axios.factory';
+import { ServiceRepository } from '@/services/ports/service.repository';
 import { ServiceCatalogue } from '@/services/recupererCatalogueServices.usecase';
+import { Service } from '@/services/recupererServiceActifs.usecase';
 
 interface ServiceApiModel {
   id: string;
@@ -76,7 +76,7 @@ export class ServiceRepositoryAxios implements ServiceRepository {
   async parametrerService(
     utilisateurId: string,
     serviceId: string,
-    parametres: { [key: string]: string }
+    parametres: { [key: string]: string },
   ): Promise<void> {
     const axiosInstance = AxiosFactory.getAxios();
     await axiosInstance.put(`/utilisateurs/${utilisateurId}/services/${serviceId}/configuration`, parametres);

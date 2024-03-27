@@ -1,5 +1,5 @@
-import { BilanOnboardingRepository } from '@/bilanOnboarding/ports/bilanOnboarding.repository';
 import { BilanOnboardingPresenter } from '@/bilanOnboarding/ports/bilanOnboarding.presenter';
+import { BilanOnboardingRepository } from '@/bilanOnboarding/ports/bilanOnboarding.repository';
 
 export class ChargerBilanOnboardingUsecase {
   constructor(private utilisateurRepository: BilanOnboardingRepository) {}

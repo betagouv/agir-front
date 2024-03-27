@@ -1,5 +1,5 @@
-import { QuestionRepository } from '@/kyc/ports/question.repository';
 import { ListeQuestionsPresenter } from '@/kyc/ports/listeQuestions.presenter';
+import { QuestionRepository } from '@/kyc/ports/question.repository';
 
 export class RecupererListeQuestionsUsecase {
   constructor(private readonly repository: QuestionRepository) {}

@@ -1,5 +1,5 @@
-import { QuestionRepository } from '@/kyc/ports/question.repository';
 import { AxiosFactory, intercept401 } from '@/axios.factory';
+import { QuestionRepository } from '@/kyc/ports/question.repository';
 import { Question } from '@/kyc/recupererQuestionUsecase';
 
 interface QuestionApiModel {

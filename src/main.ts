@@ -1,10 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { createApp } from 'vue';
-import App from '@/App.vue';
-import router from '@/router';
+import Hotjar from '@hotjar/browser';
 import { createPinia } from 'pinia';
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate';
+import { createApp } from 'vue';
 import VueMatomo from 'vue-matomo';
+import Vue3DirectiveShepherd from 'vue3-directive-shepherd';
+import { createSentry } from './sentry/sentry';
+import App from '@/App.vue';
+import { NavigationBus } from '@/navigationBus';
+import router from '@/router';
 // ordre des css important
 import 'shepherd.js/dist/css/shepherd.css';
 import '@gouvfr/dsfr/dist/core/core.min.css';
@@ -18,12 +22,8 @@ import '@gouvfr/dsfr/dist/component/tag/tag.min.css';
 import '@gouvfr/dsfr/dist/component/checkbox/checkbox.min.css';
 import '@gouvfr/dsfr/dist/component/radio/radio.min.css';
 import '@gouvfr/dsfr/dist/dsfr.module.min.js';
-import { createSentry } from './sentry/sentry';
 
 import './assets/theme/style.css';
-import { NavigationBus } from '@/navigationBus';
-import Hotjar from '@hotjar/browser';
-import Vue3DirectiveShepherd from 'vue3-directive-shepherd';
 
 declare global {
   interface Window {

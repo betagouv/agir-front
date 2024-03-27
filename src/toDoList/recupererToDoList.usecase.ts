@@ -1,5 +1,5 @@
-import { ToDoListRepository } from '@/toDoList/ports/toDoList.repository';
 import { ToDoListPresenter } from '@/toDoList/ports/toDoList.presenter';
+import { ToDoListRepository } from '@/toDoList/ports/toDoList.repository';
 
 export interface TodoList {
   titre: string;
