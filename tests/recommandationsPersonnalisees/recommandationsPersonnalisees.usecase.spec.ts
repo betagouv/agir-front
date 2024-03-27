@@ -69,13 +69,13 @@ describe('Fichier de tests concernant le chargement des recommandations personna
             nombreDePointsAGagner: 'nombreDePointsAGagner',
           },
           {
-            image: '/ic_defi.svg',
+            image: '/reco_defi.jpg',
             thematique: '🌍 Global',
             titre: 'Un défi',
             joursRestants: 'Plus que 7 jours',
             type: {
               libelle: 'Action',
-              style: 'background-bleu text--white',
+              style: 'background--bleu-ecume-hover',
             },
             bouton: {
               libelle: 'Faire le suivi',
@@ -104,13 +104,13 @@ describe('Fichier de tests concernant le chargement des recommandations personna
             },
           },
           {
-            image: '/ic_defi.svg',
+            image: '/reco_defi.jpg',
             thematique: '🌍 Global',
             titre: 'Un autre défi',
             joursRestants: null,
             type: {
               libelle: 'Action',
-              style: 'background-bleu text--white',
+              style: 'background--bleu-ecume-hover',
             },
             bouton: {
               libelle: 'Relever le défi',
