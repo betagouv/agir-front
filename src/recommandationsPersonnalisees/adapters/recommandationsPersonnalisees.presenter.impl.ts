@@ -120,7 +120,7 @@ export class RecommandationsPersonnaliseesPresenterImpl implements Recommandatio
       case InteractionType.DEFIS:
         return {
           libelle: 'Action',
-          style: 'background-bleu text--white',
+          style: 'background--bleu-ecume-hover',
         };
       case InteractionType.KYC:
         return {
@@ -138,7 +138,7 @@ export class RecommandationsPersonnaliseesPresenterImpl implements Recommandatio
   private determineImage(recommandationPersonnalisee: RecommandationPersonnalisee) {
     switch (recommandationPersonnalisee.type) {
       case InteractionType.DEFIS:
-        return '/ic_defi.svg';
+        return '/reco_defi.jpg';
       case InteractionType.KYC:
         return '/ic_kyc.svg';
       default:

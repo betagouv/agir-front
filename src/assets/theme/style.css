@@ -190,6 +190,10 @@ h3 {
   background-color: var(--background-alt-blue-france);
 }
 
+.background--bleu-ecume-hover {
+  background-color: var(--blue-ecume-975-75-hover);
+}
+
 .background--bleu-dark {
   background: var(--blue-france-sun-113-625);
 }
@@ -213,7 +217,6 @@ h3 {
 .background--vert--bourgeon {
   background-color: var(--green-bourgeon-950-100);
 }
-
 .background--caramel {
   background-color: var(--brown-caramel-925-125);
 }
@@ -222,8 +225,16 @@ h3 {
   background-color: var(--pink-tuile-925-125);
 }
 
+.background--pink-macaron {
+  background-color: var(--pink-macaron-850-200);
+}
+
 .background--yellow {
   background-color: var(--yellow-tournesol-925-125);
+}
+
+.background--marron-caramel {
+  background-color: var(--brown-caramel-950-100);
 }
 
 .background--gris {
