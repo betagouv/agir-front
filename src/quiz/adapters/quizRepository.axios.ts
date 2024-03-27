@@ -1,6 +1,6 @@
+import { Response } from 'redaxios';
 import { AxiosFactory, intercept401 } from '@/axios.factory';
 import { Quiz, QuizRepository } from '@/quiz/ports/quizRepository';
-import { Response } from 'redaxios';
 
 interface ReponsesQuizCMSModel {
   id: string;
@@ -28,7 +28,7 @@ export interface QuiCMSAttributesModel {
           contenu: string;
         };
         id: string;
-      }
+      },
     ];
   };
 }
@@ -61,7 +61,7 @@ export class QuizRepositoryAxios implements QuizRepository {
   async getQuiz(idQuizz: string): Promise<Quiz> {
     const axiosInstance = AxiosFactory.getCMSAxios();
     const response: Response<QuizCMSModel> = await axiosInstance.get<QuizCMSModel>(
-      `quizzes/${idQuizz}?populate[0]=questions&populate[1]=questions.reponses&populate[2]=thematique_gamification&populate[3]=articles`
+      `quizzes/${idQuizz}?populate[0]=questions&populate[1]=questions.reponses&populate[2]=thematique_gamification&populate[3]=articles`,
     );
     return {
       titre: response.data.data.attributes.titre,

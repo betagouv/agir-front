@@ -1,5 +1,5 @@
-import { Article } from '@/article/recupererArticle.usecase';
 import { ArticleRepository } from '@/article/ports/article.repository';
+import { Article } from '@/article/recupererArticle.usecase';
 
 export class PrevisualiserArticleUsecase {
   constructor(private readonly articleRepository: ArticleRepository) {}

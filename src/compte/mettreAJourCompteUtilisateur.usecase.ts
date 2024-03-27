@@ -1,11 +1,11 @@
-import { CompteUtilisateurRepository } from '@/compte/ports/compteUtilisateur.repository';
-import { CompteUtlisateurViewModel } from '@/compte/adapters/compteUtilisateur.presenter.impl';
 import { SessionRepository } from '@/authentification/authentifierUtilisateur.usecase';
+import { CompteUtlisateurViewModel } from '@/compte/adapters/compteUtilisateur.presenter.impl';
+import { CompteUtilisateurRepository } from '@/compte/ports/compteUtilisateur.repository';
 
 export class MettreAJourCompteUtilisateurUsecase {
   constructor(
     private compteUtilisateuRepository: CompteUtilisateurRepository,
-    private sessionRepository: SessionRepository
+    private sessionRepository: SessionRepository,
   ) {}
 
   execute(compteUtilisateurInput: CompteUtlisateurViewModel) {

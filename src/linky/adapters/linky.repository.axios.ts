@@ -1,6 +1,6 @@
 import { AxiosFactory, intercept401 } from '@/axios.factory';
-import { ConsommationElectrique, LinkyRepository } from '@/linky/ports/linkyRepository.repository';
 import { InformationCompteur } from '@/linky/obtenirInformationCompteur.usecase';
+import { ConsommationElectrique, LinkyRepository } from '@/linky/ports/linkyRepository.repository';
 
 interface ConsommationElectriqueApiModel {
   commentaires: [];

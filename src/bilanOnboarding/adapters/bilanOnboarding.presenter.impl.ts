@@ -1,5 +1,5 @@
-import { OnboardingResultat } from '@/onboarding/evaluerOnboarding.usecase';
 import { BilanOnboardingPresenter } from '@/bilanOnboarding/ports/bilanOnboarding.presenter';
+import { OnboardingResultat } from '@/onboarding/evaluerOnboarding.usecase';
 
 export interface OnboardingBilanViewModel {
   resultat: {

@@ -1,8 +1,8 @@
+import { RouteAidesName } from '@/router/aides/routeAidesName';
+import { RouteCoachName } from '@/router/coach/routeCoachName';
 import { ChargementScorePresenter, ScoreViewModel } from '@/score/ports/chargementScore.presenter';
 import { Score } from '@/score/ports/score.repository';
 import { Fonctionnalites } from '@/shell/fonctionnalitesEnum';
-import { RouteAidesName } from '@/router/aides/routeAidesName';
-import { RouteCoachName } from '@/router/coach/routeCoachName';
 
 export class ChargementScorePresenterImpl implements ChargementScorePresenter {
   constructor(private scoreViewModel: (viewModel: ScoreViewModel) => void) {}

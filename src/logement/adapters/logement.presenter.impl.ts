@@ -1,11 +1,11 @@
-import { Logement } from '@/logement/recupererInformationLogement.usecase';
-import { LogementViewModel } from '@/logement/ports/logement.presenter';
 import {
   SuperficieLogementApiModel,
   TypeLogementApiModel,
   ChauffageLogementApiModel,
   DPELogementApiModel,
 } from './logement.repository.axios';
+import { LogementViewModel } from '@/logement/ports/logement.presenter';
+import { Logement } from '@/logement/recupererInformationLogement.usecase';
 
 export class LogementPresenterImpl {
   constructor(private logementViewModel: (viewModel: LogementViewModel) => void) {}

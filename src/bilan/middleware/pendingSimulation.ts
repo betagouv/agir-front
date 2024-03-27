@@ -1,5 +1,5 @@
-import { importEmpreinteUsecase } from '@/bilan/importEmpreinte.usecase';
 import { EmpreinteRepositoryAxios } from '@/bilan/adapters/empreinteRepository.axios';
+import { importEmpreinteUsecase } from '@/bilan/importEmpreinte.usecase';
 import { utilisateurStore } from '@/store/utilisateur';
 
 const storedtNGC = 'storedImportNGC';

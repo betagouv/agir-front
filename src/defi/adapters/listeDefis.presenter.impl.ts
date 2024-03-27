@@ -1,5 +1,5 @@
-import { Defi } from '@/defi/recupererListeDefis.usecase';
 import { DefisQuestionViewModel, ListeDefisPresenter } from '@/defi/ports/listeDefis.presenter';
+import { Defi } from '@/defi/recupererListeDefis.usecase';
 
 export class ListeDefisPresenterImpl implements ListeDefisPresenter {
   constructor(private readonly defisViewModel: (viewModel: DefisQuestionViewModel) => void) {}

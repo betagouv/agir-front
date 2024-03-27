@@ -1,6 +1,6 @@
+import Cookies from 'js-cookie';
 import axios from 'redaxios';
 import { NavigationBus, EventBusEvents } from '@/navigationBus';
-import Cookies from 'js-cookie';
 
 export class AxiosFactory {
   public static getAxios() {
@@ -36,7 +36,7 @@ export function intercept401() {
     target: any,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     propertyKey: any,
-    descriptor?: PropertyDescriptor
+    descriptor?: PropertyDescriptor,
   ) => {
     if (descriptor) {
       const originalMethod = descriptor.value;

@@ -1,5 +1,5 @@
-import { LinkyRepository } from '@/linky/ports/linkyRepository.repository';
 import { LinkyPresenter } from '@/linky/ports/linky.presenter';
+import { LinkyRepository } from '@/linky/ports/linkyRepository.repository';
 
 export class ObtenirConsommationElectriqueQuatorzeJoursUsecase {
   constructor(private linkyRepository: LinkyRepository) {}

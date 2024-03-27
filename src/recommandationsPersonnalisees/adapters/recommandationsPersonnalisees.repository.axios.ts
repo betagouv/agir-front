@@ -1,8 +1,8 @@
+import axios from 'redaxios';
+import { AxiosFactory, intercept401 } from '@/axios.factory';
 import { RecommandationsPersonnaliseesRepository } from '@/recommandationsPersonnalisees/ports/recommandationsPersonnalisees.repository';
 import { RecommandationPersonnalisee } from '@/recommandationsPersonnalisees/recupererRecommandationsPersonnalisees.usecase';
-import { AxiosFactory, intercept401 } from '@/axios.factory';
 import { InteractionType } from '@/shell/interactionType';
-import axios from 'redaxios';
 
 export interface RecommandationApiModel {
   type: string;

@@ -1,6 +1,6 @@
+import { SimulationAideResultatViewModel, AideResultat } from '@/aides/ports/simulationAideResultat';
 import { SimulerAideRetrofitPresenter } from '@/aides/ports/simulerAideRetrofit.presenter';
 import { SimulationRetrofit } from '@/aides/simulerAideRetrofit.usecase';
-import { SimulationAideResultatViewModel, AideResultat } from '@/aides/ports/simulationAideResultat';
 
 export class SimulerAideRetrofitPresenterImpl implements SimulerAideRetrofitPresenter {
   constructor(private _viewModel: (simulationAideResultatViewModel: SimulationAideResultatViewModel[]) => void) {}

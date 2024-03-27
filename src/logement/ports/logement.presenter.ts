@@ -1,5 +1,5 @@
-import { Logement } from '@/logement/recupererInformationLogement.usecase';
 import { LogementApiModel } from '@/logement/adapters/logement.repository.axios';
+import { Logement } from '@/logement/recupererInformationLogement.usecase';
 
 interface LogementPlusieursReponsesPossiblesViewModel<T> {
   valeur: T;

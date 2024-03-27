@@ -1,12 +1,12 @@
 import { RecommandationPersonnalisee } from '@/recommandationsPersonnalisees/recupererRecommandationsPersonnalisees.usecase';
 import { InteractionType } from '@/shell/interactionType';
 import { RecommandationsPersonnaliseesPresenter } from '@/recommandationsPersonnalisees/ports/recommandationsPersonnalisees.presenter';
-import { buildUrl } from '@/shell/buildUrl';
 import { RouteAidesPath } from '@/router/aides/routes';
-import { RouteCoachPath } from '@/router/coach/routes';
 import { RouteArticlePath } from '@/router/articles/routes';
+import { RouteCoachPath } from '@/router/coach/routes';
 import { RouteDefiPath } from '@/router/defis/routes';
 import { RouteKycPath } from '@/router/kyc/routes';
+import { buildUrl } from '@/shell/buildUrl';
 
 interface TagViewModel {
   libelle: string;
