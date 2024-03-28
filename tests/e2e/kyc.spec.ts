@@ -11,15 +11,15 @@ test.beforeAll(async () => {
 test.describe('kyc', () => {
   test('doit afficher le bon title et titre', async () => {
     await expect(page).toHaveTitle('Agir ! - Agir');
-    await page.goto('/kyc/1');
+    await page.goto('/kyc/KYC001');
 
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('Question pour mieux vous connaître');
-    await page.fill('#reponse', 'Ma réponse, lorem ipsum dolor');
+    await page.getByText('🥦 Alimentation').click();
     await page.getByRole('button', { name: 'Valider' }).click();
   });
   test('doit afficher le remerciement', async () => {
     expect(await page.textContent('#app > div > main > div > div > div > span.fr-display--xs.fr-mb-2w')).toBe(
-      'Merci pour votre réponse !'
+      'Merci pour votre réponse !',
     );
     await page.click('text="Continuer"');
     await expect(page).toHaveTitle('Agir ! - Agir');
