@@ -31,6 +31,7 @@ export enum DPELogementApiModel {
   E = 'E',
   F = 'F',
   G = 'G',
+  NE_SAIS_PAS = 'ne_sais_pas',
 }
 
 export interface LogementApiModel {
