@@ -53,18 +53,24 @@
           <!-- <li class="fr-footer__bottom-item">
             <a class="fr-footer__bottom-link" href="#">Plan du site</a>
           </li> -->
+          <li class="fr-footer__bottom-item fr-footer__bottom-link">Accessibilité : non conforme</li>
           <li class="fr-footer__bottom-item">
-            <a class="fr-footer__bottom-link" href="#">Accessibilité : non conforme</a>
-          </li>
-          <!-- <li class="fr-footer__bottom-item">
-            <a class="fr-footer__bottom-link" href="#">Mentions légales</a>
-          </li>
-          <li class="fr-footer__bottom-item">
-            <a class="fr-footer__bottom-link" href="#">Données personnelles</a>
+            <router-link class="fr-footer__bottom-link" :to="{ name: RouteConformiteName.MENTIONS_LEGALES }"
+              >Mentions légales
+            </router-link>
           </li>
           <li class="fr-footer__bottom-item">
-            <a class="fr-footer__bottom-link" href="#">Gestion des cookies</a>
-          </li> -->
+            <router-link class="fr-footer__bottom-link" :to="{ name: RouteConformiteName.CGU }"
+              >Conditions générales d'utilisation
+            </router-link>
+          </li>
+          <li class="fr-footer__bottom-item">
+            <router-link
+              class="fr-footer__bottom-link"
+              :to="{ name: RouteConformiteName.POLITIQUES_DE_CONFIDENTIALITE }"
+              >Politique de confidentialité
+            </router-link>
+          </li>
         </ul>
         <div class="fr-footer__bottom-copy">
           <p>
@@ -85,10 +91,14 @@
   import Cookies from 'js-cookie';
 
   import { RouteCoachName } from '@/router/coach/routeCoachName';
+  import { RouteConformiteName } from '@/router/conformite/routes';
 
   export default {
     name: 'Footer',
     computed: {
+      RouteConformiteName() {
+        return RouteConformiteName;
+      },
       RouteCoachName() {
         return RouteCoachName;
       },
