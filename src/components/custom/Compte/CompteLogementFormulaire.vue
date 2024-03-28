@@ -84,17 +84,9 @@
           :default-value="logementViewModel.plusDeQuinzeAns.valeur"
           v-model="logementViewModel.plusDeQuinzeAns.valeur"
         />
-        <BoutonRadio
-          class="fr-mb-4w"
-          legende="Quel est le DPE actuel de votre logement ?"
-          legende-size="l"
-          name="dpe"
-          orientation="vertical"
-          col="fr-col"
-          :options="logementViewModel.dpe.reponsesPossibles"
-          :default-value="logementViewModel.dpe.valeur"
-          v-model="logementViewModel.dpe.valeur"
-        />
+        <div class="fr-col-12">
+          <DPE :default-value="logementViewModel.dpe.valeur" v-model="logementViewModel.dpe.valeur" />
+        </div>
         <CarteInfo>
           <p class="fr-text--bold">
             <span class="fr-icon-question-line" aria-hidden="true"></span>
@@ -134,6 +126,8 @@
   import Alert from '@/components/custom/Alert.vue';
   import { useAlerte } from '@/composables/useAlerte';
   import CarteInfo from '@/components/custom/CarteInfo.vue';
+  import DPE from '@/components/custom/DPE.vue';
+
   import { SessionRepositoryStore } from '@/authentification/adapters/session.repository.store';
 
   const props = defineModel<LogementViewModel>('logementViewModel', {
