@@ -1,7 +1,7 @@
 <template>
   <div :class="`fr-table ${tableauDoubleLegende && 'tableauDoubleLegende'}`">
     <table>
-      <caption>
+      <caption :class="titreStyle">
         {{
           titre
         }}
@@ -30,6 +30,7 @@
     titresDonnees: string[];
     donnees: (string | number)[][];
     tableauDoubleLegende?: boolean;
+    titreStyle?: string;
   }>();
 </script>
 
