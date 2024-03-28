@@ -1,6 +1,6 @@
-import { InteractionType } from '@/shell/interactionType';
-import { RecommandationsPersonnaliseesRepository } from '@/recommandationsPersonnalisees/ports/recommandationsPersonnalisees.repository';
 import { RecommandationsPersonnaliseesPresenter } from '@/recommandationsPersonnalisees/ports/recommandationsPersonnalisees.presenter';
+import { RecommandationsPersonnaliseesRepository } from '@/recommandationsPersonnalisees/ports/recommandationsPersonnalisees.repository';
+import { InteractionType } from '@/shell/interactionType';
 
 export interface RecommandationPersonnalisee {
   type: InteractionType;

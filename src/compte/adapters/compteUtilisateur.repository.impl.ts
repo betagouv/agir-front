@@ -1,11 +1,11 @@
+import { Response } from 'redaxios';
+import { AxiosFactory, intercept401 } from '@/axios.factory';
 import {
   CompteTemporaire,
   CompteUtilisateur,
   CompteUtilisateurACreer,
   CompteUtilisateurRepository,
 } from '@/compte/ports/compteUtilisateur.repository';
-import { AxiosFactory, intercept401 } from '@/axios.factory';
-import { Response } from 'redaxios';
 import { RepositoryError } from '@/shell/repositoryError';
 
 interface CompteUtilisateurApiModel {

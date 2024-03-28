@@ -1,5 +1,5 @@
-import { ToDoListEvent } from '@/toDoList/toDoListEventBusImpl';
 import { ServiceEvent } from '@/services/serviceEventBusImpl';
+import { ToDoListEvent } from '@/toDoList/toDoListEventBusImpl';
 
 export abstract class EventBus<T extends ToDoListEvent | ServiceEvent> {
   protected abstract eventSubscribers: Record<T, { subscriberName: string; callback: () => void }[]>;
@@ -19,7 +19,7 @@ export abstract class EventBus<T extends ToDoListEvent | ServiceEvent> {
 
   unsubscribe(subscriberName: string, eventName: T) {
     this.eventSubscribers[eventName] = this.eventSubscribers[eventName].filter(
-      subscriber => subscriber.subscriberName !== subscriberName
+      subscriber => subscriber.subscriberName !== subscriberName,
     );
   }
 }

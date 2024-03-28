@@ -1,8 +1,8 @@
-import { CompteUtilisateurRepository } from '@/compte/ports/compteUtilisateur.repository';
 import { SessionRepository } from '@/authentification/authentifierUtilisateur.usecase';
+import { CompteUtilisateurRepository } from '@/compte/ports/compteUtilisateur.repository';
+import { CreerComptePresenter } from '@/compte/ports/creerComptePresenter';
 import { OnboardingState } from '@/onboarding/evaluerOnboarding.usecase';
 import { RepositoryError } from '@/shell/repositoryError';
-import { CreerComptePresenter } from '@/compte/ports/creerComptePresenter';
 
 export interface UserInput {
   nom: string;
@@ -13,13 +13,13 @@ export interface UserInput {
 export class CreerCompteUtilisateurUsecase {
   constructor(
     private compteUtilisateuRepository: CompteUtilisateurRepository,
-    private sessionRepository: SessionRepository
+    private sessionRepository: SessionRepository,
   ) {}
 
   async execute(
     creerComptePresenter: CreerComptePresenter,
     compteUtilisateurACreerInput: UserInput,
-    onboarding: OnboardingState
+    onboarding: OnboardingState,
   ): Promise<void> {
     try {
       const utilisateurCree = await this.compteUtilisateuRepository.creerCompteUtilisateur({

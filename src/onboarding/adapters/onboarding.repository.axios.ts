@@ -1,6 +1,6 @@
-import { OnboardingRepository } from '@/onboarding/ports/onboardingRepository';
-import { OnboardingResultat, OnboardingState } from '@/onboarding/evaluerOnboarding.usecase';
 import { AxiosFactory } from '@/axios.factory';
+import { OnboardingResultat, OnboardingState } from '@/onboarding/evaluerOnboarding.usecase';
+import { OnboardingRepository } from '@/onboarding/ports/onboardingRepository';
 
 interface OnboardingPhraseCoachResultatApiModel {
   icon: string;

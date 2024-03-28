@@ -1,6 +1,6 @@
-import { LogementRepository } from '@/logement/ports/logement.repository';
-import { LogementPresenter } from '@/logement/ports/logement.presenter';
 import { LogementApiModel } from '@/logement/adapters/logement.repository.axios';
+import { LogementPresenter } from '@/logement/ports/logement.presenter';
+import { LogementRepository } from '@/logement/ports/logement.repository';
 
 export interface Logement {
   codePostal: string;

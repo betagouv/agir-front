@@ -1,5 +1,5 @@
-import { CommuneRepository, Communes } from '@/communes/ports/communeRepository';
 import { AxiosFactory } from '@/axios.factory';
+import { CommuneRepository, Communes } from '@/communes/ports/communeRepository';
 
 type CommuneApiModel = string[];
 export class CommuneRepositoryAxios implements CommuneRepository {

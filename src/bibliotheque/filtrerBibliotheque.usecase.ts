@@ -1,5 +1,5 @@
-import { BibliothequeRepository } from '@/bibliotheque/ports/bibliotheque.repository';
 import { BibliothequePresenter } from '@/bibliotheque/ports/bibliotheque.presenter';
+import { BibliothequeRepository } from '@/bibliotheque/ports/bibliotheque.repository';
 
 export class FiltrerBibliothequeUsecase {
   constructor(private readonly bibliothequeRepository: BibliothequeRepository) {}
@@ -9,13 +9,13 @@ export class FiltrerBibliothequeUsecase {
     filtresThematiques: string[],
     titre: string,
     filtreFavoris: boolean,
-    presenter: BibliothequePresenter
+    presenter: BibliothequePresenter,
   ): Promise<void> {
     const bibliotheque = await this.bibliothequeRepository.filtrerBibliotheque(
       utilisateurId,
       filtresThematiques,
       titre,
-      filtreFavoris
+      filtreFavoris,
     );
     presenter.presente(bibliotheque);
   }

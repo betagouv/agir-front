@@ -1,6 +1,6 @@
+import { DefiRepository } from '@/defi/ports/defi.repository';
 import { EventBus } from '@/shell/eventBus';
 import { ToDoListEvent } from '@/toDoList/toDoListEventBusImpl';
-import { DefiRepository } from '@/defi/ports/defi.repository';
 
 export class EnvoyerReponseDefiUsecase {
   constructor(

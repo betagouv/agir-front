@@ -1,7 +1,7 @@
-import { IdUtilisateur, Utilisateur, UtilisateurRepository } from '@/authentification/ports/utilisateur.repository';
-import { AxiosFactory } from '@/axios.factory';
 import Cookies from 'js-cookie';
 import { jwtDecode } from 'jwt-decode';
+import { IdUtilisateur, Utilisateur, UtilisateurRepository } from '@/authentification/ports/utilisateur.repository';
+import { AxiosFactory } from '@/axios.factory';
 
 interface UtilisateurApiModel {
   prenom: string;

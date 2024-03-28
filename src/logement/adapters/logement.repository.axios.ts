@@ -1,6 +1,6 @@
-import { Logement } from '@/logement/recupererInformationLogement.usecase';
-import { LogementRepository } from '@/logement/ports/logement.repository';
 import { AxiosFactory, intercept401 } from '@/axios.factory';
+import { LogementRepository } from '@/logement/ports/logement.repository';
+import { Logement } from '@/logement/recupererInformationLogement.usecase';
 
 export enum TypeLogementApiModel {
   Maison = 'maison',

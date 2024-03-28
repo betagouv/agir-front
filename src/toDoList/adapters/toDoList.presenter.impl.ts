@@ -1,7 +1,7 @@
+import { buildUrl } from '@/shell/buildUrl';
+import { InteractionType } from '@/shell/interactionType';
 import { ToDoListPresenter } from '@/toDoList/ports/toDoList.presenter';
 import { TodoList, TodoListItem } from '@/toDoList/recupererToDoList.usecase';
-import { InteractionType } from '@/shell/interactionType';
-import { buildUrl } from '@/shell/buildUrl';
 
 interface TodoViewModel {
   id: string;

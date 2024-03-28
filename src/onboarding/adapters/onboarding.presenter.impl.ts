@@ -1,5 +1,5 @@
-import { OnboardingResultatPresenter } from '@/onboarding/ports/onboardingResultat.presenter';
 import { OnboardingResultat } from '@/onboarding/evaluerOnboarding.usecase';
+import { OnboardingResultatPresenter } from '@/onboarding/ports/onboardingResultat.presenter';
 
 interface OnboardingPhraseCoachResultatViewModel {
   icon: string;

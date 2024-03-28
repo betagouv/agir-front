@@ -1,5 +1,5 @@
-import { LinkyRepository } from '@/linky/ports/linkyRepository.repository';
 import { LinkyInformationPresenter } from '@/linky/ports/linky.information.presenter';
+import { LinkyRepository } from '@/linky/ports/linkyRepository.repository';
 
 export interface InformationCompteur {
   prm: string;
