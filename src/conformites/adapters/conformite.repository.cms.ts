@@ -8,7 +8,7 @@ export class ConformiteRepositoryCms implements ConformiteRepository {
     const pageConformiteResponse = await axiosCMS.get(`/conformites/${pageConformiteType.valueOf()}`);
     return {
       texte: pageConformiteResponse.data.data.attributes.contenu,
-      titre: pageConformiteResponse.data.data.attributes.titre,
+      titre: pageConformiteResponse.data.data.attributes.Titre,
     };
   }
 }
