@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.8.0](https://github.com/betagouv/agir-front/compare/v1.7.0...v1.8.0) (2024-03-28)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* afficher demande carte de transport uniquement pour ALM ([#350](https://github.com/betagouv/agir-front/issues/350)) ([940fded](https://github.com/betagouv/agir-front/commit/940fdedee3e9033a7e3b836ca1ab0e34201c88e3))
+* ajout des illustrations pour les kyc & défis ([#349](https://github.com/betagouv/agir-front/issues/349)) ([7ee19d2](https://github.com/betagouv/agir-front/commit/7ee19d26d33c9c2b685ef2aba9120c73ce12c122))
+
+
+### 🐛 Corrections de bogues
+
+* import dsfr css badge ([#347](https://github.com/betagouv/agir-front/issues/347)) ([23e1706](https://github.com/betagouv/agir-front/commit/23e1706c6317cf49bc5ca7a134944ddc5e612fe1))
+
 ## [1.7.0](https://github.com/betagouv/agir-front/compare/v1.6.0...v1.7.0) (2024-03-26)
 
 
