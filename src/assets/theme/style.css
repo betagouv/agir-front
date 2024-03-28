@@ -312,6 +312,12 @@ h3 {
   height: auto;
 }
 
+.cms__content table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
 .text--lh-0 {
   line-height: 0 !important;
 }
