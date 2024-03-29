@@ -97,3 +97,5 @@ createSentry(app, router);
 app.mount('#app');
 
 window._paq.push(['trackPageView']);
+window._paq.push(['trackAllContentImpressions']);
+window._paq.push(['enableLinkTracking']);
