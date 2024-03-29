@@ -1,5 +1,25 @@
 # Changelog
 
+## [1.8.0](https://github.com/betagouv/agir-front/compare/v1.7.0...v1.8.0) (2024-03-29)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* afficher demande carte de transport uniquement pour ALM ([#350](https://github.com/betagouv/agir-front/issues/350)) ([940fded](https://github.com/betagouv/agir-front/commit/940fdedee3e9033a7e3b836ca1ab0e34201c88e3))
+* ajout des illustrations pour les kyc & défis ([#349](https://github.com/betagouv/agir-front/issues/349)) ([7ee19d2](https://github.com/betagouv/agir-front/commit/7ee19d26d33c9c2b685ef2aba9120c73ce12c122))
+* ajout des pages de conformité ([#353](https://github.com/betagouv/agir-front/issues/353)) ([e7ea964](https://github.com/betagouv/agir-front/commit/e7ea9641e4a61f8435d848c175918463bdd1e8f4))
+* ajout explication consommation electrique moyenne au graphique linky ([#352](https://github.com/betagouv/agir-front/issues/352)) ([eb1ccf4](https://github.com/betagouv/agir-front/commit/eb1ccf487a4737c242b12bbddac40dcf7c1c22fd))
+
+
+### 🐛 Corrections de bogues
+
+* import dsfr css badge ([#347](https://github.com/betagouv/agir-front/issues/347)) ([23e1706](https://github.com/betagouv/agir-front/commit/23e1706c6317cf49bc5ca7a134944ddc5e612fe1))
+
+
+### 👷 Autres changements
+
+* tracking matomo ([#355](https://github.com/betagouv/agir-front/issues/355)) ([f264e15](https://github.com/betagouv/agir-front/commit/f264e158a1fb86188852d1198a2987ea6c9d4c5f))
+
 ## [1.7.0](https://github.com/betagouv/agir-front/compare/v1.6.0...v1.7.0) (2024-03-26)
 
 
