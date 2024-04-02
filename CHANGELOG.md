@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.8.1](https://github.com/betagouv/agir-front/compare/v1.8.0...v1.8.1) (2024-04-02)
+
+
+### 🐛 Corrections de bogues
+
+* page publique pour les pages de conformités ([#356](https://github.com/betagouv/agir-front/issues/356)) ([0f209ff](https://github.com/betagouv/agir-front/commit/0f209ff93c1067d367d3f7e701e170f5be44a445))
+
 ## [1.8.0](https://github.com/betagouv/agir-front/compare/v1.7.0...v1.8.0) (2024-03-29)
 
 
