@@ -2,8 +2,8 @@
   <div class="fr-container fr-py-6w">
     <div>
       <h1 class="fr-h2">Agir</h1>
-      <div class="fr-grid-row fr-grid-row--gutters">
-        <div v-if="todoList" class="fr-col fr-col-lg-7">
+      <div v-if="todoList && !todoList.derniere" class="fr-grid-row fr-grid-row--gutters">
+        <div class="fr-col fr-col-lg-7">
           <CoachToDo :todoList="todoList" />
         </div>
         <div class="fr-col-12 fr-col-lg-4 fr-col-offset-lg-1">
@@ -70,12 +70,6 @@
     RecommandationPersonnaliseeViewModel,
     RecommandationsPersonnaliseesPresenterImpl,
   } from '@/recommandationsPersonnalisees/adapters/recommandationsPersonnalisees.presenter.impl';
-  import {
-    ChargementEmpreintePresenterImpl,
-    EmpreinteViewModel,
-  } from '@/bilan/adapters/chargementEmpreinte.presenter.impl';
-  import { ChargementEmpreinteUsecase } from '@/bilan/chargementEmpreinte.usecase';
-  import { EmpreinteRepositoryAxios } from '@/bilan/adapters/empreinteRepository.axios';
   import CoachToDo from '@/components/custom/Coach/CoachToDo.vue';
   import { ToDoListRepositoryAxios } from '@/toDoList/adapters/toDoList.repository.axios';
   import { ToDoListPresenterImpl, TodoListViewModel } from '@/toDoList/adapters/toDoList.presenter.impl';
@@ -96,10 +90,6 @@
     recommandationsPersonnaliseesViewModel.value = viewModel;
   }
 
-  function mapValueBilan(viewModel: EmpreinteViewModel) {
-    store.setValeurBilanCarbone(viewModel);
-  }
-
   function mapValueTodo(viewModel: TodoListViewModel) {
     todoList.value = viewModel;
   }
@@ -110,7 +100,6 @@
     const chargerRecommandationsPersonnaliseesUsecase = new RecommandationsPersonnaliseesUsecase(
       new RecommandationsPersonnaliseesRepositoryAxios(),
     );
-    const chargementEmpreinteUseCase = new ChargementEmpreinteUsecase(new EmpreinteRepositoryAxios());
     const chargerTodoListUsecase = new RecupererToDoListUsecase(new ToDoListRepositoryAxios());
 
     ToDoListEventBusImpl.getInstance().subscribe(subscriberName, ToDoListEvent.TODO_POINTS_ONT_ETE_RECUPERE, () => {
@@ -122,7 +111,6 @@
     });
 
     Promise.all([
-      chargementEmpreinteUseCase.execute(idUtilisateur, new ChargementEmpreintePresenterImpl(mapValueBilan)),
       chargerRecommandationsPersonnaliseesUsecase.execute(
         idUtilisateur,
         new RecommandationsPersonnaliseesPresenterImpl(mapValuesInteractions),

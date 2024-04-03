@@ -5,7 +5,7 @@ export interface Score {
   nombreDePointsDuNiveau: number;
   celebration: {
     id: string;
-    type: 'niveau';
+    type: 'niveau' | 'fin_mission';
     titre: string;
     new_niveau: number;
     reveal: {

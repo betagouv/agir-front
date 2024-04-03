@@ -34,6 +34,7 @@ export const utilisateurStore = defineStore('utilisateur', {
       nombreDePointsDansLeNiveau: 0,
       nombreDePointsDuNiveau: 0,
       celebration: null,
+      afficherMissionsTermines: false,
     },
   }),
   actions: {
