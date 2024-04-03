@@ -53,7 +53,11 @@
           <!-- <li class="fr-footer__bottom-item">
             <a class="fr-footer__bottom-link" href="#">Plan du site</a>
           </li> -->
-          <li class="fr-footer__bottom-item fr-footer__bottom-link">Accessibilité : non conforme</li>
+          <li class="fr-footer__bottom-item">
+            <router-link class="fr-footer__bottom-link" :to="{ name: RouteConformiteName.ACCESSIBILITE }"
+              >Accessibilité : non-conforme
+            </router-link>
+          </li>
           <li class="fr-footer__bottom-item">
             <router-link class="fr-footer__bottom-link" :to="{ name: RouteConformiteName.MENTIONS_LEGALES }"
               >Mentions légales

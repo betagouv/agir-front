@@ -11,7 +11,7 @@ const conformiteRoutes: RouteRecordRaw[] = [
   {
     path: '/mentions-legales',
     name: RouteConformiteName.MENTIONS_LEGALES,
-    component: () => import('@/components/PageMentionsLegales.vue'),
+    component: () => import('@/components/pages/PageMentionsLegales.vue'),
     meta: {
       title: 'Mentions légales',
       estPublique: true,
@@ -20,7 +20,7 @@ const conformiteRoutes: RouteRecordRaw[] = [
   {
     path: '/accessibilite',
     name: RouteConformiteName.ACCESSIBILITE,
-    component: () => import('@/components/PageAccessibilite.vue'),
+    component: () => import('@/components/pages/PageAccessibilite.vue'),
     meta: {
       title: 'Accessibilité',
       estPublique: true,
@@ -29,7 +29,7 @@ const conformiteRoutes: RouteRecordRaw[] = [
   {
     path: '/cgu',
     name: RouteConformiteName.CGU,
-    component: () => import('@/components/PageCGU.vue'),
+    component: () => import('@/components/pages/PageCGU.vue'),
     meta: {
       title: "Conditions générales d'utilisation",
       estPublique: true,
@@ -38,7 +38,7 @@ const conformiteRoutes: RouteRecordRaw[] = [
   {
     path: '/politiques-de-confidentialite',
     name: RouteConformiteName.POLITIQUES_DE_CONFIDENTIALITE,
-    component: () => import('@/components/PagePolitiquesDeConfidentialite.vue'),
+    component: () => import('@/components/pages/PagePolitiquesDeConfidentialite.vue'),
     meta: {
       title: 'Politiques de confidentialité',
       estPublique: true,

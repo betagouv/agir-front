@@ -82,6 +82,7 @@ app.use(Vue3DirectiveShepherd, options);
 app.use(VueMatomo, {
   host: import.meta.env.VITE_MATOMO_URL,
   siteId: import.meta.env.VITE_MATOMO_SITE_ID,
+  router: router,
 });
 if (import.meta.env.VITE_ENV === 'production') {
   Hotjar.init(import.meta.env.VITE_HOTJAR_ID, import.meta.env.VITE_HOTJAR_SNIPPET_VERSION, {
