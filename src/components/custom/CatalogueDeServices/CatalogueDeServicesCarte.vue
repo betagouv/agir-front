@@ -25,6 +25,7 @@
           v-else-if="service.estInstalle"
           class="fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-close-line fr-btn--sm"
           @click="enleverServiceActif(service.id)"
+          :title="`Enlever le service ${service.titre}`"
         >
           Enlever
         </button>
@@ -32,6 +33,7 @@
           v-else
           class="fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-download-line fr-btn--sm"
           @click="installerServiceActif(service.id)"
+          :title="`Installer le service ${service.titre}`"
         >
           Installer
         </button>
@@ -53,7 +55,6 @@
   import { ServiceEventBusImpl } from '@/services/serviceEventBusImpl';
   import { EnleverServiceActifUsecase } from '@/services/enleverServiceActif.usecase';
   import { ServiceRepositoryAxios } from '@/services/adapters/service.repository.axios';
-  import { utilisateurStore } from '@/store/utilisateur';
   import { InstallerServiceActifUsecase } from '@/services/installerServiceActif.usecase';
   import ModaleActions from '@/components/custom/Modale/ModaleActions';
   import { ServiceCatalogueViewModelItem } from '@/services/adapters/serviceCatalogue.presenter.impl';
@@ -62,21 +63,19 @@
   import { ToDoListEventBusImpl } from '@/toDoList/toDoListEventBusImpl';
   import '@gouvfr/dsfr/dist/component/badge/badge.min.css';
 
-  const props = defineProps<{ service: ServiceCatalogueViewModelItem }>();
+  const props = defineProps<{ service: ServiceCatalogueViewModelItem; utilisateurId: string }>();
 
   const emit = defineEmits<{ (e: 'update:estInstalle', value: ServiceCatalogueViewModelItem): void }>();
 
   async function enleverServiceActif(serviceId: string) {
     const useCase = new EnleverServiceActifUsecase(new ServiceRepositoryAxios(), ServiceEventBusImpl.getInstance());
-    const utilisateurId = utilisateurStore().utilisateur.id;
-    await useCase.execute(utilisateurId, serviceId);
+    await useCase.execute(props.utilisateurId, serviceId);
     emit('update:estInstalle', { ...props.service, estInstalle: false });
   }
 
   async function installerServiceActif(serviceId: string) {
     const useCase = new InstallerServiceActifUsecase(new ServiceRepositoryAxios(), ServiceEventBusImpl.getInstance());
-    const utilisateurId = utilisateurStore().utilisateur.id;
-    await useCase.execute(utilisateurId, serviceId);
+    await useCase.execute(props.utilisateurId, serviceId);
     emit('update:estInstalle', { ...props.service, estInstalle: true });
     window.scrollTo(0, 0);
 
@@ -87,7 +86,7 @@
         new LinkyRepositoryAxios(),
         ToDoListEventBusImpl.getInstance(),
       );
-      await marquerLeServiceCommeConsulteUsecase.execute(utilisateurStore().utilisateur.id);
+      await marquerLeServiceCommeConsulteUsecase.execute(props.utilisateurId);
     }
   }
 </script>
