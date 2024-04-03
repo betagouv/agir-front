@@ -10,7 +10,7 @@
         <div v-if="categoriesActives.length === 0 || categoriesActives.includes(`${index}`)">
           <h2 class="fr-h4">{{ index }}</h2>
           <div class="fr-mb-2w" v-for="aide in aides" :key="aide.id">
-            <Accordeon :label="aide.titre" :name-id="aide.id">
+            <Accordeon :label="aide.titre" :name-id="aide.id" @click="trackAideClick(aide)">
               <template v-slot:titre>
                 <span class="fr-col-12 fr-pr-2w">
                   <span class="aide__categorie text--gris">{{ aide.categorie }}</span>
@@ -53,6 +53,7 @@
   import Accordeon from '@/components/custom/Accordeon.vue';
   import { AidesViewModel } from '@/aides/ports/chargementAides.presenter';
   import InputCheckbox from '@/components/dsfr/InputCheckbox.vue';
+  import { trackClick } from '@/shell/matomo';
 
   const props = defineProps<{
     aidesGroupesParCategorie: AidesViewModel;
@@ -69,6 +70,10 @@
 
   const handleValueChange = value => {
     categoriesActives.value = value;
+  };
+
+  const trackAideClick = aide => {
+    trackClick('Aides', aide.titre);
   };
 </script>
 
