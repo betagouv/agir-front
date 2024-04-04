@@ -79,9 +79,7 @@
   const utilisateurId = utilisateurStore().utilisateur.id;
 
   const isButtonDisabled = computed(() => {
-    if (!reponse.value) return true;
-    if (reponse.value === '') return true;
-    return reponse.value.length < 1;
+    return reponse.value === 'todo';
   });
 
   onMounted(async () => {
