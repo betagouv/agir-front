@@ -24,18 +24,20 @@
           </div>
         </div>
       </div>
-      <div v-if="todoList?.derniere">
+      <div
+        v-if="todoList?.derniere"
+        v-tour-step:1="{
+          tour: defiTour,
+          options: {
+            attachTo: { on: 'top' },
+            title: 'Actions débloquées',
+            text: 'Retrouvez ici toutes vos actions personnalisées !',
+          },
+        }"
+      >
         <h2 class="fr-h2 fr-mb-0">Les actions recommandées pour vous</h2>
         <p class="fr-text--xl">En fonction de qui vous êtes et où vous en êtes</p>
         <CoachRecommandations
-          v-tour-step:1="{
-            tour: defiTour,
-            options: {
-              attachTo: { on: 'top' },
-              title: 'Actions débloquées',
-              text: 'Retrouvez ici toutes vos actions personnalisées !',
-            },
-          }"
           v-if="recommandationsPersonnaliseesViewModel"
           :recommandations="recommandationsPersonnaliseesViewModel.defisList"
         />
@@ -143,10 +145,17 @@
       });
   };
 
-  onMounted(lancerChargementDesDonnees);
+  onMounted(() => {
+    lancerChargementDesDonnees();
+
+    document.getElementById('passageDeNiveau')!.addEventListener('dsfr.conceal', () => {
+      ToDoListEventBusImpl.getInstance().publish(ToDoListEvent.TODO_A_ETE_TERMINEE);
+    });
+  });
 
   onUnmounted(() => {
     ToDoListEventBusImpl.getInstance().unsubscribe(subscriberName, ToDoListEvent.TODO_POINTS_ONT_ETE_RECUPERE);
     ToDoListEventBusImpl.getInstance().unsubscribe(subscriberName, ToDoListEvent.TODO_A_ETE_TERMINEE);
+    document.getElementById('passageDeNiveau')!.removeEventListener('dsfr.conceal', () => {});
   });
 </script>

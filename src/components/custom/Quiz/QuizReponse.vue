@@ -4,7 +4,7 @@
     <img width="32" src="/ic_score.svg" alt="points" />
   </div>
   <h2 class="fr-h4 fr-mb-2w">Pourquoi ?</h2>
-  <div v-html="texteExplication" />
+  <div class="cms__content" v-html="texteExplication" />
 </template>
 
 <script setup lang="ts">

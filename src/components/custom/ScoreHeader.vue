@@ -38,7 +38,23 @@
 
   <Teleport to="body">
     <Modale label="Modale de fin de missions" id="finDesMissions" :radius="true" :is-footer-actions="false" size="m">
-      <template v-slot:contenu><CoachFinDesMissions /></template>
+      <template v-slot:contenu>
+        <CoachFinDesMissions />
+        <div class="text--center fr-my-3w">
+          <div v-if="utilisateurStore().score.celebration?.reveal">
+            <p class="fr-m-0 text--uppercase fr-text--xs text--bold text--gris-light">Section débloquée</p>
+            <h4 class="fr-h2 fr-my-0">{{ utilisateurStore().score.celebration!.reveal!.titre }}</h4>
+            <p class="fr-text--sm">{{ utilisateurStore().score.celebration!.reveal!.description }}</p>
+            <router-link
+              class="fr-btn fr-btn--icon-right fr-icon-arrow-right-line"
+              :to="{ name: utilisateurStore().score.celebration!.reveal!.routeName }"
+              @click.prevent="revealFonctionnalite"
+            >
+              Découvrir la fonctionnalité
+            </router-link>
+          </div>
+        </div>
+      </template>
     </Modale>
     <button class="fr-btn fr-hidden" data-fr-opened="false" aria-controls="finDesMissions">
       Modale avec zone d'action

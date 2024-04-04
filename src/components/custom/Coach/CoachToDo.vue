@@ -1,6 +1,5 @@
 <template>
-  <CoachFinDesMissions v-if="todoList.derniere" />
-  <div v-else>
+  <div>
     <div v-if="!bonusFinalRecupere">
       <h2 class="fr-mb-0">{{ todoList.titre }}</h2>
       <p class="fr-text--xl">Un objectif après l’autre</p>
@@ -64,7 +63,6 @@
   import CoachCardDone from '@/components/custom/Coach/CoachCardDone.vue';
   import CoachCardToDo from '@/components/custom/Coach/CoachCardToDo.vue';
   import CoachFinDeMission from '@/components/custom/Coach/CoachFinDeMission.vue';
-  import CoachFinDesMissions from '@/components/custom/Coach/CoachFinDesMissions.vue';
   import { TodoListViewModel } from '@/toDoList/adapters/toDoList.presenter.impl';
   import { TerminerToDoListUsecase } from '@/toDoList/terminerToDoList.usecase';
   import { utilisateurStore } from '@/store/utilisateur';
@@ -91,7 +89,7 @@
   const recupererPointsTodo = async () => {
     const utilisateurId = utilisateurStore().utilisateur.id;
     new TerminerToDoListUsecase(new ToDoListRepositoryAxios(), ToDoListEventBusImpl.getInstance()).execute(
-      utilisateurId
+      utilisateurId,
     );
     bonusFinalRecupere.value = false;
   };
