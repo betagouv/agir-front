@@ -17,7 +17,7 @@
             <p class="fr-text--sm">{{ utilisateurStore().score.celebration!.reveal!.description }}</p>
             <router-link
               class="fr-btn fr-btn--icon-right fr-icon-arrow-right-line"
-              :to="{name:utilisateurStore().score.celebration!.reveal!.routeName}"
+              :to="{ name: utilisateurStore().score.celebration!.reveal!.routeName }"
               @click.prevent="revealFonctionnalite"
             >
               Découvrir la fonctionnalité
@@ -32,6 +32,15 @@
       </template>
     </Modale>
     <button class="fr-btn fr-hidden" data-fr-opened="false" aria-controls="passageDeNiveau">
+      Modale avec zone d'action
+    </button>
+  </Teleport>
+
+  <Teleport to="body">
+    <Modale label="Modale de fin de missions" id="finDesMissions" :radius="true" :is-footer-actions="false" size="m">
+      <template v-slot:contenu><CoachFinDesMissions /></template>
+    </Modale>
+    <button class="fr-btn fr-hidden" data-fr-opened="false" aria-controls="finDesMissions">
       Modale avec zone d'action
     </button>
   </Teleport>
@@ -53,6 +62,7 @@
   import ModalePassageDeNiveau from '@/components/custom/Modale/ModalePassageDeNiveau.vue';
   import { Fonctionnalites } from '@/shell/fonctionnalitesEnum';
   import { useReveal } from '@/composables/useReveal';
+  import CoachFinDesMissions from '@/components/custom/Coach/CoachFinDesMissions.vue';
 
   const { selectionnerReveal } = useReveal();
   const fonctionnaliteDebloque = ref<string>();
@@ -70,7 +80,7 @@
         function () {
           tour.cancel();
         },
-        { once: true }
+        { once: true },
       );
     }, 0);
   }
@@ -87,12 +97,17 @@
     }
 
     function declencherCelebration(celebrationId: string) {
-      modaleActions = new ModaleActions('passageDeNiveau');
-      modaleActions.open();
+      if (utilisateurStore().score.afficherMissionsTermines) {
+        modaleActions = new ModaleActions('finDesMissions');
+        modaleActions.open();
+      } else {
+        modaleActions = new ModaleActions('passageDeNiveau');
+        modaleActions.open();
+      }
 
       new ValiderCelebrationUsecase(new CelebrationRepositoryAxios()).execute(
         utilisateurStore().utilisateur.id,
-        celebrationId
+        celebrationId,
       );
     }
 
@@ -107,7 +122,7 @@
             declencherCelebration(viewModel.celebration.id);
             fonctionnaliteDebloque.value = viewModel.celebration.reveal?.feature;
           }
-        })
+        }),
       );
     }
 
@@ -131,7 +146,7 @@
       ToDoListEvent.TODO_RECOMMANDATION_A_ETE_CLIQUEE,
       () => {
         mettreAJourLeScore();
-      }
+      },
     );
     ToDoListEventBusImpl.getInstance().subscribe(subscriberName, ToDoListEvent.TODO_LINKY_A_ETE_CONSULTE, () => {
       mettreAJourLeScore();

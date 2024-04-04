@@ -8,7 +8,7 @@ interface ScoreApiModel {
   point_target_in_niveau: 0;
   celebrations: {
     id: string;
-    type: 'niveau';
+    type: 'niveau' | 'fin_mission';
     titre: string;
     new_niveau: number;
     reveal: {

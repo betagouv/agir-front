@@ -16,7 +16,6 @@ export class ChargementScorePresenterImpl implements ChargementScorePresenter {
       celebration: score.celebration
         ? {
             id: score.celebration.id,
-            type: score.celebration.type,
             titre: score.celebration.titre,
             new_niveau: score.celebration.new_niveau,
             reveal: score.celebration.reveal
@@ -29,6 +28,7 @@ export class ChargementScorePresenterImpl implements ChargementScorePresenter {
               : null,
           }
         : null,
+      afficherMissionsTermines: score.celebration?.type === 'fin_mission',
     });
   }
 
