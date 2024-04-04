@@ -65,7 +65,7 @@
           anchorElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
       }
-    }, 1);
+    }, 200);
   }
 
   onMounted(async () => {
