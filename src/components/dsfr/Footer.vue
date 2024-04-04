@@ -2,14 +2,12 @@
   <footer v-if="getUtilisateur" class="fr-footer background--white" role="contentinfo">
     <div class="fr-container">
       <div class="fr-footer__body">
-        <div class="fr-footer__brand fr-enlarge-link">
-          <router-link :to="{ name: RouteCoachName.COACH }" title="Retour à l’accueil du site">
-            <p class="fr-logo">
-              République
-              <br />
-              française
-            </p>
-          </router-link>
+        <div class="fr-footer__brand">
+          <p class="fr-logo">
+            République
+            <br />
+            française
+          </p>
         </div>
         <!-- <div class="fr-footer__content">
           <ul class="fr-footer__content-list">
