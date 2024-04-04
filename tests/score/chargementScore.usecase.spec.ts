@@ -5,6 +5,7 @@ import { MockScoreRepository } from './mockScoreRepository';
 import { Utilisateur } from '@/authentification/ports/utilisateur.repository';
 import { SessionRepository } from '@/authentification/authentifierUtilisateur.usecase';
 import { expect } from 'vitest';
+import { Fonctionnalites } from '@/shell/fonctionnalitesEnum';
 
 class SpyFeatuerAjouteeSessionRepository implements SessionRepository {
   get featureDebloquee(): string {
@@ -116,5 +117,48 @@ describe('Fichier de test du usecase de chargement du score', () => {
       });
     }
     expect(spyFeatuerAjouteeSessionRepository.featureDebloquee).toBe('aides');
+  });
+
+  it('doit construire le bon reveal pour la fonctionnalité bibliothèque', async () => {
+    // GIVEN
+    const spyFeatuerAjouteeSessionRepository = new SpyFeatuerAjouteeSessionRepository();
+    const chargementScoreUsecase = new ChargementScoreUsecase(
+      new MockScoreRepository({
+        id: 'celebrationID',
+        type: 'niveau',
+        titre: 'celebrationTitre',
+        new_niveau: 4,
+        reveal: {
+          description: ' Découvrez la biliothèque',
+          titre: 'Bibliothèque',
+          feature: Fonctionnalites.BIBLIOTHEQUE,
+        },
+      }),
+      spyFeatuerAjouteeSessionRepository,
+    );
+    // WHEN
+    await chargementScoreUsecase.execute('userAvecCelebration', new ChargementScorePresenterImpl(expectation));
+    // THEN
+    function expectation(viewModel: ScoreViewModel) {
+      expect(viewModel).toStrictEqual<ScoreViewModel>({
+        points: 10,
+        niveau: 1,
+        nombreDePointsDansLeNiveau: 25,
+        nombreDePointsDuNiveau: 100,
+        celebration: {
+          id: 'celebrationID',
+          type: 'niveau',
+          titre: 'celebrationTitre',
+          new_niveau: 4,
+          reveal: {
+            description: ' Découvrez la biliothèque',
+            feature: 'bibliotheque',
+            routeName: 'bibliotheque',
+            titre: 'Bibliothèque',
+          },
+        },
+      });
+    }
+    expect(spyFeatuerAjouteeSessionRepository.featureDebloquee).toBe('bibliotheque');
   });
 });
