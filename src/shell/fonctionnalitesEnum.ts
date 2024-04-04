@@ -3,4 +3,5 @@ export enum Fonctionnalites {
   AIDES = 'aides',
   RECOMMANDATIONS = 'recommandations',
   BIBLIOTHEQUE = 'bibliotheque',
+  DEFIS = 'defis',
 }

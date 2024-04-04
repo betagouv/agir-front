@@ -1,7 +1,7 @@
 <template>
   <div class="fr-container fr-py-6w">
     <div>
-      <h1 class="fr-h2">Agir</h1>
+      <h1 class="fr-h1">Agir</h1>
       <div v-if="todoList && !todoList.derniere" class="fr-grid-row fr-grid-row--gutters">
         <div class="fr-col fr-col-lg-7">
           <CoachToDo :todoList="todoList" />
@@ -24,6 +24,22 @@
           </div>
         </div>
       </div>
+      <div v-if="todoList?.derniere">
+        <h2 class="fr-h2 fr-mb-0">Les actions recommandées pour vous</h2>
+        <p class="fr-text--xl">En fonction de qui vous êtes et où vous en êtes</p>
+        <CoachRecommandations
+          v-tour-step:1="{
+            tour: defiTour,
+            options: {
+              attachTo: { on: 'top' },
+              title: 'Actions débloquées',
+              text: 'Retrouvez ici toutes vos actions personnalisées !',
+            },
+          }"
+          v-if="recommandationsPersonnaliseesViewModel"
+          :recommandations="recommandationsPersonnaliseesViewModel.defisList"
+        />
+      </div>
     </div>
   </div>
   <section
@@ -40,9 +56,11 @@
     }"
   >
     <div class="fr-container" v-if="!isLoading">
+      <h2 class="fr-h2 fr-mb-0">Recommandé pour vous</h2>
+      <p class="fr-text--xl">En fonction de qui vous êtes et où vous en êtes</p>
       <CoachRecommandations
         v-if="recommandationsPersonnaliseesViewModel"
-        :recommandations="recommandationsPersonnaliseesViewModel"
+        :recommandations="recommandationsPersonnaliseesViewModel.recommandationsList"
       />
     </div>
     <div class="fr-container" v-else>
@@ -79,7 +97,7 @@
   import BilanOnboarding from '@/components/custom/BilanOnboarding.vue';
   import { useReveal } from '@/composables/useReveal';
 
-  const { recommandationTour } = useReveal();
+  const { recommandationTour, defiTour } = useReveal();
 
   const isLoading = ref<boolean>(true);
   const todoList = ref<TodoListViewModel>();
