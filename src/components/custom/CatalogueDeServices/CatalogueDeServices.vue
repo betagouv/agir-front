@@ -13,9 +13,11 @@
     <div class="fr-col-12 fr-col-lg-9">
       <CatalogueDeServicesCarte
         v-for="service in servicesFiltres"
+        :key="service.id"
         :service="service"
         @update:est-installe="updateServiceEstInstalle"
         class="fr-mb-2w"
+        :id="service.ancre"
       />
     </div>
   </div>
@@ -39,7 +41,7 @@
     }
 
     return props.serviceCatalogueViewModels.catalogue.filter(service =>
-      service.thematiques.some(thematique => categoriesActives.value.includes(thematique))
+      service.thematiques.some(thematique => categoriesActives.value.includes(thematique)),
     );
   });
 

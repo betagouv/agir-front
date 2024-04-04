@@ -54,7 +54,7 @@ export class ToDoListPresenterImpl implements ToDoListPresenter {
       type: todo.type,
       thematique: todo.thematique,
       pointAEteRecolte: todo.pointAEteRecolte,
-      hash: todo.type === InteractionType.RECOMMANDATION ? '#recommandations' : undefined,
+      hash: this.determineHash(todo),
     };
   }
 
@@ -73,11 +73,22 @@ export class ToDoListPresenterImpl implements ToDoListPresenter {
       case InteractionType.COMPTE:
         return '/mon-compte';
       case InteractionType.SERVICE:
-        return '/agir/services';
+        return `/agir/services`;
       case InteractionType.RECOMMANDATION:
         return '/agir';
       default:
         return '';
+    }
+  }
+
+  private determineHash(todo: TodoListItem) {
+    switch (todo.type) {
+      case InteractionType.RECOMMANDATION:
+        return '#recommandations';
+      case InteractionType.SERVICE:
+        return `#${todo.contentId}`;
+      default:
+        return undefined;
     }
   }
 }

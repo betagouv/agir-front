@@ -161,7 +161,7 @@
     isLoading.value = false;
 
     if (informationCompteurViewModel.value?.doitOuvrirLaModaleDeConfiguration) {
-      const modaleActions = new ModaleActions('linky');
+      const modaleActions = new ModaleActions('linkyModale');
       modaleActions.open();
     }
   });

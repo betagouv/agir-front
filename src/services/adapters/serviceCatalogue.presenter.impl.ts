@@ -21,6 +21,7 @@ export interface ServiceCatalogueViewModelItem {
   image: string;
   estEnConstruction: boolean;
   parametrageRequis: boolean;
+  ancre: string;
 }
 export class ServiceCataloguePresenterImpl implements ServiceCataloguePresenter {
   constructor(private serviceCatelogueViewModels: (services: ServiceCatalogueViewModel) => void) {}
@@ -39,6 +40,7 @@ export class ServiceCataloguePresenterImpl implements ServiceCataloguePresenter 
         image: service.image,
         estEnConstruction: service.estEnConstruction,
         parametrageRequis: service.parametrageRequis,
+        ancre: service.id,
       })),
       filtreThematiques: this.recupererLesThematiquesDeFaconUnique(services),
     });
