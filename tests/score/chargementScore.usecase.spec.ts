@@ -25,7 +25,7 @@ describe('Fichier de test du usecase de chargement du score', () => {
     // GIVEN
     const chargementScoreUsecase = new ChargementScoreUsecase(
       new MockScoreRepository(),
-      new SpyFeatuerAjouteeSessionRepository()
+      new SpyFeatuerAjouteeSessionRepository(),
     );
     // WHEN
     await chargementScoreUsecase.execute('dlamande', new ChargementScorePresenterImpl(expectation));
@@ -37,6 +37,7 @@ describe('Fichier de test du usecase de chargement du score', () => {
         nombreDePointsDansLeNiveau: 25,
         nombreDePointsDuNiveau: 100,
         celebration: null,
+        afficherMissionsTermines: false,
       });
     }
   });
@@ -52,7 +53,7 @@ describe('Fichier de test du usecase de chargement du score', () => {
         new_niveau: 4,
         reveal: null,
       }),
-      spyFeatuerAjouteeSessionRepository
+      spyFeatuerAjouteeSessionRepository,
     );
     // WHEN
     await chargementScoreUsecase.execute('userAvecCelebration', new ChargementScorePresenterImpl(expectation));
@@ -65,11 +66,11 @@ describe('Fichier de test du usecase de chargement du score', () => {
         nombreDePointsDuNiveau: 100,
         celebration: {
           id: 'celebrationID',
-          type: 'niveau',
           titre: 'celebrationTitre',
           new_niveau: 4,
           reveal: null,
         },
+        afficherMissionsTermines: false,
       });
     }
   });
@@ -89,7 +90,7 @@ describe('Fichier de test du usecase de chargement du score', () => {
           feature: 'aides',
         },
       }),
-      spyFeatuerAjouteeSessionRepository
+      spyFeatuerAjouteeSessionRepository,
     );
     // WHEN
     await chargementScoreUsecase.execute('userAvecCelebration', new ChargementScorePresenterImpl(expectation));
@@ -102,7 +103,6 @@ describe('Fichier de test du usecase de chargement du score', () => {
         nombreDePointsDuNiveau: 100,
         celebration: {
           id: 'celebrationID',
-          type: 'niveau',
           titre: 'celebrationTitre',
           new_niveau: 4,
           reveal: {
@@ -112,6 +112,7 @@ describe('Fichier de test du usecase de chargement du score', () => {
             feature: 'aides',
           },
         },
+        afficherMissionsTermines: false,
       });
     }
     expect(spyFeatuerAjouteeSessionRepository.featureDebloquee).toBe('aides');
