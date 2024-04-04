@@ -147,7 +147,6 @@ describe('Fichier de test du usecase de chargement du score', () => {
         nombreDePointsDuNiveau: 100,
         celebration: {
           id: 'celebrationID',
-          type: 'niveau',
           titre: 'celebrationTitre',
           new_niveau: 4,
           reveal: {
@@ -157,6 +156,7 @@ describe('Fichier de test du usecase de chargement du score', () => {
             titre: 'Bibliothèque',
           },
         },
+        afficherMissionsTermines: false,
       });
     }
     expect(spyFeatuerAjouteeSessionRepository.featureDebloquee).toBe('bibliotheque');
