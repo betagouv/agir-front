@@ -39,7 +39,7 @@ describe('Fichier de tests concernant la recuperations des services dans le cata
           estEnConstruction: false,
           parametrageRequis: true,
         },
-      ])
+      ]),
     );
     await usecase.execute(utilisateurId, new ServiceCataloguePresenterImpl(expectation));
 
@@ -59,6 +59,7 @@ describe('Fichier de tests concernant la recuperations des services dans le cata
             image: 'image',
             estEnConstruction: false,
             parametrageRequis: false,
+            ancre: 'id',
           },
           {
             description: 'description',
@@ -72,6 +73,7 @@ describe('Fichier de tests concernant la recuperations des services dans le cata
             image: 'image',
             estEnConstruction: false,
             parametrageRequis: true,
+            ancre: 'id2',
           },
         ],
         filtreThematiques: [

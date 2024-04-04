@@ -13,6 +13,7 @@ interface ToDoListApiModel {
       titre: string;
       type: string;
       content_id: string;
+      service_id: string;
       id: string;
       points: number;
       sont_points_en_poche: boolean;
@@ -20,7 +21,7 @@ interface ToDoListApiModel {
         current: number;
         target: number;
       };
-    }
+    },
   ];
   done: [
     {
@@ -35,7 +36,7 @@ interface ToDoListApiModel {
         current: number;
         target: number;
       };
-    }
+    },
   ];
 }
 
@@ -52,7 +53,7 @@ export class ToDoListRepositoryAxios implements ToDoListRepository {
       aFaire: response.data.todo.map(todo => ({
         id: todo.id,
         titre: todo.titre,
-        contentId: todo.content_id || '',
+        contentId: todo.content_id || todo.service_id || '',
         progession: {
           etapeCourante: todo.progression.current,
           etapeTotal: todo.progression.target,

@@ -13,16 +13,16 @@
   <Teleport to="body">
     <Modale
       label="Modale de paramétrage du service Linky"
-      id="linky"
+      id="linkyModale"
       :radius="false"
       :is-footer-actions="false"
       size="m"
     >
       <template v-slot:contenu>
-        <ServiceModaleParametreLinky service-id="linky" />
+        <ServiceModaleParametreLinky service-id="linky" prm="" />
       </template>
     </Modale>
-    <button class="fr-btn fr-hidden" data-fr-opened="false" aria-controls="linky">
+    <button class="fr-btn fr-hidden" data-fr-opened="false" aria-controls="linkyModale">
       Modale paramétrage du service linky
     </button>
   </Teleport>
@@ -54,11 +54,25 @@
     serviceCatalogueViewModels.value = { ...serviceCatalogueViewModels.value };
   };
 
+  function afficherCatalogueService(viewModel: ServiceCatalogueViewModel) {
+    serviceCatalogueViewModels.value = viewModel;
+    setTimeout(() => {
+      const anchor = window.location.hash;
+      if (anchor) {
+        const cleanAnchor = anchor.replace(/^#/, '');
+        const anchorElement = document.getElementById(cleanAnchor);
+        if (anchorElement) {
+          anchorElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+    }, 1);
+  }
+
   onMounted(async () => {
     const usecase = new RecupererCatalogueServicesUseCase(new ServiceRepositoryAxios());
     const utilisateurId: string = utilisateurStore().utilisateur.id;
-    const serviceCataloguePresenterImpl = new ServiceCataloguePresenterImpl(
-      (services: ServiceCatalogueViewModel) => (serviceCatalogueViewModels.value = services)
+    const serviceCataloguePresenterImpl = new ServiceCataloguePresenterImpl((services: ServiceCatalogueViewModel) =>
+      afficherCatalogueService(services),
     );
     await usecase.execute(utilisateurId, serviceCataloguePresenterImpl);
     isLoading.value = false;

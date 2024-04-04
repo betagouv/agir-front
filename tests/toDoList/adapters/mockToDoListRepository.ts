@@ -69,7 +69,7 @@ export class MockToDoListRepository implements ToDoListRepository {
           interactionId: 'interactionId3',
           titre: 'Installer un service',
           url: '',
-          contentId: '',
+          contentId: 'leservice',
           progession: {
             etapeCourante: 1,
             etapeTotal: 1,
@@ -84,7 +84,7 @@ export class MockToDoListRepository implements ToDoListRepository {
           interactionId: 'interactionId4',
           titre: 'Installer un service',
           url: '',
-          contentId: '',
+          contentId: 'leservice',
           progession: {
             etapeCourante: 1,
             etapeTotal: 1,

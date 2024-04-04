@@ -81,7 +81,7 @@
     window.scrollTo(0, 0);
 
     if (serviceId === 'linky') {
-      const modaleActions = new ModaleActions(serviceId);
+      const modaleActions = new ModaleActions('linkyModale');
       modaleActions.open();
       const marquerLeServiceCommeConsulteUsecase = new MarquerLeServiceCommeConsulteUsecase(
         new LinkyRepositoryAxios(),

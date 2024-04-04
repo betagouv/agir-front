@@ -44,8 +44,8 @@ describe('Fichier de tests concernant la récupération de la ToDo List', () => 
             url: '/agir/quiz/',
           },
           {
-            contentId: '',
-            hash: undefined,
+            contentId: 'leservice',
+            hash: '#leservice',
             id: 'id3',
             nombreDePointsAGagner: 10,
             pointAEteRecolte: false,
@@ -59,8 +59,8 @@ describe('Fichier de tests concernant la récupération de la ToDo List', () => 
             url: '/agir/services',
           },
           {
-            contentId: '',
-            hash: undefined,
+            contentId: 'leservice',
+            hash: '#leservice',
             id: 'id4',
             nombreDePointsAGagner: 10,
             pointAEteRecolte: false,

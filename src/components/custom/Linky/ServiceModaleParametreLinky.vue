@@ -88,7 +88,7 @@
     parametrerService
       .execute(utilisateurStore().utilisateur.id, serviceId, { prm: parametreDuService.value })
       .then(() => {
-        new ModaleActions(serviceId).close();
+        new ModaleActions('linkyModale').close();
         ServiceEventBusImpl.getInstance().publish(ServiceEvent.SERVICE_INSTALLE); // todo : à sortir dans le usecase
       })
       .catch(error => afficherAlerte('error', 'Erreur', error.data.message));
