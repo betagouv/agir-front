@@ -1,7 +1,7 @@
 <template>
   <div class="fr-container fr-py-6w">
     <div>
-      <h1 class="fr-h1">Agir</h1>
+      <h1 class="fr-h1">Réduire votre empreinte écologique selon vos moyens, vos lieux de vie et vos envies</h1>
       <div v-if="todoList && !todoList.derniere" class="fr-grid-row fr-grid-row--gutters">
         <div class="fr-col fr-col-lg-7">
           <CoachToDo :todoList="todoList" />
@@ -24,9 +24,21 @@
           </div>
         </div>
       </div>
-      <div v-if="todoList?.derniere">
-        <h2 class="fr-h2 fr-mb-0">Les actions recommandées pour vous</h2>
-        <p class="fr-text--xl">En fonction de qui vous êtes et où vous en êtes</p>
+      <div
+        v-if="utilisateurStore().utilisateur.fonctionnalitesDebloquees.includes('defis')"
+        v-tour-step:1="{
+          tour: defiTour,
+          options: {
+            attachTo: { on: 'top' },
+            title: 'Actions débloquées',
+            text: 'Retrouvez ici toutes vos actions personnalisées !',
+          },
+        }"
+      >
+        <h2 class="fr-h2 fr-mb-0">Essayer de nouveaux usages</h2>
+        <p class="fr-text--xl">
+          Des propositions d'actions concrètes et faciles à mettre en oeuvre, en fonction de votre situation
+        </p>
         <CoachRecommandations
           v-if="recommandationsPersonnaliseesViewModel"
           :recommandations="recommandationsPersonnaliseesViewModel.defisList"
@@ -48,8 +60,10 @@
     }"
   >
     <div class="fr-container" v-if="!isLoading">
-      <h2 class="fr-h2 fr-mb-0">Recommandé pour vous</h2>
-      <p class="fr-text--xl">En fonction de qui vous êtes et où vous en êtes</p>
+      <h2 class="fr-h2 fr-mb-0">Personnaliser davantage votre expérience</h2>
+      <p class="fr-text--xl">
+        Mieux comprendre les enjeux environnementaux et aider Agir à mieux comprendre les vôtres
+      </p>
       <CoachRecommandations
         v-if="recommandationsPersonnaliseesViewModel"
         :recommandations="recommandationsPersonnaliseesViewModel.recommandationsList"
@@ -89,7 +103,7 @@
   import BilanOnboarding from '@/components/custom/BilanOnboarding.vue';
   import { useReveal } from '@/composables/useReveal';
 
-  const { recommandationTour } = useReveal();
+  const { recommandationTour, defiTour } = useReveal();
 
   const isLoading = ref<boolean>(true);
   const todoList = ref<TodoListViewModel>();
@@ -148,12 +162,12 @@
         new RecommandationsPersonnaliseesPresenterImpl(mapValuesInteractions),
       );
     };
-    document.getElementById('finDesMissions')!.addEventListener('dsfr.conceal', handleConcealEvent);
+    document.getElementById('passageDeNiveau')!.addEventListener('dsfr.conceal', handleConcealEvent);
   });
 
   onUnmounted(() => {
     ToDoListEventBusImpl.getInstance().unsubscribe(subscriberName, ToDoListEvent.TODO_POINTS_ONT_ETE_RECUPERE);
     ToDoListEventBusImpl.getInstance().unsubscribe(subscriberName, ToDoListEvent.TODO_A_ETE_TERMINEE);
-    document.getElementById('finDesMissions')!.removeEventListener('dsfr.conceal', handleConcealEvent);
+    document.getElementById('passageDeNiveau')!.removeEventListener('dsfr.conceal', handleConcealEvent);
   });
 </script>
