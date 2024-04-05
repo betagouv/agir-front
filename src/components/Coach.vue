@@ -24,17 +24,7 @@
           </div>
         </div>
       </div>
-      <div
-        v-if="todoList?.derniere"
-        v-tour-step:1="{
-          tour: defiTour,
-          options: {
-            attachTo: { on: 'top' },
-            title: 'Actions débloquées',
-            text: 'Retrouvez ici toutes vos actions personnalisées !',
-          },
-        }"
-      >
+      <div v-if="todoList?.derniere">
         <h2 class="fr-h2 fr-mb-0">Les actions recommandées pour vous</h2>
         <p class="fr-text--xl">En fonction de qui vous êtes et où vous en êtes</p>
         <CoachRecommandations
@@ -99,12 +89,13 @@
   import BilanOnboarding from '@/components/custom/BilanOnboarding.vue';
   import { useReveal } from '@/composables/useReveal';
 
-  const { recommandationTour, defiTour } = useReveal();
+  const { recommandationTour } = useReveal();
 
   const isLoading = ref<boolean>(true);
   const todoList = ref<TodoListViewModel>();
   const store = utilisateurStore();
   const recommandationsPersonnaliseesViewModel = ref<RecommandationPersonnaliseeViewModel>();
+  let handleConcealEvent: () => void;
 
   function mapValuesInteractions(viewModel: RecommandationPersonnaliseeViewModel) {
     recommandationsPersonnaliseesViewModel.value = viewModel;
@@ -147,15 +138,22 @@
 
   onMounted(() => {
     lancerChargementDesDonnees();
-
-    document.getElementById('passageDeNiveau')!.addEventListener('dsfr.conceal', () => {
-      ToDoListEventBusImpl.getInstance().publish(ToDoListEvent.TODO_A_ETE_TERMINEE);
-    });
+    handleConcealEvent = () => {
+      const idUtilisateur = store.utilisateur.id;
+      const chargerRecommandationsPersonnaliseesUsecase = new RecommandationsPersonnaliseesUsecase(
+        new RecommandationsPersonnaliseesRepositoryAxios(),
+      );
+      chargerRecommandationsPersonnaliseesUsecase.execute(
+        idUtilisateur,
+        new RecommandationsPersonnaliseesPresenterImpl(mapValuesInteractions),
+      );
+    };
+    document.getElementById('finDesMissions')!.addEventListener('dsfr.conceal', handleConcealEvent);
   });
 
   onUnmounted(() => {
     ToDoListEventBusImpl.getInstance().unsubscribe(subscriberName, ToDoListEvent.TODO_POINTS_ONT_ETE_RECUPERE);
     ToDoListEventBusImpl.getInstance().unsubscribe(subscriberName, ToDoListEvent.TODO_A_ETE_TERMINEE);
-    document.getElementById('passageDeNiveau')!.removeEventListener('dsfr.conceal', () => {});
+    document.getElementById('finDesMissions')!.removeEventListener('dsfr.conceal', handleConcealEvent);
   });
 </script>
