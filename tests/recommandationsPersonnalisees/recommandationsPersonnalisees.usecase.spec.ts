@@ -16,23 +16,59 @@ describe('Fichier de tests concernant le chargement des recommandations personna
     // THEN
     function expectation(recommandationsPersonnaliseesViewModel: RecommandationPersonnaliseeViewModel) {
       expect(recommandationsPersonnaliseesViewModel).toStrictEqual<RecommandationPersonnaliseeViewModel>({
+        defisList: [
+          {
+            bouton: {
+              libelle: 'Faire le suivi',
+              style: 'fr-btn--icon-left fr-icon-check-line',
+              url: '/defi/1',
+            },
+            contentId: '1',
+            image: '/reco_defi.jpg',
+            joursRestants: 'Plus que 7 jours',
+            nombreDePointsAGagner: 'nombreDePointsAGagner',
+            thematique: '🌍 Global',
+            titre: 'Un défi',
+            type: {
+              libelle: 'Action',
+              style: 'background--bleu-ecume-hover',
+            },
+          },
+          {
+            bouton: {
+              libelle: 'Relever le défi',
+              style: 'fr-btn--icon-left fr-icon-check-line',
+              url: '/defi/1',
+            },
+            contentId: '1',
+            image: '/reco_defi.jpg',
+            joursRestants: null,
+            nombreDePointsAGagner: 'nombreDePointsAGagner',
+            thematique: '🌍 Global',
+            titre: 'Un autre défi',
+            type: {
+              libelle: 'Action',
+              style: 'background--bleu-ecume-hover',
+            },
+          },
+        ],
         recommandationsList: [
           {
-            image: 'illustrationURL',
-            thematique: '🚲 Transports',
-            titre: 'Premier Quiz',
-            joursRestants: null,
             bouton: {
               libelle: 'Répondre au quiz',
               style: 'fr-btn--secondary fr-btn--icon-left fr-icon-question-line',
               url: '/agir/quiz/2',
             },
             contentId: '2',
+            image: 'illustrationURL',
+            joursRestants: null,
+            nombreDePointsAGagner: 'nombreDePointsAGagner',
+            thematique: '🚲 Transports',
+            titre: 'Premier Quiz',
             type: {
               libelle: 'Quiz',
               style: 'background--vert--bourgeon',
             },
-            nombreDePointsAGagner: 'nombreDePointsAGagner',
           },
           {
             bouton: {
@@ -41,8 +77,8 @@ describe('Fichier de tests concernant le chargement des recommandations personna
               url: '/article/article-qui-doit-etre-en-avant/2',
             },
             contentId: '2',
-            joursRestants: null,
             image: 'illustrationURL',
+            joursRestants: null,
             nombreDePointsAGagner: 'nombreDePointsAGagner',
             thematique: '🌍 Global',
             titre: 'Article qui doit être en avant',
@@ -52,40 +88,22 @@ describe('Fichier de tests concernant le chargement des recommandations personna
             },
           },
           {
-            image: 'illustrationURL',
-            thematique: '🌍 Global',
-            titre: 'Aide vélo',
-            joursRestants: null,
-            contentId: '1',
             bouton: {
               libelle: "Simuler l'aide",
               style: 'fr-btn--secondary',
               url: '/vos-aides/',
             },
+            contentId: '1',
+            image: 'illustrationURL',
+            joursRestants: null,
+            nombreDePointsAGagner: 'nombreDePointsAGagner',
+            thematique: '🌍 Global',
+            titre: 'Aide vélo',
             type: {
               libelle: 'Aide',
               style: 'background--yellow',
             },
-            nombreDePointsAGagner: 'nombreDePointsAGagner',
           },
-          {
-            image: '/reco_defi.jpg',
-            thematique: '🌍 Global',
-            titre: 'Un défi',
-            joursRestants: 'Plus que 7 jours',
-            type: {
-              libelle: 'Action',
-              style: 'background--bleu-ecume-hover',
-            },
-            bouton: {
-              libelle: 'Faire le suivi',
-              style: 'fr-btn--icon-left fr-icon-check-line',
-              url: '/defi/1',
-            },
-            contentId: '1',
-            nombreDePointsAGagner: 'nombreDePointsAGagner',
-          },
-
           {
             bouton: {
               libelle: 'Répondre à la question',
@@ -102,23 +120,6 @@ describe('Fichier de tests concernant le chargement des recommandations personna
               libelle: 'Mieux vous connaître',
               style: 'background--pink',
             },
-          },
-          {
-            image: '/reco_defi.jpg',
-            thematique: '🌍 Global',
-            titre: 'Un autre défi',
-            joursRestants: null,
-            type: {
-              libelle: 'Action',
-              style: 'background--bleu-ecume-hover',
-            },
-            bouton: {
-              libelle: 'Relever le défi',
-              style: 'fr-btn--icon-left fr-icon-check-line',
-              url: '/defi/1',
-            },
-            contentId: '1',
-            nombreDePointsAGagner: 'nombreDePointsAGagner',
           },
         ],
       });
