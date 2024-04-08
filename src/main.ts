@@ -35,6 +35,18 @@ declare global {
       };
     };
   }
+  interface HTMLElement {
+    addEventListener(
+      type: 'dsfr.conceal',
+      listener: (event: Event) => void,
+      options?: boolean | AddEventListenerOptions,
+    ): void;
+    removeEventListener(
+      type: 'dsfr.conceal',
+      listener: (event: Event) => void,
+      options?: boolean | EventListenerOptions,
+    ): void;
+  }
 }
 
 const app = createApp(App);
@@ -69,6 +81,13 @@ const options = {
       },
     },
     bibliothequeTour: {
+      useModalOverlay: true,
+      defaultStepOptions: {
+        scrollTo: true,
+        classes: 'fr-text--bold',
+      },
+    },
+    defiTour: {
       useModalOverlay: true,
       defaultStepOptions: {
         scrollTo: true,

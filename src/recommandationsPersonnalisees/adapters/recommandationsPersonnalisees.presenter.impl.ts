@@ -30,6 +30,7 @@ export interface RecommandationViewModel {
   joursRestants: string | null;
 }
 export interface RecommandationPersonnaliseeViewModel {
+  defisList: RecommandationViewModel[];
   recommandationsList: RecommandationViewModel[];
 }
 
@@ -40,6 +41,7 @@ export class RecommandationsPersonnaliseesPresenterImpl implements Recommandatio
   presente(recommandationsPersonnalisees: RecommandationPersonnalisee[]): void {
     this.viewModel({
       recommandationsList: recommandationsPersonnalisees
+        .filter(recommandationPersonnalisee => recommandationPersonnalisee.type !== 'defi')
         .map(recommandationPersonnalisee => {
           return {
             thematique: recommandationPersonnalisee.categorie,
@@ -55,6 +57,22 @@ export class RecommandationsPersonnaliseesPresenterImpl implements Recommandatio
           };
         })
         .slice(0, 6),
+      defisList: recommandationsPersonnalisees
+        .filter(recommandationPersonnalisee => recommandationPersonnalisee.type === 'defi')
+        .map(recommandationPersonnalisee => {
+          return {
+            thematique: recommandationPersonnalisee.categorie,
+            titre: recommandationPersonnalisee.titre,
+            image: this.determineImage(recommandationPersonnalisee),
+            bouton: this.determineBouton(recommandationPersonnalisee),
+            contentId: recommandationPersonnalisee.idDuContenu,
+            nombreDePointsAGagner: recommandationPersonnalisee.nombreDePointsAGagner,
+            type: this.determineTypeTag(recommandationPersonnalisee.type),
+            joursRestants: recommandationPersonnalisee.joursRestants
+              ? `Plus que ${recommandationPersonnalisee.joursRestants} jours`
+              : null,
+          };
+        }),
     });
   }
 
