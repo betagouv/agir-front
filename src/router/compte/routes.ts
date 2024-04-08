@@ -10,7 +10,7 @@ import { onboardingStore } from '@/store/onboarding';
 import { RouteRecordRaw } from 'vue-router';
 import { RouteCompteName } from '@/router/compte/routeCompteName';
 
-enum RouteComptePath {
+export enum RouteComptePath {
   MON_COMPTE = '/mon-compte/',
   MODIFIER_MOT_DE_PASSE = '/mon-compte/changer-de-mot-de-passe',
   OPTIONS_AVANCEES = '/mon-compte/options-avancees',

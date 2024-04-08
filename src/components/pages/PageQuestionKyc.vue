@@ -1,7 +1,10 @@
 <template>
   <div class="fr-container fr-mb-6w">
     <FilDAriane page-courante="Question pour mieux vous connaître" />
-    <h1 class="fr-h2">Question pour mieux vous connaître</h1>
+    <h1 class="fr-h2 fr-mb-1w">Question pour mieux vous connaître</h1>
+    <p class="fr-text--xl">
+      Dites nous en plus sur vous pour que le service vous recommande des actions plus personnalisées.
+    </p>
     <div v-if="isLoading">Chargement en cours ...</div>
     <div v-else-if="!isLoading && questionViewModel" class="background--white border fr-p-4w border-radius--md">
       <form @submit.prevent="validerLaReponse" v-if="!reponseAEteDonnee">
