@@ -2,6 +2,9 @@
   <div class="fr-container fr-py-6w">
     <div>
       <h1 class="fr-h1">Réduire votre empreinte écologique selon vos moyens, vos lieux de vie et vos envies</h1>
+      <p v-if="todoList && todoList.derniere">
+        ✅ Vous avez accompli l’ensemble des missions. De nouvelles missions arriveront très prochainement.
+      </p>
       <div v-if="todoList && !todoList.derniere" class="fr-grid-row fr-grid-row--gutters">
         <div class="fr-col fr-col-lg-7">
           <CoachToDo :todoList="todoList" />
@@ -32,6 +35,7 @@
             attachTo: { on: 'top' },
             title: 'Actions débloquées',
             text: 'Retrouvez ici toutes vos actions personnalisées !',
+            scrollTo: { behavior: 'smooth', block: 'center' },
           },
         }"
       >
