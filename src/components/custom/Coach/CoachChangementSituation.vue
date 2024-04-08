@@ -2,9 +2,8 @@
   <div class="fr-grid-row fr-grid-row--gutters fr-grid-row--middle">
     <div class="fr-col-md-8">
       <h2 class="fr-h4 text--white">Vous changez de situation ?</h2>
-      <p class="text--white text--bold fr-text--xl">
-        Le coach vous conseille et vous accompagne à tout moment avec des conseils et actions adaptées à vos
-        changements.
+      <p class="text--white fr-text--xl">
+        Agir vous conseille et vous accompagne à tout moment avec des conseils et actions adaptés à vos changements.
       </p>
     </div>
     <div class="fr-col-md-4">

@@ -12,6 +12,7 @@ export interface QuestionViewModel {
   reponses_possibles: ReponsePossible[];
   points: string;
   reponses: string[];
+  aDejaEteRepondu: boolean;
 }
 
 export class QuestionPresenterImpl implements QuestionPresenter {
@@ -28,6 +29,7 @@ export class QuestionPresenterImpl implements QuestionPresenter {
         label: reponse,
       })),
       reponses: question.reponse,
+      aDejaEteRepondu: question.reponse?.length > 0,
     });
   }
 }

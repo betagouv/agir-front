@@ -41,7 +41,11 @@
         </div>
         <button class="fr-btn fr-btn--lg" title="Valider" :disabled="isButtonDisabled">Valider</button>
       </form>
-      <KYCFin v-else :phrase-point-a-gagner="questionViewModel!.points" :a-deja-repondu="aDejaRepondu" />
+      <KYCFin
+        v-else
+        :phrase-point-a-gagner="questionViewModel.points"
+        :a-deja-repondu="questionViewModel.aDejaEteRepondu"
+      />
     </div>
     <div v-else>Problème de chargement de donées</div>
   </div>
@@ -68,7 +72,6 @@
   const questionViewModel = ref<QuestionViewModel>();
   const reponse = ref<string | string[]>('');
   const reponseAEteDonnee = ref<boolean>(false);
-  const aDejaRepondu = ref<boolean>(false);
 
   const utilisateurId = utilisateurStore().utilisateur.id;
 
@@ -98,10 +101,6 @@
       ToDoListEventBusImpl.getInstance(),
     );
     envoyerReponseUsecase.execute(utilisateurId, questionId, [reponse.value].flat());
-
-    if (questionViewModel.value?.reponses) {
-      aDejaRepondu.value = true;
-    }
     reponseAEteDonnee.value = true;
   };
 </script>
