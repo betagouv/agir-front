@@ -2,6 +2,11 @@ import { ToDoListPresenter } from '@/toDoList/ports/toDoList.presenter';
 import { TodoList, TodoListItem } from '@/toDoList/recupererToDoList.usecase';
 import { InteractionType } from '@/shell/interactionType';
 import { buildUrl } from '@/shell/buildUrl';
+import { RouteAidesPath } from '@/router/aides/routes';
+import { RouteCoachPath } from '@/router/coach/routes';
+import { RouteArticlePath } from '@/router/articles/routes';
+import { RouteKycPath } from '@/router/kyc/routes';
+import { RouteComptePath } from '@/router/compte/routes';
 
 interface TodoViewModel {
   id: string;
@@ -61,19 +66,17 @@ export class ToDoListPresenterImpl implements ToDoListPresenter {
   private determineUrl(todo: TodoListItem) {
     switch (todo.type) {
       case InteractionType.AIDE:
-        return '/vos-aides';
+        return RouteAidesPath.VOS_AIDES;
       case InteractionType.QUIZ:
-        return `/agir/quiz/${todo.contentId}`;
+        return `${RouteCoachPath.COACH + RouteCoachPath.QUIZ}/${todo.contentId}`;
       case InteractionType.ARTICLE:
-        return `/article/${buildUrl(todo.titre)}/${todo.contentId}`;
+        return `${RouteArticlePath.ARTICLE}${buildUrl(todo.titre)}/${todo.contentId}`;
       case InteractionType.KYC:
-        return `/kyc/${todo.contentId}`;
-      case InteractionType.SUIVIDUJOUR:
-        return '/agir/suivi-du-jour';
+        return `${RouteKycPath.KYC}${todo.contentId}`;
       case InteractionType.COMPTE:
-        return '/mon-compte';
+        return `${RouteCoachPath.COACH}${RouteComptePath.MON_COMPTE}`;
       case InteractionType.SERVICE:
-        return `/agir/services`;
+        return `${RouteCoachPath.COACH}${RouteCoachPath.SERVICES}`;
       case InteractionType.RECOMMANDATION:
         return '/agir';
       default:

@@ -108,7 +108,7 @@ describe('Fichier de tests concernant le chargement des recommandations personna
             bouton: {
               libelle: 'Répondre à la question',
               style: 'fr-btn--icon-left fr-icon-arrow-right-line',
-              url: '/kyc/1',
+              url: '/mieux-vous-connaitre/1',
             },
             contentId: '1',
             image: '/ic_kyc.svg',
