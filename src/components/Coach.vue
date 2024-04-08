@@ -2,7 +2,7 @@
   <div class="fr-container fr-py-6w">
     <div>
       <h1 class="fr-h1 fr-m-0">Réduire votre empreinte écologique</h1>
-      <p class="fr-text--xl">selon vos moyens, vos lieux de vie et vos envies</p>
+      <p class="fr-text--xl">Selon vos moyens, vos lieux de vie et vos envies</p>
       <div v-if="todoList && todoList.derniere" class="background--white border-radius--md shadow fr-p-2w fr-mb-3w">
         <p class="fr-mb-0">
           ✅ <span class="fr-text--bold">Vous avez accompli l’ensemble des missions ! </span> De nouvelles missions
