@@ -33,6 +33,22 @@ test.describe('Mission 1', async () => {
     await page.waitForSelector('.utilisateur .score');
     await expect(page).toHaveTitle('Agir ! - Agir');
     await recolterPoints(page);
+  });
+
+  test('Objectif 3 - Répondre à une question pour mieux vous connaître', async () => {
+    const kyc = page.getByRole('link', { name: 'Répondre à une question pour mieux vous connaître' });
+    await kyc.click();
+
+    const premierChoix = page.getByText('🥦 Alimentation');
+    await premierChoix.click();
+
+    const valider = page.getByRole('button', { name: 'Valider' });
+    await valider.click();
+
+    const continuer = page.getByRole('link', { name: 'Continuer' });
+    await continuer.click();
+
+    await recolterPoints(page);
 
     const decouvrir = page.getByRole('button', { name: 'Découvrir le bonus' });
     await expect(decouvrir).toBeVisible();
@@ -41,17 +57,6 @@ test.describe('Mission 1', async () => {
     await expect(page.locator('#app').getByText('Accomplie')).toBeVisible();
     await page.getByRole('button', { name: 'Continuer' }).click({ force: true });
     await page.waitForLoadState('domcontentloaded');
-  });
-});
-test.describe('Mission 2', async () => {
-  test('Mission 2 - début', async () => {
-    await expect(page.locator('#app').getByText('Mission 2')).toBeVisible();
-    await cliqueTodo(page);
-    await expect(page.locator('#app').getByText('Mission 2')).toBeVisible();
-    await recolterPoints(page);
-    await cliqueTodo(page);
-    await expect(page.locator('#app').getByText('Mission 2')).toBeVisible();
-    await recolterPoints(page);
   });
 });
 
