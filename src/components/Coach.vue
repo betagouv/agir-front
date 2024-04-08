@@ -31,29 +31,33 @@
           </div>
         </div>
       </div>
-      <div
-        v-if="utilisateurStore().utilisateur.fonctionnalitesDebloquees.includes('defis')"
-        v-tour-step:1="{
-          tour: defiTour,
-          options: {
-            attachTo: { on: 'top' },
-            title: 'Actions débloquées',
-            text: 'Retrouvez ici toutes vos actions personnalisées !',
-            scrollTo: { behavior: 'smooth', block: 'center' },
-          },
-        }"
-      >
-        <h2 class="fr-h2 fr-mb-0">Essayer de nouveaux usages</h2>
-        <p class="fr-text--xl">
-          Des propositions d'actions concrètes et faciles à mettre en oeuvre, en fonction de votre situation
-        </p>
-        <CoachRecommandations
-          v-if="recommandationsPersonnaliseesViewModel"
-          :recommandations="recommandationsPersonnaliseesViewModel.defisList"
-        />
-      </div>
     </div>
   </div>
+  <section
+    class="fr-pb-6w"
+    id="actions"
+    v-if="utilisateurStore().utilisateur.fonctionnalitesDebloquees.includes('defis')"
+    v-tour-step:1="{
+      tour: defiTour,
+      options: {
+        attachTo: { on: 'top' },
+        title: 'Actions débloquées',
+        text: 'Retrouvez ici toutes vos actions personnalisées !',
+        scrollTo: { behavior: 'smooth', block: 'center' },
+      },
+    }"
+  >
+    <div class="fr-container">
+      <h2 class="fr-h2 fr-mb-0">Essayer de nouveaux usages</h2>
+      <p class="fr-text--xl">
+        Des propositions d'actions concrètes et faciles à mettre en oeuvre, en fonction de votre situation
+      </p>
+      <CoachRecommandations
+        v-if="recommandationsPersonnaliseesViewModel"
+        :recommandations="recommandationsPersonnaliseesViewModel.defisList"
+      />
+    </div>
+  </section>
   <section
     id="recommandations"
     v-if="store.utilisateur.fonctionnalitesDebloquees.includes(Fonctionnalites.RECOMMANDATIONS)"
