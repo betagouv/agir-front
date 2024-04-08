@@ -40,7 +40,7 @@ test.describe('Mission 1', async () => {
     await kyc.click();
 
     const premierChoix = page.getByText('🥦 Alimentation');
-    await premierChoix.check();
+    await premierChoix.click();
 
     const valider = page.getByRole('button', { name: 'Valider' });
     await valider.click();
