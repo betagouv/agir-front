@@ -1,4 +1,10 @@
 import { test, expect, chromium, Page } from '@playwright/test';
+import { InjectService } from './utils/injectService';
+import { InjectUtilisateur } from './utils/injectUtilisateur';
+import { InjectRecommandations } from './utils/injectRecommandations';
+import { InjectTodo } from './utils/injectTodo';
+import { InjectKYC } from './utils/injectKYC';
+import { InjectGamification } from './utils/injectGamification';
 
 let page: Page;
 
@@ -8,49 +14,26 @@ test.beforeAll(async () => {
   page = await context.newPage();
   await page.goto('/');
 
-  await page.evaluate(() => {
-    localStorage.setItem(
-      'utilisateur',
-      JSON.stringify({
-        utilisateur: {
-          id: 'dorian',
-          nom: 'RECETTEUR',
-          codePostal: '21000',
-          commune: 'DIJON',
-          prenom: 'Dorian',
-          mail: 'dorian@agir.dev',
-          revenuFiscal: null,
-          nombreDePartsFiscales: 2.5,
-          fonctionnalitesDebloquees: ['aides', 'services', 'recommandations', 'bibliotheque'],
-        },
-        valeurBilanCarbone: { bilan: '', details: [], valeurMax: 0 },
-        score: {
-          points: 470,
-          niveau: 5,
-          nombreDePointsDansLeNiveau: 70,
-          nombreDePointsDuNiveau: 200,
-          celebration: null,
-          afficherMissionsTermines: false,
-        },
-      }),
-    );
-  });
+  const injectUtilisateur = new InjectUtilisateur();
+  const utilisateurPourLocalStorage = injectUtilisateur.avecUtilisateurPremiereConnexion();
+
+  await page.evaluate(utilisateur => {
+    localStorage.setItem('utilisateur', JSON.stringify(utilisateur));
+  }, utilisateurPourLocalStorage);
 
   await page.route(`${process.env.VITE_API_URL}/utilisateurs/dorian/services`, route => {
-    route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify([]) });
+    route.fulfill({
+      status: 200,
+      contentType: 'application/json',
+      body: JSON.stringify(new InjectService().avecServices([])),
+    });
   });
 
   await page.route(`${process.env.VITE_API_URL}/utilisateurs/dorian/gamification`, route => {
     route.fulfill({
       status: 200,
       contentType: 'application/json',
-      body: JSON.stringify({
-        points: 10,
-        niveau: 1,
-        current_points_in_niveau: 10,
-        point_target_in_niveau: 100,
-        celebrations: [],
-      }),
+      body: JSON.stringify(new InjectGamification().vierge()),
     });
   });
 
@@ -58,15 +41,7 @@ test.beforeAll(async () => {
     route.fulfill({
       status: 200,
       contentType: 'application/json',
-      body: JSON.stringify([]),
-    });
-  });
-
-  await page.route(`${process.env.VITE_API_URL}/utilisateurs/dorian/recommandations`, route => {
-    route.fulfill({
-      status: 200,
-      contentType: 'application/json',
-      body: JSON.stringify([]),
+      body: JSON.stringify(new InjectRecommandations().vierge()),
     });
   });
 
@@ -74,14 +49,7 @@ test.beforeAll(async () => {
     route.fulfill({
       status: 200,
       contentType: 'application/json',
-      body: JSON.stringify({
-        numero_todo: 2,
-        points_todo: 0,
-        titre: 'Plus de mission, pour le moment...',
-        todo: [],
-        done: [],
-        is_last: true,
-      }),
+      body: JSON.stringify(new InjectTodo().vierge()),
     });
   });
 
@@ -89,25 +57,26 @@ test.beforeAll(async () => {
     route.fulfill({
       status: 200,
       contentType: 'application/json',
-      body: JSON.stringify({
-        id: 'KYC001',
-        question: 'Sur quel(s) sujet(s) souhaitez-vous en savoir plus pour réduire votre impact environnemental ?',
-        reponse: ['🥦 Alimentation'],
-        categorie: 'mission',
-        points: 5,
-        type: 'choix_multiple',
-        reponses_possibles: [
-          '🥦 Alimentation',
-          '☀️ Climat et Environnement',
-          '🛒 Consommation durable',
-          '🗑️ Déchets',
-          '🏡 Logement',
-          '⚽ Loisirs (vacances, sport,...)',
-          '🚗 Transports',
-          'Aucun / Je ne sais pas',
-        ],
-        is_NGC: false,
-      }),
+      body: JSON.stringify(
+        new InjectKYC().avecKYC({
+          id: 'KYC001',
+          question: 'Sur quel(s) sujet(s) souhaitez-vous en savoir plus pour réduire votre impact environnemental ?',
+          reponse: ['🥦 Alimentation'],
+          categorie: 'mission',
+          points: 5,
+          type: 'choix_multiple',
+          reponses_possibles: [
+            '🥦 Alimentation',
+            '☀️ Climat et Environnement',
+            '🛒 Consommation durable',
+            '🗑️ Déchets',
+            '🏡 Logement',
+            '⚽ Loisirs (vacances, sport,...)',
+            '🚗 Transports',
+            'Aucun / Je ne sais pas',
+          ],
+        }),
+      ),
     });
   });
 });
@@ -118,7 +87,6 @@ test.describe('kyc', () => {
     await page.goto('/mieux-vous-connaitre/KYC001');
 
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('Question pour mieux vous connaître');
-    await page.getByRole('checkbox', { name: '🥦 Alimentation' }).check();
   });
 
   test('doit afficher le remerciement', async () => {
@@ -129,12 +97,12 @@ test.describe('kyc', () => {
     });
 
     await page.getByRole('checkbox', { name: '🥦 Alimentation' }).check();
-
     await page.getByRole('button', { name: 'Valider' }).click();
 
     expect(await page.getByText('Merci pour votre réponse !!!')).toBeDefined();
 
     await page.getByRole('link', { name: 'Continuer' }).click();
+
     await expect(page).toHaveTitle('Agir ! - Agir');
   });
 });

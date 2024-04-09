@@ -2,7 +2,7 @@ import { QuestionRepository } from '@/kyc/ports/question.repository';
 import { AxiosFactory, intercept401 } from '@/axios.factory';
 import { Question, ThematiqueQuestion } from '@/kyc/recupererQuestionUsecase';
 
-interface QuestionApiModel {
+export interface QuestionApiModel {
   id: string;
   question: string;
   type: 'libre' | 'choix_multiple' | 'choix_unique';

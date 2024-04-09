@@ -4,7 +4,7 @@ import { AxiosFactory, intercept401 } from '@/axios.factory';
 import { InteractionType } from '@/shell/interactionType';
 import axios from 'redaxios';
 
-interface RecommandationApiModel {
+export interface RecommandationApiModel {
   type: string;
   titre: string;
   thematique_gamification: string;

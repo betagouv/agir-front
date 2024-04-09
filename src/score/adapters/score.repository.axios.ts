@@ -1,7 +1,7 @@
 import { AxiosFactory, intercept401 } from '@/axios.factory';
 import { Score, ScoreRepository } from '@/score/ports/score.repository';
 
-interface ScoreApiModel {
+export interface ScoreApiModel {
   points: number;
   niveau: 0;
   current_points_in_niveau: 0;

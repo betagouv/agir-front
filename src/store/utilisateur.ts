@@ -3,14 +3,14 @@ import { EmpreinteViewModel } from '@/bilan/adapters/chargementEmpreinte.present
 import { defineStore } from 'pinia';
 import { ScoreViewModel } from '@/score/ports/chargementScore.presenter';
 
-interface State {
+export interface UtilisateurStore {
   utilisateur: Utilisateur;
   valeurBilanCarbone: EmpreinteViewModel;
   score: ScoreViewModel;
 }
 
 export const utilisateurStore = defineStore('utilisateur', {
-  state: (): State => ({
+  state: (): UtilisateurStore => ({
     utilisateur: {
       id: '',
       nom: '',
