@@ -1,7 +1,7 @@
 export interface Ressource {
   titre: string;
   description: string;
-  contentId: string;
+  idDuContenu: string;
   thematique: string;
   image: string;
   favoris: boolean;
@@ -21,6 +21,6 @@ export interface BibliothequeRepository {
     utilisateurId: string,
     filtreThematiquesIds: string[],
     titre: string,
-    filtreFavoris: boolean
+    filtreFavoris: boolean,
   ): Promise<Bibliotheque>;
 }

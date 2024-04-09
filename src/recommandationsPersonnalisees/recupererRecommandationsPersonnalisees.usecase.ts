@@ -5,14 +5,14 @@ import { RecommandationsPersonnaliseesPresenter } from '@/recommandationsPersonn
 export interface RecommandationPersonnalisee {
   type: InteractionType;
   titre: string;
-  categorie: string;
+  thematique: string;
   nombreDePointsAGagner: string;
   illustrationURL: string;
   idDuContenu: string;
   joursRestants: number | null;
 }
 
-export class RecommandationsPersonnaliseesUsecase {
+export class RecupererRecommandationsPersonnaliseesUsecase {
   constructor(private recommandationsPersonnaliseesRepository: RecommandationsPersonnaliseesRepository) {}
 
   async execute(idUtilisateur: string, presenter: RecommandationsPersonnaliseesPresenter): Promise<void> {

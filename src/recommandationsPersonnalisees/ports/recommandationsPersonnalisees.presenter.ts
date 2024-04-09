@@ -1,4 +1,4 @@
-import { RecommandationPersonnalisee } from '@/recommandationsPersonnalisees/recommandationsPersonnalisees.usecase';
+import { RecommandationPersonnalisee } from '@/recommandationsPersonnalisees/recupererRecommandationsPersonnalisees.usecase';
 
 export interface RecommandationsPersonnaliseesPresenter {
   presente(recommandationsPersonnalisees: RecommandationPersonnalisee[]): void;

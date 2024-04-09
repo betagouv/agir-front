@@ -8,11 +8,11 @@ import { RouteArticlePath } from '@/router/articles/routes';
 import { RouteKycPath } from '@/router/kyc/routes';
 import { RouteComptePath } from '@/router/compte/routes';
 
-interface TodoViewModel {
+export interface TodoViewModel {
   id: string;
   titre: string;
   url: string;
-  contentId: string;
+  idDuContenu: string;
   progession: {
     etapeCourante: number;
     etapeTotal: number;
@@ -50,7 +50,7 @@ export class ToDoListPresenterImpl implements ToDoListPresenter {
       id: todo.id,
       titre: todo.titre,
       url: this.determineUrl(todo),
-      contentId: todo.contentId,
+      idDuContenu: todo.idDuContenu,
       progession: {
         etapeCourante: todo.progession.etapeCourante,
         etapeTotal: todo.progession.etapeTotal,
@@ -68,11 +68,11 @@ export class ToDoListPresenterImpl implements ToDoListPresenter {
       case InteractionType.AIDE:
         return RouteAidesPath.VOS_AIDES;
       case InteractionType.QUIZ:
-        return `${RouteCoachPath.COACH + RouteCoachPath.QUIZ}/${todo.contentId}`;
+        return `${RouteCoachPath.COACH + RouteCoachPath.QUIZ}/${todo.idDuContenu}`;
       case InteractionType.ARTICLE:
-        return `${RouteArticlePath.ARTICLE}${buildUrl(todo.titre)}/${todo.contentId}`;
+        return `${RouteArticlePath.ARTICLE}${buildUrl(todo.titre)}/${todo.idDuContenu}`;
       case InteractionType.KYC:
-        return `${RouteKycPath.KYC}${todo.contentId}`;
+        return `${RouteKycPath.KYC}${todo.idDuContenu}`;
       case InteractionType.COMPTE:
         return `${RouteCoachPath.COACH}${RouteComptePath.MON_COMPTE}`;
       case InteractionType.SERVICE:
@@ -89,7 +89,7 @@ export class ToDoListPresenterImpl implements ToDoListPresenter {
       case InteractionType.RECOMMANDATION:
         return '#recommandations';
       case InteractionType.SERVICE:
-        return `#${todo.contentId}`;
+        return `#${todo.idDuContenu}`;
       default:
         return undefined;
     }

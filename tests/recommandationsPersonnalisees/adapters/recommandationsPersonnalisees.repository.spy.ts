@@ -1,5 +1,5 @@
 import { RecommandationsPersonnaliseesRepository } from '@/recommandationsPersonnalisees/ports/recommandationsPersonnalisees.repository';
-import { RecommandationPersonnalisee } from '@/recommandationsPersonnalisees/recommandationsPersonnalisees.usecase';
+import { RecommandationPersonnalisee } from '@/recommandationsPersonnalisees/recupererRecommandationsPersonnalisees.usecase';
 
 export class SpyRecommandationsPersonnaliseesRepository implements RecommandationsPersonnaliseesRepository {
   get recommandationAEteCliqueeAEteAppelee(): boolean {

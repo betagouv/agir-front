@@ -54,7 +54,7 @@
       </p>
       <CoachRecommandations
         v-if="recommandationsPersonnaliseesViewModel"
-        :recommandations="recommandationsPersonnaliseesViewModel.defisList"
+        :recommandations="recommandationsPersonnaliseesViewModel.defis"
       />
     </div>
   </section>
@@ -78,7 +78,7 @@
       </p>
       <CoachRecommandations
         v-if="recommandationsPersonnaliseesViewModel"
-        :recommandations="recommandationsPersonnaliseesViewModel.recommandationsList"
+        :recommandations="recommandationsPersonnaliseesViewModel.autresRecommandations"
       />
     </div>
     <div class="fr-container" v-else>
@@ -100,7 +100,7 @@
   import CarteScore from '@/components/custom/Progression/CarteScore.vue';
   import ProgressionNiveauJauge from '@/components/custom/Progression/ProgressionNiveauJauge.vue';
   import CoachRecommandations from './custom/Coach/CoachRecommandations.vue';
-  import { RecommandationsPersonnaliseesUsecase } from '@/recommandationsPersonnalisees/recommandationsPersonnalisees.usecase';
+  import { RecupererRecommandationsPersonnaliseesUsecase } from '@/recommandationsPersonnalisees/recupererRecommandationsPersonnalisees.usecase';
   import { RecommandationsPersonnaliseesRepositoryAxios } from '@/recommandationsPersonnalisees/adapters/recommandationsPersonnalisees.repository.axios';
   import {
     RecommandationPersonnaliseeViewModel,
@@ -123,7 +123,7 @@
   const recommandationsPersonnaliseesViewModel = ref<RecommandationPersonnaliseeViewModel>();
   let handleConcealEvent: () => void;
 
-  function mapValuesInteractions(viewModel: RecommandationPersonnaliseeViewModel) {
+  function onRecommandationsPretesAAfficher(viewModel: RecommandationPersonnaliseeViewModel) {
     recommandationsPersonnaliseesViewModel.value = viewModel;
   }
 
@@ -134,7 +134,7 @@
   const subscriberName = 'Coach';
   const lancerChargementDesDonnees = () => {
     const idUtilisateur = store.utilisateur.id;
-    const chargerRecommandationsPersonnaliseesUsecase = new RecommandationsPersonnaliseesUsecase(
+    const chargerRecommandationsPersonnaliseesUsecase = new RecupererRecommandationsPersonnaliseesUsecase(
       new RecommandationsPersonnaliseesRepositoryAxios(),
     );
     const chargerTodoListUsecase = new RecupererToDoListUsecase(new ToDoListRepositoryAxios());
@@ -150,7 +150,7 @@
     Promise.all([
       chargerRecommandationsPersonnaliseesUsecase.execute(
         idUtilisateur,
-        new RecommandationsPersonnaliseesPresenterImpl(mapValuesInteractions),
+        new RecommandationsPersonnaliseesPresenterImpl(onRecommandationsPretesAAfficher),
       ),
       chargerTodoListUsecase.execute(idUtilisateur, new ToDoListPresenterImpl(mapValueTodo)),
     ])
@@ -166,12 +166,12 @@
     lancerChargementDesDonnees();
     handleConcealEvent = () => {
       const idUtilisateur = store.utilisateur.id;
-      const chargerRecommandationsPersonnaliseesUsecase = new RecommandationsPersonnaliseesUsecase(
+      const chargerRecommandationsPersonnaliseesUsecase = new RecupererRecommandationsPersonnaliseesUsecase(
         new RecommandationsPersonnaliseesRepositoryAxios(),
       );
       chargerRecommandationsPersonnaliseesUsecase.execute(
         idUtilisateur,
-        new RecommandationsPersonnaliseesPresenterImpl(mapValuesInteractions),
+        new RecommandationsPersonnaliseesPresenterImpl(onRecommandationsPretesAAfficher),
       );
     };
     document.getElementById('passageDeNiveau')!.addEventListener('dsfr.conceal', handleConcealEvent);

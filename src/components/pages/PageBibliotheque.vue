@@ -18,7 +18,7 @@
         <div v-else class="fr-grid-row fr-grid-row--gutters">
           <div class="fr-col-md-6 fr-col-12" v-for="article in bibliothequeViewModel.articles" :key="article.titre">
             <BibliothequeCard
-              :id="article.contentId"
+              :id="article.idDuContenu"
               :titre="article.titre"
               :image="article.image"
               :description="article.description"
@@ -56,7 +56,7 @@
   const filtreFavoris = ref<boolean>(false);
 
   const bibliothequePresenterImpl = new BibliothequePresenterImpl(
-    viewModel => (bibliothequeViewModel.value = viewModel)
+    viewModel => (bibliothequeViewModel.value = viewModel),
   );
 
   onMounted(async () => {
@@ -93,7 +93,7 @@
       filtresThematiques.value,
       searchTitre.value,
       filtreFavoris.value,
-      bibliothequePresenterImpl
+      bibliothequePresenterImpl,
     );
   };
 </script>

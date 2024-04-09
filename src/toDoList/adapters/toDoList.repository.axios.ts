@@ -57,7 +57,7 @@ export class ToDoListRepositoryAxios implements ToDoListRepository {
       aFaire: response.data.todo.map(todo => ({
         id: todo.id,
         titre: todo.titre,
-        contentId: todo.content_id || todo.service_id || '',
+        idDuContenu: todo.content_id || todo.service_id || '',
         progession: {
           etapeCourante: todo.progression.current,
           etapeTotal: todo.progression.target,
@@ -70,7 +70,7 @@ export class ToDoListRepositoryAxios implements ToDoListRepository {
       fait: response.data.done.map(todo => ({
         id: todo.id,
         titre: todo.titre,
-        contentId: todo.content_id,
+        idDuContenu: todo.content_id,
         progession: {
           etapeCourante: todo.progression.current,
           etapeTotal: todo.progression.target,

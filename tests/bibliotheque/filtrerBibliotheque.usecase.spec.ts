@@ -21,7 +21,7 @@ describe('Fichier de tests concernant le chargement de la bibliotheque', () => {
             url: '/article/par-ou-commencer-la-renovation-de-sa-maison-/1',
             image: 'https://picsum.photos/300/200',
             favoris: false,
-            contentId: '1',
+            idDuContenu: '1',
           },
           {
             titre: 'Le coût carbone d’un t-shirt',
@@ -30,7 +30,7 @@ describe('Fichier de tests concernant le chargement de la bibliotheque', () => {
             url: '/article/le-cout-carbone-dun-t-shirt/2',
             image: 'https://picsum.photos/400/400',
             favoris: false,
-            contentId: '2',
+            idDuContenu: '2',
           },
           {
             titre: 'C’est quoi 5 tonnes de CO2e ?',
@@ -39,7 +39,7 @@ describe('Fichier de tests concernant le chargement de la bibliotheque', () => {
             url: `/article/cest-quoi-5-tonnes-de-co2e-/3`,
             image: 'https://picsum.photos/400/400',
             favoris: false,
-            contentId: '3',
+            idDuContenu: '3',
           },
           {
             description: 'lorem ipsum dolor description un peu longue hello',
@@ -48,7 +48,7 @@ describe('Fichier de tests concernant le chargement de la bibliotheque', () => {
             thematique: '🌍 Global',
             titre: 'Quelle est la mission de l’ADEME ?',
             url: '/article/quelle-est-la-mission-de-lademe-/4',
-            contentId: '4',
+            idDuContenu: '4',
           },
         ]);
 
@@ -70,7 +70,7 @@ describe('Fichier de tests concernant le chargement de la bibliotheque', () => {
             label: '🚲 Transports',
           },
         ]);
-      })
+      }),
     );
   });
 });
