@@ -8,11 +8,11 @@ export class BibliothequePresenterImpl implements BibliothequePresenter {
   presente(bibliotheque: Bibliotheque): void {
     this.bibliothequeViewModel({
       articles: bibliotheque.ressources.map(ressource => ({
-        contentId: ressource.contentId,
+        idDuContenu: ressource.idDuContenu,
         titre: ressource.titre,
         thematique: ressource.thematique,
         description: ressource.description,
-        url: `/article/${buildUrl(ressource.titre)}/${ressource.contentId}`,
+        url: `/article/${buildUrl(ressource.titre)}/${ressource.idDuContenu}`,
         image: ressource.image,
         favoris: ressource.favoris,
       })),

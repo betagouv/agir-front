@@ -1,5 +1,5 @@
 import { RecommandationsPersonnaliseesRepository } from '@/recommandationsPersonnalisees/ports/recommandationsPersonnalisees.repository';
-import { RecommandationPersonnalisee } from '@/recommandationsPersonnalisees/recommandationsPersonnalisees.usecase';
+import { RecommandationPersonnalisee } from '@/recommandationsPersonnalisees/recupererRecommandationsPersonnalisees.usecase';
 import { AxiosFactory, intercept401 } from '@/axios.factory';
 import { InteractionType } from '@/shell/interactionType';
 import axios from 'redaxios';
@@ -31,7 +31,7 @@ export class RecommandationsPersonnaliseesRepositoryAxios implements Recommandat
       const recommandationPersonnalisee: RecommandationPersonnalisee = {
         type: apiModel.type as InteractionType,
         titre: apiModel.titre,
-        categorie: apiModel.thematique_gamification,
+        thematique: apiModel.thematique_gamification,
         nombreDePointsAGagner: apiModel.points.toString(),
         illustrationURL: apiModel.image_url,
         idDuContenu: apiModel.content_id,

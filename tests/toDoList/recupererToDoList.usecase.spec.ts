@@ -14,7 +14,7 @@ describe('Fichier de tests concernant la récupération de la ToDo List', () => 
       expect(toDoList).toStrictEqual<TodoListViewModel>({
         aFaire: [
           {
-            contentId: '',
+            idDuContenu: '',
             hash: '#recommandations',
             id: 'id3',
             nombreDePointsAGagner: 10,
@@ -29,7 +29,7 @@ describe('Fichier de tests concernant la récupération de la ToDo List', () => 
             url: '/agir',
           },
           {
-            contentId: '',
+            idDuContenu: '',
             hash: undefined,
             id: 'id',
             nombreDePointsAGagner: 10,
@@ -44,7 +44,7 @@ describe('Fichier de tests concernant la récupération de la ToDo List', () => 
             url: '/agir/quiz/',
           },
           {
-            contentId: 'leservice',
+            idDuContenu: 'leservice',
             hash: '#leservice',
             id: 'id3',
             nombreDePointsAGagner: 10,
@@ -59,7 +59,7 @@ describe('Fichier de tests concernant la récupération de la ToDo List', () => 
             url: '/agir/services',
           },
           {
-            contentId: 'leservice',
+            idDuContenu: 'leservice',
             hash: '#leservice',
             id: 'id4',
             nombreDePointsAGagner: 10,
@@ -77,7 +77,7 @@ describe('Fichier de tests concernant la récupération de la ToDo List', () => 
         derniere: false,
         fait: [
           {
-            contentId: '1',
+            idDuContenu: '1',
             hash: undefined,
             id: 'id2',
             nombreDePointsAGagner: 10,

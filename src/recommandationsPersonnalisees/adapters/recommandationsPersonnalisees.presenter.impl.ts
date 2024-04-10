@@ -1,4 +1,4 @@
-import { RecommandationPersonnalisee } from '@/recommandationsPersonnalisees/recommandationsPersonnalisees.usecase';
+import { RecommandationPersonnalisee } from '@/recommandationsPersonnalisees/recupererRecommandationsPersonnalisees.usecase';
 import { InteractionType } from '@/shell/interactionType';
 import { RecommandationsPersonnaliseesPresenter } from '@/recommandationsPersonnalisees/ports/recommandationsPersonnalisees.presenter';
 import { buildUrl } from '@/shell/buildUrl';
@@ -23,15 +23,15 @@ export interface RecommandationViewModel {
   titre: string;
   image: string;
   bouton: BoutonViewModel;
-  contentId: string;
+  idDuContenu: string;
   nombreDePointsAGagner: string;
   type: TagViewModel;
   thematique: string;
   joursRestants: string | null;
 }
 export interface RecommandationPersonnaliseeViewModel {
-  defisList: RecommandationViewModel[];
-  recommandationsList: RecommandationViewModel[];
+  defis: RecommandationViewModel[];
+  autresRecommandations: RecommandationViewModel[];
 }
 
 export class RecommandationsPersonnaliseesPresenterImpl implements RecommandationsPersonnaliseesPresenter {
@@ -39,40 +39,28 @@ export class RecommandationsPersonnaliseesPresenterImpl implements Recommandatio
     private viewModel: (recommandationPersonnaliseeViewModels: RecommandationPersonnaliseeViewModel) => void,
   ) {}
   presente(recommandationsPersonnalisees: RecommandationPersonnalisee[]): void {
+    const mapRecommandation = (recommandationPersonnalisee: RecommandationPersonnalisee) => {
+      return {
+        thematique: recommandationPersonnalisee.thematique,
+        titre: recommandationPersonnalisee.titre,
+        image: this.determineImage(recommandationPersonnalisee),
+        bouton: this.determineBouton(recommandationPersonnalisee),
+        idDuContenu: recommandationPersonnalisee.idDuContenu,
+        nombreDePointsAGagner: recommandationPersonnalisee.nombreDePointsAGagner,
+        type: this.determineTypeTag(recommandationPersonnalisee.type),
+        joursRestants: recommandationPersonnalisee.joursRestants
+          ? `Plus que ${recommandationPersonnalisee.joursRestants} jours`
+          : null,
+      };
+    };
+
     this.viewModel({
-      recommandationsList: recommandationsPersonnalisees
+      autresRecommandations: recommandationsPersonnalisees
         .filter(recommandationPersonnalisee => recommandationPersonnalisee.type !== 'defi')
-        .map(recommandationPersonnalisee => {
-          return {
-            thematique: recommandationPersonnalisee.categorie,
-            titre: recommandationPersonnalisee.titre,
-            image: this.determineImage(recommandationPersonnalisee),
-            bouton: this.determineBouton(recommandationPersonnalisee),
-            contentId: recommandationPersonnalisee.idDuContenu,
-            nombreDePointsAGagner: recommandationPersonnalisee.nombreDePointsAGagner,
-            type: this.determineTypeTag(recommandationPersonnalisee.type),
-            joursRestants: recommandationPersonnalisee.joursRestants
-              ? `Plus que ${recommandationPersonnalisee.joursRestants} jours`
-              : null,
-          };
-        })
-        .slice(0, 6),
-      defisList: recommandationsPersonnalisees
+        .map(mapRecommandation),
+      defis: recommandationsPersonnalisees
         .filter(recommandationPersonnalisee => recommandationPersonnalisee.type === 'defi')
-        .map(recommandationPersonnalisee => {
-          return {
-            thematique: recommandationPersonnalisee.categorie,
-            titre: recommandationPersonnalisee.titre,
-            image: this.determineImage(recommandationPersonnalisee),
-            bouton: this.determineBouton(recommandationPersonnalisee),
-            contentId: recommandationPersonnalisee.idDuContenu,
-            nombreDePointsAGagner: recommandationPersonnalisee.nombreDePointsAGagner,
-            type: this.determineTypeTag(recommandationPersonnalisee.type),
-            joursRestants: recommandationPersonnalisee.joursRestants
-              ? `Plus que ${recommandationPersonnalisee.joursRestants} jours`
-              : null,
-          };
-        }),
+        .map(mapRecommandation),
     });
   }
 

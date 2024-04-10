@@ -12,7 +12,7 @@ export interface TodoList {
 export interface TodoListItem {
   id: string;
   titre: string;
-  contentId: string;
+  idDuContenu: string;
   progession: {
     etapeCourante: number;
     etapeTotal: number;

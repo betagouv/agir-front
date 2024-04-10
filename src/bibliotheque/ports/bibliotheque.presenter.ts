@@ -6,7 +6,7 @@ export interface BibliothequePresenter {
 
 export interface BibliothequeViewModel {
   articles: {
-    contentId: string;
+    idDuContenu: string;
     titre: string;
     thematique: string;
     description: string;

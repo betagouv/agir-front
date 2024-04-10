@@ -26,7 +26,7 @@ export class BibliothequeRepositoryAxios implements BibliothequeRepository {
       ressources: response.data.contenu.map(ressource => ({
         titre: ressource.titre,
         description: ressource.soustitre,
-        contentId: ressource.content_id,
+        idDuContenu: ressource.content_id,
         thematique: ressource.thematique_principale_label,
         image: ressource.image_url,
         favoris: ressource.favoris,
@@ -43,21 +43,21 @@ export class BibliothequeRepositoryAxios implements BibliothequeRepository {
     utilisateurId: string,
     filtreThematiquesIds: string[],
     titre: string,
-    filtreFavoris: boolean
+    filtreFavoris: boolean,
   ): Promise<Bibliotheque> {
     const axiosInstance = AxiosFactory.getAxios();
 
     const params = this.buildFiltres(filtreThematiquesIds, titre, filtreFavoris);
 
     const response = await axiosInstance.get<BibliothequeApiModel>(
-      `/utilisateurs/${utilisateurId}/bibliotheque${params}`
+      `/utilisateurs/${utilisateurId}/bibliotheque${params}`,
     );
 
     return {
       ressources: response.data.contenu.map(ressource => ({
         titre: ressource.titre,
         description: ressource.soustitre || '',
-        contentId: ressource.content_id,
+        idDuContenu: ressource.content_id,
         thematique: ressource.thematique_principale_label,
         image: ressource.image_url,
         favoris: ressource.favoris,

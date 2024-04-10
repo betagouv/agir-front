@@ -1,4 +1,4 @@
-import { RecommandationsPersonnaliseesUsecase } from '@/recommandationsPersonnalisees/recommandationsPersonnalisees.usecase';
+import { RecupererRecommandationsPersonnaliseesUsecase } from '@/recommandationsPersonnalisees/recupererRecommandationsPersonnalisees.usecase';
 import {
   RecommandationPersonnaliseeViewModel,
   RecommandationsPersonnaliseesPresenterImpl,
@@ -8,7 +8,9 @@ import { MockRecommandationsPersonnaliseesRepository } from './adapters/recomman
 describe('Fichier de tests concernant le chargement des recommandations personnalisees', () => {
   it('En donnant un id utilisateur doit charger et mettre en forme les recommandations personnalisées suivant leur type', async () => {
     // GIVEN
-    const usecase = new RecommandationsPersonnaliseesUsecase(new MockRecommandationsPersonnaliseesRepository());
+    const usecase = new RecupererRecommandationsPersonnaliseesUsecase(
+      new MockRecommandationsPersonnaliseesRepository(),
+    );
 
     // WHEN
     await usecase.execute('1', new RecommandationsPersonnaliseesPresenterImpl(expectation));
@@ -16,14 +18,14 @@ describe('Fichier de tests concernant le chargement des recommandations personna
     // THEN
     function expectation(recommandationsPersonnaliseesViewModel: RecommandationPersonnaliseeViewModel) {
       expect(recommandationsPersonnaliseesViewModel).toStrictEqual<RecommandationPersonnaliseeViewModel>({
-        defisList: [
+        defis: [
           {
             bouton: {
               libelle: 'Faire le suivi',
               style: 'fr-btn--icon-left fr-icon-check-line',
               url: '/defi/1',
             },
-            contentId: '1',
+            idDuContenu: '1',
             image: '/reco_defi.jpg',
             joursRestants: 'Plus que 7 jours',
             nombreDePointsAGagner: 'nombreDePointsAGagner',
@@ -40,7 +42,7 @@ describe('Fichier de tests concernant le chargement des recommandations personna
               style: 'fr-btn--icon-left fr-icon-check-line',
               url: '/defi/1',
             },
-            contentId: '1',
+            idDuContenu: '1',
             image: '/reco_defi.jpg',
             joursRestants: null,
             nombreDePointsAGagner: 'nombreDePointsAGagner',
@@ -52,14 +54,14 @@ describe('Fichier de tests concernant le chargement des recommandations personna
             },
           },
         ],
-        recommandationsList: [
+        autresRecommandations: [
           {
             bouton: {
               libelle: 'Répondre au quiz',
               style: 'fr-btn--secondary fr-btn--icon-left fr-icon-question-line',
               url: '/agir/quiz/2',
             },
-            contentId: '2',
+            idDuContenu: '2',
             image: 'illustrationURL',
             joursRestants: null,
             nombreDePointsAGagner: 'nombreDePointsAGagner',
@@ -76,7 +78,7 @@ describe('Fichier de tests concernant le chargement des recommandations personna
               style: 'fr-btn--secondary fr-btn--icon-left fr-icon-newspaper-line',
               url: '/article/article-qui-doit-etre-en-avant/2',
             },
-            contentId: '2',
+            idDuContenu: '2',
             image: 'illustrationURL',
             joursRestants: null,
             nombreDePointsAGagner: 'nombreDePointsAGagner',
@@ -93,7 +95,7 @@ describe('Fichier de tests concernant le chargement des recommandations personna
               style: 'fr-btn--secondary',
               url: '/vos-aides/',
             },
-            contentId: '1',
+            idDuContenu: '1',
             image: 'illustrationURL',
             joursRestants: null,
             nombreDePointsAGagner: 'nombreDePointsAGagner',
@@ -110,7 +112,7 @@ describe('Fichier de tests concernant le chargement des recommandations personna
               style: 'fr-btn--icon-left fr-icon-arrow-right-line',
               url: '/mieux-vous-connaitre/1',
             },
-            contentId: '1',
+            idDuContenu: '1',
             image: '/ic_kyc.svg',
             joursRestants: null,
             nombreDePointsAGagner: 'nombreDePointsAGagner',

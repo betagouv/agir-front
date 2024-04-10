@@ -1,13 +1,12 @@
 import { render } from '@testing-library/vue';
 import CoachToDo from '@/components/custom/Coach/CoachToDo.vue';
-import { TodoListViewModel } from '@/toDoList/adapters/toDoList.presenter.impl';
+import { TodoListViewModel, TodoViewModel } from '@/toDoList/adapters/toDoList.presenter.impl';
 
-const todoExemple1 = {
+const todoExemple1: TodoViewModel = {
   id: 'test',
-  interactionId: 'interactionId1',
   titre: 'Tâche exemple 1',
   url: 'test',
-  contentId: 'test',
+  idDuContenu: 'test',
   progession: {
     etapeCourante: 2,
     etapeTotal: 3,
@@ -17,12 +16,11 @@ const todoExemple1 = {
   thematique: 'quizz',
   pointAEteRecolte: false,
 };
-const todoExemple2 = {
+const todoExemple2: TodoViewModel = {
   id: 'test 2',
-  interactionId: 'interactionId2',
   titre: 'Tâche exemple 2',
   url: 'test 2',
-  contentId: 'test 2',
+  idDuContenu: 'test 2',
   progession: {
     etapeCourante: 7,
     etapeTotal: 10,
@@ -32,12 +30,11 @@ const todoExemple2 = {
   thematique: 'quizz',
   pointAEteRecolte: false,
 };
-const todoDoneRecupererExemple1 = {
+const todoDoneRecupererExemple1: TodoViewModel = {
   id: 'test',
-  interactionId: 'interactionId3',
   titre: 'Tâche complétée exemple 1',
   url: 'test',
-  contentId: 'test',
+  idDuContenu: 'test',
   progession: {
     etapeCourante: 2,
     etapeTotal: 3,
@@ -47,12 +44,11 @@ const todoDoneRecupererExemple1 = {
   thematique: 'quizz',
   pointAEteRecolte: true,
 };
-const todoDoneNonRecupererExemple2 = {
+const todoDoneNonRecupererExemple2: TodoViewModel = {
   id: 'test 2',
-  interactionId: 'interactionId4',
   titre: 'Tâche complétée exemple 2',
   url: 'test 2',
-  contentId: 'test 2',
+  idDuContenu: 'test 2',
   progession: {
     etapeCourante: 7,
     etapeTotal: 10,
