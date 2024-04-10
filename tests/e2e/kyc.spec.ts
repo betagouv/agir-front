@@ -5,6 +5,7 @@ import { InjectRecommandations } from './utils/injectRecommandations';
 import { InjectTodo } from './utils/injectTodo';
 import { InjectKYC } from './utils/injectKYC';
 import { InjectGamification } from './utils/injectGamification';
+import { ThematiqueQuestion } from '@/kyc/recupererQuestionUsecase';
 
 let page: Page;
 
@@ -75,6 +76,7 @@ test.beforeAll(async () => {
             '🚗 Transports',
             'Aucun / Je ne sais pas',
           ],
+          thematique: ThematiqueQuestion.AUTRE,
         }),
       ),
     });
