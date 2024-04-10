@@ -1,6 +1,14 @@
 import { QuestionPresenter } from '@/kyc/ports/question.presenter';
 import { QuestionRepository } from '@/kyc/ports/question.repository';
 
+export enum ThematiqueQuestion {
+  ALIMENTATION = 'alimentation',
+  TRANSPORT = 'transport',
+  LOGEMENT = 'logement',
+  DECHET = 'dechet',
+  AUTRE = 'autre',
+}
+
 export interface Question {
   id: string;
   libelle: string;
@@ -8,6 +16,7 @@ export interface Question {
   reponses_possibles: string[];
   points: number;
   reponse: string[];
+  thematique: ThematiqueQuestion;
 }
 
 export class RecupererQuestionUsecase {

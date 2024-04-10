@@ -1,6 +1,6 @@
 import { QuestionRepository } from '@/kyc/ports/question.repository';
 import { AxiosFactory, intercept401 } from '@/axios.factory';
-import { Question } from '@/kyc/recupererQuestionUsecase';
+import { Question, ThematiqueQuestion } from '@/kyc/recupererQuestionUsecase';
 
 interface QuestionApiModel {
   id: string;
@@ -10,6 +10,7 @@ interface QuestionApiModel {
   points: number;
   reponse: string[];
   categorie: string;
+  thematique: string;
 }
 
 export class QuestionRepositoryAxios implements QuestionRepository {
@@ -27,6 +28,9 @@ export class QuestionRepositoryAxios implements QuestionRepository {
         reponses_possibles: question.reponses_possibles || [],
         points: question.points,
         reponse: question.reponse,
+        thematique: Object.values(ThematiqueQuestion).find(thematique => thematique === question.thematique) as
+          | ThematiqueQuestion
+          | ThematiqueQuestion.AUTRE,
       }));
   }
 
@@ -43,6 +47,9 @@ export class QuestionRepositoryAxios implements QuestionRepository {
       reponses_possibles: response.data.reponses_possibles || [],
       points: response.data.points,
       reponse: response.data.reponse,
+      thematique: Object.values(ThematiqueQuestion).find(thematique => thematique === response.data.thematique) as
+        | ThematiqueQuestion
+        | ThematiqueQuestion.AUTRE,
     };
   }
 
