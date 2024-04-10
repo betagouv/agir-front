@@ -3,7 +3,7 @@ import { Service } from '@/services/recupererServiceActifs.usecase';
 import { AxiosFactory, intercept401 } from '@/axios.factory';
 import { ServiceCatalogue } from '@/services/recupererCatalogueServices.usecase';
 
-interface ServiceApiModel {
+export interface ServiceApiModel {
   id: string;
   titre: string;
   label: string;
@@ -76,7 +76,7 @@ export class ServiceRepositoryAxios implements ServiceRepository {
   async parametrerService(
     utilisateurId: string,
     serviceId: string,
-    parametres: { [key: string]: string }
+    parametres: { [key: string]: string },
   ): Promise<void> {
     const axiosInstance = AxiosFactory.getAxios();
     await axiosInstance.put(`/utilisateurs/${utilisateurId}/services/${serviceId}/configuration`, parametres);

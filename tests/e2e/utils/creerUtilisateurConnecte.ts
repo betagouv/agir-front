@@ -29,7 +29,7 @@ async function creerUtilisateurOuSupprimmer(page: Page): Promise<Page> {
         },
         etapeAlimentation: { repas: 'vegan', done: true },
         etapeConsommation: { consommation: 'jamais', done: true },
-      })
+      }),
     );
   });
 

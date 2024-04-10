@@ -13,6 +13,9 @@ const kycRoutes: RouteRecordRaw[] = [
     path: `/${RouteKycPath.KYC}/:id`,
     name: RouteKycName.KYC,
     component: PageQuestionKyc,
+    meta: {
+      title: 'Mieux vous connaître',
+    },
   },
 ];
 
