@@ -151,6 +151,10 @@ h3 {
   text-align: left;
 }
 
+.text--italic {
+  font-style: italic;
+}
+
 .text--xs {
   font-size: 0.75rem;
 }

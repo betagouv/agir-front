@@ -1,5 +1,5 @@
 import { MockQuestionRepository } from './adapters/question.repository.mock';
-import { RecupererQuestionUsecase } from '@/kyc/recupererQuestionUsecase';
+import { RecupererQuestionUsecase, ThematiqueQuestion } from '@/kyc/recupererQuestionUsecase';
 import { QuestionPresenterImpl, QuestionViewModel } from '@/kyc/adapters/question.presenter.impl';
 
 describe('Fichier de tests pour récuperer une question KYC', () => {
@@ -12,6 +12,7 @@ describe('Fichier de tests pour récuperer une question KYC', () => {
       reponses_possibles: [],
       points: 10,
       reponse: [],
+      thematique: ThematiqueQuestion.ALIMENTATION,
     });
 
     // WHEN
@@ -28,6 +29,8 @@ describe('Fichier de tests pour récuperer une question KYC', () => {
         reponses_possibles: [],
         points: 'Récoltez vos + 10 points',
         aDejaEteRepondu: false,
+        description:
+          'Ces informations permettent à <span class="text--italic">Agir</span> de mieux comprendre vos habitudes alimentaires',
       });
     }
   });
@@ -41,6 +44,7 @@ describe('Fichier de tests pour récuperer une question KYC', () => {
       reponses_possibles: ['1', '2', '3'],
       points: 10,
       reponse: [],
+      thematique: ThematiqueQuestion.DECHET,
     });
 
     // WHEN
@@ -70,6 +74,8 @@ describe('Fichier de tests pour récuperer une question KYC', () => {
           },
         ],
         aDejaEteRepondu: false,
+        description:
+          'Ces informations permettent à <span class="text--italic">Agir</span> de mieux vous conseiller en matière de gestion des déchets et d\'alimentation',
       });
     }
   });
@@ -83,6 +89,7 @@ describe('Fichier de tests pour récuperer une question KYC', () => {
       reponses_possibles: ['1', '2', '3'],
       points: 10,
       reponse: [],
+      thematique: ThematiqueQuestion.TRANSPORT,
     });
 
     // WHEN
@@ -112,6 +119,8 @@ describe('Fichier de tests pour récuperer une question KYC', () => {
           },
         ],
         aDejaEteRepondu: false,
+        description:
+          'Ces informations permettent à <span class="text--italic">Agir</span> de mieux vous conseiller en matière de mobilité',
       });
     }
   });
@@ -125,6 +134,7 @@ describe('Fichier de tests pour récuperer une question KYC', () => {
       reponses_possibles: ['1', '2', '3'],
       points: 10,
       reponse: ['1'],
+      thematique: ThematiqueQuestion.AUTRE,
     });
 
     // WHEN
@@ -154,6 +164,7 @@ describe('Fichier de tests pour récuperer une question KYC', () => {
           },
         ],
         aDejaEteRepondu: true,
+        description: 'Dites-nous en plus sur vous pour que le service vous recommande des actions plus personnalisées.',
       });
     }
   });
