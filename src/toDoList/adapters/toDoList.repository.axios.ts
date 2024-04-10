@@ -7,37 +7,41 @@ export interface ToDoListApiModel {
   points_todo: number;
   titre: string;
   is_last: boolean;
-  todo: [
-    {
-      thematiques: string[];
-      titre: string;
-      type: string;
-      content_id: string;
-      service_id: string;
-      id: string;
-      points: number;
-      sont_points_en_poche: boolean;
-      progression: {
-        current: number;
-        target: number;
-      };
-    },
-  ];
-  done: [
-    {
-      thematiques: string[];
-      titre: string;
-      type: string;
-      content_id: string;
-      id: string;
-      points: number;
-      sont_points_en_poche: boolean;
-      progression: {
-        current: number;
-        target: number;
-      };
-    },
-  ];
+  todo:
+    | []
+    | [
+        {
+          thematiques: string[];
+          titre: string;
+          type: string;
+          content_id: string;
+          service_id: string;
+          id: string;
+          points: number;
+          sont_points_en_poche: boolean;
+          progression: {
+            current: number;
+            target: number;
+          };
+        },
+      ];
+  done:
+    | [
+        {
+          thematiques: string[];
+          titre: string;
+          type: string;
+          content_id: string;
+          id: string;
+          points: number;
+          sont_points_en_poche: boolean;
+          progression: {
+            current: number;
+            target: number;
+          };
+        },
+      ]
+    | [];
 }
 
 export class ToDoListRepositoryAxios implements ToDoListRepository {

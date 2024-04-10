@@ -1,6 +1,10 @@
 import { ScoreApiModel } from '@/score/adapters/score.repository.axios';
 
 export class InjectGamification {
+  avecGamification(gamification: ScoreApiModel): ScoreApiModel {
+    return gamification;
+  }
+
   vierge(): ScoreApiModel {
     return {
       points: 0,

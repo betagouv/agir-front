@@ -4,8 +4,4 @@ export class InjectKYC {
   avecKYC(kyc: QuestionApiModel): QuestionApiModel {
     return kyc;
   }
-
-  vierge(): QuestionApiModel {
-    return {};
-  }
 }

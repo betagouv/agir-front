@@ -59,18 +59,11 @@ test.describe('Onboarding complet', () => {
 
     await page.getByRole('radio', { name: 'Je n’achète presque jamais et rarement neuf' }).click();
 
-    const button = page.getByRole('button', { name: 'Continuer' });
+    const button = await page.getByRole('button', { name: 'Continuer' });
     await button.click();
   });
 
-  test('onboarding - Bilan', async () => {
-    // TO FIX - toujours vert
-    const titre = page.getByRole('heading', { level: 1, name: 'Premiers résultats' });
-    expect(titre).toBeDefined();
+  test.skip('onboarding - Bilan', () => {});
 
-    expect(page.locator('aria-label="Jauge de 🏡 Logement - 70 rempli"')).toBeTruthy();
-    expect(page.locator('aria-label="Jauge de 🚗 Transports - 35 rempli"')).toBeTruthy();
-    expect(page.locator('aria-label="Jauge de 🛒 Consommation - 6 rempli"')).toBeTruthy();
-    expect(page.locator('aria-label="Jauge de 🥦 Alimentation - 6 rempli"')).toBeTruthy();
-  });
+  test.skip('onboarding - Inscription', () => {});
 });

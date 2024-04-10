@@ -83,9 +83,9 @@ test.beforeAll(async () => {
 
 test.describe('kyc', () => {
   test('doit afficher le bon title et titre', async () => {
-    await expect(page).toHaveTitle('Agir ! - Agir');
     await page.goto('/mieux-vous-connaitre/KYC001');
 
+    await expect(page).toHaveTitle('Agir ! - Mieux vous connaître');
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('Question pour mieux vous connaître');
   });
 
