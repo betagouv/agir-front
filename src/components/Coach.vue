@@ -35,7 +35,7 @@
   </div>
   <section
     class="fr-pb-6w"
-    id="actions"
+    id="defis"
     v-if="utilisateurStore().utilisateur.fonctionnalitesDebloquees.includes('defis')"
     v-tour-step:1="{
       tour: defiTour,
