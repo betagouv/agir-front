@@ -1,5 +1,34 @@
 # Changelog
 
+## [1.9.0](https://github.com/betagouv/agir-front/compare/v1.8.1...v1.9.0) (2024-04-15)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* ajout d'une description dynamique pour les questions "mieux vous connaître" ([#375](https://github.com/betagouv/agir-front/issues/375)) ([2f5e9b9](https://github.com/betagouv/agir-front/commit/2f5e9b92ec04f9f640faf6bfb52119dad482d3cf))
+* il est maintenant possible de rediriger vers un service spécifique depuis les missions ([#365](https://github.com/betagouv/agir-front/issues/365)) ([a1bc5bc](https://github.com/betagouv/agir-front/commit/a1bc5bce65c4fc80a54e2855c02e6753fba633c3))
+* le reveal des actions est mieux mis en avant ([#372](https://github.com/betagouv/agir-front/issues/372)) ([7c300d7](https://github.com/betagouv/agir-front/commit/7c300d734b9314bc83d8e7ed3c6b537ed73e9e84))
+* modale fin des missions ([#362](https://github.com/betagouv/agir-front/issues/362)) ([9ecdef2](https://github.com/betagouv/agir-front/commit/9ecdef27f4c1b783c12c387e99ae2e1b3f516438))
+* modification wording des pages 'mieux vous connaître' ([#371](https://github.com/betagouv/agir-front/issues/371)) ([beba047](https://github.com/betagouv/agir-front/commit/beba047e6b89fa7c6b7509f23af6bd9b4437957c))
+* page accessibilité ([#358](https://github.com/betagouv/agir-front/issues/358)) ([d57b239](https://github.com/betagouv/agir-front/commit/d57b239d0a374e99afd0f160cad4a5f6717a0ece))
+
+
+### 🐛 Corrections de bogues
+
+* afficher le nombre de point gagner sur une question non répondue de mieux vous connaître ([#366](https://github.com/betagouv/agir-front/issues/366)) ([fd6fcf1](https://github.com/betagouv/agir-front/commit/fd6fcf1d67da102663f1863cfb8edf209d80acb9))
+* correction des tests e2e ([#369](https://github.com/betagouv/agir-front/issues/369)) ([54831ca](https://github.com/betagouv/agir-front/commit/54831ca3ef84dfd647a988b7b1e53c9673d0dfe9))
+* l'url de la popup de déblocage de la fonctionnalité bibliothèque n'était pas construite ([#364](https://github.com/betagouv/agir-front/issues/364)) ([f952c93](https://github.com/betagouv/agir-front/commit/f952c93f3a5a453770acb4f88c01c169cd8d7c07))
+* le bouton valider sur les défis est desactivé lorsque qu'aucune valeur n'a été saisie ([#367](https://github.com/betagouv/agir-front/issues/367)) ([afe2a88](https://github.com/betagouv/agir-front/commit/afe2a8891a86b6b73c33843c04050cd50dc2789f))
+
+
+### 👷 Autres changements
+
+* ajout d'une méthode trackClick pour Matomo ([#360](https://github.com/betagouv/agir-front/issues/360)) ([453c875](https://github.com/betagouv/agir-front/commit/453c875e096977c6bc30d594081f680ec1ea2fec))
+* Bump vite from 5.1.4 to 5.1.7 ([#363](https://github.com/betagouv/agir-front/issues/363)) ([ec3e9ee](https://github.com/betagouv/agir-front/commit/ec3e9ee12875f184bc4ebc5417a2a11acbc46eca))
+* refacto des tests e2e pour la connexion utilisateur ([#374](https://github.com/betagouv/agir-front/issues/374)) ([b2aa6bb](https://github.com/betagouv/agir-front/commit/b2aa6bb170e6aded25d75c9a8e9ebad77d213c35))
+* refacto recommandations et contentId ([#373](https://github.com/betagouv/agir-front/issues/373)) ([ced1ff0](https://github.com/betagouv/agir-front/commit/ced1ff03ad75b5b8a8b686f6656d4e6a65115a71))
+* refacto test e2e missions ([#376](https://github.com/betagouv/agir-front/issues/376)) ([b001178](https://github.com/betagouv/agir-front/commit/b001178d89d566801b0a37385726c1682fb7c764))
+
 ## [1.8.1](https://github.com/betagouv/agir-front/compare/v1.8.0...v1.8.1) (2024-04-02)
 
 
