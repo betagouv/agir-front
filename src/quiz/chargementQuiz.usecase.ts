@@ -1,5 +1,5 @@
-import { QuizRepository } from '@/quiz/ports/quizRepository';
 import { ChargementQuizzPresenter } from '@/quiz/ports/chargementQuizz.presenter';
+import { QuizRepository } from '@/quiz/ports/quizRepository';
 
 export class ChargementQuizUsecase {
   private _quizzRepository: QuizRepository;

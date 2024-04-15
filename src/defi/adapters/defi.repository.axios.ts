@@ -1,6 +1,6 @@
-import { DefiRepository } from '@/defi/ports/defi.repository';
 import { Defi } from '../recupererListeDefis.usecase';
 import { AxiosFactory, intercept401 } from '@/axios.factory';
+import { DefiRepository } from '@/defi/ports/defi.repository';
 
 interface DefiApiModel {
   id: string;

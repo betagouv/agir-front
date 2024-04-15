@@ -1,8 +1,8 @@
-import { RepositoryError } from '@/shell/repositoryError';
 import { CreerComptePresenter } from '@/compte/ports/creerComptePresenter';
 import { RouteCommuneName } from '@/router';
 
 import { RouteCompteName } from '@/router/compte/routeCompteName';
+import { RepositoryError } from '@/shell/repositoryError';
 
 interface CreerCompteViewModel {
   route: string;

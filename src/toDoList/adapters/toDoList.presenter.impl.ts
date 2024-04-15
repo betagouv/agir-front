@@ -1,12 +1,12 @@
+import { RouteAidesPath } from '@/router/aides/routes';
+import { RouteArticlePath } from '@/router/articles/routes';
+import { RouteCoachPath } from '@/router/coach/routes';
+import { RouteComptePath } from '@/router/compte/routes';
+import { RouteKycPath } from '@/router/kyc/routes';
+import { buildUrl } from '@/shell/buildUrl';
+import { InteractionType } from '@/shell/interactionType';
 import { ToDoListPresenter } from '@/toDoList/ports/toDoList.presenter';
 import { TodoList, TodoListItem } from '@/toDoList/recupererToDoList.usecase';
-import { InteractionType } from '@/shell/interactionType';
-import { buildUrl } from '@/shell/buildUrl';
-import { RouteAidesPath } from '@/router/aides/routes';
-import { RouteCoachPath } from '@/router/coach/routes';
-import { RouteArticlePath } from '@/router/articles/routes';
-import { RouteKycPath } from '@/router/kyc/routes';
-import { RouteComptePath } from '@/router/compte/routes';
 
 export interface TodoViewModel {
   id: string;

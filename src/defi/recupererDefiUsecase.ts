@@ -1,5 +1,5 @@
-import { DefiRepository } from '@/defi/ports/defi.repository';
 import { DefiPresenter } from '@/defi/ports/defi.presenter';
+import { DefiRepository } from '@/defi/ports/defi.repository';
 
 export class RecupererDefiUsecase {
   constructor(private readonly defiRepository: DefiRepository) {}

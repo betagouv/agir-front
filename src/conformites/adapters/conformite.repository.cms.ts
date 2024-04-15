@@ -1,6 +1,6 @@
+import { AxiosFactory } from '@/axios.factory';
 import { ConformiteRepository } from '@/conformites/ports/conformite.repository';
 import { PageConformiteType, PageConformite } from '@/conformites/recupererPageConformite.usecase';
-import { AxiosFactory } from '@/axios.factory';
 
 export class ConformiteRepositoryCms implements ConformiteRepository {
   async recupererPageConformite(pageConformiteType: PageConformiteType): Promise<PageConformite> {

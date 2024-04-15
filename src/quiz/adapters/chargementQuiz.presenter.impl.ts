@@ -1,5 +1,5 @@
-import { ArticleDuQuiz, Quiz, QuizDifficulte } from '@/quiz/ports/quizRepository';
 import { ChargementQuizzPresenter } from '@/quiz/ports/chargementQuizz.presenter';
+import { ArticleDuQuiz, Quiz, QuizDifficulte } from '@/quiz/ports/quizRepository';
 
 export interface QuestionViewModel {
   id: string;
