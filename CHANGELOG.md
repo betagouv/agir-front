@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.9.1](https://github.com/betagouv/agir-front/compare/v1.9.0...v1.9.1) (2024-04-15)
+
+
+### 🐛 Corrections de bogues
+
+* revert ui fin de mission ([#378](https://github.com/betagouv/agir-front/issues/378)) ([f24b297](https://github.com/betagouv/agir-front/commit/f24b29797d400d16d0eba2e06420ed0344e11f7e))
+
 ## [1.9.0](https://github.com/betagouv/agir-front/compare/v1.8.1...v1.9.0) (2024-04-15)
 
 
