@@ -1,4 +1,4 @@
-import { UtilisateurStore } from '../../../src/store/utilisateur';
+import { UtilisateurStore } from '@/store/utilisateur';
 
 export class InjectUtilisateur {
   public avecUtilisateur(utilisateur: UtilisateurStore): UtilisateurStore {
@@ -10,14 +10,9 @@ export class InjectUtilisateur {
       utilisateur: {
         id: 'dorian',
         nom: 'RECETTEUR',
-        codePostal: '21000',
-        commune: 'DIJON',
         prenom: 'Dorian',
         mail: 'dorian@agir.dev',
-        revenuFiscal: null,
-        nombreDePartsFiscales: 2.5,
         fonctionnalitesDebloquees: [],
-        abonnementTransport: false,
       },
       valeurBilanCarbone: { bilan: '', details: [], valeurMax: 0 },
       score: {
