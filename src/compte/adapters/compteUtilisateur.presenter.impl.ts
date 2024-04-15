@@ -5,12 +5,7 @@ export interface CompteUtlisateurViewModel {
   nom: string;
   id: string;
   mail: string;
-  codePostal: string;
-  commune: string;
   prenom: string;
-  revenuFiscal: number;
-  nombreDePartsFiscales: number;
-  abonnementTransport: boolean;
   fonctionnalitesDebloquees: string[];
 }
 export class CompteUtilisateurPresenterImpl implements CompteUtilisateurPresenter {
@@ -25,12 +20,7 @@ export class CompteUtilisateurPresenterImpl implements CompteUtilisateurPresente
       nom: compteUtilisateur.nom,
       id: compteUtilisateur.id,
       mail: compteUtilisateur.mail,
-      codePostal: compteUtilisateur.codePostal,
-      commune: compteUtilisateur.commune,
-      abonnementTransport: compteUtilisateur.abonnementTransport,
       prenom: compteUtilisateur.prenom,
-      revenuFiscal: compteUtilisateur.revenuFiscal || 0,
-      nombreDePartsFiscales: compteUtilisateur.nombreDePartsFiscales,
       fonctionnalitesDebloquees: compteUtilisateur.fonctionnalitesDebloquees,
     });
   }

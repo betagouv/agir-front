@@ -12,12 +12,7 @@ interface CompteUtilisateurApiModel {
   id: string;
   nom: string;
   email: string;
-  code_postal: string;
-  commune: string;
   prenom: string;
-  revenu_fiscal: number | null;
-  nombre_de_parts_fiscales: number;
-  abonnement_ter_loire: boolean;
   fonctionnalites_debloquees: string[];
 }
 export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurRepository {
@@ -29,29 +24,9 @@ export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurReposit
       nom: response.data.nom,
       id: idUtilisateur,
       mail: response.data.email || '',
-      codePostal: response.data.code_postal || '',
       prenom: response.data.prenom || '',
-      commune: response.data.commune || '',
-      revenuFiscal: response.data.revenu_fiscal,
-      nombreDePartsFiscales: response.data.nombre_de_parts_fiscales,
-      abonnementTransport: response.data.abonnement_ter_loire,
       fonctionnalitesDebloquees: response.data.fonctionnalites_debloquees,
     };
-  }
-
-  @intercept401()
-  async mettreAjour(compteUtilisateur: CompteUtilisateur) {
-    const axiosInstance = AxiosFactory.getAxios();
-    await axiosInstance.patch(`/utilisateurs/${compteUtilisateur.id}/profile`, {
-      nom: compteUtilisateur.nom,
-      prenom: compteUtilisateur.prenom,
-      email: compteUtilisateur.mail,
-      code_postal: compteUtilisateur.codePostal,
-      commune: compteUtilisateur.commune,
-      revenu_fiscal: compteUtilisateur.revenuFiscal,
-      nombre_de_parts_fiscales: compteUtilisateur.nombreDePartsFiscales,
-      abonnement_ter_loire: compteUtilisateur.abonnementTransport,
-    });
   }
 
   async creerCompteUtilisateur(compteUtilisateurACreer: CompteUtilisateurACreer): Promise<CompteTemporaire> {

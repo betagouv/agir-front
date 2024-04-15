@@ -10,7 +10,7 @@
       id="text-input-rfr"
       inputmode="numeric"
       type="number"
-      v-model="nombreDeParts"
+      v-model="nombreDePartsModel"
       step=".5"
       min="1"
     />
@@ -22,46 +22,22 @@
     orientation="horizontal"
     :options="seuilRevenuFiscalDeReference"
     col="fr-col"
-    v-model="revenuFiscalDeReference"
-    :default-value="revenuFiscalDeReference?.toString() || '0'"
+    v-model="revenuFiscalDeReferenceModel"
+    :default-value="revenuFiscalDeReferenceModel?.toString()"
   />
 </template>
 
 <script setup lang="ts">
-  import { ref, watch } from 'vue';
+  import { defineModel, ref, watch } from 'vue';
   import BoutonRadio from '@/components/custom/BoutonRadio.vue';
-  import { utilisateurStore } from '@/store/utilisateur';
   import { calculerSeuils } from '@/shell/calculerSeuils';
 
-  const store = utilisateurStore();
-  const nombreDeParts = ref(store.utilisateur.nombreDePartsFiscales || 1);
-  const revenuFiscalDeReference = ref(store.utilisateur.revenuFiscal || 0);
-  const seuilRevenuFiscalDeReference = ref(calculerSeuils(nombreDeParts.value));
+  const nombreDePartsModel = defineModel<number>('nombreDeParts', { default: 1 });
+  const revenuFiscalDeReferenceModel = defineModel<number | null>('revenuFiscalDeReference', { default: 0 });
 
-  const emit = defineEmits<{
-    (
-      event: 'update:partEtRevenu',
-      data: {
-        nombreDeParts: number;
-        revenuFiscalDeReference: number | 0;
-      },
-    ): void;
-  }>();
+  const seuilRevenuFiscalDeReference = ref(calculerSeuils(nombreDePartsModel.value));
 
-  watch(nombreDeParts, nouvelleValeur => {
-    seuilRevenuFiscalDeReference.value = calculerSeuils(nouvelleValeur);
-    revenuFiscalDeReference.value = 0;
-
-    emit('update:partEtRevenu', {
-      nombreDeParts: nombreDeParts.value,
-      revenuFiscalDeReference: Number(revenuFiscalDeReference.value),
-    });
-  });
-
-  watch(revenuFiscalDeReference, nouvelleValeur => {
-    emit('update:partEtRevenu', {
-      nombreDeParts: nombreDeParts.value,
-      revenuFiscalDeReference: Number(nouvelleValeur),
-    });
+  watch(nombreDePartsModel, () => {
+    seuilRevenuFiscalDeReference.value = calculerSeuils(nombreDePartsModel.value);
   });
 </script>

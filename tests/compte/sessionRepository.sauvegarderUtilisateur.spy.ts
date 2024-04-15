@@ -9,18 +9,16 @@ export class SpySauvegarderUtilisateurSessionRepository implements SessionReposi
   private _utilisateur: Utilisateur = {
     id: '',
     nom: '',
-    codePostal: '',
-    commune: '',
     prenom: '',
     mail: '',
-    revenuFiscal: null,
-    nombreDePartsFiscales: 1,
-    abonnementTransport: false,
     fonctionnalitesDebloquees: [],
   };
 
   sauvegarderUtilisateur(utilisateur: Utilisateur) {
-    this._utilisateur = utilisateur;
+    this._utilisateur = {
+      ...this._utilisateur,
+      ...utilisateur,
+    };
   }
 
   nouvelleFeatureDebloquee(featureDebloquee: string): void {}

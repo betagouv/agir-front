@@ -35,7 +35,7 @@
 <script setup lang="ts">
   import CarteInfo from '@/components/custom/CarteInfo.vue';
   import { calculerSeuils } from '@/shell/calculerSeuils';
-  import { ref } from 'vue';
+  import { computed } from 'vue';
 
   import { RouteAidesName } from '@/router/aides/routeAidesName';
 
@@ -45,11 +45,13 @@
     revenuFiscal: number | null;
     nombreDePartsFiscales: number;
   }>();
-  const seuil = ref<string>('');
-  if (props.revenuFiscal !== null) {
-    const seuils = calculerSeuils(props.nombreDePartsFiscales).filter(
-      seuil => seuil.value === props.revenuFiscal!.toString()
-    );
-    seuil.value = seuils[0].label;
-  }
+  const seuil = computed(() => {
+    if (props.revenuFiscal !== null) {
+      const seuils = calculerSeuils(props.nombreDePartsFiscales).filter(
+        seuil => seuil.value === props.revenuFiscal!.toString(),
+      );
+      return seuils[0].label;
+    }
+    return '';
+  });
 </script>

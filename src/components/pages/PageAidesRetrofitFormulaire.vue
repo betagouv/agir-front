@@ -8,13 +8,17 @@
           <form @submit.prevent="mettreAJourLesInfos">
             <h3 class="fr-h4">Où habitez-vous ?</h3>
             <InputCodePostal
-              v-model="codePostal"
-              :defaultValue="codePostal"
-              :defaultSelectValue="commune"
-              @update:selectedCommune="commune = $event"
+              v-if="logementViewModel"
+              v-model="logementViewModel.codePostal"
+              :defaultValue="logementViewModel.codePostal"
+              :defaultSelectValue="logementViewModel.commune"
+              @update:selectedCommune="logementViewModel.commune = $event"
             />
             <h3 class="fr-h4 fr-mt-3w">Quelle est votre tranche de revenus ?</h3>
-            <InputTrancheDeRevenu @update:part-et-revenu="updatePartEtRevenu" />
+            <InputTrancheDeRevenu
+              v-model:nombre-de-parts="nombreDePartsFiscales"
+              v-model:revenu-fiscal-de-reference="revenuFiscal"
+            />
             <button class="fr-mt-2w fr-btn">Valider</button>
           </form>
         </div>
@@ -27,12 +31,10 @@
 </template>
 
 <script setup lang="ts">
-  import { ref } from 'vue';
+  import { onMounted, ref } from 'vue';
   import { utilisateurStore } from '@/store/utilisateur';
-  import { MettreAJourCompteUtilisateurUsecase } from '@/compte/mettreAJourCompteUtilisateur.usecase';
-  import { CompteUtilisateurRepositoryImpl } from '@/compte/adapters/compteUtilisateur.repository.impl';
+  import { MettreAJourProfileUtilisateurUsecase } from '@/profileUtilisateur/mettreAJourProfileUtilisateurUsecase';
   import { SessionRepositoryStore } from '@/authentification/adapters/session.repository.store';
-  import { CompteUtlisateurViewModel } from '@/compte/adapters/compteUtilisateur.presenter.impl';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import InputCodePostal from '@/components/dsfr/InputCodePostal.vue';
   import InputTrancheDeRevenu from '@/components/custom/InputTrancheDeRevenu.vue';
@@ -40,38 +42,82 @@
   import AidesVeloFormulaireAside from '@/components/custom/Aides/AidesInfosUtilisationDesDonnees.vue';
 
   import { RouteAidesName } from '@/router/aides/routeAidesName';
+  import {
+    ChargerProfileUtilisateurUsecase,
+    ProfileUtilisateurRepositoryAxiosImpl,
+  } from '@/profileUtilisateur/chargerProfileUtilisateur.usecase';
+  import { LogementViewModel } from '@/logement/ports/logement.presenter';
+  import { RecupererInformationLogementUseCase } from '@/logement/recupererInformationLogement.usecase';
+  import { LogementRepositoryAxios } from '@/logement/adapters/logement.repository.axios';
+  import { LogementPresenterImpl } from '@/logement/adapters/logement.presenter.impl';
+  import {
+    ProfileUtilisateurPresenterImpl,
+    ProfileUtilisateurViewModel,
+  } from '@/profileUtilisateur/adapters/profileUtilisateur.presenter.impl';
+  import { EnregistrerInformationsLogementUsecase } from '@/logement/enregistrerInformationLogement.usecase';
 
   const store = utilisateurStore();
-  const revenuFiscal = ref(store.utilisateur.revenuFiscal ? store.utilisateur.revenuFiscal : 0);
-  const nombreDePartsFiscales = ref(store.utilisateur.nombreDePartsFiscales);
-  const codePostal = ref(store.utilisateur.codePostal);
-  const commune = ref(store.utilisateur.commune);
-  const updatePartEtRevenu = (data: { nombreDeParts: number; revenuFiscalDeReference: number | 0 }) => {
-    nombreDePartsFiscales.value = data.nombreDeParts;
-    revenuFiscal.value = data.revenuFiscalDeReference;
-  };
+  const revenuFiscal = ref<number | null>(0);
+  const nombreDePartsFiscales = ref(0);
+  const logementViewModel = ref<LogementViewModel | null>(null);
+  const abonnementTransport = ref(false);
+
+  onMounted(() => {
+    const informationLogementUseCase = new RecupererInformationLogementUseCase(new LogementRepositoryAxios());
+    informationLogementUseCase.execute(
+      utilisateurStore().utilisateur.id,
+      new LogementPresenterImpl(viewModel => {
+        logementViewModel.value = viewModel;
+      }),
+    );
+
+    const usecase = new ChargerProfileUtilisateurUsecase(new ProfileUtilisateurRepositoryAxiosImpl());
+    const idUtilisateur = store.utilisateur.id;
+    usecase.execute(
+      idUtilisateur,
+      new ProfileUtilisateurPresenterImpl(viewModel => {
+        revenuFiscal.value = viewModel.revenuFiscal;
+        nombreDePartsFiscales.value = viewModel.nombreDePartsFiscales;
+        abonnementTransport.value = viewModel.abonnementTransport;
+      }),
+    );
+  });
 
   async function mettreAJourLesInfos() {
     {
-      const usecase = new MettreAJourCompteUtilisateurUsecase(
-        new CompteUtilisateurRepositoryImpl(),
-        new SessionRepositoryStore()
+      const usecase = new MettreAJourProfileUtilisateurUsecase(
+        new ProfileUtilisateurRepositoryAxiosImpl(),
+        new SessionRepositoryStore(),
       );
       const utilisateur = utilisateurStore().utilisateur;
-      const donneeAMettreAjour: CompteUtlisateurViewModel = {
+      const donneeAMettreAjour: ProfileUtilisateurViewModel = {
         nom: utilisateur.nom,
         id: utilisateur.id,
         mail: utilisateur.mail,
-        commune: commune.value,
-        codePostal: codePostal.value,
         prenom: utilisateur.prenom,
-        abonnementTransport: utilisateur.abonnementTransport,
+        abonnementTransport: abonnementTransport.value,
         revenuFiscal: revenuFiscal.value,
         nombreDePartsFiscales: nombreDePartsFiscales.value,
-        fonctionnalitesDebloquees: utilisateur.fonctionnalitesDebloquees,
       };
       await usecase.execute(donneeAMettreAjour);
-      await router.push({ name: RouteAidesName.RETROFIT });
+
+      const enregistrerInformationsLogementUsecase = new EnregistrerInformationsLogementUsecase(
+        new LogementRepositoryAxios(),
+      );
+      enregistrerInformationsLogementUsecase.execute(utilisateurStore().utilisateur.id, {
+        adultes: logementViewModel.value!.adultes,
+        enfants: logementViewModel.value!.enfants,
+        codePostal: logementViewModel.value!.codePostal,
+        commune: logementViewModel.value!.commune,
+        residence: logementViewModel.value!.residence.valeur,
+        superficie: logementViewModel.value!.superficie.valeur,
+        proprietaire: logementViewModel.value!.proprietaire.valeur,
+        modeDeChauffage: logementViewModel.value!.modeDeChauffage.valeur,
+        plusDeQuinzeAns: logementViewModel.value!.plusDeQuinzeAns.valeur,
+        dpe: logementViewModel.value!.dpe.valeur,
+      });
+
+      await router.push({ name: RouteAidesName.VELO });
     }
   }
 </script>

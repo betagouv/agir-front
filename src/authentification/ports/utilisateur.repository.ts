@@ -1,13 +1,8 @@
 export interface Utilisateur {
   nom: string;
-  codePostal: string;
-  commune: string;
   id: string;
   prenom: string;
   mail: string;
-  revenuFiscal: number | null;
-  nombreDePartsFiscales: number;
-  abonnementTransport: boolean;
   fonctionnalitesDebloquees: string[];
 }
 

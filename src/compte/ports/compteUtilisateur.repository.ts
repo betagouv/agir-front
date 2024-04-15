@@ -4,12 +4,7 @@ export interface CompteUtilisateur {
   id: string;
   nom: string;
   mail: string;
-  codePostal: string;
-  commune: string;
   prenom: string;
-  revenuFiscal: number | null;
-  nombreDePartsFiscales: number;
-  abonnementTransport: boolean;
   fonctionnalitesDebloquees: string[];
 }
 
@@ -26,7 +21,6 @@ export interface CompteUtilisateurACreer {
 }
 export interface CompteUtilisateurRepository {
   getCompteUtilisateur(idUtilisateur: string): Promise<CompteUtilisateur>;
-  mettreAjour(compteUtilisateur: CompteUtilisateur);
   creerCompteUtilisateur(compteUtilisateurACreer: CompteUtilisateurACreer): Promise<CompteTemporaire>;
   supprimerCompteUtilisateur(idUtilisateur: string): Promise<void>;
   mettreAJourLeMotDePasse(idUtilisateur: string, nouveauMotDePasse: string): Promise<void>;

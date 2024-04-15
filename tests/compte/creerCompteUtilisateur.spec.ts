@@ -105,11 +105,15 @@ describe('Fichier de tests concernant la creation du compte utilisateur', () => 
         expect(viewModel.route).toBe('validation-compte');
       }),
       compteACreer,
-      onboardingState
+      onboardingState,
     );
     // THEN
     expect(sessionRepository.utilisateur).toStrictEqual<Partial<Utilisateur>>({
+      fonctionnalitesDebloquees: [],
+      id: '',
       mail: 'john@skynet.com',
+      nom: '',
+      prenom: '',
     });
   });
   it("si le repository renvoie une erreur avec un code d'erreur 023 doit naviguer vers la page de beta fermée", async () => {
@@ -159,7 +163,7 @@ describe('Fichier de tests concernant la creation du compte utilisateur', () => 
         expect(viewModel.route).toBe('beta-fermee');
       }),
       compteACreer,
-      onboardingState
+      onboardingState,
     );
   });
 });

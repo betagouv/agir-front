@@ -9,16 +9,11 @@ class MockUtilisateurRepository implements UtilisateurRepository {
   }
 
   getUtilisateurAvecId(idUtilisateur: string): Promise<Utilisateur> {
-    return Promise.resolve({
+    return Promise.resolve<Utilisateur>({
       id: idUtilisateur,
       nom: '',
-      codePostal: '',
-      commune: '',
       prenom: '',
       mail: 'john@exemple.com',
-      revenuFiscal: null,
-      nombreDePartsFiscales: 1,
-      abonnementTransport: false,
       fonctionnalitesDebloquees: [],
     });
   }
@@ -50,13 +45,8 @@ describe('Fichier de tests concernant la validation du compte utilisateur', () =
     expect(spySessionRepository.utilisateur).toStrictEqual<Utilisateur>({
       id: 'utilisateurId',
       nom: '',
-      codePostal: '',
-      commune: '',
       prenom: '',
       mail: 'john@exemple.com',
-      revenuFiscal: null,
-      nombreDePartsFiscales: 1,
-      abonnementTransport: false,
       fonctionnalitesDebloquees: [],
     });
   });

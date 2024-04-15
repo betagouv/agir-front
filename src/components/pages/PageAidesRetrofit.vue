@@ -11,9 +11,9 @@
       <template v-slot:asideResultatAides>
         <AsideAideRetrofit
           :code-postal="codePostal"
-          :ville="utilisateurStore().utilisateur.commune"
-          :revenu-fiscal="utilisateurStore().utilisateur.revenuFiscal!"
-          :nombre-de-parts-fiscales="utilisateurStore().utilisateur.nombreDePartsFiscales!"
+          :ville="commune"
+          :revenu-fiscal="revenuFiscal"
+          :nombre-de-parts-fiscales="nombreDePartsFiscales"
         />
       </template>
     </AidesResultat>
@@ -29,28 +29,56 @@
   import SimulerAideRetrofitUsecase from '@/aides/simulerAideRetrofit.usecase';
   import { SimulerAideRetrofitRepositoryAxios } from '@/aides/adapters/simulerAideRetrofit.repository.axios';
   import { SimulerAideRetrofitPresenterImpl } from '@/aides/adapters/simulerAideRetrofit.presenter.impl';
+  import { RecupererInformationLogementUseCase } from '@/logement/recupererInformationLogement.usecase';
+  import { LogementRepositoryAxios } from '@/logement/adapters/logement.repository.axios';
   import { utilisateurStore } from '@/store/utilisateur';
+  import { LogementPresenterImpl } from '@/logement/adapters/logement.presenter.impl';
+  import {
+    ChargerProfileUtilisateurUsecase,
+    ProfileUtilisateurRepositoryAxiosImpl,
+  } from '@/profileUtilisateur/chargerProfileUtilisateur.usecase';
+  import { ProfileUtilisateurPresenterImpl } from '@/profileUtilisateur/adapters/profileUtilisateur.presenter.impl';
 
   const titrePage = 'Vos aides - Retrofit';
   const sousTitre = 'Vous pouvez bénéficier des aides Retrofit suivantes :';
   const simulationAidesRetrofitViewModel = ref<SimulationAideResultatViewModel[] | null>(null);
   const isLoading = ref<boolean>(false);
-  const codePostal = ref<string>(utilisateurStore().utilisateur.codePostal!);
+  const codePostal = ref<string>('');
+  const commune = ref<string>('');
+  const revenuFiscal = ref<number | null>(0);
+  const nombreDePartsFiscales = ref<number>(0);
 
   const simulerAideRetrofit = () => {
     isLoading.value = true;
     const useCase = new SimulerAideRetrofitUsecase(new SimulerAideRetrofitRepositoryAxios());
     useCase.execute(
-      utilisateurStore().utilisateur.codePostal,
-      utilisateurStore().utilisateur.revenuFiscal !== null
-        ? utilisateurStore().utilisateur.revenuFiscal!.toString()
-        : '',
+      codePostal.value,
+      revenuFiscal.value?.toString() ?? '',
       new SimulerAideRetrofitPresenterImpl((viewModel: SimulationAideResultatViewModel[]) => {
         simulationAidesRetrofitViewModel.value = viewModel;
         isLoading.value = false;
-      })
+      }),
     );
   };
+
+  const informationLogementUseCase = new RecupererInformationLogementUseCase(new LogementRepositoryAxios());
+  informationLogementUseCase.execute(
+    utilisateurStore().utilisateur.id,
+    new LogementPresenterImpl(viewModel => {
+      codePostal.value = viewModel.codePostal;
+      commune.value = viewModel.commune;
+    }),
+  );
+
+  const usecase = new ChargerProfileUtilisateurUsecase(new ProfileUtilisateurRepositoryAxiosImpl());
+  const idUtilisateur = utilisateurStore().utilisateur.id;
+  usecase.execute(
+    idUtilisateur,
+    new ProfileUtilisateurPresenterImpl(viewModel => {
+      revenuFiscal.value = viewModel.revenuFiscal;
+      nombreDePartsFiscales.value = viewModel.nombreDePartsFiscales;
+    }),
+  );
 
   simulerAideRetrofit();
 </script>

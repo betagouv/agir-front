@@ -46,9 +46,9 @@
         </div>
         <AsideAideVelo
           :code-postal="codePostal"
-          :ville="utilisateurStore().utilisateur.commune"
-          :revenu-fiscal="utilisateurStore().utilisateur.revenuFiscal!"
-          :nombre-de-parts-fiscales="utilisateurStore().utilisateur.nombreDePartsFiscales!"
+          :ville="commune"
+          :revenu-fiscal="revenuFiscal"
+          :nombre-de-parts-fiscales="nombreDePartsFiscales"
         />
       </template>
     </AidesResultat>
@@ -66,11 +66,22 @@
   import { utilisateurStore } from '@/store/utilisateur';
   import { SimulerAideVeloPresenterImpl } from '@/aides/adapters/simulerAideVelo.presenter.impl';
   import InputNumberVertical from '@/components/custom/InputNumberVertical.vue';
+  import { RecupererInformationLogementUseCase } from '@/logement/recupererInformationLogement.usecase';
+  import { LogementRepositoryAxios } from '@/logement/adapters/logement.repository.axios';
+  import { LogementPresenterImpl } from '@/logement/adapters/logement.presenter.impl';
+  import {
+    ChargerProfileUtilisateurUsecase,
+    ProfileUtilisateurRepositoryAxiosImpl,
+  } from '@/profileUtilisateur/chargerProfileUtilisateur.usecase';
+  import { ProfileUtilisateurPresenterImpl } from '@/profileUtilisateur/adapters/profileUtilisateur.presenter.impl';
 
   const titrePage = 'Acheter un vélo';
   const sousTitre = 'Voici les aides vélo disponibles (en fonction de votre situation)';
   const simulationAidesVeloViewModel = ref<SimulationAideResultatViewModel[] | null>(null);
-  const codePostal = ref<string>(utilisateurStore().utilisateur.codePostal!);
+  const codePostal = ref<string>('');
+  const commune = ref<string>('');
+  const revenuFiscal = ref<number | null>(0);
+  const nombreDePartsFiscales = ref<number>(0);
   const prixDuVelo = ref<number>(1000);
   const isLoading = ref<boolean>(false);
 
@@ -85,12 +96,30 @@
 
   const simulerAideVeloPresenterImpl = new SimulerAideVeloPresenterImpl(mapResultatAidesVelo);
   const simulerAideVeloRepositoryAxios = new SimulerAideVeloRepositoryAxios();
-
   const simulerAideVelo = () => {
     isLoading.value = true;
     const useCase = new SimulerAideVeloUsecase(simulerAideVeloRepositoryAxios);
     useCase.execute(prixDuVelo.value, utilisateurStore().utilisateur.id, simulerAideVeloPresenterImpl);
   };
+
+  const informationLogementUseCase = new RecupererInformationLogementUseCase(new LogementRepositoryAxios());
+  informationLogementUseCase.execute(
+    utilisateurStore().utilisateur.id,
+    new LogementPresenterImpl(viewModel => {
+      codePostal.value = viewModel.codePostal;
+      commune.value = viewModel.commune;
+    }),
+  );
+
+  const usecase = new ChargerProfileUtilisateurUsecase(new ProfileUtilisateurRepositoryAxiosImpl());
+  const idUtilisateur = utilisateurStore().utilisateur.id;
+  usecase.execute(
+    idUtilisateur,
+    new ProfileUtilisateurPresenterImpl(viewModel => {
+      revenuFiscal.value = viewModel.revenuFiscal;
+      nombreDePartsFiscales.value = viewModel.nombreDePartsFiscales;
+    }),
+  );
 
   simulerAideVelo();
 </script>

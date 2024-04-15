@@ -5,7 +5,10 @@ import { utilisateurStore } from '@/store/utilisateur';
 export class SessionRepositoryStore implements SessionRepository {
   sauvegarderUtilisateur(utilisateur: Partial<Utilisateur>) {
     const store = utilisateurStore();
-    store.setUtilisateur(utilisateur);
+    store.setUtilisateur({
+      ...store.utilisateur,
+      ...utilisateur,
+    });
   }
 
   nouvelleFeatureDebloquee(featureDebloquee: string): void {

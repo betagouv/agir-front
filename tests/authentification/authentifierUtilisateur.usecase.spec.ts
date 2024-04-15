@@ -7,13 +7,8 @@ class UtilisateurRepositoryForTest implements UtilisateurRepository {
     return Promise.resolve<Utilisateur>({
       id: '1',
       nom: 'Doe',
-      codePostal: '77650',
-      commune: 'NOM COMMUNE',
       prenom: 'John',
       mail: '',
-      revenuFiscal: null,
-      nombreDePartsFiscales: 1,
-      abonnementTransport: false,
       fonctionnalitesDebloquees: [],
     });
   }
@@ -50,13 +45,8 @@ describe("Fichier de tests concernant l'authentification ", () => {
     expect(spySessionRepository.utilisateur).toStrictEqual<Utilisateur>({
       id: '1',
       nom: 'Doe',
-      codePostal: '77650',
-      commune: 'NOM COMMUNE',
       prenom: 'John',
       mail: '',
-      revenuFiscal: null,
-      nombreDePartsFiscales: 1,
-      abonnementTransport: false,
       fonctionnalitesDebloquees: [],
     });
   });
