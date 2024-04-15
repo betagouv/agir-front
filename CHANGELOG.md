@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.9.2](https://github.com/betagouv/agir-front/compare/v1.9.1...v1.9.2) (2024-04-15)
+
+
+### 👷 Autres changements
+
+* fix du reveal des defis ([#381](https://github.com/betagouv/agir-front/issues/381)) ([981086f](https://github.com/betagouv/agir-front/commit/981086f3b17ba0d4b794ae3026011c43e2345f60))
+* ordre des imports automatique avec eslint ([#351](https://github.com/betagouv/agir-front/issues/351)) ([1ca527b](https://github.com/betagouv/agir-front/commit/1ca527bab413cc074d2daa75f90ce3e3e91304e0))
+
 ## [1.9.1](https://github.com/betagouv/agir-front/compare/v1.9.0...v1.9.1) (2024-04-15)
 
 
