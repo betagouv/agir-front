@@ -112,7 +112,8 @@ h3 {
 }
 
 .text--gris-dark {
-  color: var(--text-default-grey);
+  /* color: var(--text-default-grey); */
+  color: white;
 }
 
 .text--gris-light {
