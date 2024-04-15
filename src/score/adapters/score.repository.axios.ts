@@ -3,9 +3,9 @@ import { Score, ScoreRepository } from '@/score/ports/score.repository';
 
 export interface ScoreApiModel {
   points: number;
-  niveau: 0;
-  current_points_in_niveau: 0;
-  point_target_in_niveau: 0;
+  niveau: number;
+  current_points_in_niveau: number;
+  point_target_in_niveau: number;
   celebrations: {
     id: string;
     type: 'niveau' | 'fin_mission';

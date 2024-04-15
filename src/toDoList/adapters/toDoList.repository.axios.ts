@@ -8,39 +8,36 @@ export interface ToDoListApiModel {
   titre: string;
   is_last: boolean;
   todo:
-    | []
-    | [
-        {
-          thematiques: string[];
-          titre: string;
-          type: string;
-          content_id: string;
-          service_id: string;
-          id: string;
-          points: number;
-          sont_points_en_poche: boolean;
-          progression: {
-            current: number;
-            target: number;
-          };
-        },
-      ];
+    | {
+        thematiques: string[];
+        titre: string;
+        type: string;
+        content_id: string;
+        service_id: string;
+        id: string;
+        points: number;
+        sont_points_en_poche: boolean;
+        progression: {
+          current: number;
+          target: number;
+        };
+      }[]
+    | [];
+
   done:
-    | [
-        {
-          thematiques: string[];
-          titre: string;
-          type: string;
-          content_id: string;
-          id: string;
-          points: number;
-          sont_points_en_poche: boolean;
-          progression: {
-            current: number;
-            target: number;
-          };
-        },
-      ]
+    | {
+        thematiques: string[];
+        titre: string;
+        type: string;
+        content_id: string;
+        id: string;
+        points: number;
+        sont_points_en_poche: boolean;
+        progression: {
+          current: number;
+          target: number;
+        };
+      }[]
     | [];
 }
 

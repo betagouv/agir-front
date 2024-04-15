@@ -10,7 +10,7 @@ import { ThematiqueQuestion } from '@/kyc/recupererQuestionUsecase';
 let page: Page;
 
 test.beforeAll(async () => {
-  const browser = await chromium.launch({ headless: true });
+  const browser = await chromium.launch();
   const context = await browser.newContext();
   page = await context.newPage();
   await page.goto('/');
@@ -34,7 +34,7 @@ test.beforeAll(async () => {
     route.fulfill({
       status: 200,
       contentType: 'application/json',
-      body: JSON.stringify(new InjectGamification().vierge()),
+      body: JSON.stringify(new InjectGamification().build()),
     });
   });
 

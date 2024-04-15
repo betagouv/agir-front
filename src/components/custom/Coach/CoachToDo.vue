@@ -34,20 +34,17 @@
           </li>
         </ul>
       </div>
-      <div class="fr-py-1w">
-        <h3 class="text--uppercase fr-mb-0 fr-text--xs text--gris-dark fr-mb-1w before--path">
-          <span class="fr-icon-gift-fill" aria-hidden="true"></span>
-          Bonus de fin de mission
-        </h3>
-        <div v-if="!isDisableBonusFinDeToDo()">
-          <button
-            class="fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-gift-fill fr-text--lg background--white"
-            @click="showBonus"
-          >
-            Découvrir le bonus
-          </button>
-        </div>
-      </div>
+      <span class="text--uppercase fr-mb-0 fr-text--xs text--gris-dark fr-mb-1w before--path fr-text--bold">
+        <span class="fr-icon-gift-fill" aria-hidden="true"></span>
+        Bonus de fin de mission
+      </span>
+      <button
+        v-if="!isDisableBonusFinDeToDo()"
+        class="fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-gift-fill fr-text--lg background--white"
+        @click="showBonus"
+      >
+        Découvrir le bonus
+      </button>
     </div>
     <CoachFinDeMission
       v-else
