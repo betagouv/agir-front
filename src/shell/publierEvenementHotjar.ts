@@ -5,5 +5,7 @@ export enum HotjarEvenement {
 }
 
 export function publierEvenementHotjar(eventName: HotjarEvenement) {
-  Hotjar.event(eventName);
+  if (Hotjar.isReady()) {
+    Hotjar.event(eventName);
+  }
 }
