@@ -109,7 +109,7 @@
   <Teleport to="body">
     <Modale
       label="Modale de paramétrage du service Linky"
-      id="linky"
+      id="linkyModale"
       :radius="false"
       :is-footer-actions="false"
       size="m"
@@ -121,7 +121,7 @@
         />
       </template>
     </Modale>
-    <button class="fr-btn fr-hidden" data-fr-opened="false" aria-controls="linky">
+    <button class="fr-btn fr-hidden" data-fr-opened="false" aria-controls="linkyModale">
       Modale configuration compteur Linky
     </button>
   </Teleport>
