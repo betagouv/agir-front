@@ -91,6 +91,6 @@
         new ModaleActions('linkyModale').close();
         ServiceEventBusImpl.getInstance().publish(ServiceEvent.SERVICE_INSTALLE); // todo : à sortir dans le usecase
       })
-      .catch(error => afficherAlerte('error', 'Erreur', error.data.message));
+      .catch(error => afficherAlerte('error', 'Erreur', error.data.message || 'Erreur inattendue'));
   };
 </script>
