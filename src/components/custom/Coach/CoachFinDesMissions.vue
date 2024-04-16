@@ -17,14 +17,8 @@
 </template>
 <script setup lang="ts">
   import { publierEvenementHotjar, HotjarEvenement } from '@/shell/publierEvenementHotjar';
-  import { inject } from 'vue';
 
-  const hotjar = inject('Hotjar') as {
-    event: (eventName: string) => void;
-  };
-  if (hotjar) {
-    publierEvenementHotjar(hotjar, HotjarEvenement.DEBRIEF);
-  }
+  publierEvenementHotjar(HotjarEvenement.DEBRIEF);
 </script>
 <style scoped>
   .card-fin-missions {
