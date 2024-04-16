@@ -105,7 +105,7 @@ app.use(VueMatomo, {
 });
 
 Hotjar.init(import.meta.env.VITE_HOTJAR_ID, import.meta.env.VITE_HOTJAR_SNIPPET_VERSION, {
-  debug: false,
+  debug: true,
 });
 
 createSentry(app, router);
