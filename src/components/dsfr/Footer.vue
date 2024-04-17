@@ -29,7 +29,7 @@
         </div> -->
       </div>
       <div class="fr-footer__partners">
-        <h4 class="fr-footer__partners-title">Nos partenaires</h4>
+        <p class="fr-footer__partners-title">Nos partenaires</p>
         <div class="fr-footer__partners-logos">
           <div class="fr-footer__partners-main">
             <ul class="fr-grid-row fr-grid-row--gutters fr-grid-row--middle">
