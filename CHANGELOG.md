@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.9.3](https://github.com/betagouv/agir-front/compare/v1.9.2...v1.9.3) (2024-04-17)
+
+
+### 🐛 Corrections de bogues
+
+* message erreur manquant linky ([#384](https://github.com/betagouv/agir-front/issues/384)) ([845eb07](https://github.com/betagouv/agir-front/commit/845eb07f5e5082e80857637ce5ba849bbf7662b6))
+* ouverture modale linky ([#382](https://github.com/betagouv/agir-front/issues/382)) ([5e2962e](https://github.com/betagouv/agir-front/commit/5e2962ee80c74180ff49749bc7f468d6146b1130))
+
+
+### 👷 Autres changements
+
+* hotjar fin de mission ([#385](https://github.com/betagouv/agir-front/issues/385)) ([932fb78](https://github.com/betagouv/agir-front/commit/932fb78b71d664afae2cd7abf0e85d55c011903e))
+
 ## [1.9.2](https://github.com/betagouv/agir-front/compare/v1.9.1...v1.9.2) (2024-04-15)
 
 
