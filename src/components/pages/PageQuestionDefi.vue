@@ -6,7 +6,7 @@
     <div class="fr-grid-row fr-grid-row--gutters" v-else-if="!isLoading && defiViewModel">
       <div class="fr-col-8">
         <div class="background--white border fr-p-4w border-radius--md">
-          <span class="display-block fr-mb-2w fr-mr-1w fr-tag background-bleu text--white">Action</span>
+          <span class="display-block fr-mb-2w fr-mr-1w fr-tag background--bleu-ecume-hover">Action</span>
           <span class="display-block fr-text--bold fr-mb-1w fr-text--sm text--black">{{
             defiViewModel.thematique
           }}</span>
@@ -28,10 +28,10 @@
               :default-value="reponse ? reponse.toString() : undefined"
             />
             <div class="background-bleu-alt-light border-radius--md fr-p-2w fr-mb-2w">
-              <h3 class="fr-h6">
+              <h2 class="fr-h6">
                 <span class="fr-icon-arrow-right-s-last-line text--bleu-minor" aria-hidden="true"></span>
                 Bonnes astuces pour réaliser ce défi
-              </h3>
+              </h2>
               <p class="fr-mb-0 cms__content" v-html="defiViewModel.astuces"></p>
             </div>
             <button class="fr-btn fr-btn--lg" title="Valider" :disabled="isButtonDisabled">Valider</button>

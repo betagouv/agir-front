@@ -1,5 +1,5 @@
 <template>
-  <dialog :aria-labelledby="label" :id="id" class="fr-modal" role="dialog">
+  <dialog :aria-labelledby="label" :id="id" class="fr-modal">
     <div class="fr-container fr-container--fluid fr-container-md">
       <div class="fr-grid-row fr-grid-row--center">
         <div :class="`fr-col-12 ${modaleSize}`">
@@ -33,7 +33,7 @@
     }>(),
     {
       size: 's',
-    }
+    },
   );
 
   const modaleSize = props.size === 's' ? 'fr-col-md-4' : 'fr-col-md-8';
