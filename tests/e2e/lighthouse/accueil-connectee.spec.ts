@@ -1,6 +1,5 @@
 import { playAudit } from 'playwright-lighthouse';
-import { chromium } from 'playwright';
-import { test } from '@playwright/test';
+import { test, chromium } from '@playwright/test';
 import fs from 'fs';
 
 test.describe('Accueil - audit a11y', () => {
