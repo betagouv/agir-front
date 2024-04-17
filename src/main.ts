@@ -103,13 +103,11 @@ app.use(VueMatomo, {
   siteId: import.meta.env.VITE_MATOMO_SITE_ID,
   router: router,
 });
+
 if (import.meta.env.VITE_ENV === 'production') {
   Hotjar.init(import.meta.env.VITE_HOTJAR_ID, import.meta.env.VITE_HOTJAR_SNIPPET_VERSION, {
     debug: false,
   });
-  app.provide('Hotjar', Hotjar);
-} else {
-  app.provide('Hotjar', null);
 }
 
 createSentry(app, router);

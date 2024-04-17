@@ -13,19 +13,8 @@
       </span>
     </p>
   </div>
-  <div id="container-survey"></div>
 </template>
-<script setup lang="ts">
-  import { publierEvenementHotjar, HotjarEvenement } from '@/shell/publierEvenementHotjar';
-  import { inject } from 'vue';
-
-  const hotjar = inject('Hotjar') as {
-    event: (eventName: string) => void;
-  };
-  if (hotjar) {
-    publierEvenementHotjar(hotjar, HotjarEvenement.DEBRIEF);
-  }
-</script>
+<script setup lang="ts"></script>
 <style scoped>
   .card-fin-missions {
     background-image: url('/bg_fin-des-missions.jpg');

@@ -8,6 +8,7 @@
           ✅ <span class="fr-text--bold">Vous avez accompli l’ensemble des missions ! </span> De nouvelles missions
           arriveront très prochainement.
         </p>
+        <div id="container-survey"></div>
       </div>
       <div v-if="todoList && !todoList.derniere" class="fr-grid-row fr-grid-row--gutters">
         <div class="fr-col fr-col-lg-7">
@@ -94,26 +95,27 @@
 
 <script setup lang="ts">
   import { onMounted, onUnmounted, ref } from 'vue';
+  import CoachRecommandations from './custom/Coach/CoachRecommandations.vue';
   import CarteSkeleton from '@/components/CarteSkeleton.vue';
-  import { utilisateurStore } from '@/store/utilisateur';
+  import BilanOnboarding from '@/components/custom/BilanOnboarding.vue';
   import CoachChangementSituation from '@/components/custom/Coach/CoachChangementSituation.vue';
+  import CoachToDo from '@/components/custom/Coach/CoachToDo.vue';
   import CarteScore from '@/components/custom/Progression/CarteScore.vue';
   import ProgressionNiveauJauge from '@/components/custom/Progression/ProgressionNiveauJauge.vue';
-  import CoachRecommandations from './custom/Coach/CoachRecommandations.vue';
-  import { RecupererRecommandationsPersonnaliseesUsecase } from '@/recommandationsPersonnalisees/recupererRecommandationsPersonnalisees.usecase';
-  import { RecommandationsPersonnaliseesRepositoryAxios } from '@/recommandationsPersonnalisees/adapters/recommandationsPersonnalisees.repository.axios';
+  import { useReveal } from '@/composables/useReveal';
   import {
     RecommandationPersonnaliseeViewModel,
     RecommandationsPersonnaliseesPresenterImpl,
   } from '@/recommandationsPersonnalisees/adapters/recommandationsPersonnalisees.presenter.impl';
-  import CoachToDo from '@/components/custom/Coach/CoachToDo.vue';
-  import { ToDoListRepositoryAxios } from '@/toDoList/adapters/toDoList.repository.axios';
+  import { RecommandationsPersonnaliseesRepositoryAxios } from '@/recommandationsPersonnalisees/adapters/recommandationsPersonnalisees.repository.axios';
+  import { RecupererRecommandationsPersonnaliseesUsecase } from '@/recommandationsPersonnalisees/recupererRecommandationsPersonnalisees.usecase';
+  import { Fonctionnalites } from '@/shell/fonctionnalitesEnum';
+  import { publierEvenementHotjar, HotjarEvenement } from '@/shell/publierEvenementHotjar';
+  import { utilisateurStore } from '@/store/utilisateur';
   import { ToDoListPresenterImpl, TodoListViewModel } from '@/toDoList/adapters/toDoList.presenter.impl';
+  import { ToDoListRepositoryAxios } from '@/toDoList/adapters/toDoList.repository.axios';
   import { RecupererToDoListUsecase } from '@/toDoList/recupererToDoList.usecase';
   import { ToDoListEvent, ToDoListEventBusImpl } from '@/toDoList/toDoListEventBusImpl';
-  import { Fonctionnalites } from '@/shell/fonctionnalitesEnum';
-  import BilanOnboarding from '@/components/custom/BilanOnboarding.vue';
-  import { useReveal } from '@/composables/useReveal';
 
   const { recommandationTour, defiTour } = useReveal();
 
@@ -129,6 +131,9 @@
 
   function mapValueTodo(viewModel: TodoListViewModel) {
     todoList.value = viewModel;
+    if (todoList.value?.derniere) {
+      publierEvenementHotjar(HotjarEvenement.DEBRIEF);
+    }
   }
 
   const subscriberName = 'Coach';

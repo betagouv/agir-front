@@ -1,12 +1,11 @@
+import Hotjar from '@hotjar/browser';
+
 export enum HotjarEvenement {
   DEBRIEF = 'debrief',
 }
 
-export function publierEvenementHotjar(
-  hotjar: {
-    event: (eventName: string) => void;
-  },
-  eventName: HotjarEvenement
-) {
-  hotjar.event(eventName.toString());
+export function publierEvenementHotjar(eventName: HotjarEvenement) {
+  if (Hotjar.isReady()) {
+    Hotjar.event(eventName);
+  }
 }
