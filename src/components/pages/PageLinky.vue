@@ -37,9 +37,10 @@
           <li>Lave-vaisselle (~ 303 kWh/an)</li>
         </ol>
         <p>
-          Vous pouvez réduire votre consommation en <strong>baissant votre chauffage</strong> et en
-          <strong>choissisant la classe d'énergie A+++</strong>
-          sur ces appareils.
+          Vous pouvez réduire votre consommation en <strong>baissant votre chauffage</strong> ou
+          <strong>en adaptant l'utilisation de ces appareils à vos besoins</strong>.<br />
+          Vous pouvez aussi choisir des appareils dont la classe d'énergie est comprise
+          <strong>entre A et A+++</strong> pour qu'ils soient plus économes.
         </p>
         <p class="fr-mb-0">
           Source :
