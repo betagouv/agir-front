@@ -28,6 +28,9 @@ export class InjectUtilisateur {
         celebration: null,
         afficherMissionsTermines: false,
       },
+      tracking: {
+        matomo: true,
+      },
     };
   }
 }

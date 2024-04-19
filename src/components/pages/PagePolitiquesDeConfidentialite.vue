@@ -20,7 +20,7 @@
 <script setup lang="ts">
   import PageConformite from '@/components/custom/PageConformite/PageConformite.vue';
   import InputCheckboxUnitaire from '@/components/dsfr/InputCheckboxUnitaire.vue';
-  import { PageConformiteType } from '@/conformites/recupererPageConformite.usecase.ts';
+  import { PageConformiteType } from '@/conformites/recupererPageConformite.usecase';
   import { utilisateurStore } from '@/store/utilisateur';
 
   function onOptInOrOutMatomo() {
