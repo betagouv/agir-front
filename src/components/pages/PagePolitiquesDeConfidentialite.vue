@@ -10,7 +10,7 @@
       <InputCheckboxUnitaire
         class="fr-pl-1v"
         id="cgu"
-        v-model="utilisateurStore().tracking.matomo"
+        v-model="utilisateurStore().tracking.matomoEstInactif"
         label="Je souhaite ne pas être suivi par Matomo sur ce site."
         @update:modelValue="onOptInOrOutMatomo()"
       />
@@ -24,10 +24,10 @@
   import { utilisateurStore } from '@/store/utilisateur';
 
   function onOptInOrOutMatomo() {
-    if (utilisateurStore().tracking.matomo) {
-      window._paq.push(['forgetUserOptOut']);
-    } else {
+    if (utilisateurStore().tracking.matomoEstInactif) {
       window._paq.push(['optUserOut']);
+    } else {
+      window._paq.push(['forgetUserOptOut']);
     }
   }
 </script>

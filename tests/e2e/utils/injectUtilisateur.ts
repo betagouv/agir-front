@@ -29,7 +29,7 @@ export class InjectUtilisateur {
         afficherMissionsTermines: false,
       },
       tracking: {
-        matomo: true,
+        matomoEstInactif: true,
       },
     };
   }

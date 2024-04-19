@@ -8,7 +8,7 @@ export interface UtilisateurStore {
   valeurBilanCarbone: EmpreinteViewModel;
   score: ScoreViewModel;
   tracking: {
-    matomo: boolean;
+    matomoEstInactif: boolean;
   };
 }
 
@@ -40,7 +40,7 @@ export const utilisateurStore = defineStore('utilisateur', {
       afficherMissionsTermines: false,
     },
     tracking: {
-      matomo: true,
+      matomoEstInactif: false,
     },
   }),
   actions: {
