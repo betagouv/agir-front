@@ -2,7 +2,7 @@
   <CarteVierge v-if="!estActif" class="fr-mb-2w">
     <h2 class="fr-h4">Paramétrage</h2>
     <p class="fr-mb-0">
-      <button class="fr-link" data-fr-opened="false" aria-controls="linky">Paramétrer le service Linky</button>
+      <button class="fr-link" data-fr-opened="false" aria-controls="linkyModale">Paramétrer le service Linky</button>
     </p>
   </CarteVierge>
   <CarteExplication>

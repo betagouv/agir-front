@@ -27,28 +27,20 @@
     <div class="fr-col-md-9 fr-col-12 fr-mt-4w">
       <CarteInfo class="fr-p-4w fr-mb-4w">
         <h2>D'où provient ma consommation ?</h2>
-        <p class="fr-text--bold fr-text--xl">Environ 50% de notre consommation est dû à notre chauffage.</p>
+        <p class="fr-text--bold fr-text--xl">Environ 66% de notre consommation est dû à notre chauffage.</p>
         <p class="fr-mb-0 fr-text--bold">Retrouvez ici les appareils éléctriques les plus consommateurs :</p>
         <ol>
-          <li>Voiture électrique (~ 3 000 kWh/an)</li>
-          <li>Piscine (système de filtration et de chauffage) (~ 2 396 kWh/an)</li>
-          <li>Ballon d'eau chaude (~ 1 697 kWh/an)</li>
           <li>Éclairage (~ 450 kWh/an)</li>
           <li>Réfrigérateur (~ 473 kWh/an)</li>
-          <li>Sèche-linge (~ 434 kWh/an)</li>
           <li>Téléviseur (~ 358 kWh/an)</li>
-          <li>Congélateur (~ 320 kWh/an)</li>
           <li>Four (~ 315 kWh/an)</li>
           <li>Lave-vaisselle (~ 303 kWh/an)</li>
-          <li>Plaques électriques (~ 300 kWh/an)</li>
-          <li>Machine à laver (~ 251 kWh/an)</li>
-          <li>Informatique (ordinateur, tablette) (~ 250 kWh/an)</li>
-          <li>Box internet (~ 220 kWh/an)</li>
         </ol>
         <p>
-          Vous pouvez réduire votre consommation en <strong>baissant votre chauffage</strong> et en
-          <strong>choissisant la classe d'énergie A+++</strong>
-          sur ces appareils.
+          Vous pouvez réduire votre consommation en <strong>baissant votre chauffage</strong> ou
+          <strong>en adaptant l'utilisation de ces appareils à vos besoins</strong>.<br />
+          Vous pouvez aussi choisir des appareils dont la classe d'énergie est comprise
+          <strong>entre A et A+++</strong> pour qu'ils soient plus économes.
         </p>
         <p class="fr-mb-0">
           Source :
