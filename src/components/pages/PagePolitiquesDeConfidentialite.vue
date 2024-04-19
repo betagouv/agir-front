@@ -11,7 +11,7 @@
         class="fr-pl-1v"
         id="cgu"
         v-model="utilisateurStore().tracking.matomoEstInactif"
-        label="Je souhaite ne pas être suivi par Matomo sur ce site."
+        label="Je souhaite ne pas être suivi(e) par Matomo sur ce site."
         @update:modelValue="onOptInOrOutMatomo()"
       />
     </div>
