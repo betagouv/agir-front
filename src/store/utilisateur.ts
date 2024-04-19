@@ -7,6 +7,9 @@ export interface UtilisateurStore {
   utilisateur: Utilisateur;
   valeurBilanCarbone: EmpreinteViewModel;
   score: ScoreViewModel;
+  tracking: {
+    matomoEstInactif: boolean;
+  };
 }
 
 export const utilisateurStore = defineStore('utilisateur', {
@@ -35,6 +38,9 @@ export const utilisateurStore = defineStore('utilisateur', {
       nombreDePointsDuNiveau: 0,
       celebration: null,
       afficherMissionsTermines: false,
+    },
+    tracking: {
+      matomoEstInactif: false,
     },
   }),
   actions: {
