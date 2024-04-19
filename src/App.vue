@@ -30,8 +30,10 @@
 
 <template>
   <div class="page-container">
-    <Header class="print-hidden" />
-    <main class="background--gris">
+    <div class="print-hidden">
+      <Header />
+    </div>
+    <main id="contenu" class="background--gris">
       <Services
         v-if="
           utilisateurConnecte &&

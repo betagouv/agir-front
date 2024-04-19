@@ -1,5 +1,6 @@
 <template>
-  <header role="banner" class="fr-header">
+  <LienDEvitement />
+  <header role="banner" class="fr-header" id="header-navigation">
     <div class="fr-header__body">
       <div class="fr-container">
         <div class="fr-header__body-row">
@@ -135,6 +136,8 @@
   import { RouteCommuneName } from '@/router';
   import { utilisateurStore } from '@/store/utilisateur';
   import ScoreHeader from '@/components/custom/ScoreHeader.vue';
+  import LienDEvitement from '@/components/dsfr/LienDEvitement.vue';
+
   import { Fonctionnalites } from '@/shell/fonctionnalitesEnum';
   import { RouteCoachName } from '@/router/coach/routeCoachName';
   import { RouteCompteName } from '@/router/compte/routeCompteName';
