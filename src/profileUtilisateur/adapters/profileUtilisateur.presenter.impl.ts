@@ -1,5 +1,5 @@
-import { ProfileUtilisateurPresenter } from '@/profileUtilisateur/ports/profileUtilisateur.presenter';
 import { ProfileUtilisateur } from '@/profileUtilisateur/chargerProfileUtilisateur.usecase';
+import { ProfileUtilisateurPresenter } from '@/profileUtilisateur/ports/profileUtilisateur.presenter';
 
 export interface ProfileUtilisateurViewModel {
   nom: string;

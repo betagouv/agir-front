@@ -1,7 +1,7 @@
-import { AxiosFactory, intercept401 } from '@/axios.factory';
 import { Response } from 'redaxios';
-import { ProfileUtilisateurRepository } from '@/profileUtilisateur/ports/profileUtilisateur.repository';
+import { AxiosFactory, intercept401 } from '@/axios.factory';
 import { ProfileUtilisateurPresenter } from '@/profileUtilisateur/ports/profileUtilisateur.presenter';
+import { ProfileUtilisateurRepository } from '@/profileUtilisateur/ports/profileUtilisateur.repository';
 
 export interface ProfileUtilisateurApiModel {
   id: string;
@@ -12,6 +12,7 @@ export interface ProfileUtilisateurApiModel {
   nombre_de_parts_fiscales: number;
   abonnement_ter_loire: boolean;
 }
+
 export interface ProfileUtilisateur {
   id: string;
   nom: string;
@@ -56,6 +57,7 @@ export class ProfileUtilisateurRepositoryAxiosImpl implements ProfileUtilisateur
 
 export class ChargerProfileUtilisateurUsecase {
   constructor(private profileUtilisateurRepository: ProfileUtilisateurRepository) {}
+
   async execute(utilisateurId: string, profileUtilisateurPresenter: ProfileUtilisateurPresenter) {
     const profileUtilisateur = await this.profileUtilisateurRepository.getProfileUtilisateur(utilisateurId);
     profileUtilisateurPresenter.present(profileUtilisateur);

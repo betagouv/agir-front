@@ -1,7 +1,6 @@
 import { SessionRepository } from '@/authentification/authentifierUtilisateur.usecase';
-import { ProfileUtilisateurRepository } from '@/profileUtilisateur/ports/profileUtilisateur.repository';
-
 import { ProfileUtilisateurViewModel } from '@/profileUtilisateur/adapters/profileUtilisateur.presenter.impl';
+import { ProfileUtilisateurRepository } from '@/profileUtilisateur/ports/profileUtilisateur.repository';
 
 export class MettreAJourProfileUtilisateurUsecase {
   constructor(

@@ -1,4 +1,3 @@
-import { SessionRepository } from '@/authentification/authentifierUtilisateur.usecase';
 import { LogementRepository } from '@/logement/ports/logement.repository';
 import { Logement } from '@/logement/recupererInformationLogement.usecase';
 
