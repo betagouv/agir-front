@@ -1,5 +1,23 @@
 # Changelog
 
+## [1.10.0](https://github.com/betagouv/agir-front/compare/v1.9.3...v1.10.0) (2024-04-19)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* ajout lien d'évitement ([#388](https://github.com/betagouv/agir-front/issues/388)) ([6ee5d0d](https://github.com/betagouv/agir-front/commit/6ee5d0d53c52a68f262784ecbea97b038017e980))
+* gestion de consentement Matomo ([#389](https://github.com/betagouv/agir-front/issues/389)) ([bf6a8c6](https://github.com/betagouv/agir-front/commit/bf6a8c6a5d2ffd6f9ae5bf5628b6923bd1c5f7b1))
+
+
+### 🐛 Corrections de bogues
+
+* modification de ma description explicative consommation electrique ([#387](https://github.com/betagouv/agir-front/issues/387)) ([112d35e](https://github.com/betagouv/agir-front/commit/112d35ee65c2e126041fb50f90f28c6546e133e6))
+
+
+### 👷 Autres changements
+
+* ajout playwright lighthouse ([#386](https://github.com/betagouv/agir-front/issues/386)) ([cecd329](https://github.com/betagouv/agir-front/commit/cecd3290691e1e1fd6cb2b701ecc6d4e6df11c0d))
+
 ## [1.9.3](https://github.com/betagouv/agir-front/compare/v1.9.2...v1.9.3) (2024-04-17)
 
 
