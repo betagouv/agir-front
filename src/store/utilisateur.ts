@@ -17,13 +17,8 @@ export const utilisateurStore = defineStore('utilisateur', {
     utilisateur: {
       id: '',
       nom: '',
-      codePostal: '',
-      commune: '',
       prenom: '',
       mail: '',
-      revenuFiscal: null,
-      nombreDePartsFiscales: 1,
-      abonnementTransport: false,
       fonctionnalitesDebloquees: [],
     },
     valeurBilanCarbone: {

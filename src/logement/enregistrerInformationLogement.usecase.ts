@@ -1,18 +1,10 @@
-import { SessionRepository } from '@/authentification/authentifierUtilisateur.usecase';
 import { LogementRepository } from '@/logement/ports/logement.repository';
 import { Logement } from '@/logement/recupererInformationLogement.usecase';
 
 export class EnregistrerInformationsLogementUsecase {
-  constructor(
-    private readonly logementRepository: LogementRepository,
-    private readonly sessionRepository: SessionRepository,
-  ) {}
+  constructor(private readonly logementRepository: LogementRepository) {}
 
   async execute(idUtilsateur: string, logement: Logement) {
     await this.logementRepository.enregistrerLesInformations(idUtilsateur, logement);
-    this.sessionRepository.sauvegarderUtilisateur({
-      codePostal: logement.codePostal,
-      commune: logement.commune,
-    });
   }
 }

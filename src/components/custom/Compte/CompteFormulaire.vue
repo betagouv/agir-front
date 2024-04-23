@@ -7,13 +7,13 @@
         </legend>
         <div class="fr-grid-row fr-grid-row--gutters">
           <div class="fr-col-lg-6 fr-col-12">
-            <InputText label="Prénom" name="prenom" v-model="compteUtlisateurViewModel.prenom" />
+            <InputText label="Prénom" name="prenom" v-model="profileUtlisateurViewModel.prenom" />
           </div>
           <div class="fr-col-lg-6 fr-col-12">
-            <InputText label="Nom" name="nom" v-model="compteUtlisateurViewModel.nom" />
+            <InputText label="Nom" name="nom" v-model="profileUtlisateurViewModel.nom" />
           </div>
           <div class="fr-col-lg-6 fr-col-12">
-            <InputMail label="Adresse électronique" v-model="compteUtlisateurViewModel.mail" name="mail" />
+            <InputMail label="Adresse électronique" v-model="profileUtlisateurViewModel.mail" name="mail" />
           </div>
         </div>
       </fieldset>
@@ -23,7 +23,11 @@
         </legend>
         <div class="fr-grid fr-grid-row">
           <div class="fr-col-12">
-            <InputTrancheDeRevenu @update:part-et-revenu="updatePartEtRevenu" />
+            <InputTrancheDeRevenu
+              :nombre-de-parts="profileUtlisateurViewModel.nombreDePartsFiscales"
+              :revenu-fiscal-de-reference="profileUtlisateurViewModel.revenuFiscal"
+              @update:part-et-revenu="updatePartEtRevenu"
+            />
             <CarteInfo>
               <p class="fr-icon-information-line fr-m-0">
                 Votre <strong>revenu fiscal de référence</strong> et le <strong>nombre de parts</strong> permettent
@@ -49,9 +53,7 @@
 
 <script setup lang="ts">
   import { ref } from 'vue';
-  import { CompteUtlisateurViewModel } from '@/compte/adapters/compteUtilisateur.presenter.impl';
-  import { MettreAJourCompteUtilisateurUsecase } from '@/compte/mettreAJourCompteUtilisateur.usecase';
-  import { CompteUtilisateurRepositoryImpl } from '@/compte/adapters/compteUtilisateur.repository.impl';
+  import { MettreAJourProfileUtilisateurUsecase } from '@/profileUtilisateur/mettreAJourProfileUtilisateurUsecase';
   import { SessionRepositoryStore } from '@/authentification/adapters/session.repository.store';
   import InputText from '@/components/dsfr/InputText.vue';
   import InputMail from '@/components/dsfr/InputMail.vue';
@@ -59,32 +61,29 @@
   import CarteInfo from '@/components/custom/CarteInfo.vue';
   import InputTrancheDeRevenu from '@/components/custom/InputTrancheDeRevenu.vue';
   import { useAlerte } from '@/composables/useAlerte';
+  import { ProfileUtilisateurRepositoryAxiosImpl } from '@/profileUtilisateur/chargerProfileUtilisateur.usecase';
+  import { ProfileUtilisateurViewModel } from '@/profileUtilisateur/adapters/profileUtilisateur.presenter.impl';
 
   const props = defineProps<{
-    compteUtlisateurViewModel: CompteUtlisateurViewModel;
+    compteUtlisateurViewModel: ProfileUtilisateurViewModel;
   }>();
 
   const { alerte, afficherAlerte } = useAlerte();
 
-  const compteUtlisateurViewModel = ref<CompteUtlisateurViewModel>(props.compteUtlisateurViewModel);
+  const profileUtlisateurViewModel = ref<ProfileUtilisateurViewModel>(props.compteUtlisateurViewModel);
 
   async function modifierInformation() {
-    if (compteUtlisateurViewModel.value.commune === '') {
-      afficherAlerte('error', 'Erreur', 'Veuillez renseigner un code postal et une commune valide');
-      return;
-    }
-
-    const usecase = new MettreAJourCompteUtilisateurUsecase(
-      new CompteUtilisateurRepositoryImpl(),
+    const usecase = new MettreAJourProfileUtilisateurUsecase(
+      new ProfileUtilisateurRepositoryAxiosImpl(),
       new SessionRepositoryStore(),
     );
 
-    await usecase.execute(compteUtlisateurViewModel.value);
+    await usecase.execute(profileUtlisateurViewModel.value);
     afficherAlerte('success', 'Succès', 'Compte correctement mis à jour.');
   }
 
   const updatePartEtRevenu = (data: { nombreDeParts: number; revenuFiscalDeReference: number | null }) => {
-    compteUtlisateurViewModel.value.nombreDePartsFiscales = data.nombreDeParts;
-    compteUtlisateurViewModel.value.revenuFiscal = data.revenuFiscalDeReference || 0;
+    profileUtlisateurViewModel.value.nombreDePartsFiscales = data.nombreDeParts;
+    profileUtlisateurViewModel.value.revenuFiscal = data.revenuFiscalDeReference || 0;
   };
 </script>

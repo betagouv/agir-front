@@ -8,13 +8,17 @@
           <form @submit.prevent="mettreAJourLesInfos">
             <h3 class="fr-h4">Où habitez-vous ?</h3>
             <InputCodePostal
-              v-model="codePostal"
-              :defaultValue="codePostal"
-              :defaultSelectValue="commune"
-              @update:selectedCommune="commune = $event"
+              v-if="logementViewModel"
+              v-model="logementViewModel.codePostal"
+              :defaultValue="logementViewModel.codePostal"
+              :defaultSelectValue="logementViewModel.commune"
+              @update:selectedCommune="logementViewModel.commune = $event"
             />
             <h3 class="fr-h4 fr-mt-3w">Quelle est votre tranche de revenus ?</h3>
-            <InputTrancheDeRevenu @update:part-et-revenu="updatePartEtRevenu" />
+            <InputTrancheDeRevenu
+              v-model:nombre-de-parts="nombreDePartsFiscales"
+              v-model:revenu-fiscal-de-reference="revenuFiscal"
+            />
             <div v-if="afficherAbonnement">
               <h3 class="fr-h4">Abonnements et cartes</h3>
               <InputCheckboxUnitaire
@@ -36,63 +40,103 @@
 </template>
 
 <script setup lang="ts">
-  import { computed, ref } from 'vue';
+  import { computed, onMounted, ref } from 'vue';
   import { utilisateurStore } from '@/store/utilisateur';
-  import { MettreAJourCompteUtilisateurUsecase } from '@/compte/mettreAJourCompteUtilisateur.usecase';
-  import { CompteUtilisateurRepositoryImpl } from '@/compte/adapters/compteUtilisateur.repository.impl';
+  import { MettreAJourProfileUtilisateurUsecase } from '@/profileUtilisateur/mettreAJourProfileUtilisateurUsecase';
   import { SessionRepositoryStore } from '@/authentification/adapters/session.repository.store';
   import InputCheckboxUnitaire from '@/components/dsfr/InputCheckboxUnitaire.vue';
   import AidesVeloFormulaireAside from '@/components/custom/Aides/AidesInfosUtilisationDesDonnees.vue';
   import InputTrancheDeRevenu from '@/components/custom/InputTrancheDeRevenu.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import router from '@/router';
-  import { CompteUtlisateurViewModel } from '@/compte/adapters/compteUtilisateur.presenter.impl';
   import InputCodePostal from '@/components/dsfr/InputCodePostal.vue';
 
   import { RouteAidesName } from '@/router/aides/routeAidesName';
+  import { RecupererInformationLogementUseCase } from '@/logement/recupererInformationLogement.usecase';
+  import { LogementRepositoryAxios } from '@/logement/adapters/logement.repository.axios';
+  import { LogementPresenterImpl } from '@/logement/adapters/logement.presenter.impl';
+  import {
+    ChargerProfileUtilisateurUsecase,
+    ProfileUtilisateurRepositoryAxiosImpl,
+  } from '@/profileUtilisateur/chargerProfileUtilisateur.usecase';
+  import {
+    ProfileUtilisateurPresenterImpl,
+    ProfileUtilisateurViewModel,
+  } from '@/profileUtilisateur/adapters/profileUtilisateur.presenter.impl';
+  import { EnregistrerInformationsLogementUsecase } from '@/logement/enregistrerInformationLogement.usecase';
+  import { LogementViewModel } from '@/logement/ports/logement.presenter';
 
   const store = utilisateurStore();
-  const revenuFiscal = ref(store.utilisateur.revenuFiscal ? store.utilisateur.revenuFiscal : 0);
-  const nombreDePartsFiscales = ref(store.utilisateur.nombreDePartsFiscales);
-  const abonnementTransport = ref(store.utilisateur.abonnementTransport);
-  const codePostal = ref(store.utilisateur.codePostal);
-  const commune = ref(store.utilisateur.commune);
-  const updatePartEtRevenu = (data: { nombreDeParts: number; revenuFiscalDeReference: number | 0 }) => {
-    nombreDePartsFiscales.value = data.nombreDeParts;
-    revenuFiscal.value = data.revenuFiscalDeReference;
-  };
-
+  const revenuFiscal = ref<number | null>(0);
+  const nombreDePartsFiscales = ref(0);
+  const abonnementTransport = ref(false);
+  const logementViewModel = ref<LogementViewModel | null>(null);
   const afficherAbonnement = computed(() => {
     return (
-      codePostal.value.length === 5 &&
-      (codePostal.value.startsWith('49') ||
-        codePostal.value.startsWith('44') ||
-        codePostal.value.startsWith('53') ||
-        codePostal.value.startsWith('72') ||
-        codePostal.value.startsWith('85'))
+      logementViewModel.value?.codePostal.length === 5 &&
+      (logementViewModel.value?.codePostal.startsWith('49') ||
+        logementViewModel.value?.codePostal.startsWith('44') ||
+        logementViewModel.value?.codePostal.startsWith('53') ||
+        logementViewModel.value?.codePostal.startsWith('72') ||
+        logementViewModel.value?.codePostal.startsWith('85'))
+    );
+  });
+
+  onMounted(() => {
+    const informationLogementUseCase = new RecupererInformationLogementUseCase(new LogementRepositoryAxios());
+    informationLogementUseCase.execute(
+      utilisateurStore().utilisateur.id,
+      new LogementPresenterImpl(viewModel => {
+        logementViewModel.value = viewModel;
+      }),
+    );
+
+    const usecase = new ChargerProfileUtilisateurUsecase(new ProfileUtilisateurRepositoryAxiosImpl());
+    const idUtilisateur = store.utilisateur.id;
+    usecase.execute(
+      idUtilisateur,
+      new ProfileUtilisateurPresenterImpl(viewModel => {
+        revenuFiscal.value = viewModel.revenuFiscal;
+        nombreDePartsFiscales.value = viewModel.nombreDePartsFiscales;
+        abonnementTransport.value = viewModel.abonnementTransport;
+      }),
     );
   });
 
   async function mettreAJourLesInfos() {
     {
-      const usecase = new MettreAJourCompteUtilisateurUsecase(
-        new CompteUtilisateurRepositoryImpl(),
+      const usecase = new MettreAJourProfileUtilisateurUsecase(
+        new ProfileUtilisateurRepositoryAxiosImpl(),
         new SessionRepositoryStore(),
       );
       const utilisateur = utilisateurStore().utilisateur;
-      const donneeAMettreAjour: CompteUtlisateurViewModel = {
+      const donneeAMettreAjour: ProfileUtilisateurViewModel = {
         nom: utilisateur.nom,
         id: utilisateur.id,
         mail: utilisateur.mail,
-        commune: commune.value,
-        codePostal: codePostal.value,
         prenom: utilisateur.prenom,
         abonnementTransport: abonnementTransport.value,
         revenuFiscal: revenuFiscal.value,
         nombreDePartsFiscales: nombreDePartsFiscales.value,
-        fonctionnalitesDebloquees: utilisateur.fonctionnalitesDebloquees,
       };
       await usecase.execute(donneeAMettreAjour);
+
+      const enregistrerInformationsLogementUsecase = new EnregistrerInformationsLogementUsecase(
+        new LogementRepositoryAxios(),
+      );
+      enregistrerInformationsLogementUsecase.execute(utilisateurStore().utilisateur.id, {
+        adultes: logementViewModel.value!.adultes,
+        enfants: logementViewModel.value!.enfants,
+        codePostal: logementViewModel.value!.codePostal,
+        commune: logementViewModel.value!.commune,
+        residence: logementViewModel.value!.residence.valeur,
+        superficie: logementViewModel.value!.superficie.valeur,
+        proprietaire: logementViewModel.value!.proprietaire.valeur,
+        modeDeChauffage: logementViewModel.value!.modeDeChauffage.valeur,
+        plusDeQuinzeAns: logementViewModel.value!.plusDeQuinzeAns.valeur,
+        dpe: logementViewModel.value!.dpe.valeur,
+      });
+
       await router.push({ name: RouteAidesName.VELO });
     }
   }

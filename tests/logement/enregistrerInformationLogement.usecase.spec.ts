@@ -7,10 +7,9 @@ import {
 import { Logement } from '@/logement/recupererInformationLogement.usecase';
 import { LogementRepositorySpy } from './adapters/logement.repository.spy';
 import { EnregistrerInformationsLogementUsecase } from '@/logement/enregistrerInformationLogement.usecase';
-import { SpySauvegarderUtilisateurSessionRepository } from '../compte/sessionRepository.sauvegarderUtilisateur.spy';
 
 describe("Fichier de tests concernant l'enregistrement des informations du logement", () => {
-  it('Doit envoyer les informations au back-end et persister les infos communes dans la session', async () => {
+  it('Doit envoyer les informations au back-end', async () => {
     // GIVEN
     const logement: Logement = {
       adultes: 0,
@@ -25,9 +24,8 @@ describe("Fichier de tests concernant l'enregistrement des informations du logem
       dpe: DPELogementApiModel.B,
     };
     const spyLogementRepository = new LogementRepositorySpy();
-    const spySessionRepository = new SpySauvegarderUtilisateurSessionRepository();
     // WHEN
-    const usecase = new EnregistrerInformationsLogementUsecase(spyLogementRepository, spySessionRepository);
+    const usecase = new EnregistrerInformationsLogementUsecase(spyLogementRepository);
     await usecase.execute('idUtilsateur', logement);
 
     // THEN
@@ -44,7 +42,5 @@ describe("Fichier de tests concernant l'enregistrement des informations du logem
       plusDeQuinzeAns: false,
       dpe: DPELogementApiModel.B,
     });
-    expect(spySessionRepository.utilisateur.commune).toEqual('PARIS 01');
-    expect(spySessionRepository.utilisateur.codePostal).toEqual('75001');
   });
 });

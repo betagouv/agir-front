@@ -128,8 +128,6 @@
   import CarteInfo from '@/components/custom/CarteInfo.vue';
   import DPE from '@/components/custom/DPE.vue';
 
-  import { SessionRepositoryStore } from '@/authentification/adapters/session.repository.store';
-
   const props = defineModel<LogementViewModel>('logementViewModel', {
     type: Object,
     required: true,
@@ -138,10 +136,7 @@
   const { alerte, afficherAlerte } = useAlerte();
 
   const enregistrerLesInformations = () => {
-    const usecase = new EnregistrerInformationsLogementUsecase(
-      new LogementRepositoryAxios(),
-      new SessionRepositoryStore(),
-    );
+    const usecase = new EnregistrerInformationsLogementUsecase(new LogementRepositoryAxios());
     usecase.execute(utilisateurStore().utilisateur.id, {
       adultes: props.value.adultes,
       enfants: props.value.enfants,

@@ -20,12 +20,7 @@ class ChargeCompteUtilisateurAvecMailRepository implements CompteUtilisateurRepo
       nom: 'Doe',
       id: '1',
       mail: 'mail@exemple.com',
-      codePostal: '75001',
-      commune: 'PARIS 01',
       prenom: 'John',
-      revenuFiscal: null,
-      nombreDePartsFiscales: 1,
-      abonnementTransport: false,
       fonctionnalitesDebloquees: [],
     });
   }
@@ -46,7 +41,7 @@ class ChargeCompteUtilisateurAvecMailRepository implements CompteUtilisateurRepo
 }
 
 describe('Fichier de tests concernant le chargement du compte utilisateur', () => {
-  it("Doit aller chercher les infos à partir de l'utilisateurId et doit stocker le resultat en session", async () => {
+  it("Doit aller chercher les infos à partir de l'utilisateurId", async () => {
     // GIVEN
     const spySessionRepository = new SpySauvegarderUtilisateurSessionRepository();
     const spyPublierEvenement = new PublierEvenementRepositorySpy();
@@ -54,7 +49,6 @@ describe('Fichier de tests concernant le chargement du compte utilisateur', () =
     const usecase = new ChargerCompteUtilisateurUsecase(
       new ChargeCompteUtilisateurAvecMailRepository(),
       spySessionRepository,
-      spyPublierEvenement
     );
     await usecase.execute('1', new CompteUtilisateurPresenterImpl(expectation));
     // THEN
@@ -63,12 +57,7 @@ describe('Fichier de tests concernant le chargement du compte utilisateur', () =
         id: '1',
         nom: 'Doe',
         mail: 'mail@exemple.com',
-        codePostal: '75001',
-        commune: 'PARIS 01',
         prenom: 'John',
-        revenuFiscal: 0,
-        nombreDePartsFiscales: 1,
-        abonnementTransport: false,
         fonctionnalitesDebloquees: [],
       });
     }
@@ -76,14 +65,8 @@ describe('Fichier de tests concernant le chargement du compte utilisateur', () =
       id: '1',
       nom: 'Doe',
       mail: 'mail@exemple.com',
-      codePostal: '75001',
-      commune: 'PARIS 01',
       prenom: 'John',
-      revenuFiscal: 0,
-      nombreDePartsFiscales: 1,
-      abonnementTransport: false,
       fonctionnalitesDebloquees: [],
     });
-    expect(spyPublierEvenement.evenementPublie).toStrictEqual(Evenemement.COMPTE_CONSULTE);
   });
 });
