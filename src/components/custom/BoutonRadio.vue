@@ -60,6 +60,8 @@
       valueToUpdate = true;
     } else if (input.value === 'false') {
       valueToUpdate = false;
+    } else if (!isNaN(Number.parseInt(input.value))) {
+      valueToUpdate = Number.parseInt(input.value);
     } else {
       valueToUpdate = input.value;
     }
