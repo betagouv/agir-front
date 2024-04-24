@@ -24,6 +24,7 @@
     col="fr-col"
     v-model="revenuFiscalDeReferenceModel"
     :default-value="revenuFiscalDeReferenceModel?.toString()"
+    value-type="number"
   />
 </template>
 

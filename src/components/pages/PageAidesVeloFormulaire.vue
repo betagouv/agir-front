@@ -41,30 +41,30 @@
 
 <script setup lang="ts">
   import { computed, onMounted, ref } from 'vue';
-  import { utilisateurStore } from '@/store/utilisateur';
-  import { MettreAJourProfileUtilisateurUsecase } from '@/profileUtilisateur/mettreAJourProfileUtilisateurUsecase';
   import { SessionRepositoryStore } from '@/authentification/adapters/session.repository.store';
-  import InputCheckboxUnitaire from '@/components/dsfr/InputCheckboxUnitaire.vue';
   import AidesVeloFormulaireAside from '@/components/custom/Aides/AidesInfosUtilisationDesDonnees.vue';
   import InputTrancheDeRevenu from '@/components/custom/InputTrancheDeRevenu.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
-  import router from '@/router';
+  import InputCheckboxUnitaire from '@/components/dsfr/InputCheckboxUnitaire.vue';
   import InputCodePostal from '@/components/dsfr/InputCodePostal.vue';
 
-  import { RouteAidesName } from '@/router/aides/routeAidesName';
-  import { RecupererInformationLogementUseCase } from '@/logement/recupererInformationLogement.usecase';
-  import { LogementRepositoryAxios } from '@/logement/adapters/logement.repository.axios';
   import { LogementPresenterImpl } from '@/logement/adapters/logement.presenter.impl';
-  import {
-    ChargerProfileUtilisateurUsecase,
-    ProfileUtilisateurRepositoryAxiosImpl,
-  } from '@/profileUtilisateur/chargerProfileUtilisateur.usecase';
+  import { LogementRepositoryAxios } from '@/logement/adapters/logement.repository.axios';
+  import { EnregistrerInformationsLogementUsecase } from '@/logement/enregistrerInformationLogement.usecase';
+  import { LogementViewModel } from '@/logement/ports/logement.presenter';
+  import { RecupererInformationLogementUseCase } from '@/logement/recupererInformationLogement.usecase';
   import {
     ProfileUtilisateurPresenterImpl,
     ProfileUtilisateurViewModel,
   } from '@/profileUtilisateur/adapters/profileUtilisateur.presenter.impl';
-  import { EnregistrerInformationsLogementUsecase } from '@/logement/enregistrerInformationLogement.usecase';
-  import { LogementViewModel } from '@/logement/ports/logement.presenter';
+  import {
+    ChargerProfileUtilisateurUsecase,
+    ProfileUtilisateurRepositoryAxiosImpl,
+  } from '@/profileUtilisateur/chargerProfileUtilisateur.usecase';
+  import { MettreAJourProfileUtilisateurUsecase } from '@/profileUtilisateur/mettreAJourProfileUtilisateurUsecase';
+  import router from '@/router';
+  import { RouteAidesName } from '@/router/aides/routeAidesName';
+  import { utilisateurStore } from '@/store/utilisateur';
 
   const store = utilisateurStore();
   const revenuFiscal = ref<number | null>(0);
@@ -124,7 +124,7 @@
       const enregistrerInformationsLogementUsecase = new EnregistrerInformationsLogementUsecase(
         new LogementRepositoryAxios(),
       );
-      enregistrerInformationsLogementUsecase.execute(utilisateurStore().utilisateur.id, {
+      await enregistrerInformationsLogementUsecase.execute(utilisateurStore().utilisateur.id, {
         adultes: logementViewModel.value!.adultes,
         enfants: logementViewModel.value!.enfants,
         codePostal: logementViewModel.value!.codePostal,

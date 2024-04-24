@@ -24,9 +24,8 @@
         <div class="fr-grid fr-grid-row">
           <div class="fr-col-12">
             <InputTrancheDeRevenu
-              :nombre-de-parts="profileUtlisateurViewModel.nombreDePartsFiscales"
-              :revenu-fiscal-de-reference="profileUtlisateurViewModel.revenuFiscal"
-              @update:part-et-revenu="updatePartEtRevenu"
+              v-model:nombre-de-parts="profileUtlisateurViewModel.nombreDePartsFiscales"
+              v-model:revenu-fiscal-de-reference="profileUtlisateurViewModel.revenuFiscal"
             />
             <CarteInfo>
               <p class="fr-icon-information-line fr-m-0">
@@ -53,16 +52,16 @@
 
 <script setup lang="ts">
   import { ref } from 'vue';
-  import { MettreAJourProfileUtilisateurUsecase } from '@/profileUtilisateur/mettreAJourProfileUtilisateurUsecase';
   import { SessionRepositoryStore } from '@/authentification/adapters/session.repository.store';
-  import InputText from '@/components/dsfr/InputText.vue';
-  import InputMail from '@/components/dsfr/InputMail.vue';
   import Alert from '@/components/custom/Alert.vue';
   import CarteInfo from '@/components/custom/CarteInfo.vue';
   import InputTrancheDeRevenu from '@/components/custom/InputTrancheDeRevenu.vue';
+  import InputMail from '@/components/dsfr/InputMail.vue';
+  import InputText from '@/components/dsfr/InputText.vue';
   import { useAlerte } from '@/composables/useAlerte';
-  import { ProfileUtilisateurRepositoryAxiosImpl } from '@/profileUtilisateur/chargerProfileUtilisateur.usecase';
   import { ProfileUtilisateurViewModel } from '@/profileUtilisateur/adapters/profileUtilisateur.presenter.impl';
+  import { ProfileUtilisateurRepositoryAxiosImpl } from '@/profileUtilisateur/chargerProfileUtilisateur.usecase';
+  import { MettreAJourProfileUtilisateurUsecase } from '@/profileUtilisateur/mettreAJourProfileUtilisateurUsecase';
 
   const props = defineProps<{
     compteUtlisateurViewModel: ProfileUtilisateurViewModel;
@@ -81,9 +80,4 @@
     await usecase.execute(profileUtlisateurViewModel.value);
     afficherAlerte('success', 'Succès', 'Compte correctement mis à jour.');
   }
-
-  const updatePartEtRevenu = (data: { nombreDeParts: number; revenuFiscalDeReference: number | null }) => {
-    profileUtlisateurViewModel.value.nombreDePartsFiscales = data.nombreDeParts;
-    profileUtlisateurViewModel.value.revenuFiscal = data.revenuFiscalDeReference || 0;
-  };
 </script>

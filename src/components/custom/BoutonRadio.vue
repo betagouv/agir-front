@@ -39,7 +39,7 @@
 </template>
 
 <script setup lang="ts">
-  defineProps<{
+  const props = defineProps<{
     legende: string;
     legendeSize: 'm' | 'l';
     orientation: 'vertical' | 'horizontal';
@@ -48,6 +48,7 @@
     col: string;
     defaultValue?: string | boolean;
     description?: string;
+    valueType?: 'number';
   }>();
 
   const emit = defineEmits(['update:modelValue']);
@@ -60,6 +61,8 @@
       valueToUpdate = true;
     } else if (input.value === 'false') {
       valueToUpdate = false;
+    } else if (props.valueType === 'number') {
+      valueToUpdate = Number.parseInt(input.value);
     } else {
       valueToUpdate = input.value;
     }
