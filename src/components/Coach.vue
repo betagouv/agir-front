@@ -37,22 +37,9 @@
       </div>
     </div>
   </div>
-  <section id="univers" class="fr-pb-6w fr-mt-4w">
+  <section v-if="universViewModel" id="univers" class="fr-py-6w">
     <div class="fr-container">
-      <h2 class="fr-h2 fr-mb-0">Univers</h2>
-      <p class="fr-text--xl">Découvrez des thèmes et débloquez de nouvelles actions.</p>
-      <div class="fr-grid-row">
-        <div
-          class="border-radius--md shadow background--white fr-mr-4w"
-          v-for="univers in universViewModel"
-          :key="univers.id"
-        >
-          <div class="fr-p-2w">
-            <img class="max-full-width border-radius--xs" :src="univers.urlImage" alt="" />
-            <h3 class="fr-h6 fr-mb-2w">{{ univers.nom }}</h3>
-          </div>
-        </div>
-      </div>
+      <CoachUnivers :universViewModel="universViewModel" />
     </div>
   </section>
   <section
@@ -120,6 +107,7 @@
   import CoachActions from '@/components/custom/Coach/CoachActions.vue';
   import CoachChangementSituation from '@/components/custom/Coach/CoachChangementSituation.vue';
   import CoachToDo from '@/components/custom/Coach/CoachToDo.vue';
+  import CoachUnivers from '@/components/custom/Coach/CoachUnivers.vue';
   import CarteScore from '@/components/custom/Progression/CarteScore.vue';
   import ProgressionNiveauJauge from '@/components/custom/Progression/ProgressionNiveauJauge.vue';
   import { useReveal } from '@/composables/useReveal';
