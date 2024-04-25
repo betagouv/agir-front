@@ -281,8 +281,16 @@ h3 {
   border: 1px solid var(--warning-425-625);
 }
 
+.border-radius--xs {
+  border-radius: 4px;
+}
+
 .border-radius--md {
   border-radius: 8px;
+}
+
+.border-radius--md-top {
+  border-radius: 8px 8px 0 0;
 }
 
 .border-radius--lg {

@@ -1,8 +1,11 @@
 <template>
-  <div class="fr-container fr-py-6w">
+  <div class="fr-container">
+    <h1 class="fr-h1 fr-m-0 fr-mt-4w">Bonjour {{ utilisateurStore().utilisateur.prenom }} 👋</h1>
+    <p class="fr-text--xl">Réduire votre empreinte écologique : selon vos moyens, vos lieux de vie et vos envies</p>
+  </div>
+
+  <div class="fr-container fr-py-6w" v-if="universViewModel?.length < 0">
     <div>
-      <h1 class="fr-h1 fr-m-0">Réduire votre empreinte écologique</h1>
-      <p class="fr-text--xl">Selon vos moyens, vos lieux de vie et vos envies</p>
       <div v-if="todoList && todoList.derniere" class="background--white border-radius--md shadow fr-p-2w fr-mb-3w">
         <p class="fr-mb-0">
           ✅ <span class="fr-text--bold">Vous avez accompli l’ensemble des missions ! </span> De nouvelles missions
@@ -34,6 +37,24 @@
       </div>
     </div>
   </div>
+  <section id="univers" class="fr-pb-6w fr-mt-4w">
+    <div class="fr-container">
+      <h2 class="fr-h2 fr-mb-0">Univers</h2>
+      <p class="fr-text--xl">Découvrez des thèmes et débloquez de nouvelles actions.</p>
+      <div class="fr-grid-row">
+        <div
+          class="border-radius--md shadow background--white fr-mr-4w"
+          v-for="univers in universViewModel"
+          :key="univers.id"
+        >
+          <div class="fr-p-2w">
+            <img class="max-full-width border-radius--xs" :src="univers.urlImage" alt="" />
+            <h3 class="fr-h6 fr-mb-2w">{{ univers.nom }}</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
   <section
     class="fr-pb-6w"
     id="defis"
@@ -49,11 +70,11 @@
     }"
   >
     <div class="fr-container">
-      <h2 class="fr-h2 fr-mb-0">Essayer de nouveaux usages</h2>
+      <h2 class="fr-h2 fr-mb-0">Mes Actions</h2>
       <p class="fr-text--xl">
-        Des propositions d'actions concrètes et faciles à mettre en oeuvre, en fonction de votre situation
+        Gagnez des <img width="16" src="/ic_score.svg" alt="point" /> chaque semaine avec de nouvelles actions !
       </p>
-      <CoachRecommandations
+      <CoachActions
         v-if="recommandationsPersonnaliseesViewModel"
         :recommandations="recommandationsPersonnaliseesViewModel.defis"
       />
@@ -73,10 +94,8 @@
     }"
   >
     <div class="fr-container" v-if="!isLoading">
-      <h2 class="fr-h2 fr-mb-0">Personnaliser davantage votre expérience</h2>
-      <p class="fr-text--xl">
-        Mieux comprendre les enjeux environnementaux et aider Agir à mieux comprendre les vôtres
-      </p>
+      <h2 class="fr-h2 fr-mb-0">Recommandé, pour vous</h2>
+      <p class="fr-text--xl">Une sélection d’articles et de services, pour vous, selon vos préférences !</p>
       <CoachRecommandations
         v-if="recommandationsPersonnaliseesViewModel"
         :recommandations="recommandationsPersonnaliseesViewModel.autresRecommandations"
@@ -98,6 +117,7 @@
   import CoachRecommandations from './custom/Coach/CoachRecommandations.vue';
   import CarteSkeleton from '@/components/CarteSkeleton.vue';
   import BilanOnboarding from '@/components/custom/BilanOnboarding.vue';
+  import CoachActions from '@/components/custom/Coach/CoachActions.vue';
   import CoachChangementSituation from '@/components/custom/Coach/CoachChangementSituation.vue';
   import CoachToDo from '@/components/custom/Coach/CoachToDo.vue';
   import CarteScore from '@/components/custom/Progression/CarteScore.vue';
@@ -116,11 +136,15 @@
   import { ToDoListRepositoryAxios } from '@/toDoList/adapters/toDoList.repository.axios';
   import { RecupererToDoListUsecase } from '@/toDoList/recupererToDoList.usecase';
   import { ToDoListEvent, ToDoListEventBusImpl } from '@/toDoList/toDoListEventBusImpl';
+  import { ListeUniversPresenterImpl, UniversViewModel } from '@/univers/adapters/listeUnivers.presenter.impl';
+  import { UniversRepositoryInmemory } from '@/univers/adapters/univers.repository.inmemory';
+  import { RecupererListeUniversUsecase } from '@/univers/recupererListeUnivers.usecase';
 
   const { recommandationTour, defiTour } = useReveal();
 
   const isLoading = ref<boolean>(true);
   const todoList = ref<TodoListViewModel>();
+  const universViewModel = ref<UniversViewModel[]>();
   const store = utilisateurStore();
   const recommandationsPersonnaliseesViewModel = ref<RecommandationPersonnaliseeViewModel>();
   let handleConcealEvent: () => void;
@@ -144,6 +168,8 @@
     );
     const chargerTodoListUsecase = new RecupererToDoListUsecase(new ToDoListRepositoryAxios());
 
+    const chargerUniversUsecase = new RecupererListeUniversUsecase(new UniversRepositoryInmemory());
+
     ToDoListEventBusImpl.getInstance().subscribe(subscriberName, ToDoListEvent.TODO_POINTS_ONT_ETE_RECUPERE, () => {
       chargerTodoListUsecase.execute(idUtilisateur, new ToDoListPresenterImpl(mapValueTodo));
     });
@@ -158,6 +184,9 @@
         new RecommandationsPersonnaliseesPresenterImpl(onRecommandationsPretesAAfficher),
       ),
       chargerTodoListUsecase.execute(idUtilisateur, new ToDoListPresenterImpl(mapValueTodo)),
+      chargerUniversUsecase.execute(
+        new ListeUniversPresenterImpl(viewModel => (universViewModel.value = viewModel.univers)),
+      ),
     ])
       .then(() => {
         isLoading.value = false;

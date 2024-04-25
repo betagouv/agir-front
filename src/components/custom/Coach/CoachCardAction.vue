@@ -1,18 +1,21 @@
 <template>
-  <div class="fr-grid-row border-radius--md full-height shadow background--white">
-    <img class="full-width border-radius--md-top" :src="recommandation.image" />
-    <div class="fr-px-2w">
-      <div class="fr-grid-row flex-space-between fr-mt-2w fr-mb-2w">
-        <span :class="`fr-tag ${recommandation.type.style}`">{{ recommandation.type.libelle }}</span>
-        <span class="fr-text--bold fr-text--sm text--black fr-m-0 fr-p-0">
-          {{ recommandation.thematique }}
+  <div
+    :class="`fr-grid-row border-radius--md full-height shadow ${recommandation.joursRestants ? 'background--marron-caramel' : 'background--white'}`"
+  >
+    <div class="fr-col-3 coach-card__image" :style="`background-image: url(${recommandation.image})`"></div>
+    <div class="fr-col-9 fr-pb-2w">
+      <div class="fr-mb-2w">
+        <span v-if="recommandation.joursRestants" class="fr-tag background--pink-macaron coach-card__defi-en-cours">
+          <span class="fr-icon-timer-line" aria-hidden="true"></span> {{ recommandation.joursRestants }}
         </span>
       </div>
-
+      <span class="fr-text--bold fr-text--sm text--black">
+        {{ recommandation.thematique }}
+      </span>
       <h3 class="fr-h6 fr-my-1w">{{ recommandation.titre }}</h3>
       <router-link
         :to="recommandation.bouton.url"
-        :class="`fr-btn fr-mb-2w ${recommandation.bouton.style}`"
+        :class="`fr-btn ${recommandation.bouton.style}`"
         :title="`${recommandation.bouton.libelle} : ${recommandation.titre}`"
       >
         {{ recommandation.bouton.libelle }}
