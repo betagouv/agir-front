@@ -17,6 +17,7 @@
 <style scoped>
   .univers__link {
     background-image: none;
+    outline-width: 0;
   }
 
   .univers__link::before {
@@ -27,5 +28,8 @@
     right: 0;
     bottom: 0;
     z-index: 2;
+    outline-color: inherit;
+    outline-offset: 2px;
+    outline-style: inherit;
   }
 </style>

@@ -36,6 +36,7 @@ export class RecommandationsPersonnaliseesRepositoryAxios implements Recommandat
         illustrationURL: apiModel.image_url,
         idDuContenu: apiModel.content_id,
         joursRestants: apiModel.jours_restants,
+        points: apiModel.points,
       };
 
       return recommandationPersonnalisee;

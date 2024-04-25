@@ -1,25 +1,26 @@
 <template>
-  <div
-    :class="`fr-grid-row border-radius--md full-height shadow ${recommandation.joursRestants ? 'background--marron-caramel' : 'background--white'}`"
-  >
-    <div class="fr-col-3 coach-card__image" :style="`background-image: url(${recommandation.image})`"></div>
-    <div class="fr-col-9 fr-pb-2w">
-      <div class="fr-mb-2w">
-        <span v-if="recommandation.joursRestants" class="fr-tag background--pink-macaron coach-card__defi-en-cours">
-          <span class="fr-icon-timer-line" aria-hidden="true"></span> {{ recommandation.joursRestants }}
-        </span>
+  <div class="fr-grid-row position--relative full-height border-radius--md shadow background--white fr-p-1w">
+    <img src="/ic_defi.svg" class="fr-mr-2w" alt="" />
+    <div class="fr-col">
+      <div class="toto">
+        <div>
+          <span class="fr-text--bold fr-text--sm text--black">
+            {{ recommandation.thematique }}
+          </span>
+          <h3 class="fr-h6 fr-mb-0">
+            <router-link
+              :to="recommandation.bouton.url"
+              class="action__link"
+              :title="`${recommandation.bouton.libelle} : ${recommandation.titre}`"
+            >
+              {{ recommandation.titre }}
+            </router-link>
+          </h3>
+        </div>
+        <div></div>
+        <span class="fr-tag">{{ recommandation.points }} <img width="16" src="/ic_score.svg" alt="point" /></span>
+        <span class="fr-icon-arrow-right-s-line" aria-hidden="true"></span>
       </div>
-      <span class="fr-text--bold fr-text--sm text--black">
-        {{ recommandation.thematique }}
-      </span>
-      <h3 class="fr-h6 fr-my-1w">{{ recommandation.titre }}</h3>
-      <router-link
-        :to="recommandation.bouton.url"
-        :class="`fr-btn ${recommandation.bouton.style}`"
-        :title="`${recommandation.bouton.libelle} : ${recommandation.titre}`"
-      >
-        {{ recommandation.bouton.libelle }}
-      </router-link>
     </div>
   </div>
 </template>
@@ -31,21 +32,27 @@
 </script>
 
 <style scoped>
-  .coach-card__image {
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    border-top-left-radius: 8px;
-    border-bottom-left-radius: 8px;
+  .action__link {
+    background-image: none;
+    padding-right: 2rem;
+    outline-width: 0;
   }
 
-  .coach-card__defi-en-cours {
-    display: inline-flex;
+  .action__link::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    outline-color: inherit;
+    outline-offset: 2px;
+    outline-style: inherit;
+  }
+
+  .toto {
+    display: flex;
     align-items: center;
-    gap: 0.5rem;
-  }
-
-  .fr-icon-timer-line::before {
-    --icon-size: 14px;
   }
 </style>

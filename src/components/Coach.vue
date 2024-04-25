@@ -43,9 +43,12 @@
     </div>
   </section>
   <section
-    class="fr-pb-6w"
+    class="fr-py-6w background--white"
     id="defis"
-    v-if="utilisateurStore().utilisateur.fonctionnalitesDebloquees.includes('defis')"
+    v-if="
+      utilisateurStore().utilisateur.fonctionnalitesDebloquees.includes('defis') &&
+      recommandationsPersonnaliseesViewModel
+    "
     v-tour-step:1="{
       tour: defiTour,
       options: {
@@ -57,14 +60,7 @@
     }"
   >
     <div class="fr-container">
-      <h2 class="fr-h2 fr-mb-0">Mes Actions</h2>
-      <p class="fr-text--xl">
-        Gagnez des <img width="16" src="/ic_score.svg" alt="point" /> chaque semaine avec de nouvelles actions !
-      </p>
-      <CoachActions
-        v-if="recommandationsPersonnaliseesViewModel"
-        :recommandations="recommandationsPersonnaliseesViewModel.defis"
-      />
+      <CoachActions :recommandations="recommandationsPersonnaliseesViewModel.defis" />
     </div>
   </section>
   <section
