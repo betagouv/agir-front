@@ -1,16 +1,23 @@
 <template>
   <div class="position--relative fr-p-1w fr-pb-4w border-radius--md shadow background--white">
-    <img class="full-width border-radius--xs" :src="image" alt="" />
+    <img class="full-width border-radius--xs" :src="universViewModel.urlImage" alt="" />
     <h3 class="fr-h6 fr-mb-0">
-      <router-link class="univers__link" to="#" :title="`Allez sur l'univers : ${titre}`">{{ titre }}</router-link>
+      <router-link
+        class="univers__link"
+        :to="{ name: RouteUniversName.UNIVERS, params: { id: universViewModel.id } }"
+        :title="`Allez sur l'univers : ${universViewModel.nom}`"
+        >{{ universViewModel.nom }}</router-link
+      >
     </h3>
   </div>
 </template>
 
 <script setup lang="ts">
+  import { RouteUniversName } from '@/router/univers/routes';
+  import { UniversViewModel } from '@/univers/adapters/listeUnivers.presenter.impl';
+
   defineProps<{
-    titre: string;
-    image: string;
+    universViewModel: UniversViewModel;
   }>();
 </script>
 

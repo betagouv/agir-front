@@ -1,17 +1,17 @@
-import { UniversRepository } from '@/univers/ports/univers.repository';
-import { Univers } from '@/univers/recupererListeUnivers.usecase';
+import { UniversRepository } from '../../../src/univers/ports/univers.repository';
+import { Univers } from '../../../src/univers/recupererListeUnivers.usecase';
 
-export class UniversRepositoryInmemory implements UniversRepository {
+export class UniversRepositoryMock implements UniversRepository {
   recupererLaListeDesUnivers(): Promise<Univers[]> {
     return Promise.resolve([
       {
-        id: 1,
+        id: '1',
         nom: 'Le climat',
         urlImage: 'https://via.placeholder.com/150',
         nombreDeDefisRealises: 0,
       },
       {
-        id: 2,
+        id: '2',
         nom: 'En cuisine',
         urlImage: 'https://via.placeholder.com/150',
         nombreDeDefisRealises: 0,

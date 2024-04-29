@@ -2,7 +2,7 @@ import { ListeUniversPresenter } from '@/univers/ports/listeUnivers.presenter';
 import { Univers } from '@/univers/recupererListeUnivers.usecase';
 
 export interface UniversViewModel {
-  id: number;
+  id: string;
   nom: string;
   urlImage: string;
   nombreDeDefisRealises: number;

@@ -1,7 +1,7 @@
 <template>
   <div class="fr-grid-row border-radius--md full-height shadow background--white">
     <img class="full-width border-radius--md-top" :src="recommandation.image" />
-    <div class="fr-px-2w">
+    <div class="fr-px-2w full-width">
       <div class="fr-grid-row flex-space-between fr-mt-2w fr-mb-2w">
         <span :class="`fr-tag ${recommandation.type.style}`">{{ recommandation.type.libelle }}</span>
         <span class="fr-text--bold fr-text--sm text--black fr-m-0 fr-p-0">

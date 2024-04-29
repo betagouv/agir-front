@@ -3,7 +3,7 @@
   <p class="fr-text--xl">Découvrez des thèmes et débloquez de nouvelles actions.</p>
   <ul class="fr-grid-row fr-grid-row--gutters list-style-none">
     <li class="fr-col-md-2 fr-col-6" v-for="univers in universViewModel" :key="univers.id">
-      <CoachUniversCard :titre="univers.nom" :image="univers.urlImage" />
+      <CoachUniversCard :univers-view-model="univers" />
     </li>
   </ul>
 </template>

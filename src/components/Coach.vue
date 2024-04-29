@@ -121,7 +121,7 @@
   import { RecupererToDoListUsecase } from '@/toDoList/recupererToDoList.usecase';
   import { ToDoListEvent, ToDoListEventBusImpl } from '@/toDoList/toDoListEventBusImpl';
   import { ListeUniversPresenterImpl, UniversViewModel } from '@/univers/adapters/listeUnivers.presenter.impl';
-  import { UniversRepositoryInmemory } from '@/univers/adapters/univers.repository.inmemory';
+  import { UniversRepositoryAxios } from '@/univers/adapters/univers.repository.axios';
   import { RecupererListeUniversUsecase } from '@/univers/recupererListeUnivers.usecase';
 
   const { recommandationTour, defiTour } = useReveal();
@@ -152,7 +152,7 @@
     );
     const chargerTodoListUsecase = new RecupererToDoListUsecase(new ToDoListRepositoryAxios());
 
-    const chargerUniversUsecase = new RecupererListeUniversUsecase(new UniversRepositoryInmemory());
+    const chargerUniversUsecase = new RecupererListeUniversUsecase(new UniversRepositoryAxios());
 
     ToDoListEventBusImpl.getInstance().subscribe(subscriberName, ToDoListEvent.TODO_POINTS_ONT_ETE_RECUPERE, () => {
       chargerTodoListUsecase.execute(idUtilisateur, new ToDoListPresenterImpl(mapValueTodo));
@@ -169,6 +169,7 @@
       ),
       chargerTodoListUsecase.execute(idUtilisateur, new ToDoListPresenterImpl(mapValueTodo)),
       chargerUniversUsecase.execute(
+        idUtilisateur,
         new ListeUniversPresenterImpl(viewModel => (universViewModel.value = viewModel.univers)),
       ),
     ])

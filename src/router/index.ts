@@ -9,6 +9,7 @@ import conformiteRoutes from '@/router/conformite/routes';
 import defiRoutes from '@/router/defis/routes';
 import kycRoutes from '@/router/kyc/routes';
 import onboardingRoutes from '@/router/onboarding/routes';
+import universRoutes from '@/router/univers/routes';
 import { utilisateurStore } from '@/store/utilisateur';
 const Authentification = () => import('@/components/Authentification.vue');
 const Page404 = () => import('@/components/pages/Page404.vue');
@@ -43,6 +44,7 @@ const routes: RouteRecordRaw[] = [
   ...onboardingRoutes,
   ...articlesRoutes,
   ...aidesRoutes,
+  ...universRoutes,
   {
     path: '/',
     name: RouteCommuneName.ACCUEIL,

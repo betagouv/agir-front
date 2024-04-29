@@ -2,7 +2,7 @@ import { ListeUniversPresenter } from '@/univers/ports/listeUnivers.presenter';
 import { UniversRepository } from '@/univers/ports/univers.repository';
 
 export interface Univers {
-  id: number;
+  id: string;
   nom: string;
   urlImage: string;
   nombreDeDefisRealises: number;
@@ -10,8 +10,8 @@ export interface Univers {
 export class RecupererListeUniversUsecase {
   constructor(private universRepository: UniversRepository) {}
 
-  async execute(presenter: ListeUniversPresenter): Promise<void> {
-    const univers = await this.universRepository.recupererLaListeDesUnivers();
+  async execute(idUtilisateur: string, presenter: ListeUniversPresenter): Promise<void> {
+    const univers = await this.universRepository.recupererLaListeDesUnivers(idUtilisateur);
     presenter.present(univers);
   }
 }

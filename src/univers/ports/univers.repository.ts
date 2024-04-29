@@ -1,5 +1,5 @@
 import { Univers } from '@/univers/recupererListeUnivers.usecase';
 
 export interface UniversRepository {
-  recupererLaListeDesUnivers(): Promise<Univers[]>;
+  recupererLaListeDesUnivers(idUtilisateur: string): Promise<Univers[]>;
 }
