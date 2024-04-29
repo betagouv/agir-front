@@ -12,8 +12,35 @@ export interface RecommandationApiModel {
   image_url: string;
   points: number;
   content_id: string;
+  thematique_principale: string;
 }
 export class RecommandationsPersonnaliseesRepositoryAxios implements RecommandationsPersonnaliseesRepository {
+  async chargerRecommandationsPersonnaliseesUnivers(
+    idUnivers: string,
+    idUtilisateur: string,
+  ): Promise<RecommandationPersonnalisee[]> {
+    const axiosInstance = AxiosFactory.getAxios();
+    const response = await axiosInstance.get<RecommandationApiModel[]>(
+      `/utilisateurs/${idUtilisateur}/recommandations`,
+    );
+
+    return response.data
+      .filter(model => model.thematique_principale === idUnivers)
+      .map((apiModel: RecommandationApiModel) => {
+        const recommandationPersonnalisee: RecommandationPersonnalisee = {
+          type: apiModel.type as InteractionType,
+          titre: apiModel.titre,
+          thematique: apiModel.thematique_gamification,
+          nombreDePointsAGagner: apiModel.points.toString(),
+          illustrationURL: apiModel.image_url,
+          idDuContenu: apiModel.content_id,
+          joursRestants: apiModel.jours_restants,
+          points: apiModel.points,
+        };
+
+        return recommandationPersonnalisee;
+      });
+  }
   @intercept401()
   async recommandationAEteCliquee(idUtilisateur: string): Promise<void> {
     await axios.post(`/utilisateurs/${idUtilisateur}/events`, {
