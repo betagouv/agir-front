@@ -3,8 +3,8 @@ import { RecommandationPersonnalisee } from '@/recommandationsPersonnalisees/rec
 
 export class SpyRecommandationsPersonnaliseesRepository implements RecommandationsPersonnaliseesRepository {
   chargerRecommandationsPersonnaliseesUnivers(
-    idUnivers: string,
-    idUtilisateur: string,
+    _idUnivers: string,
+    _idUtilisateur: string,
   ): Promise<RecommandationPersonnalisee[]> {
     throw new Error('Method not implemented.');
   }

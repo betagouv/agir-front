@@ -1,13 +1,12 @@
 <template>
   <div class="fr-container">
+    <FilDAriane page-courante="Univers: univers courant" />
     <h1 class="fr-h1 fr-m-0 fr-mt-4w">Univers</h1>
   </div>
 
-  <section id="thematiques">
+  <section id="thematiques" v-if="thematiques">
     <div class="fr-container">
-      <div class="fr-grid-row fr-grid-row--gutters list-style-none fr-mb-2w">
-        <ThematiquesCard v-for="thematique in thematiques" :key="thematique.id" :thematique="thematique" />
-      </div>
+      <UniversList :thematiques="thematiques" />
     </div>
   </section>
 
@@ -50,7 +49,8 @@
   import CarteSkeleton from '@/components/CarteSkeleton.vue';
   import CoachActions from '@/components/custom/Coach/CoachActions.vue';
   import CoachRecommandations from '@/components/custom/Coach/CoachRecommandations.vue';
-  import ThematiquesCard from '@/components/custom/ThematiquesCard.vue';
+  import UniversList from '@/components/custom/Univers/UniversList.vue';
+  import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import {
     RecommandationPersonnaliseeViewModel,
     RecommandationsPersonnaliseesPresenterImpl,

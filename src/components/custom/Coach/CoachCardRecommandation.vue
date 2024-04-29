@@ -1,7 +1,7 @@
 <template>
   <div class="border-radius--md full-height shadow background--white fr-p-1w position--relative">
     <div class="position--relative toto">
-      <img class="full-width border-radius--md coach-card-recommandation__image" :src="recommandation.image" />
+      <img class="full-width border-radius--md coach-card-recommandation__image" :src="recommandation.image" alt="" />
       <span :class="`coach-card-recommandation__type fr-tag ${recommandation.type.style}`">
         {{ recommandation.type.libelle }}
       </span>

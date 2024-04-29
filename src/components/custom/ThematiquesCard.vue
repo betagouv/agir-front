@@ -1,13 +1,21 @@
 <template>
-  <div class="fr-grid-row flex-column border-radius--md shadow background--white">
-    <img class="border-radius--md-top" :src="thematique.urlImage" />
-    <div class="fr-px-2w">
-      <h3 class="fr-h6 fr-my-1w">{{ thematique.titre }}</h3>
-    </div>
+  <div class="position--relative border-radius--md shadow background--white fr-p-1w full-height">
+    <span v-if="thematique.estNouvelle" class="thematique-card__badge fr-badge background--bleu-info-dark text--white">
+      Nouveau !
+    </span>
+    <img class="border-radius--md full-width img-object-fit-cover" height="144" :src="thematique.urlImage" alt="" />
+    <BarreDeProgression :value="20" :value-max="100" label="Avancement dans la thématique xxx" couleur="#0063CB" />
+    <h2 class="fr-h6 fr-mb-1v">
+      <router-link to="#" class="thematique__link">
+        {{ thematique.titre }}
+      </router-link>
+    </h2>
+    <span class="text--semi-bold text--rouge-erreur">Niveau {{ thematique.niveau }}</span>
   </div>
 </template>
 
 <script setup lang="ts">
+  import BarreDeProgression from '@/components/custom/BarreDeProgression.vue';
   import { ThematiqueViewModel } from '@/thematiques/adapters/thematiques.presenter.impl';
 
   defineProps<{
@@ -16,6 +24,14 @@
 </script>
 
 <style scoped>
+  .thematique-card__badge {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    width: max-content;
+  }
+
   .thematique__link {
     background-image: none;
     outline-width: 0;

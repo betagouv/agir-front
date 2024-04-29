@@ -21,6 +21,7 @@ import '@gouvfr/dsfr/dist/component/form/form.min.css';
 import '@gouvfr/dsfr/dist/component/tag/tag.min.css';
 import '@gouvfr/dsfr/dist/component/checkbox/checkbox.min.css';
 import '@gouvfr/dsfr/dist/component/radio/radio.min.css';
+import '@gouvfr/dsfr/dist/component/badge/badge.min.css';
 import '@gouvfr/dsfr/dist/dsfr.module.min.js';
 
 import './assets/theme/style.css';
