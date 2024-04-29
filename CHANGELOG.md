@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.11.0](https://github.com/betagouv/agir-front/compare/v1.10.0...v1.11.0) (2024-04-29)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* permet de décocher les cases des réponses multiple kyc ([#394](https://github.com/betagouv/agir-front/issues/394)) ([3df6e36](https://github.com/betagouv/agir-front/commit/3df6e36b67795917cd34e77cee6e395a67f8141a))
+
+
+### 🐛 Corrections de bogues
+
+* mise à jour de revenu fiscal dans le profile ([#392](https://github.com/betagouv/agir-front/issues/392)) ([f9b49b6](https://github.com/betagouv/agir-front/commit/f9b49b6c2654112fb77835b26ad4df5b0f56ca9a))
+
+
+### 👷 Autres changements
+
+* suppression info profile dans les api compte utilisateur ([#377](https://github.com/betagouv/agir-front/issues/377)) ([b2400ac](https://github.com/betagouv/agir-front/commit/b2400ac1965f77a655f7a96eb1f1eddcbe3db904))
+
 ## [1.10.0](https://github.com/betagouv/agir-front/compare/v1.9.3...v1.10.0) (2024-04-19)
 
 
