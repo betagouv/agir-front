@@ -31,5 +31,6 @@
     outline-color: inherit;
     outline-offset: 2px;
     outline-style: inherit;
+    border-radius: 0.5rem;
   }
 </style>

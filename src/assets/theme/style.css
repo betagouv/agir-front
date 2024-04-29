@@ -194,6 +194,7 @@ h3 {
 .background-bleu {
   background: var(--blue-france-main-525);
 }
+
 .background-bleu-light {
   background: var(--blue-france-925-125);
 }
@@ -229,6 +230,7 @@ h3 {
 .background--vert--bourgeon {
   background-color: var(--green-bourgeon-950-100);
 }
+
 .background--caramel {
   background-color: var(--brown-caramel-925-125);
 }

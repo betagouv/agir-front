@@ -2,8 +2,8 @@
   <div class="fr-grid-row position--relative full-height border-radius--md shadow background--white fr-p-1w">
     <img src="/ic_defi.svg" class="fr-mr-2w" alt="" />
     <div class="fr-col">
-      <div class="toto">
-        <div>
+      <div class="action__contenu">
+        <div class="flex-grow">
           <span class="fr-text--bold fr-text--sm text--black">
             {{ recommandation.thematique }}
           </span>
@@ -17,8 +17,10 @@
             </router-link>
           </h3>
         </div>
-        <div></div>
-        <span class="fr-tag">{{ recommandation.points }} <img width="16" src="/ic_score.svg" alt="point" /></span>
+        <span class="action__points border border-radius--md display-block background--gris fr-text--bold fr-p-1w">
+          <span>{{ recommandation.points }}</span>
+          <img width="16" src="/ic_score.svg" alt="point" />
+        </span>
         <span class="fr-icon-arrow-right-s-line" aria-hidden="true"></span>
       </div>
     </div>
@@ -34,7 +36,6 @@
 <style scoped>
   .action__link {
     background-image: none;
-    padding-right: 2rem;
     outline-width: 0;
   }
 
@@ -49,10 +50,16 @@
     outline-color: inherit;
     outline-offset: 2px;
     outline-style: inherit;
+    border-radius: 0.5rem;
   }
 
-  .toto {
+  .action__contenu {
     display: flex;
     align-items: center;
+    gap: 0.5rem;
+  }
+
+  .action__points {
+    flex-shrink: 0;
   }
 </style>
