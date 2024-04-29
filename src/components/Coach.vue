@@ -4,7 +4,7 @@
     <p class="fr-text--xl">Réduire votre empreinte écologique : selon vos moyens, vos lieux de vie et vos envies</p>
   </div>
 
-  <div class="fr-container fr-py-6w" v-if="universViewModel?.length < 0">
+  <div class="fr-container fr-py-6w" v-if="universViewModel && universViewModel.length < 0">
     <div>
       <div v-if="todoList && todoList.derniere" class="background--white border-radius--md shadow fr-p-2w fr-mb-3w">
         <p class="fr-mb-0">
