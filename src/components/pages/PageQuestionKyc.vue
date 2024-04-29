@@ -20,6 +20,7 @@
           <InputCheckbox
             :options="questionViewModel.reponses_possibles"
             v-model="reponse"
+            :est-resetable="true"
             :default-values="reponse as string[]"
           />
         </div>
@@ -55,15 +56,15 @@
 <script setup lang="ts">
   import { computed, onMounted, ref } from 'vue';
   import { useRoute } from 'vue-router';
-  import FilDAriane from '@/components/dsfr/FilDAriane.vue';
-  import { RecupererQuestionUsecase } from '@/kyc/recupererQuestionUsecase';
-  import { QuestionRepositoryAxios } from '@/kyc/adapters/question.repository.axios';
-  import { QuestionPresenterImpl, QuestionViewModel, ReponsePossible } from '@/kyc/adapters/question.presenter.impl';
-  import { utilisateurStore } from '@/store/utilisateur';
-  import { EnvoyerReponseUsecase } from '@/kyc/envoyerReponseUsecase';
-  import InputCheckbox from '@/components/custom/InputCheckbox.vue';
   import BoutonRadio from '@/components/custom/BoutonRadio.vue';
+  import InputCheckbox from '@/components/custom/InputCheckbox.vue';
   import KYCFin from '@/components/custom/KYC/KYCFin.vue';
+  import FilDAriane from '@/components/dsfr/FilDAriane.vue';
+  import { QuestionPresenterImpl, QuestionViewModel, ReponsePossible } from '@/kyc/adapters/question.presenter.impl';
+  import { QuestionRepositoryAxios } from '@/kyc/adapters/question.repository.axios';
+  import { EnvoyerReponseUsecase } from '@/kyc/envoyerReponseUsecase';
+  import { RecupererQuestionUsecase } from '@/kyc/recupererQuestionUsecase';
+  import { utilisateurStore } from '@/store/utilisateur';
   import { ToDoListEventBusImpl } from '@/toDoList/toDoListEventBusImpl';
 
   const route = useRoute();
