@@ -3,6 +3,14 @@
     <h1 class="fr-h1 fr-m-0 fr-mt-4w">Univers</h1>
   </div>
 
+  <section id="thematiques">
+    <div class="fr-container">
+      <div class="fr-grid-row fr-grid-row--gutters list-style-none fr-mb-2w">
+        <ThematiquesCard v-for="thematique in thematiques" :key="thematique.id" :thematique="thematique" />
+      </div>
+    </div>
+  </section>
+
   <section
     class="fr-py-6w background--white"
     id="defis"
@@ -41,6 +49,7 @@
   import CarteSkeleton from '@/components/CarteSkeleton.vue';
   import CoachActions from '@/components/custom/Coach/CoachActions.vue';
   import CoachRecommandations from '@/components/custom/Coach/CoachRecommandations.vue';
+  import ThematiquesCard from '@/components/custom/ThematiquesCard.vue';
   import {
     RecommandationPersonnaliseeViewModel,
     RecommandationsPersonnaliseesPresenterImpl,
@@ -49,6 +58,9 @@
   import { RecupererRecommandationsPersonnaliseesUniversUsecase } from '@/recommandationsPersonnalisees/recupererRecommandationsPersonnaliseesUnivers.usecase';
   import { Fonctionnalites } from '@/shell/fonctionnalitesEnum';
   import { utilisateurStore } from '@/store/utilisateur';
+  import { ThematiqueRepositoryAxios } from '@/thematiques/adapters/thematique.repository.axios';
+  import { ThematiquesPresenterImpl, ThematiqueViewModel } from '@/thematiques/adapters/thematiques.presenter.impl';
+  import { RecupererThematiquesUniversUsecase } from '@/thematiques/recupererThematiquesUniversUsecase';
 
   const store = utilisateurStore();
   const route = useRoute();
@@ -56,9 +68,14 @@
 
   const universId = Array.isArray(route.params.id) ? route.params.id[0] : route.params.id;
   const recommandationsPersonnaliseesViewModel = ref<RecommandationPersonnaliseeViewModel>();
+  const thematiques = ref<ThematiqueViewModel[]>();
 
   function onRecommandationsPretesAAfficher(viewModel: RecommandationPersonnaliseeViewModel) {
     recommandationsPersonnaliseesViewModel.value = viewModel;
+  }
+
+  function onThematiquesPretesAAfficher(viewModel: ThematiqueViewModel[]) {
+    thematiques.value = viewModel;
   }
 
   const lancerChargementDesDonnees = () => {
@@ -67,11 +84,18 @@
       new RecommandationsPersonnaliseesRepositoryAxios(),
     );
 
+    const recupererThematiquesUsecase = new RecupererThematiquesUniversUsecase(new ThematiqueRepositoryAxios());
+
     Promise.all([
       chargerRecommandationsPersonnaliseesUsecase.execute(
         universId,
         idUtilisateur,
         new RecommandationsPersonnaliseesPresenterImpl(onRecommandationsPretesAAfficher),
+      ),
+      recupererThematiquesUsecase.execute(
+        universId,
+        idUtilisateur,
+        new ThematiquesPresenterImpl(onThematiquesPretesAAfficher),
       ),
     ])
       .then(() => {
