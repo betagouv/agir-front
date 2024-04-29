@@ -31,6 +31,7 @@ describe('Fichier de tests concernant le chargement des recommandations personna
             nombreDePointsAGagner: 'nombreDePointsAGagner',
             thematique: '🌍 Global',
             titre: 'Un défi',
+            points: 10,
             type: {
               libelle: 'Action',
               style: 'background--bleu-ecume-hover',
@@ -48,6 +49,7 @@ describe('Fichier de tests concernant le chargement des recommandations personna
             nombreDePointsAGagner: 'nombreDePointsAGagner',
             thematique: '🌍 Global',
             titre: 'Un autre défi',
+            points: 10,
             type: {
               libelle: 'Action',
               style: 'background--bleu-ecume-hover',
@@ -67,6 +69,7 @@ describe('Fichier de tests concernant le chargement des recommandations personna
             nombreDePointsAGagner: 'nombreDePointsAGagner',
             thematique: '🚲 Transports',
             titre: 'Premier Quiz',
+            points: 10,
             type: {
               libelle: 'Quiz',
               style: 'background--vert--bourgeon',
@@ -84,6 +87,7 @@ describe('Fichier de tests concernant le chargement des recommandations personna
             nombreDePointsAGagner: 'nombreDePointsAGagner',
             thematique: '🌍 Global',
             titre: 'Article qui doit être en avant',
+            points: 10,
             type: {
               libelle: 'Article',
               style: 'background--caramel',
@@ -101,6 +105,7 @@ describe('Fichier de tests concernant le chargement des recommandations personna
             nombreDePointsAGagner: 'nombreDePointsAGagner',
             thematique: '🌍 Global',
             titre: 'Aide vélo',
+            points: 10,
             type: {
               libelle: 'Aide',
               style: 'background--yellow',
@@ -118,6 +123,7 @@ describe('Fichier de tests concernant le chargement des recommandations personna
             nombreDePointsAGagner: 'nombreDePointsAGagner',
             thematique: '🌍 Global',
             titre: 'Un KYC',
+            points: 10,
             type: {
               libelle: 'Mieux vous connaître',
               style: 'background--pink',

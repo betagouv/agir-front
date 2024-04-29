@@ -27,7 +27,7 @@ export interface RecommandationViewModel {
   nombreDePointsAGagner: string;
   type: TagViewModel;
   thematique: string;
-  joursRestants: string | null;
+  joursRestants: string | null; // TO DELETE ?
   points: number;
 }
 export interface RecommandationPersonnaliseeViewModel {

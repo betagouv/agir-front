@@ -299,10 +299,6 @@ h3 {
   border-radius: 8px;
 }
 
-.border-radius--md-top {
-  border-radius: 8px 8px 0 0;
-}
-
 .border-radius--lg {
   border-radius: 24px;
 }

@@ -16,7 +16,8 @@
     id="defis"
     v-if="
       utilisateurStore().utilisateur.fonctionnalitesDebloquees.includes('defis') &&
-      recommandationsPersonnaliseesViewModel
+      recommandationsPersonnaliseesViewModel?.defis &&
+      recommandationsPersonnaliseesViewModel?.defis.length > 0
     "
   >
     <div class="fr-container">
