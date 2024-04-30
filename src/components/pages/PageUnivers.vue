@@ -3,13 +3,13 @@
     <FilDAriane page-courante="Univers: univers courant" />
     <div class="fr-grid-row fr-grid-row--gutters align-items--center fr-mb-4w">
       <img
-        src="/compteur-linky-exemple.jpg"
+        :src="univers?.urlImage"
         class="border-radius--full img-object-fit-cover"
         width="80"
         height="80"
-        alt=""
+        alt="univers"
       />
-      <h1 class="fr-h1 fr-col fr-m-0">Univers</h1>
+      <h1 class="fr-h1 fr-col fr-m-0">{{ univers?.nom }}</h1>
     </div>
   </div>
 
@@ -71,6 +71,10 @@
   import { ThematiqueRepositoryAxios } from '@/thematiques/adapters/thematique.repository.axios';
   import { ThematiquesPresenterImpl, ThematiqueViewModel } from '@/thematiques/adapters/thematiques.presenter.impl';
   import { RecupererThematiquesUniversUsecase } from '@/thematiques/recupererThematiquesUnivers.usecase';
+  import { UniversViewModel } from '@/univers/adapters/listeUnivers.presenter.impl';
+  import { UniversPresenterImpl } from '@/univers/adapters/univers.presenter.impl';
+  import { UniversRepositoryAxios } from '@/univers/adapters/univers.repository.axios';
+  import { RecupererUniversUsecase } from '@/univers/recupererUnivers.usecase';
 
   const store = utilisateurStore();
   const route = useRoute();
@@ -79,6 +83,11 @@
   const universId = Array.isArray(route.params.id) ? route.params.id[0] : route.params.id;
   const recommandationsPersonnaliseesViewModel = ref<RecommandationPersonnaliseeViewModel>();
   const thematiques = ref<ThematiqueViewModel[]>();
+  const univers = ref<UniversViewModel>();
+
+  function onUniversPretAAfficher(viewModel: UniversViewModel) {
+    univers.value = viewModel;
+  }
 
   function onRecommandationsPretesAAfficher(viewModel: RecommandationPersonnaliseeViewModel) {
     recommandationsPersonnaliseesViewModel.value = viewModel;
@@ -90,6 +99,7 @@
 
   const lancerChargementDesDonnees = () => {
     const idUtilisateur = store.utilisateur.id;
+    const recupererUniversUsecase = new RecupererUniversUsecase(new UniversRepositoryAxios());
     const chargerRecommandationsPersonnaliseesUsecase = new RecupererRecommandationsPersonnaliseesUniversUsecase(
       new RecommandationsPersonnaliseesRepositoryAxios(),
     );
@@ -97,6 +107,7 @@
     const recupererThematiquesUsecase = new RecupererThematiquesUniversUsecase(new ThematiqueRepositoryAxios());
 
     Promise.all([
+      recupererUniversUsecase.execute(idUtilisateur, universId, new UniversPresenterImpl(onUniversPretAAfficher)),
       chargerRecommandationsPersonnaliseesUsecase.execute(
         universId,
         idUtilisateur,

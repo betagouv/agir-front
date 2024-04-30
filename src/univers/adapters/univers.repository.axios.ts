@@ -5,7 +5,7 @@ import { Univers } from '@/univers/recupererListeUnivers.usecase';
 interface UniversApiModel {
   titre: string;
   type: string;
-  etoiles: 0;
+  etoiles: number;
   is_locked: boolean;
   reason_locked: string;
 }
@@ -21,5 +21,20 @@ export class UniversRepositoryAxios implements UniversRepository {
       urlImage: 'https://via.placeholder.com/150',
       nombreDeDefisRealises: univers.etoiles,
     }));
+  }
+
+  @intercept401()
+  async recupererUnivers(idUtilisateur: string, universId: string): Promise<Univers> {
+    const axios = AxiosFactory.getAxios();
+    const universApiModel = await axios.get<UniversApiModel[]>(`/utilisateurs/${idUtilisateur}/univers`);
+    const universFiltrer = universApiModel.data
+      .filter(univers => univers.type === universId)
+      .map<Univers>(univers => ({
+        id: univers.type,
+        nom: univers.titre,
+        urlImage: 'https://via.placeholder.com/150',
+        nombreDeDefisRealises: univers.etoiles,
+      }));
+    return universFiltrer[0];
   }
 }

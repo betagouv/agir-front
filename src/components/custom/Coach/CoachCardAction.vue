@@ -1,6 +1,6 @@
 <template>
   <div
-    class="action-card fr-grid-row position--relative full-height border-radius--md shadow background--white fr-p-1w"
+    class="action-card fr-grid-row position--relative full-height border-radius--md shadow background--white fr-p-2w"
   >
     <img src="/ic_defi.svg" class="fr-mr-2w" alt="" />
     <div class="fr-col">
