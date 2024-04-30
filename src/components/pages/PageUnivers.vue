@@ -1,7 +1,16 @@
 <template>
   <div class="fr-container">
     <FilDAriane page-courante="Univers: univers courant" />
-    <h1 class="fr-h1 fr-m-0 fr-mt-4w">Univers</h1>
+    <div class="fr-grid-row fr-grid-row--gutters align-items--center fr-mb-4w">
+      <img
+        src="/compteur-linky-exemple.jpg"
+        class="border-radius--full img-object-fit-cover"
+        width="80"
+        height="80"
+        alt=""
+      />
+      <h1 class="fr-h1 fr-col fr-m-0">Univers</h1>
+    </div>
   </div>
 
   <section id="thematiques" v-if="thematiques">

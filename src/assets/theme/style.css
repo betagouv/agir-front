@@ -352,6 +352,10 @@ h3 {
   line-height: 1 !important;
 }
 
+.align-items--center {
+  align-items: center;
+}
+
 .align-items--end {
   align-items: flex-end;
 }
