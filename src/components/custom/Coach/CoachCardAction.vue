@@ -1,5 +1,7 @@
 <template>
-  <div class="fr-grid-row position--relative full-height border-radius--md shadow background--white fr-p-1w">
+  <div
+    class="action-card fr-grid-row position--relative full-height border-radius--md shadow background--white fr-p-1w"
+  >
     <img src="/ic_defi.svg" class="fr-mr-2w" alt="" />
     <div class="fr-col">
       <div class="action__contenu">
@@ -34,6 +36,14 @@
 </script>
 
 <style scoped>
+  .action-card {
+    transition: box-shadow 0.3s ease-in-out;
+  }
+
+  .action-card:hover {
+    box-shadow: 0 6px 18px 0 rgba(0, 0, 18, 0.4);
+  }
+
   .action__link {
     background-image: none;
     outline-width: 0;

@@ -1,12 +1,12 @@
 <template>
-  <div class="position--relative border-radius--md shadow background--white fr-p-1w full-height">
+  <div class="thematique-card position--relative border-radius--md shadow background--white fr-p-1w full-height">
     <span v-if="thematique.estNouvelle" class="thematique-card__badge fr-badge background--bleu-info-dark text--white">
       Nouveau !
     </span>
     <img class="border-radius--md full-width img-object-fit-cover" height="144" :src="thematique.urlImage" alt="" />
     <BarreDeProgression :value="20" :value-max="100" label="Avancement dans la thématique xxx" couleur="#0063CB" />
     <h2 class="fr-h6 fr-mb-1v">
-      <router-link to="#" class="thematique__link">
+      <router-link to="#" class="thematique-card__link">
         {{ thematique.titre }}
       </router-link>
     </h2>
@@ -24,6 +24,14 @@
 </script>
 
 <style scoped>
+  .thematique-card {
+    transition: box-shadow 0.3s ease-in-out;
+  }
+
+  .thematique-card:hover {
+    box-shadow: 0 6px 18px 0 rgba(0, 0, 18, 0.4);
+  }
+
   .thematique-card__badge {
     position: absolute;
     top: 0;
@@ -32,12 +40,12 @@
     width: max-content;
   }
 
-  .thematique__link {
+  .thematique-card__link {
     background-image: none;
     outline-width: 0;
   }
 
-  .thematique__link::before {
+  .thematique-card__link::before {
     content: '';
     position: absolute;
     left: 0;

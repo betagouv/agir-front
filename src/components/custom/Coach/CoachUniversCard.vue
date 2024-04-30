@@ -1,9 +1,9 @@
 <template>
-  <div class="position--relative fr-p-1w fr-pb-4w border-radius--md shadow background--white">
+  <div class="univers-card position--relative fr-p-1w fr-pb-4w border-radius--md shadow background--white">
     <img class="full-width border-radius--xs" :src="universViewModel.urlImage" alt="" />
     <p class="fr-text--lg text--semi-bold fr-mb-0">
       <router-link
-        class="univers__link"
+        class="univers-card__link"
         :to="{ name: RouteUniversName.UNIVERS, params: { id: universViewModel.id } }"
         :title="`Allez sur l'univers : ${universViewModel.nom}`"
         >{{ universViewModel.nom }}</router-link
@@ -22,12 +22,20 @@
 </script>
 
 <style scoped>
-  .univers__link {
+  .univers-card {
+    transition: box-shadow 0.3s ease-in-out;
+  }
+
+  .univers-card:hover {
+    box-shadow: 0 6px 18px 0 rgba(0, 0, 18, 0.4);
+  }
+
+  .univers-card__link {
     background-image: none;
     outline-width: 0;
   }
 
-  .univers__link::before {
+  .univers-card__link::before {
     content: '';
     position: absolute;
     left: 0;

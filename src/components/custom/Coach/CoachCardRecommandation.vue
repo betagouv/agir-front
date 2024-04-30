@@ -1,5 +1,7 @@
 <template>
-  <div class="border-radius--md full-height shadow background--white fr-p-1w position--relative">
+  <div
+    class="coach-card-recommandation border-radius--md full-height shadow background--white fr-p-1w position--relative"
+  >
     <div class="position--relative toto">
       <img class="full-width border-radius--md coach-card-recommandation__image" :src="recommandation.image" alt="" />
       <span :class="`coach-card-recommandation__type fr-tag ${recommandation.type.style}`">
@@ -38,6 +40,14 @@
 </script>
 
 <style scoped>
+  .coach-card-recommandation {
+    transition: box-shadow 0.3s ease-in-out;
+  }
+
+  .coach-card-recommandation:hover {
+    box-shadow: 0 6px 18px 0 rgba(0, 0, 18, 0.4);
+  }
+
   .coach-card-recommandation__link {
     background-image: none;
     outline-width: 0;
