@@ -1,5 +1,5 @@
 import { ThematiquesPresenterImpl, ThematiqueViewModel } from '@/thematiques/adapters/thematiques.presenter.impl';
-import { RecupererThematiquesUniversUsecase, Thematique } from '@/thematiques/recupererThematiquesUniversUsecase';
+import { RecupererThematiquesUniversUsecase, Thematique } from '@/thematiques/recupererThematiquesUnivers.usecase';
 import { ThematiqueRepository } from '@/thematiques/ports/thematique.repository';
 
 class ThematiqueRepositoryMock implements ThematiqueRepository {

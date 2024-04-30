@@ -1,4 +1,4 @@
-import { Thematique } from '@/thematiques/recupererThematiquesUniversUsecase';
+import { Thematique } from '@/thematiques/recupererThematiquesUnivers.usecase';
 
 export interface ThematiquesPresenter {
   present(thematiques: Thematique[]): void;

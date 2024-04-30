@@ -1,5 +1,5 @@
 import { ThematiquesPresenter } from '@/thematiques/ports/thematiques.presenter';
-import { Thematique } from '@/thematiques/recupererThematiquesUniversUsecase';
+import { Thematique } from '@/thematiques/recupererThematiquesUnivers.usecase';
 
 export interface ThematiqueViewModel {
   titre: string;

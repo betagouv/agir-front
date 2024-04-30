@@ -20,7 +20,7 @@
           {{ recommandation.thematique }}
         </span>
       </div>
-      <p class="fr-text--lg text--semi-bold fr-mt-1w fr-mb-0">
+      <p class="fr-text--lg text--semi-bold text--black fr-mt-1w fr-mb-0">
         <router-link
           :to="recommandation.bouton.url"
           class="coach-card-recommandation__link"

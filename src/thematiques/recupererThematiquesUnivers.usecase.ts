@@ -4,11 +4,11 @@ import { ThematiquesPresenter } from '@/thematiques/ports/thematiques.presenter'
 export interface Thematique {
   titre: string;
   id: string;
-  progression: 0;
+  progression: number;
   estBloquee: boolean;
   raisonDuBlocage: string;
-  estNouvelle: true;
-  niveau: 0;
+  estNouvelle: boolean;
+  niveau: number;
 }
 
 export class RecupererThematiquesUniversUsecase {

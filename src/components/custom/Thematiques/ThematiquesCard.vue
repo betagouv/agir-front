@@ -5,7 +5,7 @@
     </span>
     <img class="border-radius--md full-width img-object-fit-cover" height="144" :src="thematique.urlImage" alt="" />
     <BarreDeProgression :value="20" :value-max="100" label="Avancement dans la thématique xxx" couleur="#0063CB" />
-    <h2 class="fr-h6 fr-mb-1v">
+    <h2 class="fr-text--lg text--semi-bold text--black fr-mb-1v">
       <router-link to="#" class="thematique-card__link">
         {{ thematique.titre }}
       </router-link>

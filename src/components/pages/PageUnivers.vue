@@ -49,7 +49,7 @@
   import CarteSkeleton from '@/components/CarteSkeleton.vue';
   import CoachActions from '@/components/custom/Coach/CoachActions.vue';
   import CoachRecommandations from '@/components/custom/Coach/CoachRecommandations.vue';
-  import UniversList from '@/components/custom/Univers/UniversList.vue';
+  import UniversList from '@/components/custom/Thematiques/ThematiquesListe.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import {
     RecommandationPersonnaliseeViewModel,
@@ -61,7 +61,7 @@
   import { utilisateurStore } from '@/store/utilisateur';
   import { ThematiqueRepositoryAxios } from '@/thematiques/adapters/thematique.repository.axios';
   import { ThematiquesPresenterImpl, ThematiqueViewModel } from '@/thematiques/adapters/thematiques.presenter.impl';
-  import { RecupererThematiquesUniversUsecase } from '@/thematiques/recupererThematiquesUniversUsecase';
+  import { RecupererThematiquesUniversUsecase } from '@/thematiques/recupererThematiquesUnivers.usecase';
 
   const store = utilisateurStore();
   const route = useRoute();
