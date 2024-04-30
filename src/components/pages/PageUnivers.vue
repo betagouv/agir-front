@@ -1,10 +1,10 @@
 <template>
   <div class="fr-container">
     <FilDAriane page-courante="Univers: univers courant" />
-    <div class="fr-grid-row fr-grid-row--gutters align-items--center fr-mb-4w">
+    <div class="fr-grid-row align-items--center fr-mb-4w">
       <img
         :src="univers?.urlImage"
-        class="border-radius--full img-object-fit-cover"
+        class="border-radius--full img-object-fit-cover fr-mr-2w"
         width="80"
         height="80"
         alt="univers"
