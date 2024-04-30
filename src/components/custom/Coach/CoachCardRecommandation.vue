@@ -13,12 +13,12 @@
       </span>
     </div>
     <div class="fr-py-2w full-width">
-      <div class="fr-grid-row flex-space-between fr-mb-2w">
+      <div class="fr-grid-row flex-space-between">
         <span class="fr-text--bold fr-text--sm text--black fr-m-0 fr-p-0">
           {{ recommandation.thematique }}
         </span>
       </div>
-      <h3 class="fr-h6 fr-mt-1w fr-mb-0">
+      <p class="fr-text--lg text--semi-bold fr-mt-1w fr-mb-0">
         <router-link
           :to="recommandation.bouton.url"
           class="coach-card-recommandation__link"
@@ -26,7 +26,7 @@
         >
           {{ recommandation.titre }}
         </router-link>
-      </h3>
+      </p>
     </div>
   </div>
 </template>

@@ -7,7 +7,7 @@
           <span class="fr-text--bold fr-text--sm text--black">
             {{ recommandation.thematique }}
           </span>
-          <h3 class="fr-h6 fr-mb-0">
+          <p class="fr-text--lg text--semi-bold fr-mb-0">
             <router-link
               :to="recommandation.bouton.url"
               class="action__link"
@@ -15,7 +15,7 @@
             >
               {{ recommandation.titre }}
             </router-link>
-          </h3>
+          </p>
         </div>
         <span class="action__points border border-radius--md display-block background--gris fr-text--bold fr-p-1w">
           <span>{{ recommandation.points }}</span>
