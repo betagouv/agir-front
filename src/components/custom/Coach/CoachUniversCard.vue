@@ -1,6 +1,6 @@
 <template>
   <div class="univers-card position--relative fr-p-1w fr-pb-4w border-radius--md shadow background--white">
-    <img class="full-width border-radius--xs" :src="universViewModel.urlImage" alt="" />
+    <img class="full-width border-radius--xs" height="150" :src="universViewModel.urlImage" alt="" />
     <p class="fr-text--lg text--semi-bold text--black fr-mb-0">
       <router-link
         class="univers-card__link"

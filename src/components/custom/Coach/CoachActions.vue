@@ -8,9 +8,7 @@
       <CoachCardAction :recommandation="recommandation" />
     </li>
   </ul>
-  <router-link :to="{ name: RouteCompteName.MIEUX_VOUS_CONNAITRE }" class="fr-link">
-    Voir toutes mes actions
-  </router-link>
+  <router-link :to="{ name: RouteCompteName.DEFIS }" class="fr-link"> Voir toutes mes actions </router-link>
 </template>
 
 <script setup lang="ts">
