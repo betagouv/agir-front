@@ -2,6 +2,9 @@ import { UniversRepository } from '../../../src/univers/ports/univers.repository
 import { Univers } from '../../../src/univers/recupererListeUnivers.usecase';
 
 export class UniversRepositoryMock implements UniversRepository {
+  recupererUnivers(idUtilisateur: string, universId: string): Promise<Univers> {
+    throw new Error('Method not implemented.');
+  }
   recupererLaListeDesUnivers(): Promise<Univers[]> {
     return Promise.resolve([
       {

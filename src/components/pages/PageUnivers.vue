@@ -25,7 +25,7 @@
     v-if="utilisateurStore().utilisateur.fonctionnalitesDebloquees.includes('defis') && defis"
   >
     <div class="fr-container">
-      {{ defis }}
+      <ActionListe :defis="defis" />
     </div>
   </section>
 
@@ -51,13 +51,16 @@
 <script setup lang="ts">
   import { onMounted, ref } from 'vue';
   import { useRoute } from 'vue-router';
+  import ActionListe from '../custom/Action/ActionListe.vue';
   import CarteSkeleton from '@/components/CarteSkeleton.vue';
   import CoachRecommandations from '@/components/custom/Coach/CoachRecommandations.vue';
   import UniversList from '@/components/custom/Thematiques/ThematiquesListe.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import { DefiRepositoryAxios } from '@/defi/adapters/defi.repository.axios';
-  import { ListeDefisPresenterImpl } from '@/defi/adapters/listeDefis.presenter.impl';
-  import { DefisQuestionViewModel } from '@/defi/ports/listeDefis.presenter';
+  import {
+    DefiDescriptionViewModel,
+    ListeDefisDescriptionPresenterImpl,
+  } from '@/defi/adapters/listeDefisDescription.presenter.impl';
   import { RecupererListeDefisParUniversUsecase } from '@/defi/recupererListeDefisParUnivers.usecase';
   import {
     RecommandationPersonnaliseeViewModel,
@@ -83,7 +86,7 @@
   const recommandationsPersonnaliseesViewModel = ref<RecommandationPersonnaliseeViewModel>();
   const thematiques = ref<ThematiqueViewModel[]>();
   const univers = ref<UniversViewModel>();
-  const defis = ref<DefisQuestionViewModel>();
+  const defis = ref<DefiDescriptionViewModel[]>();
 
   function onUniversPretAAfficher(viewModel: UniversViewModel) {
     univers.value = viewModel;
@@ -97,7 +100,7 @@
     thematiques.value = viewModel;
   }
 
-  function onDefisPretsAAfficher(viewModel: DefisQuestionViewModel) {
+  function onDefisPretsAAfficher(viewModel: DefiDescriptionViewModel[]) {
     defis.value = viewModel;
   }
 
@@ -124,7 +127,7 @@
       recupererDefiParUniversUsecase.execute(
         idUtilisateur,
         universId,
-        new ListeDefisPresenterImpl(onDefisPretsAAfficher),
+        new ListeDefisDescriptionPresenterImpl(onDefisPretsAAfficher),
       ),
     ])
       .then(() => {
