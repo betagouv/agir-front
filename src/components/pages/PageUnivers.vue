@@ -22,14 +22,10 @@
   <section
     class="fr-py-6w background--white"
     id="defis"
-    v-if="
-      utilisateurStore().utilisateur.fonctionnalitesDebloquees.includes('defis') &&
-      recommandationsPersonnaliseesViewModel?.defis &&
-      recommandationsPersonnaliseesViewModel?.defis.length > 0
-    "
+    v-if="utilisateurStore().utilisateur.fonctionnalitesDebloquees.includes('defis') && defis"
   >
     <div class="fr-container">
-      <CoachActions :recommandations="recommandationsPersonnaliseesViewModel.defis" />
+      {{ defis }}
     </div>
   </section>
 
@@ -56,10 +52,13 @@
   import { onMounted, ref } from 'vue';
   import { useRoute } from 'vue-router';
   import CarteSkeleton from '@/components/CarteSkeleton.vue';
-  import CoachActions from '@/components/custom/Coach/CoachActions.vue';
   import CoachRecommandations from '@/components/custom/Coach/CoachRecommandations.vue';
   import UniversList from '@/components/custom/Thematiques/ThematiquesListe.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
+  import { DefiRepositoryAxios } from '@/defi/adapters/defi.repository.axios';
+  import { ListeDefisPresenterImpl } from '@/defi/adapters/listeDefis.presenter.impl';
+  import { DefisQuestionViewModel } from '@/defi/ports/listeDefis.presenter';
+  import { RecupererListeDefisParUniversUsecase } from '@/defi/recupererListeDefisParUnivers.usecase';
   import {
     RecommandationPersonnaliseeViewModel,
     RecommandationsPersonnaliseesPresenterImpl,
@@ -84,6 +83,7 @@
   const recommandationsPersonnaliseesViewModel = ref<RecommandationPersonnaliseeViewModel>();
   const thematiques = ref<ThematiqueViewModel[]>();
   const univers = ref<UniversViewModel>();
+  const defis = ref<DefisQuestionViewModel>();
 
   function onUniversPretAAfficher(viewModel: UniversViewModel) {
     univers.value = viewModel;
@@ -97,15 +97,18 @@
     thematiques.value = viewModel;
   }
 
+  function onDefisPretsAAfficher(viewModel: DefisQuestionViewModel) {
+    defis.value = viewModel;
+  }
+
   const lancerChargementDesDonnees = () => {
     const idUtilisateur = store.utilisateur.id;
     const recupererUniversUsecase = new RecupererUniversUsecase(new UniversRepositoryAxios());
     const chargerRecommandationsPersonnaliseesUsecase = new RecupererRecommandationsPersonnaliseesUniversUsecase(
       new RecommandationsPersonnaliseesRepositoryAxios(),
     );
-
     const recupererThematiquesUsecase = new RecupererThematiquesUniversUsecase(new ThematiqueRepositoryAxios());
-
+    const recupererDefiParUniversUsecase = new RecupererListeDefisParUniversUsecase(new DefiRepositoryAxios());
     Promise.all([
       recupererUniversUsecase.execute(idUtilisateur, universId, new UniversPresenterImpl(onUniversPretAAfficher)),
       chargerRecommandationsPersonnaliseesUsecase.execute(
@@ -117,6 +120,11 @@
         universId,
         idUtilisateur,
         new ThematiquesPresenterImpl(onThematiquesPretesAAfficher),
+      ),
+      recupererDefiParUniversUsecase.execute(
+        idUtilisateur,
+        universId,
+        new ListeDefisPresenterImpl(onDefisPretsAAfficher),
       ),
     ])
       .then(() => {

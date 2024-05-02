@@ -1,6 +1,7 @@
 import { Defi } from '../recupererListeDefis.usecase';
 import { AxiosFactory, intercept401 } from '@/axios.factory';
 import { DefiRepository } from '@/defi/ports/defi.repository';
+import { RecommandationApiModel } from '@/recommandationsPersonnalisees/adapters/recommandationsPersonnalisees.repository.axios';
 
 interface DefiApiModel {
   id: string;
@@ -15,6 +16,30 @@ interface DefiApiModel {
 }
 
 export class DefiRepositoryAxios implements DefiRepository {
+  @intercept401()
+  async recupererListeDefisParUnivers(utilisateurId: string, universId: string): Promise<Defi[]> {
+    const axiosInstance = AxiosFactory.getAxios();
+    const response = await axiosInstance.get<RecommandationApiModel[]>(
+      `/utilisateurs/${utilisateurId}/recommandations`,
+    );
+
+    return response.data
+      .filter(model => model.thematique_principale === universId)
+      .map((apiModel: RecommandationApiModel) => {
+        const recommandationPersonnalisee: Defi = {
+          description: '',
+          thematique: apiModel.thematique_gamification,
+          id: apiModel.content_id,
+          libelle: apiModel.titre,
+          points: apiModel.points,
+          status: apiModel.status_defi,
+          astuces: '',
+          pourquoi: '',
+        };
+
+        return recommandationPersonnalisee;
+      });
+  }
   @intercept401()
   async envoyerReponse(utilisateurId: string, defiId: string, reponse: string): Promise<void> {
     const axios = AxiosFactory.getAxios();
@@ -35,6 +60,7 @@ export class DefiRepositoryAxios implements DefiRepository {
       pourquoi: response.data.pourquoi,
     };
   }
+
   @intercept401()
   async recupererDefis(utilisateurId: string): Promise<Defi[]> {
     const response = await AxiosFactory.getAxios().get<DefiApiModel[]>(`/utilisateurs/${utilisateurId}/defis`);
