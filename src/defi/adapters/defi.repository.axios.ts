@@ -65,7 +65,10 @@ export class DefiRepositoryAxios implements DefiRepository {
   async recupererDefis(utilisateurId: string): Promise<Defi[]> {
     const response = await AxiosFactory.getAxios().get<DefiApiModel[]>(`/utilisateurs/${utilisateurId}/defis`);
     return response.data
-      .filter(defi => defi.status === 'en_cours' || defi.status === 'fait' || defi.status === 'deja_fait')
+      .filter(
+        defi =>
+          defi.status === 'todo' || defi.status === 'en_cours' || defi.status === 'fait' || defi.status === 'deja_fait',
+      )
       .map(defi => ({
         id: defi.id,
         libelle: defi.titre,

@@ -47,7 +47,8 @@
     id="defis"
     v-if="
       utilisateurStore().utilisateur.fonctionnalitesDebloquees.includes('defis') &&
-      recommandationsPersonnaliseesViewModel
+      defisViewModel &&
+      defisViewModel.length > 0
     "
     v-tour-step:1="{
       tour: defiTour,
@@ -60,7 +61,7 @@
     }"
   >
     <div class="fr-container">
-      <CoachActions :recommandations="recommandationsPersonnaliseesViewModel.defis" />
+      <ActionListe :defis="defisViewModel" />
     </div>
   </section>
   <section
@@ -99,14 +100,20 @@
   import { onMounted, onUnmounted, ref } from 'vue';
   import CoachRecommandations from './custom/Coach/CoachRecommandations.vue';
   import CarteSkeleton from '@/components/CarteSkeleton.vue';
+  import ActionListe from '@/components/custom/Action/ActionListe.vue';
   import BilanOnboarding from '@/components/custom/BilanOnboarding.vue';
-  import CoachActions from '@/components/custom/Coach/CoachActions.vue';
   import CoachChangementSituation from '@/components/custom/Coach/CoachChangementSituation.vue';
   import CoachToDo from '@/components/custom/Coach/CoachToDo.vue';
   import CoachUnivers from '@/components/custom/Coach/CoachUnivers.vue';
   import CarteScore from '@/components/custom/Progression/CarteScore.vue';
   import ProgressionNiveauJauge from '@/components/custom/Progression/ProgressionNiveauJauge.vue';
   import { useReveal } from '@/composables/useReveal';
+  import { DefiRepositoryAxios } from '@/defi/adapters/defi.repository.axios';
+  import {
+    DefiDescriptionViewModel,
+    ListeDefisDescriptionPresenterImpl,
+  } from '@/defi/adapters/listeDefisDescription.presenter.impl';
+  import { RecupererListeDefisUsecase } from '@/defi/recupererListeDefis.usecase';
   import {
     RecommandationPersonnaliseeViewModel,
     RecommandationsPersonnaliseesPresenterImpl,
@@ -133,6 +140,8 @@
   const recommandationsPersonnaliseesViewModel = ref<RecommandationPersonnaliseeViewModel>();
   let handleConcealEvent: () => void;
 
+  const defisViewModel = ref<DefiDescriptionViewModel[]>();
+
   function onRecommandationsPretesAAfficher(viewModel: RecommandationPersonnaliseeViewModel) {
     recommandationsPersonnaliseesViewModel.value = viewModel;
   }
@@ -151,7 +160,7 @@
       new RecommandationsPersonnaliseesRepositoryAxios(),
     );
     const chargerTodoListUsecase = new RecupererToDoListUsecase(new ToDoListRepositoryAxios());
-
+    const chargerListeDefisUsecase = new RecupererListeDefisUsecase(new DefiRepositoryAxios());
     const chargerUniversUsecase = new RecupererListeUniversUsecase(new UniversRepositoryAxios());
 
     ToDoListEventBusImpl.getInstance().subscribe(subscriberName, ToDoListEvent.TODO_POINTS_ONT_ETE_RECUPERE, () => {
@@ -171,6 +180,10 @@
       chargerUniversUsecase.execute(
         idUtilisateur,
         new ListeUniversPresenterImpl(viewModel => (universViewModel.value = viewModel.univers)),
+      ),
+      chargerListeDefisUsecase.execute(
+        idUtilisateur,
+        new ListeDefisDescriptionPresenterImpl(viewModel => (defisViewModel.value = viewModel)),
       ),
     ])
       .then(() => {

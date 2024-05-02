@@ -22,7 +22,7 @@
   <section
     class="fr-py-6w background--white"
     id="defis"
-    v-if="utilisateurStore().utilisateur.fonctionnalitesDebloquees.includes('defis') && defis"
+    v-if="utilisateurStore().utilisateur.fonctionnalitesDebloquees.includes('defis') && defis && defis?.length > 0"
   >
     <div class="fr-container">
       <ActionListe :defis="defis" />
