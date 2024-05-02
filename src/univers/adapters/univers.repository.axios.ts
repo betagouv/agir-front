@@ -8,6 +8,7 @@ interface UniversApiModel {
   etoiles: number;
   is_locked: boolean;
   reason_locked: string;
+  image_url: string;
 }
 
 export class UniversRepositoryAxios implements UniversRepository {
@@ -18,7 +19,7 @@ export class UniversRepositoryAxios implements UniversRepository {
     return universApiModel.data.map(univers => ({
       id: univers.type,
       nom: univers.titre,
-      urlImage: 'https://via.placeholder.com/150',
+      urlImage: univers.image_url,
       nombreDeDefisRealises: univers.etoiles,
     }));
   }
@@ -32,7 +33,7 @@ export class UniversRepositoryAxios implements UniversRepository {
       .map<Univers>(univers => ({
         id: univers.type,
         nom: univers.titre,
-        urlImage: 'https://via.placeholder.com/150',
+        urlImage: univers.image_url,
         nombreDeDefisRealises: univers.etoiles,
       }));
     return universFiltrer[0];
