@@ -4,6 +4,7 @@ import { InjectService } from './utils/injectService';
 import { InjectGamification } from './utils/injectGamification';
 import { InjectRecommandations } from './utils/injectRecommandations';
 import { InjectTodo } from './utils/injectTodo';
+import { InjectUnivers } from './utils/injectUnivers';
 
 let page: Page;
 test.describe.configure({ mode: 'serial' });
@@ -50,7 +51,7 @@ test.beforeAll(async () => {
     route.fulfill({
       status: 200,
       contentType: 'application/json',
-      body: JSON.stringify([]),
+      body: JSON.stringify(new InjectUnivers().vierge()),
     });
   });
 
@@ -97,6 +98,14 @@ test.beforeAll(async () => {
           is_last: false,
         }),
       ),
+    });
+  });
+
+  await page.route(`${process.env.VITE_API_URL}/utilisateurs/dorian/defis`, route => {
+    route.fulfill({
+      status: 200,
+      contentType: 'application/json',
+      body: JSON.stringify([]),
     });
   });
 });

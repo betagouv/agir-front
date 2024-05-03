@@ -4,9 +4,9 @@
     <p class="fr-text--xl">Réduire votre empreinte écologique : selon vos moyens, vos lieux de vie et vos envies</p>
   </div>
 
-  <div class="fr-container fr-py-6w" v-if="universViewModel && universViewModel.length < 0">
+  <div class="fr-container fr-py-6w">
     <div>
-      <div v-if="todoList && todoList.derniere" class="background--white border-radius--md shadow fr-p-2w fr-mb-3w">
+      <div v-if="todoList && todoList.derniere" class="background--white border-radius--md shadow fr-p-2w">
         <p class="fr-mb-0">
           ✅ <span class="fr-text--bold">Vous avez accompli l’ensemble des missions ! </span> De nouvelles missions
           arriveront très prochainement.
@@ -37,7 +37,11 @@
       </div>
     </div>
   </div>
-  <section v-if="universViewModel" id="univers" class="fr-py-6w">
+  <section
+    v-if="universViewModel && utilisateurStore().utilisateur.fonctionnalitesDebloquees.includes('univers')"
+    id="univers"
+    class="fr-py-6w"
+  >
     <div class="fr-container">
       <CoachUnivers :universViewModel="universViewModel" />
     </div>

@@ -2,7 +2,7 @@ import { AxiosFactory, intercept401 } from '@/axios.factory';
 import { UniversRepository } from '@/univers/ports/univers.repository';
 import { Univers } from '@/univers/recupererListeUnivers.usecase';
 
-interface UniversApiModel {
+export interface UniversApiModel {
   titre: string;
   type: string;
   etoiles: number;
