@@ -3,7 +3,12 @@ import { Univers } from '../../../src/univers/recupererListeUnivers.usecase';
 
 export class UniversRepositoryMock implements UniversRepository {
   recupererUnivers(idUtilisateur: string, universId: string): Promise<Univers> {
-    throw new Error('Method not implemented.');
+    return Promise.resolve({
+      id: '1',
+      nom: 'Le climat',
+      urlImage: 'https://via.placeholder.com/150',
+      nombreDeDefisRealises: 0,
+    });
   }
   recupererLaListeDesUnivers(): Promise<Univers[]> {
     return Promise.resolve([
