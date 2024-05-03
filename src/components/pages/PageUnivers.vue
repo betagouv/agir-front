@@ -1,6 +1,6 @@
 <template>
   <div class="fr-container">
-    <FilDAriane page-courante="Univers: univers courant" />
+    <FilDAriane :page-courante="`Univers - ${univers?.nom}`" />
     <div class="fr-grid-row align-items--center fr-mb-4w">
       <img
         :src="univers?.urlImage"
@@ -15,7 +15,7 @@
 
   <section id="thematiques" v-if="thematiques">
     <div class="fr-container">
-      <UniversList :thematiques="thematiques" />
+      <UniversList :univers-id="universId" :thematiques="thematiques" />
     </div>
   </section>
 
