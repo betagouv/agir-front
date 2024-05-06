@@ -23,7 +23,7 @@ export class ThematiquesPresenterImpl implements ThematiquesPresenter {
         blocage: thematique.estBloquee ? { raison: thematique.raisonDuBlocage } : undefined,
         estNouvelle: thematique.estNouvelle,
         niveau: thematique.niveau,
-        urlImage: 'https://via.placeholder.com/150',
+        urlImage: thematique.urlImage,
       })),
     );
   }

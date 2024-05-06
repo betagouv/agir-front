@@ -9,6 +9,7 @@ export interface Thematique {
   raisonDuBlocage: string;
   estNouvelle: boolean;
   niveau: number;
+  urlImage: string;
 }
 
 export class RecupererThematiquesUniversUsecase {

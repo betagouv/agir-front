@@ -22,7 +22,7 @@ export class RecommandationsPersonnaliseesRepositoryAxios implements Recommandat
   ): Promise<RecommandationPersonnalisee[]> {
     const axiosInstance = AxiosFactory.getAxios();
     const response = await axiosInstance.get<RecommandationApiModel[]>(
-      `/utilisateurs/${idUtilisateur}/recommandations_v2?univers_id=${idUnivers}`,
+      `/utilisateurs/${idUtilisateur}/recommandations_v2?univers=${idUnivers}`,
     );
 
     return response.data.map((apiModel: RecommandationApiModel) => {
