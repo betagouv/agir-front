@@ -1,6 +1,6 @@
 <template>
   <ul class="fr-grid-row fr-grid-row--gutters list-style-none">
-    <li v-for="recommandation in recommandations" :key="recommandation.titre" class="fr-col-12 fr-col-md-6">
+    <li v-for="recommandation in recommandations" :key="recommandation.titre" class="fr-col-6 fr-col-md-3">
       <CoachCardRecommandation :recommandation="recommandation" />
     </li>
   </ul>

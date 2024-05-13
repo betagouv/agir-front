@@ -3,6 +3,12 @@ import { RecommandationPersonnalisee } from '@/recommandationsPersonnalisees/rec
 import { InteractionType } from '@/shell/interactionType';
 
 export class MockRecommandationsPersonnaliseesRepository implements RecommandationsPersonnaliseesRepository {
+  chargerRecommandationsPersonnaliseesUnivers(
+    _idUnivers: string,
+    _idUtilisateur: string,
+  ): Promise<RecommandationPersonnalisee[]> {
+    throw new Error('Method not implemented.');
+  }
   recommandationAEteCliquee(_idUtilisateur: string): Promise<void> {
     throw new Error('Method not implemented.');
   }
@@ -18,6 +24,7 @@ export class MockRecommandationsPersonnaliseesRepository implements Recommandati
         illustrationURL: 'illustrationURL',
         idDuContenu: '2',
         joursRestants: null,
+        points: 10,
       },
       {
         type: InteractionType.ARTICLE,
@@ -28,6 +35,7 @@ export class MockRecommandationsPersonnaliseesRepository implements Recommandati
         illustrationURL: 'illustrationURL',
         idDuContenu: '2',
         joursRestants: null,
+        points: 10,
       },
       {
         type: InteractionType.AIDE,
@@ -38,6 +46,7 @@ export class MockRecommandationsPersonnaliseesRepository implements Recommandati
         illustrationURL: 'illustrationURL',
         idDuContenu: '1',
         joursRestants: null,
+        points: 10,
       },
       {
         type: InteractionType.DEFIS,
@@ -48,6 +57,7 @@ export class MockRecommandationsPersonnaliseesRepository implements Recommandati
         illustrationURL: 'illustrationURL',
         idDuContenu: '1',
         joursRestants: 7,
+        points: 10,
       },
       {
         titre: 'Un KYC',
@@ -58,6 +68,7 @@ export class MockRecommandationsPersonnaliseesRepository implements Recommandati
         illustrationURL: 'illustrationURL',
         idDuContenu: '1',
         joursRestants: null,
+        points: 10,
       },
       {
         type: InteractionType.DEFIS,
@@ -68,6 +79,7 @@ export class MockRecommandationsPersonnaliseesRepository implements Recommandati
         illustrationURL: 'illustrationURL',
         idDuContenu: '1',
         joursRestants: null,
+        points: 10,
       },
     ]);
   }

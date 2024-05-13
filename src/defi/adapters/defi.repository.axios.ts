@@ -11,10 +11,33 @@ interface DefiApiModel {
   sous_titre: string;
   status: 'todo' | 'en_cours' | 'pas_envie' | 'deja_fait' | 'abondon' | 'fait';
   thematique_label: string;
+  thematique: string;
   titre: string;
 }
 
 export class DefiRepositoryAxios implements DefiRepository {
+  @intercept401()
+  async recupererListeDefisParUnivers(utilisateurId: string, universId: string): Promise<Defi[]> {
+    const axiosInstance = AxiosFactory.getAxios();
+    const response = await axiosInstance.get<DefiApiModel[]>(`/utilisateurs/${utilisateurId}/defis`);
+
+    return response.data
+      .filter(model => model.thematique === universId)
+      .map((apiModel: DefiApiModel) => {
+        const recommandationPersonnalisee: Defi = {
+          description: '',
+          thematique: apiModel.thematique_label,
+          id: apiModel.id,
+          libelle: apiModel.titre,
+          points: apiModel.points,
+          status: apiModel.status,
+          astuces: '',
+          pourquoi: '',
+        };
+
+        return recommandationPersonnalisee;
+      });
+  }
   @intercept401()
   async envoyerReponse(utilisateurId: string, defiId: string, reponse: string): Promise<void> {
     const axios = AxiosFactory.getAxios();
@@ -35,11 +58,15 @@ export class DefiRepositoryAxios implements DefiRepository {
       pourquoi: response.data.pourquoi,
     };
   }
+
   @intercept401()
   async recupererDefis(utilisateurId: string): Promise<Defi[]> {
     const response = await AxiosFactory.getAxios().get<DefiApiModel[]>(`/utilisateurs/${utilisateurId}/defis`);
     return response.data
-      .filter(defi => defi.status === 'en_cours' || defi.status === 'fait' || defi.status === 'deja_fait')
+      .filter(
+        defi =>
+          defi.status === 'todo' || defi.status === 'en_cours' || defi.status === 'fait' || defi.status === 'deja_fait',
+      )
       .map(defi => ({
         id: defi.id,
         libelle: defi.titre,

@@ -63,6 +63,10 @@ h3 {
   justify-content: center;
 }
 
+.position--relative {
+  position: relative;
+}
+
 .display-block {
   display: block;
 }
@@ -175,8 +179,16 @@ h3 {
   font-weight: 700;
 }
 
+.text--semi-bold {
+  font-weight: 500;
+}
+
 .text--underline {
   text-decoration: underline;
+}
+
+.text--decoration-none {
+  text-decoration: none;
 }
 
 .text--uppercase {
@@ -186,6 +198,7 @@ h3 {
 .background-bleu {
   background: var(--blue-france-main-525);
 }
+
 .background-bleu-light {
   background: var(--blue-france-925-125);
 }
@@ -206,6 +219,10 @@ h3 {
   background-color: var(--info-950-100);
 }
 
+.background--bleu-info-dark {
+  background-color: var(--info-425-625);
+}
+
 .background--rouge-erreur {
   background-color: var(--error-950-100);
 }
@@ -221,6 +238,7 @@ h3 {
 .background--vert--bourgeon {
   background-color: var(--green-bourgeon-950-100);
 }
+
 .background--caramel {
   background-color: var(--brown-caramel-925-125);
 }
@@ -281,6 +299,10 @@ h3 {
   border: 1px solid var(--warning-425-625);
 }
 
+.border-radius--xs {
+  border-radius: 4px;
+}
+
 .border-radius--md {
   border-radius: 8px;
 }
@@ -328,6 +350,10 @@ h3 {
 
 .text--lh-1 {
   line-height: 1 !important;
+}
+
+.align-items--center {
+  align-items: center;
 }
 
 .align-items--end {

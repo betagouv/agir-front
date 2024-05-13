@@ -1,6 +1,6 @@
 import { Defi } from '@/defi/recupererListeDefis.usecase';
 
-interface DefiQuestionViewModel {
+export interface DefiQuestionViewModel {
   id: string;
   libelle: string;
   reponse: string;

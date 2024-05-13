@@ -1,9 +1,12 @@
 <template>
+  <div class="fr-container">
+    <h1 class="fr-h1 fr-m-0 fr-mt-4w">Bonjour {{ utilisateurStore().utilisateur.prenom }} 👋</h1>
+    <p class="fr-text--xl">Réduire votre empreinte écologique : selon vos moyens, vos lieux de vie et vos envies</p>
+  </div>
+
   <div class="fr-container fr-py-6w">
     <div>
-      <h1 class="fr-h1 fr-m-0">Réduire votre empreinte écologique</h1>
-      <p class="fr-text--xl">Selon vos moyens, vos lieux de vie et vos envies</p>
-      <div v-if="todoList && todoList.derniere" class="background--white border-radius--md shadow fr-p-2w fr-mb-3w">
+      <div v-if="todoList && todoList.derniere" class="background--white border-radius--md shadow fr-p-2w">
         <p class="fr-mb-0">
           ✅ <span class="fr-text--bold">Vous avez accompli l’ensemble des missions ! </span> De nouvelles missions
           arriveront très prochainement.
@@ -35,9 +38,22 @@
     </div>
   </div>
   <section
-    class="fr-pb-6w"
+    v-if="universViewModel && utilisateurStore().utilisateur.fonctionnalitesDebloquees.includes('univers')"
+    id="univers"
+    class="fr-py-6w"
+  >
+    <div class="fr-container">
+      <CoachUnivers :universViewModel="universViewModel" />
+    </div>
+  </section>
+  <section
+    class="fr-py-6w background--white"
     id="defis"
-    v-if="utilisateurStore().utilisateur.fonctionnalitesDebloquees.includes('defis')"
+    v-if="
+      utilisateurStore().utilisateur.fonctionnalitesDebloquees.includes('defis') &&
+      defisViewModel &&
+      defisViewModel.length > 0
+    "
     v-tour-step:1="{
       tour: defiTour,
       options: {
@@ -49,14 +65,7 @@
     }"
   >
     <div class="fr-container">
-      <h2 class="fr-h2 fr-mb-0">Essayer de nouveaux usages</h2>
-      <p class="fr-text--xl">
-        Des propositions d'actions concrètes et faciles à mettre en oeuvre, en fonction de votre situation
-      </p>
-      <CoachRecommandations
-        v-if="recommandationsPersonnaliseesViewModel"
-        :recommandations="recommandationsPersonnaliseesViewModel.defis"
-      />
+      <ActionListe :defis="defisViewModel" />
     </div>
   </section>
   <section
@@ -73,10 +82,8 @@
     }"
   >
     <div class="fr-container" v-if="!isLoading">
-      <h2 class="fr-h2 fr-mb-0">Personnaliser davantage votre expérience</h2>
-      <p class="fr-text--xl">
-        Mieux comprendre les enjeux environnementaux et aider Agir à mieux comprendre les vôtres
-      </p>
+      <h2 class="fr-h2 fr-mb-0">Recommandé, pour vous</h2>
+      <p class="fr-text--xl">Une sélection d’articles et de services, pour vous, selon vos préférences !</p>
       <CoachRecommandations
         v-if="recommandationsPersonnaliseesViewModel"
         :recommandations="recommandationsPersonnaliseesViewModel.autresRecommandations"
@@ -97,12 +104,20 @@
   import { onMounted, onUnmounted, ref } from 'vue';
   import CoachRecommandations from './custom/Coach/CoachRecommandations.vue';
   import CarteSkeleton from '@/components/CarteSkeleton.vue';
+  import ActionListe from '@/components/custom/Action/ActionListe.vue';
   import BilanOnboarding from '@/components/custom/BilanOnboarding.vue';
   import CoachChangementSituation from '@/components/custom/Coach/CoachChangementSituation.vue';
   import CoachToDo from '@/components/custom/Coach/CoachToDo.vue';
+  import CoachUnivers from '@/components/custom/Coach/CoachUnivers.vue';
   import CarteScore from '@/components/custom/Progression/CarteScore.vue';
   import ProgressionNiveauJauge from '@/components/custom/Progression/ProgressionNiveauJauge.vue';
   import { useReveal } from '@/composables/useReveal';
+  import { DefiRepositoryAxios } from '@/defi/adapters/defi.repository.axios';
+  import {
+    DefiDescriptionViewModel,
+    ListeDefisDescriptionPresenterImpl,
+  } from '@/defi/adapters/listeDefisDescription.presenter.impl';
+  import { RecupererListeDefisUsecase } from '@/defi/recupererListeDefis.usecase';
   import {
     RecommandationPersonnaliseeViewModel,
     RecommandationsPersonnaliseesPresenterImpl,
@@ -116,14 +131,20 @@
   import { ToDoListRepositoryAxios } from '@/toDoList/adapters/toDoList.repository.axios';
   import { RecupererToDoListUsecase } from '@/toDoList/recupererToDoList.usecase';
   import { ToDoListEvent, ToDoListEventBusImpl } from '@/toDoList/toDoListEventBusImpl';
+  import { ListeUniversPresenterImpl, UniversViewModel } from '@/univers/adapters/listeUnivers.presenter.impl';
+  import { UniversRepositoryAxios } from '@/univers/adapters/univers.repository.axios';
+  import { RecupererListeUniversUsecase } from '@/univers/recupererListeUnivers.usecase';
 
   const { recommandationTour, defiTour } = useReveal();
 
   const isLoading = ref<boolean>(true);
   const todoList = ref<TodoListViewModel>();
+  const universViewModel = ref<UniversViewModel[]>();
   const store = utilisateurStore();
   const recommandationsPersonnaliseesViewModel = ref<RecommandationPersonnaliseeViewModel>();
   let handleConcealEvent: () => void;
+
+  const defisViewModel = ref<DefiDescriptionViewModel[]>();
 
   function onRecommandationsPretesAAfficher(viewModel: RecommandationPersonnaliseeViewModel) {
     recommandationsPersonnaliseesViewModel.value = viewModel;
@@ -143,6 +164,8 @@
       new RecommandationsPersonnaliseesRepositoryAxios(),
     );
     const chargerTodoListUsecase = new RecupererToDoListUsecase(new ToDoListRepositoryAxios());
+    const chargerListeDefisUsecase = new RecupererListeDefisUsecase(new DefiRepositoryAxios());
+    const chargerUniversUsecase = new RecupererListeUniversUsecase(new UniversRepositoryAxios());
 
     ToDoListEventBusImpl.getInstance().subscribe(subscriberName, ToDoListEvent.TODO_POINTS_ONT_ETE_RECUPERE, () => {
       chargerTodoListUsecase.execute(idUtilisateur, new ToDoListPresenterImpl(mapValueTodo));
@@ -158,6 +181,14 @@
         new RecommandationsPersonnaliseesPresenterImpl(onRecommandationsPretesAAfficher),
       ),
       chargerTodoListUsecase.execute(idUtilisateur, new ToDoListPresenterImpl(mapValueTodo)),
+      chargerUniversUsecase.execute(
+        idUtilisateur,
+        new ListeUniversPresenterImpl(viewModel => (universViewModel.value = viewModel.univers)),
+      ),
+      chargerListeDefisUsecase.execute(
+        idUtilisateur,
+        new ListeDefisDescriptionPresenterImpl(viewModel => (defisViewModel.value = viewModel)),
+      ),
     ])
       .then(() => {
         isLoading.value = false;

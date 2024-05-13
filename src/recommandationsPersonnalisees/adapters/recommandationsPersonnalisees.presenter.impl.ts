@@ -27,7 +27,8 @@ export interface RecommandationViewModel {
   nombreDePointsAGagner: string;
   type: TagViewModel;
   thematique: string;
-  joursRestants: string | null;
+  joursRestants: string | null; // TO DELETE ?
+  points: number;
 }
 export interface RecommandationPersonnaliseeViewModel {
   defis: RecommandationViewModel[];
@@ -48,6 +49,7 @@ export class RecommandationsPersonnaliseesPresenterImpl implements Recommandatio
         idDuContenu: recommandationPersonnalisee.idDuContenu,
         nombreDePointsAGagner: recommandationPersonnalisee.nombreDePointsAGagner,
         type: this.determineTypeTag(recommandationPersonnalisee.type),
+        points: recommandationPersonnalisee.points,
         joursRestants: recommandationPersonnalisee.joursRestants
           ? `Plus que ${recommandationPersonnalisee.joursRestants} jours`
           : null,

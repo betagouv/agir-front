@@ -2,6 +2,12 @@ import { RecommandationsPersonnaliseesRepository } from '@/recommandationsPerson
 import { RecommandationPersonnalisee } from '@/recommandationsPersonnalisees/recupererRecommandationsPersonnalisees.usecase';
 
 export class SpyRecommandationsPersonnaliseesRepository implements RecommandationsPersonnaliseesRepository {
+  chargerRecommandationsPersonnaliseesUnivers(
+    _idUnivers: string,
+    _idUtilisateur: string,
+  ): Promise<RecommandationPersonnalisee[]> {
+    throw new Error('Method not implemented.');
+  }
   get recommandationAEteCliqueeAEteAppelee(): boolean {
     return this._recommandationAEteCliqueeAEteAppelee;
   }

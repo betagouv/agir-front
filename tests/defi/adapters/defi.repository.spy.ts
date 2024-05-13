@@ -3,6 +3,9 @@ import { DefiRepository } from '@/defi/ports/defi.repository';
 import { Defi } from '@/defi/recupererListeDefis.usecase';
 
 export class SpyDefiRepository implements DefiRepository {
+  recupererListeDefisParUnivers(utilisateurId: string, universId: string): Promise<Defi[]> {
+    throw new Error('Method not implemented.');
+  }
   recupererDefis(_utilisateurId: string): Promise<Defi[]> {
     throw new Error('Method not implemented.');
   }
