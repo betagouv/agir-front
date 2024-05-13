@@ -10,6 +10,7 @@ export class ThematiqueRepositoryFake implements ThematiqueRepository {
       urlImage: 'https://via.placeholder.com/150',
       items: [
         {
+          id: 'id1',
           contentId: '1',
           titre: 'Mission 1',
           progression: 0,
@@ -19,6 +20,7 @@ export class ThematiqueRepositoryFake implements ThematiqueRepository {
           type: InteractionType.QUIZ,
         },
         {
+          id: 'id2',
           contentId: '2',
           titre: 'Mission 2',
           progression: 0,
