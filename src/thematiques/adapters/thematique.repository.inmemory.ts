@@ -11,6 +11,7 @@ export class ThematiqueRepositoryInMemory implements ThematiqueRepository {
       titre: 'A la maison',
       items: [
         {
+          id: '1',
           contentId: '1',
           titre: '2 questions pour mieux vous connaître',
           progression: 0,
@@ -20,6 +21,7 @@ export class ThematiqueRepositoryInMemory implements ThematiqueRepository {
           type: InteractionType.KYC,
         },
         {
+          id: '2',
           contentId: '2',
           titre: 'Les marchés gourmands à Dijon',
           progression: 0,
@@ -29,6 +31,7 @@ export class ThematiqueRepositoryInMemory implements ThematiqueRepository {
           type: InteractionType.QUIZ,
         },
         {
+          id: '3',
           contentId: '3',
           titre: "Le café ca pollue mais c'est bon pour la santé",
           progression: 0,
@@ -38,6 +41,7 @@ export class ThematiqueRepositoryInMemory implements ThematiqueRepository {
           type: InteractionType.ARTICLE,
         },
         {
+          id: '5',
           contentId: '5',
           titre: 'A découvrir',
           progression: 0,
@@ -47,6 +51,7 @@ export class ThematiqueRepositoryInMemory implements ThematiqueRepository {
           type: InteractionType.DEFIS,
         },
         {
+          id: '6',
           contentId: '6',
           titre: 'A découvrir',
           progression: 0,

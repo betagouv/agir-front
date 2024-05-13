@@ -63,10 +63,10 @@
   import CoachCardDone from '@/components/custom/Coach/CoachCardDone.vue';
   import CoachCardToDo from '@/components/custom/Coach/CoachCardToDo.vue';
   import CoachFinDeMission from '@/components/custom/Coach/CoachFinDeMission.vue';
-  import { TodoListViewModel } from '@/toDoList/adapters/toDoList.presenter.impl';
-  import { TerminerToDoListUsecase } from '@/toDoList/terminerToDoList.usecase';
   import { utilisateurStore } from '@/store/utilisateur';
+  import { TodoListViewModel } from '@/toDoList/adapters/toDoList.presenter.impl';
   import { ToDoListRepositoryAxios } from '@/toDoList/adapters/toDoList.repository.axios';
+  import { TerminerToDoListUsecase } from '@/toDoList/terminerToDoList.usecase';
   import { ToDoListEventBusImpl } from '@/toDoList/toDoListEventBusImpl';
 
   const props = defineProps<{ todoList: TodoListViewModel }>();

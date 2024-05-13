@@ -3,6 +3,7 @@ import { MissionThematiquePresenter } from '@/thematiques/ports/missionThematiqu
 import { ThematiqueRepository } from '@/thematiques/ports/thematique.repository';
 
 export interface MissionItem {
+  id: string;
   contentId: string;
   titre: string;
   progression: number;
@@ -11,6 +12,7 @@ export interface MissionItem {
   aEteRealisee: boolean;
   type: InteractionType;
 }
+
 export interface MissionThematique {
   urlImage: string;
   titre: string;

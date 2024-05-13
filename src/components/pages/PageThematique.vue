@@ -1,5 +1,5 @@
 <template>
-  <div class="fr-container">
+  <div class="fr-container fr-pb-4w">
     <FilDAriane
       page-courante="Thématique: à la maison"
       :page-hierarchie="[{ label: 'Univers', url: `univers/${useRoute().params.id}` }]"
@@ -15,73 +15,24 @@
       <h1 class="fr-h1 fr-col fr-m-0">{{ mission?.titre }}</h1>
     </div>
 
-    <div class="before--path">
-      <ul class="list-style-none fr-p-0 fr-m-0">
-        <li v-for="todo in mission?.kyc" :key="todo.titre" class="fr-mb-2w">
-          <CoachCardToDo
-            :id-du-contenu="todo.idDuContenu"
-            type=""
-            :nombre-de-points-a-gagner="todo.points"
-            :titre="todo.titre"
-            :value="todo.progession.etapeCourante"
-            :value-max="todo.progession.etapeTotal"
-            :url="todo.url"
-            :hash="todo.hash"
-          />
-        </li>
-      </ul>
+    <div class="mission__dashline fr-pb-2w" v-if="mission">
+      <ThematiquesMissions :missions="mission.kyc" />
+      <h2 class="text--uppercase fr-text--xs text--gris-dark fr-mb-1w fr-mt-3w fr-ml-6w">Articles et quiz</h2>
+      <ThematiquesMissions :missions="mission.articleEtQuiz" />
+      <h2 class="text--uppercase fr-text--xs text--gris-dark fr-mb-1w fr-mt-3w fr-ml-6w">Actions</h2>
+      <ThematiquesMissions :missions="mission.defis" />
     </div>
-
-    <div>
-      <h2 class="text--uppercase fr-mb-0 fr-text--xs text--gris-dark fr-mb-1w fr-ml-8w">ARTICLES ET QUIZ</h2>
-      <ul class="list-style-none fr-p-0 fr-m-0">
-        <li v-for="todo in mission?.articleEtQuiz" :key="todo.titre" class="fr-mb-2w">
-          <CoachCardToDo
-            :id-du-contenu="todo.idDuContenu"
-            type=""
-            :nombre-de-points-a-gagner="todo.points"
-            :titre="todo.titre"
-            :value="todo.progession.etapeCourante"
-            :value-max="todo.progession.etapeTotal"
-            :url="todo.url"
-            :hash="todo.hash"
-            class="before--path before-top--path"
-          />
-        </li>
-      </ul>
-    </div>
-
-    <div>
-      <h2 class="text--uppercase fr-mb-0 fr-text--xs text--gris-dark fr-mb-1w fr-ml-8w">DEFIS</h2>
-      <ul class="list-style-none fr-p-0 fr-m-0">
-        <li v-for="todo in mission?.defis" :key="todo.titre" class="fr-mb-2w">
-          <CoachCardToDo
-            :id-du-contenu="todo.idDuContenu"
-            type=""
-            :nombre-de-points-a-gagner="todo.points"
-            :titre="todo.titre"
-            :value="todo.progession.etapeCourante"
-            :value-max="todo.progession.etapeTotal"
-            :url="todo.url"
-            :hash="todo.hash"
-            class="before--path before-top--path"
-          />
-        </li>
-      </ul>
-      <div class="before-top--path">
-        <h2 class="text--uppercase fr-mb-0 fr-text--xs text--gris-dark fr-mb-1w">
-          <span class="fr-icon-gift-fill" aria-hidden="true"></span>
-          Bonus de fin de mission
-        </h2>
-      </div>
-    </div>
+    <h2 class="text--uppercase fr-text--xs text--gris-dark fr-pt-1w fr-pl-5v">
+      <span class="fr-icon-gift-fill" aria-hidden="true"></span>
+      Bonus de fin de mission
+    </h2>
   </div>
 </template>
 
 <script setup lang="ts">
   import { ref } from 'vue';
   import { useRoute } from 'vue-router';
-  import CoachCardToDo from '@/components/custom/Coach/CoachCardToDo.vue';
+  import ThematiquesMissions from '@/components/custom/Thematiques/ThematiquesMissions.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import {
     MissionThematiquePresenterImpl,
@@ -102,33 +53,18 @@
 </script>
 
 <style scoped>
-  .before--path {
+  .mission__dashline {
     position: relative;
   }
 
-  .before-top--path {
-    position: relative;
-  }
-
-  .before--path::before {
+  .mission__dashline::before {
     content: '';
     position: absolute;
-    bottom: -19px;
-    left: 30px;
+    top: 0;
+    bottom: 0;
+    left: 2rem;
     display: block;
     width: 0;
-    height: 20px;
-    border: 1px dashed var(--text-disabled-grey);
-  }
-
-  .before-top--path::before {
-    content: '';
-    position: absolute;
-    top: -22px;
-    left: 30px;
-    display: block;
-    width: 0;
-    height: 20px;
-    border: 1px dashed var(--text-disabled-grey);
+    border: 1px dashed var(--text-default-grey);
   }
 </style>
