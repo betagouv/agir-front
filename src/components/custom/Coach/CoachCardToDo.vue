@@ -26,9 +26,6 @@
   import CoachCardTodoProgression from '@/components/custom/Coach/CoachCardTodoProgression.vue';
 
   defineProps<{
-    type: string;
-    idDuContenu: string;
-    nombreDePointsAGagner: number;
     titre: string;
     value: number;
     valueMax: number;

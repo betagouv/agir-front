@@ -1,24 +1,21 @@
 <template>
   <ul class="list-style-none fr-p-0 fr-m-0">
-    <li v-for="todo in missions" :key="todo.titre" class="fr-mb-2w">
+    <li v-for="mission in missions" :key="mission.titre" class="fr-mb-2w">
       <CoachCardToDo
-        v-if="!todo.aEteRealisee"
-        :id-du-contenu="todo.idDuContenu"
-        type=""
-        :nombre-de-points-a-gagner="todo.points"
-        :titre="todo.titre"
-        :value="todo.progession.etapeCourante"
-        :value-max="todo.progession.etapeTotal"
-        :url="todo.url"
-        :hash="todo.hash"
+        v-if="!mission.aEteRealisee"
+        :titre="mission.titre"
+        :value="mission.progession.etapeCourante"
+        :value-max="mission.progession.etapeTotal"
+        :url="mission.url"
+        :hash="mission.hash"
       />
       <CoachCardDone
         v-else
-        :titre="todo.titre"
-        :value="todo.progession.etapeCourante"
-        :nombre-points="todo.points"
+        :titre="mission.titre"
+        :value="mission.progession.etapeCourante"
+        :nombre-points="mission.points"
         :point-a-ete-recolte="false"
-        :element-id="todo.id"
+        :element-id="mission.id"
       />
     </li>
   </ul>
