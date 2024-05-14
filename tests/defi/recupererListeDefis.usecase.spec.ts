@@ -38,6 +38,7 @@ describe('Fichier de tests concernant la récupération des défis en cours et t
           status: 'pas_envie',
           astuces: 'Defi3 astuce',
           pourquoi: 'Défi3 pourquoi',
+          explicationRefus: 'une explication',
         },
         {
           id: 'defiId4',
@@ -61,6 +62,7 @@ describe('Fichier de tests concernant la récupération des défis en cours et t
               id: 'defiId1',
               libelle: 'Defi1 libelle',
               reponse: '⏳ Défi en cours',
+              explication: undefined,
             },
           ],
           termine: [
@@ -68,11 +70,21 @@ describe('Fichier de tests concernant la récupération des défis en cours et t
               id: 'defiId2',
               libelle: 'Defi2 libelle',
               reponse: '✅ Déjà fait',
+              explication: undefined,
             },
             {
               id: 'defiId4',
               libelle: 'Defi4 libelle',
               reponse: '🏆 Défi réalisé',
+              explication: undefined,
+            },
+          ],
+          abandonne: [
+            {
+              id: 'defiId3',
+              libelle: 'Defi3 libelle',
+              reponse: '👎 Pas envie',
+              explication: 'une explication',
             },
           ],
           pasDeDefi: false,
@@ -81,44 +93,11 @@ describe('Fichier de tests concernant la récupération des défis en cours et t
     );
   });
 
-  describe("quand aucun défi n'est en cours ou terminé", () => {
+  describe("quand aucun il n'y a aucun défi", () => {
     it('doit renvoyer pasDeDefi', async () => {
       // GIVEN
       // WHEN
-      const recupererListeDefisUsecase = new RecupererListeDefisUsecase(
-        new MockListeDefisRepository([
-          {
-            id: 'defiId1',
-            description: 'Defi1 description',
-            thematique: 'transport',
-            libelle: 'Defi1 libelle',
-            points: 10,
-            status: 'todo',
-            astuces: 'Defi1 astuce',
-            pourquoi: 'Défi pourquoi',
-          },
-          {
-            id: 'defiId2',
-            description: 'Defi2 description',
-            thematique: 'transport',
-            libelle: 'Defi2 libelle',
-            points: 10,
-            status: 'pas_envie',
-            astuces: 'Defi2 astuce',
-            pourquoi: 'Défi2 pourquoi',
-          },
-          {
-            id: 'defiId3',
-            description: 'Defi3 description',
-            thematique: 'transport',
-            libelle: 'Defi3 libelle',
-            points: 10,
-            status: 'abondon',
-            astuces: 'Defi3 astuce',
-            pourquoi: 'Défi3 pourquoi',
-          },
-        ]),
-      );
+      const recupererListeDefisUsecase = new RecupererListeDefisUsecase(new MockListeDefisRepository([]));
 
       await recupererListeDefisUsecase.execute(
         'utilisateurId',
@@ -127,6 +106,7 @@ describe('Fichier de tests concernant la récupération des défis en cours et t
           expect(defisViewModel).toStrictEqual<DefisQuestionViewModel>({
             enCours: [],
             termine: [],
+            abandonne: [],
             pasDeDefi: true,
           });
         }),

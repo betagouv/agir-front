@@ -26,19 +26,34 @@
         </div>
       </div>
     </div>
+    <div v-if="defisViewModel?.abandonne && defisViewModel.abandonne.length > 0">
+      <h3 class="fr-h3 fr-my-6w">Vos défis non réalisés</h3>
+      <div v-for="defiViewModel in defisViewModel?.abandonne" :key="defiViewModel.id" class="fr-mb-4w">
+        <h3 class="fr-h4 fr-mb-2w">
+          {{ defiViewModel.libelle }}
+        </h3>
+        <div class="fr-grid-row flex-column fr-grid-row--top">
+          <p>{{ defiViewModel.reponse }}</p>
+          <p>{{ defiViewModel.explication }}</p>
+        </div>
+        <router-link class="fr-mt-4v" :to="{ name: RouteDefiName.DEFI, params: { id: defiViewModel.id } }">
+          Modifier ma réponse
+        </router-link>
+      </div>
+    </div>
     <p v-if="defisViewModel?.pasDeDefi">Vous n'avez pas encore de défis en cours</p>
   </CompteSkeleton>
 </template>
 
 <script setup lang="ts">
-  import CompteSkeleton from '@/components/custom/Compte/CompteSkeleton.vue';
   import { ref } from 'vue';
-  import { utilisateurStore } from '@/store/utilisateur';
-  import { RouteDefiName } from '@/router/defis/routes';
-  import { RecupererListeDefisUsecase } from '@/defi/recupererListeDefis.usecase';
+  import CompteSkeleton from '@/components/custom/Compte/CompteSkeleton.vue';
   import { DefiRepositoryAxios } from '@/defi/adapters/defi.repository.axios';
   import { ListeDefisPresenterImpl } from '@/defi/adapters/listeDefis.presenter.impl';
   import { DefisQuestionViewModel } from '@/defi/ports/listeDefis.presenter';
+  import { RecupererListeDefisUsecase } from '@/defi/recupererListeDefis.usecase';
+  import { RouteDefiName } from '@/router/defis/routes';
+  import { utilisateurStore } from '@/store/utilisateur';
 
   const defisViewModel = ref<DefisQuestionViewModel>();
 

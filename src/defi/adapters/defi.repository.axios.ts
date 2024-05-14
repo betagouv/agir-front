@@ -13,6 +13,7 @@ interface DefiApiModel {
   thematique_label: string;
   thematique: string;
   titre: string;
+  motif?: string;
 }
 
 export class DefiRepositoryAxios implements DefiRepository {
@@ -33,6 +34,7 @@ export class DefiRepositoryAxios implements DefiRepository {
           status: apiModel.status,
           astuces: '',
           pourquoi: '',
+          explicationRefus: apiModel.motif,
         };
 
         return recommandationPersonnalisee;
@@ -56,26 +58,23 @@ export class DefiRepositoryAxios implements DefiRepository {
       description: response.data.sous_titre,
       astuces: response.data.astuces,
       pourquoi: response.data.pourquoi,
+      explicationRefus: response.data.motif,
     };
   }
 
   @intercept401()
   async recupererDefis(utilisateurId: string): Promise<Defi[]> {
     const response = await AxiosFactory.getAxios().get<DefiApiModel[]>(`/utilisateurs/${utilisateurId}/defis`);
-    return response.data
-      .filter(
-        defi =>
-          defi.status === 'todo' || defi.status === 'en_cours' || defi.status === 'fait' || defi.status === 'deja_fait',
-      )
-      .map(defi => ({
-        id: defi.id,
-        libelle: defi.titre,
-        points: defi.points,
-        status: defi.status,
-        thematique: defi.thematique_label,
-        description: defi.sous_titre,
-        astuces: defi.astuces,
-        pourquoi: defi.pourquoi,
-      }));
+    return response.data.map(defi => ({
+      id: defi.id,
+      libelle: defi.titre,
+      points: defi.points,
+      status: defi.status,
+      thematique: defi.thematique_label,
+      description: defi.sous_titre,
+      astuces: defi.astuces,
+      pourquoi: defi.pourquoi,
+      explicationRefus: defi.motif,
+    }));
   }
 }

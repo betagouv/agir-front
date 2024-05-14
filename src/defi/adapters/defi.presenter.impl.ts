@@ -15,6 +15,7 @@ export interface DefiViewModel {
   reponse: string;
   astuces: string;
   pourquoi: string;
+  explicationRefus?: string;
 }
 
 export class DefiPresenterImpl implements DefiPresenter {
@@ -31,13 +32,14 @@ export class DefiPresenterImpl implements DefiPresenter {
       reponse: defi.status,
       astuces: defi.astuces,
       pourquoi: defi.pourquoi,
+      explicationRefus: defi.explicationRefus,
     });
   }
 
   private determinerReponsesPossible(
     status: 'todo' | 'en_cours' | 'pas_envie' | 'deja_fait' | 'abondon' | 'fait',
   ): ReponsePossible[] {
-    if (status === 'en_cours') {
+    if (status === 'en_cours' || status === 'abondon') {
       return [
         { id: 'fait', label: '🏆 Défi réalisé' },
         { id: 'en_cours', label: '⏱️ Je relance le défi' },

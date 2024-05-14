@@ -24,6 +24,8 @@
 
   const props = defineProps<{ defi: DefiViewModel; reponse: string }>();
 
+  console.log(props);
+
   const message = {
     titre: '',
     description: '',
@@ -36,11 +38,6 @@
     message.description = 'Merci pour votre réponse, retrouvez d’autres défis à relever sur la page d’accueil';
     message.background = 'background-bleu-alt-light';
     message.gainDePoint = false;
-  } else if (props.reponse === props.defi.reponse) {
-    message.titre = '⏱️ Je relance le défi';
-    message.description = 'Vous avez de nouveau 7 jours  pour relever le défi, à vous de jouer !';
-    message.gainDePoint = false;
-    message.background = 'defi-accepete--message-success';
   } else if (props.reponse === 'deja_fait') {
     message.titre = '✅ Déjà fait';
     message.description = 'Bravo, chaque geste compte !';
@@ -63,6 +60,11 @@
     message.description = 'Découvrez sur la page d’accueil d’autres défis recommandés pour vous';
     message.gainDePoint = false;
     message.background = 'background-bleu-alt-light';
+  } else if (props.reponse === props.defi.reponse) {
+    message.titre = '⏱️ Je relance le défi';
+    message.description = 'Vous avez de nouveau 7 jours  pour relever le défi, à vous de jouer !';
+    message.gainDePoint = false;
+    message.background = 'defi-accepete--message-success';
   }
 </script>
 

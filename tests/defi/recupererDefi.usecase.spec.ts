@@ -30,6 +30,7 @@ describe('Fichier de tests pour récuperer un défi', () => {
         points: '10',
         pourquoi: 'Défi pourquoi',
         reponse: 'todo',
+        explicationRefus: undefined,
         reponses_possibles: [
           {
             id: 'en_cours',
@@ -76,6 +77,7 @@ describe('Fichier de tests pour récuperer un défi', () => {
         points: '10',
         pourquoi: 'Défi pourquoi',
         reponse: 'en_cours',
+        explicationRefus: undefined,
         reponses_possibles: [
           {
             id: 'fait',
@@ -115,6 +117,7 @@ describe('Fichier de tests pour récuperer un défi', () => {
         libelle: 'Defi libelle',
         points: '10',
         pourquoi: 'Défi pourquoi',
+        explicationRefus: undefined,
         reponse: 'fait',
         reponses_possibles: [{ id: 'deja_fait', label: '✅ Déjà fait' }],
         thematique: 'transport',
