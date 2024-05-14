@@ -41,4 +41,22 @@ describe("Fichier de tests pour envoyer la réponse d'un défi", () => {
       explication: 'une explication',
     });
   });
+
+  it("Si la réponse est 'abondon', doit appeler le repos avec l'explication", async () => {
+    // GIVEN
+    const questionRepository = new SpyDefiRepository();
+    const spyEventBus = new SpyToDoListEventBus();
+    // WHEN
+    const usecase = new EnvoyerReponseDefiUsecase(questionRepository, spyEventBus);
+    await usecase.execute('utilisateurId', 'questionId', 'abondon', 'une explication');
+
+    // THEN
+    expect(questionRepository.envoyerReponseAEteAppele).toBeTruthy();
+    expect(questionRepository.envoyerReponseArgs).toStrictEqual({
+      utilisateurId: 'utilisateurId',
+      questionId: 'questionId',
+      reponse: 'abondon',
+      explication: 'une explication',
+    });
+  });
 });

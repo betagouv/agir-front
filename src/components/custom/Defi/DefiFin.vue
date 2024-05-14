@@ -24,8 +24,6 @@
 
   const props = defineProps<{ defi: DefiViewModel; reponse: string }>();
 
-  console.log(props);
-
   const message = {
     titre: '',
     description: '',
