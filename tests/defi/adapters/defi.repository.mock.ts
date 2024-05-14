@@ -15,7 +15,7 @@ export class MockDefiRepository implements DefiRepository {
     return Promise.resolve(this.defiARetourner);
   }
 
-  envoyerReponse(_defiId: string, _utilisateurId: string, _reponse: string): Promise<void> {
+  envoyerReponse(utilisateurId: string, defiId: string, reponse: string, explication: string): Promise<void> {
     throw new Error('Method not implemented.');
   }
 }

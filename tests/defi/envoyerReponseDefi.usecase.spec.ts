@@ -11,7 +11,7 @@ describe("Fichier de tests pour envoyer la réponse d'un défi", () => {
     const spyEventBus = new SpyToDoListEventBus();
     // WHEN
     const usecase = new EnvoyerReponseDefiUsecase(questionRepository, spyEventBus);
-    await usecase.execute('utilisateurId', 'questionId', 'Ma réponse, lorem ipsum dolor');
+    await usecase.execute('utilisateurId', 'questionId', 'Ma réponse, lorem ipsum dolor', '');
 
     // THEN
     expect(questionRepository.envoyerReponseAEteAppele).toBeTruthy();
@@ -19,7 +19,26 @@ describe("Fichier de tests pour envoyer la réponse d'un défi", () => {
       utilisateurId: 'utilisateurId',
       questionId: 'questionId',
       reponse: 'Ma réponse, lorem ipsum dolor',
+      explication: undefined,
     });
     expect(spyEventBus.eventName).toEqual(ToDoListEvent.TODO_KYC_A_ETE_REPONDU);
+  });
+
+  it("Si la réponse est 'pas_envie', doit appeler le repos avec l'explication", async () => {
+    // GIVEN
+    const questionRepository = new SpyDefiRepository();
+    const spyEventBus = new SpyToDoListEventBus();
+    // WHEN
+    const usecase = new EnvoyerReponseDefiUsecase(questionRepository, spyEventBus);
+    await usecase.execute('utilisateurId', 'questionId', 'pas_envie', 'une explication');
+
+    // THEN
+    expect(questionRepository.envoyerReponseAEteAppele).toBeTruthy();
+    expect(questionRepository.envoyerReponseArgs).toStrictEqual({
+      utilisateurId: 'utilisateurId',
+      questionId: 'questionId',
+      reponse: 'pas_envie',
+      explication: 'une explication',
+    });
   });
 });
