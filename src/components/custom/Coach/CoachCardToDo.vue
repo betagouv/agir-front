@@ -1,6 +1,5 @@
 <template>
   <div class="todo background--white shadow fr-p-2w">
-    <span class="fr-icon-play-circle-line todo__picto text--bleu" aria-hidden="true"></span>
     <div class="fr-col fr-col-md-9">
       <h4 class="fr-m-0">
         <router-link
@@ -27,9 +26,6 @@
   import CoachCardTodoProgression from '@/components/custom/Coach/CoachCardTodoProgression.vue';
 
   defineProps<{
-    type: string;
-    idDuContenu: string;
-    nombreDePointsAGagner: number;
     titre: string;
     value: number;
     valueMax: number;
@@ -53,7 +49,6 @@
   }
 
   .todo__link {
-    text-decoration: underline;
     background: none;
   }
 

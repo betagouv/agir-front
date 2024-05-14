@@ -7,17 +7,19 @@ import {
 import { expect } from 'vitest';
 
 describe("Fichier de tests concernant la récupération d'une mission pour une thématique", () => {
-  it('', async () => {
+  it('Doit récupérer une mission structurée', async () => {
     // GIVEN
     const usecase = new RecupererMissionThematiqueUsecase(new ThematiqueRepositoryFake());
 
     // WHEN
     await usecase.execute('1', '1', new MissionThematiquePresenterImpl(expectation));
+
     // THEN
     function expectation(mission) {
       expect(mission).toStrictEqual<MissionThematiqueViewModel>({
-        items: [
+        articleEtQuiz: [
           {
+            id: 'id1',
             aEteRealisee: false,
             estBloquee: false,
             hash: undefined,
@@ -32,6 +34,7 @@ describe("Fichier de tests concernant la récupération d'une mission pour une t
             url: '/agir/quiz/1',
           },
           {
+            id: 'id2',
             aEteRealisee: false,
             estBloquee: false,
             hash: undefined,
@@ -46,6 +49,8 @@ describe("Fichier de tests concernant la récupération d'une mission pour une t
             url: '/agir/quiz/2',
           },
         ],
+        defis: [],
+        kyc: [],
         titre: 'Thematique 1',
         urlImage: 'https://via.placeholder.com/150',
       });

@@ -8,6 +8,7 @@ import { InteractionType } from '@/shell/interactionType';
 import { MissionThematiquePresenter } from '@/thematiques/ports/missionThematique.presenter';
 
 export interface MissionItemViewModel {
+  id: string;
   idDuContenu: string;
   titre: string;
   progression: number;
@@ -24,7 +25,9 @@ export interface MissionItemViewModel {
 export interface MissionThematiqueViewModel {
   titre: string;
   urlImage: string;
-  items: MissionItemViewModel[];
+  kyc: MissionItemViewModel[];
+  articleEtQuiz: MissionItemViewModel[];
+  defis: MissionItemViewModel[];
 }
 
 export class MissionThematiquePresenterImpl implements MissionThematiquePresenter {
@@ -33,12 +36,21 @@ export class MissionThematiquePresenterImpl implements MissionThematiquePresente
     this.viewModel({
       titre: missionThematique.titre,
       urlImage: missionThematique.urlImage,
-      items: missionThematique.items.map(item => this.mapToViewModel(item)),
+      kyc: missionThematique.items
+        .filter(item => item.type === InteractionType.KYC)
+        .map(item => this.mapToViewModel(item)),
+      articleEtQuiz: missionThematique.items
+        .filter(item => item.type === InteractionType.ARTICLE || item.type === InteractionType.QUIZ)
+        .map(item => this.mapToViewModel(item)),
+      defis: missionThematique.items
+        .filter(item => item.type === InteractionType.DEFIS)
+        .map(item => this.mapToViewModel(item)),
     });
   }
 
   private mapToViewModel(item: MissionItem) {
     return {
+      id: item.id,
       idDuContenu: item.contentId,
       titre: item.titre,
       progression: item.progression,

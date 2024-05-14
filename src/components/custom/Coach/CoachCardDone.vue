@@ -21,7 +21,8 @@
         @click="recupererPointsTodo"
         :disabled="pointAEteRecolte"
       >
-        Récolter vos {{ nombrePoints }} <img src="/ic_score.svg" alt="points" width="16" class="fr-ml-1v" />
+        <span class="fr-hidden fr-unhidden-md"> Récolter vos </span> &nbsp;{{ nombrePoints }}
+        <img src="/ic_score.svg" alt="points" width="16" class="fr-ml-1v" />
       </button>
     </div>
   </div>
@@ -53,6 +54,7 @@
 
 <style scoped>
   .todo {
+    position: relative;
     display: flex;
     gap: 1rem;
     align-items: center;

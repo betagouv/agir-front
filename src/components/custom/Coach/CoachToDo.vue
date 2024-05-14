@@ -22,9 +22,6 @@
         <ul class="list-style-none fr-p-0 fr-m-0">
           <li v-for="todo in todoList.aFaire" :key="todo.titre" class="fr-mb-2w">
             <CoachCardToDo
-              :id-du-contenu="todo.idDuContenu"
-              :type="todo.type"
-              :nombre-de-points-a-gagner="todo.nombreDePointsAGagner"
               :titre="todo.titre"
               :value="todo.progession.etapeCourante"
               :value-max="todo.progession.etapeTotal"
@@ -63,10 +60,10 @@
   import CoachCardDone from '@/components/custom/Coach/CoachCardDone.vue';
   import CoachCardToDo from '@/components/custom/Coach/CoachCardToDo.vue';
   import CoachFinDeMission from '@/components/custom/Coach/CoachFinDeMission.vue';
-  import { TodoListViewModel } from '@/toDoList/adapters/toDoList.presenter.impl';
-  import { TerminerToDoListUsecase } from '@/toDoList/terminerToDoList.usecase';
   import { utilisateurStore } from '@/store/utilisateur';
+  import { TodoListViewModel } from '@/toDoList/adapters/toDoList.presenter.impl';
   import { ToDoListRepositoryAxios } from '@/toDoList/adapters/toDoList.repository.axios';
+  import { TerminerToDoListUsecase } from '@/toDoList/terminerToDoList.usecase';
   import { ToDoListEventBusImpl } from '@/toDoList/toDoListEventBusImpl';
 
   const props = defineProps<{ todoList: TodoListViewModel }>();
