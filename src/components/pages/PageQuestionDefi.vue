@@ -27,6 +27,11 @@
               v-model="reponse"
               :default-value="reponse ? reponse.toString() : undefined"
             />
+
+            <div v-if="reponse === 'pas_envie'">
+              <label class="fr-label" for="explication">Expliquez-nous pourquoi ? (facultatif)</label>
+              <textarea class="fr-input fr-mb-4w" v-model="explication" id="explication" name="explication" />
+            </div>
             <div class="background-bleu-alt-light border-radius--md fr-p-2w fr-mb-2w">
               <h2 class="fr-h6">
                 <span class="fr-icon-arrow-right-s-last-line text--bleu-minor" aria-hidden="true"></span>
@@ -56,16 +61,16 @@
 <script setup lang="ts">
   import { computed, onMounted, ref } from 'vue';
   import { useRoute } from 'vue-router';
-  import FilDAriane from '@/components/dsfr/FilDAriane.vue';
-  import { utilisateurStore } from '@/store/utilisateur';
   import BoutonRadio from '@/components/custom/BoutonRadio.vue';
-  import DefiFin from '@/components/custom/Defi/DefiFin.vue';
-  import { ToDoListEventBusImpl } from '@/toDoList/toDoListEventBusImpl';
-  import { RecupererDefiUsecase } from '@/defi/recupererDefiUsecase';
-  import { DefiRepositoryAxios } from '@/defi/adapters/defi.repository.axios';
-  import { DefiPresenterImpl, DefiViewModel, ReponsePossible } from '@/defi/adapters/defi.presenter.impl';
-  import { EnvoyerReponseDefiUsecase } from '@/defi/envoyerReponseDefi.usecase';
   import CarteInfo from '@/components/custom/CarteInfo.vue';
+  import DefiFin from '@/components/custom/Defi/DefiFin.vue';
+  import FilDAriane from '@/components/dsfr/FilDAriane.vue';
+  import { DefiPresenterImpl, DefiViewModel, ReponsePossible } from '@/defi/adapters/defi.presenter.impl';
+  import { DefiRepositoryAxios } from '@/defi/adapters/defi.repository.axios';
+  import { EnvoyerReponseDefiUsecase } from '@/defi/envoyerReponseDefi.usecase';
+  import { RecupererDefiUsecase } from '@/defi/recupererDefiUsecase';
+  import { utilisateurStore } from '@/store/utilisateur';
+  import { ToDoListEventBusImpl } from '@/toDoList/toDoListEventBusImpl';
 
   const route = useRoute();
   const questionId = Array.isArray(route.params.id) ? route.params.id[0] : route.params.id;
@@ -73,6 +78,7 @@
   const isLoading = ref<boolean>(true);
   const defiViewModel = ref<DefiViewModel>();
   const reponse = ref<string>('');
+  const explication = ref<string>('');
   const reponseAEteDonnee = ref<boolean>(false);
   const aDejaRepondu = ref<boolean>(false);
 
@@ -100,7 +106,7 @@
       new DefiRepositoryAxios(),
       ToDoListEventBusImpl.getInstance(),
     );
-    await envoyerReponseUsecase.execute(utilisateurId, questionId, reponse.value);
+    await envoyerReponseUsecase.execute(utilisateurId, questionId, reponse.value, explication.value);
 
     if (defiViewModel.value?.reponse) {
       aDejaRepondu.value = true;

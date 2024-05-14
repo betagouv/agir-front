@@ -39,9 +39,9 @@ export class DefiRepositoryAxios implements DefiRepository {
       });
   }
   @intercept401()
-  async envoyerReponse(utilisateurId: string, defiId: string, reponse: string): Promise<void> {
+  async envoyerReponse(utilisateurId: string, defiId: string, reponse: string, explication?: string): Promise<void> {
     const axios = AxiosFactory.getAxios();
-    await axios.patch(`/utilisateurs/${utilisateurId}/defis/${defiId}`, { status: reponse });
+    await axios.patch(`/utilisateurs/${utilisateurId}/defis/${defiId}`, { status: reponse, motif: explication });
   }
   @intercept401()
   async recupererDefi(defiId: string, utilisateurId: string): Promise<Defi> {
