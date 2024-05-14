@@ -26,15 +26,15 @@
         />
       </div>
       <div class="fr-fieldset__element">
-        <router-link :to="{ name: RouteConformiteName.CHARTE }" target="_blank">
-          Voir la charte de participation
-        </router-link>
-        <InputCheckboxUnitaire
-          class="fr-mt-2w"
-          v-model="acceptationCharte"
-          id="charte"
-          label="J'accepte la charte de participation"
-        />
+        <div class="fr-checkbox-group fr-checkbox-group--sm">
+          <input name="charte" id="charte" type="checkbox" v-model="acceptationCharte" />
+          <label class="fr-label" for="charte">
+            J'accepte&nbsp;
+            <router-link :to="{ name: RouteConformiteName.CHARTE }" target="_blank"
+              >la charte de participation
+            </router-link>
+          </label>
+        </div>
       </div>
       <div class="fr-fieldset__element fr-mb-0">
         <button
