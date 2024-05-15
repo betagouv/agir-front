@@ -28,10 +28,11 @@
               :default-value="reponse ? reponse.toString() : undefined"
             />
 
-            <div v-if="reponse === 'pas_envie'">
+            <div v-if="reponse === 'pas_envie' || reponse === 'abondon'">
               <label class="fr-label" for="explication">Expliquez-nous pourquoi ? (facultatif)</label>
               <textarea class="fr-input fr-mb-4w" v-model="explication" id="explication" name="explication" />
             </div>
+
             <div class="background-bleu-alt-light border-radius--md fr-p-2w fr-mb-2w">
               <h2 class="fr-h6">
                 <span class="fr-icon-arrow-right-s-last-line text--bleu-minor" aria-hidden="true"></span>
@@ -96,6 +97,7 @@
       new DefiPresenterImpl((viewModel: DefiViewModel) => {
         defiViewModel.value = viewModel;
         reponse.value = viewModel.reponse;
+        explication.value = viewModel.explicationRefus || '';
       }),
     );
     isLoading.value = false;

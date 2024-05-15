@@ -13,7 +13,7 @@ export class EnvoyerReponseDefiUsecase {
       utilisateurId,
       defiId,
       reponse,
-      reponse === 'pas_envie' ? explication : undefined,
+      reponse === 'pas_envie' || reponse === 'abondon' ? explication : undefined,
     );
     this.eventBus.publish(ToDoListEvent.TODO_KYC_A_ETE_REPONDU);
   }
