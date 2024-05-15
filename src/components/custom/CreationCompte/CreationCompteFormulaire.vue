@@ -25,8 +25,23 @@
           @update:mot-de-passe-valide="onMotDePasseValideChanged"
         />
       </div>
+      <div class="fr-fieldset__element">
+        <div class="fr-checkbox-group fr-checkbox-group--sm">
+          <input name="charte" id="charte" type="checkbox" v-model="acceptationCharte" />
+          <label class="fr-label" for="charte">
+            J'accepte&nbsp;
+            <router-link :to="{ name: RouteConformiteName.CHARTE }" target="_blank"
+              >la charte de participation
+            </router-link>
+          </label>
+        </div>
+      </div>
       <div class="fr-fieldset__element fr-mb-0">
-        <button class="fr-btn fr-btn--lg display-block full-width" :disabled="!formulaireValide" type="submit">
+        <button
+          class="fr-btn fr-btn--lg display-block full-width"
+          :disabled="!formulaireValide || !acceptationCharte"
+          type="submit"
+        >
           Créer votre compte
         </button>
       </div>
@@ -51,18 +66,20 @@
 </template>
 
 <script setup lang="ts">
-  import { CreerCompteUtilisateurUsecase, UserInput } from '@/compte/creerCompteUtilisateur.usecase';
   import { ref } from 'vue';
   import { SessionRepositoryStore } from '@/authentification/adapters/session.repository.store';
-  import { CompteUtilisateurRepositoryImpl } from '@/compte/adapters/compteUtilisateur.repository.impl';
-  import router, { RouteCommuneName } from '@/router';
-  import { utilisateurStore } from '@/store/utilisateur';
+  import Alert from '@/components/custom/Alert.vue';
+  import InputPassword from '@/components/custom/InputPassword.vue';
+  import InputCheckboxUnitaire from '@/components/dsfr/InputCheckboxUnitaire.vue';
   import InputMail from '@/components/dsfr/InputMail.vue';
   import InputText from '@/components/dsfr/InputText.vue';
-  import { onboardingStore } from '@/store/onboarding';
-  import InputPassword from '@/components/custom/InputPassword.vue';
-  import Alert from '@/components/custom/Alert.vue';
+  import { CompteUtilisateurRepositoryImpl } from '@/compte/adapters/compteUtilisateur.repository.impl';
   import { CreerComptePresenterImpl } from '@/compte/adapters/creerComptePresenterImpl';
+  import { CreerCompteUtilisateurUsecase, UserInput } from '@/compte/creerCompteUtilisateur.usecase';
+  import router, { RouteCommuneName } from '@/router';
+  import { RouteConformiteName } from '@/router/conformite/routes';
+  import { onboardingStore } from '@/store/onboarding';
+  import { utilisateurStore } from '@/store/utilisateur';
 
   let compteUtilisateurInput = ref<UserInput>({
     nom: '',
@@ -73,6 +90,7 @@
   let creationDeCompteEnErreur = ref<boolean>(false);
   let creationDeCompteMessageErreur = ref<string>('');
   let formulaireValide = ref<boolean>(false);
+  let acceptationCharte = ref<boolean>(false);
   utilisateurStore().reset();
 
   function onMotDePasseValideChanged(isMotDePasseValide: boolean) {
@@ -82,7 +100,7 @@
   const performCreerCompteUtilisateur = () => {
     const creeCompteUseCase = new CreerCompteUtilisateurUsecase(
       new CompteUtilisateurRepositoryImpl(),
-      new SessionRepositoryStore()
+      new SessionRepositoryStore(),
     );
     creeCompteUseCase
       .execute(
@@ -90,7 +108,7 @@
           router.push({ name: viewModel.route });
         }),
         compteUtilisateurInput.value,
-        onboardingStore().$state
+        onboardingStore().$state,
       )
       .catch(reason => {
         creationDeCompteMessageErreur.value = reason.message;
