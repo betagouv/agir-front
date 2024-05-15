@@ -1,7 +1,7 @@
 <template>
   <h2 class="fr-h2">Chiffres clés</h2>
   <div class="fr-grid-row fr-grid-row--gutters fr-grid-row--middle">
-    <div class="fr-col-md-6 fr-col-12">
+    <div class="fr-col-md-5 fr-col-12">
       <div class="fr-grid-row fr-grid-row--middle">
         <div
           class="background--bleu-dark text--white fr-grid-row flex-column fr-p-3w border-radius--lg text--center fr-text--bold"
@@ -15,19 +15,19 @@
         </p>
       </div>
     </div>
-    <div class="fr-col-md-6 fr-col-12">
+    <div class="fr-col-md-7 fr-col-12">
       <h3 class="fr-text--lg">Répartition thématique de l’empreinte moyenne des Français</h3>
-      <div class="fr-grid-row fr-grid-row--center fr-grid-row--middle">
+      <div class="fr-grid-row fr-grid-row--middle">
         <div class="fr-col-5 fr-hidden fr-unhidden-md">
           <img src="/camembert-onboarding.svg" alt="" />
         </div>
-        <div class="fr-col-md-5 fr-col-11">
+        <div class="fr-col-md-6 fr-col-11">
           <ul class="graph-legend list-style-none fr-text--bold fr-text--lg">
-            <li class="fr-grid-row flex-space-between fr-mb-1v"><span>🚗 Transports </span><span>27%</span></li>
-            <li class="fr-grid-row flex-space-between fr-mb-1v"><span>🥦 Alimentation</span> 25%</li>
-            <li class="fr-grid-row flex-space-between fr-mb-1v"><span>🏡 Logement</span> 19%</li>
-            <li class="fr-grid-row flex-space-between fr-mb-1v"><span>🛒 Consommation</span> 16%</li>
-            <li class="fr-grid-row flex-space-between fr-mb-1v"><span>🏛️ Services publics</span> 13%</li>
+            <li class="fr-grid-row flex-space-between fr-mb-1v"><span>🚗 Transports</span> 32%</li>
+            <li class="fr-grid-row flex-space-between fr-mb-1v"><span>🥦 Alimentation</span> 21%</li>
+            <li class="fr-grid-row flex-space-between fr-mb-1v"><span>🏡 Logement</span> 22%</li>
+            <li class="fr-grid-row flex-space-between fr-mb-1v"><span>🛒 Biens de consommation</span> 18%</li>
+            <li class="fr-grid-row flex-space-between fr-mb-1v"><span>🏛️ Services publics</span> 7%</li>
           </ul>
         </div>
       </div>

@@ -6,19 +6,12 @@
     </p>
     <p class="fr-text--sm">Les transports sont un des principaux postes de notre empreinte écologique.</p>
     <p class="fr-text--sm">
-      Par exemple, ils représentent en moyenne 27% des émissions de gaz à effet de serre de chaque Français.
+      Par exemple, ils représentent en moyenne 32% des émissions de gaz à effet de serre de chaque Français.
     </p>
-    <p class="fr-mb-0">
-      <span class="text--xs text--bold">Source :</span>
-      <a
-        href="https://www.carbone4.com/analyse-myco2-empreinte-carbone-moyenne-2021"
-        target="_blank"
-        rel="noopener"
-        class="fr-link text--xs"
-        title="Carbone 4 - ouvre une nouvelle fenêtre"
-      >
-        Carbone 4
-      </a>
+    <p class="fr-mb-0 text--xs">
+      <span class="text--bold">Source :</span>
+      Ministère de la transition écologique et de la cohésion des territoires (SDES, calculs 2023) – Année 2022
+      (estimation provisoire)
     </p>
   </CarteInfo>
   <CarteExplication>
@@ -51,6 +44,6 @@
 </template>
 
 <script setup lang="ts">
-  import CarteInfo from '@/components/custom/CarteInfo.vue';
   import CarteExplication from '@/components/custom/CarteExplication.vue';
+  import CarteInfo from '@/components/custom/CarteInfo.vue';
 </script>

@@ -5,20 +5,13 @@
       Pourquoi ces questions ?
     </p>
     <p class="fr-text--sm">
-      Le logement, et en particulier les modes de chauffage, représentent en moyenne 19% des émissions de gaz à effet de
+      Le logement, et en particulier les modes de chauffage, représentent en moyenne 22% des émissions de gaz à effet de
       serre de chaque Français.
     </p>
-    <p>
-      <span class="text--xs text--bold">Source :</span>
-      <a
-        href="https://www.carbone4.com/analyse-myco2-empreinte-carbone-moyenne-2021"
-        target="_blank"
-        rel="noopener"
-        class="fr-link text--xs"
-        title="Carbone 4 - ouvre une nouvelle fenêtre"
-      >
-        Carbone 4
-      </a>
+    <p class="text--xs">
+      <span class="text--bold">Source :</span>
+      Ministère de la transition écologique et de la cohésion des territoires (SDES, calculs 2023) – Année 2022
+      (estimation provisoire)
     </p>
     <p class="fr-text--sm fr-mb-0">
       Il existe de nombreuses manières de réduire sa consommation et ses factures ! De nombreuses aides sont disponibles
@@ -47,6 +40,6 @@
 </template>
 
 <script setup lang="ts">
-  import CarteInfo from '@/components/custom/CarteInfo.vue';
   import CarteExplication from '@/components/custom/CarteExplication.vue';
+  import CarteInfo from '@/components/custom/CarteInfo.vue';
 </script>

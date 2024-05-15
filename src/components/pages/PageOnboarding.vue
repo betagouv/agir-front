@@ -39,18 +39,18 @@
 
 <script setup lang="ts">
   import { ref } from 'vue';
-  import IndicateurDEtapes from '@/components/dsfr/IndicateurDEtapes.vue';
-  import OnboardingEtapeTransport from '@/components/custom/Onboarding/OnboardingEtapeTransport.vue';
-  import OnboardingEtapeLogement from '@/components/custom/Onboarding/OnboardingEtapeLogement.vue';
-  import OnboardingEtapeAlimentation from '@/components/custom/Onboarding/OnboardingEtapeAlimentation.vue';
-  import OnboardingEtapeConsommation from '@/components/custom/Onboarding/OnboardingEtapeConsommation.vue';
-  import AsideOnboardingEtapeTransport from '@/components/custom/Onboarding/AsideOnboardingEtapeTransport.vue';
-  import AsideOnboardingEtapeLogement from '@/components/custom/Onboarding/AsideOnboardingEtapeLogement.vue';
   import AsideOnboardingEtapeAlimentation from '@/components/custom/Onboarding/AsideOnboardingEtapeAlimentation.vue';
   import AsideOnboardingEtapeConsommation from '@/components/custom/Onboarding/AsideOnboardingEtapeConsommation.vue';
+  import AsideOnboardingEtapeLogement from '@/components/custom/Onboarding/AsideOnboardingEtapeLogement.vue';
+  import AsideOnboardingEtapeTransport from '@/components/custom/Onboarding/AsideOnboardingEtapeTransport.vue';
+  import OnboardingEtapeAlimentation from '@/components/custom/Onboarding/OnboardingEtapeAlimentation.vue';
+  import OnboardingEtapeConsommation from '@/components/custom/Onboarding/OnboardingEtapeConsommation.vue';
+  import OnboardingEtapeLogement from '@/components/custom/Onboarding/OnboardingEtapeLogement.vue';
+  import OnboardingEtapeTransport from '@/components/custom/Onboarding/OnboardingEtapeTransport.vue';
+  import IndicateurDEtapes from '@/components/dsfr/IndicateurDEtapes.vue';
 
   const etapeCourante = ref<number>(0);
-  const etapesOnboarding = ['🚗 Transports', '🏠 Logement', '🥦 Alimentation', '🛒 Consommation'];
+  const etapesOnboarding = ['🚗 Transports', '🏠 Logement', '🥦 Alimentation', '🛒 Biens de consommation'];
 
   const submitEtape = () => {
     window.scrollTo(0, 0);
