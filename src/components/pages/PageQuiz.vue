@@ -15,11 +15,11 @@
 <script setup lang="ts">
   import { onMounted, ref } from 'vue';
   import { useRoute } from 'vue-router';
-  import { ChargementQuizUsecase } from '@/quiz/chargementQuiz.usecase';
-  import { ChargementQuizPresenterImpl, QuizViewModel } from '@/quiz/adapters/chargementQuiz.presenter.impl';
-  import { utilisateurStore } from '@/store/utilisateur';
   import PageQuizComposant from '@/components/custom/Quiz/PageQuizComposant.vue';
-  import { QuizRepositoryAxios } from '@/quiz/adapters/quizRepository.axios';
+  import { ChargementQuizPresenterImpl, QuizViewModel } from '@/domaines/quiz/adapters/chargementQuiz.presenter.impl';
+  import { QuizRepositoryAxios } from '@/domaines/quiz/adapters/quizRepository.axios';
+  import { ChargementQuizUsecase } from '@/domaines/quiz/chargementQuiz.usecase';
+  import { utilisateurStore } from '@/store/utilisateur';
 
   const quizViewModel = ref<QuizViewModel>();
   const store = utilisateurStore();

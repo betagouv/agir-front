@@ -23,8 +23,8 @@
 </template>
 
 <script setup lang="ts">
+  import { UniversViewModel } from '@/domaines/univers/adapters/listeUnivers.presenter.impl';
   import { RouteUniversName } from '@/router/univers/routes';
-  import { UniversViewModel } from '@/univers/adapters/listeUnivers.presenter.impl';
 
   defineProps<{
     universViewModel: UniversViewModel;

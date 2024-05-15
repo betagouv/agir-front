@@ -1,7 +1,7 @@
-import { SimulerAideVeloRepository } from '@/aides/ports/simulerAideVelo.repository';
-import { SimulerAideVeloPresenterImpl } from '@/aides/adapters/simulerAideVelo.presenter.impl';
-import SimulerAideVeloUsecase, { SimulationVelo } from '@/aides/simulerAideVelo.usecase';
-import { SimulationAideResultatViewModel } from '@/aides/ports/simulationAideResultat';
+import { SimulerAideVeloRepository } from '@/domaines/aides/ports/simulerAideVelo.repository';
+import { SimulerAideVeloPresenterImpl } from '@/domaines/aides/adapters/simulerAideVelo.presenter.impl';
+import SimulerAideVeloUsecase, { SimulationVelo } from '@/domaines/aides/simulerAideVelo.usecase';
+import { SimulationAideResultatViewModel } from '@/domaines/aides/ports/simulationAideResultat';
 
 class SimulerAideVeloRepositoryForTest implements SimulerAideVeloRepository {
   getSimulation(prixDuVelo: number, utilisateurId: string): Promise<SimulationVelo> {

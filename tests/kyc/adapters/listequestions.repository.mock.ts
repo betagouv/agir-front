@@ -1,5 +1,5 @@
-import { QuestionRepository } from '@/kyc/ports/question.repository';
-import { Question } from '@/kyc/recupererQuestionUsecase';
+import { QuestionRepository } from '@/domaines/kyc/ports/question.repository';
+import { Question } from '@/domaines/kyc/recupererQuestionUsecase';
 
 export class MockListeQuestionsRepository implements QuestionRepository {
   constructor(private questionARetourner: Question[]) {}

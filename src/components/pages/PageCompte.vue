@@ -6,19 +6,19 @@
 
 <script setup lang="ts">
   import { onMounted, ref } from 'vue';
-  import CompteSkeleton from '@/components/custom/Compte/CompteSkeleton.vue';
-  import { utilisateurStore } from '@/store/utilisateur';
   import CompteFormulaire from '@/components/custom/Compte/CompteFormulaire.vue';
-  import {
-    ChargerProfileUtilisateurUsecase,
-    ProfileUtilisateurRepositoryAxiosImpl,
-  } from '@/profileUtilisateur/chargerProfileUtilisateur.usecase';
+  import CompteSkeleton from '@/components/custom/Compte/CompteSkeleton.vue';
   import {
     ProfileUtilisateurPresenterImpl,
     ProfileUtilisateurViewModel,
-  } from '@/profileUtilisateur/adapters/profileUtilisateur.presenter.impl';
-  import { Evenemement } from '@/shell/ports/publierEvenement.repository';
+  } from '@/domaines/profileUtilisateur/adapters/profileUtilisateur.presenter.impl';
+  import {
+    ChargerProfileUtilisateurUsecase,
+    ProfileUtilisateurRepositoryAxiosImpl,
+  } from '@/domaines/profileUtilisateur/chargerProfileUtilisateur.usecase';
   import { PublierEvenemntRepositoryAxios } from '@/shell/adapters/publierEvenemnt.repository.axios';
+  import { Evenemement } from '@/shell/ports/publierEvenement.repository';
+  import { utilisateurStore } from '@/store/utilisateur';
 
   const compteUtlisateurViewModel = ref<ProfileUtilisateurViewModel | null>(null);
   const store = utilisateurStore();

@@ -1,5 +1,5 @@
-import { Article } from '@/article/recupererArticle.usecase';
-import { ArticleRepository } from '@/article/ports/article.repository';
+import { Article } from '@/domaines/article/recupererArticle.usecase';
+import { ArticleRepository } from '@/domaines/article/ports/article.repository';
 
 export class SpyArticleRepository implements ArticleRepository {
   get previsualiserAEteAppele(): boolean {

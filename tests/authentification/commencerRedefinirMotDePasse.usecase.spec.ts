@@ -1,5 +1,9 @@
-import { IdUtilisateur, Utilisateur, UtilisateurRepository } from '@/authentification/ports/utilisateur.repository';
-import { CommencerRedefinirMotDePasseUsecase } from '@/authentification/commencerRedefinirMotDePasse.usecase';
+import {
+  IdUtilisateur,
+  Utilisateur,
+  UtilisateurRepository,
+} from '@/domaines/authentification/ports/utilisateur.repository';
+import { CommencerRedefinirMotDePasseUsecase } from '@/domaines/authentification/commencerRedefinirMotDePasse.usecase';
 
 class SpyUtilisateurRepository implements UtilisateurRepository {
   get email(): string {

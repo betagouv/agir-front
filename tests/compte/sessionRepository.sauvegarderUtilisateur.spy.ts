@@ -1,5 +1,5 @@
-import { SessionRepository } from '@/authentification/authentifierUtilisateur.usecase';
-import { Utilisateur } from '@/authentification/ports/utilisateur.repository';
+import { SessionRepository } from '@/domaines/authentification/authentifierUtilisateur.usecase';
+import { Utilisateur } from '@/domaines/authentification/ports/utilisateur.repository';
 
 export class SpySauvegarderUtilisateurSessionRepository implements SessionRepository {
   get utilisateur(): Utilisateur {

@@ -50,21 +50,21 @@
 
 <script setup lang="ts">
   import { computed, onMounted, onUnmounted, ref } from 'vue';
-  import { utilisateurStore } from '@/store/utilisateur';
-  import { ScoreViewModel } from '@/score/ports/chargementScore.presenter';
-  import { ChargementScoreUsecase } from '@/score/chargementScore.usecase';
-  import { ScoreRepositoryAxios } from '@/score/adapters/score.repository.axios';
-  import { ChargementScorePresenterImpl } from '@/score/adapters/chargementScore.presenter.impl';
-  import { ToDoListEvent, ToDoListEventBusImpl } from '@/toDoList/toDoListEventBusImpl';
+  import CoachFinDesMissions from '@/components/custom/Coach/CoachFinDesMissions.vue';
   import Modale from '@/components/custom/Modale/Modale.vue';
   import ModaleActions from '@/components/custom/Modale/ModaleActions';
-  import { ValiderCelebrationUsecase } from '@/celebration/validerCelebration.usecase';
-  import { CelebrationRepositoryAxios } from '@/celebration/adapters/celebration.repository.axios';
-  import { SessionRepositoryStore } from '@/authentification/adapters/session.repository.store';
   import ModalePassageDeNiveau from '@/components/custom/Modale/ModalePassageDeNiveau.vue';
-  import { Fonctionnalites } from '@/shell/fonctionnalitesEnum';
   import { useReveal } from '@/composables/useReveal';
-  import CoachFinDesMissions from '@/components/custom/Coach/CoachFinDesMissions.vue';
+  import { SessionRepositoryStore } from '@/domaines/authentification/adapters/session.repository.store';
+  import { CelebrationRepositoryAxios } from '@/domaines/celebration/adapters/celebration.repository.axios';
+  import { ValiderCelebrationUsecase } from '@/domaines/celebration/validerCelebration.usecase';
+  import { ChargementScorePresenterImpl } from '@/domaines/score/adapters/chargementScore.presenter.impl';
+  import { ScoreRepositoryAxios } from '@/domaines/score/adapters/score.repository.axios';
+  import { ChargementScoreUsecase } from '@/domaines/score/chargementScore.usecase';
+  import { ScoreViewModel } from '@/domaines/score/ports/chargementScore.presenter';
+  import { ToDoListEvent, ToDoListEventBusImpl } from '@/domaines/toDoList/toDoListEventBusImpl';
+  import { Fonctionnalites } from '@/shell/fonctionnalitesEnum';
+  import { utilisateurStore } from '@/store/utilisateur';
 
   const { selectionnerReveal } = useReveal();
   const fonctionnaliteDebloque = ref<string>();

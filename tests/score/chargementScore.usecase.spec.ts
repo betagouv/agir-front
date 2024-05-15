@@ -1,9 +1,9 @@
-import { ChargementScoreUsecase } from '@/score/chargementScore.usecase';
-import { ChargementScorePresenterImpl } from '@/score/adapters/chargementScore.presenter.impl';
-import { ScoreViewModel } from '@/score/ports/chargementScore.presenter';
+import { ChargementScoreUsecase } from '@/domaines/score/chargementScore.usecase';
+import { ChargementScorePresenterImpl } from '@/domaines/score/adapters/chargementScore.presenter.impl';
+import { ScoreViewModel } from '@/domaines/score/ports/chargementScore.presenter';
 import { MockScoreRepository } from './mockScoreRepository';
-import { Utilisateur } from '@/authentification/ports/utilisateur.repository';
-import { SessionRepository } from '@/authentification/authentifierUtilisateur.usecase';
+import { Utilisateur } from '@/domaines/authentification/ports/utilisateur.repository';
+import { SessionRepository } from '@/domaines/authentification/authentifierUtilisateur.usecase';
 import { expect } from 'vitest';
 import { Fonctionnalites } from '@/shell/fonctionnalitesEnum';
 

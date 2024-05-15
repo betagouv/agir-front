@@ -1,5 +1,5 @@
-import { DefiRepository } from '@/defi/ports/defi.repository';
-import { Defi } from '@/defi/recupererListeDefis.usecase';
+import { DefiRepository } from '@/domaines/defi/ports/defi.repository';
+import { Defi } from '@/domaines/defi/recupererListeDefis.usecase';
 
 export class MockDefiRepository implements DefiRepository {
   constructor(private defiARetourner: Defi) {}

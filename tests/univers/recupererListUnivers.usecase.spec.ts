@@ -1,5 +1,8 @@
-import { ListeUniversPresenterImpl, ListeUniversViewModel } from '@/univers/adapters/listeUnivers.presenter.impl';
-import { RecupererListeUniversUsecase } from '@/univers/recupererListeUnivers.usecase';
+import {
+  ListeUniversPresenterImpl,
+  ListeUniversViewModel,
+} from '@/domaines/univers/adapters/listeUnivers.presenter.impl';
+import { RecupererListeUniversUsecase } from '@/domaines/univers/recupererListeUnivers.usecase';
 import { UniversRepositoryMock } from './adapters/univers.repository.inmemory';
 
 describe('Fichier de tests concernant la recupération des univers', () => {

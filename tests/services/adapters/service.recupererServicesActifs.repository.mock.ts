@@ -1,6 +1,6 @@
-import { ServiceRepository } from '@/services/ports/service.repository';
-import { ServiceCatalogue } from '@/services/recupererCatalogueServices.usecase';
-import { Service } from '@/services/recupererServiceActifs.usecase';
+import { ServiceRepository } from '@/domaines/services/ports/service.repository';
+import { ServiceCatalogue } from '@/domaines/services/recupererCatalogueServices.usecase';
+import { Service } from '@/domaines/services/recupererServiceActifs.usecase';
 
 export class MockRecupererServicesActifsRepository implements ServiceRepository {
   constructor(private catalogueServicesActifsARetourner: Service[]) {}

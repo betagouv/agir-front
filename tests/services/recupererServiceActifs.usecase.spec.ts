@@ -1,6 +1,6 @@
-import { RecupererServiceActifsUsecase } from '@/services/recupererServiceActifs.usecase';
+import { RecupererServiceActifsUsecase } from '@/domaines/services/recupererServiceActifs.usecase';
 import { MockRecupererServicesActifsRepository } from './adapters/service.recupererServicesActifs.repository.mock';
-import { ServicePresenterImpl, ServiceViewModel } from '@/services/adapters/service.presenter.impl';
+import { ServicePresenterImpl, ServiceViewModel } from '@/domaines/services/adapters/service.presenter.impl';
 
 describe("Fichier de tests concernant la récupérations des services actifs d'un utilisateur", () => {
   it("En donnant l'id d'utilisateur doit recupérer ses services actifs", async () => {
@@ -31,7 +31,7 @@ describe("Fichier de tests concernant la récupérations des services actifs d'u
           url: 'coach/suivi-du-jour',
           isUrlExterne: false,
         },
-      ])
+      ]),
     );
     await usecase.execute(utilisateurId, new ServicePresenterImpl(expectation));
 

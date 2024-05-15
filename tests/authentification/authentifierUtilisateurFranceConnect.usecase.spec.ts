@@ -1,5 +1,9 @@
-import { IdUtilisateur, Utilisateur, UtilisateurRepository } from '@/authentification/ports/utilisateur.repository';
-import { AuthentifierUtilisateurFranceConnectUsecase } from '@/authentification/authentifierUtilisateurFranceConnect.usecase';
+import {
+  IdUtilisateur,
+  Utilisateur,
+  UtilisateurRepository,
+} from '@/domaines/authentification/ports/utilisateur.repository';
+import { AuthentifierUtilisateurFranceConnectUsecase } from '@/domaines/authentification/authentifierUtilisateurFranceConnect.usecase';
 import { SpySauvegarderUtilisateurSessionRepository } from '../compte/sessionRepository.sauvegarderUtilisateur.spy';
 
 class UtilisateurRepositoryForTest implements UtilisateurRepository {

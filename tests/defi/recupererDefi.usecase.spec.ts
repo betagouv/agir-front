@@ -1,6 +1,6 @@
 import { MockDefiRepository } from './adapters/defi.repository.mock';
-import { RecupererDefiUsecase } from '@/defi/recupererDefiUsecase';
-import { DefiPresenterImpl, DefiViewModel } from '@/defi/adapters/defi.presenter.impl';
+import { RecupererDefiUsecase } from '@/domaines/defi/recupererDefiUsecase';
+import { DefiPresenterImpl, DefiViewModel } from '@/domaines/defi/adapters/defi.presenter.impl';
 
 describe('Fichier de tests pour récuperer un défi', () => {
   it("En donnant un id d'utilisateur et l'id de la question du défi non répondu doit appeler le back et présenter le défi", async () => {

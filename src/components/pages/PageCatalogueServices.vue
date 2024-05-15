@@ -30,18 +30,18 @@
 
 <script setup lang="ts">
   import { onMounted, ref } from 'vue';
-  import { RecupererCatalogueServicesUseCase } from '@/services/recupererCatalogueServices.usecase';
-  import { ServiceRepositoryAxios } from '@/services/adapters/service.repository.axios';
-  import { utilisateurStore } from '@/store/utilisateur';
+  import CatalogueDeServices from '@/components/custom/CatalogueDeServices/CatalogueDeServices.vue';
+  import ServiceModaleParametreLinky from '@/components/custom/Linky/ServiceModaleParametreLinky.vue';
+  import Modale from '@/components/custom/Modale/Modale.vue';
+  import FilDAriane from '@/components/dsfr/FilDAriane.vue';
+  import { ServiceRepositoryAxios } from '@/domaines/services/adapters/service.repository.axios';
   import {
     ServiceCataloguePresenterImpl,
     ServiceCatalogueViewModel,
     ServiceCatalogueViewModelItem,
-  } from '@/services/adapters/serviceCatalogue.presenter.impl';
-  import FilDAriane from '@/components/dsfr/FilDAriane.vue';
-  import CatalogueDeServices from '@/components/custom/CatalogueDeServices/CatalogueDeServices.vue';
-  import Modale from '@/components/custom/Modale/Modale.vue';
-  import ServiceModaleParametreLinky from '@/components/custom/Linky/ServiceModaleParametreLinky.vue';
+  } from '@/domaines/services/adapters/serviceCatalogue.presenter.impl';
+  import { RecupererCatalogueServicesUseCase } from '@/domaines/services/recupererCatalogueServices.usecase';
+  import { utilisateurStore } from '@/store/utilisateur';
 
   const isLoading = ref<boolean>(true);
   const serviceCatalogueViewModels = ref<ServiceCatalogueViewModel>();

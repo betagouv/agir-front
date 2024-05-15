@@ -1,5 +1,8 @@
-import { ThematiquesPresenterImpl, ThematiqueViewModel } from '@/thematiques/adapters/thematiques.presenter.impl';
-import { RecupererThematiquesUniversUsecase } from '@/thematiques/recupererThematiquesUnivers.usecase';
+import {
+  ThematiquesPresenterImpl,
+  ThematiqueViewModel,
+} from '@/domaines/thematiques/adapters/thematiques.presenter.impl';
+import { RecupererThematiquesUniversUsecase } from '@/domaines/thematiques/recupererThematiquesUnivers.usecase';
 import { ThematiqueRepositoryFake } from './adapters/recupererMissionThematique.repository.fake';
 
 describe('Fichier de tests concernant la récupération des thématiques pour un Univers', () => {

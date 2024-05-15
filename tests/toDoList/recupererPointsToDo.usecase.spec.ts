@@ -1,5 +1,5 @@
-import { RecupererPointsToDoUsecase } from '@/toDoList/recupererPointsToDo.usecase';
-import { ToDoListEvent } from '@/toDoList/toDoListEventBusImpl';
+import { RecupererPointsToDoUsecase } from '@/domaines/toDoList/recupererPointsToDo.usecase';
+import { ToDoListEvent } from '@/domaines/toDoList/toDoListEventBusImpl';
 import { SpyToDoListRepository } from './adapters/spyTodoListRepository';
 import { SpyToDoListEventBus } from './spyTodoListEventBus';
 

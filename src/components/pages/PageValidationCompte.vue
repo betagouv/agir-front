@@ -26,18 +26,18 @@
 
 <script setup lang="ts">
   import { ref } from 'vue';
-  import InputText from '@/components/dsfr/InputText.vue';
-  import { ValiderCompteUtilisateurUsecase } from '@/authentification/validerCompteUtilisateur.usecase';
-  import { SessionRepositoryStore } from '@/authentification/adapters/session.repository.store';
-  import { utilisateurStore } from '@/store/utilisateur';
-  import router from '@/router';
   import Alert from '@/components/custom/Alert.vue';
-  import { UtilisateurRepositoryAxios } from '@/authentification/adapters/utilisateur.repository.axios';
-  import { RenvoyerCoteOTPUsecase } from '@/authentification/renvoyerCoteOTPUsecase';
+  import InputText from '@/components/dsfr/InputText.vue';
   import { useAlerte } from '@/composables/useAlerte';
+  import { SessionRepositoryStore } from '@/domaines/authentification/adapters/session.repository.store';
+  import { UtilisateurRepositoryAxios } from '@/domaines/authentification/adapters/utilisateur.repository.axios';
+  import { RenvoyerCoteOTPUsecase } from '@/domaines/authentification/renvoyerCoteOTPUsecase';
+  import { ValiderCompteUtilisateurUsecase } from '@/domaines/authentification/validerCompteUtilisateur.usecase';
+  import router from '@/router';
   import { RouteCoachName } from '@/router/coach/routeCoachName';
   import { onboardingStore } from '@/store/onboarding';
   import { onboardingBilanStore } from '@/store/onboardingBilan';
+  import { utilisateurStore } from '@/store/utilisateur';
 
   const code = ref('');
   const email = utilisateurStore().utilisateur.mail || new URLSearchParams(window.location.search).get('email') || '';
@@ -46,7 +46,7 @@
   const validerCode = async () => {
     const validerCompteUtilisateurUsecase = new ValiderCompteUtilisateurUsecase(
       new UtilisateurRepositoryAxios(),
-      new SessionRepositoryStore()
+      new SessionRepositoryStore(),
     );
     validerCompteUtilisateurUsecase
       .execute(email, code.value)

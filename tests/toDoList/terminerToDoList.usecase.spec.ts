@@ -1,7 +1,7 @@
-import { TerminerToDoListUsecase } from '@/toDoList/terminerToDoList.usecase';
+import { TerminerToDoListUsecase } from '@/domaines/toDoList/terminerToDoList.usecase';
 import { SpyToDoListRepository } from './adapters/spyTodoListRepository';
 import { SpyToDoListEventBus } from './spyTodoListEventBus';
-import { ToDoListEvent } from '@/toDoList/toDoListEventBusImpl';
+import { ToDoListEvent } from '@/domaines/toDoList/toDoListEventBusImpl';
 
 describe("Fichier de tests concernant la fin d'une Todo List", () => {
   it('En donnant un id utilisateurdoit appeler le back pour prevenir que la todo entière a été faite', async () => {

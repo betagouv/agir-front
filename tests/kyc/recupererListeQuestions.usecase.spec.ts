@@ -1,8 +1,8 @@
-import { RecupererListeQuestionsUsecase } from '@/kyc/recupererListeQuestions.usecase';
+import { RecupererListeQuestionsUsecase } from '@/domaines/kyc/recupererListeQuestions.usecase';
 import { MockListeQuestionsRepository } from './adapters/listequestions.repository.mock';
 import { expect } from 'vitest';
-import { ListeQuestionsPresenterImpl } from '@/kyc/adapters/listeQuestions.presenter.impl';
-import { ThematiqueQuestion } from '@/kyc/recupererQuestionUsecase';
+import { ListeQuestionsPresenterImpl } from '@/domaines/kyc/adapters/listeQuestions.presenter.impl';
+import { ThematiqueQuestion } from '@/domaines/kyc/recupererQuestionUsecase';
 
 describe('Fichier de tests concernant la récupération des KYC répondues', () => {
   it('doit récupérer la liste des questions KYC répondues', async () => {

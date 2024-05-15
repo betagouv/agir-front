@@ -1,4 +1,4 @@
-import { ToDoListApiModel } from '@/toDoList/adapters/toDoList.repository.axios';
+import { ToDoListApiModel } from '@/domaines/toDoList/adapters/toDoList.repository.axios';
 
 export class InjectTodo {
   public avecTodo(toDoList: ToDoListApiModel): ToDoListApiModel {

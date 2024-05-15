@@ -1,7 +1,7 @@
-import { ThematiqueRepository } from '@/thematiques/ports/thematique.repository';
-import { MissionThematique } from '@/thematiques/recupererMissionThematiqueUsecase';
+import { ThematiqueRepository } from '@/domaines/thematiques/ports/thematique.repository';
+import { MissionThematique } from '@/domaines/thematiques/recupererMissionThematiqueUsecase';
 import { InteractionType } from '@/shell/interactionType';
-import { Thematique } from '@/thematiques/recupererThematiquesUnivers.usecase';
+import { Thematique } from '@/domaines/thematiques/recupererThematiquesUnivers.usecase';
 
 export class ThematiqueRepositoryFake implements ThematiqueRepository {
   recupererMissionThematique(thematiqueId: string, utilisateurId: string): Promise<MissionThematique> {

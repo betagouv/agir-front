@@ -2,8 +2,8 @@ import {
   PageConformite,
   PageConformiteType,
   RecupererPageConformiteUsecase,
-} from '@/conformites/recupererPageConformite.usecase';
-import { ConformiteRepository } from '@/conformites/ports/conformite.repository';
+} from '@/domaines/conformites/recupererPageConformite.usecase';
+import { ConformiteRepository } from '@/domaines/conformites/ports/conformite.repository';
 
 class RecupererPageConformiteSpy implements ConformiteRepository {
   get pageConformiteType(): PageConformiteType | null {

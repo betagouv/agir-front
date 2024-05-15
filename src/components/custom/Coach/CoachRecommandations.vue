@@ -8,7 +8,7 @@
 
 <script setup lang="ts">
   import CoachCardRecommandation from '@/components/custom/Coach/CoachCardRecommandation.vue';
-  import { RecommandationViewModel } from '@/recommandationsPersonnalisees/adapters/recommandationsPersonnalisees.presenter.impl';
+  import { RecommandationViewModel } from '@/domaines/recommandationsPersonnalisees/adapters/recommandationsPersonnalisees.presenter.impl';
 
   defineProps<{ recommandations: RecommandationViewModel[] }>();
 </script>

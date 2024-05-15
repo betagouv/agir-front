@@ -44,17 +44,17 @@
 <script setup lang="ts">
   import { ref } from 'vue';
   import '@gouvfr/dsfr/dist/component/password/password.min.css';
-  import router from '@/router';
-  import { AuthentifierUtilisateurUsecase } from '@/authentification/authentifierUtilisateur.usecase';
-  import { UtilisateurRepositoryAxios } from '@/authentification/adapters/utilisateur.repository.axios';
-  import { SessionRepositoryStore } from '@/authentification/adapters/session.repository.store';
-  import { sendIdNGC } from '@/bilan/middleware/pendingSimulation';
-  import InputMail from '@/components/dsfr/InputMail.vue';
-  import InputPasswordLogin from '@/components/custom/InputPasswordLogin.vue';
   import Alert from '@/components/custom/Alert.vue';
+  import InputPasswordLogin from '@/components/custom/InputPasswordLogin.vue';
+  import InputMail from '@/components/dsfr/InputMail.vue';
+  import { SessionRepositoryStore } from '@/domaines/authentification/adapters/session.repository.store';
+  import { UtilisateurRepositoryAxios } from '@/domaines/authentification/adapters/utilisateur.repository.axios';
+  import { AuthentifierUtilisateurUsecase } from '@/domaines/authentification/authentifierUtilisateur.usecase';
+  import { RenvoyerCoteOTPUsecase } from '@/domaines/authentification/renvoyerCoteOTPUsecase';
+  import { sendIdNGC } from '@/domaines/bilan/middleware/pendingSimulation';
+  import router from '@/router';
   import { RouteCoachName } from '@/router/coach/routeCoachName';
   import { RouteCompteName } from '@/router/compte/routeCompteName';
-  import { RenvoyerCoteOTPUsecase } from '@/authentification/renvoyerCoteOTPUsecase';
 
   withDefaults(defineProps<{ premiereConnexion?: boolean }>(), {
     premiereConnexion: true,

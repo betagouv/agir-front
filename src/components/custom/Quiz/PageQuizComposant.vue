@@ -30,14 +30,14 @@
 
 <script setup lang="ts">
   import { ref } from 'vue';
-  import { QuizViewModel } from '@/quiz/adapters/chargementQuiz.presenter.impl';
-  import FilDAriane from '@/components/dsfr/FilDAriane.vue';
-  import { ArticleDuQuiz } from '@/quiz/ports/quizRepository';
   import QuizArticle from '@/components/custom/Quiz/QuizArticle.vue';
   import QuizQuestion from '@/components/custom/Quiz/QuizQuestion.vue';
-  import { EnvoyerDonneesQuizInteractionUsecase } from '@/quiz/envoyerDonneesQuizInteraction.usecase';
-  import { QuizRepositoryAxios } from '@/quiz/adapters/quizRepository.axios';
-  import { ToDoListEventBusImpl } from '@/toDoList/toDoListEventBusImpl';
+  import FilDAriane from '@/components/dsfr/FilDAriane.vue';
+  import { QuizViewModel } from '@/domaines/quiz/adapters/chargementQuiz.presenter.impl';
+  import { QuizRepositoryAxios } from '@/domaines/quiz/adapters/quizRepository.axios';
+  import { EnvoyerDonneesQuizInteractionUsecase } from '@/domaines/quiz/envoyerDonneesQuizInteraction.usecase';
+  import { ArticleDuQuiz } from '@/domaines/quiz/ports/quizRepository';
+  import { ToDoListEventBusImpl } from '@/domaines/toDoList/toDoListEventBusImpl';
 
   const props = defineProps<{
     quizViewModel: QuizViewModel;
@@ -54,7 +54,7 @@
     props.quizViewModel.question.reponsesPossibles.map(reponse => ({
       label: reponse,
       value: reponse,
-    }))
+    })),
   );
 
   const verifierLaReponse = async value => {
@@ -73,12 +73,12 @@
     if (!props.isModePrevisualisation) {
       await new EnvoyerDonneesQuizInteractionUsecase(
         new QuizRepositoryAxios(),
-        ToDoListEventBusImpl.getInstance()
+        ToDoListEventBusImpl.getInstance(),
       ).execute(
         props.idUtilisateur,
         props.idQuiz,
         estBienRepondu.value ? 100 : 0,
-        props.articleAssocie ? props.articleAssocie.id : null
+        props.articleAssocie ? props.articleAssocie.id : null,
       );
     }
   };

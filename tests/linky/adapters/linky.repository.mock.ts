@@ -1,5 +1,5 @@
-import { ConsommationElectrique, LinkyRepository } from '@/linky/ports/linkyRepository.repository';
-import { InformationCompteur } from '@/linky/obtenirInformationCompteur.usecase';
+import { ConsommationElectrique, LinkyRepository } from '@/domaines/linky/ports/linkyRepository.repository';
+import { InformationCompteur } from '@/domaines/linky/obtenirInformationCompteur.usecase';
 
 export class MockLinkyRepository implements LinkyRepository {
   constructor(private consommationElectrique: ConsommationElectrique) {}

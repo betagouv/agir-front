@@ -1,9 +1,9 @@
-import { CreerCompteUtilisateurUsecase } from '@/compte/creerCompteUtilisateur.usecase';
-import { Utilisateur } from '@/authentification/ports/utilisateur.repository';
-import { CompteUtilisateur, CompteUtilisateurRepository } from '@/compte/ports/compteUtilisateur.repository';
-import { OnboardingState } from '@/onboarding/evaluerOnboarding.usecase';
+import { CreerCompteUtilisateurUsecase } from '@/domaines/compte/creerCompteUtilisateur.usecase';
+import { Utilisateur } from '@/domaines/authentification/ports/utilisateur.repository';
+import { CompteUtilisateur, CompteUtilisateurRepository } from '@/domaines/compte/ports/compteUtilisateur.repository';
+import { OnboardingState } from '@/domaines/onboarding/evaluerOnboarding.usecase';
 import { SpySauvegarderUtilisateurSessionRepository } from './sessionRepository.sauvegarderUtilisateur.spy';
-import { CreerComptePresenterImpl } from '@/compte/adapters/creerComptePresenterImpl';
+import { CreerComptePresenterImpl } from '@/domaines/compte/adapters/creerComptePresenterImpl';
 import { RepositoryError } from '@/shell/repositoryError';
 
 class CompteUtilisateurForTest implements CompteUtilisateurRepository {

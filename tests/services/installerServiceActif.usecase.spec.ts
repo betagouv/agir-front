@@ -1,5 +1,5 @@
-import { InstallerServiceActifUsecase } from '@/services/installerServiceActif.usecase';
-import { ServiceEvent } from '@/services/serviceEventBusImpl';
+import { InstallerServiceActifUsecase } from '@/domaines/services/installerServiceActif.usecase';
+import { ServiceEvent } from '@/domaines/services/serviceEventBusImpl';
 import { SpyServiceRepository } from './adapters/service.repository.spy';
 import { ServiceEventBusSpy } from './serviceEventBusSpy';
 

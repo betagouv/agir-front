@@ -1,5 +1,5 @@
-import { ChargementCommunesUsecase } from '@/communes/chargementCommunesUsecase';
-import { CommuneRepository } from '@/communes/ports/communeRepository';
+import { ChargementCommunesUsecase } from '@/domaines/communes/chargementCommunesUsecase';
+import { CommuneRepository } from '@/domaines/communes/ports/communeRepository';
 
 class CommuneRepositoryForTest implements CommuneRepository {
   async getCommunes(codePostal: string): Promise<string[]> {

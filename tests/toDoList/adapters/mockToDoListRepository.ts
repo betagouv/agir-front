@@ -1,6 +1,6 @@
 import { InteractionType } from '@/shell/interactionType';
-import { ToDoListRepository } from '@/toDoList/ports/toDoList.repository';
-import { TodoList } from '@/toDoList/recupererToDoList.usecase';
+import { ToDoListRepository } from '@/domaines/toDoList/ports/toDoList.repository';
+import { TodoList } from '@/domaines/toDoList/recupererToDoList.usecase';
 
 export class MockToDoListRepository implements ToDoListRepository {
   async recupererPointsToDo(idUtilisateur: string, elementId: string): Promise<void> {

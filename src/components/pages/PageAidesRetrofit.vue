@@ -22,22 +22,22 @@
 
 <script setup lang="ts">
   import { ref } from 'vue';
-  import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import AidesResultat from '@/components/custom/Aides/AidesResultat.vue';
   import AsideAideRetrofit from '@/components/custom/Aides/AidesRetrofitAside.vue';
-  import { SimulationAideResultatViewModel } from '@/aides/ports/simulationAideResultat';
-  import SimulerAideRetrofitUsecase from '@/aides/simulerAideRetrofit.usecase';
-  import { SimulerAideRetrofitRepositoryAxios } from '@/aides/adapters/simulerAideRetrofit.repository.axios';
-  import { SimulerAideRetrofitPresenterImpl } from '@/aides/adapters/simulerAideRetrofit.presenter.impl';
-  import { RecupererInformationLogementUseCase } from '@/logement/recupererInformationLogement.usecase';
-  import { LogementRepositoryAxios } from '@/logement/adapters/logement.repository.axios';
-  import { utilisateurStore } from '@/store/utilisateur';
-  import { LogementPresenterImpl } from '@/logement/adapters/logement.presenter.impl';
+  import FilDAriane from '@/components/dsfr/FilDAriane.vue';
+  import { SimulerAideRetrofitPresenterImpl } from '@/domaines/aides/adapters/simulerAideRetrofit.presenter.impl';
+  import { SimulerAideRetrofitRepositoryAxios } from '@/domaines/aides/adapters/simulerAideRetrofit.repository.axios';
+  import { SimulationAideResultatViewModel } from '@/domaines/aides/ports/simulationAideResultat';
+  import SimulerAideRetrofitUsecase from '@/domaines/aides/simulerAideRetrofit.usecase';
+  import { LogementPresenterImpl } from '@/domaines/logement/adapters/logement.presenter.impl';
+  import { LogementRepositoryAxios } from '@/domaines/logement/adapters/logement.repository.axios';
+  import { RecupererInformationLogementUseCase } from '@/domaines/logement/recupererInformationLogement.usecase';
+  import { ProfileUtilisateurPresenterImpl } from '@/domaines/profileUtilisateur/adapters/profileUtilisateur.presenter.impl';
   import {
     ChargerProfileUtilisateurUsecase,
     ProfileUtilisateurRepositoryAxiosImpl,
-  } from '@/profileUtilisateur/chargerProfileUtilisateur.usecase';
-  import { ProfileUtilisateurPresenterImpl } from '@/profileUtilisateur/adapters/profileUtilisateur.presenter.impl';
+  } from '@/domaines/profileUtilisateur/chargerProfileUtilisateur.usecase';
+  import { utilisateurStore } from '@/store/utilisateur';
 
   const titrePage = 'Vos aides - Retrofit';
   const sousTitre = 'Vous pouvez bénéficier des aides Retrofit suivantes :';

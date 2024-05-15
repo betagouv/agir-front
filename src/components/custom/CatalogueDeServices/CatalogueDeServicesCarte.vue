@@ -50,16 +50,16 @@
 </template>
 
 <script setup lang="ts">
-  import { ServiceEventBusImpl } from '@/services/serviceEventBusImpl';
-  import { EnleverServiceActifUsecase } from '@/services/enleverServiceActif.usecase';
-  import { ServiceRepositoryAxios } from '@/services/adapters/service.repository.axios';
-  import { utilisateurStore } from '@/store/utilisateur';
-  import { InstallerServiceActifUsecase } from '@/services/installerServiceActif.usecase';
   import ModaleActions from '@/components/custom/Modale/ModaleActions';
-  import { ServiceCatalogueViewModelItem } from '@/services/adapters/serviceCatalogue.presenter.impl';
-  import { MarquerLeServiceCommeConsulteUsecase } from '@/linky/marquerLeServiceCommeConsulte.usecase';
-  import { LinkyRepositoryAxios } from '@/linky/adapters/linky.repository.axios';
-  import { ToDoListEventBusImpl } from '@/toDoList/toDoListEventBusImpl';
+  import { LinkyRepositoryAxios } from '@/domaines/linky/adapters/linky.repository.axios';
+  import { MarquerLeServiceCommeConsulteUsecase } from '@/domaines/linky/marquerLeServiceCommeConsulte.usecase';
+  import { ServiceRepositoryAxios } from '@/domaines/services/adapters/service.repository.axios';
+  import { ServiceCatalogueViewModelItem } from '@/domaines/services/adapters/serviceCatalogue.presenter.impl';
+  import { EnleverServiceActifUsecase } from '@/domaines/services/enleverServiceActif.usecase';
+  import { InstallerServiceActifUsecase } from '@/domaines/services/installerServiceActif.usecase';
+  import { ServiceEventBusImpl } from '@/domaines/services/serviceEventBusImpl';
+  import { ToDoListEventBusImpl } from '@/domaines/toDoList/toDoListEventBusImpl';
+  import { utilisateurStore } from '@/store/utilisateur';
   import '@gouvfr/dsfr/dist/component/badge/badge.min.css';
 
   const props = defineProps<{ service: ServiceCatalogueViewModelItem }>();

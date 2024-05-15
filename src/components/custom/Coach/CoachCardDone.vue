@@ -30,10 +30,10 @@
 
 <script setup lang="ts">
   import CoachCardTodoProgression from '@/components/custom/Coach/CoachCardTodoProgression.vue';
+  import { ToDoListRepositoryAxios } from '@/domaines/toDoList/adapters/toDoList.repository.axios';
+  import { RecupererPointsToDoUsecase } from '@/domaines/toDoList/recupererPointsToDo.usecase';
+  import { ToDoListEventBusImpl } from '@/domaines/toDoList/toDoListEventBusImpl';
   import { utilisateurStore } from '@/store/utilisateur';
-  import { ToDoListRepositoryAxios } from '@/toDoList/adapters/toDoList.repository.axios';
-  import { RecupererPointsToDoUsecase } from '@/toDoList/recupererPointsToDo.usecase';
-  import { ToDoListEventBusImpl } from '@/toDoList/toDoListEventBusImpl';
 
   const props = defineProps<{
     titre: string;

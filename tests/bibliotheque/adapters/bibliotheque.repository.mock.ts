@@ -1,4 +1,4 @@
-import { Bibliotheque, BibliothequeRepository } from '@/bibliotheque/ports/bibliotheque.repository';
+import { Bibliotheque, BibliothequeRepository } from '@/domaines/bibliotheque/ports/bibliotheque.repository';
 
 export class BibliothequeRepositoryMock implements BibliothequeRepository {
   chargerBibliotheque(_utilisateurId: string): Promise<Bibliotheque> {

@@ -1,7 +1,7 @@
-import { RecommandationPersonnaliseAEteCliqueeUsecase } from '@/recommandationsPersonnalisees/recommandationPersonnaliseAEteCliquee.usecase';
+import { RecommandationPersonnaliseAEteCliqueeUsecase } from '@/domaines/recommandationsPersonnalisees/recommandationPersonnaliseAEteCliquee.usecase';
 import { SpyToDoListEventBus } from '../toDoList/spyTodoListEventBus';
 import { expect } from 'vitest';
-import { ToDoListEvent } from '@/toDoList/toDoListEventBusImpl';
+import { ToDoListEvent } from '@/domaines/toDoList/toDoListEventBusImpl';
 import { SpyRecommandationsPersonnaliseesRepository } from './adapters/recommandationsPersonnalisees.repository.spy';
 
 describe('Fichier de tests concernant le clique sur les recommandations personnalisées', () => {
@@ -11,7 +11,7 @@ describe('Fichier de tests concernant le clique sur les recommandations personna
     const spyToDoListEventBus = new SpyToDoListEventBus();
     const usecase = new RecommandationPersonnaliseAEteCliqueeUsecase(
       spyRecommandationsPersonnaliseesRepository,
-      spyToDoListEventBus
+      spyToDoListEventBus,
     );
 
     // WHEN

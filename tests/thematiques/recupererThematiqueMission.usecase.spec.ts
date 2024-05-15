@@ -1,9 +1,9 @@
-import { RecupererMissionThematiqueUsecase } from '@/thematiques/recupererMissionThematiqueUsecase';
+import { RecupererMissionThematiqueUsecase } from '@/domaines/thematiques/recupererMissionThematiqueUsecase';
 import { ThematiqueRepositoryFake } from './adapters/recupererMissionThematique.repository.fake';
 import {
   MissionThematiquePresenterImpl,
   MissionThematiqueViewModel,
-} from '@/thematiques/adapters/missionThematique.presenter.impl';
+} from '@/domaines/thematiques/adapters/missionThematique.presenter.impl';
 import { expect } from 'vitest';
 
 describe("Fichier de tests concernant la récupération d'une mission pour une thématique", () => {

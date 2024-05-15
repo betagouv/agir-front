@@ -19,7 +19,7 @@
 </template>
 
 <script setup lang="ts">
-  import { DefiViewModel } from '@/defi/adapters/defi.presenter.impl';
+  import { DefiViewModel } from '@/domaines/defi/adapters/defi.presenter.impl';
   import { RouteCoachName } from '@/router/coach/routeCoachName';
 
   const props = defineProps<{ defi: DefiViewModel; reponse: string }>();

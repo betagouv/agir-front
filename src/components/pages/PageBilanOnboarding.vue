@@ -53,19 +53,19 @@
 
 <script setup lang="ts">
   import { ref } from 'vue';
-  import { onboardingStore } from '@/store/onboarding';
-  import { EvaluerOnboardingUsecase } from '@/onboarding/evaluerOnboarding.usecase';
-  import { OnboardingRepositoryAxios } from '@/onboarding/adapters/onboarding.repository.axios';
+
+  import BilanOnboardingEstimation from '@/components/custom/BilanOnboarding/BilanOnboardingEstimation.vue';
+  import BilanOnboardingPhrasesCoach from '@/components/custom/BilanOnboarding/BilanOnboardingPhrasesCoach.vue';
+  import BilanOnboardingStatFrance from '@/components/custom/BilanOnboarding/BilanOnboardingStatFrance.vue';
   import {
     OnboardingResultatPresenterImpl,
     OnboardingResultatViewModel,
-  } from '@/onboarding/adapters/onboarding.presenter.impl';
-
-  import BilanOnboardingEstimation from '@/components/custom/BilanOnboarding/BilanOnboardingEstimation.vue';
-  import BilanOnboardingStatFrance from '@/components/custom/BilanOnboarding/BilanOnboardingStatFrance.vue';
-  import BilanOnboardingPhrasesCoach from '@/components/custom/BilanOnboarding/BilanOnboardingPhrasesCoach.vue';
+  } from '@/domaines/onboarding/adapters/onboarding.presenter.impl';
+  import { OnboardingRepositoryAxios } from '@/domaines/onboarding/adapters/onboarding.repository.axios';
+  import { EvaluerOnboardingUsecase } from '@/domaines/onboarding/evaluerOnboarding.usecase';
 
   import { RouteCompteName } from '@/router/compte/routeCompteName';
+  import { onboardingStore } from '@/store/onboarding';
 
   const onBoardingStore = onboardingStore();
   let onboardingResultatViewModel = ref<OnboardingResultatViewModel>();
@@ -74,7 +74,7 @@
     onBoardingStore.$state,
     new OnboardingResultatPresenterImpl((resultat: OnboardingResultatViewModel) => {
       onboardingResultatViewModel.value = resultat;
-    })
+    }),
   );
 </script>
 

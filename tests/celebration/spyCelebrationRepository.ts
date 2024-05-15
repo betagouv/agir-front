@@ -1,4 +1,4 @@
-import { CelebrationRepository } from '@/celebration/ports/celebration.repository';
+import { CelebrationRepository } from '@/domaines/celebration/ports/celebration.repository';
 
 export class SpyCelebrationRepository implements CelebrationRepository {
   private _validerCelebrationAEteAppele: boolean = false;

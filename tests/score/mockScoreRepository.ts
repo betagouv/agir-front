@@ -1,4 +1,4 @@
-import { Score, ScoreRepository } from '@/score/ports/score.repository';
+import { Score, ScoreRepository } from '@/domaines/score/ports/score.repository';
 
 export class MockScoreRepository implements ScoreRepository {
   constructor(private celebrationMock: Score['celebration'] = null) {

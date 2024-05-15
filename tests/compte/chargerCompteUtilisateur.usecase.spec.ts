@@ -1,14 +1,14 @@
 import {
   CompteUtilisateurPresenterImpl,
   CompteUtlisateurViewModel,
-} from '@/compte/adapters/compteUtilisateur.presenter.impl';
-import { ChargerCompteUtilisateurUsecase } from '@/compte/chargerCompteUtilisateur.usecase';
+} from '@/domaines/compte/adapters/compteUtilisateur.presenter.impl';
+import { ChargerCompteUtilisateurUsecase } from '@/domaines/compte/chargerCompteUtilisateur.usecase';
 import {
   CompteUtilisateur,
   CompteUtilisateurACreer,
   CompteUtilisateurRepository,
-} from '@/compte/ports/compteUtilisateur.repository';
-import { Utilisateur } from '@/authentification/ports/utilisateur.repository';
+} from '@/domaines/compte/ports/compteUtilisateur.repository';
+import { Utilisateur } from '@/domaines/authentification/ports/utilisateur.repository';
 import { expect } from 'vitest';
 import { SpySauvegarderUtilisateurSessionRepository } from './sessionRepository.sauvegarderUtilisateur.spy';
 import { PublierEvenementRepositorySpy } from '../shell/publierEvenement.repository.spy';

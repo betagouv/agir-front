@@ -51,8 +51,8 @@
 <script setup lang="ts">
   import { ref } from 'vue';
   import Accordeon from '@/components/custom/Accordeon.vue';
-  import { AidesViewModel } from '@/aides/ports/chargementAides.presenter';
   import InputCheckbox from '@/components/dsfr/InputCheckbox.vue';
+  import { AidesViewModel } from '@/domaines/aides/ports/chargementAides.presenter';
   import { trackClick } from '@/shell/matomo';
 
   const props = defineProps<{

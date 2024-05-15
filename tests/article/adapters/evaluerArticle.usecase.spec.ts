@@ -1,4 +1,4 @@
-import { EvaluerArticleUsecase } from '../../../src/article/evaluerArticle.usecase';
+import { EvaluerArticleUsecase } from '../../../src/domaines/article/evaluerArticle.usecase';
 import { SpyArticleRepository } from './article.repository.spy';
 import { expect } from 'vitest';
 

@@ -1,5 +1,5 @@
 import { EventBus } from '@/shell/eventBus';
-import { ServiceEvent } from '@/services/serviceEventBusImpl';
+import { ServiceEvent } from '@/domaines/services/serviceEventBusImpl';
 
 export class ServiceEventBusSpy extends EventBus<ServiceEvent> {
   get eventName(): ServiceEvent | null {

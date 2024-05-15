@@ -1,5 +1,5 @@
-import { UniversRepository } from '../../../src/univers/ports/univers.repository';
-import { Univers } from '../../../src/univers/recupererListeUnivers.usecase';
+import { UniversRepository } from '@/domaines/univers/ports/univers.repository';
+import { Univers } from '@/domaines/univers/recupererListeUnivers.usecase';
 
 export class UniversRepositoryMock implements UniversRepository {
   recupererUnivers(idUtilisateur: string, universId: string): Promise<Univers> {

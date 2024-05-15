@@ -1,7 +1,7 @@
 import { expect } from 'vitest';
-import { PasserUnArticleCommeLuUsecase } from '@/article/passerUnArticleCommeLu.usecase';
+import { PasserUnArticleCommeLuUsecase } from '@/domaines/article/passerUnArticleCommeLu.usecase';
 import { SpyArticleRepository } from './adapters/article.repository.spy';
-import { ToDoListEvent } from '@/toDoList/toDoListEventBusImpl';
+import { ToDoListEvent } from '@/domaines/toDoList/toDoListEventBusImpl';
 import { SpyToDoListEventBus } from '../toDoList/spyTodoListEventBus';
 
 describe("Fichier de tests concernant le marquage d'un Article comme lu", () => {

@@ -9,7 +9,7 @@
 
 <script setup lang="ts">
   import { computed } from 'vue';
-  import { ArticleDuQuiz } from '@/quiz/ports/quizRepository';
+  import { ArticleDuQuiz } from '@/domaines/quiz/ports/quizRepository';
 
   const props = defineProps<{
     texteExplicationKO: string;

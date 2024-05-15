@@ -19,14 +19,14 @@
 </template>
 
 <script setup lang="ts">
-  import CompteSkeleton from '@/components/custom/Compte/CompteSkeleton.vue';
-  import { QuestionViewModel } from '@/kyc/ports/listeQuestions.presenter';
   import { ref } from 'vue';
-  import { RecupererListeQuestionsUsecase } from '@/kyc/recupererListeQuestions.usecase';
-  import { QuestionRepositoryAxios } from '@/kyc/adapters/question.repository.axios';
-  import { utilisateurStore } from '@/store/utilisateur';
-  import { ListeQuestionsPresenterImpl } from '@/kyc/adapters/listeQuestions.presenter.impl';
+  import CompteSkeleton from '@/components/custom/Compte/CompteSkeleton.vue';
+  import { ListeQuestionsPresenterImpl } from '@/domaines/kyc/adapters/listeQuestions.presenter.impl';
+  import { QuestionRepositoryAxios } from '@/domaines/kyc/adapters/question.repository.axios';
+  import { QuestionViewModel } from '@/domaines/kyc/ports/listeQuestions.presenter';
+  import { RecupererListeQuestionsUsecase } from '@/domaines/kyc/recupererListeQuestions.usecase';
   import { RouteKycName } from '@/router/kyc/routes';
+  import { utilisateurStore } from '@/store/utilisateur';
 
   const questionsViewModel = ref<QuestionViewModel[]>([]);
 
@@ -34,6 +34,6 @@
     utilisateurStore().utilisateur.id,
     new ListeQuestionsPresenterImpl(questions => {
       questionsViewModel.value = questions;
-    })
+    }),
   );
 </script>

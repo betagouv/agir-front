@@ -18,13 +18,13 @@
 </template>
 
 <script setup lang="ts">
-  import InputPassword from '@/components/custom/InputPassword.vue';
   import { ref } from 'vue';
-  import { ChangerMotDePasseDepuisLeCompteUsecase } from '@/compte/changerMotDePasseDepuisLeCompte.usecase';
   import Alert from '@/components/custom/Alert.vue';
+  import InputPassword from '@/components/custom/InputPassword.vue';
   import { useAlerte } from '@/composables/useAlerte';
+  import { CompteUtilisateurRepositoryImpl } from '@/domaines/compte/adapters/compteUtilisateur.repository.impl';
+  import { ChangerMotDePasseDepuisLeCompteUsecase } from '@/domaines/compte/changerMotDePasseDepuisLeCompte.usecase';
   import { utilisateurStore } from '@/store/utilisateur';
-  import { CompteUtilisateurRepositoryImpl } from '@/compte/adapters/compteUtilisateur.repository.impl';
 
   const motDePasse = ref('');
   const formulaireValide = ref(false);

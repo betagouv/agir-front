@@ -1,5 +1,5 @@
-import { LogementRepository } from '../../../src/logement/ports/logement.repository';
-import { Logement } from '../../../src/logement/recupererInformationLogement.usecase';
+import { LogementRepository } from '@/domaines/logement/ports/logement.repository';
+import { Logement } from '@/domaines/logement/recupererInformationLogement.usecase';
 
 export class MockLogementRepository implements LogementRepository {
   constructor(private logement: Logement) {}

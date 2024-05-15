@@ -1,7 +1,7 @@
-import { SimulerAideRetrofitRepository } from '../../src/aides/ports/simulerAideRetrofit.repository';
-import { SimulerAideRetrofitPresenterImpl } from '../../src/aides/adapters/simulerAideRetrofit.presenter.impl';
-import SimulerAideRetrofitUsecase, { SimulationRetrofit } from '../../src/aides/simulerAideRetrofit.usecase';
-import { SimulationAideResultatViewModel } from '../../src/aides/ports/simulationAideResultat';
+import { SimulerAideRetrofitRepository } from '@/domaines/aides/ports/simulerAideRetrofit.repository';
+import { SimulerAideRetrofitPresenterImpl } from '@/domaines/aides/adapters/simulerAideRetrofit.presenter.impl';
+import SimulerAideRetrofitUsecase, { SimulationRetrofit } from '@/domaines/aides/simulerAideRetrofit.usecase';
+import { SimulationAideResultatViewModel } from '@/domaines/aides/ports/simulationAideResultat';
 
 class SimulerAideRetrofitRepositoryForTest implements SimulerAideRetrofitRepository {
   getSimulation(codePostal: string, revenuFiscalDeReference: string): Promise<SimulationRetrofit> {

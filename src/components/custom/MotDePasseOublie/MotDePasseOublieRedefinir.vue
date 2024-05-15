@@ -28,14 +28,14 @@
 
 <script setup lang="ts">
   import { ref } from 'vue';
+  import Alert from '@/components/custom/Alert.vue';
   import InputPassword from '@/components/custom/InputPassword.vue';
   import InputText from '@/components/dsfr/InputText.vue';
-  import { UtilisateurRepositoryAxios } from '@/authentification/adapters/utilisateur.repository.axios';
-  import { TerminerRedefinirMotDePasseUsecase } from '@/authentification/terminerRedefinirMotDePasse.usecase';
-  import router, { RouteCommuneName } from '@/router';
-  import Alert from '@/components/custom/Alert.vue';
-  import { CommencerRedefinirMotDePasseUsecase } from '@/authentification/commencerRedefinirMotDePasse.usecase';
   import { useAlerte } from '@/composables/useAlerte';
+  import { UtilisateurRepositoryAxios } from '@/domaines/authentification/adapters/utilisateur.repository.axios';
+  import { CommencerRedefinirMotDePasseUsecase } from '@/domaines/authentification/commencerRedefinirMotDePasse.usecase';
+  import { TerminerRedefinirMotDePasseUsecase } from '@/domaines/authentification/terminerRedefinirMotDePasse.usecase';
+  import router, { RouteCommuneName } from '@/router';
 
   const props = defineProps<{ email: string }>();
   const code = ref<string>('');

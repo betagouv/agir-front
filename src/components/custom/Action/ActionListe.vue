@@ -13,7 +13,7 @@
 
 <script setup lang="ts">
   import ActionCard from '@/components/custom/Action/ActionCard.vue';
-  import { DefiDescriptionViewModel } from '@/defi/adapters/listeDefisDescription.presenter.impl';
+  import { DefiDescriptionViewModel } from '@/domaines/defi/adapters/listeDefisDescription.presenter.impl';
   import { RouteCompteName } from '@/router/compte/routeCompteName';
 
   defineProps<{ defis: DefiDescriptionViewModel[] }>();

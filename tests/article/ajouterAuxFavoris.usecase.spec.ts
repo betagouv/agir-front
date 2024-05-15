@@ -1,4 +1,4 @@
-import { AjouterAuxFavorisUsecase } from '@/article/ajouterAuxFavoris.usecase';
+import { AjouterAuxFavorisUsecase } from '@/domaines/article/ajouterAuxFavoris.usecase';
 import { SpyArticleRepository } from './adapters/article.repository.spy';
 
 describe('Fichier de tests pour ajouter un article aux favoris', () => {

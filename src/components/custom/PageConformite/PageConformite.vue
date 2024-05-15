@@ -7,12 +7,12 @@
 <script setup lang="ts">
   import '@gouvfr/dsfr/dist/component/table/table.min.css';
   import { onMounted, ref } from 'vue';
-  import { ConformiteRepositoryCms } from '@/conformites/adapters/conformite.repository.cms';
+  import { ConformiteRepositoryCms } from '@/domaines/conformites/adapters/conformite.repository.cms';
   import {
     PageConformite,
     PageConformiteType,
     RecupererPageConformiteUsecase,
-  } from '@/conformites/recupererPageConformite.usecase';
+  } from '@/domaines/conformites/recupererPageConformite.usecase';
 
   const props = defineProps<{ type: PageConformiteType }>();
   const contenuDeLaPage = ref<PageConformite | null>();

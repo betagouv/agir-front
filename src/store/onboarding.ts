@@ -5,7 +5,7 @@ import {
   EtapeLogement,
   EtapeTransportState,
   OnboardingState,
-} from '@/onboarding/evaluerOnboarding.usecase';
+} from '@/domaines/onboarding/evaluerOnboarding.usecase';
 
 export const onboardingStore = defineStore('onboarding', {
   state: (): OnboardingState => ({

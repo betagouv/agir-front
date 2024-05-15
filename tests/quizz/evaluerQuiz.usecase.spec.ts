@@ -1,5 +1,5 @@
 import { expect } from 'vitest';
-import { EvaluerQuizUsecase } from '@/quiz/evaluerQuiz.usecase';
+import { EvaluerQuizUsecase } from '@/domaines/quiz/evaluerQuiz.usecase';
 import { SpyQuizRepository } from './adapters/spyQuizRepository';
 
 describe("Fichier de test concernant l'évaluation d'un quiz", () => {

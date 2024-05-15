@@ -37,9 +37,9 @@
   import {
     MissionThematiquePresenterImpl,
     MissionThematiqueViewModel,
-  } from '@/thematiques/adapters/missionThematique.presenter.impl';
-  import { ThematiqueRepositoryInMemory } from '@/thematiques/adapters/thematique.repository.inmemory';
-  import { RecupererMissionThematiqueUsecase } from '@/thematiques/recupererMissionThematiqueUsecase';
+  } from '@/domaines/thematiques/adapters/missionThematique.presenter.impl';
+  import { ThematiqueRepositoryInMemory } from '@/domaines/thematiques/adapters/thematique.repository.inmemory';
+  import { RecupererMissionThematiqueUsecase } from '@/domaines/thematiques/recupererMissionThematiqueUsecase';
 
   const mission = ref<MissionThematiqueViewModel>();
 

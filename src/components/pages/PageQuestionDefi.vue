@@ -66,12 +66,12 @@
   import CarteInfo from '@/components/custom/CarteInfo.vue';
   import DefiFin from '@/components/custom/Defi/DefiFin.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
-  import { DefiPresenterImpl, DefiViewModel, ReponsePossible } from '@/defi/adapters/defi.presenter.impl';
-  import { DefiRepositoryAxios } from '@/defi/adapters/defi.repository.axios';
-  import { EnvoyerReponseDefiUsecase } from '@/defi/envoyerReponseDefi.usecase';
-  import { RecupererDefiUsecase } from '@/defi/recupererDefiUsecase';
+  import { DefiPresenterImpl, DefiViewModel, ReponsePossible } from '@/domaines/defi/adapters/defi.presenter.impl';
+  import { DefiRepositoryAxios } from '@/domaines/defi/adapters/defi.repository.axios';
+  import { EnvoyerReponseDefiUsecase } from '@/domaines/defi/envoyerReponseDefi.usecase';
+  import { RecupererDefiUsecase } from '@/domaines/defi/recupererDefiUsecase';
+  import { ToDoListEventBusImpl } from '@/domaines/toDoList/toDoListEventBusImpl';
   import { utilisateurStore } from '@/store/utilisateur';
-  import { ToDoListEventBusImpl } from '@/toDoList/toDoListEventBusImpl';
 
   const route = useRoute();
   const questionId = Array.isArray(route.params.id) ? route.params.id[0] : route.params.id;

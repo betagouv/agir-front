@@ -1,5 +1,5 @@
-import { Logement } from '../../../src/logement/recupererInformationLogement.usecase';
-import { LogementRepository } from '../../../src/logement/ports/logement.repository';
+import { Logement } from '@/domaines/logement/recupererInformationLogement.usecase';
+import { LogementRepository } from '@/domaines/logement/ports/logement.repository';
 
 export class LogementRepositorySpy implements LogementRepository {
   private _enregistrerLesInformationsAEteAppele: boolean = false;

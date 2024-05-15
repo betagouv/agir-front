@@ -52,16 +52,16 @@
 
 <script setup lang="ts">
   import { ref } from 'vue';
-  import { SessionRepositoryStore } from '@/authentification/adapters/session.repository.store';
   import Alert from '@/components/custom/Alert.vue';
   import CarteInfo from '@/components/custom/CarteInfo.vue';
   import InputTrancheDeRevenu from '@/components/custom/InputTrancheDeRevenu.vue';
   import InputMail from '@/components/dsfr/InputMail.vue';
   import InputText from '@/components/dsfr/InputText.vue';
   import { useAlerte } from '@/composables/useAlerte';
-  import { ProfileUtilisateurViewModel } from '@/profileUtilisateur/adapters/profileUtilisateur.presenter.impl';
-  import { ProfileUtilisateurRepositoryAxiosImpl } from '@/profileUtilisateur/chargerProfileUtilisateur.usecase';
-  import { MettreAJourProfileUtilisateurUsecase } from '@/profileUtilisateur/mettreAJourProfileUtilisateurUsecase';
+  import { SessionRepositoryStore } from '@/domaines/authentification/adapters/session.repository.store';
+  import { ProfileUtilisateurViewModel } from '@/domaines/profileUtilisateur/adapters/profileUtilisateur.presenter.impl';
+  import { ProfileUtilisateurRepositoryAxiosImpl } from '@/domaines/profileUtilisateur/chargerProfileUtilisateur.usecase';
+  import { MettreAJourProfileUtilisateurUsecase } from '@/domaines/profileUtilisateur/mettreAJourProfileUtilisateurUsecase';
 
   const props = defineProps<{
     compteUtlisateurViewModel: ProfileUtilisateurViewModel;

@@ -1,4 +1,4 @@
-import { ServiceApiModel } from '@/services/adapters/service.repository.axios';
+import { ServiceApiModel } from '@/domaines/services/adapters/service.repository.axios';
 
 export class InjectService {
   public avecServices(services: ServiceApiModel[]) {

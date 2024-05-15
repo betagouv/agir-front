@@ -1,5 +1,9 @@
-import { IdUtilisateur, Utilisateur, UtilisateurRepository } from '@/authentification/ports/utilisateur.repository';
-import { TerminerRedefinirMotDePasseUsecase } from '@/authentification/terminerRedefinirMotDePasse.usecase';
+import {
+  IdUtilisateur,
+  Utilisateur,
+  UtilisateurRepository,
+} from '@/domaines/authentification/ports/utilisateur.repository';
+import { TerminerRedefinirMotDePasseUsecase } from '@/domaines/authentification/terminerRedefinirMotDePasse.usecase';
 
 class SpyUtilisateurRepository implements UtilisateurRepository {
   private _code: string = '';

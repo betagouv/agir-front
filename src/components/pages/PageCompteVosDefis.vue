@@ -48,10 +48,10 @@
 <script setup lang="ts">
   import { ref } from 'vue';
   import CompteSkeleton from '@/components/custom/Compte/CompteSkeleton.vue';
-  import { DefiRepositoryAxios } from '@/defi/adapters/defi.repository.axios';
-  import { ListeDefisPresenterImpl } from '@/defi/adapters/listeDefis.presenter.impl';
-  import { DefisQuestionViewModel } from '@/defi/ports/listeDefis.presenter';
-  import { RecupererListeDefisUsecase } from '@/defi/recupererListeDefis.usecase';
+  import { DefiRepositoryAxios } from '@/domaines/defi/adapters/defi.repository.axios';
+  import { ListeDefisPresenterImpl } from '@/domaines/defi/adapters/listeDefis.presenter.impl';
+  import { DefisQuestionViewModel } from '@/domaines/defi/ports/listeDefis.presenter';
+  import { RecupererListeDefisUsecase } from '@/domaines/defi/recupererListeDefis.usecase';
   import { RouteDefiName } from '@/router/defis/routes';
   import { utilisateurStore } from '@/store/utilisateur';
 

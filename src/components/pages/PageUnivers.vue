@@ -56,27 +56,30 @@
   import CoachRecommandations from '@/components/custom/Coach/CoachRecommandations.vue';
   import UniversList from '@/components/custom/Thematiques/ThematiquesListe.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
-  import { DefiRepositoryAxios } from '@/defi/adapters/defi.repository.axios';
+  import { DefiRepositoryAxios } from '@/domaines/defi/adapters/defi.repository.axios';
   import {
     DefiDescriptionViewModel,
     ListeDefisDescriptionPresenterImpl,
-  } from '@/defi/adapters/listeDefisDescription.presenter.impl';
-  import { RecupererListeDefisParUniversUsecase } from '@/defi/recupererListeDefisParUnivers.usecase';
+  } from '@/domaines/defi/adapters/listeDefisDescription.presenter.impl';
+  import { RecupererListeDefisParUniversUsecase } from '@/domaines/defi/recupererListeDefisParUnivers.usecase';
   import {
     RecommandationPersonnaliseeViewModel,
     RecommandationsPersonnaliseesPresenterImpl,
-  } from '@/recommandationsPersonnalisees/adapters/recommandationsPersonnalisees.presenter.impl';
-  import { RecommandationsPersonnaliseesRepositoryAxios } from '@/recommandationsPersonnalisees/adapters/recommandationsPersonnalisees.repository.axios';
-  import { RecupererRecommandationsPersonnaliseesUniversUsecase } from '@/recommandationsPersonnalisees/recupererRecommandationsPersonnaliseesUnivers.usecase';
+  } from '@/domaines/recommandationsPersonnalisees/adapters/recommandationsPersonnalisees.presenter.impl';
+  import { RecommandationsPersonnaliseesRepositoryAxios } from '@/domaines/recommandationsPersonnalisees/adapters/recommandationsPersonnalisees.repository.axios';
+  import { RecupererRecommandationsPersonnaliseesUniversUsecase } from '@/domaines/recommandationsPersonnalisees/recupererRecommandationsPersonnaliseesUnivers.usecase';
+  import { ThematiqueRepositoryAxios } from '@/domaines/thematiques/adapters/thematique.repository.axios';
+  import {
+    ThematiquesPresenterImpl,
+    ThematiqueViewModel,
+  } from '@/domaines/thematiques/adapters/thematiques.presenter.impl';
+  import { RecupererThematiquesUniversUsecase } from '@/domaines/thematiques/recupererThematiquesUnivers.usecase';
+  import { UniversViewModel } from '@/domaines/univers/adapters/listeUnivers.presenter.impl';
+  import { UniversPresenterImpl } from '@/domaines/univers/adapters/univers.presenter.impl';
+  import { UniversRepositoryAxios } from '@/domaines/univers/adapters/univers.repository.axios';
+  import { RecupererUniversUsecase } from '@/domaines/univers/recupererUnivers.usecase';
   import { Fonctionnalites } from '@/shell/fonctionnalitesEnum';
   import { utilisateurStore } from '@/store/utilisateur';
-  import { ThematiqueRepositoryAxios } from '@/thematiques/adapters/thematique.repository.axios';
-  import { ThematiquesPresenterImpl, ThematiqueViewModel } from '@/thematiques/adapters/thematiques.presenter.impl';
-  import { RecupererThematiquesUniversUsecase } from '@/thematiques/recupererThematiquesUnivers.usecase';
-  import { UniversViewModel } from '@/univers/adapters/listeUnivers.presenter.impl';
-  import { UniversPresenterImpl } from '@/univers/adapters/univers.presenter.impl';
-  import { UniversRepositoryAxios } from '@/univers/adapters/univers.repository.axios';
-  import { RecupererUniversUsecase } from '@/univers/recupererUnivers.usecase';
 
   const store = utilisateurStore();
   const route = useRoute();

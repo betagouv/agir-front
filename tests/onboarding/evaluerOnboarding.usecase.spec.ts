@@ -2,12 +2,12 @@ import {
   EvaluerOnboardingUsecase,
   OnboardingResultat,
   OnboardingState,
-} from '../../src/onboarding/evaluerOnboarding.usecase';
-import { OnboardingRepository } from '../../src/onboarding/ports/onboardingRepository';
+} from '@/domaines/onboarding/evaluerOnboarding.usecase';
+import { OnboardingRepository } from '@/domaines/onboarding/ports/onboardingRepository';
 import {
   OnboardingResultatPresenterImpl,
   OnboardingResultatViewModel,
-} from '../../src/onboarding/adapters/onboarding.presenter.impl';
+} from '@/domaines/onboarding/adapters/onboarding.presenter.impl';
 
 class OnboardingRespoitoryForTest implements OnboardingRepository {
   envoyer(onboarding: OnboardingState): Promise<OnboardingResultat> {
@@ -90,7 +90,7 @@ describe("Fichier de tests concernant l'evaluation de l'onboarding", () => {
             valeur: 1,
           },
         ]);
-      })
+      }),
     );
   });
 
@@ -145,7 +145,7 @@ describe("Fichier de tests concernant l'evaluation de l'onboarding", () => {
             phrase: 'phrase 4',
           },
         ]);
-      })
+      }),
     );
   });
 });

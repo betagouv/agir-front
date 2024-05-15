@@ -65,19 +65,19 @@
 </template>
 
 <script setup lang="ts">
+  import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js';
   import { onMounted, ref } from 'vue';
   import { Bar } from 'vue-chartjs';
   import ControleSegmente from '@/components/dsfr/ControleSegmente.vue';
-  import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js';
-  import { ObtenirConsommationElectriqueAnnuelleUsecase } from '@/linky/obtenirConsommationElectriqueAnnuelle.usecase';
-  import { LinkyRepositoryAxios } from '@/linky/adapters/linky.repository.axios';
-  import { utilisateurStore } from '@/store/utilisateur';
-  import { LinkyPresenterAnnuelleImpl } from '@/linky/adapters/linkyAnnuelle.presenter.impl';
-  import { ConsommationElectriqueViewModel } from '@/linky/ports/linky.presenter';
-  import { ObtenirConsommationElectriqueQuatorzeJoursUsecase } from '@/linky/obtenirConsommationElectriqueQuatorzeJours.usecase';
-  import { LinkyPresenterQuatorzeJoursImpl } from '@/linky/adapters/linkyQuatorzeJours.presenter.impl';
-  import Transcription from '@/components/dsfr/Transcription.vue';
   import Table from '@/components/dsfr/Table.vue';
+  import Transcription from '@/components/dsfr/Transcription.vue';
+  import { LinkyRepositoryAxios } from '@/domaines/linky/adapters/linky.repository.axios';
+  import { LinkyPresenterAnnuelleImpl } from '@/domaines/linky/adapters/linkyAnnuelle.presenter.impl';
+  import { LinkyPresenterQuatorzeJoursImpl } from '@/domaines/linky/adapters/linkyQuatorzeJours.presenter.impl';
+  import { ObtenirConsommationElectriqueAnnuelleUsecase } from '@/domaines/linky/obtenirConsommationElectriqueAnnuelle.usecase';
+  import { ObtenirConsommationElectriqueQuatorzeJoursUsecase } from '@/domaines/linky/obtenirConsommationElectriqueQuatorzeJours.usecase';
+  import { ConsommationElectriqueViewModel } from '@/domaines/linky/ports/linky.presenter';
+  import { utilisateurStore } from '@/store/utilisateur';
 
   ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale);
 

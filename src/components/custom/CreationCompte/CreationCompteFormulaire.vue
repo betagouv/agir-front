@@ -67,15 +67,15 @@
 
 <script setup lang="ts">
   import { ref } from 'vue';
-  import { SessionRepositoryStore } from '@/authentification/adapters/session.repository.store';
   import Alert from '@/components/custom/Alert.vue';
   import InputPassword from '@/components/custom/InputPassword.vue';
   import InputCheckboxUnitaire from '@/components/dsfr/InputCheckboxUnitaire.vue';
   import InputMail from '@/components/dsfr/InputMail.vue';
   import InputText from '@/components/dsfr/InputText.vue';
-  import { CompteUtilisateurRepositoryImpl } from '@/compte/adapters/compteUtilisateur.repository.impl';
-  import { CreerComptePresenterImpl } from '@/compte/adapters/creerComptePresenterImpl';
-  import { CreerCompteUtilisateurUsecase, UserInput } from '@/compte/creerCompteUtilisateur.usecase';
+  import { SessionRepositoryStore } from '@/domaines/authentification/adapters/session.repository.store';
+  import { CompteUtilisateurRepositoryImpl } from '@/domaines/compte/adapters/compteUtilisateur.repository.impl';
+  import { CreerComptePresenterImpl } from '@/domaines/compte/adapters/creerComptePresenterImpl';
+  import { CreerCompteUtilisateurUsecase, UserInput } from '@/domaines/compte/creerCompteUtilisateur.usecase';
   import router, { RouteCommuneName } from '@/router';
   import { RouteConformiteName } from '@/router/conformite/routes';
   import { onboardingStore } from '@/store/onboarding';

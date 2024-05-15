@@ -1,5 +1,5 @@
 import { SpyArticleRepository } from './adapters/article.repository.spy';
-import { RetirerDesFavorisUsecase } from '@/article/retirerDesFavoris.usecase';
+import { RetirerDesFavorisUsecase } from '@/domaines/article/retirerDesFavoris.usecase';
 
 describe('Fichier de tests pour retirer un article des favoris', () => {
   it('Doit appeler le repository', async () => {

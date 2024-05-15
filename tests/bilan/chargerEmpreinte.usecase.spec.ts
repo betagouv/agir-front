@@ -1,9 +1,9 @@
 import {
   ChargementEmpreintePresenterImpl,
   EmpreinteViewModel,
-} from '../../src/bilan/adapters/chargementEmpreinte.presenter.impl';
-import { ChargementEmpreinteUsecase } from '../../src/bilan/chargementEmpreinte.usecase';
-import { Empreinte, EmpreinteRepository } from '../../src/bilan/ports/empreinteRepository';
+} from '@/domaines/bilan/adapters/chargementEmpreinte.presenter.impl';
+import { ChargementEmpreinteUsecase } from '@/domaines/bilan/chargementEmpreinte.usecase';
+import { Empreinte, EmpreinteRepository } from '@/domaines/bilan/ports/empreinteRepository';
 
 class EmpreinteRepositoryForTest implements EmpreinteRepository {
   importerSituationNGC(idNGC: string, utilisateurId: string): Promise<boolean> {

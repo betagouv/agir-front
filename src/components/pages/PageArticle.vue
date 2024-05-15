@@ -2,15 +2,15 @@
   <PageArticleComposant :article="articleAAfficher" @update:article-modifie="onArticleModifie"> </PageArticleComposant>
 </template>
 <script setup lang="ts">
-  import PageArticleComposant from '@/components/PageArticleComposant.vue';
-  import { useRoute, useRouter } from 'vue-router';
   import { onMounted, ref } from 'vue';
-  import { utilisateurStore } from '@/store/utilisateur';
-  import { Article, RecupererArticleUsecase } from '@/article/recupererArticle.usecase';
-  import { ArticleRepositoryAxios } from '@/article/adapters/article.repository.axios';
-  import { PasserUnArticleCommeLuUsecase } from '@/article/passerUnArticleCommeLu.usecase';
-  import { ToDoListEventBusImpl } from '@/toDoList/toDoListEventBusImpl';
+  import { useRoute, useRouter } from 'vue-router';
+  import PageArticleComposant from '@/components/PageArticleComposant.vue';
+  import { ArticleRepositoryAxios } from '@/domaines/article/adapters/article.repository.axios';
+  import { PasserUnArticleCommeLuUsecase } from '@/domaines/article/passerUnArticleCommeLu.usecase';
+  import { Article, RecupererArticleUsecase } from '@/domaines/article/recupererArticle.usecase';
+  import { ToDoListEventBusImpl } from '@/domaines/toDoList/toDoListEventBusImpl';
   import { RouteCommuneName } from '@/router';
+  import { utilisateurStore } from '@/store/utilisateur';
 
   const router = useRouter();
 
@@ -41,7 +41,7 @@
         articleAAfficher.value = article;
         await new PasserUnArticleCommeLuUsecase(articleRepositoryAxios, ToDoListEventBusImpl.getInstance()).execute(
           idArticle,
-          utilisateurId
+          utilisateurId,
         );
       })
       .catch(async () => {

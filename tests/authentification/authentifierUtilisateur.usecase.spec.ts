@@ -1,5 +1,12 @@
-import { AuthentifierUtilisateurUsecase, SessionRepository } from '@/authentification/authentifierUtilisateur.usecase';
-import { IdUtilisateur, Utilisateur, UtilisateurRepository } from '@/authentification/ports/utilisateur.repository';
+import {
+  AuthentifierUtilisateurUsecase,
+  SessionRepository,
+} from '@/domaines/authentification/authentifierUtilisateur.usecase';
+import {
+  IdUtilisateur,
+  Utilisateur,
+  UtilisateurRepository,
+} from '@/domaines/authentification/ports/utilisateur.repository';
 import { SpySauvegarderUtilisateurSessionRepository } from '../compte/sessionRepository.sauvegarderUtilisateur.spy';
 
 class UtilisateurRepositoryForTest implements UtilisateurRepository {

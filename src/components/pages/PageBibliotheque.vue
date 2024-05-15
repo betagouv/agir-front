@@ -36,15 +36,15 @@
 
 <script setup lang="ts">
   import { onMounted, ref } from 'vue';
-  import FilDAriane from '@/components/dsfr/FilDAriane.vue';
-  import BibliothequeFiltres from '@/components/custom/Bibliotheque/BibliothequeFiltres.vue';
   import BibliothequeCard from '@/components/custom/Bibliotheque/BibliothequeCard.vue';
+  import BibliothequeFiltres from '@/components/custom/Bibliotheque/BibliothequeFiltres.vue';
+  import FilDAriane from '@/components/dsfr/FilDAriane.vue';
+  import { BibliothequePresenterImpl } from '@/domaines/bibliotheque/adapters/bibliotheque.presenter.impl';
+  import { BibliothequeRepositoryAxios } from '@/domaines/bibliotheque/adapters/bibliotheque.repository.axios';
+  import { ChargerBibliothequeUsecase } from '@/domaines/bibliotheque/chargerBibliotheque.usecase';
+  import { FiltrerBibliothequeUsecase } from '@/domaines/bibliotheque/filtrerBibliotheque.usecase';
+  import { BibliothequeViewModel } from '@/domaines/bibliotheque/ports/bibliotheque.presenter';
   import { utilisateurStore } from '@/store/utilisateur';
-  import { ChargerBibliothequeUsecase } from '@/bibliotheque/chargerBibliotheque.usecase';
-  import { BibliothequeRepositoryAxios } from '@/bibliotheque/adapters/bibliotheque.repository.axios';
-  import { BibliothequePresenterImpl } from '@/bibliotheque/adapters/bibliotheque.presenter.impl';
-  import { BibliothequeViewModel } from '@/bibliotheque/ports/bibliotheque.presenter';
-  import { FiltrerBibliothequeUsecase } from '@/bibliotheque/filtrerBibliotheque.usecase';
 
   const { id: utilisateurId } = utilisateurStore().utilisateur;
 

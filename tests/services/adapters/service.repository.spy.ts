@@ -1,6 +1,6 @@
-import { ServiceRepository } from '@/services/ports/service.repository';
-import { ServiceCatalogue } from '@/services/recupererCatalogueServices.usecase';
-import { Service } from '@/services/recupererServiceActifs.usecase';
+import { ServiceRepository } from '@/domaines/services/ports/service.repository';
+import { ServiceCatalogue } from '@/domaines/services/recupererCatalogueServices.usecase';
+import { Service } from '@/domaines/services/recupererServiceActifs.usecase';
 
 export class SpyServiceRepository implements ServiceRepository {
   private _installerServiceActifAEteAppele: boolean = false;

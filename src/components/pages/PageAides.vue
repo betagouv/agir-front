@@ -9,14 +9,14 @@
 
 <script setup lang="ts">
   import { onMounted, ref } from 'vue';
-  import FilDAriane from '@/components/dsfr/FilDAriane.vue';
-  import { ChargementAidesPresenterImpl } from '@/aides/adapters/chargementAides.presenter.impl';
-  import { chargementAidesAxiosRepository } from '@/aides/adapters/chargementAidesAxiosRepository';
-  import ChargementAidesUsecase from '@/aides/chargementAides.usecase';
-  import { AidesViewModel } from '@/aides/ports/chargementAides.presenter';
   import Aides from '@/components/custom/Aides/Aides.vue';
-  import { utilisateurStore } from '@/store/utilisateur';
+  import FilDAriane from '@/components/dsfr/FilDAriane.vue';
+  import { ChargementAidesPresenterImpl } from '@/domaines/aides/adapters/chargementAides.presenter.impl';
+  import { chargementAidesAxiosRepository } from '@/domaines/aides/adapters/chargementAidesAxiosRepository';
+  import ChargementAidesUsecase from '@/domaines/aides/chargementAides.usecase';
+  import { AidesViewModel } from '@/domaines/aides/ports/chargementAides.presenter';
   import { PublierEvenemntRepositoryAxios } from '@/shell/adapters/publierEvenemnt.repository.axios';
+  import { utilisateurStore } from '@/store/utilisateur';
 
   const aides = ref<AidesViewModel>();
   const isLoading = ref<boolean>(true);

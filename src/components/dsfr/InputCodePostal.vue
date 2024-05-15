@@ -51,8 +51,8 @@
 
 <script setup lang="ts">
   import '@gouvfr/dsfr/dist/component/select/select.min.css';
-  import { ChargementCommunesUsecase } from '@/communes/chargementCommunesUsecase';
-  import { CommuneRepositoryAxios } from '@/communes/adapters/communeRepositoryAxios';
+  import { ChargementCommunesUsecase } from '@/domaines/communes/chargementCommunesUsecase';
+  import { CommuneRepositoryAxios } from '@/domaines/communes/adapters/communeRepositoryAxios';
   import { onMounted, ref } from 'vue';
 
   const props = defineProps<{

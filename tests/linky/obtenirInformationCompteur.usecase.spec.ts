@@ -1,7 +1,7 @@
-import { ObtenirInformationCompteurUsecase } from '@/linky/obtenirInformationCompteur.usecase';
-import { InformationCompteurViewModel } from '@/linky/ports/linky.information.presenter';
+import { ObtenirInformationCompteurUsecase } from '@/domaines/linky/obtenirInformationCompteur.usecase';
+import { InformationCompteurViewModel } from '@/domaines/linky/ports/linky.information.presenter';
 import { MockLinkyInformationRepository } from './adapters/linkyInformation.repository.mock';
-import { LinkyPresenterInformationImpl } from '@/linky/adapters/linkyInformation.presenter.impl';
+import { LinkyPresenterInformationImpl } from '@/domaines/linky/adapters/linkyInformation.presenter.impl';
 
 describe('Fichier de test du usecase du chargement informations du compteur', () => {
   describe("quand l'utilisateur n'a pas encore configuré son service", () => {

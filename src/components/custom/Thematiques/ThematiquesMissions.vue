@@ -24,7 +24,7 @@
 <script setup lang="ts">
   import CoachCardDone from '@/components/custom/Coach/CoachCardDone.vue';
   import CoachCardToDo from '@/components/custom/Coach/CoachCardToDo.vue';
-  import { MissionItemViewModel } from '@/thematiques/adapters/missionThematique.presenter.impl';
+  import { MissionItemViewModel } from '@/domaines/thematiques/adapters/missionThematique.presenter.impl';
 
   defineProps<{ missions: MissionItemViewModel[] }>();
 </script>

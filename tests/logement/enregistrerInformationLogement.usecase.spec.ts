@@ -3,10 +3,10 @@ import {
   DPELogementApiModel,
   SuperficieLogementApiModel,
   TypeLogementApiModel,
-} from '@/logement/adapters/logement.repository.axios';
-import { Logement } from '@/logement/recupererInformationLogement.usecase';
+} from '@/domaines/logement/adapters/logement.repository.axios';
+import { Logement } from '@/domaines/logement/recupererInformationLogement.usecase';
 import { LogementRepositorySpy } from './adapters/logement.repository.spy';
-import { EnregistrerInformationsLogementUsecase } from '@/logement/enregistrerInformationLogement.usecase';
+import { EnregistrerInformationsLogementUsecase } from '@/domaines/logement/enregistrerInformationLogement.usecase';
 
 describe("Fichier de tests concernant l'enregistrement des informations du logement", () => {
   it('Doit envoyer les informations au back-end', async () => {
