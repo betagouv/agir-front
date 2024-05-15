@@ -19,8 +19,8 @@
 
 <script setup lang="ts">
   import BarreDeProgression from '@/components/custom/BarreDeProgression.vue';
+  import { ThematiqueViewModel } from '@/domaines/thematiques/adapters/thematiques.presenter.impl';
   import { RouteUniversName } from '@/router/univers/routes';
-  import { ThematiqueViewModel } from '@/thematiques/adapters/thematiques.presenter.impl';
 
   defineProps<{
     thematique: ThematiqueViewModel;

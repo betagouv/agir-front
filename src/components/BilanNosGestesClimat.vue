@@ -21,7 +21,7 @@
 <script setup lang="ts">
   import CarteVierge from '@/components/CarteVierge.vue';
   import JaugeNosGestesClimat from '@/components/JaugeNosGestesClimat.vue';
-  import { EmpreinteViewModel } from '@/bilan/adapters/chargementEmpreinte.presenter.impl';
+  import { EmpreinteViewModel } from '@/domaines/bilan/adapters/chargementEmpreinte.presenter.impl';
 
   defineProps<{
     getImpactValue: EmpreinteViewModel;

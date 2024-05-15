@@ -1,6 +1,6 @@
-import { Question } from '@/kyc/recupererQuestionUsecase';
-import { DefiRepository } from '@/defi/ports/defi.repository';
-import { Defi } from '@/defi/recupererListeDefis.usecase';
+import { Question } from '@/domaines/kyc/recupererQuestionUsecase';
+import { DefiRepository } from '@/domaines/defi/ports/defi.repository';
+import { Defi } from '@/domaines/defi/recupererListeDefis.usecase';
 
 export class SpyDefiRepository implements DefiRepository {
   recupererListeDefisParUnivers(utilisateurId: string, universId: string): Promise<Defi[]> {

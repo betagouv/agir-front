@@ -1,7 +1,7 @@
-import { ObtenirConsommationElectriqueQuatorzeJoursUsecase } from '@/linky/obtenirConsommationElectriqueQuatorzeJours.usecase';
+import { ObtenirConsommationElectriqueQuatorzeJoursUsecase } from '@/domaines/linky/obtenirConsommationElectriqueQuatorzeJours.usecase';
 import { MockLinkyRepository } from './adapters/linky.repository.mock';
-import { ConsommationElectriqueViewModel } from '@/linky/ports/linky.presenter';
-import { LinkyPresenterQuatorzeJoursImpl } from '@/linky/adapters/linkyQuatorzeJours.presenter.impl';
+import { ConsommationElectriqueViewModel } from '@/domaines/linky/ports/linky.presenter';
+import { LinkyPresenterQuatorzeJoursImpl } from '@/domaines/linky/adapters/linkyQuatorzeJours.presenter.impl';
 
 describe('Fichier de test du usecase du chargement des données des 14 derniers jours linky', () => {
   it('en donnant un utilisateur valide doit me retourner ses données de consommation electrique des 14 derniers jours formatées pour le graphique avec une description, des commentaires associés et les valeurs de la transcription', async () => {

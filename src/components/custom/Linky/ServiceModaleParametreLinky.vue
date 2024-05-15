@@ -65,15 +65,15 @@
 
 <script setup lang="ts">
   import { ref, defineModel } from 'vue';
-  import InputText from '@/components/dsfr/InputText.vue';
-  import InputCheckboxUnitaire from '@/components/dsfr/InputCheckboxUnitaire.vue';
-  import { utilisateurStore } from '@/store/utilisateur';
-  import { ParametrerServiceUsecase } from '@/services/parametrerService.usecase';
-  import { ServiceRepositoryAxios } from '@/services/adapters/service.repository.axios';
-  import ModaleActions from '@/components/custom/Modale/ModaleActions';
   import Alert from '@/components/custom/Alert.vue';
+  import ModaleActions from '@/components/custom/Modale/ModaleActions';
+  import InputCheckboxUnitaire from '@/components/dsfr/InputCheckboxUnitaire.vue';
+  import InputText from '@/components/dsfr/InputText.vue';
   import { useAlerte } from '@/composables/useAlerte';
-  import { ServiceEvent, ServiceEventBusImpl } from '@/services/serviceEventBusImpl';
+  import { ServiceRepositoryAxios } from '@/domaines/services/adapters/service.repository.axios';
+  import { ParametrerServiceUsecase } from '@/domaines/services/parametrerService.usecase';
+  import { ServiceEvent, ServiceEventBusImpl } from '@/domaines/services/serviceEventBusImpl';
+  import { utilisateurStore } from '@/store/utilisateur';
 
   defineProps<{ serviceId: string; prm: string }>();
 

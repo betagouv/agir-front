@@ -1,6 +1,6 @@
 import { MockToDoListRepository } from './adapters/mockToDoListRepository';
-import { RecupererToDoListUsecase } from '@/toDoList/recupererToDoList.usecase';
-import { ToDoListPresenterImpl, TodoListViewModel } from '@/toDoList/adapters/toDoList.presenter.impl';
+import { RecupererToDoListUsecase } from '@/domaines/toDoList/recupererToDoList.usecase';
+import { ToDoListPresenterImpl, TodoListViewModel } from '@/domaines/toDoList/adapters/toDoList.presenter.impl';
 
 describe('Fichier de tests concernant la récupération de la ToDo List', () => {
   it("En donnant un id utilisateur doit récuperer une todo List composée d'elements fait et à faire", async () => {

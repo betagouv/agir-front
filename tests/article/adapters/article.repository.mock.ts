@@ -1,5 +1,5 @@
-import { ArticleRepository } from '@/article/ports/article.repository';
-import { Article } from '@/article/recupererArticle.usecase';
+import { ArticleRepository } from '@/domaines/article/ports/article.repository';
+import { Article } from '@/domaines/article/recupererArticle.usecase';
 
 export class MockArticleRepository implements ArticleRepository {
   recuperer(utilisateurId: string, articleId: string): Promise<Article> {

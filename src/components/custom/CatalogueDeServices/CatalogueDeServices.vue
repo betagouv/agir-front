@@ -24,12 +24,12 @@
 </template>
 <script setup lang="ts">
   import { ref, computed } from 'vue';
+  import CatalogueDeServicesCarte from '@/components/custom/CatalogueDeServices/CatalogueDeServicesCarte.vue';
+  import InputCheckbox from '@/components/dsfr/InputCheckbox.vue';
   import {
     ServiceCatalogueViewModel,
     ServiceCatalogueViewModelItem,
-  } from '@/services/adapters/serviceCatalogue.presenter.impl';
-  import InputCheckbox from '@/components/dsfr/InputCheckbox.vue';
-  import CatalogueDeServicesCarte from '@/components/custom/CatalogueDeServices/CatalogueDeServicesCarte.vue';
+  } from '@/domaines/services/adapters/serviceCatalogue.presenter.impl';
 
   const props = defineProps<{ serviceCatalogueViewModels: ServiceCatalogueViewModel }>();
 

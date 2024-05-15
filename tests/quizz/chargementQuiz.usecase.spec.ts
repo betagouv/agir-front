@@ -1,6 +1,6 @@
-import { Quiz, QuizRepository } from '@/quiz/ports/quizRepository';
-import { ChargementQuizUsecase } from '@/quiz/chargementQuiz.usecase';
-import { ChargementQuizPresenterImpl, QuizViewModel } from '@/quiz/adapters/chargementQuiz.presenter.impl';
+import { Quiz, QuizRepository } from '@/domaines/quiz/ports/quizRepository';
+import { ChargementQuizUsecase } from '@/domaines/quiz/chargementQuiz.usecase';
+import { ChargementQuizPresenterImpl, QuizViewModel } from '@/domaines/quiz/adapters/chargementQuiz.presenter.impl';
 
 class QuizRepositoryForTest implements QuizRepository {
   marquerLeQuizArticleCommeLu(_utilisateurId: string, _articleId: string): Promise<void> {

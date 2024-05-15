@@ -1,8 +1,8 @@
 import { SpyDefiRepository } from './adapters/defi.repository.spy';
 import { SpyToDoListEventBus } from '../toDoList/spyTodoListEventBus';
 import { expect } from 'vitest';
-import { ToDoListEvent } from '@/toDoList/toDoListEventBusImpl';
-import { EnvoyerReponseDefiUsecase } from '@/defi/envoyerReponseDefi.usecase';
+import { ToDoListEvent } from '@/domaines/toDoList/toDoListEventBusImpl';
+import { EnvoyerReponseDefiUsecase } from '@/domaines/defi/envoyerReponseDefi.usecase';
 
 describe("Fichier de tests pour envoyer la réponse d'un défi", () => {
   it("En donnant un id d'utilisateur, l'id de la question du défi et la réponse doit appeler le back pour sauvegarder la réponse", async () => {

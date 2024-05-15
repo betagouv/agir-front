@@ -1,4 +1,4 @@
-import { Article, RecupererArticleUsecase } from '@/article/recupererArticle.usecase';
+import { Article, RecupererArticleUsecase } from '@/domaines/article/recupererArticle.usecase';
 import { MockArticleRepository } from './adapters/article.repository.mock';
 import { expect } from 'vitest';
 

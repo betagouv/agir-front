@@ -46,14 +46,14 @@
 </template>
 
 <script setup lang="ts">
-  import { ServicePresenterImpl, ServiceViewModel } from '@/services/adapters/service.presenter.impl';
-  import { RecupererServiceActifsUsecase } from '@/services/recupererServiceActifs.usecase';
-  import { ServiceRepositoryAxios } from '@/services/adapters/service.repository.axios';
   import { onMounted, onUnmounted, ref } from 'vue';
-  import { utilisateurStore } from '@/store/utilisateur';
-  import { ServiceEvent, ServiceEventBusImpl } from '@/services/serviceEventBusImpl';
-  import { RouteCoachName } from '@/router/coach/routeCoachName';
   import { useReveal } from '@/composables/useReveal';
+  import { ServicePresenterImpl, ServiceViewModel } from '@/domaines/services/adapters/service.presenter.impl';
+  import { ServiceRepositoryAxios } from '@/domaines/services/adapters/service.repository.axios';
+  import { RecupererServiceActifsUsecase } from '@/domaines/services/recupererServiceActifs.usecase';
+  import { ServiceEvent, ServiceEventBusImpl } from '@/domaines/services/serviceEventBusImpl';
+  import { RouteCoachName } from '@/router/coach/routeCoachName';
+  import { utilisateurStore } from '@/store/utilisateur';
 
   const servicesViewModels = ref<ServiceViewModel[]>();
 

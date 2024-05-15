@@ -1,9 +1,12 @@
 import {
   BilanOnboardingPresenterImpl,
   OnboardingBilanViewModel,
-} from '@/bilanOnboarding/adapters/bilanOnboarding.presenter.impl';
-import { ChargerBilanOnboardingUsecase } from '@/bilanOnboarding/chargerBilanOnboarding.usecase';
-import { BilanOnboarding, BilanOnboardingRepository } from '@/bilanOnboarding/ports/bilanOnboarding.repository';
+} from '@/domaines/bilanOnboarding/adapters/bilanOnboarding.presenter.impl';
+import { ChargerBilanOnboardingUsecase } from '@/domaines/bilanOnboarding/chargerBilanOnboarding.usecase';
+import {
+  BilanOnboarding,
+  BilanOnboardingRepository,
+} from '@/domaines/bilanOnboarding/ports/bilanOnboarding.repository';
 
 class BilanOnboardingRepositoryTest implements BilanOnboardingRepository {
   recupererBilanOnboarding(_utilisateurId: string): Promise<BilanOnboarding> {
@@ -43,7 +46,7 @@ describe("Fichier de tests concernant la récupération du bilan de l'onboarding
             valeur: 1,
           },
         ]);
-      })
+      }),
     );
   });
 });

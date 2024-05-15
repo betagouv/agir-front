@@ -1,9 +1,9 @@
-import { ChangerMotDePasseDepuisLeCompteUsecase } from '@/compte/changerMotDePasseDepuisLeCompte.usecase';
+import { ChangerMotDePasseDepuisLeCompteUsecase } from '@/domaines/compte/changerMotDePasseDepuisLeCompte.usecase';
 import {
   CompteUtilisateur,
   CompteUtilisateurACreer,
   CompteUtilisateurRepository,
-} from '@/compte/ports/compteUtilisateur.repository';
+} from '@/domaines/compte/ports/compteUtilisateur.repository';
 
 class CompteUtilisateurRepositoryForTest implements CompteUtilisateurRepository {
   get nouveauMotDePasse(): string {

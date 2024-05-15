@@ -14,13 +14,13 @@
 </template>
 
 <script setup lang="ts">
-  import { EvaluerQuizUsecase } from '@/quiz/evaluerQuiz.usecase';
-  import { QuizRepositoryAxios } from '@/quiz/adapters/quizRepository.axios';
-  import { utilisateurStore } from '@/store/utilisateur';
-  import { RouteCoachName } from '@/router/coach/routeCoachName';
-  import { ArticleDuQuiz } from '@/quiz/ports/quizRepository';
-  import QuizReponse from '@/components/custom/Quiz/QuizReponse.vue';
   import Notation from '@/components/custom/Notation.vue';
+  import QuizReponse from '@/components/custom/Quiz/QuizReponse.vue';
+  import { QuizRepositoryAxios } from '@/domaines/quiz/adapters/quizRepository.axios';
+  import { EvaluerQuizUsecase } from '@/domaines/quiz/evaluerQuiz.usecase';
+  import { ArticleDuQuiz } from '@/domaines/quiz/ports/quizRepository';
+  import { RouteCoachName } from '@/router/coach/routeCoachName';
+  import { utilisateurStore } from '@/store/utilisateur';
 
   const props = defineProps<{
     texteExplicationKO: string;

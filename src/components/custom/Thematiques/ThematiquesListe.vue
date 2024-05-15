@@ -8,7 +8,7 @@
 
 <script setup lang="ts">
   import ThematiquesCard from '@/components/custom/Thematiques/ThematiquesCard.vue';
-  import { ThematiqueViewModel } from '@/thematiques/adapters/thematiques.presenter.impl';
+  import { ThematiqueViewModel } from '@/domaines/thematiques/adapters/thematiques.presenter.impl';
 
   defineProps<{
     thematiques: ThematiqueViewModel[];

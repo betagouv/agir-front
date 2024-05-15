@@ -1,7 +1,7 @@
-import ChargementAidesUsecase, { Aides } from '../../src/aides/chargementAides.usecase';
-import { ChargementAidesRepository } from '@/aides/ports/chargementAides.repository';
-import { ChargementAidesPresenterImpl } from '@/aides/adapters/chargementAides.presenter.impl';
-import { AidesViewModel } from '@/aides/ports/chargementAides.presenter';
+import ChargementAidesUsecase, { Aides } from '@/domaines/aides/chargementAides.usecase';
+import { ChargementAidesRepository } from '@/domaines/aides/ports/chargementAides.repository';
+import { ChargementAidesPresenterImpl } from '@/domaines/aides/adapters/chargementAides.presenter.impl';
+import { AidesViewModel } from '@/domaines/aides/ports/chargementAides.presenter';
 import { PublierEvenementRepositorySpy } from '../shell/publierEvenement.repository.spy';
 import { expect } from 'vitest';
 import { Evenemement } from '@/shell/ports/publierEvenement.repository';

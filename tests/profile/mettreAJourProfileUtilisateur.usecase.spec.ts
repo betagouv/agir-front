@@ -1,9 +1,9 @@
-import { MettreAJourProfileUtilisateurUsecase } from '@/profileUtilisateur/mettreAJourProfileUtilisateurUsecase';
-import { Utilisateur } from '@/authentification/ports/utilisateur.repository';
+import { MettreAJourProfileUtilisateurUsecase } from '@/domaines/profileUtilisateur/mettreAJourProfileUtilisateurUsecase';
+import { Utilisateur } from '@/domaines/authentification/ports/utilisateur.repository';
 import { SpySauvegarderUtilisateurSessionRepository } from '../compte/sessionRepository.sauvegarderUtilisateur.spy';
-import { ProfileUtilisateurViewModel } from '@/profileUtilisateur/adapters/profileUtilisateur.presenter.impl';
-import { ProfileUtilisateurRepository } from '@/profileUtilisateur/ports/profileUtilisateur.repository';
-import { ProfileUtilisateur } from '@/profileUtilisateur/chargerProfileUtilisateur.usecase';
+import { ProfileUtilisateurViewModel } from '@/domaines/profileUtilisateur/adapters/profileUtilisateur.presenter.impl';
+import { ProfileUtilisateurRepository } from '@/domaines/profileUtilisateur/ports/profileUtilisateur.repository';
+import { ProfileUtilisateur } from '@/domaines/profileUtilisateur/chargerProfileUtilisateur.usecase';
 
 class SpyProfileUtilisateurRepository implements ProfileUtilisateurRepository {
   get profileUtilisateur(): ProfileUtilisateur {

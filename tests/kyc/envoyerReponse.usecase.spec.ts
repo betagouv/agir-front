@@ -1,8 +1,8 @@
-import { EnvoyerReponseUsecase } from '@/kyc/envoyerReponseUsecase';
+import { EnvoyerReponseUsecase } from '@/domaines/kyc/envoyerReponseUsecase';
 import { SpyQuestionRepository } from './adapters/question.repository.spy';
 import { SpyToDoListEventBus } from '../toDoList/spyTodoListEventBus';
 import { expect } from 'vitest';
-import { ToDoListEvent } from '@/toDoList/toDoListEventBusImpl';
+import { ToDoListEvent } from '@/domaines/toDoList/toDoListEventBusImpl';
 
 describe("Fichier de tests pour envoyer la réponse d'une question KYC", () => {
   it("En donnant un id d'utilisateur, l'id de la question KYC et la réponse doit appeler le back pour sauvegarder la réponse", async () => {

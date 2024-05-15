@@ -1,9 +1,9 @@
-import { RecupererCatalogueServicesUseCase } from '@/services/recupererCatalogueServices.usecase';
+import { RecupererCatalogueServicesUseCase } from '@/domaines/services/recupererCatalogueServices.usecase';
 import { MockRecupererCatalogueServiceRepository } from './adapters/service.recuperCatalogue.repository.mock';
 import {
   ServiceCataloguePresenterImpl,
   ServiceCatalogueViewModel,
-} from '@/services/adapters/serviceCatalogue.presenter.impl';
+} from '@/domaines/services/adapters/serviceCatalogue.presenter.impl';
 
 describe('Fichier de tests concernant la recuperations des services dans le catalogue', () => {
   it('En donnant un id utilisateur doit retourner la liste des services disponibles, pour chaque élément on doit indiquer si le service est installé ou non', async () => {

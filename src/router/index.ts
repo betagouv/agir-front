@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
-import { storeIdNGC } from '@/bilan/middleware/pendingSimulation';
+import { storeIdNGC } from '@/domaines/bilan/middleware/pendingSimulation';
 import aidesRoutes from '@/router/aides/routes';
 import articlesRoutes from '@/router/articles/routes';
 import { RouteCoachName } from '@/router/coach/routeCoachName';

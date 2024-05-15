@@ -1,12 +1,12 @@
-import { LogementPresenterImpl } from '@/logement/adapters/logement.presenter.impl';
-import { RecupererInformationLogementUseCase } from '@/logement/recupererInformationLogement.usecase';
+import { LogementPresenterImpl } from '@/domaines/logement/adapters/logement.presenter.impl';
+import { RecupererInformationLogementUseCase } from '@/domaines/logement/recupererInformationLogement.usecase';
 import { MockLogementRepository } from './adapters/logement.repository.mock';
 import {
   ChauffageLogementApiModel,
   DPELogementApiModel,
   SuperficieLogementApiModel,
   TypeLogementApiModel,
-} from '../../src/logement/adapters/logement.repository.axios';
+} from '@/domaines/logement/adapters/logement.repository.axios';
 
 describe('Fichier de tests concernant la récuperations des informations du logement', () => {
   it('Doit recupérer les informations', () => {

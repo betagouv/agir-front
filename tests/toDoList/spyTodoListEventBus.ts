@@ -1,4 +1,4 @@
-import { ToDoListEvent } from '@/toDoList/toDoListEventBusImpl';
+import { ToDoListEvent } from '@/domaines/toDoList/toDoListEventBusImpl';
 import { EventBus } from '@/shell/eventBus';
 
 export class SpyToDoListEventBus extends EventBus<ToDoListEvent> {

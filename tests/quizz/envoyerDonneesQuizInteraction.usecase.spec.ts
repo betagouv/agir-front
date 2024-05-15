@@ -1,5 +1,5 @@
-import { EnvoyerDonneesQuizInteractionUsecase } from '@/quiz/envoyerDonneesQuizInteraction.usecase';
-import { ToDoListEvent } from '@/toDoList/toDoListEventBusImpl';
+import { EnvoyerDonneesQuizInteractionUsecase } from '@/domaines/quiz/envoyerDonneesQuizInteraction.usecase';
+import { ToDoListEvent } from '@/domaines/toDoList/toDoListEventBusImpl';
 import { expect } from 'vitest';
 import { SpyToDoListEventBus } from '../toDoList/spyTodoListEventBus';
 import { SpyQuizRepository } from './adapters/spyQuizRepository';

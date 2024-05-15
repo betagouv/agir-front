@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
-import { Utilisateur } from '@/authentification/ports/utilisateur.repository';
-import { EmpreinteViewModel } from '@/bilan/adapters/chargementEmpreinte.presenter.impl';
-import { ScoreViewModel } from '@/score/ports/chargementScore.presenter';
+import { Utilisateur } from '@/domaines/authentification/ports/utilisateur.repository';
+import { EmpreinteViewModel } from '@/domaines/bilan/adapters/chargementEmpreinte.presenter.impl';
+import { ScoreViewModel } from '@/domaines/score/ports/chargementScore.presenter';
 
 export interface UtilisateurStore {
   utilisateur: Utilisateur;

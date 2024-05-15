@@ -2,8 +2,8 @@ import {
   CompteUtilisateur,
   CompteUtilisateurACreer,
   CompteUtilisateurRepository,
-} from '@/compte/ports/compteUtilisateur.repository';
-import { SupprimerCompteUtilisateurUsecase } from '@/compte/supprimerCompteUtilisateur.usecase';
+} from '@/domaines/compte/ports/compteUtilisateur.repository';
+import { SupprimerCompteUtilisateurUsecase } from '@/domaines/compte/supprimerCompteUtilisateur.usecase';
 
 class SpyCompteUtilisateurRepository implements CompteUtilisateurRepository {
   get idUtilisateur(): string {

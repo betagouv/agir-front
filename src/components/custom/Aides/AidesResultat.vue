@@ -42,10 +42,10 @@
 </template>
 
 <script setup lang="ts">
+  import CarteSkeleton from '@/components/CarteSkeleton.vue';
   import Accordeon from '@/components/custom/Accordeon.vue';
   import AidesDetail from '@/components/custom/Aides/AidesDetail.vue';
-  import { SimulationAideResultatViewModel } from '@/aides/ports/simulationAideResultat';
-  import CarteSkeleton from '@/components/CarteSkeleton.vue';
+  import { SimulationAideResultatViewModel } from '@/domaines/aides/ports/simulationAideResultat';
   defineProps<{
     isLoading: boolean;
     titre: string;

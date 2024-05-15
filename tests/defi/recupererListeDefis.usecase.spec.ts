@@ -1,7 +1,7 @@
 import { MockListeDefisRepository } from './adapters/listedefis.repository.mock';
-import { RecupererListeDefisUsecase } from '@/defi/recupererListeDefis.usecase';
-import { ListeDefisPresenterImpl } from '@/defi/adapters/listeDefis.presenter.impl';
-import { DefisQuestionViewModel } from '@/defi/ports/listeDefis.presenter';
+import { RecupererListeDefisUsecase } from '@/domaines/defi/recupererListeDefis.usecase';
+import { ListeDefisPresenterImpl } from '@/domaines/defi/adapters/listeDefis.presenter.impl';
+import { DefisQuestionViewModel } from '@/domaines/defi/ports/listeDefis.presenter';
 
 describe('Fichier de tests concernant la récupération des défis en cours et terminés', () => {
   it('doit récupérer la liste des défis', async () => {

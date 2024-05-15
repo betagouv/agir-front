@@ -13,7 +13,7 @@
 
 <script setup lang="ts">
   import CoachCardAction from '@/components/custom/Coach/CoachCardAction.vue';
-  import { RecommandationViewModel } from '@/recommandationsPersonnalisees/adapters/recommandationsPersonnalisees.presenter.impl';
+  import { RecommandationViewModel } from '@/domaines/recommandationsPersonnalisees/adapters/recommandationsPersonnalisees.presenter.impl';
   import { RouteCompteName } from '@/router/compte/routeCompteName';
 
   defineProps<{ recommandations: RecommandationViewModel[] }>();

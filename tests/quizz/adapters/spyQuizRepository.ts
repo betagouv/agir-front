@@ -1,4 +1,4 @@
-import { Quiz, QuizRepository } from '@/quiz/ports/quizRepository';
+import { Quiz, QuizRepository } from '@/domaines/quiz/ports/quizRepository';
 
 export class SpyQuizRepository implements QuizRepository {
   get marquerLeQuizArticleCommeLuAEteAppele(): boolean {

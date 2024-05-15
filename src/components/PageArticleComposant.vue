@@ -63,15 +63,15 @@
 </template>
 
 <script setup lang="ts">
-  import FilDAriane from '@/components/dsfr/FilDAriane.vue';
-  import { Article } from '@/article/recupererArticle.usecase';
-  import { RouteCoachName } from '@/router/coach/routeCoachName';
   import Notation from '@/components/custom/Notation.vue';
-  import { ArticleRepositoryAxios } from '@/article/adapters/article.repository.axios';
+  import FilDAriane from '@/components/dsfr/FilDAriane.vue';
+  import { ArticleRepositoryAxios } from '@/domaines/article/adapters/article.repository.axios';
+  import { AjouterAuxFavorisUsecase } from '@/domaines/article/ajouterAuxFavoris.usecase';
+  import { EvaluerArticleUsecase } from '@/domaines/article/evaluerArticle.usecase';
+  import { Article } from '@/domaines/article/recupererArticle.usecase';
+  import { RetirerDesFavorisUsecase } from '@/domaines/article/retirerDesFavoris.usecase';
+  import { RouteCoachName } from '@/router/coach/routeCoachName';
   import { utilisateurStore } from '@/store/utilisateur';
-  import { EvaluerArticleUsecase } from '@/article/evaluerArticle.usecase';
-  import { AjouterAuxFavorisUsecase } from '@/article/ajouterAuxFavoris.usecase';
-  import { RetirerDesFavorisUsecase } from '@/article/retirerDesFavoris.usecase';
 
   const props = defineProps<{
     article: Article;

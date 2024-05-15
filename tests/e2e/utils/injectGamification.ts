@@ -1,4 +1,4 @@
-import { ScoreApiModel } from '@/score/adapters/score.repository.axios';
+import { ScoreApiModel } from '@/domaines/score/adapters/score.repository.axios';
 
 export class InjectGamification {
   private _gamification: ScoreApiModel;

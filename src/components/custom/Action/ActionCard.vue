@@ -26,7 +26,7 @@
 </template>
 
 <script setup lang="ts">
-  import { DefiDescriptionViewModel } from '@/defi/adapters/listeDefisDescription.presenter.impl';
+  import { DefiDescriptionViewModel } from '@/domaines/defi/adapters/listeDefisDescription.presenter.impl';
 
   defineProps<{ defi: DefiDescriptionViewModel }>();
 </script>

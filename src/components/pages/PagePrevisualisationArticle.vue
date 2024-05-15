@@ -2,13 +2,13 @@
   <PageArticleComposant :article="article" />
 </template>
 <script setup lang="ts">
-  import PageArticleComposant from '@/components/PageArticleComposant.vue';
-  import { useRoute, useRouter } from 'vue-router';
   import { onMounted, ref } from 'vue';
-  import { Article } from '@/article/recupererArticle.usecase';
-  import { ArticleRepositoryAxios } from '@/article/adapters/article.repository.axios';
+  import { useRoute, useRouter } from 'vue-router';
+  import PageArticleComposant from '@/components/PageArticleComposant.vue';
+  import { ArticleRepositoryAxios } from '@/domaines/article/adapters/article.repository.axios';
+  import { PrevisualiserArticleUsecase } from '@/domaines/article/previsualiserArticle.usecase';
+  import { Article } from '@/domaines/article/recupererArticle.usecase';
   import { RouteCommuneName } from '@/router';
-  import { PrevisualiserArticleUsecase } from '@/article/previsualiserArticle.usecase';
 
   const router = useRouter();
 

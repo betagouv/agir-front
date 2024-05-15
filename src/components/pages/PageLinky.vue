@@ -121,19 +121,19 @@
 
 <script setup lang="ts">
   import { onMounted, ref } from 'vue';
-  import { utilisateurStore } from '@/store/utilisateur';
-  import { ObtenirInformationCompteurUsecase } from '@/linky/obtenirInformationCompteur.usecase';
-  import { LinkyRepositoryAxios } from '@/linky/adapters/linky.repository.axios';
-  import FilDAriane from '@/components/dsfr/FilDAriane.vue';
-  import LinkyGraphique from '@/components/custom/Linky/LinkyGraphique.vue';
-  import LinkyAside from '@/components/custom/Linky/LinkyAside.vue';
-  import ModaleActions from '@/components/custom/Modale/ModaleActions';
-  import Modale from '@/components/custom/Modale/Modale.vue';
-  import ServiceModaleParametreLinky from '@/components/custom/Linky/ServiceModaleParametreLinky.vue';
-  import { InformationCompteurViewModel } from '@/linky/ports/linky.information.presenter';
-  import { LinkyPresenterInformationImpl } from '@/linky/adapters/linkyInformation.presenter.impl';
-  import Table from '@/components/dsfr/Table.vue';
   import CarteInfo from '@/components/custom/CarteInfo.vue';
+  import LinkyAside from '@/components/custom/Linky/LinkyAside.vue';
+  import LinkyGraphique from '@/components/custom/Linky/LinkyGraphique.vue';
+  import ServiceModaleParametreLinky from '@/components/custom/Linky/ServiceModaleParametreLinky.vue';
+  import Modale from '@/components/custom/Modale/Modale.vue';
+  import ModaleActions from '@/components/custom/Modale/ModaleActions';
+  import FilDAriane from '@/components/dsfr/FilDAriane.vue';
+  import Table from '@/components/dsfr/Table.vue';
+  import { LinkyRepositoryAxios } from '@/domaines/linky/adapters/linky.repository.axios';
+  import { LinkyPresenterInformationImpl } from '@/domaines/linky/adapters/linkyInformation.presenter.impl';
+  import { ObtenirInformationCompteurUsecase } from '@/domaines/linky/obtenirInformationCompteur.usecase';
+  import { InformationCompteurViewModel } from '@/domaines/linky/ports/linky.information.presenter';
+  import { utilisateurStore } from '@/store/utilisateur';
 
   const isLoading = ref(true);
 

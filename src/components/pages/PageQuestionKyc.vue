@@ -60,12 +60,16 @@
   import InputCheckbox from '@/components/custom/InputCheckbox.vue';
   import KYCFin from '@/components/custom/KYC/KYCFin.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
-  import { QuestionPresenterImpl, QuestionViewModel, ReponsePossible } from '@/kyc/adapters/question.presenter.impl';
-  import { QuestionRepositoryAxios } from '@/kyc/adapters/question.repository.axios';
-  import { EnvoyerReponseUsecase } from '@/kyc/envoyerReponseUsecase';
-  import { RecupererQuestionUsecase } from '@/kyc/recupererQuestionUsecase';
+  import {
+    QuestionPresenterImpl,
+    QuestionViewModel,
+    ReponsePossible,
+  } from '@/domaines/kyc/adapters/question.presenter.impl';
+  import { QuestionRepositoryAxios } from '@/domaines/kyc/adapters/question.repository.axios';
+  import { EnvoyerReponseUsecase } from '@/domaines/kyc/envoyerReponseUsecase';
+  import { RecupererQuestionUsecase } from '@/domaines/kyc/recupererQuestionUsecase';
+  import { ToDoListEventBusImpl } from '@/domaines/toDoList/toDoListEventBusImpl';
   import { utilisateurStore } from '@/store/utilisateur';
-  import { ToDoListEventBusImpl } from '@/toDoList/toDoListEventBusImpl';
 
   const route = useRoute();
   const questionId = Array.isArray(route.params.id) ? route.params.id[0] : route.params.id;

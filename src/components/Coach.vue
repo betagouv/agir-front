@@ -112,28 +112,28 @@
   import CarteScore from '@/components/custom/Progression/CarteScore.vue';
   import ProgressionNiveauJauge from '@/components/custom/Progression/ProgressionNiveauJauge.vue';
   import { useReveal } from '@/composables/useReveal';
-  import { DefiRepositoryAxios } from '@/defi/adapters/defi.repository.axios';
+  import { DefiRepositoryAxios } from '@/domaines/defi/adapters/defi.repository.axios';
   import {
     DefiDescriptionViewModel,
     ListeDefisDescriptionPresenterImpl,
-  } from '@/defi/adapters/listeDefisDescription.presenter.impl';
-  import { RecupererListeDefisUsecase } from '@/defi/recupererListeDefis.usecase';
+  } from '@/domaines/defi/adapters/listeDefisDescription.presenter.impl';
+  import { RecupererListeDefisUsecase } from '@/domaines/defi/recupererListeDefis.usecase';
   import {
     RecommandationPersonnaliseeViewModel,
     RecommandationsPersonnaliseesPresenterImpl,
-  } from '@/recommandationsPersonnalisees/adapters/recommandationsPersonnalisees.presenter.impl';
-  import { RecommandationsPersonnaliseesRepositoryAxios } from '@/recommandationsPersonnalisees/adapters/recommandationsPersonnalisees.repository.axios';
-  import { RecupererRecommandationsPersonnaliseesUsecase } from '@/recommandationsPersonnalisees/recupererRecommandationsPersonnalisees.usecase';
+  } from '@/domaines/recommandationsPersonnalisees/adapters/recommandationsPersonnalisees.presenter.impl';
+  import { RecommandationsPersonnaliseesRepositoryAxios } from '@/domaines/recommandationsPersonnalisees/adapters/recommandationsPersonnalisees.repository.axios';
+  import { RecupererRecommandationsPersonnaliseesUsecase } from '@/domaines/recommandationsPersonnalisees/recupererRecommandationsPersonnalisees.usecase';
+  import { ToDoListPresenterImpl, TodoListViewModel } from '@/domaines/toDoList/adapters/toDoList.presenter.impl';
+  import { ToDoListRepositoryAxios } from '@/domaines/toDoList/adapters/toDoList.repository.axios';
+  import { RecupererToDoListUsecase } from '@/domaines/toDoList/recupererToDoList.usecase';
+  import { ToDoListEvent, ToDoListEventBusImpl } from '@/domaines/toDoList/toDoListEventBusImpl';
+  import { ListeUniversPresenterImpl, UniversViewModel } from '@/domaines/univers/adapters/listeUnivers.presenter.impl';
+  import { UniversRepositoryAxios } from '@/domaines/univers/adapters/univers.repository.axios';
+  import { RecupererListeUniversUsecase } from '@/domaines/univers/recupererListeUnivers.usecase';
   import { Fonctionnalites } from '@/shell/fonctionnalitesEnum';
   import { publierEvenementHotjar, HotjarEvenement } from '@/shell/publierEvenementHotjar';
   import { utilisateurStore } from '@/store/utilisateur';
-  import { ToDoListPresenterImpl, TodoListViewModel } from '@/toDoList/adapters/toDoList.presenter.impl';
-  import { ToDoListRepositoryAxios } from '@/toDoList/adapters/toDoList.repository.axios';
-  import { RecupererToDoListUsecase } from '@/toDoList/recupererToDoList.usecase';
-  import { ToDoListEvent, ToDoListEventBusImpl } from '@/toDoList/toDoListEventBusImpl';
-  import { ListeUniversPresenterImpl, UniversViewModel } from '@/univers/adapters/listeUnivers.presenter.impl';
-  import { UniversRepositoryAxios } from '@/univers/adapters/univers.repository.axios';
-  import { RecupererListeUniversUsecase } from '@/univers/recupererListeUnivers.usecase';
 
   const { recommandationTour, defiTour } = useReveal();
 

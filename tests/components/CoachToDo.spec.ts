@@ -1,6 +1,6 @@
 import { render } from '@testing-library/vue';
 import CoachToDo from '@/components/custom/Coach/CoachToDo.vue';
-import { TodoListViewModel, TodoViewModel } from '@/toDoList/adapters/toDoList.presenter.impl';
+import { TodoListViewModel, TodoViewModel } from '@/domaines/toDoList/adapters/toDoList.presenter.impl';
 
 const todoExemple1: TodoViewModel = {
   id: 'test',

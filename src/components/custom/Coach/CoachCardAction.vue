@@ -30,7 +30,7 @@
 </template>
 
 <script setup lang="ts">
-  import { RecommandationViewModel } from '@/recommandationsPersonnalisees/adapters/recommandationsPersonnalisees.presenter.impl';
+  import { RecommandationViewModel } from '@/domaines/recommandationsPersonnalisees/adapters/recommandationsPersonnalisees.presenter.impl';
 
   defineProps<{ recommandation: RecommandationViewModel }>();
 </script>

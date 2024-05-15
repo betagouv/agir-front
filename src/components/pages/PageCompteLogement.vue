@@ -6,13 +6,13 @@
 
 <script setup lang="ts">
   import { onMounted, ref } from 'vue';
-  import CompteSkeleton from '@/components/custom/Compte/CompteSkeleton.vue';
   import CompteLogementFormulaire from '@/components/custom/Compte/CompteLogementFormulaire.vue';
-  import { LogementViewModel } from '@/logement/ports/logement.presenter';
-  import { RecupererInformationLogementUseCase } from '@/logement/recupererInformationLogement.usecase';
+  import CompteSkeleton from '@/components/custom/Compte/CompteSkeleton.vue';
+  import { LogementPresenterImpl } from '@/domaines/logement/adapters/logement.presenter.impl';
+  import { LogementRepositoryAxios } from '@/domaines/logement/adapters/logement.repository.axios';
+  import { LogementViewModel } from '@/domaines/logement/ports/logement.presenter';
+  import { RecupererInformationLogementUseCase } from '@/domaines/logement/recupererInformationLogement.usecase';
   import { utilisateurStore } from '@/store/utilisateur';
-  import { LogementPresenterImpl } from '@/logement/adapters/logement.presenter.impl';
-  import { LogementRepositoryAxios } from '@/logement/adapters/logement.repository.axios';
 
   const logementViewModel = ref<LogementViewModel>();
 

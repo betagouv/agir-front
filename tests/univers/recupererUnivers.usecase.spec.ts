@@ -1,7 +1,7 @@
 import { UniversRepositoryMock } from './adapters/univers.repository.inmemory';
-import { RecupererUniversUsecase } from '@/univers/recupererUnivers.usecase';
-import { UniversPresenterImpl } from '@/univers/adapters/univers.presenter.impl';
-import { UniversViewModel } from '@/univers/adapters/listeUnivers.presenter.impl';
+import { RecupererUniversUsecase } from '@/domaines/univers/recupererUnivers.usecase';
+import { UniversPresenterImpl } from '@/domaines/univers/adapters/univers.presenter.impl';
+import { UniversViewModel } from '@/domaines/univers/adapters/listeUnivers.presenter.impl';
 
 describe("Fichier de tests concernant la récupération d'un univers", async () => {
   it('En donnant un id utilisateur et un id univers doit récupérer un univers', async () => {

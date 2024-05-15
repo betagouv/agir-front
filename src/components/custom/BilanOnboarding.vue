@@ -36,16 +36,16 @@
 </template>
 
 <script setup lang="ts">
+  import { onMounted, ref } from 'vue';
   import BarreDeProgression from '@/components/custom/BarreDeProgression.vue';
-  import { ChargerBilanOnboardingUsecase } from '@/bilanOnboarding/chargerBilanOnboarding.usecase';
   import {
     BilanOnboardingPresenterImpl,
     OnboardingBilanViewModel,
-  } from '@/bilanOnboarding/adapters/bilanOnboarding.presenter.impl';
-  import { BilanOnboardingRepositoryAxios } from '@/bilanOnboarding/adapters/bilanOnboarding.repository.axios';
+  } from '@/domaines/bilanOnboarding/adapters/bilanOnboarding.presenter.impl';
+  import { BilanOnboardingRepositoryAxios } from '@/domaines/bilanOnboarding/adapters/bilanOnboarding.repository.axios';
+  import { ChargerBilanOnboardingUsecase } from '@/domaines/bilanOnboarding/chargerBilanOnboarding.usecase';
   import { calculerCouleurJauge } from '@/shell/calculerCouleurJauge';
   import { utilisateurStore } from '@/store/utilisateur';
-  import { onMounted, ref } from 'vue';
 
   const onboardingBilanViewModel = ref<OnboardingBilanViewModel | null>(null);
 
@@ -58,7 +58,7 @@
 
     await new ChargerBilanOnboardingUsecase(new BilanOnboardingRepositoryAxios()).execute(
       utilisateurId,
-      new BilanOnboardingPresenterImpl(maponboardingBilan)
+      new BilanOnboardingPresenterImpl(maponboardingBilan),
     );
   });
 </script>

@@ -1,5 +1,5 @@
-import { ServiceEvent } from '@/services/serviceEventBusImpl';
-import { ToDoListEvent } from '@/toDoList/toDoListEventBusImpl';
+import { ServiceEvent } from '@/domaines/services/serviceEventBusImpl';
+import { ToDoListEvent } from '@/domaines/toDoList/toDoListEventBusImpl';
 
 export abstract class EventBus<T extends ToDoListEvent | ServiceEvent> {
   protected abstract eventSubscribers: Record<T, { subscriberName: string; callback: () => void }[]>;

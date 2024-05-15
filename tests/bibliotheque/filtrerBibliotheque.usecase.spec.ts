@@ -1,6 +1,6 @@
-import { BibliothequePresenterImpl } from '@/bibliotheque/adapters/bibliotheque.presenter.impl';
+import { BibliothequePresenterImpl } from '@/domaines/bibliotheque/adapters/bibliotheque.presenter.impl';
 import { BibliothequeRepositoryMock } from './adapters/bibliotheque.repository.mock';
-import { FiltrerBibliothequeUsecase } from '@/bibliotheque/filtrerBibliotheque.usecase';
+import { FiltrerBibliothequeUsecase } from '@/domaines/bibliotheque/filtrerBibliotheque.usecase';
 
 describe('Fichier de tests concernant le chargement de la bibliotheque', () => {
   it("En donnant l'id utilisateur, une liste de filtres de thématique et un titre doit charger la bibliotheque", async () => {

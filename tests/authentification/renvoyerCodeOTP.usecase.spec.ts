@@ -1,5 +1,9 @@
-import { IdUtilisateur, Utilisateur, UtilisateurRepository } from '@/authentification/ports/utilisateur.repository';
-import { RenvoyerCoteOTPUsecase } from '@/authentification/renvoyerCoteOTPUsecase';
+import {
+  IdUtilisateur,
+  Utilisateur,
+  UtilisateurRepository,
+} from '@/domaines/authentification/ports/utilisateur.repository';
+import { RenvoyerCoteOTPUsecase } from '@/domaines/authentification/renvoyerCoteOTPUsecase';
 
 class SpyUtilisateurRepository implements UtilisateurRepository {
   get email(): string {

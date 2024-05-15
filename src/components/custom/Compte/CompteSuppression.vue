@@ -40,10 +40,10 @@
 
 <script setup lang="ts">
   import Modale from '@/components/custom/Modale/Modale.vue';
+  import { CompteUtilisateurRepositoryImpl } from '@/domaines/compte/adapters/compteUtilisateur.repository.impl';
+  import { SupprimerCompteUtilisateurUsecase } from '@/domaines/compte/supprimerCompteUtilisateur.usecase';
   import router from '@/router';
   import { utilisateurStore } from '@/store/utilisateur';
-  import { SupprimerCompteUtilisateurUsecase } from '@/compte/supprimerCompteUtilisateur.usecase';
-  import { CompteUtilisateurRepositoryImpl } from '@/compte/adapters/compteUtilisateur.repository.impl';
 
   const modaleId = 'modale-suppression-compte';
 

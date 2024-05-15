@@ -1,7 +1,7 @@
-import { ObtenirConsommationElectriqueAnnuelleUsecase } from '@/linky/obtenirConsommationElectriqueAnnuelle.usecase';
-import { LinkyPresenterAnnuelleImpl } from '@/linky/adapters/linkyAnnuelle.presenter.impl';
+import { ObtenirConsommationElectriqueAnnuelleUsecase } from '@/domaines/linky/obtenirConsommationElectriqueAnnuelle.usecase';
+import { LinkyPresenterAnnuelleImpl } from '@/domaines/linky/adapters/linkyAnnuelle.presenter.impl';
 import { MockLinkyRepository } from './adapters/linky.repository.mock';
-import { ConsommationElectriqueViewModel } from '@/linky/ports/linky.presenter';
+import { ConsommationElectriqueViewModel } from '@/domaines/linky/ports/linky.presenter';
 
 describe('Fichier de test du usecase du chargement des données annuelle linky', () => {
   it('en donnant un utilisateur valide doit me retourner ses données de consommation electrique annuelle formatées pour le graphique avec une description, des commentaires associés  et les valeurs de la transcription', async () => {

@@ -116,17 +116,17 @@
 </template>
 
 <script setup lang="ts">
-  import InputCodePostal from '@/components/dsfr/InputCodePostal.vue';
-  import InputNumberHorizontal from '@/components/custom/InputNumberHorizontal.vue';
-  import BoutonRadio from '@/components/custom/BoutonRadio.vue';
-  import { LogementViewModel } from '@/logement/ports/logement.presenter';
-  import { EnregistrerInformationsLogementUsecase } from '@/logement/enregistrerInformationLogement.usecase';
-  import { LogementRepositoryAxios } from '@/logement/adapters/logement.repository.axios';
-  import { utilisateurStore } from '@/store/utilisateur';
   import Alert from '@/components/custom/Alert.vue';
-  import { useAlerte } from '@/composables/useAlerte';
+  import BoutonRadio from '@/components/custom/BoutonRadio.vue';
   import CarteInfo from '@/components/custom/CarteInfo.vue';
   import DPE from '@/components/custom/DPE.vue';
+  import InputNumberHorizontal from '@/components/custom/InputNumberHorizontal.vue';
+  import InputCodePostal from '@/components/dsfr/InputCodePostal.vue';
+  import { useAlerte } from '@/composables/useAlerte';
+  import { LogementRepositoryAxios } from '@/domaines/logement/adapters/logement.repository.axios';
+  import { EnregistrerInformationsLogementUsecase } from '@/domaines/logement/enregistrerInformationLogement.usecase';
+  import { LogementViewModel } from '@/domaines/logement/ports/logement.presenter';
+  import { utilisateurStore } from '@/store/utilisateur';
 
   const props = defineModel<LogementViewModel>('logementViewModel', {
     type: Object,

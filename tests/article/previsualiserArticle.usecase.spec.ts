@@ -1,6 +1,6 @@
 import { SpyArticleRepository } from './adapters/article.repository.spy';
-import { RetirerDesFavorisUsecase } from '@/article/retirerDesFavoris.usecase';
-import { PrevisualiserArticleUsecase } from '@/article/previsualiserArticle.usecase';
+import { RetirerDesFavorisUsecase } from '@/domaines/article/retirerDesFavoris.usecase';
+import { PrevisualiserArticleUsecase } from '@/domaines/article/previsualiserArticle.usecase';
 
 describe('Fichier de tests pour previsualiser un article', () => {
   it('Doit appeler le repository', async () => {

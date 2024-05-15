@@ -1,8 +1,8 @@
-import { MarquerLeServiceCommeConsulteUsecase } from '@/linky/marquerLeServiceCommeConsulte.usecase';
+import { MarquerLeServiceCommeConsulteUsecase } from '@/domaines/linky/marquerLeServiceCommeConsulte.usecase';
 import { LinkyRepositorySpy } from './adapters/linky.repository.spy';
 import { expect } from 'vitest';
 import { SpyToDoListEventBus } from '../toDoList/spyTodoListEventBus';
-import { ToDoListEvent } from '@/toDoList/toDoListEventBusImpl';
+import { ToDoListEvent } from '@/domaines/toDoList/toDoListEventBusImpl';
 
 describe('Fichier de tests concernant le fait que le service linky a ete consulté', () => {
   it("Lorsqu'un utilisateur consulte le service linky (page de configuration) on doit prévenir le back", async () => {

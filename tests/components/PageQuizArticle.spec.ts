@@ -1,8 +1,8 @@
 import { fireEvent, render } from '@testing-library/vue';
 import PageQuizComposant from '@/components/custom/Quiz/PageQuizComposant.vue';
-import { QuizViewModel } from '@/quiz/adapters/chargementQuiz.presenter.impl';
-import { ArticleDuQuiz } from '@/quiz/ports/quizRepository';
-import { EnvoyerDonneesQuizInteractionUsecase } from '@/quiz/envoyerDonneesQuizInteraction.usecase';
+import { QuizViewModel } from '@/domaines/quiz/adapters/chargementQuiz.presenter.impl';
+import { ArticleDuQuiz } from '@/domaines/quiz/ports/quizRepository';
+import { EnvoyerDonneesQuizInteractionUsecase } from '@/domaines/quiz/envoyerDonneesQuizInteraction.usecase';
 
 const quizViewModel: QuizViewModel = {
   titre: 'A quoi ça sert de manger bio ?',
@@ -54,7 +54,7 @@ describe('Page Quiz Article', () => {
     // GIVEN
     expect(page.getByRole('heading', { name: 'Une question sur la thématique Climat', level: 1 })).toBeDefined();
     expect(
-      page.getByRole('group', { name: "Quel est le principal avantage de l'agriculture biologique ?" })
+      page.getByRole('group', { name: "Quel est le principal avantage de l'agriculture biologique ?" }),
     ).toBeDefined();
     expect(page.getByRole('radio', { name: '1' })).toBeDefined();
     expect(page.getByRole('radio', { name: '2' })).toBeDefined();
@@ -124,7 +124,7 @@ describe('Page Quiz Article', () => {
             'idUtilisateur',
             'idQuiz',
             100,
-            null
+            null,
           );
         });
       });
@@ -134,7 +134,7 @@ describe('Page Quiz Article', () => {
           // WHEN
           // THEN
           vi.spyOn(EnvoyerDonneesQuizInteractionUsecase.prototype, 'execute').mockImplementation(() =>
-            Promise.resolve()
+            Promise.resolve(),
           );
           await fireEvent.click(mauvaiseReponse);
           await fireEvent.click(boutonValider);
@@ -160,7 +160,7 @@ describe('Page Quiz Article', () => {
             'idUtilisateur',
             'idQuiz',
             0,
-            null
+            null,
           );
         });
       });

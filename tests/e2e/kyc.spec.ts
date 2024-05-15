@@ -5,7 +5,7 @@ import { InjectRecommandations } from './utils/injectRecommandations';
 import { InjectTodo } from './utils/injectTodo';
 import { InjectKYC } from './utils/injectKYC';
 import { InjectGamification } from './utils/injectGamification';
-import { ThematiqueQuestion } from '@/kyc/recupererQuestionUsecase';
+import { ThematiqueQuestion } from '@/domaines/kyc/recupererQuestionUsecase';
 
 let page: Page;
 

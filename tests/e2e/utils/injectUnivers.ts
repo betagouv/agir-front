@@ -1,4 +1,4 @@
-import { UniversApiModel } from '@/univers/adapters/univers.repository.axios';
+import { UniversApiModel } from '@/domaines/univers/adapters/univers.repository.axios';
 
 export class InjectUnivers {
   vierge(): UniversApiModel[] {

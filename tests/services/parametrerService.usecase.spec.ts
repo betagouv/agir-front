@@ -1,4 +1,4 @@
-import { ParametrerServiceUsecase } from '@/services/parametrerService.usecase';
+import { ParametrerServiceUsecase } from '@/domaines/services/parametrerService.usecase';
 import { SpyServiceRepository } from './adapters/service.repository.spy';
 
 describe("Fichier de tests concernant le paramétrage d'un service", () => {

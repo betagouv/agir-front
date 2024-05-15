@@ -30,10 +30,10 @@
 
 <script setup lang="ts">
   import { ref } from 'vue';
+  import { ArticleRepositoryAxios } from '@/domaines/article/adapters/article.repository.axios';
+  import { AjouterAuxFavorisUsecase } from '@/domaines/article/ajouterAuxFavoris.usecase';
+  import { RetirerDesFavorisUsecase } from '@/domaines/article/retirerDesFavoris.usecase';
   import { utilisateurStore } from '@/store/utilisateur';
-  import { ArticleRepositoryAxios } from '@/article/adapters/article.repository.axios';
-  import { AjouterAuxFavorisUsecase } from '@/article/ajouterAuxFavoris.usecase';
-  import { RetirerDesFavorisUsecase } from '@/article/retirerDesFavoris.usecase';
 
   const props = defineProps<{
     id: string;

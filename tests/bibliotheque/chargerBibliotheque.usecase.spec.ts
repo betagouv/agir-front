@@ -1,5 +1,5 @@
-import { ChargerBibliothequeUsecase } from '@/bibliotheque/chargerBibliotheque.usecase';
-import { BibliothequePresenterImpl } from '@/bibliotheque/adapters/bibliotheque.presenter.impl';
+import { ChargerBibliothequeUsecase } from '@/domaines/bibliotheque/chargerBibliotheque.usecase';
+import { BibliothequePresenterImpl } from '@/domaines/bibliotheque/adapters/bibliotheque.presenter.impl';
 import { BibliothequeRepositoryMock } from './adapters/bibliotheque.repository.mock';
 
 describe('Fichier de tests concernant le chargement de la bibliotheque', () => {

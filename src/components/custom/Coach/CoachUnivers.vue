@@ -10,7 +10,7 @@
 
 <script setup lang="ts">
   import CoachUniversCard from '@/components/custom/Coach/CoachUniversCard.vue';
-  import { UniversViewModel } from '@/univers/adapters/listeUnivers.presenter.impl';
+  import { UniversViewModel } from '@/domaines/univers/adapters/listeUnivers.presenter.impl';
 
   defineProps<{ universViewModel: UniversViewModel[] }>();
 </script>

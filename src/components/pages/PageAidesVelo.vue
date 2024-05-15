@@ -57,23 +57,23 @@
 
 <script setup lang="ts">
   import { ref } from 'vue';
-  import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import AidesResultat from '@/components/custom/Aides/AidesResultat.vue';
   import AsideAideVelo from '@/components/custom/Aides/AidesVeloAside.vue';
-  import { SimulationAideResultatViewModel } from '@/aides/ports/simulationAideResultat';
-  import SimulerAideVeloUsecase from '@/aides/simulerAideVelo.usecase';
-  import { SimulerAideVeloRepositoryAxios } from '@/aides/adapters/simulerAideVelo.repository.axios';
-  import { utilisateurStore } from '@/store/utilisateur';
-  import { SimulerAideVeloPresenterImpl } from '@/aides/adapters/simulerAideVelo.presenter.impl';
   import InputNumberVertical from '@/components/custom/InputNumberVertical.vue';
-  import { RecupererInformationLogementUseCase } from '@/logement/recupererInformationLogement.usecase';
-  import { LogementRepositoryAxios } from '@/logement/adapters/logement.repository.axios';
-  import { LogementPresenterImpl } from '@/logement/adapters/logement.presenter.impl';
+  import FilDAriane from '@/components/dsfr/FilDAriane.vue';
+  import { SimulerAideVeloPresenterImpl } from '@/domaines/aides/adapters/simulerAideVelo.presenter.impl';
+  import { SimulerAideVeloRepositoryAxios } from '@/domaines/aides/adapters/simulerAideVelo.repository.axios';
+  import { SimulationAideResultatViewModel } from '@/domaines/aides/ports/simulationAideResultat';
+  import SimulerAideVeloUsecase from '@/domaines/aides/simulerAideVelo.usecase';
+  import { LogementPresenterImpl } from '@/domaines/logement/adapters/logement.presenter.impl';
+  import { LogementRepositoryAxios } from '@/domaines/logement/adapters/logement.repository.axios';
+  import { RecupererInformationLogementUseCase } from '@/domaines/logement/recupererInformationLogement.usecase';
+  import { ProfileUtilisateurPresenterImpl } from '@/domaines/profileUtilisateur/adapters/profileUtilisateur.presenter.impl';
   import {
     ChargerProfileUtilisateurUsecase,
     ProfileUtilisateurRepositoryAxiosImpl,
-  } from '@/profileUtilisateur/chargerProfileUtilisateur.usecase';
-  import { ProfileUtilisateurPresenterImpl } from '@/profileUtilisateur/adapters/profileUtilisateur.presenter.impl';
+  } from '@/domaines/profileUtilisateur/chargerProfileUtilisateur.usecase';
+  import { utilisateurStore } from '@/store/utilisateur';
 
   const titrePage = 'Acheter un vélo';
   const sousTitre = 'Voici les aides vélo disponibles (en fonction de votre situation)';

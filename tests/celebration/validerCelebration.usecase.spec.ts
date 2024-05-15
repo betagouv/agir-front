@@ -1,4 +1,4 @@
-import { ValiderCelebrationUsecase } from '@/celebration/validerCelebration.usecase';
+import { ValiderCelebrationUsecase } from '@/domaines/celebration/validerCelebration.usecase';
 import { SpyCelebrationRepository } from './spyCelebrationRepository';
 
 describe('Fichier de tests de validation de celebration', () => {

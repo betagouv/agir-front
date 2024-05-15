@@ -1,8 +1,8 @@
-import { RecupererRecommandationsPersonnaliseesUsecase } from '@/recommandationsPersonnalisees/recupererRecommandationsPersonnalisees.usecase';
+import { RecupererRecommandationsPersonnaliseesUsecase } from '@/domaines/recommandationsPersonnalisees/recupererRecommandationsPersonnalisees.usecase';
 import {
   RecommandationPersonnaliseeViewModel,
   RecommandationsPersonnaliseesPresenterImpl,
-} from '@/recommandationsPersonnalisees/adapters/recommandationsPersonnalisees.presenter.impl';
+} from '@/domaines/recommandationsPersonnalisees/adapters/recommandationsPersonnalisees.presenter.impl';
 import { MockRecommandationsPersonnaliseesRepository } from './adapters/recommandationsPersonnalisees.repository.mock';
 
 describe('Fichier de tests concernant le chargement des recommandations personnalisees', () => {

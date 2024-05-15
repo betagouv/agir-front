@@ -7,10 +7,10 @@
 </template>
 
 <script setup lang="ts">
-  import InputMail from '@/components/dsfr/InputMail.vue';
   import { ref } from 'vue';
-  import { CommencerRedefinirMotDePasseUsecase } from '@/authentification/commencerRedefinirMotDePasse.usecase';
-  import { UtilisateurRepositoryAxios } from '@/authentification/adapters/utilisateur.repository.axios';
+  import InputMail from '@/components/dsfr/InputMail.vue';
+  import { UtilisateurRepositoryAxios } from '@/domaines/authentification/adapters/utilisateur.repository.axios';
+  import { CommencerRedefinirMotDePasseUsecase } from '@/domaines/authentification/commencerRedefinirMotDePasse.usecase';
 
   const email = ref('');
 

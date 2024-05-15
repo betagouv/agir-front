@@ -1,5 +1,5 @@
-import { Question } from '@/kyc/recupererQuestionUsecase';
-import { QuestionRepository } from '@/kyc/ports/question.repository';
+import { Question } from '@/domaines/kyc/recupererQuestionUsecase';
+import { QuestionRepository } from '@/domaines/kyc/ports/question.repository';
 
 export class SpyQuestionRepository implements QuestionRepository {
   recupererListeQuestions(utilisateurId: string): Promise<Question[]> {
