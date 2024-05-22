@@ -1,6 +1,6 @@
 export function calculerSeuils(nombreDeParts: number) {
-  const revenuMin = Math.floor(nombreDeParts * 6358);
-  const revenuMax = Math.floor(nombreDeParts * 14089);
+  const revenuMin = Math.floor(nombreDeParts * 7100);
+  const revenuMax = Math.floor(nombreDeParts * 15400);
 
   return [
     {
