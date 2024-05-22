@@ -34,7 +34,8 @@
     </div>
   </div>
   <p class="fr-mt-2w fr-mb-0 fr-text--sm">
-    Source : Ministère de la Transition Écologique et de la Cohésion des Territoires (2021), Carbone 4 (2021)<br />
+    Source : Ministère de la transition écologique et de la cohésion des territoires (SDES, calculs 2023) – Année 2022
+    (estimation provisoire)<br />
     *<span class="nowrap">kg CO<sub>2</sub>-e</span> : kilogramme d’équivalent dioxyde de carbone (masse de tous les gaz
     à effet de serre rapportée au dioxyde de carbone)
   </p>
