@@ -46,9 +46,9 @@
           <DefiFin v-if="reponseAEteDonnee" :defi="defiViewModel" :reponse="reponse" />
         </div>
         <div class="background--white border fr-mt-3w fr-p-4w border-radius--md">
-          <div v-if="defiViewModel?.afficherNombreDePersonnes">
+          <div v-if="defiViewModel.afficherNombreDePersonnes">
             <img height="48" src="/ic_users.svg" alt="" />
-            <p class="fr-h2 fr-mb-0">Rejoignez Louis, Lilly, Abdel et plein d’autres !</p>
+            <p class="fr-h2 fr-mb-0">Rejoignez {{ prenomsAleatoires }} et plein d’autres !</p>
             <p>{{ defiViewModel?.nombreDePersonnes }} personnes ont déjà relevé le défi... Et vous ?</p>
           </div>
 
@@ -88,6 +88,39 @@
   import { ToDoListEventBusImpl } from '@/domaines/toDoList/toDoListEventBusImpl';
   import { utilisateurStore } from '@/store/utilisateur';
 
+  const listePrenoms = [
+    'Colette',
+    'Arnaud',
+    'Gilles',
+    'Clément',
+    'Elsa',
+    'Hombeline',
+    'Alice',
+    'Isabelle',
+    'Valérie',
+    'Gregory',
+    'Zohra',
+    'Martine',
+    'Daniel',
+    'Stephane',
+    'Audrey',
+    'Pierre',
+    'Dominique',
+    'Thibaut',
+    'Sylvie',
+    'Cédric',
+    'Bernard',
+    'Keryan',
+    'Romuald',
+    'Mélanie',
+    'Jeanne',
+    'Claire',
+    'Nina',
+    'Alix',
+    'Wilfried',
+    'Géraldine',
+    'Christophe',
+  ];
   const route = useRoute();
   const questionId = Array.isArray(route.params.id) ? route.params.id[0] : route.params.id;
 
@@ -104,7 +137,7 @@
     return reponse.value === 'todo';
   });
 
-  const obtenirImagesAleatoires = (count, max) => {
+  const obtenirPrenomsAleatoires = (count, max) => {
     const indices: number[] = [];
     while (indices.length < count) {
       const randomIndex = Math.floor(Math.random() * (max + 1));
@@ -115,7 +148,11 @@
     return indices;
   };
 
-  const imagesAleatoires = computed(() => obtenirImagesAleatoires(3, 14));
+  const prenomsAleatoires = computed(() =>
+    obtenirPrenomsAleatoires(3, listePrenoms.length - 1)
+      .map(index => listePrenoms[index])
+      .join(', '),
+  );
 
   onMounted(async () => {
     const recupereQuestionUsecase = new RecupererDefiUsecase(new DefiRepositoryAxios());
@@ -144,23 +181,3 @@
     reponseAEteDonnee.value = true;
   };
 </script>
-<style scoped>
-  .profile-container {
-    display: flex;
-    align-items: center;
-  }
-
-  .profile-pic {
-    width: 4rem;
-    height: 4rem;
-    border-radius: 50%;
-    background-size: cover;
-    background-position: center;
-    margin-left: -20px;
-    border: 3px solid white;
-  }
-
-  .profile-pic:first-child {
-    margin-left: 0;
-  }
-</style>

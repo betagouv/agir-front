@@ -1,7 +1,5 @@
 import { RecupererListeDefisParUniversUsecase } from '@/domaines/defi/recupererListeDefisParUnivers.usecase';
 import { MockListeDefisRepository } from './adapters/listedefis.repository.mock';
-import { ListeDefisPresenterImpl } from '@/domaines/defi/adapters/listeDefis.presenter.impl';
-import { DefisQuestionViewModel } from '@/domaines/defi/ports/listeDefis.presenter';
 import { expect } from 'vitest';
 import {
   DefiDescriptionViewModel,
