@@ -2,6 +2,15 @@
   <div>
     <h2 class="fr-h2">Votre logement</h2>
     <form @submit.prevent="enregistrerLesInformations">
+      <div class="fr-grid-row full-width flex-end">
+        <button
+          type="submit"
+          aria-label="Soumettre le formulaire"
+          class="fr-btn fr-btn--icon-left fr-btn--lg fr-icon-save-3-fill"
+        >
+          Mettre à jour vos informations
+        </button>
+      </div>
       <div class="fr-mb-4w">
         <h3 class="fr-h4">Où habitez-vous ?</h3>
         <InputCodePostal
@@ -100,9 +109,15 @@
             <a href="https://particulier.gorenove.fr" target="_blank" rel="noreferrer">Go Renov</a>.
           </p>
         </CarteInfo>
-        <button type="submit" class="fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-save-3-fill">
-          Mettre à jour vos informations
-        </button>
+        <div class="fr-grid-row full-width flex-end">
+          <button
+            type="submit"
+            aria-label="Soumettre le formulaire"
+            class="fr-btn fr-btn--icon-left fr-btn--lg fr-mt-4w fr-icon-save-3-fill"
+          >
+            Mettre à jour vos informations
+          </button>
+        </div>
         <Alert
           v-if="alerte.isActive"
           class="fr-col-12 fr-mt-2w"
