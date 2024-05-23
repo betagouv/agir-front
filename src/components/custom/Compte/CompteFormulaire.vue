@@ -1,6 +1,15 @@
 <template>
   <div>
     <form class="fr-mb-0" @submit.prevent="modifierInformation">
+      <div class="fr-grid-row full-width flex-end">
+        <button
+          type="submit"
+          aria-label="Soumettre le formulaire"
+          class="fr-btn fr-btn--icon-left fr-btn--lg fr-icon-save-3-fill"
+        >
+          Mettre à jour vos informations
+        </button>
+      </div>
       <fieldset class="fr-mb-5v fr-fieldset" aria-labelledby="identité-fieldset-legend">
         <legend class="fr-fieldset__legend fr-px-0 fr-mx-0" id="identité-fieldset-legend">
           <h2>Identité personnelle</h2>
@@ -35,9 +44,15 @@
             </CarteInfo>
           </div>
         </div>
-        <button class="fr-btn fr-btn--secondary fr-btn--icon-left fr-mt-4w fr-icon-save-3-fill">
-          Mettre à jour vos informations
-        </button>
+        <div class="fr-grid-row full-width flex-end">
+          <button
+            type="submit"
+            aria-label="Soumettre le formulaire"
+            class="fr-btn fr-btn--icon-left fr-btn--lg fr-mt-4w fr-icon-save-3-fill"
+          >
+            Mettre à jour vos informations
+          </button>
+        </div>
       </fieldset>
     </form>
     <Alert
