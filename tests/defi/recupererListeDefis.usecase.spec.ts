@@ -18,6 +18,7 @@ describe('Fichier de tests concernant la récupération des défis en cours et t
           status: 'en_cours',
           astuces: 'Defi1 astuce',
           pourquoi: 'Défi pourquoi',
+          nombreDePersonnes: 10,
         },
         {
           id: 'defiId2',
@@ -28,6 +29,7 @@ describe('Fichier de tests concernant la récupération des défis en cours et t
           status: 'deja_fait',
           astuces: 'Defi2 astuce',
           pourquoi: 'Défi2 pourquoi',
+          nombreDePersonnes: 10,
         },
         {
           id: 'defiId3',
@@ -39,6 +41,7 @@ describe('Fichier de tests concernant la récupération des défis en cours et t
           astuces: 'Defi3 astuce',
           pourquoi: 'Défi3 pourquoi',
           explicationRefus: 'une explication',
+          nombreDePersonnes: 10,
         },
         {
           id: 'defiId4',
@@ -49,6 +52,7 @@ describe('Fichier de tests concernant la récupération des défis en cours et t
           status: 'fait',
           astuces: 'Defi4 astuce',
           pourquoi: 'Défi4 pourquoi',
+          nombreDePersonnes: 10,
         },
       ]),
     );

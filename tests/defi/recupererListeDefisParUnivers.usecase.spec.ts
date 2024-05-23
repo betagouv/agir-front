@@ -23,6 +23,7 @@ describe("Fichier de tests concernant la récupération de la liste des défis a
           status: 'en_cours',
           astuces: 'Astuces du défi 1',
           pourquoi: 'Pourquoi du défi 1',
+          nombreDePersonnes: 10,
         },
       ]),
     );
