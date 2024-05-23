@@ -27,6 +27,7 @@
               :value-max="todo.progession.etapeTotal"
               :url="todo.url"
               :hash="todo.hash"
+              :picto="todo.picto"
             />
           </li>
         </ul>

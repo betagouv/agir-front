@@ -15,6 +15,7 @@ const todoExemple1: TodoViewModel = {
   type: 'test',
   thematique: 'quizz',
   pointAEteRecolte: false,
+  picto: '',
 };
 const todoExemple2: TodoViewModel = {
   id: 'test 2',
@@ -29,6 +30,7 @@ const todoExemple2: TodoViewModel = {
   type: 'test 2',
   thematique: 'quizz',
   pointAEteRecolte: false,
+  picto: '',
 };
 const todoDoneRecupererExemple1: TodoViewModel = {
   id: 'test',
@@ -43,6 +45,7 @@ const todoDoneRecupererExemple1: TodoViewModel = {
   type: 'test',
   thematique: 'quizz',
   pointAEteRecolte: true,
+  picto: '',
 };
 const todoDoneNonRecupererExemple2: TodoViewModel = {
   id: 'test 2',
@@ -57,6 +60,7 @@ const todoDoneNonRecupererExemple2: TodoViewModel = {
   type: 'test 2',
   thematique: 'quizz',
   pointAEteRecolte: false,
+  picto: '',
 };
 
 describe('Coach - Section ToDo', () => {

@@ -27,7 +27,17 @@ export class ThematiqueRepositoryFake implements ThematiqueRepository {
           estBloquee: false,
           points: 10,
           aEteRealisee: false,
-          type: InteractionType.QUIZ,
+          type: InteractionType.DEFIS,
+        },
+        {
+          id: 'id3',
+          contentId: '3',
+          titre: 'Mission 3',
+          progression: 0,
+          estBloquee: false,
+          points: 10,
+          aEteRealisee: false,
+          type: InteractionType.KYC,
         },
       ],
     });

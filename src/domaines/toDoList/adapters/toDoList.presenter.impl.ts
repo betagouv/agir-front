@@ -22,6 +22,7 @@ export interface TodoViewModel {
   thematique: string;
   pointAEteRecolte: boolean;
   hash?: string;
+  picto: string;
 }
 
 export interface TodoListViewModel {
@@ -60,6 +61,7 @@ export class ToDoListPresenterImpl implements ToDoListPresenter {
       thematique: todo.thematique,
       pointAEteRecolte: todo.pointAEteRecolte,
       hash: this.determineHash(todo),
+      picto: this.determinePicto(todo),
     };
   }
 
@@ -92,6 +94,20 @@ export class ToDoListPresenterImpl implements ToDoListPresenter {
         return `#${todo.idDuContenu}`;
       default:
         return undefined;
+    }
+  }
+
+  private determinePicto(todo: TodoListItem) {
+    switch (todo.type) {
+      case InteractionType.DEFIS:
+        return '/ic_mission_defi.svg';
+      case InteractionType.ARTICLE:
+      case InteractionType.QUIZ:
+        return '/ic_mission_article.svg';
+      case InteractionType.KYC:
+        return '/ic_mission_kyc.svg';
+      default:
+        return '';
     }
   }
 }

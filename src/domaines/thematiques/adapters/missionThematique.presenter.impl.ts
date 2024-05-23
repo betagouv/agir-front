@@ -1,8 +1,8 @@
 import { MissionItem, MissionThematique } from '../recupererMissionThematiqueUsecase';
 import { MissionThematiquePresenter } from '@/domaines/thematiques/ports/missionThematique.presenter';
-import { RouteAidesPath } from '@/router/aides/routes';
 import { RouteArticlePath } from '@/router/articles/routes';
 import { RouteCoachPath } from '@/router/coach/routes';
+import { RouteDefiPath } from '@/router/defis/routes';
 import { RouteKycPath } from '@/router/kyc/routes';
 import { buildUrl } from '@/shell/buildUrl';
 import { InteractionType } from '@/shell/interactionType';
@@ -17,6 +17,7 @@ export interface MissionItemViewModel {
   aEteRealisee: boolean;
   url: string;
   hash?: string;
+  picto: string;
   progession: {
     etapeCourante: number;
     etapeTotal: number;
@@ -59,6 +60,7 @@ export class MissionThematiquePresenterImpl implements MissionThematiquePresente
       aEteRealisee: item.aEteRealisee,
       url: this.determineUrl(item),
       hash: this.determineHash(item),
+      picto: this.determinePicto(item),
       progession: {
         etapeCourante: 1,
         etapeTotal: 2,
@@ -77,16 +79,28 @@ export class MissionThematiquePresenterImpl implements MissionThematiquePresente
 
   private determineUrl(item: MissionItem) {
     switch (item.type) {
-      case InteractionType.AIDE:
-        return RouteAidesPath.VOS_AIDES;
       case InteractionType.QUIZ:
         return `${RouteCoachPath.COACH + RouteCoachPath.QUIZ}/${item.contentId}`;
       case InteractionType.ARTICLE:
         return `${RouteArticlePath.ARTICLE}${buildUrl(item.titre)}/${item.contentId}`;
       case InteractionType.KYC:
         return `${RouteKycPath.KYC}${item.contentId}`;
-      case InteractionType.SERVICE:
-        return `${RouteCoachPath.COACH}${RouteCoachPath.SERVICES}`;
+      case InteractionType.DEFIS:
+        return `${RouteDefiPath.DEFI}${item.contentId}`;
+      default:
+        return '';
+    }
+  }
+
+  private determinePicto(item: MissionItem) {
+    switch (item.type) {
+      case InteractionType.DEFIS:
+        return '/ic_mission_defi.svg';
+      case InteractionType.ARTICLE:
+      case InteractionType.QUIZ:
+        return '/ic_mission_article.svg';
+      case InteractionType.KYC:
+        return '/ic_mission_kyc.svg';
       default:
         return '';
     }

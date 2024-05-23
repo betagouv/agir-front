@@ -32,7 +32,10 @@ describe("Fichier de tests concernant la récupération d'une mission pour une t
             progression: 0,
             titre: 'Mission 1',
             url: '/agir/quiz/1',
+            picto: '/ic_mission_article.svg',
           },
+        ],
+        defis: [
           {
             id: 'id2',
             aEteRealisee: false,
@@ -46,11 +49,28 @@ describe("Fichier de tests concernant la récupération d'une mission pour une t
             },
             progression: 0,
             titre: 'Mission 2',
-            url: '/agir/quiz/2',
+            url: '/defi/2',
+            picto: '/ic_mission_defi.svg',
           },
         ],
-        defis: [],
-        kyc: [],
+        kyc: [
+          {
+            aEteRealisee: false,
+            estBloquee: false,
+            hash: undefined,
+            id: 'id3',
+            idDuContenu: '3',
+            picto: '/ic_mission_kyc.svg',
+            points: 10,
+            progession: {
+              etapeCourante: 1,
+              etapeTotal: 2,
+            },
+            progression: 0,
+            titre: 'Mission 3',
+            url: '/mieux-vous-connaitre/3',
+          },
+        ],
         titre: 'Thematique 1',
         urlImage: 'https://via.placeholder.com/150',
       });
