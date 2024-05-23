@@ -35,6 +35,7 @@ export class DefiRepositoryAxios implements DefiRepository {
           astuces: '',
           pourquoi: '',
           explicationRefus: apiModel.motif,
+          nombreDePersonnes: 42,
         };
 
         return recommandationPersonnalisee;
@@ -59,6 +60,7 @@ export class DefiRepositoryAxios implements DefiRepository {
       astuces: response.data.astuces,
       pourquoi: response.data.pourquoi,
       explicationRefus: response.data.motif,
+      nombreDePersonnes: 42,
     };
   }
 
@@ -75,6 +77,7 @@ export class DefiRepositoryAxios implements DefiRepository {
       astuces: defi.astuces,
       pourquoi: defi.pourquoi,
       explicationRefus: defi.motif,
+      nombreDePersonnes: 42,
     }));
   }
 }

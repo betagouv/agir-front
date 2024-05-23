@@ -29,24 +29,40 @@
             />
 
             <div v-if="reponse === 'pas_envie' || reponse === 'abondon'">
-              <label class="fr-label" for="explication">Expliquez-nous pourquoi ? (facultatif)</label>
+              <div class="fr-grid-row align-items--center fr-mb-2w">
+                <img height="48" src="/ic_cible.svg" alt="" />
+                <p class="fr-h4 fr-ml-4v fr-mb-0">Cette action ne vous convient pas ?</p>
+              </div>
+              <label class="fr-label" for="explication">
+                On ne vise pas toujours juste ! Dites-nous pourquoi en quelques mots et nous affinerons nos
+                recommandations à l’avenir. (facultatif)</label
+              >
               <textarea class="fr-input fr-mb-4w" v-model="explication" id="explication" name="explication" />
             </div>
 
-            <div class="background-bleu-alt-light border-radius--md fr-p-2w fr-mb-2w">
-              <h2 class="fr-h6">
-                <span class="fr-icon-arrow-right-s-last-line text--bleu-minor" aria-hidden="true"></span>
-                Bonnes astuces pour réaliser ce défi
-              </h2>
-              <p class="fr-mb-0 cms__content" v-html="defiViewModel.astuces"></p>
-            </div>
-            <button class="fr-btn fr-btn--lg" title="Valider" :disabled="isButtonDisabled">Valider</button>
+            <button class="fr-btn fr-btn--lg fr-mb-4w" title="Valider" :disabled="isButtonDisabled">Valider</button>
           </form>
-          <DefiFin v-else :defi="defiViewModel" :reponse="reponse" />
+
+          <DefiFin v-if="reponseAEteDonnee" :defi="defiViewModel" :reponse="reponse" />
+        </div>
+        <div class="background--white border fr-mt-3w fr-p-4w border-radius--md">
+          <div v-if="defiViewModel?.afficherNombreDePersonnes">
+            <img height="48" src="/ic_users.svg" alt="" />
+            <p class="fr-h2 fr-mb-0">Rejoignez Louis, Lilly, Abdel et plein d’autres !</p>
+            <p>{{ defiViewModel?.nombreDePersonnes }} personnes ont déjà relevé le défi... Et vous ?</p>
+          </div>
+
+          <div class="background-bleu-alt-light border-radius--md fr-p-2w fr-mb-2w">
+            <h2 class="fr-h6">
+              <span class="fr-icon-arrow-right-s-last-line text--bleu-minor" aria-hidden="true"></span>
+              Bonnes astuces pour réaliser ce défi
+            </h2>
+            <p class="fr-mb-0 cms__content" v-html="defiViewModel.astuces"></p>
+          </div>
         </div>
       </div>
       <div class="fr-col-4">
-        <CarteInfo v-if="!reponseAEteDonnee">
+        <CarteInfo>
           <p class="fr-text--bold">
             <span class="fr-icon-question-line" aria-hidden="true"></span>
             Pourquoi ce défi ?
@@ -55,7 +71,6 @@
         </CarteInfo>
       </div>
     </div>
-    <div v-else>Problème de chargement de donées</div>
   </div>
 </template>
 
@@ -89,6 +104,19 @@
     return reponse.value === 'todo';
   });
 
+  const obtenirImagesAleatoires = (count, max) => {
+    const indices: number[] = [];
+    while (indices.length < count) {
+      const randomIndex = Math.floor(Math.random() * (max + 1));
+      if (!indices.includes(randomIndex)) {
+        indices.push(randomIndex);
+      }
+    }
+    return indices;
+  };
+
+  const imagesAleatoires = computed(() => obtenirImagesAleatoires(3, 14));
+
   onMounted(async () => {
     const recupereQuestionUsecase = new RecupererDefiUsecase(new DefiRepositoryAxios());
     await recupereQuestionUsecase.execute(
@@ -116,3 +144,23 @@
     reponseAEteDonnee.value = true;
   };
 </script>
+<style scoped>
+  .profile-container {
+    display: flex;
+    align-items: center;
+  }
+
+  .profile-pic {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    margin-left: -20px;
+    border: 3px solid white;
+  }
+
+  .profile-pic:first-child {
+    margin-left: 0;
+  }
+</style>
