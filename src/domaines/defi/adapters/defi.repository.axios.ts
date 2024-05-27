@@ -14,6 +14,7 @@ interface DefiApiModel {
   thematique: string;
   titre: string;
   motif?: string;
+  nombre_de_fois_realise: number;
 }
 
 export class DefiRepositoryAxios implements DefiRepository {
@@ -35,7 +36,7 @@ export class DefiRepositoryAxios implements DefiRepository {
           astuces: '',
           pourquoi: '',
           explicationRefus: apiModel.motif,
-          nombreDePersonnes: 42,
+          nombreDePersonnes: apiModel.nombre_de_fois_realise,
         };
 
         return recommandationPersonnalisee;
@@ -60,7 +61,7 @@ export class DefiRepositoryAxios implements DefiRepository {
       astuces: response.data.astuces,
       pourquoi: response.data.pourquoi,
       explicationRefus: response.data.motif,
-      nombreDePersonnes: 42,
+      nombreDePersonnes: response.data.nombre_de_fois_realise,
     };
   }
 
