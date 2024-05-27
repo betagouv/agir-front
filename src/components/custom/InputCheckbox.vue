@@ -16,7 +16,7 @@
           v-model="checkedNames"
           @change="updateValue($event, estResetable && index === options.length - 1 ? true : false)"
         />
-        <label class="fr-label" :for="option.id">{{ option.label }}</label>
+        <label class="fr-label background--white" :for="option.id">{{ option.label }}</label>
       </div>
     </div>
   </fieldset>
