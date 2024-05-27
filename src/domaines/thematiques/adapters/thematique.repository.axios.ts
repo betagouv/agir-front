@@ -26,6 +26,7 @@ interface MissionItemThematiqueApiModel {
   is_locked: boolean;
   done: boolean;
   type: string;
+  points: number;
 }
 interface MissionThematiqueApiModel {
   id: string;
@@ -51,9 +52,9 @@ export class ThematiqueRepositoryAxios implements ThematiqueRepository {
         id: item.id,
         contentId: item.content_id,
         titre: item.titre,
-        progression: item.progression.current,
+        progression: 0,
         estBloquee: item.is_locked,
-        points: item.progression.target,
+        points: item.points,
         aEteRealisee: item.done,
         type: item.type,
       })),

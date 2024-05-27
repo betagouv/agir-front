@@ -51,7 +51,7 @@
     mission.value = viewModel;
   }
 
-  const thematiqueId = useRoute().params.id as string;
+  const thematiqueId = useRoute().params.thematique as string;
   const utilisateurId = utilisateurStore().utilisateur.id;
 
   usecase.execute(thematiqueId, utilisateurId, new MissionThematiquePresenterImpl(onMissionPretAAffchee));
