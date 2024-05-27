@@ -6,7 +6,7 @@
       <CoachCardDone
         v-else-if="mission.aEteRealisee"
         :titre="mission.titre"
-        :value="mission.progession.etapeCourante"
+        :value="mission.progression.etapeCourante"
         :nombre-points="mission.points"
         :point-a-ete-recolte="false"
         :element-id="mission.id"
@@ -14,8 +14,8 @@
       <CoachCardToDo
         v-else
         :titre="mission.titre"
-        :value="mission.progession.etapeCourante"
-        :value-max="mission.progession.etapeTotal"
+        :value="mission.progression.etapeCourante"
+        :value-max="mission.progression.etapeTotal"
         :url="mission.url"
         :hash="mission.hash"
         :picto="mission.picto"

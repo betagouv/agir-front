@@ -25,8 +25,8 @@
 
   defineProps<{
     titre: string;
-    value: number;
-    valueMax: number;
+    value?: number;
+    valueMax?: number;
     url: string;
     hash?: string;
     picto: string;

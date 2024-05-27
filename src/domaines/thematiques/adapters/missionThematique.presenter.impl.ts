@@ -11,14 +11,13 @@ export interface MissionItemViewModel {
   id: string;
   idDuContenu: string;
   titre: string;
-  progression: number;
   estBloquee: boolean;
   points: number;
   aEteRealisee: boolean;
   url: string;
   hash?: string;
   picto: string;
-  progession: {
+  progression: {
     etapeCourante: number;
     etapeTotal: number;
   };
@@ -37,9 +36,23 @@ export class MissionThematiquePresenterImpl implements MissionThematiquePresente
     this.viewModel({
       titre: missionThematique.titre,
       urlImage: missionThematique.urlImage,
-      kyc: missionThematique.items
-        .filter(item => item.type === InteractionType.KYC)
-        .map(item => this.mapToViewModel(item)),
+      kyc: [
+        {
+          id: '',
+          idDuContenu: '',
+          titre: 'Quelques questions pour mieux vous connaître',
+          progression: {
+            etapeCourante: 1,
+            etapeTotal: 2,
+          },
+          estBloquee: false,
+          points: 5,
+          aEteRealisee: false,
+          url: `/thematique/${missionThematique.idThematique}/mieux-vous-connaitre/`,
+          hash: null,
+          picto: '',
+        },
+      ],
       articleEtQuiz: missionThematique.items
         .filter(item => item.type === InteractionType.ARTICLE || item.type === InteractionType.QUIZ)
         .map(item => this.mapToViewModel(item)),

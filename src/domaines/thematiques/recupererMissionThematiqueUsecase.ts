@@ -16,6 +16,7 @@ export interface MissionThematique {
   urlImage: string;
   titre: string;
   items: MissionItem[];
+  idThematique: string;
 }
 
 export class RecupererMissionThematiqueUsecase {
@@ -23,6 +24,9 @@ export class RecupererMissionThematiqueUsecase {
 
   async execute(thematiqueId: string, utilisateurId: string, presenter: MissionThematiquePresenter): Promise<void> {
     const missionThematique = await this.thematiqueRepository.recupererMissionThematique(thematiqueId, utilisateurId);
-    presenter.present(missionThematique);
+    presenter.present({
+      ...missionThematique,
+      idThematique: thematiqueId,
+    });
   }
 }

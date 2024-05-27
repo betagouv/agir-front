@@ -31,6 +31,7 @@ interface MissionItemThematiqueApiModel {
 interface MissionThematiqueApiModel {
   id: string;
   titre: string;
+  image_url: string;
   thematique_univers: string;
   thematique_univers_label: string;
   univers: string;
@@ -47,7 +48,7 @@ export class ThematiqueRepositoryAxios implements ThematiqueRepository {
     );
     return {
       titre: reponse.data.titre,
-      urlImage: reponse.data.thematique_univers,
+      urlImage: reponse.data.image_url,
       items: reponse.data.objectifs.map(item => ({
         id: item.id,
         contentId: item.content_id,
