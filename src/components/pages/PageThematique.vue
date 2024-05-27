@@ -39,18 +39,22 @@
     MissionThematiquePresenterImpl,
     MissionThematiqueViewModel,
   } from '@/domaines/thematiques/adapters/missionThematique.presenter.impl';
-  import { ThematiqueRepositoryInMemory } from '@/domaines/thematiques/adapters/thematique.repository.inmemory';
+  import { ThematiqueRepositoryAxios } from '@/domaines/thematiques/adapters/thematique.repository.axios';
   import { RecupererMissionThematiqueUsecase } from '@/domaines/thematiques/recupererMissionThematiqueUsecase';
+  import { utilisateurStore } from '@/store/utilisateur';
 
   const mission = ref<MissionThematiqueViewModel>();
 
-  const usecase = new RecupererMissionThematiqueUsecase(new ThematiqueRepositoryInMemory());
+  const usecase = new RecupererMissionThematiqueUsecase(new ThematiqueRepositoryAxios());
 
   function onMissionPretAAffchee(viewModel: MissionThematiqueViewModel) {
     mission.value = viewModel;
   }
 
-  usecase.execute('universId', 'utilisateurId', new MissionThematiquePresenterImpl(onMissionPretAAffchee));
+  const thematiqueId = useRoute().params.thematique as string;
+  const utilisateurId = utilisateurStore().utilisateur.id;
+
+  usecase.execute(thematiqueId, utilisateurId, new MissionThematiquePresenterImpl(onMissionPretAAffchee));
 </script>
 
 <style scoped>

@@ -15,11 +15,50 @@ interface ThematiqueApiModel {
   image_url: string;
 }
 
+interface MissionItemThematiqueApiModel {
+  id: string;
+  titre: string;
+  content_id: string;
+  progression: {
+    current: number;
+    target: number;
+  };
+  is_locked: boolean;
+  done: boolean;
+  type: string;
+  points: number;
+}
+interface MissionThematiqueApiModel {
+  id: string;
+  titre: string;
+  thematique_univers: string;
+  thematique_univers_label: string;
+  univers: string;
+  univers_label: string;
+  objectifs: MissionItemThematiqueApiModel[];
+}
+
 export class ThematiqueRepositoryAxios implements ThematiqueRepository {
   @intercept401()
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  recupererMissionThematique(thematiqueId: string, utilisateurId: string): Promise<MissionThematique> {
-    throw new Error('Method not implemented.');
+  async recupererMissionThematique(thematiqueId: string, utilisateurId: string): Promise<MissionThematique> {
+    const axios = AxiosFactory.getAxios();
+    const reponse = await axios.get<MissionThematiqueApiModel>(
+      `/utilisateurs/${utilisateurId}/thematiques/${thematiqueId}/mission`,
+    );
+    return {
+      titre: reponse.data.titre,
+      urlImage: reponse.data.thematique_univers,
+      items: reponse.data.objectifs.map(item => ({
+        id: item.id,
+        contentId: item.content_id,
+        titre: item.titre,
+        progression: 0,
+        estBloquee: item.is_locked,
+        points: item.points,
+        aEteRealisee: item.done,
+        type: item.type,
+      })),
+    };
   }
   @intercept401()
   async recupererThematiques(universId: string, utilisateurId: string): Promise<Thematique[]> {
@@ -28,7 +67,7 @@ export class ThematiqueRepositoryAxios implements ThematiqueRepository {
       `/utilisateurs/${utilisateurId}/univers/${universId}/thematiques`,
     );
     return response.data.map(thematique => ({
-      id: thematique.titre,
+      id: thematique.type,
       titre: thematique.titre,
       progression: thematique.progression,
       estBloquee: thematique.is_locked,
