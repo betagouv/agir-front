@@ -1,7 +1,5 @@
 import { RecupererListeDefisParUniversUsecase } from '@/domaines/defi/recupererListeDefisParUnivers.usecase';
 import { MockListeDefisRepository } from './adapters/listedefis.repository.mock';
-import { ListeDefisPresenterImpl } from '@/domaines/defi/adapters/listeDefis.presenter.impl';
-import { DefisQuestionViewModel } from '@/domaines/defi/ports/listeDefis.presenter';
 import { expect } from 'vitest';
 import {
   DefiDescriptionViewModel,
@@ -23,6 +21,7 @@ describe("Fichier de tests concernant la récupération de la liste des défis a
           status: 'en_cours',
           astuces: 'Astuces du défi 1',
           pourquoi: 'Pourquoi du défi 1',
+          nombreDePersonnes: 10,
         },
       ]),
     );

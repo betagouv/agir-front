@@ -11,6 +11,7 @@ export interface Defi {
   astuces: string;
   pourquoi: string;
   explicationRefus?: string;
+  nombreDePersonnes: number;
 }
 
 export class RecupererListeDefisUsecase {

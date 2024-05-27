@@ -16,6 +16,8 @@ export interface DefiViewModel {
   astuces: string;
   pourquoi: string;
   explicationRefus?: string;
+  afficherNombreDePersonnes: boolean;
+  nombreDePersonnes: number;
 }
 
 export class DefiPresenterImpl implements DefiPresenter {
@@ -33,6 +35,8 @@ export class DefiPresenterImpl implements DefiPresenter {
       astuces: defi.astuces,
       pourquoi: defi.pourquoi,
       explicationRefus: defi.explicationRefus,
+      afficherNombreDePersonnes: defi.nombreDePersonnes > 2,
+      nombreDePersonnes: defi.nombreDePersonnes,
     });
   }
 
@@ -42,17 +46,15 @@ export class DefiPresenterImpl implements DefiPresenter {
     if (status === 'en_cours' || status === 'abondon') {
       return [
         { id: 'fait', label: '🏆 Défi réalisé' },
-        { id: 'en_cours', label: '⏱️ Je relance le défi' },
-        { id: 'abondon', label: '❌ Abandonner' },
+        { id: 'abondon', label: '👎 Finalement, pas pour moi' },
       ];
     } else if (status === 'fait') {
       return [{ id: 'deja_fait', label: '✅ Déjà fait' }];
     }
 
     return [
-      { id: 'en_cours', label: '👍 Défi accepté' },
-      { id: 'pas_envie', label: '👎 Pas envie' },
-      { id: 'deja_fait', label: '✅ Déjà fait' },
+      { id: 'en_cours', label: '👍 Je relève le défi' },
+      { id: 'pas_envie', label: '👎 Pas pour moi' },
     ];
   }
 }
