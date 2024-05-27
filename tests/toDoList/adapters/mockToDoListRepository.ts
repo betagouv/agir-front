@@ -3,15 +3,15 @@ import { ToDoListRepository } from '@/domaines/toDoList/ports/toDoList.repositor
 import { TodoList } from '@/domaines/toDoList/recupererToDoList.usecase';
 
 export class MockToDoListRepository implements ToDoListRepository {
-  async recupererPointsToDo(idUtilisateur: string, elementId: string): Promise<void> {
+  async recupererPointsToDo(_idUtilisateur: string, _elementId: string): Promise<void> {
     throw new Error('Method not implemented.');
   }
 
-  async terminerToDo(idUtilisateur: string): Promise<void> {
+  async terminerToDo(_idUtilisateur: string): Promise<void> {
     throw new Error('Method not implemented.');
   }
 
-  recupererToDoList(idUtilisateur: string): Promise<TodoList> {
+  recupererToDoList(_idUtilisateur: string): Promise<TodoList> {
     return Promise.resolve({
       titre: 'Ma ToDo List',
       pointFinDeMission: 30,
@@ -82,15 +82,30 @@ export class MockToDoListRepository implements ToDoListRepository {
         {
           id: 'id4',
           interactionId: 'interactionId4',
-          titre: 'Installer un service',
+          titre: 'Question KYC',
           url: '',
-          idDuContenu: 'leservice',
+          idDuContenu: 'questionKycId',
           progession: {
             etapeCourante: 1,
             etapeTotal: 1,
           },
           nombreDePointsAGagner: 10,
-          type: InteractionType.SERVICE,
+          type: InteractionType.KYC,
+          thematique: '🌍 Global',
+          pointAEteRecolte: false,
+        },
+        {
+          id: 'id3',
+          interactionId: 'interactionId3',
+          titre: 'Faire un défi',
+          url: '',
+          idDuContenu: '',
+          progession: {
+            etapeCourante: 1,
+            etapeTotal: 1,
+          },
+          nombreDePointsAGagner: 10,
+          type: InteractionType.DEFIS,
           thematique: '🌍 Global',
           pointAEteRecolte: false,
         },

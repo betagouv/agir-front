@@ -1,6 +1,6 @@
 <template>
-  <div class="todo background--white shadow fr-p-2w">
-    <span class="fr-icon-play-circle-line todo__picto text--bleu" aria-hidden="true"></span>
+  <div :class="`todo background--white shadow fr-p-2w border`">
+    <img :src="picto" alt="" />
     <div class="fr-col fr-col-md-9">
       <h4 class="fr-m-0">
         <router-link :to="{ path: url, hash: hash }" class="todo__link display-block text--normal fr-text--lg fr-mb-0">
@@ -29,6 +29,7 @@
     valueMax: number;
     url: string;
     hash?: string;
+    picto: string;
   }>();
 </script>
 
