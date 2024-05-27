@@ -21,26 +21,26 @@ export class DefiRepositoryAxios implements DefiRepository {
   @intercept401()
   async recupererListeDefisParUnivers(utilisateurId: string, universId: string): Promise<Defi[]> {
     const axiosInstance = AxiosFactory.getAxios();
-    const response = await axiosInstance.get<DefiApiModel[]>(`/utilisateurs/${utilisateurId}/defis`);
+    const response = await axiosInstance.get<DefiApiModel[]>(
+      `/utilisateurs/${utilisateurId}/univers/${universId}/defis`,
+    );
 
-    return response.data
-      .filter(model => model.thematique === universId)
-      .map((apiModel: DefiApiModel) => {
-        const recommandationPersonnalisee: Defi = {
-          description: '',
-          thematique: apiModel.thematique_label,
-          id: apiModel.id,
-          libelle: apiModel.titre,
-          points: apiModel.points,
-          status: apiModel.status,
-          astuces: '',
-          pourquoi: '',
-          explicationRefus: apiModel.motif,
-          nombreDePersonnes: apiModel.nombre_de_fois_realise,
+    return response.data.map((apiModel: DefiApiModel) => {
+      const recommandationPersonnalisee: Defi = {
+        description: '',
+        thematique: apiModel.thematique_label,
+        id: apiModel.id,
+        libelle: apiModel.titre,
+        points: apiModel.points,
+        status: apiModel.status,
+        astuces: '',
+        pourquoi: '',
+        explicationRefus: apiModel.motif,
+      nombreDePersonnes: apiModel.nombre_de_fois_realise,
         };
 
-        return recommandationPersonnalisee;
-      });
+      return recommandationPersonnalisee;
+    });
   }
   @intercept401()
   async envoyerReponse(utilisateurId: string, defiId: string, reponse: string, explication?: string): Promise<void> {
