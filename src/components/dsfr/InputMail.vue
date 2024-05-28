@@ -1,8 +1,8 @@
 <template>
   <div class="fr-input-group">
-    <label class="fr-label" :for="name">
+    <label class="fr-label" :class="classLabel" :for="name">
       {{ label }}
-      <span class="fr-hint-text">Format attendu : nom@domaine.fr</span>
+      <span class="text--normal fr-hint-text">Format attendu : nom@domaine.fr</span>
     </label>
     <input
       :id="name"
@@ -21,6 +21,7 @@
     name: string;
     label: string;
     modelValue: string;
+    classLabel?: string;
   }>();
 
   const emit = defineEmits<{
