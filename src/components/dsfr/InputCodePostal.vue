@@ -50,7 +50,6 @@
 </template>
 
 <script setup lang="ts">
-  import '@gouvfr/dsfr/dist/component/select/select.min.css';
   import { ChargementCommunesUsecase } from '@/domaines/communes/chargementCommunesUsecase';
   import { CommuneRepositoryAxios } from '@/domaines/communes/adapters/communeRepositoryAxios';
   import { onMounted, ref } from 'vue';
