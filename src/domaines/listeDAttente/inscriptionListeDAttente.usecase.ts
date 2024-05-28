@@ -2,7 +2,7 @@ import { ListeDAttentePresenter } from '@/domaines/listeDAttente/ports/listeDAtt
 import { ListeDAttenteRepository } from '@/domaines/listeDAttente/ports/listeDAttente.repository';
 
 export interface ReponseInscription {
-  succes: boolean;
+  success: boolean;
 }
 
 export class InscriptionListeDAttenteUsecase {

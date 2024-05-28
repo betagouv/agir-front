@@ -11,7 +11,7 @@ export class ListeDAttentePresenterImpl implements ListeDAttentePresenter {
   constructor(private readonly reponseInscriptionViewModel: (viewModel: ReponseInscriptionViewModel) => void) {}
 
   presente(reponse: ReponseInscription): void {
-    if (reponse.succes) {
+    if (reponse.success) {
       this.reponseInscriptionViewModel({
         type: 'success',
         titre: 'Inscription confirmée',

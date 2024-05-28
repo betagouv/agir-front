@@ -43,6 +43,13 @@
         </div>
         <button type="submit" class="fr-btn fr-btn--lg fr-mr-4w">M’inscrire sur la liste d’attente</button>
         <router-link :to="{ name: RouteCommuneName.ACCUEIL }" class="fr-link"> Revenir à l’accueil </router-link>
+        <Alert
+          v-if="alerte.isActive"
+          class="fr-col-12 fr-mt-2w"
+          :type="alerte.type"
+          :titre="alerte.titre"
+          :message="alerte.message"
+        />
       </form>
     </div>
   </div>
@@ -50,12 +57,37 @@
 
 <script setup lang="ts">
   import { ref } from 'vue';
+  import Alert from '@/components/custom/Alert.vue';
+
+  import { useAlerte } from '@/composables/useAlerte';
+  import { ListeDAttenteRepositoryAxios } from '@/domaines/listeDAttente/adapters/listeDAttente.repository.axios';
+  import {
+    ListeDAttentePresenterImpl,
+    ReponseInscriptionViewModel,
+  } from '@/domaines/listeDAttente/adapters/listeDAttenteImpl.presenter';
+  import { InscriptionListeDAttenteUsecase } from '@/domaines/listeDAttente/inscriptionListeDAttente.usecase';
   import { RouteCommuneName } from '@/router';
 
   const codePostal = ref<string>('');
   const typeVisiteur = ref<string>('');
+  const reponseInscriptionViewModel = ref<ReponseInscriptionViewModel>();
+  const { alerte, afficherAlerte } = useAlerte();
 
-  const envoyerPreInscription = () => {
-    console.log(typeVisiteur);
+  const envoyerPreInscription = async () => {
+    const usecase = new InscriptionListeDAttenteUsecase(new ListeDAttenteRepositoryAxios());
+    await usecase.execute(
+      'toto@toto.com',
+      codePostal.value,
+      typeVisiteur.value,
+      new ListeDAttentePresenterImpl(vm => (reponseInscriptionViewModel.value = vm)),
+    );
+
+    if (reponseInscriptionViewModel.value) {
+      afficherAlerte(
+        reponseInscriptionViewModel.value?.type,
+        reponseInscriptionViewModel.value?.titre,
+        reponseInscriptionViewModel.value?.message,
+      );
+    }
   };
 </script>
