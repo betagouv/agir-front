@@ -4,4 +4,5 @@ export interface QuestionRepository {
   recupererQuestion(questionId: string, utilisateurId: string): Promise<Question>;
   envoyerReponse(questionId: string, utilisateurId: string, reponse: string[]): Promise<void>;
   recupererListeQuestions(utilisateurId: string): Promise<Question[]>;
+  recupererQuestionsThematique(utilisateurId: string, thematiqueId: string): Promise<Question[]>;
 }

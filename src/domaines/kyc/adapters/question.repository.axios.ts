@@ -58,4 +58,22 @@ export class QuestionRepositoryAxios implements QuestionRepository {
     const axios = AxiosFactory.getAxios();
     await axios.put(`/utilisateurs/${utilisateurId}/questionsKYC/${questionId}`, { reponse });
   }
+
+  @intercept401()
+  async recupererQuestionsThematique(utilisateurId: string, thematiqueId: string): Promise<Question[]> {
+    const response = await AxiosFactory.getAxios().get<QuestionApiModel[]>(
+      `utilisateurs/${utilisateurId}/thematiques/${thematiqueId}/kycs`,
+    );
+    return response.data.map(question => ({
+      id: question.id,
+      libelle: question.question,
+      type: question.type,
+      reponses_possibles: question.reponses_possibles || [],
+      points: question.points,
+      reponse: question.reponse,
+      thematique: Object.values(ThematiqueQuestion).find(thematique => thematique === question.thematique) as
+        | ThematiqueQuestion
+        | ThematiqueQuestion.AUTRE,
+    }));
+  }
 }
