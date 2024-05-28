@@ -4,9 +4,9 @@
     <div v-if="questionsViewModel">
       <button @click="etapeCourante--">back</button>
       <div v-for="(questionViewModel, index) in questionsViewModel" :key="index">
-        <KYCForm />
-        <form @submit.prevent="validerLaReponse(index)" v-if="index === etapeCourante">
-          <p>Question {{ index + 1 }} sur {{ questionsViewModel.length }}</p>
+        <p v-if="index === etapeCourante">Question {{ index + 1 }} sur {{ questionsViewModel.length }}</p>
+        <KYCForm :question-view-model="questionViewModel" v-if="index === etapeCourante" />
+        <!-- <form @submit.prevent="validerLaReponse(index)" v-if="index === etapeCourante">
           <div v-if="questionViewModel.type === 'choix_unique'" class="fr-input-group">
             <BoutonRadio
               col=""
@@ -50,7 +50,7 @@
           >
             Continuer
           </button>
-        </form>
+        </form> -->
       </div>
     </div>
   </div>
@@ -58,11 +58,8 @@
 
 <script setup lang="ts">
   import { ref } from 'vue';
-  import BoutonRadio from '@/components/custom/BoutonRadio.vue';
-  import InputCheckbox from '@/components/custom/InputCheckbox.vue';
-
   import KYCForm from '@/components/custom/KYC/KYCForm.vue';
-  import { QuestionViewModel, ReponsePossible } from '@/domaines/kyc/adapters/question.presenter.impl';
+  import { QuestionViewModel } from '@/domaines/kyc/adapters/question.presenter.impl';
 
   const questionsViewModel = ref<QuestionViewModel[]>([]);
   questionsViewModel.value = [
@@ -112,7 +109,7 @@
         },
       ],
       points: '10',
-      reponses: ['1', '2'],
+      reponses: [],
       aDejaEteRepondu: false,
       description: 'lorem ipsum',
     },
