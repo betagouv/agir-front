@@ -42,6 +42,7 @@ describe("Fichier de tests concernant l'evaluation de l'onboarding", () => {
   it("En donnant des données d'onboarding doit presenter un resultat trié par valeur décroissante", async () => {
     // GIVEN
     const onboardingState: OnboardingState = {
+      email: '',
       etapeTransport: {
         transports: [],
         avion: 0,
@@ -97,6 +98,7 @@ describe("Fichier de tests concernant l'evaluation de l'onboarding", () => {
   it("En donnant des données d'onboarding doit presenter les phrases personnalisées par le coach", async () => {
     // GIVEN
     const onboardingState: OnboardingState = {
+      email: '',
       etapeTransport: {
         transports: [],
         avion: 0,

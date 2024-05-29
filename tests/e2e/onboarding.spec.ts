@@ -11,11 +11,14 @@ test.beforeAll(async () => {
 test.describe('Onboarding complet', () => {
   test("Aller sur l'onboarding", async () => {
     await page.goto('/');
-    await page.getByRole('link', { name: 'Commencer' }).click();
-    await expect(page).toHaveURL('/onboarding');
+    await page.getByRole('textbox', { name: 'Quelle est votre adresse email' }).fill('ww@w.com');
+    await page.getByRole('button', { name: 'Commencer' }).click();
+    await expect(page).toHaveURL('/pre-onboarding');
+  });
 
-    const titre = page.getByRole('heading', { level: 1, name: 'Quelques questions pour apprendre à se connaître' });
-    expect(titre).toBeDefined();
+  test('pre-onboarding', async () => {
+    await page.getByRole('link', { name: "Commencer l'estimation" }).click();
+    await expect(page).toHaveURL('/onboarding');
   });
 
   test('onboarding - step 1', async () => {

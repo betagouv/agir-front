@@ -30,6 +30,7 @@ export interface EtapeTransportState {
 }
 
 export interface OnboardingState {
+  email: string;
   etapeTransport: EtapeTransportState;
   etapeLogement: EtapeLogement;
   etapeAlimentation: EtapeAlimentation;

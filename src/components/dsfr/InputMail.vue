@@ -1,8 +1,8 @@
 <template>
   <div class="fr-input-group">
-    <label class="fr-label" :for="name">
+    <label class="fr-label" :class="classLabel" :for="name">
       {{ label }}
-      <span class="fr-hint-text">Format attendu : nom@domaine.fr</span>
+      <span class="text--normal fr-hint-text">Format attendu : nom@domaine.fr</span>
     </label>
     <input
       :id="name"
@@ -12,6 +12,7 @@
       :name="name"
       autocomplete="on"
       type="email"
+      :disabled="disable"
     />
   </div>
 </template>
@@ -21,6 +22,8 @@
     name: string;
     label: string;
     modelValue: string;
+    classLabel?: string;
+    disable?: boolean;
   }>();
 
   const emit = defineEmits<{
