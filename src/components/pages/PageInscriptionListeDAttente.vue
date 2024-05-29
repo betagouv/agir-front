@@ -42,7 +42,9 @@
             maxlength="5"
           />
         </div>
-        <button type="submit" class="fr-btn fr-btn--lg fr-mr-4w">M’inscrire sur la liste d’attente</button>
+        <button type="submit" class="fr-btn fr-btn--lg fr-mr-4w" :disabled="codePostal.length < 5">
+          M’inscrire sur la liste d’attente
+        </button>
         <router-link :to="{ name: RouteCommuneName.ACCUEIL }" class="fr-link"> Revenir à l’accueil </router-link>
         <Alert
           v-if="alerte.isActive"
@@ -70,7 +72,7 @@
   import { onboardingStore } from '@/store/onboarding';
 
   const codePostal = ref<string>('');
-  const typeVisiteur = ref<string>('');
+  const typeVisiteur = ref<string>('citoyen');
   const reponseInscriptionViewModel = ref<ReponseInscriptionViewModel>();
   const { alerte, afficherAlerte } = useAlerte();
 
