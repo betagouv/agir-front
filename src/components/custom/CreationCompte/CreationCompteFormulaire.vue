@@ -5,7 +5,12 @@
         <h2 class="fr-h4 text--center">Inscrivez-vous</h2>
       </legend>
       <div class="fr-fieldset__element">
-        <InputMail label="Adresse électronique" name="utilisateur-mail" v-model="compteUtilisateurInput.mail" />
+        <InputMail
+          label="Adresse électronique"
+          name="utilisateur-mail"
+          v-model="compteUtilisateurInput.mail"
+          :disable="true"
+        />
       </div>
       <div class="fr-grid-row fr-grid-row--gutters">
         <div class="fr-col-12 fr-col-lg-6">
@@ -69,7 +74,6 @@
   import { ref } from 'vue';
   import Alert from '@/components/custom/Alert.vue';
   import InputPassword from '@/components/custom/InputPassword.vue';
-  import InputCheckboxUnitaire from '@/components/dsfr/InputCheckboxUnitaire.vue';
   import InputMail from '@/components/dsfr/InputMail.vue';
   import InputText from '@/components/dsfr/InputText.vue';
   import { SessionRepositoryStore } from '@/domaines/authentification/adapters/session.repository.store';
@@ -83,7 +87,7 @@
 
   let compteUtilisateurInput = ref<UserInput>({
     nom: '',
-    mail: '',
+    mail: onboardingStore().email,
     prenom: '',
     motDePasse: '',
   });

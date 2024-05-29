@@ -12,6 +12,7 @@
       :name="name"
       autocomplete="on"
       type="email"
+      :disabled="disable"
     />
   </div>
 </template>
@@ -22,6 +23,7 @@
     label: string;
     modelValue: string;
     classLabel?: string;
+    disable?: boolean;
   }>();
 
   const emit = defineEmits<{

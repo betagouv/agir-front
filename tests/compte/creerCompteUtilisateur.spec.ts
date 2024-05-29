@@ -71,6 +71,7 @@ describe('Fichier de tests concernant la creation du compte utilisateur', () => 
     };
 
     const onboardingState: OnboardingState = {
+      email: '',
       etapeTransport: {
         transports: [],
         avion: 0,
@@ -129,6 +130,7 @@ describe('Fichier de tests concernant la creation du compte utilisateur', () => 
     };
 
     const onboardingState: OnboardingState = {
+      email: '',
       etapeTransport: {
         transports: [],
         avion: 0,

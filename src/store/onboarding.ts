@@ -9,6 +9,7 @@ import {
 
 export const onboardingStore = defineStore('onboarding', {
   state: (): OnboardingState => ({
+    email: '',
     etapeTransport: {
       transports: [],
       avion: 0,

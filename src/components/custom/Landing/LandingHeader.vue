@@ -23,15 +23,33 @@
     </div>
   </div>
 </template>
+
 <script setup lang="ts">
   import { ref } from 'vue';
   import InputMail from '@/components/dsfr/InputMail.vue';
-  import { RouteCommuneName } from '@/router';
+  import { ListeDAttenteRepositoryAxios } from '@/domaines/listeDAttente/adapters/listeDAttente.repository.axios';
+  import {
+    ReponseVerificationViewModel,
+    VerificationMailPresenterImpl,
+  } from '@/domaines/listeDAttente/adapters/verificationMailImpl.presenter';
+  import { VerificationWhiteListeUsecase } from '@/domaines/listeDAttente/verificationWhiteListe.usecase';
+  import router, { RouteCommuneName } from '@/router';
+  import { onboardingStore } from '@/store/onboarding';
 
   const email = ref('');
+  const reponseVerificationViewModel = ref<ReponseVerificationViewModel>();
 
-  function verifierEmail() {
-    //TODO: appeler verifierEmailUsecase
-    console.log(email);
-  }
+  const verifierEmail = async () => {
+    onboardingStore().email = email.value;
+
+    const usecase = new VerificationWhiteListeUsecase(new ListeDAttenteRepositoryAxios());
+    await usecase.execute(
+      email.value,
+      new VerificationMailPresenterImpl(vm => (reponseVerificationViewModel.value = vm)),
+    );
+
+    if (reponseVerificationViewModel.value) {
+      await router.push(reponseVerificationViewModel.value.redirectUrl);
+    }
+  };
 </script>

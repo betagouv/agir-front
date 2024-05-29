@@ -27,7 +27,7 @@ describe("Fichier de tests concernant l'inscription en liste d'attente", () => {
   describe("quand l'enregistrement fonctionne", () => {
     it('renvoie un message de succès', async () => {
       // GIVEN
-      const usecase = new InscriptionListeDAttenteUsecase(new ListeDAttenteMockRepository({ succes: true }));
+      const usecase = new InscriptionListeDAttenteUsecase(new ListeDAttenteMockRepository({ success: true }));
 
       // WHEN
       await usecase.execute('test@test.com', '75001', '1', new ListeDAttentePresenterImpl(expectation));
@@ -46,7 +46,7 @@ describe("Fichier de tests concernant l'inscription en liste d'attente", () => {
   describe("quand l'enregistrement ne fonctionne pas", () => {
     it("renvoie un message d'erreur", async () => {
       // GIVEN
-      const usecase = new InscriptionListeDAttenteUsecase(new ListeDAttenteMockRepository({ succes: false }));
+      const usecase = new InscriptionListeDAttenteUsecase(new ListeDAttenteMockRepository({ success: false }));
 
       // WHEN
       await usecase.execute('test@test.com', '75001', '1', new ListeDAttentePresenterImpl(expectation));
