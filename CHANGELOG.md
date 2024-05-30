@@ -1,5 +1,30 @@
 # Changelog
 
+## [1.12.0](https://github.com/betagouv/agir-front/compare/v1.11.0...v1.12.0) (2024-05-29)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* afficher le nombre de personnes ayant réalisés le défis et changement ui ([#406](https://github.com/betagouv/agir-front/issues/406)) ([790be4c](https://github.com/betagouv/agir-front/commit/790be4ce8548bcc31895e65df6108a5fc4e5550a))
+* ajout d'un champ pour accepter la charte lors de la création du compte ([#399](https://github.com/betagouv/agir-front/issues/399)) ([62d6a88](https://github.com/betagouv/agir-front/commit/62d6a880b742c40e67ef39f1c2143e7a9151ccf2))
+* ajout des defis abandonnes et pas envie au compte ([#398](https://github.com/betagouv/agir-front/issues/398)) ([09e0cf4](https://github.com/betagouv/agir-front/commit/09e0cf4f3117956536b1a1b4af1e7d11e185fac1))
+* ajout des missions thématique ([#396](https://github.com/betagouv/agir-front/issues/396)) ([fb788c7](https://github.com/betagouv/agir-front/commit/fb788c76c76242ee6126ed9c26f98fc17fdca50a))
+* branchement des missions ([#402](https://github.com/betagouv/agir-front/issues/402)) ([7c50b96](https://github.com/betagouv/agir-front/commit/7c50b96b70103adedbe4928b13c158ac23897869))
+* création de la page inscription liste d'attente ([#410](https://github.com/betagouv/agir-front/issues/410)) ([44a6520](https://github.com/betagouv/agir-front/commit/44a652026c52e2294d1573c39835de2242efc394))
+* mise à jour de l'écran du compte ([#407](https://github.com/betagouv/agir-front/issues/407)) ([e4bfd67](https://github.com/betagouv/agir-front/commit/e4bfd67c6146f0a00101db7219a91d3249144110))
+* mise à jour du RFR ([#403](https://github.com/betagouv/agir-front/issues/403)) ([6cc815f](https://github.com/betagouv/agir-front/commit/6cc815fc66586ec6b0be97855800aeaf43226436))
+* mise à jour picto mission ([#408](https://github.com/betagouv/agir-front/issues/408)) ([39e8a2a](https://github.com/betagouv/agir-front/commit/39e8a2af72430d1aeb6bbd4e6e1c53ac0b50e3e5))
+* mise a jour style mission ([#404](https://github.com/betagouv/agir-front/issues/404)) ([3e737b0](https://github.com/betagouv/agir-front/commit/3e737b02553da24ef7e4ecacb8b7c984e47c28c3))
+* modification wording onboarding ([#400](https://github.com/betagouv/agir-front/issues/400)) ([8646b37](https://github.com/betagouv/agir-front/commit/8646b379f2754542ac78b77b6f62f7c8654f316f))
+* on peut donner une explication de pourquoi nous n'acceptons pas le défi ([#397](https://github.com/betagouv/agir-front/issues/397)) ([b7ad0a5](https://github.com/betagouv/agir-front/commit/b7ad0a5071d4b3e19aa88d7790627aefae38ff97))
+* univers et ui home ([#393](https://github.com/betagouv/agir-front/issues/393)) ([e541d6d](https://github.com/betagouv/agir-front/commit/e541d6d46fd971bf0f80d2b1c8f3ef353c9a98f9))
+* update wording bilan onboarding ([#405](https://github.com/betagouv/agir-front/issues/405)) ([ee5c4ec](https://github.com/betagouv/agir-front/commit/ee5c4ec49fad3dbc6281c3750076ee06de979dae))
+
+
+### 👷 Autres changements
+
+* reorganisation du code source avec un repertoire domaines ([#401](https://github.com/betagouv/agir-front/issues/401)) ([3c2e159](https://github.com/betagouv/agir-front/commit/3c2e159e39f5d04312897714dba3a8a169c0150f))
+
 ## [1.11.0](https://github.com/betagouv/agir-front/compare/v1.10.0...v1.11.0) (2024-04-29)
 
 
