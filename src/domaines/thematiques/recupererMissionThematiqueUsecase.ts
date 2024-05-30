@@ -17,6 +17,10 @@ export interface MissionThematique {
   titre: string;
   items: MissionItem[];
   idThematique: string;
+  progressionKyc: {
+    etapeCourante: number;
+    etapeTotal: number;
+  };
 }
 
 export class RecupererMissionThematiqueUsecase {

@@ -4,7 +4,7 @@
     <div class="fr-col fr-col-md-9">
       <h4 class="fr-m-0">
         <router-link :to="{ path: url, hash: hash }" class="todo__link display-block text--normal fr-text--lg fr-mb-0">
-          {{ titre }}
+          <div v-html="titre" />
         </router-link>
       </h4>
       <div class="fr-col-6">

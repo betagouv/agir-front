@@ -5,7 +5,7 @@ import { Thematique } from '@/domaines/thematiques/recupererThematiquesUnivers.u
 
 export class ThematiqueRepositoryFake implements ThematiqueRepository {
   recupererMissionThematique(thematiqueId: string, utilisateurId: string): Promise<MissionThematique> {
-    return Promise.resolve({
+    return Promise.resolve<MissionThematique>({
       titre: 'Thematique 1',
       urlImage: 'https://via.placeholder.com/150',
       items: [
@@ -40,6 +40,11 @@ export class ThematiqueRepositoryFake implements ThematiqueRepository {
           type: InteractionType.KYC,
         },
       ],
+      idThematique: '1',
+      progressionKyc: {
+        etapeCourante: 1,
+        etapeTotal: 2,
+      },
     });
   }
 

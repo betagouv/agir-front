@@ -37,6 +37,10 @@ interface MissionThematiqueApiModel {
   univers: string;
   univers_label: string;
   objectifs: MissionItemThematiqueApiModel[];
+  progression_kyc: {
+    current: number;
+    target: number;
+  };
 }
 
 export class ThematiqueRepositoryAxios implements ThematiqueRepository {
@@ -59,6 +63,10 @@ export class ThematiqueRepositoryAxios implements ThematiqueRepository {
         aEteRealisee: item.done,
         type: item.type,
       })),
+      progressionKyc: {
+        etapeCourante: reponse.data.progression.current,
+        etapeTotal: reponse.data.progression.target,
+      },
     };
   }
   @intercept401()

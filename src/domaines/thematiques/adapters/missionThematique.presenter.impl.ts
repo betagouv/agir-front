@@ -40,10 +40,10 @@ export class MissionThematiquePresenterImpl implements MissionThematiquePresente
         {
           id: '',
           idDuContenu: '',
-          titre: 'Quelques questions pour mieux vous connaître',
+          titre: '<strong>Quelques questions</strong> pour mieux vous connaître',
           progression: {
-            etapeCourante: 1,
-            etapeTotal: 2,
+            etapeCourante: missionThematique.progressionKyc.etapeCourante,
+            etapeTotal: missionThematique.progressionKyc.etapeTotal,
           },
           estBloquee: false,
           points: 5,
