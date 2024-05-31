@@ -5,7 +5,7 @@
         col=""
         legende-size="l"
         :legende="questionViewModel.libelle"
-        name="toto"
+        :name="questionViewModel.id"
         orientation="vertical"
         :options="
           questionViewModel.reponses_possibles.map((reponsePossible: ReponsePossible) => ({
@@ -35,7 +35,9 @@
       <label class="fr-label" for="reponse"> Votre réponse </label>
       <textarea class="fr-input" id="reponse" name="reponse" v-model="reponse" />
     </div>
-    <button class="fr-btn fr-btn--lg" title="Valider" :disabled="isDisabled" type="submit">Continuer</button>
+    <button class="fr-btn fr-btn--lg" :title="wordingBouton" :disabled="isDisabled" type="submit">
+      {{ wordingBouton }}
+    </button>
   </form>
 </template>
 
@@ -49,7 +51,7 @@
   import { ToDoListEventBusImpl } from '@/domaines/toDoList/toDoListEventBusImpl';
   import { utilisateurStore } from '@/store/utilisateur';
 
-  const props = defineProps<{ questionViewModel: QuestionViewModel }>();
+  const props = defineProps<{ questionViewModel: QuestionViewModel; wordingBouton: string }>();
   const reponse = defineModel<string | string[]>('reponse', { default: '' });
   const isDisabled = ref<boolean>(true);
   const emit = defineEmits<{ (e: 'update:soumissionKyc', value: string[]): void }>();

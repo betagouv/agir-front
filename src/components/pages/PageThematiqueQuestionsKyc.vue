@@ -17,6 +17,7 @@
         <KYCForm
           v-if="index === etapeCourante"
           :question-view-model="questionViewModel"
+          wording-bouton="Continuer"
           @update:soumission-kyc="passerEtapeSuivante"
         />
       </div>
@@ -26,77 +27,28 @@
 </template>
 
 <script setup lang="ts">
-  import { ref } from 'vue';
+  import { onMounted, ref } from 'vue';
+  import { useRoute } from 'vue-router';
   import KYCFin from '@/components/custom/KYC/KYCFin.vue';
   import KYCForm from '@/components/custom/KYC/KYCForm.vue';
-
+  import { ListesQuestionsThematiquePresenter } from '@/domaines/kyc/adapters/listeQuestionsThematique.presenter.impl';
   import { QuestionViewModel } from '@/domaines/kyc/adapters/question.presenter.impl';
+  import { QuestionRepositoryAxios } from '@/domaines/kyc/adapters/question.repository.axios';
+  import { RecupererQuestionsThematiqueUsecase } from '@/domaines/kyc/recupererQuestionsThematique.usecase';
+  import { utilisateurStore } from '@/store/utilisateur';
 
   const afficherFinKyc = ref<boolean>(false);
-
   const questionsViewModel = ref<QuestionViewModel[]>([]);
-  questionsViewModel.value = [
-    {
-      id: '1',
-      libelle: 'Quel est votre âge ?',
-      type: 'choix_unique',
-      reponses_possibles: [
-        {
-          id: '1',
-          label: 'moins de 18 ans',
-        },
-        {
-          id: '2',
-          label: 'entre 18 et 25 ans',
-        },
-        {
-          id: '3',
-          label: 'entre 26 et 35 ans',
-        },
-        {
-          id: '4',
-          label: 'entre 36 et 45 ans',
-        },
-      ],
-      points: '10',
-      reponses: ['2'],
-      aDejaEteRepondu: true,
-      description: 'lorem ipsum',
-    },
-    {
-      id: '2',
-      libelle: 'Quel est votre sexe ?',
-      type: 'choix_multiple',
-      reponses_possibles: [
-        {
-          id: '1',
-          label: 'Homme',
-        },
-        {
-          id: '2',
-          label: 'Femme',
-        },
-        {
-          id: '3',
-          label: 'Autre',
-        },
-      ],
-      points: '10',
-      reponses: [],
-      aDejaEteRepondu: false,
-      description: 'lorem ipsum',
-    },
-    {
-      id: '3',
-      libelle: "Quel est votre niveau d'étude ?",
-      type: 'libre',
-      reponses_possibles: [],
-      points: '10',
-      reponses: [],
-      aDejaEteRepondu: false,
-      description: 'lorem ipsum',
-    },
-  ];
+
+  onMounted(() => {
+    const route = useRoute();
+    const usecase = new RecupererQuestionsThematiqueUsecase(new QuestionRepositoryAxios());
+    usecase.execute(
+      utilisateurStore().utilisateur.id,
+      route.params.id as string,
+      new ListesQuestionsThematiquePresenter(vm => (questionsViewModel.value = vm)),
+    );
+  });
 
   const premiereKycNonRepondu = () => {
     return questionsViewModel!.value.findIndex(question => question.reponses.length === 0 && !question.aDejaEteRepondu);

@@ -6,8 +6,9 @@
     <div v-if="isLoading">Chargement en cours ...</div>
     <div v-else-if="!isLoading && questionViewModel" class="background--white border fr-p-4w border-radius--md">
       <KYCForm
-        :question-view-model="questionViewModel"
         v-if="!reponseAEteDonnee"
+        :question-view-model="questionViewModel"
+        wording-bouton="Valider"
         @update:soumission-kyc="validerLaReponse"
       />
       <KYCFin
