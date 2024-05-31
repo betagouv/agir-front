@@ -14,9 +14,8 @@
           }))
         "
         :default-value="questionViewModel.reponses ? questionViewModel.reponses.toString() : undefined"
-        @update:model-value="update"
+        v-model="reponse"
       />
-      <!-- v-model="questionViewModel.reponses" -->
     </div>
     <div v-if="questionViewModel.type === 'choix_multiple'" class="fr-input-group">
       <h2 class="fr-h4 fr-mb-2w">
@@ -26,38 +25,54 @@
         :options="questionViewModel.reponses_possibles"
         :est-resetable="true"
         :default-values="questionViewModel.reponses"
-        @update:model-value="update"
+        v-model="reponse"
       />
-      <!-- v-model="questionViewModel.reponses" -->
     </div>
     <div v-if="questionViewModel.type === 'libre'" class="fr-input-group">
       <h2 class="fr-h4 fr-mb-2w">
         {{ questionViewModel.libelle }}
       </h2>
       <label class="fr-label" for="reponse"> Votre réponse </label>
-      <textarea class="fr-input" id="reponse" name="reponse" />
-      <!-- v-model="questionViewModel.reponses" -->
+      <textarea class="fr-input" id="reponse" name="reponse" v-model="reponse" />
     </div>
-    <button class="fr-btn fr-btn--lg" title="Valider" :disabled="reponse === ''" type="submit">Continuer</button>
+    <button class="fr-btn fr-btn--lg" title="Valider" :disabled="isDisabled" type="submit">Continuer</button>
   </form>
 </template>
 
 <script setup lang="ts">
-  import { ref } from 'vue';
+  import { onMounted, ref, watch } from 'vue';
   import BoutonRadio from '@/components/custom/BoutonRadio.vue';
   import InputCheckbox from '@/components/custom/InputCheckbox.vue';
   import { QuestionViewModel, ReponsePossible } from '@/domaines/kyc/adapters/question.presenter.impl';
+  import { QuestionRepositoryAxios } from '@/domaines/kyc/adapters/question.repository.axios';
+  import { EnvoyerReponseUsecase } from '@/domaines/kyc/envoyerReponseUsecase';
+  import { ToDoListEventBusImpl } from '@/domaines/toDoList/toDoListEventBusImpl';
+  import { utilisateurStore } from '@/store/utilisateur';
 
-  defineProps<{ questionViewModel: QuestionViewModel }>();
+  const props = defineProps<{ questionViewModel: QuestionViewModel }>();
+  const reponse = defineModel<string | string[]>('reponse', { default: '' });
+  const isDisabled = ref<boolean>(true);
+  const emit = defineEmits<{ (e: 'update:soumissionKyc', value: string[]): void }>();
 
-  const reponse = ref<string>('');
+  onMounted(() => {
+    isDisabled.value = props.questionViewModel.reponses.length === 0;
+  });
 
-  const update = (value: string | string[]) => {
-    reponse.value = value.toString();
-    console.log(value);
-  };
+  watch(reponse, () => {
+    isDisabled.value = reponse.value.length === 0;
+  });
 
   const validerLaReponse = async () => {
-    console.log('coucou');
+    const envoyerReponseUsecase = new EnvoyerReponseUsecase(
+      new QuestionRepositoryAxios(),
+      ToDoListEventBusImpl.getInstance(),
+    );
+    envoyerReponseUsecase.execute(
+      utilisateurStore().utilisateur.id,
+      props.questionViewModel.id,
+      [reponse.value].flat(),
+    );
+
+    emit('update:soumissionKyc', [reponse.value].flat());
   };
 </script>
