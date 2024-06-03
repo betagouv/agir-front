@@ -28,7 +28,7 @@
     const usecase = new RecupererQuestionsThematiqueUsecase(new QuestionRepositoryAxios());
     usecase.execute(
       utilisateurStore().utilisateur.id,
-      route.params.id as string,
+      route.params.thematiqueId as string,
       new ListesQuestionsThematiquePresenter(vm => (questionsViewModel.value = vm)),
     );
     isLoading.value = false;

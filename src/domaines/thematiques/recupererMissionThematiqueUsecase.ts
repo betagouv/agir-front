@@ -15,6 +15,7 @@ export interface MissionItem {
 export interface MissionThematique {
   urlImage: string;
   titre: string;
+  univers: string;
   estTerminee: boolean;
   items: MissionItem[];
   idThematique: string;

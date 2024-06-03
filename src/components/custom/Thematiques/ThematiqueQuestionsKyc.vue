@@ -20,14 +20,21 @@
       />
     </div>
   </div>
-  <KYCFin v-if="afficherFinKyc" :a-deja-repondu="false" :phrasePointAGagner="questionsViewModel.phrasePointAGagner" />
+  <KYCFin
+    v-if="afficherFinKyc"
+    :a-deja-repondu="false"
+    :phrasePointAGagner="questionsViewModel.phrasePointAGagner"
+    :bouton="{ url: urlBackBouton, label: 'Retour à la thématique' }"
+  />
 </template>
 
 <script setup lang="ts">
   import { ref } from 'vue';
+  import { useRoute } from 'vue-router';
   import KYCFin from '@/components/custom/KYC/KYCFin.vue';
   import KYCForm from '@/components/custom/KYC/KYCForm.vue';
   import { QuestionsViewModel } from '@/domaines/kyc/adapters/listeQuestionsThematique.presenter.impl';
+  import { RouteUniversName } from '@/router/univers/routes';
 
   const props = defineProps<{ questionsViewModel: QuestionsViewModel }>();
 
@@ -45,4 +52,9 @@
     etapeCourante.value++;
     afficherFinKyc.value = etapeCourante.value === props.questionsViewModel.questions.length;
   };
+
+  const route = useRoute();
+  const universId = route.params.universId;
+  const thematiqueId = route.params.thematiqueId;
+  const urlBackBouton = `/${RouteUniversName.UNIVERS}/${universId}/${thematiqueId}`;
 </script>

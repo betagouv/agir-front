@@ -15,6 +15,10 @@
         v-else
         :phrase-point-a-gagner="questionViewModel.points"
         :a-deja-repondu="questionViewModel.aDejaEteRepondu"
+        :bouton="{
+          label: `Retour à l'accueil`,
+          url: `/${RouteCoachName.COACH}`,
+        }"
       />
     </div>
     <div v-else>Problème de chargement de donées</div>
@@ -30,6 +34,7 @@
   import { QuestionPresenterImpl, QuestionViewModel } from '@/domaines/kyc/adapters/question.presenter.impl';
   import { QuestionRepositoryAxios } from '@/domaines/kyc/adapters/question.repository.axios';
   import { RecupererQuestionUsecase } from '@/domaines/kyc/recupererQuestionUsecase';
+  import { RouteCoachName } from '@/router/coach/routeCoachName';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const route = useRoute();

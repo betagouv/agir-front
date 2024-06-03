@@ -7,6 +7,7 @@ export class ThematiqueRepositoryFake implements ThematiqueRepository {
   recupererMissionThematique(thematiqueId: string, utilisateurId: string): Promise<MissionThematique> {
     return Promise.resolve<MissionThematique>({
       titre: 'Thematique 1',
+      univers: 'alimentation',
       urlImage: 'https://via.placeholder.com/150',
       estTerminee: false,
       items: [

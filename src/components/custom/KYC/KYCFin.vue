@@ -7,19 +7,21 @@
     </span>
     <router-link
       class="fr-btn fr-btn--lg fr-btn--primary fr-btn--icon-right fr-icon-arrow-right-line"
-      :to="{ name: RouteCoachName.COACH }"
+      :to="{ path: bouton.url }"
     >
-      Continuer
+      {{ bouton.label }}
     </router-link>
   </div>
 </template>
 
 <script setup lang="ts">
-  import { RouteCoachName } from '@/router/coach/routeCoachName';
-
   defineProps<{
     aDejaRepondu: boolean;
     phrasePointAGagner: string;
+    bouton: {
+      url: string;
+      label: string;
+    };
   }>();
 </script>
 

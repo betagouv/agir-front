@@ -20,7 +20,7 @@ const kycRoutes: RouteRecordRaw[] = [
     },
   },
   {
-    path: `/thematique/:id/mieux-vous-connaitre/`,
+    path: `/${RouteKycPath.KYC}/:universId/:thematiqueId`,
     name: RouteKycName.KYC_THEMATIQUE,
     component: PageThematiqueQuestionsKyc,
     meta: {

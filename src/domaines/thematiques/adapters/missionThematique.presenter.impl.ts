@@ -52,7 +52,7 @@ export class MissionThematiquePresenterImpl implements MissionThematiquePresente
           estBloquee: false,
           points: 5,
           aEteRealisee: missionThematique.progressionKyc.etapeCourante === missionThematique.progressionKyc.etapeTotal,
-          url: `/thematique/${missionThematique.idThematique}/mieux-vous-connaitre/`,
+          url: `${RouteKycPath.KYC}${missionThematique.univers}/${missionThematique.idThematique}`,
           hash: undefined,
           picto: '/ic_mission_kyc.svg',
         },

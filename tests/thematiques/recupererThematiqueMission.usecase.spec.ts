@@ -59,7 +59,7 @@ describe("Fichier de tests concernant la récupération d'une mission pour une t
               etapeTotal: 2,
             },
             titre: '<strong>Quelques questions</strong> pour mieux vous connaître',
-            url: '/thematique/1/mieux-vous-connaitre/',
+            url: '/mieux-vous-connaitre/alimentation/1',
           },
         ],
         titre: 'Thematique 1',
