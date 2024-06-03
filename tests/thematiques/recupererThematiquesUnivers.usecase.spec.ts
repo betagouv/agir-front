@@ -17,7 +17,7 @@ describe('Fichier de tests concernant la récupération des thématiques pour un
         {
           titre: 'Thematique 1',
           id: '1',
-          progression: 0,
+          progression: { etapeActuelle: 0, etapeCible: 4 },
           blocage: undefined,
           estNouvelle: true,
           niveau: 0,
@@ -26,7 +26,7 @@ describe('Fichier de tests concernant la récupération des thématiques pour un
         {
           titre: 'Thematique 2',
           id: '2',
-          progression: 0,
+          progression: { etapeActuelle: 0, etapeCible: 4 },
           blocage: {
             raison: 'Depensez 1000 points pour débloquer cette thématique',
           },

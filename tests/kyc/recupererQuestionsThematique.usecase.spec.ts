@@ -1,7 +1,10 @@
 import { MockListeQuestionsRepository } from './adapters/listequestions.repository.mock';
 import { RecupererQuestionsThematiqueUsecase } from '@/domaines/kyc/recupererQuestionsThematique.usecase';
-import { QuestionViewModel } from '@/domaines/kyc/adapters/question.presenter.impl';
-import { ListesQuestionsThematiquePresenter } from '@/domaines/kyc/adapters/listeQuestionsThematique.presenter.impl';
+import {
+  ListesQuestionsThematiquePresenter,
+  QuestionsViewModel,
+} from '@/domaines/kyc/adapters/listeQuestionsThematique.presenter.impl';
+import { ThematiqueQuestion } from '@/domaines/kyc/recupererQuestionUsecase';
 
 describe('Fichier de tests concernant la recupérations des questions kyc pour une thématique', () => {
   it('En donnant un id utilisateur et id de thematique doit presenter les kyc de le thématique', async () => {
@@ -17,7 +20,7 @@ describe('Fichier de tests concernant la recupérations des questions kyc pour u
           reponses_possibles: [],
           points: 10,
           reponse: [],
-          thematique: 'ALIMENTATION',
+          thematique: ThematiqueQuestion.ALIMENTATION,
         },
       ]),
     );
@@ -26,19 +29,22 @@ describe('Fichier de tests concernant la recupérations des questions kyc pour u
       'utilisateurId',
       'thematiqueId',
       new ListesQuestionsThematiquePresenter(viewModels => {
-        expect(viewModels).toStrictEqual<QuestionViewModel[]>([
-          {
-            id: 'questionId',
-            libelle: 'Une question',
-            type: 'libre',
-            reponses: [],
-            reponses_possibles: [],
-            points: 'Récoltez vos + 10 points',
-            aDejaEteRepondu: false,
-            description:
-              'Dites-nous en plus sur vous pour que le service vous recommande des actions plus personnalisées.',
-          },
-        ]);
+        expect(viewModels).toStrictEqual<QuestionsViewModel>({
+          phrasePointAGagner: 'Vous avez remporté 10',
+          questions: [
+            {
+              id: 'questionId',
+              libelle: 'Une question',
+              type: 'libre',
+              reponses: [],
+              reponses_possibles: [],
+              points: 'Récoltez vos + 10 points',
+              aDejaEteRepondu: false,
+              description:
+                'Ces informations permettent à <span class="text--italic">Agir</span> de mieux comprendre vos habitudes alimentaires',
+            },
+          ],
+        });
       }),
     );
   });

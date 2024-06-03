@@ -53,7 +53,7 @@ export class ThematiqueRepositoryFake implements ThematiqueRepository {
       {
         titre: 'Thematique 1',
         id: '1',
-        progression: 0,
+        progression: { etapeActuelle: 0, etapeCible: 4 },
         estBloquee: false,
         raisonDuBlocage: '',
         estNouvelle: true,
@@ -63,7 +63,7 @@ export class ThematiqueRepositoryFake implements ThematiqueRepository {
       {
         titre: 'Thematique 2',
         id: '2',
-        progression: 0,
+        progression: { etapeActuelle: 0, etapeCible: 4 },
         estBloquee: true,
         raisonDuBlocage: 'Depensez 1000 points pour débloquer cette thématique',
         estNouvelle: true,

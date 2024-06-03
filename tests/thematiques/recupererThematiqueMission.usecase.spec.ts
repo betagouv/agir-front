@@ -25,11 +25,7 @@ describe("Fichier de tests concernant la récupération d'une mission pour une t
             hash: undefined,
             idDuContenu: '1',
             points: 10,
-            progession: {
-              etapeCourante: 1,
-              etapeTotal: 2,
-            },
-            progression: 0,
+            progression: undefined,
             titre: 'Mission 1',
             url: '/agir/quiz/1',
             picto: '/ic_mission_article.svg',
@@ -43,11 +39,7 @@ describe("Fichier de tests concernant la récupération d'une mission pour une t
             hash: undefined,
             idDuContenu: '2',
             points: 10,
-            progession: {
-              etapeCourante: 1,
-              etapeTotal: 2,
-            },
-            progression: 0,
+            progression: undefined,
             titre: 'Mission 2',
             url: '/defi/2',
             picto: '/ic_mission_defi.svg',
@@ -57,10 +49,10 @@ describe("Fichier de tests concernant la récupération d'une mission pour une t
           {
             aEteRealisee: false,
             estBloquee: false,
-            hash: null,
             id: '',
             idDuContenu: '',
-            picto: '',
+            hash: undefined,
+            picto: '/ic_mission_kyc.svg',
             points: 5,
             progression: {
               etapeCourante: 1,
