@@ -64,6 +64,7 @@ describe("Fichier de tests concernant la récupération d'une mission pour une t
         ],
         titre: 'Thematique 1',
         urlImage: 'https://via.placeholder.com/150',
+        bonusMission: { phrase: 'Bonus de fin de mission', picto: 'fr-icon-gift-fill' },
       });
     }
   });

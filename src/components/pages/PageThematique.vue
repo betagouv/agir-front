@@ -15,18 +15,18 @@
       <h1 class="fr-h1 fr-col fr-m-0">{{ mission?.titre }}</h1>
     </div>
 
-    <div class="mission__dashline fr-pb-6w" v-if="mission">
+    <div class="mission__dashline" v-if="mission">
       <ThematiquesMissions :missions="mission.kyc" />
       <h2 class="text--uppercase fr-text--xs text--bleu fr-mb-1w fr-mt-3w fr-ml-6w">Articles et quiz</h2>
       <ThematiquesMissions :missions="mission.articleEtQuiz" />
       <h2 class="text--uppercase fr-text--xs text--bleu fr-mb-1w fr-mt-3w fr-ml-6w">Actions</h2>
       <ThematiquesMissions :missions="mission.defis" />
+      <p class="text--uppercase fr-text--bold fr-text--xs text--bleu fr-pt-6w fr-pl-5v">
+        <span :class="mission.bonusMission.picto" aria-hidden="true"></span>
+        {{ mission.bonusMission.phrase }}
+        <img src="/ic_score.svg" alt="" width="16" class="fr-ml-1v" />
+      </p>
     </div>
-    <h2 class="text--uppercase fr-text--xs text--bleu fr-pt-1w fr-pl-5v">
-      <span class="fr-icon-gift-fill" aria-hidden="true"></span>
-      Bonus de fin de mission
-      <img src="/ic_score.svg" alt="" width="16" class="fr-ml-1v" />
-    </h2>
   </div>
 </template>
 
@@ -66,7 +66,7 @@
     content: '';
     position: absolute;
     top: 0;
-    bottom: 0;
+    bottom: 2rem;
     left: 2rem;
     display: block;
     width: 0;

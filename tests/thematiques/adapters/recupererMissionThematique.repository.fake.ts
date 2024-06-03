@@ -8,6 +8,7 @@ export class ThematiqueRepositoryFake implements ThematiqueRepository {
     return Promise.resolve<MissionThematique>({
       titre: 'Thematique 1',
       urlImage: 'https://via.placeholder.com/150',
+      estTerminee: false,
       items: [
         {
           id: 'id1',

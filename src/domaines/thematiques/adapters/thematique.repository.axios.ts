@@ -37,6 +37,7 @@ interface MissionThematiqueApiModel {
   univers: string;
   univers_label: string;
   objectifs: MissionItemThematiqueApiModel[];
+  done_at: Date | null;
   progression_kyc: {
     current: number;
     target: number;
@@ -54,6 +55,7 @@ export class ThematiqueRepositoryAxios implements ThematiqueRepository {
       idThematique: thematiqueId,
       titre: reponse.data.titre,
       urlImage: reponse.data.image_url,
+      estTerminee: Boolean(reponse.data.done_at),
       items: reponse.data.objectifs.map(item => ({
         id: item.id,
         contentId: item.content_id,

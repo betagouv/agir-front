@@ -28,6 +28,7 @@ export interface MissionThematiqueViewModel {
   kyc: MissionItemViewModel[];
   articleEtQuiz: MissionItemViewModel[];
   defis: MissionItemViewModel[];
+  bonusMission: { phrase: string; picto: string };
 }
 
 export class MissionThematiquePresenterImpl implements MissionThematiquePresenter {
@@ -36,6 +37,9 @@ export class MissionThematiquePresenterImpl implements MissionThematiquePresente
     this.viewModel({
       titre: missionThematique.titre,
       urlImage: missionThematique.urlImage,
+      bonusMission: missionThematique.estTerminee
+        ? { phrase: 'Bravo ! Vous avez accompli l’ensemble des missions.', picto: 'fr-icon-trophy-fill' }
+        : { phrase: 'Bonus de fin de mission', picto: 'fr-icon-gift-fill' },
       kyc: [
         {
           id: '',
