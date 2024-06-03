@@ -79,7 +79,10 @@ export class ThematiqueRepositoryAxios implements ThematiqueRepository {
     return response.data.map(thematique => ({
       id: thematique.type,
       titre: thematique.titre,
-      progression: thematique.progression,
+      progression: {
+        etapeActuelle: thematique.progression,
+        etapeCible: thematique.cible_progression,
+      },
       estBloquee: thematique.is_locked,
       raisonDuBlocage: thematique.reason_locked,
       estNouvelle: thematique.is_new,
