@@ -7,7 +7,7 @@
           <div v-html="titre" />
         </router-link>
       </h4>
-      <div class="fr-col-6" v-if="value !== undefined && valueMax !== undefined">
+      <div class="fr-col-6" v-if="value !== undefined && value > 0 && valueMax !== undefined">
         <CoachCardTodoProgression
           :value="value"
           :value-max="valueMax"
