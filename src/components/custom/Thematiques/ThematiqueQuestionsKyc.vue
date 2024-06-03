@@ -1,5 +1,5 @@
 <template>
-  <div v-for="(questionViewModel, index) in questionsViewModel" :key="index">
+  <div v-for="(questionViewModel, index) in questionsViewModel.questions" :key="index">
     <div v-show="index === etapeCourante">
       <p class="text--bleu fr-grid-row align-items--center fr-py-2w">
         <button
@@ -11,7 +11,7 @@
           Retour à l'étape précédente
         </button>
         <span class="fr-text--bold">Question {{ index + 1 }}</span>
-        &nbsp; sur {{ questionsViewModel.length }}
+        &nbsp; sur {{ questionsViewModel.questions.length }}
       </p>
       <KYCForm
         :question-view-model="questionViewModel"
@@ -20,19 +20,19 @@
       />
     </div>
   </div>
-  <KYCFin v-if="afficherFinKyc" :a-deja-repondu="false" phrasePointAGagner="toto" />
+  <KYCFin v-if="afficherFinKyc" :a-deja-repondu="false" :phrasePointAGagner="questionsViewModel.phrasePointAGagner" />
 </template>
 
 <script setup lang="ts">
   import { ref } from 'vue';
   import KYCFin from '@/components/custom/KYC/KYCFin.vue';
   import KYCForm from '@/components/custom/KYC/KYCForm.vue';
-  import { QuestionViewModel } from '@/domaines/kyc/adapters/question.presenter.impl';
+  import { QuestionsViewModel } from '@/domaines/kyc/adapters/listeQuestionsThematique.presenter.impl';
 
-  const props = defineProps<{ questionsViewModel: QuestionViewModel[] }>();
+  const props = defineProps<{ questionsViewModel: QuestionsViewModel }>();
 
   const premiereKycNonRepondu = () => {
-    const indexQuestion = props.questionsViewModel.findIndex(
+    const indexQuestion = props.questionsViewModel.questions.findIndex(
       question => question.reponses.length === 0 && !question.aDejaEteRepondu,
     );
     return indexQuestion !== -1 ? indexQuestion : 0;
@@ -43,6 +43,6 @@
 
   const passerEtapeSuivante = () => {
     etapeCourante.value++;
-    afficherFinKyc.value = etapeCourante.value === props.questionsViewModel.length;
+    afficherFinKyc.value = etapeCourante.value === props.questionsViewModel.questions.length;
   };
 </script>

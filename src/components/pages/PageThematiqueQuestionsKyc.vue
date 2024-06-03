@@ -12,14 +12,16 @@
   import { useRoute } from 'vue-router';
   import CarteSkeleton from '@/components/CarteSkeleton.vue';
   import ThematiqueQuestionsKyc from '@/components/custom/Thematiques/ThematiqueQuestionsKyc.vue';
-  import { ListesQuestionsThematiquePresenter } from '@/domaines/kyc/adapters/listeQuestionsThematique.presenter.impl';
-  import { QuestionViewModel } from '@/domaines/kyc/adapters/question.presenter.impl';
+  import {
+    ListesQuestionsThematiquePresenter,
+    QuestionsViewModel,
+  } from '@/domaines/kyc/adapters/listeQuestionsThematique.presenter.impl';
   import { QuestionRepositoryAxios } from '@/domaines/kyc/adapters/question.repository.axios';
   import { RecupererQuestionsThematiqueUsecase } from '@/domaines/kyc/recupererQuestionsThematique.usecase';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const isLoading = ref<boolean>(true);
-  const questionsViewModel = ref<QuestionViewModel[]>();
+  const questionsViewModel = ref<QuestionsViewModel>();
 
   onMounted(async () => {
     const route = useRoute();

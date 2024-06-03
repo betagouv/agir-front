@@ -51,6 +51,7 @@ export class ThematiqueRepositoryAxios implements ThematiqueRepository {
       `/utilisateurs/${utilisateurId}/thematiques/${thematiqueId}/mission`,
     );
     return {
+      idThematique: thematiqueId,
       titre: reponse.data.titre,
       urlImage: reponse.data.image_url,
       items: reponse.data.objectifs.map(item => ({

@@ -5,6 +5,12 @@ export interface ReponsePossible {
   id: string;
   label: string;
 }
+
+export interface QuestionsViewModel {
+  questions: QuestionViewModel[];
+  phrasePointAGagner: string;
+}
+
 export interface QuestionViewModel {
   id: string;
   libelle: string;
@@ -17,11 +23,11 @@ export interface QuestionViewModel {
 }
 
 export class ListesQuestionsThematiquePresenter implements ListeQuestionsPresenter {
-  constructor(private readonly questionViewModel: (viewModel: QuestionViewModel[]) => void) {}
+  constructor(private readonly questionViewModel: (viewModel: QuestionsViewModel) => void) {}
 
   presente(questions: Question[]) {
-    this.questionViewModel(
-      questions.map(question => ({
+    this.questionViewModel({
+      questions: questions.map(question => ({
         id: question.id,
         libelle: question.libelle,
         type: question.type,
@@ -34,7 +40,8 @@ export class ListesQuestionsThematiquePresenter implements ListeQuestionsPresent
         aDejaEteRepondu: question.reponse?.length > 0,
         description: this.determineDescription(question.thematique),
       })),
-    );
+      phrasePointAGagner: `Vous avez remporté ${questions.reduce((accumulator, question: Question) => accumulator + question.points, 0)}`,
+    });
   }
 
   private determineDescription(thematique: ThematiqueQuestion) {

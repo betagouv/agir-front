@@ -5,6 +5,7 @@ export interface ReponsePossible {
   id: string;
   label: string;
 }
+
 export interface QuestionViewModel {
   id: string;
   libelle: string;

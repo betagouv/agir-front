@@ -2,7 +2,6 @@
   <ul class="list-style-none fr-p-0 fr-m-0">
     <li v-for="mission in missions" :key="mission.titre" class="fr-mb-2w">
       <MissionCarteBloquee v-if="mission.estBloquee" :picto-mission="mission.picto" />
-
       <CoachCardDone
         v-else-if="mission.aEteRealisee"
         :titre="mission.titre"
