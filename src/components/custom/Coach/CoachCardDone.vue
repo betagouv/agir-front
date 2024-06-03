@@ -2,9 +2,10 @@
   <div class="todo background--white fr-p-2w shadow">
     <span class="fr-icon-checkbox-circle-line todo__picto text--success" aria-hidden="true"></span>
     <div class="fr-col fr-col-md-7">
-      <h4 class="fr-text--bold fr-text--lg text--success fr-mb-0 display-block">{{ titre }}</h4>
+      <h4 class="fr-text--bold fr-text--lg text--success fr-mb-0 display-block" v-html="titre" />
       <div class="fr-col-6">
         <CoachCardTodoProgression
+          v-if="value"
           :value="value"
           :value-max="value"
           label="Barre de progression: tâche terminé"
@@ -37,7 +38,7 @@
 
   const props = defineProps<{
     titre: string;
-    value: number;
+    value?: number;
     nombrePoints: number;
     pointAEteRecolte: boolean;
     elementId: string;

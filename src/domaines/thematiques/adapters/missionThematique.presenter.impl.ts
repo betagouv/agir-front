@@ -17,7 +17,7 @@ export interface MissionItemViewModel {
   url: string;
   hash?: string;
   picto: string;
-  progression: {
+  progression?: {
     etapeCourante: number;
     etapeTotal: number;
   };
@@ -47,9 +47,9 @@ export class MissionThematiquePresenterImpl implements MissionThematiquePresente
           },
           estBloquee: false,
           points: 5,
-          aEteRealisee: false,
+          aEteRealisee: missionThematique.progressionKyc.etapeCourante === missionThematique.progressionKyc.etapeTotal,
           url: `/thematique/${missionThematique.idThematique}/mieux-vous-connaitre/`,
-          hash: null,
+          hash: undefined,
           picto: '',
         },
       ],

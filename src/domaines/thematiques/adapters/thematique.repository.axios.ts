@@ -65,8 +65,8 @@ export class ThematiqueRepositoryAxios implements ThematiqueRepository {
         type: item.type,
       })),
       progressionKyc: {
-        etapeCourante: reponse.data.progression.current,
-        etapeTotal: reponse.data.progression.target,
+        etapeCourante: reponse.data.progression_kyc.current,
+        etapeTotal: reponse.data.progression_kyc.target,
       },
     };
   }
