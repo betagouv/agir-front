@@ -50,7 +50,7 @@ export class MissionThematiquePresenterImpl implements MissionThematiquePresente
           aEteRealisee: missionThematique.progressionKyc.etapeCourante === missionThematique.progressionKyc.etapeTotal,
           url: `/thematique/${missionThematique.idThematique}/mieux-vous-connaitre/`,
           hash: undefined,
-          picto: '',
+          picto: '/ic_mission_kyc.svg',
         },
       ],
       articleEtQuiz: missionThematique.items
@@ -67,17 +67,13 @@ export class MissionThematiquePresenterImpl implements MissionThematiquePresente
       id: item.id,
       idDuContenu: item.contentId,
       titre: item.titre,
-      progression: item.progression,
+      progression: undefined,
       estBloquee: item.estBloquee,
       points: item.points,
       aEteRealisee: item.aEteRealisee,
       url: this.determineUrl(item),
       hash: this.determineHash(item),
       picto: this.determinePicto(item),
-      progession: {
-        etapeCourante: 1,
-        etapeTotal: 2,
-      },
     };
   }
 
