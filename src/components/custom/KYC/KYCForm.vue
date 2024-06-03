@@ -55,7 +55,6 @@
   const reponse = defineModel<string | string[]>('reponse', { default: '' });
   const isDisabled = ref<boolean>(true);
   const emit = defineEmits<{ (e: 'update:soumissionKyc', value: string[]): void }>();
-
   onMounted(() => {
     isDisabled.value = props.questionViewModel.reponses.length === 0;
   });
@@ -72,7 +71,7 @@
     envoyerReponseUsecase.execute(
       utilisateurStore().utilisateur.id,
       props.questionViewModel.id,
-      [reponse.value].flat(),
+      reponse.value === '' ? props.questionViewModel.reponses.flat() : [reponse.value].flat(),
     );
 
     emit('update:soumissionKyc', [reponse.value].flat());
