@@ -25,14 +25,11 @@ describe("Fichier de tests concernant la récupération d'une mission pour une t
             hash: undefined,
             idDuContenu: '1',
             points: 10,
-            progession: {
-              etapeCourante: 1,
-              etapeTotal: 2,
-            },
-            progression: 0,
+            progression: undefined,
             titre: 'Mission 1',
             url: '/agir/quiz/1',
             picto: '/ic_mission_article.svg',
+            pointAEteRecolte: false,
           },
         ],
         defis: [
@@ -43,36 +40,34 @@ describe("Fichier de tests concernant la récupération d'une mission pour une t
             hash: undefined,
             idDuContenu: '2',
             points: 10,
-            progession: {
-              etapeCourante: 1,
-              etapeTotal: 2,
-            },
-            progression: 0,
+            progression: undefined,
             titre: 'Mission 2',
             url: '/defi/2',
             picto: '/ic_mission_defi.svg',
+            pointAEteRecolte: false,
           },
         ],
         kyc: [
           {
             aEteRealisee: false,
             estBloquee: false,
-            hash: undefined,
             id: 'id3',
-            idDuContenu: '3',
+            idDuContenu: '',
+            hash: undefined,
             picto: '/ic_mission_kyc.svg',
-            points: 10,
-            progession: {
+            points: 5,
+            progression: {
               etapeCourante: 1,
               etapeTotal: 2,
             },
-            progression: 0,
-            titre: 'Mission 3',
-            url: '/mieux-vous-connaitre/3',
+            titre: '<strong>Quelques questions</strong> pour mieux vous connaître',
+            url: '/mieux-vous-connaitre/alimentation/1',
+            pointAEteRecolte: false,
           },
         ],
         titre: 'Thematique 1',
         urlImage: 'https://via.placeholder.com/150',
+        bonusMission: { phrase: 'Bonus de fin de mission', picto: 'fr-icon-gift-fill' },
       });
     }
   });

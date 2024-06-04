@@ -3,7 +3,11 @@ import { Question } from '@/domaines/kyc/recupererQuestionUsecase';
 
 export class MockQuestionRepository implements QuestionRepository {
   constructor(private questionARetourner: Question) {}
-  recupererListeQuestions(utilisateurId: string): Promise<Question[]> {
+  recupererQuestionsThematique(_utilisateurId: string, _thematiqueId: string): Promise<Question[]> {
+    throw new Error('Method not implemented.');
+  }
+
+  recupererListeQuestions(_utilisateurId: string): Promise<Question[]> {
     throw new Error('Method not implemented.');
   }
   recupererQuestion(_questionId: string, _utilisateurId: string): Promise<Question> {

@@ -13,6 +13,7 @@
               :nombre-points="todo.nombreDePointsAGagner"
               :point-a-ete-recolte="todo.pointAEteRecolte"
               :element-id="todo.id"
+              :on-recolter-points="onRecolterPoints"
             />
           </li>
         </ul>
@@ -63,6 +64,7 @@
   import CoachFinDeMission from '@/components/custom/Coach/CoachFinDeMission.vue';
   import { TodoListViewModel } from '@/domaines/toDoList/adapters/toDoList.presenter.impl';
   import { ToDoListRepositoryAxios } from '@/domaines/toDoList/adapters/toDoList.repository.axios';
+  import { RecupererPointsToDoUsecase } from '@/domaines/toDoList/recupererPointsToDo.usecase';
   import { TerminerToDoListUsecase } from '@/domaines/toDoList/terminerToDoList.usecase';
   import { ToDoListEventBusImpl } from '@/domaines/toDoList/toDoListEventBusImpl';
   import { utilisateurStore } from '@/store/utilisateur';
@@ -85,12 +87,18 @@
   };
 
   const recupererPointsTodo = async () => {
-    const utilisateurId = utilisateurStore().utilisateur.id;
     new TerminerToDoListUsecase(new ToDoListRepositoryAxios(), ToDoListEventBusImpl.getInstance()).execute(
-      utilisateurId,
+      utilisateurStore().utilisateur.id,
     );
     bonusFinalRecupere.value = false;
   };
+
+  function onRecolterPoints(missionId: string) {
+    new RecupererPointsToDoUsecase(new ToDoListRepositoryAxios(), ToDoListEventBusImpl.getInstance()).execute(
+      utilisateurStore().utilisateur.id,
+      missionId,
+    );
+  }
 </script>
 
 <style scoped>

@@ -15,7 +15,7 @@
 
   <section id="thematiques" v-if="thematiques">
     <div class="fr-container">
-      <UniversList :univers-id="universId" :thematiques="thematiques" />
+      <ThematiquesListe :univers-id="universId" :thematiques="thematiques" />
     </div>
   </section>
 
@@ -54,7 +54,7 @@
   import ActionListe from '../custom/Action/ActionListe.vue';
   import CarteSkeleton from '@/components/CarteSkeleton.vue';
   import CoachRecommandations from '@/components/custom/Coach/CoachRecommandations.vue';
-  import UniversList from '@/components/custom/Thematiques/ThematiquesListe.vue';
+  import ThematiquesListe from '@/components/custom/Thematiques/ThematiquesListe.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import { DefiRepositoryAxios } from '@/domaines/defi/adapters/defi.repository.axios';
   import {

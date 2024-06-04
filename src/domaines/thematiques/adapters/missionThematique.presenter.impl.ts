@@ -11,17 +11,17 @@ export interface MissionItemViewModel {
   id: string;
   idDuContenu: string;
   titre: string;
-  progression: number;
   estBloquee: boolean;
   points: number;
   aEteRealisee: boolean;
   url: string;
   hash?: string;
   picto: string;
-  progession: {
+  progression?: {
     etapeCourante: number;
     etapeTotal: number;
   };
+  pointAEteRecolte: boolean;
 }
 export interface MissionThematiqueViewModel {
   titre: string;
@@ -29,6 +29,7 @@ export interface MissionThematiqueViewModel {
   kyc: MissionItemViewModel[];
   articleEtQuiz: MissionItemViewModel[];
   defis: MissionItemViewModel[];
+  bonusMission: { phrase: string; picto: string };
 }
 
 export class MissionThematiquePresenterImpl implements MissionThematiquePresenter {
@@ -37,9 +38,28 @@ export class MissionThematiquePresenterImpl implements MissionThematiquePresente
     this.viewModel({
       titre: missionThematique.titre,
       urlImage: missionThematique.urlImage,
-      kyc: missionThematique.items
-        .filter(item => item.type === InteractionType.KYC)
-        .map(item => this.mapToViewModel(item)),
+      bonusMission: missionThematique.estTerminee
+        ? { phrase: 'Bravo ! Vous avez accompli l’ensemble des missions.', picto: 'fr-icon-trophy-fill' }
+        : { phrase: 'Bonus de fin de mission', picto: 'fr-icon-gift-fill' },
+      kyc: [
+        {
+          id: missionThematique.items.filter(item => item.type === InteractionType.KYC)[0].id,
+          idDuContenu: '',
+          titre: '<strong>Quelques questions</strong> pour mieux vous connaître',
+          progression: {
+            etapeCourante: missionThematique.progressionKyc.etapeCourante,
+            etapeTotal: missionThematique.progressionKyc.etapeTotal,
+          },
+          estBloquee: false,
+          points: 5,
+          aEteRealisee: missionThematique.progressionKyc.etapeCourante === missionThematique.progressionKyc.etapeTotal,
+          url: `${RouteKycPath.KYC}${missionThematique.univers}/${missionThematique.idThematique}`,
+          hash: undefined,
+          picto: '/ic_mission_kyc.svg',
+          pointAEteRecolte: missionThematique.items.filter(item => item.type === InteractionType.KYC)[0]
+            .pointAEteRecolte,
+        },
+      ],
       articleEtQuiz: missionThematique.items
         .filter(item => item.type === InteractionType.ARTICLE || item.type === InteractionType.QUIZ)
         .map(item => this.mapToViewModel(item)),
@@ -54,17 +74,14 @@ export class MissionThematiquePresenterImpl implements MissionThematiquePresente
       id: item.id,
       idDuContenu: item.contentId,
       titre: item.titre,
-      progression: item.progression,
+      progression: undefined,
       estBloquee: item.estBloquee,
       points: item.points,
       aEteRealisee: item.aEteRealisee,
       url: this.determineUrl(item),
       hash: this.determineHash(item),
       picto: this.determinePicto(item),
-      progession: {
-        etapeCourante: 1,
-        etapeTotal: 2,
-      },
+      pointAEteRecolte: item.pointAEteRecolte,
     };
   }
 

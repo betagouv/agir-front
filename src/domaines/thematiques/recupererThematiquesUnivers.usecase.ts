@@ -4,7 +4,10 @@ import { ThematiquesPresenter } from '@/domaines/thematiques/ports/thematiques.p
 export interface Thematique {
   titre: string;
   id: string;
-  progression: number;
+  progression: {
+    etapeActuelle: number;
+    etapeCible: number;
+  };
   estBloquee: boolean;
   raisonDuBlocage: string;
   estNouvelle: boolean;

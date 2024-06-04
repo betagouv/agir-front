@@ -2,7 +2,11 @@ import { Question } from '@/domaines/kyc/recupererQuestionUsecase';
 import { QuestionRepository } from '@/domaines/kyc/ports/question.repository';
 
 export class SpyQuestionRepository implements QuestionRepository {
-  recupererListeQuestions(utilisateurId: string): Promise<Question[]> {
+  recupererQuestionsThematique(_utilisateurId: string, _thematiqueId: string): Promise<Question[]> {
+    throw new Error('Method not implemented.');
+  }
+
+  recupererListeQuestions(_utilisateurId: string): Promise<Question[]> {
     throw new Error('Method not implemented.');
   }
   private _envoyerQuestionAEteAppele: boolean = false;
@@ -13,7 +17,7 @@ export class SpyQuestionRepository implements QuestionRepository {
     reponse: [],
   };
 
-  recupererQuestion(questionId: string, utilisateurId: string): Promise<Question> {
+  recupererQuestion(_questionId: string, _utilisateurId: string): Promise<Question> {
     throw new Error('Method not implemented.');
   }
 

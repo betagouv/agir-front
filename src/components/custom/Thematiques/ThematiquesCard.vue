@@ -4,7 +4,12 @@
       Nouveau !
     </span>
     <img class="border-radius--md full-width img-object-fit-cover" height="144" :src="thematique.urlImage" alt="" />
-    <BarreDeProgression :value="20" :value-max="100" label="Avancement dans la thématique xxx" couleur="#0063CB" />
+    <BarreDeProgression
+      :value="thematique.progression.etapeActuelle"
+      :value-max="thematique.progression.etapeCible"
+      label="Avancement dans la thématique xxx"
+      couleur="#0063CB"
+    />
     <h2 class="fr-text--lg text--semi-bold text--black fr-mb-1v">
       <router-link
         :to="{ name: RouteUniversName.THEMATIQUE, params: { id: universId, thematique: thematique.id } }"

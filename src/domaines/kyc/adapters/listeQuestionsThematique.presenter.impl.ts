@@ -1,9 +1,14 @@
-import { QuestionPresenter } from '@/domaines/kyc/ports/question.presenter';
+import { ListeQuestionsPresenter } from '@/domaines/kyc/ports/listeQuestions.presenter';
 import { Question, ThematiqueQuestion } from '@/domaines/kyc/recupererQuestionUsecase';
 
 export interface ReponsePossible {
   id: string;
   label: string;
+}
+
+export interface QuestionsViewModel {
+  questions: QuestionViewModel[];
+  phrasePointAGagner: string;
 }
 
 export interface QuestionViewModel {
@@ -17,22 +22,25 @@ export interface QuestionViewModel {
   description: string;
 }
 
-export class QuestionPresenterImpl implements QuestionPresenter {
-  constructor(private readonly questionViewModel: (viewModel: QuestionViewModel) => void) {}
+export class ListesQuestionsThematiquePresenter implements ListeQuestionsPresenter {
+  constructor(private readonly questionViewModel: (viewModel: QuestionsViewModel) => void) {}
 
-  presente(question: Question) {
+  presente(questions: Question[]) {
     this.questionViewModel({
-      id: question.id,
-      libelle: question.libelle,
-      type: question.type,
-      points: `Récoltez vos + ${question.points} points`,
-      reponses_possibles: question.reponses_possibles.map(reponse => ({
-        id: reponse,
-        label: reponse,
+      questions: questions.map(question => ({
+        id: question.id,
+        libelle: question.libelle,
+        type: question.type,
+        points: `Récoltez vos + ${question.points} points`,
+        reponses_possibles: question.reponses_possibles.map(reponse => ({
+          id: reponse,
+          label: reponse,
+        })),
+        reponses: question.reponse,
+        aDejaEteRepondu: question.reponse?.length > 0,
+        description: this.determineDescription(question.thematique),
       })),
-      reponses: question.reponse,
-      aDejaEteRepondu: question.reponse?.length > 0,
-      description: this.determineDescription(question.thematique),
+      phrasePointAGagner: `Vous avez remporté ${questions.reduce((accumulator, question: Question) => accumulator + question.points, 0)}`,
     });
   }
 

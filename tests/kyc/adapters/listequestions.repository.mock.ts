@@ -13,4 +13,8 @@ export class MockListeQuestionsRepository implements QuestionRepository {
   envoyerReponse(_questionId: string, _utilisateurId: string, _reponse: string[]): Promise<void> {
     throw new Error('Method not implemented.');
   }
+
+  recupererQuestionsThematique(utilisateurId: string, thematiqueId: string): Promise<Question[]> {
+    return Promise.resolve(this.questionARetourner);
+  }
 }

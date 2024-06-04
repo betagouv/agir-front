@@ -10,12 +10,20 @@ export interface MissionItem {
   points: number;
   aEteRealisee: boolean;
   type: string;
+  pointAEteRecolte: boolean;
 }
 
 export interface MissionThematique {
   urlImage: string;
   titre: string;
+  univers: string;
+  estTerminee: boolean;
   items: MissionItem[];
+  idThematique: string;
+  progressionKyc: {
+    etapeCourante: number;
+    etapeTotal: number;
+  };
 }
 
 export class RecupererMissionThematiqueUsecase {
@@ -23,6 +31,9 @@ export class RecupererMissionThematiqueUsecase {
 
   async execute(thematiqueId: string, utilisateurId: string, presenter: MissionThematiquePresenter): Promise<void> {
     const missionThematique = await this.thematiqueRepository.recupererMissionThematique(thematiqueId, utilisateurId);
-    presenter.present(missionThematique);
+    presenter.present({
+      ...missionThematique,
+      idThematique: thematiqueId,
+    });
   }
 }

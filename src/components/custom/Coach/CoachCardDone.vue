@@ -2,23 +2,15 @@
   <div class="todo background--white fr-p-2w shadow">
     <span class="fr-icon-checkbox-circle-line todo__picto text--success" aria-hidden="true"></span>
     <div class="fr-col fr-col-md-7">
-      <h4 class="fr-text--bold fr-text--lg text--success fr-mb-0 display-block">{{ titre }}</h4>
-      <div class="fr-col-6">
-        <CoachCardTodoProgression
-          :value="value"
-          :value-max="value"
-          label="Barre de progression: tâche terminé"
-          couleur="#18753C"
-        />
-      </div>
+      <h4 class="fr-text--bold fr-text--lg text--success fr-mb-0 display-block" v-html="titre" />
     </div>
     <div class="todo__boutonContainer fr-ml-auto">
-      <span v-if="!pointAEteRecolte" class="text--uppercase fr-mb-0 fr-text--xs text--gris-dark fr-text--bold"
-        >Objectif réalisé</span
-      >
+      <span v-if="!pointAEteRecolte" class="text--uppercase fr-mb-0 fr-text--xs text--gris-dark fr-text--bold">
+        Objectif réalisé
+      </span>
       <button
         class="fr-btn fr-btn--secondary fr-text--md todo__bouton"
-        @click="recupererPointsTodo"
+        @click="recolterPoints"
         :disabled="pointAEteRecolte"
       >
         <span class="fr-hidden fr-unhidden-md"> Récolter vos </span> &nbsp;{{ nombrePoints }}
@@ -29,26 +21,17 @@
 </template>
 
 <script setup lang="ts">
-  import CoachCardTodoProgression from '@/components/custom/Coach/CoachCardTodoProgression.vue';
-  import { ToDoListRepositoryAxios } from '@/domaines/toDoList/adapters/toDoList.repository.axios';
-  import { RecupererPointsToDoUsecase } from '@/domaines/toDoList/recupererPointsToDo.usecase';
-  import { ToDoListEventBusImpl } from '@/domaines/toDoList/toDoListEventBusImpl';
-  import { utilisateurStore } from '@/store/utilisateur';
-
   const props = defineProps<{
     titre: string;
-    value: number;
+    value?: number;
     nombrePoints: number;
     pointAEteRecolte: boolean;
     elementId: string;
+    onRecolterPoints: (missionId: string) => void;
   }>();
 
-  const recupererPointsTodo = async () => {
-    const utilisateurId: string = utilisateurStore().utilisateur.id;
-    new RecupererPointsToDoUsecase(new ToDoListRepositoryAxios(), ToDoListEventBusImpl.getInstance()).execute(
-      utilisateurId,
-      props.elementId,
-    );
+  const recolterPoints = () => {
+    props.onRecolterPoints(props.elementId);
   };
 </script>
 

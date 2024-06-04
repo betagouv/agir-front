@@ -5,48 +5,20 @@
     <p class="fr-text--xl" v-html="questionViewModel?.description" />
     <div v-if="isLoading">Chargement en cours ...</div>
     <div v-else-if="!isLoading && questionViewModel" class="background--white border fr-p-4w border-radius--md">
-      <form @submit.prevent="validerLaReponse" v-if="!reponseAEteDonnee">
-        <div v-if="questionViewModel?.type === 'libre'" class="fr-input-group">
-          <h2 class="fr-h4 fr-mb-2w">
-            {{ questionViewModel?.libelle }}
-          </h2>
-          <label class="fr-label" for="reponse"> Votre réponse </label>
-          <textarea class="fr-input" v-model="reponse" id="reponse" name="reponse" />
-        </div>
-        <div v-if="questionViewModel?.type === 'choix_multiple'" class="fr-input-group">
-          <h2 class="fr-h4 fr-mb-2w">
-            {{ questionViewModel?.libelle }}
-          </h2>
-          <InputCheckbox
-            :options="questionViewModel.reponses_possibles"
-            v-model="reponse"
-            :est-resetable="true"
-            :default-values="reponse as string[]"
-          />
-        </div>
-        <div v-if="questionViewModel?.type === 'choix_unique'" class="fr-input-group">
-          <BoutonRadio
-            col=""
-            legende-size="l"
-            :legende="questionViewModel.libelle"
-            name="toto"
-            orientation="vertical"
-            :options="
-              questionViewModel.reponses_possibles.map((reponsePossible: ReponsePossible) => ({
-                label: reponsePossible.label,
-                value: reponsePossible.id,
-              }))
-            "
-            v-model="reponse"
-            :default-value="reponse ? reponse.toString() : undefined"
-          />
-        </div>
-        <button class="fr-btn fr-btn--lg" title="Valider" :disabled="isButtonDisabled">Valider</button>
-      </form>
+      <KYCForm
+        v-if="!reponseAEteDonnee"
+        :question-view-model="questionViewModel"
+        wording-bouton="Valider"
+        @update:soumission-kyc="validerLaReponse"
+      />
       <KYCFin
         v-else
         :phrase-point-a-gagner="questionViewModel.points"
         :a-deja-repondu="questionViewModel.aDejaEteRepondu"
+        :bouton="{
+          label: `Retour à l'accueil`,
+          url: `/${RouteCoachName.COACH}`,
+        }"
       />
     </div>
     <div v-else>Problème de chargement de donées</div>
@@ -54,21 +26,15 @@
 </template>
 
 <script setup lang="ts">
-  import { computed, onMounted, ref } from 'vue';
+  import { onMounted, ref } from 'vue';
   import { useRoute } from 'vue-router';
-  import BoutonRadio from '@/components/custom/BoutonRadio.vue';
-  import InputCheckbox from '@/components/custom/InputCheckbox.vue';
   import KYCFin from '@/components/custom/KYC/KYCFin.vue';
+  import KYCForm from '@/components/custom/KYC/KYCForm.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
-  import {
-    QuestionPresenterImpl,
-    QuestionViewModel,
-    ReponsePossible,
-  } from '@/domaines/kyc/adapters/question.presenter.impl';
+  import { QuestionPresenterImpl, QuestionViewModel } from '@/domaines/kyc/adapters/question.presenter.impl';
   import { QuestionRepositoryAxios } from '@/domaines/kyc/adapters/question.repository.axios';
-  import { EnvoyerReponseUsecase } from '@/domaines/kyc/envoyerReponseUsecase';
   import { RecupererQuestionUsecase } from '@/domaines/kyc/recupererQuestionUsecase';
-  import { ToDoListEventBusImpl } from '@/domaines/toDoList/toDoListEventBusImpl';
+  import { RouteCoachName } from '@/router/coach/routeCoachName';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const route = useRoute();
@@ -80,13 +46,6 @@
   const reponseAEteDonnee = ref<boolean>(false);
 
   const utilisateurId = utilisateurStore().utilisateur.id;
-
-  const isButtonDisabled = computed(() => {
-    if (!reponse.value) return true;
-    if (reponse.value === '') return true;
-    if (reponse.value.length < 1) return true;
-    return false;
-  });
 
   onMounted(async () => {
     const recupereQuestionUsecase = new RecupererQuestionUsecase(new QuestionRepositoryAxios());
@@ -102,11 +61,6 @@
   });
 
   const validerLaReponse = async () => {
-    const envoyerReponseUsecase = new EnvoyerReponseUsecase(
-      new QuestionRepositoryAxios(),
-      ToDoListEventBusImpl.getInstance(),
-    );
-    envoyerReponseUsecase.execute(utilisateurId, questionId, [reponse.value].flat());
     reponseAEteDonnee.value = true;
   };
 </script>

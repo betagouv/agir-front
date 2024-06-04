@@ -29,7 +29,7 @@
             :checked="option.value === defaultValue"
             :disabled="option.disabled"
           />
-          <label class="fr-label" :for="`${option.value}-${name}`">
+          <label class="fr-label background--white" :for="`${option.value}-${name}`">
             {{ option.label }}
           </label>
         </div>

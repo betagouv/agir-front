@@ -27,15 +27,22 @@ interface MissionItemThematiqueApiModel {
   done: boolean;
   type: string;
   points: number;
+  sont_points_en_poche: boolean;
 }
 interface MissionThematiqueApiModel {
   id: string;
   titre: string;
+  image_url: string;
   thematique_univers: string;
   thematique_univers_label: string;
   univers: string;
   univers_label: string;
   objectifs: MissionItemThematiqueApiModel[];
+  done_at: Date | null;
+  progression_kyc: {
+    current: number;
+    target: number;
+  };
 }
 
 export class ThematiqueRepositoryAxios implements ThematiqueRepository {
@@ -46,8 +53,11 @@ export class ThematiqueRepositoryAxios implements ThematiqueRepository {
       `/utilisateurs/${utilisateurId}/thematiques/${thematiqueId}/mission`,
     );
     return {
+      idThematique: thematiqueId,
       titre: reponse.data.titre,
-      urlImage: reponse.data.thematique_univers,
+      univers: reponse.data.univers,
+      urlImage: reponse.data.image_url,
+      estTerminee: Boolean(reponse.data.done_at),
       items: reponse.data.objectifs.map(item => ({
         id: item.id,
         contentId: item.content_id,
@@ -57,7 +67,12 @@ export class ThematiqueRepositoryAxios implements ThematiqueRepository {
         points: item.points,
         aEteRealisee: item.done,
         type: item.type,
+        pointAEteRecolte: item.sont_points_en_poche,
       })),
+      progressionKyc: {
+        etapeCourante: reponse.data.progression_kyc.current,
+        etapeTotal: reponse.data.progression_kyc.target,
+      },
     };
   }
   @intercept401()
@@ -69,12 +84,20 @@ export class ThematiqueRepositoryAxios implements ThematiqueRepository {
     return response.data.map(thematique => ({
       id: thematique.type,
       titre: thematique.titre,
-      progression: thematique.progression,
+      progression: {
+        etapeActuelle: thematique.progression,
+        etapeCible: thematique.cible_progression,
+      },
       estBloquee: thematique.is_locked,
       raisonDuBlocage: thematique.reason_locked,
       estNouvelle: thematique.is_new,
       niveau: thematique.niveau,
       urlImage: thematique.image_url,
     }));
+  }
+  @intercept401()
+  async recupererPoints(idUtilisateur: string, elementId: string): Promise<void> {
+    const axios = AxiosFactory.getAxios();
+    await axios.post(`/utilisateurs/${idUtilisateur}/objectifs/${elementId}/gagner_points`, { element_id: elementId });
   }
 }

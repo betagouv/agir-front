@@ -4,7 +4,10 @@ import { Thematique } from '@/domaines/thematiques/recupererThematiquesUnivers.u
 export interface ThematiqueViewModel {
   titre: string;
   id: string;
-  progression: number;
+  progression: {
+    etapeActuelle: number;
+    etapeCible: number;
+  };
   blocage?: {
     raison: string;
   };
