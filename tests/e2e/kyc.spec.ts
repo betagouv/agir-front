@@ -103,7 +103,7 @@ test.describe('kyc', () => {
 
     expect(await page.getByText('Merci pour votre réponse !!!')).toBeDefined();
 
-    await page.getByRole('link', { name: 'Continuer' }).click();
+    await page.getByRole('link', { name: "Retour à l'accueil" }).click();
 
     await expect(page).toHaveTitle('Agir ! - Agir');
   });
