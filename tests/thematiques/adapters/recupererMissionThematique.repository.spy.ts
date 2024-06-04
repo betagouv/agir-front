@@ -6,7 +6,12 @@ export class ThematiqueRepositorySpy implements ThematiqueRepository {
   get recupererPointsArgs(): { elementId: string; idUtilisateur: string } {
     return this._recupererPointsArgs;
   }
-  private _recupererPointsArgs: { elementId: string; idUtilisateur: string };
+
+  private _recupererPointsArgs: { elementId: string; idUtilisateur: string } = {
+    elementId: 'elementId',
+    idUtilisateur: 'idUtilisateur',
+  };
+
   recupererMissionThematique(thematiqueId: string, utilisateurId: string): Promise<MissionThematique> {
     throw new Error('Method not implemented.');
   }

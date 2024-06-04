@@ -1,4 +1,3 @@
-import { it } from 'vitest';
 import { MissionThematique } from '../recupererMissionThematiqueUsecase';
 import { AxiosFactory, intercept401 } from '@/axios.factory';
 import { ThematiqueRepository } from '@/domaines/thematiques/ports/thematique.repository';
