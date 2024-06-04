@@ -86,17 +86,16 @@
     return false;
   };
 
-  const utilisateurId = utilisateurStore().utilisateur.id;
   const recupererPointsTodo = async () => {
     new TerminerToDoListUsecase(new ToDoListRepositoryAxios(), ToDoListEventBusImpl.getInstance()).execute(
-      utilisateurId,
+      utilisateurStore().utilisateur.id,
     );
     bonusFinalRecupere.value = false;
   };
 
   function onRecolterPoints(missionId: string) {
     new RecupererPointsToDoUsecase(new ToDoListRepositoryAxios(), ToDoListEventBusImpl.getInstance()).execute(
-      utilisateurId,
+      utilisateurStore().utilisateur.id,
       missionId,
     );
   }
