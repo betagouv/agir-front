@@ -31,7 +31,7 @@
 </template>
 
 <script setup lang="ts">
-  import { ref } from 'vue';
+  import { onMounted, onUnmounted, ref } from 'vue';
   import { useRoute } from 'vue-router';
   import ThematiquesMissions from '@/components/custom/Thematiques/ThematiquesMissions.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
@@ -41,6 +41,7 @@
   } from '@/domaines/thematiques/adapters/missionThematique.presenter.impl';
   import { ThematiqueRepositoryAxios } from '@/domaines/thematiques/adapters/thematique.repository.axios';
   import { RecupererMissionThematiqueUsecase } from '@/domaines/thematiques/recupererMissionThematiqueUsecase';
+  import { ThematiqueEvent, ThematiqueEventBusImpl } from '@/domaines/thematiques/thematiqueEventBusImpl';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const mission = ref<MissionThematiqueViewModel>();
@@ -53,8 +54,26 @@
 
   const thematiqueId = useRoute().params.thematique as string;
   const utilisateurId = utilisateurStore().utilisateur.id;
+  const subscriberName = 'PageThematique';
 
   usecase.execute(thematiqueId, utilisateurId, new MissionThematiquePresenterImpl(onMissionPretAAffchee));
+
+  onMounted(() => {
+    ThematiqueEventBusImpl.getInstance().subscribe(
+      subscriberName,
+      ThematiqueEvent.OBJECTIF_MISSION_POINTS_ONT_ETE_RECUPERE,
+      () => {
+        usecase.execute(thematiqueId, utilisateurId, new MissionThematiquePresenterImpl(onMissionPretAAffchee));
+      },
+    );
+  });
+
+  onUnmounted(() => {
+    ThematiqueEventBusImpl.getInstance().unsubscribe(
+      subscriberName,
+      ThematiqueEvent.OBJECTIF_MISSION_POINTS_ONT_ETE_RECUPERE,
+    );
+  });
 </script>
 
 <style scoped>

@@ -10,6 +10,7 @@ export interface MissionItem {
   points: number;
   aEteRealisee: boolean;
   type: string;
+  pointAEteRecolte: boolean;
 }
 
 export interface MissionThematique {

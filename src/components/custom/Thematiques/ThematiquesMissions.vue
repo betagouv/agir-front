@@ -7,8 +7,9 @@
         :titre="mission.titre"
         :value="mission.progression?.etapeCourante"
         :nombre-points="mission.points"
-        :point-a-ete-recolte="false"
+        :point-a-ete-recolte="mission.pointAEteRecolte"
         :element-id="mission.id"
+        :on-recolter-points="onRecolterPoints"
       />
       <CoachCardToDo
         v-else
@@ -28,6 +29,18 @@
   import CoachCardToDo from '@/components/custom/Coach/CoachCardToDo.vue';
   import MissionCarteBloquee from '@/components/custom/Mission/MissionCarteBloquee.vue';
   import { MissionItemViewModel } from '@/domaines/thematiques/adapters/missionThematique.presenter.impl';
+  import { ThematiqueRepositoryAxios } from '@/domaines/thematiques/adapters/thematique.repository.axios';
+  import { RecupererPointsMissionThematiqueUsecase } from '@/domaines/thematiques/recupererPointsMissionThematique.usecase';
+  import { ThematiqueEventBusImpl } from '@/domaines/thematiques/thematiqueEventBusImpl';
+  import { utilisateurStore } from '@/store/utilisateur';
 
   defineProps<{ missions: MissionItemViewModel[] }>();
+
+  function onRecolterPoints(missionId: string) {
+    const utilisateurId: string = utilisateurStore().utilisateur.id;
+    new RecupererPointsMissionThematiqueUsecase(
+      new ThematiqueRepositoryAxios(),
+      ThematiqueEventBusImpl.getInstance(),
+    ).execute(utilisateurId, missionId);
+  }
 </script>

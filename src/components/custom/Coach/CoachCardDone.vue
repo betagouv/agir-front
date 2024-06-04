@@ -10,7 +10,7 @@
       </span>
       <button
         class="fr-btn fr-btn--secondary fr-text--md todo__bouton"
-        @click="recupererPointsTodo"
+        @click="recolterPoints"
         :disabled="pointAEteRecolte"
       >
         <span class="fr-hidden fr-unhidden-md"> Récolter vos </span> &nbsp;{{ nombrePoints }}
@@ -21,25 +21,17 @@
 </template>
 
 <script setup lang="ts">
-  import { ToDoListRepositoryAxios } from '@/domaines/toDoList/adapters/toDoList.repository.axios';
-  import { RecupererPointsToDoUsecase } from '@/domaines/toDoList/recupererPointsToDo.usecase';
-  import { ToDoListEventBusImpl } from '@/domaines/toDoList/toDoListEventBusImpl';
-  import { utilisateurStore } from '@/store/utilisateur';
-
   const props = defineProps<{
     titre: string;
     value?: number;
     nombrePoints: number;
     pointAEteRecolte: boolean;
     elementId: string;
+    onRecolterPoints: (missionId: string) => void;
   }>();
 
-  const recupererPointsTodo = async () => {
-    const utilisateurId: string = utilisateurStore().utilisateur.id;
-    new RecupererPointsToDoUsecase(new ToDoListRepositoryAxios(), ToDoListEventBusImpl.getInstance()).execute(
-      utilisateurId,
-      props.elementId,
-    );
+  const recolterPoints = () => {
+    props.onRecolterPoints(props.elementId);
   };
 </script>
 

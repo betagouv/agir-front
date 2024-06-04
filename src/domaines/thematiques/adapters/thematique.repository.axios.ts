@@ -1,3 +1,4 @@
+import { it } from 'vitest';
 import { MissionThematique } from '../recupererMissionThematiqueUsecase';
 import { AxiosFactory, intercept401 } from '@/axios.factory';
 import { ThematiqueRepository } from '@/domaines/thematiques/ports/thematique.repository';
@@ -27,6 +28,7 @@ interface MissionItemThematiqueApiModel {
   done: boolean;
   type: string;
   points: number;
+  sont_points_en_poche: boolean;
 }
 interface MissionThematiqueApiModel {
   id: string;
@@ -66,6 +68,7 @@ export class ThematiqueRepositoryAxios implements ThematiqueRepository {
         points: item.points,
         aEteRealisee: item.done,
         type: item.type,
+        pointAEteRecolte: item.sont_points_en_poche,
       })),
       progressionKyc: {
         etapeCourante: reponse.data.progression_kyc.current,
@@ -92,5 +95,10 @@ export class ThematiqueRepositoryAxios implements ThematiqueRepository {
       niveau: thematique.niveau,
       urlImage: thematique.image_url,
     }));
+  }
+  @intercept401()
+  async recupererPoints(idUtilisateur: string, elementId: string): Promise<void> {
+    const axios = AxiosFactory.getAxios();
+    await axios.post(`/utilisateurs/${idUtilisateur}/objectifs/${elementId}/gagner_points`, { element_id: elementId });
   }
 }

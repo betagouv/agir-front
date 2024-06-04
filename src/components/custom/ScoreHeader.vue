@@ -62,6 +62,7 @@
   import { ScoreRepositoryAxios } from '@/domaines/score/adapters/score.repository.axios';
   import { ChargementScoreUsecase } from '@/domaines/score/chargementScore.usecase';
   import { ScoreViewModel } from '@/domaines/score/ports/chargementScore.presenter';
+  import { ThematiqueEvent, ThematiqueEventBusImpl } from '@/domaines/thematiques/thematiqueEventBusImpl';
   import { ToDoListEvent, ToDoListEventBusImpl } from '@/domaines/toDoList/toDoListEventBusImpl';
   import { Fonctionnalites } from '@/shell/fonctionnalitesEnum';
   import { utilisateurStore } from '@/store/utilisateur';
@@ -128,6 +129,14 @@
       );
     }
 
+    ThematiqueEventBusImpl.getInstance().subscribe(
+      subscriberName,
+      ThematiqueEvent.OBJECTIF_MISSION_POINTS_ONT_ETE_RECUPERE,
+      () => {
+        mettreAJourLeScore();
+      },
+    );
+
     ToDoListEventBusImpl.getInstance().subscribe(subscriberName, ToDoListEvent.TODO_POINTS_ONT_ETE_RECUPERE, () => {
       mettreAJourLeScore();
     });
@@ -163,6 +172,10 @@
     ToDoListEventBusImpl.getInstance().unsubscribe(subscriberName, ToDoListEvent.TODO_KYC_A_ETE_REPONDU);
     ToDoListEventBusImpl.getInstance().unsubscribe(subscriberName, ToDoListEvent.TODO_RECOMMANDATION_A_ETE_CLIQUEE);
     ToDoListEventBusImpl.getInstance().unsubscribe(subscriberName, ToDoListEvent.TODO_LINKY_A_ETE_CONSULTE);
+    ThematiqueEventBusImpl.getInstance().unsubscribe(
+      subscriberName,
+      ThematiqueEvent.OBJECTIF_MISSION_POINTS_ONT_ETE_RECUPERE,
+    );
   });
 </script>
 

@@ -21,6 +21,7 @@ export interface MissionItemViewModel {
     etapeCourante: number;
     etapeTotal: number;
   };
+  pointAEteRecolte: boolean;
 }
 export interface MissionThematiqueViewModel {
   titre: string;
@@ -42,7 +43,7 @@ export class MissionThematiquePresenterImpl implements MissionThematiquePresente
         : { phrase: 'Bonus de fin de mission', picto: 'fr-icon-gift-fill' },
       kyc: [
         {
-          id: '',
+          id: missionThematique.items.filter(item => item.type === InteractionType.KYC)[0].id,
           idDuContenu: '',
           titre: '<strong>Quelques questions</strong> pour mieux vous connaître',
           progression: {
@@ -55,6 +56,8 @@ export class MissionThematiquePresenterImpl implements MissionThematiquePresente
           url: `${RouteKycPath.KYC}${missionThematique.univers}/${missionThematique.idThematique}`,
           hash: undefined,
           picto: '/ic_mission_kyc.svg',
+          pointAEteRecolte: missionThematique.items.filter(item => item.type === InteractionType.KYC)[0]
+            .pointAEteRecolte,
         },
       ],
       articleEtQuiz: missionThematique.items
@@ -78,6 +81,7 @@ export class MissionThematiquePresenterImpl implements MissionThematiquePresente
       url: this.determineUrl(item),
       hash: this.determineHash(item),
       picto: this.determinePicto(item),
+      pointAEteRecolte: item.pointAEteRecolte,
     };
   }
 

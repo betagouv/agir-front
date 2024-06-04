@@ -20,6 +20,7 @@ export class ThematiqueRepositoryFake implements ThematiqueRepository {
           points: 10,
           aEteRealisee: false,
           type: InteractionType.QUIZ,
+          pointAEteRecolte: false,
         },
         {
           id: 'id2',
@@ -30,6 +31,7 @@ export class ThematiqueRepositoryFake implements ThematiqueRepository {
           points: 10,
           aEteRealisee: false,
           type: InteractionType.DEFIS,
+          pointAEteRecolte: false,
         },
         {
           id: 'id3',
@@ -40,6 +42,7 @@ export class ThematiqueRepositoryFake implements ThematiqueRepository {
           points: 10,
           aEteRealisee: false,
           type: InteractionType.KYC,
+          pointAEteRecolte: false,
         },
       ],
       idThematique: '1',
@@ -73,5 +76,9 @@ export class ThematiqueRepositoryFake implements ThematiqueRepository {
         urlImage: 'https://via.placeholder.com/150',
       },
     ];
+  }
+
+  recupererPoints(idUtilisateur: string, elementId: string): Promise<void> {
+    return Promise.resolve();
   }
 }

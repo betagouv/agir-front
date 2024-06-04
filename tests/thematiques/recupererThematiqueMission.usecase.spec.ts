@@ -29,6 +29,7 @@ describe("Fichier de tests concernant la récupération d'une mission pour une t
             titre: 'Mission 1',
             url: '/agir/quiz/1',
             picto: '/ic_mission_article.svg',
+            pointAEteRecolte: false,
           },
         ],
         defis: [
@@ -43,13 +44,14 @@ describe("Fichier de tests concernant la récupération d'une mission pour une t
             titre: 'Mission 2',
             url: '/defi/2',
             picto: '/ic_mission_defi.svg',
+            pointAEteRecolte: false,
           },
         ],
         kyc: [
           {
             aEteRealisee: false,
             estBloquee: false,
-            id: '',
+            id: 'id3',
             idDuContenu: '',
             hash: undefined,
             picto: '/ic_mission_kyc.svg',
@@ -60,6 +62,7 @@ describe("Fichier de tests concernant la récupération d'une mission pour une t
             },
             titre: '<strong>Quelques questions</strong> pour mieux vous connaître',
             url: '/mieux-vous-connaitre/alimentation/1',
+            pointAEteRecolte: false,
           },
         ],
         titre: 'Thematique 1',
