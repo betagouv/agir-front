@@ -28,7 +28,9 @@
             <Notation @rated="noterLarticle" />
           </div>
           <div class="print-hidden fr-grid-row fr-mt-5v fr-grid-row--middle flex-space-between">
-            <router-link class="fr-btn" :to="{ name: RouteCoachName.COACH }"> Revenir à l'accueil </router-link>
+            <router-link class="fr-btn fr-mt-3w" :to="useBoutonRetour().url">
+              {{ useBoutonRetour().label }}
+            </router-link>
           </div>
         </div>
       </div>
@@ -65,12 +67,12 @@
 <script setup lang="ts">
   import Notation from '@/components/custom/Notation.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
+  import { useBoutonRetour } from '@/composables/boutonRetour';
   import { ArticleRepositoryAxios } from '@/domaines/article/adapters/article.repository.axios';
   import { AjouterAuxFavorisUsecase } from '@/domaines/article/ajouterAuxFavoris.usecase';
   import { EvaluerArticleUsecase } from '@/domaines/article/evaluerArticle.usecase';
   import { Article } from '@/domaines/article/recupererArticle.usecase';
   import { RetirerDesFavorisUsecase } from '@/domaines/article/retirerDesFavoris.usecase';
-  import { RouteCoachName } from '@/router/coach/routeCoachName';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const props = defineProps<{
@@ -85,6 +87,7 @@
     const noterArticleUseCase = new EvaluerArticleUsecase(new ArticleRepositoryAxios());
     noterArticleUseCase.execute(props.article.id, utilisateurStore().utilisateur.id, note);
   };
+
   const imprimer = () => {
     window.print();
   };

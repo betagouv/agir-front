@@ -11,6 +11,7 @@ export enum RouteArticlePath {
 
 enum RouteArticleName {
   ARTICLE = 'article',
+  ARTICLE_THEMATIQUE = 'article-thematique',
 }
 
 const articlesRoutes: RouteRecordRaw[] = [
@@ -37,6 +38,11 @@ const articlesRoutes: RouteRecordRaw[] = [
         meta: { estPublique: true },
       },
     ],
+  },
+  {
+    path: `${RouteArticlePath.ARTICLE}/:universId/:thematiqueId/:titre/:id`,
+    name: RouteArticleName.ARTICLE_THEMATIQUE,
+    component: PageArticle,
   },
 ];
 
