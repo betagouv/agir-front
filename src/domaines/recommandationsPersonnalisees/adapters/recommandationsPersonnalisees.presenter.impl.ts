@@ -2,7 +2,6 @@ import { RecommandationsPersonnaliseesPresenter } from '@/domaines/recommandatio
 import { RecommandationPersonnalisee } from '@/domaines/recommandationsPersonnalisees/recupererRecommandationsPersonnalisees.usecase';
 import { RouteAidesPath } from '@/router/aides/routes';
 import { RouteArticlePath } from '@/router/articles/routes';
-import { RouteCoachPath } from '@/router/coach/routes';
 import { RouteDefiPath } from '@/router/defis/routes';
 import { RouteKycPath } from '@/router/kyc/routes';
 import { RouteQuizPath } from '@/router/quiz/routes';
