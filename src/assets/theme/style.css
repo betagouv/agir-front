@@ -243,6 +243,10 @@ h3 {
   background-color: var(--green-bourgeon-950-100);
 }
 
+.background--vert--success {
+  background-color: var(--success-425-625);
+}
+
 .background--caramel {
   background-color: var(--brown-caramel-925-125);
 }

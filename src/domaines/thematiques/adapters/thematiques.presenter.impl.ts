@@ -14,6 +14,7 @@ export interface ThematiqueViewModel {
   estNouvelle: boolean;
   niveau: number;
   urlImage: string;
+  estTerminee: boolean;
 }
 export class ThematiquesPresenterImpl implements ThematiquesPresenter {
   constructor(private thematiquesViewModel: (viewModel: ThematiqueViewModel[]) => void) {}
@@ -27,6 +28,7 @@ export class ThematiquesPresenterImpl implements ThematiquesPresenter {
         estNouvelle: thematique.estNouvelle,
         niveau: thematique.niveau,
         urlImage: thematique.urlImage,
+        estTerminee: thematique.progression.etapeActuelle === thematique.progression.etapeCible,
       })),
     );
   }
