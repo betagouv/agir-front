@@ -18,4 +18,8 @@ export class MockDefiRepository implements DefiRepository {
   envoyerReponse(utilisateurId: string, defiId: string, reponse: string, explication: string): Promise<void> {
     throw new Error('Method not implemented.');
   }
+
+  recupererTousLesDefis(utilisateurId: string): Promise<Defi[]> {
+    return Promise.resolve([]);
+  }
 }

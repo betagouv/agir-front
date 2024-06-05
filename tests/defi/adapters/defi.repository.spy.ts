@@ -1,4 +1,3 @@
-import { Question } from '@/domaines/kyc/recupererQuestionUsecase';
 import { DefiRepository } from '@/domaines/defi/ports/defi.repository';
 import { Defi } from '@/domaines/defi/recupererDefisEnCoursOuAFaire.usecase';
 
@@ -39,5 +38,9 @@ export class SpyDefiRepository implements DefiRepository {
 
   get envoyerReponseArgs() {
     return this._envoyerReponseArgs;
+  }
+
+  recupererTousLesDefis(utilisateurId: string): Promise<Defi[]> {
+    return Promise.resolve([]);
   }
 }
