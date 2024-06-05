@@ -28,8 +28,8 @@
             <Notation @rated="noterLarticle" />
           </div>
           <div class="print-hidden fr-grid-row fr-mt-5v fr-grid-row--middle flex-space-between">
-            <router-link class="fr-btn fr-mt-3w" :to="boutonRetourUrl().url">
-              {{ boutonRetourUrl().label }}
+            <router-link class="fr-btn fr-mt-3w" :to="useBoutonRetour().url">
+              {{ useBoutonRetour().label }}
             </router-link>
           </div>
         </div>
@@ -67,7 +67,7 @@
 <script setup lang="ts">
   import Notation from '@/components/custom/Notation.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
-  import { boutonRetourUrl } from '@/composables/boutonRetour';
+  import { useBoutonRetour } from '@/composables/boutonRetour';
   import { ArticleRepositoryAxios } from '@/domaines/article/adapters/article.repository.axios';
   import { AjouterAuxFavorisUsecase } from '@/domaines/article/ajouterAuxFavoris.usecase';
   import { EvaluerArticleUsecase } from '@/domaines/article/evaluerArticle.usecase';

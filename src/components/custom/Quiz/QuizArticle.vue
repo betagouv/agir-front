@@ -10,13 +10,13 @@
     <span class="fr-m-0 fr-text--bold fr-text--md">Comment avez-vous trouvé ce quiz ?</span>
     <Notation @rated="noterLeQuiz" />
   </div>
-  <router-link class="fr-btn fr-mt-3w" :to="boutonRetourUrl().url"> {{ boutonRetourUrl().label }} </router-link>
+  <router-link class="fr-btn fr-mt-3w" :to="useBoutonRetour().url"> {{ useBoutonRetour().label }}</router-link>
 </template>
 
 <script setup lang="ts">
   import Notation from '@/components/custom/Notation.vue';
   import QuizReponse from '@/components/custom/Quiz/QuizReponse.vue';
-  import { boutonRetourUrl } from '@/composables/boutonRetour';
+  import { useBoutonRetour } from '@/composables/boutonRetour';
   import { QuizRepositoryAxios } from '@/domaines/quiz/adapters/quizRepository.axios';
   import { EvaluerQuizUsecase } from '@/domaines/quiz/evaluerQuiz.usecase';
   import { ArticleDuQuiz } from '@/domaines/quiz/ports/quizRepository';
