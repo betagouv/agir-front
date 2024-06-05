@@ -27,7 +27,7 @@ describe("Fichier de tests concernant la récupération d'une mission pour une t
             points: 10,
             progression: undefined,
             titre: 'Mission 1',
-            url: '/agir/quiz/1',
+            url: '/quiz/alimentation/1/1',
             picto: '/ic_mission_article.svg',
             pointAEteRecolte: false,
           },

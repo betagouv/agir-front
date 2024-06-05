@@ -1,9 +1,9 @@
 import { MissionItem, MissionThematique } from '../recupererMissionThematiqueUsecase';
 import { MissionThematiquePresenter } from '@/domaines/thematiques/ports/missionThematique.presenter';
 import { RouteArticlePath } from '@/router/articles/routes';
-import { RouteCoachPath } from '@/router/coach/routes';
 import { RouteDefiPath } from '@/router/defis/routes';
 import { RouteKycPath } from '@/router/kyc/routes';
+import { RouteQuizPath } from '@/router/quiz/routes';
 import { buildUrl } from '@/shell/buildUrl';
 import { InteractionType } from '@/shell/interactionType';
 
@@ -62,14 +62,14 @@ export class MissionThematiquePresenterImpl implements MissionThematiquePresente
       ],
       articleEtQuiz: missionThematique.items
         .filter(item => item.type === InteractionType.ARTICLE || item.type === InteractionType.QUIZ)
-        .map(item => this.mapToViewModel(item)),
+        .map(item => this.mapToViewModel(item, missionThematique.univers, missionThematique.idThematique)),
       defis: missionThematique.items
         .filter(item => item.type === InteractionType.DEFIS)
-        .map(item => this.mapToViewModel(item)),
+        .map(item => this.mapToViewModel(item, missionThematique.univers, missionThematique.idThematique)),
     });
   }
 
-  private mapToViewModel(item: MissionItem) {
+  private mapToViewModel(item: MissionItem, univers: string, thematique: string) {
     return {
       id: item.id,
       idDuContenu: item.contentId,
@@ -78,7 +78,7 @@ export class MissionThematiquePresenterImpl implements MissionThematiquePresente
       estBloquee: item.estBloquee,
       points: item.points,
       aEteRealisee: item.aEteRealisee,
-      url: this.determineUrl(item),
+      url: this.determineUrl(item, univers, thematique),
       hash: this.determineHash(item),
       picto: this.determinePicto(item),
       pointAEteRecolte: item.pointAEteRecolte,
@@ -94,14 +94,12 @@ export class MissionThematiquePresenterImpl implements MissionThematiquePresente
     }
   }
 
-  private determineUrl(item: MissionItem) {
+  private determineUrl(item: MissionItem, univers: string, thematique: string) {
     switch (item.type) {
       case InteractionType.QUIZ:
-        return `${RouteCoachPath.COACH + RouteCoachPath.QUIZ}/${item.contentId}`;
+        return `${RouteQuizPath.QUIZ}${univers}/${thematique}/${item.contentId}`;
       case InteractionType.ARTICLE:
         return `${RouteArticlePath.ARTICLE}${buildUrl(item.titre)}/${item.contentId}`;
-      case InteractionType.KYC:
-        return `${RouteKycPath.KYC}${item.contentId}`;
       case InteractionType.DEFIS:
         return `${RouteDefiPath.DEFI}${item.contentId}`;
       default:

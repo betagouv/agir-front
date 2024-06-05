@@ -3,6 +3,7 @@ import PageQuizComposant from '@/components/custom/Quiz/PageQuizComposant.vue';
 import { QuizViewModel } from '@/domaines/quiz/adapters/chargementQuiz.presenter.impl';
 import { ArticleDuQuiz } from '@/domaines/quiz/ports/quizRepository';
 import { EnvoyerDonneesQuizInteractionUsecase } from '@/domaines/quiz/envoyerDonneesQuizInteraction.usecase';
+import router from '@/router';
 
 const quizViewModel: QuizViewModel = {
   titre: 'A quoi ça sert de manger bio ?',
@@ -43,7 +44,12 @@ let mauvaiseReponse: HTMLInputElement;
 describe('Page Quiz Article', () => {
   beforeEach(() => {
     vi.spyOn(EnvoyerDonneesQuizInteractionUsecase.prototype, 'execute').mockImplementation(() => Promise.resolve());
-    page = render(PageQuizComposant, { props: pageQuizComposantprops });
+    page = render(PageQuizComposant, {
+      props: pageQuizComposantprops,
+      global: {
+        plugins: [router],
+      },
+    });
     boutonValider = page.getByRole('button', { name: 'Valider' });
     bonneReponse = page.getByRole('radio', { name: '1' });
     mauvaiseReponse = page.getByRole('radio', { name: '2' });
