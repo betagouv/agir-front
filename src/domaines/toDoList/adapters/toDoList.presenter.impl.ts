@@ -77,9 +77,9 @@ export class ToDoListPresenterImpl implements ToDoListPresenter {
       case InteractionType.KYC:
         return `${RouteKycPath.KYC}${todo.idDuContenu}`;
       case InteractionType.COMPTE:
-        return `${RouteCoachPath.COACH}${RouteComptePath.MON_COMPTE}`;
+        return `${RouteCoachPath.COACH}/${RouteComptePath.MON_COMPTE}`;
       case InteractionType.SERVICE:
-        return `${RouteCoachPath.COACH}${RouteCoachPath.SERVICES}`;
+        return `${RouteCoachPath.COACH}/${RouteCoachPath.SERVICES}`;
       case InteractionType.RECOMMANDATION:
         return '/agir';
       default:

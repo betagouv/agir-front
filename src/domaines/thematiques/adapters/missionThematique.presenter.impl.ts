@@ -101,7 +101,7 @@ export class MissionThematiquePresenterImpl implements MissionThematiquePresente
       case InteractionType.ARTICLE:
         return `${RouteArticlePath.ARTICLE}${univers}/${thematique}/${buildUrl(item.titre)}/${item.contentId}`;
       case InteractionType.DEFIS:
-        return `${RouteDefiPath.DEFI}${item.contentId}`;
+        return `${RouteDefiPath.DEFI}${univers}/${thematique}/${item.contentId}`;
       default:
         return '';
     }
