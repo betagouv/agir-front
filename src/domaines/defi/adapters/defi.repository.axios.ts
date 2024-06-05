@@ -36,8 +36,8 @@ export class DefiRepositoryAxios implements DefiRepository {
         astuces: '',
         pourquoi: '',
         explicationRefus: apiModel.motif,
-      nombreDePersonnes: apiModel.nombre_de_fois_realise,
-        };
+        nombreDePersonnes: apiModel.nombre_de_fois_realise,
+      };
 
       return recommandationPersonnalisee;
     });
@@ -67,7 +67,7 @@ export class DefiRepositoryAxios implements DefiRepository {
 
   @intercept401()
   async recupererDefis(utilisateurId: string): Promise<Defi[]> {
-    const response = await AxiosFactory.getAxios().get<DefiApiModel[]>(`/utilisateurs/${utilisateurId}/defis`);
+    const response = await AxiosFactory.getAxios().get<DefiApiModel[]>(`/utilisateurs/${utilisateurId}/defis_v2`);
     return response.data.map(defi => ({
       id: defi.id,
       libelle: defi.titre,
