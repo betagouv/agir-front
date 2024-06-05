@@ -1,5 +1,5 @@
 import { MockListeDefisRepository } from './adapters/listedefis.repository.mock';
-import { RecupererListeDefisUsecase } from '@/domaines/defi/recupererListeDefis.usecase';
+import { RecupererDefisEnCoursOuAFaireUsecase } from '@/domaines/defi/recupererDefisEnCoursOuAFaire.usecase';
 import { ListeDefisPresenterImpl } from '@/domaines/defi/adapters/listeDefis.presenter.impl';
 import { DefisQuestionViewModel } from '@/domaines/defi/ports/listeDefis.presenter';
 
@@ -7,7 +7,7 @@ describe('Fichier de tests concernant la récupération des défis en cours et t
   it('doit récupérer la liste des défis', async () => {
     // GIVEN
     // WHEN
-    const recupererListeDefisUsecase = new RecupererListeDefisUsecase(
+    const recupererListeDefisUsecase = new RecupererDefisEnCoursOuAFaireUsecase(
       new MockListeDefisRepository([
         {
           id: 'defiId1',
@@ -101,7 +101,7 @@ describe('Fichier de tests concernant la récupération des défis en cours et t
     it('doit renvoyer pasDeDefi', async () => {
       // GIVEN
       // WHEN
-      const recupererListeDefisUsecase = new RecupererListeDefisUsecase(new MockListeDefisRepository([]));
+      const recupererListeDefisUsecase = new RecupererDefisEnCoursOuAFaireUsecase(new MockListeDefisRepository([]));
 
       await recupererListeDefisUsecase.execute(
         'utilisateurId',

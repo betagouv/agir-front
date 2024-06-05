@@ -1,5 +1,5 @@
 import { DefiRepository } from '@/domaines/defi/ports/defi.repository';
-import { Defi } from '@/domaines/defi/recupererListeDefis.usecase';
+import { Defi } from '@/domaines/defi/recupererDefisEnCoursOuAFaire.usecase';
 
 export class MockDefiRepository implements DefiRepository {
   constructor(private defiARetourner: Defi) {}
@@ -7,7 +7,7 @@ export class MockDefiRepository implements DefiRepository {
     throw new Error('Method not implemented.');
   }
 
-  recupererDefis(_utilisateurId: string): Promise<Defi[]> {
+  recupererDefisEnCoursOuAFaire(_utilisateurId: string): Promise<Defi[]> {
     throw new Error('Method not implemented.');
   }
 

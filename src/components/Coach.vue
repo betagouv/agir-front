@@ -117,7 +117,7 @@
     DefiDescriptionViewModel,
     ListeDefisDescriptionPresenterImpl,
   } from '@/domaines/defi/adapters/listeDefisDescription.presenter.impl';
-  import { RecupererListeDefisUsecase } from '@/domaines/defi/recupererListeDefis.usecase';
+  import { RecupererDefisEnCoursOuAFaireUsecase } from '@/domaines/defi/recupererDefisEnCoursOuAFaire.usecase';
   import {
     RecommandationPersonnaliseeViewModel,
     RecommandationsPersonnaliseesPresenterImpl,
@@ -164,7 +164,7 @@
       new RecommandationsPersonnaliseesRepositoryAxios(),
     );
     const chargerTodoListUsecase = new RecupererToDoListUsecase(new ToDoListRepositoryAxios());
-    const chargerListeDefisUsecase = new RecupererListeDefisUsecase(new DefiRepositoryAxios());
+    const chargerListeDefisUsecase = new RecupererDefisEnCoursOuAFaireUsecase(new DefiRepositoryAxios());
     const chargerUniversUsecase = new RecupererListeUniversUsecase(new UniversRepositoryAxios());
 
     ToDoListEventBusImpl.getInstance().subscribe(subscriberName, ToDoListEvent.TODO_POINTS_ONT_ETE_RECUPERE, () => {

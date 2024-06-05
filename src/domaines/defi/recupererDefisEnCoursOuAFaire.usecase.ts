@@ -14,11 +14,11 @@ export interface Defi {
   nombreDePersonnes: number;
 }
 
-export class RecupererListeDefisUsecase {
+export class RecupererDefisEnCoursOuAFaireUsecase {
   constructor(private readonly defiRepository: DefiRepository) {}
 
   async execute(utilisateurId: string, presenter: ListeDefisPresenter): Promise<void> {
-    const defis = await this.defiRepository.recupererDefis(utilisateurId);
+    const defis = await this.defiRepository.recupererDefisEnCoursOuAFaire(utilisateurId);
     presenter.presente(defis);
   }
 }
