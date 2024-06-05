@@ -61,7 +61,7 @@ describe('Fichier de tests concernant le chargement des recommandations personna
             bouton: {
               libelle: 'Répondre au quiz',
               style: 'fr-btn--secondary fr-btn--icon-left fr-icon-question-line',
-              url: '/agir/quiz/2',
+              url: '/quiz/2',
             },
             idDuContenu: '2',
             image: 'illustrationURL',

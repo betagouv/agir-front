@@ -5,6 +5,7 @@ import { RouteArticlePath } from '@/router/articles/routes';
 import { RouteCoachPath } from '@/router/coach/routes';
 import { RouteComptePath } from '@/router/compte/routes';
 import { RouteKycPath } from '@/router/kyc/routes';
+import { RouteQuizPath } from '@/router/quiz/routes';
 import { buildUrl } from '@/shell/buildUrl';
 import { InteractionType } from '@/shell/interactionType';
 
@@ -70,7 +71,7 @@ export class ToDoListPresenterImpl implements ToDoListPresenter {
       case InteractionType.AIDE:
         return RouteAidesPath.VOS_AIDES;
       case InteractionType.QUIZ:
-        return `${RouteCoachPath.COACH + RouteCoachPath.QUIZ}/${todo.idDuContenu}`;
+        return `${RouteQuizPath.QUIZ}${todo.idDuContenu}`;
       case InteractionType.ARTICLE:
         return `${RouteArticlePath.ARTICLE}${buildUrl(todo.titre)}/${todo.idDuContenu}`;
       case InteractionType.KYC:

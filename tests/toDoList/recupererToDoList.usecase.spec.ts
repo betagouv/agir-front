@@ -42,7 +42,7 @@ describe('Fichier de tests concernant la récupération de la ToDo List', () => 
             thematique: '🚲 Transports',
             titre: 'Premier Quiz',
             type: 'quizz',
-            url: '/agir/quiz/',
+            url: '/quiz/',
             picto: '/ic_mission_article.svg',
           },
           {

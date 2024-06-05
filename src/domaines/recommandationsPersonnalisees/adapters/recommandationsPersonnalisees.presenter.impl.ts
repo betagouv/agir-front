@@ -5,6 +5,7 @@ import { RouteArticlePath } from '@/router/articles/routes';
 import { RouteCoachPath } from '@/router/coach/routes';
 import { RouteDefiPath } from '@/router/defis/routes';
 import { RouteKycPath } from '@/router/kyc/routes';
+import { RouteQuizPath } from '@/router/quiz/routes';
 import { buildUrl } from '@/shell/buildUrl';
 import { InteractionType } from '@/shell/interactionType';
 
@@ -77,7 +78,7 @@ export class RecommandationsPersonnaliseesPresenterImpl implements Recommandatio
       case InteractionType.QUIZ:
         return {
           libelle: 'Répondre au quiz',
-          url: `${RouteCoachPath.COACH + RouteCoachPath.QUIZ}/${recommandationPersonnalisee.idDuContenu}`,
+          url: `${RouteQuizPath.QUIZ}${recommandationPersonnalisee.idDuContenu}`,
           style: 'fr-btn--secondary fr-btn--icon-left fr-icon-question-line',
         };
       case InteractionType.ARTICLE:
