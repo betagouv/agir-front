@@ -7,7 +7,7 @@ import { RouteRecordRaw } from 'vue-router';
 import { RouteCoachName } from '@/router/coach/routeCoachName';
 
 export enum RouteCoachPath {
-  COACH = '/agir/',
+  COACH = '/agir',
   SERVICES = 'services',
   SERVICES_LINKY = '/agir/services/linky',
   SUIVI_DU_JOUR = 'suivi-du-jour',

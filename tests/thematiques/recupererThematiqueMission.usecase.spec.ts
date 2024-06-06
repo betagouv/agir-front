@@ -42,7 +42,7 @@ describe("Fichier de tests concernant la récupération d'une mission pour une t
             points: 10,
             progression: undefined,
             titre: 'Mission 2',
-            url: '/defi/2',
+            url: '/defi/alimentation/1/2',
             picto: '/ic_mission_defi.svg',
             pointAEteRecolte: false,
           },

@@ -10,17 +10,14 @@
     Vous récoltez <span class="fr-text--bold">+{{ defi.points }}</span>
     <img width="32" src="/ic_score.svg" alt="points" />
   </div>
-  <router-link
-    class="fr-btn fr-btn--icon-left fr-icon-arrow-left-line"
-    :to="{ name: RouteCoachName.COACH, hash: '#recommandations' }"
-  >
-    Revenir à l'accueil
+  <router-link class="fr-btn fr-btn--icon-left fr-icon-arrow-left-line" :to="useBoutonRetour().url">
+    {{ useBoutonRetour().label }}
   </router-link>
 </template>
 
 <script setup lang="ts">
+  import { useBoutonRetour } from '@/composables/boutonRetour';
   import { DefiViewModel } from '@/domaines/defi/adapters/defi.presenter.impl';
-  import { RouteCoachName } from '@/router/coach/routeCoachName';
 
   const props = defineProps<{ defi: DefiViewModel; reponse: string }>();
 
