@@ -1,5 +1,8 @@
 <template>
-  <div class="thematique-card position--relative border-radius--md shadow background--white fr-p-1w full-height">
+  <div
+    class="thematique-card position--relative border-radius--md shadow background--white fr-p-1w full-height"
+    :class="thematique.estTerminee ? 'opacity-6' : ''"
+  >
     <span v-if="thematique.estNouvelle" class="thematique-card__badge fr-badge background--bleu-info-dark text--white">
       Nouveau !
     </span>

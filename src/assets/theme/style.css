@@ -377,6 +377,10 @@ h3 {
   background-size: cover;
 }
 
+.opacity-6 {
+  opacity: 0.6;
+}
+
 @media print {
   .print-hidden {
     display: none;
