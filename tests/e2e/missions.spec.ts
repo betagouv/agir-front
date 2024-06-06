@@ -108,6 +108,13 @@ test.beforeAll(async () => {
       body: JSON.stringify([]),
     });
   });
+  await page.route(`${process.env.VITE_API_URL}/utilisateurs/dorian/defis_v2`, route => {
+    route.fulfill({
+      status: 200,
+      contentType: 'application/json',
+      body: JSON.stringify([]),
+    });
+  });
 });
 
 test.describe('Mission 1', async () => {
