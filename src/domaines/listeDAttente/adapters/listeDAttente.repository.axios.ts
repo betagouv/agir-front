@@ -5,6 +5,7 @@ import { AxiosFactory } from '@/axios.factory';
 
 interface CheckWhitelisteApiModel {
   is_whitelisted: boolean;
+  is_registered: boolean;
 }
 export class ListeDAttenteRepositoryAxios implements ListeDAttenteRepository {
   async verificationEmailWhiteListe(email: string): Promise<ReponseVerification> {
@@ -13,7 +14,10 @@ export class ListeDAttenteRepositoryAxios implements ListeDAttenteRepository {
       email,
     });
 
-    return { estAutorise: reponseVerification.data.is_whitelisted };
+    return {
+      estAutorise: reponseVerification.data.is_whitelisted,
+      aDejaUnCompte: reponseVerification.data.is_registered,
+    };
   }
 
   async inscrireVisiteur(email: string, codePostal: string, typeVisiteur: string): Promise<ReponseInscription> {

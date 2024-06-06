@@ -5,6 +5,7 @@ import {
   ReponseVerificationViewModel,
   VerificationMailPresenterImpl,
 } from '@/domaines/listeDAttente/adapters/verificationMailImpl.presenter';
+import { RouteCommuneName } from '@/router';
 
 describe('Fichier de tests concernant le test du mail whitelisté', () => {
   it('doit envoyer les informations au back-end', async () => {
@@ -24,7 +25,7 @@ describe('Fichier de tests concernant le test du mail whitelisté', () => {
     it('renvoie un objet de succès', async () => {
       // GIVEN
       const usecase = new VerificationWhiteListeUsecase(
-        new VerificationWhitelisteMockRepository({ estAutorise: true }),
+        new VerificationWhitelisteMockRepository({ estAutorise: true, aDejaUnCompte: false }),
       );
 
       // WHEN
@@ -43,7 +44,7 @@ describe('Fichier de tests concernant le test du mail whitelisté', () => {
     it("renvoie un objet d'erreur", async () => {
       // GIVEN
       const usecase = new VerificationWhiteListeUsecase(
-        new VerificationWhitelisteMockRepository({ estAutorise: false }),
+        new VerificationWhitelisteMockRepository({ estAutorise: false, aDejaUnCompte: false }),
       );
       // WHEN
       await usecase.execute('test@test.com', new VerificationMailPresenterImpl(expectation));
@@ -52,6 +53,24 @@ describe('Fichier de tests concernant le test du mail whitelisté', () => {
       function expectation(viewModel: ReponseVerificationViewModel) {
         expect(viewModel).toStrictEqual<ReponseVerificationViewModel>({
           redirectUrl: 'inscription-liste-d-attente',
+        });
+      }
+    });
+  });
+
+  describe('quand le visiteur possède déjà un compte', () => {
+    it("renvoie sur la page d'authentification", async () => {
+      // GIVEN
+      const usecase = new VerificationWhiteListeUsecase(
+        new VerificationWhitelisteMockRepository({ estAutorise: true, aDejaUnCompte: true }),
+      );
+      // WHEN
+      await usecase.execute('test@test.com', new VerificationMailPresenterImpl(expectation));
+
+      // THEN
+      function expectation(viewModel: ReponseVerificationViewModel) {
+        expect(viewModel).toStrictEqual<ReponseVerificationViewModel>({
+          redirectUrl: RouteCommuneName.AUTHENTIFICATION,
         });
       }
     });

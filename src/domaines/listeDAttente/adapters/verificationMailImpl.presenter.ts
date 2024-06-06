@@ -1,5 +1,6 @@
 import { VerificationMailPresenter } from '../ports/verificationMail.presenter';
 import { ReponseVerification } from '../verificationWhiteListe.usecase';
+import { RouteCommuneName } from '@/router';
 import { RouteOnboardingName } from '@/router/onboarding/routeOnboardingName';
 
 export interface ReponseVerificationViewModel {
@@ -10,9 +11,13 @@ export class VerificationMailPresenterImpl implements VerificationMailPresenter 
   constructor(private readonly reponseVerificationViewModel: (viewModel: ReponseVerificationViewModel) => void) {}
 
   presente(reponse: ReponseVerification): void {
-    const url = reponse.estAutorise
-      ? RouteOnboardingName.PRE_ONBOARDING
-      : RouteOnboardingName.INSCRIPTION_LISTE_D_ATTENTE;
-    this.reponseVerificationViewModel({ redirectUrl: url });
+    if (reponse.aDejaUnCompte) {
+      this.reponseVerificationViewModel({ redirectUrl: RouteCommuneName.AUTHENTIFICATION });
+    } else {
+      const url = reponse.estAutorise
+        ? RouteOnboardingName.PRE_ONBOARDING
+        : RouteOnboardingName.INSCRIPTION_LISTE_D_ATTENTE;
+      this.reponseVerificationViewModel({ redirectUrl: url });
+    }
   }
 }

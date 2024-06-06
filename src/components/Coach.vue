@@ -133,6 +133,7 @@
   import { RecupererListeUniversUsecase } from '@/domaines/univers/recupererListeUnivers.usecase';
   import { Fonctionnalites } from '@/shell/fonctionnalitesEnum';
   import { publierEvenementHotjar, HotjarEvenement } from '@/shell/publierEvenementHotjar';
+  import { onboardingStore } from '@/store/onboarding';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const { recommandationTour, defiTour } = useReveal();
@@ -199,6 +200,7 @@
   };
 
   onMounted(() => {
+    onboardingStore().reset();
     lancerChargementDesDonnees();
     handleConcealEvent = () => {
       const idUtilisateur = store.utilisateur.id;
