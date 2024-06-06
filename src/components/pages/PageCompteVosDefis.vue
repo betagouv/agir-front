@@ -51,13 +51,13 @@
   import { DefiRepositoryAxios } from '@/domaines/defi/adapters/defi.repository.axios';
   import { ListeDefisPresenterImpl } from '@/domaines/defi/adapters/listeDefis.presenter.impl';
   import { DefisQuestionViewModel } from '@/domaines/defi/ports/listeDefis.presenter';
-  import { RecupererListeDefisUsecase } from '@/domaines/defi/recupererListeDefis.usecase';
+  import { RecupererTousLesDefisUsecase } from '@/domaines/defi/recupererTousLesDefis.usecase';
   import { RouteDefiName } from '@/router/defis/routes';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const defisViewModel = ref<DefisQuestionViewModel>();
 
-  new RecupererListeDefisUsecase(new DefiRepositoryAxios()).execute(
+  new RecupererTousLesDefisUsecase(new DefiRepositoryAxios()).execute(
     utilisateurStore().utilisateur.id,
     new ListeDefisPresenterImpl(defis => {
       defisViewModel.value = defis;

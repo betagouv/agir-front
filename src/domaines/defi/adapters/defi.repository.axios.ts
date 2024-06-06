@@ -1,4 +1,4 @@
-import { Defi } from '../recupererListeDefis.usecase';
+import { Defi } from '../recupererDefisEnCoursOuAFaire.usecase';
 import { AxiosFactory, intercept401 } from '@/axios.factory';
 import { DefiRepository } from '@/domaines/defi/ports/defi.repository';
 
@@ -36,12 +36,13 @@ export class DefiRepositoryAxios implements DefiRepository {
         astuces: '',
         pourquoi: '',
         explicationRefus: apiModel.motif,
-      nombreDePersonnes: apiModel.nombre_de_fois_realise,
-        };
+        nombreDePersonnes: apiModel.nombre_de_fois_realise,
+      };
 
       return recommandationPersonnalisee;
     });
   }
+
   @intercept401()
   async envoyerReponse(utilisateurId: string, defiId: string, reponse: string, explication?: string): Promise<void> {
     const axios = AxiosFactory.getAxios();
@@ -66,7 +67,24 @@ export class DefiRepositoryAxios implements DefiRepository {
   }
 
   @intercept401()
-  async recupererDefis(utilisateurId: string): Promise<Defi[]> {
+  async recupererDefisEnCoursOuAFaire(utilisateurId: string): Promise<Defi[]> {
+    const response = await AxiosFactory.getAxios().get<DefiApiModel[]>(`/utilisateurs/${utilisateurId}/defis_v2`);
+    return response.data.map(defi => ({
+      id: defi.id,
+      libelle: defi.titre,
+      points: defi.points,
+      status: defi.status,
+      thematique: defi.thematique_label,
+      description: defi.sous_titre,
+      astuces: defi.astuces,
+      pourquoi: defi.pourquoi,
+      explicationRefus: defi.motif,
+      nombreDePersonnes: 42,
+    }));
+  }
+
+  @intercept401()
+  async recupererTousLesDefis(utilisateurId: string): Promise<Defi[]> {
     const response = await AxiosFactory.getAxios().get<DefiApiModel[]>(`/utilisateurs/${utilisateurId}/defis`);
     return response.data.map(defi => ({
       id: defi.id,

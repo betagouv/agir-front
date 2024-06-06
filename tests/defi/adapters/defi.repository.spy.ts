@@ -1,12 +1,11 @@
-import { Question } from '@/domaines/kyc/recupererQuestionUsecase';
 import { DefiRepository } from '@/domaines/defi/ports/defi.repository';
-import { Defi } from '@/domaines/defi/recupererListeDefis.usecase';
+import { Defi } from '@/domaines/defi/recupererDefisEnCoursOuAFaire.usecase';
 
 export class SpyDefiRepository implements DefiRepository {
   recupererListeDefisParUnivers(utilisateurId: string, universId: string): Promise<Defi[]> {
     throw new Error('Method not implemented.');
   }
-  recupererDefis(_utilisateurId: string): Promise<Defi[]> {
+  recupererDefisEnCoursOuAFaire(_utilisateurId: string): Promise<Defi[]> {
     throw new Error('Method not implemented.');
   }
   private _envoyerReponseAEteAppele: boolean = false;
@@ -39,5 +38,9 @@ export class SpyDefiRepository implements DefiRepository {
 
   get envoyerReponseArgs() {
     return this._envoyerReponseArgs;
+  }
+
+  recupererTousLesDefis(utilisateurId: string): Promise<Defi[]> {
+    return Promise.resolve([]);
   }
 }
