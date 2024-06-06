@@ -1,14 +1,20 @@
 <template>
-  <div class="thematique-card position--relative border-radius--md shadow background--white fr-p-1w full-height">
+  <div
+    class="thematique-card position--relative border-radius--md shadow background--white fr-p-1w full-height"
+    :class="thematique.estTerminee ? 'opacity-6' : ''"
+  >
     <span v-if="thematique.estNouvelle" class="thematique-card__badge fr-badge background--bleu-info-dark text--white">
       Nouveau !
+    </span>
+    <span v-if="thematique.estTerminee" class="thematique-card__badge fr-badge background--vert--success text--white">
+      Terminé !
     </span>
     <img class="border-radius--md full-width img-object-fit-cover" height="144" :src="thematique.urlImage" alt="" />
     <BarreDeProgression
       :value="thematique.progression.etapeActuelle"
       :value-max="thematique.progression.etapeCible"
       label="Avancement dans la thématique xxx"
-      couleur="#0063CB"
+      :couleur="thematique.estTerminee ? '#18753c' : '#0063CB'"
     />
     <h2 class="fr-text--lg text--semi-bold text--black fr-mb-1v">
       <router-link
@@ -18,7 +24,6 @@
         {{ thematique.titre }}
       </router-link>
     </h2>
-    <span class="text--semi-bold text--rouge-erreur">Niveau {{ thematique.niveau }}</span>
   </div>
 </template>
 

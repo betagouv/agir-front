@@ -243,6 +243,10 @@ h3 {
   background-color: var(--green-bourgeon-950-100);
 }
 
+.background--vert--success {
+  background-color: var(--success-425-625);
+}
+
 .background--caramel {
   background-color: var(--brown-caramel-925-125);
 }
@@ -371,6 +375,10 @@ h3 {
 .background--image--coach {
   background-image: url('/bg_changement_situation.jpg');
   background-size: cover;
+}
+
+.opacity-6 {
+  opacity: 0.6;
 }
 
 @media print {

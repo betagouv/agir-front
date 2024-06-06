@@ -22,6 +22,7 @@ describe('Fichier de tests concernant la récupération des thématiques pour un
           estNouvelle: true,
           niveau: 0,
           urlImage: 'https://via.placeholder.com/150',
+          estTerminee: false,
         },
         {
           titre: 'Thematique 2',
@@ -33,6 +34,7 @@ describe('Fichier de tests concernant la récupération des thématiques pour un
           estNouvelle: true,
           niveau: 0,
           urlImage: 'https://via.placeholder.com/150',
+          estTerminee: false,
         },
       ]);
     }
