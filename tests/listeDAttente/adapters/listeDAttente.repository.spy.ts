@@ -32,7 +32,7 @@ export class ListeDAttenteSpy implements ListeDAttenteRepository {
     this._verificationEmailWhiteListeAEteAppele = true;
     this._verificationEmailWhiteListeArgs = { email };
 
-    return Promise.resolve({ estAutorise: true });
+    return Promise.resolve({ estAutorise: true, aDejaUnCompte: false });
   }
 
   get inscrireVisiteurAEteAppele(): boolean {
