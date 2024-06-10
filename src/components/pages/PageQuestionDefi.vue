@@ -64,7 +64,7 @@
           </div>
         </div>
       </div>
-      <div class="fr-col-4">
+      <div class="fr-col-4" v-if="defiViewModel.pourquoi">
         <CarteInfo>
           <p class="fr-text--bold">
             <span class="fr-icon-question-line" aria-hidden="true"></span>
