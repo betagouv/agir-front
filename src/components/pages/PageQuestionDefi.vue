@@ -45,14 +45,17 @@
 
           <DefiFin v-if="reponseAEteDonnee" :defi="defiViewModel" :reponse="reponse" />
         </div>
-        <div class="background--white border fr-mt-3w fr-p-4w border-radius--md">
+        <div
+          v-if="defiViewModel.astuces || defiViewModel.afficherNombreDePersonnes"
+          class="background--white border fr-mt-3w fr-p-4w border-radius--md"
+        >
           <div v-if="defiViewModel.afficherNombreDePersonnes">
             <img height="48" src="/ic_users.svg" alt="" />
             <p class="fr-h2 fr-mb-0">Rejoignez {{ prenomsAleatoires }} et plein d’autres !</p>
             <p>{{ defiViewModel?.nombreDePersonnes }} personnes ont déjà relevé le défi... Et vous ?</p>
           </div>
 
-          <div class="background-bleu-alt-light border-radius--md fr-p-2w fr-mb-2w">
+          <div class="background-bleu-alt-light border-radius--md fr-p-2w fr-mb-2w" v-if="defiViewModel.astuces">
             <h2 class="fr-h6">
               <span class="fr-icon-arrow-right-s-last-line text--bleu-minor" aria-hidden="true"></span>
               Bonnes astuces pour réaliser ce défi
@@ -61,7 +64,7 @@
           </div>
         </div>
       </div>
-      <div class="fr-col-4">
+      <div class="fr-col-4" v-if="defiViewModel.pourquoi">
         <CarteInfo>
           <p class="fr-text--bold">
             <span class="fr-icon-question-line" aria-hidden="true"></span>
