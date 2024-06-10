@@ -3,6 +3,7 @@ import { VerificationMailPresenter } from '@/domaines/listeDAttente/ports/verifi
 
 export interface ReponseVerification {
   estAutorise: boolean;
+  aDejaUnCompte: boolean;
 }
 
 export class VerificationWhiteListeUsecase {

@@ -55,12 +55,13 @@
   import router from '@/router';
   import { RouteCoachName } from '@/router/coach/routeCoachName';
   import { RouteCompteName } from '@/router/compte/routeCompteName';
+  import { onboardingStore } from '@/store/onboarding';
 
   withDefaults(defineProps<{ premiereConnexion?: boolean }>(), {
     premiereConnexion: true,
   });
 
-  const email = ref<string>('');
+  const email = ref<string>(onboardingStore().email);
   const password = ref<string>('');
   const loginEnErreur = ref<boolean>(false);
   const loginMessageErreur = ref<string>('');
