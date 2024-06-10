@@ -9,7 +9,7 @@ export interface ReponsePossible {
 export interface QuestionViewModel {
   id: string;
   libelle: string;
-  type: 'libre' | 'choix_multiple' | 'choix_unique';
+  type: 'libre' | 'choix_multiple' | 'choix_unique' | 'mosaique';
   reponses_possibles: ReponsePossible[];
   points: string;
   reponses: string[];
@@ -24,11 +24,11 @@ export class QuestionPresenterImpl implements QuestionPresenter {
     this.questionViewModel({
       id: question.id,
       libelle: question.libelle,
-      type: question.type,
+      type: 'mosaique',
       points: `Récoltez vos + ${question.points} points`,
       reponses_possibles: question.reponses_possibles.map(reponse => ({
         id: reponse,
-        label: reponse,
+        label: '🚗️ ' + reponse,
       })),
       reponses: question.reponse,
       aDejaEteRepondu: question.reponse?.length > 0,

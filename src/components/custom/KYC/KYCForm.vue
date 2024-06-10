@@ -35,6 +35,17 @@
       <label class="fr-label" for="reponse"> Votre réponse </label>
       <textarea class="fr-input" id="reponse" name="reponse" v-model="reponse" />
     </div>
+    <div v-if="questionViewModel.type === 'mosaique'" class="fr-input-group">
+      <h2 class="fr-h4 fr-mb-2w">
+        {{ questionViewModel.libelle }}
+      </h2>
+      <InputCheckboxMosaique
+        :options="questionViewModel.reponses_possibles"
+        :est-resetable="true"
+        :default-values="questionViewModel.reponses"
+        v-model="reponse"
+      />
+    </div>
     <button class="fr-btn fr-btn--lg" :title="wordingBouton" :disabled="isDisabled" type="submit">
       {{ wordingBouton }}
     </button>
@@ -45,6 +56,7 @@
   import { onMounted, ref, watch } from 'vue';
   import BoutonRadio from '@/components/custom/BoutonRadio.vue';
   import InputCheckbox from '@/components/custom/InputCheckbox.vue';
+  import InputCheckboxMosaique from '@/components/custom/InputCheckboxMosaique.vue';
   import { QuestionViewModel, ReponsePossible } from '@/domaines/kyc/adapters/question.presenter.impl';
   import { QuestionRepositoryAxios } from '@/domaines/kyc/adapters/question.repository.axios';
   import { EnvoyerReponseUsecase } from '@/domaines/kyc/envoyerReponseUsecase';
