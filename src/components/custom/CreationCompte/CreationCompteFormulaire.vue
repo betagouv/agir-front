@@ -23,6 +23,11 @@
             <InputText label="Prénom" name="utilisateur-prenom" v-model="compteUtilisateurInput.prenom" />
           </div>
         </div>
+        <div class="fr-col-12">
+          <div class="fr-fieldset__element">
+            <InputSelectAnneeDeNaissance v-model="compteUtilisateurInput.anneeNaissance" />
+          </div>
+        </div>
       </div>
       <div class="fr-fieldset__element">
         <InputPassword
@@ -73,6 +78,7 @@
 <script setup lang="ts">
   import { ref } from 'vue';
   import Alert from '@/components/custom/Alert.vue';
+  import InputSelectAnneeDeNaissance from '@/components/custom/CreationCompte/InputSelectAnneeDeNaissance.vue';
   import InputPassword from '@/components/custom/InputPassword.vue';
   import InputMail from '@/components/dsfr/InputMail.vue';
   import InputText from '@/components/dsfr/InputText.vue';

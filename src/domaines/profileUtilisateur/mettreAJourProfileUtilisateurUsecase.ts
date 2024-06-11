@@ -17,6 +17,7 @@ export class MettreAJourProfileUtilisateurUsecase {
       prenom: compteUtilisateurInput.prenom,
       revenuFiscal: compteUtilisateurInput.revenuFiscal,
       nombreDePartsFiscales: compteUtilisateurInput.nombreDePartsFiscales,
+      anneeNaissance: compteUtilisateurInput.anneeNaissance ? Number(compteUtilisateurInput.anneeNaissance) : undefined,
     });
     this.sessionRepository.sauvegarderUtilisateur({
       prenom: compteUtilisateurInput.prenom,

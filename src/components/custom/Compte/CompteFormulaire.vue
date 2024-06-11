@@ -24,6 +24,12 @@
           <div class="fr-col-lg-6 fr-col-12">
             <InputMail label="Adresse électronique" v-model="profileUtlisateurViewModel.mail" name="mail" />
           </div>
+          <div class="fr-col-lg-6 fr-col-12">
+            <InputSelectAnneeDeNaissance
+              v-model="profileUtlisateurViewModel.anneeNaissance"
+              :default-select-value="profileUtlisateurViewModel.anneeNaissance"
+            />
+          </div>
         </div>
       </fieldset>
       <fieldset class="fr-mb-0 fr-fieldset" aria-labelledby="donnee-fieldset-legend">
@@ -69,6 +75,7 @@
   import { ref } from 'vue';
   import Alert from '@/components/custom/Alert.vue';
   import CarteInfo from '@/components/custom/CarteInfo.vue';
+  import InputSelectAnneeDeNaissance from '@/components/custom/CreationCompte/InputSelectAnneeDeNaissance.vue';
   import InputTrancheDeRevenu from '@/components/custom/InputTrancheDeRevenu.vue';
   import InputMail from '@/components/dsfr/InputMail.vue';
   import InputText from '@/components/dsfr/InputText.vue';
@@ -78,12 +85,8 @@
   import { ProfileUtilisateurRepositoryAxiosImpl } from '@/domaines/profileUtilisateur/chargerProfileUtilisateur.usecase';
   import { MettreAJourProfileUtilisateurUsecase } from '@/domaines/profileUtilisateur/mettreAJourProfileUtilisateurUsecase';
 
-  const props = defineProps<{
-    compteUtlisateurViewModel: ProfileUtilisateurViewModel;
-  }>();
-
   const { alerte, afficherAlerte } = useAlerte();
-
+  const props = defineProps<{ compteUtlisateurViewModel: ProfileUtilisateurViewModel }>();
   const profileUtlisateurViewModel = ref<ProfileUtilisateurViewModel>(props.compteUtlisateurViewModel);
 
   async function modifierInformation() {

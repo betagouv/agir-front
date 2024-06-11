@@ -17,6 +17,7 @@ class SpyProfileUtilisateurRepository implements ProfileUtilisateurRepository {
     revenuFiscal: 0,
     nombreDePartsFiscales: 0,
     abonnementTransport: false,
+    anneeNaissance: 1998,
   };
   getProfileUtilisateur(idUtilisateur: string): Promise<ProfileUtilisateur> {
     throw new Error('Method not implemented.');
@@ -41,6 +42,7 @@ describe('Fichier de tests concernant la mise à jour du profile utilisateur', (
       revenuFiscal: 10000,
       nombreDePartsFiscales: 1,
       abonnementTransport: false,
+      anneeNaissance: '',
     };
     usecase.execute(viewModelInput);
     // THEN
@@ -52,6 +54,7 @@ describe('Fichier de tests concernant la mise à jour du profile utilisateur', (
       revenuFiscal: 10000,
       nombreDePartsFiscales: 1,
       abonnementTransport: false,
+      anneeNaissance: undefined,
     });
     expect(sessionRepository.utilisateur).toStrictEqual<Utilisateur>({
       id: '',
