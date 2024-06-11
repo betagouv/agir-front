@@ -9,7 +9,7 @@ export interface ProfileUtilisateurViewModel {
   abonnementTransport: boolean;
   revenuFiscal: number | null;
   nombreDePartsFiscales: number;
-  anneeNaissance: string;
+  anneeNaissance?: string;
 }
 
 export class ProfileUtilisateurPresenterImpl implements ProfileUtilisateurPresenter {
@@ -24,7 +24,7 @@ export class ProfileUtilisateurPresenterImpl implements ProfileUtilisateurPresen
       prenom: profileUtilisateur.prenom,
       revenuFiscal: profileUtilisateur.revenuFiscal,
       nombreDePartsFiscales: profileUtilisateur.nombreDePartsFiscales,
-      anneeNaissance: profileUtilisateur.anneeNaissance ? profileUtilisateur.anneeNaissance.toString() : '',
+      anneeNaissance: profileUtilisateur.anneeNaissance ? profileUtilisateur.anneeNaissance.toString() : undefined,
     });
   }
 }
