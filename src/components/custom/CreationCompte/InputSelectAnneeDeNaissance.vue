@@ -6,12 +6,16 @@
     </label>
     <select class="fr-select" id="selectAnneeNaissance" name="selectAnneeNaissance" @input="updateValue">
       <option value="" selected disabled hidden>Sélectionner une année</option>
-      <option v-for="annee in anneesOptions" :key="annee" :value="annee">{{ annee }}</option>
+      <option v-for="annee in anneesOptions" :key="annee" :value="annee" :selected="defaultSelectValue === annee">
+        {{ annee }}
+      </option>
     </select>
   </div>
 </template>
+
 <script setup lang="ts">
   defineModel<number>('anneeDeNaissance');
+  defineProps<{ defaultSelectValue?: string }>();
   const anneesOptions = Array.from({ length: 100 }, (_, i) => (new Date().getFullYear() - i).toString());
 
   const emit = defineEmits<{

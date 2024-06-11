@@ -112,8 +112,7 @@
       new CompteUtilisateurRepositoryImpl(),
       new SessionRepositoryStore(),
     );
-    console.log(compteUtilisateurInput.value);
-    /*creeCompteUseCase
+    creeCompteUseCase
       .execute(
         new CreerComptePresenterImpl(viewModel => {
           router.push({ name: viewModel.route });
@@ -124,6 +123,6 @@
       .catch(reason => {
         creationDeCompteMessageErreur.value = reason.message;
         creationDeCompteEnErreur.value = true;
-      });*/
+      });
   };
 </script>

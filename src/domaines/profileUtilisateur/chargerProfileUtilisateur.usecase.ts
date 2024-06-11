@@ -11,6 +11,7 @@ export interface ProfileUtilisateurApiModel {
   revenu_fiscal: number | null;
   nombre_de_parts_fiscales: number;
   abonnement_ter_loire: boolean;
+  annee_naissance?: number;
 }
 
 export interface ProfileUtilisateur {
@@ -21,6 +22,7 @@ export interface ProfileUtilisateur {
   abonnementTransport: boolean;
   revenuFiscal: number | null;
   nombreDePartsFiscales: number;
+  anneeNaissance?: number;
 }
 
 export class ProfileUtilisateurRepositoryAxiosImpl implements ProfileUtilisateurRepository {
@@ -38,6 +40,7 @@ export class ProfileUtilisateurRepositoryAxiosImpl implements ProfileUtilisateur
       revenuFiscal: response.data.revenu_fiscal,
       nombreDePartsFiscales: response.data.nombre_de_parts_fiscales,
       abonnementTransport: response.data.abonnement_ter_loire,
+      anneeNaissance: response.data.annee_naissance,
     };
   }
 
@@ -51,6 +54,7 @@ export class ProfileUtilisateurRepositoryAxiosImpl implements ProfileUtilisateur
       revenu_fiscal: profileUtilisateur.revenuFiscal,
       nombre_de_parts_fiscales: profileUtilisateur.nombreDePartsFiscales,
       abonnement_ter_loire: profileUtilisateur.abonnementTransport,
+      annee_naissance: profileUtilisateur.anneeNaissance,
     });
   }
 }
