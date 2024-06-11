@@ -1,5 +1,8 @@
 <template>
-  <div :class="`todo background--white shadow fr-p-2w border`">
+  <div class="todo background--white shadow fr-p-2w border">
+    <span v-if="estRecommande" class="todo__badge fr-badge background--bleu-info-dark text--white text--transform-none">
+      Recommandé pour vous !
+    </span>
     <img :src="picto" alt="" />
     <div class="fr-col fr-col-md-9">
       <h4 class="fr-m-0">
@@ -30,6 +33,7 @@
     url: string;
     hash?: string;
     picto: string;
+    estRecommande?: boolean;
   }>();
 </script>
 
@@ -41,6 +45,13 @@
     align-items: center;
     border-radius: 8px;
     transition: box-shadow 0.3s ease;
+  }
+
+  .todo__badge {
+    position: absolute;
+    top: 0;
+    left: 3rem;
+    transform: translateY(-50%);
   }
 
   .todo:hover {

@@ -12,6 +12,7 @@ export interface MissionItemViewModel {
   idDuContenu: string;
   titre: string;
   estBloquee: boolean;
+  estRecommande?: boolean;
   points: number;
   aEteRealisee: boolean;
   url: string;
@@ -58,6 +59,7 @@ export class MissionThematiquePresenterImpl implements MissionThematiquePresente
           picto: '/ic_mission_kyc.svg',
           pointAEteRecolte: missionThematique.items.filter(item => item.type === InteractionType.KYC)[0]
             .pointAEteRecolte,
+          estRecommande: undefined,
         },
       ],
       articleEtQuiz: missionThematique.items
@@ -69,7 +71,7 @@ export class MissionThematiquePresenterImpl implements MissionThematiquePresente
     });
   }
 
-  private mapToViewModel(item: MissionItem, univers: string, thematique: string) {
+  private mapToViewModel(item: MissionItem, univers: string, thematique: string): MissionItemViewModel {
     return {
       id: item.id,
       idDuContenu: item.contentId,
@@ -82,6 +84,7 @@ export class MissionThematiquePresenterImpl implements MissionThematiquePresente
       hash: this.determineHash(item),
       picto: this.determinePicto(item),
       pointAEteRecolte: item.pointAEteRecolte,
+      estRecommande: item.type === InteractionType.DEFIS ? item.estRecommande : undefined,
     };
   }
 

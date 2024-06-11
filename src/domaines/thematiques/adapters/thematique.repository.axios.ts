@@ -1,6 +1,6 @@
-import { MissionThematique } from '../recupererMissionThematiqueUsecase';
 import { AxiosFactory, intercept401 } from '@/axios.factory';
 import { ThematiqueRepository } from '@/domaines/thematiques/ports/thematique.repository';
+import { MissionThematique } from '@/domaines/thematiques/recupererMissionThematiqueUsecase';
 import { Thematique } from '@/domaines/thematiques/recupererThematiquesUnivers.usecase';
 
 interface ThematiqueApiModel {
@@ -24,6 +24,7 @@ interface MissionItemThematiqueApiModel {
     target: number;
   };
   is_locked: boolean;
+  is_reco: boolean;
   done: boolean;
   type: string;
   points: number;
@@ -52,6 +53,7 @@ export class ThematiqueRepositoryAxios implements ThematiqueRepository {
     const reponse = await axios.get<MissionThematiqueApiModel>(
       `/utilisateurs/${utilisateurId}/thematiques/${thematiqueId}/mission`,
     );
+
     return {
       idThematique: thematiqueId,
       titre: reponse.data.titre,
@@ -67,6 +69,7 @@ export class ThematiqueRepositoryAxios implements ThematiqueRepository {
         points: item.points,
         aEteRealisee: item.done,
         type: item.type,
+        estRecommande: item.is_reco,
         pointAEteRecolte: item.sont_points_en_poche,
       })),
       progressionKyc: {
