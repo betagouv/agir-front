@@ -9,6 +9,7 @@ export interface UserInput {
   mail: string;
   prenom: string;
   motDePasse: string;
+  anneeNaissance?: number;
 }
 export class CreerCompteUtilisateurUsecase {
   constructor(
@@ -28,6 +29,7 @@ export class CreerCompteUtilisateurUsecase {
         prenom: compteUtilisateurACreerInput.prenom,
         motDePasse: compteUtilisateurACreerInput.motDePasse,
         onboarding: onboarding,
+        anneeDeNaissance: compteUtilisateurACreerInput.anneeNaissance,
       });
 
       this.sessionRepository.sauvegarderUtilisateur({

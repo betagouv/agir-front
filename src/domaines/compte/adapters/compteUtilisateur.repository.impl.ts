@@ -37,6 +37,7 @@ export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurReposit
         prenom: compteUtilisateurACreer.prenom,
         email: compteUtilisateurACreer.email,
         mot_de_passe: compteUtilisateurACreer.motDePasse,
+        annee_naissance: compteUtilisateurACreer.anneeDeNaissance,
         onboardingData: {
           transports: compteUtilisateurACreer.onboarding.etapeTransport.transports,
           avion: compteUtilisateurACreer.onboarding.etapeTransport.avion,
