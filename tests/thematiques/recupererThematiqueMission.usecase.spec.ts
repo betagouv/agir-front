@@ -22,6 +22,7 @@ describe("Fichier de tests concernant la récupération d'une mission pour une t
             id: 'id1',
             aEteRealisee: false,
             estBloquee: false,
+            estRecommande: undefined,
             hash: undefined,
             idDuContenu: '1',
             points: 10,
@@ -41,6 +42,8 @@ describe("Fichier de tests concernant la récupération d'une mission pour une t
             idDuContenu: '2',
             points: 10,
             progression: undefined,
+
+            estRecommande: true,
             titre: 'Mission 2',
             url: '/defi/alimentation/1/2',
             picto: '/ic_mission_defi.svg',
@@ -51,6 +54,7 @@ describe("Fichier de tests concernant la récupération d'une mission pour une t
           {
             aEteRealisee: false,
             estBloquee: false,
+            estRecommande: undefined,
             id: 'id3',
             idDuContenu: '',
             hash: undefined,

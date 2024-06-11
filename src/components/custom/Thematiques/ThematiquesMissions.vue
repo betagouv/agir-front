@@ -19,6 +19,7 @@
         :url="mission.url"
         :hash="mission.hash"
         :picto="mission.picto"
+        :estRecommande="mission.estRecommande"
       />
     </li>
   </ul>

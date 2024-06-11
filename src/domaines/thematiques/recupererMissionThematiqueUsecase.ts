@@ -7,6 +7,7 @@ export interface MissionItem {
   titre: string;
   progression: number;
   estBloquee: boolean;
+  estRecommande: boolean;
   points: number;
   aEteRealisee: boolean;
   type: string;

@@ -199,6 +199,10 @@ h3 {
   text-transform: uppercase;
 }
 
+.text--transform-none {
+  text-transform: none;
+}
+
 .background-bleu {
   background: var(--blue-france-main-525);
 }
