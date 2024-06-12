@@ -20,6 +20,7 @@
         :hash="mission.hash"
         :picto="mission.picto"
         :estRecommande="mission.estRecommande"
+        :points="mission.points"
       />
     </li>
   </ul>
