@@ -44,7 +44,7 @@ describe('Fichier de tests concernant la mise à jour du profile utilisateur', (
       abonnementTransport: false,
       anneeNaissance: '',
     };
-    usecase.execute(viewModelInput);
+    await usecase.execute(viewModelInput);
     // THEN
     expect(repository.profileUtilisateur).toStrictEqual<ProfileUtilisateur>({
       id: '1',
