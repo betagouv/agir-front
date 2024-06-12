@@ -2,7 +2,9 @@
   <div class="fr-container fr-py-6w">
     <h1 class="fr-h2 fr-mb-1w">Question pour mieux vous connaître</h1>
     <CarteSkeleton v-if="isLoading" />
-    <ThematiqueQuestionsKyc v-else-if="questionsViewModel" v-model:questions-view-model="questionsViewModel" />
+    <div v-else-if="questionsViewModel" class="background--white border fr-p-4w border-radius--md">
+      <ThematiqueQuestionsKyc v-model:questions-view-model="questionsViewModel" />
+    </div>
     <div v-else>Une erreur est survenue</div>
   </div>
 </template>
