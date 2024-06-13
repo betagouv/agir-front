@@ -24,6 +24,7 @@
         {{ thematique.titre }}
       </router-link>
     </h2>
+    <span class="text--semi-bold text--rouge-erreur">Niveau {{ thematique.niveau }}</span>
   </div>
 </template>
 
