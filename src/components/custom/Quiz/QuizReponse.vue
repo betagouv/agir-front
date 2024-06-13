@@ -12,8 +12,8 @@
   import { ArticleDuQuiz } from '@/domaines/quiz/ports/quizRepository';
 
   const props = defineProps<{
-    texteExplicationKO: string;
-    texteExplicationOK: string;
+    texteExplicationKO: string | null;
+    texteExplicationOK: string | null;
     reponseCorrecte: boolean;
     articleAssocie: ArticleDuQuiz | null;
     points: string;

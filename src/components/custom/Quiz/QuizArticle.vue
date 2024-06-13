@@ -23,8 +23,8 @@
   import { utilisateurStore } from '@/store/utilisateur';
 
   const props = defineProps<{
-    texteExplicationKO: string;
-    texteExplicationOK: string;
+    texteExplicationKO: string | null;
+    texteExplicationOK: string | null;
     reponseCorrecte: boolean;
     articleAssocie: ArticleDuQuiz | null;
     points: string;
