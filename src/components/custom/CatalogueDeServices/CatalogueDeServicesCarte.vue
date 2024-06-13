@@ -33,7 +33,7 @@
           class="fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-download-line fr-btn--sm"
           @click="installerServiceActif(service.id)"
         >
-          Installer
+          Ajouter
         </button>
       </div>
     </div>
