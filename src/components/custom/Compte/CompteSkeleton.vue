@@ -8,7 +8,7 @@
       <div class="fr-grid-row">
         <div class="fr-col-lg-4 fr-col-12">
           <div class="full-height fr-grid-row flex-column flex-space-between">
-            <CompteMenuLateral />
+            <CompteMenuLateral class="fr-mb-6w" />
             <button
               class="fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-logout-box-r-line fr-btn--lg fr-mr-auto"
               @click="logout"
