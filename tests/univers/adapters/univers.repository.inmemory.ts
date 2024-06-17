@@ -8,6 +8,7 @@ export class UniversRepositoryMock implements UniversRepository {
       nom: 'Le climat',
       urlImage: 'https://via.placeholder.com/150',
       nombreDeDefisRealises: 0,
+      estBloque: false,
     });
   }
   recupererLaListeDesUnivers(): Promise<Univers[]> {
@@ -17,12 +18,14 @@ export class UniversRepositoryMock implements UniversRepository {
         nom: 'Le climat',
         urlImage: 'https://via.placeholder.com/150',
         nombreDeDefisRealises: 0,
+        estBloque: true,
       },
       {
         id: '2',
         nom: 'En cuisine',
         urlImage: 'https://via.placeholder.com/150',
         nombreDeDefisRealises: 0,
+        estBloque: false,
       },
     ]);
   }

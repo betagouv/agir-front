@@ -6,6 +6,7 @@ export interface UniversViewModel {
   nom: string;
   urlImage: string;
   nombreDeDefisRealises: number;
+  estBloque: boolean;
 }
 export interface ListeUniversViewModel {
   univers: UniversViewModel[];
@@ -21,6 +22,7 @@ export class ListeUniversPresenterImpl implements ListeUniversPresenter {
         nom: univers.nom,
         urlImage: univers.urlImage,
         nombreDeDefisRealises: univers.nombreDeDefisRealises,
+        estBloque: univers.estBloque,
       })),
     });
   }

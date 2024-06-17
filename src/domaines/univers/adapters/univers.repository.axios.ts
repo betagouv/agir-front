@@ -21,6 +21,7 @@ export class UniversRepositoryAxios implements UniversRepository {
       nom: univers.titre,
       urlImage: univers.image_url,
       nombreDeDefisRealises: univers.etoiles,
+      estBloque: univers.is_locked,
     }));
   }
 
@@ -35,6 +36,7 @@ export class UniversRepositoryAxios implements UniversRepository {
         nom: univers.titre,
         urlImage: univers.image_url,
         nombreDeDefisRealises: univers.etoiles,
+        estBloque: univers.is_locked,
       }));
     return universFiltrer[0];
   }
