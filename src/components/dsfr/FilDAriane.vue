@@ -28,3 +28,9 @@
     pageCourante: string;
   }>();
 </script>
+
+<style scoped>
+  .fr-breadcrumb__link {
+    font-size: 0.8rem;
+  }
+</style>
