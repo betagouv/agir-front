@@ -1,6 +1,16 @@
 <template>
   <div class="fr-container fr-mb-6w">
-    <FilDAriane :page-courante="`Défi : ${defiViewModel?.libelle}`" />
+    <FilDAriane
+      :page-courante="`Défi : ${defiViewModel?.libelle}`"
+      :page-hierarchie="
+        useRoute().params.universId
+          ? [
+              { label: 'Univers', url: `univers/${useRoute().params.universId}` },
+              { label: 'Thématique', url: `univers/${useRoute().params.universId}/${useRoute().params.thematiqueId}` },
+            ]
+          : []
+      "
+    />
     <h1 class="fr-h2">Relevez le défi !</h1>
     <div v-if="isLoading">Chargement en cours ...</div>
     <div class="fr-grid-row fr-grid-row--gutters" v-else-if="!isLoading && defiViewModel">

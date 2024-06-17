@@ -1,6 +1,16 @@
 <template>
   <div class="fr-container fr-mb-6w">
-    <FilDAriane :page-courante="`Article: ${article.titre}`" />
+    <FilDAriane
+      :page-courante="`Article: ${article.titre}`"
+      :page-hierarchie="
+        useRoute().params.universId
+          ? [
+              { label: 'Univers', url: `univers/${useRoute().params.universId}` },
+              { label: 'Thématique', url: `univers/${useRoute().params.universId}/${useRoute().params.thematiqueId}` },
+            ]
+          : []
+      "
+    />
     <h1>{{ article.titre }}</h1>
     <div class="fr-grid-row fr-grid-row--gutters">
       <div class="fr-col-12 fr-col-md-8">
@@ -65,6 +75,7 @@
 </template>
 
 <script setup lang="ts">
+  import { useRoute } from 'vue-router';
   import Notation from '@/components/custom/Notation.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import { useBoutonRetour } from '@/composables/boutonRetour';
