@@ -1,5 +1,5 @@
 <template lang="">
-  <div class="fr-p-1w fr-pb-4w border-radius--md shadow background--white">
+  <div class="fr-p-1w fr-pb-3w border-radius--md shadow background--white">
     <div class="univers-carte__image">
       <img
         class="full-width img-object-fit-cover border-radius--xs"

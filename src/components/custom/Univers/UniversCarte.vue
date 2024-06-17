@@ -1,5 +1,5 @@
 <template>
-  <div class="univers-card position--relative fr-p-1w fr-pb-4w border-radius--md shadow background--white">
+  <div class="univers-card position--relative fr-p-1w fr-pb-3w border-radius--md shadow background--white full-height">
     <img
       class="full-width img-object-fit-cover border-radius--xs"
       height="150"
@@ -16,8 +16,9 @@
           },
         }"
         :title="`Allez sur l'univers : ${universViewModel.nom}`"
-        >{{ universViewModel.nom }}</router-link
       >
+        {{ universViewModel.nom }}
+      </router-link>
     </p>
   </div>
 </template>
