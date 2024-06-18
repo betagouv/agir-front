@@ -8,7 +8,7 @@
         {{ recommandation.type.libelle }}
       </span>
       <span
-        class="coach-card-recommandation__points border border-radius--xs display-block background--white fr-text--bold fr-py-1v fr-px-1w"
+        class="coach-card-recommandation__points border border-radius--xs display-block background--white fr-text--bold fr-p-1w"
       >
         {{ recommandation.points }}
         <img width="16" src="/ic_score.svg" alt="point" />
@@ -81,8 +81,6 @@
   }
 
   .coach-card-recommandation__points {
-    display: flex;
-    align-items: center;
     position: absolute;
     right: 0.5rem;
     top: 0.5rem;
