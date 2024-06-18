@@ -19,8 +19,8 @@
             </router-link>
           </p>
         </div>
-        <span class="action__points border border-radius--md display-block background--gris fr-text--bold fr-p-1w">
-          <span>{{ recommandation.points }}</span>
+        <span class="action__points border border-radius--xs display-block background--white fr-text--bold fr-p-1w">
+          {{ recommandation.points }}
           <img width="16" src="/ic_score.svg" alt="point" />
         </span>
         <span class="fr-icon-arrow-right-s-line" aria-hidden="true"></span>

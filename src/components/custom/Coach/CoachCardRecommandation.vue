@@ -8,9 +8,9 @@
         {{ recommandation.type.libelle }}
       </span>
       <span
-        class="coach-card-recommandation__points border border-radius--md display-block background--gris fr-text--bold fr-py-1v fr-px-1w"
+        class="coach-card-recommandation__points border border-radius--xs display-block background--white fr-text--bold fr-py-1v fr-px-1w"
       >
-        <span>{{ recommandation.points }}</span>
+        {{ recommandation.points }}
         <img width="16" src="/ic_score.svg" alt="point" />
       </span>
     </div>
