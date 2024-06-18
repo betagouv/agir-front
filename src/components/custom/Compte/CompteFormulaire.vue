@@ -1,5 +1,4 @@
 <template>
-  <!-- <div> -->
   <form class="fr-mb-0" @submit.prevent="modifierInformation">
     <div class="fr-grid-row full-width flex-end">
       <button
@@ -70,7 +69,6 @@
       :message="alerte.message"
     />
   </div>
-  <!-- </div> -->
 </template>
 
 <script setup lang="ts">
