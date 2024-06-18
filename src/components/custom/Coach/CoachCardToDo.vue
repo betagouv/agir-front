@@ -25,11 +25,13 @@
         />
       </div>
     </div>
-    <span v-if="points" class="border fr-ml-auto border-radius--md background--gris fr-text--bold fr-p-1w">
-      <span>{{ points }}</span>
-      <img width="16" src="/ic_score.svg" alt="point" />
-    </span>
-    <span class="fr-icon-arrow-right-line todo__picto text--bleu fr-ml-auto" aria-hidden="true"></span>
+    <div class="fr-ml-auto">
+      <span v-if="points" class="border border-radius--md background--gris fr-text--bold fr-p-1w fr-mr-2w">
+        <span>{{ points }}</span>
+        <img width="16" src="/ic_score.svg" alt="point" />
+      </span>
+      <span class="fr-icon-arrow-right-line todo__picto text--bleu" aria-hidden="true"></span>
+    </div>
   </div>
 </template>
 
