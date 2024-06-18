@@ -24,7 +24,9 @@
         {{ thematique.titre }}
       </router-link>
     </h2>
-    <span class="text--semi-bold text--rouge-erreur">Niveau {{ thematique.niveau }}</span>
+    <span v-if="thematique.niveau" class="text--semi-bold text--rouge-erreur fr-mt-auto">
+      Niveau {{ thematique.niveau }}
+    </span>
   </div>
 </template>
 
@@ -41,6 +43,9 @@
 
 <style scoped>
   .thematique-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
     transition: box-shadow 0.3s ease-in-out;
   }
 

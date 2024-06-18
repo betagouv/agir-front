@@ -12,7 +12,7 @@ export interface ThematiqueViewModel {
     raison: string;
   };
   estNouvelle: boolean;
-  niveau: number;
+  niveau?: number;
   urlImage: string;
   estTerminee: boolean;
 }
