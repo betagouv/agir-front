@@ -118,13 +118,15 @@
             Mettre à jour vos informations
           </button>
         </div>
-        <Alert
-          v-if="alerte.isActive"
-          class="fr-col-12 fr-mt-2w"
-          :type="alerte.type"
-          :titre="alerte.titre"
-          :message="alerte.message"
-        />
+        <div id="scroll-to-alerte">
+          <Alert
+            v-if="alerte.isActive"
+            class="fr-col-12 fr-mt-2w"
+            :type="alerte.type"
+            :titre="alerte.titre"
+            :message="alerte.message"
+          />
+        </div>
       </div>
     </form>
   </div>
@@ -166,5 +168,10 @@
     });
 
     afficherAlerte('success', 'Succès', 'Vos informations ont été correctement mises à jour.');
+
+    const alertElement = document.getElementById('scroll-to-alerte');
+    if (alertElement) {
+      alertElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   };
 </script>
