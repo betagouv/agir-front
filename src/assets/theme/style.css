@@ -371,6 +371,10 @@ h3 {
   line-height: 0 !important;
 }
 
+.text--lh-1-3 {
+  line-height: 1.3 !important;
+}
+
 .text--lh-1 {
   line-height: 1 !important;
 }
