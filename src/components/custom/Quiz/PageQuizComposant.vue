@@ -1,6 +1,17 @@
 <template>
   <div class="fr-container fr-mb-6w">
-    <FilDAriane :page-courante="`Question : ${quizViewModel.titre}`" />
+    <FilDAriane
+      :page-courante="`Question : ${quizViewModel.titre}`"
+      :page-hierarchie="
+        useRoute().params.universId
+          ? [
+              { label: 'Univers', url: `univers/${useRoute().params.universId}` },
+              { label: 'Thématique', url: `univers/${useRoute().params.universId}/${useRoute().params.thematiqueId}` },
+            ]
+          : []
+      "
+    />
+
     <div class="fr-grid-row fr-grid-row--gutters">
       <div class="fr-col-12 fr-col-lg-8">
         <h1>
@@ -30,6 +41,7 @@
 
 <script setup lang="ts">
   import { ref } from 'vue';
+  import { useRoute } from 'vue-router';
   import QuizArticle from '@/components/custom/Quiz/QuizArticle.vue';
   import QuizQuestion from '@/components/custom/Quiz/QuizQuestion.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';

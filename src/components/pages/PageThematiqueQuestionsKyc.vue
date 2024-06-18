@@ -1,5 +1,16 @@
 <template>
-  <div class="fr-container fr-py-6w">
+  <div class="fr-container fr-mb-6w">
+    <FilDAriane
+      page-courante="Question pour mieux vous connaître"
+      :page-hierarchie="
+        useRoute().params.universId
+          ? [
+              { label: 'Univers', url: `univers/${useRoute().params.universId}` },
+              { label: 'Thématique', url: `univers/${useRoute().params.universId}/${useRoute().params.thematiqueId}` },
+            ]
+          : []
+      "
+    />
     <h1 class="fr-h2 fr-mb-1w">Question pour mieux vous connaître</h1>
     <CarteSkeleton v-if="isLoading" />
     <div v-else-if="questionsViewModel" class="background--white border fr-p-4w border-radius--md">
@@ -14,6 +25,7 @@
   import { useRoute } from 'vue-router';
   import CarteSkeleton from '@/components/CarteSkeleton.vue';
   import ThematiqueQuestionsKyc from '@/components/custom/Thematiques/ThematiqueQuestionsKyc.vue';
+  import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import {
     ListesQuestionsThematiquePresenter,
     QuestionsViewModel,
