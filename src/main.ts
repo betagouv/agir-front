@@ -82,13 +82,6 @@ const options = {
         classes: 'fr-text--bold',
       },
     },
-    bibliothequeTour: {
-      useModalOverlay: true,
-      defaultStepOptions: {
-        scrollTo: true,
-        classes: 'fr-text--bold',
-      },
-    },
     defiTour: {
       useModalOverlay: true,
       defaultStepOptions: {

@@ -48,13 +48,28 @@
         </div>
       </div>
     </div>
-    <CoachFinDeMission
+    <div v-else>coucou</div>
+    <!-- <CoachFinDeMission
       v-else
       @recuperer-points-todo="recupererPointsTodo"
       :nombre-de-points-a-gagner="todoList.pointFinDeMission"
       :titre-de-mission="todoList.titre"
-    />
+    /> -->
   </div>
+  <Teleport to="body">
+    <Modale label="Modale de fin de missions" id="finDesMissions2" :radius="true" :is-footer-actions="false" size="m">
+      <template v-slot:contenu>
+        <CoachFinDeMission
+          @recuperer-points-todo="recupererPointsTodo"
+          :nombre-de-points-a-gagner="todoList.pointFinDeMission"
+          :titre-de-mission="todoList.titre"
+        />
+      </template>
+    </Modale>
+    <button class="fr-btn fr-hidden" data-fr-opened="false" aria-controls="finDesMissions2">
+      Modale avec zone d'action
+    </button>
+  </Teleport>
 </template>
 
 <script setup lang="ts">
@@ -62,19 +77,30 @@
   import CoachCardDone from '@/components/custom/Coach/CoachCardDone.vue';
   import CoachCardToDo from '@/components/custom/Coach/CoachCardToDo.vue';
   import CoachFinDeMission from '@/components/custom/Coach/CoachFinDeMission.vue';
+  import Modale from '@/components/custom/Modale/Modale.vue';
+  import ModaleActions from '@/components/custom/Modale/ModaleActions';
+  import { useReveal } from '@/composables/useReveal';
   import { TodoListViewModel } from '@/domaines/toDoList/adapters/toDoList.presenter.impl';
   import { ToDoListRepositoryAxios } from '@/domaines/toDoList/adapters/toDoList.repository.axios';
   import { RecupererPointsToDoUsecase } from '@/domaines/toDoList/recupererPointsToDo.usecase';
   import { TerminerToDoListUsecase } from '@/domaines/toDoList/terminerToDoList.usecase';
   import { ToDoListEventBusImpl } from '@/domaines/toDoList/toDoListEventBusImpl';
+  import { Fonctionnalites } from '@/shell/fonctionnalitesEnum';
   import { utilisateurStore } from '@/store/utilisateur';
+  import { CelebrationRepositoryAxios } from '@/domaines/celebration/adapters/celebration.repository.axios';
+  import { ValiderCelebrationUsecase } from '@/domaines/celebration/validerCelebration.usecase';
+
+  const { selectionnerReveal } = useReveal();
 
   const props = defineProps<{ todoList: TodoListViewModel }>();
+  let modaleActions: ModaleActions | null;
 
   const bonusFinalRecupere = ref(false);
 
   const showBonus = () => {
-    bonusFinalRecupere.value = true;
+    modaleActions = new ModaleActions('finDesMissions2');
+    modaleActions.open();
+    // bonusFinalRecupere.value = true;
   };
 
   const isDisableBonusFinDeToDo = () => {
@@ -91,6 +117,11 @@
       utilisateurStore().utilisateur.id,
     );
     bonusFinalRecupere.value = false;
+    new ValiderCelebrationUsecase(new CelebrationRepositoryAxios()).execute(
+      utilisateurStore().utilisateur.id,
+      celebrationId,
+    );
+    revealFonctionnalite();
   };
 
   function onRecolterPoints(missionId: string) {
@@ -98,6 +129,24 @@
       utilisateurStore().utilisateur.id,
       missionId,
     );
+  }
+
+  function revealFonctionnalite() {
+    modaleActions?.close();
+
+    const tour = selectionnerReveal('aides' as Fonctionnalites);
+    tour.start();
+
+    // Ajout d'un écouteur pour fermer le tour lors du clic sur l'overlay
+    setTimeout(() => {
+      document.addEventListener(
+        'click',
+        function () {
+          tour.cancel();
+        },
+        { once: true },
+      );
+    }, 0);
   }
 </script>
 
