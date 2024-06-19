@@ -1,5 +1,8 @@
 <template>
-  <div class="univers-card position--relative fr-p-1w fr-pb-4w border-radius--md shadow background--white">
+  <div class="univers-card position--relative fr-p-1w fr-pb-3w border-radius--md shadow background--white full-height">
+    <span v-if="universViewModel.estTermine" class="univers-card__badge fr-badge background--vert--success text--white">
+      Terminé !
+    </span>
     <img
       class="full-width img-object-fit-cover border-radius--xs"
       height="150"
@@ -16,8 +19,9 @@
           },
         }"
         :title="`Allez sur l'univers : ${universViewModel.nom}`"
-        >{{ universViewModel.nom }}</router-link
       >
+        {{ universViewModel.nom }}
+      </router-link>
     </p>
   </div>
 </template>
@@ -57,5 +61,13 @@
     outline-offset: 2px;
     outline-style: inherit;
     border-radius: 0.5rem;
+  }
+
+  .univers-card__badge {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    width: max-content;
   }
 </style>

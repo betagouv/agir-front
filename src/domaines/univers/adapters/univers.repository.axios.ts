@@ -7,6 +7,7 @@ export interface UniversApiModel {
   type: string;
   etoiles: number;
   is_locked: boolean;
+  is_done: boolean;
   reason_locked: string;
   image_url: string;
 }
@@ -21,6 +22,8 @@ export class UniversRepositoryAxios implements UniversRepository {
       nom: univers.titre,
       urlImage: univers.image_url,
       nombreDeDefisRealises: univers.etoiles,
+      estBloque: univers.is_locked,
+      estTermine: univers.is_done,
     }));
   }
 
@@ -35,6 +38,8 @@ export class UniversRepositoryAxios implements UniversRepository {
         nom: univers.titre,
         urlImage: univers.image_url,
         nombreDeDefisRealises: univers.etoiles,
+        estBloque: univers.is_locked,
+        estTermine: univers.is_done,
       }));
     return universFiltrer[0];
   }
