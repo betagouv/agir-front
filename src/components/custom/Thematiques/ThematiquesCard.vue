@@ -16,7 +16,7 @@
       label="Avancement dans la thématique xxx"
       :couleur="thematique.estTerminee ? '#18753c' : '#0063CB'"
     />
-    <h2 class="fr-text--lg text--semi-bold text--black fr-mb-1v">
+    <h2 class="fr-text--lg text--semi-bold text--black fr-mb-1v text--lh-1-3 fr-pt-1w">
       <router-link
         :to="{ name: RouteUniversName.THEMATIQUE, params: { id: universId, thematique: thematique.id } }"
         class="thematique-card__link"
