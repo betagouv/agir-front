@@ -231,6 +231,10 @@ h3 {
   background-color: var(--info-425-625);
 }
 
+.background--green-light {
+  background-color: #DCEF64;
+}
+
 .background--rouge-erreur {
   background-color: var(--error-950-100);
 }
@@ -307,10 +311,17 @@ h3 {
   border: 1px solid var(--blue-france-sun-113-625);
 }
 
+.border--bleu-info-dark {
+  border: 1px solid var(--info-425-625);
+}
+
 .border--warning {
   border: 1px solid var(--warning-425-625);
 }
 
+.border--green-light {
+  border: 1px solid #DCEF64;
+}
 .border-radius--xs {
   border-radius: 4px;
 }

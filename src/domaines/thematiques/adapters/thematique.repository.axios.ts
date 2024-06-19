@@ -29,6 +29,7 @@ interface MissionItemThematiqueApiModel {
   type: string;
   points: number;
   sont_points_en_poche: boolean;
+  defi_status: 'en_cours' | undefined;
 }
 interface MissionThematiqueApiModel {
   id: string;
@@ -70,6 +71,7 @@ export class ThematiqueRepositoryAxios implements ThematiqueRepository {
         aEteRealisee: item.done,
         type: item.type,
         estRecommande: item.is_reco,
+        estEnCours: item.defi_status === 'en_cours',
         pointAEteRecolte: item.sont_points_en_poche,
       })),
       progressionKyc: {
