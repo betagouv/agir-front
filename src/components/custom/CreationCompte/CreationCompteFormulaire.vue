@@ -120,12 +120,12 @@
     formulaireValide.value = isMotDePasseValide;
   }
 
-  const performCreerCompteUtilisateur = () => {
+  const performCreerCompteUtilisateur = async () => {
     const creeCompteUseCase = new CreerCompteUtilisateurUsecase(
       new CompteUtilisateurRepositoryImpl(),
       new SessionRepositoryStore(),
     );
-    creeCompteUseCase
+    await creeCompteUseCase
       .execute(
         new CreerComptePresenterImpl(viewModel => {
           router.push({ name: viewModel.route });
