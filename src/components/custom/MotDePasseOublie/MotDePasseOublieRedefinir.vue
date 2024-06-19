@@ -1,4 +1,13 @@
 <template>
+  <div class="fr-messages-group">
+    <Alert
+      v-if="alerte.isActive"
+      class="fr-col-12 fr-mb-2w"
+      :type="alerte.type"
+      :titre="alerte.titre"
+      :message="alerte.message"
+    />
+  </div>
   <p class="fr-text--lg">
     Saisissez le code envoyé à l’adresse suivante :
     <strong>{{ email }}</strong>
@@ -15,15 +24,6 @@
       Valider
     </button>
   </form>
-  <div class="fr-messages-group">
-    <Alert
-      v-if="alerte.isActive"
-      class="fr-col-12 fr-mt-2w"
-      :type="alerte.type"
-      :titre="alerte.titre"
-      :message="alerte.message"
-    />
-  </div>
 </template>
 
 <script setup lang="ts">

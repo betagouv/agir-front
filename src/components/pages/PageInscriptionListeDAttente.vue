@@ -13,7 +13,13 @@
         l'adresse : <strong>{{ onboardingStore().email }}</strong
         >) à rejoindre l’aventure !
       </p>
-
+      <Alert
+        v-if="alerte.isActive"
+        class="fr-col-lg-8 fr-col-12 fr-mb-2w"
+        :type="alerte.type"
+        :titre="alerte.titre"
+        :message="alerte.message"
+      />
       <form class="fr-col-lg-8 fr-col-12" @submit.prevent="envoyerPreInscription">
         <div class="fr-select-group">
           <label class="fr-label" for="selectTypeVisiteur">Vous êtes</label>
@@ -46,13 +52,6 @@
           M’inscrire sur la liste d’attente
         </button>
         <router-link :to="{ name: RouteCommuneName.ACCUEIL }" class="fr-link"> Revenir à l’accueil </router-link>
-        <Alert
-          v-if="alerte.isActive"
-          class="fr-col-12 fr-mt-2w"
-          :type="alerte.type"
-          :titre="alerte.titre"
-          :message="alerte.message"
-        />
       </form>
     </div>
   </div>

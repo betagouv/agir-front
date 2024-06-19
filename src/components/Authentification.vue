@@ -6,6 +6,13 @@
           <legend class="fr-fieldset__legend" id="login-fieldset-legend">
             <h1 class="text--center">Se connecter avec son compte</h1>
           </legend>
+          <Alert
+            v-if="loginEnErreur"
+            class="fr-col-12 fr-mb-2w"
+            type="error"
+            titre="Erreur lors de l'authentification"
+            :message="loginMessageErreur"
+          />
           <div class="fr-fieldset__element">
             <InputMail label="Adresse électronique" v-model="email" name="email" />
           </div>
@@ -18,13 +25,6 @@
           <div class="fr-fieldset__element fr-mt-2w">
             <button class="fr-btn fr-btn--lg display-block full-width" type="submit">Se connecter</button>
           </div>
-          <Alert
-            v-if="loginEnErreur"
-            class="fr-col-12 fr-mt-2w"
-            type="error"
-            titre="Erreur lors de l'authentification"
-            :message="loginMessageErreur"
-          />
         </fieldset>
       </form>
       <div class="text--center" v-if="premiereConnexion">

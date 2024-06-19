@@ -5,6 +5,13 @@
       <p class="fr-text--lg">
         Un code à usage unique vous a été envoyé à l’adresse suivante : <strong>{{ email }}</strong>
       </p>
+      <Alert
+        v-if="alerte.isActive"
+        class="fr-col-12 fr-mt-2w"
+        :type="alerte.type"
+        :titre="alerte.titre"
+        :message="alerte.message"
+      />
       <form @submit.prevent="validerCode">
         <InputText class="fr-col-md-5" v-model="code" name="code" label="Code à usage unique" />
         <button class="fr-btn fr-mr-4w" :disabled="code.length == 0">Valider</button>
@@ -13,13 +20,6 @@
       <button class="fr-link fr-icon-mail-line fr-link--icon-left text--underline" @click="renvoyerCode">
         Renvoyer le code
       </button>
-      <Alert
-        v-if="alerte.isActive"
-        class="fr-col-12 fr-mt-2w"
-        :type="alerte.type"
-        :titre="alerte.titre"
-        :message="alerte.message"
-      />
     </div>
   </div>
 </template>

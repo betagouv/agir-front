@@ -1,6 +1,15 @@
 <template>
   <div>
     <h2 class="fr-h2">Votre logement</h2>
+    <div id="scroll-to-alerte">
+      <Alert
+        v-if="alerte.isActive"
+        class="fr-col-12 fr-mb-2w"
+        :type="alerte.type"
+        :titre="alerte.titre"
+        :message="alerte.message"
+      />
+    </div>
     <form @submit.prevent="enregistrerLesInformations">
       <div class="fr-grid-row full-width flex-end">
         <button
@@ -117,15 +126,6 @@
           >
             Mettre à jour vos informations
           </button>
-        </div>
-        <div id="scroll-to-alerte">
-          <Alert
-            v-if="alerte.isActive"
-            class="fr-col-12 fr-mt-2w"
-            :type="alerte.type"
-            :titre="alerte.titre"
-            :message="alerte.message"
-          />
         </div>
       </div>
     </form>

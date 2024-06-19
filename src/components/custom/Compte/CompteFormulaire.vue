@@ -1,4 +1,13 @@
 <template>
+  <div id="scroll-to-alerte">
+    <Alert
+      v-if="alerte.isActive"
+      class="fr-col-12 fr-mb-2w"
+      :type="alerte.type"
+      :titre="alerte.titre"
+      :message="alerte.message"
+    />
+  </div>
   <form class="fr-mb-0" @submit.prevent="modifierInformation">
     <div class="fr-grid-row full-width flex-end">
       <button
@@ -60,15 +69,6 @@
       </div>
     </fieldset>
   </form>
-  <div id="scroll-to-alerte">
-    <Alert
-      v-if="alerte.isActive"
-      class="fr-col-12 fr-mt-2w"
-      :type="alerte.type"
-      :titre="alerte.titre"
-      :message="alerte.message"
-    />
-  </div>
 </template>
 
 <script setup lang="ts">
