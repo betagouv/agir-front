@@ -17,23 +17,7 @@
         <div class="fr-col fr-col-lg-7">
           <CoachToDo :todoList="todoList" />
         </div>
-        <div class="fr-col-12 fr-col-lg-4 fr-col-offset-lg-1">
-          <div v-if="!isLoading">
-            <div class="fr-grid-row flex-space-between fr-mb-1w">
-              <CarteScore class="fr-mr-3w" :value="utilisateurStore().score.niveau" type="niveau" />
-              <CarteScore :value="utilisateurStore().score.points" type="score" />
-            </div>
-            <ProgressionNiveauJauge
-              class="fr-mb-3w"
-              :objectif="utilisateurStore().score.nombreDePointsDuNiveau"
-              :valeur="utilisateurStore().score.nombreDePointsDansLeNiveau"
-            />
-            <BilanOnboarding />
-          </div>
-          <div v-else>
-            <CarteSkeleton />
-          </div>
-        </div>
+        <div class="fr-col-12 fr-col-lg-4 fr-col-offset-lg-1">Une illu</div>
       </div>
     </div>
   </div>
@@ -105,12 +89,9 @@
   import CoachRecommandations from './custom/Coach/CoachRecommandations.vue';
   import CarteSkeleton from '@/components/CarteSkeleton.vue';
   import ActionListe from '@/components/custom/Action/ActionListe.vue';
-  import BilanOnboarding from '@/components/custom/BilanOnboarding.vue';
   import CoachChangementSituation from '@/components/custom/Coach/CoachChangementSituation.vue';
   import CoachToDo from '@/components/custom/Coach/CoachToDo.vue';
   import CoachUnivers from '@/components/custom/Coach/CoachUnivers.vue';
-  import CarteScore from '@/components/custom/Progression/CarteScore.vue';
-  import ProgressionNiveauJauge from '@/components/custom/Progression/ProgressionNiveauJauge.vue';
   import { useReveal } from '@/composables/useReveal';
   import { DefiRepositoryAxios } from '@/domaines/defi/adapters/defi.repository.axios';
   import {
@@ -212,12 +193,10 @@
         new RecommandationsPersonnaliseesPresenterImpl(onRecommandationsPretesAAfficher),
       );
     };
-    document.getElementById('passageDeNiveau')!.addEventListener('dsfr.conceal', handleConcealEvent);
   });
 
   onUnmounted(() => {
     ToDoListEventBusImpl.getInstance().unsubscribe(subscriberName, ToDoListEvent.TODO_POINTS_ONT_ETE_RECUPERE);
     ToDoListEventBusImpl.getInstance().unsubscribe(subscriberName, ToDoListEvent.TODO_A_ETE_TERMINEE);
-    document.getElementById('passageDeNiveau')!.removeEventListener('dsfr.conceal', handleConcealEvent);
   });
 </script>
