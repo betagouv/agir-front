@@ -21,6 +21,7 @@
         :picto="mission.picto"
         :estRecommande="mission.estRecommande"
         :points="mission.points"
+        :estEnCours="mission.estEnCours"
       />
     </li>
   </ul>

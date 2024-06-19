@@ -13,6 +13,7 @@ export interface MissionItemViewModel {
   titre: string;
   estBloquee: boolean;
   estRecommande?: boolean;
+  estEnCours?: boolean;
   points: number;
   aEteRealisee: boolean;
   url: string;
@@ -60,6 +61,7 @@ export class MissionThematiquePresenterImpl implements MissionThematiquePresente
           pointAEteRecolte: missionThematique.items.filter(item => item.type === InteractionType.KYC)[0]
             .pointAEteRecolte,
           estRecommande: undefined,
+          estEnCours: undefined,
         },
       ],
       articleEtQuiz: missionThematique.items
@@ -85,6 +87,7 @@ export class MissionThematiquePresenterImpl implements MissionThematiquePresente
       picto: this.determinePicto(item),
       pointAEteRecolte: item.pointAEteRecolte,
       estRecommande: item.type === InteractionType.DEFIS ? item.estRecommande : undefined,
+      estEnCours: item.type === InteractionType.DEFIS ? item.estEnCours : undefined,
     };
   }
 

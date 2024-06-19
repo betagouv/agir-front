@@ -22,6 +22,7 @@ export class ThematiqueRepositoryFake implements ThematiqueRepository {
           type: InteractionType.QUIZ,
           pointAEteRecolte: false,
           estRecommande: false,
+          estEnCours: false,
         },
         {
           id: 'id2',
@@ -34,6 +35,7 @@ export class ThematiqueRepositoryFake implements ThematiqueRepository {
           type: InteractionType.DEFIS,
           pointAEteRecolte: false,
           estRecommande: true,
+          estEnCours: false,
         },
         {
           id: 'id3',
@@ -46,6 +48,7 @@ export class ThematiqueRepositoryFake implements ThematiqueRepository {
           type: InteractionType.KYC,
           pointAEteRecolte: false,
           estRecommande: false,
+          estEnCours: false,
         },
       ],
       idThematique: '1',

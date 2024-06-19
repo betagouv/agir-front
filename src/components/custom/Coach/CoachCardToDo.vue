@@ -1,6 +1,12 @@
 <template>
-  <div class="todo background--white shadow fr-p-2w border">
-    <span v-if="estRecommande" class="todo__badge fr-badge background--bleu-info-dark text--white text--transform-none">
+  <div
+    class="todo background--white shadow fr-p-2w border"
+    :class="estEnCours ? 'border--green-light' : estRecommande ? 'border--bleu-info-dark' : ''"
+  >
+    <span v-if="estEnCours" class="item__badge fr-badge background--green-light text--black text--transform-none">
+      En cours !
+    </span>
+    <span v-if="estRecommande" class="item__badge fr-badge background--bleu-info-dark text--white text--transform-none">
       Recommandé pour vous !
     </span>
     <img :src="picto" alt="" />
@@ -39,6 +45,7 @@
     picto: string;
     estRecommande?: boolean;
     points?: number;
+    estEnCours?: boolean;
   }>();
 </script>
 
@@ -52,7 +59,7 @@
     transition: box-shadow 0.3s ease;
   }
 
-  .todo__badge {
+  .item__badge {
     position: absolute;
     top: 0;
     left: 3rem;

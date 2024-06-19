@@ -31,6 +31,7 @@ describe("Fichier de tests concernant la récupération d'une mission pour une t
             url: '/quiz/alimentation/1/1',
             picto: '/ic_mission_article.svg',
             pointAEteRecolte: false,
+            estEnCours: undefined,
           },
         ],
         defis: [
@@ -42,12 +43,12 @@ describe("Fichier de tests concernant la récupération d'une mission pour une t
             idDuContenu: '2',
             points: 10,
             progression: undefined,
-
             estRecommande: true,
             titre: 'Mission 2',
             url: '/defi/alimentation/1/2',
             picto: '/ic_mission_defi.svg',
             pointAEteRecolte: false,
+            estEnCours: false,
           },
         ],
         kyc: [
@@ -67,6 +68,7 @@ describe("Fichier de tests concernant la récupération d'une mission pour une t
             titre: '<strong>Quelques questions</strong> pour mieux vous connaître',
             url: '/mieux-vous-connaitre/alimentation/1',
             pointAEteRecolte: false,
+            estEnCours: undefined,
           },
         ],
         titre: 'Thematique 1',
