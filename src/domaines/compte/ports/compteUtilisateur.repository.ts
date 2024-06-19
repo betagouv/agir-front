@@ -1,5 +1,3 @@
-import { OnboardingState } from '@/domaines/onboarding/evaluerOnboarding.usecase';
-
 export interface CompteUtilisateur {
   id: string;
   nom: string;
@@ -17,8 +15,9 @@ export interface CompteUtilisateurACreer {
   email: string;
   prenom: string;
   motDePasse: string;
-  onboarding: OnboardingState;
   anneeDeNaissance?: number;
+  codePostal: string;
+  commune: string;
 }
 export interface CompteUtilisateurRepository {
   getCompteUtilisateur(idUtilisateur: string): Promise<CompteUtilisateur>;

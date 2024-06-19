@@ -8,7 +8,6 @@ const PageCompteLogement = () => import('@/components/pages/PageCompteLogement.v
 const PageCompteVosDefis = () => import('@/components/pages/PageCompteVosDefis.vue');
 import { RouteRecordRaw } from 'vue-router';
 import { RouteCompteName } from '@/router/compte/routeCompteName';
-import { onboardingStore } from '@/store/onboarding';
 
 export enum RouteComptePath {
   MON_COMPTE = '/mon-compte/',
@@ -57,13 +56,6 @@ const compteRoutes: RouteRecordRaw[] = [
     path: RouteComptePath.CREATION_COMPTE,
     name: RouteCompteName.CREATION_COMPTE,
     component: PageCreationCompte,
-    beforeEnter: (to, from, next) => {
-      if (!onboardingStore().estComplet) {
-        next({ name: 'pre-onboarding' });
-      } else {
-        next();
-      }
-    },
     meta: {
       title: 'Création du compte',
       estPublique: true,

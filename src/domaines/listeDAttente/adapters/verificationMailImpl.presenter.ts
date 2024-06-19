@@ -1,6 +1,7 @@
-import { VerificationMailPresenter } from '../ports/verificationMail.presenter';
-import { ReponseVerification } from '../verificationWhiteListe.usecase';
+import { VerificationMailPresenter } from '@/domaines/listeDAttente/ports/verificationMail.presenter';
+import { ReponseVerification } from '@/domaines/listeDAttente/verificationWhiteListe.usecase';
 import { RouteCommuneName } from '@/router';
+import { RouteCompteName } from '@/router/compte/routeCompteName';
 import { RouteOnboardingName } from '@/router/onboarding/routeOnboardingName';
 
 export interface ReponseVerificationViewModel {
@@ -15,7 +16,7 @@ export class VerificationMailPresenterImpl implements VerificationMailPresenter 
       this.reponseVerificationViewModel({ redirectUrl: RouteCommuneName.AUTHENTIFICATION });
     } else {
       const url = reponse.estAutorise
-        ? RouteOnboardingName.PRE_ONBOARDING
+        ? RouteCompteName.CREATION_COMPTE
         : RouteOnboardingName.INSCRIPTION_LISTE_D_ATTENTE;
       this.reponseVerificationViewModel({ redirectUrl: url });
     }

@@ -38,20 +38,8 @@ export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurReposit
         email: compteUtilisateurACreer.email,
         mot_de_passe: compteUtilisateurACreer.motDePasse,
         annee_naissance: compteUtilisateurACreer.anneeDeNaissance,
-        onboardingData: {
-          transports: compteUtilisateurACreer.onboarding.etapeTransport.transports,
-          avion: compteUtilisateurACreer.onboarding.etapeTransport.avion,
-          code_postal: compteUtilisateurACreer.onboarding.etapeLogement.code_postal,
-          commune: compteUtilisateurACreer.onboarding.etapeLogement.commune,
-          adultes: compteUtilisateurACreer.onboarding.etapeLogement.adultes,
-          enfants: compteUtilisateurACreer.onboarding.etapeLogement.enfants,
-          residence: compteUtilisateurACreer.onboarding.etapeLogement.residence,
-          proprietaire: compteUtilisateurACreer.onboarding.etapeLogement.proprietaire,
-          superficie: compteUtilisateurACreer.onboarding.etapeLogement.superficie,
-          chauffage: compteUtilisateurACreer.onboarding.etapeLogement.chauffage,
-          repas: compteUtilisateurACreer.onboarding.etapeAlimentation.repas,
-          consommation: compteUtilisateurACreer.onboarding.etapeConsommation.consommation,
-        },
+        code_postal: compteUtilisateurACreer.codePostal,
+        commune: compteUtilisateurACreer.commune,
       });
       return {
         mail: response.data.email || '',

@@ -64,39 +64,13 @@ describe('Fichier de tests concernant la creation du compte utilisateur', () => 
       nom: 'John',
       id: '',
       mail: 'john@skynet.com',
-      codePostal: '',
       prenom: 'Doe',
       revenuFiscal: '',
       motDePasse: 'motDePasse',
+      codePostal: '77370',
+      commune: 'Nangis',
     };
 
-    const onboardingState: OnboardingState = {
-      email: '',
-      etapeTransport: {
-        transports: [],
-        avion: 0,
-        done: true,
-      },
-      etapeLogement: {
-        code_postal: '',
-        commune: '',
-        adultes: 0,
-        enfants: 0,
-        residence: '',
-        proprietaire: false,
-        superficie: '',
-        chauffage: '',
-        done: true,
-      },
-      etapeAlimentation: {
-        repas: '',
-        done: true,
-      },
-      etapeConsommation: {
-        consommation: '',
-        done: true,
-      },
-    };
     const sessionRepository = new SpySauvegarderUtilisateurSessionRepository();
     const compteUtilisateurRepository = new CompteUtilisateurForTest();
     // WHEN
@@ -106,7 +80,6 @@ describe('Fichier de tests concernant la creation du compte utilisateur', () => 
         expect(viewModel.route).toBe('validation-compte');
       }),
       compteACreer,
-      onboardingState,
     );
     // THEN
     expect(sessionRepository.utilisateur).toStrictEqual<Partial<Utilisateur>>({
@@ -123,10 +96,11 @@ describe('Fichier de tests concernant la creation du compte utilisateur', () => 
       nom: 'John',
       id: '',
       mail: 'john@skynet.com',
-      codePostal: '',
       prenom: 'Doe',
       revenuFiscal: '',
       motDePasse: 'motDePasse',
+      codePostal: '77370',
+      commune: 'Nangis',
     };
 
     const onboardingState: OnboardingState = {
@@ -165,7 +139,6 @@ describe('Fichier de tests concernant la creation du compte utilisateur', () => 
         expect(viewModel.route).toBe('beta-fermee');
       }),
       compteACreer,
-      onboardingState,
     );
   });
 });
