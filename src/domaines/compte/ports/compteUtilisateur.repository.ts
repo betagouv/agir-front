@@ -17,8 +17,9 @@ export interface CompteUtilisateurACreer {
   email: string;
   prenom: string;
   motDePasse: string;
-  onboarding: OnboardingState;
   anneeDeNaissance?: number;
+  codePostal: string;
+  commune: string;
 }
 export interface CompteUtilisateurRepository {
   getCompteUtilisateur(idUtilisateur: string): Promise<CompteUtilisateur>;

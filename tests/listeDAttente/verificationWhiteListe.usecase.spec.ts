@@ -34,7 +34,7 @@ describe('Fichier de tests concernant le test du mail whitelisté', () => {
       // THEN
       function expectation(viewModel: ReponseVerificationViewModel) {
         expect(viewModel).toStrictEqual<ReponseVerificationViewModel>({
-          redirectUrl: 'pre-onboarding',
+          redirectUrl: 'creation-compte',
         });
       }
     });

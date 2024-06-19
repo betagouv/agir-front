@@ -57,13 +57,6 @@ const compteRoutes: RouteRecordRaw[] = [
     path: RouteComptePath.CREATION_COMPTE,
     name: RouteCompteName.CREATION_COMPTE,
     component: PageCreationCompte,
-    beforeEnter: (to, from, next) => {
-      if (!onboardingStore().estComplet) {
-        next({ name: 'pre-onboarding' });
-      } else {
-        next();
-      }
-    },
     meta: {
       title: 'Création du compte',
       estPublique: true,

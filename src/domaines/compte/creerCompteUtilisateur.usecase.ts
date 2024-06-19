@@ -1,7 +1,6 @@
 import { SessionRepository } from '@/domaines/authentification/authentifierUtilisateur.usecase';
 import { CompteUtilisateurRepository } from '@/domaines/compte/ports/compteUtilisateur.repository';
 import { CreerComptePresenter } from '@/domaines/compte/ports/creerComptePresenter';
-import { OnboardingState } from '@/domaines/onboarding/evaluerOnboarding.usecase';
 import { RepositoryError } from '@/shell/repositoryError';
 
 export interface UserInput {
@@ -10,6 +9,8 @@ export interface UserInput {
   prenom: string;
   motDePasse: string;
   anneeNaissance?: number;
+  codePostal: string;
+  commune: string;
 }
 export class CreerCompteUtilisateurUsecase {
   constructor(
@@ -17,19 +18,16 @@ export class CreerCompteUtilisateurUsecase {
     private sessionRepository: SessionRepository,
   ) {}
 
-  async execute(
-    creerComptePresenter: CreerComptePresenter,
-    compteUtilisateurACreerInput: UserInput,
-    onboarding: OnboardingState,
-  ): Promise<void> {
+  async execute(creerComptePresenter: CreerComptePresenter, compteUtilisateurACreerInput: UserInput): Promise<void> {
     try {
       const utilisateurCree = await this.compteUtilisateuRepository.creerCompteUtilisateur({
         nom: compteUtilisateurACreerInput.nom,
         email: compteUtilisateurACreerInput.mail,
         prenom: compteUtilisateurACreerInput.prenom,
         motDePasse: compteUtilisateurACreerInput.motDePasse,
-        onboarding: onboarding,
         anneeDeNaissance: compteUtilisateurACreerInput.anneeNaissance,
+        codePostal: compteUtilisateurACreerInput.codePostal,
+        commune: compteUtilisateurACreerInput.commune,
       });
 
       this.sessionRepository.sauvegarderUtilisateur({

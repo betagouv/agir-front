@@ -9,21 +9,8 @@ test.beforeAll(async () => {
 });
 
 test.describe('Onboarding complet', () => {
-  test("Aller sur l'onboarding", async () => {
-    await page.route(`${process.env.VITE_API_URL}/utilisateurs/check_whiteliste`, route => {
-      route.fulfill({
-        status: 200,
-        contentType: 'application/json',
-        body: JSON.stringify({ is_whitelisted: true, is_registered: false }),
-      });
-    });
-    await page.goto('/');
-    await page.getByRole('textbox', { name: 'Quelle est votre adresse email' }).fill('ww@w.com');
-    await page.getByRole('button', { name: 'Commencer' }).click();
-    await expect(page).toHaveURL('/pre-onboarding');
-  });
-
   test('pre-onboarding', async () => {
+    await page.goto('/pre-onboarding');
     await page.getByRole('link', { name: "Commencer l'estimation" }).click();
     await expect(page).toHaveURL('/onboarding');
   });

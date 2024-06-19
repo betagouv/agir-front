@@ -4,6 +4,15 @@
       <legend class="fr-fieldset__legend" id="identity-fieldset-legend">
         <h2 class="fr-h4 text--center">Inscrivez-vous</h2>
       </legend>
+      <div class="fr-messages-group">
+        <Alert
+          v-if="creationDeCompteEnErreur"
+          class="fr-col-12 fr-mb-2w"
+          type="error"
+          titre="Erreur lors de la création du compte"
+          :message="creationDeCompteMessageErreur"
+        />
+      </div>
       <div class="fr-fieldset__element">
         <InputMail
           label="Adresse électronique"
@@ -26,6 +35,16 @@
         <div class="fr-col-12">
           <div class="fr-fieldset__element">
             <InputSelectAnneeDeNaissance v-model="compteUtilisateurInput.anneeNaissance" />
+          </div>
+        </div>
+        <div class="fr-col-12">
+          <div class="fr-fieldset__element">
+            <InputCodePostal
+              v-model="compteUtilisateurInput.codePostal"
+              :default-value="compteUtilisateurInput.codePostal"
+              :default-select-value="compteUtilisateurInput.commune"
+              @update:selectedCommune="compteUtilisateurInput.commune = $event"
+            />
           </div>
         </div>
       </div>
@@ -55,15 +74,6 @@
           Créer votre compte
         </button>
       </div>
-      <div class="fr-messages-group">
-        <Alert
-          v-if="creationDeCompteEnErreur"
-          class="fr-col-12 fr-mt-2w"
-          type="error"
-          titre="Erreur lors de la création du compte"
-          :message="creationDeCompteMessageErreur"
-        />
-      </div>
     </fieldset>
   </form>
   <hr class="fr-pb-4w" />
@@ -80,6 +90,7 @@
   import Alert from '@/components/custom/Alert.vue';
   import InputSelectAnneeDeNaissance from '@/components/custom/CreationCompte/InputSelectAnneeDeNaissance.vue';
   import InputPassword from '@/components/custom/InputPassword.vue';
+  import InputCodePostal from '@/components/dsfr/InputCodePostal.vue';
   import InputMail from '@/components/dsfr/InputMail.vue';
   import InputText from '@/components/dsfr/InputText.vue';
   import { SessionRepositoryStore } from '@/domaines/authentification/adapters/session.repository.store';
@@ -96,9 +107,11 @@
     mail: onboardingStore().email,
     prenom: '',
     motDePasse: '',
+    codePostal: '',
+    commune: '',
   });
-  let creationDeCompteEnErreur = ref<boolean>(false);
-  let creationDeCompteMessageErreur = ref<string>('');
+  let creationDeCompteEnErreur = ref<boolean>(true);
+  let creationDeCompteMessageErreur = ref<string>('test');
   let formulaireValide = ref<boolean>(false);
   let acceptationCharte = ref<boolean>(false);
   utilisateurStore().reset();
@@ -118,11 +131,11 @@
           router.push({ name: viewModel.route });
         }),
         compteUtilisateurInput.value,
-        onboardingStore().$state,
       )
       .catch(reason => {
         creationDeCompteMessageErreur.value = reason.message;
         creationDeCompteEnErreur.value = true;
+        window.scrollTo(0, 0);
       });
   };
 </script>
