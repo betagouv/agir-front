@@ -110,8 +110,8 @@
     codePostal: '',
     commune: '',
   });
-  let creationDeCompteEnErreur = ref<boolean>(true);
-  let creationDeCompteMessageErreur = ref<string>('test');
+  let creationDeCompteEnErreur = ref<boolean>();
+  let creationDeCompteMessageErreur = ref<string>('');
   let formulaireValide = ref<boolean>(false);
   let acceptationCharte = ref<boolean>(false);
   utilisateurStore().reset();
