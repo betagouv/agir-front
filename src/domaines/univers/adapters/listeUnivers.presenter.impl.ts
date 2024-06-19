@@ -24,7 +24,7 @@ export class ListeUniversPresenterImpl implements ListeUniversPresenter {
         urlImage: univers.urlImage,
         nombreDeDefisRealises: univers.nombreDeDefisRealises,
         estBloque: univers.estBloque,
-        estTermine: true,
+        estTermine: univers.estTermine,
       })),
     });
   }

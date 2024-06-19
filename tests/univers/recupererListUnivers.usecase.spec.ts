@@ -21,6 +21,7 @@ describe('Fichier de tests concernant la recupération des univers', () => {
             urlImage: 'https://via.placeholder.com/150',
             nombreDeDefisRealises: 0,
             estBloque: true,
+            estTermine: false,
           },
           {
             id: '2',
@@ -28,6 +29,7 @@ describe('Fichier de tests concernant la recupération des univers', () => {
             urlImage: 'https://via.placeholder.com/150',
             nombreDeDefisRealises: 0,
             estBloque: false,
+            estTermine: true,
           },
         ],
       });

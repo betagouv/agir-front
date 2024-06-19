@@ -9,6 +9,7 @@ export class UniversRepositoryMock implements UniversRepository {
       urlImage: 'https://via.placeholder.com/150',
       nombreDeDefisRealises: 0,
       estBloque: false,
+      estTermine: true,
     });
   }
   recupererLaListeDesUnivers(): Promise<Univers[]> {
@@ -19,6 +20,7 @@ export class UniversRepositoryMock implements UniversRepository {
         urlImage: 'https://via.placeholder.com/150',
         nombreDeDefisRealises: 0,
         estBloque: true,
+        estTermine: false,
       },
       {
         id: '2',
@@ -26,6 +28,7 @@ export class UniversRepositoryMock implements UniversRepository {
         urlImage: 'https://via.placeholder.com/150',
         nombreDeDefisRealises: 0,
         estBloque: false,
+        estTermine: true,
       },
     ]);
   }

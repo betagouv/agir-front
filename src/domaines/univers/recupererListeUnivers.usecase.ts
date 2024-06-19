@@ -7,6 +7,7 @@ export interface Univers {
   urlImage: string;
   nombreDeDefisRealises: number;
   estBloque: boolean;
+  estTermine: boolean;
 }
 export class RecupererListeUniversUsecase {
   constructor(private universRepository: UniversRepository) {}

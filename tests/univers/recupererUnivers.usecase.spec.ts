@@ -17,6 +17,7 @@ describe("Fichier de tests concernant la récupération d'un univers", async () 
         urlImage: 'https://via.placeholder.com/150',
         nombreDeDefisRealises: 0,
         estBloque: false,
+        estTermine: true,
       });
     }
   });

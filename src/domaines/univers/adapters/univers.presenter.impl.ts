@@ -12,6 +12,7 @@ export class UniversPresenterImpl implements UniversPresenter {
       urlImage: univers.urlImage,
       nombreDeDefisRealises: univers.nombreDeDefisRealises,
       estBloque: univers.estBloque,
+      estTermine: univers.estTermine,
     });
   }
 }
