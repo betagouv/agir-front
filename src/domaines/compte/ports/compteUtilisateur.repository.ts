@@ -1,5 +1,3 @@
-import { OnboardingState } from '@/domaines/onboarding/evaluerOnboarding.usecase';
-
 export interface CompteUtilisateur {
   id: string;
   nom: string;
