@@ -2,6 +2,13 @@ import { AxiosFactory, intercept401 } from '@/axios.factory';
 import { ToDoListRepository } from '@/domaines/toDoList/ports/toDoList.repository';
 import { TodoList } from '@/domaines/toDoList/recupererToDoList.usecase';
 
+interface Reveal {
+  id: string;
+  feature: string;
+  titre: string;
+  description: string;
+}
+
 export interface ToDoListApiModel {
   numero_todo: number;
   points_todo: number;
@@ -40,6 +47,11 @@ export interface ToDoListApiModel {
         };
       }[]
     | [];
+  celebration: {
+    type: string;
+    titre: string;
+    reveal: Reveal;
+  };
 }
 
 export class ToDoListRepositoryAxios implements ToDoListRepository {

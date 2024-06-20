@@ -119,7 +119,7 @@
     bonusFinalRecupere.value = false;
     new ValiderCelebrationUsecase(new CelebrationRepositoryAxios()).execute(
       utilisateurStore().utilisateur.id,
-      celebrationId,
+      '6a18c8cd-0fef-44ef-bb9e-a580af56efbc',
     );
     revealFonctionnalite();
   };
