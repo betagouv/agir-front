@@ -17,7 +17,9 @@
         <div class="fr-col fr-col-lg-7">
           <CoachToDo :todoList="todoList" />
         </div>
-        <div class="fr-col-12 fr-col-lg-4 fr-col-offset-lg-1">Une illu</div>
+        <div class="fr-col-12 fr-col-lg-5">
+          <img :src="todoList.imageUrl" class="max-full-width" alt="Illustration" />
+        </div>
       </div>
     </div>
   </div>

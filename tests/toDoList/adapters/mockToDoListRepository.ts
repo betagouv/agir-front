@@ -16,6 +16,7 @@ export class MockToDoListRepository implements ToDoListRepository {
       titre: 'Ma ToDo List',
       pointFinDeMission: 30,
       derniere: false,
+      imageUrl: 'imageUrl',
       fait: [
         {
           id: 'id2',

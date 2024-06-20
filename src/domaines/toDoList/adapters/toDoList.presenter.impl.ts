@@ -30,6 +30,7 @@ export interface TodoListViewModel {
   titre: string;
   pointFinDeMission: number;
   derniere: boolean;
+  imageUrl: string;
   aFaire: TodoViewModel[];
   fait: TodoViewModel[];
 }
@@ -44,6 +45,7 @@ export class ToDoListPresenterImpl implements ToDoListPresenter {
       derniere: toDoList.derniere,
       aFaire: toDoList.aFaire.map(todo => this.mapToListItemToViewModel(todo)),
       fait: toDoList.fait.map(todo => this.mapToListItemToViewModel(todo)),
+      imageUrl: toDoList.imageUrl,
     });
   }
 

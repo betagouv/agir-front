@@ -5,6 +5,7 @@ export interface TodoList {
   titre: string;
   pointFinDeMission: number;
   derniere: boolean;
+  imageUrl: string;
   fait: TodoListItem[];
   aFaire: TodoListItem[];
 }
