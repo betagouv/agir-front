@@ -64,6 +64,7 @@ test.beforeAll(async () => {
           numero_todo: 0,
           points_todo: 0,
           titre: 'Première mission !',
+          imageUrl: '',
           todo: [
             {
               titre: 'Titre de ma mission à faire',
@@ -179,6 +180,7 @@ test.describe('Mission 1', async () => {
             numero_todo: 0,
             points_todo: 0,
             titre: 'Première mission !',
+            imageUrl: '',
             todo: [
               {
                 titre: 'Titre de ma mission à faire',
@@ -430,6 +432,7 @@ test.describe('Mission 1', async () => {
             numero_todo: 0,
             points_todo: 0,
             titre: 'Première mission !',
+            imageUrl: '',
             todo: [],
             done: [
               {
@@ -500,6 +503,7 @@ test.describe('Mission 1', async () => {
             numero_todo: 0,
             points_todo: 0,
             titre: 'Première mission !',
+            imageUrl: '',
             todo: [],
             done: [
               {

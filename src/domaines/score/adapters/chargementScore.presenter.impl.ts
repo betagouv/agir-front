@@ -40,8 +40,6 @@ export class ChargementScorePresenterImpl implements ChargementScorePresenter {
         return RouteCoachName.SERVICES;
       case Fonctionnalites.RECOMMANDATIONS:
         return RouteCoachName.COACH;
-      case Fonctionnalites.BIBLIOTHEQUE:
-        return RouteCoachName.BIBLIOTHEQUE;
       default:
         return RouteCoachName.COACH;
     }

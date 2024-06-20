@@ -13,6 +13,7 @@ export class InjectTodo {
       todo: [],
       done: [],
       is_last: true,
+      imageUrl: '',
     };
   }
 }
