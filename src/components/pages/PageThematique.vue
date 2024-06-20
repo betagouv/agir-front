@@ -16,9 +16,11 @@
     </div>
     <div class="mission__dashline" v-if="mission">
       <ThematiquesMissions :missions="mission.kyc" />
-      <h2 class="text--uppercase fr-text--xs text--bleu fr-mb-2w fr-mt-3w fr-ml-6w">Articles et quiz</h2>
+      <h2 class="text--uppercase fr-text--xs text--bleu fr-mb-2w fr-mt-3w fr-ml-6w">
+        Lire des articles et répondre aux quiz
+      </h2>
       <ThematiquesMissions :missions="mission.articleEtQuiz" />
-      <h2 class="text--uppercase fr-text--xs text--bleu fr-mb-2w fr-mt-3w fr-ml-6w">Actions</h2>
+      <h2 class="text--uppercase fr-text--xs text--bleu fr-mb-2w fr-mt-3w fr-ml-6w">Réaliser une action</h2>
       <ThematiquesMissions :missions="mission.defis" />
       <p class="text--uppercase fr-text--bold fr-text--xs text--bleu fr-pt-6w fr-pl-5v">
         <span :class="mission.bonusMission.picto" aria-hidden="true"></span>
