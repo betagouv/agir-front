@@ -1,6 +1,6 @@
 import { TerminerToDoListUsecase } from '@/domaines/toDoList/terminerToDoList.usecase';
 import { SpyToDoListRepository } from './adapters/spyTodoListRepository';
-import { SpyToDoListEventBus } from './spyTodoListEventBus';
+import { SpyToDoListEventBus } from './adapters/spyTodoListEventBus';
 import { ToDoListEvent } from '@/domaines/toDoList/toDoListEventBusImpl';
 import { SpySauvegarderUtilisateurSessionRepository } from '../compte/sessionRepository.sauvegarderUtilisateur.spy';
 

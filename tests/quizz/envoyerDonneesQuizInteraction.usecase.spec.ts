@@ -1,7 +1,7 @@
 import { EnvoyerDonneesQuizInteractionUsecase } from '@/domaines/quiz/envoyerDonneesQuizInteraction.usecase';
 import { ToDoListEvent } from '@/domaines/toDoList/toDoListEventBusImpl';
 import { expect } from 'vitest';
-import { SpyToDoListEventBus } from '../toDoList/spyTodoListEventBus';
+import { SpyToDoListEventBus } from '../toDoList/adapters/spyTodoListEventBus';
 import { SpyQuizRepository } from './adapters/spyQuizRepository';
 
 describe("Fichier de tests pour envoyer le resultat d'un quizz", () => {

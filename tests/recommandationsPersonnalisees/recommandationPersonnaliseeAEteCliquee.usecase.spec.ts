@@ -1,5 +1,5 @@
 import { RecommandationPersonnaliseAEteCliqueeUsecase } from '@/domaines/recommandationsPersonnalisees/recommandationPersonnaliseAEteCliquee.usecase';
-import { SpyToDoListEventBus } from '../toDoList/spyTodoListEventBus';
+import { SpyToDoListEventBus } from '../toDoList/adapters/spyTodoListEventBus';
 import { expect } from 'vitest';
 import { ToDoListEvent } from '@/domaines/toDoList/toDoListEventBusImpl';
 import { SpyRecommandationsPersonnaliseesRepository } from './adapters/recommandationsPersonnalisees.repository.spy';
