@@ -4,14 +4,11 @@ import { Fonctionnalites } from '@/shell/fonctionnalitesEnum';
 
 export const useReveal = () => {
   const aideTour: Shepherd.Tour = inject('aideTour')!;
-  const serviceTour: Shepherd.Tour = inject('serviceTour')!;
   const recommandationTour: Shepherd.Tour = inject('recommandationTour')!;
   const defiTour: Shepherd.Tour = inject('defiTour')!;
 
   function selectionnerReveal(fonctionnalite: Fonctionnalites): Shepherd.Tour {
     switch (fonctionnalite) {
-      case Fonctionnalites.SERVICES:
-        return serviceTour;
       case Fonctionnalites.AIDES:
         return aideTour;
       case Fonctionnalites.RECOMMANDATIONS:
@@ -23,5 +20,5 @@ export const useReveal = () => {
     }
   }
 
-  return { aideTour, serviceTour, recommandationTour, defiTour, selectionnerReveal };
+  return { aideTour, recommandationTour, defiTour, selectionnerReveal };
 };

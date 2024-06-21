@@ -36,8 +36,6 @@ export class ChargementScorePresenterImpl implements ChargementScorePresenter {
     switch (feature) {
       case Fonctionnalites.AIDES:
         return RouteAidesName.VOS_AIDES;
-      case Fonctionnalites.SERVICES:
-        return RouteCoachName.SERVICES;
       case Fonctionnalites.RECOMMANDATIONS:
         return RouteCoachName.COACH;
       default:

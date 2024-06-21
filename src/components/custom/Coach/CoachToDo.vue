@@ -82,10 +82,9 @@
   import { ToDoListRepositoryAxios } from '@/domaines/toDoList/adapters/toDoList.repository.axios';
   import { RecupererPointsToDoUsecase } from '@/domaines/toDoList/recupererPointsToDo.usecase';
   import { TerminerToDoListUsecase } from '@/domaines/toDoList/terminerToDoList.usecase';
-  import { ToDoListEvent, ToDoListEventBusImpl } from '@/domaines/toDoList/toDoListEventBusImpl';
+  import { ToDoListEventBusImpl } from '@/domaines/toDoList/toDoListEventBusImpl';
   import { Fonctionnalites } from '@/shell/fonctionnalitesEnum';
   import { utilisateurStore } from '@/store/utilisateur';
-  import { EventBus } from '@/shell/eventBus';
 
   const { selectionnerReveal } = useReveal();
 
