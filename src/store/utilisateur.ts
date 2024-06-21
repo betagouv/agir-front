@@ -31,8 +31,6 @@ export const utilisateurStore = defineStore('utilisateur', {
       niveau: 0,
       nombreDePointsDansLeNiveau: 0,
       nombreDePointsDuNiveau: 0,
-      celebration: null,
-      afficherMissionsTermines: false,
     },
     tracking: {
       matomoEstInactif: false,

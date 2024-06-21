@@ -9,7 +9,6 @@
 
 <script setup lang="ts">
   import { computed, onMounted, onUnmounted } from 'vue';
-  import { SessionRepositoryStore } from '@/domaines/authentification/adapters/session.repository.store';
   import { ChargementScorePresenterImpl } from '@/domaines/score/adapters/chargementScore.presenter.impl';
   import { ScoreRepositoryAxios } from '@/domaines/score/adapters/score.repository.axios';
   import { ChargementScoreUsecase } from '@/domaines/score/chargementScore.usecase';
@@ -78,7 +77,7 @@
   };
 
   const mettreAJourLeScore = () => {
-    const chargerScoreUseCase = new ChargementScoreUsecase(new ScoreRepositoryAxios(), new SessionRepositoryStore());
+    const chargerScoreUseCase = new ChargementScoreUsecase(new ScoreRepositoryAxios());
     chargerScoreUseCase.execute(
       utilisateurStore().utilisateur.id,
       new ChargementScorePresenterImpl(async viewModel => {
