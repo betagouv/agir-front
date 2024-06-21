@@ -14,6 +14,7 @@ export class InjectTodo {
       done: [],
       is_last: true,
       imageUrl: '',
+      celebration: undefined,
     };
   }
 }

@@ -3,23 +3,14 @@
     <h1 class="fr-h1 fr-m-0 fr-mt-4w">Bonjour {{ utilisateurStore().utilisateur.prenom }} 👋</h1>
     <p class="fr-text--xl">Réduire votre empreinte écologique : selon vos moyens, vos lieux de vie et vos envies</p>
   </div>
-
-  <div class="fr-container fr-py-6w">
-    <div>
-      <div v-if="todoList && todoList.derniere" class="background--white border-radius--md shadow fr-p-2w">
-        <p class="fr-mb-0">
-          ✅ <span class="fr-text--bold">Vous avez accompli l’ensemble des missions ! </span> De nouvelles missions
-          arriveront très prochainement.
-        </p>
-        <div id="container-survey"></div>
+  <div v-if="todoList && !todoList.derniere" class="fr-container fr-py-6w">
+    <div id="container-survey"></div>
+    <div class="fr-grid-row fr-grid-row--gutters">
+      <div class="fr-col fr-col-lg-7">
+        <CoachToDo :todoList="todoList" />
       </div>
-      <div v-if="todoList && !todoList.derniere" class="fr-grid-row fr-grid-row--gutters">
-        <div class="fr-col fr-col-lg-7">
-          <CoachToDo :todoList="todoList" />
-        </div>
-        <div class="fr-col-12 fr-col-lg-5">
-          <img :src="todoList.imageUrl" class="max-full-width" alt="Illustration" />
-        </div>
+      <div class="fr-col-12 fr-col-lg-5">
+        <img :src="todoList.imageUrl" class="max-full-width" alt="" />
       </div>
     </div>
   </div>
@@ -126,7 +117,6 @@
   const universViewModel = ref<UniversViewModel[]>();
   const store = utilisateurStore();
   const recommandationsPersonnaliseesViewModel = ref<RecommandationPersonnaliseeViewModel>();
-  let handleConcealEvent: () => void;
 
   const defisViewModel = ref<DefiDescriptionViewModel[]>();
 
@@ -157,6 +147,10 @@
 
     ToDoListEventBusImpl.getInstance().subscribe(subscriberName, ToDoListEvent.TODO_A_ETE_TERMINEE, () => {
       chargerTodoListUsecase.execute(idUtilisateur, new ToDoListPresenterImpl(mapValueTodo));
+      chargerUniversUsecase.execute(
+        idUtilisateur,
+        new ListeUniversPresenterImpl(viewModel => (universViewModel.value = viewModel.univers)),
+      );
     });
 
     Promise.all([
@@ -185,16 +179,6 @@
   onMounted(() => {
     onboardingStore().reset();
     lancerChargementDesDonnees();
-    handleConcealEvent = () => {
-      const idUtilisateur = store.utilisateur.id;
-      const chargerRecommandationsPersonnaliseesUsecase = new RecupererRecommandationsPersonnaliseesUsecase(
-        new RecommandationsPersonnaliseesRepositoryAxios(),
-      );
-      chargerRecommandationsPersonnaliseesUsecase.execute(
-        idUtilisateur,
-        new RecommandationsPersonnaliseesPresenterImpl(onRecommandationsPretesAAfficher),
-      );
-    };
   });
 
   onUnmounted(() => {

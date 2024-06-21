@@ -116,6 +116,11 @@ describe('Fichier de tests concernant la récupération de la ToDo List', () => 
         pointFinDeMission: 30,
         titre: 'Ma ToDo List',
         imageUrl: 'imageUrl',
+        featureDebloquee: {
+          description: 'Description de vos aides',
+          feature: 'aides',
+          titre: 'Vos aides',
+        },
       });
     }
   });

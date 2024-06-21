@@ -47,7 +47,7 @@ export interface ToDoListApiModel {
         };
       }[]
     | [];
-  celebration: {
+  celebration?: {
     type: string;
     titre: string;
     reveal: Reveal;
@@ -65,6 +65,13 @@ export class ToDoListRepositoryAxios implements ToDoListRepository {
       pointFinDeMission: response.data.points_todo,
       derniere: response.data.is_last,
       imageUrl: response.data.imageUrl,
+      featureDebloquee: response.data.celebration
+        ? {
+            titre: response.data.celebration?.reveal.titre,
+            description: response.data.celebration?.reveal.description,
+            feature: response.data.celebration?.reveal.feature,
+          }
+        : undefined,
       aFaire: response.data.todo.map(todo => ({
         id: todo.id,
         titre: todo.titre,

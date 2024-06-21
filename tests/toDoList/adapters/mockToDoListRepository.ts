@@ -111,6 +111,11 @@ export class MockToDoListRepository implements ToDoListRepository {
           pointAEteRecolte: false,
         },
       ],
+      featureDebloquee: {
+        titre: 'Vos aides',
+        feature: 'aides',
+        description: 'Description de vos aides',
+      },
     });
   }
 }
