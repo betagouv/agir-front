@@ -28,6 +28,7 @@
         <img src="/ic_score.svg" alt="" width="16" class="fr-ml-1v" />
       </p>
     </div>
+    <router-link class="fr-btn fr-mt-3w" :to="`/univers/${useRoute().params.id}`">Retour</router-link>
   </div>
 </template>
 
