@@ -60,7 +60,7 @@ describe("Fichier de tests concernant la récupération d'une mission pour une t
             idDuContenu: '',
             hash: undefined,
             picto: '/ic_mission_kyc.svg',
-            points: 5,
+            points: 10,
             progression: {
               etapeCourante: 1,
               etapeTotal: 2,
