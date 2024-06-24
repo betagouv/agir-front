@@ -232,7 +232,7 @@ h3 {
 }
 
 .background--green-light {
-  background-color: #DCEF64;
+  background-color: #dcef64;
 }
 
 .background--rouge-erreur {
@@ -320,7 +320,7 @@ h3 {
 }
 
 .border--green-light {
-  border: 1px solid #DCEF64;
+  border: 1px solid #dcef64;
 }
 .border-radius--xs {
   border-radius: 4px;
@@ -403,5 +403,36 @@ h3 {
 @media print {
   .print-hidden {
     display: none;
+  }
+}
+
+.animation__button--shake {
+  animation: shake 3s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite both;
+}
+
+@keyframes shake {
+  0%,
+  60% {
+    transform: rotate(0deg);
+    transform-origin: 50% 100%;
+  }
+  5% {
+    transform: rotate(1deg);
+  }
+  10%,
+  20%,
+  30% {
+    transform: rotate(-2deg);
+  }
+  15%,
+  25%,
+  35% {
+    transform: rotate(2deg);
+  }
+  50% {
+    transform: rotate(-2deg);
+  }
+  60% {
+    transform: rotate(1deg);
   }
 }
