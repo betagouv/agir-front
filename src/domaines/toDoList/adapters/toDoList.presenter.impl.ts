@@ -33,7 +33,7 @@ export interface TodoListViewModel {
   imageUrl: string;
   aFaire: TodoViewModel[];
   fait: TodoViewModel[];
-  featureDebloquee?: {
+  featureDebloquee: {
     titre: string;
     feature: string;
     description: string;

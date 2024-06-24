@@ -65,6 +65,16 @@ test.beforeAll(async () => {
           points_todo: 0,
           titre: 'Première mission !',
           imageUrl: '',
+          celebration: {
+            type: 'reveal',
+            titre: 'Vos recommandations',
+            reveal: {
+              id: 'idReveal',
+              feature: 'recommandations',
+              titre: 'Recommandations',
+              description: 'Recommandations description lorem ipsum',
+            },
+          },
           todo: [
             {
               titre: 'Titre de ma mission à faire',
@@ -181,6 +191,16 @@ test.describe('Mission 1', async () => {
             points_todo: 0,
             titre: 'Première mission !',
             imageUrl: '',
+            celebration: {
+              type: 'reveal',
+              titre: 'Vos recommandations',
+              reveal: {
+                id: 'idReveal',
+                feature: 'recommandations',
+                titre: 'Recommandations',
+                description: 'Recommandations description lorem ipsum',
+              },
+            },
             todo: [
               {
                 titre: 'Titre de ma mission à faire',
@@ -433,6 +453,16 @@ test.describe('Mission 1', async () => {
             points_todo: 0,
             titre: 'Première mission !',
             imageUrl: '',
+            celebration: {
+              type: 'reveal',
+              titre: 'Vos recommandations',
+              reveal: {
+                id: 'idReveal',
+                feature: 'recommandations',
+                titre: 'Recommandations',
+                description: 'Recommandations description lorem ipsum',
+              },
+            },
             todo: [],
             done: [
               {
@@ -504,6 +534,16 @@ test.describe('Mission 1', async () => {
             points_todo: 0,
             titre: 'Première mission !',
             imageUrl: '',
+            celebration: {
+              type: 'reveal',
+              titre: 'Vos recommandations',
+              reveal: {
+                id: 'idReveal',
+                feature: 'recommandations',
+                titre: 'Recommandations',
+                description: 'Recommandations description lorem ipsum',
+              },
+            },
             todo: [],
             done: [
               {
