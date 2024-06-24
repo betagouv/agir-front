@@ -15,7 +15,15 @@
     </div>
   </div>
   <section
-    v-if="universViewModel && utilisateurStore().utilisateur.fonctionnalitesDebloquees.includes('univers')"
+    v-if="universViewModel"
+    v-tour-step:1="{
+      tour: universTour,
+      options: {
+        attachTo: { on: 'bottom' },
+        title: 'Univers débloqués',
+        text: 'Retrouvez ici tous vos univers !',
+      },
+    }"
     id="univers"
     class="fr-py-6w"
   >
@@ -110,7 +118,7 @@
   import { onboardingStore } from '@/store/onboarding';
   import { utilisateurStore } from '@/store/utilisateur';
 
-  const { recommandationTour, defiTour } = useReveal();
+  const { recommandationTour, defiTour, universTour } = useReveal();
 
   const isLoading = ref<boolean>(true);
   const todoList = ref<TodoListViewModel>();

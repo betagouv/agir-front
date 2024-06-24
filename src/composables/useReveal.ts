@@ -6,6 +6,7 @@ export const useReveal = () => {
   const aideTour: Shepherd.Tour = inject('aideTour')!;
   const recommandationTour: Shepherd.Tour = inject('recommandationTour')!;
   const defiTour: Shepherd.Tour = inject('defiTour')!;
+  const universTour: Shepherd.Tour = inject('universTour')!;
 
   function selectionnerReveal(fonctionnalite: Fonctionnalites): Shepherd.Tour {
     switch (fonctionnalite) {
@@ -15,10 +16,12 @@ export const useReveal = () => {
         return recommandationTour;
       case Fonctionnalites.DEFIS:
         return defiTour;
+      case Fonctionnalites.UNIVERS:
+        return universTour;
       default:
         return aideTour;
     }
   }
 
-  return { aideTour, recommandationTour, defiTour, selectionnerReveal };
+  return { aideTour, recommandationTour, defiTour, universTour, selectionnerReveal };
 };
