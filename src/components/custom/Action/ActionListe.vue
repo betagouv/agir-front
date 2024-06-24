@@ -3,7 +3,10 @@
   <p class="fr-text--xl">
     Gagnez des <img width="16" src="/ic_score.svg" alt="point" /> chaque semaine avec de nouvelles actions !
   </p>
-  <ul class="fr-grid-row fr-grid-row--gutters list-style-none fr-mb-2w">
+  <p v-if="defis.length === 0">
+    Vous n'avez aucune action à réaliser en ce moment. Débloquez-en de nouvelles dans les univers.
+  </p>
+  <ul v-else class="fr-grid-row fr-grid-row--gutters list-style-none fr-mb-2w">
     <li v-for="defi in defis" :key="defi.titre" class="fr-col-12 fr-col-md-6">
       <ActionCard :defi="defi" />
     </li>
