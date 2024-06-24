@@ -34,11 +34,7 @@
   <section
     class="fr-py-6w background--white"
     id="defis"
-    v-if="
-      utilisateurStore().utilisateur.fonctionnalitesDebloquees.includes('defis') &&
-      defisViewModel &&
-      defisViewModel.length > 0
-    "
+    v-if="defisViewModel && defisViewModel.length > 0"
     v-tour-step:1="{
       tour: defiTour,
       options: {
