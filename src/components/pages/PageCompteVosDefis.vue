@@ -1,8 +1,8 @@
 <template>
-  <CompteSkeleton page-courante="Mon Compte - Vos défis">
-    <h2 class="fr-h2">Vos défis</h2>
+  <CompteSkeleton page-courante="Mon Compte - Vos actions">
+    <h2 class="fr-h2">Vos actions</h2>
     <div v-if="defisViewModel?.enCours && defisViewModel.enCours.length > 0">
-      <h3 class="fr-h3 fr-my-6w">Vos défis en cours</h3>
+      <h3 class="fr-h3 fr-my-6w">Vos actions en cours</h3>
       <div v-for="defiViewModel in defisViewModel.enCours" :key="defiViewModel.id" class="fr-mb-4w">
         <h3 class="fr-h4 fr-mb-2w">
           {{ defiViewModel.libelle }}
@@ -16,7 +16,7 @@
       </div>
     </div>
     <div v-if="defisViewModel?.termine && defisViewModel.termine.length > 0">
-      <h3 class="fr-h3 fr-my-6w">Vos défis terminés</h3>
+      <h3 class="fr-h3 fr-my-6w">Vos actions terminées</h3>
       <div v-for="defiViewModel in defisViewModel?.termine" :key="defiViewModel.id" class="fr-mb-4w">
         <h3 class="fr-h4 fr-mb-2w">
           {{ defiViewModel.libelle }}
@@ -27,7 +27,7 @@
       </div>
     </div>
     <div v-if="defisViewModel?.abandonne && defisViewModel.abandonne.length > 0">
-      <h3 class="fr-h3 fr-my-6w">Vos défis non réalisés</h3>
+      <h3 class="fr-h3 fr-my-6w">Vos actions non réalisées</h3>
       <div v-for="defiViewModel in defisViewModel?.abandonne" :key="defiViewModel.id" class="fr-mb-4w">
         <h3 class="fr-h4 fr-mb-2w">
           {{ defiViewModel.libelle }}

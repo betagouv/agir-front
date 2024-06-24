@@ -4,7 +4,7 @@
       { label: 'Vos informations', url: RouteCompteName.MON_COMPTE },
       { label: 'Votre logement', url: RouteCompteName.LOGEMENT },
       { label: 'Mieux vous connaître', url: RouteCompteName.MIEUX_VOUS_CONNAITRE },
-      { label: 'Vos défis', url: RouteCompteName.DEFIS },
+      { label: 'Vos actions', url: RouteCompteName.DEFIS },
       { label: 'Options avancées', url: RouteCompteName.OPTIONS_AVANCEES },
     ]"
   />

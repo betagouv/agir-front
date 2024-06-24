@@ -18,7 +18,7 @@ export enum RouteComptePath {
   MOT_DE_PASSE_OUBLIE = '/mot-de-passe-oublie',
   MIEUX_VOUS_CONNAITRE = '/mon-compte/mieux-vous-connaitre',
   LOGEMENT = '/mon-compte/logement',
-  DEFIS = '/mon-compte/vos-defis',
+  DEFIS = '/mon-compte/vos-actions',
 }
 
 const compteRoutes: RouteRecordRaw[] = [
