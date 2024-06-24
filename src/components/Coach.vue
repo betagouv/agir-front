@@ -3,42 +3,27 @@
     <h1 class="fr-h1 fr-m-0 fr-mt-4w">Bonjour {{ utilisateurStore().utilisateur.prenom }} 👋</h1>
     <p class="fr-text--xl">Réduire votre empreinte écologique : selon vos moyens, vos lieux de vie et vos envies</p>
   </div>
-
-  <div class="fr-container fr-py-6w">
-    <div>
-      <div v-if="todoList && todoList.derniere" class="background--white border-radius--md shadow fr-p-2w">
-        <p class="fr-mb-0">
-          ✅ <span class="fr-text--bold">Vous avez accompli l’ensemble des missions ! </span> De nouvelles missions
-          arriveront très prochainement.
-        </p>
-        <div id="container-survey"></div>
+  <div v-if="todoList && !todoList.derniere" class="fr-container fr-py-6w">
+    <div id="container-survey"></div>
+    <div class="fr-grid-row fr-grid-row--gutters">
+      <div class="fr-col fr-col-lg-7">
+        <CoachToDo :todoList="todoList" />
       </div>
-      <div v-if="todoList && !todoList.derniere" class="fr-grid-row fr-grid-row--gutters">
-        <div class="fr-col fr-col-lg-7">
-          <CoachToDo :todoList="todoList" />
-        </div>
-        <div class="fr-col-12 fr-col-lg-4 fr-col-offset-lg-1">
-          <div v-if="!isLoading">
-            <div class="fr-grid-row flex-space-between fr-mb-1w">
-              <CarteScore class="fr-mr-3w" :value="utilisateurStore().score.niveau" type="niveau" />
-              <CarteScore :value="utilisateurStore().score.points" type="score" />
-            </div>
-            <ProgressionNiveauJauge
-              class="fr-mb-3w"
-              :objectif="utilisateurStore().score.nombreDePointsDuNiveau"
-              :valeur="utilisateurStore().score.nombreDePointsDansLeNiveau"
-            />
-            <BilanOnboarding />
-          </div>
-          <div v-else>
-            <CarteSkeleton />
-          </div>
-        </div>
+      <div class="fr-col-12 fr-col-lg-5">
+        <img :src="todoList.imageUrl" class="max-full-width" alt="" />
       </div>
     </div>
   </div>
   <section
-    v-if="universViewModel && utilisateurStore().utilisateur.fonctionnalitesDebloquees.includes('univers')"
+    v-if="universViewModel"
+    v-tour-step:1="{
+      tour: universTour,
+      options: {
+        attachTo: { on: 'bottom' },
+        title: 'Univers débloqués',
+        text: 'Retrouvez ici tous vos univers !',
+      },
+    }"
     id="univers"
     class="fr-py-6w"
   >
@@ -49,11 +34,7 @@
   <section
     class="fr-py-6w background--white"
     id="defis"
-    v-if="
-      utilisateurStore().utilisateur.fonctionnalitesDebloquees.includes('defis') &&
-      defisViewModel &&
-      defisViewModel.length > 0
-    "
+    v-if="defisViewModel && defisViewModel.length > 0"
     v-tour-step:1="{
       tour: defiTour,
       options: {
@@ -105,12 +86,9 @@
   import CoachRecommandations from './custom/Coach/CoachRecommandations.vue';
   import CarteSkeleton from '@/components/CarteSkeleton.vue';
   import ActionListe from '@/components/custom/Action/ActionListe.vue';
-  import BilanOnboarding from '@/components/custom/BilanOnboarding.vue';
   import CoachChangementSituation from '@/components/custom/Coach/CoachChangementSituation.vue';
   import CoachToDo from '@/components/custom/Coach/CoachToDo.vue';
   import CoachUnivers from '@/components/custom/Coach/CoachUnivers.vue';
-  import CarteScore from '@/components/custom/Progression/CarteScore.vue';
-  import ProgressionNiveauJauge from '@/components/custom/Progression/ProgressionNiveauJauge.vue';
   import { useReveal } from '@/composables/useReveal';
   import { DefiRepositoryAxios } from '@/domaines/defi/adapters/defi.repository.axios';
   import {
@@ -136,14 +114,13 @@
   import { onboardingStore } from '@/store/onboarding';
   import { utilisateurStore } from '@/store/utilisateur';
 
-  const { recommandationTour, defiTour } = useReveal();
+  const { recommandationTour, defiTour, universTour } = useReveal();
 
   const isLoading = ref<boolean>(true);
   const todoList = ref<TodoListViewModel>();
   const universViewModel = ref<UniversViewModel[]>();
   const store = utilisateurStore();
   const recommandationsPersonnaliseesViewModel = ref<RecommandationPersonnaliseeViewModel>();
-  let handleConcealEvent: () => void;
 
   const defisViewModel = ref<DefiDescriptionViewModel[]>();
 
@@ -174,6 +151,10 @@
 
     ToDoListEventBusImpl.getInstance().subscribe(subscriberName, ToDoListEvent.TODO_A_ETE_TERMINEE, () => {
       chargerTodoListUsecase.execute(idUtilisateur, new ToDoListPresenterImpl(mapValueTodo));
+      chargerUniversUsecase.execute(
+        idUtilisateur,
+        new ListeUniversPresenterImpl(viewModel => (universViewModel.value = viewModel.univers)),
+      );
     });
 
     Promise.all([
@@ -202,22 +183,10 @@
   onMounted(() => {
     onboardingStore().reset();
     lancerChargementDesDonnees();
-    handleConcealEvent = () => {
-      const idUtilisateur = store.utilisateur.id;
-      const chargerRecommandationsPersonnaliseesUsecase = new RecupererRecommandationsPersonnaliseesUsecase(
-        new RecommandationsPersonnaliseesRepositoryAxios(),
-      );
-      chargerRecommandationsPersonnaliseesUsecase.execute(
-        idUtilisateur,
-        new RecommandationsPersonnaliseesPresenterImpl(onRecommandationsPretesAAfficher),
-      );
-    };
-    document.getElementById('passageDeNiveau')!.addEventListener('dsfr.conceal', handleConcealEvent);
   });
 
   onUnmounted(() => {
     ToDoListEventBusImpl.getInstance().unsubscribe(subscriberName, ToDoListEvent.TODO_POINTS_ONT_ETE_RECUPERE);
     ToDoListEventBusImpl.getInstance().unsubscribe(subscriberName, ToDoListEvent.TODO_A_ETE_TERMINEE);
-    document.getElementById('passageDeNiveau')!.removeEventListener('dsfr.conceal', handleConcealEvent);
   });
 </script>

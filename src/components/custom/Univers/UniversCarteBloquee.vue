@@ -15,7 +15,6 @@
     <p class="fr-text--lg text--semi-bold text--black fr-mb-0">
       {{ universViewModel.nom }}
     </p>
-    <span class="text--bleu fr-text--sm fr-mb-0">Prochainement</span>
   </div>
 </template>
 

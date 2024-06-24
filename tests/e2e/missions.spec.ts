@@ -64,6 +64,17 @@ test.beforeAll(async () => {
           numero_todo: 0,
           points_todo: 0,
           titre: 'Première mission !',
+          imageUrl: '',
+          celebration: {
+            type: 'reveal',
+            titre: 'Vos recommandations',
+            reveal: {
+              id: 'idReveal',
+              feature: 'recommandations',
+              titre: 'Recommandations',
+              description: 'Recommandations description lorem ipsum',
+            },
+          },
           todo: [
             {
               titre: 'Titre de ma mission à faire',
@@ -144,7 +155,7 @@ test.describe('Mission 1', async () => {
   });
 
   test('Objectif 1 - récolter ses premiers points', async () => {
-    const scoreInitial = parseInt(await page.innerText('.utilisateur .score'));
+    const scoreInitial = parseInt(await page.innerText('.tag__progression--score'));
     await expect(scoreInitial).toEqual(0);
 
     const boutonRecolter = page.getByRole('button', { name: 'Récolter vos 10 points' });
@@ -179,6 +190,17 @@ test.describe('Mission 1', async () => {
             numero_todo: 0,
             points_todo: 0,
             titre: 'Première mission !',
+            imageUrl: '',
+            celebration: {
+              type: 'reveal',
+              titre: 'Vos recommandations',
+              reveal: {
+                id: 'idReveal',
+                feature: 'recommandations',
+                titre: 'Recommandations',
+                description: 'Recommandations description lorem ipsum',
+              },
+            },
             todo: [
               {
                 titre: 'Titre de ma mission à faire',
@@ -219,7 +241,7 @@ test.describe('Mission 1', async () => {
     await boutonRecolter.click({ force: true });
     await page.waitForTimeout(500);
 
-    const scoreFinal = parseInt(await page.innerText('.utilisateur .score'));
+    const scoreFinal = parseInt(await page.innerText('.tag__progression--score'));
     await expect(scoreFinal).toEqual(10);
   });
 
@@ -430,6 +452,17 @@ test.describe('Mission 1', async () => {
             numero_todo: 0,
             points_todo: 0,
             titre: 'Première mission !',
+            imageUrl: '',
+            celebration: {
+              type: 'reveal',
+              titre: 'Vos recommandations',
+              reveal: {
+                id: 'idReveal',
+                feature: 'recommandations',
+                titre: 'Recommandations',
+                description: 'Recommandations description lorem ipsum',
+              },
+            },
             todo: [],
             done: [
               {
@@ -500,6 +533,17 @@ test.describe('Mission 1', async () => {
             numero_todo: 0,
             points_todo: 0,
             titre: 'Première mission !',
+            imageUrl: '',
+            celebration: {
+              type: 'reveal',
+              titre: 'Vos recommandations',
+              reveal: {
+                id: 'idReveal',
+                feature: 'recommandations',
+                titre: 'Recommandations',
+                description: 'Recommandations description lorem ipsum',
+              },
+            },
             todo: [],
             done: [
               {
@@ -543,7 +587,7 @@ test.describe('Mission 1', async () => {
 
     await boutonRecolterBonus.click();
 
-    const toto = await page.getByText('Accomplie !');
+    const toto = await page.getByText('Vous avez accompli la Première mission !');
     await expect(toto).toBeVisible();
   });
 });
@@ -571,66 +615,3 @@ const postfullFillGagnerPointReponseOk = (route: Route, id: string) => {
     body: 'Ok',
   });
 };
-
-// TO DELETE
-async function recolterPoints(page: Page): Promise<Page> {
-  const niveauInitial = parseInt(await page.innerText('.utilisateur .niveau'));
-  await page.waitForTimeout(1000);
-  const boutons = await page.$$('button.todo__bouton');
-  for (const bouton of boutons) {
-    await bouton.click({ force: true });
-  }
-  await page.waitForTimeout(1000);
-
-  const passageNiveau = await page.locator('dialog#passageDeNiveau').isVisible();
-  if (passageNiveau) {
-    await checkPassageNiveau(page);
-    const nouveauNiveau = parseInt(await page.innerText('.utilisateur .niveau'));
-    expect(nouveauNiveau).toBeGreaterThan(niveauInitial);
-  }
-
-  return page;
-}
-
-async function checkPassageNiveau(page: Page): Promise<Page> {
-  await page.locator('dialog#passageDeNiveau').getByText('Fermer').click({ force: true });
-  return page;
-}
-
-async function repondreQuiz(linkElement: Locator, page: Page): Promise<Page> {
-  // clique sur le deuxième objectif et lecture de la réponse du serveur pour tricher sur le quiz
-  const [response] = await Promise.all([page.waitForResponse('**/api/quizzes/*'), linkElement.click()]);
-
-  const quizzData = await response.json();
-
-  const questions = quizzData.data.attributes.questions;
-
-  const exactTrueResponseTexts = questions.map(question => {
-    const reponses = question.reponses;
-    const exactTrueResponse = reponses.find(reponse => reponse.exact === true);
-    return exactTrueResponse ? exactTrueResponse.reponse : null;
-  });
-
-  // vérifie que l'on est sur la page du quiz
-  await expect(page).toHaveTitle('Agir ! - Quiz');
-  // vérification que le contenu est bien chargé et affiché
-  await expect(page.getByText('Une question sur la thématique ☀️  Climat', { exact: true })).toBeVisible();
-
-  // répondre correctement au quiz
-  await page.getByText(exactTrueResponseTexts[0]).click();
-
-  // valider le quiz
-  const validation = page.getByRole('button', { name: 'Valider' });
-  await expect(validation).toBeVisible();
-  validation.click({ force: true });
-
-  // vérifier que l'on est bien sur la page de fin du quiz
-  await expect(page.locator('#app').getByText('Bien joué !')).toBeVisible();
-
-  const retourAccueil = page.getByText("Revenir à l'accueil");
-  await expect(retourAccueil).toBeVisible();
-  retourAccueil.click({ force: true });
-  await page.waitForTimeout(1000);
-
-  return page;
-}

@@ -1,5 +1,5 @@
 import { SpyDefiRepository } from './adapters/defi.repository.spy';
-import { SpyToDoListEventBus } from '../toDoList/spyTodoListEventBus';
+import { SpyToDoListEventBus } from '../toDoList/adapters/spyTodoListEventBus';
 import { expect } from 'vitest';
 import { ToDoListEvent } from '@/domaines/toDoList/toDoListEventBusImpl';
 import { EnvoyerReponseDefiUsecase } from '@/domaines/defi/envoyerReponseDefi.usecase';

@@ -61,13 +61,6 @@ app.use(pinia);
 const options = {
   router,
   tourMap: {
-    serviceTour: {
-      useModalOverlay: true,
-      defaultStepOptions: {
-        scrollTo: true,
-        classes: 'fr-text--bold',
-      },
-    },
     aideTour: {
       useModalOverlay: true,
       defaultStepOptions: {
@@ -82,14 +75,14 @@ const options = {
         classes: 'fr-text--bold',
       },
     },
-    bibliothequeTour: {
+    defiTour: {
       useModalOverlay: true,
       defaultStepOptions: {
         scrollTo: true,
         classes: 'fr-text--bold',
       },
     },
-    defiTour: {
+    universTour: {
       useModalOverlay: true,
       defaultStepOptions: {
         scrollTo: true,

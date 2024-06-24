@@ -5,8 +5,14 @@ export interface TodoList {
   titre: string;
   pointFinDeMission: number;
   derniere: boolean;
+  imageUrl: string;
   fait: TodoListItem[];
   aFaire: TodoListItem[];
+  featureDebloquee: {
+    feature: string;
+    titre: string;
+    description: string;
+  };
 }
 
 export interface TodoListItem {

@@ -6,6 +6,14 @@ export class SpySauvegarderUtilisateurSessionRepository implements SessionReposi
     return this._utilisateur;
   }
 
+  get nouvelleFeatureDebloqueeAEteAppele(): boolean {
+    return this._nouvelleFeatureDebloqueeAEteAppele;
+  }
+
+  get nouvelleFeatureDebloqueeArgs(): string {
+    return this._nouvelleFeatureDebloqueeArgs;
+  }
+
   private _utilisateur: Utilisateur = {
     id: '',
     nom: '',
@@ -14,6 +22,9 @@ export class SpySauvegarderUtilisateurSessionRepository implements SessionReposi
     fonctionnalitesDebloquees: [],
   };
 
+  private _nouvelleFeatureDebloqueeAEteAppele: boolean = false;
+  private _nouvelleFeatureDebloqueeArgs: string = '';
+
   sauvegarderUtilisateur(utilisateur: Utilisateur) {
     this._utilisateur = {
       ...this._utilisateur,
@@ -21,5 +32,8 @@ export class SpySauvegarderUtilisateurSessionRepository implements SessionReposi
     };
   }
 
-  nouvelleFeatureDebloquee(featureDebloquee: string): void {}
+  nouvelleFeatureDebloquee(featureDebloquee: string): void {
+    this._nouvelleFeatureDebloqueeAEteAppele = true;
+    this._nouvelleFeatureDebloqueeArgs = featureDebloquee;
+  }
 }

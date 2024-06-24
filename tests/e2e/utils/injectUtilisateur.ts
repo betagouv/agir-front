@@ -20,8 +20,6 @@ export class InjectUtilisateur {
         niveau: 1,
         nombreDePointsDansLeNiveau: 10,
         nombreDePointsDuNiveau: 100,
-        celebration: null,
-        afficherMissionsTermines: false,
       },
       tracking: {
         matomoEstInactif: true,

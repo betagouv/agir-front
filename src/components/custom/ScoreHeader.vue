@@ -1,133 +1,27 @@
 <template>
-  <div class="tag__progression niveau fr-text--bold">
+  <div class="tag__progression tag__progression--niveau fr-text--bold">
     {{ score.niveau }} <img width="16" src="/ic_star.svg" alt="niveau" />
   </div>
-  <div class="tag__progression score fr-text--bold">
+  <div class="tag__progression tag__progression--score fr-text--bold">
     {{ score.points }} <img width="16" src="/ic_score.svg" alt="score" />
   </div>
-
-  <Teleport to="body">
-    <Modale label="Modale de passage de niveau" id="passageDeNiveau" :radius="true" :is-footer-actions="false">
-      <template v-slot:contenu>
-        <ModalePassageDeNiveau :niveau="utilisateurStore().score.niveau" label-title="Modale de passage de niveau" />
-        <div class="text--center fr-my-3w">
-          <div v-if="utilisateurStore().score.celebration?.reveal">
-            <p class="fr-m-0 text--uppercase fr-text--xs text--bold text--gris-light">Section débloquée</p>
-            <h4 class="fr-h2 fr-my-0">{{ utilisateurStore().score.celebration!.reveal!.titre }}</h4>
-            <p class="fr-text--sm">{{ utilisateurStore().score.celebration!.reveal!.description }}</p>
-            <router-link
-              class="fr-btn fr-btn--icon-right fr-icon-arrow-right-line"
-              :to="{ name: utilisateurStore().score.celebration!.reveal!.routeName }"
-              @click.prevent="revealFonctionnalite"
-            >
-              Découvrir la fonctionnalité
-            </router-link>
-          </div>
-          <div v-else>
-            <button class="fr-btn fr-btn--icon-right fr-icon-arrow-right-line" aria-controls="passageDeNiveau">
-              Continuer
-            </button>
-          </div>
-        </div>
-      </template>
-    </Modale>
-    <button class="fr-btn fr-hidden" data-fr-opened="false" aria-controls="passageDeNiveau">
-      Modale avec zone d'action
-    </button>
-  </Teleport>
-
-  <Teleport to="body">
-    <Modale label="Modale de fin de missions" id="finDesMissions" :radius="true" :is-footer-actions="false" size="m">
-      <template v-slot:contenu>
-        <CoachFinDesMissions />
-      </template>
-    </Modale>
-    <button class="fr-btn fr-hidden" data-fr-opened="false" aria-controls="finDesMissions">
-      Modale avec zone d'action
-    </button>
-  </Teleport>
 </template>
 
 <script setup lang="ts">
-  import { computed, onMounted, onUnmounted, ref } from 'vue';
-  import CoachFinDesMissions from '@/components/custom/Coach/CoachFinDesMissions.vue';
-  import Modale from '@/components/custom/Modale/Modale.vue';
-  import ModaleActions from '@/components/custom/Modale/ModaleActions';
-  import ModalePassageDeNiveau from '@/components/custom/Modale/ModalePassageDeNiveau.vue';
-  import { useReveal } from '@/composables/useReveal';
-  import { SessionRepositoryStore } from '@/domaines/authentification/adapters/session.repository.store';
-  import { CelebrationRepositoryAxios } from '@/domaines/celebration/adapters/celebration.repository.axios';
-  import { ValiderCelebrationUsecase } from '@/domaines/celebration/validerCelebration.usecase';
+  import { computed, onMounted, onUnmounted } from 'vue';
   import { ChargementScorePresenterImpl } from '@/domaines/score/adapters/chargementScore.presenter.impl';
   import { ScoreRepositoryAxios } from '@/domaines/score/adapters/score.repository.axios';
   import { ChargementScoreUsecase } from '@/domaines/score/chargementScore.usecase';
   import { ScoreViewModel } from '@/domaines/score/ports/chargementScore.presenter';
   import { ThematiqueEvent, ThematiqueEventBusImpl } from '@/domaines/thematiques/thematiqueEventBusImpl';
   import { ToDoListEvent, ToDoListEventBusImpl } from '@/domaines/toDoList/toDoListEventBusImpl';
-  import { Fonctionnalites } from '@/shell/fonctionnalitesEnum';
   import { utilisateurStore } from '@/store/utilisateur';
 
-  const { selectionnerReveal } = useReveal();
-  const fonctionnaliteDebloque = ref<string>();
-
-  function revealFonctionnalite() {
-    modaleActions?.close();
-
-    const tour = selectionnerReveal(fonctionnaliteDebloque.value as Fonctionnalites);
-    tour.start();
-
-    // Ajout d'un écouteur pour fermer le tour lors du clic sur l'overlay
-    setTimeout(() => {
-      document.addEventListener(
-        'click',
-        function () {
-          tour.cancel();
-        },
-        { once: true },
-      );
-    }, 0);
-  }
-
   const score = computed(() => utilisateurStore().score);
-  let modaleActions: ModaleActions | null;
   const subscriberName = 'ScoreHeader';
 
   onMounted(() => {
     mettreAJourLeScore();
-
-    function sauvegarderLeScoreEnLocal(viewModel: ScoreViewModel) {
-      utilisateurStore().setScore(viewModel);
-    }
-
-    function declencherCelebration(celebrationId: string) {
-      if (utilisateurStore().score.afficherMissionsTermines) {
-        modaleActions = new ModaleActions('finDesMissions');
-        modaleActions.open();
-      } else {
-        modaleActions = new ModaleActions('passageDeNiveau');
-        modaleActions.open();
-      }
-
-      new ValiderCelebrationUsecase(new CelebrationRepositoryAxios()).execute(
-        utilisateurStore().utilisateur.id,
-        celebrationId,
-      );
-    }
-
-    function mettreAJourLeScore() {
-      const chargerScoreUseCase = new ChargementScoreUsecase(new ScoreRepositoryAxios(), new SessionRepositoryStore());
-      chargerScoreUseCase.execute(
-        utilisateurStore().utilisateur.id,
-        new ChargementScorePresenterImpl(async viewModel => {
-          sauvegarderLeScoreEnLocal(viewModel);
-
-          if (viewModel.celebration) {
-            declencherCelebration(viewModel.celebration.id);
-            fonctionnaliteDebloque.value = viewModel.celebration.reveal?.feature;
-          }
-        }),
-      );
-    }
 
     ThematiqueEventBusImpl.getInstance().subscribe(
       subscriberName,
@@ -177,6 +71,20 @@
       ThematiqueEvent.OBJECTIF_MISSION_POINTS_ONT_ETE_RECUPERE,
     );
   });
+
+  const sauvegarderLeScoreEnLocal = (viewModel: ScoreViewModel) => {
+    utilisateurStore().setScore(viewModel);
+  };
+
+  const mettreAJourLeScore = () => {
+    const chargerScoreUseCase = new ChargementScoreUsecase(new ScoreRepositoryAxios());
+    chargerScoreUseCase.execute(
+      utilisateurStore().utilisateur.id,
+      new ChargementScorePresenterImpl(async viewModel => {
+        sauvegarderLeScoreEnLocal(viewModel);
+      }),
+    );
+  };
 </script>
 
 <style scoped>
@@ -188,11 +96,11 @@
     border-radius: 8px;
   }
 
-  .tag__progression.score {
+  .tag__progression--score {
     background: rgba(104, 165, 50, 0.1);
   }
 
-  .tag__progression.niveau {
+  .tag__progression--niveau {
     background: rgba(237, 142, 0, 0.1);
   }
 </style>

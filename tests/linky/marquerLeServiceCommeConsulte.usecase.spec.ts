@@ -1,7 +1,7 @@
 import { MarquerLeServiceCommeConsulteUsecase } from '@/domaines/linky/marquerLeServiceCommeConsulte.usecase';
 import { LinkyRepositorySpy } from './adapters/linky.repository.spy';
 import { expect } from 'vitest';
-import { SpyToDoListEventBus } from '../toDoList/spyTodoListEventBus';
+import { SpyToDoListEventBus } from '../toDoList/adapters/spyTodoListEventBus';
 import { ToDoListEvent } from '@/domaines/toDoList/toDoListEventBusImpl';
 
 describe('Fichier de tests concernant le fait que le service linky a ete consulté', () => {
