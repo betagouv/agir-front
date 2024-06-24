@@ -41,13 +41,13 @@
   } else if (props.reponse === 'en_cours') {
     message.titre = '👍 Défi accepté';
     message.description =
-      'Merci pour votre réponse et bravo !<br> N’oubliez pas de mettre à jour le défi en cours quand vous l’avez réalisé sur la page d’accueil';
+      'À vous de jouer !<br>N’oubliez pas de mettre à jour le défi en cours lorsque vous l’avez réalisé en revenant sur l’action choisie.';
     message.gainDePoint = false;
     message.background = 'defi-accepete--message-success';
   } else if (props.reponse === 'fait') {
     message.titre = '🏆 Défi realisé ';
     message.description =
-      'Félicitations, chaque geste compte !<br> Retrouvez l’ensemble des actions que vous avez réalisé dans votre profil et de nouveaux défis à relever sur la page d’accueil';
+      'Félicitations, chaque geste compte !<br>Retrouvez l’ensemble des actions que vous avez réalisé dans votre profil et débloquez de nouveaux défis dans les univers.';
     message.gainDePoint = true;
     message.background = 'defi-accepete--message-success';
   } else if (props.reponse === 'abondon') {
