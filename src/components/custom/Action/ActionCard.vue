@@ -15,7 +15,7 @@
             </router-link>
           </p>
         </div>
-        <span class="action__points border border-radius--xs background--white display-block fr-text--bold fr-p-1w">
+        <span class="action__points background--white display-block fr-text--bold fr-p-1w">
           {{ defi.points }}
           <img width="16" src="/ic_score.svg" alt="point" />
         </span>

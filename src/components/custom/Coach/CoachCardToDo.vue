@@ -29,7 +29,7 @@
       </div>
     </div>
     <div class="fr-ml-auto">
-      <span v-if="points" class="border border-radius--xs background--white fr-text--bold fr-p-1w fr-mr-2w">
+      <span v-if="points" class="background--white fr-text--bold fr-p-1w fr-mr-2w">
         {{ points }}
         <img width="16" src="/ic_score.svg" alt="point" />
       </span>
