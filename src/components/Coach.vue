@@ -1,9 +1,11 @@
 <template>
   <div class="fr-container">
     <h1 class="fr-h1 fr-m-0 fr-mt-4w">Bonjour {{ utilisateurStore().utilisateur.prenom }} 👋</h1>
-    <p class="fr-text--xl">Réduire votre empreinte écologique : selon vos moyens, vos lieux de vie et vos envies</p>
+    <p class="fr-text--xl fr-mb-0">
+      Réduire votre empreinte écologique : selon vos moyens, vos lieux de vie et vos envies
+    </p>
   </div>
-  <div v-if="todoList && !todoList.derniere" class="fr-container fr-py-6w">
+  <div v-if="todoList && !todoList.derniere" class="fr-container fr-py-3w">
     <div id="container-survey"></div>
     <div class="fr-grid-row fr-grid-row--gutters">
       <div class="fr-col fr-col-lg-7">
@@ -25,14 +27,14 @@
       },
     }"
     id="univers"
-    class="fr-py-6w"
+    class="fr-pb-3w"
   >
     <div class="fr-container">
       <CoachUnivers :universViewModel="universViewModel" />
     </div>
   </section>
   <section
-    class="fr-py-6w background--white"
+    class="fr-py-3w background--white"
     id="defis"
     v-if="defisViewModel && defisViewModel.length > 0"
     v-tour-step:1="{
@@ -52,7 +54,7 @@
   <section
     id="recommandations"
     v-if="store.utilisateur.fonctionnalitesDebloquees.includes(Fonctionnalites.RECOMMANDATIONS)"
-    class="fr-py-6w fr-background-contrast--grey"
+    class="fr-py-3w fr-background-contrast--grey"
     v-tour-step:1="{
       tour: recommandationTour,
       options: {
