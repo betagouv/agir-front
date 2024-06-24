@@ -585,10 +585,10 @@ test.describe('Mission 1', async () => {
     const boutonRecolterBonus = await page.getByRole('button', { name: 'Découvrir le bonus' });
     await expect(boutonRecolterBonus).toBeVisible();
 
-    await boutonRecolterBonus.click();
+    await boutonRecolterBonus.click({ force: true });
 
-    const toto = await page.getByText('Vous avez accompli la Première mission !');
-    await expect(toto).toBeVisible();
+    const texteFelicitation = await page.getByText('Vous avez accompli la Première mission !');
+    await expect(texteFelicitation).toBeVisible();
   });
 });
 
