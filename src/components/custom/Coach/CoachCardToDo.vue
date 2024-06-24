@@ -6,7 +6,10 @@
     <span v-if="estEnCours" class="item__badge fr-badge background--green-light text--black text--transform-none">
       En cours !
     </span>
-    <span v-if="estRecommande" class="item__badge fr-badge background--bleu-info-dark text--white text--transform-none">
+    <span
+      v-else-if="estRecommande"
+      class="item__badge fr-badge background--bleu-info-dark text--white text--transform-none"
+    >
       Recommandé pour vous !
     </span>
     <img :src="picto" alt="" />
