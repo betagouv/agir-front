@@ -53,7 +53,9 @@ export class MissionThematiquePresenterImpl implements MissionThematiquePresente
             etapeTotal: missionThematique.progressionKyc.etapeTotal,
           },
           estBloquee: false,
-          points: 5,
+          points: missionThematique.items
+            .filter(item => item.type === InteractionType.KYC)
+            .reduce((sum, item) => sum + item.points, 0),
           aEteRealisee: missionThematique.progressionKyc.etapeCourante === missionThematique.progressionKyc.etapeTotal,
           url: `${RouteKycPath.KYC}${missionThematique.univers}/${missionThematique.idThematique}`,
           hash: undefined,
