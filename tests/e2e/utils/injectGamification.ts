@@ -9,7 +9,6 @@ export class InjectGamification {
       niveau: 0,
       current_points_in_niveau: 0,
       point_target_in_niveau: 0,
-      celebrations: [],
     };
   }
 
@@ -30,11 +29,6 @@ export class InjectGamification {
 
   avecPointsTargetInNiveau(point_target_in_niveau: number): InjectGamification {
     this._gamification.point_target_in_niveau = point_target_in_niveau;
-    return this;
-  }
-
-  avecCelebrations(celebrations: ScoreApiModel['celebrations']): InjectGamification {
-    this._gamification.celebrations = celebrations;
     return this;
   }
 
