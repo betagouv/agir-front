@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.14.0](https://github.com/betagouv/agir-front/compare/v1.13.0...v1.14.0) (2024-06-25)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* ajout d'un message explicatif à la bibliotheque quand aucun article n'a ete consulte ([#452](https://github.com/betagouv/agir-front/issues/452)) ([bad4401](https://github.com/betagouv/agir-front/commit/bad4401e77fccab3b0e45071251f9890fb71afc6))
+* suppression phrase d'accroche page d'acceuil ([#455](https://github.com/betagouv/agir-front/issues/455)) ([a3b8733](https://github.com/betagouv/agir-front/commit/a3b87332450f390ce32099583474f7a7cfaa2b30))
+
+
+### 🐛 Corrections de bogues
+
+* renvoyer le code ne soumet plus le formulaire ([#454](https://github.com/betagouv/agir-front/issues/454)) ([4158b22](https://github.com/betagouv/agir-front/commit/4158b22ab162cf1713a5ac21e10fd7e9165c813a))
+
 ## [1.13.0](https://github.com/betagouv/agir-front/compare/v1.12.0...v1.13.0) (2024-06-25)
 
 
