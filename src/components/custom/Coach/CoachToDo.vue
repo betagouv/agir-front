@@ -39,7 +39,7 @@
       </h3>
       <div v-if="!isDisableBonusFinDeToDo">
         <button
-          class="fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-gift-fill fr-text--lg background--white"
+          class="fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-gift-fill fr-text--lg background--white animation__button--shake"
           aria-controls="finDesMissions"
           data-fr-opened="false"
         >
