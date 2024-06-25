@@ -33,11 +33,13 @@ export interface TodoListViewModel {
   imageUrl: string;
   aFaire: TodoViewModel[];
   fait: TodoViewModel[];
-  featureDebloquee: {
-    titre: string;
-    feature: string;
-    description: string;
-  };
+  featureDebloquee:
+    | {
+        titre: string;
+        feature: string;
+        description: string;
+      }
+    | undefined;
 }
 
 export class ToDoListPresenterImpl implements ToDoListPresenter {

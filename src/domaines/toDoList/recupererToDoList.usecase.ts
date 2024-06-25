@@ -8,11 +8,13 @@ export interface TodoList {
   imageUrl: string;
   fait: TodoListItem[];
   aFaire: TodoListItem[];
-  featureDebloquee: {
-    feature: string;
-    titre: string;
-    description: string;
-  };
+  featureDebloquee:
+    | {
+        feature: string;
+        titre: string;
+        description: string;
+      }
+    | undefined;
 }
 
 export interface TodoListItem {

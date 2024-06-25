@@ -58,8 +58,8 @@
                 @recuperer-points-todo="recupererPointsTodo"
                 :nombre-de-points-a-gagner="todoList.pointFinDeMission"
                 :titre-de-mission="todoList.titre"
-                :titre-feature-debloquee="todoList.featureDebloquee.titre"
-                :description-feature-debloquee="todoList.featureDebloquee.description"
+                :titre-feature-debloquee="todoList.featureDebloquee?.titre"
+                :description-feature-debloquee="todoList.featureDebloquee?.description"
               />
             </template>
           </Modale>
@@ -104,7 +104,7 @@
       new SessionRepositoryStore(),
       ToDoListEventBusImpl.getInstance(),
     );
-    await usecase.execute(utilisateurStore().utilisateur.id, props.todoList.featureDebloquee.feature);
+    await usecase.execute(utilisateurStore().utilisateur.id, props.todoList.featureDebloquee!.feature);
     revealFonctionnalite();
   };
 
@@ -118,7 +118,7 @@
   function revealFonctionnalite() {
     modaleActions?.close();
 
-    const tour = selectionnerReveal(props.todoList.featureDebloquee.feature as Fonctionnalites);
+    const tour = selectionnerReveal(props.todoList.featureDebloquee!.feature as Fonctionnalites);
     tour.start();
 
     // Ajout d'un écouteur pour fermer le tour lors du clic sur l'overlay
