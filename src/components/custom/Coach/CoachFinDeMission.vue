@@ -27,8 +27,8 @@
   defineProps<{
     titreDeMission: string;
     nombreDePointsAGagner: number;
-    titreFeatureDebloquee: string;
-    descriptionFeatureDebloquee: string;
+    titreFeatureDebloquee: string | undefined;
+    descriptionFeatureDebloquee: string | undefined;
   }>();
 
   const emit = defineEmits(['recuperer-points-todo']);
