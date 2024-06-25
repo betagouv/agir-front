@@ -15,7 +15,7 @@
   <form @submit.prevent="definirMotDePasse">
     <InputText class="fr-col-md-5 fr-mt-2w" v-model="code" name="code" label="Code à usage unique" />
     <p class="fr-mt-4w fr-mb-0">Vous n’avez pas reçu de code ?</p>
-    <button class="fr-link fr-icon-mail-line fr-link--icon-left text--underline fr-mb-2w" @click="renvoyerCode">
+    <button class="fr-link fr-icon-mail-line fr-link--icon-left text--underline fr-mb-2w" @click.prevent="renvoyerCode">
       Renvoyer le code
     </button>
     <p class="fr-text--lg fr-mb-0">Définissez votre nouveau mot de passe</p>
