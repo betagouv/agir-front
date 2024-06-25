@@ -11,7 +11,7 @@
       <ActionCard :defi="defi" />
     </li>
   </ul>
-  <router-link :to="{ name: RouteCompteName.DEFIS }" class="fr-link"> Voir toutes mes actions </router-link>
+  <router-link :to="{ name: RouteCompteName.DEFIS }" class="fr-link"> Voir toutes vos actions </router-link>
 </template>
 
 <script setup lang="ts">
