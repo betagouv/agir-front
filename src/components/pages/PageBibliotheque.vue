@@ -15,6 +15,15 @@
       <div class="fr-col-md-8 fr-col-12">
         <h2 class="fr-h4">{{ bibliothequeViewModel.articles.length }} articles</h2>
         <div v-if="isLoadingFiltre">Chargement en cours ...</div>
+        <div v-else-if="bibliothequeViewModel.articles.length === 0">
+          <div class="text--center">
+            <img src="/bibliotheque_illustration.svg" alt="" />
+            <h3 class="fr-h4 fr-mt-2w">Débloquez des articles en complétant des missions !</h3>
+            <router-link class="fr-btn fr-btn--lg" :to="{ name: RouteCoachName.COACH }">
+              Retourner à l'accueil
+            </router-link>
+          </div>
+        </div>
         <div v-else class="fr-grid-row fr-grid-row--gutters">
           <div class="fr-col-md-6 fr-col-12" v-for="article in bibliothequeViewModel.articles" :key="article.titre">
             <BibliothequeCard
@@ -44,6 +53,7 @@
   import { ChargerBibliothequeUsecase } from '@/domaines/bibliotheque/chargerBibliotheque.usecase';
   import { FiltrerBibliothequeUsecase } from '@/domaines/bibliotheque/filtrerBibliotheque.usecase';
   import { BibliothequeViewModel } from '@/domaines/bibliotheque/ports/bibliotheque.presenter';
+  import { RouteCoachName } from '@/router/coach/routeCoachName';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const { id: utilisateurId } = utilisateurStore().utilisateur;
