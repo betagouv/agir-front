@@ -5,7 +5,7 @@
       Réduire votre empreinte écologique : selon vos moyens, vos lieux de vie et vos envies
     </p>
   </div>
-  <div v-if="todoList && !todoList.derniere" class="fr-container fr-py-3w">
+  <div v-if="todoList && !todoList.derniere" class="fr-container fr-pt-3w">
     <div id="container-survey"></div>
     <div class="fr-grid-row fr-grid-row--gutters">
       <div class="fr-col fr-col-lg-7">
@@ -27,7 +27,7 @@
       },
     }"
     id="univers"
-    class="fr-pb-3w"
+    class="fr-py-3w"
   >
     <div class="fr-container">
       <CoachUnivers :universViewModel="universViewModel" />
