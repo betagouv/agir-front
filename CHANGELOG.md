@@ -1,5 +1,59 @@
 # Changelog
 
+## [1.13.0](https://github.com/betagouv/agir-front/compare/v1.12.0...v1.13.0) (2024-06-25)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* affichage d'un texte explicatif quand pas de defis ([#442](https://github.com/betagouv/agir-front/issues/442)) ([ee4a18c](https://github.com/betagouv/agir-front/commit/ee4a18c31b1487dee59673969b40c22a8d91e846))
+* affichage univers bloque ([#432](https://github.com/betagouv/agir-front/issues/432)) ([fd7de5e](https://github.com/betagouv/agir-front/commit/fd7de5e83e7f78d58e326aad300c4ab0cb18da64))
+* afficher l'état du défi (en cours) dans les thématiques ([#435](https://github.com/betagouv/agir-front/issues/435)) ([34eeded](https://github.com/betagouv/agir-front/commit/34eeded976745424a613024fd008930a3e2039dc))
+* afficher le niveau d'une thématique ([#425](https://github.com/betagouv/agir-front/issues/425)) ([7c40b89](https://github.com/betagouv/agir-front/commit/7c40b89dac2ed816fa553a6a2323c9967004ffce))
+* afficher le nombre de points pour les objectifs de missions à faire ([#422](https://github.com/betagouv/agir-front/issues/422)) ([672f4ff](https://github.com/betagouv/agir-front/commit/672f4ff5e12630de53d8830ca6fbaff79c55b4d3))
+* ajout d'un animation shake au bouton découvrir le bonus ([#446](https://github.com/betagouv/agir-front/issues/446)) ([5765b5d](https://github.com/betagouv/agir-front/commit/5765b5d6c3dc4e4ce3185f294d61ee38c9f2489a))
+* ajout de l'aide sur la saisie du rfr et part dans le compte ([#441](https://github.com/betagouv/agir-front/issues/441)) ([72e8851](https://github.com/betagouv/agir-front/commit/72e885132dfa28f067b313254857133f28db5d5a))
+* ajout de l'année de naissance à l'inscription ([#420](https://github.com/betagouv/agir-front/issues/420)) ([c708e56](https://github.com/betagouv/agir-front/commit/c708e5681e7124d5bc120fae1b6552d04ecd603e))
+* ajout tag recommandé pour vous aux défis ([#421](https://github.com/betagouv/agir-front/issues/421)) ([3cdbe12](https://github.com/betagouv/agir-front/commit/3cdbe12509c15365f93cf5c67d2d170a9907cc1c))
+* Ajouter un bouton retour en bas des missions ([#445](https://github.com/betagouv/agir-front/issues/445)) ([15c7369](https://github.com/betagouv/agir-front/commit/15c7369f4edc03ec4316791ecff117d74eafcf7d))
+* augmentation de la font size du breadcrumb ([#428](https://github.com/betagouv/agir-front/issues/428)) ([3ac3cef](https://github.com/betagouv/agir-front/commit/3ac3cefe8e085b94d198357b25e23020c7cb5bb8))
+* decaler points missions à droite ([#434](https://github.com/betagouv/agir-front/issues/434)) ([2fbf236](https://github.com/betagouv/agir-front/commit/2fbf2364e3685539914f53f8d6c47d422285e3d8))
+* diriger vers connexion quand le mail est connu ([#418](https://github.com/betagouv/agir-front/issues/418)) ([f0c1bc2](https://github.com/betagouv/agir-front/commit/f0c1bc2d00aa1b86af6be55da2bfa5eb8df92b1a))
+* fil d'ariane à jours en fonction du parcours ([#429](https://github.com/betagouv/agir-front/issues/429)) ([fd6a659](https://github.com/betagouv/agir-front/commit/fd6a659bde09135fd5123d01f089fb891e983c86))
+* gestion de la navigation vers les articles ([#413](https://github.com/betagouv/agir-front/issues/413)) ([5cf3827](https://github.com/betagouv/agir-front/commit/5cf38272bc8e478bbbab8652156d4303d490c926))
+* gestion de la navigation vers les defis ([#414](https://github.com/betagouv/agir-front/issues/414)) ([91e574f](https://github.com/betagouv/agir-front/commit/91e574fc5f595ca254e87c2c10f633e4d44ac5ad))
+* gestion de la navigation vers les quizz ([#412](https://github.com/betagouv/agir-front/issues/412)) ([4d458fa](https://github.com/betagouv/agir-front/commit/4d458fa012dc6f17bd4b522738e473dbeeb353b3))
+* kyc thematiques ([#409](https://github.com/betagouv/agir-front/issues/409)) ([c4b2fe1](https://github.com/betagouv/agir-front/commit/c4b2fe1731ebb0f981e7ba3b77398999cf16c619))
+* masquer niveau thématique si non défini ([#433](https://github.com/betagouv/agir-front/issues/433)) ([e585ffd](https://github.com/betagouv/agir-front/commit/e585ffd0dbb5eee01d5fd92e6273b449a621f427))
+* mise a jour mission post onboarding ([#438](https://github.com/betagouv/agir-front/issues/438)) ([6fa0f12](https://github.com/betagouv/agir-front/commit/6fa0f128c6b0e9f36308203194419c8eaf882572))
+* modification du wording defi en action dans la page compte ([#448](https://github.com/betagouv/agir-front/issues/448)) ([6440fe9](https://github.com/betagouv/agir-front/commit/6440fe9a2bdb094373445c78112c2742cbccd711))
+* modification wording defi ([#450](https://github.com/betagouv/agir-front/issues/450)) ([0e376a4](https://github.com/betagouv/agir-front/commit/0e376a4a0ba7a8ab6f723837d972c176730031e4))
+* modification wording des sous titres de mission ([#439](https://github.com/betagouv/agir-front/issues/439)) ([949de32](https://github.com/betagouv/agir-front/commit/949de3289b4474a735fcdfd73fede076190e29e4))
+* Ne pas afficher le 'pourquoi' et 'astuces' si le défi n’a pas de contenu pour ces parties là ([#417](https://github.com/betagouv/agir-front/issues/417)) ([112c339](https://github.com/betagouv/agir-front/commit/112c3393c0676db606ee2d19d6ed06752679922a))
+* remonter les alertes liés à un formulaire ([#437](https://github.com/betagouv/agir-front/issues/437)) ([5546881](https://github.com/betagouv/agir-front/commit/554688192f9f06ab442444cf265ea4a6dc94775a))
+* retirer la bordure des gains de points non cliquable ([#449](https://github.com/betagouv/agir-front/issues/449)) ([cb0afda](https://github.com/betagouv/agir-front/commit/cb0afda5164e9454f7a0cdd62d14bc6adcd215de))
+* scroll alerte apres modification du compte ([#431](https://github.com/betagouv/agir-front/issues/431)) ([4406bb3](https://github.com/betagouv/agir-front/commit/4406bb3985baeb59ec6ee41c99be42e7a613f0fa))
+* suppression onboarding avant création de compte ([#436](https://github.com/betagouv/agir-front/issues/436)) ([d8a7573](https://github.com/betagouv/agir-front/commit/d8a7573390cd846bf1d90df4eb1fa39e3928eca2))
+* ui thematique terminee ([#415](https://github.com/betagouv/agir-front/issues/415)) ([5f0012a](https://github.com/betagouv/agir-front/commit/5f0012a94dfd320b18bbd817bcf684fdd8e14e50))
+* wording installer plutôt qu'ajouter sur la liste des services ([#426](https://github.com/betagouv/agir-front/issues/426)) ([9cfd45d](https://github.com/betagouv/agir-front/commit/9cfd45d44254146852ab3155d54845aafbb3a1bf))
+
+
+### 🐛 Corrections de bogues
+
+* affichage mauvaise reponse d'un quiz ([#423](https://github.com/betagouv/agir-front/issues/423)) ([0369bf1](https://github.com/betagouv/agir-front/commit/0369bf1082cb474d4b25d1a430b296baa729fd00))
+* Afficher les défis “en cours” dans les missions ([#444](https://github.com/betagouv/agir-front/issues/444)) ([5e5230e](https://github.com/betagouv/agir-front/commit/5e5230ec350aeba0bcc2f051dea1453093f17c19))
+* bouton découvrir le bonus ([#451](https://github.com/betagouv/agir-front/issues/451)) ([c67900c](https://github.com/betagouv/agir-front/commit/c67900c052a05475d0449ca3e34c614cb2d84ff9))
+* overlap bouton deconnexion ([#427](https://github.com/betagouv/agir-front/issues/427)) ([070751d](https://github.com/betagouv/agir-front/commit/070751dfd228acc75d2c9d2cab0e5be20c20255e))
+* Récolter vos points sur les KYC = la somme des points ([#443](https://github.com/betagouv/agir-front/issues/443)) ([100175b](https://github.com/betagouv/agir-front/commit/100175ba3f27492f75d98bf032a2f467afe4c482))
+* resolution d'un problème de synchro lors de la mise à jour du profil ([#424](https://github.com/betagouv/agir-front/issues/424)) ([bc807c6](https://github.com/betagouv/agir-front/commit/bc807c61e64464d4d9b0b12c2eb66e6b9af300cf))
+
+
+### 👷 Autres changements
+
+* amelioration du responsive ([#430](https://github.com/betagouv/agir-front/issues/430)) ([1bd9155](https://github.com/betagouv/agir-front/commit/1bd9155f45e1c7ea7f9eaeb94ab21dd7c9b0b83d))
+* marge mission ([6161ab8](https://github.com/betagouv/agir-front/commit/6161ab89cf41ea153eb5f8c31ff3f2e4a2632cbe))
+* nouvelle route api defis ([#416](https://github.com/betagouv/agir-front/issues/416)) ([7b4ddf2](https://github.com/betagouv/agir-front/commit/7b4ddf20ecf98429962fcc5a5e27ff674e242beb))
+* Réduire les marges entre les missions premiers pas et les univers ([#447](https://github.com/betagouv/agir-front/issues/447)) ([569977d](https://github.com/betagouv/agir-front/commit/569977dbc0f5ab715870701280e7b811249f5bcc))
+
 ## [1.12.0](https://github.com/betagouv/agir-front/compare/v1.11.0...v1.12.0) (2024-05-29)
 
 
