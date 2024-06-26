@@ -1,10 +1,19 @@
+import { SessionRepository } from '@/domaines/authentification/authentifierUtilisateur.usecase';
 import { ChargementScorePresenter } from '@/domaines/score/ports/chargementScore.presenter';
 import { ScoreRepository } from '@/domaines/score/ports/score.repository';
 
 export class ChargementScoreUsecase {
-  constructor(private scoreRepository: ScoreRepository) {}
-  async execute(idUtilisateur: string, presenter: ChargementScorePresenter): Promise<void> {
+  constructor(
+    private scoreRepository: ScoreRepository,
+    private sessionRepostory: SessionRepository,
+  ) {}
+  async execute(idUtilisateur: string): Promise<void> {
     const score = await this.scoreRepository.getScore(idUtilisateur);
-    presenter.presenteScore(score);
+    this.sessionRepostory.sauvegarderScore({
+      points: score.points,
+      niveau: score.niveau,
+      nombreDePointsDansLeNiveau: score.nombreDePointsDansLeNiveau,
+      nombreDePointsDuNiveau: score.nombreDePointsDuNiveau,
+    });
   }
 }

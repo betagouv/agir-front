@@ -1,12 +1,12 @@
 import { defineStore } from 'pinia';
 import { Utilisateur } from '@/domaines/authentification/ports/utilisateur.repository';
 import { EmpreinteViewModel } from '@/domaines/bilan/adapters/chargementEmpreinte.presenter.impl';
-import { ScoreViewModel } from '@/domaines/score/ports/chargementScore.presenter';
+import { Score } from '@/domaines/score/ports/score.repository';
 
 export interface UtilisateurStore {
   utilisateur: Utilisateur;
   valeurBilanCarbone: EmpreinteViewModel;
-  score: ScoreViewModel;
+  score: Score;
   tracking: {
     matomoEstInactif: boolean;
   };
@@ -46,8 +46,8 @@ export const utilisateurStore = defineStore('utilisateur', {
     setValeurBilanCarbone(valeurBilanCarbone: EmpreinteViewModel) {
       this.valeurBilanCarbone = valeurBilanCarbone;
     },
-    setScore(scoreViewModel: ScoreViewModel) {
-      this.score = scoreViewModel;
+    setScore(score: Score) {
+      this.score = score;
     },
 
     reset() {
