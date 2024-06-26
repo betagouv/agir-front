@@ -71,10 +71,7 @@
   });
 
   onUnmounted(() => {
-    ThematiqueEventBusImpl.getInstance().unsubscribe(
-      subscriberName,
-      ThematiqueEvent.OBJECTIF_MISSION_POINTS_ONT_ETE_RECUPERE,
-    );
+    ThematiqueEventBusImpl.getInstance().unsubscribeToAllEvents(subscriberName);
   });
 </script>
 

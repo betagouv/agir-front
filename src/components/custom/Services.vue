@@ -66,8 +66,7 @@
   });
 
   onUnmounted(() => {
-    ServiceEventBusImpl.getInstance().unsubscribe(subscriberName, ServiceEvent.SERVICE_SUPPRIME);
-    ServiceEventBusImpl.getInstance().unsubscribe(subscriberName, ServiceEvent.SERVICE_INSTALLE);
+    ServiceEventBusImpl.getInstance().unsubscribeToAllEvents(subscriberName);
   });
 </script>
 

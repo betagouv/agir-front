@@ -2,7 +2,7 @@
   <div class="fr-container">
     <h1 class="fr-h1 fr-m-0 fr-mt-4w">Bonjour {{ utilisateurStore().utilisateur.prenom }} 👋</h1>
     <p class="fr-text--xl fr-mb-0">
-      Réduire votre empreinte écologique : selon vos moyens, vos lieux de vie et vos envies
+      Réduire votre empreinte écologique&nbsp;: selon vos moyens, vos lieux de vie et vos envies
     </p>
   </div>
   <div v-if="todoList && !todoList.derniere" class="fr-container fr-pt-3w">
@@ -66,7 +66,7 @@
   >
     <div class="fr-container" v-if="!isLoading">
       <h2 class="fr-h2 fr-mb-0">Recommandé, pour vous</h2>
-      <p class="fr-text--xl">Une sélection d’articles et de services, pour vous, selon vos préférences !</p>
+      <p class="fr-text--xl">Une sélection d’articles et de services, pour vous, selon vos préférences&nbsp;!</p>
       <CoachRecommandations
         v-if="recommandationsPersonnaliseesViewModel"
         :recommandations="recommandationsPersonnaliseesViewModel.autresRecommandations"
@@ -188,7 +188,6 @@
   });
 
   onUnmounted(() => {
-    ToDoListEventBusImpl.getInstance().unsubscribe(subscriberName, ToDoListEvent.TODO_POINTS_ONT_ETE_RECUPERE);
-    ToDoListEventBusImpl.getInstance().unsubscribe(subscriberName, ToDoListEvent.TODO_A_ETE_TERMINEE);
+    ToDoListEventBusImpl.getInstance().unsubscribeToAllEvents(subscriberName);
   });
 </script>
