@@ -1,5 +1,4 @@
 import { Utilisateur, UtilisateurRepository } from '@/domaines/authentification/ports/utilisateur.repository';
-import { ScoreViewModel } from '@/domaines/score/ports/chargementScore.presenter';
 import { Score } from '@/domaines/score/ports/score.repository';
 
 export interface SessionRepository {
