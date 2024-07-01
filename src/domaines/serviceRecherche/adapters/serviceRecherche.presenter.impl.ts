@@ -13,16 +13,6 @@ export interface SuggestionServiceViewModel {
   };
 }
 
-export interface CarouselServiceViewModel {
-  titre: string;
-  img: string;
-  information?: string;
-  tag: {
-    label: string;
-    style: string;
-  };
-}
-
 export interface ServiceRechercheViewModel {
   titre: string;
   favoris?: SuggestionServiceViewModel[];

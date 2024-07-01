@@ -1,10 +1,16 @@
 import { ServiceRecherchePresenter } from '@/domaines/serviceRecherche/ports/serviceRecherche.presenter';
 import { ServiceRechercheRepository } from '@/domaines/serviceRecherche/ports/serviceRecherche.repository';
 
+interface ServiceRechercheResultat {
+  titre: string;
+  adresse?: string;
+  nombreMiseEnFavoris: number;
+}
+
 export interface ServiceRecherche {
   titre: string;
-  suggestions: { titre: string; adresse?: string; nombreMiseEnFavoris: number }[];
-  favoris: { titre: string; adresse?: string; nombreMiseEnFavoris: number }[];
+  suggestions: ServiceRechercheResultat[];
+  favoris: ServiceRechercheResultat[];
 }
 
 export class RecupererServiceRechercheUsecase {
