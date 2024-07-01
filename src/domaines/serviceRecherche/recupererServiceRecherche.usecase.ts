@@ -4,6 +4,7 @@ import { ServiceRechercheRepository } from '@/domaines/serviceRecherche/ports/se
 export interface ServiceRecherche {
   titre: string;
   suggestions: { titre: string; adresse?: string; nombreMiseEnFavoris: number }[];
+  favoris: { titre: string; adresse?: string; nombreMiseEnFavoris: number }[];
 }
 
 export class RecupererServiceRechercheUsecase {
@@ -14,7 +15,7 @@ export class RecupererServiceRechercheUsecase {
     idService: string,
     recupererServiceRecherchePresenter: ServiceRecherchePresenter,
   ) {
-    const service = await this.serviceRechercheRepository.getService(idUtilisateur, idService);
+    const service = await this.serviceRechercheRepository.recupererService(idUtilisateur, idService);
     recupererServiceRecherchePresenter.presente(service);
   }
 }

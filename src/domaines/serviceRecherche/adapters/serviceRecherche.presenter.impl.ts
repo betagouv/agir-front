@@ -25,7 +25,7 @@ export interface CarouselServiceViewModel {
 
 export interface ServiceRechercheViewModel {
   titre: string;
-  carousel?: CarouselServiceViewModel[];
+  favoris?: SuggestionServiceViewModel[];
   suggestions: SuggestionServiceViewModel[];
   aside: {
     nom: string;
@@ -47,7 +47,11 @@ export class ServiceRecherchePresenterImpl implements ServiceRecherchePresenter 
         description: elem.adresse,
         nombreMiseEnFavoris: elem.nombreMiseEnFavoris,
       })),
-      carousel: undefined,
+      favoris: serviceRecherche.favoris.map(elem => ({
+        titre: elem.titre,
+        description: elem.adresse,
+        nombreMiseEnFavoris: elem.nombreMiseEnFavoris,
+      })),
       aside: {
         nom: 'Mon service lorem',
         description: 'Ceci est la description de mon service',
