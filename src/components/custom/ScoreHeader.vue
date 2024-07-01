@@ -14,7 +14,7 @@
   import { ChargementScoreUsecase } from '@/domaines/score/chargementScore.usecase';
   import { ScoreViewModel } from '@/domaines/score/ports/chargementScore.presenter';
   import { ThematiqueEvent, ThematiqueEventBusImpl } from '@/domaines/thematiques/thematiqueEventBusImpl';
-  import { ToDoListEvent, ToDoListEventBusImpl } from '@/domaines/toDoList/toDoListEventBusImpl';
+  import { ToDoListEventBusImpl } from '@/domaines/toDoList/toDoListEventBusImpl';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const score = computed(() => utilisateurStore().score);
@@ -31,45 +31,14 @@
       },
     );
 
-    ToDoListEventBusImpl.getInstance().subscribe(subscriberName, ToDoListEvent.TODO_POINTS_ONT_ETE_RECUPERE, () => {
-      mettreAJourLeScore();
-    });
-    ToDoListEventBusImpl.getInstance().subscribe(subscriberName, ToDoListEvent.TODO_ARTICLE_A_ETE_LU, () => {
-      mettreAJourLeScore();
-    });
-    ToDoListEventBusImpl.getInstance().subscribe(subscriberName, ToDoListEvent.TODO_A_ETE_TERMINEE, () => {
-      mettreAJourLeScore();
-    });
-    ToDoListEventBusImpl.getInstance().subscribe(subscriberName, ToDoListEvent.TODO_QUIZ_ETE_TERMINE, () => {
-      mettreAJourLeScore();
-    });
-    ToDoListEventBusImpl.getInstance().subscribe(subscriberName, ToDoListEvent.TODO_KYC_A_ETE_REPONDU, () => {
-      mettreAJourLeScore();
-    });
-    ToDoListEventBusImpl.getInstance().subscribe(
-      subscriberName,
-      ToDoListEvent.TODO_RECOMMANDATION_A_ETE_CLIQUEE,
-      () => {
-        mettreAJourLeScore();
-      },
-    );
-    ToDoListEventBusImpl.getInstance().subscribe(subscriberName, ToDoListEvent.TODO_LINKY_A_ETE_CONSULTE, () => {
+    ToDoListEventBusImpl.getInstance().subscribeToAllEvents(subscriberName, () => {
       mettreAJourLeScore();
     });
   });
 
   onUnmounted(() => {
-    ToDoListEventBusImpl.getInstance().unsubscribe(subscriberName, ToDoListEvent.TODO_POINTS_ONT_ETE_RECUPERE);
-    ToDoListEventBusImpl.getInstance().unsubscribe(subscriberName, ToDoListEvent.TODO_ARTICLE_A_ETE_LU);
-    ToDoListEventBusImpl.getInstance().unsubscribe(subscriberName, ToDoListEvent.TODO_A_ETE_TERMINEE);
-    ToDoListEventBusImpl.getInstance().unsubscribe(subscriberName, ToDoListEvent.TODO_QUIZ_ETE_TERMINE);
-    ToDoListEventBusImpl.getInstance().unsubscribe(subscriberName, ToDoListEvent.TODO_KYC_A_ETE_REPONDU);
-    ToDoListEventBusImpl.getInstance().unsubscribe(subscriberName, ToDoListEvent.TODO_RECOMMANDATION_A_ETE_CLIQUEE);
-    ToDoListEventBusImpl.getInstance().unsubscribe(subscriberName, ToDoListEvent.TODO_LINKY_A_ETE_CONSULTE);
-    ThematiqueEventBusImpl.getInstance().unsubscribe(
-      subscriberName,
-      ThematiqueEvent.OBJECTIF_MISSION_POINTS_ONT_ETE_RECUPERE,
-    );
+    ToDoListEventBusImpl.getInstance().unsubscribeToAllEvents(subscriberName);
+    ThematiqueEventBusImpl.getInstance().unsubscribeToAllEvents(subscriberName);
   });
 
   const sauvegarderLeScoreEnLocal = (viewModel: ScoreViewModel) => {
