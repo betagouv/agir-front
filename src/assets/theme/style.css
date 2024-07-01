@@ -42,10 +42,6 @@ h2 {
   font-size: 24px;
   margin-bottom: 20px;
 }
-h3 {
-  font-size: 18px;
-  margin-right: 10px;
-}
 
 .flex-column {
   flex-direction: column;
@@ -398,6 +394,10 @@ h3 {
 
 .opacity-6 {
   opacity: 0.6;
+}
+
+.overflow--hidden {
+  overflow: hidden;
 }
 
 @media print {
