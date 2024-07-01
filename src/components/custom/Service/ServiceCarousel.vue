@@ -6,14 +6,14 @@
       aria-label="Liste des fonctionnalités du site"
     >
       <li
-        v-for="(carouselItemServiceViewModel, index) in carouselServiceViewModel"
+        v-for="(serviceRechercheFavorisViewModel, index) in servicesRechercheFavorisViewModel"
         :key="index"
         class="fr-col-md-3 fr-col-7"
         aria-roledescription="slide"
         :aria-current="index === activeSlide"
         :aria-hidden="index !== activeSlide"
       >
-        <ServiceCarouselItem :carousel-service-view-model="carouselItemServiceViewModel" />
+        <ServiceCarouselItem :services-recherche-favoris="serviceRechercheFavorisViewModel" />
       </li>
     </ul>
     <ul class="dots list-style-none fr-pl-0" aria-label="indicateurs">
@@ -35,7 +35,7 @@
   import ServiceCarouselItem from '@/components/custom/Service/ServiceCarouselItem.vue';
   import { ServiceRechercheViewModel } from '@/domaines/serviceRecherche/adapters/serviceRecherche.presenter.impl';
 
-  defineProps<{ carouselServiceViewModel: NonNullable<ServiceRechercheViewModel['carousel']> }>();
+  defineProps<{ servicesRechercheFavorisViewModel: NonNullable<ServiceRechercheViewModel['suggestions']> }>();
 
   const slides = [
     {

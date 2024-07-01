@@ -7,8 +7,8 @@
     <h1 class="fr-h2">{{ serviceRechercheViewModel.titre }}</h1>
     <div class="fr-grid-row fr-grid-row--gutters">
       <div class="fr-col-12 fr-col-md-8">
-        <section v-if="serviceRechercheViewModel.carousel">
-          <ServiceCarousel :carousel-service-view-model="serviceRechercheViewModel.carousel" />
+        <section v-if="serviceRechercheViewModel.favoris">
+          <ServiceCarousel :services-recherche-favoris-view-model="serviceRechercheViewModel.favoris" />
         </section>
         <section v-if="serviceRechercheViewModel.suggestions" class="fr-py-6w">
           <ServiceListeCarte :suggestions-service-view-model="serviceRechercheViewModel.suggestions" />
