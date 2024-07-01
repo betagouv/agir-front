@@ -14,9 +14,9 @@ interface ServiceRechercheApiModel {
 
 export class ServiceRechercheAxios implements ServiceRechercheRepository {
   @intercept401()
-  async getService(idUtilisateur: string, idService: string): Promise<ServiceRecherche> {
+  async recupererService(idUtilisateur: string, idService: string): Promise<ServiceRecherche> {
     const axiosInstance = AxiosFactory.getAxios();
-    const response = await axiosInstance.post<ServiceRechercheApiModel[]>(
+    const responseSuggestions = await axiosInstance.post<ServiceRechercheApiModel[]>(
       `/utilisateurs/${idUtilisateur}/recherche_services/${idService}/search`,
       {
         categorie: 'lieux_collaboratifs',
@@ -25,9 +25,18 @@ export class ServiceRechercheAxios implements ServiceRechercheRepository {
       },
     );
 
+    const responseFavoris = await axiosInstance.get<ServiceRechercheApiModel[]>(
+      `/utilisateurs/${idUtilisateur}/recherche_services/${idService}/favoris`,
+    );
+
     return {
       titre: 'Mon titre',
-      suggestions: response.data.map(elem => ({
+      suggestions: responseSuggestions.data.map(elem => ({
+        titre: elem.titre,
+        adresse: `${elem.adresse_rue}, ${elem.adresse_nom_ville} - ${elem.adresse_code_postal}`,
+        nombreMiseEnFavoris: elem.nombre_favoris,
+      })),
+      favoris: responseFavoris.data.map(elem => ({
         titre: elem.titre,
         adresse: `${elem.adresse_rue}, ${elem.adresse_nom_ville} - ${elem.adresse_code_postal}`,
         nombreMiseEnFavoris: elem.nombre_favoris,
