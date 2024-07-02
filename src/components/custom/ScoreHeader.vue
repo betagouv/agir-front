@@ -9,10 +9,9 @@
 
 <script setup lang="ts">
   import { computed, onMounted, onUnmounted } from 'vue';
-  import { ChargementScorePresenterImpl } from '@/domaines/score/adapters/chargementScore.presenter.impl';
+  import { SessionRepositoryStore } from '@/domaines/authentification/adapters/session.repository.store';
   import { ScoreRepositoryAxios } from '@/domaines/score/adapters/score.repository.axios';
   import { ChargementScoreUsecase } from '@/domaines/score/chargementScore.usecase';
-  import { ScoreViewModel } from '@/domaines/score/ports/chargementScore.presenter';
   import { ThematiqueEvent, ThematiqueEventBusImpl } from '@/domaines/thematiques/thematiqueEventBusImpl';
   import { ToDoListEventBusImpl } from '@/domaines/toDoList/toDoListEventBusImpl';
   import { utilisateurStore } from '@/store/utilisateur';
@@ -41,18 +40,9 @@
     ThematiqueEventBusImpl.getInstance().unsubscribeToAllEvents(subscriberName);
   });
 
-  const sauvegarderLeScoreEnLocal = (viewModel: ScoreViewModel) => {
-    utilisateurStore().setScore(viewModel);
-  };
-
   const mettreAJourLeScore = () => {
-    const chargerScoreUseCase = new ChargementScoreUsecase(new ScoreRepositoryAxios());
-    chargerScoreUseCase.execute(
-      utilisateurStore().utilisateur.id,
-      new ChargementScorePresenterImpl(async viewModel => {
-        sauvegarderLeScoreEnLocal(viewModel);
-      }),
-    );
+    const chargerScoreUseCase = new ChargementScoreUsecase(new ScoreRepositoryAxios(), new SessionRepositoryStore());
+    chargerScoreUseCase.execute(utilisateurStore().utilisateur.id);
   };
 </script>
 

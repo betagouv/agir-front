@@ -1,5 +1,6 @@
 import { SessionRepository } from '@/domaines/authentification/authentifierUtilisateur.usecase';
 import { Utilisateur } from '@/domaines/authentification/ports/utilisateur.repository';
+import { Score } from '@/domaines/score/ports/score.repository';
 import { utilisateurStore } from '@/store/utilisateur';
 
 export class SessionRepositoryStore implements SessionRepository {
@@ -13,5 +14,9 @@ export class SessionRepositoryStore implements SessionRepository {
 
   nouvelleFeatureDebloquee(featureDebloquee: string): void {
     utilisateurStore().utilisateur.fonctionnalitesDebloquees.push(featureDebloquee);
+  }
+
+  sauvegarderScore(score: Score): void {
+    utilisateurStore().setScore(score);
   }
 }

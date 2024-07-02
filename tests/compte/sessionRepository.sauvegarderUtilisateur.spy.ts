@@ -1,5 +1,6 @@
 import { SessionRepository } from '@/domaines/authentification/authentifierUtilisateur.usecase';
 import { Utilisateur } from '@/domaines/authentification/ports/utilisateur.repository';
+import { Score } from '@/domaines/score/ports/score.repository';
 
 export class SpySauvegarderUtilisateurSessionRepository implements SessionRepository {
   get utilisateur(): Utilisateur {
@@ -36,4 +37,6 @@ export class SpySauvegarderUtilisateurSessionRepository implements SessionReposi
     this._nouvelleFeatureDebloqueeAEteAppele = true;
     this._nouvelleFeatureDebloqueeArgs = featureDebloquee;
   }
+
+  sauvegarderScore(score: Score): void {}
 }
