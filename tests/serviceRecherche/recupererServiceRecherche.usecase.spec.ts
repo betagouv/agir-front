@@ -42,12 +42,22 @@ describe("Fichier de tests concernant la récuperation de service d'un recherche
       expect(catalogueViewModel).toStrictEqual<ServiceRechercheViewModel>({
         titre: 'Mon service',
         suggestions: [
-          { titre: 'titre 1', description: '2 Avenue de la République, Palaiseau - 91120', nombreMiseEnFavoris: 12 },
-          { titre: 'titre 1', description: undefined, nombreMiseEnFavoris: 0 },
+          {
+            titre: 'titre 1',
+            description: '2 Avenue de la République, Palaiseau - 91120',
+            nombreMiseEnFavoris: 12,
+            img: '/ic_services.svg',
+          },
+          { titre: 'titre 1', description: undefined, nombreMiseEnFavoris: 0, img: '/ic_services.svg' },
         ],
         favoris: [
-          { titre: 'titre 1', description: '2 Avenue de la République, Palaiseau - 91120', nombreMiseEnFavoris: 12 },
-          { titre: 'titre 1', description: undefined, nombreMiseEnFavoris: 0 },
+          {
+            titre: 'titre 1',
+            description: '2 Avenue de la République, Palaiseau - 91120',
+            nombreMiseEnFavoris: 12,
+            img: '/ic_services.svg',
+          },
+          { titre: 'titre 1', description: undefined, nombreMiseEnFavoris: 0, img: '/ic_services.svg' },
         ],
         aside: {
           nom: 'Mon service lorem',

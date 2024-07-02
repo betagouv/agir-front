@@ -19,18 +19,20 @@ interface CategoriesViewModel {
   estLaCategorieParDefaut: boolean;
 }
 
+export interface AsideServiceViewModel {
+  nom: string;
+  description: string;
+  url: string;
+  logo: string;
+  screenshot: string;
+}
+
 export interface ServiceRechercheViewModel {
   titre: string;
   favoris?: SuggestionServiceViewModel[];
   suggestions: SuggestionServiceViewModel[];
   categories: CategoriesViewModel[];
-  aside: {
-    nom: string;
-    description: string;
-    url: string;
-    logo: string;
-    screenshot: string;
-  };
+  aside: AsideServiceViewModel;
 }
 
 export class ServiceRecherchePresenterImpl implements ServiceRecherchePresenter {
