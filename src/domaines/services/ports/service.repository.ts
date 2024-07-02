@@ -1,5 +1,5 @@
+import { Service } from '@/domaines/services/installerServiceActif.usecase';
 import { ServiceCatalogue } from '@/domaines/services/recupererCatalogueServices.usecase';
-import { Service } from '@/domaines/services/recupererServiceActifs.usecase';
 
 export interface ServiceRepository {
   recupererServicesActifs(utilisateurId: string): Promise<Service[]>;

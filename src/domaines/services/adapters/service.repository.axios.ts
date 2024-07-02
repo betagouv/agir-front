@@ -1,7 +1,7 @@
 import { AxiosFactory, intercept401 } from '@/axios.factory';
+import { Service } from '@/domaines/services/installerServiceActif.usecase';
 import { ServiceRepository } from '@/domaines/services/ports/service.repository';
 import { ServiceCatalogue } from '@/domaines/services/recupererCatalogueServices.usecase';
-import { Service } from '@/domaines/services/recupererServiceActifs.usecase';
 
 export interface ServiceApiModel {
   id: string;

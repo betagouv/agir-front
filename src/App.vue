@@ -1,15 +1,9 @@
 <script setup lang="ts">
-  import { computed } from 'vue';
   import { NavigationGuardNext, RouteLocationNormalized } from 'vue-router';
-  import Services from '@/components/custom/Services.vue';
   import Footer from '@/components/dsfr/Footer.vue';
   import Header from '@/components/dsfr/Header.vue';
   import router from '@/router';
   import { utilisateurStore } from '@/store/utilisateur';
-
-  const utilisateurConnecte = computed(() => {
-    return utilisateurStore().utilisateur.id.length > 0;
-  });
 
   const appName = 'Agir ! -';
   router.beforeEach((to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
@@ -33,7 +27,6 @@
       <Header />
     </div>
     <main id="contenu" class="background--gris">
-      <Services v-if="utilisateurConnecte" />
       <router-view />
     </main>
 
