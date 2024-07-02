@@ -13,10 +13,17 @@ export interface SuggestionServiceViewModel {
   };
 }
 
+interface CategoriesViewModel {
+  code: string;
+  label: string;
+  estLaCategorieParDefaut: boolean;
+}
+
 export interface ServiceRechercheViewModel {
   titre: string;
   favoris?: SuggestionServiceViewModel[];
   suggestions: SuggestionServiceViewModel[];
+  categories: CategoriesViewModel[];
   aside: {
     nom: string;
     description: string;
@@ -49,6 +56,11 @@ export class ServiceRecherchePresenterImpl implements ServiceRecherchePresenter 
         logo: 'logo',
         screenshot: 'screenshot',
       },
+      categories: serviceRecherche.categories.map(elem => ({
+        code: elem.code,
+        label: elem.label,
+        estLaCategorieParDefaut: elem.estLaCategorieParDefaut,
+      })),
     });
   }
 }

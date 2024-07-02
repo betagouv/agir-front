@@ -12,16 +12,27 @@ interface ServiceRechercheApiModel {
   nombre_favoris: number;
 }
 
+interface ServiceRechercheCategorieApiModel {
+  code: string;
+  label: string;
+  isDefault: boolean;
+}
+
 export class ServiceRechercheAxios implements ServiceRechercheRepository {
   @intercept401()
   async recupererService(idUtilisateur: string, idService: string): Promise<ServiceRecherche> {
     const axiosInstance = AxiosFactory.getAxios();
+
+    const responseCategorie = await axiosInstance.get<ServiceRechercheCategorieApiModel[]>(
+      `/utilisateurs/${idUtilisateur}/recherche_services/${idService}/categories`,
+    );
+
     const responseSuggestions = await axiosInstance.post<ServiceRechercheApiModel[]>(
       `/utilisateurs/${idUtilisateur}/recherche_services/${idService}/search`,
       {
-        categorie: 'lieux_collaboratifs',
+        categorie: responseCategorie.data[0].code,
         nombre_max_resultats: 0,
-        rayon_metres: 0,
+        rayon_metres: 5000,
       },
     );
 
@@ -40,6 +51,11 @@ export class ServiceRechercheAxios implements ServiceRechercheRepository {
         titre: elem.titre,
         adresse: `${elem.adresse_rue}, ${elem.adresse_nom_ville} - ${elem.adresse_code_postal}`,
         nombreMiseEnFavoris: elem.nombre_favoris,
+      })),
+      categories: responseCategorie.data.map(elem => ({
+        code: elem.code,
+        label: elem.label,
+        estLaCategorieParDefaut: elem.isDefault,
       })),
     };
   }
