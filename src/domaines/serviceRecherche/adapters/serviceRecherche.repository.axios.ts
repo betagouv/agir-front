@@ -15,7 +15,7 @@ interface ServiceRechercheApiModel {
 interface ServiceRechercheCategorieApiModel {
   code: string;
   label: string;
-  isDefault: boolean;
+  is_default: boolean;
 }
 
 export class ServiceRechercheAxios implements ServiceRechercheRepository {
@@ -30,7 +30,7 @@ export class ServiceRechercheAxios implements ServiceRechercheRepository {
     const responseSuggestions = await axiosInstance.post<ServiceRechercheApiModel[]>(
       `/utilisateurs/${idUtilisateur}/recherche_services/${idService}/search`,
       {
-        categorie: responseCategorie.data[0].code,
+        categorie: responseCategorie.data.filter(elem => elem.is_default)[0].code,
         nombre_max_resultats: 0,
         rayon_metres: 5000,
       },
@@ -55,7 +55,7 @@ export class ServiceRechercheAxios implements ServiceRechercheRepository {
       categories: responseCategorie.data.map(elem => ({
         code: elem.code,
         label: elem.label,
-        estLaCategorieParDefaut: elem.isDefault,
+        estLaCategorieParDefaut: elem.is_default,
       })),
     };
   }
