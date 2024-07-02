@@ -43,11 +43,13 @@ export class ServiceRecherchePresenterImpl implements ServiceRecherchePresenter 
         titre: elem.titre,
         description: elem.adresse,
         nombreMiseEnFavoris: elem.nombreMiseEnFavoris,
+        img: '/ic_services.svg',
       })),
       favoris: serviceRecherche.favoris.map(elem => ({
         titre: elem.titre,
         description: elem.adresse,
         nombreMiseEnFavoris: elem.nombreMiseEnFavoris,
+        img: '/ic_services.svg',
       })),
       aside: {
         nom: 'Mon service lorem',

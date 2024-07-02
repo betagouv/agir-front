@@ -17,11 +17,15 @@
       </li>
     </ul>
     <ul class="dots list-style-none fr-pl-0" aria-label="indicateurs">
-      <li v-for="(slide, index) in slides" :key="index" :aria-current="index === activeSlide">
+      <li
+        v-for="(slide, index) in servicesRechercheFavorisViewModel"
+        :key="index"
+        :aria-current="index === activeSlide"
+      >
         <button
           :class="{ active: index === activeSlide }"
           @click="setActiveSlide(index)"
-          :title="`Aller à la slide : ${slide.titre} (${index + 1}/${slides.length})`"
+          :title="`Aller à la slide : ${slide.titre} (${index + 1}/${servicesRechercheFavorisViewModel.length})`"
         >
           <span></span>
         </button>
@@ -37,78 +41,6 @@
 
   defineProps<{ servicesRechercheFavorisViewModel: NonNullable<ServiceRechercheViewModel['suggestions']> }>();
 
-  const slides = [
-    {
-      titre: 'Le coach',
-      liste: [
-        'Un accompagnement personnalisé',
-        'Adapté en fonction de vos revenus, où vous vivez et vos goûts',
-        'Un suivi au quotidien',
-        'Des articles pour apprendre de nouvelles choses',
-        '...',
-      ],
-    },
-    {
-      titre: 'Le coach',
-      liste: [
-        'Un accompagnement personnalisé',
-        'Adapté en fonction de vos revenus, où vous vivez et vos goûts',
-        'Un suivi au quotidien',
-        'Des articles pour apprendre de nouvelles choses',
-        '...',
-      ],
-    },
-    {
-      titre: 'Le coach',
-      liste: [
-        'Un accompagnement personnalisé',
-        'Adapté en fonction de vos revenus, où vous vivez et vos goûts',
-        'Un suivi au quotidien',
-        'Des articles pour apprendre de nouvelles choses',
-        '...',
-      ],
-    },
-    {
-      titre: 'Le coach',
-      liste: [
-        'Un accompagnement personnalisé',
-        'Adapté en fonction de vos revenus, où vous vivez et vos goûts',
-        'Un suivi au quotidien',
-        'Des articles pour apprendre de nouvelles choses',
-        '...',
-      ],
-    },
-    {
-      titre: 'Le coach',
-      liste: [
-        'Un accompagnement personnalisé',
-        'Adapté en fonction de vos revenus, où vous vivez et vos goûts',
-        'Un suivi au quotidien',
-        'Des articles pour apprendre de nouvelles choses',
-        '...',
-      ],
-    },
-    {
-      titre: 'Le coach',
-      liste: [
-        'Un accompagnement personnalisé',
-        'Adapté en fonction de vos revenus, où vous vivez et vos goûts',
-        'Un suivi au quotidien',
-        'Des articles pour apprendre de nouvelles choses',
-        '...',
-      ],
-    },
-    {
-      titre: 'Des aides financières',
-      liste: [
-        'Un accompagnement personnalisé',
-        'Adapté en fonction de vos revenus, où vous vivez et vos goûts',
-        'Un suivi au quotidien',
-        'Des articles pour apprendre de nouvelles choses',
-        '...',
-      ],
-    },
-  ];
   const activeSlide = ref(0);
 
   const setActiveSlide = (index: number) => {
