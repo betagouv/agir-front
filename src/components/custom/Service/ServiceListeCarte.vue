@@ -5,7 +5,6 @@
       <ServiceCarte :suggestionsServiceViewModel="suggestion" />
     </li>
   </ul>
-  <button class="fr-btn fr-btn--tertiary display-block fr-mx-auto">Afficher plus de suggestions</button>
 </template>
 
 <script setup lang="ts">
