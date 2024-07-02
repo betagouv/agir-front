@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.14.1](https://github.com/betagouv/agir-front/compare/v1.14.0...v1.14.1) (2024-07-02)
+
+
+### 👷 Autres changements
+
+* Bump @playwright/test from 1.42.0 to 1.45.0 ([#462](https://github.com/betagouv/agir-front/issues/462)) ([3eef5e4](https://github.com/betagouv/agir-front/commit/3eef5e40e11f35cab1c62465ff75e3e038e4838a))
+* Bump @types/node from 20.11.21 to 20.14.9 ([#463](https://github.com/betagouv/agir-front/issues/463)) ([d0922f1](https://github.com/betagouv/agir-front/commit/d0922f1eb81512980cd3bdbebea0876d5a29d626))
+* Bump @typescript-eslint/parser from 7.1.0 to 7.15.0 ([#461](https://github.com/betagouv/agir-front/issues/461)) ([34c67d2](https://github.com/betagouv/agir-front/commit/34c67d2f1079ff35bb1d46c451a3b6d92911c33e))
+* Bump braces from 3.0.2 to 3.0.3 ([#440](https://github.com/betagouv/agir-front/issues/440)) ([7b33fb8](https://github.com/betagouv/agir-front/commit/7b33fb8bc3bbd9a345664a4604f885ec91453b20))
+* Bump prettier from 3.2.5 to 3.3.2 ([#464](https://github.com/betagouv/agir-front/issues/464)) ([d964791](https://github.com/betagouv/agir-front/commit/d9647910583eed46db378b52f4b757c9df512a60))
+* mise en place de dependabot ([#458](https://github.com/betagouv/agir-front/issues/458)) ([1cb0a53](https://github.com/betagouv/agir-front/commit/1cb0a5396520962c98f37e036c43cfc63a66d9cf))
+* refacto event bus ([#456](https://github.com/betagouv/agir-front/issues/456)) ([0ece46b](https://github.com/betagouv/agir-front/commit/0ece46b70013234d1447e1afb23e953060ac07f5))
+* refacto score en mettant la sauvegarde du score dans le usecase plutôt que dans le component ([#457](https://github.com/betagouv/agir-front/issues/457)) ([d83e76a](https://github.com/betagouv/agir-front/commit/d83e76a6cb0af51b07b839a1ced056a8b02eb469))
+
 ## [1.14.0](https://github.com/betagouv/agir-front/compare/v1.13.0...v1.14.0) (2024-06-25)
 
 
