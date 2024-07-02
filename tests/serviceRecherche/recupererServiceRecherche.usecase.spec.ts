@@ -27,6 +27,10 @@ describe("Fichier de tests concernant la récuperation de service d'un recherche
           },
           { titre: 'titre 1', adresse: undefined, nombreMiseEnFavoris: 0 },
         ],
+        categories: [
+          { code: 'code', label: 'label', estLaCategorieParDefaut: true },
+          { code: 'code', label: 'label', estLaCategorieParDefaut: false },
+        ],
       }),
     );
 
@@ -52,6 +56,10 @@ describe("Fichier de tests concernant la récuperation de service d'un recherche
           logo: 'logo',
           screenshot: 'screenshot',
         },
+        categories: [
+          { code: 'code', label: 'label', estLaCategorieParDefaut: true },
+          { code: 'code', label: 'label', estLaCategorieParDefaut: false },
+        ],
       });
     }
   });

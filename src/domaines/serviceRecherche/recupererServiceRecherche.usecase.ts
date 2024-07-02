@@ -7,10 +7,16 @@ interface ServiceRechercheResultat {
   nombreMiseEnFavoris: number;
 }
 
+interface ServiceRechercheCategorie {
+  code: string;
+  label: string;
+  estLaCategorieParDefaut: boolean;
+}
 export interface ServiceRecherche {
   titre: string;
   suggestions: ServiceRechercheResultat[];
   favoris: ServiceRechercheResultat[];
+  categories: ServiceRechercheCategorie[];
 }
 
 export class RecupererServiceRechercheUsecase {

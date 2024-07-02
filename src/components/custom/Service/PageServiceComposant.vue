@@ -4,6 +4,16 @@
     :page-hierarchie="[{ label: 'Vos services', url: RouteCoachName.SERVICES }]"
   />
   <h1 class="fr-h2">{{ serviceRechercheViewModel.titre }}</h1>
+  <select class="fr-select" id="categories" name="categories">
+    <option
+      v-for="categorie in serviceRechercheViewModel.categories"
+      :key="categorie.code"
+      :value="categorie.code"
+      :selected="categorie.estLaCategorieParDefaut"
+    >
+      {{ categorie.label }}
+    </option>
+  </select>
   <div class="fr-grid-row fr-grid-row--gutters">
     <div class="fr-col-12 fr-col-md-8">
       <section v-if="serviceRechercheViewModel.favoris">
