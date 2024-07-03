@@ -20,20 +20,18 @@ export interface ServiceRechercheCategorieApiModel {
 
 export class ServiceRechercheAxios implements ServiceRechercheRepository {
   @intercept401()
-  async recupererService(idUtilisateur: string, idService: string): Promise<ServiceRecherche> {
+  async recupererService(idUtilisateur: string, categorie: string): Promise<ServiceRecherche> {
+    const idService = 'proximite';
     const axiosInstance = AxiosFactory.getAxios();
 
     const responseCategorie = await axiosInstance.get<ServiceRechercheCategorieApiModel[]>(
       `/utilisateurs/${idUtilisateur}/recherche_services/${idService}/categories`,
     );
 
-    const defaultCategorie = responseCategorie.data.find(elem => elem.is_default)?.code;
-
-    // Récupération des suggestions et favoris en parallèle
     const responseSuggestionsPromise = axiosInstance.post<ServiceRechercheApiModel[]>(
       `/utilisateurs/${idUtilisateur}/recherche_services/${idService}/search`,
       {
-        categorie: defaultCategorie,
+        categorie,
         nombre_max_resultats: 0,
         rayon_metres: 5000,
       },

@@ -61,6 +61,16 @@
 
   const usecase = new RecupererServiceFruitsEtLegumesUsecase(new ServiceRechercheFruitsEtLegumesAxios());
 
+  onMounted(async () => {
+    await usecase.execute(
+      utilisateurStore().utilisateur.id,
+      '',
+      new ServiceRechercheFruitsEtLegumesPresenterImpl(vm => (serviceFruitsEtLegumesViewModel.value = vm)),
+    );
+
+    isLoading.value = false;
+  });
+
   const updateMois = async (event: Event) => {
     const inputElement = event.target as HTMLInputElement;
 
@@ -70,17 +80,4 @@
       new ServiceRechercheFruitsEtLegumesPresenterImpl(vm => (serviceFruitsEtLegumesViewModel.value = vm)),
     );
   };
-
-  onMounted(async () => {
-    const formatter = new Intl.DateTimeFormat('fr-FR', { month: 'long' });
-    const moisCourant = formatter.format(new Date());
-
-    await usecase.execute(
-      utilisateurStore().utilisateur.id,
-      moisCourant,
-      new ServiceRechercheFruitsEtLegumesPresenterImpl(vm => (serviceFruitsEtLegumesViewModel.value = vm)),
-    );
-
-    isLoading.value = false;
-  });
 </script>

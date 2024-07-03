@@ -7,7 +7,7 @@
         page-courante="Service : Près de chez nous"
         :page-hierarchie="[{ label: 'Vos services', url: RouteCoachName.SERVICES }]"
       />
-      <select class="fr-select" id="categories" name="categories">
+      <select class="fr-select" id="categories" name="categories" @input="updateFiltre">
         <option
           v-for="categorie in serviceRechercheViewModel.categories"
           :key="categorie.code"
@@ -49,14 +49,24 @@
   const isLoading = ref<boolean>(true);
   const serviceRechercheViewModel = ref<ServiceRechercheViewModel>();
 
+  const usecase = new RecupererServiceRechercheUsecase(new ServiceRechercheAxios());
+
   onMounted(async () => {
-    const usecase = new RecupererServiceRechercheUsecase(new ServiceRechercheAxios());
     await usecase.execute(
       utilisateurStore().utilisateur.id,
-      'proximite',
+      '',
       new ServiceRecherchePresenterImpl(vm => (serviceRechercheViewModel.value = vm)),
     );
 
     isLoading.value = false;
   });
+
+  const updateFiltre = (event: Event) => {
+    const inputElement = event.target as HTMLInputElement;
+    usecase.execute(
+      utilisateurStore().utilisateur.id,
+      inputElement.value,
+      new ServiceRecherchePresenterImpl(vm => (serviceRechercheViewModel.value = vm)),
+    );
+  };
 </script>
