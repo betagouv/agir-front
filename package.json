@@ -34,7 +34,7 @@
   },
   "devDependencies": {
     "@playwright/test": "1.45.0",
-    "@testing-library/vue": "8.0.2",
+    "@testing-library/vue": "8.1.0",
     "@types/node": "20.14.9",
     "@typescript-eslint/eslint-plugin": "7.1.0",
     "@typescript-eslint/parser": "7.15.0",
