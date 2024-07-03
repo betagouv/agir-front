@@ -1,25 +1,25 @@
 import { RouteRecordRaw } from 'vue-router';
 
-const PageService = () => import('@/components/pages/PageService.vue');
+const PageServicePresDeChezNous = () => import('@/components/pages/PageServicePresDeChezNous.vue');
 const PageServiceFruitsEtLegumes = () => import('@/components/pages/PageServiceFruitsEtLegumes.vue');
 
 export enum RouteServiceName {
-  SERVICE = 'service',
+  PROXIMITE = 'pres-de-chez-nous',
   SERVICE_FRUITS_ET_LEGUMES = 'fruits-et-legumes',
 }
 
 export enum RouteServicePath {
-  SERVICE = '/service/',
+  PROXIMITE = '/service/pres-de-chez-nous',
   SERVICE_FRUITS_ET_LEGUMES = '/service/fruits-et-legumes',
 }
 
 const serviceRoutes: RouteRecordRaw[] = [
   {
-    path: RouteServicePath.SERVICE,
-    name: RouteServiceName.SERVICE,
-    component: PageService,
+    path: RouteServicePath.PROXIMITE,
+    name: RouteServiceName.PROXIMITE,
+    component: PageServicePresDeChezNous,
     meta: {
-      title: 'Service',
+      title: 'Service : Près de chez nous',
     },
   },
   {
@@ -27,7 +27,7 @@ const serviceRoutes: RouteRecordRaw[] = [
     name: RouteServiceName.SERVICE_FRUITS_ET_LEGUMES,
     component: PageServiceFruitsEtLegumes,
     meta: {
-      title: 'Service : fruits et légumes',
+      title: 'Service : Fruits et légumes',
     },
   },
 ];
