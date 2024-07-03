@@ -1,5 +1,6 @@
 import { ServiceRecherchePresenter } from '@/domaines/serviceRecherche/ports/serviceRecherche.presenter';
 import { ServiceRechercheRepository } from '@/domaines/serviceRecherche/ports/serviceRecherche.repository';
+import { ServiceRechercheBase } from '@/domaines/serviceRecherche/serviceRecherche';
 
 interface ServiceRechercheResultat {
   titre: string;
@@ -7,16 +8,10 @@ interface ServiceRechercheResultat {
   nombreMiseEnFavoris: number;
 }
 
-interface ServiceRechercheCategorie {
-  code: string;
-  label: string;
-  estLaCategorieParDefaut: boolean;
-}
-export interface ServiceRecherche {
+export interface ServiceRecherche extends ServiceRechercheBase {
   titre: string;
   suggestions: ServiceRechercheResultat[];
   favoris: ServiceRechercheResultat[];
-  categories: ServiceRechercheCategorie[];
 }
 
 export class RecupererServiceRechercheUsecase {

@@ -12,7 +12,7 @@ interface ServiceRechercheApiModel {
   nombre_favoris: number;
 }
 
-interface ServiceRechercheCategorieApiModel {
+export interface ServiceRechercheCategorieApiModel {
   code: string;
   label: string;
   is_default: boolean;

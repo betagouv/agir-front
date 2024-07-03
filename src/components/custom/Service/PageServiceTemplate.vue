@@ -4,14 +4,14 @@
       <slot />
     </div>
     <div class="fr-col-12 fr-col-md-4">
-      <ServiceAside :service-footer-view-model="aside" />
+      <ServiceAside :service-aside-view-model="aside" />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
   import ServiceAside from '@/components/custom/Service/ServiceAside.vue';
-  import { AsideServiceViewModel } from '@/domaines/serviceRecherche/adapters/serviceRecherche.presenter.impl';
+  import { ServiceRechercheViewModelBase } from '@/domaines/serviceRecherche/adapters/serviceRechercheViewModel';
 
-  defineProps<{ aside: AsideServiceViewModel }>();
+  defineProps<{ aside: ServiceRechercheViewModelBase['aside'] }>();
 </script>

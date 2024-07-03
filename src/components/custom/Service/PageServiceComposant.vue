@@ -24,7 +24,7 @@
       </section>
     </div>
     <div class="fr-col-12 fr-col-md-4">
-      <ServiceAside :service-footer-view-model="serviceRechercheViewModel.aside" />
+      <ServiceAside :service-aside-view-model="serviceRechercheViewModel.aside" />
     </div>
   </div>
 </template>

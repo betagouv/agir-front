@@ -1,26 +1,25 @@
-import { AsideServiceViewModel } from '@/domaines/serviceRecherche/adapters/serviceRecherche.presenter.impl';
+import { ServiceRechercheViewModelBase } from './serviceRechercheViewModel';
 import { ServiceRechercheFruitsEtLegumesPresenter } from '@/domaines/serviceRecherche/ports/serviceRechercheFruitsEtLegumes.presenter';
 import { ServiceRechercheFruitsEtLegumes } from '@/domaines/serviceRecherche/recupererServiceFruitsEtLegumes.usecase';
 
-export interface ServiceFruitsEtLegumesViewModel {
+export interface ServiceFruitsEtLegumesViewModel extends ServiceRechercheViewModelBase {
   peuConsommateurs: string[];
   moyennementConsommateurs: string[];
   tresConsommateurs: string[];
-  aside: AsideServiceViewModel;
 }
 
 export class ServiceRechercheFruitsEtLegumesPresenterImpl implements ServiceRechercheFruitsEtLegumesPresenter {
   constructor(private serviceFruitsEtLegumesViewModel: (viewModel: ServiceFruitsEtLegumesViewModel) => void) {}
 
-  presente(serviceRechercheFruitsEtLegumes: ServiceRechercheFruitsEtLegumes[]): void {
+  presente(serviceRechercheFruitsEtLegumes: ServiceRechercheFruitsEtLegumes): void {
     this.serviceFruitsEtLegumesViewModel({
-      peuConsommateurs: serviceRechercheFruitsEtLegumes
+      peuConsommateurs: serviceRechercheFruitsEtLegumes.listeFruitsEtLegumes
         .filter(elem => elem.impactCarboneKg < 1)
         .map(elem => elem.titre),
-      moyennementConsommateurs: serviceRechercheFruitsEtLegumes
+      moyennementConsommateurs: serviceRechercheFruitsEtLegumes.listeFruitsEtLegumes
         .filter(elem => elem.impactCarboneKg >= 1 && elem.impactCarboneKg < 5)
         .map(elem => elem.titre),
-      tresConsommateurs: serviceRechercheFruitsEtLegumes
+      tresConsommateurs: serviceRechercheFruitsEtLegumes.listeFruitsEtLegumes
         .filter(elem => elem.impactCarboneKg >= 5)
         .map(elem => elem.titre),
       aside: {
@@ -30,6 +29,11 @@ export class ServiceRechercheFruitsEtLegumesPresenterImpl implements ServiceRech
         logo: '',
         screenshot: '',
       },
+      categories: serviceRechercheFruitsEtLegumes.categories.map(elem => ({
+        code: elem.code,
+        label: elem.label,
+        estLaCategorieParDefaut: elem.estLaCategorieParDefaut,
+      })),
     });
   }
 }

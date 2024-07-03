@@ -7,7 +7,10 @@
         page-courante="Service : fruits et légumes"
         :page-hierarchie="[{ label: 'Vos services', url: RouteCoachName.SERVICES }]"
       />
-      <h1 class="fr-h2">Les fruits et légumes pour le mois de</h1>
+      <h1 class="fr-h2">
+        Les fruits et légumes pour le mois de
+        {{ serviceFruitsEtLegumesViewModel.categories.find(elem => elem.estLaCategorieParDefaut)?.label }}
+      </h1>
       <PageServiceTemplate :aside="serviceFruitsEtLegumesViewModel.aside">
         <ServiceListeFruitsEtLegumes
           titre="Peu consommateurs"

@@ -1,3 +1,4 @@
+import { ServiceRechercheViewModelBase } from './serviceRechercheViewModel';
 import { ServiceRecherchePresenter } from '../ports/serviceRecherche.presenter';
 import { ServiceRecherche } from '../recupererServiceRecherche.usecase';
 
@@ -13,26 +14,10 @@ export interface SuggestionServiceViewModel {
   };
 }
 
-interface CategoriesViewModel {
-  code: string;
-  label: string;
-  estLaCategorieParDefaut: boolean;
-}
-
-export interface AsideServiceViewModel {
-  nom: string;
-  description: string;
-  url: string;
-  logo: string;
-  screenshot: string;
-}
-
-export interface ServiceRechercheViewModel {
+export interface ServiceRechercheViewModel extends ServiceRechercheViewModelBase {
   titre: string;
   favoris?: SuggestionServiceViewModel[];
   suggestions: SuggestionServiceViewModel[];
-  categories: CategoriesViewModel[];
-  aside: AsideServiceViewModel;
 }
 
 export class ServiceRecherchePresenterImpl implements ServiceRecherchePresenter {

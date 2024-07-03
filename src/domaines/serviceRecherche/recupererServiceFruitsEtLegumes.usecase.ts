@@ -1,9 +1,9 @@
 import { ServiceRechercheFruitsEtLegumesPresenter } from '@/domaines/serviceRecherche/ports/serviceRechercheFruitsEtLegumes.presenter';
 import { ServiceRechercheFruitsEtLegumesRepository } from '@/domaines/serviceRecherche/ports/serviceRechercheFruitsEtLegumes.repository';
+import { ServiceRechercheBase } from '@/domaines/serviceRecherche/serviceRecherche';
 
-export interface ServiceRechercheFruitsEtLegumes {
-  titre: string;
-  impactCarboneKg: number;
+export interface ServiceRechercheFruitsEtLegumes extends ServiceRechercheBase {
+  listeFruitsEtLegumes: { titre: string; impactCarboneKg: number }[];
 }
 
 export class RecupererServiceFruitsEtLegumesUsecase {

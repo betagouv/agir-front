@@ -1,7 +1,7 @@
 <template>
   <aside class="background-bleu-light border-radius--md border--bleu overflow--hidden">
     <img
-      :src="serviceFooterViewModel.screenshot"
+      :src="serviceAsideViewModel.screenshot"
       alt=""
       class="img-object-fit-cover full-width display-block"
       height="150"
@@ -9,21 +9,21 @@
     <div class="fr-px-2w fr-py-3w">
       <h2 class="text--lh-1-3">
         <span class="text--normal text--bleu text--italic fr-text--md">Proposé par</span><br />
-        {{ serviceFooterViewModel.nom }}
+        {{ serviceAsideViewModel.nom }}
       </h2>
-      <p>{{ serviceFooterViewModel.description }}</p>
+      <p>{{ serviceAsideViewModel.description }}</p>
       <p>
-        <a :href="serviceFooterViewModel.url" class="fr-link" target="_blank" rel="noopener">
-          {{ serviceFooterViewModel.url }}
+        <a :href="serviceAsideViewModel.url" class="fr-link" target="_blank" rel="noopener">
+          {{ serviceAsideViewModel.url }}
         </a>
       </p>
-      <img :src="serviceFooterViewModel.logo" alt="" class="display-block max-full-width" />
+      <img :src="serviceAsideViewModel.logo" alt="" class="display-block max-full-width" />
     </div>
   </aside>
 </template>
 
 <script setup lang="ts">
-  import { ServiceRechercheViewModel } from '@/domaines/serviceRecherche/adapters/serviceRecherche.presenter.impl';
+  import { ServiceRechercheViewModelBase } from '@/domaines/serviceRecherche/adapters/serviceRechercheViewModel';
 
-  defineProps<{ serviceFooterViewModel: ServiceRechercheViewModel['aside'] }>();
+  defineProps<{ serviceAsideViewModel: ServiceRechercheViewModelBase['aside'] }>();
 </script>
