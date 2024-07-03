@@ -27,31 +27,37 @@ export class ServiceRechercheAxios implements ServiceRechercheRepository {
       `/utilisateurs/${idUtilisateur}/recherche_services/${idService}/categories`,
     );
 
-    const responseSuggestions = await axiosInstance.post<ServiceRechercheApiModel[]>(
+    const defaultCategorie = responseCategorie.data.find(elem => elem.is_default)?.code;
+
+    // Récupération des suggestions et favoris en parallèle
+    const responseSuggestionsPromise = axiosInstance.post<ServiceRechercheApiModel[]>(
       `/utilisateurs/${idUtilisateur}/recherche_services/${idService}/search`,
       {
-        categorie: responseCategorie.data.filter(elem => elem.is_default)[0].code,
+        categorie: defaultCategorie,
         nombre_max_resultats: 0,
         rayon_metres: 5000,
       },
     );
 
-    const responseFavoris = await axiosInstance.get<ServiceRechercheApiModel[]>(
+    const responseFavorisPromise = axiosInstance.get<ServiceRechercheApiModel[]>(
       `/utilisateurs/${idUtilisateur}/recherche_services/${idService}/favoris`,
     );
 
+    const [responseSuggestions, responseFavoris] = await Promise.all([
+      responseSuggestionsPromise,
+      responseFavorisPromise,
+    ]);
+
+    const mapServiceRecherche = (elem: ServiceRechercheApiModel) => ({
+      titre: elem.titre,
+      adresse: `${elem.adresse_rue}, ${elem.adresse_nom_ville} - ${elem.adresse_code_postal}`,
+      nombreMiseEnFavoris: elem.nombre_favoris,
+    });
+
     return {
       titre: 'Mon titre',
-      suggestions: responseSuggestions.data.map(elem => ({
-        titre: elem.titre,
-        adresse: `${elem.adresse_rue}, ${elem.adresse_nom_ville} - ${elem.adresse_code_postal}`,
-        nombreMiseEnFavoris: elem.nombre_favoris,
-      })),
-      favoris: responseFavoris.data.map(elem => ({
-        titre: elem.titre,
-        adresse: `${elem.adresse_rue}, ${elem.adresse_nom_ville} - ${elem.adresse_code_postal}`,
-        nombreMiseEnFavoris: elem.nombre_favoris,
-      })),
+      suggestions: responseSuggestions.data.map(mapServiceRecherche),
+      favoris: responseFavoris.data.map(mapServiceRecherche),
       categories: responseCategorie.data.map(elem => ({
         code: elem.code,
         label: elem.label,
