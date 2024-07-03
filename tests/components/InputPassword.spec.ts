@@ -4,7 +4,7 @@ import InputPassword from '../../src/components/custom/InputPassword.vue';
 describe('InputPassword', () => {
   describe('au moins 1 chiffre', () => {
     it('Si le mot de passe ne contient pas de chiffre doit avoir la classe fr-message--info', () => {
-      const { getByText } = render(InputPassword, {
+      const { getByText } = render(InputPassword as unknown as { props: { modelValue: string } }, {
         props: {
           modelValue: 'PasswordWithoutNumber!',
         },
@@ -17,7 +17,7 @@ describe('InputPassword', () => {
       expect(messageElement.className).toContain('fr-message--info');
     });
     it('Si le mot de passe contient au moins un chiffre doit avoir la classe fr-message--valid', () => {
-      const { getByText } = render(InputPassword, {
+      const { getByText } = render(InputPassword as unknown as { props: { modelValue: string } }, {
         props: {
           modelValue: 'Password1!',
         },
@@ -33,7 +33,7 @@ describe('InputPassword', () => {
 
   describe('au moins 1 caractère spéciale', () => {
     it('Si le mot de passe ne contient pas au moins 1 caractère spéciale doit avoir la classe fr-message--info', () => {
-      const { getByText } = render(InputPassword, {
+      const { getByText } = render(InputPassword as unknown as { props: { modelValue: string } }, {
         props: {
           modelValue: 'Password',
         },
@@ -46,7 +46,7 @@ describe('InputPassword', () => {
       expect(messageElement.className).toContain('fr-message--info');
     });
     it('Si le mot de passe contient au moins 1 caractère spéciale doit avoir la classe fr-message--valid', () => {
-      const { getByText } = render(InputPassword, {
+      const { getByText } = render(InputPassword as unknown as { props: { modelValue: string } }, {
         props: {
           modelValue: 'Password1!',
         },
@@ -62,7 +62,7 @@ describe('InputPassword', () => {
 
   describe('12 caractères minimum', () => {
     it('Si le mot de passe ne contient pas 12 caractères minimum doit avoir la classe fr-message--info', () => {
-      const { getByText } = render(InputPassword, {
+      const { getByText } = render(InputPassword as unknown as { props: { modelValue: string } }, {
         props: {
           modelValue: 'Password',
         },
@@ -75,7 +75,7 @@ describe('InputPassword', () => {
       expect(messageElement.className).toContain('fr-message--info');
     });
     it('Si le mot de passe contient 12 caractère et plus doit avoir la classe fr-message--valid', () => {
-      const { getByText } = render(InputPassword, {
+      const { getByText } = render(InputPassword as unknown as { props: { modelValue: string } }, {
         props: {
           modelValue: 'Password123456!',
         },
@@ -91,7 +91,7 @@ describe('InputPassword', () => {
 
   describe('au moins 1 majuscule et 1 minuscule', () => {
     it('Si le mot de passe ne contient pas de majuscule doit avoir la classe fr-message--info', () => {
-      const { getByText } = render(InputPassword, {
+      const { getByText } = render(InputPassword as unknown as { props: { modelValue: string } }, {
         props: {
           modelValue: 'password',
         },
@@ -102,7 +102,7 @@ describe('InputPassword', () => {
       expect(messageElement.className).toContain('fr-message--info');
     });
     it('Si le mot de passe ne contient pas de minuscule doit avoir la classe fr-message--info', () => {
-      const { getByText } = render(InputPassword, {
+      const { getByText } = render(InputPassword as unknown as { props: { modelValue: string } }, {
         props: {
           modelValue: '123PASSWORD!',
         },
@@ -113,7 +113,7 @@ describe('InputPassword', () => {
       expect(messageElement.className).toContain('fr-message--info');
     });
     it('Si le mot de passe contient au moins une majuscule et une minuscule doit avoir la classe fr-message--valid', () => {
-      const { getByText } = render(InputPassword, {
+      const { getByText } = render(InputPassword as unknown as { props: { modelValue: string } }, {
         props: {
           modelValue: 'Password',
         },
