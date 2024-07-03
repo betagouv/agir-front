@@ -6,13 +6,7 @@ export function createSentry(app: App, router: Router) {
   Sentry.init({
     app,
     dsn: import.meta.env.VITE_SENTRY_DSN,
-    integrations: [
-      new Sentry.BrowserTracing({
-        routingInstrumentation: Sentry.vueRouterInstrumentation(router),
-      }),
-      new Sentry.Replay(),
-    ],
-
+    integrations: [Sentry.browserTracingIntegration({ router })],
     tracesSampleRate: import.meta.env.VITE_SENTRY_TRACES_SAMPLE_RATE || 0.0,
     replaysSessionSampleRate: import.meta.env.VITE_SENTRY_REPLAYS_SESSION_SAMPLE_RATE || 0.0,
     replaysOnErrorSampleRate: import.meta.env.VITE_SENTRY_REPLAYS_ON_ERROR_SAMPLE_RATE || 0.0,
