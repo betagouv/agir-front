@@ -11,6 +11,16 @@
         Les fruits et légumes pour le mois de
         {{ serviceFruitsEtLegumesViewModel.categories.find(elem => elem.estLaCategorieParDefaut)?.label }}
       </h1>
+      <select class="fr-select" id="categories" name="categories" @input="updateMois">
+        <option
+          v-for="categorie in serviceFruitsEtLegumesViewModel.categories"
+          :key="categorie.code"
+          :value="categorie.code"
+          :selected="categorie.estLaCategorieParDefaut"
+        >
+          {{ categorie.label }}
+        </option>
+      </select>
       <PageServiceTemplate :aside="serviceFruitsEtLegumesViewModel.aside">
         <ServiceListeFruitsEtLegumes
           titre="Peu consommateurs"
@@ -49,11 +59,22 @@
   const isLoading = ref<boolean>(true);
   const serviceFruitsEtLegumesViewModel = ref<ServiceFruitsEtLegumesViewModel>();
 
+  const usecase = new RecupererServiceFruitsEtLegumesUsecase(new ServiceRechercheFruitsEtLegumesAxios());
+
+  const updateMois = async (event: Event) => {
+    const inputElement = event.target as HTMLInputElement;
+
+    usecase.execute(
+      utilisateurStore().utilisateur.id,
+      inputElement.value,
+      new ServiceRechercheFruitsEtLegumesPresenterImpl(vm => (serviceFruitsEtLegumesViewModel.value = vm)),
+    );
+  };
+
   onMounted(async () => {
     const formatter = new Intl.DateTimeFormat('fr-FR', { month: 'long' });
     const moisCourant = formatter.format(new Date());
 
-    const usecase = new RecupererServiceFruitsEtLegumesUsecase(new ServiceRechercheFruitsEtLegumesAxios());
     await usecase.execute(
       utilisateurStore().utilisateur.id,
       moisCourant,
