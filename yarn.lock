@@ -294,10 +294,10 @@
   dependencies:
     tslib "^2.4.0"
 
-"@google-automations/git-file-utils@^1.2.5":
-  version "1.2.6"
-  resolved "https://registry.yarnpkg.com/@google-automations/git-file-utils/-/git-file-utils-1.2.6.tgz#c5999d1e7463b3f3af7337445f225a97d5c0e97e"
-  integrity sha512-wNWeNLBtQH39kTayGuJMF1IRVPxfcywH//thQHD+xzRlanTNDI/5WACUvBkIz9bhnEC7ADm5ibA+DX9meU+JwQ==
+"@google-automations/git-file-utils@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@google-automations/git-file-utils/-/git-file-utils-2.0.0.tgz#f358529f20d5e803f29a37c2f46d5b1ff6b7cbac"
+  integrity sha512-F6h8npq7rt60fr3W+cil/zXbIiF9Hj8JzaN3LNh7uBIJpsWnjL9ObV84qW/345boMheDdo/n+cItmvCfsn0lLA==
   dependencies:
     "@octokit/rest" "^19.0.7"
     "@octokit/types" "^9.0.0"
@@ -4688,13 +4688,13 @@ regexp.prototype.flags@^1.5.1, regexp.prototype.flags@^1.5.2:
     es-errors "^1.3.0"
     set-function-name "^2.0.1"
 
-release-please@16.3.1:
-  version "16.3.1"
-  resolved "https://registry.yarnpkg.com/release-please/-/release-please-16.3.1.tgz#bd7192d5a36da68941ce32c23f6193cf83a34680"
-  integrity sha512-PxI/ACuQ4IBnRhP4mfNcuZGsHX+OjdiAV0Yh6C1A2e3CEKfWOvxMzhlsHBJSYJYhSBIVZNAaIbduxCaUW0LSxg==
+release-please@16.12.0:
+  version "16.12.0"
+  resolved "https://registry.yarnpkg.com/release-please/-/release-please-16.12.0.tgz#da8dd59f188d09fbd26bfbeba987a6362b689d37"
+  integrity sha512-GTZBZQ/1fJwBk6y/BMSdzOczRkEu2L9LrPOXeS1FMHxY/djQLYfwfCEFrmzxGDWfsJvEeDxJlPEPR66s6WWN9w==
   dependencies:
     "@conventional-commits/parser" "^0.4.1"
-    "@google-automations/git-file-utils" "^1.2.5"
+    "@google-automations/git-file-utils" "^2.0.0"
     "@iarna/toml" "^3.0.0"
     "@octokit/graphql" "^5.0.0"
     "@octokit/request" "^6.0.0"
@@ -4721,7 +4721,7 @@ release-please@16.3.1:
     typescript "^4.6.4"
     unist-util-visit "^2.0.3"
     unist-util-visit-parents "^3.1.1"
-    xpath "^0.0.32"
+    xpath "^0.0.34"
     yaml "^2.2.2"
     yargs "^17.0.0"
 
@@ -5905,10 +5905,10 @@ xmlchars@^2.2.0:
   resolved "https://registry.yarnpkg.com/xmlchars/-/xmlchars-2.2.0.tgz#060fe1bcb7f9c76fe2a17db86a9bc3ab894210cb"
   integrity sha512-JZnDKK8B0RCDw84FNdDAIpZK+JuJw+s7Lz8nksI7SIuU3UXJJslUthsi+uWBUYOwPFwW7W7PRLRfUKpxjtjFCw==
 
-xpath@^0.0.32:
-  version "0.0.32"
-  resolved "https://registry.yarnpkg.com/xpath/-/xpath-0.0.32.tgz#1b73d3351af736e17ec078d6da4b8175405c48af"
-  integrity sha512-rxMJhSIoiO8vXcWvSifKqhvV96GjiD5wYb8/QHdoRyQvraTpp4IEv944nhGausZZ3u7dhQXteZuZbaqfpB7uYw==
+xpath@^0.0.34:
+  version "0.0.34"
+  resolved "https://registry.yarnpkg.com/xpath/-/xpath-0.0.34.tgz#a769255e8816e0938e1e0005f2baa7279be8be12"
+  integrity sha512-FxF6+rkr1rNSQrhUNYrAFJpRXNzlDoMxeXN5qI84939ylEv3qqPFKa85Oxr6tDaJKqwW6KKyo2v26TSv3k6LeA==
 
 y18n@^5.0.5:
   version "5.0.8"
