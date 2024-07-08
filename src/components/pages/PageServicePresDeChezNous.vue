@@ -38,24 +38,24 @@
   import ServiceListeCarte from '@/components/custom/Service/ServiceListeCarte.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import {
-    ServiceRecherchePresenterImpl,
-    ServiceRechercheViewModel,
-  } from '@/domaines/serviceRecherche/adapters/serviceRecherche.presenter.impl';
-  import { ServiceRechercheAxios } from '@/domaines/serviceRecherche/adapters/serviceRecherche.repository.axios';
-  import { RecupererServiceRechercheUsecase } from '@/domaines/serviceRecherche/recupererServiceRecherche.usecase';
+    ServiceRecherchePresDeChezNousPresenterImpl,
+    ServiceRecherchePresDeChezNousViewModel,
+  } from '@/domaines/serviceRecherche/adapters/serviceRecherchePresDeChezNous.presenter.impl';
+  import { ServiceRecherchePresDeChezNousAxios } from '@/domaines/serviceRecherche/adapters/serviceRecherchePresDeChezNous.repository.axios';
+  import { RecupererServicePresDeChezNousUsecase } from '@/domaines/serviceRecherche/recupererServicePresDeChezNous.usecase';
   import { RouteCoachName } from '@/router/coach/routeCoachName';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const isLoading = ref<boolean>(true);
-  const serviceRechercheViewModel = ref<ServiceRechercheViewModel>();
+  const serviceRechercheViewModel = ref<ServiceRecherchePresDeChezNousViewModel>();
 
-  const usecase = new RecupererServiceRechercheUsecase(new ServiceRechercheAxios());
+  const usecase = new RecupererServicePresDeChezNousUsecase(new ServiceRecherchePresDeChezNousAxios());
 
   onMounted(async () => {
     await usecase.execute(
       utilisateurStore().utilisateur.id,
       '',
-      new ServiceRecherchePresenterImpl(vm => (serviceRechercheViewModel.value = vm)),
+      new ServiceRecherchePresDeChezNousPresenterImpl(vm => (serviceRechercheViewModel.value = vm)),
     );
 
     isLoading.value = false;
@@ -66,7 +66,7 @@
     usecase.execute(
       utilisateurStore().utilisateur.id,
       inputElement.value,
-      new ServiceRecherchePresenterImpl(vm => (serviceRechercheViewModel.value = vm)),
+      new ServiceRecherchePresDeChezNousPresenterImpl(vm => (serviceRechercheViewModel.value = vm)),
     );
   };
 </script>

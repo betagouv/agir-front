@@ -1,6 +1,6 @@
-import { ServiceRechercheViewModelBase } from './serviceRechercheViewModel';
-import { ServiceRecherchePresenter } from '../ports/serviceRecherche.presenter';
-import { ServiceRecherche } from '../recupererServiceRecherche.usecase';
+import { ServiceRechercheViewModelBase } from '@/domaines/serviceRecherche/adapters/serviceRechercheViewModel';
+import { ServiceRecherchePresDeChezNousPresenter } from '@/domaines/serviceRecherche/ports/serviceRecherchePresDeChezNous.presenter';
+import { ServiceRecherchePresDeChezNous } from '@/domaines/serviceRecherche/recupererServicePresDeChezNous.usecase';
 
 export interface SuggestionServiceViewModel {
   titre: string;
@@ -14,16 +14,16 @@ export interface SuggestionServiceViewModel {
   };
 }
 
-export interface ServiceRechercheViewModel extends ServiceRechercheViewModelBase {
+export interface ServiceRecherchePresDeChezNousViewModel extends ServiceRechercheViewModelBase {
   titre: string;
   favoris?: SuggestionServiceViewModel[];
   suggestions: SuggestionServiceViewModel[];
 }
 
-export class ServiceRecherchePresenterImpl implements ServiceRecherchePresenter {
-  constructor(private serviceRechercheViewModel: (viewModel: ServiceRechercheViewModel) => void) {}
+export class ServiceRecherchePresDeChezNousPresenterImpl implements ServiceRecherchePresDeChezNousPresenter {
+  constructor(private serviceRechercheViewModel: (viewModel: ServiceRecherchePresDeChezNousViewModel) => void) {}
 
-  presente(serviceRecherche: ServiceRecherche): void {
+  presente(serviceRecherche: ServiceRecherchePresDeChezNous): void {
     this.serviceRechercheViewModel({
       titre: 'Mon service',
       suggestions: serviceRecherche.suggestions.map(elem => ({

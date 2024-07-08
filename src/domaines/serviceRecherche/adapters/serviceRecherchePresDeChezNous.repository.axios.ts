@@ -1,6 +1,6 @@
-import { ServiceRechercheRepository } from '../ports/serviceRecherche.repository';
-import { ServiceRecherche } from '../recupererServiceRecherche.usecase';
 import { AxiosFactory, intercept401 } from '@/axios.factory';
+import { ServiceRecherchePresDeChezNousRepository } from '@/domaines/serviceRecherche/ports/serviceRecherchePresDeChezNous.repository';
+import { ServiceRecherchePresDeChezNous } from '@/domaines/serviceRecherche/recupererServicePresDeChezNous.usecase';
 
 interface ServiceRechercheApiModel {
   id: string;
@@ -10,6 +10,7 @@ interface ServiceRechercheApiModel {
   adresse_rue?: string;
   site_web?: string;
   nombre_favoris: number;
+  distance_metres: number;
 }
 
 export interface ServiceRechercheCategorieApiModel {
@@ -18,9 +19,9 @@ export interface ServiceRechercheCategorieApiModel {
   is_default: boolean;
 }
 
-export class ServiceRechercheAxios implements ServiceRechercheRepository {
+export class ServiceRecherchePresDeChezNousAxios implements ServiceRecherchePresDeChezNousRepository {
   @intercept401()
-  async recupererService(idUtilisateur: string, categorie: string): Promise<ServiceRecherche> {
+  async recupererService(idUtilisateur: string, categorie: string): Promise<ServiceRecherchePresDeChezNous> {
     const idService = 'proximite';
     const axiosInstance = AxiosFactory.getAxios();
 

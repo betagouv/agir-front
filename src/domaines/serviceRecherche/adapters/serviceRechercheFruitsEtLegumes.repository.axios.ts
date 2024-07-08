@@ -1,5 +1,5 @@
 import { AxiosFactory, intercept401 } from '@/axios.factory';
-import { ServiceRechercheCategorieApiModel } from '@/domaines/serviceRecherche/adapters/serviceRecherche.repository.axios';
+import { ServiceRechercheCategorieApiModel } from '@/domaines/serviceRecherche/adapters/serviceRecherchePresDeChezNous.repository.axios';
 import { ServiceRechercheFruitsEtLegumesRepository } from '@/domaines/serviceRecherche/ports/serviceRechercheFruitsEtLegumes.repository';
 import { ServiceRechercheFruitsEtLegumes } from '@/domaines/serviceRecherche/recupererServiceFruitsEtLegumes.usecase';
 

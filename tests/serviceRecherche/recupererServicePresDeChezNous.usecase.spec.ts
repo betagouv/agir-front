@@ -1,15 +1,15 @@
+import { ServiceRecherchePresDeChezNousRepositoryMock } from './adapters/serviceRecherchePresDeChezNous.repository.mock';
+import { RecupererServicePresDeChezNousUsecase } from '@/domaines/serviceRecherche/recupererServicePresDeChezNous.usecase';
 import {
-  ServiceRecherchePresenterImpl,
-  ServiceRechercheViewModel,
-} from '@/domaines/serviceRecherche/adapters/serviceRecherche.presenter.impl';
-import { RecupererServiceRechercheUsecase } from '@/domaines/serviceRecherche/recupererServiceRecherche.usecase';
-import { ServiceRechercheRepositoryMock } from './adapters/serviceRecherche.repository.mock';
+  ServiceRecherchePresDeChezNousPresenterImpl,
+  ServiceRecherchePresDeChezNousViewModel,
+} from '@/domaines/serviceRecherche/adapters/serviceRecherchePresDeChezNous.presenter.impl';
 
 describe("Fichier de tests concernant la récuperation de service d'un recherche", () => {
   it("en donnant l'id d'un utilisateur et d'un service, renvoie les suggestions du service", () => {
     // GIVEN
-    const usecase = new RecupererServiceRechercheUsecase(
-      new ServiceRechercheRepositoryMock({
+    const usecase = new RecupererServicePresDeChezNousUsecase(
+      new ServiceRecherchePresDeChezNousRepositoryMock({
         titre: 'Mon service',
         suggestions: [
           {
@@ -35,11 +35,11 @@ describe("Fichier de tests concernant la récuperation de service d'un recherche
     );
 
     // WHEN
-    usecase.execute('idUtilisateur', 'idService', new ServiceRecherchePresenterImpl(expectation));
+    usecase.execute('idUtilisateur', 'idService', new ServiceRecherchePresDeChezNousPresenterImpl(expectation));
 
     // THEN
-    function expectation(catalogueViewModel: ServiceRechercheViewModel) {
-      expect(catalogueViewModel).toStrictEqual<ServiceRechercheViewModel>({
+    function expectation(serviceRecherchePresDeChezNousViewModel: ServiceRecherchePresDeChezNousViewModel) {
+      expect(serviceRecherchePresDeChezNousViewModel).toStrictEqual<ServiceRecherchePresDeChezNousViewModel>({
         titre: 'Mon service',
         suggestions: [
           {
