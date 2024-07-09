@@ -26,9 +26,19 @@
 </template>
 
 <script setup lang="ts">
-  import { SuggestionServiceViewModel } from '@/domaines/serviceRecherche/adapters/serviceRecherche.presenter.impl';
-
-  const props = defineProps<{ suggestionsServiceViewModel: SuggestionServiceViewModel }>();
+  const props = defineProps<{
+    suggestionsServiceViewModel: {
+      titre: string;
+      img: string;
+      description?: string;
+      information?: string;
+      nombreMiseEnFavoris: number;
+      tag?: {
+        label: string;
+        style: string;
+      };
+    };
+  }>();
   const backgroundImageUrl = `url(${props.suggestionsServiceViewModel.img})`;
 </script>
 

@@ -24,9 +24,19 @@
 </template>
 
 <script setup lang="ts">
-  import { SuggestionServiceViewModel } from '@/domaines/serviceRecherche/adapters/serviceRecherche.presenter.impl';
-
-  defineProps<{ servicesRechercheFavoris: SuggestionServiceViewModel }>();
+  defineProps<{
+    servicesRechercheFavoris: {
+      titre: string;
+      img: string;
+      description?: string;
+      information?: string;
+      nombreMiseEnFavoris: number;
+      tag?: {
+        label: string;
+        style: string;
+      };
+    };
+  }>();
 </script>
 
 <style scoped>

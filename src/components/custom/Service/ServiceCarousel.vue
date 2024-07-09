@@ -37,9 +37,20 @@
 <script setup lang="ts">
   import { ref } from 'vue';
   import ServiceCarouselItem from '@/components/custom/Service/ServiceCarouselItem.vue';
-  import { ServiceRechercheViewModel } from '@/domaines/serviceRecherche/adapters/serviceRecherche.presenter.impl';
 
-  defineProps<{ servicesRechercheFavorisViewModel: NonNullable<ServiceRechercheViewModel['suggestions']> }>();
+  defineProps<{
+    servicesRechercheFavorisViewModel: {
+      titre: string;
+      img: string;
+      description?: string;
+      information?: string;
+      nombreMiseEnFavoris: number;
+      tag?: {
+        label: string;
+        style: string;
+      };
+    }[];
+  }>();
 
   const activeSlide = ref(0);
 
