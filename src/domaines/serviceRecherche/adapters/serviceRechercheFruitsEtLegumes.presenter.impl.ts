@@ -26,8 +26,8 @@ export class ServiceRechercheFruitsEtLegumesPresenterImpl implements ServiceRech
         nom: 'Impact CO₂',
         description: 'Des informations fiables et sourcées issues des données environnementales de l’ADEME',
         url: 'https://impactco2.fr/',
-        logo: '',
-        screenshot: '',
+        logo: '/service-fruits-logo.png',
+        screenshot: '/service-fruits.jpg',
       },
       categories: serviceRechercheFruitsEtLegumes.categories.map(elem => ({
         code: elem.code,

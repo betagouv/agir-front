@@ -9,18 +9,8 @@
       />
       <h1 class="fr-h2">
         Les fruits et légumes pour le mois de
-        {{ serviceFruitsEtLegumesViewModel.categories.find(elem => elem.estLaCategorieParDefaut)?.label }}
+        <ServiceSelect id="categories" :options="serviceFruitsEtLegumesViewModel.categories" @update="updateMois" />
       </h1>
-      <select class="fr-select" id="categories" name="categories" @input="updateMois">
-        <option
-          v-for="categorie in serviceFruitsEtLegumesViewModel.categories"
-          :key="categorie.code"
-          :value="categorie.code"
-          :selected="categorie.estLaCategorieParDefaut"
-        >
-          {{ categorie.label }}
-        </option>
-      </select>
       <PageServiceTemplate :aside="serviceFruitsEtLegumesViewModel.aside">
         <ServiceListeFruitsEtLegumes
           titre="Peu consommateurs"
@@ -46,6 +36,7 @@
   import { onMounted, ref } from 'vue';
   import PageServiceTemplate from '@/components/custom/Service/PageServiceTemplate.vue';
   import ServiceListeFruitsEtLegumes from '@/components/custom/Service/ServiceListeFruitsEtLegumes.vue';
+  import ServiceSelect from '@/components/custom/Service/ServiceSelect.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import {
     ServiceFruitsEtLegumesViewModel,
@@ -71,12 +62,10 @@
     isLoading.value = false;
   });
 
-  const updateMois = async (event: Event) => {
-    const inputElement = event.target as HTMLInputElement;
-
+  const updateMois = async (mois: string) => {
     usecase.execute(
       utilisateurStore().utilisateur.id,
-      inputElement.value,
+      mois,
       new ServiceRechercheFruitsEtLegumesPresenterImpl(vm => (serviceFruitsEtLegumesViewModel.value = vm)),
     );
   };

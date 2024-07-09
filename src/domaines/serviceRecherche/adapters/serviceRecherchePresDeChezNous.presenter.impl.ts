@@ -45,11 +45,12 @@ export class ServiceRecherchePresDeChezNousPresenterImpl implements ServiceReche
         img: '/ic_services.svg',
       })),
       aside: {
-        nom: 'Mon service lorem',
-        description: 'Ceci est la description de mon service',
-        url: 'url',
-        logo: 'logo',
-        screenshot: 'screenshot',
+        nom: 'Près de chez nous',
+        description:
+          'Près de chez nous est un site gratuit et libre de droits. Ça veut dire que le code source est en accès libre sur Gitlab, à condition que vous le partagiez à...',
+        url: 'https://presdecheznous.fr/',
+        logo: '/service-proximite-logo.png',
+        screenshot: '/service-proximite.png',
       },
       categories: serviceRecherche.categories.map(elem => ({
         code: elem.code,

@@ -1,5 +1,5 @@
 <template>
-  <div class="fr-grid-row fr-grid-row--gutters">
+  <div class="fr-grid-row fr-grid-row--gutters fr-py-4w">
     <div class="fr-col-12 fr-col-md-8">
       <slot />
     </div>

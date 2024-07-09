@@ -1,30 +1,27 @@
 <template>
   <div class="fr-container">
     <div v-if="isLoading">Chargement en cours ...</div>
-    <p v-else-if="!serviceRechercheViewModel">Problème de chargement de donées</p>
+    <p v-else-if="!serviceRecherchePresDeChezNousViewModel">Problème de chargement de donées</p>
     <div v-else>
       <FilDAriane
         page-courante="Service : Près de chez nous"
         :page-hierarchie="[{ label: 'Vos services', url: RouteCoachName.SERVICES }]"
       />
-      <select class="fr-select" id="categories" name="categories" @input="updateFiltre">
-        <option
-          v-for="categorie in serviceRechercheViewModel.categories"
-          :key="categorie.code"
-          :value="categorie.code"
-          :selected="categorie.estLaCategorieParDefaut"
-        >
-          {{ categorie.label }}
-        </option>
-      </select>
-      <h1 class="fr-h2">à proximité de chez vous</h1>
+      <h1 class="fr-h2">
+        <ServiceSelect
+          id="categories"
+          :options="serviceRecherchePresDeChezNousViewModel.categories"
+          @update="updateType"
+        />
+        à proximité de chez vous
+      </h1>
       <p>Produits locaux, bio, de saisons et vendeurs de vrac, pour une cuisine savoureuse et responsable</p>
-      <PageServiceTemplate :aside="serviceRechercheViewModel.aside">
-        <section v-if="serviceRechercheViewModel.favoris">
-          <ServiceCarousel :services-recherche-favoris-view-model="serviceRechercheViewModel.favoris" />
+      <PageServiceTemplate :aside="serviceRecherchePresDeChezNousViewModel.aside">
+        <section v-if="serviceRecherchePresDeChezNousViewModel.favoris">
+          <ServiceCarousel :services-recherche-favoris-view-model="serviceRecherchePresDeChezNousViewModel.favoris" />
         </section>
-        <section v-if="serviceRechercheViewModel.suggestions" class="fr-py-6w">
-          <ServiceListeCarte :suggestions-service-view-model="serviceRechercheViewModel.suggestions" />
+        <section v-if="serviceRecherchePresDeChezNousViewModel.suggestions" class="fr-py-6w">
+          <ServiceListeCarte :suggestions-service-view-model="serviceRecherchePresDeChezNousViewModel.suggestions" />
         </section>
       </PageServiceTemplate>
     </div>
@@ -36,6 +33,7 @@
   import PageServiceTemplate from '@/components/custom/Service/PageServiceTemplate.vue';
   import ServiceCarousel from '@/components/custom/Service/ServiceCarousel.vue';
   import ServiceListeCarte from '@/components/custom/Service/ServiceListeCarte.vue';
+  import ServiceSelect from '@/components/custom/Service/ServiceSelect.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import {
     ServiceRecherchePresDeChezNousPresenterImpl,
@@ -47,7 +45,7 @@
   import { utilisateurStore } from '@/store/utilisateur';
 
   const isLoading = ref<boolean>(true);
-  const serviceRechercheViewModel = ref<ServiceRecherchePresDeChezNousViewModel>();
+  const serviceRecherchePresDeChezNousViewModel = ref<ServiceRecherchePresDeChezNousViewModel>();
 
   const usecase = new RecupererServicePresDeChezNousUsecase(new ServiceRecherchePresDeChezNousAxios());
 
@@ -55,18 +53,17 @@
     await usecase.execute(
       utilisateurStore().utilisateur.id,
       '',
-      new ServiceRecherchePresDeChezNousPresenterImpl(vm => (serviceRechercheViewModel.value = vm)),
+      new ServiceRecherchePresDeChezNousPresenterImpl(vm => (serviceRecherchePresDeChezNousViewModel.value = vm)),
     );
 
     isLoading.value = false;
   });
 
-  const updateFiltre = (event: Event) => {
-    const inputElement = event.target as HTMLInputElement;
+  const updateType = (type: string) => {
     usecase.execute(
       utilisateurStore().utilisateur.id,
-      inputElement.value,
-      new ServiceRecherchePresDeChezNousPresenterImpl(vm => (serviceRechercheViewModel.value = vm)),
+      type,
+      new ServiceRecherchePresDeChezNousPresenterImpl(vm => (serviceRecherchePresDeChezNousViewModel.value = vm)),
     );
   };
 </script>
