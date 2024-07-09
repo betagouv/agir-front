@@ -17,18 +17,20 @@ describe("Fichier de tests concernant la récuperation de service d'un recherche
             adresse: '2 Avenue de la République, Palaiseau - 91120',
             nombreMiseEnFavoris: 12,
             distance: 282,
+            image: '',
           },
-          { titre: 'titre 2', adresse: undefined, nombreMiseEnFavoris: 0, distance: undefined },
-          { titre: 'titre 3', adresse: undefined, nombreMiseEnFavoris: 0, distance: 2123 },
+          { titre: 'titre 2', adresse: undefined, nombreMiseEnFavoris: 0, distance: undefined, image: '' },
+          { titre: 'titre 3', adresse: undefined, nombreMiseEnFavoris: 0, distance: 2123, image: '' },
         ],
         favoris: [
           {
+            image: '',
             titre: 'titre 1',
             adresse: '2 Avenue de la République, Palaiseau - 91120',
             nombreMiseEnFavoris: 12,
             distance: undefined,
           },
-          { titre: 'titre 1', adresse: undefined, nombreMiseEnFavoris: 0, distance: undefined },
+          { titre: 'titre 1', adresse: undefined, nombreMiseEnFavoris: 0, distance: undefined, image: '' },
         ],
         categories: [
           { code: 'code', label: 'label', estLaCategorieParDefaut: true },
@@ -77,11 +79,12 @@ describe("Fichier de tests concernant la récuperation de service d'un recherche
           { titre: 'titre 1', description: undefined, nombreMiseEnFavoris: 0, img: '/ic_services.svg' },
         ],
         aside: {
-          nom: 'Mon service lorem',
-          description: 'Ceci est la description de mon service',
-          url: 'url',
-          logo: 'logo',
-          screenshot: 'screenshot',
+          nom: 'Près de chez nous',
+          description:
+            'Près de chez nous est un site gratuit et libre de droits. Ça veut dire que le code source est en accès libre sur Gitlab, à condition que vous le partagiez à...',
+          url: 'https://presdecheznous.fr/',
+          logo: '/service-proximite-logo.png',
+          screenshot: '/service-proximite.png',
         },
         categories: [
           { code: 'code', label: 'label', estLaCategorieParDefaut: true },
