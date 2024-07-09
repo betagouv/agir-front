@@ -51,6 +51,7 @@ export class ServiceRecherchePresDeChezNousAxios implements ServiceRecherchePres
       titre: elem.titre,
       adresse: `${elem.adresse_rue}, ${elem.adresse_nom_ville} - ${elem.adresse_code_postal}`,
       nombreMiseEnFavoris: elem.nombre_favoris,
+      distance: elem.distance_metres,
     });
 
     return {

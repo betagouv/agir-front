@@ -16,16 +16,19 @@ describe("Fichier de tests concernant la récuperation de service d'un recherche
             titre: 'titre 1',
             adresse: '2 Avenue de la République, Palaiseau - 91120',
             nombreMiseEnFavoris: 12,
+            distance: 282,
           },
-          { titre: 'titre 1', adresse: undefined, nombreMiseEnFavoris: 0 },
+          { titre: 'titre 2', adresse: undefined, nombreMiseEnFavoris: 0, distance: undefined },
+          { titre: 'titre 3', adresse: undefined, nombreMiseEnFavoris: 0, distance: 2123 },
         ],
         favoris: [
           {
             titre: 'titre 1',
             adresse: '2 Avenue de la République, Palaiseau - 91120',
             nombreMiseEnFavoris: 12,
+            distance: undefined,
           },
-          { titre: 'titre 1', adresse: undefined, nombreMiseEnFavoris: 0 },
+          { titre: 'titre 1', adresse: undefined, nombreMiseEnFavoris: 0, distance: undefined },
         ],
         categories: [
           { code: 'code', label: 'label', estLaCategorieParDefaut: true },
@@ -47,8 +50,22 @@ describe("Fichier de tests concernant la récuperation de service d'un recherche
             description: '2 Avenue de la République, Palaiseau - 91120',
             nombreMiseEnFavoris: 12,
             img: '/ic_services.svg',
+            tag: {
+              label: 'À 282m',
+              style: 'background--caramel text--background-caramel',
+            },
           },
-          { titre: 'titre 1', description: undefined, nombreMiseEnFavoris: 0, img: '/ic_services.svg' },
+          { titre: 'titre 2', description: undefined, nombreMiseEnFavoris: 0, img: '/ic_services.svg', tag: undefined },
+          {
+            description: undefined,
+            img: '/ic_services.svg',
+            nombreMiseEnFavoris: 0,
+            tag: {
+              label: 'À 2,1km',
+              style: 'background--caramel text--background-caramel',
+            },
+            titre: 'titre 3',
+          },
         ],
         favoris: [
           {

@@ -2,16 +2,17 @@ import { ServiceRecherchePresDeChezNousPresenter } from '@/domaines/serviceReche
 import { ServiceRecherchePresDeChezNousRepository } from '@/domaines/serviceRecherche/ports/serviceRecherchePresDeChezNous.repository';
 import { ServiceRechercheBase } from '@/domaines/serviceRecherche/serviceRecherche';
 
-interface ServiceRechercheResultat {
+interface ServiceRecherchePresDeChezNousResultat {
   titre: string;
   adresse?: string;
   nombreMiseEnFavoris: number;
+  distance?: number;
 }
 
 export interface ServiceRecherchePresDeChezNous extends ServiceRechercheBase {
   titre: string;
-  suggestions: ServiceRechercheResultat[];
-  favoris: ServiceRechercheResultat[];
+  suggestions: ServiceRecherchePresDeChezNousResultat[];
+  favoris: ServiceRecherchePresDeChezNousResultat[];
 }
 
 export class RecupererServicePresDeChezNousUsecase {

@@ -31,6 +31,12 @@ export class ServiceRecherchePresDeChezNousPresenterImpl implements ServiceReche
         description: elem.adresse,
         nombreMiseEnFavoris: elem.nombreMiseEnFavoris,
         img: '/ic_services.svg',
+        tag: elem.distance
+          ? {
+              label: this.construireTag(elem.distance),
+              style: 'background--caramel text--background-caramel',
+            }
+          : undefined,
       })),
       favoris: serviceRecherche.favoris.map(elem => ({
         titre: elem.titre,
@@ -51,5 +57,16 @@ export class ServiceRecherchePresDeChezNousPresenterImpl implements ServiceReche
         estLaCategorieParDefaut: elem.estLaCategorieParDefaut,
       })),
     });
+  }
+
+  private construireTag(distance: number): string {
+    const distanceArondie = Math.round(distance / 100) * 100;
+
+    if (distanceArondie >= 1000) {
+      const distanceKm = distanceArondie / 1000;
+      return `À ${distanceKm.toFixed(1).replace('.', ',')}km`;
+    }
+
+    return `À ${distance}m`;
   }
 }
