@@ -11,6 +11,7 @@ interface ServiceRechercheApiModel {
   site_web?: string;
   nombre_favoris: number;
   distance_metres: number;
+  image_url: string;
 }
 
 export interface ServiceRechercheCategorieApiModel {
@@ -52,6 +53,7 @@ export class ServiceRecherchePresDeChezNousAxios implements ServiceRecherchePres
       adresse: `${elem.adresse_rue}, ${elem.adresse_nom_ville} - ${elem.adresse_code_postal}`,
       nombreMiseEnFavoris: elem.nombre_favoris,
       distance: elem.distance_metres,
+      image: elem.image_url,
     });
 
     return {

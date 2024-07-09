@@ -1,7 +1,11 @@
 <template>
   <select class="service-select" :id="id" :name="id" @input="updateMois">
-    <option v-for="option in options" :key="option.code" :value="option.code">
-      <!-- :selected="option.estLaCategorieParDefaut" -->
+    <option
+      v-for="option in options"
+      :key="option.code"
+      :value="option.code"
+      :selected="option.estLaCategorieParDefaut"
+    >
       {{ option.label }}
     </option>
   </select>
@@ -10,7 +14,11 @@
 <script setup lang="ts">
   defineProps<{
     id: string;
-    options: { label: string; code: string }[];
+    options: {
+      label: string;
+      code: string;
+      estLaCategorieParDefaut: boolean;
+    }[];
   }>();
 
   const emit = defineEmits<{ (e: 'update', value: string): void }>();

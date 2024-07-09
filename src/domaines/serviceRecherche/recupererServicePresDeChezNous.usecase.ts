@@ -6,6 +6,7 @@ interface ServiceRecherchePresDeChezNousResultat {
   titre: string;
   adresse?: string;
   nombreMiseEnFavoris: number;
+  image: string;
   distance?: number;
 }
 

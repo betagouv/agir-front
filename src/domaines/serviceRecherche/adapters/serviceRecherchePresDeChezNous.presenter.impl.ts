@@ -4,7 +4,7 @@ import { ServiceRecherchePresDeChezNous } from '@/domaines/serviceRecherche/recu
 
 export interface SuggestionServiceViewModel {
   titre: string;
-  img?: string;
+  img: string;
   description?: string;
   information?: string;
   nombreMiseEnFavoris: number;
@@ -30,7 +30,7 @@ export class ServiceRecherchePresDeChezNousPresenterImpl implements ServiceReche
         titre: elem.titre,
         description: elem.adresse,
         nombreMiseEnFavoris: elem.nombreMiseEnFavoris,
-        img: '/ic_services.svg',
+        img: elem.image ? elem.image : '/ic_services.svg',
         tag: elem.distance
           ? {
               label: this.construireTag(elem.distance),
