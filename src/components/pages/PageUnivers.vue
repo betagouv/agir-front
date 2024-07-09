@@ -34,7 +34,7 @@
             :url="RouteServiceName.SERVICE_FRUITS_ET_LEGUMES"
             label="Fruits et légumes de saison"
             picto="/cerise.png"
-            legende="Juillet"
+            :legende="moisCourantCapitalized"
           />
         </div>
         <div class="fr-col-6 fr-col-md-3">
@@ -42,7 +42,7 @@
             :url="RouteServiceName.PROXIMITE"
             label="Mes commerces de proximités"
             picto="/commerce.png"
-            legende="Dijon"
+            legende="Commerces"
           />
         </div>
       </div>
@@ -112,6 +112,9 @@
   const thematiques = ref<ThematiqueViewModel[]>();
   const univers = ref<UniversViewModel>();
   const defis = ref<DefiDescriptionViewModel[]>();
+
+  const moisCourant = new Intl.DateTimeFormat('fr-FR', { month: 'long' }).format(new Date());
+  const moisCourantCapitalized = moisCourant.charAt(0).toUpperCase() + moisCourant.slice(1);
 
   function onUniversPretAAfficher(viewModel: UniversViewModel) {
     univers.value = viewModel;
