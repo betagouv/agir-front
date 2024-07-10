@@ -349,6 +349,10 @@ h2 {
   box-shadow: 0 6px 18px 0 rgba(0, 0, 18, 0.16);
 }
 
+.shadow--light {
+  box-shadow: 0 5px 20px 0 rgba(0, 0, 101, 0.06);
+}
+
 .cms__content ul p,
 .cms__content ol p {
   margin-bottom: 0;
