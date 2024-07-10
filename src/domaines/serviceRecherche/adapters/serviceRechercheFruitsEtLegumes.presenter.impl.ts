@@ -15,13 +15,16 @@ export class ServiceRechercheFruitsEtLegumesPresenterImpl implements ServiceRech
     this.serviceFruitsEtLegumesViewModel({
       peuConsommateurs: serviceRechercheFruitsEtLegumes.listeFruitsEtLegumes
         .filter(elem => elem.impactCarboneKg < 1)
-        .map(elem => elem.titre),
+        .map(elem => elem.titre)
+        .sort(),
       moyennementConsommateurs: serviceRechercheFruitsEtLegumes.listeFruitsEtLegumes
         .filter(elem => elem.impactCarboneKg >= 1 && elem.impactCarboneKg < 5)
-        .map(elem => elem.titre),
+        .map(elem => elem.titre)
+        .sort(),
       tresConsommateurs: serviceRechercheFruitsEtLegumes.listeFruitsEtLegumes
         .filter(elem => elem.impactCarboneKg >= 5)
-        .map(elem => elem.titre),
+        .map(elem => elem.titre)
+        .sort(),
       aside: {
         nom: 'Impact CO₂',
         description: 'Des informations fiables et sourcées issues des données environnementales de l’ADEME',
