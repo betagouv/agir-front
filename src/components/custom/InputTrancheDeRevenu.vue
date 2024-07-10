@@ -29,7 +29,7 @@
 </template>
 
 <script setup lang="ts">
-  import { defineModel, ref, watch } from 'vue';
+  import { ref, watch } from 'vue';
   import BoutonRadio from '@/components/custom/BoutonRadio.vue';
   import { calculerSeuils } from '@/shell/calculerSeuils';
 
