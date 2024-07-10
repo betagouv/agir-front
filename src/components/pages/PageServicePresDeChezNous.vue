@@ -10,6 +10,7 @@
       <h1 class="fr-h2">
         <ServiceSelect
           id="categories"
+          label="Choisir une catégorie"
           :options="serviceRecherchePresDeChezNousViewModel.categories"
           @update="updateType"
         />

@@ -9,7 +9,12 @@
       />
       <h1 class="fr-h2">
         Les fruits et légumes pour le mois de
-        <ServiceSelect id="categories" :options="serviceFruitsEtLegumesViewModel.categories" @update="updateMois" />
+        <ServiceSelect
+          id="mois"
+          :options="serviceFruitsEtLegumesViewModel.categories"
+          @update="updateMois"
+          label="Choisir un mois"
+        />
       </h1>
       <PageServiceTemplate :aside="serviceFruitsEtLegumesViewModel.aside">
         <ServiceListeFruitsEtLegumes
