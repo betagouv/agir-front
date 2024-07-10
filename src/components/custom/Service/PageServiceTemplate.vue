@@ -1,9 +1,9 @@
 <template>
   <div class="fr-grid-row fr-grid-row--gutters fr-py-4w">
-    <div class="fr-col-12 fr-col-md-8">
+    <div class="fr-col-12 fr-col-md-9">
       <slot />
     </div>
-    <div class="fr-col-12 fr-col-md-4">
+    <div class="fr-col-12 fr-col-md-3">
       <ServiceAside :service-aside-view-model="aside" />
     </div>
   </div>

@@ -40,4 +40,8 @@
     background-position: right 10px center;
     padding-right: 2rem;
   }
+
+  .service-select option {
+    font-size: 1.25rem;
+  }
 </style>

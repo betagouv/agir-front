@@ -68,6 +68,6 @@ export class ServiceRecherchePresDeChezNousPresenterImpl implements ServiceReche
       return `À ${distanceKm.toFixed(1).replace('.', ',')}km`;
     }
 
-    return `À ${distance}m`;
+    return `À ${distanceArondie}m`;
   }
 }

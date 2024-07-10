@@ -53,7 +53,7 @@ describe("Fichier de tests concernant la récuperation de service d'un recherche
             nombreMiseEnFavoris: 12,
             img: '/ic_services.svg',
             tag: {
-              label: 'À 282m',
+              label: 'À 300m',
               style: 'background--caramel text--background-caramel',
             },
           },
