@@ -25,6 +25,30 @@
     </div>
   </section>
 
+  <section class="fr-py-6w" v-if="universId === 'alimentation'">
+    <div class="fr-container">
+      <h2 class="fr-h2">Vos services</h2>
+      <div class="fr-grid-row fr-grid-row--gutters">
+        <div class="fr-col-6 fr-col-md-3">
+          <ServiceLink
+            :url="RouteServiceName.SERVICE_FRUITS_ET_LEGUMES"
+            label="Fruits et légumes de saison"
+            picto="/cerise.png"
+            :legende="moisCourantCapitalized"
+          />
+        </div>
+        <div class="fr-col-6 fr-col-md-3">
+          <ServiceLink
+            :url="RouteServiceName.PROXIMITE"
+            label="Mes commerces de proximités"
+            picto="/commerce.png"
+            legende="Commerces"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section
     id="recommandations"
     v-if="store.utilisateur.fonctionnalitesDebloquees.includes(Fonctionnalites.RECOMMANDATIONS)"
@@ -50,6 +74,7 @@
   import ActionListe from '../custom/Action/ActionListe.vue';
   import CarteSkeleton from '@/components/CarteSkeleton.vue';
   import CoachRecommandations from '@/components/custom/Coach/CoachRecommandations.vue';
+  import ServiceLink from '@/components/custom/Service/ServiceLink.vue';
   import ThematiquesListe from '@/components/custom/Thematiques/ThematiquesListe.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import { DefiRepositoryAxios } from '@/domaines/defi/adapters/defi.repository.axios';
@@ -74,6 +99,7 @@
   import { UniversPresenterImpl } from '@/domaines/univers/adapters/univers.presenter.impl';
   import { UniversRepositoryAxios } from '@/domaines/univers/adapters/univers.repository.axios';
   import { RecupererUniversUsecase } from '@/domaines/univers/recupererUnivers.usecase';
+  import { RouteServiceName } from '@/router/services/routes';
   import { Fonctionnalites } from '@/shell/fonctionnalitesEnum';
   import { utilisateurStore } from '@/store/utilisateur';
 
@@ -86,6 +112,9 @@
   const thematiques = ref<ThematiqueViewModel[]>();
   const univers = ref<UniversViewModel>();
   const defis = ref<DefiDescriptionViewModel[]>();
+
+  const moisCourant = new Intl.DateTimeFormat('fr-FR', { month: 'long' }).format(new Date());
+  const moisCourantCapitalized = moisCourant.charAt(0).toUpperCase() + moisCourant.slice(1);
 
   function onUniversPretAAfficher(viewModel: UniversViewModel) {
     univers.value = viewModel;
