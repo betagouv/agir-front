@@ -64,7 +64,7 @@
 </template>
 
 <script setup lang="ts">
-  import { ref, defineModel } from 'vue';
+  import { ref } from 'vue';
   import Alert from '@/components/custom/Alert.vue';
   import ModaleActions from '@/components/custom/Modale/ModaleActions';
   import InputCheckboxUnitaire from '@/components/dsfr/InputCheckboxUnitaire.vue';
