@@ -5,7 +5,7 @@
     <div v-else>
       <FilDAriane
         page-courante="Service : Près de chez nous"
-        :page-hierarchie="[{ label: 'Vos services', url: RouteCoachName.SERVICES }]"
+        :page-hierarchie="[{ label: 'Univers - En cuisine', url: `${RouteUniversName.UNIVERS}/alimentation` }]"
       />
       <h1 class="fr-h2">
         <ServiceSelect
@@ -41,7 +41,7 @@
   } from '@/domaines/serviceRecherche/adapters/serviceRecherchePresDeChezNous.presenter.impl';
   import { ServiceRecherchePresDeChezNousAxios } from '@/domaines/serviceRecherche/adapters/serviceRecherchePresDeChezNous.repository.axios';
   import { RecupererServicePresDeChezNousUsecase } from '@/domaines/serviceRecherche/recupererServicePresDeChezNous.usecase';
-  import { RouteCoachName } from '@/router/coach/routeCoachName';
+  import { RouteUniversName } from '@/router/univers/routes';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const isLoading = ref<boolean>(true);
