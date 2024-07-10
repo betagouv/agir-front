@@ -2,10 +2,15 @@ import { ServiceRechercheViewModelBase } from './serviceRechercheViewModel';
 import { ServiceRechercheFruitsEtLegumesPresenter } from '@/domaines/serviceRecherche/ports/serviceRechercheFruitsEtLegumes.presenter';
 import { ServiceRechercheFruitsEtLegumes } from '@/domaines/serviceRecherche/recupererServiceFruitsEtLegumes.usecase';
 
+export interface ServiceFruitsEtLegumesDetailViewModel {
+  nom: string;
+  emoji: string;
+}
+
 export interface ServiceFruitsEtLegumesViewModel extends ServiceRechercheViewModelBase {
-  peuConsommateurs: string[];
-  moyennementConsommateurs: string[];
-  tresConsommateurs: string[];
+  peuConsommateurs: ServiceFruitsEtLegumesDetailViewModel[];
+  moyennementConsommateurs: ServiceFruitsEtLegumesDetailViewModel[];
+  tresConsommateurs: ServiceFruitsEtLegumesDetailViewModel[];
 }
 
 export class ServiceRechercheFruitsEtLegumesPresenterImpl implements ServiceRechercheFruitsEtLegumesPresenter {
@@ -15,16 +20,16 @@ export class ServiceRechercheFruitsEtLegumesPresenterImpl implements ServiceRech
     this.serviceFruitsEtLegumesViewModel({
       peuConsommateurs: serviceRechercheFruitsEtLegumes.listeFruitsEtLegumes
         .filter(elem => elem.impactCarboneKg < 1)
-        .map(elem => elem.titre)
-        .sort(),
+        .map(elem => ({ nom: elem.titre, emoji: elem.emoji }))
+        .sort((a, b) => a.nom.localeCompare(b.nom)),
       moyennementConsommateurs: serviceRechercheFruitsEtLegumes.listeFruitsEtLegumes
         .filter(elem => elem.impactCarboneKg >= 1 && elem.impactCarboneKg < 5)
-        .map(elem => elem.titre)
-        .sort(),
+        .map(elem => ({ nom: elem.titre, emoji: elem.emoji }))
+        .sort((a, b) => a.nom.localeCompare(b.nom)),
       tresConsommateurs: serviceRechercheFruitsEtLegumes.listeFruitsEtLegumes
         .filter(elem => elem.impactCarboneKg >= 5)
-        .map(elem => elem.titre)
-        .sort(),
+        .map(elem => ({ nom: elem.titre, emoji: elem.emoji }))
+        .sort((a, b) => a.nom.localeCompare(b.nom)),
       aside: {
         nom: 'Impact CO₂',
         description: 'Des informations fiables et sourcées issues des données environnementales de l’ADEME',

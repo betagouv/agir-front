@@ -14,22 +14,27 @@ describe('Fichier de tests concernant la récuperation du service Fruits et Lég
           {
             titre: 'Haricot',
             impactCarboneKg: 0.4130619719,
+            emoji: '🌱',
           },
           {
             titre: 'Aubergine',
             impactCarboneKg: 0.4571093429,
+            emoji: '🍆',
           },
           {
             titre: 'Ananas',
             impactCarboneKg: 1.292282106,
+            emoji: '🍍',
           },
           {
             titre: 'Cerise',
             impactCarboneKg: 1.3353255069,
+            emoji: '🍒',
           },
           {
             titre: 'Mangue',
             impactCarboneKg: 10.641545366,
+            emoji: '🥭',
           },
         ],
         categories: [
@@ -58,9 +63,15 @@ describe('Fichier de tests concernant la récuperation du service Fruits et Lég
     // THEN
     function expectation(catalogueViewModel: ServiceFruitsEtLegumesViewModel) {
       expect(catalogueViewModel).toStrictEqual<ServiceFruitsEtLegumesViewModel>({
-        peuConsommateurs: ['Aubergine', 'Haricot'],
-        moyennementConsommateurs: ['Ananas', 'Cerise'],
-        tresConsommateurs: ['Mangue'],
+        peuConsommateurs: [
+          { nom: 'Aubergine', emoji: '🍆' },
+          { nom: 'Haricot', emoji: '🌱' },
+        ],
+        moyennementConsommateurs: [
+          { nom: 'Ananas', emoji: '🍍' },
+          { nom: 'Cerise', emoji: '🍒' },
+        ],
+        tresConsommateurs: [{ nom: 'Mangue', emoji: '🥭' }],
         aside: {
           nom: 'Impact CO₂',
           description: 'Des informations fiables et sourcées issues des données environnementales de l’ADEME',
