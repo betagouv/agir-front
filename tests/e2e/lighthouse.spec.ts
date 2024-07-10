@@ -56,11 +56,6 @@ test.describe('Audit a11y - pages connectées', () => {
     await playAuditA11y(page);
   });
 
-  test('Page catalogue de service', async () => {
-    await page.goto('/agir/services');
-    await playAuditA11y(page);
-  });
-
   test("Page catalogue d'aides", async () => {
     await page.goto('/vos-aides/');
     await playAuditA11y(page);
@@ -118,6 +113,16 @@ test.describe('Audit a11y - pages connectées', () => {
 
   test('Page quiz', async () => {
     await page.goto('/agir/quiz/14');
+    await playAuditA11y(page);
+  });
+
+  test('Page service - Près de chez nous', async () => {
+    await page.goto('/service/pres-de-chez-nous');
+    await playAuditA11y(page);
+  });
+
+  test('Page service - Fruits et légumes', async () => {
+    await page.goto('/service/fruits-et-legumes');
     await playAuditA11y(page);
   });
 

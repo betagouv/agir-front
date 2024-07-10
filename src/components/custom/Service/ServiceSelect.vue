@@ -1,4 +1,5 @@
 <template>
+  <label :for="id" class="fr-sr-only">{{ label }}</label>
   <select class="service-select" :id="id" :name="id" @input="updateMois">
     <option
       v-for="option in options"
@@ -14,6 +15,7 @@
 <script setup lang="ts">
   defineProps<{
     id: string;
+    label: string;
     options: {
       label: string;
       code: string;
