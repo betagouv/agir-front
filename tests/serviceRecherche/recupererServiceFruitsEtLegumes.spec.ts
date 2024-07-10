@@ -6,7 +6,7 @@ import {
 import { ServiceRechercheFruitsEtLegumesRepositoryMock } from './adapters/serviceRechercheFruitsEtLegumes.repository.mock';
 
 describe('Fichier de tests concernant la récuperation du service Fruits et Légumes', () => {
-  it("en donnant l'id d'un utilisateur, renvoie la liste des fruits et légumes du mois triès", () => {
+  it("en donnant l'id d'un utilisateur, renvoie la liste des fruits et légumes du mois triès par odre alphabétique", () => {
     // GIVEN
     const usecase = new RecupererServiceFruitsEtLegumesUsecase(
       new ServiceRechercheFruitsEtLegumesRepositoryMock({
@@ -58,7 +58,7 @@ describe('Fichier de tests concernant la récuperation du service Fruits et Lég
     // THEN
     function expectation(catalogueViewModel: ServiceFruitsEtLegumesViewModel) {
       expect(catalogueViewModel).toStrictEqual<ServiceFruitsEtLegumesViewModel>({
-        peuConsommateurs: ['Haricot', 'Aubergine'],
+        peuConsommateurs: ['Aubergine', 'Haricot'],
         moyennementConsommateurs: ['Ananas', 'Cerise'],
         tresConsommateurs: ['Mangue'],
         aside: {
