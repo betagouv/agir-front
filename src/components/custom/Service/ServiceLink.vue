@@ -1,11 +1,13 @@
 <template>
-  <div class="service-link-card position--relative background--white shadow border-radius--md fr-p-2w">
+  <div
+    class="service-link-card position--relative background--white shadow border-radius--md fr-p-2w full-height flex-column fr-grid-row flex-space-between"
+  >
     <h3 class="fr-h6 fr-mb-0">
       <router-link :to="{ name: url }" class="service-link-card__link">{{ label }}</router-link>
     </h3>
     <div class="fr-grid-row flex-space-between">
       <span class="text--gris-light">{{ legende }}</span>
-      <img :src="picto" alt="" />
+      <img :src="picto" alt="" height="26" />
     </div>
   </div>
 </template>

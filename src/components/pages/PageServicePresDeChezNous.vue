@@ -19,7 +19,10 @@
       <p>Produits locaux, bio, de saisons et vendeurs de vrac, pour une cuisine savoureuse et responsable</p>
       <PageServiceTemplate :aside="serviceRecherchePresDeChezNousViewModel.aside">
         <section v-if="serviceRecherchePresDeChezNousViewModel.favoris">
-          <ServiceCarousel :services-recherche-favoris-view-model="serviceRecherchePresDeChezNousViewModel.favoris" />
+          <ServiceCarousel
+            titre="Mes lieux favoris"
+            :services-recherche-favoris-view-model="serviceRecherchePresDeChezNousViewModel.favoris"
+          />
         </section>
         <section v-if="serviceRecherchePresDeChezNousViewModel.suggestions" class="fr-py-6w">
           <ServiceListeCarte :suggestions-service-view-model="serviceRecherchePresDeChezNousViewModel.suggestions" />

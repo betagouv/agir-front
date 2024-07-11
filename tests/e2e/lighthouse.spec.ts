@@ -126,6 +126,11 @@ test.describe('Audit a11y - pages connectées', () => {
     await playAuditA11y(page);
   });
 
+  test('Page service - Recettes', async () => {
+    await page.goto('/service/recettes');
+    await playAuditA11y(page);
+  });
+
   test.afterAll(async () => {
     await context.close();
     fs.rmSync('./tmp', { recursive: true, force: true });

@@ -72,7 +72,7 @@ describe('Fichier de tests concernant le chargement des recommandations personna
             points: 10,
             type: {
               libelle: 'Quiz',
-              style: 'background--vert--bourgeon',
+              style: 'background--vert-bourgeon',
             },
           },
           {
