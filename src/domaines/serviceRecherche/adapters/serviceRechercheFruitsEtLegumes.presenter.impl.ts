@@ -7,10 +7,15 @@ export interface ServiceFruitsEtLegumesDetailViewModel {
   emoji: string;
 }
 
-export interface ServiceFruitsEtLegumesViewModel extends ServiceRechercheViewModelBase {
+interface ServiceFruitsEtLegumesConsommationViewModel {
   peuConsommateurs: ServiceFruitsEtLegumesDetailViewModel[];
   moyennementConsommateurs: ServiceFruitsEtLegumesDetailViewModel[];
   tresConsommateurs: ServiceFruitsEtLegumesDetailViewModel[];
+}
+
+export interface ServiceFruitsEtLegumesViewModel extends ServiceRechercheViewModelBase {
+  fruits: ServiceFruitsEtLegumesConsommationViewModel;
+  legumes: ServiceFruitsEtLegumesConsommationViewModel;
 }
 
 export class ServiceRechercheFruitsEtLegumesPresenterImpl implements ServiceRechercheFruitsEtLegumesPresenter {
@@ -18,18 +23,34 @@ export class ServiceRechercheFruitsEtLegumesPresenterImpl implements ServiceRech
 
   presente(serviceRechercheFruitsEtLegumes: ServiceRechercheFruitsEtLegumes): void {
     this.serviceFruitsEtLegumesViewModel({
-      peuConsommateurs: serviceRechercheFruitsEtLegumes.listeFruitsEtLegumes
-        .filter(elem => elem.impactCarboneKg < 1)
-        .map(elem => ({ nom: elem.titre, emoji: elem.emoji }))
-        .sort((a, b) => a.nom.localeCompare(b.nom)),
-      moyennementConsommateurs: serviceRechercheFruitsEtLegumes.listeFruitsEtLegumes
-        .filter(elem => elem.impactCarboneKg >= 1 && elem.impactCarboneKg < 5)
-        .map(elem => ({ nom: elem.titre, emoji: elem.emoji }))
-        .sort((a, b) => a.nom.localeCompare(b.nom)),
-      tresConsommateurs: serviceRechercheFruitsEtLegumes.listeFruitsEtLegumes
-        .filter(elem => elem.impactCarboneKg >= 5)
-        .map(elem => ({ nom: elem.titre, emoji: elem.emoji }))
-        .sort((a, b) => a.nom.localeCompare(b.nom)),
+      fruits: {
+        peuConsommateurs: serviceRechercheFruitsEtLegumes.listeFruitsEtLegumes
+          .filter(elem => elem.type === 'fruit' && elem.impactCarboneKg < 1)
+          .map(elem => ({ nom: elem.titre, emoji: elem.emoji }))
+          .sort((a, b) => a.nom.localeCompare(b.nom)),
+        moyennementConsommateurs: serviceRechercheFruitsEtLegumes.listeFruitsEtLegumes
+          .filter(elem => elem.type === 'fruit' && elem.impactCarboneKg >= 1 && elem.impactCarboneKg < 5)
+          .map(elem => ({ nom: elem.titre, emoji: elem.emoji }))
+          .sort((a, b) => a.nom.localeCompare(b.nom)),
+        tresConsommateurs: serviceRechercheFruitsEtLegumes.listeFruitsEtLegumes
+          .filter(elem => elem.type === 'fruit' && elem.impactCarboneKg >= 5)
+          .map(elem => ({ nom: elem.titre, emoji: elem.emoji }))
+          .sort((a, b) => a.nom.localeCompare(b.nom)),
+      },
+      legumes: {
+        peuConsommateurs: serviceRechercheFruitsEtLegumes.listeFruitsEtLegumes
+          .filter(elem => elem.type === 'legume' && elem.impactCarboneKg < 1)
+          .map(elem => ({ nom: elem.titre, emoji: elem.emoji }))
+          .sort((a, b) => a.nom.localeCompare(b.nom)),
+        moyennementConsommateurs: serviceRechercheFruitsEtLegumes.listeFruitsEtLegumes
+          .filter(elem => elem.type === 'legume' && elem.impactCarboneKg >= 1 && elem.impactCarboneKg < 5)
+          .map(elem => ({ nom: elem.titre, emoji: elem.emoji }))
+          .sort((a, b) => a.nom.localeCompare(b.nom)),
+        tresConsommateurs: serviceRechercheFruitsEtLegumes.listeFruitsEtLegumes
+          .filter(elem => elem.type === 'legume' && elem.impactCarboneKg >= 5)
+          .map(elem => ({ nom: elem.titre, emoji: elem.emoji }))
+          .sort((a, b) => a.nom.localeCompare(b.nom)),
+      },
       aside: {
         nom: 'Impact CO₂',
         description: 'Des informations fiables et sourcées issues des données environnementales de l’ADEME',
