@@ -7,10 +7,15 @@ export interface ServiceFruitsEtLegumesDetailViewModel {
   emoji: string;
 }
 
-export interface ServiceFruitsEtLegumesViewModel extends ServiceRechercheViewModelBase {
+interface ServiceFruitsEtLegumesConsommationViewModel {
   peuConsommateurs: ServiceFruitsEtLegumesDetailViewModel[];
   moyennementConsommateurs: ServiceFruitsEtLegumesDetailViewModel[];
   tresConsommateurs: ServiceFruitsEtLegumesDetailViewModel[];
+}
+
+export interface ServiceFruitsEtLegumesViewModel extends ServiceRechercheViewModelBase {
+  fruits: ServiceFruitsEtLegumesConsommationViewModel;
+  legumes: ServiceFruitsEtLegumesConsommationViewModel;
 }
 
 export class ServiceRechercheFruitsEtLegumesPresenterImpl implements ServiceRechercheFruitsEtLegumesPresenter {
@@ -18,18 +23,8 @@ export class ServiceRechercheFruitsEtLegumesPresenterImpl implements ServiceRech
 
   presente(serviceRechercheFruitsEtLegumes: ServiceRechercheFruitsEtLegumes): void {
     this.serviceFruitsEtLegumesViewModel({
-      peuConsommateurs: serviceRechercheFruitsEtLegumes.listeFruitsEtLegumes
-        .filter(elem => elem.impactCarboneKg < 1)
-        .map(elem => ({ nom: elem.titre, emoji: elem.emoji }))
-        .sort((a, b) => a.nom.localeCompare(b.nom)),
-      moyennementConsommateurs: serviceRechercheFruitsEtLegumes.listeFruitsEtLegumes
-        .filter(elem => elem.impactCarboneKg >= 1 && elem.impactCarboneKg < 5)
-        .map(elem => ({ nom: elem.titre, emoji: elem.emoji }))
-        .sort((a, b) => a.nom.localeCompare(b.nom)),
-      tresConsommateurs: serviceRechercheFruitsEtLegumes.listeFruitsEtLegumes
-        .filter(elem => elem.impactCarboneKg >= 5)
-        .map(elem => ({ nom: elem.titre, emoji: elem.emoji }))
-        .sort((a, b) => a.nom.localeCompare(b.nom)),
+      fruits: this.categoriserFruitEtLegume(serviceRechercheFruitsEtLegumes.listeFruitsEtLegumes, 'fruit'),
+      legumes: this.categoriserFruitEtLegume(serviceRechercheFruitsEtLegumes.listeFruitsEtLegumes, 'legume'),
       aside: {
         nom: 'Impact CO₂',
         description: 'Des informations fiables et sourcées issues des données environnementales de l’ADEME',
@@ -43,5 +38,28 @@ export class ServiceRechercheFruitsEtLegumesPresenterImpl implements ServiceRech
         estLaCategorieParDefaut: elem.estLaCategorieParDefaut,
       })),
     });
+  }
+
+  private categoriserFruitEtLegume(
+    items: ServiceRechercheFruitsEtLegumes['listeFruitsEtLegumes'],
+    type: 'fruit' | 'legume',
+  ): ServiceFruitsEtLegumesConsommationViewModel {
+    const RANGE_BASSE = 1;
+    const RANGE_HAUTE = 5;
+
+    return {
+      peuConsommateurs: items
+        .filter(item => item.type === type && item.impactCarboneKg < RANGE_BASSE)
+        .map(item => ({ nom: item.titre, emoji: item.emoji }))
+        .sort((a, b) => a.nom.localeCompare(b.nom)),
+      moyennementConsommateurs: items
+        .filter(item => item.type === type && item.impactCarboneKg >= RANGE_BASSE && item.impactCarboneKg < RANGE_HAUTE)
+        .map(item => ({ nom: item.titre, emoji: item.emoji }))
+        .sort((a, b) => a.nom.localeCompare(b.nom)),
+      tresConsommateurs: items
+        .filter(item => item.type === type && item.impactCarboneKg >= RANGE_HAUTE)
+        .map(item => ({ nom: item.titre, emoji: item.emoji }))
+        .sort((a, b) => a.nom.localeCompare(b.nom)),
+    };
   }
 }

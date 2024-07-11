@@ -3,7 +3,12 @@ import { ServiceRechercheFruitsEtLegumesRepository } from '@/domaines/serviceRec
 import { ServiceRechercheBase } from '@/domaines/serviceRecherche/serviceRecherche';
 
 export interface ServiceRechercheFruitsEtLegumes extends ServiceRechercheBase {
-  listeFruitsEtLegumes: { titre: string; impactCarboneKg: number; emoji: string }[];
+  listeFruitsEtLegumes: {
+    titre: string;
+    impactCarboneKg: number;
+    emoji: string;
+    type: 'legume' | 'fruit';
+  }[];
 }
 
 export class RecupererServiceFruitsEtLegumesUsecase {

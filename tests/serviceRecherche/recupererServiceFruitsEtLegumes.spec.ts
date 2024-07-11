@@ -15,26 +15,31 @@ describe('Fichier de tests concernant la récuperation du service Fruits et Lég
             titre: 'Haricot',
             impactCarboneKg: 0.4130619719,
             emoji: '🌱',
+            type: 'legume',
           },
           {
             titre: 'Aubergine',
             impactCarboneKg: 0.4571093429,
             emoji: '🍆',
+            type: 'legume',
           },
           {
             titre: 'Ananas',
             impactCarboneKg: 1.292282106,
             emoji: '🍍',
+            type: 'fruit',
           },
           {
             titre: 'Cerise',
             impactCarboneKg: 1.3353255069,
             emoji: '🍒',
+            type: 'fruit',
           },
           {
             titre: 'Mangue',
             impactCarboneKg: 10.641545366,
             emoji: '🥭',
+            type: 'fruit',
           },
         ],
         categories: [
@@ -63,15 +68,22 @@ describe('Fichier de tests concernant la récuperation du service Fruits et Lég
     // THEN
     function expectation(catalogueViewModel: ServiceFruitsEtLegumesViewModel) {
       expect(catalogueViewModel).toStrictEqual<ServiceFruitsEtLegumesViewModel>({
-        peuConsommateurs: [
-          { nom: 'Aubergine', emoji: '🍆' },
-          { nom: 'Haricot', emoji: '🌱' },
-        ],
-        moyennementConsommateurs: [
-          { nom: 'Ananas', emoji: '🍍' },
-          { nom: 'Cerise', emoji: '🍒' },
-        ],
-        tresConsommateurs: [{ nom: 'Mangue', emoji: '🥭' }],
+        fruits: {
+          peuConsommateurs: [],
+          moyennementConsommateurs: [
+            { nom: 'Ananas', emoji: '🍍' },
+            { nom: 'Cerise', emoji: '🍒' },
+          ],
+          tresConsommateurs: [{ nom: 'Mangue', emoji: '🥭' }],
+        },
+        legumes: {
+          peuConsommateurs: [
+            { nom: 'Aubergine', emoji: '🍆' },
+            { nom: 'Haricot', emoji: '🌱' },
+          ],
+          moyennementConsommateurs: [],
+          tresConsommateurs: [],
+        },
         aside: {
           nom: 'Impact CO₂',
           description: 'Des informations fiables et sourcées issues des données environnementales de l’ADEME',

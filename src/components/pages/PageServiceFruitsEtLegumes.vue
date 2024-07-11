@@ -16,22 +16,44 @@
           label="Choisir un mois"
         />
       </h1>
+
       <PageServiceTemplate :aside="serviceFruitsEtLegumesViewModel.aside">
-        <ServiceListeFruitsEtLegumes
-          titre="Peu consommateurs"
-          sous-titre="Moins de 1 kg CO₂e par kg"
-          :liste="serviceFruitsEtLegumesViewModel.peuConsommateurs"
-        />
-        <ServiceListeFruitsEtLegumes
-          titre="Moyennement consommateurs"
-          sous-titre="Entre 1 et 5 kg CO₂e par kg"
-          :liste="serviceFruitsEtLegumesViewModel.moyennementConsommateurs"
-        />
-        <ServiceListeFruitsEtLegumes
-          titre="Consommateurs"
-          sous-titre="Plus de 5 kg CO₂e par kg"
-          :liste="serviceFruitsEtLegumesViewModel.tresConsommateurs"
-        />
+        <Onglet label-aria="Sélection de fruits ou légumes" :tab-panel="['Fruits', 'Légumes']">
+          <template v-slot:tab-0>
+            <ServiceListeFruitsEtLegumes
+              titre="Peu consommateurs"
+              sous-titre="Moins de 1 kg CO₂e par kg"
+              :liste="serviceFruitsEtLegumesViewModel.fruits.peuConsommateurs"
+            />
+            <ServiceListeFruitsEtLegumes
+              titre="Moyennement consommateurs"
+              sous-titre="Entre 1 et 5 kg CO₂e par kg"
+              :liste="serviceFruitsEtLegumesViewModel.fruits.moyennementConsommateurs"
+            />
+            <ServiceListeFruitsEtLegumes
+              titre="Consommateurs"
+              sous-titre="Plus de 5 kg CO₂e par kg"
+              :liste="serviceFruitsEtLegumesViewModel.fruits.tresConsommateurs"
+            />
+          </template>
+          <template v-slot:tab-1>
+            <ServiceListeFruitsEtLegumes
+              titre="Peu consommateurs"
+              sous-titre="Moins de 1 kg CO₂e par kg"
+              :liste="serviceFruitsEtLegumesViewModel.legumes.peuConsommateurs"
+            />
+            <ServiceListeFruitsEtLegumes
+              titre="Moyennement consommateurs"
+              sous-titre="Entre 1 et 5 kg CO₂e par kg"
+              :liste="serviceFruitsEtLegumesViewModel.legumes.moyennementConsommateurs"
+            />
+            <ServiceListeFruitsEtLegumes
+              titre="Consommateurs"
+              sous-titre="Plus de 5 kg CO₂e par kg"
+              :liste="serviceFruitsEtLegumesViewModel.legumes.tresConsommateurs"
+            />
+          </template>
+        </Onglet>
       </PageServiceTemplate>
     </div>
   </div>
@@ -43,6 +65,7 @@
   import ServiceListeFruitsEtLegumes from '@/components/custom/Service/ServiceListeFruitsEtLegumes.vue';
   import ServiceSelect from '@/components/custom/Service/ServiceSelect.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
+  import Onglet from '@/components/dsfr/Onglet.vue';
   import {
     ServiceFruitsEtLegumesViewModel,
     ServiceRechercheFruitsEtLegumesPresenterImpl,
