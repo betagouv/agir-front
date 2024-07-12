@@ -1,8 +1,8 @@
 import { RouteRecordRaw } from 'vue-router';
 
 const PageServiceRecettes = () => import('@/components/pages/PagesService/PageServiceRecettes.vue');
-const PageServicePresDeChezNous = () => import('@/components/pages/PageServicePresDeChezNous.vue');
-const PageServiceFruitsEtLegumes = () => import('@/components/pages/PageServiceFruitsEtLegumes.vue');
+const PageServicePresDeChezNous = () => import('@/components/pages/PagesService/PageServicePresDeChezNous.vue');
+const PageServiceFruitsEtLegumes = () => import('@/components/pages/PagesService/PageServiceFruitsEtLegumes.vue');
 
 export enum RouteServiceName {
   RECETTES = 'recettes',
