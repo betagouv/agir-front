@@ -38,12 +38,14 @@ export class ServiceRecherchePresDeChezNousPresenterImpl implements ServiceReche
             }
           : undefined,
       })),
-      favoris: serviceRecherche.favoris.map(elem => ({
-        titre: elem.titre,
-        description: elem.adresse,
-        nombreMiseEnFavoris: elem.nombreMiseEnFavoris,
-        img: elem.image ? elem.image : '/ic_services.svg',
-      })),
+      favoris: serviceRecherche.favoris
+        ? serviceRecherche.favoris.map(elem => ({
+            titre: elem.titre,
+            description: elem.adresse,
+            nombreMiseEnFavoris: elem.nombreMiseEnFavoris,
+            img: elem.image ? elem.image : '/ic_services.svg',
+          }))
+        : undefined,
       aside: {
         nom: 'Près de chez nous',
         description:
