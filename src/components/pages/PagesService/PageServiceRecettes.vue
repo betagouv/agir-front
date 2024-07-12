@@ -8,7 +8,7 @@
         :page-hierarchie="[{ label: 'Univers - En cuisine', url: `${RouteUniversName.UNIVERS}/alimentation` }]"
       />
       <h1 class="fr-h2">
-        Recettes de
+        Recettes
         <ServiceSelect
           id="mois"
           :options="serviceRecettesViewModel.categories"
