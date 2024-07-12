@@ -11,6 +11,7 @@ import { NavigationBus } from '@/navigationBus';
 import router from '@/router';
 // ordre des css important
 import 'shepherd.js/dist/css/shepherd.css';
+import '@gouvfr/dsfr/dist/component/modal/modal.min.css';
 import '@gouvfr/dsfr/dist/core/core.min.css';
 import '@gouvfr/dsfr/dist/utility/utility.min.css';
 import '@gouvfr/dsfr/dist/component/button/button.min.css';
