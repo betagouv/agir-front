@@ -42,15 +42,15 @@
             :url="RouteServiceName.PROXIMITE"
             label="Mes commerces de proximités"
             picto="/commerce.png"
-            legende="Commerces"
+            legende="Dans ma ville"
           />
         </div>
         <div class="fr-col-6 fr-col-md-3">
           <ServiceLink
             :url="RouteServiceName.RECETTES"
-            label="La Fabrique à Menus"
+            label="Recettes saines et équilibrées"
             picto="/omelette.png"
-            legende="Recettes de tout type"
+            legende="Bas carbone"
           />
         </div>
       </div>
