@@ -18,7 +18,7 @@
       </h1>
       <PageServiceTemplate :aside="serviceRecettesViewModel.aside">
         <section v-if="serviceRecettesViewModel.favoris" class="fr-pb-6w">
-          <ServiceCarousel
+          <ServiceFavoris
             titre="Mes recettes favorites"
             :services-recherche-favoris-view-model="serviceRecettesViewModel.favoris"
           />
@@ -34,7 +34,7 @@
 <script setup lang="ts">
   import { onMounted, ref } from 'vue';
   import PageServiceTemplate from '@/components/custom/Service/PageServiceTemplate.vue';
-  import ServiceCarousel from '@/components/custom/Service/ServiceCarousel.vue';
+  import ServiceFavoris from '@/components/custom/Service/ServiceFavoris.vue';
   import ServiceListeCarte from '@/components/custom/Service/ServiceListeCarte.vue';
   import ServiceSelect from '@/components/custom/Service/ServiceSelect.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';

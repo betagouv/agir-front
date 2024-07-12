@@ -42,7 +42,7 @@ export class ServiceRecherchePresDeChezNousPresenterImpl implements ServiceReche
         titre: elem.titre,
         description: elem.adresse,
         nombreMiseEnFavoris: elem.nombreMiseEnFavoris,
-        img: '/ic_services.svg',
+        img: elem.image ? elem.image : '/ic_services.svg',
       })),
       aside: {
         nom: 'Près de chez nous',
