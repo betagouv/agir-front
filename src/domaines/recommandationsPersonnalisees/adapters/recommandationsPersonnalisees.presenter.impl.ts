@@ -118,7 +118,7 @@ export class RecommandationsPersonnaliseesPresenterImpl implements Recommandatio
       case InteractionType.QUIZ:
         return {
           libelle: 'Quiz',
-          style: 'background--vert--bourgeon',
+          style: 'background--vert-bourgeon',
         };
       case InteractionType.ARTICLE:
         return {

@@ -90,7 +90,7 @@
     isLoading.value = false;
   });
 
-  const updateMois = async (mois: string) => {
+  const updateMois = (mois: string) => {
     usecase.execute(
       utilisateurStore().utilisateur.id,
       mois,

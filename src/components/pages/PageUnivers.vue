@@ -45,6 +45,14 @@
             legende="Commerces"
           />
         </div>
+        <div class="fr-col-6 fr-col-md-3">
+          <ServiceLink
+            :url="RouteServiceName.RECETTES"
+            label="La Fabrique à Menus"
+            picto="/omelette.png"
+            legende="Recettes de tout type"
+          />
+        </div>
       </div>
     </div>
   </section>

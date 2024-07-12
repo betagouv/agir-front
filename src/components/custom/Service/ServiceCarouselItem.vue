@@ -14,7 +14,10 @@
       </div>
       <h3 class="fr-text--md">{{ servicesRechercheFavoris.titre }}</h3>
       <div class="fr-mt-auto">
-        <span v-if="servicesRechercheFavoris.tag" class="fr-tag fr-text--xs fr-mr-2w">
+        <span
+          v-if="servicesRechercheFavoris.tag"
+          :class="`fr-tag fr-text--xs fr-mr-2w ${servicesRechercheFavoris.tag.style}`"
+        >
           {{ servicesRechercheFavoris.tag.label }}
         </span>
         <span class="fr-text--xs text--mention-grey">{{ servicesRechercheFavoris.information }}</span>

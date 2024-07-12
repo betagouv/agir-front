@@ -1,5 +1,5 @@
 <template>
-  <h2>Qu’est-ce que vous y trouverez</h2>
+  <h2>{{ titre }}</h2>
   <div class="carousel" role="region" aria-roledescription="carousel">
     <ul
       class="fr-grid-row fr-grid-row--gutters carousel__container fr-mb-4w list-style-none"
@@ -39,6 +39,7 @@
   import ServiceCarouselItem from '@/components/custom/Service/ServiceCarouselItem.vue';
 
   defineProps<{
+    titre: string;
     servicesRechercheFavorisViewModel: {
       titre: string;
       img: string;
