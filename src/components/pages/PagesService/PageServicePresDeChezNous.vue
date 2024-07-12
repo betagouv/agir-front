@@ -19,7 +19,7 @@
       <p>Produits locaux, bio, de saisons et vendeurs de vrac, pour une cuisine savoureuse et responsable</p>
       <PageServiceTemplate :aside="serviceRecherchePresDeChezNousViewModel.aside">
         <section v-if="serviceRecherchePresDeChezNousViewModel.favoris">
-          <ServiceCarousel
+          <ServiceFavoris
             titre="Mes lieux favoris"
             :services-recherche-favoris-view-model="serviceRecherchePresDeChezNousViewModel.favoris"
           />
@@ -35,7 +35,7 @@
 <script setup lang="ts">
   import { onMounted, ref } from 'vue';
   import PageServiceTemplate from '@/components/custom/Service/PageServiceTemplate.vue';
-  import ServiceCarousel from '@/components/custom/Service/ServiceCarousel.vue';
+  import ServiceFavoris from '@/components/custom/Service/ServiceFavoris.vue';
   import ServiceListeCarte from '@/components/custom/Service/ServiceListeCarte.vue';
   import ServiceSelect from '@/components/custom/Service/ServiceSelect.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
