@@ -72,7 +72,6 @@
   import { useAlerte } from '@/composables/useAlerte';
   import { ServiceRepositoryAxios } from '@/domaines/services/adapters/service.repository.axios';
   import { ParametrerServiceUsecase } from '@/domaines/services/parametrerService.usecase';
-  import { ServiceEvent, ServiceEventBusImpl } from '@/domaines/services/serviceEventBusImpl';
   import { utilisateurStore } from '@/store/utilisateur';
 
   defineProps<{ serviceId: string; prm: string }>();
@@ -89,7 +88,6 @@
       .execute(utilisateurStore().utilisateur.id, serviceId, { prm: parametreDuService.value })
       .then(() => {
         new ModaleActions('linkyModale').close();
-        ServiceEventBusImpl.getInstance().publish(ServiceEvent.SERVICE_INSTALLE); // todo : à sortir dans le usecase
       })
       .catch(error => afficherAlerte('error', 'Erreur', error.data.message || 'Erreur inattendue'));
   };
