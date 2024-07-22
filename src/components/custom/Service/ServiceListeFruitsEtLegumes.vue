@@ -5,7 +5,7 @@
     <li v-for="item in liste" :key="item.nom" class="fr-col-6 fr-col-md-4">
       <div class="fr-grid-row flex-space-between shadow--light background--white border-radius--md fr-p-2w">
         <span>{{ item.nom }}</span>
-        <span aria-hidden="true">{{ item.emoji }}</span>
+        <img alt="" height="24" :src="item.urlImage" />
       </div>
     </li>
   </ul>

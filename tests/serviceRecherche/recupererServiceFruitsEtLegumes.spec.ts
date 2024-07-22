@@ -6,7 +6,7 @@ import {
 import { ServiceRechercheFruitsEtLegumesRepositoryMock } from './adapters/serviceRechercheFruitsEtLegumes.repository.mock';
 
 describe('Fichier de tests concernant la récuperation du service Fruits et Légumes', () => {
-  it("en donnant l'id d'un utilisateur, renvoie la liste des fruits et légumes du mois triès par odre alphabétique", () => {
+  it("en donnant l'id d'un utilisateur, renvoie la liste des fruits et légumes du mois triès par odre alphabétique", async () => {
     // GIVEN
     const usecase = new RecupererServiceFruitsEtLegumesUsecase(
       new ServiceRechercheFruitsEtLegumesRepositoryMock({
@@ -14,32 +14,38 @@ describe('Fichier de tests concernant la récuperation du service Fruits et Lég
           {
             titre: 'Haricot',
             impactCarboneKg: 0.4130619719,
-            emoji: '🌱',
+            urlImage: 'urlImage',
             type: 'legume',
           },
           {
             titre: 'Aubergine',
             impactCarboneKg: 0.4571093429,
-            emoji: '🍆',
+            urlImage: 'urlImage',
             type: 'legume',
           },
           {
             titre: 'Ananas',
             impactCarboneKg: 1.292282106,
-            emoji: '🍍',
+            urlImage: 'urlImage',
             type: 'fruit',
           },
           {
             titre: 'Cerise',
             impactCarboneKg: 1.3353255069,
-            emoji: '🍒',
+            urlImage: 'urlImage',
             type: 'fruit',
           },
           {
             titre: 'Mangue',
             impactCarboneKg: 10.641545366,
-            emoji: '🥭',
+            urlImage: 'urlImage',
             type: 'fruit',
+          },
+          {
+            titre: 'Tomate',
+            impactCarboneKg: 0.581556477,
+            urlImage: 'urlImage',
+            type: 'fruit_et_legume',
           },
         ],
         categories: [
@@ -63,23 +69,32 @@ describe('Fichier de tests concernant la récuperation du service Fruits et Lég
     );
 
     // WHEN
-    usecase.execute('idUtilisateur', 'juillet', new ServiceRechercheFruitsEtLegumesPresenterImpl(expectation));
+    await usecase.execute('idUtilisateur', 'juillet', new ServiceRechercheFruitsEtLegumesPresenterImpl(expectation));
 
     // THEN
     function expectation(catalogueViewModel: ServiceFruitsEtLegumesViewModel) {
       expect(catalogueViewModel).toStrictEqual<ServiceFruitsEtLegumesViewModel>({
         fruits: {
-          peuConsommateurs: [],
-          moyennementConsommateurs: [
-            { nom: 'Ananas', emoji: '🍍' },
-            { nom: 'Cerise', emoji: '🍒' },
+          peuConsommateurs: [
+            {
+              nom: 'Tomate',
+              urlImage: 'urlImage',
+            },
           ],
-          tresConsommateurs: [{ nom: 'Mangue', emoji: '🥭' }],
+          moyennementConsommateurs: [
+            { nom: 'Ananas', urlImage: 'urlImage' },
+            { nom: 'Cerise', urlImage: 'urlImage' },
+          ],
+          tresConsommateurs: [{ nom: 'Mangue', urlImage: 'urlImage' }],
         },
         legumes: {
           peuConsommateurs: [
-            { nom: 'Aubergine', emoji: '🍆' },
-            { nom: 'Haricot', emoji: '🌱' },
+            { nom: 'Aubergine', urlImage: 'urlImage' },
+            { nom: 'Haricot', urlImage: 'urlImage' },
+            {
+              nom: 'Tomate',
+              urlImage: 'urlImage',
+            },
           ],
           moyennementConsommateurs: [],
           tresConsommateurs: [],

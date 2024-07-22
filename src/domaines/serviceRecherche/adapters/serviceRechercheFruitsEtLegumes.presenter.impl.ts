@@ -4,7 +4,7 @@ import { ServiceRechercheFruitsEtLegumes } from '@/domaines/serviceRecherche/rec
 
 export interface ServiceFruitsEtLegumesDetailViewModel {
   nom: string;
-  emoji: string;
+  urlImage: string;
 }
 
 interface ServiceFruitsEtLegumesConsommationViewModel {
@@ -23,8 +23,14 @@ export class ServiceRechercheFruitsEtLegumesPresenterImpl implements ServiceRech
 
   presente(serviceRechercheFruitsEtLegumes: ServiceRechercheFruitsEtLegumes): void {
     this.serviceFruitsEtLegumesViewModel({
-      fruits: this.categoriserFruitEtLegume(serviceRechercheFruitsEtLegumes.listeFruitsEtLegumes, 'fruit'),
-      legumes: this.categoriserFruitEtLegume(serviceRechercheFruitsEtLegumes.listeFruitsEtLegumes, 'legume'),
+      fruits: this.categoriserFruitEtLegume(serviceRechercheFruitsEtLegumes.listeFruitsEtLegumes, [
+        'fruit',
+        'fruit_et_legume',
+      ]),
+      legumes: this.categoriserFruitEtLegume(serviceRechercheFruitsEtLegumes.listeFruitsEtLegumes, [
+        'legume',
+        'fruit_et_legume',
+      ]),
       aside: {
         nom: 'Impact CO₂',
         description: 'Des informations fiables et sourcées issues des données environnementales de l’ADEME',
@@ -42,23 +48,25 @@ export class ServiceRechercheFruitsEtLegumesPresenterImpl implements ServiceRech
 
   private categoriserFruitEtLegume(
     items: ServiceRechercheFruitsEtLegumes['listeFruitsEtLegumes'],
-    type: 'fruit' | 'legume',
+    type: string[],
   ): ServiceFruitsEtLegumesConsommationViewModel {
     const RANGE_BASSE = 1;
     const RANGE_HAUTE = 5;
 
     return {
       peuConsommateurs: items
-        .filter(item => item.type === type && item.impactCarboneKg < RANGE_BASSE)
-        .map(item => ({ nom: item.titre, emoji: item.emoji }))
+        .filter(item => type.includes(item.type) && item.impactCarboneKg < RANGE_BASSE)
+        .map(item => ({ nom: item.titre, urlImage: item.urlImage }))
         .sort((a, b) => a.nom.localeCompare(b.nom)),
       moyennementConsommateurs: items
-        .filter(item => item.type === type && item.impactCarboneKg >= RANGE_BASSE && item.impactCarboneKg < RANGE_HAUTE)
-        .map(item => ({ nom: item.titre, emoji: item.emoji }))
+        .filter(
+          item => type.includes(item.type) && item.impactCarboneKg >= RANGE_BASSE && item.impactCarboneKg < RANGE_HAUTE,
+        )
+        .map(item => ({ nom: item.titre, urlImage: item.urlImage }))
         .sort((a, b) => a.nom.localeCompare(b.nom)),
       tresConsommateurs: items
-        .filter(item => item.type === type && item.impactCarboneKg >= RANGE_HAUTE)
-        .map(item => ({ nom: item.titre, emoji: item.emoji }))
+        .filter(item => type.includes(item.type) && item.impactCarboneKg >= RANGE_HAUTE)
+        .map(item => ({ nom: item.titre, urlImage: item.urlImage }))
         .sort((a, b) => a.nom.localeCompare(b.nom)),
     };
   }
