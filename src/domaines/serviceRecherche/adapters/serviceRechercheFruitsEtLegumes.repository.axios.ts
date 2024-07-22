@@ -7,8 +7,8 @@ interface ServiceRechercheFruitsEtLegumesApiModel {
   id: string;
   titre: string;
   impact_carbone_kg: number;
-  emoji: string;
-  type_fruit_legume: 'legume' | 'fruit';
+  image_url: string;
+  type_fruit_legume: 'legume' | 'fruit' | 'fruit_et_legume';
 }
 
 export class ServiceRechercheFruitsEtLegumesAxios implements ServiceRechercheFruitsEtLegumesRepository {
@@ -34,7 +34,7 @@ export class ServiceRechercheFruitsEtLegumesAxios implements ServiceRechercheFru
       listeFruitsEtLegumes: reponse.data.map(elem => ({
         titre: elem.titre,
         impactCarboneKg: elem.impact_carbone_kg,
-        emoji: elem.emoji,
+        urlImage: elem.image_url,
         type: elem.type_fruit_legume,
       })),
       categories: responseCategorie.data.map(elem => ({

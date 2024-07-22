@@ -6,8 +6,8 @@ export interface ServiceRechercheFruitsEtLegumes extends ServiceRechercheBase {
   listeFruitsEtLegumes: {
     titre: string;
     impactCarboneKg: number;
-    emoji: string;
-    type: 'legume' | 'fruit';
+    urlImage: string;
+    type: 'legume' | 'fruit' | 'fruit_et_legume';
   }[];
 }
 
