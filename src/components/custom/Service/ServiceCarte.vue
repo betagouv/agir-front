@@ -11,7 +11,9 @@
     </div>
     <div class="fr-col-9 fr-pl-1w fr-grid-row flex-column">
       <h3 class="fr-text--md fr-m-0">{{ suggestionsServiceViewModel.titre }}</h3>
-      <p class="fr-text--sm text--gris">{{ suggestionsServiceViewModel.description }}</p>
+      <p class="fr-text--sm text--gris" v-if="suggestionsServiceViewModel.description">
+        {{ suggestionsServiceViewModel.description }}
+      </p>
       <div class="fr-mt-auto">
         <span
           v-if="suggestionsServiceViewModel.tag"

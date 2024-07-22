@@ -48,13 +48,19 @@ export class ServiceRecherchePresDeChezNousAxios implements ServiceRecherchePres
       responseFavorisPromise,
     ]);
 
-    const mapServiceRecherche = (elem: ServiceRechercheApiModel) => ({
-      titre: elem.titre,
-      adresse: `${elem.adresse_rue}, ${elem.adresse_nom_ville} - ${elem.adresse_code_postal}`,
-      nombreMiseEnFavoris: elem.nombre_favoris,
-      distance: elem.distance_metres,
-      image: elem.image_url,
-    });
+    const mapServiceRecherche = (elem: ServiceRechercheApiModel) => {
+      const adresse_rue = elem.adresse_rue ? elem.adresse_rue + ', ' : '';
+      const adresse_nom_ville = elem.adresse_nom_ville ? elem.adresse_nom_ville + ' - ' : '';
+      const adresse_code_postal = elem.adresse_code_postal ? elem.adresse_code_postal : '';
+
+      return {
+        titre: elem.titre,
+        adresse: `${adresse_rue} ${adresse_nom_ville} ${adresse_code_postal}`,
+        nombreMiseEnFavoris: elem.nombre_favoris,
+        distance: elem.distance_metres,
+        image: elem.image_url,
+      };
+    };
 
     return {
       titre: 'Mon titre',

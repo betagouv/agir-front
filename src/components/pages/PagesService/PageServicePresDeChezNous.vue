@@ -24,8 +24,13 @@
             :services-recherche-favoris-view-model="serviceRecherchePresDeChezNousViewModel.favoris"
           />
         </section>
-        <section v-if="serviceRecherchePresDeChezNousViewModel.suggestions" class="fr-py-6w">
-          <ServiceListeCarte :suggestions-service-view-model="serviceRecherchePresDeChezNousViewModel.suggestions" />
+        <section class="fr-py-6w">
+          <h2>Suggestions</h2>
+          <ServiceListeCarte
+            v-if="serviceRecherchePresDeChezNousViewModel.suggestions.length > 0"
+            :suggestions-service-view-model="serviceRecherchePresDeChezNousViewModel.suggestions"
+          />
+          <p v-else class="fr-text--lg">😢 Aucun résultat n’est encore disponible pour votre localisation</p>
         </section>
       </PageServiceTemplate>
     </div>

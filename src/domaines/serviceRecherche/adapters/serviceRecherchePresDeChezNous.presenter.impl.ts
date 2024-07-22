@@ -28,7 +28,7 @@ export class ServiceRecherchePresDeChezNousPresenterImpl implements ServiceReche
       titre: 'Mon service',
       suggestions: serviceRecherche.suggestions.map(elem => ({
         titre: elem.titre,
-        description: elem.adresse,
+        description: elem.adresse ? elem.adresse : undefined,
         nombreMiseEnFavoris: elem.nombreMiseEnFavoris,
         img: elem.image ? elem.image : '/ic_services.svg',
         tag: elem.distance
@@ -41,7 +41,7 @@ export class ServiceRecherchePresDeChezNousPresenterImpl implements ServiceReche
       favoris: serviceRecherche.favoris
         ? serviceRecherche.favoris.map(elem => ({
             titre: elem.titre,
-            description: elem.adresse,
+            description: elem.adresse ? elem.adresse : undefined,
             nombreMiseEnFavoris: elem.nombreMiseEnFavoris,
             img: elem.image ? elem.image : '/ic_services.svg',
           }))
@@ -49,7 +49,7 @@ export class ServiceRecherchePresDeChezNousPresenterImpl implements ServiceReche
       aside: {
         nom: 'Près de chez nous',
         description:
-          'Près de chez nous est un site gratuit et libre de droits. Ça veut dire que le code source est en accès libre sur Gitlab, à condition que vous le partagiez à...',
+          'Près de chez nous est une cartographie collaborative qui recense l’ensemble des structures qui proposent des produits bio, équitables et locaux.',
         url: 'https://presdecheznous.fr/',
         logo: '/service-proximite-logo.png',
         screenshot: '/service-proximite.png',
@@ -67,9 +67,9 @@ export class ServiceRecherchePresDeChezNousPresenterImpl implements ServiceReche
 
     if (distanceArondie >= 1000) {
       const distanceKm = distanceArondie / 1000;
-      return `À ${distanceKm.toFixed(1).replace('.', ',')}km`;
+      return `À ${distanceKm.toFixed(1).replace('.', ',')} km`;
     }
 
-    return `À ${distanceArondie}m`;
+    return `À ${distanceArondie} m`;
   }
 }
