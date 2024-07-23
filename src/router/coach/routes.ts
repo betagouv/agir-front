@@ -1,5 +1,4 @@
 const Coach = () => import('@/components/Coach.vue');
-const PageCatalogueServices = () => import('@/components/pages/PageCatalogueServices.vue');
 const PageBibliotheque = () => import('@/components/pages/PageBibliotheque.vue');
 const PageLinky = () => import('@/components/pages/PageLinky.vue');
 
@@ -24,14 +23,6 @@ const coachRoutes: RouteRecordRaw[] = [
         component: Coach,
         meta: {
           title: 'Agir',
-        },
-      },
-      {
-        path: RouteCoachPath.SERVICES,
-        name: RouteCoachName.SERVICES,
-        component: PageCatalogueServices,
-        meta: {
-          title: 'Catalogue de services',
         },
       },
       {
