@@ -20,7 +20,7 @@
     "@gouvfr/dsfr": "1.11.2",
     "@hotjar/browser": "1.0.9",
     "@sentry/vue": "8.13.0",
-    "chart.js": "4.4.1",
+    "chart.js": "4.4.3",
     "js-cookie": "3.0.5",
     "jwt-decode": "4.0.0",
     "pinia": "2.1.7",
