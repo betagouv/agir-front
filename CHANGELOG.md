@@ -1,5 +1,58 @@
 # Changelog
 
+## [1.15.0](https://github.com/betagouv/agir-front/compare/v1.14.0...v1.15.0) (2024-07-23)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* ajout des pictos au service fruits et légumes ([#486](https://github.com/betagouv/agir-front/issues/486)) ([428e283](https://github.com/betagouv/agir-front/commit/428e283c09834755516e098e42fa37f872aa8e6a))
+* ajout onglets fruit et legume au service fruits et légumes de saison ([#488](https://github.com/betagouv/agir-front/issues/488)) ([a2808f0](https://github.com/betagouv/agir-front/commit/a2808f05e4969d79b3fa32907a9695df74439bbe))
+* creation de la page service recettes ([#489](https://github.com/betagouv/agir-front/issues/489)) ([75e2d2c](https://github.com/betagouv/agir-front/commit/75e2d2cf6f26bd899f9fb9b1736490dbf4181f72))
+* création des pages services ([#480](https://github.com/betagouv/agir-front/issues/480)) ([ac7519a](https://github.com/betagouv/agir-front/commit/ac7519a5ef17f714c07a1d949c940cc4085e6341))
+* masque les titres si pas de fruits et legumes ([#490](https://github.com/betagouv/agir-front/issues/490)) ([950470c](https://github.com/betagouv/agir-front/commit/950470c99c46b201db648b0a0fbc91e100c52469))
+* masquer favoris si absent dans les services ([#493](https://github.com/betagouv/agir-front/issues/493)) ([c936a68](https://github.com/betagouv/agir-front/commit/c936a6860b96ccf1ad0da08c078b1d4f79fffe99))
+* modification du fil d'arianne des services pour retourner sur l'univers associé ([#482](https://github.com/betagouv/agir-front/issues/482)) ([849ba47](https://github.com/betagouv/agir-front/commit/849ba47c2d646f0bddfcc133c6b10e8dd818a084))
+* modification images fruits et legumes ([#497](https://github.com/betagouv/agir-front/issues/497)) ([8c7fbbf](https://github.com/betagouv/agir-front/commit/8c7fbbfeb808bac131f583a6495b7cc5c25efba8))
+* suppression carousel service ([#491](https://github.com/betagouv/agir-front/issues/491)) ([e33089d](https://github.com/betagouv/agir-front/commit/e33089dd5bdca8e07d53d1fd159220241a07369f))
+* trier les fruits et légumes par ordre alphabetique ([#481](https://github.com/betagouv/agir-front/issues/481)) ([db7d813](https://github.com/betagouv/agir-front/commit/db7d8139975fab7ddf8e5c779c4623f47deb7757))
+
+
+### 🐛 Corrections de bogues
+
+* correction wording suppression de compte ([#485](https://github.com/betagouv/agir-front/issues/485)) ([76842ac](https://github.com/betagouv/agir-front/commit/76842ac9548eff9ba93ce2e58c64cae788194f3f))
+* ouverture du menu en responsive permanent ([#492](https://github.com/betagouv/agir-front/issues/492)) ([92ce1bd](https://github.com/betagouv/agir-front/commit/92ce1bd8b05142fcd8f4ff5e146b8f508e769fce))
+
+
+### 👷 Autres changements
+
+* ajout test a11y aux pages services ([#483](https://github.com/betagouv/agir-front/issues/483)) ([c74a482](https://github.com/betagouv/agir-front/commit/c74a482e05946f717c9fde7f92ddeb2779ead2e3))
+* Bump @gouvfr/dsfr from 1.11.1 to 1.11.2 ([#469](https://github.com/betagouv/agir-front/issues/469)) ([bf6d93d](https://github.com/betagouv/agir-front/commit/bf6d93df63b9dd62c8a404435d723d869d7225d3))
+* Bump @playwright/test from 1.42.0 to 1.45.0 ([#462](https://github.com/betagouv/agir-front/issues/462)) ([3eef5e4](https://github.com/betagouv/agir-front/commit/3eef5e40e11f35cab1c62465ff75e3e038e4838a))
+* Bump @playwright/test from 1.45.0 to 1.45.2 ([#496](https://github.com/betagouv/agir-front/issues/496)) ([5dee3d2](https://github.com/betagouv/agir-front/commit/5dee3d2cff60666311aa0ed76c1b12eeeb46d8a8))
+* Bump @sentry/vue from 7.103.0 to 8.13.0 ([#460](https://github.com/betagouv/agir-front/issues/460)) ([3e124aa](https://github.com/betagouv/agir-front/commit/3e124aafba47faf1b78bd9f32d5d99910c248127))
+* Bump @testing-library/vue from 8.0.2 to 8.1.0 ([#466](https://github.com/betagouv/agir-front/issues/466)) ([87b52a6](https://github.com/betagouv/agir-front/commit/87b52a67874d2142a79ecba814db6c9921312eb0))
+* Bump @types/node from 20.11.21 to 20.14.9 ([#463](https://github.com/betagouv/agir-front/issues/463)) ([d0922f1](https://github.com/betagouv/agir-front/commit/d0922f1eb81512980cd3bdbebea0876d5a29d626))
+* Bump @typescript-eslint/eslint-plugin from 7.1.0 to 7.16.1 ([#495](https://github.com/betagouv/agir-front/issues/495)) ([42f5148](https://github.com/betagouv/agir-front/commit/42f51481ea667bb9a8ad33080f713638f3aa95f6))
+* Bump @typescript-eslint/parser from 7.1.0 to 7.15.0 ([#461](https://github.com/betagouv/agir-front/issues/461)) ([34c67d2](https://github.com/betagouv/agir-front/commit/34c67d2f1079ff35bb1d46c451a3b6d92911c33e))
+* Bump @vitejs/plugin-vue from 5.0.4 to 5.0.5 ([#472](https://github.com/betagouv/agir-front/issues/472)) ([2808b3c](https://github.com/betagouv/agir-front/commit/2808b3c93a63b2340ef39629050a7d4182a32c5b))
+* Bump @vitest/coverage-v8 from 1.3.1 to 2.0.4 ([#502](https://github.com/betagouv/agir-front/issues/502)) ([8b3bb63](https://github.com/betagouv/agir-front/commit/8b3bb6354552f3afe0bebb06546bf9cccad4fc8a))
+* Bump braces from 3.0.2 to 3.0.3 ([#440](https://github.com/betagouv/agir-front/issues/440)) ([7b33fb8](https://github.com/betagouv/agir-front/commit/7b33fb8bc3bbd9a345664a4604f885ec91453b20))
+* Bump chart.js from 4.4.1 to 4.4.3 ([#500](https://github.com/betagouv/agir-front/issues/500)) ([d44165c](https://github.com/betagouv/agir-front/commit/d44165c49726fff537d1e4cab156b07f1ea8968f))
+* Bump eslint-plugin-vue from 9.18.1 to 9.27.0 ([#468](https://github.com/betagouv/agir-front/issues/468)) ([24ee3ea](https://github.com/betagouv/agir-front/commit/24ee3ea284fe19e08f4456d1aa2ccd2ebdf839e9))
+* Bump lighthouse from 11.7.1 to 12.1.0 ([#470](https://github.com/betagouv/agir-front/issues/470)) ([e345810](https://github.com/betagouv/agir-front/commit/e3458103bc86b6a0f15581af6ec3167d029cbcbd))
+* Bump lint-staged from 14.0.1 to 15.2.7 ([#465](https://github.com/betagouv/agir-front/issues/465)) ([5cd28f3](https://github.com/betagouv/agir-front/commit/5cd28f33e3a309c83555522aec8b64dedc9cc029))
+* Bump prettier from 3.2.5 to 3.3.2 ([#464](https://github.com/betagouv/agir-front/issues/464)) ([d964791](https://github.com/betagouv/agir-front/commit/d9647910583eed46db378b52f4b757c9df512a60))
+* Bump release-please from 16.3.1 to 16.12.0 ([#473](https://github.com/betagouv/agir-front/issues/473)) ([9a04f1c](https://github.com/betagouv/agir-front/commit/9a04f1c0be09204b8f34212e4c74dd33a47f6836))
+* Bump vite from 5.1.7 to 5.3.3 ([#471](https://github.com/betagouv/agir-front/issues/471)) ([fab09db](https://github.com/betagouv/agir-front/commit/fab09dbe9a10eade9bb8220fe4588f323a18f7bc))
+* Bump vue from 3.4.20 to 3.4.31 ([#467](https://github.com/betagouv/agir-front/issues/467)) ([705e5db](https://github.com/betagouv/agir-front/commit/705e5db86a5f5d3522f2d0317f1b7333cac9df33))
+* Bump vue-tsc from 1.8.22 to 2.0.26 ([#476](https://github.com/betagouv/agir-front/issues/476)) ([7c02705](https://github.com/betagouv/agir-front/commit/7c0270543b4650f9c6583644cfbcbe6e3b144dec))
+* Bump ws from 7.5.9 to 7.5.10 ([#501](https://github.com/betagouv/agir-front/issues/501)) ([dd90c48](https://github.com/betagouv/agir-front/commit/dd90c48011ffe5702a5720efbaa4178f68460177))
+* mise en place de dependabot ([#458](https://github.com/betagouv/agir-front/issues/458)) ([1cb0a53](https://github.com/betagouv/agir-front/commit/1cb0a5396520962c98f37e036c43cfc63a66d9cf))
+* refacto event bus ([#456](https://github.com/betagouv/agir-front/issues/456)) ([0ece46b](https://github.com/betagouv/agir-front/commit/0ece46b70013234d1447e1afb23e953060ac07f5))
+* refacto score en mettant la sauvegarde du score dans le usecase plutôt que dans le component ([#457](https://github.com/betagouv/agir-front/issues/457)) ([d83e76a](https://github.com/betagouv/agir-front/commit/d83e76a6cb0af51b07b839a1ced056a8b02eb469))
+* suppression des imports defineModel ([#484](https://github.com/betagouv/agir-front/issues/484)) ([fd54625](https://github.com/betagouv/agir-front/commit/fd54625a3e4c523afa17483ea31450b0699052be))
+* suppression du catalogue de service ([#498](https://github.com/betagouv/agir-front/issues/498)) ([e1912c7](https://github.com/betagouv/agir-front/commit/e1912c75cd0241c936fb4d29e1ef954a7b14a40a))
+
 ## [1.14.0](https://github.com/betagouv/agir-front/compare/v1.13.0...v1.14.0) (2024-06-25)
 
 
