@@ -108,8 +108,9 @@
     >
       <template v-slot:contenu>
         <ServiceModaleParametreLinky
+          v-if="informationCompteurViewModel"
           service-id="linky"
-          :prm="informationCompteurViewModel && informationCompteurViewModel.prm"
+          :prm="informationCompteurViewModel.prm"
         />
       </template>
     </Modale>
