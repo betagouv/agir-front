@@ -18,20 +18,22 @@
       </h1>
       <p>Produits locaux, bio, de saisons et vendeurs de vrac, pour une cuisine savoureuse et responsable</p>
       <PageServiceTemplate :aside="serviceRecherchePresDeChezNousViewModel.aside">
-        <section v-if="serviceRecherchePresDeChezNousViewModel.favoris">
-          <ServiceFavoris
-            titre="Mes lieux favoris"
-            :services-recherche-favoris-view-model="serviceRecherchePresDeChezNousViewModel.favoris"
-          />
-        </section>
-        <section class="fr-py-6w">
-          <h2>Suggestions</h2>
-          <ServiceListeCarte
-            v-if="serviceRecherchePresDeChezNousViewModel.suggestions.length > 0"
-            :suggestions-service-view-model="serviceRecherchePresDeChezNousViewModel.suggestions"
-          />
-          <p v-else class="fr-text--lg">😢 Aucun résultat n’est encore disponible pour votre localisation</p>
-        </section>
+        <div class="text--center" v-if="serviceRecherchePresDeChezNousViewModel.aucunResultat">
+          <img src="/service_aucun_resultat.svg" height="250" alt="" />
+          <p class="fr-text--lg">😢 Aucun résultat n’est encore disponible pour votre localisation</p>
+        </div>
+        <div v-else>
+          <section v-if="serviceRecherchePresDeChezNousViewModel.favoris">
+            <ServiceFavoris
+              titre="Mes lieux favoris"
+              :services-recherche-favoris-view-model="serviceRecherchePresDeChezNousViewModel.favoris"
+            />
+          </section>
+          <section class="fr-py-6w">
+            <h2>Suggestions</h2>
+            <ServiceListeCarte :suggestions-service-view-model="serviceRecherchePresDeChezNousViewModel.suggestions" />
+          </section>
+        </div>
       </PageServiceTemplate>
     </div>
   </div>

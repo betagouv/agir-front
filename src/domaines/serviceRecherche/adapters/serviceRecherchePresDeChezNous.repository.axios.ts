@@ -49,13 +49,18 @@ export class ServiceRecherchePresDeChezNousAxios implements ServiceRecherchePres
     ]);
 
     const mapServiceRecherche = (elem: ServiceRechercheApiModel) => {
+      let adresseFinale: string | undefined;
       const adresse_rue = elem.adresse_rue ? elem.adresse_rue + ', ' : '';
       const adresse_nom_ville = elem.adresse_nom_ville ? elem.adresse_nom_ville + ' - ' : '';
       const adresse_code_postal = elem.adresse_code_postal ? elem.adresse_code_postal : '';
 
+      if (!adresse_rue && !adresse_nom_ville && !adresse_code_postal) {
+        adresseFinale = `${adresse_rue} ${adresse_nom_ville} ${adresse_code_postal}`;
+      }
+
       return {
         titre: elem.titre,
-        adresse: `${adresse_rue} ${adresse_nom_ville} ${adresse_code_postal}`,
+        adresse: adresseFinale,
         nombreMiseEnFavoris: elem.nombre_favoris,
         distance: elem.distance_metres,
         image: elem.image_url,
