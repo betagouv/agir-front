@@ -32,8 +32,8 @@ export class DefiPresenterImpl implements DefiPresenter {
       thematique: defi.thematique,
       description: defi.description,
       reponse: defi.status,
-      astuces: defi.astuces,
-      pourquoi: defi.pourquoi,
+      astuces: this.determinerParagrapheVide(defi.astuces),
+      pourquoi: this.determinerParagrapheVide(defi.pourquoi),
       explicationRefus: defi.explicationRefus,
       afficherNombreDePersonnes: defi.nombreDePersonnes > 2,
       nombreDePersonnes: defi.nombreDePersonnes,
@@ -56,5 +56,9 @@ export class DefiPresenterImpl implements DefiPresenter {
       { id: 'en_cours', label: '👍 Je relève le défi' },
       { id: 'pas_envie', label: '👎 Pas pour moi' },
     ];
+  }
+
+  private determinerParagrapheVide(html: string) {
+    return html !== '<p></p>' ? html : '';
   }
 }
