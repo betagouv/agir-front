@@ -13,6 +13,7 @@ export class InjectUtilisateur {
         prenom: 'Dorian',
         mail: 'dorian@agir.dev',
         fonctionnalitesDebloquees: [],
+        onboardingAEteRealise: true,
       },
       valeurBilanCarbone: { bilan: '', details: [], valeurMax: 0 },
       score: {

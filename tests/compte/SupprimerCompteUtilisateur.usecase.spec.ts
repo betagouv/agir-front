@@ -15,15 +15,11 @@ class SpyCompteUtilisateurRepository implements CompteUtilisateurRepository {
   }
   private _aEteAppelee: boolean = false;
   getCompteUtilisateur(idUtilisateur: string): Promise<CompteUtilisateur> {
-    throw Error();
-  }
-
-  mettreAjour(compteUtilisateur: CompteUtilisateur) {
-    throw Error();
+    throw Error;
   }
 
   creerCompteUtilisateur(compteUtilisateurACreer: CompteUtilisateurACreer): Promise<CompteUtilisateur> {
-    throw Error();
+    throw Error;
   }
 
   supprimerCompteUtilisateur(idUtilisateur: string): Promise<void> {
@@ -33,7 +29,16 @@ class SpyCompteUtilisateurRepository implements CompteUtilisateurRepository {
   }
 
   mettreAJourLeMotDePasse(idUtilisateur: string, nouveauMotDePasse: string): Promise<void> {
-    throw Error();
+    throw Error;
+  }
+
+  validationOnboardingPostCreationCompte(
+    idUtilisateur: string,
+    prenom: string,
+    commune: string,
+    codePostal: string,
+  ): Promise<void> {
+    return Promise.resolve(undefined);
   }
 }
 

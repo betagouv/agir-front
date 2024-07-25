@@ -32,7 +32,7 @@ describe('Fichier de tests concernant la mise à jour du profile utilisateur', (
     // GIVEN
     // WHEN
     const repository = new SpyProfileUtilisateurRepository();
-    const sessionRepository = new SpySauvegarderUtilisateurSessionRepository();
+    const sessionRepository = SpySauvegarderUtilisateurSessionRepository.avecOnBoardingRealise();
     const usecase = new MettreAJourProfileUtilisateurUsecase(repository, sessionRepository);
     const viewModelInput: ProfileUtilisateurViewModel = {
       id: '1',
@@ -57,11 +57,12 @@ describe('Fichier de tests concernant la mise à jour du profile utilisateur', (
       anneeNaissance: undefined,
     });
     expect(sessionRepository.utilisateur).toStrictEqual<Utilisateur>({
-      id: '',
+      id: '1',
       nom: 'Dorian',
       mail: 'mail@exemple.com',
       prenom: 'John',
       fonctionnalitesDebloquees: [],
+      onboardingAEteRealise: true,
     });
   });
 });

@@ -1,7 +1,6 @@
-import { CreerCompteUtilisateurUsecase } from '@/domaines/compte/creerCompteUtilisateur.usecase';
+import { CreerCompteUtilisateurUsecase, UserInput } from '@/domaines/compte/creerCompteUtilisateur.usecase';
 import { Utilisateur } from '@/domaines/authentification/ports/utilisateur.repository';
 import { CompteUtilisateur, CompteUtilisateurRepository } from '@/domaines/compte/ports/compteUtilisateur.repository';
-import { OnboardingState } from '@/domaines/onboarding/evaluerOnboarding.usecase';
 import { SpySauvegarderUtilisateurSessionRepository } from './sessionRepository.sauvegarderUtilisateur.spy';
 import { CreerComptePresenterImpl } from '@/domaines/compte/adapters/creerComptePresenterImpl';
 import { RepositoryError } from '@/shell/repositoryError';
@@ -29,11 +28,20 @@ class CompteUtilisateurForTest implements CompteUtilisateurRepository {
   mettreAjour(compteUtilisateur: CompteUtilisateur) {}
 
   supprimerCompteUtilisateur(idUtilisateur: string): Promise<void> {
-    throw Error();
+    throw new Error();
   }
 
   mettreAJourLeMotDePasse(idUtilisateur: string, nouveauMotDePasse: string): Promise<void> {
-    throw Error();
+    throw new Error();
+  }
+
+  validationOnboardingPostCreationCompte(
+    idUtilisateur: string,
+    prenom: string,
+    commune: string,
+    codePostal: string,
+  ): Promise<void> {
+    return Promise.resolve(undefined);
   }
 }
 
@@ -49,29 +57,32 @@ class CompteUtilisateurRepositoryErreurBetaFermee implements CompteUtilisateurRe
   mettreAjour(compteUtilisateur: CompteUtilisateur) {}
 
   supprimerCompteUtilisateur(idUtilisateur: string): Promise<void> {
-    throw Error();
+    throw new Error();
   }
 
   mettreAJourLeMotDePasse(idUtilisateur: string, nouveauMotDePasse: string): Promise<void> {
-    throw Error();
+    throw new Error();
+  }
+
+  validationOnboardingPostCreationCompte(
+    idUtilisateur: string,
+    prenom: string,
+    commune: string,
+    codePostal: string,
+  ): Promise<void> {
+    return Promise.resolve(undefined);
   }
 }
 
 describe('Fichier de tests concernant la creation du compte utilisateur', () => {
   it('doit creer un compte temporaire et sauvegarder uniquement le mail en session', async () => {
     // GIVEN
-    const compteACreer = {
-      nom: 'John',
-      id: '',
+    const compteACreer: UserInput = {
       mail: 'john@skynet.com',
-      prenom: 'Doe',
-      revenuFiscal: '',
       motDePasse: 'motDePasse',
-      codePostal: '77370',
-      commune: 'Nangis',
     };
 
-    const sessionRepository = new SpySauvegarderUtilisateurSessionRepository();
+    const sessionRepository = SpySauvegarderUtilisateurSessionRepository.sansOnBoardingRealise();
     const compteUtilisateurRepository = new CompteUtilisateurForTest();
     // WHEN
     const usecase = new CreerCompteUtilisateurUsecase(compteUtilisateurRepository, sessionRepository);
@@ -88,48 +99,16 @@ describe('Fichier de tests concernant la creation du compte utilisateur', () => 
       mail: 'john@skynet.com',
       nom: '',
       prenom: '',
+      onboardingAEteRealise: false,
     });
   });
   it("si le repository renvoie une erreur avec un code d'erreur 023 doit naviguer vers la page de beta fermée", async () => {
     // GIVEN
-    const compteACreer = {
-      nom: 'John',
-      id: '',
+    const compteACreer: UserInput = {
       mail: 'john@skynet.com',
-      prenom: 'Doe',
-      revenuFiscal: '',
       motDePasse: 'motDePasse',
-      codePostal: '77370',
-      commune: 'Nangis',
     };
 
-    const onboardingState: OnboardingState = {
-      email: '',
-      etapeTransport: {
-        transports: [],
-        avion: 0,
-        done: true,
-      },
-      etapeLogement: {
-        code_postal: '',
-        commune: '',
-        adultes: 0,
-        enfants: 0,
-        residence: '',
-        proprietaire: false,
-        superficie: '',
-        chauffage: '',
-        done: true,
-      },
-      etapeAlimentation: {
-        repas: '',
-        done: true,
-      },
-      etapeConsommation: {
-        consommation: '',
-        done: true,
-      },
-    };
     const sessionRepository = new SpySauvegarderUtilisateurSessionRepository();
     const compteUtilisateurRepository = new CompteUtilisateurRepositoryErreurBetaFermee();
     // WHEN // THEN

@@ -17,6 +17,7 @@ class UtilisateurRepositoryForTest implements UtilisateurRepository {
       prenom: 'John',
       mail: '',
       fonctionnalitesDebloquees: [],
+      onboardingAEteRealise: true,
     });
   }
 
@@ -44,7 +45,7 @@ class UtilisateurRepositoryForTest implements UtilisateurRepository {
 describe("Fichier de tests concernant l'authentification ", () => {
   it("Lorsque je passe un email et un mot de passe doit authentifer et sauvegarder l'utilisateur en session", async () => {
     // GIVEN
-    const spySessionRepository = new SpySauvegarderUtilisateurSessionRepository();
+    const spySessionRepository = SpySauvegarderUtilisateurSessionRepository.avecOnBoardingRealise();
     const usecase = new AuthentifierUtilisateurUsecase(new UtilisateurRepositoryForTest(), spySessionRepository);
     // WHEN
     await usecase.execute('Dorian', '123');
@@ -55,6 +56,7 @@ describe("Fichier de tests concernant l'authentification ", () => {
       prenom: 'John',
       mail: '',
       fonctionnalitesDebloquees: [],
+      onboardingAEteRealise: true,
     });
   });
 });

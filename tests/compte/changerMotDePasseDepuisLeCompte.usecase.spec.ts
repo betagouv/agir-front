@@ -15,11 +15,11 @@ class CompteUtilisateurRepositoryForTest implements CompteUtilisateurRepository 
   }
   private _idUtilisateur: string = '';
   creerCompteUtilisateur(compteUtilisateurACreer: CompteUtilisateurACreer): Promise<CompteUtilisateur> {
-    throw Error();
+    throw Error;
   }
 
   getCompteUtilisateur(idUtilisateur: string): Promise<CompteUtilisateur> {
-    throw Error();
+    throw Error;
   }
 
   mettreAJourLeMotDePasse(idUtilisateur: string, nouveauMotDePasse: string): Promise<void> {
@@ -28,10 +28,17 @@ class CompteUtilisateurRepositoryForTest implements CompteUtilisateurRepository 
     return Promise.resolve();
   }
 
-  mettreAjour(compteUtilisateur: CompteUtilisateur) {}
-
   supprimerCompteUtilisateur(idUtilisateur: string): Promise<void> {
-    throw Error();
+    throw Error;
+  }
+
+  validationOnboardingPostCreationCompte(
+    idUtilisateur: string,
+    prenom: string,
+    commune: string,
+    codePostal: string,
+  ): Promise<void> {
+    return Promise.resolve(undefined);
   }
 }
 describe('Fichier de tests concernant le changement du mot passe utilisateur', () => {

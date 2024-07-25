@@ -36,7 +36,15 @@
                     Se connecter
                   </router-link>
                 </li>
-                <li v-if="estConnecte">
+                <li v-if="doitAfficherLeBoutonSeDeconnecter">
+                  <button
+                    class="fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-logout-box-r-line fr-btn--lg fr-mr-auto"
+                    @click="logout"
+                  >
+                    Se déconnecter
+                  </button>
+                </li>
+                <li v-if="utilisateurStore().utilisateur.onboardingAEteRealise">
                   <div class="utilisateur">
                     <div class="fr-icon-user-fill fr-icon--sm fr-text-label--blue-france">
                       <router-link
@@ -48,7 +56,7 @@
                       </router-link>
                     </div>
 
-                    <ScoreHeader />
+                    <ScoreHeader v-if="utilisateurStore().utilisateur.onboardingAEteRealise" />
                   </div>
                 </li>
               </ul>
@@ -61,15 +69,8 @@
       <div class="fr-container">
         <button class="fr-btn--close fr-btn" aria-controls="modal-menu" title="Fermer">Fermer</button>
         <div class="fr-header__menu-links"></div>
-        <nav
-          v-if="nomUtilisateur"
-          class="fr-nav"
-          id="navigation"
-          role="navigation"
-          aria-label="Menu principal"
-          data-fr-js-navigation="true"
-        >
-          <ul class="fr-nav__list">
+        <nav class="fr-nav" id="navigation" role="navigation" aria-label="Menu principal" data-fr-js-navigation="true">
+          <ul class="fr-nav__list" v-if="utilisateurStore().utilisateur.onboardingAEteRealise">
             <li class="fr-nav__item" data-fr-js-navigation-item="true">
               <router-link
                 class="fr-nav__link"
@@ -121,7 +122,7 @@
   import '@gouvfr/dsfr/dist/component/navigation/navigation.min.css';
   import { computed } from 'vue';
   import { useRoute } from 'vue-router';
-  import { RouteCommuneName } from '@/router';
+  import router, { RouteCommuneName } from '@/router';
   import { utilisateurStore } from '@/store/utilisateur';
   import ScoreHeader from '@/components/custom/ScoreHeader.vue';
   import LienDEvitement from '@/components/dsfr/LienDEvitement.vue';
@@ -131,6 +132,7 @@
   import { RouteCompteName } from '@/router/compte/routeCompteName';
   import { RouteAidesName } from '@/router/aides/routeAidesName';
   import { useReveal } from '@/composables/useReveal';
+  import Cookies from 'js-cookie';
 
   const { aideTour } = useReveal();
 
@@ -138,7 +140,16 @@
   const store = utilisateurStore();
 
   const nomUtilisateur = computed(() => store.utilisateur.prenom);
-  const estConnecte = computed(() => store.utilisateur.nom.length > 0);
+  const estConnecte = computed(() => store.utilisateur.id.length > 0);
+  const doitAfficherLeBoutonSeDeconnecter = computed(
+    () => estConnecte.value && !store.utilisateur.onboardingAEteRealise,
+  );
+
+  const logout = () => {
+    store.reset();
+    Cookies.remove('bearer');
+    router.replace('/');
+  };
 </script>
 
 <style scoped>

@@ -11,17 +11,18 @@ export interface CompteTemporaire {
 }
 
 export interface CompteUtilisateurACreer {
-  nom: string;
   email: string;
-  prenom: string;
   motDePasse: string;
-  anneeDeNaissance?: number;
-  codePostal: string;
-  commune: string;
 }
 export interface CompteUtilisateurRepository {
   getCompteUtilisateur(idUtilisateur: string): Promise<CompteUtilisateur>;
   creerCompteUtilisateur(compteUtilisateurACreer: CompteUtilisateurACreer): Promise<CompteTemporaire>;
   supprimerCompteUtilisateur(idUtilisateur: string): Promise<void>;
   mettreAJourLeMotDePasse(idUtilisateur: string, nouveauMotDePasse: string): Promise<void>;
+  validationOnboardingPostCreationCompte(
+    idUtilisateur: string,
+    prenom: string,
+    commune: string,
+    codePostal: string,
+  ): Promise<void>;
 }
