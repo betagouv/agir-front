@@ -4,7 +4,6 @@ import {
   CompteUtilisateurACreer,
   CompteUtilisateurRepository,
 } from '@/domaines/compte/ports/compteUtilisateur.repository';
-import { Error } from 'lighthouse/core/lib/lantern/lantern';
 
 class CompteUtilisateurRepositoryForTest implements CompteUtilisateurRepository {
   get nouveauMotDePasse(): string {

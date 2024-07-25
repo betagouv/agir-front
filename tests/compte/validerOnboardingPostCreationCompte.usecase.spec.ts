@@ -5,7 +5,6 @@ import {
   CompteUtilisateurACreer,
   CompteUtilisateurRepository,
 } from '@/domaines/compte/ports/compteUtilisateur.repository';
-import { Error } from 'lighthouse/core/lib/lantern/lantern';
 import { ValiderOnboardingPostCreationCompteUsecase } from '@/domaines/compte/validerOnboardingPostCreationCompte.usecase';
 
 class ValidationOnboardingCompteUtilisateurRepository implements CompteUtilisateurRepository {

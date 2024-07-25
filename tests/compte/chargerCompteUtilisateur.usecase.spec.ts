@@ -11,7 +11,6 @@ import {
 import { Utilisateur } from '@/domaines/authentification/ports/utilisateur.repository';
 import { expect } from 'vitest';
 import { SpySauvegarderUtilisateurSessionRepository } from './sessionRepository.sauvegarderUtilisateur.spy';
-import { Error } from 'lighthouse/core/lib/lantern/lantern';
 
 class ChargeCompteUtilisateurAvecMailRepository implements CompteUtilisateurRepository {
   getCompteUtilisateur(idUtilisateur: string): Promise<CompteUtilisateur> {

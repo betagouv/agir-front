@@ -4,7 +4,6 @@ import { CompteUtilisateur, CompteUtilisateurRepository } from '@/domaines/compt
 import { SpySauvegarderUtilisateurSessionRepository } from './sessionRepository.sauvegarderUtilisateur.spy';
 import { CreerComptePresenterImpl } from '@/domaines/compte/adapters/creerComptePresenterImpl';
 import { RepositoryError } from '@/shell/repositoryError';
-import { Error } from 'lighthouse/core/lib/lantern/lantern';
 
 class CompteUtilisateurForTest implements CompteUtilisateurRepository {
   creerCompteUtilisateur(compteUtilisateurACreer): Promise<CompteUtilisateur> {

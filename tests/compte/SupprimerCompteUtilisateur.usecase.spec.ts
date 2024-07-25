@@ -4,7 +4,6 @@ import {
   CompteUtilisateurRepository,
 } from '@/domaines/compte/ports/compteUtilisateur.repository';
 import { SupprimerCompteUtilisateurUsecase } from '@/domaines/compte/supprimerCompteUtilisateur.usecase';
-import { Error } from 'lighthouse/core/lib/lantern/lantern';
 
 class SpyCompteUtilisateurRepository implements CompteUtilisateurRepository {
   get idUtilisateur(): string {
