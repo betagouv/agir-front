@@ -69,15 +69,8 @@
       <div class="fr-container">
         <button class="fr-btn--close fr-btn" aria-controls="modal-menu" title="Fermer">Fermer</button>
         <div class="fr-header__menu-links"></div>
-        <nav
-          v-if="utilisateurStore().utilisateur.onboardingAEteRealise"
-          class="fr-nav"
-          id="navigation"
-          role="navigation"
-          aria-label="Menu principal"
-          data-fr-js-navigation="true"
-        >
-          <ul class="fr-nav__list">
+        <nav class="fr-nav" id="navigation" role="navigation" aria-label="Menu principal" data-fr-js-navigation="true">
+          <ul class="fr-nav__list" v-if="utilisateurStore().utilisateur.onboardingAEteRealise">
             <li class="fr-nav__item" data-fr-js-navigation-item="true">
               <router-link
                 class="fr-nav__link"
