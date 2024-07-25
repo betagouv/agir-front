@@ -1,7 +1,7 @@
 <template>
   <div class="fr-container fr-py-6w">
     <div class="fr-col-md-6 fr-col-12 fr-mx-auto">
-      <div class="fr-mb-0 background--white fr-p-3w border border-radius--md">
+      <div class="background--white fr-p-3w border border-radius--md">
         <CreationCompteFormulaire />
       </div>
     </div>

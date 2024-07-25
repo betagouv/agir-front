@@ -36,7 +36,7 @@
                     Se connecter
                   </router-link>
                 </li>
-                <li v-if="estConnecte && !utilisateurStore().utilisateur.onboardingAEteRealise">
+                <li v-if="doitAfficherLeBoutonSeDeconnecter">
                   <button
                     class="fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-logout-box-r-line fr-btn--lg fr-mr-auto"
                     @click="logout"
@@ -141,6 +141,9 @@
 
   const nomUtilisateur = computed(() => store.utilisateur.prenom);
   const estConnecte = computed(() => store.utilisateur.id.length > 0);
+  const doitAfficherLeBoutonSeDeconnecter = computed(
+    () => estConnecte.value && !store.utilisateur.onboardingAEteRealise,
+  );
 
   const logout = () => {
     store.reset();
