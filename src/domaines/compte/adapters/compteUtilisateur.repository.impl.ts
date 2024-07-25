@@ -32,14 +32,9 @@ export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurReposit
   async creerCompteUtilisateur(compteUtilisateurACreer: CompteUtilisateurACreer): Promise<CompteTemporaire> {
     try {
       const axiosInstance = AxiosFactory.getAxios();
-      const response: Response<CompteUtilisateurApiModel> = await axiosInstance.post(`/utilisateurs/`, {
-        nom: compteUtilisateurACreer.nom,
-        prenom: compteUtilisateurACreer.prenom,
+      const response: Response<CompteUtilisateurApiModel> = await axiosInstance.post(`/utilisateurs_v2/`, {
         email: compteUtilisateurACreer.email,
         mot_de_passe: compteUtilisateurACreer.motDePasse,
-        annee_naissance: compteUtilisateurACreer.anneeDeNaissance,
-        code_postal: compteUtilisateurACreer.codePostal,
-        commune: compteUtilisateurACreer.commune,
       });
       return {
         mail: response.data.email || '',
@@ -65,6 +60,21 @@ export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurReposit
     const axiosInstance = AxiosFactory.getAxios();
     await axiosInstance.patch(`/utilisateurs/${idUtilisateur}/profile`, {
       mot_de_passe: nouveauMotDePasse,
+    });
+  }
+
+  @intercept401()
+  async validationOnboardingPostCreationCompte(
+    idUtilisateur: string,
+    prenom: string,
+    commune: string,
+    codePostal: string,
+  ): Promise<void> {
+    const axiosInstance = AxiosFactory.getAxios();
+    await axiosInstance.patch(`/utilisateurs/${idUtilisateur}/profile`, {
+      prenom,
+      commune,
+      code_postal: codePostal,
     });
   }
 }

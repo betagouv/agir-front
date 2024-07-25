@@ -11,8 +11,7 @@ import {
 import { Utilisateur } from '@/domaines/authentification/ports/utilisateur.repository';
 import { expect } from 'vitest';
 import { SpySauvegarderUtilisateurSessionRepository } from './sessionRepository.sauvegarderUtilisateur.spy';
-import { PublierEvenementRepositorySpy } from '../shell/publierEvenement.repository.spy';
-import { Evenemement } from '@/shell/ports/publierEvenement.repository';
+import { Error } from 'lighthouse/core/lib/lantern/lantern';
 
 class ChargeCompteUtilisateurAvecMailRepository implements CompteUtilisateurRepository {
   getCompteUtilisateur(idUtilisateur: string): Promise<CompteUtilisateur> {
@@ -25,8 +24,6 @@ class ChargeCompteUtilisateurAvecMailRepository implements CompteUtilisateurRepo
     });
   }
 
-  mettreAjour(compteUtilisateur: CompteUtilisateur) {}
-
   creerCompteUtilisateur(compteUtilisateurACreer: CompteUtilisateurACreer): Promise<CompteUtilisateur> {
     throw Error;
   }
@@ -36,15 +33,23 @@ class ChargeCompteUtilisateurAvecMailRepository implements CompteUtilisateurRepo
   }
 
   mettreAJourLeMotDePasse(idUtilisateur: string, nouveauMotDePasse: string): Promise<void> {
-    throw Error();
+    throw Error;
+  }
+
+  validationOnboardingPostCreationCompte(
+    idUtilisateur: string,
+    prenom: string,
+    commune: string,
+    codePostal: string,
+  ): Promise<void> {
+    throw Error;
   }
 }
 
 describe('Fichier de tests concernant le chargement du compte utilisateur', () => {
   it("Doit aller chercher les infos à partir de l'utilisateurId", async () => {
     // GIVEN
-    const spySessionRepository = new SpySauvegarderUtilisateurSessionRepository();
-    const spyPublierEvenement = new PublierEvenementRepositorySpy();
+    const spySessionRepository = SpySauvegarderUtilisateurSessionRepository.avecOnBoardingRealise();
     // WHEN
     const usecase = new ChargerCompteUtilisateurUsecase(
       new ChargeCompteUtilisateurAvecMailRepository(),
@@ -67,6 +72,7 @@ describe('Fichier de tests concernant le chargement du compte utilisateur', () =
       mail: 'mail@exemple.com',
       prenom: 'John',
       fonctionnalitesDebloquees: [],
+      onboardingAEteRealise: true,
     });
   });
 });

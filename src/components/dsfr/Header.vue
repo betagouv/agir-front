@@ -36,7 +36,12 @@
                     Se connecter
                   </router-link>
                 </li>
-                <li v-if="estConnecte">
+                <li v-if="estConnecte && !utilisateurStore().utilisateur.onboardingAEteRealise">
+                  <router-link :to="{ name: RouteCommuneName.AUTHENTIFICATION }" class="fr-btn fr-btn--secondary">
+                    Se déconnecter
+                  </router-link>
+                </li>
+                <li v-if="utilisateurStore().utilisateur.onboardingAEteRealise">
                   <div class="utilisateur">
                     <div class="fr-icon-user-fill fr-icon--sm fr-text-label--blue-france">
                       <router-link
@@ -48,7 +53,7 @@
                       </router-link>
                     </div>
 
-                    <ScoreHeader />
+                    <ScoreHeader v-if="utilisateurStore().utilisateur.onboardingAEteRealise" />
                   </div>
                 </li>
               </ul>
@@ -62,7 +67,7 @@
         <button class="fr-btn--close fr-btn" aria-controls="modal-menu" title="Fermer">Fermer</button>
         <div class="fr-header__menu-links"></div>
         <nav
-          v-if="nomUtilisateur"
+          v-if="utilisateurStore().utilisateur.onboardingAEteRealise"
           class="fr-nav"
           id="navigation"
           role="navigation"
@@ -138,7 +143,7 @@
   const store = utilisateurStore();
 
   const nomUtilisateur = computed(() => store.utilisateur.prenom);
-  const estConnecte = computed(() => store.utilisateur.nom.length > 0);
+  const estConnecte = computed(() => store.utilisateur.id.length > 0);
 </script>
 
 <style scoped>

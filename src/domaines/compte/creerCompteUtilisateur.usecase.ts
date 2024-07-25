@@ -4,13 +4,8 @@ import { CreerComptePresenter } from '@/domaines/compte/ports/creerComptePresent
 import { RepositoryError } from '@/shell/repositoryError';
 
 export interface UserInput {
-  nom: string;
   mail: string;
-  prenom: string;
   motDePasse: string;
-  anneeNaissance?: number;
-  codePostal: string;
-  commune: string;
 }
 export class CreerCompteUtilisateurUsecase {
   constructor(
@@ -21,13 +16,8 @@ export class CreerCompteUtilisateurUsecase {
   async execute(creerComptePresenter: CreerComptePresenter, compteUtilisateurACreerInput: UserInput): Promise<void> {
     try {
       const utilisateurCree = await this.compteUtilisateuRepository.creerCompteUtilisateur({
-        nom: compteUtilisateurACreerInput.nom,
         email: compteUtilisateurACreerInput.mail,
-        prenom: compteUtilisateurACreerInput.prenom,
         motDePasse: compteUtilisateurACreerInput.motDePasse,
-        anneeDeNaissance: compteUtilisateurACreerInput.anneeNaissance,
-        codePostal: compteUtilisateurACreerInput.codePostal,
-        commune: compteUtilisateurACreerInput.commune,
       });
 
       this.sessionRepository.sauvegarderUtilisateur({

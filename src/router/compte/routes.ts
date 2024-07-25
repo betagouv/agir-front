@@ -6,12 +6,15 @@ const PageCompteOptionsAvancees = () => import('@/components/pages/PageCompteOpt
 const PageCompteMieuxVousConnaitre = () => import('@/components/pages/PageCompteMieuxVousConnaitre.vue');
 const PageCompteLogement = () => import('@/components/pages/PageCompteLogement.vue');
 const PageCompteVosDefis = () => import('@/components/pages/PageCompteVosDefis.vue');
+const PagePostCreationCompteEtape1 = () =>
+  import('@/components/pages/PagePostCreationCompte/PagePostCreationCompteEtape1.vue');
+const PagePostCreationCompteEtape2 = () =>
+  import('@/components/pages/PagePostCreationCompte/PagePostCreationCompteEtape2.vue');
 import { RouteRecordRaw } from 'vue-router';
 import { RouteCompteName } from '@/router/compte/routeCompteName';
 
 export enum RouteComptePath {
   MON_COMPTE = '/mon-compte/',
-  MODIFIER_MOT_DE_PASSE = '/mon-compte/changer-de-mot-de-passe',
   OPTIONS_AVANCEES = '/mon-compte/options-avancees',
   CREATION_COMPTE = '/creation-compte',
   VALIDATION_COMPTE = '/validation-compte',
@@ -19,6 +22,8 @@ export enum RouteComptePath {
   MIEUX_VOUS_CONNAITRE = '/mon-compte/mieux-vous-connaitre',
   LOGEMENT = '/mon-compte/logement',
   DEFIS = '/mon-compte/vos-actions',
+  POST_CREATION_COMPTE_ETAPE_1 = '/creation-compte/etape-1',
+  POST_CREATION_COMPTE_ETAPE_2 = '/creation-compte/etape-2',
 }
 
 const compteRoutes: RouteRecordRaw[] = [
@@ -83,6 +88,22 @@ const compteRoutes: RouteRecordRaw[] = [
         },
       },
     ],
+  },
+  {
+    path: RouteComptePath.POST_CREATION_COMPTE_ETAPE_1,
+    name: RouteCompteName.POST_CREATION_COMPTE_ETAPE_1,
+    component: PagePostCreationCompteEtape1,
+    meta: {
+      estPublique: true,
+    },
+  },
+  {
+    path: RouteComptePath.POST_CREATION_COMPTE_ETAPE_2,
+    name: RouteCompteName.POST_CREATION_COMPTE_ETAPE_2,
+    component: PagePostCreationCompteEtape2,
+    meta: {
+      estPublique: true,
+    },
   },
 ];
 

@@ -50,7 +50,7 @@ export class RecommandationsPersonnaliseesRepositoryAxios implements Recommandat
   async chargerRecommandationsPersonnalisees(idUtilisateur: string): Promise<RecommandationPersonnalisee[]> {
     const axiosInstance = AxiosFactory.getAxios();
     const response = await axiosInstance.get<RecommandationApiModel[]>(
-      `/utilisateurs/${idUtilisateur}/recommandations`,
+      `/utilisateurs/${idUtilisateur}/recommandations_v2`,
     );
 
     return response.data.map((apiModel: RecommandationApiModel) => {

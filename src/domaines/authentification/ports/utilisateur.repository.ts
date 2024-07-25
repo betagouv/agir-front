@@ -4,6 +4,7 @@ export interface Utilisateur {
   prenom: string;
   mail: string;
   fonctionnalitesDebloquees: string[];
+  onboardingAEteRealise: boolean;
 }
 
 export type IdUtilisateur = string;

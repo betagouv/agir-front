@@ -25,6 +25,7 @@ class UtilisateurRepositoryForTest implements UtilisateurRepository {
       prenom: 'John',
       mail: '',
       fonctionnalitesDebloquees: [],
+      onboardingAEteRealise: false,
     });
   }
 
@@ -63,6 +64,7 @@ describe("Fichier de tests concernant l'authentification France Connect", () => 
       prenom: 'John',
       mail: '',
       fonctionnalitesDebloquees: [],
+      onboardingAEteRealise: false,
     });
   });
 });

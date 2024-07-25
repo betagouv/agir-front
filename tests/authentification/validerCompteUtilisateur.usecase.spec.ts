@@ -19,6 +19,7 @@ class MockUtilisateurRepository implements UtilisateurRepository {
       prenom: '',
       mail: 'john@exemple.com',
       fonctionnalitesDebloquees: [],
+      onboardingAEteRealise: false,
     });
   }
 
@@ -42,7 +43,7 @@ describe('Fichier de tests concernant la validation du compte utilisateur', () =
   it('En donnant un mail et un code doit valider le compte puis le sauvegarder en session', async () => {
     // GIVEN
     // WHEN
-    const spySessionRepository = new SpySauvegarderUtilisateurSessionRepository();
+    const spySessionRepository = SpySauvegarderUtilisateurSessionRepository.sansOnBoardingRealise();
     const usecase = new ValiderCompteUtilisateurUsecase(new MockUtilisateurRepository(), spySessionRepository);
     await usecase.execute('john@exemple.com', '123456');
     // THEN
@@ -52,6 +53,7 @@ describe('Fichier de tests concernant la validation du compte utilisateur', () =
       prenom: '',
       mail: 'john@exemple.com',
       fonctionnalitesDebloquees: [],
+      onboardingAEteRealise: false,
     });
   });
 });

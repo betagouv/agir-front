@@ -20,6 +20,7 @@ export const utilisateurStore = defineStore('utilisateur', {
       prenom: '',
       mail: '',
       fonctionnalitesDebloquees: [],
+      onboardingAEteRealise: false,
     },
     valeurBilanCarbone: {
       bilan: '',
@@ -42,9 +43,6 @@ export const utilisateurStore = defineStore('utilisateur', {
         ...this.utilisateur,
         ...utilisateur,
       };
-    },
-    setValeurBilanCarbone(valeurBilanCarbone: EmpreinteViewModel) {
-      this.valeurBilanCarbone = valeurBilanCarbone;
     },
     setScore(score: Score) {
       this.score = score;

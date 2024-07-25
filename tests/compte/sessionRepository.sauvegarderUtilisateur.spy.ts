@@ -3,6 +3,27 @@ import { Utilisateur } from '@/domaines/authentification/ports/utilisateur.repos
 import { Score } from '@/domaines/score/ports/score.repository';
 
 export class SpySauvegarderUtilisateurSessionRepository implements SessionRepository {
+  private _utilisateur: Utilisateur = {
+    id: '',
+    mail: '',
+    prenom: '',
+    nom: '',
+    fonctionnalitesDebloquees: [],
+    onboardingAEteRealise: false,
+  };
+
+  static avecOnBoardingRealise(): SpySauvegarderUtilisateurSessionRepository {
+    const repository = new SpySauvegarderUtilisateurSessionRepository();
+    repository.sauvegarderUtilisateur({ onboardingAEteRealise: true });
+    return repository;
+  }
+
+  static sansOnBoardingRealise(): SpySauvegarderUtilisateurSessionRepository {
+    const repository = new SpySauvegarderUtilisateurSessionRepository();
+    repository.sauvegarderUtilisateur({ onboardingAEteRealise: false });
+    return repository;
+  }
+
   get utilisateur(): Utilisateur {
     return this._utilisateur;
   }
@@ -15,18 +36,10 @@ export class SpySauvegarderUtilisateurSessionRepository implements SessionReposi
     return this._nouvelleFeatureDebloqueeArgs;
   }
 
-  private _utilisateur: Utilisateur = {
-    id: '',
-    nom: '',
-    prenom: '',
-    mail: '',
-    fonctionnalitesDebloquees: [],
-  };
-
   private _nouvelleFeatureDebloqueeAEteAppele: boolean = false;
   private _nouvelleFeatureDebloqueeArgs: string = '';
 
-  sauvegarderUtilisateur(utilisateur: Utilisateur) {
+  sauvegarderUtilisateur(utilisateur: Partial<Utilisateur>) {
     this._utilisateur = {
       ...this._utilisateur,
       ...utilisateur,

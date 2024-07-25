@@ -2,7 +2,11 @@
   <form aria-labelledby="identity-fieldset-legend" @submit.prevent="performCreerCompteUtilisateur" class="fr-mb-4w">
     <fieldset class="fr-fieldset fr-mb-0">
       <legend class="fr-fieldset__legend" id="identity-fieldset-legend">
-        <h2 class="fr-h4 text--center">Inscrivez-vous</h2>
+        <img src="/bg_creation_compte.png" alt="" />
+        <h2 class="fr-h4 fr-mb-0">Créez votre compte Agir</h2>
+        <p class="fr-text--regular">
+          Indiquez votre adresse email et choississez un mot de passe pour accéder au service.
+        </p>
       </legend>
       <div class="fr-messages-group">
         <Alert
@@ -14,40 +18,9 @@
         />
       </div>
       <div class="fr-fieldset__element">
-        <InputMail
-          label="Adresse électronique"
-          name="utilisateur-mail"
-          v-model="compteUtilisateurInput.mail"
-          :disable="true"
-        />
+        <InputMail label="Adresse électronique" name="utilisateur-mail" v-model="compteUtilisateurInput.mail" />
       </div>
-      <div class="fr-grid-row fr-grid-row--gutters">
-        <div class="fr-col-12 fr-col-lg-6">
-          <div class="fr-fieldset__element">
-            <InputText label="Nom" name="utilisateur-nom" v-model="compteUtilisateurInput.nom" />
-          </div>
-        </div>
-        <div class="fr-col-12 fr-col-lg-6">
-          <div class="fr-fieldset__element">
-            <InputText label="Prénom" name="utilisateur-prenom" v-model="compteUtilisateurInput.prenom" />
-          </div>
-        </div>
-        <div class="fr-col-12">
-          <div class="fr-fieldset__element">
-            <InputSelectAnneeDeNaissance v-model="compteUtilisateurInput.anneeNaissance" />
-          </div>
-        </div>
-        <div class="fr-col-12">
-          <div class="fr-fieldset__element">
-            <InputCodePostal
-              v-model="compteUtilisateurInput.codePostal"
-              :default-value="compteUtilisateurInput.codePostal"
-              :default-select-value="compteUtilisateurInput.commune"
-              @update:selectedCommune="compteUtilisateurInput.commune = $event"
-            />
-          </div>
-        </div>
-      </div>
+
       <div class="fr-fieldset__element">
         <InputPassword
           v-model="compteUtilisateurInput.motDePasse"
@@ -88,27 +61,19 @@
 <script setup lang="ts">
   import { ref } from 'vue';
   import Alert from '@/components/custom/Alert.vue';
-  import InputSelectAnneeDeNaissance from '@/components/custom/CreationCompte/InputSelectAnneeDeNaissance.vue';
   import InputPassword from '@/components/custom/InputPassword.vue';
-  import InputCodePostal from '@/components/dsfr/InputCodePostal.vue';
   import InputMail from '@/components/dsfr/InputMail.vue';
-  import InputText from '@/components/dsfr/InputText.vue';
   import { SessionRepositoryStore } from '@/domaines/authentification/adapters/session.repository.store';
   import { CompteUtilisateurRepositoryImpl } from '@/domaines/compte/adapters/compteUtilisateur.repository.impl';
   import { CreerComptePresenterImpl } from '@/domaines/compte/adapters/creerComptePresenterImpl';
   import { CreerCompteUtilisateurUsecase, UserInput } from '@/domaines/compte/creerCompteUtilisateur.usecase';
   import router, { RouteCommuneName } from '@/router';
   import { RouteConformiteName } from '@/router/conformite/routes';
-  import { onboardingStore } from '@/store/onboarding';
   import { utilisateurStore } from '@/store/utilisateur';
 
   let compteUtilisateurInput = ref<UserInput>({
-    nom: '',
-    mail: onboardingStore().email,
-    prenom: '',
+    mail: '',
     motDePasse: '',
-    codePostal: '',
-    commune: '',
   });
   let creationDeCompteEnErreur = ref<boolean>();
   let creationDeCompteMessageErreur = ref<string>('');
