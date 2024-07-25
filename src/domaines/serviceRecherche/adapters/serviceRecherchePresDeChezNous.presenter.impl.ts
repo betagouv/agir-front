@@ -14,62 +14,85 @@ export interface SuggestionServiceViewModel {
   };
 }
 
-export interface ServiceRecherchePresDeChezNousViewModel extends ServiceRechercheViewModelBase {
-  titre: string;
+export interface ServiceRecherchePresDeChezNousViewModelAvecResultats extends ServiceRechercheViewModelBase {
   favoris?: SuggestionServiceViewModel[];
   suggestions: SuggestionServiceViewModel[];
+  aucunResultat: false;
 }
+
+export interface ServiceRecherchePresDeChezNousViewModelSansResultats extends ServiceRechercheViewModelBase {
+  aucunResultat: true;
+}
+
+export type ServiceRecherchePresDeChezNousViewModel =
+  | ServiceRecherchePresDeChezNousViewModelAvecResultats
+  | ServiceRecherchePresDeChezNousViewModelSansResultats;
 
 export class ServiceRecherchePresDeChezNousPresenterImpl implements ServiceRecherchePresDeChezNousPresenter {
   constructor(private serviceRechercheViewModel: (viewModel: ServiceRecherchePresDeChezNousViewModel) => void) {}
 
   presente(serviceRecherche: ServiceRecherchePresDeChezNous): void {
-    this.serviceRechercheViewModel({
-      titre: 'Mon service',
-      suggestions: serviceRecherche.suggestions.map(elem => ({
-        titre: elem.titre,
-        description: elem.adresse,
-        nombreMiseEnFavoris: elem.nombreMiseEnFavoris,
-        img: elem.image ? elem.image : '/ic_services.svg',
-        tag: elem.distance
-          ? {
-              label: this.construireTag(elem.distance),
-              style: 'background--caramel text--background-caramel',
-            }
+    const aside = {
+      nom: 'Près de chez nous',
+      description:
+        'Près de chez nous est une cartographie collaborative qui recense l’ensemble des structures qui proposent des produits bio, équitables et locaux.',
+      url: 'https://presdecheznous.fr/',
+      logo: '/service-proximite-logo.png',
+      screenshot: '/service-proximite.png',
+    };
+    const categories = serviceRecherche.categories.map(elem => ({
+      code: elem.code,
+      label: elem.label,
+      estLaCategorieParDefaut: elem.estLaCategorieParDefaut,
+    }));
+
+    let serviceRechercheViewModel: ServiceRecherchePresDeChezNousViewModel;
+
+    if (serviceRecherche.suggestions.length > 0) {
+      serviceRechercheViewModel = {
+        suggestions: serviceRecherche.suggestions.map(elem => ({
+          titre: elem.titre,
+          description: elem.adresse,
+          nombreMiseEnFavoris: elem.nombreMiseEnFavoris,
+          img: elem.image ? elem.image : '/ic_services.svg',
+          tag: elem.distance
+            ? {
+                label: this.construireTag(elem.distance),
+                style: 'background--caramel text--background-caramel',
+              }
+            : undefined,
+        })),
+        favoris: serviceRecherche.favoris
+          ? serviceRecherche.favoris.map(elem => ({
+              titre: elem.titre,
+              description: elem.adresse,
+              nombreMiseEnFavoris: elem.nombreMiseEnFavoris,
+              img: elem.image ? elem.image : '/ic_services.svg',
+            }))
           : undefined,
-      })),
-      favoris: serviceRecherche.favoris
-        ? serviceRecherche.favoris.map(elem => ({
-            titre: elem.titre,
-            description: elem.adresse,
-            nombreMiseEnFavoris: elem.nombreMiseEnFavoris,
-            img: elem.image ? elem.image : '/ic_services.svg',
-          }))
-        : undefined,
-      aside: {
-        nom: 'Près de chez nous',
-        description:
-          'Près de chez nous est un site gratuit et libre de droits. Ça veut dire que le code source est en accès libre sur Gitlab, à condition que vous le partagiez à...',
-        url: 'https://presdecheznous.fr/',
-        logo: '/service-proximite-logo.png',
-        screenshot: '/service-proximite.png',
-      },
-      categories: serviceRecherche.categories.map(elem => ({
-        code: elem.code,
-        label: elem.label,
-        estLaCategorieParDefaut: elem.estLaCategorieParDefaut,
-      })),
-    });
+        aucunResultat: false,
+        aside,
+        categories,
+      };
+    } else {
+      serviceRechercheViewModel = {
+        aucunResultat: true,
+        aside,
+        categories,
+      };
+    }
+
+    this.serviceRechercheViewModel(serviceRechercheViewModel);
   }
 
   private construireTag(distance: number): string {
-    const distanceArondie = Math.round(distance / 100) * 100;
+    const distanceArrondie = Math.round(distance / 100) * 100;
 
-    if (distanceArondie >= 1000) {
-      const distanceKm = distanceArondie / 1000;
-      return `À ${distanceKm.toFixed(1).replace('.', ',')}km`;
+    if (distanceArrondie >= 1000) {
+      const distanceKm = distanceArrondie / 1000;
+      return `À ${distanceKm.toFixed(1).replace('.', ',')} km`;
     }
 
-    return `À ${distanceArondie}m`;
+    return `À ${distanceArrondie} m`;
   }
 }

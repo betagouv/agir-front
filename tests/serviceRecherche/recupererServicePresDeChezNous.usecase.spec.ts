@@ -45,7 +45,7 @@ describe("Fichier de tests concernant la récuperation de service d'un recherche
     // THEN
     function expectation(serviceRecherchePresDeChezNousViewModel: ServiceRecherchePresDeChezNousViewModel) {
       expect(serviceRecherchePresDeChezNousViewModel).toStrictEqual<ServiceRecherchePresDeChezNousViewModel>({
-        titre: 'Mon service',
+        aucunResultat: false,
         suggestions: [
           {
             titre: 'titre 1',
@@ -53,7 +53,7 @@ describe("Fichier de tests concernant la récuperation de service d'un recherche
             nombreMiseEnFavoris: 12,
             img: '/ic_services.svg',
             tag: {
-              label: 'À 300m',
+              label: 'À 300 m',
               style: 'background--caramel text--background-caramel',
             },
           },
@@ -63,7 +63,7 @@ describe("Fichier de tests concernant la récuperation de service d'un recherche
             img: '/ic_services.svg',
             nombreMiseEnFavoris: 0,
             tag: {
-              label: 'À 2,1km',
+              label: 'À 2,1 km',
               style: 'background--caramel text--background-caramel',
             },
             titre: 'titre 3',
@@ -81,7 +81,44 @@ describe("Fichier de tests concernant la récuperation de service d'un recherche
         aside: {
           nom: 'Près de chez nous',
           description:
-            'Près de chez nous est un site gratuit et libre de droits. Ça veut dire que le code source est en accès libre sur Gitlab, à condition que vous le partagiez à...',
+            'Près de chez nous est une cartographie collaborative qui recense l’ensemble des structures qui proposent des produits bio, équitables et locaux.',
+          url: 'https://presdecheznous.fr/',
+          logo: '/service-proximite-logo.png',
+          screenshot: '/service-proximite.png',
+        },
+        categories: [
+          { code: 'code', label: 'label', estLaCategorieParDefaut: true },
+          { code: 'code', label: 'label', estLaCategorieParDefaut: false },
+        ],
+      });
+    }
+  });
+
+  it("quand il n'y a pas de suggestions, renvoie aucun resultat", () => {
+    // GIVEN
+    const usecase = new RecupererServicePresDeChezNousUsecase(
+      new ServiceRecherchePresDeChezNousRepositoryMock({
+        titre: 'Mon service',
+        suggestions: [],
+        favoris: [],
+        categories: [
+          { code: 'code', label: 'label', estLaCategorieParDefaut: true },
+          { code: 'code', label: 'label', estLaCategorieParDefaut: false },
+        ],
+      }),
+    );
+
+    // WHEN
+    usecase.execute('idUtilisateur', 'idService', new ServiceRecherchePresDeChezNousPresenterImpl(expectation));
+
+    // THEN
+    function expectation(serviceRecherchePresDeChezNousViewModel: ServiceRecherchePresDeChezNousViewModel) {
+      expect(serviceRecherchePresDeChezNousViewModel).toStrictEqual<ServiceRecherchePresDeChezNousViewModel>({
+        aucunResultat: true,
+        aside: {
+          nom: 'Près de chez nous',
+          description:
+            'Près de chez nous est une cartographie collaborative qui recense l’ensemble des structures qui proposent des produits bio, équitables et locaux.',
           url: 'https://presdecheznous.fr/',
           logo: '/service-proximite-logo.png',
           screenshot: '/service-proximite.png',
