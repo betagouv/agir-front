@@ -37,9 +37,12 @@
                   </router-link>
                 </li>
                 <li v-if="estConnecte && !utilisateurStore().utilisateur.onboardingAEteRealise">
-                  <router-link :to="{ name: RouteCommuneName.AUTHENTIFICATION }" class="fr-btn fr-btn--secondary">
+                  <button
+                    class="fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-logout-box-r-line fr-btn--lg fr-mr-auto"
+                    @click="logout"
+                  >
                     Se déconnecter
-                  </router-link>
+                  </button>
                 </li>
                 <li v-if="utilisateurStore().utilisateur.onboardingAEteRealise">
                   <div class="utilisateur">
@@ -126,7 +129,7 @@
   import '@gouvfr/dsfr/dist/component/navigation/navigation.min.css';
   import { computed } from 'vue';
   import { useRoute } from 'vue-router';
-  import { RouteCommuneName } from '@/router';
+  import router, { RouteCommuneName } from '@/router';
   import { utilisateurStore } from '@/store/utilisateur';
   import ScoreHeader from '@/components/custom/ScoreHeader.vue';
   import LienDEvitement from '@/components/dsfr/LienDEvitement.vue';
@@ -136,6 +139,7 @@
   import { RouteCompteName } from '@/router/compte/routeCompteName';
   import { RouteAidesName } from '@/router/aides/routeAidesName';
   import { useReveal } from '@/composables/useReveal';
+  import Cookies from 'js-cookie';
 
   const { aideTour } = useReveal();
 
@@ -144,6 +148,12 @@
 
   const nomUtilisateur = computed(() => store.utilisateur.prenom);
   const estConnecte = computed(() => store.utilisateur.id.length > 0);
+
+  const logout = () => {
+    store.reset();
+    Cookies.remove('bearer');
+    router.replace('/');
+  };
 </script>
 
 <style scoped>

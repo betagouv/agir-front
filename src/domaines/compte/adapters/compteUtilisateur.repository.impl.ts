@@ -73,6 +73,9 @@ export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurReposit
     const axiosInstance = AxiosFactory.getAxios();
     await axiosInstance.patch(`/utilisateurs/${idUtilisateur}/profile`, {
       prenom,
+    });
+
+    await axiosInstance.patch(`/utilisateurs/${idUtilisateur}/logement`, {
       commune,
       code_postal: codePostal,
     });
