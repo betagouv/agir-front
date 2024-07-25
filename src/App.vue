@@ -3,6 +3,7 @@
   import Footer from '@/components/dsfr/Footer.vue';
   import Header from '@/components/dsfr/Header.vue';
   import router from '@/router';
+  import { RouteCompteName } from '@/router/compte/routeCompteName';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const appName = 'Agir ! -';
@@ -12,7 +13,13 @@
     if (title) {
       document.title = `${appName} ${title as string}`;
     }
-    if (estPublique || utilisateurStore().utilisateur.id.length > 0) {
+    const estConnecte = utilisateurStore().utilisateur.id.length > 0;
+    const onboardingTermine = utilisateurStore().utilisateur.onboardingAEteRealise;
+    if (estPublique) {
+      next();
+    } else if (estConnecte && !onboardingTermine) {
+      next({ name: RouteCompteName.POST_CREATION_COMPTE_ETAPE_1 });
+    } else if (estConnecte && onboardingTermine) {
       next();
     } else {
       next({ name: 'authentification' });

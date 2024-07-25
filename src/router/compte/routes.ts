@@ -95,6 +95,7 @@ const compteRoutes: RouteRecordRaw[] = [
     component: PagePostCreationCompteEtape1,
     meta: {
       title: 'Création de compte - étape 1',
+      estPublique: true,
     },
   },
   {
@@ -103,6 +104,7 @@ const compteRoutes: RouteRecordRaw[] = [
     component: PagePostCreationCompteEtape2,
     meta: {
       title: 'Création de compte - étape 2',
+      estPublique: true,
     },
   },
 ];
