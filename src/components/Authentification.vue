@@ -47,12 +47,9 @@
   import Alert from '@/components/custom/Alert.vue';
   import InputPasswordLogin from '@/components/custom/InputPasswordLogin.vue';
   import InputMail from '@/components/dsfr/InputMail.vue';
-  import { AuthentificationResultatPresenterImpl } from '@/domaines/authentification/adapters/authentificationResultatPresenterImpl';
-  import { SessionRepositoryStore } from '@/domaines/authentification/adapters/session.repository.store';
   import { UtilisateurRepositoryAxios } from '@/domaines/authentification/adapters/utilisateur.repository.axios';
   import { AuthentifierUtilisateurUsecase } from '@/domaines/authentification/authentifierUtilisateur.usecase';
   import { RenvoyerCoteOTPUsecase } from '@/domaines/authentification/renvoyerCoteOTPUsecase';
-  import { sendIdNGC } from '@/domaines/bilan/middleware/pendingSimulation';
   import router from '@/router';
   import { RouteCompteName } from '@/router/compte/routeCompteName';
   import { onboardingStore } from '@/store/onboarding';
@@ -67,7 +64,7 @@
   const loginMessageErreur = ref<string>('');
 
   const login = async () => {
-    const usecase = new AuthentifierUtilisateurUsecase(new UtilisateurRepositoryAxios(), new SessionRepositoryStore());
+    const usecase = new AuthentifierUtilisateurUsecase(new UtilisateurRepositoryAxios());
     usecase
       .execute(email.value, password.value)
       .then(() => {
