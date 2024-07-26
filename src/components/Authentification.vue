@@ -69,17 +69,10 @@
   const login = async () => {
     const usecase = new AuthentifierUtilisateurUsecase(new UtilisateurRepositoryAxios(), new SessionRepositoryStore());
     usecase
-      .execute(
-        email.value,
-        password.value,
-        new AuthentificationResultatPresenterImpl(route => {
-          loginEnErreur.value = false;
-          const requestedRoute = sessionStorage.getItem('requestedRoute');
-          sessionStorage.removeItem('requestedRoute');
-          router.push(requestedRoute || route);
-          sendIdNGC();
-        }),
-      )
+      .execute(email.value, password.value)
+      .then(() => {
+        router.push({ name: RouteCompteName.VALIDATION_AUTHENTIFICATION, query: { email: email.value } });
+      })
       .catch(reason => {
         loginMessageErreur.value = reason.data.message;
         loginEnErreur.value = true;

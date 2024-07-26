@@ -1,5 +1,5 @@
-import { AuthentificationResultat } from '@/domaines/authentification/authentifierUtilisateur.usecase';
 import { AuthentificationResultatPresenter } from '@/domaines/authentification/ports/authentificationResultatPresenter';
+import { AuthentificationResultat } from '@/domaines/authentification/validerAuthentificationUtilisateur.usecase';
 import { RouteCoachPath } from '@/router/coach/routes';
 import { RouteComptePath } from '@/router/compte/routes';
 
