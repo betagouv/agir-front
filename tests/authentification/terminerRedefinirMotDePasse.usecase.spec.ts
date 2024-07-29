@@ -18,7 +18,8 @@ class SpyUtilisateurRepository implements UtilisateurRepository {
     return this._email;
   }
   private _email: string = '';
-  authentifierUtilisateur(email: string, motDePasse: string): Promise<Utilisateur> {
+
+  authentifierUtilisateur(email: string, motDePasse: string): Promise<void> {
     throw Error;
   }
 
@@ -42,6 +43,10 @@ class SpyUtilisateurRepository implements UtilisateurRepository {
   }
 
   renvoyerCodeOTP(email: string): Promise<void> {
+    throw Error;
+  }
+
+  validerLoginOtp(email: string, code: string): Promise<Utilisateur> {
     throw Error;
   }
 }

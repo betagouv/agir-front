@@ -1,4 +1,4 @@
-import { AuthentificationResultat } from '@/domaines/authentification/authentifierUtilisateur.usecase';
+import { AuthentificationResultat } from '@/domaines/authentification/validerAuthentificationUtilisateur.usecase';
 
 export interface AuthentificationResultatPresenter {
   presente(cas: AuthentificationResultat): void;
