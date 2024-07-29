@@ -26,18 +26,20 @@ export class ClassementPresenterImpl implements ClassementPresenter {
       style: 'background--white',
     }));
 
-    const utilisateursProche = classement.utilisateursProche.map((utilisateur, index) => ({
-      id: utilisateur.id,
-      prenom: utilisateur.prenom,
-      rang: utilisateur.rank,
-      points: utilisateur.points,
-      style: this.determineStyle(
-        index,
-        classement.utilisateursProche.length,
-        utilisateur.id,
-        classement.utilisateur.id,
-      ),
-    }));
+    const utilisateursProche = classement.utilisateursProche
+      .filter(utilisateur => utilisateur.rank !== 1 && utilisateur.rank !== 2 && utilisateur.rank !== 3)
+      .map((utilisateur, index) => ({
+        id: utilisateur.id,
+        prenom: utilisateur.prenom,
+        rang: utilisateur.rank,
+        points: utilisateur.points,
+        style: this.determineStyle(
+          index,
+          classement.utilisateursProche.length,
+          utilisateur.id,
+          classement.utilisateur.id,
+        ),
+      }));
 
     this.classementViewModel({
       classement: [...topTrois, ...utilisateursProche],
@@ -51,12 +53,12 @@ export class ClassementPresenterImpl implements ClassementPresenter {
     idUtilisateur: string,
     idUtilisateurCourant: string,
   ): string {
-    if (index === 0 || index === classementLength - 1) {
-      return 'opacity-8';
-    }
-
     if (idUtilisateur === idUtilisateurCourant) {
       return 'background-bleu-light border--bleu';
+    }
+
+    if (index === 0 || index === classementLength - 1) {
+      return 'opacity-8';
     }
 
     return 'background--white';
