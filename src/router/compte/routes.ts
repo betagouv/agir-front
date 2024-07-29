@@ -12,7 +12,9 @@ const PagePostCreationCompteEtape1 = () =>
 const PagePostCreationCompteEtape2 = () =>
   import('@/components/pages/PagePostCreationCompte/PagePostCreationCompteEtape2.vue');
 import { RouteRecordRaw } from 'vue-router';
+import { RouteCoachName } from '@/router/coach/routeCoachName';
 import { RouteCompteName } from '@/router/compte/routeCompteName';
+import { utilisateurStore } from '@/store/utilisateur';
 
 export enum RouteComptePath {
   MON_COMPTE = '/mon-compte/',
@@ -27,6 +29,13 @@ export enum RouteComptePath {
   POST_CREATION_COMPTE_ETAPE_1 = '/creation-compte/etape-1',
   POST_CREATION_COMPTE_ETAPE_2 = '/creation-compte/etape-2',
 }
+
+const onboardingGuard = () => {
+  const { utilisateur } = utilisateurStore();
+  if (utilisateur.onboardingAEteRealise) {
+    return false;
+  }
+};
 
 const compteRoutes: RouteRecordRaw[] = [
   {
@@ -69,6 +78,7 @@ const compteRoutes: RouteRecordRaw[] = [
     },
   },
   {
+    beforeEnter: onboardingGuard,
     path: RouteComptePath.VALIDATION_COMPTE,
     name: RouteCompteName.VALIDATION_COMPTE,
     component: PageValidationCompte,
@@ -101,6 +111,7 @@ const compteRoutes: RouteRecordRaw[] = [
     ],
   },
   {
+    beforeEnter: onboardingGuard,
     path: RouteComptePath.POST_CREATION_COMPTE_ETAPE_1,
     name: RouteCompteName.POST_CREATION_COMPTE_ETAPE_1,
     component: PagePostCreationCompteEtape1,
@@ -110,6 +121,15 @@ const compteRoutes: RouteRecordRaw[] = [
     },
   },
   {
+    beforeEnter: (to, from, next) => {
+      {
+        if (utilisateurStore().utilisateur.onboardingAEteRealise) {
+          next({ name: RouteCoachName.COACH, replace: true });
+        } else {
+          next();
+        }
+      }
+    },
     path: RouteComptePath.POST_CREATION_COMPTE_ETAPE_2,
     name: RouteCompteName.POST_CREATION_COMPTE_ETAPE_2,
     component: PagePostCreationCompteEtape2,

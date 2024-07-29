@@ -21,7 +21,7 @@
             />
           </div>
         </fieldset>
-        <button class="fr-btn fr-mr-4w" :disabled="onboardingPostCreationCompte().commune.length == 0">
+        <button class="fr-btn fr-mr-4w" :disabled="onboardingPostCreationCompte().commune?.length == 0">
           Continuer
         </button>
         <router-link :to="{ name: RouteCompteName.POST_CREATION_COMPTE_ETAPE_1 }" class="fr-link fr-mt-1v"
@@ -52,7 +52,7 @@
       utilisateurStore().utilisateur.id,
       onboardingPostCreationCompte(),
     );
-    await router.push({ name: RouteCoachName.COACH });
+    await router.replace({ name: RouteCoachName.COACH });
     onboardingPostCreationCompte().$reset();
   };
 </script>
