@@ -200,7 +200,7 @@ h2 {
 }
 
 .background-bleu {
-  background: var(--blue-france-main-525);
+  background-color: var(--blue-france-main-525);
 }
 
 .background-bleu-light {
@@ -405,6 +405,10 @@ h2 {
 
 .opacity-6 {
   opacity: 0.6;
+}
+
+.opacity-8 {
+  opacity: 0.8;
 }
 
 .overflow--hidden {

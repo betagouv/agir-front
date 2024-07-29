@@ -1,8 +1,8 @@
 import { AxiosFactory, intercept401 } from '@/axios.factory';
 import { ClassementRepository } from '@/domaines/classement/ports/classement.repository';
-import { Classement } from '@/domaines/classement/recupererClassementNational.usecase';
+import { Classement, ClassementPourcentage } from '@/domaines/classement/recupererClassement.usecase';
 
-enum Pourcentile {
+enum PourcentileApiModel {
   pourcent_5 = 'pourcent_5',
   pourcent_10 = 'pourcent_10',
   pourcent_25 = 'pourcent_25',
@@ -10,13 +10,14 @@ enum Pourcentile {
 }
 
 interface ClassementItemApiModel {
+  id: string;
   points: number;
   prenom: string;
   rank: number;
 }
 
 interface ClassementApiModel {
-  pourcentile: Pourcentile;
+  pourcentile: PourcentileApiModel;
   top_trois: ClassementItemApiModel[];
   utilisateur: ClassementItemApiModel;
   classement_utilisateur: ClassementItemApiModel[];
@@ -34,7 +35,22 @@ export class ClassementRepositoryAxios implements ClassementRepository {
       utilisateur: response.data.utilisateur,
       topTrois: response.data.top_trois,
       utilisateursProche: response.data.classement_utilisateur,
-      pourcentage: response.data.pourcentile,
+      pourcentage: this.mapPourcentileToClassement(response.data.pourcentile),
     };
+  }
+
+  private mapPourcentileToClassement(apiPourcentile: PourcentileApiModel): ClassementPourcentage {
+    switch (apiPourcentile) {
+      case PourcentileApiModel.pourcent_5:
+        return ClassementPourcentage.top5;
+      case PourcentileApiModel.pourcent_10:
+        return ClassementPourcentage.top10;
+      case PourcentileApiModel.pourcent_25:
+        return ClassementPourcentage.top25;
+      case PourcentileApiModel.pourcent_50:
+        return ClassementPourcentage.top50;
+      default:
+        return ClassementPourcentage.top50;
+    }
   }
 }

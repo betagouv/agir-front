@@ -1,4 +1,4 @@
-import { Classement } from '@/domaines/classement/recupererClassementNational.usecase';
+import { Classement } from '@/domaines/classement/recupererClassement.usecase';
 
 export interface ClassementRepository {
   recupererClassementNational(utilisateurId: string): Promise<Classement>;
