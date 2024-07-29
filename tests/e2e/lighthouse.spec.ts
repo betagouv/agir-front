@@ -131,6 +131,11 @@ test.describe('Audit a11y - pages connectées', () => {
     await playAuditA11y(page);
   });
 
+  test('Page classement', async () => {
+    await page.goto('/agir/classement');
+    await playAuditA11y(page);
+  });
+
   test.afterAll(async () => {
     await context.close();
     fs.rmSync('./tmp', { recursive: true, force: true });
