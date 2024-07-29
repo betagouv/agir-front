@@ -1,4 +1,3 @@
-import { AuthentificationResultatPresenter } from '@/domaines/authentification/ports/authentificationResultatPresenter';
 import { Utilisateur, UtilisateurRepository } from '@/domaines/authentification/ports/utilisateur.repository';
 import { Score } from '@/domaines/score/ports/score.repository';
 
