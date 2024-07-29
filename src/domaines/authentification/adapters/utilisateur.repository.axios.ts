@@ -25,26 +25,33 @@ interface LoginApiModel {
 interface ValiderCompteApiModel {
   token: string;
 }
+
 export class UtilisateurRepositoryAxios implements UtilisateurRepository {
-  async authentifierUtilisateur(mail: string, password: string): Promise<Utilisateur> {
+  async authentifierUtilisateur(mail: string, password: string): Promise<void> {
     const axiosInstance = AxiosFactory.getAxios();
-    const response = await axiosInstance.post<LoginApiModel>(`/utilisateurs/login`, {
+    await axiosInstance.post(`/utilisateurs/login_v2`, {
       email: mail,
       mot_de_passe: password,
     });
+  }
 
+  async validerLoginOtp(email: string, code: string): Promise<Utilisateur> {
+    const axiosInstance = AxiosFactory.getAxios();
+    const response = await axiosInstance.post<LoginApiModel>(`/utilisateurs/login_v2_code`, {
+      email,
+      code,
+    });
     this.setBearerInCookie(response.data.token);
 
     return {
       nom: response.data.utilisateur.nom,
       id: response.data.utilisateur.id,
-      prenom: response.data.utilisateur.prenom || '',
+      prenom: response.data.utilisateur.prenom,
       mail: response.data.utilisateur.email,
-      fonctionnalitesDebloquees: response.data.utilisateur.fonctionnalites_debloquees,
+      fonctionnalitesDebloquees: response.data.utilisateur.fonctionnalites_debloquees || ['aides'],
       onboardingAEteRealise: response.data.utilisateur.is_onboarding_done,
     };
   }
-
   private setBearerInCookie(token: string) {
     Cookies.set('bearer', token, {
       secure: true,

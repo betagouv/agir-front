@@ -1,6 +1,7 @@
 const PageCompte = () => import('@/components/pages/PageCompte.vue');
 const PageCreationCompte = () => import('@/components/pages/PageCreationCompte.vue');
 const PageValidationCompte = () => import('@/components/pages/PageValidationCompte.vue');
+const PageValidationAuthentification = () => import('@/components/pages/PageValidationAuthentification.vue');
 const PageMotDePasseOublie = () => import('@/components/pages/PageMotDePasseOublie.vue');
 const PageCompteOptionsAvancees = () => import('@/components/pages/PageCompteOptionsAvancees.vue');
 const PageCompteMieuxVousConnaitre = () => import('@/components/pages/PageCompteMieuxVousConnaitre.vue');
@@ -18,6 +19,7 @@ export enum RouteComptePath {
   OPTIONS_AVANCEES = '/mon-compte/options-avancees',
   CREATION_COMPTE = '/creation-compte',
   VALIDATION_COMPTE = '/validation-compte',
+  VALIDATION_AUTHENTIFICATION = '/validation-authentification',
   MOT_DE_PASSE_OUBLIE = '/mot-de-passe-oublie',
   MIEUX_VOUS_CONNAITRE = '/mon-compte/mieux-vous-connaitre',
   LOGEMENT = '/mon-compte/logement',
@@ -72,6 +74,15 @@ const compteRoutes: RouteRecordRaw[] = [
     component: PageValidationCompte,
     meta: {
       title: 'Validation du compte',
+      estPublique: true,
+    },
+  },
+  {
+    path: RouteComptePath.VALIDATION_AUTHENTIFICATION,
+    name: RouteCompteName.VALIDATION_AUTHENTIFICATION,
+    component: PageValidationAuthentification,
+    meta: {
+      title: "Validation de l'authentification",
       estPublique: true,
     },
   },

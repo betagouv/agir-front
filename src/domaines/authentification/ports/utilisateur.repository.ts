@@ -10,7 +10,8 @@ export interface Utilisateur {
 export type IdUtilisateur = string;
 
 export interface UtilisateurRepository {
-  authentifierUtilisateur(email: string, motDePasse: string): Promise<Utilisateur>;
+  authentifierUtilisateur(email: string, motDePasse: string): Promise<void>;
+  validerLoginOtp(email: string, code: string): Promise<Utilisateur>;
   getUtilisateurAvecId(idUtilisateur: string): Promise<Utilisateur>;
   validerCompteUtilisateur(email: string, code: string): Promise<IdUtilisateur>;
   renvoyerCodeOTP(email: string): Promise<void>;
