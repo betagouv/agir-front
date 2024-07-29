@@ -2,11 +2,11 @@ import { ClassementPresenter } from '@/domaines/classement/ports/classement.pres
 import { Classement, ClassementPourcentage } from '@/domaines/classement/recupererClassement.usecase';
 
 interface ClassementItemViewModel {
-  id: string;
   prenom: string;
   rang: number;
   points: number;
   style: string;
+  medailleTopTrois?: string;
 }
 
 export interface ClassementViewModel {
@@ -19,17 +19,16 @@ export class ClassementPresenterImpl implements ClassementPresenter {
 
   presente(classement: Classement) {
     const topTrois = classement.topTrois.map(utilisateur => ({
-      id: utilisateur.id,
       prenom: utilisateur.prenom,
       rang: utilisateur.rank,
       points: utilisateur.points,
       style: 'background--white',
+      medailleTopTrois: this.determineMedaille(utilisateur.rank),
     }));
 
     const utilisateursProche = classement.utilisateursProche
       .filter(utilisateur => utilisateur.rank !== 1 && utilisateur.rank !== 2 && utilisateur.rank !== 3)
       .map((utilisateur, index) => ({
-        id: utilisateur.id,
         prenom: utilisateur.prenom,
         rang: utilisateur.rank,
         points: utilisateur.points,
@@ -67,15 +66,28 @@ export class ClassementPresenterImpl implements ClassementPresenter {
   private determinePhraseClassement(pourcentage: ClassementPourcentage): string {
     switch (pourcentage) {
       case ClassementPourcentage.top5:
-        return 'Wouah ! Vous faites partie du <strong>top 5%</strong> en <strong>France !</strong>';
+        return 'Wouah ! Vous faites partie du <strong>top 5%</strong> en <strong>France&nbsp;!</strong>';
       case ClassementPourcentage.top10:
-        return 'Wouah ! Vous faites partie du <strong>top 10%</strong> en <strong>France !</strong>';
+        return 'Wouah ! Vous faites partie du <strong>top 10%</strong> en <strong>France&nbsp!</strong>';
       case ClassementPourcentage.top25:
-        return 'Wouah ! Vous faites partie du <strong>top 25%</strong> en <strong>France !</strong>';
+        return 'Wouah ! Vous faites partie du <strong>top 25%</strong> en <strong>France&nbsp!</strong>';
       case ClassementPourcentage.top50:
-        return 'Wouah ! Vous faites partie du <strong>top 50%</strong> en <strong>France !</strong>';
+        return 'Wouah ! Vous faites partie du <strong>top 50%</strong> en <strong>France&nbsp!</strong>';
       default:
-        return 'Wouah ! Vous faites partie du classement en France !';
+        return "Réalisez plus d'actions pour grimper au classement !";
+    }
+  }
+
+  private determineMedaille(index: number): string {
+    switch (index) {
+      case 1:
+        return '/medaille-or.png';
+      case 2:
+        return '/medaille-argent.png';
+      case 3:
+        return '/medaille-bronze.png';
+      default:
+        return '';
     }
   }
 }

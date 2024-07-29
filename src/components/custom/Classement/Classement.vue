@@ -8,13 +8,16 @@
     </CarteInfo>
     <ol class="list-style-none fr-p-0">
       <li
-        v-for="item in classementViewModel.classement"
+        v-for="(item, index) in classementViewModel.classement"
         :class="`fr-grid-row align-items--center flex-space-between fr-mb-2w border-radius--md shadow--light fr-p-2w ${item.style}`"
-        :key="item.id"
-        :value="item.id"
+        :key="index"
+        :value="index"
       >
-        <div class="fr-text--bold">
-          <span class="border border-radius--md fr-text--bold fr-p-1w fr-mr-1w background--white">{{ item.rang }}</span>
+        <div class="fr-grid-row align-items--center fr-text--bold">
+          <img v-if="item.medailleTopTrois" :src="item.medailleTopTrois" :alt="`${index}`" class="fr-mr-1w" />
+          <span v-else class="border border-radius--md fr-text--bold fr-p-1w fr-mr-1w background--white">
+            {{ item.rang }}
+          </span>
           <span>{{ item.prenom }}</span>
         </div>
         <div class="fr-grid-row background--white align-items--center border border-radius--md fr-text--bold fr-p-1w">
