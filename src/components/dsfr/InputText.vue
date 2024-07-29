@@ -4,7 +4,15 @@
       {{ label }}
       <span v-if="description" class="fr-hint-text">{{ description }}</span>
     </label>
-    <input class="fr-input" type="text" :id="name" :name="name" :value="modelValue" @input="updateValue" />
+    <input
+      class="fr-input"
+      type="text"
+      :required="required"
+      :id="name"
+      :name="name"
+      :value="modelValue"
+      @input="updateValue"
+    />
   </div>
 </template>
 
@@ -14,6 +22,7 @@
     label: string;
     modelValue: string;
     description?: string;
+    required?: boolean;
   }>();
 
   const emit = defineEmits<{

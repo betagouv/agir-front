@@ -24,10 +24,16 @@
       </legend>
       <div class="fr-grid-row fr-grid-row--gutters">
         <div class="fr-col-lg-6 fr-col-12">
-          <InputText label="Prénom" name="prenom" v-model="profileUtlisateurViewModel.prenom" />
+          <InputText
+            :required="true"
+            description="obligatoire"
+            label="Prénom"
+            name="prenom"
+            v-model="profileUtlisateurViewModel.prenom"
+          />
         </div>
         <div class="fr-col-lg-6 fr-col-12">
-          <InputText label="Nom" name="nom" v-model="profileUtlisateurViewModel.nom" />
+          <InputText description="facultatif" label="Nom" name="nom" v-model="profileUtlisateurViewModel.nom" />
         </div>
         <div class="fr-col-lg-6 fr-col-12">
           <InputMail label="Adresse électronique" v-model="profileUtlisateurViewModel.mail" name="mail" />
