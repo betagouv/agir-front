@@ -1,39 +1,6 @@
 import { playAudit } from 'playwright-lighthouse';
 import { test, chromium, BrowserContext, Page } from '@playwright/test';
 import fs from 'fs';
-
-test.describe('Audit a11y - pages non connectées', () => {
-  let context: BrowserContext;
-  let page: Page;
-
-  test.beforeAll(async () => {
-    context = await chromium.launchPersistentContext('./tmp', {
-      args: ['--remote-debugging-port=9222'],
-    });
-    page = await context.newPage();
-  });
-
-  test("Page d'accueil", async () => {
-    await page.goto('/');
-    await playAuditA11y(page);
-  });
-
-  test('Page de connexion', async () => {
-    await page.goto('/authentification');
-    await playAuditA11y(page);
-  });
-
-  test('Page CGU', async () => {
-    await page.goto('/cgu');
-    await playAuditA11y(page);
-  });
-
-  test.afterAll(async () => {
-    await context.close();
-    fs.rmSync('./tmp', { recursive: true, force: true });
-  });
-});
-
 test.describe('Audit a11y - pages connectées', () => {
   let context: BrowserContext;
   let page: Page;
