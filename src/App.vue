@@ -1,5 +1,21 @@
+<template>
+  <div class="page-container">
+    <div class="print-hidden">
+      <Header />
+      <DisclaimerGeneral v-if="afficherLeDisclaimer" />
+    </div>
+    <main id="contenu" class="background--gris">
+      <router-view />
+    </main>
+
+    <Footer class="print-hidden" />
+  </div>
+</template>
+
 <script setup lang="ts">
+  import { computed } from 'vue';
   import { NavigationGuardNext, RouteLocationNormalized } from 'vue-router';
+  import DisclaimerGeneral from '@/components/dsfr/DisclaimerGeneral.vue';
   import Footer from '@/components/dsfr/Footer.vue';
   import Header from '@/components/dsfr/Header.vue';
   import router from '@/router';
@@ -26,20 +42,13 @@
       sessionStorage.setItem('requestedRoute', to.fullPath);
     }
   });
+
+  const afficherLeDisclaimer = computed(() => {
+    return (
+      utilisateurStore().utilisateur.onboardingAEteRealise && utilisateurStore().disclaimer.afficherDisclaimerGeneral
+    );
+  });
 </script>
-
-<template>
-  <div class="page-container">
-    <div class="print-hidden">
-      <Header />
-    </div>
-    <main id="contenu" class="background--gris">
-      <router-view />
-    </main>
-
-    <Footer class="print-hidden" />
-  </div>
-</template>
 
 <style scoped>
   .page-container {

@@ -25,6 +25,9 @@ export class InjectUtilisateur {
       tracking: {
         matomoEstInactif: true,
       },
+      disclaimer: {
+        afficherDisclaimerGeneral: false,
+      },
     };
   }
 }
