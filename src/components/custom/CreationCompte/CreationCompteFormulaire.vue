@@ -36,6 +36,8 @@
               >la charte de participation
             </router-link>
           </label>
+        </div>
+        <div class="fr-checkbox-group fr-checkbox-group--sm">
           <input name="cgu" id="cgu" type="checkbox" v-model="acceptationCGU" />
           <label class="fr-label fr-mt-1w" for="cgu">
             J'accepte&nbsp;
