@@ -21,7 +21,7 @@ export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurReposit
     const axiosInstance = AxiosFactory.getAxios();
     const response: Response<CompteUtilisateurApiModel> = await axiosInstance.get(`/utilisateurs/${idUtilisateur}`);
     return {
-      nom: response.data.nom,
+      nom: response.data.nom || '',
       id: idUtilisateur,
       mail: response.data.email || '',
       prenom: response.data.prenom || '',

@@ -2,7 +2,7 @@
   <div class="fr-input-group">
     <label class="fr-label" :class="classLabel" :for="name">
       {{ label }}
-      <span class="text--normal fr-hint-text">Format attendu : nom@domaine.fr</span>
+      <span class="text--normal fr-hint-text">Format attendu : nom@domaine.fr (obligatoire)</span>
     </label>
     <input
       :id="name"
@@ -13,6 +13,7 @@
       autocomplete="on"
       type="email"
       :disabled="disable"
+      required
     />
   </div>
 </template>

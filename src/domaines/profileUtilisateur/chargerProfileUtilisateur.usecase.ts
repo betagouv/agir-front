@@ -33,7 +33,7 @@ export class ProfileUtilisateurRepositoryAxiosImpl implements ProfileUtilisateur
       `/utilisateurs/${idUtilisateur}/profile`,
     );
     return {
-      nom: response.data.nom,
+      nom: response.data.nom || '',
       id: idUtilisateur,
       mail: response.data.email || '',
       prenom: response.data.prenom || '',
