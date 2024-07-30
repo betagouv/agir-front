@@ -49,6 +49,8 @@ test.describe('Audit a11y - pages connectées', () => {
     await page.getByRole('textbox', { name: 'Adresse électronique Format' }).fill(`${process.env.PLAYWRIGHT_EMAIL}`);
     await page.getByRole('textbox', { name: 'Mot de passe' }).fill(`${process.env.PLAYWRIGHT_PASSWORD}`);
     await page.getByRole('button', { name: 'Se connecter' }).click({ force: true });
+    await page.getByRole('textbox', { name: 'code' }).fill('999999');
+    await page.getByRole('button', { name: 'Valider' }).click({ force: true });
     await page.waitForTimeout(1500);
   });
 
