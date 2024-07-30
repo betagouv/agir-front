@@ -1,56 +1,46 @@
 <template>
   <div class="fr-container">
-    <FilDAriane :page-courante="`Univers - ${univers?.nom}`" />
+    <FilDAriane :page-courante="`Univers - ${universViewModel?.nom}`" />
     <div class="fr-grid-row align-items--center fr-mb-4w">
       <img
-        :src="univers?.urlImage"
+        :src="universViewModel?.urlImage"
         class="border-radius--full img-object-fit-cover fr-mr-2w"
         width="80"
         height="80"
         alt="univers"
       />
-      <h1 class="fr-h1 fr-col fr-m-0">{{ univers?.nom }}</h1>
+      <h1 class="fr-h1 fr-col fr-m-0">{{ universViewModel?.nom }}</h1>
     </div>
   </div>
 
-  <section id="thematiques" v-if="thematiques">
+  <section id="thematiques" v-if="thematiquesViewModel">
     <div class="fr-container">
-      <ThematiquesListe :univers-id="universId" :thematiques="thematiques" />
+      <ThematiquesListe :univers-id="universId" :thematiques="thematiquesViewModel" />
     </div>
   </section>
 
-  <section class="fr-py-6w background--white" id="defis" v-if="defis">
+  <section class="fr-py-6w background--white" id="defis" v-if="defisViewModel">
     <div class="fr-container">
-      <ActionListe :defis="defis" />
+      <ActionListe :defis="defisViewModel" />
     </div>
   </section>
-
-  <section class="fr-py-6w" v-if="universId === 'alimentation'">
+  <section class="fr-py-6w" v-if="servicesViewModel?.services">
     <div class="fr-container">
       <h2 class="fr-h2">Vos services</h2>
       <div class="fr-grid-row fr-grid-row--gutters">
-        <div class="fr-col-6 fr-col-md-3">
-          <ServiceLink
-            :url="RouteServiceName.SERVICE_FRUITS_ET_LEGUMES"
-            label="Fruits et légumes de saison"
-            picto="/cerise.png"
-            :legende="moisCourantCapitalized"
+        <div v-for="service in servicesViewModel.services" :key="service.label" class="fr-col-6 fr-col-md-3">
+          <ServiceLinkExterne
+            v-if="service.estServiceExterne"
+            :url="service.url"
+            :titre="service.label"
+            :sous-titre="service.legende"
           />
-        </div>
-        <div class="fr-col-6 fr-col-md-3">
           <ServiceLink
-            :url="RouteServiceName.PROXIMITE"
-            label="Mes commerces de proximités"
-            picto="/commerce.png"
-            legende="Dans ma ville"
-          />
-        </div>
-        <div class="fr-col-6 fr-col-md-3">
-          <ServiceLink
-            :url="RouteServiceName.RECETTES"
-            label="Recettes saines et équilibrées"
-            picto="/omelette.png"
-            legende="Bas carbone"
+            v-else
+            :url="service.url"
+            :label="service.label"
+            :picto="service.picto"
+            :legende="service.legende"
           />
         </div>
       </div>
@@ -83,6 +73,7 @@
   import CarteSkeleton from '@/components/CarteSkeleton.vue';
   import CoachRecommandations from '@/components/custom/Coach/CoachRecommandations.vue';
   import ServiceLink from '@/components/custom/Service/ServiceLink.vue';
+  import ServiceLinkExterne from '@/components/custom/Service/ServiceLinkExterne.vue';
   import ThematiquesListe from '@/components/custom/Thematiques/ThematiquesListe.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import { DefiRepositoryAxios } from '@/domaines/defi/adapters/defi.repository.axios';
@@ -97,6 +88,12 @@
   } from '@/domaines/recommandationsPersonnalisees/adapters/recommandationsPersonnalisees.presenter.impl';
   import { RecommandationsPersonnaliseesRepositoryAxios } from '@/domaines/recommandationsPersonnalisees/adapters/recommandationsPersonnalisees.repository.axios';
   import { RecupererRecommandationsPersonnaliseesUniversUsecase } from '@/domaines/recommandationsPersonnalisees/recupererRecommandationsPersonnaliseesUnivers.usecase';
+  import {
+    ServicesRechercheViewModel,
+    ServiceRecherchePresenterImpl,
+  } from '@/domaines/serviceRecherche/adapters/serviceRecherche.presenter.impl';
+  import { ServiceRechercheRepositoryAxios } from '@/domaines/serviceRecherche/adapters/serviceRecherche.repository.axios';
+  import { RecupererServicesRechercheParUniversUsecase } from '@/domaines/serviceRecherche/recupererServicesRechercheParUnivers.usecase';
   import { ThematiqueRepositoryAxios } from '@/domaines/thematiques/adapters/thematique.repository.axios';
   import {
     ThematiquesPresenterImpl,
@@ -107,7 +104,6 @@
   import { UniversPresenterImpl } from '@/domaines/univers/adapters/univers.presenter.impl';
   import { UniversRepositoryAxios } from '@/domaines/univers/adapters/univers.repository.axios';
   import { RecupererUniversUsecase } from '@/domaines/univers/recupererUnivers.usecase';
-  import { RouteServiceName } from '@/router/services/routes';
   import { Fonctionnalites } from '@/shell/fonctionnalitesEnum';
   import { utilisateurStore } from '@/store/utilisateur';
 
@@ -117,28 +113,10 @@
 
   const universId = Array.isArray(route.params.id) ? route.params.id[0] : route.params.id;
   const recommandationsPersonnaliseesViewModel = ref<RecommandationPersonnaliseeViewModel>();
-  const thematiques = ref<ThematiqueViewModel[]>();
-  const univers = ref<UniversViewModel>();
-  const defis = ref<DefiDescriptionViewModel[]>();
-
-  const moisCourant = new Intl.DateTimeFormat('fr-FR', { month: 'long' }).format(new Date());
-  const moisCourantCapitalized = moisCourant.charAt(0).toUpperCase() + moisCourant.slice(1);
-
-  function onUniversPretAAfficher(viewModel: UniversViewModel) {
-    univers.value = viewModel;
-  }
-
-  function onRecommandationsPretesAAfficher(viewModel: RecommandationPersonnaliseeViewModel) {
-    recommandationsPersonnaliseesViewModel.value = viewModel;
-  }
-
-  function onThematiquesPretesAAfficher(viewModel: ThematiqueViewModel[]) {
-    thematiques.value = viewModel;
-  }
-
-  function onDefisPretsAAfficher(viewModel: DefiDescriptionViewModel[]) {
-    defis.value = viewModel;
-  }
+  const thematiquesViewModel = ref<ThematiqueViewModel[]>();
+  const universViewModel = ref<UniversViewModel>();
+  const defisViewModel = ref<DefiDescriptionViewModel[]>();
+  const servicesViewModel = ref<ServicesRechercheViewModel>();
 
   const lancerChargementDesDonnees = () => {
     const idUtilisateur = store.utilisateur.id;
@@ -148,22 +126,34 @@
     );
     const recupererThematiquesUsecase = new RecupererThematiquesUniversUsecase(new ThematiqueRepositoryAxios());
     const recupererDefiParUniversUsecase = new RecupererListeDefisParUniversUsecase(new DefiRepositoryAxios());
+    const recupererServicesRechercheParUniversUsecase = new RecupererServicesRechercheParUniversUsecase(
+      new ServiceRechercheRepositoryAxios(),
+    );
     Promise.all([
-      recupererUniversUsecase.execute(idUtilisateur, universId, new UniversPresenterImpl(onUniversPretAAfficher)),
+      recupererUniversUsecase.execute(
+        idUtilisateur,
+        universId,
+        new UniversPresenterImpl(vm => (universViewModel.value = vm)),
+      ),
       chargerRecommandationsPersonnaliseesUsecase.execute(
         universId,
         idUtilisateur,
-        new RecommandationsPersonnaliseesPresenterImpl(onRecommandationsPretesAAfficher),
+        new RecommandationsPersonnaliseesPresenterImpl(vm => (recommandationsPersonnaliseesViewModel.value = vm)),
       ),
       recupererThematiquesUsecase.execute(
         universId,
         idUtilisateur,
-        new ThematiquesPresenterImpl(onThematiquesPretesAAfficher),
+        new ThematiquesPresenterImpl(vm => (thematiquesViewModel.value = vm)),
       ),
       recupererDefiParUniversUsecase.execute(
         idUtilisateur,
         universId,
-        new ListeDefisDescriptionPresenterImpl(onDefisPretsAAfficher),
+        new ListeDefisDescriptionPresenterImpl(vm => (defisViewModel.value = vm)),
+      ),
+      recupererServicesRechercheParUniversUsecase.execute(
+        idUtilisateur,
+        universId,
+        new ServiceRecherchePresenterImpl(vm => (servicesViewModel.value = vm)),
       ),
     ])
       .then(() => {

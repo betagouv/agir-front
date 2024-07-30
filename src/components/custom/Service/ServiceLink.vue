@@ -21,7 +21,7 @@
   }>();
 </script>
 
-<style>
+<style scoped>
   .service-link-card {
     transition: box-shadow 0.3s ease-in-out;
   }
