@@ -10,6 +10,9 @@ export interface UtilisateurStore {
   tracking: {
     matomoEstInactif: boolean;
   };
+  disclaimer: {
+    afficherDisclaimerGeneral: boolean;
+  };
 }
 
 export const utilisateurStore = defineStore('utilisateur', {
@@ -35,6 +38,9 @@ export const utilisateurStore = defineStore('utilisateur', {
     },
     tracking: {
       matomoEstInactif: false,
+    },
+    disclaimer: {
+      afficherDisclaimerGeneral: true,
     },
   }),
   actions: {
