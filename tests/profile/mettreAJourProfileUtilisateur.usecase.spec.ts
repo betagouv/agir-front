@@ -63,6 +63,7 @@ describe('Fichier de tests concernant la mise à jour du profile utilisateur', (
       prenom: 'John',
       fonctionnalitesDebloquees: [],
       onboardingAEteRealise: true,
+      afficherDisclaimerAides: false,
     });
   });
 });

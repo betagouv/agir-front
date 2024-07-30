@@ -5,6 +5,7 @@ export interface Utilisateur {
   mail: string;
   fonctionnalitesDebloquees: string[];
   onboardingAEteRealise: boolean;
+  afficherDisclaimerAides: boolean;
 }
 
 export type IdUtilisateur = string;

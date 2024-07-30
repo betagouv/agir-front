@@ -17,6 +17,7 @@ export class MockUtilisateurRepository implements UtilisateurRepository {
       mail: 'john@exemple.com',
       fonctionnalitesDebloquees: [],
       onboardingAEteRealise: false,
+      afficherDisclaimerAides: false,
     });
   }
 
@@ -44,6 +45,7 @@ export class MockUtilisateurRepository implements UtilisateurRepository {
       mail: email,
       fonctionnalitesDebloquees: [],
       onboardingAEteRealise: false,
+      afficherDisclaimerAides: false,
     });
   }
 }

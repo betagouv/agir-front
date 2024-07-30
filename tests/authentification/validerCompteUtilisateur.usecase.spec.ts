@@ -18,6 +18,7 @@ describe('Fichier de tests concernant la validation du compte utilisateur', () =
       mail: 'john@exemple.com',
       fonctionnalitesDebloquees: [],
       onboardingAEteRealise: false,
+      afficherDisclaimerAides: false,
     });
   });
 });

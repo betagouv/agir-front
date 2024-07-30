@@ -30,6 +30,7 @@ describe("Fichier de tests concernant la validation de l'authentification de l'u
       mail: 'john@exemple.com',
       fonctionnalitesDebloquees: [],
       onboardingAEteRealise: false,
+      afficherDisclaimerAides: false,
     });
   });
 

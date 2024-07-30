@@ -10,6 +10,7 @@ export class SpySauvegarderUtilisateurSessionRepository implements SessionReposi
     nom: '',
     fonctionnalitesDebloquees: [],
     onboardingAEteRealise: false,
+    afficherDisclaimerAides: false,
   };
 
   static avecOnBoardingRealise(): SpySauvegarderUtilisateurSessionRepository {

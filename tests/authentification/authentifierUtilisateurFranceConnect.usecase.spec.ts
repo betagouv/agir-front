@@ -21,6 +21,7 @@ describe("Fichier de tests concernant l'authentification France Connect", () => 
       mail: '',
       fonctionnalitesDebloquees: [],
       onboardingAEteRealise: true,
+      afficherDisclaimerAides: false,
     });
   });
 });

@@ -15,6 +15,7 @@ interface UtilisateurApiModel {
   abonnement_transport: boolean;
   fonctionnalites_debloquees: string[];
   is_onboarding_done: boolean;
+  couverture_aides_ok: boolean;
 }
 
 interface LoginApiModel {
@@ -50,6 +51,7 @@ export class UtilisateurRepositoryAxios implements UtilisateurRepository {
       mail: response.data.utilisateur.email,
       fonctionnalitesDebloquees: response.data.utilisateur.fonctionnalites_debloquees || ['aides'],
       onboardingAEteRealise: response.data.utilisateur.is_onboarding_done,
+      afficherDisclaimerAides: !response.data.utilisateur.couverture_aides_ok,
     };
   }
   private setBearerInCookie(token: string) {
@@ -68,6 +70,7 @@ export class UtilisateurRepositoryAxios implements UtilisateurRepository {
       mail: response.data.email,
       fonctionnalitesDebloquees: response.data.fonctionnalites_debloquees || ['aides'],
       onboardingAEteRealise: response.data.is_onboarding_done,
+      afficherDisclaimerAides: !response.data.couverture_aides_ok,
     };
   }
 

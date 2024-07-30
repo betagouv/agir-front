@@ -14,6 +14,7 @@ export class InjectUtilisateur {
         mail: 'dorian@agir.dev',
         fonctionnalitesDebloquees: [],
         onboardingAEteRealise: true,
+        afficherDisclaimerAides: false,
       },
       valeurBilanCarbone: { bilan: '', details: [], valeurMax: 0 },
       score: {

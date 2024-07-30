@@ -100,6 +100,7 @@ describe('Fichier de tests concernant la creation du compte utilisateur', () => 
       nom: '',
       prenom: '',
       onboardingAEteRealise: false,
+      afficherDisclaimerAides: false,
     });
   });
   it("si le repository renvoie une erreur avec un code d'erreur 023 doit naviguer vers la page de beta fermée", async () => {
