@@ -27,6 +27,7 @@ export class UtilisateurRepositoryForTest implements UtilisateurRepository {
       mail: '',
       fonctionnalitesDebloquees: [],
       onboardingAEteRealise: this.onboardingRealise,
+      afficherDisclaimerAides: false,
     });
   }
 
@@ -54,6 +55,7 @@ export class UtilisateurRepositoryForTest implements UtilisateurRepository {
       mail: email,
       fonctionnalitesDebloquees: [],
       onboardingAEteRealise: this.onboardingRealise,
+      afficherDisclaimerAides: false,
     });
   }
 }

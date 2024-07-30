@@ -72,6 +72,7 @@ describe('Fichier de tests concernant le chargement du compte utilisateur', () =
       prenom: 'John',
       fonctionnalitesDebloquees: [],
       onboardingAEteRealise: true,
+      afficherDisclaimerAides: false,
     });
   });
 });

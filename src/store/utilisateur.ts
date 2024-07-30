@@ -24,6 +24,7 @@ export const utilisateurStore = defineStore('utilisateur', {
       mail: '',
       fonctionnalitesDebloquees: [],
       onboardingAEteRealise: false,
+      afficherDisclaimerAides: false,
     },
     valeurBilanCarbone: {
       bilan: '',
