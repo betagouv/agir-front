@@ -6,4 +6,5 @@ export enum RouteCoachName {
   QUIZ = 'quiz',
   QUIZ_PREVISUALISATION = 'quiz-previsualisation',
   BIBLIOTHEQUE = 'bibliotheque',
+  CLASSEMENT = 'classement',
 }
