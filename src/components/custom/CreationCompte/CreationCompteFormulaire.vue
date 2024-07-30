@@ -36,12 +36,19 @@
               >la charte de participation
             </router-link>
           </label>
+          <input name="cgu" id="cgu" type="checkbox" v-model="acceptationCGU" />
+          <label class="fr-label fr-mt-1w" for="cgu">
+            J'accepte&nbsp;
+            <router-link :to="{ name: RouteConformiteName.CGU }" target="_blank"
+              >les conditions générales d'utilisation
+            </router-link>
+          </label>
         </div>
       </div>
-      <div class="fr-fieldset__element fr-mb-0">
+      <div class="fr-fieldset__element fr-mb-0 fr-mt-1w">
         <button
           class="fr-btn fr-btn--lg display-block full-width"
-          :disabled="!formulaireValide || !acceptationCharte"
+          :disabled="!formulaireValide || !acceptationCharte || !acceptationCGU"
           type="submit"
         >
           Créer votre compte
@@ -79,6 +86,7 @@
   let creationDeCompteMessageErreur = ref<string>('');
   let formulaireValide = ref<boolean>(false);
   let acceptationCharte = ref<boolean>(false);
+  let acceptationCGU = ref<boolean>(false);
   utilisateurStore().reset();
 
   function onMotDePasseValideChanged(isMotDePasseValide: boolean) {
