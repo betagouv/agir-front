@@ -4,9 +4,8 @@
       <Header />
       <DisclaimerGeneral
         v-if="afficherLeDisclaimer"
-        titre="Le service est en cours de construction."
-        description="Certains contenus et fonctionnalités sur cette page seront mis à jour progressivement pour vous proposer la
-            meilleure expérience."
+        titre="Agir est encore en expérimentation !"
+        description="Certains contenus et fonctionnalités seront mis à jour progressivement pour vous proposer la meilleure expérience. Revenez régulièrement pour profiter de nos dernières nouveautés."
         :onClick="
           () => {
             utilisateurStore().disclaimer.afficherDisclaimerGeneral = false;
