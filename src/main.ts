@@ -104,9 +104,9 @@ if (import.meta.env.VITE_ENV === 'production') {
   Hotjar.init(import.meta.env.VITE_HOTJAR_ID, import.meta.env.VITE_HOTJAR_SNIPPET_VERSION, {
     debug: false,
   });
-}
 
-createSentry(app, router);
+  createSentry(app, router);
+}
 
 app.mount('#app');
 
