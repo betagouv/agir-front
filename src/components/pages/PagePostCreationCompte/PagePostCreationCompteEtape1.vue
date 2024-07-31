@@ -5,7 +5,7 @@
         <fieldset class="fr-fieldset fr-mb-0">
           <legend class="fr-fieldset__legend" id="identity-fieldset-legend">
             <img src="/bg_creation_compte.png" alt="" />
-            <p class="text--normal text--bleu fr-mb-1w"><span class="fr-text--bold">Question 1</span> sur 2</p>
+            <p class="text--normal text--bleu fr-mt-1w fr-mb-1w"><span class="fr-text--bold">Question 1</span> sur 2</p>
             <h1 class="fr-h4 fr-mb-1w">Bienvenue sur Agir ! Faisons connaissance...</h1>
             <p class="fr-text--regular fr-text--lg">
               Nous avons quelques questions à vous poser pour personnaliser votre expérience !

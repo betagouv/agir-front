@@ -11,8 +11,9 @@ const PagePostCreationCompteEtape1 = () =>
   import('@/components/pages/PagePostCreationCompte/PagePostCreationCompteEtape1.vue');
 const PagePostCreationCompteEtape2 = () =>
   import('@/components/pages/PagePostCreationCompte/PagePostCreationCompteEtape2.vue');
+const PagePostCreationCompteFin = () =>
+  import('@/components/pages/PagePostCreationCompte/PagePostCreationCompteFin.vue');
 import { RouteRecordRaw } from 'vue-router';
-import { RouteCoachName } from '@/router/coach/routeCoachName';
 import { RouteCompteName } from '@/router/compte/routeCompteName';
 import { utilisateurStore } from '@/store/utilisateur';
 
@@ -28,6 +29,7 @@ export enum RouteComptePath {
   DEFIS = '/mon-compte/vos-actions',
   POST_CREATION_COMPTE_ETAPE_1 = '/creation-compte/etape-1',
   POST_CREATION_COMPTE_ETAPE_2 = '/creation-compte/etape-2',
+  POST_CREATION_COMPTE_FIN = '/creation-compte/fin',
 }
 
 const onboardingGuard = () => {
@@ -121,20 +123,20 @@ const compteRoutes: RouteRecordRaw[] = [
     },
   },
   {
-    beforeEnter: (to, from, next) => {
-      {
-        if (utilisateurStore().utilisateur.onboardingAEteRealise) {
-          next({ name: RouteCoachName.COACH, replace: true });
-        } else {
-          next();
-        }
-      }
-    },
     path: RouteComptePath.POST_CREATION_COMPTE_ETAPE_2,
     name: RouteCompteName.POST_CREATION_COMPTE_ETAPE_2,
     component: PagePostCreationCompteEtape2,
     meta: {
       title: 'Création de compte - étape 2',
+      estPublique: true,
+    },
+  },
+  {
+    path: RouteComptePath.POST_CREATION_COMPTE_FIN,
+    name: RouteCompteName.POST_CREATION_COMPTE_FIN,
+    component: PagePostCreationCompteFin,
+    meta: {
+      title: 'Création de compte - fin',
       estPublique: true,
     },
   },

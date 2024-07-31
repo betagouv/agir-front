@@ -390,6 +390,10 @@ h2 {
   line-height: 1 !important;
 }
 
+.align-items--baseline {
+  align-items: baseline;
+}
+
 .align-items--center {
   align-items: center;
 }

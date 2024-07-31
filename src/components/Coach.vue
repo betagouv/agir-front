@@ -114,6 +114,7 @@
   import { Fonctionnalites } from '@/shell/fonctionnalitesEnum';
   import { publierEvenementHotjar, HotjarEvenement } from '@/shell/publierEvenementHotjar';
   import { onboardingStore } from '@/store/onboarding';
+  import { onboardingPostCreationCompte } from '@/store/onboardingPostCreationCompte';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const { recommandationTour, defiTour, universTour } = useReveal();
