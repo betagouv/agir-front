@@ -14,8 +14,8 @@
               :defaultSelectValue="logementViewModel.commune"
               @update:selectedCommune="logementViewModel.commune = $event"
             />
-            <h3 class="fr-h4 fr-mt-3w">Quelle est votre tranche de revenus ?</h3>
-            <InputTrancheDeRevenu
+            <h3 class="fr-h4 fr-mt-3w">Quel est votre revenu ?</h3>
+            <CompteFormulaireRevenuFiscal
               v-model:nombre-de-parts="nombreDePartsFiscales"
               v-model:revenu-fiscal-de-reference="revenuFiscal"
             />
@@ -42,12 +42,11 @@
 <script setup lang="ts">
   import { computed, onMounted, ref } from 'vue';
   import AidesVeloFormulaireAside from '@/components/custom/Aides/AidesInfosUtilisationDesDonnees.vue';
-  import InputTrancheDeRevenu from '@/components/custom/InputTrancheDeRevenu.vue';
+  import CompteFormulaireRevenuFiscal from '@/components/custom/Compte/CompteFormulaireRevenuFiscal.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import InputCheckboxUnitaire from '@/components/dsfr/InputCheckboxUnitaire.vue';
   import InputCodePostal from '@/components/dsfr/InputCodePostal.vue';
   import { SessionRepositoryStore } from '@/domaines/authentification/adapters/session.repository.store';
-
   import { LogementPresenterImpl } from '@/domaines/logement/adapters/logement.presenter.impl';
   import { LogementRepositoryAxios } from '@/domaines/logement/adapters/logement.repository.axios';
   import { EnregistrerInformationsLogementUsecase } from '@/domaines/logement/enregistrerInformationLogement.usecase';

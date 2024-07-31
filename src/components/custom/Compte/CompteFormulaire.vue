@@ -50,50 +50,49 @@
       <legend class="fr-fieldset__legend fr-px-0 fr-mx-0" id="donnee-fieldset-legend">
         <h2>Données personnelles</h2>
       </legend>
-      <div class="fr-grid fr-grid-row">
-        <div class="fr-col-12">
-          <InputTrancheDeRevenu
-            v-model:nombre-de-parts="profileUtlisateurViewModel.nombreDePartsFiscales"
-            v-model:revenu-fiscal-de-reference="profileUtlisateurViewModel.revenuFiscal"
-          />
-          <CarteInfo>
-            <p class="fr-text--bold">
-              <span class="fr-icon-question-line" aria-hidden="true"></span>
-              Où trouver ces informations
-            </p>
-            <p>
-              Le <strong>revenu fiscal de référence</strong> et votre <strong>nombre de parts</strong> se trouvent sur
-              la 1ère page de votre dernier avis d’impôt.<br />
-              <strong>Nombre de part</strong><br />
-              Si vous ne disposez pas de votre dernier avis d’impôt, renseignez 1 part pour chaque adulte de votre foyer
-              fiscal, puis 0,5 part par enfant jusqu’à 2 enfants, puis 1 part par enfant à partir du 3ème enfant.
-            </p>
-            <p>
-              Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme des revenus de toutes les
-              personnes avec lequelles vous partagez vos déclarations d’impôts (pour toute l’année) pour vous faire une
-              première idée.
-            </p>
-            <p class="fr-text--bold">
-              <span class="fr-icon-information-line" aria-hidden="true"></span>
-              Pourquoi ces questions ?
-            </p>
-            <p class="fr-mb-0">
-              Votre <strong>revenu fiscal de référence</strong> et le <strong>nombre de parts</strong> permettent
-              d’afficher les aides en fonction de vos ressources.
-            </p>
-          </CarteInfo>
-        </div>
-      </div>
-      <div class="fr-grid-row full-width flex-end">
-        <button
-          type="submit"
-          aria-label="Soumettre le formulaire"
-          class="fr-btn fr-btn--icon-left fr-btn--lg fr-mt-4w fr-icon-save-3-fill"
-        >
-          Mettre à jour vos informations
-        </button>
+      <div class="full-width">
+        <CompteFormulaireRevenuFiscal
+          class="fr-mb-4w"
+          v-model:nombre-de-parts="profileUtlisateurViewModel.nombreDePartsFiscales"
+          v-model:revenu-fiscal-de-reference="profileUtlisateurViewModel.revenuFiscal"
+        />
       </div>
     </fieldset>
+    <CarteInfo>
+      <p class="fr-text--bold">
+        <span class="fr-icon-question-line" aria-hidden="true"></span>
+        Où trouver ces informations
+      </p>
+      <p>
+        Le <strong>revenu fiscal de référence</strong> et votre <strong>nombre de parts</strong> se trouvent sur la 1ère
+        page de votre dernier avis d’impôt.<br />
+        <strong>Nombre de part</strong><br />
+        Si vous ne disposez pas de votre dernier avis d’impôt, renseignez 1 part pour chaque adulte de votre foyer
+        fiscal, puis 0,5 part par enfant jusqu’à 2 enfants, puis 1 part par enfant à partir du 3ème enfant.
+      </p>
+      <p>
+        Si vous ne disposez pas de votre dernier avis d’impôt, renseignez la somme des revenus de toutes les personnes
+        avec lequelles vous partagez vos déclarations d’impôts (pour toute l’année) pour vous faire une première idée.
+      </p>
+      <p class="fr-text--bold">
+        <span class="fr-icon-information-line" aria-hidden="true"></span>
+        Pourquoi ces questions ?
+      </p>
+      <p class="fr-mb-0">
+        Votre <strong>revenu fiscal de référence</strong> et le <strong>nombre de parts</strong> permettent d’afficher
+        les aides en fonction de vos ressources.
+      </p>
+    </CarteInfo>
+
+    <div class="fr-grid-row full-width flex-end">
+      <button
+        type="submit"
+        aria-label="Soumettre le formulaire"
+        class="fr-btn fr-btn--icon-left fr-btn--lg fr-mt-4w fr-icon-save-3-fill"
+      >
+        Mettre à jour vos informations
+      </button>
+    </div>
   </form>
 </template>
 
@@ -101,8 +100,8 @@
   import { ref } from 'vue';
   import Alert from '@/components/custom/Alert.vue';
   import CarteInfo from '@/components/custom/CarteInfo.vue';
+  import CompteFormulaireRevenuFiscal from '@/components/custom/Compte/CompteFormulaireRevenuFiscal.vue';
   import InputSelectAnneeDeNaissance from '@/components/custom/CreationCompte/InputSelectAnneeDeNaissance.vue';
-  import InputTrancheDeRevenu from '@/components/custom/InputTrancheDeRevenu.vue';
   import InputMail from '@/components/dsfr/InputMail.vue';
   import InputText from '@/components/dsfr/InputText.vue';
   import { useAlerte } from '@/composables/useAlerte';
@@ -114,7 +113,6 @@
   const { alerte, afficherAlerte } = useAlerte();
   const props = defineProps<{ compteUtlisateurViewModel: ProfileUtilisateurViewModel }>();
   const profileUtlisateurViewModel = ref<ProfileUtilisateurViewModel>(props.compteUtlisateurViewModel);
-
   async function modifierInformation() {
     const usecase = new MettreAJourProfileUtilisateurUsecase(
       new ProfileUtilisateurRepositoryAxiosImpl(),
