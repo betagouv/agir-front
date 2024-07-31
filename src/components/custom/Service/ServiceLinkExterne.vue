@@ -5,8 +5,8 @@
     target="_blank"
     rel="noopener noreferrer"
   >
-    <span class="fr-text--lg fr-text--bold fr-mb-1v">{{ titre }}</span>
-    <span class="fr-text--md fr-mb-0 fr-pr-3w">{{ sousTitre }}</span>
+    <h3 class="fr-h6 fr-text--bold fr-mb-1v">{{ titre }}</h3>
+    <span class="fr-mb-0 fr-pr-3w">{{ sousTitre }}</span>
   </a>
 </template>
 
