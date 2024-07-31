@@ -9,7 +9,7 @@
         Code postal : <span class="fr-text--bold">{{ codePostal }} {{ ville }}</span>
       </li>
       <li>
-        Revenu fiscal de référence : <span class="fr-text--bold">{{ seuil }} </span> <br />
+        Revenu fiscal de référence : <span class="fr-text--bold">{{ revenuFiscal }} </span> <br />
         <span v-if="revenuFiscal === null">⚠️ Donnée à compléter</span>
       </li>
       <li>
@@ -37,22 +37,12 @@
 
 <script setup lang="ts">
   import CarteInfo from '@/components/custom/CarteInfo.vue';
-  import { calculerSeuils } from '@/shell/calculerSeuils';
-  import { ref } from 'vue';
-
   import { RouteAidesName } from '@/router/aides/routeAidesName';
 
-  const props = defineProps<{
+  defineProps<{
     codePostal: string;
     ville: string;
     revenuFiscal: number | null;
     nombreDePartsFiscales: number;
   }>();
-  const seuil = ref<string>('');
-  if (props.revenuFiscal !== null) {
-    const seuils = calculerSeuils(props.nombreDePartsFiscales).filter(
-      seuil => seuil.value === props.revenuFiscal!.toString()
-    );
-    seuil.value = seuils[0].label;
-  }
 </script>

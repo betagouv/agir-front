@@ -14,11 +14,33 @@
               :defaultSelectValue="logementViewModel.commune"
               @update:selectedCommune="logementViewModel.commune = $event"
             />
-            <h3 class="fr-h4 fr-mt-3w">Quelle est votre tranche de revenus ?</h3>
-            <InputTrancheDeRevenu
-              v-model:nombre-de-parts="nombreDePartsFiscales"
-              v-model:revenu-fiscal-de-reference="revenuFiscal"
-            />
+            <h3 class="fr-h4 fr-mt-3w">Quel est votre revenu ?</h3>
+            <div class="fr-grid-row fr-grid-row--gutters fr-col-12 fr-pb-4w">
+              <div class="fr-col-6">
+                <div class="fr-input-group">
+                  <label class="fr-label" for="text-input-rfr"> Nombre de parts fiscales de votre foyer </label>
+                  <input
+                    required
+                    class="fr-input fr-col-4"
+                    name="revenu-fiscal"
+                    id="text-input-rfr"
+                    inputmode="numeric"
+                    type="number"
+                    v-model="nombreDePartsFiscales"
+                    step=".5"
+                    min="1"
+                  />
+                </div>
+              </div>
+              <div class="fr-col-6">
+                <InputText
+                  name="revenu"
+                  @update:model-value="value => (revenuFiscal = Number(value))"
+                  :model-value="revenuFiscal?.toString() || ''"
+                  label="Revenu fiscal de référence de votre foyer"
+                />
+              </div>
+            </div>
             <div v-if="afficherAbonnement">
               <h3 class="fr-h4">Abonnements et cartes</h3>
               <InputCheckboxUnitaire
@@ -42,10 +64,10 @@
 <script setup lang="ts">
   import { computed, onMounted, ref } from 'vue';
   import AidesVeloFormulaireAside from '@/components/custom/Aides/AidesInfosUtilisationDesDonnees.vue';
-  import InputTrancheDeRevenu from '@/components/custom/InputTrancheDeRevenu.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import InputCheckboxUnitaire from '@/components/dsfr/InputCheckboxUnitaire.vue';
   import InputCodePostal from '@/components/dsfr/InputCodePostal.vue';
+  import InputText from '@/components/dsfr/InputText.vue';
   import { SessionRepositoryStore } from '@/domaines/authentification/adapters/session.repository.store';
 
   import { LogementPresenterImpl } from '@/domaines/logement/adapters/logement.presenter.impl';
