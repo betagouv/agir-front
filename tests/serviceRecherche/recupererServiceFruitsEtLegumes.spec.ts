@@ -104,7 +104,7 @@ describe('Fichier de tests concernant la récuperation du service Fruits et Lég
           description: 'Des informations fiables et sourcées issues des données environnementales de l’ADEME',
           url: 'https://impactco2.fr/',
           logo: '/service-fruits-logo.png',
-          screenshot: '/service-fruits.jpg',
+          screenshot: '/service-fruits.png',
         },
         categories: [
           {
