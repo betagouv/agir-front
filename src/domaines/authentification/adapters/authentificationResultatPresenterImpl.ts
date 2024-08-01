@@ -9,7 +9,7 @@ export class AuthentificationResultatPresenterImpl implements AuthentificationRe
   presente(cas: string): void {
     switch (cas) {
       case AuthentificationResultat.DOIT_FAIRE_ONBOARDING:
-        this.routeViewModel(RouteComptePath.POST_CREATION_COMPTE_ETAPE_1);
+        this.routeViewModel(RouteComptePath.POST_CREATION_COMPTE_DISCLAIMER);
         break;
       case AuthentificationResultat.PEUT_SE_CONNECTER:
         this.routeViewModel(RouteCoachPath.COACH);

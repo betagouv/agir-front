@@ -13,6 +13,8 @@ const PagePostCreationCompteEtape2 = () =>
   import('@/components/pages/PagePostCreationCompte/PagePostCreationCompteEtape2.vue');
 const PagePostCreationCompteFin = () =>
   import('@/components/pages/PagePostCreationCompte/PagePostCreationCompteFin.vue');
+const PagePostCreationCompteDisclaimer = () =>
+  import('@/components/pages/PagePostCreationCompte/PagePostCreationCompteDisclaimer.vue');
 import { RouteRecordRaw } from 'vue-router';
 import { RouteCompteName } from '@/router/compte/routeCompteName';
 import { utilisateurStore } from '@/store/utilisateur';
@@ -30,6 +32,7 @@ export enum RouteComptePath {
   POST_CREATION_COMPTE_ETAPE_1 = '/creation-compte/etape-1',
   POST_CREATION_COMPTE_ETAPE_2 = '/creation-compte/etape-2',
   POST_CREATION_COMPTE_FIN = '/creation-compte/fin',
+  POST_CREATION_COMPTE_DISCLAIMER = '/creation-compte/experimentation',
 }
 
 const onboardingGuard = () => {
@@ -137,6 +140,15 @@ const compteRoutes: RouteRecordRaw[] = [
     component: PagePostCreationCompteFin,
     meta: {
       title: 'Création de compte - fin',
+      estPublique: true,
+    },
+  },
+  {
+    path: RouteComptePath.POST_CREATION_COMPTE_DISCLAIMER,
+    name: RouteCompteName.POST_CREATION_COMPTE_DISCLAIMER,
+    component: PagePostCreationCompteDisclaimer,
+    meta: {
+      title: 'Création de compte - Expirementation',
       estPublique: true,
     },
   },

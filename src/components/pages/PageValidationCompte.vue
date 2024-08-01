@@ -53,7 +53,7 @@
       .then(() => {
         onboardingStore().reset();
         onboardingBilanStore().reset();
-        router.push({ name: RouteCompteName.POST_CREATION_COMPTE_ETAPE_1 });
+        router.push({ name: RouteCompteName.POST_CREATION_COMPTE_DISCLAIMER });
       })
       .catch(reason => {
         afficherAlerte('error', 'Erreur lors de la validation du compte', reason.data.message);

@@ -46,7 +46,7 @@ describe("Fichier de tests concernant la validation de l'authentification de l'u
 
     // THEN
     function expectToto(viewModel: string) {
-      expect(viewModel).toEqual(RouteComptePath.POST_CREATION_COMPTE_ETAPE_1);
+      expect(viewModel).toEqual(RouteComptePath.POST_CREATION_COMPTE_DISCLAIMER);
     }
   });
 
