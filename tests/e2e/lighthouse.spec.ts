@@ -138,6 +138,11 @@ test.describe('Audit a11y - pages connectées', () => {
     await playAuditA11y(page);
   });
 
+  test('Page bilan carbone', async () => {
+    await page.goto('/bilan-carbone');
+    await playAuditA11y(page);
+  });
+
   test.afterAll(async () => {
     await context.close();
     fs.rmSync('./tmp', { recursive: true, force: true });

@@ -4,7 +4,13 @@
       <slot />
     </div>
     <div class="fr-col-12 fr-col-md-3">
-      <ServiceAside :service-aside-view-model="aside" />
+      <ServiceAside
+        :nom="aside.nom"
+        :image="aside.screenshot"
+        :description="aside.description"
+        :url="aside.url"
+        :logo="aside.logo"
+      />
     </div>
   </div>
 </template>

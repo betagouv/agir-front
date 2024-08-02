@@ -13,7 +13,7 @@
         "
       />
     </div>
-    <main id="contenu" class="background--gris">
+    <main id="contenu" class="background--main">
       <router-view />
     </main>
 
