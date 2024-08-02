@@ -203,6 +203,10 @@ h2 {
   background: none;
 }
 
+.background--main {
+  background-color: #f7f8f8;
+}
+
 .background-bleu {
   background-color: var(--blue-france-main-525);
 }
@@ -306,6 +310,10 @@ h2 {
   border: 1px solid rgba(0, 0, 0, 0.19);
 }
 
+.border--bottom--grey {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
 .border--white {
   border: 1px solid #fff;
 }
@@ -329,6 +337,7 @@ h2 {
 .border--green-light {
   border: 1px solid #dcef64;
 }
+
 .border-radius--xs {
   border-radius: 4px;
 }

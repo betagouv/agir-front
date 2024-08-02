@@ -2,6 +2,7 @@ import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import { storeIdNGC } from '@/domaines/bilan/middleware/pendingSimulation';
 import aidesRoutes from '@/router/aides/routes';
 import articlesRoutes from '@/router/articles/routes';
+import bilanCarboneRoutes from '@/router/bilanCarbone/routes';
 import { RouteCoachName } from '@/router/coach/routeCoachName';
 import coachRoutes from '@/router/coach/routes';
 import compteRoutes from '@/router/compte/routes';
@@ -49,6 +50,7 @@ const routes: RouteRecordRaw[] = [
   ...universRoutes,
   ...quizRoutes,
   ...serviceRoutes,
+  ...bilanCarboneRoutes,
   {
     path: '/',
     name: RouteCommuneName.ACCUEIL,
