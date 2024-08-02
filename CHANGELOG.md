@@ -1,5 +1,59 @@
 # Changelog
 
+## [1.16.0](https://github.com/betagouv/agir-front/compare/v1.15.0...v1.16.0) (2024-08-02)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* affichage d'un disclaimer à la création du compte ([#540](https://github.com/betagouv/agir-front/issues/540)) ([e1392df](https://github.com/betagouv/agir-front/commit/e1392df94b40c2adfe4087e58502e3ef1bad38ad))
+* afficher un disclaimer pour les aides dans les villes non couvertes ([#529](https://github.com/betagouv/agir-front/issues/529)) ([7212d9a](https://github.com/betagouv/agir-front/commit/7212d9a4904d12832eda5a13018ff05bf0083b56))
+* ajout d'un disclaimer general ([#528](https://github.com/betagouv/agir-front/issues/528)) ([d9fb1cb](https://github.com/betagouv/agir-front/commit/d9fb1cbebd41da0e3491a67538da30b0a4480e02))
+* ajout d'une étape de fin dans la création de compte ([#539](https://github.com/betagouv/agir-front/issues/539)) ([310e063](https://github.com/betagouv/agir-front/commit/310e0636a65fb8ed610858a7c6686d34e5d34187))
+* authentification avec otp ([#516](https://github.com/betagouv/agir-front/issues/516)) ([d49adfd](https://github.com/betagouv/agir-front/commit/d49adfd51fc9309df39857aca048812cf27c7537))
+* changement illustration service fruits et legumes ([#535](https://github.com/betagouv/agir-front/issues/535)) ([dac36ec](https://github.com/betagouv/agir-front/commit/dac36ec2fc31496361cd4a8c3dbb2664b35e0851))
+* creation de la page bilan carbone ([#542](https://github.com/betagouv/agir-front/issues/542)) ([80fdac6](https://github.com/betagouv/agir-front/commit/80fdac6910761b2ddf16a6a1fcb6190750784df4))
+* dynamisation et ajout des services externes ([#530](https://github.com/betagouv/agir-front/issues/530)) ([8c9112c](https://github.com/betagouv/agir-front/commit/8c9112caa778651eedfdbf772152952da8962a12))
+* le nom est maintenant facultatif ([#521](https://github.com/betagouv/agir-front/issues/521)) ([eaecdef](https://github.com/betagouv/agir-front/commit/eaecdef6fafda91e5032ba5250511415d318108a))
+* onboarding après création du compte ([#510](https://github.com/betagouv/agir-front/issues/510)) ([848101e](https://github.com/betagouv/agir-front/commit/848101e19369d53e9eda77f3cc00605d4a135776))
+* passage en champs libre pour le revenu fiscal ([#537](https://github.com/betagouv/agir-front/issues/537)) ([560f5f6](https://github.com/betagouv/agir-front/commit/560f5f69368c7d2242aea2529b5cb2ede57b54f1))
+* redirection onboarding apres connexion si l'onboarding n'est pas terminé ([#511](https://github.com/betagouv/agir-front/issues/511)) ([f734d12](https://github.com/betagouv/agir-front/commit/f734d12f73d2e49d26d3eef21acfebe7c7378b25))
+* wording parcours creation de compte ([#541](https://github.com/betagouv/agir-front/issues/541)) ([981b349](https://github.com/betagouv/agir-front/commit/981b3493ccc746d567f05a4e9636e590f77e3154))
+
+
+### 🐛 Corrections de bogues
+
+* adresse qui n'apparaissait plus dans le service près de chez nous ([#536](https://github.com/betagouv/agir-front/issues/536)) ([b5080d0](https://github.com/betagouv/agir-front/commit/b5080d082dc5f7af7c54801186856df946f9ca66))
+* checkbox creation de compte ([4c5f0b1](https://github.com/betagouv/agir-front/commit/4c5f0b1748245fafc5d3e314c608c97814537f13))
+* code postal et navigation ([#520](https://github.com/betagouv/agir-front/issues/520)) ([ae22837](https://github.com/betagouv/agir-front/commit/ae22837c5599d07a58cc1c1f9aed236455ea1fe2))
+* connection avec otp sur la CI ([2035baa](https://github.com/betagouv/agir-front/commit/2035baab411d45beb47db7fc7619c97fdfc66aab))
+* feedbacks service près de chez vous ([#499](https://github.com/betagouv/agir-front/issues/499)) ([d127b2f](https://github.com/betagouv/agir-front/commit/d127b2f1adf98613ff00a35dc959d5d2290788b3))
+* masquer astuce et pourquoi ce défi quand le cms renvoie un pararaphe vide ([#508](https://github.com/betagouv/agir-front/issues/508)) ([1246abf](https://github.com/betagouv/agir-front/commit/1246abfa826b4c960cbc25cc065d4f4fa70e0dc2))
+
+
+### 👷 Autres changements
+
+* activation de sentry uniquement en prod ([#538](https://github.com/betagouv/agir-front/issues/538)) ([f639131](https://github.com/betagouv/agir-front/commit/f639131878537eb3fe8bd3b397068a632d641130))
+* Bump @playwright/test from 1.45.2 to 1.45.3 ([#524](https://github.com/betagouv/agir-front/issues/524)) ([14a947e](https://github.com/betagouv/agir-front/commit/14a947e7090f27347ebbfb29e6c23c54cb08b77e))
+* Bump @sentry/vue from 8.13.0 to 8.20.0 ([#518](https://github.com/betagouv/agir-front/issues/518)) ([ddf9787](https://github.com/betagouv/agir-front/commit/ddf9787c0b013f385e5d95bfde7b94f2bdf962db))
+* Bump @types/node from 20.14.12 to 22.0.0 ([#526](https://github.com/betagouv/agir-front/issues/526)) ([70f337c](https://github.com/betagouv/agir-front/commit/70f337c45dedc643a65c97d7843f94e9a5d180f9))
+* Bump @types/node from 20.14.9 to 20.14.12 ([#503](https://github.com/betagouv/agir-front/issues/503)) ([1d1a854](https://github.com/betagouv/agir-front/commit/1d1a8540f0c846bcf5174c976610058e672dc466))
+* Bump @typescript-eslint/eslint-plugin from 7.16.1 to 7.18.0 ([#525](https://github.com/betagouv/agir-front/issues/525)) ([8e2e0d7](https://github.com/betagouv/agir-front/commit/8e2e0d71aa00a642944ac341efa67fb05b511b94))
+* Bump @typescript-eslint/parser from 7.15.0 to 7.17.0 ([#517](https://github.com/betagouv/agir-front/issues/517)) ([9d321f9](https://github.com/betagouv/agir-front/commit/9d321f931be64841ae508db343081d93ba12962a))
+* Bump @vue/test-utils from 2.4.2 to 2.4.6 ([#515](https://github.com/betagouv/agir-front/issues/515)) ([94fc506](https://github.com/betagouv/agir-front/commit/94fc5064cfeec4479e6c491f8700fc03f0435fc7))
+* Bump husky from 9.0.11 to 9.1.4 ([#534](https://github.com/betagouv/agir-front/issues/534)) ([49f8f24](https://github.com/betagouv/agir-front/commit/49f8f243700e98650b6d82b0b0438094d09a1ed2))
+* Bump jsdom from 22.1.0 to 24.1.1 ([#507](https://github.com/betagouv/agir-front/issues/507)) ([4cd55da](https://github.com/betagouv/agir-front/commit/4cd55da682fb77e21803b613da963d734e4647a4))
+* Bump prettier from 3.3.2 to 3.3.3 ([#504](https://github.com/betagouv/agir-front/issues/504)) ([bbb421e](https://github.com/betagouv/agir-front/commit/bbb421ebcdeab76851827b835edd2717e7e1d0d1))
+* Bump typescript from 5.2.2 to 5.5.4 ([#532](https://github.com/betagouv/agir-front/issues/532)) ([c7bdf52](https://github.com/betagouv/agir-front/commit/c7bdf52e88db3f597e11a8a421878e16c9219c32))
+* Bump validate-branch-name from 1.3.0 to 1.3.1 ([#514](https://github.com/betagouv/agir-front/issues/514)) ([4ef59b8](https://github.com/betagouv/agir-front/commit/4ef59b805907582557305571ac041116969b252c))
+* Bump vite from 5.3.3 to 5.3.5 ([#533](https://github.com/betagouv/agir-front/issues/533)) ([d037a2c](https://github.com/betagouv/agir-front/commit/d037a2c6dbce055e65332b0a4d71af32a976c9c4))
+* Bump vitest from 1.6.0 to 2.0.4 ([#506](https://github.com/betagouv/agir-front/issues/506)) ([1ca5c54](https://github.com/betagouv/agir-front/commit/1ca5c54cde3eaf8ef299ffc4df8aa93026669fef))
+* Bump vue from 3.4.31 to 3.4.33 ([#505](https://github.com/betagouv/agir-front/issues/505)) ([3b58da5](https://github.com/betagouv/agir-front/commit/3b58da5aee3c36261ad6497ace9480b5c05a9bce))
+* Bump vue from 3.4.33 to 3.4.34 ([#512](https://github.com/betagouv/agir-front/issues/512)) ([2b7b045](https://github.com/betagouv/agir-front/commit/2b7b04558dbac4f83529e933fa3046b668610671))
+* Bump vue-chartjs from 5.3.0 to 5.3.1 ([#513](https://github.com/betagouv/agir-front/issues/513)) ([4f5814a](https://github.com/betagouv/agir-front/commit/4f5814a89771f585b1c2cbc49cf03983b76c3a94))
+* Bump vue-tsc from 2.0.26 to 2.0.29 ([#527](https://github.com/betagouv/agir-front/issues/527)) ([e3f0889](https://github.com/betagouv/agir-front/commit/e3f08894c5418e82e8a135dc21f1263f347f6efb))
+* dependabot le lundi ([af269fb](https://github.com/betagouv/agir-front/commit/af269fb6302faf406721d1da6311aa4ce7451bc3))
+* dependabot seulement le lundi ([cb8c3ea](https://github.com/betagouv/agir-front/commit/cb8c3ea35545bd010abf6cf8d3431c366448b0db))
+
 ## [1.15.0](https://github.com/betagouv/agir-front/compare/v1.14.0...v1.15.0) (2024-07-23)
 
 
