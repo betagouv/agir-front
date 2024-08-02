@@ -13,17 +13,32 @@ export interface BilanCarboneViewModel {
   details: BilanCarboneDetailViewModel[];
 }
 
-const NOMBRE_SEMAINES_PAR_AN = 52;
+enum UniversIdInterne {
+  TRANSPORT = 'transport',
+  ALIMENTATION = 'alimentation',
+  LOGEMENT = 'logement',
+  CONSOMMATION = 'consommation',
+  SERVICE_SOCIETAUX = 'services_societaux',
+}
 
 export class BilanCarbonePresenterImpl implements BilanCarbonePresenter {
   constructor(private readonly bilanCarboneViewModel: (viewModel: BilanCarboneViewModel) => void) {}
 
   presente(bilanCarbone: BilanCarbone): void {
+    const NOMBRE_SEMAINES_PAR_AN = 52;
+    const pictoLabels = {
+      [UniversIdInterne.TRANSPORT]: '🚙',
+      [UniversIdInterne.ALIMENTATION]: '🍛',
+      [UniversIdInterne.LOGEMENT]: '🏡',
+      [UniversIdInterne.CONSOMMATION]: '👕',
+      [UniversIdInterne.SERVICE_SOCIETAUX]: '🏥',
+    };
+
     this.bilanCarboneViewModel({
       impactKgAnnuel: this.formateKg(bilanCarbone.impactKgAnnuel),
       impactKgHebdomadaire: this.formateKg(bilanCarbone.impactKgAnnuel / NOMBRE_SEMAINES_PAR_AN),
       details: bilanCarbone.details.map(detail => ({
-        universLabel: this.determineLabel(detail.universId, detail.universLabel),
+        universLabel: `${pictoLabels[detail.universId] || ''} ${detail.universLabel}`,
         impactKgAnnuel: this.formateKg(detail.impactKgAnnuel),
         pourcentage: detail.pourcentage,
       })),
@@ -31,29 +46,6 @@ export class BilanCarbonePresenterImpl implements BilanCarbonePresenter {
   }
 
   private formateKg(nombreDeKg: number): string {
-    if (nombreDeKg >= 1000) {
-      const tonnes = nombreDeKg / 1000;
-      const tonnesArrondies = tonnes.toFixed(1);
-      return `${tonnesArrondies} tonnes`;
-    }
-
-    return `${nombreDeKg.toFixed()} kg`;
-  }
-
-  private determineLabel(universId: string, universLabel: string): string {
-    switch (universId) {
-      case 'transport':
-        return `🚙 ${universLabel}`;
-      case 'alimentation':
-        return `🍛 ${universLabel}`;
-      case 'logement':
-        return `🏡 ${universLabel}`;
-      case 'consommation':
-        return `👕 ${universLabel}`;
-      case 'services_societaux':
-        return `🏥 ${universLabel}`;
-      default:
-        return universLabel;
-    }
+    return nombreDeKg >= 1000 ? `${(nombreDeKg / 1000).toFixed(1)} tonnes` : `${nombreDeKg.toFixed(0)} kg`;
   }
 }

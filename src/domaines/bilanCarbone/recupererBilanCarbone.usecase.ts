@@ -1,7 +1,7 @@
 import { BilanCarbonePresenter } from '@/domaines/bilanCarbone/ports/bilanCarbone.presenter';
 import { BilanCarboneRepository } from '@/domaines/bilanCarbone/ports/bilanCarbone.repository';
 
-interface BilanCarboneDetail {
+interface BilanCarboneDetailParUnivers {
   universId: string;
   universLabel: string;
   pourcentage: number;
@@ -10,7 +10,7 @@ interface BilanCarboneDetail {
 
 export interface BilanCarbone {
   impactKgAnnuel: number;
-  details: BilanCarboneDetail[];
+  details: BilanCarboneDetailParUnivers[];
 }
 
 export class RecupererBilanCarboneUsecase {
