@@ -3,7 +3,7 @@
     <label class="fr-label" :for="name">
       {{ label }}
     </label>
-    <div class="input-wrapper-suffixe">
+    <div class="fr-input-wrap fr-icon-money-euro-circle-line">
       <input
         class="fr-input fr-mr-1w"
         pattern="[0-9]*"
@@ -38,17 +38,6 @@
 </script>
 
 <style scoped>
-  .input-wrapper-suffixe {
-    position: relative;
-  }
-
-  .input-wrapper-suffixe::after {
-    content: '€';
-    position: absolute;
-    right: 3rem;
-    top: 0.5rem;
-  }
-
   input {
     max-width: 8rem;
   }

@@ -4,7 +4,7 @@
       <img src="/bg_creation_compte.png" alt="" />
       <h1 class="fr-h4 fr-mb-1w">Entrez le code reçu par email !</h1>
       <p class="fr-text--lg">
-        Pour vérifier votre identité et vous permettre d’accéder à votre compte, nous vous avons envoyé un email à
+        Pour vérifier votre adresse email et vous permettre d’accéder à votre compte, nous vous avons envoyé un email à
         l’adresse : <strong>{{ email }}</strong>
       </p>
       <Alert
