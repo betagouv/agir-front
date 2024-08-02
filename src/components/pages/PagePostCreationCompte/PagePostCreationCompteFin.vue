@@ -7,22 +7,29 @@
         <li class="fr-grid-row fr-grid-row--gutters align-items--baseline">
           <span class="fr-icon-arrow-right-line text--bleu" aria-hidden="true" />
           <p class="fr-col fr-text--lg fr-mb-0">
-            <span class="fr-text--bold">Découvrez des aides, lieux et articles</span> à
-            <span class="fr-text--bold text--bleu">{{ onboardingPostCreationCompte().commune }}</span> et dans la région
+            <span class="fr-text--bold">Découvrez les aides et dispositifs disponibles</span> pour les habitants de
+            <span class="fr-text--bold text--bleu">{{ onboardingPostCreationCompte().commune }}</span> et des environs,
           </p>
         </li>
         <li class="fr-grid-row fr-grid-row--gutters align-items--baseline">
           <span class="fr-icon-arrow-right-line text--bleu" aria-hidden="true" />
           <p class="fr-col fr-text--lg fr-mb-0">
-            <span class="fr-text--bold">Complétez des thèmes</span>
-            pour obtenir des recommandations personnalisées
+            <span class="fr-text--bold">Tout pour comprendre les enjeux environnementaux</span> qui se cachent dans nos
+            choix quotidiens,
+          </p>
+        </li>
+        <li class="fr-grid-row fr-grid-row--gutters align-items--baseline">
+          <span class="fr-icon-arrow-right-line text--bleu" aria-hidden="true" />
+          <p class="fr-col fr-text--lg fr-mb-0">
+            <span class="fr-text--bold">Personnalisez chaque thème</span>
+            pour obtenir des recommandations adaptées à votre situation,
           </p>
         </li>
         <li class="fr-grid-row fr-grid-row--gutters align-items--baseline">
           <span class="fr-icon-arrow-right-line text--bleu" aria-hidden="true" />
           <p class="fr-col fr-text--lg fr-mb-0">
             <span class="fr-text--bold">Gagnez des </span>
-            <img src="/ic_score.svg" alt="points" /> en améliorant votre impact environnemental
+            <img src="/ic_score.svg" alt="points" /> à chaque utilisation d'<span class="text--italic">Agir</span>.
           </p>
         </li>
       </ul>

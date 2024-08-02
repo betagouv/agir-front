@@ -17,19 +17,19 @@
       </div>
     </div>
     <div class="fr-col-lg-6 fr-col-12">
-      <InputText
+      <InputTextAvecIcon
         name="revenu"
         @update:model-value="value => (revenuFiscalDeReferenceModel = Number(value))"
         :model-value="revenuFiscalDeReferenceModel?.toString() || ''"
         label="Revenu fiscal de référence de votre foyer"
+        icon="fr-icon-money-euro-circle-line"
       />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-  import InputText from '@/components/dsfr/InputText.vue';
-
+  import InputTextAvecIcon from '@/components/dsfr/InputTextAvecIcon.vue';
   const nombreDePartsModel = defineModel<number>('nombreDeParts', { default: 1 });
   const revenuFiscalDeReferenceModel = defineModel<number | null>('revenuFiscalDeReference', { default: 0 });
 </script>
