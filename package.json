@@ -23,7 +23,7 @@
     "chart.js": "4.4.3",
     "js-cookie": "3.0.5",
     "jwt-decode": "4.0.0",
-    "pinia": "2.1.7",
+    "pinia": "2.2.0",
     "pinia-plugin-persistedstate": "3.2.1",
     "redaxios": "0.5.1",
     "vue": "3.4.34",
