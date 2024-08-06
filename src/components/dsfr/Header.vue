@@ -55,7 +55,6 @@
                         {{ nomUtilisateur }}
                       </router-link>
                     </div>
-
                     <ScoreHeader v-if="utilisateurStore().utilisateur.onboardingAEteRealise" />
                   </div>
                 </li>
@@ -110,6 +109,15 @@
                 Bibliothèque
               </router-link>
             </li>
+            <li class="fr-nav__item" data-fr-js-navigation-item="true">
+              <router-link
+                class="fr-nav__link"
+                :to="{ name: RouteBilanCarboneName.BILAN_CARBONE }"
+                :aria-current="route.name === RouteBilanCarboneName.BILAN_CARBONE ? 'page' : null"
+              >
+                Mon bilan carbone
+              </router-link>
+            </li>
           </ul>
         </nav>
       </div>
@@ -126,8 +134,8 @@
   import { utilisateurStore } from '@/store/utilisateur';
   import ScoreHeader from '@/components/custom/ScoreHeader.vue';
   import LienDEvitement from '@/components/dsfr/LienDEvitement.vue';
-
   import { Fonctionnalites } from '@/shell/fonctionnalitesEnum';
+  import { RouteBilanCarboneName } from '@/router/bilanCarbone/routes';
   import { RouteCoachName } from '@/router/coach/routeCoachName';
   import { RouteCompteName } from '@/router/compte/routeCompteName';
   import { RouteAidesName } from '@/router/aides/routeAidesName';

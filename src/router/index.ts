@@ -3,6 +3,7 @@ import { storeIdNGC } from '@/domaines/bilan/middleware/pendingSimulation';
 import aidesRoutes from '@/router/aides/routes';
 import articlesRoutes from '@/router/articles/routes';
 import bilanCarboneRoutes from '@/router/bilanCarbone/routes';
+import classementRoutes from '@/router/classement/routes';
 import { RouteCoachName } from '@/router/coach/routeCoachName';
 import coachRoutes from '@/router/coach/routes';
 import compteRoutes from '@/router/compte/routes';
@@ -51,6 +52,7 @@ const routes: RouteRecordRaw[] = [
   ...quizRoutes,
   ...serviceRoutes,
   ...bilanCarboneRoutes,
+  ...classementRoutes,
   {
     path: '/',
     name: RouteCommuneName.ACCUEIL,
