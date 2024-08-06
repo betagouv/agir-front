@@ -13,7 +13,7 @@ interface ServiceRecherchePresDeChezNousResultat {
 export interface ServiceRecherchePresDeChezNous extends ServiceRechercheBase {
   titre: string;
   suggestions: ServiceRecherchePresDeChezNousResultat[];
-  favoris: ServiceRecherchePresDeChezNousResultat[];
+  favoris?: ServiceRecherchePresDeChezNousResultat[];
 }
 
 export class RecupererServicePresDeChezNousUsecase {
