@@ -1,5 +1,5 @@
-import { Classement } from '@/domaines/classement/recupererClassement.usecase';
+import { ClassementGlobal } from '@/domaines/classement/recupererClassement.usecase';
 
 export interface ClassementPresenter {
-  presente(question: Classement): void;
+  presente(question: ClassementGlobal): void;
 }

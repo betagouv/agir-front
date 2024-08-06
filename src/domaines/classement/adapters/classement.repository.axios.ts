@@ -1,6 +1,6 @@
 import { AxiosFactory, intercept401 } from '@/axios.factory';
 import { ClassementRepository } from '@/domaines/classement/ports/classement.repository';
-import { Classement, ClassementPourcentage } from '@/domaines/classement/recupererClassement.usecase';
+import { ClassementGlobal, ClassementPourcentage } from '@/domaines/classement/recupererClassement.usecase';
 
 enum PourcentileApiModel {
   pourcent_5 = 'pourcent_5',
@@ -27,15 +27,28 @@ interface ClassementApiModel {
 
 export class ClassementRepositoryAxios implements ClassementRepository {
   @intercept401()
-  async recupererClassementNational(utilisateurId: string): Promise<Classement> {
+  async recupererClassementNational(utilisateurId: string): Promise<ClassementGlobal> {
     const axiosInstance = AxiosFactory.getAxios();
-    const response = await axiosInstance.get<ClassementApiModel>(`/utilisateurs/${utilisateurId}/classement/national`);
+    const reponseClassementNational = await axiosInstance.get<ClassementApiModel>(
+      `/utilisateurs/${utilisateurId}/classement/national`,
+    );
+    const reponseClassementLocal = await axiosInstance.get<ClassementApiModel>(
+      `/utilisateurs/${utilisateurId}/classement/local`,
+    );
 
     return {
-      utilisateur: response.data.utilisateur,
-      topTrois: response.data.top_trois,
-      utilisateursProche: response.data.classement_utilisateur,
-      pourcentage: this.mapPourcentileToClassement(response.data.pourcentile),
+      utilisateur: reponseClassementLocal.data.utilisateur,
+      commune: reponseClassementLocal.data.commune_label,
+      classementLocal: {
+        topTrois: reponseClassementLocal.data.top_trois,
+        utilisateursProche: reponseClassementLocal.data.classement_utilisateur,
+        pourcentage: this.mapPourcentileToClassement(reponseClassementLocal.data.pourcentile),
+      },
+      classementNational: {
+        topTrois: reponseClassementNational.data.top_trois,
+        utilisateursProche: reponseClassementNational.data.classement_utilisateur,
+        pourcentage: this.mapPourcentileToClassement(reponseClassementNational.data.pourcentile),
+      },
     };
   }
 
