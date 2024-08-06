@@ -8,7 +8,7 @@
           :tabindex="index === 0 ? 0 : -1"
           role="tab"
           :aria-selected="index === 0"
-          :aria-controls="`tabpanel-${tab}-panel`"
+          :aria-controls="`tabpanel-${index}-panel`"
         >
           {{ tab }}
         </button>
@@ -17,7 +17,7 @@
     <div
       v-for="(tab, index) in tabPanel"
       :key="tab"
-      :id="`tabpanel-${tab}-panel`"
+      :id="`tabpanel-${index}-panel`"
       role="tabpanel"
       tabindex="0"
       class="fr-tabs__panel"
