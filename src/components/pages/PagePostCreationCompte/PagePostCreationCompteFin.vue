@@ -14,22 +14,22 @@
         <li class="fr-grid-row fr-grid-row--gutters align-items--baseline">
           <span class="fr-icon-arrow-right-line text--bleu" aria-hidden="true" />
           <p class="fr-col fr-text--lg fr-mb-0">
-            <span class="fr-text--bold">Tout pour comprendre les enjeux environnementaux</span> qui se cachent dans nos
+            <span class="fr-text--bold">Informez-vous sur les enjeux environnementaux</span> qui se cachent dans nos
             choix quotidiens,
           </p>
         </li>
         <li class="fr-grid-row fr-grid-row--gutters align-items--baseline">
           <span class="fr-icon-arrow-right-line text--bleu" aria-hidden="true" />
           <p class="fr-col fr-text--lg fr-mb-0">
-            <span class="fr-text--bold">Personnalisez chaque thème</span>
-            pour obtenir des recommandations adaptées à votre situation,
+            <span class="fr-text--bold">Personnalisez votre profil</span>
+            pour obtenir des recommandations adaptées à vos moyens, vos envies et vos besoins,
           </p>
         </li>
         <li class="fr-grid-row fr-grid-row--gutters align-items--baseline">
           <span class="fr-icon-arrow-right-line text--bleu" aria-hidden="true" />
           <p class="fr-col fr-text--lg fr-mb-0">
             <span class="fr-text--bold">Gagnez des </span>
-            <img src="/ic_score.svg" alt="points" /> à chaque utilisation d'<span class="text--italic">Agir</span>.
+            <img src="/ic_score.svg" alt="points" /> en progressant avec <span class="text--italic">Agir</span>.
           </p>
         </li>
       </ul>
