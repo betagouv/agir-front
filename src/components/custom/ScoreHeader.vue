@@ -2,20 +2,27 @@
   <div class="tag__progression tag__progression--niveau fr-text--bold">
     {{ score.niveau }} <img width="16" src="/ic_star.svg" alt="niveau" />
   </div>
-  <div class="tag__progression tag__progression--score fr-text--bold">
+  <router-link
+    :to="{ name: RouteClassementName.CLASSEMENT }"
+    :aria-current="route.name === RouteClassementName.CLASSEMENT ? 'page' : null"
+    class="tag__progression tag__progression--score fr-text--bold"
+  >
     {{ score.points }} <img width="16" src="/ic_score.svg" alt="score" />
-  </div>
+  </router-link>
 </template>
 
 <script setup lang="ts">
   import { computed, onMounted, onUnmounted } from 'vue';
+  import { useRoute } from 'vue-router';
   import { SessionRepositoryStore } from '@/domaines/authentification/adapters/session.repository.store';
   import { ScoreRepositoryAxios } from '@/domaines/score/adapters/score.repository.axios';
   import { ChargementScoreUsecase } from '@/domaines/score/chargementScore.usecase';
   import { ThematiqueEvent, ThematiqueEventBusImpl } from '@/domaines/thematiques/thematiqueEventBusImpl';
   import { ToDoListEventBusImpl } from '@/domaines/toDoList/toDoListEventBusImpl';
+  import { RouteClassementName } from '@/router/classement/routes';
   import { utilisateurStore } from '@/store/utilisateur';
 
+  const route = useRoute();
   const score = computed(() => utilisateurStore().score);
   const subscriberName = 'ScoreHeader';
 
@@ -56,7 +63,12 @@
   }
 
   .tag__progression--score {
+    transition: background 0.3s ease;
     background: rgba(104, 165, 50, 0.1);
+  }
+
+  .tag__progression--score:hover {
+    background: rgba(104, 165, 50, 0.25);
   }
 
   .tag__progression--niveau {
