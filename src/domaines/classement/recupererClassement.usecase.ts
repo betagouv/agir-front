@@ -17,9 +17,15 @@ interface ClassementItem {
 
 export interface Classement {
   pourcentage: ClassementPourcentage;
-  utilisateur: ClassementItem;
   topTrois: ClassementItem[];
   utilisateursProche: ClassementItem[];
+}
+
+export interface ClassementGlobal {
+  utilisateur: ClassementItem;
+  commune: string;
+  classementLocal: Classement;
+  classementNational: Classement;
 }
 
 export class RecupererClassementUsecase {

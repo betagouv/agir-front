@@ -1,10 +1,10 @@
 import { ClassementRepository } from '@/domaines/classement/ports/classement.repository';
-import { Classement } from '@/domaines/classement/recupererClassement.usecase';
+import { ClassementGlobal } from '@/domaines/classement/recupererClassement.usecase';
 
 export class ClassementRepositoryMock implements ClassementRepository {
-  constructor(private classementARetourner: Classement) {}
+  constructor(private classementARetourner: ClassementGlobal) {}
 
-  recupererClassementNational(_utilisateurId: string): Promise<Classement> {
+  recupererClassementNational(_utilisateurId: string): Promise<ClassementGlobal> {
     return Promise.resolve(this.classementARetourner);
   }
 }

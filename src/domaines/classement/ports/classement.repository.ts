@@ -1,5 +1,5 @@
-import { Classement } from '@/domaines/classement/recupererClassement.usecase';
+import { ClassementGlobal } from '@/domaines/classement/recupererClassement.usecase';
 
 export interface ClassementRepository {
-  recupererClassementNational(utilisateurId: string): Promise<Classement>;
+  recupererClassementNational(utilisateurId: string): Promise<ClassementGlobal>;
 }
