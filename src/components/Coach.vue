@@ -65,7 +65,7 @@
   </section>
   <section class="fr-py-6w background--image--coach">
     <div class="fr-container">
-      <CoachChangementSituation />
+      <CoachContact />
     </div>
   </section>
 </template>
@@ -74,7 +74,7 @@
   import { onMounted, onUnmounted, ref } from 'vue';
   import CoachRecommandations from './custom/Coach/CoachRecommandations.vue';
   import CarteSkeleton from '@/components/CarteSkeleton.vue';
-  import CoachChangementSituation from '@/components/custom/Coach/CoachChangementSituation.vue';
+  import CoachContact from '@/components/custom/Coach/CoachContact.vue';
   import CoachToDo from '@/components/custom/Coach/CoachToDo.vue';
   import CoachUnivers from '@/components/custom/Coach/CoachUnivers.vue';
   import { useReveal } from '@/composables/useReveal';
