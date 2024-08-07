@@ -1,5 +1,5 @@
+import { Defi } from '@/domaines/defi/defi';
 import { ListeDefisPresenter } from '@/domaines/defi/ports/listeDefis.presenter';
-import { Defi } from '@/domaines/defi/recupererDefisEnCoursOuAFaire.usecase';
 import { RouteDefiPath } from '@/router/defis/routes';
 
 export interface DefiDescriptionViewModel {

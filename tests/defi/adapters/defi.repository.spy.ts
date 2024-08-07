@@ -1,13 +1,11 @@
 import { DefiRepository } from '@/domaines/defi/ports/defi.repository';
-import { Defi } from '@/domaines/defi/recupererDefisEnCoursOuAFaire.usecase';
+import { Defi } from '@/domaines/defi/defi';
 
 export class SpyDefiRepository implements DefiRepository {
   recupererListeDefisParUnivers(utilisateurId: string, universId: string): Promise<Defi[]> {
     throw new Error('Method not implemented.');
   }
-  recupererDefisEnCoursOuAFaire(_utilisateurId: string): Promise<Defi[]> {
-    throw new Error('Method not implemented.');
-  }
+
   private _envoyerReponseAEteAppele: boolean = false;
 
   private _envoyerReponseArgs: { questionId: string; utilisateurId: string; reponse: string; explication?: string } = {
