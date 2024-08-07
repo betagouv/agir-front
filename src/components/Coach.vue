@@ -1,38 +1,43 @@
 <template>
-  <div class="fr-container">
-    <h1 class="fr-h1 fr-m-0 fr-mt-4w">Bonjour {{ utilisateurStore().utilisateur.prenom }} 👋</h1>
-    <p class="fr-text--xl fr-mb-0">
-      Réduire votre empreinte écologique&nbsp;: selon vos moyens, vos lieux de vie et vos envies
-    </p>
-  </div>
-  <div v-if="todoList && !todoList.derniere" class="fr-container fr-pt-3w">
-    <div id="container-survey"></div>
-    <div class="fr-grid-row fr-grid-row--gutters">
-      <div class="fr-col fr-col-lg-7">
-        <CoachToDo :todoList="todoList" />
-      </div>
-      <div class="fr-col-12 fr-col-lg-5">
-        <img :src="todoList.imageUrl" class="max-full-width" alt="" />
-      </div>
-    </div>
-  </div>
-  <section
-    v-if="universViewModel"
-    v-tour-step:1="{
-      tour: universTour,
-      options: {
-        attachTo: { on: 'bottom' },
-        title: 'Univers débloqués',
-        text: 'Retrouvez ici tous vos univers !',
-      },
-    }"
-    id="univers"
-    class="fr-py-3w"
-  >
+  <div class="background--white fr-py-6w">
     <div class="fr-container">
-      <CoachUnivers :universViewModel="universViewModel" />
+      <h1 class="fr-h1 fr-m-0">Bonjour {{ utilisateurStore().utilisateur.prenom }} 👋</h1>
+      <p class="fr-text--xl fr-mb-0">
+        Réduisez votre impact environnemental en <strong>complétant des missions</strong>
+      </p>
     </div>
-  </section>
+
+    <div v-if="todoList && !todoList.derniere" class="fr-container fr-pt-3w">
+      <div id="container-survey"></div>
+      <div class="fr-grid-row fr-grid-row--gutters">
+        <div class="fr-col fr-col-lg-7">
+          <CoachToDo :todoList="todoList" />
+        </div>
+        <div class="fr-col-12 fr-col-lg-5">
+          <img :src="todoList.imageUrl" class="max-full-width" alt="" />
+        </div>
+      </div>
+    </div>
+
+    <section
+      v-if="universViewModel"
+      v-tour-step:1="{
+        tour: universTour,
+        options: {
+          attachTo: { on: 'bottom' },
+          title: 'Univers débloqués',
+          text: 'Retrouvez ici tous vos univers !',
+        },
+      }"
+      id="univers"
+      class="fr-py-3w"
+    >
+      <div class="fr-container">
+        <CoachUnivers :universViewModel="universViewModel" />
+      </div>
+    </section>
+  </div>
+
   <section
     id="recommandations"
     v-if="store.utilisateur.fonctionnalitesDebloquees.includes(Fonctionnalites.RECOMMANDATIONS)"
