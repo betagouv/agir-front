@@ -34,24 +34,6 @@
     </div>
   </section>
   <section
-    class="fr-py-3w background--white"
-    id="defis"
-    v-if="defisViewModel && defisViewModel.length > 0"
-    v-tour-step:1="{
-      tour: defiTour,
-      options: {
-        attachTo: { on: 'top' },
-        title: 'Actions débloquées',
-        text: 'Retrouvez ici toutes vos actions personnalisées !',
-        scrollTo: { behavior: 'smooth', block: 'center' },
-      },
-    }"
-  >
-    <div class="fr-container">
-      <ActionListe :defis="defisViewModel" />
-    </div>
-  </section>
-  <section
     id="recommandations"
     v-if="store.utilisateur.fonctionnalitesDebloquees.includes(Fonctionnalites.RECOMMANDATIONS)"
     class="fr-py-3w fr-background-contrast--grey"
@@ -87,17 +69,10 @@
   import { onMounted, onUnmounted, ref } from 'vue';
   import CoachRecommandations from './custom/Coach/CoachRecommandations.vue';
   import CarteSkeleton from '@/components/CarteSkeleton.vue';
-  import ActionListe from '@/components/custom/Action/ActionListe.vue';
   import CoachChangementSituation from '@/components/custom/Coach/CoachChangementSituation.vue';
   import CoachToDo from '@/components/custom/Coach/CoachToDo.vue';
   import CoachUnivers from '@/components/custom/Coach/CoachUnivers.vue';
   import { useReveal } from '@/composables/useReveal';
-  import { DefiRepositoryAxios } from '@/domaines/defi/adapters/defi.repository.axios';
-  import {
-    DefiDescriptionViewModel,
-    ListeDefisDescriptionPresenterImpl,
-  } from '@/domaines/defi/adapters/listeDefisDescription.presenter.impl';
-  import { RecupererDefisEnCoursOuAFaireUsecase } from '@/domaines/defi/recupererDefisEnCoursOuAFaire.usecase';
   import {
     RecommandationPersonnaliseeViewModel,
     RecommandationsPersonnaliseesPresenterImpl,
@@ -114,18 +89,15 @@
   import { Fonctionnalites } from '@/shell/fonctionnalitesEnum';
   import { publierEvenementHotjar, HotjarEvenement } from '@/shell/publierEvenementHotjar';
   import { onboardingStore } from '@/store/onboarding';
-  import { onboardingPostCreationCompte } from '@/store/onboardingPostCreationCompte';
   import { utilisateurStore } from '@/store/utilisateur';
 
-  const { recommandationTour, defiTour, universTour } = useReveal();
+  const { recommandationTour, universTour } = useReveal();
 
   const isLoading = ref<boolean>(true);
   const todoList = ref<TodoListViewModel>();
   const universViewModel = ref<UniversViewModel[]>();
   const store = utilisateurStore();
   const recommandationsPersonnaliseesViewModel = ref<RecommandationPersonnaliseeViewModel>();
-
-  const defisViewModel = ref<DefiDescriptionViewModel[]>();
 
   function onRecommandationsPretesAAfficher(viewModel: RecommandationPersonnaliseeViewModel) {
     recommandationsPersonnaliseesViewModel.value = viewModel;
@@ -145,7 +117,6 @@
       new RecommandationsPersonnaliseesRepositoryAxios(),
     );
     const chargerTodoListUsecase = new RecupererToDoListUsecase(new ToDoListRepositoryAxios());
-    const chargerListeDefisUsecase = new RecupererDefisEnCoursOuAFaireUsecase(new DefiRepositoryAxios());
     const chargerUniversUsecase = new RecupererListeUniversUsecase(new UniversRepositoryAxios());
 
     ToDoListEventBusImpl.getInstance().subscribe(subscriberName, ToDoListEvent.TODO_POINTS_ONT_ETE_RECUPERE, () => {
@@ -169,10 +140,6 @@
       chargerUniversUsecase.execute(
         idUtilisateur,
         new ListeUniversPresenterImpl(viewModel => (universViewModel.value = viewModel.univers)),
-      ),
-      chargerListeDefisUsecase.execute(
-        idUtilisateur,
-        new ListeDefisDescriptionPresenterImpl(viewModel => (defisViewModel.value = viewModel)),
       ),
     ])
       .then(() => {

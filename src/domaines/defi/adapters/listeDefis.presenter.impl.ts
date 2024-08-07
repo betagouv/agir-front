@@ -1,10 +1,9 @@
+import { Defi } from '@/domaines/defi/defi';
 import {
   DefiQuestionViewModel,
   DefisQuestionViewModel,
   ListeDefisPresenter,
 } from '@/domaines/defi/ports/listeDefis.presenter';
-import { Defi } from '@/domaines/defi/recupererDefisEnCoursOuAFaire.usecase';
-
 export class ListeDefisPresenterImpl implements ListeDefisPresenter {
   constructor(private readonly defisViewModel: (viewModel: DefisQuestionViewModel) => void) {}
 

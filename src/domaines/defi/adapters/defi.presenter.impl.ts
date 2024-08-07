@@ -1,5 +1,5 @@
+import { Defi } from '@/domaines/defi/defi';
 import { DefiPresenter } from '@/domaines/defi/ports/defi.presenter';
-import { Defi } from '@/domaines/defi/recupererDefisEnCoursOuAFaire.usecase';
 
 export interface ReponsePossible {
   id: string;

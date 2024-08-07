@@ -1,4 +1,4 @@
-import { Defi } from '@/domaines/defi/recupererDefisEnCoursOuAFaire.usecase';
+import { Defi } from '@/domaines/defi/defi';
 
 export interface DefiQuestionViewModel {
   id: string;
