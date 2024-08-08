@@ -4,7 +4,7 @@ export enum RouteConformiteName {
   MENTIONS_LEGALES = 'mentions-legales',
   ACCESSIBILITE = 'accessibilite',
   CGU = 'cgu',
-  POLITIQUES_DE_CONFIDENTIALITE = 'politiques-de-confidentialite',
+  POLITIQUE_DE_CONFIDENTIALITE = 'politique-de-confidentialite',
   CHARTE = 'charte',
 }
 
@@ -37,11 +37,11 @@ const conformiteRoutes: RouteRecordRaw[] = [
     },
   },
   {
-    path: '/politiques-de-confidentialite',
-    name: RouteConformiteName.POLITIQUES_DE_CONFIDENTIALITE,
-    component: () => import('@/components/pages/PagePolitiquesDeConfidentialite.vue'),
+    path: '/politique-de-confidentialite',
+    name: RouteConformiteName.POLITIQUE_DE_CONFIDENTIALITE,
+    component: () => import('@/components/pages/PagePolitiqueDeConfidentialite.vue'),
     meta: {
-      title: 'Politiques de confidentialité',
+      title: 'Politique de confidentialité',
       estPublique: true,
     },
   },

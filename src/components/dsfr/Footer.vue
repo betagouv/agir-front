@@ -69,8 +69,9 @@
           <li class="fr-footer__bottom-item">
             <router-link
               class="fr-footer__bottom-link"
-              :to="{ name: RouteConformiteName.POLITIQUES_DE_CONFIDENTIALITE }"
-              >Politique de confidentialité
+              :to="{ name: RouteConformiteName.POLITIQUE_DE_CONFIDENTIALITE }"
+            >
+              Politique de confidentialité
             </router-link>
           </li>
         </ul>
