@@ -69,7 +69,7 @@
       class="fr-mb-4w"
       legende-size="l"
       orientation="vertical"
-      legende="Quelle est votre mode de chauffage principal ?"
+      legende="Quel est votre mode de chauffage principal ?"
       name="modeDeChauffage"
       :options="[
         { label: 'Électricité', value: 'electricite' },

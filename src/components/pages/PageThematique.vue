@@ -15,6 +15,7 @@
       <h1 class="fr-h1 fr-col fr-m-0">{{ mission?.titre }}</h1>
     </div>
     <div class="mission__dashline" v-if="mission">
+      <h2 class="text--uppercase fr-text--xs text--bleu fr-mb-2w fr-mt-3w fr-ml-6w">Adapter votre expérience</h2>
       <ThematiquesMissions :missions="mission.kyc" />
       <h2 class="text--uppercase fr-text--xs text--bleu fr-mb-2w fr-mt-3w fr-ml-6w">
         Lire des articles et répondre aux quiz

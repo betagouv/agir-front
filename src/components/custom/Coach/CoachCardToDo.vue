@@ -14,11 +14,11 @@
     </span>
     <img :src="picto" alt="" />
     <div class="fr-col fr-col-md-9">
-      <h4 class="fr-m-0">
+      <h3 class="fr-m-0">
         <router-link :to="{ path: url, hash: hash }" class="todo__link display-block text--normal fr-text--lg fr-mb-0">
           <div v-html="titre" />
         </router-link>
-      </h4>
+      </h3>
       <div class="fr-col-6" v-if="value !== undefined && value > 0 && valueMax !== undefined">
         <CoachCardTodoProgression
           :value="value"
