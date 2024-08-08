@@ -2,7 +2,11 @@
   <div class="todo background--white fr-p-2w shadow">
     <span class="fr-icon-checkbox-circle-line todo__picto text--success" aria-hidden="true"></span>
     <div class="fr-col fr-col-md-7">
-      <h4 class="fr-text--bold fr-text--lg text--success fr-mb-0 display-block" v-html="titre" />
+      <h3 class="fr-text--bold fr-text--lg text--success fr-mb-0 display-block">
+        <router-link :to="{ path: url, hash: hash }" class="background--none fr-mb-0">
+          <span v-html="titre" />
+        </router-link>
+      </h3>
     </div>
     <div class="todo__boutonContainer fr-ml-auto">
       <span v-if="!pointAEteRecolte" class="text--uppercase fr-mb-0 fr-text--xs text--gris-dark fr-text--bold">
@@ -24,6 +28,8 @@
   const props = defineProps<{
     titre: string;
     value?: number;
+    url: string;
+    hash?: string;
     nombrePoints: number;
     pointAEteRecolte: boolean;
     elementId: string;

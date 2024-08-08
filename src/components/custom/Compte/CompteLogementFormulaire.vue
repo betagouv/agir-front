@@ -82,7 +82,7 @@
         />
         <BoutonRadio
           class="fr-mb-4w fr-col-12"
-          legende="Quelle est votre mode de chauffage principal ?"
+          legende="Quel est votre mode de chauffage principal ?"
           legende-size="l"
           name="chauffage"
           orientation="horizontal"

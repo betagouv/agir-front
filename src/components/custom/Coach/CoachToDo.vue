@@ -2,7 +2,7 @@
   <div>
     <h2 class="fr-mb-0">{{ todoList.titre }}</h2>
     <div v-if="todoList.fait.length > 0">
-      <h3 class="text--uppercase fr-mb-0 fr-text--xs text--gris-dark fr-mb-1w">déjà fait</h3>
+      <p class="text--uppercase fr-mb-0 fr-text--xs text--gris-dark fr-mb-1w fr-text--bold">déjà fait</p>
       <ul class="list-style-none fr-p-0 fr-m-0">
         <li v-for="todo in todoList.fait" :key="todo.titre" class="fr-mb-2w">
           <CoachCardDone
@@ -11,13 +11,15 @@
             :nombre-points="todo.nombreDePointsAGagner"
             :point-a-ete-recolte="todo.pointAEteRecolte"
             :element-id="todo.id"
+            :url="todo.url"
+            :hash="todo.hash"
             :on-recolter-points="onRecolterPoints"
           />
         </li>
       </ul>
     </div>
     <div v-if="todoList.aFaire.length > 0">
-      <h3 class="text--uppercase fr-mb-0 fr-text--xs text--gris-dark fr-mb-1w">à faire</h3>
+      <p class="text--uppercase fr-mb-0 fr-text--xs text--gris-dark fr-text--bold fr-mb-1w">à faire</p>
       <ul class="list-style-none fr-p-0 fr-m-0">
         <li v-for="todo in todoList.aFaire" :key="todo.titre" class="fr-mb-2w">
           <CoachCardToDo

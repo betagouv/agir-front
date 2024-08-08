@@ -9,6 +9,8 @@
         :nombre-points="mission.points"
         :point-a-ete-recolte="mission.pointAEteRecolte"
         :element-id="mission.id"
+        :url="mission.url"
+        :hash="mission.hash"
         :on-recolter-points="onRecolterPoints"
       />
       <CoachCardToDo
