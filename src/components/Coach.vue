@@ -41,7 +41,7 @@
   <section
     id="recommandations"
     v-if="store.utilisateur.fonctionnalitesDebloquees.includes(Fonctionnalites.RECOMMANDATIONS)"
-    class="fr-py-3w fr-background-contrast--grey"
+    class="fr-py-6w fr-background-contrast--grey"
     v-tour-step:1="{
       tour: recommandationTour,
       options: {
@@ -52,12 +52,24 @@
     }"
   >
     <div class="fr-container" v-if="!isLoading">
-      <h2 class="fr-h2 fr-mb-0">Recommandé, pour vous</h2>
-      <p class="fr-text--xl">Une sélection d’articles et de services, pour vous, selon vos préférences&nbsp;!</p>
+      <h2 class="fr-h2 fr-mb-1w">Articles et quiz recommandés pour vous</h2>
+      <p class="fr-text--xl">
+        Sélection suggérée en fonction de vos
+        <router-link
+          :to="{ name: RouteCompteName.MIEUX_VOUS_CONNAITRE }"
+          class="fr-link fr-icon-user-setting-line fr-link--icon-right fr-text--xl"
+        >
+          préférences
+        </router-link>
+      </p>
       <CoachRecommandations
         v-if="recommandationsPersonnaliseesViewModel"
+        class="fr-mb-2w"
         :recommandations="recommandationsPersonnaliseesViewModel.autresRecommandations"
       />
+      <router-link :to="{ name: RouteCoachName.BIBLIOTHEQUE }" class="fr-link fr-text--xl">
+        Voir la bibliothèque
+      </router-link>
     </div>
     <div class="fr-container" v-else>
       <CarteSkeleton />
@@ -91,6 +103,8 @@
   import { ListeUniversPresenterImpl, UniversViewModel } from '@/domaines/univers/adapters/listeUnivers.presenter.impl';
   import { UniversRepositoryAxios } from '@/domaines/univers/adapters/univers.repository.axios';
   import { RecupererListeUniversUsecase } from '@/domaines/univers/recupererListeUnivers.usecase';
+  import { RouteCoachName } from '@/router/coach/routeCoachName';
+  import { RouteCompteName } from '@/router/compte/routeCompteName';
   import { Fonctionnalites } from '@/shell/fonctionnalitesEnum';
   import { publierEvenementHotjar, HotjarEvenement } from '@/shell/publierEvenementHotjar';
   import { onboardingStore } from '@/store/onboarding';

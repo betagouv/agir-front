@@ -115,7 +115,7 @@
                 :to="{ name: RouteBilanCarboneName.BILAN_CARBONE }"
                 :aria-current="route.name === RouteBilanCarboneName.BILAN_CARBONE ? 'page' : null"
               >
-                Mon bilan carbone
+                Votre empreinte
               </router-link>
             </li>
           </ul>
