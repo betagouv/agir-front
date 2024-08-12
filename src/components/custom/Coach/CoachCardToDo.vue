@@ -1,6 +1,6 @@
 <template>
   <div
-    class="todo background--white shadow fr-p-2w border"
+    class="todo background--white shadow fr-p-3w border"
     :class="estEnCours ? 'border--green-light' : estRecommande ? 'border--bleu-info-dark' : ''"
   >
     <span v-if="estEnCours" class="item__badge fr-badge background--green-light text--black text--transform-none">

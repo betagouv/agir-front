@@ -11,7 +11,7 @@
     />
     <div class="fr-col">
       <span class="text--bleu">Mission terminée</span>
-      <h1 class="fr-h1 fr-col fr-m-0">{{ titre }}</h1>
+      <h1 class="fr-h4 fr-col fr-m-0">{{ titre }}</h1>
     </div>
     <button
       class="fr-btn fr-btn--secondary fr-ml-auto fr-col-auto"

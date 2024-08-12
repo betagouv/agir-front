@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="fr-grid-row background--white shadow fr-px-2w fr-py-3w border-radius--md flex-space-between position--relative"
-  >
+  <div class="fr-grid-row background--white shadow fr-p-3w border-radius--md flex-space-between position--relative">
     <div>
       <img :src="pictoMission" class="fr-mr-2w" alt="" />
       <span class="text--normal fr-text--lg text--black">À découvrir</span>
@@ -11,5 +9,5 @@
 </template>
 
 <script setup lang="ts">
-  defineProps<{ pictoMission }>();
+  defineProps<{ pictoMission: string }>();
 </script>

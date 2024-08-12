@@ -16,7 +16,7 @@
       <h1 class="fr-h1 fr-col fr-m-0">{{ missionViewModel.titre }}</h1>
     </div>
   </div>
-  <div class="mission__dashline">
+  <div class="mission__dashline fr-col-md-8 fr-col-12">
     <h2 class="text--uppercase fr-text--xs text--bleu fr-mb-2w fr-mt-3w fr-ml-6w">1. Adapter votre expérience</h2>
     <ThematiquesMissions :missions="missionViewModel.kyc" />
     <h2 class="text--uppercase fr-text--xs text--bleu fr-mb-2w fr-mt-5w fr-ml-6w">
@@ -28,7 +28,7 @@
     </h2>
     <ThematiquesMissions :missions="missionViewModel.defis" />
   </div>
-  <div :class="`${!missionViewModel.estTerminee ? 'opacity-6' : ''}`">
+  <div :class="`fr-col-md-8 fr-col-12 ${!missionViewModel.estTerminee ? 'opacity-6' : ''}`">
     <h2 class="text--uppercase fr-text--xs text--bleu fr-mb-2w fr-mt-5w fr-ml-6w">4. Fin de la mission</h2>
     <ThematiqueTerminee
       :url-image="missionViewModel.urlImage"
