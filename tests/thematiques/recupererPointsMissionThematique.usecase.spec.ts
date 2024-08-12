@@ -1,6 +1,4 @@
-import { ThematiqueRepositoryFake } from './adapters/recupererMissionThematique.repository.fake';
 import { RecupererPointsMissionThematiqueUsecase } from '@/domaines/thematiques/recupererPointsMissionThematique.usecase';
-import { PublierEvenementRepositorySpy } from '../shell/publierEvenement.repository.spy';
 import { ThematiqueRepositorySpy } from './adapters/recupererMissionThematique.repository.spy';
 import { SpyThematiqueEventBus } from './adapters/spyThematiqueEventBus';
 import { ThematiqueEvent } from '@/domaines/thematiques/thematiqueEventBusImpl';

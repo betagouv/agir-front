@@ -2,7 +2,7 @@
   <dialog :aria-labelledby="label" :id="id" class="fr-modal">
     <div class="fr-container fr-container--fluid fr-container-md">
       <div class="fr-grid-row fr-grid-row--center">
-        <div :class="`fr-col-12 ${modaleSize}`">
+        <div :class="`fr-col-12 ${modaleSize(size)}`">
           <div class="fr-modal__body" :class="radius && 'border-radius--lg'">
             <div class="fr-modal__header">
               <button class="fr-btn--close fr-btn" :aria-controls="id">Fermer</button>
@@ -21,18 +21,29 @@
 </template>
 
 <script setup lang="ts">
-  const props = withDefaults(
+  withDefaults(
     defineProps<{
       id: string;
       label: string;
       radius: boolean;
       isFooterActions: boolean;
-      size?: 's' | 'm';
+      size?: 's' | 'sm' | 'm';
     }>(),
     {
       size: 's',
     },
   );
 
-  const modaleSize = props.size === 's' ? 'fr-col-md-4' : 'fr-col-md-8';
+  const modaleSize = size => {
+    switch (size) {
+      case 's':
+        return 'fr-col-md-4';
+      case 'sm':
+        return 'fr-col-md-6';
+      case 'm':
+        return 'fr-col-md-8';
+      default:
+        return 'fr-col-md-4';
+    }
+  };
 </script>
