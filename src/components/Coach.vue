@@ -1,5 +1,5 @@
 <template>
-  <div class="background--white fr-py-6w">
+  <div class="background--white fr-py-8w">
     <div class="fr-container">
       <h1 class="fr-h1 fr-m-0">Bonjour {{ utilisateurStore().utilisateur.prenom }} 👋</h1>
       <p class="fr-text--xl fr-mb-0">
@@ -37,6 +37,15 @@
       </div>
     </section>
   </div>
+
+  <section class="fr-py-8w position--relative">
+    <div class="section--outils">
+      <img src="/boite-outil.png" alt="" />
+    </div>
+    <div class="fr-container">
+      <CoachServices />
+    </div>
+  </section>
 
   <section
     id="recommandations"
@@ -87,6 +96,7 @@
   import CoachRecommandations from './custom/Coach/CoachRecommandations.vue';
   import CarteSkeleton from '@/components/CarteSkeleton.vue';
   import CoachContact from '@/components/custom/Coach/CoachContact.vue';
+  import CoachServices from '@/components/custom/Coach/CoachServices.vue';
   import CoachToDo from '@/components/custom/Coach/CoachToDo.vue';
   import CoachUnivers from '@/components/custom/Coach/CoachUnivers.vue';
   import { useReveal } from '@/composables/useReveal';
@@ -178,3 +188,19 @@
     ToDoListEventBusImpl.getInstance().unsubscribeToAllEvents(subscriberName);
   });
 </script>
+
+<style scoped>
+  .section--outils {
+    position: absolute;
+    top: -2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+  }
+</style>
