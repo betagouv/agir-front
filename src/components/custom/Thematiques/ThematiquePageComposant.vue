@@ -26,7 +26,7 @@
     <h2 class="text--uppercase fr-text--xs text--bleu fr-mb-2w fr-mt-5w fr-ml-6w">
       3. Réaliser au moins une action proposée
     </h2>
-    <ThematiquesMissions :missions="missionViewModel.defis" />
+    <ThematiqueDefis :defis="missionViewModel.defis" />
   </div>
   <div :class="`fr-col-md-8 fr-col-12 ${!missionViewModel.estTerminee ? 'opacity-6' : ''}`">
     <h2 class="text--uppercase fr-text--xs text--bleu fr-mb-2w fr-mt-5w fr-ml-6w">4. Fin de la mission</h2>
@@ -40,6 +40,7 @@
 </template>
 
 <script setup lang="ts">
+  import ThematiqueDefis from '@/components/custom/Thematiques/ThematiqueDefis.vue';
   import ThematiquesMissions from '@/components/custom/Thematiques/ThematiquesMissions.vue';
   import ThematiqueTerminee from '@/components/custom/Thematiques/ThematiqueTerminee.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
