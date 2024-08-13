@@ -1,5 +1,39 @@
 # Changelog
 
+## [1.17.0](https://github.com/betagouv/agir-front/compare/v1.16.0...v1.17.0) (2024-08-13)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* ajout de liens vers les pages classement et bilan carbone ([#550](https://github.com/betagouv/agir-front/issues/550)) ([40b06a3](https://github.com/betagouv/agir-front/commit/40b06a3b835a1f85bceace5e2ca59741fc77908d))
+* ajout du classement local ([#547](https://github.com/betagouv/agir-front/issues/547)) ([d5f8284](https://github.com/betagouv/agir-front/commit/d5f82847e65c18df41767a73ec9788f85cfa232b))
+* ajout services à la page d'accueil ([#564](https://github.com/betagouv/agir-front/issues/564)) ([1ab1177](https://github.com/betagouv/agir-front/commit/1ab1177d21101d84af6fbfc503dc2fa4e1085258))
+* changement de wording à l'onboarding ([#551](https://github.com/betagouv/agir-front/issues/551)) ([7b15b1d](https://github.com/betagouv/agir-front/commit/7b15b1d75a9cb9815be60d1698bd633b22fcc2e4))
+* modification section contact page accueil ([#554](https://github.com/betagouv/agir-front/issues/554)) ([d6d2cf2](https://github.com/betagouv/agir-front/commit/d6d2cf25b5aedffecee3668211bdcceb69f4f80f))
+* modification ui de la page thematique ([#558](https://github.com/betagouv/agir-front/issues/558)) ([1c157c7](https://github.com/betagouv/agir-front/commit/1c157c76e2697449e9b67461f9d3828a6b86719d))
+* modification wording des recos de la page d'accueil ([#555](https://github.com/betagouv/agir-front/issues/555)) ([90f179f](https://github.com/betagouv/agir-front/commit/90f179f1601b378a03fb54f795a9254951d0ecbc))
+* modification wording section univers page d'accueil ([#553](https://github.com/betagouv/agir-front/issues/553)) ([a26f232](https://github.com/betagouv/agir-front/commit/a26f232da1dfa394b50a0c5465917034273cbe8e))
+* rendre mission terminée cliquable ([#557](https://github.com/betagouv/agir-front/issues/557)) ([223c8a2](https://github.com/betagouv/agir-front/commit/223c8a275879e5dbd68b216aceebceb481e1ef90))
+* suppression des défis de la page d'accueil ([#552](https://github.com/betagouv/agir-front/issues/552)) ([a49d0e8](https://github.com/betagouv/agir-front/commit/a49d0e8bcda8c5bfab17c3bc871f95039465e0dc))
+
+
+### 🐛 Corrections de bogues
+
+* masquer les favoris si vide page service pres de chez nous ([#548](https://github.com/betagouv/agir-front/issues/548)) ([8d7986c](https://github.com/betagouv/agir-front/commit/8d7986c32c4c9017b7f7a42be535de52ffd842fd))
+* wording politique au singulier ([#556](https://github.com/betagouv/agir-front/issues/556)) ([4238d88](https://github.com/betagouv/agir-front/commit/4238d884c9db07884908504e97e8f5059b61e8f3))
+
+
+### 👷 Autres changements
+
+* Bump @types/node from 22.0.0 to 22.2.0 ([#559](https://github.com/betagouv/agir-front/issues/559)) ([2c9d196](https://github.com/betagouv/agir-front/commit/2c9d1966860de13a3e029fb5a26c7512afe41960))
+* Bump @typescript-eslint/parser from 7.17.0 to 7.18.0 ([#545](https://github.com/betagouv/agir-front/issues/545)) ([e52c1a0](https://github.com/betagouv/agir-front/commit/e52c1a06f583b0f41379bc769551840b5836b0b3))
+* Bump @vitejs/plugin-vue from 5.0.5 to 5.1.2 ([#543](https://github.com/betagouv/agir-front/issues/543)) ([96bcac8](https://github.com/betagouv/agir-front/commit/96bcac85f9d998e07579dccae5de76177c14d041))
+* Bump lint-staged from 15.2.7 to 15.2.8 ([#544](https://github.com/betagouv/agir-front/issues/544)) ([a1ced87](https://github.com/betagouv/agir-front/commit/a1ced870fb20f212e5dc9514aab6ca42acba28ea))
+* Bump pinia from 2.1.7 to 2.2.0 ([#546](https://github.com/betagouv/agir-front/issues/546)) ([f423df2](https://github.com/betagouv/agir-front/commit/f423df2bb5d1f0932c55a5460922ffb37f0b0a5b))
+* Bump vitest and @vitest/coverage-v8 ([#562](https://github.com/betagouv/agir-front/issues/562)) ([9d007ac](https://github.com/betagouv/agir-front/commit/9d007acdbc0cf777d35ba7cf8f554db4931d7026))
+* Bump vue from 3.4.34 to 3.4.37 ([#561](https://github.com/betagouv/agir-front/issues/561)) ([6769a5b](https://github.com/betagouv/agir-front/commit/6769a5b409ebb944598b7eabaa4bbcca52c9cab8))
+* Bump vue-router from 4.3.0 to 4.4.3 ([#560](https://github.com/betagouv/agir-front/issues/560)) ([0d291a4](https://github.com/betagouv/agir-front/commit/0d291a4df93e61f5103238a97d8d86de06384507))
+
 ## [1.16.0](https://github.com/betagouv/agir-front/compare/v1.15.0...v1.16.0) (2024-08-02)
 
 
