@@ -1,59 +1,46 @@
 <template>
-  <div
-    class="defi full-height position--relative border-radius--md background--white shadow fr-p-3w border"
-    :class="estEnCours ? 'border--green-light' : estRecommande && !aEteRealise ? 'border--bleu-info-dark' : ''"
-  >
-    <span v-if="estEnCours" class="item__badge fr-badge background--green-light text--black text--transform-none">
-      En cours !
+  <div :class="`defi full-height border-radius--md background--white shadow fr-p-3w border ${defi.couleurBordure}`">
+    <span v-if="defi.badge" :class="`item__badge fr-badge text--transform-none ${defi.badge.style}`">
+      {{ defi.badge.label }}
     </span>
-    <span
-      v-else-if="estRecommande && !aEteRealise"
-      class="item__badge fr-badge background--bleu-info-dark text--white text--transform-none"
-    >
-      Recommandé pour vous !
-    </span>
-    <h3 class="text--normal fr-text--lg">{{ titre }}</h3>
+    <h3 class="text--normal fr-text--lg">{{ defi.titre }}</h3>
     <router-link
-      v-if="!aEteRealise"
-      :to="{ path: url }"
-      :class="`${estEnCours ? 'fr-btn--secondary' : ''} fr-btn`"
-      :title="`Aller à l'action : ${titre}`"
+      v-if="defi.link"
+      :to="{ path: defi.url }"
+      :class="`fr-btn ${defi.link.style}`"
+      :title="defi.link.title"
     >
-      Aller à l'action
+      {{ defi.link.label }}
     </router-link>
     <button
-      v-else
+      v-if="defi.aEteRealisee"
       class="fr-btn fr-btn--secondary fr-text--md todo__bouton"
-      :disabled="pointAEteRecolte"
+      :disabled="defi.pointAEteRecolte"
       @click="recolterPoints"
     >
-      <span class="fr-hidden fr-unhidden-md"> Récolter vos </span> &nbsp;{{ points }}
+      <span class="fr-hidden fr-unhidden-md"> Récolter vos </span> &nbsp;{{ defi.points }}
       <img src="/ic_score.svg" alt="points" width="16" class="fr-ml-1v" />
     </button>
   </div>
 </template>
 
 <script setup lang="ts">
+  import { MissionDefiViewModel } from '@/domaines/thematiques/adapters/missionThematique.presenter.impl';
+
   const props = defineProps<{
-    id: string;
-    titre: string;
-    url: string;
-    estRecommande?: boolean;
-    estEnCours?: boolean;
-    aEteRealise: boolean;
-    points?: number;
-    pointAEteRecolte: boolean;
+    defi: MissionDefiViewModel;
     onRecolterPoints: (missionId: string) => void;
   }>();
 
   const recolterPoints = () => {
-    props.onRecolterPoints(props.id);
+    props.onRecolterPoints(props.defi.id);
   };
 </script>
 
 <style scoped>
   .defi {
     display: flex;
+    position: relative;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;

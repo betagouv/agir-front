@@ -7,31 +7,47 @@ import { RouteQuizPath } from '@/router/quiz/routes';
 import { buildUrl } from '@/shell/buildUrl';
 import { InteractionType } from '@/shell/interactionType';
 
-export interface MissionItemViewModel {
+export interface MissionBaseViewModel {
   id: string;
-  idDuContenu: string;
-  titre: string;
-  estBloquee: boolean;
-  estRecommande?: boolean;
-  estEnCours?: boolean;
-  points: number;
-  aEteRealisee: boolean;
   url: string;
-  hash?: string;
+  estBloquee: boolean;
+  aEteRealisee: boolean;
   picto: string;
-  progression?: {
+  titre: string;
+  pointAEteRecolte: boolean;
+  points: number;
+}
+
+export interface MissionDefiViewModel extends MissionBaseViewModel {
+  couleurBordure: string;
+  link?: {
+    title: string;
+    style: string;
+    label: string;
+  };
+  badge?: {
+    style: string;
+    label: string;
+  };
+}
+
+export interface MissionKycViewModel extends MissionBaseViewModel {
+  progression: {
     etapeCourante: number;
     etapeTotal: number;
   };
-  pointAEteRecolte: boolean;
+}
+
+export interface MissionItemViewModel extends MissionBaseViewModel {
+  idDuContenu: string;
 }
 export interface MissionThematiqueViewModel {
   titre: string;
   urlImage: string;
   estTerminee: boolean;
-  kyc: MissionItemViewModel[];
+  kyc: MissionKycViewModel[];
   articleEtQuiz: MissionItemViewModel[];
-  defis: MissionItemViewModel[];
+  defis: MissionDefiViewModel[];
 }
 
 export class MissionThematiquePresenterImpl implements MissionThematiquePresenter {
@@ -44,7 +60,6 @@ export class MissionThematiquePresenterImpl implements MissionThematiquePresente
       kyc: [
         {
           id: missionThematique.items.filter(item => item.type === InteractionType.KYC)[0].id,
-          idDuContenu: '',
           titre: '<strong>Quelques questions</strong> pour mieux vous connaître',
           progression: {
             etapeCourante: missionThematique.progressionKyc.etapeCourante,
@@ -56,12 +71,9 @@ export class MissionThematiquePresenterImpl implements MissionThematiquePresente
             .reduce((sum, item) => sum + item.points, 0),
           aEteRealisee: missionThematique.progressionKyc.etapeCourante === missionThematique.progressionKyc.etapeTotal,
           url: `${RouteKycPath.KYC}${missionThematique.univers}/${missionThematique.idThematique}`,
-          hash: undefined,
           picto: '/ic_mission_kyc.svg',
           pointAEteRecolte: missionThematique.items.filter(item => item.type === InteractionType.KYC)[0]
             .pointAEteRecolte,
-          estRecommande: undefined,
-          estEnCours: undefined,
         },
       ],
       articleEtQuiz: missionThematique.items
@@ -69,7 +81,7 @@ export class MissionThematiquePresenterImpl implements MissionThematiquePresente
         .map(item => this.mapToViewModel(item, missionThematique.univers, missionThematique.idThematique)),
       defis: missionThematique.items
         .filter(item => item.type === InteractionType.DEFIS)
-        .map(item => this.mapToViewModel(item, missionThematique.univers, missionThematique.idThematique)),
+        .map(item => this.mapToDefiViewModel(item, missionThematique.univers, missionThematique.idThematique)),
     });
   }
 
@@ -78,26 +90,29 @@ export class MissionThematiquePresenterImpl implements MissionThematiquePresente
       id: item.id,
       idDuContenu: item.contentId,
       titre: item.titre,
-      progression: undefined,
       estBloquee: item.estBloquee,
       points: item.points,
       aEteRealisee: item.aEteRealisee,
       url: this.determineUrl(item, univers, thematique),
-      hash: this.determineHash(item),
       picto: this.determinePicto(item),
       pointAEteRecolte: item.pointAEteRecolte,
-      estRecommande: item.type === InteractionType.DEFIS ? item.estRecommande : undefined,
-      estEnCours: item.type === InteractionType.DEFIS ? item.estEnCours : undefined,
     };
   }
 
-  private determineHash(item: MissionItem) {
-    switch (item.type) {
-      case InteractionType.SERVICE:
-        return `#${item.contentId}`;
-      default:
-        return undefined;
-    }
+  private mapToDefiViewModel(item: MissionItem, univers: string, thematique: string): MissionDefiViewModel {
+    return {
+      id: item.id,
+      titre: item.titre,
+      estBloquee: item.estBloquee,
+      points: item.points,
+      aEteRealisee: item.aEteRealisee,
+      url: `${RouteDefiPath.DEFI}${univers}/${thematique}/${item.contentId}`,
+      picto: this.determinePicto(item),
+      pointAEteRecolte: item.pointAEteRecolte,
+      link: !item.aEteRealisee ? this.determineLienDefi(item.estEnCours, item.titre) : undefined,
+      badge: this.determineBadgeDefi(item.estEnCours, item.estRecommande, item.aEteRealisee),
+      couleurBordure: this.determineCouleurBordureDefi(item.estEnCours, item.estRecommande, item.aEteRealisee),
+    };
   }
 
   private determineUrl(item: MissionItem, univers: string, thematique: string) {
@@ -106,8 +121,6 @@ export class MissionThematiquePresenterImpl implements MissionThematiquePresente
         return `${RouteQuizPath.QUIZ}${univers}/${thematique}/${item.contentId}`;
       case InteractionType.ARTICLE:
         return `${RouteArticlePath.ARTICLE}${univers}/${thematique}/${buildUrl(item.titre)}/${item.contentId}`;
-      case InteractionType.DEFIS:
-        return `${RouteDefiPath.DEFI}${univers}/${thematique}/${item.contentId}`;
       default:
         return '';
     }
@@ -125,5 +138,47 @@ export class MissionThematiquePresenterImpl implements MissionThematiquePresente
       default:
         return '';
     }
+  }
+
+  private determineBadgeDefi(
+    estEnCours: boolean,
+    estRecommande: boolean,
+    aEteRealise: boolean,
+  ): MissionDefiViewModel['badge'] {
+    if (estEnCours) {
+      return {
+        label: 'En cours !',
+        style: 'background--green-light text--black',
+      };
+    }
+
+    if (estRecommande && !aEteRealise) {
+      return {
+        label: 'Recommandé',
+        style: 'background--bleu-info-dark text--white',
+      };
+    }
+  }
+
+  private determineCouleurBordureDefi(estEnCours: boolean, estRecommande: boolean, aEteRealise: boolean): string {
+    if (estEnCours) return 'border--green-light';
+    if (estRecommande && !aEteRealise) return 'border--bleu-info-dark';
+    return '';
+  }
+
+  private determineLienDefi(estEnCours: boolean, titre: string): MissionDefiViewModel['link'] {
+    if (estEnCours) {
+      return {
+        style: 'fr-btn--secondary',
+        title: `Reprendre l'action : ${titre}`,
+        label: "Reprendre l'action",
+      };
+    }
+
+    return {
+      style: '',
+      title: `Aller à l'action : ${titre}`,
+      label: "Aller à l'action",
+    };
   }
 }
