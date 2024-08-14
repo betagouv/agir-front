@@ -18,15 +18,15 @@
   </div>
   <div class="mission__dashline fr-col-md-8 fr-col-12">
     <h2 class="text--uppercase fr-text--xs text--bleu fr-mb-2w fr-mt-3w fr-ml-6w">1. Adapter votre expérience</h2>
-    <ThematiquesMissions :missions="missionViewModel.kyc" />
+    <ThematiqueMissionKyc :missions="missionViewModel.kyc" />
     <h2 class="text--uppercase fr-text--xs text--bleu fr-mb-2w fr-mt-5w fr-ml-6w">
       2. Lire des articles et répondre aux quiz
     </h2>
-    <ThematiquesMissions :missions="missionViewModel.articleEtQuiz" />
+    <ThematiqueMissionQuizArticle :missions="missionViewModel.articleEtQuiz" />
     <h2 class="text--uppercase fr-text--xs text--bleu fr-mb-2w fr-mt-5w fr-ml-6w">
       3. Réaliser au moins une action proposée
     </h2>
-    <ThematiqueDefis :defis="missionViewModel.defis" />
+    <ThematiqueMissionDefis :defis="missionViewModel.defis" />
   </div>
   <div :class="`fr-col-md-8 fr-col-12 ${!missionViewModel.estTerminee ? 'opacity-6' : ''}`">
     <h2 class="text--uppercase fr-text--xs text--bleu fr-mb-2w fr-mt-5w fr-ml-6w">4. Fin de la mission</h2>
@@ -40,8 +40,9 @@
 </template>
 
 <script setup lang="ts">
-  import ThematiqueDefis from '@/components/custom/Thematiques/ThematiqueDefis.vue';
-  import ThematiquesMissions from '@/components/custom/Thematiques/ThematiquesMissions.vue';
+  import ThematiqueMissionDefis from '@/components/custom/Thematiques/ThematiqueMissionDefis.vue';
+  import ThematiqueMissionKyc from '@/components/custom/Thematiques/ThematiqueMissionKyc.vue';
+  import ThematiqueMissionQuizArticle from '@/components/custom/Thematiques/ThematiqueMissionQuizArticle.vue';
   import ThematiqueTerminee from '@/components/custom/Thematiques/ThematiqueTerminee.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import { MissionThematiqueViewModel } from '@/domaines/thematiques/adapters/missionThematique.presenter.impl';

@@ -38,7 +38,7 @@ export interface MissionKycViewModel extends MissionBaseViewModel {
   };
 }
 
-export interface MissionItemViewModel extends MissionBaseViewModel {
+export interface MissionQuizArticleViewModel extends MissionBaseViewModel {
   idDuContenu: string;
 }
 export interface MissionThematiqueViewModel {
@@ -46,12 +46,13 @@ export interface MissionThematiqueViewModel {
   urlImage: string;
   estTerminee: boolean;
   kyc: MissionKycViewModel[];
-  articleEtQuiz: MissionItemViewModel[];
+  articleEtQuiz: MissionQuizArticleViewModel[];
   defis: MissionDefiViewModel[];
 }
 
 export class MissionThematiquePresenterImpl implements MissionThematiquePresenter {
   constructor(private readonly viewModel: (mission: MissionThematiqueViewModel) => void) {}
+
   present(missionThematique: MissionThematique): void {
     this.viewModel({
       titre: missionThematique.titre,
@@ -85,7 +86,7 @@ export class MissionThematiquePresenterImpl implements MissionThematiquePresente
     });
   }
 
-  private mapToViewModel(item: MissionItem, univers: string, thematique: string): MissionItemViewModel {
+  private mapToViewModel(item: MissionItem, univers: string, thematique: string): MissionQuizArticleViewModel {
     return {
       id: item.id,
       idDuContenu: item.contentId,

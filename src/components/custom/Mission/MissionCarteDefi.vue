@@ -16,7 +16,7 @@
       v-if="defi.aEteRealisee"
       class="fr-btn fr-btn--secondary fr-text--md todo__bouton"
       :disabled="defi.pointAEteRecolte"
-      @click="recolterPoints"
+      @click="onRecolterPoints(defi.id)"
     >
       <span class="fr-hidden fr-unhidden-md"> Récolter vos </span> &nbsp;{{ defi.points }}
       <img src="/ic_score.svg" alt="points" width="16" class="fr-ml-1v" />
@@ -26,14 +26,19 @@
 
 <script setup lang="ts">
   import { MissionDefiViewModel } from '@/domaines/thematiques/adapters/missionThematique.presenter.impl';
+  import { ThematiqueRepositoryAxios } from '@/domaines/thematiques/adapters/thematique.repository.axios';
+  import { RecupererPointsMissionThematiqueUsecase } from '@/domaines/thematiques/recupererPointsMissionThematique.usecase';
+  import { ThematiqueEventBusImpl } from '@/domaines/thematiques/thematiqueEventBusImpl';
+  import { utilisateurStore } from '@/store/utilisateur';
 
-  const props = defineProps<{
-    defi: MissionDefiViewModel;
-    onRecolterPoints: (missionId: string) => void;
-  }>();
+  defineProps<{ defi: MissionDefiViewModel }>();
 
-  const recolterPoints = () => {
-    props.onRecolterPoints(props.defi.id);
+  const onRecolterPoints = (missionId: string) => {
+    const utilisateurId: string = utilisateurStore().utilisateur.id;
+    new RecupererPointsMissionThematiqueUsecase(
+      new ThematiqueRepositoryAxios(),
+      ThematiqueEventBusImpl.getInstance(),
+    ).execute(utilisateurId, missionId);
   };
 </script>
 
