@@ -75,6 +75,10 @@ h2 {
   display: block;
 }
 
+.display-inline-block {
+  display: inline-block;
+}
+
 .width--auto {
   width: auto;
 }

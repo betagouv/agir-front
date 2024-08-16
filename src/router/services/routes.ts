@@ -6,13 +6,15 @@ const PageServicePresDeChezNous = () => import('@/components/pages/PagesService/
 const PageServicePresDeChezNousDetail = () =>
   import('@/components/pages/PagesService/PageServicePresDeChezNousDetail.vue');
 const PageServiceFruitsEtLegumes = () => import('@/components/pages/PagesService/PageServiceFruitsEtLegumes.vue');
+const PageServiceLinky = () => import('@/components/pages/PagesService/PageServiceLinky.vue');
 
 export enum RouteServiceName {
   RECETTES = 'recettes',
   RECETTES_DETAIL = 'recettes-detail',
   PROXIMITE = 'pres-de-chez-nous',
   PROXIMITE_DETAIL = 'pres-de-chez-nous-detail',
-  SERVICE_FRUITS_ET_LEGUMES = 'fruits-et-legumes',
+  FRUITS_ET_LEGUMES = 'fruits-et-legumes',
+  LINKY = 'linky',
 }
 
 export enum RouteServicePath {
@@ -20,7 +22,8 @@ export enum RouteServicePath {
   RECETTES_DETAIL = '/service/recettes/:id',
   PROXIMITE = '/service/pres-de-chez-nous',
   PROXIMITE_DETAIL = '/service/pres-de-chez-nous/:id',
-  SERVICE_FRUITS_ET_LEGUMES = '/service/fruits-et-legumes',
+  FRUITS_ET_LEGUMES = '/service/fruits-et-legumes',
+  LINKY = '/service/linky',
 }
 
 const serviceRoutes: RouteRecordRaw[] = [
@@ -57,11 +60,19 @@ const serviceRoutes: RouteRecordRaw[] = [
     },
   },
   {
-    path: RouteServicePath.SERVICE_FRUITS_ET_LEGUMES,
-    name: RouteServiceName.SERVICE_FRUITS_ET_LEGUMES,
+    path: RouteServicePath.FRUITS_ET_LEGUMES,
+    name: RouteServiceName.FRUITS_ET_LEGUMES,
     component: PageServiceFruitsEtLegumes,
     meta: {
       title: 'Service : Fruits et légumes',
+    },
+  },
+  {
+    path: RouteServicePath.LINKY,
+    name: RouteServiceName.LINKY,
+    component: PageServiceLinky,
+    meta: {
+      title: 'Service : Linky',
     },
   },
 ];

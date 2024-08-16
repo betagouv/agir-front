@@ -53,7 +53,7 @@ describe('Fichier de tests concernant la récupération des services par univers
             label: 'Fruits et légumes de saison',
             legende: 'juillet',
             picto: 'iconUrlFruits',
-            url: RouteServiceName.SERVICE_FRUITS_ET_LEGUMES,
+            url: RouteServiceName.FRUITS_ET_LEGUMES,
           },
           {
             estServiceExterne: false,
