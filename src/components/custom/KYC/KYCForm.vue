@@ -18,7 +18,7 @@
       />
     </div>
     <div v-if="questionViewModel.type === 'choix_multiple'" class="fr-input-group">
-      <h2 class="fr-h4 fr-mb-2w">
+      <h2 :class="styleDuTitre ? styleDuTitre : 'fr-h4 fr-mb-2w'">
         {{ questionViewModel.libelle }}
       </h2>
       <InputCheckbox
@@ -29,7 +29,7 @@
       />
     </div>
     <div v-if="questionViewModel.type === 'libre'" class="fr-input-group">
-      <h2 class="fr-h4 fr-mb-2w">
+      <h2 :class="styleDuTitre ? styleDuTitre : 'fr-h4 fr-mb-2w'">
         {{ questionViewModel.libelle }}
       </h2>
       <label class="fr-label" for="reponse"> Votre réponse </label>
@@ -38,6 +38,7 @@
     <button class="fr-btn fr-btn--lg" :title="wordingBouton" :disabled="isDisabled" type="submit">
       {{ wordingBouton }}
     </button>
+    <slot> </slot>
   </form>
 </template>
 
@@ -51,7 +52,7 @@
   import { ToDoListEventBusImpl } from '@/domaines/toDoList/toDoListEventBusImpl';
   import { utilisateurStore } from '@/store/utilisateur';
 
-  const props = defineProps<{ questionViewModel: QuestionViewModel; wordingBouton: string }>();
+  const props = defineProps<{ questionViewModel: QuestionViewModel; wordingBouton: string; styleDuTitre?: string }>();
   const reponse = defineModel<string | string[]>('reponse', { default: '' });
   const isDisabled = ref<boolean>(true);
   const emit = defineEmits<{ (e: 'update:soumissionKyc', value: string[]): void }>();

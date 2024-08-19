@@ -10,6 +10,7 @@ export enum RouteCompteName {
   DEFIS = 'vos-actions',
   POST_CREATION_COMPTE_ETAPE_1 = 'creation-compte-etape-1',
   POST_CREATION_COMPTE_ETAPE_2 = 'creation-compte-etape-2',
+  POST_CREATION_COMPTE_ETAPE_3 = 'creation-compte-etape-3',
   POST_CREATION_COMPTE_FIN = 'creation-compte-fin',
   POST_CREATION_COMPTE_DISCLAIMER = 'creation-compte-disclaimer',
 }
