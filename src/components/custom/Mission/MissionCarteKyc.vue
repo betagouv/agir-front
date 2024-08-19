@@ -1,24 +1,31 @@
 <template>
   <div class="todo background--white shadow fr-p-3w border">
-    <img :src="picto" alt="" />
+    <img :src="mission.picto" alt="" />
     <div class="fr-col fr-col-md-9">
       <h3 class="fr-m-0">
-        <router-link :to="{ path: url }" class="todo__link display-block text--normal fr-text--lg fr-mb-0">
-          <div v-html="titre" />
+        <router-link :to="{ path: mission.url }" class="todo__link display-block text--normal fr-text--lg fr-mb-0">
+          <div v-html="mission.titre" />
         </router-link>
       </h3>
-      <div class="fr-col-6" v-if="value !== undefined && value > 0 && valueMax !== undefined">
+      <div
+        class="fr-col-6"
+        v-if="
+          mission.progression.etapeCourante !== undefined &&
+          mission.progression.etapeCourante > 0 &&
+          mission.progression.etapeTotal !== undefined
+        "
+      >
         <CoachCardTodoProgression
-          :value="value"
-          :value-max="valueMax"
+          :value="mission.progression.etapeCourante"
+          :value-max="mission.progression.etapeTotal"
           label="Barre de progression: tâche à faire"
           couleur="#000091"
         />
       </div>
     </div>
     <div class="fr-ml-auto">
-      <span v-if="points" class="background--white fr-text--bold fr-p-1w fr-mr-2w">
-        {{ points }}
+      <span v-if="mission.points" class="background--white fr-text--bold fr-p-1w fr-mr-2w">
+        {{ mission.points }}
         <img width="16" src="/ic_score.svg" alt="point" />
       </span>
       <span class="fr-icon-arrow-right-line todo__picto text--bleu" aria-hidden="true"></span>
@@ -28,15 +35,9 @@
 
 <script setup lang="ts">
   import CoachCardTodoProgression from '@/components/custom/Coach/CoachCardTodoProgression.vue';
+  import { MissionKycViewModel } from '@/domaines/thematiques/adapters/missionThematique.presenter.impl';
 
-  defineProps<{
-    titre: string;
-    value?: number;
-    valueMax?: number;
-    url: string;
-    picto: string;
-    points?: number;
-  }>();
+  defineProps<{ mission: MissionKycViewModel }>();
 </script>
 
 <style scoped>

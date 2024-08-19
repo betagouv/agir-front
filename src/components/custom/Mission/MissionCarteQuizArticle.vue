@@ -1,24 +1,16 @@
 <template>
   <div class="todo background--white shadow fr-p-3w border">
-    <img :src="picto" alt="" />
+    <img :src="quizArticle.picto" alt="" />
     <div class="fr-col fr-col-md-9">
       <h3 class="fr-m-0">
-        <router-link :to="{ path: url }" class="todo__link display-block text--normal fr-text--lg fr-mb-0">
-          <div v-html="titre" />
+        <router-link :to="{ path: quizArticle.url }" class="todo__link display-block text--normal fr-text--lg fr-mb-0">
+          <div v-html="quizArticle.titre" />
         </router-link>
       </h3>
-      <div class="fr-col-6" v-if="value !== undefined && value > 0 && valueMax !== undefined">
-        <CoachCardTodoProgression
-          :value="value"
-          :value-max="valueMax"
-          label="Barre de progression: tâche à faire"
-          couleur="#000091"
-        />
-      </div>
     </div>
     <div class="fr-ml-auto">
-      <span v-if="points" class="background--white fr-text--bold fr-p-1w fr-mr-2w">
-        {{ points }}
+      <span v-if="quizArticle.points" class="background--white fr-text--bold fr-p-1w fr-mr-2w">
+        {{ quizArticle.points }}
         <img width="16" src="/ic_score.svg" alt="point" />
       </span>
       <span class="fr-icon-arrow-right-line todo__picto text--bleu" aria-hidden="true"></span>
@@ -27,16 +19,9 @@
 </template>
 
 <script setup lang="ts">
-  import CoachCardTodoProgression from '@/components/custom/Coach/CoachCardTodoProgression.vue';
+  import { MissionQuizArticleViewModel } from '@/domaines/thematiques/adapters/missionThematique.presenter.impl';
 
-  defineProps<{
-    titre: string;
-    value?: number;
-    valueMax?: number;
-    url: string;
-    picto: string;
-    points?: number;
-  }>();
+  defineProps<{ quizArticle: MissionQuizArticleViewModel }>();
 </script>
 
 <style scoped>
