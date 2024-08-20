@@ -27,6 +27,22 @@ test.beforeAll(async () => {
     fullFillServiceVierge(route);
   });
 
+  await page.route(`${process.env.VITE_API_URL}/utilisateurs/dorian/aides`, route => {
+    fullFillServiceVierge(route);
+  });
+
+  await page.route(`${process.env.VITE_API_URL}/utilisateurs/dorian/events`, route => {
+    fullFillServiceVierge(route);
+  });
+
+  await page.route(`${process.env.VITE_API_URL}/utilisateurs/dorian/logement`, route => {
+    route.fulfill({
+      status: 200,
+      contentType: 'application/json',
+      body: JSON.stringify({ commune: 'Paris' }),
+    });
+  });
+
   await page.route(`${process.env.VITE_API_URL}/utilisateurs/dorian/recommandations_v2`, route => {
     fullFillRecommandationsVierge(route);
   });
