@@ -40,10 +40,15 @@
 
   <section class="fr-py-8w position--relative">
     <div class="section--outils">
-      <img src="/boite-outil.png" alt="" />
+      <img src="/ic_outils.svg" alt="" />
     </div>
     <div class="fr-container">
-      <CoachServices />
+      <h2 class="fr-h2 text--center">Les outils pour vous aider</h2>
+      <div class="fr-grid-row flex-space-between">
+        <CoachAides class="fr-col-5" />
+        <div class="headerDivider1" />
+        <CoachServices class="fr-col-5" />
+      </div>
     </div>
   </section>
 
@@ -61,12 +66,12 @@
     }"
   >
     <div class="fr-container" v-if="!isLoading">
-      <h2 class="fr-h2 fr-mb-1w">Articles et quiz recommandés pour vous</h2>
-      <p class="fr-text--xl">
+      <h2 class="fr-h3 fr-mb-1w">Articles et quiz recommandés pour vous</h2>
+      <p class="fr-text--md">
         Sélection suggérée en fonction de vos
         <router-link
           :to="{ name: RouteCompteName.MIEUX_VOUS_CONNAITRE }"
-          class="fr-link fr-icon-user-setting-line fr-link--icon-right fr-text--xl"
+          class="fr-link fr-icon-user-setting-line fr-link--icon-right fr-text--md"
         >
           préférences
         </router-link>
@@ -76,9 +81,7 @@
         class="fr-mb-2w"
         :recommandations="recommandationsPersonnaliseesViewModel.autresRecommandations"
       />
-      <router-link :to="{ name: RouteCoachName.BIBLIOTHEQUE }" class="fr-link fr-text--xl">
-        Voir la bibliothèque
-      </router-link>
+      <router-link :to="{ name: RouteCoachName.BIBLIOTHEQUE }" class="fr-link"> Voir la bibliothèque </router-link>
     </div>
     <div class="fr-container" v-else>
       <CarteSkeleton />
@@ -95,6 +98,7 @@
   import { onMounted, onUnmounted, ref } from 'vue';
   import CoachRecommandations from './custom/Coach/CoachRecommandations.vue';
   import CarteSkeleton from '@/components/CarteSkeleton.vue';
+  import CoachAides from '@/components/custom/Coach/CoachAides.vue';
   import CoachContact from '@/components/custom/Coach/CoachContact.vue';
   import CoachServices from '@/components/custom/Coach/CoachServices.vue';
   import CoachToDo from '@/components/custom/Coach/CoachToDo.vue';
@@ -202,5 +206,10 @@
     width: 5rem;
     height: 5rem;
     border-radius: 50%;
+  }
+
+  .headerDivider1 {
+    border-left: 1px solid #d8e0e0;
+    margin-top: 100px;
   }
 </style>

@@ -9,7 +9,7 @@
       <div v-for="(aides, index) in props.aidesGroupesParCategorie" :key="index">
         <div v-if="categoriesActives.length === 0 || categoriesActives.includes(`${index}`)">
           <h2 class="fr-h4">{{ index }}</h2>
-          <div class="fr-mb-2w" v-for="aide in aides" :key="aide.id">
+          <div class="fr-mb-2w" v-for="aide in aides" :key="aide.id" :id="`aide_${aide.id}`">
             <Accordeon :label="aide.titre" :name-id="aide.id" @click="trackAideClick(aide)">
               <template v-slot:titre>
                 <span class="fr-col-12 fr-pr-2w">
@@ -21,9 +21,9 @@
                     <div v-if="aide.isSimulateur || aide.montantMaximum" class="fr-grid-row">
                       <span
                         v-if="aide.isSimulateur"
-                        class="fr-tag fr-mr-1w fr-icon-money-euro-circle-line fr-tag--icon-left"
+                        class="fr-tag background-bleu-light fr-mr-1w fr-icon-money-euro-circle-line fr-tag--icon-left"
                       >
-                        Simulateur disponible
+                        Simulateur
                       </span>
                       <span v-if="aide.montantMaximum" class="fr-tag">{{ aide.montantMaximum }}</span>
                     </div>
@@ -49,11 +49,14 @@
 </template>
 
 <script setup lang="ts">
-  import { ref } from 'vue';
+  import { onMounted, ref } from 'vue';
+  import { useRoute } from 'vue-router';
   import Accordeon from '@/components/custom/Accordeon.vue';
   import InputCheckbox from '@/components/dsfr/InputCheckbox.vue';
   import { AidesViewModel } from '@/domaines/aides/ports/chargementAides.presenter';
   import { trackClick } from '@/shell/matomo';
+
+  const route = useRoute();
 
   const props = defineProps<{
     aidesGroupesParCategorie: AidesViewModel;
@@ -75,6 +78,18 @@
   const trackAideClick = aide => {
     trackClick('Aides', aide.titre);
   };
+
+  onMounted(() => {
+    const hash = route.hash;
+
+    if (hash) {
+      const id = hash.substring(1);
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  });
 </script>
 
 <style scoped>

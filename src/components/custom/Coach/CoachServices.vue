@@ -1,33 +1,34 @@
 <template>
-  <h2 class="fr-h2 text--center">Les outils pour vous aider</h2>
-  <h3>Mes services</h3>
-  <ul class="fr-grid-row fr-grid-row--gutters list-style-none fr-mb-2w">
-    <li class="fr-col-4">
-      <ServiceLink
-        :url="RouteServiceName.SERVICE_FRUITS_ET_LEGUMES"
-        label="Fruits et légumes de saison"
-        picto="/cerise.png"
-        :legende="moisCourant"
-      />
-    </li>
-    <li class="fr-col-4">
-      <ServiceLink
-        :url="RouteServiceName.PROXIMITE"
-        label="Mes commerces de proximité"
-        picto="/commerce.png"
-        :legende="moisCourant"
-      />
-    </li>
-    <li class="fr-col-4">
-      <ServiceLink
-        :url="RouteServiceName.RECETTES"
-        label="Recettes saines et équilibrées"
-        picto="/omelette.png"
-        :legende="moisCourant"
-      />
-    </li>
-  </ul>
-  <p>Retrouvez plus de services dans vos univers...</p>
+  <div>
+    <h3>Mes services</h3>
+    <ul class="list-style-none fr-mb-2w">
+      <li>
+        <ServiceLink
+          :url="RouteServiceName.SERVICE_FRUITS_ET_LEGUMES"
+          label="Fruits et légumes de saison"
+          picto="/cerise.png"
+          :legende="moisCourant"
+        />
+      </li>
+      <li class="fr-mt-2w">
+        <ServiceLink
+          :url="RouteServiceName.PROXIMITE"
+          label="Mes commerces de proximité"
+          picto="/commerce.png"
+          :legende="moisCourant"
+        />
+      </li>
+      <li class="fr-mt-2w">
+        <ServiceLink
+          :url="RouteServiceName.RECETTES"
+          label="Recettes saines et équilibrées"
+          picto="/omelette.png"
+          :legende="moisCourant"
+        />
+      </li>
+    </ul>
+    <p>Retrouvez plus de services dans vos univers...</p>
+  </div>
 </template>
 
 <script setup lang="ts">
