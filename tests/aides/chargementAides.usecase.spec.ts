@@ -5,6 +5,10 @@ import { AidesViewModel } from '@/domaines/aides/ports/chargementAides.presenter
 import { PublierEvenementRepositorySpy } from '../shell/publierEvenement.repository.spy';
 import { expect } from 'vitest';
 import { Evenemement } from '@/shell/ports/publierEvenement.repository';
+import {
+  AideNonGroupeeViewModel,
+  ChargementAidesNonGroupeesPresenterImpl,
+} from '@/domaines/aides/adapters/chargementCinqAidesNonGroupees.presenter.impl';
 
 class ChargementAidesRepositoryForTest implements ChargementAidesRepository {
   getAides(): Promise<Aides[]> {
@@ -55,17 +59,62 @@ class ChargementAidesRepositoryForTest implements ChargementAidesRepository {
         idDuContenu: '',
         isSimulateur: true,
       },
+      {
+        id: 'id-4',
+        titre: 'Aide test',
+        sousTitre: '',
+        categorie: '🥦 Alimentation',
+        nombreDePointsAGagner: '25',
+        miseEnAvant: '',
+        type: 'AIDE',
+        illustrationURL: 'https://picsum.photos/200/300',
+        url: 'vos-aides-velo',
+        isUrlExterne: false,
+        contenu: '<h3>Titre test</h3><p>lorem ipsum dolor test</p>',
+        idDuContenu: '',
+        isSimulateur: true,
+      },
+      {
+        id: 'id-5',
+        titre: 'Aide test',
+        sousTitre: '',
+        categorie: '🥦 Alimentation',
+        nombreDePointsAGagner: '25',
+        miseEnAvant: '',
+        type: 'AIDE',
+        illustrationURL: 'https://picsum.photos/200/300',
+        url: 'vos-aides-velo',
+        isUrlExterne: false,
+        contenu: '<h3>Titre test</h3><p>lorem ipsum dolor test</p>',
+        idDuContenu: '',
+        isSimulateur: true,
+      },
+      {
+        id: 'id-6',
+        titre: 'Aide test',
+        sousTitre: '',
+        categorie: '🥦 Alimentation',
+        nombreDePointsAGagner: '25',
+        miseEnAvant: '',
+        type: 'AIDE',
+        illustrationURL: 'https://picsum.photos/200/300',
+        url: 'vos-aides-velo',
+        isUrlExterne: false,
+        contenu: '<h3>Titre test</h3><p>lorem ipsum dolor test</p>',
+        idDuContenu: '',
+        isSimulateur: true,
+      },
     ]);
   }
 }
 
 describe('Fichier de tests pour charger toutes les aides', () => {
-  it('Renvoie toutes les aides groupés par catégorie et doit prevenir le back que le catalogue a été consulté', async () => {
+  it('Renvoie toutes les aides groupés par catégorie', async () => {
     // GIVEN
     const spyPublierEvenemntRepository = new PublierEvenementRepositorySpy();
 
     // WHEN
-    const useCase = new ChargementAidesUsecase(new ChargementAidesRepositoryForTest(), spyPublierEvenemntRepository);
+    const useCase = new ChargementAidesUsecase(new ChargementAidesRepositoryForTest());
     await useCase.execute('utilisateurId', new ChargementAidesPresenterImpl(expectation));
 
     // THEN
@@ -101,9 +150,77 @@ describe('Fichier de tests pour charger toutes les aides', () => {
             url: 'vos-aides-velo',
             montantMaximum: undefined,
           },
+          {
+            categorie: '🥦 Alimentation',
+            contenu: '<h3>Titre test</h3><p>lorem ipsum dolor test</p>',
+            id: 'id-4',
+            isSimulateur: true,
+            titre: 'Aide test',
+            url: 'vos-aides-velo',
+            montantMaximum: undefined,
+          },
+          {
+            categorie: '🥦 Alimentation',
+            contenu: '<h3>Titre test</h3><p>lorem ipsum dolor test</p>',
+            id: 'id-5',
+            isSimulateur: true,
+            titre: 'Aide test',
+            url: 'vos-aides-velo',
+            montantMaximum: undefined,
+          },
+          {
+            categorie: '🥦 Alimentation',
+            contenu: '<h3>Titre test</h3><p>lorem ipsum dolor test</p>',
+            id: 'id-6',
+            isSimulateur: true,
+            titre: 'Aide test',
+            url: 'vos-aides-velo',
+            montantMaximum: undefined,
+          },
         ],
       });
     }
-    expect(spyPublierEvenemntRepository.evenementPublie).toStrictEqual(Evenemement.AIDES_CONSULTEES);
+  });
+
+  it('Renvoie les 5 premiers aides retournées par le back', async () => {
+    // WHEN
+    const useCase = new ChargementAidesUsecase(new ChargementAidesRepositoryForTest());
+    await useCase.execute('utilisateurId', new ChargementAidesNonGroupeesPresenterImpl(expectation));
+
+    // THEN
+    function expectation(aidesViewModel: AideNonGroupeeViewModel[]) {
+      expect(aidesViewModel).toStrictEqual([
+        {
+          id: 'id-1',
+          isSimulateur: true,
+          titre: "Simulez vos aides pour l'achat d'un vélo",
+          url: 'vos-aides-velo',
+        },
+        {
+          id: 'id-2',
+          isSimulateur: false,
+          titre: 'Simulez vos aides pour convertir votre voiture thermique en électrique',
+          url: '/vos-aides#aide_id-2',
+        },
+        {
+          id: 'id-3',
+          isSimulateur: true,
+          titre: 'Aide test',
+          url: 'vos-aides-velo',
+        },
+        {
+          id: 'id-4',
+          isSimulateur: true,
+          titre: 'Aide test',
+          url: 'vos-aides-velo',
+        },
+        {
+          id: 'id-5',
+          isSimulateur: true,
+          titre: 'Aide test',
+          url: 'vos-aides-velo',
+        },
+      ]);
+    }
   });
 });
