@@ -1,7 +1,7 @@
 <template>
   <div>
     <h3>Mes services</h3>
-    <ul class="list-style-none fr-mb-2w">
+    <ul class="list-style-none fr-mt-6w">
       <li>
         <ServiceLink
           :url="RouteServiceName.SERVICE_FRUITS_ET_LEGUMES"

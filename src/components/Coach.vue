@@ -43,7 +43,7 @@
       <img src="/ic_outils.svg" alt="" />
     </div>
     <div class="fr-container">
-      <h2 class="fr-h2 text--center">Les outils pour vous aider</h2>
+      <h2 class="fr-h2 text--center fr-mb-5w">Les outils pour vous aider</h2>
       <div class="fr-grid-row flex-space-between">
         <CoachAides class="fr-col-5" />
         <div class="headerDivider1" />
