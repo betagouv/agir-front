@@ -41,6 +41,7 @@ interface MissionThematiqueApiModel {
   univers_label: string;
   objectifs: MissionItemThematiqueApiModel[];
   done_at: Date | null;
+  terminable: boolean;
   progression_kyc: {
     current: number;
     target: number;
@@ -61,6 +62,7 @@ export class ThematiqueRepositoryAxios implements ThematiqueRepository {
       univers: reponse.data.univers,
       urlImage: reponse.data.image_url,
       estTerminee: Boolean(reponse.data.done_at),
+      estTerminable: reponse.data.terminable,
       items: reponse.data.objectifs.map(item => ({
         id: item.id,
         contentId: item.content_id,
@@ -80,6 +82,7 @@ export class ThematiqueRepositoryAxios implements ThematiqueRepository {
       },
     };
   }
+
   @intercept401()
   async recupererThematiques(universId: string, utilisateurId: string): Promise<Thematique[]> {
     const axios = AxiosFactory.getAxios();
@@ -104,5 +107,11 @@ export class ThematiqueRepositoryAxios implements ThematiqueRepository {
   async recupererPoints(idUtilisateur: string, elementId: string): Promise<void> {
     const axios = AxiosFactory.getAxios();
     await axios.post(`/utilisateurs/${idUtilisateur}/objectifs/${elementId}/gagner_points`, { element_id: elementId });
+  }
+
+  @intercept401()
+  async terminerMission(utilisateurId: string, thematiqueId: string): Promise<void> {
+    const axios = AxiosFactory.getAxios();
+    await axios.post(`/utilisateurs/${utilisateurId}/thematiques/${thematiqueId}/mission/terminer`);
   }
 }

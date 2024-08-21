@@ -2,7 +2,11 @@
   <div v-if="isLoading">Chargement en cours ...</div>
   <div v-else-if="!missionViewModel">Une erreur est survenue</div>
   <div v-else class="fr-container fr-pb-4w">
-    <ThematiquePageComposant :univers-id="universId" :mission-view-model="missionViewModel" />
+    <ThematiquePageComposant
+      :thematique-id="thematiqueId"
+      :univers-id="universId"
+      :mission-view-model="missionViewModel"
+    />
   </div>
 </template>
 

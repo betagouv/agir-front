@@ -16,4 +16,8 @@ export class MissionThematiqueRepositoryMock implements ThematiqueRepository {
   recupererPoints(_idUtilisateur: string, _elementId: string): Promise<void> {
     return Promise.resolve();
   }
+
+  terminerMission(utilisateurId: string, thematiqueId: string): Promise<void> {
+    return Promise.resolve(undefined);
+  }
 }

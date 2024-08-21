@@ -2,15 +2,11 @@ import { ThematiqueRepository } from '@/domaines/thematiques/ports/thematique.re
 import { MissionThematique } from '@/domaines/thematiques/recupererMissionThematiqueUsecase';
 import { Thematique } from '@/domaines/thematiques/recupererThematiquesUnivers.usecase';
 
-export class ThematiqueRepositorySpy implements ThematiqueRepository {
-  get recupererPointsArgs(): { elementId: string; idUtilisateur: string } {
-    return this._recupererPointsArgs;
+export class TerminierMissionThematiqueRepositorySpy implements ThematiqueRepository {
+  get terminerMissionAEteAppele(): boolean {
+    return this._terminerMissionAEteAppele;
   }
-
-  private _recupererPointsArgs: { elementId: string; idUtilisateur: string } = {
-    elementId: 'elementId',
-    idUtilisateur: 'idUtilisateur',
-  };
+  private _terminerMissionAEteAppele: boolean = false;
 
   recupererMissionThematique(thematiqueId: string, utilisateurId: string): Promise<MissionThematique> {
     throw new Error('Method not implemented.');
@@ -21,11 +17,11 @@ export class ThematiqueRepositorySpy implements ThematiqueRepository {
   }
 
   recupererPoints(idUtilisateur: string, elementId: string): Promise<void> {
-    this._recupererPointsArgs = { idUtilisateur, elementId };
-    return Promise.resolve();
+    throw new Error('Method not implemented.');
   }
 
   terminerMission(utilisateurId: string, thematiqueId: string): Promise<void> {
+    this._terminerMissionAEteAppele = true;
     return Promise.resolve(undefined);
   }
 }
