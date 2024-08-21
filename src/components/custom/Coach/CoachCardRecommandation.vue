@@ -16,7 +16,7 @@
     </div>
     <div class="fr-py-2w full-width">
       <div class="fr-grid-row flex-space-between">
-        <span class="fr-text--bold fr-text--sm text--black fr-m-0 fr-p-0">
+        <span class="fr-text--sm text--black fr-m-0 fr-p-0">
           {{ recommandation.thematique }}
         </span>
       </div>

@@ -7,7 +7,7 @@ import { RouteRecordRaw } from 'vue-router';
 import { RouteAidesName } from '@/router/aides/routeAidesName';
 
 export enum RouteAidesPath {
-  VOS_AIDES = '/vos-aides/',
+  VOS_AIDES = '/vos-aides',
   RETROFIT = 'retrofit',
   FORMULAIRE = 'formulaire',
   VELO = 'velo',

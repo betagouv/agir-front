@@ -34,10 +34,7 @@
 
   onMounted(async () => {
     const { id: utilisateurId } = utilisateurStore().utilisateur;
-    const usecase = new ChargementAidesUsecase(
-      new chargementAidesAxiosRepository(),
-      new PublierEvenemntRepositoryAxios(),
-    );
+    const usecase = new ChargementAidesUsecase(new chargementAidesAxiosRepository());
     await usecase.execute(
       utilisateurId,
       new ChargementAidesPresenterImpl(aidesViewModel => (aides.value = aidesViewModel)),

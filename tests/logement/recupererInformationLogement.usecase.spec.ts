@@ -7,14 +7,16 @@ import {
   SuperficieLogementApiModel,
   TypeLogementApiModel,
 } from '@/domaines/logement/adapters/logement.repository.axios';
+import { LogementViewModel } from '@/domaines/logement/ports/logement.presenter';
 
 describe('Fichier de tests concernant la récuperations des informations du logement', () => {
-  it('Doit recupérer les informations', () => {
+  it('Doit recupérer les informations', async () => {
     // GIVEN
     const usecase = new RecupererInformationLogementUseCase(
       new MockLogementRepository({
         codePostal: '75001',
-        commune: 'PARIS 01',
+        commune_utilisee_dans_le_compte: 'PARIS 01',
+        commune_label: 'Paris 01',
         adultes: 2,
         enfants: 1,
         residence: TypeLogementApiModel.Appartement,
@@ -27,12 +29,13 @@ describe('Fichier de tests concernant la récuperations des informations du loge
     );
 
     // WHEN // THEN
-    usecase.execute(
+    await usecase.execute(
       'idUtilisateur',
       new LogementPresenterImpl(viewModel => {
         expect(viewModel).toEqual({
           codePostal: '75001',
-          commune: 'PARIS 01',
+          commune_utilisee_dans_le_compte: 'PARIS 01',
+          commune_label: 'Paris 01',
           adultes: 2,
           enfants: 1,
           residence: {

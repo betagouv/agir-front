@@ -11,11 +11,12 @@ import { EnregistrerInformationsLogementUsecase } from '@/domaines/logement/enre
 describe("Fichier de tests concernant l'enregistrement des informations du logement", () => {
   it('Doit envoyer les informations au back-end', async () => {
     // GIVEN
-    const logement: Logement = {
+    const logementAMettreAJour: Logement = {
       adultes: 0,
       enfants: 0,
       codePostal: '75001',
-      commune: 'PARIS 01',
+      commune_utilisee_dans_le_compte: 'PARIS 01',
+      commune_label: '',
       residence: TypeLogementApiModel.Appartement,
       superficie: SuperficieLogementApiModel.Superficie_150_Et_Plus,
       proprietaire: true,
@@ -26,7 +27,7 @@ describe("Fichier de tests concernant l'enregistrement des informations du logem
     const spyLogementRepository = new LogementRepositorySpy();
     // WHEN
     const usecase = new EnregistrerInformationsLogementUsecase(spyLogementRepository);
-    await usecase.execute('idUtilsateur', logement);
+    await usecase.execute('idUtilsateur', logementAMettreAJour);
 
     // THEN
     expect(spyLogementRepository.enregistrerLesInformationsAEteAppele).toBeTruthy();
@@ -34,7 +35,8 @@ describe("Fichier de tests concernant l'enregistrement des informations du logem
       adultes: 0,
       enfants: 0,
       codePostal: '75001',
-      commune: 'PARIS 01',
+      commune_utilisee_dans_le_compte: 'PARIS 01',
+      commune_label: '',
       residence: TypeLogementApiModel.Appartement,
       superficie: SuperficieLogementApiModel.Superficie_150_Et_Plus,
       proprietaire: true,

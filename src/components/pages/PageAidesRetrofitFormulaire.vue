@@ -11,8 +11,8 @@
               v-if="logementViewModel"
               v-model="logementViewModel.codePostal"
               :defaultValue="logementViewModel.codePostal"
-              :defaultSelectValue="logementViewModel.commune"
-              @update:selectedCommune="logementViewModel.commune = $event"
+              :defaultSelectValue="logementViewModel.commune_utilisee_dans_le_compte"
+              @update:selectedCommune="logementViewModel.commune_utilisee_dans_le_compte = $event"
             />
             <h3 class="fr-h4 fr-mt-3w">Quel est votre revenu ?</h3>
             <CompteFormulaireRevenuFiscal
@@ -108,7 +108,8 @@
         adultes: logementViewModel.value!.adultes,
         enfants: logementViewModel.value!.enfants,
         codePostal: logementViewModel.value!.codePostal,
-        commune: logementViewModel.value!.commune,
+        commune_utilisee_dans_le_compte: logementViewModel.value!.commune_utilisee_dans_le_compte,
+        commune_label: '',
         residence: logementViewModel.value!.residence.valeur,
         superficie: logementViewModel.value!.superficie.valeur,
         proprietaire: logementViewModel.value!.proprietaire.valeur,

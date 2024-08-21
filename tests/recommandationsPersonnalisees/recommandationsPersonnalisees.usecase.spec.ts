@@ -97,7 +97,7 @@ describe('Fichier de tests concernant le chargement des recommandations personna
             bouton: {
               libelle: "Simuler l'aide",
               style: 'fr-btn--secondary',
-              url: '/vos-aides/',
+              url: '/vos-aides',
             },
             idDuContenu: '1',
             image: 'illustrationURL',

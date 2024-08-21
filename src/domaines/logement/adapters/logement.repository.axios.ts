@@ -39,6 +39,7 @@ export interface LogementApiModel {
   nombre_enfants: number;
   code_postal: string;
   commune: string;
+  commune_label: string;
   type: TypeLogementApiModel;
   superficie: SuperficieLogementApiModel;
   proprietaire: boolean;
@@ -52,7 +53,7 @@ export class LogementRepositoryAxios implements LogementRepository {
   async enregistrerLesInformations(utilisateurId: string, logement: Logement): Promise<void> {
     await AxiosFactory.getAxios().patch(`utilisateurs/${utilisateurId}/logement`, {
       code_postal: logement.codePostal,
-      commune: logement.commune,
+      commune: logement.commune_utilisee_dans_le_compte,
       nombre_adultes: logement.adultes,
       nombre_enfants: logement.enfants,
       type: logement.residence,
@@ -70,7 +71,8 @@ export class LogementRepositoryAxios implements LogementRepository {
 
     return {
       codePostal: reponse.data.code_postal,
-      commune: reponse.data.commune,
+      commune_utilisee_dans_le_compte: reponse.data.commune,
+      commune_label: reponse.data.commune_label,
       adultes: reponse.data.nombre_adultes,
       enfants: reponse.data.nombre_enfants,
       residence: reponse.data.type,
