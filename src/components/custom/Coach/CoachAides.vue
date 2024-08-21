@@ -100,17 +100,13 @@
   import { LogementRepositoryAxios } from '@/domaines/logement/adapters/logement.repository.axios';
   import { RecupererInformationLogementUseCase } from '@/domaines/logement/recupererInformationLogement.usecase';
   import { RouteAidesPath } from '@/router/aides/routes';
-  import { PublierEvenemntRepositoryAxios } from '@/shell/adapters/publierEvenemnt.repository.axios';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const aidesNonGroupees = ref<AideNonGroupeeViewModel[]>();
   const commune = ref<string>('');
   onMounted(async () => {
     const { id: utilisateurId } = utilisateurStore().utilisateur;
-    const usecase = new ChargementAidesUsecase(
-      new chargementAidesAxiosRepository(),
-      new PublierEvenemntRepositoryAxios(),
-    );
+    const usecase = new ChargementAidesUsecase(new chargementAidesAxiosRepository());
 
     const informationLogementUseCase = new RecupererInformationLogementUseCase(new LogementRepositoryAxios());
     await Promise.all([
@@ -121,7 +117,7 @@
       informationLogementUseCase.execute(
         utilisateurStore().utilisateur.id,
         new LogementPresenterImpl(viewModel => {
-          commune.value = viewModel.commune;
+          commune.value = viewModel.commune_label;
         }),
       ),
     ]);

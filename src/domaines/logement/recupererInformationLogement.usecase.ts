@@ -4,7 +4,8 @@ import { LogementRepository } from '@/domaines/logement/ports/logement.repositor
 
 export interface Logement {
   codePostal: string;
-  commune: string;
+  commune_utilisee_dans_le_compte: string;
+  commune_label: string;
   adultes: number;
   enfants: number;
   residence: LogementApiModel['type'];

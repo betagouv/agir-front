@@ -24,9 +24,9 @@
         <h3 class="fr-h4">Où habitez-vous ?</h3>
         <InputCodePostal
           :default-value="logementViewModel.codePostal"
-          :default-select-value="logementViewModel.commune"
+          :default-select-value="logementViewModel.commune_utilisee_dans_le_compte"
           v-model="logementViewModel.codePostal"
-          @update:selectedCommune="logementViewModel.commune = $event"
+          @update:selectedCommune="logementViewModel.commune_utilisee_dans_le_compte = $event"
         />
       </div>
       <h3 class="fr-h4">Combien êtes-vous dans votre logement (vous inclus) ?</h3>
@@ -158,7 +158,8 @@
       adultes: props.value.adultes,
       enfants: props.value.enfants,
       codePostal: props.value.codePostal,
-      commune: props.value.commune,
+      commune_utilisee_dans_le_compte: props.value.commune_utilisee_dans_le_compte,
+      commune_label: '',
       residence: props.value.residence.valeur,
       superficie: props.value.superficie.valeur,
       proprietaire: props.value.proprietaire.valeur,

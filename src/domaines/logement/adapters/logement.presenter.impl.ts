@@ -13,7 +13,8 @@ export class LogementPresenterImpl {
   presente(logement: Logement) {
     this.logementViewModel({
       codePostal: logement.codePostal,
-      commune: logement.commune,
+      commune_utilisee_dans_le_compte: logement.commune_utilisee_dans_le_compte,
+      commune_label: logement.commune_label,
       adultes: logement.adultes,
       enfants: logement.enfants,
       residence: {

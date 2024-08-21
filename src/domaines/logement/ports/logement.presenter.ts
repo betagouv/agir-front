@@ -11,7 +11,8 @@ interface LogementPlusieursReponsesPossiblesViewModel<T> {
 
 export interface LogementViewModel {
   codePostal: string;
-  commune: string;
+  commune_utilisee_dans_le_compte: string;
+  commune_label: string;
   adultes: number;
   enfants: number;
   residence: LogementPlusieursReponsesPossiblesViewModel<LogementApiModel['type']>;

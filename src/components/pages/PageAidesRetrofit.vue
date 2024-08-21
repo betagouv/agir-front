@@ -66,7 +66,7 @@
     utilisateurStore().utilisateur.id,
     new LogementPresenterImpl(viewModel => {
       codePostal.value = viewModel.codePostal;
-      commune.value = viewModel.commune;
+      commune.value = viewModel.commune_utilisee_dans_le_compte;
     }),
   );
 
