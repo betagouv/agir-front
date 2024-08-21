@@ -13,6 +13,7 @@ const thematique = {
   univers: 'alimentation',
   urlImage: 'urlImage',
   estTerminee: false,
+  estTerminable: false,
   idThematique: '1',
   progressionKyc: {
     etapeCourante: 1,
@@ -79,6 +80,7 @@ describe("Fichier de tests concernant la récupération d'une mission pour une t
     function expectation(mission) {
       expect(mission).toStrictEqual<MissionThematiqueViewModel>({
         estTerminee: false,
+        estTerminable: false,
         articleEtQuiz: [
           {
             id: 'id1',

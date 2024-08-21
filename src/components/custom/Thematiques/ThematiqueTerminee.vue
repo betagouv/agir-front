@@ -1,29 +1,23 @@
 <template>
-  <div
-    class="fr-grid-row position--relative align-items--center background--white z-index-2 shadow fr-p-2w border border-radius--md"
-  >
-    <img
-      :src="urlImage"
-      class="fr-col-auto border-radius--md img-object-fit-cover fr-mr-2w"
-      width="120"
-      height="100"
-      alt=""
-    />
-    <div class="fr-col">
-      <span class="text--bleu">Mission terminée</span>
-      <h1 class="fr-h4 fr-col fr-m-0">{{ titre }}</h1>
-    </div>
+  <div class="fr-grid-row align-items--center background--white border-radius--md shadow fr-p-3w border">
+    <img :src="urlImage" class="border-radius--md img-object-fit-cover" width="120" height="100" alt="" />
+    <h1 class="fr-col fr-h4 fr-m-0 fr-ml-3w">{{ titre }}</h1>
+    <span v-if="estTerminee" class="fr-ml-md-auto fr-mt-md-0 fr-mt-2w text--semi-bold text--bleu"
+      >Mission terminée</span
+    >
     <button
-      class="fr-btn fr-btn--secondary fr-ml-auto fr-col-auto"
-      :disabled="!estTerminee"
+      v-else
+      class="fr-ml-md-auto fr-mt-md-0 fr-mt-2w fr-btn fr-btn--secondary"
+      :disabled="!estTerminable"
       data-fr-opened="false"
       :aria-controls="modaleId"
+      @click="terminerMission"
     >
       Terminer la mission
     </button>
   </div>
 
-  <Teleport to="body" v-if="estTerminee">
+  <Teleport to="body" v-if="estTerminable">
     <Modale label="Modale de fin de mission" :id="modaleId" :radius="true" :is-footer-actions="false" size="s">
       <template v-slot:contenu>
         <div class="fr-grid-row fr-grid-row--gutters modale-thematique-terminee">
@@ -43,12 +37,30 @@
 </template>
 
 <script setup lang="ts">
+  import { ref } from 'vue';
   import Modale from '@/components/custom/Modale/Modale.vue';
   import ThematiqueCardDone from '@/components/custom/Thematiques/ThematiqueCardDone.vue';
+  import { ThematiqueRepositoryAxios } from '@/domaines/thematiques/adapters/thematique.repository.axios';
+  import { TerminerMissionThematiqueUsecase } from '@/domaines/thematiques/terminerMissionThematique.usecase';
+  import { utilisateurStore } from '@/store/utilisateur';
 
-  defineProps<{ urlImage: string; titre: string; estTerminee: boolean; universId: string }>();
+  const props = defineProps<{
+    urlImage: string;
+    titre: string;
+    estTerminee: boolean;
+    estTerminable: boolean;
+    universId: string;
+    thematiqueId: string;
+  }>();
+
+  const estTerminee = ref<boolean>(props.estTerminee);
 
   const modaleId = 'terminer-mission-modale';
+  const terminerMission = async () => {
+    const terminerMissionThematiqueUsecase = new TerminerMissionThematiqueUsecase(new ThematiqueRepositoryAxios());
+    await terminerMissionThematiqueUsecase.execute(props.thematiqueId, utilisateurStore().utilisateur.id);
+    estTerminee.value = true;
+  };
 </script>
 
 <style scoped>

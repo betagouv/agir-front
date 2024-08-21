@@ -28,13 +28,15 @@
     </h2>
     <ThematiqueMissionDefis :defis="missionViewModel.defis" />
   </div>
-  <div :class="`fr-col-md-8 fr-col-12 ${!missionViewModel.estTerminee ? 'opacity-6' : ''}`">
-    <h2 class="text--uppercase fr-text--xs text--bleu fr-mb-2w fr-mt-5w fr-ml-6w">4. Fin de la mission</h2>
+  <div :class="`fr-col-md-8 fr-col-12 ${!missionViewModel.estTerminable ? 'opacity-6' : ''}`">
+    <h2 class="text--uppercase fr-text--xs text--bleu fr-mb-2w fr-mt-5w fr-ml-6w">4. Gagner votre carte</h2>
     <ThematiqueTerminee
       :url-image="missionViewModel.urlImage"
       :titre="missionViewModel.titre"
       :est-terminee="missionViewModel.estTerminee"
+      :est-terminable="missionViewModel.estTerminable"
       :univers-id="universId"
+      :thematique-id="thematiqueId"
     />
   </div>
 </template>
@@ -47,7 +49,7 @@
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import { MissionThematiqueViewModel } from '@/domaines/thematiques/adapters/missionThematique.presenter.impl';
 
-  defineProps<{ universId: string; missionViewModel: MissionThematiqueViewModel }>();
+  defineProps<{ thematiqueId: string; universId: string; missionViewModel: MissionThematiqueViewModel }>();
 </script>
 
 <style scoped>

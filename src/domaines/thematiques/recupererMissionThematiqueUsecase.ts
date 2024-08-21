@@ -20,6 +20,7 @@ export interface MissionThematique {
   titre: string;
   univers: string;
   estTerminee: boolean;
+  estTerminable: boolean;
   items: MissionItem[];
   idThematique: string;
   progressionKyc: {

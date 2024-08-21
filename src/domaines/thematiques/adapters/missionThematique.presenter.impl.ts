@@ -45,6 +45,7 @@ export interface MissionThematiqueViewModel {
   titre: string;
   urlImage: string;
   estTerminee: boolean;
+  estTerminable: boolean;
   kyc: MissionKycViewModel[];
   articleEtQuiz: MissionQuizArticleViewModel[];
   defis: MissionDefiViewModel[];
@@ -58,6 +59,7 @@ export class MissionThematiquePresenterImpl implements MissionThematiquePresente
       titre: missionThematique.titre,
       urlImage: missionThematique.urlImage,
       estTerminee: missionThematique.estTerminee,
+      estTerminable: missionThematique.estTerminable,
       kyc: [
         {
           id: missionThematique.items.filter(item => item.type === InteractionType.KYC)[0].id,
