@@ -12,17 +12,65 @@
             :impact-kg-annuel="bilanCarboneViewModel.impactKgAnnuel"
             :impact-kg-hebdomadaire="bilanCarboneViewModel.impactKgHebdomadaire"
           />
-          <h2>Voir le détail</h2>
-          <ol class="fr-p-0 list-style-none">
-            <li
-              v-for="detail in bilanCarboneViewModel.details"
-              :key="detail.universLabel"
-              class="fr-grid-row fr-grid-row--gutters flex-space-between fr-py-3v fr-m-0 fr-py-2w border--bottom--grey align-items--center"
-            >
-              <span class="fr-text--xl fr-text--bold fr-mb-0">{{ detail.universLabel }}</span>
-              <span class="fr-text--bold text--bleu">{{ detail.impactKgAnnuel }}</span>
+          <h2>Vos principaux postes d'émission</h2>
+          <ol>
+            <li v-for="top in bilanCarboneViewModel.top3" :key="top.label" class="fr-text--xl fr-text--bold fr-ml-2v">
+              <div class="fr-grid-row">
+                <div>
+                  <div>
+                    {{ top.label }}
+                  </div>
+                  <span class="text--rouge"> {{ top.pourcentage }}% </span>
+                  <span class="fr-text--regular"> de vos émissions </span>
+                </div>
+                <span class="text--3xl fr-p-md-2w fr-p-0w fr-ml-4w">{{ top.emoji }}</span>
+              </div>
             </li>
           </ol>
+          <h2>Voir le détail</h2>
+          <div v-for="univers in bilanCarboneViewModel.univers" :key="univers.label" class="fr-col-12">
+            <Accordeon :name-id="univers.label">
+              <template v-slot:titre>
+                <span class="fr-grid-row flex-space-between full-width">
+                  <span class="fr-text--md text--black text--semi-bold">
+                    {{ univers.label }}
+                  </span>
+                  <span class="fr-text--md fr-mr-4w text--bleu text--bold">
+                    {{ univers.impactKgAnnuel.valeur }}
+                    <span class="fr-text--sm fr-text--regular">{{ univers.impactKgAnnuel.unite }}</span>
+                  </span>
+                </span>
+              </template>
+              <template #contenu>
+                <ul class="list-style-none">
+                  <li
+                    v-for="detail in univers.details"
+                    :key="detail.label"
+                    class="fr-grid-row align-items--center fr-mb-4w"
+                  >
+                    <span class="fr-grid-row flex-space-between full-width fr-m-0">
+                      <span class="fr-text--md text--black text--semi-bold fr-m-0">
+                        <span class="fr-mr-2w">{{ detail.emoji }}</span> {{ detail.label }}
+                      </span>
+                      <span class="fr-text--md fr-mr-4w text--bleu text--bold fr-m-0">
+                        {{ detail.impactKgAnnuel.valeur }}
+                        <span class="fr-text--sm fr-text--regular">{{ detail.impactKgAnnuel.unite }}</span>
+                      </span>
+                    </span>
+                    <div class="full-width fr-ml-5w fr-mr-32v">
+                      <BarreDeProgression
+                        :value="detail.pourcentage"
+                        :value-max="100"
+                        :label="`Représente ${detail.pourcentage}% de votre empreinte carbone dans cette categorie`"
+                        couleur="#DF1451"
+                        min-width="2%"
+                      />
+                    </div>
+                  </li>
+                </ul>
+              </template>
+            </Accordeon>
+          </div>
         </div>
         <div class="fr-col-12 fr-col-md-3">
           <ServiceAside
@@ -40,6 +88,8 @@
 
 <script setup lang="ts">
   import { onMounted, ref } from 'vue';
+  import Accordeon from '@/components/custom/Accordeon.vue';
+  import BarreDeProgression from '@/components/custom/BarreDeProgression.vue';
   import BilanCarboneHebdo from '@/components/custom/BilanCarbone/BilanCarboneHebdo.vue';
   import ServiceAside from '@/components/custom/Service/ServiceAside.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';

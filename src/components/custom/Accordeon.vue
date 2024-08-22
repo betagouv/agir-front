@@ -7,7 +7,7 @@
         :aria-controls="nameId"
       >
         <slot name="titre" />
-        <span class="chevron-icon fr-icon-arrow-up-s-line" aria-hidden="true"></span>
+        <span class="chevron-icon fr-icon-arrow-right-s-line" aria-hidden="true"></span>
       </button>
     </h3>
     <div class="fr-collapse" :id="nameId">
@@ -45,6 +45,6 @@
   }
 
   .fr-accordion__btn[aria-expanded='true'] .chevron-icon {
-    transform: rotate(180deg);
+    transform: rotate(90deg);
   }
 </style>

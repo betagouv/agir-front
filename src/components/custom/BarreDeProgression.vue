@@ -17,6 +17,7 @@
     value: number;
     valueMax: number;
     couleur: string;
+    minWidth: string;
   }>();
 
   const valeurToWidth = () => {
@@ -39,8 +40,8 @@
     position: static;
     background-color: var(--jauge-color);
     height: 100%;
-    min-width: 8%;
     border-radius: 10px;
     border: 2px solid #fff;
+    min-width: v-bind(props.minWidth);
   }
 </style>

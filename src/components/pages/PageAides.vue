@@ -26,7 +26,6 @@
   import { chargementAidesAxiosRepository } from '@/domaines/aides/adapters/chargementAidesAxiosRepository';
   import ChargementAidesUsecase from '@/domaines/aides/chargementAides.usecase';
   import { AidesViewModel } from '@/domaines/aides/ports/chargementAides.presenter';
-  import { PublierEvenemntRepositoryAxios } from '@/shell/adapters/publierEvenemnt.repository.axios';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const aides = ref<AidesViewModel>();

@@ -143,6 +143,10 @@ h2 {
   color: var(--error-425-625);
 }
 
+.text--rouge {
+  color: #DF1451;
+}
+
 .text--black-light {
   color: var(--grey-50-1000);
 }
