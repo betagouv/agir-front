@@ -1,16 +1,29 @@
 import { BilanCarbonePresenter } from '@/domaines/bilanCarbone/ports/bilanCarbone.presenter';
 import { BilanCarboneRepository } from '@/domaines/bilanCarbone/ports/bilanCarbone.repository';
 
+interface BilanCarboneDetail {
+  label: string;
+  pourcentage: number;
+  impactKgAnnuel: number;
+  emoji: string;
+}
+
 interface BilanCarboneDetailParUnivers {
   universId: string;
   universLabel: string;
   pourcentage: number;
   impactKgAnnuel: number;
+  details: BilanCarboneDetail[];
 }
 
 export interface BilanCarbone {
   impactKgAnnuel: number;
-  details: BilanCarboneDetailParUnivers[];
+  univers: BilanCarboneDetailParUnivers[];
+  top3: {
+    label: string;
+    emoji: string;
+    pourcentage: string;
+  }[];
 }
 
 export class RecupererBilanCarboneUsecase {
