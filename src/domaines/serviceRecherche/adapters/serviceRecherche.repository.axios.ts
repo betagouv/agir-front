@@ -31,4 +31,24 @@ export class ServiceRechercheRepositoryAxios implements ServiceRechercheReposito
       })),
     };
   }
+
+  @intercept401()
+  async recupererServicesPageAccueil(idUtilisateur: string): Promise<ServicesRecherche> {
+    const axiosInstance = AxiosFactory.getAxios();
+
+    const response = await axiosInstance.get<ServiceRechercheApiModel[]>(
+      `/utilisateurs/${idUtilisateur}/recherche_services`,
+    );
+
+    return {
+      services: response.data.map(service => ({
+        id: service.id_service,
+        titre: service.titre,
+        sous_titre: service.sous_titre,
+        externalUrl: service.external_url,
+        iconUrl: service.icon_url,
+        estServiceExterne: !service.is_available_inhouse,
+      })),
+    };
+  }
 }

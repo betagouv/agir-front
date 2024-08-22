@@ -7,4 +7,8 @@ export class ServiceRechercheRepositoryMock implements ServiceRechercheRepositor
   recupererServicesParUnivers(_idUtilisateur: string): Promise<ServicesRecherche> {
     return Promise.resolve(this.servicesRechercheARetourner);
   }
+
+  recupererServicesPageAccueil(idUtilisateur: string): Promise<ServicesRecherche> {
+    return Promise.resolve(this.servicesRechercheARetourner);
+  }
 }

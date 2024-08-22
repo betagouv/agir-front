@@ -2,4 +2,5 @@ import { ServicesRecherche } from '@/domaines/serviceRecherche/recupererServices
 
 export interface ServiceRechercheRepository {
   recupererServicesParUnivers(idUtilisateur: string, univers: string): Promise<ServicesRecherche>;
+  recupererServicesPageAccueil(idUtilisateur: string): Promise<ServicesRecherche>;
 }

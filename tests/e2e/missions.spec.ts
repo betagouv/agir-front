@@ -27,6 +27,10 @@ test.beforeAll(async () => {
     fullFillServiceVierge(route);
   });
 
+  await page.route(`${process.env.VITE_API_URL}/utilisateurs/dorian/recherche_services`, route => {
+    fullFillServiceVierge(route);
+  });
+
   await page.route(`${process.env.VITE_API_URL}/utilisateurs/dorian/aides`, route => {
     fullFillServiceVierge(route);
   });
@@ -172,7 +176,7 @@ test.describe('Mission 1', async () => {
 
   test('Objectif 1 - récolter ses premiers points', async () => {
     const scoreInitial = parseInt(await page.innerText('.tag__progression--score'));
-    await expect(scoreInitial).toEqual(0);
+    expect(scoreInitial).toEqual(0);
 
     const boutonRecolter = page.getByRole('button', { name: 'Récolter vos 10 points' });
 
