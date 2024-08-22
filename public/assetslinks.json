@@ -1,0 +1,18 @@
+[
+  {
+    "relation": [ "delegate_permission/common.handle_all_urls" ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "fr.gouv.agir",
+      "sha256_cert_fingerprints": [ "F5:D0:E4:BA:66:BF:30:5B:7D:DB:85:F1:BA:58:DE:F8:81:03:D6:1B:4E:06:4C:7D:A8:1B:57:24:72:EB:43:38" ]
+    }
+  },
+  {
+    "relation": [ "delegate_permission/common.handle_all_urls" ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "fr.gouv.agir.dev2",
+      "sha256_cert_fingerprints": [ "64:DA:86:6F:8A:68:46:5A:EF:D9:94:21:41:AD:CE:DB:F3:D7:73:C4:5B:6E:52:8D:FA:52:90:32:DE:00:B7:35" ]
+    }
+  }
+]
