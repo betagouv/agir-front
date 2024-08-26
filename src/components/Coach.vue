@@ -121,7 +121,6 @@
   import { RouteCompteName } from '@/router/compte/routeCompteName';
   import { Fonctionnalites } from '@/shell/fonctionnalitesEnum';
   import { publierEvenementHotjar, HotjarEvenement } from '@/shell/publierEvenementHotjar';
-  import { onboardingStore } from '@/store/onboarding';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const { recommandationTour, universTour } = useReveal();
@@ -184,7 +183,6 @@
   };
 
   onMounted(() => {
-    onboardingStore().reset();
     lancerChargementDesDonnees();
   });
 

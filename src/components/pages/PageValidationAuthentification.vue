@@ -36,8 +36,6 @@
   import { ValiderAuthentificationUtilisateurUsecase } from '@/domaines/authentification/validerAuthentificationUtilisateur.usecase';
   import { sendIdNGC } from '@/domaines/bilan/middleware/pendingSimulation';
   import router from '@/router';
-  import { onboardingStore } from '@/store/onboarding';
-  import { onboardingBilanStore } from '@/store/onboardingBilan';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const code = ref('');
@@ -57,8 +55,6 @@
           const requestedRoute = sessionStorage.getItem('requestedRoute');
           sessionStorage.removeItem('requestedRoute');
           sendIdNGC();
-          onboardingStore().reset();
-          onboardingBilanStore().reset();
           router.push(requestedRoute || route);
         }),
       )
