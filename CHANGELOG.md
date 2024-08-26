@@ -1,5 +1,27 @@
 # Changelog
 
+## [1.18.0](https://github.com/betagouv/agir-front/compare/v1.17.0...v1.18.0) (2024-08-26)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* ajout d'une etape 3 sur la création de compte ([#567](https://github.com/betagouv/agir-front/issues/567)) ([6a9b75a](https://github.com/betagouv/agir-front/commit/6a9b75ae50f80de276cee472131109b7c5eabd18))
+* ajout des aides sur la page d'accueil ([#572](https://github.com/betagouv/agir-front/issues/572)) ([c3d01dd](https://github.com/betagouv/agir-front/commit/c3d01dd4cbe68cc228988e4ce7fedcfb6108e49c))
+* détail du bilan carbone ([#575](https://github.com/betagouv/agir-front/issues/575)) ([c38916a](https://github.com/betagouv/agir-front/commit/c38916a36b15e1cc6ea8220f03a1bb5d8d228a7f))
+* fin de mission dans une thématique ([#573](https://github.com/betagouv/agir-front/issues/573)) ([7a34ff2](https://github.com/betagouv/agir-front/commit/7a34ff240e2d463ac63f6c2a5037a4f93f682cd0))
+* les services sur la page d'accueil sont maintenant pilotés par le back-end ([#574](https://github.com/betagouv/agir-front/issues/574)) ([12439e8](https://github.com/betagouv/agir-front/commit/12439e82813e0a1b28c1d26c02a8682bda096721))
+* passer les defis en horizontal ([#563](https://github.com/betagouv/agir-front/issues/563)) ([7a7a354](https://github.com/betagouv/agir-front/commit/7a7a3549edbe3bc60319d1f265a5bf3b109da9f6))
+* tracking services dans Matomo ([#576](https://github.com/betagouv/agir-front/issues/576)) ([d42673c](https://github.com/betagouv/agir-front/commit/d42673c6885a3b1aca5471f8f44c219a6fce0b4e))
+
+
+### 👷 Autres changements
+
+* Bump @playwright/test from 1.45.3 to 1.46.1 ([#570](https://github.com/betagouv/agir-front/issues/570)) ([59c4740](https://github.com/betagouv/agir-front/commit/59c47401b3b07b55a7d69a0ec530e6d150353c7d))
+* Bump lint-staged from 15.2.8 to 15.2.9 ([#571](https://github.com/betagouv/agir-front/issues/571)) ([1e7bdb9](https://github.com/betagouv/agir-front/commit/1e7bdb965565ad865331be96ac385c11c21a4699))
+* Bump vue from 3.4.37 to 3.4.38 ([#569](https://github.com/betagouv/agir-front/issues/569)) ([fff9d5b](https://github.com/betagouv/agir-front/commit/fff9d5b2920a7700b5a6ac3639b551715f45ceb7))
+* deep link ios & android ([0ad9047](https://github.com/betagouv/agir-front/commit/0ad904790fc1d457da86853944b3fc010f40430a))
+* suppresion de l'onboarding avant la création du compte et liste d'attente ([#577](https://github.com/betagouv/agir-front/issues/577)) ([d3e09c3](https://github.com/betagouv/agir-front/commit/d3e09c37387eaff4b260d623823a33f6c422cd11))
+
 ## [1.17.0](https://github.com/betagouv/agir-front/compare/v1.16.0...v1.17.0) (2024-08-13)
 
 
