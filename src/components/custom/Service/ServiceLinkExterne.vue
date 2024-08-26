@@ -4,6 +4,7 @@
     :href="url"
     target="_blank"
     rel="noopener noreferrer"
+    @click="trackClickService()"
   >
     <h3 class="fr-h6 fr-text--bold fr-mb-1v">{{ titre }}</h3>
     <span class="fr-mb-0 fr-pr-3w">{{ sousTitre }}</span>
@@ -11,7 +12,12 @@
 </template>
 
 <script setup lang="ts">
-  defineProps<{ url: string; titre: string; sousTitre: string }>();
+  import { trackClick } from '@/shell/matomo';
+
+  const props = defineProps<{ url: string; titre: string; sousTitre: string }>();
+  const trackClickService = () => {
+    trackClick('Service', props.titre);
+  };
 </script>
 
 <style scoped>
