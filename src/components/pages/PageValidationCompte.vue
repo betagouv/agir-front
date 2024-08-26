@@ -35,8 +35,6 @@
   import { ValiderCompteUtilisateurUsecase } from '@/domaines/authentification/validerCompteUtilisateur.usecase';
   import router from '@/router';
   import { RouteCompteName } from '@/router/compte/routeCompteName';
-  import { onboardingStore } from '@/store/onboarding';
-  import { onboardingBilanStore } from '@/store/onboardingBilan';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const code = ref('');
@@ -51,8 +49,6 @@
     validerCompteUtilisateurUsecase
       .execute(email, code.value)
       .then(() => {
-        onboardingStore().reset();
-        onboardingBilanStore().reset();
         router.push({ name: RouteCompteName.POST_CREATION_COMPTE_DISCLAIMER });
       })
       .catch(reason => {

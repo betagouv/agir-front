@@ -52,13 +52,13 @@
   import { RenvoyerCoteOTPUsecase } from '@/domaines/authentification/renvoyerCoteOTPUsecase';
   import router from '@/router';
   import { RouteCompteName } from '@/router/compte/routeCompteName';
-  import { onboardingStore } from '@/store/onboarding';
+  import { utilisateurStore } from '@/store/utilisateur';
 
   withDefaults(defineProps<{ premiereConnexion?: boolean }>(), {
     premiereConnexion: true,
   });
 
-  const email = ref<string>(onboardingStore().email);
+  const email = ref<string>(utilisateurStore().utilisateur.mail);
   const password = ref<string>('');
   const loginEnErreur = ref<boolean>(false);
   const loginMessageErreur = ref<string>('');

@@ -10,7 +10,6 @@ import compteRoutes from '@/router/compte/routes';
 import conformiteRoutes from '@/router/conformite/routes';
 import defiRoutes from '@/router/defis/routes';
 import kycRoutes from '@/router/kyc/routes';
-import onboardingRoutes from '@/router/onboarding/routes';
 import quizRoutes from '@/router/quiz/routes';
 import serviceRoutes from '@/router/services/routes';
 import universRoutes from '@/router/univers/routes';
@@ -26,7 +25,6 @@ export enum RouteCommuneName {
   ACCUEIL = 'accueil',
   AUTHENTIFICATION = 'authentification',
   SESSION_EXPIREE = 'session-expiree',
-  DASHBOARD = 'dashboard',
   BETA_FERMEE = 'beta-fermee',
   NOT_FOUND = 'not-found',
   RETOUR_AUTH_FRANCE_CONNECT = 'retour-auth-france-connect',
@@ -45,7 +43,6 @@ const routes: RouteRecordRaw[] = [
   ...kycRoutes,
   ...compteRoutes,
   ...coachRoutes,
-  ...onboardingRoutes,
   ...articlesRoutes,
   ...aidesRoutes,
   ...universRoutes,
