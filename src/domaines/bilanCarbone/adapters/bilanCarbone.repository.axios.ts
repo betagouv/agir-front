@@ -14,6 +14,7 @@ interface BilanCarboneDetailApiModel {
   univers_label: string;
   pourcentage: number;
   impact_kg_annee: number;
+  emoji: string;
   details: BilanCarboneDetailUniversApiModel[];
 }
 
@@ -40,6 +41,7 @@ export class BilanCarboneRepositoryAxios implements BilanCarboneRepository {
         universLabel: detail.univers_label,
         pourcentage: detail.pourcentage,
         impactKgAnnuel: detail.impact_kg_annee,
+        emoji: detail.emoji,
         details: detail.details.map(detailUnivers => ({
           label: detailUnivers.label,
           pourcentage: detailUnivers.pourcentage_categorie,
