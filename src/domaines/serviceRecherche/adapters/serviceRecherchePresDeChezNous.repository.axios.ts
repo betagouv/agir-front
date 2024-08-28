@@ -102,30 +102,27 @@ export class ServiceRecherchePresDeChezNousAxios implements ServiceRecherchePres
   ): Promise<ServiceRecherchePresDeChezNousResultatDetail> {
     const axiosInstance = AxiosFactory.getAxios();
 
-    const responseSuggestionsPromise = await axiosInstance.post<ServiceRechercheDetailApiModel[]>(
-      `/utilisateurs/${idUtilisateur}/recherche_services/proximite/search`,
-      {
-        nombre_max_resultats: 0,
-        rayon_metres: 5000,
-      },
+    const reponse = await axiosInstance.get<ServiceRechercheDetailApiModel>(
+      `/utilisateurs/${idUtilisateur}/recherche_services/proximite/last_results/${idService}`,
     );
 
-    const element = responseSuggestionsPromise.data.find(elem => elem.id === idService);
-    const adresse_rue = element!.adresse_rue ? element!.adresse_rue + ', ' : '';
-    const adresse_nom_ville = element!.adresse_nom_ville ? element!.adresse_nom_ville + ' - ' : '';
-    const adresse_code_postal = element!.adresse_code_postal ? element!.adresse_code_postal : '';
+    const adresse_rue = reponse.data.adresse_rue ? reponse.data.adresse_rue + ', ' : '';
+    const adresse_nom_ville = reponse.data.adresse_nom_ville ? reponse.data.adresse_nom_ville + ' - ' : '';
+    const adresse_code_postal = reponse.data.adresse_code_postal ? reponse.data.adresse_code_postal : '';
 
     const adresseFinale = `${adresse_rue}${adresse_nom_ville}${adresse_code_postal}`;
 
     return {
-      titre: element!.titre,
+      titre: reponse.data.titre,
       adresse: adresseFinale,
-      telephone: element!.phone?.toString(),
-      image: element!.image_url,
-      siteWeb: element!.site_web,
-      distance: element!.distance_metres,
-      heuresOuvertures: element!.openhours_more_infos,
-      description: element!.description ? element!.description + ' ' + element!.description_more : undefined,
+      telephone: reponse.data.phone?.toString(),
+      image: reponse.data.image_url,
+      siteWeb: reponse.data.site_web,
+      distance: reponse.data.distance_metres,
+      heuresOuvertures: reponse.data.openhours_more_infos,
+      description: reponse.data.description
+        ? reponse.data.description + ' ' + reponse.data.description_more
+        : undefined,
     };
   }
 }
