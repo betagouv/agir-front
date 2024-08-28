@@ -31,6 +31,7 @@ describe('Fichier de tests concernant le chargement du bilan carbone', () => {
                 emoji: '✈️',
               },
             ],
+            emoji: '🚦',
           },
           {
             universId: 'alimentation',
@@ -38,6 +39,7 @@ describe('Fichier de tests concernant le chargement du bilan carbone', () => {
             pourcentage: 24,
             impactKgAnnuel: 2094.1568221,
             details: [],
+            emoji: '🍴',
           },
           {
             universId: 'logement',
@@ -45,13 +47,7 @@ describe('Fichier de tests concernant le chargement du bilan carbone', () => {
             pourcentage: 17,
             impactKgAnnuel: 1477.82343812085,
             details: [],
-          },
-          {
-            universId: 'services_societaux',
-            universLabel: 'Titre manquant',
-            pourcentage: 16,
-            impactKgAnnuel: 1450.9052263863641,
-            details: [],
+            emoji: '🏠',
           },
           {
             universId: 'consommation',
@@ -59,6 +55,7 @@ describe('Fichier de tests concernant le chargement du bilan carbone', () => {
             pourcentage: 12,
             impactKgAnnuel: 450.0454437235896,
             details: [],
+            emoji: '📦',
           },
         ],
         top3: [
@@ -134,7 +131,7 @@ describe('Fichier de tests concernant le chargement du bilan carbone', () => {
                 pourcentage: 8,
               },
             ],
-            emoji: '',
+            emoji: '🚦',
             impactKgAnnuel: {
               unite: 'tonnes',
               valeur: '2.8',
@@ -144,7 +141,7 @@ describe('Fichier de tests concernant le chargement du bilan carbone', () => {
           },
           {
             details: [],
-            emoji: '',
+            emoji: '🍴',
             impactKgAnnuel: {
               unite: 'tonnes',
               valeur: '2.1',
@@ -154,7 +151,7 @@ describe('Fichier de tests concernant le chargement du bilan carbone', () => {
           },
           {
             details: [],
-            emoji: '',
+            emoji: '🏠',
             impactKgAnnuel: {
               unite: 'tonnes',
               valeur: '1.5',
@@ -164,17 +161,7 @@ describe('Fichier de tests concernant le chargement du bilan carbone', () => {
           },
           {
             details: [],
-            emoji: '',
-            impactKgAnnuel: {
-              unite: 'tonnes',
-              valeur: '1.5',
-            },
-            label: 'Titre manquant',
-            pourcentage: 16,
-          },
-          {
-            details: [],
-            emoji: '',
+            emoji: '📦',
             impactKgAnnuel: {
               unite: 'kg',
               valeur: '450 ',

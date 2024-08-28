@@ -44,7 +44,7 @@ export class BilanCarbonePresenterImpl implements BilanCarbonePresenter {
         label: univers.universLabel,
         impactKgAnnuel: this.formateKg(univers.impactKgAnnuel),
         pourcentage: univers.pourcentage,
-        emoji: '',
+        emoji: univers.emoji,
         details: univers.details.map(detail => ({
           emoji: detail.emoji,
           label: detail.label,

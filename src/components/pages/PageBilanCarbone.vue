@@ -33,7 +33,7 @@
               <template v-slot:titre>
                 <span class="fr-grid-row flex-space-between full-width">
                   <span class="fr-text--md text--black text--semi-bold">
-                    {{ univers.label }}
+                    <span class="fr-mr-2w">{{ univers.emoji }}</span> {{ univers.label }}
                   </span>
                   <span class="fr-text--md fr-mr-4w text--bleu text--bold">
                     {{ univers.impactKgAnnuel.valeur }}

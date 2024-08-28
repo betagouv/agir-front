@@ -14,6 +14,7 @@ interface BilanCarboneDetailParUnivers {
   pourcentage: number;
   impactKgAnnuel: number;
   details: BilanCarboneDetail[];
+  emoji: string;
 }
 
 export interface BilanCarbone {
