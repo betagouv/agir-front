@@ -3,6 +3,7 @@ import { ServiceRechercheRecettesRepository } from '@/domaines/serviceRecherche/
 import { ServiceRechercheBase } from '@/domaines/serviceRecherche/serviceRecherche';
 
 interface ServiceRechercheRecettesResultat {
+  id: string;
   titre: string;
   difficulte: string;
   img: string;

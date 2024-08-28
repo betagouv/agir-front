@@ -3,6 +3,7 @@ import { ServiceRecherchePresDeChezNousRepository } from '@/domaines/serviceRech
 import { ServiceRechercheBase } from '@/domaines/serviceRecherche/serviceRecherche';
 
 interface ServiceRecherchePresDeChezNousResultat {
+  id: string;
   titre: string;
   adresse?: string;
   nombreMiseEnFavoris: number;

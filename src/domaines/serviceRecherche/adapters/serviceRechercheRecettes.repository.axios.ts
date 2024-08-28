@@ -42,6 +42,7 @@ export class ServiceRechercheRecettesAxios implements ServiceRechercheRecettesRe
       suggestions: response.data
         .filter(suggestion => !suggestion.est_favoris)
         .map(suggestion => ({
+          id: suggestion.id,
           titre: suggestion.titre,
           difficulte: suggestion.difficulty_plat,
           nombreFavoris: suggestion.nombre_favoris,
@@ -52,6 +53,7 @@ export class ServiceRechercheRecettesAxios implements ServiceRechercheRecettesRe
       favoris: response.data
         .filter(suggestion => suggestion.est_favoris)
         .map(suggestion => ({
+          id: suggestion.id,
           titre: suggestion.titre,
           difficulte: suggestion.difficulty_plat,
           nombreFavoris: suggestion.nombre_favoris,

@@ -12,6 +12,7 @@ describe('Fichier de tests concernant le service Recettes', () => {
       new ServiceRechercheRecettesMock({
         suggestions: [
           {
+            id: 'id1',
             titre: 'Tian de sardines',
             difficulte: 'Intérmédiaire',
             img: '',
@@ -20,6 +21,7 @@ describe('Fichier de tests concernant le service Recettes', () => {
             typeDePlat: 'Plat principal',
           },
           {
+            id: 'id2',
             titre: 'Tiramissu',
             typeDePlat: 'Dessert',
             nombreFavoris: 2,
@@ -30,6 +32,7 @@ describe('Fichier de tests concernant le service Recettes', () => {
         ],
         favoris: [
           {
+            id: 'id3',
             titre: 'Salade crevettes au curry',
             typeDePlat: 'Entrée',
             nombreFavoris: 8,
@@ -53,6 +56,7 @@ describe('Fichier de tests concernant le service Recettes', () => {
       expect(serviceRechercheRecettesViewModel).toStrictEqual<ServiceRechercheRecettesViewModel>({
         suggestions: [
           {
+            id: 'id1',
             titre: 'Tian de sardines',
             description: 'Plat principal',
             nombreMiseEnFavoris: 12,
@@ -62,8 +66,10 @@ describe('Fichier de tests concernant le service Recettes', () => {
               label: 'Intermédiaire',
               style: 'background--bleu-ecume-hover',
             },
+            to: null,
           },
           {
+            id: 'id2',
             titre: 'Tiramissu',
             description: 'Dessert',
             nombreMiseEnFavoris: 2,
@@ -73,10 +79,12 @@ describe('Fichier de tests concernant le service Recettes', () => {
               label: 'Facile',
               style: 'background--vert-bourgeon',
             },
+            to: null,
           },
         ],
         favoris: [
           {
+            id: 'id3',
             description: 'Entrée',
             img: '',
             information: '15 min',
@@ -86,6 +94,7 @@ describe('Fichier de tests concernant le service Recettes', () => {
               style: 'background--glycine',
             },
             titre: 'Salade crevettes au curry',
+            to: null,
           },
         ],
         aside: {

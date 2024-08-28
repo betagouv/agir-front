@@ -3,6 +3,7 @@ import { ServiceRechercheRecettesPresenter } from '@/domaines/serviceRecherche/p
 import { ServiceRechercheRecettes } from '@/domaines/serviceRecherche/recupererServiceRecettes.usecase';
 
 interface SuggestionRecetteServiceViewModel {
+  id: string;
   titre: string;
   img: string;
   description?: string;
@@ -12,6 +13,7 @@ interface SuggestionRecetteServiceViewModel {
     label: string;
     style: string;
   };
+  to: { name: string; params: { id: string } } | null;
 }
 
 export interface ServiceRechercheRecettesViewModel extends ServiceRechercheViewModelBase {
@@ -25,22 +27,26 @@ export class ServiceRechercheRecettesPresenterImpl implements ServiceRechercheRe
   presente(serviceRechercheRecette: ServiceRechercheRecettes): void {
     this.serviceRechercheRecettesViewModel({
       suggestions: serviceRechercheRecette.suggestions.map(elem => ({
+        id: elem.id,
         titre: elem.titre,
         img: elem.img,
         description: elem.typeDePlat,
         information: `${elem.tempsDePreparation} min`,
         nombreMiseEnFavoris: elem.nombreFavoris,
         tag: this.determineTag(elem.difficulte),
+        to: null,
       })),
       favoris:
         serviceRechercheRecette.favoris.length > 0
           ? serviceRechercheRecette.favoris.map(elem => ({
+              id: elem.id,
               titre: elem.titre,
               img: elem.img,
               description: elem.typeDePlat,
               information: `${elem.tempsDePreparation} min`,
               nombreMiseEnFavoris: elem.nombreFavoris,
               tag: this.determineTag(elem.difficulte),
+              to: null,
             }))
           : undefined,
       aside: {
