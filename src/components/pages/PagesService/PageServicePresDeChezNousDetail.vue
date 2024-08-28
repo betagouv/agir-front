@@ -11,6 +11,20 @@
     </div>
     <h1 class="fr-mt-2w">{{ detailServiceViewModel.titre }}</h1>
     <p v-if="detailServiceViewModel.description">{{ detailServiceViewModel.description }}</p>
+    <div class="map-container" v-if="detailServiceViewModel.position">
+      <LMap
+        ref="map"
+        :zoom="100"
+        :center="[detailServiceViewModel.position.latitude, detailServiceViewModel.position.longitude]"
+      >
+        <LTileLayer
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          layer-type="base"
+          name="OpenStreetMap"
+        ></LTileLayer>
+        <LMarker :lat-lng="[detailServiceViewModel.position?.latitude, detailServiceViewModel.position?.longitude]" />
+      </LMap>
+    </div>
     <h2 class="fr-mt-4w">Detail</h2>
     <div class="fr-grid-row flex-column fr-mb-4w">
       <span v-if="detailServiceViewModel.heuresOuvertures" class="fr-icon-time-line text--bleu">
@@ -30,6 +44,8 @@
 </template>
 
 <script setup lang="ts">
+  import 'leaflet/dist/leaflet.css';
+  import { LMap, LMarker, LTileLayer } from '@vue-leaflet/vue-leaflet';
   import { onMounted, ref } from 'vue';
   import { useRoute } from 'vue-router';
   import { ServiceRecherchePresDeChezNousAxios } from '@/domaines/serviceRecherche/adapters/serviceRecherchePresDeChezNous.repository.axios';
@@ -55,3 +71,13 @@
     isLoading.value = false;
   });
 </script>
+<style scoped>
+  .map-container {
+    height: 50vh;
+    width: 100%;
+  }
+
+  .leaflet-container * {
+    background-image: none;
+  }
+</style>

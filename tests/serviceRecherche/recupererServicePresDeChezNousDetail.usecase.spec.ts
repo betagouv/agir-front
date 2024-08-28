@@ -24,6 +24,7 @@ describe('Fichier de tests concernant le détail du Service Près de chez nous '
         siteWeb: 'https://monservice.fr',
         distance: 282,
         description: 'Description de mon service',
+        position: { latitude: 48.7123, longitude: 2.2084 },
       }),
     );
 
@@ -48,6 +49,7 @@ describe('Fichier de tests concernant le détail du Service Près de chez nous '
           label: 'À 300 m',
           style: 'background--caramel text--background-caramel',
         },
+        position: { latitude: 48.7123, longitude: 2.2084 },
       });
     }
   });

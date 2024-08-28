@@ -30,6 +30,8 @@ interface ServiceRechercheDetailApiModel {
   description: string;
   description_more: string;
   commitment: string;
+  latitude: number;
+  longitude: number;
 }
 
 export interface ServiceRechercheCategorieApiModel {
@@ -123,6 +125,13 @@ export class ServiceRecherchePresDeChezNousAxios implements ServiceRecherchePres
       description: reponse.data.description
         ? reponse.data.description + ' ' + reponse.data.description_more
         : undefined,
+      position:
+        reponse.data.latitude && reponse.data.longitude
+          ? {
+              latitude: reponse.data.latitude,
+              longitude: reponse.data.longitude,
+            }
+          : undefined,
     };
   }
 }

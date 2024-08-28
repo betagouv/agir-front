@@ -10,6 +10,7 @@ export interface ServiceRecherchePresDeChezNousResultatDetail {
   siteWeb?: string;
   distance?: number;
   description?: string;
+  position?: { latitude: number; longitude: number };
 }
 
 export class RecupererDetailServicePresDeChezNousUsecase {
