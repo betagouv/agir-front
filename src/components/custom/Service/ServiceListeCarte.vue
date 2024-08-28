@@ -8,18 +8,9 @@
 
 <script setup lang="ts">
   import ServiceCarte from '@/components/custom/Service/ServiceCarte.vue';
+  import { SuggestionServiceViewModel } from '@/domaines/serviceRecherche/adapters/serviceRecherchePresDeChezNous.presenter.impl';
 
   defineProps<{
-    suggestionsServiceViewModel: {
-      titre: string;
-      img: string;
-      description?: string;
-      information?: string;
-      nombreMiseEnFavoris: number;
-      tag?: {
-        label: string;
-        style: string;
-      };
-    }[];
+    suggestionsServiceViewModel: SuggestionServiceViewModel[];
   }>();
 </script>
