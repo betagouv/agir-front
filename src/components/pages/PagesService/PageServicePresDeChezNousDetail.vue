@@ -74,7 +74,7 @@
 <style scoped>
   .map-container {
     height: 50vh;
-    width: 100%;
+    width: 70%;
   }
 
   .leaflet-container * {
