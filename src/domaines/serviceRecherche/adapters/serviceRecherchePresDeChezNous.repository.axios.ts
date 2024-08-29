@@ -123,7 +123,7 @@ export class ServiceRecherchePresDeChezNousAxios implements ServiceRecherchePres
       distance: reponse.data.distance_metres,
       heuresOuvertures: reponse.data.openhours_more_infos,
       description: reponse.data.description
-        ? reponse.data.description + ' ' + reponse.data.description_more
+        ? `${reponse.data.description} ${reponse.data.description_more || ''}`
         : undefined,
       position:
         reponse.data.latitude && reponse.data.longitude
