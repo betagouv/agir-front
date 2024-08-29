@@ -8,7 +8,7 @@
 
 <script setup lang="ts">
   import ServiceCarte from '@/components/custom/Service/ServiceCarte.vue';
-  import { SuggestionServiceViewModel } from '@/domaines/serviceRecherche/adapters/serviceRecherchePresDeChezNous.presenter.impl';
+  import { SuggestionServiceViewModel } from '@/domaines/serviceRecherche/presDeChezNous/adapters/serviceRecherchePresDeChezNous.presenter.impl';
 
   defineProps<{
     suggestionsServiceViewModel: SuggestionServiceViewModel[];

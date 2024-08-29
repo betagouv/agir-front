@@ -42,9 +42,9 @@
   import {
     ServiceRechercheRecettesViewModel,
     ServiceRechercheRecettesPresenterImpl,
-  } from '@/domaines/serviceRecherche/adapters/serviceRechercheRecettes.presenter.impl';
-  import { ServiceRechercheRecettesAxios } from '@/domaines/serviceRecherche/adapters/serviceRechercheRecettes.repository.axios';
-  import { RecupererServiceRecettesUsecase } from '@/domaines/serviceRecherche/recupererServiceRecettes.usecase';
+  } from '@/domaines/serviceRecherche/recettes/adapters/serviceRechercheRecettes.presenter.impl';
+  import { ServiceRechercheRecettesAxios } from '@/domaines/serviceRecherche/recettes/adapters/serviceRechercheRecettes.repository.axios';
+  import { RecupererServiceRecettesUsecase } from '@/domaines/serviceRecherche/recettes/recupererServiceRecettes.usecase';
   import { RouteUniversName } from '@/router/univers/routes';
   import { utilisateurStore } from '@/store/utilisateur';
 

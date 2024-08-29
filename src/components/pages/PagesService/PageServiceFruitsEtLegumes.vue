@@ -75,9 +75,9 @@
   import {
     ServiceFruitsEtLegumesViewModel,
     ServiceRechercheFruitsEtLegumesPresenterImpl,
-  } from '@/domaines/serviceRecherche/adapters/serviceRechercheFruitsEtLegumes.presenter.impl';
-  import { ServiceRechercheFruitsEtLegumesAxios } from '@/domaines/serviceRecherche/adapters/serviceRechercheFruitsEtLegumes.repository.axios';
-  import { RecupererServiceFruitsEtLegumesUsecase } from '@/domaines/serviceRecherche/recupererServiceFruitsEtLegumes.usecase';
+  } from '@/domaines/serviceRecherche/fruitsEtLegumes/adapters/serviceRechercheFruitsEtLegumes.presenter.impl';
+  import { ServiceRechercheFruitsEtLegumesAxios } from '@/domaines/serviceRecherche/fruitsEtLegumes/adapters/serviceRechercheFruitsEtLegumes.repository.axios';
+  import { RecupererServiceFruitsEtLegumesUsecase } from '@/domaines/serviceRecherche/fruitsEtLegumes/recupererServiceFruitsEtLegumes.usecase';
   import { RouteUniversName } from '@/router/univers/routes';
   import { utilisateurStore } from '@/store/utilisateur';
 
