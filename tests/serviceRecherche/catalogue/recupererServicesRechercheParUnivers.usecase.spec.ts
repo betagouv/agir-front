@@ -5,6 +5,7 @@ import {
 } from '../../../src/domaines/serviceRecherche/catalogue/adapters/serviceRecherche.presenter.impl';
 import { ServiceRechercheRepositoryMock } from './adapters/serviceRecherche.repository.mock';
 import { RouteServiceName } from '../../../src/router/services/routes';
+import { expect, describe, it } from 'vitest';
 
 describe('Fichier de tests concernant la récupération des services par univers', () => {
   it("en donnant l'id d'un utilisateur et d'un univers, renvoie les services associées", async () => {

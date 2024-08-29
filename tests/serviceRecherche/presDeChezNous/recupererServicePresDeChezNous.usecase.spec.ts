@@ -5,7 +5,7 @@ import {
   ServiceRecherchePresDeChezNousViewModel,
 } from '../../../src/domaines/serviceRecherche/presDeChezNous/adapters/serviceRecherchePresDeChezNous.presenter.impl';
 import { RouteServiceName } from '../../../src/router/services/routes';
-
+import { expect, describe, it } from 'vitest';
 describe("Fichier de tests concernant la récuperation de service d'un recherche", () => {
   it("en donnant l'id d'un utilisateur et d'un service, renvoie les suggestions du service", async () => {
     // GIVEN
