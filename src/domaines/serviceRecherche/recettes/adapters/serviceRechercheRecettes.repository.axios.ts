@@ -1,5 +1,6 @@
 import { AxiosFactory, intercept401 } from '@/axios.factory';
 import { ServiceRechercheRecettesRepository } from '@/domaines/serviceRecherche/recettes/ports/serviceRechercheRecettes.repository';
+import { Recette } from '@/domaines/serviceRecherche/recettes/recupererDetailServiceRecettes.usecase';
 import { ServiceRechercheRecettes } from '@/domaines/serviceRecherche/recettes/recupererServiceRecettes.usecase';
 
 interface ServiceRechercheRecettesCategorieApiModel {
@@ -17,6 +18,24 @@ interface ServiceRechercheRecettesApiModel {
   temps_prepa_min: number;
   titre: string;
   type_plat: string;
+}
+
+export interface RecetteApiModel {
+  id: string;
+  image_url: string;
+  temps_prepa_min: number;
+  titre: string;
+  type_plat: string;
+  ingredients: {
+    nom: string;
+    quantite: string;
+    unite: string;
+  }[];
+  etapes_recette: {
+    ordre: number;
+    texte: string;
+  }[];
+  difficulty_plat: string;
 }
 
 export class ServiceRechercheRecettesAxios implements ServiceRechercheRecettesRepository {
@@ -66,6 +85,29 @@ export class ServiceRechercheRecettesAxios implements ServiceRechercheRecettesRe
         label: elem.label,
         estLaCategorieParDefaut: elem.is_default,
       })),
+    };
+  }
+
+  @intercept401()
+  async recupererDetailRecette(idUtilisateur: string, idRecette: string): Promise<Recette> {
+    const idService = 'recettes';
+    const axiosInstance = AxiosFactory.getAxios();
+
+    const reponse = await axiosInstance.get<RecetteApiModel>(
+      `/utilisateurs/${idUtilisateur}/recherche_services/${idService}/last_results/${idRecette}`,
+    );
+
+    return {
+      titre: reponse.data.titre,
+      tempsDePreparation: reponse.data.temps_prepa_min,
+      image: reponse.data.image_url,
+      ingredients: reponse.data.ingredients.map(ingredient => ({
+        nom: ingredient.nom,
+        quantite: ingredient.quantite,
+        unite: ingredient.unite,
+      })),
+      etapes: reponse.data.etapes_recette.map(etape => etape.texte),
+      difficulte: reponse.data.difficulty_plat,
     };
   }
 }

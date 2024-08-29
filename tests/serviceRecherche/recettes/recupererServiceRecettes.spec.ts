@@ -4,12 +4,13 @@ import {
 } from '../../../src/domaines/serviceRecherche/recettes/adapters/serviceRechercheRecettes.presenter.impl';
 import { RecupererServiceRecettesUsecase } from '../../../src/domaines/serviceRecherche/recettes/recupererServiceRecettes.usecase';
 import { ServiceRechercheRecettesMock } from './adapters/serviceRechercheRecettes.repository.mock';
+import { RouteServiceName } from '../../../src/router/services/routes';
 
 describe('Fichier de tests concernant le service Recettes', () => {
-  it("en donnant l'id d'un utilisateur et un type de catégorie, renvoie les recettes associées", () => {
+  it("en donnant l'id d'un utilisateur et un type de catégorie, renvoie les recettes associées", async () => {
     // GIVEN
     const usecase = new RecupererServiceRecettesUsecase(
-      new ServiceRechercheRecettesMock({
+      ServiceRechercheRecettesMock.avecServiceARetourner({
         suggestions: [
           {
             id: 'id1',
@@ -49,7 +50,7 @@ describe('Fichier de tests concernant le service Recettes', () => {
     );
 
     // WHEN
-    usecase.execute('idUtilisateur', 'idService', new ServiceRechercheRecettesPresenterImpl(expectation));
+    await usecase.execute('idUtilisateur', 'idService', new ServiceRechercheRecettesPresenterImpl(expectation));
 
     // THEN
     function expectation(serviceRechercheRecettesViewModel: ServiceRechercheRecettesViewModel) {
@@ -66,7 +67,10 @@ describe('Fichier de tests concernant le service Recettes', () => {
               label: 'Intermédiaire',
               style: 'background--bleu-ecume-hover',
             },
-            to: null,
+            to: {
+              name: RouteServiceName.RECETTES_DETAIL,
+              params: { id: 'id1' },
+            },
           },
           {
             id: 'id2',
@@ -79,7 +83,10 @@ describe('Fichier de tests concernant le service Recettes', () => {
               label: 'Facile',
               style: 'background--vert-bourgeon',
             },
-            to: null,
+            to: {
+              name: RouteServiceName.RECETTES_DETAIL,
+              params: { id: 'id2' },
+            },
           },
         ],
         favoris: [
@@ -94,7 +101,10 @@ describe('Fichier de tests concernant le service Recettes', () => {
               style: 'background--glycine',
             },
             titre: 'Salade crevettes au curry',
-            to: null,
+            to: {
+              name: RouteServiceName.RECETTES_DETAIL,
+              params: { id: 'id3' },
+            },
           },
         ],
         aside: {

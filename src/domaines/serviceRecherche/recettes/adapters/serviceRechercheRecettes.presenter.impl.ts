@@ -1,6 +1,7 @@
 import { ServiceRechercheViewModelBase } from '@/domaines/serviceRecherche/catalogue/adapters/serviceRechercheViewModel';
 import { ServiceRechercheRecettesPresenter } from '@/domaines/serviceRecherche/recettes/ports/serviceRechercheRecettes.presenter';
 import { ServiceRechercheRecettes } from '@/domaines/serviceRecherche/recettes/recupererServiceRecettes.usecase';
+import { RouteServiceName } from '@/router/services/routes';
 
 interface SuggestionRecetteServiceViewModel {
   id: string;
@@ -34,7 +35,10 @@ export class ServiceRechercheRecettesPresenterImpl implements ServiceRechercheRe
         information: `${elem.tempsDePreparation} min`,
         nombreMiseEnFavoris: elem.nombreFavoris,
         tag: this.determineTag(elem.difficulte),
-        to: null,
+        to: {
+          name: RouteServiceName.RECETTES_DETAIL,
+          params: { id: elem.id },
+        },
       })),
       favoris:
         serviceRechercheRecette.favoris.length > 0
@@ -46,7 +50,10 @@ export class ServiceRechercheRecettesPresenterImpl implements ServiceRechercheRe
               information: `${elem.tempsDePreparation} min`,
               nombreMiseEnFavoris: elem.nombreFavoris,
               tag: this.determineTag(elem.difficulte),
-              to: null,
+              to: {
+                name: RouteServiceName.RECETTES_DETAIL,
+                params: { id: elem.id },
+              },
             }))
           : undefined,
       aside: {

@@ -1,6 +1,7 @@
 import { RouteRecordRaw } from 'vue-router';
 
 const PageServiceRecettes = () => import('@/components/pages/PagesService/PageServiceRecettes.vue');
+const PageServiceRecetteDetail = () => import('@/components/pages/PagesService/PageServiceRecetteDetail.vue');
 const PageServicePresDeChezNous = () => import('@/components/pages/PagesService/PageServicePresDeChezNous.vue');
 const PageServicePresDeChezNousDetail = () =>
   import('@/components/pages/PagesService/PageServicePresDeChezNousDetail.vue');
@@ -8,6 +9,7 @@ const PageServiceFruitsEtLegumes = () => import('@/components/pages/PagesService
 
 export enum RouteServiceName {
   RECETTES = 'recettes',
+  RECETTES_DETAIL = 'recettes-detail',
   PROXIMITE = 'pres-de-chez-nous',
   PROXIMITE_DETAIL = 'pres-de-chez-nous-detail',
   SERVICE_FRUITS_ET_LEGUMES = 'fruits-et-legumes',
@@ -15,6 +17,7 @@ export enum RouteServiceName {
 
 export enum RouteServicePath {
   RECETTES = '/service/recettes',
+  RECETTES_DETAIL = '/service/recettes/:id',
   PROXIMITE = '/service/pres-de-chez-nous',
   PROXIMITE_DETAIL = '/service/pres-de-chez-nous/:id',
   SERVICE_FRUITS_ET_LEGUMES = '/service/fruits-et-legumes',
@@ -27,6 +30,14 @@ const serviceRoutes: RouteRecordRaw[] = [
     component: PageServiceRecettes,
     meta: {
       title: 'Service : Recettes',
+    },
+  },
+  {
+    path: RouteServicePath.RECETTES_DETAIL,
+    name: RouteServiceName.RECETTES_DETAIL,
+    component: PageServiceRecetteDetail,
+    meta: {
+      title: 'Detail de la recette',
     },
   },
   {
