@@ -48,12 +48,12 @@
   import { LMap, LMarker, LTileLayer } from '@vue-leaflet/vue-leaflet';
   import { onMounted, ref } from 'vue';
   import { useRoute } from 'vue-router';
-  import { ServiceRecherchePresDeChezNousAxios } from '@/domaines/serviceRecherche/adapters/serviceRecherchePresDeChezNous.repository.axios';
+  import { ServiceRecherchePresDeChezNousAxios } from '@/domaines/serviceRecherche/presDeChezNous/adapters/serviceRecherchePresDeChezNous.repository.axios';
   import {
     DetailServiceViewModel,
     ServiceRecherchePresDeChezNousPresenterDetailImpl,
-  } from '@/domaines/serviceRecherche/adapters/serviceRecherchePresDeChezNousDetail.presenter.impl';
-  import { RecupererDetailServicePresDeChezNousUsecase } from '@/domaines/serviceRecherche/recupererDetailServicePresDeChezNous.usecase';
+  } from '@/domaines/serviceRecherche/presDeChezNous/adapters/serviceRecherchePresDeChezNousDetail.presenter.impl';
+  import { RecupererDetailServicePresDeChezNousUsecase } from '@/domaines/serviceRecherche/presDeChezNous/recupererDetailServicePresDeChezNous.usecase';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const isLoading = ref<boolean>(true);

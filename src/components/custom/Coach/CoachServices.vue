@@ -16,9 +16,9 @@
   import {
     ServiceRecherchePresenterImpl,
     ServicesRechercheViewModel,
-  } from '@/domaines/serviceRecherche/adapters/serviceRecherche.presenter.impl';
-  import { ServiceRechercheRepositoryAxios } from '@/domaines/serviceRecherche/adapters/serviceRecherche.repository.axios';
-  import { RecupererServicesRecherchePageAccueilUsecase } from '@/domaines/serviceRecherche/recupererServicesRecherchePageAccueil.usecase';
+  } from '@/domaines/serviceRecherche/catalogue/adapters/serviceRecherche.presenter.impl';
+  import { ServiceRechercheRepositoryAxios } from '@/domaines/serviceRecherche/catalogue/adapters/serviceRecherche.repository.axios';
+  import { RecupererServicesRecherchePageAccueilUsecase } from '@/domaines/serviceRecherche/catalogue/recupererServicesRecherchePageAccueil.usecase';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const services = ref<ServicesRechercheViewModel>();

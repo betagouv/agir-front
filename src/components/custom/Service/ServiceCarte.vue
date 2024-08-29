@@ -37,7 +37,7 @@
 </template>
 
 <script setup lang="ts">
-  import { SuggestionServiceViewModel } from '@/domaines/serviceRecherche/adapters/serviceRecherchePresDeChezNous.presenter.impl';
+  import { SuggestionServiceViewModel } from '@/domaines/serviceRecherche/presDeChezNous/adapters/serviceRecherchePresDeChezNous.presenter.impl';
 
   const props = defineProps<{
     suggestionsServiceViewModel: SuggestionServiceViewModel;

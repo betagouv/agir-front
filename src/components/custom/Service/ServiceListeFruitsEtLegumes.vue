@@ -12,7 +12,7 @@
 </template>
 
 <script setup lang="ts">
-  import { ServiceFruitsEtLegumesDetailViewModel } from '@/domaines/serviceRecherche/adapters/serviceRechercheFruitsEtLegumes.presenter.impl';
+  import { ServiceFruitsEtLegumesDetailViewModel } from '@/domaines/serviceRecherche/fruitsEtLegumes/adapters/serviceRechercheFruitsEtLegumes.presenter.impl';
 
   defineProps<{ titre: string; sousTitre: string; liste: ServiceFruitsEtLegumesDetailViewModel[] }>();
 </script>

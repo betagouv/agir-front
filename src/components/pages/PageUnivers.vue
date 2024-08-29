@@ -91,9 +91,9 @@
   import {
     ServicesRechercheViewModel,
     ServiceRecherchePresenterImpl,
-  } from '@/domaines/serviceRecherche/adapters/serviceRecherche.presenter.impl';
-  import { ServiceRechercheRepositoryAxios } from '@/domaines/serviceRecherche/adapters/serviceRecherche.repository.axios';
-  import { RecupererServicesRechercheParUniversUsecase } from '@/domaines/serviceRecherche/recupererServicesRechercheParUnivers.usecase';
+  } from '@/domaines/serviceRecherche/catalogue/adapters/serviceRecherche.presenter.impl';
+  import { ServiceRechercheRepositoryAxios } from '@/domaines/serviceRecherche/catalogue/adapters/serviceRecherche.repository.axios';
+  import { RecupererServicesRechercheParUniversUsecase } from '@/domaines/serviceRecherche/catalogue/recupererServicesRechercheParUnivers.usecase';
   import { ThematiqueRepositoryAxios } from '@/domaines/thematiques/adapters/thematique.repository.axios';
   import {
     ThematiquesPresenterImpl,
