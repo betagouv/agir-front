@@ -1,8 +1,10 @@
 import { ServiceRechercheViewModelBase } from '@/domaines/serviceRecherche/adapters/serviceRechercheViewModel';
 import { ServiceRecherchePresDeChezNousPresenter } from '@/domaines/serviceRecherche/ports/serviceRecherchePresDeChezNous.presenter';
 import { ServiceRecherchePresDeChezNous } from '@/domaines/serviceRecherche/recupererServicePresDeChezNous.usecase';
+import { RouteServiceName } from '@/router/services/routes';
 
 export interface SuggestionServiceViewModel {
+  id: string;
   titre: string;
   img: string;
   description?: string;
@@ -12,6 +14,7 @@ export interface SuggestionServiceViewModel {
     label: string;
     style: string;
   };
+  to: { name: string; params: { id: string } } | null;
 }
 
 export interface ServiceRecherchePresDeChezNousViewModelAvecResultats extends ServiceRechercheViewModelBase {
@@ -51,6 +54,7 @@ export class ServiceRecherchePresDeChezNousPresenterImpl implements ServiceReche
     if (serviceRecherche.suggestions.length > 0) {
       serviceRechercheViewModel = {
         suggestions: serviceRecherche.suggestions.map(elem => ({
+          id: elem.id,
           titre: elem.titre,
           description: elem.adresse,
           nombreMiseEnFavoris: elem.nombreMiseEnFavoris,
@@ -61,13 +65,16 @@ export class ServiceRecherchePresDeChezNousPresenterImpl implements ServiceReche
                 style: 'background--caramel text--background-caramel',
               }
             : undefined,
+          to: { name: RouteServiceName.PROXIMITE_DETAIL, params: { id: elem.id } },
         })),
         favoris: serviceRecherche.favoris
           ? serviceRecherche.favoris.map(elem => ({
+              id: elem.id,
               titre: elem.titre,
               description: elem.adresse,
               nombreMiseEnFavoris: elem.nombreMiseEnFavoris,
               img: elem.image ? elem.image : '/ic_services.svg',
+              to: { name: RouteServiceName.PROXIMITE_DETAIL, params: { id: elem.id } },
             }))
           : undefined,
         aucunResultat: false,

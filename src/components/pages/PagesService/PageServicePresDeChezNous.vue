@@ -29,7 +29,7 @@
               :services-recherche-favoris-view-model="serviceRecherchePresDeChezNousViewModel.favoris"
             />
           </section>
-          <section class="fr-py-6w">
+          <section>
             <h2>Suggestions</h2>
             <ServiceListeCarte :suggestions-service-view-model="serviceRecherchePresDeChezNousViewModel.suggestions" />
           </section>
