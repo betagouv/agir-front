@@ -4,6 +4,7 @@ import {
   RecettePresenterImpl,
   RecetteViewModel,
 } from '../../../src/domaines/serviceRecherche/recettes/adapters/recette.presenter.impl';
+import { expect, describe, it } from 'vitest';
 
 describe("Fichier de tests concernant le détail d'une recette", () => {
   it("En donnant l'id utilisateur, et l'id de la recette doit récuperer les détails", async () => {

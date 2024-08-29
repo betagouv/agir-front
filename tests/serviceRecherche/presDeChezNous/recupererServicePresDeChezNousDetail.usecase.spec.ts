@@ -1,15 +1,10 @@
 import { ServiceRecherchePresDeChezNousRepositoryMock } from './adapters/serviceRecherchePresDeChezNous.repository.mock';
-import { RecupererServicePresDeChezNousUsecase } from '../../../src/domaines/serviceRecherche/presDeChezNous/recupererServicePresDeChezNous.usecase';
-import {
-  ServiceRecherchePresDeChezNousPresenterImpl,
-  ServiceRecherchePresDeChezNousViewModel,
-} from '../../../src/domaines/serviceRecherche/presDeChezNous/adapters/serviceRecherchePresDeChezNous.presenter.impl';
-import { RouteServiceName } from '../../../src/router/services/routes';
 import { RecupererDetailServicePresDeChezNousUsecase } from '../../../src/domaines/serviceRecherche/presDeChezNous/recupererDetailServicePresDeChezNous.usecase';
 import {
   DetailServiceViewModel,
   ServiceRecherchePresDeChezNousPresenterDetailImpl,
 } from '../../../src/domaines/serviceRecherche/presDeChezNous/adapters/serviceRecherchePresDeChezNousDetail.presenter.impl';
+import { expect, describe, it } from 'vitest';
 
 describe('Fichier de tests concernant le détail du Service Près de chez nous ', () => {
   it("en donnant l'id d'un utilisateur et d'une entrée du service près de chez nous, renvoie les informations de détail", async () => {
