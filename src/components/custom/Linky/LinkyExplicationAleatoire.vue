@@ -43,6 +43,7 @@
     }, 500);
   };
 </script>
+
 <style scoped>
   .fade-enter-active,
   .fade-leave-active {

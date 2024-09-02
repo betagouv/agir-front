@@ -1,5 +1,5 @@
-import { InformationCompteur } from '../obtenirInformationCompteur.usecase';
-import { ServiceRechercheViewModelBase } from '@/domaines/serviceRecherche/adapters/serviceRechercheViewModel';
+import { ServiceRechercheViewModelBase } from '@/domaines/serviceRecherche/catalogue/adapters/serviceRechercheViewModel';
+import { InformationCompteur } from '@/domaines/serviceRecherche/linky/obtenirInformationCompteur.usecase';
 import { ServiceRechercheLinkyPresenter } from '@/domaines/serviceRecherche/linky/ports/serviceRechercheLinky.presenter';
 
 export interface ServiceLinkyViewModel extends ServiceRechercheViewModelBase {

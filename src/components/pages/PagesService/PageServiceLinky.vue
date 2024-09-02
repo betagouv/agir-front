@@ -14,9 +14,7 @@
           :prm="serviceLinkyViewModel.informationCompteur.prm"
         />
         <LinkyEnAttente v-else-if="!serviceLinkyViewModel.informationCompteur.estFonctionnel" />
-        <div v-else-if="serviceLinkyViewModel.informationCompteur.estActif">
-          <!-- METTRE ICI COMPOSANT GRAPHIQUE AVEC USECASE DIRECTEMENT A L'INTERIEUR -->
-        </div>
+        <LinkyGraphique v-else-if="serviceLinkyViewModel.informationCompteur.estActif" />
       </PageServiceTemplate>
     </div>
   </div>
@@ -26,6 +24,7 @@
   import { onMounted, ref } from 'vue';
   import LinkyConfiguration from '@/components/custom/Linky/LinkyConfiguration.vue';
   import LinkyEnAttente from '@/components/custom/Linky/LinkyEnAttente.vue';
+  import LinkyGraphique from '@/components/custom/Linky/LinkyGraphique.vue';
   import PageServiceTemplate from '@/components/custom/Service/PageServiceTemplate.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import {

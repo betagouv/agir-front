@@ -1,9 +1,7 @@
 <template>
   <section>
     <p class="text--center">
-      <!-- !! IMAGE A METTRE ICI !! FORMAT MAQUETTE PNG PAS BON -->
-      <!-- <img class="display-block fr-mx-auto fr-mb-2w" src="XXX" height="XXX" alt="" /> -->
-      <!-- !! IMAGE A METTRE ICI !! -->
+      <img class="display-block fr-mx-auto fr-mb-2w" src="/ic_linky_en_attente.svg" height="130" alt="" />
       Votre service est en cours de connexion.<br />
       <strong>Revenez plus tard</strong> pour consulter vos données.
     </p>
