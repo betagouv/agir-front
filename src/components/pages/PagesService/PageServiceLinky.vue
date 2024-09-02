@@ -10,7 +10,7 @@
       <h1 class="fr-h2">Suivre ma consommation <span class="text--bleu">d’électricité</span></h1>
       <PageServiceTemplate :aside="serviceLinkyViewModel.aside">
         <LinkyConfiguration
-          v-if="serviceLinkyViewModel.informationCompteur.estConfigure"
+          v-if="!serviceLinkyViewModel.informationCompteur.estConfigure"
           :prm="serviceLinkyViewModel.informationCompteur.prm"
         />
         <LinkyEnAttente v-else-if="!serviceLinkyViewModel.informationCompteur.estFonctionnel" />
