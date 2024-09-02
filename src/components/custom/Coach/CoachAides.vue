@@ -5,7 +5,7 @@
       >&nbsp;💶
     </h3>
     <p>Retrouvez un ensemble d'aides locales et nationales</p>
-    <ul class="list-style-none fr-mb-2w">
+    <ul class="list-style-none fr-pl-0">
       <li v-for="aide in aidesNonGroupees" :key="aide.id">
         <AideLink :aide="aide" />
       </li>

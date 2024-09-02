@@ -1,7 +1,7 @@
 <template>
   <div>
     <h3>Mes services</h3>
-    <ul class="list-style-none fr-mt-6w">
+    <ul class="list-style-none fr-mt-6w fr-pl-0">
       <li v-for="service in services?.services" :key="service.label" class="fr-mb-2w">
         <ServiceLink :url="service.url" :label="service.label" :picto="service.picto" :legende="service.legende" />
       </li>

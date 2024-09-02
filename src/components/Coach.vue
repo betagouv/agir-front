@@ -44,10 +44,9 @@
     </div>
     <div class="fr-container">
       <h2 class="fr-h2 text--center fr-mb-5w">Les outils pour vous aider</h2>
-      <div class="fr-grid-row flex-space-between">
-        <CoachAides class="fr-col-5" />
-        <div class="headerDivider1" />
-        <CoachServices class="fr-col-5" />
+      <div class="fr-grid-row flex-space-between section--outils-separator">
+        <CoachAides class="fr-col-lg-5 fr-col-12 fr-mb-4w" />
+        <CoachServices class="fr-col-lg-5 fr-col-12" />
       </div>
     </div>
   </section>
@@ -206,8 +205,16 @@
     border-radius: 50%;
   }
 
-  .headerDivider1 {
-    border-left: 1px solid #d8e0e0;
-    margin-top: 100px;
+  @media (min-width: 62em) {
+    .section--outils-separator::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 1px;
+      height: 60%;
+      background-color: #d8e0e0;
+      transform: translateY(50%);
+    }
   }
 </style>
