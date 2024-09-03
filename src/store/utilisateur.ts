@@ -33,9 +33,6 @@ export const utilisateurStore = defineStore('utilisateur', {
     },
     score: {
       points: 0,
-      niveau: 0,
-      nombreDePointsDansLeNiveau: 0,
-      nombreDePointsDuNiveau: 0,
     },
     tracking: {
       matomoEstInactif: false,
