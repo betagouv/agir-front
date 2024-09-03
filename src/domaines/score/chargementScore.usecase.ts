@@ -10,9 +10,6 @@ export class ChargementScoreUsecase {
     const score = await this.scoreRepository.getScore(idUtilisateur);
     this.sessionRepostory.sauvegarderScore({
       points: score.points,
-      niveau: score.niveau,
-      nombreDePointsDansLeNiveau: score.nombreDePointsDansLeNiveau,
-      nombreDePointsDuNiveau: score.nombreDePointsDuNiveau,
     });
   }
 }

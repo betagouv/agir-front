@@ -1,7 +1,4 @@
 <template>
-  <div class="tag__progression tag__progression--niveau fr-text--bold">
-    {{ score.niveau }} <img width="16" src="/ic_star.svg" alt="niveau" />
-  </div>
   <router-link
     :to="{ name: RouteClassementName.CLASSEMENT }"
     :aria-current="route.name === RouteClassementName.CLASSEMENT ? 'page' : null"
