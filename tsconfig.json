@@ -26,12 +26,9 @@
     },
     "esModuleInterop": true,
     "types": ["vitest/globals"],
-    "experimentalDecorators": true,
+    "experimentalDecorators": true
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "tests/components/*.ts", "tests/*/*.ts"],
-  "exclude": [
-    "node_modules",
-    "dist",
-  ],
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "tests/components/*.ts", "tests/**/*.ts"],
+  "exclude": ["node_modules", "dist"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

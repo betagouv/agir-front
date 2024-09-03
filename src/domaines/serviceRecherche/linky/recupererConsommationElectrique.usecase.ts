@@ -1,3 +1,4 @@
+import { ServiceRechercheConsommationLinkyPresenter } from '@/domaines/serviceRecherche/linky/ports/serviceRechercheConsommationLinky.presenter';
 import { ServiceRechercheLinkyRepository } from '@/domaines/serviceRecherche/linky/ports/serviceRechercheLinky.repository';
 
 export interface ConsommationElectrique {
@@ -18,8 +19,9 @@ export interface ConsommationElectriqueGlobal {
 export class RecupererConsommationElectriqueUsecase {
   constructor(private serviceRechercheLinkyRepository: ServiceRechercheLinkyRepository) {}
 
-  async execute(idUtilisateur: string) {
-    await this.serviceRechercheLinkyRepository.recupererConsommationElectrique(idUtilisateur);
-    // New presenter à créer pour graphique
+  async execute(idUtilisateur: string, presenter: ServiceRechercheConsommationLinkyPresenter) {
+    const consommationElectrique =
+      await this.serviceRechercheLinkyRepository.recupererConsommationElectrique(idUtilisateur);
+    presenter.presente(consommationElectrique);
   }
 }

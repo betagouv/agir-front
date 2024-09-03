@@ -4,7 +4,6 @@ import {
   ServiceRechercheFruitsEtLegumesPresenterImpl,
 } from '../../../src/domaines/serviceRecherche/fruitsEtLegumes/adapters/serviceRechercheFruitsEtLegumes.presenter.impl';
 import { ServiceRechercheFruitsEtLegumesRepositoryMock } from './adapters/serviceRechercheFruitsEtLegumes.repository.mock';
-import { expect, describe, it } from 'vitest';
 
 describe('Fichier de tests concernant la récuperation du service Fruits et Légumes', () => {
   it("en donnant l'id d'un utilisateur, renvoie la liste des fruits et légumes du mois triès par odre alphabétique", async () => {
