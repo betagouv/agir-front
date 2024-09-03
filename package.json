@@ -51,7 +51,7 @@
     "jsdom": "24.1.1",
     "jsdom-global": "3.0.2",
     "lighthouse": "^11.7.1",
-    "lint-staged": "15.2.9",
+    "lint-staged": "15.2.10",
     "playwright-lighthouse": "^4.0.0",
     "prettier": "3.3.3",
     "release-please": "16.12.0",
