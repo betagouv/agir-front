@@ -17,10 +17,10 @@ export class ServiceRechercheRecettesMock implements ServiceRechercheRecettesRep
   }
 
   recupererService(_idUtilisateur: string, _idService: string): Promise<ServiceRechercheRecettes> {
-    return Promise.resolve(this.serviceRechercheARetourner);
+    return Promise.resolve(this.serviceRechercheARetourner!);
   }
 
   recupererDetailRecette(idUtilisateur: string, idRecette: string): Promise<Recette> {
-    return Promise.resolve(this.recetteARetourner);
+    return Promise.resolve(this.recetteARetourner!);
   }
 }
