@@ -13,7 +13,6 @@ export class MettreAJourProfileUtilisateurUsecase {
       id: compteUtilisateurInput.id,
       abonnementTransport: compteUtilisateurInput.abonnementTransport,
       nom: compteUtilisateurInput.nom,
-      mail: compteUtilisateurInput.mail,
       prenom: compteUtilisateurInput.prenom,
       revenuFiscal: compteUtilisateurInput.revenuFiscal,
       nombreDePartsFiscales: compteUtilisateurInput.nombreDePartsFiscales,
@@ -23,7 +22,6 @@ export class MettreAJourProfileUtilisateurUsecase {
       id: compteUtilisateurInput.id,
       prenom: compteUtilisateurInput.prenom,
       nom: compteUtilisateurInput.nom,
-      mail: compteUtilisateurInput.mail,
     });
   }
 }

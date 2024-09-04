@@ -12,7 +12,13 @@
             </p>
           </legend>
           <div class="fr-fieldset__element">
-            <InputText label="Votre prénom" name="utilisateur-prenom" v-model="onboardingPostCreationCompte().prenom" />
+            <InputText
+              label="Votre prénom"
+              name="utilisateur-prenom"
+              v-model="onboardingPostCreationCompte().prenom"
+              :erreur="champsPrenomStatus"
+              @blur="onValidationPrenom"
+            />
           </div>
         </fieldset>
         <button class="fr-btn fr-mr-4w" :disabled="onboardingPostCreationCompte().prenom.length == 0">Continuer</button>
@@ -22,12 +28,25 @@
 </template>
 
 <script setup lang="ts">
+  import { ref } from 'vue';
   import InputText from '@/components/dsfr/InputText.vue';
+  import { validationPrenom } from '@/components/validations/validationsChampsFormulaire';
   import router from '@/router';
   import { RouteCompteName } from '@/router/compte/routeCompteName';
   import { onboardingPostCreationCompte } from '@/store/onboardingPostCreationCompte';
 
   const validerLaReponse = () => {
+    if (!onValidationPrenom()) return;
     router.push({ name: RouteCompteName.POST_CREATION_COMPTE_ETAPE_2 });
   };
+  const champsPrenomStatus = ref({ message: '', afficher: false });
+
+  function onValidationPrenom(): boolean {
+    if (!validationPrenom(onboardingPostCreationCompte().prenom)) {
+      champsPrenomStatus.value = { message: 'Le prénom doit contenir uniquement des lettres', afficher: true };
+      return false;
+    }
+    champsPrenomStatus.value = { message: '', afficher: false };
+    return true;
+  }
 </script>
