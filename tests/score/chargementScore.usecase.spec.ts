@@ -9,9 +9,6 @@ describe('Fichier de test du usecase de chargement du score', () => {
     const sauvergarderScoreSessionRepositorySpy = new SauvergarderScoreSessionRepositorySpy();
     const chargementScoreUsecase = new ChargementScoreUsecase(
       new MockScoreRepository({
-        niveau: 1,
-        nombreDePointsDuNiveau: 100,
-        nombreDePointsDansLeNiveau: 25,
         points: 10,
       }),
       sauvergarderScoreSessionRepositorySpy,
@@ -24,9 +21,6 @@ describe('Fichier de test du usecase de chargement du score', () => {
 
     expect(sauvergarderScoreSessionRepositorySpy.score).toStrictEqual<Score>({
       points: 10,
-      niveau: 1,
-      nombreDePointsDansLeNiveau: 25,
-      nombreDePointsDuNiveau: 100,
     });
   });
 });

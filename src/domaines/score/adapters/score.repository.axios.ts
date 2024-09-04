@@ -16,9 +16,6 @@ export class ScoreRepositoryAxios implements ScoreRepository {
 
     return {
       points: response.data.points,
-      niveau: response.data.niveau,
-      nombreDePointsDansLeNiveau: response.data.current_points_in_niveau,
-      nombreDePointsDuNiveau: response.data.point_target_in_niveau,
     };
   }
 }

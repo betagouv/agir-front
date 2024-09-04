@@ -15,9 +15,6 @@ export class InjectUtilisateur {
       valeurBilanCarbone: { bilan: '', details: [], valeurMax: 0 },
       score: {
         points: 0,
-        niveau: 1,
-        nombreDePointsDansLeNiveau: 10,
-        nombreDePointsDuNiveau: 100,
       },
       tracking: {
         matomoEstInactif: true,
