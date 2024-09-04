@@ -3,13 +3,13 @@ import { InformationCompteur } from '@/domaines/serviceRecherche/linky/obtenirIn
 import { ConsommationElectriqueGlobal } from '@/domaines/serviceRecherche/linky/recupererConsommationElectrique.usecase';
 
 export class ServiceRechercheConsommationLinkyRepositoryMock implements ServiceRechercheLinkyRepository {
-  constructor(private consommationElectriqueGlobal: ConsommationElectriqueGlobal) {}
+  constructor(private consommationElectriqueGlobalARetourner: ConsommationElectriqueGlobal) {}
 
   recupererInformationCompteur(_idUtilisateur: string): Promise<InformationCompteur> {
     throw new Error('Method not implemented.');
   }
 
   recupererConsommationElectrique(idUtilsateur: string): Promise<ConsommationElectriqueGlobal> {
-    return Promise.resolve(this.consommationElectriqueGlobal);
+    return Promise.resolve(this.consommationElectriqueGlobalARetourner);
   }
 }

@@ -6,10 +6,10 @@ import {
 
 interface GraphiqueConsommationLinkyViewModel {
   libelles: string[];
-  valeur_courante: number[];
-  valeur_precedente: number[];
-  valeur_courante_transcription: string[];
-  valeur_precedente_transcription: string[];
+  valeurCourante: number[];
+  valeurPrecedente: number[];
+  valeurCouranteTranscription: string[];
+  valeurPrecedenteTranscription: string[];
 }
 
 export interface ConsommationLinkyViewModel {
@@ -56,10 +56,10 @@ export class ServiceRechercheConsommationLinkyPresenterImpl implements ServiceRe
   ): GraphiqueConsommationLinkyViewModel {
     const graphique: GraphiqueConsommationLinkyViewModel = {
       libelles: [],
-      valeur_precedente: [],
-      valeur_precedente_transcription: [],
-      valeur_courante: [],
-      valeur_courante_transcription: [],
+      valeurPrecedente: [],
+      valeurPrecedenteTranscription: [],
+      valeurCourante: [],
+      valeurCouranteTranscription: [],
     };
 
     for (const [index, consommation] of data.entries()) {
@@ -67,11 +67,11 @@ export class ServiceRechercheConsommationLinkyPresenterImpl implements ServiceRe
 
       if (index % 2 === 0) {
         graphique.libelles.push(estAnnuelle ? consommation.mois : this.buildDate(consommation.date));
-        graphique.valeur_precedente.push(Number(valeurFormatee));
-        graphique.valeur_precedente_transcription.push(`${valeurFormatee} kWh`);
+        graphique.valeurPrecedente.push(Number(valeurFormatee));
+        graphique.valeurPrecedenteTranscription.push(`${valeurFormatee} kWh`);
       } else {
-        graphique.valeur_courante.push(Number(valeurFormatee));
-        graphique.valeur_courante_transcription.push(`${valeurFormatee} kWh`);
+        graphique.valeurCourante.push(Number(valeurFormatee));
+        graphique.valeurCouranteTranscription.push(`${valeurFormatee} kWh`);
       }
     }
 

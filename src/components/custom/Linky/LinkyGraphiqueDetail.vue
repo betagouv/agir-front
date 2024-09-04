@@ -23,12 +23,12 @@
           {
             label: 'année précédente',
             backgroundColor: consommationLinkyViewModel.couleurValeur1,
-            data: consommationLinkyViewModel.graphique.valeur_precedente,
+            data: consommationLinkyViewModel.graphique.valeurPrecedente,
           },
           {
             label: 'année courante',
             backgroundColor: consommationLinkyViewModel.couleurValeur2,
-            data: consommationLinkyViewModel.graphique.valeur_courante,
+            data: consommationLinkyViewModel.graphique.valeurCourante,
           },
         ],
       }"
@@ -45,8 +45,8 @@
       :titre="consommationLinkyViewModel.titre"
       :titres-donnees="['', ...consommationLinkyViewModel.graphique.libelles]"
       :donnees="[
-        ['Année précédente', ...consommationLinkyViewModel.graphique.valeur_precedente_transcription],
-        ['Année courante', ...consommationLinkyViewModel.graphique.valeur_courante_transcription],
+        ['Année précédente', ...consommationLinkyViewModel.graphique.valeurPrecedenteTranscription],
+        ['Année courante', ...consommationLinkyViewModel.graphique.valeurCouranteTranscription],
       ]"
     />
   </Transcription>
