@@ -1,5 +1,9 @@
 <template>
   <div>
+    <p class="fr-text--bold">
+      <span class="fr-icon-lightbulb-fill text--bleu" aria-hidden="true"></span>
+      Pour vous donner une idée
+    </p>
     <Transition name="fade">
       <p v-if="afficherAction">{{ infoActionQuotidienneAffichee }}</p>
     </Transition>
@@ -39,6 +43,7 @@
     }, 500);
   };
 </script>
+
 <style scoped>
   .fade-enter-active,
   .fade-leave-active {

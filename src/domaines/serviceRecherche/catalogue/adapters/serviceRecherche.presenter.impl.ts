@@ -25,7 +25,7 @@ export class ServiceRecherchePresenterImpl implements ServiceRecherchePresenter 
 
   presente(serviceRecherche: ServicesRecherche): void {
     const urls = {
-      [ServiceIdInterne.FRUITS_ET_LEGUMES]: RouteServiceName.SERVICE_FRUITS_ET_LEGUMES,
+      [ServiceIdInterne.FRUITS_ET_LEGUMES]: RouteServiceName.FRUITS_ET_LEGUMES,
       [ServiceIdInterne.PRES_DE_CHEZ_VOUS]: RouteServiceName.PROXIMITE,
       [ServiceIdInterne.RECETTES]: RouteServiceName.RECETTES,
     };

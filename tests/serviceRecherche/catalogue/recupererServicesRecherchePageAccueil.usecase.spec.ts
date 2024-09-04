@@ -5,7 +5,6 @@ import {
 import { ServiceRechercheRepositoryMock } from './adapters/serviceRecherche.repository.mock';
 import { RouteServiceName } from '../../../src/router/services/routes';
 import { RecupererServicesRecherchePageAccueilUsecase } from '../../../src/domaines/serviceRecherche/catalogue/recupererServicesRecherchePageAccueil.usecase';
-import { expect, describe, it } from 'vitest';
 
 describe("Fichier de tests concernant la récupération des services pour la page d'Accueil", () => {
   it("en donnant l'id d'un utilisateur renvoie les services associées à la page d'accueil", async () => {
@@ -53,7 +52,7 @@ describe("Fichier de tests concernant la récupération des services pour la pag
             label: 'Fruits et légumes de saison',
             legende: 'juillet',
             picto: 'iconUrlFruits',
-            url: RouteServiceName.SERVICE_FRUITS_ET_LEGUMES,
+            url: RouteServiceName.FRUITS_ET_LEGUMES,
           },
           {
             estServiceExterne: false,

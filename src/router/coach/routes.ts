@@ -1,6 +1,5 @@
 const Coach = () => import('@/components/Coach.vue');
 const PageBibliotheque = () => import('@/components/pages/PageBibliotheque.vue');
-const PageLinky = () => import('@/components/pages/PageLinky.vue');
 
 import { RouteRecordRaw } from 'vue-router';
 import { RouteCoachName } from '@/router/coach/routeCoachName';
@@ -8,7 +7,6 @@ import { RouteCoachName } from '@/router/coach/routeCoachName';
 export enum RouteCoachPath {
   COACH = '/agir',
   SERVICES = 'services',
-  SERVICES_LINKY = '/agir/services/linky',
   SUIVI_DU_JOUR = 'suivi-du-jour',
   BIBLIOTHEQUE = 'bibliotheque',
 }
@@ -23,14 +21,6 @@ const coachRoutes: RouteRecordRaw[] = [
         component: Coach,
         meta: {
           title: 'Agir',
-        },
-      },
-      {
-        path: RouteCoachPath.SERVICES_LINKY,
-        name: RouteCoachName.SERVICES_LINKY,
-        component: PageLinky,
-        meta: {
-          title: 'Service Linky',
         },
       },
       {
