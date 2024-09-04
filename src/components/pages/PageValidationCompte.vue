@@ -49,7 +49,7 @@
     validerCompteUtilisateurUsecase
       .execute(email, code.value)
       .then(() => {
-        router.push({ name: RouteCompteName.POST_CREATION_COMPTE_DISCLAIMER });
+        router.push({ name: RouteCompteName.POST_CREATION_COMPTE_ETAPE_1 });
       })
       .catch(reason => {
         afficherAlerte('error', 'Erreur lors de la validation du compte', reason.data.message);
