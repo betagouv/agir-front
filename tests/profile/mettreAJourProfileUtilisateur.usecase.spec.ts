@@ -3,17 +3,19 @@ import { Utilisateur } from '@/domaines/authentification/ports/utilisateur.repos
 import { SpySauvegarderUtilisateurSessionRepository } from '../compte/sessionRepository.sauvegarderUtilisateur.spy';
 import { ProfileUtilisateurViewModel } from '@/domaines/profileUtilisateur/adapters/profileUtilisateur.presenter.impl';
 import { ProfileUtilisateurRepository } from '@/domaines/profileUtilisateur/ports/profileUtilisateur.repository';
-import { ProfileUtilisateur } from '@/domaines/profileUtilisateur/chargerProfileUtilisateur.usecase';
+import {
+  ProfileUtilisateur,
+  ProfileUtilisateurAMettreAJour,
+} from '@/domaines/profileUtilisateur/chargerProfileUtilisateur.usecase';
 
 class SpyProfileUtilisateurRepository implements ProfileUtilisateurRepository {
-  get profileUtilisateur(): ProfileUtilisateur {
-    return this._profileUtilisateur;
+  get profileUtilisateuraMettreAJourArgs(): ProfileUtilisateurAMettreAJour {
+    return this._profileUtilisateuraMettreAJourArgs;
   }
-  private _profileUtilisateur: ProfileUtilisateur = {
+  private _profileUtilisateuraMettreAJourArgs: ProfileUtilisateurAMettreAJour = {
     id: '',
     nom: '',
     prenom: '',
-    mail: '',
     revenuFiscal: 0,
     nombreDePartsFiscales: 0,
     abonnementTransport: false,
@@ -22,8 +24,9 @@ class SpyProfileUtilisateurRepository implements ProfileUtilisateurRepository {
   getProfileUtilisateur(idUtilisateur: string): Promise<ProfileUtilisateur> {
     throw new Error('Method not implemented.');
   }
-  mettreAjour(profileUtilisateur: ProfileUtilisateur) {
-    this._profileUtilisateur = profileUtilisateur;
+  mettreAjour(profileUtilisateur: ProfileUtilisateurAMettreAJour): Promise<void> {
+    this._profileUtilisateuraMettreAJourArgs = profileUtilisateur;
+    return Promise.resolve();
   }
 }
 
@@ -32,7 +35,9 @@ describe('Fichier de tests concernant la mise à jour du profile utilisateur', (
     // GIVEN
     // WHEN
     const repository = new SpyProfileUtilisateurRepository();
-    const sessionRepository = SpySauvegarderUtilisateurSessionRepository.avecOnBoardingRealise();
+    const sessionRepository = SpySauvegarderUtilisateurSessionRepository.avecOnBoardingRealise({
+      mail: 'mail@exemple.com',
+    });
     const usecase = new MettreAJourProfileUtilisateurUsecase(repository, sessionRepository);
     const viewModelInput: ProfileUtilisateurViewModel = {
       id: '1',
@@ -46,10 +51,9 @@ describe('Fichier de tests concernant la mise à jour du profile utilisateur', (
     };
     await usecase.execute(viewModelInput);
     // THEN
-    expect(repository.profileUtilisateur).toStrictEqual<ProfileUtilisateur>({
+    expect(repository.profileUtilisateuraMettreAJourArgs).toStrictEqual<ProfileUtilisateurAMettreAJour>({
       id: '1',
       nom: 'Dorian',
-      mail: 'mail@exemple.com',
       prenom: 'John',
       revenuFiscal: 10000,
       nombreDePartsFiscales: 1,
