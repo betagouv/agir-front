@@ -3,6 +3,7 @@
     v-if="serviceConsommationLinkyViewModel"
     label-aria="Sélection de votre intervalle de consommation électrique"
     :tab-panel="['Par jour', 'Par mois']"
+    class="fr-mb-2w"
   >
     <template v-slot:tab-0>
       <LinkyGraphiqueDetail :consommationLinkyViewModel="serviceConsommationLinkyViewModel.consommationQuatorzeJours" />
@@ -11,10 +12,15 @@
       <LinkyGraphiqueDetail :consommationLinkyViewModel="serviceConsommationLinkyViewModel.consommationAnnuelle" />
     </template>
   </Onglet>
+  <CarteInfo>
+    <LinkyExplicationAleatoire />
+  </CarteInfo>
 </template>
 
 <script setup lang="ts">
   import { onMounted, ref } from 'vue';
+  import CarteInfo from '@/components/custom/CarteInfo.vue';
+  import LinkyExplicationAleatoire from '@/components/custom/Linky/LinkyExplicationAleatoire.vue';
   import LinkyGraphiqueDetail from '@/components/custom/Linky/LinkyGraphiqueDetail.vue';
   import Onglet from '@/components/dsfr/Onglet.vue';
   import {

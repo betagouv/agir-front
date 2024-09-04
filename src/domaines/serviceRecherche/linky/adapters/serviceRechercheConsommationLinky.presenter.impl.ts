@@ -63,7 +63,7 @@ export class ServiceRechercheConsommationLinkyPresenterImpl implements ServiceRe
     };
 
     for (const [index, consommation] of data.entries()) {
-      const valeurFormatee = Math.round(consommation.valeur);
+      const valeurFormatee = Math.round(consommation.valeur) / 1000;
 
       if (index % 2 === 0) {
         graphique.libelles.push(estAnnuelle ? consommation.mois : this.buildDate(consommation.date));

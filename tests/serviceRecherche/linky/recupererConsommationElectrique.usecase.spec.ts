@@ -13,25 +13,25 @@ describe('Fichier de tests concernant la récupération de la consommation élec
         commentaires: ['commentaire 1', 'commentaire 2'],
         data: [
           {
-            valeur: 1,
+            valeur: 1000,
             mois: 'janvier',
             annee: '2023',
             date: '2023-01-01T12:00:00.000Z',
           },
           {
-            valeur: 1,
+            valeur: 1234,
             mois: 'janvier',
             annee: '2024',
             date: '2024-01-01T12:00:00.000Z',
           },
           {
-            valeur: 2,
+            valeur: 2000,
             mois: 'fevrier',
             annee: '2023',
             date: '2023-02-01T12:00:00.000Z',
           },
           {
-            valeur: 2,
+            valeur: 2000,
             mois: 'fevrier',
             annee: '2024',
             date: '2024-02-01T12:00:00.000Z',
@@ -42,25 +42,25 @@ describe('Fichier de tests concernant la récupération de la consommation élec
         commentaires: ['commentaire 1', 'commentaire 2'],
         data: [
           {
-            valeur: 1,
+            valeur: 1000,
             mois: 'janvier',
             annee: '2023',
             date: '2023-01-01T12:00:00.000Z',
           },
           {
-            valeur: 1,
+            valeur: 1000,
             mois: 'janvier',
             annee: '2024',
             date: '2024-01-01T12:00:00.000Z',
           },
           {
-            valeur: 2,
+            valeur: 2000,
             mois: 'janvier',
             annee: '2023',
             date: '2023-01-02T12:00:00.000Z',
           },
           {
-            valeur: 2,
+            valeur: 2000,
             mois: 'janvier',
             annee: '2024',
             date: '2024-01-02T12:00:00.000Z',
@@ -85,8 +85,8 @@ describe('Fichier de tests concernant la récupération de la consommation élec
         couleurValeur2: '#447049',
         graphique: {
           libelles: ['janvier', 'fevrier'],
-          valeurCourante: [1, 2],
-          valeurCouranteTranscription: ['1 kWh', '2 kWh'],
+          valeurCourante: [1.234, 2],
+          valeurCouranteTranscription: ['1.234 kWh', '2 kWh'],
           valeurPrecedente: [1, 2],
           valeurPrecedenteTranscription: ['1 kWh', '2 kWh'],
         },
