@@ -22,6 +22,9 @@
       <legend class="fr-fieldset__legend fr-px-0 fr-mx-0" id="identité-fieldset-legend">
         <h2>Identité personnelle</h2>
       </legend>
+      <div class="fr-mb-4w">
+        Adresse email : <strong>{{ profileUtlisateurViewModel.mail }}</strong>
+      </div>
       <div class="fr-grid-row fr-grid-row--gutters">
         <div class="fr-col-lg-6 fr-col-12">
           <InputText
@@ -30,13 +33,19 @@
             label="Prénom"
             name="prenom"
             v-model="profileUtlisateurViewModel.prenom"
+            :erreur="champsPrenomStatus"
+            @blur="onValidationPrenom()"
           />
         </div>
         <div class="fr-col-lg-6 fr-col-12">
-          <InputText description="facultatif" label="Nom" name="nom" v-model="profileUtlisateurViewModel.nom" />
-        </div>
-        <div class="fr-col-lg-6 fr-col-12">
-          <InputMail label="Adresse électronique" v-model="profileUtlisateurViewModel.mail" name="mail" />
+          <InputText
+            description="facultatif"
+            label="Nom"
+            name="nom"
+            v-model="profileUtlisateurViewModel.nom"
+            :erreur="champsNomStatus"
+            @blur="onValidationNom()"
+          />
         </div>
         <div class="fr-col-lg-6 fr-col-12">
           <InputSelectAnneeDeNaissance
@@ -102,8 +111,8 @@
   import CarteInfo from '@/components/custom/CarteInfo.vue';
   import CompteFormulaireRevenuFiscal from '@/components/custom/Compte/CompteFormulaireRevenuFiscal.vue';
   import InputSelectAnneeDeNaissance from '@/components/custom/CreationCompte/InputSelectAnneeDeNaissance.vue';
-  import InputMail from '@/components/dsfr/InputMail.vue';
   import InputText from '@/components/dsfr/InputText.vue';
+  import { validationNom, validationPrenom } from '@/components/validations/validationsChampsFormulaire';
   import { useAlerte } from '@/composables/useAlerte';
   import { SessionRepositoryStore } from '@/domaines/authentification/adapters/session.repository.store';
   import { ProfileUtilisateurViewModel } from '@/domaines/profileUtilisateur/adapters/profileUtilisateur.presenter.impl';
@@ -113,7 +122,10 @@
   const { alerte, afficherAlerte } = useAlerte();
   const props = defineProps<{ compteUtlisateurViewModel: ProfileUtilisateurViewModel }>();
   const profileUtlisateurViewModel = ref<ProfileUtilisateurViewModel>(props.compteUtlisateurViewModel);
+  const champsPrenomStatus = ref<{ message: string; afficher: boolean }>({ message: '', afficher: false });
+  const champsNomStatus = ref<{ message: string; afficher: boolean }>({ message: '', afficher: false });
   async function modifierInformation() {
+    if (!onValidationPrenom() || !onValidationNom()) return;
     const usecase = new MettreAJourProfileUtilisateurUsecase(
       new ProfileUtilisateurRepositoryAxiosImpl(),
       new SessionRepositoryStore(),
@@ -126,5 +138,23 @@
     if (alertElement) {
       alertElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
+  }
+
+  function onValidationPrenom(): boolean {
+    if (!validationPrenom(profileUtlisateurViewModel.value.prenom)) {
+      champsPrenomStatus.value = { message: 'Le prénom doit contenir uniquement des lettres', afficher: true };
+      return false;
+    }
+    champsPrenomStatus.value = { message: '', afficher: false };
+    return true;
+  }
+
+  function onValidationNom(): boolean {
+    if (!validationNom(profileUtlisateurViewModel.value.nom)) {
+      champsNomStatus.value = { message: 'Le nom doit contenir uniquement des lettres', afficher: true };
+      return false;
+    }
+    champsNomStatus.value = { message: '', afficher: false };
+    return true;
   }
 </script>

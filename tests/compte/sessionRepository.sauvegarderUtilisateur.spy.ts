@@ -13,9 +13,9 @@ export class SpySauvegarderUtilisateurSessionRepository implements SessionReposi
     afficherDisclaimerAides: false,
   };
 
-  static avecOnBoardingRealise(): SpySauvegarderUtilisateurSessionRepository {
+  static avecOnBoardingRealise(utilisateur?: Partial<Utilisateur>): SpySauvegarderUtilisateurSessionRepository {
     const repository = new SpySauvegarderUtilisateurSessionRepository();
-    repository.sauvegarderUtilisateur({ onboardingAEteRealise: true });
+    repository.sauvegarderUtilisateur({ onboardingAEteRealise: true, ...utilisateur });
     return repository;
   }
 

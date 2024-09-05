@@ -25,6 +25,16 @@ export interface ProfileUtilisateur {
   anneeNaissance?: number;
 }
 
+export interface ProfileUtilisateurAMettreAJour {
+  id: string;
+  nom: string;
+  prenom: string;
+  abonnementTransport: boolean;
+  revenuFiscal: number | null;
+  nombreDePartsFiscales: number;
+  anneeNaissance?: number;
+}
+
 export class ProfileUtilisateurRepositoryAxiosImpl implements ProfileUtilisateurRepository {
   @intercept401()
   async getProfileUtilisateur(idUtilisateur: string): Promise<ProfileUtilisateur> {
@@ -45,12 +55,11 @@ export class ProfileUtilisateurRepositoryAxiosImpl implements ProfileUtilisateur
   }
 
   @intercept401()
-  async mettreAjour(profileUtilisateur: ProfileUtilisateur) {
+  async mettreAjour(profileUtilisateur: ProfileUtilisateurAMettreAJour) {
     const axiosInstance = AxiosFactory.getAxios();
     await axiosInstance.patch(`/utilisateurs/${profileUtilisateur.id}/profile`, {
       nom: profileUtilisateur.nom,
       prenom: profileUtilisateur.prenom,
-      email: profileUtilisateur.mail,
       revenu_fiscal: profileUtilisateur.revenuFiscal,
       nombre_de_parts_fiscales: profileUtilisateur.nombreDePartsFiscales,
       abonnement_ter_loire: profileUtilisateur.abonnementTransport,
