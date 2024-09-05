@@ -30,6 +30,7 @@
   import InputText from '@/components/dsfr/InputText.vue';
   import { useAlerte } from '@/composables/useAlerte';
   import { ServiceRepositoryAxios } from '@/domaines/services/adapters/service.repository.axios';
+  import { LinkyEventBusImpl } from '@/domaines/services/linkyEventBusImpl';
   import { ParametrerServiceUsecase } from '@/domaines/services/parametrerService.usecase';
   import { utilisateurStore } from '@/store/utilisateur';
 
@@ -41,7 +42,10 @@
   const { alerte, afficherAlerte } = useAlerte();
 
   const parametrerLeService = async () => {
-    const parametrerService = new ParametrerServiceUsecase(new ServiceRepositoryAxios());
+    const parametrerService = new ParametrerServiceUsecase(
+      new ServiceRepositoryAxios(),
+      LinkyEventBusImpl.getInstance(),
+    );
 
     parametrerService
       .execute(utilisateurId, 'linky', { prm: parametreDuService.value })

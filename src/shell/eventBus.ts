@@ -1,7 +1,8 @@
+import { LinkyEvent } from '@/domaines/services/linkyEventBusImpl';
 import { ThematiqueEvent } from '@/domaines/thematiques/thematiqueEventBusImpl';
 import { ToDoListEvent } from '@/domaines/toDoList/toDoListEventBusImpl';
 
-export abstract class EventBus<T extends ToDoListEvent | ThematiqueEvent> {
+export abstract class EventBus<T extends ToDoListEvent | ThematiqueEvent | LinkyEvent> {
   protected abstract eventSubscribers: Record<T, { subscriberName: string; callback: () => void }[]>;
   publish(eventName: T): void {
     const subscribers = this.eventSubscribers[eventName] || [];
