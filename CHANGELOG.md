@@ -1,5 +1,38 @@
 # Changelog
 
+## [1.19.0](https://github.com/betagouv/agir-front/compare/v1.18.0...v1.19.0) (2024-09-05)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* accéder au détail d'une recette ([#585](https://github.com/betagouv/agir-front/issues/585)) ([ca18454](https://github.com/betagouv/agir-front/commit/ca18454cb3e1dfeec724cb537c4c0550ecb3e158))
+* ajout des emoji pour les catégories du bilan carbone ([#583](https://github.com/betagouv/agir-front/issues/583)) ([db76d67](https://github.com/betagouv/agir-front/commit/db76d67722c5977cc1f7af65fb68367326f1af39))
+* changement des étapes de l'onboarding après création du compte ([#592](https://github.com/betagouv/agir-front/issues/592)) ([c0c80b8](https://github.com/betagouv/agir-front/commit/c0c80b89afccecbf344f9b713595c47014757132))
+* convertir les W en kW - service Linky ([#593](https://github.com/betagouv/agir-front/issues/593)) ([8382f6e](https://github.com/betagouv/agir-front/commit/8382f6efcbcd8c5d83d858494082fbc142a682c9))
+* détail d'une entrée près de chez nous ([#581](https://github.com/betagouv/agir-front/issues/581)) ([a26a7a2](https://github.com/betagouv/agir-front/commit/a26a7a20070648e59374d871bf22a82fe3e64f06))
+* mettre a jour la vue quand le prm est envoyé ([#596](https://github.com/betagouv/agir-front/issues/596)) ([ea55d1c](https://github.com/betagouv/agir-front/commit/ea55d1c3eae3cae0a3d4bec6440bc7f86579da4e))
+* on ne peut plus changer son email, ajout des controles sur les nom et prénoms pour éviter les injections ([#594](https://github.com/betagouv/agir-front/issues/594)) ([f2b3fa4](https://github.com/betagouv/agir-front/commit/f2b3fa46c968ebedb61c616d13902415826cbf23))
+* ouverture automatique de l'aide ([#595](https://github.com/betagouv/agir-front/issues/595)) ([9f0a568](https://github.com/betagouv/agir-front/commit/9f0a5685f2a77598a33b76911ffc6de83366586c))
+* passer linky en template service ([#565](https://github.com/betagouv/agir-front/issues/565)) ([916fbd8](https://github.com/betagouv/agir-front/commit/916fbd82a11978d51f068c94695ffc24fa6f0473))
+* rendre la section outils de la page d'accueil responsive ([#587](https://github.com/betagouv/agir-front/issues/587)) ([504799a](https://github.com/betagouv/agir-front/commit/504799ad39781512037a90bcfaf544da9eee8bf5))
+* suppression de l'indicateur de niveau ([#591](https://github.com/betagouv/agir-front/issues/591)) ([3c5c5c0](https://github.com/betagouv/agir-front/commit/3c5c5c0894f3b069533653c7be41319c2816d6ba))
+
+
+### 🐛 Corrections de bogues
+
+* la légende des services sur la home n'était pas la bonne ([#586](https://github.com/betagouv/agir-front/issues/586)) ([477afec](https://github.com/betagouv/agir-front/commit/477afece12ca3b5823407525bfeb835d17551ccd))
+
+
+### 👷 Autres changements
+
+* Bump @sentry/vue from 8.20.0 to 8.27.0 ([#588](https://github.com/betagouv/agir-front/issues/588)) ([608c63a](https://github.com/betagouv/agir-front/commit/608c63a3db82e4f21ee85cef2dece93ef20c2a19))
+* Bump chart.js from 4.4.3 to 4.4.4 ([#580](https://github.com/betagouv/agir-front/issues/580)) ([ba59ca2](https://github.com/betagouv/agir-front/commit/ba59ca2a7748edab9d0e959ed09671349adbdda2))
+* Bump jsdom from 24.1.1 to 25.0.0 ([#589](https://github.com/betagouv/agir-front/issues/589)) ([e89298b](https://github.com/betagouv/agir-front/commit/e89298bfaa56aa7c9d7c7562d589c0658bff30a6))
+* Bump lint-staged from 15.2.9 to 15.2.10 ([#590](https://github.com/betagouv/agir-front/issues/590)) ([c797e90](https://github.com/betagouv/agir-front/commit/c797e90237ea6644f108237d98b12a97d3ba4e4e))
+* Bump micromatch from 4.0.7 to 4.0.8 ([#578](https://github.com/betagouv/agir-front/issues/578)) ([8649bc6](https://github.com/betagouv/agir-front/commit/8649bc692991cbc6d05c39288ae6e3bb5abffedd))
+* Bump vite from 5.3.5 to 5.4.2 ([#579](https://github.com/betagouv/agir-front/issues/579)) ([8e49883](https://github.com/betagouv/agir-front/commit/8e49883c012e8f622e3cb686de46cfcece146a18))
+* decoupage fonctionnel (domaine) pour les services ([#584](https://github.com/betagouv/agir-front/issues/584)) ([72cc1af](https://github.com/betagouv/agir-front/commit/72cc1af53a395bdbaae38cb3c47278e13b4688ce))
+
 ## [1.18.0](https://github.com/betagouv/agir-front/compare/v1.17.0...v1.18.0) (2024-08-26)
 
 
