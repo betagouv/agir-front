@@ -21,7 +21,7 @@
 </template>
 
 <script setup lang="ts">
-  import { onMounted, ref } from 'vue';
+  import { onMounted, onUnmounted, ref } from 'vue';
   import LinkyConfiguration from '@/components/custom/Linky/LinkyConfiguration.vue';
   import LinkyEnAttente from '@/components/custom/Linky/LinkyEnAttente.vue';
   import LinkyGraphique from '@/components/custom/Linky/LinkyGraphique.vue';
@@ -52,10 +52,14 @@
     isLoading.value = false;
   });
 
-  LinkyEventBusImpl.getInstance().subscribe('linky', LinkyEvent.PRM_A_ETE_SUBMIT, async () => {
+  LinkyEventBusImpl.getInstance().subscribe('linky', LinkyEvent.PRM_A_ETE_ENVOYE, async () => {
     await usecase.execute(
       utilisateurId,
       new ServiceRechercheLinkyPresenterImpl(vm => (serviceLinkyViewModel.value = vm)),
     );
+  });
+
+  onUnmounted(() => {
+    LinkyEventBusImpl.getInstance().unsubscribeToAllEvents('linky');
   });
 </script>

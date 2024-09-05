@@ -1,14 +1,14 @@
 import { EventBus } from '@/shell/eventBus';
 
 export enum LinkyEvent {
-  PRM_A_ETE_SUBMIT,
+  PRM_A_ETE_ENVOYE,
 }
 
 export class LinkyEventBusImpl extends EventBus<LinkyEvent> {
   private static instance: LinkyEventBusImpl | null = null;
 
   protected eventSubscribers: Record<LinkyEvent, { subscriberName: string; callback: () => void }[]> = {
-    [LinkyEvent.PRM_A_ETE_SUBMIT]: [],
+    [LinkyEvent.PRM_A_ETE_ENVOYE]: [],
   };
   private constructor() {
     super();

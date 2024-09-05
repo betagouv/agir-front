@@ -10,6 +10,6 @@ export class ParametrerServiceUsecase {
 
   async execute(utilisateurId: string, serviceId: string, parametres: { [key: string]: string }): Promise<void> {
     await this.serviceRepository.parametrerService(utilisateurId, serviceId, parametres);
-    this.eventBus.publish(LinkyEvent.PRM_A_ETE_SUBMIT);
+    this.eventBus.publish(LinkyEvent.PRM_A_ETE_ENVOYE);
   }
 }

@@ -18,6 +18,6 @@ describe("Fichier de tests concernant le paramétrage d'un service", () => {
 
     // THEN
     expect(serviceRepositorySpy.parametrerServiceAEteAppele).toBeTruthy();
-    expect(linkyEventBusSpy.eventName).toBe(LinkyEvent.PRM_A_ETE_SUBMIT);
+    expect(linkyEventBusSpy.eventName).toBe(LinkyEvent.PRM_A_ETE_ENVOYE);
   });
 });
