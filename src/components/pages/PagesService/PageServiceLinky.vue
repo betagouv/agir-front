@@ -33,6 +33,7 @@
   } from '@/domaines/serviceRecherche/linky/adapters/serviceRechercheLinky.presenter.impl';
   import { ServiceRechercheLinkyRepositoryAxios } from '@/domaines/serviceRecherche/linky/adapters/serviceRechercheLinky.repository.axios';
   import { ObtenirInformationCompteurUsecase } from '@/domaines/serviceRecherche/linky/obtenirInformationCompteur.usecase';
+  import { LinkyEvent, LinkyEventBusImpl } from '@/domaines/services/linkyEventBusImpl';
   import { RouteUniversName } from '@/router/univers/routes';
   import { utilisateurStore } from '@/store/utilisateur';
 
@@ -49,5 +50,12 @@
     );
 
     isLoading.value = false;
+  });
+
+  LinkyEventBusImpl.getInstance().subscribe('linky', LinkyEvent.PRM_A_ETE_SUBMIT, async () => {
+    await usecase.execute(
+      utilisateurId,
+      new ServiceRechercheLinkyPresenterImpl(vm => (serviceLinkyViewModel.value = vm)),
+    );
   });
 </script>
