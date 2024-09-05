@@ -38,6 +38,6 @@
   import { RouteCompteName } from '@/router/compte/routeCompteName';
   import { onboardingPostCreationCompte } from '@/store/onboardingPostCreationCompte';
   const validerLaReponse = async () => {
-    await router.replace({ name: RouteCompteName.POST_CREATION_COMPTE_ETAPE_3 });
+    await router.replace({ name: RouteCompteName.POST_CREATION_COMPTE_DISCLAIMER });
   };
 </script>
