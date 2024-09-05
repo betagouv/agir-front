@@ -87,6 +87,9 @@
       const element = document.getElementById(id);
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' });
+        setTimeout(() => {
+          document.getElementById(`button-${hash.split('_')[1]}`)?.click();
+        }, 100);
       }
     }
   });

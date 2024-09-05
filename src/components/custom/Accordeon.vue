@@ -5,6 +5,7 @@
         class="fr-accordion__btn fr-text-label--blue-france fr-p-2w"
         aria-expanded="false"
         :aria-controls="nameId"
+        :id="`button-${nameId}`"
       >
         <slot name="titre" />
         <span class="chevron-icon fr-icon-arrow-right-s-line" aria-hidden="true"></span>
