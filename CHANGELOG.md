@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.20.0](https://github.com/betagouv/agir-front/compare/v1.19.0...v1.20.0) (2024-09-06)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* suppression de la charte d'experimentation ([#597](https://github.com/betagouv/agir-front/issues/597)) ([11f8ded](https://github.com/betagouv/agir-front/commit/11f8dedceb008040f7583a213881a20191bc6572))
+
 ## [1.19.0](https://github.com/betagouv/agir-front/compare/v1.18.0...v1.19.0) (2024-09-05)
 
 
