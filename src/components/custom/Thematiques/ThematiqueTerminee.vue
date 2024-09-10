@@ -1,7 +1,9 @@
 <template>
-  <div class="fr-grid-row align-items--center background--white border-radius--md shadow fr-p-3w border">
+  <div
+    class="fr-grid-row fr-grid-row--gutters align-items--center background--white border-radius--md shadow fr-p-3w border"
+  >
     <img :src="urlImage" class="border-radius--md img-object-fit-cover" width="120" height="100" alt="" />
-    <h1 class="fr-col fr-h4 fr-m-0 fr-ml-3w">{{ titre }}</h1>
+    <h1 class="fr-col fr-h4 fr-m-0 fr-ml-1w">{{ titre }}</h1>
     <span v-if="estTerminee" class="fr-ml-md-auto fr-mt-md-0 fr-mt-2w text--semi-bold text--bleu"
       >Mission terminée</span
     >

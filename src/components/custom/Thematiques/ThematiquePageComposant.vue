@@ -61,7 +61,7 @@
     content: '';
     position: absolute;
     top: 0;
-    bottom: -4rem;
+    bottom: -3.3rem;
     left: 2rem;
     display: block;
     width: 0;
