@@ -35,7 +35,7 @@ const quiz = {
   estEnCours: false,
 };
 
-const defi = {
+const defiAFaireEtNonRecommande = {
   id: 'id2',
   contentId: '2',
   titre: 'Mission 2',
@@ -69,7 +69,7 @@ describe("Fichier de tests concernant la récupération d'une mission pour une t
     const usecase = new RecupererMissionThematiqueUsecase(
       new MissionThematiqueRepositoryMock({
         ...thematique,
-        items: [quiz, defi, kyc],
+        items: [quiz, defiAFaireEtNonRecommande, kyc],
       }),
     );
 
@@ -99,9 +99,9 @@ describe("Fichier de tests concernant la récupération d'une mission pour une t
             id: 'id2',
             aEteRealisee: false,
             estBloquee: false,
+            badge: undefined,
             couleurBordure: '',
             points: 10,
-            badge: undefined,
             titre: 'Mission 2',
             url: '/defi/alimentation/1/2',
             picto: '/ic_mission_defi.svg',
@@ -141,7 +141,7 @@ describe("Fichier de tests concernant la récupération d'une mission pour une t
       const usecase = new RecupererMissionThematiqueUsecase(
         new MissionThematiqueRepositoryMock({
           ...thematique,
-          items: [{ ...defi, estEnCours: true }, kyc],
+          items: [{ ...defiAFaireEtNonRecommande, estEnCours: true }, kyc],
         }),
       );
 
@@ -162,7 +162,7 @@ describe("Fichier de tests concernant la récupération d'une mission pour une t
       const usecase = new RecupererMissionThematiqueUsecase(
         new MissionThematiqueRepositoryMock({
           ...thematique,
-          items: [{ ...defi, estEnCours: true, estRecommande: true }, kyc],
+          items: [{ ...defiAFaireEtNonRecommande, estEnCours: true, estRecommande: true }, kyc],
         }),
       );
 
@@ -183,7 +183,7 @@ describe("Fichier de tests concernant la récupération d'une mission pour une t
       const usecase = new RecupererMissionThematiqueUsecase(
         new MissionThematiqueRepositoryMock({
           ...thematique,
-          items: [{ ...defi, estEnCours: true }, kyc],
+          items: [{ ...defiAFaireEtNonRecommande, estEnCours: true }, kyc],
         }),
       );
 
@@ -203,7 +203,7 @@ describe("Fichier de tests concernant la récupération d'une mission pour une t
       const usecase = new RecupererMissionThematiqueUsecase(
         new MissionThematiqueRepositoryMock({
           ...thematique,
-          items: [{ ...defi, estEnCours: true, estRecommande: true }, kyc],
+          items: [{ ...defiAFaireEtNonRecommande, estEnCours: true, estRecommande: true }, kyc],
         }),
       );
 
@@ -224,8 +224,8 @@ describe("Fichier de tests concernant la récupération d'une mission pour une t
         new MissionThematiqueRepositoryMock({
           ...thematique,
           items: [
-            { ...defi, estEnCours: true, aEteRealisee: true },
-            { ...defi, estEnCours: true, aEteRealisee: false },
+            { ...defiAFaireEtNonRecommande, estEnCours: true, aEteRealisee: true },
+            { ...defiAFaireEtNonRecommande, estEnCours: true, aEteRealisee: false },
             kyc,
           ],
         }),
@@ -236,7 +236,6 @@ describe("Fichier de tests concernant la récupération d'une mission pour une t
 
       // THEN
       function expectation(mission: MissionThematiqueViewModel) {
-        expect(mission.defis[0].link).toBeUndefined();
         expect(mission.defis[1].link).toStrictEqual<MissionDefiViewModel['link']>({
           label: "Reprendre l'action",
           style: 'fr-btn--secondary',
@@ -252,11 +251,7 @@ describe("Fichier de tests concernant la récupération d'une mission pour une t
       const usecase = new RecupererMissionThematiqueUsecase(
         new MissionThematiqueRepositoryMock({
           ...thematique,
-          items: [
-            { ...defi, estRecommande: true, aEteRealisee: true },
-            { ...defi, estRecommande: true, aEteRealisee: false },
-            kyc,
-          ],
+          items: [{ ...defiAFaireEtNonRecommande, estRecommande: true, aEteRealisee: false }, kyc],
         }),
       );
 
@@ -265,8 +260,7 @@ describe("Fichier de tests concernant la récupération d'une mission pour une t
 
       // THEN
       function expectation(mission: MissionThematiqueViewModel) {
-        expect(mission.defis[0].badge).toBeUndefined();
-        expect(mission.defis[1].badge).toStrictEqual<MissionDefiViewModel['badge']>({
+        expect(mission.defis[0].badge).toStrictEqual<MissionDefiViewModel['badge']>({
           label: 'Recommandé',
           style: 'background--bleu-info-dark text--white',
         });
@@ -278,7 +272,7 @@ describe("Fichier de tests concernant la récupération d'une mission pour une t
       const usecase = new RecupererMissionThematiqueUsecase(
         new MissionThematiqueRepositoryMock({
           ...thematique,
-          items: [{ ...defi, estRecommande: true, aEteRealisee: true }, { ...defi, estRecommande: true }, kyc],
+          items: [{ ...defiAFaireEtNonRecommande, estRecommande: true }, kyc],
         }),
       );
 
@@ -287,8 +281,50 @@ describe("Fichier de tests concernant la récupération d'une mission pour une t
 
       // THEN
       function expectation(mission: MissionThematiqueViewModel) {
-        expect(mission.defis[0].couleurBordure).toStrictEqual<MissionDefiViewModel['couleurBordure']>('');
-        expect(mission.defis[1].couleurBordure).toStrictEqual<MissionDefiViewModel['couleurBordure']>(
+        expect(mission.defis[0].couleurBordure).toStrictEqual<MissionDefiViewModel['couleurBordure']>(
+          'border--bleu-info-dark',
+        );
+      }
+    });
+  });
+
+  describe('quand un défi est terminé', () => {
+    it("doit récupérer un tag 'Terminé' si le défi a été réalisé", async () => {
+      // GIVEN
+      const usecase = new RecupererMissionThematiqueUsecase(
+        new MissionThematiqueRepositoryMock({
+          ...thematique,
+          items: [{ ...defiAFaireEtNonRecommande, estRecommande: true, aEteRealisee: true }, kyc],
+        }),
+      );
+
+      // WHEN
+      await usecase.execute('1', '1', new MissionThematiquePresenterImpl(expectation));
+
+      // THEN
+      function expectation(mission: MissionThematiqueViewModel) {
+        expect(mission.defis[0].badge).toStrictEqual<MissionDefiViewModel['badge']>({
+          label: 'Terminé !',
+          style: 'background--vert--success text--white',
+        });
+      }
+    });
+
+    it('doit récupérer une couleur de bordure a été réalisé', async () => {
+      // GIVEN
+      const usecase = new RecupererMissionThematiqueUsecase(
+        new MissionThematiqueRepositoryMock({
+          ...thematique,
+          items: [{ ...defiAFaireEtNonRecommande, estRecommande: true }, kyc],
+        }),
+      );
+
+      // WHEN
+      await usecase.execute('thematiqueId', 'utilisateurId', new MissionThematiquePresenterImpl(expectation));
+
+      // THEN
+      function expectation(mission: MissionThematiqueViewModel) {
+        expect(mission.defis[0].couleurBordure).toStrictEqual<MissionDefiViewModel['couleurBordure']>(
           'border--bleu-info-dark',
         );
       }

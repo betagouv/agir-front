@@ -20,7 +20,7 @@ export interface MissionBaseViewModel {
 
 export interface MissionDefiViewModel extends MissionBaseViewModel {
   couleurBordure: string;
-  link?: {
+  link: {
     title: string;
     style: string;
     label: string;
@@ -108,11 +108,11 @@ export class MissionThematiquePresenterImpl implements MissionThematiquePresente
       titre: item.titre,
       estBloquee: item.estBloquee,
       points: item.points,
-      aEteRealisee: item.aEteRealisee,
+      aEteRealisee: item.aEteRealisee && !item.estEnCours,
       url: `${RouteDefiPath.DEFI}${univers}/${thematique}/${item.contentId}`,
       picto: this.determinePicto(item),
       pointAEteRecolte: item.pointAEteRecolte,
-      link: !item.aEteRealisee ? this.determineLienDefi(item.estEnCours, item.titre) : undefined,
+      link: this.determineLienDefi(item.estEnCours, item.titre),
       badge: this.determineBadgeDefi(item.estEnCours, item.estRecommande, item.aEteRealisee),
       couleurBordure: this.determineCouleurBordureDefi(item.estEnCours, item.estRecommande, item.aEteRealisee),
     };
@@ -153,20 +153,26 @@ export class MissionThematiquePresenterImpl implements MissionThematiquePresente
         label: 'En cours !',
         style: 'background--green-light text--black',
       };
-    }
-
-    if (estRecommande && !aEteRealise) {
+    } else if (estRecommande && !aEteRealise) {
       return {
         label: 'Recommandé',
         style: 'background--bleu-info-dark text--white',
       };
+    } else if (aEteRealise) {
+      return {
+        label: 'Terminé !',
+        style: 'background--vert--success text--white',
+      };
+    } else {
+      return undefined;
     }
   }
 
   private determineCouleurBordureDefi(estEnCours: boolean, estRecommande: boolean, aEteRealise: boolean): string {
     if (estEnCours) return 'border--green-light';
-    if (estRecommande && !aEteRealise) return 'border--bleu-info-dark';
-    return '';
+    else if (estRecommande && !aEteRealise) return 'border--bleu-info-dark';
+    else if (aEteRealise) return 'border--vert--success';
+    else return '';
   }
 
   private determineLienDefi(estEnCours: boolean, titre: string): MissionDefiViewModel['link'] {
