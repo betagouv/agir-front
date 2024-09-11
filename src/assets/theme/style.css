@@ -259,10 +259,6 @@ h2 {
   background-color: var(--background-contrast-warning);
 }
 
-.background--vert--success {
-  background-color: var(--success-950-100);
-}
-
 .background--vert-bourgeon {
   background-color: var(--green-bourgeon-950-100);
 }
@@ -340,6 +336,10 @@ h2 {
 
 .border--bleu-info-dark {
   border: 1px solid var(--info-425-625);
+}
+
+.border--vert--success {
+  border: 1px solid var(--success-425-625);
 }
 
 .border--warning {

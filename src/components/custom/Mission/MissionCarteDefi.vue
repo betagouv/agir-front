@@ -5,7 +5,7 @@
     </span>
     <h3 class="text--normal fr-text--lg">{{ defi.titre }}</h3>
     <router-link
-      v-if="defi.link"
+      v-if="!defi.aEteRealisee"
       :to="{ path: defi.url }"
       :class="`fr-btn ${defi.link.style}`"
       :title="defi.link.title"
@@ -18,7 +18,7 @@
       :disabled="defi.pointAEteRecolte"
       @click="onRecolterPoints(defi.id)"
     >
-      <span class="fr-hidden fr-unhidden-md"> Récolter vos </span> &nbsp;{{ defi.points }}
+      <span class="fr-hidden fr-unhidden-md">Récolter vos </span> &nbsp;{{ defi.points }}
       <img src="/ic_score.svg" alt="points" width="16" class="fr-ml-1v" />
     </button>
   </div>
