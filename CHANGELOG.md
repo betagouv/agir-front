@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.20.1](https://github.com/betagouv/agir-front/compare/v1.20.0...v1.20.1) (2024-09-11)
+
+
+### 🐛 Corrections de bogues
+
+* fix marge sur le bouton termine une mission ([#605](https://github.com/betagouv/agir-front/issues/605)) ([21b78d0](https://github.com/betagouv/agir-front/commit/21b78d0994872b4d266f0c22354b6f2f161eb697))
+* on doit pouvoir terminer une action ([#606](https://github.com/betagouv/agir-front/issues/606)) ([ff0c6f5](https://github.com/betagouv/agir-front/commit/ff0c6f52759dc2201d43fbf67f3818bef77c4c11))
+
+
+### 👷 Autres changements
+
+* Bump @playwright/test from 1.46.1 to 1.47.0 ([#604](https://github.com/betagouv/agir-front/issues/604)) ([95d7fec](https://github.com/betagouv/agir-front/commit/95d7fece05c6b6ca512004d45417516b432e89b1))
+* Bump @vitejs/plugin-vue from 5.1.2 to 5.1.3 ([#602](https://github.com/betagouv/agir-front/issues/602)) ([3d50358](https://github.com/betagouv/agir-front/commit/3d503588882ed483a8c0e0e6be555d65d8fd64fe))
+* Bump eslint-plugin-import from 2.29.1 to 2.30.0 ([#603](https://github.com/betagouv/agir-front/issues/603)) ([7f8bd88](https://github.com/betagouv/agir-front/commit/7f8bd88250b44a9352b08ad54518d122cdaadca6))
+* Bump lighthouse from 11.7.1 to 12.2.1 ([#599](https://github.com/betagouv/agir-front/issues/599)) ([8da0f52](https://github.com/betagouv/agir-front/commit/8da0f52514800478914672505220fc7d460e7ffd))
+* Bump typescript from 5.5.4 to 5.6.2 ([#601](https://github.com/betagouv/agir-front/issues/601)) ([2c69c35](https://github.com/betagouv/agir-front/commit/2c69c358f841445f5dc25b0982a7ffd3717ba2d7))
+
 ## [1.20.0](https://github.com/betagouv/agir-front/compare/v1.19.0...v1.20.0) (2024-09-06)
 
 
