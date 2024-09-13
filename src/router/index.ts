@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
-import { storeIdNGC } from '@/domaines/bilan/middleware/pendingSimulation';
 import aidesRoutes from '@/router/aides/routes';
 import articlesRoutes from '@/router/articles/routes';
 import bilanCarboneRoutes from '@/router/bilanCarbone/routes';
@@ -59,7 +58,6 @@ const routes: RouteRecordRaw[] = [
       estPublique: true,
     },
     beforeEnter: () => {
-      storeIdNGC;
       if (utilisateurStore().utilisateur.id.length > 0) {
         router.replace({ name: RouteCoachName.COACH });
       }

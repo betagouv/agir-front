@@ -7,7 +7,6 @@
   import { SessionRepositoryStore } from '@/domaines/authentification/adapters/session.repository.store';
   import { UtilisateurRepositoryAxios } from '@/domaines/authentification/adapters/utilisateur.repository.axios';
   import { AuthentifierUtilisateurFranceConnectUsecase } from '@/domaines/authentification/authentifierUtilisateurFranceConnect.usecase';
-  import { sendIdNGC } from '@/domaines/bilan/middleware/pendingSimulation';
   import router from '@/router';
   import { RouteCoachName } from '@/router/coach/routeCoachName';
   import { utilisateurStore } from '@/store/utilisateur';
@@ -27,7 +26,6 @@
       const requestedRoute = sessionStorage.getItem('requestedRoute');
       sessionStorage.removeItem('requestedRoute');
       router.push(requestedRoute || { name: RouteCoachName.COACH, state: { utilisateur: store.utilisateur.nom } });
-      sendIdNGC();
     });
   });
 </script>

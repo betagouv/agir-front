@@ -34,7 +34,6 @@
   import { UtilisateurRepositoryAxios } from '@/domaines/authentification/adapters/utilisateur.repository.axios';
   import { RenvoyerCoteOTPUsecase } from '@/domaines/authentification/renvoyerCoteOTPUsecase';
   import { ValiderAuthentificationUtilisateurUsecase } from '@/domaines/authentification/validerAuthentificationUtilisateur.usecase';
-  import { sendIdNGC } from '@/domaines/bilan/middleware/pendingSimulation';
   import router from '@/router';
   import { utilisateurStore } from '@/store/utilisateur';
 
@@ -54,7 +53,6 @@
         new AuthentificationResultatPresenterImpl(route => {
           const requestedRoute = sessionStorage.getItem('requestedRoute');
           sessionStorage.removeItem('requestedRoute');
-          sendIdNGC();
           router.push(requestedRoute || route);
         }),
       )
