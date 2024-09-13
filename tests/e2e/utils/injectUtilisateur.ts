@@ -12,7 +12,6 @@ export class InjectUtilisateur {
         onboardingAEteRealise: true,
         afficherDisclaimerAides: false,
       },
-      valeurBilanCarbone: { bilan: '', details: [], valeurMax: 0 },
       score: {
         points: 0,
       },
