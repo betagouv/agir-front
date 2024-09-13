@@ -5,7 +5,7 @@
         <img src="/bg_creation_compte.png" alt="" />
         <h2 class="fr-h4 fr-mb-0">Créez votre compte Agir</h2>
         <p class="fr-text--regular">
-          Indiquez votre adresse email et choississez un mot de passe pour accéder au service.
+          Indiquez votre adresse e-mail et choisissez un mot de passe pour accéder au service.
         </p>
       </legend>
       <div class="fr-messages-group">
