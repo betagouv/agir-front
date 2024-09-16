@@ -1,12 +1,5 @@
 import { QuestionPresenter } from '@/domaines/kyc/ports/question.presenter';
-import {
-  Question,
-  QuestionChoixMultiple,
-  QuestionChoixUnique,
-  QuestionLibre,
-  QuestionMosaicBoolean,
-  ThematiqueQuestion,
-} from '@/domaines/kyc/recupererQuestionUsecase';
+import { Question, ReponseKYCSimple, ReponseMosaic, ThematiqueQuestion } from '@/domaines/kyc/recupererQuestionUsecase';
 
 export interface ReponsePossible {
   id: string;
@@ -35,7 +28,9 @@ export class QuestionPresenterImpl implements QuestionPresenter {
       points: `Récoltez vos + ${question.points} points`,
       reponses_possibles: this.determineReponsePossibles(question),
       reponses: this.determineReponse(question),
-      aDejaEteRepondu: false,
+      //TODO: DLA - fix me for mosaic_boolean
+      aDejaEteRepondu:
+        question.type === 'mosaic_boolean' ? false : (question.reponses as ReponseKYCSimple).reponse.length > 0,
       description: this.determineDescription(question.thematique),
     });
   }
@@ -56,41 +51,24 @@ export class QuestionPresenterImpl implements QuestionPresenter {
   }
 
   private determineReponsePossibles(question: Question): ReponsePossible[] {
-    switch (question.type) {
-      case 'libre':
-        return (question.question as QuestionLibre).reponses_possibles.map(reponse => ({
-          id: reponse,
-          label: reponse,
-        }));
-
-      case 'choix_unique':
-        return (question.question as QuestionChoixUnique).reponses_possibles.map(reponse => ({
-          id: reponse,
-          label: reponse,
-        }));
-      case 'choix_multiple':
-        return (question.question as QuestionChoixMultiple).reponses_possibles.map(reponse => ({
-          id: reponse,
-          label: reponse,
-        }));
-      case 'mosaic_boolean':
-        return (question.question as QuestionMosaicBoolean).reponse.map(reponse => ({
-          id: reponse.code,
-          label: reponse.label,
-        }));
+    if (question.type === 'mosaic_boolean') {
+      return (question.reponses as ReponseMosaic).reponse.map(reponse => ({
+        id: reponse.code,
+        label: reponse.label,
+      }));
+    } else {
+      return (question.reponses as ReponseKYCSimple).reponses_possibles.map(reponse => ({
+        id: reponse,
+        label: reponse,
+      }));
     }
   }
 
   private determineReponse(question: Question): string[] {
-    switch (question.type) {
-      case 'libre':
-        return (question.question as QuestionLibre).reponse;
-      case 'choix_unique':
-        return (question.question as QuestionChoixUnique).reponse || [];
-      case 'choix_multiple':
-        return (question.question as QuestionChoixMultiple).reponse;
-      case 'mosaic_boolean':
-        return (question.question as QuestionMosaicBoolean).reponse.map(reponse => reponse.boolean_value.toString());
+    if (question.type === 'mosaic_boolean') {
+      return (question.reponses as ReponseMosaic).reponse.map(reponse => reponse.valeur.toString());
+    } else {
+      return (question.reponses as ReponseKYCSimple).reponse;
     }
   }
 }

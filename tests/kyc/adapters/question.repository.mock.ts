@@ -17,4 +17,15 @@ export class MockQuestionRepository implements QuestionRepository {
   envoyerReponse(_questionId: string, _utilisateurId: string, _reponse: string[]): Promise<void> {
     throw new Error('Method not implemented.');
   }
+
+  envoyerReponseMosaic(
+    utilisateurId: string,
+    questionId: string,
+    reponses: {
+      code: string;
+      valeur: boolean;
+    }[],
+  ): Promise<void> {
+    return Promise.resolve(undefined);
+  }
 }

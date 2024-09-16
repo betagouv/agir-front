@@ -1,14 +1,6 @@
-import axios from 'redaxios';
 import { AxiosFactory, intercept401 } from '@/axios.factory';
 import { QuestionRepository } from '@/domaines/kyc/ports/question.repository';
-import {
-  Question,
-  QuestionChoixMultiple,
-  QuestionChoixUnique,
-  QuestionLibre,
-  QuestionMosaicBoolean,
-  ThematiqueQuestion,
-} from '@/domaines/kyc/recupererQuestionUsecase';
+import { Question, ReponseKYCSimple, ReponseMosaic, ThematiqueQuestion } from '@/domaines/kyc/recupererQuestionUsecase';
 
 export interface QuestionApiModel extends QuestionMosaicBooleanApiModel {
   id: string;
@@ -43,7 +35,7 @@ export class QuestionRepositoryAxios implements QuestionRepository {
         id: question.id,
         libelle: question.type === 'mosaic_boolean' ? question.titre : question.question,
         type: question.type,
-        question: this.determineQuestion(question),
+        reponses: this.determineReponses(question),
         points: question.points,
         thematique: Object.values(ThematiqueQuestion).find(thematique => thematique === question.thematique) as
           | ThematiqueQuestion
@@ -61,7 +53,7 @@ export class QuestionRepositoryAxios implements QuestionRepository {
       id: response.data.id,
       libelle: response.data.type === 'mosaic_boolean' ? response.data.titre : response.data.question,
       type: response.data.type,
-      question: this.determineQuestion(response.data),
+      reponses: this.determineReponses(response.data),
       points: response.data.points,
       thematique: Object.values(ThematiqueQuestion).find(thematique => thematique === response.data.thematique) as
         | ThematiqueQuestion
@@ -86,25 +78,28 @@ export class QuestionRepositoryAxios implements QuestionRepository {
       libelle: question.type === 'mosaic_boolean' ? question.titre : question.question,
       type: question.type,
       points: question.points,
-      question: this.determineQuestion(question),
+      reponses: this.determineReponses(question),
       thematique: Object.values(ThematiqueQuestion).find(thematique => thematique === question.thematique) as
         | ThematiqueQuestion
         | ThematiqueQuestion.AUTRE,
     }));
   }
 
-  private determineQuestion(
-    question: QuestionApiModel,
-  ): QuestionLibre | QuestionChoixMultiple | QuestionChoixUnique | QuestionMosaicBoolean {
+  private determineReponses(question: QuestionApiModel): ReponseKYCSimple | ReponseMosaic<boolean> {
     if (question.type === 'mosaic_boolean') {
       return {
-        reponse: question.reponses,
-      };
+        reponse: question.reponses.map(reponse => ({
+          code: reponse.code,
+          image_url: reponse.image_url,
+          label: reponse.label,
+          valeur: reponse.boolean_value,
+        })),
+      } as ReponseMosaic<boolean>;
     } else {
       return {
         reponses_possibles: question.reponses_possibles,
         reponse: question.reponse,
-      };
+      } as ReponseKYCSimple;
     }
   }
 

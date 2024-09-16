@@ -9,25 +9,17 @@ export enum ThematiqueQuestion {
   AUTRE = 'autre',
 }
 
-export interface QuestionLibre {
-  reponses_possibles: string[];
-  reponse: string[];
-}
-export interface QuestionChoixMultiple {
-  reponses_possibles: string[];
-  reponse: string[];
-}
-export interface QuestionChoixUnique {
+export interface ReponseKYCSimple {
   reponses_possibles: string[];
   reponse: string[];
 }
 
-export interface QuestionMosaicBoolean {
+export interface ReponseMosaic<T> {
   reponse: {
     code: string;
     image_url: string;
     label: string;
-    boolean_value: boolean;
+    valeur: T;
   }[];
 }
 export interface Question {
@@ -36,7 +28,7 @@ export interface Question {
   type: 'libre' | 'choix_multiple' | 'choix_unique' | 'mosaic_boolean';
   points: number;
   thematique: ThematiqueQuestion;
-  question: QuestionLibre | QuestionChoixMultiple | QuestionChoixUnique | QuestionMosaicBoolean;
+  reponses: ReponseKYCSimple | ReponseMosaic<boolean>;
 }
 
 export class RecupererQuestionUsecase {
