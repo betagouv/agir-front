@@ -1,16 +1,34 @@
+import axios from 'redaxios';
 import { AxiosFactory, intercept401 } from '@/axios.factory';
 import { QuestionRepository } from '@/domaines/kyc/ports/question.repository';
-import { Question, ThematiqueQuestion } from '@/domaines/kyc/recupererQuestionUsecase';
+import {
+  Question,
+  QuestionChoixMultiple,
+  QuestionChoixUnique,
+  QuestionLibre,
+  QuestionMosaicBoolean,
+  ThematiqueQuestion,
+} from '@/domaines/kyc/recupererQuestionUsecase';
 
-export interface QuestionApiModel {
+export interface QuestionApiModel extends QuestionMosaicBooleanApiModel {
   id: string;
   question: string;
-  type: 'libre' | 'choix_multiple' | 'choix_unique';
+  type: 'libre' | 'choix_multiple' | 'choix_unique' | 'mosaic_boolean';
   reponses_possibles: string[];
   points: number;
   reponse: string[];
   categorie: string;
   thematique: string;
+}
+
+export interface QuestionMosaicBooleanApiModel {
+  titre: string;
+  reponses: {
+    code: string;
+    image_url: string;
+    label: string;
+    boolean_value: boolean;
+  }[];
 }
 
 export class QuestionRepositoryAxios implements QuestionRepository {
@@ -23,11 +41,10 @@ export class QuestionRepositoryAxios implements QuestionRepository {
       .filter(question => question.categorie !== 'defi')
       .map(question => ({
         id: question.id,
-        libelle: question.question,
+        libelle: question.type === 'mosaic_boolean' ? question.titre : question.question,
         type: question.type,
-        reponses_possibles: question.reponses_possibles || [],
+        question: this.determineQuestion(question),
         points: question.points,
-        reponse: question.reponse,
         thematique: Object.values(ThematiqueQuestion).find(thematique => thematique === question.thematique) as
           | ThematiqueQuestion
           | ThematiqueQuestion.AUTRE,
@@ -42,11 +59,10 @@ export class QuestionRepositoryAxios implements QuestionRepository {
 
     return {
       id: response.data.id,
-      libelle: response.data.question,
+      libelle: response.data.type === 'mosaic_boolean' ? response.data.titre : response.data.question,
       type: response.data.type,
-      reponses_possibles: response.data.reponses_possibles || [],
+      question: this.determineQuestion(response.data),
       points: response.data.points,
-      reponse: response.data.reponse,
       thematique: Object.values(ThematiqueQuestion).find(thematique => thematique === response.data.thematique) as
         | ThematiqueQuestion
         | ThematiqueQuestion.AUTRE,
@@ -64,16 +80,42 @@ export class QuestionRepositoryAxios implements QuestionRepository {
     const response = await AxiosFactory.getAxios().get<QuestionApiModel[]>(
       `utilisateurs/${utilisateurId}/thematiques/${thematiqueId}/kycs`,
     );
+
     return response.data.map(question => ({
       id: question.id,
-      libelle: question.question,
+      libelle: question.type === 'mosaic_boolean' ? question.titre : question.question,
       type: question.type,
-      reponses_possibles: question.reponses_possibles || [],
       points: question.points,
-      reponse: question.reponse,
+      question: this.determineQuestion(question),
       thematique: Object.values(ThematiqueQuestion).find(thematique => thematique === question.thematique) as
         | ThematiqueQuestion
         | ThematiqueQuestion.AUTRE,
     }));
+  }
+
+  private determineQuestion(
+    question: QuestionApiModel,
+  ): QuestionLibre | QuestionChoixMultiple | QuestionChoixUnique | QuestionMosaicBoolean {
+    if (question.type === 'mosaic_boolean') {
+      return {
+        reponse: question.reponses,
+      };
+    } else {
+      return {
+        reponses_possibles: question.reponses_possibles,
+        reponse: question.reponse,
+      };
+    }
+  }
+
+  @intercept401()
+  async envoyerReponseMosaic(
+    utilisateurId: string,
+    questionId: string,
+    reponses: { code: string; valeur: boolean }[],
+  ): Promise<void> {
+    await AxiosFactory.getAxios().put(`/utilisateurs/${utilisateurId}/mosaicsKYC/${questionId}`, {
+      reponse: reponses,
+    });
   }
 }

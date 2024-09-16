@@ -1,6 +1,10 @@
 <template>
   <form @submit.prevent="validerLaReponse()">
-    <div v-if="questionViewModel.type === 'choix_unique'" class="fr-input-group">
+    <div
+      v-if="questionViewModel.type === 'choix_unique' || questionViewModel.type === 'mosaic_boolean'"
+      class="fr-input-group"
+    >
+      {{ reponse }}
       <BoutonRadio
         col=""
         legende-size="l"
@@ -48,6 +52,7 @@
   import InputCheckbox from '@/components/custom/InputCheckbox.vue';
   import { QuestionViewModel, ReponsePossible } from '@/domaines/kyc/adapters/question.presenter.impl';
   import { QuestionRepositoryAxios } from '@/domaines/kyc/adapters/question.repository.axios';
+  import { EnvoyerReponseMosaicUsecase } from '@/domaines/kyc/envoyerReponseMosaic.usecase';
   import { EnvoyerReponseUsecase } from '@/domaines/kyc/envoyerReponseUsecase';
   import { ToDoListEventBusImpl } from '@/domaines/toDoList/toDoListEventBusImpl';
   import { utilisateurStore } from '@/store/utilisateur';
@@ -57,7 +62,7 @@
   const isDisabled = ref<boolean>(true);
   const emit = defineEmits<{ (e: 'update:soumissionKyc', value: string[]): void }>();
   onMounted(() => {
-    isDisabled.value = props.questionViewModel.reponses.length === 0;
+    isDisabled.value = props.questionViewModel.reponses?.length === 0;
   });
 
   watch(reponse, () => {
@@ -65,15 +70,29 @@
   });
 
   const validerLaReponse = async () => {
-    const envoyerReponseUsecase = new EnvoyerReponseUsecase(
-      new QuestionRepositoryAxios(),
-      ToDoListEventBusImpl.getInstance(),
-    );
-    envoyerReponseUsecase.execute(
-      utilisateurStore().utilisateur.id,
-      props.questionViewModel.id,
-      reponse.value === '' ? props.questionViewModel.reponses.flat() : [reponse.value].flat(),
-    );
+    if (props.questionViewModel.type === 'mosaic_boolean') {
+      //TODO useCase Mosaic
+      const envoyerReponseMosaicUsecase = new EnvoyerReponseMosaicUsecase(new QuestionRepositoryAxios());
+      await envoyerReponseMosaicUsecase.execute(
+        utilisateurStore().utilisateur.id,
+        props.questionViewModel.id,
+        props.questionViewModel.reponses_possibles.map(r => ({
+          code: r.id,
+          valeur: reponse.value === r.id,
+        })),
+      );
+    } else {
+      const envoyerReponseUsecase = new EnvoyerReponseUsecase(
+        new QuestionRepositoryAxios(),
+        ToDoListEventBusImpl.getInstance(),
+      );
+
+      await envoyerReponseUsecase.execute(
+        utilisateurStore().utilisateur.id,
+        props.questionViewModel.id,
+        reponse.value === '' ? props.questionViewModel.reponses.flat() : [reponse.value].flat(),
+      );
+    }
 
     emit('update:soumissionKyc', [reponse.value].flat());
   };
