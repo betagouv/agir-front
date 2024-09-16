@@ -4,6 +4,7 @@ import { Question, ReponseKYCSimple, ReponseMosaic, ThematiqueQuestion } from '@
 export interface ReponsePossible {
   id: string;
   label: string;
+  picto?: string;
 }
 
 export interface QuestionsViewModel {
@@ -58,9 +59,10 @@ export class ListesQuestionsThematiquePresenter implements ListeQuestionsPresent
 
   private determineReponsePossibles(question: Question): ReponsePossible[] {
     if (question.type === 'mosaic_boolean') {
-      return (question.reponses as ReponseMosaic).reponse.map(reponse => ({
+      return (question.reponses as ReponseMosaic<boolean>).reponse.map(reponse => ({
         id: reponse.code,
         label: reponse.label,
+        picto: reponse.image_url,
       }));
     } else {
       return (question.reponses as ReponseKYCSimple).reponses_possibles.map(reponse => ({
@@ -71,15 +73,10 @@ export class ListesQuestionsThematiquePresenter implements ListeQuestionsPresent
   }
 
   private determineReponse(question: Question): string[] {
-    switch (question.type) {
-      case 'libre':
-        return (question.reponses as ReponseKYCSimple).reponse;
-      case 'choix_unique':
-        return (question.reponses as QuestionChoixUnique).reponse || [];
-      case 'choix_multiple':
-        return (question.reponses as QuestionChoixMultiple).reponse;
-      case 'mosaic_boolean':
-        return (question.reponses as ReponseMosaic).reponse.map(reponse => reponse.valeur.toString());
+    if (question.type === 'mosaic_boolean') {
+      return (question.reponses as ReponseMosaic<boolean>).reponse.map(reponse => reponse.valeur.toString());
+    } else {
+      return (question.reponses as ReponseKYCSimple).reponse;
     }
   }
 }

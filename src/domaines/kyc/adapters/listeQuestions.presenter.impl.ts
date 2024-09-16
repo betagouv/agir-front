@@ -1,5 +1,5 @@
 import { ListeQuestionsPresenter, QuestionViewModel } from '@/domaines/kyc/ports/listeQuestions.presenter';
-import { Question, ThematiqueQuestion } from '@/domaines/kyc/recupererQuestionUsecase';
+import { Question, ReponseKYCSimple, ThematiqueQuestion } from '@/domaines/kyc/recupererQuestionUsecase';
 
 export class ListeQuestionsPresenterImpl implements ListeQuestionsPresenter {
   constructor(private readonly questionsViewModel: (viewModel: QuestionViewModel[]) => void) {}
@@ -8,7 +8,7 @@ export class ListeQuestionsPresenterImpl implements ListeQuestionsPresenter {
       questions.map<QuestionViewModel>(question => ({
         id: question.id,
         libelle: question.libelle,
-        reponse: question.reponse?.join(' - '),
+        reponse: (question.reponses as ReponseKYCSimple).reponse.join(' - '),
         description: this.determineDescription(question.thematique),
       })),
     );

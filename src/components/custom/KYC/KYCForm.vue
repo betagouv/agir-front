@@ -4,7 +4,7 @@
       v-if="questionViewModel.type === 'choix_unique' || questionViewModel.type === 'mosaic_boolean'"
       class="fr-input-group"
     >
-      {{ reponse }}
+      {{ questionViewModel }}
       <BoutonRadio
         col=""
         legende-size="l"

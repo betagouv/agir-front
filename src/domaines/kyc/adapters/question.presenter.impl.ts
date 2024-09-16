@@ -52,7 +52,7 @@ export class QuestionPresenterImpl implements QuestionPresenter {
 
   private determineReponsePossibles(question: Question): ReponsePossible[] {
     if (question.type === 'mosaic_boolean') {
-      return (question.reponses as ReponseMosaic).reponse.map(reponse => ({
+      return (question.reponses as ReponseMosaic<boolean>).reponse.map(reponse => ({
         id: reponse.code,
         label: reponse.label,
       }));
@@ -66,7 +66,7 @@ export class QuestionPresenterImpl implements QuestionPresenter {
 
   private determineReponse(question: Question): string[] {
     if (question.type === 'mosaic_boolean') {
-      return (question.reponses as ReponseMosaic).reponse.map(reponse => reponse.valeur.toString());
+      return (question.reponses as ReponseMosaic<boolean>).reponse.map(reponse => reponse.valeur.toString());
     } else {
       return (question.reponses as ReponseKYCSimple).reponse;
     }
