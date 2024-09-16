@@ -2080,6 +2080,11 @@ diff@^5.0.0:
   resolved "https://registry.yarnpkg.com/diff/-/diff-5.2.0.tgz#26ded047cd1179b78b9537d5ef725503ce1ae531"
   integrity sha512-uIFDxqpRZGZ6ThOk84hEfqWoHx2devRFvpTZcTHur85vImfaxUbTW9Ryh4CpCuDnToOP1CEtXKIgytHBPVff5A==
 
+diff@^7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/diff/-/diff-7.0.0.tgz#3fb34d387cd76d803f6eebea67b921dab0182a9a"
+  integrity sha512-PJWHUb1RFevKCwaFA9RlG5tCd+FO5iRh9A8HEtkmBH2Li03iJriB6m6JIN4rGz3K3JLawI7/veA1xzRKP6ISBw==
+
 dir-glob@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/dir-glob/-/dir-glob-3.0.1.tgz#56dbf73d992a4a93ba1584f4534063fd2e41717f"
@@ -4554,10 +4559,10 @@ regexp.prototype.flags@^1.5.1, regexp.prototype.flags@^1.5.2:
     es-errors "^1.3.0"
     set-function-name "^2.0.1"
 
-release-please@16.12.0:
-  version "16.12.0"
-  resolved "https://registry.yarnpkg.com/release-please/-/release-please-16.12.0.tgz#da8dd59f188d09fbd26bfbeba987a6362b689d37"
-  integrity sha512-GTZBZQ/1fJwBk6y/BMSdzOczRkEu2L9LrPOXeS1FMHxY/djQLYfwfCEFrmzxGDWfsJvEeDxJlPEPR66s6WWN9w==
+release-please@16.12.2:
+  version "16.12.2"
+  resolved "https://registry.yarnpkg.com/release-please/-/release-please-16.12.2.tgz#b3179f0e5e993780b9ddb2d5fc9879833dca5fc3"
+  integrity sha512-2Dwx0Nz9Zdi/I+u6cVcM+unzRws8KUuXYWKePNbjwaNIojcKtUBCFNUM/xMl+J229UJUy+PoJPMle8VMUz7tIw==
   dependencies:
     "@conventional-commits/parser" "^0.4.1"
     "@google-automations/git-file-utils" "^2.0.0"
@@ -4574,7 +4579,7 @@ release-please@16.12.0:
     conventional-changelog-writer "^6.0.0"
     conventional-commits-filter "^3.0.0"
     detect-indent "^6.1.0"
-    diff "^5.0.0"
+    diff "^7.0.0"
     figures "^3.0.0"
     http-proxy-agent "^7.0.0"
     https-proxy-agent "^7.0.0"
