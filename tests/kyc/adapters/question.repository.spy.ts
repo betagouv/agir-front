@@ -38,4 +38,15 @@ export class SpyQuestionRepository implements QuestionRepository {
   get envoyerQuestionArgs() {
     return this._envoyerQuestionArgs;
   }
+
+  envoyerReponseMosaic(
+    utilisateurId: string,
+    questionId: string,
+    reponses: {
+      code: string;
+      valeur: boolean;
+    }[],
+  ): Promise<void> {
+    throw new Error('Method not implemented.');
+  }
 }
