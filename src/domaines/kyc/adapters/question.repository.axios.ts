@@ -21,6 +21,7 @@ export interface QuestionMosaicBooleanApiModel {
     label: string;
     boolean_value: boolean;
   }[];
+  is_answered: boolean;
 }
 
 export class QuestionRepositoryAxios implements QuestionRepository {
@@ -40,6 +41,7 @@ export class QuestionRepositoryAxios implements QuestionRepository {
         thematique: Object.values(ThematiqueQuestion).find(thematique => thematique === question.thematique) as
           | ThematiqueQuestion
           | ThematiqueQuestion.AUTRE,
+        aEteRepondu: question.type === 'mosaic_boolean' ? question.is_answered : question.reponse.length > 0,
       }));
   }
 
@@ -49,15 +51,17 @@ export class QuestionRepositoryAxios implements QuestionRepository {
       `utilisateurs/${utilisateurId}/questionsKYC/${questionId}`,
     );
 
+    const question = response.data;
     return {
-      id: response.data.id,
-      libelle: response.data.type === 'mosaic_boolean' ? response.data.titre : response.data.question,
-      type: response.data.type,
-      reponses: this.determineReponses(response.data),
-      points: response.data.points,
-      thematique: Object.values(ThematiqueQuestion).find(thematique => thematique === response.data.thematique) as
+      id: question.id,
+      libelle: question.type === 'mosaic_boolean' ? question.titre : question.question,
+      type: question.type,
+      reponses: this.determineReponses(question),
+      points: question.points,
+      thematique: Object.values(ThematiqueQuestion).find(thematique => thematique === question.thematique) as
         | ThematiqueQuestion
         | ThematiqueQuestion.AUTRE,
+      aEteRepondu: question.type === 'mosaic_boolean' ? question.is_answered : question.reponse.length > 0,
     };
   }
 
@@ -82,6 +86,7 @@ export class QuestionRepositoryAxios implements QuestionRepository {
       thematique: Object.values(ThematiqueQuestion).find(thematique => thematique === question.thematique) as
         | ThematiqueQuestion
         | ThematiqueQuestion.AUTRE,
+      aEteRepondu: question.type === 'mosaic_boolean' ? question.is_answered : question.reponse.length > 0,
     }));
   }
 

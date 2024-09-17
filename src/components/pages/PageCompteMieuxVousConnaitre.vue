@@ -24,13 +24,13 @@
   import { ListeQuestionsPresenterImpl } from '@/domaines/kyc/adapters/listeQuestions.presenter.impl';
   import { QuestionRepositoryAxios } from '@/domaines/kyc/adapters/question.repository.axios';
   import { QuestionViewModel } from '@/domaines/kyc/ports/listeQuestions.presenter';
-  import { RecupererListeQuestionsUsecase } from '@/domaines/kyc/recupererListeQuestions.usecase';
+  import { RecupererListeQuestionsReponduesUsecase } from '@/domaines/kyc/recupererListeQuestionsReponduesUsecase';
   import { RouteKycName } from '@/router/kyc/routes';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const questionsViewModel = ref<QuestionViewModel[]>([]);
 
-  new RecupererListeQuestionsUsecase(new QuestionRepositoryAxios()).execute(
+  new RecupererListeQuestionsReponduesUsecase(new QuestionRepositoryAxios()).execute(
     utilisateurStore().utilisateur.id,
     new ListeQuestionsPresenterImpl(questions => {
       questionsViewModel.value = questions;

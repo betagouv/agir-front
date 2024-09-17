@@ -29,6 +29,7 @@ export interface Question {
   points: number;
   thematique: ThematiqueQuestion;
   reponses: ReponseKYCSimple | ReponseMosaic<boolean>;
+  aEteRepondu: boolean;
 }
 
 export class RecupererQuestionUsecase {

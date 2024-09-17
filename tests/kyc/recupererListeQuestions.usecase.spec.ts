@@ -1,4 +1,4 @@
-import { RecupererListeQuestionsUsecase } from '@/domaines/kyc/recupererListeQuestions.usecase';
+import { RecupererListeQuestionsReponduesUsecase } from '@/domaines/kyc/recupererListeQuestionsReponduesUsecase';
 import { MockListeQuestionsRepository } from './adapters/listequestions.repository.mock';
 import { expect } from 'vitest';
 import { ListeQuestionsPresenterImpl } from '@/domaines/kyc/adapters/listeQuestions.presenter.impl';
@@ -8,7 +8,7 @@ describe('Fichier de tests concernant la récupération des KYC répondues', () 
   it('doit récupérer la liste des questions KYC répondues', async () => {
     // GIVEN
     // WHEN
-    const recupererListeQuestionsUsecase = new RecupererListeQuestionsUsecase(
+    const recupererListeQuestionsUsecase = new RecupererListeQuestionsReponduesUsecase(
       new MockListeQuestionsRepository([
         {
           id: 'questionId',
@@ -20,6 +20,7 @@ describe('Fichier de tests concernant la récupération des KYC répondues', () 
             reponse: ['une réponse'],
           } as ReponseKYCSimple,
           thematique: ThematiqueQuestion.LOGEMENT,
+          aEteRepondu: true,
         },
         {
           id: 'questionId2',
@@ -31,6 +32,7 @@ describe('Fichier de tests concernant la récupération des KYC répondues', () 
             reponse: [],
           } as ReponseKYCSimple,
           thematique: ThematiqueQuestion.TRANSPORT,
+          aEteRepondu: false,
         },
         {
           id: 'questionId3',
@@ -42,6 +44,7 @@ describe('Fichier de tests concernant la récupération des KYC répondues', () 
             reponse: ['une réponse', 'une autre réponse'],
           } as ReponseKYCSimple,
           thematique: ThematiqueQuestion.TRANSPORT,
+          aEteRepondu: true,
         },
       ]),
     );
