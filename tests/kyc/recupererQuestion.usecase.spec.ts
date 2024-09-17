@@ -3,6 +3,7 @@ import {
   ReponseKYCSimple,
   RecupererQuestionUsecase,
   ThematiqueQuestion,
+  ReponseMosaic,
 } from '@/domaines/kyc/recupererQuestionUsecase';
 import { QuestionPresenterImpl } from '@/domaines/kyc/adapters/question.presenter.impl';
 import { QuestionViewModel } from '@/domaines/kyc/adapters/listeQuestionsThematique.presenter.impl';
@@ -130,6 +131,62 @@ describe('Fichier de tests pour récuperer une question KYC', () => {
           {
             id: '3',
             label: '3',
+          },
+        ],
+        aDejaEteRepondu: false,
+        description:
+          'Ces informations permettent à <span class="text--italic">Agir</span> de mieux vous conseiller en matière de mobilité',
+      });
+    }
+  });
+
+  it("En donnant un id d'utilisateur et l'id de la question KYC doit appeler le back pour récuperer la question pour un type mosaic_boolean", async () => {
+    // GIVEN
+    const questionRepository = new MockQuestionRepository({
+      id: 'questionId',
+      libelle: 'Une question',
+      type: 'mosaic_boolean',
+      points: 10,
+      thematique: ThematiqueQuestion.TRANSPORT,
+      reponses: {
+        reponse: [
+          {
+            code: '1',
+            image_url: 'image_url',
+            label: '1',
+            valeur: true,
+          },
+          {
+            code: '2',
+            image_url: 'image_url',
+            label: '2',
+            valeur: true,
+          },
+        ],
+      } as ReponseMosaic<boolean>,
+      aEteRepondu: false,
+    });
+
+    // WHEN
+    const usecase = new RecupererQuestionUsecase(questionRepository);
+    await usecase.execute('utilisateurId', 'questionId', new QuestionPresenterImpl(expectation));
+
+    // THEN
+    function expectation(viewModel: QuestionViewModel) {
+      expect(viewModel).toStrictEqual<QuestionViewModel>({
+        id: 'questionId',
+        libelle: 'Une question',
+        points: 'Récoltez vos + 10 points',
+        type: 'mosaic_boolean',
+        reponses: ['true', 'true'],
+        reponses_possibles: [
+          {
+            id: '1',
+            label: '1',
+          },
+          {
+            id: '2',
+            label: '2',
           },
         ],
         aDejaEteRepondu: false,
