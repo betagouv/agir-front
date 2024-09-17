@@ -2,7 +2,7 @@ import { RecupererListeQuestionsUsecase } from '@/domaines/kyc/recupererListeQue
 import { MockListeQuestionsRepository } from './adapters/listequestions.repository.mock';
 import { expect } from 'vitest';
 import { ListeQuestionsPresenterImpl } from '@/domaines/kyc/adapters/listeQuestions.presenter.impl';
-import { ThematiqueQuestion } from '@/domaines/kyc/recupererQuestionUsecase';
+import { ReponseKYCSimple, ThematiqueQuestion } from '@/domaines/kyc/recupererQuestionUsecase';
 
 describe('Fichier de tests concernant la récupération des KYC répondues', () => {
   it('doit récupérer la liste des questions KYC répondues', async () => {
@@ -14,27 +14,33 @@ describe('Fichier de tests concernant la récupération des KYC répondues', () 
           id: 'questionId',
           libelle: 'Une question',
           type: 'libre',
-          reponses_possibles: [],
           points: 10,
-          reponse: ['une réponse'],
+          reponses: {
+            reponses_possibles: [],
+            reponse: ['une réponse'],
+          } as ReponseKYCSimple,
           thematique: ThematiqueQuestion.LOGEMENT,
         },
         {
           id: 'questionId2',
           libelle: 'Une question2',
           type: 'libre',
-          reponses_possibles: [],
           points: 10,
-          reponse: [],
+          reponses: {
+            reponses_possibles: ['1', '2', '3'],
+            reponse: [],
+          } as ReponseKYCSimple,
           thematique: ThematiqueQuestion.TRANSPORT,
         },
         {
           id: 'questionId3',
           libelle: 'Une question2',
           type: 'choix_multiple',
-          reponses_possibles: [],
           points: 10,
-          reponse: ['une réponse', 'une autre réponse'],
+          reponses: {
+            reponses_possibles: ['une réponse', 'une autre réponse', 'une autre réponse2'],
+            reponse: ['une réponse', 'une autre réponse'],
+          } as ReponseKYCSimple,
           thematique: ThematiqueQuestion.TRANSPORT,
         },
       ]),
