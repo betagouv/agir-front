@@ -5,20 +5,72 @@ import {
 import { Question, ReponseKYCSimple, ReponseMosaic, ThematiqueQuestion } from '@/domaines/kyc/recupererQuestionUsecase';
 
 export class QuestionViewModelBuilder {
-  static build(question: Question): QuestionViewModel {
-    const builder = new QuestionViewModelBuilder();
-    return {
-      id: question.id,
-      libelle: question.libelle,
-      type: question.type,
-      points: `Récoltez vos + ${question.points} points`,
-      reponses_possibles: builder.determineReponsePossibles(question),
-      reponses: builder.determineReponse(question),
-      aDejaEteRepondu: question.aEteRepondu,
-      description: builder.determineDescription(question.thematique),
-    };
+  private questionViewModel: Partial<QuestionViewModel> = {};
+
+  static init(): QuestionViewModelBuilder {
+    return new QuestionViewModelBuilder();
   }
-  private determineDescription(thematique: ThematiqueQuestion) {
+
+  withId(id: string): QuestionViewModelBuilder {
+    this.questionViewModel.id = id;
+    return this;
+  }
+
+  withLibelle(libelle: string): QuestionViewModelBuilder {
+    this.questionViewModel.libelle = libelle;
+    return this;
+  }
+
+  withType(type: 'libre' | 'choix_multiple' | 'choix_unique' | 'mosaic_boolean'): QuestionViewModelBuilder {
+    this.questionViewModel.type = type;
+    return this;
+  }
+
+  withPoints(points: number): QuestionViewModelBuilder {
+    this.questionViewModel.points = `Récoltez vos + ${points} points`;
+    return this;
+  }
+
+  withReponsesPossibles(reponses: ReponsePossibleViewModel[]): QuestionViewModelBuilder {
+    this.questionViewModel.reponses_possibles = reponses;
+    return this;
+  }
+
+  withReponses(reponses: string[]): QuestionViewModelBuilder {
+    this.questionViewModel.reponses = reponses;
+    return this;
+  }
+
+  withADejaEteRepondu(aDejaEteRepondu: boolean): QuestionViewModelBuilder {
+    this.questionViewModel.aDejaEteRepondu = aDejaEteRepondu;
+    return this;
+  }
+
+  withDescription(description: string): QuestionViewModelBuilder {
+    this.questionViewModel.description = description;
+    return this;
+  }
+
+  build(): QuestionViewModel {
+    return this.questionViewModel as QuestionViewModel;
+  }
+
+  static buildFromQuestion(question: Question): QuestionViewModel {
+    const builder = QuestionViewModelBuilder.init();
+
+    return builder
+      .withId(question.id)
+      .withLibelle(question.libelle)
+      .withType(question.type)
+      .withPoints(question.points)
+      .withReponsesPossibles(builder.determineReponsePossibles(question))
+      .withReponses(builder.determineReponse(question))
+      .withADejaEteRepondu(question.aEteRepondu)
+      .withDescription(builder.determineDescription(question.thematique))
+      .build();
+  }
+
+  private determineDescription(thematique: ThematiqueQuestion): string {
     switch (thematique) {
       case ThematiqueQuestion.ALIMENTATION:
         return 'Ces informations permettent à <span class="text--italic">Agir</span> de mieux comprendre vos habitudes alimentaires';

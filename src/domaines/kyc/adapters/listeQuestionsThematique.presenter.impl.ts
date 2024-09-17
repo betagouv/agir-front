@@ -29,7 +29,7 @@ export class ListesQuestionsThematiquePresenter implements ListeQuestionsPresent
 
   presente(questions: Question[]) {
     this.questionViewModel({
-      questions: questions.map(question => QuestionViewModelBuilder.build(question)),
+      questions: questions.map(question => QuestionViewModelBuilder.buildFromQuestion(question)),
       phrasePointAGagner: `Vous avez remporté ${questions.reduce((acc, question) => acc + question.points, 0)}`,
     });
   }
