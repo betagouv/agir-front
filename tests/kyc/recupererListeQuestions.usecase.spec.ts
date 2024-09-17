@@ -1,7 +1,7 @@
 import { RecupererListeQuestionsReponduesUsecase } from '@/domaines/kyc/recupererListeQuestionsReponduesUsecase';
 import { MockListeQuestionsRepository } from './adapters/listequestions.repository.mock';
 import { expect } from 'vitest';
-import { ListeQuestionsPresenterImpl } from '@/domaines/kyc/adapters/listeQuestions.presenter.impl';
+import { ListeQuestionsDansLeComptePresenter } from '@/domaines/kyc/adapters/listeQuestionsDansLeComptePresenter';
 import { ReponseKYCSimple, ThematiqueQuestion } from '@/domaines/kyc/recupererQuestionUsecase';
 
 describe('Fichier de tests concernant la récupération des KYC répondues', () => {
@@ -50,7 +50,7 @@ describe('Fichier de tests concernant la récupération des KYC répondues', () 
     );
     await recupererListeQuestionsUsecase.execute(
       'utilisateurId',
-      new ListeQuestionsPresenterImpl(questionsViewModel => {
+      new ListeQuestionsDansLeComptePresenter(questionsViewModel => {
         // THEN
         expect(questionsViewModel).toStrictEqual([
           {

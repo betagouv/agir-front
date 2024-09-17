@@ -2,25 +2,22 @@ import {
   QuestionViewModel,
   ReponsePossibleViewModel,
 } from '@/domaines/kyc/adapters/listeQuestionsThematique.presenter.impl';
-import { QuestionPresenter } from '@/domaines/kyc/ports/question.presenter';
 import { Question, ReponseKYCSimple, ReponseMosaic, ThematiqueQuestion } from '@/domaines/kyc/recupererQuestionUsecase';
 
-export class QuestionPresenterImpl implements QuestionPresenter {
-  constructor(private readonly questionViewModel: (viewModel: QuestionViewModel) => void) {}
-
-  presente(question: Question) {
-    this.questionViewModel({
+export class QuestionViewModelBuilder {
+  static build(question: Question): QuestionViewModel {
+    const builder = new QuestionViewModelBuilder();
+    return {
       id: question.id,
       libelle: question.libelle,
       type: question.type,
       points: `Récoltez vos + ${question.points} points`,
-      reponses_possibles: this.determineReponsePossibles(question),
-      reponses: this.determineReponse(question),
+      reponses_possibles: builder.determineReponsePossibles(question),
+      reponses: builder.determineReponse(question),
       aDejaEteRepondu: question.aEteRepondu,
-      description: this.determineDescription(question.thematique),
-    });
+      description: builder.determineDescription(question.thematique),
+    };
   }
-
   private determineDescription(thematique: ThematiqueQuestion) {
     switch (thematique) {
       case ThematiqueQuestion.ALIMENTATION:

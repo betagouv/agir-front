@@ -23,6 +23,7 @@ describe('Fichier de tests concernant la recupérations des questions kyc pour u
             reponses_possibles: [],
             reponse: [],
           } as ReponseKYCSimple,
+          aEteRepondu: false,
         },
       ]),
     );

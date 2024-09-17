@@ -12,7 +12,7 @@
         :name="questionViewModel.id"
         orientation="vertical"
         :options="
-          questionViewModel.reponses_possibles.map((reponsePossible: ReponsePossible) => ({
+          questionViewModel.reponses_possibles.map((reponsePossible: ReponsePossibleViewModel) => ({
             label: reponsePossible.label,
             value: reponsePossible.id,
           }))
@@ -50,7 +50,7 @@
   import { onMounted, ref, watch } from 'vue';
   import BoutonRadio from '@/components/custom/BoutonRadio.vue';
   import InputCheckbox from '@/components/custom/InputCheckbox.vue';
-  import { QuestionViewModel, ReponsePossible } from '@/domaines/kyc/adapters/question.presenter.impl';
+  import { QuestionViewModel, ReponsePossibleViewModel } from '@/domaines/kyc/adapters/question.presenter.impl';
   import { QuestionRepositoryAxios } from '@/domaines/kyc/adapters/question.repository.axios';
   import { EnvoyerReponseMosaicUsecase } from '@/domaines/kyc/envoyerReponseMosaic.usecase';
   import { EnvoyerReponseUsecase } from '@/domaines/kyc/envoyerReponseUsecase';

@@ -1,6 +1,6 @@
 import { Question } from '@/domaines/kyc/recupererQuestionUsecase';
 
-export interface QuestionViewModel {
+export interface QuestionDansLeCompteViewModel {
   id: string;
   libelle: string;
   reponse: string;

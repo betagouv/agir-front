@@ -4,7 +4,8 @@ import {
   RecupererQuestionUsecase,
   ThematiqueQuestion,
 } from '@/domaines/kyc/recupererQuestionUsecase';
-import { QuestionPresenterImpl, QuestionViewModel } from '@/domaines/kyc/adapters/question.presenter.impl';
+import { QuestionPresenterImpl } from '@/domaines/kyc/adapters/question.presenter.impl';
+import { QuestionViewModel } from '@/domaines/kyc/adapters/listeQuestionsThematique.presenter.impl';
 
 describe('Fichier de tests pour récuperer une question KYC', () => {
   it("En donnant un id d'utilisateur et l'id de la question KYC doit appeler le back pour récuperer la question pour un type libre", async () => {
@@ -19,6 +20,7 @@ describe('Fichier de tests pour récuperer une question KYC', () => {
         reponses_possibles: [],
         reponse: [],
       } as ReponseKYCSimple,
+      aEteRepondu: false,
     });
 
     // WHEN
@@ -53,6 +55,7 @@ describe('Fichier de tests pour récuperer une question KYC', () => {
         reponse: [],
       } as ReponseKYCSimple,
       thematique: ThematiqueQuestion.DECHET,
+      aEteRepondu: false,
     });
 
     // WHEN
@@ -100,6 +103,7 @@ describe('Fichier de tests pour récuperer une question KYC', () => {
         reponses_possibles: ['1', '2', '3'],
         reponse: [],
       } as ReponseKYCSimple,
+      aEteRepondu: false,
     });
 
     // WHEN
@@ -147,6 +151,7 @@ describe('Fichier de tests pour récuperer une question KYC', () => {
         reponses_possibles: ['1', '2', '3'],
         reponse: ['1'],
       } as ReponseKYCSimple,
+      aEteRepondu: true,
     });
 
     // WHEN

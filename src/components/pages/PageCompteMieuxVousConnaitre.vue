@@ -21,18 +21,18 @@
 <script setup lang="ts">
   import { ref } from 'vue';
   import CompteSkeleton from '@/components/custom/Compte/CompteSkeleton.vue';
-  import { ListeQuestionsPresenterImpl } from '@/domaines/kyc/adapters/listeQuestions.presenter.impl';
+  import { ListeQuestionsDansLeComptePresenter } from '@/domaines/kyc/adapters/listeQuestionsDansLeComptePresenter';
   import { QuestionRepositoryAxios } from '@/domaines/kyc/adapters/question.repository.axios';
-  import { QuestionViewModel } from '@/domaines/kyc/ports/listeQuestions.presenter';
+  import { QuestionDansLeCompteViewModel } from '@/domaines/kyc/ports/listeQuestions.presenter';
   import { RecupererListeQuestionsReponduesUsecase } from '@/domaines/kyc/recupererListeQuestionsReponduesUsecase';
   import { RouteKycName } from '@/router/kyc/routes';
   import { utilisateurStore } from '@/store/utilisateur';
 
-  const questionsViewModel = ref<QuestionViewModel[]>([]);
+  const questionsViewModel = ref<QuestionDansLeCompteViewModel[]>([]);
 
   new RecupererListeQuestionsReponduesUsecase(new QuestionRepositoryAxios()).execute(
     utilisateurStore().utilisateur.id,
-    new ListeQuestionsPresenterImpl(questions => {
+    new ListeQuestionsDansLeComptePresenter(questions => {
       questionsViewModel.value = questions;
     }),
   );
