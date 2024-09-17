@@ -50,7 +50,10 @@
   import { onMounted, ref, watch } from 'vue';
   import BoutonRadio from '@/components/custom/BoutonRadio.vue';
   import InputCheckbox from '@/components/custom/InputCheckbox.vue';
-  import { QuestionViewModel, ReponsePossibleViewModel } from '@/domaines/kyc/adapters/question.presenter.impl';
+  import {
+    QuestionViewModel,
+    ReponsePossibleViewModel,
+  } from '@/domaines/kyc/adapters/listeQuestionsThematique.presenter.impl';
   import { QuestionRepositoryAxios } from '@/domaines/kyc/adapters/question.repository.axios';
   import { EnvoyerReponseMosaicUsecase } from '@/domaines/kyc/envoyerReponseMosaic.usecase';
   import { EnvoyerReponseUsecase } from '@/domaines/kyc/envoyerReponseUsecase';
@@ -71,7 +74,6 @@
 
   const validerLaReponse = async () => {
     if (props.questionViewModel.type === 'mosaic_boolean') {
-      //TODO useCase Mosaic
       const envoyerReponseMosaicUsecase = new EnvoyerReponseMosaicUsecase(new QuestionRepositoryAxios());
       await envoyerReponseMosaicUsecase.execute(
         utilisateurStore().utilisateur.id,

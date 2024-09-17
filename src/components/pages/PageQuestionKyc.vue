@@ -31,7 +31,8 @@
   import KYCFin from '@/components/custom/KYC/KYCFin.vue';
   import KYCForm from '@/components/custom/KYC/KYCForm.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
-  import { QuestionPresenterImpl, QuestionViewModel } from '@/domaines/kyc/adapters/question.presenter.impl';
+  import { QuestionViewModel } from '@/domaines/kyc/adapters/listeQuestionsThematique.presenter.impl';
+  import { QuestionPresenterImpl } from '@/domaines/kyc/adapters/question.presenter.impl';
   import { QuestionRepositoryAxios } from '@/domaines/kyc/adapters/question.repository.axios';
   import { RecupererQuestionUsecase } from '@/domaines/kyc/recupererQuestionUsecase';
   import { RouteCoachName } from '@/router/coach/routeCoachName';
