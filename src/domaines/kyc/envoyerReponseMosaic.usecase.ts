@@ -6,7 +6,7 @@ export class EnvoyerReponseMosaicUsecase {
   async execute(
     utilisateurId: string,
     questionId: string,
-    reponses: { code: string; valeur: boolean }[],
+    reponses: { code: string; boolean_value: boolean }[],
   ): Promise<void> {
     await this.questionRepository.envoyerReponseMosaic(utilisateurId, questionId, reponses);
   }

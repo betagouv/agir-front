@@ -8,6 +8,6 @@ export interface QuestionRepository {
   envoyerReponseMosaic(
     utilisateurId: string,
     questionId: string,
-    reponses: { code: string; valeur: boolean }[],
+    reponses: { code: string; boolean_value: boolean }[],
   ): Promise<void>;
 }

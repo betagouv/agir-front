@@ -1,9 +1,20 @@
 <template>
   <form @submit.prevent="validerLaReponse()">
-    <div
-      v-if="questionViewModel.type === 'choix_unique' || questionViewModel.type === 'mosaic_boolean'"
-      class="fr-input-group"
-    >
+    <div v-if="questionViewModel.type === 'mosaic_boolean'">
+      <KYCMosaic
+        :name="questionViewModel.id"
+        :legende="questionViewModel.libelle"
+        :options="
+          questionViewModel.reponses_possibles.map(reponsePossible => ({
+            label: reponsePossible.label,
+            value: reponsePossible.id,
+            picto: reponsePossible.picto,
+          }))
+        "
+        v-model="reponse"
+      />
+    </div>
+    <div v-if="questionViewModel.type === 'choix_unique'" class="fr-input-group">
       {{ questionViewModel }}
       <BoutonRadio
         col=""
@@ -50,6 +61,7 @@
   import { onMounted, ref, watch } from 'vue';
   import BoutonRadio from '@/components/custom/BoutonRadio.vue';
   import InputCheckbox from '@/components/custom/InputCheckbox.vue';
+  import KYCMosaic from '@/components/custom/KYC/KYCMosaic.vue';
   import {
     QuestionViewModel,
     ReponsePossibleViewModel,
@@ -80,7 +92,7 @@
         props.questionViewModel.id,
         props.questionViewModel.reponses_possibles.map(r => ({
           code: r.id,
-          valeur: reponse.value === r.id,
+          boolean_value: reponse.value.includes(r.id),
         })),
       );
     } else {

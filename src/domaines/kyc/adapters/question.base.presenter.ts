@@ -90,6 +90,7 @@ export class QuestionViewModelBuilder {
       return (question.reponses as ReponseMosaic<boolean>).reponse.map(reponse => ({
         id: reponse.code,
         label: reponse.label,
+        picto: reponse.image_url,
       }));
     } else {
       return (question.reponses as ReponseKYCSimple).reponses_possibles.map(reponse => ({

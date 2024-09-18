@@ -95,10 +95,10 @@ export class QuestionRepositoryAxios implements QuestionRepository {
   async envoyerReponseMosaic(
     utilisateurId: string,
     questionId: string,
-    reponses: { code: string; valeur: boolean }[],
+    reponses: { code: string; boolean_value: boolean }[],
   ): Promise<void> {
-    await AxiosFactory.getAxios().put(`/utilisateurs/${utilisateurId}/mosaicsKYC/${questionId}`, {
-      reponse: reponses,
+    await AxiosFactory.getAxios().put(`/utilisateurs/${utilisateurId}/questionsKYC/${questionId}`, {
+      reponse_mosaic: reponses,
     });
   }
 }
