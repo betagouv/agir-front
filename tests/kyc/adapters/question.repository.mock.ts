@@ -23,7 +23,7 @@ export class MockQuestionRepository implements QuestionRepository {
     questionId: string,
     reponses: {
       code: string;
-      valeur: boolean;
+      boolean_value: boolean;
     }[],
   ): Promise<void> {
     return Promise.resolve(undefined);

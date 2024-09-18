@@ -44,7 +44,7 @@ export class SpyQuestionRepository implements QuestionRepository {
     questionId: string,
     reponses: {
       code: string;
-      valeur: boolean;
+      boolean_value: boolean;
     }[],
   ): Promise<void> {
     throw new Error('Method not implemented.');
