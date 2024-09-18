@@ -9,9 +9,10 @@
           :name="name"
           :value="option.value"
           @change="updateValue($event)"
+          :checked="option.checked"
         />
         <span class="fr-icon-checkbox-circle-fill text--bleu mosaic__checkbox" aria-hidden="true"></span>
-        <span class="toto border border-radius--md mosaic__label">
+        <span class="mosaic__label border border-radius--md">
           <img :src="option.picto" height="50" alt="" />
           {{ option.label }}
         </span>
@@ -26,7 +27,7 @@
   defineProps<{
     legende: string;
     name: string;
-    options: { label: string; value: string | boolean; picto?: string }[];
+    options: { label: string; value: string | boolean; checked?: boolean; picto?: string }[];
   }>();
 
   const emit = defineEmits<{ (e: 'update:modelValue', value: string[]): void }>();
@@ -50,13 +51,7 @@
   .mosaic {
     padding: 0;
     margin: 0;
-  }
-  fieldset {
     border: 0;
-  }
-
-  img {
-    width: fit-content;
   }
 
   input[type='checkbox'] {

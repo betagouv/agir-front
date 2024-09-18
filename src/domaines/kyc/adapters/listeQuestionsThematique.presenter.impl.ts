@@ -6,6 +6,7 @@ export interface ReponsePossibleViewModel {
   id: string;
   label: string;
   picto?: string;
+  checked?: boolean;
 }
 
 export interface QuestionsViewModel {

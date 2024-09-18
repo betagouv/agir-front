@@ -9,6 +9,7 @@
             label: reponsePossible.label,
             value: reponsePossible.id,
             picto: reponsePossible.picto,
+            checked: reponsePossible.checked,
           }))
         "
         v-model="reponse"

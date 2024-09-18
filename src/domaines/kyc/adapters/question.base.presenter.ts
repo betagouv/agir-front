@@ -91,6 +91,7 @@ export class QuestionViewModelBuilder {
         id: reponse.code,
         label: reponse.label,
         picto: reponse.image_url,
+        checked: reponse.valeur,
       }));
     } else {
       return (question.reponses as ReponseKYCSimple).reponses_possibles.map(reponse => ({
