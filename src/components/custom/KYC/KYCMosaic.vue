@@ -24,7 +24,7 @@
 <script setup lang="ts">
   import { ref } from 'vue';
 
-  defineProps<{
+  const props = defineProps<{
     legende: string;
     name: string;
     options: { label: string; value: string | boolean; checked?: boolean; picto?: string }[];
@@ -32,7 +32,9 @@
 
   const emit = defineEmits<{ (e: 'update:modelValue', value: string[]): void }>();
 
-  const checkedNames = ref<Set<string>>(new Set());
+  const checkedNames = ref<Set<string>>(
+    new Set(props.options.filter(option => option.checked).map(option => String(option.value))),
+  );
 
   const updateValue = (event: Event) => {
     const input = event.target as HTMLInputElement;
