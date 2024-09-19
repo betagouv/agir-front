@@ -2,7 +2,7 @@
   <fieldset class="mosaic fr-mb-2w">
     <legend class="fr-h4">{{ legende }}</legend>
     <div class="fr-grid-row fr-grid-row--gutters">
-      <label v-for="option in options" :key="option.label" class="fr-col-3 position--relative">
+      <label v-for="option in options" :key="option.label" class="fr-col-6 fr-col-md-3 position--relative">
         <input
           type="checkbox"
           :id="`${option.value}-${name}`"
