@@ -46,15 +46,13 @@
                 </li>
                 <li v-if="utilisateurStore().utilisateur.onboardingAEteRealise">
                   <div class="utilisateur">
-                    <div class="fr-icon-user-fill fr-icon--sm fr-text-label--blue-france">
-                      <router-link
-                        class="fr-text-label--blue-france fr-text--bold fr-ml-1w"
-                        title="accéder à mon compte"
-                        :to="{ name: RouteCompteName.MON_COMPTE }"
-                      >
-                        {{ nomUtilisateur }}
-                      </router-link>
-                    </div>
+                    <router-link
+                      class="fr-text-label--blue-france fr-text--bold fr-ml-1w fr-icon-user-fill fr-icon--sm"
+                      title="accéder à mon compte"
+                      :to="{ name: RouteCompteName.MON_COMPTE }"
+                    >
+                      {{ nomUtilisateur }}
+                    </router-link>
                     <ScoreHeader v-if="utilisateurStore().utilisateur.onboardingAEteRealise" />
                   </div>
                 </li>
