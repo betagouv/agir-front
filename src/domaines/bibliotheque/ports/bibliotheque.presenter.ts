@@ -5,6 +5,7 @@ export interface BibliothequePresenter {
 }
 
 export interface BibliothequeViewModel {
+  phraseNombreArticles: string;
   articles: {
     idDuContenu: string;
     titre: string;
