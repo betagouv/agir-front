@@ -6,14 +6,14 @@
         <InputPassword v-model="motDePasse" @update:mot-de-passe-valide="onMotDePasseValideChanged" />
       </div>
       <button :disabled="!formulaireValide" class="fr-btn fr-btn--secondary">Modifier votre mot de passe</button>
-      <Alert
-        v-if="alerte.isActive"
-        class="fr-col-12 fr-mt-2w"
-        :type="alerte.type"
-        :titre="alerte.titre"
-        :message="alerte.message"
-      />
     </div>
+    <Alert
+      v-if="alerte.isActive"
+      class="fr-col-12 fr-mt-2w"
+      :type="alerte.type"
+      :titre="alerte.titre"
+      :message="alerte.message"
+    />
   </form>
 </template>
 
@@ -41,7 +41,7 @@
     usecase
       .execute(utilisateurId, motDePasse.value)
       .then(() => {
-        afficherAlerte('success', 'Changement de mot de passe', 'Votre mot de passe a été changé');
+        afficherAlerte('success', 'Changement de mot de passe', 'Votre mot de passe a été modifié avec succès');
       })
       .catch(reason => {
         afficherAlerte('error', 'Changement de mot de passe', reason.data.message);
