@@ -16,7 +16,6 @@
       />
     </div>
     <div v-if="questionViewModel.type === 'choix_unique'" class="fr-input-group">
-      {{ questionViewModel }}
       <BoutonRadio
         col=""
         legende-size="l"
