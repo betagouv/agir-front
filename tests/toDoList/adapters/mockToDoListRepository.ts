@@ -110,6 +110,21 @@ export class MockToDoListRepository implements ToDoListRepository {
           thematique: '🌍 Global',
           pointAEteRecolte: false,
         },
+        {
+          id: 'id3',
+          interactionId: 'interactionId3',
+          titre: 'Faire son bilan',
+          url: '',
+          idDuContenu: '',
+          progession: {
+            etapeCourante: 1,
+            etapeTotal: 1,
+          },
+          nombreDePointsAGagner: 10,
+          type: InteractionType.ENCHAINEMENT_KYC,
+          thematique: '🌍 Global',
+          pointAEteRecolte: false,
+        },
       ],
       featureDebloquee: {
         titre: 'Vos aides',

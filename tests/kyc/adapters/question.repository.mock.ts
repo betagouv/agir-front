@@ -28,4 +28,8 @@ export class MockQuestionRepository implements QuestionRepository {
   ): Promise<void> {
     return Promise.resolve(undefined);
   }
+
+  recupererQuestionsDepuisMissionOnboarding(utilisateurId: string): Promise<Question[]> {
+    return Promise.resolve([]);
+  }
 }

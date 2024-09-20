@@ -7,4 +7,5 @@ export enum InteractionType {
   SERVICE = 'service',
   RECOMMANDATION = 'recommandations',
   DEFIS = 'defi',
+  ENCHAINEMENT_KYC = 'enchainement_kyc',
 }

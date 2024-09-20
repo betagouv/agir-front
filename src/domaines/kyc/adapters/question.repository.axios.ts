@@ -101,4 +101,73 @@ export class QuestionRepositoryAxios implements QuestionRepository {
       reponse_mosaic: reponses,
     });
   }
+
+  @intercept401()
+  async recupererQuestionsDepuisMissionOnboarding(utilisateurId: string): Promise<Question[]> {
+    const axiosInstance = AxiosFactory.getAxios();
+    const response = await axiosInstance.get(`/utilisateurs/${utilisateurId}/todo`);
+
+    const KYC = JSON.stringify({
+      titre: 'Enchainement',
+      type: 'enchainement_kyc',
+      level: 1,
+      content_id: 'ENCHAINEMENT_KYC_1',
+      points: 10,
+      questions: [
+        {
+          id: 'KYC001',
+          question: 'quest 1',
+          reponse: [],
+          reponses_possibles: ['Oui', 'Non', 'Je sais pas'],
+          categorie: 'recommandation',
+          points: 20,
+          type: 'choix_unique',
+          is_NGC: true,
+          thematique: 'alimentation',
+        },
+        {
+          id: 'KYC002',
+          question: 'quest 2',
+          reponse: [],
+          reponses_possibles: ['Oui', 'Non', 'Je sais pas'],
+          categorie: 'recommandation',
+          points: 20,
+          type: 'choix_unique',
+          is_NGC: true,
+          thematique: 'alimentation',
+        },
+        {
+          id: 'TEST_MOSAIC_ID',
+          titre: 'Titre test',
+          reponses: [
+            {
+              boolean_value: false,
+              code: 'KYC003',
+              image_url: 'AAA',
+              label: 'short',
+            },
+            {
+              boolean_value: false,
+              code: 'KYC004',
+              image_url: 'AAA',
+              label: 'short',
+            },
+          ],
+          categorie: 'test',
+          points: 10,
+          type: 'mosaic_boolean',
+          is_answered: false,
+        },
+      ],
+      progression: { current: 0, target: 3 },
+      sont_points_en_poche: false,
+      thematiques: ['climat'],
+    });
+
+    response.data.todo.push(JSON.parse(KYC));
+
+    return response.data.todo
+      .filter(todo => todo.type === 'enchainement_kyc')[0]
+      .questions.map((question: QuestionApiModel) => this.mapQuestionApiModelToQuestion(question));
+  }
 }

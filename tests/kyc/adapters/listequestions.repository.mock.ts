@@ -28,4 +28,8 @@ export class MockListeQuestionsRepository implements QuestionRepository {
   ): Promise<void> {
     throw new Error('Method not implemented.');
   }
+
+  recupererQuestionsDepuisMissionOnboarding(utilisateurId: string): Promise<Question[]> {
+    return Promise.resolve(this.questionARetourner);
+  }
 }
