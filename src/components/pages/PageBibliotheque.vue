@@ -13,7 +13,9 @@
         />
       </div>
       <div class="fr-col-md-8 fr-col-12">
-        <h2 class="fr-h4">{{ bibliothequeViewModel.articles.length }} articles</h2>
+        <h2 class="fr-h4">
+          {{ bibliothequeViewModel.phraseNombreArticles }}
+        </h2>
         <div v-if="isLoadingFiltre">Chargement en cours ...</div>
         <div v-else-if="bibliothequeViewModel.articles.length === 0">
           <div class="text--center">

@@ -6,7 +6,10 @@ export class BibliothequePresenterImpl implements BibliothequePresenter {
   constructor(private readonly bibliothequeViewModel: (viewModel: BibliothequeViewModel) => void) {}
 
   presente(bibliotheque: Bibliotheque): void {
+    const nombresArticle = bibliotheque.ressources.length;
+
     this.bibliothequeViewModel({
+      phraseNombreArticles: `${nombresArticle} article${nombresArticle > 1 ? 's' : ''}`,
       articles: bibliotheque.ressources.map(ressource => ({
         idDuContenu: ressource.idDuContenu,
         titre: ressource.titre,
