@@ -58,27 +58,25 @@ test.beforeAll(async () => {
     route.fulfill({
       status: 200,
       contentType: 'application/json',
-      body: JSON.stringify(
-        new InjectKYC().avecKYC({
-          id: 'KYC001',
-          question: 'Sur quel(s) sujet(s) souhaitez-vous en savoir plus pour réduire votre impact environnemental ?',
-          reponse: ['🥦 Alimentation'],
-          categorie: 'mission',
-          points: 5,
-          type: 'choix_multiple',
-          reponses_possibles: [
-            '🥦 Alimentation',
-            '☀️ Climat et Environnement',
-            '🛒 Consommation durable',
-            '🗑️ Déchets',
-            '🏡 Logement',
-            '⚽ Loisirs (vacances, sport,...)',
-            '🚗 Transports',
-            'Aucun / Je ne sais pas',
-          ],
-          thematique: ThematiqueQuestion.AUTRE,
-        }),
-      ),
+      body: JSON.stringify({
+        id: 'KYC001',
+        question: 'Sur quel(s) sujet(s) souhaitez-vous en savoir plus pour réduire votre impact environnemental ?',
+        reponse: ['🥦 Alimentation'],
+        categorie: 'mission',
+        points: 5,
+        type: 'choix_multiple',
+        reponses_possibles: [
+          '🥦 Alimentation',
+          '☀️ Climat et Environnement',
+          '🛒 Consommation durable',
+          '🗑️ Déchets',
+          '🏡 Logement',
+          '⚽ Loisirs (vacances, sport,...)',
+          '🚗 Transports',
+          'Aucun / Je ne sais pas',
+        ],
+        thematique: ThematiqueQuestion.AUTRE,
+      }),
     });
   });
 });

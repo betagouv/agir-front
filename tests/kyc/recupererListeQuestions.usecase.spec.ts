@@ -1,47 +1,56 @@
-import { RecupererListeQuestionsUsecase } from '@/domaines/kyc/recupererListeQuestions.usecase';
+import { RecupererListeQuestionsReponduesUsecase } from '@/domaines/kyc/recupererListeQuestionsReponduesUsecase';
 import { MockListeQuestionsRepository } from './adapters/listequestions.repository.mock';
 import { expect } from 'vitest';
-import { ListeQuestionsPresenterImpl } from '@/domaines/kyc/adapters/listeQuestions.presenter.impl';
-import { ThematiqueQuestion } from '@/domaines/kyc/recupererQuestionUsecase';
+import { ListeQuestionsDansLeComptePresenter } from '@/domaines/kyc/adapters/listeQuestionsDansLeComptePresenter';
+import { ReponseKYCSimple, ThematiqueQuestion } from '@/domaines/kyc/recupererQuestionUsecase';
 
 describe('Fichier de tests concernant la récupération des KYC répondues', () => {
   it('doit récupérer la liste des questions KYC répondues', async () => {
     // GIVEN
     // WHEN
-    const recupererListeQuestionsUsecase = new RecupererListeQuestionsUsecase(
+    const recupererListeQuestionsUsecase = new RecupererListeQuestionsReponduesUsecase(
       new MockListeQuestionsRepository([
         {
           id: 'questionId',
           libelle: 'Une question',
           type: 'libre',
-          reponses_possibles: [],
           points: 10,
-          reponse: ['une réponse'],
+          reponses: {
+            reponses_possibles: [],
+            reponse: ['une réponse'],
+          } as ReponseKYCSimple,
           thematique: ThematiqueQuestion.LOGEMENT,
+          aEteRepondu: true,
         },
         {
           id: 'questionId2',
           libelle: 'Une question2',
           type: 'libre',
-          reponses_possibles: [],
           points: 10,
-          reponse: [],
+          reponses: {
+            reponses_possibles: ['1', '2', '3'],
+            reponse: [],
+          } as ReponseKYCSimple,
           thematique: ThematiqueQuestion.TRANSPORT,
+          aEteRepondu: false,
         },
         {
           id: 'questionId3',
           libelle: 'Une question2',
           type: 'choix_multiple',
-          reponses_possibles: [],
           points: 10,
-          reponse: ['une réponse', 'une autre réponse'],
+          reponses: {
+            reponses_possibles: ['une réponse', 'une autre réponse', 'une autre réponse2'],
+            reponse: ['une réponse', 'une autre réponse'],
+          } as ReponseKYCSimple,
           thematique: ThematiqueQuestion.TRANSPORT,
+          aEteRepondu: true,
         },
       ]),
     );
     await recupererListeQuestionsUsecase.execute(
       'utilisateurId',
-      new ListeQuestionsPresenterImpl(questionsViewModel => {
+      new ListeQuestionsDansLeComptePresenter(questionsViewModel => {
         // THEN
         expect(questionsViewModel).toStrictEqual([
           {

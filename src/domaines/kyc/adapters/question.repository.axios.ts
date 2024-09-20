@@ -1,16 +1,27 @@
 import { AxiosFactory, intercept401 } from '@/axios.factory';
 import { QuestionRepository } from '@/domaines/kyc/ports/question.repository';
-import { Question, ThematiqueQuestion } from '@/domaines/kyc/recupererQuestionUsecase';
+import { Question, ReponseKYCSimple, ReponseMosaic, ThematiqueQuestion } from '@/domaines/kyc/recupererQuestionUsecase';
 
-export interface QuestionApiModel {
+export interface QuestionApiModel extends QuestionMosaicBooleanApiModel {
   id: string;
   question: string;
-  type: 'libre' | 'choix_multiple' | 'choix_unique';
+  type: 'libre' | 'choix_multiple' | 'choix_unique' | 'mosaic_boolean';
   reponses_possibles: string[];
   points: number;
   reponse: string[];
   categorie: string;
   thematique: string;
+}
+
+export interface QuestionMosaicBooleanApiModel {
+  titre: string;
+  reponses: {
+    code: string;
+    image_url: string;
+    label: string;
+    boolean_value: boolean;
+  }[];
+  is_answered: boolean;
 }
 
 export class QuestionRepositoryAxios implements QuestionRepository {
@@ -21,17 +32,39 @@ export class QuestionRepositoryAxios implements QuestionRepository {
     );
     return response.data
       .filter(question => question.categorie !== 'defi')
-      .map(question => ({
-        id: question.id,
-        libelle: question.question,
-        type: question.type,
-        reponses_possibles: question.reponses_possibles || [],
-        points: question.points,
+      .map(question => this.mapQuestionApiModelToQuestion(question));
+  }
+
+  private mapQuestionApiModelToQuestion(question: QuestionApiModel): Question {
+    return {
+      id: question.id,
+      libelle: question.type === 'mosaic_boolean' ? question.titre : question.question,
+      type: question.type,
+      reponses: this.determineReponses(question),
+      points: question.points,
+      thematique: Object.values(ThematiqueQuestion).find(thematique => thematique === question.thematique) as
+        | ThematiqueQuestion
+        | ThematiqueQuestion.AUTRE,
+      aEteRepondu: question.type === 'mosaic_boolean' ? question.is_answered : question.reponse.length > 0,
+    };
+  }
+
+  private determineReponses(question: QuestionApiModel): ReponseKYCSimple | ReponseMosaic<boolean> {
+    if (question.type === 'mosaic_boolean') {
+      return {
+        reponse: question.reponses.map(reponse => ({
+          code: reponse.code,
+          image_url: reponse.image_url,
+          label: reponse.label,
+          valeur: reponse.boolean_value,
+        })),
+      } as ReponseMosaic<boolean>;
+    } else {
+      return {
+        reponses_possibles: question.reponses_possibles,
         reponse: question.reponse,
-        thematique: Object.values(ThematiqueQuestion).find(thematique => thematique === question.thematique) as
-          | ThematiqueQuestion
-          | ThematiqueQuestion.AUTRE,
-      }));
+      } as ReponseKYCSimple;
+    }
   }
 
   @intercept401()
@@ -40,17 +73,7 @@ export class QuestionRepositoryAxios implements QuestionRepository {
       `utilisateurs/${utilisateurId}/questionsKYC/${questionId}`,
     );
 
-    return {
-      id: response.data.id,
-      libelle: response.data.question,
-      type: response.data.type,
-      reponses_possibles: response.data.reponses_possibles || [],
-      points: response.data.points,
-      reponse: response.data.reponse,
-      thematique: Object.values(ThematiqueQuestion).find(thematique => thematique === response.data.thematique) as
-        | ThematiqueQuestion
-        | ThematiqueQuestion.AUTRE,
-    };
+    return this.mapQuestionApiModelToQuestion(response.data);
   }
 
   @intercept401()
@@ -64,16 +87,18 @@ export class QuestionRepositoryAxios implements QuestionRepository {
     const response = await AxiosFactory.getAxios().get<QuestionApiModel[]>(
       `utilisateurs/${utilisateurId}/thematiques/${thematiqueId}/kycs`,
     );
-    return response.data.map(question => ({
-      id: question.id,
-      libelle: question.question,
-      type: question.type,
-      reponses_possibles: question.reponses_possibles || [],
-      points: question.points,
-      reponse: question.reponse,
-      thematique: Object.values(ThematiqueQuestion).find(thematique => thematique === question.thematique) as
-        | ThematiqueQuestion
-        | ThematiqueQuestion.AUTRE,
-    }));
+
+    return response.data.map(question => this.mapQuestionApiModelToQuestion(question));
+  }
+
+  @intercept401()
+  async envoyerReponseMosaic(
+    utilisateurId: string,
+    questionId: string,
+    reponses: { code: string; boolean_value: boolean }[],
+  ): Promise<void> {
+    await AxiosFactory.getAxios().put(`/utilisateurs/${utilisateurId}/questionsKYC/${questionId}`, {
+      reponse_mosaic: reponses,
+    });
   }
 }

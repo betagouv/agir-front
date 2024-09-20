@@ -9,14 +9,27 @@ export enum ThematiqueQuestion {
   AUTRE = 'autre',
 }
 
+export interface ReponseKYCSimple {
+  reponses_possibles: string[];
+  reponse: string[];
+}
+
+export interface ReponseMosaic<T> {
+  reponse: {
+    code: string;
+    image_url: string;
+    label: string;
+    valeur: T;
+  }[];
+}
 export interface Question {
   id: string;
   libelle: string;
-  type: 'libre' | 'choix_multiple' | 'choix_unique';
-  reponses_possibles: string[];
+  type: 'libre' | 'choix_multiple' | 'choix_unique' | 'mosaic_boolean';
   points: number;
-  reponse: string[];
   thematique: ThematiqueQuestion;
+  reponses: ReponseKYCSimple | ReponseMosaic<boolean>;
+  aEteRepondu: boolean;
 }
 
 export class RecupererQuestionUsecase {
