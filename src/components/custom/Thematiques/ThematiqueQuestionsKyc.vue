@@ -39,9 +39,7 @@
   const props = defineProps<{ questionsViewModel: QuestionsViewModel }>();
 
   const premiereKycNonRepondu = () => {
-    const indexQuestion = props.questionsViewModel.questions.findIndex(
-      question => question.reponses?.length === 0 && !question.aDejaEteRepondu,
-    );
+    const indexQuestion = props.questionsViewModel.questions.findIndex(question => !question.aDejaEteRepondu);
     return indexQuestion !== -1 ? indexQuestion : 0;
   };
 
