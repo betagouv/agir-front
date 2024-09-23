@@ -7,7 +7,7 @@
       <strong>Attention, aucune donnée ne pourra être récupérée.</strong>
     </p>
     <button
-      class="fr-btn fr-btn--sm fr-btn--warning fr-btn--icon-left fr-icon-warning-line text--warning border--warning background--white"
+      class="fr-btn fr-btn--warning fr-btn--icon-left fr-icon-warning-line text--warning border--warning background--white"
       data-fr-opened="false"
       :aria-controls="modaleId"
     >

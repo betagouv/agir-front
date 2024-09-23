@@ -8,21 +8,21 @@
           <span class="fr-icon-arrow-right-line text--bleu" aria-hidden="true" />
           <p class="fr-col fr-text--lg fr-mb-0">
             <span class="fr-text--bold">Découvrez les aides et dispositifs disponibles</span> pour les habitants de
-            <span class="fr-text--bold text--bleu">{{ onboardingPostCreationCompte().commune }}</span> et des environs,
+            <span class="fr-text--bold text--bleu">{{ onboardingPostCreationCompte().commune }}</span> et des environs.
           </p>
         </li>
         <li class="fr-grid-row fr-grid-row--gutters align-items--baseline">
           <span class="fr-icon-arrow-right-line text--bleu" aria-hidden="true" />
           <p class="fr-col fr-text--lg fr-mb-0">
             <span class="fr-text--bold">Informez-vous sur les enjeux environnementaux</span> qui se cachent dans nos
-            choix quotidiens,
+            choix quotidiens.
           </p>
         </li>
         <li class="fr-grid-row fr-grid-row--gutters align-items--baseline">
           <span class="fr-icon-arrow-right-line text--bleu" aria-hidden="true" />
           <p class="fr-col fr-text--lg fr-mb-0">
             <span class="fr-text--bold">Personnalisez votre profil</span>
-            pour obtenir des recommandations adaptées à vos moyens, vos envies et vos besoins,
+            pour obtenir des recommandations adaptées à vos moyens, vos envies et vos besoins.
           </p>
         </li>
         <li class="fr-grid-row fr-grid-row--gutters align-items--baseline">

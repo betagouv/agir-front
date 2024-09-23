@@ -20,7 +20,7 @@
           </span>
           <span>{{ item.prenom }}</span>
         </div>
-        <div class="fr-grid-row background--white align-items--center border border-radius--md fr-text--bold fr-p-1w">
+        <div class="fr-grid-row background--white align-items--center border-radius--md fr-text--bold fr-p-1w">
           <span class="fr-mr-1v">{{ item.points }}</span>
           <img src="/ic_score.svg" alt="points" />
         </div>

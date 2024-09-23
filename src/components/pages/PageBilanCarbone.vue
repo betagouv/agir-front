@@ -74,9 +74,9 @@
         </div>
         <div class="fr-col-12 fr-col-md-3">
           <ServiceAside
-            image="/bilan-carbone-ngc-screenshot.jpg"
+            image="/bilan-carbone-ngc-screenshot.svg"
             nom="Nos Gestes Climat"
-            description="En 10 minutes, obtenez une estimation de votre empreinte carbone de consommation."
+            description="Basé sur le calculateur carbone développé par l’Agence de la transition écologique (ADEME) et beta.gouv.fr, en partenariat avec l’Association Bilan Carbone (ABC)."
             url="https://nosgestesclimat.fr/"
             logo="/logo_ngc.png"
           />
