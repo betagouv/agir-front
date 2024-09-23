@@ -3,6 +3,7 @@ import { TodoList, TodoListItem } from '@/domaines/toDoList/recupererToDoList.us
 import { RouteAidesName } from '@/router/aides/routeAidesName';
 import { RouteAidesPath } from '@/router/aides/routes';
 import { RouteArticlePath } from '@/router/articles/routes';
+import { RouteBilanCarboneName } from '@/router/bilanCarbone/routes';
 import { RouteCoachName } from '@/router/coach/routeCoachName';
 import { RouteCoachPath } from '@/router/coach/routes';
 import { RouteComptePath } from '@/router/compte/routes';
@@ -141,6 +142,12 @@ export class ToDoListPresenterImpl implements ToDoListPresenter {
           id: Fonctionnalites.BIBLIOTHEQUE,
           titre: 'Retrouver les articles lus dans la bibliothèque',
           url: RouteCoachName.BIBLIOTHEQUE,
+        };
+      case Fonctionnalites.BILAN_CARBONE:
+        return {
+          id: Fonctionnalites.BILAN_CARBONE,
+          titre: 'Retrouver une estimation de votre empreinte environnementale',
+          url: RouteBilanCarboneName.BILAN_CARBONE,
         };
       default:
         return undefined;
