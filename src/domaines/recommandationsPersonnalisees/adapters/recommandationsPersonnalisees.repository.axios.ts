@@ -1,4 +1,3 @@
-import axios from 'redaxios';
 import { AxiosFactory, intercept401 } from '@/axios.factory';
 import { RecommandationsPersonnaliseesRepository } from '@/domaines/recommandationsPersonnalisees/ports/recommandationsPersonnalisees.repository';
 import { RecommandationPersonnalisee } from '@/domaines/recommandationsPersonnalisees/recupererRecommandationsPersonnalisees.usecase';
@@ -42,8 +41,9 @@ export class RecommandationsPersonnaliseesRepositoryAxios implements Recommandat
   }
   @intercept401()
   async recommandationAEteCliquee(idUtilisateur: string): Promise<void> {
-    await axios.post(`/utilisateurs/${idUtilisateur}/events`, {
-      type: 'reco_clickée',
+    const axiosInstance = AxiosFactory.getAxios();
+    axiosInstance.post(`/utilisateurs/${idUtilisateur}/events`, {
+      type: 'access_recommandations',
     });
   }
   @intercept401()

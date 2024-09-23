@@ -1,6 +1,8 @@
 import { MockToDoListRepository } from './adapters/mockToDoListRepository';
 import { RecupererToDoListUsecase } from '@/domaines/toDoList/recupererToDoList.usecase';
 import { ToDoListPresenterImpl, TodoListViewModel } from '@/domaines/toDoList/adapters/toDoList.presenter.impl';
+import { RouteAidesName } from '@/router/aides/routeAidesName';
+import { Fonctionnalites } from '@/shell/fonctionnalitesEnum';
 
 describe('Fichier de tests concernant la récupération de la ToDo List', () => {
   it("En donnant un id utilisateur doit récuperer une todo List composée d'elements fait et à faire", async () => {
@@ -133,9 +135,9 @@ describe('Fichier de tests concernant la récupération de la ToDo List', () => 
         titre: 'Ma ToDo List',
         imageUrl: 'imageUrl',
         featureDebloquee: {
-          description: 'Description de vos aides',
-          feature: 'aides',
-          titre: 'Vos aides',
+          id: Fonctionnalites.AIDES,
+          titre: 'Retrouver les aides financières auxquelles vous êtes éligible',
+          url: RouteAidesName.VOS_AIDES,
         },
       });
     }

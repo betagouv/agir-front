@@ -2,12 +2,11 @@
   <div class="background--white fr-py-8w">
     <div class="fr-container">
       <h1 class="fr-h1 fr-m-0">Bonjour {{ utilisateurStore().utilisateur.prenom }} 👋</h1>
+    </div>
+    <div v-if="todoList && !todoList.derniere" class="fr-container fr-pt-3w">
       <p class="fr-text--xl fr-mb-0">
         Réduisez votre impact environnemental en <strong>complétant des missions</strong>
       </p>
-    </div>
-
-    <div v-if="todoList && !todoList.derniere" class="fr-container fr-pt-3w">
       <div id="container-survey"></div>
       <div class="fr-grid-row fr-grid-row--gutters">
         <div class="fr-col fr-col-lg-7">
@@ -19,19 +18,7 @@
       </div>
     </div>
 
-    <section
-      v-if="universViewModel"
-      v-tour-step:1="{
-        tour: universTour,
-        options: {
-          attachTo: { on: 'bottom' },
-          title: 'Univers débloqués',
-          text: 'Retrouvez ici tous vos univers !',
-        },
-      }"
-      id="univers"
-      class="fr-py-3w"
-    >
+    <section v-if="universViewModel" id="univers" class="fr-py-3w">
       <div class="fr-container">
         <CoachUnivers :universViewModel="universViewModel" />
       </div>
@@ -51,19 +38,7 @@
     </div>
   </section>
 
-  <section
-    id="recommandations"
-    v-if="store.utilisateur.fonctionnalitesDebloquees.includes(Fonctionnalites.RECOMMANDATIONS)"
-    class="fr-py-6w fr-background-contrast--grey"
-    v-tour-step:1="{
-      tour: recommandationTour,
-      options: {
-        attachTo: { on: 'top' },
-        title: 'Recommandations débloquées',
-        text: 'Retrouvez ici toutes vos recommandations personnalisées !',
-      },
-    }"
-  >
+  <section id="recommandations" class="fr-py-6w fr-background-contrast--grey">
     <div class="fr-container" v-if="!isLoading">
       <h2 class="fr-h3 fr-mb-1w">Articles et quiz recommandés pour vous</h2>
       <p class="fr-text--md">
@@ -102,7 +77,6 @@
   import CoachServices from '@/components/custom/Coach/CoachServices.vue';
   import CoachToDo from '@/components/custom/Coach/CoachToDo.vue';
   import CoachUnivers from '@/components/custom/Coach/CoachUnivers.vue';
-  import { useReveal } from '@/composables/useReveal';
   import {
     RecommandationPersonnaliseeViewModel,
     RecommandationsPersonnaliseesPresenterImpl,
@@ -118,11 +92,8 @@
   import { RecupererListeUniversUsecase } from '@/domaines/univers/recupererListeUnivers.usecase';
   import { RouteCoachName } from '@/router/coach/routeCoachName';
   import { RouteCompteName } from '@/router/compte/routeCompteName';
-  import { Fonctionnalites } from '@/shell/fonctionnalitesEnum';
   import { publierEvenementHotjar, HotjarEvenement } from '@/shell/publierEvenementHotjar';
   import { utilisateurStore } from '@/store/utilisateur';
-
-  const { recommandationTour, universTour } = useReveal();
 
   const isLoading = ref<boolean>(true);
   const todoList = ref<TodoListViewModel>();
@@ -153,6 +124,14 @@
     ToDoListEventBusImpl.getInstance().subscribe(subscriberName, ToDoListEvent.TODO_POINTS_ONT_ETE_RECUPERE, () => {
       chargerTodoListUsecase.execute(idUtilisateur, new ToDoListPresenterImpl(mapValueTodo));
     });
+
+    ToDoListEventBusImpl.getInstance().subscribe(
+      subscriberName,
+      ToDoListEvent.TODO_RECOMMANDATION_A_ETE_CLIQUEE,
+      () => {
+        chargerTodoListUsecase.execute(idUtilisateur, new ToDoListPresenterImpl(mapValueTodo));
+      },
+    );
 
     ToDoListEventBusImpl.getInstance().subscribe(subscriberName, ToDoListEvent.TODO_A_ETE_TERMINEE, () => {
       chargerTodoListUsecase.execute(idUtilisateur, new ToDoListPresenterImpl(mapValueTodo));

@@ -3,7 +3,11 @@
     <img :src="picto" alt="" />
     <div class="fr-col fr-col-md-9">
       <h3 class="fr-m-0">
-        <router-link :to="{ path: url, hash: hash }" class="todo__link display-block text--normal fr-text--lg fr-mb-0">
+        <router-link
+          :to="{ path: url, hash: hash }"
+          @click="cliqueSurToDoAvecHash"
+          class="todo__link display-block text--normal fr-text--lg fr-mb-0"
+        >
           <div v-html="titre" />
         </router-link>
       </h3>
@@ -28,8 +32,16 @@
 
 <script setup lang="ts">
   import CoachCardTodoProgression from '@/components/custom/Coach/CoachCardTodoProgression.vue';
+  import { RecommandationsPersonnaliseesRepositoryAxios } from '@/domaines/recommandationsPersonnalisees/adapters/recommandationsPersonnalisees.repository.axios';
+  import { RecommandationPersonnaliseAEteCliqueeUsecase } from '@/domaines/recommandationsPersonnalisees/recommandationPersonnaliseAEteCliquee.usecase';
+  import { ToDoListEventBusImpl } from '@/domaines/toDoList/toDoListEventBusImpl';
+  import { utilisateurStore } from '@/store/utilisateur';
 
-  defineProps<{
+  const store = utilisateurStore();
+
+  const idUtilisateur = store.utilisateur.id;
+
+  const props = defineProps<{
     titre: string;
     value?: number;
     valueMax?: number;
@@ -38,6 +50,17 @@
     points?: number;
     hash?: string;
   }>();
+
+  const cliqueSurToDoAvecHash = async () => {
+    if (props.hash) {
+      const usecase = new RecommandationPersonnaliseAEteCliqueeUsecase(
+        new RecommandationsPersonnaliseesRepositoryAxios(),
+        ToDoListEventBusImpl.getInstance(),
+      );
+      usecase.execute(idUtilisateur);
+      return;
+    }
+  };
 </script>
 
 <style scoped>

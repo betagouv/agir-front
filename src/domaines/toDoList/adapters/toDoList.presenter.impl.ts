@@ -1,12 +1,15 @@
 import { ToDoListPresenter } from '@/domaines/toDoList/ports/toDoList.presenter';
 import { TodoList, TodoListItem } from '@/domaines/toDoList/recupererToDoList.usecase';
+import { RouteAidesName } from '@/router/aides/routeAidesName';
 import { RouteAidesPath } from '@/router/aides/routes';
 import { RouteArticlePath } from '@/router/articles/routes';
+import { RouteCoachName } from '@/router/coach/routeCoachName';
 import { RouteCoachPath } from '@/router/coach/routes';
 import { RouteComptePath } from '@/router/compte/routes';
 import { RouteKycPath } from '@/router/kyc/routes';
 import { RouteQuizPath } from '@/router/quiz/routes';
 import { buildUrl } from '@/shell/buildUrl';
+import { Fonctionnalites } from '@/shell/fonctionnalitesEnum';
 import { InteractionType } from '@/shell/interactionType';
 
 export interface TodoViewModel {
@@ -33,13 +36,11 @@ export interface TodoListViewModel {
   imageUrl: string;
   aFaire: TodoViewModel[];
   fait: TodoViewModel[];
-  featureDebloquee:
-    | {
-        titre: string;
-        feature: string;
-        description: string;
-      }
-    | undefined;
+  featureDebloquee?: {
+    id: Fonctionnalites;
+    titre: string;
+    url: string;
+  };
 }
 
 export class ToDoListPresenterImpl implements ToDoListPresenter {
@@ -53,7 +54,7 @@ export class ToDoListPresenterImpl implements ToDoListPresenter {
       aFaire: toDoList.aFaire.map(todo => this.mapToListItemToViewModel(todo)),
       fait: toDoList.fait.map(todo => this.mapToListItemToViewModel(todo)),
       imageUrl: toDoList.imageUrl,
-      featureDebloquee: toDoList.featureDebloquee,
+      featureDebloquee: this.determineFeatureDebloquee(toDoList.featureDebloquee),
     });
   }
 
@@ -122,6 +123,27 @@ export class ToDoListPresenterImpl implements ToDoListPresenter {
         return '/ic_mission_kyc.svg';
       default:
         return '';
+    }
+  }
+
+  private determineFeatureDebloquee(
+    featureDebloquee: TodoList['featureDebloquee'],
+  ): TodoListViewModel['featureDebloquee'] {
+    switch (featureDebloquee?.feature) {
+      case Fonctionnalites.AIDES:
+        return {
+          id: Fonctionnalites.AIDES,
+          titre: 'Retrouver les aides financières auxquelles vous êtes éligible',
+          url: RouteAidesName.VOS_AIDES,
+        };
+      case Fonctionnalites.BIBLIOTHEQUE:
+        return {
+          id: Fonctionnalites.BIBLIOTHEQUE,
+          titre: 'Retrouver les articles lus dans la bibliothèque',
+          url: RouteCoachName.BIBLIOTHEQUE,
+        };
+      default:
+        return undefined;
     }
   }
 }
