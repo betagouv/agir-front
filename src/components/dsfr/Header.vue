@@ -155,6 +155,10 @@
     flex: 1 0 0;
   }
 
+  .utilisateur a {
+    max-width: 100% !important;
+  }
+
   .fr-header__service {
     box-shadow: none;
     width: auto;
