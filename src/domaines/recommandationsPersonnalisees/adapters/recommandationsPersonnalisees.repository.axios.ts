@@ -42,8 +42,9 @@ export class RecommandationsPersonnaliseesRepositoryAxios implements Recommandat
   }
   @intercept401()
   async recommandationAEteCliquee(idUtilisateur: string): Promise<void> {
-    await axios.post(`/utilisateurs/${idUtilisateur}/events`, {
-      type: 'reco_clickée',
+    const axiosInstance = AxiosFactory.getAxios();
+    axiosInstance.post(`/utilisateurs/${idUtilisateur}/events`, {
+      type: 'access_recommandations',
     });
   }
   @intercept401()
