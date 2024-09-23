@@ -47,7 +47,7 @@
                 <li v-if="utilisateurStore().utilisateur.onboardingAEteRealise">
                   <div class="utilisateur">
                     <router-link
-                      class="fr-text-label--blue-france fr-text--bold fr-ml-1w fr-icon-user-fill fr-icon--sm"
+                      class="fr-btn fr-mb-0 fr-text--lg fr-icon-user-fill"
                       title="accéder à mon compte"
                       :to="{ name: RouteCompteName.MON_COMPTE }"
                     >
@@ -153,6 +153,10 @@
     align-items: center;
     gap: 1rem;
     flex: 1 0 0;
+  }
+
+  .utilisateur a {
+    max-width: 100% !important;
   }
 
   .fr-header__service {
