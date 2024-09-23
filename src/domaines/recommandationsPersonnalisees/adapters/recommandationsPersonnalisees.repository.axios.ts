@@ -1,4 +1,3 @@
-import axios from 'redaxios';
 import { AxiosFactory, intercept401 } from '@/axios.factory';
 import { RecommandationsPersonnaliseesRepository } from '@/domaines/recommandationsPersonnalisees/ports/recommandationsPersonnalisees.repository';
 import { RecommandationPersonnalisee } from '@/domaines/recommandationsPersonnalisees/recupererRecommandationsPersonnalisees.usecase';
