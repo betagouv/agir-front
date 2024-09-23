@@ -1,5 +1,34 @@
 # Changelog
 
+## [1.21.0](https://github.com/betagouv/agir-front/compare/v1.20.1...v1.21.0) (2024-09-23)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* ajout dernier bonus mission, reveal votre bilan carbone ([#622](https://github.com/betagouv/agir-front/issues/622)) ([8aa0401](https://github.com/betagouv/agir-front/commit/8aa040127848311fa3286df57e146b60165338d5))
+* ajout du type KYC mosaic ([#610](https://github.com/betagouv/agir-front/issues/610)) ([12d1b4c](https://github.com/betagouv/agir-front/commit/12d1b4ca1fdd0ec75d3c68bea751df93cb855b94))
+* changement du bonus de fin de missions ([#621](https://github.com/betagouv/agir-front/issues/621)) ([3ffff25](https://github.com/betagouv/agir-front/commit/3ffff25121254bd0e9526997e06ac766a7271872))
+* gestion du pluriel pour le nombre d'article de la bibliotheque ([#618](https://github.com/betagouv/agir-front/issues/618)) ([0678cd6](https://github.com/betagouv/agir-front/commit/0678cd69406f1b0b3d66781b6c56c662d4f071be))
+* modification de wording ([#616](https://github.com/betagouv/agir-front/issues/616)) ([0cc55d0](https://github.com/betagouv/agir-front/commit/0cc55d0c462f223d52ef73dda72c3821375ab2f2))
+* on peut maintenant avoir un objectif de mission qui consiste à enchainer des kyc ([#620](https://github.com/betagouv/agir-front/issues/620)) ([21a65d4](https://github.com/betagouv/agir-front/commit/21a65d494332db76e6c076e0a28a80d551543dc6))
+* rendre picto cliquable dans header ([#617](https://github.com/betagouv/agir-front/issues/617)) ([7b51858](https://github.com/betagouv/agir-front/commit/7b518580bc9c38b639c6624d2b9bce63d62e05f9))
+
+
+### 🐛 Corrections de bogues
+
+* correction du code postal dans le post onboarding et du header ([#619](https://github.com/betagouv/agir-front/issues/619)) ([0156741](https://github.com/betagouv/agir-front/commit/0156741b4629f8e21e7b4da0fc91ed94bc2238d5))
+* typos sur l'écran de création de compte ([#607](https://github.com/betagouv/agir-front/issues/607)) ([24dee76](https://github.com/betagouv/agir-front/commit/24dee7651bea21255ead15241fe3b5b7b3460057))
+
+
+### 👷 Autres changements
+
+* Bump eslint-plugin-vue from 9.27.0 to 9.28.0 ([#613](https://github.com/betagouv/agir-front/issues/613)) ([cefa668](https://github.com/betagouv/agir-front/commit/cefa668b02b578d37606d388d1c47cfb154f6694))
+* Bump pinia from 2.2.0 to 2.2.2 ([#611](https://github.com/betagouv/agir-front/issues/611)) ([e556805](https://github.com/betagouv/agir-front/commit/e55680504cc75f34e3ab3ca80afc3ca0e9cc4a62))
+* Bump release-please from 16.12.0 to 16.12.2 ([#612](https://github.com/betagouv/agir-front/issues/612)) ([a1ee10f](https://github.com/betagouv/agir-front/commit/a1ee10f9dd4d00785688b217dbbb7b30b4e9bcad))
+* Bump vite from 5.4.2 to 5.4.5 ([#614](https://github.com/betagouv/agir-front/issues/614)) ([6949d20](https://github.com/betagouv/agir-front/commit/6949d202f3103d9f075840f11ed993e8d912477f))
+* Bump vite from 5.4.5 to 5.4.6 ([#615](https://github.com/betagouv/agir-front/issues/615)) ([421be82](https://github.com/betagouv/agir-front/commit/421be82daaaae916038fbbe582854da4b8f218b8))
+* suppression du code inutilisé pour l'import ngc ([#608](https://github.com/betagouv/agir-front/issues/608)) ([0e724da](https://github.com/betagouv/agir-front/commit/0e724da9f5db928856cca5b861443d97b98a5246))
+
 ## [1.20.1](https://github.com/betagouv/agir-front/compare/v1.20.0...v1.20.1) (2024-09-11)
 
 
