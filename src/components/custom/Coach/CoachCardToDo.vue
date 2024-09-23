@@ -36,7 +36,7 @@
     url: string;
     picto: string;
     points?: number;
-    hash: string;
+    hash?: string;
   }>();
 </script>
 
