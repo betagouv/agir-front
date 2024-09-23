@@ -14,7 +14,7 @@ export interface TodoViewModel {
   titre: string;
   url: string;
   idDuContenu: string;
-  progession: {
+  progression: {
     etapeCourante: number;
     etapeTotal: number;
   };
@@ -63,7 +63,7 @@ export class ToDoListPresenterImpl implements ToDoListPresenter {
       titre: todo.titre,
       url: this.determineUrl(todo),
       idDuContenu: todo.idDuContenu,
-      progession: {
+      progression: {
         etapeCourante: todo.progession.etapeCourante,
         etapeTotal: todo.progession.etapeTotal,
       },
@@ -92,6 +92,8 @@ export class ToDoListPresenterImpl implements ToDoListPresenter {
         return `${RouteCoachPath.COACH}/${RouteCoachPath.SERVICES}`;
       case InteractionType.RECOMMANDATION:
         return '/agir';
+      case InteractionType.ENCHAINEMENT_KYC:
+        return `${RouteKycPath.KYC_ONBOARDING}${todo.idDuContenu}`;
       default:
         return '';
     }
@@ -115,6 +117,7 @@ export class ToDoListPresenterImpl implements ToDoListPresenter {
       case InteractionType.ARTICLE:
       case InteractionType.QUIZ:
         return '/ic_mission_article.svg';
+      case InteractionType.ENCHAINEMENT_KYC:
       case InteractionType.KYC:
         return '/ic_mission_kyc.svg';
       default:

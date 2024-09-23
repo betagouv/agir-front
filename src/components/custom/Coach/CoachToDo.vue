@@ -7,7 +7,7 @@
         <li v-for="todo in todoList.fait" :key="todo.titre" class="fr-mb-2w">
           <CoachCardDone
             :titre="todo.titre"
-            :value="todo.progession.etapeCourante"
+            :value="todo.progression.etapeCourante"
             :nombre-points="todo.nombreDePointsAGagner"
             :point-a-ete-recolte="todo.pointAEteRecolte"
             :element-id="todo.id"
@@ -24,8 +24,8 @@
         <li v-for="todo in todoList.aFaire" :key="todo.titre" class="fr-mb-2w">
           <CoachCardToDo
             :titre="todo.titre"
-            :value="todo.progession.etapeCourante"
-            :value-max="todo.progession.etapeTotal"
+            :value="todo.progression.etapeCourante"
+            :value-max="todo.progression.etapeTotal"
             :url="todo.url"
             :hash="todo.hash"
             :picto="todo.picto"

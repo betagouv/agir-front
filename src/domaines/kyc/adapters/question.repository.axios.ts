@@ -101,4 +101,14 @@ export class QuestionRepositoryAxios implements QuestionRepository {
       reponse_mosaic: reponses,
     });
   }
+
+  @intercept401()
+  async recupererQuestionsDepuisMissionOnboarding(utilisateurId: string, contentId: string): Promise<Question[]> {
+    const axiosInstance = AxiosFactory.getAxios();
+    const response = await axiosInstance.get<QuestionApiModel[]>(
+      `/utilisateurs/${utilisateurId}/enchainementQuestionsKYC/${contentId}`,
+    );
+
+    return response.data.map((question: QuestionApiModel) => this.mapQuestionApiModelToQuestion(question));
+  }
 }

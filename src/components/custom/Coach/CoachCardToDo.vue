@@ -3,7 +3,7 @@
     <img :src="picto" alt="" />
     <div class="fr-col fr-col-md-9">
       <h3 class="fr-m-0">
-        <router-link :to="{ path: url }" class="todo__link display-block text--normal fr-text--lg fr-mb-0">
+        <router-link :to="{ path: url, hash: hash }" class="todo__link display-block text--normal fr-text--lg fr-mb-0">
           <div v-html="titre" />
         </router-link>
       </h3>
@@ -36,6 +36,7 @@
     url: string;
     picto: string;
     points?: number;
+    hash?: string;
   }>();
 </script>
 

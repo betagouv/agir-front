@@ -19,7 +19,7 @@ describe('Fichier de tests concernant la récupération de la ToDo List', () => 
             id: 'id3',
             nombreDePointsAGagner: 10,
             pointAEteRecolte: false,
-            progession: {
+            progression: {
               etapeCourante: 1,
               etapeTotal: 1,
             },
@@ -35,7 +35,7 @@ describe('Fichier de tests concernant la récupération de la ToDo List', () => 
             id: 'id',
             nombreDePointsAGagner: 10,
             pointAEteRecolte: false,
-            progession: {
+            progression: {
               etapeCourante: 1,
               etapeTotal: 2,
             },
@@ -51,7 +51,7 @@ describe('Fichier de tests concernant la récupération de la ToDo List', () => 
             id: 'id3',
             nombreDePointsAGagner: 10,
             pointAEteRecolte: false,
-            progession: {
+            progression: {
               etapeCourante: 1,
               etapeTotal: 1,
             },
@@ -67,7 +67,7 @@ describe('Fichier de tests concernant la récupération de la ToDo List', () => 
             id: 'id4',
             nombreDePointsAGagner: 10,
             pointAEteRecolte: false,
-            progession: {
+            progression: {
               etapeCourante: 1,
               etapeTotal: 1,
             },
@@ -84,7 +84,7 @@ describe('Fichier de tests concernant la récupération de la ToDo List', () => 
             nombreDePointsAGagner: 10,
             picto: '/ic_mission_defi.svg',
             pointAEteRecolte: false,
-            progession: {
+            progression: {
               etapeCourante: 1,
               etapeTotal: 1,
             },
@@ -92,6 +92,22 @@ describe('Fichier de tests concernant la récupération de la ToDo List', () => 
             titre: 'Faire un défi',
             type: 'defi',
             url: '',
+          },
+          {
+            hash: undefined,
+            id: 'id3',
+            idDuContenu: 'ENCHAINEMENT_KYC_001',
+            nombreDePointsAGagner: 10,
+            picto: '/ic_mission_kyc.svg',
+            pointAEteRecolte: false,
+            progression: {
+              etapeCourante: 1,
+              etapeTotal: 1,
+            },
+            thematique: '🌍 Global',
+            titre: 'Faire son bilan',
+            type: 'enchainement_kyc',
+            url: '/mission/mieux-vous-connaitre/ENCHAINEMENT_KYC_001',
           },
         ],
         derniere: false,
@@ -102,7 +118,7 @@ describe('Fichier de tests concernant la récupération de la ToDo List', () => 
             id: 'id2',
             nombreDePointsAGagner: 10,
             pointAEteRecolte: true,
-            progession: {
+            progression: {
               etapeCourante: 1,
               etapeTotal: 1,
             },
