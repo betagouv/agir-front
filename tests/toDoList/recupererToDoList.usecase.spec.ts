@@ -96,7 +96,7 @@ describe('Fichier de tests concernant la récupération de la ToDo List', () => 
           {
             hash: undefined,
             id: 'id3',
-            idDuContenu: '',
+            idDuContenu: 'ENCHAINEMENT_KYC_001',
             nombreDePointsAGagner: 10,
             picto: '/ic_mission_kyc.svg',
             pointAEteRecolte: false,
@@ -107,7 +107,7 @@ describe('Fichier de tests concernant la récupération de la ToDo List', () => 
             thematique: '🌍 Global',
             titre: 'Faire son bilan',
             type: 'enchainement_kyc',
-            url: '/mission/mieux-vous-connaitre/',
+            url: '/mission/mieux-vous-connaitre/ENCHAINEMENT_KYC_001',
           },
         ],
         derniere: false,

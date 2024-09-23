@@ -12,6 +12,7 @@
 
 <script setup lang="ts">
   import { ref, onMounted } from 'vue';
+  import { useRoute } from 'vue-router';
   import CarteSkeleton from '@/components/CarteSkeleton.vue';
   import ThematiqueQuestionsKyc from '@/components/custom/Thematiques/ThematiqueQuestionsKyc.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
@@ -27,9 +28,12 @@
   const questionsViewModel = ref<QuestionsViewModel>();
 
   onMounted(() => {
+    const route = useRoute();
+
     const usecase = new RecupererQuestionsMissionOnboardingUsecase(new QuestionRepositoryAxios());
     usecase.execute(
       utilisateurStore().utilisateur.id,
+      route.params.id as string,
       new ListesQuestionsThematiquePresenter(vm => (questionsViewModel.value = vm)),
     );
     isLoading.value = false;

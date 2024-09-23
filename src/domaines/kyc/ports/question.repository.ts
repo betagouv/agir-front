@@ -10,5 +10,5 @@ export interface QuestionRepository {
     questionId: string,
     reponses: { code: string; boolean_value: boolean }[],
   ): Promise<void>;
-  recupererQuestionsDepuisMissionOnboarding(utilisateurId: string): Promise<Question[]>;
+  recupererQuestionsDepuisMissionOnboarding(utilisateurId: string, contentId: string): Promise<Question[]>;
 }

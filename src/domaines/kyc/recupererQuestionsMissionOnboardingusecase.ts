@@ -4,8 +4,8 @@ import { QuestionRepository } from '@/domaines/kyc/ports/question.repository';
 export class RecupererQuestionsMissionOnboardingUsecase {
   constructor(private questionRepository: QuestionRepository) {}
 
-  async execute(utilisateurId: string, presenter: ListeQuestionsPresenter): Promise<void> {
-    const questions = await this.questionRepository.recupererQuestionsDepuisMissionOnboarding(utilisateurId);
+  async execute(utilisateurId: string, contentId: string, presenter: ListeQuestionsPresenter): Promise<void> {
+    const questions = await this.questionRepository.recupererQuestionsDepuisMissionOnboarding(utilisateurId, contentId);
     presenter.presente(questions);
   }
 }

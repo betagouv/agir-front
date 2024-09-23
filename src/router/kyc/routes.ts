@@ -31,7 +31,7 @@ const kycRoutes: RouteRecordRaw[] = [
     },
   },
   {
-    path: RouteKycPath.KYC_ONBOARDING,
+    path: `/${RouteKycPath.KYC_ONBOARDING}/:id`,
     name: RouteKycName.KYC_ONBOARDING,
     component: PageQuestionsKYCOnboarding,
     meta: {

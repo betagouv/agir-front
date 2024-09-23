@@ -115,7 +115,7 @@ export class MockToDoListRepository implements ToDoListRepository {
           interactionId: 'interactionId3',
           titre: 'Faire son bilan',
           url: '',
-          idDuContenu: '',
+          idDuContenu: 'ENCHAINEMENT_KYC_001',
           progession: {
             etapeCourante: 1,
             etapeTotal: 1,

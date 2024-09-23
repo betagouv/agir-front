@@ -93,7 +93,7 @@ export class ToDoListPresenterImpl implements ToDoListPresenter {
       case InteractionType.RECOMMANDATION:
         return '/agir';
       case InteractionType.ENCHAINEMENT_KYC:
-        return RouteKycPath.KYC_ONBOARDING;
+        return `${RouteKycPath.KYC_ONBOARDING}${todo.idDuContenu}`;
       default:
         return '';
     }
