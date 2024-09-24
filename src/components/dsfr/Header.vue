@@ -94,6 +94,7 @@
               <router-link
                 class="fr-nav__link"
                 :to="{ name: RouteCoachName.BIBLIOTHEQUE }"
+                v-if="utilisateurStore().utilisateur.fonctionnalitesDebloquees.includes(Fonctionnalites.BIBLIOTHEQUE)"
                 :aria-current="route.name === RouteCoachName.BIBLIOTHEQUE ? 'page' : null"
               >
                 Bibliothèque
@@ -103,6 +104,7 @@
               <router-link
                 class="fr-nav__link"
                 :to="{ name: RouteBilanCarboneName.BILAN_CARBONE }"
+                v-if="utilisateurStore().utilisateur.fonctionnalitesDebloquees.includes(Fonctionnalites.BILAN_CARBONE)"
                 :aria-current="route.name === RouteBilanCarboneName.BILAN_CARBONE ? 'page' : null"
               >
                 Votre empreinte
