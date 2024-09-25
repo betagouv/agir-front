@@ -5,7 +5,7 @@ import { Question, ReponseKYCSimple, ReponseMosaic, ThematiqueQuestion } from '@
 export interface QuestionApiModel extends QuestionMosaicBooleanApiModel {
   id: string;
   question: string;
-  type: 'libre' | 'choix_multiple' | 'choix_unique' | 'mosaic_boolean';
+  type: 'libre' | 'choix_multiple' | 'choix_unique' | 'mosaic_boolean' | 'entier';
   reponses_possibles: string[];
   points: number;
   reponse: string[];

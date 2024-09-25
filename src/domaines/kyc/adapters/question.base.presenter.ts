@@ -21,7 +21,7 @@ export class QuestionViewModelBuilder {
     return this;
   }
 
-  withType(type: 'libre' | 'choix_multiple' | 'choix_unique' | 'mosaic_boolean'): QuestionViewModelBuilder {
+  withType(type: 'libre' | 'choix_multiple' | 'choix_unique' | 'mosaic_boolean' | 'entier'): QuestionViewModelBuilder {
     this.questionViewModel.type = type;
     return this;
   }

@@ -1,5 +1,15 @@
 <template>
   <form @submit.prevent="validerLaReponse()">
+    <div v-if="questionViewModel.type === 'entier'" class="fr-input-group">
+      <InputNumeric
+        :id="questionViewModel.id"
+        :label="{
+          wording: questionViewModel.libelle,
+          cssModifier: 'fr-h4',
+        }"
+        v-model="reponse"
+      />
+    </div>
     <div v-if="questionViewModel.type === 'mosaic_boolean'">
       <KYCMosaic
         :name="questionViewModel.id"
@@ -60,6 +70,7 @@
 <script setup lang="ts">
   import { onMounted, ref, watch } from 'vue';
   import BoutonRadio from '@/components/custom/BoutonRadio.vue';
+  import InputNumeric from '@/components/custom/Form/InputNumeric.vue';
   import InputCheckbox from '@/components/custom/InputCheckbox.vue';
   import KYCMosaic from '@/components/custom/KYC/KYCMosaic.vue';
   import {
