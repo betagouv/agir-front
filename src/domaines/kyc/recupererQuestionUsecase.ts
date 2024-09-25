@@ -25,7 +25,7 @@ export interface ReponseMosaic<T> {
 export interface Question {
   id: string;
   libelle: string;
-  type: 'libre' | 'choix_multiple' | 'choix_unique' | 'mosaic_boolean';
+  type: 'libre' | 'choix_multiple' | 'choix_unique' | 'mosaic_boolean' | 'entier';
   points: number;
   thematique: ThematiqueQuestion;
   reponses: ReponseKYCSimple | ReponseMosaic<boolean>;
