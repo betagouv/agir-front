@@ -14,6 +14,7 @@
       <button
         type="submit"
         aria-label="Soumettre le formulaire"
+        :disabled="formulaireEnErreur"
         class="fr-btn fr-btn--icon-left fr-btn--lg fr-icon-save-3-fill"
       >
         Mettre à jour vos informations
@@ -65,6 +66,7 @@
           class="fr-mb-4w"
           v-model:nombre-de-parts="profileUtlisateurViewModel.nombreDePartsFiscales"
           v-model:revenu-fiscal-de-reference="profileUtlisateurViewModel.revenuFiscal"
+          @update:isRFREnErreur="value => (isRFREnErreur = value)"
         />
       </div>
     </fieldset>
@@ -101,6 +103,7 @@
       <button
         type="submit"
         aria-label="Soumettre le formulaire"
+        :disabled="formulaireEnErreur"
         class="fr-btn fr-btn--icon-left fr-btn--lg fr-mt-4w fr-icon-save-3-fill"
       >
         Mettre à jour vos informations
@@ -110,7 +113,7 @@
 </template>
 
 <script setup lang="ts">
-  import { ref } from 'vue';
+  import { computed, ref } from 'vue';
   import Alert from '@/components/custom/Alert.vue';
   import CarteInfo from '@/components/custom/CarteInfo.vue';
   import CompteFormulaireRevenuFiscal from '@/components/custom/Compte/CompteFormulaireRevenuFiscal.vue';
@@ -128,8 +131,12 @@
   const profileUtlisateurViewModel = ref<ProfileUtilisateurViewModel>(props.compteUtlisateurViewModel);
   const champsPrenomStatus = ref<{ message: string; afficher: boolean }>({ message: '', afficher: false });
   const champsNomStatus = ref<{ message: string; afficher: boolean }>({ message: '', afficher: false });
+  let isRFREnErreur = ref(false);
+  const formulaireEnErreur = computed(() => {
+    return !onValidationPrenom() || !onValidationNom() || isRFREnErreur.value;
+  });
   async function modifierInformation() {
-    if (!onValidationPrenom() || !onValidationNom()) return;
+    if (formulaireEnErreur.value) return;
     const usecase = new MettreAJourProfileUtilisateurUsecase(
       new ProfileUtilisateurRepositoryAxiosImpl(),
       new SessionRepositoryStore(),
