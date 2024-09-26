@@ -18,9 +18,10 @@
             <CompteFormulaireRevenuFiscal
               v-model:nombre-de-parts="nombreDePartsFiscales"
               v-model:revenu-fiscal-de-reference="revenuFiscal"
+              @update:isRFREnErreur="value => (isRFREnErreur = value)"
             />
 
-            <button class="fr-mt-2w fr-btn">Valider</button>
+            <button class="fr-mt-2w fr-btn" :disabled="isRFREnErreur">Valider</button>
           </form>
         </div>
       </div>
@@ -61,6 +62,7 @@
   const nombreDePartsFiscales = ref(0);
   const logementViewModel = ref<LogementViewModel | null>(null);
   const abonnementTransport = ref(false);
+  const isRFREnErreur = ref(false);
 
   onMounted(() => {
     const informationLogementUseCase = new RecupererInformationLogementUseCase(new LogementRepositoryAxios());

@@ -131,7 +131,7 @@
   const profileUtlisateurViewModel = ref<ProfileUtilisateurViewModel>(props.compteUtlisateurViewModel);
   const champsPrenomStatus = ref<{ message: string; afficher: boolean }>({ message: '', afficher: false });
   const champsNomStatus = ref<{ message: string; afficher: boolean }>({ message: '', afficher: false });
-  let isRFREnErreur = ref(false);
+  const isRFREnErreur = ref(false);
   const formulaireEnErreur = computed(() => {
     return !onValidationPrenom() || !onValidationNom() || isRFREnErreur.value;
   });

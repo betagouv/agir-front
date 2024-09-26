@@ -51,7 +51,7 @@
   }>();
 
   const onValidationRFR = () => {
-    if (revenuFiscalDeReferenceModel.value < 0) {
+    if (revenuFiscalDeReferenceModel.value && revenuFiscalDeReferenceModel.value < 0) {
       champsRFRStatus.value = { message: 'Le revenu fiscal de référence doit être positif', afficher: true };
       emit('update:isRFREnErreur', true);
     } else {

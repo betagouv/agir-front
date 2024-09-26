@@ -18,6 +18,7 @@
             <CompteFormulaireRevenuFiscal
               v-model:nombre-de-parts="nombreDePartsFiscales"
               v-model:revenu-fiscal-de-reference="revenuFiscal"
+              @update:isRFREnErreur="value => (isRFREnErreur = value)"
             />
             <div v-if="afficherAbonnement">
               <h3 class="fr-h4">Abonnements et cartes</h3>
@@ -28,7 +29,7 @@
                 v-model="abonnementTransport"
               />
             </div>
-            <button class="fr-mt-2w fr-btn">Valider</button>
+            <button class="fr-mt-2w fr-btn" :disabled="isRFREnErreur">Valider</button>
           </form>
         </div>
       </div>
@@ -70,6 +71,7 @@
   const nombreDePartsFiscales = ref(0);
   const abonnementTransport = ref(false);
   const logementViewModel = ref<LogementViewModel | null>(null);
+  const isRFREnErreur = ref(false);
   const afficherAbonnement = computed(() => {
     return (
       logementViewModel.value?.codePostal.length === 5 &&
