@@ -2,7 +2,7 @@ import { RecupererListeQuestionsReponduesUsecase } from '@/domaines/kyc/recupere
 import { MockListeQuestionsRepository } from './adapters/listequestions.repository.mock';
 import { expect } from 'vitest';
 import { ListeQuestionsDansLeComptePresenter } from '@/domaines/kyc/adapters/listeQuestionsDansLeComptePresenter';
-import { ReponseKYCSimple, ThematiqueQuestion } from '@/domaines/kyc/recupererQuestionUsecase';
+import { ReponseKYCSimple, ReponseMosaic, ThematiqueQuestion } from '@/domaines/kyc/recupererQuestionUsecase';
 
 describe('Fichier de tests concernant la récupération des KYC répondues', () => {
   it('doit récupérer la liste des questions KYC répondues', async () => {
@@ -46,6 +46,36 @@ describe('Fichier de tests concernant la récupération des KYC répondues', () 
           thematique: ThematiqueQuestion.TRANSPORT,
           aEteRepondu: true,
         },
+        {
+          id: 'questionId3',
+          libelle: 'Une question2',
+          type: 'mosaic_boolean',
+          points: 10,
+          reponses: {
+            reponse: [
+              {
+                code: 'code',
+                image_url: 'image',
+                label: 'ma valeur 1',
+                valeur: true,
+              },
+              {
+                code: 'code',
+                image_url: 'image',
+                label: 'ma valeur 2',
+                valeur: false,
+              },
+              {
+                code: 'code',
+                image_url: 'image',
+                label: 'ma valeur 3',
+                valeur: true,
+              },
+            ],
+          } as ReponseMosaic<boolean>,
+          thematique: ThematiqueQuestion.TRANSPORT,
+          aEteRepondu: true,
+        },
       ]),
     );
     await recupererListeQuestionsUsecase.execute(
@@ -66,6 +96,13 @@ describe('Fichier de tests concernant la récupération des KYC répondues', () 
             reponse: 'une réponse - une autre réponse',
             description:
               'Ces informations permettent à <span class="text--italic">Agir</span> de mieux vous conseiller en matière de mobilité',
+          },
+          {
+            description:
+              'Ces informations permettent à <span class="text--italic">Agir</span> de mieux vous conseiller en matière de mobilité',
+            id: 'questionId3',
+            libelle: 'Une question2',
+            reponse: 'ma valeur 1 - ma valeur 3',
           },
         ]);
       }),

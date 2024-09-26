@@ -1,5 +1,5 @@
 import { ListeQuestionsPresenter, QuestionDansLeCompteViewModel } from '@/domaines/kyc/ports/listeQuestions.presenter';
-import { Question, ReponseKYCSimple, ThematiqueQuestion } from '@/domaines/kyc/recupererQuestionUsecase';
+import { Question, ReponseKYCSimple, ReponseMosaic, ThematiqueQuestion } from '@/domaines/kyc/recupererQuestionUsecase';
 
 export class ListeQuestionsDansLeComptePresenter implements ListeQuestionsPresenter {
   constructor(private readonly questionsViewModel: (viewModel: QuestionDansLeCompteViewModel[]) => void) {}
@@ -8,7 +8,13 @@ export class ListeQuestionsDansLeComptePresenter implements ListeQuestionsPresen
       questions.map<QuestionDansLeCompteViewModel>(question => ({
         id: question.id,
         libelle: question.libelle,
-        reponse: (question.reponses as ReponseKYCSimple).reponse.join(' - '),
+        reponse:
+          question.type === 'mosaic_boolean'
+            ? (question.reponses as ReponseMosaic<boolean>).reponse
+                .filter(r => r.valeur)
+                .map(value => value.label)
+                .join(' - ')
+            : (question.reponses as ReponseKYCSimple).reponse.join(' - '),
         description: this.determineDescription(question.thematique),
       })),
     );

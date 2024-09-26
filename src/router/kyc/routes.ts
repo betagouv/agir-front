@@ -15,7 +15,7 @@ export enum RouteKycPath {
 }
 const kycRoutes: RouteRecordRaw[] = [
   {
-    path: `/${RouteKycPath.KYC}/:id`,
+    path: `${RouteKycPath.KYC}:id`,
     name: RouteKycName.KYC,
     component: PageQuestionKyc,
     meta: {
@@ -23,7 +23,7 @@ const kycRoutes: RouteRecordRaw[] = [
     },
   },
   {
-    path: `/${RouteKycPath.KYC}/:universId/:thematiqueId`,
+    path: `${RouteKycPath.KYC}:universId/:thematiqueId`,
     name: RouteKycName.KYC_THEMATIQUE,
     component: PageThematiqueQuestionsKyc,
     meta: {
