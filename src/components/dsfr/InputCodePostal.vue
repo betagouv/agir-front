@@ -72,6 +72,7 @@
   const emit = defineEmits<{
     (e: 'update:modelValue', value: string): void;
     (e: 'update:selectedCommune', commune: string): void;
+    (e: 'update:isCodePostalEnErreur', value: boolean): void;
   }>();
 
   const updateValue = async event => {
@@ -79,18 +80,21 @@
 
     if (inputElement.value.length === 5) {
       communes.value = await usecase.execute(inputElement.value);
-      codePostalValide.value = communes.value.length !== 0;
       emit('update:selectedCommune', communes.value[0]);
+      codePostalValide.value = true;
     } else {
       communes.value = [];
+      codePostalValide.value = false;
       emit('update:selectedCommune', '');
     }
 
     emit('update:modelValue', inputElement.value);
+    emit('update:isCodePostalEnErreur', !codePostalValide.value);
   };
 
   const updateSelectedCommune = (event: Event) => {
     const selectElement = event.target as HTMLSelectElement;
+    codePostalValide.value = selectElement.value !== '';
 
     emit('update:selectedCommune', selectElement.value);
   };

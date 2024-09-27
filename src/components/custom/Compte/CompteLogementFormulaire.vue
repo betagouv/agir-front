@@ -15,6 +15,7 @@
         <button
           type="submit"
           aria-label="Soumettre le formulaire"
+          :disabled="!formulaireValide"
           class="fr-btn fr-btn--icon-left fr-btn--lg fr-icon-save-3-fill"
         >
           Mettre à jour vos informations
@@ -27,6 +28,7 @@
           :default-select-value="logementViewModel.commune_utilisee_dans_le_compte"
           v-model="logementViewModel.codePostal"
           @update:selectedCommune="logementViewModel.commune_utilisee_dans_le_compte = $event"
+          @update:isCodePostalEnErreur="isCodePostalEnErreur = $event"
         />
       </div>
       <h3 class="fr-h4">Combien êtes-vous dans votre logement (vous inclus) ?</h3>
@@ -122,6 +124,7 @@
           <button
             type="submit"
             aria-label="Soumettre le formulaire"
+            :disabled="!formulaireValide"
             class="fr-btn fr-btn--icon-left fr-btn--lg fr-mt-4w fr-icon-save-3-fill"
           >
             Mettre à jour vos informations
@@ -133,6 +136,7 @@
 </template>
 
 <script setup lang="ts">
+  import { computed, ref } from 'vue';
   import Alert from '@/components/custom/Alert.vue';
   import BoutonRadio from '@/components/custom/BoutonRadio.vue';
   import CarteInfo from '@/components/custom/CarteInfo.vue';
@@ -152,6 +156,10 @@
 
   const { alerte, afficherAlerte } = useAlerte();
 
+  const formulaireValide = computed(() => {
+    return !isCodePostalEnErreur.value;
+  });
+  const isCodePostalEnErreur = ref(false);
   const enregistrerLesInformations = () => {
     const usecase = new EnregistrerInformationsLogementUsecase(new LogementRepositoryAxios());
     usecase.execute(utilisateurStore().utilisateur.id, {
