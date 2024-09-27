@@ -10,7 +10,8 @@
     <div class="fr-col-lg-8 fr-col-12">
       <div v-if="!isLoading" class="background--white border border-radius--md fr-p-3w">
         <h2 class="fr-h4">{{ sousTitre }}</h2>
-        <div v-for="(aides, index) in simulationAidesViewModel" :key="index">
+        <p v-if="simulationAidesViewModel.aucunResultat">Aucune aide n'est disponible dans votre situation.</p>
+        <div v-else v-for="(aides, index) in simulationAidesViewModel?.resultats" :key="index">
           <Accordeon v-if="aides.aides.length" :nameId="`aides-${index}`">
             <template v-slot:titre>
               <div class="fr-grid-row flex-space-between full-width fr-pr-4w">
@@ -50,7 +51,7 @@
     isLoading: boolean;
     titre: string;
     sousTitre: string;
-    simulationAidesViewModel: SimulationAideResultatViewModel[] | null;
+    simulationAidesViewModel: SimulationAideResultatViewModel;
     titreCategorieAide: string;
   }>();
 </script>

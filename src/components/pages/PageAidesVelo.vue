@@ -1,12 +1,15 @@
 <template>
   <div class="fr-container fr-pb-6w">
     <FilDAriane :page-courante="titrePage" />
+    <CarteSkeleton v-if="isLoadingGlobal" />
+    <div v-else-if="!simulationAidesVeloViewModel">Problème de chargement</div>
     <AidesResultat
+      v-else
       :is-loading="isLoading"
       titre-categorie-aide="Acheter un vélo neuf"
       :simulation-aides-view-model="simulationAidesVeloViewModel"
       :titre="titrePage"
-      :sous-titre="sousTitre"
+      sous-titre="Les aides vélo disponibles"
     >
       <template v-slot:asideResultatAides>
         <div class="background--white border border-radius--md fr-p-3w fr-mb-3w">
@@ -56,7 +59,8 @@
 </template>
 
 <script setup lang="ts">
-  import { ref } from 'vue';
+  import { onMounted, ref } from 'vue';
+  import CarteSkeleton from '@/components/CarteSkeleton.vue';
   import AidesResultat from '@/components/custom/Aides/AidesResultat.vue';
   import AsideAideVelo from '@/components/custom/Aides/AidesVeloAside.vue';
   import InputNumberVertical from '@/components/custom/InputNumberVertical.vue';
@@ -76,8 +80,7 @@
   import { utilisateurStore } from '@/store/utilisateur';
 
   const titrePage = 'Acheter un vélo';
-  const sousTitre = 'Voici les aides vélo disponibles (en fonction de votre situation)';
-  const simulationAidesVeloViewModel = ref<SimulationAideResultatViewModel[] | null>(null);
+  const simulationAidesVeloViewModel = ref<SimulationAideResultatViewModel>();
   const codePostal = ref<string>('');
   const commune = ref<string>('');
   const revenuFiscal = ref<number | null>(0);
@@ -85,41 +88,50 @@
   const prixDuVelo = ref<number>(1000);
   const isLoading = ref<boolean>(false);
 
-  function mapResultatAidesVelo(viewModels: SimulationAideResultatViewModel[]) {
+  const isLoadingGlobal = ref<boolean>(true);
+  const { id: idUtilisateur } = utilisateurStore().utilisateur;
+
+  const recupererInformationLogementUseCase = new RecupererInformationLogementUseCase(new LogementRepositoryAxios());
+  const chargerProfileUtilisateurUsecase = new ChargerProfileUtilisateurUsecase(
+    new ProfileUtilisateurRepositoryAxiosImpl(),
+  );
+
+  onMounted(async () => {
+    await simulerAideVelo();
+    await recupererInformationLogementUseCase.execute(
+      idUtilisateur,
+      new LogementPresenterImpl(viewModel => {
+        codePostal.value = viewModel.codePostal;
+        commune.value = viewModel.commune_utilisee_dans_le_compte;
+      }),
+    );
+    await chargerProfileUtilisateurUsecase.execute(
+      idUtilisateur,
+      new ProfileUtilisateurPresenterImpl(viewModel => {
+        revenuFiscal.value = viewModel.revenuFiscal;
+        nombreDePartsFiscales.value = viewModel.nombreDePartsFiscales;
+      }),
+    );
+
+    isLoadingGlobal.value = false;
+  });
+
+  const simulerAideVelo = async () => {
+    isLoading.value = true;
+    const simulerAideVeloUsecase = new SimulerAideVeloUsecase(new SimulerAideVeloRepositoryAxios());
+    await simulerAideVeloUsecase.execute(
+      prixDuVelo.value,
+      idUtilisateur,
+      new SimulerAideVeloPresenterImpl(mapResultatAidesVelo),
+    );
+  };
+
+  const mapResultatAidesVelo = (viewModels: SimulationAideResultatViewModel) => {
     simulationAidesVeloViewModel.value = viewModels;
     isLoading.value = false;
-  }
+  };
 
   const updatePrixDuVelo = (prix: number) => {
     prixDuVelo.value = prix;
   };
-
-  const simulerAideVeloPresenterImpl = new SimulerAideVeloPresenterImpl(mapResultatAidesVelo);
-  const simulerAideVeloRepositoryAxios = new SimulerAideVeloRepositoryAxios();
-  const simulerAideVelo = () => {
-    isLoading.value = true;
-    const useCase = new SimulerAideVeloUsecase(simulerAideVeloRepositoryAxios);
-    useCase.execute(prixDuVelo.value, utilisateurStore().utilisateur.id, simulerAideVeloPresenterImpl);
-  };
-
-  const informationLogementUseCase = new RecupererInformationLogementUseCase(new LogementRepositoryAxios());
-  informationLogementUseCase.execute(
-    utilisateurStore().utilisateur.id,
-    new LogementPresenterImpl(viewModel => {
-      codePostal.value = viewModel.codePostal;
-      commune.value = viewModel.commune_utilisee_dans_le_compte;
-    }),
-  );
-
-  const usecase = new ChargerProfileUtilisateurUsecase(new ProfileUtilisateurRepositoryAxiosImpl());
-  const idUtilisateur = utilisateurStore().utilisateur.id;
-  usecase.execute(
-    idUtilisateur,
-    new ProfileUtilisateurPresenterImpl(viewModel => {
-      revenuFiscal.value = viewModel.revenuFiscal;
-      nombreDePartsFiscales.value = viewModel.nombreDePartsFiscales;
-    }),
-  );
-
-  simulerAideVelo();
 </script>
