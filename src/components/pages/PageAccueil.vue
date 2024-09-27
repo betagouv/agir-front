@@ -4,6 +4,11 @@
       <LandingHeader />
     </div>
   </section>
+  <section class="fr-py-8w background--beige">
+    <div class="fr-container">
+      <LandingPourquoi />
+    </div>
+  </section>
   <section class="fr-py-8w">
     <div class="fr-container">
       <LandingServices />
@@ -19,5 +24,6 @@
 <script setup lang="ts">
   import LandingHeader from '@/components/custom/Landing/LandingHeader.vue';
   import LandingPourQui from '@/components/custom/Landing/LandingPourQui.vue';
+  import LandingPourquoi from '@/components/custom/Landing/LandingPourquoi.vue';
   import LandingServices from '@/components/custom/Landing/LandingServices.vue';
 </script>
