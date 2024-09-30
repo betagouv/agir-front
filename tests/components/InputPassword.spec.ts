@@ -7,6 +7,7 @@ describe('InputPassword', () => {
       const { getByText } = render(InputPassword as unknown as { props: { modelValue: string } }, {
         props: {
           modelValue: 'PasswordWithoutNumber!',
+          legende: 'Votre mot de passe doit contenir :',
         },
       });
 
@@ -20,6 +21,7 @@ describe('InputPassword', () => {
       const { getByText } = render(InputPassword as unknown as { props: { modelValue: string } }, {
         props: {
           modelValue: 'Password1!',
+          legende: 'Votre mot de passe doit contenir :',
         },
       });
 
@@ -36,6 +38,7 @@ describe('InputPassword', () => {
       const { getByText } = render(InputPassword as unknown as { props: { modelValue: string } }, {
         props: {
           modelValue: 'Password',
+          legende: 'Votre mot de passe doit contenir :',
         },
       });
 
@@ -49,6 +52,7 @@ describe('InputPassword', () => {
       const { getByText } = render(InputPassword as unknown as { props: { modelValue: string } }, {
         props: {
           modelValue: 'Password1!',
+          legende: 'Votre mot de passe doit contenir :',
         },
       });
 
@@ -65,6 +69,7 @@ describe('InputPassword', () => {
       const { getByText } = render(InputPassword as unknown as { props: { modelValue: string } }, {
         props: {
           modelValue: 'Password',
+          legende: 'Votre mot de passe doit contenir :',
         },
       });
 
@@ -78,6 +83,7 @@ describe('InputPassword', () => {
       const { getByText } = render(InputPassword as unknown as { props: { modelValue: string } }, {
         props: {
           modelValue: 'Password123456!',
+          legende: 'Votre mot de passe doit contenir :',
         },
       });
 
@@ -94,6 +100,7 @@ describe('InputPassword', () => {
       const { getByText } = render(InputPassword as unknown as { props: { modelValue: string } }, {
         props: {
           modelValue: 'password',
+          legende: 'Votre mot de passe doit contenir :',
         },
       });
 
@@ -105,6 +112,7 @@ describe('InputPassword', () => {
       const { getByText } = render(InputPassword as unknown as { props: { modelValue: string } }, {
         props: {
           modelValue: '123PASSWORD!',
+          legende: 'Votre mot de passe doit contenir :',
         },
       });
 
@@ -116,6 +124,7 @@ describe('InputPassword', () => {
       const { getByText } = render(InputPassword as unknown as { props: { modelValue: string } }, {
         props: {
           modelValue: 'Password',
+          legende: 'Votre mot de passe doit contenir :',
         },
       });
 

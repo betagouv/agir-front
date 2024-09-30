@@ -63,6 +63,7 @@
 
   defineProps<{
     modelValue: string;
+    legende: string;
   }>();
 
   const emit = defineEmits<{

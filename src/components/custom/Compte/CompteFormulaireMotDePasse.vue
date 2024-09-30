@@ -3,7 +3,11 @@
     <div class="fr-col-lg-6 fr-col-12">
       <h3 class="fr-h6">Changer votre mot de passe</h3>
       <div class="fr-col-12 fr-py-0 fr-mb-4w">
-        <InputPassword v-model="motDePasse" @update:mot-de-passe-valide="onMotDePasseValideChanged" />
+        <InputPassword
+          v-model="motDePasse"
+          @update:mot-de-passe-valide="onMotDePasseValideChanged"
+          legende="Votre nouveau mot de passe doit contenir :"
+        />
       </div>
       <button :disabled="!formulaireValide" class="fr-btn fr-btn--secondary">Modifier votre mot de passe</button>
     </div>
