@@ -8,7 +8,7 @@ export interface Recette {
   ingredients: {
     nom: string;
     quantite: string;
-    unite: string;
+    unite?: string;
   }[];
   etapes: string[];
   difficulte: string;
