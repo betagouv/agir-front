@@ -21,8 +21,10 @@ export class RecettePresenterImpl implements RecettePresenter {
       titre: recette.titre,
       image: recette.image,
       tempsDePreparation: `Temps de préparation : ${recette.tempsDePreparation} min`,
-      ingredients: recette.ingredients.map(
-        ingredient => `${ingredient.quantite} ${ingredient.unite} de ${ingredient.nom} `,
+      ingredients: recette.ingredients.map(ingredient =>
+        ingredient.unite
+          ? `${ingredient.quantite} ${ingredient.unite} de ${ingredient.nom}`
+          : `${ingredient.quantite} ${ingredient.nom}`,
       ),
       etapes: recette.etapes,
       tag: this.determineTag(recette.difficulte),
