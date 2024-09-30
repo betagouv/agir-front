@@ -260,7 +260,7 @@ h2 {
 }
 
 .background--bleu-dark {
-  background: var(--blue-france-sun-113-625);
+  background-color: var(--blue-france-sun-113-625);
 }
 
 .background--bleu-info {
