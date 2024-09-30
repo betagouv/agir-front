@@ -13,6 +13,7 @@
               :defaultValue="logementViewModel.codePostal"
               :defaultSelectValue="logementViewModel.commune_utilisee_dans_le_compte"
               @update:selectedCommune="logementViewModel.commune_utilisee_dans_le_compte = $event"
+              @update:isCodePostalEnErreur="isCodePostalEnErreur = $event"
             />
             <h3 class="fr-h4 fr-mt-3w">Quel est votre revenu ?</h3>
             <CompteFormulaireRevenuFiscal
@@ -29,7 +30,7 @@
                 v-model="abonnementTransport"
               />
             </div>
-            <button class="fr-mt-2w fr-btn" :disabled="isRFREnErreur">Valider</button>
+            <button class="fr-mt-2w fr-btn" :disabled="isFormulaireEnErreur">Valider</button>
           </form>
         </div>
       </div>
@@ -72,6 +73,10 @@
   const abonnementTransport = ref(false);
   const logementViewModel = ref<LogementViewModel | null>(null);
   const isRFREnErreur = ref(false);
+  const isCodePostalEnErreur = ref(false);
+  const isFormulaireEnErreur = computed(() => {
+    return isCodePostalEnErreur.value || isRFREnErreur.value;
+  });
   const afficherAbonnement = computed(() => {
     return (
       logementViewModel.value?.codePostal.length === 5 &&
