@@ -22,15 +22,15 @@ import { RouteCompteName } from '@/router/compte/routeCompteName';
 import { utilisateurStore } from '@/store/utilisateur';
 
 export enum RouteComptePath {
-  MON_COMPTE = '/mon-compte/',
-  OPTIONS_AVANCEES = '/mon-compte/options-avancees',
+  MON_COMPTE = '/compte/',
+  OPTIONS_AVANCEES = '/compte/options-avancees',
   CREATION_COMPTE = '/creation-compte',
   VALIDATION_COMPTE = '/validation-compte',
   VALIDATION_AUTHENTIFICATION = '/validation-authentification',
   MOT_DE_PASSE_OUBLIE = '/mot-de-passe-oublie',
-  MIEUX_VOUS_CONNAITRE = '/mon-compte/mieux-vous-connaitre',
-  LOGEMENT = '/mon-compte/logement',
-  DEFIS = '/mon-compte/vos-actions',
+  MIEUX_VOUS_CONNAITRE = '/compte/mieux-vous-connaitre',
+  LOGEMENT = '/compte/logement',
+  DEFIS = '/compte/vos-actions',
   POST_CREATION_COMPTE_ETAPE_1 = '/creation-compte/etape-1',
   POST_CREATION_COMPTE_ETAPE_2 = '/creation-compte/etape-2',
   POST_CREATION_COMPTE_ETAPE_3 = '/creation-compte/etape-3',

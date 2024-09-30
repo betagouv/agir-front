@@ -8,7 +8,7 @@
         </h3>
         <div class="fr-grid-row flex-column fr-grid-row--top">
           {{ questionViewModel.reponse }}
-          <router-link class="fr-mt-4v" :to="{ name: RouteKycName.KYC, params: { id: questionViewModel.id } }">
+          <router-link class="fr-mt-4v" :to="{ name: RouteKycName.KYC_COMPTE, params: { id: questionViewModel.id } }">
             Modifier ma réponse
           </router-link>
         </div>
