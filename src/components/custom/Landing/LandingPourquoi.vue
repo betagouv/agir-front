@@ -1,6 +1,6 @@
 <template>
   <h2 class="fr-h2 fr-mb-6w text--center">Un titre pour l'a11y sivouuuuplééé</h2>
-  <ul class="fr-grid-row flex-space-around fr-grid-row--gutters">
+  <ul class="fr-grid-row flex-space-around fr-grid-row--gutters toto">
     <li class="fr-col-md-5 fr-col-12 fr-grid-row align-items--start">
       <div class="border--beige fr-p-1v fr-mr-2w border-radius--l">
         <span
