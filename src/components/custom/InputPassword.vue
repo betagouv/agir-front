@@ -15,7 +15,7 @@
       />
     </div>
     <div class="fr-messages-group" id="password-input-messages" aria-live="assertive">
-      <p class="fr-message" id="password-input-message">Votre mot de passe doit contenir :</p>
+      <p class="fr-message" id="password-input-message">{{ legende }}</p>
       <p
         :class="auMoinsDouzeCaracteres(modelValue) ? 'fr-message--valid' : 'fr-message--info'"
         class="fr-message"
