@@ -6,8 +6,13 @@ export interface AideResultat {
   logo: string;
 }
 
-export interface SimulationAideResultatViewModel {
+export interface AideResultats {
   titre: string;
   montantTotal: number;
   aides: AideResultat[];
+}
+
+export interface SimulationAideResultatViewModel {
+  aucunResultat: boolean;
+  resultats: AideResultats[];
 }
