@@ -26,6 +26,13 @@
         <section v-if="serviceRecettesViewModel.suggestions">
           <h2>Suggestions</h2>
           <ServiceListeCarte :suggestions-service-view-model="serviceRecettesViewModel.suggestions" />
+          <button
+            v-if="serviceRecettesViewModel.plusDeResultatsDisponibles"
+            class="fr-link text--underline"
+            @click="chargerPlusDeRecettes()"
+          >
+            Voir plus de recettes
+          </button>
         </section>
       </PageServiceTemplate>
     </div>
@@ -50,23 +57,37 @@
 
   const isLoading = ref<boolean>(true);
   const serviceRecettesViewModel = ref<ServiceRechercheRecettesViewModel>();
-
+  const typeDeRecettes = ref<string>('saison');
   const usecase = new RecupererServiceRecettesUsecase(new ServiceRechercheRecettesAxios());
-
+  let nombreMaxResultats = 10;
   onMounted(async () => {
     await usecase.execute(
       utilisateurStore().utilisateur.id,
-      '',
+      typeDeRecettes.value,
+      nombreMaxResultats,
       new ServiceRechercheRecettesPresenterImpl(vm => (serviceRecettesViewModel.value = vm)),
     );
 
     isLoading.value = false;
   });
 
+  const chargerPlusDeRecettes = () => {
+    nombreMaxResultats += 10;
+    usecase.execute(
+      utilisateurStore().utilisateur.id,
+      typeDeRecettes.value,
+      nombreMaxResultats,
+      new ServiceRechercheRecettesPresenterImpl(vm => (serviceRecettesViewModel.value = vm)),
+    );
+  };
+
   const updateType = (type: string) => {
+    nombreMaxResultats = 10;
+    typeDeRecettes.value = type;
     usecase.execute(
       utilisateurStore().utilisateur.id,
       type,
+      nombreMaxResultats,
       new ServiceRechercheRecettesPresenterImpl(vm => (serviceRecettesViewModel.value = vm)),
     );
   };

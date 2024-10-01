@@ -13,6 +13,8 @@ interface ServiceRechercheRecettesResultat {
 }
 
 export interface ServiceRechercheRecettes extends ServiceRechercheBase {
+  plusDeResultatsDisponibles: boolean;
+  nombreMaxResultats: number;
   suggestions: ServiceRechercheRecettesResultat[];
   favoris: ServiceRechercheRecettesResultat[];
 }
@@ -23,9 +25,15 @@ export class RecupererServiceRecettesUsecase {
   async execute(
     idUtilisateur: string,
     typeRecette: string,
+    nombreMaxResultats: number,
     recupererServiceRechercheRecettesPresenter: ServiceRechercheRecettesPresenter,
   ) {
-    const service = await this.serviceRechercheRecettesRepository.recupererService(idUtilisateur, typeRecette);
+    const service = await this.serviceRechercheRecettesRepository.recupererService(
+      idUtilisateur,
+      typeRecette,
+      nombreMaxResultats,
+    );
+
     recupererServiceRechercheRecettesPresenter.presente(service);
   }
 }

@@ -18,6 +18,7 @@ interface SuggestionRecetteServiceViewModel {
 }
 
 export interface ServiceRechercheRecettesViewModel extends ServiceRechercheViewModelBase {
+  plusDeResultatsDisponibles: boolean;
   favoris?: SuggestionRecetteServiceViewModel[];
   suggestions: SuggestionRecetteServiceViewModel[];
 }
@@ -27,6 +28,7 @@ export class ServiceRechercheRecettesPresenterImpl implements ServiceRechercheRe
 
   presente(serviceRechercheRecette: ServiceRechercheRecettes): void {
     this.serviceRechercheRecettesViewModel({
+      plusDeResultatsDisponibles: serviceRechercheRecette.plusDeResultatsDisponibles,
       suggestions: serviceRechercheRecette.suggestions.map(elem => ({
         id: elem.id,
         titre: elem.titre,
