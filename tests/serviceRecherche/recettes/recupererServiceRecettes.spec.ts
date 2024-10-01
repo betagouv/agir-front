@@ -11,6 +11,7 @@ describe('Fichier de tests concernant le service Recettes', () => {
     // GIVEN
     const usecase = new RecupererServiceRecettesUsecase(
       ServiceRechercheRecettesMock.avecServiceARetourner({
+        plusDeResultatsDisponibles: true,
         suggestions: [
           {
             id: 'id1',
@@ -55,6 +56,7 @@ describe('Fichier de tests concernant le service Recettes', () => {
     // THEN
     function expectation(serviceRechercheRecettesViewModel: ServiceRechercheRecettesViewModel) {
       expect(serviceRechercheRecettesViewModel).toStrictEqual<ServiceRechercheRecettesViewModel>({
+        plusDeResultatsDisponibles: true,
         suggestions: [
           {
             id: 'id1',

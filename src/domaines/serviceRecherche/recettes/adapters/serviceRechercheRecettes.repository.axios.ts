@@ -9,6 +9,10 @@ interface ServiceRechercheRecettesCategorieApiModel {
   is_default: boolean;
 }
 
+interface ServiceRechercheRecettesApiResultatsModel {
+  resultats: ServiceRechercheRecettesApiModel[];
+  encore_plus_resultats_dispo: boolean;
+}
 interface ServiceRechercheRecettesApiModel {
   id: string;
   difficulty_plat: string;
@@ -52,8 +56,8 @@ export class ServiceRechercheRecettesAxios implements ServiceRechercheRecettesRe
       `/utilisateurs/${idUtilisateur}/recherche_services/${idService}/categories`,
     );
 
-    const response = await axiosInstance.post<ServiceRechercheRecettesApiModel[]>(
-      `/utilisateurs/${idUtilisateur}/recherche_services/${idService}/search`,
+    const response = await axiosInstance.post<ServiceRechercheRecettesApiResultatsModel>(
+      `/utilisateurs/${idUtilisateur}/recherche_services/${idService}/search2`,
       {
         categorie: type,
         nombre_max_resultats: nombreMaxResultats,
@@ -62,8 +66,9 @@ export class ServiceRechercheRecettesAxios implements ServiceRechercheRecettesRe
     );
 
     return {
+      plusDeResultatsDisponibles: response.data.encore_plus_resultats_dispo,
       nombreMaxResultats: nombreMaxResultats,
-      suggestions: response.data
+      suggestions: response.data.resultats
         .filter(suggestion => !suggestion.est_favoris)
         .map(suggestion => ({
           id: suggestion.id,
@@ -74,7 +79,7 @@ export class ServiceRechercheRecettesAxios implements ServiceRechercheRecettesRe
           typeDePlat: suggestion.type_plat,
           img: suggestion.image_url,
         })),
-      favoris: response.data
+      favoris: response.data.resultats
         .filter(suggestion => suggestion.est_favoris)
         .map(suggestion => ({
           id: suggestion.id,
