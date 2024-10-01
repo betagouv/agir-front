@@ -12,6 +12,7 @@ describe('Fichier de tests concernant le service Recettes', () => {
     const usecase = new RecupererServiceRecettesUsecase(
       ServiceRechercheRecettesMock.avecServiceARetourner({
         plusDeResultatsDisponibles: true,
+        nombreMaxResultats: 10,
         suggestions: [
           {
             id: 'id1',

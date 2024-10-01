@@ -57,13 +57,13 @@
 
   const isLoading = ref<boolean>(true);
   const serviceRecettesViewModel = ref<ServiceRechercheRecettesViewModel>();
-
+  const typeDeRecettes = ref<string>('saison');
   const usecase = new RecupererServiceRecettesUsecase(new ServiceRechercheRecettesAxios());
   let nombreMaxResultats = 10;
   onMounted(async () => {
     await usecase.execute(
       utilisateurStore().utilisateur.id,
-      'saison',
+      typeDeRecettes.value,
       nombreMaxResultats,
       new ServiceRechercheRecettesPresenterImpl(vm => (serviceRecettesViewModel.value = vm)),
     );
@@ -75,7 +75,7 @@
     nombreMaxResultats += 10;
     usecase.execute(
       utilisateurStore().utilisateur.id,
-      serviceRecettesViewModel.value?.type,
+      typeDeRecettes.value,
       nombreMaxResultats,
       new ServiceRechercheRecettesPresenterImpl(vm => (serviceRecettesViewModel.value = vm)),
     );
@@ -83,6 +83,7 @@
 
   const updateType = (type: string) => {
     nombreMaxResultats = 10;
+    typeDeRecettes.value = type;
     usecase.execute(
       utilisateurStore().utilisateur.id,
       type,
