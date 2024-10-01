@@ -40,7 +40,11 @@ export interface RecetteApiModel {
 
 export class ServiceRechercheRecettesAxios implements ServiceRechercheRecettesRepository {
   @intercept401()
-  async recupererService(idUtilisateur: string, type: string): Promise<ServiceRechercheRecettes> {
+  async recupererService(
+    idUtilisateur: string,
+    type: string,
+    nombreMaxResultats: number,
+  ): Promise<ServiceRechercheRecettes> {
     const idService = 'recettes';
     const axiosInstance = AxiosFactory.getAxios();
 
@@ -52,12 +56,13 @@ export class ServiceRechercheRecettesAxios implements ServiceRechercheRecettesRe
       `/utilisateurs/${idUtilisateur}/recherche_services/${idService}/search`,
       {
         categorie: type,
-        nombre_max_resultats: 0,
+        nombre_max_resultats: nombreMaxResultats,
         rayon_metres: 5000,
       },
     );
 
     return {
+      nombreMaxResultats: nombreMaxResultats,
       suggestions: response.data
         .filter(suggestion => !suggestion.est_favoris)
         .map(suggestion => ({

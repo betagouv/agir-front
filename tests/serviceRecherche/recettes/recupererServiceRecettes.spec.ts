@@ -50,7 +50,7 @@ describe('Fichier de tests concernant le service Recettes', () => {
     );
 
     // WHEN
-    await usecase.execute('idUtilisateur', 'idService', new ServiceRechercheRecettesPresenterImpl(expectation));
+    await usecase.execute('idUtilisateur', 'idService', 10, new ServiceRechercheRecettesPresenterImpl(expectation));
 
     // THEN
     function expectation(serviceRechercheRecettesViewModel: ServiceRechercheRecettesViewModel) {
