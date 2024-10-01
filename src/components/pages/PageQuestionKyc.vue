@@ -15,10 +15,7 @@
         v-else
         :phrase-point-a-gagner="questionViewModel.points"
         :a-deja-repondu="questionViewModel.aDejaEteRepondu"
-        :bouton="{
-          label: `Retour à l'accueil`,
-          url: `/${RouteCoachName.COACH}`,
-        }"
+        :bouton="buttonRetour"
       />
     </div>
     <div v-else>Problème de chargement de donées</div>
@@ -36,6 +33,8 @@
   import { QuestionRepositoryAxios } from '@/domaines/kyc/adapters/question.repository.axios';
   import { RecupererQuestionUsecase } from '@/domaines/kyc/recupererQuestionUsecase';
   import { RouteCoachName } from '@/router/coach/routeCoachName';
+  import { RouteComptePath } from '@/router/compte/routes';
+  import { RouteKycName } from '@/router/kyc/routes';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const route = useRoute();
@@ -48,7 +47,15 @@
 
   const utilisateurId = utilisateurStore().utilisateur.id;
 
+  const buttonRetour = {
+    label: `Retour à l'accueil`,
+    url: `/${RouteCoachName.COACH}`,
+  };
   onMounted(async () => {
+    if (route.name === RouteKycName.KYC_COMPTE) {
+      buttonRetour.label = 'Retour à mon compte';
+      buttonRetour.url = `${RouteComptePath.MIEUX_VOUS_CONNAITRE}`;
+    }
     const recupereQuestionUsecase = new RecupererQuestionUsecase(new QuestionRepositoryAxios());
     await recupereQuestionUsecase.execute(
       questionId,
