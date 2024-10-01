@@ -19,9 +19,15 @@
       <LandingRappelCTA />
     </div>
   </section>
+  <section class="fr-py-8w background--beige">
+    <div class="fr-container">
+      <LandingEnsemble />
+    </div>
+  </section>
 </template>
 
 <script setup lang="ts">
+  import LandingEnsemble from '@/components/custom/Landing/LandingEnsemble.vue';
   import LandingHeader from '@/components/custom/Landing/LandingHeader.vue';
   import LandingNotreApproche from '@/components/custom/Landing/LandingNotreApproche.vue';
   import LandingPourquoi from '@/components/custom/Landing/LandingPourquoi.vue';
