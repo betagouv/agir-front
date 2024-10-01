@@ -27,7 +27,6 @@ export class ServiceRechercheRecettesPresenterImpl implements ServiceRechercheRe
   constructor(private serviceRechercheRecettesViewModel: (viewModel: ServiceRechercheRecettesViewModel) => void) {}
 
   presente(serviceRechercheRecette: ServiceRechercheRecettes): void {
-    console.log(serviceRechercheRecette);
     this.serviceRechercheRecettesViewModel({
       plusDeResultatsDisponibles: serviceRechercheRecette.plusDeResultatsDisponibles,
       suggestions: serviceRechercheRecette.suggestions.map(elem => ({
