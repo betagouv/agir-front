@@ -15,7 +15,7 @@ describe("Fichier de tests concernant le détail d'une recette", () => {
         image: '',
         tempsDePreparation: 30,
         ingredients: [
-          { nom: 'sardines', quantite: '4', unite: 'unité' },
+          { nom: 'sardines', quantite: '4' },
           { nom: 'tomates', quantite: '4', unite: 'unité' },
         ],
         etapes: ['Etape 1', 'Etape 2'],
@@ -29,7 +29,7 @@ describe("Fichier de tests concernant le détail d'une recette", () => {
         titre: 'Tian de sardines',
         image: '',
         tempsDePreparation: 'Temps de préparation : 30 min',
-        ingredients: ['4 unité de sardines ', '4 unité de tomates '],
+        ingredients: ['4 sardines', '4 unité de tomates'],
         etapes: ['Etape 1', 'Etape 2'],
         tag: {
           label: 'Intermédiaire',
