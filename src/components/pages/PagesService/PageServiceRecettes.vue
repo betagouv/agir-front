@@ -63,7 +63,7 @@
   onMounted(async () => {
     await usecase.execute(
       utilisateurStore().utilisateur.id,
-      '',
+      'saison',
       nombreMaxResultats,
       new ServiceRechercheRecettesPresenterImpl(vm => (serviceRecettesViewModel.value = vm)),
     );
