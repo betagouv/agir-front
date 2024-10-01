@@ -19,7 +19,12 @@
       Renvoyer le code
     </button>
     <p class="fr-text--lg fr-mb-0">Définissez votre nouveau mot de passe</p>
-    <InputPassword class="fr-my-2w" v-model="motDePasse" @update:mot-de-passe-valide="onMotDePasseValideChanged" />
+    <InputPassword
+      class="fr-my-2w"
+      v-model="motDePasse"
+      @update:mot-de-passe-valide="onMotDePasseValideChanged"
+      legende="Votre nouveau mot de passe doit contenir :"
+    />
     <button class="fr-btn display-block text--center" :disabled="!motDePasseValide || code.length === 0" type="submit">
       Valider
     </button>

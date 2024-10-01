@@ -13,6 +13,7 @@
     <p v-if="detailServiceViewModel.description">{{ detailServiceViewModel.description }}</p>
     <div class="map-container" v-if="detailServiceViewModel.position">
       <LMap
+        :useGlobalLeaflet="false"
         ref="map"
         :zoom="100"
         :center="[detailServiceViewModel.position.latitude, detailServiceViewModel.position.longitude]"
@@ -25,7 +26,7 @@
         <LMarker :lat-lng="[detailServiceViewModel.position?.latitude, detailServiceViewModel.position?.longitude]" />
       </LMap>
     </div>
-    <h2 class="fr-mt-4w">Detail</h2>
+    <h2 class="fr-mt-4w">Détails</h2>
     <div class="fr-grid-row flex-column fr-mb-4w">
       <span v-if="detailServiceViewModel.heuresOuvertures" class="fr-icon-time-line text--bleu">
         <span class="fr-ml-1w text--black"> {{ detailServiceViewModel.heuresOuvertures }}</span>
