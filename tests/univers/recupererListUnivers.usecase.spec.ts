@@ -20,7 +20,6 @@ describe('Fichier de tests concernant la recupération des univers', () => {
             nom: 'Le climat',
             urlImage: 'https://via.placeholder.com/150',
             nombreDeDefisRealises: 0,
-            estBloque: true,
             estTermine: false,
           },
           {
@@ -28,7 +27,6 @@ describe('Fichier de tests concernant la recupération des univers', () => {
             nom: 'En cuisine',
             urlImage: 'https://via.placeholder.com/150',
             nombreDeDefisRealises: 0,
-            estBloque: false,
             estTermine: true,
           },
         ],
