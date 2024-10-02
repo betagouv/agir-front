@@ -9,8 +9,8 @@
         <div class="fr-col fr-col-lg-7">
           <CoachToDo :todoList="todoList" />
         </div>
-        <div class="fr-col-12 fr-col-lg-5 text--center fr-hidden fr-unhidden-lg">
-          <img :src="todoList.imageUrl" class="max-full-width" alt="" />
+        <div class="fr-col-12 fr-col-lg-5 fr-hidden fr-unhidden-lg">
+          <img :src="todoList.imageUrl" class="fr-mx-auto max-full-width" alt="" />
         </div>
       </div>
     </div>
