@@ -4,16 +4,13 @@
       <h1 class="fr-h1 fr-m-0">Bonjour {{ utilisateurStore().utilisateur.prenom }} 👋</h1>
     </div>
     <div v-if="todoList && !todoList.derniere" class="fr-container fr-pt-3w">
-      <p class="fr-text--xl fr-mb-0">
-        Réduisez votre impact environnemental en <strong>complétant des missions</strong>
-      </p>
       <div id="container-survey"></div>
       <div class="fr-grid-row fr-grid-row--gutters">
         <div class="fr-col fr-col-lg-7">
           <CoachToDo :todoList="todoList" />
         </div>
-        <div class="fr-col-12 fr-col-lg-5">
-          <img :src="todoList.imageUrl" class="max-full-width" alt="" />
+        <div class="fr-col-12 fr-col-lg-5 fr-hidden fr-unhidden-lg">
+          <img :src="todoList.imageUrl" class="fr-mx-auto max-full-width" alt="" />
         </div>
       </div>
     </div>

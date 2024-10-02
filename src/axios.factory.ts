@@ -48,7 +48,7 @@ export function intercept401() {
             return Promise.resolve(result);
           } catch (exception) {
             //Session Expired
-            if ((exception as AxiosError).status === 401) {
+            if ((exception as AxiosError).status === 401 || (exception as AxiosError).status === 404) {
               await NavigationBus.getInstance().on(EventBusEvents.SESSION_EXPIREE);
             } else {
               throw exception;

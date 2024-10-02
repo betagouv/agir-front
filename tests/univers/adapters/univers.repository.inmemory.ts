@@ -8,7 +8,6 @@ export class UniversRepositoryMock implements UniversRepository {
       nom: 'Le climat',
       urlImage: 'https://via.placeholder.com/150',
       nombreDeDefisRealises: 0,
-      estBloque: false,
       estTermine: true,
     });
   }
@@ -19,7 +18,6 @@ export class UniversRepositoryMock implements UniversRepository {
         nom: 'Le climat',
         urlImage: 'https://via.placeholder.com/150',
         nombreDeDefisRealises: 0,
-        estBloque: true,
         estTermine: false,
       },
       {
@@ -27,7 +25,6 @@ export class UniversRepositoryMock implements UniversRepository {
         nom: 'En cuisine',
         urlImage: 'https://via.placeholder.com/150',
         nombreDeDefisRealises: 0,
-        estBloque: false,
         estTermine: true,
       },
     ]);

@@ -57,7 +57,7 @@
         new RecommandationsPersonnaliseesRepositoryAxios(),
         ToDoListEventBusImpl.getInstance(),
       );
-      usecase.execute(idUtilisateur);
+      await usecase.execute(idUtilisateur);
       return;
     }
   };

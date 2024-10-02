@@ -35,9 +35,14 @@
     </div>
     <div class="fr-py-1w">
       <h3 class="fr-mb-2w fr-text--md text--gris-dark before--path">
-        <span class="fr-icon-gift-fill" aria-hidden="true"></span>
-        {{ todoList.featureDebloquee?.titre }}
+        <button class="fr-text--bold" type="button" aria-describedby="tooltip-feature-debloquee">
+          <span class="fr-icon-gift-fill" aria-hidden="true"></span>
+          {{ todoList.featureDebloquee?.titre }}
+        </button>
       </h3>
+      <span class="fr-tooltip fr-placement" id="tooltip-feature-debloquee" role="tooltip" aria-hidden="true">
+        Pensez à récolter vos points
+      </span>
       <router-link
         v-if="!isDisableBonusFinDeToDo"
         :to="{ name: todoList.featureDebloquee?.url }"
@@ -51,6 +56,7 @@
 </template>
 
 <script setup lang="ts">
+  import '@gouvfr/dsfr/dist/component/tooltip/tooltip.min.css';
   import { computed } from 'vue';
   import CoachCardDone from '@/components/custom/Coach/CoachCardDone.vue';
   import CoachCardToDo from '@/components/custom/Coach/CoachCardToDo.vue';
