@@ -17,7 +17,14 @@
       <h3 class="fr-h5">Être en bonne santé</h3>
       <p class="fr-mb-0">Qualité de l'air, pollutions, impacts actuels</p>
     </div>
-    <div class="item3">Item 3</div>
+    <div class="item3 border-radius--md flex flex-column">
+      <p class="text--center fr-px-2w fr-pt-6w text--lh-1-8">
+        <span class="fr-h1 text--bold">473 902</span>
+        <br />kg de CO2-e économisés<br />
+        <span class="fr-h6 text--bold">ensemble</span>
+      </p>
+      <img src="/hp-ensemble.png" class="fr-mt-auto" alt="" />
+    </div>
     <div class="item4 text--center fr-px-2w background--white border-radius--md fr-py-4w">
       <span
         class="fr-icon-parent-line border-radius--full text--beige background--beige fr-p-1w display-inline-block fr-mb-2w"
@@ -44,6 +51,10 @@
     gap: 2rem;
   }
 
+  .item3 {
+    background-color: #e3d6c5;
+  }
+
   @media (min-width: 48em) {
     .grid-container {
       grid-template-columns: repeat(3, 1fr);
@@ -62,7 +73,6 @@
     }
 
     .item3 {
-      height: 150px;
       grid-column: 2;
       grid-row: 1 / span 2;
     }
