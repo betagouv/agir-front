@@ -1,5 +1,5 @@
 <template>
-  <h2 class="fr-h2 text--center"><span class="text--italic">J'agis</span> c’est aussi...</h2>
+  <h2 class="fr-h2 text--center"><strong class="text--italic">J'agis</strong> c’est aussi...</h2>
   <div class="grid-container">
     <div class="item1 text--center fr-px-2w background--white border-radius--md fr-py-4w">
       <span
