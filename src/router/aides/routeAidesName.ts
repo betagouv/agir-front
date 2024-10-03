@@ -1,5 +1,5 @@
 export enum RouteAidesName {
-  VOS_AIDES = 'vos-aides',
-  VELO = 'vos-aides-velo',
-  VELO_FORMULAIRE = 'vos-aides-velo-formulaire',
+  AIDES = 'aides',
+  VELO = 'aides-velo',
+  VELO_FORMULAIRE = 'aides-velo-formulaire',
 }

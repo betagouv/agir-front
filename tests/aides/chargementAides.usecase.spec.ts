@@ -200,7 +200,7 @@ describe('Fichier de tests pour charger toutes les aides', () => {
           id: 'id-2',
           isSimulateur: false,
           titre: 'Simulez vos aides pour convertir votre voiture thermique en électrique',
-          url: '/vos-aides#aide_id-2',
+          url: '/aides#aide_id-2',
         },
         {
           id: 'id-3',

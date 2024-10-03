@@ -52,7 +52,7 @@
         class="fr-mb-2w"
         :recommandations="recommandationsPersonnaliseesViewModel.autresRecommandations"
       />
-      <router-link :to="{ name: RouteCoachName.BIBLIOTHEQUE }" class="fr-link"> Voir la bibliothèque </router-link>
+      <router-link :to="{ name: RouteCoachName.BIBLIOTHEQUE }" class="fr-link"> Voir ma bibliothèque </router-link>
     </div>
     <div class="fr-container" v-else>
       <CarteSkeleton />

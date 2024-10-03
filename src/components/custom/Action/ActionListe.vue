@@ -1,5 +1,5 @@
 <template>
-  <h2 class="fr-h2 fr-mb-0">Vos actions</h2>
+  <h2 class="fr-h2 fr-mb-0">Mes actions</h2>
   <p class="fr-text--xl">
     Gagnez des <img width="16" src="/ic_score.svg" alt="point" /> chaque semaine avec de nouvelles actions !
   </p>
@@ -11,7 +11,7 @@
       <ActionCard :defi="defi" />
     </li>
   </ul>
-  <router-link :to="{ name: RouteCompteName.DEFIS }" class="fr-link"> Voir toutes vos actions </router-link>
+  <router-link :to="{ name: RouteCompteName.DEFIS }" class="fr-link"> Voir toutes mes actions </router-link>
 </template>
 
 <script setup lang="ts">

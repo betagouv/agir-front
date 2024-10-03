@@ -1,7 +1,7 @@
 <template>
   <div>
     <h3 class="fr-mb-0">
-      Vos aides à <span class="text--bleu">{{ commune }}</span
+      Mes aides à <span class="text--bleu">{{ commune }}</span
       >&nbsp;💶
     </h3>
     <p>Retrouvez un ensemble d'aides locales et nationales</p>
@@ -10,7 +10,7 @@
         <AideLink :aide="aide" />
       </li>
     </ul>
-    <router-link class="fr-link" :to="RouteAidesPath.VOS_AIDES">Voir toutes les aides</router-link>
+    <router-link class="fr-link" :to="RouteAidesPath.AIDES">Voir toutes les aides</router-link>
   </div>
 </template>
 

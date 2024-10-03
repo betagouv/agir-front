@@ -59,7 +59,7 @@ test.describe('Audit a11y - pages connectées', () => {
   });
 
   test("Page catalogue d'aides", async () => {
-    await page.goto('/vos-aides/');
+    await page.goto('/aides/');
     await playAuditA11y(page);
   });
 
@@ -84,7 +84,7 @@ test.describe('Audit a11y - pages connectées', () => {
   });
 
   test('Page mon compte - défis', async () => {
-    await page.goto('/mon-compte/vos-actions');
+    await page.goto('/mon-compte/mes-actions');
     await playAuditA11y(page);
   });
 

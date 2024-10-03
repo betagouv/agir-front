@@ -30,7 +30,7 @@ export enum RouteComptePath {
   MOT_DE_PASSE_OUBLIE = '/mot-de-passe-oublie',
   MIEUX_VOUS_CONNAITRE = '/compte/mieux-vous-connaitre',
   LOGEMENT = '/compte/logement',
-  DEFIS = '/compte/vos-actions',
+  DEFIS = '/compte/mes-actions',
   POST_CREATION_COMPTE_ETAPE_1 = '/creation-compte/etape-1',
   POST_CREATION_COMPTE_ETAPE_2 = '/creation-compte/etape-2',
   POST_CREATION_COMPTE_ETAPE_3 = '/creation-compte/etape-3',
