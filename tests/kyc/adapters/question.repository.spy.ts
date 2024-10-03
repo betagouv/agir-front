@@ -2,6 +2,23 @@ import { Question } from '@/domaines/kyc/recupererQuestionUsecase';
 import { QuestionRepository } from '@/domaines/kyc/ports/question.repository';
 
 export class SpyQuestionRepository implements QuestionRepository {
+  get envoyerReponseMosaicArgs(): {
+    questionId: string;
+    utilisateurId: string;
+    reponses: { code: string; boolean_value: boolean }[];
+  } {
+    return this._envoyerReponseMosaicArgs;
+  }
+  private _envoyerReponseMosaicArgs: {
+    questionId: string;
+    utilisateurId: string;
+    reponses: { code: string; boolean_value: boolean }[];
+  } = {
+    questionId: '',
+    utilisateurId: '',
+    reponses: [],
+  };
+
   recupererQuestionsThematique(_utilisateurId: string, _thematiqueId: string): Promise<Question[]> {
     throw new Error('Method not implemented.');
   }
@@ -47,7 +64,12 @@ export class SpyQuestionRepository implements QuestionRepository {
       boolean_value: boolean;
     }[],
   ): Promise<void> {
-    throw new Error('Method not implemented.');
+    this._envoyerReponseMosaicArgs = {
+      utilisateurId,
+      questionId,
+      reponses,
+    };
+    return Promise.resolve();
   }
 
   recupererQuestionsDepuisMissionOnboarding(utilisateurId: string): Promise<Question[]> {

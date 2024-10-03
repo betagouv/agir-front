@@ -97,7 +97,10 @@
 
   const validerLaReponse = async () => {
     if (props.questionViewModel.type === 'mosaic_boolean') {
-      const envoyerReponseMosaicUsecase = new EnvoyerReponseMosaicUsecase(new QuestionRepositoryAxios());
+      const envoyerReponseMosaicUsecase = new EnvoyerReponseMosaicUsecase(
+        new QuestionRepositoryAxios(),
+        ToDoListEventBusImpl.getInstance(),
+      );
       await envoyerReponseMosaicUsecase.execute(
         utilisateurStore().utilisateur.id,
         props.questionViewModel.id,
