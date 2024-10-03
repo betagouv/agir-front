@@ -15,7 +15,7 @@
         Selon vos envies
       </li>
     </ul>
-    <div class="fr-grid-row fr-col-6">
+    <div class="fr-grid-row fr-col-md-6 fr-col-12">
       <span class="fr-col-12 fr-p-1v">
         <router-link
           class="fr-btn full-width fr-btn--lg display-block text--center"

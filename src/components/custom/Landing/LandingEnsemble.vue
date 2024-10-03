@@ -40,35 +40,42 @@
 <style scoped>
   .grid-container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(2, auto);
+    grid-template-columns: 1;
     gap: 2rem;
   }
 
-  .item1 {
-    grid-column: 1;
-    grid-row: 1;
-  }
+  @media (min-width: 48em) {
+    .grid-container {
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, auto);
+      gap: 2rem;
+    }
 
-  .item2 {
-    grid-column: 1;
-    grid-row: 2;
-  }
+    .item1 {
+      grid-column: 1;
+      grid-row: 1;
+    }
 
-  .item3 {
-    height: 150px;
-    grid-column: 2;
-    grid-row: 1 / span 2;
-  }
+    .item2 {
+      grid-column: 1;
+      grid-row: 2;
+    }
 
-  .item4 {
-    grid-column: 3;
-    grid-row: 1;
-  }
+    .item3 {
+      height: 150px;
+      grid-column: 2;
+      grid-row: 1 / span 2;
+    }
 
-  .item5 {
-    grid-column: 3;
-    grid-row: 2;
+    .item4 {
+      grid-column: 3;
+      grid-row: 1;
+    }
+
+    .item5 {
+      grid-column: 3;
+      grid-row: 2;
+    }
   }
 
   [class*='fr-icon-']::before {
