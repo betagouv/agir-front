@@ -81,7 +81,7 @@ export class ToDoListPresenterImpl implements ToDoListPresenter {
   private determineUrl(todo: TodoListItem) {
     switch (todo.type) {
       case InteractionType.AIDE:
-        return RouteAidesPath.VOS_AIDES;
+        return RouteAidesPath.AIDES;
       case InteractionType.QUIZ:
         return `${RouteQuizPath.QUIZ}${todo.idDuContenu}`;
       case InteractionType.ARTICLE:
@@ -135,7 +135,7 @@ export class ToDoListPresenterImpl implements ToDoListPresenter {
         return {
           id: Fonctionnalites.AIDES,
           titre: 'Retrouver les aides financières auxquelles vous êtes éligible',
-          url: RouteAidesName.VOS_AIDES,
+          url: RouteAidesName.AIDES,
         };
       case Fonctionnalites.BIBLIOTHEQUE:
         return {

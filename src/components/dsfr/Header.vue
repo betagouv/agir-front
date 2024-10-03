@@ -84,10 +84,10 @@
             >
               <router-link
                 class="fr-nav__link"
-                :to="{ name: RouteAidesName.VOS_AIDES }"
-                :aria-current="route.name === RouteAidesName.VOS_AIDES ? 'page' : null"
+                :to="{ name: RouteAidesName.AIDES }"
+                :aria-current="route.name === RouteAidesName.AIDES ? 'page' : null"
               >
-                Vos aides
+                Mes aides
               </router-link>
             </li>
             <li class="fr-nav__item" data-fr-js-navigation-item="true">
@@ -97,7 +97,7 @@
                 v-if="utilisateurStore().utilisateur.fonctionnalitesDebloquees.includes(Fonctionnalites.BIBLIOTHEQUE)"
                 :aria-current="route.name === RouteCoachName.BIBLIOTHEQUE ? 'page' : null"
               >
-                Bibliothèque
+                Ma bibliothèque
               </router-link>
             </li>
             <li class="fr-nav__item" data-fr-js-navigation-item="true">
@@ -107,7 +107,7 @@
                 v-if="utilisateurStore().utilisateur.fonctionnalitesDebloquees.includes(Fonctionnalites.BILAN_CARBONE)"
                 :aria-current="route.name === RouteBilanCarboneName.BILAN_CARBONE ? 'page' : null"
               >
-                Votre empreinte
+                Mon empreinte
               </router-link>
             </li>
           </ul>

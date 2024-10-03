@@ -137,7 +137,7 @@ describe('Fichier de tests concernant la récupération de la ToDo List', () => 
         featureDebloquee: {
           id: Fonctionnalites.AIDES,
           titre: 'Retrouver les aides financières auxquelles vous êtes éligible',
-          url: RouteAidesName.VOS_AIDES,
+          url: RouteAidesName.AIDES,
         },
       });
     }

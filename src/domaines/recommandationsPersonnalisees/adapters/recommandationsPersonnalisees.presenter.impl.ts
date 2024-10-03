@@ -71,7 +71,7 @@ export class RecommandationsPersonnaliseesPresenterImpl implements Recommandatio
       case InteractionType.AIDE:
         return {
           libelle: "Simuler l'aide",
-          url: RouteAidesPath.VOS_AIDES,
+          url: RouteAidesPath.AIDES,
           style: 'fr-btn--secondary',
         };
       case InteractionType.QUIZ:

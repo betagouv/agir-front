@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2 class="fr-h2">Votre logement</h2>
+    <h2 class="fr-h2">Mon logement</h2>
     <div id="scroll-to-alerte">
       <Alert
         v-if="alerte.isActive"
@@ -18,7 +18,7 @@
           :disabled="!formulaireValide"
           class="fr-btn fr-btn--icon-left fr-btn--lg fr-icon-save-3-fill"
         >
-          Mettre à jour vos informations
+          Mettre à jour mes informations
         </button>
       </div>
       <div class="fr-mb-4w">
@@ -127,7 +127,7 @@
             :disabled="!formulaireValide"
             class="fr-btn fr-btn--icon-left fr-btn--lg fr-mt-4w fr-icon-save-3-fill"
           >
-            Mettre à jour vos informations
+            Mettre à jour mes informations
           </button>
         </div>
       </div>

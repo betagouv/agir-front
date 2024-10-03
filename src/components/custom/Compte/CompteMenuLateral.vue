@@ -1,10 +1,10 @@
 <template>
   <MenuLateral
     :liens="[
-      { label: 'Vos informations', url: RouteCompteName.MON_COMPTE },
-      { label: 'Votre logement', url: RouteCompteName.LOGEMENT },
+      { label: 'Mes informations', url: RouteCompteName.MON_COMPTE },
+      { label: 'Mes logement', url: RouteCompteName.LOGEMENT },
       { label: 'Mieux vous connaître', url: RouteCompteName.MIEUX_VOUS_CONNAITRE },
-      { label: 'Vos actions', url: RouteCompteName.DEFIS },
+      { label: 'Mes actions', url: RouteCompteName.DEFIS },
       { label: 'Options avancées', url: RouteCompteName.OPTIONS_AVANCEES },
     ]"
   />

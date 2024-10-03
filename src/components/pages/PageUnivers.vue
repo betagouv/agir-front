@@ -26,7 +26,7 @@
   </section>
   <section class="fr-py-6w" v-if="servicesViewModel?.services">
     <div class="fr-container">
-      <h2 class="fr-h2">Vos services</h2>
+      <h2 class="fr-h2">Mes services</h2>
       <div class="fr-grid-row fr-grid-row--gutters">
         <div v-for="service in servicesViewModel.services" :key="service.label" class="fr-col-6 fr-col-md-3">
           <ServiceLinkExterne

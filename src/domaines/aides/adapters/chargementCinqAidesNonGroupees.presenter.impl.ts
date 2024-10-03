@@ -17,7 +17,7 @@ export class ChargementAidesNonGroupeesPresenterImpl implements ChargementAidesP
         id: aide.id,
         titre: aide.titre,
         isSimulateur: aide.isSimulateur,
-        url: aide.isSimulateur ? aide.url : `${RouteAidesPath.VOS_AIDES}#aide_${aide.id}`,
+        url: aide.isSimulateur ? aide.url : `${RouteAidesPath.AIDES}#aide_${aide.id}`,
       })),
     );
   }

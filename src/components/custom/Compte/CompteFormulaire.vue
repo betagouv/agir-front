@@ -1,5 +1,5 @@
 <template>
-  <h2 class="fr-h2">Vos informations</h2>
+  <h2 class="fr-h2">Mes informations</h2>
   <div id="scroll-to-alerte">
     <Alert
       v-if="alerte.isActive"
@@ -17,7 +17,7 @@
         :disabled="formulaireEnErreur"
         class="fr-btn fr-btn--icon-left fr-btn--lg fr-icon-save-3-fill"
       >
-        Mettre à jour vos informations
+        Mettre à jour mes informations
       </button>
     </div>
     <fieldset class="fr-mb-5v fr-fieldset" aria-labelledby="identité-fieldset-legend">
@@ -106,7 +106,7 @@
         :disabled="formulaireEnErreur"
         class="fr-btn fr-btn--icon-left fr-btn--lg fr-mt-4w fr-icon-save-3-fill"
       >
-        Mettre à jour vos informations
+        Mettre à jour mes informations
       </button>
     </div>
   </form>

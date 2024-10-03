@@ -5,21 +5,21 @@ import { RouteRecordRaw } from 'vue-router';
 import { RouteAidesName } from '@/router/aides/routeAidesName';
 
 export enum RouteAidesPath {
-  VOS_AIDES = '/vos-aides',
+  AIDES = '/aides',
   FORMULAIRE = 'formulaire',
   VELO = 'velo',
 }
 
 const aidesRoutes: RouteRecordRaw[] = [
   {
-    path: RouteAidesPath.VOS_AIDES,
+    path: RouteAidesPath.AIDES,
     children: [
       {
-        path: RouteAidesPath.VOS_AIDES,
-        name: RouteAidesName.VOS_AIDES,
+        path: RouteAidesPath.AIDES,
+        name: RouteAidesName.AIDES,
         component: PageAides,
         meta: {
-          title: `Vos aides`,
+          title: 'Aides',
         },
       },
       {
