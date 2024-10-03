@@ -24,6 +24,11 @@
       <LandingEnsemble />
     </div>
   </section>
+  <section class="fr-py-16w">
+    <div class="fr-container">
+      <LandingApp />
+    </div>
+  </section>
   <section class="fr-py-16w background--vert rappel-app-cta">
     <div class="fr-container">
       <LandingRappelAppCTA />
@@ -32,6 +37,7 @@
 </template>
 
 <script setup lang="ts">
+  import LandingApp from '@/components/custom/Landing/LandingApp.vue';
   import LandingEnsemble from '@/components/custom/Landing/LandingEnsemble.vue';
   import LandingHeader from '@/components/custom/Landing/LandingHeader.vue';
   import LandingNotreApproche from '@/components/custom/Landing/LandingNotreApproche.vue';
