@@ -1,5 +1,5 @@
 <template>
-  <section class="background--white fr-py-10w">
+  <section class="background--white fr-py-16w">
     <div class="fr-container">
       <LandingHeader />
     </div>
