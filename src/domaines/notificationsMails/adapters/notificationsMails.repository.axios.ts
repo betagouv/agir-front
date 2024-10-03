@@ -5,7 +5,7 @@ export class NotificationsMailsRepositoryAxios implements NotificationsMailsRepo
   async seDesabonnerDesNotificationsMails(idDeDesabonnement: string): Promise<boolean> {
     const axiosInstance = AxiosFactory.getAxios();
     try {
-      await axiosInstance.post(`/email/token/disable`, { token: idDeDesabonnement });
+      await axiosInstance.post(`/notifications/email/disable`, { token: idDeDesabonnement });
       return true;
     } catch {
       return false;

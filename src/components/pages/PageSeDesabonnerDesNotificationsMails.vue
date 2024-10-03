@@ -22,7 +22,6 @@
       route.query.token as string,
       new SeDesabonnerDesNotificationsMailsPresenterImpl((viewModel: SeDesabonnerDesNotificationsMailsViewModel) => {
         messageAAfficher.value = viewModel.message;
-        console.log(messageAAfficher.value);
       }),
     );
   });
