@@ -30,6 +30,18 @@
       />
     </div>
   </div>
+  <ul class="fr-grid-row fr-grid-row--gutters list-style-none flex-center">
+    <li class="fr-col-auto"><p class="fr-logo">République Française</p></li>
+    <li class="fr-col-auto">
+      <img src="/logo-dinum.png" alt="DINUM : Direction interministérielle du numérique" height="80px" />
+    </li>
+    <li class="fr-col-auto">
+      <img src="/logo-ademe.svg" alt="Ademe" height="80px" />
+    </li>
+    <li class="fr-col-auto">
+      <img src="/logo_fnv.png" alt="France Nation Verte" height="80px" />
+    </li>
+  </ul>
 </template>
 
 <script setup lang="ts">
