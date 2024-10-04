@@ -7,11 +7,13 @@ export class ServiceRecherchePresDeChezNousRepositoryEnErreur implements Service
     return Promise.resolve({
       titre: '',
       suggestions: [],
+      favoris: [],
+      categories: [],
       estEnErreur: true,
-    });
+    } as ServiceRecherchePresDeChezNous);
   }
   recupererDetail(idUtilisateur: string, idService: string): Promise<ServiceRecherchePresDeChezNousResultatDetail> {
-    return Promise.resolve(this.detail!);
+    throw new Error('Method not implemented.');
   }
 }
 

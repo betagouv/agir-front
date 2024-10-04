@@ -34,7 +34,7 @@ export type ServiceRecherchePresDeChezNousViewModel =
 export class ServiceRecherchePresDeChezNousPresenterImpl implements ServiceRecherchePresDeChezNousPresenter {
   constructor(
     private serviceRechercheViewModel: (viewModel: ServiceRecherchePresDeChezNousViewModel) => void,
-    private erreur: (messageErreur: string) => void,
+    private erreur: (messageErreur: string | null) => void,
   ) {}
 
   presenteErreur() {

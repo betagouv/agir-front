@@ -86,6 +86,7 @@ export class ServiceRecherchePresDeChezNousAxios implements ServiceRecherchePres
       };
 
       return {
+        estEnErreur: false,
         titre: 'Mon titre',
         suggestions: responseSuggestions.data.map(mapServiceRecherche),
         favoris: responseFavoris.data.length > 0 ? responseFavoris.data.map(mapServiceRecherche) : undefined,
@@ -97,6 +98,7 @@ export class ServiceRecherchePresDeChezNousAxios implements ServiceRecherchePres
       };
     } catch {
       return {
+        titre: '',
         suggestions: [],
         favoris: [],
         categories: [],
