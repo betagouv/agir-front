@@ -21,6 +21,7 @@
 
   --custom-vert: #13bf88;
   --custom-background-vert: #008566;
+  --custom-background-vert-light: #04ad89;
   --custom-bleu: #4a5882;
   --custom-background-bleu: #f8f9fc;
 }
@@ -293,6 +294,10 @@ h2 {
 
 .background--vert {
   background-color: var(--custom-background-vert);
+}
+
+.background--vert-light {
+  background-color: var(--custom-background-vert-light);
 }
 
 .background--vert-bourgeon {
