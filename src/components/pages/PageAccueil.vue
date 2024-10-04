@@ -24,7 +24,7 @@
       <LandingEnsemble />
     </div>
   </section>
-  <section class="fr-py-16w">
+  <section class="fr-py-16w rappel-app">
     <div class="fr-container">
       <LandingApp />
     </div>
@@ -62,6 +62,14 @@
       background-repeat: no-repeat;
       background-size: contain;
     }
+
+    .rappel-app {
+      background-image: url('/hp-background-rappel-app.png');
+      background-position: 25% bottom;
+      background-repeat: no-repeat;
+      background-size: contain;
+    }
+
     .rappel-app-cta {
       background-image: url('/hp-background-rappel-app-cta.png');
       background-position: 70% bottom;

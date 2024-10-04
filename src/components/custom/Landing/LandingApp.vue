@@ -6,12 +6,12 @@
     </p>
     <ul class="fr-grid-row fr-grid-row--gutters list-style-none">
       <li class="fr-col-auto"><img src="/logo_ngc.png" alt="Nos gestes climat" height="32px" /></li>
+      <li class="fr-col-auto"><img src="/logo_impact_co2.svg" alt="Impact CO2" height="32px" /></li>
       <li class="fr-col-auto">
         <img src="/service-winter-logo.png" alt="Service Winter" height="32px" />
       </li>
-      <!-- <li class="fr-col-auto"><img src="" alt="" /></li>
-      <li class="fr-col-auto"><img src="" alt="" /></li>
-      <li class="fr-col-auto"><img src="" alt="" /></li> -->
+      <li class="fr-col-auto"><img src="/logo-manger-bouger.svg" alt="Manger Bouger" height="32px" /></li>
+      <li class="fr-col-auto"><img src="/logo-JVA.png" alt="Je Veux Aider" height="32px" /></li>
     </ul>
   </div>
 </template>
