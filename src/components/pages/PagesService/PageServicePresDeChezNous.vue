@@ -15,28 +15,46 @@
           <ServiceSelect
             id="categories"
             label="Choisir une catégorie"
-            :options="serviceRecherchePresDeChezNousViewModel.categories"
+            :options="(serviceRecherchePresDeChezNousViewModel as ServiceRechercheViewModelBase).categories"
             @update="updateType"
           />
           à proximité de chez vous
         </h1>
         <p>Produits locaux, bio, de saisons et vendeurs de vrac, pour une cuisine savoureuse et responsable</p>
-        <PageServiceTemplate :aside="serviceRecherchePresDeChezNousViewModel.aside">
-          <div class="text--center" v-if="serviceRecherchePresDeChezNousViewModel.aucunResultat">
+        <PageServiceTemplate :aside="(serviceRecherchePresDeChezNousViewModel as ServiceRechercheViewModelBase).aside">
+          <div
+            class="text--center"
+            v-if="
+              (serviceRecherchePresDeChezNousViewModel as ServiceRecherchePresDeChezNousViewModelSansResultats)
+                .aucunResultat
+            "
+          >
             <img src="/service_aucun_resultat.svg" height="250" alt="" />
             <p class="fr-text--lg">😢 Aucun résultat n’est encore disponible pour votre localisation</p>
           </div>
           <div v-else>
-            <section v-if="serviceRecherchePresDeChezNousViewModel.favoris">
+            <section
+              v-if="
+                serviceRecherchePresDeChezNousViewModel &&
+                (serviceRecherchePresDeChezNousViewModel as ServiceRecherchePresDeChezNousViewModelAvecResultats)
+                  .favoris
+              "
+            >
               <ServiceFavoris
                 titre="Mes lieux favoris"
-                :services-recherche-favoris-view-model="serviceRecherchePresDeChezNousViewModel.favoris"
+                :services-recherche-favoris-view-model="
+                  (serviceRecherchePresDeChezNousViewModel as ServiceRecherchePresDeChezNousViewModelAvecResultats)
+                    .favoris!
+                "
               />
             </section>
             <section>
               <h2>Suggestions</h2>
               <ServiceListeCarte
-                :suggestions-service-view-model="serviceRecherchePresDeChezNousViewModel.suggestions"
+                :suggestions-service-view-model="
+                  (serviceRecherchePresDeChezNousViewModel as ServiceRecherchePresDeChezNousViewModelAvecResultats)
+                    .suggestions
+                "
               />
             </section>
           </div>
@@ -53,9 +71,12 @@
   import ServiceListeCarte from '@/components/custom/Service/ServiceListeCarte.vue';
   import ServiceSelect from '@/components/custom/Service/ServiceSelect.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
+  import { ServiceRechercheViewModelBase } from '@/domaines/serviceRecherche/catalogue/adapters/serviceRechercheViewModel';
   import {
     ServiceRecherchePresDeChezNousPresenterImpl,
     ServiceRecherchePresDeChezNousViewModel,
+    ServiceRecherchePresDeChezNousViewModelAvecResultats,
+    ServiceRecherchePresDeChezNousViewModelSansResultats,
   } from '@/domaines/serviceRecherche/presDeChezNous/adapters/serviceRecherchePresDeChezNous.presenter.impl';
   import { ServiceRecherchePresDeChezNousAxios } from '@/domaines/serviceRecherche/presDeChezNous/adapters/serviceRecherchePresDeChezNous.repository.axios';
   import { RecupererServicePresDeChezNousUsecase } from '@/domaines/serviceRecherche/presDeChezNous/recupererServicePresDeChezNous.usecase';
@@ -67,7 +88,7 @@
 
   const usecase = new RecupererServicePresDeChezNousUsecase(new ServiceRecherchePresDeChezNousAxios());
 
-  const serviceErreur = ref<string>(null);
+  const serviceErreur = ref<string | null>(null);
 
   onMounted(async () => {
     await usecase.execute(
