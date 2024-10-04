@@ -1,5 +1,5 @@
 <template>
-  <section class="background--main fr-py-16w">
+  <section class="background--main fr-py-16w background-image-header">
     <div class="fr-container">
       <LandingHeader />
     </div>
@@ -56,6 +56,12 @@
   }
 
   @media (min-width: 48rem) {
+    .background-image-header {
+      background-image: url('/hp-background-header.png');
+      background-position: right bottom;
+      background-repeat: no-repeat;
+      background-size: contain;
+    }
     .rappel-app-cta {
       background-image: url('/hp-background-rappel-app-cta.png');
       background-position: 70% bottom;
