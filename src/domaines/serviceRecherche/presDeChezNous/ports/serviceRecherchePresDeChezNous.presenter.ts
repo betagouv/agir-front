@@ -2,4 +2,5 @@ import { ServiceRecherchePresDeChezNous } from '@/domaines/serviceRecherche/pres
 
 export interface ServiceRecherchePresDeChezNousPresenter {
   presente(serviceRecherche: ServiceRecherchePresDeChezNous): void;
+  presenteErreur(): void;
 }

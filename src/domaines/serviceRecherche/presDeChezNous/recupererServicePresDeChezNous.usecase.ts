@@ -15,6 +15,7 @@ export interface ServiceRecherchePresDeChezNous extends ServiceRechercheBase {
   titre: string;
   suggestions: ServiceRecherchePresDeChezNousResultat[];
   favoris?: ServiceRecherchePresDeChezNousResultat[];
+  estEnErreur: boolean;
 }
 
 export class RecupererServicePresDeChezNousUsecase {
@@ -26,6 +27,10 @@ export class RecupererServicePresDeChezNousUsecase {
     recupererServiceRecherchePresDeChezNousPresenter: ServiceRecherchePresDeChezNousPresenter,
   ) {
     const service = await this.serviceRecherchePresDeChezNousRepository.recupererService(idUtilisateur, idService);
-    recupererServiceRecherchePresDeChezNousPresenter.presente(service);
+    if (service.estEnErreur) {
+      recupererServiceRecherchePresDeChezNousPresenter.presenteErreur();
+    } else {
+      recupererServiceRecherchePresDeChezNousPresenter.presente(service);
+    }
   }
 }

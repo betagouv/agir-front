@@ -1,40 +1,47 @@
 <template>
   <div class="fr-container">
     <div v-if="isLoading">Chargement en cours ...</div>
-    <p v-else-if="!serviceRecherchePresDeChezNousViewModel">Problème de chargement de donées</p>
     <div v-else>
       <FilDAriane
         page-courante="Service : Près de chez nous"
         :page-hierarchie="[{ label: 'Univers - En cuisine', url: `${RouteUniversName.UNIVERS}/alimentation` }]"
       />
-      <h1 class="fr-h2">
-        <ServiceSelect
-          id="categories"
-          label="Choisir une catégorie"
-          :options="serviceRecherchePresDeChezNousViewModel.categories"
-          @update="updateType"
-        />
-        à proximité de chez vous
-      </h1>
-      <p>Produits locaux, bio, de saisons et vendeurs de vrac, pour une cuisine savoureuse et responsable</p>
-      <PageServiceTemplate :aside="serviceRecherchePresDeChezNousViewModel.aside">
-        <div class="text--center" v-if="serviceRecherchePresDeChezNousViewModel.aucunResultat">
-          <img src="/service_aucun_resultat.svg" height="250" alt="" />
-          <p class="fr-text--lg">😢 Aucun résultat n’est encore disponible pour votre localisation</p>
-        </div>
-        <div v-else>
-          <section v-if="serviceRecherchePresDeChezNousViewModel.favoris">
-            <ServiceFavoris
-              titre="Mes lieux favoris"
-              :services-recherche-favoris-view-model="serviceRecherchePresDeChezNousViewModel.favoris"
-            />
-          </section>
-          <section>
-            <h2>Suggestions</h2>
-            <ServiceListeCarte :suggestions-service-view-model="serviceRecherchePresDeChezNousViewModel.suggestions" />
-          </section>
-        </div>
-      </PageServiceTemplate>
+      <div v-if="serviceErreur">
+        <h1>Service indisponible</h1>
+        <p>{{ serviceErreur }}</p>
+      </div>
+      <div v-else>
+        <h1 class="fr-h2">
+          <ServiceSelect
+            id="categories"
+            label="Choisir une catégorie"
+            :options="serviceRecherchePresDeChezNousViewModel.categories"
+            @update="updateType"
+          />
+          à proximité de chez vous
+        </h1>
+        <p>Produits locaux, bio, de saisons et vendeurs de vrac, pour une cuisine savoureuse et responsable</p>
+        <PageServiceTemplate :aside="serviceRecherchePresDeChezNousViewModel.aside">
+          <div class="text--center" v-if="serviceRecherchePresDeChezNousViewModel.aucunResultat">
+            <img src="/service_aucun_resultat.svg" height="250" alt="" />
+            <p class="fr-text--lg">😢 Aucun résultat n’est encore disponible pour votre localisation</p>
+          </div>
+          <div v-else>
+            <section v-if="serviceRecherchePresDeChezNousViewModel.favoris">
+              <ServiceFavoris
+                titre="Mes lieux favoris"
+                :services-recherche-favoris-view-model="serviceRecherchePresDeChezNousViewModel.favoris"
+              />
+            </section>
+            <section>
+              <h2>Suggestions</h2>
+              <ServiceListeCarte
+                :suggestions-service-view-model="serviceRecherchePresDeChezNousViewModel.suggestions"
+              />
+            </section>
+          </div>
+        </PageServiceTemplate>
+      </div>
     </div>
   </div>
 </template>
@@ -60,21 +67,30 @@
 
   const usecase = new RecupererServicePresDeChezNousUsecase(new ServiceRecherchePresDeChezNousAxios());
 
+  const serviceErreur = ref<string>(null);
+
   onMounted(async () => {
     await usecase.execute(
       utilisateurStore().utilisateur.id,
       '',
-      new ServiceRecherchePresDeChezNousPresenterImpl(vm => (serviceRecherchePresDeChezNousViewModel.value = vm)),
+      new ServiceRecherchePresDeChezNousPresenterImpl(
+        vm => (serviceRecherchePresDeChezNousViewModel.value = vm),
+        error => (serviceErreur.value = error),
+      ),
     );
 
     isLoading.value = false;
   });
 
-  const updateType = (type: string) => {
-    usecase.execute(
+  const updateType = async (type: string) => {
+    await usecase.execute(
       utilisateurStore().utilisateur.id,
       type,
-      new ServiceRecherchePresDeChezNousPresenterImpl(vm => (serviceRecherchePresDeChezNousViewModel.value = vm)),
+      new ServiceRecherchePresDeChezNousPresenterImpl(
+        vm => (serviceRecherchePresDeChezNousViewModel.value = vm),
+        error => (serviceErreur.value = error),
+      ),
     );
+    isLoading.value = false;
   };
 </script>

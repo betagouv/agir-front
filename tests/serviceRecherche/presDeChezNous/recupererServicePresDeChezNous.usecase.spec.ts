@@ -1,4 +1,7 @@
-import { ServiceRecherchePresDeChezNousRepositoryMock } from './adapters/serviceRecherchePresDeChezNous.repository.mock';
+import {
+  ServiceRecherchePresDeChezNousRepositoryEnErreur,
+  ServiceRecherchePresDeChezNousRepositoryMock,
+} from './adapters/serviceRecherchePresDeChezNous.repository.mock';
 import { RecupererServicePresDeChezNousUsecase } from '../../../src/domaines/serviceRecherche/presDeChezNous/recupererServicePresDeChezNous.usecase';
 import {
   ServiceRecherchePresDeChezNousPresenterImpl,
@@ -189,5 +192,24 @@ describe("Fichier de tests concernant la récuperation de service d'un recherche
         ],
       });
     }
+  });
+
+  it("quand il y a une erreur, affiche un message d'erreur", async () => {
+    // GIVEN
+    const usecase = new RecupererServicePresDeChezNousUsecase(new ServiceRecherchePresDeChezNousRepositoryEnErreur());
+
+    // WHEN
+    await usecase.execute(
+      'idUtilisateur',
+      'idService',
+      new ServiceRecherchePresDeChezNousPresenterImpl(
+        vm => expect(vm).toEqual(null),
+
+        error =>
+          expect(error).toEqual(
+            'Le service prend plus de temps que prévu à répondre. Merci de recharger la page ou réessayer plus tard.',
+          ),
+      ),
+    );
   });
 });
