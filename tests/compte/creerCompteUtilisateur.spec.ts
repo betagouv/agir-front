@@ -80,6 +80,7 @@ describe('Fichier de tests concernant la creation du compte utilisateur', () => 
     const compteACreer: UserInput = {
       mail: 'john@skynet.com',
       motDePasse: 'motDePasse',
+      situationId: 'situationId',
     };
 
     const sessionRepository = SpySauvegarderUtilisateurSessionRepository.sansOnBoardingRealise();

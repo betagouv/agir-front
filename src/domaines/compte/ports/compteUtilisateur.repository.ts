@@ -13,6 +13,7 @@ export interface CompteTemporaire {
 export interface CompteUtilisateurACreer {
   email: string;
   motDePasse: string;
+  situationId?: string;
 }
 export interface CompteUtilisateurRepository {
   getCompteUtilisateur(idUtilisateur: string): Promise<CompteUtilisateur>;
