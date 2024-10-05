@@ -101,6 +101,7 @@
   let compteUtilisateurInput = ref<UserInput>({
     mail: '',
     motDePasse: '',
+    situationId: null,
   });
   let creationDeCompteEnErreur = ref<boolean>();
   let creationDeCompteMessageErreur = ref<string>('');
@@ -109,7 +110,7 @@
   utilisateurStore().reset();
   let doitPrendreEnCompteIdNGC = false;
   const route = useRoute();
-  const idNGC = ref<string>(route.query.situationId as string | null);
+  const idNGC = ref<string | null>(route.query.situationId as string | null);
   if (idNGC.value) {
     doitPrendreEnCompteIdNGC = true;
   }
