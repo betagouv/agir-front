@@ -57,6 +57,21 @@
       utilisateurStore().utilisateur.onboardingAEteRealise && utilisateurStore().disclaimer.afficherDisclaimerGeneral
     );
   });
+
+  // eslint-disable-next-line no-undef
+  const currentVersion = __APP_VERSION__;
+  async function checkForNewVersion() {
+    const response = await fetch('/version.json', { cache: 'no-cache' });
+    const { version } = await response.json();
+    if (version !== currentVersion) {
+      window.location.reload();
+    }
+  }
+
+  if (import.meta.env.VITE_ENV === 'production') {
+    const VERSION_CHECK_INTERVAL = 60 * 1000;
+    setInterval(checkForNewVersion, VERSION_CHECK_INTERVAL);
+  }
 </script>
 
 <style scoped>
