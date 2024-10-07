@@ -6,6 +6,7 @@ import { RepositoryError } from '@/shell/repositoryError';
 export interface UserInput {
   mail: string;
   motDePasse: string;
+  situationId: string | null;
 }
 export class CreerCompteUtilisateurUsecase {
   constructor(
@@ -18,6 +19,7 @@ export class CreerCompteUtilisateurUsecase {
       const utilisateurCree = await this.compteUtilisateuRepository.creerCompteUtilisateur({
         email: compteUtilisateurACreerInput.mail,
         motDePasse: compteUtilisateurACreerInput.motDePasse,
+        situationId: compteUtilisateurACreerInput.situationId,
       });
 
       this.sessionRepository.sauvegarderUtilisateur({

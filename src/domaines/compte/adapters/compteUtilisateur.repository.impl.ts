@@ -35,6 +35,7 @@ export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurReposit
       const response: Response<CompteUtilisateurApiModel> = await axiosInstance.post(`/utilisateurs_v2/`, {
         email: compteUtilisateurACreer.email,
         mot_de_passe: compteUtilisateurACreer.motDePasse,
+        situation_ngc_id: compteUtilisateurACreer.situationId,
       });
       return {
         mail: response.data.email || '',

@@ -40,12 +40,37 @@
         </div>
       </div>
       <div class="fr-fieldset__element fr-mb-0 fr-mt-1w">
+        <div v-if="idNGC">
+          <button
+            type="submit"
+            class="fr-btn fr-btn--lg display-block full-width"
+            :disabled="!formulaireValide || !acceptationCGU"
+          >
+            S'inscrire
+          </button>
+          <p
+            v-if="idNGC"
+            class="fr-mt-1w"
+            :class="!formulaireValide || !acceptationCGU ? 'text-disabled-grey' : 'text--bleu'"
+          >
+            En partageant mon bilan Nos Gestes Climat <span class="fr-text--bold">(conseillé)</span>
+          </p>
+          <button
+            class="fr-link text--underline fr-link--icon-right fr-icon-arrow-right-line display-block full-width"
+            :disabled="!formulaireValide || !acceptationCGU"
+            @click.prevent="performCreerCompteUtilisateurSansIdNGC"
+          >
+            S’inscrire sans partager mon bilan
+          </button>
+        </div>
+
         <button
+          v-else
           class="fr-btn fr-btn--lg display-block full-width"
           :disabled="!formulaireValide || !acceptationCGU"
           type="submit"
         >
-          Créer votre compte
+          S'inscrire
         </button>
       </div>
     </fieldset>
@@ -61,6 +86,7 @@
 
 <script setup lang="ts">
   import { ref } from 'vue';
+  import { useRoute } from 'vue-router';
   import Alert from '@/components/custom/Alert.vue';
   import InputPassword from '@/components/custom/InputPassword.vue';
   import InputMail from '@/components/dsfr/InputMail.vue';
@@ -75,17 +101,28 @@
   let compteUtilisateurInput = ref<UserInput>({
     mail: '',
     motDePasse: '',
+    situationId: null,
   });
   let creationDeCompteEnErreur = ref<boolean>();
   let creationDeCompteMessageErreur = ref<string>('');
   let formulaireValide = ref<boolean>(false);
   let acceptationCGU = ref<boolean>(false);
   utilisateurStore().reset();
+  let doitPrendreEnCompteIdNGC = false;
+  const route = useRoute();
+  const idNGC = ref<string | null>(route.query.situationId as string | null);
+  if (idNGC.value) {
+    doitPrendreEnCompteIdNGC = true;
+  }
 
   function onMotDePasseValideChanged(isMotDePasseValide: boolean) {
     formulaireValide.value = isMotDePasseValide;
   }
 
+  const performCreerCompteUtilisateurSansIdNGC = async () => {
+    doitPrendreEnCompteIdNGC = false;
+    await performCreerCompteUtilisateur();
+  };
   const performCreerCompteUtilisateur = async () => {
     const creeCompteUseCase = new CreerCompteUtilisateurUsecase(
       new CompteUtilisateurRepositoryImpl(),
@@ -96,11 +133,12 @@
         new CreerComptePresenterImpl(viewModel => {
           router.push({ name: viewModel.route });
         }),
-        compteUtilisateurInput.value,
+        { ...compteUtilisateurInput.value, situationId: doitPrendreEnCompteIdNGC ? idNGC.value : null },
       )
       .catch(reason => {
         creationDeCompteMessageErreur.value = reason.message;
         creationDeCompteEnErreur.value = true;
+        doitPrendreEnCompteIdNGC = true;
         window.scrollTo(0, 0);
       });
   };
