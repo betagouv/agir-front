@@ -6,7 +6,9 @@
   </section>
   <section class="fr-py-8w background--beige">
     <div class="fr-container">
-      <LandingPourquoi />
+      <div class="fr-col-md-9 fr-mx-auto">
+        <LandingPourquoi />
+      </div>
     </div>
   </section>
   <section class="fr-py-8w background--white">
