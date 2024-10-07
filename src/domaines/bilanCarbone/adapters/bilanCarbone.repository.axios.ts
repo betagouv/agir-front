@@ -19,13 +19,15 @@ interface BilanCarboneDetailApiModel {
 }
 
 interface BilanCarboneApiModel {
-  impact_univers: BilanCarboneDetailApiModel[];
-  impact_kg_annee: number;
-  top_3: {
-    label: string;
-    emoji: string;
-    pourcentage: number;
-  }[];
+  bilan_complet: {
+    impact_univers: BilanCarboneDetailApiModel[];
+    impact_kg_annee: number;
+    top_3: {
+      label: string;
+      emoji: string;
+      pourcentage: number;
+    }[];
+  };
 }
 
 export class BilanCarboneRepositoryAxios implements BilanCarboneRepository {
@@ -35,8 +37,8 @@ export class BilanCarboneRepositoryAxios implements BilanCarboneRepository {
     const reponse = await axiosInstance.get<BilanCarboneApiModel>(`/utilisateur/${utilisateurId}/bilans/last`);
 
     return {
-      impactKgAnnuel: reponse.data.impact_kg_annee,
-      univers: reponse.data.impact_univers.map(detail => ({
+      impactKgAnnuel: reponse.data.bilan_complet.impact_kg_annee,
+      univers: reponse.data.bilan_complet.impact_univers.map(detail => ({
         universId: detail.univers,
         universLabel: detail.univers_label,
         pourcentage: detail.pourcentage,
@@ -49,7 +51,7 @@ export class BilanCarboneRepositoryAxios implements BilanCarboneRepository {
           emoji: detailUnivers.emoji,
         })),
       })),
-      top3: reponse.data.top_3.map(top3 => ({
+      top3: reponse.data.bilan_complet.top_3.map(top3 => ({
         emoji: top3.emoji,
         label: top3.label,
         pourcentage: top3.pourcentage.toString(),
