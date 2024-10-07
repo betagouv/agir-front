@@ -4864,10 +4864,10 @@ pinia-plugin-persistedstate@4.0.2:
     defu "^6.1.4"
     destr "^2.0.3"
 
-pinia@2.2.3:
-  version "2.2.3"
-  resolved "https://registry.yarnpkg.com/pinia/-/pinia-2.2.3.tgz#f71fb2ce00e134db4e0470ee00b313e5077313e7"
-  integrity sha512-t2X9y1FT0h5zHmi9PsVr0LMNC0DXdPiYxX6zM5IyZHoWFjLq/LGpM1OVpGhXTPHjUh0XaFlsQd3GvPvGGNLQnw==
+pinia@2.2.4:
+  version "2.2.4"
+  resolved "https://registry.yarnpkg.com/pinia/-/pinia-2.2.4.tgz#79b63b231a3da80968ab58f7721f575fe2c509ac"
+  integrity sha512-K7ZhpMY9iJ9ShTC0cR2+PnxdQRuwVIsXDO/WIEV/RnMC/vmSoKDTKW/exNQYPI+4ij10UjXqdNiEHwn47McANQ==
   dependencies:
     "@vue/devtools-api" "^6.6.3"
     vue-demi "^0.14.10"
