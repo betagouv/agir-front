@@ -5,6 +5,10 @@ import { ConsommationElectriqueGlobal } from '@/domaines/serviceRecherche/linky/
 export class ServiceRechercheConsommationLinkyRepositoryMock implements ServiceRechercheLinkyRepository {
   constructor(private consommationElectriqueGlobalARetourner: ConsommationElectriqueGlobal) {}
 
+  seDesabonner(_idUtilsateur: string): Promise<void> {
+    throw new Error('Method not implemented.');
+  }
+
   recupererInformationCompteur(_idUtilisateur: string): Promise<InformationCompteur> {
     throw new Error('Method not implemented.');
   }

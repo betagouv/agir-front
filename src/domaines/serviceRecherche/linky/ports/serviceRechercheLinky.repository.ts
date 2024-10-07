@@ -4,4 +4,5 @@ import { ConsommationElectriqueGlobal } from '@/domaines/serviceRecherche/linky/
 export interface ServiceRechercheLinkyRepository {
   recupererConsommationElectrique(idUtilsateur: string): Promise<ConsommationElectriqueGlobal>;
   recupererInformationCompteur(idUtilsateur: string): Promise<InformationCompteur>;
+  seDesabonner(idUtilsateur: string): Promise<void>;
 }

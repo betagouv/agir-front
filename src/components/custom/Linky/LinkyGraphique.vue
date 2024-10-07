@@ -15,6 +15,9 @@
   <CarteInfo>
     <LinkyExplicationAleatoire />
   </CarteInfo>
+  <button @click="desactiverServiceLinky" class="fr-btn fr-btn--icon-left fr-btn--tertiary fr-icon-close-circle-fill">
+    Désactiver le service
+  </button>
 </template>
 
 <script setup lang="ts">
@@ -29,17 +32,28 @@
   } from '@/domaines/serviceRecherche/linky/adapters/serviceRechercheConsommationLinky.presenter.impl';
   import { ServiceRechercheLinkyRepositoryAxios } from '@/domaines/serviceRecherche/linky/adapters/serviceRechercheLinky.repository.axios';
   import { RecupererConsommationElectriqueUsecase } from '@/domaines/serviceRecherche/linky/recupererConsommationElectrique.usecase';
+  import { SeDesinscrireDuServiceUsecase } from '@/domaines/serviceRecherche/linky/seDesinscrireDuService.usecase';
+  import { LinkyEventBusImpl } from '@/domaines/services/linkyEventBusImpl';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const serviceConsommationLinkyViewModel = ref<ServiceConsommationLinkyViewModel>();
+  const { id: utilisateurId } = utilisateurStore().utilisateur;
 
   onMounted(async () => {
     const recupererConsommationElectriqueUsecase = new RecupererConsommationElectriqueUsecase(
       new ServiceRechercheLinkyRepositoryAxios(),
     );
     await recupererConsommationElectriqueUsecase.execute(
-      utilisateurStore().utilisateur.id,
+      utilisateurId,
       new ServiceRechercheConsommationLinkyPresenterImpl(vm => (serviceConsommationLinkyViewModel.value = vm)),
     );
   });
+
+  const desactiverServiceLinky = async () => {
+    const seDesinscrireDuServiceUsecase = new SeDesinscrireDuServiceUsecase(
+      new ServiceRechercheLinkyRepositoryAxios(),
+      LinkyEventBusImpl.getInstance(),
+    );
+    await seDesinscrireDuServiceUsecase.execute(utilisateurId);
+  };
 </script>

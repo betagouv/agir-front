@@ -59,6 +59,13 @@
     );
   });
 
+  LinkyEventBusImpl.getInstance().subscribe('linky', LinkyEvent.DESABONNEMENT, async () => {
+    await usecase.execute(
+      utilisateurId,
+      new ServiceRechercheLinkyPresenterImpl(vm => (serviceLinkyViewModel.value = vm)),
+    );
+  });
+
   onUnmounted(() => {
     LinkyEventBusImpl.getInstance().unsubscribeToAllEvents('linky');
   });
