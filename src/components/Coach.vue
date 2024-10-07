@@ -22,7 +22,10 @@
     </section>
   </div>
 
-  <section class="fr-py-8w position--relative">
+  <section
+    v-if="utilisateurStore().utilisateur.fonctionnalitesDebloquees.includes(Fonctionnalites.AIDES)"
+    class="fr-py-8w position--relative"
+  >
     <div class="section--outils">
       <img src="/ic_outils.svg" alt="" />
     </div>
@@ -89,6 +92,7 @@
   import { RecupererListeUniversUsecase } from '@/domaines/univers/recupererListeUnivers.usecase';
   import { RouteCoachName } from '@/router/coach/routeCoachName';
   import { RouteCompteName } from '@/router/compte/routeCompteName';
+  import { Fonctionnalites } from '@/shell/fonctionnalitesEnum';
   import { publierEvenementHotjar, HotjarEvenement } from '@/shell/publierEvenementHotjar';
   import { utilisateurStore } from '@/store/utilisateur';
 
