@@ -1,6 +1,9 @@
 <template>
   <div class="fr-col-md-7">
-    <h1>Simplifiez votre transition écologique, à votre rythme</h1>
+    <h1>
+      <img src="/logo-jagis.svg" height="110px" class="display-block" alt="J'agis" />
+      Simplifiez votre transition écologique, à votre rythme
+    </h1>
     <ul class="fr-grid-row fr-grid-row--gutters list-style-none fr-pl-0 fr-mb-2w">
       <li class="fr-col-auto">
         <span class="fr-icon-check-line text--vert" aria-hidden="true" />

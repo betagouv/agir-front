@@ -1,5 +1,5 @@
 <template>
-  <section class="background--main fr-py-16w background-image-header">
+  <section class="background--main fr-pt-4w fr-py-md-16w background-image-header">
     <div class="fr-container">
       <LandingHeader />
     </div>
@@ -65,12 +65,20 @@
     background-repeat: no-repeat;
   }
 
+  .background-image-header {
+    --height-background-img-mobile: 15rem;
+
+    background-image: url('/hp-background-header.png');
+    background-repeat: no-repeat;
+    background-size: auto var(--height-background-img-mobile);
+    background-position: right bottom;
+    padding-bottom: calc(var(--height-background-img-mobile) + 2rem);
+  }
+
   @media (min-width: 48rem) {
     .background-image-header {
-      background-image: url('/hp-background-header.png');
       background-position: right bottom;
-      background-repeat: no-repeat;
-      background-size: contain;
+      background-size: 45%;
     }
 
     .rappel-app {
