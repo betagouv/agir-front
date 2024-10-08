@@ -1,5 +1,5 @@
 import { Response } from 'redaxios';
-import { AxiosFactory, intercept401 } from '@/axios.factory';
+import { AxiosError, AxiosFactory, intercept401 } from '@/axios.factory';
 import {
   CompteTemporaire,
   CompteUtilisateur,
@@ -15,6 +15,7 @@ interface CompteUtilisateurApiModel {
   prenom: string;
   fonctionnalites_debloquees: string[];
 }
+
 export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurRepository {
   @intercept401()
   async getCompteUtilisateur(idUtilisateur: string): Promise<CompteUtilisateur> {
@@ -41,17 +42,15 @@ export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurReposit
         mail: response.data.email || '',
       };
     } catch (e) {
-      if (e.status === 400) {
-        const domainError = e.data as Response<RepositoryError>;
-        throw new RepositoryError(domainError.code, domainError.message);
-      } else if (!e.data) {
-        // Cas de l'absence de réponse, souvent causée par un bloqueur de contenu
+      const erreur = e as AxiosError;
+      if (erreur.status === 400) {
+        throw new RepositoryError((erreur.data as RepositoryError).code, (erreur.data as RepositoryError).message);
+      } else if (!erreur.data) {
         throw new RepositoryError(
           'NETWORK_ERROR',
           'Erreur de connexion. Vérifiez votre connexion ou les bloqueurs de contenu.',
         );
       } else {
-        // Erreur générique pour tout autre cas
         throw new RepositoryError('UNKNOWN_ERROR', 'Une erreur inattendue est survenue.');
       }
     }
