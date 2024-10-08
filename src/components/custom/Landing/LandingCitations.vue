@@ -1,6 +1,6 @@
 <template>
   <h2 class="fr-h2 text--center">Ils agissent avec nous</h2>
-  <div class="fr-grid-row fr-grid-row--gutters fr-p-4w">
+  <div class="fr-grid-row fr-grid-row--gutters">
     <div class="fr-col-md-6">
       <LandingCitation
         citation="Beaucoup plus <strong>facile à prendre en main</strong> que ce que je pensais"
