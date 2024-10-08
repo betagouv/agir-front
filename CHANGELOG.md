@@ -1,5 +1,52 @@
 # Changelog
 
+## [1.22.0](https://github.com/betagouv/agir-front/compare/v1.21.0...v1.22.0) (2024-10-08)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* affiche un message par defaut quand aucune aide n'est disponible ([#634](https://github.com/betagouv/agir-front/issues/634)) ([42ac307](https://github.com/betagouv/agir-front/commit/42ac307c16f295670b22bd634f5dd120c0e24bea))
+* ajout kyc nombre entier ([#631](https://github.com/betagouv/agir-front/issues/631)) ([199de3b](https://github.com/betagouv/agir-front/commit/199de3b333227638587abca391eae092fe9c89b6))
+* bilbiotheque et empreinte carbone deviennent debloquable ([#629](https://github.com/betagouv/agir-front/issues/629)) ([462247e](https://github.com/betagouv/agir-front/commit/462247e4299708b9e8196dbb23c3d02f58373012))
+* creation de compte depuis nos gestes climat ([#651](https://github.com/betagouv/agir-front/issues/651)) ([d143dce](https://github.com/betagouv/agir-front/commit/d143dce5712b85b6d3f5583eb356e42098d41cfa))
+* gestion des kycs dans le compte avec les mosaic ([#632](https://github.com/betagouv/agir-front/issues/632)) ([c57cb75](https://github.com/betagouv/agir-front/commit/c57cb75634b053959df838106c81427bc83fc830))
+* gestion du cas d'erreur sur les services près de chez nous ([#650](https://github.com/betagouv/agir-front/issues/650)) ([25cd168](https://github.com/betagouv/agir-front/commit/25cd168feee9dad1d7326579f7dae7478372081c))
+* modification des wording suite au passage à jagis ([#648](https://github.com/betagouv/agir-front/issues/648)) ([d598a0c](https://github.com/betagouv/agir-front/commit/d598a0c657ec3e7e4104cac3b7c076d12490d21a))
+* possibilité de se désabonner des notifications mails ([#647](https://github.com/betagouv/agir-front/issues/647)) ([985800c](https://github.com/betagouv/agir-front/commit/985800c8aa892fff988d7e3adae28062fbc85271))
+* voir plus de recettes ([#645](https://github.com/betagouv/agir-front/issues/645)) ([85511e9](https://github.com/betagouv/agir-front/commit/85511e91df2b613b62c4c9c48a88a27c82a03957))
+
+
+### 🐛 Corrections de bogues
+
+* catcher les erreurs chunk dans le router et forcer le reload ([#661](https://github.com/betagouv/agir-front/issues/661)) ([ac302b6](https://github.com/betagouv/agir-front/commit/ac302b677c620ee3cad98aefe3621196cedb3298))
+* declenchement scroll pour les recommandations ([#646](https://github.com/betagouv/agir-front/issues/646)) ([20af315](https://github.com/betagouv/agir-front/commit/20af3154fd504e807b5136b1eff396d36753bc44))
+* envoyer un evenement à la fin d'un mosaic afin d'avoir les points gagnés ([#649](https://github.com/betagouv/agir-front/issues/649)) ([b48a624](https://github.com/betagouv/agir-front/commit/b48a624e0f598985bfb1fcdd4aeeadb261f3a267))
+* mise à jour du code postal et ville ([#636](https://github.com/betagouv/agir-front/issues/636)) ([62d0775](https://github.com/betagouv/agir-front/commit/62d07753a51418ace9880d64ac562f475bc56e9c))
+* rediriger vers le compte depuis une kyc répondue via le compte ([#639](https://github.com/betagouv/agir-front/issues/639)) ([782c150](https://github.com/betagouv/agir-front/commit/782c15054739d0e15af43ec2b95d8697d03fb66a))
+* saisie de rfr invalide ([#633](https://github.com/betagouv/agir-front/issues/633)) ([bede3a9](https://github.com/betagouv/agir-front/commit/bede3a958e33c6a20746f8388ae4f52f9b8a7002))
+* wording recettes ([#638](https://github.com/betagouv/agir-front/issues/638)) ([dba1d5b](https://github.com/betagouv/agir-front/commit/dba1d5b4c9ae1ff92b202744cbcd273d2aaad7eb))
+* wording sur le nouveau mot de passe ([#637](https://github.com/betagouv/agir-front/issues/637)) ([6f06165](https://github.com/betagouv/agir-front/commit/6f061652e224f92b429cb28697f9f52901629733))
+
+
+### 👷 Autres changements
+
+* Bump @playwright/test from 1.47.0 to 1.47.2 ([#641](https://github.com/betagouv/agir-front/issues/641)) ([f94b31e](https://github.com/betagouv/agir-front/commit/f94b31eaca0ed48125036c15961bc838376f2f48))
+* Bump @sentry/vue from 8.27.0 to 8.32.0 ([#643](https://github.com/betagouv/agir-front/issues/643)) ([bd0647d](https://github.com/betagouv/agir-front/commit/bd0647d991cab27e563e723b360bc8a011360839))
+* Bump @sentry/vue from 8.32.0 to 8.33.1 ([#657](https://github.com/betagouv/agir-front/issues/657)) ([8adf4e2](https://github.com/betagouv/agir-front/commit/8adf4e210facdb6c32d141a52dd3f3c1f24a1a81))
+* Bump @types/node from 22.2.0 to 22.7.4 ([#640](https://github.com/betagouv/agir-front/issues/640)) ([21041d5](https://github.com/betagouv/agir-front/commit/21041d55aafa4f8f1c9e732dc6953826b25b580d))
+* Bump eslint-plugin-import from 2.30.0 to 2.31.0 ([#654](https://github.com/betagouv/agir-front/issues/654)) ([71d0803](https://github.com/betagouv/agir-front/commit/71d0803cdb5c8f47dcb49f8cfd2b65f6510b16b5))
+* Bump jsdom from 25.0.0 to 25.0.1 ([#624](https://github.com/betagouv/agir-front/issues/624)) ([e9511fd](https://github.com/betagouv/agir-front/commit/e9511fd4a96587d6a4fcca1c422fed60aadbb7f3))
+* Bump pinia from 2.2.2 to 2.2.3 ([#644](https://github.com/betagouv/agir-front/issues/644)) ([f6e76e7](https://github.com/betagouv/agir-front/commit/f6e76e71967a70683e87443b2472f57bb9a018be))
+* Bump pinia from 2.2.3 to 2.2.4 ([#656](https://github.com/betagouv/agir-front/issues/656)) ([4ee4566](https://github.com/betagouv/agir-front/commit/4ee456616dfbf124749a127679682d4bb4861cc9))
+* Bump pinia-plugin-persistedstate from 3.2.1 to 4.0.2 ([#642](https://github.com/betagouv/agir-front/issues/642)) ([1b78682](https://github.com/betagouv/agir-front/commit/1b786820549e9c016f73c0fb666a48f400ee5f54))
+* Bump pinia-plugin-persistedstate from 4.0.2 to 4.1.1 ([#658](https://github.com/betagouv/agir-front/issues/658)) ([552d9c3](https://github.com/betagouv/agir-front/commit/552d9c3bdbc3b80af8af6d8ab2d23d6b7fdb491f))
+* Bump release-please from 16.12.2 to 16.14.0 ([#626](https://github.com/betagouv/agir-front/issues/626)) ([aff1b66](https://github.com/betagouv/agir-front/commit/aff1b66a678fc363b2a9815c71192825c482ac49))
+* Bump release-please from 16.14.0 to 16.14.1 ([#655](https://github.com/betagouv/agir-front/issues/655)) ([2075008](https://github.com/betagouv/agir-front/commit/20750084724df0c2bde98dc64f96d307cd6c333b))
+* Bump rollup from 4.21.1 to 4.22.4 ([#628](https://github.com/betagouv/agir-front/issues/628)) ([0da5c5d](https://github.com/betagouv/agir-front/commit/0da5c5d4d8334086b1911d124f78f8e2de9fda5c))
+* Bump vue from 3.4.38 to 3.5.8 ([#627](https://github.com/betagouv/agir-front/issues/627)) ([1caeb33](https://github.com/betagouv/agir-front/commit/1caeb33029bf3875831bc56b2b844221d15fa3e9))
+* Bump vue-router from 4.4.3 to 4.4.5 ([#625](https://github.com/betagouv/agir-front/issues/625)) ([1c79e5c](https://github.com/betagouv/agir-front/commit/1c79e5cbae84cbdf2c09a0f12dd62739fda80a0d))
+* Bump vue-tsc from 2.0.29 to 2.1.6 ([#623](https://github.com/betagouv/agir-front/issues/623)) ([3083015](https://github.com/betagouv/agir-front/commit/3083015b55c321f7e80a222f3d7ad64b6eb42b6d))
+
 ## [1.21.0](https://github.com/betagouv/agir-front/compare/v1.20.1...v1.21.0) (2024-09-23)
 
 
