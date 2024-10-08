@@ -41,11 +41,18 @@ export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurReposit
         mail: response.data.email || '',
       };
     } catch (e) {
-      const domainError = e as Response<RepositoryError>;
-      if (domainError) {
-        throw new RepositoryError(domainError.data.code, domainError.data.message);
+      if (e.status === 400) {
+        const domainError = e.data as Response<RepositoryError>;
+        throw new RepositoryError(domainError.code, domainError.message);
+      } else if (!e.data) {
+        // Cas de l'absence de réponse, souvent causée par un bloqueur de contenu
+        throw new RepositoryError(
+          'NETWORK_ERROR',
+          'Erreur de connexion. Vérifiez votre connexion ou les bloqueurs de contenu.',
+        );
       } else {
-        throw e;
+        // Erreur générique pour tout autre cas
+        throw new RepositoryError('UNKNOWN_ERROR', 'Une erreur inattendue est survenue.');
       }
     }
   }
