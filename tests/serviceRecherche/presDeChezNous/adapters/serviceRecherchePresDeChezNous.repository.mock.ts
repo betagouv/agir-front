@@ -2,6 +2,21 @@ import { ServiceRecherchePresDeChezNousRepository } from '../../../../src/domain
 import { ServiceRecherchePresDeChezNous } from '../../../../src/domaines/serviceRecherche/presDeChezNous/recupererServicePresDeChezNous.usecase';
 import { ServiceRecherchePresDeChezNousResultatDetail } from '../../../../src/domaines/serviceRecherche/presDeChezNous/recupererDetailServicePresDeChezNous.usecase';
 
+export class ServiceRecherchePresDeChezNousRepositoryEnErreur implements ServiceRecherchePresDeChezNousRepository {
+  recupererService(idUtilisateur: string, idService: string): Promise<ServiceRecherchePresDeChezNous> {
+    return Promise.resolve({
+      titre: '',
+      suggestions: [],
+      favoris: [],
+      categories: [],
+      estEnErreur: true,
+    } as ServiceRecherchePresDeChezNous);
+  }
+  recupererDetail(idUtilisateur: string, idService: string): Promise<ServiceRecherchePresDeChezNousResultatDetail> {
+    throw new Error('Method not implemented.');
+  }
+}
+
 export class ServiceRecherchePresDeChezNousRepositoryMock implements ServiceRecherchePresDeChezNousRepository {
   private constructor(
     private service: ServiceRecherchePresDeChezNous | null,

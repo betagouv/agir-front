@@ -32,7 +32,16 @@ export type ServiceRecherchePresDeChezNousViewModel =
   | ServiceRecherchePresDeChezNousViewModelSansResultats;
 
 export class ServiceRecherchePresDeChezNousPresenterImpl implements ServiceRecherchePresDeChezNousPresenter {
-  constructor(private serviceRechercheViewModel: (viewModel: ServiceRecherchePresDeChezNousViewModel) => void) {}
+  constructor(
+    private serviceRechercheViewModel: (viewModel: ServiceRecherchePresDeChezNousViewModel) => void,
+    private erreur: (messageErreur: string | null) => void,
+  ) {}
+
+  presenteErreur() {
+    this.erreur(
+      'Le service prend plus de temps que prévu à répondre. Merci de recharger la page ou réessayer plus tard.',
+    );
+  }
 
   presente(serviceRecherche: ServiceRecherchePresDeChezNous): void {
     const aside = {
@@ -90,6 +99,7 @@ export class ServiceRecherchePresDeChezNousPresenterImpl implements ServiceReche
     }
 
     this.serviceRechercheViewModel(serviceRechercheViewModel);
+    this.erreur(null);
   }
 
   private construireTag(distance: number): string {

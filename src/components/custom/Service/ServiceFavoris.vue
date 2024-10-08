@@ -13,19 +13,10 @@
 
 <script setup lang="ts">
   import ServiceFavorisCarte from '@/components/custom/Service/ServiceFavorisCarte.vue';
+  import { SuggestionServiceViewModel } from '@/domaines/serviceRecherche/presDeChezNous/adapters/serviceRecherchePresDeChezNous.presenter.impl';
 
   defineProps<{
     titre: string;
-    servicesRechercheFavorisViewModel: {
-      titre: string;
-      img: string;
-      description?: string;
-      information?: string;
-      nombreMiseEnFavoris: number;
-      tag?: {
-        label: string;
-        style: string;
-      };
-    }[];
+    servicesRechercheFavorisViewModel: SuggestionServiceViewModel[];
   }>();
 </script>
