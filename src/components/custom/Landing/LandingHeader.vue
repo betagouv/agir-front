@@ -24,8 +24,8 @@
           Je m'inscris
         </router-link>
       </span>
-      <img src="/bouton-google-play.jpg" class="fr-col-6 fr-p-1v" alt="Télécharger dans l'App Store" />
-      <img src="/bouton-app-store.jpg" class="fr-col-6 fr-p-1v" alt="Disponible sur Google Play" />
+      <img src="/bouton-google-play.svg" class="fr-col-6 fr-p-1v" alt="Télécharger dans l'App Store" />
+      <img src="/bouton-app-store.svg" class="fr-col-6 fr-p-1v" alt="Disponible sur Google Play" />
     </div>
   </div>
 </template>

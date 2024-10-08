@@ -16,7 +16,12 @@
       <LandingNotreApproche />
     </div>
   </section>
-  <section class="fr-py-8w rappel-cta">
+  <section class="fr-py-16w background--vert rappel-app-cta">
+    <div class="fr-container">
+      <LandingRappelAppCTA />
+    </div>
+  </section>
+  <section class="fr-py-12w rappel-cta">
     <div class="fr-container">
       <LandingRappelCTA />
     </div>
@@ -34,11 +39,6 @@
   <section class="fr-py-8w background--white">
     <div class="fr-container">
       <LandingCitations />
-    </div>
-  </section>
-  <section class="fr-py-16w background--vert rappel-app-cta">
-    <div class="fr-container">
-      <LandingRappelAppCTA />
     </div>
   </section>
 </template>
@@ -82,18 +82,7 @@
       background-image: url('/hp-background-rappel-app-cta.png');
       background-position: 70% bottom;
       background-repeat: no-repeat;
+      background-size: auto 90%;
     }
-  }
-
-  .toto {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
-  }
-
-  .empty-card {
-    background-color: #006d5b; /* Green color to match your design */
-    border-radius: 10px;
-    height: auto;
   }
 </style>
