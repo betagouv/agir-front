@@ -123,4 +123,12 @@ const router = createRouter({
   },
 });
 
+// Error handling to force refresh the page when a dynamic import fails
+router.onError((error) => {
+  if (error.message.includes('Failed to fetch dynamically imported module') || 
+      error.message.includes("Importing a module script failed")) {
+    window.location.reload();
+  }
+});
+
 export default router;
