@@ -1,5 +1,6 @@
-import { BilanCarbone } from '@/domaines/bilanCarbone/recupererBilanCarbone.usecase';
+import { BilanCompletCarbone, BilanPartielCarbone } from '@/domaines/bilanCarbone/recupererBilanCarbone.usecase';
 
 export interface BilanCarbonePresenter {
-  presente(question: BilanCarbone): void;
+  presenteBilanComplet(bilan: BilanCompletCarbone): void;
+  presenteBilanPartiel(bilan: BilanPartielCarbone): void;
 }

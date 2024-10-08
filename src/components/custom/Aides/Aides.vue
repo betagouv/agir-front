@@ -51,7 +51,7 @@
 <script setup lang="ts">
   import { onMounted, ref } from 'vue';
   import { useRoute } from 'vue-router';
-  import Accordeon from '@/components/custom/Accordeon.vue';
+  import Accordeon from '@/components/custom/Aides/AccordeonAides.vue';
   import InputCheckbox from '@/components/dsfr/InputCheckbox.vue';
   import { AidesViewModel } from '@/domaines/aides/ports/chargementAides.presenter';
   import { trackClick } from '@/shell/matomo';

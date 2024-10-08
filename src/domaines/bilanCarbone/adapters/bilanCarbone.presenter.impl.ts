@@ -1,5 +1,6 @@
+import * as timers from 'node:timers';
 import { BilanCarbonePresenter } from '@/domaines/bilanCarbone/ports/bilanCarbone.presenter';
-import { BilanCarbone } from '@/domaines/bilanCarbone/recupererBilanCarbone.usecase';
+import { BilanCompletCarbone, BilanPartielCarbone } from '@/domaines/bilanCarbone/recupererBilanCarbone.usecase';
 
 interface BilanCarbonDetailItemViewModel {
   label: string;
@@ -14,7 +15,10 @@ interface BilanCarboneDetailViewModel extends BilanCarbonDetailItemViewModel {
   details: BilanCarbonDetailItemViewModel[];
 }
 
-export interface BilanCarboneViewModel {
+export interface BilanCarboneViewModelBase {
+  titre: string;
+}
+export interface BilanCarboneCompletViewModel extends BilanCarboneViewModelBase {
   impactKgAnnuel: {
     valeur: string;
     unite: string;
@@ -31,13 +35,37 @@ export interface BilanCarboneViewModel {
   }[];
 }
 
-export class BilanCarbonePresenterImpl implements BilanCarbonePresenter {
-  constructor(private readonly bilanCarboneViewModel: (viewModel: BilanCarboneViewModel) => void) {}
+export interface BilanCarbonePartielViewModel extends BilanCarboneViewModelBase {
+  pourcentageCompletionTotal: number;
+  categories: {
+    label: string;
+    tag: {
+      wording: string;
+      classes: string;
+    };
+  }[];
 
-  presente(bilanCarbone: BilanCarbone): void {
+  universBilan: {
+    contentId: string;
+    label: string;
+    urlImage: string;
+    estTermine: boolean;
+    pourcentageProgression: number;
+    nombreTotalDeQuestion: number;
+  }[];
+}
+
+export class BilanCarbonePresenterImpl implements BilanCarbonePresenter {
+  constructor(
+    private readonly bilanCarboneViewModel: (viewModel: BilanCarboneCompletViewModel) => void,
+    private readonly bilanCarbonePartielViewModel: (viewModel: BilanCarbonePartielViewModel) => void,
+  ) {}
+
+  presenteBilanComplet(bilanCarbone: BilanCompletCarbone): void {
     const NOMBRE_SEMAINES_PAR_AN = 52;
 
     this.bilanCarboneViewModel({
+      titre: 'Votre bilan <span class="text--bleu">environnemental</span>',
       impactKgAnnuel: this.formateKg(bilanCarbone.impactKgAnnuel),
       impactKgHebdomadaire: this.formateKg(bilanCarbone.impactKgAnnuel / NOMBRE_SEMAINES_PAR_AN),
       univers: bilanCarbone.univers.map(univers => ({
@@ -70,5 +98,63 @@ export class BilanCarbonePresenterImpl implements BilanCarbonePresenter {
           valeur: `${nombreDeKg.toFixed(0)} `,
           unite: 'kg',
         };
+  }
+
+  presenteBilanPartiel(bilan: BilanPartielCarbone): void {
+    this.bilanCarbonePartielViewModel({
+      titre: 'Estimez votre <span class="text--bleu">bilan environnemental</span>',
+      pourcentageCompletionTotal: bilan.pourcentageCompletionTotal,
+      categories: [
+        {
+          label: '🚙 Transports',
+          tag: {
+            wording: this.determineLabelNiveau(bilan.transport.niveau),
+            classes: '',
+          },
+        },
+        {
+          label: '🥘 Alimentation',
+          tag: {
+            wording: this.determineLabelNiveau(bilan.alimentation.niveau),
+            classes: '',
+          },
+        },
+        {
+          label: '🏡 Logement',
+          tag: {
+            wording: this.determineLabelNiveau(bilan.logement.niveau),
+            classes: '',
+          },
+        },
+        {
+          label: '🛍 Consommation',
+          tag: {
+            wording: this.determineLabelNiveau(bilan.consommation.niveau),
+            classes: '',
+          },
+        },
+      ],
+      universBilan: bilan.universBilan.map(univers => ({
+        contentId: univers.contentId,
+        label: univers.label,
+        urlImage: univers.urlImage,
+        estTermine: univers.estTermine,
+        pourcentageProgression: univers.pourcentageProgression,
+        nombreTotalDeQuestion: univers.nombreTotalDeQuestion,
+      })),
+    });
+  }
+
+  private determineLabelNiveau(niveau: 'moyen' | 'faible' | 'fort' | 'tres-fort'): string {
+    switch (niveau) {
+      case 'moyen':
+        return 'Moyen';
+      case 'faible':
+        return 'Faible';
+      case 'fort':
+        return 'Fort';
+      case 'tres-fort':
+        return 'Très fort';
+    }
   }
 }
