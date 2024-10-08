@@ -410,6 +410,10 @@ h2 {
   border-radius: 12px;
 }
 
+.border-radius--xl {
+  border-radius: 16px;
+}
+
 .border-radius--lg {
   border-radius: 24px;
 }

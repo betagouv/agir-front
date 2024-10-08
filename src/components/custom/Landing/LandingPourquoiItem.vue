@@ -1,5 +1,5 @@
 <template>
-  <div class="border--beige fr-p-1v fr-mr-2w border-radius--l">
+  <div class="border--beige fr-p-2v fr-mr-2w border-radius--xl">
     <span :class="`${picto} fr-p-1w background--white display-block border-radius--l text--beige`" aria-hidden="true" />
   </div>
   <div class="fr-col">
