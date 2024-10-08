@@ -26,7 +26,7 @@
     "jwt-decode": "4.0.0",
     "leaflet": "^1.9.4",
     "pinia": "2.2.4",
-    "pinia-plugin-persistedstate": "4.0.2",
+    "pinia-plugin-persistedstate": "4.1.1",
     "redaxios": "0.5.1",
     "vue": "3.5.8",
     "vue-chartjs": "5.3.1",
