@@ -4,8 +4,17 @@
     <div class="fr-header__body">
       <div class="fr-container">
         <div class="fr-header__body-row">
-          <div class="fr-header__brand">
+          <div class="fr-header__brand fr-enlarge-link">
             <div class="fr-header__brand-top">
+              <div class="fr-header__logo">
+                <p class="fr-logo">
+                  République
+                  <br />Française
+                </p>
+              </div>
+              <div class="fr-header__operator">
+                <img class="fr-responsive-img" src="/logo-jagis-full.svg" alt="J'agis" />
+              </div>
               <div class="fr-header__navbar">
                 <button
                   class="fr-btn--menu fr-btn"
@@ -19,21 +28,23 @@
                 </button>
               </div>
             </div>
-            <div class="fr-col-12 fr-grid-row fr-grid-row--middle">
-              <router-link
-                class="fr-header__service"
-                :to="{ name: estConnecte ? RouteCoachName.COACH : RouteCommuneName.ACCUEIL }"
-              >
-                <img alt="Revenir à l'accueil" src="/logo.svg" />
+            <div class="fr-header__service">
+              <router-link :to="{ name: estConnecte ? RouteCoachName.COACH : RouteCommuneName.ACCUEIL }">
+                <p class="fr-header__service-title">J'agis</p>
               </router-link>
             </div>
           </div>
           <div class="fr-header__tools">
             <div class="fr-header__tools-links">
-              <ul class="fr-btns-group">
+              <ul class="fr-btns-group fr-btns-group--lg">
                 <li v-if="!estConnecte">
                   <router-link :to="{ name: RouteCommuneName.AUTHENTIFICATION }" class="fr-btn fr-btn--secondary">
                     Se connecter
+                  </router-link>
+                </li>
+                <li v-if="!estConnecte">
+                  <router-link :to="{ name: RouteCommuneName.AUTHENTIFICATION }" class="fr-btn fr-btn--primary">
+                    Créer mon compte
                   </router-link>
                 </li>
                 <li v-if="doitAfficherLeBoutonSeDeconnecter">
@@ -164,6 +175,19 @@
   .fr-header__service {
     box-shadow: none;
     width: auto;
+  }
+
+  .fr-responsive-img {
+    height: 4rem;
+  }
+
+  .fr-header__tools-links .fr-btn--primary {
+    background-color: var(--blue-france-sun-113-625);
+    color: white;
+  }
+
+  .fr-header__tools-links .fr-btn--primary:hover {
+    background-color: var(--blue-france-sun-113-625-hover);
   }
 
   @media (min-width: 62em) {
