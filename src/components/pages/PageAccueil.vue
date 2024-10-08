@@ -38,7 +38,9 @@
   </section>
   <section class="fr-py-8w background--white">
     <div class="fr-container">
-      <LandingCitations />
+      <div class="fr-col-md-9 fr-mx-auto">
+        <LandingCitations />
+      </div>
     </div>
   </section>
 </template>
