@@ -91,23 +91,23 @@
             <a class="fr-footer__bottom-link" href="#">Plan du site</a>
           </li> -->
           <li class="fr-footer__bottom-item">
-            <router-link class="fr-footer__bottom-link" :to="{ name: RouteConformiteName.ACCESSIBILITE }"
+            <router-link class="fr-footer__bottom-link fr-pt-1w" :to="{ name: RouteConformiteName.ACCESSIBILITE }"
               >Accessibilité : non-conforme
             </router-link>
           </li>
           <li class="fr-footer__bottom-item">
-            <router-link class="fr-footer__bottom-link" :to="{ name: RouteConformiteName.MENTIONS_LEGALES }"
+            <router-link class="fr-footer__bottom-link fr-pt-1w" :to="{ name: RouteConformiteName.MENTIONS_LEGALES }"
               >Mentions légales
             </router-link>
           </li>
           <li class="fr-footer__bottom-item">
-            <router-link class="fr-footer__bottom-link" :to="{ name: RouteConformiteName.CGU }"
+            <router-link class="fr-footer__bottom-link fr-pt-1w" :to="{ name: RouteConformiteName.CGU }"
               >Conditions générales d'utilisation
             </router-link>
           </li>
           <li class="fr-footer__bottom-item">
             <router-link
-              class="fr-footer__bottom-link"
+              class="fr-footer__bottom-link fr-pt-1w"
               :to="{ name: RouteConformiteName.POLITIQUE_DE_CONFIDENTIALITE }"
             >
               Politique de confidentialité
