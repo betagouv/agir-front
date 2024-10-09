@@ -28,10 +28,10 @@ export interface BilanCompletCarbone {
 }
 export interface BilanPartielCarbone {
   pourcentageCompletionTotal: number;
-  transport: { niveau: 'moyen' | 'faible' | 'fort' | 'tres-fort' };
-  alimentation: { niveau: 'moyen' | 'faible' | 'fort' | 'tres-fort' };
-  logement: { niveau: 'moyen' | 'faible' | 'fort' | 'tres-fort' };
-  consommation: { niveau: 'moyen' | 'faible' | 'fort' | 'tres-fort' };
+  transport: { niveau: 'moyen' | 'faible' | 'fort' | 'tres_fort' };
+  alimentation: { niveau: 'moyen' | 'faible' | 'fort' | 'tres_fort' };
+  logement: { niveau: 'moyen' | 'faible' | 'fort' | 'tres_fort' };
+  consommation: { niveau: 'moyen' | 'faible' | 'fort' | 'tres_fort' };
   universBilan: {
     contentId: string;
     label: string;

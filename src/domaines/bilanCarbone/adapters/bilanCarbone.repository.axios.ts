@@ -29,10 +29,10 @@ interface BilanCarboneApiModel {
     }[];
   };
   bilan_synthese: {
-    impact_transport: 'moyen' | 'faible' | 'fort' | 'tres-fort';
-    impact_alimentation: 'moyen' | 'faible' | 'fort' | 'tres-fort';
-    impact_logement: 'moyen' | 'faible' | 'fort' | 'tres-fort';
-    impact_consommation: 'moyen' | 'faible' | 'fort' | 'tres-fort';
+    impact_transport: 'moyen' | 'faible' | 'fort' | 'tres_fort';
+    impact_alimentation: 'moyen' | 'faible' | 'fort' | 'tres_fort';
+    impact_logement: 'moyen' | 'faible' | 'fort' | 'tres_fort';
+    impact_consommation: 'moyen' | 'faible' | 'fort' | 'tres_fort';
     pourcentage_completion_totale: number;
     liens_bilans_univers: {
       id_enchainement_kyc: string;

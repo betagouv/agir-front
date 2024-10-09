@@ -195,7 +195,7 @@ describe('Fichier de tests concernant le chargement du bilan carbone', () => {
           pourcentageCompletionTotal: 90,
           transport: { niveau: 'moyen' },
           alimentation: { niveau: 'fort' },
-          logement: { niveau: 'tres-fort' },
+          logement: { niveau: 'tres_fort' },
           consommation: { niveau: 'faible' },
           universBilan: [
             {
@@ -251,30 +251,34 @@ describe('Fichier de tests concernant le chargement du bilan carbone', () => {
           {
             label: '🚙 Transports',
             tag: {
-              classes: '',
+              classes: 'tag-impact-moyen',
               wording: 'Moyen',
             },
+            progressBarStyle: 'progress-bar-impact-moyen',
           },
           {
             label: '🥘 Alimentation',
             tag: {
-              classes: '',
+              classes: 'tag-impact-fort',
               wording: 'Fort',
             },
+            progressBarStyle: 'progress-bar-impact-fort',
           },
           {
             label: '🏡 Logement',
             tag: {
-              classes: '',
+              classes: 'tag-impact-tres-fort',
               wording: 'Très fort',
             },
+            progressBarStyle: 'progress-bar-impact-tres-fort',
           },
           {
             label: '🛍 Consommation',
             tag: {
-              classes: '',
+              classes: 'tag-impact-faible',
               wording: 'Faible',
             },
+            progressBarStyle: 'progress-bar-impact-faible',
           },
         ],
         pourcentageCompletionTotal: 90,

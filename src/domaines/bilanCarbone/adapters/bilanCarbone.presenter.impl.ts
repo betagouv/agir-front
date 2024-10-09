@@ -34,14 +34,17 @@ export interface BilanCarboneCompletViewModel extends BilanCarboneViewModelBase 
   }[];
 }
 
+interface BilanCarbonePartielTagViewModel {
+  wording: string;
+  classes: string;
+}
+
 export interface BilanCarbonePartielViewModel extends BilanCarboneViewModelBase {
   pourcentageCompletionTotal: number;
   categories: {
     label: string;
-    tag: {
-      wording: string;
-      classes: string;
-    };
+    tag: BilanCarbonePartielTagViewModel;
+    progressBarStyle: string;
   }[];
 
   universBilan: {
@@ -106,31 +109,23 @@ export class BilanCarbonePresenterImpl implements BilanCarbonePresenter {
       categories: [
         {
           label: '🚙 Transports',
-          tag: {
-            wording: this.determineLabelNiveau(bilan.transport.niveau),
-            classes: '',
-          },
+          tag: this.determineTag(bilan.transport.niveau),
+          progressBarStyle: this.determineProgressBar(bilan.transport.niveau),
         },
         {
           label: '🥘 Alimentation',
-          tag: {
-            wording: this.determineLabelNiveau(bilan.alimentation.niveau),
-            classes: '',
-          },
+          tag: this.determineTag(bilan.alimentation.niveau),
+          progressBarStyle: this.determineProgressBar(bilan.alimentation.niveau),
         },
         {
           label: '🏡 Logement',
-          tag: {
-            wording: this.determineLabelNiveau(bilan.logement.niveau),
-            classes: '',
-          },
+          tag: this.determineTag(bilan.logement.niveau),
+          progressBarStyle: this.determineProgressBar(bilan.logement.niveau),
         },
         {
           label: '🛍 Consommation',
-          tag: {
-            wording: this.determineLabelNiveau(bilan.consommation.niveau),
-            classes: '',
-          },
+          tag: this.determineTag(bilan.consommation.niveau),
+          progressBarStyle: this.determineProgressBar(bilan.consommation.niveau),
         },
       ],
       universBilan: bilan.universBilan.map(univers => ({
@@ -144,16 +139,41 @@ export class BilanCarbonePresenterImpl implements BilanCarbonePresenter {
     });
   }
 
-  private determineLabelNiveau(niveau: 'moyen' | 'faible' | 'fort' | 'tres-fort'): string {
+  private determineProgressBar(niveau: 'moyen' | 'faible' | 'fort' | 'tres_fort'): string {
     switch (niveau) {
       case 'moyen':
-        return 'Moyen';
+        return 'progress-bar-impact-moyen';
       case 'faible':
-        return 'Faible';
+        return 'progress-bar-impact-faible';
       case 'fort':
-        return 'Fort';
-      case 'tres-fort':
-        return 'Très fort';
+        return 'progress-bar-impact-fort';
+      case 'tres_fort':
+        return 'progress-bar-impact-tres-fort';
+    }
+  }
+
+  private determineTag(niveau: 'moyen' | 'faible' | 'fort' | 'tres_fort'): BilanCarbonePartielTagViewModel {
+    switch (niveau) {
+      case 'moyen':
+        return {
+          wording: 'Moyen',
+          classes: 'tag-impact-moyen',
+        };
+      case 'faible':
+        return {
+          wording: 'Faible',
+          classes: 'tag-impact-faible',
+        };
+      case 'fort':
+        return {
+          wording: 'Fort',
+          classes: 'tag-impact-fort',
+        };
+      case 'tres_fort':
+        return {
+          wording: 'Très fort',
+          classes: 'tag-impact-tres-fort',
+        };
     }
   }
 }

@@ -1,14 +1,11 @@
 <template>
   <div class="fr-mt-4w">
     <h2>Votre première estimation</h2>
-    <div class="fr-grid-row background--white fr-p-2w shadow border-radius--md">
-      <ul>
-        <li v-for="categorie in bilanCarbonePartielViewModel?.categories" :key="categorie.label">
-          {{ categorie.label }}
-        </li>
-      </ul>
+    <div v-if="bilanCarbonePartielViewModel && bilanCarbonePartielViewModel.categories">
+      <div class="fr-col-md-6">
+        <BilanPremiereEstimation :bilanPremiereEstimation="bilanCarbonePartielViewModel.categories" />
+      </div>
     </div>
-
     <p class="fr-mt-4w">
       ✨ Estimation complète à
       <span class="text--bleu">{{ bilanCarbonePartielViewModel?.pourcentageCompletionTotal }}%</span>
@@ -69,7 +66,9 @@
   </div>
 </template>
 <script setup lang="ts">
+  import BilanPremiereEstimation from '@/components/custom/BilanCarbone/BilanPremiereEstimation.vue';
   import BilanUniversCarte from '@/components/custom/BilanCarbone/BilanUniversCarte.vue';
+
   import Accordeon from '@/components/dsfr/Accordeon.vue';
   import { BilanCarbonePartielViewModel } from '@/domaines/bilanCarbone/adapters/bilanCarbone.presenter.impl';
 
