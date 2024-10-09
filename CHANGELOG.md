@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.23.0](https://github.com/betagouv/agir-front/compare/v1.22.0...v1.23.0) (2024-10-09)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* se desinscrire du service linky ([#653](https://github.com/betagouv/agir-front/issues/653)) ([1e8efdd](https://github.com/betagouv/agir-front/commit/1e8efdd7ba2e31b756062b13901666501765cf32))
+
 ## [1.22.0](https://github.com/betagouv/agir-front/compare/v1.21.0...v1.22.0) (2024-10-08)
 
 
