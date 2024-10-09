@@ -1,7 +1,12 @@
 <template>
   <h2 class="fr-h2 fr-mb-6w text--center">À retrouver sur <strong class="text--italic">J’agis</strong></h2>
   <ul class="fr-grid-row flex-space-around fr-grid-row--gutters">
-    <li v-for="item in items" :key="item.titre" class="fr-col-md-6 fr-col-12 fr-grid-row align-items--start">
+    <li
+      v-for="(item, index) in items"
+      :key="item.titre"
+      class="fr-col-md-6 fr-col-12 fr-grid-row align-items--start"
+      :class="index % 2 === 0 ? 'fr-pr-md-6w' : 'fr-pl-md-6w'"
+    >
       <LandingPourquoiItem :titre="item.titre" :description="item.description" :picto="item.picto" />
     </li>
   </ul>

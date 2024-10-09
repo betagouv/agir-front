@@ -1,6 +1,6 @@
 <template>
   <div class="fr-col-md-6 fr-col-12 text--white">
-    <h2 class="fr-h2 text--white"><strong class="text--italic">J'agis</strong> sur l’application mobile</h2>
+    <h2 class="fr-h2 fr-mb-1w text--white"><strong class="text--italic">J'agis</strong> sur l’application mobile</h2>
     <p>
       L'application J'agis répond à toutes vos questions et guide vos réflexions au quotidien, au moment où vous en avez
       besoin.

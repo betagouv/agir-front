@@ -6,7 +6,7 @@
   </section>
   <section class="fr-py-8w background--beige">
     <div class="fr-container">
-      <div class="fr-col-md-9 fr-mx-auto">
+      <div class="fr-col-md-10 fr-mx-auto">
         <LandingPourquoi />
       </div>
     </div>
@@ -38,7 +38,7 @@
   </section>
   <section class="fr-py-8w background--white">
     <div class="fr-container">
-      <div class="fr-col-md-9 fr-mx-auto">
+      <div class="fr-col-md-10 fr-mx-auto">
         <LandingCitations />
       </div>
     </div>
@@ -61,12 +61,12 @@
     background-color: var(--blue-france-sun-113-625);
     background-image: url('/hp-background-rappel-cta.svg');
     background-size: contain;
-    background-position: center;
+    background-position: center bottom;
     background-repeat: no-repeat;
   }
 
   .background-image-header {
-    --height-background-img-mobile: 15rem;
+    --height-background-img-mobile: 20rem;
 
     background-image: url('/hp-background-header.png');
     background-repeat: no-repeat;

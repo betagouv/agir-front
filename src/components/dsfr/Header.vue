@@ -38,12 +38,15 @@
             <div class="fr-header__tools-links">
               <ul class="fr-btns-group fr-btns-group--lg">
                 <li v-if="!estConnecte">
-                  <router-link :to="{ name: RouteCommuneName.AUTHENTIFICATION }" class="fr-btn fr-btn--secondary">
+                  <router-link
+                    :to="{ name: RouteCommuneName.AUTHENTIFICATION }"
+                    class="fr-btn fr-btn--secondary fr-mr-2w"
+                  >
                     Se connecter
                   </router-link>
                 </li>
                 <li v-if="!estConnecte">
-                  <router-link :to="{ name: RouteCommuneName.AUTHENTIFICATION }" class="fr-btn fr-btn--primary">
+                  <router-link :to="{ name: RouteCompteName.CREATION_COMPTE }" class="fr-btn fr-btn--primary">
                     Créer mon compte
                   </router-link>
                 </li>
