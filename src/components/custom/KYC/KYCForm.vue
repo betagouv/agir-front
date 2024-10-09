@@ -1,7 +1,6 @@
 <template>
   <form @submit.prevent="validerLaReponse()">
     <div v-if="questionViewModel.type === 'entier'" class="fr-input-group">
-      reponse : {{ questionViewModel.reponses[0] }}
       <InputNumeric
         :id="questionViewModel.id"
         :label="{
