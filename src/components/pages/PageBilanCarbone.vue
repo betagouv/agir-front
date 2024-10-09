@@ -1,20 +1,21 @@
 <template>
   <div class="fr-container">
     <FilDAriane page-courante="Votre bilan environnemental" />
-    <h1
-      class="fr-h2 fr-mb-0"
-      v-html="bilanCarboneViewModel?.titre ? bilanCarboneViewModel?.titre : bilanCarbonePartielViewModel?.titre"
-    ></h1>
     <div v-if="isLoading">Chargement en cours ...</div>
-
-    <section>
-      <BilanCarboneComplet v-if="bilanCarboneViewModel" :bilan-carbone-view-model="bilanCarboneViewModel" />
-      <BilanCarbonePartiel
-        v-else-if="bilanCarbonePartielViewModel"
-        :bilan-carbone-partiel-view-model="bilanCarbonePartielViewModel"
+    <div v-else-if="!isLoading && (bilanCarboneViewModel || bilanCarbonePartielViewModel)">
+      <h1
+        class="fr-h2 fr-mb-0"
+        v-html="bilanCarboneViewModel?.titre ? bilanCarboneViewModel?.titre : bilanCarbonePartielViewModel?.titre"
       />
-      <p v-else>Problème de chargement de données</p>
-    </section>
+      <section>
+        <BilanCarboneComplet v-if="bilanCarboneViewModel" :bilan-carbone-view-model="bilanCarboneViewModel" />
+        <BilanCarbonePartiel
+          v-else-if="bilanCarbonePartielViewModel"
+          :bilan-carbone-partiel-view-model="bilanCarbonePartielViewModel"
+        />
+      </section>
+    </div>
+    <p v-else>Problème de chargement de donées</p>
   </div>
 </template>
 
@@ -33,8 +34,9 @@
   import { utilisateurStore } from '@/store/utilisateur';
 
   const isLoading = ref<boolean>(true);
-  const bilanCarboneViewModel = ref<BilanCarboneCompletViewModel | null>();
-  const bilanCarbonePartielViewModel = ref<BilanCarbonePartielViewModel | null>();
+  const bilanCarboneViewModel = ref<BilanCarboneCompletViewModel>();
+  const bilanCarbonePartielViewModel = ref<BilanCarbonePartielViewModel>();
+
   onMounted(async () => {
     const { id: utilisateurId } = utilisateurStore().utilisateur;
     const recupererBilanCarboneUsecase = new RecupererBilanCarboneUsecase(new BilanCarboneRepositoryAxios());
