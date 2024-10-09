@@ -1,32 +1,71 @@
 <template>
-  <footer v-if="getUtilisateur" class="fr-footer background--white" role="contentinfo" id="footer">
+  <footer class="fr-footer" role="contentinfo" id="footer">
     <div class="fr-container">
       <div class="fr-footer__body">
-        <div class="fr-footer__brand">
-          <p class="fr-logo">
-            République
-            <br />
-            française
-          </p>
+        <div class="fr-footer__brand fr-enlarge-link">
+          <router-link title="Retour à l'accueil du site - J'agis" :to="{ name: RouteCommuneName.ACCUEIL }">
+            <p class="fr-logo">
+              République<br />
+              française
+            </p>
+          </router-link>
         </div>
-        <!-- <div class="fr-footer__content">
+        <div class="fr-footer__content">
+          <p class="fr-footer__content-desc">
+            L'application <strong class="text--italic">J’agis</strong> est un service pour accompagner les citoyens
+            proposé par le Secrétariat Général à la Planification Ecologique
+          </p>
           <ul class="fr-footer__content-list">
             <li class="fr-footer__content-item">
-              <a class="fr-footer__content-link" target="_blank" href="https://legifrance.gouv.fr"
-                >legifrance.gouv.fr</a
+              <a
+                target="_blank"
+                rel="noopener external"
+                title="info.gouv.fr - nouvelle fenêtre"
+                id="footer__content-link-7654"
+                class="fr-footer__content-link"
+                href="https://info.gouv.fr"
               >
+                info.gouv.fr
+              </a>
             </li>
             <li class="fr-footer__content-item">
-              <a class="fr-footer__content-link" target="_blank" href="https://gouvernement.fr">gouvernement.fr</a>
+              <a
+                target="_blank"
+                rel="noopener external"
+                title="service-public.fr - nouvelle fenêtre"
+                id="footer__content-link-7655"
+                class="fr-footer__content-link"
+                href="https://service-public.fr"
+              >
+                service-public.fr
+              </a>
             </li>
             <li class="fr-footer__content-item">
-              <a class="fr-footer__content-link" target="_blank" href="https://service-public.fr">service-public.fr</a>
+              <a
+                target="_blank"
+                rel="noopener external"
+                title="legifrance.gouv.fr - nouvelle fenêtre"
+                id="footer__content-link-7656"
+                class="fr-footer__content-link"
+                href="https://legifrance.gouv.fr"
+              >
+                legifrance.gouv.fr
+              </a>
             </li>
             <li class="fr-footer__content-item">
-              <a class="fr-footer__content-link" target="_blank" href="https://data.gouv.fr">data.gouv.fr</a>
+              <a
+                target="_blank"
+                rel="noopener external"
+                title="data.gouv.fr - nouvelle fenêtre"
+                id="footer__content-link-7657"
+                class="fr-footer__content-link"
+                href="https://data.gouv.fr"
+              >
+                data.gouv.fr
+              </a>
             </li>
           </ul>
-        </div> -->
+        </div>
       </div>
       <div class="fr-footer__partners">
         <p class="fr-footer__partners-title">Nos partenaires</p>
@@ -34,13 +73,13 @@
           <div class="fr-footer__partners-main">
             <ul class="fr-grid-row fr-grid-row--gutters fr-grid-row--middle">
               <li class="fr-col">
-                <img class="fr-footer__logo" src="/logo_ademe.png" alt="Agence de la transition écologique à Paris" />
+                <img src="/logo-dinum.png" alt="DINUM : Direction interministérielle du numérique" height="80px" />
               </li>
               <li class="fr-col">
-                <img class="fr-footer__logo" src="/logo_fnv.png" alt="France Nation Verte" />
+                <img src="/logo-ademe.svg" alt="ADEME: Agence de la transition écologique " height="80px" />
               </li>
               <li class="fr-col">
-                <img class="fr-footer__logo" src="/logo-betagouvfr.svg" alt="Beta gouv" />
+                <img src="/logo_fnv.png" alt="France Nation Verte" height="80px" />
               </li>
             </ul>
           </div>
@@ -87,34 +126,8 @@
   </footer>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
   import '@gouvfr/dsfr/dist/component/footer/footer.min.css';
-  import router from '@/router';
-  import { utilisateurStore } from '@/store/utilisateur';
-  import Cookies from 'js-cookie';
-
-  import { RouteCoachName } from '@/router/coach/routeCoachName';
+  import { RouteCommuneName } from '@/router';
   import { RouteConformiteName } from '@/router/conformite/routes';
-
-  export default {
-    name: 'Footer',
-    computed: {
-      RouteConformiteName() {
-        return RouteConformiteName;
-      },
-      RouteCoachName() {
-        return RouteCoachName;
-      },
-      getUtilisateur() {
-        return utilisateurStore().utilisateur;
-      },
-    },
-    methods: {
-      logout() {
-        utilisateurStore().reset();
-        Cookies.remove('bearer');
-        router.replace('/');
-      },
-    },
-  };
 </script>
