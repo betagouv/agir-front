@@ -32,7 +32,6 @@
 <script setup lang="ts">
   import BarreDeProgression from '@/components/custom/BarreDeProgression.vue';
   import { RouteBilanCarboneName } from '@/router/bilanCarbone/routes';
-  import { RouteUniversName } from '@/router/univers/routes';
 
   defineProps<{
     contentId: string;

@@ -1,13 +1,15 @@
 <template>
   <form @submit.prevent="validerLaReponse()">
     <div v-if="questionViewModel.type === 'entier'" class="fr-input-group">
+      reponse : {{ questionViewModel.reponses[0] }}
       <InputNumeric
         :id="questionViewModel.id"
         :label="{
           wording: questionViewModel.libelle,
           cssModifier: 'fr-h4',
         }"
-        v-model="reponse"
+        :default-value="questionViewModel.reponses[0]"
+        @update:modelValue="(value: string) => (reponse = value)"
       />
     </div>
     <div v-if="questionViewModel.type === 'mosaic_boolean'">
@@ -123,5 +125,12 @@
     }
 
     emit('update:soumissionKyc', [reponse.value].flat());
+  };
+
+  const determineLabel = (questionViewModel: QuestionViewModel) => {
+    return {
+      wording: questionViewModel.libelle,
+      cssModifier: 'fr-mb-2w',
+    };
   };
 </script>

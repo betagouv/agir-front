@@ -16,7 +16,7 @@
       <div :class="`fr-fieldset__element ${col}`" v-for="option in options" :key="option.label">
         <div
           :class="`fr-radio-group border fr-col
-          ${option.value === defaultValue ? 'fr-text--bold border--bleu-dark' : ''}
+          ${option.value === selectedValue ? 'fr-text--bold border--bleu-dark' : ''}
           ${option.customClass}
           `"
         >
@@ -39,6 +39,8 @@
 </template>
 
 <script setup lang="ts">
+  import { ref, watch } from 'vue';
+
   const props = defineProps<{
     legende: string;
     legendeSize: 'm' | 'l';
@@ -51,8 +53,14 @@
     valueType?: 'number';
   }>();
 
+  const selectedValue = ref(props.defaultValue || '');
   const emit = defineEmits(['update:modelValue']);
-
+  watch(
+    () => props.defaultValue,
+    newDefault => {
+      selectedValue.value = newDefault;
+    },
+  );
   const onInputChange = (event: Event) => {
     const input = event.target as HTMLInputElement;
     let valueToUpdate;
@@ -66,6 +74,7 @@
     } else {
       valueToUpdate = input.value;
     }
+    selectedValue.value = valueToUpdate;
 
     emit('update:modelValue', valueToUpdate);
   };
