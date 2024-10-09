@@ -2,6 +2,7 @@ import { EventBus } from '@/shell/eventBus';
 
 export enum LinkyEvent {
   PRM_A_ETE_ENVOYE,
+  DESABONNEMENT,
 }
 
 export class LinkyEventBusImpl extends EventBus<LinkyEvent> {
@@ -9,6 +10,7 @@ export class LinkyEventBusImpl extends EventBus<LinkyEvent> {
 
   protected eventSubscribers: Record<LinkyEvent, { subscriberName: string; callback: () => void }[]> = {
     [LinkyEvent.PRM_A_ETE_ENVOYE]: [],
+    [LinkyEvent.DESABONNEMENT]: [],
   };
   private constructor() {
     super();

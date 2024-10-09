@@ -14,5 +14,6 @@ export class SpyLinkyEventBus extends EventBus<LinkyEvent> {
 
   eventSubscribers: Record<LinkyEvent, { subscriberName: string; callback: () => void }[]> = {
     [LinkyEvent.PRM_A_ETE_ENVOYE]: [],
+    [LinkyEvent.DESABONNEMENT]: [],
   };
 }

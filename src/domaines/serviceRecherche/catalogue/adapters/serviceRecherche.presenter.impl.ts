@@ -18,6 +18,7 @@ enum ServiceIdInterne {
   FRUITS_ET_LEGUMES = 'fruits_legumes',
   PRES_DE_CHEZ_VOUS = 'proximite',
   RECETTES = 'recettes',
+  LINKY = 'linky',
 }
 
 export class ServiceRecherchePresenterImpl implements ServiceRecherchePresenter {
@@ -28,6 +29,7 @@ export class ServiceRecherchePresenterImpl implements ServiceRecherchePresenter 
       [ServiceIdInterne.FRUITS_ET_LEGUMES]: RouteServiceName.FRUITS_ET_LEGUMES,
       [ServiceIdInterne.PRES_DE_CHEZ_VOUS]: RouteServiceName.PROXIMITE,
       [ServiceIdInterne.RECETTES]: RouteServiceName.RECETTES,
+      [ServiceIdInterne.LINKY]: RouteServiceName.LINKY,
     };
 
     this.serviceViewModel({

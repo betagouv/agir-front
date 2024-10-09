@@ -65,6 +65,12 @@ export class ServiceRechercheLinkyRepositoryAxios implements ServiceRechercheLin
     };
   }
 
+  @intercept401()
+  async seDesabonner(idUtilsateur: string): Promise<void> {
+    const axiosInstance = AxiosFactory.getAxios();
+    await axiosInstance.delete(`/utilisateurs/${idUtilsateur}/services/linky`);
+  }
+
   private mapConsommationElectrique(data: ConsommationElectriqueApiModel['data']): ConsommationElectrique['data'] {
     return data.map(donneeConsommation => ({
       mois: donneeConsommation.mois,

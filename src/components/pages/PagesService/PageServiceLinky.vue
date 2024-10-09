@@ -44,19 +44,26 @@
   const usecase = new ObtenirInformationCompteurUsecase(new ServiceRechercheLinkyRepositoryAxios());
 
   onMounted(async () => {
+    LinkyEventBusImpl.getInstance().subscribe('linky', LinkyEvent.PRM_A_ETE_ENVOYE, async () => {
+      await usecase.execute(
+        utilisateurId,
+        new ServiceRechercheLinkyPresenterImpl(vm => (serviceLinkyViewModel.value = vm)),
+      );
+    });
+
+    LinkyEventBusImpl.getInstance().subscribe('linky', LinkyEvent.DESABONNEMENT, async () => {
+      await usecase.execute(
+        utilisateurId,
+        new ServiceRechercheLinkyPresenterImpl(vm => (serviceLinkyViewModel.value = vm)),
+      );
+    });
+
     await usecase.execute(
       utilisateurId,
       new ServiceRechercheLinkyPresenterImpl(vm => (serviceLinkyViewModel.value = vm)),
     );
 
     isLoading.value = false;
-  });
-
-  LinkyEventBusImpl.getInstance().subscribe('linky', LinkyEvent.PRM_A_ETE_ENVOYE, async () => {
-    await usecase.execute(
-      utilisateurId,
-      new ServiceRechercheLinkyPresenterImpl(vm => (serviceLinkyViewModel.value = vm)),
-    );
   });
 
   onUnmounted(() => {
