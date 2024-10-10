@@ -58,7 +58,7 @@
   watch(
     () => props.defaultValue,
     newDefault => {
-      selectedValue.value = newDefault;
+      selectedValue.value = newDefault || '';
     },
   );
   const onInputChange = (event: Event) => {
