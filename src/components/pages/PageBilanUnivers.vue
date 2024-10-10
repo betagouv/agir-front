@@ -7,20 +7,19 @@
     <h1>
       Estimation du bilan <span class="text--bleu">{{ univers }}</span>
     </h1>
-    <div class="fr-mb-4w" v-if="questionsViewModel">
+    <p v-if="isLoading" class="fr-mb-4w">Chargement en cours ...</p>
+    <div class="fr-mb-4w" v-if="!isLoading && questionsViewModel">
       <div v-for="(questionViewModel, index) in questionsViewModel.questions" :key="index">
         <div v-show="index === etapeCourante">
           <p class="text--bleu fr-grid-row align-items--center fr-py-2w">
             <button
               v-if="index !== 0"
-              class="fr-btn fr-btn--tertiary-no-outline fr-icon-arrow-left-line"
+              class="fr-btn fr-p-0 fr-m-0 fr-btn--tertiary-no-outline fr-icon-arrow-left-line"
               :title="`Retour à l'étape ${index}`"
               @click="etapeCourante--"
-            >
-              Retour à l'étape précédente
-            </button>
+            ></button>
             <span class="fr-text--bold">Question {{ index + 1 }}</span>
-            &nbsp; sur {{ questionsViewModel.questions.length }}
+            &nbsp;sur {{ questionsViewModel.questions.length }}
           </p>
           <KYCForm
             :question-view-model="questionViewModel"
@@ -47,7 +46,7 @@
   import { RouteBilanCarboneName, RouteBilanCarbonePath } from '@/router/bilanCarbone/routes';
   import { utilisateurStore } from '@/store/utilisateur';
   const questionsViewModel = ref<QuestionsViewModel>();
-
+  const isLoading = ref<boolean>(true);
   const usecase = new RecupererEnchainementQuestionsUsecase(new QuestionRepositoryAxios());
   const route = useRoute();
 
@@ -68,6 +67,7 @@
     if (indexQuestion === etapeCourante.value) {
       etapeCourante.value = 0;
     }
+    isLoading.value = false;
   });
 
   const passerEtapeSuivante = async () => {
@@ -78,4 +78,8 @@
     }
   };
 </script>
-<style scoped></style>
+<style scoped>
+  .fr-btn {
+    min-height: auto;
+  }
+</style>

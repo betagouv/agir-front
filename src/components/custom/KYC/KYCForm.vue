@@ -125,11 +125,4 @@
 
     emit('update:soumissionKyc', [reponse.value].flat());
   };
-
-  const determineLabel = (questionViewModel: QuestionViewModel) => {
-    return {
-      wording: questionViewModel.libelle,
-      cssModifier: 'fr-mb-2w',
-    };
-  };
 </script>
