@@ -1,5 +1,21 @@
 # Changelog
 
+## [1.24.0](https://github.com/betagouv/agir-front/compare/v1.23.0...v1.24.0) (2024-10-10)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* bilan partiel ([#660](https://github.com/betagouv/agir-front/issues/660)) ([7e60197](https://github.com/betagouv/agir-front/commit/7e60197a98780db04a337646af252a24ebf687fe))
+* enchainement des questions pour le bilan ([#662](https://github.com/betagouv/agir-front/issues/662)) ([7735e00](https://github.com/betagouv/agir-front/commit/7735e00e4cb72ef7549b0e3fbad4709eaf7d08bf))
+* nouvelle Landing page ([#635](https://github.com/betagouv/agir-front/issues/635)) ([5476545](https://github.com/betagouv/agir-front/commit/5476545b9e6cf8a95a5492584a70e2df4fbcec4a))
+
+
+### 🐛 Corrections de bogues
+
+* accessibilité du footer ([7d73b47](https://github.com/betagouv/agir-front/commit/7d73b4706d4e24711332b27c95e9a42075f41398))
+* afficher un message d'erreur lisibile en cas de problème réseau sur la création de compte ([#659](https://github.com/betagouv/agir-front/issues/659)) ([a32751d](https://github.com/betagouv/agir-front/commit/a32751d42af19a02811c0d5e7ab8c5628cb483eb))
+* modification wording bibliothèque ([#665](https://github.com/betagouv/agir-front/issues/665)) ([22e663f](https://github.com/betagouv/agir-front/commit/22e663f6311263f608f552864fe2381083ede8cc))
+
 ## [1.23.0](https://github.com/betagouv/agir-front/compare/v1.22.0...v1.23.0) (2024-10-09)
 
 
