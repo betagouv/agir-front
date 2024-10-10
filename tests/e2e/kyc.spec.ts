@@ -103,6 +103,6 @@ test.describe('kyc', () => {
 
     await page.getByRole('link', { name: "Retour à l'accueil" }).click();
 
-    await expect(page).toHaveTitle('Agir ! - Agir');
+    await expect(page).toHaveTitle("J'agis - Agir");
   });
 });
