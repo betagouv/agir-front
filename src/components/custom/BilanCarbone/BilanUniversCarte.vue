@@ -17,10 +17,11 @@
         :to="{
           name: RouteBilanCarboneName.BILAN_CARBONE_ENCHAINEMENT,
           params: {
+            univers: univers,
             id: contentId,
           },
         }"
-        :title="`Allez sur l'univers : ${label}`"
+        :title="`Allez sur l'estimation du bilan ${univers}`"
       >
         {{ label }}
       </router-link>
@@ -40,6 +41,7 @@
     estTermine: boolean;
     nombreDeQuestions: number;
     progression: number;
+    univers: string;
   }>();
 </script>
 

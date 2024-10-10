@@ -4,7 +4,9 @@
       page-courante="Estimation du bilan"
       :page-hierarchie="[{ label: 'Bilan carbone', url: `${RouteBilanCarboneName.BILAN_CARBONE}` }]"
     />
-    <h1>Estimation du bilan</h1>
+    <h1>
+      Estimation du bilan <span class="text--bleu">{{ univers }}</span>
+    </h1>
     <div class="fr-mb-4w" v-if="questionsViewModel">
       <div v-for="(questionViewModel, index) in questionsViewModel.questions" :key="index">
         <div v-show="index === etapeCourante">
@@ -50,7 +52,7 @@
   const route = useRoute();
 
   const etapeCourante = ref<number>(-1);
-
+  const univers = route.params.univers as string;
   async function chargerLeQuestionnaire() {
     await usecase.execute(
       utilisateurStore().utilisateur.id,
