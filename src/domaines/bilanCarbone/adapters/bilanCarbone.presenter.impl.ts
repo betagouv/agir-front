@@ -136,7 +136,7 @@ export class BilanCarbonePresenterImpl implements BilanCarbonePresenter {
         },
       ],
       universBilan: bilan.universBilan.map((univers, index) => ({
-        nomDeLunivers: mapUnivers.get(index),
+        nomDeLunivers: mapUnivers.get(index) || '',
         contentId: univers.contentId,
         label: univers.label,
         urlImage: univers.urlImage,
