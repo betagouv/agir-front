@@ -1,7 +1,8 @@
 <template>
   <div class="fr-container fr-pb-6w">
     <FilDAriane page-courante="Bibliothèque" />
-    <h1 class="fr-h2">Ma bibliothèque</h1>
+    <h1 class="fr-h2 fr-mb-1w">Ma bibliothèque</h1>
+    <p>Retrouver ici vos articles déjà consultés ainsi que vos favoris</p>
     <div v-if="isLoadingGlobal">Chargement en cours ...</div>
     <div v-else-if="!isLoadingGlobal && bibliothequeViewModel" class="fr-grid-row fr-grid-row--gutters">
       <div class="fr-col-md-4 fr-col-12">
