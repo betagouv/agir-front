@@ -3,11 +3,24 @@
     {{ label.wording }}
     <span class="fr-hint-text">Nombre uniquement</span>
   </label>
-  <input class="fr-input" type="text" :id="id" :name="id" inputmode="numeric" pattern="[0-9]*" @input="updateValue" />
+  <input
+    class="fr-input"
+    type="text"
+    :value="defaultValue"
+    :id="id"
+    :name="id"
+    inputmode="numeric"
+    pattern="[0-9]*"
+    @input="updateValue"
+  />
 </template>
 
 <script setup lang="ts">
-  defineProps<{ id: string; label: { wording: string; cssModifier?: string } }>();
+  defineProps<{
+    id: string;
+    label: { wording: string; cssModifier?: string };
+    defaultValue?: string;
+  }>();
 
   const emit = defineEmits<{
     (e: 'update:modelValue', value: string): void;

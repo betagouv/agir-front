@@ -1,4 +1,5 @@
 import { RouteRecordRaw } from 'vue-router';
+const PageBilanUnivers = () => import('@/components/pages/PageBilanUnivers.vue');
 const PageBilanCarbone = () => import('@/components/pages/PageBilanCarbone.vue');
 
 export enum RouteBilanCarboneName {
@@ -8,7 +9,7 @@ export enum RouteBilanCarboneName {
 
 export enum RouteBilanCarbonePath {
   BILAN_CARBONE = '/bilan-carbone',
-  BILAN_CARBONE_ENCHAINEMENT = '/bilan-carbone/:id',
+  BILAN_CARBONE_ENCHAINEMENT = '/bilan-carbone/:univers/:id',
 }
 
 const bilanCarboneRoutes: RouteRecordRaw[] = [
@@ -23,9 +24,9 @@ const bilanCarboneRoutes: RouteRecordRaw[] = [
   {
     path: RouteBilanCarbonePath.BILAN_CARBONE_ENCHAINEMENT,
     name: RouteBilanCarboneName.BILAN_CARBONE_ENCHAINEMENT,
-    component: PageBilanCarbone,
+    component: PageBilanUnivers,
     meta: {
-      title: 'Mon bilan environnemental',
+      title: 'Estimation du bilan',
     },
   },
 ];

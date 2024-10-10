@@ -7,7 +7,8 @@
           wording: questionViewModel.libelle,
           cssModifier: 'fr-h4',
         }"
-        v-model="reponse"
+        :default-value="questionViewModel.reponses[0]"
+        @update:modelValue="(value: string) => (reponse = value)"
       />
     </div>
     <div v-if="questionViewModel.type === 'mosaic_boolean'">

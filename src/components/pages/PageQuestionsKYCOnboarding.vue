@@ -21,7 +21,7 @@
     QuestionsViewModel,
   } from '@/domaines/kyc/adapters/listeQuestionsThematique.presenter.impl';
   import { QuestionRepositoryAxios } from '@/domaines/kyc/adapters/question.repository.axios';
-  import { RecupererQuestionsMissionOnboardingUsecase } from '@/domaines/kyc/recupererQuestionsMissionOnboardingusecase';
+  import { RecupererEnchainementQuestionsUsecase } from '@/domaines/kyc/recupererEnchainementQuestionsUsecase';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const isLoading = ref<boolean>(true);
@@ -30,7 +30,7 @@
   onMounted(() => {
     const route = useRoute();
 
-    const usecase = new RecupererQuestionsMissionOnboardingUsecase(new QuestionRepositoryAxios());
+    const usecase = new RecupererEnchainementQuestionsUsecase(new QuestionRepositoryAxios());
     usecase.execute(
       utilisateurStore().utilisateur.id,
       route.params.id as string,
