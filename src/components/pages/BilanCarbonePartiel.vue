@@ -1,0 +1,90 @@
+<template>
+  <div class="fr-grid-row fr-grid-row--gutters">
+    <div class="fr-col-12 fr-col-md-9">
+      <h2>Votre première estimation</h2>
+      <div v-if="bilanCarbonePartielViewModel && bilanCarbonePartielViewModel.categories">
+        <div class="fr-col-md-6">
+          <BilanPremiereEstimation :bilanPremiereEstimation="bilanCarbonePartielViewModel.categories" />
+        </div>
+      </div>
+      <p class="fr-mt-4w">
+        ✨ Estimation complète à
+        <span class="text--bleu">{{ bilanCarbonePartielViewModel?.pourcentageCompletionTotal }}%</span>
+      </p>
+
+      <h2 class="fr-mb-0">Affinez votre <span class="text--bleu">estimation</span></h2>
+      <p>Et obtenez un bilan détaillé de votre impact sur l’environnement</p>
+
+      <ul class="fr-grid-row fr-grid-row--gutters list-style-none">
+        <li
+          class="fr-col-md-3 fr-col-6"
+          v-for="univers in bilanCarbonePartielViewModel?.universBilan"
+          :key="univers.contentId"
+        >
+          <BilanUniversCarte
+            :content-id="univers.contentId"
+            :url-image="univers.urlImage"
+            :label="univers.label"
+            :est-termine="univers.estTermine"
+            :nombre-de-questions="univers.nombreTotalDeQuestion"
+            :progression="univers.pourcentageProgression"
+          />
+        </li>
+      </ul>
+
+      <h2 class="fr-mt-4w">Une question&nbsp;?</h2>
+      <div class="fr-accordions-group background--white fr-mb-4w">
+        <Accordeon name-id="bilan-carbone">
+          <template #titre> Qu’est-ce qu’un bilan carbone ?</template>
+          <template #contenu>
+            <p>
+              Que l’on se rende dans un magasin de quartier pour faire ses courses, qu’on allume la lumière ou qu’on
+              chauffe son logement, l’ensemble de nos actions quotidiennes a un impact sur l’environnement. Cet impact,
+              c’est ce que l’on appelle le bilan environnemental, comme une trace invisible que nous laissons derrière
+              nous. L’empreinte mesure la quantité totale de gaz à effet de serre (dioxyde de carbone (CO2), protoxyde
+              d'azote, méthane, ...) liés à notre consommation et permet donc de quantifier nos émissions selon notre
+              mode de vie. Elle peut concerner les émissions d’un individu (son mode de vie), d’une entreprise (ses
+              activités) ou d’une population, d'un territoire. Calculer son bilan environnemental permet de comprendre
+              quels sont nos usages qui contribuent le plus au changement climatique, et de saisir les actions qui
+              auraient le plus d’impact pour le réduire.
+            </p>
+          </template>
+        </Accordeon>
+        <Accordeon name-id="bilan-empreinte">
+          <template #titre> Comment est calculée mon empreinte ?</template>
+          <template #contenu>
+            <p>
+              Votre bilan environnemental est calculé à partir de vos réponses grâce au calculateur carbone de
+              <a href="https://nosgestesclimat.fr/documentation/bilan" target="_blank" rel="noopener noreferrer">
+                Nos Gestes Climat</a
+              >
+              développé par l’Agence de la transition écologique (ADEME) et beta.gouv.fr, en partenariat avec
+              l’Association Bilan Carbone (ABC).
+            </p>
+          </template>
+        </Accordeon>
+      </div>
+    </div>
+    <div class="fr-col-12 fr-col-md-3">
+      <ServiceAside
+        image="/bilan-carbone-ngc-screenshot.svg"
+        nom="Nos Gestes Climat"
+        description="Basé sur le calculateur carbone développé par l’Agence de la transition écologique (ADEME) et beta.gouv.fr, en partenariat avec l’Association Bilan Carbone (ABC)."
+        url="https://nosgestesclimat.fr/"
+        logo="/logo_ngc.png"
+      />
+    </div>
+  </div>
+</template>
+<script setup lang="ts">
+  import BilanPremiereEstimation from '@/components/custom/BilanCarbone/BilanPremiereEstimation.vue';
+  import BilanUniversCarte from '@/components/custom/BilanCarbone/BilanUniversCarte.vue';
+  import ServiceAside from '@/components/custom/Service/ServiceAside.vue';
+
+  import Accordeon from '@/components/dsfr/Accordeon.vue';
+  import { BilanCarbonePartielViewModel } from '@/domaines/bilanCarbone/adapters/bilanCarbone.presenter.impl';
+
+  defineProps<{
+    bilanCarbonePartielViewModel: BilanCarbonePartielViewModel;
+  }>();
+</script>

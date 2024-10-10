@@ -28,6 +28,20 @@ interface BilanCarboneApiModel {
       pourcentage: number;
     }[];
   };
+  bilan_synthese: {
+    impact_transport: 'moyen' | 'faible' | 'fort' | 'tres_fort';
+    impact_alimentation: 'moyen' | 'faible' | 'fort' | 'tres_fort';
+    impact_logement: 'moyen' | 'faible' | 'fort' | 'tres_fort';
+    impact_consommation: 'moyen' | 'faible' | 'fort' | 'tres_fort';
+    pourcentage_completion_totale: number;
+    liens_bilans_univers: {
+      id_enchainement_kyc: string;
+      image_url: string;
+      nombre_total_question: number;
+      pourcentage_progression: number;
+      univers_label: string;
+    }[];
+  };
 }
 
 export class BilanCarboneRepositoryAxios implements BilanCarboneRepository {
@@ -37,25 +51,43 @@ export class BilanCarboneRepositoryAxios implements BilanCarboneRepository {
     const reponse = await axiosInstance.get<BilanCarboneApiModel>(`/utilisateur/${utilisateurId}/bilans/last`);
 
     return {
-      impactKgAnnuel: reponse.data.bilan_complet.impact_kg_annee,
-      univers: reponse.data.bilan_complet.impact_univers.map(detail => ({
-        universId: detail.univers,
-        universLabel: detail.univers_label,
-        pourcentage: detail.pourcentage,
-        impactKgAnnuel: detail.impact_kg_annee,
-        emoji: detail.emoji,
-        details: detail.details.map(detailUnivers => ({
-          label: detailUnivers.label,
-          pourcentage: detailUnivers.pourcentage_categorie,
-          impactKgAnnuel: detailUnivers.impact_kg_annee,
-          emoji: detailUnivers.emoji,
+      pourcentageCompletionTotal: 0,
+      bilanComplet: {
+        impactKgAnnuel: reponse.data.bilan_complet.impact_kg_annee,
+        univers: reponse.data.bilan_complet.impact_univers.map(detail => ({
+          universId: detail.univers,
+          universLabel: detail.univers_label,
+          pourcentage: detail.pourcentage,
+          impactKgAnnuel: detail.impact_kg_annee,
+          emoji: detail.emoji,
+          details: detail.details.map(detailUnivers => ({
+            label: detailUnivers.label,
+            pourcentage: detailUnivers.pourcentage_categorie,
+            impactKgAnnuel: detailUnivers.impact_kg_annee,
+            emoji: detailUnivers.emoji,
+          })),
         })),
-      })),
-      top3: reponse.data.bilan_complet.top_3.map(top3 => ({
-        emoji: top3.emoji,
-        label: top3.label,
-        pourcentage: top3.pourcentage.toString(),
-      })),
+        top3: reponse.data.bilan_complet.top_3.map(top3 => ({
+          emoji: top3.emoji,
+          label: top3.label,
+          pourcentage: top3.pourcentage.toString(),
+        })),
+      },
+      bilanPartiel: {
+        pourcentageCompletionTotal: reponse.data.bilan_synthese.pourcentage_completion_totale,
+        alimentation: { niveau: reponse.data.bilan_synthese.impact_alimentation },
+        consommation: { niveau: reponse.data.bilan_synthese.impact_consommation },
+        logement: { niveau: reponse.data.bilan_synthese.impact_logement },
+        transport: { niveau: reponse.data.bilan_synthese.impact_transport },
+        universBilan: reponse.data.bilan_synthese.liens_bilans_univers.map(lien => ({
+          contentId: lien.id_enchainement_kyc,
+          estTermine: lien.pourcentage_progression === 100,
+          label: lien.univers_label,
+          nombreTotalDeQuestion: lien.nombre_total_question,
+          pourcentageProgression: lien.pourcentage_progression,
+          urlImage: lien.image_url,
+        })),
+      },
     };
   }
 }

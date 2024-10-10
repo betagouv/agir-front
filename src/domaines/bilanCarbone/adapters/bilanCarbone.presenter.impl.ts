@@ -1,5 +1,5 @@
 import { BilanCarbonePresenter } from '@/domaines/bilanCarbone/ports/bilanCarbone.presenter';
-import { BilanCarbone } from '@/domaines/bilanCarbone/recupererBilanCarbone.usecase';
+import { BilanCompletCarbone, BilanPartielCarbone } from '@/domaines/bilanCarbone/recupererBilanCarbone.usecase';
 
 interface BilanCarbonDetailItemViewModel {
   label: string;
@@ -14,7 +14,10 @@ interface BilanCarboneDetailViewModel extends BilanCarbonDetailItemViewModel {
   details: BilanCarbonDetailItemViewModel[];
 }
 
-export interface BilanCarboneViewModel {
+export interface BilanCarboneViewModelBase {
+  titre: string;
+}
+export interface BilanCarboneCompletViewModel extends BilanCarboneViewModelBase {
   impactKgAnnuel: {
     valeur: string;
     unite: string;
@@ -31,13 +34,40 @@ export interface BilanCarboneViewModel {
   }[];
 }
 
-export class BilanCarbonePresenterImpl implements BilanCarbonePresenter {
-  constructor(private readonly bilanCarboneViewModel: (viewModel: BilanCarboneViewModel) => void) {}
+interface BilanCarbonePartielTagViewModel {
+  wording: string;
+  classes: string;
+}
 
-  presente(bilanCarbone: BilanCarbone): void {
+export interface BilanCarbonePartielViewModel extends BilanCarboneViewModelBase {
+  pourcentageCompletionTotal: number;
+  categories: {
+    label: string;
+    tag: BilanCarbonePartielTagViewModel;
+    progressBarStyle: string;
+  }[];
+
+  universBilan: {
+    contentId: string;
+    label: string;
+    urlImage: string;
+    estTermine: boolean;
+    pourcentageProgression: number;
+    nombreTotalDeQuestion: number;
+  }[];
+}
+
+export class BilanCarbonePresenterImpl implements BilanCarbonePresenter {
+  constructor(
+    private readonly bilanCarboneViewModel: (viewModel: BilanCarboneCompletViewModel) => void,
+    private readonly bilanCarbonePartielViewModel: (viewModel: BilanCarbonePartielViewModel) => void,
+  ) {}
+
+  presenteBilanComplet(bilanCarbone: BilanCompletCarbone): void {
     const NOMBRE_SEMAINES_PAR_AN = 52;
 
     this.bilanCarboneViewModel({
+      titre: 'Votre bilan <span class="text--bleu">environnemental</span>',
       impactKgAnnuel: this.formateKg(bilanCarbone.impactKgAnnuel),
       impactKgHebdomadaire: this.formateKg(bilanCarbone.impactKgAnnuel / NOMBRE_SEMAINES_PAR_AN),
       univers: bilanCarbone.univers.map(univers => ({
@@ -70,5 +100,80 @@ export class BilanCarbonePresenterImpl implements BilanCarbonePresenter {
           valeur: `${nombreDeKg.toFixed(0)} `,
           unite: 'kg',
         };
+  }
+
+  presenteBilanPartiel(bilan: BilanPartielCarbone): void {
+    this.bilanCarbonePartielViewModel({
+      titre: 'Estimez votre <span class="text--bleu">bilan environnemental</span>',
+      pourcentageCompletionTotal: bilan.pourcentageCompletionTotal,
+      categories: [
+        {
+          label: '🚙 Transports',
+          tag: this.determineTag(bilan.transport.niveau),
+          progressBarStyle: this.determineProgressBar(bilan.transport.niveau),
+        },
+        {
+          label: '🥘 Alimentation',
+          tag: this.determineTag(bilan.alimentation.niveau),
+          progressBarStyle: this.determineProgressBar(bilan.alimentation.niveau),
+        },
+        {
+          label: '🏡 Logement',
+          tag: this.determineTag(bilan.logement.niveau),
+          progressBarStyle: this.determineProgressBar(bilan.logement.niveau),
+        },
+        {
+          label: '🛍 Consommation',
+          tag: this.determineTag(bilan.consommation.niveau),
+          progressBarStyle: this.determineProgressBar(bilan.consommation.niveau),
+        },
+      ],
+      universBilan: bilan.universBilan.map(univers => ({
+        contentId: univers.contentId,
+        label: univers.label,
+        urlImage: univers.urlImage,
+        estTermine: univers.estTermine,
+        pourcentageProgression: univers.pourcentageProgression,
+        nombreTotalDeQuestion: univers.nombreTotalDeQuestion,
+      })),
+    });
+  }
+
+  private determineProgressBar(niveau: 'moyen' | 'faible' | 'fort' | 'tres_fort'): string {
+    switch (niveau) {
+      case 'moyen':
+        return 'progress-bar-impact-moyen';
+      case 'faible':
+        return 'progress-bar-impact-faible';
+      case 'fort':
+        return 'progress-bar-impact-fort';
+      case 'tres_fort':
+        return 'progress-bar-impact-tres-fort';
+    }
+  }
+
+  private determineTag(niveau: 'moyen' | 'faible' | 'fort' | 'tres_fort'): BilanCarbonePartielTagViewModel {
+    switch (niveau) {
+      case 'moyen':
+        return {
+          wording: 'Moyen',
+          classes: 'tag-impact-moyen',
+        };
+      case 'faible':
+        return {
+          wording: 'Faible',
+          classes: 'tag-impact-faible',
+        };
+      case 'fort':
+        return {
+          wording: 'Fort',
+          classes: 'tag-impact-fort',
+        };
+      case 'tres_fort':
+        return {
+          wording: 'Très fort',
+          classes: 'tag-impact-tres-fort',
+        };
+    }
   }
 }
