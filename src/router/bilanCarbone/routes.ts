@@ -26,7 +26,7 @@ const bilanCarboneRoutes: RouteRecordRaw[] = [
     name: RouteBilanCarboneName.BILAN_CARBONE_ENCHAINEMENT,
     component: PageBilanUnivers,
     meta: {
-      title: 'Mon bilan environnemental',
+      title: 'Estimation du bilan',
     },
   },
 ];

@@ -36,18 +36,19 @@
       <h2 class="fr-mt-4w">Une question&nbsp;?</h2>
       <div class="fr-accordions-group background--white fr-mb-4w">
         <Accordeon name-id="bilan-carbone">
-          <template #titre> Qu’est-ce qu’un bilan carbone ?</template>
+          <template #titre>Qu’est-ce qu’un bilan carbone ?</template>
           <template #contenu>
             <p>
               Que l’on se rende dans un magasin de quartier pour faire ses courses, qu’on allume la lumière ou qu’on
               chauffe son logement, l’ensemble de nos actions quotidiennes a un impact sur l’environnement. Cet impact,
-              c’est ce que l’on appelle le bilan environnemental, comme une trace invisible que nous laissons derrière
-              nous. L’empreinte mesure la quantité totale de gaz à effet de serre (dioxyde de carbone (CO2), protoxyde
-              d'azote, méthane, ...) liés à notre consommation et permet donc de quantifier nos émissions selon notre
-              mode de vie. Elle peut concerner les émissions d’un individu (son mode de vie), d’une entreprise (ses
-              activités) ou d’une population, d'un territoire. Calculer son bilan environnemental permet de comprendre
-              quels sont nos usages qui contribuent le plus au changement climatique, et de saisir les actions qui
-              auraient le plus d’impact pour le réduire.
+              c’est ce que l’on appelle le <b>bilan environnemental</b>, comme une trace invisible que nous laissons
+              derrière nous. L’empreinte mesure la quantité totale de gaz à effet de serre (dioxyde de carbone (CO2),
+              protoxyde d'azote, méthane, ...) liés à notre consommation et permet donc de quantifier nos émissions
+              selon notre mode de vie. Elle peut concerner les émissions d’un individu (son mode de vie), d’une
+              entreprise (ses activités) ou d’une population, d'un territoire.<br />Calculer son
+              <b>bilan environnemental</b>
+              permet de comprendre quels sont nos usages qui contribuent le plus au changement climatique, et de saisir
+              les actions qui auraient le plus d’impact pour le réduire.
             </p>
           </template>
         </Accordeon>
