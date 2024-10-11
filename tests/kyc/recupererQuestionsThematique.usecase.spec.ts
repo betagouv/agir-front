@@ -44,7 +44,7 @@ describe('Fichier de tests concernant la recupérations des questions kyc pour u
               points: 'Récoltez vos + 10 points',
               aDejaEteRepondu: false,
               description:
-                'Ces informations permettent à <span class="text--italic">Agir</span> de mieux comprendre vos habitudes alimentaires',
+                "Ces informations permettent à <span class='text--italic'>J'agis</span> de mieux comprendre vos habitudes alimentaires",
             },
           ],
         });

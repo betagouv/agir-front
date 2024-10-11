@@ -18,7 +18,7 @@
             :options="(serviceRecherchePresDeChezNousViewModel as ServiceRechercheViewModelBase).categories"
             @update="updateType"
           />
-          à proximité de chez vous
+          à proximité de chez moi
         </h1>
         <p>Produits locaux, bio, de saisons et vendeurs de vrac, pour une cuisine savoureuse et responsable</p>
         <PageServiceTemplate :aside="(serviceRecherchePresDeChezNousViewModel as ServiceRechercheViewModelBase).aside">

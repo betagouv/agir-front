@@ -1,10 +1,10 @@
 <template>
   <form @submit.prevent="parametrerLeService()">
-    <InputText name="nom" v-model="nomDeFamille" label="Votre nom de famille" />
+    <InputText name="nom" v-model="nomDeFamille" label="Mon nom de famille" />
     <InputText
       name="prm"
       v-model="parametreDuService"
-      label="Numéro de PRM"
+      label="Mon numéro de PRM"
       description="Il s’agit d’une suite de 14 chiffres qui identifie le logement sur le réseau électrique."
     />
     <Alert
@@ -18,7 +18,7 @@
       class="fr-mb-2w"
       id="cgu"
       v-model="acceptationCGU"
-      label="Je déclare sur l'honneur être titulaire du point ou être mandaté par celui-ci et j'accepte que le service 'Agir' ait accès à mes données des 2 ans passés et pour les 3 ans à venir. Je peux changer d'avis à tout moment sur mon compte Enedis."
+      label="Je déclare sur l'honneur être titulaire du point ou être mandaté par celui-ci et j'accepte que le service 'J'agis' ait accès à mes données des 2 ans passés et pour les 3 ans à venir. Je peux changer d'avis à tout moment sur mon compte Enedis."
     />
     <button type="submit" class="fr-btn" :disabled="!acceptationCGU || parametreDuService.length != 14">Valider</button>
   </form>

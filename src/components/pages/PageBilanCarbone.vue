@@ -1,6 +1,6 @@
 <template>
   <div class="fr-container">
-    <FilDAriane page-courante="Votre bilan environnemental" />
+    <FilDAriane page-courante="Mon bilan environnemental" />
     <div v-if="isLoading">Chargement en cours ...</div>
     <div v-else-if="!isLoading && (bilanCarboneViewModel || bilanCarbonePartielViewModel)">
       <h1

@@ -68,7 +68,7 @@ export class BilanCarbonePresenterImpl implements BilanCarbonePresenter {
     const NOMBRE_SEMAINES_PAR_AN = 52;
 
     this.bilanCarboneViewModel({
-      titre: 'Votre bilan <span class="text--bleu">environnemental</span>',
+      titre: 'Mon bilan <span class="text--bleu">environnemental</span>',
       impactKgAnnuel: this.formateKg(bilanCarbone.impactKgAnnuel),
       impactKgHebdomadaire: this.formateKg(bilanCarbone.impactKgAnnuel / NOMBRE_SEMAINES_PAR_AN),
       univers: bilanCarbone.univers.map(univers => ({
@@ -111,7 +111,7 @@ export class BilanCarbonePresenterImpl implements BilanCarbonePresenter {
       [3, 'consommation'],
     ]);
     this.bilanCarbonePartielViewModel({
-      titre: 'Estimez votre <span class="text--bleu">bilan environnemental</span>',
+      titre: 'Estimez mon <span class="text--bleu">bilan environnemental</span>',
       pourcentageCompletionTotal: bilan.pourcentageCompletionTotal,
       categories: [
         {

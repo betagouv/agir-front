@@ -73,13 +73,13 @@ export class QuestionViewModelBuilder {
   private determineDescription(thematique: ThematiqueQuestion): string {
     switch (thematique) {
       case ThematiqueQuestion.ALIMENTATION:
-        return 'Ces informations permettent à <span class="text--italic">Agir</span> de mieux comprendre vos habitudes alimentaires';
+        return "Ces informations permettent à <span class='text--italic'>J'agis</span> de mieux comprendre vos habitudes alimentaires";
       case ThematiqueQuestion.TRANSPORT:
-        return 'Ces informations permettent à <span class="text--italic">Agir</span> de mieux vous conseiller en matière de mobilité';
+        return "Ces informations permettent à <span class='text--italic'>J'agis</span> de mieux vous conseiller en matière de mobilité";
       case ThematiqueQuestion.LOGEMENT:
-        return 'Ces informations permettent à <span class="text--italic">Agir</span> de mieux vous conseiller sur les aides auxquelles vous pourriez avoir droit';
+        return "Ces informations permettent à <span class='text--italic'>J'agis</span> de mieux vous conseiller sur les aides auxquelles vous pourriez avoir droit";
       case ThematiqueQuestion.DECHET:
-        return 'Ces informations permettent à <span class="text--italic">Agir</span> de mieux vous conseiller en matière de gestion des déchets et d\'alimentation';
+        return "Ces informations permettent à <span class='text--italic'>J'agis</span> de mieux vous conseiller en matière de gestion des déchets et d'alimentation";
       default:
         return 'Dites-nous en plus sur vous pour que le service vous recommande des actions plus personnalisées.';
     }

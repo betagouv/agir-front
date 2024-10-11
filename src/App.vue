@@ -4,7 +4,7 @@
       <Header />
       <DisclaimerGeneral
         v-if="afficherLeDisclaimer"
-        titre="Agir est en construction !"
+        titre="J'agis est en construction !"
         description="Cette version est encore très incomplète et de nombreuses évolutions et nouvelles fonctionnalités sont mises en ligne chaque semaine. N'hésitez pas à nous communiquer vos commentaires pour améliorer l'expérience."
         :onClick="
           () => {

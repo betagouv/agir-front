@@ -1,7 +1,7 @@
 <template>
   <DisclaimerGeneral
     v-if="utilisateurStore().utilisateur.afficherDisclaimerAides"
-    titre="Votre ville n’est pas encore couverte par le service Agir."
+    titre="Votre ville n’est pas encore couverte par le service J'agis."
     description="Nous mettons les informations à jour progressivement. N'hésitez pas à nous en partager à <a href=mailto:contact@agir.beta.gouv.fr>contact@agir.beta.gouv.fr</a> !"
     :onClick="
       () => {
@@ -10,7 +10,7 @@
     "
   />
   <div class="fr-container fr-pb-3w">
-    <FilDAriane page-courante="Vos aides" />
+    <FilDAriane page-courante="Mes aides" />
     <div v-if="isLoading">Chargement ...</div>
     <div v-else-if="!aides">Une erreur est survenue</div>
     <Aides v-else :aidesGroupesParCategorie="aides" />

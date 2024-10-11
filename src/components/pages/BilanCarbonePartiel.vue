@@ -1,7 +1,7 @@
 <template>
   <div class="fr-grid-row fr-grid-row--gutters">
     <div class="fr-col-12 fr-col-md-9">
-      <h2>Votre première estimation</h2>
+      <h2>Ma première estimation</h2>
       <div v-if="bilanCarbonePartielViewModel && bilanCarbonePartielViewModel.categories">
         <div class="fr-col-md-6">
           <BilanPremiereEstimation :bilanPremiereEstimation="bilanCarbonePartielViewModel.categories" />
@@ -12,7 +12,7 @@
         <span class="text--bleu">{{ bilanCarbonePartielViewModel?.pourcentageCompletionTotal }}%</span>
       </p>
 
-      <h2 class="fr-mb-0">Affinez votre <span class="text--bleu">estimation</span></h2>
+      <h2 class="fr-mb-0">Affinez mon <span class="text--bleu">estimation</span></h2>
       <p>Et obtenez un bilan détaillé de votre impact sur l’environnement</p>
 
       <ul class="fr-grid-row fr-grid-row--gutters list-style-none">
