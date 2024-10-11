@@ -3,7 +3,7 @@
     <fieldset class="fr-fieldset fr-mb-0">
       <legend class="fr-fieldset__legend" id="identity-fieldset-legend">
         <img src="/bg_creation_compte.png" alt="" />
-        <h2 class="fr-h4 fr-mb-0">Créez votre compte Agir</h2>
+        <h2 class="fr-h4 fr-mb-0">Créez votre compte sur J'agis</h2>
         <p class="fr-text--regular">
           Indiquez votre adresse e-mail et choisissez un mot de passe pour accéder au service.
         </p>

@@ -95,7 +95,7 @@ export class ClassementPresenterImpl implements ClassementPresenter {
       case ClassementPourcentage.top50:
         return `Wouah ! Vous faites partie du <strong>top 50%</strong> à <strong>${commune}&nbsp!</strong>`;
       default:
-        return 'Continuez à gagner des points en réalisant des actions sur Agir pour améliorer votre classement.';
+        return "Continuez à gagner des points en réalisant des actions sur J'agis pour améliorer votre classement.";
     }
   }
 
@@ -110,7 +110,7 @@ export class ClassementPresenterImpl implements ClassementPresenter {
       case ClassementPourcentage.top50:
         return 'Wouah ! Vous faites partie du <strong>top 50%</strong> en <strong>France&nbsp!</strong>';
       default:
-        return 'Continuez à gagner des points en réalisant des actions sur Agir pour améliorer votre classement.';
+        return "Continuez à gagner des points en réalisant des actions sur J'agis pour améliorer votre classement.";
     }
   }
 

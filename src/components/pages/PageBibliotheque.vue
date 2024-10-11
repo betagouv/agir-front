@@ -1,6 +1,6 @@
 <template>
   <div class="fr-container fr-pb-6w">
-    <FilDAriane page-courante="Bibliothèque" />
+    <FilDAriane page-courante="Ma bibliothèque" />
     <h1 class="fr-h2 fr-mb-1w">Ma bibliothèque</h1>
     <p>Retrouver ici vos articles déjà consultés ainsi que vos favoris</p>
     <div v-if="isLoadingGlobal">Chargement en cours ...</div>

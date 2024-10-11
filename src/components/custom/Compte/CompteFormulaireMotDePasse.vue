@@ -1,7 +1,7 @@
 <template>
   <form class="background--white fr-p-2w border border-radius--md" @submit.prevent="mettreAJourLeMotDePasse">
     <div class="fr-col-lg-6 fr-col-12">
-      <h3 class="fr-h6">Changer votre mot de passe</h3>
+      <h3 class="fr-h6">Changer mon mot de passe</h3>
       <div class="fr-col-12 fr-py-0 fr-mb-4w">
         <InputPassword
           v-model="motDePasse"
@@ -9,7 +9,7 @@
           legende="Votre nouveau mot de passe doit contenir :"
         />
       </div>
-      <button :disabled="!formulaireValide" class="fr-btn fr-btn--secondary">Modifier votre mot de passe</button>
+      <button :disabled="!formulaireValide" class="fr-btn fr-btn--secondary">Modifier mon mot de passe</button>
     </div>
     <Alert
       v-if="alerte.isActive"

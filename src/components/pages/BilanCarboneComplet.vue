@@ -6,7 +6,7 @@
         :impact-kg-annuel="bilanCarboneViewModel.impactKgAnnuel"
         :impact-kg-hebdomadaire="bilanCarboneViewModel.impactKgHebdomadaire"
       />
-      <h2>Vos principaux postes d'émission</h2>
+      <h2>Mes principaux postes d'émission</h2>
       <ol>
         <li v-for="top in bilanCarboneViewModel.top3" :key="top.label" class="fr-text--xl fr-text--bold fr-ml-2v">
           <div class="fr-grid-row">
@@ -15,7 +15,7 @@
                 {{ top.label }}
               </div>
               <span class="text--rouge"> {{ top.pourcentage }}% </span>
-              <span class="fr-text--regular"> de vos émissions </span>
+              <span class="fr-text--regular"> de mes émissions </span>
             </div>
             <span class="text--3xl fr-p-md-2w fr-p-0w fr-ml-4w">{{ top.emoji }}</span>
           </div>

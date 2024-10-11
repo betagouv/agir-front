@@ -121,7 +121,7 @@
                 v-if="utilisateurStore().utilisateur.fonctionnalitesDebloquees.includes(Fonctionnalites.BILAN_CARBONE)"
                 :aria-current="route.name === RouteBilanCarboneName.BILAN_CARBONE ? 'page' : null"
               >
-                Mon empreinte
+                Mon bilan
               </router-link>
             </li>
           </ul>

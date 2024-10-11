@@ -5,8 +5,8 @@
       :page-hierarchie="
         useRoute().params.universId
           ? [
-              { label: 'Univers', url: `univers/${useRoute().params.universId}` },
-              { label: 'Thématique', url: `univers/${useRoute().params.universId}/${useRoute().params.thematiqueId}` },
+              { label: 'Univers', url: `/univers/${useRoute().params.universId}` },
+              { label: 'Thématique', url: `/univers/${useRoute().params.universId}/${useRoute().params.thematiqueId}` },
             ]
           : []
       "

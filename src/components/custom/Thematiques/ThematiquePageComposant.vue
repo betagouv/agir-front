@@ -1,7 +1,7 @@
 <template>
   <FilDAriane
     :page-courante="`Thématique: ${missionViewModel.titre}`"
-    :page-hierarchie="[{ label: 'Univers', url: `univers/${universId}` }]"
+    :page-hierarchie="[{ label: 'Univers', url: `/univers/${universId}` }]"
   />
   <div class="fr-grid-row align-items--center fr-mb-4w">
     <img

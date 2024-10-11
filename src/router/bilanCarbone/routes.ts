@@ -8,8 +8,8 @@ export enum RouteBilanCarboneName {
 }
 
 export enum RouteBilanCarbonePath {
-  BILAN_CARBONE = '/bilan-carbone',
-  BILAN_CARBONE_ENCHAINEMENT = '/bilan-carbone/:univers/:id',
+  BILAN_CARBONE = '/bilan-environnemental',
+  BILAN_CARBONE_ENCHAINEMENT = '/bilan-environnemental/:univers/:id',
 }
 
 const bilanCarboneRoutes: RouteRecordRaw[] = [
