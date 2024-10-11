@@ -28,7 +28,9 @@
   </section>
   <section class="fr-py-8w background--beige">
     <div class="fr-container">
-      <LandingEnsemble />
+      <div class="fr-col-md-10 fr-mx-auto">
+        <LandingEnsemble />
+      </div>
     </div>
   </section>
   <section class="fr-py-16w rappel-app">
