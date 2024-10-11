@@ -1,7 +1,7 @@
 <template>
   <div class="fr-container fr-py-6w">
     <div class="fr-col-12 fr-col-md-6 fr-mx-auto fr-mb-0 background--white fr-p-4w border border-radius--md">
-      <img src="/bg_creation_compte.png" alt="" />
+      <img src="/bg_creation_compte.svg" alt="" />
       <h1 class="fr-h4 fr-mb-1w">Entrez le code reçu par email !</h1>
       <p class="fr-text--lg">
         Pour vérifier votre adresse email et vous permettre d’accéder à votre compte, nous vous avons envoyé un email à

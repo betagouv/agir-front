@@ -4,7 +4,7 @@
       <form aria-labelledby="identity-fieldset-legend" class="fr-mb-4w" @submit.prevent="validerLaReponse()">
         <fieldset class="fr-fieldset fr-mb-0">
           <legend class="fr-fieldset__legend" id="identity-fieldset-legend">
-            <img src="/bg_creation_compte_etape_2.png" alt="" />
+            <img src="/bg_creation_compte_etape_2.svg" alt="" />
             <p class="text--normal text--bleu fr-mb-1w fr-mt-1w"><span class="fr-text--bold">Question 2</span> sur 3</p>
             <h1 class="fr-h4 fr-mb-1w">Enchanté, {{ onboardingPostCreationCompte().prenom }}</h1>
             <p class="fr-text--regular fr-text--lg">
