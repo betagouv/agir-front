@@ -1,7 +1,7 @@
 <template>
   <h2 class="fr-h2 text--center"><strong class="text--italic">J'agis</strong> c’est aussi...</h2>
   <div class="grid-container">
-    <div class="item1 fr-p-1w">
+    <div class="item1 fr-p-md-1w fr-pb-2w">
       <div class="text--center fr-px-2w background--white border-radius--md fr-py-4w">
         <span
           class="fr-icon-money-euro-circle-line border-radius--full text--beige background--beige fr-p-2w display-inline-block fr-mb-2w"
@@ -11,7 +11,7 @@
         <p class="fr-mb-0">Alléger le budget et les factures liées à votre consommation</p>
       </div>
     </div>
-    <div class="item2 fr-p-1w">
+    <div class="item2 fr-p-md-1w fr-pb-2w">
       <div class="text--center fr-px-2w background--white border-radius--md fr-py-4w">
         <span
           class="fr-icon-lungs-line border-radius--full text--beige background--beige fr-p-2w display-inline-block fr-mb-2w"
@@ -21,7 +21,7 @@
         <p class="fr-mb-0">Qualité de l'air, pollutions, impacts actuels</p>
       </div>
     </div>
-    <div class="item3 fr-p-1w">
+    <div class="item3 fr-p-md-1w fr-pb-2w">
       <div class="border-radius--md flex flex-column full-height">
         <p class="text--center fr-px-2w fr-pt-6w text--lh-1-8 fr-mb-0">
           <span class="fr-h1 text--bold">473 902</span>
@@ -31,7 +31,7 @@
         <img src="/hp-ensemble.png" class="fr-mt-auto max-full-width" alt="" />
       </div>
     </div>
-    <div class="item4 fr-p-1w">
+    <div class="item4 fr-p-md-1w fr-pb-2w">
       <div class="text--center background--white border-radius--md fr-px-2w md fr-py-4w">
         <span
           class="fr-icon-parent-line border-radius--full text--beige background--beige fr-p-2w display-inline-block fr-mb-2w"
@@ -41,7 +41,7 @@
         <p class="fr-mb-0">Faire des choix éclairés pour les générations futures</p>
       </div>
     </div>
-    <div class="item5 fr-p-1w">
+    <div class="item5 fr-p-md-1w fr-pb-2w">
       <div class="text--center fr-px-2w background--white border-radius--md fr-py-4w">
         <span
           class="fr-icon-heart-line border-radius--full text--beige background--beige fr-p-2w display-inline-block fr-mb-2w"
