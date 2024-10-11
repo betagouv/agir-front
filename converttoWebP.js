@@ -25,7 +25,7 @@ fs.readdir(inputFolder, (err, files) => {
 
       sharp(inputFilePath)
         .toFormat('webp')
-        .toFile(outputFilePath, (err, info) => {
+        .toFile(outputFilePath, err => {
           if (err) {
             console.error(`Erreur lors de la conversion de ${file}:`, err);
           } else {
