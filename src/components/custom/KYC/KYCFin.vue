@@ -27,7 +27,7 @@
 
 <style scoped>
   .kyc-fin {
-    background-image: url('/bg_quiz-success.jpg');
+    background-image: url('/bg_quiz-success.webp');
     background-position: center;
     background-size: cover;
   }

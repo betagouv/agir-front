@@ -73,7 +73,7 @@
         nom="Nos Gestes Climat"
         description="Basé sur le calculateur carbone développé par l’Agence de la transition écologique (ADEME) et beta.gouv.fr, en partenariat avec l’Association Bilan Carbone (ABC)."
         url="https://nosgestesclimat.fr/"
-        logo="/logo_ngc.png"
+        logo="/logo_ngc.webp"
       />
     </div>
   </div>
