@@ -7,7 +7,7 @@
           <router-link class="fr-breadcrumb__link" to="/agir">Accueil</router-link>
         </li>
         <li v-for="page in pageHierarchie" :key="page.label">
-          <router-link class="fr-breadcrumb__link" :to="`/${page.url}`">{{ page.label }}</router-link>
+          <router-link class="fr-breadcrumb__link" :to="`${page.url}`">{{ page.label }}</router-link>
         </li>
         <li>
           <a class="fr-breadcrumb__link" aria-current="page">{{ pageCourante }}</a>

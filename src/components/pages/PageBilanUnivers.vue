@@ -2,7 +2,7 @@
   <div class="fr-container">
     <FilDAriane
       page-courante="Estimation du bilan"
-      :page-hierarchie="[{ label: 'Bilan carbone', url: `${RouteBilanCarboneName.BILAN_CARBONE}` }]"
+      :page-hierarchie="[{ label: 'Bilan carbone', url: `${RouteBilanCarbonePath.BILAN_CARBONE}` }]"
     />
     <h1>
       Estimation du bilan <span class="text--bleu">{{ univers }}</span>
@@ -43,7 +43,7 @@
   import { QuestionRepositoryAxios } from '@/domaines/kyc/adapters/question.repository.axios';
   import { RecupererEnchainementQuestionsUsecase } from '@/domaines/kyc/recupererEnchainementQuestionsUsecase';
   import router from '@/router';
-  import { RouteBilanCarboneName, RouteBilanCarbonePath } from '@/router/bilanCarbone/routes';
+  import { RouteBilanCarbonePath } from '@/router/bilanCarbone/routes';
   import { utilisateurStore } from '@/store/utilisateur';
   const questionsViewModel = ref<QuestionsViewModel>();
   const isLoading = ref<boolean>(true);
