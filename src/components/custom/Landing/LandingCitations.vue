@@ -3,10 +3,10 @@
   <div class="fr-grid-row fr-grid-row--gutters">
     <div class="fr-col-md-6">
       <LandingCitation
-        citation="Beaucoup plus <strong>facile à prendre en main</strong> que ce que je pensais"
-        image="/hp-user-1.webp"
-        autheur="Jean-Yves"
-        activite="Retraité, La Roche-Sur-Yon"
+        citation="J’ai enfin eu des réponses à mes <strong>questions concrètes</strong> du quotidien."
+        image="/hp-user-2.webp"
+        autheur="Sarah"
+        activite="Infirmière, Angers"
       />
       <div
         class="empty-card empty-card--bottom fr-mt-2w background--vert-light border-radius--md fr-hidden fr-unhidden-md"
@@ -15,18 +15,18 @@
     <div class="fr-col-md-6">
       <div class="empty-card empty-card--top background--vert border-radius--md fr-mb-2w fr-hidden fr-unhidden-md" />
       <LandingCitation
-        citation="J’ai enfin eu des réponses à mes <strong>questions concrètes</strong> du quotidien"
-        image="/hp-user-2.webp"
-        autheur="Sarah"
-        activite="Ingénieure, Marseille"
+        citation="Beaucoup plus <strong>facile à prendre en main</strong> que ce que je pensais."
+        image="/hp-user-1.webp"
+        autheur="Jean-Yves"
+        activite="Retraité, Besançon"
       />
     </div>
     <div class="fr-col-12">
       <LandingCitation
-        citation="Des idées pour <strong>agir localement</strong>, c’est ce dont j’avais besoin"
+        citation="C'est super concret pour <strong>agir localement</strong>, c'est ce dont j'avais besoin."
         image="/hp-user-3.webp"
         autheur="Matthieu"
-        activite="Étudiant, Rennes"
+        activite="Étudiant, Dijon"
       />
     </div>
   </div>

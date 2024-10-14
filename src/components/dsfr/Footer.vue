@@ -12,8 +12,8 @@
         </div>
         <div class="fr-footer__content">
           <p class="fr-footer__content-desc">
-            L'application <strong class="text--italic">J’agis</strong> est un service pour accompagner les citoyens
-            proposé par le Secrétariat Général à la Planification Ecologique
+            L'application <strong class="text--italic">J’agis</strong> est un service proposé par le Secrétariat Général
+            à la Planification Ecologique.
           </p>
           <ul class="fr-footer__content-list">
             <li class="fr-footer__content-item">

@@ -1,14 +1,14 @@
 <template>
   <h2 class="fr-h2 text--center">Notre approche</h2>
   <p class="fr-text--xl text--center">
-    Une méthode <strong>sur-mesure,</strong> adaptée à vos besoins et vos contraintes
+    Une démarche <strong>sur-mesure,</strong> adaptée à vos besoins et vos contraintes
   </p>
   <ul class="fr-tags-group flex-center fr-mb-4w">
     <li>
-      <p class="fr-tag">Progressive</p>
+      <p class="fr-tag">Pas à pas</p>
     </li>
     <li>
-      <p class="fr-tag">Bienveillante</p>
+      <p class="fr-tag">Sans jugement</p>
     </li>
     <li>
       <p class="fr-tag">Concrète</p>
@@ -44,8 +44,8 @@
     },
     {
       picto: 'fr-icon-award-line',
-      titre: 'Progrès mesurable',
-      description: 'Suivez vos actions et vos progrès pour mesurer votre impact',
+      titre: 'Économies mesurables',
+      description: 'Suivez vos actions et mesurer leurs impacts grâce au bilan environnemental',
       image: '/hp-approche-3.webp',
     },
   ];
