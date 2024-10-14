@@ -146,7 +146,7 @@ export class RecommandationsPersonnaliseesPresenterImpl implements Recommandatio
   private determineImage(recommandationPersonnalisee: RecommandationPersonnalisee) {
     switch (recommandationPersonnalisee.type) {
       case InteractionType.DEFIS:
-        return '/reco_defi.jpg';
+        return '/reco_defi.webp';
       case InteractionType.KYC:
         return '/ic_kyc.svg';
       default:

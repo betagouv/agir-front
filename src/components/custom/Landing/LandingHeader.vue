@@ -2,20 +2,20 @@
   <div class="fr-col-md-7">
     <h1>
       <img src="/logo-jagis.svg" height="110px" class="display-block" alt="J'agis" />
-      Simplifiez votre transition écologique, à votre rythme
+      Des solutions pour la transition écologique à mon échelle
     </h1>
     <ul class="fr-grid-row fr-grid-row--gutters list-style-none fr-pl-0 fr-mb-2w">
       <li class="fr-col-auto">
         <span class="fr-icon-check-line text--vert" aria-hidden="true" />
-        Selon vos moyens
+        Selon mes moyens
       </li>
       <li class="fr-col-auto">
         <span class="fr-icon-check-line text--vert" aria-hidden="true" />
-        Selon votre lieu de vie
+        Selon mes lieux de vie
       </li>
       <li class="fr-col-auto">
         <span class="fr-icon-check-line text--vert" aria-hidden="true" />
-        Selon vos envies
+        Selon mes envies
       </li>
     </ul>
     <div class="fr-grid-row fr-col-md-6 fr-col-12">

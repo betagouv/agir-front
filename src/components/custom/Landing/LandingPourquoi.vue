@@ -18,7 +18,7 @@
   const items = [
     {
       picto: 'fr-icon-money-euro-circle-line',
-      titre: 'De l’aide financière',
+      titre: 'Des aides financières',
       description: 'Découvrez tous les bons plans et subventions auxquelles vous avez droit',
     },
     {

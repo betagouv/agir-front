@@ -21,6 +21,11 @@
       <LandingRappelAppCTA />
     </div>
   </section>
+  <section class="fr-py-12w">
+    <div class="fr-container">
+      <LandingOnglet />
+    </div>
+  </section>
   <section class="fr-py-12w rappel-cta">
     <div class="fr-container">
       <LandingRappelCTA />
@@ -53,6 +58,7 @@
   import LandingEnsemble from '@/components/custom/Landing/LandingEnsemble.vue';
   import LandingHeader from '@/components/custom/Landing/LandingHeader.vue';
   import LandingNotreApproche from '@/components/custom/Landing/LandingNotreApproche.vue';
+  import LandingOnglet from '@/components/custom/Landing/LandingOnglet.vue';
   import LandingPourquoi from '@/components/custom/Landing/LandingPourquoi.vue';
   import LandingRappelAppCTA from '@/components/custom/Landing/LandingRappelAppCTA.vue';
   import LandingRappelCTA from '@/components/custom/Landing/LandingRappelCTA.vue';

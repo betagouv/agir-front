@@ -42,12 +42,12 @@
                     :to="{ name: RouteCommuneName.AUTHENTIFICATION }"
                     class="fr-btn fr-btn--secondary fr-mr-2w"
                   >
-                    Se connecter
+                    Je me connecte
                   </router-link>
                 </li>
                 <li v-if="!estConnecte">
                   <router-link :to="{ name: RouteCompteName.CREATION_COMPTE }" class="fr-btn fr-btn--primary">
-                    Créer mon compte
+                    Je crée mon compte
                   </router-link>
                 </li>
                 <li v-if="doitAfficherLeBoutonSeDeconnecter">
