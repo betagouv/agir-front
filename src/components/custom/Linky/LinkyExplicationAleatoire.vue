@@ -22,7 +22,7 @@
 
   const infosActionsQuotidiennes = [
     "Laver son linge à 30°C consomme trois fois moins d'énergie qu'à 90°C.",
-    "Le programme Eco du lave-vaisselle utilise 45% d'électricité de mois qu'un programme intensif.",
+    "Le programme Eco du lave-vaisselle utilise 45% d'électricité de moins qu'un programme intensif.",
     "Couvrir les casseroles permet de raccourcir le temps de cuisson et d'économiser 25% d'électricité ou de gaz.",
     "Éteindre complètement les appareils plutôt que de les laisser en veille peut représenter jusqu'à 10% d'économies.",
     "Installer un thermostat programmable pour réguler la température des pièces selon les besoins permet de réaliser jusqu'à 15% d'économies sur le chauffage.",
