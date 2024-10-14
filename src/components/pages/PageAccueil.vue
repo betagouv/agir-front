@@ -70,7 +70,7 @@
   .background-image-header {
     --height-background-img-mobile: 20rem;
 
-    background-image: url('/hp-background-header.png');
+    background-image: url('/hp-background-header.webp');
     background-repeat: no-repeat;
     background-size: auto var(--height-background-img-mobile);
     background-position: right bottom;
@@ -84,14 +84,14 @@
     }
 
     .rappel-app {
-      background-image: url('/hp-background-rappel-app.png');
+      background-image: url('/hp-background-rappel-app.webp');
       background-position: 25% bottom;
       background-repeat: no-repeat;
       background-size: contain;
     }
 
     .rappel-app-cta {
-      background-image: url('/hp-background-rappel-app-cta.png');
+      background-image: url('/hp-background-rappel-app-cta.webp');
       background-position: 70% bottom;
       background-repeat: no-repeat;
       background-size: auto 90%;

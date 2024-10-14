@@ -149,21 +149,21 @@ describe('Fichier de test du usecase de chargement du classement', () => {
               rang: 1,
               points: 1120,
               style: 'background--white',
-              medailleTopTrois: '/medaille-or.png',
+              medailleTopTrois: '/medaille-or.webp',
             },
             {
               prenom: 'Timothé',
               rang: 2,
               points: 1030,
               style: 'background--white',
-              medailleTopTrois: '/medaille-argent.png',
+              medailleTopTrois: '/medaille-argent.webp',
             },
             {
               prenom: 'Lucas',
               rang: 3,
               points: 950,
               style: 'background--white',
-              medailleTopTrois: '/medaille-bronze.png',
+              medailleTopTrois: '/medaille-bronze.webp',
             },
             {
               prenom: 'Dunia',
@@ -225,7 +225,7 @@ describe('Fichier de test du usecase de chargement du classement', () => {
         classementLocal: {
           classement: [
             {
-              medailleTopTrois: '/medaille-or.png',
+              medailleTopTrois: '/medaille-or.webp',
               points: 1120,
               prenom: 'Guillaume',
               rang: 1,
@@ -239,7 +239,7 @@ describe('Fichier de test du usecase de chargement du classement', () => {
               style: 'background-bleu-light border--bleu',
             },
             {
-              medailleTopTrois: '/medaille-bronze.png',
+              medailleTopTrois: '/medaille-bronze.webp',
               points: 345,
               prenom: 'Lucas',
               rang: 3,

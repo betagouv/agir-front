@@ -73,13 +73,13 @@
           <div class="fr-footer__partners-main">
             <ul class="fr-grid-row fr-grid-row--gutters fr-grid-row--middle">
               <li class="fr-col">
-                <img src="/logo-dinum.png" alt="DINUM : Direction interministérielle du numérique" height="80px" />
+                <img src="/logo-dinum.webp" alt="DINUM : Direction interministérielle du numérique" height="80px" />
               </li>
               <li class="fr-col">
                 <img src="/logo-ademe.svg" alt="ADEME: Agence de la transition écologique " height="80px" />
               </li>
               <li class="fr-col">
-                <img src="/logo_fnv.png" alt="France Nation Verte" height="80px" />
+                <img src="/logo_fnv.webp" alt="France Nation Verte" height="80px" />
               </li>
             </ul>
           </div>

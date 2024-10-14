@@ -15,7 +15,7 @@
       </li>
     </ul>
     <div class="display-inline-block background--white fr-p-2w border-radius--md shadow fr-my-2w">
-      <img src="/service-linky-a-configurer.jpg" height="300" alt="" />
+      <img src="/service-linky-a-configurer.webp" height="300" alt="" />
     </div>
     <h2>Activer le service</h2>
     <LinkyFormConfiguration :prm="prm" />

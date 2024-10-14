@@ -28,7 +28,7 @@
           <br />kg de CO2-e économisés<br />
           <span class="fr-h6 text--bold">ensemble</span>
         </p>
-        <img src="/hp-ensemble.png" class="fr-mt-auto max-full-width" alt="" />
+        <img src="/hp-ensemble.webp" class="fr-mt-auto max-full-width" alt="" />
       </div>
     </div>
     <div class="item4 fr-p-md-1w fr-pb-2w">

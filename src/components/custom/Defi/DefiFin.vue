@@ -72,7 +72,7 @@
     justify-content: center;
     padding: 1rem 0;
     gap: 0.5rem;
-    background-image: url('/article-quiz-gagne.png');
+    background-image: url('/article-quiz-gagne.webp');
     background-size: contain;
     background-position: center;
   }

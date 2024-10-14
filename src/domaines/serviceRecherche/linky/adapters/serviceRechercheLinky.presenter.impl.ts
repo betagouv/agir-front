@@ -28,8 +28,8 @@ export class ServiceRechercheLinkyPresenterImpl implements ServiceRechercheLinky
       aside: {
         nom: 'Winter énergies',
         url: 'https://www.winter-energies.fr/',
-        logo: '/service-winter-logo.png',
-        screenshot: '/service-winter.jpg',
+        logo: '/service-winter-logo.webp',
+        screenshot: '/service-winter.webp',
         description:
           'Comprenez comment vous consommez et surtout, comment réduire votre consommation pour réaliser des économies.',
       },

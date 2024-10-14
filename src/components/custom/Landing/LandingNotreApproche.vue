@@ -34,19 +34,19 @@
       picto: 'fr-icon-account-circle-line',
       titre: 'Un parcours qui vous ressemble',
       description: 'Des recommandations basées sur votre mode de vie et vos priorités, sans culpabilité',
-      image: '/hp-approche-1.png',
+      image: '/hp-approche-1.webp',
     },
     {
       picto: 'fr-icon-thumb-up-line',
       titre: 'Des outils pratiques et concrets',
       description: 'Agissez pour votre environnement proche grâce à des solutions et aides locales',
-      image: '/hp-approche-2.png',
+      image: '/hp-approche-2.webp',
     },
     {
       picto: 'fr-icon-award-line',
       titre: 'Progrès mesurable',
       description: 'Suivez vos actions et vos progrès pour mesurer votre impact',
-      image: '/hp-approche-3.png',
+      image: '/hp-approche-3.webp',
     },
   ];
 </script>

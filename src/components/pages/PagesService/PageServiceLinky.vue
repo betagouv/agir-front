@@ -5,7 +5,7 @@
     <div v-else>
       <FilDAriane
         page-courante="Service : linky"
-        :page-hierarchie="[{ label: 'Univers - À la maison', url: `${RouteUniversName.UNIVERS}/logement` }]"
+        :page-hierarchie="[{ label: 'Univers - À la maison', url: `/${RouteUniversName.UNIVERS}/logement` }]"
       />
       <h1 class="fr-h2">Suivre ma consommation <span class="text--bleu">d’électricité</span></h1>
       <PageServiceTemplate :aside="serviceLinkyViewModel.aside">

@@ -5,7 +5,7 @@
     <div v-else>
       <FilDAriane
         page-courante="Service : fruits et légumes"
-        :page-hierarchie="[{ label: 'Univers - En cuisine', url: `${RouteUniversName.UNIVERS}/alimentation` }]"
+        :page-hierarchie="[{ label: 'Univers - En cuisine', url: `/${RouteUniversName.UNIVERS}/alimentation` }]"
       />
       <h1 class="fr-h2">
         Les fruits et légumes pour le mois de

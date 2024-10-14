@@ -26,9 +26,9 @@ describe('Fichier de tests concernant la récupération des informations compteu
         aside: {
           description:
             'Comprenez comment vous consommez et surtout, comment réduire votre consommation pour réaliser des économies.',
-          logo: '/service-winter-logo.png',
+          logo: '/service-winter-logo.webp',
           nom: 'Winter énergies',
-          screenshot: '/service-winter.jpg',
+          screenshot: '/service-winter.webp',
           url: 'https://www.winter-energies.fr/',
         },
         categories: [],

@@ -4,7 +4,7 @@
     <div v-else>
       <FilDAriane
         page-courante="Service : Près de chez nous"
-        :page-hierarchie="[{ label: 'Univers - En cuisine', url: `${RouteUniversName.UNIVERS}/alimentation` }]"
+        :page-hierarchie="[{ label: 'Univers - En cuisine', url: `/${RouteUniversName.UNIVERS}/alimentation` }]"
       />
       <div v-if="serviceErreur">
         <h1>Service indisponible</h1>
