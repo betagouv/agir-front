@@ -78,7 +78,7 @@
   const updateValue = async event => {
     const inputElement = event.target as HTMLInputElement;
 
-    if (inputElement.value.length === 5) {
+    if (/^\d{5}$/.test(inputElement.value)) {
       communes.value = await usecase.execute(inputElement.value);
       emit('update:selectedCommune', communes.value[0]);
       codePostalValide.value = true;
