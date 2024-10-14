@@ -115,17 +115,3 @@
     border-bottom: 3px solid var(--blue-france-sun-113-625);
   }
 </style>
-
-<!-- 
-TODO: SPEC TEST COMPOSANT:
-
-Attribut role="tablist" sur l'élément contenant les onglets.
-Chaque onglet a un attribut role="tab"
-Chaque panneau a les attributs role="tabpanel" et tabindex="0"
-Chaque onglet est associé à son panneau avec le couple d’attributs aria-controls/id
-Chaque panneau est associé à son onglet aria-labelledby/id
-Suivant l'état de l’onglet (sélectionné ou non), les attributs suivants changent de valeursaria-selected = true ou false tabindex = 0 ou -1
-aria-selected = true ou false
-tabindex = 0 ou -1
-Les panneaux non affichés à l’écran sont masqués avec display: none et/ou visibility: hidden
--->
