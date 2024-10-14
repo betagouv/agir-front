@@ -16,7 +16,7 @@
       <LandingNotreApproche />
     </div>
   </section>
-  <section class="fr-py-16w background--vert rappel-app-cta">
+  <section class="fr-py-12w background--vert rappel-app-cta">
     <div class="fr-container">
       <LandingRappelAppCTA />
     </div>
@@ -89,18 +89,27 @@
       background-size: 45%;
     }
 
-    .rappel-app {
-      background-image: url('/hp-background-rappel-app.webp');
-      background-position: 25% bottom;
-      background-repeat: no-repeat;
-      background-size: contain;
-    }
-
     .rappel-app-cta {
       background-image: url('/hp-background-rappel-app-cta.webp');
       background-position: 70% bottom;
       background-repeat: no-repeat;
       background-size: auto 90%;
+    }
+  }
+
+  @media (min-width: 62rem) {
+    .rappel-app {
+      background-image: url('/hp-background-rappel-app.webp');
+      background-position: 5% bottom;
+      background-repeat: no-repeat;
+      background-size: auto 80%;
+    }
+  }
+
+  @media (min-width: 78rem) {
+    .rappel-app {
+      background-position: 10% bottom;
+      background-size: contain;
     }
   }
 </style>
