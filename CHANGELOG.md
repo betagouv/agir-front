@@ -1,5 +1,36 @@
 # Changelog
 
+## [1.24.0](https://github.com/betagouv/agir-front/compare/v1.23.0...v1.24.0) (2024-10-14)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* bilan partiel ([#660](https://github.com/betagouv/agir-front/issues/660)) ([7e60197](https://github.com/betagouv/agir-front/commit/7e60197a98780db04a337646af252a24ebf687fe))
+* création de la section landing onglet ([#670](https://github.com/betagouv/agir-front/issues/670)) ([dec17fc](https://github.com/betagouv/agir-front/commit/dec17fc9d898662430e9c0829c583cdc46c28acd))
+* enchainement des questions pour le bilan ([#662](https://github.com/betagouv/agir-front/issues/662)) ([7735e00](https://github.com/betagouv/agir-front/commit/7735e00e4cb72ef7549b0e3fbad4709eaf7d08bf))
+* gestion derniers feedbacks landing ([#669](https://github.com/betagouv/agir-front/issues/669)) ([fb40726](https://github.com/betagouv/agir-front/commit/fb40726ae735477086af0a5a776df21260b14907))
+* modification des wordings suite au passage sur J'agis ([#666](https://github.com/betagouv/agir-front/issues/666)) ([6192226](https://github.com/betagouv/agir-front/commit/6192226e1470ebb28c8d486d92b58ff7eae52135))
+* nouvelle Landing page ([#635](https://github.com/betagouv/agir-front/issues/635)) ([5476545](https://github.com/betagouv/agir-front/commit/5476545b9e6cf8a95a5492584a70e2df4fbcec4a))
+* remplacement illustration parcours creation de compte ([#667](https://github.com/betagouv/agir-front/issues/667)) ([6d82112](https://github.com/betagouv/agir-front/commit/6d82112bd192a3919e8c178854e74d02ebfdb982))
+
+
+### 🐛 Corrections de bogues
+
+* accessibilité du footer ([7d73b47](https://github.com/betagouv/agir-front/commit/7d73b4706d4e24711332b27c95e9a42075f41398))
+* afficher des entiers dans les aides vélos ([#672](https://github.com/betagouv/agir-front/issues/672)) ([eb0acce](https://github.com/betagouv/agir-front/commit/eb0acce12c18898c1c0a06166c5c4cc34c2bb76d))
+* afficher un message d'erreur lisibile en cas de problème réseau sur la création de compte ([#659](https://github.com/betagouv/agir-front/issues/659)) ([a32751d](https://github.com/betagouv/agir-front/commit/a32751d42af19a02811c0d5e7ab8c5628cb483eb))
+* bascule bilan partiel vers complet ([#673](https://github.com/betagouv/agir-front/issues/673)) ([3fd2a57](https://github.com/betagouv/agir-front/commit/3fd2a57466c1632389c5c68162796e000d65f7ba))
+* modification wording bibliothèque ([#665](https://github.com/betagouv/agir-front/issues/665)) ([22e663f](https://github.com/betagouv/agir-front/commit/22e663f6311263f608f552864fe2381083ede8cc))
+* règle de validation du code postal ([#671](https://github.com/betagouv/agir-front/issues/671)) ([51f7017](https://github.com/betagouv/agir-front/commit/51f701773c12527e80479a59aa57a02359d0a061))
+* typo linky ([#676](https://github.com/betagouv/agir-front/issues/676)) ([c77a553](https://github.com/betagouv/agir-front/commit/c77a55337c5f18e1e502f292682eccbe98abf6f8))
+* typo url image ([#674](https://github.com/betagouv/agir-front/issues/674)) ([e47ae38](https://github.com/betagouv/agir-front/commit/e47ae38fb23590ffc750a0a6daf2042e661c9de1))
+* update champ input numeric ([#675](https://github.com/betagouv/agir-front/issues/675)) ([f357328](https://github.com/betagouv/agir-front/commit/f357328386751a4db983c2a4e4ade0ec8b8c38eb))
+
+
+### 👷 Autres changements
+
+* conversion des png/jpg en webp ([#668](https://github.com/betagouv/agir-front/issues/668)) ([12f1275](https://github.com/betagouv/agir-front/commit/12f127593848380a972332584696b0487d309902))
+
 ## [1.23.0](https://github.com/betagouv/agir-front/compare/v1.22.0...v1.23.0) (2024-10-09)
 
 
