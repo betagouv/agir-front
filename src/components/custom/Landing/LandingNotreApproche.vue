@@ -5,13 +5,13 @@
   </p>
   <ul class="fr-tags-group flex-center fr-mb-4w">
     <li>
-      <p class="fr-tag text--white background--vert">Progressive</p>
+      <p class="fr-tag">Progressive</p>
     </li>
     <li>
-      <p class="fr-tag text--white background--vert">Bienveillante</p>
+      <p class="fr-tag">Bienveillante</p>
     </li>
     <li>
-      <p class="fr-tag text--white background--vert">Concrète</p>
+      <p class="fr-tag">Concrète</p>
     </li>
   </ul>
   <ul class="fr-grid-row fr-grid-row--gutters list-style-none">
@@ -50,3 +50,10 @@
     },
   ];
 </script>
+
+<style scoped>
+  .fr-tag {
+    color: #00785c;
+    background-color: #e7f7f4;
+  }
+</style>
