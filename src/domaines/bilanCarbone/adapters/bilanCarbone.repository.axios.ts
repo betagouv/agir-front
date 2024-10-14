@@ -51,7 +51,7 @@ export class BilanCarboneRepositoryAxios implements BilanCarboneRepository {
     const reponse = await axiosInstance.get<BilanCarboneApiModel>(`/utilisateur/${utilisateurId}/bilans/last`);
 
     return {
-      pourcentageCompletionTotal: 0,
+      pourcentageCompletionTotal: reponse.data.bilan_synthese.pourcentage_completion_totale,
       bilanComplet: {
         impactKgAnnuel: reponse.data.bilan_complet.impact_kg_annee,
         univers: reponse.data.bilan_complet.impact_univers.map(detail => ({
