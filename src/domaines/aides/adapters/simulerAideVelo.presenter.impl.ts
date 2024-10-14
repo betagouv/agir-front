@@ -23,7 +23,7 @@ export class SimulerAideVeloPresenterImpl implements SimulerAideVeloPresenter {
 
       const simulationAideResultat: AideResultats = {
         titre: `Acheter un vélo ${category}`,
-        montantTotal: aides.reduce((total, aide) => total + aide.montant, 0),
+        montantTotal: aides.reduce((total, aide) => total + Math.round(aide.montant), 0),
         aides: aides,
       };
 
