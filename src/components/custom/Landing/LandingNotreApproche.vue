@@ -46,7 +46,7 @@
       picto: 'fr-icon-award-line',
       titre: 'Économies mesurables',
       description: 'Suivez vos actions et mesurer leurs impacts grâce au bilan environnemental',
-      image: '/hp-approche-3.webp',
+      image: '/hp-approche-3.png',
     },
   ];
 </script>
