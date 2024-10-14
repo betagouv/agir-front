@@ -33,7 +33,7 @@
       :tabindex="index === ongletSlectionne ? '0' : '-1'"
       class="fr-p-4w"
     >
-      <div class="fr-grid-row fr-grid-row--gutters">
+      <div class="fr-grid-row fr-grid-row--gutters align-items--center">
         <div class="fr-col-md-6">
           <img :src="item.imgPanel" alt="" class="img-object-fit-contain full-width" />
         </div>
@@ -72,24 +72,24 @@
     {
       titre: 'Je ne sais pas par où commencer',
       personna: 'Marc, 38 ans dit...',
-      imgPersonna: '/schema_archi.png',
-      imgPanel: '/schema_archi.png',
+      imgPersonna: '/hp-onglet-user-1.png',
+      imgPanel: '/hp-onglet-panel-1.png',
       textePanel:
         'Grâce à notre bilan environnemental personnalisé, identifiez vos premiers pas et recevez des recommandations concrètes pour débuter sereinement.',
     },
     {
       titre: 'L’écologie, ça coûte cher',
       personna: 'Leïla, 22 ans dit...',
-      imgPersonna: '/schema_archi.png',
-      imgPanel: '',
+      imgPersonna: '/hp-onglet-user-3.png',
+      imgPanel: '/hp-onglet-panel-2.png',
       textePanel:
         'Accédez à toutes les aides financières disponibles localement et nationalement pour vous accompagner dans chaque étape.',
     },
     {
       titre: 'Où sont les sources fiables ?',
-      personna: 'Où sont les sources fiables ?',
-      imgPersonna: '',
-      imgPanel: '',
+      personna: 'Richard, 63 ans dit...',
+      imgPersonna: '/hp-onglet-user-2.png',
+      imgPanel: '/hp-onglet-panel-3.png',
       textePanel:
         "Nous vous offrons des informations fiables et sourcées pour vous aider à faire un choix éclairé, basées sur des études et des partenaires experts comme l'ADEME.",
     },
