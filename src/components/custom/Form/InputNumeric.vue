@@ -6,17 +6,18 @@
   <input
     class="fr-input"
     type="text"
-    :value="defaultValue"
+    v-model="internalValue"
     :id="id"
     :name="id"
     inputmode="numeric"
     pattern="[0-9]*"
-    @input="updateValue"
   />
 </template>
 
 <script setup lang="ts">
-  defineProps<{
+  import { ref, watch } from 'vue';
+
+  const props = defineProps<{
     id: string;
     label: { wording: string; cssModifier?: string };
     defaultValue?: string;
@@ -26,8 +27,9 @@
     (e: 'update:modelValue', value: string): void;
   }>();
 
-  const updateValue = async event => {
-    const { value } = event.target as HTMLInputElement;
-    emit('update:modelValue', value);
-  };
+  const internalValue = ref(props.defaultValue || '');
+
+  watch(internalValue, newValue => {
+    emit('update:modelValue', newValue);
+  });
 </script>
