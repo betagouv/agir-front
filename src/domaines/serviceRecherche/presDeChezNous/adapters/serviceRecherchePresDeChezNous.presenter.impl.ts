@@ -49,8 +49,8 @@ export class ServiceRecherchePresDeChezNousPresenterImpl implements ServiceReche
       description:
         'Près de chez nous est une cartographie collaborative qui recense l’ensemble des structures qui proposent des produits bio, équitables et locaux.',
       url: 'https://presdecheznous.fr/',
-      logo: '/service-proximite-logo.png',
-      screenshot: '/service-proximite.png',
+      logo: '/service-proximite-logo.webp',
+      screenshot: '/service-proximite.webp',
     };
     const categories = serviceRecherche.categories.map(elem => ({
       code: elem.code,

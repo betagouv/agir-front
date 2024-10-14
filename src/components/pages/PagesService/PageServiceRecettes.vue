@@ -5,7 +5,7 @@
     <div v-else>
       <FilDAriane
         page-courante="Service : recettes"
-        :page-hierarchie="[{ label: 'Univers - En cuisine', url: `${RouteUniversName.UNIVERS}/alimentation` }]"
+        :page-hierarchie="[{ label: 'Univers - En cuisine', url: `/${RouteUniversName.UNIVERS}/alimentation` }]"
       />
       <h1 class="fr-h2">
         Recettes

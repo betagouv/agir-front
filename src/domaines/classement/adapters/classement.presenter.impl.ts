@@ -117,11 +117,11 @@ export class ClassementPresenterImpl implements ClassementPresenter {
   private determineMedaille(index: number): string {
     switch (index) {
       case 1:
-        return '/medaille-or.png';
+        return '/medaille-or.webp';
       case 2:
-        return '/medaille-argent.png';
+        return '/medaille-argent.webp';
       case 3:
-        return '/medaille-bronze.png';
+        return '/medaille-bronze.webp';
       default:
         return '';
     }
