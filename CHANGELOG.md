@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.24.1](https://github.com/betagouv/agir-front/compare/v1.24.0...v1.24.1) (2024-10-15)
+
+
+### 🐛 Corrections de bogues
+
+* label logement ([4585826](https://github.com/betagouv/agir-front/commit/4585826e943a36a7655d2e9dddfc84ba907d1cdc))
+
+
+### 👷 Autres changements
+
+* Bump @vitejs/plugin-vue from 5.1.3 to 5.1.4 ([#681](https://github.com/betagouv/agir-front/issues/681)) ([bb0991d](https://github.com/betagouv/agir-front/commit/bb0991dced468c1d9bf140fac1718abf4ffe3c2f))
+* Bump vite from 5.4.6 to 5.4.9 ([#678](https://github.com/betagouv/agir-front/issues/678)) ([4bf8463](https://github.com/betagouv/agir-front/commit/4bf84638e904b145f92e1f2abd8dd6f5213319ce))
+
 ## [1.24.0](https://github.com/betagouv/agir-front/compare/v1.23.0...v1.24.0) (2024-10-14)
 
 
