@@ -1,12 +1,31 @@
 <template>
+  <div class="fr-grid-row fr-grid-row--gutters">
+    <div class="fr-col">
+      <img src="/bg_creation_compte.svg" alt="" />
+    </div>
+    <div>
+      <div class="fr-grid-row border border-radius--md fr-p-2w align-items--center fr-mb-md-0 fr-mb-5w">
+        <img class="fr-mr-2w" width="60" src="/ic_ngc_small.webp" alt="" />
+        <div class="flex-column text--bold text--orange-dark">
+          <span class="text--black">MON BILAN</span>
+          <div class="fr-grid-row align-items--center">
+            <span class="text--4xl">{{ bilanTonnes }}</span>
+            <div class="fr-grid-row flex-column">
+              tonnes
+              <span class="fr-m-0 fr-p-0">de CO2e/an</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <form aria-labelledby="identity-fieldset-legend" @submit.prevent="performCreerCompteUtilisateur" class="fr-mb-4w">
     <fieldset class="fr-fieldset fr-mb-0">
       <legend class="fr-fieldset__legend" id="identity-fieldset-legend">
-        <img src="/bg_creation_compte.svg" alt="" />
         <h2 class="fr-h4 fr-mb-0">Rejoignez-nous pour continuer</h2>
-        <p class="fr-text--regular">
+        <span class="fr-text--regular">
           Indiquez votre adresse e-mail et choisissez un mot de passe pour accéder au service.
-        </p>
+        </span>
       </legend>
       <div class="fr-messages-group">
         <Alert
@@ -36,11 +55,6 @@
             <router-link :to="{ name: RouteConformiteName.CGU }" target="_blank"
               >les conditions générales d'utilisation
             </router-link>
-          </label>
-        </div>
-        <div class="fr-checkbox-group fr-checkbox-group--sm">
-          <input name="ngc" id="ngc" type="checkbox" v-model="doitPrendreEnCompteIdNGC" />
-          <label class="fr-label fr-mt-1w" for="ngc">
             <p>
               Utiliser les informations issues de mon bilan <span class="text--bold"> Nos Gestes Climat</span> pour
               profiter d’une expérience d’usage améliorée
@@ -71,7 +85,7 @@
   import { CompteUtilisateurRepositoryImpl } from '@/domaines/compte/adapters/compteUtilisateur.repository.impl';
   import { CreerComptePresenterImpl } from '@/domaines/compte/adapters/creerComptePresenterImpl';
   import { CreerCompteUtilisateurUsecase, UserInput } from '@/domaines/compte/creerCompteUtilisateur.usecase';
-  import router, { RouteCommuneName } from '@/router';
+  import router from '@/router';
   import { RouteConformiteName } from '@/router/conformite/routes';
   import { utilisateurStore } from '@/store/utilisateur';
 
@@ -85,12 +99,9 @@
   let formulaireValide = ref<boolean>(false);
   let acceptationCGU = ref<boolean>(false);
   utilisateurStore().reset();
-  let doitPrendreEnCompteIdNGC = false;
   const route = useRoute();
   const idNGC = ref<string | null>(route.query.situationId as string | null);
-  if (idNGC.value) {
-    doitPrendreEnCompteIdNGC = true;
-  }
+  const bilanTonnes = ref<string | null>(route.query.bilan_tonnes as string | null);
 
   function onMotDePasseValideChanged(isMotDePasseValide: boolean) {
     formulaireValide.value = isMotDePasseValide;
@@ -106,12 +117,11 @@
         new CreerComptePresenterImpl(viewModel => {
           router.push({ name: viewModel.route });
         }),
-        { ...compteUtilisateurInput.value, situationId: doitPrendreEnCompteIdNGC ? idNGC.value : null },
+        { ...compteUtilisateurInput.value, situationId: idNGC.value },
       )
       .catch(reason => {
         creationDeCompteMessageErreur.value = reason.message;
         creationDeCompteEnErreur.value = true;
-        doitPrendreEnCompteIdNGC = true;
         window.scrollTo(0, 0);
       });
   };
