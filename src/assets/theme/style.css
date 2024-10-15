@@ -168,6 +168,10 @@ h2 {
   color: #ed8e00;
 }
 
+.text--orange-dark {
+  color: #d35209;
+}
+
 .text--warning {
   color: var(--text-default-warning);
 }

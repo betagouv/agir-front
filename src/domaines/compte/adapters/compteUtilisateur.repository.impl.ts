@@ -37,6 +37,7 @@ export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurReposit
         email: compteUtilisateurACreer.email,
         mot_de_passe: compteUtilisateurACreer.motDePasse,
         situation_ngc_id: compteUtilisateurACreer.situationId,
+        source_inscription: compteUtilisateurACreer.situationId ? 'web_ngc' : 'web',
       });
       return {
         mail: response.data.email || '',

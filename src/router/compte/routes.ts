@@ -1,5 +1,6 @@
 const PageCompte = () => import('@/components/pages/PageCompte.vue');
 const PageCreationCompte = () => import('@/components/pages/PageCreationCompte.vue');
+const PageCreationCompteDepuisNGC = () => import('@/components/pages/PageCreationCompteDepuisNGC.vue');
 const PageValidationCompte = () => import('@/components/pages/PageValidationCompte.vue');
 const PageValidationAuthentification = () => import('@/components/pages/PageValidationAuthentification.vue');
 const PageMotDePasseOublie = () => import('@/components/pages/PageMotDePasseOublie.vue');
@@ -25,6 +26,7 @@ export enum RouteComptePath {
   MON_COMPTE = '/compte/',
   OPTIONS_AVANCEES = '/compte/options-avancees',
   CREATION_COMPTE = '/creation-compte',
+  CREATION_COMPTE_NGC = '/creation-compte/nos-gestes-climat',
   VALIDATION_COMPTE = '/validation-compte',
   VALIDATION_AUTHENTIFICATION = '/validation-authentification',
   MOT_DE_PASSE_OUBLIE = '/mot-de-passe-oublie',
@@ -82,6 +84,15 @@ const compteRoutes: RouteRecordRaw[] = [
     component: PageCreationCompte,
     meta: {
       title: 'Création du compte',
+      estPublique: true,
+    },
+  },
+  {
+    path: RouteComptePath.CREATION_COMPTE_NGC,
+    name: RouteCompteName.CREATION_COMPTE_NGC,
+    component: PageCreationCompteDepuisNGC,
+    meta: {
+      title: 'Création du compte depuis Nos Gestes Climat',
       estPublique: true,
     },
   },

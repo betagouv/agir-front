@@ -3,6 +3,7 @@ export enum RouteCompteName {
   OPTIONS_AVANCEES = 'options-avancees',
   MIEUX_VOUS_CONNAITRE = 'mieux-vous-connaitre',
   CREATION_COMPTE = 'creation-compte',
+  CREATION_COMPTE_NGC = 'creation-compte-ngc',
   VALIDATION_COMPTE = 'validation-compte',
   VALIDATION_AUTHENTIFICATION = 'validation-authentification',
   MOT_DE_PASSE_OUBLIE = 'mot-de-passe-oublie',

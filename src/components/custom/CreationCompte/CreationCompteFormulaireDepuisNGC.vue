@@ -1,12 +1,31 @@
 <template>
+  <div class="fr-grid-row fr-grid-row--gutters">
+    <div class="fr-col">
+      <img src="/bg_creation_compte.svg" alt="" />
+    </div>
+    <div>
+      <div class="fr-grid-row border border-radius--md fr-p-2w align-items--center fr-mb-md-0 fr-mb-5w">
+        <img class="fr-mr-2w" width="60" src="/ic_ngc_small.webp" alt="" />
+        <div class="flex-column text--bold">
+          <span class="text--black">MON BILAN</span>
+          <div class="fr-grid-row align-items--center text--orange-dark">
+            <span class="text--4xl fr-mr-1v">{{ bilanTonnes }}</span>
+            <span class="text--lh-1">
+              tonnes<br />
+              de CO2e/an
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <form aria-labelledby="identity-fieldset-legend" @submit.prevent="performCreerCompteUtilisateur" class="fr-mb-4w">
     <fieldset class="fr-fieldset fr-mb-0">
       <legend class="fr-fieldset__legend" id="identity-fieldset-legend">
-        <img src="/bg_creation_compte.svg" alt="" />
-        <h2 class="fr-h4 fr-mb-0">Créez votre compte sur J'agis</h2>
-        <p class="fr-text--regular">
+        <h2 class="fr-h4 fr-mb-0">Rejoignez-nous pour continuer</h2>
+        <span class="fr-text--regular">
           Indiquez votre adresse e-mail et choisissez un mot de passe pour accéder au service.
-        </p>
+        </span>
       </legend>
       <div class="fr-messages-group">
         <Alert
@@ -36,31 +55,29 @@
             <router-link :to="{ name: RouteConformiteName.CGU }" target="_blank"
               >les conditions générales d'utilisation
             </router-link>
+            <p>
+              Utiliser les informations issues de mon bilan <span class="text--bold"> Nos Gestes Climat</span> pour
+              profiter d’une expérience d’usage améliorée
+            </p>
           </label>
         </div>
       </div>
       <div class="fr-fieldset__element fr-mb-0 fr-mt-1w">
         <button
+          type="submit"
           class="fr-btn fr-btn--lg display-block full-width"
           :disabled="!formulaireValide || !acceptationCGU"
-          type="submit"
         >
           S'inscrire
         </button>
       </div>
     </fieldset>
   </form>
-  <hr class="fr-pb-4w" />
-  <router-link
-    :to="{ name: RouteCommuneName.AUTHENTIFICATION }"
-    class="fr-btn fr-btn--lg fr-btn--tertiary-no-outline full-width flex-center"
-  >
-    J'ai déjà un compte
-  </router-link>
 </template>
 
 <script setup lang="ts">
   import { ref } from 'vue';
+  import { useRoute } from 'vue-router';
   import Alert from '@/components/custom/Alert.vue';
   import InputPassword from '@/components/custom/InputPassword.vue';
   import InputMail from '@/components/dsfr/InputMail.vue';
@@ -68,7 +85,7 @@
   import { CompteUtilisateurRepositoryImpl } from '@/domaines/compte/adapters/compteUtilisateur.repository.impl';
   import { CreerComptePresenterImpl } from '@/domaines/compte/adapters/creerComptePresenterImpl';
   import { CreerCompteUtilisateurUsecase, UserInput } from '@/domaines/compte/creerCompteUtilisateur.usecase';
-  import router, { RouteCommuneName } from '@/router';
+  import router from '@/router';
   import { RouteConformiteName } from '@/router/conformite/routes';
   import { utilisateurStore } from '@/store/utilisateur';
 
@@ -82,6 +99,9 @@
   let formulaireValide = ref<boolean>(false);
   let acceptationCGU = ref<boolean>(false);
   utilisateurStore().reset();
+  const route = useRoute();
+  const idNGC = ref<string | null>(route.query.situationId as string | null);
+  const bilanTonnes = ref<string | null>(route.query.bilan_tonnes as string | null);
 
   function onMotDePasseValideChanged(isMotDePasseValide: boolean) {
     formulaireValide.value = isMotDePasseValide;
@@ -97,7 +117,7 @@
         new CreerComptePresenterImpl(viewModel => {
           router.push({ name: viewModel.route });
         }),
-        { ...compteUtilisateurInput.value, situationId: null },
+        { ...compteUtilisateurInput.value, situationId: idNGC.value },
       )
       .catch(reason => {
         creationDeCompteMessageErreur.value = reason.message;
