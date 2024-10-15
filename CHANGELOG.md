@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.25.0](https://github.com/betagouv/agir-front/compare/v1.24.1...v1.25.0) (2024-10-15)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* nouvelle version creation de compte depuis NGC ([#683](https://github.com/betagouv/agir-front/issues/683)) ([10034d5](https://github.com/betagouv/agir-front/commit/10034d5424a35c1cbaae2b40cf28b297ddce4316))
+
+
+### 👷 Autres changements
+
+* Bump typescript from 5.6.2 to 5.6.3 ([#677](https://github.com/betagouv/agir-front/issues/677)) ([27edac5](https://github.com/betagouv/agir-front/commit/27edac5a0ae6433711e4c870f9018ac66ee3a33f))
+
 ## [1.24.1](https://github.com/betagouv/agir-front/compare/v1.24.0...v1.24.1) (2024-10-15)
 
 
