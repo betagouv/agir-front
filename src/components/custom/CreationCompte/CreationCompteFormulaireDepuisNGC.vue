@@ -6,14 +6,14 @@
     <div>
       <div class="fr-grid-row border border-radius--md fr-p-2w align-items--center fr-mb-md-0 fr-mb-5w">
         <img class="fr-mr-2w" width="60" src="/ic_ngc_small.webp" alt="" />
-        <div class="flex-column text--bold text--orange-dark">
+        <div class="flex-column text--bold">
           <span class="text--black">MON BILAN</span>
-          <div class="fr-grid-row align-items--center">
-            <span class="text--4xl">{{ bilanTonnes }}</span>
-            <div class="fr-grid-row flex-column">
-              tonnes
-              <span class="fr-m-0 fr-p-0">de CO2e/an</span>
-            </div>
+          <div class="fr-grid-row align-items--center text--orange-dark">
+            <span class="text--4xl fr-mr-1v">{{ bilanTonnes }}</span>
+            <span class="text--lh-1">
+              tonnes<br />
+              de CO2e/an
+            </span>
           </div>
         </div>
       </div>
