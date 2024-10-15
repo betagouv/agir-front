@@ -2,7 +2,7 @@
   <MenuLateral
     :liens="[
       { label: 'Mes informations', url: RouteCompteName.MON_COMPTE },
-      { label: 'Mes logement', url: RouteCompteName.LOGEMENT },
+      { label: 'Mon logement', url: RouteCompteName.LOGEMENT },
       { label: 'Mieux vous connaître', url: RouteCompteName.MIEUX_VOUS_CONNAITRE },
       { label: 'Mes actions', url: RouteCompteName.DEFIS },
       { label: 'Options avancées', url: RouteCompteName.OPTIONS_AVANCEES },
