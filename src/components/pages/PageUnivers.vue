@@ -20,7 +20,7 @@
   <div v-if="!isLoading">
     <section id="thematiques" v-if="thematiquesViewModel">
       <div class="fr-container">
-        <ThematiquesListe :univers-id="useRoute().params.id" :thematiques="thematiquesViewModel" />
+        <ThematiquesListe :univers-id="useRoute().params.id.toString()" :thematiques="thematiquesViewModel" />
       </div>
     </section>
 
@@ -118,7 +118,7 @@
   const universViewModel = ref<UniversViewModel>();
   const defisViewModel = ref<DefiDescriptionViewModel[]>();
   const servicesViewModel = ref<ServicesRechercheViewModel>();
-  let universId = useRoute().params.id;
+  let universId = useRoute().params.id.toString();
   const lancerChargementDesDonnees = () => {
     isLoading.value = true;
     const idUtilisateur = store.utilisateur.id;
@@ -167,7 +167,7 @@
   };
   onBeforeRouteUpdate((to, from, next) => {
     next();
-    universId = to.params.id;
+    universId = to.params.id.toString();
     lancerChargementDesDonnees();
   });
   onMounted(() => {
