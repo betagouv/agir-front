@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.26.0](https://github.com/betagouv/agir-front/compare/v1.25.0...v1.26.0) (2024-10-16)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* ajout liens stores et meta description ([#687](https://github.com/betagouv/agir-front/issues/687)) ([92c8b19](https://github.com/betagouv/agir-front/commit/92c8b1911e8bd8cd3b926d1ccf0ccc55b7fc738d))
+
+
+### 🐛 Corrections de bogues
+
+* ne pas deconnecter si erreur 404 depuis API ([#685](https://github.com/betagouv/agir-front/issues/685)) ([7d727ec](https://github.com/betagouv/agir-front/commit/7d727ecd0dbf2ca800e6a2481ca08bfefdde895b))
+
 ## [1.25.0](https://github.com/betagouv/agir-front/compare/v1.24.1...v1.25.0) (2024-10-15)
 
 
