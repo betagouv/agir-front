@@ -27,30 +27,20 @@
           Je m'inscris
         </router-link>
       </span>
-      <img
-        src="/bouton-google-play.svg"
-        class="fr-col-6 fr-p-1v"
-        alt="Télécharger dans l'App Store"
-        type="button"
-        aria-describedby="tooltip-bouton-google-store-header"
-      />
-      <span class="fr-tooltip fr-placement" id="tooltip-bouton-google-store-header" role="tooltip" aria-hidden="true">
-        Bientôt dispobile
-      </span>
-      <img
-        src="/bouton-app-store.svg"
-        class="fr-col-6 fr-p-1v"
-        alt="Disponible sur Google Play"
-        aria-describedby="tooltip-bouton-app-store-header"
-      />
-      <span class="fr-tooltip fr-placement" id="tooltip-bouton-app-store-header" role="tooltip" aria-hidden="true">
-        Bientôt dispobile
-      </span>
+      <div class="fr-col-6 fr-p-1v">
+        <a href="https://play.google.com/store/apps/details?id=fr.gouv.agir" target="_blank" class="no_blank">
+          <img src="/bouton-google-play.svg" alt="Disponible sur Google Play" class="display-block full-width" />
+        </a>
+      </div>
+      <div class="fr-col-6 fr-p-1v">
+        <a href="https://apps.apple.com/fr/app/jagis/id6504984321" target="_blank" class="no_blank">
+          <img src="/bouton-app-store.svg" alt="Télécharger dans l'App Store" class="display-block full-width" />
+        </a>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-  import '@gouvfr/dsfr/dist/component/tooltip/tooltip.min.css';
   import { RouteCompteName } from '@/router/compte/routeCompteName';
 </script>

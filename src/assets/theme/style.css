@@ -512,6 +512,10 @@ h2 {
   overflow: hidden;
 }
 
+.no_blank::after {
+  display: none;
+}
+
 @media print {
   .print-hidden {
     display: none;
