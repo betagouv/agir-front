@@ -91,6 +91,50 @@
                 Agir
               </router-link>
             </li>
+            <li class="fr-nav__item" data-fr-js-navigation-item="true">
+              <router-link
+                class="fr-nav__link"
+                :to="{ name: RouteUniversName.UNIVERS, params: { id: 'alimentation' } }"
+                :aria-current="
+                  route.name === RouteUniversName.UNIVERS && route.params.id === 'alimentation' ? 'page' : null
+                "
+              >
+                Cuisine
+              </router-link>
+            </li>
+            <li class="fr-nav__item" data-fr-js-navigation-item="true">
+              <router-link
+                class="fr-nav__link"
+                :to="{ name: RouteUniversName.UNIVERS, params: { id: 'logement' } }"
+                :aria-current="
+                  route.name === RouteUniversName.UNIVERS && route.params.id === 'logement' ? 'page' : null
+                "
+              >
+                Logement
+              </router-link>
+            </li>
+            <li class="fr-nav__item" data-fr-js-navigation-item="true">
+              <router-link
+                class="fr-nav__link"
+                :to="{ name: RouteUniversName.UNIVERS, params: { id: 'consommation' } }"
+                :aria-current="
+                  route.name === RouteUniversName.UNIVERS && route.params.id === 'consommation' ? 'page' : null
+                "
+              >
+                Consommation
+              </router-link>
+            </li>
+            <li class="fr-nav__item" data-fr-js-navigation-item="true">
+              <router-link
+                class="fr-nav__link"
+                :to="{ name: RouteUniversName.UNIVERS, params: { id: 'transport' } }"
+                :aria-current="
+                  route.name === RouteUniversName.UNIVERS && route.params.id === 'transport' ? 'page' : null
+                "
+              >
+                Transport
+              </router-link>
+            </li>
             <li
               v-if="utilisateurStore().utilisateur.fonctionnalitesDebloquees.includes(Fonctionnalites.AIDES)"
               class="fr-nav__item"
@@ -146,6 +190,7 @@
   import { RouteCompteName } from '@/router/compte/routeCompteName';
   import { RouteAidesName } from '@/router/aides/routeAidesName';
   import Cookies from 'js-cookie';
+  import { RouteUniversName } from '@/router/univers/routes';
 
   const route = useRoute();
   const store = utilisateurStore();

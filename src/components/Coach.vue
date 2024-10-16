@@ -14,31 +14,9 @@
         </div>
       </div>
     </div>
-
-    <section v-if="universViewModel" id="univers" class="fr-py-3w">
-      <div class="fr-container">
-        <CoachUnivers :universViewModel="universViewModel" />
-      </div>
-    </section>
   </div>
 
-  <section
-    v-if="utilisateurStore().utilisateur.fonctionnalitesDebloquees.includes(Fonctionnalites.AIDES)"
-    class="fr-py-8w position--relative"
-  >
-    <div class="section--outils">
-      <img src="/ic_outils.svg" alt="" />
-    </div>
-    <div class="fr-container">
-      <h2 class="fr-h2 text--center fr-mb-5w">Les outils pour vous aider</h2>
-      <div class="fr-grid-row flex-space-between section--outils-separator">
-        <CoachAides class="fr-col-lg-5 fr-col-12 fr-mb-4w" />
-        <CoachServices class="fr-col-lg-5 fr-col-12" />
-      </div>
-    </div>
-  </section>
-
-  <section id="recommandations" class="fr-py-6w fr-background-contrast--grey">
+  <section id="recommandations" class="fr-py-6w">
     <div class="fr-container" v-if="!isLoading">
       <h2 class="fr-h3 fr-mb-1w">Articles et quiz recommandés pour vous</h2>
       <p class="fr-text--md">
@@ -61,6 +39,23 @@
       <CarteSkeleton />
     </div>
   </section>
+
+  <section
+    v-if="utilisateurStore().utilisateur.fonctionnalitesDebloquees.includes(Fonctionnalites.AIDES)"
+    class="fr-py-8w background--white position--relative"
+  >
+    <div class="section--outils">
+      <img src="/ic_outils.svg" alt="" />
+    </div>
+    <div class="fr-container">
+      <h2 class="fr-h2 text--center fr-mb-5w">Les outils pour vous aider</h2>
+      <div class="fr-grid-row flex-space-between section--outils-separator">
+        <CoachAides class="fr-col-lg-5 fr-col-12 fr-mb-4w" />
+        <CoachServices class="fr-col-lg-5 fr-col-12" />
+      </div>
+    </div>
+  </section>
+
   <section class="fr-py-6w background--image--coach">
     <div class="fr-container">
       <CoachContact />
@@ -76,7 +71,6 @@
   import CoachContact from '@/components/custom/Coach/CoachContact.vue';
   import CoachServices from '@/components/custom/Coach/CoachServices.vue';
   import CoachToDo from '@/components/custom/Coach/CoachToDo.vue';
-  import CoachUnivers from '@/components/custom/Coach/CoachUnivers.vue';
   import {
     RecommandationPersonnaliseeViewModel,
     RecommandationsPersonnaliseesPresenterImpl,
@@ -87,9 +81,6 @@
   import { ToDoListRepositoryAxios } from '@/domaines/toDoList/adapters/toDoList.repository.axios';
   import { RecupererToDoListUsecase } from '@/domaines/toDoList/recupererToDoList.usecase';
   import { ToDoListEvent, ToDoListEventBusImpl } from '@/domaines/toDoList/toDoListEventBusImpl';
-  import { ListeUniversPresenterImpl, UniversViewModel } from '@/domaines/univers/adapters/listeUnivers.presenter.impl';
-  import { UniversRepositoryAxios } from '@/domaines/univers/adapters/univers.repository.axios';
-  import { RecupererListeUniversUsecase } from '@/domaines/univers/recupererListeUnivers.usecase';
   import { RouteCoachName } from '@/router/coach/routeCoachName';
   import { RouteCompteName } from '@/router/compte/routeCompteName';
   import { Fonctionnalites } from '@/shell/fonctionnalitesEnum';
@@ -98,7 +89,6 @@
 
   const isLoading = ref<boolean>(true);
   const todoList = ref<TodoListViewModel>();
-  const universViewModel = ref<UniversViewModel[]>();
   const store = utilisateurStore();
   const recommandationsPersonnaliseesViewModel = ref<RecommandationPersonnaliseeViewModel>();
 
@@ -120,7 +110,6 @@
       new RecommandationsPersonnaliseesRepositoryAxios(),
     );
     const chargerTodoListUsecase = new RecupererToDoListUsecase(new ToDoListRepositoryAxios());
-    const chargerUniversUsecase = new RecupererListeUniversUsecase(new UniversRepositoryAxios());
 
     ToDoListEventBusImpl.getInstance().subscribe(subscriberName, ToDoListEvent.TODO_POINTS_ONT_ETE_RECUPERE, () => {
       chargerTodoListUsecase.execute(idUtilisateur, new ToDoListPresenterImpl(mapValueTodo));
@@ -136,10 +125,6 @@
 
     ToDoListEventBusImpl.getInstance().subscribe(subscriberName, ToDoListEvent.TODO_A_ETE_TERMINEE, () => {
       chargerTodoListUsecase.execute(idUtilisateur, new ToDoListPresenterImpl(mapValueTodo));
-      chargerUniversUsecase.execute(
-        idUtilisateur,
-        new ListeUniversPresenterImpl(viewModel => (universViewModel.value = viewModel.univers)),
-      );
     });
 
     Promise.all([
@@ -148,10 +133,6 @@
         new RecommandationsPersonnaliseesPresenterImpl(onRecommandationsPretesAAfficher),
       ),
       chargerTodoListUsecase.execute(idUtilisateur, new ToDoListPresenterImpl(mapValueTodo)),
-      chargerUniversUsecase.execute(
-        idUtilisateur,
-        new ListeUniversPresenterImpl(viewModel => (universViewModel.value = viewModel.univers)),
-      ),
     ])
       .then(() => {
         isLoading.value = false;
