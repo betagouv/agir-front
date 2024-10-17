@@ -1,11 +1,13 @@
 <template>
   <div class="fr-grid-row fr-grid-row--gutters fr-py-4w">
     <div class="fr-col-12 fr-col-md-9">
-      <BilanCarboneHebdo
-        class="fr-mb-4w"
-        :impact-kg-annuel="bilanCarboneViewModel.impactKgAnnuel"
-        :impact-kg-hebdomadaire="bilanCarboneViewModel.impactKgHebdomadaire"
-      />
+      <div class="fr-col-md-9">
+        <BilanCarboneProgressBar
+          :impact-tonne-annuel="bilanCarboneViewModel.nombreDeTonnesAnnuel"
+          :pourcentage-progess-bar="bilanCarboneViewModel.pourcentageProgessBar"
+          class="fr-mb-4w"
+        />
+      </div>
       <h2>Mes principaux postes d'émission</h2>
       <ol>
         <li v-for="top in bilanCarboneViewModel.top3" :key="top.label" class="fr-text--xl fr-text--bold fr-ml-2v">
@@ -22,7 +24,7 @@
         </li>
       </ol>
       <h2>Voir le détail</h2>
-      <div v-for="univers in bilanCarboneViewModel.univers" :key="univers.label" class="fr-col-12">
+      <div v-for="univers in bilanCarboneViewModel.univers" :key="univers.label" class="fr-col-12 fr-col-md-9">
         <Accordeon :name-id="univers.label">
           <template v-slot:titre>
             <span class="fr-grid-row flex-space-between full-width">
@@ -80,7 +82,7 @@
 <script setup lang="ts">
   import Accordeon from '@/components/custom/Aides/AccordeonAides.vue';
   import BarreDeProgression from '@/components/custom/BarreDeProgression.vue';
-  import BilanCarboneHebdo from '@/components/custom/BilanCarbone/BilanCarboneHebdo.vue';
+  import BilanCarboneProgressBar from '@/components/custom/BilanCarbone/BilanCarboneProgressBar.vue';
   import ServiceAside from '@/components/custom/Service/ServiceAside.vue';
   import { BilanCarboneCompletViewModel } from '@/domaines/bilanCarbone/adapters/bilanCarbone.presenter.impl';
 
