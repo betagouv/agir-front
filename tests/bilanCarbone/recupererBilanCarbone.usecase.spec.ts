@@ -13,7 +13,7 @@ describe('Fichier de tests concernant le chargement du bilan carbone', () => {
       new BilanCarboneRepositoryMock({
         pourcentageCompletionTotal: 100,
         bilanComplet: {
-          impactKgAnnuel: 8898.031054479543,
+          impactKgAnnuel: 9600,
           univers: [
             {
               universId: 'transport',
@@ -98,11 +98,7 @@ describe('Fichier de tests concernant le chargement du bilan carbone', () => {
         titre: 'Mon bilan <span class="text--bleu">environnemental</span>',
         impactKgAnnuel: {
           unite: 'tonnes',
-          valeur: '8.9',
-        },
-        impactKgHebdomadaire: {
-          unite: 'kg',
-          valeur: '171 ',
+          valeur: '9.6',
         },
         top3: [
           {
@@ -182,6 +178,8 @@ describe('Fichier de tests concernant le chargement du bilan carbone', () => {
             pourcentage: 12,
           },
         ],
+        pourcentageProgessBar: 80,
+        nombreDeTonnesAnnuel: '9,6',
       });
     }
   });

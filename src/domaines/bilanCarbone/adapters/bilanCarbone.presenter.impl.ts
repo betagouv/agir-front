@@ -18,11 +18,9 @@ export interface BilanCarboneViewModelBase {
   titre: string;
 }
 export interface BilanCarboneCompletViewModel extends BilanCarboneViewModelBase {
+  pourcentageProgessBar: number;
+  nombreDeTonnesAnnuel: string;
   impactKgAnnuel: {
-    valeur: string;
-    unite: string;
-  };
-  impactKgHebdomadaire: {
     valeur: string;
     unite: string;
   };
@@ -65,12 +63,11 @@ export class BilanCarbonePresenterImpl implements BilanCarbonePresenter {
   ) {}
 
   presenteBilanComplet(bilanCarbone: BilanCompletCarbone): void {
-    const NOMBRE_SEMAINES_PAR_AN = 52;
-
     this.bilanCarboneViewModel({
       titre: 'Mon bilan <span class="text--bleu">environnemental</span>',
+      pourcentageProgessBar: this.calculPourcentageProgressBar(bilanCarbone.impactKgAnnuel),
+      nombreDeTonnesAnnuel: this.calculTonnesAnnuel(bilanCarbone.impactKgAnnuel),
       impactKgAnnuel: this.formateKg(bilanCarbone.impactKgAnnuel),
-      impactKgHebdomadaire: this.formateKg(bilanCarbone.impactKgAnnuel / NOMBRE_SEMAINES_PAR_AN),
       univers: bilanCarbone.univers.map(univers => ({
         label: univers.universLabel,
         impactKgAnnuel: this.formateKg(univers.impactKgAnnuel),
@@ -183,5 +180,16 @@ export class BilanCarbonePresenterImpl implements BilanCarbonePresenter {
           classes: 'tag-impact-tres-fort',
         };
     }
+  }
+
+  private calculPourcentageProgressBar(nombreDeKg: number): number {
+    const maxKg = 12000;
+    const pourcentage = (nombreDeKg / maxKg) * 100;
+
+    return Math.min(Math.max(pourcentage, 0), 100);
+  }
+
+  private calculTonnesAnnuel(nombreDeKg: number): string {
+    return (nombreDeKg / 1000).toLocaleString('fr-FR', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
   }
 }
