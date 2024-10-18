@@ -12,13 +12,18 @@ export function createSentry(app: App, router: Router) {
     replaysOnErrorSampleRate: import.meta.env.VITE_SENTRY_REPLAYS_ON_ERROR_SAMPLE_RATE || 0.0,
     release: __APP_VERSION__ || '0.0.0',
     environment: import.meta.env.VITE_ENV || 'local',
-    ignoreTransactions: ['session-expiree'],
     beforeSend(event) {
       if (import.meta.env.VITE_ENV === 'local') {
         return null;
       }
       if (event.transaction && event.transaction === '/session-expiree') {
         return null;
+      }
+      if (event.exception) {
+        const exceptionMessage = event.exception.values[0]?.value || '';
+        if (exceptionMessage.includes('session-expiree')) {
+          return null;
+        }
       }
       return event;
     },
