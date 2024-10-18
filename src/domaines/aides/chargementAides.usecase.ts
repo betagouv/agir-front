@@ -2,6 +2,10 @@ import { ChargementAidesPresenter } from '@/domaines/aides/ports/chargementAides
 import { ChargementAidesRepository } from '@/domaines/aides/ports/chargementAides.repository';
 
 export interface Aides {
+  utilisateurEstCouvert: boolean;
+  aides: Aide[];
+}
+export interface Aide {
   id: string;
   titre: string;
   categorie: string;

@@ -1,14 +1,15 @@
-import { Aides } from '@/domaines/aides/chargementAides.usecase';
+import { Aide, Aides } from '@/domaines/aides/chargementAides.usecase';
 import {
   ChargementAidesPresenter,
   AideViewModel,
   AidesViewModel,
+  AidesAvecCouvertureViewModel,
 } from '@/domaines/aides/ports/chargementAides.presenter';
 
 export class ChargementAidesPresenterImpl implements ChargementAidesPresenter {
-  constructor(private _viewModel: (AidesViewModel: AidesViewModel) => void) {}
+  constructor(private _viewModel: (vm: AidesAvecCouvertureViewModel) => void) {}
 
-  private groupeParCategorie = (aides: Aides[]): AidesViewModel => {
+  private groupeParCategorie = (aides: Aide[]): AidesViewModel => {
     const map: AidesViewModel = {};
 
     aides.forEach(aide => {
@@ -40,9 +41,12 @@ export class ChargementAidesPresenterImpl implements ChargementAidesPresenter {
     }).format(montantMaximum)}`;
   }
 
-  presente(aides: Aides[]): void {
-    const viewModel = this.groupeParCategorie(aides);
+  presente(aides: Aides): void {
+    const viewModel = this.groupeParCategorie(aides.aides);
 
-    this._viewModel(viewModel);
+    this._viewModel({
+      utilisateurEstCouvert: aides.utilisateurEstCouvert,
+      aides: viewModel,
+    });
   }
 }
