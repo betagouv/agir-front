@@ -82,7 +82,7 @@
         <div class="fr-header__menu-links"></div>
         <nav class="fr-nav" id="navigation" role="navigation" aria-label="Menu principal" data-fr-js-navigation="true">
           <ul class="fr-nav__list" v-if="utilisateurStore().utilisateur.onboardingAEteRealise">
-            <li class="fr-nav__item toto" data-fr-js-navigation-item="true">
+            <li class="fr-nav__item nav__item--separateur" data-fr-js-navigation-item="true">
               <router-link
                 class="fr-nav__link fr-pb-0"
                 :to="{ name: RouteCoachName.COACH }"
@@ -90,9 +90,6 @@
               >
                 <img class="fr-p-0" src="/icons/buildings/home-4-line.svg" alt="Accueil" />
               </router-link>
-            </li>
-            <li aria-hidden="true" class="fr-hidden fr-unhidden-lg fr-grid-row align-items--center fr-mx-2w">
-              <span class="text-disabled-grey">|</span>
             </li>
             <li class="fr-nav__item" data-fr-js-navigation-item="true">
               <router-link
@@ -145,7 +142,7 @@
                 {{ MenuUnivers.getUniversData(ClefTechniqueAPI.consommation).labelDansLeMenu }}
               </router-link>
             </li>
-            <li class="fr-nav__item" data-fr-js-navigation-item="true">
+            <li class="fr-nav__item nav__item--separateur" data-fr-js-navigation-item="true">
               <router-link
                 class="fr-nav__link"
                 :to="{
@@ -270,12 +267,23 @@
     .fr-header__body-row {
       padding: 1rem 0;
     }
-  }
 
-  .toto {
-    border-right: 1px solid #d8d8d8;
-  }
+    .nav__item--separateur {
+      position: relative;
+      padding-right: 1rem;
+      margin-right: 1rem;
+    }
 
-  .toto::after {
+    .nav__item--separateur::after {
+      --hauteur-separateur: 1.25rem;
+
+      content: '';
+      position: absolute;
+      right: 0;
+      height: var(--hauteur-separateur);
+      width: 1px;
+      background-color: #dbcdbd;
+      top: calc(50% - var(--hauteur-separateur) / 2);
+    }
   }
 </style>
