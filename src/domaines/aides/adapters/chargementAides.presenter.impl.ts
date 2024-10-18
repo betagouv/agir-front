@@ -1,4 +1,4 @@
-import { Aides } from '@/domaines/aides/chargementAides.usecase';
+import { Aide, Aides } from '@/domaines/aides/chargementAides.usecase';
 import {
   ChargementAidesPresenter,
   AideViewModel,
@@ -9,7 +9,7 @@ import {
 export class ChargementAidesPresenterImpl implements ChargementAidesPresenter {
   constructor(private _viewModel: (vm: AidesAvecCouvertureViewModel) => void) {}
 
-  private groupeParCategorie = (aides: Aides[]): AidesViewModel => {
+  private groupeParCategorie = (aides: Aide[]): AidesViewModel => {
     const map: AidesViewModel = {};
 
     aides.forEach(aide => {
