@@ -1,5 +1,32 @@
 # Changelog
 
+## [1.27.0](https://github.com/betagouv/agir-front/compare/v1.26.0...v1.27.0) (2024-10-18)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* ajout progress bar au bilan carbone complet ([#691](https://github.com/betagouv/agir-front/issues/691)) ([a70e90e](https://github.com/betagouv/agir-front/commit/a70e90e6424e5a68af869221686c2f7de5c59fb9))
+
+
+### 🐛 Corrections de bogues
+
+* affichage du disclaimer dans les aides ([#693](https://github.com/betagouv/agir-front/issues/693)) ([7ccf039](https://github.com/betagouv/agir-front/commit/7ccf0390c8cb23de79966b9f81fb9ae34e2eb47d))
+
+
+### 👷 Autres changements
+
+* ajout du dossier .well-known pour le mobile ([#694](https://github.com/betagouv/agir-front/issues/694)) ([83cbba9](https://github.com/betagouv/agir-front/commit/83cbba9c8b3b9d0016b16f021a1733fcc90d228f))
+* Bump @playwright/test from 1.47.2 to 1.48.0 ([#679](https://github.com/betagouv/agir-front/issues/679)) ([30fa1da](https://github.com/betagouv/agir-front/commit/30fa1dad0d929165139850521ba56da23b203b82))
+* Bump @types/node from 22.7.4 to 22.7.5 ([#680](https://github.com/betagouv/agir-front/issues/680)) ([9182654](https://github.com/betagouv/agir-front/commit/91826543088e421a131f8f739aefea2a1986c8e0))
+* Bump actions/checkout from 2 to 4 ([#698](https://github.com/betagouv/agir-front/issues/698)) ([0145334](https://github.com/betagouv/agir-front/commit/01453342aa8a5ff3ecfabdc27d51c76a79b34ac6))
+* Bump actions/setup-node from 2 to 4 ([#699](https://github.com/betagouv/agir-front/issues/699)) ([6f03e9a](https://github.com/betagouv/agir-front/commit/6f03e9a840f71a0f39730166100f5ecdb624e218))
+* Bump actions/upload-artifact from 3 to 4 ([#696](https://github.com/betagouv/agir-front/issues/696)) ([a740dea](https://github.com/betagouv/agir-front/commit/a740dea8bf4a4c5a1516a87fcdd7ba61b3448260))
+* Bump chart.js from 4.4.4 to 4.4.5 ([#701](https://github.com/betagouv/agir-front/issues/701)) ([6a39090](https://github.com/betagouv/agir-front/commit/6a39090002da40dad6e9dd4a0439a4ca9da8015f))
+* Bump husky from 9.1.4 to 9.1.6 ([#700](https://github.com/betagouv/agir-front/issues/700)) ([5b39fba](https://github.com/betagouv/agir-front/commit/5b39fba7f2903fa5203eb599dc96f5bc132c2317))
+* Bump release-please from 16.14.1 to 16.14.3 ([#702](https://github.com/betagouv/agir-front/issues/702)) ([bbf1390](https://github.com/betagouv/agir-front/commit/bbf13904c94682fefcbec87ec2dc7d691cd75d41))
+* **dependabot:** ajouter github-actions ([#692](https://github.com/betagouv/agir-front/issues/692)) ([aa7a761](https://github.com/betagouv/agir-front/commit/aa7a761af009f1960a9c24177647e571a7f1128e))
+* optimiser les SVGs ([#689](https://github.com/betagouv/agir-front/issues/689)) ([a4a1b43](https://github.com/betagouv/agir-front/commit/a4a1b43d52e6fea87bbef0c90def1f8410d6f10e))
+
 ## [1.26.0](https://github.com/betagouv/agir-front/compare/v1.25.0...v1.26.0) (2024-10-16)
 
 
