@@ -19,7 +19,7 @@ export function createSentry(app: App, router: Router) {
       if (event.transaction && event.transaction === '/session-expiree') {
         return null;
       }
-      if (event.exception) {
+      if (event.exception && event.exception.values) {
         const exceptionMessage = event.exception.values[0]?.value || '';
         if (exceptionMessage.includes('session-expiree')) {
           return null;
