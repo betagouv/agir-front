@@ -1,5 +1,1 @@
-<svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g id="Ic&#195;&#180;ne">
-<path id="Ic&#195;&#180;ne_2" fill-rule="evenodd" clip-rule="evenodd" d="M12 18.9099L4.94698 22.8579L6.52198 14.9299L0.586975 9.4419L8.61398 8.4899L12 1.1499L15.386 8.4899L23.413 9.4419L17.478 14.9299L19.053 22.8579L12 18.9099Z" fill="#000091"/>
-</g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" fill="none"><path fill="#000091" fill-rule="evenodd" d="m12 18.91-7.053 3.948 1.575-7.928L.587 9.442l8.027-.952L12 1.15l3.386 7.34 8.027.952-5.935 5.488 1.575 7.928z" clip-rule="evenodd"/></svg>
