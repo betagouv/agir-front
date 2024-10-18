@@ -19,7 +19,7 @@
     {
       picto: 'fr-icon-money-euro-circle-line',
       titre: 'Des aides financières',
-      description: 'Découvrez tous les bons plans et subventions auxquelles vous avez droit',
+      description: 'Découvrez tous les bons plans et subventions auxquels vous avez droit',
     },
     {
       picto: 'fr-icon-stethoscope-line',
