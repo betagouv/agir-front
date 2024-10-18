@@ -56,8 +56,8 @@
               >les conditions générales d'utilisation
             </router-link>
             <p>
-              Utiliser les informations issues de mon bilan <span class="text--bold"> Nos Gestes Climat</span> pour
-              profiter d’une expérience d’usage améliorée
+              et de transférer les informations issues de mon bilan
+              <span class="text--bold">Nos Gestes Climat</span> pour profiter d’une expérience d’usage améliorée
             </p>
           </label>
         </div>
