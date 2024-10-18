@@ -4018,7 +4018,7 @@ jsdom@25.0.1:
     ws "^8.18.0"
     xml-name-validator "^5.0.0"
 
-jsep@^1.3.8:
+jsep@^1.3.9:
   version "1.3.9"
   resolved "https://registry.yarnpkg.com/jsep/-/jsep-1.3.9.tgz#8ce42df80ee9c1b39e52d0dd062a465342f35440"
   integrity sha512-i1rBX5N7VPl0eYb6+mHNp52sEuaS2Wi8CDYx1X5sn9naevL78+265XJqy1qENEk7mRKwS06NHpUqiBwR7qeodw==
@@ -4074,14 +4074,14 @@ jsonfile@^6.0.1:
   optionalDependencies:
     graceful-fs "^4.1.6"
 
-jsonpath-plus@^9.0.0:
-  version "9.0.0"
-  resolved "https://registry.yarnpkg.com/jsonpath-plus/-/jsonpath-plus-9.0.0.tgz#bb8703ee481531142bca8dee9a42fe72b8358a7f"
-  integrity sha512-bqE77VIDStrOTV/czspZhTn+o27Xx9ZJRGVkdVShEtPoqsIx5yALv3lWVU6y+PqYvWPJNWE7ORCQheQkEe0DDA==
+jsonpath-plus@^10.0.0:
+  version "10.0.6"
+  resolved "https://registry.yarnpkg.com/jsonpath-plus/-/jsonpath-plus-10.0.6.tgz#09c4db1670a533c3022ec3f59df61a33de975a00"
+  integrity sha512-Q0KCash90S0WQnPnE/W0uVXQSww4NkO34COfs+gbq0fk+Kv03FYpZ+uU2I7soLLaS4d/ywsm9PxplZsTMmfBmg==
   dependencies:
     "@jsep-plugin/assignment" "^1.2.1"
     "@jsep-plugin/regex" "^1.0.3"
-    jsep "^1.3.8"
+    jsep "^1.3.9"
 
 jwt-decode@4.0.0:
   version "4.0.0"
@@ -5205,10 +5205,10 @@ regexp.prototype.flags@^1.5.1, regexp.prototype.flags@^1.5.2:
     es-errors "^1.3.0"
     set-function-name "^2.0.1"
 
-release-please@16.14.1:
-  version "16.14.1"
-  resolved "https://registry.yarnpkg.com/release-please/-/release-please-16.14.1.tgz#20a40d20dd4f509e70e3a60568ec07e16b01a8a9"
-  integrity sha512-M02Jf28saDUKstt/88eVBQOFRJOGJzuJsJrpYmicis657q97qHIK+LKu/Xk31SDTw3rNcHui/skHVL/IvAxhJQ==
+release-please@16.14.3:
+  version "16.14.3"
+  resolved "https://registry.yarnpkg.com/release-please/-/release-please-16.14.3.tgz#f49c9c30933d923ae96f4b8ab54afad1b1a5fef9"
+  integrity sha512-eOhuIK0P4nZRxk1AVgKkKBKyn/StPuON1nYpy9TozlxuLLrcaSrN5A2Zc5lCLEG38de1y4qAAUBy0DEkJUgxBg==
   dependencies:
     "@conventional-commits/parser" "^0.4.1"
     "@google-automations/git-file-utils" "^2.0.0"
@@ -5230,7 +5230,7 @@ release-please@16.14.1:
     http-proxy-agent "^7.0.0"
     https-proxy-agent "^7.0.0"
     js-yaml "^4.0.0"
-    jsonpath-plus "^9.0.0"
+    jsonpath-plus "^10.0.0"
     node-html-parser "^6.0.0"
     parse-github-repo-url "^1.4.1"
     semver "^7.5.3"
