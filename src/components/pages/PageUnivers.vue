@@ -20,7 +20,7 @@
   <div v-if="!isLoading">
     <section id="thematiques" v-if="thematiquesViewModel">
       <div class="fr-container">
-        <ThematiquesListe :univers-id="useRoute().params.id.toString()" :thematiques="thematiquesViewModel" />
+        <ThematiquesListe :univers-id="universId" :thematiques="thematiquesViewModel" />
       </div>
     </section>
 
@@ -109,6 +109,7 @@
   import { UniversRepositoryAxios } from '@/domaines/univers/adapters/univers.repository.axios';
   import { RecupererUniversUsecase } from '@/domaines/univers/recupererUnivers.usecase';
   import { Fonctionnalites } from '@/shell/fonctionnalitesEnum';
+  import { MenuUnivers } from '@/shell/MenuUnivers';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const store = utilisateurStore();
@@ -118,7 +119,7 @@
   const universViewModel = ref<UniversViewModel>();
   const defisViewModel = ref<DefiDescriptionViewModel[]>();
   const servicesViewModel = ref<ServicesRechercheViewModel>();
-  let universId = useRoute().params.id.toString();
+  let universId = MenuUnivers.getFromUrl(useRoute().params.id as string)!.clefTechniqueAPI;
   const lancerChargementDesDonnees = () => {
     isLoading.value = true;
     const idUtilisateur = store.utilisateur.id;
@@ -167,7 +168,7 @@
   };
   onBeforeRouteUpdate((to, from, next) => {
     next();
-    universId = to.params.id.toString();
+    universId = MenuUnivers.getFromUrl(to.params.id as string)!.clefTechniqueAPI;
     lancerChargementDesDonnees();
   });
   onMounted(() => {
