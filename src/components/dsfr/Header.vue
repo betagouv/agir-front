@@ -84,11 +84,11 @@
           <ul class="fr-nav__list" v-if="utilisateurStore().utilisateur.onboardingAEteRealise">
             <li class="fr-nav__item" data-fr-js-navigation-item="true">
               <router-link
-                class="fr-nav__link"
+                class="fr-nav__link fr-pb-0"
                 :to="{ name: RouteCoachName.COACH }"
                 :aria-current="route.name === RouteCoachName.COACH ? 'page' : null"
               >
-                Agir
+                <img class="fr-p-0" src="/icons/buildings/home-4-line.svg" alt="Accueil" />
               </router-link>
             </li>
             <li class="fr-nav__item" data-fr-js-navigation-item="true">
