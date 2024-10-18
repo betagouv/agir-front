@@ -82,7 +82,7 @@
         <div class="fr-header__menu-links"></div>
         <nav class="fr-nav" id="navigation" role="navigation" aria-label="Menu principal" data-fr-js-navigation="true">
           <ul class="fr-nav__list" v-if="utilisateurStore().utilisateur.onboardingAEteRealise">
-            <li class="fr-nav__item" data-fr-js-navigation-item="true">
+            <li class="fr-nav__item toto" data-fr-js-navigation-item="true">
               <router-link
                 class="fr-nav__link fr-pb-0"
                 :to="{ name: RouteCoachName.COACH }"
@@ -91,48 +91,75 @@
                 <img class="fr-p-0" src="/icons/buildings/home-4-line.svg" alt="Accueil" />
               </router-link>
             </li>
+            <li aria-hidden="true" class="fr-hidden fr-unhidden-lg fr-grid-row align-items--center fr-mx-2w">
+              <span class="text-disabled-grey">|</span>
+            </li>
             <li class="fr-nav__item" data-fr-js-navigation-item="true">
               <router-link
                 class="fr-nav__link"
-                :to="{ name: RouteUniversName.UNIVERS, params: { id: 'alimentation' } }"
+                :to="{
+                  name: RouteUniversName.UNIVERS,
+                  params: { id: MenuUnivers.getUniversData(ClefTechniqueAPI.alimentation).url },
+                }"
                 :aria-current="
-                  route.name === RouteUniversName.UNIVERS && route.params.id === 'alimentation' ? 'page' : null
+                  route.name === RouteUniversName.UNIVERS &&
+                  route.params.id === MenuUnivers.getUniversData(ClefTechniqueAPI.alimentation).url
+                    ? 'page'
+                    : null
                 "
               >
-                Cuisine
+                {{ MenuUnivers.getUniversData(ClefTechniqueAPI.alimentation).labelDansLeMenu }}
               </router-link>
             </li>
             <li class="fr-nav__item" data-fr-js-navigation-item="true">
               <router-link
                 class="fr-nav__link"
-                :to="{ name: RouteUniversName.UNIVERS, params: { id: 'logement' } }"
+                :to="{
+                  name: RouteUniversName.UNIVERS,
+                  params: { id: MenuUnivers.getUniversData(ClefTechniqueAPI.logement).url },
+                }"
                 :aria-current="
-                  route.name === RouteUniversName.UNIVERS && route.params.id === 'logement' ? 'page' : null
+                  route.name === RouteUniversName.UNIVERS &&
+                  route.params.id === MenuUnivers.getUniversData(ClefTechniqueAPI.logement).url
+                    ? 'page'
+                    : null
                 "
               >
-                Logement
+                {{ MenuUnivers.getUniversData(ClefTechniqueAPI.logement).labelDansLeMenu }}
               </router-link>
             </li>
             <li class="fr-nav__item" data-fr-js-navigation-item="true">
               <router-link
                 class="fr-nav__link"
-                :to="{ name: RouteUniversName.UNIVERS, params: { id: 'consommation' } }"
+                :to="{
+                  name: RouteUniversName.UNIVERS,
+                  params: { id: MenuUnivers.getUniversData(ClefTechniqueAPI.consommation).url },
+                }"
                 :aria-current="
-                  route.name === RouteUniversName.UNIVERS && route.params.id === 'consommation' ? 'page' : null
+                  route.name === RouteUniversName.UNIVERS &&
+                  route.params.id === MenuUnivers.getUniversData(ClefTechniqueAPI.consommation).url
+                    ? 'page'
+                    : null
                 "
               >
-                Consommation
+                {{ MenuUnivers.getUniversData(ClefTechniqueAPI.consommation).labelDansLeMenu }}
               </router-link>
             </li>
             <li class="fr-nav__item" data-fr-js-navigation-item="true">
               <router-link
                 class="fr-nav__link"
-                :to="{ name: RouteUniversName.UNIVERS, params: { id: 'transport' } }"
+                :to="{
+                  name: RouteUniversName.UNIVERS,
+                  params: { id: MenuUnivers.getUniversData(ClefTechniqueAPI.transports).url },
+                }"
                 :aria-current="
-                  route.name === RouteUniversName.UNIVERS && route.params.id === 'transport' ? 'page' : null
+                  route.name === RouteUniversName.UNIVERS &&
+                  route.params.id === MenuUnivers.getUniversData(ClefTechniqueAPI.transports).url
+                    ? 'page'
+                    : null
                 "
               >
-                Transport
+                {{ MenuUnivers.getUniversData(ClefTechniqueAPI.transports).labelDansLeMenu }}
               </router-link>
             </li>
             <li
@@ -191,6 +218,7 @@
   import { RouteAidesName } from '@/router/aides/routeAidesName';
   import Cookies from 'js-cookie';
   import { RouteUniversName } from '@/router/univers/routes';
+  import { ClefTechniqueAPI, MenuUnivers } from '@/shell/MenuUnivers';
 
   const route = useRoute();
   const store = utilisateurStore();
@@ -242,5 +270,12 @@
     .fr-header__body-row {
       padding: 1rem 0;
     }
+  }
+
+  .toto {
+    border-right: 1px solid #d8d8d8;
+  }
+
+  .toto::after {
   }
 </style>
