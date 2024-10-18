@@ -14,6 +14,11 @@ export interface AidesViewModel {
   [key: AideViewModel['categorie']]: AideViewModel[];
 }
 
+export interface AidesAvecCouvertureViewModel {
+  utilisateurEstCouvert: boolean;
+  aides: AidesViewModel;
+}
+
 export interface ChargementAidesPresenter {
-  presente(aides: Aides[]): void;
+  presente(aides: Aides): void;
 }

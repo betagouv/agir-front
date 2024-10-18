@@ -14,7 +14,6 @@
 
 <script setup lang="ts">
   import '@gouvfr/dsfr/dist/component/notice/notice.min.css';
-  import { utilisateurStore } from '@/store/utilisateur';
 
   defineProps<{
     titre: string;

@@ -11,9 +11,9 @@ export interface AideNonGroupeeViewModel {
 export class ChargementAidesNonGroupeesPresenterImpl implements ChargementAidesPresenter {
   constructor(private _viewModel: (aides: AideNonGroupeeViewModel[]) => void) {}
 
-  presente(aides: Aides[]): void {
+  presente(aides: Aides): void {
     this._viewModel(
-      aides.slice(0, 5).map(aide => ({
+      aides.aides.slice(0, 5).map(aide => ({
         id: aide.id,
         titre: aide.titre,
         isSimulateur: aide.isSimulateur,
