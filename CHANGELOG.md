@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.27.0](https://github.com/betagouv/agir-front/compare/v1.26.0...v1.27.0) (2024-10-19)
+
+
+### Features
+
+* ajout progress bar au bilan carbone complet ([#691](https://github.com/betagouv/agir-front/issues/691)) ([a70e90e](https://github.com/betagouv/agir-front/commit/a70e90e6424e5a68af869221686c2f7de5c59fb9))
+* modification création de compte depuis NGC ([#703](https://github.com/betagouv/agir-front/issues/703)) ([7b5172f](https://github.com/betagouv/agir-front/commit/7b5172f5df24a3f3b6fab217345dd761fc7445fc))
+
+
+### Bug Fixes
+
+* affichage du disclaimer dans les aides ([#693](https://github.com/betagouv/agir-front/issues/693)) ([7ccf039](https://github.com/betagouv/agir-front/commit/7ccf0390c8cb23de79966b9f81fb9ae34e2eb47d))
+
 ## [1.26.0](https://github.com/betagouv/agir-front/compare/v1.25.0...v1.26.0) (2024-10-16)
 
 
