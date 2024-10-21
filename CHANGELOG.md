@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.27.1](https://github.com/betagouv/agir-front/compare/v1.27.0...v1.27.1) (2024-10-21)
+
+
+### 🐛 Corrections de bogues
+
+* navigation vers les questions du bilan carbone ([#713](https://github.com/betagouv/agir-front/issues/713)) ([6d154aa](https://github.com/betagouv/agir-front/commit/6d154aa5df19c51f315f4a0b74b7e7f74c9bccc7))
+
 ## [1.27.0](https://github.com/betagouv/agir-front/compare/v1.26.0...v1.27.0) (2024-10-21)
 
 
