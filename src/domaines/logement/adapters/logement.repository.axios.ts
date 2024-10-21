@@ -59,7 +59,6 @@ export class LogementRepositoryAxios implements LogementRepository {
       type: logement.residence,
       proprietaire: logement.proprietaire,
       superficie: logement.superficie,
-      chauffage: logement.modeDeChauffage,
       plus_de_15_ans: logement.plusDeQuinzeAns,
       dpe: logement.dpe,
     });
@@ -78,7 +77,6 @@ export class LogementRepositoryAxios implements LogementRepository {
       residence: reponse.data.type,
       proprietaire: reponse.data.proprietaire,
       superficie: reponse.data.superficie,
-      modeDeChauffage: reponse.data.chauffage,
       plusDeQuinzeAns: reponse.data.plus_de_15_ans,
       dpe: reponse.data.dpe,
     };
