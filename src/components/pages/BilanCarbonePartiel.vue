@@ -28,7 +28,7 @@
             :est-termine="univers.estTermine"
             :nombre-de-questions="univers.nombreTotalDeQuestion"
             :progression="univers.pourcentageProgression"
-            :univers="univers.nomDeLunivers"
+            :univers="univers.clefUnivers"
           />
         </li>
       </ul>
