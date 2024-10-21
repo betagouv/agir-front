@@ -20,7 +20,6 @@ describe("Fichier de tests concernant l'enregistrement des informations du logem
       residence: TypeLogementApiModel.Appartement,
       superficie: SuperficieLogementApiModel.Superficie_150_Et_Plus,
       proprietaire: true,
-      modeDeChauffage: ChauffageLogementApiModel.Bois,
       plusDeQuinzeAns: false,
       dpe: DPELogementApiModel.B,
     };
@@ -40,7 +39,6 @@ describe("Fichier de tests concernant l'enregistrement des informations du logem
       residence: TypeLogementApiModel.Appartement,
       superficie: SuperficieLogementApiModel.Superficie_150_Et_Plus,
       proprietaire: true,
-      modeDeChauffage: ChauffageLogementApiModel.Bois,
       plusDeQuinzeAns: false,
       dpe: DPELogementApiModel.B,
     });
