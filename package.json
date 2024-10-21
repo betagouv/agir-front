@@ -20,7 +20,7 @@
   "dependencies": {
     "@gouvfr/dsfr": "1.11.2",
     "@hotjar/browser": "1.0.9",
-    "@sentry/vue": "8.33.1",
+    "@sentry/vue": "8.35.0",
     "@vue-leaflet/vue-leaflet": "^0.10.1",
     "chart.js": "4.4.5",
     "js-cookie": "3.0.5",
