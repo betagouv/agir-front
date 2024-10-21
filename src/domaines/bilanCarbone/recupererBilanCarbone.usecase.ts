@@ -39,6 +39,7 @@ export interface BilanPartielCarbone {
     estTermine: boolean;
     pourcentageProgression: number;
     nombreTotalDeQuestion: number;
+    clefUnivers: string;
   }[];
 }
 export interface BilanCarbone {

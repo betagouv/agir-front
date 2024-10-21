@@ -40,6 +40,7 @@ interface BilanCarboneApiModel {
       nombre_total_question: number;
       pourcentage_progression: number;
       univers_label: string;
+      univers: string;
     }[];
   };
 }
@@ -86,6 +87,7 @@ export class BilanCarboneRepositoryAxios implements BilanCarboneRepository {
           nombreTotalDeQuestion: lien.nombre_total_question,
           pourcentageProgression: lien.pourcentage_progression,
           urlImage: lien.image_url,
+          clefUnivers: lien.univers,
         })),
       },
     };

@@ -203,6 +203,7 @@ describe('Fichier de tests concernant le chargement du bilan carbone', () => {
               estTermine: false,
               pourcentageProgression: 80,
               nombreTotalDeQuestion: 10,
+              clefUnivers: 'transports',
             },
             {
               contentId: 'id2',
@@ -211,6 +212,7 @@ describe('Fichier de tests concernant le chargement du bilan carbone', () => {
               estTermine: true,
               pourcentageProgression: 100,
               nombreTotalDeQuestion: 10,
+              clefUnivers: 'alimentation',
             },
             {
               contentId: 'id3',
@@ -219,6 +221,7 @@ describe('Fichier de tests concernant le chargement du bilan carbone', () => {
               estTermine: true,
               pourcentageProgression: 100,
               nombreTotalDeQuestion: 10,
+              clefUnivers: 'logement',
             },
             {
               contentId: 'id4',
@@ -227,6 +230,7 @@ describe('Fichier de tests concernant le chargement du bilan carbone', () => {
               estTermine: true,
               pourcentageProgression: 100,
               nombreTotalDeQuestion: 10,
+              clefUnivers: 'consommation',
             },
           ],
         },
@@ -289,7 +293,7 @@ describe('Fichier de tests concernant le chargement du bilan carbone', () => {
             nombreTotalDeQuestion: 10,
             pourcentageProgression: 80,
             urlImage: 'url1',
-            nomDeLunivers: 'transports',
+            clefUnivers: 'transports',
           },
           {
             contentId: 'id2',
@@ -298,7 +302,7 @@ describe('Fichier de tests concernant le chargement du bilan carbone', () => {
             nombreTotalDeQuestion: 10,
             pourcentageProgression: 100,
             urlImage: 'url2',
-            nomDeLunivers: 'alimentation',
+            clefUnivers: 'alimentation',
           },
           {
             contentId: 'id3',
@@ -307,7 +311,7 @@ describe('Fichier de tests concernant le chargement du bilan carbone', () => {
             nombreTotalDeQuestion: 10,
             pourcentageProgression: 100,
             urlImage: 'url3',
-            nomDeLunivers: 'logement',
+            clefUnivers: 'logement',
           },
           {
             contentId: 'id4',
@@ -316,7 +320,7 @@ describe('Fichier de tests concernant le chargement du bilan carbone', () => {
             nombreTotalDeQuestion: 10,
             pourcentageProgression: 100,
             urlImage: 'url4',
-            nomDeLunivers: 'consommation',
+            clefUnivers: 'consommation',
           },
         ],
       });

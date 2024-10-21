@@ -52,7 +52,7 @@ export interface BilanCarbonePartielViewModel extends BilanCarboneViewModelBase 
     estTermine: boolean;
     pourcentageProgression: number;
     nombreTotalDeQuestion: number;
-    nomDeLunivers: string;
+    clefUnivers: string;
   }[];
 }
 
@@ -101,12 +101,6 @@ export class BilanCarbonePresenterImpl implements BilanCarbonePresenter {
   }
 
   presenteBilanPartiel(bilan: BilanPartielCarbone): void {
-    const mapUnivers: Map<number, string> = new Map([
-      [0, 'transports'],
-      [1, 'alimentation'],
-      [2, 'logement'],
-      [3, 'consommation'],
-    ]);
     this.bilanCarbonePartielViewModel({
       titre: 'Estimez mon <span class="text--bleu">bilan environnemental</span>',
       pourcentageCompletionTotal: bilan.pourcentageCompletionTotal,
@@ -132,8 +126,8 @@ export class BilanCarbonePresenterImpl implements BilanCarbonePresenter {
           progressBarStyle: this.determineProgressBar(bilan.consommation.niveau),
         },
       ],
-      universBilan: bilan.universBilan.map((univers, index) => ({
-        nomDeLunivers: mapUnivers.get(index) || '',
+      universBilan: bilan.universBilan.map(univers => ({
+        clefUnivers: univers.clefUnivers,
         contentId: univers.contentId,
         label: univers.label,
         urlImage: univers.urlImage,
