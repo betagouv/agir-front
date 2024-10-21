@@ -62,7 +62,7 @@ export class ServiceRechercheRecettesPresenterImpl implements ServiceRechercheRe
         nom: 'La fabrique à Menus',
         description: 'Pour vous aider jour après jour à manger varié et équilibré.',
         url: 'https://www.mangerbouger.fr/manger-mieux/la-fabrique-a-menus/',
-        logo: '/service-recettes-logo.webp',
+        logo: '/logo-manger-bouger.svg',
         screenshot: '/service-recettes.webp',
       },
       categories: serviceRechercheRecette.categories.map(elem => ({
