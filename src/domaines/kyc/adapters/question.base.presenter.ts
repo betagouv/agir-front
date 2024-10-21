@@ -91,6 +91,7 @@ export class QuestionViewModelBuilder {
         id: reponse.code,
         label: reponse.label,
         picto: reponse.image_url,
+        emoji: reponse.emoji,
         checked: reponse.valeur,
       }));
     } else {

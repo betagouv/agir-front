@@ -17,7 +17,8 @@ export interface ReponseKYCSimple {
 export interface ReponseMosaic<T> {
   reponse: {
     code: string;
-    image_url: string;
+    image_url?: string;
+    emoji?: string;
     label: string;
     valeur: T;
   }[];

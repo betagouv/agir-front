@@ -17,9 +17,10 @@ export interface QuestionMosaicBooleanApiModel {
   titre: string;
   reponses: {
     code: string;
-    image_url: string;
+    image_url?: string;
     label: string;
     boolean_value: boolean;
+    emoji?: string;
   }[];
   is_answered: boolean;
 }
