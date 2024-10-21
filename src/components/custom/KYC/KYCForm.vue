@@ -20,6 +20,7 @@
             label: reponsePossible.label,
             value: reponsePossible.id,
             picto: reponsePossible.picto,
+            emoji: reponsePossible.emoji,
             checked: reponsePossible.checked,
           }))
         "
