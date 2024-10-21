@@ -29,7 +29,7 @@
     "pinia": "2.2.4",
     "pinia-plugin-persistedstate": "4.1.1",
     "redaxios": "0.5.1",
-    "vue": "3.5.8",
+    "vue": "3.5.12",
     "vue-chartjs": "5.3.1",
     "vue-matomo": "4.2.0",
     "vue-router": "4.4.5"
