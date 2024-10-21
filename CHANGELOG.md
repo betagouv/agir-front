@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.27.2](https://github.com/betagouv/agir-front/compare/v1.27.1...v1.27.2) (2024-10-21)
+
+
+### 👷 Autres changements
+
+* ne pas remonter les sessions expirees ([#705](https://github.com/betagouv/agir-front/issues/705)) ([8ef424c](https://github.com/betagouv/agir-front/commit/8ef424ce4cba9bd9da970396f0f435be9667cfd2))
+
 ## [1.27.1](https://github.com/betagouv/agir-front/compare/v1.27.0...v1.27.1) (2024-10-21)
 
 
