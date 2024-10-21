@@ -69,8 +69,8 @@
 <script setup lang="ts">
   import { onMounted, ref } from 'vue';
   import { useRoute } from 'vue-router';
-  import ActionListe from '../custom/Action/ActionListe.vue';
   import CarteSkeleton from '@/components/CarteSkeleton.vue';
+  import ActionListe from '@/components/custom/Action/ActionListe.vue';
   import CoachRecommandations from '@/components/custom/Coach/CoachRecommandations.vue';
   import ServiceLink from '@/components/custom/Service/ServiceLink.vue';
   import ServiceLinkExterne from '@/components/custom/Service/ServiceLinkExterne.vue';
