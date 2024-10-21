@@ -7,6 +7,7 @@ export interface ReponsePossibleViewModel {
   label: string;
   picto?: string;
   checked?: boolean;
+  emoji?: string;
 }
 
 export interface QuestionsViewModel {
