@@ -4,6 +4,7 @@ on:
     branches: [ main ]
 jobs:
   test:
+    if: github.actor != 'dependabot[bot]'
     timeout-minutes: 10
     runs-on: ubuntu-latest
     env:
