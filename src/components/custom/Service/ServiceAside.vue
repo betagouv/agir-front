@@ -12,7 +12,7 @@
           {{ url }}
         </a>
       </p>
-      <img :src="logo" alt="" class="display-block max-full-width" />
+      <img :src="logo" alt="" class="display-block max-full-width" height="32px" />
     </div>
   </aside>
 </template>
