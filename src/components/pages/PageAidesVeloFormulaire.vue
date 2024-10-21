@@ -139,7 +139,6 @@
         residence: logementViewModel.value!.residence.valeur,
         superficie: logementViewModel.value!.superficie.valeur,
         proprietaire: logementViewModel.value!.proprietaire.valeur,
-        modeDeChauffage: logementViewModel.value!.modeDeChauffage.valeur,
         plusDeQuinzeAns: logementViewModel.value!.plusDeQuinzeAns.valeur,
         dpe: logementViewModel.value!.dpe.valeur,
       });

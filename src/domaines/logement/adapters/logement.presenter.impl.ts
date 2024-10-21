@@ -1,13 +1,8 @@
-import {
-  SuperficieLogementApiModel,
-  TypeLogementApiModel,
-  ChauffageLogementApiModel,
-  DPELogementApiModel,
-} from './logement.repository.axios';
-import { LogementViewModel } from '@/domaines/logement/ports/logement.presenter';
+import { SuperficieLogementApiModel, TypeLogementApiModel, DPELogementApiModel } from './logement.repository.axios';
+import { LogementPresenter, LogementViewModel } from '@/domaines/logement/ports/logement.presenter';
 import { Logement } from '@/domaines/logement/recupererInformationLogement.usecase';
 
-export class LogementPresenterImpl {
+export class LogementPresenterImpl implements LogementPresenter {
   constructor(private logementViewModel: (viewModel: LogementViewModel) => void) {}
 
   presente(logement: Logement) {
@@ -51,16 +46,6 @@ export class LogementPresenterImpl {
           { label: 'Entre 70 et 100 m²', value: SuperficieLogementApiModel.Superficie_100 },
           { label: 'Entre 100 et 150 m²', value: SuperficieLogementApiModel.Superficie_150 },
           { label: 'Plus de 150 m²', value: SuperficieLogementApiModel.Superficie_150_Et_Plus },
-        ],
-      },
-      modeDeChauffage: {
-        valeur: logement.modeDeChauffage,
-        reponsesPossibles: [
-          { label: 'Électricité', value: ChauffageLogementApiModel.Electricite },
-          { label: 'Bois / Pellets', value: ChauffageLogementApiModel.Bois },
-          { label: 'Fioul', value: ChauffageLogementApiModel.Fioul },
-          { label: 'Gaz', value: ChauffageLogementApiModel.Gaz },
-          { label: 'Autre / Je ne sais pas', value: ChauffageLogementApiModel.Autre },
         ],
       },
       plusDeQuinzeAns: {
