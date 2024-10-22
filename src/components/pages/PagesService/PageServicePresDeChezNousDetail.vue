@@ -19,7 +19,7 @@
         :center="[detailServiceViewModel.position.latitude, detailServiceViewModel.position.longitude]"
       >
         <LTileLayer
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.webp"
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           layer-type="base"
           name="OpenStreetMap"
         ></LTileLayer>
