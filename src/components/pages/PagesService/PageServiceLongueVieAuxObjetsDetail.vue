@@ -1,6 +1,6 @@
 <template>
   <div class="fr-container fr-pb-4w" v-if="detailServiceViewModel">
-    <img alt="" :src="detailServiceViewModel?.img" />
+    <img alt="" :src="detailServiceViewModel.img" />
     <div class="fr-mt-auto">
       <span
         v-if="detailServiceViewModel.tag"
@@ -9,7 +9,7 @@
         {{ detailServiceViewModel.tag.label }}
       </span>
     </div>
-    <h1 class="fr-mt-2w">{{ detailServiceViewModel.titre }}</h1>
+    <h1 class="fr-h2 fr-mt-2w">{{ detailServiceViewModel.titre }}</h1>
     <p v-if="detailServiceViewModel.description">{{ detailServiceViewModel.description }}</p>
     <div class="map-container" v-if="detailServiceViewModel.position">
       <LMap
@@ -38,7 +38,12 @@
         <span class="fr-ml-1w text--black"> {{ detailServiceViewModel.telephone }}</span>
       </span>
     </div>
-    <a class="fr-link width--auto" :href="detailServiceViewModel.siteWeb" target="_blank" rel="noopener noreferrer"
+    <a
+      v-if="detailServiceViewModel.siteWeb"
+      class="fr-link width--auto"
+      :href="detailServiceViewModel.siteWeb"
+      target="_blank"
+      rel="noopener noreferrer"
       >En savoir plus</a
     >
   </div>
