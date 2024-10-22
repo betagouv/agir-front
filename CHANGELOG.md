@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.27.2](https://github.com/betagouv/agir-front/compare/v1.27.1...v1.27.2) (2024-10-22)
+
+
+### 🐛 Corrections de bogues
+
+* affichage de la carte service pres de chez nous ([84028e1](https://github.com/betagouv/agir-front/commit/84028e1ee49c5c87a1d55011cb377996bc60ab30))
+
+
+### 👷 Autres changements
+
+* Bump @sentry/vue from 8.33.1 to 8.35.0 ([#717](https://github.com/betagouv/agir-front/issues/717)) ([c223154](https://github.com/betagouv/agir-front/commit/c22315415889ef6a18ecee041e060daedc965f7b))
+* Bump @types/node from 22.7.5 to 22.7.7 ([#721](https://github.com/betagouv/agir-front/issues/721)) ([37b331c](https://github.com/betagouv/agir-front/commit/37b331c4674a65be19773b6e224acda40eed3ba5))
+* Bump eslint-plugin-vue from 9.28.0 to 9.29.1 ([#719](https://github.com/betagouv/agir-front/issues/719)) ([cd1701e](https://github.com/betagouv/agir-front/commit/cd1701e4ac0d6fb3d5e1a2ee33f86b0fe8bdbcdd))
+* Bump vue from 3.5.8 to 3.5.12 ([#718](https://github.com/betagouv/agir-front/issues/718)) ([c380fb5](https://github.com/betagouv/agir-front/commit/c380fb526a9fa4642bb3d317b46d5c54d18898b8))
+* husky - application du tsc au pre-commit ([#711](https://github.com/betagouv/agir-front/issues/711)) ([7ee8531](https://github.com/betagouv/agir-front/commit/7ee85315b8782ff1dea6071931d1ce4c7bf76615))
+* ne pas remonter les sessions expirees ([#705](https://github.com/betagouv/agir-front/issues/705)) ([8ef424c](https://github.com/betagouv/agir-front/commit/8ef424ce4cba9bd9da970396f0f435be9667cfd2))
+
 ## [1.27.1](https://github.com/betagouv/agir-front/compare/v1.27.0...v1.27.1) (2024-10-21)
 
 
