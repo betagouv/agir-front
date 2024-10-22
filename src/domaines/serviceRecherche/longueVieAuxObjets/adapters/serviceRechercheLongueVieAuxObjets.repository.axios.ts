@@ -1,7 +1,7 @@
 import { AxiosFactory, intercept401 } from '@/axios.factory';
-import { ServiceRechercheLongueVieAuxObjetsRepository } from '@/domaines/serviceRecherche/presDeChezNous/ports/serviceRechercheLongueVieAuxObjets.repository';
-import { ServiceRechercheLongueVieAuxObjetsResultatDetail } from '@/domaines/serviceRecherche/presDeChezNous/recupererDetailServiceLongueVieAuxObjets.usecase';
-import { ServiceRechercheLongueVieAuxObjets } from '@/domaines/serviceRecherche/presDeChezNous/recupererServiceLongueVieAuxObjets.usecase';
+import { ServiceRechercheLongueVieAuxObjetsRepository } from '@/domaines/serviceRecherche/longueVieAuxObjets/ports/serviceRechercheLongueVieAuxObjets.repository';
+import { ServiceRechercheLongueVieAuxObjetsResultatDetail } from '@/domaines/serviceRecherche/longueVieAuxObjets/recupererDetailServiceLongueVieAuxObjets.usecase';
+import { ServiceRechercheLongueVieAuxObjets } from '@/domaines/serviceRecherche/longueVieAuxObjets/recupererServiceLongueVieAuxObjets.usecase';
 
 interface ServiceRechercheApiModel {
   id: string;

@@ -1,5 +1,5 @@
-import { ServiceRechercheLongueVieAuxObjetsRepository } from '@/domaines/serviceRecherche/presDeChezNous/ports/serviceRechercheLongueVieAuxObjets.repository';
-import { ServiceRechercheLongueVieAuxObjetsPresenterDetail } from '@/domaines/serviceRecherche/presDeChezNous/ports/serviceRechercheLongueVieAuxObjetsDetail.presenter';
+import { ServiceRechercheLongueVieAuxObjetsRepository } from '@/domaines/serviceRecherche/longueVieAuxObjets/ports/serviceRechercheLongueVieAuxObjets.repository';
+import { ServiceRechercheLongueVieAuxObjetsPresenterDetail } from '@/domaines/serviceRecherche/longueVieAuxObjets/ports/serviceRechercheLongueVieAuxObjetsDetail.presenter';
 
 export interface ServiceRechercheLongueVieAuxObjetsResultatDetail {
   titre: string;

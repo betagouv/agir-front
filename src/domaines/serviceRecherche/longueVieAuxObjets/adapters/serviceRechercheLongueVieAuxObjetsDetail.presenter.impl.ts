@@ -1,5 +1,5 @@
-import { ServiceRechercheLongueVieAuxObjetsPresenterDetail } from '@/domaines/serviceRecherche/presDeChezNous/ports/serviceRechercheLongueVieAuxObjetsDetail.presenter';
-import { ServiceRechercheLongueVieAuxObjetsResultatDetail } from '@/domaines/serviceRecherche/presDeChezNous/recupererDetailServiceLongueVieAuxObjets.usecase';
+import { ServiceRechercheLongueVieAuxObjetsPresenterDetail } from '@/domaines/serviceRecherche/longueVieAuxObjets/ports/serviceRechercheLongueVieAuxObjetsDetail.presenter';
+import { ServiceRechercheLongueVieAuxObjetsResultatDetail } from '@/domaines/serviceRecherche/longueVieAuxObjets/recupererDetailServiceLongueVieAuxObjets.usecase';
 
 export interface DetailServiceViewModel {
   titre: string;
