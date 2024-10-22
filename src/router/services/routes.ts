@@ -1,4 +1,7 @@
 import { RouteRecordRaw } from 'vue-router';
+const PageServiceLongueVieAuxObjets = () => import('@/components/pages/PagesService/PageServiceLongueVieAuxObjets.vue');
+const PageServiceLongueVieAuxObjetsDetail = () =>
+  import('@/components/pages/PagesService/PageServiceLongueVieAuxObjetsDetail.vue');
 
 const PageServiceRecettes = () => import('@/components/pages/PagesService/PageServiceRecettes.vue');
 const PageServiceRecetteDetail = () => import('@/components/pages/PagesService/PageServiceRecetteDetail.vue');
@@ -15,11 +18,15 @@ export enum RouteServiceName {
   PROXIMITE_DETAIL = 'pres-de-chez-nous-detail',
   FRUITS_ET_LEGUMES = 'fruits-et-legumes',
   LINKY = 'linky',
+  LONGUE_VIE_AUX_OBJETS = 'longue-vie-aux-objets',
+  LONGUE_VIE_AUX_OBJETS_DETAIL = 'longue-vie-aux-objets-detail',
 }
 
 export enum RouteServicePath {
   RECETTES = '/service/recettes',
   RECETTES_DETAIL = '/service/recettes/:id',
+  LONGUE_VIE_AUX_OBJETS = '/service/longue-vie-aux-objets',
+  LONGUE_VIE_AUX_OBJETS_DETAIL = '/service/longue-vie-aux-objets/:id',
   PROXIMITE = '/service/pres-de-chez-nous',
   PROXIMITE_DETAIL = '/service/pres-de-chez-nous/:id',
   FRUITS_ET_LEGUMES = '/service/fruits-et-legumes',
@@ -73,6 +80,22 @@ const serviceRoutes: RouteRecordRaw[] = [
     component: PageServiceLinky,
     meta: {
       title: 'Service : Linky',
+    },
+  },
+  {
+    path: RouteServicePath.LONGUE_VIE_AUX_OBJETS,
+    name: RouteServiceName.LONGUE_VIE_AUX_OBJETS,
+    component: PageServiceLongueVieAuxObjets,
+    meta: {
+      title: 'Service : Longue vie aux objets',
+    },
+  },
+  {
+    path: RouteServicePath.LONGUE_VIE_AUX_OBJETS_DETAIL,
+    name: RouteServiceName.LONGUE_VIE_AUX_OBJETS_DETAIL,
+    component: PageServiceLongueVieAuxObjetsDetail,
+    meta: {
+      title: 'Service : Longue vie aux objets - Page de détail',
     },
   },
 ];
