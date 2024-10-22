@@ -3,8 +3,8 @@
     <div v-if="isLoading">Chargement en cours ...</div>
     <div v-else>
       <FilDAriane
-        page-courante="Service : Près de chez nous"
-        :page-hierarchie="[{ label: 'Univers - En cuisine', url: `/${RouteUniversName.UNIVERS}/alimentation` }]"
+        page-courante="Service : Longue vie aux objets"
+        :page-hierarchie="[{ label: 'Univers - Mes achats', url: `/${RouteUniversName.UNIVERS}/consommation` }]"
       />
       <div v-if="serviceErreur">
         <h1>Service indisponible</h1>
