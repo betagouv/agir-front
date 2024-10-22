@@ -2,7 +2,7 @@
   <div
     class="action-card fr-grid-row position--relative full-height border-radius--md shadow background--white fr-p-2w"
   >
-    <img src="/ic_defi.svg" class="fr-mr-2w" alt="" />
+    <img src="/ic_defi.svg" class="fr-mr-2w img-object-fit-contain" alt="" />
     <div class="fr-col">
       <div class="action__contenu">
         <div class="flex-grow">
