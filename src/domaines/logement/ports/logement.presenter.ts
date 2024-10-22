@@ -18,7 +18,6 @@ export interface LogementViewModel {
   residence: LogementPlusieursReponsesPossiblesViewModel<LogementApiModel['type']>;
   proprietaire: LogementPlusieursReponsesPossiblesViewModel<boolean>;
   superficie: LogementPlusieursReponsesPossiblesViewModel<LogementApiModel['superficie']>;
-  modeDeChauffage: LogementPlusieursReponsesPossiblesViewModel<LogementApiModel['chauffage']>;
   plusDeQuinzeAns: LogementPlusieursReponsesPossiblesViewModel<boolean>;
   dpe: LogementPlusieursReponsesPossiblesViewModel<LogementApiModel['dpe']>;
 }

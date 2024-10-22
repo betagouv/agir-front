@@ -84,17 +84,6 @@
         />
         <BoutonRadio
           class="fr-mb-4w fr-col-12"
-          legende="Quel est votre mode de chauffage principal ?"
-          legende-size="l"
-          name="chauffage"
-          orientation="horizontal"
-          col="fr-col"
-          :options="logementViewModel.modeDeChauffage.reponsesPossibles"
-          :default-value="logementViewModel.modeDeChauffage.valeur"
-          v-model="logementViewModel.modeDeChauffage.valeur"
-        />
-        <BoutonRadio
-          class="fr-mb-4w fr-col-12"
           legende="Votre logement a-t-il plus de 15 ans ?"
           legende-size="l"
           name="anciennete"
@@ -171,7 +160,6 @@
       residence: props.value.residence.valeur,
       superficie: props.value.superficie.valeur,
       proprietaire: props.value.proprietaire.valeur,
-      modeDeChauffage: props.value.modeDeChauffage.valeur,
       plusDeQuinzeAns: props.value.plusDeQuinzeAns.valeur,
       dpe: props.value.dpe.valeur,
     });

@@ -11,7 +11,6 @@ export interface Logement {
   residence: LogementApiModel['type'];
   proprietaire: boolean;
   superficie: LogementApiModel['superficie'];
-  modeDeChauffage: LogementApiModel['chauffage'];
   plusDeQuinzeAns: boolean;
   dpe: LogementApiModel['dpe'];
 }

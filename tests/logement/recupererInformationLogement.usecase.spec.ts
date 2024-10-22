@@ -22,7 +22,6 @@ describe('Fichier de tests concernant la récuperations des informations du loge
         residence: TypeLogementApiModel.Appartement,
         proprietaire: true,
         superficie: SuperficieLogementApiModel.Superficie_100,
-        modeDeChauffage: ChauffageLogementApiModel.Gaz,
         plusDeQuinzeAns: true,
         dpe: DPELogementApiModel.B,
       }),
@@ -72,16 +71,6 @@ describe('Fichier de tests concernant la récuperations des informations du loge
               { label: 'Entre 70 et 100 m²', value: 'superficie_100' },
               { label: 'Entre 100 et 150 m²', value: 'superficie_150' },
               { label: 'Plus de 150 m²', value: 'superficie_150_et_plus' },
-            ],
-          },
-          modeDeChauffage: {
-            valeur: 'gaz',
-            reponsesPossibles: [
-              { label: 'Électricité', value: 'electricite' },
-              { label: 'Bois / Pellets', value: 'bois' },
-              { label: 'Fioul', value: 'fioul' },
-              { label: 'Gaz', value: 'gaz' },
-              { label: 'Autre / Je ne sais pas', value: 'autre' },
             ],
           },
           plusDeQuinzeAns: {
