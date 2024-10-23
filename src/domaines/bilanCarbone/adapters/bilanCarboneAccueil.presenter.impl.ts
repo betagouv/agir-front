@@ -1,4 +1,4 @@
-import { BilanCarbonePresenter } from '@/domaines/bilanCarbone/ports/bilanCarbone.presenter';
+import { BilanCarbonePresenter, ThematiquesBilan } from '@/domaines/bilanCarbone/ports/bilanCarbone.presenter';
 import { BilanCompletCarbone, BilanPartielCarbone } from '@/domaines/bilanCarbone/recupererBilanCarbone.usecase';
 
 export interface BilanCarboneCompletAccueilViewModel {
@@ -8,15 +8,7 @@ export interface BilanCarboneCompletAccueilViewModel {
 
 export interface BilanCarbonePartielAccueilViewModel {
   pourcentageCompletionTotal: number;
-  universBilan: {
-    contentId: string;
-    label: string;
-    urlImage: string;
-    estTermine: boolean;
-    pourcentageProgression: number;
-    nombreTotalDeQuestion: number;
-    nomDeLunivers: string;
-  }[];
+  thematiquesBilan: ThematiquesBilan[];
 }
 
 export class BilanCarboneAccueilPresenterImpl implements BilanCarbonePresenter {
@@ -41,7 +33,7 @@ export class BilanCarboneAccueilPresenterImpl implements BilanCarbonePresenter {
     ]);
     this.bilanCarbonePartielViewModel({
       pourcentageCompletionTotal: bilan.pourcentageCompletionTotal,
-      universBilan: bilan.universBilan.map((univers, index) => ({
+      thematiquesBilan: bilan.universBilan.map((univers, index) => ({
         nomDeLunivers: mapUnivers.get(index) || '',
         contentId: univers.contentId,
         label: univers.label,

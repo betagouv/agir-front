@@ -13,6 +13,6 @@
 
   defineProps<{
     nombreDeTonnesAnnuel: BilanCarboneCompletViewModel['nombreDeTonnesAnnuel'];
-    pourcentageProgressBar: BilanCarboneCompletViewModel['pourcentageProgessBar'];
+    pourcentageProgressBar: BilanCarboneCompletViewModel['pourcentageProgressBar'];
   }>();
 </script>

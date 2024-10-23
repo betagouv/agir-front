@@ -4,7 +4,7 @@
       <div class="fr-col-md-9">
         <BilanCarboneProgressBar
           :impact-tonne-annuel="bilanCarboneViewModel.nombreDeTonnesAnnuel"
-          :pourcentage-progess-bar="bilanCarboneViewModel.pourcentageProgessBar"
+          :pourcentage-progress-bar="bilanCarboneViewModel.pourcentageProgressBar"
           class="fr-mb-4w"
         />
       </div>

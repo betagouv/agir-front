@@ -7,7 +7,7 @@
   <CoachBilanCarbonePartiel
     v-else-if="bilanCarbonePartielViewModel"
     :pourcentage-completion="bilanCarbonePartielViewModel.pourcentageCompletionTotal"
-    :univers-bilan="bilanCarbonePartielViewModel.universBilan"
+    :univers-bilan="bilanCarbonePartielViewModel.thematiquesBilan"
   />
 </template>
 

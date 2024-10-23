@@ -178,7 +178,7 @@ describe('Fichier de tests concernant le chargement du bilan carbone', () => {
             pourcentage: 12,
           },
         ],
-        pourcentageProgessBar: 80,
+        pourcentageProgressBar: 80,
         nombreDeTonnesAnnuel: '9,6',
       });
     }
@@ -285,7 +285,7 @@ describe('Fichier de tests concernant le chargement du bilan carbone', () => {
         ],
         pourcentageCompletionTotal: 90,
         titre: 'Estimez mon <span class="text--bleu">bilan environnemental</span>',
-        universBilan: [
+        thematiquesBilan: [
           {
             contentId: 'id1',
             estTermine: false,

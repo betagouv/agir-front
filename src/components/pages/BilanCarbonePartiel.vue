@@ -2,14 +2,14 @@
   <div class="fr-grid-row fr-grid-row--gutters">
     <div class="fr-col-12 fr-col-md-9">
       <h2>Ma première estimation</h2>
-      <div v-if="bilanCarbonePartielViewModel && bilanCarbonePartielViewModel.categories">
+      <div v-if="bilanCarbonePartielViewModel.categories">
         <div class="fr-col-md-6">
           <BilanPremiereEstimation :bilanPremiereEstimation="bilanCarbonePartielViewModel.categories" />
         </div>
       </div>
       <p class="fr-mt-4w">
         ✨ Estimation complète à
-        <span class="text--bleu">{{ bilanCarbonePartielViewModel?.pourcentageCompletionTotal }}%</span>
+        <span class="text--bleu">{{ bilanCarbonePartielViewModel.pourcentageCompletionTotal }}%</span>
       </p>
 
       <h2 class="fr-mb-0">Affinez mon <span class="text--bleu">estimation</span></h2>
@@ -18,7 +18,7 @@
       <ul class="fr-grid-row fr-grid-row--gutters list-style-none">
         <li
           class="fr-col-md-3 fr-col-6"
-          v-for="univers in bilanCarbonePartielViewModel?.universBilan"
+          v-for="univers in bilanCarbonePartielViewModel.thematiquesBilan"
           :key="univers.contentId"
         >
           <BilanUniversCarte

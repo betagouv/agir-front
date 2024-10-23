@@ -29,6 +29,6 @@
 
   defineProps<{
     pourcentageCompletion: BilanCarbonePartielViewModel['pourcentageCompletionTotal'];
-    universBilan: BilanCarbonePartielViewModel['universBilan'];
+    universBilan: BilanCarbonePartielViewModel['thematiquesBilan'];
   }>();
 </script>

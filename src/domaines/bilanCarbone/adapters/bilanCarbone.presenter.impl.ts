@@ -1,4 +1,4 @@
-import { BilanCarbonePresenter } from '@/domaines/bilanCarbone/ports/bilanCarbone.presenter';
+import { BilanCarbonePresenter, ThematiquesBilan } from '@/domaines/bilanCarbone/ports/bilanCarbone.presenter';
 import { BilanCompletCarbone, BilanPartielCarbone } from '@/domaines/bilanCarbone/recupererBilanCarbone.usecase';
 
 interface BilanCarbonDetailItemViewModel {
@@ -18,7 +18,7 @@ export interface BilanCarboneViewModelBase {
   titre: string;
 }
 export interface BilanCarboneCompletViewModel extends BilanCarboneViewModelBase {
-  pourcentageProgessBar: number;
+  pourcentageProgressBar: number;
   nombreDeTonnesAnnuel: string;
   impactKgAnnuel: {
     valeur: string;
@@ -44,16 +44,7 @@ export interface BilanCarbonePartielViewModel extends BilanCarboneViewModelBase 
     tag: BilanCarbonePartielTagViewModel;
     progressBarStyle: string;
   }[];
-
-  universBilan: {
-    contentId: string;
-    label: string;
-    urlImage: string;
-    estTermine: boolean;
-    pourcentageProgression: number;
-    nombreTotalDeQuestion: number;
-    clefUnivers: string;
-  }[];
+  thematiquesBilan: ThematiquesBilan[];
 }
 
 export class BilanCarbonePresenterImpl implements BilanCarbonePresenter {
@@ -65,7 +56,7 @@ export class BilanCarbonePresenterImpl implements BilanCarbonePresenter {
   presenteBilanComplet(bilanCarbone: BilanCompletCarbone): void {
     this.bilanCarboneViewModel({
       titre: 'Mon bilan <span class="text--bleu">environnemental</span>',
-      pourcentageProgessBar: this.calculPourcentageProgressBar(bilanCarbone.impactKgAnnuel),
+      pourcentageProgressBar: this.calculPourcentageProgressBar(bilanCarbone.impactKgAnnuel),
       nombreDeTonnesAnnuel: this.calculTonnesAnnuel(bilanCarbone.impactKgAnnuel),
       impactKgAnnuel: this.formateKg(bilanCarbone.impactKgAnnuel),
       univers: bilanCarbone.univers.map(univers => ({
@@ -126,8 +117,10 @@ export class BilanCarbonePresenterImpl implements BilanCarbonePresenter {
           progressBarStyle: this.determineProgressBar(bilan.consommation.niveau),
         },
       ],
-      universBilan: bilan.universBilan.map(univers => ({
+      thematiquesBilan: bilan.universBilan.map((univers, index) => ({
+        nomDeLunivers: univers.clefUnivers,
         clefUnivers: univers.clefUnivers,
+
         contentId: univers.contentId,
         label: univers.label,
         urlImage: univers.urlImage,
