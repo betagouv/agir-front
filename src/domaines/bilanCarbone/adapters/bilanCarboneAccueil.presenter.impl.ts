@@ -25,16 +25,10 @@ export class BilanCarboneAccueilPresenterImpl implements BilanCarbonePresenter {
   }
 
   presenteBilanPartiel(bilan: BilanPartielCarbone): void {
-    const mapUnivers: Map<number, string> = new Map([
-      [0, 'transports'],
-      [1, 'alimentation'],
-      [2, 'logement'],
-      [3, 'consommation'],
-    ]);
     this.bilanCarbonePartielViewModel({
       pourcentageCompletionTotal: bilan.pourcentageCompletionTotal,
-      thematiquesBilan: bilan.universBilan.map((univers, index) => ({
-        nomDeLunivers: mapUnivers.get(index) || '',
+      thematiquesBilan: bilan.universBilan.map(univers => ({
+        clefUnivers: univers.clefUnivers,
         contentId: univers.contentId,
         label: univers.label,
         urlImage: univers.urlImage,

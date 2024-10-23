@@ -12,83 +12,132 @@ import {
 } from '@/domaines/bilanCarbone/adapters/bilanCarboneAccueil.presenter.impl';
 
 describe('Fichier de tests concernant le chargement du bilan carbone', () => {
-  const usecase = new RecupererBilanCarboneUsecase(
-    new BilanCarboneRepositoryMock({
-      pourcentageCompletionTotal: 100,
-      bilanComplet: {
-        impactKgAnnuel: 9600,
-        univers: [
-          {
-            universId: 'transport',
-            universLabel: 'Les transports',
-            pourcentage: 31,
-            impactKgAnnuel: 2796.1001241487393,
-            details: [
-              {
-                label: 'Voiture',
-                pourcentage: 23,
-                impactKgAnnuel: 2042.1001241487393,
-                emoji: '🚗',
-              },
-              {
-                label: 'Avion',
-                pourcentage: 8,
-                impactKgAnnuel: 754.1001241487393,
-                emoji: '✈️',
-              },
-            ],
-            emoji: '🚦',
-          },
-          {
-            universId: 'alimentation',
-            universLabel: 'En cuisine',
-            pourcentage: 24,
-            impactKgAnnuel: 2094.1568221,
-            details: [],
-            emoji: '🍴',
-          },
-          {
-            universId: 'logement',
-            universLabel: 'À la maison',
-            pourcentage: 17,
-            impactKgAnnuel: 1477.82343812085,
-            details: [],
-            emoji: '🏠',
-          },
-          {
-            universId: 'consommation',
-            universLabel: 'En courses',
-            pourcentage: 12,
-            impactKgAnnuel: 450.0454437235896,
-            details: [],
-            emoji: '📦',
-          },
-        ],
-        top3: [
-          {
-            label: 'Voiture',
-            emoji: '🚙',
-            pourcentage: '31',
-          },
-          {
-            label: 'En cuisine',
-            emoji: '🍛',
-            pourcentage: '24',
-          },
-          {
-            label: 'À la maison',
-            emoji: '🏡',
-            pourcentage: '17',
-          },
-        ],
-      },
-      bilanPartiel: undefined,
-    }),
-  );
+  const bilanCarboneCompletMock = new BilanCarboneRepositoryMock({
+    pourcentageCompletionTotal: 100,
+    bilanComplet: {
+      impactKgAnnuel: 9600,
+      univers: [
+        {
+          universId: 'transport',
+          universLabel: 'Les transports',
+          pourcentage: 31,
+          impactKgAnnuel: 2796.1001241487393,
+          details: [
+            {
+              label: 'Voiture',
+              pourcentage: 23,
+              impactKgAnnuel: 2042.1001241487393,
+              emoji: '🚗',
+            },
+            {
+              label: 'Avion',
+              pourcentage: 8,
+              impactKgAnnuel: 754.1001241487393,
+              emoji: '✈️',
+            },
+          ],
+          emoji: '🚦',
+        },
+        {
+          universId: 'alimentation',
+          universLabel: 'En cuisine',
+          pourcentage: 24,
+          impactKgAnnuel: 2094.1568221,
+          details: [],
+          emoji: '🍴',
+        },
+        {
+          universId: 'logement',
+          universLabel: 'À la maison',
+          pourcentage: 17,
+          impactKgAnnuel: 1477.82343812085,
+          details: [],
+          emoji: '🏠',
+        },
+        {
+          universId: 'consommation',
+          universLabel: 'En courses',
+          pourcentage: 12,
+          impactKgAnnuel: 450.0454437235896,
+          details: [],
+          emoji: '📦',
+        },
+      ],
+      top3: [
+        {
+          label: 'Voiture',
+          emoji: '🚙',
+          pourcentage: '31',
+        },
+        {
+          label: 'En cuisine',
+          emoji: '🍛',
+          pourcentage: '24',
+        },
+        {
+          label: 'À la maison',
+          emoji: '🏡',
+          pourcentage: '17',
+        },
+      ],
+    },
+    bilanPartiel: undefined,
+  });
+  const bilanCarbonePartielMock = new BilanCarboneRepositoryMock({
+    pourcentageCompletionTotal: 90,
+    bilanComplet: undefined,
+    bilanPartiel: {
+      pourcentageCompletionTotal: 90,
+      transport: { niveau: 'moyen' },
+      alimentation: { niveau: 'fort' },
+      logement: { niveau: 'tres_fort' },
+      consommation: { niveau: 'faible' },
+      universBilan: [
+        {
+          contentId: 'id1',
+          label: 'Les transports',
+          urlImage: 'url1',
+          estTermine: false,
+          pourcentageProgression: 80,
+          nombreTotalDeQuestion: 10,
+          clefUnivers: 'transports',
+        },
+        {
+          contentId: 'id2',
+          label: 'En cuisine',
+          urlImage: 'url2',
+          estTermine: true,
+          pourcentageProgression: 100,
+          nombreTotalDeQuestion: 10,
+          clefUnivers: 'alimentation',
+        },
+        {
+          contentId: 'id3',
+          label: 'À la maison',
+          urlImage: 'url3',
+          estTermine: true,
+          pourcentageProgression: 100,
+          nombreTotalDeQuestion: 10,
+          clefUnivers: 'logement',
+        },
+        {
+          contentId: 'id4',
+          label: 'En courses',
+          urlImage: 'url4',
+          estTermine: true,
+          pourcentageProgression: 100,
+          nombreTotalDeQuestion: 10,
+          clefUnivers: 'consommation',
+        },
+      ],
+    },
+  });
 
   describe("Quand le bilan est chargé sur la page d'accueil", () => {
     it('Bilan complet', async () => {
       // GIVEN
+      const usecase = new RecupererBilanCarboneUsecase(bilanCarboneCompletMock);
+
       // WHEN
       await usecase.execute(
         'idUtilisateur',
@@ -108,6 +157,8 @@ describe('Fichier de tests concernant le chargement du bilan carbone', () => {
     });
     it('Bilan partiel', async () => {
       // GIVEN
+      const usecase = new RecupererBilanCarboneUsecase(bilanCarbonePartielMock);
+
       // WHEN
       await usecase.execute(
         'idUtilisateur',
@@ -130,7 +181,6 @@ describe('Fichier de tests concernant le chargement du bilan carbone', () => {
               clefUnivers: 'transports',
               pourcentageProgression: 80,
               urlImage: 'url1',
-              nomDeLunivers: 'transports',
             },
             {
               contentId: 'id2',
@@ -140,7 +190,6 @@ describe('Fichier de tests concernant le chargement du bilan carbone', () => {
               clefUnivers: 'alimentation',
               pourcentageProgression: 100,
               urlImage: 'url2',
-              nomDeLunivers: 'alimentation',
             },
             {
               contentId: 'id3',
@@ -150,7 +199,6 @@ describe('Fichier de tests concernant le chargement du bilan carbone', () => {
               clefUnivers: 'logement',
               pourcentageProgression: 100,
               urlImage: 'url3',
-              nomDeLunivers: 'logement',
             },
             {
               contentId: 'id4',
@@ -160,7 +208,6 @@ describe('Fichier de tests concernant le chargement du bilan carbone', () => {
               clefUnivers: 'consommation',
               pourcentageProgression: 100,
               urlImage: 'url4',
-              nomDeLunivers: 'consommation',
             },
           ],
         });
@@ -171,6 +218,8 @@ describe('Fichier de tests concernant le chargement du bilan carbone', () => {
   describe('Quand le bilan est chargé sur la page bilan', () => {
     it('Bilan complet', async () => {
       // GIVEN
+      const usecase = new RecupererBilanCarboneUsecase(bilanCarboneCompletMock);
+
       // WHEN
       await usecase.execute(
         'idUtilisateur',
@@ -273,6 +322,8 @@ describe('Fichier de tests concernant le chargement du bilan carbone', () => {
     });
     it('Bilan partiel', async () => {
       // GIVEN
+      const usecase = new RecupererBilanCarboneUsecase(bilanCarbonePartielMock);
+
       // WHEN
       await usecase.execute(
         'idUtilisateur',
@@ -329,7 +380,7 @@ describe('Fichier de tests concernant le chargement du bilan carbone', () => {
               nombreTotalDeQuestion: 10,
               pourcentageProgression: 80,
               urlImage: 'url1',
-              nomDeLunivers: 'transports',
+              clefUnivers: 'transports',
             },
             {
               contentId: 'id2',
@@ -338,7 +389,7 @@ describe('Fichier de tests concernant le chargement du bilan carbone', () => {
               nombreTotalDeQuestion: 10,
               pourcentageProgression: 100,
               urlImage: 'url2',
-              nomDeLunivers: 'alimentation',
+              clefUnivers: 'alimentation',
             },
             {
               contentId: 'id3',
@@ -347,7 +398,7 @@ describe('Fichier de tests concernant le chargement du bilan carbone', () => {
               nombreTotalDeQuestion: 10,
               pourcentageProgression: 100,
               urlImage: 'url3',
-              nomDeLunivers: 'logement',
+              clefUnivers: 'logement',
             },
             {
               contentId: 'id4',
@@ -356,7 +407,7 @@ describe('Fichier de tests concernant le chargement du bilan carbone', () => {
               nombreTotalDeQuestion: 10,
               pourcentageProgression: 100,
               urlImage: 'url4',
-              nomDeLunivers: 'consommation',
+              clefUnivers: 'consommation',
             },
           ],
         });

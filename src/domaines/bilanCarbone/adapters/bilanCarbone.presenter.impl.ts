@@ -117,10 +117,8 @@ export class BilanCarbonePresenterImpl implements BilanCarbonePresenter {
           progressBarStyle: this.determineProgressBar(bilan.consommation.niveau),
         },
       ],
-      thematiquesBilan: bilan.universBilan.map((univers, index) => ({
-        nomDeLunivers: univers.clefUnivers,
+      thematiquesBilan: bilan.universBilan.map(univers => ({
         clefUnivers: univers.clefUnivers,
-
         contentId: univers.contentId,
         label: univers.label,
         urlImage: univers.urlImage,

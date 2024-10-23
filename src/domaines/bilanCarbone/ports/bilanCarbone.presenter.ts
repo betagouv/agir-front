@@ -7,7 +7,6 @@ export interface ThematiquesBilan {
   estTermine: boolean;
   pourcentageProgression: number;
   nombreTotalDeQuestion: number;
-  nomDeLunivers: string;
   clefUnivers: string;
 }
 
