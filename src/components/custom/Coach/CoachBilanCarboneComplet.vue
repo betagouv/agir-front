@@ -2,7 +2,7 @@
   <h2 class="fr-h2">Votre <span class="text--bleu">bilan environnemental</span> complet</h2>
   <BilanCarboneProgressBar
     :impact-tonne-annuel="nombreDeTonnesAnnuel"
-    :pourcentage-progess-bar="pourcentageProgessBar"
+    :pourcentage-progress-bar="pourcentageProgressBar"
     class="fr-col-md-6 fr-mb-4w"
   />
 </template>
@@ -13,6 +13,6 @@
 
   defineProps<{
     nombreDeTonnesAnnuel: BilanCarboneCompletViewModel['nombreDeTonnesAnnuel'];
-    pourcentageProgessBar: BilanCarboneCompletViewModel['pourcentageProgessBar'];
+    pourcentageProgressBar: BilanCarboneCompletViewModel['pourcentageProgessBar'];
   }>();
 </script>

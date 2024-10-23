@@ -2,7 +2,7 @@
   <CoachBilanCarboneComplet
     v-if="bilanCarboneCompletViewModel"
     :nombre-de-tonnes-annuel="bilanCarboneCompletViewModel.nombreDeTonnesAnnuel"
-    :pourcentage-progess-bar="bilanCarboneCompletViewModel.pourcentageProgessBar"
+    :pourcentage-progress-bar="bilanCarboneCompletViewModel.pourcentageProgressBar"
   />
   <CoachBilanCarbonePartiel
     v-else-if="bilanCarbonePartielViewModel"
@@ -15,12 +15,12 @@
   import CoachBilanCarboneComplet from '@/components/custom/Coach/CoachBilanCarboneComplet.vue';
   import CoachBilanCarbonePartiel from '@/components/custom/Coach/CoachBilanCarbonePartiel.vue';
   import {
-    BilanCarboneCompletViewModel,
-    BilanCarbonePartielViewModel,
-  } from '@/domaines/bilanCarbone/adapters/bilanCarbone.presenter.impl';
+    BilanCarboneCompletAccueilViewModel,
+    BilanCarbonePartielAccueilViewModel,
+  } from '@/domaines/bilanCarbone/adapters/bilanCarboneAccueil.presenter.impl';
 
   defineProps<{
-    bilanCarboneCompletViewModel?: BilanCarboneCompletViewModel;
-    bilanCarbonePartielViewModel?: BilanCarbonePartielViewModel;
+    bilanCarboneCompletViewModel?: BilanCarboneCompletAccueilViewModel;
+    bilanCarbonePartielViewModel?: BilanCarbonePartielAccueilViewModel;
   }>();
 </script>

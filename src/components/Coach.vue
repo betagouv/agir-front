@@ -79,12 +79,12 @@
   import CoachContact from '@/components/custom/Coach/CoachContact.vue';
   import CoachServices from '@/components/custom/Coach/CoachServices.vue';
   import CoachToDo from '@/components/custom/Coach/CoachToDo.vue';
-  import {
-    BilanCarboneCompletViewModel,
-    BilanCarbonePartielViewModel,
-    BilanCarbonePresenterImpl,
-  } from '@/domaines/bilanCarbone/adapters/bilanCarbone.presenter.impl';
   import { BilanCarboneRepositoryAxios } from '@/domaines/bilanCarbone/adapters/bilanCarbone.repository.axios';
+  import {
+    BilanCarboneAccueilPresenterImpl,
+    BilanCarboneCompletAccueilViewModel,
+    BilanCarbonePartielAccueilViewModel,
+  } from '@/domaines/bilanCarbone/adapters/bilanCarboneAccueil.presenter.impl';
   import { RecupererBilanCarboneUsecase } from '@/domaines/bilanCarbone/recupererBilanCarbone.usecase';
   import {
     RecommandationPersonnaliseeViewModel,
@@ -99,14 +99,14 @@
   import { RouteCoachName } from '@/router/coach/routeCoachName';
   import { RouteCompteName } from '@/router/compte/routeCompteName';
   import { Fonctionnalites } from '@/shell/fonctionnalitesEnum';
-  import { publierEvenementHotjar, HotjarEvenement } from '@/shell/publierEvenementHotjar';
+  import { HotjarEvenement, publierEvenementHotjar } from '@/shell/publierEvenementHotjar';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const isLoading = ref<boolean>(true);
   const todoList = ref<TodoListViewModel>();
 
-  const bilanCarboneCompletViewModel = ref<BilanCarboneCompletViewModel>();
-  const bilanCarbonePartielViewModel = ref<BilanCarbonePartielViewModel>();
+  const bilanCarboneCompletViewModel = ref<BilanCarboneCompletAccueilViewModel>();
+  const bilanCarbonePartielViewModel = ref<BilanCarbonePartielAccueilViewModel>();
   const store = utilisateurStore();
   const recommandationsPersonnaliseesViewModel = ref<RecommandationPersonnaliseeViewModel>();
 
@@ -155,7 +155,7 @@
       chargerTodoListUsecase.execute(idUtilisateur, new ToDoListPresenterImpl(mapValueTodo)),
       recupererBilanCarboneUsecase.execute(
         idUtilisateur,
-        new BilanCarbonePresenterImpl(
+        new BilanCarboneAccueilPresenterImpl(
           vm => (bilanCarboneCompletViewModel.value = vm),
           vm => (bilanCarbonePartielViewModel.value = vm),
         ),
