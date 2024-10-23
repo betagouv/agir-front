@@ -1,17 +1,14 @@
 <template>
-  <div v-if="bilanCarboneCompletViewModel">
-    <!--    C'est un peu verbeux, voir pour déconstruire plutôt -->
-    <CoachBilanCarboneComplet
-      :nombre-de-tonnes-annuel="bilanCarboneCompletViewModel.nombreDeTonnesAnnuel"
-      :pourcentage-progess-bar="bilanCarboneCompletViewModel.pourcentageProgessBar"
-    />
-  </div>
-  <div v-else-if="bilanCarbonePartielViewModel">
-    <CoachBilanCarbonePartiel
-      :pourcentage-completion="bilanCarbonePartielViewModel.pourcentageCompletionTotal"
-      :univers-bilan="bilanCarbonePartielViewModel.universBilan"
-    />
-  </div>
+  <CoachBilanCarboneComplet
+    v-if="bilanCarboneCompletViewModel"
+    :nombre-de-tonnes-annuel="bilanCarboneCompletViewModel.nombreDeTonnesAnnuel"
+    :pourcentage-progess-bar="bilanCarboneCompletViewModel.pourcentageProgessBar"
+  />
+  <CoachBilanCarbonePartiel
+    v-else-if="bilanCarbonePartielViewModel"
+    :pourcentage-completion="bilanCarbonePartielViewModel.pourcentageCompletionTotal"
+    :univers-bilan="bilanCarbonePartielViewModel.universBilan"
+  />
 </template>
 
 <script setup lang="ts">
@@ -23,7 +20,7 @@
   } from '@/domaines/bilanCarbone/adapters/bilanCarbone.presenter.impl';
 
   defineProps<{
-    bilanCarboneCompletViewModel: BilanCarboneCompletViewModel;
-    bilanCarbonePartielViewModel: BilanCarbonePartielViewModel;
+    bilanCarboneCompletViewModel?: BilanCarboneCompletViewModel;
+    bilanCarbonePartielViewModel?: BilanCarbonePartielViewModel;
   }>();
 </script>
