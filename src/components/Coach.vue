@@ -16,43 +16,11 @@
     </div>
   </div>
 
-  <section v-if="todoList && todoList.derniere" class="fr-container fr-py-6w">
-    <div v-if="bilanCarboneViewModel">
-      <h2 class="fr-h2">Votre <span class="text--bleu">bilan environnemental</span> complet</h2>
-      <BilanCarboneProgressBar
-        :impact-tonne-annuel="bilanCarboneViewModel.nombreDeTonnesAnnuel"
-        :pourcentage-progess-bar="bilanCarboneViewModel.pourcentageProgessBar"
-        class="fr-col-md-6 fr-mb-4w"
-      />
-    </div>
-    <div v-else-if="bilanCarbonePartielViewModel">
-      <h2 class="fr-h2">Estimez votre <span class="text--bleu">bilan environnemental</span></h2>
-      <p>
-        Et obtenez des <span class="text--bold">recommandations</span> et
-        <span class="text--bold">aides</span> personnalisées
-      </p>
-      <ul class="fr-grid-row fr-grid-row--gutters list-style-none fr-mb-4w">
-        <li
-          class="fr-col-md-2 fr-col-6"
-          v-for="univers in bilanCarbonePartielViewModel?.universBilan"
-          :key="univers.contentId"
-        >
-          <BilanUniversCarte
-            :content-id="univers.contentId"
-            :url-image="univers.urlImage"
-            :label="univers.label"
-            :est-termine="univers.estTermine"
-            :nombre-de-questions="univers.nombreTotalDeQuestion"
-            :progression="univers.pourcentageProgression"
-            :univers="univers.nomDeLunivers"
-          />
-        </li>
-      </ul>
-      <p class="fr-mb-0 background--bleu-info fr-p-2w border border-radius--md display-inline-block border--bleu">
-        ✨ Estimation complète à
-        <span class="text--bleu fr-text--bold">{{ bilanCarbonePartielViewModel?.pourcentageCompletionTotal }}%</span>
-      </p>
-    </div>
+  <section class="fr-container fr-py-6w">
+    <CoachBilanCarbone
+      :bilanCarboneCompletViewModel="bilanCarboneCompletViewModel"
+      :bilanCarbonePartielViewModel="bilanCarbonePartielViewModel"
+    />
   </section>
 
   <section id="recommandations" class="fr-py-6w">
@@ -106,9 +74,8 @@
   import { onMounted, onUnmounted, ref } from 'vue';
   import CoachRecommandations from './custom/Coach/CoachRecommandations.vue';
   import CarteSkeleton from '@/components/CarteSkeleton.vue';
-  import BilanCarboneProgressBar from '@/components/custom/BilanCarbone/BilanCarboneProgressBar.vue';
-  import BilanUniversCarte from '@/components/custom/BilanCarbone/BilanUniversCarte.vue';
   import CoachAides from '@/components/custom/Coach/CoachAides.vue';
+  import CoachBilanCarbone from '@/components/custom/Coach/CoachBilanCarbone.vue';
   import CoachContact from '@/components/custom/Coach/CoachContact.vue';
   import CoachServices from '@/components/custom/Coach/CoachServices.vue';
   import CoachToDo from '@/components/custom/Coach/CoachToDo.vue';
@@ -138,7 +105,7 @@
   const isLoading = ref<boolean>(true);
   const todoList = ref<TodoListViewModel>();
 
-  const bilanCarboneViewModel = ref<BilanCarboneCompletViewModel>();
+  const bilanCarboneCompletViewModel = ref<BilanCarboneCompletViewModel>();
   const bilanCarbonePartielViewModel = ref<BilanCarbonePartielViewModel>();
   const store = utilisateurStore();
   const recommandationsPersonnaliseesViewModel = ref<RecommandationPersonnaliseeViewModel>();
@@ -189,7 +156,7 @@
       recupererBilanCarboneUsecase.execute(
         idUtilisateur,
         new BilanCarbonePresenterImpl(
-          vm => (bilanCarboneViewModel.value = vm),
+          vm => (bilanCarboneCompletViewModel.value = vm),
           vm => (bilanCarbonePartielViewModel.value = vm),
         ),
       ),
