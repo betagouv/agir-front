@@ -1,5 +1,5 @@
 <template>
-  <div class="background--white fr-py-8w">
+  <div class="background--white fr-py-6w">
     <div class="fr-container">
       <h1 class="fr-h1 fr-m-0">Bonjour {{ utilisateurStore().utilisateur.prenom }} 👋</h1>
     </div>
@@ -16,14 +16,7 @@
     </div>
   </div>
 
-  <section class="fr-container fr-py-6w">
-    <CoachBilanCarbone
-      :bilanCarboneCompletViewModel="bilanCarboneCompletViewModel"
-      :bilanCarbonePartielViewModel="bilanCarbonePartielViewModel"
-    />
-  </section>
-
-  <section id="recommandations" class="fr-py-6w">
+  <section id="recommandations" class="fr-pb-6w background--white">
     <div class="fr-container" v-if="!isLoading">
       <h2 class="fr-h3 fr-mb-1w">Articles et quiz recommandés pour vous</h2>
       <p class="fr-text--md">
@@ -45,6 +38,13 @@
     <div class="fr-container" v-else>
       <CarteSkeleton />
     </div>
+  </section>
+
+  <section v-if="todoList && todoList.derniere" class="fr-container fr-py-6w">
+    <CoachBilanCarbone
+      :bilanCarboneCompletViewModel="bilanCarboneCompletViewModel"
+      :bilanCarbonePartielViewModel="bilanCarbonePartielViewModel"
+    />
   </section>
 
   <section

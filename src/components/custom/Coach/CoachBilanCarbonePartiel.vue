@@ -1,5 +1,5 @@
 <template>
-  <h2 class="fr-h2">Affiner mon <span class="text--bleu">bilan environnemental</span></h2>
+  <h2 class="fr-h3 fr-mb-1w">Affiner mon <span class="text--bleu">bilan environnemental</span></h2>
   <p>
     Pour obtenir des <span class="text--bold">recommandations</span> et
     <span class="text--bold">aides</span> personnalisées
