@@ -1,16 +1,17 @@
 <template>
-  <div class="univers-card position--relative fr-p-1w fr-pb-3w border-radius--md shadow background--white full-height">
+  <div class="univers-card position--relative fr-p-1w fr-pb-2w border-radius--md shadow background--white full-height">
     <span v-if="estTermine" class="univers-card__badge fr-badge background--vert--success text--white">
       Terminé !
     </span>
     <img class="full-width img-object-fit-cover border-radius--xs" height="150" :src="urlImage" alt="" />
     <BarreDeProgression
+      class="fr-mb-1w"
       label="Progression"
       :value="progression"
       :value-max="100"
       :couleur="estTermine ? '#18753c' : '#0063CB'"
     />
-    <p class="fr-text--lg text--semi-bold text--black fr-mb-0">
+    <p class="fr-text--lg text--semi-bold text--black fr-mb-1v text--lh-1-3 fr-pt-1w">
       <router-link
         class="univers-card__link"
         :to="{

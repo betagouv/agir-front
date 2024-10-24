@@ -21,7 +21,7 @@
           v-for="univers in bilanCarbonePartielViewModel.thematiquesBilan"
           :key="univers.contentId"
         >
-          <BilanUniversCarte
+          <BilanThematiquesCarte
             :content-id="univers.contentId"
             :url-image="univers.urlImage"
             :label="univers.label"
@@ -80,7 +80,7 @@
 </template>
 <script setup lang="ts">
   import BilanPremiereEstimation from '@/components/custom/BilanCarbone/BilanPremiereEstimation.vue';
-  import BilanUniversCarte from '@/components/custom/BilanCarbone/BilanUniversCarte.vue';
+  import BilanThematiquesCarte from '@/components/custom/BilanCarbone/BilanThematiquesCarte.vue';
   import ServiceAside from '@/components/custom/Service/ServiceAside.vue';
 
   import Accordeon from '@/components/dsfr/Accordeon.vue';
