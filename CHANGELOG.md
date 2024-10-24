@@ -1,5 +1,28 @@
 # Changelog
 
+## [1.28.0](https://github.com/betagouv/agir-front/compare/v1.27.2...v1.28.0) (2024-10-24)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* ajout des entrées - longue vie aux objets ([#726](https://github.com/betagouv/agir-front/issues/726)) ([097eaad](https://github.com/betagouv/agir-front/commit/097eaad8bbe00d15c9a8d84827c0a36fc89aff6e))
+* ajout du service - longue vie aux objets ([#723](https://github.com/betagouv/agir-front/issues/723)) ([9ef2322](https://github.com/betagouv/agir-front/commit/9ef232253feb31a7bdfd3b9dedc62d9ff8fe5ee8))
+* harmonisation des cartes bilans et thématiques ([#727](https://github.com/betagouv/agir-front/issues/727)) ([6da43a7](https://github.com/betagouv/agir-front/commit/6da43a7f0381d72c7624ac5b3dca8604fbbdd3b8))
+* passage des univers dans le header et ajout du bilan à la homepage ([#688](https://github.com/betagouv/agir-front/issues/688)) ([0dc7c1b](https://github.com/betagouv/agir-front/commit/0dc7c1b21ab25e070a18623391f006ff0ed4e257))
+* suppression du mode de chauffage dans logement ([#710](https://github.com/betagouv/agir-front/issues/710)) ([edcbe1a](https://github.com/betagouv/agir-front/commit/edcbe1a757f51d8798c655be59b2ad0f5b70031f))
+* utilisation potentielle d'emoji pour les mosaic ([#715](https://github.com/betagouv/agir-front/issues/715)) ([d9cac94](https://github.com/betagouv/agir-front/commit/d9cac940e8f4a3c7c3c65573a9c7c1c7066c59b9))
+
+
+### 🐛 Corrections de bogues
+
+* applique object-fit contain au picto defi ([#712](https://github.com/betagouv/agir-front/issues/712)) ([19fc87e](https://github.com/betagouv/agir-front/commit/19fc87edf77d6f7db85aeb11af3dca5f4fc8ced2))
+* mauvais nom de fichier pour assetlinks ([#725](https://github.com/betagouv/agir-front/issues/725)) ([dedebc8](https://github.com/betagouv/agir-front/commit/dedebc864376d39896b9184c646d8612bcc6f08e))
+
+
+### 👷 Autres changements
+
+* Bump @playwright/test from 1.48.0 to 1.48.1 ([#720](https://github.com/betagouv/agir-front/issues/720)) ([7f17779](https://github.com/betagouv/agir-front/commit/7f1777909862fdc9d5610eb83fe13d7ae063b06b))
+
 ## [1.27.2](https://github.com/betagouv/agir-front/compare/v1.27.1...v1.27.2) (2024-10-22)
 
 
