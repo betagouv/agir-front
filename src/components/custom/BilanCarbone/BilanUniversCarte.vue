@@ -9,7 +9,6 @@
       :value="progression"
       :value-max="100"
       :couleur="estTermine ? '#18753c' : '#0063CB'"
-      min-width="8"
     />
     <p class="fr-text--lg text--semi-bold text--black fr-mb-0">
       <router-link

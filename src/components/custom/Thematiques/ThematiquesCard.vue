@@ -13,9 +13,8 @@
     <BarreDeProgression
       :value="thematique.progression.etapeActuelle"
       :value-max="thematique.progression.etapeCible"
-      label="Avancement dans la thématique xxx"
+      :label="`Vous avez complété ${thematique.progression.etapeActuelle} missions sur ${thematique.progression.etapeCible}`"
       :couleur="thematique.estTerminee ? '#18753c' : '#0063CB'"
-      min-width="8%"
     />
     <h2 class="fr-text--lg text--semi-bold text--black fr-mb-1v text--lh-1-3 fr-pt-1w">
       <router-link
