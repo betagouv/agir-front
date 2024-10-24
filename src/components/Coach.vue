@@ -1,5 +1,5 @@
 <template>
-  <div class="background--white fr-py-8w">
+  <div class="background--white fr-py-6w">
     <div class="fr-container">
       <h1 class="fr-h1 fr-m-0">Bonjour {{ utilisateurStore().utilisateur.prenom }} 👋</h1>
     </div>
@@ -14,31 +14,9 @@
         </div>
       </div>
     </div>
-
-    <section v-if="universViewModel" id="univers" class="fr-py-3w">
-      <div class="fr-container">
-        <CoachUnivers :universViewModel="universViewModel" />
-      </div>
-    </section>
   </div>
 
-  <section
-    v-if="utilisateurStore().utilisateur.fonctionnalitesDebloquees.includes(Fonctionnalites.AIDES)"
-    class="fr-py-8w position--relative"
-  >
-    <div class="section--outils">
-      <img src="/ic_outils.svg" alt="" />
-    </div>
-    <div class="fr-container">
-      <h2 class="fr-h2 text--center fr-mb-5w">Les outils pour vous aider</h2>
-      <div class="fr-grid-row flex-space-between section--outils-separator">
-        <CoachAides class="fr-col-lg-5 fr-col-12 fr-mb-4w" />
-        <CoachServices class="fr-col-lg-5 fr-col-12" />
-      </div>
-    </div>
-  </section>
-
-  <section id="recommandations" class="fr-py-6w fr-background-contrast--grey">
+  <section id="recommandations" class="fr-pb-6w background--white">
     <div class="fr-container" v-if="!isLoading">
       <h2 class="fr-h3 fr-mb-1w">Articles et quiz recommandés pour vous</h2>
       <p class="fr-text--md">
@@ -61,6 +39,30 @@
       <CarteSkeleton />
     </div>
   </section>
+
+  <section v-if="todoList && todoList.derniere" class="fr-container fr-py-6w">
+    <CoachBilanCarbone
+      :bilanCarboneCompletViewModel="bilanCarboneCompletViewModel"
+      :bilanCarbonePartielViewModel="bilanCarbonePartielViewModel"
+    />
+  </section>
+
+  <section
+    v-if="utilisateurStore().utilisateur.fonctionnalitesDebloquees.includes(Fonctionnalites.AIDES)"
+    class="fr-py-8w background--white position--relative"
+  >
+    <div class="section--outils">
+      <img src="/ic_outils.svg" alt="" />
+    </div>
+    <div class="fr-container">
+      <h2 class="fr-h2 text--center fr-mb-5w">Les outils pour vous aider</h2>
+      <div class="fr-grid-row flex-space-between section--outils-separator">
+        <CoachAides class="fr-col-lg-5 fr-col-12 fr-mb-4w" />
+        <CoachServices class="fr-col-lg-5 fr-col-12" />
+      </div>
+    </div>
+  </section>
+
   <section class="fr-py-6w background--image--coach">
     <div class="fr-container">
       <CoachContact />
@@ -73,10 +75,17 @@
   import CoachRecommandations from './custom/Coach/CoachRecommandations.vue';
   import CarteSkeleton from '@/components/CarteSkeleton.vue';
   import CoachAides from '@/components/custom/Coach/CoachAides.vue';
+  import CoachBilanCarbone from '@/components/custom/Coach/CoachBilanCarbone.vue';
   import CoachContact from '@/components/custom/Coach/CoachContact.vue';
   import CoachServices from '@/components/custom/Coach/CoachServices.vue';
   import CoachToDo from '@/components/custom/Coach/CoachToDo.vue';
-  import CoachUnivers from '@/components/custom/Coach/CoachUnivers.vue';
+  import { BilanCarboneRepositoryAxios } from '@/domaines/bilanCarbone/adapters/bilanCarbone.repository.axios';
+  import {
+    BilanCarboneAccueilPresenterImpl,
+    BilanCarboneCompletAccueilViewModel,
+    BilanCarbonePartielAccueilViewModel,
+  } from '@/domaines/bilanCarbone/adapters/bilanCarboneAccueil.presenter.impl';
+  import { RecupererBilanCarboneUsecase } from '@/domaines/bilanCarbone/recupererBilanCarbone.usecase';
   import {
     RecommandationPersonnaliseeViewModel,
     RecommandationsPersonnaliseesPresenterImpl,
@@ -87,18 +96,17 @@
   import { ToDoListRepositoryAxios } from '@/domaines/toDoList/adapters/toDoList.repository.axios';
   import { RecupererToDoListUsecase } from '@/domaines/toDoList/recupererToDoList.usecase';
   import { ToDoListEvent, ToDoListEventBusImpl } from '@/domaines/toDoList/toDoListEventBusImpl';
-  import { ListeUniversPresenterImpl, UniversViewModel } from '@/domaines/univers/adapters/listeUnivers.presenter.impl';
-  import { UniversRepositoryAxios } from '@/domaines/univers/adapters/univers.repository.axios';
-  import { RecupererListeUniversUsecase } from '@/domaines/univers/recupererListeUnivers.usecase';
   import { RouteCoachName } from '@/router/coach/routeCoachName';
   import { RouteCompteName } from '@/router/compte/routeCompteName';
   import { Fonctionnalites } from '@/shell/fonctionnalitesEnum';
-  import { publierEvenementHotjar, HotjarEvenement } from '@/shell/publierEvenementHotjar';
+  import { HotjarEvenement, publierEvenementHotjar } from '@/shell/publierEvenementHotjar';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const isLoading = ref<boolean>(true);
   const todoList = ref<TodoListViewModel>();
-  const universViewModel = ref<UniversViewModel[]>();
+
+  const bilanCarboneCompletViewModel = ref<BilanCarboneCompletAccueilViewModel>();
+  const bilanCarbonePartielViewModel = ref<BilanCarbonePartielAccueilViewModel>();
   const store = utilisateurStore();
   const recommandationsPersonnaliseesViewModel = ref<RecommandationPersonnaliseeViewModel>();
 
@@ -120,7 +128,8 @@
       new RecommandationsPersonnaliseesRepositoryAxios(),
     );
     const chargerTodoListUsecase = new RecupererToDoListUsecase(new ToDoListRepositoryAxios());
-    const chargerUniversUsecase = new RecupererListeUniversUsecase(new UniversRepositoryAxios());
+
+    const recupererBilanCarboneUsecase = new RecupererBilanCarboneUsecase(new BilanCarboneRepositoryAxios());
 
     ToDoListEventBusImpl.getInstance().subscribe(subscriberName, ToDoListEvent.TODO_POINTS_ONT_ETE_RECUPERE, () => {
       chargerTodoListUsecase.execute(idUtilisateur, new ToDoListPresenterImpl(mapValueTodo));
@@ -136,10 +145,6 @@
 
     ToDoListEventBusImpl.getInstance().subscribe(subscriberName, ToDoListEvent.TODO_A_ETE_TERMINEE, () => {
       chargerTodoListUsecase.execute(idUtilisateur, new ToDoListPresenterImpl(mapValueTodo));
-      chargerUniversUsecase.execute(
-        idUtilisateur,
-        new ListeUniversPresenterImpl(viewModel => (universViewModel.value = viewModel.univers)),
-      );
     });
 
     Promise.all([
@@ -148,9 +153,12 @@
         new RecommandationsPersonnaliseesPresenterImpl(onRecommandationsPretesAAfficher),
       ),
       chargerTodoListUsecase.execute(idUtilisateur, new ToDoListPresenterImpl(mapValueTodo)),
-      chargerUniversUsecase.execute(
+      recupererBilanCarboneUsecase.execute(
         idUtilisateur,
-        new ListeUniversPresenterImpl(viewModel => (universViewModel.value = viewModel.univers)),
+        new BilanCarboneAccueilPresenterImpl(
+          vm => (bilanCarboneCompletViewModel.value = vm),
+          vm => (bilanCarbonePartielViewModel.value = vm),
+        ),
       ),
     ])
       .then(() => {

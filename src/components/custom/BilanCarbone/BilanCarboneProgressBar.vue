@@ -8,10 +8,7 @@
       </span>
     </div>
     <div class="progress-bar-container overflow--hidden fr-mb-3v">
-      <div class="progress-bar-content" :style="progressBarStyle">
-        <span class="fr-sr-only">70% des Français ont réalisé cette action</span>
-        <!-- trouver wording pour a11y -->
-      </div>
+      <div class="progress-bar-content" :style="progressBarStyle" />
     </div>
     <p class="fr-mb-0 text--lh-1-3">
       A titre de comparaison, la moyenne française est de <span class="fr-text--bold">9,2 tonnes</span>
@@ -22,10 +19,10 @@
 <script setup lang="ts">
   import { computed } from 'vue';
 
-  const props = defineProps<{ impactTonneAnnuel: string; pourcentageProgessBar: number }>();
+  const props = defineProps<{ impactTonneAnnuel: string; pourcentageProgressBar: number }>();
 
   const progressBarStyle = computed(() => {
-    const percentage = 100 - props.pourcentageProgessBar;
+    const percentage = 100 - props.pourcentageProgressBar;
     return {
       'clip-path': `inset(0 ${percentage}% 0 0 round 0 25px 25px 0)`,
     };

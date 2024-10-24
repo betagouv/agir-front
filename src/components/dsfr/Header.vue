@@ -82,13 +82,81 @@
         <div class="fr-header__menu-links"></div>
         <nav class="fr-nav" id="navigation" role="navigation" aria-label="Menu principal" data-fr-js-navigation="true">
           <ul class="fr-nav__list" v-if="utilisateurStore().utilisateur.onboardingAEteRealise">
-            <li class="fr-nav__item" data-fr-js-navigation-item="true">
+            <li class="fr-nav__item nav__item--separateur" data-fr-js-navigation-item="true">
               <router-link
-                class="fr-nav__link"
+                class="fr-nav__link fr-pb-0"
                 :to="{ name: RouteCoachName.COACH }"
                 :aria-current="route.name === RouteCoachName.COACH ? 'page' : null"
               >
-                Agir
+                <img class="fr-p-0" src="/icons/buildings/home-4-line.svg" alt="Accueil" />
+              </router-link>
+            </li>
+            <li class="fr-nav__item" data-fr-js-navigation-item="true">
+              <router-link
+                class="fr-nav__link"
+                :to="{
+                  name: RouteUniversName.UNIVERS,
+                  params: { id: MenuUnivers.getUniversData(ClefTechniqueAPI.alimentation).url },
+                }"
+                :aria-current="
+                  route.name === RouteUniversName.UNIVERS &&
+                  route.params.id === MenuUnivers.getUniversData(ClefTechniqueAPI.alimentation).url
+                    ? 'page'
+                    : null
+                "
+              >
+                {{ MenuUnivers.getUniversData(ClefTechniqueAPI.alimentation).labelDansLeMenu }}
+              </router-link>
+            </li>
+            <li class="fr-nav__item" data-fr-js-navigation-item="true">
+              <router-link
+                class="fr-nav__link"
+                :to="{
+                  name: RouteUniversName.UNIVERS,
+                  params: { id: MenuUnivers.getUniversData(ClefTechniqueAPI.logement).url },
+                }"
+                :aria-current="
+                  route.name === RouteUniversName.UNIVERS &&
+                  route.params.id === MenuUnivers.getUniversData(ClefTechniqueAPI.logement).url
+                    ? 'page'
+                    : null
+                "
+              >
+                {{ MenuUnivers.getUniversData(ClefTechniqueAPI.logement).labelDansLeMenu }}
+              </router-link>
+            </li>
+            <li class="fr-nav__item" data-fr-js-navigation-item="true">
+              <router-link
+                class="fr-nav__link"
+                :to="{
+                  name: RouteUniversName.UNIVERS,
+                  params: { id: MenuUnivers.getUniversData(ClefTechniqueAPI.consommation).url },
+                }"
+                :aria-current="
+                  route.name === RouteUniversName.UNIVERS &&
+                  route.params.id === MenuUnivers.getUniversData(ClefTechniqueAPI.consommation).url
+                    ? 'page'
+                    : null
+                "
+              >
+                {{ MenuUnivers.getUniversData(ClefTechniqueAPI.consommation).labelDansLeMenu }}
+              </router-link>
+            </li>
+            <li class="fr-nav__item nav__item--separateur" data-fr-js-navigation-item="true">
+              <router-link
+                class="fr-nav__link"
+                :to="{
+                  name: RouteUniversName.UNIVERS,
+                  params: { id: MenuUnivers.getUniversData(ClefTechniqueAPI.transports).url },
+                }"
+                :aria-current="
+                  route.name === RouteUniversName.UNIVERS &&
+                  route.params.id === MenuUnivers.getUniversData(ClefTechniqueAPI.transports).url
+                    ? 'page'
+                    : null
+                "
+              >
+                {{ MenuUnivers.getUniversData(ClefTechniqueAPI.transports).labelDansLeMenu }}
               </router-link>
             </li>
             <li
@@ -146,6 +214,8 @@
   import { RouteCompteName } from '@/router/compte/routeCompteName';
   import { RouteAidesName } from '@/router/aides/routeAidesName';
   import Cookies from 'js-cookie';
+  import { RouteUniversName } from '@/router/univers/routes';
+  import { ClefTechniqueAPI, MenuUnivers } from '@/shell/MenuUnivers';
 
   const route = useRoute();
   const store = utilisateurStore();
@@ -196,6 +266,24 @@
   @media (min-width: 62em) {
     .fr-header__body-row {
       padding: 1rem 0;
+    }
+
+    .nav__item--separateur {
+      position: relative;
+      padding-right: 1rem;
+      margin-right: 1rem;
+    }
+
+    .nav__item--separateur::after {
+      --hauteur-separateur: 1.25rem;
+
+      content: '';
+      position: absolute;
+      right: 0;
+      height: var(--hauteur-separateur);
+      width: 1px;
+      background-color: #dbcdbd;
+      top: calc(50% - var(--hauteur-separateur) / 2);
     }
   }
 </style>

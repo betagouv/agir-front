@@ -23,27 +23,15 @@ test.beforeAll(async () => {
     localStorage.setItem('utilisateur', JSON.stringify(utilisateur));
   }, utilisateurPourLocalStorage);
 
-  await page.route(`${process.env.VITE_API_URL}/utilisateurs/dorian/services`, route => {
-    fullFillServiceVierge(route);
-  });
-
   await page.route(`${process.env.VITE_API_URL}/utilisateurs/dorian/recherche_services`, route => {
     fullFillServiceVierge(route);
   });
 
-  await page.route(`${process.env.VITE_API_URL}/utilisateurs/dorian/aides`, route => {
-    fullFillServiceVierge(route);
-  });
-
-  await page.route(`${process.env.VITE_API_URL}/utilisateurs/dorian/events`, route => {
-    fullFillServiceVierge(route);
-  });
-
-  await page.route(`${process.env.VITE_API_URL}/utilisateurs/dorian/logement`, route => {
+  await page.route(`${process.env.VITE_API_URL}/utilisateur/dorian/bilans/last`, route => {
     route.fulfill({
       status: 200,
       contentType: 'application/json',
-      body: JSON.stringify({ commune: 'Paris' }),
+      body: JSON.stringify({}),
     });
   });
 
@@ -56,22 +44,6 @@ test.beforeAll(async () => {
       status: 200,
       contentType: 'application/json',
       body: JSON.stringify(new InjectGamification().avecPointsTargetInNiveau(50).build()),
-    });
-  });
-
-  await page.route(`${process.env.VITE_API_URL}/utilisateurs/dorian/profile`, route => {
-    route.fulfill({
-      status: 200,
-      contentType: 'application/json',
-      body: JSON.stringify({}),
-    });
-  });
-
-  await page.route(`${process.env.VITE_API_URL}/utilisateurs/dorian/univers`, route => {
-    route.fulfill({
-      status: 200,
-      contentType: 'application/json',
-      body: JSON.stringify(new InjectUnivers().vierge()),
     });
   });
 
@@ -129,21 +101,6 @@ test.beforeAll(async () => {
           is_last: false,
         }),
       ),
-    });
-  });
-
-  await page.route(`${process.env.VITE_API_URL}/utilisateurs/dorian/defis`, route => {
-    route.fulfill({
-      status: 200,
-      contentType: 'application/json',
-      body: JSON.stringify([]),
-    });
-  });
-  await page.route(`${process.env.VITE_API_URL}/utilisateurs/dorian/defis_v2`, route => {
-    route.fulfill({
-      status: 200,
-      contentType: 'application/json',
-      body: JSON.stringify([]),
     });
   });
 });
