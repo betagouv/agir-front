@@ -13,7 +13,8 @@
         />
         <span class="fr-icon-checkbox-circle-fill text--bleu mosaic__checkbox" aria-hidden="true"></span>
         <span class="mosaic__label border border-radius--md">
-          <img :src="option.picto" height="50" alt="" />
+          <span v-if="option.emoji">{{ option.emoji }}</span>
+          <img v-else :src="option.picto" height="50" alt="" />
           {{ option.label }}
         </span>
       </label>
@@ -27,7 +28,7 @@
   const props = defineProps<{
     legende: string;
     name: string;
-    options: { label: string; value: string | boolean; checked?: boolean; picto?: string }[];
+    options: { label: string; value: string | boolean; checked?: boolean; emoji?: string; picto?: string }[];
   }>();
 
   const emit = defineEmits<{ (e: 'update:modelValue', value: string[]): void }>();
