@@ -1,7 +1,7 @@
 <template>
   <div class="fr-grid-row fr-grid-row--gutters fr-grid-row--middle">
     <div class="fr-col-9">
-      <BarreDeProgression :value="value" :value-max="valueMax" :label="label" :couleur="couleur" min-width="8%" />
+      <BarreDeProgression :value="value" :value-max="valueMax" :label="label" :couleur="couleur" />
     </div>
     <div class="fr-col fr-text--xs fr-mb-0 fr-pl-0">
       <span class="fr-text--bold">{{ value }}</span

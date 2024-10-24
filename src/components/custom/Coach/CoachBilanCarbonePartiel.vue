@@ -6,7 +6,7 @@
   </p>
   <ul class="fr-grid-row fr-grid-row--gutters list-style-none fr-mb-2w">
     <li class="fr-col-md-2 fr-col-6" v-for="univers in universBilan" :key="univers.contentId">
-      <BilanUniversCarte
+      <BilanThematiquesCarte
         :content-id="univers.contentId"
         :url-image="univers.urlImage"
         :label="univers.label"
@@ -25,7 +25,7 @@
 </template>
 
 <script setup lang="ts">
-  import BilanUniversCarte from '@/components/custom/BilanCarbone/BilanUniversCarte.vue';
+  import BilanThematiquesCarte from '@/components/custom/BilanCarbone/BilanThematiquesCarte.vue';
   import { BilanCarbonePartielViewModel } from '@/domaines/bilanCarbone/adapters/bilanCarbone.presenter.impl';
   import { RouteBilanCarboneName } from '@/router/bilanCarbone/routes';
 

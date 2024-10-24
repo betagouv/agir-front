@@ -130,23 +130,6 @@
                 class="fr-nav__link"
                 :to="{
                   name: RouteUniversName.UNIVERS,
-                  params: { id: MenuUnivers.getUniversData(ClefTechniqueAPI.consommation).url },
-                }"
-                :aria-current="
-                  route.name === RouteUniversName.UNIVERS &&
-                  route.params.id === MenuUnivers.getUniversData(ClefTechniqueAPI.consommation).url
-                    ? 'page'
-                    : null
-                "
-              >
-                {{ MenuUnivers.getUniversData(ClefTechniqueAPI.consommation).labelDansLeMenu }}
-              </router-link>
-            </li>
-            <li class="fr-nav__item nav__item--separateur" data-fr-js-navigation-item="true">
-              <router-link
-                class="fr-nav__link"
-                :to="{
-                  name: RouteUniversName.UNIVERS,
                   params: { id: MenuUnivers.getUniversData(ClefTechniqueAPI.transports).url },
                 }"
                 :aria-current="
@@ -157,6 +140,23 @@
                 "
               >
                 {{ MenuUnivers.getUniversData(ClefTechniqueAPI.transports).labelDansLeMenu }}
+              </router-link>
+            </li>
+            <li class="fr-nav__item nav__item--separateur" data-fr-js-navigation-item="true">
+              <router-link
+                class="fr-nav__link"
+                :to="{
+                  name: RouteUniversName.UNIVERS,
+                  params: { id: MenuUnivers.getUniversData(ClefTechniqueAPI.consommation).url },
+                }"
+                :aria-current="
+                  route.name === RouteUniversName.UNIVERS &&
+                  route.params.id === MenuUnivers.getUniversData(ClefTechniqueAPI.consommation).url
+                    ? 'page'
+                    : null
+                "
+              >
+                {{ MenuUnivers.getUniversData(ClefTechniqueAPI.consommation).labelDansLeMenu }}
               </router-link>
             </li>
             <li
