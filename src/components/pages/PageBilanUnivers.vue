@@ -45,33 +45,31 @@
   import router from '@/router';
   import { RouteBilanCarbonePath } from '@/router/bilanCarbone/routes';
   import { utilisateurStore } from '@/store/utilisateur';
+
+  const route = useRoute();
+  const univers = route.params.univers as string;
+  const recupererEnchainementQuestionsUsecase = new RecupererEnchainementQuestionsUsecase(
+    new QuestionRepositoryAxios(),
+  );
+
   const questionsViewModel = ref<QuestionsViewModel>();
   const isLoading = ref<boolean>(true);
-  const usecase = new RecupererEnchainementQuestionsUsecase(new QuestionRepositoryAxios());
-  const route = useRoute();
+  const etapeCourante = ref<number>(0);
 
-  const etapeCourante = ref<number>(-1);
-  const univers = route.params.univers as string;
-  async function chargerLeQuestionnaire() {
-    await usecase.execute(
+  onMounted(async () => {
+    await recupererEnchainementQuestionsUsecase.execute(
       utilisateurStore().utilisateur.id,
       route.params.id as string,
       new ListesQuestionsThematiquePresenter(vm => (questionsViewModel.value = vm)),
     );
-  }
 
-  onMounted(async () => {
-    await chargerLeQuestionnaire();
-    const indexQuestion = questionsViewModel.value?.questions.findIndex(question => !question.aDejaEteRepondu) || -1;
-    etapeCourante.value = indexQuestion !== -1 ? indexQuestion : 0;
-    if (indexQuestion === etapeCourante.value) {
-      etapeCourante.value = 0;
-    }
+    const premiereQuestionNonRep =
+      questionsViewModel.value?.questions.findIndex(question => !question.aDejaEteRepondu) || -1;
+    etapeCourante.value = premiereQuestionNonRep !== -1 ? premiereQuestionNonRep : 0;
     isLoading.value = false;
   });
 
   const passerEtapeSuivante = async () => {
-    await chargerLeQuestionnaire();
     etapeCourante.value++;
     if (etapeCourante.value === questionsViewModel.value?.questions.length) {
       await router.push({ path: RouteBilanCarbonePath.BILAN_CARBONE });
