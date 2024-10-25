@@ -1,4 +1,4 @@
-import { BilanCarbonePresenter } from '@/domaines/bilanCarbone/ports/bilanCarbone.presenter';
+import { BilanCarbonePresenter, ThematiquesBilan } from '@/domaines/bilanCarbone/ports/bilanCarbone.presenter';
 import { BilanCarboneRepository } from '@/domaines/bilanCarbone/ports/bilanCarbone.repository';
 
 interface BilanCarboneDetail {
@@ -25,15 +25,7 @@ export interface BilanCompletCarbone {
     emoji: string;
     pourcentage: string;
   }[];
-  universBilan: {
-    contentId: string;
-    label: string;
-    urlImage: string;
-    estTermine: boolean;
-    pourcentageProgression: number;
-    nombreTotalDeQuestion: number;
-    clefUnivers: string;
-  }[];
+  universBilan: ThematiquesBilan[];
 }
 export interface BilanPartielCarbone {
   pourcentageCompletionTotal: number;
@@ -41,15 +33,7 @@ export interface BilanPartielCarbone {
   alimentation: { niveau: 'moyen' | 'faible' | 'fort' | 'tres_fort' };
   logement: { niveau: 'moyen' | 'faible' | 'fort' | 'tres_fort' };
   consommation: { niveau: 'moyen' | 'faible' | 'fort' | 'tres_fort' };
-  universBilan: {
-    contentId: string;
-    label: string;
-    urlImage: string;
-    estTermine: boolean;
-    pourcentageProgression: number;
-    nombreTotalDeQuestion: number;
-    clefUnivers: string;
-  }[];
+  universBilan: ThematiquesBilan[];
 }
 export interface BilanCarbone {
   pourcentageCompletionTotal: number;

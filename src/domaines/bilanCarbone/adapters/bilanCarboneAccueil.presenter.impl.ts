@@ -1,5 +1,7 @@
 import { BilanCarbonePresenter, ThematiquesBilan } from '@/domaines/bilanCarbone/ports/bilanCarbone.presenter';
 import { BilanCompletCarbone, BilanPartielCarbone } from '@/domaines/bilanCarbone/recupererBilanCarbone.usecase';
+import { calculPourcentageProgressBar } from '@/domaines/bilanCarbone/utils/calculPourcentageProgressBar';
+import { calculTonnesAnnuel } from '@/domaines/bilanCarbone/utils/calculTonnesAnnuel';
 
 export interface BilanCarboneCompletAccueilViewModel {
   pourcentageProgressBar: number;
@@ -19,34 +21,15 @@ export class BilanCarboneAccueilPresenterImpl implements BilanCarbonePresenter {
 
   presenteBilanComplet(bilanCarbone: BilanCompletCarbone): void {
     this.bilanCarboneViewModel({
-      pourcentageProgressBar: this.calculPourcentageProgressBar(bilanCarbone.impactKgAnnuel),
-      nombreDeTonnesAnnuel: this.calculTonnesAnnuel(bilanCarbone.impactKgAnnuel),
+      pourcentageProgressBar: calculPourcentageProgressBar(bilanCarbone.impactKgAnnuel),
+      nombreDeTonnesAnnuel: calculTonnesAnnuel(bilanCarbone.impactKgAnnuel),
     });
   }
 
   presenteBilanPartiel(bilan: BilanPartielCarbone): void {
     this.bilanCarbonePartielViewModel({
       pourcentageCompletionTotal: bilan.pourcentageCompletionTotal,
-      thematiquesBilan: bilan.universBilan.map(univers => ({
-        clefUnivers: univers.clefUnivers,
-        contentId: univers.contentId,
-        label: univers.label,
-        urlImage: univers.urlImage,
-        estTermine: univers.estTermine,
-        pourcentageProgression: univers.pourcentageProgression,
-        nombreTotalDeQuestion: univers.nombreTotalDeQuestion,
-      })),
+      thematiquesBilan: bilan.universBilan,
     });
-  }
-
-  private calculPourcentageProgressBar(nombreDeKg: number): number {
-    const maxKg = 12000;
-    const pourcentage = (nombreDeKg / maxKg) * 100;
-
-    return Math.min(Math.max(pourcentage, 0), 100);
-  }
-
-  private calculTonnesAnnuel(nombreDeKg: number): string {
-    return (nombreDeKg / 1000).toLocaleString('fr-FR', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
   }
 }
