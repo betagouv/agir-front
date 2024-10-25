@@ -82,7 +82,6 @@
   import BilanPremiereEstimation from '@/components/custom/BilanCarbone/BilanPremiereEstimation.vue';
   import BilanThematiquesCarte from '@/components/custom/BilanCarbone/BilanThematiquesCarte.vue';
   import ServiceAside from '@/components/custom/Service/ServiceAside.vue';
-
   import Accordeon from '@/components/dsfr/Accordeon.vue';
   import { BilanCarbonePartielViewModel } from '@/domaines/bilanCarbone/adapters/bilanCarbone.presenter.impl';
 

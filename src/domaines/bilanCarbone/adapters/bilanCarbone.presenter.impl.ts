@@ -30,6 +30,7 @@ export interface BilanCarboneCompletViewModel extends BilanCarboneViewModelBase 
     emoji: string;
     pourcentage: string;
   }[];
+  thematiquesBilan: ThematiquesBilan[];
 }
 
 interface BilanCarbonePartielTagViewModel {
@@ -75,6 +76,15 @@ export class BilanCarbonePresenterImpl implements BilanCarbonePresenter {
         emoji: top3.emoji,
         label: top3.label,
         pourcentage: top3.pourcentage,
+      })),
+      thematiquesBilan: bilanCarbone.universBilan.map(univers => ({
+        clefUnivers: univers.clefUnivers,
+        contentId: univers.contentId,
+        label: univers.label,
+        urlImage: univers.urlImage,
+        estTermine: univers.estTermine,
+        pourcentageProgression: univers.pourcentageProgression,
+        nombreTotalDeQuestion: univers.nombreTotalDeQuestion,
       })),
     });
   }

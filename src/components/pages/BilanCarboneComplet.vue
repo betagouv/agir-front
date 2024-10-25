@@ -23,50 +23,74 @@
           </div>
         </li>
       </ol>
-      <h2>Voir le détail</h2>
-      <div v-for="univers in bilanCarboneViewModel.univers" :key="univers.label" class="fr-col-12 fr-col-md-9">
-        <Accordeon :name-id="univers.label">
-          <template v-slot:titre>
-            <span class="fr-grid-row flex-space-between full-width">
-              <span class="fr-text--md text--black text--semi-bold">
-                <span class="fr-mr-2w">{{ univers.emoji }}</span> {{ univers.label }}
-              </span>
-              <span class="fr-text--md fr-mr-4w text--bleu text--bold">
-                {{ univers.impactKgAnnuel.valeur }}
-                <span class="fr-text--sm fr-text--regular">{{ univers.impactKgAnnuel.unite }}</span>
-              </span>
-            </span>
-          </template>
-          <template #contenu>
-            <ul class="list-style-none">
-              <li
-                v-for="detail in univers.details"
-                :key="detail.label"
-                class="fr-grid-row align-items--center fr-mb-4w"
-              >
-                <span class="fr-grid-row flex-space-between full-width fr-m-0">
-                  <span class="fr-text--md text--black text--semi-bold fr-m-0">
-                    <span class="fr-mr-2w">{{ detail.emoji }}</span> {{ detail.label }}
-                  </span>
-                  <span class="fr-text--md fr-mr-4w text--bleu text--bold fr-m-0">
-                    {{ detail.impactKgAnnuel.valeur }}
-                    <span class="fr-text--sm fr-text--regular">{{ detail.impactKgAnnuel.unite }}</span>
-                  </span>
+      <section class="fr-mb-4w">
+        <h2>Voir le détail</h2>
+        <div v-for="univers in bilanCarboneViewModel.univers" :key="univers.label" class="fr-col-12 fr-col-md-9">
+          <Accordeon :name-id="univers.label">
+            <template v-slot:titre>
+              <span class="fr-grid-row flex-space-between full-width">
+                <span class="fr-text--md text--black text--semi-bold">
+                  <span class="fr-mr-2w">{{ univers.emoji }}</span> {{ univers.label }}
                 </span>
-                <div class="full-width fr-ml-5w fr-mr-32v">
-                  <BarreDeProgression
-                    :value="detail.pourcentage"
-                    :value-max="100"
-                    :label="`Représente ${detail.pourcentage}% de votre empreinte carbone dans cette categorie`"
-                    couleur="#DF1451"
-                    min-width="2%"
-                  />
-                </div>
-              </li>
-            </ul>
-          </template>
-        </Accordeon>
-      </div>
+                <span class="fr-text--md fr-mr-4w text--bleu text--bold">
+                  {{ univers.impactKgAnnuel.valeur }}
+                  <span class="fr-text--sm fr-text--regular">{{ univers.impactKgAnnuel.unite }}</span>
+                </span>
+              </span>
+            </template>
+            <template #contenu>
+              <ul class="list-style-none">
+                <li
+                  v-for="detail in univers.details"
+                  :key="detail.label"
+                  class="fr-grid-row align-items--center fr-mb-4w"
+                >
+                  <span class="fr-grid-row flex-space-between full-width fr-m-0">
+                    <span class="fr-text--md text--black text--semi-bold fr-m-0">
+                      <span class="fr-mr-2w">{{ detail.emoji }}</span> {{ detail.label }}
+                    </span>
+                    <span class="fr-text--md fr-mr-4w text--bleu text--bold fr-m-0">
+                      {{ detail.impactKgAnnuel.valeur }}
+                      <span class="fr-text--sm fr-text--regular">{{ detail.impactKgAnnuel.unite }}</span>
+                    </span>
+                  </span>
+                  <div class="full-width fr-ml-5w fr-mr-32v">
+                    <BarreDeProgression
+                      :value="detail.pourcentage"
+                      :value-max="100"
+                      :label="`Représente ${detail.pourcentage}% de votre empreinte carbone dans cette categorie`"
+                      couleur="#DF1451"
+                      min-width="2%"
+                    />
+                  </div>
+                </li>
+              </ul>
+            </template>
+          </Accordeon>
+        </div>
+      </section>
+      <h2>Affiner ou modifier mon bilan</h2>
+      <p class="fr-text--md">
+        Et obtenir des recommandations toujours plus personnalisées sur
+        <span class="text--italic fr-text--bold">J'Agis</span>
+      </p>
+      <ul class="fr-grid-row fr-grid-row--gutters list-style-none">
+        <li
+          class="fr-col-md-3 fr-col-6"
+          v-for="univers in bilanCarboneViewModel.thematiquesBilan"
+          :key="univers.contentId"
+        >
+          <BilanThematiquesCarte
+            :content-id="univers.contentId"
+            :url-image="univers.urlImage"
+            :label="univers.label"
+            :est-termine="univers.estTermine"
+            :nombre-de-questions="univers.nombreTotalDeQuestion"
+            :progression="univers.pourcentageProgression"
+            :univers="univers.clefUnivers"
+          />
+        </li>
+      </ul>
     </div>
     <div class="fr-col-12 fr-col-md-3">
       <ServiceAside
@@ -83,6 +107,7 @@
   import Accordeon from '@/components/custom/Aides/AccordeonAides.vue';
   import BarreDeProgression from '@/components/custom/BarreDeProgression.vue';
   import BilanCarboneProgressBar from '@/components/custom/BilanCarbone/BilanCarboneProgressBar.vue';
+  import BilanThematiquesCarte from '@/components/custom/BilanCarbone/BilanThematiquesCarte.vue';
   import ServiceAside from '@/components/custom/Service/ServiceAside.vue';
   import { BilanCarboneCompletViewModel } from '@/domaines/bilanCarbone/adapters/bilanCarbone.presenter.impl';
 

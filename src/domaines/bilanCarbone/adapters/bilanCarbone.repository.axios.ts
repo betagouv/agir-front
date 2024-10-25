@@ -73,6 +73,15 @@ export class BilanCarboneRepositoryAxios implements BilanCarboneRepository {
           label: top3.label,
           pourcentage: top3.pourcentage.toString(),
         })),
+        universBilan: reponse.data.bilan_synthese.liens_bilans_univers.map(lien => ({
+          contentId: lien.id_enchainement_kyc,
+          estTermine: lien.pourcentage_progression === 100,
+          label: lien.univers_label,
+          nombreTotalDeQuestion: lien.nombre_total_question,
+          pourcentageProgression: lien.pourcentage_progression,
+          urlImage: lien.image_url,
+          clefUnivers: lien.univers,
+        })),
       },
       bilanPartiel: {
         pourcentageCompletionTotal: reponse.data.bilan_synthese.pourcentage_completion_totale,
