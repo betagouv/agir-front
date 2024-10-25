@@ -1,4 +1,4 @@
-import { BilanCarbonePresenter } from '@/domaines/bilanCarbone/ports/bilanCarbone.presenter';
+import { BilanCarbonePresenter, ThematiquesBilan } from '@/domaines/bilanCarbone/ports/bilanCarbone.presenter';
 import { BilanCarboneRepository } from '@/domaines/bilanCarbone/ports/bilanCarbone.repository';
 
 interface BilanCarboneDetail {
@@ -25,15 +25,7 @@ export interface BilanCompletCarbone {
     emoji: string;
     pourcentage: string;
   }[];
-  universBilan: {
-    contentId: string;
-    label: string;
-    urlImage: string;
-    estTermine: boolean;
-    pourcentageProgression: number;
-    nombreTotalDeQuestion: number;
-    clefUnivers: string;
-  }[];
+  universBilan: ThematiquesBilan[];
 }
 export interface BilanPartielCarbone {
   pourcentageCompletionTotal: number;
@@ -41,20 +33,13 @@ export interface BilanPartielCarbone {
   alimentation: { niveau: 'moyen' | 'faible' | 'fort' | 'tres_fort' };
   logement: { niveau: 'moyen' | 'faible' | 'fort' | 'tres_fort' };
   consommation: { niveau: 'moyen' | 'faible' | 'fort' | 'tres_fort' };
-  universBilan: {
-    contentId: string;
-    label: string;
-    urlImage: string;
-    estTermine: boolean;
-    pourcentageProgression: number;
-    nombreTotalDeQuestion: number;
-    clefUnivers: string;
-  }[];
+  universBilan: ThematiquesBilan[];
 }
 export interface BilanCarbone {
+  bilanCompletEstDispo: boolean;
   pourcentageCompletionTotal: number;
-  bilanComplet?: BilanCompletCarbone;
-  bilanPartiel?: BilanPartielCarbone;
+  bilanComplet: BilanCompletCarbone;
+  bilanPartiel: BilanPartielCarbone;
 }
 
 export class RecupererBilanCarboneUsecase {
@@ -62,10 +47,11 @@ export class RecupererBilanCarboneUsecase {
 
   async execute(utilisateurId: string, presenter: BilanCarbonePresenter): Promise<void> {
     const bilanCarbone = await this.bilanCarboneRepository.recupererBilanCarbone(utilisateurId);
-    if (bilanCarbone.bilanComplet && bilanCarbone.pourcentageCompletionTotal === 100) {
+
+    if (bilanCarbone.bilanCompletEstDispo) {
       presenter.presenteBilanComplet(bilanCarbone.bilanComplet);
     } else {
-      presenter.presenteBilanPartiel(bilanCarbone.bilanPartiel!);
+      presenter.presenteBilanPartiel(bilanCarbone.bilanPartiel);
     }
   }
 }

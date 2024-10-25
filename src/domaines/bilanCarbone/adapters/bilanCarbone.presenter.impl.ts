@@ -1,5 +1,7 @@
 import { BilanCarbonePresenter, ThematiquesBilan } from '@/domaines/bilanCarbone/ports/bilanCarbone.presenter';
 import { BilanCompletCarbone, BilanPartielCarbone } from '@/domaines/bilanCarbone/recupererBilanCarbone.usecase';
+import { calculPourcentageProgressBar } from '@/domaines/bilanCarbone/utils/calculPourcentageProgressBar';
+import { calculTonnesAnnuel } from '@/domaines/bilanCarbone/utils/calculTonnesAnnuel';
 
 interface BilanCarbonDetailItemViewModel {
   label: string;
@@ -16,6 +18,7 @@ interface BilanCarboneDetailViewModel extends BilanCarbonDetailItemViewModel {
 
 export interface BilanCarboneViewModelBase {
   titre: string;
+  thematiquesBilan: ThematiquesBilan[];
 }
 export interface BilanCarboneCompletViewModel extends BilanCarboneViewModelBase {
   pourcentageProgressBar: number;
@@ -30,7 +33,6 @@ export interface BilanCarboneCompletViewModel extends BilanCarboneViewModelBase 
     emoji: string;
     pourcentage: string;
   }[];
-  thematiquesBilan: ThematiquesBilan[];
 }
 
 interface BilanCarbonePartielTagViewModel {
@@ -45,7 +47,6 @@ export interface BilanCarbonePartielViewModel extends BilanCarboneViewModelBase 
     tag: BilanCarbonePartielTagViewModel;
     progressBarStyle: string;
   }[];
-  thematiquesBilan: ThematiquesBilan[];
 }
 
 export class BilanCarbonePresenterImpl implements BilanCarbonePresenter {
@@ -57,8 +58,8 @@ export class BilanCarbonePresenterImpl implements BilanCarbonePresenter {
   presenteBilanComplet(bilanCarbone: BilanCompletCarbone): void {
     this.bilanCarboneViewModel({
       titre: 'Mon bilan <span class="text--bleu">environnemental</span>',
-      pourcentageProgressBar: this.calculPourcentageProgressBar(bilanCarbone.impactKgAnnuel),
-      nombreDeTonnesAnnuel: this.calculTonnesAnnuel(bilanCarbone.impactKgAnnuel),
+      pourcentageProgressBar: calculPourcentageProgressBar(bilanCarbone.impactKgAnnuel),
+      nombreDeTonnesAnnuel: calculTonnesAnnuel(bilanCarbone.impactKgAnnuel),
       impactKgAnnuel: this.formateKg(bilanCarbone.impactKgAnnuel),
       univers: bilanCarbone.univers.map(univers => ({
         label: univers.universLabel,
@@ -175,16 +176,5 @@ export class BilanCarbonePresenterImpl implements BilanCarbonePresenter {
           classes: 'tag-impact-tres-fort',
         };
     }
-  }
-
-  private calculPourcentageProgressBar(nombreDeKg: number): number {
-    const maxKg = 12000;
-    const pourcentage = (nombreDeKg / maxKg) * 100;
-
-    return Math.min(Math.max(pourcentage, 0), 100);
-  }
-
-  private calculTonnesAnnuel(nombreDeKg: number): string {
-    return (nombreDeKg / 1000).toLocaleString('fr-FR', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
   }
 }
