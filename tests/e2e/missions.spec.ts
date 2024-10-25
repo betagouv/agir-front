@@ -62,7 +62,7 @@ test.beforeAll(async () => {
         new InjectTodo().avecTodo({
           numero_todo: 0,
           points_todo: 0,
-          titre: 'Première mission !',
+          titre: 'Découvrir Mes aides',
           imageUrl: '',
           celebration: {
             type: 'reveal',
@@ -116,26 +116,11 @@ test.describe('Mission 1', async () => {
   test('Affichage des missions', async () => {
     await page.goto('/agir');
 
-    await expect(page.getByRole('heading', { level: 1, name: 'Bonjour' })).toBeVisible();
+    const titrePrincipal = page.getByRole('heading', { level: 1, name: 'Bonjour Dorian 👋', exact: true });
+    await expect(titrePrincipal).toBeVisible();
 
-    // const titrePrincipalMission = page.getByRole('heading', { level: 2, name: 'Première mission !' });
-    // await expect(titrePrincipalMission).toBeVisible();
-
-    // const titreEtatMissionDone = page.getByRole('heading', { level: 3, name: 'déjà fait' });
-    // await expect(titreEtatMissionDone).toBeVisible();
-
-    // const titreMission1 = page.getByRole('heading', { level: 4, name: 'Titre de ma mission terminée' });
-    // const lienMission1 = page.getByRole('link', { name: 'Titre de ma mission terminée' });
-    // await expect(titreMission1).toBeVisible();
-    // await expect(lienMission1).not.toBeVisible();
-
-    // const titreEtatMissionEnCours = page.getByRole('heading', { level: 3, name: 'à faire' });
-    // await expect(titreEtatMissionEnCours).toBeVisible();
-
-    // const titreMission2 = page.getByRole('heading', { level: 4, name: 'Titre de ma mission à faire' });
-    // const lienMission2 = page.getByRole('link', { name: 'Titre de ma mission à faire' });
-    // await expect(titreMission2).toBeVisible();
-    // await expect(lienMission2).toBeVisible();
+    const titrePrincipalMission = page.getByRole('heading', { level: 2, name: 'Découvrir Mes aides', exact: true });
+    await expect(titrePrincipalMission).toBeVisible();
   });
 
   test('Objectif 1 - récolter ses premiers points', async () => {
