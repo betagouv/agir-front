@@ -4,7 +4,7 @@
     <div v-if="isLoading">Chargement en cours ...</div>
     <div v-else-if="!isLoading && (bilanCarboneViewModel || bilanCarbonePartielViewModel)">
       <h1
-        class="fr-h2 fr-mb-0"
+        class="fr-h2"
         v-html="bilanCarboneViewModel?.titre ? bilanCarboneViewModel?.titre : bilanCarbonePartielViewModel?.titre"
       />
       <section>

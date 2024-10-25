@@ -1,39 +1,26 @@
 <template>
   <div class="fr-grid-row fr-grid-row--gutters">
     <div class="fr-col-12 fr-col-md-9">
-      <h2>Ma première estimation</h2>
+      <h2 class="fr-h3">Ma première estimation</h2>
       <div v-if="bilanCarbonePartielViewModel.categories">
         <div class="fr-col-md-6">
           <BilanPremiereEstimation :bilanPremiereEstimation="bilanCarbonePartielViewModel.categories" />
         </div>
       </div>
-      <p class="fr-mt-4w">
+      <p class="fr-my-4w">
         ✨ Estimation complète à
         <span class="text--bleu">{{ bilanCarbonePartielViewModel.pourcentageCompletionTotal }}%</span>
       </p>
 
-      <h2 class="fr-mb-0">Affinez mon <span class="text--bleu">estimation</span></h2>
-      <p>Et obtenez un bilan détaillé de votre impact sur l’environnement</p>
+      <section>
+        <BilanThematiquesListeCartes
+          titre="Affinez mon <span class='text--bleu'>estimation</span>"
+          sous-titre="Et obtenez un bilan détaillé de votre impact sur l’environnement"
+          :thematiques-bilan="bilanCarbonePartielViewModel.thematiquesBilan"
+        />
+      </section>
 
-      <ul class="fr-grid-row fr-grid-row--gutters list-style-none">
-        <li
-          class="fr-col-md-3 fr-col-6"
-          v-for="univers in bilanCarbonePartielViewModel.thematiquesBilan"
-          :key="univers.contentId"
-        >
-          <BilanThematiquesCarte
-            :content-id="univers.contentId"
-            :url-image="univers.urlImage"
-            :label="univers.label"
-            :est-termine="univers.estTermine"
-            :nombre-de-questions="univers.nombreTotalDeQuestion"
-            :progression="univers.pourcentageProgression"
-            :univers="univers.clefUnivers"
-          />
-        </li>
-      </ul>
-
-      <h2 class="fr-mt-4w">Une question&nbsp;?</h2>
+      <h2 class="fr-h3 fr-mt-4w">Une question&nbsp;?</h2>
       <div class="fr-accordions-group background--white fr-mb-4w">
         <Accordeon name-id="bilan-carbone">
           <template #titre>Qu’est-ce qu’un bilan carbone ?</template>
@@ -80,7 +67,7 @@
 </template>
 <script setup lang="ts">
   import BilanPremiereEstimation from '@/components/custom/BilanCarbone/BilanPremiereEstimation.vue';
-  import BilanThematiquesCarte from '@/components/custom/BilanCarbone/BilanThematiquesCarte.vue';
+  import BilanThematiquesListeCartes from '@/components/custom/BilanCarbone/BilanThematiquesListeCartes.vue';
   import ServiceAside from '@/components/custom/Service/ServiceAside.vue';
   import Accordeon from '@/components/dsfr/Accordeon.vue';
   import { BilanCarbonePartielViewModel } from '@/domaines/bilanCarbone/adapters/bilanCarbone.presenter.impl';

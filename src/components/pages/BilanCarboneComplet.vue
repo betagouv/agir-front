@@ -1,5 +1,5 @@
 <template>
-  <div class="fr-grid-row fr-grid-row--gutters fr-py-4w">
+  <div class="fr-grid-row fr-grid-row--gutters fr-pb-4w">
     <div class="fr-col-12 fr-col-md-9">
       <div class="fr-col-md-9">
         <BilanCarboneProgressBar
@@ -8,7 +8,7 @@
           class="fr-mb-4w"
         />
       </div>
-      <h2>Mes principaux postes d'émission</h2>
+      <h2 class="fr-h3">Mes principaux postes d'émission</h2>
       <ol>
         <li v-for="top in bilanCarboneViewModel.top3" :key="top.label" class="fr-text--xl fr-text--bold fr-ml-2v">
           <div class="fr-grid-row">
@@ -24,7 +24,7 @@
         </li>
       </ol>
       <section class="fr-mb-4w">
-        <h2>Voir le détail</h2>
+        <h2 class="fr-h3">Voir le détail</h2>
         <div v-for="univers in bilanCarboneViewModel.univers" :key="univers.label" class="fr-col-12 fr-col-md-9">
           <Accordeon :name-id="univers.label">
             <template v-slot:titre>
@@ -69,28 +69,13 @@
           </Accordeon>
         </div>
       </section>
-      <h2>Affiner ou modifier mon bilan</h2>
-      <p class="fr-text--md">
-        Et obtenir des recommandations toujours plus personnalisées sur
-        <span class="text--italic fr-text--bold">J'Agis</span>
-      </p>
-      <ul class="fr-grid-row fr-grid-row--gutters list-style-none">
-        <li
-          class="fr-col-md-3 fr-col-6"
-          v-for="univers in bilanCarboneViewModel.thematiquesBilan"
-          :key="univers.contentId"
-        >
-          <BilanThematiquesCarte
-            :content-id="univers.contentId"
-            :url-image="univers.urlImage"
-            :label="univers.label"
-            :est-termine="univers.estTermine"
-            :nombre-de-questions="univers.nombreTotalDeQuestion"
-            :progression="univers.pourcentageProgression"
-            :univers="univers.clefUnivers"
-          />
-        </li>
-      </ul>
+      <section>
+        <BilanThematiquesListeCartes
+          titre="Affiner ou modifier mon bilan"
+          sous-titre="Et obtenir des recommandations toujours plus personnalisées sur <span class='text--italic fr-text--bold'>J'Agis</span>"
+          :thematiques-bilan="bilanCarboneViewModel.thematiquesBilan"
+        />
+      </section>
     </div>
     <div class="fr-col-12 fr-col-md-3">
       <ServiceAside
@@ -107,7 +92,7 @@
   import Accordeon from '@/components/custom/Aides/AccordeonAides.vue';
   import BarreDeProgression from '@/components/custom/BarreDeProgression.vue';
   import BilanCarboneProgressBar from '@/components/custom/BilanCarbone/BilanCarboneProgressBar.vue';
-  import BilanThematiquesCarte from '@/components/custom/BilanCarbone/BilanThematiquesCarte.vue';
+  import BilanThematiquesListeCartes from '@/components/custom/BilanCarbone/BilanThematiquesListeCartes.vue';
   import ServiceAside from '@/components/custom/Service/ServiceAside.vue';
   import { BilanCarboneCompletViewModel } from '@/domaines/bilanCarbone/adapters/bilanCarbone.presenter.impl';
 
