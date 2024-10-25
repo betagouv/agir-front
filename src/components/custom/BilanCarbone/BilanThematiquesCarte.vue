@@ -1,6 +1,8 @@
 <template>
-  <div class="univers-card position--relative fr-p-1w fr-pb-2w border-radius--md shadow background--white full-height">
-    <span v-if="estTermine" class="univers-card__badge fr-badge background--vert--success text--white">
+  <div
+    class="thematique-card position--relative fr-p-1w fr-pb-2w border-radius--md shadow background--white full-height"
+  >
+    <span v-if="estTermine" class="thematique-card__badge fr-badge background--vert--success text--white">
       Terminé !
     </span>
     <img class="full-width img-object-fit-cover border-radius--xs" height="150" :src="urlImage" alt="" />
@@ -13,15 +15,15 @@
     />
     <p class="fr-text--lg text--semi-bold text--black fr-mb-1v text--lh-1-3 fr-pt-1w">
       <router-link
-        class="univers-card__link"
+        class="thematique-card__link"
         :to="{
           name: RouteBilanCarboneName.BILAN_CARBONE_ENCHAINEMENT,
           params: {
-            univers: univers,
+            univers: thematique,
             id: contentId,
           },
         }"
-        :title="`Allez sur l'estimation du bilan ${univers}`"
+        :title="`Allez sur l'estimation du bilan ${label}`"
       >
         {{ label }}
       </router-link>
@@ -41,25 +43,25 @@
     estTermine: boolean;
     nombreDeQuestions: number;
     progression: number;
-    univers: string;
+    thematique: string;
   }>();
 </script>
 
 <style scoped>
-  .univers-card {
+  .thematique-card {
     transition: box-shadow 0.3s ease-in-out;
   }
 
-  .univers-card:hover {
+  .thematique-card:hover {
     box-shadow: 0 6px 18px 0 rgba(0, 0, 18, 0.4);
   }
 
-  .univers-card__link {
+  .thematique-card__link {
     background-image: none;
     outline-width: 0;
   }
 
-  .univers-card__link::before {
+  .thematique-card__link::before {
     content: '';
     position: absolute;
     left: 0;
@@ -73,7 +75,7 @@
     border-radius: 0.5rem;
   }
 
-  .univers-card__badge {
+  .thematique-card__badge {
     position: absolute;
     top: 0;
     left: 50%;

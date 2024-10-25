@@ -25,6 +25,15 @@ export interface BilanCompletCarbone {
     emoji: string;
     pourcentage: string;
   }[];
+  universBilan: {
+    contentId: string;
+    label: string;
+    urlImage: string;
+    estTermine: boolean;
+    pourcentageProgression: number;
+    nombreTotalDeQuestion: number;
+    clefUnivers: string;
+  }[];
 }
 export interface BilanPartielCarbone {
   pourcentageCompletionTotal: number;
