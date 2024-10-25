@@ -1,9 +1,8 @@
 <template>
   <h2 v-html="titre" class="fr-h3" />
   <p class="fr-text--md" v-html="sousTitre" />
-
   <ul class="fr-grid-row fr-grid-row--gutters list-style-none">
-    <li class="fr-col-md-3 fr-col-6" v-for="thematique in thematiquesBilan" :key="thematique.contentId">
+    <li :class="colonnes" v-for="thematique in thematiquesBilan" :key="thematique.contentId">
       <BilanThematiquesCarte
         :content-id="thematique.contentId"
         :url-image="thematique.urlImage"
@@ -24,6 +23,7 @@
   defineProps<{
     titre: string;
     sousTitre: string;
+    colonnes: string;
     thematiquesBilan: ThematiquesBilan[];
   }>();
 </script>

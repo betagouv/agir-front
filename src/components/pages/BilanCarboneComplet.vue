@@ -8,21 +8,23 @@
           class="fr-mb-4w"
         />
       </div>
-      <h2 class="fr-h3">Mes principaux postes d'émission</h2>
-      <ol>
-        <li v-for="top in bilanCarboneViewModel.top3" :key="top.label" class="fr-text--xl fr-text--bold fr-ml-2v">
-          <div class="fr-grid-row">
-            <div>
+      <section>
+        <h2 class="fr-h3">Mes principaux postes d'émission</h2>
+        <ol>
+          <li v-for="top in bilanCarboneViewModel.top3" :key="top.label" class="fr-text--xl fr-text--bold fr-ml-2v">
+            <div class="fr-grid-row">
               <div>
-                {{ top.label }}
+                <div>
+                  {{ top.label }}
+                </div>
+                <span class="text--rouge"> {{ top.pourcentage }}% </span>
+                <span class="fr-text--regular"> de mes émissions </span>
               </div>
-              <span class="text--rouge"> {{ top.pourcentage }}% </span>
-              <span class="fr-text--regular"> de mes émissions </span>
+              <span class="text--3xl fr-p-md-2w fr-p-0w fr-ml-4w">{{ top.emoji }}</span>
             </div>
-            <span class="text--3xl fr-p-md-2w fr-p-0w fr-ml-4w">{{ top.emoji }}</span>
-          </div>
-        </li>
-      </ol>
+          </li>
+        </ol>
+      </section>
       <section class="fr-mb-4w">
         <h2 class="fr-h3">Voir le détail</h2>
         <div v-for="univers in bilanCarboneViewModel.univers" :key="univers.label" class="fr-col-12 fr-col-md-9">
@@ -74,6 +76,7 @@
           titre="Affiner ou modifier mon bilan"
           sous-titre="Et obtenir des recommandations toujours plus personnalisées sur <span class='text--italic fr-text--bold'>J'Agis</span>"
           :thematiques-bilan="bilanCarboneViewModel.thematiquesBilan"
+          colonnes="fr-col-md-3 fr-col-6"
         />
       </section>
     </div>

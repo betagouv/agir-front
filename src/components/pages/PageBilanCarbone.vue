@@ -1,20 +1,18 @@
 <template>
-  <div class="fr-container">
+  <div class="fr-container fr-pb-2w">
     <FilDAriane page-courante="Mon bilan environnemental" />
-    <div v-if="isLoading">Chargement en cours ...</div>
-    <div v-else-if="!isLoading && (bilanCarboneViewModel || bilanCarbonePartielViewModel)">
+    <p v-if="isLoading">Chargement en cours ...</p>
+    <template v-else-if="!isLoading && (bilanCarboneViewModel || bilanCarbonePartielViewModel)">
       <h1
         class="fr-h2"
         v-html="bilanCarboneViewModel?.titre ? bilanCarboneViewModel?.titre : bilanCarbonePartielViewModel?.titre"
       />
-      <section>
-        <BilanCarboneComplet v-if="bilanCarboneViewModel" :bilan-carbone-view-model="bilanCarboneViewModel" />
-        <BilanCarbonePartiel
-          v-else-if="bilanCarbonePartielViewModel"
-          :bilan-carbone-partiel-view-model="bilanCarbonePartielViewModel"
-        />
-      </section>
-    </div>
+      <BilanCarboneComplet v-if="bilanCarboneViewModel" :bilan-carbone-view-model="bilanCarboneViewModel" />
+      <BilanCarbonePartiel
+        v-else-if="bilanCarbonePartielViewModel"
+        :bilan-carbone-partiel-view-model="bilanCarbonePartielViewModel"
+      />
+    </template>
     <p v-else>Problème de chargement de donées</p>
   </div>
 </template>
