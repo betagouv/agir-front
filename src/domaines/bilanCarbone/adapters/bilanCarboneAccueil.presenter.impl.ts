@@ -29,7 +29,15 @@ export class BilanCarboneAccueilPresenterImpl implements BilanCarbonePresenter {
   presenteBilanPartiel(bilan: BilanPartielCarbone): void {
     this.bilanCarbonePartielViewModel({
       pourcentageCompletionTotal: bilan.pourcentageCompletionTotal,
-      thematiquesBilan: bilan.universBilan,
+      thematiquesBilan: bilan.universBilan.map(univers => ({
+        clefUnivers: univers.clefUnivers,
+        contentId: univers.contentId,
+        label: univers.label,
+        urlImage: univers.urlImage,
+        estTermine: univers.estTermine,
+        pourcentageProgression: univers.pourcentageProgression,
+        nombreTotalDeQuestion: univers.nombreTotalDeQuestion,
+      })),
     });
   }
 }

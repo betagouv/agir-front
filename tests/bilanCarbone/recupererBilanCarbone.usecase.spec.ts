@@ -3,7 +3,11 @@ import {
   BilanCarboneCompletViewModel,
   BilanCarbonePartielViewModel,
 } from '@/domaines/bilanCarbone/adapters/bilanCarbone.presenter.impl';
-import { RecupererBilanCarboneUsecase } from '@/domaines/bilanCarbone/recupererBilanCarbone.usecase';
+import {
+  BilanCompletCarbone,
+  BilanPartielCarbone,
+  RecupererBilanCarboneUsecase,
+} from '@/domaines/bilanCarbone/recupererBilanCarbone.usecase';
 import { BilanCarboneRepositoryMock } from './adapters/bilanCarbone.repository.mock';
 import {
   BilanCarboneAccueilPresenterImpl,
@@ -13,6 +17,7 @@ import {
 
 describe('Fichier de tests concernant le chargement du bilan carbone', () => {
   const bilanCarboneCompletMock = new BilanCarboneRepositoryMock({
+    bilanCompletEstDispo: true,
     pourcentageCompletionTotal: 100,
     bilanComplet: {
       impactKgAnnuel: 9600,
@@ -119,11 +124,12 @@ describe('Fichier de tests concernant le chargement du bilan carbone', () => {
         },
       ],
     },
-    bilanPartiel: undefined,
+    bilanPartiel: {} as BilanPartielCarbone,
   });
   const bilanCarbonePartielMock = new BilanCarboneRepositoryMock({
+    bilanCompletEstDispo: false,
     pourcentageCompletionTotal: 90,
-    bilanComplet: undefined,
+    bilanComplet: {} as BilanCompletCarbone,
     bilanPartiel: {
       pourcentageCompletionTotal: 90,
       transport: { niveau: 'moyen' },

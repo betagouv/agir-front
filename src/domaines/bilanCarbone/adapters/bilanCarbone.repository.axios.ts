@@ -42,6 +42,8 @@ interface BilanCarboneApiModel {
       univers_label: string;
       univers: string;
     }[];
+    mini_bilan_dispo: boolean;
+    bilan_complet_dispo: boolean;
   };
 }
 
@@ -52,6 +54,7 @@ export class BilanCarboneRepositoryAxios implements BilanCarboneRepository {
     const reponse = await axiosInstance.get<BilanCarboneApiModel>(`/utilisateur/${utilisateurId}/bilans/last`);
 
     return {
+      bilanCompletEstDispo: reponse.data.bilan_synthese.bilan_complet_dispo,
       pourcentageCompletionTotal: reponse.data.bilan_synthese.pourcentage_completion_totale,
       bilanComplet: {
         impactKgAnnuel: reponse.data.bilan_complet.impact_kg_annee,
