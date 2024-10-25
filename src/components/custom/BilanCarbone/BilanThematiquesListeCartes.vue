@@ -1,5 +1,5 @@
 <template>
-  <h2 v-html="titre" class="fr-h3" />
+  <h2 class="fr-h3" v-html="titre" />
   <p class="fr-text--md" v-html="sousTitre" />
   <ul class="fr-grid-row fr-grid-row--gutters list-style-none">
     <li :class="colonnes" v-for="thematique in thematiquesBilan" :key="thematique.contentId">
@@ -10,7 +10,7 @@
         :est-termine="thematique.estTermine"
         :nombre-de-questions="thematique.nombreTotalDeQuestion"
         :progression="thematique.pourcentageProgression"
-        :univers="thematique.clefUnivers"
+        :thematique="thematique.clefUnivers"
       />
     </li>
   </ul>
