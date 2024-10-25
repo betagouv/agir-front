@@ -19,7 +19,7 @@ export class MenuUnivers {
       labelDansLeMenu: 'Me nourrir',
     },
     [ClefTechniqueAPI.transports]: {
-      clefTechniqueAPI: 'transports',
+      clefTechniqueAPI: 'transport',
       url: 'me-deplacer',
       labelDansLeMenu: 'Me déplacer',
     },
