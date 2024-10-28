@@ -113,6 +113,11 @@
               Politique de confidentialité
             </router-link>
           </li>
+          <li class="fr-footer__bottom-item">
+            <router-link class="fr-footer__bottom-link fr-pt-1w" :to="{ name: RouteConformiteName.STATISTIQUES }">
+              Statistiques
+            </router-link>
+          </li>
         </ul>
         <div class="fr-footer__bottom-copy">
           <p>
