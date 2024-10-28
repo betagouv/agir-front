@@ -31,7 +31,6 @@
       <ThematiquesListe
         v-if="listeMissionThematiqueRecommandeeViewModel"
         :thematiques="listeMissionThematiqueRecommandeeViewModel"
-        univers-id="logement"
       />
 
       <router-link :to="{ name: RouteCoachName.BIBLIOTHEQUE }" class="fr-link"> Voir ma bibliothèque </router-link>

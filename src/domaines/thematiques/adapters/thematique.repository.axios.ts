@@ -102,7 +102,7 @@ export class ThematiqueRepositoryAxios implements ThematiqueRepository {
       niveau: thematique.niveau,
       urlImage: thematique.image_url,
       thematiqueParent: {
-        nom: thematique.univers_parent,
+        apiId: thematique.univers_parent,
         label: thematique.univers_parent_label,
       },
     }));
@@ -127,7 +127,7 @@ export class ThematiqueRepositoryAxios implements ThematiqueRepository {
       niveau: thematique.niveau,
       urlImage: thematique.image_url,
       thematiqueParent: {
-        nom: thematique.univers_parent,
+        apiId: thematique.univers_parent,
         label: thematique.univers_parent_label,
       },
     }));

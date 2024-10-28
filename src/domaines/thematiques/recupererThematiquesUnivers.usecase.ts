@@ -14,7 +14,7 @@ export interface Thematique {
   niveau: number;
   urlImage: string;
   thematiqueParent: {
-    nom: string;
+    apiId: string;
     label: string;
   };
 }

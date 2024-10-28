@@ -20,7 +20,7 @@
   <div v-if="!isLoading">
     <section id="thematiques" v-if="thematiquesViewModel">
       <div class="fr-container">
-        <ThematiquesListe :univers-id="universId" :thematiques="thematiquesViewModel" />
+        <ThematiquesListe :thematiques="thematiquesViewModel" />
       </div>
     </section>
 
