@@ -22,6 +22,6 @@ export class ThematiqueRepositoryMock implements ThematiqueRepository {
   }
 
   recupererMissionThematiqueRecommandee(utilisateurId: string): Promise<Thematique[]> {
-    throw new Error('Method not implemented.');
+    return Promise.resolve<Thematique[]>(this.thematiquesARetourner);
   }
 }

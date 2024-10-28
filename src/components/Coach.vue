@@ -18,15 +18,9 @@
 
   <section id="recommandations" class="fr-pb-6w background--white">
     <div class="fr-container" v-if="!isLoading">
-      <h2 class="fr-h3 fr-mb-1w">Articles et quiz recommandés pour vous</h2>
+      <h2 class="fr-h3 fr-mb-1w">Recommandés <span class="text--bleu">pour vous</span></h2>
       <p class="fr-text--md">
-        Sélection suggérée en fonction de vos
-        <router-link
-          :to="{ name: RouteCompteName.MIEUX_VOUS_CONNAITRE }"
-          class="fr-link fr-icon-user-setting-line fr-link--icon-right fr-text--md"
-        >
-          préférences
-        </router-link>
+        Des solutions <span class="text--bold">adaptées à votre situation</span> et les clés pour comprendre
       </p>
       <ThematiquesListe
         v-if="listeThematiquesRecommandeesViewModel"
@@ -96,7 +90,6 @@
   import { RecupererToDoListUsecase } from '@/domaines/toDoList/recupererToDoList.usecase';
   import { ToDoListEvent, ToDoListEventBusImpl } from '@/domaines/toDoList/toDoListEventBusImpl';
   import { RouteCoachName } from '@/router/coach/routeCoachName';
-  import { RouteCompteName } from '@/router/compte/routeCompteName';
   import { Fonctionnalites } from '@/shell/fonctionnalitesEnum';
   import { HotjarEvenement, publierEvenementHotjar } from '@/shell/publierEvenementHotjar';
   import { utilisateurStore } from '@/store/utilisateur';
