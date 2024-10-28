@@ -20,4 +20,8 @@ export class ThematiqueRepositoryMock implements ThematiqueRepository {
   terminerMission(utilisateurId: string, thematiqueId: string): Promise<void> {
     return Promise.resolve(undefined);
   }
+
+  recupererMissionThematiqueRecommandee(utilisateurId: string): Promise<Thematique[]> {
+    throw new Error('Method not implemented.');
+  }
 }

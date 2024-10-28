@@ -9,6 +9,10 @@ export class MissionThematiqueRepositoryMock implements ThematiqueRepository {
     return Promise.resolve<MissionThematique>(this.missionsARetourner);
   }
 
+  recupererMissionThematiqueRecommandee(utilisateurId: string): Promise<Thematique[]> {
+    throw new Error('Method not implemented.');
+  }
+
   recupererThematiques(_universId: string, _utilisateurId: string): Promise<Thematique[]> {
     throw new Error('Method not implemented.');
   }
