@@ -1,10 +1,9 @@
-import { test, expect, Page, Locator, chromium, Route } from '@playwright/test';
+import { test, expect, Page, chromium, Route } from '@playwright/test';
 import { InjectUtilisateur } from './utils/injectUtilisateur';
 import { InjectService } from './utils/injectService';
 import { InjectGamification } from './utils/injectGamification';
 import { InjectRecommandations } from './utils/injectRecommandations';
 import { InjectTodo } from './utils/injectTodo';
-import { InjectUnivers } from './utils/injectUnivers';
 
 let page: Page;
 test.describe.configure({ mode: 'serial' });
@@ -27,16 +26,16 @@ test.beforeAll(async () => {
     fullFillServiceVierge(route);
   });
 
+  await page.route(`${process.env.VITE_API_URL}/utilisateurs/dorian/thematiques_recommandees`, route => {
+    fullFillServiceVierge(route);
+  });
+
   await page.route(`${process.env.VITE_API_URL}/utilisateur/dorian/bilans/last`, route => {
     route.fulfill({
       status: 200,
       contentType: 'application/json',
       body: JSON.stringify({}),
     });
-  });
-
-  await page.route(`${process.env.VITE_API_URL}/utilisateurs/dorian/recommandations_v2`, route => {
-    fullFillRecommandationsVierge(route);
   });
 
   await page.route(`${process.env.VITE_API_URL}/utilisateurs/dorian/gamification`, route => {

@@ -90,7 +90,7 @@
     ThematiquesPresenterImpl,
     ThematiqueViewModel,
   } from '@/domaines/thematiques/adapters/thematiques.presenter.impl';
-  import { RecupererListeThematiquesRecommandeesUsecase } from '@/domaines/thematiques/RecupererListeThematiquesRecommandees.usecase';
+  import { RecupererListeThematiquesRecommandeesUsecase } from '@/domaines/thematiques/recupererListeThematiquesRecommandees.usecase';
   import { ToDoListPresenterImpl, TodoListViewModel } from '@/domaines/toDoList/adapters/toDoList.presenter.impl';
   import { ToDoListRepositoryAxios } from '@/domaines/toDoList/adapters/toDoList.repository.axios';
   import { RecupererToDoListUsecase } from '@/domaines/toDoList/recupererToDoList.usecase';
