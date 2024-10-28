@@ -1,7 +1,6 @@
+import { BilanCarboneBasePresenter } from '@/domaines/bilanCarbone/adapters/bilanCarboneBase.presenter';
 import { BilanCarbonePresenter, ThematiquesBilan } from '@/domaines/bilanCarbone/ports/bilanCarbone.presenter';
 import { BilanCompletCarbone, BilanPartielCarbone } from '@/domaines/bilanCarbone/recupererBilanCarbone.usecase';
-import { calculPourcentageProgressBar } from '@/domaines/bilanCarbone/utils/calculPourcentageProgressBar';
-import { calculTonnesAnnuel } from '@/domaines/bilanCarbone/utils/calculTonnesAnnuel';
 
 export interface BilanCarboneCompletAccueilViewModel {
   pourcentageProgressBar: number;
@@ -13,16 +12,18 @@ export interface BilanCarbonePartielAccueilViewModel {
   thematiquesBilan: ThematiquesBilan[];
 }
 
-export class BilanCarboneAccueilPresenterImpl implements BilanCarbonePresenter {
+export class BilanCarboneAccueilPresenterImpl extends BilanCarboneBasePresenter implements BilanCarbonePresenter {
   constructor(
     private readonly bilanCarboneViewModel: (viewModel: BilanCarboneCompletAccueilViewModel) => void,
     private readonly bilanCarbonePartielViewModel: (viewModel: BilanCarbonePartielAccueilViewModel) => void,
-  ) {}
+  ) {
+    super();
+  }
 
   presenteBilanComplet(bilanCarbone: BilanCompletCarbone): void {
     this.bilanCarboneViewModel({
-      pourcentageProgressBar: calculPourcentageProgressBar(bilanCarbone.impactKgAnnuel),
-      nombreDeTonnesAnnuel: calculTonnesAnnuel(bilanCarbone.impactKgAnnuel),
+      pourcentageProgressBar: this.calculPourcentageProgressBar(bilanCarbone.impactKgAnnuel),
+      nombreDeTonnesAnnuel: this.calculTonnesAnnuel(bilanCarbone.impactKgAnnuel),
     });
   }
 
