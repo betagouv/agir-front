@@ -1,5 +1,22 @@
 import { MissionThematique } from '@/domaines/thematiques/recupererMissionThematiqueUsecase';
-import { Thematique } from '@/domaines/thematiques/recupererThematiquesUnivers.usecase';
+
+export interface Thematique {
+  titre: string;
+  id: string;
+  progression: {
+    etapeActuelle: number;
+    etapeCible: number;
+  };
+  estBloquee: boolean;
+  raisonDuBlocage: string;
+  estNouvelle: boolean;
+  niveau: number;
+  urlImage: string;
+  thematiqueParent: {
+    apiId: string;
+    label: string;
+  };
+}
 
 export interface ThematiqueRepository {
   recupererThematiques(universId: string, utilisateurId: string): Promise<Thematique[]>;

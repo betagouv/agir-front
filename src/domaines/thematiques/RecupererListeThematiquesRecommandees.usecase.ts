@@ -1,7 +1,7 @@
 import { ThematiqueRepository } from '@/domaines/thematiques/ports/thematique.repository';
 import { ThematiquesPresenter } from '@/domaines/thematiques/ports/thematiques.presenter';
 
-export class RecupererListeMissionThematiqueRecommandeeUsecase {
+export class RecupererListeThematiquesRecommandeesUsecase {
   constructor(private readonly thematiqueRepository: ThematiqueRepository) {}
 
   async execute(utilisateurId: string, presenter: ThematiquesPresenter): Promise<void> {

@@ -29,10 +29,9 @@
         </router-link>
       </p>
       <ThematiquesListe
-        v-if="listeMissionThematiqueRecommandeeViewModel"
-        :thematiques="listeMissionThematiqueRecommandeeViewModel"
+        v-if="listeThematiquesRecommandeesViewModel"
+        :thematiques="listeThematiquesRecommandeesViewModel"
       />
-
       <router-link :to="{ name: RouteCoachName.BIBLIOTHEQUE }" class="fr-link"> Voir ma bibliothèque </router-link>
     </div>
     <div class="fr-container" v-else>
@@ -91,7 +90,7 @@
     ThematiquesPresenterImpl,
     ThematiqueViewModel,
   } from '@/domaines/thematiques/adapters/thematiques.presenter.impl';
-  import { RecupererListeMissionThematiqueRecommandeeUsecase } from '@/domaines/thematiques/recupererListeMissionThematiqueRecommandeeUsecase.usecase';
+  import { RecupererListeThematiquesRecommandeesUsecase } from '@/domaines/thematiques/RecupererListeThematiquesRecommandees.usecase';
   import { ToDoListPresenterImpl, TodoListViewModel } from '@/domaines/toDoList/adapters/toDoList.presenter.impl';
   import { ToDoListRepositoryAxios } from '@/domaines/toDoList/adapters/toDoList.repository.axios';
   import { RecupererToDoListUsecase } from '@/domaines/toDoList/recupererToDoList.usecase';
@@ -108,10 +107,10 @@
   const bilanCarboneCompletViewModel = ref<BilanCarboneCompletAccueilViewModel>();
   const bilanCarbonePartielViewModel = ref<BilanCarbonePartielAccueilViewModel>();
   const store = utilisateurStore();
-  const listeMissionThematiqueRecommandeeViewModel = ref<ThematiqueViewModel[]>();
+  const listeThematiquesRecommandeesViewModel = ref<ThematiqueViewModel[]>();
 
   function onRecommandationsPretesAAfficher(viewModel: ThematiqueViewModel[]) {
-    listeMissionThematiqueRecommandeeViewModel.value = viewModel;
+    listeThematiquesRecommandeesViewModel.value = viewModel;
   }
 
   function mapValueTodo(viewModel: TodoListViewModel) {
@@ -124,7 +123,7 @@
   const subscriberName = 'Coach';
   const lancerChargementDesDonnees = () => {
     const idUtilisateur = store.utilisateur.id;
-    const recupererListeMissionThematiqueRecommandeeUsecase = new RecupererListeMissionThematiqueRecommandeeUsecase(
+    const recupererListeThematiquesRecommandeesUsecase = new RecupererListeThematiquesRecommandeesUsecase(
       new ThematiqueRepositoryAxios(),
     );
     const chargerTodoListUsecase = new RecupererToDoListUsecase(new ToDoListRepositoryAxios());
@@ -148,7 +147,7 @@
     });
 
     Promise.all([
-      recupererListeMissionThematiqueRecommandeeUsecase.execute(
+      recupererListeThematiquesRecommandeesUsecase.execute(
         idUtilisateur,
         new ThematiquesPresenterImpl(onRecommandationsPretesAAfficher),
       ),
