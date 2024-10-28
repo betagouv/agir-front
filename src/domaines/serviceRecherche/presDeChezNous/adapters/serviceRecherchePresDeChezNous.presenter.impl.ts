@@ -14,6 +14,7 @@ export interface SuggestionServiceViewModel {
     label: string;
     style: string;
   };
+  categories?: string[];
   to: { name: string; params: { id: string } } | null;
 }
 

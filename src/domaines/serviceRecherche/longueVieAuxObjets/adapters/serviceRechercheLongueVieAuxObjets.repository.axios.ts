@@ -13,6 +13,7 @@ interface ServiceRechercheApiModel {
   nombre_favoris: number;
   distance_metres: number;
   image_url: string;
+  categories?: string[];
 }
 
 interface ServiceRechercheDetailApiModel {
@@ -82,6 +83,7 @@ export class ServiceRechercheLongueVieAuxObjetsAxios implements ServiceRecherche
           nombreMiseEnFavoris: elem.nombre_favoris,
           distance: elem.distance_metres,
           image: elem.image_url,
+          categories: elem.categories,
         };
       };
 

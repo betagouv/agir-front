@@ -2,13 +2,14 @@ import { ServiceRechercheBase } from '@/domaines/serviceRecherche/catalogue/serv
 import { ServiceRechercheLongueVieAuxObjetsPresenter } from '@/domaines/serviceRecherche/longueVieAuxObjets/ports/serviceRechercheLongueVieAuxObjets.presenter';
 import { ServiceRechercheLongueVieAuxObjetsRepository } from '@/domaines/serviceRecherche/longueVieAuxObjets/ports/serviceRechercheLongueVieAuxObjets.repository';
 
-interface ServiceRechercheLongueVieAuxObjetsResultat {
+export interface ServiceRechercheLongueVieAuxObjetsResultat {
   id: string;
   titre: string;
   adresse?: string;
   nombreMiseEnFavoris: number;
   image: string;
   distance?: number;
+  categories?: string[];
 }
 
 export interface ServiceRechercheLongueVieAuxObjets extends ServiceRechercheBase {

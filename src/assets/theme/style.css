@@ -24,6 +24,9 @@
   --custom-background-vert-light: #04ad89;
   --custom-bleu: #4a5882;
   --custom-background-bleu: #f8f9fc;
+  --custom-bleu-dark: #021E52;
+  --custom-bleu-light: #CFE5FF;
+
 }
 
 body {
@@ -130,6 +133,11 @@ h2 {
 
 .text--custom-bleu {
   color: var(--custom-bleu);
+}
+
+.jagis--text--bleu-dark {
+  color: var(--custom-bleu-dark);
+
 }
 
 .text--bleu-minor {
@@ -286,6 +294,10 @@ h2 {
 
 .background--custom-bleu {
   background-color: var(--custom-background-bleu);
+}
+
+.jagis-background--bleu-light {
+  background-color:  var(--custom-bleu-light);
 }
 
 .background--green-light {

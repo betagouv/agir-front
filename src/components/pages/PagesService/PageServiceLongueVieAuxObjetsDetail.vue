@@ -46,13 +46,17 @@
       rel="noopener noreferrer"
       >En savoir plus</a
     >
+
+    <a class="fr-btn fr-btn--secondary" :href="urlModification" target="_blank" rel="noopener noreferrer"
+      >Proposer une modification</a
+    >
   </div>
 </template>
 
 <script setup lang="ts">
   import 'leaflet/dist/leaflet.css';
   import { LMap, LMarker, LTileLayer } from '@vue-leaflet/vue-leaflet';
-  import { onMounted, ref } from 'vue';
+  import { computed, onMounted, ref } from 'vue';
   import { useRoute } from 'vue-router';
   import { ServiceRechercheLongueVieAuxObjetsAxios } from '@/domaines/serviceRecherche/longueVieAuxObjets/adapters/serviceRechercheLongueVieAuxObjets.repository.axios';
   import {
@@ -66,6 +70,10 @@
   const detailServiceViewModel = ref<DetailServiceViewModel>();
 
   const usecase = new RecupererDetailServiceLongueVieAuxObjetsUsecase(new ServiceRechercheLongueVieAuxObjetsAxios());
+
+  const urlModification = computed(() => {
+    return `https://tally.so/r/3xMqd9?Nom=${detailServiceViewModel.value?.titre}&Ville=&Adresse=${detailServiceViewModel.value?.adresse?.replace(',', '')}`;
+  });
 
   onMounted(async () => {
     await usecase.execute(

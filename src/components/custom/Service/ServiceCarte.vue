@@ -20,6 +20,15 @@
         </router-link>
         <span v-else> {{ suggestionsServiceViewModel.titre }} </span>
       </p>
+      <div v-if="suggestionsServiceViewModel.categories" class="fr-mb-2w">
+        <span
+          v-for="categorie in suggestionsServiceViewModel.categories"
+          :key="categorie"
+          class="fr-tag jagis-background--bleu-light jagis--text--bleu-dark text--semi-bold fr-mr-1w"
+        >
+          {{ categorie }}
+        </span>
+      </div>
       <p class="fr-text--sm text--gris" v-if="suggestionsServiceViewModel.description">
         {{ suggestionsServiceViewModel.description }}
       </p>
