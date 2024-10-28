@@ -31,6 +31,7 @@
     </div>
   </div>
 </template>
+
 <script setup lang="ts">
   import { onMounted, ref } from 'vue';
   import { useRoute } from 'vue-router';
@@ -56,13 +57,16 @@
   const isLoading = ref<boolean>(true);
   const etapeCourante = ref<number>(0);
 
-  onMounted(async () => {
+  async function chargerLeQuestionnaire() {
     await recupererEnchainementQuestionsUsecase.execute(
       utilisateurStore().utilisateur.id,
       route.params.id as string,
       new ListesQuestionsThematiquePresenter(vm => (questionsViewModel.value = vm)),
     );
+  }
 
+  onMounted(async () => {
+    await chargerLeQuestionnaire();
     const premiereQuestionNonRep =
       questionsViewModel.value?.questions.findIndex(question => !question.aDejaEteRepondu) || -1;
     etapeCourante.value = premiereQuestionNonRep !== -1 ? premiereQuestionNonRep : 0;
@@ -70,6 +74,7 @@
   });
 
   const passerEtapeSuivante = async () => {
+    await chargerLeQuestionnaire();
     etapeCourante.value++;
     if (etapeCourante.value === questionsViewModel.value?.questions.length) {
       await router.push({ path: RouteBilanCarbonePath.BILAN_CARBONE });
