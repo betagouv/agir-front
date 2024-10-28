@@ -21,7 +21,7 @@ export class ThematiqueRepositoryMock implements ThematiqueRepository {
     return Promise.resolve(undefined);
   }
 
-  recupererMissionThematiqueRecommandee(utilisateurId: string): Promise<Thematique[]> {
+  recupererMissionsThematiquesRecommandees(utilisateurId: string): Promise<Thematique[]> {
     return Promise.resolve<Thematique[]>(this.thematiquesARetourner);
   }
 }

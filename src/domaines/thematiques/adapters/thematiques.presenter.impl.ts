@@ -20,7 +20,6 @@ export interface ThematiqueViewModel {
 }
 export class ThematiquesPresenterImpl implements ThematiquesPresenter {
   constructor(private thematiquesViewModel: (viewModel: ThematiqueViewModel[]) => void) {}
-
   present(thematiques: Thematique[]): void {
     this.thematiquesViewModel(
       thematiques.map(thematique => ({

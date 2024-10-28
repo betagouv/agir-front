@@ -29,7 +29,7 @@ export class ThematiqueRepositorySpy implements ThematiqueRepository {
     return Promise.resolve(undefined);
   }
 
-  recupererMissionThematiqueRecommandee(utilisateurId: string): Promise<Thematique[]> {
+  recupererMissionsThematiquesRecommandees(utilisateurId: string): Promise<Thematique[]> {
     throw new Error('Method not implemented.');
   }
 }

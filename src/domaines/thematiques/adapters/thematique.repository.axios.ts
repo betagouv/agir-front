@@ -86,7 +86,7 @@ export class ThematiqueRepositoryAxios implements ThematiqueRepository {
   }
 
   @intercept401()
-  async recupererMissionThematiqueRecommandee(utilisateurId: string): Promise<Thematique[]> {
+  async recupererMissionsThematiquesRecommandees(utilisateurId: string): Promise<Thematique[]> {
     const axios = AxiosFactory.getAxios();
     const response = await axios.get<ThematiqueApiModel[]>(`/utilisateurs/${utilisateurId}/thematiques_recommandees`);
     return response.data.map(thematique => ({
