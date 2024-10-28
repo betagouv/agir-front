@@ -13,6 +13,8 @@ interface ThematiqueApiModel {
   is_new: boolean;
   niveau: number;
   image_url: string;
+  univers_parent: string;
+  univers_parent_label: string;
 }
 
 interface MissionItemThematiqueApiModel {
@@ -84,6 +86,29 @@ export class ThematiqueRepositoryAxios implements ThematiqueRepository {
   }
 
   @intercept401()
+  async recupererMissionThematiqueRecommandee(utilisateurId: string): Promise<Thematique[]> {
+    const axios = AxiosFactory.getAxios();
+    const response = await axios.get<ThematiqueApiModel[]>(`/utilisateurs/${utilisateurId}/thematiques_recommandees`);
+    return response.data.map(thematique => ({
+      id: thematique.type,
+      titre: thematique.titre,
+      progression: {
+        etapeActuelle: thematique.progression,
+        etapeCible: thematique.cible_progression,
+      },
+      estBloquee: thematique.is_locked,
+      raisonDuBlocage: thematique.reason_locked,
+      estNouvelle: thematique.is_new,
+      niveau: thematique.niveau,
+      urlImage: thematique.image_url,
+      thematiqueParent: {
+        nom: thematique.univers_parent,
+        label: thematique.univers_parent_label,
+      },
+    }));
+  }
+
+  @intercept401()
   async recupererThematiques(universId: string, utilisateurId: string): Promise<Thematique[]> {
     const axios = AxiosFactory.getAxios();
     const response = await axios.get<ThematiqueApiModel[]>(
@@ -101,6 +126,10 @@ export class ThematiqueRepositoryAxios implements ThematiqueRepository {
       estNouvelle: thematique.is_new,
       niveau: thematique.niveau,
       urlImage: thematique.image_url,
+      thematiqueParent: {
+        nom: thematique.univers_parent,
+        label: thematique.univers_parent_label,
+      },
     }));
   }
   @intercept401()

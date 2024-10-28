@@ -13,6 +13,10 @@ export interface Thematique {
   estNouvelle: boolean;
   niveau: number;
   urlImage: string;
+  thematiqueParent: {
+    nom: string;
+    label: string;
+  };
 }
 
 export class RecupererThematiquesUniversUsecase {

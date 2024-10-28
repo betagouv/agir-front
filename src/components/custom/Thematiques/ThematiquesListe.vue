@@ -12,6 +12,6 @@
 
   defineProps<{
     thematiques: ThematiqueViewModel[];
-    universId: string;
+    universId?: string;
   }>();
 </script>

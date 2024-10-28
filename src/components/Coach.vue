@@ -28,11 +28,12 @@
           préférences
         </router-link>
       </p>
-      <CoachRecommandations
-        v-if="recommandationsPersonnaliseesViewModel"
-        class="fr-mb-2w"
-        :recommandations="recommandationsPersonnaliseesViewModel.autresRecommandations"
+      <ThematiquesListe
+        v-if="listeMissionThematiqueRecommandeeViewModel"
+        :thematiques="listeMissionThematiqueRecommandeeViewModel"
+        univers-id="logement"
       />
+
       <router-link :to="{ name: RouteCoachName.BIBLIOTHEQUE }" class="fr-link"> Voir ma bibliothèque </router-link>
     </div>
     <div class="fr-container" v-else>
@@ -72,13 +73,13 @@
 
 <script setup lang="ts">
   import { onMounted, onUnmounted, ref } from 'vue';
-  import CoachRecommandations from './custom/Coach/CoachRecommandations.vue';
   import CarteSkeleton from '@/components/CarteSkeleton.vue';
   import CoachAides from '@/components/custom/Coach/CoachAides.vue';
   import CoachBilanCarbone from '@/components/custom/Coach/CoachBilanCarbone.vue';
   import CoachContact from '@/components/custom/Coach/CoachContact.vue';
   import CoachServices from '@/components/custom/Coach/CoachServices.vue';
   import CoachToDo from '@/components/custom/Coach/CoachToDo.vue';
+  import ThematiquesListe from '@/components/custom/Thematiques/ThematiquesListe.vue';
   import { BilanCarboneRepositoryAxios } from '@/domaines/bilanCarbone/adapters/bilanCarbone.repository.axios';
   import {
     BilanCarboneAccueilPresenterImpl,
@@ -86,12 +87,12 @@
     BilanCarbonePartielAccueilViewModel,
   } from '@/domaines/bilanCarbone/adapters/bilanCarboneAccueil.presenter.impl';
   import { RecupererBilanCarboneUsecase } from '@/domaines/bilanCarbone/recupererBilanCarbone.usecase';
+  import { ThematiqueRepositoryAxios } from '@/domaines/thematiques/adapters/thematique.repository.axios';
   import {
-    RecommandationPersonnaliseeViewModel,
-    RecommandationsPersonnaliseesPresenterImpl,
-  } from '@/domaines/recommandationsPersonnalisees/adapters/recommandationsPersonnalisees.presenter.impl';
-  import { RecommandationsPersonnaliseesRepositoryAxios } from '@/domaines/recommandationsPersonnalisees/adapters/recommandationsPersonnalisees.repository.axios';
-  import { RecupererRecommandationsPersonnaliseesUsecase } from '@/domaines/recommandationsPersonnalisees/recupererRecommandationsPersonnalisees.usecase';
+    ThematiquesPresenterImpl,
+    ThematiqueViewModel,
+  } from '@/domaines/thematiques/adapters/thematiques.presenter.impl';
+  import { RecupererListeMissionThematiqueRecommandeeUsecase } from '@/domaines/thematiques/recupererListeMissionThematiqueRecommandeeUsecase.usecase';
   import { ToDoListPresenterImpl, TodoListViewModel } from '@/domaines/toDoList/adapters/toDoList.presenter.impl';
   import { ToDoListRepositoryAxios } from '@/domaines/toDoList/adapters/toDoList.repository.axios';
   import { RecupererToDoListUsecase } from '@/domaines/toDoList/recupererToDoList.usecase';
@@ -108,10 +109,10 @@
   const bilanCarboneCompletViewModel = ref<BilanCarboneCompletAccueilViewModel>();
   const bilanCarbonePartielViewModel = ref<BilanCarbonePartielAccueilViewModel>();
   const store = utilisateurStore();
-  const recommandationsPersonnaliseesViewModel = ref<RecommandationPersonnaliseeViewModel>();
+  const listeMissionThematiqueRecommandeeViewModel = ref<ThematiqueViewModel[]>();
 
-  function onRecommandationsPretesAAfficher(viewModel: RecommandationPersonnaliseeViewModel) {
-    recommandationsPersonnaliseesViewModel.value = viewModel;
+  function onRecommandationsPretesAAfficher(viewModel: ThematiqueViewModel[]) {
+    listeMissionThematiqueRecommandeeViewModel.value = viewModel;
   }
 
   function mapValueTodo(viewModel: TodoListViewModel) {
@@ -124,8 +125,8 @@
   const subscriberName = 'Coach';
   const lancerChargementDesDonnees = () => {
     const idUtilisateur = store.utilisateur.id;
-    const chargerRecommandationsPersonnaliseesUsecase = new RecupererRecommandationsPersonnaliseesUsecase(
-      new RecommandationsPersonnaliseesRepositoryAxios(),
+    const recupererListeMissionThematiqueRecommandeeUsecase = new RecupererListeMissionThematiqueRecommandeeUsecase(
+      new ThematiqueRepositoryAxios(),
     );
     const chargerTodoListUsecase = new RecupererToDoListUsecase(new ToDoListRepositoryAxios());
 
@@ -148,9 +149,9 @@
     });
 
     Promise.all([
-      chargerRecommandationsPersonnaliseesUsecase.execute(
+      recupererListeMissionThematiqueRecommandeeUsecase.execute(
         idUtilisateur,
-        new RecommandationsPersonnaliseesPresenterImpl(onRecommandationsPretesAAfficher),
+        new ThematiquesPresenterImpl(onRecommandationsPretesAAfficher),
       ),
       chargerTodoListUsecase.execute(idUtilisateur, new ToDoListPresenterImpl(mapValueTodo)),
       recupererBilanCarboneUsecase.execute(
