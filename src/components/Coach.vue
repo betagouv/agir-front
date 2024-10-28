@@ -80,10 +80,8 @@
   } from '@/domaines/bilanCarbone/adapters/bilanCarboneAccueil.presenter.impl';
   import { RecupererBilanCarboneUsecase } from '@/domaines/bilanCarbone/recupererBilanCarbone.usecase';
   import { ThematiqueRepositoryAxios } from '@/domaines/thematiques/adapters/thematique.repository.axios';
-  import {
-    ThematiquesPresenterImpl,
-    ThematiqueViewModel,
-  } from '@/domaines/thematiques/adapters/thematiques.presenter.impl';
+  import { ThematiqueViewModel } from '@/domaines/thematiques/adapters/thematiques.presenter.impl';
+  import { ThematiquesRecommandeesPresenterImpl } from '@/domaines/thematiques/adapters/thematiquesRecommandees.presenter.impl';
   import { RecupererListeThematiquesRecommandeesUsecase } from '@/domaines/thematiques/recupererListeThematiquesRecommandees.usecase';
   import { ToDoListPresenterImpl, TodoListViewModel } from '@/domaines/toDoList/adapters/toDoList.presenter.impl';
   import { ToDoListRepositoryAxios } from '@/domaines/toDoList/adapters/toDoList.repository.axios';
@@ -142,7 +140,7 @@
     Promise.all([
       recupererListeThematiquesRecommandeesUsecase.execute(
         idUtilisateur,
-        new ThematiquesPresenterImpl(onRecommandationsPretesAAfficher),
+        new ThematiquesRecommandeesPresenterImpl(onRecommandationsPretesAAfficher),
       ),
       chargerTodoListUsecase.execute(idUtilisateur, new ToDoListPresenterImpl(mapValueTodo)),
       recupererBilanCarboneUsecase.execute(

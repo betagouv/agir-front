@@ -1,12 +1,10 @@
-import {
-  ThematiquesPresenterImpl,
-  ThematiqueViewModel,
-} from '@/domaines/thematiques/adapters/thematiques.presenter.impl';
+import { ThematiqueViewModel } from '@/domaines/thematiques/adapters/thematiques.presenter.impl';
 import { ThematiqueRepositoryMock } from './adapters/thematique.repository.mock';
 import { RecupererListeThematiquesRecommandeesUsecase } from '@/domaines/thematiques/recupererListeThematiquesRecommandees.usecase';
+import { ThematiquesRecommandeesPresenterImpl } from '@/domaines/thematiques/adapters/thematiquesRecommandees.presenter.impl';
 
-describe('Fichier de tests concernant la récupération des thématiques pour un Univers', () => {
-  it("En donnant l'id utilisateur et l'id de l'univers doit récupérer les thématiques", async () => {
+describe('Fichier de tests concernant la récupération des thématiques recommandées', () => {
+  it("En donnant l'id utilisateur, il doit récupérer ses thématiques recommandées", async () => {
     // GIVEN
     const usecase = new RecupererListeThematiquesRecommandeesUsecase(
       new ThematiqueRepositoryMock([
@@ -20,7 +18,7 @@ describe('Fichier de tests concernant la récupération des thématiques pour un
           niveau: 0,
           urlImage: 'https://via.placeholder.com/150',
           thematiqueParent: {
-            apiId: 'thematiqueParent1',
+            clefAPI: 'thematiqueParent1',
             label: 'Nom de thematique parent 1',
           },
         },
@@ -34,14 +32,14 @@ describe('Fichier de tests concernant la récupération des thématiques pour un
           niveau: 0,
           urlImage: 'https://via.placeholder.com/150',
           thematiqueParent: {
-            apiId: 'thematiqueParent2',
+            clefAPI: 'thematiqueParent2',
             label: 'Nom de thematique parent 2',
           },
         },
       ]),
     );
     // WHEN
-    await usecase.execute('1', new ThematiquesPresenterImpl(expectation));
+    await usecase.execute('1', new ThematiquesRecommandeesPresenterImpl(expectation));
     // THEN
     function expectation(thematiques) {
       expect(thematiques).toEqual<ThematiqueViewModel[]>([
@@ -54,7 +52,8 @@ describe('Fichier de tests concernant la récupération des thématiques pour un
           niveau: 0,
           urlImage: 'https://via.placeholder.com/150',
           estTerminee: false,
-          thematiqueParentId: 'thematiqueParent1',
+          clefThematique: 'thematiqueParent1',
+          tagLabel: 'Nom de thematique parent 1',
         },
         {
           titre: 'Thematique 2',
@@ -67,7 +66,8 @@ describe('Fichier de tests concernant la récupération des thématiques pour un
           niveau: 0,
           urlImage: 'https://via.placeholder.com/150',
           estTerminee: false,
-          thematiqueParentId: 'thematiqueParent2',
+          clefThematique: 'thematiqueParent2',
+          tagLabel: 'Nom de thematique parent 2',
         },
       ]);
     }

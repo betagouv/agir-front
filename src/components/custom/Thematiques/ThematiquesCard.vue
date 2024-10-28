@@ -15,12 +15,17 @@
       :value-max="thematique.progression.etapeCible"
       :label="`Vous avez complété ${thematique.progression.etapeActuelle} missions sur ${thematique.progression.etapeCible}`"
       :couleur="thematique.estTerminee ? '#18753c' : '#0063CB'"
+      class="fr-mb-1w"
     />
-    <h2 class="fr-text--lg text--semi-bold text--black fr-mb-1v text--lh-1-3 fr-pt-1w">
+    <ThematiqueTag
+      v-if="thematique.tagLabel"
+      :tagInfo="{ thematiqueClefAPI: thematique.clefThematique, label: thematique.tagLabel }"
+    />
+    <h2 class="fr-text--lg text--semi-bold text--black fr-mb-1v text--lh-1-3">
       <router-link
         :to="{
           name: RouteUniversName.THEMATIQUE,
-          params: { id: thematique.thematiqueParentId, thematique: thematique.id },
+          params: { id: thematique.clefThematique, thematique: thematique.id },
         }"
         class="thematique-card__link"
       >
@@ -35,6 +40,7 @@
 
 <script setup lang="ts">
   import BarreDeProgression from '@/components/custom/BarreDeProgression.vue';
+  import ThematiqueTag from '@/components/custom/Thematiques/ThematiqueTag.vue';
   import { ThematiqueViewModel } from '@/domaines/thematiques/adapters/thematiques.presenter.impl';
   import { RouteUniversName } from '@/router/univers/routes';
 

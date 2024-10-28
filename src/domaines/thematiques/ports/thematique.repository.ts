@@ -13,7 +13,7 @@ export interface Thematique {
   niveau: number;
   urlImage: string;
   thematiqueParent: {
-    apiId: string;
+    clefAPI: string;
     label: string;
   };
 }
