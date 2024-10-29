@@ -19,7 +19,8 @@
     />
     <ThematiqueTag
       v-if="thematique.tagLabel"
-      :tagInfo="{ thematiqueClefAPI: thematique.clefThematique, label: thematique.tagLabel }"
+      :label="thematique.tagLabel"
+      :thematiqueClefAPI="thematique.clefThematique"
     />
     <h2 class="fr-text--lg text--semi-bold text--black fr-mb-1v text--lh-1-3">
       <router-link

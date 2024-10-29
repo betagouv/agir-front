@@ -1,7 +1,7 @@
 <template>
   <span class="tag border-radius--xl display-inline text--xs text--semi-bold">
     <span class="emoji">{{ utilitaires.emoji }}</span>
-    {{ tagInfo.label }}
+    {{ label }}
   </span>
 </template>
 
@@ -9,19 +9,17 @@
   import { TagThematique } from '@/shell/TagThematique';
 
   const props = defineProps<{
-    tagInfo: {
-      thematiqueClefAPI: string;
-      label: string;
-    };
+    thematiqueClefAPI: string;
+    label: string;
   }>();
 
-  const utilitaires = TagThematique.getTagThematiqueUtilitaire(props.tagInfo.thematiqueClefAPI);
+  const utilitaires = TagThematique.getTagThematiqueUtilitaire(props.thematiqueClefAPI);
 </script>
 
 <style scoped>
   .tag {
     width: fit-content;
-    padding: 0.2rem 0.5rem;
+    padding: 0.2rem 0.7rem;
     background-color: v-bind(utilitaires.color);
   }
 
