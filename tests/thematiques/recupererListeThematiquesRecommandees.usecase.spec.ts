@@ -101,7 +101,7 @@ describe('Fichier de tests concernant la récupération des thématiques recomma
             style: {
               backgroundColor: '#E3FBAF',
               color: '#175202',
-              emoj: '🥗',
+              emoji: '🥗',
             },
           },
         },
@@ -122,7 +122,7 @@ describe('Fichier de tests concernant la récupération des thématiques recomma
             style: {
               backgroundColor: '#D2E9FF',
               color: '#021952',
-              emoji: '?',
+              emoji: '🚗',
             },
           },
         },
@@ -131,7 +131,7 @@ describe('Fichier de tests concernant la récupération des thématiques recomma
           id: '3',
           progression: { etapeActuelle: 0, etapeCible: 4 },
           blocage: {
-            raison: 'Depensez 1000 points pour débloquer cette thématiqu',
+            raison: 'Depensez 1000 points pour débloquer cette thématique',
           },
           estNouvelle: true,
           niveau: 0,
@@ -143,7 +143,7 @@ describe('Fichier de tests concernant la récupération des thématiques recomma
             style: {
               backgroundColor: '#FFE8D7',
               color: '#522E02',
-              emoji: '?',
+              emoji: '👕',
             },
           },
         },
@@ -152,7 +152,7 @@ describe('Fichier de tests concernant la récupération des thématiques recomma
           id: '4',
           progression: { etapeActuelle: 0, etapeCible: 4 },
           blocage: {
-            raison: 'Depensez 1000 points pour débloquer cette thématiqu',
+            raison: 'Depensez 1000 points pour débloquer cette thématique',
           },
           estNouvelle: true,
           niveau: 0,
@@ -164,7 +164,7 @@ describe('Fichier de tests concernant la récupération des thématiques recomma
             style: {
               backgroundColor: '#FFE2E0',
               color: '#52022E',
-              emoji: '?',
+              emoji: '🏠',
             },
           },
         },
@@ -173,7 +173,7 @@ describe('Fichier de tests concernant la récupération des thématiques recomma
           id: '5',
           progression: { etapeActuelle: 0, etapeCible: 4 },
           blocage: {
-            raison: 'Depensez 1000 points pour débloquer cette thématiqu',
+            raison: 'Depensez 1000 points pour débloquer cette thématique',
           },
           estNouvelle: true,
           niveau: 0,
@@ -185,7 +185,7 @@ describe('Fichier de tests concernant la récupération des thématiques recomma
             style: {
               backgroundColor: '#ececec',
               color: 'black',
-              emoji: '?',
+              emoji: '👏',
             },
           },
         },
