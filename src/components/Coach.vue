@@ -16,7 +16,7 @@
     </div>
   </div>
 
-  <section id="recommandations" class="fr-pb-6w background--white">
+  <section id="recommandations" class="fr-pb-4w background--white">
     <div class="fr-container" v-if="!isLoading">
       <h2 class="fr-h3 fr-mb-1w">Recommandés <span class="text--bleu">pour vous</span></h2>
       <p class="fr-text--md">
@@ -26,7 +26,6 @@
         v-if="listeThematiquesRecommandeesViewModel"
         :thematiques="listeThematiquesRecommandeesViewModel"
       />
-      <router-link :to="{ name: RouteCoachName.BIBLIOTHEQUE }" class="fr-link"> Voir ma bibliothèque </router-link>
     </div>
     <div class="fr-container" v-else>
       <CarteSkeleton />
@@ -87,7 +86,6 @@
   import { ToDoListRepositoryAxios } from '@/domaines/toDoList/adapters/toDoList.repository.axios';
   import { RecupererToDoListUsecase } from '@/domaines/toDoList/recupererToDoList.usecase';
   import { ToDoListEvent, ToDoListEventBusImpl } from '@/domaines/toDoList/toDoListEventBusImpl';
-  import { RouteCoachName } from '@/router/coach/routeCoachName';
   import { Fonctionnalites } from '@/shell/fonctionnalitesEnum';
   import { HotjarEvenement, publierEvenementHotjar } from '@/shell/publierEvenementHotjar';
   import { utilisateurStore } from '@/store/utilisateur';
