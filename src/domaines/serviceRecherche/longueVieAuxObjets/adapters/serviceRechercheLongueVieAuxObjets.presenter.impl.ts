@@ -1,6 +1,9 @@
 import { ServiceRechercheViewModelBase } from '@/domaines/serviceRecherche/catalogue/adapters/serviceRechercheViewModel';
 import { ServiceRechercheLongueVieAuxObjetsPresenter } from '@/domaines/serviceRecherche/longueVieAuxObjets/ports/serviceRechercheLongueVieAuxObjets.presenter';
-import { ServiceRechercheLongueVieAuxObjets } from '@/domaines/serviceRecherche/longueVieAuxObjets/recupererServiceLongueVieAuxObjets.usecase';
+import {
+  ServiceRechercheLongueVieAuxObjets,
+  ServiceRechercheLongueVieAuxObjetsResultat,
+} from '@/domaines/serviceRecherche/longueVieAuxObjets/recupererServiceLongueVieAuxObjets.usecase';
 import { RouteServiceName } from '@/router/services/routes';
 
 export interface SuggestionServiceViewModel {
@@ -14,6 +17,7 @@ export interface SuggestionServiceViewModel {
     label: string;
     style: string;
   };
+  categories?: string[];
   to: { name: string; params: { id: string } } | null;
 }
 
@@ -62,30 +66,8 @@ export class ServiceRechercheLongueVieAuxObjetsPresenterImpl implements ServiceR
 
     if (serviceRecherche.suggestions.length > 0) {
       serviceRechercheViewModel = {
-        suggestions: serviceRecherche.suggestions.map(elem => ({
-          id: elem.id,
-          titre: elem.titre,
-          description: elem.adresse,
-          nombreMiseEnFavoris: elem.nombreMiseEnFavoris,
-          img: elem.image ? elem.image : '/ic_service_longue_vie_aux_objets.svg',
-          tag: elem.distance
-            ? {
-                label: this.construireTag(elem.distance),
-                style: 'background--caramel text--background-caramel',
-              }
-            : undefined,
-          to: { name: RouteServiceName.LONGUE_VIE_AUX_OBJETS_DETAIL, params: { id: elem.id } },
-        })),
-        favoris: serviceRecherche.favoris
-          ? serviceRecherche.favoris.map(elem => ({
-              id: elem.id,
-              titre: elem.titre,
-              description: elem.adresse,
-              nombreMiseEnFavoris: elem.nombreMiseEnFavoris,
-              img: elem.image ? elem.image : '/ic_service_longue_vie_aux_objets.svg',
-              to: { name: RouteServiceName.LONGUE_VIE_AUX_OBJETS_DETAIL, params: { id: elem.id } },
-            }))
-          : undefined,
+        suggestions: serviceRecherche.suggestions.map(elem => this.buildResultat(elem)),
+        favoris: serviceRecherche.favoris ? serviceRecherche.favoris.map(elem => this.buildResultat(elem)) : undefined,
         aucunResultat: false,
         aside,
         categories,
@@ -100,6 +82,24 @@ export class ServiceRechercheLongueVieAuxObjetsPresenterImpl implements ServiceR
 
     this.serviceRechercheViewModel(serviceRechercheViewModel);
     this.erreur(null);
+  }
+
+  private buildResultat(elem: ServiceRechercheLongueVieAuxObjetsResultat): SuggestionServiceViewModel {
+    return {
+      id: elem.id,
+      titre: elem.titre,
+      description: elem.adresse,
+      nombreMiseEnFavoris: elem.nombreMiseEnFavoris,
+      img: elem.image ? elem.image : '/ic_service_longue_vie_aux_objets.svg',
+      categories: elem.categories,
+      tag: elem.distance
+        ? {
+            label: this.construireTag(elem.distance),
+            style: 'background--caramel text--background-caramel',
+          }
+        : undefined,
+      to: { name: RouteServiceName.LONGUE_VIE_AUX_OBJETS_DETAIL, params: { id: elem.id } },
+    };
   }
 
   private construireTag(distance: number): string {

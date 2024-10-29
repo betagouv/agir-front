@@ -90,6 +90,7 @@ describe("Fichier de tests concernant la récuperation de service d'un recherche
                   name: RouteServiceName.LONGUE_VIE_AUX_OBJETS_DETAIL,
                   params: { id: 'id1' },
                 },
+                categories: undefined,
               },
               {
                 id: 'id2',
@@ -102,6 +103,7 @@ describe("Fichier de tests concernant la récuperation de service d'un recherche
                   name: RouteServiceName.LONGUE_VIE_AUX_OBJETS_DETAIL,
                   params: { id: 'id2' },
                 },
+                categories: undefined,
               },
               {
                 id: 'id3',
@@ -117,6 +119,7 @@ describe("Fichier de tests concernant la récuperation de service d'un recherche
                   name: RouteServiceName.LONGUE_VIE_AUX_OBJETS_DETAIL,
                   params: { id: 'id3' },
                 },
+                categories: undefined,
               },
             ],
             favoris: [
@@ -130,6 +133,8 @@ describe("Fichier de tests concernant la récuperation de service d'un recherche
                   name: RouteServiceName.LONGUE_VIE_AUX_OBJETS_DETAIL,
                   params: { id: 'id4' },
                 },
+                tag: undefined,
+                categories: undefined,
               },
               {
                 id: 'id5',
@@ -141,6 +146,8 @@ describe("Fichier de tests concernant la récuperation de service d'un recherche
                   name: RouteServiceName.LONGUE_VIE_AUX_OBJETS_DETAIL,
                   params: { id: 'id5' },
                 },
+                categories: undefined,
+                tag: undefined,
               },
             ],
             aside: {
