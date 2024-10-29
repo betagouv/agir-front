@@ -6,7 +6,7 @@ interface Univers {
 
 export enum ClefTechniqueAPI {
   alimentation = 'alimentation',
-  transports = 'transports',
+  transports = 'transport',
   consommation = 'consommation',
   logement = 'logement',
 }

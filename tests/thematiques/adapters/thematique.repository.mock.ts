@@ -1,6 +1,6 @@
 import { ThematiqueRepository } from '@/domaines/thematiques/ports/thematique.repository';
 import { MissionThematique } from '@/domaines/thematiques/recupererMissionThematiqueUsecase';
-import { Thematique } from '@/domaines/thematiques/recupererThematiquesUnivers.usecase';
+import { Thematique } from '@/domaines/thematiques/thematique';
 
 export class ThematiqueRepositoryMock implements ThematiqueRepository {
   constructor(private thematiquesARetourner: Thematique[]) {}
@@ -19,5 +19,9 @@ export class ThematiqueRepositoryMock implements ThematiqueRepository {
 
   terminerMission(utilisateurId: string, thematiqueId: string): Promise<void> {
     return Promise.resolve(undefined);
+  }
+
+  recupererMissionsThematiquesRecommandees(utilisateurId: string): Promise<Thematique[]> {
+    return Promise.resolve<Thematique[]>(this.thematiquesARetourner);
   }
 }

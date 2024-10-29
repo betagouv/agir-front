@@ -1,7 +1,7 @@
 <template>
-  <ul class="fr-grid-row fr-grid-row--gutters list-style-none fr-m-0 fr-pb-4w">
+  <ul class="fr-grid-row fr-grid-row--gutters list-style-none fr-m-0 fr-pb-2w">
     <li v-for="thematique in thematiques" :key="thematique.id" class="fr-mb-1w fr-col-6 fr-col-md-4 fr-col-lg-2">
-      <ThematiquesCard :univers-id="universId" :thematique="thematique" />
+      <ThematiquesCard :thematique="thematique" />
     </li>
   </ul>
 </template>
@@ -12,6 +12,5 @@
 
   defineProps<{
     thematiques: ThematiqueViewModel[];
-    universId: string;
   }>();
 </script>

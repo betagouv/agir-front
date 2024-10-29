@@ -19,6 +19,10 @@ describe('Fichier de tests concernant la récupération des thématiques pour un
           estNouvelle: true,
           niveau: 0,
           urlImage: 'https://via.placeholder.com/150',
+          thematiqueParent: {
+            clefAPI: 'thematiqueParent1',
+            label: 'Nom de thematique parent 1',
+          },
         },
         {
           titre: 'Thematique 2',
@@ -29,6 +33,10 @@ describe('Fichier de tests concernant la récupération des thématiques pour un
           estNouvelle: true,
           niveau: 0,
           urlImage: 'https://via.placeholder.com/150',
+          thematiqueParent: {
+            clefAPI: 'thematiqueParent2',
+            label: 'Nom de thematique parent 2',
+          },
         },
       ]),
     );
@@ -46,6 +54,8 @@ describe('Fichier de tests concernant la récupération des thématiques pour un
           niveau: 0,
           urlImage: 'https://via.placeholder.com/150',
           estTerminee: false,
+          clefThematique: 'thematiqueParent1',
+          tagThematique: undefined,
         },
         {
           titre: 'Thematique 2',
@@ -58,6 +68,8 @@ describe('Fichier de tests concernant la récupération des thématiques pour un
           niveau: 0,
           urlImage: 'https://via.placeholder.com/150',
           estTerminee: false,
+          clefThematique: 'thematiqueParent2',
+          tagThematique: undefined,
         },
       ]);
     }

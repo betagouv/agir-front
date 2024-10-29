@@ -1,29 +1,11 @@
+import { ThematiqueViewModel } from '@/domaines/thematiques/adapters/thematiques.presenter.impl';
 import { ThematiquesPresenter } from '@/domaines/thematiques/ports/thematiques.presenter';
 import { Thematique } from '@/domaines/thematiques/thematique';
-import { TagStyle } from '@/shell/TagThematique';
+import { TagThematique } from '@/shell/TagThematique';
 
-export interface ThematiqueViewModel {
-  titre: string;
-  id: string;
-  progression: {
-    etapeActuelle: number;
-    etapeCible: number;
-  };
-  blocage?: {
-    raison: string;
-  };
-  estNouvelle: boolean;
-  niveau?: number;
-  urlImage: string;
-  estTerminee: boolean;
-  clefThematique: string;
-  tagThematique?: {
-    label: string;
-    style: TagStyle;
-  };
-}
-export class ThematiquesPresenterImpl implements ThematiquesPresenter {
+export class ThematiquesRecommandeesPresenterImpl implements ThematiquesPresenter {
   constructor(private thematiquesViewModel: (viewModel: ThematiqueViewModel[]) => void) {}
+
   present(thematiques: Thematique[]): void {
     this.thematiquesViewModel(
       thematiques.map(thematique => ({
@@ -36,7 +18,10 @@ export class ThematiquesPresenterImpl implements ThematiquesPresenter {
         urlImage: thematique.urlImage,
         estTerminee: thematique.progression.etapeActuelle === thematique.progression.etapeCible,
         clefThematique: thematique.thematiqueParent.clefAPI,
-        tagThematique: undefined,
+        tagThematique: {
+          label: thematique.thematiqueParent.label,
+          style: TagThematique.getTagThematiqueUtilitaire(thematique.thematiqueParent.clefAPI),
+        },
       })),
     );
   }

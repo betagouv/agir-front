@@ -1,8 +1,8 @@
 import { ThematiqueRepository } from '@/domaines/thematiques/ports/thematique.repository';
 import { MissionThematique } from '@/domaines/thematiques/recupererMissionThematiqueUsecase';
-import { Thematique } from '@/domaines/thematiques/recupererThematiquesUnivers.usecase';
+import { Thematique } from '@/domaines/thematiques/thematique';
 
-export class TerminierMissionThematiqueRepositorySpy implements ThematiqueRepository {
+export class TerminerMissionThematiqueRepositorySpy implements ThematiqueRepository {
   get terminerMissionAEteAppele(): boolean {
     return this._terminerMissionAEteAppele;
   }
@@ -23,5 +23,9 @@ export class TerminierMissionThematiqueRepositorySpy implements ThematiqueReposi
   terminerMission(utilisateurId: string, thematiqueId: string): Promise<void> {
     this._terminerMissionAEteAppele = true;
     return Promise.resolve(undefined);
+  }
+
+  recupererMissionsThematiquesRecommandees(utilisateurId: string): Promise<Thematique[]> {
+    throw new Error('Method not implemented.');
   }
 }

@@ -1,11 +1,11 @@
 import { ThematiqueRepository } from '@/domaines/thematiques/ports/thematique.repository';
 import { ThematiquesPresenter } from '@/domaines/thematiques/ports/thematiques.presenter';
 
-export class RecupererThematiquesUniversUsecase {
+export class RecupererListeThematiquesRecommandeesUsecase {
   constructor(private readonly thematiqueRepository: ThematiqueRepository) {}
 
-  async execute(universId: string, utilisateurId: string, presenter: ThematiquesPresenter): Promise<void> {
-    const thematiques = await this.thematiqueRepository.recupererThematiques(universId, utilisateurId);
+  async execute(utilisateurId: string, presenter: ThematiquesPresenter): Promise<void> {
+    const thematiques = await this.thematiqueRepository.recupererMissionsThematiquesRecommandees(utilisateurId);
     presenter.present(thematiques);
   }
 }
