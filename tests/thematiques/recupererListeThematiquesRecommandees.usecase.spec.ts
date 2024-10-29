@@ -2,6 +2,7 @@ import { ThematiqueViewModel } from '@/domaines/thematiques/adapters/thematiques
 import { ThematiqueRepositoryMock } from './adapters/thematique.repository.mock';
 import { RecupererListeThematiquesRecommandeesUsecase } from '@/domaines/thematiques/recupererListeThematiquesRecommandees.usecase';
 import { ThematiquesRecommandeesPresenterImpl } from '@/domaines/thematiques/adapters/thematiquesRecommandees.presenter.impl';
+import { ClefTechniqueAPI } from '@/shell/MenuUnivers';
 
 describe('Fichier de tests concernant la récupération des thématiques recommandées', () => {
   it("En donnant l'id utilisateur, il doit récupérer ses thématiques recommandées", async () => {
@@ -18,7 +19,7 @@ describe('Fichier de tests concernant la récupération des thématiques recomma
           niveau: 0,
           urlImage: 'https://via.placeholder.com/150',
           thematiqueParent: {
-            clefAPI: 'thematiqueParent1',
+            clefAPI: ClefTechniqueAPI.alimentation,
             label: 'Nom de thematique parent 1',
           },
         },
@@ -32,8 +33,50 @@ describe('Fichier de tests concernant la récupération des thématiques recomma
           niveau: 0,
           urlImage: 'https://via.placeholder.com/150',
           thematiqueParent: {
-            clefAPI: 'thematiqueParent2',
+            clefAPI: ClefTechniqueAPI.transports,
             label: 'Nom de thematique parent 2',
+          },
+        },
+        {
+          titre: 'Thematique 3',
+          id: '3',
+          progression: { etapeActuelle: 0, etapeCible: 4 },
+          estBloquee: true,
+          raisonDuBlocage: 'Depensez 1000 points pour débloquer cette thématique',
+          estNouvelle: true,
+          niveau: 0,
+          urlImage: 'https://via.placeholder.com/150',
+          thematiqueParent: {
+            clefAPI: ClefTechniqueAPI.consommation,
+            label: 'Nom de thematique parent 3',
+          },
+        },
+        {
+          titre: 'Thematique 4',
+          id: '4',
+          progression: { etapeActuelle: 0, etapeCible: 4 },
+          estBloquee: true,
+          raisonDuBlocage: 'Depensez 1000 points pour débloquer cette thématique',
+          estNouvelle: true,
+          niveau: 0,
+          urlImage: 'https://via.placeholder.com/150',
+          thematiqueParent: {
+            clefAPI: ClefTechniqueAPI.logement,
+            label: 'Nom de thematique parent 4',
+          },
+        },
+        {
+          titre: 'Thematique 5',
+          id: '5',
+          progression: { etapeActuelle: 0, etapeCible: 4 },
+          estBloquee: true,
+          raisonDuBlocage: 'Depensez 1000 points pour débloquer cette thématique',
+          estNouvelle: true,
+          niveau: 0,
+          urlImage: 'https://via.placeholder.com/150',
+          thematiqueParent: {
+            clefAPI: 'thematique_inconnue',
+            label: 'Nom de thematique parent 5',
           },
         },
       ]),
@@ -52,8 +95,15 @@ describe('Fichier de tests concernant la récupération des thématiques recomma
           niveau: 0,
           urlImage: 'https://via.placeholder.com/150',
           estTerminee: false,
-          clefThematique: 'thematiqueParent1',
-          tagLabel: 'Nom de thematique parent 1',
+          clefThematique: ClefTechniqueAPI.alimentation,
+          tagThematique: {
+            label: 'Nom de thematique parent 1',
+            style: {
+              backgroundColor: '#E3FBAF',
+              color: '#175202',
+              emoj: '🥗',
+            },
+          },
         },
         {
           titre: 'Thematique 2',
@@ -66,8 +116,78 @@ describe('Fichier de tests concernant la récupération des thématiques recomma
           niveau: 0,
           urlImage: 'https://via.placeholder.com/150',
           estTerminee: false,
-          clefThematique: 'thematiqueParent2',
-          tagLabel: 'Nom de thematique parent 2',
+          clefThematique: ClefTechniqueAPI.transports,
+          tagThematique: {
+            label: 'Nom de thematique parent 2',
+            style: {
+              backgroundColor: '#D2E9FF',
+              color: '#021952',
+              emoji: '?',
+            },
+          },
+        },
+        {
+          titre: 'Thematique 3',
+          id: '3',
+          progression: { etapeActuelle: 0, etapeCible: 4 },
+          blocage: {
+            raison: 'Depensez 1000 points pour débloquer cette thématiqu',
+          },
+          estNouvelle: true,
+          niveau: 0,
+          urlImage: 'https://via.placeholder.com/150',
+          estTerminee: false,
+          clefThematique: ClefTechniqueAPI.consommation,
+          tagThematique: {
+            label: 'Nom de thematique parent 3',
+            style: {
+              backgroundColor: '#FFE8D7',
+              color: '#522E02',
+              emoji: '?',
+            },
+          },
+        },
+        {
+          titre: 'Thematique 4',
+          id: '4',
+          progression: { etapeActuelle: 0, etapeCible: 4 },
+          blocage: {
+            raison: 'Depensez 1000 points pour débloquer cette thématiqu',
+          },
+          estNouvelle: true,
+          niveau: 0,
+          urlImage: 'https://via.placeholder.com/150',
+          estTerminee: false,
+          clefThematique: ClefTechniqueAPI.logement,
+          tagThematique: {
+            label: 'Nom de thematique parent 4',
+            style: {
+              backgroundColor: '#FFE2E0',
+              color: '#52022E',
+              emoji: '?',
+            },
+          },
+        },
+        {
+          titre: 'Thematique 5',
+          id: '5',
+          progression: { etapeActuelle: 0, etapeCible: 4 },
+          blocage: {
+            raison: 'Depensez 1000 points pour débloquer cette thématiqu',
+          },
+          estNouvelle: true,
+          niveau: 0,
+          urlImage: 'https://via.placeholder.com/150',
+          estTerminee: false,
+          clefThematique: 'thematique_inconnue',
+          tagThematique: {
+            label: 'Nom de thematique parent 5',
+            style: {
+              backgroundColor: '#ececec',
+              color: 'black',
+              emoji: '?',
+            },
+          },
         },
       ]);
     }

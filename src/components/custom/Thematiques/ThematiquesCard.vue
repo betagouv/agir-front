@@ -18,9 +18,9 @@
       class="fr-mb-1w"
     />
     <ThematiqueTag
-      v-if="thematique.tagLabel"
-      :label="thematique.tagLabel"
+      v-if="thematique.tagThematique"
       :thematiqueClefAPI="thematique.clefThematique"
+      :tag="thematique.tagThematique"
     />
     <h2 class="fr-text--lg text--semi-bold text--black fr-mb-1v text--lh-1-3">
       <router-link
@@ -43,7 +43,6 @@
   import BarreDeProgression from '@/components/custom/BarreDeProgression.vue';
   import ThematiqueTag from '@/components/custom/Thematiques/ThematiqueTag.vue';
   import { ThematiqueViewModel } from '@/domaines/thematiques/adapters/thematiques.presenter.impl';
-  import { RouteUniversName } from '@/router/univers/routes';
 
   defineProps<{
     thematique: ThematiqueViewModel;

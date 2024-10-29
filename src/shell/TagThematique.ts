@@ -1,34 +1,40 @@
 import { ClefTechniqueAPI } from '@/shell/MenuUnivers';
 
-interface TagThematiqueUtilitaire {
-  emoji: string;
+export interface TagStyle {
+  backgroundColor: string;
   color: string;
+  emoji: string;
 }
 
 export class TagThematique {
-  private static tagData: Record<ClefTechniqueAPI, TagThematiqueUtilitaire> = {
+  private static tagData: Record<ClefTechniqueAPI, TagStyle> = {
     [ClefTechniqueAPI.alimentation]: {
+      backgroundColor: '#E3FBAF',
+      color: '#175202',
       emoji: '🥗',
-      color: '#E3FBAF',
     },
     [ClefTechniqueAPI.transports]: {
+      backgroundColor: '#D2E9FF',
+      color: '#021952',
       emoji: '🚗',
-      color: '#D2E9FF',
     },
     [ClefTechniqueAPI.consommation]: {
+      backgroundColor: '#FFE8D7',
+      color: '#522E02',
       emoji: '👕',
-      color: '#FFE8D7',
     },
     [ClefTechniqueAPI.logement]: {
+      backgroundColor: '#FFE2E0',
+      color: '#52022E',
       emoji: '🏠',
-      color: '#FFE2E0',
     },
   };
 
-  static getTagThematiqueUtilitaire(clefTechniqueAPI: string): TagThematiqueUtilitaire {
+  static getTagThematiqueUtilitaire(clefTechniqueAPI: string): TagStyle {
     return (
       this.tagData[clefTechniqueAPI] ?? {
-        color: '#ececec',
+        backgroundColor: '#ececec',
+        color: 'black',
         emoji: '👏',
       }
     );
