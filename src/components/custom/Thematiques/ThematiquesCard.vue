@@ -43,6 +43,7 @@
   import BarreDeProgression from '@/components/custom/BarreDeProgression.vue';
   import ThematiqueTag from '@/components/custom/Thematiques/ThematiqueTag.vue';
   import { ThematiqueViewModel } from '@/domaines/thematiques/adapters/thematiques.presenter.impl';
+  import { RouteUniversName } from '@/router/univers/routes';
 
   defineProps<{
     thematique: ThematiqueViewModel;
