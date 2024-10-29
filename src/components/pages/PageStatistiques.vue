@@ -2,20 +2,23 @@
   <div class="fr-container fr-py-6w">
     <h1>Statistiques d'utilisation de J'agis</h1>
     <div>
-      <iframe
+      <IframeResizer
         src="https://agir-metabase-prod.osc-secnum-fr1.scalingo.io/public/dashboard/ee7ed49c-eb83-48ce-a548-ff74b6ff99c7"
         title="Statistiques d'utilisation de J'agis"
         allowtransparency
+        license="GPLv3"
       />
     </div>
   </div>
 </template>
-<script setup></script>
+
+<script setup lang="ts">
+  import IframeResizer from '@iframe-resizer/vue/sfc';
+</script>
+
 <style scoped>
   iframe {
-    display: block;
-    border: none;
-    height: 100vh;
     width: 100%;
+    height: 100vh;
   }
 </style>
