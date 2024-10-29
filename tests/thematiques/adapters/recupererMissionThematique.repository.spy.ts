@@ -1,6 +1,6 @@
 import { ThematiqueRepository } from '@/domaines/thematiques/ports/thematique.repository';
 import { MissionThematique } from '@/domaines/thematiques/recupererMissionThematiqueUsecase';
-import { Thematique } from '@/domaines/thematiques/ports/thematique.repository';
+import { Thematique } from '@/domaines/thematiques/thematique';
 
 export class ThematiqueRepositorySpy implements ThematiqueRepository {
   get recupererPointsArgs(): { elementId: string; idUtilisateur: string } {

@@ -1,6 +1,6 @@
 <template>
-  <span class="tag border-radius--xl display-inline text--xs text--semi-bold">
-    <span class="emoji">{{ utilitaires.emoji }}</span>
+  <span class="tag border-radius--xl text--xs text--semi-bold fr-py-1v fr-px-3v">
+    <span class="fr-mr-1v">{{ utilitaires.emoji }}</span>
     {{ label }}
   </span>
 </template>
@@ -19,11 +19,6 @@
 <style scoped>
   .tag {
     width: fit-content;
-    padding: 0.2rem 0.7rem;
     background-color: v-bind(utilitaires.color);
-  }
-
-  .emoji {
-    margin-right: 0.1rem;
   }
 </style>

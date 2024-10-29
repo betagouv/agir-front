@@ -1,7 +1,7 @@
 import { AxiosFactory, intercept401 } from '@/axios.factory';
 import { ThematiqueRepository } from '@/domaines/thematiques/ports/thematique.repository';
-import { Thematique } from '@/domaines/thematiques/ports/thematique.repository';
 import { MissionThematique } from '@/domaines/thematiques/recupererMissionThematiqueUsecase';
+import { Thematique } from '@/domaines/thematiques/thematique';
 
 interface ThematiqueApiModel {
   titre: string;

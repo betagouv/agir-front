@@ -1,6 +1,6 @@
 import { ThematiqueViewModel } from '@/domaines/thematiques/adapters/thematiques.presenter.impl';
-import { Thematique } from '@/domaines/thematiques/ports/thematique.repository';
 import { ThematiquesPresenter } from '@/domaines/thematiques/ports/thematiques.presenter';
+import { Thematique } from '@/domaines/thematiques/thematique';
 
 export class ThematiquesRecommandeesPresenterImpl implements ThematiquesPresenter {
   constructor(private thematiquesViewModel: (viewModel: ThematiqueViewModel[]) => void) {}

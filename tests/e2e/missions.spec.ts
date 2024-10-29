@@ -1,4 +1,4 @@
-import { test, expect, Page, chromium, Route } from '@playwright/test';
+import { chromium, expect, Page, Route, test } from '@playwright/test';
 import { InjectUtilisateur } from './utils/injectUtilisateur';
 import { InjectService } from './utils/injectService';
 import { InjectGamification } from './utils/injectGamification';
@@ -27,7 +27,11 @@ test.beforeAll(async () => {
   });
 
   await page.route(`${process.env.VITE_API_URL}/utilisateurs/dorian/thematiques_recommandees`, route => {
-    fullFillServiceVierge(route);
+    route.fulfill({
+      status: 200,
+      contentType: 'application/json',
+      body: JSON.stringify({}),
+    });
   });
 
   await page.route(`${process.env.VITE_API_URL}/utilisateur/dorian/bilans/last`, route => {
@@ -139,7 +143,7 @@ test.describe('Mission 1', async () => {
     await expect(boutonRecolter).toBeVisible();
 
     await page.route(`${process.env.VITE_API_URL}/utilisateurs/dorian/todo/id1/gagner_points`, route => {
-      postfullFillGagnerPointReponseOk(route, 'id1');
+      postfullFillGagnerPointReponseOk(route);
     });
 
     nombreDePoints = nombreDePoints + 10;
@@ -482,7 +486,7 @@ test.describe('Mission 1', async () => {
 
   test('Objectif 4 - Finir la mission', async () => {
     await page.route(`${process.env.VITE_API_URL}/utilisateurs/dorian/todo/id/gagner_points`, route => {
-      postfullFillGagnerPointReponseOk(route, 'id');
+      postfullFillGagnerPointReponseOk(route);
     });
 
     nombreDePoints = nombreDePoints + 20;
@@ -584,7 +588,7 @@ const fullFillRecommandationsVierge = (route: Route) => {
   });
 };
 
-const postfullFillGagnerPointReponseOk = (route: Route, id: string) => {
+const postfullFillGagnerPointReponseOk = (route: Route) => {
   route.fulfill({
     status: 200,
     contentType: 'application/json',
