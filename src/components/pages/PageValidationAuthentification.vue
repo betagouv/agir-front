@@ -15,8 +15,15 @@
         :message="alerte.message"
       />
       <form @submit.prevent="validerCode">
-        <InputText class="fr-col-md-5" v-model="code" name="code" label="Code à usage unique" />
-        <button class="fr-btn fr-mr-4w" :disabled="code.length == 0">Valider</button>
+        <InputText
+          class="fr-col-md-5"
+          v-model="code"
+          name="code"
+          label="Code à usage unique"
+          :required="true"
+          :maxlength="6"
+        />
+        <button class="fr-btn fr-mr-4w">Valider</button>
       </form>
       <p class="fr-mt-4w fr-mb-0">Vous n’avez pas reçu de code ?</p>
       <button class="fr-link text--underline" @click="renvoyerCode">Renvoyer le code</button>

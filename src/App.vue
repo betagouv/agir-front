@@ -31,12 +31,12 @@
   import { RouteCompteName } from '@/router/compte/routeCompteName';
   import { utilisateurStore } from '@/store/utilisateur';
 
-  const appName = "J'agis -";
+  const appName = "- J'agis";
   router.beforeEach((to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
     const { title, estPublique } = to.meta;
 
     if (title) {
-      document.title = `${appName} ${title as string}`;
+      document.title = `${title as string} ${appName}`;
     }
     const estConnecte = utilisateurStore().utilisateur.id.length > 0;
     const onboardingTermine = utilisateurStore().utilisateur.onboardingAEteRealise;
