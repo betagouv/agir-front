@@ -13,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-  import IframeResizer from '@iframe-resizer/vue/sfc';
+  import IframeResizer from '@iframe-resizer/vue/iframe-resizer.vue';
 </script>
 
 <style scoped>
