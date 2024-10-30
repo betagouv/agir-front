@@ -13,7 +13,7 @@
         :bilan-carbone-partiel-view-model="bilanCarbonePartielViewModel"
       />
     </template>
-    <p v-else>Problème de chargement de donées</p>
+    <p v-else>Problème de chargement de données</p>
   </div>
 </template>
 
