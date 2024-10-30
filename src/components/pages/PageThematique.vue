@@ -21,7 +21,7 @@
   import { ThematiqueRepositoryAxios } from '@/domaines/thematiques/adapters/thematique.repository.axios';
   import { RecupererMissionThematiqueUsecase } from '@/domaines/thematiques/recupererMissionThematiqueUsecase';
   import { ThematiqueEvent, ThematiqueEventBusImpl } from '@/domaines/thematiques/thematiqueEventBusImpl';
-  import { MenuUnivers } from '@/shell/MenuUnivers';
+  import { ClefTechniqueAPI, MenuUnivers } from '@/shell/MenuUnivers';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const isLoading = ref<boolean>(true);
@@ -32,7 +32,7 @@
   }
 
   const thematiqueId = useRoute().params.thematique as string;
-  const clefUniversAPI = MenuUnivers.getFromUrl(useRoute().params.id).clefTechniqueAPI;
+  const clefUniversAPI = MenuUnivers.getFromUrl(useRoute().params.id as ClefTechniqueAPI)!.clefTechniqueAPI;
 
   const utilisateurId = utilisateurStore().utilisateur.id;
   const subscriberName = 'PageThematique';

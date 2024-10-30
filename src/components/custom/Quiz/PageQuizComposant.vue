@@ -1,6 +1,5 @@
 <template>
   <div class="fr-container fr-mb-6w">
-    {{ useRoute().params.universId }}
     <FilDAriane
       :page-courante="`Question : ${quizViewModel.titre}`"
       :page-hierarchie="

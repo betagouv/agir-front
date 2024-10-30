@@ -31,7 +31,10 @@
         </div>
         <div class="fr-py-3w text--center">
           <h2 class="fr-text--lg fr-mb-2w">Découvrez de nouvelles missions</h2>
-          <router-link :to="`/univers/${MenuUnivers.getUniversData(universId).url}`" class="fr-btn fr-btn--lg">
+          <router-link
+            :to="`/univers/${MenuUnivers.getUniversData(universId as ClefTechniqueAPI).url}`"
+            class="fr-btn fr-btn--lg"
+          >
             Revenir à l’univers
           </router-link>
         </div>
@@ -46,7 +49,7 @@
   import ThematiqueCardDone from '@/components/custom/Thematiques/ThematiqueCardDone.vue';
   import { ThematiqueRepositoryAxios } from '@/domaines/thematiques/adapters/thematique.repository.axios';
   import { TerminerMissionThematiqueUsecase } from '@/domaines/thematiques/terminerMissionThematique.usecase';
-  import { MenuUnivers } from '@/shell/MenuUnivers';
+  import { ClefTechniqueAPI, MenuUnivers } from '@/shell/MenuUnivers';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const props = defineProps<{
