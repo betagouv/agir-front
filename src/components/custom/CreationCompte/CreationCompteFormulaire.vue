@@ -17,6 +17,7 @@
           :message="creationDeCompteMessageErreur"
         />
       </div>
+      <p class="fr-text--md text--gris-light fr-mt-0 fr-mb-1w fr-ml-1w">Tous les champs sont obligatoires</p>
       <div class="fr-fieldset__element">
         <InputMail label="Adresse électronique" name="utilisateur-mail" v-model="compteUtilisateurInput.mail" />
       </div>

@@ -2,7 +2,7 @@
   <div class="fr-input-group">
     <label class="fr-label" :class="classLabel" :for="name">
       {{ label }}
-      <span class="text--normal fr-hint-text">Format attendu : nom@domaine.fr (obligatoire)</span>
+      <span class="text--normal fr-hint-text">Format attendu : nom@domaine.fr</span>
     </label>
     <input
       :id="name"
