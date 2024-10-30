@@ -1,5 +1,45 @@
 # Changelog
 
+## [1.28.0](https://github.com/betagouv/agir-front/compare/v1.27.2...v1.28.0) (2024-10-30)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* ajout de la page statisiques ([#733](https://github.com/betagouv/agir-front/issues/733)) ([d9c5842](https://github.com/betagouv/agir-front/commit/d9c584297fa7fad19bf8618074abd7ecddfc9c1f))
+* ajout des entrées - longue vie aux objets ([#726](https://github.com/betagouv/agir-front/issues/726)) ([097eaad](https://github.com/betagouv/agir-front/commit/097eaad8bbe00d15c9a8d84827c0a36fc89aff6e))
+* ajout des tags pour longue vie aux objets et un bouton 'proposer une modification' ([#737](https://github.com/betagouv/agir-front/issues/737)) ([dd5d185](https://github.com/betagouv/agir-front/commit/dd5d1850db9e31403c8ad1863bb43c0e4b9d35bd))
+* ajout du service - longue vie aux objets ([#723](https://github.com/betagouv/agir-front/issues/723)) ([9ef2322](https://github.com/betagouv/agir-front/commit/9ef232253feb31a7bdfd3b9dedc62d9ff8fe5ee8))
+* brancher les mission de thématiques recommandées sur la homepage ([#735](https://github.com/betagouv/agir-front/issues/735)) ([94de5dc](https://github.com/betagouv/agir-front/commit/94de5dc84fb657380825cda0df7ed22c907b9695))
+* commencer l'onboarding à la question courante ([#728](https://github.com/betagouv/agir-front/issues/728)) ([621daa9](https://github.com/betagouv/agir-front/commit/621daa9f580fb000e687efecf08d19840e99a418))
+* harmonisation des cartes bilans et thématiques ([#727](https://github.com/betagouv/agir-front/issues/727)) ([6da43a7](https://github.com/betagouv/agir-front/commit/6da43a7f0381d72c7624ac5b3dca8604fbbdd3b8))
+* passage des univers dans le header et ajout du bilan à la homepage ([#688](https://github.com/betagouv/agir-front/issues/688)) ([0dc7c1b](https://github.com/betagouv/agir-front/commit/0dc7c1b21ab25e070a18623391f006ff0ed4e257))
+* pouvoir affiner son bilan complet ([#729](https://github.com/betagouv/agir-front/issues/729)) ([5a73ecb](https://github.com/betagouv/agir-front/commit/5a73ecbf3cb5946e8a7855c57de4337f844a3ab0))
+* rendre bilan complet accessible aux utilisateurs NGC ([#730](https://github.com/betagouv/agir-front/issues/730)) ([58d4304](https://github.com/betagouv/agir-front/commit/58d4304957caee9b593abfe94a5d9729e20cecf8))
+* resize hauteur iframe ([#743](https://github.com/betagouv/agir-front/issues/743)) ([01ddb92](https://github.com/betagouv/agir-front/commit/01ddb925950a8b09a41019a00c8b33cad2c75ef9))
+* suppression du mode de chauffage dans logement ([#710](https://github.com/betagouv/agir-front/issues/710)) ([edcbe1a](https://github.com/betagouv/agir-front/commit/edcbe1a757f51d8798c655be59b2ad0f5b70031f))
+* utilisation potentielle d'emoji pour les mosaic ([#715](https://github.com/betagouv/agir-front/issues/715)) ([d9cac94](https://github.com/betagouv/agir-front/commit/d9cac940e8f4a3c7c3c65573a9c7c1c7066c59b9))
+
+
+### 🐛 Corrections de bogues
+
+* applique object-fit contain au picto defi ([#712](https://github.com/betagouv/agir-front/issues/712)) ([19fc87e](https://github.com/betagouv/agir-front/commit/19fc87edf77d6f7db85aeb11af3dca5f4fc8ced2))
+* lien pour transport dans header ([#731](https://github.com/betagouv/agir-front/issues/731)) ([f4ae686](https://github.com/betagouv/agir-front/commit/f4ae686c39b70c26fa1f21cd970f1c835399e2e9))
+* mauvais nom de fichier pour assetlinks ([#725](https://github.com/betagouv/agir-front/issues/725)) ([dedebc8](https://github.com/betagouv/agir-front/commit/dedebc864376d39896b9184c646d8612bcc6f08e))
+* rajouter quizz recommandés dans la homepage ([#744](https://github.com/betagouv/agir-front/issues/744)) ([5520f84](https://github.com/betagouv/agir-front/commit/5520f844dd261cf2c3e910dd70951a0b1f93f176))
+* url fin de mission et fil d'ariane ([#745](https://github.com/betagouv/agir-front/issues/745)) ([121fd4a](https://github.com/betagouv/agir-front/commit/121fd4a80f4843a2d2160052ea7ed75333ebb495))
+
+
+### 👷 Autres changements
+
+* Bump @playwright/test from 1.48.0 to 1.48.1 ([#720](https://github.com/betagouv/agir-front/issues/720)) ([7f17779](https://github.com/betagouv/agir-front/commit/7f1777909862fdc9d5610eb83fe13d7ae063b06b))
+* Bump @types/node from 22.7.7 to 22.8.1 ([#741](https://github.com/betagouv/agir-front/issues/741)) ([1064e2d](https://github.com/betagouv/agir-front/commit/1064e2d104a587afd90b5102bafd4be66a8dbbac))
+* Bump chart.js from 4.4.5 to 4.4.6 ([#742](https://github.com/betagouv/agir-front/issues/742)) ([35eeb88](https://github.com/betagouv/agir-front/commit/35eeb8801e6061e1c409043550e8a69e91017717))
+* Bump eslint-plugin-vue from 9.29.1 to 9.30.0 ([#740](https://github.com/betagouv/agir-front/issues/740)) ([427da28](https://github.com/betagouv/agir-front/commit/427da282d2187c7c6c520f35751f7cc76a52d0d6))
+* Bump pinia-plugin-persistedstate from 4.1.1 to 4.1.2 ([#738](https://github.com/betagouv/agir-front/issues/738)) ([6395207](https://github.com/betagouv/agir-front/commit/6395207b028f924337823cea3a3cccb1c4023fe2))
+* Bump vite from 5.4.9 to 5.4.10 ([#739](https://github.com/betagouv/agir-front/issues/739)) ([e2d81fd](https://github.com/betagouv/agir-front/commit/e2d81fdec046830271bb88711adf5315470580b6))
+* fix enchainement des questions conditionnées ([#736](https://github.com/betagouv/agir-front/issues/736)) ([d733773](https://github.com/betagouv/agir-front/commit/d73377374833d6f35d8fc5e4b186a50ac0bde730))
+* refactorisation du bilan ([#734](https://github.com/betagouv/agir-front/issues/734)) ([dfe23ca](https://github.com/betagouv/agir-front/commit/dfe23ca8c30cb063dd9d7073378734cd51797809))
+
 ## [1.27.2](https://github.com/betagouv/agir-front/compare/v1.27.1...v1.27.2) (2024-10-22)
 
 
