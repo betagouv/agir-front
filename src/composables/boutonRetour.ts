@@ -8,7 +8,10 @@ export const useBoutonRetour = () => {
       label: 'Revenir à la thématique',
       url: {
         name: RouteUniversName.THEMATIQUE,
-        params: { id: useRoute().params.universId, thematique: useRoute().params.thematiqueId },
+        params: {
+          id: useRoute().params.universId,
+          thematique: useRoute().params.thematiqueId,
+        },
       },
     };
   }

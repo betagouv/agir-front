@@ -1,7 +1,9 @@
 <template>
   <FilDAriane
     :page-courante="`Thématique: ${missionViewModel.titre}`"
-    :page-hierarchie="[{ label: 'Univers', url: `/univers/${universId}` }]"
+    :page-hierarchie="[
+      { label: 'Univers', url: `/univers/${MenuUnivers.getUniversData(universId as ClefTechniqueAPI).url}` },
+    ]"
   />
   <div class="fr-grid-row align-items--center fr-mb-4w">
     <img
@@ -48,6 +50,7 @@
   import ThematiqueTerminee from '@/components/custom/Thematiques/ThematiqueTerminee.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import { MissionThematiqueViewModel } from '@/domaines/thematiques/adapters/missionThematique.presenter.impl';
+  import { ClefTechniqueAPI, MenuUnivers } from '@/shell/MenuUnivers';
 
   defineProps<{ thematiqueId: string; universId: string; missionViewModel: MissionThematiqueViewModel }>();
 </script>

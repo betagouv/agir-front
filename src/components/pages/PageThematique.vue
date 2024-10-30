@@ -4,7 +4,7 @@
   <div v-else class="fr-container fr-pb-4w">
     <ThematiquePageComposant
       :thematique-id="thematiqueId"
-      :univers-id="universId"
+      :univers-id="clefUniversAPI"
       :mission-view-model="missionViewModel"
     />
   </div>
@@ -21,6 +21,7 @@
   import { ThematiqueRepositoryAxios } from '@/domaines/thematiques/adapters/thematique.repository.axios';
   import { RecupererMissionThematiqueUsecase } from '@/domaines/thematiques/recupererMissionThematiqueUsecase';
   import { ThematiqueEvent, ThematiqueEventBusImpl } from '@/domaines/thematiques/thematiqueEventBusImpl';
+  import { ClefTechniqueAPI, MenuUnivers } from '@/shell/MenuUnivers';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const isLoading = ref<boolean>(true);
@@ -31,7 +32,7 @@
   }
 
   const thematiqueId = useRoute().params.thematique as string;
-  const universId = useRoute().params.id as string;
+  const clefUniversAPI = MenuUnivers.getFromUrl(useRoute().params.id as ClefTechniqueAPI)!.clefTechniqueAPI;
 
   const utilisateurId = utilisateurStore().utilisateur.id;
   const subscriberName = 'PageThematique';

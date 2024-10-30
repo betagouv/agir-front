@@ -26,7 +26,10 @@
       <router-link
         :to="{
           name: RouteUniversName.THEMATIQUE,
-          params: { id: thematique.clefThematique, thematique: thematique.id },
+          params: {
+            id: MenuUnivers.getUniversData(thematique.clefThematique as ClefTechniqueAPI).url,
+            thematique: thematique.id,
+          },
         }"
         class="thematique-card__link"
       >
@@ -44,6 +47,7 @@
   import ThematiqueTag from '@/components/custom/Thematiques/ThematiqueTag.vue';
   import { ThematiqueViewModel } from '@/domaines/thematiques/adapters/thematiques.presenter.impl';
   import { RouteUniversName } from '@/router/univers/routes';
+  import { ClefTechniqueAPI, MenuUnivers } from '@/shell/MenuUnivers';
 
   defineProps<{
     thematique: ThematiqueViewModel;
