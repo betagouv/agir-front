@@ -16,7 +16,7 @@
     </div>
   </div>
 
-  <section id="recommandations" class="fr-pb-4w background--white">
+  <section class="fr-pb-4w background--white">
     <div class="fr-container" v-if="!isLoading">
       <h2 class="fr-h3 fr-mb-1w">Recommandés <span class="text--bleu">pour vous</span></h2>
       <p class="fr-text--md">
@@ -55,6 +55,30 @@
     </div>
   </section>
 
+  <section id="recommandations" class="fr-pb-6w background--white">
+    <div class="fr-container" v-if="!isLoading">
+      <h2 class="fr-h3 fr-mb-1w">Articles et quiz recommandés pour vous</h2>
+      <p class="fr-text--md">
+        Sélection suggérée en fonction de vos
+        <router-link
+          :to="{ name: RouteCompteName.MIEUX_VOUS_CONNAITRE }"
+          class="fr-link fr-icon-user-setting-line fr-link--icon-right fr-text--md"
+        >
+          préférences
+        </router-link>
+      </p>
+      <CoachRecommandations
+        v-if="recommandationsPersonnaliseesViewModel"
+        class="fr-mb-2w"
+        :recommandations="recommandationsPersonnaliseesViewModel.autresRecommandations"
+      />
+      <router-link :to="{ name: RouteCoachName.BIBLIOTHEQUE }" class="fr-link">Voir ma bibliothèque</router-link>
+    </div>
+    <div class="fr-container" v-else>
+      <CarteSkeleton />
+    </div>
+  </section>
+
   <section class="fr-py-6w background--image--coach">
     <div class="fr-container">
       <CoachContact />
@@ -68,6 +92,7 @@
   import CoachAides from '@/components/custom/Coach/CoachAides.vue';
   import CoachBilanCarbone from '@/components/custom/Coach/CoachBilanCarbone.vue';
   import CoachContact from '@/components/custom/Coach/CoachContact.vue';
+  import CoachRecommandations from '@/components/custom/Coach/CoachRecommandations.vue';
   import CoachServices from '@/components/custom/Coach/CoachServices.vue';
   import CoachToDo from '@/components/custom/Coach/CoachToDo.vue';
   import ThematiquesListe from '@/components/custom/Thematiques/ThematiquesListe.vue';
@@ -78,6 +103,12 @@
     BilanCarbonePartielAccueilViewModel,
   } from '@/domaines/bilanCarbone/adapters/bilanCarboneAccueil.presenter.impl';
   import { RecupererBilanCarboneUsecase } from '@/domaines/bilanCarbone/recupererBilanCarbone.usecase';
+  import {
+    RecommandationPersonnaliseeViewModel,
+    RecommandationsPersonnaliseesPresenterImpl,
+  } from '@/domaines/recommandationsPersonnalisees/adapters/recommandationsPersonnalisees.presenter.impl';
+  import { RecommandationsPersonnaliseesRepositoryAxios } from '@/domaines/recommandationsPersonnalisees/adapters/recommandationsPersonnalisees.repository.axios';
+  import { RecupererRecommandationsPersonnaliseesUsecase } from '@/domaines/recommandationsPersonnalisees/recupererRecommandationsPersonnalisees.usecase';
   import { ThematiqueRepositoryAxios } from '@/domaines/thematiques/adapters/thematique.repository.axios';
   import { ThematiqueViewModel } from '@/domaines/thematiques/adapters/thematiques.presenter.impl';
   import { ThematiquesRecommandeesPresenterImpl } from '@/domaines/thematiques/adapters/thematiquesRecommandees.presenter.impl';
@@ -86,6 +117,8 @@
   import { ToDoListRepositoryAxios } from '@/domaines/toDoList/adapters/toDoList.repository.axios';
   import { RecupererToDoListUsecase } from '@/domaines/toDoList/recupererToDoList.usecase';
   import { ToDoListEvent, ToDoListEventBusImpl } from '@/domaines/toDoList/toDoListEventBusImpl';
+  import { RouteCoachName } from '@/router/coach/routeCoachName';
+  import { RouteCompteName } from '@/router/compte/routeCompteName';
   import { Fonctionnalites } from '@/shell/fonctionnalitesEnum';
   import { HotjarEvenement, publierEvenementHotjar } from '@/shell/publierEvenementHotjar';
   import { utilisateurStore } from '@/store/utilisateur';
@@ -97,10 +130,7 @@
   const bilanCarbonePartielViewModel = ref<BilanCarbonePartielAccueilViewModel>();
   const store = utilisateurStore();
   const listeThematiquesRecommandeesViewModel = ref<ThematiqueViewModel[]>();
-
-  function onRecommandationsPretesAAfficher(viewModel: ThematiqueViewModel[]) {
-    listeThematiquesRecommandeesViewModel.value = viewModel;
-  }
+  const recommandationsPersonnaliseesViewModel = ref<RecommandationPersonnaliseeViewModel>();
 
   function mapValueTodo(viewModel: TodoListViewModel) {
     todoList.value = viewModel;
@@ -116,6 +146,9 @@
       new ThematiqueRepositoryAxios(),
     );
     const chargerTodoListUsecase = new RecupererToDoListUsecase(new ToDoListRepositoryAxios());
+    const chargerRecommandationsPersonnaliseesUsecase = new RecupererRecommandationsPersonnaliseesUsecase(
+      new RecommandationsPersonnaliseesRepositoryAxios(),
+    );
 
     const recupererBilanCarboneUsecase = new RecupererBilanCarboneUsecase(new BilanCarboneRepositoryAxios());
 
@@ -138,9 +171,13 @@
     Promise.all([
       recupererListeThematiquesRecommandeesUsecase.execute(
         idUtilisateur,
-        new ThematiquesRecommandeesPresenterImpl(onRecommandationsPretesAAfficher),
+        new ThematiquesRecommandeesPresenterImpl(vm => (listeThematiquesRecommandeesViewModel.value = vm)),
       ),
       chargerTodoListUsecase.execute(idUtilisateur, new ToDoListPresenterImpl(mapValueTodo)),
+      chargerRecommandationsPersonnaliseesUsecase.execute(
+        idUtilisateur,
+        new RecommandationsPersonnaliseesPresenterImpl(vm => (recommandationsPersonnaliseesViewModel.value = vm)),
+      ),
       recupererBilanCarboneUsecase.execute(
         idUtilisateur,
         new BilanCarboneAccueilPresenterImpl(

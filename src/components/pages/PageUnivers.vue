@@ -53,18 +53,11 @@
       </div>
     </section>
 
-    <section
-      id="recommandations"
-      v-if="store.utilisateur.fonctionnalitesDebloquees.includes(Fonctionnalites.RECOMMANDATIONS)"
-      class="fr-py-6w fr-background-contrast--grey"
-    >
-      <div class="fr-container" v-if="!isLoading">
+    <section class="fr-py-6w fr-background-contrast--grey" v-if="!isLoading && recommandationsPersonnaliseesViewModel">
+      <div class="fr-container">
         <h2 class="fr-h2 fr-mb-0">Recommandé, pour vous</h2>
         <p class="fr-text--xl">Une sélection d’articles et de services, pour vous, selon vos préférences !</p>
-        <CoachRecommandations
-          v-if="recommandationsPersonnaliseesViewModel"
-          :recommandations="recommandationsPersonnaliseesViewModel.autresRecommandations"
-        />
+        <CoachRecommandations :recommandations="recommandationsPersonnaliseesViewModel.autresRecommandations" />
       </div>
     </section>
   </div>
@@ -108,7 +101,6 @@
   import { UniversPresenterImpl } from '@/domaines/univers/adapters/univers.presenter.impl';
   import { UniversRepositoryAxios } from '@/domaines/univers/adapters/univers.repository.axios';
   import { RecupererUniversUsecase } from '@/domaines/univers/recupererUnivers.usecase';
-  import { Fonctionnalites } from '@/shell/fonctionnalitesEnum';
   import { MenuUnivers } from '@/shell/MenuUnivers';
   import { utilisateurStore } from '@/store/utilisateur';
 
