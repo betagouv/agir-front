@@ -6,6 +6,7 @@ import { RouteKycPath } from '@/router/kyc/routes';
 import { RouteQuizPath } from '@/router/quiz/routes';
 import { buildUrl } from '@/shell/buildUrl';
 import { InteractionType } from '@/shell/interactionType';
+import { ClefTechniqueAPI, MenuUnivers } from '@/shell/MenuUnivers';
 
 export interface MissionBaseViewModel {
   id: string;
@@ -73,7 +74,7 @@ export class MissionThematiquePresenterImpl implements MissionThematiquePresente
             .filter(item => item.type === InteractionType.KYC)
             .reduce((sum, item) => sum + item.points, 0),
           aEteRealisee: missionThematique.progressionKyc.etapeCourante === missionThematique.progressionKyc.etapeTotal,
-          url: `${RouteKycPath.KYC}${missionThematique.univers}/${missionThematique.idThematique}`,
+          url: `${RouteKycPath.KYC}${MenuUnivers.getUniversData(missionThematique.univers as ClefTechniqueAPI).url}/${missionThematique.idThematique}`,
           picto: '/ic_mission_kyc.svg',
           pointAEteRecolte: missionThematique.items.filter(item => item.type === InteractionType.KYC)[0]
             .pointAEteRecolte,
@@ -81,10 +82,22 @@ export class MissionThematiquePresenterImpl implements MissionThematiquePresente
       ],
       articleEtQuiz: missionThematique.items
         .filter(item => item.type === InteractionType.ARTICLE || item.type === InteractionType.QUIZ)
-        .map(item => this.mapToViewModel(item, missionThematique.univers, missionThematique.idThematique)),
+        .map(item =>
+          this.mapToViewModel(
+            item,
+            MenuUnivers.getUniversData(missionThematique.univers as ClefTechniqueAPI).url,
+            missionThematique.idThematique,
+          ),
+        ),
       defis: missionThematique.items
         .filter(item => item.type === InteractionType.DEFIS)
-        .map(item => this.mapToDefiViewModel(item, missionThematique.univers, missionThematique.idThematique)),
+        .map(item =>
+          this.mapToDefiViewModel(
+            item,
+            MenuUnivers.getUniversData(missionThematique.univers as ClefTechniqueAPI).url,
+            missionThematique.idThematique,
+          ),
+        ),
     });
   }
 

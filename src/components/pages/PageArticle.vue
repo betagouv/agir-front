@@ -1,5 +1,6 @@
 <template>
-  <PageArticleComposant :article="articleAAfficher" @update:article-modifie="onArticleModifie"> </PageArticleComposant>
+  <PageArticleComposant v-if="articleAAfficher" :article="articleAAfficher" @update:article-modifie="onArticleModifie">
+  </PageArticleComposant>
 </template>
 <script setup lang="ts">
   import { onMounted, ref } from 'vue';
@@ -14,19 +15,7 @@
 
   const router = useRouter();
 
-  const articleAAfficher = ref<Article>({
-    id: '',
-    titre: '',
-    texte: '',
-    sousTitre: '',
-    estEnFavori: false,
-    partenaire: {
-      id: '',
-      nom: '',
-      logo: '',
-    },
-    sources: [],
-  });
+  const articleAAfficher = ref<Article | null>(null);
 
   onMounted(() => {
     const route = useRoute();
