@@ -42,6 +42,10 @@ test.beforeAll(async () => {
     });
   });
 
+  await page.route(`${process.env.VITE_API_URL}/utilisateurs/dorian/recommandations_v2`, route => {
+    fullFillRecommandationsVierge(route);
+  });
+
   await page.route(`${process.env.VITE_API_URL}/utilisateurs/dorian/gamification`, route => {
     route.fulfill({
       status: 200,
