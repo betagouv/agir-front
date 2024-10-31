@@ -13,11 +13,7 @@
         :bilan-carbone-partiel-view-model="bilanCarbonePartielViewModel"
       />
     </template>
-<<<<<<< HEAD
-    <p v-else>Problème de chargement de données</p>
-=======
     <p v-else>Problème de chargement des données</p>
->>>>>>> f95edbdc (tech: bilan carbone e2e)
   </div>
 </template>
 
