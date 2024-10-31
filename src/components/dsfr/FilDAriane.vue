@@ -1,5 +1,5 @@
 <template>
-  <nav role="navigation" class="print-hidden fr-breadcrumb" aria-label="vous êtes ici :">
+  <nav role="navigation" class="print-hidden fr-breadcrumb" aria-label="Vous êtes ici :">
     <button class="fr-breadcrumb__button" aria-expanded="false" aria-controls="breadcrumb">Voir le fil d’Ariane</button>
     <div class="fr-collapse" id="breadcrumb">
       <ol class="fr-breadcrumb__list">
