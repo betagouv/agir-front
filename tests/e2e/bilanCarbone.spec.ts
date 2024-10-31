@@ -1,7 +1,7 @@
 import { test, expect, chromium, Page } from '@playwright/test';
 import { InjectUtilisateur } from './utils/injectUtilisateur';
 import { InjectGamification } from './utils/injectGamification';
-import { getByText } from '@testing-library/vue';
+import { RouteCoachPath } from '@/router/coach/routes';
 
 let page: Page;
 
@@ -39,13 +39,19 @@ test.describe('Bilan carbone', () => {
       const breadcrumb = page.getByRole('navigation', { name: 'Vous êtes ici :', exact: true });
       await expect(breadcrumb).toBeVisible();
 
-      const nombreElementsBreadcrumb = await breadcrumb.getByRole('list').getByRole('listitem').count();
-      const premierElementDuBreadcrumb = breadcrumb.getByRole('list').getByRole('listitem').first();
-      const lienAccueil = premierElementDuBreadcrumb.getByRole('link', { name: 'Accueil', exact: true });
-      expect(nombreElementsBreadcrumb).toEqual(2);
+      const elementsBreadcrumb = await breadcrumb.getByRole('list').getByRole('listitem').all();
+      expect(elementsBreadcrumb).toHaveLength(2);
+
+      const lienAccueil = elementsBreadcrumb[0].getByRole('link', { name: 'Accueil', exact: true });
       await expect(lienAccueil).toBeVisible();
+      await expect(lienAccueil).toHaveAttribute('href', RouteCoachPath.COACH);
+
+      const lienCourant = elementsBreadcrumb[1].getByText('Mon bilan environnemental');
+      await expect(lienCourant).toBeVisible();
+      await expect(lienCourant).toHaveAttribute('aria-current', 'page');
 
       const loader = page.getByText('Chargement en cours ...', { exact: true });
+      await expect(loader).toHaveRole('paragraph');
       await expect(loader).toBeVisible();
     });
   });
