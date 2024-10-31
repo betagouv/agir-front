@@ -19,6 +19,7 @@
               :erreur="champsPrenomStatus"
               @blur="onValidationPrenom"
               :required="true"
+              :autofocus="true"
             />
           </div>
         </fieldset>

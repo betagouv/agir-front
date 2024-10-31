@@ -15,6 +15,7 @@
           type="text"
           @input="updateValue"
           :value="defaultValue"
+          :autofocus="autofocus"
         />
         <p v-if="!codePostalValide" id="text-input-error-desc-error" class="fr-error-text">
           Ce code postal n'est pas valide
@@ -57,6 +58,7 @@
   const props = defineProps<{
     defaultValue?: string;
     defaultSelectValue?: string;
+    autofocus?: boolean;
   }>();
 
   const communes = ref<string[]>([]);

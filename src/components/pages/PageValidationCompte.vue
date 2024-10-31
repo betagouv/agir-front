@@ -22,6 +22,7 @@
           label="Code à usage unique"
           :required="true"
           :maxlength="6"
+          :autofocus="true"
         />
         <button class="fr-btn fr-mr-4w">Valider</button>
       </form>

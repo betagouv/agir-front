@@ -10,6 +10,7 @@
         autocomplete="new-password"
         id="password"
         type="password"
+        :required="required"
         :value="modelValue"
         @input="updateValue"
       />
@@ -21,27 +22,39 @@
         class="fr-message"
         id="password-input-message-info"
       >
+        <span class="fr-sr-only">
+          {{ auMoinsDouzeCaracteres(modelValue) ? 'critère valide :' : 'critère non valide :' }}
+        </span>
         12 caractères minimum
       </p>
       <p
         :class="auMoinsUneMajusculeEtUneMinuscule(modelValue) ? 'fr-message--valid' : 'fr-message--info'"
         class="fr-message"
-        id="password-input-message-info"
+        id="password-input-message-info-1"
       >
+        <span class="fr-sr-only">
+          {{ auMoinsUneMajusculeEtUneMinuscule(modelValue) ? 'critère valide :' : 'critère non valide :' }}
+        </span>
         Au moins 1 majuscule et 1 minuscule
       </p>
       <p
         :class="auMoinsUnCaractereSpecial(modelValue) ? 'fr-message--valid' : 'fr-message--info'"
         class="fr-message"
-        id="password-input-message-info-1"
+        id="password-input-message-info-2"
       >
+        <span class="fr-sr-only">
+          {{ auMoinsUnCaractereSpecial(modelValue) ? 'critère valide :' : 'critère non valide :' }}
+        </span>
         1 caractère spécial minimum
       </p>
       <p
         :class="auMoinsUnChiffre(modelValue) ? 'fr-message--valid' : 'fr-message--info'"
         class="fr-message"
-        id="password-input-message-info-2"
+        id="password-input-message-info-3"
       >
+        <span class="fr-sr-only">
+          {{ auMoinsUnChiffre(modelValue) ? 'critère valide :' : 'critère non valide :' }}
+        </span>
         1 chiffre minimum
       </p>
     </div>
@@ -64,6 +77,7 @@
   defineProps<{
     modelValue: string;
     legende: string;
+    required?: boolean;
   }>();
 
   const emit = defineEmits<{

@@ -27,6 +27,7 @@
           v-model="compteUtilisateurInput.motDePasse"
           @update:mot-de-passe-valide="onMotDePasseValideChanged"
           legende="Votre mot de passe doit contenir :"
+          :required="true"
         />
       </div>
       <div class="fr-fieldset__element">

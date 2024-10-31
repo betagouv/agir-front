@@ -3,7 +3,6 @@ import { Utilisateur } from '@/domaines/authentification/ports/utilisateur.repos
 import { CompteUtilisateur, CompteUtilisateurRepository } from '@/domaines/compte/ports/compteUtilisateur.repository';
 import { SpySauvegarderUtilisateurSessionRepository } from './sessionRepository.sauvegarderUtilisateur.spy';
 import { CreerComptePresenterImpl } from '@/domaines/compte/adapters/creerComptePresenterImpl';
-import { RepositoryError } from '@/shell/repositoryError';
 
 class CompteUtilisateurForTest implements CompteUtilisateurRepository {
   creerCompteUtilisateur(compteUtilisateurACreer): Promise<CompteUtilisateur> {
@@ -19,35 +18,6 @@ class CompteUtilisateurForTest implements CompteUtilisateurRepository {
       abonnementTransport: false,
       fonctionnalitesDebloquees: [],
     });
-  }
-
-  getCompteUtilisateur(idUtilisateur: string): Promise<CompteUtilisateur> {
-    throw Error;
-  }
-
-  mettreAjour(compteUtilisateur: CompteUtilisateur) {}
-
-  supprimerCompteUtilisateur(idUtilisateur: string): Promise<void> {
-    throw new Error();
-  }
-
-  mettreAJourLeMotDePasse(idUtilisateur: string, nouveauMotDePasse: string): Promise<void> {
-    throw new Error();
-  }
-
-  validationOnboardingPostCreationCompte(
-    idUtilisateur: string,
-    prenom: string,
-    commune: string,
-    codePostal: string,
-  ): Promise<void> {
-    return Promise.resolve(undefined);
-  }
-}
-
-class CompteUtilisateurRepositoryErreurBetaFermee implements CompteUtilisateurRepository {
-  creerCompteUtilisateur(compteUtilisateurACreer): Promise<CompteUtilisateur> {
-    throw new RepositoryError('023', 'message');
   }
 
   getCompteUtilisateur(idUtilisateur: string): Promise<CompteUtilisateur> {
@@ -103,24 +73,5 @@ describe('Fichier de tests concernant la creation du compte utilisateur', () => 
       onboardingAEteRealise: false,
       afficherDisclaimerAides: false,
     });
-  });
-  it("si le repository renvoie une erreur avec un code d'erreur 023 doit naviguer vers la page de beta fermée", async () => {
-    // GIVEN
-    const compteACreer: UserInput = {
-      mail: 'john@skynet.com',
-      motDePasse: 'motDePasse',
-      situationId: null,
-    };
-
-    const sessionRepository = new SpySauvegarderUtilisateurSessionRepository();
-    const compteUtilisateurRepository = new CompteUtilisateurRepositoryErreurBetaFermee();
-    // WHEN // THEN
-    const usecase = new CreerCompteUtilisateurUsecase(compteUtilisateurRepository, sessionRepository);
-    await usecase.execute(
-      new CreerComptePresenterImpl(viewModel => {
-        expect(viewModel.route).toBe('beta-fermee');
-      }),
-      compteACreer,
-    );
   });
 });

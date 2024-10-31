@@ -24,6 +24,7 @@
               v-model="onboardingPostCreationCompte().codePostal"
               :default-value="onboardingPostCreationCompte().codePostal"
               :default-select-value="onboardingPostCreationCompte().commune"
+              :autofocus="true"
               @update:selectedCommune="onboardingPostCreationCompte().commune = $event"
             />
           </div>

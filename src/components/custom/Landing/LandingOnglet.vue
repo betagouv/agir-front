@@ -1,5 +1,5 @@
 <template>
-  <h2 class="fr-h2 fr-mb-6w text--center"><strong class="text--italic">J’agis</strong> répond à vos inquiétudes</h2>
+  <h2 class="fr-h2 fr-mb-6w text--center"><i>J’agis</i> répond à vos inquiétudes</h2>
   <div>
     <ul class="fr-grid-row list-style-none" role="tablist" aria-label="Les questions des utilisateurs">
       <li v-for="(item, index) in items" :key="index" role="presentation" class="fr-col">
@@ -43,6 +43,7 @@
           <router-link
             :to="{ name: RouteCompteName.CREATION_COMPTE }"
             class="fr-link fr-link--lg fr-icon-arrow-right-line fr-link--icon-right"
+            title="Découvrir J'agis"
           >
             Découvrir
           </router-link>
