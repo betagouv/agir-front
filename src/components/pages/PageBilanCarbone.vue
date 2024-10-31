@@ -13,7 +13,11 @@
         :bilan-carbone-partiel-view-model="bilanCarbonePartielViewModel"
       />
     </template>
+<<<<<<< HEAD
     <p v-else>Problème de chargement de données</p>
+=======
+    <p v-else>Problème de chargement des données</p>
+>>>>>>> f95edbdc (tech: bilan carbone e2e)
   </div>
 </template>
 
@@ -37,14 +41,17 @@
 
   onMounted(async () => {
     const { id: utilisateurId } = utilisateurStore().utilisateur;
-    const recupererBilanCarboneUsecase = new RecupererBilanCarboneUsecase(new BilanCarboneRepositoryAxios());
-    await recupererBilanCarboneUsecase.execute(
-      utilisateurId,
-      new BilanCarbonePresenterImpl(
-        vm => (bilanCarboneViewModel.value = vm),
-        vm => (bilanCarbonePartielViewModel.value = vm),
-      ),
-    );
-    isLoading.value = false;
+    try {
+      const recupererBilanCarboneUsecase = new RecupererBilanCarboneUsecase(new BilanCarboneRepositoryAxios());
+      await recupererBilanCarboneUsecase.execute(
+        utilisateurId,
+        new BilanCarbonePresenterImpl(
+          vm => (bilanCarboneViewModel.value = vm),
+          vm => (bilanCarbonePartielViewModel.value = vm),
+        ),
+      );
+    } finally {
+      isLoading.value = false;
+    }
   });
 </script>
