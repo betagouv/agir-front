@@ -24,7 +24,7 @@
       </p>
       <ThematiquesListe
         v-if="listeThematiquesRecommandeesViewModel"
-        :thematiques="listeThematiquesRecommandeesViewModel"
+        :missions="listeThematiquesRecommandeesViewModel"
       />
     </div>
     <div class="fr-container" v-else>
@@ -95,7 +95,7 @@
   import CoachRecommandations from '@/components/custom/Coach/CoachRecommandations.vue';
   import CoachServices from '@/components/custom/Coach/CoachServices.vue';
   import CoachToDo from '@/components/custom/Coach/CoachToDo.vue';
-  import ThematiquesListe from '@/components/custom/Thematiques/ThematiquesListe.vue';
+  import ThematiquesListe from '@/components/custom/Mission/MissionsListe.vue';
   import { BilanCarboneRepositoryAxios } from '@/domaines/bilanCarbone/adapters/bilanCarbone.repository.axios';
   import {
     BilanCarboneAccueilPresenterImpl,
@@ -103,6 +103,7 @@
     BilanCarbonePartielAccueilViewModel,
   } from '@/domaines/bilanCarbone/adapters/bilanCarboneAccueil.presenter.impl';
   import { RecupererBilanCarboneUsecase } from '@/domaines/bilanCarbone/recupererBilanCarbone.usecase';
+  import { MissionViewModel } from '@/domaines/missions/adapters/missions.presenter.impl';
   import { MissionsRepositoryAxios } from '@/domaines/missions/adapters/missions.repository.axios';
   import {
     RecommandationPersonnaliseeViewModel,
@@ -110,7 +111,6 @@
   } from '@/domaines/recommandationsPersonnalisees/adapters/recommandationsPersonnalisees.presenter.impl';
   import { RecommandationsPersonnaliseesRepositoryAxios } from '@/domaines/recommandationsPersonnalisees/adapters/recommandationsPersonnalisees.repository.axios';
   import { RecupererRecommandationsPersonnaliseesUsecase } from '@/domaines/recommandationsPersonnalisees/recupererRecommandationsPersonnalisees.usecase';
-  import { ThematiqueViewModel } from '@/domaines/thematiques/adapters/thematiques.presenter.impl';
   import { ThematiquesRecommandeesPresenterImpl } from '@/domaines/thematiques/adapters/thematiquesRecommandees.presenter.impl';
   import { RecupererListeThematiquesRecommandeesUsecase } from '@/domaines/thematiques/recupererListeThematiquesRecommandees.usecase';
   import { ToDoListPresenterImpl, TodoListViewModel } from '@/domaines/toDoList/adapters/toDoList.presenter.impl';
@@ -129,7 +129,7 @@
   const bilanCarboneCompletViewModel = ref<BilanCarboneCompletAccueilViewModel>();
   const bilanCarbonePartielViewModel = ref<BilanCarbonePartielAccueilViewModel>();
   const store = utilisateurStore();
-  const listeThematiquesRecommandeesViewModel = ref<ThematiqueViewModel[]>();
+  const listeThematiquesRecommandeesViewModel = ref<MissionViewModel[]>();
   const recommandationsPersonnaliseesViewModel = ref<RecommandationPersonnaliseeViewModel>();
 
   function mapValueTodo(viewModel: TodoListViewModel) {

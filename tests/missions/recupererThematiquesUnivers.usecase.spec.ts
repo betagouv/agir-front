@@ -1,15 +1,12 @@
-import {
-  ThematiquesPresenterImpl,
-  ThematiqueViewModel,
-} from '@/domaines/thematiques/adapters/thematiques.presenter.impl';
-import { RecupererThematiquesUniversUsecase } from '@/domaines/thematiques/recupererThematiquesUnivers.usecase';
-import { ThematiqueRepositoryMock } from '../missions/adapters/thematique.repository.mock';
+import { MissionsPresenterImpl, MissionViewModel } from '@/domaines/missions/adapters/missions.presenter.impl';
+import { RecupererMissionsThematiqueUsecase } from '@/domaines/missions/recupererMissionsThematique.usecase';
+import { MissionsRepositoryMock } from './adapters/missions.repository.mock';
 
-describe('Fichier de tests concernant la récupération des thématiques pour un Univers', () => {
-  it("En donnant l'id utilisateur et l'id de l'univers doit récupérer les thématiques", async () => {
+describe('Fichier de tests concernant la récupération des missions pour une thématique', () => {
+  it("En donnant l'id utilisateur et l'id de la thématique doit récupérer les missions", async () => {
     // GIVEN
-    const usecase = new RecupererThematiquesUniversUsecase(
-      new ThematiqueRepositoryMock([
+    const usecase = new RecupererMissionsThematiqueUsecase(
+      new MissionsRepositoryMock([
         {
           titre: 'Thematique 1',
           id: '1',
@@ -41,10 +38,10 @@ describe('Fichier de tests concernant la récupération des thématiques pour un
       ]),
     );
     // WHEN
-    await usecase.execute('1', '1', new ThematiquesPresenterImpl(expectation));
+    await usecase.execute('1', '1', new MissionsPresenterImpl(expectation));
     // THEN
     function expectation(thematiques) {
-      expect(thematiques).toEqual<ThematiqueViewModel[]>([
+      expect(thematiques).toEqual<MissionViewModel[]>([
         {
           titre: 'Thematique 1',
           id: '1',

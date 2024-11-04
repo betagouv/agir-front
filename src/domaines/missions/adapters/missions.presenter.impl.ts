@@ -1,8 +1,8 @@
-import { ThematiquesPresenter } from '@/domaines/thematiques/ports/thematiques.presenter';
-import { Thematique } from '@/domaines/thematiques/thematique';
+import { MissionsPresenter } from '@/domaines/missions/ports/missions.presenter';
+import { Mission } from '@/domaines/missions/recupererMissionsThematique.usecase';
 import { TagStyle } from '@/shell/TagThematique';
 
-export interface ThematiqueViewModel {
+export interface MissionViewModel {
   titre: string;
   id: string;
   progression: {
@@ -22,11 +22,11 @@ export interface ThematiqueViewModel {
     style: TagStyle;
   };
 }
-export class ThematiquesPresenterImpl implements ThematiquesPresenter {
-  constructor(private thematiquesViewModel: (viewModel: ThematiqueViewModel[]) => void) {}
-  present(thematiques: Thematique[]): void {
-    this.thematiquesViewModel(
-      thematiques.map(thematique => ({
+export class MissionsPresenterImpl implements MissionsPresenter {
+  constructor(private missionViewModel: (viewModel: MissionViewModel[]) => void) {}
+  presente(missions: Mission[]): void {
+    this.missionViewModel(
+      missions.map(thematique => ({
         titre: thematique.titre,
         id: thematique.id,
         progression: thematique.progression,

@@ -1,4 +1,4 @@
-import { MissionItem, Mission } from '../recupererDetailMission.usecase';
+import { MissionItem, DetailMission } from '../recupererDetailMission.usecase';
 import { MissionPresenter } from '@/domaines/missions/ports/missionPresenter';
 import { RouteArticlePath } from '@/router/articles/routes';
 import { RouteDefiPath } from '@/router/defis/routes';
@@ -55,7 +55,7 @@ export interface MissionViewModel {
 export class MissionPresenterImpl implements MissionPresenter {
   constructor(private readonly viewModel: (mission: MissionViewModel) => void) {}
 
-  presente(mission: Mission): void {
+  presente(mission: DetailMission): void {
     this.viewModel({
       titre: mission.titre,
       urlImage: mission.urlImage,

@@ -1,7 +1,8 @@
 import { AxiosFactory, intercept401 } from '@/axios.factory';
 import { MissionsRepository } from '@/domaines/missions/ports/missionsRepository';
-import { Mission } from '@/domaines/missions/recupererDetailMission.usecase';
-import { Thematique } from '@/domaines/thematiques/thematique';
+import { DetailMission } from '@/domaines/missions/recupererDetailMission.usecase';
+
+import { Mission } from '@/domaines/missions/recupererMissionsThematique.usecase';
 
 interface ThematiqueApiModel {
   titre: string;
@@ -52,7 +53,7 @@ interface MissionThematiqueApiModel {
 
 export class MissionsRepositoryAxios implements MissionsRepository {
   @intercept401()
-  async recupererDetailMission(thematiqueId: string, utilisateurId: string): Promise<Mission> {
+  async recupererDetailMission(thematiqueId: string, utilisateurId: string): Promise<DetailMission> {
     const axios = AxiosFactory.getAxios();
     const reponse = await axios.get<MissionThematiqueApiModel>(
       `/utilisateurs/${utilisateurId}/thematiques/${thematiqueId}/mission`,
@@ -86,7 +87,7 @@ export class MissionsRepositoryAxios implements MissionsRepository {
   }
 
   @intercept401()
-  async recupererMissionsRecommandees(utilisateurId: string): Promise<Thematique[]> {
+  async recupererMissionsRecommandees(utilisateurId: string): Promise<Mission[]> {
     const axios = AxiosFactory.getAxios();
     const response = await axios.get<ThematiqueApiModel[]>(`/utilisateurs/${utilisateurId}/thematiques_recommandees`);
     return response.data.map(thematique => ({
@@ -109,7 +110,7 @@ export class MissionsRepositoryAxios implements MissionsRepository {
   }
 
   @intercept401()
-  async recupererMissions(universId: string, utilisateurId: string): Promise<Thematique[]> {
+  async recupererMissionsThematique(universId: string, utilisateurId: string): Promise<Mission[]> {
     const axios = AxiosFactory.getAxios();
     const response = await axios.get<ThematiqueApiModel[]>(
       `/utilisateurs/${utilisateurId}/univers/${universId}/thematiques`,

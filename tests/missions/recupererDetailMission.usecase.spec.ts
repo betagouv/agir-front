@@ -1,4 +1,4 @@
-import { Mission, RecupererDetailMissionUsecase } from '@/domaines/missions/recupererDetailMission.usecase';
+import { DetailMission, RecupererDetailMissionUsecase } from '@/domaines/missions/recupererDetailMission.usecase';
 import { MissionThematiqueRepositoryMock } from './adapters/missionThematique.repository.mock';
 import {
   MissionDefiViewModel,
@@ -8,7 +8,7 @@ import {
 import { expect } from 'vitest';
 import { InteractionType } from '@/shell/interactionType';
 
-const mission: Mission = {
+const mission: DetailMission = {
   titre: 'Thematique 1',
   univers: 'alimentation',
   urlImage: 'urlImage',

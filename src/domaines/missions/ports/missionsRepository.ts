@@ -1,10 +1,11 @@
-import { Mission } from '@/domaines/missions/recupererDetailMission.usecase';
-import { Thematique } from '@/domaines/thematiques/thematique';
+import { DetailMission } from '@/domaines/missions/recupererDetailMission.usecase';
+
+import { Mission } from '@/domaines/missions/recupererMissionsThematique.usecase';
 
 export interface MissionsRepository {
-  recupererMissions(universId: string, utilisateurId: string): Promise<Thematique[]>;
-  recupererMissionsRecommandees(utilisateurId: string): Promise<Thematique[]>;
-  recupererDetailMission(missionId: string, utilisateurId: string): Promise<Mission>;
+  recupererMissionsThematique(thematiqueId: string, utilisateurId: string): Promise<Mission[]>;
+  recupererMissionsRecommandees(utilisateurId: string): Promise<Mission[]>;
+  recupererDetailMission(missionId: string, utilisateurId: string): Promise<DetailMission>;
   recupererPoints(idUtilisateur: string, elementId: string): Promise<void>;
   terminerMission(utilisateurId: string, missionId: string): Promise<void>;
 }

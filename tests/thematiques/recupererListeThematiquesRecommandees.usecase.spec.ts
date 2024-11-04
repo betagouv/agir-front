@@ -1,5 +1,5 @@
-import { ThematiqueViewModel } from '@/domaines/thematiques/adapters/thematiques.presenter.impl';
-import { ThematiqueRepositoryMock } from '../missions/adapters/thematique.repository.mock';
+import { MissionViewModel } from '@/domaines/missions/adapters/missions.presenter.impl';
+import { MissionsRepositoryMock } from '../missions/adapters/missions.repository.mock';
 import { RecupererListeThematiquesRecommandeesUsecase } from '@/domaines/thematiques/recupererListeThematiquesRecommandees.usecase';
 import { ThematiquesRecommandeesPresenterImpl } from '@/domaines/thematiques/adapters/thematiquesRecommandees.presenter.impl';
 import { ClefTechniqueAPI } from '@/shell/MenuUnivers';
@@ -8,7 +8,7 @@ describe('Fichier de tests concernant la récupération des thématiques recomma
   it("En donnant l'id utilisateur, il doit récupérer ses thématiques recommandées", async () => {
     // GIVEN
     const usecase = new RecupererListeThematiquesRecommandeesUsecase(
-      new ThematiqueRepositoryMock([
+      new MissionsRepositoryMock([
         {
           titre: 'Thematique 1',
           id: '1',
@@ -85,7 +85,7 @@ describe('Fichier de tests concernant la récupération des thématiques recomma
     await usecase.execute('1', new ThematiquesRecommandeesPresenterImpl(expectation));
     // THEN
     function expectation(thematiques) {
-      expect(thematiques).toEqual<ThematiqueViewModel[]>([
+      expect(thematiques).toEqual<MissionViewModel[]>([
         {
           titre: 'Thematique 1',
           id: '1',

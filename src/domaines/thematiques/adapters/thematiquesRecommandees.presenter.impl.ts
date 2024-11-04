@@ -1,12 +1,12 @@
-import { ThematiqueViewModel } from '@/domaines/thematiques/adapters/thematiques.presenter.impl';
-import { ThematiquesPresenter } from '@/domaines/thematiques/ports/thematiques.presenter';
-import { Thematique } from '@/domaines/thematiques/thematique';
+import { MissionViewModel } from '@/domaines/missions/adapters/missions.presenter.impl';
+import { MissionsPresenter } from '@/domaines/missions/ports/missions.presenter';
+import { Mission } from '@/domaines/missions/recupererMissionsThematique.usecase';
 import { TagThematique } from '@/shell/TagThematique';
 
-export class ThematiquesRecommandeesPresenterImpl implements ThematiquesPresenter {
-  constructor(private thematiquesViewModel: (viewModel: ThematiqueViewModel[]) => void) {}
+export class ThematiquesRecommandeesPresenterImpl implements MissionsPresenter {
+  constructor(private thematiquesViewModel: (viewModel: MissionViewModel[]) => void) {}
 
-  present(thematiques: Thematique[]): void {
+  presente(thematiques: Mission[]): void {
     this.thematiquesViewModel(
       thematiques.map(thematique => ({
         titre: thematique.titre,

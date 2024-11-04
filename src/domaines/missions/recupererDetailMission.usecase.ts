@@ -15,7 +15,7 @@ export interface MissionItem {
   pointAEteRecolte: boolean;
 }
 
-export interface Mission {
+export interface DetailMission {
   urlImage: string;
   titre: string;
   univers: string;
