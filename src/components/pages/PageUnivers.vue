@@ -18,9 +18,9 @@
   </div>
 
   <div v-if="!isLoading">
-    <section id="thematiques" v-if="thematiquesViewModel">
+    <section id="thematiques" v-if="missionsViewModel">
       <div class="fr-container">
-        <ThematiquesListe :thematiques="thematiquesViewModel" />
+        <MissionsListe :missions="missionsViewModel" />
       </div>
     </section>
 
@@ -69,9 +69,9 @@
   import CarteSkeleton from '@/components/CarteSkeleton.vue';
   import ActionListe from '@/components/custom/Action/ActionListe.vue';
   import CoachRecommandations from '@/components/custom/Coach/CoachRecommandations.vue';
+  import MissionsListe from '@/components/custom/Mission/MissionsListe.vue';
   import ServiceLink from '@/components/custom/Service/ServiceLink.vue';
   import ServiceLinkExterne from '@/components/custom/Service/ServiceLinkExterne.vue';
-  import ThematiquesListe from '@/components/custom/Thematiques/ThematiquesListe.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import { DefiRepositoryAxios } from '@/domaines/defi/adapters/defi.repository.axios';
   import {
@@ -79,6 +79,9 @@
     ListeDefisDescriptionPresenterImpl,
   } from '@/domaines/defi/adapters/listeDefisDescription.presenter.impl';
   import { RecupererListeDefisParUniversUsecase } from '@/domaines/defi/recupererListeDefisParUnivers.usecase';
+  import { MissionsPresenterImpl, MissionViewModel } from '@/domaines/missions/adapters/missions.presenter.impl';
+  import { MissionsRepositoryAxios } from '@/domaines/missions/adapters/missions.repository.axios';
+  import { RecupererMissionsThematiqueUsecase } from '@/domaines/missions/recupererMissionsThematique.usecase';
   import {
     RecommandationPersonnaliseeViewModel,
     RecommandationsPersonnaliseesPresenterImpl,
@@ -91,12 +94,6 @@
   } from '@/domaines/serviceRecherche/catalogue/adapters/serviceRecherche.presenter.impl';
   import { ServiceRechercheRepositoryAxios } from '@/domaines/serviceRecherche/catalogue/adapters/serviceRecherche.repository.axios';
   import { RecupererServicesRechercheParUniversUsecase } from '@/domaines/serviceRecherche/catalogue/recupererServicesRechercheParUnivers.usecase';
-  import { ThematiqueRepositoryAxios } from '@/domaines/thematiques/adapters/thematique.repository.axios';
-  import {
-    ThematiquesPresenterImpl,
-    ThematiqueViewModel,
-  } from '@/domaines/thematiques/adapters/thematiques.presenter.impl';
-  import { RecupererThematiquesUniversUsecase } from '@/domaines/thematiques/recupererThematiquesUnivers.usecase';
   import { UniversViewModel } from '@/domaines/univers/adapters/listeUnivers.presenter.impl';
   import { UniversPresenterImpl } from '@/domaines/univers/adapters/univers.presenter.impl';
   import { UniversRepositoryAxios } from '@/domaines/univers/adapters/univers.repository.axios';
@@ -107,11 +104,12 @@
   const store = utilisateurStore();
   const isLoading = ref<boolean>(true);
   const recommandationsPersonnaliseesViewModel = ref<RecommandationPersonnaliseeViewModel>();
-  const thematiquesViewModel = ref<ThematiqueViewModel[]>();
+  const missionsViewModel = ref<MissionViewModel[]>();
   const universViewModel = ref<UniversViewModel>();
   const defisViewModel = ref<DefiDescriptionViewModel[]>();
   const servicesViewModel = ref<ServicesRechercheViewModel>();
   let universId = MenuUnivers.getFromUrl(useRoute().params.id as string)!.clefTechniqueAPI;
+
   const lancerChargementDesDonnees = () => {
     isLoading.value = true;
     const idUtilisateur = store.utilisateur.id;
@@ -119,7 +117,7 @@
     const chargerRecommandationsPersonnaliseesUsecase = new RecupererRecommandationsPersonnaliseesUniversUsecase(
       new RecommandationsPersonnaliseesRepositoryAxios(),
     );
-    const recupererThematiquesUsecase = new RecupererThematiquesUniversUsecase(new ThematiqueRepositoryAxios());
+    const recupererThematiquesUsecase = new RecupererMissionsThematiqueUsecase(new MissionsRepositoryAxios());
     const recupererDefiParUniversUsecase = new RecupererListeDefisParUniversUsecase(new DefiRepositoryAxios());
     const recupererServicesRechercheParUniversUsecase = new RecupererServicesRechercheParUniversUsecase(
       new ServiceRechercheRepositoryAxios(),
@@ -138,7 +136,7 @@
       recupererThematiquesUsecase.execute(
         universId,
         idUtilisateur,
-        new ThematiquesPresenterImpl(vm => (thematiquesViewModel.value = vm)),
+        new MissionsPresenterImpl(vm => (missionsViewModel.value = vm)),
       ),
       recupererDefiParUniversUsecase.execute(
         idUtilisateur,

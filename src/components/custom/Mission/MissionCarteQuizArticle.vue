@@ -19,7 +19,7 @@
 </template>
 
 <script setup lang="ts">
-  import { MissionQuizArticleViewModel } from '@/domaines/thematiques/adapters/missionThematique.presenter.impl';
+  import { MissionQuizArticleViewModel } from '@/domaines/missions/adapters/mission.presenter.impl';
 
   defineProps<{ quizArticle: MissionQuizArticleViewModel }>();
 </script>

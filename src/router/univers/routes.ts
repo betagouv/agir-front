@@ -1,15 +1,14 @@
 import { RouteRecordRaw } from 'vue-router';
-const PageThematique = () => import('@/components/pages/PageThematique.vue');
+const PageMission = () => import('@/components/pages/PageMission.vue');
 const PageUnivers = () => import('@/components/pages/PageUnivers.vue');
 
 export enum RouteUniversName {
   UNIVERS = 'univers',
-  THEMATIQUE = 'thematique',
+  MISSION = 'mission',
 }
 
 export enum RouteUniversPath {
   UNIVERS = 'univers',
-  THEMATIQUE = 'thematique',
 }
 
 const universRoutes: RouteRecordRaw[] = [
@@ -22,9 +21,9 @@ const universRoutes: RouteRecordRaw[] = [
     },
   },
   {
-    path: `/${RouteUniversPath.UNIVERS}/:id/:thematique`,
-    name: RouteUniversName.THEMATIQUE,
-    component: PageThematique,
+    path: `/${RouteUniversPath.UNIVERS}/:id/:missionId`,
+    name: RouteUniversName.MISSION,
+    component: PageMission,
     meta: {
       title: 'Thematique',
     },
