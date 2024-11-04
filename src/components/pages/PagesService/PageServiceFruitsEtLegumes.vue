@@ -5,8 +5,18 @@
     <div v-else>
       <FilDAriane
         page-courante="Service : fruits et légumes"
-        :page-hierarchie="[{ label: 'Univers - En cuisine', url: `/${RouteThematiquesName.THEMATIQUE}/alimentation` }]"
+        :page-hierarchie="
+          useRoute().params.thematiqueId
+            ? [
+                {
+                  label: `${MenuThematiques.getFromUrl(useRoute().params.thematiqueId as string).labelDansLeMenu}`,
+                  url: `/thematique/${useRoute().params.thematiqueId}`,
+                },
+              ]
+            : []
+        "
       />
+
       <h1 class="fr-h2">
         Les fruits et légumes pour le mois de
         <ServiceSelect
@@ -67,6 +77,7 @@
 
 <script setup lang="ts">
   import { onMounted, ref } from 'vue';
+  import { useRoute } from 'vue-router';
   import PageServiceTemplate from '@/components/custom/Service/PageServiceTemplate.vue';
   import ServiceListeFruitsEtLegumes from '@/components/custom/Service/ServiceListeFruitsEtLegumes.vue';
   import ServiceSelect from '@/components/custom/Service/ServiceSelect.vue';
@@ -78,7 +89,7 @@
   } from '@/domaines/serviceRecherche/fruitsEtLegumes/adapters/serviceRechercheFruitsEtLegumes.presenter.impl';
   import { ServiceRechercheFruitsEtLegumesAxios } from '@/domaines/serviceRecherche/fruitsEtLegumes/adapters/serviceRechercheFruitsEtLegumes.repository.axios';
   import { RecupererServiceFruitsEtLegumesUsecase } from '@/domaines/serviceRecherche/fruitsEtLegumes/recupererServiceFruitsEtLegumes.usecase';
-  import { RouteThematiquesName } from '@/router/thematiques/routes';
+  import { MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const isLoading = ref<boolean>(true);

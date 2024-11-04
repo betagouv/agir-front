@@ -1,6 +1,6 @@
 import { AxiosFactory, intercept401 } from '@/axios.factory';
 import { ServiceRechercheRepository } from '@/domaines/serviceRecherche/catalogue/ports/serviceRecherche.repository';
-import { ServicesRecherche } from '@/domaines/serviceRecherche/catalogue/recupererServicesRechercheParUnivers.usecase';
+import { ServicesRecherche } from '@/domaines/serviceRecherche/catalogue/recupererServicesRechercheParThematique.usecase';
 
 interface ServiceRechercheApiModel {
   id_service: string;
@@ -13,7 +13,7 @@ interface ServiceRechercheApiModel {
 
 export class ServiceRechercheRepositoryAxios implements ServiceRechercheRepository {
   @intercept401()
-  async recupererServicesParUnivers(idUtilisateur: string, univers: string): Promise<ServicesRecherche> {
+  async recupererServicesParThematique(idUtilisateur: string, univers: string): Promise<ServicesRecherche> {
     const axiosInstance = AxiosFactory.getAxios();
 
     const response = await axiosInstance.get<ServiceRechercheApiModel[]>(

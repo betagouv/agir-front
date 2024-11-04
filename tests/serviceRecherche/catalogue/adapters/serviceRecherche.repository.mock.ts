@@ -1,14 +1,14 @@
 import { ServiceRechercheRepository } from '../../../../src/domaines/serviceRecherche/catalogue/ports/serviceRecherche.repository';
-import { ServicesRecherche } from '../../../../src/domaines/serviceRecherche/catalogue/recupererServicesRechercheParUnivers.usecase';
+import { ServicesRecherche } from '../../../../src/domaines/serviceRecherche/catalogue/recupererServicesRechercheParThematique.usecase';
 
 export class ServiceRechercheRepositoryMock implements ServiceRechercheRepository {
   constructor(private servicesRechercheARetourner: ServicesRecherche) {}
 
-  recupererServicesParUnivers(_idUtilisateur: string): Promise<ServicesRecherche> {
+  recupererServicesParThematique(_idUtilisateur: string, _thematiqueId: string): Promise<ServicesRecherche> {
     return Promise.resolve(this.servicesRechercheARetourner);
   }
 
-  recupererServicesPageAccueil(idUtilisateur: string): Promise<ServicesRecherche> {
+  recupererServicesPageAccueil(_idUtilisateur: string): Promise<ServicesRecherche> {
     return Promise.resolve(this.servicesRechercheARetourner);
   }
 }

@@ -1,4 +1,4 @@
-import { RecupererServicesRechercheParUniversUsecase } from '../../../src/domaines/serviceRecherche/catalogue/recupererServicesRechercheParUnivers.usecase';
+import { RecupererServicesRechercheParThematiqueUsecase } from '../../../src/domaines/serviceRecherche/catalogue/recupererServicesRechercheParThematique.usecase';
 import {
   ServiceRecherchePresenterImpl,
   ServicesRechercheViewModel,
@@ -6,10 +6,10 @@ import {
 import { ServiceRechercheRepositoryMock } from './adapters/serviceRecherche.repository.mock';
 import { RouteServiceName } from '../../../src/router/services/routes';
 
-describe('Fichier de tests concernant la récupération des services par univers', () => {
-  it("en donnant l'id d'un utilisateur et d'un univers, renvoie les services associées", async () => {
+describe('Fichier de tests concernant la récupération des services par thématique', () => {
+  it("en donnant l'id d'un utilisateur et d'une thématique, renvoie les services associées", async () => {
     // GIVEN
-    const usecase = new RecupererServicesRechercheParUniversUsecase(
+    const usecase = new RecupererServicesRechercheParThematiqueUsecase(
       new ServiceRechercheRepositoryMock({
         services: [
           {
@@ -41,7 +41,7 @@ describe('Fichier de tests concernant la récupération des services par univers
     );
 
     // WHEN
-    await usecase.execute('idUtilisateur', 'idUnivers', new ServiceRecherchePresenterImpl(expectation));
+    await usecase.execute('idUtilisateur', 'idThematique', new ServiceRecherchePresenterImpl(expectation));
 
     // THEN
     function expectation(serviceRechercheViewModel: ServicesRechercheViewModel) {
@@ -52,14 +52,14 @@ describe('Fichier de tests concernant la récupération des services par univers
             label: 'Fruits et légumes de saison',
             legende: 'juillet',
             picto: 'iconUrlFruits',
-            url: RouteServiceName.FRUITS_ET_LEGUMES,
+            url: `/thematique/me-nourrir/service/${RouteServiceName.FRUITS_ET_LEGUMES}`,
           },
           {
             estServiceExterne: false,
             label: 'Mes commerces de proximité',
             legende: 'À PARIS 01',
             picto: 'iconUrlProximite',
-            url: RouteServiceName.PROXIMITE,
+            url: `/thematique/me-nourrir/service/${RouteServiceName.PROXIMITE}`,
           },
           {
             estServiceExterne: true,

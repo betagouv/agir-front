@@ -1,6 +1,6 @@
-import { ServicesRecherche } from '@/domaines/serviceRecherche/catalogue/recupererServicesRechercheParUnivers.usecase';
+import { ServicesRecherche } from '@/domaines/serviceRecherche/catalogue/recupererServicesRechercheParThematique.usecase';
 
 export interface ServiceRechercheRepository {
-  recupererServicesParUnivers(idUtilisateur: string, univers: string): Promise<ServicesRecherche>;
+  recupererServicesParThematique(idUtilisateur: string, thematiqueId: string): Promise<ServicesRecherche>;
   recupererServicesPageAccueil(idUtilisateur: string): Promise<ServicesRecherche>;
 }
