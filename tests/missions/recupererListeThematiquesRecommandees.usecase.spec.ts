@@ -1,13 +1,13 @@
 import { MissionViewModel } from '@/domaines/missions/adapters/missions.presenter.impl';
-import { MissionsRepositoryMock } from '../missions/adapters/missions.repository.mock';
-import { RecupererListeThematiquesRecommandeesUsecase } from '@/domaines/thematiques/recupererListeThematiquesRecommandees.usecase';
-import { ThematiquesRecommandeesPresenterImpl } from '@/domaines/thematiques/adapters/thematiquesRecommandees.presenter.impl';
+import { MissionsRepositoryMock } from './adapters/missions.repository.mock';
+import { RecupererMissionsRecommandeesUsecase } from '@/domaines/missions/recupererMissionsRecommandees.usecase';
+import { MissionsRecommandeesPresenterImpl } from '@/domaines/missions/adapters/missionsRecommandees.presenter.impl';
 import { ClefTechniqueAPI } from '@/shell/MenuUnivers';
 
-describe('Fichier de tests concernant la récupération des thématiques recommandées', () => {
-  it("En donnant l'id utilisateur, il doit récupérer ses thématiques recommandées", async () => {
+describe('Fichier de tests concernant la récupération des missions recommandées', () => {
+  it("En donnant l'id utilisateur, il doit récupérer ses missions recommandées", async () => {
     // GIVEN
-    const usecase = new RecupererListeThematiquesRecommandeesUsecase(
+    const usecase = new RecupererMissionsRecommandeesUsecase(
       new MissionsRepositoryMock([
         {
           titre: 'Thematique 1',
@@ -82,7 +82,7 @@ describe('Fichier de tests concernant la récupération des thématiques recomma
       ]),
     );
     // WHEN
-    await usecase.execute('1', new ThematiquesRecommandeesPresenterImpl(expectation));
+    await usecase.execute('1', new MissionsRecommandeesPresenterImpl(expectation));
     // THEN
     function expectation(thematiques) {
       expect(thematiques).toEqual<MissionViewModel[]>([

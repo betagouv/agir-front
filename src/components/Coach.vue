@@ -22,10 +22,7 @@
       <p class="fr-text--md">
         Des solutions <span class="text--bold">adaptées à votre situation</span> et les clés pour comprendre
       </p>
-      <ThematiquesListe
-        v-if="listeThematiquesRecommandeesViewModel"
-        :missions="listeThematiquesRecommandeesViewModel"
-      />
+      <MissionsListe v-if="missionsRecommandeesViewModel" :missions="missionsRecommandeesViewModel" />
     </div>
     <div class="fr-container" v-else>
       <CarteSkeleton />
@@ -95,7 +92,7 @@
   import CoachRecommandations from '@/components/custom/Coach/CoachRecommandations.vue';
   import CoachServices from '@/components/custom/Coach/CoachServices.vue';
   import CoachToDo from '@/components/custom/Coach/CoachToDo.vue';
-  import ThematiquesListe from '@/components/custom/Mission/MissionsListe.vue';
+  import MissionsListe from '@/components/custom/Mission/MissionsListe.vue';
   import { BilanCarboneRepositoryAxios } from '@/domaines/bilanCarbone/adapters/bilanCarbone.repository.axios';
   import {
     BilanCarboneAccueilPresenterImpl,
@@ -105,14 +102,14 @@
   import { RecupererBilanCarboneUsecase } from '@/domaines/bilanCarbone/recupererBilanCarbone.usecase';
   import { MissionViewModel } from '@/domaines/missions/adapters/missions.presenter.impl';
   import { MissionsRepositoryAxios } from '@/domaines/missions/adapters/missions.repository.axios';
+  import { MissionsRecommandeesPresenterImpl } from '@/domaines/missions/adapters/missionsRecommandees.presenter.impl';
+  import { RecupererMissionsRecommandeesUsecase } from '@/domaines/missions/recupererMissionsRecommandees.usecase';
   import {
     RecommandationPersonnaliseeViewModel,
     RecommandationsPersonnaliseesPresenterImpl,
   } from '@/domaines/recommandationsPersonnalisees/adapters/recommandationsPersonnalisees.presenter.impl';
   import { RecommandationsPersonnaliseesRepositoryAxios } from '@/domaines/recommandationsPersonnalisees/adapters/recommandationsPersonnalisees.repository.axios';
   import { RecupererRecommandationsPersonnaliseesUsecase } from '@/domaines/recommandationsPersonnalisees/recupererRecommandationsPersonnalisees.usecase';
-  import { ThematiquesRecommandeesPresenterImpl } from '@/domaines/thematiques/adapters/thematiquesRecommandees.presenter.impl';
-  import { RecupererListeThematiquesRecommandeesUsecase } from '@/domaines/thematiques/recupererListeThematiquesRecommandees.usecase';
   import { ToDoListPresenterImpl, TodoListViewModel } from '@/domaines/toDoList/adapters/toDoList.presenter.impl';
   import { ToDoListRepositoryAxios } from '@/domaines/toDoList/adapters/toDoList.repository.axios';
   import { RecupererToDoListUsecase } from '@/domaines/toDoList/recupererToDoList.usecase';
@@ -129,7 +126,7 @@
   const bilanCarboneCompletViewModel = ref<BilanCarboneCompletAccueilViewModel>();
   const bilanCarbonePartielViewModel = ref<BilanCarbonePartielAccueilViewModel>();
   const store = utilisateurStore();
-  const listeThematiquesRecommandeesViewModel = ref<MissionViewModel[]>();
+  const missionsRecommandeesViewModel = ref<MissionViewModel[]>();
   const recommandationsPersonnaliseesViewModel = ref<RecommandationPersonnaliseeViewModel>();
 
   function mapValueTodo(viewModel: TodoListViewModel) {
@@ -142,7 +139,7 @@
   const subscriberName = 'Coach';
   const lancerChargementDesDonnees = () => {
     const idUtilisateur = store.utilisateur.id;
-    const recupererListeThematiquesRecommandeesUsecase = new RecupererListeThematiquesRecommandeesUsecase(
+    const recupererMissionsRecommandeesUsecase = new RecupererMissionsRecommandeesUsecase(
       new MissionsRepositoryAxios(),
     );
     const chargerTodoListUsecase = new RecupererToDoListUsecase(new ToDoListRepositoryAxios());
@@ -169,9 +166,9 @@
     });
 
     Promise.all([
-      recupererListeThematiquesRecommandeesUsecase.execute(
+      recupererMissionsRecommandeesUsecase.execute(
         idUtilisateur,
-        new ThematiquesRecommandeesPresenterImpl(vm => (listeThematiquesRecommandeesViewModel.value = vm)),
+        new MissionsRecommandeesPresenterImpl(vm => (missionsRecommandeesViewModel.value = vm)),
       ),
       chargerTodoListUsecase.execute(idUtilisateur, new ToDoListPresenterImpl(mapValueTodo)),
       chargerRecommandationsPersonnaliseesUsecase.execute(
