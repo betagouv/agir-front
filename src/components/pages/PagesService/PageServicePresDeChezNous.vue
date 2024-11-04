@@ -4,7 +4,7 @@
     <div v-else>
       <FilDAriane
         page-courante="Service : Près de chez nous"
-        :page-hierarchie="[{ label: 'Univers - En cuisine', url: `/${RouteUniversName.UNIVERS}/alimentation` }]"
+        :page-hierarchie="[{ label: 'Univers - En cuisine', url: `/${RouteThematiquesName.THEMATIQUE}/alimentation` }]"
       />
       <div v-if="serviceErreur">
         <h1>Service indisponible</h1>
@@ -80,7 +80,7 @@
   } from '@/domaines/serviceRecherche/presDeChezNous/adapters/serviceRecherchePresDeChezNous.presenter.impl';
   import { ServiceRecherchePresDeChezNousAxios } from '@/domaines/serviceRecherche/presDeChezNous/adapters/serviceRecherchePresDeChezNous.repository.axios';
   import { RecupererServicePresDeChezNousUsecase } from '@/domaines/serviceRecherche/presDeChezNous/recupererServicePresDeChezNous.usecase';
-  import { RouteUniversName } from '@/router/univers/routes';
+  import { RouteThematiquesName } from '@/router/thematiques/routes';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const isLoading = ref<boolean>(true);

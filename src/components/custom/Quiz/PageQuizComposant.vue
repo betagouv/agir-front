@@ -3,10 +3,16 @@
     <FilDAriane
       :page-courante="`Question : ${quizViewModel.titre}`"
       :page-hierarchie="
-        useRoute().params.universId
+        useRoute().params.thematiqueId && useRoute().params.missionId
           ? [
-              { label: 'Univers', url: `/univers/${useRoute().params.universId}` },
-              { label: 'Thématique', url: `/univers/${useRoute().params.universId}/${useRoute().params.thematiqueId}` },
+              {
+                label: `${MenuThematiques.getFromUrl(useRoute().params.thematiqueId as string).labelDansLeMenu}`,
+                url: `/thematique/${useRoute().params.thematiqueId}`,
+              },
+              {
+                label: `Mission`,
+                url: `/thematique/${useRoute().params.thematiqueId}/mission/${useRoute().params.missionId}`,
+              },
             ]
           : []
       "
@@ -49,6 +55,7 @@
   import { QuizRepositoryAxios } from '@/domaines/quiz/adapters/quizRepository.axios';
   import { EnvoyerDonneesQuizInteractionUsecase } from '@/domaines/quiz/envoyerDonneesQuizInteraction.usecase';
   import { ArticleDuQuiz } from '@/domaines/quiz/ports/quizRepository';
+  import { MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
   import { ToDoListEventBusImpl } from '@/domaines/toDoList/toDoListEventBusImpl';
 
   const props = defineProps<{

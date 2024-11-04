@@ -40,7 +40,7 @@ const articlesRoutes: RouteRecordRaw[] = [
     ],
   },
   {
-    path: `${RouteArticlePath.ARTICLE}/:universId/:missionId/:titre/:id`,
+    path: `/thematique/:thematiqueId/mission/:missionId${RouteArticlePath.ARTICLE}:titre/:id`,
     name: RouteArticleName.ARTICLE_THEMATIQUE,
     component: PageArticle,
   },

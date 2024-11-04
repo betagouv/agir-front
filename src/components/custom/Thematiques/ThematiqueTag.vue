@@ -6,7 +6,7 @@
 </template>
 
 <script setup lang="ts">
-  import { TagStyle } from '@/shell/TagThematique';
+  import { TagStyle } from '@/domaines/thematiques/TagThematique';
 
   const props = defineProps<{
     thematiqueClefAPI: string;

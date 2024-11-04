@@ -3,10 +3,16 @@
     <FilDAriane
       :page-courante="`Défi : ${defiViewModel?.libelle}`"
       :page-hierarchie="
-        useRoute().params.universId
+        useRoute().params.thematiqueId && useRoute().params.missionId
           ? [
-              { label: 'Univers', url: `/univers/${useRoute().params.universId}` },
-              { label: 'Thématique', url: `/univers/${useRoute().params.universId}/${useRoute().params.thematiqueId}` },
+              {
+                label: `${MenuThematiques.getFromUrl(useRoute().params.thematiqueId as string).labelDansLeMenu}`,
+                url: `/thematique/${useRoute().params.thematiqueId}`,
+              },
+              {
+                label: `Mission`,
+                url: `/thematique/${useRoute().params.thematiqueId}/mission/${useRoute().params.missionId}`,
+              },
             ]
           : []
       "
@@ -98,6 +104,7 @@
   import { DefiRepositoryAxios } from '@/domaines/defi/adapters/defi.repository.axios';
   import { EnvoyerReponseDefiUsecase } from '@/domaines/defi/envoyerReponseDefi.usecase';
   import { RecupererDefiUsecase } from '@/domaines/defi/recupererDefiUsecase';
+  import { MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
   import { ToDoListEventBusImpl } from '@/domaines/toDoList/toDoListEventBusImpl';
   import { utilisateurStore } from '@/store/utilisateur';
 

@@ -95,68 +95,68 @@
               <router-link
                 class="fr-nav__link"
                 :to="{
-                  name: RouteUniversName.UNIVERS,
-                  params: { id: MenuUnivers.getUniversData(ClefTechniqueAPI.alimentation).url },
+                  name: RouteThematiquesName.THEMATIQUE,
+                  params: { id: MenuThematiques.getThematiqueData(ClefThematiqueAPI.alimentation).url },
                 }"
                 :aria-current="
-                  route.name === RouteUniversName.UNIVERS &&
-                  route.params.id === MenuUnivers.getUniversData(ClefTechniqueAPI.alimentation).url
+                  route.name === RouteThematiquesName.THEMATIQUE &&
+                  route.params.id === MenuThematiques.getThematiqueData(ClefThematiqueAPI.alimentation).url
                     ? 'page'
                     : null
                 "
               >
-                {{ MenuUnivers.getUniversData(ClefTechniqueAPI.alimentation).labelDansLeMenu }}
+                {{ MenuThematiques.getThematiqueData(ClefThematiqueAPI.alimentation).labelDansLeMenu }}
               </router-link>
             </li>
             <li class="fr-nav__item" data-fr-js-navigation-item="true">
               <router-link
                 class="fr-nav__link"
                 :to="{
-                  name: RouteUniversName.UNIVERS,
-                  params: { id: MenuUnivers.getUniversData(ClefTechniqueAPI.logement).url },
+                  name: RouteThematiquesName.THEMATIQUE,
+                  params: { id: MenuThematiques.getThematiqueData(ClefThematiqueAPI.logement).url },
                 }"
                 :aria-current="
-                  route.name === RouteUniversName.UNIVERS &&
-                  route.params.id === MenuUnivers.getUniversData(ClefTechniqueAPI.logement).url
+                  route.name === RouteThematiquesName.THEMATIQUE &&
+                  route.params.id === MenuThematiques.getThematiqueData(ClefThematiqueAPI.logement).url
                     ? 'page'
                     : null
                 "
               >
-                {{ MenuUnivers.getUniversData(ClefTechniqueAPI.logement).labelDansLeMenu }}
+                {{ MenuThematiques.getThematiqueData(ClefThematiqueAPI.logement).labelDansLeMenu }}
               </router-link>
             </li>
             <li class="fr-nav__item" data-fr-js-navigation-item="true">
               <router-link
                 class="fr-nav__link"
                 :to="{
-                  name: RouteUniversName.UNIVERS,
-                  params: { id: MenuUnivers.getUniversData(ClefTechniqueAPI.transports).url },
+                  name: RouteThematiquesName.THEMATIQUE,
+                  params: { id: MenuThematiques.getThematiqueData(ClefThematiqueAPI.transports).url },
                 }"
                 :aria-current="
-                  route.name === RouteUniversName.UNIVERS &&
-                  route.params.id === MenuUnivers.getUniversData(ClefTechniqueAPI.transports).url
+                  route.name === RouteThematiquesName.THEMATIQUE &&
+                  route.params.id === MenuThematiques.getThematiqueData(ClefThematiqueAPI.transports).url
                     ? 'page'
                     : null
                 "
               >
-                {{ MenuUnivers.getUniversData(ClefTechniqueAPI.transports).labelDansLeMenu }}
+                {{ MenuThematiques.getThematiqueData(ClefThematiqueAPI.transports).labelDansLeMenu }}
               </router-link>
             </li>
             <li class="fr-nav__item nav__item--separateur" data-fr-js-navigation-item="true">
               <router-link
                 class="fr-nav__link"
                 :to="{
-                  name: RouteUniversName.UNIVERS,
-                  params: { id: MenuUnivers.getUniversData(ClefTechniqueAPI.consommation).url },
+                  name: RouteThematiquesName.THEMATIQUE,
+                  params: { id: MenuThematiques.getThematiqueData(ClefThematiqueAPI.consommation).url },
                 }"
                 :aria-current="
-                  route.name === RouteUniversName.UNIVERS &&
-                  route.params.id === MenuUnivers.getUniversData(ClefTechniqueAPI.consommation).url
+                  route.name === RouteThematiquesName.THEMATIQUE &&
+                  route.params.id === MenuThematiques.getThematiqueData(ClefThematiqueAPI.consommation).url
                     ? 'page'
                     : null
                 "
               >
-                {{ MenuUnivers.getUniversData(ClefTechniqueAPI.consommation).labelDansLeMenu }}
+                {{ MenuThematiques.getThematiqueData(ClefThematiqueAPI.consommation).labelDansLeMenu }}
               </router-link>
             </li>
             <li
@@ -214,8 +214,8 @@
   import { RouteCompteName } from '@/router/compte/routeCompteName';
   import { RouteAidesName } from '@/router/aides/routeAidesName';
   import Cookies from 'js-cookie';
-  import { RouteUniversName } from '@/router/univers/routes';
-  import { ClefTechniqueAPI, MenuUnivers } from '@/shell/MenuUnivers';
+  import { RouteThematiquesName } from '@/router/thematiques/routes';
+  import { ClefThematiqueAPI, MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
 
   const route = useRoute();
   const store = utilisateurStore();

@@ -1,10 +1,10 @@
-import { UniversApiModel } from '@/domaines/univers/adapters/univers.repository.axios';
+import { ThematiqueApiModel } from '@/domaines/thematiques/adapters/thematiques.repository.axios';
 
 export class InjectUnivers {
-  vierge(): UniversApiModel[] {
+  vierge(): ThematiqueApiModel[] {
     return [];
   }
-  public avecUnivers(univers: UniversApiModel[]): UniversApiModel[] {
+  public avecUnivers(univers: ThematiqueApiModel[]): ThematiqueApiModel[] {
     return univers;
   }
 }

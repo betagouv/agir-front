@@ -1,6 +1,6 @@
 import { MissionsPresenter } from '@/domaines/missions/ports/missions.presenter';
 import { Mission } from '@/domaines/missions/recupererMissionsThematique.usecase';
-import { TagStyle } from '@/shell/TagThematique';
+import { TagStyle } from '@/domaines/thematiques/TagThematique';
 
 export interface MissionViewModel {
   titre: string;

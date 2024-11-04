@@ -1,12 +1,12 @@
 import { MissionItem, DetailMission } from '../recupererDetailMission.usecase';
 import { MissionPresenter } from '@/domaines/missions/ports/missionPresenter';
+import { ClefThematiqueAPI, MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
 import { RouteArticlePath } from '@/router/articles/routes';
 import { RouteDefiPath } from '@/router/defis/routes';
 import { RouteKycPath } from '@/router/kyc/routes';
 import { RouteQuizPath } from '@/router/quiz/routes';
 import { buildUrl } from '@/shell/buildUrl';
 import { InteractionType } from '@/shell/interactionType';
-import { ClefTechniqueAPI, MenuUnivers } from '@/shell/MenuUnivers';
 
 export interface MissionBaseViewModel {
   id: string;
@@ -74,7 +74,7 @@ export class MissionPresenterImpl implements MissionPresenter {
             .filter(item => item.type === InteractionType.KYC)
             .reduce((sum, item) => sum + item.points, 0),
           aEteRealisee: mission.progressionKyc.etapeCourante === mission.progressionKyc.etapeTotal,
-          url: `${RouteKycPath.KYC}${MenuUnivers.getUniversData(mission.univers as ClefTechniqueAPI).url}/${mission.missionId}`,
+          url: `${RouteKycPath.KYC}${MenuThematiques.getThematiqueData(mission.univers as ClefThematiqueAPI).url}/${mission.missionId}`,
           picto: '/ic_mission_kyc.svg',
           pointAEteRecolte: mission.items.filter(item => item.type === InteractionType.KYC)[0].pointAEteRecolte,
         },
@@ -84,7 +84,7 @@ export class MissionPresenterImpl implements MissionPresenter {
         .map(item =>
           this.mapToViewModel(
             item,
-            MenuUnivers.getUniversData(mission.univers as ClefTechniqueAPI).url,
+            MenuThematiques.getThematiqueData(mission.univers as ClefThematiqueAPI).url,
             mission.missionId,
           ),
         ),
@@ -93,7 +93,7 @@ export class MissionPresenterImpl implements MissionPresenter {
         .map(item =>
           this.mapToDefiViewModel(
             item,
-            MenuUnivers.getUniversData(mission.univers as ClefTechniqueAPI).url,
+            MenuThematiques.getThematiqueData(mission.univers as ClefThematiqueAPI).url,
             mission.missionId,
           ),
         ),
@@ -114,14 +114,14 @@ export class MissionPresenterImpl implements MissionPresenter {
     };
   }
 
-  private mapToDefiViewModel(item: MissionItem, univers: string, thematique: string): MissionDefiViewModel {
+  private mapToDefiViewModel(item: MissionItem, thematiqueLabelUrl: string, missionId: string): MissionDefiViewModel {
     return {
       id: item.id,
       titre: item.titre,
       estBloquee: item.estBloquee,
       points: item.points,
       aEteRealisee: item.aEteRealisee && !item.estEnCours,
-      url: `${RouteDefiPath.DEFI}${univers}/${thematique}/${item.contentId}`,
+      url: `/thematique/${thematiqueLabelUrl}/mission/${missionId}${RouteDefiPath.DEFI}${item.contentId}`,
       picto: this.determinePicto(item),
       pointAEteRecolte: item.pointAEteRecolte,
       link: this.determineLienDefi(item.estEnCours, item.titre),
@@ -130,12 +130,12 @@ export class MissionPresenterImpl implements MissionPresenter {
     };
   }
 
-  private determineUrl(item: MissionItem, univers: string, thematique: string) {
+  private determineUrl(item: MissionItem, thematiqueLabelUrl: string, missionId: string) {
     switch (item.type) {
       case InteractionType.QUIZ:
-        return `${RouteQuizPath.QUIZ}${univers}/${thematique}/${item.contentId}`;
+        return `/thematique/${thematiqueLabelUrl}/mission/${missionId}${RouteQuizPath.QUIZ}${item.contentId}`;
       case InteractionType.ARTICLE:
-        return `${RouteArticlePath.ARTICLE}${univers}/${thematique}/${buildUrl(item.titre)}/${item.contentId}`;
+        return `/thematique/${thematiqueLabelUrl}/mission/${missionId}${RouteArticlePath.ARTICLE}${buildUrl(item.titre)}/${item.contentId}`;
       default:
         return '';
     }

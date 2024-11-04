@@ -90,7 +90,7 @@ describe("Fichier de tests concernant la récupération d'une mission", () => {
             idDuContenu: '1',
             points: 10,
             titre: 'Mission 1',
-            url: '/quiz/me-nourrir/1/1',
+            url: '/thematique/me-nourrir/mission/1/quiz/1',
             picto: '/ic_mission_article.svg',
             pointAEteRecolte: false,
           },
@@ -104,7 +104,7 @@ describe("Fichier de tests concernant la récupération d'une mission", () => {
             couleurBordure: '',
             points: 10,
             titre: 'Mission 2',
-            url: '/defi/me-nourrir/1/2',
+            url: '/thematique/me-nourrir/mission/1/defi/2',
             picto: '/ic_mission_defi.svg',
             pointAEteRecolte: false,
             link: {

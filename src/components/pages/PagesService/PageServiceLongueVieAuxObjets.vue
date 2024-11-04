@@ -4,7 +4,7 @@
     <div v-else>
       <FilDAriane
         page-courante="Service : Longue vie aux objets"
-        :page-hierarchie="[{ label: 'Univers - Mes achats', url: `/${RouteUniversName.UNIVERS}/consommation` }]"
+        :page-hierarchie="[{ label: 'Univers - Mes achats', url: `/${RouteThematiquesName.THEMATIQUE}/consommation` }]"
       />
       <div v-if="serviceErreur">
         <h1>Service indisponible</h1>
@@ -85,7 +85,7 @@
   } from '@/domaines/serviceRecherche/longueVieAuxObjets/adapters/serviceRechercheLongueVieAuxObjets.presenter.impl';
   import { ServiceRechercheLongueVieAuxObjetsAxios } from '@/domaines/serviceRecherche/longueVieAuxObjets/adapters/serviceRechercheLongueVieAuxObjets.repository.axios';
   import { RecupererServiceLongueVieAuxObjetsUsecase } from '@/domaines/serviceRecherche/longueVieAuxObjets/recupererServiceLongueVieAuxObjets.usecase';
-  import { RouteUniversName } from '@/router/univers/routes';
+  import { RouteThematiquesName } from '@/router/thematiques/routes';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const isLoading = ref<boolean>(true);

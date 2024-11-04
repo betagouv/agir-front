@@ -3,10 +3,16 @@
     <FilDAriane
       page-courante="Question pour mieux vous connaître"
       :page-hierarchie="
-        useRoute().params.universId
+        useRoute().params.thematiqueId && useRoute().params.missionId
           ? [
-              { label: 'Univers', url: `/univers/${useRoute().params.universId}` },
-              { label: 'Thématique', url: `/univers/${useRoute().params.universId}/${useRoute().params.thematiqueId}` },
+              {
+                label: `${MenuThematiques.getFromUrl(useRoute().params.thematiqueId as string).labelDansLeMenu}`,
+                url: `/thematique/${useRoute().params.thematiqueId}`,
+              },
+              {
+                label: `Mission`,
+                url: `/thematique/${useRoute().params.thematiqueId}/mission/${useRoute().params.missionId}`,
+              },
             ]
           : []
       "
@@ -32,6 +38,7 @@
   } from '@/domaines/kyc/adapters/listeQuestionsThematique.presenter.impl';
   import { QuestionRepositoryAxios } from '@/domaines/kyc/adapters/question.repository.axios';
   import { RecupererQuestionsThematiqueUsecase } from '@/domaines/kyc/recupererQuestionsThematique.usecase';
+  import { MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const isLoading = ref<boolean>(true);
@@ -42,7 +49,7 @@
     const usecase = new RecupererQuestionsThematiqueUsecase(new QuestionRepositoryAxios());
     usecase.execute(
       utilisateurStore().utilisateur.id,
-      route.params.thematiqueId as string,
+      route.params.missionId as string,
       new ListesQuestionsThematiquePresenter(vm => (questionsViewModel.value = vm)),
     );
     isLoading.value = false;

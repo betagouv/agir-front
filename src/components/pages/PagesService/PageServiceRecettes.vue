@@ -5,7 +5,7 @@
     <div v-else>
       <FilDAriane
         page-courante="Service : recettes"
-        :page-hierarchie="[{ label: 'Univers - En cuisine', url: `/${RouteUniversName.UNIVERS}/alimentation` }]"
+        :page-hierarchie="[{ label: 'Univers - En cuisine', url: `/${RouteThematiquesName.THEMATIQUE}/alimentation` }]"
       />
       <h1 class="fr-h2">
         Recettes
@@ -52,7 +52,7 @@
   } from '@/domaines/serviceRecherche/recettes/adapters/serviceRechercheRecettes.presenter.impl';
   import { ServiceRechercheRecettesAxios } from '@/domaines/serviceRecherche/recettes/adapters/serviceRechercheRecettes.repository.axios';
   import { RecupererServiceRecettesUsecase } from '@/domaines/serviceRecherche/recettes/recupererServiceRecettes.usecase';
-  import { RouteUniversName } from '@/router/univers/routes';
+  import { RouteThematiquesName } from '@/router/thematiques/routes';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const isLoading = ref<boolean>(true);

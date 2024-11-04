@@ -33,7 +33,7 @@ const kycRoutes: RouteRecordRaw[] = [
     },
   },
   {
-    path: `${RouteKycPath.KYC}:universId/:thematiqueId`,
+    path: `${RouteKycPath.KYC}:thematiqueId/:missionId`,
     name: RouteKycName.KYC_THEMATIQUE,
     component: PageMissionQuestionsKyc,
     meta: {

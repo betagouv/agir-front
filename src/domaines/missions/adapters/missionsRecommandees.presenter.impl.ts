@@ -1,7 +1,7 @@
 import { MissionViewModel } from '@/domaines/missions/adapters/missions.presenter.impl';
 import { MissionsPresenter } from '@/domaines/missions/ports/missions.presenter';
 import { Mission } from '@/domaines/missions/recupererMissionsThematique.usecase';
-import { TagThematique } from '@/shell/TagThematique';
+import { TagThematique } from '@/domaines/thematiques/TagThematique';
 
 export class MissionsRecommandeesPresenterImpl implements MissionsPresenter {
   constructor(private missionsViewModel: (viewModel: MissionViewModel[]) => void) {}
