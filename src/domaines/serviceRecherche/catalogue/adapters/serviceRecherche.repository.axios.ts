@@ -13,11 +13,11 @@ interface ServiceRechercheApiModel {
 
 export class ServiceRechercheRepositoryAxios implements ServiceRechercheRepository {
   @intercept401()
-  async recupererServicesParThematique(idUtilisateur: string, univers: string): Promise<ServicesRecherche> {
+  async recupererServicesParThematique(idUtilisateur: string, thematiqueId: string): Promise<ServicesRecherche> {
     const axiosInstance = AxiosFactory.getAxios();
 
     const response = await axiosInstance.get<ServiceRechercheApiModel[]>(
-      `/utilisateurs/${idUtilisateur}/recherche_services/${univers}`,
+      `/utilisateurs/${idUtilisateur}/recherche_services/${thematiqueId}`,
     );
 
     return {

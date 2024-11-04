@@ -2,7 +2,7 @@ import { DefiRepository } from '@/domaines/defi/ports/defi.repository';
 import { Defi } from '@/domaines/defi/defi';
 
 export class SpyDefiRepository implements DefiRepository {
-  recupererListeDefisParUnivers(utilisateurId: string, universId: string): Promise<Defi[]> {
+  recupererListeDefisParThematique(utilisateurId: string, universId: string): Promise<Defi[]> {
     throw new Error('Method not implemented.');
   }
 

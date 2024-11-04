@@ -1,4 +1,4 @@
-import { RecupererListeDefisParUniversUsecase } from '@/domaines/defi/recupererListeDefisParUnivers.usecase';
+import { RecupererListeDefisParThematiqueUsecase } from '@/domaines/defi/recupererListeDefisParThematique.usecase';
 import { MockListeDefisRepository } from './adapters/listedefis.repository.mock';
 import { expect } from 'vitest';
 import {
@@ -6,11 +6,11 @@ import {
   ListeDefisDescriptionPresenterImpl,
 } from '@/domaines/defi/adapters/listeDefisDescription.presenter.impl';
 
-describe("Fichier de tests concernant la récupération de la liste des défis avec leur description fonction d'un univers", () => {
-  it('En donnant un id utilisateur et un id univers doit retourner la liste des défis', async () => {
+describe("Fichier de tests concernant la récupération de la liste des défis avec leur description fonction d'une thématique", () => {
+  it('En donnant un id utilisateur et un id de thématique doit retourner la liste des défis', async () => {
     // GIVEN
     // WHEN
-    const usecase = new RecupererListeDefisParUniversUsecase(
+    const usecase = new RecupererListeDefisParThematiqueUsecase(
       new MockListeDefisRepository([
         {
           id: '1',
@@ -26,7 +26,7 @@ describe("Fichier de tests concernant la récupération de la liste des défis a
       ]),
     );
 
-    await usecase.execute('idUtilisateur', 'idUnivers', new ListeDefisDescriptionPresenterImpl(expectation));
+    await usecase.execute('idUtilisateur', 'idThematique', new ListeDefisDescriptionPresenterImpl(expectation));
     // THEN
     function expectation(viewModel: DefiDescriptionViewModel[]) {
       expect(viewModel).toStrictEqual<DefiDescriptionViewModel[]>([

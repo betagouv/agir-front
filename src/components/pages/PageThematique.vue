@@ -78,7 +78,7 @@
     DefiDescriptionViewModel,
     ListeDefisDescriptionPresenterImpl,
   } from '@/domaines/defi/adapters/listeDefisDescription.presenter.impl';
-  import { RecupererListeDefisParUniversUsecase } from '@/domaines/defi/recupererListeDefisParUnivers.usecase';
+  import { RecupererListeDefisParThematiqueUsecase } from '@/domaines/defi/recupererListeDefisParThematique.usecase';
   import { MissionsPresenterImpl, MissionViewModel } from '@/domaines/missions/adapters/missions.presenter.impl';
   import { MissionsRepositoryAxios } from '@/domaines/missions/adapters/missions.repository.axios';
   import { RecupererMissionsThematiqueUsecase } from '@/domaines/missions/recupererMissionsThematique.usecase';
@@ -120,7 +120,9 @@
       new RecommandationsPersonnaliseesRepositoryAxios(),
     );
     const recupererThematiquesUsecase = new RecupererMissionsThematiqueUsecase(new MissionsRepositoryAxios());
-    const recupererDefiParUniversUsecase = new RecupererListeDefisParUniversUsecase(new DefiRepositoryAxios());
+    const recupererListeDefisParThematiqueUsecase = new RecupererListeDefisParThematiqueUsecase(
+      new DefiRepositoryAxios(),
+    );
     const recupererServicesRechercheParThematiqueUsecase = new RecupererServicesRechercheParThematiqueUsecase(
       new ServiceRechercheRepositoryAxios(),
     );
@@ -140,7 +142,7 @@
         idUtilisateur,
         new MissionsPresenterImpl(vm => (missionsViewModel.value = vm)),
       ),
-      recupererDefiParUniversUsecase.execute(
+      recupererListeDefisParThematiqueUsecase.execute(
         idUtilisateur,
         universId,
         new ListeDefisDescriptionPresenterImpl(vm => (defisViewModel.value = vm)),
@@ -168,3 +170,4 @@
   });
 </script>
 @/domaines/serviceRecherche/catalogue/recupererServicesRechercheParThematique.usecase
+@/domaines/defi/recupererListeDefisParThematique.usecase
