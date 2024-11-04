@@ -1,4 +1,4 @@
-import { ThematiquesRepositoryMock } from './adapters/univers.repository.mock';
+import { ThematiquesRepositoryMock } from './adapters/thematique.repository.mock';
 import { RecupererThematiqueUsecase } from '@/domaines/thematiques/recupererThematique.usecase';
 import {
   ThematiquePresenterImpl,
