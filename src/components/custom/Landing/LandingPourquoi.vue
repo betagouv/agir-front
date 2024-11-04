@@ -1,5 +1,5 @@
 <template>
-  <h2 class="fr-h2 fr-mb-6w text--center">À retrouver sur <strong class="text--italic">J’agis</strong></h2>
+  <h2 class="fr-h2 fr-mb-6w text--center">À retrouver sur <i>J’agis</i></h2>
   <ul class="fr-grid-row flex-space-around fr-grid-row--gutters">
     <li
       v-for="(item, index) in items"

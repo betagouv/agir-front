@@ -18,13 +18,11 @@ const Page404 = () => import('@/components/pages/Page404.vue');
 const FranceConnectCallBack = () => import('@/components/FranceConnectCallBack.vue');
 const PageAccueil = () => import('@/components/pages/PageAccueil.vue');
 const PageSessionExpiree = () => import('@/components/pages/PageSessionExpiree.vue');
-const PageBetaFermee = () => import('@/components/pages/PageBetaFermee.vue');
 
 export enum RouteCommuneName {
   ACCUEIL = 'accueil',
   AUTHENTIFICATION = 'authentification',
   SESSION_EXPIREE = 'session-expiree',
-  BETA_FERMEE = 'beta-fermee',
   NOT_FOUND = 'not-found',
   RETOUR_AUTH_FRANCE_CONNECT = 'retour-auth-france-connect',
 }
@@ -61,15 +59,6 @@ const routes: RouteRecordRaw[] = [
       if (utilisateurStore().utilisateur.id.length > 0) {
         router.replace({ name: RouteCoachName.COACH });
       }
-    },
-  },
-  {
-    path: RouteCommunePath.BETA_FERMEE,
-    name: RouteCommuneName.BETA_FERMEE,
-    component: PageBetaFermee,
-    meta: {
-      title: 'Bêta fermée',
-      estPublique: true,
     },
   },
   {

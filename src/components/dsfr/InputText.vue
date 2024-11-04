@@ -14,6 +14,8 @@
       :value="modelValue"
       @input="updateValue"
       @blur="handleBlur"
+      :maxlength="maxlength"
+      :autofocus="autofocus"
     />
     <p v-if="erreur && erreur.afficher" id="text-input-error-desc-error" class="fr-error-text">{{ erreur.message }}</p>
   </div>
@@ -30,6 +32,8 @@
       message: string;
       afficher: boolean;
     };
+    maxlength?: number;
+    autofocus?: boolean;
   }>();
 
   const emit = defineEmits<{

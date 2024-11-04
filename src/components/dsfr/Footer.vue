@@ -3,17 +3,17 @@
     <div class="fr-container">
       <div class="fr-footer__body">
         <div class="fr-footer__brand fr-enlarge-link">
+          <p class="fr-logo">
+            République
+            <br />Française
+          </p>
           <router-link title="Retour à l'accueil du site - J'agis" :to="{ name: RouteCommuneName.ACCUEIL }">
-            <p class="fr-logo">
-              République<br />
-              française
-            </p>
+            <img class="logo-jagis" src="/logo-jagis-full.svg" alt="J'agis" />
           </router-link>
         </div>
         <div class="fr-footer__content">
           <p class="fr-footer__content-desc">
-            L'application <strong class="text--italic">J’agis</strong> est un service proposé par le Secrétariat Général
-            à la Planification Ecologique.
+            L'application <i>J’agis</i> est un service proposé par le Secrétariat Général à la Planification Ecologique.
           </p>
           <ul class="fr-footer__content-list">
             <li class="fr-footer__content-item">
@@ -136,3 +136,10 @@
   import { RouteCommuneName } from '@/router';
   import { RouteConformiteName } from '@/router/conformite/routes';
 </script>
+
+<style scoped>
+  .logo-jagis {
+    height: 4rem;
+    margin-left: 4rem;
+  }
+</style>

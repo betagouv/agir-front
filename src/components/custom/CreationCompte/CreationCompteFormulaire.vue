@@ -3,7 +3,7 @@
     <fieldset class="fr-fieldset fr-mb-0">
       <legend class="fr-fieldset__legend" id="identity-fieldset-legend">
         <img src="/bg_creation_compte.svg" alt="" />
-        <h2 class="fr-h4 fr-mb-0">Créez votre compte sur J'agis</h2>
+        <h1 class="fr-h4 fr-mb-0">Créez votre compte sur J'agis</h1>
         <p class="fr-text--regular">
           Indiquez votre adresse e-mail et choisissez un mot de passe pour accéder au service.
         </p>
@@ -17,6 +17,7 @@
           :message="creationDeCompteMessageErreur"
         />
       </div>
+      <p class="fr-text--md text--gris-light fr-mt-0 fr-mb-1w fr-ml-1w">Tous les champs sont obligatoires</p>
       <div class="fr-fieldset__element">
         <InputMail label="Adresse électronique" name="utilisateur-mail" v-model="compteUtilisateurInput.mail" />
       </div>
@@ -26,6 +27,7 @@
           v-model="compteUtilisateurInput.motDePasse"
           @update:mot-de-passe-valide="onMotDePasseValideChanged"
           legende="Votre mot de passe doit contenir :"
+          :required="true"
         />
       </div>
       <div class="fr-fieldset__element">
@@ -40,13 +42,7 @@
         </div>
       </div>
       <div class="fr-fieldset__element fr-mb-0 fr-mt-1w">
-        <button
-          class="fr-btn fr-btn--lg display-block full-width"
-          :disabled="!formulaireValide || !acceptationCGU"
-          type="submit"
-        >
-          S'inscrire
-        </button>
+        <button class="fr-btn fr-btn--lg display-block full-width" type="submit">S'inscrire</button>
       </div>
     </fieldset>
   </form>
@@ -88,6 +84,14 @@
   }
 
   const performCreerCompteUtilisateur = async () => {
+    creationDeCompteEnErreur.value = false;
+    if (acceptationCGU.value === false) {
+      creationDeCompteMessageErreur.value =
+        "Vous devez accepter les conditions générales d'utilisation pour continuer.";
+      creationDeCompteEnErreur.value = true;
+      window.scrollTo(0, 0);
+      return;
+    }
     const creeCompteUseCase = new CreerCompteUtilisateurUsecase(
       new CompteUtilisateurRepositoryImpl(),
       new SessionRepositoryStore(),

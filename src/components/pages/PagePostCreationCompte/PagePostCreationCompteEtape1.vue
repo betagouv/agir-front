@@ -18,10 +18,12 @@
               v-model="onboardingPostCreationCompte().prenom"
               :erreur="champsPrenomStatus"
               @blur="onValidationPrenom"
+              :required="true"
+              :autofocus="true"
             />
           </div>
         </fieldset>
-        <button class="fr-btn fr-mr-4w" :disabled="onboardingPostCreationCompte().prenom.length == 0">Continuer</button>
+        <button class="fr-btn fr-mr-4w">Continuer</button>
       </form>
     </div>
   </div>

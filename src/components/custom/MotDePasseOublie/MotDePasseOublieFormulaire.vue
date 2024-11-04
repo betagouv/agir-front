@@ -2,7 +2,7 @@
   <p class="fr-text--lg">Saisissez l’adresse électronique associé à votre compte.</p>
   <form @submit.prevent="recupererMotDePasse">
     <InputMail label="Adresse électronique" v-model="email" name="email" />
-    <button class="fr-btn fr-btn--lg" :disabled="!email" type="submit">Valider</button>
+    <button class="fr-btn fr-btn--lg" type="submit">Valider</button>
   </form>
 </template>
 

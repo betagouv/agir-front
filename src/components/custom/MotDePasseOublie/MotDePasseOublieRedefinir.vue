@@ -13,7 +13,14 @@
     <strong>{{ email }}</strong>
   </p>
   <form @submit.prevent="definirMotDePasse">
-    <InputText class="fr-col-md-5 fr-mt-2w" v-model="code" name="code" label="Code à usage unique" />
+    <InputText
+      class="fr-col-md-5 fr-mt-2w"
+      v-model="code"
+      name="code"
+      label="Code à usage unique"
+      :required="true"
+      :maxlength="6"
+    />
     <p class="fr-mt-4w fr-mb-0">Vous n’avez pas reçu de code ?</p>
     <button class="fr-link fr-icon-mail-line fr-link--icon-left text--underline fr-mb-2w" @click.prevent="renvoyerCode">
       Renvoyer le code
@@ -25,9 +32,7 @@
       @update:mot-de-passe-valide="onMotDePasseValideChanged"
       legende="Votre nouveau mot de passe doit contenir :"
     />
-    <button class="fr-btn display-block text--center" :disabled="!motDePasseValide || code.length === 0" type="submit">
-      Valider
-    </button>
+    <button class="fr-btn display-block text--center" type="submit">Valider</button>
   </form>
 </template>
 
