@@ -27,7 +27,7 @@
             <h1 :id="modaleId">Bravo !</h1>
             <p class="fr-text--lg text--bleu fr-mb-0">Vous avez gagné votre carte mission</p>
           </div>
-          <ThematiqueCardDone class="fr-col-5" :titre="titre" :urlImage="urlImage" />
+          <MissionCarteTerminee class="fr-col-5" :titre="titre" :urlImage="urlImage" />
         </div>
         <div class="fr-py-3w text--center">
           <h2 class="fr-text--lg fr-mb-2w">Découvrez de nouvelles missions</h2>
@@ -45,8 +45,8 @@
 
 <script setup lang="ts">
   import { ref } from 'vue';
+  import MissionCarteTerminee from '@/components/custom/Mission/MissionCarteTerminee.vue';
   import Modale from '@/components/custom/Modale/Modale.vue';
-  import ThematiqueCardDone from '@/components/custom/Thematiques/ThematiqueCardDone.vue';
   import { MissionsRepositoryAxios } from '@/domaines/missions/adapters/missions.repository.axios';
   import { TerminerMissionUsecase } from '@/domaines/missions/terminerMission.usecase';
   import { ClefTechniqueAPI, MenuUnivers } from '@/shell/MenuUnivers';

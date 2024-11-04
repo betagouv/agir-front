@@ -23,15 +23,15 @@
   </div>
   <div class="mission__dashline fr-col-md-8 fr-col-12">
     <h2 class="text--uppercase fr-text--xs text--bleu fr-mb-2w fr-mt-3w fr-ml-6w">1. Adapter votre expérience</h2>
-    <ThematiqueMissionKyc :missions="missionViewModel.kyc" />
+    <MissionKyc :missions="missionViewModel.kyc" />
     <h2 class="text--uppercase fr-text--xs text--bleu fr-mb-2w fr-mt-5w fr-ml-6w">
       2. Lire des articles et répondre aux quiz
     </h2>
-    <ThematiqueMissionQuizArticle :missions="missionViewModel.articleEtQuiz" />
+    <MissionQuizArticle :missions="missionViewModel.articleEtQuiz" />
     <h2 class="text--uppercase fr-text--xs text--bleu fr-mb-2w fr-mt-5w fr-ml-6w">
       3. Réaliser au moins une action proposée
     </h2>
-    <ThematiqueMissionDefis :defis="missionViewModel.defis" />
+    <MissionDefis :defis="missionViewModel.defis" />
   </div>
   <div :class="`fr-col-md-8 fr-col-12 ${!missionViewModel.estTerminable ? 'opacity-6' : ''}`">
     <h2 class="text--uppercase fr-text--xs text--bleu fr-mb-2w fr-mt-5w fr-ml-6w">4. Gagner votre carte</h2>
@@ -47,10 +47,10 @@
 </template>
 
 <script setup lang="ts">
-  import ThematiqueMissionKyc from '@/components/custom/Mission/MissionKyc.vue';
+  import MissionDefis from '@/components/custom/Mission/MissionDefis.vue';
+  import MissionKyc from '@/components/custom/Mission/MissionKyc.vue';
+  import MissionQuizArticle from '@/components/custom/Mission/MissionQuizArticle.vue';
   import MissionTerminee from '@/components/custom/Mission/MissionTerminee.vue';
-  import ThematiqueMissionDefis from '@/components/custom/Thematiques/ThematiqueMissionDefis.vue';
-  import ThematiqueMissionQuizArticle from '@/components/custom/Thematiques/ThematiqueMissionQuizArticle.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import { MissionViewModel } from '@/domaines/missions/adapters/mission.presenter.impl';
   import { ClefTechniqueAPI, MenuUnivers } from '@/shell/MenuUnivers';

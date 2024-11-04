@@ -18,9 +18,9 @@
   </div>
 
   <div v-if="!isLoading">
-    <section id="thematiques" v-if="thematiquesViewModel">
+    <section id="thematiques" v-if="missionsViewModel">
       <div class="fr-container">
-        <ThematiquesListe :missions="thematiquesViewModel" />
+        <MissionsListe :missions="missionsViewModel" />
       </div>
     </section>
 
@@ -69,7 +69,7 @@
   import CarteSkeleton from '@/components/CarteSkeleton.vue';
   import ActionListe from '@/components/custom/Action/ActionListe.vue';
   import CoachRecommandations from '@/components/custom/Coach/CoachRecommandations.vue';
-  import ThematiquesListe from '@/components/custom/Mission/MissionsListe.vue';
+  import MissionsListe from '@/components/custom/Mission/MissionsListe.vue';
   import ServiceLink from '@/components/custom/Service/ServiceLink.vue';
   import ServiceLinkExterne from '@/components/custom/Service/ServiceLinkExterne.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
@@ -104,11 +104,12 @@
   const store = utilisateurStore();
   const isLoading = ref<boolean>(true);
   const recommandationsPersonnaliseesViewModel = ref<RecommandationPersonnaliseeViewModel>();
-  const thematiquesViewModel = ref<MissionViewModel[]>();
+  const missionsViewModel = ref<MissionViewModel[]>();
   const universViewModel = ref<UniversViewModel>();
   const defisViewModel = ref<DefiDescriptionViewModel[]>();
   const servicesViewModel = ref<ServicesRechercheViewModel>();
   let universId = MenuUnivers.getFromUrl(useRoute().params.id as string)!.clefTechniqueAPI;
+
   const lancerChargementDesDonnees = () => {
     isLoading.value = true;
     const idUtilisateur = store.utilisateur.id;
@@ -135,7 +136,7 @@
       recupererThematiquesUsecase.execute(
         universId,
         idUtilisateur,
-        new MissionsPresenterImpl(vm => (thematiquesViewModel.value = vm)),
+        new MissionsPresenterImpl(vm => (missionsViewModel.value = vm)),
       ),
       recupererDefiParUniversUsecase.execute(
         idUtilisateur,
