@@ -3,8 +3,8 @@
     :page-courante="`Mission: ${missionViewModel.titre}`"
     :page-hierarchie="[
       {
-        label: `${MenuUnivers.getUniversData(universId as ClefTechniqueAPI).labelDansLeMenu}`,
-        url: `/univers/${MenuUnivers.getUniversData(universId as ClefTechniqueAPI).url}`,
+        label: `${MenuThematiques.getThematiqueData(clefThematiqueAPI as ClefThematiqueAPI).labelDansLeMenu}`,
+        url: `/thematique/${MenuThematiques.getThematiqueData(clefThematiqueAPI as ClefThematiqueAPI).url}`,
       },
     ]"
   />
@@ -40,7 +40,7 @@
       :titre="missionViewModel.titre"
       :est-terminee="missionViewModel.estTerminee"
       :est-terminable="missionViewModel.estTerminable"
-      :univers-id="universId"
+      :thematique-id="clefThematiqueAPI"
       :mission-id="missionId"
     />
   </div>
@@ -53,9 +53,9 @@
   import MissionTerminee from '@/components/custom/Mission/MissionTerminee.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import { MissionViewModel } from '@/domaines/missions/adapters/mission.presenter.impl';
-  import { ClefTechniqueAPI, MenuUnivers } from '@/shell/MenuUnivers';
+  import { ClefThematiqueAPI, MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
 
-  defineProps<{ missionId: string; universId: string; missionViewModel: MissionViewModel }>();
+  defineProps<{ missionId: string; clefThematiqueAPI: string; missionViewModel: MissionViewModel }>();
 </script>
 
 <style scoped>

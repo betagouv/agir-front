@@ -2,7 +2,7 @@ import { MissionViewModel } from '@/domaines/missions/adapters/missions.presente
 import { MissionsRepositoryMock } from './adapters/missions.repository.mock';
 import { RecupererMissionsRecommandeesUsecase } from '@/domaines/missions/recupererMissionsRecommandees.usecase';
 import { MissionsRecommandeesPresenterImpl } from '@/domaines/missions/adapters/missionsRecommandees.presenter.impl';
-import { ClefTechniqueAPI } from '@/shell/MenuUnivers';
+import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 
 describe('Fichier de tests concernant la récupération des missions recommandées', () => {
   it("En donnant l'id utilisateur, il doit récupérer ses missions recommandées", async () => {
@@ -19,7 +19,7 @@ describe('Fichier de tests concernant la récupération des missions recommandé
           niveau: 0,
           urlImage: 'https://via.placeholder.com/150',
           thematiqueParent: {
-            clefAPI: ClefTechniqueAPI.alimentation,
+            clefAPI: ClefThematiqueAPI.alimentation,
             label: 'Nom de thematique parent 1',
           },
         },
@@ -33,7 +33,7 @@ describe('Fichier de tests concernant la récupération des missions recommandé
           niveau: 0,
           urlImage: 'https://via.placeholder.com/150',
           thematiqueParent: {
-            clefAPI: ClefTechniqueAPI.transports,
+            clefAPI: ClefThematiqueAPI.transports,
             label: 'Nom de thematique parent 2',
           },
         },
@@ -47,7 +47,7 @@ describe('Fichier de tests concernant la récupération des missions recommandé
           niveau: 0,
           urlImage: 'https://via.placeholder.com/150',
           thematiqueParent: {
-            clefAPI: ClefTechniqueAPI.consommation,
+            clefAPI: ClefThematiqueAPI.consommation,
             label: 'Nom de thematique parent 3',
           },
         },
@@ -61,7 +61,7 @@ describe('Fichier de tests concernant la récupération des missions recommandé
           niveau: 0,
           urlImage: 'https://via.placeholder.com/150',
           thematiqueParent: {
-            clefAPI: ClefTechniqueAPI.logement,
+            clefAPI: ClefThematiqueAPI.logement,
             label: 'Nom de thematique parent 4',
           },
         },
@@ -95,7 +95,7 @@ describe('Fichier de tests concernant la récupération des missions recommandé
           niveau: 0,
           urlImage: 'https://via.placeholder.com/150',
           estTerminee: false,
-          clefThematique: ClefTechniqueAPI.alimentation,
+          clefThematique: ClefThematiqueAPI.alimentation,
           tagThematique: {
             label: 'Nom de thematique parent 1',
             style: {
@@ -116,7 +116,7 @@ describe('Fichier de tests concernant la récupération des missions recommandé
           niveau: 0,
           urlImage: 'https://via.placeholder.com/150',
           estTerminee: false,
-          clefThematique: ClefTechniqueAPI.transports,
+          clefThematique: ClefThematiqueAPI.transports,
           tagThematique: {
             label: 'Nom de thematique parent 2',
             style: {
@@ -137,7 +137,7 @@ describe('Fichier de tests concernant la récupération des missions recommandé
           niveau: 0,
           urlImage: 'https://via.placeholder.com/150',
           estTerminee: false,
-          clefThematique: ClefTechniqueAPI.consommation,
+          clefThematique: ClefThematiqueAPI.consommation,
           tagThematique: {
             label: 'Nom de thematique parent 3',
             style: {
@@ -158,7 +158,7 @@ describe('Fichier de tests concernant la récupération des missions recommandé
           niveau: 0,
           urlImage: 'https://via.placeholder.com/150',
           estTerminee: false,
-          clefThematique: ClefTechniqueAPI.logement,
+          clefThematique: ClefThematiqueAPI.logement,
           tagThematique: {
             label: 'Nom de thematique parent 4',
             style: {

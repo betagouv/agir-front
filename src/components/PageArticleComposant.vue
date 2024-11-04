@@ -3,10 +3,16 @@
     <FilDAriane
       :page-courante="`Article: ${article.titre}`"
       :page-hierarchie="
-        useRoute().params.universId
+        useRoute().params.thematiqueId && useRoute().params.missionId
           ? [
-              { label: 'Univers', url: `/univers/${useRoute().params.universId}` },
-              { label: 'Thématique', url: `/univers/${useRoute().params.universId}/${useRoute().params.thematiqueId}` },
+              {
+                label: `${MenuThematiques.getFromUrl(useRoute().params.thematiqueId).labelDansLeMenu}`,
+                url: `/thematique/${useRoute().params.thematiqueId}`,
+              },
+              {
+                label: `Mission`,
+                url: `/thematique/${useRoute().params.thematiqueId}/mission/${useRoute().params.missionId}`,
+              },
             ]
           : []
       "
@@ -84,6 +90,7 @@
   import { EvaluerArticleUsecase } from '@/domaines/article/evaluerArticle.usecase';
   import { Article } from '@/domaines/article/recupererArticle.usecase';
   import { RetirerDesFavorisUsecase } from '@/domaines/article/retirerDesFavoris.usecase';
+  import { MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const props = defineProps<{

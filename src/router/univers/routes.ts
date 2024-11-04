@@ -2,27 +2,27 @@ import { RouteRecordRaw } from 'vue-router';
 const PageMission = () => import('@/components/pages/PageMission.vue');
 const PageUnivers = () => import('@/components/pages/PageUnivers.vue');
 
-export enum RouteUniversName {
-  UNIVERS = 'univers',
+export enum RouteThematiquesName {
+  THEMATIQUE = 'thematique',
   MISSION = 'mission',
 }
 
-export enum RouteUniversPath {
-  UNIVERS = 'univers',
+export enum RouteThematiquesPath {
+  THEMATIQUE = 'thematique',
 }
 
-const universRoutes: RouteRecordRaw[] = [
+const thematiqueRoutes: RouteRecordRaw[] = [
   {
-    path: `/${RouteUniversPath.UNIVERS}/:id`,
-    name: RouteUniversName.UNIVERS,
+    path: `/${RouteThematiquesPath.THEMATIQUE}/:id`,
+    name: RouteThematiquesName.THEMATIQUE,
     component: PageUnivers,
     meta: {
       title: 'Univers',
     },
   },
   {
-    path: `/${RouteUniversPath.UNIVERS}/:id/:missionId`,
-    name: RouteUniversName.MISSION,
+    path: `/${RouteThematiquesPath.THEMATIQUE}/:id/mission/:missionId`,
+    name: RouteThematiquesName.MISSION,
     component: PageMission,
     meta: {
       title: 'Thematique',
@@ -30,4 +30,4 @@ const universRoutes: RouteRecordRaw[] = [
   },
 ];
 
-export default universRoutes;
+export default thematiqueRoutes;

@@ -2,7 +2,11 @@
   <div v-if="isLoading">Chargement en cours ...</div>
   <div v-else-if="!missionViewModel">Une erreur est survenue</div>
   <div v-else class="fr-container fr-pb-4w">
-    <MissionPageComposant :mission-id="missionId" :univers-id="clefUniversAPI" :mission-view-model="missionViewModel" />
+    <MissionPageComposant
+      :mission-id="missionId"
+      :thematique-id="clefThematiqueAPI"
+      :mission-view-model="missionViewModel"
+    />
   </div>
 </template>
 
@@ -14,7 +18,7 @@
   import { MissionsRepositoryAxios } from '@/domaines/missions/adapters/missions.repository.axios';
   import { MissionEvent, MissionEventBusImpl } from '@/domaines/missions/missionEventBus.impl';
   import { RecupererDetailMissionUsecase } from '@/domaines/missions/recupererDetailMission.usecase';
-  import { ClefTechniqueAPI, MenuUnivers } from '@/shell/MenuUnivers';
+  import { ClefThematiqueAPI, MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const isLoading = ref<boolean>(true);
@@ -25,7 +29,7 @@
   }
 
   const missionId = useRoute().params.missionId as string;
-  const clefUniversAPI = MenuUnivers.getFromUrl(useRoute().params.id as ClefTechniqueAPI)!.clefTechniqueAPI;
+  const clefThematiqueAPI = MenuThematiques.getFromUrl(useRoute().params.id as ClefThematiqueAPI)!.clefTechniqueAPI;
 
   const utilisateurId = utilisateurStore().utilisateur.id;
   const subscriberName = 'PageMission';

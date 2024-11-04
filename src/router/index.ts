@@ -11,7 +11,7 @@ import defiRoutes from '@/router/defis/routes';
 import kycRoutes from '@/router/kyc/routes';
 import quizRoutes from '@/router/quiz/routes';
 import serviceRoutes from '@/router/services/routes';
-import universRoutes from '@/router/univers/routes';
+import thematiqueRoutes from '@/router/univers/routes';
 import { utilisateurStore } from '@/store/utilisateur';
 const Authentification = () => import('@/components/Authentification.vue');
 const Page404 = () => import('@/components/pages/Page404.vue');
@@ -42,7 +42,7 @@ const routes: RouteRecordRaw[] = [
   ...coachRoutes,
   ...articlesRoutes,
   ...aidesRoutes,
-  ...universRoutes,
+  ...thematiqueRoutes,
   ...quizRoutes,
   ...serviceRoutes,
   ...bilanCarboneRoutes,

@@ -1,4 +1,4 @@
-import { ClefTechniqueAPI } from '@/shell/MenuUnivers';
+import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 
 export interface TagStyle {
   backgroundColor: string;
@@ -7,23 +7,23 @@ export interface TagStyle {
 }
 
 export class TagThematique {
-  private static tagData: Record<ClefTechniqueAPI, TagStyle> = {
-    [ClefTechniqueAPI.alimentation]: {
+  private static tagData: Record<ClefThematiqueAPI, TagStyle> = {
+    [ClefThematiqueAPI.alimentation]: {
       backgroundColor: '#E3FBAF',
       color: '#175202',
       emoji: '🥗',
     },
-    [ClefTechniqueAPI.transports]: {
+    [ClefThematiqueAPI.transports]: {
       backgroundColor: '#D2E9FF',
       color: '#021952',
       emoji: '🚗',
     },
-    [ClefTechniqueAPI.consommation]: {
+    [ClefThematiqueAPI.consommation]: {
       backgroundColor: '#FFE8D7',
       color: '#522E02',
       emoji: '👕',
     },
-    [ClefTechniqueAPI.logement]: {
+    [ClefThematiqueAPI.logement]: {
       backgroundColor: '#FFE2E0',
       color: '#52022E',
       emoji: '🏠',

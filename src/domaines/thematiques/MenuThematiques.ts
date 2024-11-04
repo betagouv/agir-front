@@ -1,44 +1,44 @@
-interface Univers {
+interface Thematique {
   clefTechniqueAPI: string;
   url: string;
   labelDansLeMenu: string;
 }
 
-export enum ClefTechniqueAPI {
+export enum ClefThematiqueAPI {
   alimentation = 'alimentation',
   transports = 'transport',
   consommation = 'consommation',
   logement = 'logement',
 }
 
-export class MenuUnivers {
-  private static universData: Record<ClefTechniqueAPI, Univers> = {
-    [ClefTechniqueAPI.alimentation]: {
+export class MenuThematiques {
+  private static thematiquesData: Record<ClefThematiqueAPI, Thematique> = {
+    [ClefThematiqueAPI.alimentation]: {
       clefTechniqueAPI: 'alimentation',
       url: 'me-nourrir',
       labelDansLeMenu: 'Me nourrir',
     },
-    [ClefTechniqueAPI.transports]: {
+    [ClefThematiqueAPI.transports]: {
       clefTechniqueAPI: 'transport',
       url: 'me-deplacer',
       labelDansLeMenu: 'Me déplacer',
     },
-    [ClefTechniqueAPI.consommation]: {
+    [ClefThematiqueAPI.consommation]: {
       clefTechniqueAPI: 'consommation',
       url: 'consommer',
       labelDansLeMenu: 'Consommer',
     },
-    [ClefTechniqueAPI.logement]: {
+    [ClefThematiqueAPI.logement]: {
       clefTechniqueAPI: 'logement',
       url: 'me-loger',
       labelDansLeMenu: 'Me loger',
     },
   };
-  static getUniversData(clefTechniqueAPI: ClefTechniqueAPI): Univers {
-    return this.universData[clefTechniqueAPI];
+  static getThematiqueData(clefTechniqueAPI: ClefThematiqueAPI): Thematique {
+    return this.thematiquesData[clefTechniqueAPI];
   }
 
-  static getFromUrl(url: string): Univers | undefined {
-    return Object.values(this.universData).find(univers => univers.url === url);
+  static getFromUrl(url: string): Thematique | undefined {
+    return Object.values(this.thematiquesData).find(thematique => thematique.url === url);
   }
 }

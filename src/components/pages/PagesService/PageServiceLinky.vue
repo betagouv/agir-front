@@ -5,7 +5,7 @@
     <div v-else>
       <FilDAriane
         page-courante="Service : linky"
-        :page-hierarchie="[{ label: 'Univers - À la maison', url: `/${RouteUniversName.UNIVERS}/logement` }]"
+        :page-hierarchie="[{ label: 'Univers - À la maison', url: `/${RouteThematiquesName.THEMATIQUE}/logement` }]"
       />
       <h1 class="fr-h2">Suivre ma consommation <span class="text--bleu">d’électricité</span></h1>
       <PageServiceTemplate :aside="serviceLinkyViewModel.aside">
@@ -34,7 +34,7 @@
   import { ServiceRechercheLinkyRepositoryAxios } from '@/domaines/serviceRecherche/linky/adapters/serviceRechercheLinky.repository.axios';
   import { ObtenirInformationCompteurUsecase } from '@/domaines/serviceRecherche/linky/obtenirInformationCompteur.usecase';
   import { LinkyEvent, LinkyEventBusImpl } from '@/domaines/services/linkyEventBusImpl';
-  import { RouteUniversName } from '@/router/univers/routes';
+  import { RouteThematiquesName } from '@/router/univers/routes';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const { id: utilisateurId } = utilisateurStore().utilisateur;

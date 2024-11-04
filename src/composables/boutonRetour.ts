@@ -1,15 +1,15 @@
 import { useRoute } from 'vue-router';
 import { RouteCoachName } from '@/router/coach/routeCoachName';
-import { RouteUniversName } from '@/router/univers/routes';
+import { RouteThematiquesName } from '@/router/univers/routes';
 
 export const useBoutonRetour = () => {
-  if (useRoute().params.universId && useRoute().params.missionId) {
+  if (useRoute().params.thematiqueId && useRoute().params.missionId) {
     return {
       label: 'Revenir à la mission',
       url: {
-        name: RouteUniversName.MISSION,
+        name: RouteThematiquesName.MISSION,
         params: {
-          id: useRoute().params.universId,
+          id: useRoute().params.thematiqueId,
           missionId: useRoute().params.missionId,
         },
       },

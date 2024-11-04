@@ -5,7 +5,7 @@
     <div v-else>
       <FilDAriane
         page-courante="Service : fruits et légumes"
-        :page-hierarchie="[{ label: 'Univers - En cuisine', url: `/${RouteUniversName.UNIVERS}/alimentation` }]"
+        :page-hierarchie="[{ label: 'Univers - En cuisine', url: `/${RouteThematiquesName.THEMATIQUE}/alimentation` }]"
       />
       <h1 class="fr-h2">
         Les fruits et légumes pour le mois de
@@ -78,7 +78,7 @@
   } from '@/domaines/serviceRecherche/fruitsEtLegumes/adapters/serviceRechercheFruitsEtLegumes.presenter.impl';
   import { ServiceRechercheFruitsEtLegumesAxios } from '@/domaines/serviceRecherche/fruitsEtLegumes/adapters/serviceRechercheFruitsEtLegumes.repository.axios';
   import { RecupererServiceFruitsEtLegumesUsecase } from '@/domaines/serviceRecherche/fruitsEtLegumes/recupererServiceFruitsEtLegumes.usecase';
-  import { RouteUniversName } from '@/router/univers/routes';
+  import { RouteThematiquesName } from '@/router/univers/routes';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const isLoading = ref<boolean>(true);

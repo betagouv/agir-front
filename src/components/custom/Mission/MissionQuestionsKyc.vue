@@ -24,7 +24,7 @@
     v-if="afficherFinKyc"
     :a-deja-repondu="false"
     :phrasePointAGagner="questionsViewModel.phrasePointAGagner"
-    :bouton="{ url: urlBackBouton, label: 'Retour à la thématique' }"
+    :bouton="{ url: urlBackBouton, label: 'Retour à la mission' }"
   />
 </template>
 
@@ -34,7 +34,7 @@
   import KYCFin from '@/components/custom/KYC/KYCFin.vue';
   import KYCForm from '@/components/custom/KYC/KYCForm.vue';
   import { QuestionsViewModel } from '@/domaines/kyc/adapters/listeQuestionsThematique.presenter.impl';
-  import { RouteUniversName } from '@/router/univers/routes';
+  import { RouteThematiquesPath } from '@/router/univers/routes';
 
   const props = defineProps<{ questionsViewModel: QuestionsViewModel }>();
 
@@ -52,7 +52,7 @@
   };
 
   const route = useRoute();
-  const universId = route.params.universId;
+  const missionId = route.params.missionId;
   const thematiqueId = route.params.thematiqueId;
-  const urlBackBouton = `/${RouteUniversName.UNIVERS}/${universId}/${thematiqueId}`;
+  const urlBackBouton = `/${RouteThematiquesPath.THEMATIQUE}/${thematiqueId}/mission/${missionId}`;
 </script>

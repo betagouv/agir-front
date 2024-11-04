@@ -4,7 +4,7 @@
   </div>
 
   <div v-else class="fr-container">
-    <FilDAriane :page-courante="`Univers - ${universViewModel?.nom}`" />
+    <FilDAriane :page-courante="universViewModel?.nom" />
     <div class="fr-grid-row align-items--center fr-mb-4w">
       <img
         :src="universViewModel?.urlImage"
@@ -94,26 +94,28 @@
   } from '@/domaines/serviceRecherche/catalogue/adapters/serviceRecherche.presenter.impl';
   import { ServiceRechercheRepositoryAxios } from '@/domaines/serviceRecherche/catalogue/adapters/serviceRecherche.repository.axios';
   import { RecupererServicesRechercheParUniversUsecase } from '@/domaines/serviceRecherche/catalogue/recupererServicesRechercheParUnivers.usecase';
-  import { UniversViewModel } from '@/domaines/univers/adapters/listeUnivers.presenter.impl';
-  import { UniversPresenterImpl } from '@/domaines/univers/adapters/univers.presenter.impl';
-  import { UniversRepositoryAxios } from '@/domaines/univers/adapters/univers.repository.axios';
-  import { RecupererUniversUsecase } from '@/domaines/univers/recupererUnivers.usecase';
-  import { MenuUnivers } from '@/shell/MenuUnivers';
+  import {
+    ThematiquePresenterImpl,
+    ThematiqueViewModel,
+  } from '@/domaines/thematiques/adapters/thematique.presenter.impl';
+  import { ThematiquesRepositoryAxios } from '@/domaines/thematiques/adapters/thematiques.repository.axios';
+  import { MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
+  import { RecupererThematiqueUsecase } from '@/domaines/thematiques/recupererThematique.usecase';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const store = utilisateurStore();
   const isLoading = ref<boolean>(true);
   const recommandationsPersonnaliseesViewModel = ref<RecommandationPersonnaliseeViewModel>();
   const missionsViewModel = ref<MissionViewModel[]>();
-  const universViewModel = ref<UniversViewModel>();
+  const universViewModel = ref<ThematiqueViewModel>();
   const defisViewModel = ref<DefiDescriptionViewModel[]>();
   const servicesViewModel = ref<ServicesRechercheViewModel>();
-  let universId = MenuUnivers.getFromUrl(useRoute().params.id as string)!.clefTechniqueAPI;
+  let universId = MenuThematiques.getFromUrl(useRoute().params.id as string)!.clefTechniqueAPI;
 
   const lancerChargementDesDonnees = () => {
     isLoading.value = true;
     const idUtilisateur = store.utilisateur.id;
-    const recupererUniversUsecase = new RecupererUniversUsecase(new UniversRepositoryAxios());
+    const recupererUniversUsecase = new RecupererThematiqueUsecase(new ThematiquesRepositoryAxios());
     const chargerRecommandationsPersonnaliseesUsecase = new RecupererRecommandationsPersonnaliseesUniversUsecase(
       new RecommandationsPersonnaliseesRepositoryAxios(),
     );
@@ -126,7 +128,7 @@
       recupererUniversUsecase.execute(
         idUtilisateur,
         universId,
-        new UniversPresenterImpl(vm => (universViewModel.value = vm)),
+        new ThematiquePresenterImpl(vm => (universViewModel.value = vm)),
       ),
       chargerRecommandationsPersonnaliseesUsecase.execute(
         universId,
@@ -158,7 +160,7 @@
   };
   onBeforeRouteUpdate((to, from, next) => {
     next();
-    universId = MenuUnivers.getFromUrl(to.params.id as string)!.clefTechniqueAPI;
+    universId = MenuThematiques.getFromUrl(to.params.id as string)!.clefTechniqueAPI;
     lancerChargementDesDonnees();
   });
   onMounted(() => {

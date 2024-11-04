@@ -32,10 +32,10 @@
         <div class="fr-py-3w text--center">
           <h2 class="fr-text--lg fr-mb-2w">Découvrez de nouvelles missions</h2>
           <router-link
-            :to="`/univers/${MenuUnivers.getUniversData(universId as ClefTechniqueAPI).url}`"
+            :to="`/thematique/${MenuThematiques.getThematiqueData(thematiqueId as ClefThematiqueAPI).url}`"
             class="fr-btn fr-btn--lg"
           >
-            Revenir à l’univers
+            Revenir à la thémathique
           </router-link>
         </div>
       </template>
@@ -49,7 +49,7 @@
   import Modale from '@/components/custom/Modale/Modale.vue';
   import { MissionsRepositoryAxios } from '@/domaines/missions/adapters/missions.repository.axios';
   import { TerminerMissionUsecase } from '@/domaines/missions/terminerMission.usecase';
-  import { ClefTechniqueAPI, MenuUnivers } from '@/shell/MenuUnivers';
+  import { ClefThematiqueAPI, MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const props = defineProps<{
@@ -57,7 +57,7 @@
     titre: string;
     estTerminee: boolean;
     estTerminable: boolean;
-    universId: string;
+    thematiqueId: string;
     missionId: string;
   }>();
 
