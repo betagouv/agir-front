@@ -4,7 +4,7 @@
   <div v-else class="fr-container fr-pb-4w">
     <MissionPageComposant
       :mission-id="missionId"
-      :thematique-id="clefThematiqueAPI"
+      :clef-thematique-a-p-i="clefThematiqueAPI"
       :mission-view-model="missionViewModel"
     />
   </div>

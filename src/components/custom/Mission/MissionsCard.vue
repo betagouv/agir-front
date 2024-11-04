@@ -47,7 +47,7 @@
   import ThematiqueTag from '@/components/custom/Thematiques/ThematiqueTag.vue';
   import { MissionViewModel } from '@/domaines/missions/adapters/missions.presenter.impl';
   import { ClefThematiqueAPI, MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
-  import { RouteThematiquesName } from '@/router/univers/routes';
+  import { RouteThematiquesName } from '@/router/thematiques/routes';
 
   defineProps<{
     mission: MissionViewModel;

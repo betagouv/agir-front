@@ -34,7 +34,7 @@
   import { ServiceRechercheLinkyRepositoryAxios } from '@/domaines/serviceRecherche/linky/adapters/serviceRechercheLinky.repository.axios';
   import { ObtenirInformationCompteurUsecase } from '@/domaines/serviceRecherche/linky/obtenirInformationCompteur.usecase';
   import { LinkyEvent, LinkyEventBusImpl } from '@/domaines/services/linkyEventBusImpl';
-  import { RouteThematiquesName } from '@/router/univers/routes';
+  import { RouteThematiquesName } from '@/router/thematiques/routes';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const { id: utilisateurId } = utilisateurStore().utilisateur;

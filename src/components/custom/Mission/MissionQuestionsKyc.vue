@@ -34,7 +34,7 @@
   import KYCFin from '@/components/custom/KYC/KYCFin.vue';
   import KYCForm from '@/components/custom/KYC/KYCForm.vue';
   import { QuestionsViewModel } from '@/domaines/kyc/adapters/listeQuestionsThematique.presenter.impl';
-  import { RouteThematiquesPath } from '@/router/univers/routes';
+  import { RouteThematiquesPath } from '@/router/thematiques/routes';
 
   const props = defineProps<{ questionsViewModel: QuestionsViewModel }>();
 

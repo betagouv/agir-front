@@ -1,6 +1,6 @@
 import { useRoute } from 'vue-router';
 import { RouteCoachName } from '@/router/coach/routeCoachName';
-import { RouteThematiquesName } from '@/router/univers/routes';
+import { RouteThematiquesName } from '@/router/thematiques/routes';
 
 export const useBoutonRetour = () => {
   if (useRoute().params.thematiqueId && useRoute().params.missionId) {

@@ -214,7 +214,7 @@
   import { RouteCompteName } from '@/router/compte/routeCompteName';
   import { RouteAidesName } from '@/router/aides/routeAidesName';
   import Cookies from 'js-cookie';
-  import { RouteThematiquesName } from '@/router/univers/routes';
+  import { RouteThematiquesName } from '@/router/thematiques/routes';
   import { ClefThematiqueAPI, MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
 
   const route = useRoute();

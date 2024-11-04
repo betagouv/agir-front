@@ -3,17 +3,17 @@
     <CarteSkeleton />
   </div>
 
-  <div v-else class="fr-container">
-    <FilDAriane :page-courante="universViewModel?.nom" />
+  <div v-else-if="universViewModel" class="fr-container">
+    <FilDAriane :page-courante="universViewModel.nom" />
     <div class="fr-grid-row align-items--center fr-mb-4w">
       <img
-        :src="universViewModel?.urlImage"
+        :src="universViewModel.urlImage"
         class="border-radius--full img-object-fit-cover fr-mr-2w"
         width="80"
         height="80"
         alt="univers"
       />
-      <h1 class="fr-h1 fr-col fr-m-0">{{ universViewModel?.nom }}</h1>
+      <h1 class="fr-h1 fr-col fr-m-0">{{ universViewModel.nom }}</h1>
     </div>
   </div>
 

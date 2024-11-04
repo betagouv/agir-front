@@ -38,7 +38,11 @@ export class MenuThematiques {
     return this.thematiquesData[clefTechniqueAPI];
   }
 
-  static getFromUrl(url: string): Thematique | undefined {
-    return Object.values(this.thematiquesData).find(thematique => thematique.url === url);
+  static getFromUrl(url: string): Thematique {
+    const thematique = Object.values(this.thematiquesData).find(thematique => thematique.url === url);
+    if (!thematique) {
+      throw new Error(`Thematique not found for url: ${url}`);
+    }
+    return thematique;
   }
 }

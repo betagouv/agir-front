@@ -6,7 +6,7 @@
         useRoute().params.thematiqueId && useRoute().params.missionId
           ? [
               {
-                label: `${MenuThematiques.getFromUrl(useRoute().params.thematiqueId).labelDansLeMenu}`,
+                label: `${MenuThematiques.getFromUrl(useRoute().params.thematiqueId as string).labelDansLeMenu}`,
                 url: `/thematique/${useRoute().params.thematiqueId}`,
               },
               {

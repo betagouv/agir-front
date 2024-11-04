@@ -11,7 +11,7 @@ import defiRoutes from '@/router/defis/routes';
 import kycRoutes from '@/router/kyc/routes';
 import quizRoutes from '@/router/quiz/routes';
 import serviceRoutes from '@/router/services/routes';
-import thematiqueRoutes from '@/router/univers/routes';
+import thematiqueRoutes from '@/router/thematiques/routes';
 import { utilisateurStore } from '@/store/utilisateur';
 const Authentification = () => import('@/components/Authentification.vue');
 const Page404 = () => import('@/components/pages/Page404.vue');
