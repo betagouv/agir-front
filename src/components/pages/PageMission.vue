@@ -16,8 +16,8 @@
   import MissionPageComposant from '@/components/custom/Mission/MissionPageComposant.vue';
   import { MissionPresenterImpl, MissionViewModel } from '@/domaines/missions/adapters/mission.presenter.impl';
   import { MissionsRepositoryAxios } from '@/domaines/missions/adapters/missions.repository.axios';
+  import { MissionEvent, MissionEventBusImpl } from '@/domaines/missions/missionEventBus.impl';
   import { RecupererDetailMissionUsecase } from '@/domaines/missions/recupererDetailMission.usecase';
-  import { ThematiqueEvent, ThematiqueEventBusImpl } from '@/domaines/thematiques/thematiqueEventBusImpl';
   import { ClefTechniqueAPI, MenuUnivers } from '@/shell/MenuUnivers';
   import { utilisateurStore } from '@/store/utilisateur';
 
@@ -38,9 +38,9 @@
     const usecase = new RecupererDetailMissionUsecase(new MissionsRepositoryAxios());
     await usecase.execute(thematiqueId, utilisateurId, new MissionPresenterImpl(onMissionPretAAffchee));
 
-    ThematiqueEventBusImpl.getInstance().subscribe(
+    MissionEventBusImpl.getInstance().subscribe(
       subscriberName,
-      ThematiqueEvent.OBJECTIF_MISSION_POINTS_ONT_ETE_RECUPERE,
+      MissionEvent.OBJECTIF_MISSION_POINTS_ONT_ETE_RECUPERE,
       () => {
         usecase.execute(thematiqueId, utilisateurId, new MissionPresenterImpl(onMissionPretAAffchee));
       },
@@ -49,6 +49,6 @@
   });
 
   onUnmounted(() => {
-    ThematiqueEventBusImpl.getInstance().unsubscribeToAllEvents(subscriberName);
+    MissionEventBusImpl.getInstance().unsubscribeToAllEvents(subscriberName);
   });
 </script>

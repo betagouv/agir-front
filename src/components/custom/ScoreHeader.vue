@@ -12,9 +12,9 @@
   import { computed, onMounted, onUnmounted } from 'vue';
   import { useRoute } from 'vue-router';
   import { SessionRepositoryStore } from '@/domaines/authentification/adapters/session.repository.store';
+  import { MissionEvent, MissionEventBusImpl } from '@/domaines/missions/missionEventBus.impl';
   import { ScoreRepositoryAxios } from '@/domaines/score/adapters/score.repository.axios';
   import { ChargementScoreUsecase } from '@/domaines/score/chargementScore.usecase';
-  import { ThematiqueEvent, ThematiqueEventBusImpl } from '@/domaines/thematiques/thematiqueEventBusImpl';
   import { ToDoListEventBusImpl } from '@/domaines/toDoList/toDoListEventBusImpl';
   import { RouteClassementName } from '@/router/classement/routes';
   import { utilisateurStore } from '@/store/utilisateur';
@@ -26,9 +26,9 @@
   onMounted(() => {
     mettreAJourLeScore();
 
-    ThematiqueEventBusImpl.getInstance().subscribe(
+    MissionEventBusImpl.getInstance().subscribe(
       subscriberName,
-      ThematiqueEvent.OBJECTIF_MISSION_POINTS_ONT_ETE_RECUPERE,
+      MissionEvent.OBJECTIF_MISSION_POINTS_ONT_ETE_RECUPERE,
       () => {
         mettreAJourLeScore();
       },
@@ -41,7 +41,7 @@
 
   onUnmounted(() => {
     ToDoListEventBusImpl.getInstance().unsubscribeToAllEvents(subscriberName);
-    ThematiqueEventBusImpl.getInstance().unsubscribeToAllEvents(subscriberName);
+    MissionEventBusImpl.getInstance().unsubscribeToAllEvents(subscriberName);
   });
 
   const mettreAJourLeScore = () => {

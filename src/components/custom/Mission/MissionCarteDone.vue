@@ -27,18 +27,18 @@
 <script setup lang="ts">
   import { MissionBaseViewModel } from '@/domaines/missions/adapters/mission.presenter.impl';
   import { MissionsRepositoryAxios } from '@/domaines/missions/adapters/missions.repository.axios';
-  import { RecupererPointsMissionThematiqueUsecase } from '@/domaines/thematiques/recupererPointsMissionThematique.usecase';
-  import { ThematiqueEventBusImpl } from '@/domaines/thematiques/thematiqueEventBusImpl';
+  import { MissionEventBusImpl } from '@/domaines/missions/missionEventBus.impl';
+  import { RecupererPointsMissionUsecase } from '@/domaines/missions/recupererPointsMission.usecase';
   import { utilisateurStore } from '@/store/utilisateur';
 
   defineProps<{ mission: MissionBaseViewModel }>();
 
   const onRecolterPoints = (missionId: string) => {
     const utilisateurId: string = utilisateurStore().utilisateur.id;
-    new RecupererPointsMissionThematiqueUsecase(
-      new MissionsRepositoryAxios(),
-      ThematiqueEventBusImpl.getInstance(),
-    ).execute(utilisateurId, missionId);
+    new RecupererPointsMissionUsecase(new MissionsRepositoryAxios(), MissionEventBusImpl.getInstance()).execute(
+      utilisateurId,
+      missionId,
+    );
   };
 </script>
 

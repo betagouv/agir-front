@@ -3,7 +3,7 @@ import { DetailMission } from '@/domaines/missions/recupererDetailMission.usecas
 
 import { Mission } from '@/domaines/missions/recupererMissionsThematique.usecase';
 
-export class ThematiqueRepositorySpy implements MissionsRepository {
+export class MissionRepositorySpy implements MissionsRepository {
   get recupererPointsArgs(): { elementId: string; idUtilisateur: string } {
     return this._recupererPointsArgs;
   }
