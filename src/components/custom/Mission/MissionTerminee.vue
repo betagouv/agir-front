@@ -22,7 +22,7 @@
   <Teleport to="body" v-if="estTerminable">
     <Modale label="Modale de fin de mission" :id="modaleId" :radius="true" :is-footer-actions="false" size="s">
       <template v-slot:contenu>
-        <div class="fr-grid-row fr-grid-row--gutters modale-thematique-terminee">
+        <div class="fr-grid-row fr-grid-row--gutters modale-mission-terminee">
           <div class="fr-col-7">
             <h1 :id="modaleId">Bravo !</h1>
             <p class="fr-text--lg text--bleu fr-mb-0">Vous avez gagné votre carte mission</p>
@@ -48,7 +48,7 @@
   import Modale from '@/components/custom/Modale/Modale.vue';
   import ThematiqueCardDone from '@/components/custom/Thematiques/ThematiqueCardDone.vue';
   import { MissionsRepositoryAxios } from '@/domaines/missions/adapters/missions.repository.axios';
-  import { TerminerMissionThematiqueUsecase } from '@/domaines/thematiques/terminerMissionThematique.usecase';
+  import { TerminerMissionUsecase } from '@/domaines/missions/terminerMission.usecase';
   import { ClefTechniqueAPI, MenuUnivers } from '@/shell/MenuUnivers';
   import { utilisateurStore } from '@/store/utilisateur';
 
@@ -58,21 +58,21 @@
     estTerminee: boolean;
     estTerminable: boolean;
     universId: string;
-    thematiqueId: string;
+    missionId: string;
   }>();
 
   const estTerminee = ref<boolean>(props.estTerminee);
 
   const modaleId = 'terminer-mission-modale';
   const terminerMission = async () => {
-    const terminerMissionThematiqueUsecase = new TerminerMissionThematiqueUsecase(new MissionsRepositoryAxios());
-    await terminerMissionThematiqueUsecase.execute(props.thematiqueId, utilisateurStore().utilisateur.id);
+    const terminerMissionUsecase = new TerminerMissionUsecase(new MissionsRepositoryAxios());
+    await terminerMissionUsecase.execute(props.missionId, utilisateurStore().utilisateur.id);
     estTerminee.value = true;
   };
 </script>
 
 <style scoped>
-  .modale-thematique-terminee {
+  .modale-mission-terminee {
     padding: 1rem;
     flex-direction: row-reverse;
     background-image: url('/bg_fin-de-mission.webp');

@@ -15,7 +15,7 @@ const defiRoutes: RouteRecordRaw[] = [
     component: PageQuestionDefi,
   },
   {
-    path: `${RouteDefiPath.DEFI}:universId/:thematiqueId/:id`,
+    path: `${RouteDefiPath.DEFI}:universId/:missionId/:id`,
     name: RouteDefiName.DEFI_THEMATIQUE,
     component: PageQuestionDefi,
   },

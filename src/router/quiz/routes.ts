@@ -30,7 +30,7 @@ const quizRoutes: RouteRecordRaw[] = [
     },
   },
   {
-    path: `/${RouteQuizPath.QUIZ}/:universId/:thematiqueId/:id`,
+    path: `/${RouteQuizPath.QUIZ}/:universId/:missionId/:id`,
     name: RouteQuizName.QUIZ_THEMATIQUE,
     component: PageQuiz,
     meta: {

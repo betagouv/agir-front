@@ -25,10 +25,10 @@
     <h2 class="fr-text--lg text--semi-bold text--black fr-mb-1v text--lh-1-3">
       <router-link
         :to="{
-          name: RouteUniversName.THEMATIQUE,
+          name: RouteUniversName.MISSION,
           params: {
             id: MenuUnivers.getUniversData(mission.clefThematique as ClefTechniqueAPI).url,
-            thematique: mission.id,
+            missionId: mission.id,
           },
         }"
         class="mission-card__link"

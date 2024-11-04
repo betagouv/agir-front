@@ -35,27 +35,27 @@
   </div>
   <div :class="`fr-col-md-8 fr-col-12 ${!missionViewModel.estTerminable ? 'opacity-6' : ''}`">
     <h2 class="text--uppercase fr-text--xs text--bleu fr-mb-2w fr-mt-5w fr-ml-6w">4. Gagner votre carte</h2>
-    <ThematiqueTerminee
+    <MissionTerminee
       :url-image="missionViewModel.urlImage"
       :titre="missionViewModel.titre"
       :est-terminee="missionViewModel.estTerminee"
       :est-terminable="missionViewModel.estTerminable"
       :univers-id="universId"
-      :thematique-id="thematiqueId"
+      :mission-id="missionId"
     />
   </div>
 </template>
 
 <script setup lang="ts">
   import ThematiqueMissionKyc from '@/components/custom/Mission/MissionKyc.vue';
+  import MissionTerminee from '@/components/custom/Mission/MissionTerminee.vue';
   import ThematiqueMissionDefis from '@/components/custom/Thematiques/ThematiqueMissionDefis.vue';
   import ThematiqueMissionQuizArticle from '@/components/custom/Thematiques/ThematiqueMissionQuizArticle.vue';
-  import ThematiqueTerminee from '@/components/custom/Thematiques/ThematiqueTerminee.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import { MissionViewModel } from '@/domaines/missions/adapters/mission.presenter.impl';
   import { ClefTechniqueAPI, MenuUnivers } from '@/shell/MenuUnivers';
 
-  defineProps<{ thematiqueId: string; universId: string; missionViewModel: MissionViewModel }>();
+  defineProps<{ missionId: string; universId: string; missionViewModel: MissionViewModel }>();
 </script>
 
 <style scoped>

@@ -3,14 +3,14 @@ import { RouteCoachName } from '@/router/coach/routeCoachName';
 import { RouteUniversName } from '@/router/univers/routes';
 
 export const useBoutonRetour = () => {
-  if (useRoute().params.universId && useRoute().params.thematiqueId) {
+  if (useRoute().params.universId && useRoute().params.missionId) {
     return {
-      label: 'Revenir à la thématique',
+      label: 'Revenir à la mission',
       url: {
-        name: RouteUniversName.THEMATIQUE,
+        name: RouteUniversName.MISSION,
         params: {
           id: useRoute().params.universId,
-          thematique: useRoute().params.thematiqueId,
+          missionId: useRoute().params.missionId,
         },
       },
     };
