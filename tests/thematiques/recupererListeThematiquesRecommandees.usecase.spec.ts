@@ -1,5 +1,5 @@
 import { ThematiqueViewModel } from '@/domaines/thematiques/adapters/thematiques.presenter.impl';
-import { ThematiqueRepositoryMock } from './adapters/thematique.repository.mock';
+import { ThematiqueRepositoryMock } from '../missions/adapters/thematique.repository.mock';
 import { RecupererListeThematiquesRecommandeesUsecase } from '@/domaines/thematiques/recupererListeThematiquesRecommandees.usecase';
 import { ThematiquesRecommandeesPresenterImpl } from '@/domaines/thematiques/adapters/thematiquesRecommandees.presenter.impl';
 import { ClefTechniqueAPI } from '@/shell/MenuUnivers';

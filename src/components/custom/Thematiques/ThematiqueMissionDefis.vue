@@ -10,7 +10,7 @@
 <script setup lang="ts">
   import MissionCarteBloquee from '@/components/custom/Mission/MissionCarteBloquee.vue';
   import MissionCarteDefi from '@/components/custom/Mission/MissionCarteDefi.vue';
-  import { MissionDefiViewModel } from '@/domaines/thematiques/adapters/missionThematique.presenter.impl';
+  import { MissionDefiViewModel } from '@/domaines/missions/adapters/mission.presenter.impl';
 
   defineProps<{ defis: MissionDefiViewModel[] }>();
 </script>

@@ -1,5 +1,5 @@
-import { MissionItem, MissionThematique } from '../recupererMissionThematiqueUsecase';
-import { MissionThematiquePresenter } from '@/domaines/thematiques/ports/missionThematique.presenter';
+import { MissionItem, Mission } from '../recupererDetailMission.usecase';
+import { MissionPresenter } from '@/domaines/missions/ports/missionPresenter';
 import { RouteArticlePath } from '@/router/articles/routes';
 import { RouteDefiPath } from '@/router/defis/routes';
 import { RouteKycPath } from '@/router/kyc/routes';
@@ -42,7 +42,7 @@ export interface MissionKycViewModel extends MissionBaseViewModel {
 export interface MissionQuizArticleViewModel extends MissionBaseViewModel {
   idDuContenu: string;
 }
-export interface MissionThematiqueViewModel {
+export interface MissionViewModel {
   titre: string;
   urlImage: string;
   estTerminee: boolean;
@@ -52,50 +52,49 @@ export interface MissionThematiqueViewModel {
   defis: MissionDefiViewModel[];
 }
 
-export class MissionThematiquePresenterImpl implements MissionThematiquePresenter {
-  constructor(private readonly viewModel: (mission: MissionThematiqueViewModel) => void) {}
+export class MissionPresenterImpl implements MissionPresenter {
+  constructor(private readonly viewModel: (mission: MissionViewModel) => void) {}
 
-  present(missionThematique: MissionThematique): void {
+  presente(mission: Mission): void {
     this.viewModel({
-      titre: missionThematique.titre,
-      urlImage: missionThematique.urlImage,
-      estTerminee: missionThematique.estTerminee,
-      estTerminable: missionThematique.estTerminable,
+      titre: mission.titre,
+      urlImage: mission.urlImage,
+      estTerminee: mission.estTerminee,
+      estTerminable: mission.estTerminable,
       kyc: [
         {
-          id: missionThematique.items.filter(item => item.type === InteractionType.KYC)[0].id,
+          id: mission.items.filter(item => item.type === InteractionType.KYC)[0].id,
           titre: '<strong>Quelques questions</strong> pour mieux vous connaître',
           progression: {
-            etapeCourante: missionThematique.progressionKyc.etapeCourante,
-            etapeTotal: missionThematique.progressionKyc.etapeTotal,
+            etapeCourante: mission.progressionKyc.etapeCourante,
+            etapeTotal: mission.progressionKyc.etapeTotal,
           },
           estBloquee: false,
-          points: missionThematique.items
+          points: mission.items
             .filter(item => item.type === InteractionType.KYC)
             .reduce((sum, item) => sum + item.points, 0),
-          aEteRealisee: missionThematique.progressionKyc.etapeCourante === missionThematique.progressionKyc.etapeTotal,
-          url: `${RouteKycPath.KYC}${MenuUnivers.getUniversData(missionThematique.univers as ClefTechniqueAPI).url}/${missionThematique.idThematique}`,
+          aEteRealisee: mission.progressionKyc.etapeCourante === mission.progressionKyc.etapeTotal,
+          url: `${RouteKycPath.KYC}${MenuUnivers.getUniversData(mission.univers as ClefTechniqueAPI).url}/${mission.missionId}`,
           picto: '/ic_mission_kyc.svg',
-          pointAEteRecolte: missionThematique.items.filter(item => item.type === InteractionType.KYC)[0]
-            .pointAEteRecolte,
+          pointAEteRecolte: mission.items.filter(item => item.type === InteractionType.KYC)[0].pointAEteRecolte,
         },
       ],
-      articleEtQuiz: missionThematique.items
+      articleEtQuiz: mission.items
         .filter(item => item.type === InteractionType.ARTICLE || item.type === InteractionType.QUIZ)
         .map(item =>
           this.mapToViewModel(
             item,
-            MenuUnivers.getUniversData(missionThematique.univers as ClefTechniqueAPI).url,
-            missionThematique.idThematique,
+            MenuUnivers.getUniversData(mission.univers as ClefTechniqueAPI).url,
+            mission.missionId,
           ),
         ),
-      defis: missionThematique.items
+      defis: mission.items
         .filter(item => item.type === InteractionType.DEFIS)
         .map(item =>
           this.mapToDefiViewModel(
             item,
-            MenuUnivers.getUniversData(missionThematique.univers as ClefTechniqueAPI).url,
-            missionThematique.idThematique,
+            MenuUnivers.getUniversData(mission.univers as ClefTechniqueAPI).url,
+            mission.missionId,
           ),
         ),
     });

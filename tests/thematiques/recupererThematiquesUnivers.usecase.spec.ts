@@ -3,7 +3,7 @@ import {
   ThematiqueViewModel,
 } from '@/domaines/thematiques/adapters/thematiques.presenter.impl';
 import { RecupererThematiquesUniversUsecase } from '@/domaines/thematiques/recupererThematiquesUnivers.usecase';
-import { ThematiqueRepositoryMock } from './adapters/thematique.repository.mock';
+import { ThematiqueRepositoryMock } from '../missions/adapters/thematique.repository.mock';
 
 describe('Fichier de tests concernant la récupération des thématiques pour un Univers', () => {
   it("En donnant l'id utilisateur et l'id de l'univers doit récupérer les thématiques", async () => {

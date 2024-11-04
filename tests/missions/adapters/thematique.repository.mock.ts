@@ -1,15 +1,15 @@
-import { ThematiqueRepository } from '@/domaines/thematiques/ports/thematique.repository';
-import { MissionThematique } from '@/domaines/thematiques/recupererMissionThematiqueUsecase';
+import { MissionsRepository } from '@/domaines/missions/ports/missionsRepository';
+import { Mission } from '@/domaines/missions/recupererDetailMission.usecase';
 import { Thematique } from '@/domaines/thematiques/thematique';
 
-export class ThematiqueRepositoryMock implements ThematiqueRepository {
+export class ThematiqueRepositoryMock implements MissionsRepository {
   constructor(private thematiquesARetourner: Thematique[]) {}
 
-  recupererMissionThematique(_thematiqueId: string, _utilisateurId: string): Promise<MissionThematique> {
+  recupererDetailMission(_thematiqueId: string, _utilisateurId: string): Promise<Mission> {
     throw new Error('Method not implemented.');
   }
 
-  recupererThematiques(_universId: string, _utilisateurId: string): Promise<Thematique[]> {
+  recupererMissions(_universId: string, _utilisateurId: string): Promise<Thematique[]> {
     return Promise.resolve<Thematique[]>(this.thematiquesARetourner);
   }
 
@@ -21,7 +21,7 @@ export class ThematiqueRepositoryMock implements ThematiqueRepository {
     return Promise.resolve(undefined);
   }
 
-  recupererMissionsThematiquesRecommandees(utilisateurId: string): Promise<Thematique[]> {
+  recupererMissionsRecommandees(utilisateurId: string): Promise<Thematique[]> {
     return Promise.resolve<Thematique[]>(this.thematiquesARetourner);
   }
 }

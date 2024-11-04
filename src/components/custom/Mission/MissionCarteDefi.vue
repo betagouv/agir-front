@@ -25,8 +25,8 @@
 </template>
 
 <script setup lang="ts">
-  import { MissionDefiViewModel } from '@/domaines/thematiques/adapters/missionThematique.presenter.impl';
-  import { ThematiqueRepositoryAxios } from '@/domaines/thematiques/adapters/thematique.repository.axios';
+  import { MissionDefiViewModel } from '@/domaines/missions/adapters/mission.presenter.impl';
+  import { MissionsRepositoryAxios } from '@/domaines/missions/adapters/missions.repository.axios';
   import { RecupererPointsMissionThematiqueUsecase } from '@/domaines/thematiques/recupererPointsMissionThematique.usecase';
   import { ThematiqueEventBusImpl } from '@/domaines/thematiques/thematiqueEventBusImpl';
   import { utilisateurStore } from '@/store/utilisateur';
@@ -36,7 +36,7 @@
   const onRecolterPoints = (missionId: string) => {
     const utilisateurId: string = utilisateurStore().utilisateur.id;
     new RecupererPointsMissionThematiqueUsecase(
-      new ThematiqueRepositoryAxios(),
+      new MissionsRepositoryAxios(),
       ThematiqueEventBusImpl.getInstance(),
     ).execute(utilisateurId, missionId);
   };

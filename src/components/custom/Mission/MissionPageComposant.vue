@@ -1,8 +1,11 @@
 <template>
   <FilDAriane
-    :page-courante="`Thématique: ${missionViewModel.titre}`"
+    :page-courante="`Mission: ${missionViewModel.titre}`"
     :page-hierarchie="[
-      { label: 'Univers', url: `/univers/${MenuUnivers.getUniversData(universId as ClefTechniqueAPI).url}` },
+      {
+        label: `${MenuUnivers.getUniversData(universId as ClefTechniqueAPI).labelDansLeMenu}`,
+        url: `/univers/${MenuUnivers.getUniversData(universId as ClefTechniqueAPI).url}`,
+      },
     ]"
   />
   <div class="fr-grid-row align-items--center fr-mb-4w">
@@ -44,15 +47,15 @@
 </template>
 
 <script setup lang="ts">
+  import ThematiqueMissionKyc from '@/components/custom/Mission/MissionKyc.vue';
   import ThematiqueMissionDefis from '@/components/custom/Thematiques/ThematiqueMissionDefis.vue';
-  import ThematiqueMissionKyc from '@/components/custom/Thematiques/ThematiqueMissionKyc.vue';
   import ThematiqueMissionQuizArticle from '@/components/custom/Thematiques/ThematiqueMissionQuizArticle.vue';
   import ThematiqueTerminee from '@/components/custom/Thematiques/ThematiqueTerminee.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
-  import { MissionThematiqueViewModel } from '@/domaines/thematiques/adapters/missionThematique.presenter.impl';
+  import { MissionViewModel } from '@/domaines/missions/adapters/mission.presenter.impl';
   import { ClefTechniqueAPI, MenuUnivers } from '@/shell/MenuUnivers';
 
-  defineProps<{ thematiqueId: string; universId: string; missionViewModel: MissionThematiqueViewModel }>();
+  defineProps<{ thematiqueId: string; universId: string; missionViewModel: MissionViewModel }>();
 </script>
 
 <style scoped>

@@ -79,6 +79,7 @@
     ListeDefisDescriptionPresenterImpl,
   } from '@/domaines/defi/adapters/listeDefisDescription.presenter.impl';
   import { RecupererListeDefisParUniversUsecase } from '@/domaines/defi/recupererListeDefisParUnivers.usecase';
+  import { MissionsRepositoryAxios } from '@/domaines/missions/adapters/missions.repository.axios';
   import {
     RecommandationPersonnaliseeViewModel,
     RecommandationsPersonnaliseesPresenterImpl,
@@ -91,7 +92,6 @@
   } from '@/domaines/serviceRecherche/catalogue/adapters/serviceRecherche.presenter.impl';
   import { ServiceRechercheRepositoryAxios } from '@/domaines/serviceRecherche/catalogue/adapters/serviceRecherche.repository.axios';
   import { RecupererServicesRechercheParUniversUsecase } from '@/domaines/serviceRecherche/catalogue/recupererServicesRechercheParUnivers.usecase';
-  import { ThematiqueRepositoryAxios } from '@/domaines/thematiques/adapters/thematique.repository.axios';
   import {
     ThematiquesPresenterImpl,
     ThematiqueViewModel,
@@ -119,7 +119,7 @@
     const chargerRecommandationsPersonnaliseesUsecase = new RecupererRecommandationsPersonnaliseesUniversUsecase(
       new RecommandationsPersonnaliseesRepositoryAxios(),
     );
-    const recupererThematiquesUsecase = new RecupererThematiquesUniversUsecase(new ThematiqueRepositoryAxios());
+    const recupererThematiquesUsecase = new RecupererThematiquesUniversUsecase(new MissionsRepositoryAxios());
     const recupererDefiParUniversUsecase = new RecupererListeDefisParUniversUsecase(new DefiRepositoryAxios());
     const recupererServicesRechercheParUniversUsecase = new RecupererServicesRechercheParUniversUsecase(
       new ServiceRechercheRepositoryAxios(),

@@ -1,5 +1,5 @@
 import { RouteRecordRaw } from 'vue-router';
-const PageThematique = () => import('@/components/pages/PageThematique.vue');
+const PageThematique = () => import('@/components/pages/PageMission.vue');
 const PageUnivers = () => import('@/components/pages/PageUnivers.vue');
 
 export enum RouteUniversName {

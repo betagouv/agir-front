@@ -1,6 +1,6 @@
 import { AxiosFactory, intercept401 } from '@/axios.factory';
-import { ThematiqueRepository } from '@/domaines/thematiques/ports/thematique.repository';
-import { MissionThematique } from '@/domaines/thematiques/recupererMissionThematiqueUsecase';
+import { MissionsRepository } from '@/domaines/missions/ports/missionsRepository';
+import { Mission } from '@/domaines/missions/recupererDetailMission.usecase';
 import { Thematique } from '@/domaines/thematiques/thematique';
 
 interface ThematiqueApiModel {
@@ -50,16 +50,16 @@ interface MissionThematiqueApiModel {
   };
 }
 
-export class ThematiqueRepositoryAxios implements ThematiqueRepository {
+export class MissionsRepositoryAxios implements MissionsRepository {
   @intercept401()
-  async recupererMissionThematique(thematiqueId: string, utilisateurId: string): Promise<MissionThematique> {
+  async recupererDetailMission(thematiqueId: string, utilisateurId: string): Promise<Mission> {
     const axios = AxiosFactory.getAxios();
     const reponse = await axios.get<MissionThematiqueApiModel>(
       `/utilisateurs/${utilisateurId}/thematiques/${thematiqueId}/mission`,
     );
 
     return {
-      idThematique: thematiqueId,
+      missionId: thematiqueId,
       titre: reponse.data.titre,
       univers: reponse.data.univers,
       urlImage: reponse.data.image_url,
@@ -86,7 +86,7 @@ export class ThematiqueRepositoryAxios implements ThematiqueRepository {
   }
 
   @intercept401()
-  async recupererMissionsThematiquesRecommandees(utilisateurId: string): Promise<Thematique[]> {
+  async recupererMissionsRecommandees(utilisateurId: string): Promise<Thematique[]> {
     const axios = AxiosFactory.getAxios();
     const response = await axios.get<ThematiqueApiModel[]>(`/utilisateurs/${utilisateurId}/thematiques_recommandees`);
     return response.data.map(thematique => ({
@@ -109,7 +109,7 @@ export class ThematiqueRepositoryAxios implements ThematiqueRepository {
   }
 
   @intercept401()
-  async recupererThematiques(universId: string, utilisateurId: string): Promise<Thematique[]> {
+  async recupererMissions(universId: string, utilisateurId: string): Promise<Thematique[]> {
     const axios = AxiosFactory.getAxios();
     const response = await axios.get<ThematiqueApiModel[]>(
       `/utilisateurs/${utilisateurId}/univers/${universId}/thematiques`,
@@ -132,6 +132,7 @@ export class ThematiqueRepositoryAxios implements ThematiqueRepository {
       },
     }));
   }
+
   @intercept401()
   async recupererPoints(idUtilisateur: string, elementId: string): Promise<void> {
     const axios = AxiosFactory.getAxios();

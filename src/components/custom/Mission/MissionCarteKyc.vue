@@ -35,7 +35,7 @@
 
 <script setup lang="ts">
   import CoachCardTodoProgression from '@/components/custom/Coach/CoachCardTodoProgression.vue';
-  import { MissionKycViewModel } from '@/domaines/thematiques/adapters/missionThematique.presenter.impl';
+  import { MissionKycViewModel } from '@/domaines/missions/adapters/mission.presenter.impl';
 
   defineProps<{ mission: MissionKycViewModel }>();
 </script>

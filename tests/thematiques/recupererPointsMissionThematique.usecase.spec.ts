@@ -1,5 +1,5 @@
 import { RecupererPointsMissionThematiqueUsecase } from '@/domaines/thematiques/recupererPointsMissionThematique.usecase';
-import { ThematiqueRepositorySpy } from './adapters/recupererMissionThematique.repository.spy';
+import { ThematiqueRepositorySpy } from '../missions/adapters/recupererMissionThematique.repository.spy';
 import { SpyThematiqueEventBus } from './adapters/spyThematiqueEventBus';
 import { ThematiqueEvent } from '@/domaines/thematiques/thematiqueEventBusImpl';
 

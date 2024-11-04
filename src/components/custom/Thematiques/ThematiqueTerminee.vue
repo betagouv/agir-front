@@ -47,7 +47,7 @@
   import { ref } from 'vue';
   import Modale from '@/components/custom/Modale/Modale.vue';
   import ThematiqueCardDone from '@/components/custom/Thematiques/ThematiqueCardDone.vue';
-  import { ThematiqueRepositoryAxios } from '@/domaines/thematiques/adapters/thematique.repository.axios';
+  import { MissionsRepositoryAxios } from '@/domaines/missions/adapters/missions.repository.axios';
   import { TerminerMissionThematiqueUsecase } from '@/domaines/thematiques/terminerMissionThematique.usecase';
   import { ClefTechniqueAPI, MenuUnivers } from '@/shell/MenuUnivers';
   import { utilisateurStore } from '@/store/utilisateur';
@@ -65,7 +65,7 @@
 
   const modaleId = 'terminer-mission-modale';
   const terminerMission = async () => {
-    const terminerMissionThematiqueUsecase = new TerminerMissionThematiqueUsecase(new ThematiqueRepositoryAxios());
+    const terminerMissionThematiqueUsecase = new TerminerMissionThematiqueUsecase(new MissionsRepositoryAxios());
     await terminerMissionThematiqueUsecase.execute(props.thematiqueId, utilisateurStore().utilisateur.id);
     estTerminee.value = true;
   };

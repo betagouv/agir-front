@@ -12,7 +12,7 @@
   import MissionCarteBloquee from '@/components/custom/Mission/MissionCarteBloquee.vue';
   import MissionCarteDone from '@/components/custom/Mission/MissionCarteDone.vue';
   import MissionCarteQuizArticle from '@/components/custom/Mission/MissionCarteQuizArticle.vue';
-  import { MissionQuizArticleViewModel } from '@/domaines/thematiques/adapters/missionThematique.presenter.impl';
+  import { MissionQuizArticleViewModel } from '@/domaines/missions/adapters/mission.presenter.impl';
 
   defineProps<{ missions: MissionQuizArticleViewModel[] }>();
 </script>

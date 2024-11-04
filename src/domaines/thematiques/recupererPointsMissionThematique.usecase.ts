@@ -1,10 +1,10 @@
-import { ThematiqueRepository } from '@/domaines/thematiques/ports/thematique.repository';
+import { MissionsRepository } from '@/domaines/missions/ports/missionsRepository';
 import { ThematiqueEvent } from '@/domaines/thematiques/thematiqueEventBusImpl';
 import { EventBus } from '@/shell/eventBus';
 
 export class RecupererPointsMissionThematiqueUsecase {
   constructor(
-    private thematiqueRepository: ThematiqueRepository,
+    private thematiqueRepository: MissionsRepository,
     private thematiqueEventBus: EventBus<ThematiqueEvent>,
   ) {}
 

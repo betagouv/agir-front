@@ -2,7 +2,7 @@
   <div v-if="isLoading">Chargement en cours ...</div>
   <div v-else-if="!missionViewModel">Une erreur est survenue</div>
   <div v-else class="fr-container fr-pb-4w">
-    <ThematiquePageComposant
+    <MissionPageComposant
       :thematique-id="thematiqueId"
       :univers-id="clefUniversAPI"
       :mission-view-model="missionViewModel"
@@ -13,21 +13,18 @@
 <script setup lang="ts">
   import { onMounted, onUnmounted, ref } from 'vue';
   import { useRoute } from 'vue-router';
-  import ThematiquePageComposant from '@/components/custom/Thematiques/ThematiquePageComposant.vue';
-  import {
-    MissionThematiquePresenterImpl,
-    MissionThematiqueViewModel,
-  } from '@/domaines/thematiques/adapters/missionThematique.presenter.impl';
-  import { ThematiqueRepositoryAxios } from '@/domaines/thematiques/adapters/thematique.repository.axios';
-  import { RecupererMissionThematiqueUsecase } from '@/domaines/thematiques/recupererMissionThematiqueUsecase';
+  import MissionPageComposant from '@/components/custom/Mission/MissionPageComposant.vue';
+  import { MissionPresenterImpl, MissionViewModel } from '@/domaines/missions/adapters/mission.presenter.impl';
+  import { MissionsRepositoryAxios } from '@/domaines/missions/adapters/missions.repository.axios';
+  import { RecupererDetailMissionUsecase } from '@/domaines/missions/recupererDetailMission.usecase';
   import { ThematiqueEvent, ThematiqueEventBusImpl } from '@/domaines/thematiques/thematiqueEventBusImpl';
   import { ClefTechniqueAPI, MenuUnivers } from '@/shell/MenuUnivers';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const isLoading = ref<boolean>(true);
-  const missionViewModel = ref<MissionThematiqueViewModel>();
+  const missionViewModel = ref<MissionViewModel>();
 
-  function onMissionPretAAffchee(viewModel: MissionThematiqueViewModel) {
+  function onMissionPretAAffchee(viewModel: MissionViewModel) {
     missionViewModel.value = viewModel;
   }
 
@@ -38,14 +35,14 @@
   const subscriberName = 'PageThematique';
 
   onMounted(async () => {
-    const usecase = new RecupererMissionThematiqueUsecase(new ThematiqueRepositoryAxios());
-    await usecase.execute(thematiqueId, utilisateurId, new MissionThematiquePresenterImpl(onMissionPretAAffchee));
+    const usecase = new RecupererDetailMissionUsecase(new MissionsRepositoryAxios());
+    await usecase.execute(thematiqueId, utilisateurId, new MissionPresenterImpl(onMissionPretAAffchee));
 
     ThematiqueEventBusImpl.getInstance().subscribe(
       subscriberName,
       ThematiqueEvent.OBJECTIF_MISSION_POINTS_ONT_ETE_RECUPERE,
       () => {
-        usecase.execute(thematiqueId, utilisateurId, new MissionThematiquePresenterImpl(onMissionPretAAffchee));
+        usecase.execute(thematiqueId, utilisateurId, new MissionPresenterImpl(onMissionPretAAffchee));
       },
     );
     isLoading.value = false;
