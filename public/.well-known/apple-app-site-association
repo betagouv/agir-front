@@ -4,11 +4,11 @@
       "details": [
       {
         "appID": "PR958DC548.fr.gouv.agir",
-        "paths": ["/validation-authentification","/validation-compte"]
+        "paths": ["*"]
       },
       {
         "appID": "PR958DC548.fr.gouv.agir.dev2",
-        "paths": ["/validation-authentification","/validation-compte"]
+        "paths": ["*"]
       }
     ]
   }
