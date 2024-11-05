@@ -10,7 +10,7 @@ export class MissionsRepositoryMock implements MissionsRepository {
     throw new Error('Method not implemented.');
   }
 
-  recupererMissionsThematique(_universId: string, _utilisateurId: string): Promise<Mission[]> {
+  recupererMissionsThematique(_thematiqueId: string, _utilisateurId: string): Promise<Mission[]> {
     return Promise.resolve<Mission[]>(this.thematiquesARetourner);
   }
 
@@ -18,11 +18,11 @@ export class MissionsRepositoryMock implements MissionsRepository {
     throw new Error('Method not implemented.');
   }
 
-  terminerMission(utilisateurId: string, thematiqueId: string): Promise<void> {
+  terminerMission(_utilisateurId: string, _thematiqueId: string): Promise<void> {
     return Promise.resolve(undefined);
   }
 
-  recupererMissionsRecommandees(utilisateurId: string): Promise<Mission[]> {
+  recupererMissionsRecommandees(_utilisateurId: string): Promise<Mission[]> {
     return Promise.resolve<Mission[]>(this.thematiquesARetourner);
   }
 }
