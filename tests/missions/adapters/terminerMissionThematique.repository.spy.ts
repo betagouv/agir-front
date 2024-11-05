@@ -9,24 +9,24 @@ export class TerminerMissionThematiqueRepositorySpy implements MissionsRepositor
   }
   private _terminerMissionAEteAppele: boolean = false;
 
-  recupererMissionsThematique(universId: string, utilisateurId: string): Promise<Mission[]> {
+  recupererMissionsThematique(_thematiqueId: string, _utilisateurId: string): Promise<Mission[]> {
     throw new Error('Method not implemented.');
   }
 
-  recupererDetailMission(thematiqueId: string, utilisateurId: string): Promise<DetailMission> {
+  recupererDetailMission(_thematiqueId: string, _utilisateurId: string): Promise<DetailMission> {
     throw new Error('Method not implemented.');
   }
 
-  recupererPoints(idUtilisateur: string, elementId: string): Promise<void> {
+  recupererPoints(_idUtilisateur: string, _elementId: string): Promise<void> {
     throw new Error('Method not implemented.');
   }
 
-  terminerMission(utilisateurId: string, thematiqueId: string): Promise<void> {
+  terminerMission(_utilisateurId: string, _thematiqueId: string): Promise<void> {
     this._terminerMissionAEteAppele = true;
     return Promise.resolve(undefined);
   }
 
-  recupererMissionsRecommandees(utilisateurId: string): Promise<Mission[]> {
+  recupererMissionsRecommandees(_utilisateurId: string): Promise<Mission[]> {
     throw new Error('Method not implemented.');
   }
 }

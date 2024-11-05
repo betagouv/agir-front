@@ -1,6 +1,5 @@
 import { MissionsRepository } from '@/domaines/missions/ports/missionsRepository';
 import { DetailMission } from '@/domaines/missions/recupererDetailMission.usecase';
-
 import { Mission } from '@/domaines/missions/recupererMissionsThematique.usecase';
 
 export class MissionRepositorySpy implements MissionsRepository {
@@ -13,11 +12,11 @@ export class MissionRepositorySpy implements MissionsRepository {
     idUtilisateur: 'idUtilisateur',
   };
 
-  recupererDetailMission(thematiqueId: string, utilisateurId: string): Promise<DetailMission> {
+  recupererDetailMission(_thematiqueId: string, _utilisateurId: string): Promise<DetailMission> {
     throw new Error('Method not implemented.');
   }
 
-  async recupererMissionsThematique(universId: string, utilisateurId: string): Promise<Mission[]> {
+  async recupererMissionsThematique(_thematiqueId: string, _utilisateurId: string): Promise<Mission[]> {
     throw new Error('Method not implemented.');
   }
 
@@ -26,11 +25,11 @@ export class MissionRepositorySpy implements MissionsRepository {
     return Promise.resolve();
   }
 
-  terminerMission(utilisateurId: string, thematiqueId: string): Promise<void> {
+  terminerMission(_utilisateurId: string, _thematiqueId: string): Promise<void> {
     return Promise.resolve(undefined);
   }
 
-  recupererMissionsRecommandees(utilisateurId: string): Promise<Mission[]> {
+  recupererMissionsRecommandees(_utilisateurId: string): Promise<Mission[]> {
     throw new Error('Method not implemented.');
   }
 }

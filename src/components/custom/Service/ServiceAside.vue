@@ -2,7 +2,7 @@
   <aside class="background-bleu-light border-radius--md border--bleu overflow--hidden">
     <img :src="image" alt="" class="img-object-fit-cover full-width display-block background--white" height="150" />
     <div class="fr-px-2w fr-py-3w">
-      <h2 class="text--lh-1-3">
+      <h2 class="text--lh-1-3 fr-h3">
         <span class="text--normal text--bleu text--italic fr-text--md">Proposé par</span><br />
         {{ nom }}
       </h2>

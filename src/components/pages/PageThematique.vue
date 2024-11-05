@@ -3,17 +3,17 @@
     <CarteSkeleton />
   </div>
 
-  <div v-else-if="universViewModel" class="fr-container">
-    <FilDAriane :page-courante="universViewModel.nom" />
+  <div v-else-if="thematiqueViewModel" class="fr-container">
+    <FilDAriane :page-courante="thematiqueViewModel.nom" />
     <div class="fr-grid-row align-items--center fr-mb-4w">
       <img
-        :src="universViewModel.urlImage"
+        :src="thematiqueViewModel.urlImage"
         class="border-radius--full img-object-fit-cover fr-mr-2w"
         width="80"
         height="80"
-        alt="univers"
+        alt="thématique"
       />
-      <h1 class="fr-h1 fr-col fr-m-0">{{ universViewModel.nom }}</h1>
+      <h1 class="fr-h1 fr-col fr-m-0">{{ thematiqueViewModel.nom }}</h1>
     </div>
   </div>
 
@@ -107,15 +107,15 @@
   const isLoading = ref<boolean>(true);
   const recommandationsPersonnaliseesViewModel = ref<RecommandationPersonnaliseeViewModel>();
   const missionsViewModel = ref<MissionViewModel[]>();
-  const universViewModel = ref<ThematiqueViewModel>();
+  const thematiqueViewModel = ref<ThematiqueViewModel>();
   const defisViewModel = ref<DefiDescriptionViewModel[]>();
   const servicesViewModel = ref<ServicesRechercheViewModel>();
-  let universId = MenuThematiques.getFromUrl(useRoute().params.id as string)!.clefTechniqueAPI;
+  let thematiqueId = MenuThematiques.getFromUrl(useRoute().params.id as string)!.clefTechniqueAPI;
 
   const lancerChargementDesDonnees = () => {
     isLoading.value = true;
     const idUtilisateur = store.utilisateur.id;
-    const recupererUniversUsecase = new RecupererThematiqueUsecase(new ThematiquesRepositoryAxios());
+    const recupererThematiqueUsecase = new RecupererThematiqueUsecase(new ThematiquesRepositoryAxios());
     const chargerRecommandationsPersonnaliseesUsecase = new RecupererRecommandationsPersonnaliseesUniversUsecase(
       new RecommandationsPersonnaliseesRepositoryAxios(),
     );
@@ -127,29 +127,29 @@
       new ServiceRechercheRepositoryAxios(),
     );
     Promise.all([
-      recupererUniversUsecase.execute(
+      recupererThematiqueUsecase.execute(
         idUtilisateur,
-        universId,
-        new ThematiquePresenterImpl(vm => (universViewModel.value = vm)),
+        thematiqueId,
+        new ThematiquePresenterImpl(vm => (thematiqueViewModel.value = vm)),
       ),
       chargerRecommandationsPersonnaliseesUsecase.execute(
-        universId,
+        thematiqueId,
         idUtilisateur,
         new RecommandationsPersonnaliseesPresenterImpl(vm => (recommandationsPersonnaliseesViewModel.value = vm)),
       ),
       recupererThematiquesUsecase.execute(
-        universId,
+        thematiqueId,
         idUtilisateur,
         new MissionsPresenterImpl(vm => (missionsViewModel.value = vm)),
       ),
       recupererListeDefisParThematiqueUsecase.execute(
         idUtilisateur,
-        universId,
+        thematiqueId,
         new ListeDefisDescriptionPresenterImpl(vm => (defisViewModel.value = vm)),
       ),
       recupererServicesRechercheParThematiqueUsecase.execute(
         idUtilisateur,
-        universId,
+        thematiqueId,
         new ServiceRecherchePresenterImpl(vm => (servicesViewModel.value = vm)),
       ),
     ])
@@ -162,12 +162,10 @@
   };
   onBeforeRouteUpdate((to, from, next) => {
     next();
-    universId = MenuThematiques.getFromUrl(to.params.id as string)!.clefTechniqueAPI;
+    thematiqueId = MenuThematiques.getFromUrl(to.params.id as string)!.clefTechniqueAPI;
     lancerChargementDesDonnees();
   });
   onMounted(() => {
     lancerChargementDesDonnees();
   });
 </script>
-@/domaines/serviceRecherche/catalogue/recupererServicesRechercheParThematique.usecase
-@/domaines/defi/recupererListeDefisParThematique.usecase

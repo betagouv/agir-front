@@ -22,7 +22,7 @@
     </div>
     <fieldset class="fr-mb-5v fr-fieldset" aria-labelledby="identité-fieldset-legend">
       <legend class="fr-fieldset__legend fr-px-0 fr-mx-0" id="identité-fieldset-legend">
-        <h2>Mon identité</h2>
+        <h2 class="fr-h3">Mon identité</h2>
       </legend>
       <div class="fr-mb-4w">
         Adresse email : <strong>{{ profileUtlisateurViewModel.mail }}</strong>
@@ -59,7 +59,7 @@
     </fieldset>
     <fieldset class="fr-mb-0 fr-fieldset" aria-labelledby="donnee-fieldset-legend">
       <legend class="fr-fieldset__legend fr-px-0 fr-mx-0" id="donnee-fieldset-legend">
-        <h2>Données personnelles</h2>
+        <h2 class="fr-h3">Données personnelles</h2>
       </legend>
       <div class="full-width">
         <CompteFormulaireRevenuFiscal

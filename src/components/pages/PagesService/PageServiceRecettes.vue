@@ -33,7 +33,7 @@
           />
         </section>
         <section v-if="serviceRecettesViewModel.suggestions">
-          <h2>Suggestions</h2>
+          <h2 class="fr-h3">Suggestions</h2>
           <ServiceListeCarte :suggestions-service-view-model="serviceRecettesViewModel.suggestions" />
           <button
             v-if="serviceRecettesViewModel.plusDeResultatsDisponibles"

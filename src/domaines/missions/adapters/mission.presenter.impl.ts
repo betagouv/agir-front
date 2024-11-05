@@ -74,7 +74,7 @@ export class MissionPresenterImpl implements MissionPresenter {
             .filter(item => item.type === InteractionType.KYC)
             .reduce((sum, item) => sum + item.points, 0),
           aEteRealisee: mission.progressionKyc.etapeCourante === mission.progressionKyc.etapeTotal,
-          url: `${RouteKycPath.KYC}${MenuThematiques.getThematiqueData(mission.univers as ClefThematiqueAPI).url}/${mission.missionId}`,
+          url: `/thematique/${MenuThematiques.getThematiqueData(mission.univers as ClefThematiqueAPI).url}/mission/${mission.missionId}${RouteKycPath.KYC}`,
           picto: '/ic_mission_kyc.svg',
           pointAEteRecolte: mission.items.filter(item => item.type === InteractionType.KYC)[0].pointAEteRecolte,
         },

@@ -3,7 +3,8 @@ import { Defi } from '@/domaines/defi/defi';
 
 export class MockDefiRepository implements DefiRepository {
   constructor(private defiARetourner: Defi) {}
-  recupererListeDefisParThematique(utilisateurId: string, universId: string): Promise<Defi[]> {
+
+  recupererListeDefisParThematique(_utilisateurId: string, _thematiqueId: string): Promise<Defi[]> {
     throw new Error('Method not implemented.');
   }
 
@@ -11,11 +12,11 @@ export class MockDefiRepository implements DefiRepository {
     return Promise.resolve(this.defiARetourner);
   }
 
-  envoyerReponse(utilisateurId: string, defiId: string, reponse: string, explication: string): Promise<void> {
+  envoyerReponse(_utilisateurId: string, _defiId: string, _reponse: string, _explication?: string): Promise<void> {
     throw new Error('Method not implemented.');
   }
 
-  recupererTousLesDefis(utilisateurId: string): Promise<Defi[]> {
+  recupererTousLesDefis(_utilisateurId: string): Promise<Defi[]> {
     return Promise.resolve([]);
   }
 }

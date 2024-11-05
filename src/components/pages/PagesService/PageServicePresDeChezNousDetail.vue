@@ -26,7 +26,7 @@
         <LMarker :lat-lng="[detailServiceViewModel.position?.latitude, detailServiceViewModel.position?.longitude]" />
       </LMap>
     </div>
-    <h2 class="fr-mt-4w">Détails</h2>
+    <h2 class="fr-h3 fr-mt-4w">Détails</h2>
     <div class="fr-grid-row flex-column fr-mb-4w">
       <span v-if="detailServiceViewModel.heuresOuvertures" class="fr-icon-time-line text--bleu">
         <span class="fr-ml-1w text--black"> {{ detailServiceViewModel.heuresOuvertures }}</span>

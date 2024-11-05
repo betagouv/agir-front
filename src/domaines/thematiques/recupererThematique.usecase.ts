@@ -4,9 +4,9 @@ import { ThematiquesRepository } from '@/domaines/thematiques/ports/thematiquesR
 export class RecupererThematiqueUsecase {
   constructor(private readonly thematiquesRepository: ThematiquesRepository) {}
 
-  async execute(utilisateurId: string, thematiqueId: string, universPresenter: ThematiquePresenter): Promise<void> {
+  async execute(utilisateurId: string, thematiqueId: string, thematiquePresenter: ThematiquePresenter): Promise<void> {
     const thematique = await this.thematiquesRepository.recupererThematique(utilisateurId, thematiqueId);
-    universPresenter.presente(thematique);
+    thematiquePresenter.presente(thematique);
   }
 }
 

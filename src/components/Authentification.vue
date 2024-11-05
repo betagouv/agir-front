@@ -30,7 +30,7 @@
       </form>
       <div class="text--center" v-if="premiereConnexion">
         <hr />
-        <h2>Première visite ?</h2>
+        <h2 class="fr-h3">Première visite ?</h2>
         <router-link
           :to="{ name: RouteCompteName.CREATION_COMPTE }"
           class="fr-btn fr-btn--lg fr-btn--secondary display-block full-width"

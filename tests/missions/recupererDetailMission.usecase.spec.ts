@@ -126,7 +126,7 @@ describe("Fichier de tests concernant la récupération d'une mission", () => {
               etapeTotal: 2,
             },
             titre: '<strong>Quelques questions</strong> pour mieux vous connaître',
-            url: '/mieux-vous-connaitre/me-nourrir/1',
+            url: '/thematique/me-nourrir/mission/1/mieux-vous-connaitre/',
             pointAEteRecolte: false,
           },
         ],

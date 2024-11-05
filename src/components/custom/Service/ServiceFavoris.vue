@@ -1,5 +1,5 @@
 <template>
-  <h2>{{ titre }}</h2>
+  <h2 class="fr-h3">{{ titre }}</h2>
   <ul class="fr-grid-row fr-grid-row--gutters fr-mb-4w list-style-none">
     <li
       v-for="(serviceRechercheFavorisViewModel, index) in servicesRechercheFavorisViewModel"

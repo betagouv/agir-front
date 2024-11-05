@@ -11,13 +11,13 @@
       <span class="fr-icon-timer-line" />
       {{ recetteViewModel.tempsDePreparation }}
     </p>
-    <h2 class="fr-mt-4w">Ingrédients</h2>
+    <h2 class="fr-h3 fr-mt-4w">Ingrédients</h2>
     <ul>
       <li v-for="ingredient in recetteViewModel.ingredients" :key="ingredient">
         {{ ingredient }}
       </li>
     </ul>
-    <h2 class="fr-mt-4w">Étapes</h2>
+    <h2 class="fr-h3 fr-mt-4w">Étapes</h2>
     <ol>
       <li v-for="etape in recetteViewModel.etapes" :key="etape">
         {{ etape }}
