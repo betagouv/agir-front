@@ -5,7 +5,16 @@
     <div v-else>
       <FilDAriane
         page-courante="Service : recettes"
-        :page-hierarchie="[{ label: 'Univers - En cuisine', url: `/${RouteThematiquesName.THEMATIQUE}/alimentation` }]"
+        :page-hierarchie="
+          useRoute().params.thematiqueId
+            ? [
+                {
+                  label: `${MenuThematiques.getFromUrl(useRoute().params.thematiqueId as string).labelDansLeMenu}`,
+                  url: `/thematique/${useRoute().params.thematiqueId}`,
+                },
+              ]
+            : []
+        "
       />
       <h1 class="fr-h2">
         Recettes
@@ -41,6 +50,7 @@
 
 <script setup lang="ts">
   import { onMounted, ref } from 'vue';
+  import { useRoute } from 'vue-router';
   import PageServiceTemplate from '@/components/custom/Service/PageServiceTemplate.vue';
   import ServiceFavoris from '@/components/custom/Service/ServiceFavoris.vue';
   import ServiceListeCarte from '@/components/custom/Service/ServiceListeCarte.vue';
@@ -52,7 +62,7 @@
   } from '@/domaines/serviceRecherche/recettes/adapters/serviceRechercheRecettes.presenter.impl';
   import { ServiceRechercheRecettesAxios } from '@/domaines/serviceRecherche/recettes/adapters/serviceRechercheRecettes.repository.axios';
   import { RecupererServiceRecettesUsecase } from '@/domaines/serviceRecherche/recettes/recupererServiceRecettes.usecase';
-  import { RouteThematiquesName } from '@/router/thematiques/routes';
+  import { MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const isLoading = ref<boolean>(true);

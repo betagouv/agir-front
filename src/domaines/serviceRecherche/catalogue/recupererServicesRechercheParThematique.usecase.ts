@@ -14,11 +14,11 @@ export interface ServicesRecherche {
   services: ServiceRecherche[];
 }
 
-export class RecupererServicesRechercheParUniversUsecase {
+export class RecupererServicesRechercheParThematiqueUsecase {
   constructor(private serviceRechercheRepository: ServiceRechercheRepository) {}
 
-  async execute(idUtilisateur: string, univers: string, serviceRecherchePresenter: ServiceRecherchePresenter) {
-    const service = await this.serviceRechercheRepository.recupererServicesParUnivers(idUtilisateur, univers);
+  async execute(idUtilisateur: string, thematiqueId: string, serviceRecherchePresenter: ServiceRecherchePresenter) {
+    const service = await this.serviceRechercheRepository.recupererServicesParThematique(idUtilisateur, thematiqueId);
     serviceRecherchePresenter.presente(service);
   }
 }

@@ -47,7 +47,7 @@
   } else if (props.reponse === 'fait') {
     message.titre = '🏆 Défi realisé ';
     message.description =
-      'Félicitations, chaque geste compte !<br>Retrouvez l’ensemble des actions que vous avez réalisé dans votre profil et débloquez de nouveaux défis dans les univers.';
+      'Félicitations, chaque geste compte !<br>Retrouvez l’ensemble des actions que vous avez réalisé dans votre profil et débloquez de nouveaux défis dans les thématiques.';
     message.gainDePoint = true;
     message.background = 'defi-accepete--message-success';
   } else if (props.reponse === 'abondon') {

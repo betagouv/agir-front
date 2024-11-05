@@ -1,6 +1,6 @@
 import { ServiceRecherchePresenter } from '@/domaines/serviceRecherche/catalogue/ports/serviceRecherche.presenter';
-import { ServicesRecherche } from '@/domaines/serviceRecherche/catalogue/recupererServicesRechercheParUnivers.usecase';
-import { RouteServiceName } from '@/router/services/routes';
+import { ServicesRecherche } from '@/domaines/serviceRecherche/catalogue/recupererServicesRechercheParThematique.usecase';
+import { ClefThematiqueAPI, MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
 
 interface ServiceRechercheViewModel {
   url: string;
@@ -27,11 +27,11 @@ export class ServiceRecherchePresenterImpl implements ServiceRecherchePresenter 
 
   presente(serviceRecherche: ServicesRecherche): void {
     const urls = {
-      [ServiceIdInterne.FRUITS_ET_LEGUMES]: RouteServiceName.FRUITS_ET_LEGUMES,
-      [ServiceIdInterne.PRES_DE_CHEZ_VOUS]: RouteServiceName.PROXIMITE,
-      [ServiceIdInterne.RECETTES]: RouteServiceName.RECETTES,
-      [ServiceIdInterne.LINKY]: RouteServiceName.LINKY,
-      [ServiceIdInterne.LONGUE_VIE_AUX_OBJETS]: RouteServiceName.LONGUE_VIE_AUX_OBJETS,
+      [ServiceIdInterne.FRUITS_ET_LEGUMES]: `/thematique/${MenuThematiques.getThematiqueData(ClefThematiqueAPI.alimentation).url}/service/fruits-et-legumes`,
+      [ServiceIdInterne.PRES_DE_CHEZ_VOUS]: `/thematique/${MenuThematiques.getThematiqueData(ClefThematiqueAPI.alimentation).url}/service/pres-de-chez-nous`,
+      [ServiceIdInterne.RECETTES]: `/thematique/${MenuThematiques.getThematiqueData(ClefThematiqueAPI.alimentation).url}/service/recettes`,
+      [ServiceIdInterne.LINKY]: `/thematique/${MenuThematiques.getThematiqueData(ClefThematiqueAPI.logement).url}/service/linky`,
+      [ServiceIdInterne.LONGUE_VIE_AUX_OBJETS]: `/thematique/${MenuThematiques.getThematiqueData(ClefThematiqueAPI.consommation).url}/service/longue-vie-aux-objets`,
     };
 
     this.serviceViewModel({

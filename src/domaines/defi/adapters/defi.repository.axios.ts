@@ -19,10 +19,10 @@ interface DefiApiModel {
 
 export class DefiRepositoryAxios implements DefiRepository {
   @intercept401()
-  async recupererListeDefisParUnivers(utilisateurId: string, universId: string): Promise<Defi[]> {
+  async recupererListeDefisParThematique(utilisateurId: string, thematiqueId: string): Promise<Defi[]> {
     const axiosInstance = AxiosFactory.getAxios();
     const response = await axiosInstance.get<DefiApiModel[]>(
-      `/utilisateurs/${utilisateurId}/univers/${universId}/defis`,
+      `/utilisateurs/${utilisateurId}/univers/${thematiqueId}/defis`,
     );
 
     return response.data.map((apiModel: DefiApiModel) => {

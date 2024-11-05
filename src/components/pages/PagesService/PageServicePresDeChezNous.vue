@@ -4,7 +4,16 @@
     <div v-else>
       <FilDAriane
         page-courante="Service : Près de chez nous"
-        :page-hierarchie="[{ label: 'Univers - En cuisine', url: `/${RouteThematiquesName.THEMATIQUE}/alimentation` }]"
+        :page-hierarchie="
+          useRoute().params.thematiqueId
+            ? [
+                {
+                  label: `${MenuThematiques.getFromUrl(useRoute().params.thematiqueId as string).labelDansLeMenu}`,
+                  url: `/thematique/${useRoute().params.thematiqueId}`,
+                },
+              ]
+            : []
+        "
       />
       <div v-if="serviceErreur">
         <h1>Service indisponible</h1>
@@ -66,6 +75,7 @@
 
 <script setup lang="ts">
   import { onMounted, ref } from 'vue';
+  import { useRoute } from 'vue-router';
   import PageServiceTemplate from '@/components/custom/Service/PageServiceTemplate.vue';
   import ServiceFavoris from '@/components/custom/Service/ServiceFavoris.vue';
   import ServiceListeCarte from '@/components/custom/Service/ServiceListeCarte.vue';
@@ -80,7 +90,7 @@
   } from '@/domaines/serviceRecherche/presDeChezNous/adapters/serviceRecherchePresDeChezNous.presenter.impl';
   import { ServiceRecherchePresDeChezNousAxios } from '@/domaines/serviceRecherche/presDeChezNous/adapters/serviceRecherchePresDeChezNous.repository.axios';
   import { RecupererServicePresDeChezNousUsecase } from '@/domaines/serviceRecherche/presDeChezNous/recupererServicePresDeChezNous.usecase';
-  import { RouteThematiquesName } from '@/router/thematiques/routes';
+  import { MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const isLoading = ref<boolean>(true);

@@ -4,7 +4,7 @@ import { DefiRepository } from '@/domaines/defi/ports/defi.repository';
 export class MockListeDefisRepository implements DefiRepository {
   constructor(private defisARetourner: Defi[]) {}
 
-  recupererListeDefisParUnivers(_utilisateurId: string, _universId: string): Promise<Defi[]> {
+  recupererListeDefisParThematique(_utilisateurId: string, _universId: string): Promise<Defi[]> {
     return Promise.resolve(this.defisARetourner);
   }
 

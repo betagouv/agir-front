@@ -23,14 +23,14 @@ export enum RouteServiceName {
 }
 
 export enum RouteServicePath {
-  RECETTES = '/service/recettes',
-  RECETTES_DETAIL = '/service/recettes/:id',
-  LONGUE_VIE_AUX_OBJETS = '/service/longue-vie-aux-objets',
-  LONGUE_VIE_AUX_OBJETS_DETAIL = '/service/longue-vie-aux-objets/:id',
-  PROXIMITE = '/service/pres-de-chez-nous',
-  PROXIMITE_DETAIL = '/service/pres-de-chez-nous/:id',
-  FRUITS_ET_LEGUMES = '/service/fruits-et-legumes',
-  LINKY = '/service/linky',
+  RECETTES = '/thematique/:thematiqueId/service/recettes',
+  RECETTES_DETAIL = '/thematique/:thematiqueId/service/recettes/:id',
+  LONGUE_VIE_AUX_OBJETS = '/thematique/:thematiqueId/service/longue-vie-aux-objets',
+  LONGUE_VIE_AUX_OBJETS_DETAIL = '/thematique/:thematiqueId/service/longue-vie-aux-objets/:id',
+  PROXIMITE = '/thematique/:thematiqueId/service/pres-de-chez-nous',
+  PROXIMITE_DETAIL = '/thematique/:thematiqueId/service/pres-de-chez-nous/:id',
+  FRUITS_ET_LEGUMES = '/thematique/:thematiqueId/service/fruits-et-legumes',
+  LINKY = '/thematique/:thematiqueId/service/linky',
 }
 
 const serviceRoutes: RouteRecordRaw[] = [

@@ -52,14 +52,14 @@ describe("Fichier de tests concernant la récupération des services pour la pag
             label: 'Fruits et légumes de saison',
             legende: 'juillet',
             picto: 'iconUrlFruits',
-            url: RouteServiceName.FRUITS_ET_LEGUMES,
+            url: `/thematique/me-nourrir/service/${RouteServiceName.FRUITS_ET_LEGUMES}`,
           },
           {
             estServiceExterne: false,
             label: 'Mes commerces de proximité',
             legende: 'À PARIS 01',
             picto: 'iconUrlProximite',
-            url: RouteServiceName.PROXIMITE,
+            url: `/thematique/me-nourrir/service/${RouteServiceName.PROXIMITE}`,
           },
           {
             estServiceExterne: true,

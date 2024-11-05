@@ -78,7 +78,7 @@
     DefiDescriptionViewModel,
     ListeDefisDescriptionPresenterImpl,
   } from '@/domaines/defi/adapters/listeDefisDescription.presenter.impl';
-  import { RecupererListeDefisParUniversUsecase } from '@/domaines/defi/recupererListeDefisParUnivers.usecase';
+  import { RecupererListeDefisParThematiqueUsecase } from '@/domaines/defi/recupererListeDefisParThematique.usecase';
   import { MissionsPresenterImpl, MissionViewModel } from '@/domaines/missions/adapters/missions.presenter.impl';
   import { MissionsRepositoryAxios } from '@/domaines/missions/adapters/missions.repository.axios';
   import { RecupererMissionsThematiqueUsecase } from '@/domaines/missions/recupererMissionsThematique.usecase';
@@ -93,7 +93,7 @@
     ServiceRecherchePresenterImpl,
   } from '@/domaines/serviceRecherche/catalogue/adapters/serviceRecherche.presenter.impl';
   import { ServiceRechercheRepositoryAxios } from '@/domaines/serviceRecherche/catalogue/adapters/serviceRecherche.repository.axios';
-  import { RecupererServicesRechercheParUniversUsecase } from '@/domaines/serviceRecherche/catalogue/recupererServicesRechercheParUnivers.usecase';
+  import { RecupererServicesRechercheParThematiqueUsecase } from '@/domaines/serviceRecherche/catalogue/recupererServicesRechercheParThematique.usecase';
   import {
     ThematiquePresenterImpl,
     ThematiqueViewModel,
@@ -120,8 +120,10 @@
       new RecommandationsPersonnaliseesRepositoryAxios(),
     );
     const recupererThematiquesUsecase = new RecupererMissionsThematiqueUsecase(new MissionsRepositoryAxios());
-    const recupererDefiParUniversUsecase = new RecupererListeDefisParUniversUsecase(new DefiRepositoryAxios());
-    const recupererServicesRechercheParUniversUsecase = new RecupererServicesRechercheParUniversUsecase(
+    const recupererListeDefisParThematiqueUsecase = new RecupererListeDefisParThematiqueUsecase(
+      new DefiRepositoryAxios(),
+    );
+    const recupererServicesRechercheParThematiqueUsecase = new RecupererServicesRechercheParThematiqueUsecase(
       new ServiceRechercheRepositoryAxios(),
     );
     Promise.all([
@@ -140,12 +142,12 @@
         idUtilisateur,
         new MissionsPresenterImpl(vm => (missionsViewModel.value = vm)),
       ),
-      recupererDefiParUniversUsecase.execute(
+      recupererListeDefisParThematiqueUsecase.execute(
         idUtilisateur,
         universId,
         new ListeDefisDescriptionPresenterImpl(vm => (defisViewModel.value = vm)),
       ),
-      recupererServicesRechercheParUniversUsecase.execute(
+      recupererServicesRechercheParThematiqueUsecase.execute(
         idUtilisateur,
         universId,
         new ServiceRecherchePresenterImpl(vm => (servicesViewModel.value = vm)),
@@ -167,3 +169,5 @@
     lancerChargementDesDonnees();
   });
 </script>
+@/domaines/serviceRecherche/catalogue/recupererServicesRechercheParThematique.usecase
+@/domaines/defi/recupererListeDefisParThematique.usecase

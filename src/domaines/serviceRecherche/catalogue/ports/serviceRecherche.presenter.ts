@@ -1,4 +1,4 @@
-import { ServicesRecherche } from '@/domaines/serviceRecherche/catalogue/recupererServicesRechercheParUnivers.usecase';
+import { ServicesRecherche } from '@/domaines/serviceRecherche/catalogue/recupererServicesRechercheParThematique.usecase';
 
 export interface ServiceRecherchePresenter {
   presente(serviceRecherche: ServicesRecherche): void;

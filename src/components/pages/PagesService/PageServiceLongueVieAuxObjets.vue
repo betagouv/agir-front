@@ -4,7 +4,16 @@
     <div v-else>
       <FilDAriane
         page-courante="Service : Longue vie aux objets"
-        :page-hierarchie="[{ label: 'Univers - Mes achats', url: `/${RouteThematiquesName.THEMATIQUE}/consommation` }]"
+        :page-hierarchie="
+          useRoute().params.thematiqueId
+            ? [
+                {
+                  label: `${MenuThematiques.getFromUrl(useRoute().params.thematiqueId as string).labelDansLeMenu}`,
+                  url: `/thematique/${useRoute().params.thematiqueId}`,
+                },
+              ]
+            : []
+        "
       />
       <div v-if="serviceErreur">
         <h1>Service indisponible</h1>
@@ -71,6 +80,7 @@
 
 <script setup lang="ts">
   import { onMounted, ref } from 'vue';
+  import { useRoute } from 'vue-router';
   import PageServiceTemplate from '@/components/custom/Service/PageServiceTemplate.vue';
   import ServiceFavoris from '@/components/custom/Service/ServiceFavoris.vue';
   import ServiceListeCarte from '@/components/custom/Service/ServiceListeCarte.vue';
@@ -85,7 +95,7 @@
   } from '@/domaines/serviceRecherche/longueVieAuxObjets/adapters/serviceRechercheLongueVieAuxObjets.presenter.impl';
   import { ServiceRechercheLongueVieAuxObjetsAxios } from '@/domaines/serviceRecherche/longueVieAuxObjets/adapters/serviceRechercheLongueVieAuxObjets.repository.axios';
   import { RecupererServiceLongueVieAuxObjetsUsecase } from '@/domaines/serviceRecherche/longueVieAuxObjets/recupererServiceLongueVieAuxObjets.usecase';
-  import { RouteThematiquesName } from '@/router/thematiques/routes';
+  import { MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const isLoading = ref<boolean>(true);

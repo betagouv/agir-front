@@ -6,7 +6,7 @@
         <ServiceLink :url="service.url" :label="service.label" :picto="service.picto" :legende="service.legende" />
       </li>
     </ul>
-    <p>Retrouvez plus de services dans vos univers...</p>
+    <p>Retrouvez plus de services dans vos thématiques...</p>
   </div>
 </template>
 
