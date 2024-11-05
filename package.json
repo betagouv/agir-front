@@ -27,7 +27,7 @@
     "js-cookie": "3.0.5",
     "jwt-decode": "4.0.0",
     "leaflet": "^1.9.4",
-    "pinia": "2.2.4",
+    "pinia": "2.2.6",
     "pinia-plugin-persistedstate": "4.1.2",
     "redaxios": "0.5.1",
     "vue": "3.5.12",
