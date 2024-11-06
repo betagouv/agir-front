@@ -19,7 +19,7 @@
         :to="{
           name: RouteBilanCarboneName.BILAN_CARBONE_ENCHAINEMENT,
           params: {
-            univers: thematique,
+            thematiqueId: thematique,
             id: contentId,
           },
         }"

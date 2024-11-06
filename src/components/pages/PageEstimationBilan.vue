@@ -5,7 +5,7 @@
       :page-hierarchie="[{ label: 'Bilan carbone', url: `${RouteBilanCarbonePath.BILAN_CARBONE}` }]"
     />
     <h1>
-      Estimation du bilan <span class="text--bleu">{{ univers }}</span>
+      Estimation du bilan <span class="text--bleu">{{ thematiqueId }}</span>
     </h1>
     <p v-if="isLoading" class="fr-mb-4w">Chargement en cours ...</p>
     <div class="fr-mb-4w" v-if="!isLoading && questionsViewModel">
@@ -48,7 +48,7 @@
   import { utilisateurStore } from '@/store/utilisateur';
 
   const route = useRoute();
-  const univers = route.params.univers as string;
+  const thematiqueId = route.params.thematiqueId as string;
   const recupererEnchainementQuestionsUsecase = new RecupererEnchainementQuestionsUsecase(
     new QuestionRepositoryAxios(),
   );
