@@ -5,7 +5,10 @@
       :page-hierarchie="[{ label: 'Bilan carbone', url: `${RouteBilanCarbonePath.BILAN_CARBONE}` }]"
     />
     <h1>
-      Estimation du bilan <span class="text--bleu">{{ univers }}</span>
+      Estimation du bilan
+      <span class="text--bleu">{{
+        MenuThematiques.getThematiqueData(thematiqueId as ClefThematiqueAPI).labelDansLeMenu
+      }}</span>
     </h1>
     <p v-if="isLoading" class="fr-mb-4w">Chargement en cours ...</p>
     <div class="fr-mb-4w" v-if="!isLoading && questionsViewModel">
@@ -43,12 +46,13 @@
   } from '@/domaines/kyc/adapters/listeQuestionsThematique.presenter.impl';
   import { QuestionRepositoryAxios } from '@/domaines/kyc/adapters/question.repository.axios';
   import { RecupererEnchainementQuestionsUsecase } from '@/domaines/kyc/recupererEnchainementQuestionsUsecase';
+  import { ClefThematiqueAPI, MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
   import router from '@/router';
   import { RouteBilanCarbonePath } from '@/router/bilanCarbone/routes';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const route = useRoute();
-  const univers = route.params.univers as string;
+  const thematiqueId = route.params.thematiqueId as string;
   const recupererEnchainementQuestionsUsecase = new RecupererEnchainementQuestionsUsecase(
     new QuestionRepositoryAxios(),
   );

@@ -1,17 +1,17 @@
 import { RecommandationsPersonnaliseesPresenter } from '@/domaines/recommandationsPersonnalisees/ports/recommandationsPersonnalisees.presenter';
 import { RecommandationsPersonnaliseesRepository } from '@/domaines/recommandationsPersonnalisees/ports/recommandationsPersonnalisees.repository';
 
-export class RecupererRecommandationsPersonnaliseesUniversUsecase {
+export class RecupererRecommandationsPersonnaliseesThematiqueUsecase {
   constructor(private recommandationsPersonnaliseesRepository: RecommandationsPersonnaliseesRepository) {}
 
   async execute(
-    universId: string,
+    thematiqueId: string,
     idUtilisateur: string,
     presenter: RecommandationsPersonnaliseesPresenter,
   ): Promise<void> {
     const recommandationsPersonnalisees =
-      await this.recommandationsPersonnaliseesRepository.chargerRecommandationsPersonnaliseesUnivers(
-        universId,
+      await this.recommandationsPersonnaliseesRepository.chargerRecommandationsPersonnaliseesThematique(
+        thematiqueId,
         idUtilisateur,
       );
     presenter.presente(recommandationsPersonnalisees);

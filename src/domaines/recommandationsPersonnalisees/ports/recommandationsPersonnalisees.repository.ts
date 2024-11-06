@@ -2,8 +2,8 @@ import { RecommandationPersonnalisee } from '@/domaines/recommandationsPersonnal
 
 export interface RecommandationsPersonnaliseesRepository {
   chargerRecommandationsPersonnalisees(idUtilisateur: string): Promise<RecommandationPersonnalisee[]>;
-  chargerRecommandationsPersonnaliseesUnivers(
-    idUnivers: string,
+  chargerRecommandationsPersonnaliseesThematique(
+    idThematique: string,
     idUtilisateur: string,
   ): Promise<RecommandationPersonnalisee[]>;
   recommandationAEteCliquee(idUtilisateur: string): Promise<void>;

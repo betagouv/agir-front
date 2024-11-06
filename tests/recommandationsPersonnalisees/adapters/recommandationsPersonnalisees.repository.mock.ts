@@ -3,12 +3,13 @@ import { RecommandationPersonnalisee } from '@/domaines/recommandationsPersonnal
 import { InteractionType } from '@/shell/interactionType';
 
 export class MockRecommandationsPersonnaliseesRepository implements RecommandationsPersonnaliseesRepository {
-  chargerRecommandationsPersonnaliseesUnivers(
-    _idUnivers: string,
+  chargerRecommandationsPersonnaliseesThematique(
+    _idThematique: string,
     _idUtilisateur: string,
   ): Promise<RecommandationPersonnalisee[]> {
     throw new Error('Method not implemented.');
   }
+
   recommandationAEteCliquee(_idUtilisateur: string): Promise<void> {
     throw new Error('Method not implemented.');
   }
