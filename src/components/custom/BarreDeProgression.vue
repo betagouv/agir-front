@@ -2,6 +2,7 @@
   <div
     class="jauge-background full-width overflow--hidden"
     :aria-label="label"
+    :aria-labelledby="label"
     role="progressbar"
     :aria-valuenow="value"
     aria-valuemin="0"

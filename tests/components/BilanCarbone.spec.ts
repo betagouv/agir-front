@@ -1,13 +1,23 @@
-import { render } from '@testing-library/vue';
+import { render, RenderResult } from '@testing-library/vue';
 import BilanCarbone from '@/components/custom/BilanCarbone/BilanCarbone.vue';
 import {
   BilanCarboneCompletViewModel,
   BilanCarbonePartielViewModel,
 } from '@/domaines/bilanCarbone/adapters/bilanCarbone.presenter.impl';
+import { beforeEach } from 'vitest';
+import { config } from '@vue/test-utils';
+
+config.global.stubs = {
+  'router-link': {
+    template: '<a href="#"><slot /></a>',
+  },
+};
 
 describe('BilanCarbone', () => {
   describe('Quand le bilan est incomplet', () => {
-    it('affiche le titre du bilan partiel et une première estimation', () => {
+    let page: RenderResult;
+
+    beforeEach(() => {
       const bilanCarboneProps: {
         bilanCarbonePartiel?: BilanCarbonePartielViewModel;
         bilanCarboneComplet?: BilanCarboneCompletViewModel;
@@ -57,30 +67,25 @@ describe('BilanCarbone', () => {
               nombreTotalDeQuestion: 6,
             },
             {
-              clefUnivers: 'consommation',
-              contentId: 'ENCHAINEMENT_KYC_bilan_consommation',
-              label: '🛒 Consommation durable',
-              urlImage: 'https://res.cloudinary.com/dq023imd8/image/upload/v1728468852/conso_7522b1950d.svg',
-              estTermine: true,
-              pourcentageProgression: 100,
-              nombreTotalDeQuestion: 8,
-            },
-            {
               clefUnivers: 'logement',
               contentId: 'ENCHAINEMENT_KYC_bilan_logement',
               label: '🏡 Logement',
               urlImage: 'https://res.cloudinary.com/dq023imd8/image/upload/v1728468978/maison_80242d91f3.svg',
               estTermine: true,
-              pourcentageProgression: 100,
+              pourcentageProgression: 12,
               nombreTotalDeQuestion: 8,
             },
           ],
         },
         bilanCarboneComplet: undefined,
       };
-      const page = render(BilanCarbone, {
+
+      page = render(BilanCarbone, {
         props: bilanCarboneProps,
       });
+    });
+
+    it('affiche le titre du bilan partiel et une première estimation', () => {
       expect(page.getByRole('heading', { level: 2, name: 'Ma première estimation' })).toBeDefined();
       const transport = page.getByText('🚙 Transports');
       expect(transport.nextElementSibling?.innerHTML).toEqual('Fort');
@@ -93,6 +98,30 @@ describe('BilanCarbone', () => {
 
       const consommation = page.getByText('🛍 Consommation');
       expect(consommation.nextElementSibling?.innerHTML).toEqual('Très fort');
+    });
+
+    it('affiche les cartes pour affiner son bilan', () => {
+      expect(page.getByRole('heading', { level: 2, name: 'Affinez mon estimation' })).toBeDefined();
+      const carteTransport = page.getByRole('link', { name: '🚗 Transports' });
+      expect(carteTransport).toBeDefined();
+      expect(carteTransport).toHaveProperty('title', "Allez sur l'estimation du bilan 🚗 Transports");
+      const progressTransport = page.getByRole('progressbar', { name: 'Progression transport ' });
+      expect(progressTransport).toBeDefined();
+      expect(progressTransport.getAttribute('aria-valuenow')).toBe('100');
+
+      const carteAlimentation = page.getByRole('link', { name: '🥦 Alimentation' });
+      expect(carteAlimentation).toBeDefined();
+      expect(carteAlimentation).toHaveProperty('title', "Allez sur l'estimation du bilan 🥦 Alimentation");
+      const progressAlimentation = page.getByRole('progressbar', { name: 'Progression alimentation' });
+      expect(progressAlimentation).toBeDefined();
+      expect(progressAlimentation.getAttribute('aria-valuenow')).toBe('33');
+
+      const carteLogement = page.getByRole('link', { name: '🏡 Logement' });
+      expect(carteLogement).toBeDefined();
+      expect(carteLogement).toHaveProperty('title', "Allez sur l'estimation du bilan 🏡 Logement");
+      const progressLogement = page.getByRole('progressbar', { name: 'Progression logement' });
+      expect(progressLogement).toBeDefined();
+      expect(progressLogement.getAttribute('aria-valuenow')).toBe('12');
     });
   });
 
