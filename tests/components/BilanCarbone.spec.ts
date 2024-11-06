@@ -105,7 +105,7 @@ describe('BilanCarbone', () => {
       const carteTransport = page.getByRole('link', { name: '🚗 Transports' });
       expect(carteTransport).toBeDefined();
       expect(carteTransport).toHaveProperty('title', "Allez sur l'estimation du bilan 🚗 Transports");
-      const progressTransport = page.getByRole('progressbar', { name: 'Progression transport ' });
+      const progressTransport = page.getByRole('progressbar', { name: 'Progression transport' });
       expect(progressTransport).toBeDefined();
       expect(progressTransport.getAttribute('aria-valuenow')).toBe('100');
 
@@ -122,6 +122,12 @@ describe('BilanCarbone', () => {
       const progressLogement = page.getByRole('progressbar', { name: 'Progression logement' });
       expect(progressLogement).toBeDefined();
       expect(progressLogement.getAttribute('aria-valuenow')).toBe('12');
+    });
+
+    it('affiche une FAQ', () => {
+      expect(page.getByRole('heading', { level: 2, name: /Une question ?/g })).toBeDefined();
+      expect(page.getByRole('button', { name: 'Qu’est-ce qu’un bilan carbone ?' })).toBeDefined();
+      expect(page.getByRole('button', { name: 'Comment est calculée mon empreinte ?' })).toBeDefined();
     });
   });
 
