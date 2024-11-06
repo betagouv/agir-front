@@ -32,7 +32,7 @@ test.describe('Bilan carbone', () => {
     await page.route(`${process.env.VITE_API_URL}/utilisateur/dorian/bilans/last`, async _route => {});
     await page.goto('/bilan-environnemental');
 
-    await expect(page).toHaveTitle("J'agis - Mon bilan environnemental");
+    await expect(page).toHaveTitle("Mon bilan environnemental - J'agis");
 
     const breadcrumb = page.getByRole('navigation', { name: 'Vous êtes ici :', exact: true });
     await expect(breadcrumb).toBeVisible();
