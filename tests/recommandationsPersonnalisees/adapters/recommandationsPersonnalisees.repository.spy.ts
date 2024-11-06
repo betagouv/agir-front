@@ -2,12 +2,6 @@ import { RecommandationsPersonnaliseesRepository } from '@/domaines/recommandati
 import { RecommandationPersonnalisee } from '@/domaines/recommandationsPersonnalisees/recupererRecommandationsPersonnalisees.usecase';
 
 export class SpyRecommandationsPersonnaliseesRepository implements RecommandationsPersonnaliseesRepository {
-  chargerRecommandationsPersonnaliseesUnivers(
-    _idUnivers: string,
-    _idUtilisateur: string,
-  ): Promise<RecommandationPersonnalisee[]> {
-    throw new Error('Method not implemented.');
-  }
   get recommandationAEteCliqueeAEteAppelee(): boolean {
     return this._recommandationAEteCliqueeAEteAppelee;
   }
@@ -18,8 +12,15 @@ export class SpyRecommandationsPersonnaliseesRepository implements Recommandatio
     throw new Error('Method not implemented.');
   }
 
-  recommandationAEteCliquee(idUtilisateur: string): Promise<void> {
+  recommandationAEteCliquee(_idUtilisateur: string): Promise<void> {
     this._recommandationAEteCliqueeAEteAppelee = true;
     return Promise.resolve();
+  }
+
+  chargerRecommandationsPersonnaliseesThematique(
+    _idThematique: string,
+    _idUtilisateur: string,
+  ): Promise<RecommandationPersonnalisee[]> {
+    throw new Error('Method not implemented.');
   }
 }

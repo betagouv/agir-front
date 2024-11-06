@@ -87,7 +87,7 @@
     RecommandationsPersonnaliseesPresenterImpl,
   } from '@/domaines/recommandationsPersonnalisees/adapters/recommandationsPersonnalisees.presenter.impl';
   import { RecommandationsPersonnaliseesRepositoryAxios } from '@/domaines/recommandationsPersonnalisees/adapters/recommandationsPersonnalisees.repository.axios';
-  import { RecupererRecommandationsPersonnaliseesUniversUsecase } from '@/domaines/recommandationsPersonnalisees/recupererRecommandationsPersonnaliseesUnivers.usecase';
+  import { RecupererRecommandationsPersonnaliseesThematiqueUsecase } from '@/domaines/recommandationsPersonnalisees/recupererRecommandationsPersonnaliseesThematique.usecase';
   import {
     ServicesRechercheViewModel,
     ServiceRecherchePresenterImpl,
@@ -116,9 +116,8 @@
     isLoading.value = true;
     const idUtilisateur = store.utilisateur.id;
     const recupererThematiqueUsecase = new RecupererThematiqueUsecase(new ThematiquesRepositoryAxios());
-    const chargerRecommandationsPersonnaliseesUsecase = new RecupererRecommandationsPersonnaliseesUniversUsecase(
-      new RecommandationsPersonnaliseesRepositoryAxios(),
-    );
+    const recupererRecommandationsPersonnaliseesThematiqueUsecase =
+      new RecupererRecommandationsPersonnaliseesThematiqueUsecase(new RecommandationsPersonnaliseesRepositoryAxios());
     const recupererThematiquesUsecase = new RecupererMissionsThematiqueUsecase(new MissionsRepositoryAxios());
     const recupererListeDefisParThematiqueUsecase = new RecupererListeDefisParThematiqueUsecase(
       new DefiRepositoryAxios(),
@@ -132,7 +131,7 @@
         thematiqueId,
         new ThematiquePresenterImpl(vm => (thematiqueViewModel.value = vm)),
       ),
-      chargerRecommandationsPersonnaliseesUsecase.execute(
+      recupererRecommandationsPersonnaliseesThematiqueUsecase.execute(
         thematiqueId,
         idUtilisateur,
         new RecommandationsPersonnaliseesPresenterImpl(vm => (recommandationsPersonnaliseesViewModel.value = vm)),

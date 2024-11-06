@@ -12,8 +12,8 @@ describe("Fichier de tests concernant la récupération d'une thématique", asyn
     // WHEN
     await usecase.execute('idUtilisateur', 'idThematique', new ThematiquePresenterImpl(expectation));
     // THEN
-    function expectation(univers: ThematiqueViewModel) {
-      expect(univers).toStrictEqual<ThematiqueViewModel>({
+    function expectation(thematique: ThematiqueViewModel) {
+      expect(thematique).toStrictEqual<ThematiqueViewModel>({
         id: '1',
         nom: 'Le climat',
         urlImage: 'https://via.placeholder.com/150',

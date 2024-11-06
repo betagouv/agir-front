@@ -15,13 +15,14 @@ export interface RecommandationApiModel {
   status_defi: 'todo' | 'en_cours' | 'pas_envie' | 'deja_fait' | 'abondon' | 'fait';
 }
 export class RecommandationsPersonnaliseesRepositoryAxios implements RecommandationsPersonnaliseesRepository {
-  async chargerRecommandationsPersonnaliseesUnivers(
-    idUnivers: string,
+  @intercept401()
+  async chargerRecommandationsPersonnaliseesThematique(
+    idThematique: string,
     idUtilisateur: string,
   ): Promise<RecommandationPersonnalisee[]> {
     const axiosInstance = AxiosFactory.getAxios();
     const response = await axiosInstance.get<RecommandationApiModel[]>(
-      `/utilisateurs/${idUtilisateur}/recommandations_v2?univers=${idUnivers}`,
+      `/utilisateurs/${idUtilisateur}/recommandations_v2?univers=${idThematique}`,
     );
 
     return response.data.map((apiModel: RecommandationApiModel) => {
@@ -39,6 +40,7 @@ export class RecommandationsPersonnaliseesRepositoryAxios implements Recommandat
       return recommandationPersonnalisee;
     });
   }
+
   @intercept401()
   async recommandationAEteCliquee(idUtilisateur: string): Promise<void> {
     const axiosInstance = AxiosFactory.getAxios();
