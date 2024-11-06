@@ -7,7 +7,7 @@ import {
 
 describe('BilanCarbone', () => {
   describe('Quand le bilan est incomplet', () => {
-    it('affiche le titre du bilan partiel', () => {
+    it('affiche le titre du bilan partiel et une première estimation', () => {
       const bilanCarboneProps: {
         bilanCarbonePartiel?: BilanCarbonePartielViewModel;
         bilanCarboneComplet?: BilanCarboneCompletViewModel;
@@ -23,18 +23,18 @@ describe('BilanCarbone', () => {
             },
             {
               label: '🥘 Alimentation',
-              tag: { wording: 'Très fort', classes: 'tag-impact-tres-fort' },
-              progressBarStyle: 'progress-bar-impact-tres-fort',
+              tag: { wording: 'Moyen', classes: 'tag-impact-moyen' },
+              progressBarStyle: 'progress-bar-impact-moyen',
             },
             {
               label: '🏡 Logement',
-              tag: { wording: 'Fort', classes: 'tag-impact-fort' },
-              progressBarStyle: 'progress-bar-impact-fort',
+              tag: { wording: 'Faible', classes: 'tag-impact-faible' },
+              progressBarStyle: 'progress-bar-impact-faible',
             },
             {
               label: '🛍 Consommation',
-              tag: { wording: 'Fort', classes: 'tag-impact-fort' },
-              progressBarStyle: 'progress-bar-impact-fort',
+              tag: { wording: 'Très fort', classes: 'tag-impact-tres-fort' },
+              progressBarStyle: 'progress-bar-impact-tres-fort',
             },
           ],
           thematiquesBilan: [
@@ -82,6 +82,17 @@ describe('BilanCarbone', () => {
         props: bilanCarboneProps,
       });
       expect(page.getByRole('heading', { level: 2, name: 'Ma première estimation' })).toBeDefined();
+      const transport = page.getByText('🚙 Transports');
+      expect(transport.nextElementSibling?.innerHTML).toEqual('Fort');
+
+      const alimentation = page.getByText('🥘 Alimentation');
+      expect(alimentation.nextElementSibling?.innerHTML).toEqual('Moyen');
+
+      const logement = page.getAllByText('🏡 Logement')[0];
+      expect(logement.nextElementSibling?.innerHTML).toEqual('Faible');
+
+      const consommation = page.getByText('🛍 Consommation');
+      expect(consommation.nextElementSibling?.innerHTML).toEqual('Très fort');
     });
   });
 

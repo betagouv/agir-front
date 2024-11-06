@@ -6,14 +6,14 @@
         :key="categorie.label"
         :class="bilanPremiereEstimation.length - 1 === index ? 'fr-mb-0' : 'fr-mb-4w'"
       >
-        <div class="fr-grid-row fr-grid-row--gutters flex-space-between align-items--center fr-mb-1v">
+        <p class="fr-grid-row fr-grid-row--gutters flex-space-between align-items--center fr-mb-1v">
           <span class="fr-text--bold fr-col-auto">{{ categorie.label }}</span>
           <span
             :class="`${categorie.tag.classes} text--lh-1-3 fr-col-auto fr-py-1v fr-px-1w fr-mb-0 fr-mr-1w fr-text--sm border-radius--xs`"
           >
             {{ categorie.tag.wording }}
           </span>
-        </div>
+        </p>
         <div :class="`${categorie.progressBarStyle}  border-radius--md`" aria-hidden="true" />
       </li>
     </ul>
