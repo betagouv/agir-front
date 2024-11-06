@@ -1,6 +1,6 @@
-import Cookies from 'js-cookie';
 import axios from 'redaxios';
 import { NavigationBus, EventBusEvents } from '@/navigationBus';
+import { utilisateurStore } from '@/store/utilisateur';
 
 export class AxiosFactory {
   public static getAxios() {
@@ -9,7 +9,7 @@ export class AxiosFactory {
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${Cookies.get('bearer')}`,
+        Authorization: `Bearer ${utilisateurStore().utilisateur.token}`,
       },
     });
   }

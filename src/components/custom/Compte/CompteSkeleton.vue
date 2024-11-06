@@ -26,7 +26,6 @@
 </template>
 
 <script setup lang="ts">
-  import Cookies from 'js-cookie';
   import CompteMenuLateral from '@/components/custom/Compte/CompteMenuLateral.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import router from '@/router';
@@ -38,7 +37,6 @@
 
   const logout = () => {
     store.reset();
-    Cookies.remove('bearer');
     router.replace('/');
   };
 </script>

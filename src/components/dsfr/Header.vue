@@ -213,7 +213,6 @@
   import { RouteCoachName } from '@/router/coach/routeCoachName';
   import { RouteCompteName } from '@/router/compte/routeCompteName';
   import { RouteAidesName } from '@/router/aides/routeAidesName';
-  import Cookies from 'js-cookie';
   import { RouteThematiquesName } from '@/router/thematiques/routes';
   import { ClefThematiqueAPI, MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
 
@@ -228,7 +227,6 @@
 
   const logout = () => {
     store.reset();
-    Cookies.remove('bearer');
     router.replace('/');
   };
 </script>

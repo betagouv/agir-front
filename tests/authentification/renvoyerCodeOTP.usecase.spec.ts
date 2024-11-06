@@ -1,6 +1,7 @@
 import {
   IdUtilisateur,
   Utilisateur,
+  UtilisateurConnecte,
   UtilisateurRepository,
 } from '@/domaines/authentification/ports/utilisateur.repository';
 import { RenvoyerCoteOTPUsecase } from '@/domaines/authentification/renvoyerCoteOTPUsecase';
@@ -23,7 +24,7 @@ class SpyUtilisateurRepository implements UtilisateurRepository {
     return Promise.resolve();
   }
 
-  validerCompteUtilisateur(email: string, code: string): Promise<IdUtilisateur> {
+  validerCompteUtilisateur(email: string, code: string): Promise<UtilisateurConnecte> {
     throw Error;
   }
 

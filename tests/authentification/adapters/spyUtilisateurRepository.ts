@@ -1,6 +1,7 @@
 import {
   IdUtilisateur,
   Utilisateur,
+  UtilisateurConnecte,
   UtilisateurRepository,
 } from '@/domaines/authentification/ports/utilisateur.repository';
 
@@ -22,7 +23,7 @@ export class SpyUtilisateurRepository implements UtilisateurRepository {
     throw Error;
   }
 
-  validerCompteUtilisateur(email: string, code: string): Promise<IdUtilisateur> {
+  validerCompteUtilisateur(email: string, code: string): Promise<UtilisateurConnecte> {
     throw Error;
   }
 

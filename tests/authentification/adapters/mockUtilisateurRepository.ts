@@ -1,6 +1,7 @@
 import {
   IdUtilisateur,
   Utilisateur,
+  UtilisateurConnecte,
   UtilisateurRepository,
 } from '@/domaines/authentification/ports/utilisateur.repository';
 
@@ -33,8 +34,11 @@ export class MockUtilisateurRepository implements UtilisateurRepository {
     throw Error;
   }
 
-  validerCompteUtilisateur(email: string, code: string): Promise<IdUtilisateur> {
-    return Promise.resolve('utilisateurId');
+  validerCompteUtilisateur(email: string, code: string): Promise<UtilisateurConnecte> {
+    return Promise.resolve({
+      id: 'utilisateurId',
+      token: 'token',
+    });
   }
 
   validerLoginOtp(email: string, code: string): Promise<Utilisateur> {
@@ -46,6 +50,7 @@ export class MockUtilisateurRepository implements UtilisateurRepository {
       fonctionnalitesDebloquees: [],
       onboardingAEteRealise: false,
       afficherDisclaimerAides: false,
+      token: 'token',
     });
   }
 }
