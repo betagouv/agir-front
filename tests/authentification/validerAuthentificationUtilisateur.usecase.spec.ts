@@ -31,6 +31,7 @@ describe("Fichier de tests concernant la validation de l'authentification de l'u
       fonctionnalitesDebloquees: [],
       onboardingAEteRealise: false,
       afficherDisclaimerAides: false,
+      token: 'token',
     });
   });
 

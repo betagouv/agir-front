@@ -23,6 +23,7 @@ export const utilisateurStore = defineStore('utilisateur', {
       fonctionnalitesDebloquees: [],
       onboardingAEteRealise: false,
       afficherDisclaimerAides: false,
+      token: '',
     },
     score: {
       points: 0,

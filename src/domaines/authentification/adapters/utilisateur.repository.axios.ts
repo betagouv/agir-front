@@ -1,9 +1,8 @@
-import Cookies from 'js-cookie';
 import { jwtDecode } from 'jwt-decode';
 import { AxiosFactory } from '@/axios.factory';
 import {
-  IdUtilisateur,
   Utilisateur,
+  UtilisateurConnecte,
   UtilisateurRepository,
 } from '@/domaines/authentification/ports/utilisateur.repository';
 
@@ -42,7 +41,6 @@ export class UtilisateurRepositoryAxios implements UtilisateurRepository {
       email,
       code,
     });
-    this.setBearerInCookie(response.data.token);
 
     return {
       nom: response.data.utilisateur.nom,
@@ -52,12 +50,8 @@ export class UtilisateurRepositoryAxios implements UtilisateurRepository {
       fonctionnalitesDebloquees: response.data.utilisateur.fonctionnalites_debloquees || ['aides'],
       onboardingAEteRealise: response.data.utilisateur.is_onboarding_done,
       afficherDisclaimerAides: !response.data.utilisateur.couverture_aides_ok,
+      token: response.data.token,
     };
-  }
-  private setBearerInCookie(token: string) {
-    Cookies.set('bearer', token, {
-      secure: true,
-    });
   }
 
   async getUtilisateurAvecId(idUtilisateur: string): Promise<Utilisateur> {
@@ -74,7 +68,7 @@ export class UtilisateurRepositoryAxios implements UtilisateurRepository {
     };
   }
 
-  async validerCompteUtilisateur(email: string, code: string): Promise<IdUtilisateur> {
+  async validerCompteUtilisateur(email: string, code: string): Promise<UtilisateurConnecte> {
     const axiosInstance = AxiosFactory.getAxios();
     const response = await axiosInstance.post<ValiderCompteApiModel>(`/utilisateurs/valider`, {
       email,
@@ -83,9 +77,11 @@ export class UtilisateurRepositoryAxios implements UtilisateurRepository {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     const utilisateurId = jwtDecode(response.data.token).utilisateurId as string;
-    this.setBearerInCookie(response.data.token);
 
-    return utilisateurId;
+    return {
+      id: utilisateurId,
+      token: response.data.token,
+    };
   }
 
   async renvoyerCodeOTP(email: string): Promise<void> {

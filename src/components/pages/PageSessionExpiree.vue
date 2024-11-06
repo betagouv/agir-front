@@ -6,7 +6,5 @@
 <script setup lang="ts">
   import Authentification from '@/components/Authentification.vue';
   import { utilisateurStore } from '@/store/utilisateur';
-  import Cookies from 'js-cookie';
   utilisateurStore().reset();
-  Cookies.remove('bearer');
 </script>

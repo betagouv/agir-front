@@ -1,6 +1,6 @@
 import {
-  IdUtilisateur,
   Utilisateur,
+  UtilisateurConnecte,
   UtilisateurRepository,
 } from '@/domaines/authentification/ports/utilisateur.repository';
 import { TerminerRedefinirMotDePasseUsecase } from '@/domaines/authentification/terminerRedefinirMotDePasse.usecase';
@@ -31,7 +31,7 @@ class SpyUtilisateurRepository implements UtilisateurRepository {
     throw Error;
   }
 
-  validerCompteUtilisateur(email: string, code: string): Promise<IdUtilisateur> {
+  validerCompteUtilisateur(email: string, code: string): Promise<UtilisateurConnecte> {
     throw Error;
   }
 
