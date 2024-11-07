@@ -8,7 +8,7 @@
     <img class="full-width img-object-fit-cover border-radius--xs" height="150" :src="urlImage" alt="" />
     <BarreDeProgression
       class="fr-mb-1w"
-      label="Progression"
+      :label="`Progression ${thematique}`"
       :value="progression"
       :value-max="100"
       :couleur="estTermine ? '#18753c' : '#0063CB'"

@@ -2,15 +2,14 @@
   <div class="fr-container fr-pb-2w">
     <FilDAriane page-courante="Mon bilan environnemental" />
     <p v-if="isLoading">Chargement en cours ...</p>
-    <template v-else-if="!isLoading && (bilanCarboneViewModel || bilanCarbonePartielViewModel)">
+    <template v-else-if="bilanCarboneViewModel || bilanCarbonePartielViewModel">
       <h1
         class="fr-h2"
-        v-html="bilanCarboneViewModel?.titre ? bilanCarboneViewModel?.titre : bilanCarbonePartielViewModel?.titre"
+        v-html="bilanCarboneViewModel?.titre ? bilanCarboneViewModel.titre : bilanCarbonePartielViewModel?.titre"
       />
-      <BilanCarboneComplet v-if="bilanCarboneViewModel" :bilan-carbone-view-model="bilanCarboneViewModel" />
-      <BilanCarbonePartiel
-        v-else-if="bilanCarbonePartielViewModel"
-        :bilan-carbone-partiel-view-model="bilanCarbonePartielViewModel"
+      <BilanCarbone
+        :bilan-carbone-complet="bilanCarboneViewModel"
+        :bilan-carbone-partiel="bilanCarbonePartielViewModel"
       />
     </template>
     <p v-else>Problème de chargement des données</p>
@@ -19,9 +18,8 @@
 
 <script setup lang="ts">
   import { onMounted, ref } from 'vue';
+  import BilanCarbone from '@/components/custom/BilanCarbone/BilanCarbone.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
-  import BilanCarboneComplet from '@/components/pages/BilanCarboneComplet.vue';
-  import BilanCarbonePartiel from '@/components/pages/BilanCarbonePartiel.vue';
   import {
     BilanCarboneCompletViewModel,
     BilanCarbonePartielViewModel,
