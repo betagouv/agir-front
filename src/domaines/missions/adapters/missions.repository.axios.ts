@@ -3,19 +3,17 @@ import { MissionsRepository } from '@/domaines/missions/ports/missionsRepository
 import { DetailMission } from '@/domaines/missions/recupererDetailMission.usecase';
 
 import { Mission } from '@/domaines/missions/recupererMissionsThematique.usecase';
+import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 
 interface ThematiqueApiModel {
   titre: string;
-  type: string;
+  code: string;
   progression: number;
   cible_progression: number;
-  is_locked: boolean;
-  reason_locked: string;
   is_new: boolean;
-  niveau: number;
   image_url: string;
-  univers_parent: string;
-  univers_parent_label: string;
+  thematique: string;
+  thematique_label: string;
 }
 
 interface MissionItemThematiqueApiModel {
@@ -38,10 +36,7 @@ interface MissionThematiqueApiModel {
   id: string;
   titre: string;
   image_url: string;
-  thematique_univers: string;
-  thematique_univers_label: string;
-  univers: string;
-  univers_label: string;
+  thematique: string;
   objectifs: MissionItemThematiqueApiModel[];
   done_at: Date | null;
   terminable: boolean;
@@ -53,16 +48,14 @@ interface MissionThematiqueApiModel {
 
 export class MissionsRepositoryAxios implements MissionsRepository {
   @intercept401()
-  async recupererDetailMission(thematiqueId: string, utilisateurId: string): Promise<DetailMission> {
+  async recupererDetailMission(missionId: string, utilisateurId: string): Promise<DetailMission> {
     const axios = AxiosFactory.getAxios();
-    const reponse = await axios.get<MissionThematiqueApiModel>(
-      `/utilisateurs/${utilisateurId}/thematiques/${thematiqueId}/mission`,
-    );
+    const reponse = await axios.get<MissionThematiqueApiModel>(`/utilisateurs/${utilisateurId}/missions/${missionId}`);
 
     return {
-      missionId: thematiqueId,
+      missionId: missionId,
       titre: reponse.data.titre,
-      univers: reponse.data.univers,
+      clefApiThematique: reponse.data.thematique as ClefThematiqueAPI,
       urlImage: reponse.data.image_url,
       estTerminee: Boolean(reponse.data.done_at),
       estTerminable: reponse.data.terminable,
@@ -89,22 +82,19 @@ export class MissionsRepositoryAxios implements MissionsRepository {
   @intercept401()
   async recupererMissionsRecommandees(utilisateurId: string): Promise<Mission[]> {
     const axios = AxiosFactory.getAxios();
-    const response = await axios.get<ThematiqueApiModel[]>(`/utilisateurs/${utilisateurId}/thematiques_recommandees`);
+    const response = await axios.get<ThematiqueApiModel[]>(`/utilisateurs/${utilisateurId}/tuiles_missions`);
     return response.data.map(thematique => ({
-      id: thematique.type,
+      id: thematique.code,
       titre: thematique.titre,
       progression: {
         etapeActuelle: thematique.progression,
         etapeCible: thematique.cible_progression,
       },
-      estBloquee: thematique.is_locked,
-      raisonDuBlocage: thematique.reason_locked,
       estNouvelle: thematique.is_new,
-      niveau: thematique.niveau,
       urlImage: thematique.image_url,
       thematiqueParent: {
-        clefAPI: thematique.univers_parent,
-        label: thematique.univers_parent_label,
+        clefAPI: thematique.thematique,
+        label: thematique.thematique_label,
       },
     }));
   }
@@ -113,23 +103,20 @@ export class MissionsRepositoryAxios implements MissionsRepository {
   async recupererMissionsThematique(universId: string, utilisateurId: string): Promise<Mission[]> {
     const axios = AxiosFactory.getAxios();
     const response = await axios.get<ThematiqueApiModel[]>(
-      `/utilisateurs/${utilisateurId}/univers/${universId}/thematiques`,
+      `/utilisateurs/${utilisateurId}/thematiques/${universId}/tuiles_missions`,
     );
     return response.data.map(thematique => ({
-      id: thematique.type,
+      id: thematique.code,
       titre: thematique.titre,
       progression: {
         etapeActuelle: thematique.progression,
         etapeCible: thematique.cible_progression,
       },
-      estBloquee: thematique.is_locked,
-      raisonDuBlocage: thematique.reason_locked,
       estNouvelle: thematique.is_new,
-      niveau: thematique.niveau,
       urlImage: thematique.image_url,
       thematiqueParent: {
-        clefAPI: thematique.univers_parent,
-        label: thematique.univers_parent_label,
+        clefAPI: thematique.thematique,
+        label: thematique.thematique_label,
       },
     }));
   }
@@ -143,6 +130,6 @@ export class MissionsRepositoryAxios implements MissionsRepository {
   @intercept401()
   async terminerMission(utilisateurId: string, thematiqueId: string): Promise<void> {
     const axios = AxiosFactory.getAxios();
-    await axios.post(`/utilisateurs/${utilisateurId}/thematiques/${thematiqueId}/mission/terminer`);
+    await axios.post(`/utilisateurs/${utilisateurId}/missions/${thematiqueId}/terminer`);
   }
 }

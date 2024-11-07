@@ -22,7 +22,7 @@ export class DefiRepositoryAxios implements DefiRepository {
   async recupererListeDefisParThematique(utilisateurId: string, thematiqueId: string): Promise<Defi[]> {
     const axiosInstance = AxiosFactory.getAxios();
     const response = await axiosInstance.get<DefiApiModel[]>(
-      `/utilisateurs/${utilisateurId}/univers/${thematiqueId}/defis`,
+      `/utilisateurs/${utilisateurId}/thematiques/${thematiqueId}/defis`,
     );
 
     return response.data.map((apiModel: DefiApiModel) => {
@@ -68,7 +68,7 @@ export class DefiRepositoryAxios implements DefiRepository {
 
   @intercept401()
   async recupererTousLesDefis(utilisateurId: string): Promise<Defi[]> {
-    const response = await AxiosFactory.getAxios().get<DefiApiModel[]>(`/utilisateurs/${utilisateurId}/defis`);
+    const response = await AxiosFactory.getAxios().get<DefiApiModel[]>(`/utilisateurs/${utilisateurId}/defis_v2`);
     return response.data.map(defi => ({
       id: defi.id,
       libelle: defi.titre,

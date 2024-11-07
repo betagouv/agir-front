@@ -1,6 +1,6 @@
 import { MissionItem, DetailMission } from '../recupererDetailMission.usecase';
 import { MissionPresenter } from '@/domaines/missions/ports/missionPresenter';
-import { ClefThematiqueAPI, MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
+import { MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
 import { RouteArticlePath } from '@/router/articles/routes';
 import { RouteDefiPath } from '@/router/defis/routes';
 import { RouteKycPath } from '@/router/kyc/routes';
@@ -74,7 +74,7 @@ export class MissionPresenterImpl implements MissionPresenter {
             .filter(item => item.type === InteractionType.KYC)
             .reduce((sum, item) => sum + item.points, 0),
           aEteRealisee: mission.progressionKyc.etapeCourante === mission.progressionKyc.etapeTotal,
-          url: `/thematique/${MenuThematiques.getThematiqueData(mission.univers as ClefThematiqueAPI).url}/mission/${mission.missionId}${RouteKycPath.KYC}`,
+          url: `/thematique/${MenuThematiques.getThematiqueData(mission.clefApiThematique).url}/mission/${mission.missionId}${RouteKycPath.KYC}`,
           picto: '/ic_mission_kyc.svg',
           pointAEteRecolte: mission.items.filter(item => item.type === InteractionType.KYC)[0].pointAEteRecolte,
         },
@@ -84,7 +84,7 @@ export class MissionPresenterImpl implements MissionPresenter {
         .map(item =>
           this.mapToViewModel(
             item,
-            MenuThematiques.getThematiqueData(mission.univers as ClefThematiqueAPI).url,
+            MenuThematiques.getThematiqueData(mission.clefApiThematique).url,
             mission.missionId,
           ),
         ),
@@ -93,14 +93,14 @@ export class MissionPresenterImpl implements MissionPresenter {
         .map(item =>
           this.mapToDefiViewModel(
             item,
-            MenuThematiques.getThematiqueData(mission.univers as ClefThematiqueAPI).url,
+            MenuThematiques.getThematiqueData(mission.clefApiThematique).url,
             mission.missionId,
           ),
         ),
     });
   }
 
-  private mapToViewModel(item: MissionItem, univers: string, thematique: string): MissionQuizArticleViewModel {
+  private mapToViewModel(item: MissionItem, thematiqueUrl: string, missionId: string): MissionQuizArticleViewModel {
     return {
       id: item.id,
       idDuContenu: item.contentId,
@@ -108,7 +108,7 @@ export class MissionPresenterImpl implements MissionPresenter {
       estBloquee: item.estBloquee,
       points: item.points,
       aEteRealisee: item.aEteRealisee,
-      url: this.determineUrl(item, univers, thematique),
+      url: this.determineUrl(item, thematiqueUrl, missionId),
       picto: this.determinePicto(item),
       pointAEteRecolte: item.pointAEteRecolte,
     };

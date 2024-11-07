@@ -36,9 +36,6 @@
         {{ mission.titre }}
       </router-link>
     </h2>
-    <span v-if="mission.niveau" class="text--semi-bold text--rouge-erreur fr-mt-auto">
-      Niveau {{ mission.niveau }}
-    </span>
   </div>
 </template>
 
