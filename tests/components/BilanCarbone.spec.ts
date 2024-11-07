@@ -37,7 +37,7 @@ describe('BilanCarbone', () => {
               progressBarStyle: 'progress-bar-impact-moyen',
             },
             {
-              label: '🏡 Logement',
+              label: '🏡 A la maison',
               tag: { wording: 'Faible', classes: 'tag-impact-faible' },
               progressBarStyle: 'progress-bar-impact-faible',
             },
@@ -50,34 +50,33 @@ describe('BilanCarbone', () => {
           thematiquesBilan: [
             {
               clefUnivers: 'transport',
-              contentId: 'ENCHAINEMENT_KYC_bilan_transport',
+              contentId: 'contentId1',
               label: '🚗 Transports',
-              urlImage: 'https://res.cloudinary.com/dq023imd8/image/upload/v1728466903/Mobilite_df75aefd09.svg',
+              urlImage: 'image1.svg',
               estTermine: true,
               pourcentageProgression: 100,
               nombreTotalDeQuestion: 9,
             },
             {
               clefUnivers: 'alimentation',
-              contentId: 'ENCHAINEMENT_KYC_bilan_alimentation',
+              contentId: 'contentId2',
               label: '🥦 Alimentation',
-              urlImage: 'https://res.cloudinary.com/dq023imd8/image/upload/v1728466523/cuisine_da54797693.svg',
+              urlImage: 'image2.svg',
               estTermine: false,
               pourcentageProgression: 33,
               nombreTotalDeQuestion: 6,
             },
             {
               clefUnivers: 'logement',
-              contentId: 'ENCHAINEMENT_KYC_bilan_logement',
+              contentId: 'contentId3',
               label: '🏡 Logement',
-              urlImage: 'https://res.cloudinary.com/dq023imd8/image/upload/v1728468978/maison_80242d91f3.svg',
-              estTermine: true,
+              urlImage: 'image3.svg',
+              estTermine: false,
               pourcentageProgression: 12,
               nombreTotalDeQuestion: 8,
             },
           ],
         },
-        bilanCarboneComplet: undefined,
       };
 
       page = render(BilanCarbone, {
@@ -86,46 +85,59 @@ describe('BilanCarbone', () => {
     });
 
     it('affiche le titre du bilan partiel et une première estimation', () => {
-      expect(page.getByRole('heading', { level: 2, name: 'Ma première estimation' })).toBeDefined();
-      const transport = page.getByText('🚙 Transports');
-      expect(transport.nextElementSibling?.innerHTML).toEqual('Fort');
+      const titre = page.getByRole('heading', { level: 2, name: 'Ma première estimation' });
+      expect(titre).toBeDefined();
 
-      const alimentation = page.getByText('🥘 Alimentation');
-      expect(alimentation.nextElementSibling?.innerHTML).toEqual('Moyen');
+      const categorieLabel1 = page.getByText('🚙 Transports');
+      const categorieValeur1 = categorieLabel1.nextElementSibling?.innerHTML;
+      expect(categorieValeur1).toEqual('Fort');
 
-      const logement = page.getAllByText('🏡 Logement')[0];
-      expect(logement.nextElementSibling?.innerHTML).toEqual('Faible');
+      const categorieLabel2 = page.getByText('🥘 Alimentation');
+      const categorieValeur2 = categorieLabel2.nextElementSibling?.innerHTML;
+      expect(categorieValeur2).toEqual('Moyen');
 
-      const consommation = page.getByText('🛍 Consommation');
-      expect(consommation.nextElementSibling?.innerHTML).toEqual('Très fort');
+      const categorieLabel3 = page.getByText('🏡 A la maison');
+      const categorieValeur3 = categorieLabel3.nextElementSibling?.innerHTML;
+      expect(categorieValeur3).toEqual('Faible');
+
+      const categorieLabel4 = page.getByText('🛍 Consommation');
+      const categorieValeur4 = categorieLabel4.nextElementSibling?.innerHTML;
+      expect(categorieValeur4).toEqual('Très fort');
+
+      const tauxCompletionEstimation = page.getByText('✨ Estimation complète à');
+      expect(tauxCompletionEstimation.children[0].innerHTML).toBe('89%');
     });
 
     it('affiche les cartes pour affiner son bilan', () => {
-      expect(page.getByRole('heading', { level: 2, name: 'Affinez mon estimation' })).toBeDefined();
-      const carteTransport = page.getByRole('link', { name: '🚗 Transports' });
-      expect(carteTransport).toBeDefined();
-      expect(carteTransport).toHaveProperty('title', "Allez sur l'estimation du bilan 🚗 Transports");
-      const progressTransport = page.getByRole('progressbar', { name: 'Progression transport' });
-      expect(progressTransport).toBeDefined();
-      expect(progressTransport.getAttribute('aria-valuenow')).toBe('100');
+      const titre = page.getByRole('heading', { level: 2, name: 'Affinez mon estimation' });
+      expect(titre).toBeDefined();
 
-      const carteAlimentation = page.getByRole('link', { name: '🥦 Alimentation' });
-      expect(carteAlimentation).toBeDefined();
-      expect(carteAlimentation).toHaveProperty('title', "Allez sur l'estimation du bilan 🥦 Alimentation");
-      const progressAlimentation = page.getByRole('progressbar', { name: 'Progression alimentation' });
-      expect(progressAlimentation).toBeDefined();
-      expect(progressAlimentation.getAttribute('aria-valuenow')).toBe('33');
+      const carteThematique1 = page.getByRole('link', { name: '🚗 Transports' });
+      expect(carteThematique1).toBeDefined();
+      expect(carteThematique1).toHaveProperty('title', "Allez sur l'estimation du bilan 🚗 Transports");
+      const progressThematique1 = page.getByRole('progressbar', { name: 'Progression transport' });
+      expect(progressThematique1).toBeDefined();
+      expect(progressThematique1.getAttribute('aria-valuenow')).toBe('100');
 
-      const carteLogement = page.getByRole('link', { name: '🏡 Logement' });
-      expect(carteLogement).toBeDefined();
-      expect(carteLogement).toHaveProperty('title', "Allez sur l'estimation du bilan 🏡 Logement");
-      const progressLogement = page.getByRole('progressbar', { name: 'Progression logement' });
-      expect(progressLogement).toBeDefined();
-      expect(progressLogement.getAttribute('aria-valuenow')).toBe('12');
+      const carteThematique2 = page.getByRole('link', { name: '🥦 Alimentation' });
+      expect(carteThematique2).toBeDefined();
+      expect(carteThematique2).toHaveProperty('title', "Allez sur l'estimation du bilan 🥦 Alimentation");
+      const progressThematique2 = page.getByRole('progressbar', { name: 'Progression alimentation' });
+      expect(progressThematique2).toBeDefined();
+      expect(progressThematique2.getAttribute('aria-valuenow')).toBe('33');
+
+      const carteThematique3 = page.getByRole('link', { name: '🏡 Logement' });
+      expect(carteThematique3).toBeDefined();
+      expect(carteThematique3).toHaveProperty('title', "Allez sur l'estimation du bilan 🏡 Logement");
+      const progressThematique3 = page.getByRole('progressbar', { name: 'Progression logement' });
+      expect(progressThematique3).toBeDefined();
+      expect(progressThematique3.getAttribute('aria-valuenow')).toBe('12');
     });
 
     it('affiche une FAQ', () => {
-      expect(page.getByRole('heading', { level: 2, name: /Une question ?/g })).toBeDefined();
+      const titre = page.getByRole('heading', { level: 2, name: /Une question ?/ });
+      expect(titre).toBeDefined();
+
       expect(page.getByRole('button', { name: 'Qu’est-ce qu’un bilan carbone ?' })).toBeDefined();
       expect(page.getByRole('button', { name: 'Comment est calculée mon empreinte ?' })).toBeDefined();
     });
