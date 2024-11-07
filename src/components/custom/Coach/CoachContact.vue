@@ -8,8 +8,12 @@
       </p>
     </div>
     <div class="fr-col-md-4">
-      <a href="mailto:contact@agir.beta.gouv.fr" class="fr-btn fr-btn--icon-left fr-icon-mail-line border--white">
-        Suggérer une amélioration
+      <a
+        href="https://thread-origami-ae6.notion.site/130576eceac1804b8863d874f7f1fd1e?pvs=105"
+        class="fr-btn fr-btn--icon-left fr-icon-survey-line border--white"
+        target="_blank"
+      >
+        Donner mon avis
       </a>
     </div>
   </div>
