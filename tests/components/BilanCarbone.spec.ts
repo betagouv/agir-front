@@ -144,12 +144,13 @@ describe('BilanCarbone', () => {
   });
 
   describe('Quand le bilan est complet', () => {
-    it('affiche le titre du bilan complet', () => {
+    let page: RenderResult;
+
+    beforeEach(() => {
       const bilanCarboneProps: {
         bilanCarbonePartiel?: BilanCarbonePartielViewModel;
         bilanCarboneComplet?: BilanCarboneCompletViewModel;
       } = {
-        bilanCarbonePartiel: undefined,
         bilanCarboneComplet: {
           titre: 'Mon bilan <span class="text--bleu">environnemental</span>',
           pourcentageProgressBar: 52.18743032269549,
@@ -317,10 +318,65 @@ describe('BilanCarbone', () => {
           ],
         },
       };
-      const page = render(BilanCarbone, {
+      page = render(BilanCarbone, {
         props: bilanCarboneProps,
       });
-      expect(page.getByRole('heading', { level: 2, name: "Mes principaux postes d'émission" })).toBeDefined();
+    });
+
+    it('affiche le titre et le bilan complet', () => {
+      const titre = page.getByRole('heading', { level: 2, name: "Mes principaux postes d'émission" });
+      expect(titre).toBeDefined();
+
+      const nombreTonnes = page.getByText('6,3');
+      const nombreTonnesUnite = nombreTonnes.nextElementSibling?.children[0].innerHTML;
+
+      expect(nombreTonnes).toBeDefined();
+      expect(nombreTonnesUnite).toBe('tonnes');
+    });
+
+    it.todo("affiche le top 3 des principaux postes d'émission", () => {
+      const titre = page.getByRole('heading', { level: 2, name: "Mes principaux postes d'émission" });
+      expect(titre).toBeDefined();
+
+      const listeOrdonee = page.getByRole('list');
+    });
+
+    it.todo('affiche le détail des émissions', () => {
+      const titre = page.getByRole('heading', { level: 2, name: 'Voir le détail' });
+      expect(titre).toBeDefined();
+    });
+
+    it('affiche les cartes terminées pour affiner son bilan', () => {
+      const carteThematique1 = page.getByRole('link', { name: '🚗 Transports' });
+      expect(carteThematique1).toBeDefined();
+      expect(carteThematique1).toHaveProperty('title', "Allez sur l'estimation du bilan 🚗 Transports");
+      const progressThematique1 = page.getByRole('progressbar', { name: 'Progression transport' });
+      expect(progressThematique1).toBeDefined();
+      expect(progressThematique1.getAttribute('aria-valuenow')).toBe('100');
+
+      const carteThematique2 = page.getByRole('link', { name: '🥦 Alimentation' });
+      expect(carteThematique2).toBeDefined();
+      expect(carteThematique2).toHaveProperty('title', "Allez sur l'estimation du bilan 🥦 Alimentation");
+      const progressThematique2 = page.getByRole('progressbar', { name: 'Progression alimentation' });
+      expect(progressThematique2).toBeDefined();
+      expect(progressThematique2.getAttribute('aria-valuenow')).toBe('100');
+
+      const carteThematique3 = page.getByRole('link', { name: '🏡 Logement' });
+      expect(carteThematique3).toBeDefined();
+      expect(carteThematique3).toHaveProperty('title', "Allez sur l'estimation du bilan 🏡 Logement");
+      const progressThematique3 = page.getByRole('progressbar', { name: 'Progression logement' });
+      expect(progressThematique3).toBeDefined();
+      expect(progressThematique3.getAttribute('aria-valuenow')).toBe('100');
+
+      const carteThematique4 = page.getByRole('link', { name: '🛒 Consommation durable' });
+      expect(carteThematique4).toBeDefined();
+      expect(carteThematique4).toHaveProperty('title', "Allez sur l'estimation du bilan 🛒 Consommation durable");
+      const progressThematique4 = page.getByRole('progressbar', { name: 'Progression logement' });
+      expect(progressThematique4).toBeDefined();
+      expect(progressThematique4.getAttribute('aria-valuenow')).toBe('100');
+
+      const badgeTerminee = page.getAllByText('Terminé !');
+      expect(badgeTerminee).toHaveLength(4);
     });
   });
 });
