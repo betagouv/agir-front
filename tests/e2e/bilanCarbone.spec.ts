@@ -49,7 +49,9 @@ test.describe('Bilan carbone', () => {
     await expect(lienCourant).toHaveAttribute('aria-current', 'page');
 
     const aside = page.getByRole('complementary');
-    await expect(aside.getByRole('heading', { level: 2, name: 'Nos gestes climat', exact: true })).toBeVisible();
+    await expect(
+      aside.getByRole('heading', { level: 2, name: 'Proposé par Nos Gestes Climat', exact: true }),
+    ).toBeVisible();
   });
 
   test.describe('quand le bilan carbone est en cours de chargement', async () => {
