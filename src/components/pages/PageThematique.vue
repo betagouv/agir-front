@@ -3,17 +3,17 @@
     <CarteSkeleton />
   </div>
 
-  <div v-else-if="thematiqueViewModel" class="fr-container">
-    <FilDAriane :page-courante="thematiqueViewModel.nom" />
+  <div class="fr-container">
+    <FilDAriane :page-courante="thematique.labelDansLeMenu" />
     <div class="fr-grid-row align-items--center fr-mb-4w">
       <img
-        :src="thematiqueViewModel.urlImage"
+        :src="thematique.imageUrl"
         class="border-radius--full img-object-fit-cover fr-mr-2w"
         width="80"
         height="80"
         alt="thématique"
       />
-      <h1 class="fr-h1 fr-col fr-m-0">{{ thematiqueViewModel.nom }}</h1>
+      <h1 class="fr-h1 fr-col fr-m-0">{{ thematique.labelDansLeMenu }}</h1>
     </div>
   </div>
 
@@ -94,28 +94,21 @@
   } from '@/domaines/serviceRecherche/catalogue/adapters/serviceRecherche.presenter.impl';
   import { ServiceRechercheRepositoryAxios } from '@/domaines/serviceRecherche/catalogue/adapters/serviceRecherche.repository.axios';
   import { RecupererServicesRechercheParThematiqueUsecase } from '@/domaines/serviceRecherche/catalogue/recupererServicesRechercheParThematique.usecase';
-  import {
-    ThematiquePresenterImpl,
-    ThematiqueViewModel,
-  } from '@/domaines/thematiques/adapters/thematique.presenter.impl';
-  import { ThematiquesRepositoryAxios } from '@/domaines/thematiques/adapters/thematiques.repository.axios';
   import { MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
-  import { RecupererThematiqueUsecase } from '@/domaines/thematiques/recupererThematique.usecase';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const store = utilisateurStore();
   const isLoading = ref<boolean>(true);
   const recommandationsPersonnaliseesViewModel = ref<RecommandationPersonnaliseeViewModel>();
   const missionsViewModel = ref<MissionViewModel[]>();
-  const thematiqueViewModel = ref<ThematiqueViewModel>();
   const defisViewModel = ref<DefiDescriptionViewModel[]>();
   const servicesViewModel = ref<ServicesRechercheViewModel>();
-  let thematiqueId = MenuThematiques.getFromUrl(useRoute().params.id as string)!.clefTechniqueAPI;
+  const thematique = MenuThematiques.getFromUrl(useRoute().params.id as string);
+  let thematiqueId = thematique.clefTechniqueAPI;
 
   const lancerChargementDesDonnees = () => {
     isLoading.value = true;
     const idUtilisateur = store.utilisateur.id;
-    const recupererThematiqueUsecase = new RecupererThematiqueUsecase(new ThematiquesRepositoryAxios());
     const recupererRecommandationsPersonnaliseesThematiqueUsecase =
       new RecupererRecommandationsPersonnaliseesThematiqueUsecase(new RecommandationsPersonnaliseesRepositoryAxios());
     const recupererThematiquesUsecase = new RecupererMissionsThematiqueUsecase(new MissionsRepositoryAxios());
@@ -126,11 +119,6 @@
       new ServiceRechercheRepositoryAxios(),
     );
     Promise.all([
-      recupererThematiqueUsecase.execute(
-        idUtilisateur,
-        thematiqueId,
-        new ThematiquePresenterImpl(vm => (thematiqueViewModel.value = vm)),
-      ),
       recupererRecommandationsPersonnaliseesThematiqueUsecase.execute(
         thematiqueId,
         idUtilisateur,

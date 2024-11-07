@@ -26,7 +26,7 @@ test.beforeAll(async () => {
     fullFillServiceVierge(route);
   });
 
-  await page.route(`${process.env.VITE_API_URL}/utilisateurs/dorian/thematiques_recommandees`, route => {
+  await page.route(`${process.env.VITE_API_URL}/utilisateurs/dorian/tuiles_missions`, route => {
     route.fulfill({
       status: 200,
       contentType: 'application/json',

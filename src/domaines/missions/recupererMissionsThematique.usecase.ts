@@ -17,10 +17,7 @@ export interface Mission {
     etapeActuelle: number;
     etapeCible: number;
   };
-  estBloquee: boolean;
-  raisonDuBlocage: string;
   estNouvelle: boolean;
-  niveau: number;
   urlImage: string;
   thematiqueParent: {
     clefAPI: string;

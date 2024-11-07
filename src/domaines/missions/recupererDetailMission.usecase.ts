@@ -1,5 +1,6 @@
 import { MissionPresenter } from '@/domaines/missions/ports/missionPresenter';
 import { MissionsRepository } from '@/domaines/missions/ports/missionsRepository';
+import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 
 export interface MissionItem {
   id: string;
@@ -18,7 +19,7 @@ export interface MissionItem {
 export interface DetailMission {
   urlImage: string;
   titre: string;
-  univers: string;
+  clefApiThematique: ClefThematiqueAPI;
   estTerminee: boolean;
   estTerminable: boolean;
   items: MissionItem[];

@@ -9,11 +9,7 @@ export interface MissionViewModel {
     etapeActuelle: number;
     etapeCible: number;
   };
-  blocage?: {
-    raison: string;
-  };
   estNouvelle: boolean;
-  niveau?: number;
   urlImage: string;
   estTerminee: boolean;
   clefThematique: string;
@@ -30,9 +26,7 @@ export class MissionsPresenterImpl implements MissionsPresenter {
         titre: thematique.titre,
         id: thematique.id,
         progression: thematique.progression,
-        blocage: thematique.estBloquee ? { raison: thematique.raisonDuBlocage } : undefined,
         estNouvelle: thematique.estNouvelle,
-        niveau: thematique.niveau,
         urlImage: thematique.urlImage,
         estTerminee: thematique.progression.etapeActuelle === thematique.progression.etapeCible,
         clefThematique: thematique.thematiqueParent.clefAPI,

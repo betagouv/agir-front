@@ -7,10 +7,11 @@ import {
 } from '@/domaines/missions/adapters/mission.presenter.impl';
 import { expect } from 'vitest';
 import { InteractionType } from '@/shell/interactionType';
+import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 
 const mission: DetailMission = {
   titre: 'Thematique 1',
-  univers: 'alimentation',
+  clefApiThematique: ClefThematiqueAPI.alimentation,
   urlImage: 'urlImage',
   estTerminee: false,
   estTerminable: false,
