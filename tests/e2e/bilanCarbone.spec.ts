@@ -28,7 +28,7 @@ test.beforeAll(async () => {
 });
 
 test.describe('Bilan carbone', () => {
-  test('doit afficher le meta titre associé et le breadcrumb', async () => {
+  test('doit afficher le meta titre associé, le breadcrumb et un aside explicatif', async () => {
     await page.route(`${process.env.VITE_API_URL}/utilisateur/dorian/bilans/last`, async _route => {});
     await page.goto('/bilan-environnemental');
 
@@ -47,6 +47,11 @@ test.describe('Bilan carbone', () => {
     const lienCourant = elementsBreadcrumb[1].getByText('Mon bilan environnemental');
     await expect(lienCourant).toBeVisible();
     await expect(lienCourant).toHaveAttribute('aria-current', 'page');
+
+    const aside = page.getByRole('complementary');
+    await expect(
+      aside.getByRole('heading', { level: 2, name: 'Proposé par Nos Gestes Climat', exact: true }),
+    ).toBeVisible();
   });
 
   test.describe('quand le bilan carbone est en cours de chargement', async () => {
