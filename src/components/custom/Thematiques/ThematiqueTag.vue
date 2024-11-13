@@ -9,7 +9,6 @@
   import { TagStyle } from '@/domaines/thematiques/TagThematique';
 
   const props = defineProps<{
-    thematiqueClefAPI: string;
     tag: {
       label: string;
       style: TagStyle;

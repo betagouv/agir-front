@@ -1,6 +1,7 @@
 import { AxiosFactory, intercept401 } from '@/axios.factory';
 import { Aides } from '@/domaines/aides/chargementAides.usecase';
 import { ChargementAidesRepository } from '@/domaines/aides/ports/chargementAides.repository';
+import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 
 interface AidesApiModel {
   utilisateur_est_couvert: boolean;
@@ -13,6 +14,7 @@ interface AideApiModel {
   url_simulateur: string;
   is_simulateur: true;
   thematiques_label: string[];
+  thematiques: string[];
   montant_max: number;
 }
 
@@ -28,6 +30,7 @@ export class chargementAidesAxiosRepository implements ChargementAidesRepository
         id: aide.content_id,
         titre: aide.titre,
         categorie: aide.thematiques_label[0],
+        thematique: aide.thematiques[0] as ClefThematiqueAPI,
         contenu: aide.contenu,
         url: aide.url_simulateur,
         isSimulateur: aide.is_simulateur,

@@ -1,14 +1,13 @@
 import ChargementAidesUsecase, { Aides } from '@/domaines/aides/chargementAides.usecase';
 import { ChargementAidesRepository } from '@/domaines/aides/ports/chargementAides.repository';
 import { ChargementAidesPresenterImpl } from '@/domaines/aides/adapters/chargementAides.presenter.impl';
-import { AidesAvecCouvertureViewModel, AidesViewModel } from '@/domaines/aides/ports/chargementAides.presenter';
-import { PublierEvenementRepositorySpy } from '../shell/publierEvenement.repository.spy';
+import { AidesAvecCouvertureViewModel } from '@/domaines/aides/ports/chargementAides.presenter';
 import { expect } from 'vitest';
-import { Evenemement } from '@/shell/ports/publierEvenement.repository';
 import {
   AideNonGroupeeViewModel,
   ChargementAidesNonGroupeesPresenterImpl,
 } from '@/domaines/aides/adapters/chargementCinqAidesNonGroupees.presenter.impl';
+import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 
 class ChargementAidesRepositoryForTest implements ChargementAidesRepository {
   getAides(): Promise<Aides> {
@@ -20,6 +19,7 @@ class ChargementAidesRepositoryForTest implements ChargementAidesRepository {
           titre: "Simulez vos aides pour l'achat d'un vélo",
           sousTitre: '',
           categorie: '🚗 Transport du quotidien',
+          thematique: ClefThematiqueAPI.transports,
           nombreDePointsAGagner: '25',
           miseEnAvant: '',
           type: 'AIDE',
@@ -36,6 +36,7 @@ class ChargementAidesRepositoryForTest implements ChargementAidesRepository {
           titre: 'Simulez vos aides pour convertir votre voiture thermique en électrique',
           sousTitre: '',
           categorie: '🚗 Transport du quotidien',
+          thematique: ClefThematiqueAPI.transports,
           nombreDePointsAGagner: '25',
           miseEnAvant: '',
           type: 'AIDE',
@@ -51,6 +52,7 @@ class ChargementAidesRepositoryForTest implements ChargementAidesRepository {
           titre: 'Aide test',
           sousTitre: '',
           categorie: '🥦 Alimentation',
+          thematique: ClefThematiqueAPI.alimentation,
           nombreDePointsAGagner: '25',
           miseEnAvant: '',
           type: 'AIDE',
@@ -66,6 +68,7 @@ class ChargementAidesRepositoryForTest implements ChargementAidesRepository {
           titre: 'Aide test',
           sousTitre: '',
           categorie: '🥦 Alimentation',
+          thematique: ClefThematiqueAPI.alimentation,
           nombreDePointsAGagner: '25',
           miseEnAvant: '',
           type: 'AIDE',
@@ -81,6 +84,7 @@ class ChargementAidesRepositoryForTest implements ChargementAidesRepository {
           titre: 'Aide test',
           sousTitre: '',
           categorie: '🥦 Alimentation',
+          thematique: ClefThematiqueAPI.alimentation,
           nombreDePointsAGagner: '25',
           miseEnAvant: '',
           type: 'AIDE',
@@ -96,6 +100,7 @@ class ChargementAidesRepositoryForTest implements ChargementAidesRepository {
           titre: 'Aide test',
           sousTitre: '',
           categorie: '🥦 Alimentation',
+          thematique: ClefThematiqueAPI.alimentation,
           nombreDePointsAGagner: '25',
           miseEnAvant: '',
           type: 'AIDE',
@@ -198,30 +203,70 @@ describe('Fichier de tests pour charger toutes les aides', () => {
         {
           id: 'id-1',
           isSimulateur: true,
+          thematiqueTag: {
+            label: 'Me déplacer',
+            style: {
+              backgroundColor: '#D2E9FF',
+              color: '#021952',
+              emoji: '🚗',
+            },
+          },
           titre: "Simulez vos aides pour l'achat d'un vélo",
           url: 'vos-aides-velo',
         },
         {
           id: 'id-2',
           isSimulateur: false,
+          thematiqueTag: {
+            label: 'Me déplacer',
+            style: {
+              backgroundColor: '#D2E9FF',
+              color: '#021952',
+              emoji: '🚗',
+            },
+          },
           titre: 'Simulez vos aides pour convertir votre voiture thermique en électrique',
           url: '/aides#aide_id-2',
         },
         {
           id: 'id-3',
           isSimulateur: true,
+          thematiqueTag: {
+            label: 'Me nourrir',
+            style: {
+              backgroundColor: '#E3FBAF',
+              color: '#175202',
+              emoji: '🥗',
+            },
+          },
           titre: 'Aide test',
           url: 'vos-aides-velo',
         },
         {
           id: 'id-4',
           isSimulateur: true,
+          thematiqueTag: {
+            label: 'Me nourrir',
+            style: {
+              backgroundColor: '#E3FBAF',
+              color: '#175202',
+              emoji: '🥗',
+            },
+          },
           titre: 'Aide test',
           url: 'vos-aides-velo',
         },
         {
           id: 'id-5',
           isSimulateur: true,
+          thematiqueTag: {
+            label: 'Me nourrir',
+            style: {
+              backgroundColor: '#E3FBAF',
+              color: '#175202',
+              emoji: '🥗',
+            },
+          },
           titre: 'Aide test',
           url: 'vos-aides-velo',
         },

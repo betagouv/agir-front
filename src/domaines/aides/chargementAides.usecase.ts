@@ -1,5 +1,6 @@
 import { ChargementAidesPresenter } from '@/domaines/aides/ports/chargementAides.presenter';
 import { ChargementAidesRepository } from '@/domaines/aides/ports/chargementAides.repository';
+import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 
 export interface Aides {
   utilisateurEstCouvert: boolean;
@@ -13,6 +14,7 @@ export interface Aide {
   url: string;
   isSimulateur: boolean;
   montantMaximum?: number;
+  thematique: ClefThematiqueAPI;
 }
 
 export default class ChargementAidesUsecase {
