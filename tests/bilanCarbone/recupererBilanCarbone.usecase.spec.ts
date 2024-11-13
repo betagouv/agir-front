@@ -17,7 +17,6 @@ import {
 
 describe('Fichier de tests concernant le chargement du bilan carbone', () => {
   const bilanCarboneCompletMock = new BilanCarboneRepositoryMock({
-    bilanCompletEstDispo: true,
     pourcentageCompletionTotal: 100,
     bilanComplet: {
       impactKgAnnuel: 9600,
@@ -85,7 +84,7 @@ describe('Fichier de tests concernant le chargement du bilan carbone', () => {
           pourcentage: '17',
         },
       ],
-      universBilan: [
+      thematiquesBilan: [
         {
           contentId: 'id1',
           label: 'Les transports',
@@ -127,16 +126,15 @@ describe('Fichier de tests concernant le chargement du bilan carbone', () => {
     bilanPartiel: {} as BilanPartielCarbone,
   });
   const bilanCarbonePartielMock = new BilanCarboneRepositoryMock({
-    bilanCompletEstDispo: false,
     pourcentageCompletionTotal: 90,
-    bilanComplet: {} as BilanCompletCarbone,
+    bilanComplet: undefined,
     bilanPartiel: {
       pourcentageCompletionTotal: 90,
       transport: { niveau: 'moyen' },
       alimentation: { niveau: 'fort' },
       logement: { niveau: 'tres_fort' },
       consommation: { niveau: 'faible' },
-      universBilan: [
+      thematiquesBilan: [
         {
           contentId: 'id1',
           label: 'Les transports',

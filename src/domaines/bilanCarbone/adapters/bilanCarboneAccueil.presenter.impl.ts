@@ -30,7 +30,7 @@ export class BilanCarboneAccueilPresenterImpl extends BilanCarboneBasePresenter 
   presenteBilanPartiel(bilan: BilanPartielCarbone): void {
     this.bilanCarbonePartielViewModel({
       pourcentageCompletionTotal: bilan.pourcentageCompletionTotal,
-      thematiquesBilan: bilan.universBilan.map(univers => ({
+      thematiquesBilan: bilan.thematiquesBilan.map(univers => ({
         clefUnivers: univers.clefUnivers,
         contentId: univers.contentId,
         label: univers.label,

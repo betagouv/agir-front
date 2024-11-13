@@ -79,15 +79,7 @@ export class BilanCarbonePresenterImpl extends BilanCarboneBasePresenter impleme
         label: top3.label,
         pourcentage: top3.pourcentage,
       })),
-      thematiquesBilan: bilanCarbone.universBilan.map(univers => ({
-        clefUnivers: univers.clefUnivers,
-        contentId: univers.contentId,
-        label: univers.label,
-        urlImage: univers.urlImage,
-        estTermine: univers.estTermine,
-        pourcentageProgression: univers.pourcentageProgression,
-        nombreTotalDeQuestion: univers.nombreTotalDeQuestion,
-      })),
+      thematiquesBilan: bilanCarbone.thematiquesBilan,
     });
   }
 
@@ -129,15 +121,7 @@ export class BilanCarbonePresenterImpl extends BilanCarboneBasePresenter impleme
           progressBarStyle: this.determineProgressBar(bilan.consommation.niveau),
         },
       ],
-      thematiquesBilan: bilan.universBilan.map(univers => ({
-        clefUnivers: univers.clefUnivers,
-        contentId: univers.contentId,
-        label: univers.label,
-        urlImage: univers.urlImage,
-        estTermine: univers.estTermine,
-        pourcentageProgression: univers.pourcentageProgression,
-        nombreTotalDeQuestion: univers.nombreTotalDeQuestion,
-      })),
+      thematiquesBilan: bilan.thematiquesBilan,
     });
   }
 

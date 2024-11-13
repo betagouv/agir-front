@@ -1,10 +1,20 @@
 import { AxiosFactory, intercept401 } from '@/axios.factory';
+import { ThematiquesBilan } from '@/domaines/bilanCarbone/ports/bilanCarbone.presenter';
 import { BilanCarboneRepository } from '@/domaines/bilanCarbone/ports/bilanCarbone.repository';
 import { BilanCarbone } from '@/domaines/bilanCarbone/recupererBilanCarbone.usecase';
 
-interface BilanCarboneApiModel2 {
+interface LienBilanThematiqueAPI_v3 {
+  thematique: string;
+  image_url: string;
+  pourcentage_progression: number;
+  nombre_total_question: number;
+  id_enchainement_kyc: string;
+}
+
+interface BilanCarboneApiModel {
   pourcentage_completion_totale: number;
-  bilan_complet: {
+  liens_bilans_thematique: LienBilanThematiqueAPI_v3[];
+  bilan_complet?: {
     impact_thematique: [
       {
         thematique: string;
@@ -39,28 +49,17 @@ interface BilanCarboneApiModel2 {
     impact_logement: 'moyen' | 'faible' | 'fort' | 'tres_fort';
     impact_consommation: 'moyen' | 'faible' | 'fort' | 'tres_fort';
   };
-  liens_bilans_thematique: [
-    {
-      thematique: string;
-      image_url: string;
-      pourcentage_progression: number;
-      nombre_total_question: number;
-      temps_minutes: number;
-      id_enchainement_kyc: string;
-    },
-  ];
 }
 
 export class BilanCarboneRepositoryAxios implements BilanCarboneRepository {
   @intercept401()
   async recupererBilanCarbone(utilisateurId: string): Promise<BilanCarbone> {
     const axiosInstance = AxiosFactory.getAxios();
-    const reponse = await axiosInstance.get<BilanCarboneApiModel2>(`/utilisateurs/${utilisateurId}/bilans/last_v3`);
+    const reponse = await axiosInstance.get<BilanCarboneApiModel>(`/utilisateurs/${utilisateurId}/bilans/last_v3`);
 
     return {
-      bilanCompletEstDispo: reponse.data.pourcentage_completion_totale === 100,
       pourcentageCompletionTotal: reponse.data.pourcentage_completion_totale,
-      bilanComplet: {
+      bilanComplet: reponse.data.bilan_complet && {
         impactKgAnnuel: reponse.data.bilan_complet.impact_kg_annee,
         univers: reponse.data.bilan_complet.impact_thematique.map(detail => ({
           universId: detail.thematique,
@@ -80,15 +79,7 @@ export class BilanCarboneRepositoryAxios implements BilanCarboneRepository {
           label: top3.label,
           pourcentage: top3.pourcentage.toString(),
         })),
-        universBilan: reponse.data.liens_bilans_thematique.map(lien => ({
-          contentId: lien.id_enchainement_kyc,
-          estTermine: lien.pourcentage_progression === 100,
-          label: lien.thematique,
-          nombreTotalDeQuestion: lien.nombre_total_question,
-          pourcentageProgression: lien.pourcentage_progression,
-          urlImage: lien.image_url,
-          clefUnivers: lien.thematique,
-        })),
+        thematiquesBilan: reponse.data.liens_bilans_thematique.map(lien => this.determineThematiqueBilan(lien)),
       },
       bilanPartiel: reponse.data.bilan_approximatif && {
         pourcentageCompletionTotal: reponse.data.pourcentage_completion_totale,
@@ -96,16 +87,20 @@ export class BilanCarboneRepositoryAxios implements BilanCarboneRepository {
         consommation: { niveau: reponse.data.bilan_approximatif.impact_consommation },
         logement: { niveau: reponse.data.bilan_approximatif.impact_logement },
         transport: { niveau: reponse.data.bilan_approximatif.impact_transport },
-        universBilan: reponse.data.liens_bilans_thematique.map(lien => ({
-          contentId: lien.id_enchainement_kyc,
-          estTermine: lien.pourcentage_progression === 100,
-          label: lien.thematique,
-          nombreTotalDeQuestion: lien.nombre_total_question,
-          pourcentageProgression: lien.pourcentage_progression,
-          urlImage: lien.image_url,
-          clefUnivers: lien.thematique,
-        })),
+        thematiquesBilan: reponse.data.liens_bilans_thematique.map(lien => this.determineThematiqueBilan(lien)),
       },
+    };
+  }
+
+  private determineThematiqueBilan(liensBilansThematique: LienBilanThematiqueAPI_v3): ThematiquesBilan {
+    return {
+      contentId: liensBilansThematique.id_enchainement_kyc,
+      estTermine: liensBilansThematique.pourcentage_progression === 100,
+      label: liensBilansThematique.thematique,
+      nombreTotalDeQuestion: liensBilansThematique.nombre_total_question,
+      pourcentageProgression: liensBilansThematique.pourcentage_progression,
+      urlImage: liensBilansThematique.image_url,
+      clefUnivers: liensBilansThematique.thematique,
     };
   }
 }
