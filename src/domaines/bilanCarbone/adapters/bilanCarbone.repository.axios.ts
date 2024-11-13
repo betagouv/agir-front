@@ -2,65 +2,69 @@ import { AxiosFactory, intercept401 } from '@/axios.factory';
 import { BilanCarboneRepository } from '@/domaines/bilanCarbone/ports/bilanCarbone.repository';
 import { BilanCarbone } from '@/domaines/bilanCarbone/recupererBilanCarbone.usecase';
 
-interface BilanCarboneDetailUniversApiModel {
-  label: string;
-  pourcentage_categorie: number;
-  impact_kg_annee: number;
-  emoji: string;
-}
-
-interface BilanCarboneDetailApiModel {
-  univers: string;
-  univers_label: string;
-  pourcentage: number;
-  impact_kg_annee: number;
-  emoji: string;
-  details: BilanCarboneDetailUniversApiModel[];
-}
-
-interface BilanCarboneApiModel {
+interface BilanCarboneApiModel2 {
+  pourcentage_completion_totale: number;
   bilan_complet: {
-    impact_univers: BilanCarboneDetailApiModel[];
+    impact_thematique: [
+      {
+        thematique: string;
+        pourcentage: number;
+        impact_kg_annee: number;
+        emoji: string;
+        details: [
+          {
+            label: string;
+            emoji: string;
+            pourcentage: number;
+            pourcentage_categorie: number;
+            impact_kg_annee: number;
+          },
+        ];
+      },
+    ];
     impact_kg_annee: number;
-    top_3: {
-      label: string;
-      emoji: string;
-      pourcentage: number;
-    }[];
+    top_3: [
+      {
+        label: string;
+        emoji: string;
+        pourcentage: number;
+        pourcentage_categorie: number;
+        impact_kg_annee: number;
+      },
+    ];
   };
-  bilan_synthese: {
+  bilan_approximatif?: {
     impact_transport: 'moyen' | 'faible' | 'fort' | 'tres_fort';
     impact_alimentation: 'moyen' | 'faible' | 'fort' | 'tres_fort';
     impact_logement: 'moyen' | 'faible' | 'fort' | 'tres_fort';
     impact_consommation: 'moyen' | 'faible' | 'fort' | 'tres_fort';
-    pourcentage_completion_totale: number;
-    liens_bilans_univers: {
-      id_enchainement_kyc: string;
-      image_url: string;
-      nombre_total_question: number;
-      pourcentage_progression: number;
-      univers_label: string;
-      univers: string;
-    }[];
-    mini_bilan_dispo: boolean;
-    bilan_complet_dispo: boolean;
   };
+  liens_bilans_thematique: [
+    {
+      thematique: string;
+      image_url: string;
+      pourcentage_progression: number;
+      nombre_total_question: number;
+      temps_minutes: number;
+      id_enchainement_kyc: string;
+    },
+  ];
 }
 
 export class BilanCarboneRepositoryAxios implements BilanCarboneRepository {
   @intercept401()
   async recupererBilanCarbone(utilisateurId: string): Promise<BilanCarbone> {
     const axiosInstance = AxiosFactory.getAxios();
-    const reponse = await axiosInstance.get<BilanCarboneApiModel>(`/utilisateur/${utilisateurId}/bilans/last`);
+    const reponse = await axiosInstance.get<BilanCarboneApiModel2>(`/utilisateurs/${utilisateurId}/bilans/last_v3`);
 
     return {
-      bilanCompletEstDispo: reponse.data.bilan_synthese.bilan_complet_dispo,
-      pourcentageCompletionTotal: reponse.data.bilan_synthese.pourcentage_completion_totale,
+      bilanCompletEstDispo: reponse.data.pourcentage_completion_totale === 100,
+      pourcentageCompletionTotal: reponse.data.pourcentage_completion_totale,
       bilanComplet: {
         impactKgAnnuel: reponse.data.bilan_complet.impact_kg_annee,
-        univers: reponse.data.bilan_complet.impact_univers.map(detail => ({
-          universId: detail.univers,
-          universLabel: detail.univers_label,
+        univers: reponse.data.bilan_complet.impact_thematique.map(detail => ({
+          universId: detail.thematique,
+          universLabel: detail.thematique,
           pourcentage: detail.pourcentage,
           impactKgAnnuel: detail.impact_kg_annee,
           emoji: detail.emoji,
@@ -76,30 +80,30 @@ export class BilanCarboneRepositoryAxios implements BilanCarboneRepository {
           label: top3.label,
           pourcentage: top3.pourcentage.toString(),
         })),
-        universBilan: reponse.data.bilan_synthese.liens_bilans_univers.map(lien => ({
+        universBilan: reponse.data.liens_bilans_thematique.map(lien => ({
           contentId: lien.id_enchainement_kyc,
           estTermine: lien.pourcentage_progression === 100,
-          label: lien.univers_label,
+          label: lien.thematique,
           nombreTotalDeQuestion: lien.nombre_total_question,
           pourcentageProgression: lien.pourcentage_progression,
           urlImage: lien.image_url,
-          clefUnivers: lien.univers,
+          clefUnivers: lien.thematique,
         })),
       },
-      bilanPartiel: {
-        pourcentageCompletionTotal: reponse.data.bilan_synthese.pourcentage_completion_totale,
-        alimentation: { niveau: reponse.data.bilan_synthese.impact_alimentation },
-        consommation: { niveau: reponse.data.bilan_synthese.impact_consommation },
-        logement: { niveau: reponse.data.bilan_synthese.impact_logement },
-        transport: { niveau: reponse.data.bilan_synthese.impact_transport },
-        universBilan: reponse.data.bilan_synthese.liens_bilans_univers.map(lien => ({
+      bilanPartiel: reponse.data.bilan_approximatif && {
+        pourcentageCompletionTotal: reponse.data.pourcentage_completion_totale,
+        alimentation: { niveau: reponse.data.bilan_approximatif.impact_alimentation },
+        consommation: { niveau: reponse.data.bilan_approximatif.impact_consommation },
+        logement: { niveau: reponse.data.bilan_approximatif.impact_logement },
+        transport: { niveau: reponse.data.bilan_approximatif.impact_transport },
+        universBilan: reponse.data.liens_bilans_thematique.map(lien => ({
           contentId: lien.id_enchainement_kyc,
           estTermine: lien.pourcentage_progression === 100,
-          label: lien.univers_label,
+          label: lien.thematique,
           nombreTotalDeQuestion: lien.nombre_total_question,
           pourcentageProgression: lien.pourcentage_progression,
           urlImage: lien.image_url,
-          clefUnivers: lien.univers,
+          clefUnivers: lien.thematique,
         })),
       },
     };

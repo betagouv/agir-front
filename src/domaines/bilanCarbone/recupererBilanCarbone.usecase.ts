@@ -36,10 +36,10 @@ export interface BilanPartielCarbone {
   universBilan: ThematiquesBilan[];
 }
 export interface BilanCarbone {
-  bilanCompletEstDispo: boolean;
+  // bilanCompletEstDispo: boolean;
   pourcentageCompletionTotal: number;
-  bilanComplet: BilanCompletCarbone;
-  bilanPartiel: BilanPartielCarbone;
+  bilanComplet?: BilanCompletCarbone;
+  bilanPartiel?: BilanPartielCarbone;
 }
 
 export class RecupererBilanCarboneUsecase {
@@ -48,9 +48,9 @@ export class RecupererBilanCarboneUsecase {
   async execute(utilisateurId: string, presenter: BilanCarbonePresenter): Promise<void> {
     const bilanCarbone = await this.bilanCarboneRepository.recupererBilanCarbone(utilisateurId);
 
-    if (bilanCarbone.bilanCompletEstDispo) {
+    if (bilanCarbone.bilanComplet) {
       presenter.presenteBilanComplet(bilanCarbone.bilanComplet);
-    } else {
+    } else if (bilanCarbone.bilanPartiel) {
       presenter.presenteBilanPartiel(bilanCarbone.bilanPartiel);
     }
   }
