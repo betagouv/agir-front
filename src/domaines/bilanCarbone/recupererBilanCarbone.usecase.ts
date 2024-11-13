@@ -17,6 +17,8 @@ interface BilanCarboneDetailParUnivers {
   emoji: string;
 }
 
+export type NiveauImpactBilanCarbone = 'faible' | 'moyen' | 'fort' | 'tres_fort';
+
 export interface BilanCompletCarbone {
   impactKgAnnuel: number;
   univers: BilanCarboneDetailParUnivers[];
@@ -25,20 +27,21 @@ export interface BilanCompletCarbone {
     emoji: string;
     pourcentage: string;
   }[];
-  thematiquesBilan: ThematiquesBilan[];
 }
+
 export interface BilanPartielCarbone {
   pourcentageCompletionTotal: number;
-  transport: { niveau: 'moyen' | 'faible' | 'fort' | 'tres_fort' };
-  alimentation: { niveau: 'moyen' | 'faible' | 'fort' | 'tres_fort' };
-  logement: { niveau: 'moyen' | 'faible' | 'fort' | 'tres_fort' };
-  consommation: { niveau: 'moyen' | 'faible' | 'fort' | 'tres_fort' };
-  thematiquesBilan: ThematiquesBilan[];
+  transport: { niveau: NiveauImpactBilanCarbone };
+  alimentation: { niveau: NiveauImpactBilanCarbone };
+  logement: { niveau: NiveauImpactBilanCarbone };
+  consommation: { niveau: NiveauImpactBilanCarbone };
 }
+
 export interface BilanCarbone {
   pourcentageCompletionTotal: number;
   bilanComplet?: BilanCompletCarbone;
   bilanPartiel?: BilanPartielCarbone;
+  thematiquesBilan: ThematiquesBilan[];
 }
 
 export class RecupererBilanCarboneUsecase {
@@ -48,9 +51,9 @@ export class RecupererBilanCarboneUsecase {
     const bilanCarbone = await this.bilanCarboneRepository.recupererBilanCarbone(utilisateurId);
 
     if (bilanCarbone.bilanComplet) {
-      presenter.presenteBilanComplet(bilanCarbone.bilanComplet);
+      presenter.presenteBilanComplet(bilanCarbone);
     } else if (bilanCarbone.bilanPartiel) {
-      presenter.presenteBilanPartiel(bilanCarbone.bilanPartiel);
+      presenter.presenteBilanPartiel(bilanCarbone);
     }
   }
 }

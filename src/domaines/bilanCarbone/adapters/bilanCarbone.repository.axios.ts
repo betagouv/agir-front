@@ -79,7 +79,6 @@ export class BilanCarboneRepositoryAxios implements BilanCarboneRepository {
           label: top3.label,
           pourcentage: top3.pourcentage.toString(),
         })),
-        thematiquesBilan: reponse.data.liens_bilans_thematique.map(lien => this.determineThematiqueBilan(lien)),
       },
       bilanPartiel: reponse.data.bilan_approximatif && {
         pourcentageCompletionTotal: reponse.data.pourcentage_completion_totale,
@@ -87,8 +86,8 @@ export class BilanCarboneRepositoryAxios implements BilanCarboneRepository {
         consommation: { niveau: reponse.data.bilan_approximatif.impact_consommation },
         logement: { niveau: reponse.data.bilan_approximatif.impact_logement },
         transport: { niveau: reponse.data.bilan_approximatif.impact_transport },
-        thematiquesBilan: reponse.data.liens_bilans_thematique.map(lien => this.determineThematiqueBilan(lien)),
       },
+      thematiquesBilan: reponse.data.liens_bilans_thematique.map(lien => this.determineThematiqueBilan(lien)),
     };
   }
 
