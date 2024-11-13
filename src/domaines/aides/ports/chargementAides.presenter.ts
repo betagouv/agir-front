@@ -1,17 +1,19 @@
 import { Aides } from '@/domaines/aides/chargementAides.usecase';
+import { TagStyle } from '@/domaines/thematiques/TagThematique';
 
 export interface AideViewModel {
   id: string;
   titre: string;
-  categorie: string;
   contenu: string;
   isSimulateur: boolean;
   url: string;
   montantMaximum?: string;
+  thematiqueLabel: string;
+  thematiqueTag: { label: string; style: TagStyle };
 }
 
 export interface AidesViewModel {
-  [key: AideViewModel['categorie']]: AideViewModel[];
+  [key: AideViewModel['thematiqueLabel']]: AideViewModel[];
 }
 
 export interface AidesAvecCouvertureViewModel {

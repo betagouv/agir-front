@@ -1,5 +1,7 @@
 import { Aides } from '@/domaines/aides/chargementAides.usecase';
 import { ChargementAidesPresenter } from '@/domaines/aides/ports/chargementAides.presenter';
+import { MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
+import { TagStyle, TagThematique } from '@/domaines/thematiques/TagThematique';
 import { RouteAidesPath } from '@/router/aides/routes';
 
 export interface AideNonGroupeeViewModel {
@@ -7,6 +9,7 @@ export interface AideNonGroupeeViewModel {
   titre: string;
   isSimulateur: boolean;
   url: string;
+  thematiqueTag: { label: string; style: TagStyle };
 }
 export class ChargementAidesNonGroupeesPresenterImpl implements ChargementAidesPresenter {
   constructor(private _viewModel: (aides: AideNonGroupeeViewModel[]) => void) {}
@@ -18,6 +21,10 @@ export class ChargementAidesNonGroupeesPresenterImpl implements ChargementAidesP
         titre: aide.titre,
         isSimulateur: aide.isSimulateur,
         url: aide.isSimulateur ? aide.url : `${RouteAidesPath.AIDES}#aide_${aide.id}`,
+        thematiqueTag: {
+          label: MenuThematiques.getThematiqueData(aide.thematique).labelDansLeMenu,
+          style: TagThematique.getTagThematiqueUtilitaire(aide.thematique),
+        },
       })),
     );
   }

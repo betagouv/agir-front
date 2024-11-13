@@ -3,11 +3,12 @@
     class="position--relative aide-link-card aide fr-p-3w fr-mb-3w full-height background--white shadow border-radius--md full-width"
   >
     <div>
-      <h3 class="fr-text--lg text--semi-bold fr-m-0">
+      <h3 class="fr-text--lg text--semi-bold fr-m-0 fr-mb-2w">
         <router-link :to="aide.url" class="aide-link-card__link display-block fr-mb-0">
           {{ aide.titre }}
         </router-link>
       </h3>
+      <ThematiqueTag :tag="aide.thematiqueTag" />
     </div>
     <div class="fr-ml-auto">
       <span
@@ -21,6 +22,7 @@
   </div>
 </template>
 <script setup lang="ts">
+  import ThematiqueTag from '@/components/custom/Thematiques/ThematiqueTag.vue';
   import { AideNonGroupeeViewModel } from '@/domaines/aides/adapters/chargementCinqAidesNonGroupees.presenter.impl';
 
   defineProps<{
