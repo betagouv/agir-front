@@ -117,7 +117,7 @@ class ChargementAidesRepositoryForTest implements ChargementAidesRepository {
 }
 
 describe('Fichier de tests pour charger toutes les aides', () => {
-  it('Renvoie toutes les aides groupés par catégorie', async () => {
+  it('Renvoie toutes les aides groupés par thématiques', async () => {
     // GIVEN
     const useCase = new ChargementAidesUsecase(new ChargementAidesRepositoryForTest());
 
@@ -127,67 +127,115 @@ describe('Fichier de tests pour charger toutes les aides', () => {
     // THEN
     function expectation(aidesViewModel: AidesAvecCouvertureViewModel) {
       expect(aidesViewModel).toStrictEqual({
-        utilisateurEstCouvert: true,
         aides: {
-          '🚗 Transport du quotidien': [
+          '🚗 Me déplacer': [
             {
-              categorie: '🚗 Transport du quotidien',
               contenu: '<h3>Titre test</h3><p>lorem ipsum dolor test</p><ul><li>Item 1</li><li>Item 2</li></ul>',
               id: 'id-1',
               isSimulateur: true,
+              montantMaximum: "Jusqu'à 15 000 €",
+              thematiqueLabel: '🚗 Me déplacer',
+              thematiqueTag: {
+                label: 'Me déplacer',
+                style: {
+                  backgroundColor: '#D2E9FF',
+                  color: '#021952',
+                  emoji: '🚗',
+                },
+              },
               titre: "Simulez vos aides pour l'achat d'un vélo",
               url: 'vos-aides-velo',
-              montantMaximum: "Jusqu'à 15 000 €",
             },
             {
-              categorie: '🚗 Transport du quotidien',
               contenu: '<h3>Titre test</h3><p>lorem ipsum dolor test</p>',
               id: 'id-2',
               isSimulateur: false,
+              montantMaximum: undefined,
+              thematiqueLabel: '🚗 Me déplacer',
+              thematiqueTag: {
+                label: 'Me déplacer',
+                style: {
+                  backgroundColor: '#D2E9FF',
+                  color: '#021952',
+                  emoji: '🚗',
+                },
+              },
               titre: 'Simulez vos aides pour convertir votre voiture thermique en électrique',
               url: 'vos-aides-retrofit',
-              montantMaximum: undefined,
             },
           ],
-          '🥦 Alimentation': [
+          '🥗 Me nourrir': [
             {
-              categorie: '🥦 Alimentation',
               contenu: '<h3>Titre test</h3><p>lorem ipsum dolor test</p>',
               id: 'id-3',
               isSimulateur: true,
+              montantMaximum: undefined,
+              thematiqueLabel: '🥗 Me nourrir',
+              thematiqueTag: {
+                label: 'Me nourrir',
+                style: {
+                  backgroundColor: '#E3FBAF',
+                  color: '#175202',
+                  emoji: '🥗',
+                },
+              },
               titre: 'Aide test',
               url: 'vos-aides-velo',
-              montantMaximum: undefined,
             },
             {
-              categorie: '🥦 Alimentation',
               contenu: '<h3>Titre test</h3><p>lorem ipsum dolor test</p>',
               id: 'id-4',
               isSimulateur: true,
+              montantMaximum: undefined,
+              thematiqueLabel: '🥗 Me nourrir',
+              thematiqueTag: {
+                label: 'Me nourrir',
+                style: {
+                  backgroundColor: '#E3FBAF',
+                  color: '#175202',
+                  emoji: '🥗',
+                },
+              },
               titre: 'Aide test',
               url: 'vos-aides-velo',
-              montantMaximum: undefined,
             },
             {
-              categorie: '🥦 Alimentation',
               contenu: '<h3>Titre test</h3><p>lorem ipsum dolor test</p>',
               id: 'id-5',
               isSimulateur: true,
+              montantMaximum: undefined,
+              thematiqueLabel: '🥗 Me nourrir',
+              thematiqueTag: {
+                label: 'Me nourrir',
+                style: {
+                  backgroundColor: '#E3FBAF',
+                  color: '#175202',
+                  emoji: '🥗',
+                },
+              },
               titre: 'Aide test',
               url: 'vos-aides-velo',
-              montantMaximum: undefined,
             },
             {
-              categorie: '🥦 Alimentation',
               contenu: '<h3>Titre test</h3><p>lorem ipsum dolor test</p>',
               id: 'id-6',
               isSimulateur: true,
+              montantMaximum: undefined,
+              thematiqueLabel: '🥗 Me nourrir',
+              thematiqueTag: {
+                label: 'Me nourrir',
+                style: {
+                  backgroundColor: '#E3FBAF',
+                  color: '#175202',
+                  emoji: '🥗',
+                },
+              },
               titre: 'Aide test',
               url: 'vos-aides-velo',
-              montantMaximum: undefined,
             },
           ],
         },
+        utilisateurEstCouvert: true,
       });
     }
   });

@@ -5,6 +5,8 @@ import {
   AidesViewModel,
   AidesAvecCouvertureViewModel,
 } from '@/domaines/aides/ports/chargementAides.presenter';
+import { MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
+import { TagThematique } from '@/domaines/thematiques/TagThematique';
 
 export class ChargementAidesPresenterImpl implements ChargementAidesPresenter {
   constructor(private _viewModel: (vm: AidesAvecCouvertureViewModel) => void) {}
@@ -13,21 +15,27 @@ export class ChargementAidesPresenterImpl implements ChargementAidesPresenter {
     const map: AidesViewModel = {};
 
     aides.forEach(aide => {
-      if (!map[aide.categorie]) {
-        map[aide.categorie] = [];
+      const thematiqueLabel = `${TagThematique.getTagThematiqueUtilitaire(aide.thematique).emoji} ${MenuThematiques.getThematiqueData(aide.thematique).labelDansLeMenu}`;
+
+      if (!map[thematiqueLabel]) {
+        map[thematiqueLabel] = [];
       }
 
       const aideToPush: AideViewModel = {
         id: aide.id,
         titre: aide.titre,
-        categorie: aide.categorie,
+        thematiqueLabel: thematiqueLabel,
         contenu: aide.contenu,
         isSimulateur: aide.isSimulateur,
         url: aide.url,
         montantMaximum: aide.montantMaximum ? this.formatMontantMaximum(aide.montantMaximum) : undefined,
+        thematiqueTag: {
+          label: MenuThematiques.getThematiqueData(aide.thematique).labelDansLeMenu,
+          style: TagThematique.getTagThematiqueUtilitaire(aide.thematique),
+        },
       };
 
-      map[aide.categorie].push(aideToPush);
+      map[thematiqueLabel].push(aideToPush);
     });
 
     return map;

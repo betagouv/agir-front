@@ -13,8 +13,8 @@
             <Accordeon :label="aide.titre" :name-id="aide.id" @click="trackAideClick(aide)">
               <template v-slot:titre>
                 <span class="fr-col-12 fr-pr-2w">
-                  <span class="aide__categorie text--gris">{{ aide.categorie }}</span>
-                  <span class="aide__titre">
+                  <ThematiqueTag :tag="aide.thematiqueTag" />
+                  <span class="aide__titre fr-mt-2w">
                     <span class="fr-h4 text--gris">
                       {{ aide.titre }}
                     </span>
@@ -52,6 +52,7 @@
   import { onMounted, ref } from 'vue';
   import { useRoute } from 'vue-router';
   import Accordeon from '@/components/custom/Aides/AccordeonAides.vue';
+  import ThematiqueTag from '@/components/custom/Thematiques/ThematiqueTag.vue';
   import InputCheckbox from '@/components/dsfr/InputCheckbox.vue';
   import { AidesViewModel } from '@/domaines/aides/ports/chargementAides.presenter';
   import { trackClick } from '@/shell/matomo';
