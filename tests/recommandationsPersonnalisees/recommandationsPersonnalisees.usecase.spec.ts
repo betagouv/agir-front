@@ -18,44 +18,6 @@ describe('Fichier de tests concernant le chargement des recommandations personna
     // THEN
     function expectation(recommandationsPersonnaliseesViewModel: RecommandationPersonnaliseeViewModel) {
       expect(recommandationsPersonnaliseesViewModel).toStrictEqual<RecommandationPersonnaliseeViewModel>({
-        defis: [
-          {
-            bouton: {
-              libelle: 'Faire le suivi',
-              style: 'fr-btn--icon-left fr-icon-check-line',
-              url: '/defi/1',
-            },
-            idDuContenu: '1',
-            image: '/reco_defi.webp',
-            joursRestants: 'Plus que 7 jours',
-            nombreDePointsAGagner: 'nombreDePointsAGagner',
-            thematique: '🌍 Global',
-            titre: 'Un défi',
-            points: 10,
-            type: {
-              libelle: 'Action',
-              style: 'background--bleu-ecume-hover',
-            },
-          },
-          {
-            bouton: {
-              libelle: 'Relever le défi',
-              style: 'fr-btn--icon-left fr-icon-check-line',
-              url: '/defi/1',
-            },
-            idDuContenu: '1',
-            image: '/reco_defi.webp',
-            joursRestants: null,
-            nombreDePointsAGagner: 'nombreDePointsAGagner',
-            thematique: '🌍 Global',
-            titre: 'Un autre défi',
-            points: 10,
-            type: {
-              libelle: 'Action',
-              style: 'background--bleu-ecume-hover',
-            },
-          },
-        ],
         autresRecommandations: [
           {
             bouton: {
@@ -65,11 +27,17 @@ describe('Fichier de tests concernant le chargement des recommandations personna
             },
             idDuContenu: '2',
             image: 'illustrationURL',
-            joursRestants: null,
             nombreDePointsAGagner: 'nombreDePointsAGagner',
-            thematique: '🚲 Transports',
-            titre: 'Premier Quiz',
             points: 10,
+            thematiqueTag: {
+              label: 'Me déplacer',
+              style: {
+                backgroundColor: '#D2E9FF',
+                color: '#021952',
+                emoji: '🚗',
+              },
+            },
+            titre: 'Premier Quiz',
             type: {
               libelle: 'Quiz',
               style: 'background--vert-bourgeon',
@@ -83,11 +51,17 @@ describe('Fichier de tests concernant le chargement des recommandations personna
             },
             idDuContenu: '2',
             image: 'illustrationURL',
-            joursRestants: null,
             nombreDePointsAGagner: 'nombreDePointsAGagner',
-            thematique: '🌍 Global',
-            titre: 'Article qui doit être en avant',
             points: 10,
+            thematiqueTag: {
+              label: 'Me déplacer',
+              style: {
+                backgroundColor: '#D2E9FF',
+                color: '#021952',
+                emoji: '🚗',
+              },
+            },
+            titre: 'Article qui doit être en avant',
             type: {
               libelle: 'Article',
               style: 'background--caramel',
@@ -101,11 +75,17 @@ describe('Fichier de tests concernant le chargement des recommandations personna
             },
             idDuContenu: '1',
             image: 'illustrationURL',
-            joursRestants: null,
             nombreDePointsAGagner: 'nombreDePointsAGagner',
-            thematique: '🌍 Global',
-            titre: 'Aide vélo',
             points: 10,
+            thematiqueTag: {
+              label: 'Me déplacer',
+              style: {
+                backgroundColor: '#D2E9FF',
+                color: '#021952',
+                emoji: '🚗',
+              },
+            },
+            titre: 'Aide vélo',
             type: {
               libelle: 'Aide',
               style: 'background--yellow',
@@ -119,14 +99,70 @@ describe('Fichier de tests concernant le chargement des recommandations personna
             },
             idDuContenu: '1',
             image: '/ic_kyc.svg',
-            joursRestants: null,
             nombreDePointsAGagner: 'nombreDePointsAGagner',
-            thematique: '🌍 Global',
-            titre: 'Un KYC',
             points: 10,
+            thematiqueTag: {
+              label: 'Me déplacer',
+              style: {
+                backgroundColor: '#D2E9FF',
+                color: '#021952',
+                emoji: '🚗',
+              },
+            },
+            titre: 'Un KYC',
             type: {
               libelle: 'Mieux vous connaître',
               style: 'background--pink',
+            },
+          },
+        ],
+        defis: [
+          {
+            bouton: {
+              libelle: 'Faire le suivi',
+              style: 'fr-btn--icon-left fr-icon-check-line',
+              url: '/defi/1',
+            },
+            idDuContenu: '1',
+            image: '/reco_defi.webp',
+            nombreDePointsAGagner: 'nombreDePointsAGagner',
+            points: 10,
+            thematiqueTag: {
+              label: 'Me déplacer',
+              style: {
+                backgroundColor: '#D2E9FF',
+                color: '#021952',
+                emoji: '🚗',
+              },
+            },
+            titre: 'Un défi',
+            type: {
+              libelle: 'Action',
+              style: 'background--bleu-ecume-hover',
+            },
+          },
+          {
+            bouton: {
+              libelle: 'Relever le défi',
+              style: 'fr-btn--icon-left fr-icon-check-line',
+              url: '/defi/1',
+            },
+            idDuContenu: '1',
+            image: '/reco_defi.webp',
+            nombreDePointsAGagner: 'nombreDePointsAGagner',
+            points: 10,
+            thematiqueTag: {
+              label: 'Me déplacer',
+              style: {
+                backgroundColor: '#D2E9FF',
+                color: '#021952',
+                emoji: '🚗',
+              },
+            },
+            titre: 'Un autre défi',
+            type: {
+              libelle: 'Action',
+              style: 'background--bleu-ecume-hover',
             },
           },
         ],

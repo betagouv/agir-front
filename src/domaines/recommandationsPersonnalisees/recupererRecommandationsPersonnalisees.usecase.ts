@@ -1,11 +1,12 @@
 import { RecommandationsPersonnaliseesPresenter } from '@/domaines/recommandationsPersonnalisees/ports/recommandationsPersonnalisees.presenter';
 import { RecommandationsPersonnaliseesRepository } from '@/domaines/recommandationsPersonnalisees/ports/recommandationsPersonnalisees.repository';
+import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 import { InteractionType } from '@/shell/interactionType';
 
 export interface RecommandationPersonnalisee {
   type: InteractionType;
   titre: string;
-  thematique: string;
+  clefThematiqueAPI: ClefThematiqueAPI;
   nombreDePointsAGagner: string;
   illustrationURL: string;
   idDuContenu: string;

@@ -16,9 +16,7 @@
     </div>
     <div class="fr-py-2w full-width">
       <div class="fr-grid-row flex-space-between">
-        <span class="fr-text--sm text--black fr-m-0 fr-p-0">
-          {{ recommandation.thematique }}
-        </span>
+        <ThematiqueTag :tag="recommandation.thematiqueTag" />
       </div>
       <p class="fr-text--lg text--semi-bold text--black fr-mt-1w fr-mb-0">
         <router-link
@@ -34,6 +32,7 @@
 </template>
 
 <script setup lang="ts">
+  import ThematiqueTag from '@/components/custom/Thematiques/ThematiqueTag.vue';
   import { RecommandationViewModel } from '@/domaines/recommandationsPersonnalisees/adapters/recommandationsPersonnalisees.presenter.impl';
 
   defineProps<{ recommandation: RecommandationViewModel }>();

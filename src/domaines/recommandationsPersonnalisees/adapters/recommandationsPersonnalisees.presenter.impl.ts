@@ -1,5 +1,7 @@
 import { RecommandationsPersonnaliseesPresenter } from '@/domaines/recommandationsPersonnalisees/ports/recommandationsPersonnalisees.presenter';
 import { RecommandationPersonnalisee } from '@/domaines/recommandationsPersonnalisees/recupererRecommandationsPersonnalisees.usecase';
+import { MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
+import { TagStyle, TagThematique } from '@/domaines/thematiques/TagThematique';
 import { RouteAidesPath } from '@/router/aides/routes';
 import { RouteArticlePath } from '@/router/articles/routes';
 import { RouteDefiPath } from '@/router/defis/routes';
@@ -26,8 +28,7 @@ export interface RecommandationViewModel {
   idDuContenu: string;
   nombreDePointsAGagner: string;
   type: TagViewModel;
-  thematique: string;
-  joursRestants: string | null; // TO DELETE ?
+  thematiqueTag: { label: string; style: TagStyle };
   points: number;
 }
 export interface RecommandationPersonnaliseeViewModel {
@@ -42,7 +43,10 @@ export class RecommandationsPersonnaliseesPresenterImpl implements Recommandatio
   presente(recommandationsPersonnalisees: RecommandationPersonnalisee[]): void {
     const mapRecommandation = (recommandationPersonnalisee: RecommandationPersonnalisee) => {
       return {
-        thematique: recommandationPersonnalisee.thematique,
+        thematiqueTag: {
+          label: MenuThematiques.getThematiqueData(recommandationPersonnalisee.clefThematiqueAPI).labelDansLeMenu,
+          style: TagThematique.getTagThematiqueUtilitaire(recommandationPersonnalisee.clefThematiqueAPI),
+        },
         titre: recommandationPersonnalisee.titre,
         image: this.determineImage(recommandationPersonnalisee),
         bouton: this.determineBouton(recommandationPersonnalisee),
@@ -50,9 +54,6 @@ export class RecommandationsPersonnaliseesPresenterImpl implements Recommandatio
         nombreDePointsAGagner: recommandationPersonnalisee.nombreDePointsAGagner,
         type: this.determineTypeTag(recommandationPersonnalisee.type),
         points: recommandationPersonnalisee.points,
-        joursRestants: recommandationPersonnalisee.joursRestants
-          ? `Plus que ${recommandationPersonnalisee.joursRestants} jours`
-          : null,
       };
     };
 

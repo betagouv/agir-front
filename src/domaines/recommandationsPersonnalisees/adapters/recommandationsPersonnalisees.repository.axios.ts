@@ -1,12 +1,12 @@
 import { AxiosFactory, intercept401 } from '@/axios.factory';
 import { RecommandationsPersonnaliseesRepository } from '@/domaines/recommandationsPersonnalisees/ports/recommandationsPersonnalisees.repository';
 import { RecommandationPersonnalisee } from '@/domaines/recommandationsPersonnalisees/recupererRecommandationsPersonnalisees.usecase';
+import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 import { InteractionType } from '@/shell/interactionType';
 
 export interface RecommandationApiModel {
   type: string;
   titre: string;
-  thematique_gamification: string;
   jours_restants: number | null;
   image_url: string;
   points: number;
@@ -29,7 +29,7 @@ export class RecommandationsPersonnaliseesRepositoryAxios implements Recommandat
       const recommandationPersonnalisee: RecommandationPersonnalisee = {
         type: apiModel.type as InteractionType,
         titre: apiModel.titre,
-        thematique: apiModel.thematique_gamification,
+        clefThematiqueAPI: apiModel.thematique_principale as ClefThematiqueAPI,
         nombreDePointsAGagner: apiModel.points.toString(),
         illustrationURL: apiModel.image_url,
         idDuContenu: apiModel.content_id,
@@ -59,7 +59,7 @@ export class RecommandationsPersonnaliseesRepositoryAxios implements Recommandat
       const recommandationPersonnalisee: RecommandationPersonnalisee = {
         type: apiModel.type as InteractionType,
         titre: apiModel.titre,
-        thematique: apiModel.thematique_gamification,
+        clefThematiqueAPI: apiModel.thematique_principale as ClefThematiqueAPI,
         nombreDePointsAGagner: apiModel.points.toString(),
         illustrationURL: apiModel.image_url,
         idDuContenu: apiModel.content_id,
