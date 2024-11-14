@@ -34,7 +34,7 @@ test.beforeAll(async () => {
     });
   });
 
-  await page.route(`${process.env.VITE_API_URL}/utilisateur/dorian/bilans/last`, route => {
+  await page.route(`${process.env.VITE_API_URL}/utilisateurs/dorian/bilans/last_v3`, route => {
     route.fulfill({
       status: 200,
       contentType: 'application/json',
