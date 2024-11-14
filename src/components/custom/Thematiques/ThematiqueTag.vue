@@ -1,6 +1,6 @@
 <template>
   <span class="tag border-radius--xl text--xs text--semi-bold fr-py-1v fr-px-3v">
-    <span class="fr-mr-1v">{{ tag.style.emoji }}</span>
+    <span class="fr-mr-1v" aria-hidden="true">{{ tag.style.emoji }}</span>
     {{ tag.label }}
   </span>
 </template>

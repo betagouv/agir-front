@@ -1,6 +1,7 @@
 import { RecommandationsPersonnaliseesRepository } from '@/domaines/recommandationsPersonnalisees/ports/recommandationsPersonnalisees.repository';
 import { RecommandationPersonnalisee } from '@/domaines/recommandationsPersonnalisees/recupererRecommandationsPersonnalisees.usecase';
 import { InteractionType } from '@/shell/interactionType';
+import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 
 export class MockRecommandationsPersonnaliseesRepository implements RecommandationsPersonnaliseesRepository {
   chargerRecommandationsPersonnaliseesThematique(
@@ -20,7 +21,7 @@ export class MockRecommandationsPersonnaliseesRepository implements Recommandati
         type: InteractionType.QUIZ,
         titre: 'Premier Quiz',
         sousTitre: 'sousTitre',
-        thematique: '🚲 Transports',
+        clefThematiqueAPI: ClefThematiqueAPI.transports,
         nombreDePointsAGagner: 'nombreDePointsAGagner',
         illustrationURL: 'illustrationURL',
         idDuContenu: '2',
@@ -31,7 +32,7 @@ export class MockRecommandationsPersonnaliseesRepository implements Recommandati
         type: InteractionType.ARTICLE,
         titre: 'Article qui doit être en avant',
         sousTitre: 'sousTitre',
-        thematique: '🌍 Global',
+        clefThematiqueAPI: ClefThematiqueAPI.transports,
         nombreDePointsAGagner: 'nombreDePointsAGagner',
         illustrationURL: 'illustrationURL',
         idDuContenu: '2',
@@ -42,7 +43,7 @@ export class MockRecommandationsPersonnaliseesRepository implements Recommandati
         type: InteractionType.AIDE,
         titre: 'Aide vélo',
         sousTitre: 'sousTitre',
-        thematique: '🌍 Global',
+        clefThematiqueAPI: ClefThematiqueAPI.transports,
         nombreDePointsAGagner: 'nombreDePointsAGagner',
         illustrationURL: 'illustrationURL',
         idDuContenu: '1',
@@ -53,7 +54,7 @@ export class MockRecommandationsPersonnaliseesRepository implements Recommandati
         type: InteractionType.DEFIS,
         titre: 'Un défi',
         sousTitre: 'sousTitre',
-        thematique: '🌍 Global',
+        clefThematiqueAPI: ClefThematiqueAPI.transports,
         nombreDePointsAGagner: 'nombreDePointsAGagner',
         illustrationURL: 'illustrationURL',
         idDuContenu: '1',
@@ -64,7 +65,7 @@ export class MockRecommandationsPersonnaliseesRepository implements Recommandati
         titre: 'Un KYC',
         type: InteractionType.KYC,
         sousTitre: 'sousTitre',
-        thematique: '🌍 Global',
+        clefThematiqueAPI: ClefThematiqueAPI.transports,
         nombreDePointsAGagner: 'nombreDePointsAGagner',
         illustrationURL: 'illustrationURL',
         idDuContenu: '1',
@@ -75,7 +76,7 @@ export class MockRecommandationsPersonnaliseesRepository implements Recommandati
         type: InteractionType.DEFIS,
         titre: 'Un autre défi',
         sousTitre: 'sousTitre',
-        thematique: '🌍 Global',
+        clefThematiqueAPI: ClefThematiqueAPI.transports,
         nombreDePointsAGagner: 'nombreDePointsAGagner',
         illustrationURL: 'illustrationURL',
         idDuContenu: '1',
