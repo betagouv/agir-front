@@ -8,6 +8,7 @@ import {
 import { expect } from 'vitest';
 import { InteractionType } from '@/shell/interactionType';
 import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
+import { TagStyle } from '@/domaines/thematiques/TagThematique';
 
 const mission: DetailMission = {
   titre: 'Thematique 1',
@@ -83,6 +84,14 @@ describe("Fichier de tests concernant la récupération d'une mission", () => {
       expect(mission).toStrictEqual<MissionViewModel>({
         estTerminee: false,
         estTerminable: false,
+        tag: {
+          label: 'Me nourrir',
+          style: {
+            backgroundColor: '#E3FBAF',
+            color: '#175202',
+            emoji: '🥗',
+          },
+        },
         articleEtQuiz: [
           {
             id: 'id1',
@@ -94,6 +103,7 @@ describe("Fichier de tests concernant la récupération d'une mission", () => {
             url: '/thematique/me-nourrir/mission/1/quiz/1',
             picto: '/ic_mission_article.svg',
             pointAEteRecolte: false,
+            type: 'quiz',
           },
         ],
         defis: [
