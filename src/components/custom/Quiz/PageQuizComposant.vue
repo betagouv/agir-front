@@ -56,6 +56,7 @@
   import { QuizRepositoryAxios } from '@/domaines/quiz/adapters/quizRepository.axios';
   import { EnvoyerDonneesQuizInteractionUsecase } from '@/domaines/quiz/envoyerDonneesQuizInteraction.usecase';
   import { ArticleDuQuiz } from '@/domaines/quiz/ports/quizRepository';
+  import { MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
   import { ToDoListEventBusImpl } from '@/domaines/toDoList/toDoListEventBusImpl';
 
   const props = defineProps<{
