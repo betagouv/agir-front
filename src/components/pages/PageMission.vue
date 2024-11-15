@@ -3,20 +3,24 @@
   <div v-else-if="!missionViewModel">Une erreur est survenue</div>
   <div v-else class="fr-container fr-pb-4w">
     <MissionIntroduction
-      v-if="doitAfficherINTRO"
+      v-if="etatCourant === 'INTRO'"
       :titre="missionViewModel.titre"
       :url-image="missionViewModel.urlImage"
       texte="lorem"
       :tag="missionViewModel.tag"
-      :on-click-continuer="afficherKYC"
+      :on-click-continuer="() => miseAJourEtatCourant('KYC')"
     />
-    <PageMissionQuestionsKyc v-if="doitAfficherKYC" :mission-id="missionId" :on-click-fin-k-y-c="afficherARTICLE" />
+    <PageMissionQuestionsKyc
+      v-if="etatCourant === 'KYC'"
+      :mission-id="missionId"
+      :on-click-fin-k-y-c="() => miseAJourEtatCourant('QUIZ_ARTICLE')"
+    />
     <MissionQuizArticles
-      v-if="doitAfficherQuizArticle"
+      v-if="etatCourant === 'QUIZ_ARTICLE'"
       :missions="missionViewModel.articleEtQuiz"
-      :on-click-fin-quiz-article="afficherDefi"
+      :on-click-fin-quiz-article="() => miseAJourEtatCourant('DEFI')"
     />
-    <MissionDefis v-if="doitAfficherDefi" :defis="missionViewModel.defis" />
+    <MissionDefis v-if="etatCourant === 'DEFI'" :defis="missionViewModel.defis" />
   </div>
 </template>
 
@@ -33,37 +37,14 @@
   import { RecupererDetailMissionUsecase } from '@/domaines/missions/recupererDetailMission.usecase';
   import { utilisateurStore } from '@/store/utilisateur';
 
+  type EtatsPossible = 'INTRO' | 'KYC' | 'QUIZ_ARTICLE' | 'DEFI';
+
   const isLoading = ref<boolean>(true);
   const missionViewModel = ref<MissionViewModel>();
-
-  const doitAfficherINTRO = ref<boolean>(false);
-  const doitAfficherKYC = ref<boolean>(false);
-  const doitAfficherQuizArticle = ref<boolean>(false);
-  const doitAfficherDefi = ref<boolean>(false);
+  const etatCourant = ref<EtatsPossible>('INTRO');
 
   function onMissionPretAAffchee(viewModel: MissionViewModel) {
     missionViewModel.value = viewModel;
-  }
-
-  function afficherKYC(): void {
-    doitAfficherKYC.value = true;
-    doitAfficherINTRO.value = false;
-    doitAfficherQuizArticle.value = false;
-    doitAfficherDefi.value = false;
-  }
-
-  function afficherARTICLE(): void {
-    doitAfficherKYC.value = false;
-    doitAfficherINTRO.value = false;
-    doitAfficherQuizArticle.value = true;
-    doitAfficherDefi.value = false;
-  }
-
-  function afficherDefi(): void {
-    doitAfficherKYC.value = false;
-    doitAfficherINTRO.value = false;
-    doitAfficherQuizArticle.value = false;
-    doitAfficherDefi.value = true;
   }
 
   const missionId = useRoute().params.missionId as string;
@@ -86,13 +67,17 @@
 
     const quizArticleAAfficher = missionViewModel.value?.articleEtQuiz.find(elem => elem.aEteRealisee);
     if (!missionViewModel.value?.kyc[0].aEteRealisee) {
-      afficherKYC();
+      miseAJourEtatCourant('KYC');
     } else if (!quizArticleAAfficher) {
-      afficherARTICLE();
+      miseAJourEtatCourant('QUIZ_ARTICLE');
     } else {
-      afficherDefi();
+      miseAJourEtatCourant('DEFI');
     }
   });
+
+  const miseAJourEtatCourant = (etat: EtatsPossible): void => {
+    etatCourant.value = etat;
+  };
 
   onUnmounted(() => {
     MissionEventBusImpl.getInstance().unsubscribeToAllEvents(subscriberName);
