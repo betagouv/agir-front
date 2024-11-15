@@ -5,13 +5,14 @@
       :article-id="item.idDuContenu"
       :on-click-continuer="passerEtapeSuivante"
     />
-    <div v-if="item.type === 'quiz'">quiz {{ item.titre }}</div>
+    <MissionQuiz v-if="item.type === 'quiz' && etapeCourante === index" :quiz-id="item.idDuContenu" />
   </div>
 </template>
 
 <script setup lang="ts">
   import { ref } from 'vue';
   import MissionArticle from '@/components/custom/Mission/MissionArticle.vue';
+  import MissionQuiz from '@/components/custom/Mission/MissionQuiz.vue';
   import { MissionQuizArticleViewModel } from '@/domaines/missions/adapters/mission.presenter.impl';
 
   const etapeCourante = ref<number>(0);
