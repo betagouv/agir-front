@@ -21,13 +21,16 @@
 
   const etapeCourante = ref<number>(0);
 
-  defineProps<{
+  const props = defineProps<{
     missions: MissionQuizArticleViewModel[];
+    onClickFinQuizArticle: () => void;
   }>();
 
   const passerEtapeSuivante = () => {
     etapeCourante.value++;
-    // afficherFinKyc.value = etapeCourante.value === props.questionsViewModel.questions.length;
-    // if (afficherFinKyc.value) props.onClickFinKYC();
+
+    if (etapeCourante.value === props.missions.length) {
+      props.onClickFinQuizArticle();
+    }
   };
 </script>
