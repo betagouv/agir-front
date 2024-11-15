@@ -1,6 +1,7 @@
 import { MissionItem, DetailMission } from '../recupererDetailMission.usecase';
 import { MissionPresenter } from '@/domaines/missions/ports/missionPresenter';
 import { MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
+import { TagStyle, TagThematique } from '@/domaines/thematiques/TagThematique';
 import { RouteArticlePath } from '@/router/articles/routes';
 import { RouteDefiPath } from '@/router/defis/routes';
 import { RouteKycPath } from '@/router/kyc/routes';
@@ -41,6 +42,7 @@ export interface MissionKycViewModel extends MissionBaseViewModel {
 
 export interface MissionQuizArticleViewModel extends MissionBaseViewModel {
   idDuContenu: string;
+  type: 'quiz' | 'article';
 }
 export interface MissionViewModel {
   titre: string;
@@ -50,6 +52,10 @@ export interface MissionViewModel {
   kyc: MissionKycViewModel[];
   articleEtQuiz: MissionQuizArticleViewModel[];
   defis: MissionDefiViewModel[];
+  tag: {
+    label: string;
+    style: TagStyle;
+  };
 }
 
 export class MissionPresenterImpl implements MissionPresenter {
@@ -61,6 +67,10 @@ export class MissionPresenterImpl implements MissionPresenter {
       urlImage: mission.urlImage,
       estTerminee: mission.estTerminee,
       estTerminable: mission.estTerminable,
+      tag: {
+        label: MenuThematiques.getThematiqueData(mission.clefApiThematique).labelDansLeMenu,
+        style: TagThematique.getTagThematiqueUtilitaire(mission.clefApiThematique),
+      },
       kyc: [
         {
           id: mission.items.filter(item => item.type === InteractionType.KYC)[0].id,
@@ -111,6 +121,7 @@ export class MissionPresenterImpl implements MissionPresenter {
       url: this.determineUrl(item, thematiqueUrl, missionId),
       picto: this.determinePicto(item),
       pointAEteRecolte: item.pointAEteRecolte,
+      type: item.type === InteractionType.ARTICLE ? 'article' : 'quiz',
     };
   }
 
