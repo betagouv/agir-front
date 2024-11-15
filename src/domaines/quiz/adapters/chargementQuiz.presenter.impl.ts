@@ -1,5 +1,7 @@
 import { ChargementQuizzPresenter } from '@/domaines/quiz/ports/chargementQuizz.presenter';
 import { ArticleDuQuiz, Quiz, QuizDifficulte } from '@/domaines/quiz/ports/quizRepository';
+import { MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
+import { TagStyle, TagThematique } from '@/domaines/thematiques/TagThematique';
 
 export interface QuestionViewModel {
   id: string;
@@ -14,7 +16,10 @@ export interface QuestionViewModel {
 export interface QuizViewModel {
   titre: string;
   question: QuestionViewModel;
-  thematique: string;
+  thematiqueTag: {
+    label: string;
+    style: TagStyle;
+  };
   difficulte: string;
   nombreDePointsAGagner: string;
   articleAssocie: ArticleDuQuiz | null;
@@ -31,7 +36,10 @@ export class ChargementQuizPresenterImpl implements ChargementQuizzPresenter {
     this._quizViewModel({
       nombreDePointsAGagner: quiz.nombreDePointsAGagner.toString(),
       difficulte: this.determinerDifficulte(quiz),
-      thematique: quiz.thematique,
+      thematiqueTag: {
+        label: MenuThematiques.getThematiqueData(quiz.clefThematiqueAPI).labelDansLeMenu,
+        style: TagThematique.getTagThematiqueUtilitaire(quiz.clefThematiqueAPI),
+      },
       titre: quiz.titre,
       question: {
         id: '0',

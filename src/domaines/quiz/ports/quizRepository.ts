@@ -1,3 +1,5 @@
+import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
+
 interface QuestionsQuiz {
   ordre: string;
   id: string;
@@ -24,7 +26,7 @@ export interface Quiz {
   titre: string;
   difficulte: QuizDifficulte;
   questions: QuestionsQuiz[];
-  thematique: string;
+  clefThematiqueAPI: ClefThematiqueAPI;
   nombreDePointsAGagner: number;
   articleAssocie: ArticleDuQuiz | null;
 }
