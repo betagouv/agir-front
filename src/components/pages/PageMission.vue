@@ -12,8 +12,11 @@
     />
 
     <PageMissionQuestionsKyc v-if="doitAfficherKYC" :mission-id="missionId" :on-click-fin-k-y-c="afficherARTICLE" />
-
-    <MissionQuizArticles v-if="doitAfficherQuizArticle" :missions="missionViewModel.articleEtQuiz" />
+    <MissionQuizArticles
+      v-if="doitAfficherQuizArticle"
+      :missions="missionViewModel.articleEtQuiz"
+      :on-click-continuer="afficherKYC"
+    />
   </div>
 </template>
 

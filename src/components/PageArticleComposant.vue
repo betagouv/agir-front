@@ -1,100 +1,80 @@
 <template>
-  <div class="fr-container fr-mb-6w">
-    <FilDAriane
-      :page-courante="`Article: ${article.titre}`"
-      :page-hierarchie="
-        useRoute().params.thematiqueId && useRoute().params.missionId
-          ? [
-              {
-                label: `${MenuThematiques.getFromUrl(useRoute().params.thematiqueId as string).labelDansLeMenu}`,
-                url: `/thematique/${useRoute().params.thematiqueId}`,
-              },
-              {
-                label: `Mission`,
-                url: `/thematique/${useRoute().params.thematiqueId}/mission/${useRoute().params.missionId}`,
-              },
-            ]
-          : []
-      "
-    />
-    <h1>{{ article.titre }}</h1>
-    <div class="fr-grid-row fr-grid-row--gutters">
-      <div class="fr-col-12 fr-col-md-8">
-        <div class="border fr-p-6v background--white border-radius--md">
-          <h2 class="fr-h3">{{ article.sousTitre }}</h2>
-          <div class="cms__content" v-html="article.texte" />
-          <div v-if="article.sources && article.sources.length > 0" class="fr-mb-4w print-hidden">
-            <p v-if="article.sources.length === 1" class="fr-text--xs">
-              <span class="fr-mr-1w">Source :</span>
-              <a :href="article.sources[0].url" target="_blank" rel="noopener noreferrer">{{
-                article.sources[0].label
-              }}</a>
-            </p>
-            <div v-else class="fr-text--xs">
-              <span class="fr-mr-1w">Sources :</span>
-              <ul>
-                <li v-for="source in article.sources" :key="source.label">
-                  <a :href="source.url" target="_blank" rel="noopener noreferrer">{{ source.label }}</a>
-                </li>
-              </ul>
-            </div>
+  <h1>{{ article.titre }}</h1>
+  <div class="fr-grid-row fr-grid-row--gutters">
+    <div class="fr-col-12 fr-col-md-8">
+      <div class="border fr-p-6v background--white border-radius--md">
+        <h2 class="fr-h3">{{ article.sousTitre }}</h2>
+        <div class="cms__content" v-html="article.texte" />
+        <div v-if="article.sources && article.sources.length > 0" class="fr-mb-4w print-hidden">
+          <p v-if="article.sources.length === 1" class="fr-text--xs">
+            <span class="fr-mr-1w">Source :</span>
+            <a :href="article.sources[0].url" target="_blank" rel="noopener noreferrer">{{
+              article.sources[0].label
+            }}</a>
+          </p>
+          <div v-else class="fr-text--xs">
+            <span class="fr-mr-1w">Sources :</span>
+            <ul>
+              <li v-for="source in article.sources" :key="source.label">
+                <a :href="source.url" target="_blank" rel="noopener noreferrer">{{ source.label }}</a>
+              </li>
+            </ul>
           </div>
-          <div class="print-hidden fr-grid-row fr-grid-row--middle flex-space-between border border-radius--md fr-p-2w">
-            <span class="fr-m-0 fr-text--bold fr-text--md">Comment avez-vous trouvé cet article ?</span>
-            <Notation @rated="noterLarticle" />
-          </div>
-          <div class="print-hidden fr-grid-row fr-mt-5v fr-grid-row--middle flex-space-between">
-            <router-link class="fr-btn fr-mt-3w" :to="useBoutonRetour().url">
-              {{ useBoutonRetour().label }}
-            </router-link>
-          </div>
+        </div>
+        <div class="print-hidden fr-grid-row fr-grid-row--middle flex-space-between border border-radius--md fr-p-2w">
+          <span class="fr-m-0 fr-text--bold fr-text--md">Comment avez-vous trouvé cet article ?</span>
+          <Notation @rated="noterLarticle" />
+        </div>
+        <div v-if="estEnchainementMission"><slot></slot></div>
+        <div v-else class="print-hidden fr-grid-row fr-mt-5v fr-grid-row--middle flex-space-between">
+          <router-link class="fr-btn fr-mt-3w" :to="useBoutonRetour().url">
+            {{ useBoutonRetour().label }}
+          </router-link>
         </div>
       </div>
-      <div class="fr-col-12 fr-col-md-4 print-hidden">
-        <div class="fr-grid-row flex-center background--white border border-radius--md fr-p-2w">
-          <button
-            v-if="!article.estEnFavori"
-            class="fr-btn fr-btn--tertiary fr-icon-heart-line fr-btn--icon-right icon-favoris--off"
-            @click="ajouterAuxFavoris"
-          >
-            Ajouter aux favoris
-          </button>
-          <button
-            v-else
-            class="fr-btn fr-btn--tertiary fr-icon-heart-fill fr-btn--icon-right icon-favoris--on"
-            @click="retirerDesFavoris"
-          >
-            Retirer des favoris
-          </button>
-          <button class="fr-btn fr-btn--tertiary fr-btn--icon-left fr-icon-printer-fill fr-ml-1w" @click="imprimer">
-            Imprimer
-          </button>
-        </div>
+    </div>
+    <div class="fr-col-12 fr-col-md-4 print-hidden">
+      <div class="fr-grid-row flex-center background--white border border-radius--md fr-p-2w">
+        <button
+          v-if="!article.estEnFavori"
+          class="fr-btn fr-btn--tertiary fr-icon-heart-line fr-btn--icon-right icon-favoris--off"
+          @click="ajouterAuxFavoris"
+        >
+          Ajouter aux favoris
+        </button>
+        <button
+          v-else
+          class="fr-btn fr-btn--tertiary fr-icon-heart-fill fr-btn--icon-right icon-favoris--on"
+          @click="retirerDesFavoris"
+        >
+          Retirer des favoris
+        </button>
+        <button class="fr-btn fr-btn--tertiary fr-btn--icon-left fr-icon-printer-fill fr-ml-1w" @click="imprimer">
+          Imprimer
+        </button>
+      </div>
 
-        <div v-if="article.partenaire" class="fr-mt-2w background--white border border-radius--md fr-p-2w">
-          <p class="fr-mb-0">Proposé par</p>
-          <img class="fr-mt-5v max-full-width" :src="article.partenaire.logo" :alt="article.partenaire.nom" />
-        </div>
+      <div v-if="article.partenaire" class="fr-mt-2w background--white border border-radius--md fr-p-2w">
+        <p class="fr-mb-0">Proposé par</p>
+        <img class="fr-mt-5v max-full-width" :src="article.partenaire.logo" :alt="article.partenaire.nom" />
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-  import { useRoute } from 'vue-router';
   import Notation from '@/components/custom/Notation.vue';
-  import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import { useBoutonRetour } from '@/composables/boutonRetour';
   import { ArticleRepositoryAxios } from '@/domaines/article/adapters/article.repository.axios';
   import { AjouterAuxFavorisUsecase } from '@/domaines/article/ajouterAuxFavoris.usecase';
   import { EvaluerArticleUsecase } from '@/domaines/article/evaluerArticle.usecase';
   import { Article } from '@/domaines/article/recupererArticle.usecase';
   import { RetirerDesFavorisUsecase } from '@/domaines/article/retirerDesFavoris.usecase';
-  import { MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const props = defineProps<{
     article: Article;
+    estEnchainementMission: boolean;
   }>();
 
   const emit = defineEmits<{

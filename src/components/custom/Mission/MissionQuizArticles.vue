@@ -1,19 +1,28 @@
 <template>
-  <div>
-    <h1>MissionQuizArticles</h1>
-    <div v-for="item in missions" :key="item.idDuContenu">
-      <div v-if="item.type === 'article'">article {{ item.titre }}</div>
-      <div v-if="item.type === 'quiz'">quiz {{ item.titre }}</div>
-    </div>
+  <div v-for="(item, index) in missions" :key="item.idDuContenu">
+    <MissionArticle
+      v-if="item.type === 'article' && etapeCourante === index"
+      :article-id="item.idDuContenu"
+      :on-click-continuer="passerEtapeSuivante"
+    />
+    <div v-if="item.type === 'quiz'">quiz {{ item.titre }}</div>
   </div>
 </template>
 
 <script setup lang="ts">
+  import { ref } from 'vue';
+  import MissionArticle from '@/components/custom/Mission/MissionArticle.vue';
   import { MissionQuizArticleViewModel } from '@/domaines/missions/adapters/mission.presenter.impl';
+
+  const etapeCourante = ref<number>(0);
 
   defineProps<{
     missions: MissionQuizArticleViewModel[];
   }>();
-</script>
 
-<style scoped></style>
+  const passerEtapeSuivante = () => {
+    etapeCourante.value++;
+    // afficherFinKyc.value = etapeCourante.value === props.questionsViewModel.questions.length;
+    // if (afficherFinKyc.value) props.onClickFinKYC();
+  };
+</script>
