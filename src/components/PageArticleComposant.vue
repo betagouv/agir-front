@@ -25,7 +25,7 @@
           <span class="fr-m-0 fr-text--bold fr-text--md">Comment avez-vous trouvé cet article ?</span>
           <Notation @rated="noterLarticle" />
         </div>
-        <div v-if="estEnchainementMission"><slot></slot></div>
+        <div v-if="estEnchainementMission"><slot /></div>
         <div v-else class="print-hidden fr-grid-row fr-mt-5v fr-grid-row--middle flex-space-between">
           <router-link class="fr-btn fr-mt-3w" :to="useBoutonRetour().url">
             {{ useBoutonRetour().label }}
@@ -74,7 +74,7 @@
 
   const props = defineProps<{
     article: Article;
-    estEnchainementMission: boolean;
+    estEnchainementMission?: boolean;
   }>();
 
   const emit = defineEmits<{

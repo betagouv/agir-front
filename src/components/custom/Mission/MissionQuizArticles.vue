@@ -5,7 +5,11 @@
       :article-id="item.idDuContenu"
       :on-click-continuer="passerEtapeSuivante"
     />
-    <MissionQuiz v-if="item.type === 'quiz' && etapeCourante === index" :quiz-id="item.idDuContenu" />
+    <MissionQuiz
+      v-if="item.type === 'quiz' && etapeCourante === index"
+      :quiz-id="item.idDuContenu"
+      :on-click-continuer="passerEtapeSuivante"
+    />
   </div>
 </template>
 

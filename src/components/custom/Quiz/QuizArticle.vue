@@ -10,7 +10,9 @@
     <span class="fr-m-0 fr-text--bold fr-text--md">Comment avez-vous trouvé ce quiz ?</span>
     <Notation @rated="noterLeQuiz" />
   </div>
-  <router-link class="fr-btn fr-mt-3w" :to="useBoutonRetour().url"> {{ useBoutonRetour().label }}</router-link>
+  <button v-if="estEnchainementMission" class="fr-btn fr-mt-3w" @click="onClickContinuer">Continuer</button>
+
+  <router-link v-else class="fr-btn fr-mt-3w" :to="useBoutonRetour().url"> {{ useBoutonRetour().label }}</router-link>
 </template>
 
 <script setup lang="ts">
@@ -29,6 +31,8 @@
     articleAssocie: ArticleDuQuiz | null;
     points: string;
     quizId: string;
+    estEnchainementMission?: boolean;
+    onClickContinuer?: () => void;
   }>();
 
   const noterLeQuiz = note => {

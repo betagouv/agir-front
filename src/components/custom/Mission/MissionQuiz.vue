@@ -6,6 +6,8 @@
     :is-mode-previsualisation="false"
     :id-quiz="quizId"
     :article-associe="quizViewModel.articleAssocie"
+    :est-enchainement-mission="true"
+    :on-click-continuer="onClickContinuer"
   />
 </template>
 
@@ -19,7 +21,7 @@
 
   const quizViewModel = ref<QuizViewModel>();
   const isLoading = ref<boolean>(false);
-  const props = defineProps<{ quizId: string }>();
+  const props = defineProps<{ quizId: string; estEnchainementMission?: boolean; onClickContinuer: () => void }>();
 
   const mapValuesQuiz = (viewModel: QuizViewModel) => {
     quizViewModel.value = viewModel;
@@ -34,5 +36,3 @@
 
   onMounted(chargementQuizz);
 </script>
-
-<style scoped></style>
