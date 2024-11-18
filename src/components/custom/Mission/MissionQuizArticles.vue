@@ -6,6 +6,10 @@
     Retour
   </button>
   <div v-for="(item, index) in missions" :key="item.idDuContenu">
+    <div v-if="etapeCourante === index">
+      Etape {{ index + 1 + nombreDetapesPrecendentes }} sur {{ nombreEtapesMission }}
+    </div>
+
     <MissionArticle
       v-if="item.type === 'article' && etapeCourante === index"
       :article-id="item.idDuContenu"
@@ -32,6 +36,8 @@
     onClickFinQuizArticle: () => void;
     onClickRevenirEtapePrecedente: () => void;
     etapeCouranteDefaut?: number;
+    nombreEtapesMission: number;
+    nombreDetapesPrecendentes: number;
   }>();
 
   etapeCourante.value = props.etapeCouranteDefaut ?? 0;

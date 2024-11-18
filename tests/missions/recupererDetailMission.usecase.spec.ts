@@ -82,6 +82,7 @@ describe("Fichier de tests concernant la récupération d'une mission", () => {
     // THEN
     function expectation(mission) {
       expect(mission).toStrictEqual<MissionViewModel>({
+        nombreEtapesMission: 3,
         estTerminee: false,
         estTerminable: false,
         tag: {

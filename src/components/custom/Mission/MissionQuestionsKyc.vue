@@ -7,6 +7,7 @@
   </button>
   <div v-for="(questionViewModel, index) in questionsViewModel.questions" :key="index">
     <div v-show="index === etapeCourante">
+      Etape {{ index + 1 }} sur {{ nombreEtapesMission }}
       <KYCForm
         :question-view-model="questionViewModel"
         wording-bouton="Continuer"
@@ -26,6 +27,7 @@
     onClickFinKYC: () => void;
     onClickRevenirEtapePrecedente: () => void;
     etapeCouranteDefaut?: number;
+    nombreEtapesMission: number;
   }>();
 
   const premiereKycNonRepondu = () => {

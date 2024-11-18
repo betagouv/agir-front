@@ -7,6 +7,7 @@
         :on-click-fin-k-y-c="onClickFinKYC"
         :on-click-revenir-etape-precedente="onClickRevenirEtapePrecedente"
         :etape-courante-defaut="props.etapeCouranteDefaut"
+        :nombre-etapes-mission="props.nombreEtapesMission"
       />
     </div>
     <div v-else>Une erreur est survenue</div>
@@ -33,6 +34,7 @@
     onClickFinKYC: () => void;
     onClickRevenirEtapePrecedente: () => void;
     etapeCouranteDefaut?: number;
+    nombreEtapesMission: number;
   }>();
 
   onMounted(async () => {

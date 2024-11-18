@@ -56,6 +56,7 @@ export interface MissionViewModel {
     label: string;
     style: TagStyle;
   };
+  nombreEtapesMission: number;
 }
 
 export class MissionPresenterImpl implements MissionPresenter {
@@ -107,6 +108,8 @@ export class MissionPresenterImpl implements MissionPresenter {
             mission.missionId,
           ),
         ),
+      nombreEtapesMission:
+        mission.items.length - mission.items.filter(item => item.type === InteractionType.DEFIS).length + 1,
     });
   }
 
