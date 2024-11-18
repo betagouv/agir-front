@@ -94,7 +94,9 @@
     isLoading.value = false;
 
     const quizArticleAAfficher = missionViewModel.value?.articleEtQuiz.find(elem => elem.aEteRealisee);
-    if (missionViewModel.value?.kyc[0].progression.etapeCourante === 0) {
+    if (missionViewModel.value?.estTerminee) {
+      miseAJourEtatCourant('INTRO', 0);
+    } else if (missionViewModel.value?.kyc[0].progression.etapeCourante === 0) {
       miseAJourEtatCourant('INTRO', 0);
     } else if (
       missionViewModel.value?.kyc[0].progression.etapeCourante !== missionViewModel.value?.kyc[0].progression.etapeTotal
