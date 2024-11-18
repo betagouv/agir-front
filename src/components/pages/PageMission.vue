@@ -44,7 +44,16 @@
       v-if="etapeCourante.type === 'DEFI'"
       :defis="missionViewModel.defis"
       :on-click-retour="() => miseAJourEtatCourant('QUIZ_ARTICLE', missionViewModel!.articleEtQuiz.length - 1)"
+      :on-click-fin-defis="() => miseAJourEtatCourant('FIN', 0)"
       :nombre-etapes-mission="missionViewModel.nombreEtapesMission"
+    />
+    <MissionTerminee
+      v-if="etapeCourante.type === 'FIN'"
+      :titre="missionViewModel.titre"
+      :url-image="missionViewModel.urlImage"
+      texte="lorem"
+      :tag="missionViewModel.tag"
+      :on-click-continuer="() => miseAJourEtatCourant('KYC', 0)"
     />
   </div>
 </template>
@@ -55,6 +64,7 @@
   import MissionDefis from '@/components/custom/Mission/MissionDefis.vue';
   import MissionIntroduction from '@/components/custom/Mission/MissionIntroduction.vue';
   import MissionQuizArticles from '@/components/custom/Mission/MissionQuizArticles.vue';
+  import MissionTerminee from '@/components/custom/Mission/MissionTerminee.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import PageMissionQuestionsKyc from '@/components/pages/PageMissionQuestionsKyc.vue';
   import { MissionPresenterImpl, MissionViewModel } from '@/domaines/missions/adapters/mission.presenter.impl';
@@ -68,7 +78,7 @@
     type: EtatsPossible;
   }
 
-  type EtatsPossible = 'INTRO' | 'KYC' | 'QUIZ_ARTICLE' | 'DEFI';
+  type EtatsPossible = 'INTRO' | 'KYC' | 'QUIZ_ARTICLE' | 'DEFI' | 'FIN';
 
   const etapeCourante = ref<EtapeCourante>({ etapeDansLetape: 0, type: 'INTRO' });
 

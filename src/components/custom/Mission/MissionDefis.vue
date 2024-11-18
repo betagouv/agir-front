@@ -20,5 +20,10 @@
   import MissionCarteDefi from '@/components/custom/Mission/MissionCarteDefi.vue';
   import { MissionDefiViewModel } from '@/domaines/missions/adapters/mission.presenter.impl';
 
-  defineProps<{ defis: MissionDefiViewModel[]; onClickRetour: () => void; nombreEtapesMission: number }>();
+  defineProps<{
+    defis: MissionDefiViewModel[];
+    onClickFinDefis: () => void;
+    onClickRetour: () => void;
+    nombreEtapesMission: number;
+  }>();
 </script>
