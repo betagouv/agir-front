@@ -46,15 +46,9 @@
       :on-click-retour="() => miseAJourEtatCourant('QUIZ_ARTICLE', missionViewModel!.articleEtQuiz.length - 1)"
       :on-click-fin-defis="() => miseAJourEtatCourant('FIN', 0)"
       :nombre-etapes-mission="missionViewModel.nombreEtapesMission"
+      :afficher-terminer-mission="missionViewModel.estTerminable && !missionViewModel.estTerminee"
     />
-    <MissionTerminee
-      v-if="etapeCourante.type === 'FIN'"
-      :titre="missionViewModel.titre"
-      :url-image="missionViewModel.urlImage"
-      texte="lorem"
-      :tag="missionViewModel.tag"
-      :on-click-continuer="() => miseAJourEtatCourant('KYC', 0)"
-    />
+    <MissionTerminee v-if="etapeCourante.type === 'FIN'" :titre="missionViewModel.titre" />
   </div>
 </template>
 

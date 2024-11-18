@@ -13,6 +13,7 @@
         <MissionCarteDefi :defi="defi" />
       </li>
     </ul>
+    <button v-if="afficherTerminerMission" @click="onClickFinDefis" class="fr-btn">Suivant</button>
   </section>
 </template>
 
@@ -25,5 +26,6 @@
     onClickFinDefis: () => void;
     onClickRetour: () => void;
     nombreEtapesMission: number;
+    afficherTerminerMission: boolean;
   }>();
 </script>
