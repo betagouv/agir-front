@@ -5,31 +5,26 @@
   >
     Retour
   </button>
-  <div v-for="(item, index) in missions" :key="item.idDuContenu">
-    <div v-if="etapeCourante === index">
-      Etape {{ index + 1 + nombreDetapesPrecendentes }} sur {{ nombreEtapesMission }}
-    </div>
-
-    <MissionArticle
-      v-if="item.type === 'article' && etapeCourante === index"
-      :article-id="item.idDuContenu"
-      :on-click-continuer="passerEtapeSuivante"
-    />
-    <MissionQuiz
-      v-if="item.type === 'quiz' && etapeCourante === index"
-      :quiz-id="item.idDuContenu"
-      :on-click-continuer="passerEtapeSuivante"
-    />
-  </div>
+  Etape {{ etapeAffichee }} sur {{ nombreEtapesMission }}
+  <MissionArticle
+    v-if="missionAffichee.type === 'article'"
+    :key="etapeCourante"
+    :article-id="missionAffichee.idDuContenu"
+    :on-click-continuer="passerEtapeSuivante"
+  />
+  <MissionQuiz
+    v-if="missionAffichee.type === 'quiz'"
+    :key="etapeCourante"
+    :quiz-id="missionAffichee.idDuContenu"
+    :on-click-continuer="passerEtapeSuivante"
+  />
 </template>
 
 <script setup lang="ts">
-  import { ref } from 'vue';
+  import { ref, computed } from 'vue';
   import MissionArticle from '@/components/custom/Mission/MissionArticle.vue';
   import MissionQuiz from '@/components/custom/Mission/MissionQuiz.vue';
   import { MissionQuizArticleViewModel } from '@/domaines/missions/adapters/mission.presenter.impl';
-
-  const etapeCourante = ref<number>(0);
 
   const props = defineProps<{
     missions: MissionQuizArticleViewModel[];
@@ -40,7 +35,11 @@
     nombreDetapesPrecendentes: number;
   }>();
 
-  etapeCourante.value = props.etapeCouranteDefaut ?? 0;
+  const etapeCourante = ref<number>(props.etapeCouranteDefaut ?? 0);
+
+  const missionAffichee = computed(() => props.missions[etapeCourante.value]);
+  const etapeAffichee = computed(() => etapeCourante.value + 1 + props.nombreDetapesPrecendentes);
+
   const passerEtapeSuivante = () => {
     etapeCourante.value++;
 
@@ -51,6 +50,7 @@
 
   const revenirEtapePrecedente = () => {
     etapeCourante.value--;
+
     if (etapeCourante.value === -1) {
       props.onClickRevenirEtapePrecedente();
     }
