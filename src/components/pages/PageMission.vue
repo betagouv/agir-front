@@ -2,50 +2,46 @@
   <div v-if="isLoading">Chargement en cours ...</div>
   <div v-else-if="!missionViewModel">Une erreur est survenue</div>
   <div v-else class="fr-container fr-pb-4w">
-    <div class="fr-grid-row fr-grid-row--gutters">
-      <div class="fr-col-md-3">
-        <aside>
-          <ol>
-            <li>Introduction</li>
-            <li>Quelques questions pour mieux vous connaître</li>
-            <li v-for="item in missionViewModel?.articleEtQuiz" :key="item.titre">
-              {{ item.titre }}
-            </li>
-            <li>Defis</li>
-          </ol>
-        </aside>
-      </div>
-
-      <div class="fr-col-md-9">
-        <MissionIntroduction
-          v-if="etapeCourante.type === 'INTRO'"
-          :titre="missionViewModel.titre"
-          :url-image="missionViewModel.urlImage"
-          texte="lorem"
-          :tag="missionViewModel.tag"
-          :on-click-continuer="() => miseAJourEtatCourant('KYC', 0)"
-        />
-        <PageMissionQuestionsKyc
-          v-if="etapeCourante.type === 'KYC'"
-          :mission-id="missionId"
-          :on-click-fin-k-y-c="() => miseAJourEtatCourant('QUIZ_ARTICLE', 0)"
-          :on-click-revenir-etape-precedente="() => miseAJourEtatCourant('INTRO', 0)"
-          :etape-courante-defaut="etapeCourante.etapeDansLetape"
-        />
-        <MissionQuizArticles
-          v-if="etapeCourante.type === 'QUIZ_ARTICLE'"
-          :missions="missionViewModel.articleEtQuiz"
-          :on-click-fin-quiz-article="() => miseAJourEtatCourant('DEFI', 0)"
-          :on-click-revenir-etape-precedente="() => miseAJourEtatCourant('KYC', missionViewModel!.kyc.length)"
-          :etape-courante-defaut="etapeCourante.etapeDansLetape"
-        />
-        <MissionDefis
-          v-if="etapeCourante.type === 'DEFI'"
-          :defis="missionViewModel.defis"
-          :on-click-retour="() => miseAJourEtatCourant('QUIZ_ARTICLE', missionViewModel!.articleEtQuiz.length - 1)"
-        />
-      </div>
-    </div>
+    <FilDAriane
+      :page-courante="`Mission : ${missionViewModel.titre}`"
+      :page-hierarchie="
+        useRoute().params.id && useRoute().params.missionId
+          ? [
+              {
+                label: `${MenuThematiques.getFromUrl(useRoute().params.id as string).labelDansLeMenu}`,
+                url: `/thematique/${useRoute().params.id}`,
+              },
+            ]
+          : []
+      "
+    />
+    <MissionIntroduction
+      v-if="etapeCourante.type === 'INTRO'"
+      :titre="missionViewModel.titre"
+      :url-image="missionViewModel.urlImage"
+      texte="lorem"
+      :tag="missionViewModel.tag"
+      :on-click-continuer="() => miseAJourEtatCourant('KYC', 0)"
+    />
+    <PageMissionQuestionsKyc
+      v-if="etapeCourante.type === 'KYC'"
+      :mission-id="missionId"
+      :on-click-fin-k-y-c="() => miseAJourEtatCourant('QUIZ_ARTICLE', 0)"
+      :on-click-revenir-etape-precedente="() => miseAJourEtatCourant('INTRO', 0)"
+      :etape-courante-defaut="etapeCourante.etapeDansLetape"
+    />
+    <MissionQuizArticles
+      v-if="etapeCourante.type === 'QUIZ_ARTICLE'"
+      :missions="missionViewModel.articleEtQuiz"
+      :on-click-fin-quiz-article="() => miseAJourEtatCourant('DEFI', 0)"
+      :on-click-revenir-etape-precedente="() => miseAJourEtatCourant('KYC', missionViewModel!.kyc.length)"
+      :etape-courante-defaut="etapeCourante.etapeDansLetape"
+    />
+    <MissionDefis
+      v-if="etapeCourante.type === 'DEFI'"
+      :defis="missionViewModel.defis"
+      :on-click-retour="() => miseAJourEtatCourant('QUIZ_ARTICLE', missionViewModel!.articleEtQuiz.length - 1)"
+    />
   </div>
 </template>
 
@@ -55,11 +51,13 @@
   import MissionDefis from '@/components/custom/Mission/MissionDefis.vue';
   import MissionIntroduction from '@/components/custom/Mission/MissionIntroduction.vue';
   import MissionQuizArticles from '@/components/custom/Mission/MissionQuizArticles.vue';
+  import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import PageMissionQuestionsKyc from '@/components/pages/PageMissionQuestionsKyc.vue';
   import { MissionPresenterImpl, MissionViewModel } from '@/domaines/missions/adapters/mission.presenter.impl';
   import { MissionsRepositoryAxios } from '@/domaines/missions/adapters/missions.repository.axios';
   import { MissionEvent, MissionEventBusImpl } from '@/domaines/missions/missionEventBus.impl';
   import { RecupererDetailMissionUsecase } from '@/domaines/missions/recupererDetailMission.usecase';
+  import { MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
   import { utilisateurStore } from '@/store/utilisateur';
 
   interface EtapeCourante {
