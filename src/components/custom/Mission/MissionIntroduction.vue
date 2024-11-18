@@ -4,13 +4,14 @@
     <h1 class="fr-mt-2w">
       {{ titre }}
     </h1>
-    <img :src="urlImage" alt="" />
+    <img :src="urlImage" height="200" alt="" />
     <p class="fr-mt-2w text--bold">{{ texte }}</p>
-    <button class="fr-btn" @click="onClickContinuer">Continuer</button>
+    <button id="btnContinuer" class="fr-btn" @click="onClickContinuer">Continuer</button>
   </div>
 </template>
 
 <script setup lang="ts">
+  import { onMounted } from 'vue';
   import ThematiqueTag from '@/components/custom/Thematiques/ThematiqueTag.vue';
   import { TagStyle } from '@/domaines/thematiques/TagThematique';
 
@@ -24,4 +25,9 @@
     };
     onClickContinuer: () => void;
   }>();
+
+  onMounted(() => {
+    const btnContinuer = document.getElementById('btnContinuer');
+    btnContinuer?.focus();
+  });
 </script>

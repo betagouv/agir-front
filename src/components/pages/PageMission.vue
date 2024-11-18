@@ -30,6 +30,9 @@
       :on-click-retour="() => miseAJourEtatCourant('QUIZ_ARTICLE', missionViewModel!.articleEtQuiz.length - 1)"
     />
   </div>
+  <aside>
+    <MissionsListe :missions="missionViewModel?.missions" />
+  </aside>
 </template>
 
 <script setup lang="ts">
@@ -38,6 +41,7 @@
   import MissionDefis from '@/components/custom/Mission/MissionDefis.vue';
   import MissionIntroduction from '@/components/custom/Mission/MissionIntroduction.vue';
   import MissionQuizArticles from '@/components/custom/Mission/MissionQuizArticles.vue';
+  import MissionsListe from '@/components/custom/Mission/MissionsListe.vue';
   import PageMissionQuestionsKyc from '@/components/pages/PageMissionQuestionsKyc.vue';
   import { MissionPresenterImpl, MissionViewModel } from '@/domaines/missions/adapters/mission.presenter.impl';
   import { MissionsRepositoryAxios } from '@/domaines/missions/adapters/missions.repository.axios';
@@ -80,8 +84,12 @@
     isLoading.value = false;
 
     const quizArticleAAfficher = missionViewModel.value?.articleEtQuiz.find(elem => elem.aEteRealisee);
-    if (!missionViewModel.value?.kyc[0].aEteRealisee) {
-      miseAJourEtatCourant('KYC', 0);
+    if (missionViewModel.value?.kyc[0].progression.etapeCourante === 0) {
+      miseAJourEtatCourant('INTRO', 0);
+    } else if (
+      missionViewModel.value?.kyc[0].progression.etapeCourante !== missionViewModel.value?.kyc[0].progression.etapeTotal
+    ) {
+      miseAJourEtatCourant('KYC', missionViewModel.value!.kyc[0].progression.etapeCourante);
     } else if (!quizArticleAAfficher) {
       miseAJourEtatCourant('QUIZ_ARTICLE', 0);
     } else {
