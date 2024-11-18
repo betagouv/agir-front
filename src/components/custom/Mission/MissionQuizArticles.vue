@@ -1,4 +1,10 @@
 <template>
+  <button
+    class="fr-mb-2w fr-btn fr-btn--icon-left fr-btn--tertiary-no-outline fr-icon-arrow-left-line"
+    @click="revenirEtapePrecedente"
+  >
+    Retour
+  </button>
   <div v-for="(item, index) in missions" :key="item.idDuContenu">
     <MissionArticle
       v-if="item.type === 'article' && etapeCourante === index"
@@ -24,13 +30,23 @@
   const props = defineProps<{
     missions: MissionQuizArticleViewModel[];
     onClickFinQuizArticle: () => void;
+    onClickRevenirEtapePrecedente: () => void;
+    etapeCouranteDefaut?: number;
   }>();
 
+  etapeCourante.value = props.etapeCouranteDefaut ?? 0;
   const passerEtapeSuivante = () => {
     etapeCourante.value++;
 
     if (etapeCourante.value === props.missions.length) {
       props.onClickFinQuizArticle();
+    }
+  };
+
+  const revenirEtapePrecedente = () => {
+    etapeCourante.value--;
+    if (etapeCourante.value === -1) {
+      props.onClickRevenirEtapePrecedente();
     }
   };
 </script>

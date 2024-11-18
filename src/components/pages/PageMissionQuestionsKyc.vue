@@ -2,7 +2,12 @@
   <div class="fr-container fr-mb-6w">
     <CarteSkeleton v-if="isLoading" />
     <div v-else-if="questionsViewModel" class="fr-p-4w">
-      <MissionQuestionsKyc v-model:questions-view-model="questionsViewModel" :on-click-fin-k-y-c="onClickFinKYC" />
+      <MissionQuestionsKyc
+        v-model:questions-view-model="questionsViewModel"
+        :on-click-fin-k-y-c="onClickFinKYC"
+        :on-click-revenir-etape-precedente="onClickRevenirEtapePrecedente"
+        :etape-courante-defaut="props.etapeCouranteDefaut"
+      />
     </div>
     <div v-else>Une erreur est survenue</div>
   </div>
@@ -23,7 +28,12 @@
   const isLoading = ref<boolean>(true);
   const questionsViewModel = ref<QuestionsViewModel>();
 
-  const props = defineProps<{ missionId: string; onClickFinKYC: () => void }>();
+  const props = defineProps<{
+    missionId: string;
+    onClickFinKYC: () => void;
+    onClickRevenirEtapePrecedente: () => void;
+    etapeCouranteDefaut?: number;
+  }>();
 
   onMounted(async () => {
     const usecase = new RecupererQuestionsThematiqueUsecase(new QuestionRepositoryAxios());

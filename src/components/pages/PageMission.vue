@@ -3,24 +3,32 @@
   <div v-else-if="!missionViewModel">Une erreur est survenue</div>
   <div v-else class="fr-container fr-pb-4w">
     <MissionIntroduction
-      v-if="etatCourant === 'INTRO'"
+      v-if="etapeCourante.type === 'INTRO'"
       :titre="missionViewModel.titre"
       :url-image="missionViewModel.urlImage"
       texte="lorem"
       :tag="missionViewModel.tag"
-      :on-click-continuer="() => miseAJourEtatCourant('KYC')"
+      :on-click-continuer="() => miseAJourEtatCourant('KYC', 0)"
     />
     <PageMissionQuestionsKyc
-      v-if="etatCourant === 'KYC'"
+      v-if="etapeCourante.type === 'KYC'"
       :mission-id="missionId"
-      :on-click-fin-k-y-c="() => miseAJourEtatCourant('QUIZ_ARTICLE')"
+      :on-click-fin-k-y-c="() => miseAJourEtatCourant('QUIZ_ARTICLE', 0)"
+      :on-click-revenir-etape-precedente="() => miseAJourEtatCourant('INTRO', 0)"
+      :etape-courante-defaut="etapeCourante.etapeDansLetape"
     />
     <MissionQuizArticles
-      v-if="etatCourant === 'QUIZ_ARTICLE'"
+      v-if="etapeCourante.type === 'QUIZ_ARTICLE'"
       :missions="missionViewModel.articleEtQuiz"
-      :on-click-fin-quiz-article="() => miseAJourEtatCourant('DEFI')"
+      :on-click-fin-quiz-article="() => miseAJourEtatCourant('DEFI', 0)"
+      :on-click-revenir-etape-precedente="() => miseAJourEtatCourant('KYC', missionViewModel!.kyc.length)"
+      :etape-courante-defaut="etapeCourante.etapeDansLetape"
     />
-    <MissionDefis v-if="etatCourant === 'DEFI'" :defis="missionViewModel.defis" />
+    <MissionDefis
+      v-if="etapeCourante.type === 'DEFI'"
+      :defis="missionViewModel.defis"
+      :on-click-retour="() => miseAJourEtatCourant('QUIZ_ARTICLE', missionViewModel!.articleEtQuiz.length - 1)"
+    />
   </div>
 </template>
 
@@ -37,11 +45,17 @@
   import { RecupererDetailMissionUsecase } from '@/domaines/missions/recupererDetailMission.usecase';
   import { utilisateurStore } from '@/store/utilisateur';
 
+  interface EtapeCourante {
+    etapeDansLetape: number;
+    type: EtatsPossible;
+  }
+
   type EtatsPossible = 'INTRO' | 'KYC' | 'QUIZ_ARTICLE' | 'DEFI';
+
+  const etapeCourante = ref<EtapeCourante>({ etapeDansLetape: 0, type: 'INTRO' });
 
   const isLoading = ref<boolean>(true);
   const missionViewModel = ref<MissionViewModel>();
-  const etatCourant = ref<EtatsPossible>('INTRO');
 
   function onMissionPretAAffchee(viewModel: MissionViewModel) {
     missionViewModel.value = viewModel;
@@ -67,16 +81,16 @@
 
     const quizArticleAAfficher = missionViewModel.value?.articleEtQuiz.find(elem => elem.aEteRealisee);
     if (!missionViewModel.value?.kyc[0].aEteRealisee) {
-      miseAJourEtatCourant('KYC');
+      miseAJourEtatCourant('KYC', 0);
     } else if (!quizArticleAAfficher) {
-      miseAJourEtatCourant('QUIZ_ARTICLE');
+      miseAJourEtatCourant('QUIZ_ARTICLE', 0);
     } else {
-      miseAJourEtatCourant('DEFI');
+      miseAJourEtatCourant('DEFI', 0);
     }
   });
 
-  const miseAJourEtatCourant = (etat: EtatsPossible): void => {
-    etatCourant.value = etat;
+  const miseAJourEtatCourant = (etat: EtatsPossible, indexEtape: number): void => {
+    etapeCourante.value = { etapeDansLetape: indexEtape, type: etat };
   };
 
   onUnmounted(() => {

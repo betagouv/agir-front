@@ -25,5 +25,3 @@
     onClickContinuer: () => void;
   }>();
 </script>
-
-<style scoped></style>
