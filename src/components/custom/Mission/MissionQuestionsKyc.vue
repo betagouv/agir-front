@@ -1,13 +1,11 @@
 <template>
-  <button
-    class="fr-mb-2w fr-btn fr-btn--icon-left fr-btn--tertiary-no-outline fr-icon-arrow-left-line"
-    @click="revenirEtapePrecedente"
-  >
-    Retour
-  </button>
   <div v-for="(questionViewModel, index) in questionsViewModel.questions" :key="index">
     <div v-show="index === etapeCourante">
-      Etape {{ index + 1 }} sur {{ nombreEtapesMission }}
+      <MissionNavigation
+        :on-click-revenir-etape-precedente="revenirEtapePrecedente"
+        :etape-actuelle="index + 1"
+        :etape-totale="nombreEtapesMission"
+      />
       <KYCForm
         :question-view-model="questionViewModel"
         wording-bouton="Continuer"
@@ -20,6 +18,8 @@
 <script setup lang="ts">
   import { ref } from 'vue';
   import KYCForm from '@/components/custom/KYC/KYCForm.vue';
+  import MissionNavigation from '@/components/custom/Mission/MissionNavigation.vue';
+
   import { QuestionsViewModel } from '@/domaines/kyc/adapters/listeQuestionsThematique.presenter.impl';
 
   const props = defineProps<{

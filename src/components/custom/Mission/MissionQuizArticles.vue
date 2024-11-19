@@ -1,11 +1,9 @@
 <template>
-  <button
-    class="fr-mb-2w fr-btn fr-btn--icon-left fr-btn--tertiary-no-outline fr-icon-arrow-left-line"
-    @click="revenirEtapePrecedente"
-  >
-    Retour
-  </button>
-  Etape {{ etapeAffichee }} sur {{ nombreEtapesMission }}
+  <MissionNavigation
+    :on-click-revenir-etape-precedente="revenirEtapePrecedente"
+    :etape-actuelle="etapeAffichee"
+    :etape-totale="nombreEtapesMission"
+  />
   <MissionArticle
     v-if="missionAffichee.type === 'article'"
     :key="etapeCourante"
@@ -23,6 +21,7 @@
 <script setup lang="ts">
   import { ref, computed } from 'vue';
   import MissionArticle from '@/components/custom/Mission/MissionArticle.vue';
+  import MissionNavigation from '@/components/custom/Mission/MissionNavigation.vue';
   import MissionQuiz from '@/components/custom/Mission/MissionQuiz.vue';
   import { MissionQuizArticleViewModel } from '@/domaines/missions/adapters/mission.presenter.impl';
 
