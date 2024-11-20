@@ -1,4 +1,4 @@
-interface Thematique {
+export interface Thematique {
   clefTechniqueAPI: string;
   url: string;
   labelDansLeMenu: string;

@@ -94,7 +94,7 @@
   } from '@/domaines/serviceRecherche/catalogue/adapters/serviceRecherche.presenter.impl';
   import { ServiceRechercheRepositoryAxios } from '@/domaines/serviceRecherche/catalogue/adapters/serviceRecherche.repository.axios';
   import { RecupererServicesRechercheParThematiqueUsecase } from '@/domaines/serviceRecherche/catalogue/recupererServicesRechercheParThematique.usecase';
-  import { MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
+  import { MenuThematiques, Thematique } from '@/domaines/thematiques/MenuThematiques';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const store = utilisateurStore();
@@ -103,8 +103,8 @@
   const missionsViewModel = ref<MissionViewModel[]>();
   const defisViewModel = ref<DefiDescriptionViewModel[]>();
   const servicesViewModel = ref<ServicesRechercheViewModel>();
-  const thematique = MenuThematiques.getFromUrl(useRoute().params.id as string);
-  let thematiqueId = thematique.clefTechniqueAPI;
+  const thematique = ref<Thematique>(MenuThematiques.getFromUrl(useRoute().params.id as string));
+  let thematiqueId = thematique.value.clefTechniqueAPI;
 
   const lancerChargementDesDonnees = () => {
     isLoading.value = true;
@@ -149,7 +149,8 @@
   };
   onBeforeRouteUpdate((to, from, next) => {
     next();
-    thematiqueId = MenuThematiques.getFromUrl(to.params.id as string)!.clefTechniqueAPI;
+    thematique.value = MenuThematiques.getFromUrl(to.params.id as string)!;
+    thematiqueId = thematique.value.clefTechniqueAPI;
     lancerChargementDesDonnees();
   });
   onMounted(() => {
