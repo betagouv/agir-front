@@ -1,17 +1,15 @@
 <template>
-  <div class="fr-container fr-mb-6w">
-    <CarteSkeleton v-if="isLoading" />
-    <div v-else-if="questionsViewModel" class="fr-p-4w">
-      <MissionQuestionsKyc
-        v-model:questions-view-model="questionsViewModel"
-        :on-click-fin-k-y-c="onClickFinKYC"
-        :on-click-revenir-etape-precedente="onClickRevenirEtapePrecedente"
-        :etape-courante-defaut="props.etapeCouranteDefaut"
-        :nombre-etapes-mission="props.nombreEtapesMission"
-      />
-    </div>
-    <div v-else>Une erreur est survenue</div>
+  <CarteSkeleton v-if="isLoading" />
+  <div v-else-if="questionsViewModel">
+    <MissionQuestionsKyc
+      v-model:questions-view-model="questionsViewModel"
+      :on-click-fin-k-y-c="onClickFinKYC"
+      :on-click-revenir-etape-precedente="onClickRevenirEtapePrecedente"
+      :etape-courante-defaut="props.etapeCouranteDefaut"
+      :nombre-etapes-mission="props.nombreEtapesMission"
+    />
   </div>
+  <div v-else>Une erreur est survenue</div>
 </template>
 
 <script setup lang="ts">

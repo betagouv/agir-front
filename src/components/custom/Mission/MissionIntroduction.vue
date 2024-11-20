@@ -5,7 +5,7 @@
       {{ titre }}
     </h1>
     <img :src="urlImage" height="200" alt="" />
-    <p class="fr-mt-2w text--bold">{{ texte }}</p>
+    <p class="fr-mt-2w" v-html="texte"></p>
     <button id="btnContinuer" class="fr-btn" @click="onClickContinuer">Continuer</button>
   </div>
 </template>

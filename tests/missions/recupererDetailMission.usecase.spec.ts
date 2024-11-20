@@ -8,7 +8,6 @@ import {
 import { expect } from 'vitest';
 import { InteractionType } from '@/shell/interactionType';
 import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
-import { TagStyle } from '@/domaines/thematiques/TagThematique';
 
 const mission: DetailMission = {
   titre: 'Thematique 1',
@@ -16,6 +15,7 @@ const mission: DetailMission = {
   urlImage: 'urlImage',
   estTerminee: false,
   estTerminable: false,
+  intro: 'Coucou les amis',
   missionId: '1',
   progressionKyc: {
     etapeCourante: 1,
@@ -85,6 +85,7 @@ describe("Fichier de tests concernant la récupération d'une mission", () => {
         nombreEtapesMission: 3,
         estTerminee: false,
         estTerminable: false,
+        intro: 'Coucou les amis',
         tag: {
           label: 'Me nourrir',
           style: {

@@ -49,6 +49,7 @@ export interface MissionViewModel {
   urlImage: string;
   estTerminee: boolean;
   estTerminable: boolean;
+  intro: string;
   kyc: MissionKycViewModel[];
   articleEtQuiz: MissionQuizArticleViewModel[];
   defis: MissionDefiViewModel[];
@@ -68,6 +69,7 @@ export class MissionPresenterImpl implements MissionPresenter {
       urlImage: mission.urlImage,
       estTerminee: mission.estTerminee,
       estTerminable: mission.estTerminable,
+      intro: mission.intro,
       tag: {
         label: MenuThematiques.getThematiqueData(mission.clefApiThematique).labelDansLeMenu,
         style: TagThematique.getTagThematiqueUtilitaire(mission.clefApiThematique),

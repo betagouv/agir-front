@@ -19,7 +19,7 @@
       v-if="etapeCourante.type === 'INTRO'"
       :titre="missionViewModel.titre"
       :url-image="missionViewModel.urlImage"
-      texte="lorem"
+      :texte="missionViewModel.intro"
       :tag="missionViewModel.tag"
       :on-click-continuer="() => miseAJourEtatCourant('KYC', 0)"
     />
