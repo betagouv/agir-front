@@ -3,7 +3,7 @@
     <legend class="fr-fieldset__legend--regular fr-fieldset__legend" id="checkboxes-legend">
       Plusieurs réponses sont possibles
     </legend>
-    <div class="fr-fieldset__element" v-for="(option, index) in options" :key="option.id">
+    <div class="fr-fieldset__element" v-for="(option, index) in updatedOptions" :key="option.id">
       <div
         :class="`fr-checkbox-group checkbox-group--custom border ${
           option.checked ? 'fr-text--bold border--bleu-dark' : ''
@@ -14,7 +14,7 @@
           :value="option.id"
           type="checkbox"
           :checked="option.checked"
-          @change="updateValue($event, !!(estResetable && index === options.length - 1))"
+          @change="updateValue($event, index)"
         />
         <label class="fr-label background--white" :for="option.id">{{ option.label }}</label>
       </div>
@@ -23,6 +23,8 @@
 </template>
 
 <script setup lang="ts">
+  import { ref } from 'vue';
+
   const props = defineProps<{
     options: {
       id: string;
@@ -36,8 +38,28 @@
     (e: 'update:modelValue', value: string[]): void;
   }>();
 
-  const updateValue = (event: Event, reset: boolean) => {
+  const updatedOptions = ref(props.options);
+  const updateValue = (event: Event, index: number) => {
     const input = event.target as HTMLInputElement;
+
+    if (props.estResetable && index === props.options.length - 1) {
+      // Si l'option "reset" est cochée, on désélectionne tout sauf elle
+      updatedOptions.value.forEach((opt, i) => (opt.checked = i === index ? input.checked : false));
+    } else {
+      // Sinon, on met à jour l'état de l'option sélectionnée
+      updatedOptions.value[index].checked = input.checked;
+
+      // Si une autre option était "reset", elle est décochée
+      if (props.estResetable) {
+        updatedOptions.value[updatedOptions.value.length - 1].checked = false;
+      }
+    }
+
+    // Mise à jour des options
+    emit(
+      'update:modelValue',
+      updatedOptions.value.filter(opt => opt.checked).map(opt => opt.id),
+    );
   };
 </script>
 
