@@ -24,7 +24,7 @@ export interface QuestionApiModel extends QuestionMosaicBooleanApiModel {
       value: string;
       emoji: string;
       image_url: string;
-      unite: 'kg';
+      unite: string;
     },
   ];
   categorie: string;
@@ -34,21 +34,13 @@ export interface QuestionApiModel extends QuestionMosaicBooleanApiModel {
 
 export interface QuestionMosaicBooleanApiModel {
   titre: string;
-  reponses_multiples: {
-    code: string;
-    image_url?: string;
-    label: string;
-    boolean_value: boolean;
-    emoji?: string;
-  }[];
-  is_answered: boolean;
 }
 
 export class QuestionRepositoryAxios implements QuestionRepository {
   @intercept401()
   async recupererListeQuestions(utilisateurId: string): Promise<Question[]> {
     const response = await AxiosFactory.getAxios().get<QuestionApiModel[]>(
-      `utilisateurs/${utilisateurId}/questionsKYC`,
+      `utilisateurs/${utilisateurId}/questionsKYC_v2`,
     );
     return response.data
       .filter(question => question.categorie !== 'defi')
@@ -58,7 +50,7 @@ export class QuestionRepositoryAxios implements QuestionRepository {
   private mapQuestionApiModelToQuestion(question: QuestionApiModel): Question {
     return {
       id: question.code,
-      libelle: question.type === 'mosaic_boolean' ? question.titre : question.question,
+      libelle: question.question,
       type: question.type,
       reponses: this.determineReponses(question),
       points: question.points,
@@ -72,11 +64,11 @@ export class QuestionRepositoryAxios implements QuestionRepository {
   private determineReponses(question: QuestionApiModel): ReponseKYCSimple | ReponseMosaic<boolean> | ReponseMultiples {
     if (question.type === 'mosaic_boolean') {
       return {
-        reponse: question.reponses_multiples.map(reponse => ({
+        reponse: question.reponse_multiple.map(reponse => ({
           code: reponse.code,
           image_url: reponse.image_url,
           label: reponse.label,
-          valeur: reponse.boolean_value,
+          valeur: reponse.value === 'oui',
         })),
       } as ReponseMosaic<boolean>;
     } else if (question.type === 'choix_multiple' || question.type === 'choix_unique') {
@@ -84,7 +76,7 @@ export class QuestionRepositoryAxios implements QuestionRepository {
         reponse: question.reponse_multiple.map(reponse => ({
           code: reponse.code,
           label: reponse.label,
-          estSelectionnee: false,
+          estSelectionnee: reponse.value === 'oui',
         })),
       } as ReponseMultiples;
     } else {

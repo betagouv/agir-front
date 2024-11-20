@@ -48,8 +48,15 @@
       <h2 :class="styleDuTitre ? styleDuTitre : 'fr-h4 fr-mb-2w'">
         {{ questionViewModel.libelle }}
       </h2>
+      {{ questionViewModel }}
       <InputCheckbox
-        :options="questionViewModel.reponses_possibles"
+        :options="
+          questionViewModel.reponses_possibles.map(reponsePossible => ({
+            id: reponsePossible.id,
+            label: reponsePossible.label,
+            checked: reponsePossible.checked,
+          }))
+        "
         :est-resetable="true"
         :default-values="questionViewModel.reponses"
         v-model="reponse"

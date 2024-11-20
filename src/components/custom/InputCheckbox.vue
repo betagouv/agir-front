@@ -6,15 +6,15 @@
     <div class="fr-fieldset__element" v-for="(option, index) in options" :key="option.id">
       <div
         :class="`fr-checkbox-group checkbox-group--custom border ${
-          checkedNames.includes(option.id) ? 'fr-text--bold border--bleu-dark' : ''
+          option.checked ? 'fr-text--bold border--bleu-dark' : ''
         }`"
       >
         <input
           :id="option.id"
           :value="option.id"
           type="checkbox"
-          v-model="checkedNames"
-          @change="updateValue($event, estResetable && index === options.length - 1 ? true : false)"
+          :checked="option.checked"
+          @change="updateValue($event, !!(estResetable && index === options.length - 1))"
         />
         <label class="fr-label background--white" :for="option.id">{{ option.label }}</label>
       </div>
@@ -23,18 +23,14 @@
 </template>
 
 <script setup lang="ts">
-  import { ref } from 'vue';
-
   const props = defineProps<{
     options: {
       id: string;
       label: string;
+      checked?: boolean;
     }[];
-    defaultValues?: string[];
     estResetable?: boolean;
   }>();
-
-  const checkedNames = ref<string[]>(props.defaultValues || []);
 
   const emit = defineEmits<{
     (e: 'update:modelValue', value: string[]): void;
@@ -42,13 +38,6 @@
 
   const updateValue = (event: Event, reset: boolean) => {
     const input = event.target as HTMLInputElement;
-
-    if (props.estResetable && reset && input.checked) {
-      checkedNames.value = [input.value];
-    } else if (props.estResetable) {
-      checkedNames.value = checkedNames.value.filter(value => value !== props.options[props.options.length - 1].id);
-    }
-    emit('update:modelValue', checkedNames.value);
   };
 </script>
 
