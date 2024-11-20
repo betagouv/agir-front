@@ -95,7 +95,7 @@
 
     isLoading.value = false;
 
-    const quizArticleAAfficher = missionViewModel.value?.articleEtQuiz.find(elem => elem.aEteRealisee);
+    const indexDuQuizzAAfficher = missionViewModel.value?.articleEtQuiz.findLastIndex(elem => elem.aEteRealisee);
     if (missionViewModel.value?.estTerminee) {
       miseAJourEtatCourant('INTRO', 0);
     } else if (missionViewModel.value?.kyc[0].progression.etapeCourante === 0) {
@@ -104,8 +104,10 @@
       missionViewModel.value?.kyc[0].progression.etapeCourante !== missionViewModel.value?.kyc[0].progression.etapeTotal
     ) {
       miseAJourEtatCourant('KYC', missionViewModel.value!.kyc[0].progression.etapeCourante);
-    } else if (!quizArticleAAfficher) {
+    } else if (indexDuQuizzAAfficher !== undefined && indexDuQuizzAAfficher === -1) {
       miseAJourEtatCourant('QUIZ_ARTICLE', 0);
+    } else if (indexDuQuizzAAfficher > -1 && indexDuQuizzAAfficher < missionViewModel.value?.articleEtQuiz.length - 1) {
+      miseAJourEtatCourant('QUIZ_ARTICLE', indexDuQuizzAAfficher + 1);
     } else {
       miseAJourEtatCourant('DEFI', 0);
     }
