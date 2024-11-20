@@ -35,7 +35,9 @@
       v-if="etapeCourante.type === 'QUIZ_ARTICLE'"
       :missions="missionViewModel.articleEtQuiz"
       :on-click-fin-quiz-article="() => miseAJourEtatCourant('DEFI', 0)"
-      :on-click-revenir-etape-precedente="() => miseAJourEtatCourant('KYC', missionViewModel!.kyc.length)"
+      :on-click-revenir-etape-precedente="
+        () => miseAJourEtatCourant('KYC', missionViewModel!.kyc[0].progression.etapeTotal - 1)
+      "
       :etape-courante-defaut="etapeCourante.etapeDansLetape"
       :nombre-etapes-mission="missionViewModel.nombreEtapesMission"
       :nombre-detapes-precendentes="missionViewModel?.kyc[0].progression.etapeTotal"
