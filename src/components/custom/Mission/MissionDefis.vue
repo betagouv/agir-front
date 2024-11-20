@@ -6,12 +6,12 @@
       :etape-totale="nombreEtapesMission"
     />
     <h1 class="fr-h2">Sélectionnez un défi</h1>
-    <ul class="fr-grid fr-grid-row fr-grid-row--gutters list-style-none">
+    <ul class="fr-grid fr-grid-row fr-grid-row--gutters list-style-none fr-mb-3w">
       <li v-for="defi in defis" :key="defi.id" class="fr-col-4">
         <MissionCarteDefi :defi="defi" />
       </li>
     </ul>
-    <button v-if="afficherTerminerMission" @click="onClickFinDefis" class="fr-btn">Suivant</button>
+    <button v-if="afficherTerminerMission" @click="onClickFinDefis" class="fr-btn fr-btn--lg">Continuer</button>
   </section>
 </template>
 

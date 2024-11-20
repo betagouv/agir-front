@@ -5,7 +5,7 @@
     :est-enchainement-mission="true"
     @update:article-modifie="onArticleModifie"
   >
-    <button class="fr-btn" @click="onClickContinuer">Continuer</button>
+    <button class="fr-btn fr-btn--lg fr-mt-3w" @click="onClickContinuer">Continuer</button>
   </PageArticleComposant>
 </template>
 

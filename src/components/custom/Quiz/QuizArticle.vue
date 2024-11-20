@@ -10,7 +10,7 @@
     <span class="fr-m-0 fr-text--bold fr-text--md">Comment avez-vous trouvé ce quiz ?</span>
     <Notation @rated="noterLeQuiz" />
   </div>
-  <button v-if="estEnchainementMission" class="fr-btn fr-mt-3w" @click="onClickContinuer">Continuer</button>
+  <button v-if="estEnchainementMission" class="fr-btn fr-btn--lg fr-mt-3w" @click="onClickContinuer">Continuer</button>
 
   <router-link v-else class="fr-btn fr-mt-3w" :to="useBoutonRetour().url"> {{ useBoutonRetour().label }}</router-link>
 </template>
