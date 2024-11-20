@@ -67,6 +67,7 @@
   import { MissionsRepositoryAxios } from '@/domaines/missions/adapters/missions.repository.axios';
   import { RecupererDetailMissionUsecase } from '@/domaines/missions/recupererDetailMission.usecase';
   import { MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
+  import { determineEtapeMission, EtatsPossible } from '@/shell/determineEtapeMission';
   import { utilisateurStore } from '@/store/utilisateur';
 
   interface EtapeCourante {
@@ -74,43 +75,29 @@
     type: EtatsPossible;
   }
 
-  type EtatsPossible = 'INTRO' | 'KYC' | 'QUIZ_ARTICLE' | 'DEFI' | 'FIN';
-
   const etapeCourante = ref<EtapeCourante>({ etapeDansLetape: 0, type: 'INTRO' });
 
   const isLoading = ref<boolean>(true);
   const missionViewModel = ref<MissionViewModel>();
 
-  function onMissionPretAAffchee(viewModel: MissionViewModel) {
-    missionViewModel.value = viewModel;
-  }
-
   const missionId = useRoute().params.missionId as string;
 
   const utilisateurId = utilisateurStore().utilisateur.id;
 
+  // ToDo: Gestion loading erreur
+
   onMounted(async () => {
     const usecase = new RecupererDetailMissionUsecase(new MissionsRepositoryAxios());
-    await usecase.execute(missionId, utilisateurId, new MissionPresenterImpl(onMissionPretAAffchee));
+    await usecase.execute(
+      missionId,
+      utilisateurId,
+      new MissionPresenterImpl((viewModel: MissionViewModel) => (missionViewModel.value = viewModel)),
+    );
 
     isLoading.value = false;
 
-    const indexDuQuizzAAfficher = missionViewModel.value?.articleEtQuiz.findLastIndex(elem => elem.aEteRealisee);
-    if (missionViewModel.value?.estTerminee) {
-      miseAJourEtatCourant('INTRO', 0);
-    } else if (missionViewModel.value?.kyc[0].progression.etapeCourante === 0) {
-      miseAJourEtatCourant('INTRO', 0);
-    } else if (
-      missionViewModel.value?.kyc[0].progression.etapeCourante !== missionViewModel.value?.kyc[0].progression.etapeTotal
-    ) {
-      miseAJourEtatCourant('KYC', missionViewModel.value!.kyc[0].progression.etapeCourante);
-    } else if (indexDuQuizzAAfficher !== undefined && indexDuQuizzAAfficher === -1) {
-      miseAJourEtatCourant('QUIZ_ARTICLE', 0);
-    } else if (indexDuQuizzAAfficher > -1 && indexDuQuizzAAfficher < missionViewModel.value?.articleEtQuiz.length - 1) {
-      miseAJourEtatCourant('QUIZ_ARTICLE', indexDuQuizzAAfficher + 1);
-    } else {
-      miseAJourEtatCourant('DEFI', 0);
-    }
+    const etat = determineEtapeMission(missionViewModel.value!);
+    miseAJourEtatCourant(etat.etat, etat.indexEtape);
   });
 
   const miseAJourEtatCourant = (etat: EtatsPossible, indexEtape: number): void => {
