@@ -1,6 +1,6 @@
 import { BilanCarboneBasePresenter } from '@/domaines/bilanCarbone/adapters/bilanCarboneBase.presenter';
 import { BilanCarbonePresenter, ThematiquesBilan } from '@/domaines/bilanCarbone/ports/bilanCarbone.presenter';
-import { BilanCompletCarbone, BilanPartielCarbone } from '@/domaines/bilanCarbone/recupererBilanCarbone.usecase';
+import { BilanCarbone } from '@/domaines/bilanCarbone/recupererBilanCarbone.usecase';
 
 export interface BilanCarboneCompletAccueilViewModel {
   pourcentageProgressBar: number;
@@ -20,25 +20,17 @@ export class BilanCarboneAccueilPresenterImpl extends BilanCarboneBasePresenter 
     super();
   }
 
-  presenteBilanComplet(bilanCarbone: BilanCompletCarbone): void {
+  presenteBilanComplet(bilanCarbone: BilanCarbone): void {
     this.bilanCarboneViewModel({
-      pourcentageProgressBar: this.calculPourcentageProgressBar(bilanCarbone.impactKgAnnuel),
-      nombreDeTonnesAnnuel: this.calculTonnesAnnuel(bilanCarbone.impactKgAnnuel),
+      pourcentageProgressBar: this.calculPourcentageProgressBar(bilanCarbone.bilanComplet!.impactKgAnnuel),
+      nombreDeTonnesAnnuel: this.calculTonnesAnnuel(bilanCarbone.bilanComplet!.impactKgAnnuel),
     });
   }
 
-  presenteBilanPartiel(bilan: BilanPartielCarbone): void {
+  presenteBilanPartiel(bilan: BilanCarbone): void {
     this.bilanCarbonePartielViewModel({
       pourcentageCompletionTotal: bilan.pourcentageCompletionTotal,
-      thematiquesBilan: bilan.universBilan.map(univers => ({
-        clefUnivers: univers.clefUnivers,
-        contentId: univers.contentId,
-        label: univers.label,
-        urlImage: univers.urlImage,
-        estTermine: univers.estTermine,
-        pourcentageProgression: univers.pourcentageProgression,
-        nombreTotalDeQuestion: univers.nombreTotalDeQuestion,
-      })),
+      thematiquesBilan: bilan.thematiquesBilan,
     });
   }
 }

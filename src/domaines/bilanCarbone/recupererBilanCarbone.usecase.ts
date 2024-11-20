@@ -17,6 +17,8 @@ interface BilanCarboneDetailParUnivers {
   emoji: string;
 }
 
+export type NiveauImpactBilanCarbone = 'faible' | 'moyen' | 'fort' | 'tres_fort';
+
 export interface BilanCompletCarbone {
   impactKgAnnuel: number;
   univers: BilanCarboneDetailParUnivers[];
@@ -25,21 +27,21 @@ export interface BilanCompletCarbone {
     emoji: string;
     pourcentage: string;
   }[];
-  universBilan: ThematiquesBilan[];
 }
+
 export interface BilanPartielCarbone {
   pourcentageCompletionTotal: number;
-  transport: { niveau: 'moyen' | 'faible' | 'fort' | 'tres_fort' };
-  alimentation: { niveau: 'moyen' | 'faible' | 'fort' | 'tres_fort' };
-  logement: { niveau: 'moyen' | 'faible' | 'fort' | 'tres_fort' };
-  consommation: { niveau: 'moyen' | 'faible' | 'fort' | 'tres_fort' };
-  universBilan: ThematiquesBilan[];
+  transport: { niveau: NiveauImpactBilanCarbone };
+  alimentation: { niveau: NiveauImpactBilanCarbone };
+  logement: { niveau: NiveauImpactBilanCarbone };
+  consommation: { niveau: NiveauImpactBilanCarbone };
 }
+
 export interface BilanCarbone {
-  bilanCompletEstDispo: boolean;
   pourcentageCompletionTotal: number;
-  bilanComplet: BilanCompletCarbone;
-  bilanPartiel: BilanPartielCarbone;
+  bilanComplet?: BilanCompletCarbone;
+  bilanPartiel?: BilanPartielCarbone;
+  thematiquesBilan: ThematiquesBilan[];
 }
 
 export class RecupererBilanCarboneUsecase {
@@ -48,10 +50,10 @@ export class RecupererBilanCarboneUsecase {
   async execute(utilisateurId: string, presenter: BilanCarbonePresenter): Promise<void> {
     const bilanCarbone = await this.bilanCarboneRepository.recupererBilanCarbone(utilisateurId);
 
-    if (bilanCarbone.bilanCompletEstDispo) {
-      presenter.presenteBilanComplet(bilanCarbone.bilanComplet);
-    } else {
-      presenter.presenteBilanPartiel(bilanCarbone.bilanPartiel);
+    if (bilanCarbone.bilanComplet) {
+      presenter.presenteBilanComplet(bilanCarbone);
+    } else if (bilanCarbone.bilanPartiel) {
+      presenter.presenteBilanPartiel(bilanCarbone);
     }
   }
 }

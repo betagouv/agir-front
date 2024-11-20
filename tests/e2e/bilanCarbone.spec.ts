@@ -29,7 +29,7 @@ test.beforeAll(async () => {
 
 test.describe('Bilan carbone', () => {
   test('doit afficher le meta titre associé, le breadcrumb et un aside explicatif', async () => {
-    await page.route(`${process.env.VITE_API_URL}/utilisateur/dorian/bilans/last`, async _route => {});
+    await page.route(`${process.env.VITE_API_URL}/utilisateurs/dorian/bilans/last_v3`, async _route => {});
     await page.goto('/bilan-environnemental');
 
     await expect(page).toHaveTitle("Mon bilan environnemental - J'agis");
@@ -56,7 +56,7 @@ test.describe('Bilan carbone', () => {
 
   test.describe('quand le bilan carbone est en cours de chargement', async () => {
     test('doit afficher un loader', async () => {
-      await page.route(`${process.env.VITE_API_URL}/utilisateur/dorian/bilans/last`, async _route => {});
+      await page.route(`${process.env.VITE_API_URL}/utilisateurs/dorian/bilans/last_v3`, async _route => {});
 
       const loader = page.getByText('Chargement en cours ...', { exact: true });
       await expect(loader).toHaveRole('paragraph');
@@ -73,7 +73,7 @@ test.describe('Bilan carbone', () => {
 
   test.describe('quand le bilan carbone a rencontré un problème de chargement', async () => {
     test("doit afficher un message d'erreur", async () => {
-      await page.route(`${process.env.VITE_API_URL}/utilisateur/dorian/bilans/last`, route => {
+      await page.route(`${process.env.VITE_API_URL}/utilisateurs/dorian/bilans/last_v3`, route => {
         route.fulfill({
           status: 500,
           contentType: 'application/json',
@@ -98,69 +98,52 @@ test.describe('Bilan carbone', () => {
 
   test.describe('quand le bilan carbone a fini de charger', async () => {
     test('doit afficher la page correctement', async () => {
-      await page.route(`${process.env.VITE_API_URL}/utilisateur/dorian/bilans/last`, route => {
+      await page.route(`${process.env.VITE_API_URL}/utilisateurs/dorian/bilans/last_v3`, route => {
         route.fulfill({
           status: 200,
           contentType: 'application/json',
           body: JSON.stringify({
-            mini_bilan: {
+            pourcentage_completion_totale: 29,
+            bilan_approximatif: {
               impact_transport: 'fort',
-              impact_alimentation: 'tres_fort',
-              impact_logement: 'fort',
-              impact_consommation: 'fort',
+              impact_alimentation: 'faible',
+              impact_logement: 'faible',
+              impact_consommation: 'faible',
             },
-            bilan_complet: {
-              impact_kg_annee: 7040.79948610642,
-              top_3: [],
-              impact_univers: [],
-            },
-            bilan_synthese: {
-              impact_transport: 'fort',
-              impact_alimentation: 'tres_fort',
-              impact_logement: 'fort',
-              impact_consommation: 'fort',
-              pourcentage_completion_totale: 58,
-              liens_bilans_univers: [
-                {
-                  id_enchainement_kyc: 'ENCHAINEMENT_KYC_bilan_transport',
-                  image_url: 'https://res.cloudinary.com/dq023imd8/image/upload/v1728466903/Mobilite_df75aefd09.svg',
-                  nombre_total_question: 9,
-                  pourcentage_progression: 100,
-                  univers: 'transport',
-                  univers_label: 'Mes déplacements',
-                  temps_minutes: 5,
-                },
-                {
-                  id_enchainement_kyc: 'ENCHAINEMENT_KYC_bilan_alimentation',
-                  image_url: 'https://res.cloudinary.com/dq023imd8/image/upload/v1728466523/cuisine_da54797693.svg',
-                  nombre_total_question: 6,
-                  pourcentage_progression: 33,
-                  univers: 'alimentation',
-                  univers_label: 'Me nourrir',
-                  temps_minutes: 3,
-                },
-                {
-                  id_enchainement_kyc: 'ENCHAINEMENT_KYC_bilan_consommation',
-                  image_url: 'https://res.cloudinary.com/dq023imd8/image/upload/v1728468852/conso_7522b1950d.svg',
-                  nombre_total_question: 8,
-                  pourcentage_progression: 13,
-                  univers: 'consommation',
-                  univers_label: 'Mes achats',
-                  temps_minutes: 10,
-                },
-                {
-                  id_enchainement_kyc: 'ENCHAINEMENT_KYC_bilan_logement',
-                  image_url: 'https://res.cloudinary.com/dq023imd8/image/upload/v1728468978/maison_80242d91f3.svg',
-                  nombre_total_question: 8,
-                  pourcentage_progression: 38,
-                  univers: 'logement',
-                  univers_label: 'Me loger',
-                  temps_minutes: 9,
-                },
-              ],
-              mini_bilan_dispo: true,
-              bilan_complet_dispo: false,
-            },
+            liens_bilans_thematique: [
+              {
+                id_enchainement_kyc: 'ENCHAINEMENT_KYC_bilan_transport',
+                image_url: 'image-transport.svg',
+                nombre_total_question: 9,
+                pourcentage_progression: 0,
+                thematique: 'transport',
+                temps_minutes: 5,
+              },
+              {
+                id_enchainement_kyc: 'ENCHAINEMENT_KYC_bilan_alimentation',
+                image_url: 'image-alimentation.svg',
+                nombre_total_question: 6,
+                pourcentage_progression: 17,
+                thematique: 'alimentation',
+                temps_minutes: 3,
+              },
+              {
+                id_enchainement_kyc: 'ENCHAINEMENT_KYC_bilan_consommation',
+                image_url: 'image-conso.svg',
+                nombre_total_question: 8,
+                pourcentage_progression: 75,
+                thematique: 'consommation',
+                temps_minutes: 10,
+              },
+              {
+                id_enchainement_kyc: 'ENCHAINEMENT_KYC_bilan_logement',
+                image_url: 'image-logement.svg',
+                nombre_total_question: 8,
+                pourcentage_progression: 38,
+                thematique: 'logement',
+                temps_minutes: 9,
+              },
+            ],
           }),
         });
       });

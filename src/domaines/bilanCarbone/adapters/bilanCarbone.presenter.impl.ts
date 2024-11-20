@@ -1,6 +1,6 @@
 import { BilanCarboneBasePresenter } from '@/domaines/bilanCarbone/adapters/bilanCarboneBase.presenter';
 import { BilanCarbonePresenter, ThematiquesBilan } from '@/domaines/bilanCarbone/ports/bilanCarbone.presenter';
-import { BilanCompletCarbone, BilanPartielCarbone } from '@/domaines/bilanCarbone/recupererBilanCarbone.usecase';
+import { BilanCarbone, NiveauImpactBilanCarbone } from '@/domaines/bilanCarbone/recupererBilanCarbone.usecase';
 
 interface BilanCarbonDetailItemViewModel {
   label: string;
@@ -56,13 +56,13 @@ export class BilanCarbonePresenterImpl extends BilanCarboneBasePresenter impleme
     super();
   }
 
-  presenteBilanComplet(bilanCarbone: BilanCompletCarbone): void {
+  presenteBilanComplet(bilanCarbone: BilanCarbone): void {
     this.bilanCarboneViewModel({
       titre: 'Mon bilan <span class="text--bleu">environnemental</span>',
-      pourcentageProgressBar: this.calculPourcentageProgressBar(bilanCarbone.impactKgAnnuel),
-      nombreDeTonnesAnnuel: this.calculTonnesAnnuel(bilanCarbone.impactKgAnnuel),
-      impactKgAnnuel: this.formateKg(bilanCarbone.impactKgAnnuel),
-      univers: bilanCarbone.univers.map(univers => ({
+      pourcentageProgressBar: this.calculPourcentageProgressBar(bilanCarbone.bilanComplet!.impactKgAnnuel),
+      nombreDeTonnesAnnuel: this.calculTonnesAnnuel(bilanCarbone.bilanComplet!.impactKgAnnuel),
+      impactKgAnnuel: this.formateKg(bilanCarbone.bilanComplet!.impactKgAnnuel),
+      univers: bilanCarbone.bilanComplet!.univers.map(univers => ({
         label: univers.universLabel,
         impactKgAnnuel: this.formateKg(univers.impactKgAnnuel),
         pourcentage: univers.pourcentage,
@@ -74,20 +74,12 @@ export class BilanCarbonePresenterImpl extends BilanCarboneBasePresenter impleme
           pourcentage: detail.pourcentage,
         })),
       })),
-      top3: bilanCarbone.top3.map(top3 => ({
+      top3: bilanCarbone.bilanComplet!.top3.map(top3 => ({
         emoji: top3.emoji,
         label: top3.label,
         pourcentage: top3.pourcentage,
       })),
-      thematiquesBilan: bilanCarbone.universBilan.map(univers => ({
-        clefUnivers: univers.clefUnivers,
-        contentId: univers.contentId,
-        label: univers.label,
-        urlImage: univers.urlImage,
-        estTermine: univers.estTermine,
-        pourcentageProgression: univers.pourcentageProgression,
-        nombreTotalDeQuestion: univers.nombreTotalDeQuestion,
-      })),
+      thematiquesBilan: bilanCarbone.thematiquesBilan,
     });
   }
 
@@ -103,50 +95,42 @@ export class BilanCarbonePresenterImpl extends BilanCarboneBasePresenter impleme
         };
   }
 
-  presenteBilanPartiel(bilan: BilanPartielCarbone): void {
+  presenteBilanPartiel(bilanCarbone: BilanCarbone): void {
     this.bilanCarbonePartielViewModel({
       titre: 'Estimez mon <span class="text--bleu">bilan environnemental</span>',
-      pourcentageCompletionTotal: bilan.pourcentageCompletionTotal,
+      pourcentageCompletionTotal: bilanCarbone.bilanPartiel!.pourcentageCompletionTotal,
       categories: [
         {
           label: '🚙 Transports',
-          tag: this.determineTag(bilan.transport.niveau),
-          progressBarStyle: this.determineProgressBar(bilan.transport.niveau),
+          tag: this.determineTag(bilanCarbone.bilanPartiel!.transport.niveau),
+          progressBarStyle: this.determineProgressBar(bilanCarbone.bilanPartiel!.transport.niveau),
         },
         {
           label: '🥘 Alimentation',
-          tag: this.determineTag(bilan.alimentation.niveau),
-          progressBarStyle: this.determineProgressBar(bilan.alimentation.niveau),
+          tag: this.determineTag(bilanCarbone.bilanPartiel!.alimentation.niveau),
+          progressBarStyle: this.determineProgressBar(bilanCarbone.bilanPartiel!.alimentation.niveau),
         },
         {
           label: '🏡 Logement',
-          tag: this.determineTag(bilan.logement.niveau),
-          progressBarStyle: this.determineProgressBar(bilan.logement.niveau),
+          tag: this.determineTag(bilanCarbone.bilanPartiel!.logement.niveau),
+          progressBarStyle: this.determineProgressBar(bilanCarbone.bilanPartiel!.logement.niveau),
         },
         {
           label: '🛍 Consommation',
-          tag: this.determineTag(bilan.consommation.niveau),
-          progressBarStyle: this.determineProgressBar(bilan.consommation.niveau),
+          tag: this.determineTag(bilanCarbone.bilanPartiel!.consommation.niveau),
+          progressBarStyle: this.determineProgressBar(bilanCarbone.bilanPartiel!.consommation.niveau),
         },
       ],
-      thematiquesBilan: bilan.universBilan.map(univers => ({
-        clefUnivers: univers.clefUnivers,
-        contentId: univers.contentId,
-        label: univers.label,
-        urlImage: univers.urlImage,
-        estTermine: univers.estTermine,
-        pourcentageProgression: univers.pourcentageProgression,
-        nombreTotalDeQuestion: univers.nombreTotalDeQuestion,
-      })),
+      thematiquesBilan: bilanCarbone.thematiquesBilan,
     });
   }
 
-  private determineProgressBar(niveau: 'moyen' | 'faible' | 'fort' | 'tres_fort'): string {
+  private determineProgressBar(niveau: NiveauImpactBilanCarbone): string {
     switch (niveau) {
-      case 'moyen':
-        return 'progress-bar-impact-moyen';
       case 'faible':
         return 'progress-bar-impact-faible';
+      case 'moyen':
+        return 'progress-bar-impact-moyen';
       case 'fort':
         return 'progress-bar-impact-fort';
       case 'tres_fort':
@@ -154,17 +138,17 @@ export class BilanCarbonePresenterImpl extends BilanCarboneBasePresenter impleme
     }
   }
 
-  private determineTag(niveau: 'moyen' | 'faible' | 'fort' | 'tres_fort'): BilanCarbonePartielTagViewModel {
+  private determineTag(niveau: NiveauImpactBilanCarbone): BilanCarbonePartielTagViewModel {
     switch (niveau) {
-      case 'moyen':
-        return {
-          wording: 'Moyen',
-          classes: 'tag-impact-moyen',
-        };
       case 'faible':
         return {
           wording: 'Faible',
           classes: 'tag-impact-faible',
+        };
+      case 'moyen':
+        return {
+          wording: 'Moyen',
+          classes: 'tag-impact-moyen',
         };
       case 'fort':
         return {
