@@ -1,13 +1,11 @@
 <template>
-  <div class="fr-container fr-py-6w">
-    <ThematiqueTag :tag="tag" />
-    <h1 class="fr-mt-2w">
-      {{ titre }}
-    </h1>
-    <img :src="urlImage" height="200" alt="" />
-    <p class="fr-mt-2w" v-html="texte"></p>
-    <button id="btnContinuer" class="fr-btn" @click="onClickContinuer">Continuer</button>
-  </div>
+  <ThematiqueTag :tag="tag" />
+  <h1 class="fr-mt-2w">
+    {{ titre }}
+  </h1>
+  <img :src="urlImage" height="200" alt="" />
+  <p class="fr-mt-2w" v-html="texte"></p>
+  <button id="btnContinuer" class="fr-btn fr-btn--lg" @click="onClickContinuer">Continuer</button>
 </template>
 
 <script setup lang="ts">
