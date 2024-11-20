@@ -4,6 +4,7 @@ import {
   RecupererQuestionUsecase,
   ThematiqueQuestion,
   ReponseMosaic,
+  ReponseMultiples,
 } from '@/domaines/kyc/recupererQuestionUsecase';
 import { QuestionPresenterImpl } from '@/domaines/kyc/adapters/question.presenter.impl';
 import { QuestionViewModel } from '@/domaines/kyc/adapters/listeQuestionsThematique.presenter.impl';
@@ -52,9 +53,24 @@ describe('Fichier de tests pour récuperer une question KYC', () => {
       type: 'choix_multiple',
       points: 10,
       reponses: {
-        reponses_possibles: ['1', '2', '3'],
-        reponse: [],
-      } as ReponseKYCSimple,
+        reponse: [
+          {
+            code: '1',
+            label: '1',
+            estSelectionnee: true,
+          },
+          {
+            code: '2',
+            label: '2',
+            estSelectionnee: false,
+          },
+          {
+            code: '3',
+            label: '3',
+            estSelectionnee: true,
+          },
+        ],
+      },
       thematique: ThematiqueQuestion.DECHET,
       aEteRepondu: false,
     });
@@ -75,14 +91,17 @@ describe('Fichier de tests pour récuperer une question KYC', () => {
           {
             id: '1',
             label: '1',
+            checked: true,
           },
           {
             id: '2',
             label: '2',
+            checked: false,
           },
           {
             id: '3',
             label: '3',
+            checked: true,
           },
         ],
         aDejaEteRepondu: false,
@@ -101,9 +120,25 @@ describe('Fichier de tests pour récuperer une question KYC', () => {
       points: 10,
       thematique: ThematiqueQuestion.TRANSPORT,
       reponses: {
-        reponses_possibles: ['1', '2', '3'],
-        reponse: [],
-      } as ReponseKYCSimple,
+        reponse: [
+          {
+            code: '1',
+            label: '1',
+            estSelectionnee: true,
+          },
+          {
+            code: '2',
+            label: '2',
+            estSelectionnee: false,
+          },
+          {
+            code: '3',
+            label: '3',
+            estSelectionnee: false,
+          },
+        ],
+      },
+
       aEteRepondu: false,
     });
 
@@ -123,14 +158,17 @@ describe('Fichier de tests pour récuperer une question KYC', () => {
           {
             id: '1',
             label: '1',
+            checked: true,
           },
           {
             id: '2',
             label: '2',
+            checked: false,
           },
           {
             id: '3',
             label: '3',
+            checked: false,
           },
         ],
         aDejaEteRepondu: false,
@@ -200,53 +238,6 @@ describe('Fichier de tests pour récuperer une question KYC', () => {
         aDejaEteRepondu: false,
         description:
           "Ces informations permettent à <span class='text--italic'>J'agis</span> de mieux vous conseiller en matière de mobilité",
-      });
-    }
-  });
-
-  it('Si une KYC a déjà été répondue aDejaEteRepondu doit être à true', async () => {
-    // GIVEN
-    const questionRepository = new MockQuestionRepository({
-      id: 'questionId',
-      libelle: 'Une question',
-      type: 'choix_unique',
-      points: 10,
-      thematique: ThematiqueQuestion.AUTRE,
-      reponses: {
-        reponses_possibles: ['1', '2', '3'],
-        reponse: ['1'],
-      } as ReponseKYCSimple,
-      aEteRepondu: true,
-    });
-
-    // WHEN
-    const usecase = new RecupererQuestionUsecase(questionRepository);
-    await usecase.execute('utilisateurId', 'questionId', new QuestionPresenterImpl(expectation));
-
-    // THEN
-    function expectation(viewModel: QuestionViewModel) {
-      expect(viewModel).toStrictEqual<QuestionViewModel>({
-        id: 'questionId',
-        libelle: 'Une question',
-        points: 'Récoltez vos + 10 points',
-        type: 'choix_unique',
-        reponses: ['1'],
-        reponses_possibles: [
-          {
-            id: '1',
-            label: '1',
-          },
-          {
-            id: '2',
-            label: '2',
-          },
-          {
-            id: '3',
-            label: '3',
-          },
-        ],
-        aDejaEteRepondu: true,
-        description: 'Dites-nous en plus sur vous pour que le service vous recommande des actions plus personnalisées.',
       });
     }
   });

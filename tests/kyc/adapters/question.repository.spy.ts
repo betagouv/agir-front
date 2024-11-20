@@ -56,7 +56,7 @@ export class SpyQuestionRepository implements QuestionRepository {
     return this._envoyerQuestionArgs;
   }
 
-  envoyerReponseMosaic(
+  envoyerReponsesMultiples(
     utilisateurId: string,
     questionId: string,
     reponses: {

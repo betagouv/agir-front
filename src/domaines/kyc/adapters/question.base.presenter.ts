@@ -2,7 +2,13 @@ import {
   QuestionViewModel,
   ReponsePossibleViewModel,
 } from '@/domaines/kyc/adapters/listeQuestionsThematique.presenter.impl';
-import { Question, ReponseKYCSimple, ReponseMosaic, ThematiqueQuestion } from '@/domaines/kyc/recupererQuestionUsecase';
+import {
+  Question,
+  ReponseKYCSimple,
+  ReponseMosaic,
+  ReponseMultiples,
+  ThematiqueQuestion,
+} from '@/domaines/kyc/recupererQuestionUsecase';
 
 export class QuestionViewModelBuilder {
   private questionViewModel: Partial<QuestionViewModel> = {};
@@ -94,17 +100,24 @@ export class QuestionViewModelBuilder {
         emoji: reponse.emoji,
         checked: reponse.valeur,
       }));
-    } else {
+    } else if (question.type === 'choix_multiple' || question.type === 'choix_unique') {
+      return (question.reponses as ReponseMultiples).reponse.map(reponse => ({
+        id: reponse.code,
+        label: reponse.label,
+        checked: reponse.estSelectionnee,
+      }));
+    } else
       return (question.reponses as ReponseKYCSimple).reponses_possibles.map(reponse => ({
         id: reponse,
         label: reponse,
       }));
-    }
   }
 
   private determineReponse(question: Question): string[] {
     if (question.type === 'mosaic_boolean') {
       return (question.reponses as ReponseMosaic<boolean>).reponse.map(reponse => reponse.valeur.toString());
+    } else if (question.type === 'choix_multiple' || question.type === 'choix_unique') {
+      return [];
     } else {
       return (question.reponses as ReponseKYCSimple).reponse;
     }

@@ -80,7 +80,7 @@
     ReponsePossibleViewModel,
   } from '@/domaines/kyc/adapters/listeQuestionsThematique.presenter.impl';
   import { QuestionRepositoryAxios } from '@/domaines/kyc/adapters/question.repository.axios';
-  import { EnvoyerReponseMosaicUsecase } from '@/domaines/kyc/envoyerReponseMosaic.usecase';
+  import { EnvoyerReponsesMultiplesUsecase } from '@/domaines/kyc/envoyerReponsesMultiples.usecase';
   import { EnvoyerReponseUsecase } from '@/domaines/kyc/envoyerReponseUsecase';
   import { ToDoListEventBusImpl } from '@/domaines/toDoList/toDoListEventBusImpl';
   import { utilisateurStore } from '@/store/utilisateur';
@@ -98,8 +98,12 @@
   });
 
   const validerLaReponse = async () => {
-    if (props.questionViewModel.type === 'mosaic_boolean') {
-      const envoyerReponseMosaicUsecase = new EnvoyerReponseMosaicUsecase(
+    if (
+      props.questionViewModel.type === 'mosaic_boolean' ||
+      props.questionViewModel.type === 'choix_multiple' ||
+      props.questionViewModel.type === 'choix_unique'
+    ) {
+      const envoyerReponseMosaicUsecase = new EnvoyerReponsesMultiplesUsecase(
         new QuestionRepositoryAxios(),
         ToDoListEventBusImpl.getInstance(),
       );

@@ -1,4 +1,4 @@
-import { EnvoyerReponseMosaicUsecase } from '@/domaines/kyc/envoyerReponseMosaic.usecase';
+import { EnvoyerReponsesMultiplesUsecase } from '@/domaines/kyc/envoyerReponsesMultiples.usecase';
 import { SpyToDoListEventBus } from '../toDoList/adapters/spyTodoListEventBus';
 import { expect } from 'vitest';
 import { ToDoListEvent } from '@/domaines/toDoList/toDoListEventBusImpl';
@@ -11,7 +11,7 @@ describe("Fichier de tests concernant l'envoie des reponses à une question mosa
     const spyEventBus = new SpyToDoListEventBus();
 
     // WHEN
-    const usecase = new EnvoyerReponseMosaicUsecase(questionRepository, spyEventBus);
+    const usecase = new EnvoyerReponsesMultiplesUsecase(questionRepository, spyEventBus);
     await usecase.execute('utilisateurId', 'questionId', [
       {
         code: 'code',

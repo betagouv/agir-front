@@ -5,7 +5,7 @@ export interface QuestionRepository {
   envoyerReponse(questionId: string, utilisateurId: string, reponse: string[]): Promise<void>;
   recupererListeQuestions(utilisateurId: string): Promise<Question[]>;
   recupererQuestionsThematique(utilisateurId: string, thematiqueId: string): Promise<Question[]>;
-  envoyerReponseMosaic(
+  envoyerReponsesMultiples(
     utilisateurId: string,
     questionId: string,
     reponses: { code: string; boolean_value: boolean }[],

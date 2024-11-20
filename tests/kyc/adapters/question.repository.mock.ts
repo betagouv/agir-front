@@ -18,7 +18,7 @@ export class MockQuestionRepository implements QuestionRepository {
     throw new Error('Method not implemented.');
   }
 
-  envoyerReponseMosaic(
+  envoyerReponsesMultiples(
     utilisateurId: string,
     questionId: string,
     reponses: {

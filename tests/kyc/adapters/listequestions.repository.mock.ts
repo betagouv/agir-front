@@ -18,7 +18,7 @@ export class MockListeQuestionsRepository implements QuestionRepository {
     return Promise.resolve(this.questionARetourner);
   }
 
-  envoyerReponseMosaic(
+  envoyerReponsesMultiples(
     utilisateurId: string,
     questionId: string,
     reponses: {
