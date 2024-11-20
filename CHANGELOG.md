@@ -1,5 +1,50 @@
 # Changelog
 
+## [1.29.0](https://github.com/betagouv/agir-front/compare/v1.28.0...v1.29.0) (2024-11-20)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* ajout des tags thematiques pour les aides ([#770](https://github.com/betagouv/agir-front/issues/770)) ([290fbab](https://github.com/betagouv/agir-front/commit/290fbab2034a047b2362be682ad41574d7f092b8))
+* ajout des tags thématiques pour les quiz ([#773](https://github.com/betagouv/agir-front/issues/773)) ([57929c5](https://github.com/betagouv/agir-front/commit/57929c5ae2da943c3c5ad6bf05f3311e85355e0e))
+* modification du mailto de la home en lien vers un formulaire ([#763](https://github.com/betagouv/agir-front/issues/763)) ([7818647](https://github.com/betagouv/agir-front/commit/7818647a1ed43ee774d7d47503fe1c6125f43421))
+
+
+### 🐛 Corrections de bogues
+
+* correction des tags thématiques pour les recommandations ([#772](https://github.com/betagouv/agir-front/issues/772)) ([0b1d517](https://github.com/betagouv/agir-front/commit/0b1d51778a25f1ec4beadd8521f056746b08d220))
+* mise a jour du titre des thematique au changement ([69f114d](https://github.com/betagouv/agir-front/commit/69f114d80601a57e05221aa6f3f2994ee2a86a56))
+
+
+### 👷 Autres changements
+
+* amélioration accessibilité ([#746](https://github.com/betagouv/agir-front/issues/746)) ([03bb5a4](https://github.com/betagouv/agir-front/commit/03bb5a48da3a58c3f090aed241ea1f74af727ad4))
+* branchement api bilan last v3 ([#771](https://github.com/betagouv/agir-front/issues/771)) ([2a796f7](https://github.com/betagouv/agir-front/commit/2a796f7332884dc790c874b87368da53cb725ad4))
+* Bump @playwright/test from 1.48.1 to 1.48.2 ([#754](https://github.com/betagouv/agir-front/issues/754)) ([deeb786](https://github.com/betagouv/agir-front/commit/deeb786c7a7045b2a8233d7d073f19fc2b782f69))
+* Bump @playwright/test from 1.48.2 to 1.49.0 ([#777](https://github.com/betagouv/agir-front/issues/777)) ([8731df6](https://github.com/betagouv/agir-front/commit/8731df6ec402f3e510fe5f1b74ea04a4c98e6a81))
+* Bump @sentry/vue from 8.35.0 to 8.37.1 ([#765](https://github.com/betagouv/agir-front/issues/765)) ([4ab87b4](https://github.com/betagouv/agir-front/commit/4ab87b4d123af06719f0e1ba27b7dd6727107747))
+* Bump @types/node from 22.8.1 to 22.9.0 ([#756](https://github.com/betagouv/agir-front/issues/756)) ([21b3989](https://github.com/betagouv/agir-front/commit/21b3989eacdc9c79ea3dec6219f1514f2123475d))
+* Bump @vitejs/plugin-vue from 5.1.4 to 5.1.5 ([#767](https://github.com/betagouv/agir-front/issues/767)) ([d79c958](https://github.com/betagouv/agir-front/commit/d79c95802058c3edce55d4fcbe809cbb371d70ec))
+* Bump eslint-plugin-vue from 9.30.0 to 9.31.0 ([#776](https://github.com/betagouv/agir-front/issues/776)) ([389a50e](https://github.com/betagouv/agir-front/commit/389a50edcaa80f78d034845e120e297a222800ba))
+* Bump husky from 9.1.6 to 9.1.7 ([#779](https://github.com/betagouv/agir-front/issues/779)) ([2593841](https://github.com/betagouv/agir-front/commit/2593841d5ac4fc6006a824034cb25d8c554c3911))
+* Bump jsonpath-plus from 10.0.6 to 10.1.0 ([#769](https://github.com/betagouv/agir-front/issues/769)) ([ca56bbb](https://github.com/betagouv/agir-front/commit/ca56bbb8e4bfe107d927625b234a786722a41f61))
+* Bump lighthouse from 12.2.1 to 12.2.2 ([#775](https://github.com/betagouv/agir-front/issues/775)) ([86e0350](https://github.com/betagouv/agir-front/commit/86e0350a9a73a6c41750ccd49ceff021c1630ddb))
+* Bump pinia from 2.2.4 to 2.2.6 ([#751](https://github.com/betagouv/agir-front/issues/751)) ([f5e9467](https://github.com/betagouv/agir-front/commit/f5e9467608edb6e96dddd43ba71ceacfbf0002fd))
+* Bump pinia-plugin-persistedstate from 4.1.2 to 4.1.3 ([#766](https://github.com/betagouv/agir-front/issues/766)) ([4857069](https://github.com/betagouv/agir-front/commit/485706979957494b6cc4ff2ebe8f93fa8e22c95b))
+* Bump vite from 5.4.10 to 5.4.11 ([#768](https://github.com/betagouv/agir-front/issues/768)) ([121aeb9](https://github.com/betagouv/agir-front/commit/121aeb93a1755da89fd0b2298255259633fa3f39))
+* Bump vue-chartjs from 5.3.1 to 5.3.2 ([#753](https://github.com/betagouv/agir-front/issues/753)) ([bb05d0e](https://github.com/betagouv/agir-front/commit/bb05d0eed907932b7b655fcf9a394f3eee1fe085))
+* Bump vue-tsc from 2.1.6 to 2.1.10 ([#755](https://github.com/betagouv/agir-front/issues/755)) ([dd90062](https://github.com/betagouv/agir-front/commit/dd90062168364e116bb109424a4dc5ef901e8943))
+* changement de la manière dont est sauvegardée le token ([#759](https://github.com/betagouv/agir-front/issues/759)) ([73fdb8a](https://github.com/betagouv/agir-front/commit/73fdb8a48c3d578d0ba95fb21a2e73e1e542d980))
+* **deeplink:** allow all path for iOS ([#758](https://github.com/betagouv/agir-front/issues/758)) ([14dd09f](https://github.com/betagouv/agir-front/commit/14dd09f4f8aeed5f0cd0c08bfbd7986e9a0f3eee))
+* gestion url kyc thematique ([#757](https://github.com/betagouv/agir-front/issues/757)) ([80e7fa2](https://github.com/betagouv/agir-front/commit/80e7fa2b0930e63cbb69d18766df8d5b8ce55001))
+* passage des univers en thematiques ([#749](https://github.com/betagouv/agir-front/issues/749)) ([8a60f0b](https://github.com/betagouv/agir-front/commit/8a60f0bd228a01563903febb02c6b7dfb2aee030))
+* reflexion e2e 🤔 ([#732](https://github.com/betagouv/agir-front/issues/732)) ([0ce11be](https://github.com/betagouv/agir-front/commit/0ce11befada06b15fa801976cd4493fa74b5b8d5))
+* renommage des recos personnalisées en thématique ([#760](https://github.com/betagouv/agir-front/issues/760)) ([776e65c](https://github.com/betagouv/agir-front/commit/776e65cb3bde38c96a559f89cb2ea0a805cdae6c))
+* renommage univers vers thematique pour les services ([#750](https://github.com/betagouv/agir-front/issues/750)) ([d292ab1](https://github.com/betagouv/agir-front/commit/d292ab161e87321d0a6ae822400904bdc28c7591))
+* suppression de l'aside dupliquée de la page bilan carbone ([#764](https://github.com/betagouv/agir-front/issues/764)) ([908e595](https://github.com/betagouv/agir-front/commit/908e595a6af3f3fb5446e93ae4684832c7ad2f97))
+* test du composant bilan carbone ([#762](https://github.com/betagouv/agir-front/issues/762)) ([4d87e84](https://github.com/betagouv/agir-front/commit/4d87e8447181bf4dfdd4a089e6813830beb6494d))
+* utilisation des nouvelles API ([#761](https://github.com/betagouv/agir-front/issues/761)) ([e6d0aa9](https://github.com/betagouv/agir-front/commit/e6d0aa936dba1530f2159712c49c7d19980e1899))
+
 ## [1.28.0](https://github.com/betagouv/agir-front/compare/v1.27.2...v1.28.0) (2024-10-30)
 
 
