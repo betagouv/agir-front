@@ -1,6 +1,7 @@
 import { Response } from 'redaxios';
 import { AxiosFactory, intercept401 } from '@/axios.factory';
 import { Quiz, QuizRepository } from '@/domaines/quiz/ports/quizRepository';
+import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 
 interface ReponsesQuizCMSModel {
   id: string;
@@ -39,7 +40,7 @@ export interface QuizCMSDataModel {
 export interface ThematiqueGamificationCMSModel {
   data: {
     attributes: {
-      titre: string;
+      code: ClefThematiqueAPI;
     };
   };
 }
@@ -76,7 +77,8 @@ export class QuizRepositoryAxios implements QuizRepository {
           solution: question.reponses.filter(r => r.exact)[0].reponse,
         };
       }),
-      thematique: response.data.data.attributes.thematique_gamification.data.attributes.titre,
+      clefThematiqueAPI: response.data.data.attributes.thematique_gamification.data.attributes
+        .code as ClefThematiqueAPI,
       difficulte: response.data.data.attributes.difficulty,
       nombreDePointsAGagner: response.data.data.attributes.points,
       articleAssocie:

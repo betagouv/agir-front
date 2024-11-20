@@ -1,6 +1,7 @@
 import { Quiz, QuizRepository } from '@/domaines/quiz/ports/quizRepository';
 import { ChargementQuizUsecase } from '@/domaines/quiz/chargementQuiz.usecase';
 import { ChargementQuizPresenterImpl, QuizViewModel } from '@/domaines/quiz/adapters/chargementQuiz.presenter.impl';
+import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 
 class QuizRepositoryForTest implements QuizRepository {
   marquerLeQuizArticleCommeLu(_utilisateurId: string, _articleId: string): Promise<void> {
@@ -15,7 +16,7 @@ class QuizRepositoryForTest implements QuizRepository {
     return {
       nombreDePointsAGagner: 10,
       difficulte: 1,
-      thematique: '🛒 Consommation durable',
+      clefThematiqueAPI: ClefThematiqueAPI.consommation,
       titre: `Mon super quizz ${id}`,
       questions: [
         {
@@ -49,7 +50,14 @@ describe("Fichier de test du usecase de chargement d'un quizz", () => {
       expect(quizzViewModel).toStrictEqual<QuizViewModel>({
         nombreDePointsAGagner: '10',
         difficulte: 'très facile',
-        thematique: '🛒 Consommation durable',
+        thematiqueTag: {
+          label: 'Consommer',
+          style: {
+            backgroundColor: '#FFE8D7',
+            color: '#522E02',
+            emoji: '👕',
+          },
+        },
         titre: 'Mon super quizz 1',
         question: {
           id: '0',

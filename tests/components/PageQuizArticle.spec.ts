@@ -7,7 +7,14 @@ import router from '@/router';
 
 const quizViewModel: QuizViewModel = {
   titre: 'A quoi ça sert de manger bio ?',
-  thematique: 'Climat',
+  thematiqueTag: {
+    label: 'Consommer',
+    style: {
+      backgroundColor: '#FFE8D7',
+      color: '#522E02',
+      emoji: '👕',
+    },
+  },
   difficulte: '1',
   nombreDePointsAGagner: '10',
   question: {
@@ -58,7 +65,7 @@ describe('Page Quiz Article', () => {
   it("affiche le titre, une question, ses réponses possibles et un bouton 'Valider' disable", () => {
     // WHEN THEN
     // GIVEN
-    expect(page.getByRole('heading', { name: 'Une question sur la thématique Climat', level: 1 })).toBeDefined();
+    expect(page.getByRole('heading', { name: 'Une question sur la thématique Consommer', level: 1 })).toBeDefined();
     expect(
       page.getByRole('group', { name: "Quel est le principal avantage de l'agriculture biologique ?" }),
     ).toBeDefined();

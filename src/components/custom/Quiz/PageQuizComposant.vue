@@ -22,7 +22,7 @@
       <div class="fr-col-12 fr-col-lg-8">
         <h1>
           <span class="fr-h2">Une question sur la thématique </span>
-          <span class="fr-h3">{{ quizViewModel.thematique }}</span>
+          <ThematiqueTag :tag="{ ...quizViewModel.thematiqueTag, display: 'xl' }" />
         </h1>
         <div class="background--white border fr-p-2w border-radius--md">
           <QuizQuestion
@@ -50,6 +50,7 @@
   import { useRoute } from 'vue-router';
   import QuizArticle from '@/components/custom/Quiz/QuizArticle.vue';
   import QuizQuestion from '@/components/custom/Quiz/QuizQuestion.vue';
+  import ThematiqueTag from '@/components/custom/Thematiques/ThematiqueTag.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import { QuizViewModel } from '@/domaines/quiz/adapters/chargementQuiz.presenter.impl';
   import { QuizRepositoryAxios } from '@/domaines/quiz/adapters/quizRepository.axios';
