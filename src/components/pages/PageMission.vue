@@ -1,56 +1,58 @@
 <template>
-  <div v-if="isLoading">Chargement en cours ...</div>
-  <div v-else-if="!missionViewModel">Une erreur est survenue</div>
-  <div v-else class="fr-container fr-pb-4w">
-    <FilDAriane
-      :page-courante="`Mission : ${missionViewModel.titre}`"
-      :page-hierarchie="
-        useRoute().params.id && useRoute().params.missionId
-          ? [
-              {
-                label: `${MenuThematiques.getFromUrl(useRoute().params.id as string).labelDansLeMenu}`,
-                url: `/thematique/${useRoute().params.id}`,
-              },
-            ]
-          : []
-      "
-    />
-    <MissionIntroduction
-      v-if="etapeCourante.type === 'INTRO'"
-      :titre="missionViewModel.titre"
-      :url-image="missionViewModel.urlImage"
-      :texte="missionViewModel.intro"
-      :tag="missionViewModel.tag"
-      :on-click-continuer="() => miseAJourEtatCourant('KYC', 0)"
-    />
-    <PageMissionQuestionsKyc
-      v-if="etapeCourante.type === 'KYC'"
-      :mission-id="missionId"
-      :on-click-fin-k-y-c="() => miseAJourEtatCourant('QUIZ_ARTICLE', 0)"
-      :on-click-revenir-etape-precedente="() => miseAJourEtatCourant('INTRO', 0)"
-      :etape-courante-defaut="etapeCourante.etapeDansLetape"
-      :nombre-etapes-mission="missionViewModel.nombreEtapesMission"
-    />
-    <MissionQuizArticles
-      v-if="etapeCourante.type === 'QUIZ_ARTICLE'"
-      :missions="missionViewModel.articleEtQuiz"
-      :on-click-fin-quiz-article="() => miseAJourEtatCourant('DEFI', 0)"
-      :on-click-revenir-etape-precedente="
-        () => miseAJourEtatCourant('KYC', missionViewModel!.kyc[0].progression.etapeTotal - 1)
-      "
-      :etape-courante-defaut="etapeCourante.etapeDansLetape"
-      :nombre-etapes-mission="missionViewModel.nombreEtapesMission"
-      :nombre-detapes-precendentes="missionViewModel?.kyc[0].progression.etapeTotal"
-    />
-    <MissionDefis
-      v-if="etapeCourante.type === 'DEFI'"
-      :defis="missionViewModel.defis"
-      :on-click-retour="() => miseAJourEtatCourant('QUIZ_ARTICLE', missionViewModel!.articleEtQuiz.length - 1)"
-      :on-click-fin-defis="() => miseAJourEtatCourant('FIN', 0)"
-      :nombre-etapes-mission="missionViewModel.nombreEtapesMission"
-      :afficher-terminer-mission="missionViewModel.estTerminable && !missionViewModel.estTerminee"
-    />
-    <MissionTerminee v-if="etapeCourante.type === 'FIN'" :titre="missionViewModel.titre" />
+  <div class="fr-container fr-pb-4w">
+    <p v-if="isLoading" class="fr-mt-4w">Chargement en cours ...</p>
+    <p v-else-if="!missionViewModel" class="fr-mt-4w">Une erreur est survenue</p>
+    <template v-else>
+      <FilDAriane
+        :page-courante="`Mission : ${missionViewModel.titre}`"
+        :page-hierarchie="
+          useRoute().params.id && useRoute().params.missionId
+            ? [
+                {
+                  label: `${MenuThematiques.getFromUrl(useRoute().params.id as string).labelDansLeMenu}`,
+                  url: `/thematique/${useRoute().params.id}`,
+                },
+              ]
+            : []
+        "
+      />
+      <MissionIntroduction
+        v-if="etapeCourante.type === 'INTRO'"
+        :titre="missionViewModel.titre"
+        :url-image="missionViewModel.urlImage"
+        :texte="missionViewModel.intro"
+        :tag="missionViewModel.tag"
+        :on-click-continuer="() => miseAJourEtatCourant('KYC', 0)"
+      />
+      <PageMissionQuestionsKyc
+        v-if="etapeCourante.type === 'KYC'"
+        :mission-id="missionId"
+        :on-click-fin-k-y-c="() => miseAJourEtatCourant('QUIZ_ARTICLE', 0)"
+        :on-click-revenir-etape-precedente="() => miseAJourEtatCourant('INTRO', 0)"
+        :etape-courante-defaut="etapeCourante.etapeDansLetape"
+        :nombre-etapes-mission="missionViewModel.nombreEtapesMission"
+      />
+      <MissionQuizArticles
+        v-if="etapeCourante.type === 'QUIZ_ARTICLE'"
+        :missions="missionViewModel.articleEtQuiz"
+        :on-click-fin-quiz-article="() => miseAJourEtatCourant('DEFI', 0)"
+        :on-click-revenir-etape-precedente="
+          () => miseAJourEtatCourant('KYC', missionViewModel!.kyc[0].progression.etapeTotal - 1)
+        "
+        :etape-courante-defaut="etapeCourante.etapeDansLetape"
+        :nombre-etapes-mission="missionViewModel.nombreEtapesMission"
+        :nombre-detapes-precendentes="missionViewModel?.kyc[0].progression.etapeTotal"
+      />
+      <MissionDefis
+        v-if="etapeCourante.type === 'DEFI'"
+        :defis="missionViewModel.defis"
+        :on-click-retour="() => miseAJourEtatCourant('QUIZ_ARTICLE', missionViewModel!.articleEtQuiz.length - 1)"
+        :on-click-fin-defis="() => miseAJourEtatCourant('FIN', 0)"
+        :nombre-etapes-mission="missionViewModel.nombreEtapesMission"
+        :afficher-terminer-mission="missionViewModel.estTerminable && !missionViewModel.estTerminee"
+      />
+      <MissionTerminee v-if="etapeCourante.type === 'FIN'" :titre="missionViewModel.titre" />
+    </template>
   </div>
 </template>
 
@@ -87,28 +89,27 @@
 
   const utilisateurId = utilisateurStore().utilisateur.id;
 
-  // ToDo: Gestion loading erreur
-
   function onMissionPretAAfficher(viewModel: MissionViewModel) {
     missionViewModel.value = viewModel;
   }
 
   onMounted(async () => {
-    const usecase = new RecupererDetailMissionUsecase(new MissionsRepositoryAxios());
-    await usecase.execute(missionId, utilisateurId, new MissionPresenterImpl(onMissionPretAAfficher));
+    try {
+      const usecase = new RecupererDetailMissionUsecase(new MissionsRepositoryAxios());
+      await usecase.execute(missionId, utilisateurId, new MissionPresenterImpl(onMissionPretAAfficher));
 
-    MissionEventBusImpl.getInstance().subscribe(
-      subscriberName,
-      MissionEvent.OBJECTIF_MISSION_POINTS_ONT_ETE_RECUPERE,
-      () => {
-        usecase.execute(missionId, utilisateurId, new MissionPresenterImpl(onMissionPretAAfficher));
-      },
-    );
-
-    isLoading.value = false;
-
-    const etat = determineEtapeMission(missionViewModel.value!);
-    miseAJourEtatCourant(etat.etat, etat.indexEtape);
+      MissionEventBusImpl.getInstance().subscribe(
+        subscriberName,
+        MissionEvent.OBJECTIF_MISSION_POINTS_ONT_ETE_RECUPERE,
+        () => {
+          usecase.execute(missionId, utilisateurId, new MissionPresenterImpl(onMissionPretAAfficher));
+        },
+      );
+    } finally {
+      isLoading.value = false;
+      const etat = determineEtapeMission(missionViewModel.value!);
+      miseAJourEtatCourant(etat.etat, etat.indexEtape);
+    }
   });
 
   const miseAJourEtatCourant = (etat: EtatsPossible, indexEtape: number): void => {
