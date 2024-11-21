@@ -207,15 +207,15 @@ export class MissionPresenterImpl implements MissionPresenter {
     if (estEnCours) {
       return {
         style: 'fr-btn--secondary',
-        title: `Reprendre l'action : ${titre}`,
-        label: "Reprendre l'action",
+        title: `Reprendre le défi : ${titre}`,
+        label: 'Reprendre le défi',
       };
     }
 
     return {
       style: '',
-      title: `Aller à l'action : ${titre}`,
-      label: "Aller à l'action",
+      title: `Aller au défi : ${titre}`,
+      label: 'Aller au défi',
     };
   }
 }

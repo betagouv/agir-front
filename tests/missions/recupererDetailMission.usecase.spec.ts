@@ -122,8 +122,8 @@ describe("Fichier de tests concernant la récupération d'une mission", () => {
             pointAEteRecolte: false,
             link: {
               style: '',
-              title: "Aller à l'action : Mission 2",
-              label: "Aller à l'action",
+              title: 'Aller au défi : Mission 2',
+              label: 'Aller au défi',
             },
           },
         ],
@@ -251,9 +251,9 @@ describe("Fichier de tests concernant la récupération d'une mission", () => {
       // THEN
       function expectation(mission: MissionViewModel) {
         expect(mission.defis[1].link).toStrictEqual<MissionDefiViewModel['link']>({
-          label: "Reprendre l'action",
+          label: 'Reprendre le défi',
           style: 'fr-btn--secondary',
-          title: "Reprendre l'action : Mission 2",
+          title: 'Reprendre le défi : Mission 2',
         });
       }
     });
