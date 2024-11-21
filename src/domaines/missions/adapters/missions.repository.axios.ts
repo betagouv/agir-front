@@ -40,7 +40,7 @@ interface MissionThematiqueApiModel {
   objectifs: MissionItemThematiqueApiModel[];
   done_at: Date | null;
   terminable: boolean;
-  intro: string;
+  introduction: string;
   progression_kyc: {
     current: number;
     target: number;
@@ -60,7 +60,7 @@ export class MissionsRepositoryAxios implements MissionsRepository {
       urlImage: reponse.data.image_url,
       estTerminee: Boolean(reponse.data.done_at),
       estTerminable: reponse.data.terminable,
-      intro: reponse.data.intro,
+      intro: reponse.data.introduction,
       items: reponse.data.objectifs.map(item => ({
         id: item.id,
         contentId: item.content_id,
