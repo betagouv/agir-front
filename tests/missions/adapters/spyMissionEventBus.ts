@@ -14,5 +14,6 @@ export class SpyMissionEventBus extends EventBus<MissionEvent> {
 
   eventSubscribers: Record<MissionEvent, { subscriberName: string; callback: () => void }[]> = {
     [MissionEvent.OBJECTIF_MISSION_POINTS_ONT_ETE_RECUPERE]: [],
+    [MissionEvent.MISSION_TERMINEE]: [],
   };
 }
