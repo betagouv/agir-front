@@ -55,7 +55,7 @@
 </template>
 
 <script setup lang="ts">
-  import { onMounted, ref } from 'vue';
+  import { onMounted, onUnmounted, ref } from 'vue';
   import { useRoute } from 'vue-router';
   import MissionDefis from '@/components/custom/Mission/MissionDefis.vue';
   import MissionIntroduction from '@/components/custom/Mission/MissionIntroduction.vue';
@@ -65,6 +65,7 @@
   import PageMissionQuestionsKyc from '@/components/pages/PageMissionQuestionsKyc.vue';
   import { MissionPresenterImpl, MissionViewModel } from '@/domaines/missions/adapters/mission.presenter.impl';
   import { MissionsRepositoryAxios } from '@/domaines/missions/adapters/missions.repository.axios';
+  import { MissionEvent, MissionEventBusImpl } from '@/domaines/missions/missionEventBus.impl';
   import { RecupererDetailMissionUsecase } from '@/domaines/missions/recupererDetailMission.usecase';
   import { MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
   import { determineEtapeMission, EtatsPossible } from '@/shell/determineEtapeMission';
@@ -74,6 +75,8 @@
     etapeDansLetape: number;
     type: EtatsPossible;
   }
+
+  const subscriberName = 'PageMission';
 
   const etapeCourante = ref<EtapeCourante>({ etapeDansLetape: 0, type: 'INTRO' });
 
@@ -86,12 +89,20 @@
 
   // ToDo: Gestion loading erreur
 
+  function onMissionPretAAfficher(viewModel: MissionViewModel) {
+    missionViewModel.value = viewModel;
+  }
+
   onMounted(async () => {
     const usecase = new RecupererDetailMissionUsecase(new MissionsRepositoryAxios());
-    await usecase.execute(
-      missionId,
-      utilisateurId,
-      new MissionPresenterImpl((viewModel: MissionViewModel) => (missionViewModel.value = viewModel)),
+    await usecase.execute(missionId, utilisateurId, new MissionPresenterImpl(onMissionPretAAfficher));
+
+    MissionEventBusImpl.getInstance().subscribe(
+      subscriberName,
+      MissionEvent.OBJECTIF_MISSION_POINTS_ONT_ETE_RECUPERE,
+      () => {
+        usecase.execute(missionId, utilisateurId, new MissionPresenterImpl(onMissionPretAAfficher));
+      },
     );
 
     isLoading.value = false;
@@ -103,4 +114,8 @@
   const miseAJourEtatCourant = (etat: EtatsPossible, indexEtape: number): void => {
     etapeCourante.value = { etapeDansLetape: indexEtape, type: etat };
   };
+
+  onUnmounted(() => {
+    MissionEventBusImpl.getInstance().unsubscribeToAllEvents(subscriberName);
+  });
 </script>

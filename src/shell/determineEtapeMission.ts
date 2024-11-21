@@ -27,6 +27,5 @@ export function determineEtapeMission(missionViewModel: MissionViewModel): { eta
     return { etat: 'QUIZ_ARTICLE', indexEtape: indexDuDernierQuizzRealise + 1 };
   }
 
-  // ToDo: mettre par défaut l'intro et conditionner ça
   return { etat: 'DEFI', indexEtape: 0 };
 }
