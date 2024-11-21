@@ -36,7 +36,7 @@
       :missions="missionViewModel.articleEtQuiz"
       :on-click-fin-quiz-article="() => miseAJourEtatCourant('DEFI', 0)"
       :on-click-revenir-etape-precedente="
-        () => miseAJourEtatCourant('KYC', missionViewModel.kyc[0].progression.etapeTotal - 1)
+        () => miseAJourEtatCourant('KYC', missionViewModel!.kyc[0].progression.etapeTotal - 1)
       "
       :etape-courante-defaut="etapeCourante.etapeDansLetape"
       :nombre-etapes-mission="missionViewModel.nombreEtapesMission"
