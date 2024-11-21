@@ -14,9 +14,9 @@
           >" !
         </span>
       </h1>
-      <router-link @click="terminerLaMission" :to="`/thematique/${useRoute().params.id}`" class="fr-btn"
-        >Retourner à la liste des missions</router-link
-      >
+      <router-link @click="terminerLaMission" :to="`/thematique/${useRoute().params.id}`" class="fr-btn">
+        Retourner à la liste des missions
+      </router-link>
     </div>
   </div>
 </template>
@@ -24,6 +24,7 @@
 <script setup lang="ts">
   import { useRoute } from 'vue-router';
   import { MissionsRepositoryAxios } from '@/domaines/missions/adapters/missions.repository.axios';
+  import { MissionEventBusImpl } from '@/domaines/missions/missionEventBus.impl';
   import { TerminerMissionUsecase } from '@/domaines/missions/terminerMission.usecase';
   import { utilisateurStore } from '@/store/utilisateur';
 
@@ -32,7 +33,10 @@
   const missionId = useRoute().params.missionId;
 
   const terminerLaMission = async () => {
-    const terminerMissionUsecase = new TerminerMissionUsecase(new MissionsRepositoryAxios());
+    const terminerMissionUsecase = new TerminerMissionUsecase(
+      new MissionsRepositoryAxios(),
+      MissionEventBusImpl.getInstance(),
+    );
     await terminerMissionUsecase.execute(missionId as string, utilisateurStore().utilisateur.id);
   };
 </script>

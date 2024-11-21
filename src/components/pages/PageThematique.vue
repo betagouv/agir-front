@@ -81,6 +81,7 @@
   import { RecupererListeDefisParThematiqueUsecase } from '@/domaines/defi/recupererListeDefisParThematique.usecase';
   import { MissionsPresenterImpl, MissionViewModel } from '@/domaines/missions/adapters/missions.presenter.impl';
   import { MissionsRepositoryAxios } from '@/domaines/missions/adapters/missions.repository.axios';
+  import { MissionEvent, MissionEventBusImpl } from '@/domaines/missions/missionEventBus.impl';
   import { RecupererMissionsThematiqueUsecase } from '@/domaines/missions/recupererMissionsThematique.usecase';
   import {
     RecommandationPersonnaliseeViewModel,
@@ -106,12 +107,14 @@
   const thematique = ref<Thematique>(MenuThematiques.getFromUrl(useRoute().params.id as string));
   let thematiqueId = thematique.value.clefTechniqueAPI;
 
+  const recupererThematiquesUsecase = new RecupererMissionsThematiqueUsecase(new MissionsRepositoryAxios());
+
+  const idUtilisateur = store.utilisateur.id;
+
   const lancerChargementDesDonnees = () => {
     isLoading.value = true;
-    const idUtilisateur = store.utilisateur.id;
     const recupererRecommandationsPersonnaliseesThematiqueUsecase =
       new RecupererRecommandationsPersonnaliseesThematiqueUsecase(new RecommandationsPersonnaliseesRepositoryAxios());
-    const recupererThematiquesUsecase = new RecupererMissionsThematiqueUsecase(new MissionsRepositoryAxios());
     const recupererListeDefisParThematiqueUsecase = new RecupererListeDefisParThematiqueUsecase(
       new DefiRepositoryAxios(),
     );
@@ -153,7 +156,16 @@
     thematiqueId = thematique.value.clefTechniqueAPI;
     lancerChargementDesDonnees();
   });
+
   onMounted(() => {
     lancerChargementDesDonnees();
+
+    MissionEventBusImpl.getInstance().subscribe('PageThematique', MissionEvent.MISSION_TERMINEE, () => {
+      recupererThematiquesUsecase.execute(
+        thematiqueId,
+        idUtilisateur,
+        new MissionsPresenterImpl(vm => (missionsViewModel.value = vm)),
+      );
+    });
   });
 </script>
