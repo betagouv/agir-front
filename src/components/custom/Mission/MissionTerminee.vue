@@ -40,6 +40,9 @@
 <style scoped>
   .bg-fin-mission {
     background-image: url('/bg_fin-des-missions.webp');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
   }
 
   .conteneur-drapeaux {

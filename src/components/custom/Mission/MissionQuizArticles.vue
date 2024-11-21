@@ -45,6 +45,7 @@
     if (etapeCourante.value === props.missions.length) {
       props.onClickFinQuizArticle();
     }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const revenirEtapePrecedente = () => {
@@ -53,5 +54,6 @@
     if (etapeCourante.value === -1) {
       props.onClickRevenirEtapePrecedente();
     }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 </script>

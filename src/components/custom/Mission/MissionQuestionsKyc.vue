@@ -41,12 +41,12 @@
     etapeCourante.value++;
     afficherFinKyc.value = etapeCourante.value === props.questionsViewModel.questions.length;
     if (afficherFinKyc.value) props.onClickFinKYC();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const revenirEtapePrecedente = () => {
     etapeCourante.value--;
-    if (etapeCourante.value === -1) {
-      props.onClickRevenirEtapePrecedente();
-    }
+    if (etapeCourante.value === -1) props.onClickRevenirEtapePrecedente();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 </script>
