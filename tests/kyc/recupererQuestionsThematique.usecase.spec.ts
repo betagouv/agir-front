@@ -4,7 +4,7 @@ import {
   ListesQuestionsThematiquePresenter,
   QuestionsViewModel,
 } from '@/domaines/kyc/adapters/listeQuestionsThematique.presenter.impl';
-import { ReponseKYCSimple, ThematiqueQuestion } from '@/domaines/kyc/recupererQuestionUsecase';
+import { ReponseKYCSimple, ThematiqueQuestion } from '@/domaines/kyc/recupererQuestion.usecase';
 
 describe('Fichier de tests concernant la recupérations des questions kyc pour une thématique', () => {
   it('En donnant un id utilisateur et id de thematique doit presenter les kyc de le thématique', async () => {

@@ -1,4 +1,4 @@
-import { Question } from '@/domaines/kyc/recupererQuestionUsecase';
+import { Question } from '@/domaines/kyc/recupererQuestion.usecase';
 import { QuestionRepository } from '@/domaines/kyc/ports/question.repository';
 
 export class SpyQuestionRepository implements QuestionRepository {

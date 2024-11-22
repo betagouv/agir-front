@@ -24,7 +24,7 @@ export interface ReponseMosaic<T> {
   }[];
 }
 
-export interface ReponseMultiples {
+export interface ReponseMultiple {
   reponse: {
     code: string;
     label: string;
@@ -37,7 +37,7 @@ export interface Question {
   type: 'libre' | 'choix_multiple' | 'choix_unique' | 'mosaic_boolean' | 'entier';
   points: number;
   thematique: ThematiqueQuestion;
-  reponses: ReponseKYCSimple | ReponseMosaic<boolean> | ReponseMultiples;
+  reponses: ReponseKYCSimple | ReponseMosaic<boolean> | ReponseMultiple;
   aEteRepondu: boolean;
 }
 

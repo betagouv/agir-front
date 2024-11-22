@@ -1,8 +1,13 @@
 import { RecupererListeQuestionsReponduesUsecase } from '@/domaines/kyc/recupererListeQuestionsReponduesUsecase';
 import { MockListeQuestionsRepository } from './adapters/listequestions.repository.mock';
 import { expect } from 'vitest';
-import { ListeQuestionsDansLeComptePresenter } from '@/domaines/kyc/adapters/listeQuestionsDansLeComptePresenter';
-import { ReponseKYCSimple, ReponseMosaic, ThematiqueQuestion } from '@/domaines/kyc/recupererQuestionUsecase';
+import { ListeQuestionsDansLeComptePresenter } from '@/domaines/kyc/adapters/listeQuestionsDansLeCompte.presenter';
+import {
+  ReponseKYCSimple,
+  ReponseMosaic,
+  ReponseMultiple,
+  ThematiqueQuestion,
+} from '@/domaines/kyc/recupererQuestion.usecase';
 
 describe('Fichier de tests concernant la récupération des KYC répondues', () => {
   it('doit récupérer la liste des questions KYC répondues', async () => {
@@ -40,9 +45,24 @@ describe('Fichier de tests concernant la récupération des KYC répondues', () 
           type: 'choix_multiple',
           points: 10,
           reponses: {
-            reponses_possibles: ['une réponse', 'une autre réponse', 'une autre réponse2'],
-            reponse: ['une réponse', 'une autre réponse'],
-          } as ReponseKYCSimple,
+            reponse: [
+              {
+                code: 'code',
+                label: 'une réponse',
+                estSelectionnee: true,
+              },
+              {
+                code: 'code',
+                label: 'une autre réponse',
+                estSelectionnee: true,
+              },
+              {
+                code: 'code',
+                label: 'une autre réponse2',
+                estSelectionnee: false,
+              },
+            ],
+          } as ReponseMultiple,
           thematique: ThematiqueQuestion.TRANSPORT,
           aEteRepondu: true,
         },

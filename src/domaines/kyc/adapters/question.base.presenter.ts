@@ -6,9 +6,9 @@ import {
   Question,
   ReponseKYCSimple,
   ReponseMosaic,
-  ReponseMultiples,
+  ReponseMultiple,
   ThematiqueQuestion,
-} from '@/domaines/kyc/recupererQuestionUsecase';
+} from '@/domaines/kyc/recupererQuestion.usecase';
 
 export class QuestionViewModelBuilder {
   private questionViewModel: Partial<QuestionViewModel> = {};
@@ -101,7 +101,7 @@ export class QuestionViewModelBuilder {
         checked: reponse.valeur,
       }));
     } else if (question.type === 'choix_multiple' || question.type === 'choix_unique') {
-      return (question.reponses as ReponseMultiples).reponse.map(reponse => ({
+      return (question.reponses as ReponseMultiple).reponse.map(reponse => ({
         id: reponse.code,
         label: reponse.label,
         checked: reponse.estSelectionnee,

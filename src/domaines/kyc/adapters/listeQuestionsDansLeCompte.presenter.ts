@@ -3,9 +3,9 @@ import {
   Question,
   ReponseKYCSimple,
   ReponseMosaic,
-  ReponseMultiples,
+  ReponseMultiple,
   ThematiqueQuestion,
-} from '@/domaines/kyc/recupererQuestionUsecase';
+} from '@/domaines/kyc/recupererQuestion.usecase';
 
 export class ListeQuestionsDansLeComptePresenter implements ListeQuestionsPresenter {
   constructor(private readonly questionsViewModel: (viewModel: QuestionDansLeCompteViewModel[]) => void) {}
@@ -27,7 +27,7 @@ export class ListeQuestionsDansLeComptePresenter implements ListeQuestionsPresen
         .map(value => value.label)
         .join(' - ');
     else if (question.type === 'choix_multiple' || question.type === 'choix_unique') {
-      return (question.reponses as ReponseMultiples).reponse
+      return (question.reponses as ReponseMultiple).reponse
         .filter(r => r.estSelectionnee)
         .map(value => value.label)
         .join(' - ');

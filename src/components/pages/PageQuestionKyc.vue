@@ -31,7 +31,7 @@
   import { QuestionViewModel } from '@/domaines/kyc/adapters/listeQuestionsThematique.presenter.impl';
   import { QuestionPresenterImpl } from '@/domaines/kyc/adapters/question.presenter.impl';
   import { QuestionRepositoryAxios } from '@/domaines/kyc/adapters/question.repository.axios';
-  import { RecupererQuestionUsecase } from '@/domaines/kyc/recupererQuestionUsecase';
+  import { RecupererQuestionUsecase } from '@/domaines/kyc/recupererQuestion.usecase';
   import { RouteCoachName } from '@/router/coach/routeCoachName';
   import { RouteComptePath } from '@/router/compte/routes';
   import { RouteKycName } from '@/router/kyc/routes';

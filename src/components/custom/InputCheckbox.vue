@@ -43,19 +43,14 @@
     const input = event.target as HTMLInputElement;
 
     if (props.estResetable && index === props.options.length - 1) {
-      // Si l'option "reset" est cochée, on désélectionne tout sauf elle
       updatedOptions.value.forEach((opt, i) => (opt.checked = i === index ? input.checked : false));
     } else {
-      // Sinon, on met à jour l'état de l'option sélectionnée
       updatedOptions.value[index].checked = input.checked;
-
-      // Si une autre option était "reset", elle est décochée
       if (props.estResetable) {
         updatedOptions.value[updatedOptions.value.length - 1].checked = false;
       }
     }
 
-    // Mise à jour des options
     emit(
       'update:modelValue',
       updatedOptions.value.filter(opt => opt.checked).map(opt => opt.id),

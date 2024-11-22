@@ -1,4 +1,4 @@
-import { Question } from '@/domaines/kyc/recupererQuestionUsecase';
+import { Question } from '@/domaines/kyc/recupererQuestion.usecase';
 
 export interface QuestionRepository {
   recupererQuestion(questionId: string, utilisateurId: string): Promise<Question>;

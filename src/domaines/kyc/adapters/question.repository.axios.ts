@@ -4,9 +4,9 @@ import {
   Question,
   ReponseKYCSimple,
   ReponseMosaic,
-  ReponseMultiples,
+  ReponseMultiple,
   ThematiqueQuestion,
-} from '@/domaines/kyc/recupererQuestionUsecase';
+} from '@/domaines/kyc/recupererQuestion.usecase';
 
 export interface QuestionApiModel extends QuestionMosaicBooleanApiModel {
   code: string;
@@ -61,7 +61,7 @@ export class QuestionRepositoryAxios implements QuestionRepository {
     };
   }
 
-  private determineReponses(question: QuestionApiModel): ReponseKYCSimple | ReponseMosaic<boolean> | ReponseMultiples {
+  private determineReponses(question: QuestionApiModel): ReponseKYCSimple | ReponseMosaic<boolean> | ReponseMultiple {
     if (question.type === 'mosaic_boolean') {
       return {
         reponse: question.reponse_multiple.map(reponse => ({
@@ -78,7 +78,7 @@ export class QuestionRepositoryAxios implements QuestionRepository {
           label: reponse.label,
           estSelectionnee: reponse.value === 'oui',
         })),
-      } as ReponseMultiples;
+      } as ReponseMultiple;
     } else {
       return {
         reponses_possibles: [question.reponse_unique.value],

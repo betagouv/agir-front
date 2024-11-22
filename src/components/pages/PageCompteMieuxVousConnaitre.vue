@@ -21,7 +21,7 @@
 <script setup lang="ts">
   import { ref } from 'vue';
   import CompteSkeleton from '@/components/custom/Compte/CompteSkeleton.vue';
-  import { ListeQuestionsDansLeComptePresenter } from '@/domaines/kyc/adapters/listeQuestionsDansLeComptePresenter';
+  import { ListeQuestionsDansLeComptePresenter } from '@/domaines/kyc/adapters/listeQuestionsDansLeCompte.presenter';
   import { QuestionRepositoryAxios } from '@/domaines/kyc/adapters/question.repository.axios';
   import { QuestionDansLeCompteViewModel } from '@/domaines/kyc/ports/listeQuestions.presenter';
   import { RecupererListeQuestionsReponduesUsecase } from '@/domaines/kyc/recupererListeQuestionsReponduesUsecase';

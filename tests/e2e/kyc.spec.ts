@@ -3,9 +3,8 @@ import { InjectService } from './utils/injectService';
 import { InjectUtilisateur } from './utils/injectUtilisateur';
 import { InjectRecommandations } from './utils/injectRecommandations';
 import { InjectTodo } from './utils/injectTodo';
-import { InjectKYC } from './utils/injectKYC';
 import { InjectGamification } from './utils/injectGamification';
-import { ThematiqueQuestion } from '@/domaines/kyc/recupererQuestionUsecase';
+import { ThematiqueQuestion } from '@/domaines/kyc/recupererQuestion.usecase';
 
 let page: Page;
 

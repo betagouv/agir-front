@@ -4,8 +4,7 @@ import {
   RecupererQuestionUsecase,
   ThematiqueQuestion,
   ReponseMosaic,
-  ReponseMultiples,
-} from '@/domaines/kyc/recupererQuestionUsecase';
+} from '@/domaines/kyc/recupererQuestion.usecase';
 import { QuestionPresenterImpl } from '@/domaines/kyc/adapters/question.presenter.impl';
 import { QuestionViewModel } from '@/domaines/kyc/adapters/listeQuestionsThematique.presenter.impl';
 

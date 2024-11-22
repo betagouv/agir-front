@@ -8,7 +8,7 @@
           cssModifier: 'fr-h4',
         }"
         :default-value="questionViewModel.reponses[0]"
-        @update:modelValue="(value: string) => (reponse = value)"
+        @update:modelValue="(valeur: string) => (reponse = valeur)"
       />
     </div>
     <div v-if="questionViewModel.type === 'mosaic_boolean'">
@@ -48,7 +48,6 @@
       <h2 :class="styleDuTitre ? styleDuTitre : 'fr-h4 fr-mb-2w'">
         {{ questionViewModel.libelle }}
       </h2>
-      {{ questionViewModel }}
       <InputCheckbox
         :options="
           questionViewModel.reponses_possibles.map(reponsePossible => ({
@@ -110,11 +109,11 @@
       props.questionViewModel.type === 'choix_multiple' ||
       props.questionViewModel.type === 'choix_unique'
     ) {
-      const envoyerReponseMosaicUsecase = new EnvoyerReponsesMultiplesUsecase(
+      const envoyerReponsesMultiplesUsecase = new EnvoyerReponsesMultiplesUsecase(
         new QuestionRepositoryAxios(),
         ToDoListEventBusImpl.getInstance(),
       );
-      await envoyerReponseMosaicUsecase.execute(
+      await envoyerReponsesMultiplesUsecase.execute(
         utilisateurStore().utilisateur.id,
         props.questionViewModel.id,
         props.questionViewModel.reponses_possibles.map(r => ({
