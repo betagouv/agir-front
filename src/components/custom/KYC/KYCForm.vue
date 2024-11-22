@@ -30,7 +30,7 @@
     <div v-if="questionViewModel.type === 'choix_unique'" class="fr-input-group">
       <BoutonRadio
         v-model="reponse"
-        :default-value="questionViewModel.reponses ? questionViewModel.reponses.toString() : undefined"
+        :default-value="questionViewModel.reponses_possibles.filter(r => r.checked)[0]?.id"
         :legende="questionViewModel.libelle"
         :name="questionViewModel.id"
         :options="
