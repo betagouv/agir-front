@@ -21,10 +21,10 @@ export interface QuestionApiModel extends QuestionMosaicBooleanApiModel {
     {
       code: string;
       label: string;
-      value: string;
       emoji: string;
       image_url: string;
       unite: string;
+      selected: boolean;
     },
   ];
   categorie: string;
@@ -47,46 +47,6 @@ export class QuestionRepositoryAxios implements QuestionRepository {
       .map(question => this.mapQuestionApiModelToQuestion(question));
   }
 
-  private mapQuestionApiModelToQuestion(question: QuestionApiModel): Question {
-    return {
-      id: question.code,
-      libelle: question.question,
-      type: question.type,
-      reponses: this.determineReponses(question),
-      points: question.points,
-      thematique: Object.values(ThematiqueQuestion).find(thematique => thematique === question.thematique) as
-        | ThematiqueQuestion
-        | ThematiqueQuestion.AUTRE,
-      aEteRepondu: question.is_answered,
-    };
-  }
-
-  private determineReponses(question: QuestionApiModel): ReponseKYCSimple | ReponseMosaic<boolean> | ReponseMultiple {
-    if (question.type === 'mosaic_boolean') {
-      return {
-        reponse: question.reponse_multiple.map(reponse => ({
-          code: reponse.code,
-          image_url: reponse.image_url,
-          label: reponse.label,
-          valeur: reponse.value === 'oui',
-        })),
-      } as ReponseMosaic<boolean>;
-    } else if (question.type === 'choix_multiple' || question.type === 'choix_unique') {
-      return {
-        reponse: question.reponse_multiple.map(reponse => ({
-          code: reponse.code,
-          label: reponse.label,
-          estSelectionnee: reponse.value === 'oui',
-        })),
-      } as ReponseMultiple;
-    } else {
-      return {
-        reponses_possibles: [question.reponse_unique.value],
-        reponse: [question.reponse_unique.value],
-      } as ReponseKYCSimple;
-    }
-  }
-
   @intercept401()
   async recupererQuestion(questionId: string, utilisateurId: string): Promise<Question> {
     const response = await AxiosFactory.getAxios().get<QuestionApiModel>(
@@ -99,7 +59,11 @@ export class QuestionRepositoryAxios implements QuestionRepository {
   @intercept401()
   async envoyerReponse(utilisateurId: string, questionId: string, reponse: string[]): Promise<void> {
     const axios = AxiosFactory.getAxios();
-    await axios.put(`/utilisateurs/${utilisateurId}/questionsKYC/${questionId}`, { reponse });
+    await axios.put(`/utilisateurs/${utilisateurId}/questionsKYC_v2/${questionId}`, [
+      {
+        value: reponse[0],
+      },
+    ]);
   }
 
   @intercept401()
@@ -134,5 +98,45 @@ export class QuestionRepositoryAxios implements QuestionRepository {
     );
 
     return response.data.map((question: QuestionApiModel) => this.mapQuestionApiModelToQuestion(question));
+  }
+
+  private mapQuestionApiModelToQuestion(question: QuestionApiModel): Question {
+    return {
+      id: question.code,
+      libelle: question.question,
+      type: question.type,
+      reponses: this.determineReponses(question),
+      points: question.points,
+      thematique: Object.values(ThematiqueQuestion).find(thematique => thematique === question.thematique) as
+        | ThematiqueQuestion
+        | ThematiqueQuestion.AUTRE,
+      aEteRepondu: question.is_answered,
+    };
+  }
+
+  private determineReponses(question: QuestionApiModel): ReponseKYCSimple | ReponseMosaic<boolean> | ReponseMultiple {
+    if (question.type === 'mosaic_boolean') {
+      return {
+        reponse: question.reponse_multiple.map(reponse => ({
+          code: reponse.code,
+          image_url: reponse.image_url,
+          label: reponse.label,
+          valeur: reponse.selected,
+        })),
+      } as ReponseMosaic<boolean>;
+    } else if (question.type === 'choix_multiple' || question.type === 'choix_unique') {
+      return {
+        reponse: question.reponse_multiple.map(reponse => ({
+          code: reponse.code,
+          label: reponse.label,
+          estSelectionnee: reponse.selected,
+        })),
+      } as ReponseMultiple;
+    } else {
+      return {
+        reponses_possibles: [question.reponse_unique.value],
+        reponse: [question.reponse_unique.value],
+      } as ReponseKYCSimple;
+    }
   }
 }

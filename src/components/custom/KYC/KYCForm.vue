@@ -66,7 +66,7 @@
         {{ questionViewModel.libelle }}
       </h2>
       <label class="fr-label" for="reponse"> Votre réponse </label>
-      <textarea class="fr-input" id="reponse" name="reponse" v-model="reponse" />
+      <textarea class="fr-input" id="reponse" name="reponse" v-model="reponse"/>
     </div>
     <button class="fr-btn fr-btn--lg" :title="wordingBouton" :disabled="isDisabled" type="submit">
       {{ wordingBouton }}
@@ -92,11 +92,12 @@
   import { utilisateurStore } from '@/store/utilisateur';
 
   const props = defineProps<{ questionViewModel: QuestionViewModel; wordingBouton: string; styleDuTitre?: string }>();
-  const reponse = defineModel<string | string[]>('reponse', { default: '' });
+  const reponse = defineModel<string | string[]>('reponse', { default:'' });
   const isDisabled = ref<boolean>(true);
   const emit = defineEmits<{ (e: 'update:soumissionKyc', value: string[]): void }>();
   onMounted(() => {
     isDisabled.value = props.questionViewModel.reponses?.length === 0;
+    reponse.value = props.questionViewModel.reponses?.toString() || '';
   });
 
   watch(reponse, () => {
