@@ -24,6 +24,7 @@
   import MissionNavigation from '@/components/custom/Mission/MissionNavigation.vue';
   import MissionQuiz from '@/components/custom/Mission/MissionQuiz.vue';
   import { MissionQuizArticleViewModel } from '@/domaines/missions/adapters/mission.presenter.impl';
+  import { scrollToMain } from '@/shell/scrollToMain';
 
   const props = defineProps<{
     missions: MissionQuizArticleViewModel[];
@@ -45,7 +46,7 @@
     if (etapeCourante.value === props.missions.length) {
       props.onClickFinQuizArticle();
     }
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    scrollToMain();
   };
 
   const revenirEtapePrecedente = () => {
@@ -54,6 +55,6 @@
     if (etapeCourante.value === -1) {
       props.onClickRevenirEtapePrecedente();
     }
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    scrollToMain();
   };
 </script>

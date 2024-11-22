@@ -19,8 +19,8 @@
   import { ref } from 'vue';
   import KYCForm from '@/components/custom/KYC/KYCForm.vue';
   import MissionNavigation from '@/components/custom/Mission/MissionNavigation.vue';
-
   import { QuestionsViewModel } from '@/domaines/kyc/adapters/listeQuestionsThematique.presenter.impl';
+  import { scrollToMain } from '@/shell/scrollToMain';
 
   const props = defineProps<{
     questionsViewModel: QuestionsViewModel;
@@ -41,12 +41,12 @@
     etapeCourante.value++;
     afficherFinKyc.value = etapeCourante.value === props.questionsViewModel.questions.length;
     if (afficherFinKyc.value) props.onClickFinKYC();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    scrollToMain();
   };
 
   const revenirEtapePrecedente = () => {
     etapeCourante.value--;
     if (etapeCourante.value === -1) props.onClickRevenirEtapePrecedente();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    scrollToMain();
   };
 </script>
