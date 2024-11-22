@@ -1,7 +1,7 @@
 import { AxiosFactory, intercept401 } from '@/axios.factory';
 import { Aides } from '@/domaines/aides/chargementAides.usecase';
 import { ChargementAidesRepository } from '@/domaines/aides/ports/chargementAides.repository';
-import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
+import { ClefThematiqueAPI, MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
 
 interface AidesApiModel {
   utilisateur_est_couvert: boolean;
@@ -26,16 +26,21 @@ export class chargementAidesAxiosRepository implements ChargementAidesRepository
 
     return {
       utilisateurEstCouvert: reponse.data.utilisateur_est_couvert,
-      aides: reponse.data.liste_aides.map(aide => ({
-        id: aide.content_id,
-        titre: aide.titre,
-        categorie: aide.thematiques_label[0],
-        thematique: aide.thematiques[0] as ClefThematiqueAPI,
-        contenu: aide.contenu,
-        url: aide.url_simulateur,
-        isSimulateur: aide.is_simulateur,
-        montantMaximum: aide.montant_max,
-      })),
+      aides: reponse.data.liste_aides
+        .filter(aide => {
+          const thematique = aide.thematiques[0];
+          return MenuThematiques.clefsThematiques.includes(thematique as ClefThematiqueAPI);
+        })
+        .map(aide => ({
+          id: aide.content_id,
+          titre: aide.titre,
+          categorie: aide.thematiques_label[0],
+          thematique: aide.thematiques[0] as ClefThematiqueAPI,
+          contenu: aide.contenu,
+          url: aide.url_simulateur,
+          isSimulateur: aide.is_simulateur,
+          montantMaximum: aide.montant_max,
+        })),
     };
   }
 }

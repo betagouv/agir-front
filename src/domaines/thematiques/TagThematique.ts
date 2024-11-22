@@ -28,6 +28,21 @@ export class TagThematique {
       color: '#52022E',
       emoji: '🏠',
     },
+    [ClefThematiqueAPI.dechets]: {
+      backgroundColor: '#fff0e0',
+      color: '#4a0252',
+      emoji: '🗑️',
+    },
+    [ClefThematiqueAPI.environnement]: {
+      backgroundColor: '#fff0e0',
+      color: '#4a0252',
+      emoji: '☀️',
+    },
+    [ClefThematiqueAPI.loisir]: {
+      backgroundColor: '#fff0e0',
+      color: '#4a0252',
+      emoji: '⚽',
+    },
   };
 
   static getTagThematiqueUtilitaire(clefTechniqueAPI: string): TagStyle {

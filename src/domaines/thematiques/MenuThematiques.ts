@@ -10,9 +10,21 @@ export enum ClefThematiqueAPI {
   transports = 'transport',
   consommation = 'consommation',
   logement = 'logement',
+  dechets = 'dechet',
+  environnement = 'environnement',
+  loisir = 'loisir',
 }
 
 export class MenuThematiques {
+  static clefsThematiques: ClefThematiqueAPI[] = [
+    ClefThematiqueAPI.alimentation,
+    ClefThematiqueAPI.transports,
+    ClefThematiqueAPI.consommation,
+    ClefThematiqueAPI.logement,
+    ClefThematiqueAPI.dechets,
+    ClefThematiqueAPI.environnement,
+    ClefThematiqueAPI.loisir,
+  ];
   private static thematiquesData: Record<ClefThematiqueAPI, Thematique> = {
     [ClefThematiqueAPI.alimentation]: {
       clefTechniqueAPI: 'alimentation',
@@ -39,6 +51,24 @@ export class MenuThematiques {
       url: 'me-loger',
       labelDansLeMenu: 'Me loger',
       imageUrl: 'https://res.cloudinary.com/dq023imd8/image/upload/t_media_lib_thumb/v1728468978/maison_80242d91f3.svg',
+    },
+    [ClefThematiqueAPI.dechets]: {
+      clefTechniqueAPI: 'dechet',
+      url: 'dechet',
+      labelDansLeMenu: 'Déchets',
+      imageUrl: '',
+    },
+    [ClefThematiqueAPI.environnement]: {
+      clefTechniqueAPI: 'environnement',
+      url: 'environnement',
+      labelDansLeMenu: 'Environnement',
+      imageUrl: '',
+    },
+    [ClefThematiqueAPI.loisir]: {
+      clefTechniqueAPI: 'loisir',
+      url: 'loisir',
+      labelDansLeMenu: 'Loisir',
+      imageUrl: '',
     },
   };
   static getThematiqueData(clefTechniqueAPI: ClefThematiqueAPI): Thematique {
