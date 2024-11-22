@@ -8,7 +8,7 @@ export class EnvoyerReponseUsecase {
     private readonly eventBus: EventBus<ToDoListEvent>,
   ) {}
 
-  async execute(utilisateurId: string, questionId: string, reponse: string[]): Promise<void> {
+  async execute(utilisateurId: string, questionId: string, reponse: string): Promise<void> {
     await this.questionRepository.envoyerReponse(utilisateurId, questionId, reponse);
     this.eventBus.publish(ToDoListEvent.TODO_KYC_A_ETE_REPONDU);
   }

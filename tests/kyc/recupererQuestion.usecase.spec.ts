@@ -1,9 +1,9 @@
 import { MockQuestionRepository } from './adapters/question.repository.mock';
 import {
-  ReponseKYCSimple,
   RecupererQuestionUsecase,
-  ThematiqueQuestion,
+  ReponseKYCSimple,
   ReponseMosaic,
+  ThematiqueQuestion,
 } from '@/domaines/kyc/recupererQuestion.usecase';
 import { QuestionPresenterImpl } from '@/domaines/kyc/adapters/question.presenter.impl';
 import { QuestionViewModel } from '@/domaines/kyc/adapters/listeQuestionsThematique.presenter.impl';
@@ -34,7 +34,6 @@ describe('Fichier de tests pour récuperer une question KYC', () => {
         id: 'questionId',
         libelle: 'Une question',
         type: 'libre',
-        reponses: [],
         reponses_possibles: [],
         points: 'Récoltez vos + 10 points',
         aDejaEteRepondu: false,
@@ -85,7 +84,6 @@ describe('Fichier de tests pour récuperer une question KYC', () => {
         libelle: 'Une question',
         type: 'choix_multiple',
         points: 'Récoltez vos + 10 points',
-        reponses: [],
         reponses_possibles: [
           {
             id: '1',
@@ -152,7 +150,6 @@ describe('Fichier de tests pour récuperer une question KYC', () => {
         libelle: 'Une question',
         points: 'Récoltez vos + 10 points',
         type: 'choix_unique',
-        reponses: [],
         reponses_possibles: [
           {
             id: '1',
@@ -217,7 +214,6 @@ describe('Fichier de tests pour récuperer une question KYC', () => {
         libelle: 'Une question',
         points: 'Récoltez vos + 10 points',
         type: 'mosaic_boolean',
-        reponses: ['true', 'false'],
         reponses_possibles: [
           {
             id: '1',

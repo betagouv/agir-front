@@ -3,7 +3,7 @@
     <div v-if="questionViewModel.type === 'entier'" class="fr-input-group">
       <InputNumeric
         :id="questionViewModel.id"
-        :default-value="questionViewModel.reponses[0]"
+        :default-value="questionViewModel.reponses_possibles[0].label"
         :label="{
           wording: questionViewModel.libelle,
           cssModifier: 'fr-h4',
@@ -50,7 +50,6 @@
       </h2>
       <InputCheckbox
         v-model="reponse"
-        :default-values="questionViewModel.reponses"
         :est-resetable="true"
         :options="
           questionViewModel.reponses_possibles.map(reponsePossible => ({
@@ -96,12 +95,17 @@
   const isDisabled = ref<boolean>(true);
   const emit = defineEmits<{ (e: 'update:soumissionKyc', value: string[]): void }>();
   onMounted(() => {
-    isDisabled.value = props.questionViewModel.reponses?.length === 0;
-    reponse.value = props.questionViewModel.reponses?.toString() || '';
+    reponse.value =
+      props.questionViewModel.type === 'libre' || props.questionViewModel.type === 'entier'
+        ? props.questionViewModel.reponses_possibles[0].label
+        : props.questionViewModel.reponses_possibles.filter(r => r.checked).map(r => r.id);
   });
 
   watch(reponse, () => {
-    isDisabled.value = reponse.value.length === 0;
+    isDisabled.value =
+      props.questionViewModel.type === 'libre' || props.questionViewModel.type === 'entier'
+        ? !reponse.value
+        : reponse.value.length === 0;
   });
 
   const validerLaReponse = async () => {
@@ -131,7 +135,7 @@
       await envoyerReponseUsecase.execute(
         utilisateurStore().utilisateur.id,
         props.questionViewModel.id,
-        reponse.value === '' ? props.questionViewModel.reponses.flat() : [reponse.value].flat(),
+        reponse.value.toString(),
       );
     }
 

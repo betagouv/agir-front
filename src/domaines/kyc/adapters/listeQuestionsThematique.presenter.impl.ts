@@ -21,7 +21,6 @@ export interface QuestionViewModel {
   type: 'libre' | 'choix_multiple' | 'choix_unique' | 'mosaic_boolean' | 'entier';
   reponses_possibles: ReponsePossibleViewModel[];
   points: string;
-  reponses: string[];
   aDejaEteRepondu: boolean;
   description: string;
 }

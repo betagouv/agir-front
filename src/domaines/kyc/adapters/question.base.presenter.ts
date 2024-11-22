@@ -17,6 +17,20 @@ export class QuestionViewModelBuilder {
     return new QuestionViewModelBuilder();
   }
 
+  static buildFromQuestion(question: Question): QuestionViewModel {
+    const builder = QuestionViewModelBuilder.init();
+
+    return builder
+      .withId(question.id)
+      .withLibelle(question.libelle)
+      .withType(question.type)
+      .withPoints(question.points)
+      .withReponsesPossibles(builder.determineReponsePossibles(question))
+      .withADejaEteRepondu(question.aEteRepondu)
+      .withDescription(builder.determineDescription(question.thematique))
+      .build();
+  }
+
   withId(id: string): QuestionViewModelBuilder {
     this.questionViewModel.id = id;
     return this;
@@ -42,11 +56,6 @@ export class QuestionViewModelBuilder {
     return this;
   }
 
-  withReponses(reponses: string[]): QuestionViewModelBuilder {
-    this.questionViewModel.reponses = reponses;
-    return this;
-  }
-
   withADejaEteRepondu(aDejaEteRepondu: boolean): QuestionViewModelBuilder {
     this.questionViewModel.aDejaEteRepondu = aDejaEteRepondu;
     return this;
@@ -59,21 +68,6 @@ export class QuestionViewModelBuilder {
 
   build(): QuestionViewModel {
     return this.questionViewModel as QuestionViewModel;
-  }
-
-  static buildFromQuestion(question: Question): QuestionViewModel {
-    const builder = QuestionViewModelBuilder.init();
-
-    return builder
-      .withId(question.id)
-      .withLibelle(question.libelle)
-      .withType(question.type)
-      .withPoints(question.points)
-      .withReponsesPossibles(builder.determineReponsePossibles(question))
-      .withReponses(builder.determineReponse(question))
-      .withADejaEteRepondu(question.aEteRepondu)
-      .withDescription(builder.determineDescription(question.thematique))
-      .build();
   }
 
   private determineDescription(thematique: ThematiqueQuestion): string {
@@ -111,15 +105,5 @@ export class QuestionViewModelBuilder {
         id: reponse,
         label: reponse,
       }));
-  }
-
-  private determineReponse(question: Question): string[] {
-    if (question.type === 'mosaic_boolean') {
-      return (question.reponses as ReponseMosaic<boolean>).reponse.map(reponse => reponse.valeur.toString());
-    } else if (question.type === 'choix_multiple' || question.type === 'choix_unique') {
-      return [];
-    } else {
-      return (question.reponses as ReponseKYCSimple).reponse;
-    }
   }
 }

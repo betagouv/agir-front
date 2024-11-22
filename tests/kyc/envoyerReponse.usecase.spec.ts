@@ -11,7 +11,7 @@ describe("Fichier de tests pour envoyer la réponse d'une question KYC", () => {
     const spyEventBus = new SpyToDoListEventBus();
     // WHEN
     const usecase = new EnvoyerReponseUsecase(questionRepository, spyEventBus);
-    await usecase.execute('utilisateurId', 'questionId', ['Ma réponse, lorem ipsum dolor']);
+    await usecase.execute('utilisateurId', 'questionId', 'Ma réponse, lorem ipsum dolor');
 
     // THEN
     expect(questionRepository.envoyerQuestionAEteAppele).toBeTruthy();

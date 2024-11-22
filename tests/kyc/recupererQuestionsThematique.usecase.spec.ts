@@ -39,7 +39,6 @@ describe('Fichier de tests concernant la recupérations des questions kyc pour u
               id: 'questionId',
               libelle: 'Une question',
               type: 'libre',
-              reponses: [],
               reponses_possibles: [],
               points: 'Récoltez vos + 10 points',
               aDejaEteRepondu: false,

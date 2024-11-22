@@ -57,11 +57,11 @@ export class QuestionRepositoryAxios implements QuestionRepository {
   }
 
   @intercept401()
-  async envoyerReponse(utilisateurId: string, questionId: string, reponse: string[]): Promise<void> {
+  async envoyerReponse(utilisateurId: string, questionId: string, reponse: string): Promise<void> {
     const axios = AxiosFactory.getAxios();
     await axios.put(`/utilisateurs/${utilisateurId}/questionsKYC_v2/${questionId}`, [
       {
-        value: reponse[0],
+        value: reponse,
       },
     ]);
   }

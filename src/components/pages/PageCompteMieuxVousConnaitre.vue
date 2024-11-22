@@ -25,6 +25,7 @@
   import { QuestionRepositoryAxios } from '@/domaines/kyc/adapters/question.repository.axios';
   import { QuestionDansLeCompteViewModel } from '@/domaines/kyc/ports/listeQuestions.presenter';
   import { RecupererListeQuestionsReponduesUsecase } from '@/domaines/kyc/recupererListeQuestionsRepondues.usecase';
+  import { RouteKycName } from '@/router/kyc/routes';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const questionsViewModel = ref<QuestionDansLeCompteViewModel[]>([]);
