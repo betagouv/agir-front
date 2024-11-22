@@ -1,5 +1,5 @@
 import { expect } from 'vitest';
-import { determineEtapeMission } from '@/shell/determineEtapeMission';
+import { determineEtapeMission } from '@/domaines/missions/determineEtapeMission';
 import {
   MissionKycViewModel,
   MissionQuizArticleViewModel,

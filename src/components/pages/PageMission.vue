@@ -67,10 +67,10 @@
   import PageMissionQuestionsKyc from '@/components/pages/PageMissionQuestionsKyc.vue';
   import { MissionPresenterImpl, MissionViewModel } from '@/domaines/missions/adapters/mission.presenter.impl';
   import { MissionsRepositoryAxios } from '@/domaines/missions/adapters/missions.repository.axios';
+  import { determineEtapeMission, EtatsPossible } from '@/domaines/missions/determineEtapeMission';
   import { MissionEvent, MissionEventBusImpl } from '@/domaines/missions/missionEventBus.impl';
   import { RecupererDetailMissionUsecase } from '@/domaines/missions/recupererDetailMission.usecase';
   import { MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
-  import { determineEtapeMission, EtatsPossible } from '@/shell/determineEtapeMission';
   import { utilisateurStore } from '@/store/utilisateur';
 
   interface EtapeCourante {
