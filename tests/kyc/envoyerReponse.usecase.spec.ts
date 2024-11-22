@@ -1,4 +1,4 @@
-import { EnvoyerReponseUsecase } from '@/domaines/kyc/envoyerReponseUsecase';
+import { EnvoyerReponseUsecase } from '@/domaines/kyc/envoyerReponse.usecase';
 import { SpyQuestionRepository } from './adapters/question.repository.spy';
 import { SpyToDoListEventBus } from '../toDoList/adapters/spyTodoListEventBus';
 import { expect } from 'vitest';

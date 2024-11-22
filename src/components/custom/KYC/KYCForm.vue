@@ -3,18 +3,19 @@
     <div v-if="questionViewModel.type === 'entier'" class="fr-input-group">
       <InputNumeric
         :id="questionViewModel.id"
+        :default-value="questionViewModel.reponses[0]"
         :label="{
           wording: questionViewModel.libelle,
           cssModifier: 'fr-h4',
         }"
-        :default-value="questionViewModel.reponses[0]"
         @update:modelValue="(valeur: string) => (reponse = valeur)"
       />
     </div>
     <div v-if="questionViewModel.type === 'mosaic_boolean'">
       <KYCMosaic
-        :name="questionViewModel.id"
+        v-model="reponse"
         :legende="questionViewModel.libelle"
+        :name="questionViewModel.id"
         :options="
           questionViewModel.reponses_possibles.map(reponsePossible => ({
             label: reponsePossible.label,
@@ -24,24 +25,23 @@
             checked: reponsePossible.checked,
           }))
         "
-        v-model="reponse"
       />
     </div>
     <div v-if="questionViewModel.type === 'choix_unique'" class="fr-input-group">
       <BoutonRadio
-        col=""
-        legende-size="l"
+        v-model="reponse"
+        :default-value="questionViewModel.reponses ? questionViewModel.reponses.toString() : undefined"
         :legende="questionViewModel.libelle"
         :name="questionViewModel.id"
-        orientation="vertical"
         :options="
           questionViewModel.reponses_possibles.map((reponsePossible: ReponsePossibleViewModel) => ({
             label: reponsePossible.label,
             value: reponsePossible.id,
           }))
         "
-        :default-value="questionViewModel.reponses ? questionViewModel.reponses.toString() : undefined"
-        v-model="reponse"
+        col=""
+        legende-size="l"
+        orientation="vertical"
       />
     </div>
     <div v-if="questionViewModel.type === 'choix_multiple'" class="fr-input-group">
@@ -49,6 +49,9 @@
         {{ questionViewModel.libelle }}
       </h2>
       <InputCheckbox
+        v-model="reponse"
+        :default-values="questionViewModel.reponses"
+        :est-resetable="true"
         :options="
           questionViewModel.reponses_possibles.map(reponsePossible => ({
             id: reponsePossible.id,
@@ -56,9 +59,6 @@
             checked: reponsePossible.checked,
           }))
         "
-        :est-resetable="true"
-        :default-values="questionViewModel.reponses"
-        v-model="reponse"
       />
     </div>
     <div v-if="questionViewModel.type === 'libre'" class="fr-input-group">
@@ -66,16 +66,16 @@
         {{ questionViewModel.libelle }}
       </h2>
       <label class="fr-label" for="reponse"> Votre réponse </label>
-      <textarea class="fr-input" id="reponse" name="reponse" v-model="reponse"/>
+      <textarea id="reponse" v-model="reponse" class="fr-input" name="reponse" />
     </div>
-    <button class="fr-btn fr-btn--lg" :title="wordingBouton" :disabled="isDisabled" type="submit">
+    <button :disabled="isDisabled" :title="wordingBouton" class="fr-btn fr-btn--lg" type="submit">
       {{ wordingBouton }}
     </button>
-    <slot> </slot>
+    <slot></slot>
   </form>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
   import { onMounted, ref, watch } from 'vue';
   import BoutonRadio from '@/components/custom/BoutonRadio.vue';
   import InputNumeric from '@/components/custom/Form/InputNumeric.vue';
@@ -86,13 +86,13 @@
     ReponsePossibleViewModel,
   } from '@/domaines/kyc/adapters/listeQuestionsThematique.presenter.impl';
   import { QuestionRepositoryAxios } from '@/domaines/kyc/adapters/question.repository.axios';
+  import { EnvoyerReponseUsecase } from '@/domaines/kyc/envoyerReponse.usecase';
   import { EnvoyerReponsesMultiplesUsecase } from '@/domaines/kyc/envoyerReponsesMultiples.usecase';
-  import { EnvoyerReponseUsecase } from '@/domaines/kyc/envoyerReponseUsecase';
   import { ToDoListEventBusImpl } from '@/domaines/toDoList/toDoListEventBusImpl';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const props = defineProps<{ questionViewModel: QuestionViewModel; wordingBouton: string; styleDuTitre?: string }>();
-  const reponse = defineModel<string | string[]>('reponse', { default:'' });
+  const reponse = defineModel<string | string[]>('reponse', { default: '' });
   const isDisabled = ref<boolean>(true);
   const emit = defineEmits<{ (e: 'update:soumissionKyc', value: string[]): void }>();
   onMounted(() => {

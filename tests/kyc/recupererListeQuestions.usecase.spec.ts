@@ -1,4 +1,4 @@
-import { RecupererListeQuestionsReponduesUsecase } from '@/domaines/kyc/recupererListeQuestionsReponduesUsecase';
+import { RecupererListeQuestionsReponduesUsecase } from '@/domaines/kyc/recupererListeQuestionsRepondues.usecase';
 import { MockListeQuestionsRepository } from './adapters/listequestions.repository.mock';
 import { expect } from 'vitest';
 import { ListeQuestionsDansLeComptePresenter } from '@/domaines/kyc/adapters/listeQuestionsDansLeCompte.presenter';

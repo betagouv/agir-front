@@ -8,7 +8,7 @@
         </h3>
         <div class="fr-grid-row flex-column fr-grid-row--top">
           {{ questionViewModel.reponse }}
-          <router-link class="fr-mt-4v" :to="{ name: RouteKycName.KYC_COMPTE, params: { id: questionViewModel.id } }">
+          <router-link :to="{ name: RouteKycName.KYC_COMPTE, params: { id: questionViewModel.id } }" class="fr-mt-4v">
             Modifier ma réponse
           </router-link>
         </div>
@@ -18,14 +18,13 @@
   </CompteSkeleton>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
   import { ref } from 'vue';
   import CompteSkeleton from '@/components/custom/Compte/CompteSkeleton.vue';
   import { ListeQuestionsDansLeComptePresenter } from '@/domaines/kyc/adapters/listeQuestionsDansLeCompte.presenter';
   import { QuestionRepositoryAxios } from '@/domaines/kyc/adapters/question.repository.axios';
   import { QuestionDansLeCompteViewModel } from '@/domaines/kyc/ports/listeQuestions.presenter';
-  import { RecupererListeQuestionsReponduesUsecase } from '@/domaines/kyc/recupererListeQuestionsReponduesUsecase';
-  import { RouteKycName } from '@/router/kyc/routes';
+  import { RecupererListeQuestionsReponduesUsecase } from '@/domaines/kyc/recupererListeQuestionsRepondues.usecase';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const questionsViewModel = ref<QuestionDansLeCompteViewModel[]>([]);
