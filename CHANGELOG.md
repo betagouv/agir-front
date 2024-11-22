@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.29.1](https://github.com/betagouv/agir-front/compare/v1.29.0...v1.29.1) (2024-11-22)
+
+
+### 🐛 Corrections de bogues
+
+* ajout des thematiques manquantes dans le catalogue des aides ([#782](https://github.com/betagouv/agir-front/issues/782)) ([ff8e35d](https://github.com/betagouv/agir-front/commit/ff8e35d70436e7f7491d31d7113fa233e4d32ed3))
+
 ## [1.29.0](https://github.com/betagouv/agir-front/compare/v1.28.0...v1.29.0) (2024-11-20)
 
 
