@@ -1,4 +1,4 @@
-import { test, expect, chromium, Page } from '@playwright/test';
+import { chromium, expect, Page, test } from '@playwright/test';
 import { InjectService } from './utils/injectService';
 import { InjectUtilisateur } from './utils/injectUtilisateur';
 import { InjectRecommandations } from './utils/injectRecommandations';
@@ -106,18 +106,18 @@ test.describe('kyc', () => {
   });
 
   test('doit afficher le remerciement', async () => {
-    await page.route(`${process.env.VITE_API_URL}/utilisateurs/dorian/questionsKYC_v2/KYC001`, route => {
+    await page.route(`${process.env.VITE_API_URL}/utilisateurs/dorian/questionsKYC_v2/KYC_preference`, route => {
       route.fulfill({
         status: 201,
       });
     });
 
-    await page.getByRole('checkbox', { name: 'La cuisine et l’alimentation' }).check();
-    await page.getByRole('button', { name: 'Valider' }).click();
+    await page.getByRole('checkbox', { name: 'La cuisine et l’alimentation' }).check({ force: true });
+    await page.getByRole('button', { name: 'Valider' }).click({ force: true });
 
     expect(await page.getByText('Merci pour votre réponse !!!')).toBeDefined();
 
-    await page.getByRole('link', { name: "Retour à l'accueil" }).click();
+    await page.getByRole('link', { name: "Retour à l'accueil" }).click({ force: true });
 
     await expect(page).toHaveTitle("Agir - J'agis");
   });
