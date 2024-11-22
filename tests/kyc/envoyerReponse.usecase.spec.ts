@@ -18,7 +18,7 @@ describe("Fichier de tests pour envoyer la réponse d'une question KYC", () => {
     expect(questionRepository.envoyerQuestionArgs).toStrictEqual({
       utilisateurId: 'utilisateurId',
       questionId: 'questionId',
-      reponse: ['Ma réponse, lorem ipsum dolor'],
+      reponse: 'Ma réponse, lorem ipsum dolor',
     });
     expect(spyEventBus.eventName).toEqual(ToDoListEvent.TODO_KYC_A_ETE_REPONDU);
   });
