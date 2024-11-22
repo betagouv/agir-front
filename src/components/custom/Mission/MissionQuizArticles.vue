@@ -1,5 +1,6 @@
 <template>
   <MissionNavigation
+    :titre="missionAffichee.type === 'article' ? 'Article' : 'Quiz'"
     :on-click-revenir-etape-precedente="revenirEtapePrecedente"
     :etape-actuelle="etapeAffichee"
     :etape-totale="nombreEtapesMission"

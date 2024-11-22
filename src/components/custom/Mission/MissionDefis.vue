@@ -1,5 +1,6 @@
 <template>
   <MissionNavigation
+    titre="Défi"
     :on-click-revenir-etape-precedente="onClickRetour"
     :etape-actuelle="nombreEtapesMission"
     :etape-totale="nombreEtapesMission"

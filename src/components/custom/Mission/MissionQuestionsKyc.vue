@@ -2,6 +2,7 @@
   <div v-for="(questionViewModel, index) in questionsViewModel.questions" :key="index">
     <div v-show="index === etapeCourante">
       <MissionNavigation
+        titre="Une question pour mieux vous connaître"
         :on-click-revenir-etape-precedente="revenirEtapePrecedente"
         :etape-actuelle="index + 1"
         :etape-totale="nombreEtapesMission"
