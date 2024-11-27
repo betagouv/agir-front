@@ -54,7 +54,7 @@
     "lint-staged": "15.2.10",
     "playwright-lighthouse": "^4.0.0",
     "prettier": "3.3.3",
-    "release-please": "16.14.3",
+    "release-please": "16.15.0",
     "sharp": "^0.33.5",
     "ts-node": "10.9.2",
     "typescript": "5.6.3",
