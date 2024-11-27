@@ -28,7 +28,6 @@ describe("Fichier de tests concernant la validation de l'authentification de l'u
       nom: '',
       prenom: '',
       mail: 'john@exemple.com',
-      fonctionnalitesDebloquees: [],
       onboardingAEteRealise: false,
       afficherDisclaimerAides: false,
       token: 'token',

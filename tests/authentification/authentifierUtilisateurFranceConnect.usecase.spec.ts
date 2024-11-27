@@ -19,7 +19,6 @@ describe("Fichier de tests concernant l'authentification France Connect", () => 
       nom: 'Doe',
       prenom: 'John',
       mail: '',
-      fonctionnalitesDebloquees: [],
       onboardingAEteRealise: true,
       afficherDisclaimerAides: false,
     });

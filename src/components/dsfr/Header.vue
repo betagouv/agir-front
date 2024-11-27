@@ -1,6 +1,6 @@
 <template>
   <LienDEvitement />
-  <header role="banner" class="fr-header" id="header-navigation">
+  <header id="header-navigation" class="fr-header" role="banner">
     <div class="fr-header__body">
       <div class="fr-container">
         <div class="fr-header__body-row">
@@ -13,15 +13,15 @@
                 </p>
               </div>
               <div class="fr-header__operator">
-                <img class="fr-responsive-img" src="/logo-jagis-full.svg" alt="J'agis" />
+                <img alt="J'agis" class="fr-responsive-img" src="/logo-jagis-full.svg" />
               </div>
               <div class="fr-header__navbar">
                 <button
-                  class="fr-btn--menu fr-btn"
-                  data-fr-opened="false"
+                  id="button-menu"
                   aria-controls="modal-menu"
                   aria-haspopup="menu"
-                  id="button-menu"
+                  class="fr-btn--menu fr-btn"
+                  data-fr-opened="false"
                   title="Menu"
                 >
                   Menu
@@ -61,9 +61,9 @@
                 <li v-if="utilisateurStore().utilisateur.onboardingAEteRealise">
                   <div class="utilisateur">
                     <router-link
+                      :to="{ name: RouteCompteName.MON_COMPTE }"
                       class="fr-btn fr-mb-0 fr-text--lg fr-icon-user-fill"
                       title="accéder à mon compte"
-                      :to="{ name: RouteCompteName.MON_COMPTE }"
                     >
                       {{ nomUtilisateur }}
                     </router-link>
@@ -76,118 +76,112 @@
         </div>
       </div>
     </div>
-    <div class="fr-header__menu fr-modal" id="modal-menu" aria-labelledby="button-menu">
+    <div id="modal-menu" aria-labelledby="button-menu" class="fr-header__menu fr-modal">
       <div class="fr-container">
-        <button class="fr-btn--close fr-btn" aria-controls="modal-menu" title="Fermer">Fermer</button>
+        <button aria-controls="modal-menu" class="fr-btn--close fr-btn" title="Fermer">Fermer</button>
         <div class="fr-header__menu-links"></div>
-        <nav class="fr-nav" id="navigation" role="navigation" aria-label="Menu principal" data-fr-js-navigation="true">
-          <ul class="fr-nav__list" v-if="utilisateurStore().utilisateur.onboardingAEteRealise">
+        <nav id="navigation" aria-label="Menu principal" class="fr-nav" data-fr-js-navigation="true" role="navigation">
+          <ul v-if="utilisateurStore().utilisateur.onboardingAEteRealise" class="fr-nav__list">
             <li class="fr-nav__item nav__item--separateur" data-fr-js-navigation-item="true">
               <router-link
-                class="fr-nav__link fr-pb-0"
-                :to="{ name: RouteCoachName.COACH }"
                 :aria-current="route.name === RouteCoachName.COACH ? 'page' : null"
+                :to="{ name: RouteCoachName.COACH }"
+                class="fr-nav__link fr-pb-0"
               >
-                <img class="fr-p-0" src="/icons/buildings/home-4-line.svg" alt="Accueil" />
+                <img alt="Accueil" class="fr-p-0" src="/icons/buildings/home-4-line.svg" />
               </router-link>
             </li>
             <li class="fr-nav__item" data-fr-js-navigation-item="true">
               <router-link
-                class="fr-nav__link"
-                :to="{
-                  name: RouteThematiquesName.THEMATIQUE,
-                  params: { id: MenuThematiques.getThematiqueData(ClefThematiqueAPI.alimentation).url },
-                }"
                 :aria-current="
                   route.name === RouteThematiquesName.THEMATIQUE &&
                   route.params.id === MenuThematiques.getThematiqueData(ClefThematiqueAPI.alimentation).url
                     ? 'page'
                     : null
                 "
+                :to="{
+                  name: RouteThematiquesName.THEMATIQUE,
+                  params: { id: MenuThematiques.getThematiqueData(ClefThematiqueAPI.alimentation).url },
+                }"
+                class="fr-nav__link"
               >
                 {{ MenuThematiques.getThematiqueData(ClefThematiqueAPI.alimentation).labelDansLeMenu }}
               </router-link>
             </li>
             <li class="fr-nav__item" data-fr-js-navigation-item="true">
               <router-link
-                class="fr-nav__link"
-                :to="{
-                  name: RouteThematiquesName.THEMATIQUE,
-                  params: { id: MenuThematiques.getThematiqueData(ClefThematiqueAPI.logement).url },
-                }"
                 :aria-current="
                   route.name === RouteThematiquesName.THEMATIQUE &&
                   route.params.id === MenuThematiques.getThematiqueData(ClefThematiqueAPI.logement).url
                     ? 'page'
                     : null
                 "
+                :to="{
+                  name: RouteThematiquesName.THEMATIQUE,
+                  params: { id: MenuThematiques.getThematiqueData(ClefThematiqueAPI.logement).url },
+                }"
+                class="fr-nav__link"
               >
                 {{ MenuThematiques.getThematiqueData(ClefThematiqueAPI.logement).labelDansLeMenu }}
               </router-link>
             </li>
             <li class="fr-nav__item" data-fr-js-navigation-item="true">
               <router-link
-                class="fr-nav__link"
-                :to="{
-                  name: RouteThematiquesName.THEMATIQUE,
-                  params: { id: MenuThematiques.getThematiqueData(ClefThematiqueAPI.transports).url },
-                }"
                 :aria-current="
                   route.name === RouteThematiquesName.THEMATIQUE &&
                   route.params.id === MenuThematiques.getThematiqueData(ClefThematiqueAPI.transports).url
                     ? 'page'
                     : null
                 "
+                :to="{
+                  name: RouteThematiquesName.THEMATIQUE,
+                  params: { id: MenuThematiques.getThematiqueData(ClefThematiqueAPI.transports).url },
+                }"
+                class="fr-nav__link"
               >
                 {{ MenuThematiques.getThematiqueData(ClefThematiqueAPI.transports).labelDansLeMenu }}
               </router-link>
             </li>
             <li class="fr-nav__item nav__item--separateur" data-fr-js-navigation-item="true">
               <router-link
-                class="fr-nav__link"
-                :to="{
-                  name: RouteThematiquesName.THEMATIQUE,
-                  params: { id: MenuThematiques.getThematiqueData(ClefThematiqueAPI.consommation).url },
-                }"
                 :aria-current="
                   route.name === RouteThematiquesName.THEMATIQUE &&
                   route.params.id === MenuThematiques.getThematiqueData(ClefThematiqueAPI.consommation).url
                     ? 'page'
                     : null
                 "
+                :to="{
+                  name: RouteThematiquesName.THEMATIQUE,
+                  params: { id: MenuThematiques.getThematiqueData(ClefThematiqueAPI.consommation).url },
+                }"
+                class="fr-nav__link"
               >
                 {{ MenuThematiques.getThematiqueData(ClefThematiqueAPI.consommation).labelDansLeMenu }}
               </router-link>
             </li>
-            <li
-              v-if="utilisateurStore().utilisateur.fonctionnalitesDebloquees.includes(Fonctionnalites.AIDES)"
-              class="fr-nav__item"
-              data-fr-js-navigation-item="true"
-            >
+            <li class="fr-nav__item" data-fr-js-navigation-item="true">
               <router-link
-                class="fr-nav__link"
-                :to="{ name: RouteAidesName.AIDES }"
                 :aria-current="route.name === RouteAidesName.AIDES ? 'page' : null"
+                :to="{ name: RouteAidesName.AIDES }"
+                class="fr-nav__link"
               >
                 Mes aides
               </router-link>
             </li>
             <li class="fr-nav__item" data-fr-js-navigation-item="true">
               <router-link
-                class="fr-nav__link"
-                :to="{ name: RouteCoachName.BIBLIOTHEQUE }"
-                v-if="utilisateurStore().utilisateur.fonctionnalitesDebloquees.includes(Fonctionnalites.BIBLIOTHEQUE)"
                 :aria-current="route.name === RouteCoachName.BIBLIOTHEQUE ? 'page' : null"
+                :to="{ name: RouteCoachName.BIBLIOTHEQUE }"
+                class="fr-nav__link"
               >
                 Ma bibliothèque
               </router-link>
             </li>
             <li class="fr-nav__item" data-fr-js-navigation-item="true">
               <router-link
-                class="fr-nav__link"
-                :to="{ name: RouteBilanCarboneName.BILAN_CARBONE }"
-                v-if="utilisateurStore().utilisateur.fonctionnalitesDebloquees.includes(Fonctionnalites.BILAN_CARBONE)"
                 :aria-current="route.name === RouteBilanCarboneName.BILAN_CARBONE ? 'page' : null"
+                :to="{ name: RouteBilanCarboneName.BILAN_CARBONE }"
+                class="fr-nav__link"
               >
                 Mon bilan
               </router-link>
@@ -199,7 +193,7 @@
   </header>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
   import '@gouvfr/dsfr/dist/component/header/header.min.css';
   import '@gouvfr/dsfr/dist/component/navigation/navigation.min.css';
   import { computed } from 'vue';
@@ -208,7 +202,6 @@
   import { utilisateurStore } from '@/store/utilisateur';
   import ScoreHeader from '@/components/custom/ScoreHeader.vue';
   import LienDEvitement from '@/components/dsfr/LienDEvitement.vue';
-  import { Fonctionnalites } from '@/shell/fonctionnalitesEnum';
   import { RouteBilanCarboneName } from '@/router/bilanCarbone/routes';
   import { RouteCoachName } from '@/router/coach/routeCoachName';
   import { RouteCompteName } from '@/router/compte/routeCompteName';

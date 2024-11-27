@@ -55,6 +55,7 @@ describe('Fichier de tests concernant le chargement du compte utilisateur', () =
       spySessionRepository,
     );
     await usecase.execute('1', new CompteUtilisateurPresenterImpl(expectation));
+
     // THEN
     function expectation(compteUtilisateurViewModel: CompteUtlisateurViewModel) {
       expect(compteUtilisateurViewModel).toStrictEqual<CompteUtlisateurViewModel>({
@@ -65,12 +66,12 @@ describe('Fichier de tests concernant le chargement du compte utilisateur', () =
         fonctionnalitesDebloquees: [],
       });
     }
+
     expect(spySessionRepository.utilisateur).toStrictEqual<Utilisateur>({
       id: '1',
       nom: 'Doe',
       mail: 'mail@exemple.com',
       prenom: 'John',
-      fonctionnalitesDebloquees: [],
       onboardingAEteRealise: true,
       afficherDisclaimerAides: false,
     });

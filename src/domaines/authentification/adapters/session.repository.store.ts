@@ -12,10 +12,6 @@ export class SessionRepositoryStore implements SessionRepository {
     });
   }
 
-  nouvelleFeatureDebloquee(featureDebloquee: string): void {
-    utilisateurStore().utilisateur.fonctionnalitesDebloquees.push(featureDebloquee);
-  }
-
   sauvegarderScore(score: Score): void {
     utilisateurStore().setScore(score);
   }

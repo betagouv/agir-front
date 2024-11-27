@@ -20,7 +20,6 @@ export const utilisateurStore = defineStore('utilisateur', {
       nom: '',
       prenom: '',
       mail: '',
-      fonctionnalitesDebloquees: [],
       onboardingAEteRealise: false,
       afficherDisclaimerAides: false,
       token: '',

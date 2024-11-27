@@ -47,7 +47,6 @@ export class UtilisateurRepositoryAxios implements UtilisateurRepository {
       id: response.data.utilisateur.id,
       prenom: response.data.utilisateur.prenom,
       mail: response.data.utilisateur.email,
-      fonctionnalitesDebloquees: response.data.utilisateur.fonctionnalites_debloquees || ['aides'],
       onboardingAEteRealise: response.data.utilisateur.is_onboarding_done,
       afficherDisclaimerAides: !response.data.utilisateur.couverture_aides_ok,
       token: response.data.token,
@@ -62,7 +61,6 @@ export class UtilisateurRepositoryAxios implements UtilisateurRepository {
       id: response.data.id,
       prenom: response.data.prenom,
       mail: response.data.email,
-      fonctionnalitesDebloquees: response.data.fonctionnalites_debloquees || ['aides'],
       onboardingAEteRealise: response.data.is_onboarding_done,
       afficherDisclaimerAides: !response.data.couverture_aides_ok,
     };

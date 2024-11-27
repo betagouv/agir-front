@@ -8,10 +8,13 @@ export class SpySauvegarderUtilisateurSessionRepository implements SessionReposi
     mail: '',
     prenom: '',
     nom: '',
-    fonctionnalitesDebloquees: [],
     onboardingAEteRealise: false,
     afficherDisclaimerAides: false,
   };
+
+  get utilisateur(): Utilisateur {
+    return this._utilisateur;
+  }
 
   static avecOnBoardingRealise(utilisateur?: Partial<Utilisateur>): SpySauvegarderUtilisateurSessionRepository {
     const repository = new SpySauvegarderUtilisateurSessionRepository();
@@ -25,31 +28,11 @@ export class SpySauvegarderUtilisateurSessionRepository implements SessionReposi
     return repository;
   }
 
-  get utilisateur(): Utilisateur {
-    return this._utilisateur;
-  }
-
-  get nouvelleFeatureDebloqueeAEteAppele(): boolean {
-    return this._nouvelleFeatureDebloqueeAEteAppele;
-  }
-
-  get nouvelleFeatureDebloqueeArgs(): string {
-    return this._nouvelleFeatureDebloqueeArgs;
-  }
-
-  private _nouvelleFeatureDebloqueeAEteAppele: boolean = false;
-  private _nouvelleFeatureDebloqueeArgs: string = '';
-
   sauvegarderUtilisateur(utilisateur: Partial<Utilisateur>) {
     this._utilisateur = {
       ...this._utilisateur,
       ...utilisateur,
     };
-  }
-
-  nouvelleFeatureDebloquee(featureDebloquee: string): void {
-    this._nouvelleFeatureDebloqueeAEteAppele = true;
-    this._nouvelleFeatureDebloqueeArgs = featureDebloquee;
   }
 
   sauvegarderScore(score: Score): void {}
