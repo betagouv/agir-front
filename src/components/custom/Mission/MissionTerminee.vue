@@ -1,82 +1,66 @@
 <template>
-  <div
-    class="fr-grid-row fr-grid-row--gutters align-items--center background--white border-radius--md shadow fr-p-3w border"
-  >
-    <img :src="urlImage" class="border-radius--md img-object-fit-cover" width="120" height="100" alt="" />
-    <h1 class="fr-col fr-h4 fr-m-0 fr-ml-1w">{{ titre }}</h1>
-    <span v-if="estTerminee" class="fr-ml-md-auto fr-mt-md-0 fr-mt-2w text--semi-bold text--bleu"
-      >Mission terminée</span
-    >
-    <button
-      v-else
-      class="fr-ml-md-auto fr-mt-md-0 fr-mt-2w fr-btn fr-btn--secondary"
-      :disabled="!estTerminable"
-      data-fr-opened="false"
-      :aria-controls="modaleId"
-      @click="terminerMission"
-    >
-      Terminer la mission
-    </button>
+  <div class="fr-container fr-py-6w">
+    <div class="bg-fin-mission fr-p-4w text--center border-radius--md">
+      <div class="conteneur-drapeaux fr-mb-2w">
+        <span class="fr-icon-flag-fill text--bleu" aria-hidden="true" />
+        <span class="fr-icon-flag-fill text--bleu big" aria-hidden="true" />
+        <span class="fr-icon-flag-fill text--bleu" aria-hidden="true" />
+      </div>
+      <h1 class="fr-mt-2w">
+        <span class="text--uppercase">Bravo !</span><br />
+        <span class="text--bleu fr-text--lead text--normal">
+          Vous avez terminé la mission<br />
+          "<span class="fr-text--bold">{{ titre }}</span
+          >" !
+        </span>
+      </h1>
+      <router-link @click="terminerLaMission" :to="`/thematique/${useRoute().params.id}`" class="fr-btn">
+        Retourner à la liste des missions
+      </router-link>
+    </div>
   </div>
-
-  <Teleport to="body" v-if="estTerminable">
-    <Modale label="Modale de fin de mission" :id="modaleId" :radius="true" :is-footer-actions="false" size="s">
-      <template v-slot:contenu>
-        <div class="fr-grid-row fr-grid-row--gutters modale-mission-terminee">
-          <div class="fr-col-7">
-            <h1 :id="modaleId">Bravo !</h1>
-            <p class="fr-text--lg text--bleu fr-mb-0">Vous avez gagné votre carte mission</p>
-          </div>
-          <MissionCarteTerminee class="fr-col-5" :titre="titre" :urlImage="urlImage" />
-        </div>
-        <div class="fr-py-3w text--center">
-          <h2 class="fr-text--lg fr-mb-2w">Découvrez de nouvelles missions</h2>
-          <router-link
-            :to="`/thematique/${MenuThematiques.getThematiqueData(thematiqueId as ClefThematiqueAPI).url}`"
-            class="fr-btn fr-btn--lg"
-          >
-            Revenir à la thémathique
-          </router-link>
-        </div>
-      </template>
-    </Modale>
-  </Teleport>
 </template>
 
 <script setup lang="ts">
-  import { ref } from 'vue';
-  import MissionCarteTerminee from '@/components/custom/Mission/MissionCarteTerminee.vue';
-  import Modale from '@/components/custom/Modale/Modale.vue';
+  import { useRoute } from 'vue-router';
   import { MissionsRepositoryAxios } from '@/domaines/missions/adapters/missions.repository.axios';
+  import { MissionEventBusImpl } from '@/domaines/missions/missionEventBus.impl';
   import { TerminerMissionUsecase } from '@/domaines/missions/terminerMission.usecase';
-  import { ClefThematiqueAPI, MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
   import { utilisateurStore } from '@/store/utilisateur';
 
-  const props = defineProps<{
-    urlImage: string;
-    titre: string;
-    estTerminee: boolean;
-    estTerminable: boolean;
-    thematiqueId: string;
-    missionId: string;
-  }>();
+  defineProps<{ titre: string }>();
 
-  const estTerminee = ref<boolean>(props.estTerminee);
+  const missionId = useRoute().params.missionId;
 
-  const modaleId = 'terminer-mission-modale';
-  const terminerMission = async () => {
-    const terminerMissionUsecase = new TerminerMissionUsecase(new MissionsRepositoryAxios());
-    await terminerMissionUsecase.execute(props.missionId, utilisateurStore().utilisateur.id);
-    estTerminee.value = true;
+  const terminerLaMission = async () => {
+    const terminerMissionUsecase = new TerminerMissionUsecase(
+      new MissionsRepositoryAxios(),
+      MissionEventBusImpl.getInstance(),
+    );
+    await terminerMissionUsecase.execute(missionId as string, utilisateurStore().utilisateur.id);
   };
 </script>
 
 <style scoped>
-  .modale-mission-terminee {
-    padding: 1rem;
-    flex-direction: row-reverse;
-    background-image: url('/bg_fin-de-mission.webp');
+  .bg-fin-mission {
+    background-image: url('/bg_fin-des-missions.webp');
+    background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+  }
+
+  .conteneur-drapeaux {
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .fr-icon-flag-fill::before {
+    --icon-size: 1.5rem;
+  }
+
+  .big::before {
+    --icon-size: 3.5rem;
   }
 </style>

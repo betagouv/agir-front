@@ -1,6 +1,7 @@
 import { MissionItem, DetailMission } from '../recupererDetailMission.usecase';
 import { MissionPresenter } from '@/domaines/missions/ports/missionPresenter';
 import { MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
+import { TagStyle, TagThematique } from '@/domaines/thematiques/TagThematique';
 import { RouteArticlePath } from '@/router/articles/routes';
 import { RouteDefiPath } from '@/router/defis/routes';
 import { RouteKycPath } from '@/router/kyc/routes';
@@ -41,15 +42,22 @@ export interface MissionKycViewModel extends MissionBaseViewModel {
 
 export interface MissionQuizArticleViewModel extends MissionBaseViewModel {
   idDuContenu: string;
+  type: 'quiz' | 'article';
 }
 export interface MissionViewModel {
   titre: string;
   urlImage: string;
   estTerminee: boolean;
   estTerminable: boolean;
+  intro: string;
   kyc: MissionKycViewModel[];
   articleEtQuiz: MissionQuizArticleViewModel[];
   defis: MissionDefiViewModel[];
+  tag: {
+    label: string;
+    style: TagStyle;
+  };
+  nombreEtapesMission: number;
 }
 
 export class MissionPresenterImpl implements MissionPresenter {
@@ -61,6 +69,11 @@ export class MissionPresenterImpl implements MissionPresenter {
       urlImage: mission.urlImage,
       estTerminee: mission.estTerminee,
       estTerminable: mission.estTerminable,
+      intro: mission.intro,
+      tag: {
+        label: MenuThematiques.getThematiqueData(mission.clefApiThematique).labelDansLeMenu,
+        style: TagThematique.getTagThematiqueUtilitaire(mission.clefApiThematique),
+      },
       kyc: [
         {
           id: mission.items.filter(item => item.type === InteractionType.KYC)[0].id,
@@ -97,6 +110,8 @@ export class MissionPresenterImpl implements MissionPresenter {
             mission.missionId,
           ),
         ),
+      nombreEtapesMission:
+        mission.items.length - mission.items.filter(item => item.type === InteractionType.DEFIS).length + 1,
     });
   }
 
@@ -111,6 +126,7 @@ export class MissionPresenterImpl implements MissionPresenter {
       url: this.determineUrl(item, thematiqueUrl, missionId),
       picto: this.determinePicto(item),
       pointAEteRecolte: item.pointAEteRecolte,
+      type: item.type === InteractionType.ARTICLE ? 'article' : 'quiz',
     };
   }
 
@@ -191,15 +207,15 @@ export class MissionPresenterImpl implements MissionPresenter {
     if (estEnCours) {
       return {
         style: 'fr-btn--secondary',
-        title: `Reprendre l'action : ${titre}`,
-        label: "Reprendre l'action",
+        title: `Reprendre le défi : ${titre}`,
+        label: 'Reprendre le défi',
       };
     }
 
     return {
       style: '',
-      title: `Aller à l'action : ${titre}`,
-      label: "Aller à l'action",
+      title: `Aller au défi : ${titre}`,
+      label: 'Aller au défi',
     };
   }
 }

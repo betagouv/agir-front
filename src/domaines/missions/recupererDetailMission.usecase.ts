@@ -22,6 +22,7 @@ export interface DetailMission {
   clefApiThematique: ClefThematiqueAPI;
   estTerminee: boolean;
   estTerminable: boolean;
+  intro: string;
   items: MissionItem[];
   missionId: string;
   progressionKyc: {

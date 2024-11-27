@@ -15,6 +15,7 @@ const mission: DetailMission = {
   urlImage: 'urlImage',
   estTerminee: false,
   estTerminable: false,
+  intro: 'Coucou les amis',
   missionId: '1',
   progressionKyc: {
     etapeCourante: 1,
@@ -81,8 +82,18 @@ describe("Fichier de tests concernant la récupération d'une mission", () => {
     // THEN
     function expectation(mission) {
       expect(mission).toStrictEqual<MissionViewModel>({
+        nombreEtapesMission: 3,
         estTerminee: false,
         estTerminable: false,
+        intro: 'Coucou les amis',
+        tag: {
+          label: 'Me nourrir',
+          style: {
+            backgroundColor: '#E3FBAF',
+            color: '#175202',
+            emoji: '🥗',
+          },
+        },
         articleEtQuiz: [
           {
             id: 'id1',
@@ -94,6 +105,7 @@ describe("Fichier de tests concernant la récupération d'une mission", () => {
             url: '/thematique/me-nourrir/mission/1/quiz/1',
             picto: '/ic_mission_article.svg',
             pointAEteRecolte: false,
+            type: 'quiz',
           },
         ],
         defis: [
@@ -110,8 +122,8 @@ describe("Fichier de tests concernant la récupération d'une mission", () => {
             pointAEteRecolte: false,
             link: {
               style: '',
-              title: "Aller à l'action : Mission 2",
-              label: "Aller à l'action",
+              title: 'Aller au défi : Mission 2',
+              label: 'Aller au défi',
             },
           },
         ],
@@ -239,9 +251,9 @@ describe("Fichier de tests concernant la récupération d'une mission", () => {
       // THEN
       function expectation(mission: MissionViewModel) {
         expect(mission.defis[1].link).toStrictEqual<MissionDefiViewModel['link']>({
-          label: "Reprendre l'action",
+          label: 'Reprendre le défi',
           style: 'fr-btn--secondary',
-          title: "Reprendre l'action : Mission 2",
+          title: 'Reprendre le défi : Mission 2',
         });
       }
     });

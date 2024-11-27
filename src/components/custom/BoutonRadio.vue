@@ -15,6 +15,7 @@
     <div class="fr-grid-row">
       <div :class="`fr-fieldset__element ${col}`" v-for="option in options" :key="option.label">
         <div
+          class="background--white"
           :class="`fr-radio-group border fr-col
           ${option.value === selectedValue ? 'fr-text--bold border--bleu-dark' : ''}
           ${option.customClass}

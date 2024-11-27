@@ -1,23 +1,4 @@
 <template>
-  <div class="fr-container fr-mb-6w">
-    <FilDAriane
-      :page-courante="`Question : ${quizViewModel.titre}`"
-      :page-hierarchie="
-        useRoute().params.thematiqueId && useRoute().params.missionId
-          ? [
-              {
-                label: `${MenuThematiques.getFromUrl(useRoute().params.thematiqueId as string).labelDansLeMenu}`,
-                url: `/thematique/${useRoute().params.thematiqueId}`,
-              },
-              {
-                label: `Mission`,
-                url: `/thematique/${useRoute().params.thematiqueId}/mission/${useRoute().params.missionId}`,
-              },
-            ]
-          : []
-      "
-    />
-
     <div class="fr-grid-row fr-grid-row--gutters">
       <div class="fr-col-12 fr-col-lg-8">
         <h1>
@@ -38,25 +19,23 @@
             :article-associe="articleAssocie"
             :points="quizViewModel.nombreDePointsAGagner"
             :quiz-id="quizViewModel.articleAssocie?.id!"
+            :est-enchainement-mission="estEnchainementMission"
+            :on-click-continuer="onClickContinuer"
           />
         </div>
       </div>
     </div>
-  </div>
 </template>
 
 <script setup lang="ts">
   import { ref } from 'vue';
-  import { useRoute } from 'vue-router';
   import QuizArticle from '@/components/custom/Quiz/QuizArticle.vue';
   import QuizQuestion from '@/components/custom/Quiz/QuizQuestion.vue';
   import ThematiqueTag from '@/components/custom/Thematiques/ThematiqueTag.vue';
-  import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import { QuizViewModel } from '@/domaines/quiz/adapters/chargementQuiz.presenter.impl';
   import { QuizRepositoryAxios } from '@/domaines/quiz/adapters/quizRepository.axios';
   import { EnvoyerDonneesQuizInteractionUsecase } from '@/domaines/quiz/envoyerDonneesQuizInteraction.usecase';
   import { ArticleDuQuiz } from '@/domaines/quiz/ports/quizRepository';
-  import { MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
   import { ToDoListEventBusImpl } from '@/domaines/toDoList/toDoListEventBusImpl';
 
   const props = defineProps<{
@@ -65,6 +44,8 @@
     isModePrevisualisation: boolean;
     idQuiz: string;
     articleAssocie: ArticleDuQuiz | null;
+    estEnchainementMission?: boolean;
+    onClickContinuer?: () => void;
   }>();
 
   const isValide = ref<boolean>(false);
