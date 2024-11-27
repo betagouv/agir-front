@@ -54,6 +54,8 @@ export class RecupererBilanCarboneUsecase {
       presenter.presenteBilanComplet(bilanCarbone);
     } else if (bilanCarbone.bilanPartiel) {
       presenter.presenteBilanPartiel(bilanCarbone);
+    } else {
+      presenter.presenteBilanAFaire(bilanCarbone);
     }
   }
 }

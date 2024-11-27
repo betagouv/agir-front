@@ -1,12 +1,9 @@
 import {
-  BilanCarbonePresenterImpl,
   BilanCarboneCompletViewModel,
   BilanCarbonePartielViewModel,
+  BilanCarbonePresenterImpl,
 } from '@/domaines/bilanCarbone/adapters/bilanCarbone.presenter.impl';
-import {
-  BilanPartielCarbone,
-  RecupererBilanCarboneUsecase,
-} from '@/domaines/bilanCarbone/recupererBilanCarbone.usecase';
+import { RecupererBilanCarboneUsecase } from '@/domaines/bilanCarbone/recupererBilanCarbone.usecase';
 import { BilanCarboneRepositoryMock } from './adapters/bilanCarbone.repository.mock';
 import {
   BilanCarboneAccueilPresenterImpl,
@@ -265,6 +262,7 @@ describe('Fichier de tests concernant le chargement du bilan carbone', () => {
         new BilanCarbonePresenterImpl(
           bilanCarboneViewModel => expectation(bilanCarboneViewModel),
           () => {},
+          () => {},
         ),
       );
 
@@ -407,6 +405,7 @@ describe('Fichier de tests concernant le chargement du bilan carbone', () => {
         new BilanCarbonePresenterImpl(
           () => {},
           bilanCarboneViewModel => expectation(bilanCarboneViewModel),
+          () => {},
         ),
       );
 

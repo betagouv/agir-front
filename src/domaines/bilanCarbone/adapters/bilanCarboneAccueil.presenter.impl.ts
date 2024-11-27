@@ -15,7 +15,7 @@ export interface BilanCarbonePartielAccueilViewModel {
 export class BilanCarboneAccueilPresenterImpl extends BilanCarboneBasePresenter implements BilanCarbonePresenter {
   constructor(
     private readonly bilanCarboneViewModel: (viewModel: BilanCarboneCompletAccueilViewModel) => void,
-    private readonly bilanCarbonePartielViewModel: (viewModel: BilanCarbonePartielAccueilViewModel) => void,
+    private readonly bilanCarboneAFaireViewModel: (viewModel: BilanCarbonePartielAccueilViewModel) => void,
   ) {
     super();
   }
@@ -27,8 +27,13 @@ export class BilanCarboneAccueilPresenterImpl extends BilanCarboneBasePresenter 
     });
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   presenteBilanPartiel(bilan: BilanCarbone): void {
-    this.bilanCarbonePartielViewModel({
+    //no-op
+  }
+
+  presenteBilanAFaire(bilan: BilanCarbone): void {
+    this.bilanCarboneAFaireViewModel({
       pourcentageCompletionTotal: bilan.pourcentageCompletionTotal,
       thematiquesBilan: bilan.thematiquesBilan,
     });

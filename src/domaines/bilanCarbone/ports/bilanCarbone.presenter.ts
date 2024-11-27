@@ -12,5 +12,8 @@ export interface ThematiquesBilan {
 
 export interface BilanCarbonePresenter {
   presenteBilanComplet(bilan: BilanCarbone): void;
+
   presenteBilanPartiel(bilan: BilanCarbone): void;
+
+  presenteBilanAFaire(bilan: BilanCarbone): void;
 }

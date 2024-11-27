@@ -5,6 +5,13 @@
     </div>
   </div>
 
+  <section class="fr-container fr-py-6w">
+    <CoachBilanCarbone
+      :bilanCarboneAFaireViewModel="bilanCarboneAFaireViewModel"
+      :bilanCarboneCompletViewModel="bilanCarboneCompletViewModel"
+    />
+  </section>
+
   <section class="fr-pb-4w background--white">
     <div v-if="!isLoading" class="fr-container">
       <h2 class="fr-h3 fr-mb-1w">Recommandés <span class="text--bleu">pour vous</span></h2>
@@ -16,13 +23,6 @@
     <div v-else class="fr-container">
       <CarteSkeleton />
     </div>
-  </section>
-
-  <section class="fr-container fr-py-6w">
-    <CoachBilanCarbone
-      :bilanCarboneCompletViewModel="bilanCarboneCompletViewModel"
-      :bilanCarbonePartielViewModel="bilanCarbonePartielViewModel"
-    />
   </section>
 
   <section class="fr-py-8w background--white position--relative">
@@ -78,11 +78,11 @@
   import CoachRecommandations from '@/components/custom/Coach/CoachRecommandations.vue';
   import CoachServices from '@/components/custom/Coach/CoachServices.vue';
   import MissionsListe from '@/components/custom/Mission/MissionsListe.vue';
+  import { BilanCarboneAFaireViewModel } from '@/domaines/bilanCarbone/adapters/bilanCarbone.presenter.impl';
   import { BilanCarboneRepositoryAxios } from '@/domaines/bilanCarbone/adapters/bilanCarbone.repository.axios';
   import {
     BilanCarboneAccueilPresenterImpl,
     BilanCarboneCompletAccueilViewModel,
-    BilanCarbonePartielAccueilViewModel,
   } from '@/domaines/bilanCarbone/adapters/bilanCarboneAccueil.presenter.impl';
   import { RecupererBilanCarboneUsecase } from '@/domaines/bilanCarbone/recupererBilanCarbone.usecase';
   import { MissionViewModel } from '@/domaines/missions/adapters/missions.presenter.impl';
@@ -103,7 +103,7 @@
   const isLoading = ref<boolean>(true);
 
   const bilanCarboneCompletViewModel = ref<BilanCarboneCompletAccueilViewModel>();
-  const bilanCarbonePartielViewModel = ref<BilanCarbonePartielAccueilViewModel>();
+  const bilanCarboneAFaireViewModel = ref<BilanCarboneAFaireViewModel>();
   const store = utilisateurStore();
   const missionsRecommandeesViewModel = ref<MissionViewModel[]>();
   const recommandationsPersonnaliseesViewModel = ref<RecommandationPersonnaliseeViewModel>();
@@ -133,7 +133,7 @@
         idUtilisateur,
         new BilanCarboneAccueilPresenterImpl(
           vm => (bilanCarboneCompletViewModel.value = vm),
-          vm => (bilanCarbonePartielViewModel.value = vm),
+          vm => (bilanCarboneAFaireViewModel.value = vm),
         ),
       ),
     ])

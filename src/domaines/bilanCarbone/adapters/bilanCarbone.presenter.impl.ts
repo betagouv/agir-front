@@ -11,6 +11,7 @@ interface BilanCarbonDetailItemViewModel {
   };
   pourcentage: number;
 }
+
 interface BilanCarboneDetailViewModel extends BilanCarbonDetailItemViewModel {
   details: BilanCarbonDetailItemViewModel[];
 }
@@ -19,6 +20,7 @@ export interface BilanCarboneViewModelBase {
   titre: string;
   thematiquesBilan: ThematiquesBilan[];
 }
+
 export interface BilanCarboneCompletViewModel extends BilanCarboneViewModelBase {
   pourcentageProgressBar: number;
   nombreDeTonnesAnnuel: string;
@@ -48,10 +50,16 @@ export interface BilanCarbonePartielViewModel extends BilanCarboneViewModelBase 
   }[];
 }
 
+export interface BilanCarboneAFaireViewModel {
+  pourcentageCompletionTotal: number;
+  thematiquesBilan: ThematiquesBilan[];
+}
+
 export class BilanCarbonePresenterImpl extends BilanCarboneBasePresenter implements BilanCarbonePresenter {
   constructor(
     private readonly bilanCarboneViewModel: (viewModel: BilanCarboneCompletViewModel) => void,
     private readonly bilanCarbonePartielViewModel: (viewModel: BilanCarbonePartielViewModel) => void,
+    private readonly bilanCarboneAFaireViewModel: (viewModel: BilanCarboneAFaireViewModel) => void,
   ) {
     super();
   }
@@ -83,18 +91,6 @@ export class BilanCarbonePresenterImpl extends BilanCarboneBasePresenter impleme
     });
   }
 
-  private formateKg(nombreDeKg: number): { valeur: string; unite: string } {
-    return nombreDeKg >= 1000
-      ? {
-          valeur: `${(nombreDeKg / 1000).toFixed(1)}`,
-          unite: 'tonnes',
-        }
-      : {
-          valeur: `${nombreDeKg.toFixed(0)} `,
-          unite: 'kg',
-        };
-  }
-
   presenteBilanPartiel(bilanCarbone: BilanCarbone): void {
     this.bilanCarbonePartielViewModel({
       titre: 'Estimez mon <span class="text--bleu">bilan environnemental</span>',
@@ -123,6 +119,25 @@ export class BilanCarbonePresenterImpl extends BilanCarboneBasePresenter impleme
       ],
       thematiquesBilan: bilanCarbone.thematiquesBilan,
     });
+  }
+
+  presenteBilanAFaire(bilan: BilanCarbone): void {
+    this.bilanCarboneAFaireViewModel({
+      pourcentageCompletionTotal: bilan.pourcentageCompletionTotal,
+      thematiquesBilan: bilan.thematiquesBilan,
+    });
+  }
+
+  private formateKg(nombreDeKg: number): { valeur: string; unite: string } {
+    return nombreDeKg >= 1000
+      ? {
+          valeur: `${(nombreDeKg / 1000).toFixed(1)}`,
+          unite: 'tonnes',
+        }
+      : {
+          valeur: `${nombreDeKg.toFixed(0)} `,
+          unite: 'kg',
+        };
   }
 
   private determineProgressBar(niveau: NiveauImpactBilanCarbone): string {
