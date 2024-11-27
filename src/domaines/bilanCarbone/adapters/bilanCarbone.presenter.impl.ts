@@ -1,6 +1,7 @@
 import { BilanCarboneBasePresenter } from '@/domaines/bilanCarbone/adapters/bilanCarboneBase.presenter';
-import { BilanCarbonePresenter, ThematiquesBilanViewModel } from '@/domaines/bilanCarbone/ports/bilanCarbone.presenter';
+import { BilanCarbonePresenter, ThematiqueBilanViewModel } from '@/domaines/bilanCarbone/ports/bilanCarbone.presenter';
 import { BilanCarbone, NiveauImpactBilanCarbone } from '@/domaines/bilanCarbone/recupererBilanCarbone.usecase';
+import { ClefThematiqueAPI, MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
 
 interface BilanCarbonDetailItemViewModel {
   label: string;
@@ -18,7 +19,7 @@ interface BilanCarboneDetailViewModel extends BilanCarbonDetailItemViewModel {
 
 export interface BilanCarboneViewModelBase {
   titre: string;
-  thematiquesBilan: ThematiquesBilanViewModel[];
+  thematiquesBilan: ThematiqueBilanViewModel[];
 }
 
 export interface BilanCarboneCompletViewModel extends BilanCarboneViewModelBase {
@@ -52,7 +53,7 @@ export interface BilanCarbonePartielViewModel extends BilanCarboneViewModelBase 
 
 export interface BilanCarboneAFaireViewModel {
   pourcentageCompletionTotal: number;
-  thematiquesBilan: ThematiquesBilanViewModel[];
+  thematiquesBilan: ThematiqueBilanViewModel[];
 }
 
 export class BilanCarbonePresenterImpl extends BilanCarboneBasePresenter implements BilanCarbonePresenter {
@@ -71,7 +72,7 @@ export class BilanCarbonePresenterImpl extends BilanCarboneBasePresenter impleme
       nombreDeTonnesAnnuel: this.calculTonnesAnnuel(bilanCarbone.bilanComplet!.impactKgAnnuel),
       impactKgAnnuel: this.formateKg(bilanCarbone.bilanComplet!.impactKgAnnuel),
       univers: bilanCarbone.bilanComplet!.univers.map(univers => ({
-        label: univers.universLabel,
+        label: MenuThematiques.getThematiqueData(univers.clefThematiqueAPI).labelDansLeMenu,
         impactKgAnnuel: this.formateKg(univers.impactKgAnnuel),
         pourcentage: univers.pourcentage,
         emoji: univers.emoji,
@@ -87,7 +88,15 @@ export class BilanCarbonePresenterImpl extends BilanCarboneBasePresenter impleme
         label: top3.label,
         pourcentage: top3.pourcentage,
       })),
-      thematiquesBilan: bilanCarbone.thematiquesBilan,
+      thematiquesBilan: bilanCarbone.thematiquesBilan.map(thematiqueBilan => ({
+        label: MenuThematiques.getThematiqueData(thematiqueBilan.clefUnivers as ClefThematiqueAPI).labelDansLeMenu,
+        contentId: thematiqueBilan.contentId,
+        urlImage: thematiqueBilan.urlImage,
+        estTermine: thematiqueBilan.estTermine,
+        pourcentageProgression: thematiqueBilan.pourcentageProgression,
+        nombreTotalDeQuestion: thematiqueBilan.nombreTotalDeQuestion,
+        clefUnivers: thematiqueBilan.clefUnivers,
+      })),
     });
   }
 
@@ -117,14 +126,30 @@ export class BilanCarbonePresenterImpl extends BilanCarboneBasePresenter impleme
           progressBarStyle: this.determineProgressBar(bilanCarbone.bilanPartiel!.consommation.niveau),
         },
       ],
-      thematiquesBilan: bilanCarbone.thematiquesBilan,
+      thematiquesBilan: bilanCarbone.thematiquesBilan.map(thematiqueBilan => ({
+        label: MenuThematiques.getThematiqueData(thematiqueBilan.clefUnivers as ClefThematiqueAPI).labelDansLeMenu,
+        contentId: thematiqueBilan.contentId,
+        urlImage: thematiqueBilan.urlImage,
+        estTermine: thematiqueBilan.estTermine,
+        pourcentageProgression: thematiqueBilan.pourcentageProgression,
+        nombreTotalDeQuestion: thematiqueBilan.nombreTotalDeQuestion,
+        clefUnivers: thematiqueBilan.clefUnivers,
+      })),
     });
   }
 
   presenteBilanAFaire(bilan: BilanCarbone): void {
     this.bilanCarboneAFaireViewModel({
       pourcentageCompletionTotal: bilan.pourcentageCompletionTotal,
-      thematiquesBilan: bilan.thematiquesBilan,
+      thematiquesBilan: bilan.thematiquesBilan.map(thematiqueBilan => ({
+        label: MenuThematiques.getThematiqueData(thematiqueBilan.clefUnivers as ClefThematiqueAPI).labelDansLeMenu,
+        contentId: thematiqueBilan.contentId,
+        urlImage: thematiqueBilan.urlImage,
+        estTermine: thematiqueBilan.estTermine,
+        pourcentageProgression: thematiqueBilan.pourcentageProgression,
+        nombreTotalDeQuestion: thematiqueBilan.nombreTotalDeQuestion,
+        clefUnivers: thematiqueBilan.clefUnivers,
+      })),
     });
   }
 

@@ -1,7 +1,7 @@
 import { AxiosFactory, intercept401 } from '@/axios.factory';
-import { ThematiquesBilanViewModel } from '@/domaines/bilanCarbone/ports/bilanCarbone.presenter';
 import { BilanCarboneRepository } from '@/domaines/bilanCarbone/ports/bilanCarbone.repository';
-import { BilanCarbone } from '@/domaines/bilanCarbone/recupererBilanCarbone.usecase';
+import { BilanCarbone, ThematiqueBilan } from '@/domaines/bilanCarbone/recupererBilanCarbone.usecase';
+import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 
 interface LienBilanThematiqueAPI_v3 {
   thematique: string;
@@ -62,8 +62,7 @@ export class BilanCarboneRepositoryAxios implements BilanCarboneRepository {
       bilanComplet: reponse.data.bilan_complet && {
         impactKgAnnuel: reponse.data.bilan_complet.impact_kg_annee,
         univers: reponse.data.bilan_complet.impact_thematique.map(detail => ({
-          universId: detail.thematique,
-          universLabel: detail.thematique,
+          clefThematiqueAPI: detail.thematique as ClefThematiqueAPI,
           pourcentage: detail.pourcentage,
           impactKgAnnuel: detail.impact_kg_annee,
           emoji: detail.emoji,
@@ -91,7 +90,7 @@ export class BilanCarboneRepositoryAxios implements BilanCarboneRepository {
     };
   }
 
-  private determineThematiqueBilan(liensBilansThematique: LienBilanThematiqueAPI_v3): ThematiquesBilanViewModel {
+  private determineThematiqueBilan(liensBilansThematique: LienBilanThematiqueAPI_v3): ThematiqueBilan {
     return {
       contentId: liensBilansThematique.id_enchainement_kyc,
       estTermine: liensBilansThematique.pourcentage_progression === 100,

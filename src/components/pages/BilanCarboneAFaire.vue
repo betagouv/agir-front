@@ -1,9 +1,9 @@
 <template>
-  <section class="fr-py-2w">
+  <section class="fr-pb-2w">
     <h1>Mon bilan environnemental</h1>
     <BilanThematiquesListeCartes
       :thematiques-bilan="thematiques"
-      colonnes="fr-col-md-2 fr-col-6"
+      colonnes="fr-col-md-3 fr-col-6"
       sous-titre="Pour obtenir des <span class='text--bold'>recommandations</span> et <span class='text--bold'>aides</span> personnalisées"
       titre="Affiner mon <span class='text--bleu'>bilan environnemental</span>"
     />
@@ -16,7 +16,7 @@
 
 <script lang="ts" setup>
   import BilanThematiquesListeCartes from '@/components/custom/BilanCarbone/BilanThematiquesListeCartes.vue';
-  import { ThematiquesBilanViewModel } from '@/domaines/bilanCarbone/ports/bilanCarbone.presenter';
+  import { ThematiqueBilanViewModel } from '@/domaines/bilanCarbone/ports/bilanCarbone.presenter';
 
-  defineProps<{ thematiques: ThematiquesBilanViewModel[]; pourcentageCompletionTotal: number }>();
+  defineProps<{ thematiques: ThematiqueBilanViewModel[]; pourcentageCompletionTotal: number }>();
 </script>

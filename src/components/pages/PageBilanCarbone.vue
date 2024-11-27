@@ -7,6 +7,7 @@
         <template v-else-if="bilanCarboneViewModel || bilanCarbonePartielViewModel || bilanCarboneAFaireViewModel">
           <h1
             class="fr-h2"
+            v-if="bilanCarboneViewModel || bilanCarbonePartielViewModel"
             v-html="bilanCarboneViewModel?.titre ? bilanCarboneViewModel.titre : bilanCarbonePartielViewModel?.titre"
           />
           <BilanCarbone

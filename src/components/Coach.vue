@@ -1,18 +1,20 @@
 <template>
-  <div class="background--white fr-py-6w">
+  <div class="fr-pt-4w fr-pb-1w background--white">
     <div class="fr-container">
       <h1 class="fr-h1 fr-m-0">Bonjour {{ utilisateurStore().utilisateur.prenom }} 👋</h1>
     </div>
   </div>
 
-  <section class="fr-container fr-py-6w">
-    <CoachBilanCarbone
-      :bilanCarboneAFaireViewModel="bilanCarboneAFaireViewModel"
-      :bilanCarboneCompletViewModel="bilanCarboneCompletViewModel"
-    />
+  <section class="background--white">
+    <div class="fr-container fr-py-4w">
+      <CoachBilanCarbone
+        :bilanCarboneAFaireViewModel="bilanCarboneAFaireViewModel"
+        :bilanCarboneCompletViewModel="bilanCarboneCompletViewModel"
+      />
+    </div>
   </section>
 
-  <section class="fr-pb-4w background--white">
+  <section class="fr-pb-4w fr-pt-2w">
     <div v-if="!isLoading" class="fr-container">
       <h2 class="fr-h3 fr-mb-1w">Recommandés <span class="text--bleu">pour vous</span></h2>
       <p class="fr-text--md">
@@ -53,7 +55,7 @@
       <CoachRecommandations
         v-if="recommandationsPersonnaliseesViewModel"
         :recommandations="recommandationsPersonnaliseesViewModel.autresRecommandations"
-        class="fr-mb-2w"
+        class="fr-mb-3w"
       />
       <router-link :to="{ name: RouteCoachName.BIBLIOTHEQUE }" class="fr-link">Voir ma bibliothèque</router-link>
     </div>
