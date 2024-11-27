@@ -1,6 +1,6 @@
 import { BilanCarbone } from '@/domaines/bilanCarbone/recupererBilanCarbone.usecase';
 
-export interface ThematiquesBilan {
+export interface ThematiquesBilanViewModel {
   contentId: string;
   label: string;
   urlImage: string;

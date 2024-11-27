@@ -1,5 +1,5 @@
 import { BilanCarboneBasePresenter } from '@/domaines/bilanCarbone/adapters/bilanCarboneBase.presenter';
-import { BilanCarbonePresenter, ThematiquesBilan } from '@/domaines/bilanCarbone/ports/bilanCarbone.presenter';
+import { BilanCarbonePresenter, ThematiquesBilanViewModel } from '@/domaines/bilanCarbone/ports/bilanCarbone.presenter';
 import { BilanCarbone, NiveauImpactBilanCarbone } from '@/domaines/bilanCarbone/recupererBilanCarbone.usecase';
 
 interface BilanCarbonDetailItemViewModel {
@@ -18,7 +18,7 @@ interface BilanCarboneDetailViewModel extends BilanCarbonDetailItemViewModel {
 
 export interface BilanCarboneViewModelBase {
   titre: string;
-  thematiquesBilan: ThematiquesBilan[];
+  thematiquesBilan: ThematiquesBilanViewModel[];
 }
 
 export interface BilanCarboneCompletViewModel extends BilanCarboneViewModelBase {
@@ -52,7 +52,7 @@ export interface BilanCarbonePartielViewModel extends BilanCarboneViewModelBase 
 
 export interface BilanCarboneAFaireViewModel {
   pourcentageCompletionTotal: number;
-  thematiquesBilan: ThematiquesBilan[];
+  thematiquesBilan: ThematiquesBilanViewModel[];
 }
 
 export class BilanCarbonePresenterImpl extends BilanCarboneBasePresenter implements BilanCarbonePresenter {

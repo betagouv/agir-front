@@ -1,5 +1,5 @@
 import { AxiosFactory, intercept401 } from '@/axios.factory';
-import { ThematiquesBilan } from '@/domaines/bilanCarbone/ports/bilanCarbone.presenter';
+import { ThematiquesBilanViewModel } from '@/domaines/bilanCarbone/ports/bilanCarbone.presenter';
 import { BilanCarboneRepository } from '@/domaines/bilanCarbone/ports/bilanCarbone.repository';
 import { BilanCarbone } from '@/domaines/bilanCarbone/recupererBilanCarbone.usecase';
 
@@ -91,7 +91,7 @@ export class BilanCarboneRepositoryAxios implements BilanCarboneRepository {
     };
   }
 
-  private determineThematiqueBilan(liensBilansThematique: LienBilanThematiqueAPI_v3): ThematiquesBilan {
+  private determineThematiqueBilan(liensBilansThematique: LienBilanThematiqueAPI_v3): ThematiquesBilanViewModel {
     return {
       contentId: liensBilansThematique.id_enchainement_kyc,
       estTermine: liensBilansThematique.pourcentage_progression === 100,

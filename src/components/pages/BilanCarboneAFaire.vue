@@ -16,7 +16,7 @@
 
 <script lang="ts" setup>
   import BilanThematiquesListeCartes from '@/components/custom/BilanCarbone/BilanThematiquesListeCartes.vue';
-  import { ThematiquesBilan } from '@/domaines/bilanCarbone/ports/bilanCarbone.presenter';
+  import { ThematiquesBilanViewModel } from '@/domaines/bilanCarbone/ports/bilanCarbone.presenter';
 
-  defineProps<{ thematiques: ThematiquesBilan[]; pourcentageCompletionTotal: number }>();
+  defineProps<{ thematiques: ThematiquesBilanViewModel[]; pourcentageCompletionTotal: number }>();
 </script>

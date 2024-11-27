@@ -139,7 +139,7 @@ test.describe('Audit a11y - pages connectées', () => {
   });
 
   test('Page bilan carbone', async () => {
-    await page.goto('/bilan-carbone');
+    await page.goto('/bilan-environnemental');
     await playAuditA11y(page);
   });
 

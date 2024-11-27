@@ -84,7 +84,7 @@
     BilanCarboneAccueilPresenterImpl,
     BilanCarboneCompletAccueilViewModel,
   } from '@/domaines/bilanCarbone/adapters/bilanCarboneAccueil.presenter.impl';
-  import { RecupererBilanCarboneUsecase } from '@/domaines/bilanCarbone/recupererBilanCarbone.usecase';
+  import { RecupererBilanCarboneAccueilUsecase } from '@/domaines/bilanCarbone/recupererBilanCarboneAccueil.usecase';
   import { MissionViewModel } from '@/domaines/missions/adapters/missions.presenter.impl';
   import { MissionsRepositoryAxios } from '@/domaines/missions/adapters/missions.repository.axios';
   import { MissionsRecommandeesPresenterImpl } from '@/domaines/missions/adapters/missionsRecommandees.presenter.impl';
@@ -118,7 +118,7 @@
       new RecommandationsPersonnaliseesRepositoryAxios(),
     );
 
-    const recupererBilanCarboneUsecase = new RecupererBilanCarboneUsecase(new BilanCarboneRepositoryAxios());
+    const recupererBilanCarboneUsecase = new RecupererBilanCarboneAccueilUsecase(new BilanCarboneRepositoryAxios());
 
     Promise.all([
       recupererMissionsRecommandeesUsecase.execute(

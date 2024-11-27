@@ -1,4 +1,4 @@
-import { BilanCarbonePresenter, ThematiquesBilan } from '@/domaines/bilanCarbone/ports/bilanCarbone.presenter';
+import { BilanCarbonePresenter, ThematiquesBilanViewModel } from '@/domaines/bilanCarbone/ports/bilanCarbone.presenter';
 import { BilanCarboneRepository } from '@/domaines/bilanCarbone/ports/bilanCarbone.repository';
 
 interface BilanCarboneDetail {
@@ -41,7 +41,7 @@ export interface BilanCarbone {
   pourcentageCompletionTotal: number;
   bilanComplet?: BilanCompletCarbone;
   bilanPartiel?: BilanPartielCarbone;
-  thematiquesBilan: ThematiquesBilan[];
+  thematiquesBilan: ThematiquesBilanViewModel[];
 }
 
 export class RecupererBilanCarboneUsecase {
