@@ -1,6 +1,6 @@
 import { QuestionViewModelBuilder } from '@/domaines/kyc/adapters/question.base.presenter';
 import { ListeQuestionsPresenter } from '@/domaines/kyc/ports/listeQuestions.presenter';
-import { Question } from '@/domaines/kyc/recupererQuestionUsecase';
+import { Question } from '@/domaines/kyc/recupererQuestion.usecase';
 
 export interface ReponsePossibleViewModel {
   id: string;
@@ -21,7 +21,6 @@ export interface QuestionViewModel {
   type: 'libre' | 'choix_multiple' | 'choix_unique' | 'mosaic_boolean' | 'entier';
   reponses_possibles: ReponsePossibleViewModel[];
   points: string;
-  reponses: string[];
   aDejaEteRepondu: boolean;
   description: string;
 }

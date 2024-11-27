@@ -1,8 +1,8 @@
 <template>
   <div class="fr-container">
     <FilDAriane
-      page-courante="Estimation du bilan"
       :page-hierarchie="[{ label: 'Bilan carbone', url: `${RouteBilanCarbonePath.BILAN_CARBONE}` }]"
+      page-courante="Estimation du bilan"
     />
     <h1>
       Estimation du bilan
@@ -11,14 +11,14 @@
       }}</span>
     </h1>
     <p v-if="isLoading" class="fr-mb-4w">Chargement en cours ...</p>
-    <div class="fr-mb-4w" v-if="!isLoading && questionsViewModel">
+    <div v-if="!isLoading && questionsViewModel" class="fr-mb-4w">
       <div v-for="(questionViewModel, index) in questionsViewModel.questions" :key="index">
         <div v-show="index === etapeCourante">
           <p class="text--bleu fr-grid-row align-items--center fr-py-2w">
             <button
               v-if="index !== 0"
-              class="fr-btn fr-p-0 fr-m-0 fr-btn--tertiary-no-outline fr-icon-arrow-left-line"
               :title="`Retour à l'étape ${index}`"
+              class="fr-btn fr-p-0 fr-m-0 fr-btn--tertiary-no-outline fr-icon-arrow-left-line"
               @click="etapeCourante--"
             ></button>
             <span class="fr-text--bold">Question {{ index + 1 }}</span>
@@ -35,7 +35,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
   import { onMounted, ref } from 'vue';
   import { useRoute } from 'vue-router';
   import KYCForm from '@/components/custom/KYC/KYCForm.vue';
@@ -45,7 +45,7 @@
     QuestionsViewModel,
   } from '@/domaines/kyc/adapters/listeQuestionsThematique.presenter.impl';
   import { QuestionRepositoryAxios } from '@/domaines/kyc/adapters/question.repository.axios';
-  import { RecupererEnchainementQuestionsUsecase } from '@/domaines/kyc/recupererEnchainementQuestionsUsecase';
+  import { RecupererEnchainementQuestionsUsecase } from '@/domaines/kyc/recupererEnchainementQuestions.usecase';
   import { ClefThematiqueAPI, MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
   import router from '@/router';
   import { RouteBilanCarbonePath } from '@/router/bilanCarbone/routes';

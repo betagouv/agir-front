@@ -10,8 +10,8 @@
   </div>
 </template>
 
-<script setup lang="ts">
-  import { ref, onMounted } from 'vue';
+<script lang="ts" setup>
+  import { onMounted, ref } from 'vue';
   import { useRoute } from 'vue-router';
   import CarteSkeleton from '@/components/CarteSkeleton.vue';
   import OnboardingQuestionsKyc from '@/components/custom/Mission/OnboardingQuestionsKyc.vue';
@@ -21,7 +21,7 @@
     QuestionsViewModel,
   } from '@/domaines/kyc/adapters/listeQuestionsThematique.presenter.impl';
   import { QuestionRepositoryAxios } from '@/domaines/kyc/adapters/question.repository.axios';
-  import { RecupererEnchainementQuestionsUsecase } from '@/domaines/kyc/recupererEnchainementQuestionsUsecase';
+  import { RecupererEnchainementQuestionsUsecase } from '@/domaines/kyc/recupererEnchainementQuestions.usecase';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const isLoading = ref<boolean>(true);

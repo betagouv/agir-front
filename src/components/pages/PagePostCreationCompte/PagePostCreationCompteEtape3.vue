@@ -25,7 +25,7 @@
   import { QuestionViewModel } from '@/domaines/kyc/adapters/listeQuestionsThematique.presenter.impl';
   import { QuestionPresenterImpl } from '@/domaines/kyc/adapters/question.presenter.impl';
   import { QuestionRepositoryAxios } from '@/domaines/kyc/adapters/question.repository.axios';
-  import { RecupererQuestionUsecase } from '@/domaines/kyc/recupererQuestionUsecase';
+  import { RecupererQuestionUsecase } from '@/domaines/kyc/recupererQuestion.usecase';
   import router from '@/router';
   import { RouteCompteName } from '@/router/compte/routeCompteName';
   import { utilisateurStore } from '@/store/utilisateur';

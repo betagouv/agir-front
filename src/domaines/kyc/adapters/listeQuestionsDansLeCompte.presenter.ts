@@ -1,5 +1,11 @@
 import { ListeQuestionsPresenter, QuestionDansLeCompteViewModel } from '@/domaines/kyc/ports/listeQuestions.presenter';
-import { Question, ReponseKYCSimple, ReponseMosaic, ThematiqueQuestion } from '@/domaines/kyc/recupererQuestionUsecase';
+import {
+  Question,
+  ReponseKYCSimple,
+  ReponseMosaic,
+  ReponseMultiple,
+  ThematiqueQuestion,
+} from '@/domaines/kyc/recupererQuestion.usecase';
 
 export class ListeQuestionsDansLeComptePresenter implements ListeQuestionsPresenter {
   constructor(private readonly questionsViewModel: (viewModel: QuestionDansLeCompteViewModel[]) => void) {}
@@ -8,16 +14,26 @@ export class ListeQuestionsDansLeComptePresenter implements ListeQuestionsPresen
       questions.map<QuestionDansLeCompteViewModel>(question => ({
         id: question.id,
         libelle: question.libelle,
-        reponse:
-          question.type === 'mosaic_boolean'
-            ? (question.reponses as ReponseMosaic<boolean>).reponse
-                .filter(r => r.valeur)
-                .map(value => value.label)
-                .join(' - ')
-            : (question.reponses as ReponseKYCSimple).reponse.join(' - '),
+        reponse: this.determineReponse(question),
         description: this.determineDescription(question.thematique),
       })),
     );
+  }
+
+  private determineReponse(question: Question) {
+    if (question.type === 'mosaic_boolean')
+      return (question.reponses as ReponseMosaic<boolean>).reponse
+        .filter(r => r.valeur)
+        .map(value => value.label)
+        .join(' - ');
+    else if (question.type === 'choix_multiple' || question.type === 'choix_unique') {
+      return (question.reponses as ReponseMultiple).reponse
+        .filter(r => r.estSelectionnee)
+        .map(value => value.label)
+        .join(' - ');
+    } else {
+      return (question.reponses as ReponseKYCSimple).reponse.join(' - ');
+    }
   }
 
   private determineDescription(thematique: ThematiqueQuestion) {

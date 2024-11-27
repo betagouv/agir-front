@@ -13,16 +13,16 @@
       />
       <KYCFin
         v-else
-        :phrase-point-a-gagner="questionViewModel.points"
         :a-deja-repondu="questionViewModel.aDejaEteRepondu"
         :bouton="buttonRetour"
+        :phrase-point-a-gagner="questionViewModel.points"
       />
     </div>
     <div v-else>Problème de chargement de donées</div>
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
   import { onMounted, ref } from 'vue';
   import { useRoute } from 'vue-router';
   import KYCFin from '@/components/custom/KYC/KYCFin.vue';
@@ -31,7 +31,7 @@
   import { QuestionViewModel } from '@/domaines/kyc/adapters/listeQuestionsThematique.presenter.impl';
   import { QuestionPresenterImpl } from '@/domaines/kyc/adapters/question.presenter.impl';
   import { QuestionRepositoryAxios } from '@/domaines/kyc/adapters/question.repository.axios';
-  import { RecupererQuestionUsecase } from '@/domaines/kyc/recupererQuestionUsecase';
+  import { RecupererQuestionUsecase } from '@/domaines/kyc/recupererQuestion.usecase';
   import { RouteCoachName } from '@/router/coach/routeCoachName';
   import { RouteComptePath } from '@/router/compte/routes';
   import { RouteKycName } from '@/router/kyc/routes';
@@ -42,7 +42,6 @@
 
   const isLoading = ref<boolean>(true);
   const questionViewModel = ref<QuestionViewModel>();
-  const reponse = ref<string | string[]>('');
   const reponseAEteDonnee = ref<boolean>(false);
 
   const utilisateurId = utilisateurStore().utilisateur.id;
@@ -62,7 +61,6 @@
       utilisateurId,
       new QuestionPresenterImpl((viewModel: QuestionViewModel) => {
         questionViewModel.value = viewModel;
-        reponse.value = viewModel.reponses;
       }),
     );
     isLoading.value = false;

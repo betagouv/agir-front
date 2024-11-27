@@ -1,11 +1,9 @@
-import { test, expect, chromium, Page } from '@playwright/test';
+import { chromium, expect, Page, test } from '@playwright/test';
 import { InjectService } from './utils/injectService';
 import { InjectUtilisateur } from './utils/injectUtilisateur';
 import { InjectRecommandations } from './utils/injectRecommandations';
 import { InjectTodo } from './utils/injectTodo';
-import { InjectKYC } from './utils/injectKYC';
 import { InjectGamification } from './utils/injectGamification';
-import { ThematiqueQuestion } from '@/domaines/kyc/recupererQuestionUsecase';
 
 let page: Page;
 
@@ -54,28 +52,46 @@ test.beforeAll(async () => {
     });
   });
 
-  await page.route(`${process.env.VITE_API_URL}/utilisateurs/dorian/questionsKYC/KYC001`, route => {
+  await page.route(`${process.env.VITE_API_URL}/utilisateurs/dorian/questionsKYC_v2/KYC001`, route => {
     route.fulfill({
       status: 200,
       contentType: 'application/json',
       body: JSON.stringify({
-        id: 'KYC001',
-        question: 'Sur quel(s) sujet(s) souhaitez-vous en savoir plus pour réduire votre impact environnemental ?',
-        reponse: ['🥦 Alimentation'],
-        categorie: 'mission',
-        points: 5,
-        type: 'choix_multiple',
-        reponses_possibles: [
-          '🥦 Alimentation',
-          '☀️ Climat et Environnement',
-          '🛒 Consommation durable',
-          '🗑️ Déchets',
-          '🏡 Logement',
-          '⚽ Loisirs (vacances, sport,...)',
-          '🚗 Transports',
-          'Aucun / Je ne sais pas',
+        code: 'KYC_preference',
+        question: 'Sur quels thèmes recherchez-vous en priorité des aides et conseils ?',
+        reponse_multiple: [
+          {
+            code: 'alimentation',
+            label: 'La cuisine et l’alimentation',
+            selected: false,
+          },
+          {
+            code: 'transport',
+            label: 'Mes déplacements',
+            selected: false,
+          },
+          {
+            code: 'logement',
+            label: 'Mon logement',
+            selected: false,
+          },
+          {
+            code: 'consommation',
+            label: 'Ma consommation',
+            selected: false,
+          },
+          {
+            code: 'ne_sais_pas',
+            label: 'Je ne sais pas encore',
+            selected: false,
+          },
         ],
-        thematique: ThematiqueQuestion.AUTRE,
+        is_answered: true,
+        categorie: 'recommandation',
+        points: 0,
+        type: 'choix_multiple',
+        is_NGC: false,
+        thematique: 'climat',
       }),
     });
   });
@@ -90,18 +106,18 @@ test.describe('kyc', () => {
   });
 
   test('doit afficher le remerciement', async () => {
-    await page.route(`${process.env.VITE_API_URL}/utilisateurs/dorian/questionsKYC/KYC001`, route => {
+    await page.route(`${process.env.VITE_API_URL}/utilisateurs/dorian/questionsKYC_v2/KYC_preference`, route => {
       route.fulfill({
         status: 201,
       });
     });
 
-    await page.getByRole('checkbox', { name: '🥦 Alimentation' }).check();
-    await page.getByRole('button', { name: 'Valider' }).click();
+    await page.getByRole('checkbox', { name: 'La cuisine et l’alimentation' }).check({ force: true });
+    await page.getByRole('button', { name: 'Valider' }).click({ force: true });
 
     expect(await page.getByText('Merci pour votre réponse !!!')).toBeDefined();
 
-    await page.getByRole('link', { name: "Retour à l'accueil" }).click();
+    await page.getByRole('link', { name: "Retour à l'accueil" }).click({ force: true });
 
     await expect(page).toHaveTitle("Agir - J'agis");
   });

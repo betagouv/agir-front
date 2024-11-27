@@ -3,18 +3,18 @@
     <legend class="fr-fieldset__legend--regular fr-fieldset__legend" id="checkboxes-legend">
       Plusieurs réponses sont possibles
     </legend>
-    <div class="fr-fieldset__element" v-for="(option, index) in options" :key="option.id">
+    <div class="fr-fieldset__element" v-for="(option, index) in updatedOptions" :key="option.id">
       <div
         :class="`fr-checkbox-group checkbox-group--custom border ${
-          checkedNames.includes(option.id) ? 'fr-text--bold border--bleu-dark' : ''
+          option.checked ? 'fr-text--bold border--bleu-dark' : ''
         }`"
       >
         <input
           :id="option.id"
           :value="option.id"
           type="checkbox"
-          v-model="checkedNames"
-          @change="updateValue($event, estResetable && index === options.length - 1 ? true : false)"
+          :checked="option.checked"
+          @change="updateValue($event, index)"
         />
         <label class="fr-label background--white" :for="option.id">{{ option.label }}</label>
       </div>
@@ -29,26 +29,32 @@
     options: {
       id: string;
       label: string;
+      checked?: boolean;
     }[];
-    defaultValues?: string[];
     estResetable?: boolean;
   }>();
-
-  const checkedNames = ref<string[]>(props.defaultValues || []);
 
   const emit = defineEmits<{
     (e: 'update:modelValue', value: string[]): void;
   }>();
 
-  const updateValue = (event: Event, reset: boolean) => {
+  const updatedOptions = ref(props.options);
+  const updateValue = (event: Event, index: number) => {
     const input = event.target as HTMLInputElement;
 
-    if (props.estResetable && reset && input.checked) {
-      checkedNames.value = [input.value];
-    } else if (props.estResetable) {
-      checkedNames.value = checkedNames.value.filter(value => value !== props.options[props.options.length - 1].id);
+    if (props.estResetable && index === props.options.length - 1) {
+      updatedOptions.value.forEach((opt, i) => (opt.checked = i === index ? input.checked : false));
+    } else {
+      updatedOptions.value[index].checked = input.checked;
+      if (props.estResetable) {
+        updatedOptions.value[updatedOptions.value.length - 1].checked = false;
+      }
     }
-    emit('update:modelValue', checkedNames.value);
+
+    emit(
+      'update:modelValue',
+      updatedOptions.value.filter(opt => opt.checked).map(opt => opt.id),
+    );
   };
 </script>
 

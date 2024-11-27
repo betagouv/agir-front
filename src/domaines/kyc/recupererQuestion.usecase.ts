@@ -23,13 +23,21 @@ export interface ReponseMosaic<T> {
     valeur: T;
   }[];
 }
+
+export interface ReponseMultiple {
+  reponse: {
+    code: string;
+    label: string;
+    estSelectionnee: boolean;
+  }[];
+}
 export interface Question {
   id: string;
   libelle: string;
   type: 'libre' | 'choix_multiple' | 'choix_unique' | 'mosaic_boolean' | 'entier';
   points: number;
   thematique: ThematiqueQuestion;
-  reponses: ReponseKYCSimple | ReponseMosaic<boolean>;
+  reponses: ReponseKYCSimple | ReponseMosaic<boolean> | ReponseMultiple;
   aEteRepondu: boolean;
 }
 

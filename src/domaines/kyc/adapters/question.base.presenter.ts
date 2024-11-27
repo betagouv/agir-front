@@ -2,13 +2,33 @@ import {
   QuestionViewModel,
   ReponsePossibleViewModel,
 } from '@/domaines/kyc/adapters/listeQuestionsThematique.presenter.impl';
-import { Question, ReponseKYCSimple, ReponseMosaic, ThematiqueQuestion } from '@/domaines/kyc/recupererQuestionUsecase';
+import {
+  Question,
+  ReponseKYCSimple,
+  ReponseMosaic,
+  ReponseMultiple,
+  ThematiqueQuestion,
+} from '@/domaines/kyc/recupererQuestion.usecase';
 
 export class QuestionViewModelBuilder {
   private questionViewModel: Partial<QuestionViewModel> = {};
 
   static init(): QuestionViewModelBuilder {
     return new QuestionViewModelBuilder();
+  }
+
+  static buildFromQuestion(question: Question): QuestionViewModel {
+    const builder = QuestionViewModelBuilder.init();
+
+    return builder
+      .withId(question.id)
+      .withLibelle(question.libelle)
+      .withType(question.type)
+      .withPoints(question.points)
+      .withReponsesPossibles(builder.determineReponsePossibles(question))
+      .withADejaEteRepondu(question.aEteRepondu)
+      .withDescription(builder.determineDescription(question.thematique))
+      .build();
   }
 
   withId(id: string): QuestionViewModelBuilder {
@@ -36,11 +56,6 @@ export class QuestionViewModelBuilder {
     return this;
   }
 
-  withReponses(reponses: string[]): QuestionViewModelBuilder {
-    this.questionViewModel.reponses = reponses;
-    return this;
-  }
-
   withADejaEteRepondu(aDejaEteRepondu: boolean): QuestionViewModelBuilder {
     this.questionViewModel.aDejaEteRepondu = aDejaEteRepondu;
     return this;
@@ -53,21 +68,6 @@ export class QuestionViewModelBuilder {
 
   build(): QuestionViewModel {
     return this.questionViewModel as QuestionViewModel;
-  }
-
-  static buildFromQuestion(question: Question): QuestionViewModel {
-    const builder = QuestionViewModelBuilder.init();
-
-    return builder
-      .withId(question.id)
-      .withLibelle(question.libelle)
-      .withType(question.type)
-      .withPoints(question.points)
-      .withReponsesPossibles(builder.determineReponsePossibles(question))
-      .withReponses(builder.determineReponse(question))
-      .withADejaEteRepondu(question.aEteRepondu)
-      .withDescription(builder.determineDescription(question.thematique))
-      .build();
   }
 
   private determineDescription(thematique: ThematiqueQuestion): string {
@@ -94,19 +94,16 @@ export class QuestionViewModelBuilder {
         emoji: reponse.emoji,
         checked: reponse.valeur,
       }));
-    } else {
+    } else if (question.type === 'choix_multiple' || question.type === 'choix_unique') {
+      return (question.reponses as ReponseMultiple).reponse.map(reponse => ({
+        id: reponse.code,
+        label: reponse.label,
+        checked: reponse.estSelectionnee,
+      }));
+    } else
       return (question.reponses as ReponseKYCSimple).reponses_possibles.map(reponse => ({
         id: reponse,
         label: reponse,
       }));
-    }
-  }
-
-  private determineReponse(question: Question): string[] {
-    if (question.type === 'mosaic_boolean') {
-      return (question.reponses as ReponseMosaic<boolean>).reponse.map(reponse => reponse.valeur.toString());
-    } else {
-      return (question.reponses as ReponseKYCSimple).reponse;
-    }
   }
 }
