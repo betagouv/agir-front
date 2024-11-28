@@ -1,4 +1,4 @@
 export const scrollToMain = () => {
   const main = document.querySelector('main');
-  main?.scrollIntoView();
+  main?.scrollIntoView({ behavior: 'smooth' });
 };

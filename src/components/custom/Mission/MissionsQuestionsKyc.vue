@@ -2,10 +2,15 @@
   <MissionNavigation
     titre="Une question pour mieux vous connaître"
     :on-click-revenir-etape-precedente="revenirEtapePrecedente"
-    :etape-actuelle="etapeAffichee"
+    :etape-actuelle="labelEtapeAffichee"
     :etape-totale="nombreEtapesMission"
   />
-  <MissionQuestionKYC :mission-id="idKycCourante" :on-click-continuer="passerEtapeSuivante" :key="etapeCourante" />
+  <MissionQuestionKYC
+    v-if="idKycCourante"
+    :kyc-id="idKycCourante"
+    :on-click-continuer="passerEtapeSuivante"
+    :key="etapeCourante"
+  />
 </template>
 
 <script setup lang="ts">
@@ -16,22 +21,22 @@
   import { scrollToMain } from '@/shell/scrollToMain';
 
   const props = defineProps<{
-    missions: MissionKycViewModel[];
-    onClickFinKYC: () => void;
+    kycs: MissionKycViewModel[];
+    onKycTermine: () => void;
     onClickRevenirEtapePrecedente: () => void;
     etapeCouranteDefaut?: number;
     nombreEtapesMission: number;
   }>();
 
   const etapeCourante = ref<number>(props.etapeCouranteDefaut ?? 0);
-  const etapeAffichee = computed(() => etapeCourante.value + 1);
-  const idKycCourante = computed(() => props.missions[etapeCourante.value]?.id);
+  const labelEtapeAffichee = computed(() => etapeCourante.value + 1);
+  const idKycCourante = computed(() => props.kycs[etapeCourante.value]?.id);
 
   const passerEtapeSuivante = () => {
     etapeCourante.value++;
 
-    if (etapeCourante.value === props.missions.length) {
-      props.onClickFinKYC();
+    if (etapeCourante.value === props.kycs.length) {
+      props.onKycTermine();
     }
     scrollToMain();
   };
@@ -44,14 +49,4 @@
     }
     scrollToMain();
   };
-
-  // onMounted(async () => {
-  //   const usecase = new RecupererQuestionsThematiqueUsecase(new QuestionRepositoryAxios());
-  //   await usecase.execute(
-  //     utilisateurStore().utilisateur.id,
-  //     props.missionId,
-  //     new ListesQuestionsThematiquePresenter(vm => (questionsViewModel.value = vm)),
-  //   );
-  //   isLoading.value = false;
-  // });
 </script>

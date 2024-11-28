@@ -26,8 +26,8 @@
       />
       <MissionsQuestionsKyc
         v-if="etapeCourante.type === 'KYC'"
-        :missions="missionViewModel.kyc"
-        :on-click-fin-k-y-c="() => miseAJourEtatCourant('QUIZ_ARTICLE', 0)"
+        :kycs="missionViewModel.kyc"
+        :on-kyc-termine="() => miseAJourEtatCourant('QUIZ_ARTICLE', 0)"
         :on-click-revenir-etape-precedente="() => miseAJourEtatCourant('INTRO', 0)"
         :etape-courante-defaut="etapeCourante.etapeDansLetape"
         :nombre-etapes-mission="missionViewModel.nombreEtapesMission"

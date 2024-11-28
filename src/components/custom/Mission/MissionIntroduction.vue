@@ -16,7 +16,7 @@
   defineProps<{
     titre: string;
     urlImage: string;
-    texte: string;
+    texte?: string;
     tag: {
       label: string;
       style: TagStyle;
