@@ -24,9 +24,9 @@
         :tag="missionViewModel.tag"
         :on-click-continuer="() => miseAJourEtatCourant('KYC', 0)"
       />
-      <PageMissionQuestionsKyc
+      <MissionsQuestionsKyc
         v-if="etapeCourante.type === 'KYC'"
-        :mission-id="missionId"
+        :missions="missionViewModel.kyc"
         :on-click-fin-k-y-c="() => miseAJourEtatCourant('QUIZ_ARTICLE', 0)"
         :on-click-revenir-etape-precedente="() => miseAJourEtatCourant('INTRO', 0)"
         :etape-courante-defaut="etapeCourante.etapeDansLetape"
@@ -62,9 +62,9 @@
   import MissionDefis from '@/components/custom/Mission/MissionDefis.vue';
   import MissionIntroduction from '@/components/custom/Mission/MissionIntroduction.vue';
   import MissionQuizArticles from '@/components/custom/Mission/MissionQuizArticles.vue';
+  import MissionsQuestionsKyc from '@/components/custom/Mission/MissionsQuestionsKyc.vue';
   import MissionTerminee from '@/components/custom/Mission/MissionTerminee.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
-  import PageMissionQuestionsKyc from '@/components/pages/PageMissionQuestionsKyc.vue';
   import { MissionPresenterImpl, MissionViewModel } from '@/domaines/missions/adapters/mission.presenter.impl';
   import { MissionsRepositoryAxios } from '@/domaines/missions/adapters/missions.repository.axios';
   import { determineEtapeMission, EtatsPossible } from '@/domaines/missions/determineEtapeMission';

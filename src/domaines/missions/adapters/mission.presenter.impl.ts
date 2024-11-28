@@ -4,7 +4,6 @@ import { MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
 import { TagStyle, TagThematique } from '@/domaines/thematiques/TagThematique';
 import { RouteArticlePath } from '@/router/articles/routes';
 import { RouteDefiPath } from '@/router/defis/routes';
-import { RouteKycPath } from '@/router/kyc/routes';
 import { RouteQuizPath } from '@/router/quiz/routes';
 import { buildUrl } from '@/shell/buildUrl';
 import { InteractionType } from '@/shell/interactionType';
@@ -74,24 +73,24 @@ export class MissionPresenterImpl implements MissionPresenter {
         label: MenuThematiques.getThematiqueData(mission.clefApiThematique).labelDansLeMenu,
         style: TagThematique.getTagThematiqueUtilitaire(mission.clefApiThematique),
       },
-      kyc: [
-        {
-          id: mission.items.filter(item => item.type === InteractionType.KYC)[0].id,
-          titre: '<strong>Quelques questions</strong> pour mieux vous connaître',
-          progression: {
-            etapeCourante: mission.progressionKyc.etapeCourante,
-            etapeTotal: mission.progressionKyc.etapeTotal,
-          },
-          estBloquee: false,
-          points: mission.items
-            .filter(item => item.type === InteractionType.KYC)
-            .reduce((sum, item) => sum + item.points, 0),
-          aEteRealisee: mission.progressionKyc.etapeCourante === mission.progressionKyc.etapeTotal,
-          url: `/thematique/${MenuThematiques.getThematiqueData(mission.clefApiThematique).url}/mission/${mission.missionId}${RouteKycPath.KYC}`,
-          picto: '/ic_mission_kyc.svg',
-          pointAEteRecolte: mission.items.filter(item => item.type === InteractionType.KYC)[0].pointAEteRecolte,
-        },
-      ],
+      kyc: mission.items
+        .filter(item => item.type === InteractionType.KYC)
+        .map((item): MissionKycViewModel => {
+          return {
+            id: item.contentId,
+            progression: {
+              etapeCourante: mission.progressionKyc.etapeCourante,
+              etapeTotal: mission.progressionKyc.etapeTotal,
+            },
+            estBloquee: item.estBloquee,
+            points: item.points,
+            aEteRealisee: item.aEteRealisee,
+            pointAEteRecolte: item.pointAEteRecolte,
+            picto: '',
+            titre: '',
+            url: '',
+          };
+        }),
       articleEtQuiz: mission.items
         .filter(item => item.type === InteractionType.ARTICLE || item.type === InteractionType.QUIZ)
         .map(item =>

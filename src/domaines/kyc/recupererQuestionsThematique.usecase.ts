@@ -5,7 +5,7 @@ export class RecupererQuestionsThematiqueUsecase {
   constructor(private questionRepository: QuestionRepository) {}
 
   async execute(utilisateurId: string, thematiqueId: string, presenter: ListeQuestionsPresenter): Promise<void> {
-    const questions = await this.questionRepository.recupererQuestionsThematique(utilisateurId, thematiqueId);
+    const questions = await this.questionRepository.recupererQuestion(utilisateurId, thematiqueId);
     presenter.presente(questions);
   }
 }

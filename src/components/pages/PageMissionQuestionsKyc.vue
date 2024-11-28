@@ -22,13 +22,14 @@
   } from '@/domaines/kyc/adapters/listeQuestionsThematique.presenter.impl';
   import { QuestionRepositoryAxios } from '@/domaines/kyc/adapters/question.repository.axios';
   import { RecupererQuestionsThematiqueUsecase } from '@/domaines/kyc/recupererQuestionsThematique.usecase';
+  import { MissionKycViewModel } from '@/domaines/missions/adapters/mission.presenter.impl';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const isLoading = ref<boolean>(true);
   const questionsViewModel = ref<QuestionsViewModel>();
 
   const props = defineProps<{
-    missionId: string;
+    missions: MissionKycViewModel[];
     onClickFinKYC: () => void;
     onClickRevenirEtapePrecedente: () => void;
     etapeCouranteDefaut?: number;
