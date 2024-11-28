@@ -43,6 +43,11 @@ export class TagThematique {
       color: '#4a0252',
       emoji: '⚽',
     },
+    [ClefThematiqueAPI.services_societaux]: {
+      backgroundColor: '#fff0e0',
+      color: '#4a0252',
+      emoji: '🏛️',
+    },
   };
 
   static getTagThematiqueUtilitaire(clefTechniqueAPI: string): TagStyle {
