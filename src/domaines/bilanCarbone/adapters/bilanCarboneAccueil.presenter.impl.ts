@@ -1,6 +1,8 @@
 import { BilanCarboneBasePresenter } from '@/domaines/bilanCarbone/adapters/bilanCarboneBase.presenter';
-import { BilanCarbonePresenter, ThematiquesBilan } from '@/domaines/bilanCarbone/ports/bilanCarbone.presenter';
+import { ThematiqueBilanViewModel } from '@/domaines/bilanCarbone/ports/bilanCarbone.presenter';
+import { BilanCarboneAccueilPresenter } from '@/domaines/bilanCarbone/ports/bilanCarboneAccueil.presenter';
 import { BilanCarbone } from '@/domaines/bilanCarbone/recupererBilanCarbone.usecase';
+import { ClefThematiqueAPI, MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
 
 export interface BilanCarboneCompletAccueilViewModel {
   pourcentageProgressBar: number;
@@ -9,13 +11,16 @@ export interface BilanCarboneCompletAccueilViewModel {
 
 export interface BilanCarbonePartielAccueilViewModel {
   pourcentageCompletionTotal: number;
-  thematiquesBilan: ThematiquesBilan[];
+  thematiquesBilan: ThematiqueBilanViewModel[];
 }
 
-export class BilanCarboneAccueilPresenterImpl extends BilanCarboneBasePresenter implements BilanCarbonePresenter {
+export class BilanCarboneAccueilPresenterImpl
+  extends BilanCarboneBasePresenter
+  implements BilanCarboneAccueilPresenter
+{
   constructor(
     private readonly bilanCarboneViewModel: (viewModel: BilanCarboneCompletAccueilViewModel) => void,
-    private readonly bilanCarbonePartielViewModel: (viewModel: BilanCarbonePartielAccueilViewModel) => void,
+    private readonly bilanCarboneAFaireViewModel: (viewModel: BilanCarbonePartielAccueilViewModel) => void,
   ) {
     super();
   }
@@ -27,10 +32,18 @@ export class BilanCarboneAccueilPresenterImpl extends BilanCarboneBasePresenter 
     });
   }
 
-  presenteBilanPartiel(bilan: BilanCarbone): void {
-    this.bilanCarbonePartielViewModel({
+  presenteBilanAFaire(bilan: BilanCarbone): void {
+    this.bilanCarboneAFaireViewModel({
       pourcentageCompletionTotal: bilan.pourcentageCompletionTotal,
-      thematiquesBilan: bilan.thematiquesBilan,
+      thematiquesBilan: bilan.thematiquesBilan.map(thematiqueBilan => ({
+        label: MenuThematiques.getThematiqueData(thematiqueBilan.clefUnivers as ClefThematiqueAPI).labelDansLeMenu,
+        contentId: thematiqueBilan.contentId,
+        urlImage: thematiqueBilan.urlImage,
+        estTermine: thematiqueBilan.estTermine,
+        pourcentageProgression: thematiqueBilan.pourcentageProgression,
+        nombreTotalDeQuestion: thematiqueBilan.nombreTotalDeQuestion,
+        clefUnivers: thematiqueBilan.clefUnivers,
+      })),
     });
   }
 }

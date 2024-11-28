@@ -1,6 +1,7 @@
 import { BilanCarboneBasePresenter } from '@/domaines/bilanCarbone/adapters/bilanCarboneBase.presenter';
-import { BilanCarbonePresenter, ThematiquesBilan } from '@/domaines/bilanCarbone/ports/bilanCarbone.presenter';
+import { BilanCarbonePresenter, ThematiqueBilanViewModel } from '@/domaines/bilanCarbone/ports/bilanCarbone.presenter';
 import { BilanCarbone, NiveauImpactBilanCarbone } from '@/domaines/bilanCarbone/recupererBilanCarbone.usecase';
+import { ClefThematiqueAPI, MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
 
 interface BilanCarbonDetailItemViewModel {
   label: string;
@@ -11,14 +12,16 @@ interface BilanCarbonDetailItemViewModel {
   };
   pourcentage: number;
 }
+
 interface BilanCarboneDetailViewModel extends BilanCarbonDetailItemViewModel {
   details: BilanCarbonDetailItemViewModel[];
 }
 
 export interface BilanCarboneViewModelBase {
   titre: string;
-  thematiquesBilan: ThematiquesBilan[];
+  thematiquesBilan: ThematiqueBilanViewModel[];
 }
+
 export interface BilanCarboneCompletViewModel extends BilanCarboneViewModelBase {
   pourcentageProgressBar: number;
   nombreDeTonnesAnnuel: string;
@@ -48,10 +51,16 @@ export interface BilanCarbonePartielViewModel extends BilanCarboneViewModelBase 
   }[];
 }
 
+export interface BilanCarboneAFaireViewModel {
+  pourcentageCompletionTotal: number;
+  thematiquesBilan: ThematiqueBilanViewModel[];
+}
+
 export class BilanCarbonePresenterImpl extends BilanCarboneBasePresenter implements BilanCarbonePresenter {
   constructor(
     private readonly bilanCarboneViewModel: (viewModel: BilanCarboneCompletViewModel) => void,
     private readonly bilanCarbonePartielViewModel: (viewModel: BilanCarbonePartielViewModel) => void,
+    private readonly bilanCarboneAFaireViewModel: (viewModel: BilanCarboneAFaireViewModel) => void,
   ) {
     super();
   }
@@ -63,7 +72,7 @@ export class BilanCarbonePresenterImpl extends BilanCarboneBasePresenter impleme
       nombreDeTonnesAnnuel: this.calculTonnesAnnuel(bilanCarbone.bilanComplet!.impactKgAnnuel),
       impactKgAnnuel: this.formateKg(bilanCarbone.bilanComplet!.impactKgAnnuel),
       univers: bilanCarbone.bilanComplet!.univers.map(univers => ({
-        label: univers.universLabel,
+        label: MenuThematiques.getThematiqueData(univers.clefThematiqueAPI).labelDansLeMenu,
         impactKgAnnuel: this.formateKg(univers.impactKgAnnuel),
         pourcentage: univers.pourcentage,
         emoji: univers.emoji,
@@ -79,20 +88,16 @@ export class BilanCarbonePresenterImpl extends BilanCarboneBasePresenter impleme
         label: top3.label,
         pourcentage: top3.pourcentage,
       })),
-      thematiquesBilan: bilanCarbone.thematiquesBilan,
+      thematiquesBilan: bilanCarbone.thematiquesBilan.map(thematiqueBilan => ({
+        label: MenuThematiques.getThematiqueData(thematiqueBilan.clefUnivers as ClefThematiqueAPI).labelDansLeMenu,
+        contentId: thematiqueBilan.contentId,
+        urlImage: thematiqueBilan.urlImage,
+        estTermine: thematiqueBilan.estTermine,
+        pourcentageProgression: thematiqueBilan.pourcentageProgression,
+        nombreTotalDeQuestion: thematiqueBilan.nombreTotalDeQuestion,
+        clefUnivers: thematiqueBilan.clefUnivers,
+      })),
     });
-  }
-
-  private formateKg(nombreDeKg: number): { valeur: string; unite: string } {
-    return nombreDeKg >= 1000
-      ? {
-          valeur: `${(nombreDeKg / 1000).toFixed(1)}`,
-          unite: 'tonnes',
-        }
-      : {
-          valeur: `${nombreDeKg.toFixed(0)} `,
-          unite: 'kg',
-        };
   }
 
   presenteBilanPartiel(bilanCarbone: BilanCarbone): void {
@@ -121,8 +126,43 @@ export class BilanCarbonePresenterImpl extends BilanCarboneBasePresenter impleme
           progressBarStyle: this.determineProgressBar(bilanCarbone.bilanPartiel!.consommation.niveau),
         },
       ],
-      thematiquesBilan: bilanCarbone.thematiquesBilan,
+      thematiquesBilan: bilanCarbone.thematiquesBilan.map(thematiqueBilan => ({
+        label: MenuThematiques.getThematiqueData(thematiqueBilan.clefUnivers as ClefThematiqueAPI).labelDansLeMenu,
+        contentId: thematiqueBilan.contentId,
+        urlImage: thematiqueBilan.urlImage,
+        estTermine: thematiqueBilan.estTermine,
+        pourcentageProgression: thematiqueBilan.pourcentageProgression,
+        nombreTotalDeQuestion: thematiqueBilan.nombreTotalDeQuestion,
+        clefUnivers: thematiqueBilan.clefUnivers,
+      })),
     });
+  }
+
+  presenteBilanAFaire(bilan: BilanCarbone): void {
+    this.bilanCarboneAFaireViewModel({
+      pourcentageCompletionTotal: bilan.pourcentageCompletionTotal,
+      thematiquesBilan: bilan.thematiquesBilan.map(thematiqueBilan => ({
+        label: MenuThematiques.getThematiqueData(thematiqueBilan.clefUnivers as ClefThematiqueAPI).labelDansLeMenu,
+        contentId: thematiqueBilan.contentId,
+        urlImage: thematiqueBilan.urlImage,
+        estTermine: thematiqueBilan.estTermine,
+        pourcentageProgression: thematiqueBilan.pourcentageProgression,
+        nombreTotalDeQuestion: thematiqueBilan.nombreTotalDeQuestion,
+        clefUnivers: thematiqueBilan.clefUnivers,
+      })),
+    });
+  }
+
+  private formateKg(nombreDeKg: number): { valeur: string; unite: string } {
+    return nombreDeKg >= 1000
+      ? {
+          valeur: `${(nombreDeKg / 1000).toFixed(1)}`,
+          unite: 'tonnes',
+        }
+      : {
+          valeur: `${nombreDeKg.toFixed(0)} `,
+          unite: 'kg',
+        };
   }
 
   private determineProgressBar(niveau: NiveauImpactBilanCarbone): string {

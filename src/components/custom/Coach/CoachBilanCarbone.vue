@@ -5,22 +5,20 @@
     :pourcentage-progress-bar="bilanCarboneCompletViewModel.pourcentageProgressBar"
   />
   <CoachBilanCarbonePartiel
-    v-else-if="bilanCarbonePartielViewModel"
-    :pourcentage-completion="bilanCarbonePartielViewModel.pourcentageCompletionTotal"
-    :thematique-bilan="bilanCarbonePartielViewModel.thematiquesBilan"
+    v-else-if="bilanCarboneAFaireViewModel"
+    :pourcentage-completion="bilanCarboneAFaireViewModel.pourcentageCompletionTotal"
+    :thematique-bilan="bilanCarboneAFaireViewModel.thematiquesBilan"
   />
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
+  import CoachBilanCarbonePartiel from '@/components/custom/Coach/CoachBilanCarboneAFaire.vue';
   import CoachBilanCarboneComplet from '@/components/custom/Coach/CoachBilanCarboneComplet.vue';
-  import CoachBilanCarbonePartiel from '@/components/custom/Coach/CoachBilanCarbonePartiel.vue';
-  import {
-    BilanCarboneCompletAccueilViewModel,
-    BilanCarbonePartielAccueilViewModel,
-  } from '@/domaines/bilanCarbone/adapters/bilanCarboneAccueil.presenter.impl';
+  import { BilanCarboneAFaireViewModel } from '@/domaines/bilanCarbone/adapters/bilanCarbone.presenter.impl';
+  import { BilanCarboneCompletAccueilViewModel } from '@/domaines/bilanCarbone/adapters/bilanCarboneAccueil.presenter.impl';
 
   defineProps<{
     bilanCarboneCompletViewModel?: BilanCarboneCompletAccueilViewModel;
-    bilanCarbonePartielViewModel?: BilanCarbonePartielAccueilViewModel;
+    bilanCarboneAFaireViewModel?: BilanCarboneAFaireViewModel;
   }>();
 </script>

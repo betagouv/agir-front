@@ -1,18 +1,12 @@
 import {
-  BilanCarbonePresenterImpl,
+  BilanCarboneAFaireViewModel,
   BilanCarboneCompletViewModel,
   BilanCarbonePartielViewModel,
+  BilanCarbonePresenterImpl,
 } from '@/domaines/bilanCarbone/adapters/bilanCarbone.presenter.impl';
-import {
-  BilanPartielCarbone,
-  RecupererBilanCarboneUsecase,
-} from '@/domaines/bilanCarbone/recupererBilanCarbone.usecase';
+import { RecupererBilanCarboneUsecase } from '@/domaines/bilanCarbone/recupererBilanCarbone.usecase';
 import { BilanCarboneRepositoryMock } from './adapters/bilanCarbone.repository.mock';
-import {
-  BilanCarboneAccueilPresenterImpl,
-  BilanCarboneCompletAccueilViewModel,
-  BilanCarbonePartielAccueilViewModel,
-} from '@/domaines/bilanCarbone/adapters/bilanCarboneAccueil.presenter.impl';
+import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 
 describe('Fichier de tests concernant le chargement du bilan carbone', () => {
   const bilanCarboneCompletMock = new BilanCarboneRepositoryMock({
@@ -21,8 +15,7 @@ describe('Fichier de tests concernant le chargement du bilan carbone', () => {
       impactKgAnnuel: 9600,
       univers: [
         {
-          universId: 'transport',
-          universLabel: 'Les transports',
+          clefThematiqueAPI: ClefThematiqueAPI.transports,
           pourcentage: 31,
           impactKgAnnuel: 2796.1001241487393,
           details: [
@@ -42,24 +35,21 @@ describe('Fichier de tests concernant le chargement du bilan carbone', () => {
           emoji: '🚦',
         },
         {
-          universId: 'alimentation',
-          universLabel: 'En cuisine',
+          clefThematiqueAPI: ClefThematiqueAPI.alimentation,
           pourcentage: 24,
           impactKgAnnuel: 2094.1568221,
           details: [],
           emoji: '🍴',
         },
         {
-          universId: 'logement',
-          universLabel: 'À la maison',
+          clefThematiqueAPI: ClefThematiqueAPI.logement,
           pourcentage: 17,
           impactKgAnnuel: 1477.82343812085,
           details: [],
           emoji: '🏠',
         },
         {
-          universId: 'consommation',
-          universLabel: 'En courses',
+          clefThematiqueAPI: ClefThematiqueAPI.consommation,
           pourcentage: 12,
           impactKgAnnuel: 450.0454437235896,
           details: [],
@@ -73,12 +63,12 @@ describe('Fichier de tests concernant le chargement du bilan carbone', () => {
           pourcentage: '31',
         },
         {
-          label: 'En cuisine',
+          label: 'Me nourrir',
           emoji: '🍛',
           pourcentage: '24',
         },
         {
-          label: 'À la maison',
+          label: 'Me loger',
           emoji: '🏡',
           pourcentage: '17',
         },
@@ -87,39 +77,39 @@ describe('Fichier de tests concernant le chargement du bilan carbone', () => {
     thematiquesBilan: [
       {
         contentId: 'id1',
-        label: 'Les transports',
+        label: 'Me déplacer',
         urlImage: 'url1',
         estTermine: false,
         pourcentageProgression: 80,
         nombreTotalDeQuestion: 10,
-        clefUnivers: 'transports',
+        clefUnivers: ClefThematiqueAPI.transports,
       },
       {
         contentId: 'id2',
-        label: 'En cuisine',
+        label: 'Me nourrir',
         urlImage: 'url2',
         estTermine: true,
         pourcentageProgression: 100,
         nombreTotalDeQuestion: 10,
-        clefUnivers: 'alimentation',
+        clefUnivers: ClefThematiqueAPI.alimentation,
       },
       {
         contentId: 'id3',
-        label: 'À la maison',
+        label: 'Me loger',
         urlImage: 'url3',
         estTermine: true,
         pourcentageProgression: 100,
         nombreTotalDeQuestion: 10,
-        clefUnivers: 'logement',
+        clefUnivers: ClefThematiqueAPI.logement,
       },
       {
         contentId: 'id4',
-        label: 'En courses',
+        label: 'Consommer',
         urlImage: 'url4',
         estTermine: true,
         pourcentageProgression: 100,
         nombreTotalDeQuestion: 10,
-        clefUnivers: 'consommation',
+        clefUnivers: ClefThematiqueAPI.consommation,
       },
     ],
   });
@@ -135,123 +125,82 @@ describe('Fichier de tests concernant le chargement du bilan carbone', () => {
     thematiquesBilan: [
       {
         contentId: 'id1',
-        label: 'Les transports',
+        label: 'Me déplacer',
         urlImage: 'url1',
         estTermine: false,
         pourcentageProgression: 80,
         nombreTotalDeQuestion: 10,
-        clefUnivers: 'transports',
+        clefUnivers: ClefThematiqueAPI.transports,
       },
       {
         contentId: 'id2',
-        label: 'En cuisine',
+        label: 'Me nourrir',
         urlImage: 'url2',
         estTermine: true,
         pourcentageProgression: 100,
         nombreTotalDeQuestion: 10,
-        clefUnivers: 'alimentation',
+        clefUnivers: ClefThematiqueAPI.alimentation,
       },
       {
         contentId: 'id3',
-        label: 'À la maison',
+        label: 'Me loger',
         urlImage: 'url3',
         estTermine: true,
         pourcentageProgression: 100,
         nombreTotalDeQuestion: 10,
-        clefUnivers: 'logement',
+        clefUnivers: ClefThematiqueAPI.logement,
       },
       {
         contentId: 'id4',
-        label: 'En courses',
+        label: 'Consommer',
         urlImage: 'url4',
         estTermine: true,
         pourcentageProgression: 100,
         nombreTotalDeQuestion: 10,
-        clefUnivers: 'consommation',
+        clefUnivers: ClefThematiqueAPI.consommation,
       },
     ],
   });
-
-  describe("Quand le bilan est chargé sur la page d'accueil", () => {
-    it('Bilan complet', async () => {
-      // GIVEN
-      const usecase = new RecupererBilanCarboneUsecase(bilanCarboneCompletMock);
-
-      // WHEN
-      await usecase.execute(
-        'idUtilisateur',
-        new BilanCarboneAccueilPresenterImpl(
-          bilanCarboneAccueilViewModel => expectation(bilanCarboneAccueilViewModel),
-          () => {},
-        ),
-      );
-
-      // THEN
-      function expectation(bilanCarboneViewModel: BilanCarboneCompletAccueilViewModel) {
-        expect(bilanCarboneViewModel).toStrictEqual<BilanCarboneCompletAccueilViewModel>({
-          pourcentageProgressBar: 80,
-          nombreDeTonnesAnnuel: '9,6',
-        });
-      }
-    });
-    it('Bilan partiel', async () => {
-      // GIVEN
-      const usecase = new RecupererBilanCarboneUsecase(bilanCarbonePartielMock);
-
-      // WHEN
-      await usecase.execute(
-        'idUtilisateur',
-        new BilanCarboneAccueilPresenterImpl(
-          () => {},
-          bilanCarboneAccueilViewModel => expectation(bilanCarboneAccueilViewModel),
-        ),
-      );
-
-      // THEN
-      function expectation(bilanCarbonePartielAccueilViewModel: BilanCarbonePartielAccueilViewModel) {
-        expect(bilanCarbonePartielAccueilViewModel).toStrictEqual<BilanCarbonePartielAccueilViewModel>({
-          pourcentageCompletionTotal: 90,
-          thematiquesBilan: [
-            {
-              contentId: 'id1',
-              estTermine: false,
-              label: 'Les transports',
-              nombreTotalDeQuestion: 10,
-              clefUnivers: 'transports',
-              pourcentageProgression: 80,
-              urlImage: 'url1',
-            },
-            {
-              contentId: 'id2',
-              estTermine: true,
-              label: 'En cuisine',
-              nombreTotalDeQuestion: 10,
-              clefUnivers: 'alimentation',
-              pourcentageProgression: 100,
-              urlImage: 'url2',
-            },
-            {
-              contentId: 'id3',
-              estTermine: true,
-              label: 'À la maison',
-              nombreTotalDeQuestion: 10,
-              clefUnivers: 'logement',
-              pourcentageProgression: 100,
-              urlImage: 'url3',
-            },
-            {
-              contentId: 'id4',
-              estTermine: true,
-              label: 'En courses',
-              nombreTotalDeQuestion: 10,
-              clefUnivers: 'consommation',
-              pourcentageProgression: 100,
-              urlImage: 'url4',
-            },
-          ],
-        });
-      }
-    });
+  const bilanCarboneAFaireMock = new BilanCarboneRepositoryMock({
+    pourcentageCompletionTotal: 90,
+    thematiquesBilan: [
+      {
+        contentId: 'id1',
+        label: 'Me déplacer',
+        urlImage: 'url1',
+        estTermine: false,
+        pourcentageProgression: 80,
+        nombreTotalDeQuestion: 10,
+        clefUnivers: ClefThematiqueAPI.transports,
+      },
+      {
+        contentId: 'id2',
+        label: 'Me nourrir',
+        urlImage: 'url2',
+        estTermine: true,
+        pourcentageProgression: 100,
+        nombreTotalDeQuestion: 10,
+        clefUnivers: ClefThematiqueAPI.alimentation,
+      },
+      {
+        contentId: 'id3',
+        label: 'Me loger',
+        urlImage: 'url3',
+        estTermine: true,
+        pourcentageProgression: 100,
+        nombreTotalDeQuestion: 10,
+        clefUnivers: ClefThematiqueAPI.logement,
+      },
+      {
+        contentId: 'id4',
+        label: 'Consommer',
+        urlImage: 'url4',
+        estTermine: true,
+        pourcentageProgression: 100,
+        nombreTotalDeQuestion: 10,
+        clefUnivers: ClefThematiqueAPI.consommation,
+      },
+    ],
   });
 
   describe('Quand le bilan est chargé sur la page bilan', () => {
@@ -264,6 +213,7 @@ describe('Fichier de tests concernant le chargement du bilan carbone', () => {
         'idUtilisateur',
         new BilanCarbonePresenterImpl(
           bilanCarboneViewModel => expectation(bilanCarboneViewModel),
+          () => {},
           () => {},
         ),
       );
@@ -284,12 +234,12 @@ describe('Fichier de tests concernant le chargement du bilan carbone', () => {
             },
             {
               emoji: '🍛',
-              label: 'En cuisine',
+              label: 'Me nourrir',
               pourcentage: '24',
             },
             {
               emoji: '🏡',
-              label: 'À la maison',
+              label: 'Me loger',
               pourcentage: '17',
             },
           ],
@@ -320,7 +270,7 @@ describe('Fichier de tests concernant le chargement du bilan carbone', () => {
                 unite: 'tonnes',
                 valeur: '2.8',
               },
-              label: 'Les transports',
+              label: 'Me déplacer',
               pourcentage: 31,
             },
             {
@@ -330,7 +280,7 @@ describe('Fichier de tests concernant le chargement du bilan carbone', () => {
                 unite: 'tonnes',
                 valeur: '2.1',
               },
-              label: 'En cuisine',
+              label: 'Me nourrir',
               pourcentage: 24,
             },
             {
@@ -340,7 +290,7 @@ describe('Fichier de tests concernant le chargement du bilan carbone', () => {
                 unite: 'tonnes',
                 valeur: '1.5',
               },
-              label: 'À la maison',
+              label: 'Me loger',
               pourcentage: 17,
             },
             {
@@ -350,7 +300,7 @@ describe('Fichier de tests concernant le chargement du bilan carbone', () => {
                 unite: 'kg',
                 valeur: '450 ',
               },
-              label: 'En courses',
+              label: 'Consommer',
               pourcentage: 12,
             },
           ],
@@ -358,16 +308,16 @@ describe('Fichier de tests concernant le chargement du bilan carbone', () => {
             {
               contentId: 'id1',
               estTermine: false,
-              label: 'Les transports',
+              label: 'Me déplacer',
               nombreTotalDeQuestion: 10,
               pourcentageProgression: 80,
               urlImage: 'url1',
-              clefUnivers: 'transports',
+              clefUnivers: 'transport',
             },
             {
               contentId: 'id2',
               estTermine: true,
-              label: 'En cuisine',
+              label: 'Me nourrir',
               nombreTotalDeQuestion: 10,
               pourcentageProgression: 100,
               urlImage: 'url2',
@@ -376,7 +326,7 @@ describe('Fichier de tests concernant le chargement du bilan carbone', () => {
             {
               contentId: 'id3',
               estTermine: true,
-              label: 'À la maison',
+              label: 'Me loger',
               nombreTotalDeQuestion: 10,
               pourcentageProgression: 100,
               urlImage: 'url3',
@@ -385,7 +335,7 @@ describe('Fichier de tests concernant le chargement du bilan carbone', () => {
             {
               contentId: 'id4',
               estTermine: true,
-              label: 'En courses',
+              label: 'Consommer',
               nombreTotalDeQuestion: 10,
               pourcentageProgression: 100,
               urlImage: 'url4',
@@ -407,6 +357,7 @@ describe('Fichier de tests concernant le chargement du bilan carbone', () => {
         new BilanCarbonePresenterImpl(
           () => {},
           bilanCarboneViewModel => expectation(bilanCarboneViewModel),
+          () => {},
         ),
       );
 
@@ -453,16 +404,16 @@ describe('Fichier de tests concernant le chargement du bilan carbone', () => {
             {
               contentId: 'id1',
               estTermine: false,
-              label: 'Les transports',
+              label: 'Me déplacer',
               nombreTotalDeQuestion: 10,
               pourcentageProgression: 80,
               urlImage: 'url1',
-              clefUnivers: 'transports',
+              clefUnivers: 'transport',
             },
             {
               contentId: 'id2',
               estTermine: true,
-              label: 'En cuisine',
+              label: 'Me nourrir',
               nombreTotalDeQuestion: 10,
               pourcentageProgression: 100,
               urlImage: 'url2',
@@ -471,7 +422,7 @@ describe('Fichier de tests concernant le chargement du bilan carbone', () => {
             {
               contentId: 'id3',
               estTermine: true,
-              label: 'À la maison',
+              label: 'Me loger',
               nombreTotalDeQuestion: 10,
               pourcentageProgression: 100,
               urlImage: 'url3',
@@ -480,7 +431,66 @@ describe('Fichier de tests concernant le chargement du bilan carbone', () => {
             {
               contentId: 'id4',
               estTermine: true,
-              label: 'En courses',
+              label: 'Consommer',
+              nombreTotalDeQuestion: 10,
+              pourcentageProgression: 100,
+              urlImage: 'url4',
+              clefUnivers: 'consommation',
+            },
+          ],
+        });
+      }
+    });
+    it('Bilan à faire', async () => {
+      // GIVEN
+      const usecase = new RecupererBilanCarboneUsecase(bilanCarboneAFaireMock);
+
+      // WHEN
+      await usecase.execute(
+        'idUtilisateur',
+        new BilanCarbonePresenterImpl(
+          () => {},
+          () => {},
+          bilanCarboneViewModel => expectation(bilanCarboneViewModel),
+        ),
+      );
+
+      // THEN
+      function expectation(bilanCarboneViewModel: BilanCarboneAFaireViewModel) {
+        expect(bilanCarboneViewModel).toStrictEqual<BilanCarboneAFaireViewModel>({
+          pourcentageCompletionTotal: 90,
+          thematiquesBilan: [
+            {
+              contentId: 'id1',
+              estTermine: false,
+              label: 'Me déplacer',
+              nombreTotalDeQuestion: 10,
+              pourcentageProgression: 80,
+              urlImage: 'url1',
+              clefUnivers: 'transport',
+            },
+            {
+              contentId: 'id2',
+              estTermine: true,
+              label: 'Me nourrir',
+              nombreTotalDeQuestion: 10,
+              pourcentageProgression: 100,
+              urlImage: 'url2',
+              clefUnivers: 'alimentation',
+            },
+            {
+              contentId: 'id3',
+              estTermine: true,
+              label: 'Me loger',
+              nombreTotalDeQuestion: 10,
+              pourcentageProgression: 100,
+              urlImage: 'url3',
+              clefUnivers: 'logement',
+            },
+            {
+              contentId: 'id4',
+              estTermine: true,
+              label: 'Consommer',
               nombreTotalDeQuestion: 10,
               pourcentageProgression: 100,
               urlImage: 'url4',

@@ -8,7 +8,6 @@ export class InjectUtilisateur {
         nom: 'RECETTEUR',
         prenom: 'Dorian',
         mail: 'dorian@agir.dev',
-        fonctionnalitesDebloquees: [],
         onboardingAEteRealise: true,
         afficherDisclaimerAides: false,
       },

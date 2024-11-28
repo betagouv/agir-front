@@ -1,5 +1,16 @@
-import { BilanCarbonePresenter, ThematiquesBilan } from '@/domaines/bilanCarbone/ports/bilanCarbone.presenter';
+import { BilanCarbonePresenter } from '@/domaines/bilanCarbone/ports/bilanCarbone.presenter';
 import { BilanCarboneRepository } from '@/domaines/bilanCarbone/ports/bilanCarbone.repository';
+import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
+
+export interface ThematiqueBilan {
+  contentId: string;
+  label: string;
+  urlImage: string;
+  estTermine: boolean;
+  pourcentageProgression: number;
+  nombreTotalDeQuestion: number;
+  clefUnivers: string;
+}
 
 interface BilanCarboneDetail {
   label: string;
@@ -9,8 +20,7 @@ interface BilanCarboneDetail {
 }
 
 interface BilanCarboneDetailParUnivers {
-  universId: string;
-  universLabel: string;
+  clefThematiqueAPI: ClefThematiqueAPI;
   pourcentage: number;
   impactKgAnnuel: number;
   details: BilanCarboneDetail[];
@@ -41,7 +51,7 @@ export interface BilanCarbone {
   pourcentageCompletionTotal: number;
   bilanComplet?: BilanCompletCarbone;
   bilanPartiel?: BilanPartielCarbone;
-  thematiquesBilan: ThematiquesBilan[];
+  thematiquesBilan: ThematiqueBilan[];
 }
 
 export class RecupererBilanCarboneUsecase {
@@ -54,6 +64,8 @@ export class RecupererBilanCarboneUsecase {
       presenter.presenteBilanComplet(bilanCarbone);
     } else if (bilanCarbone.bilanPartiel) {
       presenter.presenteBilanPartiel(bilanCarbone);
+    } else {
+      presenter.presenteBilanAFaire(bilanCarbone);
     }
   }
 }

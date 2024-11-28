@@ -4,12 +4,14 @@
     <div class="fr-grid-row fr-grid-row--gutters">
       <div class="fr-col-12 fr-col-md-9">
         <p v-if="isLoading">Chargement en cours ...</p>
-        <template v-else-if="bilanCarboneViewModel || bilanCarbonePartielViewModel">
+        <template v-else-if="bilanCarboneViewModel || bilanCarbonePartielViewModel || bilanCarboneAFaireViewModel">
           <h1
             class="fr-h2"
+            v-if="bilanCarboneViewModel || bilanCarbonePartielViewModel"
             v-html="bilanCarboneViewModel?.titre ? bilanCarboneViewModel.titre : bilanCarbonePartielViewModel?.titre"
           />
           <BilanCarbone
+            :bilan-carbone-a-faire="bilanCarboneAFaireViewModel"
             :bilan-carbone-complet="bilanCarboneViewModel"
             :bilan-carbone-partiel="bilanCarbonePartielViewModel"
           />
@@ -18,23 +20,24 @@
       </div>
       <div class="fr-col-12 fr-col-md-3">
         <ServiceAside
-          image="/bilan-carbone-ngc-screenshot.svg"
-          nom="Nos Gestes Climat"
           description="Basé sur le calculateur carbone développé par l’Agence de la transition écologique (ADEME) et beta.gouv.fr, en partenariat avec l’Association Bilan Carbone (ABC)."
-          url="https://nosgestesclimat.fr/"
+          image="/bilan-carbone-ngc-screenshot.svg"
           logo="/logo_ngc.webp"
+          nom="Nos Gestes Climat"
+          url="https://nosgestesclimat.fr/"
         />
       </div>
     </div>
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
   import { onMounted, ref } from 'vue';
   import BilanCarbone from '@/components/custom/BilanCarbone/BilanCarbone.vue';
   import ServiceAside from '@/components/custom/Service/ServiceAside.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import {
+    BilanCarboneAFaireViewModel,
     BilanCarboneCompletViewModel,
     BilanCarbonePartielViewModel,
     BilanCarbonePresenterImpl,
@@ -46,6 +49,7 @@
   const isLoading = ref<boolean>(true);
   const bilanCarboneViewModel = ref<BilanCarboneCompletViewModel>();
   const bilanCarbonePartielViewModel = ref<BilanCarbonePartielViewModel>();
+  const bilanCarboneAFaireViewModel = ref<BilanCarboneAFaireViewModel>();
 
   onMounted(async () => {
     const { id: utilisateurId } = utilisateurStore().utilisateur;
@@ -56,6 +60,7 @@
         new BilanCarbonePresenterImpl(
           vm => (bilanCarboneViewModel.value = vm),
           vm => (bilanCarbonePartielViewModel.value = vm),
+          vm => (bilanCarboneAFaireViewModel.value = vm),
         ),
       );
     } finally {

@@ -1,5 +1,4 @@
 import {
-  IdUtilisateur,
   Utilisateur,
   UtilisateurConnecte,
   UtilisateurRepository,
@@ -16,7 +15,6 @@ export class MockUtilisateurRepository implements UtilisateurRepository {
       nom: '',
       prenom: '',
       mail: 'john@exemple.com',
-      fonctionnalitesDebloquees: [],
       onboardingAEteRealise: false,
       afficherDisclaimerAides: false,
     });
@@ -47,7 +45,6 @@ export class MockUtilisateurRepository implements UtilisateurRepository {
       nom: '',
       prenom: '',
       mail: email,
-      fonctionnalitesDebloquees: [],
       onboardingAEteRealise: false,
       afficherDisclaimerAides: false,
       token: 'token',

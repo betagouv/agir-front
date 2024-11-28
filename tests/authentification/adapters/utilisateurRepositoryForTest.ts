@@ -1,11 +1,12 @@
 import {
-  IdUtilisateur,
   Utilisateur,
   UtilisateurConnecte,
   UtilisateurRepository,
 } from '@/domaines/authentification/ports/utilisateur.repository';
 
 export class UtilisateurRepositoryForTest implements UtilisateurRepository {
+  private constructor(private onboardingRealise = true) {}
+
   static avecOnBoardingRealise() {
     return new UtilisateurRepositoryForTest(true);
   }
@@ -13,8 +14,6 @@ export class UtilisateurRepositoryForTest implements UtilisateurRepository {
   static sansOnBoardingRealise() {
     return new UtilisateurRepositoryForTest(false);
   }
-
-  private constructor(private onboardingRealise = true) {}
 
   authentifierUtilisateur(nomUtilisateur: string, motDePasse: string): Promise<void> {
     return Promise.resolve();
@@ -26,7 +25,6 @@ export class UtilisateurRepositoryForTest implements UtilisateurRepository {
       nom: 'Doe',
       prenom: 'John',
       mail: '',
-      fonctionnalitesDebloquees: [],
       onboardingAEteRealise: this.onboardingRealise,
       afficherDisclaimerAides: false,
     });
@@ -54,7 +52,6 @@ export class UtilisateurRepositoryForTest implements UtilisateurRepository {
       nom: 'Doe',
       prenom: 'John',
       mail: email,
-      fonctionnalitesDebloquees: [],
       onboardingAEteRealise: this.onboardingRealise,
       afficherDisclaimerAides: false,
     });

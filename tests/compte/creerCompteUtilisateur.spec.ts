@@ -65,7 +65,6 @@ describe('Fichier de tests concernant la creation du compte utilisateur', () => 
     );
     // THEN
     expect(sessionRepository.utilisateur).toStrictEqual<Partial<Utilisateur>>({
-      fonctionnalitesDebloquees: [],
       id: '',
       mail: 'john@skynet.com',
       nom: '',

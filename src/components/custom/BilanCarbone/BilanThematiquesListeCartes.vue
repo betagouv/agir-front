@@ -18,12 +18,12 @@
 
 <script setup lang="ts">
   import BilanThematiquesCarte from '@/components/custom/BilanCarbone/BilanThematiquesCarte.vue';
-  import { ThematiquesBilan } from '@/domaines/bilanCarbone/ports/bilanCarbone.presenter';
+  import { ThematiqueBilanViewModel } from '@/domaines/bilanCarbone/ports/bilanCarbone.presenter';
 
   defineProps<{
     titre: string;
     sousTitre: string;
     colonnes: string;
-    thematiquesBilan: ThematiquesBilan[];
+    thematiquesBilan: ThematiqueBilanViewModel[];
   }>();
 </script>

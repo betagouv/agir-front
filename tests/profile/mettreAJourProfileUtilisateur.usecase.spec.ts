@@ -9,9 +9,6 @@ import {
 } from '@/domaines/profileUtilisateur/chargerProfileUtilisateur.usecase';
 
 class SpyProfileUtilisateurRepository implements ProfileUtilisateurRepository {
-  get profileUtilisateuraMettreAJourArgs(): ProfileUtilisateurAMettreAJour {
-    return this._profileUtilisateuraMettreAJourArgs;
-  }
   private _profileUtilisateuraMettreAJourArgs: ProfileUtilisateurAMettreAJour = {
     id: '',
     nom: '',
@@ -21,9 +18,15 @@ class SpyProfileUtilisateurRepository implements ProfileUtilisateurRepository {
     abonnementTransport: false,
     anneeNaissance: 1998,
   };
+
+  get profileUtilisateuraMettreAJourArgs(): ProfileUtilisateurAMettreAJour {
+    return this._profileUtilisateuraMettreAJourArgs;
+  }
+
   getProfileUtilisateur(idUtilisateur: string): Promise<ProfileUtilisateur> {
     throw new Error('Method not implemented.');
   }
+
   mettreAjour(profileUtilisateur: ProfileUtilisateurAMettreAJour): Promise<void> {
     this._profileUtilisateuraMettreAJourArgs = profileUtilisateur;
     return Promise.resolve();
@@ -65,7 +68,6 @@ describe('Fichier de tests concernant la mise à jour du profile utilisateur', (
       nom: 'Dorian',
       mail: 'mail@exemple.com',
       prenom: 'John',
-      fonctionnalitesDebloquees: [],
       onboardingAEteRealise: true,
       afficherDisclaimerAides: false,
     });
