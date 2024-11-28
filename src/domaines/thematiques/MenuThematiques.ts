@@ -13,6 +13,7 @@ export enum ClefThematiqueAPI {
   dechets = 'dechet',
   environnement = 'environnement',
   loisir = 'loisir',
+  services_societaux = 'services_societaux',
 }
 
 export class MenuThematiques {
@@ -24,6 +25,7 @@ export class MenuThematiques {
     ClefThematiqueAPI.dechets,
     ClefThematiqueAPI.environnement,
     ClefThematiqueAPI.loisir,
+    ClefThematiqueAPI.services_societaux,
   ];
   private static thematiquesData: Record<ClefThematiqueAPI, Thematique> = {
     [ClefThematiqueAPI.alimentation]: {
@@ -70,7 +72,14 @@ export class MenuThematiques {
       labelDansLeMenu: 'Loisir',
       imageUrl: '',
     },
+    [ClefThematiqueAPI.services_societaux]: {
+      clefTechniqueAPI: 'services_societaux',
+      url: 'services_societaux',
+      labelDansLeMenu: 'Services sociétaux',
+      imageUrl: '',
+    },
   };
+
   static getThematiqueData(clefTechniqueAPI: ClefThematiqueAPI): Thematique {
     return this.thematiquesData[clefTechniqueAPI];
   }

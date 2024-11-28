@@ -18,7 +18,7 @@
             <span class="text--rouge"> {{ top.pourcentage }}% </span>
             <span class="fr-text--regular"> de mes émissions </span>
           </div>
-          <span class="text--3xl fr-p-md-2w fr-p-0w fr-ml-4w">{{ top.emoji }}</span>
+          <span aria-hidden="true" class="text--3xl fr-p-md-2w fr-p-0w fr-ml-4w">{{ top.emoji }}</span>
         </div>
       </li>
     </ol>
@@ -30,7 +30,7 @@
         <template v-slot:titre>
           <span class="fr-grid-row flex-space-between full-width">
             <span class="fr-text--md text--black text--semi-bold">
-              <span class="fr-mr-2w">{{ univers.emoji }}</span> {{ univers.label }}
+              <span aria-hidden="true" class="fr-mr-2w">{{ univers.emoji }}</span> {{ univers.label }}
             </span>
             <span class="fr-text--md fr-mr-4w text--bleu text--bold">
               {{ univers.impactKgAnnuel.valeur }}
@@ -52,9 +52,9 @@
               </span>
               <div class="full-width fr-ml-5w fr-mr-32v">
                 <BarreDeProgression
+                  :label="`Représente ${detail.pourcentage}% de votre empreinte carbone dans cette categorie`"
                   :value="detail.pourcentage"
                   :value-max="100"
-                  :label="`Représente ${detail.pourcentage}% de votre empreinte carbone dans cette categorie`"
                   couleur="#DF1451"
                   min-width="2%"
                 />
@@ -67,15 +67,15 @@
   </section>
   <section>
     <BilanThematiquesListeCartes
-      titre="Affiner ou modifier mon bilan"
-      sous-titre="Et obtenir des recommandations toujours plus personnalisées sur <span class='text--italic fr-text--bold'>J'Agis</span>"
       :thematiques-bilan="bilanCarboneViewModel.thematiquesBilan"
       colonnes="fr-col-md-3 fr-col-6"
+      sous-titre="Et obtenir des recommandations toujours plus personnalisées sur <span class='text--italic fr-text--bold'>J'Agis</span>"
+      titre="Affiner ou modifier mon bilan"
     />
   </section>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
   import Accordeon from '@/components/custom/Aides/AccordeonAides.vue';
   import BarreDeProgression from '@/components/custom/BarreDeProgression.vue';
   import BilanCarboneProgressBar from '@/components/custom/BilanCarbone/BilanCarboneProgressBar.vue';
