@@ -4,24 +4,19 @@ import { MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
 import { TagStyle, TagThematique } from '@/domaines/thematiques/TagThematique';
 import { RouteArticlePath } from '@/router/articles/routes';
 import { RouteDefiPath } from '@/router/defis/routes';
-import { RouteKycPath } from '@/router/kyc/routes';
 import { RouteQuizPath } from '@/router/quiz/routes';
 import { buildUrl } from '@/shell/buildUrl';
 import { InteractionType } from '@/shell/interactionType';
 
 export interface MissionBaseViewModel {
   id: string;
-  url: string;
-  estBloquee: boolean;
   aEteRealisee: boolean;
-  picto: string;
-  titre: string;
-  pointAEteRecolte: boolean;
-  points: number;
 }
 
 export interface MissionDefiViewModel extends MissionBaseViewModel {
+  titre: string;
   couleurBordure: string;
+  url: string;
   link: {
     title: string;
     style: string;
@@ -74,33 +69,21 @@ export class MissionPresenterImpl implements MissionPresenter {
         label: MenuThematiques.getThematiqueData(mission.clefApiThematique).labelDansLeMenu,
         style: TagThematique.getTagThematiqueUtilitaire(mission.clefApiThematique),
       },
-      kyc: [
-        {
-          id: mission.items.filter(item => item.type === InteractionType.KYC)[0].id,
-          titre: '<strong>Quelques questions</strong> pour mieux vous connaître',
-          progression: {
-            etapeCourante: mission.progressionKyc.etapeCourante,
-            etapeTotal: mission.progressionKyc.etapeTotal,
-          },
-          estBloquee: false,
-          points: mission.items
-            .filter(item => item.type === InteractionType.KYC)
-            .reduce((sum, item) => sum + item.points, 0),
-          aEteRealisee: mission.progressionKyc.etapeCourante === mission.progressionKyc.etapeTotal,
-          url: `/thematique/${MenuThematiques.getThematiqueData(mission.clefApiThematique).url}/mission/${mission.missionId}${RouteKycPath.KYC}`,
-          picto: '/ic_mission_kyc.svg',
-          pointAEteRecolte: mission.items.filter(item => item.type === InteractionType.KYC)[0].pointAEteRecolte,
-        },
-      ],
+      kyc: mission.items
+        .filter(item => item.type === InteractionType.KYC)
+        .map((item): MissionKycViewModel => {
+          return {
+            id: item.contentId,
+            progression: {
+              etapeCourante: mission.progressionKyc.etapeCourante,
+              etapeTotal: mission.progressionKyc.etapeTotal,
+            },
+            aEteRealisee: item.aEteRealisee,
+          };
+        }),
       articleEtQuiz: mission.items
         .filter(item => item.type === InteractionType.ARTICLE || item.type === InteractionType.QUIZ)
-        .map(item =>
-          this.mapToViewModel(
-            item,
-            MenuThematiques.getThematiqueData(mission.clefApiThematique).url,
-            mission.missionId,
-          ),
-        ),
+        .map(item => this.mapToViewModel(item)),
       defis: mission.items
         .filter(item => item.type === InteractionType.DEFIS)
         .map(item =>
@@ -115,17 +98,11 @@ export class MissionPresenterImpl implements MissionPresenter {
     });
   }
 
-  private mapToViewModel(item: MissionItem, thematiqueUrl: string, missionId: string): MissionQuizArticleViewModel {
+  private mapToViewModel(item: MissionItem): MissionQuizArticleViewModel {
     return {
       id: item.id,
       idDuContenu: item.contentId,
-      titre: item.titre,
-      estBloquee: item.estBloquee,
-      points: item.points,
       aEteRealisee: item.aEteRealisee,
-      url: this.determineUrl(item, thematiqueUrl, missionId),
-      picto: this.determinePicto(item),
-      pointAEteRecolte: item.pointAEteRecolte,
       type: item.type === InteractionType.ARTICLE ? 'article' : 'quiz',
     };
   }
@@ -134,12 +111,8 @@ export class MissionPresenterImpl implements MissionPresenter {
     return {
       id: item.id,
       titre: item.titre,
-      estBloquee: item.estBloquee,
-      points: item.points,
       aEteRealisee: item.aEteRealisee && !item.estEnCours,
       url: `/thematique/${thematiqueLabelUrl}/mission/${missionId}${RouteDefiPath.DEFI}${item.contentId}`,
-      picto: this.determinePicto(item),
-      pointAEteRecolte: item.pointAEteRecolte,
       link: this.determineLienDefi(item.estEnCours, item.titre),
       badge: this.determineBadgeDefi(item.estEnCours, item.estRecommande, item.aEteRealisee),
       couleurBordure: this.determineCouleurBordureDefi(item.estEnCours, item.estRecommande, item.aEteRealisee),

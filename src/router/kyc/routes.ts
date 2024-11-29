@@ -1,11 +1,9 @@
 import { RouteRecordRaw } from 'vue-router';
 const PageQuestionsKYCOnboarding = () => import('@/components/pages/PageQuestionsKYCOnboarding.vue');
 const PageQuestionKyc = () => import('@/components/pages/PageQuestionKyc.vue');
-const PageMissionQuestionsKyc = () => import('@/components/pages/PageMissionQuestionsKyc.vue');
 
 export enum RouteKycName {
   KYC = 'kyc',
-  KYC_THEMATIQUE = 'kyc-thematique',
   KYC_ONBOARDING = 'kyc-thematique-onboarding',
   KYC_COMPTE = 'kyc-compte',
 }
@@ -28,14 +26,6 @@ const kycRoutes: RouteRecordRaw[] = [
     path: `${RouteKycPath.KYC}:id`,
     name: RouteKycName.KYC,
     component: PageQuestionKyc,
-    meta: {
-      title: 'Mieux vous connaître',
-    },
-  },
-  {
-    path: `/thematique/:thematiqueId/mission/:missionId${RouteKycPath.KYC}`,
-    name: RouteKycName.KYC_THEMATIQUE,
-    component: PageMissionQuestionsKyc,
     meta: {
       title: 'Mieux vous connaître',
     },

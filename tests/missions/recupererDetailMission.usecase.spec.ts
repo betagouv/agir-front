@@ -98,13 +98,7 @@ describe("Fichier de tests concernant la récupération d'une mission", () => {
           {
             id: 'id1',
             aEteRealisee: false,
-            estBloquee: false,
             idDuContenu: '1',
-            points: 10,
-            titre: 'Mission 1',
-            url: '/thematique/me-nourrir/mission/1/quiz/1',
-            picto: '/ic_mission_article.svg',
-            pointAEteRecolte: false,
             type: 'quiz',
           },
         ],
@@ -112,14 +106,10 @@ describe("Fichier de tests concernant la récupération d'une mission", () => {
           {
             id: 'id2',
             aEteRealisee: false,
-            estBloquee: false,
             badge: undefined,
             couleurBordure: '',
-            points: 10,
             titre: 'Mission 2',
             url: '/thematique/me-nourrir/mission/1/defi/2',
-            picto: '/ic_mission_defi.svg',
-            pointAEteRecolte: false,
             link: {
               style: '',
               title: 'Aller au défi : Mission 2',
@@ -130,17 +120,11 @@ describe("Fichier de tests concernant la récupération d'une mission", () => {
         kyc: [
           {
             aEteRealisee: false,
-            estBloquee: false,
-            id: 'id3',
-            picto: '/ic_mission_kyc.svg',
-            points: 10,
+            id: '3',
             progression: {
               etapeCourante: 1,
               etapeTotal: 2,
             },
-            titre: '<strong>Quelques questions</strong> pour mieux vous connaître',
-            url: '/thematique/me-nourrir/mission/1/mieux-vous-connaitre/',
-            pointAEteRecolte: false,
           },
         ],
         titre: 'Thematique 1',

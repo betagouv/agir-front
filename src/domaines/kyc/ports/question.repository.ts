@@ -7,8 +7,6 @@ export interface QuestionRepository {
 
   recupererListeQuestions(utilisateurId: string): Promise<Question[]>;
 
-  recupererQuestionsThematique(utilisateurId: string, thematiqueId: string): Promise<Question[]>;
-
   envoyerReponsesMultiples(
     utilisateurId: string,
     questionId: string,

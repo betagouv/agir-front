@@ -67,15 +67,6 @@ export class QuestionRepositoryAxios implements QuestionRepository {
   }
 
   @intercept401()
-  async recupererQuestionsThematique(utilisateurId: string, thematiqueId: string): Promise<Question[]> {
-    const response = await AxiosFactory.getAxios().get<QuestionApiModel[]>(
-      `utilisateurs/${utilisateurId}/thematiques/${thematiqueId}/kycs`,
-    );
-
-    return response.data.map(question => this.mapQuestionApiModelToQuestion(question));
-  }
-
-  @intercept401()
   async envoyerReponsesMultiples(
     utilisateurId: string,
     questionId: string,
