@@ -1,5 +1,5 @@
 <template>
-  <div class="background--vert-light text--white border-radius--md fr-p-3w fr-p-md-5w">
+  <div class="background--vert text--white border-radius--md fr-p-3w fr-p-md-5w">
     <img src="/france-localization.svg" alt="" class="fr-mb-3w" />
 
     <h3 class="fr-h2 text--white">Collectivités locales et territoires</h3>
@@ -19,9 +19,10 @@
     </ul>
 
     <a
-      href="#"
+      href="https://thread-origami-ae6.notion.site/150576eceac180e2a952fc3d28b17967?pvs=105"
       class="fr-btn fr-btn--secondary fr-btn--lg fr-btn--icon-right fr-icon-arrow-right-s-line shadow--none"
       target="_blank"
+      rel="noopener external"
     >
       Prendre contact avec l'équipe
     </a>
@@ -35,7 +36,7 @@
   }
 
   a.fr-btn--secondary:hover {
-    background-color: rgba(255, 255, 255, 20%);
+    background-color: var(--custom-background-vert-light);
   }
 
   .fr-icon-success-line::before {
