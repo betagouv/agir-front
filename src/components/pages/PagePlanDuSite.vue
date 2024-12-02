@@ -54,5 +54,3 @@
 
   const estConnecte = utilisateurStore().utilisateur.id.length > 0;
 </script>
-
-<style scoped></style>
