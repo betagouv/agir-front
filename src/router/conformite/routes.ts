@@ -6,6 +6,7 @@ export enum RouteConformiteName {
   CGU = 'cgu',
   POLITIQUE_DE_CONFIDENTIALITE = 'politique-de-confidentialite',
   STATISTIQUES = 'statistiques',
+  PLAN_DU_SITE = 'plan-du-site',
 }
 
 const conformiteRoutes: RouteRecordRaw[] = [
@@ -51,6 +52,15 @@ const conformiteRoutes: RouteRecordRaw[] = [
     component: () => import('@/components/pages/PageStatistiques.vue'),
     meta: {
       title: 'Statistiques',
+      estPublique: true,
+    },
+  },
+  {
+    path: '/plan-du-site',
+    name: RouteConformiteName.PLAN_DU_SITE,
+    component: () => import('@/components/pages/PagePlanDuSite.vue'),
+    meta: {
+      title: 'Plan du site',
       estPublique: true,
     },
   },

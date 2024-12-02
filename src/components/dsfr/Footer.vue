@@ -118,6 +118,11 @@
               Statistiques
             </router-link>
           </li>
+          <li class="fr-footer__bottom-item">
+            <router-link class="fr-footer__bottom-link fr-pt-1w" :to="{ name: RouteConformiteName.PLAN_DU_SITE }">
+              Plan du site
+            </router-link>
+          </li>
         </ul>
         <div class="fr-footer__bottom-copy">
           <p>
