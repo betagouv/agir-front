@@ -43,10 +43,11 @@
       <LandingApp />
     </div>
   </section>
-  <section class="fr-py-8w background--white">
+  <section class="fr-py-8w fr-pb-3w background--white">
     <div class="fr-container">
       <div class="fr-col-md-10 fr-mx-auto">
         <LandingCitations />
+        <LandingCollectivite />
       </div>
     </div>
   </section>
@@ -55,6 +56,7 @@
 <script setup lang="ts">
   import LandingApp from '@/components/custom/Landing/LandingApp.vue';
   import LandingCitations from '@/components/custom/Landing/LandingCitations.vue';
+  import LandingCollectivite from '@/components/custom/Landing/LandingCollectivite.vue';
   import LandingEnsemble from '@/components/custom/Landing/LandingEnsemble.vue';
   import LandingHeader from '@/components/custom/Landing/LandingHeader.vue';
   import LandingNotreApproche from '@/components/custom/Landing/LandingNotreApproche.vue';
