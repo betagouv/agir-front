@@ -430,6 +430,10 @@
   box-shadow: 0 5px 20px 0 rgba(0, 0, 101, 0.06);
 }
 
+.shadow--none {
+  box-shadow: none;
+}
+
 .cms__content ul p,
 .cms__content ol p {
   margin-bottom: 0;

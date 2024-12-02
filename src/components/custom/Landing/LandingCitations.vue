@@ -1,6 +1,6 @@
 <template>
   <h2 class="fr-h2 text--center">Ils agissent avec nous</h2>
-  <div class="fr-grid-row fr-grid-row--gutters">
+  <div class="fr-grid-row fr-grid-row--gutters fr-pb-3w">
     <div class="fr-col-md-6">
       <LandingCitation
         citation="J’ai enfin eu des réponses à mes <strong>questions concrètes</strong> du quotidien."
