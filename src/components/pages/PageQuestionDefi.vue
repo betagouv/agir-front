@@ -22,8 +22,8 @@
     <div v-else-if="!isLoading && defiViewModel" class="fr-grid-row fr-grid-row--gutters">
       <div class="fr-col-8">
         <div class="background--white border fr-p-4w border-radius--md">
-          <div class="fr-grid-row">
-            <span class="display-block fr-mb-2w fr-mr-1w fr-tag background--bleu-ecume-hover">Action</span>
+          <div class="flex align-items--center gap--small fr-mb-2w">
+            <span class="display-block fr-tag background--bleu-ecume-hover text--xs">Action</span>
             <ThematiqueTag :tag="defiViewModel.thematiqueTag" />
           </div>
           <form v-if="!reponseAEteDonnee" @submit.prevent="validerLaReponse">
@@ -56,7 +56,7 @@
               <textarea id="explication" v-model="explication" class="fr-input fr-mb-4w" name="explication" />
             </div>
 
-            <button :disabled="isButtonDisabled" class="fr-btn fr-btn--lg fr-mb-4w" title="Valider">Valider</button>
+            <button :disabled="isButtonDisabled" class="fr-btn fr-btn--lg fr-mb-2w" title="Valider">Valider</button>
           </form>
 
           <DefiFin v-if="reponseAEteDonnee" :defi="defiViewModel" :reponse="reponse" />
