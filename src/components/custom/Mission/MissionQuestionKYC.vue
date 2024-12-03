@@ -1,19 +1,17 @@
 <template>
-  <KycSkeleton v-if="isLoading" />
-  <KYCForm
-    v-else-if="questionViewModel"
-    @update:soumission-kyc="onClickContinuer"
-    :est-enchainement-mission="true"
-    :question-view-model="questionViewModel"
-    wording-bouton="Continuer"
-  />
-  <p v-else>Problème de chargement...</p>
+  <MissionEtapeSkeleton :view-model-existe="questionViewModel !== undefined" :is-loading="isLoading">
+    <KYCForm
+      @update:soumission-kyc="onClickContinuer"
+      :question-view-model="questionViewModel!"
+      wording-bouton="Continuer"
+    />
+  </MissionEtapeSkeleton>
 </template>
 
 <script setup lang="ts">
   import { onMounted, ref } from 'vue';
   import KYCForm from '@/components/custom/KYC/KYCForm.vue';
-  import KycSkeleton from '@/components/KycSkeleton.vue';
+  import MissionEtapeSkeleton from '@/components/custom/Mission/MissionEtapeSkeleton.vue';
   import { QuestionViewModel } from '@/domaines/kyc/adapters/listeQuestionsThematique.presenter.impl';
   import { QuestionPresenterImpl } from '@/domaines/kyc/adapters/question.presenter.impl';
   import { QuestionRepositoryAxios } from '@/domaines/kyc/adapters/question.repository.axios';
