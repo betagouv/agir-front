@@ -1,7 +1,6 @@
 <template>
   <div>
     <div class="skeleton fr-mb-5v"></div>
-    <div class="skeleton fr-mb-5v"></div>
 
     <CarteVierge class="kyc-skeleton">
       <div class="skeleton fr-mb-5v"></div>

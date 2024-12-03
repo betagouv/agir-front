@@ -1,6 +1,6 @@
 <template>
   <KycSkeleton v-if="isLoading" />
-  <slot v-else-if="viewModelExiste"></slot>
+  <slot v-else-if="viewModelExiste" />
   <p v-else>Problème de chargement...</p>
 </template>
 
