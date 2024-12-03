@@ -1,16 +1,19 @@
 import { Defi } from '@/domaines/defi/defi';
 import { DefiPresenter } from '@/domaines/defi/ports/defi.presenter';
+import { MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
+import { TagStyle, TagThematique } from '@/domaines/thematiques/TagThematique';
 
 export interface ReponsePossible {
   id: string;
   label: string;
 }
+
 export interface DefiViewModel {
   id: string;
   libelle: string;
   reponses_possibles: ReponsePossible[];
   points: string;
-  thematique: string;
+  thematiqueTag: { label: string; style: TagStyle };
   description: string;
   reponse: string;
   astuces: string;
@@ -29,7 +32,10 @@ export class DefiPresenterImpl implements DefiPresenter {
       libelle: defi.libelle,
       points: defi.points.toLocaleString(),
       reponses_possibles: this.determinerReponsesPossible(defi.status),
-      thematique: defi.thematique,
+      thematiqueTag: {
+        label: MenuThematiques.getThematiqueData(defi.thematique).labelDansLeMenu,
+        style: TagThematique.getTagThematiqueUtilitaire(defi.thematique),
+      },
       description: defi.description,
       reponse: defi.status,
       astuces: this.determinerParagrapheVide(defi.astuces),

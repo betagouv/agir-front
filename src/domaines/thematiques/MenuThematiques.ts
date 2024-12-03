@@ -11,7 +11,7 @@ export enum ClefThematiqueAPI {
   consommation = 'consommation',
   logement = 'logement',
   dechets = 'dechet',
-  environnement = 'environnement',
+  climat = 'climat',
   loisir = 'loisir',
   services_societaux = 'services_societaux',
 }
@@ -23,7 +23,7 @@ export class MenuThematiques {
     ClefThematiqueAPI.consommation,
     ClefThematiqueAPI.logement,
     ClefThematiqueAPI.dechets,
-    ClefThematiqueAPI.environnement,
+    ClefThematiqueAPI.climat,
     ClefThematiqueAPI.loisir,
     ClefThematiqueAPI.services_societaux,
   ];
@@ -60,9 +60,9 @@ export class MenuThematiques {
       labelDansLeMenu: 'Déchets',
       imageUrl: '',
     },
-    [ClefThematiqueAPI.environnement]: {
-      clefTechniqueAPI: 'environnement',
-      url: 'environnement',
+    [ClefThematiqueAPI.climat]: {
+      clefTechniqueAPI: 'climat',
+      url: 'climat',
       labelDansLeMenu: 'Environnement',
       imageUrl: '',
     },

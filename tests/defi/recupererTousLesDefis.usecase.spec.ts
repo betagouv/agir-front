@@ -2,6 +2,7 @@ import { MockListeDefisRepository } from './adapters/listedefis.repository.mock'
 import { RecupererTousLesDefisUsecase } from '@/domaines/defi/recupererTousLesDefis.usecase';
 import { ListeDefisPresenterImpl } from '@/domaines/defi/adapters/listeDefis.presenter.impl';
 import { DefisQuestionViewModel } from '@/domaines/defi/ports/listeDefis.presenter';
+import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 
 describe('Fichier de tests concernant la récupération des défis en cours et terminés', () => {
   it('doit récupérer la liste des défis', async () => {
@@ -12,7 +13,7 @@ describe('Fichier de tests concernant la récupération des défis en cours et t
         {
           id: 'defiId1',
           description: 'Defi1 description',
-          thematique: 'transport',
+          thematique: ClefThematiqueAPI.transports,
           libelle: 'Defi1 libelle',
           points: 10,
           status: 'en_cours',
@@ -23,7 +24,7 @@ describe('Fichier de tests concernant la récupération des défis en cours et t
         {
           id: 'defiId2',
           description: 'Defi2 description',
-          thematique: 'transport',
+          thematique: ClefThematiqueAPI.transports,
           libelle: 'Defi2 libelle',
           points: 10,
           status: 'deja_fait',
@@ -34,7 +35,7 @@ describe('Fichier de tests concernant la récupération des défis en cours et t
         {
           id: 'defiId3',
           description: 'Defi3 description',
-          thematique: 'transport',
+          thematique: ClefThematiqueAPI.transports,
           libelle: 'Defi3 libelle',
           points: 10,
           status: 'pas_envie',
@@ -46,7 +47,7 @@ describe('Fichier de tests concernant la récupération des défis en cours et t
         {
           id: 'defiId4',
           description: 'Defi4 description',
-          thematique: 'transport',
+          thematique: ClefThematiqueAPI.transports,
           libelle: 'Defi4 libelle',
           points: 10,
           status: 'fait',

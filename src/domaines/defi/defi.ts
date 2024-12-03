@@ -1,6 +1,8 @@
+import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
+
 export interface Defi {
   description: string;
-  thematique: string;
+  thematique: ClefThematiqueAPI;
   id: string;
   libelle: string;
   points: number;

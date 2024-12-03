@@ -2,13 +2,10 @@
   <div
     class="action-card fr-grid-row position--relative full-height border-radius--md shadow background--white fr-p-2w"
   >
-    <img src="/ic_defi.svg" class="fr-mr-2w img-object-fit-contain" alt="" />
+    <img alt="" class="fr-mr-2w img-object-fit-contain" src="/ic_defi.svg" />
     <div class="fr-col">
       <div class="action__contenu">
         <div class="flex-grow">
-          <span class="fr-text--bold fr-text--sm text--black">
-            {{ defi.thematique }}
-          </span>
           <p class="fr-text--lg text--semi-bold text--black fr-mb-0">
             <router-link :to="defi.url" class="action__link">
               {{ defi.titre }}
@@ -17,15 +14,15 @@
         </div>
         <span class="action__points background--white display-block fr-text--bold fr-p-1w">
           {{ defi.points }}
-          <img width="16" src="/ic_score.svg" alt="point" />
+          <img alt="point" src="/ic_score.svg" width="16" />
         </span>
-        <span class="fr-icon-arrow-right-s-line" aria-hidden="true"></span>
+        <span aria-hidden="true" class="fr-icon-arrow-right-s-line"></span>
       </div>
     </div>
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
   import { DefiDescriptionViewModel } from '@/domaines/defi/adapters/listeDefisDescription.presenter.impl';
 
   defineProps<{ defi: DefiDescriptionViewModel }>();
