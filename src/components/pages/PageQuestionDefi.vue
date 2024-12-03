@@ -19,44 +19,44 @@
     />
     <h1 class="fr-h2">Relevez le défi !</h1>
     <div v-if="isLoading">Chargement en cours ...</div>
-    <div class="fr-grid-row fr-grid-row--gutters" v-else-if="!isLoading && defiViewModel">
+    <div v-else-if="!isLoading && defiViewModel" class="fr-grid-row fr-grid-row--gutters">
       <div class="fr-col-8">
         <div class="background--white border fr-p-4w border-radius--md">
-          <span class="display-block fr-mb-2w fr-mr-1w fr-tag background--bleu-ecume-hover">Action</span>
-          <span class="display-block fr-text--bold fr-mb-1w fr-text--sm text--black">{{
-            defiViewModel.thematique
-          }}</span>
-          <form @submit.prevent="validerLaReponse" v-if="!reponseAEteDonnee">
+          <div class="flex align-items--center gap--small fr-mb-2w">
+            <span class="display-block fr-tag background--bleu-ecume-hover text--xs">Action</span>
+            <ThematiqueTag :tag="defiViewModel.thematiqueTag" />
+          </div>
+          <form v-if="!reponseAEteDonnee" @submit.prevent="validerLaReponse">
             <BoutonRadio
-              col=""
-              legende-size="l"
+              v-model="reponse"
+              :default-value="reponse ? reponse.toString() : undefined"
+              :description="defiViewModel.description"
               :legende="defiViewModel.libelle"
-              name="defi"
-              orientation="horizontal"
               :options="
                 defiViewModel.reponses_possibles.map((reponsePossible: ReponsePossible) => ({
                   label: reponsePossible.label,
                   value: reponsePossible.id,
                 }))
               "
-              :description="defiViewModel.description"
-              v-model="reponse"
-              :default-value="reponse ? reponse.toString() : undefined"
+              col=""
+              legende-size="l"
+              name="defi"
+              orientation="horizontal"
             />
 
             <div v-if="reponse === 'pas_envie' || reponse === 'abondon'">
               <div class="fr-grid-row align-items--center fr-mb-2w">
-                <img height="48" src="/ic_cible.svg" alt="" />
+                <img alt="" height="48" src="/ic_cible.svg" />
                 <p class="fr-h4 fr-ml-4v fr-mb-0">Cette action ne vous convient pas ?</p>
               </div>
               <label class="fr-label" for="explication">
                 On ne vise pas toujours juste ! Dites-nous pourquoi en quelques mots et nous affinerons nos
                 recommandations à l’avenir. (facultatif)</label
               >
-              <textarea class="fr-input fr-mb-4w" v-model="explication" id="explication" name="explication" />
+              <textarea id="explication" v-model="explication" class="fr-input fr-mb-4w" name="explication" />
             </div>
 
-            <button class="fr-btn fr-btn--lg fr-mb-4w" title="Valider" :disabled="isButtonDisabled">Valider</button>
+            <button :disabled="isButtonDisabled" class="fr-btn fr-btn--lg fr-mb-2w" title="Valider">Valider</button>
           </form>
 
           <DefiFin v-if="reponseAEteDonnee" :defi="defiViewModel" :reponse="reponse" />
@@ -66,24 +66,24 @@
           class="background--white border fr-mt-3w fr-p-4w border-radius--md"
         >
           <div v-if="defiViewModel.afficherNombreDePersonnes">
-            <img height="48" src="/ic_users.svg" alt="" />
+            <img alt="" height="48" src="/ic_users.svg" />
             <p class="fr-h2 fr-mb-0">Rejoignez {{ prenomsAleatoires }} et plein d’autres !</p>
             <p>{{ defiViewModel?.nombreDePersonnes }} personnes ont déjà relevé le défi... Et vous ?</p>
           </div>
 
-          <div class="background-bleu-alt-light border-radius--md fr-p-2w fr-mb-2w" v-if="defiViewModel.astuces">
+          <div v-if="defiViewModel.astuces" class="background-bleu-alt-light border-radius--md fr-p-2w fr-mb-2w">
             <h2 class="fr-h6">
-              <span class="fr-icon-arrow-right-s-last-line text--bleu-minor" aria-hidden="true"></span>
+              <span aria-hidden="true" class="fr-icon-arrow-right-s-last-line text--bleu-minor"></span>
               Bonnes astuces pour réaliser ce défi
             </h2>
             <p class="fr-mb-0 cms__content" v-html="defiViewModel.astuces"></p>
           </div>
         </div>
       </div>
-      <div class="fr-col-4" v-if="defiViewModel.pourquoi">
+      <div v-if="defiViewModel.pourquoi" class="fr-col-4">
         <CarteInfo>
           <p class="fr-text--bold">
-            <span class="fr-icon-question-line" aria-hidden="true"></span>
+            <span aria-hidden="true" class="fr-icon-question-line"></span>
             Pourquoi ce défi ?
           </p>
           <p class="fr-mb-0 cms__content" v-html="defiViewModel.pourquoi"></p>
@@ -93,12 +93,13 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
   import { computed, onMounted, ref } from 'vue';
   import { useRoute } from 'vue-router';
   import BoutonRadio from '@/components/custom/BoutonRadio.vue';
   import CarteInfo from '@/components/custom/CarteInfo.vue';
   import DefiFin from '@/components/custom/Defi/DefiFin.vue';
+  import ThematiqueTag from '@/components/custom/Thematiques/ThematiqueTag.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import { DefiPresenterImpl, DefiViewModel, ReponsePossible } from '@/domaines/defi/adapters/defi.presenter.impl';
   import { DefiRepositoryAxios } from '@/domaines/defi/adapters/defi.repository.axios';

@@ -1,6 +1,7 @@
 import { AxiosFactory, intercept401 } from '@/axios.factory';
 import { Defi } from '@/domaines/defi/defi';
 import { DefiRepository } from '@/domaines/defi/ports/defi.repository';
+import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 
 interface DefiApiModel {
   id: string;
@@ -11,7 +12,7 @@ interface DefiApiModel {
   sous_titre: string;
   status: 'todo' | 'en_cours' | 'pas_envie' | 'deja_fait' | 'abondon' | 'fait';
   thematique_label: string;
-  thematique: string;
+  thematique: ClefThematiqueAPI;
   titre: string;
   motif?: string;
   nombre_de_fois_realise: number;
@@ -28,7 +29,7 @@ export class DefiRepositoryAxios implements DefiRepository {
     return response.data.map((apiModel: DefiApiModel) => {
       const recommandationPersonnalisee: Defi = {
         description: '',
-        thematique: apiModel.thematique_label,
+        thematique: apiModel.thematique,
         id: apiModel.id,
         libelle: apiModel.titre,
         points: apiModel.points,
@@ -48,6 +49,7 @@ export class DefiRepositoryAxios implements DefiRepository {
     const axios = AxiosFactory.getAxios();
     await axios.patch(`/utilisateurs/${utilisateurId}/defis/${defiId}`, { status: reponse, motif: explication });
   }
+
   @intercept401()
   async recupererDefi(defiId: string, utilisateurId: string): Promise<Defi> {
     const response = await AxiosFactory.getAxios().get<DefiApiModel>(`/utilisateurs/${utilisateurId}/defis/${defiId}`);
@@ -57,7 +59,7 @@ export class DefiRepositoryAxios implements DefiRepository {
       libelle: response.data.titre,
       points: response.data.points,
       status: response.data.status,
-      thematique: response.data.thematique_label,
+      thematique: response.data.thematique,
       description: response.data.sous_titre,
       astuces: response.data.astuces,
       pourquoi: response.data.pourquoi,
@@ -74,7 +76,7 @@ export class DefiRepositoryAxios implements DefiRepository {
       libelle: defi.titre,
       points: defi.points,
       status: defi.status,
-      thematique: defi.thematique_label,
+      thematique: defi.thematique,
       description: defi.sous_titre,
       astuces: defi.astuces,
       pourquoi: defi.pourquoi,

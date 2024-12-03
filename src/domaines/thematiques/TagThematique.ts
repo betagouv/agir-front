@@ -33,7 +33,7 @@ export class TagThematique {
       color: '#4a0252',
       emoji: '🗑️',
     },
-    [ClefThematiqueAPI.environnement]: {
+    [ClefThematiqueAPI.climat]: {
       backgroundColor: '#fff0e0',
       color: '#4a0252',
       emoji: '☀️',

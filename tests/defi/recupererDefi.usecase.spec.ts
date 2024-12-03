@@ -2,6 +2,7 @@ import { MockDefiRepository } from './adapters/defi.repository.mock';
 import { RecupererDefiUsecase } from '@/domaines/defi/recupererDefiUsecase';
 import { DefiPresenterImpl, DefiViewModel } from '@/domaines/defi/adapters/defi.presenter.impl';
 import { describe } from 'vitest';
+import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 
 describe('Fichier de tests pour récuperer un défi', () => {
   it("En donnant un id d'utilisateur et l'id de la question du défi non répondu doit appeler le back et présenter le défi", async () => {
@@ -9,7 +10,7 @@ describe('Fichier de tests pour récuperer un défi', () => {
     const questionRepository = new MockDefiRepository({
       id: 'defiId',
       description: 'Defi description',
-      thematique: 'transport',
+      thematique: ClefThematiqueAPI.transports,
       libelle: 'Defi libelle',
       points: 10,
       status: 'todo',
@@ -43,7 +44,14 @@ describe('Fichier de tests pour récuperer un défi', () => {
             label: '👎 Pas pour moi',
           },
         ],
-        thematique: 'transport',
+        thematiqueTag: {
+          label: 'Me déplacer',
+          style: {
+            backgroundColor: '#D2E9FF',
+            color: '#021952',
+            emoji: '🚗',
+          },
+        },
         afficherNombreDePersonnes: true,
         nombreDePersonnes: 42,
       });
@@ -55,7 +63,7 @@ describe('Fichier de tests pour récuperer un défi', () => {
     const questionRepository = new MockDefiRepository({
       id: 'defiId',
       description: 'Defi description',
-      thematique: 'transport',
+      thematique: ClefThematiqueAPI.transports,
       libelle: 'Defi libelle',
       points: 10,
       status: 'en_cours',
@@ -86,7 +94,14 @@ describe('Fichier de tests pour récuperer un défi', () => {
           },
           { id: 'abondon', label: '👎 Finalement, pas pour moi' },
         ],
-        thematique: 'transport',
+        thematiqueTag: {
+          label: 'Me déplacer',
+          style: {
+            backgroundColor: '#D2E9FF',
+            color: '#021952',
+            emoji: '🚗',
+          },
+        },
         afficherNombreDePersonnes: true,
         nombreDePersonnes: 42,
       });
@@ -98,7 +113,7 @@ describe('Fichier de tests pour récuperer un défi', () => {
     const questionRepository = new MockDefiRepository({
       id: 'defiId',
       description: 'Defi description',
-      thematique: 'transport',
+      thematique: ClefThematiqueAPI.transports,
       libelle: 'Defi libelle',
       points: 10,
       status: 'fait',
@@ -123,7 +138,14 @@ describe('Fichier de tests pour récuperer un défi', () => {
         explicationRefus: undefined,
         reponse: 'fait',
         reponses_possibles: [{ id: 'deja_fait', label: '✅ Déjà fait' }],
-        thematique: 'transport',
+        thematiqueTag: {
+          label: 'Me déplacer',
+          style: {
+            backgroundColor: '#D2E9FF',
+            color: '#021952',
+            emoji: '🚗',
+          },
+        },
         afficherNombreDePersonnes: true,
         nombreDePersonnes: 42,
       });
@@ -136,7 +158,7 @@ describe('Fichier de tests pour récuperer un défi', () => {
       const questionRepository = new MockDefiRepository({
         id: 'defiId',
         description: 'Defi description',
-        thematique: 'transport',
+        thematique: ClefThematiqueAPI.transports,
         libelle: 'Defi libelle',
         points: 10,
         status: 'fait',
@@ -161,7 +183,14 @@ describe('Fichier de tests pour récuperer un défi', () => {
           explicationRefus: undefined,
           reponse: 'fait',
           reponses_possibles: [{ id: 'deja_fait', label: '✅ Déjà fait' }],
-          thematique: 'transport',
+          thematiqueTag: {
+            label: 'Me déplacer',
+            style: {
+              backgroundColor: '#D2E9FF',
+              color: '#021952',
+              emoji: '🚗',
+            },
+          },
           afficherNombreDePersonnes: false,
           nombreDePersonnes: 0,
         });
@@ -172,7 +201,7 @@ describe('Fichier de tests pour récuperer un défi', () => {
       const questionRepository = new MockDefiRepository({
         id: 'defiId',
         description: 'Defi description',
-        thematique: 'transport',
+        thematique: ClefThematiqueAPI.transports,
         libelle: 'Defi libelle',
         points: 10,
         status: 'fait',
@@ -197,7 +226,14 @@ describe('Fichier de tests pour récuperer un défi', () => {
           explicationRefus: undefined,
           reponse: 'fait',
           reponses_possibles: [{ id: 'deja_fait', label: '✅ Déjà fait' }],
-          thematique: 'transport',
+          thematiqueTag: {
+            label: 'Me déplacer',
+            style: {
+              backgroundColor: '#D2E9FF',
+              color: '#021952',
+              emoji: '🚗',
+            },
+          },
           afficherNombreDePersonnes: false,
           nombreDePersonnes: 1,
         });
@@ -208,7 +244,7 @@ describe('Fichier de tests pour récuperer un défi', () => {
       const questionRepository = new MockDefiRepository({
         id: 'defiId',
         description: 'Defi description',
-        thematique: 'transport',
+        thematique: ClefThematiqueAPI.transports,
         libelle: 'Defi libelle',
         points: 10,
         status: 'fait',
@@ -233,7 +269,14 @@ describe('Fichier de tests pour récuperer un défi', () => {
           explicationRefus: undefined,
           reponse: 'fait',
           reponses_possibles: [{ id: 'deja_fait', label: '✅ Déjà fait' }],
-          thematique: 'transport',
+          thematiqueTag: {
+            label: 'Me déplacer',
+            style: {
+              backgroundColor: '#D2E9FF',
+              color: '#021952',
+              emoji: '🚗',
+            },
+          },
           afficherNombreDePersonnes: false,
           nombreDePersonnes: 2,
         });
@@ -244,7 +287,7 @@ describe('Fichier de tests pour récuperer un défi', () => {
       const questionRepository = new MockDefiRepository({
         id: 'defiId',
         description: 'Defi description',
-        thematique: 'transport',
+        thematique: ClefThematiqueAPI.transports,
         libelle: 'Defi libelle',
         points: 10,
         status: 'fait',
@@ -269,7 +312,14 @@ describe('Fichier de tests pour récuperer un défi', () => {
           explicationRefus: undefined,
           reponse: 'fait',
           reponses_possibles: [{ id: 'deja_fait', label: '✅ Déjà fait' }],
-          thematique: 'transport',
+          thematiqueTag: {
+            label: 'Me déplacer',
+            style: {
+              backgroundColor: '#D2E9FF',
+              color: '#021952',
+              emoji: '🚗',
+            },
+          },
           afficherNombreDePersonnes: true,
           nombreDePersonnes: 3,
         });
