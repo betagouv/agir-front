@@ -6,9 +6,9 @@
         <h1 class="fr-h2 fr-mb-0 fr-col">Mon profil</h1>
       </div>
       <div class="fr-grid-row">
-        <div class="fr-col-lg-4 fr-col-12">
+        <div class="fr-col-lg-4 fr-col-12 fr-mb-4w fr-mb-md-0">
           <div class="full-height fr-grid-row flex-column flex-space-between">
-            <CompteMenuLateral class="fr-mb-6w" />
+            <CompteMenuLateral class="fr-mb-2w fr-mb-md-6w" />
             <button
               class="fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-logout-box-r-line fr-btn--lg fr-mr-auto"
               @click="logout"
