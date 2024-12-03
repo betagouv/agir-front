@@ -34,6 +34,10 @@
     border-radius: 6px;
   }
 
+  .fr-collapse.fr-collapse--expanded {
+    padding: 1rem;
+  }
+
   .fr-accordion__btn[aria-expanded='true'] {
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;

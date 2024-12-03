@@ -11,7 +11,7 @@
       />
     </div>
     <form @submit.prevent="enregistrerLesInformations">
-      <div class="fr-grid-row full-width flex-end">
+      <div class="fr-grid-row full-width flex-end fr-mb-4w fr-mb-md-2w">
         <button
           type="submit"
           aria-label="Soumettre le formulaire"

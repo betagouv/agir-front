@@ -1,6 +1,6 @@
 <template>
   <div
-    class="defi full-height border-radius--md background--white shadow fr-p-3w border"
+    class="defi full-height border-radius--md background--white shadow fr-p-2w fr-p-md-3w border"
     :class="`${defi.couleurBordure}`"
   >
     <span v-if="defi.badge" class="item__badge fr-badge text--transform-none" :class="`${defi.badge.style}`">

@@ -7,7 +7,7 @@
   />
   <h1 class="fr-h2">Sélectionnez un défi</h1>
   <ul class="fr-grid fr-grid-row fr-grid-row--gutters list-style-none fr-mb-3w">
-    <li v-for="defi in defis" :key="defi.id" class="fr-col-4">
+    <li v-for="defi in defis" :key="defi.id" class="fr-col-12 fr-col-sm-6 fr-col-md-4">
       <MissionCarteDefi :defi="defi" />
     </li>
   </ul>

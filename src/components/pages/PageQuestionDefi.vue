@@ -20,7 +20,7 @@
     <h1 class="fr-h2">Relevez le défi !</h1>
     <div v-if="isLoading">Chargement en cours ...</div>
     <div v-else-if="!isLoading && defiViewModel" class="fr-grid-row fr-grid-row--gutters">
-      <div class="fr-col-8">
+      <div class="fr-col-sm-8">
         <div class="background--white border fr-p-4w border-radius--md">
           <div class="flex align-items--center gap--small fr-mb-2w">
             <span class="display-block fr-tag background--bleu-ecume-hover text--xs">Action</span>
@@ -45,9 +45,9 @@
             />
 
             <div v-if="reponse === 'pas_envie' || reponse === 'abondon'">
-              <div class="fr-grid-row align-items--center fr-mb-2w">
+              <div class="fr-grid-row align-items--center fr-mb-2w gap--small">
                 <img alt="" height="48" src="/ic_cible.svg" />
-                <p class="fr-h4 fr-ml-4v fr-mb-0">Cette action ne vous convient pas ?</p>
+                <p class="fr-h4 fr-mb-0">Cette action ne vous convient pas ?</p>
               </div>
               <label class="fr-label" for="explication">
                 On ne vise pas toujours juste ! Dites-nous pourquoi en quelques mots et nous affinerons nos
@@ -80,7 +80,7 @@
           </div>
         </div>
       </div>
-      <div v-if="defiViewModel.pourquoi" class="fr-col-4">
+      <div v-if="defiViewModel.pourquoi" class="fr-col-sm-4">
         <CarteInfo>
           <p class="fr-text--bold">
             <span aria-hidden="true" class="fr-icon-question-line"></span>
