@@ -45,7 +45,7 @@ describe('Fichier de tests pour récuperer un défi', () => {
           },
         ],
         thematiqueTag: {
-          label: 'Transports',
+          label: 'Me déplacer',
           style: {
             backgroundColor: '#D2E9FF',
             color: '#021952',
@@ -95,7 +95,7 @@ describe('Fichier de tests pour récuperer un défi', () => {
           { id: 'abondon', label: '👎 Finalement, pas pour moi' },
         ],
         thematiqueTag: {
-          label: 'Transports',
+          label: 'Me déplacer',
           style: {
             backgroundColor: '#D2E9FF',
             color: '#021952',
@@ -139,7 +139,7 @@ describe('Fichier de tests pour récuperer un défi', () => {
         reponse: 'fait',
         reponses_possibles: [{ id: 'deja_fait', label: '✅ Déjà fait' }],
         thematiqueTag: {
-          label: 'Transports',
+          label: 'Me déplacer',
           style: {
             backgroundColor: '#D2E9FF',
             color: '#021952',
@@ -184,7 +184,7 @@ describe('Fichier de tests pour récuperer un défi', () => {
           reponse: 'fait',
           reponses_possibles: [{ id: 'deja_fait', label: '✅ Déjà fait' }],
           thematiqueTag: {
-            label: 'Transports',
+            label: 'Me déplacer',
             style: {
               backgroundColor: '#D2E9FF',
               color: '#021952',
@@ -227,7 +227,7 @@ describe('Fichier de tests pour récuperer un défi', () => {
           reponse: 'fait',
           reponses_possibles: [{ id: 'deja_fait', label: '✅ Déjà fait' }],
           thematiqueTag: {
-            label: 'Transports',
+            label: 'Me déplacer',
             style: {
               backgroundColor: '#D2E9FF',
               color: '#021952',
@@ -270,7 +270,7 @@ describe('Fichier de tests pour récuperer un défi', () => {
           reponse: 'fait',
           reponses_possibles: [{ id: 'deja_fait', label: '✅ Déjà fait' }],
           thematiqueTag: {
-            label: 'Transports',
+            label: 'Me déplacer',
             style: {
               backgroundColor: '#D2E9FF',
               color: '#021952',
@@ -313,7 +313,7 @@ describe('Fichier de tests pour récuperer un défi', () => {
           reponse: 'fait',
           reponses_possibles: [{ id: 'deja_fait', label: '✅ Déjà fait' }],
           thematiqueTag: {
-            label: 'Transports',
+            label: 'Me déplacer',
             style: {
               backgroundColor: '#D2E9FF',
               color: '#021952',
