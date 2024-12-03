@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.31.0](https://github.com/betagouv/agir-front/compare/v1.30.0...v1.31.0) (2024-12-03)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* quelques quick fix css pour version mobile ([#802](https://github.com/betagouv/agir-front/issues/802)) ([d620db4](https://github.com/betagouv/agir-front/commit/d620db4cb44800395c4b2454b1c3c8405a463af4))
+
 ## [1.30.0](https://github.com/betagouv/agir-front/compare/v1.29.1...v1.30.0) (2024-12-03)
 
 
