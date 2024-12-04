@@ -1,8 +1,4 @@
 <template>
-  <div class="fr-container fr-mt-4w" v-if="isLoading">
-    <CarteSkeleton />
-  </div>
-
   <div class="fr-container">
     <FilDAriane :page-courante="thematique.labelDansLeMenu" />
     <div class="fr-grid-row align-items--center fr-mb-4w">
@@ -17,7 +13,11 @@
     </div>
   </div>
 
-  <div v-if="!isLoading">
+  <div class="fr-container fr-mt-4w" v-if="isLoading">
+    <CarteSkeleton class="fr-mb-3w" />
+  </div>
+
+  <div v-else>
     <section id="thematiques" v-if="missionsViewModel">
       <div class="fr-container">
         <MissionsListe :missions="missionsViewModel" />
@@ -53,7 +53,7 @@
       </div>
     </section>
 
-    <section class="fr-py-6w fr-background-contrast--grey" v-if="!isLoading && recommandationsPersonnaliseesViewModel">
+    <section class="fr-py-6w fr-background-contrast--grey" v-if="recommandationsPersonnaliseesViewModel">
       <div class="fr-container">
         <h2 class="fr-h2 fr-mb-0">Recommandé, pour vous</h2>
         <p class="fr-text--xl">Une sélection d’articles et de services, pour vous, selon vos préférences !</p>
