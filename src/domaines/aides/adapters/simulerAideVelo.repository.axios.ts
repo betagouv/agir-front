@@ -18,7 +18,14 @@ interface Collectivite {
   code?: string;
 }
 
-type TypeVelos = 'mécanique simple' | 'électrique' | 'cargo' | 'cargo électrique' | 'pliant' | 'motorisation';
+type TypeVelos =
+  | 'mécanique simple'
+  | 'électrique'
+  | 'cargo'
+  | 'cargo électrique'
+  | 'pliant'
+  | 'pliant électrique'
+  | 'motorisation';
 
 type AidesVeloParType = {
   [category in TypeVelos]: AidesVelo[];
@@ -31,6 +38,15 @@ export class SimulerAideVeloRepositoryAxios implements SimulerAideVeloRepository
     const response = await axiosInstance.post<AidesVeloParType>(`/utilisateurs/${utilisateurId}/simulerAideVelo`, {
       prix_du_velo: prixDuVelo,
     });
-    return response.data;
+
+    return {
+      'mécanique simple': response.data['mécanique simple'] ?? [],
+      électrique: response.data.électrique ?? [],
+      cargo: response.data.cargo ?? [],
+      'cargo électrique': response.data['cargo électrique'] ?? [],
+      pliant: response.data.pliant ?? [],
+      'pliant électrique': response.data['pliant électrique'] ?? [],
+      motorisation: response.data.motorisation ?? [],
+    };
   }
 }

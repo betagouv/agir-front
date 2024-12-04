@@ -1,5 +1,5 @@
 import { SimulerAideVeloPresenterImpl } from '@/domaines/aides/adapters/simulerAideVelo.presenter.impl';
-import SimulerAideVeloUsecase, { SimulationVelo } from '@/domaines/aides/simulerAideVelo.usecase';
+import SimulerAideVeloUsecase from '@/domaines/aides/simulerAideVelo.usecase';
 import { SimulationAideResultatViewModel } from '@/domaines/aides/ports/simulationAideResultat';
 import { SimulerAideVeloRepositoryMock } from './adapters/simulerAideVelo.repository.mock';
 
@@ -207,6 +207,33 @@ describe('Fichier de tests pour simuler une aide velo', () => {
           logo: 'https://mesaidesvelo.fr/miniatures/logo_ile_de_france.webp',
         },
       ],
+      'pliant électrique': [
+        {
+          libelle: 'Bonus vélo',
+          description: 'Nouveau bonus vélo pliant applicable du 15 août 2022 au 31 décembre 2023.',
+          lien: 'https://www.service-public.fr/particuliers/vosdroits/F36828',
+          collectivite: {
+            kind: 'pays',
+            value: 'France',
+          },
+          montant: 2000,
+          plafond: 2000,
+          logo: 'https://mesaidesvelo.fr/miniatures/logo_etat_francais.webp',
+        },
+        {
+          libelle: 'Île-de-France Mobilités',
+          description:
+            'La région Île-de-France subventionne l’achat d’un vélo pliant à hauteur de 50% et jusqu’à un plafond de 500 €. Les éventuelles aides locales déjà perçues sont déduites de ce montant.',
+          lien: 'https://www.iledefrance-mobilites.fr/le-reseau/services-de-mobilite/velo/prime-achat-velo',
+          collectivite: {
+            kind: 'région',
+            value: '11',
+          },
+          montant: 550,
+          plafond: 550,
+          logo: 'https://mesaidesvelo.fr/miniatures/logo_ile_de_france.webp',
+        },
+      ],
       motorisation: [
         {
           libelle: 'Île-de-France Mobilités',
@@ -393,6 +420,27 @@ describe('Fichier de tests pour simuler une aide velo', () => {
           {
             aides: [
               {
+                libelle: 'Bonus vélo',
+                description: 'Nouveau bonus vélo pliant applicable du 15 août 2022 au 31 décembre 2023.',
+                lien: 'https://www.service-public.fr/particuliers/vosdroits/F36828',
+                montant: 2000,
+                logo: 'https://mesaidesvelo.fr/miniatures/logo_etat_francais.webp',
+              },
+              {
+                libelle: 'Île-de-France Mobilités',
+                description:
+                  'La région Île-de-France subventionne l’achat d’un vélo pliant à hauteur de 50% et jusqu’à un plafond de 500 €. Les éventuelles aides locales déjà perçues sont déduites de ce montant.',
+                lien: 'https://www.iledefrance-mobilites.fr/le-reseau/services-de-mobilite/velo/prime-achat-velo',
+                montant: 550,
+                logo: 'https://mesaidesvelo.fr/miniatures/logo_ile_de_france.webp',
+              },
+            ],
+            montantTotal: 2550,
+            titre: 'Acheter un vélo pliant électrique',
+          },
+          {
+            aides: [
+              {
                 description:
                   'La région Île-de-France subventionne l’achat d’un kit de motorisation à hauteur de 50% et jusqu’à un plafond de 200 €. Les éventuelles aides locales déjà perçues sont déduites de ce montant.',
                 libelle: 'Île-de-France Mobilités',
@@ -427,6 +475,7 @@ describe('Fichier de tests pour simuler une aide velo', () => {
         cargo: [],
         'cargo électrique': [],
         pliant: [],
+        'pliant électrique': [],
         motorisation: [],
       });
 
@@ -462,6 +511,11 @@ describe('Fichier de tests pour simuler une aide velo', () => {
               aides: [],
               montantTotal: 0,
               titre: 'Acheter un vélo pliant',
+            },
+            {
+              aides: [],
+              montantTotal: 0,
+              titre: 'Acheter un vélo pliant électrique',
             },
             {
               aides: [],
