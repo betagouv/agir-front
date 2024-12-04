@@ -17,7 +17,14 @@ interface Collectivite {
   code?: string;
 }
 
-type TypeVelos = 'mécanique simple' | 'électrique' | 'cargo' | 'cargo électrique' | 'pliant' | 'motorisation';
+type TypeVelos =
+  | 'mécanique simple'
+  | 'électrique'
+  | 'cargo'
+  | 'cargo électrique'
+  | 'pliant'
+  | 'pliant électrique'
+  | 'motorisation';
 
 export type SimulationVelo = {
   [category in TypeVelos]: AidesVelo[];
