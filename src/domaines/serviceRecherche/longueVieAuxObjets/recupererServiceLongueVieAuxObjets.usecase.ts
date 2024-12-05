@@ -17,6 +17,8 @@ export interface ServiceRechercheLongueVieAuxObjets extends ServiceRechercheBase
   suggestions: ServiceRechercheLongueVieAuxObjetsResultat[];
   favoris?: ServiceRechercheLongueVieAuxObjetsResultat[];
   estEnErreur: boolean;
+  plusDeResultatsDisponibles: boolean;
+  nombreMaxResultats: number;
 }
 
 export class RecupererServiceLongueVieAuxObjetsUsecase {
@@ -25,9 +27,14 @@ export class RecupererServiceLongueVieAuxObjetsUsecase {
   async execute(
     idUtilisateur: string,
     idService: string,
+    nombreMaxResultats: number,
     recupererServiceRechercheLongueVieAuxObjetsPresenter: ServiceRechercheLongueVieAuxObjetsPresenter,
   ) {
-    const service = await this.serviceRechercheLongueVieAuxObjetsRepository.recupererService(idUtilisateur, idService);
+    const service = await this.serviceRechercheLongueVieAuxObjetsRepository.recupererService(
+      idUtilisateur,
+      idService,
+      nombreMaxResultats,
+    );
     if (service.estEnErreur) {
       recupererServiceRechercheLongueVieAuxObjetsPresenter.presenteErreur();
     } else {

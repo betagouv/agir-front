@@ -41,9 +41,18 @@ export interface ServiceRechercheCategorieApiModel {
   is_default: boolean;
 }
 
+interface ServiceRechercheLongueVieAuxObjetsApiResultatsModel {
+  resultats: ServiceRechercheApiModel[];
+  encore_plus_resultats_dispo: boolean;
+}
+
 export class ServiceRechercheLongueVieAuxObjetsAxios implements ServiceRechercheLongueVieAuxObjetsRepository {
   @intercept401()
-  async recupererService(idUtilisateur: string, categorie: string): Promise<ServiceRechercheLongueVieAuxObjets> {
+  async recupererService(
+    idUtilisateur: string,
+    categorie: string,
+    nombreMaxResultats: number,
+  ): Promise<ServiceRechercheLongueVieAuxObjets> {
     const idService = 'longue_vie_objets';
     const axiosInstance = AxiosFactory.getAxios();
 
@@ -52,11 +61,11 @@ export class ServiceRechercheLongueVieAuxObjetsAxios implements ServiceRecherche
         `/utilisateurs/${idUtilisateur}/recherche_services/${idService}/categories`,
       );
 
-      const responseSuggestionsPromise = axiosInstance.post<ServiceRechercheApiModel[]>(
-        `/utilisateurs/${idUtilisateur}/recherche_services/${idService}/search`,
+      const responseSuggestionsPromise = axiosInstance.post<ServiceRechercheLongueVieAuxObjetsApiResultatsModel>(
+        `/utilisateurs/${idUtilisateur}/recherche_services/${idService}/search2`,
         {
           categorie,
-          nombre_max_resultats: 0,
+          nombre_max_resultats: nombreMaxResultats,
           rayon_metres: 5000,
         },
       );
@@ -90,13 +99,15 @@ export class ServiceRechercheLongueVieAuxObjetsAxios implements ServiceRecherche
       return {
         estEnErreur: false,
         titre: 'Mon titre',
-        suggestions: responseSuggestions.data.map(mapServiceRecherche),
+        suggestions: responseSuggestions.data.resultats.map(mapServiceRecherche),
         favoris: responseFavoris.data.length > 0 ? responseFavoris.data.map(mapServiceRecherche) : undefined,
         categories: responseCategorie.data.map(elem => ({
           code: elem.code,
           label: elem.label,
           estLaCategorieParDefaut: elem.is_default,
         })),
+        plusDeResultatsDisponibles: responseSuggestions.data.encore_plus_resultats_dispo,
+        nombreMaxResultats: nombreMaxResultats,
       };
     } catch {
       return {
@@ -105,6 +116,8 @@ export class ServiceRechercheLongueVieAuxObjetsAxios implements ServiceRecherche
         favoris: [],
         categories: [],
         estEnErreur: true,
+        plusDeResultatsDisponibles: false,
+        nombreMaxResultats: nombreMaxResultats,
       };
     }
   }

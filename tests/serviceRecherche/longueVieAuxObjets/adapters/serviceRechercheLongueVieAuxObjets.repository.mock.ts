@@ -1,6 +1,6 @@
-import { ServiceRechercheLongueVieAuxObjetsRepository } from '../../../../src/domaines/serviceRecherche/longueVieAuxObjets/ports/serviceRechercheLongueVieAuxObjets.repository';
-import { ServiceRechercheLongueVieAuxObjets } from '../../../../src/domaines/serviceRecherche/longueVieAuxObjets/recupererServiceLongueVieAuxObjets.usecase';
-import { ServiceRechercheLongueVieAuxObjetsResultatDetail } from '../../../../src/domaines/serviceRecherche/longueVieAuxObjets/recupererDetailServiceLongueVieAuxObjets.usecase';
+import { ServiceRechercheLongueVieAuxObjetsRepository } from '@/domaines/serviceRecherche/longueVieAuxObjets/ports/serviceRechercheLongueVieAuxObjets.repository';
+import { ServiceRechercheLongueVieAuxObjets } from '@/domaines/serviceRecherche/longueVieAuxObjets/recupererServiceLongueVieAuxObjets.usecase';
+import { ServiceRechercheLongueVieAuxObjetsResultatDetail } from '@/domaines/serviceRecherche/longueVieAuxObjets/recupererDetailServiceLongueVieAuxObjets.usecase';
 
 export class ServiceRechercheLongueVieAuxObjetsRepositoryEnErreur
   implements ServiceRechercheLongueVieAuxObjetsRepository
@@ -12,8 +12,11 @@ export class ServiceRechercheLongueVieAuxObjetsRepositoryEnErreur
       favoris: [],
       categories: [],
       estEnErreur: true,
+      plusDeResultatsDisponibles: false,
+      nombreMaxResultats: 10,
     } as ServiceRechercheLongueVieAuxObjets);
   }
+
   recupererDetail(idUtilisateur: string, idService: string): Promise<ServiceRechercheLongueVieAuxObjetsResultatDetail> {
     throw new Error('Method not implemented.');
   }

@@ -1,6 +1,12 @@
 <template>
-  <div class="fr-container fr-pb-4w" v-if="detailServiceViewModel">
-    <img alt="" :src="detailServiceViewModel.img" />
+  <div v-if="detailServiceViewModel" class="fr-container fr-pb-4w">
+    <router-link
+      class="fr-btn fr-btn--tertiary-no-outline fr-btn--icon-left fr-icon-arrow-left-line fr-pl-0 fr-my-2w"
+      to="/thematique/consommer/service/longue-vie-aux-objets"
+    >
+      Retour
+    </router-link>
+    <img :src="detailServiceViewModel.img" alt="" />
     <div class="fr-mt-auto">
       <span
         v-if="detailServiceViewModel.tag"
@@ -11,17 +17,17 @@
     </div>
     <h1 class="fr-h2 fr-mt-2w">{{ detailServiceViewModel.titre }}</h1>
     <p v-if="detailServiceViewModel.description">{{ detailServiceViewModel.description }}</p>
-    <div class="map-container" v-if="detailServiceViewModel.position">
+    <div v-if="detailServiceViewModel.position" class="map-container">
       <LMap
-        :useGlobalLeaflet="false"
         ref="map"
-        :zoom="100"
         :center="[detailServiceViewModel.position.latitude, detailServiceViewModel.position.longitude]"
+        :useGlobalLeaflet="false"
+        :zoom="100"
       >
         <LTileLayer
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           layer-type="base"
           name="OpenStreetMap"
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         ></LTileLayer>
         <LMarker :lat-lng="[detailServiceViewModel.position?.latitude, detailServiceViewModel.position?.longitude]" />
       </LMap>
@@ -40,20 +46,20 @@
     </div>
     <a
       v-if="detailServiceViewModel.siteWeb"
-      class="fr-link width--auto"
       :href="detailServiceViewModel.siteWeb"
-      target="_blank"
+      class="fr-link width--auto"
       rel="noopener noreferrer"
+      target="_blank"
       >En savoir plus</a
     >
 
-    <a class="fr-btn fr-btn--secondary" :href="urlModification" target="_blank" rel="noopener noreferrer"
+    <a :href="urlModification" class="fr-btn fr-btn--secondary" rel="noopener noreferrer" target="_blank"
       >Proposer une modification</a
     >
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
   import 'leaflet/dist/leaflet.css';
   import { LMap, LMarker, LTileLayer } from '@vue-leaflet/vue-leaflet';
   import { computed, onMounted, ref } from 'vue';

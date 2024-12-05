@@ -3,7 +3,6 @@
     <div v-if="isLoading">Chargement en cours ...</div>
     <div v-else>
       <FilDAriane
-        page-courante="Service : Longue vie aux objets"
         :page-hierarchie="
           useRoute().params.thematiqueId
             ? [
@@ -14,6 +13,7 @@
               ]
             : []
         "
+        page-courante="Service : Longue vie aux objets"
       />
       <div v-if="serviceErreur">
         <h1>Service indisponible</h1>
@@ -22,25 +22,27 @@
       <div v-else>
         <h1 class="fr-h2">
           <ServiceSelect
+            v-if="serviceRechercheLongueVieAuxObjetsViewModel?.categories"
             id="categories"
+            :options="serviceRechercheLongueVieAuxObjetsViewModel.categories"
             label="Choisir une catégorie"
-            :options="(serviceRechercheLongueVieAuxObjetsViewModel as ServiceRechercheViewModelBase).categories"
             @update="updateType"
           />
           à proximité de chez moi
         </h1>
         <p>Redonnez vie à vos objets et trouvez les nouveaux en seconde main</p>
         <PageServiceTemplate
-          :aside="(serviceRechercheLongueVieAuxObjetsViewModel as ServiceRechercheViewModelBase).aside"
+          v-if="serviceRechercheLongueVieAuxObjetsViewModel?.aside"
+          :aside="serviceRechercheLongueVieAuxObjetsViewModel.aside"
         >
           <div
-            class="text--center"
             v-if="
               (serviceRechercheLongueVieAuxObjetsViewModel as ServiceRechercheLongueVieAuxObjetsViewModelSansResultats)
                 .aucunResultat
             "
+            class="text--center"
           >
-            <img src="/service_aucun_resultat.svg" height="250" alt="" />
+            <img alt="" height="250" src="/service_aucun_resultat.svg" />
             <p class="fr-text--lg">😢 Aucun résultat n’est encore disponible pour votre localisation</p>
           </div>
           <div v-else>
@@ -53,12 +55,12 @@
               "
             >
               <ServiceFavoris
-                titre="Mes lieux favoris"
                 :services-recherche-favoris-view-model="
                   (
                     serviceRechercheLongueVieAuxObjetsViewModel as ServiceRechercheLongueVieAuxObjetsViewModelAvecResultats
                   ).favoris!
                 "
+                titre="Mes lieux favoris"
               />
             </section>
             <section>
@@ -70,6 +72,17 @@
                   ).suggestions
                 "
               />
+              <button
+                v-if="
+                  (
+                    serviceRechercheLongueVieAuxObjetsViewModel as ServiceRechercheLongueVieAuxObjetsViewModelAvecResultats
+                  ).plusDeResultatsDisponibles
+                "
+                class="fr-link text--underline"
+                @click="chargerPlusDeResultats()"
+              >
+                Voir plus de résultats
+              </button>
             </section>
           </div>
         </PageServiceTemplate>
@@ -78,7 +91,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
   import { onMounted, ref } from 'vue';
   import { useRoute } from 'vue-router';
   import PageServiceTemplate from '@/components/custom/Service/PageServiceTemplate.vue';
@@ -86,7 +99,6 @@
   import ServiceListeCarte from '@/components/custom/Service/ServiceListeCarte.vue';
   import ServiceSelect from '@/components/custom/Service/ServiceSelect.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
-  import { ServiceRechercheViewModelBase } from '@/domaines/serviceRecherche/catalogue/adapters/serviceRechercheViewModel';
   import {
     ServiceRechercheLongueVieAuxObjetsPresenterImpl,
     ServiceRechercheLongueVieAuxObjetsViewModel,
@@ -104,29 +116,36 @@
   const usecase = new RecupererServiceLongueVieAuxObjetsUsecase(new ServiceRechercheLongueVieAuxObjetsAxios());
 
   const serviceErreur = ref<string | null>(null);
+  let nombreMaxResultats = 10;
+  const typeDeRecherche = ref<string>('vos_objets');
 
-  onMounted(async () => {
-    await usecase.execute(
-      utilisateurStore().utilisateur.id,
-      '',
-      new ServiceRechercheLongueVieAuxObjetsPresenterImpl(
-        vm => (serviceRechercheLongueVieAuxObjetsViewModel.value = vm),
-        error => (serviceErreur.value = error),
-      ),
-    );
-
-    isLoading.value = false;
+  onMounted(() => {
+    lancerRecherche();
   });
 
-  const updateType = async (type: string) => {
+  async function lancerRecherche(): Promise<void> {
     await usecase.execute(
       utilisateurStore().utilisateur.id,
-      type,
+      typeDeRecherche.value,
+      nombreMaxResultats,
       new ServiceRechercheLongueVieAuxObjetsPresenterImpl(
-        vm => (serviceRechercheLongueVieAuxObjetsViewModel.value = vm),
+        vm => {
+          serviceRechercheLongueVieAuxObjetsViewModel.value = vm;
+        },
         error => (serviceErreur.value = error),
       ),
     );
     isLoading.value = false;
+  }
+
+  const chargerPlusDeResultats = () => {
+    nombreMaxResultats += 10;
+    lancerRecherche();
+  };
+
+  const updateType = (type: string) => {
+    nombreMaxResultats = 10;
+    typeDeRecherche.value = type;
+    lancerRecherche();
   };
 </script>
