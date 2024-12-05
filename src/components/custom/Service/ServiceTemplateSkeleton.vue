@@ -1,0 +1,11 @@
+<template>
+  <ServiceSkeleton v-if="isLoading" />
+  <slot v-else-if="viewModelExiste" />
+  <p v-else>Problème de chargement...</p>
+</template>
+
+<script setup lang="ts">
+  import ServiceSkeleton from '@/components/ServiceSkeleton.vue';
+
+  defineProps<{ viewModelExiste: boolean; isLoading: boolean }>();
+</script>
