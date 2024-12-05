@@ -7,6 +7,9 @@
       </span>
     </h1>
     <div class="fr-stepper__steps fr-mb-1w" :data-fr-current-step="etapeActuelle" :data-fr-steps="etapeTotale"></div>
+    <p v-if="prochaineEtape" class="fr-stepper__details">
+      <span class="fr-text--bold">Étape suivante :</span> {{ prochaineEtape }}
+    </p>
     <button
       class="fr-btn fr-btn--icon-left fr-btn--tertiary-no-outline fr-icon-arrow-left-line fr-pl-0"
       @click="fonctionRetour"
@@ -17,5 +20,11 @@
 </template>
 
 <script setup lang="ts">
-  defineProps<{ titre: string; etapeActuelle: number; etapeTotale: number; fonctionRetour: () => void }>();
+  defineProps<{
+    titre: string;
+    etapeActuelle: number;
+    etapeTotale: number;
+    fonctionRetour: () => void;
+    prochaineEtape?: string;
+  }>();
 </script>
