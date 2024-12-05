@@ -6,7 +6,7 @@
     >
       Retour
     </router-link>
-    <img :src="detailServiceViewModel.img" alt="" />
+    <img v-if="detailServiceViewModel.img" :src="detailServiceViewModel.img" alt="" />
     <div class="fr-mt-auto">
       <span
         v-if="detailServiceViewModel.tag"
