@@ -1,42 +1,43 @@
 <template>
   <div class="fr-container">
-    <div v-if="isLoading">Chargement en cours ...</div>
-    <p v-else-if="!serviceRecettesViewModel">Problème de chargement de donées</p>
-    <div v-else>
-      <FilDAriane
-        page-courante="Service : recettes"
-        :page-hierarchie="
-          useRoute().params.thematiqueId
-            ? [
-                {
-                  label: `${MenuThematiques.getFromUrl(useRoute().params.thematiqueId as string).labelDansLeMenu}`,
-                  url: `/thematique/${useRoute().params.thematiqueId}`,
-                },
-              ]
-            : []
-        "
-      />
+    <FilDAriane
+      page-courante="Service : recettes"
+      :page-hierarchie="
+        useRoute().params.thematiqueId
+          ? [
+              {
+                label: `${MenuThematiques.getFromUrl(useRoute().params.thematiqueId as string).labelDansLeMenu}`,
+                url: `/thematique/${useRoute().params.thematiqueId}`,
+              },
+            ]
+          : []
+      "
+    />
+
+    <!--    TODO: revoir le viewModelExiste en vrai -->
+    <ServiceTemplateSkeleton :is-loading="isLoading" :view-model-existe="true">
       <h1 class="fr-h2">
         Recettes
         <ServiceSelect
           id="mois"
-          :options="serviceRecettesViewModel.categories"
+          :options="serviceRecettesViewModel!.categories"
           @update="updateType"
           label="Choisir un type"
         />
       </h1>
-      <PageServiceTemplate :aside="serviceRecettesViewModel.aside">
-        <section v-if="serviceRecettesViewModel.favoris" class="fr-pb-6w">
+
+      <PageServiceTemplate :aside="serviceRecettesViewModel!.aside">
+        <section v-if="serviceRecettesViewModel!.favoris" class="fr-pb-6w">
           <ServiceFavoris
             titre="Mes recettes favorites"
-            :services-recherche-favoris-view-model="serviceRecettesViewModel.favoris"
+            :services-recherche-favoris-view-model="serviceRecettesViewModel!.favoris"
           />
         </section>
-        <section v-if="serviceRecettesViewModel.suggestions">
+        <section v-if="serviceRecettesViewModel!.suggestions">
           <h2 class="fr-h3">Suggestions</h2>
-          <ServiceListeCarte :suggestions-service-view-model="serviceRecettesViewModel.suggestions" />
+          <ServiceListeCarte :suggestions-service-view-model="serviceRecettesViewModel!.suggestions" />
           <button
-            v-if="serviceRecettesViewModel.plusDeResultatsDisponibles"
+            v-if="serviceRecettesViewModel!.plusDeResultatsDisponibles"
             class="fr-link text--underline"
             @click="chargerPlusDeRecettes()"
           >
@@ -44,7 +45,7 @@
           </button>
         </section>
       </PageServiceTemplate>
-    </div>
+    </ServiceTemplateSkeleton>
   </div>
 </template>
 
@@ -55,6 +56,7 @@
   import ServiceFavoris from '@/components/custom/Service/ServiceFavoris.vue';
   import ServiceListeCarte from '@/components/custom/Service/ServiceListeCarte.vue';
   import ServiceSelect from '@/components/custom/Service/ServiceSelect.vue';
+  import ServiceTemplateSkeleton from '@/components/custom/Service/ServiceTemplateSkeleton.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import {
     ServiceRechercheRecettesViewModel,
