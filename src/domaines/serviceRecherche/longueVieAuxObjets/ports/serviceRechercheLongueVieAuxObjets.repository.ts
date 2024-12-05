@@ -2,6 +2,11 @@ import { ServiceRechercheLongueVieAuxObjetsResultatDetail } from '@/domaines/ser
 import { ServiceRechercheLongueVieAuxObjets } from '@/domaines/serviceRecherche/longueVieAuxObjets/recupererServiceLongueVieAuxObjets.usecase';
 
 export interface ServiceRechercheLongueVieAuxObjetsRepository {
-  recupererService(idUtilisateur: string, idService: string): Promise<ServiceRechercheLongueVieAuxObjets>;
+  recupererService(
+    idUtilisateur: string,
+    categorie: string,
+    nombreMaxResultats: number,
+  ): Promise<ServiceRechercheLongueVieAuxObjets>;
+
   recupererDetail(idUtilisateur: string, idService: string): Promise<ServiceRechercheLongueVieAuxObjetsResultatDetail>;
 }

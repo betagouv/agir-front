@@ -2,18 +2,20 @@ import {
   ServiceRechercheLongueVieAuxObjetsRepositoryEnErreur,
   ServiceRechercheLongueVieAuxObjetsRepositoryMock,
 } from './adapters/serviceRechercheLongueVieAuxObjets.repository.mock';
-import { RecupererServiceLongueVieAuxObjetsUsecase } from '../../../src/domaines/serviceRecherche/longueVieAuxObjets/recupererServiceLongueVieAuxObjets.usecase';
+import { RecupererServiceLongueVieAuxObjetsUsecase } from '@/domaines/serviceRecherche/longueVieAuxObjets/recupererServiceLongueVieAuxObjets.usecase';
 import {
   ServiceRechercheLongueVieAuxObjetsPresenterImpl,
   ServiceRechercheLongueVieAuxObjetsViewModel,
-} from '../../../src/domaines/serviceRecherche/longueVieAuxObjets/adapters/serviceRechercheLongueVieAuxObjets.presenter.impl';
-import { RouteServiceName } from '../../../src/router/services/routes';
+} from '@/domaines/serviceRecherche/longueVieAuxObjets/adapters/serviceRechercheLongueVieAuxObjets.presenter.impl';
+import { RouteServiceName } from '@/router/services/routes';
 
 describe("Fichier de tests concernant la récuperation de service d'un recherche", () => {
   it("en donnant l'id d'un utilisateur et d'un service, renvoie les suggestions du service", async () => {
     // GIVEN
     const usecase = new RecupererServiceLongueVieAuxObjetsUsecase(
       ServiceRechercheLongueVieAuxObjetsRepositoryMock.recupererServiceMock({
+        plusDeResultatsDisponibles: false,
+        nombreMaxResultats: 10,
         estEnErreur: false,
         titre: 'Mon service',
         suggestions: [
@@ -71,10 +73,12 @@ describe("Fichier de tests concernant la récuperation de service d'un recherche
     await usecase.execute(
       'idUtilisateur',
       'idService',
+      10,
       new ServiceRechercheLongueVieAuxObjetsPresenterImpl(
         vm =>
           expect(vm).toStrictEqual<ServiceRechercheLongueVieAuxObjetsViewModel>({
             aucunResultat: false,
+            plusDeResultatsDisponibles: false,
             suggestions: [
               {
                 id: 'id1',
@@ -172,6 +176,8 @@ describe("Fichier de tests concernant la récuperation de service d'un recherche
     // GIVEN
     const usecase = new RecupererServiceLongueVieAuxObjetsUsecase(
       ServiceRechercheLongueVieAuxObjetsRepositoryMock.recupererServiceMock({
+        plusDeResultatsDisponibles: false,
+        nombreMaxResultats: 10,
         titre: 'Mon service',
         suggestions: [],
         favoris: [],
@@ -187,6 +193,7 @@ describe("Fichier de tests concernant la récuperation de service d'un recherche
     await usecase.execute(
       'idUtilisateur',
       'idService',
+      10,
       new ServiceRechercheLongueVieAuxObjetsPresenterImpl(
         vm =>
           expect(vm).toStrictEqual<ServiceRechercheLongueVieAuxObjetsViewModel>({
@@ -219,6 +226,7 @@ describe("Fichier de tests concernant la récuperation de service d'un recherche
     await usecase.execute(
       'idUtilisateur',
       'idService',
+      10,
       new ServiceRechercheLongueVieAuxObjetsPresenterImpl(
         vm => expect(vm).toEqual(null),
 

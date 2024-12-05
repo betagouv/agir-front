@@ -25,6 +25,7 @@ export interface ServiceRechercheLongueVieAuxObjetsViewModelAvecResultats extend
   favoris?: SuggestionServiceViewModel[];
   suggestions: SuggestionServiceViewModel[];
   aucunResultat: false;
+  plusDeResultatsDisponibles: boolean;
 }
 
 export interface ServiceRechercheLongueVieAuxObjetsViewModelSansResultats extends ServiceRechercheViewModelBase {
@@ -69,6 +70,7 @@ export class ServiceRechercheLongueVieAuxObjetsPresenterImpl implements ServiceR
         suggestions: serviceRecherche.suggestions.map(elem => this.buildResultat(elem)),
         favoris: serviceRecherche.favoris ? serviceRecherche.favoris.map(elem => this.buildResultat(elem)) : undefined,
         aucunResultat: false,
+        plusDeResultatsDisponibles: serviceRecherche.plusDeResultatsDisponibles,
         aside,
         categories,
       };
