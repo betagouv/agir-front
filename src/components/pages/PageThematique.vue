@@ -1,8 +1,4 @@
 <template>
-  <div class="fr-container fr-mt-4w" v-if="isLoading">
-    <CarteSkeleton />
-  </div>
-
   <div class="fr-container">
     <FilDAriane :page-courante="thematique.labelDansLeMenu" />
     <div class="fr-grid-row align-items--center fr-mb-4w">
@@ -17,7 +13,15 @@
     </div>
   </div>
 
-  <div v-if="!isLoading">
+  <div class="fr-container fr-mt-4w" v-if="isLoading">
+    <ul class="fr-grid-row fr-grid-row--gutters list-style-none fr-m-0 fr-pb-2w">
+      <li v-for="n in 6" :key="n" class="fr-mb-1w fr-col-6 fr-col-md-4 fr-col-lg-2">
+        <MissionSkeleton class="fr-mb-3w" />
+      </li>
+    </ul>
+  </div>
+
+  <div v-else>
     <section id="thematiques" v-if="missionsViewModel">
       <div class="fr-container">
         <MissionsListe :missions="missionsViewModel" />
@@ -53,7 +57,7 @@
       </div>
     </section>
 
-    <section class="fr-py-6w fr-background-contrast--grey" v-if="!isLoading && recommandationsPersonnaliseesViewModel">
+    <section class="fr-py-6w fr-background-contrast--grey" v-if="recommandationsPersonnaliseesViewModel">
       <div class="fr-container">
         <h2 class="fr-h2 fr-mb-0">Recommandé, pour vous</h2>
         <p class="fr-text--xl">Une sélection d’articles et de services, pour vous, selon vos préférences !</p>
@@ -66,13 +70,13 @@
 <script setup lang="ts">
   import { onMounted, ref } from 'vue';
   import { onBeforeRouteUpdate, useRoute } from 'vue-router';
-  import CarteSkeleton from '@/components/CarteSkeleton.vue';
   import ActionListe from '@/components/custom/Action/ActionListe.vue';
   import CoachRecommandations from '@/components/custom/Coach/CoachRecommandations.vue';
   import MissionsListe from '@/components/custom/Mission/MissionsListe.vue';
   import ServiceLink from '@/components/custom/Service/ServiceLink.vue';
   import ServiceLinkExterne from '@/components/custom/Service/ServiceLinkExterne.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
+  import MissionSkeleton from '@/components/MissionSkeleton.vue';
   import { DefiRepositoryAxios } from '@/domaines/defi/adapters/defi.repository.axios';
   import {
     DefiDescriptionViewModel,
@@ -90,8 +94,8 @@
   import { RecommandationsPersonnaliseesRepositoryAxios } from '@/domaines/recommandationsPersonnalisees/adapters/recommandationsPersonnalisees.repository.axios';
   import { RecupererRecommandationsPersonnaliseesThematiqueUsecase } from '@/domaines/recommandationsPersonnalisees/recupererRecommandationsPersonnaliseesThematique.usecase';
   import {
-    ServicesRechercheViewModel,
     ServiceRecherchePresenterImpl,
+    ServicesRechercheViewModel,
   } from '@/domaines/serviceRecherche/catalogue/adapters/serviceRecherche.presenter.impl';
   import { ServiceRechercheRepositoryAxios } from '@/domaines/serviceRecherche/catalogue/adapters/serviceRecherche.repository.axios';
   import { RecupererServicesRechercheParThematiqueUsecase } from '@/domaines/serviceRecherche/catalogue/recupererServicesRechercheParThematique.usecase';

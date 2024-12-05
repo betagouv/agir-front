@@ -23,7 +23,7 @@
       <MissionsListe v-if="missionsRecommandeesViewModel" :missions="missionsRecommandeesViewModel" />
     </div>
     <div v-else class="fr-container">
-      <CarteSkeleton />
+      <CarteSkeleton class="fr-mb-3w" />
     </div>
   </section>
 
