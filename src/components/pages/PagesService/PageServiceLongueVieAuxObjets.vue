@@ -1,25 +1,29 @@
 <template>
   <div class="fr-container">
-    <div v-if="isLoading">Chargement en cours ...</div>
+    <FilDAriane
+      :page-hierarchie="
+        useRoute().params.thematiqueId
+          ? [
+              {
+                label: `${MenuThematiques.getFromUrl(useRoute().params.thematiqueId as string).labelDansLeMenu}`,
+                url: `/thematique/${useRoute().params.thematiqueId}`,
+              },
+            ]
+          : []
+      "
+      page-courante="Service : Longue vie aux objets"
+    />
+
+    <!--    TODO: Gérer erreur dans template -->
+    <div v-if="serviceErreur">
+      <h1>Service indisponible</h1>
+      <p>{{ serviceErreur }}</p>
+    </div>
     <div v-else>
-      <FilDAriane
-        :page-hierarchie="
-          useRoute().params.thematiqueId
-            ? [
-                {
-                  label: `${MenuThematiques.getFromUrl(useRoute().params.thematiqueId as string).labelDansLeMenu}`,
-                  url: `/thematique/${useRoute().params.thematiqueId}`,
-                },
-              ]
-            : []
-        "
-        page-courante="Service : Longue vie aux objets"
-      />
-      <div v-if="serviceErreur">
-        <h1>Service indisponible</h1>
-        <p>{{ serviceErreur }}</p>
-      </div>
-      <div v-else>
+      <ServiceTemplateSkeleton
+        :is-loading="isLoading"
+        :view-model-existe="serviceRechercheLongueVieAuxObjetsViewModel !== undefined"
+      >
         <h1 class="fr-h2">
           <ServiceSelect
             v-if="serviceRechercheLongueVieAuxObjetsViewModel?.categories"
@@ -86,7 +90,7 @@
             </section>
           </div>
         </PageServiceTemplate>
-      </div>
+      </ServiceTemplateSkeleton>
     </div>
   </div>
 </template>
@@ -98,6 +102,7 @@
   import ServiceFavoris from '@/components/custom/Service/ServiceFavoris.vue';
   import ServiceListeCarte from '@/components/custom/Service/ServiceListeCarte.vue';
   import ServiceSelect from '@/components/custom/Service/ServiceSelect.vue';
+  import ServiceTemplateSkeleton from '@/components/custom/Service/ServiceTemplateSkeleton.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import {
     ServiceRechercheLongueVieAuxObjetsPresenterImpl,
