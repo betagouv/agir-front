@@ -60,10 +60,10 @@
 
 <script setup lang="ts">
   import { onMounted, ref } from 'vue';
-  import CarteSkeleton from '@/components/CarteSkeleton.vue';
   import AidesResultat from '@/components/custom/Aides/AidesResultat.vue';
   import AsideAideVelo from '@/components/custom/Aides/AidesVeloAside.vue';
   import InputNumberVertical from '@/components/custom/InputNumberVertical.vue';
+  import CarteSkeleton from '@/components/custom/Skeleton/CarteSkeleton.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import { SimulerAideVeloPresenterImpl } from '@/domaines/aides/adapters/simulerAideVelo.presenter.impl';
   import { SimulerAideVeloRepositoryAxios } from '@/domaines/aides/adapters/simulerAideVelo.repository.axios';

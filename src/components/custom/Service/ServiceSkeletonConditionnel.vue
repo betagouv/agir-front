@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-  import ServiceSkeleton from '@/components/ServiceSkeleton.vue';
+  import ServiceSkeleton from '@/components/custom/Service/ServiceSkeleton.vue';
 
   defineProps<{ viewModelExiste: boolean; isLoading: boolean }>();
 </script>

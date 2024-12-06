@@ -73,13 +73,13 @@
 
 <script lang="ts" setup>
   import { onMounted, onUnmounted, ref } from 'vue';
-  import CarteSkeleton from '@/components/CarteSkeleton.vue';
   import CoachAides from '@/components/custom/Coach/CoachAides.vue';
   import CoachBilanCarbone from '@/components/custom/Coach/CoachBilanCarbone.vue';
   import CoachContact from '@/components/custom/Coach/CoachContact.vue';
   import CoachRecommandations from '@/components/custom/Coach/CoachRecommandations.vue';
   import CoachServices from '@/components/custom/Coach/CoachServices.vue';
   import MissionsListe from '@/components/custom/Mission/MissionsListe.vue';
+  import CarteSkeleton from '@/components/custom/Skeleton/CarteSkeleton.vue';
   import { BilanCarboneAFaireViewModel } from '@/domaines/bilanCarbone/adapters/bilanCarbone.presenter.impl';
   import { BilanCarboneRepositoryAxios } from '@/domaines/bilanCarbone/adapters/bilanCarbone.repository.axios';
   import {

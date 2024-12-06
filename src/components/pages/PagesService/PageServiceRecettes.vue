@@ -15,7 +15,7 @@
     />
 
     <!--    TODO: revoir le viewModelExiste en vrai -->
-    <ServiceTemplateSkeleton :is-loading="isLoading" :view-model-existe="true">
+    <ServiceSkeletonConditionnel :is-loading="isLoading" :view-model-existe="true">
       <h1 class="fr-h2">
         Recettes
         <ServiceSelect
@@ -45,7 +45,7 @@
           </button>
         </section>
       </PageServiceTemplate>
-    </ServiceTemplateSkeleton>
+    </ServiceSkeletonConditionnel>
   </div>
 </template>
 
@@ -56,7 +56,7 @@
   import ServiceFavoris from '@/components/custom/Service/ServiceFavoris.vue';
   import ServiceListeCarte from '@/components/custom/Service/ServiceListeCarte.vue';
   import ServiceSelect from '@/components/custom/Service/ServiceSelect.vue';
-  import ServiceTemplateSkeleton from '@/components/custom/Service/ServiceTemplateSkeleton.vue';
+  import ServiceSkeletonConditionnel from '@/components/custom/Service/ServiceSkeletonConditionnel.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import {
     ServiceRechercheRecettesViewModel,
