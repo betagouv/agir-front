@@ -14,8 +14,7 @@
       "
     />
 
-    <!--    TODO: revoir le viewModelExiste en vrai -->
-    <ServiceSkeletonConditionnel :is-loading="isLoading" :view-model-existe="true">
+    <ServiceSkeletonConditionnel :is-loading="isLoading" :view-model-existe="serviceRecettesViewModel !== undefined">
       <h1 class="fr-h2">
         Recettes
         <ServiceSelect
@@ -68,39 +67,41 @@
   import { utilisateurStore } from '@/store/utilisateur';
 
   const isLoading = ref<boolean>(true);
+  const isLoadingMore = ref<boolean>(false);
   const serviceRecettesViewModel = ref<ServiceRechercheRecettesViewModel>();
-  const typeDeRecettes = ref<string>('saison');
+
   const usecase = new RecupererServiceRecettesUsecase(new ServiceRechercheRecettesAxios());
+
   let nombreMaxResultats = 10;
-  onMounted(async () => {
+  const typeDeRecettes = ref<string>('saison');
+
+  onMounted(() => {
+    lancerRecherche();
+  });
+
+  const lancerRecherche = async () => {
+    isLoading.value = true;
     await usecase.execute(
       utilisateurStore().utilisateur.id,
       typeDeRecettes.value,
       nombreMaxResultats,
-      new ServiceRechercheRecettesPresenterImpl(vm => (serviceRecettesViewModel.value = vm)),
+      new ServiceRechercheRecettesPresenterImpl(vm => {
+        serviceRecettesViewModel.value = vm;
+      }),
     );
-
     isLoading.value = false;
-  });
+  };
 
-  const chargerPlusDeRecettes = () => {
+  const chargerPlusDeRecettes = async () => {
+    isLoadingMore.value = true;
     nombreMaxResultats += 10;
-    usecase.execute(
-      utilisateurStore().utilisateur.id,
-      typeDeRecettes.value,
-      nombreMaxResultats,
-      new ServiceRechercheRecettesPresenterImpl(vm => (serviceRecettesViewModel.value = vm)),
-    );
+    await lancerRecherche();
+    isLoadingMore.value = false;
   };
 
   const updateType = (type: string) => {
     nombreMaxResultats = 10;
     typeDeRecettes.value = type;
-    usecase.execute(
-      utilisateurStore().utilisateur.id,
-      type,
-      nombreMaxResultats,
-      new ServiceRechercheRecettesPresenterImpl(vm => (serviceRecettesViewModel.value = vm)),
-    );
+    lancerRecherche();
   };
 </script>
