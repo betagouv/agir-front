@@ -1,93 +1,91 @@
 <template>
   <div class="fr-container">
-    <div v-if="isLoading">Chargement en cours ...</div>
-    <div v-else>
-      <FilDAriane
-        :page-hierarchie="
-          useRoute().params.thematiqueId
-            ? [
-                {
-                  label: `${MenuThematiques.getFromUrl(useRoute().params.thematiqueId as string).labelDansLeMenu}`,
-                  url: `/thematique/${useRoute().params.thematiqueId}`,
-                },
-              ]
-            : []
-        "
-        page-courante="Service : Longue vie aux objets"
-      />
-      <div v-if="serviceErreur">
-        <h1>Service indisponible</h1>
-        <p>{{ serviceErreur }}</p>
-      </div>
-      <div v-else>
-        <h1 class="fr-h2">
-          <ServiceSelect
-            v-if="serviceRechercheLongueVieAuxObjetsViewModel?.categories"
-            id="categories"
-            :options="serviceRechercheLongueVieAuxObjetsViewModel.categories"
-            label="Choisir une catégorie"
-            @update="updateType"
-          />
-          à proximité de chez moi
-        </h1>
-        <p>Redonnez vie à vos objets et trouvez les nouveaux en seconde main</p>
-        <PageServiceTemplate
-          v-if="serviceRechercheLongueVieAuxObjetsViewModel?.aside"
-          :aside="serviceRechercheLongueVieAuxObjetsViewModel.aside"
+    <FilDAriane
+      :page-hierarchie="
+        useRoute().params.thematiqueId
+          ? [
+              {
+                label: `${MenuThematiques.getFromUrl(useRoute().params.thematiqueId as string).labelDansLeMenu}`,
+                url: `/thematique/${useRoute().params.thematiqueId}`,
+              },
+            ]
+          : []
+      "
+      page-courante="Service : Longue vie aux objets"
+    />
+
+    <ServiceSkeletonConditionnel
+      :is-loading="isLoading"
+      :view-model-existe="serviceRechercheLongueVieAuxObjetsViewModel !== undefined"
+      :message-erreur="serviceErreur"
+    >
+      <h1 class="fr-h2">
+        <ServiceSelect
+          v-if="serviceRechercheLongueVieAuxObjetsViewModel?.categories"
+          id="categories"
+          :options="serviceRechercheLongueVieAuxObjetsViewModel.categories"
+          label="Choisir une catégorie"
+          @update="updateType"
+        />
+        à proximité de chez moi
+      </h1>
+      <p>Redonnez vie à vos objets et trouvez les nouveaux en seconde main</p>
+      <PageServiceTemplate
+        v-if="serviceRechercheLongueVieAuxObjetsViewModel?.aside"
+        :aside="serviceRechercheLongueVieAuxObjetsViewModel.aside"
+      >
+        <div
+          v-if="
+            (serviceRechercheLongueVieAuxObjetsViewModel as ServiceRechercheLongueVieAuxObjetsViewModelSansResultats)
+              .aucunResultat
+          "
+          class="text--center"
         >
-          <div
+          <img alt="" height="250" src="/service_aucun_resultat.svg" />
+          <p class="fr-text--lg">😢 Aucun résultat n’est encore disponible pour votre localisation</p>
+        </div>
+        <div v-else>
+          <section
             v-if="
-              (serviceRechercheLongueVieAuxObjetsViewModel as ServiceRechercheLongueVieAuxObjetsViewModelSansResultats)
-                .aucunResultat
+              serviceRechercheLongueVieAuxObjetsViewModel &&
+              (serviceRechercheLongueVieAuxObjetsViewModel as ServiceRechercheLongueVieAuxObjetsViewModelAvecResultats)
+                .favoris
             "
-            class="text--center"
           >
-            <img alt="" height="250" src="/service_aucun_resultat.svg" />
-            <p class="fr-text--lg">😢 Aucun résultat n’est encore disponible pour votre localisation</p>
-          </div>
-          <div v-else>
-            <section
-              v-if="
-                serviceRechercheLongueVieAuxObjetsViewModel &&
+            <ServiceFavoris
+              :services-recherche-favoris-view-model="
                 (
                   serviceRechercheLongueVieAuxObjetsViewModel as ServiceRechercheLongueVieAuxObjetsViewModelAvecResultats
-                ).favoris
+                ).favoris!
               "
+              titre="Mes lieux favoris"
+            />
+          </section>
+          <section>
+            <h2 class="fr-h3">Suggestions</h2>
+            <ServiceListeCarte
+              :suggestions-service-view-model="
+                (
+                  serviceRechercheLongueVieAuxObjetsViewModel as ServiceRechercheLongueVieAuxObjetsViewModelAvecResultats
+                ).suggestions
+              "
+            />
+            <ServiceSkeletonCartes v-if="isLoadingMore" />
+            <button
+              v-if="
+                (
+                  serviceRechercheLongueVieAuxObjetsViewModel as ServiceRechercheLongueVieAuxObjetsViewModelAvecResultats
+                ).plusDeResultatsDisponibles
+              "
+              class="fr-link text--underline"
+              @click="chargerPlusDeResultats()"
             >
-              <ServiceFavoris
-                :services-recherche-favoris-view-model="
-                  (
-                    serviceRechercheLongueVieAuxObjetsViewModel as ServiceRechercheLongueVieAuxObjetsViewModelAvecResultats
-                  ).favoris!
-                "
-                titre="Mes lieux favoris"
-              />
-            </section>
-            <section>
-              <h2 class="fr-h3">Suggestions</h2>
-              <ServiceListeCarte
-                :suggestions-service-view-model="
-                  (
-                    serviceRechercheLongueVieAuxObjetsViewModel as ServiceRechercheLongueVieAuxObjetsViewModelAvecResultats
-                  ).suggestions
-                "
-              />
-              <button
-                v-if="
-                  (
-                    serviceRechercheLongueVieAuxObjetsViewModel as ServiceRechercheLongueVieAuxObjetsViewModelAvecResultats
-                  ).plusDeResultatsDisponibles
-                "
-                class="fr-link text--underline"
-                @click="chargerPlusDeResultats()"
-              >
-                Voir plus de résultats
-              </button>
-            </section>
-          </div>
-        </PageServiceTemplate>
-      </div>
-    </div>
+              Voir plus de résultats
+            </button>
+          </section>
+        </div>
+      </PageServiceTemplate>
+    </ServiceSkeletonConditionnel>
   </div>
 </template>
 
@@ -98,6 +96,8 @@
   import ServiceFavoris from '@/components/custom/Service/ServiceFavoris.vue';
   import ServiceListeCarte from '@/components/custom/Service/ServiceListeCarte.vue';
   import ServiceSelect from '@/components/custom/Service/ServiceSelect.vue';
+  import ServiceSkeletonCartes from '@/components/custom/Service/ServiceSkeletonCartes.vue';
+  import ServiceSkeletonConditionnel from '@/components/custom/Service/ServiceSkeletonConditionnel.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import {
     ServiceRechercheLongueVieAuxObjetsPresenterImpl,
@@ -111,6 +111,7 @@
   import { utilisateurStore } from '@/store/utilisateur';
 
   const isLoading = ref<boolean>(true);
+  const isLoadingMore = ref<boolean>(false);
   const serviceRechercheLongueVieAuxObjetsViewModel = ref<ServiceRechercheLongueVieAuxObjetsViewModel>();
 
   const usecase = new RecupererServiceLongueVieAuxObjetsUsecase(new ServiceRechercheLongueVieAuxObjetsAxios());
@@ -138,9 +139,11 @@
     isLoading.value = false;
   }
 
-  const chargerPlusDeResultats = () => {
+  const chargerPlusDeResultats = async () => {
+    isLoadingMore.value = true;
     nombreMaxResultats += 10;
-    lancerRecherche();
+    await lancerRecherche();
+    isLoadingMore.value = false;
   };
 
   const updateType = (type: string) => {
