@@ -4,7 +4,7 @@
       "details": [
       {
         "appID": "PR958DC548.fr.gouv.agir",
-        "paths": ["NOT /thematique/*","*"]
+        "paths": ["*"]
       },
       {
         "appID": "PR958DC548.fr.gouv.agir.dev2",
