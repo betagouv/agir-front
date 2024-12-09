@@ -3,6 +3,10 @@ import { ServiceRechercheFruitsEtLegumesRepository } from '@/domaines/serviceRec
 import { ServiceRechercheFruitsEtLegumes } from '@/domaines/serviceRecherche/fruitsEtLegumes/recupererServiceFruitsEtLegumes.usecase';
 import { ServiceRechercheCategorieApiModel } from '@/domaines/serviceRecherche/presDeChezNous/adapters/serviceRecherchePresDeChezNous.repository.axios';
 
+interface ServiceRechercheFruitsEtLegumesApiResultatsModel {
+  resultats: ServiceRechercheFruitsEtLegumesApiModel[];
+}
+
 interface ServiceRechercheFruitsEtLegumesApiModel {
   id: string;
   titre: string;
@@ -21,8 +25,8 @@ export class ServiceRechercheFruitsEtLegumesAxios implements ServiceRechercheFru
       `/utilisateurs/${idUtilisateur}/recherche_services/${idService}/categories`,
     );
 
-    const reponse = await axiosInstance.post<ServiceRechercheFruitsEtLegumesApiModel[]>(
-      `/utilisateurs/${idUtilisateur}/recherche_services/${idService}/search`,
+    const reponse = await axiosInstance.post<ServiceRechercheFruitsEtLegumesApiResultatsModel>(
+      `/utilisateurs/${idUtilisateur}/recherche_services/${idService}/search2`,
       {
         categorie: mois,
         nombre_max_resultats: 0,
@@ -31,7 +35,7 @@ export class ServiceRechercheFruitsEtLegumesAxios implements ServiceRechercheFru
     );
 
     return {
-      listeFruitsEtLegumes: reponse.data.map(elem => ({
+      listeFruitsEtLegumes: reponse.data.resultats.map(elem => ({
         titre: elem.titre,
         impactCarboneKg: elem.impact_carbone_kg,
         urlImage: elem.image_url,
