@@ -1,5 +1,25 @@
 # Changelog
 
+## [1.32.0](https://github.com/betagouv/agir-front/compare/v1.31.0...v1.32.0) (2024-12-09)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* ajout d'un bouton 'voir plus de résultats' pour longue vie aux objets et passer à l'api search v2 ([#809](https://github.com/betagouv/agir-front/issues/809)) ([6b0f03f](https://github.com/betagouv/agir-front/commit/6b0f03fcfcf017ac7be1f2acb964d2890cce4fab))
+* ajout d'un stepper KYC et de skeleton sur les pages quiz et articles ([#800](https://github.com/betagouv/agir-front/issues/800)) ([ea9f0bb](https://github.com/betagouv/agir-front/commit/ea9f0bb4825817afd385760f46c80d2a583a0988))
+* mise à jour du texte de feedback ([#808](https://github.com/betagouv/agir-front/issues/808)) ([1b89158](https://github.com/betagouv/agir-front/commit/1b89158187d865d8718adf2f2f93513d2e9693ba))
+
+
+### 🐛 Corrections de bogues
+
+* **applinks:** mise à jour des chemins pour l'app agir ([#811](https://github.com/betagouv/agir-front/issues/811)) ([0092f30](https://github.com/betagouv/agir-front/commit/0092f30144be2d5b9eda0a1e121213b7c12d8555))
+
+
+### 👷 Autres changements
+
+* passage à l'api v3 pour les recommandations ([#805](https://github.com/betagouv/agir-front/issues/805)) ([11399ab](https://github.com/betagouv/agir-front/commit/11399ab1ff1a9dad1730f2f9fecf7b839f392cb1))
+* skeleton amélioré pour l'accueil et la page thématique ([#804](https://github.com/betagouv/agir-front/issues/804)) ([b57374f](https://github.com/betagouv/agir-front/commit/b57374f9e6b81adadae6e4e3e99a3ddeddeb1fb8))
+
 ## [1.31.0](https://github.com/betagouv/agir-front/compare/v1.30.0...v1.31.0) (2024-12-03)
 
 
