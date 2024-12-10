@@ -3,6 +3,11 @@ import { ServiceRecherchePresDeChezNousRepository } from '@/domaines/serviceRech
 import { ServiceRecherchePresDeChezNousResultatDetail } from '@/domaines/serviceRecherche/presDeChezNous/recupererDetailServicePresDeChezNous.usecase';
 import { ServiceRecherchePresDeChezNous } from '@/domaines/serviceRecherche/presDeChezNous/recupererServicePresDeChezNous.usecase';
 
+interface ServiceRechercheApiModelResultatsModel {
+  resultats: ServiceRechercheApiModel[];
+  encore_plus_resultats_dispo: boolean;
+}
+
 interface ServiceRechercheApiModel {
   id: string;
   titre: string;
@@ -51,8 +56,8 @@ export class ServiceRecherchePresDeChezNousAxios implements ServiceRecherchePres
         `/utilisateurs/${idUtilisateur}/recherche_services/${idService}/categories`,
       );
 
-      const responseSuggestionsPromise = axiosInstance.post<ServiceRechercheApiModel[]>(
-        `/utilisateurs/${idUtilisateur}/recherche_services/${idService}/search`,
+      const responseSuggestionsPromise = axiosInstance.post<ServiceRechercheApiModelResultatsModel>(
+        `/utilisateurs/${idUtilisateur}/recherche_services/${idService}/search2`,
         {
           categorie,
           nombre_max_resultats: 0,
@@ -88,7 +93,7 @@ export class ServiceRecherchePresDeChezNousAxios implements ServiceRecherchePres
       return {
         estEnErreur: false,
         titre: 'Mon titre',
-        suggestions: responseSuggestions.data.map(mapServiceRecherche),
+        suggestions: responseSuggestions.data.resultats.map(mapServiceRecherche),
         favoris: responseFavoris.data.length > 0 ? responseFavoris.data.map(mapServiceRecherche) : undefined,
         categories: responseCategorie.data.map(elem => ({
           code: elem.code,
