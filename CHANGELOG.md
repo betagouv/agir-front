@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.32.2](https://github.com/betagouv/agir-front/compare/v1.32.1...v1.32.2) (2024-12-10)
+
+
+### 👷 Autres changements
+
+* ajouter les sources maps pour sentry ([#822](https://github.com/betagouv/agir-front/issues/822)) ([8041b54](https://github.com/betagouv/agir-front/commit/8041b5407de77821268bdb1e3b625ea5281809a3))
+* Bump @vitejs/plugin-vue from 5.2.0 to 5.2.1 ([#815](https://github.com/betagouv/agir-front/issues/815)) ([d5253a5](https://github.com/betagouv/agir-front/commit/d5253a56fdb4391419d27c48f69c963966cc99c9))
+* Bump chart.js from 4.4.6 to 4.4.7 ([#816](https://github.com/betagouv/agir-front/issues/816)) ([541268e](https://github.com/betagouv/agir-front/commit/541268ebf0ab1eb9f62aa90f8fdb22bc3b431dbc))
+* Bump dotenv from 16.4.5 to 16.4.7 ([#814](https://github.com/betagouv/agir-front/issues/814)) ([4585282](https://github.com/betagouv/agir-front/commit/45852820cfdcf8792a2b02841cfff63f61f74d19))
+* Bump nanoid from 3.3.7 to 3.3.8 ([#819](https://github.com/betagouv/agir-front/issues/819)) ([9072647](https://github.com/betagouv/agir-front/commit/907264766e90a11878a2a04855bbfafec279223f))
+* Bump pinia from 2.2.8 to 2.3.0 ([#813](https://github.com/betagouv/agir-front/issues/813)) ([b28837b](https://github.com/betagouv/agir-front/commit/b28837b16980e4211bb8a5fb7b8e49a55495ed01))
+
 ## [1.32.1](https://github.com/betagouv/agir-front/compare/v1.32.0...v1.32.1) (2024-12-10)
 
 
