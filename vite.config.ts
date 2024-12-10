@@ -1,10 +1,22 @@
+import { sentryVitePlugin } from '@sentry/vite-plugin';
 import vue from '@vitejs/plugin-vue';
 import * as path from 'path';
 import { defineConfig } from 'vite';
 
 // https://vitejs.dev/config/
 export const viteConfig = {
-  plugins: [vue()],
+  build: {
+    sourcemap: true,
+  },
+  plugins: [
+    vue(),
+    sentryVitePlugin({
+      authToken: process.env.SENTRY_AUTH_TOKEN,
+      org: 'betagouv',
+      project: 'front-dev',
+      url: 'https://sentry.incubateur.net/',
+    }),
+  ],
   server: {
     host: '0.0.0.0',
   },
