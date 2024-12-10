@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.33.0](https://github.com/betagouv/agir-front/compare/v1.32.2...v1.33.0) (2024-12-10)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* ajout d'un bouton aucune de ces propositions pour les mosaics ([#821](https://github.com/betagouv/agir-front/issues/821)) ([f1cece1](https://github.com/betagouv/agir-front/commit/f1cece146246fd4077e7ace2813780138a9ca28d))
+
+
+### 👷 Autres changements
+
+* sentry uniquement en prod ([#823](https://github.com/betagouv/agir-front/issues/823)) ([e2ec32c](https://github.com/betagouv/agir-front/commit/e2ec32c82bb855b16d1f5e644383af3421fbd913))
+
 ## [1.32.2](https://github.com/betagouv/agir-front/compare/v1.32.1...v1.32.2) (2024-12-10)
 
 
