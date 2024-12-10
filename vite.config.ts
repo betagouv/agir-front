@@ -10,12 +10,16 @@ export const viteConfig = {
   },
   plugins: [
     vue(),
-    sentryVitePlugin({
-      authToken: process.env.SENTRY_AUTH_TOKEN,
-      org: 'betagouv',
-      project: 'front-dev',
-      url: 'https://sentry.incubateur.net/',
-    }),
+    ...(process.env.VITE_ENV === 'production'
+      ? [
+          sentryVitePlugin({
+            authToken: process.env.SENTRY_AUTH_TOKEN,
+            org: 'betagouv',
+            project: 'front-dev',
+            url: 'https://sentry.incubateur.net/',
+          }),
+        ]
+      : []),
   ],
   server: {
     host: '0.0.0.0',
