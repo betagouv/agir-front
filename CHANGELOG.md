@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.32.1](https://github.com/betagouv/agir-front/compare/v1.32.0...v1.32.1) (2024-12-10)
+
+
+### 👷 Autres changements
+
+* migration API de defis vers defis_v2 pour la récupérations de la liste des défis depuis une thématique ([#817](https://github.com/betagouv/agir-front/issues/817)) ([5e15710](https://github.com/betagouv/agir-front/commit/5e15710be15443e96c8110953d719b05d1373e9a))
+* migration des l'api search vers search2 ([#812](https://github.com/betagouv/agir-front/issues/812)) ([b5f1396](https://github.com/betagouv/agir-front/commit/b5f139661f690e9e71db4882bd9a610f6c66252b))
+
 ## [1.32.0](https://github.com/betagouv/agir-front/compare/v1.31.0...v1.32.0) (2024-12-09)
 
 
