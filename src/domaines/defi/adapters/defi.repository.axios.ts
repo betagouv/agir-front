@@ -23,7 +23,7 @@ export class DefiRepositoryAxios implements DefiRepository {
   async recupererListeDefisParThematique(utilisateurId: string, thematiqueId: string): Promise<Defi[]> {
     const axiosInstance = AxiosFactory.getAxios();
     const response = await axiosInstance.get<DefiApiModel[]>(
-      `/utilisateurs/${utilisateurId}/thematiques/${thematiqueId}/defis`,
+      `/utilisateurs/${utilisateurId}/defis_v2?thematique=${thematiqueId}`,
     );
 
     return response.data.map((apiModel: DefiApiModel) => {
