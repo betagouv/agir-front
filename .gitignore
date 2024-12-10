@@ -54,4 +54,5 @@ package-lock.json
 /playwright-report/
 /blob-report/
 /playwright/.cache/
-.env
+.env.local
+.env.sentry-build-plugin
