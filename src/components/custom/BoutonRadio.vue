@@ -1,36 +1,36 @@
 <template>
   <fieldset
-    :class="`fr-fieldset ${orientation === 'horizontal' && 'boutonRadio--horizontal'}`"
     :id="name"
     :aria-labelledby="`radio-legend-${name}`"
+    :class="`fr-fieldset ${orientation === 'horizontal' && 'boutonRadio--horizontal'}`"
   >
     <legend
-      class="fr-fieldset__legend--regular fr-fieldset__legend fr-pb-0"
-      :class="legendeSize === 'l' ? 'fr-h4' : 'fr-mb-1w'"
       :id="`radio-legend-${name}`"
+      :class="legendeSize === 'l' ? 'fr-h4' : 'fr-mb-1w'"
+      class="fr-fieldset__legend--regular fr-fieldset__legend fr-pb-0"
     >
       {{ legende }}
       <span v-if="description" class="fr-hint-text">{{ description }}</span>
     </legend>
     <div class="fr-grid-row">
-      <div :class="`fr-fieldset__element ${col}`" v-for="option in options" :key="option.label">
+      <div v-for="option in options" :key="option.label" :class="`fr-fieldset__element ${col}`">
         <div
-          class="background--white"
           :class="`fr-radio-group border fr-col
           ${option.value === selectedValue ? 'fr-text--bold border--bleu-dark' : ''}
           ${option.customClass}
           `"
+          class="background--white"
         >
           <input
-            type="radio"
             :id="`${option.value}-${name}`"
-            :name="name"
-            :value="option.value"
-            @change.prevent="onInputChange"
             :checked="option.value === defaultValue"
             :disabled="option.disabled"
+            :name="name"
+            :value="option.value"
+            type="radio"
+            @change.prevent="onInputChange"
           />
-          <label class="fr-label" :for="`${option.value}-${name}`">
+          <label :for="`${option.value}-${name}`" class="fr-label">
             {{ option.label }}
           </label>
         </div>
@@ -39,8 +39,8 @@
   </fieldset>
 </template>
 
-<script setup lang="ts">
-  import { ref, watch } from 'vue';
+<script lang="ts" setup>
+  import { onUpdated, ref, watch } from 'vue';
 
   const props = defineProps<{
     legende: string;
@@ -79,6 +79,8 @@
 
     emit('update:modelValue', valueToUpdate);
   };
+
+  onUpdated(() => {});
 </script>
 
 <style scoped>

@@ -4,17 +4,22 @@
     <div class="fr-grid-row fr-grid-row--gutters">
       <label v-for="option in options" :key="option.label" class="fr-col-6 fr-col-md-3 position--relative">
         <input
-          type="checkbox"
           :id="`${option.value}-${name}`"
+          :checked="option.checked"
           :name="name"
           :value="option.value"
+          type="checkbox"
           @change="updateValue($event)"
-          :checked="option.checked"
         />
-        <span class="fr-icon-checkbox-circle-fill text--bleu mosaic__checkbox" aria-hidden="true"></span>
+        <img
+          alt=""
+          aria-hidden="true"
+          class="fr-icon-checkbox-circle-fill text--bleu mosaic__checkbox"
+          src="/ic-check-mosaic.svg"
+        />
         <span class="mosaic__label border border-radius--md">
           <span v-if="option.emoji">{{ option.emoji }}</span>
-          <img v-else :src="option.picto" height="50" alt="" />
+          <img v-else :src="option.picto" alt="" height="50" />
           {{ option.label }}
         </span>
       </label>
@@ -22,7 +27,7 @@
   </fieldset>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
   import { ref } from 'vue';
 
   const props = defineProps<{
@@ -93,6 +98,7 @@
     position: absolute;
     top: 0;
     right: 0;
+    height: 1.5rem;
   }
 
   label {
