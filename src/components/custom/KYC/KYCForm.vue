@@ -70,6 +70,13 @@
     <button :disabled="isDisabled" :title="wordingBouton" class="fr-btn fr-btn--lg" type="submit">
       {{ wordingBouton }}
     </button>
+    <button
+      v-if="questionViewModel.type === 'mosaic_boolean'"
+      class="fr-link fr-icon-checkbox-circle-fill text--underline fr-ml-2w"
+      @click.prevent="validerChoixAucuneReponse"
+    >
+      Aucune de ces propositions
+    </button>
     <slot></slot>
   </form>
 </template>
@@ -91,6 +98,7 @@
   import { utilisateurStore } from '@/store/utilisateur';
 
   const props = defineProps<{ questionViewModel: QuestionViewModel; wordingBouton: string; styleDuTitre?: string }>();
+  const questionViewModel = ref<QuestionViewModel>(props.questionViewModel);
   const reponse = defineModel<string | string[]>('reponse', { default: '' });
   const isDisabled = ref<boolean>(true);
   const emit = defineEmits<{ (e: 'update:soumissionKyc', value: string[]): void }>();
@@ -138,7 +146,29 @@
         reponse.value.toString(),
       );
     }
-
     emit('update:soumissionKyc', [reponse.value].flat());
+  };
+
+  const validerChoixAucuneReponse = async () => {
+    const envoyerReponsesMultiplesUsecase = new EnvoyerReponsesMultiplesUsecase(
+      new QuestionRepositoryAxios(),
+      ToDoListEventBusImpl.getInstance(),
+    );
+    await envoyerReponsesMultiplesUsecase.execute(
+      utilisateurStore().utilisateur.id,
+      props.questionViewModel.id,
+      props.questionViewModel.reponses_possibles.map(r => ({
+        code: r.id,
+        boolean_value: false,
+      })),
+    );
+
+    reponse.value = [];
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach(checkbox => {
+      (checkbox as HTMLInputElement).checked = false;
+    });
+
+    emit('update:soumissionKyc', reponse.value);
   };
 </script>
