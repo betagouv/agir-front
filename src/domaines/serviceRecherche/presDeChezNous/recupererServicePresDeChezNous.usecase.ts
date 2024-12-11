@@ -16,6 +16,7 @@ export interface ServiceRecherchePresDeChezNous extends ServiceRechercheBase {
   suggestions: ServiceRecherchePresDeChezNousResultat[];
   favoris?: ServiceRecherchePresDeChezNousResultat[];
   estEnErreur: boolean;
+  plusDeResultatsDisponibles: boolean;
 }
 
 export class RecupererServicePresDeChezNousUsecase {
@@ -24,9 +25,14 @@ export class RecupererServicePresDeChezNousUsecase {
   async execute(
     idUtilisateur: string,
     idService: string,
+    nombreMaxResultats: number,
     recupererServiceRecherchePresDeChezNousPresenter: ServiceRecherchePresDeChezNousPresenter,
   ) {
-    const service = await this.serviceRecherchePresDeChezNousRepository.recupererService(idUtilisateur, idService);
+    const service = await this.serviceRecherchePresDeChezNousRepository.recupererService(
+      idUtilisateur,
+      idService,
+      nombreMaxResultats,
+    );
     if (service.estEnErreur) {
       recupererServiceRecherchePresDeChezNousPresenter.presenteErreur();
     } else {

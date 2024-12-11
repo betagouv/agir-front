@@ -2,6 +2,11 @@ import { ServiceRecherchePresDeChezNousResultatDetail } from '@/domaines/service
 import { ServiceRecherchePresDeChezNous } from '@/domaines/serviceRecherche/presDeChezNous/recupererServicePresDeChezNous.usecase';
 
 export interface ServiceRecherchePresDeChezNousRepository {
-  recupererService(idUtilisateur: string, idService: string): Promise<ServiceRecherchePresDeChezNous>;
+  recupererService(
+    idUtilisateur: string,
+    idService: string,
+    nombreMaxResultats: number,
+  ): Promise<ServiceRecherchePresDeChezNous>;
+
   recupererDetail(idUtilisateur: string, idService: string): Promise<ServiceRecherchePresDeChezNousResultatDetail>;
 }

@@ -22,6 +22,7 @@ export interface ServiceRecherchePresDeChezNousViewModelAvecResultats extends Se
   favoris?: SuggestionServiceViewModel[];
   suggestions: SuggestionServiceViewModel[];
   aucunResultat: false;
+  plusDeResultatsDisponibles: boolean;
 }
 
 export interface ServiceRecherchePresDeChezNousViewModelSansResultats extends ServiceRechercheViewModelBase {
@@ -90,6 +91,7 @@ export class ServiceRecherchePresDeChezNousPresenterImpl implements ServiceReche
         aucunResultat: false,
         aside,
         categories,
+        plusDeResultatsDisponibles: serviceRecherche.plusDeResultatsDisponibles,
       };
     } else {
       serviceRechercheViewModel = {

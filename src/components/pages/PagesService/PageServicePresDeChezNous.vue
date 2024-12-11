@@ -3,7 +3,6 @@
     <div v-if="isLoading">Chargement en cours ...</div>
     <div v-else>
       <FilDAriane
-        page-courante="Service : Près de chez nous"
         :page-hierarchie="
           useRoute().params.thematiqueId
             ? [
@@ -14,6 +13,7 @@
               ]
             : []
         "
+        page-courante="Service : Près de chez nous"
       />
       <div v-if="serviceErreur">
         <h1>Service indisponible</h1>
@@ -23,8 +23,8 @@
         <h1 class="fr-h2">
           <ServiceSelect
             id="categories"
-            label="Choisir une catégorie"
             :options="(serviceRecherchePresDeChezNousViewModel as ServiceRechercheViewModelBase).categories"
+            label="Choisir une catégorie"
             @update="updateType"
           />
           à proximité de chez moi
@@ -32,13 +32,13 @@
         <p>Produits locaux, bio, de saisons et vendeurs de vrac, pour une cuisine savoureuse et responsable</p>
         <PageServiceTemplate :aside="(serviceRecherchePresDeChezNousViewModel as ServiceRechercheViewModelBase).aside">
           <div
-            class="text--center"
             v-if="
               (serviceRecherchePresDeChezNousViewModel as ServiceRecherchePresDeChezNousViewModelSansResultats)
                 .aucunResultat
             "
+            class="text--center"
           >
-            <img src="/service_aucun_resultat.svg" height="250" alt="" />
+            <img alt="" height="250" src="/service_aucun_resultat.svg" />
             <p class="fr-text--lg">😢 Aucun résultat n’est encore disponible pour votre localisation</p>
           </div>
           <div v-else>
@@ -50,11 +50,11 @@
               "
             >
               <ServiceFavoris
-                titre="Mes lieux favoris"
                 :services-recherche-favoris-view-model="
                   (serviceRecherchePresDeChezNousViewModel as ServiceRecherchePresDeChezNousViewModelAvecResultats)
                     .favoris!
                 "
+                titre="Mes lieux favoris"
               />
             </section>
             <section>
@@ -65,6 +65,16 @@
                     .suggestions
                 "
               />
+              <button
+                v-if="
+                  (serviceRecherchePresDeChezNousViewModel as ServiceRecherchePresDeChezNousViewModelAvecResultats)
+                    .plusDeResultatsDisponibles
+                "
+                class="fr-link text--underline"
+                @click="chargerPlusDeResultats()"
+              >
+                Voir plus de résultats
+              </button>
             </section>
           </div>
         </PageServiceTemplate>
@@ -73,7 +83,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
   import { onMounted, ref } from 'vue';
   import { useRoute } from 'vue-router';
   import PageServiceTemplate from '@/components/custom/Service/PageServiceTemplate.vue';
@@ -99,29 +109,35 @@
   const usecase = new RecupererServicePresDeChezNousUsecase(new ServiceRecherchePresDeChezNousAxios());
 
   const serviceErreur = ref<string | null>(null);
+  let nombreMaxResultats = 10;
+  const typeDeRecherche = ref<string>('');
+
+  async function lancerRecherche() {
+    await usecase.execute(
+      utilisateurStore().utilisateur.id,
+      typeDeRecherche.value,
+      nombreMaxResultats,
+      new ServiceRecherchePresDeChezNousPresenterImpl(
+        vm => (serviceRecherchePresDeChezNousViewModel.value = vm),
+        error => (serviceErreur.value = error),
+      ),
+    );
+
+    isLoading.value = false;
+  }
 
   onMounted(async () => {
-    await usecase.execute(
-      utilisateurStore().utilisateur.id,
-      '',
-      new ServiceRecherchePresDeChezNousPresenterImpl(
-        vm => (serviceRecherchePresDeChezNousViewModel.value = vm),
-        error => (serviceErreur.value = error),
-      ),
-    );
-
-    isLoading.value = false;
+    await lancerRecherche();
   });
 
-  const updateType = async (type: string) => {
-    await usecase.execute(
-      utilisateurStore().utilisateur.id,
-      type,
-      new ServiceRecherchePresDeChezNousPresenterImpl(
-        vm => (serviceRecherchePresDeChezNousViewModel.value = vm),
-        error => (serviceErreur.value = error),
-      ),
-    );
-    isLoading.value = false;
+  const chargerPlusDeResultats = () => {
+    nombreMaxResultats += 10;
+    lancerRecherche();
+  };
+
+  const updateType = (type: string) => {
+    nombreMaxResultats = 10;
+    typeDeRecherche.value = type;
+    lancerRecherche();
   };
 </script>

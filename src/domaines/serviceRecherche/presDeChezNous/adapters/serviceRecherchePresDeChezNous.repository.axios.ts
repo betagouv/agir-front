@@ -47,7 +47,11 @@ export interface ServiceRechercheCategorieApiModel {
 
 export class ServiceRecherchePresDeChezNousAxios implements ServiceRecherchePresDeChezNousRepository {
   @intercept401()
-  async recupererService(idUtilisateur: string, categorie: string): Promise<ServiceRecherchePresDeChezNous> {
+  async recupererService(
+    idUtilisateur: string,
+    categorie: string,
+    nombreMaxResultats: number,
+  ): Promise<ServiceRecherchePresDeChezNous> {
     const idService = 'proximite';
     const axiosInstance = AxiosFactory.getAxios();
 
@@ -60,7 +64,7 @@ export class ServiceRecherchePresDeChezNousAxios implements ServiceRecherchePres
         `/utilisateurs/${idUtilisateur}/recherche_services/${idService}/search2`,
         {
           categorie,
-          nombre_max_resultats: 0,
+          nombre_max_resultats: nombreMaxResultats,
           rayon_metres: 5000,
         },
       );
@@ -100,6 +104,7 @@ export class ServiceRecherchePresDeChezNousAxios implements ServiceRecherchePres
           label: elem.label,
           estLaCategorieParDefaut: elem.is_default,
         })),
+        plusDeResultatsDisponibles: responseSuggestions.data.encore_plus_resultats_dispo,
       };
     } catch {
       return {
@@ -108,6 +113,7 @@ export class ServiceRecherchePresDeChezNousAxios implements ServiceRecherchePres
         favoris: [],
         categories: [],
         estEnErreur: true,
+        plusDeResultatsDisponibles: false,
       };
     }
   }

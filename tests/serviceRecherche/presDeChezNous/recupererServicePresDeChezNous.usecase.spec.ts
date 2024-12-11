@@ -64,6 +64,7 @@ describe("Fichier de tests concernant la récuperation de service d'un recherche
           { code: 'code', label: 'label', estLaCategorieParDefaut: true },
           { code: 'code', label: 'label', estLaCategorieParDefaut: false },
         ],
+        plusDeResultatsDisponibles: false,
       }),
     );
 
@@ -71,6 +72,7 @@ describe("Fichier de tests concernant la récuperation de service d'un recherche
     await usecase.execute(
       'idUtilisateur',
       'idService',
+      5,
       new ServiceRecherchePresDeChezNousPresenterImpl(
         vm =>
           expect(vm).toStrictEqual<ServiceRecherchePresDeChezNousViewModel>({
@@ -155,6 +157,7 @@ describe("Fichier de tests concernant la récuperation de service d'un recherche
               { code: 'code', label: 'label', estLaCategorieParDefaut: true },
               { code: 'code', label: 'label', estLaCategorieParDefaut: false },
             ],
+            plusDeResultatsDisponibles: false,
           }),
         error => expect(error).toEqual(null),
       ),
@@ -173,6 +176,7 @@ describe("Fichier de tests concernant la récuperation de service d'un recherche
           { code: 'code', label: 'label', estLaCategorieParDefaut: false },
         ],
         estEnErreur: false,
+        plusDeResultatsDisponibles: false,
       }),
     );
 
@@ -180,6 +184,7 @@ describe("Fichier de tests concernant la récuperation de service d'un recherche
     await usecase.execute(
       'idUtilisateur',
       'idService',
+      5,
       new ServiceRecherchePresDeChezNousPresenterImpl(
         vm =>
           expect(vm).toStrictEqual<ServiceRecherchePresDeChezNousViewModel>({
@@ -210,6 +215,7 @@ describe("Fichier de tests concernant la récuperation de service d'un recherche
     await usecase.execute(
       'idUtilisateur',
       'idService',
+      5,
       new ServiceRecherchePresDeChezNousPresenterImpl(
         vm => expect(vm).toEqual(null),
 
