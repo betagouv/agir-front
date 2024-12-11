@@ -10,8 +10,10 @@ export class ServiceRecherchePresDeChezNousRepositoryEnErreur implements Service
       favoris: [],
       categories: [],
       estEnErreur: true,
+      plusDeResultatsDisponibles: false,
     } as ServiceRecherchePresDeChezNous);
   }
+
   recupererDetail(idUtilisateur: string, idService: string): Promise<ServiceRecherchePresDeChezNousResultatDetail> {
     throw new Error('Method not implemented.');
   }
