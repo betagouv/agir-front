@@ -4,7 +4,7 @@ import {
 } from '@/domaines/nouveauParcours/ports/nouveauParcours.presenter';
 import { NouveauParcours } from '@/domaines/nouveauParcours/recuperationDonneesNouveauParcours.usecase';
 
-class NouveauParcoursPresenterImpl implements NouveauParcoursPresenter {
+export class NouveauParcoursPresenterImpl implements NouveauParcoursPresenter {
   constructor(private readonly viewModel: (nouveauParcoursViewModel: NouveauParcoursViewModel) => void) {}
 
   displayNouveauParcours(nouveauParcours: NouveauParcours): void {

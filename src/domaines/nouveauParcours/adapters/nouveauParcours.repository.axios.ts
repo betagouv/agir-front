@@ -21,7 +21,7 @@ interface NouveauParcoursModeAPI {
   result_PDCN_zero_dechet: number;
 }
 
-class NouveauParcoursRepositoryAxios implements NouveauParcoursRepository {
+export class NouveauParcoursRepositoryAxios implements NouveauParcoursRepository {
   async getNouveauParcours(codePostal: string): Promise<NouveauParcours> {
     const axios = AxiosFactory.getAxios();
     const response = await axios.get<NouveauParcoursModeAPI>(`/code_postal_synthese/${codePostal}`);

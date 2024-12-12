@@ -26,7 +26,7 @@ export interface NouveauParcours {
   };
 }
 
-class RecuperationDonneesNouveauParcoursUsecase {
+export class RecuperationDonneesNouveauParcoursUsecase {
   constructor(private readonly nouveauParcoursRepository: NouveauParcoursRepository) {}
 
   async execute(codePostal: string, presenter: NouveauParcoursPresenter): Promise<void> {
