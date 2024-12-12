@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.34.0](https://github.com/betagouv/agir-front/compare/v1.33.0...v1.34.0) (2024-12-12)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* suppression des images pour recettes/pres de chez nous/longue vie aux objets et ajout du 'voir plus de résultats' pour 'pres de chez nous' ([#825](https://github.com/betagouv/agir-front/issues/825)) ([f7f1bf5](https://github.com/betagouv/agir-front/commit/f7f1bf59900b571265ad6ec985a6c9eaa1612564))
+
 ## [1.33.0](https://github.com/betagouv/agir-front/compare/v1.32.2...v1.33.0) (2024-12-10)
 
 
