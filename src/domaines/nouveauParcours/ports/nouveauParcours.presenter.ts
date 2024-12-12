@@ -1,3 +1,5 @@
+import { NouveauParcours } from '@/domaines/nouveauParcours/recuperationDonneesNouveauParcours.usecase';
+
 export interface NouveauParcoursViewModel {
   nombreInscrits: number;
   nombrePointsMoyen: number;
@@ -24,5 +26,5 @@ export interface NouveauParcoursViewModel {
 }
 
 export interface NouveauParcoursPresenter {
-  displayNouveauParcours(): void;
+  displayNouveauParcours(nouveauParcours: NouveauParcours): void;
 }

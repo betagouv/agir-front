@@ -1,3 +1,5 @@
+import { NouveauParcours } from '@/domaines/nouveauParcours/recuperationDonneesNouveauParcours.usecase';
+
 export interface NouveauParcoursRepository {
-  getNouveauParcours(): Promise<void>;
+  getNouveauParcours(codePostal: string): Promise<NouveauParcours>;
 }
