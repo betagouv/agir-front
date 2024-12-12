@@ -10,7 +10,7 @@ export class NouveauParcoursPresenterImpl implements NouveauParcoursPresenter {
   displayNouveauParcours(nouveauParcours: NouveauParcours): void {
     this.viewModel({
       nombreInscrits: nouveauParcours.nombreInscrits,
-      nombrePointsMoyen: nouveauParcours.nombrePointsMoyen,
+      nombrePointsMoyen: Math.round(nouveauParcours.nombrePointsMoyen),
       aides: {
         nombreAidesTotal: nouveauParcours.aides.nombreAidesTotal,
         nombreAidesNatTotal: nouveauParcours.aides.nombreAidesNatTotal,
