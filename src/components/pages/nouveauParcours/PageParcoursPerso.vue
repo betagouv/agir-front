@@ -40,11 +40,19 @@
           >, voici ce que nous pouvons vous proposer :
         </p>
 
-        <Propositions
-          :aides="nouveauParcoursViewmodel.aides"
-          :longue-vie-aux-objets="nouveauParcoursViewmodel.longueVieAuxObjets"
-          :pres-de-chez-nous="nouveauParcoursViewmodel.presDeChezNous"
-        />
+        <div class="fr-grid-row fr-grid-row--gutters">
+          <CarteDecouverte
+            v-for="proposition in nouveauParcoursViewmodel.propositions"
+            :key="proposition.titre"
+            :titre-emoji="proposition.emoji"
+            :titre-texte="proposition.titre"
+            :lien-bouton="proposition.lien"
+          >
+            <ul>
+              <li v-for="item in proposition.contenu" :key="item" v-html="item"></li>
+            </ul>
+          </CarteDecouverte>
+        </div>
       </section>
     </template>
   </section>
@@ -54,8 +62,8 @@
   import { onMounted, ref } from 'vue';
   import { useRoute } from 'vue-router';
   import CarteSkeleton from '@/components/CarteSkeleton.vue';
+  import CarteDecouverte from '@/components/custom/NouveauParcours/CarteDecouverte.vue';
   import Objectif from '@/components/custom/NouveauParcours/Objectif.vue';
-  import Propositions from '@/components/custom/NouveauParcours/Propositions.vue';
   import { NouveauParcoursPresenterImpl } from '@/domaines/nouveauParcours/adapters/nouveauParcours.presenter.impl';
   import { NouveauParcoursRepositoryAxios } from '@/domaines/nouveauParcours/adapters/nouveauParcours.repository.axios';
   import { NouveauParcoursViewModel } from '@/domaines/nouveauParcours/ports/nouveauParcours.presenter';
