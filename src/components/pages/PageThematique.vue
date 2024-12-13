@@ -13,14 +13,9 @@
     </div>
   </div>
 
-  <div class="fr-container fr-mt-4w" v-if="isLoading">
-    <ul class="fr-grid-row fr-grid-row--gutters list-style-none fr-m-0 fr-pb-2w">
-      <li v-for="n in 6" :key="n" class="fr-mb-1w fr-col-6 fr-col-md-4 fr-col-lg-2">
-        <MissionSkeleton class="fr-mb-3w" />
-      </li>
-    </ul>
+  <div v-if="isLoading" class="fr-container fr-mt-4w">
+    <MissionsListeSkeleton />
   </div>
-
   <div v-else>
     <section id="thematiques" v-if="missionsViewModel">
       <div class="fr-container">
@@ -73,10 +68,10 @@
   import ActionListe from '@/components/custom/Action/ActionListe.vue';
   import CoachRecommandations from '@/components/custom/Coach/CoachRecommandations.vue';
   import MissionsListe from '@/components/custom/Mission/MissionsListe.vue';
+  import MissionsListeSkeleton from '@/components/custom/Mission/MissionsListeSkeleton.vue';
   import ServiceLink from '@/components/custom/Service/ServiceLink.vue';
   import ServiceLinkExterne from '@/components/custom/Service/ServiceLinkExterne.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
-  import MissionSkeleton from '@/components/MissionSkeleton.vue';
   import { DefiRepositoryAxios } from '@/domaines/defi/adapters/defi.repository.axios';
   import {
     DefiDescriptionViewModel,
@@ -146,13 +141,9 @@
         thematiqueId,
         new ServiceRecherchePresenterImpl(vm => (servicesViewModel.value = vm)),
       ),
-    ])
-      .then(() => {
-        isLoading.value = false;
-      })
-      .catch(() => {
-        isLoading.value = false;
-      });
+    ]).finally(() => {
+      isLoading.value = false;
+    });
   };
   onBeforeRouteUpdate((to, from, next) => {
     next();

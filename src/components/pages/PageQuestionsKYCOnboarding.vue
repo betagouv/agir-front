@@ -13,8 +13,8 @@
 <script lang="ts" setup>
   import { onMounted, ref } from 'vue';
   import { useRoute } from 'vue-router';
-  import CarteSkeleton from '@/components/CarteSkeleton.vue';
   import OnboardingQuestionsKyc from '@/components/custom/Mission/OnboardingQuestionsKyc.vue';
+  import CarteSkeleton from '@/components/custom/Skeleton/CarteSkeleton.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import {
     ListesQuestionsThematiquePresenter,
