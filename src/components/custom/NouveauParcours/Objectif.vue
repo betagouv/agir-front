@@ -1,7 +1,7 @@
 <template>
   <div class="objectif-card text--white border-radius--md fr-p-5w position--relative">
     <div class="width-container">
-      <h1 class="fr-h2 text--white text--lh-0 fr-pt-2w fr-pb-1v">Prochain objectif :</h1>
+      <h2 class="fr-h3 text--white text--lh-0 fr-pt-2w fr-pb-1v">Prochain objectif :</h2>
       <p class="fr-mb-2w fr-text--lg">{{ objectifInscription }} inscrits sur J'agis dans votre commune</p>
       <BarreDeProgression
         label="test"
@@ -13,7 +13,7 @@
       <slot></slot>
     </div>
 
-    <img class="objectif-card--img" src="/public/nouveau_parcours_escaliers.svg" alt="" />
+    <img class="objectif-card--img" src="/nouveau_parcours_escaliers.svg" alt="" />
   </div>
 </template>
 
