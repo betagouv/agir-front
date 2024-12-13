@@ -8,7 +8,6 @@
         <slot />
       </div>
 
-      <!--      TODO le style est dég-->
       <a :href="lienBouton" class="fr-btn">Découvrir</a>
     </div>
   </div>
@@ -27,6 +26,10 @@
     align-self: center;
     border-radius: 2rem;
     background-color: black;
+  }
+
+  .fr-btn:hover {
+    background-color: #656565;
   }
 
   h3 {

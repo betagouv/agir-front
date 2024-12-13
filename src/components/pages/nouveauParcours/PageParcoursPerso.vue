@@ -95,4 +95,8 @@
     font-weight: bold;
     font-style: italic;
   }
+
+  .propositions li:first-letter {
+    text-transform: capitalize;
+  }
 </style>

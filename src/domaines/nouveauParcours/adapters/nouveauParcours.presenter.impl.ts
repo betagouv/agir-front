@@ -16,34 +16,34 @@ export class NouveauParcoursPresenterImpl implements NouveauParcoursPresenter {
           emoji: '📺',
           titre: 'Mes achats',
           lien: '#',
-          contenu: this.genererListe(nouveauParcours.longueVieAuxObjets, [
+          contenu: this.genererListe([
             {
               template: valeurEtGroupePronominal => `${valeurEtGroupePronominal} à proximité`,
-              cle: 'reparer',
+              valeur: nouveauParcours.longueVieAuxObjets.reparer,
               singulier: 'point de réparation',
               pluriel: 'points de réparations',
             },
             {
               template: valeurEtGroupePronominal => `${valeurEtGroupePronominal} près de chez moi`,
-              cle: 'louer',
+              valeur: nouveauParcours.longueVieAuxObjets.louer,
               singulier: 'point de location',
               pluriel: 'points de locations',
             },
             {
               template: valeurEtGroupePronominal => `${valeurEtGroupePronominal} à proximité`,
-              cle: 'emprunter',
+              valeur: nouveauParcours.longueVieAuxObjets.emprunter,
               singulier: "point d'emprunt",
               pluriel: "points d'emprunts",
             },
             {
               template: valeurEtGroupePronominal => `${valeurEtGroupePronominal} près de chez moi`,
-              cle: 'donner',
+              valeur: nouveauParcours.longueVieAuxObjets.donner,
               singulier: 'point de don',
               pluriel: 'points de dons',
             },
             {
               template: valeurEtGroupePronominal => `Pour un ensemble de ${valeurEtGroupePronominal}`,
-              cle: 'tout',
+              valeur: nouveauParcours.longueVieAuxObjets.tout,
               singulier: 'point',
               pluriel: 'points',
             },
@@ -53,28 +53,28 @@ export class NouveauParcoursPresenterImpl implements NouveauParcoursPresenter {
           emoji: '🍛',
           titre: 'Me nourrir',
           lien: '#',
-          contenu: this.genererListe(nouveauParcours.presDeChezNous, [
+          contenu: this.genererListe([
             {
               template: valeurEtGroupePronominal => `${valeurEtGroupePronominal} près de chez moi`,
-              cle: 'circuitCourt',
+              valeur: nouveauParcours.presDeChezNous.circuitCourt,
               singulier: 'point de circuit court',
               pluriel: 'points de circuit court',
             },
             {
               template: valeurEtGroupePronominal => `${valeurEtGroupePronominal} à proximité`,
-              cle: 'epicerieSuperette',
+              valeur: nouveauParcours.presDeChezNous.epicerieSuperette,
               singulier: 'épicerie ou supérette',
               pluriel: 'épiceries ou supérettes',
             },
             {
               template: valeurEtGroupePronominal => valeurEtGroupePronominal,
-              cle: 'marcheLocal',
+              valeur: nouveauParcours.presDeChezNous.marcheLocal,
               singulier: 'marché local',
               pluriel: 'marchés locaux',
             },
             {
               template: valeurEtGroupePronominal => `${valeurEtGroupePronominal} zéro-déchet à proximité`,
-              cle: 'zeroDechet',
+              valeur: nouveauParcours.presDeChezNous.zeroDechet,
               singulier: 'point',
               pluriel: 'points',
             },
@@ -84,34 +84,34 @@ export class NouveauParcoursPresenterImpl implements NouveauParcoursPresenter {
           emoji: '💸',
           titre: 'Vos aides',
           lien: '#',
-          contenu: this.genererListe(nouveauParcours.aides, [
+          contenu: this.genererListe([
             {
               template: valeurEtGroupePronominal => valeurEtGroupePronominal,
-              cle: 'nombreAidesNatTotal',
+              valeur: nouveauParcours.aides.nombreAidesNatTotal,
               singulier: 'aide nationale',
               pluriel: 'aides nationales',
             },
             {
               template: valeurEtGroupePronominal => valeurEtGroupePronominal,
-              cle: 'nombreAidesRegionTotal',
+              valeur: nouveauParcours.aides.nombreAidesRegionTotal,
               singulier: 'aide régionale',
               pluriel: 'aides régionales',
             },
             {
               template: valeurEtGroupePronominal => valeurEtGroupePronominal,
-              cle: 'nombreAidesDepartementTotal',
+              valeur: nouveauParcours.aides.nombreAidesDepartementTotal,
               singulier: 'aide départementale',
               pluriel: 'aides départementales',
             },
             {
               template: valeurEtGroupePronominal => valeurEtGroupePronominal,
-              cle: 'nombreAidesCommuneTotal',
+              valeur: nouveauParcours.aides.nombreAidesCommuneTotal,
               singulier: 'aide communale',
               pluriel: 'aides communales',
             },
             {
               template: valeurEtGroupePronominal => `Pour un total de ${valeurEtGroupePronominal} !`,
-              cle: 'nombreAidesTotal',
+              valeur: nouveauParcours.aides.nombreAidesTotal,
               singulier: 'aide',
               pluriel: 'aides',
             },
@@ -121,25 +121,24 @@ export class NouveauParcoursPresenterImpl implements NouveauParcoursPresenter {
     });
   }
 
-  private genererListe<T>(
-    objet: T,
+  private genererListe(
     mappingsInfo: {
-      cle: keyof T;
+      template: (valeurEtGroupePronominal: string) => string;
+      valeur: number;
       singulier: string;
       pluriel: string;
-      template: (valeurEtGroupePronominal: string) => string;
     }[],
   ): string[] {
     return mappingsInfo
       .map(mapping => {
-        const value = objet[mapping.cle] as number;
-        if (!value) {
+        const valeur = mapping.valeur;
+        if (!valeur) {
           return null;
         }
 
-        const valeurAffichee = value === 200 ? 'plus de 200' : value;
+        const valeurAffichee = valeur === 200 ? 'plus de 200' : valeur;
         const valeurEnGrasEtSonGroupePronominal = `<span class="fr-text--bold">${valeurAffichee}</span> ${this.gererPluriel(
-          value,
+          valeur,
           mapping.singulier,
           mapping.pluriel,
         )}`;
