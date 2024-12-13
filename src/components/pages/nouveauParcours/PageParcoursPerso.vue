@@ -61,9 +61,9 @@
 <script lang="ts" setup>
   import { onMounted, ref } from 'vue';
   import { useRoute } from 'vue-router';
-  import CarteSkeleton from '@/components/CarteSkeleton.vue';
   import CarteDecouverte from '@/components/custom/NouveauParcours/CarteDecouverte.vue';
   import Objectif from '@/components/custom/NouveauParcours/Objectif.vue';
+  import CarteSkeleton from '@/components/custom/Skeleton/CarteSkeleton.vue';
   import { NouveauParcoursPresenterImpl } from '@/domaines/nouveauParcours/adapters/nouveauParcours.presenter.impl';
   import { NouveauParcoursRepositoryAxios } from '@/domaines/nouveauParcours/adapters/nouveauParcours.repository.axios';
   import { NouveauParcoursViewModel } from '@/domaines/nouveauParcours/ports/nouveauParcours.presenter';
