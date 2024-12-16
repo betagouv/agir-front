@@ -1,7 +1,7 @@
 import { RouteRecordRaw } from 'vue-router';
 const PageExamen = () => import('@/components/pages/PageExamen.vue');
 
-export enum RouteThematiquesName {
+export enum RouteExamenName {
   EXAMEN = 'examen',
 }
 
@@ -12,7 +12,7 @@ export enum RouteThematiquesPath {
 const examenRoutes: RouteRecordRaw[] = [
   {
     path: `/${RouteThematiquesPath.THEMATIQUE}/:id/quiz/:missionId`,
-    name: RouteThematiquesName.EXAMEN,
+    name: RouteExamenName.EXAMEN,
     component: PageExamen,
     meta: {
       title: 'Examen',

@@ -13,6 +13,7 @@ export class RecupererMissionsThematiqueUsecase {
 export interface Mission {
   titre: string;
   id: string;
+  estUnExamen: boolean;
   progression: {
     etapeActuelle: number;
     etapeCible: number;

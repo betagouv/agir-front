@@ -5,8 +5,9 @@ import { DetailMission } from '@/domaines/missions/recupererDetailMission.usecas
 import { Mission } from '@/domaines/missions/recupererMissionsThematique.usecase';
 import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 
-interface ThematiqueApiModel {
+interface MissionApiModel {
   titre: string;
+  is_examen: boolean;
   code: string;
   progression: number;
   cible_progression: number;
@@ -84,10 +85,11 @@ export class MissionsRepositoryAxios implements MissionsRepository {
   @intercept401()
   async recupererMissionsRecommandees(utilisateurId: string): Promise<Mission[]> {
     const axios = AxiosFactory.getAxios();
-    const response = await axios.get<ThematiqueApiModel[]>(`/utilisateurs/${utilisateurId}/tuiles_missions`);
+    const response = await axios.get<MissionApiModel[]>(`/utilisateurs/${utilisateurId}/tuiles_missions`);
     return response.data.map(thematique => ({
       id: thematique.code,
       titre: thematique.titre,
+      estUnExamen: thematique.is_examen,
       progression: {
         etapeActuelle: thematique.progression,
         etapeCible: thematique.cible_progression,
@@ -104,12 +106,13 @@ export class MissionsRepositoryAxios implements MissionsRepository {
   @intercept401()
   async recupererMissionsThematique(universId: string, utilisateurId: string): Promise<Mission[]> {
     const axios = AxiosFactory.getAxios();
-    const response = await axios.get<ThematiqueApiModel[]>(
+    const response = await axios.get<MissionApiModel[]>(
       `/utilisateurs/${utilisateurId}/thematiques/${universId}/tuiles_missions`,
     );
     return response.data.map(thematique => ({
       id: thematique.code,
       titre: thematique.titre,
+      estUnExamen: thematique.is_examen,
       progression: {
         etapeActuelle: thematique.progression,
         etapeCible: thematique.cible_progression,

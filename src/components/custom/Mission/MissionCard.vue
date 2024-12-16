@@ -25,9 +25,9 @@
     <h2 class="fr-text--lg text--semi-bold text--black fr-mb-1v text--lh-1-3">
       <router-link
         :to="{
-          name: RouteThematiquesName.MISSION,
+          name: mission.url.name,
           params: {
-            id: MenuThematiques.getThematiqueData(mission.clefThematique as ClefThematiqueAPI).url,
+            id: mission.url.id,
             missionId: mission.id,
           },
         }"
@@ -43,8 +43,6 @@
   import BarreDeProgression from '@/components/custom/BarreDeProgression.vue';
   import ThematiqueTag from '@/components/custom/Thematiques/ThematiqueTag.vue';
   import { MissionViewModel } from '@/domaines/missions/adapters/missions.presenter.impl';
-  import { ClefThematiqueAPI, MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
-  import { RouteThematiquesName } from '@/router/thematiques/routes';
 
   defineProps<{
     mission: MissionViewModel;

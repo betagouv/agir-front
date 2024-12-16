@@ -12,6 +12,7 @@ describe('Fichier de tests concernant la récupération des missions recommandé
         {
           titre: 'Thematique 1',
           id: '1',
+          estUnExamen: false,
           progression: { etapeActuelle: 0, etapeCible: 4 },
           estNouvelle: true,
           urlImage: 'https://via.placeholder.com/150',
@@ -23,6 +24,7 @@ describe('Fichier de tests concernant la récupération des missions recommandé
         {
           titre: 'Thematique 2',
           id: '2',
+          estUnExamen: false,
           progression: { etapeActuelle: 0, etapeCible: 4 },
           estNouvelle: true,
           urlImage: 'https://via.placeholder.com/150',
@@ -34,6 +36,7 @@ describe('Fichier de tests concernant la récupération des missions recommandé
         {
           titre: 'Thematique 3',
           id: '3',
+          estUnExamen: false,
           progression: { etapeActuelle: 0, etapeCible: 4 },
           estNouvelle: true,
           urlImage: 'https://via.placeholder.com/150',
@@ -45,23 +48,13 @@ describe('Fichier de tests concernant la récupération des missions recommandé
         {
           titre: 'Thematique 4',
           id: '4',
+          estUnExamen: false,
           progression: { etapeActuelle: 0, etapeCible: 4 },
           estNouvelle: true,
           urlImage: 'https://via.placeholder.com/150',
           thematiqueParent: {
             clefAPI: ClefThematiqueAPI.logement,
             label: 'Nom de thematique parent 4',
-          },
-        },
-        {
-          titre: 'Thematique 5',
-          id: '5',
-          progression: { etapeActuelle: 0, etapeCible: 4 },
-          estNouvelle: true,
-          urlImage: 'https://via.placeholder.com/150',
-          thematiqueParent: {
-            clefAPI: 'thematique_inconnue',
-            label: 'Nom de thematique parent 5',
           },
         },
       ]),
@@ -87,6 +80,10 @@ describe('Fichier de tests concernant la récupération des missions recommandé
               emoji: '🥗',
             },
           },
+          url: {
+            name: 'mission',
+            id: 'me-nourrir',
+          },
         },
         {
           titre: 'Thematique 2',
@@ -103,6 +100,10 @@ describe('Fichier de tests concernant la récupération des missions recommandé
               color: '#021952',
               emoji: '🚗',
             },
+          },
+          url: {
+            name: 'mission',
+            id: 'me-deplacer',
           },
         },
         {
@@ -121,6 +122,10 @@ describe('Fichier de tests concernant la récupération des missions recommandé
               emoji: '👕',
             },
           },
+          url: {
+            name: 'mission',
+            id: 'consommer',
+          },
         },
         {
           titre: 'Thematique 4',
@@ -138,22 +143,9 @@ describe('Fichier de tests concernant la récupération des missions recommandé
               emoji: '🏠',
             },
           },
-        },
-        {
-          titre: 'Thematique 5',
-          id: '5',
-          progression: { etapeActuelle: 0, etapeCible: 4 },
-          estNouvelle: true,
-          urlImage: 'https://via.placeholder.com/150',
-          estTerminee: false,
-          clefThematique: 'thematique_inconnue',
-          tagThematique: {
-            label: 'Nom de thematique parent 5',
-            style: {
-              backgroundColor: '#ececec',
-              color: 'black',
-              emoji: '👏',
-            },
+          url: {
+            name: 'mission',
+            id: 'me-loger',
           },
         },
       ]);
