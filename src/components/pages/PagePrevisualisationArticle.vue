@@ -1,7 +1,7 @@
 <template>
   <PageArticleComposant :article="article" />
 </template>
-<script setup lang="ts">
+<script lang="ts" setup>
   import { onMounted, ref } from 'vue';
   import { useRoute, useRouter } from 'vue-router';
   import PageArticleComposant from '@/components/PageArticleComposant.vue';
@@ -19,7 +19,6 @@
     sousTitre: '',
     estEnFavori: false,
     partenaire: {
-      id: '',
       nom: '',
       logo: '',
     },

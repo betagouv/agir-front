@@ -2,6 +2,29 @@ import { AxiosFactory, intercept401 } from '@/axios.factory';
 import { ArticleRepository } from '@/domaines/article/ports/article.repository';
 import { Article } from '@/domaines/article/recupererArticle.usecase';
 
+interface ArticleAPI {
+  titre: string;
+  soustitre: string;
+  thematiques: string[];
+  image_url: string;
+  thematique_principale: string;
+  thematique_principale_label: string;
+  points: 0;
+  content_id: string;
+  favoris: true;
+  like_level: 0;
+  contenu: string;
+  partenaire_nom: string;
+  partenaire_url: string;
+  partenaire_logo_url: string;
+  sources: [
+    {
+      label: string;
+      url: string;
+    },
+  ];
+}
+
 export class ArticleRepositoryAxios implements ArticleRepository {
   @intercept401()
   async ajouterAuxFavoris(articleId: string, utilisateurId: string): Promise<void> {
@@ -43,31 +66,26 @@ export class ArticleRepositoryAxios implements ArticleRepository {
 
   @intercept401()
   async recuperer(utilisateurId: string, articleId: string): Promise<Article> {
-    const axiosCMS = AxiosFactory.getCMSAxios();
-    const article = await axiosCMS.get(
-      `/articles/${articleId}?populate[0]=partenaire,partenaire.logo.media&populate[1]=sources`,
-    );
-
     const axios = AxiosFactory.getAxios();
-    const articleMetaData = await axios.get(`/utilisateurs/${utilisateurId}/bibliotheque/articles/${articleId}`);
+    const article = await axios.get<ArticleAPI>(`/utilisateurs/${utilisateurId}/bibliotheque/articles/${articleId}`);
     return {
       id: articleId,
-      texte: article.data.data.attributes.contenu,
-      titre: article.data.data.attributes.titre,
-      sousTitre: article.data.data.attributes.sousTitre,
+      texte: article.data.contenu,
+      titre: article.data.titre,
+      sousTitre: article.data.soustitre,
       sources:
-        article.data.data.attributes.sources?.map(source => ({
-          label: source.libelle,
-          url: source.lien,
+        article.data.sources?.map(source => ({
+          label: source.label,
+          url: source.url,
         })) || null,
-      partenaire: article.data.data.attributes.partenaire.data
-        ? {
-            id: article.data.data.attributes.partenaire.data.attributes.id,
-            nom: article.data.data.attributes.partenaire.data.attributes.nom,
-            logo: article.data.data.attributes.partenaire.data.attributes.logo.data[0].attributes.url,
-          }
-        : null,
-      estEnFavori: articleMetaData.data.favoris,
+      partenaire:
+        article.data.partenaire_nom && article.data.partenaire_logo_url
+          ? {
+              nom: article.data.partenaire_nom,
+              logo: article.data.partenaire_logo_url,
+            }
+          : null,
+      estEnFavori: article.data.favoris,
     };
   }
 
@@ -89,7 +107,6 @@ export class ArticleRepositoryAxios implements ArticleRepository {
         })) || null,
       partenaire: article.data.data.attributes.partenaire.data
         ? {
-            id: article.data.data.attributes.partenaire.data.attributes.id,
             nom: article.data.data.attributes.partenaire.data.attributes.nom,
             logo: article.data.data.attributes.partenaire.data.attributes.logo.data[0].attributes.url,
           }
