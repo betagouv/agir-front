@@ -4,7 +4,7 @@
     <p v-else-if="!examenViewModel" class="fr-mt-4w">Une erreur est survenue</p>
     <template v-else>
       <FilDAriane
-        :page-courante="`Examen : ${examenViewModel.titre}`"
+        :page-courante="`Quiz : ${examenViewModel.titre}`"
         :page-hierarchie="
           useRoute().params.id && useRoute().params.missionId
             ? [
@@ -50,7 +50,6 @@
   import { EtatsPossible } from '@/domaines/missions/determineEtapeMission';
   import { MissionEvent, MissionEventBusImpl } from '@/domaines/missions/missionEventBus.impl';
   import { RecupererDetailMissionUsecase } from '@/domaines/missions/recupererDetailMission.usecase';
-  import { MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
   import { utilisateurStore } from '@/store/utilisateur';
 
   interface EtapeCourante {

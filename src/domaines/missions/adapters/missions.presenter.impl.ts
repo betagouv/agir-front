@@ -21,8 +21,8 @@ export interface MissionViewModel {
     style: TagStyle;
   };
   url: {
-    name: string;
-    id: string;
+    routeName: string;
+    thematiqueId: string;
   };
 }
 
@@ -40,8 +40,8 @@ export class MissionsPresenterImpl implements MissionsPresenter {
         clefThematique: mission.thematiqueParent.clefAPI,
         tagThematique: undefined,
         url: {
-          id: MenuThematiques.getThematiqueData(mission.thematiqueParent.clefAPI as ClefThematiqueAPI).url,
-          name: mission.estUnExamen ? RouteExamenName.EXAMEN : RouteThematiquesName.MISSION,
+          thematiqueId: MenuThematiques.getThematiqueData(mission.thematiqueParent.clefAPI as ClefThematiqueAPI).url,
+          routeName: mission.estUnExamen ? RouteExamenName.EXAMEN : RouteThematiquesName.MISSION,
         },
       })),
     );

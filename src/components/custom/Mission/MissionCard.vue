@@ -25,9 +25,9 @@
     <h2 class="fr-text--lg text--semi-bold text--black fr-mb-1v text--lh-1-3">
       <router-link
         :to="{
-          name: mission.url.name,
+          name: mission.url.routeName,
           params: {
-            id: mission.url.id,
+            id: mission.url.thematiqueId,
             missionId: mission.id,
           },
         }"

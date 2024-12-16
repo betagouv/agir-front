@@ -48,7 +48,7 @@ describe('Fichier de tests concernant la récupération des missions recommandé
         {
           titre: 'Thematique 4',
           id: '4',
-          estUnExamen: false,
+          estUnExamen: true,
           progression: { etapeActuelle: 0, etapeCible: 4 },
           estNouvelle: true,
           urlImage: 'https://via.placeholder.com/150',
@@ -81,8 +81,8 @@ describe('Fichier de tests concernant la récupération des missions recommandé
             },
           },
           url: {
-            name: 'mission',
-            id: 'me-nourrir',
+            routeName: 'mission',
+            thematiqueId: 'me-nourrir',
           },
         },
         {
@@ -102,8 +102,8 @@ describe('Fichier de tests concernant la récupération des missions recommandé
             },
           },
           url: {
-            name: 'mission',
-            id: 'me-deplacer',
+            routeName: 'mission',
+            thematiqueId: 'me-deplacer',
           },
         },
         {
@@ -123,8 +123,8 @@ describe('Fichier de tests concernant la récupération des missions recommandé
             },
           },
           url: {
-            name: 'mission',
-            id: 'consommer',
+            routeName: 'mission',
+            thematiqueId: 'consommer',
           },
         },
         {
@@ -144,8 +144,8 @@ describe('Fichier de tests concernant la récupération des missions recommandé
             },
           },
           url: {
-            name: 'mission',
-            id: 'me-loger',
+            routeName: 'examen',
+            thematiqueId: 'me-loger',
           },
         },
       ]);

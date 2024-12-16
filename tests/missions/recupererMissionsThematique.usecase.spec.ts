@@ -51,8 +51,8 @@ describe('Fichier de tests concernant la récupération des missions pour une th
           clefThematique: 'alimentation',
           tagThematique: undefined,
           url: {
-            name: RouteExamenName.EXAMEN,
-            id: 'me-nourrir',
+            routeName: RouteExamenName.EXAMEN,
+            thematiqueId: 'me-nourrir',
           },
         },
         {
@@ -65,8 +65,8 @@ describe('Fichier de tests concernant la récupération des missions pour une th
           clefThematique: 'transport',
           tagThematique: undefined,
           url: {
-            name: RouteThematiquesName.MISSION,
-            id: 'me-deplacer',
+            routeName: RouteThematiquesName.MISSION,
+            thematiqueId: 'me-deplacer',
           },
         },
       ]);

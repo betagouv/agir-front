@@ -24,8 +24,8 @@ export class MissionsRecommandeesPresenterImpl implements MissionsPresenter {
           style: TagThematique.getTagThematiqueUtilitaire(mission.thematiqueParent.clefAPI),
         },
         url: {
-          id: MenuThematiques.getThematiqueData(mission.thematiqueParent.clefAPI as ClefThematiqueAPI).url,
-          name: mission.estUnExamen ? RouteExamenName.EXAMEN : RouteThematiquesName.MISSION,
+          thematiqueId: MenuThematiques.getThematiqueData(mission.thematiqueParent.clefAPI as ClefThematiqueAPI).url,
+          routeName: mission.estUnExamen ? RouteExamenName.EXAMEN : RouteThematiquesName.MISSION,
         },
       })),
     );
