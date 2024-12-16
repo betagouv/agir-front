@@ -11,7 +11,7 @@ export enum RouteThematiquesPath {
 
 const examenRoutes: RouteRecordRaw[] = [
   {
-    path: `/${RouteThematiquesPath.THEMATIQUE}/:id/examen/:missionId`,
+    path: `/${RouteThematiquesPath.THEMATIQUE}/:id/quiz/:missionId`,
     name: RouteThematiquesName.EXAMEN,
     component: PageExamen,
     meta: {

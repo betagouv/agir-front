@@ -33,7 +33,7 @@
         :nombre-etapes-mission="examenViewModel.nombreEtapesMission"
         :nombre-detapes-precendentes="1"
       />
-      <MissionTerminee v-if="etapeCourante.type === 'FIN'" :titre="examenViewModel.titre" />
+      <ExamenTerminee v-if="etapeCourante.type === 'FIN'" :titre="examenViewModel.titre" />
     </template>
   </div>
 </template>
@@ -41,9 +41,9 @@
 <script setup lang="ts">
   import { onMounted, onUnmounted, ref } from 'vue';
   import { useRoute } from 'vue-router';
+  import ExamenTerminee from '@/components/custom/Mission/ExamenTerminee.vue';
   import MissionIntroduction from '@/components/custom/Mission/MissionIntroduction.vue';
   import MissionQuizArticles from '@/components/custom/Mission/MissionQuizArticles.vue';
-  import MissionTerminee from '@/components/custom/Mission/MissionTerminee.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import { ExamenPresenterImpl, ExamenViewModel } from '@/domaines/missions/adapters/examen.presenter.impl';
   import { MissionsRepositoryAxios } from '@/domaines/missions/adapters/missions.repository.axios';

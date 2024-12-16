@@ -2,7 +2,7 @@
   <div class="fr-grid-row fr-grid-row--gutters">
     <div class="fr-col-12 fr-col-lg-8">
       <h1 class="flex align-items--center gap--small">
-        <span class="fr-h2">Une question sur la thématique </span>
+        <span class="fr-h2">Une question sur la thématique</span>
         <ThematiqueTag :tag="{ ...quizViewModel.thematiqueTag, display: 'xl' }" />
       </h1>
       <div class="background--white border fr-p-2w border-radius--md">
