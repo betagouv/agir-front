@@ -25,7 +25,7 @@ describe('Fichier de tests concernant les examens (quiz)', () => {
     expect(spyMissionEventBus.eventName).toBe(MissionEvent.MISSION_TERMINEE);
   });
 
-  it('doit renvoyer le % et une phrase de félicitations quand le quiz est moyennement réussi', async () => {
+  it("doit renvoyer le cas d'un pourcentage de réussite inférieur ou égal à 50% et une phrase de félicitations", async () => {
     // GIVEN
     const repository = new ExamenRepositoryMock({ pourcentageDeReussite: 40 });
     const spyMissionEventBus = new SpyMissionEventBus();
@@ -45,7 +45,7 @@ describe('Fichier de tests concernant les examens (quiz)', () => {
     expect(spyMissionEventBus.eventName).toBe(MissionEvent.MISSION_TERMINEE);
   });
 
-  it("doit renvoyer me % et une phrase de félicitations quand le quiz n'est pas réussi", async () => {
+  it('doit renvoyer le cas où toutes les réponses sont fausses et une phrase', async () => {
     // GIVEN
     const repository = new ExamenRepositoryMock({ pourcentageDeReussite: 0 });
     const spyMissionEventBus = new SpyMissionEventBus();
