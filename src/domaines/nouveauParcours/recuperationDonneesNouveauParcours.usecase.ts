@@ -7,6 +7,8 @@ export interface NouveauParcours {
   nombrePointsMoyen: number;
   nombreDefiEnCours: number;
   nombreDefiRealises: number;
+  nombreArticlesLocaux: number;
+  nombreArticlesTotal: number;
   aides: {
     nombreAidesTotal: number;
     nombreAidesNatTotal: number;
@@ -35,7 +37,6 @@ export interface NouveauParcours {
     marcheLocal: number;
     zeroDechet: number;
   };
-
   articles: {
     id: number;
     thematique: ClefThematiqueAPI;

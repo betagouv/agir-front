@@ -30,6 +30,8 @@ interface NouveauParcoursModeAPI {
   result_PDCN_marche_local: number;
   result_PDCN_zero_dechet: number;
 
+  nombre_articles_locaux: number;
+  nombre_articles_total: number;
   nombre_defis_encours: number;
   nombre_defis_realises: number;
 
@@ -49,6 +51,8 @@ export class NouveauParcoursRepositoryAxios implements NouveauParcoursRepository
       nombrePointsMoyen: response.data.nombre_points_moyen,
       nombreDefiEnCours: response.data.nombre_defis_encours,
       nombreDefiRealises: response.data.nombre_defis_realises,
+      nombreArticlesLocaux: response.data.nombre_articles_locaux,
+      nombreArticlesTotal: response.data.nombre_articles_total,
       aides: {
         nombreAidesTotal: response.data.nombre_aides_total,
         nombreAidesNatTotal: response.data.nombre_aides_nat_total,

@@ -3,12 +3,16 @@ import { NouveauParcours } from '@/domaines/nouveauParcours/recuperationDonneesN
 export interface NouveauParcoursViewModel {
   nombreInscrits: number;
   nombrePointsMoyen: number;
+  nombreArticlesLocaux: number;
+  nombreArticlesTotal: number;
+  nombreDefiEnCours: number;
+  nombreDefiRealises: number;
   propositions: {
     emoji: string;
     titre: string;
     contenu: string[];
     lien: string;
-    article: {
+    articles: {
       id: number;
       titre: string;
     }[];

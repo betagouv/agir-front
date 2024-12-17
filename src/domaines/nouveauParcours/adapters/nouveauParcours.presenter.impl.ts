@@ -12,6 +12,10 @@ export class NouveauParcoursPresenterImpl implements NouveauParcoursPresenter {
     this.viewModel({
       nombreInscrits: nouveauParcours.nombreInscrits,
       nombrePointsMoyen: Math.round(nouveauParcours.nombrePointsMoyen),
+      nombreArticlesLocaux: nouveauParcours.nombreArticlesLocaux,
+      nombreArticlesTotal: nouveauParcours.nombreArticlesTotal,
+      nombreDefiEnCours: nouveauParcours.nombreDefiEnCours,
+      nombreDefiRealises: nouveauParcours.nombreDefiRealises,
       propositions: [
         {
           emoji: '📺',
@@ -49,7 +53,7 @@ export class NouveauParcoursPresenterImpl implements NouveauParcoursPresenter {
               pluriel: 'points',
             },
           ]),
-          article: nouveauParcours.articles.filter(article => article.thematique === ClefThematiqueAPI.consommation),
+          articles: nouveauParcours.articles.filter(article => article.thematique === ClefThematiqueAPI.consommation),
         },
         {
           emoji: '🍛',
@@ -81,7 +85,7 @@ export class NouveauParcoursPresenterImpl implements NouveauParcoursPresenter {
               pluriel: 'points',
             },
           ]),
-          article: nouveauParcours.articles.filter(article => article.thematique === ClefThematiqueAPI.alimentation),
+          articles: nouveauParcours.articles.filter(article => article.thematique === ClefThematiqueAPI.alimentation),
         },
         {
           emoji: '🚲',
@@ -119,7 +123,7 @@ export class NouveauParcoursPresenterImpl implements NouveauParcoursPresenter {
               pluriel: 'aides',
             },
           ]),
-          article: nouveauParcours.articles.filter(article => article.thematique === ClefThematiqueAPI.transports),
+          articles: nouveauParcours.articles.filter(article => article.thematique === ClefThematiqueAPI.transports),
         },
         {
           emoji: '🧱',
@@ -157,7 +161,7 @@ export class NouveauParcoursPresenterImpl implements NouveauParcoursPresenter {
               pluriel: 'aides',
             },
           ]),
-          article: nouveauParcours.articles.filter(article => article.thematique === ClefThematiqueAPI.logement),
+          articles: nouveauParcours.articles.filter(article => article.thematique === ClefThematiqueAPI.logement),
         },
       ],
     });

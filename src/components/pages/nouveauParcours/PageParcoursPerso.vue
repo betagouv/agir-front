@@ -23,10 +23,10 @@
               <li v-for="item in proposition.contenu" :key="item" v-html="item"></li>
             </ul>
 
-            <div v-if="proposition.article.length > 0">
+            <div v-if="proposition.articles.length > 0">
               <p class="fr-m-0">Les articles :</p>
               <ul>
-                <li v-for="article in proposition.article" :key="article.id">
+                <li v-for="article in proposition.articles" :key="article.id">
                   <router-link :to="`/article/previsualisation/${article.id}`">{{ article.titre }}</router-link>
                 </li>
               </ul>
