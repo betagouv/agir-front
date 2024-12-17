@@ -1,15 +1,35 @@
 {
   "applinks": {
-      "apps": [],
-      "details": [
+    "apps": [],
+    "details": [
       {
         "appID": "PR958DC548.fr.gouv.agir",
-        "paths": ["*"]
+        "paths": [
+          "*"
+        ],
+        "components": [
+          {
+            "/": "/*"
+          },
+          {
+            "/": "/thematique/*/quiz/*",
+            "exclude": true,
+            "comment": "Exclure les quiz pendant le développement"
+          }
+        ]
       },
       {
         "appID": "PR958DC548.fr.gouv.agir.dev2",
-        "paths": ["*"]
+        "paths": [
+          "*"
+        ]
       }
+    ]
+  },
+  "webcredentials": {
+    "apps": [
+      "PR958DC548.fr.gouv.agir",
+      "PR958DC548.fr.gouv.agir.dev2"
     ]
   }
 }
