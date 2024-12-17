@@ -20,8 +20,10 @@ describe('Fichier de tests concernant les examens (quiz)', () => {
         pourcentageDeReussite: '100 %',
         phrase:
           'Bravo ! Nous espérons que ce quiz vous a permis de mieux comprendre l’impact de nos habitudes et vous a donné envie d’agir.',
+        couleurPourcentageDeReussite: 'text--vert',
       });
     }
+
     expect(spyMissionEventBus.eventName).toBe(MissionEvent.MISSION_TERMINEE);
   });
 
@@ -40,8 +42,10 @@ describe('Fichier de tests concernant les examens (quiz)', () => {
         pourcentageDeReussite: '40 %',
         phrase:
           'Vous avez compris les grands enjeux ! Retrouvez les articles sur le sujet dans votre bibliothèque, et n’hésitez pas à consulter les sources renseignées pour en savoir plus.',
+        couleurPourcentageDeReussite: 'text--orange',
       });
     }
+
     expect(spyMissionEventBus.eventName).toBe(MissionEvent.MISSION_TERMINEE);
   });
 
@@ -59,8 +63,10 @@ describe('Fichier de tests concernant les examens (quiz)', () => {
       expect(viewModel).toStrictEqual<ScoreExamenViewModel>({
         pourcentageDeReussite: '0 %',
         phrase: 'Nous espérons que ce quiz vous a permis de mieux comprendre l’impact de nos habitudes.',
+        couleurPourcentageDeReussite: 'text--rouge',
       });
     }
+
     expect(spyMissionEventBus.eventName).toBe(MissionEvent.MISSION_TERMINEE);
   });
 });

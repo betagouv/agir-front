@@ -1,9 +1,9 @@
 <template>
   <MissionNavigation
-    :titre="missionAffichee.type === 'article' ? 'Article' : 'Quiz'"
-    :on-click-revenir-etape-precedente="revenirEtapePrecedente"
     :etape-actuelle="etapeAffichee"
     :etape-totale="nombreEtapesMission"
+    :on-click-revenir-etape-precedente="revenirEtapePrecedente"
+    :titre="missionAffichee.type === 'article' ? 'Article' : ''"
   />
   <MissionArticle
     v-if="missionAffichee.type === 'article'"
@@ -14,13 +14,13 @@
   <MissionQuiz
     v-if="missionAffichee.type === 'quiz'"
     :key="etapeCourante"
-    :quiz-id="missionAffichee.idDuContenu"
     :on-click-continuer="passerEtapeSuivante"
+    :quiz-id="missionAffichee.idDuContenu"
   />
 </template>
 
-<script setup lang="ts">
-  import { ref, computed } from 'vue';
+<script lang="ts" setup>
+  import { computed, ref } from 'vue';
   import MissionArticle from '@/components/custom/Mission/MissionArticle.vue';
   import MissionNavigation from '@/components/custom/Mission/MissionNavigation.vue';
   import MissionQuiz from '@/components/custom/Mission/MissionQuiz.vue';

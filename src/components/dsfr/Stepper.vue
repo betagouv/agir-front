@@ -1,12 +1,12 @@
 <template>
-  <div class="fr-stepper fr-mb-2w">
+  <div class="fr-stepper">
     <h1 class="fr-stepper__title">
       {{ titre }}
       <span class="fr-stepper__state">
         <span class="fr-text--bold"> Étape {{ etapeActuelle }} sur {{ etapeTotale }}</span>
       </span>
     </h1>
-    <div class="fr-stepper__steps fr-mb-1w" :data-fr-current-step="etapeActuelle" :data-fr-steps="etapeTotale"></div>
+    <div :data-fr-current-step="etapeActuelle" :data-fr-steps="etapeTotale" class="fr-stepper__steps fr-mb-1w"></div>
     <p v-if="prochaineEtape" class="fr-stepper__details">
       <span class="fr-text--bold">Étape suivante :</span> {{ prochaineEtape }}
     </p>
@@ -19,7 +19,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
   defineProps<{
     titre: string;
     etapeActuelle: number;

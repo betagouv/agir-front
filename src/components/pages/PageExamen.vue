@@ -18,30 +18,30 @@
       />
       <MissionIntroduction
         v-if="etapeCourante.type === 'INTRO'"
+        :on-click-continuer="() => miseAJourEtatCourant('QUIZ_ARTICLE', 0)"
+        :tag="examenViewModel.tag"
+        :texte="examenViewModel.intro"
         :titre="examenViewModel.titre"
         :url-image="examenViewModel.urlImage"
-        :texte="examenViewModel.intro"
-        :tag="examenViewModel.tag"
-        :on-click-continuer="() => miseAJourEtatCourant('QUIZ_ARTICLE', 0)"
       />
       <MissionQuizArticles
         v-if="etapeCourante.type === 'QUIZ_ARTICLE'"
+        :etape-courante-defaut="etapeCourante.etapeDansLetape"
         :missions="examenViewModel.articleEtQuiz"
+        :nombre-detapes-precendentes="1"
+        :nombre-etapes-mission="examenViewModel.nombreEtapesMission"
         :on-click-fin-quiz-article="() => miseAJourEtatCourant('FIN', 0)"
         :on-click-revenir-etape-precedente="() => miseAJourEtatCourant('INTRO', 0)"
-        :etape-courante-defaut="etapeCourante.etapeDansLetape"
-        :nombre-etapes-mission="examenViewModel.nombreEtapesMission"
-        :nombre-detapes-precendentes="1"
       />
       <ExamenTerminee v-if="etapeCourante.type === 'FIN'" :titre="examenViewModel.titre" />
     </template>
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
   import { onMounted, onUnmounted, ref } from 'vue';
   import { useRoute } from 'vue-router';
-  import ExamenTerminee from '@/components/custom/Mission/ExamenTerminee.vue';
+  import ExamenTerminee from '@/components/custom/Mission/Examen/ExamenTerminee.vue';
   import MissionIntroduction from '@/components/custom/Mission/MissionIntroduction.vue';
   import MissionQuizArticles from '@/components/custom/Mission/MissionQuizArticles.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
