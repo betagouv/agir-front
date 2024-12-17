@@ -3,6 +3,7 @@ import { NouveauParcoursRepository } from '@/domaines/nouveauParcours/ports/nouv
 import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 
 export interface NouveauParcours {
+  listeCommunes: string[];
   nombreInscrits: number;
   nombrePointsMoyen: number;
   nombreDefiEnCours: number;
@@ -40,6 +41,11 @@ export interface NouveauParcours {
   articles: {
     id: number;
     thematique: ClefThematiqueAPI;
+    titre: string;
+  }[];
+  aidesLocales: {
+    id: number;
+    thematiques: ClefThematiqueAPI[];
     titre: string;
   }[];
 }

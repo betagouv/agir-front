@@ -62,15 +62,21 @@
                 </ul>
               </div>
 
-              <div v-if="proposition.aides.length > 0">
-                <p class="fr-m-0">Les aides :</p>
+              <div v-if="proposition.aides.length > 0 && proposition.nombreDAides > 0">
+                <p v-if="proposition.aides.length === proposition.nombreDAides" class="fr-m-0">
+                  Les aides disponibles :
+                </p>
+                <p v-else class="fr-m-0">Quelques aides parmi les {{ proposition.nombreDAides }} disponibles :</p>
+
                 <ul>
-                  <li v-for="item in proposition.aides" :key="item" v-html="item"></li>
+                  <li v-for="article in proposition.aides" :key="article.id">
+                    <router-link :to="`/article/previsualisation/${article.id}`">{{ article.titre }}</router-link>
+                  </li>
                 </ul>
               </div>
 
               <div v-if="proposition.articles.length > 0">
-                <p class="fr-m-0">Les articles :</p>
+                <p class="fr-m-0">Quelques exemples d'articles :</p>
                 <ul>
                   <li v-for="article in proposition.articles" :key="article.id">
                     <router-link :to="`/article/previsualisation/${article.id}`">{{ article.titre }}</router-link>

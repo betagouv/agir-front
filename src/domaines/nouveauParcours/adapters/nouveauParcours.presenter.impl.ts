@@ -54,14 +54,8 @@ export class NouveauParcoursPresenterImpl implements NouveauParcoursPresenter {
               pluriel: 'points de consommations responsables',
             },
           ]),
-          aides: this.genererListe([
-            {
-              template: valeurEtGroupePronominal => `${valeurEtGroupePronominal} pour la consommation`,
-              valeur: nouveauParcours.thematiques.nombre_aides_consommation,
-              singulier: 'aide recensée',
-              pluriel: 'aides recensées',
-            },
-          ]),
+          nombreDAides: nouveauParcours.thematiques.nombre_aides_consommation,
+          aides: nouveauParcours.aidesLocales.filter(aide => aide.thematiques.includes(ClefThematiqueAPI.consommation)),
           articles: nouveauParcours.articles.filter(article => article.thematique === ClefThematiqueAPI.consommation),
         },
         {
@@ -94,14 +88,8 @@ export class NouveauParcoursPresenterImpl implements NouveauParcoursPresenter {
               pluriel: 'points',
             },
           ]),
-          aides: this.genererListe([
-            {
-              template: valeurEtGroupePronominal => `Et ${valeurEtGroupePronominal} pour l'alimentation`,
-              valeur: nouveauParcours.thematiques.nombre_aides_alimentation,
-              singulier: 'aide recensée',
-              pluriel: 'aides recensées',
-            },
-          ]),
+          nombreDAides: nouveauParcours.thematiques.nombre_aides_alimentation,
+          aides: nouveauParcours.aidesLocales.filter(aide => aide.thematiques.includes(ClefThematiqueAPI.alimentation)),
           articles: nouveauParcours.articles.filter(article => article.thematique === ClefThematiqueAPI.alimentation),
         },
         {
@@ -109,14 +97,8 @@ export class NouveauParcoursPresenterImpl implements NouveauParcoursPresenter {
           titre: 'Me déplacer',
           lien: '#',
           contenu: this.genererListe([]),
-          aides: this.genererListe([
-            {
-              template: valeurEtGroupePronominal => `${valeurEtGroupePronominal} aux transports`,
-              valeur: nouveauParcours.thematiques.nombre_aides_transport,
-              singulier: 'aide dédiée',
-              pluriel: 'aides dédiées',
-            },
-          ]),
+          nombreDAides: nouveauParcours.thematiques.nombre_aides_transport,
+          aides: nouveauParcours.aidesLocales.filter(aide => aide.thematiques.includes(ClefThematiqueAPI.transports)),
           articles: nouveauParcours.articles.filter(article => article.thematique === ClefThematiqueAPI.transports),
         },
         {
@@ -124,14 +106,8 @@ export class NouveauParcoursPresenterImpl implements NouveauParcoursPresenter {
           titre: 'Me loger',
           lien: '#',
           contenu: this.genererListe([]),
-          aides: this.genererListe([
-            {
-              template: valeurEtGroupePronominal => `${valeurEtGroupePronominal} pour le logement`,
-              valeur: nouveauParcours.thematiques.nombre_aides_logement,
-              singulier: 'aide dédiée',
-              pluriel: 'aides dédiées',
-            },
-          ]),
+          nombreDAides: nouveauParcours.thematiques.nombre_aides_logement,
+          aides: nouveauParcours.aidesLocales.filter(aide => aide.thematiques.includes(ClefThematiqueAPI.logement)),
           articles: nouveauParcours.articles.filter(article => article.thematique === ClefThematiqueAPI.logement),
         },
       ],

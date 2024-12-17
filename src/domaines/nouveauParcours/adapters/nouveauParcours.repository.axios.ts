@@ -4,6 +4,7 @@ import { NouveauParcours } from '@/domaines/nouveauParcours/recuperationDonneesN
 import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 
 interface NouveauParcoursModeAPI {
+  liste_communes: string[];
   nombre_inscrits: number;
   nombre_points_moyen: number;
 
@@ -40,6 +41,11 @@ interface NouveauParcoursModeAPI {
     thematique: ClefThematiqueAPI;
     titre: string;
   }[];
+  liste_id_aides_locales: {
+    id: number;
+    thematiques: ClefThematiqueAPI[];
+    titre: string;
+  }[];
 }
 
 export class NouveauParcoursRepositoryAxios implements NouveauParcoursRepository {
@@ -47,6 +53,7 @@ export class NouveauParcoursRepositoryAxios implements NouveauParcoursRepository
     const axios = AxiosFactory.getAxios();
     const response = await axios.get<NouveauParcoursModeAPI>(`/code_postal_synthese/${codePostal}`);
     return {
+      listeCommunes: response.data.liste_communes,
       nombreInscrits: response.data.nombre_inscrits,
       nombrePointsMoyen: response.data.nombre_points_moyen,
       nombreDefiEnCours: response.data.nombre_defis_encours,
@@ -82,6 +89,7 @@ export class NouveauParcoursRepositoryAxios implements NouveauParcoursRepository
         zeroDechet: response.data.result_PDCN_zero_dechet,
       },
       articles: response.data.liste_id_articles_locaux,
+      aidesLocales: response.data.liste_id_aides_locales,
     };
   }
 }

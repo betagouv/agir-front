@@ -12,7 +12,11 @@ export interface NouveauParcoursViewModel {
     emoji: string;
     titre: string;
     contenu: string[];
-    aides: string[];
+    nombreDAides: number;
+    aides: {
+      id: number;
+      titre: string;
+    }[];
     lien: string;
     articles: {
       id: number;
