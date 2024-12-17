@@ -4,12 +4,22 @@ import { NouveauParcoursRepository } from '@/domaines/nouveauParcours/ports/nouv
 export interface NouveauParcours {
   nombreInscrits: number;
   nombrePointsMoyen: number;
+  nombreDefiEnCours: number;
+  nombreDefiRealises: number;
   aides: {
     nombreAidesTotal: number;
     nombreAidesNatTotal: number;
     nombreAidesRegionTotal: number;
     nombreAidesDepartementTotal: number;
     nombreAidesCommuneTotal: number;
+  };
+  thematiques: {
+    nombre_aides_alimentation: number;
+    nombre_aides_consommation: number;
+    nombre_aides_logement: number;
+    nombre_aides_transport: number;
+    nombre_aides_dechet: number;
+    nombre_aides_loisir: number;
   };
   longueVieAuxObjets: {
     tout: number;

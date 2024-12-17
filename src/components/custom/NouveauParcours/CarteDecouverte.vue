@@ -9,8 +9,6 @@
         </h3>
         <slot />
       </div>
-
-      <a :href="lienBouton" class="fr-btn">Découvrir</a>
     </div>
   </div>
 </template>
@@ -24,16 +22,6 @@
 </script>
 
 <style scoped>
-  .fr-btn {
-    align-self: center;
-    border-radius: 2rem;
-    background-color: black;
-  }
-
-  .fr-btn:hover {
-    background-color: #656565;
-  }
-
   h3 {
     border-bottom: 1px solid #eaeaea;
   }
