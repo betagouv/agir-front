@@ -49,6 +49,6 @@ export class RecuperationDonneesNouveauParcoursUsecase {
 
   async execute(codePostal: string, presenter: NouveauParcoursPresenter): Promise<void> {
     const nouveauParcours = await this.nouveauParcoursRepository.getNouveauParcours(codePostal);
-    presenter.displayNouveauParcours(nouveauParcours);
+    presenter.displayNouveauParcours(nouveauParcours, codePostal);
   }
 }

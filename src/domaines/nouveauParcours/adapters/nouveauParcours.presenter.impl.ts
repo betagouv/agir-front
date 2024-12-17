@@ -8,8 +8,9 @@ import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 export class NouveauParcoursPresenterImpl implements NouveauParcoursPresenter {
   constructor(private readonly viewModel: (nouveauParcoursViewModel: NouveauParcoursViewModel) => void) {}
 
-  displayNouveauParcours(nouveauParcours: NouveauParcours): void {
+  displayNouveauParcours(nouveauParcours: NouveauParcours, codePostal: string): void {
     this.viewModel({
+      codePostal,
       nombreInscrits: nouveauParcours.nombreInscrits,
       nombrePointsMoyen: Math.round(nouveauParcours.nombrePointsMoyen),
       nombreArticlesLocaux: nouveauParcours.nombreArticlesLocaux,
@@ -49,11 +50,13 @@ export class NouveauParcoursPresenterImpl implements NouveauParcoursPresenter {
             {
               template: valeurEtGroupePronominal => `Pour un ensemble de ${valeurEtGroupePronominal}`,
               valeur: nouveauParcours.longueVieAuxObjets.tout,
-              singulier: 'point responsable',
-              pluriel: 'points responsables',
+              singulier: 'point de consommation responsable',
+              pluriel: 'points de consommations responsables',
             },
+          ]),
+          aides: this.genererListe([
             {
-              template: valeurEtGroupePronominal => `Et ${valeurEtGroupePronominal} pour la consommation`,
+              template: valeurEtGroupePronominal => `${valeurEtGroupePronominal} pour la consommation`,
               valeur: nouveauParcours.thematiques.nombre_aides_consommation,
               singulier: 'aide recensée',
               pluriel: 'aides recensées',
@@ -90,6 +93,8 @@ export class NouveauParcoursPresenterImpl implements NouveauParcoursPresenter {
               singulier: 'point',
               pluriel: 'points',
             },
+          ]),
+          aides: this.genererListe([
             {
               template: valeurEtGroupePronominal => `Et ${valeurEtGroupePronominal} pour l'alimentation`,
               valeur: nouveauParcours.thematiques.nombre_aides_alimentation,
@@ -103,7 +108,8 @@ export class NouveauParcoursPresenterImpl implements NouveauParcoursPresenter {
           emoji: '🚲',
           titre: 'Me déplacer',
           lien: '#',
-          contenu: this.genererListe([
+          contenu: this.genererListe([]),
+          aides: this.genererListe([
             {
               template: valeurEtGroupePronominal => `${valeurEtGroupePronominal} aux transports`,
               valeur: nouveauParcours.thematiques.nombre_aides_transport,
@@ -117,7 +123,8 @@ export class NouveauParcoursPresenterImpl implements NouveauParcoursPresenter {
           emoji: '🧱',
           titre: 'Me loger',
           lien: '#',
-          contenu: this.genererListe([
+          contenu: this.genererListe([]),
+          aides: this.genererListe([
             {
               template: valeurEtGroupePronominal => `${valeurEtGroupePronominal} pour le logement`,
               valeur: nouveauParcours.thematiques.nombre_aides_logement,
@@ -146,8 +153,7 @@ export class NouveauParcoursPresenterImpl implements NouveauParcoursPresenter {
           return null;
         }
 
-        const valeurAffichee = valeur === 200 ? 'plus de 200' : valeur;
-        const valeurEnGrasEtSonGroupePronominal = `<span class="fr-text--bold">${valeurAffichee}</span> ${this.gererPluriel(
+        const valeurEnGrasEtSonGroupePronominal = `<span class="fr-text--bold">${valeur}</span> ${this.gererPluriel(
           valeur,
           mapping.singulier,
           mapping.pluriel,

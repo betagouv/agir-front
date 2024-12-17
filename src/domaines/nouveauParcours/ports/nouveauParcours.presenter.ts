@@ -1,6 +1,7 @@
 import { NouveauParcours } from '@/domaines/nouveauParcours/recuperationDonneesNouveauParcours.usecase';
 
 export interface NouveauParcoursViewModel {
+  codePostal: string;
   nombreInscrits: number;
   nombrePointsMoyen: number;
   nombreArticlesLocaux: number;
@@ -11,6 +12,7 @@ export interface NouveauParcoursViewModel {
     emoji: string;
     titre: string;
     contenu: string[];
+    aides: string[];
     lien: string;
     articles: {
       id: number;
@@ -20,5 +22,5 @@ export interface NouveauParcoursViewModel {
 }
 
 export interface NouveauParcoursPresenter {
-  displayNouveauParcours(nouveauParcours: NouveauParcours): void;
+  displayNouveauParcours(nouveauParcours: NouveauParcours, codePostal: string): void;
 }

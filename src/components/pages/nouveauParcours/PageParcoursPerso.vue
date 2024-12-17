@@ -1,8 +1,9 @@
-<!-- TODO: changer l'url -->
 <!-- TODO: articles pour dechets, climat, loisir et services_societaux ET nombre_aides_dechet, nombre_aides_climat -->
-<!-- TODO: dernières propriétés : nombreInscrits, nombrePointsMoyen, nombreArticlesLocaux, nombreArticlesTotal, nombreDefiEnCours, nombreDefiRealises -->
-<!-- TODO: où vous les chiffres des aides ? -->
+<!-- TODO: dernières propriétés : nombreArticlesLocaux, nombreArticlesTotal, nombreDefiEnCours, nombreDefiRealises -->
+<!-- TODO: où vont les chiffres des aides ? -->
+<!-- TODO: liste des aides par thématique -->
 <!-- TODO: mettre le gras -->
+<!-- TODO: supprimer tous les "nvx parcours" ? -->
 <!-- TODO: skeleton -->
 
 <template>
@@ -25,10 +26,26 @@
       <CarteSkeleton v-if="isLoading" />
       <template v-else-if="nouveauParcoursViewmodel">
         <section class="propositions text--center">
-          <h1 class="fr-h2 fr-mb-5w">
+          <h1 class="fr-h2 fr-mb-3w">
             <span class="text--italic">J'agis</span> en quelques chiffres pour le code postal
-            <span class="codePostal">{{ codePostal }}</span>
+            <span class="codePostal">{{ nouveauParcoursViewmodel.codePostal }}</span>
           </h1>
+
+          <p
+            v-if="nouveauParcoursViewmodel.nombreInscrits > 1 && nouveauParcoursViewmodel.nombrePointsMoyen > 1"
+            class="fr-mb-5w"
+          >
+            Dans votre commune, {{ nouveauParcoursViewmodel.nombreInscrits }} utilisateurs sont inscrits à J'agis et
+            cumulent {{ nouveauParcoursViewmodel.nombrePointsMoyen }} points en moyenne.
+          </p>
+
+          <p
+            v-if="nouveauParcoursViewmodel?.nombreInscrits === 1 && nouveauParcoursViewmodel.nombrePointsMoyen > 0"
+            class="fr-mb-5w"
+          >
+            Dans votre commune, un unique utilisateur est inscrit à J'agis et il cumule
+            {{ nouveauParcoursViewmodel.nombrePointsMoyen }} points.
+          </p>
 
           <div class="fr-grid-row fr-grid-row--gutters">
             <CarteDecouverte
@@ -38,9 +55,19 @@
               :titre-emoji="proposition.emoji"
               :titre-texte="proposition.titre"
             >
-              <ul>
-                <li v-for="item in proposition.contenu" :key="item" v-html="item"></li>
-              </ul>
+              <div v-if="proposition.contenu.length > 0">
+                <p class="fr-m-0">Les services :</p>
+                <ul>
+                  <li v-for="item in proposition.contenu" :key="item" v-html="item"></li>
+                </ul>
+              </div>
+
+              <div v-if="proposition.aides.length > 0">
+                <p class="fr-m-0">Les aides :</p>
+                <ul>
+                  <li v-for="item in proposition.aides" :key="item" v-html="item"></li>
+                </ul>
+              </div>
 
               <div v-if="proposition.articles.length > 0">
                 <p class="fr-m-0">Les articles :</p>
@@ -50,6 +77,16 @@
                   </li>
                 </ul>
               </div>
+
+              <p
+                v-if="
+                  proposition.contenu.length === 0 &&
+                  proposition.articles.length === 0 &&
+                  proposition.aides.length === 0
+                "
+              >
+                Aucun contenu disponible pour l'instant !
+              </p>
             </CarteDecouverte>
           </div>
         </section>
@@ -97,5 +134,9 @@
 
   form {
     justify-self: center;
+  }
+
+  button {
+    justify-content: center;
   }
 </style>
