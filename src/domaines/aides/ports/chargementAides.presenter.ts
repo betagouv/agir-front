@@ -10,6 +10,7 @@ export interface AideViewModel {
   montantMaximum?: string;
   thematiqueLabel: string;
   thematiqueTag: { label: string; style: TagStyle };
+  urlCommencerVotreDemarche?: string;
 }
 
 export interface AidesViewModel {

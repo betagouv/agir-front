@@ -3,13 +3,13 @@
   <div class="fr-grid-row fr-grid-row--gutters">
     <div class="fr-col-12 fr-col-lg-3">
       <h2 class="fr-h4">Filtres</h2>
-      <InputCheckbox id="categoriesAides" label="Catégories" :options="optionsCheckbox" @update="handleValueChange" />
+      <InputCheckbox id="categoriesAides" :options="optionsCheckbox" label="Catégories" @update="handleValueChange" />
     </div>
     <div class="fr-col-12 fr-col-lg-9">
       <div v-for="(aides, index) in props.aidesGroupesParCategorie" :key="index">
         <div v-if="categoriesActives.length === 0 || categoriesActives.includes(`${index}`)">
           <h2 class="fr-h4">{{ index }}</h2>
-          <div class="fr-mb-2w" v-for="aide in aides" :key="aide.id" :id="`aide_${aide.id}`">
+          <div v-for="aide in aides" :id="`aide_${aide.id}`" :key="aide.id" class="fr-mb-2w">
             <Accordeon :label="aide.titre" :name-id="aide.id" @click="trackAideClick(aide)">
               <template v-slot:titre>
                 <span class="fr-col-12 fr-pr-2w">
@@ -32,13 +32,24 @@
               </template>
               <template v-slot:contenu>
                 <div class="cms__content" v-html="aide.contenu" />
-                <router-link
-                  v-if="aide.isSimulateur"
-                  :to="{ path: aide.url }"
-                  class="fr-btn fr-btn--icon-left fr-icon-arrow-right-line"
-                >
-                  Estimer le montant des aides
-                </router-link>
+                <div class="flex align-items--center gap--small">
+                  <a
+                    v-if="aide.urlCommencerVotreDemarche"
+                    :href="aide.urlCommencerVotreDemarche"
+                    class="fr-btn"
+                    rel="noopener external"
+                    target="_blank"
+                  >
+                    Commencer votre démarche
+                  </a>
+                  <router-link
+                    v-if="aide.isSimulateur"
+                    :to="{ path: aide.url }"
+                    class="fr-btn fr-btn--icon-left fr-icon-arrow-right-line"
+                  >
+                    Estimer le montant des aides
+                  </router-link>
+                </div>
               </template>
             </Accordeon>
           </div>
@@ -48,7 +59,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
   import { onMounted, ref } from 'vue';
   import { useRoute } from 'vue-router';
   import Accordeon from '@/components/custom/Aides/AccordeonAides.vue';

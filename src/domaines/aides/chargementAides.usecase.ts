@@ -6,6 +6,7 @@ export interface Aides {
   utilisateurEstCouvert: boolean;
   aides: Aide[];
 }
+
 export interface Aide {
   id: string;
   titre: string;
@@ -15,6 +16,7 @@ export interface Aide {
   isSimulateur: boolean;
   montantMaximum?: number;
   thematique: ClefThematiqueAPI;
+  urlCommencerVotreDemarche?: string;
 }
 
 export default class ChargementAidesUsecase {
