@@ -1,15 +1,24 @@
 import { Aide, Aides } from '@/domaines/aides/chargementAides.usecase';
 import {
-  ChargementAidesPresenter,
-  AideViewModel,
-  AidesViewModel,
   AidesAvecCouvertureViewModel,
+  AidesViewModel,
+  AideViewModel,
+  ChargementAidesPresenter,
 } from '@/domaines/aides/ports/chargementAides.presenter';
 import { MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
 import { TagThematique } from '@/domaines/thematiques/TagThematique';
 
 export class ChargementAidesPresenterImpl implements ChargementAidesPresenter {
   constructor(private _viewModel: (vm: AidesAvecCouvertureViewModel) => void) {}
+
+  presente(aides: Aides): void {
+    const viewModel = this.groupeParCategorie(aides.aides);
+
+    this._viewModel({
+      utilisateurEstCouvert: aides.utilisateurEstCouvert,
+      aides: viewModel,
+    });
+  }
 
   private groupeParCategorie = (aides: Aide[]): AidesViewModel => {
     const map: AidesViewModel = {};
@@ -33,6 +42,7 @@ export class ChargementAidesPresenterImpl implements ChargementAidesPresenter {
           label: MenuThematiques.getThematiqueData(aide.thematique).labelDansLeMenu,
           style: TagThematique.getTagThematiqueUtilitaire(aide.thematique),
         },
+        urlCommencerVotreDemarche: aide.urlCommencerVotreDemarche,
       };
 
       map[thematiqueLabel].push(aideToPush);
@@ -47,14 +57,5 @@ export class ChargementAidesPresenterImpl implements ChargementAidesPresenter {
       currency: 'EUR',
       maximumSignificantDigits: 4,
     }).format(montantMaximum)}`;
-  }
-
-  presente(aides: Aides): void {
-    const viewModel = this.groupeParCategorie(aides.aides);
-
-    this._viewModel({
-      utilisateurEstCouvert: aides.utilisateurEstCouvert,
-      aides: viewModel,
-    });
   }
 }

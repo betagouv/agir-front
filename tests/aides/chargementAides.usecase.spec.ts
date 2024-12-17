@@ -30,6 +30,7 @@ class ChargementAidesRepositoryForTest implements ChargementAidesRepository {
           idDuContenu: '',
           isSimulateur: true,
           montantMaximum: 15000,
+          urlCommencerVotreDemarche: 'urlCommencerVotreDemarche',
         },
         {
           id: 'id-2',
@@ -145,6 +146,7 @@ describe('Fichier de tests pour charger toutes les aides', () => {
               },
               titre: "Simulez vos aides pour l'achat d'un vélo",
               url: 'vos-aides-velo',
+              urlCommencerVotreDemarche: 'urlCommencerVotreDemarche',
             },
             {
               contenu: '<h3>Titre test</h3><p>lorem ipsum dolor test</p>',
@@ -162,6 +164,7 @@ describe('Fichier de tests pour charger toutes les aides', () => {
               },
               titre: 'Simulez vos aides pour convertir votre voiture thermique en électrique',
               url: 'vos-aides-retrofit',
+              urlCommencerVotreDemarche: undefined,
             },
           ],
           '🥗 Me nourrir': [
@@ -181,6 +184,7 @@ describe('Fichier de tests pour charger toutes les aides', () => {
               },
               titre: 'Aide test',
               url: 'vos-aides-velo',
+              urlCommencerVotreDemarche: undefined,
             },
             {
               contenu: '<h3>Titre test</h3><p>lorem ipsum dolor test</p>',
@@ -198,6 +202,7 @@ describe('Fichier de tests pour charger toutes les aides', () => {
               },
               titre: 'Aide test',
               url: 'vos-aides-velo',
+              urlCommencerVotreDemarche: undefined,
             },
             {
               contenu: '<h3>Titre test</h3><p>lorem ipsum dolor test</p>',
@@ -215,6 +220,7 @@ describe('Fichier de tests pour charger toutes les aides', () => {
               },
               titre: 'Aide test',
               url: 'vos-aides-velo',
+              urlCommencerVotreDemarche: undefined,
             },
             {
               contenu: '<h3>Titre test</h3><p>lorem ipsum dolor test</p>',
@@ -232,6 +238,7 @@ describe('Fichier de tests pour charger toutes les aides', () => {
               },
               titre: 'Aide test',
               url: 'vos-aides-velo',
+              urlCommencerVotreDemarche: undefined,
             },
           ],
         },

@@ -7,6 +7,7 @@ interface AidesApiModel {
   utilisateur_est_couvert: boolean;
   liste_aides: AideApiModel[];
 }
+
 interface AideApiModel {
   content_id: string;
   titre: string;
@@ -16,6 +17,7 @@ interface AideApiModel {
   thematiques_label: string[];
   thematiques: string[];
   montant_max: number;
+  url_demande?: string;
 }
 
 export class chargementAidesAxiosRepository implements ChargementAidesRepository {
@@ -40,6 +42,7 @@ export class chargementAidesAxiosRepository implements ChargementAidesRepository
           url: aide.url_simulateur,
           isSimulateur: aide.is_simulateur,
           montantMaximum: aide.montant_max,
+          urlCommencerVotreDemarche: aide.url_demande,
         })),
     };
   }
