@@ -1,5 +1,5 @@
 <template>
-  <div class="fr-col-12 fr-col-md-4">
+  <div class="fr-col-12 fr-col-md-6">
     <div
       class="shadow border-radius--md text--left fr-p-3w full-height flex flex-column flex-space-between background--white"
     >
@@ -13,7 +13,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
   const { titreEmoji = '😊', titreTexte } = defineProps<{
     titreEmoji: string;
     titreTexte: string;

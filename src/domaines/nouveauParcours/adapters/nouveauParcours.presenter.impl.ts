@@ -3,6 +3,7 @@ import {
   NouveauParcoursViewModel,
 } from '@/domaines/nouveauParcours/ports/nouveauParcours.presenter';
 import { NouveauParcours } from '@/domaines/nouveauParcours/recuperationDonneesNouveauParcours.usecase';
+import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 
 export class NouveauParcoursPresenterImpl implements NouveauParcoursPresenter {
   constructor(private readonly viewModel: (nouveauParcoursViewModel: NouveauParcoursViewModel) => void) {}
@@ -48,6 +49,7 @@ export class NouveauParcoursPresenterImpl implements NouveauParcoursPresenter {
               pluriel: 'points',
             },
           ]),
+          article: nouveauParcours.articles.filter(article => article.thematique === ClefThematiqueAPI.consommation),
         },
         {
           emoji: '🍛',
@@ -79,10 +81,11 @@ export class NouveauParcoursPresenterImpl implements NouveauParcoursPresenter {
               pluriel: 'points',
             },
           ]),
+          article: nouveauParcours.articles.filter(article => article.thematique === ClefThematiqueAPI.alimentation),
         },
         {
-          emoji: '💸',
-          titre: 'Vos aides',
+          emoji: '🚲',
+          titre: 'Me déplacer',
           lien: '#',
           contenu: this.genererListe([
             {
@@ -116,6 +119,45 @@ export class NouveauParcoursPresenterImpl implements NouveauParcoursPresenter {
               pluriel: 'aides',
             },
           ]),
+          article: nouveauParcours.articles.filter(article => article.thematique === ClefThematiqueAPI.transports),
+        },
+        {
+          emoji: '🧱',
+          titre: 'Me loger',
+          lien: '#',
+          contenu: this.genererListe([
+            {
+              template: valeurEtGroupePronominal => valeurEtGroupePronominal,
+              valeur: nouveauParcours.aides.nombreAidesNatTotal,
+              singulier: 'aide nationale',
+              pluriel: 'aides nationales',
+            },
+            {
+              template: valeurEtGroupePronominal => valeurEtGroupePronominal,
+              valeur: nouveauParcours.aides.nombreAidesRegionTotal,
+              singulier: 'aide régionale',
+              pluriel: 'aides régionales',
+            },
+            {
+              template: valeurEtGroupePronominal => valeurEtGroupePronominal,
+              valeur: nouveauParcours.aides.nombreAidesDepartementTotal,
+              singulier: 'aide départementale',
+              pluriel: 'aides départementales',
+            },
+            {
+              template: valeurEtGroupePronominal => valeurEtGroupePronominal,
+              valeur: nouveauParcours.aides.nombreAidesCommuneTotal,
+              singulier: 'aide communale',
+              pluriel: 'aides communales',
+            },
+            {
+              template: valeurEtGroupePronominal => `Pour un total de ${valeurEtGroupePronominal} !`,
+              valeur: nouveauParcours.aides.nombreAidesTotal,
+              singulier: 'aide',
+              pluriel: 'aides',
+            },
+          ]),
+          article: nouveauParcours.articles.filter(article => article.thematique === ClefThematiqueAPI.logement),
         },
       ],
     });

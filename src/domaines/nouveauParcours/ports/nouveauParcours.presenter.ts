@@ -8,6 +8,10 @@ export interface NouveauParcoursViewModel {
     titre: string;
     contenu: string[];
     lien: string;
+    article: {
+      id: number;
+      titre: string;
+    }[];
   }[];
 }
 

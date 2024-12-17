@@ -1,6 +1,7 @@
 import { AxiosFactory } from '@/axios.factory';
 import { NouveauParcoursRepository } from '@/domaines/nouveauParcours/ports/nouveauParcours.repository';
 import { NouveauParcours } from '@/domaines/nouveauParcours/recuperationDonneesNouveauParcours.usecase';
+import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 
 interface NouveauParcoursModeAPI {
   nombre_inscrits: number;
@@ -29,8 +30,14 @@ interface NouveauParcoursModeAPI {
   result_PDCN_marche_local: number;
   result_PDCN_zero_dechet: number;
 
-  nombre_defis_encours: 0;
-  nombre_defis_realises: 0;
+  nombre_defis_encours: number;
+  nombre_defis_realises: number;
+
+  liste_id_articles_locaux: {
+    id: number;
+    thematique: ClefThematiqueAPI;
+    titre: string;
+  }[];
 }
 
 export class NouveauParcoursRepositoryAxios implements NouveauParcoursRepository {
@@ -70,6 +77,7 @@ export class NouveauParcoursRepositoryAxios implements NouveauParcoursRepository
         marcheLocal: response.data.result_PDCN_marche_local,
         zeroDechet: response.data.result_PDCN_zero_dechet,
       },
+      articles: response.data.liste_id_articles_locaux,
     };
   }
 }

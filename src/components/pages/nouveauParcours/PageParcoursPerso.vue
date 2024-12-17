@@ -15,13 +15,22 @@
           <CarteDecouverte
             v-for="proposition in nouveauParcoursViewmodel.propositions"
             :key="proposition.titre"
+            :lien-bouton="proposition.lien"
             :titre-emoji="proposition.emoji"
             :titre-texte="proposition.titre"
-            :lien-bouton="proposition.lien"
           >
             <ul>
               <li v-for="item in proposition.contenu" :key="item" v-html="item"></li>
             </ul>
+
+            <div v-if="proposition.article.length > 0">
+              <p class="fr-m-0">Les articles :</p>
+              <ul>
+                <li v-for="article in proposition.article" :key="article.id">
+                  <router-link :to="`/article/previsualisation/${article.id}`">{{ article.titre }}</router-link>
+                </li>
+              </ul>
+            </div>
           </CarteDecouverte>
         </div>
       </section>

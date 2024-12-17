@@ -1,5 +1,7 @@
 <template>
-  <PageArticleComposant :article="article" />
+  <div class="fr-container">
+    <PageArticleComposant :article="article" />
+  </div>
 </template>
 <script lang="ts" setup>
   import { onMounted, ref } from 'vue';

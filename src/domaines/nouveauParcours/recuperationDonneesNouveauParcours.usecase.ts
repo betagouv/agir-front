@@ -1,5 +1,6 @@
 import { NouveauParcoursPresenter } from '@/domaines/nouveauParcours/ports/nouveauParcours.presenter';
 import { NouveauParcoursRepository } from '@/domaines/nouveauParcours/ports/nouveauParcours.repository';
+import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 
 export interface NouveauParcours {
   nombreInscrits: number;
@@ -34,6 +35,12 @@ export interface NouveauParcours {
     marcheLocal: number;
     zeroDechet: number;
   };
+
+  articles: {
+    id: number;
+    thematique: ClefThematiqueAPI;
+    titre: string;
+  }[];
 }
 
 export class RecuperationDonneesNouveauParcoursUsecase {
