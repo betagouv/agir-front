@@ -1,8 +1,6 @@
 <!-- TODO: articles pour dechets, climat, loisir et services_societaux ET nombre_aides_dechet, nombre_aides_climat -->
 <!-- TODO: dernières propriétés : nombreArticlesLocaux, nombreArticlesTotal, nombreDefiEnCours, nombreDefiRealises -->
 <!-- TODO: où vont les chiffres des aides ? -->
-<!-- TODO: liste des aides par thématique -->
-<!-- TODO: mettre le gras -->
 <!-- TODO: supprimer tous les "nvx parcours" ? -->
 <!-- TODO: skeleton -->
 
@@ -64,19 +62,21 @@
 
               <div v-if="proposition.aides.length > 0 && proposition.nombreDAides > 0">
                 <p v-if="proposition.aides.length === proposition.nombreDAides" class="fr-m-0">
-                  Les aides disponibles :
+                  Les <span class="text--bold">aides</span> disponibles :
                 </p>
-                <p v-else class="fr-m-0">Quelques aides parmi les {{ proposition.nombreDAides }} disponibles :</p>
+                <p v-else class="fr-m-0">
+                  Quelques <span class="text--bold">aides</span> parmi les {{ proposition.nombreDAides }} disponibles :
+                </p>
 
                 <ul>
                   <li v-for="article in proposition.aides" :key="article.id">
-                    <router-link :to="`/article/previsualisation/${article.id}`">{{ article.titre }}</router-link>
+                    {{ article.titre }}
                   </li>
                 </ul>
               </div>
 
               <div v-if="proposition.articles.length > 0">
-                <p class="fr-m-0">Quelques exemples d'articles :</p>
+                <p class="fr-m-0">Quelques <span class="text--bold">articles</span> :</p>
                 <ul>
                   <li v-for="article in proposition.articles" :key="article.id">
                     <router-link :to="`/article/previsualisation/${article.id}`">{{ article.titre }}</router-link>
