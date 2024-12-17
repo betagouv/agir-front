@@ -33,6 +33,7 @@ interface MissionItemThematiqueApiModel {
   sont_points_en_poche: boolean;
   defi_status: 'en_cours' | undefined;
 }
+
 interface MissionThematiqueApiModel {
   id: string;
   titre: string;
@@ -85,7 +86,7 @@ export class MissionsRepositoryAxios implements MissionsRepository {
   @intercept401()
   async recupererMissionsRecommandees(utilisateurId: string): Promise<Mission[]> {
     const axios = AxiosFactory.getAxios();
-    const response = await axios.get<MissionApiModel[]>(`/utilisateurs/${utilisateurId}/tuiles_missions`);
+    const response = await axios.get<MissionApiModel[]>(`/utilisateurs/${utilisateurId}/tuiles_missions_v2`);
     return response.data.map(thematique => ({
       id: thematique.code,
       titre: thematique.titre,
@@ -107,7 +108,7 @@ export class MissionsRepositoryAxios implements MissionsRepository {
   async recupererMissionsThematique(universId: string, utilisateurId: string): Promise<Mission[]> {
     const axios = AxiosFactory.getAxios();
     const response = await axios.get<MissionApiModel[]>(
-      `/utilisateurs/${utilisateurId}/thematiques/${universId}/tuiles_missions`,
+      `/utilisateurs/${utilisateurId}/thematiques/${universId}/tuiles_missions_v2`,
     );
     return response.data.map(thematique => ({
       id: thematique.code,
