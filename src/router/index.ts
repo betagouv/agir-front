@@ -10,6 +10,7 @@ import conformiteRoutes from '@/router/conformite/routes';
 import defiRoutes from '@/router/defis/routes';
 import examenRoutes from '@/router/examen/routes';
 import kycRoutes from '@/router/kyc/routes';
+import nouveauParcoursRoutes from '@/router/nouveauParcours/routes';
 import quizRoutes from '@/router/quiz/routes';
 import serviceRoutes from '@/router/services/routes';
 import thematiqueRoutes from '@/router/thematiques/routes';
@@ -50,6 +51,7 @@ const routes: RouteRecordRaw[] = [
   ...bilanCarboneRoutes,
   ...classementRoutes,
   ...examenRoutes,
+  ...nouveauParcoursRoutes,
   {
     path: '/',
     name: RouteCommuneName.ACCUEIL,
