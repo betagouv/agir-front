@@ -1,10 +1,10 @@
 <template>
   <div v-if="scoreExamen" class="fr-container fr-py-6w">
-    <div class="bg-fin-mission fr-p-4w text--center border-radius--md">
+    <div class="background--white fr-p-4w text--center border-radius--md">
       <div class="conteneur-drapeaux fr-mb-2w">
-        <span class="fr-icon-flag-fill text--bleu" aria-hidden="true" />
-        <span class="fr-icon-flag-fill text--bleu big" aria-hidden="true" />
-        <span class="fr-icon-flag-fill text--bleu" aria-hidden="true" />
+        <span aria-hidden="true" class="fr-icon-flag-fill text--bleu" />
+        <span aria-hidden="true" class="fr-icon-flag-fill text--bleu big" />
+        <span aria-hidden="true" class="fr-icon-flag-fill text--bleu" />
       </div>
       <h1 class="fr-mt-2w">
         <span class="text--uppercase">Bravo !</span><br />
@@ -14,16 +14,16 @@
           >" !
         </span>
       </h1>
-      <p>
+      <p :class="scoreExamen.couleurPourcentageDeReussite" class="fr-h2">
         Vous avez obtenu un score de <span class="text--bold">{{ scoreExamen.pourcentageDeReussite }}</span>
       </p>
-      <p>{{ scoreExamen.phrase }}</p>
-      <router-link :to="`/thematique/${useRoute().params.id}`" class="fr-btn"> Retourner à la thématique </router-link>
+      <p class="text--bold">{{ scoreExamen.phrase }}</p>
+      <router-link :to="`/thematique/${useRoute().params.id}`" class="fr-btn"> Retourner à la thématique</router-link>
     </div>
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
   import { onMounted, ref } from 'vue';
   import { useRoute } from 'vue-router';
   import { ExamenRepositoryAxios } from '@/domaines/examens/adapters/examen.repository.axios';

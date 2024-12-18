@@ -4,22 +4,19 @@ import { MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
 import { TagStyle, TagThematique } from '@/domaines/thematiques/TagThematique';
 import { InteractionType } from '@/shell/interactionType';
 
-export interface ExamenBaseViewModel {
+export interface ExamenQuizViewModel {
+  idDuContenu: string;
   id: string;
   aEteRealisee: boolean;
 }
 
-export interface ExamenQuizArticleViewModel extends ExamenBaseViewModel {
-  idDuContenu: string;
-  type: 'quiz' | 'article';
-}
 export interface ExamenViewModel {
   titre: string;
   urlImage: string;
   estTerminee: boolean;
   estTerminable: boolean;
   intro: string;
-  articleEtQuiz: ExamenQuizArticleViewModel[];
+  quizz: ExamenQuizViewModel[];
   tag: {
     label: string;
     style: TagStyle;
@@ -41,20 +38,16 @@ export class ExamenPresenterImpl implements MissionPresenter {
         label: MenuThematiques.getThematiqueData(examen.clefApiThematique).labelDansLeMenu,
         style: TagThematique.getTagThematiqueUtilitaire(examen.clefApiThematique),
       },
-      articleEtQuiz: examen.items
-        .filter(item => item.type === InteractionType.ARTICLE || item.type === InteractionType.QUIZ)
-        .map(item => this.mapToViewModel(item)),
-      nombreEtapesMission:
-        examen.items.length - examen.items.filter(item => item.type === InteractionType.DEFIS).length + 1,
+      quizz: examen.items.filter(item => item.type === InteractionType.QUIZ).map(item => this.mapToViewModel(item)),
+      nombreEtapesMission: examen.items.length,
     });
   }
 
-  private mapToViewModel(item: MissionItem): ExamenQuizArticleViewModel {
+  private mapToViewModel(item: MissionItem): ExamenQuizViewModel {
     return {
       id: item.id,
       idDuContenu: item.contentId,
       aEteRealisee: item.aEteRealisee,
-      type: item.type === InteractionType.ARTICLE ? 'article' : 'quiz',
     };
   }
 }
