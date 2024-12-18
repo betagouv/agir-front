@@ -2,32 +2,34 @@
   <div class="fr-grid-row fr-grid-row--gutters">
     <div class="fr-col-12 fr-col-lg-8">
       <h1 class="flex align-items--center gap--small">
-        <span class="fr-h2">Une question sur la thématique</span>
-        <ThematiqueTag :tag="{ ...quizViewModel.thematiqueTag, display: 'xl' }" />
+        <slot>
+          <span class="fr-h2">Une question sur la thématique</span>
+          <ThematiqueTag :tag="{ ...quizViewModel.thematiqueTag, display: 'xl' }" />
+        </slot>
       </h1>
       <div class="background--white border fr-p-2w border-radius--md">
         <QuizQuestion
-          :questions="listeDesReponses"
           :question="quizViewModel.question.intitule"
+          :questions="listeDesReponses"
           @quiz-termine="verifierLaReponse"
         />
         <QuizArticle
           v-if="isValide"
-          :texte-explication-o-k="quizViewModel.question.texteExplicationOK"
-          :texte-explication-k-o="quizViewModel.question.texteExplicationKO"
-          :reponse-correcte="estBienRepondu"
           :article-associe="articleAssocie"
-          :points="quizViewModel.nombreDePointsAGagner"
-          :quiz-id="quizViewModel.articleAssocie?.id!"
           :est-enchainement-mission="estEnchainementMission"
           :on-click-continuer="onClickContinuer"
+          :points="quizViewModel.nombreDePointsAGagner"
+          :quiz-id="quizViewModel.articleAssocie?.id!"
+          :reponse-correcte="estBienRepondu"
+          :texte-explication-k-o="quizViewModel.question.texteExplicationKO"
+          :texte-explication-o-k="quizViewModel.question.texteExplicationOK"
         />
       </div>
     </div>
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
   import { ref } from 'vue';
   import QuizArticle from '@/components/custom/Quiz/QuizArticle.vue';
   import QuizQuestion from '@/components/custom/Quiz/QuizQuestion.vue';

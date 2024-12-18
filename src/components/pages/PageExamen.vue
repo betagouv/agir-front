@@ -24,14 +24,15 @@
         :titre="examenViewModel.titre"
         :url-image="examenViewModel.urlImage"
       />
-      <MissionQuizArticles
+      <ExamenQuiz
         v-if="etapeCourante.type === 'QUIZ_ARTICLE'"
         :etape-courante-defaut="etapeCourante.etapeDansLetape"
-        :missions="examenViewModel.articleEtQuiz"
         :nombre-detapes-precendentes="1"
         :nombre-etapes-mission="examenViewModel.nombreEtapesMission"
         :on-click-fin-quiz-article="() => miseAJourEtatCourant('FIN', 0)"
         :on-click-revenir-etape-precedente="() => miseAJourEtatCourant('INTRO', 0)"
+        :quizz="examenViewModel.quizz"
+        :titre="examenViewModel.titre"
       />
       <ExamenTerminee v-if="etapeCourante.type === 'FIN'" :titre="examenViewModel.titre" />
     </template>
@@ -41,9 +42,9 @@
 <script lang="ts" setup>
   import { onMounted, onUnmounted, ref } from 'vue';
   import { useRoute } from 'vue-router';
+  import ExamenQuiz from '@/components/custom/Mission/Examen/ExamenQuiz.vue';
   import ExamenTerminee from '@/components/custom/Mission/Examen/ExamenTerminee.vue';
   import MissionIntroduction from '@/components/custom/Mission/MissionIntroduction.vue';
-  import MissionQuizArticles from '@/components/custom/Mission/MissionQuizArticles.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import { ExamenPresenterImpl, ExamenViewModel } from '@/domaines/missions/adapters/examen.presenter.impl';
   import { MissionsRepositoryAxios } from '@/domaines/missions/adapters/missions.repository.axios';
@@ -94,7 +95,7 @@
 
   function determineEtapeExamen(examenViewModel: ExamenViewModel): { etat: EtatsPossible; indexEtape: number } {
     const missionEstTerminee = examenViewModel.estTerminee;
-    const indexDuDernierQuizzRealise = examenViewModel.articleEtQuiz.findLastIndex(elem => elem.aEteRealisee);
+    const indexDuDernierQuizzRealise = examenViewModel.quizz.findLastIndex(elem => elem.aEteRealisee);
     const aucunQuizzRepondu = indexDuDernierQuizzRealise !== undefined && indexDuDernierQuizzRealise === -1;
 
     if (missionEstTerminee || aucunQuizzRepondu) {
@@ -102,9 +103,9 @@
     }
 
     const quizzEstCommence = indexDuDernierQuizzRealise > -1;
-    const quizzNestPasTermine = indexDuDernierQuizzRealise < examenViewModel.articleEtQuiz.length - 1;
+    const quizzNestPasTermine = indexDuDernierQuizzRealise < examenViewModel.quizz.length - 1;
     if (quizzEstCommence && quizzNestPasTermine) {
-      return { etat: 'QUIZ_ARTICLE', indexEtape: indexDuDernierQuizzRealise + 1 };
+      return { etat: 'QUIZ_ARTICLE', indexEtape: indexDuDernierQuizzRealise };
     }
 
     return { etat: 'INTRO', indexEtape: 0 };
