@@ -1,5 +1,28 @@
 # Changelog
 
+## [1.35.0](https://github.com/betagouv/agir-front/compare/v1.34.0...v1.35.0) (2024-12-18)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* ajout du bouton commencer votre demarche pour les aides ([#838](https://github.com/betagouv/agir-front/issues/838)) ([f8ae35a](https://github.com/betagouv/agir-front/commit/f8ae35a76a190b4283601601e5501c5980e021d7))
+* ajustement écran de fin d'un examen ([#839](https://github.com/betagouv/agir-front/issues/839)) ([07a3c9e](https://github.com/betagouv/agir-front/commit/07a3c9ef5bd5988460408b9083832cd96942011c))
+* page examen ([#829](https://github.com/betagouv/agir-front/issues/829)) ([33241a3](https://github.com/betagouv/agir-front/commit/33241a334ce92f4e4291d7906d921fd5888b0108))
+* skeleton chargement voir plus ([#810](https://github.com/betagouv/agir-front/issues/810)) ([cca41b1](https://github.com/betagouv/agir-front/commit/cca41b1785891ede59933d8dae3b1c0a05996548))
+* statistiques collectivites ([#828](https://github.com/betagouv/agir-front/issues/828)) ([fc478fd](https://github.com/betagouv/agir-front/commit/fc478fdbe4ba741bfcc8dd5f4dd29cb710a3fbf7))
+
+
+### 👷 Autres changements
+
+* ajout webcredentials et exclusion des quiz dans universal links ([#837](https://github.com/betagouv/agir-front/issues/837)) ([bbd6993](https://github.com/betagouv/agir-front/commit/bbd6993b1a705893ca42c57cff3b6f3ae9c0104d))
+* Bump @types/node from 22.10.1 to 22.10.2 ([#834](https://github.com/betagouv/agir-front/issues/834)) ([7a1141e](https://github.com/betagouv/agir-front/commit/7a1141e8f788e10c17e526653dda3a7cfb6769e4))
+* Bump lighthouse from 12.2.2 to 12.3.0 ([#831](https://github.com/betagouv/agir-front/issues/831)) ([e4bb231](https://github.com/betagouv/agir-front/commit/e4bb2316b3ccacef1e8fc5306ade229619629525))
+* Bump lint-staged from 15.2.10 to 15.2.11 ([#832](https://github.com/betagouv/agir-front/issues/832)) ([18528be](https://github.com/betagouv/agir-front/commit/18528bef496692dafe8b5bc0faf1662620403227))
+* Bump prettier from 3.3.3 to 3.4.2 ([#833](https://github.com/betagouv/agir-front/issues/833)) ([59ec842](https://github.com/betagouv/agir-front/commit/59ec84213a9936325ee5cf7851530cf6b9c992ef))
+* Bump vite from 5.4.11 to 6.0.3 ([#835](https://github.com/betagouv/agir-front/issues/835)) ([cb5a6db](https://github.com/betagouv/agir-front/commit/cb5a6db8aac067b262ad2fafff3d22945cc06eb4))
+* utilisation API article plutôt que le CMS (hors preview) ([#830](https://github.com/betagouv/agir-front/issues/830)) ([31b924d](https://github.com/betagouv/agir-front/commit/31b924daccc917c7ac42d79d0381733087da0fe7))
+* utilisation des api v2 pour tuiles_missions ([#836](https://github.com/betagouv/agir-front/issues/836)) ([904eddf](https://github.com/betagouv/agir-front/commit/904eddf982cf6319c31f9a41e0ef7307a6d11cb3))
+
 ## [1.34.0](https://github.com/betagouv/agir-front/compare/v1.33.0...v1.34.0) (2024-12-12)
 
 
