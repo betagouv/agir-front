@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.35.1](https://github.com/betagouv/agir-front/compare/v1.35.0...v1.35.1) (2024-12-19)
+
+
+### 👷 Autres changements
+
+* récupérer les quiz depuis le back-end ([#840](https://github.com/betagouv/agir-front/issues/840)) ([714e4c8](https://github.com/betagouv/agir-front/commit/714e4c85969a7644c82e4f250f65f0e73e624284))
+
 ## [1.35.0](https://github.com/betagouv/agir-front/compare/v1.34.0...v1.35.0) (2024-12-18)
 
 
