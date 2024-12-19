@@ -6,11 +6,11 @@ export interface PageConformite {
 }
 
 export enum PageConformiteType {
-  MENTIONS_LEGALES = 1,
-  CGU = 2,
-  CONFIDENTIALITE = 3,
-  ACCESSIBILITE = 4,
-  CHARTE = 5,
+  MENTIONS_LEGALES = 'mention_legale',
+  CGU = 'cgu',
+  CONFIDENTIALITE = 'confidentialite',
+  ACCESSIBILITE = 'accessibilite',
+  CHARTE = 'charte_exp',
 }
 
 export class RecupererPageConformiteUsecase {

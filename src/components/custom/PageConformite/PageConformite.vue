@@ -4,10 +4,10 @@
     <div class="cms__content" v-html="contenuDeLaPage?.texte"></div>
   </div>
 </template>
-<script setup lang="ts">
+<script lang="ts" setup>
   import '@gouvfr/dsfr/dist/component/table/table.min.css';
   import { onMounted, ref } from 'vue';
-  import { ConformiteRepositoryCms } from '@/domaines/conformites/adapters/conformite.repository.cms';
+  import { ConformiteRepositoryAxios } from '@/domaines/conformites/adapters/conformite.repository.axios';
   import {
     PageConformite,
     PageConformiteType,
@@ -18,7 +18,7 @@
   const contenuDeLaPage = ref<PageConformite | null>();
 
   onMounted(async () => {
-    const usecase = new RecupererPageConformiteUsecase(new ConformiteRepositoryCms());
+    const usecase = new RecupererPageConformiteUsecase(new ConformiteRepositoryAxios());
     contenuDeLaPage.value = await usecase.execute(props.type);
   });
 </script>
