@@ -149,19 +149,8 @@ export class QuizRepositoryAxios implements QuizRepository {
   @intercept401()
   async terminerQuiz(idUtilisateur: string, idQuiz: string, score: number): Promise<void> {
     const axiosInstance = AxiosFactory.getAxios();
-    await axiosInstance.post(`/utilisateurs/${idUtilisateur}/events`, {
-      type: 'quizz_score',
-      content_id: idQuiz,
-      number_value: score,
-    });
-  }
-
-  @intercept401()
-  async marquerLeQuizArticleCommeLu(utilisateurId: string, articleId: string): Promise<void> {
-    const axios = AxiosFactory.getAxios();
-    await axios.post(`/utilisateurs/${utilisateurId}/events`, {
-      type: 'article_lu',
-      content_id: articleId,
+    await axiosInstance.patch(`/utilisateurs/${idUtilisateur}/bibliotheque/quizz/${idQuiz}`, {
+      pourcent: score,
     });
   }
 }

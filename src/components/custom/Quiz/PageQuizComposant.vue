@@ -77,12 +77,7 @@
       await new EnvoyerDonneesQuizInteractionUsecase(
         new QuizRepositoryAxios(),
         ToDoListEventBusImpl.getInstance(),
-      ).execute(
-        props.idUtilisateur,
-        props.idQuiz,
-        estBienRepondu.value ? 100 : 0,
-        props.articleAssocie ? props.articleAssocie.id : null,
-      );
+      ).execute(props.idUtilisateur, props.idQuiz, estBienRepondu.value ? 100 : 0);
     }
   };
 
