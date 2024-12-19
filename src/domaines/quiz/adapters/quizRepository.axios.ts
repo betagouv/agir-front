@@ -85,6 +85,8 @@ export class QuizRepositoryAxios implements QuizRepository {
       content_type: 'quizz',
     });
   }
+
+  @intercept401()
   async getQuiz(idQuizz: string, idUtilisateur: string): Promise<Quiz> {
     const axiosInstance = AxiosFactory.getAxios();
     const response: Response<QuizApiModel> = await axiosInstance.get<QuizApiModel>(
@@ -109,6 +111,38 @@ export class QuizRepositoryAxios implements QuizRepository {
         id: response.data.article_id,
         contenu: response.data.article_contenu,
       },
+    };
+  }
+
+  async getPrevisualisationQuiz(idQuiz: string): Promise<Quiz> {
+    const axiosInstance = AxiosFactory.getCMSAxios();
+    const response: Response<QuizCMSModel> = await axiosInstance.get<QuizCMSModel>(
+      `quizzes/${idQuiz}?populate[0]=questions&populate[1]=questions.reponses&populate[2]=thematique_gamification&populate[3]=articles`,
+    );
+    return {
+      titre: response.data.data.attributes.titre,
+      questions: response.data.data.attributes.questions.map((question, index) => {
+        return {
+          id: question.id,
+          intitule: question.libelle,
+          reponsesPossibles: question.reponses.map(r => r.reponse),
+          ordre: (index + 1).toString(),
+          texteExplicationOK: question.explicationOk,
+          texteExplicationKO: question.explicationKO,
+          solution: question.reponses.filter(r => r.exact)[0].reponse,
+        };
+      }),
+      clefThematiqueAPI: response.data.data.attributes.thematique_gamification.data.attributes
+        .code as ClefThematiqueAPI,
+      difficulte: response.data.data.attributes.difficulty,
+      nombreDePointsAGagner: response.data.data.attributes.points,
+      articleAssocie:
+        response.data.data.attributes.articles.data.length > 0
+          ? {
+              id: response.data.data.attributes.articles.data[0].id.toString(),
+              contenu: response.data.data.attributes.articles.data[0].attributes.contenu,
+            }
+          : null,
     };
   }
 

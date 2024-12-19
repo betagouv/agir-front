@@ -32,6 +32,7 @@ export interface Quiz {
 
 export interface QuizRepository {
   getQuiz(idQuiz: string, idUtilisateur: string): Promise<Quiz>;
+  getPrevisualisationQuiz(idQuiz: string): Promise<Quiz>;
   terminerQuiz(idUtilisateur: string, idQuiz: string, score: number): Promise<void>;
   noterQuiz(quizId: string, utilisateurId: string, note: 1 | 2 | 3 | 4): Promise<void>;
   marquerLeQuizArticleCommeLu(utilisateurId: string, articleId: string): Promise<void>;

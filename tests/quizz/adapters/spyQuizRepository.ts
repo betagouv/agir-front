@@ -55,4 +55,8 @@ export class SpyQuizRepository implements QuizRepository {
     this._score = score;
     return Promise.resolve();
   }
+
+  getPrevisualisationQuiz(idQuiz: string): Promise<Quiz> {
+    throw Error;
+  }
 }

@@ -31,8 +31,13 @@ class QuizRepositoryForTest implements QuizRepository {
       articleAssocie: null,
     };
   }
+
   async terminerQuiz(idUtilisateur: string, idInteraction: string, score: number): Promise<void> {
     return Promise.resolve();
+  }
+
+  getPrevisualisationQuiz(idQuiz: string): Promise<Quiz> {
+    throw Error();
   }
 }
 
