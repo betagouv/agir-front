@@ -8,11 +8,8 @@ export class EnvoyerDonneesQuizInteractionUsecase {
     private todoListEventBus: EventBus<ToDoListEvent>,
   ) {}
 
-  async execute(utilisateurId: string, quizId: string, pourcentageDeReussite: 0 | 100, articleId: string | null) {
+  async execute(utilisateurId: string, quizId: string, pourcentageDeReussite: 0 | 100) {
     await this.quizRepository.terminerQuiz(utilisateurId, quizId, pourcentageDeReussite);
-    if (articleId) {
-      await this.quizRepository.marquerLeQuizArticleCommeLu(utilisateurId, articleId);
-    }
     this.todoListEventBus.publish(ToDoListEvent.TODO_QUIZ_ETE_TERMINE);
   }
 }

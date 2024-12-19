@@ -132,13 +132,7 @@ describe('Page Quiz Article', () => {
           await fireEvent.click(boutonValider);
 
           // GIVEN
-          expect(envoyerDonneesQuizInteractionUsecaseMock).toHaveBeenNthCalledWith(
-            1,
-            'idUtilisateur',
-            'idQuiz',
-            100,
-            null,
-          );
+          expect(envoyerDonneesQuizInteractionUsecaseMock).toHaveBeenCalledWith('idUtilisateur', 'idQuiz', 100);
         });
       });
 
@@ -168,13 +162,7 @@ describe('Page Quiz Article', () => {
           await fireEvent.click(boutonValider);
 
           // GIVEN
-          expect(envoyerDonneesQuizInteractionUsecaseMock).toHaveBeenNthCalledWith(
-            1,
-            'idUtilisateur',
-            'idQuiz',
-            0,
-            null,
-          );
+          expect(envoyerDonneesQuizInteractionUsecaseMock).toHaveBeenCalledWith('idUtilisateur', 'idQuiz', 0);
         });
       });
     });

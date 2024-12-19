@@ -53,8 +53,9 @@
 
   const chargementQuizz = async () => {
     isLoading.value = true;
+    const { id: idUtilisateur } = utilisateurStore().utilisateur;
     const chargementQuizzUsecase = new ChargementQuizUsecase(new QuizRepositoryAxios());
-    await chargementQuizzUsecase.execute(idQuiz, new ChargementQuizPresenterImpl(mapValuesQuiz));
+    await chargementQuizzUsecase.execute(idQuiz, idUtilisateur, new ChargementQuizPresenterImpl(mapValuesQuiz));
     isLoading.value = false;
   };
 
