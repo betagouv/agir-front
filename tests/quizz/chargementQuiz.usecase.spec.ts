@@ -20,7 +20,6 @@ class QuizRepositoryForTest implements QuizRepository {
       titre: `Mon super quizz ${id}`,
       questions: [
         {
-          id: '1',
           ordre: '1',
           intitule: 'Une question ?',
           reponsesPossibles: ['Reponse 1', 'Reponse 2'],
@@ -43,7 +42,7 @@ describe("Fichier de test du usecase de chargement d'un quizz", () => {
     const chargementQuizzUsecase = new ChargementQuizUsecase(new QuizRepositoryForTest());
 
     // WHEN
-    await chargementQuizzUsecase.execute('1', new ChargementQuizPresenterImpl(expectation));
+    await chargementQuizzUsecase.execute('1', '1', new ChargementQuizPresenterImpl(expectation));
 
     // THEN
     function expectation(quizzViewModel: QuizViewModel) {

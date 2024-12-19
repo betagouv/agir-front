@@ -2,7 +2,6 @@ import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 
 interface QuestionsQuiz {
   ordre: string;
-  id: string;
   intitule: string;
   reponsesPossibles: string[];
   texteExplicationOK: string;
@@ -32,7 +31,7 @@ export interface Quiz {
 }
 
 export interface QuizRepository {
-  getQuiz(id: string): Promise<Quiz>;
+  getQuiz(idQuiz: string, idUtilisateur: string): Promise<Quiz>;
   terminerQuiz(idUtilisateur: string, idQuiz: string, score: number): Promise<void>;
   noterQuiz(quizId: string, utilisateurId: string, note: 1 | 2 | 3 | 4): Promise<void>;
   marquerLeQuizArticleCommeLu(utilisateurId: string, articleId: string): Promise<void>;

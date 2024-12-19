@@ -8,8 +8,8 @@ export class ChargementQuizUsecase {
     this._quizzRepository = quizRepository;
   }
 
-  async execute(quizId: string, chargementQuizPresenter: ChargementQuizzPresenter) {
-    const quiz = await this._quizzRepository.getQuiz(quizId);
+  async execute(quizId: string, utilisateurId: string, chargementQuizPresenter: ChargementQuizzPresenter) {
+    const quiz = await this._quizzRepository.getQuiz(quizId, utilisateurId);
     chargementQuizPresenter.presenteQuiz(quiz);
   }
 }

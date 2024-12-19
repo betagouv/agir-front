@@ -33,7 +33,7 @@
     isLoading.value = true;
     const idQuiz = Array.isArray(route.params.id) ? route.params.id[0] : route.params.id;
     const chargementQuizzUsecase = new ChargementQuizUsecase(new QuizRepositoryAxios());
-    await chargementQuizzUsecase.execute(idQuiz, new ChargementQuizPresenterImpl(mapValuesQuiz));
+    await chargementQuizzUsecase.execute(idQuiz, '', new ChargementQuizPresenterImpl(mapValuesQuiz));
     isLoading.value = false;
   };
 
