@@ -1,6 +1,6 @@
-import { NouveauParcours } from '@/domaines/nouveauParcours/recuperationDonneesNouveauParcours.usecase';
+import { DonneesCollectivites } from '@/domaines/collectivites/recuperationDonneesCollectivites.usecase';
 
-export interface NouveauParcoursViewModel {
+export interface DonneesCollectivitesViewModel {
   codePostal: string;
   nombreInscrits: number;
   nombrePointsMoyen: number;
@@ -25,6 +25,6 @@ export interface NouveauParcoursViewModel {
   }[];
 }
 
-export interface NouveauParcoursPresenter {
-  displayNouveauParcours(nouveauParcours: NouveauParcours, codePostal: string): void;
+export interface DonneesCollectivitesPresenter {
+  displayDonneesCollectivites(donneesCollectivites: DonneesCollectivites, codePostal: string): void;
 }
