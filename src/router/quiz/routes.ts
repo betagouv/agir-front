@@ -4,7 +4,6 @@ const PagePrevisualisationQuiz = () => import('@/components/pages/PagePrevisuali
 
 export enum RouteQuizName {
   QUIZ = 'quiz',
-  QUIZ_THEMATIQUE = 'quiz-thematique',
 }
 
 export enum RouteQuizPath {
@@ -24,14 +23,6 @@ const quizRoutes: RouteRecordRaw[] = [
   {
     path: `/${RouteQuizPath.QUIZ}/:id`,
     name: RouteQuizName.QUIZ,
-    component: PageQuiz,
-    meta: {
-      title: 'Quiz',
-    },
-  },
-  {
-    path: `/thematique/:thematiqueId/mission/:missionId/${RouteQuizPath.QUIZ}/:id`,
-    name: RouteQuizName.QUIZ_THEMATIQUE,
     component: PageQuiz,
     meta: {
       title: 'Quiz',
