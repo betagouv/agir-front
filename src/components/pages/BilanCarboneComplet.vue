@@ -33,6 +33,7 @@
               <span aria-hidden="true" class="fr-mr-2w">{{ univers.emoji }}</span> {{ univers.label }}
             </span>
             <span class="fr-text--md fr-mr-4w text--bleu text--bold">
+              <span class="fr-sr-only">: </span>
               {{ univers.impactKgAnnuel.valeur }}
               <span class="fr-text--sm fr-text--regular">{{ univers.impactKgAnnuel.unite }}</span>
             </span>
