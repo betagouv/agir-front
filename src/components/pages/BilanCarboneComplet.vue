@@ -43,7 +43,7 @@
             <li v-for="detail in univers.details" :key="detail.label" class="fr-grid-row align-items--center fr-mb-4w">
               <span class="fr-grid-row flex-space-between full-width fr-m-0">
                 <span class="fr-text--md text--black text--semi-bold fr-m-0">
-                  <span class="fr-mr-2w">{{ detail.emoji }}</span> {{ detail.label }}
+                  <span class="fr-mr-2w" aria-hidden="true">{{ detail.emoji }}</span> {{ detail.label }}
                 </span>
                 <span class="fr-text--md fr-mr-4w text--bleu text--bold fr-m-0">
                   {{ detail.impactKgAnnuel.valeur }}

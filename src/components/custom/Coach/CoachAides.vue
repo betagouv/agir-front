@@ -2,7 +2,7 @@
   <div>
     <h3 class="fr-mb-0">
       Mes aides à <span class="text--bleu">{{ commune }}</span
-      >&nbsp;💶
+      ><span aria-hidden="true">&nbsp;💶</span>
     </h3>
     <p>Retrouvez un ensemble d'aides locales et nationales</p>
     <ul class="list-style-none fr-pl-0">
