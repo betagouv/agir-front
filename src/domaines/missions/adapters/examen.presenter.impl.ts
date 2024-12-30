@@ -33,7 +33,7 @@ export class ExamenPresenterImpl implements MissionPresenter {
       urlImage: examen.urlImage,
       estTerminee: examen.estTerminee,
       estTerminable: examen.estTerminable,
-      intro: examen.intro,
+      intro: examen.intro ?? "Testez vos connaissances à l'aide de ce quiz !",
       tag: {
         label: MenuThematiques.getThematiqueData(examen.clefApiThematique).labelDansLeMenu,
         style: TagThematique.getTagThematiqueUtilitaire(examen.clefApiThematique),

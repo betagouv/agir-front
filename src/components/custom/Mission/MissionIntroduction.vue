@@ -1,10 +1,17 @@
 <template>
-  <ThematiqueTag :tag="tag" />
-  <h1 class="fr-mt-2w">
-    {{ titre }}
-  </h1>
-  <img :src="urlImage" height="200" alt="" />
-  <p class="fr-mt-2w" v-html="texte"></p>
+  <div class="intro--layout flex fr-mb-2w">
+    <img :src="urlImage" height="200" alt="" />
+    <div class="gap--small">
+      <div class="flex align-items--center gap--small">
+        <h1 class="fr-mt-2w fr-mr-1w">
+          {{ titre }}
+        </h1>
+        <ThematiqueTag :tag="tag" class="intro--tag" />
+      </div>
+
+      <p class="fr-m-0" v-html="texte"></p>
+    </div>
+  </div>
   <button id="btnContinuer" class="fr-btn fr-btn--lg" @click="onClickContinuer">Continuer</button>
 </template>
 
@@ -29,3 +36,18 @@
     btnContinuer?.focus();
   });
 </script>
+
+<style scoped>
+  .intro--layout {
+    gap: 1rem;
+    flex-direction: column;
+
+    @media all and (min-width: 800px) {
+      flex-direction: row;
+    }
+  }
+
+  .intro--tag {
+    min-width: fit-content;
+  }
+</style>
