@@ -1,10 +1,10 @@
 import { RouteRecordRaw } from 'vue-router';
 
-const nouveauParcoursRoutes: RouteRecordRaw[] = [
+const collectivitesRoutes: RouteRecordRaw[] = [
   {
     path: '/collectivites',
     name: 'collectivites',
-    component: () => import('@/components/pages/nouveauParcours/PageParcoursPerso.vue'),
+    component: () => import('@/components/pages/PageCollectivite.vue'),
     meta: {
       title: 'Accueil',
       estPublique: true,
@@ -12,4 +12,4 @@ const nouveauParcoursRoutes: RouteRecordRaw[] = [
   },
 ];
 
-export default nouveauParcoursRoutes;
+export default collectivitesRoutes;

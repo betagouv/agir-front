@@ -1,22 +1,22 @@
 import {
-  NouveauParcoursPresenter,
-  NouveauParcoursViewModel,
-} from '@/domaines/nouveauParcours/ports/nouveauParcours.presenter';
-import { NouveauParcours } from '@/domaines/nouveauParcours/recuperationDonneesNouveauParcours.usecase';
+  DonneesCollectivitesPresenter,
+  DonneesCollectivitesViewModel,
+} from '@/domaines/collectivites/ports/donneesCollectivites.presenter';
+import { DonneesCollectivites } from '@/domaines/collectivites/recuperationDonneesCollectivites.usecase';
 import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 
-export class NouveauParcoursPresenterImpl implements NouveauParcoursPresenter {
-  constructor(private readonly viewModel: (nouveauParcoursViewModel: NouveauParcoursViewModel) => void) {}
+export class DonneesCollectivitesPresenterImpl implements DonneesCollectivitesPresenter {
+  constructor(private readonly viewModel: (donneesCollectivitesViewModel: DonneesCollectivitesViewModel) => void) {}
 
-  displayNouveauParcours(nouveauParcours: NouveauParcours, codePostal: string): void {
+  displayDonneesCollectivites(donneesCollectivites: DonneesCollectivites, codePostal: string): void {
     this.viewModel({
       codePostal,
-      nombreInscrits: nouveauParcours.nombreInscrits,
-      nombrePointsMoyen: Math.round(nouveauParcours.nombrePointsMoyen),
-      nombreArticlesLocaux: nouveauParcours.nombreArticlesLocaux,
-      nombreArticlesTotal: nouveauParcours.nombreArticlesTotal,
-      nombreDefiEnCours: nouveauParcours.nombreDefiEnCours,
-      nombreDefiRealises: nouveauParcours.nombreDefiRealises,
+      nombreInscrits: donneesCollectivites.nombreInscrits,
+      nombrePointsMoyen: Math.round(donneesCollectivites.nombrePointsMoyen),
+      nombreArticlesLocaux: donneesCollectivites.nombreArticlesLocaux,
+      nombreArticlesTotal: donneesCollectivites.nombreArticlesTotal,
+      nombreDefiEnCours: donneesCollectivites.nombreDefiEnCours,
+      nombreDefiRealises: donneesCollectivites.nombreDefiRealises,
       propositions: [
         {
           emoji: '📺',
@@ -25,38 +25,42 @@ export class NouveauParcoursPresenterImpl implements NouveauParcoursPresenter {
           contenu: this.genererListe([
             {
               template: valeurEtGroupePronominal => `${valeurEtGroupePronominal} à proximité`,
-              valeur: nouveauParcours.longueVieAuxObjets.reparer,
+              valeur: donneesCollectivites.longueVieAuxObjets.reparer,
               singulier: 'point de <span class="text--bold">réparation</span>',
               pluriel: 'points de <span class="text--bold">réparations</span>',
             },
             {
               template: valeurEtGroupePronominal => `${valeurEtGroupePronominal} près de chez moi`,
-              valeur: nouveauParcours.longueVieAuxObjets.louer,
+              valeur: donneesCollectivites.longueVieAuxObjets.louer,
               singulier: 'point de <span class="text--bold">location</span>',
               pluriel: 'points de <span class="text--bold">locations</span>',
             },
             {
               template: valeurEtGroupePronominal => `${valeurEtGroupePronominal} à proximité`,
-              valeur: nouveauParcours.longueVieAuxObjets.emprunter,
+              valeur: donneesCollectivites.longueVieAuxObjets.emprunter,
               singulier: "point <span class='text--bold'>d'emprunt</span>",
               pluriel: "points <span class='text--bold'>d'emprunts</span>",
             },
             {
               template: valeurEtGroupePronominal => `${valeurEtGroupePronominal} près de chez moi`,
-              valeur: nouveauParcours.longueVieAuxObjets.donner,
+              valeur: donneesCollectivites.longueVieAuxObjets.donner,
               singulier: 'point de <span class="text--bold">don</span>',
               pluriel: 'points de <span class="text--bold">dons</span>',
             },
             {
               template: valeurEtGroupePronominal => `Pour un ensemble de ${valeurEtGroupePronominal}`,
-              valeur: nouveauParcours.longueVieAuxObjets.tout,
+              valeur: donneesCollectivites.longueVieAuxObjets.tout,
               singulier: 'point de consommation responsable',
               pluriel: 'points de consommations responsables',
             },
           ]),
-          nombreDAides: nouveauParcours.thematiques.nombre_aides_consommation,
-          aides: nouveauParcours.aidesLocales.filter(aide => aide.thematiques.includes(ClefThematiqueAPI.consommation)),
-          articles: nouveauParcours.articles.filter(article => article.thematique === ClefThematiqueAPI.consommation),
+          nombreDAides: donneesCollectivites.thematiques.nombre_aides_consommation,
+          aides: donneesCollectivites.aidesLocales.filter(aide =>
+            aide.thematiques.includes(ClefThematiqueAPI.consommation),
+          ),
+          articles: donneesCollectivites.articles.filter(
+            article => article.thematique === ClefThematiqueAPI.consommation,
+          ),
         },
         {
           emoji: '🍛',
@@ -65,51 +69,61 @@ export class NouveauParcoursPresenterImpl implements NouveauParcoursPresenter {
           contenu: this.genererListe([
             {
               template: valeurEtGroupePronominal => `${valeurEtGroupePronominal} près de chez moi`,
-              valeur: nouveauParcours.presDeChezNous.circuitCourt,
+              valeur: donneesCollectivites.presDeChezNous.circuitCourt,
               singulier: 'point de <span class="text--bold">circuit court</span>',
               pluriel: 'points de <span class="text--bold">circuit court</span>',
             },
             {
               template: valeurEtGroupePronominal => `${valeurEtGroupePronominal} à proximité`,
-              valeur: nouveauParcours.presDeChezNous.epicerieSuperette,
+              valeur: donneesCollectivites.presDeChezNous.epicerieSuperette,
               singulier: '<span class="text--bold">épicerie ou supérette</span>',
               pluriel: '<span class="text--bold">épiceries ou supérettes</span>',
             },
             {
               template: valeurEtGroupePronominal => valeurEtGroupePronominal,
-              valeur: nouveauParcours.presDeChezNous.marcheLocal,
+              valeur: donneesCollectivites.presDeChezNous.marcheLocal,
               singulier: '<span class="text--bold">marché local</span>',
               pluriel: '<span class="text--bold">marchés locaux</span>',
             },
             {
               template: valeurEtGroupePronominal =>
                 `${valeurEtGroupePronominal} <span class="text--bold">zéro-déchet</span> à proximité`,
-              valeur: nouveauParcours.presDeChezNous.zeroDechet,
+              valeur: donneesCollectivites.presDeChezNous.zeroDechet,
               singulier: 'point',
               pluriel: 'points',
             },
           ]),
-          nombreDAides: nouveauParcours.thematiques.nombre_aides_alimentation,
-          aides: nouveauParcours.aidesLocales.filter(aide => aide.thematiques.includes(ClefThematiqueAPI.alimentation)),
-          articles: nouveauParcours.articles.filter(article => article.thematique === ClefThematiqueAPI.alimentation),
+          nombreDAides: donneesCollectivites.thematiques.nombre_aides_alimentation,
+          aides: donneesCollectivites.aidesLocales.filter(aide =>
+            aide.thematiques.includes(ClefThematiqueAPI.alimentation),
+          ),
+          articles: donneesCollectivites.articles.filter(
+            article => article.thematique === ClefThematiqueAPI.alimentation,
+          ),
         },
         {
           emoji: '🚲',
           titre: 'Me déplacer',
           lien: '#',
           contenu: this.genererListe([]),
-          nombreDAides: nouveauParcours.thematiques.nombre_aides_transport,
-          aides: nouveauParcours.aidesLocales.filter(aide => aide.thematiques.includes(ClefThematiqueAPI.transports)),
-          articles: nouveauParcours.articles.filter(article => article.thematique === ClefThematiqueAPI.transports),
+          nombreDAides: donneesCollectivites.thematiques.nombre_aides_transport,
+          aides: donneesCollectivites.aidesLocales.filter(aide =>
+            aide.thematiques.includes(ClefThematiqueAPI.transports),
+          ),
+          articles: donneesCollectivites.articles.filter(
+            article => article.thematique === ClefThematiqueAPI.transports,
+          ),
         },
         {
           emoji: '🧱',
           titre: 'Me loger',
           lien: '#',
           contenu: this.genererListe([]),
-          nombreDAides: nouveauParcours.thematiques.nombre_aides_logement,
-          aides: nouveauParcours.aidesLocales.filter(aide => aide.thematiques.includes(ClefThematiqueAPI.logement)),
-          articles: nouveauParcours.articles.filter(article => article.thematique === ClefThematiqueAPI.logement),
+          nombreDAides: donneesCollectivites.thematiques.nombre_aides_logement,
+          aides: donneesCollectivites.aidesLocales.filter(aide =>
+            aide.thematiques.includes(ClefThematiqueAPI.logement),
+          ),
+          articles: donneesCollectivites.articles.filter(article => article.thematique === ClefThematiqueAPI.logement),
         },
       ],
     });

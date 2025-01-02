@@ -1,8 +1,8 @@
-import { NouveauParcoursPresenter } from '@/domaines/nouveauParcours/ports/nouveauParcours.presenter';
-import { NouveauParcoursRepository } from '@/domaines/nouveauParcours/ports/nouveauParcours.repository';
+import { DonneesCollectivitesPresenter } from '@/domaines/collectivites/ports/donneesCollectivites.presenter';
+import { DonneesCollectivitesRepository } from '@/domaines/collectivites/ports/donneesCollectivites.repository';
 import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 
-export interface NouveauParcours {
+export interface DonneesCollectivites {
   listeCommunes: string[];
   nombreInscrits: number;
   nombrePointsMoyen: number;
@@ -50,11 +50,11 @@ export interface NouveauParcours {
   }[];
 }
 
-export class RecuperationDonneesNouveauParcoursUsecase {
-  constructor(private readonly nouveauParcoursRepository: NouveauParcoursRepository) {}
+export class RecuperationDonneesCollectivitesUsecase {
+  constructor(private readonly donneesCollectivitesRepository: DonneesCollectivitesRepository) {}
 
-  async execute(codePostal: string, presenter: NouveauParcoursPresenter): Promise<void> {
-    const nouveauParcours = await this.nouveauParcoursRepository.getNouveauParcours(codePostal);
-    presenter.displayNouveauParcours(nouveauParcours, codePostal);
+  async execute(codePostal: string, presenter: DonneesCollectivitesPresenter): Promise<void> {
+    const donneesCollectivites = await this.donneesCollectivitesRepository.getDonneesCollectivites(codePostal);
+    presenter.displayDonneesCollectivites(donneesCollectivites, codePostal);
   }
 }

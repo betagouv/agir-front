@@ -5,12 +5,12 @@ import bilanCarboneRoutes from '@/router/bilanCarbone/routes';
 import classementRoutes from '@/router/classement/routes';
 import { RouteCoachName } from '@/router/coach/routeCoachName';
 import coachRoutes from '@/router/coach/routes';
+import collectiviteRoutes from '@/router/collectivites/routes';
 import compteRoutes from '@/router/compte/routes';
 import conformiteRoutes from '@/router/conformite/routes';
 import defiRoutes from '@/router/defis/routes';
 import examenRoutes from '@/router/examen/routes';
 import kycRoutes from '@/router/kyc/routes';
-import nouveauParcoursRoutes from '@/router/nouveauParcours/routes';
 import quizRoutes from '@/router/quiz/routes';
 import serviceRoutes from '@/router/services/routes';
 import thematiqueRoutes from '@/router/thematiques/routes';
@@ -51,7 +51,7 @@ const routes: RouteRecordRaw[] = [
   ...bilanCarboneRoutes,
   ...classementRoutes,
   ...examenRoutes,
-  ...nouveauParcoursRoutes,
+  ...collectiviteRoutes,
   {
     path: '/',
     name: RouteCommuneName.ACCUEIL,

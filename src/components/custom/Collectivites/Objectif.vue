@@ -18,8 +18,7 @@
 </template>
 
 <script setup lang="ts">
-  // TODO: Nomenclature du fichier ?
-
+  // TODO: Unused mais sera peut-être utilisé dans le nouveau parcours
   import BarreDeProgression from '@/components/custom/BarreDeProgression.vue';
 
   defineProps<{

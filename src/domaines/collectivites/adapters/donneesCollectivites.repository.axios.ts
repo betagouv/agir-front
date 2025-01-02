@@ -1,9 +1,9 @@
 import { AxiosFactory } from '@/axios.factory';
-import { NouveauParcoursRepository } from '@/domaines/nouveauParcours/ports/nouveauParcours.repository';
-import { NouveauParcours } from '@/domaines/nouveauParcours/recuperationDonneesNouveauParcours.usecase';
+import { DonneesCollectivitesRepository } from '@/domaines/collectivites/ports/donneesCollectivites.repository';
+import { DonneesCollectivites } from '@/domaines/collectivites/recuperationDonneesCollectivites.usecase';
 import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 
-interface NouveauParcoursModeAPI {
+interface DonneesCollectivitesModelAPI {
   liste_communes: string[];
   nombre_inscrits: number;
   nombre_points_moyen: number;
@@ -48,10 +48,10 @@ interface NouveauParcoursModeAPI {
   }[];
 }
 
-export class NouveauParcoursRepositoryAxios implements NouveauParcoursRepository {
-  async getNouveauParcours(codePostal: string): Promise<NouveauParcours> {
+export class DonneesCollectivitesRepositoryAxios implements DonneesCollectivitesRepository {
+  async getDonneesCollectivites(codePostal: string): Promise<DonneesCollectivites> {
     const axios = AxiosFactory.getAxios();
-    const response = await axios.get<NouveauParcoursModeAPI>(`/code_postal_synthese/${codePostal}`);
+    const response = await axios.get<DonneesCollectivitesModelAPI>(`/code_postal_synthese/${codePostal}`);
     return {
       listeCommunes: response.data.liste_communes,
       nombreInscrits: response.data.nombre_inscrits,

@@ -1,9 +1,3 @@
-<!-- TODO: articles pour dechets, climat, loisir et services_societaux ET nombre_aides_dechet, nombre_aides_climat -->
-<!-- TODO: dernières propriétés : nombreArticlesLocaux, nombreArticlesTotal, nombreDefiEnCours, nombreDefiRealises -->
-<!-- TODO: où vont les chiffres des aides ? -->
-<!-- TODO: supprimer tous les "nvx parcours" ? -->
-<!-- TODO: skeleton -->
-
 <template>
   <section class="fr-container fr-my-6w">
     <form
@@ -22,32 +16,36 @@
 
     <div>
       <CarteSkeleton v-if="isLoading" />
-      <template v-else-if="nouveauParcoursViewmodel">
+      <template v-else-if="donneesCollectivitesViewmodel">
         <section class="propositions text--center">
           <h1 class="fr-h2 fr-mb-3w">
             <span class="text--italic">J'agis</span> en quelques chiffres pour le code postal
-            <span class="codePostal">{{ nouveauParcoursViewmodel.codePostal }}</span>
+            <span class="codePostal">{{ donneesCollectivitesViewmodel.codePostal }}</span>
           </h1>
 
           <p
-            v-if="nouveauParcoursViewmodel.nombreInscrits > 1 && nouveauParcoursViewmodel.nombrePointsMoyen > 1"
+            v-if="
+              donneesCollectivitesViewmodel.nombreInscrits > 1 && donneesCollectivitesViewmodel.nombrePointsMoyen > 1
+            "
             class="fr-mb-5w"
           >
-            Dans votre commune, {{ nouveauParcoursViewmodel.nombreInscrits }} utilisateurs sont inscrits à J'agis et
-            cumulent {{ nouveauParcoursViewmodel.nombrePointsMoyen }} points en moyenne.
+            Dans votre commune, {{ donneesCollectivitesViewmodel.nombreInscrits }} utilisateurs sont inscrits à J'agis
+            et cumulent {{ donneesCollectivitesViewmodel.nombrePointsMoyen }} points en moyenne.
           </p>
 
           <p
-            v-if="nouveauParcoursViewmodel?.nombreInscrits === 1 && nouveauParcoursViewmodel.nombrePointsMoyen > 0"
+            v-if="
+              donneesCollectivitesViewmodel?.nombreInscrits === 1 && donneesCollectivitesViewmodel.nombrePointsMoyen > 0
+            "
             class="fr-mb-5w"
           >
             Dans votre commune, un unique utilisateur est inscrit à J'agis et il cumule
-            {{ nouveauParcoursViewmodel.nombrePointsMoyen }} points.
+            {{ donneesCollectivitesViewmodel.nombrePointsMoyen }} points.
           </p>
 
           <div class="fr-grid-row fr-grid-row--gutters">
             <CarteDecouverte
-              v-for="proposition in nouveauParcoursViewmodel.propositions"
+              v-for="proposition in donneesCollectivitesViewmodel.propositions"
               :key="proposition.titre"
               :lien-bouton="proposition.lien"
               :titre-emoji="proposition.emoji"
@@ -103,24 +101,27 @@
 
 <script lang="ts" setup>
   import { ref } from 'vue';
-  import CarteDecouverte from '@/components/custom/NouveauParcours/CarteDecouverte.vue';
+  import CarteDecouverte from '@/components/custom/Collectivites/CarteDecouverte.vue';
   import CarteSkeleton from '@/components/custom/Skeleton/CarteSkeleton.vue';
   import InputText from '@/components/dsfr/InputText.vue';
-  import { NouveauParcoursPresenterImpl } from '@/domaines/nouveauParcours/adapters/nouveauParcours.presenter.impl';
-  import { NouveauParcoursRepositoryAxios } from '@/domaines/nouveauParcours/adapters/nouveauParcours.repository.axios';
-  import { NouveauParcoursViewModel } from '@/domaines/nouveauParcours/ports/nouveauParcours.presenter';
-  import { RecuperationDonneesNouveauParcoursUsecase } from '@/domaines/nouveauParcours/recuperationDonneesNouveauParcours.usecase';
+  import { DonneesCollectivitesPresenterImpl } from '@/domaines/collectivites/adapters/donneesCollectivites.presenter.impl';
+  import { DonneesCollectivitesRepositoryAxios } from '@/domaines/collectivites/adapters/donneesCollectivites.repository.axios';
+  import { DonneesCollectivitesViewModel } from '@/domaines/collectivites/ports/donneesCollectivites.presenter';
+  import { RecuperationDonneesCollectivitesUsecase } from '@/domaines/collectivites/recuperationDonneesCollectivites.usecase';
 
   const isLoading = ref<boolean>(false);
-  const nouveauParcoursViewmodel = ref<NouveauParcoursViewModel>();
+  const donneesCollectivitesViewmodel = ref<DonneesCollectivitesViewModel>();
 
   const codePostal = ref<string>('');
 
   function lancerRecherche() {
     isLoading.value = true;
-    const usecase = new RecuperationDonneesNouveauParcoursUsecase(new NouveauParcoursRepositoryAxios());
+    const usecase = new RecuperationDonneesCollectivitesUsecase(new DonneesCollectivitesRepositoryAxios());
     usecase
-      .execute(codePostal.value, new NouveauParcoursPresenterImpl(vm => (nouveauParcoursViewmodel.value = vm)))
+      .execute(
+        codePostal.value,
+        new DonneesCollectivitesPresenterImpl(vm => (donneesCollectivitesViewmodel.value = vm)),
+      )
       .finally(() => {
         isLoading.value = false;
       });
