@@ -7,7 +7,6 @@ import { RouteCoachName } from '@/router/coach/routeCoachName';
 
 export enum RouteCoachPath {
   COACH = '/agir',
-  SERVICES = 'services',
   BIBLIOTHEQUE = 'bibliotheque',
   SE_DESABONNER_DES_NOTIFICATIONS_MAILS = '/se-desabonner',
 }
