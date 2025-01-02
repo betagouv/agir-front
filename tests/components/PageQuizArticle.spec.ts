@@ -92,7 +92,8 @@ describe('Page Quiz Article', () => {
         await fireEvent.click(boutonValider);
 
         // THEN
-        expect(page.getByRole('alert')).toBeDefined();
+        const alertMessage = page.getByRole('alert').textContent;
+        expect(alertMessage).toEqual('Veuillez sélectionner une réponse pour continuer');
       });
 
       it("les radios deviennent disable et affiche un bouton pour retourner à l'accueil", async () => {
