@@ -51,16 +51,16 @@ export class DefiPresenterImpl implements DefiPresenter {
   ): ReponsePossible[] {
     if (status === 'en_cours' || status === 'abondon') {
       return [
-        { id: 'fait', label: '🏆 Défi réalisé' },
-        { id: 'abondon', label: '👎 Finalement, pas pour moi' },
+        { id: 'fait', label: '<span aria-hidden="true">🏆</span> Défi réalisé' },
+        { id: 'abondon', label: '<span aria-hidden="true">👎</span> Finalement, pas pour moi' },
       ];
     } else if (status === 'fait') {
-      return [{ id: 'deja_fait', label: '✅ Déjà fait' }];
+      return [{ id: 'deja_fait', label: '<span aria-hidden="true">✅</span> Déjà fait' }];
     }
 
     return [
-      { id: 'en_cours', label: '👍 Je relève le défi' },
-      { id: 'pas_envie', label: '👎 Pas pour moi' },
+      { id: 'en_cours', label: '<span aria-hidden="true">👍</span> Je relève le défi' },
+      { id: 'pas_envie', label: '<span aria-hidden="true">👎</span> Pas pour moi' },
     ];
   }
 

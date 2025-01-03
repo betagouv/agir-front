@@ -1,7 +1,9 @@
 <template>
   <div class="fr-pt-4w fr-pb-1w background--white">
     <div class="fr-container">
-      <h1 class="fr-h1 fr-m-0">Bonjour {{ utilisateurStore().utilisateur.prenom }} 👋</h1>
+      <h1 class="fr-h1 fr-m-0">
+        Bonjour {{ utilisateurStore().utilisateur.prenom }}<span aria-hidden="true"> 👋</span>
+      </h1>
     </div>
   </div>
 

@@ -13,20 +13,24 @@
             <Accordeon :label="aide.titre" :name-id="aide.id" @click="trackAideClick(aide)">
               <template v-slot:titre>
                 <span class="fr-col-12 fr-pr-2w">
-                  <ThematiqueTag :tag="aide.thematiqueTag" />
+                  <ThematiqueTag :tag="aide.thematiqueTag" aria-hidden="true" />
                   <span class="aide__titre fr-mt-2w">
                     <span class="fr-h4 text--gris">
                       {{ aide.titre }}
                     </span>
-                    <div v-if="aide.isSimulateur || aide.montantMaximum" class="fr-grid-row">
+                    <span v-if="aide.isSimulateur || aide.montantMaximum" class="fr-grid-row">
                       <span
                         v-if="aide.isSimulateur"
                         class="fr-tag background-bleu-light fr-mr-1w fr-icon-money-euro-circle-line fr-tag--icon-left"
                       >
+                        <span class="fr-sr-only">: </span>
                         Simulateur
                       </span>
-                      <span v-if="aide.montantMaximum" class="fr-tag">{{ aide.montantMaximum }}</span>
-                    </div>
+                      <span v-if="aide.montantMaximum" class="fr-tag">
+                        <span class="fr-sr-only">, </span>
+                        {{ aide.montantMaximum }}
+                      </span>
+                    </span>
                   </span>
                 </span>
               </template>

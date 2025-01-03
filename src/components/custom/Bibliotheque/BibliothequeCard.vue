@@ -1,7 +1,7 @@
 <template>
-  <article class="bibliotheque-card background--white border-radius--md shadow">
+  <article class="bibliotheque-card background--white border-radius--md shadow full-height flex flex-column">
     <img :src="image" class="bibliotheque-card__image" alt="" />
-    <div class="fr-px-3w fr-py-2w">
+    <div class="fr-px-3w fr-py-2w full-height flex flex-column">
       <div class="fr-grid-row flex-space-between fr-grid-row--middle">
         <span class="fr-text--xs fr-text--bold fr-m-0">{{ thematique }}</span>
         <button
@@ -19,11 +19,17 @@
           Mettre en favori
         </button>
       </div>
-      <h3 class="fr-h4 text--bleu fr-mt-1w fr-mb-2w">{{ titre }}</h3>
-      <p class="fr-text--md text--gris-dark fr-mb-2w">{{ description }}</p>
-      <router-link :to="url" class="fr-link fr-icon-arrow-right-line fr-link--icon-right" :title="titre">
-        Continuer la lecture
-      </router-link>
+      <div class="flex flex-column flex-space-between full-height">
+        <h3 class="fr-h4 text--bleu fr-mt-1w fr-mb-2w">{{ titre }}</h3>
+        <p v-if="description" class="fr-text--md text--gris-dark fr-mb-2w">{{ description }}</p>
+        <router-link
+          :to="url"
+          class="fr-link fr-icon-arrow-right-line fr-link--icon-right width--fit-content"
+          :title="titre"
+        >
+          Continuer la lecture
+        </router-link>
+      </div>
     </div>
   </article>
 </template>

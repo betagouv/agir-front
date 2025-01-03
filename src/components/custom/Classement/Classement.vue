@@ -2,7 +2,7 @@
   <section>
     <CarteInfo>
       <div class="fr-grid-row align-items--center fr-text--lg">
-        <span class="fr-mr-2w fr-col-auto">🤩</span>
+        <span class="fr-mr-2w fr-col-auto" aria-hidden="true">🤩</span>
         <p v-html="classementViewModel.phraseClassement" class="fr-mb-0 fr-col" />
       </div>
     </CarteInfo>

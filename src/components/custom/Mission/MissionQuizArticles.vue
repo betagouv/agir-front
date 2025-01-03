@@ -3,7 +3,7 @@
     :etape-actuelle="etapeAffichee"
     :etape-totale="nombreEtapesMission"
     :on-click-revenir-etape-precedente="revenirEtapePrecedente"
-    :titre="missionAffichee.type === 'article' ? 'Article' : ''"
+    :titre="missionAffichee.type === 'article' ? 'Article' : 'Quiz'"
   />
   <MissionArticle
     v-if="missionAffichee.type === 'article'"
