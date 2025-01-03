@@ -62,7 +62,7 @@ describe('Page Quiz Article', () => {
     mauvaiseReponse = page.getByRole('radio', { name: '2' });
   });
 
-  it("affiche le titre, une question, ses réponses possibles et un bouton 'Valider' disable", () => {
+  it("affiche le titre, une question, ses réponses possibles et un bouton 'Valider'", () => {
     // WHEN THEN
     // GIVEN
     expect(page.getByRole('heading', { name: 'Une question sur la thématique Consommer', level: 1 })).toBeDefined();
@@ -74,7 +74,6 @@ describe('Page Quiz Article', () => {
     expect(page.getByRole('radio', { name: '3' })).toBeDefined();
     expect(page.getByRole('radio', { name: '4' })).toBeDefined();
     expect(page.getAllByRole('radio')).toHaveLength(4);
-    expect(boutonValider.disabled).toBeTruthy();
   });
 
   describe("quand l'utilisateur répond à une question", () => {
@@ -88,6 +87,15 @@ describe('Page Quiz Article', () => {
     });
 
     describe("quand je clique sur le bouton 'Valider'", () => {
+      it("sans qu'une réponse ne soit sélectionnée, un message d'erreur apparait", async () => {
+        // WHEN
+        await fireEvent.click(boutonValider);
+
+        // THEN
+        const alertMessage = page.getByRole('alert').textContent;
+        expect(alertMessage).toEqual('Veuillez sélectionner une réponse pour continuer');
+      });
+
       it("les radios deviennent disable et affiche un bouton pour retourner à l'accueil", async () => {
         // WHEN
         // THEN

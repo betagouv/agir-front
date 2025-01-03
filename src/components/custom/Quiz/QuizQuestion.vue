@@ -10,12 +10,21 @@
       v-model="valueInput"
       :defaultValue="valueInput"
     />
-    <button v-if="!questionEstrepondu" class="fr-btn fr-btn--lg" type="submit" :disabled="isDisable">Valider</button>
+
+    <AlertSmall
+      v-if="afficherMessageErreur && estIncomplet"
+      message="Veuillez sélectionner une réponse pour continuer"
+      type="error"
+      class="fr-mb-2w"
+    />
+
+    <button v-if="!questionEstRepondu" class="fr-btn fr-btn--lg fr-mt-1w" type="submit">Valider</button>
   </form>
 </template>
 
 <script setup lang="ts">
   import { computed, ref } from 'vue';
+  import AlertSmall from '@/components/custom/AlertSmall.vue';
   import BoutonRadio from '@/components/custom/BoutonRadio.vue';
 
   defineProps<{
@@ -24,14 +33,19 @@
   }>();
 
   const valueInput = ref<string>('');
-  const questionEstrepondu = ref<boolean>(false);
+  const questionEstRepondu = ref<boolean>(false);
+  const afficherMessageErreur = ref<boolean>(false);
 
-  const isDisable = computed(() => valueInput.value === '');
+  const estIncomplet = computed(() => valueInput.value === '');
 
   const emit = defineEmits<{ (e: 'quizTermine', value: string): void }>();
 
   const validerLaReponse = () => {
-    questionEstrepondu.value = true;
+    if (estIncomplet.value) {
+      afficherMessageErreur.value = true;
+      return;
+    }
+    questionEstRepondu.value = true;
     emit('quizTermine', valueInput.value);
   };
 </script>

@@ -27,7 +27,7 @@
         "
       />
     </div>
-    <div v-if="questionViewModel.type === 'choix_unique'" class="fr-input-group">
+    <div v-if="questionViewModel.type === 'choix_unique'" class="fr-input-group fr-mb-0">
       <BoutonRadio
         v-model="reponse"
         :default-value="questionViewModel.reponses_possibles.filter(r => r.checked)[0]?.id"
@@ -42,6 +42,7 @@
         col=""
         legende-size="l"
         orientation="vertical"
+        class="fr-mb-0"
       />
     </div>
     <div v-if="questionViewModel.type === 'choix_multiple'" class="fr-input-group">
@@ -64,10 +65,18 @@
       <h2 :class="styleDuTitre ? styleDuTitre : 'fr-h4 fr-mb-2w'">
         {{ questionViewModel.libelle }}
       </h2>
-      <label class="fr-label" for="reponse"> Votre réponse </label>
+      <label class="fr-label" for="reponse">Votre réponse</label>
       <textarea id="reponse" v-model="reponse" class="fr-input" name="reponse" />
     </div>
-    <button :disabled="isDisabled" :title="wordingBouton" class="fr-btn fr-btn--lg" type="submit">
+
+    <AlertSmall
+      v-if="afficherMessageErreur && estIncomplet"
+      message="Veuillez sélectionner une réponse pour continuer"
+      type="error"
+      class="fr-mt-1w"
+    />
+
+    <button :title="wordingBouton" class="fr-btn fr-btn--lg fr-mt-3w" type="submit">
       {{ wordingBouton }}
     </button>
     <button
@@ -83,6 +92,7 @@
 
 <script lang="ts" setup>
   import { onMounted, ref, watch } from 'vue';
+  import AlertSmall from '@/components/custom/AlertSmall.vue';
   import BoutonRadio from '@/components/custom/BoutonRadio.vue';
   import InputNumeric from '@/components/custom/Form/InputNumeric.vue';
   import InputCheckbox from '@/components/custom/InputCheckbox.vue';
@@ -100,7 +110,8 @@
   const props = defineProps<{ questionViewModel: QuestionViewModel; wordingBouton: string; styleDuTitre?: string }>();
   const questionViewModel = ref<QuestionViewModel>(props.questionViewModel);
   const reponse = defineModel<string | string[]>('reponse', { default: '' });
-  const isDisabled = ref<boolean>(true);
+  const estIncomplet = ref<boolean>(true);
+  const afficherMessageErreur = ref<boolean>(false);
   const emit = defineEmits<{ (e: 'update:soumissionKyc', value: string[]): void }>();
   onMounted(() => {
     reponse.value =
@@ -110,13 +121,17 @@
   });
 
   watch(reponse, () => {
-    isDisabled.value =
+    estIncomplet.value =
       props.questionViewModel.type === 'libre' || props.questionViewModel.type === 'entier'
         ? !reponse.value
         : reponse.value.length === 0;
   });
 
   const validerLaReponse = async () => {
+    if (!reponse.value || reponse.value.length === 0) {
+      afficherMessageErreur.value = true;
+      return;
+    }
     if (
       props.questionViewModel.type === 'mosaic_boolean' ||
       props.questionViewModel.type === 'choix_multiple' ||
@@ -134,6 +149,7 @@
           boolean_value: reponse.value.includes(r.id),
         })),
       );
+      afficherMessageErreur.value = false;
     } else {
       const envoyerReponseUsecase = new EnvoyerReponseUsecase(
         new QuestionRepositoryAxios(),
@@ -145,6 +161,7 @@
         props.questionViewModel.id,
         reponse.value.toString(),
       );
+      afficherMessageErreur.value = false;
     }
     emit('update:soumissionKyc', [reponse.value].flat());
   };
@@ -170,5 +187,6 @@
     });
 
     emit('update:soumissionKyc', reponse.value);
+    afficherMessageErreur.value = false;
   };
 </script>

@@ -56,7 +56,14 @@
               <textarea id="explication" v-model="explication" class="fr-input fr-mb-4w" name="explication" />
             </div>
 
-            <button :disabled="isButtonDisabled" class="fr-btn fr-btn--lg fr-mb-2w" title="Valider">Valider</button>
+            <button
+              :aria-disabled="isButtonDisabled"
+              :disabled="isButtonDisabled"
+              class="fr-btn fr-btn--lg fr-mb-2w"
+              title="Valider"
+            >
+              Valider
+            </button>
           </form>
 
           <DefiFin v-if="reponseAEteDonnee" :defi="defiViewModel" :reponse="reponse" />
