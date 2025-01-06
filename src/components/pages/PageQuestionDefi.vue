@@ -56,14 +56,14 @@
               <textarea id="explication" v-model="explication" class="fr-input fr-mb-4w" name="explication" />
             </div>
 
-            <button
-              :aria-disabled="isButtonDisabled"
-              :disabled="isButtonDisabled"
-              class="fr-btn fr-btn--lg fr-mb-2w"
-              title="Valider"
-            >
-              Valider
-            </button>
+            <AlertSmall
+              v-if="afficheMessageErreur && !isReponseInitialeDifferente"
+              message="Veuillez sélectionner une réponse pour continuer"
+              type="error"
+              class="fr-mb-4w"
+            />
+
+            <button class="fr-btn fr-btn--lg fr-mb-2w" title="Valider">Valider</button>
           </form>
 
           <DefiFin v-if="reponseAEteDonnee" :defi="defiViewModel" :reponse="reponse" />
@@ -103,6 +103,7 @@
 <script lang="ts" setup>
   import { computed, onMounted, ref } from 'vue';
   import { useRoute } from 'vue-router';
+  import AlertSmall from '@/components/custom/AlertSmall.vue';
   import BoutonRadio from '@/components/custom/BoutonRadio.vue';
   import CarteInfo from '@/components/custom/CarteInfo.vue';
   import DefiFin from '@/components/custom/Defi/DefiFin.vue';
@@ -158,11 +159,12 @@
   const explication = ref<string>('');
   const reponseAEteDonnee = ref<boolean>(false);
   const aDejaRepondu = ref<boolean>(false);
+  const afficheMessageErreur = ref<boolean>(false);
+  const reponseInitiale = ref<string>('');
 
   const utilisateurId = utilisateurStore().utilisateur.id;
-
-  const isButtonDisabled = computed(() => {
-    return reponse.value === 'todo';
+  const isReponseInitialeDifferente = computed(() => {
+    return reponse.value !== reponseInitiale.value;
   });
 
   const obtenirPrenomsAleatoires = (count, max) => {
@@ -194,14 +196,21 @@
       }),
     );
     isLoading.value = false;
+    reponseInitiale.value = reponse.value;
   });
 
   const validerLaReponse = async () => {
+    if (!isReponseInitialeDifferente.value) {
+      afficheMessageErreur.value = true;
+      return;
+    }
+
     const envoyerReponseUsecase = new EnvoyerReponseDefiUsecase(
       new DefiRepositoryAxios(),
       ToDoListEventBusImpl.getInstance(),
     );
     await envoyerReponseUsecase.execute(utilisateurId, questionId, reponse.value, explication.value);
+    afficheMessageErreur.value = false;
 
     if (defiViewModel.value?.reponse) {
       aDejaRepondu.value = true;
