@@ -1,5 +1,33 @@
 # Changelog
 
+## [1.36.0](https://github.com/betagouv/agir-front/compare/v1.35.0...v1.36.0) (2025-01-06)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* remplacer disabled par msg erreur (article, kyc) ([#854](https://github.com/betagouv/agir-front/issues/854)) ([b68623c](https://github.com/betagouv/agir-front/commit/b68623c32ff3adb8d343ab507bfd0b44ea0455b0))
+
+
+### 🐛 Corrections de bogues
+
+* quelques css quick fixes ([#850](https://github.com/betagouv/agir-front/issues/850)) ([ce5fc50](https://github.com/betagouv/agir-front/commit/ce5fc500d241463bffac928d06475b96cb4d89c8))
+
+
+### 👷 Autres changements
+
+* Bump @gouvfr/dsfr from 1.11.2 to 1.13.0 ([#846](https://github.com/betagouv/agir-front/issues/846)) ([202fd74](https://github.com/betagouv/agir-front/commit/202fd745c6b39b846972826a9f00f623d7414c6e))
+* Bump @playwright/test from 1.49.0 to 1.49.1 ([#843](https://github.com/betagouv/agir-front/issues/843)) ([c5fe407](https://github.com/betagouv/agir-front/commit/c5fe4077c81c9b93600c569540d5e9b9f601458a))
+* Bump @sentry/vue from 8.37.1 to 8.47.0 ([#845](https://github.com/betagouv/agir-front/issues/845)) ([5c8b64e](https://github.com/betagouv/agir-front/commit/5c8b64e4b7a4b642630d9728187f2f6e78ca0384))
+* Bump lint-staged from 15.2.11 to 15.3.0 ([#851](https://github.com/betagouv/agir-front/issues/851)) ([dc32e68](https://github.com/betagouv/agir-front/commit/dc32e68a963eddaa9596fd3cbb77a57abf0c524a))
+* Bump pinia-plugin-persistedstate from 4.1.3 to 4.2.0 ([#844](https://github.com/betagouv/agir-front/issues/844)) ([2ecd4a8](https://github.com/betagouv/agir-front/commit/2ecd4a8adcf98687443d0444de83d2ddcb6899e1))
+* Bump vite from 6.0.3 to 6.0.5 ([#847](https://github.com/betagouv/agir-front/issues/847)) ([2f10a92](https://github.com/betagouv/agir-front/commit/2f10a92ae7d5e1dd53da890c24a7b536070e0bec))
+* Bump vite from 6.0.5 to 6.0.6 ([#853](https://github.com/betagouv/agir-front/issues/853)) ([9fe5429](https://github.com/betagouv/agir-front/commit/9fe54293d09988e44a21aa20136341108c179ba0))
+* Bump vue-tsc from 2.1.10 to 2.2.0 ([#852](https://github.com/betagouv/agir-front/issues/852)) ([e2d4a92](https://github.com/betagouv/agir-front/commit/e2d4a92730f88ccbfe6533e700b70f1ed8394d95))
+* récupérer les quiz depuis le back-end ([#840](https://github.com/betagouv/agir-front/issues/840)) ([714e4c8](https://github.com/betagouv/agir-front/commit/714e4c85969a7644c82e4f250f65f0e73e624284))
+* remplacer "nouveau parcours" par "données collectivités" ([#849](https://github.com/betagouv/agir-front/issues/849)) ([179f768](https://github.com/betagouv/agir-front/commit/179f7685be9b8f2afa7f8dbe0d5d1706f4fbcdfb))
+* supprimer routes inutilisées après enchainement KYC ([#848](https://github.com/betagouv/agir-front/issues/848)) ([7ec1fc5](https://github.com/betagouv/agir-front/commit/7ec1fc561139e625f0c42a0f26603127291124d8))
+* utilisation api back plutôt que CMS pour les pages de conformité ([#841](https://github.com/betagouv/agir-front/issues/841)) ([4de5319](https://github.com/betagouv/agir-front/commit/4de5319b0b6c425404254d2cbd4dfc2c54b573ea))
+
 ## [1.35.0](https://github.com/betagouv/agir-front/compare/v1.34.0...v1.35.0) (2024-12-18)
 
 
