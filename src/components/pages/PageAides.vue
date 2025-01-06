@@ -8,7 +8,7 @@
         <h3 class="fr-alert__title">Votre ville n’est pas encore couverte par le service J'agis.</h3>
         <p>
           Nous mettons les informations à jour progressivement. N'hésitez pas à nous en partager à
-          <a href="mailto:contact@agir.beta.gouv.fr">contact@agir.beta.gouv.fr</a> !
+          <a href="mailto:contact@jagis.beta.gouv.fr">contact@jagis.beta.gouv.fr</a> !
         </p>
       </div>
       <Aides :aidesGroupesParCategorie="aides.aides" />

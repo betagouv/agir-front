@@ -37,11 +37,11 @@ describe('Fichier de tests pour récuperer un défi', () => {
         reponses_possibles: [
           {
             id: 'en_cours',
-            label: '👍 Je relève le défi',
+            label: '<span aria-hidden="true">👍</span> Je relève le défi',
           },
           {
             id: 'pas_envie',
-            label: '👎 Pas pour moi',
+            label: '<span aria-hidden="true">👎</span> Pas pour moi',
           },
         ],
         thematiqueTag: {
@@ -90,9 +90,9 @@ describe('Fichier de tests pour récuperer un défi', () => {
         reponses_possibles: [
           {
             id: 'fait',
-            label: '🏆 Défi réalisé',
+            label: '<span aria-hidden="true">🏆</span> Défi réalisé',
           },
-          { id: 'abondon', label: '👎 Finalement, pas pour moi' },
+          { id: 'abondon', label: '<span aria-hidden="true">👎</span> Finalement, pas pour moi' },
         ],
         thematiqueTag: {
           label: 'Me déplacer',
@@ -137,7 +137,7 @@ describe('Fichier de tests pour récuperer un défi', () => {
         pourquoi: 'Défi pourquoi',
         explicationRefus: undefined,
         reponse: 'fait',
-        reponses_possibles: [{ id: 'deja_fait', label: '✅ Déjà fait' }],
+        reponses_possibles: [{ id: 'deja_fait', label: '<span aria-hidden="true">✅</span> Déjà fait' }],
         thematiqueTag: {
           label: 'Me déplacer',
           style: {
@@ -182,7 +182,7 @@ describe('Fichier de tests pour récuperer un défi', () => {
           pourquoi: 'Défi pourquoi',
           explicationRefus: undefined,
           reponse: 'fait',
-          reponses_possibles: [{ id: 'deja_fait', label: '✅ Déjà fait' }],
+          reponses_possibles: [{ id: 'deja_fait', label: '<span aria-hidden="true">✅</span> Déjà fait' }],
           thematiqueTag: {
             label: 'Me déplacer',
             style: {
@@ -225,7 +225,7 @@ describe('Fichier de tests pour récuperer un défi', () => {
           pourquoi: 'Défi pourquoi',
           explicationRefus: undefined,
           reponse: 'fait',
-          reponses_possibles: [{ id: 'deja_fait', label: '✅ Déjà fait' }],
+          reponses_possibles: [{ id: 'deja_fait', label: '<span aria-hidden="true">✅</span> Déjà fait' }],
           thematiqueTag: {
             label: 'Me déplacer',
             style: {
@@ -268,7 +268,7 @@ describe('Fichier de tests pour récuperer un défi', () => {
           pourquoi: 'Défi pourquoi',
           explicationRefus: undefined,
           reponse: 'fait',
-          reponses_possibles: [{ id: 'deja_fait', label: '✅ Déjà fait' }],
+          reponses_possibles: [{ id: 'deja_fait', label: '<span aria-hidden="true">✅</span> Déjà fait' }],
           thematiqueTag: {
             label: 'Me déplacer',
             style: {
@@ -311,7 +311,7 @@ describe('Fichier de tests pour récuperer un défi', () => {
           pourquoi: 'Défi pourquoi',
           explicationRefus: undefined,
           reponse: 'fait',
-          reponses_possibles: [{ id: 'deja_fait', label: '✅ Déjà fait' }],
+          reponses_possibles: [{ id: 'deja_fait', label: '<span aria-hidden="true">✅</span> Déjà fait' }],
           thematiqueTag: {
             label: 'Me déplacer',
             style: {

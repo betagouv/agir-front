@@ -2,10 +2,7 @@ import { MissionItem, DetailMission } from '../recupererDetailMission.usecase';
 import { MissionPresenter } from '@/domaines/missions/ports/missionPresenter';
 import { MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
 import { TagStyle, TagThematique } from '@/domaines/thematiques/TagThematique';
-import { RouteArticlePath } from '@/router/articles/routes';
 import { RouteDefiPath } from '@/router/defis/routes';
-import { RouteQuizPath } from '@/router/quiz/routes';
-import { buildUrl } from '@/shell/buildUrl';
 import { InteractionType } from '@/shell/interactionType';
 
 export interface MissionBaseViewModel {
@@ -64,7 +61,9 @@ export class MissionPresenterImpl implements MissionPresenter {
       urlImage: mission.urlImage,
       estTerminee: mission.estTerminee,
       estTerminable: mission.estTerminable,
-      intro: mission.intro,
+      intro:
+        mission.intro ??
+        'Découvrez de courtes ressources pour vous aider à <span class="text--bold">agir</span> directement !',
       tag: {
         label: MenuThematiques.getThematiqueData(mission.clefApiThematique).labelDansLeMenu,
         style: TagThematique.getTagThematiqueUtilitaire(mission.clefApiThematique),
@@ -117,31 +116,6 @@ export class MissionPresenterImpl implements MissionPresenter {
       badge: this.determineBadgeDefi(item.estEnCours, item.estRecommande, item.aEteRealisee),
       couleurBordure: this.determineCouleurBordureDefi(item.estEnCours, item.estRecommande, item.aEteRealisee),
     };
-  }
-
-  private determineUrl(item: MissionItem, thematiqueLabelUrl: string, missionId: string) {
-    switch (item.type) {
-      case InteractionType.QUIZ:
-        return `/thematique/${thematiqueLabelUrl}/mission/${missionId}${RouteQuizPath.QUIZ}${item.contentId}`;
-      case InteractionType.ARTICLE:
-        return `/thematique/${thematiqueLabelUrl}/mission/${missionId}${RouteArticlePath.ARTICLE}${buildUrl(item.titre)}/${item.contentId}`;
-      default:
-        return '';
-    }
-  }
-
-  private determinePicto(item: MissionItem) {
-    switch (item.type) {
-      case InteractionType.DEFIS:
-        return '/ic_mission_defi.svg';
-      case InteractionType.ARTICLE:
-      case InteractionType.QUIZ:
-        return '/ic_mission_article.svg';
-      case InteractionType.KYC:
-        return '/ic_mission_kyc.svg';
-      default:
-        return '';
-    }
   }
 
   private determineBadgeDefi(

@@ -15,11 +15,8 @@
     <div class="fr-grid-row">
       <div v-for="option in options" :key="option.label" :class="`fr-fieldset__element ${col}`">
         <div
-          :class="`fr-radio-group border fr-col
-          ${option.value === selectedValue ? 'fr-text--bold border--bleu-dark' : ''}
-          ${option.customClass}
-          `"
-          class="background--white"
+          class="fr-radio-group border fr-col background--white"
+          :class="`${option.value === selectedValue ? 'fr-text--bold border--bleu-dark' : ''} ${option.customClass ?? ''}`"
         >
           <input
             :id="`${option.value}-${name}`"
@@ -31,7 +28,7 @@
             @change.prevent="onInputChange"
           />
           <label :for="`${option.value}-${name}`" class="fr-label">
-            {{ option.label }}
+            <span v-html="option.label" />
           </label>
         </div>
       </div>

@@ -18,7 +18,7 @@
           src="/ic-check-mosaic.svg"
         />
         <span class="mosaic__label border border-radius--md">
-          <span v-if="option.emoji">{{ option.emoji }}</span>
+          <span v-if="option.emoji" aria-hidden="true">{{ option.emoji }}</span>
           <img v-else :src="option.picto" alt="" height="50" />
           {{ option.label }}
         </span>
