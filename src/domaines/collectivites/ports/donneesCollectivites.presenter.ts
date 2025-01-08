@@ -2,12 +2,6 @@ import { DonneesCollectivites } from '@/domaines/collectivites/recuperationDonne
 
 export interface DonneesCollectivitesViewModel {
   codePostal: string;
-  nombreInscrits: number;
-  nombrePointsMoyen: number;
-  nombreArticlesLocaux: number;
-  nombreArticlesTotal: number;
-  nombreDefiEnCours: number;
-  nombreDefiRealises: number;
   propositions: {
     emoji: string;
     titre: string;
