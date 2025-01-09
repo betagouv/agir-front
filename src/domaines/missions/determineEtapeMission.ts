@@ -3,7 +3,7 @@ import { MissionViewModel } from '@/domaines/missions/adapters/mission.presenter
 export type EtatsPossible = 'INTRO' | 'KYC' | 'QUIZ_ARTICLE' | 'DEFI' | 'FIN';
 
 export function determineEtapeMission(missionViewModel: MissionViewModel): { etat: EtatsPossible; indexEtape: number } {
-  const { etapeCourante: etapeKycCourante, etapeTotal: etapeKycTotal } = missionViewModel.kyc[0].progression;
+  const { etapeCourante: etapeKycCourante, etapeTotal: etapeKycTotal } = missionViewModel.kyc.progression;
 
   const missionEstTerminee = missionViewModel.estTerminee;
   const aucuneKycRepondu = etapeKycCourante === 0;

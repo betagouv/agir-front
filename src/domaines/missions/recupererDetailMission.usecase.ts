@@ -25,10 +25,6 @@ export interface DetailMission {
   intro: string;
   items: MissionItem[];
   missionId: string;
-  progressionKyc: {
-    etapeCourante: number;
-    etapeTotal: number;
-  };
 }
 
 export class RecupererDetailMissionUsecase {

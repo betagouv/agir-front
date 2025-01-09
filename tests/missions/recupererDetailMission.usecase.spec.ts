@@ -17,10 +17,6 @@ const mission: DetailMission = {
   estTerminable: false,
   intro: 'Coucou les amis',
   missionId: '1',
-  progressionKyc: {
-    etapeCourante: 1,
-    etapeTotal: 2,
-  },
   items: [],
 };
 
@@ -52,19 +48,34 @@ const defiAFaireEtNonRecommande = {
   estEnCours: false,
 };
 
-const kyc = {
-  id: 'id3',
-  contentId: '3',
-  titre: 'Mission 3',
-  progression: 0,
-  estBloquee: false,
-  points: 10,
-  aEteRealisee: false,
-  type: InteractionType.KYC,
-  pointAEteRecolte: false,
-  estRecommande: false,
-  estEnCours: false,
-};
+const kycs = [
+  {
+    id: 'id3',
+    contentId: '3',
+    titre: 'Mission 3',
+    progression: 0,
+    estBloquee: false,
+    points: 10,
+    aEteRealisee: true,
+    type: InteractionType.KYC,
+    pointAEteRecolte: false,
+    estRecommande: false,
+    estEnCours: false,
+  },
+  {
+    id: 'id4',
+    contentId: '4',
+    titre: 'Mission 4',
+    progression: 0,
+    estBloquee: false,
+    points: 10,
+    aEteRealisee: false,
+    type: InteractionType.KYC,
+    pointAEteRecolte: false,
+    estRecommande: false,
+    estEnCours: false,
+  },
+];
 
 describe("Fichier de tests concernant la récupération d'une mission", () => {
   it('doit récupérer une mission structurée', async () => {
@@ -72,7 +83,7 @@ describe("Fichier de tests concernant la récupération d'une mission", () => {
     const usecase = new RecupererDetailMissionUsecase(
       new MissionThematiqueRepositoryMock({
         ...mission,
-        items: [quiz, defiAFaireEtNonRecommande, kyc],
+        items: [quiz, defiAFaireEtNonRecommande, ...kycs],
       }),
     );
 
@@ -82,7 +93,7 @@ describe("Fichier de tests concernant la récupération d'une mission", () => {
     // THEN
     function expectation(mission) {
       expect(mission).toStrictEqual<MissionViewModel>({
-        nombreEtapesMission: 3,
+        nombreEtapesMission: 4,
         estTerminee: false,
         estTerminable: false,
         intro: 'Coucou les amis',
@@ -117,16 +128,22 @@ describe("Fichier de tests concernant la récupération d'une mission", () => {
             },
           },
         ],
-        kyc: [
-          {
-            aEteRealisee: false,
-            id: '3',
-            progression: {
-              etapeCourante: 1,
-              etapeTotal: 2,
+        kyc: {
+          kycs: [
+            {
+              aEteRealisee: true,
+              id: '3',
             },
+            {
+              aEteRealisee: false,
+              id: '4',
+            },
+          ],
+          progression: {
+            etapeCourante: 1,
+            etapeTotal: 2,
           },
-        ],
+        },
         titre: 'Thematique 1',
         urlImage: 'urlImage',
       });
@@ -139,7 +156,7 @@ describe("Fichier de tests concernant la récupération d'une mission", () => {
       const usecase = new RecupererDetailMissionUsecase(
         new MissionThematiqueRepositoryMock({
           ...mission,
-          items: [{ ...defiAFaireEtNonRecommande, estEnCours: true }, kyc],
+          items: [{ ...defiAFaireEtNonRecommande, estEnCours: true }, ...kycs],
         }),
       );
 
@@ -160,7 +177,7 @@ describe("Fichier de tests concernant la récupération d'une mission", () => {
       const usecase = new RecupererDetailMissionUsecase(
         new MissionThematiqueRepositoryMock({
           ...mission,
-          items: [{ ...defiAFaireEtNonRecommande, estEnCours: true, estRecommande: true }, kyc],
+          items: [{ ...defiAFaireEtNonRecommande, estEnCours: true, estRecommande: true }, ...kycs],
         }),
       );
 
@@ -181,7 +198,7 @@ describe("Fichier de tests concernant la récupération d'une mission", () => {
       const usecase = new RecupererDetailMissionUsecase(
         new MissionThematiqueRepositoryMock({
           ...mission,
-          items: [{ ...defiAFaireEtNonRecommande, estEnCours: true }, kyc],
+          items: [{ ...defiAFaireEtNonRecommande, estEnCours: true }, ...kycs],
         }),
       );
 
@@ -201,7 +218,7 @@ describe("Fichier de tests concernant la récupération d'une mission", () => {
       const usecase = new RecupererDetailMissionUsecase(
         new MissionThematiqueRepositoryMock({
           ...mission,
-          items: [{ ...defiAFaireEtNonRecommande, estEnCours: true, estRecommande: true }, kyc],
+          items: [{ ...defiAFaireEtNonRecommande, estEnCours: true, estRecommande: true }, ...kycs],
         }),
       );
 
@@ -224,7 +241,7 @@ describe("Fichier de tests concernant la récupération d'une mission", () => {
           items: [
             { ...defiAFaireEtNonRecommande, estEnCours: true, aEteRealisee: true },
             { ...defiAFaireEtNonRecommande, estEnCours: true, aEteRealisee: false },
-            kyc,
+            ...kycs,
           ],
         }),
       );
@@ -249,7 +266,7 @@ describe("Fichier de tests concernant la récupération d'une mission", () => {
       const usecase = new RecupererDetailMissionUsecase(
         new MissionThematiqueRepositoryMock({
           ...mission,
-          items: [{ ...defiAFaireEtNonRecommande, estRecommande: true, aEteRealisee: false }, kyc],
+          items: [{ ...defiAFaireEtNonRecommande, estRecommande: true, aEteRealisee: false }, ...kycs],
         }),
       );
 
@@ -270,7 +287,7 @@ describe("Fichier de tests concernant la récupération d'une mission", () => {
       const usecase = new RecupererDetailMissionUsecase(
         new MissionThematiqueRepositoryMock({
           ...mission,
-          items: [{ ...defiAFaireEtNonRecommande, estRecommande: true }, kyc],
+          items: [{ ...defiAFaireEtNonRecommande, estRecommande: true }, ...kycs],
         }),
       );
 
@@ -292,7 +309,7 @@ describe("Fichier de tests concernant la récupération d'une mission", () => {
       const usecase = new RecupererDetailMissionUsecase(
         new MissionThematiqueRepositoryMock({
           ...mission,
-          items: [{ ...defiAFaireEtNonRecommande, estRecommande: true, aEteRealisee: true }, kyc],
+          items: [{ ...defiAFaireEtNonRecommande, estRecommande: true, aEteRealisee: true }, ...kycs],
         }),
       );
 
@@ -313,7 +330,7 @@ describe("Fichier de tests concernant la récupération d'une mission", () => {
       const usecase = new RecupererDetailMissionUsecase(
         new MissionThematiqueRepositoryMock({
           ...mission,
-          items: [{ ...defiAFaireEtNonRecommande, estRecommande: true }, kyc],
+          items: [{ ...defiAFaireEtNonRecommande, estRecommande: true }, ...kycs],
         }),
       );
 

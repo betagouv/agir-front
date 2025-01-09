@@ -17,11 +17,11 @@
   import { computed, ref } from 'vue';
   import MissionNavigation from '@/components/custom/Mission/MissionNavigation.vue';
   import MissionQuestionKYC from '@/components/custom/Mission/MissionQuestionKYC.vue';
-  import { MissionKycViewModel } from '@/domaines/missions/adapters/mission.presenter.impl';
+  import { MissionBaseViewModel } from '@/domaines/missions/adapters/mission.presenter.impl';
   import { scrollToMain } from '@/shell/scrollToMain';
 
   const props = defineProps<{
-    kycs: MissionKycViewModel[];
+    kycs: MissionBaseViewModel[];
     onKycTermine: () => void;
     onClickRevenirEtapePrecedente: () => void;
     etapeCouranteDefaut?: number;

@@ -1,7 +1,7 @@
 import { expect } from 'vitest';
 import { determineEtapeMission } from '@/domaines/missions/determineEtapeMission';
 import {
-  MissionKycViewModel,
+  MissionBaseViewModel,
   MissionQuizArticleViewModel,
   MissionViewModel,
 } from '@/domaines/missions/adapters/mission.presenter.impl';
@@ -15,22 +15,24 @@ describe('Determine les étapes', () => {
     estTerminee: false,
     intro: 'Ceci est une intro',
     nombreEtapesMission: 2,
-    kyc: [
-      {
-        progression: {
-          etapeCourante: 0,
-          etapeTotal: 3,
-        },
-        id: '',
-        url: '',
-        estBloquee: false,
-        aEteRealisee: false,
-        picto: '',
-        titre: '',
-        pointAEteRecolte: false,
-        points: 0,
+    kyc: {
+      progression: {
+        etapeCourante: 0,
+        etapeTotal: 3,
       },
-    ],
+      kycs: [
+        {
+          id: '',
+          url: '',
+          estBloquee: false,
+          aEteRealisee: false,
+          picto: '',
+          titre: '',
+          pointAEteRecolte: false,
+          points: 0,
+        },
+      ],
+    },
     tag: {
       label: 'Mon tag',
       style: {
@@ -62,14 +64,13 @@ describe('Determine les étapes', () => {
       // GIVEN
       const viewModel: MissionViewModel = {
         ...viewModelBase,
-        kyc: [
-          {
-            progression: {
-              etapeCourante: 0,
-              etapeTotal: 3,
-            },
+        kyc: {
+          progression: {
+            etapeCourante: 0,
+            etapeTotal: 3,
           },
-        ] as MissionKycViewModel[],
+          kycs: [] as MissionBaseViewModel[],
+        },
       };
 
       // WHEN
@@ -83,14 +84,13 @@ describe('Determine les étapes', () => {
       // GIVEN
       const viewModel: MissionViewModel = {
         ...viewModelBase,
-        kyc: [
-          {
-            progression: {
-              etapeCourante: 2,
-              etapeTotal: 3,
-            },
+        kyc: {
+          progression: {
+            etapeCourante: 2,
+            etapeTotal: 3,
           },
-        ] as MissionKycViewModel[],
+          kycs: [] as MissionBaseViewModel[],
+        },
       };
 
       // WHEN
@@ -104,14 +104,13 @@ describe('Determine les étapes', () => {
       // GIVEN
       const viewModel: MissionViewModel = {
         ...viewModelBase,
-        kyc: [
-          {
-            progression: {
-              etapeCourante: 3,
-              etapeTotal: 3,
-            },
+        kyc: {
+          progression: {
+            etapeCourante: 3,
+            etapeTotal: 3,
           },
-        ] as MissionKycViewModel[],
+          kycs: [] as MissionBaseViewModel[],
+        },
       };
 
       // WHEN
@@ -125,14 +124,13 @@ describe('Determine les étapes', () => {
       // GIVEN
       const viewModel: MissionViewModel = {
         ...viewModelBase,
-        kyc: [
-          {
-            progression: {
-              etapeCourante: 3,
-              etapeTotal: 3,
-            },
+        kyc: {
+          progression: {
+            etapeCourante: 3,
+            etapeTotal: 3,
           },
-        ] as MissionKycViewModel[],
+          kycs: [] as MissionBaseViewModel[],
+        },
         articleEtQuiz: [
           { aEteRealisee: true },
           { aEteRealisee: true },
@@ -152,14 +150,13 @@ describe('Determine les étapes', () => {
       // GIVEN
       const viewModel: MissionViewModel = {
         ...viewModelBase,
-        kyc: [
-          {
-            progression: {
-              etapeCourante: 3,
-              etapeTotal: 3,
-            },
+        kyc: {
+          progression: {
+            etapeCourante: 3,
+            etapeTotal: 3,
           },
-        ] as MissionKycViewModel[],
+          kycs: [] as MissionBaseViewModel[],
+        },
         articleEtQuiz: [
           { aEteRealisee: true },
           { aEteRealisee: true },
