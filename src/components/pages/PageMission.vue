@@ -26,7 +26,7 @@
       />
       <MissionsQuestionsKyc
         v-if="etapeCourante.type === 'KYC'"
-        :kycs="missionViewModel.kyc"
+        :kycs="missionViewModel.kyc.kycs"
         :on-kyc-termine="() => miseAJourEtatCourant('QUIZ_ARTICLE', 0)"
         :on-click-revenir-etape-precedente="() => miseAJourEtatCourant('INTRO', 0)"
         :etape-courante-defaut="etapeCourante.etapeDansLetape"
@@ -37,11 +37,11 @@
         :missions="missionViewModel.articleEtQuiz"
         :on-click-fin-quiz-article="() => miseAJourEtatCourant('DEFI', 0)"
         :on-click-revenir-etape-precedente="
-          () => miseAJourEtatCourant('KYC', missionViewModel!.kyc[0].progression.etapeTotal - 1)
+          () => miseAJourEtatCourant('KYC', missionViewModel!.kyc.progression.etapeTotal - 1)
         "
         :etape-courante-defaut="etapeCourante.etapeDansLetape"
         :nombre-etapes-mission="missionViewModel.nombreEtapesMission"
-        :nombre-detapes-precendentes="missionViewModel?.kyc[0].progression.etapeTotal"
+        :nombre-detapes-precendentes="missionViewModel.kyc.progression.etapeTotal"
       />
       <MissionDefis
         v-if="etapeCourante.type === 'DEFI'"

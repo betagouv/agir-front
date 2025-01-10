@@ -25,7 +25,8 @@ export interface MissionDefiViewModel extends MissionBaseViewModel {
   };
 }
 
-export interface MissionKycViewModel extends MissionBaseViewModel {
+export interface MissionKycViewModel {
+  kycs: MissionBaseViewModel[];
   progression: {
     etapeCourante: number;
     etapeTotal: number;
@@ -42,7 +43,7 @@ export interface MissionViewModel {
   estTerminee: boolean;
   estTerminable: boolean;
   intro: string;
-  kyc: MissionKycViewModel[];
+  kyc: MissionKycViewModel;
   articleEtQuiz: MissionQuizArticleViewModel[];
   defis: MissionDefiViewModel[];
   tag: {
@@ -56,6 +57,9 @@ export class MissionPresenterImpl implements MissionPresenter {
   constructor(private readonly viewModel: (mission: MissionViewModel) => void) {}
 
   presente(mission: DetailMission): void {
+    const kycs = mission.items.filter(mission => mission.type === InteractionType.KYC);
+    const foundKycIndex = kycs.findIndex(mission => !mission.aEteRealisee);
+
     this.viewModel({
       titre: mission.titre,
       urlImage: mission.urlImage,
@@ -68,18 +72,18 @@ export class MissionPresenterImpl implements MissionPresenter {
         label: MenuThematiques.getThematiqueData(mission.clefApiThematique).labelDansLeMenu,
         style: TagThematique.getTagThematiqueUtilitaire(mission.clefApiThematique),
       },
-      kyc: mission.items
-        .filter(item => item.type === InteractionType.KYC)
-        .map((item): MissionKycViewModel => {
+      kyc: {
+        progression: {
+          etapeCourante: foundKycIndex === -1 ? kycs.length : foundKycIndex,
+          etapeTotal: kycs.length,
+        },
+        kycs: kycs.map((kyc): MissionBaseViewModel => {
           return {
-            id: item.contentId,
-            progression: {
-              etapeCourante: mission.progressionKyc.etapeCourante,
-              etapeTotal: mission.progressionKyc.etapeTotal,
-            },
-            aEteRealisee: item.aEteRealisee,
+            id: kyc.contentId,
+            aEteRealisee: kyc.aEteRealisee,
           };
         }),
+      },
       articleEtQuiz: mission.items
         .filter(item => item.type === InteractionType.ARTICLE || item.type === InteractionType.QUIZ)
         .map(item => this.mapToViewModel(item)),

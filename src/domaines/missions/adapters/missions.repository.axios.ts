@@ -76,10 +76,6 @@ export class MissionsRepositoryAxios implements MissionsRepository {
         estEnCours: item.defi_status === 'en_cours',
         pointAEteRecolte: item.sont_points_en_poche,
       })),
-      progressionKyc: {
-        etapeCourante: reponse.data.progression_kyc.current,
-        etapeTotal: reponse.data.progression_kyc.target,
-      },
     };
   }
 
