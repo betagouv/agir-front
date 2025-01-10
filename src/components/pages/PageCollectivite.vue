@@ -18,30 +18,10 @@
       <CarteSkeleton v-if="isLoading" />
       <template v-else-if="donneesCollectivitesViewmodel">
         <section class="propositions text--center">
-          <h1 class="fr-h2 fr-mb-3w">
+          <h1 class="fr-h2 fr-mb-6w">
             <span class="text--italic">J'agis</span> en quelques chiffres pour le code postal
             <span class="codePostal">{{ donneesCollectivitesViewmodel.codePostal }}</span>
           </h1>
-
-          <p
-            v-if="
-              donneesCollectivitesViewmodel.nombreInscrits > 1 && donneesCollectivitesViewmodel.nombrePointsMoyen > 1
-            "
-            class="fr-mb-5w"
-          >
-            Dans votre commune, {{ donneesCollectivitesViewmodel.nombreInscrits }} utilisateurs sont inscrits à J'agis
-            et cumulent {{ donneesCollectivitesViewmodel.nombrePointsMoyen }} points en moyenne.
-          </p>
-
-          <p
-            v-if="
-              donneesCollectivitesViewmodel?.nombreInscrits === 1 && donneesCollectivitesViewmodel.nombrePointsMoyen > 0
-            "
-            class="fr-mb-5w"
-          >
-            Dans votre commune, un unique utilisateur est inscrit à J'agis et il cumule
-            {{ donneesCollectivitesViewmodel.nombrePointsMoyen }} points.
-          </p>
 
           <div class="fr-grid-row fr-grid-row--gutters">
             <CarteDecouverte

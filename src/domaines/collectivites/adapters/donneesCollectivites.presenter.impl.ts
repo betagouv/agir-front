@@ -11,12 +11,6 @@ export class DonneesCollectivitesPresenterImpl implements DonneesCollectivitesPr
   displayDonneesCollectivites(donneesCollectivites: DonneesCollectivites, codePostal: string): void {
     this.viewModel({
       codePostal,
-      nombreInscrits: donneesCollectivites.nombreInscrits,
-      nombrePointsMoyen: Math.round(donneesCollectivites.nombrePointsMoyen),
-      nombreArticlesLocaux: donneesCollectivites.nombreArticlesLocaux,
-      nombreArticlesTotal: donneesCollectivites.nombreArticlesTotal,
-      nombreDefiEnCours: donneesCollectivites.nombreDefiEnCours,
-      nombreDefiRealises: donneesCollectivites.nombreDefiRealises,
       propositions: [
         {
           emoji: '📺',
