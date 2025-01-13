@@ -1,5 +1,24 @@
 # Changelog
 
+## [1.37.0](https://github.com/betagouv/agir-front/compare/v1.36.0...v1.37.0) (2025-01-10)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* bouton "continuer" dans les défis activé et affichage d'un message d'erreur ([#855](https://github.com/betagouv/agir-front/issues/855)) ([f5ab199](https://github.com/betagouv/agir-front/commit/f5ab199b863ec1deb0fcaf7d2db099d3cc24179f))
+* retirer la phrase indiquant le nombre d'utilisateurs sur la page collectivité ([#859](https://github.com/betagouv/agir-front/issues/859)) ([fb6bab1](https://github.com/betagouv/agir-front/commit/fb6bab18ec2b1e1894cc3e86fefabf9cf5999ed4))
+
+
+### 🐛 Corrections de bogues
+
+* le cas où une KYC a déjà été répondu dans mission + refactor kyc ([#860](https://github.com/betagouv/agir-front/issues/860)) ([1f5c76c](https://github.com/betagouv/agir-front/commit/1f5c76cdba4f7eebbc5ade4ad60d6ca1e75ba906))
+
+
+### 👷 Autres changements
+
+* Bump @types/node from 22.10.2 to 22.10.5 ([#857](https://github.com/betagouv/agir-front/issues/857)) ([c226b55](https://github.com/betagouv/agir-front/commit/c226b558c09bf9bc0fbdce2cc360532e1b8cbbb0))
+* Bump vite from 6.0.6 to 6.0.7 ([#856](https://github.com/betagouv/agir-front/issues/856)) ([64ba51b](https://github.com/betagouv/agir-front/commit/64ba51b9c134db50d3b334b35eb409a3af4526f7))
+
 ## [1.36.0](https://github.com/betagouv/agir-front/compare/v1.35.0...v1.36.0) (2025-01-06)
 
 
