@@ -1,5 +1,5 @@
 import { AxiosFactory, intercept401 } from '@/axios.factory';
-import { Aides } from '@/domaines/aides/chargementAides.usecase';
+import { Aide, Aides } from '@/domaines/aides/chargementAides.usecase';
 import { ChargementAidesRepository } from '@/domaines/aides/ports/chargementAides.repository';
 import { ClefThematiqueAPI, MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
 
@@ -20,7 +20,7 @@ interface AideApiModel {
   url_demande?: string;
 }
 
-export class chargementAidesAxiosRepository implements ChargementAidesRepository {
+export class ChargementAidesAxiosRepository implements ChargementAidesRepository {
   @intercept401()
   async getAides(utilisateurId: string): Promise<Aides> {
     const axios = AxiosFactory.getAxios();
@@ -44,6 +44,25 @@ export class chargementAidesAxiosRepository implements ChargementAidesRepository
           montantMaximum: aide.montant_max,
           urlCommencerVotreDemarche: aide.url_demande,
         })),
+    };
+  }
+
+  @intercept401()
+  async previsualiser(idAide: string): Promise<Aide> {
+    const axios = AxiosFactory.getCMSAxios();
+    const aideCMS = await axios.get(
+      `/aides/${idAide}?populate[1]=imageUrl&populate[2]=partenaire&populate[3]=thematique_gamification&populate[4]=rubriques&populate[5]=thematiques&populate[6]=tags&populate[7]=besoin`,
+    );
+    return {
+      id: aideCMS.data.data.id,
+      titre: aideCMS.data.data.attributes.titre,
+      categorie: aideCMS.data.data.attributes.thematique_principale_label,
+      thematique: aideCMS.data.data.attributes.thematiques.data[0].attributes.code as ClefThematiqueAPI,
+      contenu: aideCMS.data.data.attributes.description,
+      url: aideCMS.data.data.attributes.url_source,
+      isSimulateur: aideCMS.data.data.attributes.is_simulateur,
+      montantMaximum: aideCMS.data.data.attributes.points,
+      urlCommencerVotreDemarche: aideCMS.data.data.url_commencer_votre_demarche,
     };
   }
 }

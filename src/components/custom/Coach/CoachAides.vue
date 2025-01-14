@@ -10,14 +10,14 @@
         <AideLink :aide="aide" />
       </li>
     </ul>
-    <router-link class="fr-link" :to="RouteAidesPath.AIDES">Voir toutes les aides</router-link>
+    <router-link :to="RouteAidesPath.AIDES" class="fr-link">Voir toutes les aides</router-link>
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
   import { onMounted, ref } from 'vue';
   import AideLink from '@/components/custom/Aides/AideLink.vue';
-  import { chargementAidesAxiosRepository } from '@/domaines/aides/adapters/chargementAidesAxiosRepository';
+  import { ChargementAidesAxiosRepository } from '@/domaines/aides/adapters/chargementAidesAxiosRepository';
   import {
     AideNonGroupeeViewModel,
     ChargementAidesNonGroupeesPresenterImpl,
@@ -33,7 +33,7 @@
   const commune = ref<string>('');
   onMounted(async () => {
     const { id: utilisateurId } = utilisateurStore().utilisateur;
-    const usecase = new ChargementAidesUsecase(new chargementAidesAxiosRepository());
+    const usecase = new ChargementAidesUsecase(new ChargementAidesAxiosRepository());
 
     const informationLogementUseCase = new RecupererInformationLogementUseCase(new LogementRepositoryAxios());
     await Promise.all([

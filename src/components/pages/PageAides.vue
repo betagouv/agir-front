@@ -16,13 +16,13 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
   import '@gouvfr/dsfr/dist/component/alert/alert.min.css';
   import { onMounted, ref } from 'vue';
   import Aides from '@/components/custom/Aides/Aides.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import { ChargementAidesPresenterImpl } from '@/domaines/aides/adapters/chargementAides.presenter.impl';
-  import { chargementAidesAxiosRepository } from '@/domaines/aides/adapters/chargementAidesAxiosRepository';
+  import { ChargementAidesAxiosRepository } from '@/domaines/aides/adapters/chargementAidesAxiosRepository';
   import ChargementAidesUsecase from '@/domaines/aides/chargementAides.usecase';
   import { AidesAvecCouvertureViewModel } from '@/domaines/aides/ports/chargementAides.presenter';
   import { utilisateurStore } from '@/store/utilisateur';
@@ -32,7 +32,7 @@
 
   onMounted(async () => {
     const { id: utilisateurId } = utilisateurStore().utilisateur;
-    const usecase = new ChargementAidesUsecase(new chargementAidesAxiosRepository());
+    const usecase = new ChargementAidesUsecase(new ChargementAidesAxiosRepository());
     await usecase.execute(
       utilisateurId,
       new ChargementAidesPresenterImpl(aidesViewModel => (aides.value = aidesViewModel)),

@@ -1,4 +1,4 @@
-import ChargementAidesUsecase, { Aides } from '@/domaines/aides/chargementAides.usecase';
+import ChargementAidesUsecase, { Aide, Aides } from '@/domaines/aides/chargementAides.usecase';
 import { ChargementAidesRepository } from '@/domaines/aides/ports/chargementAides.repository';
 import { ChargementAidesPresenterImpl } from '@/domaines/aides/adapters/chargementAides.presenter.impl';
 import { AidesAvecCouvertureViewModel } from '@/domaines/aides/ports/chargementAides.presenter';
@@ -114,6 +114,10 @@ class ChargementAidesRepositoryForTest implements ChargementAidesRepository {
         },
       ],
     });
+  }
+
+  previsualiser(idAide: string): Promise<Aide> {
+    throw new Error('Method not implemented.');
   }
 }
 
