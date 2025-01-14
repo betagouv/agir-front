@@ -146,9 +146,10 @@
   const { alerte, afficherAlerte } = useAlerte();
 
   const formulaireValide = computed(() => {
-    return !isCodePostalEnErreur.value;
+    return !isCodePostalEnErreur.value && props.value.commune_utilisee_dans_le_compte;
   });
   const isCodePostalEnErreur = ref(false);
+
   const enregistrerLesInformations = () => {
     const usecase = new EnregistrerInformationsLogementUsecase(new LogementRepositoryAxios());
     usecase.execute(utilisateurStore().utilisateur.id, {
