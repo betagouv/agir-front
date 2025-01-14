@@ -15,7 +15,6 @@
         <button
           type="submit"
           aria-label="Soumettre le formulaire"
-          :disabled="!formulaireValide"
           class="fr-btn fr-btn--icon-left fr-btn--lg fr-icon-save-3-fill"
         >
           Mettre à jour mes informations
@@ -113,7 +112,6 @@
           <button
             type="submit"
             aria-label="Soumettre le formulaire"
-            :disabled="!formulaireValide"
             class="fr-btn fr-btn--icon-left fr-btn--lg fr-mt-4w fr-icon-save-3-fill"
           >
             Mettre à jour mes informations
@@ -145,12 +143,17 @@
 
   const { alerte, afficherAlerte } = useAlerte();
 
-  const formulaireValide = computed(() => {
+  const isCodePostalEnErreur = ref(false);
+  const codePostalEstValide = computed(() => {
     return !isCodePostalEnErreur.value && props.value.commune_utilisee_dans_le_compte;
   });
-  const isCodePostalEnErreur = ref(false);
 
   const enregistrerLesInformations = () => {
+    if (!codePostalEstValide.value) {
+      afficherAlerte('error', 'Erreur', 'Veuillez renseigner votre code postal ainsi que votre commune associée.');
+      return;
+    }
+
     const usecase = new EnregistrerInformationsLogementUsecase(new LogementRepositoryAxios());
     usecase.execute(utilisateurStore().utilisateur.id, {
       adultes: props.value.adultes,
