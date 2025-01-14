@@ -1,13 +1,16 @@
+import { RouteRecordRaw } from 'vue-router';
+import PagePrevisualisationAide from '@/components/pages/PagePrevisualisationAide.vue';
+import { RouteAidesName } from '@/router/aides/routeAidesName';
+
 const PageAidesVelo = () => import('@/components/pages/PageAidesVelo.vue');
 const PageAides = () => import('@/components/pages/PageAides.vue');
 const PageAidesVeloFormulaire = () => import('@/components/pages/PageAidesVeloFormulaire.vue');
-import { RouteRecordRaw } from 'vue-router';
-import { RouteAidesName } from '@/router/aides/routeAidesName';
 
 export enum RouteAidesPath {
   AIDES = '/aides',
   FORMULAIRE = 'formulaire',
   VELO = 'velo',
+  AIDE_PREVISUALISATION = 'previsualisation/:id',
 }
 
 const aidesRoutes: RouteRecordRaw[] = [
@@ -44,6 +47,11 @@ const aidesRoutes: RouteRecordRaw[] = [
             component: PageAidesVeloFormulaire,
           },
         ],
+      },
+      {
+        path: RouteAidesPath.AIDE_PREVISUALISATION,
+        component: PagePrevisualisationAide,
+        meta: { estPublique: true },
       },
     ],
   },
