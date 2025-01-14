@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.37.1](https://github.com/betagouv/agir-front/compare/v1.37.0...v1.37.1) (2025-01-14)
+
+
+### 👷 Autres changements
+
+* Bump @sentry/vite-plugin from 2.22.7 to 2.23.0 ([#861](https://github.com/betagouv/agir-front/issues/861)) ([8ba85d3](https://github.com/betagouv/agir-front/commit/8ba85d30e933fa7cee9b2b35f1ca616a792ee038))
+* Bump @sentry/vue from 8.47.0 to 8.48.0 ([#863](https://github.com/betagouv/agir-front/issues/863)) ([086993a](https://github.com/betagouv/agir-front/commit/086993adadbe0480ffaeff44a3265c7417dbb6c6))
+* Bump typescript from 5.6.3 to 5.7.3 ([#865](https://github.com/betagouv/agir-front/issues/865)) ([675405e](https://github.com/betagouv/agir-front/commit/675405e622d579efb44673f62076835ad2d328b8))
+
 ## [1.37.0](https://github.com/betagouv/agir-front/compare/v1.36.0...v1.37.0) (2025-01-10)
 
 
