@@ -70,9 +70,10 @@
     </div>
 
     <AlertSmall
-      v-if="afficherMessageErreur && estIncomplet"
-      message="Veuillez sélectionner une réponse pour continuer"
-      type="error"
+      v-if="alerte.isActive"
+      :type="alerte.type"
+      :titre="alerte.titre"
+      :message="alerte.message"
       class="fr-mt-1w"
     />
 
@@ -97,6 +98,7 @@
   import InputNumeric from '@/components/custom/Form/InputNumeric.vue';
   import InputCheckbox from '@/components/custom/InputCheckbox.vue';
   import KYCMosaic from '@/components/custom/KYC/KYCMosaic.vue';
+  import { useAlerte } from '@/composables/useAlerte';
   import {
     QuestionViewModel,
     ReponsePossibleViewModel,
@@ -111,8 +113,8 @@
   const questionViewModel = ref<QuestionViewModel>(props.questionViewModel);
   const reponse = defineModel<string | string[]>('reponse', { default: '' });
   const estIncomplet = ref<boolean>(true);
-  const afficherMessageErreur = ref<boolean>(false);
   const emit = defineEmits<{ (e: 'update:soumissionKyc', value: string[]): void }>();
+  const { alerte, afficherAlerte } = useAlerte();
   onMounted(() => {
     reponse.value =
       props.questionViewModel.type === 'libre' || props.questionViewModel.type === 'entier'
@@ -129,7 +131,7 @@
 
   const validerLaReponse = async () => {
     if (!reponse.value || reponse.value.length === 0) {
-      afficherMessageErreur.value = true;
+      afficherAlerte('error', '', 'Veuillez sélectionner une réponse pour continuer');
       return;
     }
     if (
@@ -149,7 +151,6 @@
           boolean_value: reponse.value.includes(r.id),
         })),
       );
-      afficherMessageErreur.value = false;
     } else {
       const envoyerReponseUsecase = new EnvoyerReponseUsecase(
         new QuestionRepositoryAxios(),
@@ -161,7 +162,6 @@
         props.questionViewModel.id,
         reponse.value.toString(),
       );
-      afficherMessageErreur.value = false;
     }
     emit('update:soumissionKyc', [reponse.value].flat());
   };
@@ -187,6 +187,5 @@
     });
 
     emit('update:soumissionKyc', reponse.value);
-    afficherMessageErreur.value = false;
   };
 </script>

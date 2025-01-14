@@ -12,13 +12,14 @@
     />
 
     <AlertSmall
-      v-if="afficherMessageErreur && estIncomplet"
-      message="Veuillez sélectionner une réponse pour continuer"
-      type="error"
+      v-if="alerte.isActive"
+      :type="alerte.type"
+      :titre="alerte.titre"
+      :message="alerte.message"
       class="fr-mb-2w"
     />
 
-    <button v-if="!questionEstRepondu" class="fr-btn fr-btn--lg fr-mt-1w" type="submit">Valider</button>
+    <button v-if="!reponseEstDonnee" class="fr-btn fr-btn--lg fr-mt-1w" type="submit">Valider</button>
   </form>
 </template>
 
@@ -26,15 +27,16 @@
   import { computed, ref } from 'vue';
   import AlertSmall from '@/components/custom/AlertSmall.vue';
   import BoutonRadio from '@/components/custom/BoutonRadio.vue';
+  import { useAlerte } from '@/composables/useAlerte';
 
   defineProps<{
     questions: { label: string; value: string; disabled?: boolean; customClass?: string }[];
     question: string;
   }>();
 
+  const { alerte, afficherAlerte } = useAlerte();
   const valueInput = ref<string>('');
-  const questionEstRepondu = ref<boolean>(false);
-  const afficherMessageErreur = ref<boolean>(false);
+  const reponseEstDonnee = ref<boolean>(false);
 
   const estIncomplet = computed(() => valueInput.value === '');
 
@@ -42,10 +44,11 @@
 
   const validerLaReponse = () => {
     if (estIncomplet.value) {
-      afficherMessageErreur.value = true;
+      afficherAlerte('error', '', 'Veuillez sélectionner une réponse pour continuer');
       return;
     }
-    questionEstRepondu.value = true;
+    reponseEstDonnee.value = true;
     emit('quizTermine', valueInput.value);
+    alerte.value.isActive = false;
   };
 </script>

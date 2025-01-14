@@ -150,7 +150,7 @@
 
   const enregistrerLesInformations = () => {
     if (!codePostalEstValide.value) {
-      afficherAlerte('error', 'Erreur', 'Veuillez renseigner votre code postal ainsi que votre commune associée.');
+      afficherAlerte('error', 'Erreur', 'Veuillez renseigner votre commune.');
       return;
     }
 
