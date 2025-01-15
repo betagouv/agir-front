@@ -48,14 +48,7 @@
 
                 <ul>
                   <li v-for="aide in proposition.aides" :key="aide.id">
-                    <router-link
-                      :to="{
-                        name: RouteAidesName.AIDE_PREVISUALISATION,
-                        params: { id: aide.id },
-                      }"
-                    >
-                      {{ aide.titre }}
-                    </router-link>
+                    <router-link :to="aide.url">{{ aide.titre }}</router-link>
                   </li>
                 </ul>
               </div>
@@ -64,14 +57,7 @@
                 <p class="fr-m-0">Quelques <span class="text--bold">articles</span> :</p>
                 <ul>
                   <li v-for="article in proposition.articles" :key="article.id">
-                    <router-link
-                      :to="{
-                        name: RouteArticleName.ARTICLE_PREVISUALISATION,
-                        params: { id: article.id },
-                      }"
-                    >
-                      {{ article.titre }}
-                    </router-link>
+                    <router-link :to="article.url">{{ article.titre }}</router-link>
                   </li>
                 </ul>
               </div>
@@ -102,8 +88,6 @@
   import { DonneesCollectivitesRepositoryAxios } from '@/domaines/collectivites/adapters/donneesCollectivites.repository.axios';
   import { DonneesCollectivitesViewModel } from '@/domaines/collectivites/ports/donneesCollectivites.presenter';
   import { RecuperationDonneesCollectivitesUsecase } from '@/domaines/collectivites/recuperationDonneesCollectivites.usecase';
-  import { RouteAidesName } from '@/router/aides/routeAidesName';
-  import { RouteArticleName } from '@/router/articles/routes';
 
   const isLoading = ref<boolean>(false);
   const donneesCollectivitesViewmodel = ref<DonneesCollectivitesViewModel>();
