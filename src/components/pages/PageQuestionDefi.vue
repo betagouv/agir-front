@@ -56,7 +56,7 @@
               <textarea id="explication" v-model="explication" class="fr-input fr-mb-4w" name="explication" />
             </div>
 
-            <AlertSmall
+            <Alert
               v-if="alerte.isActive && !isReponseInitialeDifferente"
               :type="alerte.type"
               :titre="alerte.titre"
@@ -104,7 +104,7 @@
 <script lang="ts" setup>
   import { computed, onMounted, ref } from 'vue';
   import { useRoute } from 'vue-router';
-  import AlertSmall from '@/components/custom/AlertSmall.vue';
+  import Alert from '@/components/custom/Alert.vue';
   import BoutonRadio from '@/components/custom/BoutonRadio.vue';
   import CarteInfo from '@/components/custom/CarteInfo.vue';
   import DefiFin from '@/components/custom/Defi/DefiFin.vue';
@@ -203,7 +203,7 @@
 
   const validerLaReponse = async () => {
     if (!isReponseInitialeDifferente.value) {
-      afficherAlerte('error', '', 'Veuillez sélectionner une réponse pour continuer');
+      afficherAlerte('error', 'Erreur', 'Veuillez sélectionner une réponse pour continuer');
       return;
     }
 

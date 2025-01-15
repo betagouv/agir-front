@@ -11,7 +11,7 @@
       :defaultValue="valueInput"
     />
 
-    <AlertSmall
+    <Alert
       v-if="alerte.isActive"
       :type="alerte.type"
       :titre="alerte.titre"
@@ -25,7 +25,7 @@
 
 <script setup lang="ts">
   import { computed, ref } from 'vue';
-  import AlertSmall from '@/components/custom/AlertSmall.vue';
+  import Alert from '@/components/custom/Alert.vue';
   import BoutonRadio from '@/components/custom/BoutonRadio.vue';
   import { useAlerte } from '@/composables/useAlerte';
 
@@ -44,7 +44,7 @@
 
   const validerLaReponse = () => {
     if (estIncomplet.value) {
-      afficherAlerte('error', '', 'Veuillez sélectionner une réponse pour continuer');
+      afficherAlerte('error', 'Erreur', 'Veuillez sélectionner une réponse pour continuer');
       return;
     }
     reponseEstDonnee.value = true;
