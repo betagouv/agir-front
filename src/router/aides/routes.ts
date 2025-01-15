@@ -50,6 +50,7 @@ const aidesRoutes: RouteRecordRaw[] = [
       },
       {
         path: RouteAidesPath.AIDE_PREVISUALISATION,
+        name: RouteAidesName.AIDE_PREVISUALISATION,
         component: PagePrevisualisationAide,
         meta: { estPublique: true },
       },
