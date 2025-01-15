@@ -1,6 +1,6 @@
 import {
-  AidesLocalesViewModel,
-  ArticlesLocauxViewModel,
+  AideLocaleViewModel,
+  ArticleLocalViewModel,
   DonneesCollectivitesPresenter,
   DonneesCollectivitesViewModel,
 } from '@/domaines/collectivites/ports/donneesCollectivites.presenter';
@@ -13,15 +13,19 @@ export class DonneesCollectivitesPresenterImpl implements DonneesCollectivitesPr
   constructor(private readonly viewModel: (donneesCollectivitesViewModel: DonneesCollectivitesViewModel) => void) {}
 
   displayDonneesCollectivites(donneesCollectivites: DonneesCollectivites, codePostal: string): void {
-    const aidesLocales: AidesLocalesViewModel[] = donneesCollectivites.aidesLocales.map(aide => ({
+    const aidesLocales: AideLocaleViewModel[] = donneesCollectivites.aidesLocales.map(aide => ({
       ...aide,
       url: { name: RouteAidesName.AIDE_PREVISUALISATION, params: { id: aide.id } },
     }));
+    const filtrerAidesLocalesParThematique = (clef: ClefThematiqueAPI) =>
+      aidesLocales.filter(aide => aide.thematiques.includes(clef));
 
-    const articlesLocaux: ArticlesLocauxViewModel[] = donneesCollectivites.articles.map(article => ({
+    const articlesLocaux: ArticleLocalViewModel[] = donneesCollectivites.articles.map(article => ({
       ...article,
       url: { name: RouteArticleName.ARTICLE_PREVISUALISATION, params: { id: article.id } },
     }));
+    const filtrerArticlesLocauxParThematique = (clef: ClefThematiqueAPI) =>
+      articlesLocaux.filter(article => article.thematique === clef);
 
     this.viewModel({
       codePostal,
@@ -63,8 +67,8 @@ export class DonneesCollectivitesPresenterImpl implements DonneesCollectivitesPr
             },
           ]),
           nombreDAides: donneesCollectivites.thematiques.nombre_aides_consommation,
-          aides: aidesLocales.filter(aide => aide.thematiques.includes(ClefThematiqueAPI.consommation)),
-          articles: articlesLocaux.filter(article => article.thematique === ClefThematiqueAPI.consommation),
+          aides: filtrerAidesLocalesParThematique(ClefThematiqueAPI.consommation),
+          articles: filtrerArticlesLocauxParThematique(ClefThematiqueAPI.consommation),
         },
         {
           emoji: '🍛',
@@ -98,8 +102,8 @@ export class DonneesCollectivitesPresenterImpl implements DonneesCollectivitesPr
             },
           ]),
           nombreDAides: donneesCollectivites.thematiques.nombre_aides_alimentation,
-          aides: aidesLocales.filter(aide => aide.thematiques.includes(ClefThematiqueAPI.alimentation)),
-          articles: articlesLocaux.filter(article => article.thematique === ClefThematiqueAPI.alimentation),
+          aides: filtrerAidesLocalesParThematique(ClefThematiqueAPI.alimentation),
+          articles: filtrerArticlesLocauxParThematique(ClefThematiqueAPI.alimentation),
         },
         {
           emoji: '🚲',
@@ -107,8 +111,8 @@ export class DonneesCollectivitesPresenterImpl implements DonneesCollectivitesPr
           lien: '#',
           contenu: [],
           nombreDAides: donneesCollectivites.thematiques.nombre_aides_transport,
-          aides: aidesLocales.filter(aide => aide.thematiques.includes(ClefThematiqueAPI.transports)),
-          articles: articlesLocaux.filter(article => article.thematique === ClefThematiqueAPI.transports),
+          aides: filtrerAidesLocalesParThematique(ClefThematiqueAPI.transports),
+          articles: filtrerArticlesLocauxParThematique(ClefThematiqueAPI.transports),
         },
         {
           emoji: '🧱',
@@ -116,8 +120,8 @@ export class DonneesCollectivitesPresenterImpl implements DonneesCollectivitesPr
           lien: '#',
           contenu: [],
           nombreDAides: donneesCollectivites.thematiques.nombre_aides_logement,
-          aides: aidesLocales.filter(aide => aide.thematiques.includes(ClefThematiqueAPI.logement)),
-          articles: articlesLocaux.filter(article => article.thematique === ClefThematiqueAPI.logement),
+          aides: filtrerAidesLocalesParThematique(ClefThematiqueAPI.logement),
+          articles: filtrerArticlesLocauxParThematique(ClefThematiqueAPI.logement),
         },
       ],
     });

@@ -8,9 +8,9 @@ export interface DonneesCollectivitesViewModel {
     titre: string;
     contenu: string[];
     nombreDAides: number;
-    aides: AidesLocalesViewModel[];
+    aides: AideLocaleViewModel[];
     lien: string;
-    articles: ArticlesLocauxViewModel[];
+    articles: ArticleLocalViewModel[];
   }[];
 }
 
@@ -21,13 +21,13 @@ interface ViewModelWithUrl {
   };
 }
 
-export interface ArticlesLocauxViewModel extends ViewModelWithUrl {
+export interface ArticleLocalViewModel extends ViewModelWithUrl {
   id: number;
   titre: string;
   thematique: string;
 }
 
-export interface AidesLocalesViewModel extends ViewModelWithUrl {
+export interface AideLocaleViewModel extends ViewModelWithUrl {
   id: number;
   titre: string;
   thematiques: ClefThematiqueAPI[];
