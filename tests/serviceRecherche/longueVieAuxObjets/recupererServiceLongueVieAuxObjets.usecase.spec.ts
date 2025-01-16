@@ -156,11 +156,11 @@ describe("Fichier de tests concernant la récuperation de service d'un recherche
             ],
             aside: {
               description:
-                "L'ADEME vous aide à trouver des alternatives à l'achat et à prolonger la vie de vos objets. Pour préserver les ressources de la planète.... et de votre porte-monnaie !",
+                'L’ADEME vous aide à prolonger la vie de vos objets. Pour préserver les ressources de la planète… et de votre porte-monnaie !',
               logo: '',
-              nom: 'Longue Vie Aux Objets - ADEME',
+              nom: 'Que faire de mes objets - ADEME',
               screenshot: '/service-longue-vie-aux-objets.webp',
-              url: 'https://longuevieauxobjets.ademe.fr/',
+              url: 'https://quefairedemesobjets.ademe.fr/?mtm_campaign=jagis',
             },
             categories: [
               { code: 'code', label: 'label', estLaCategorieParDefaut: true },
@@ -200,11 +200,11 @@ describe("Fichier de tests concernant la récuperation de service d'un recherche
             aucunResultat: true,
             aside: {
               description:
-                "L'ADEME vous aide à trouver des alternatives à l'achat et à prolonger la vie de vos objets. Pour préserver les ressources de la planète.... et de votre porte-monnaie !",
+                'L’ADEME vous aide à prolonger la vie de vos objets. Pour préserver les ressources de la planète… et de votre porte-monnaie !',
               logo: '',
-              nom: 'Longue Vie Aux Objets - ADEME',
+              nom: 'Que faire de mes objets - ADEME',
               screenshot: '/service-longue-vie-aux-objets.webp',
-              url: 'https://longuevieauxobjets.ademe.fr/',
+              url: 'https://quefairedemesobjets.ademe.fr/?mtm_campaign=jagis',
             },
             categories: [
               { code: 'code', label: 'label', estLaCategorieParDefaut: true },
