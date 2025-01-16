@@ -112,6 +112,26 @@ class ChargementAidesRepositoryForTest implements ChargementAidesRepository {
           idDuContenu: '',
           isSimulateur: true,
         },
+        {
+          id: 'id-7',
+          titre: 'Aide test',
+          sousTitre: '',
+          categorie: '🥦 Alimentation',
+          thematique: ClefThematiqueAPI.alimentation,
+          nombreDePointsAGagner: '25',
+          miseEnAvant: '',
+          type: 'AIDE',
+          illustrationURL: 'https://picsum.photos/200/300',
+          url: 'vos-aides-velo',
+          isUrlExterne: false,
+          contenu: '<h3>Titre test</h3><p>lorem ipsum dolor test</p>',
+          idDuContenu: '',
+          isSimulateur: true,
+          partenaire: {
+            logoUrl: 'https://',
+            nom: 'Partenaire test',
+          },
+        },
       ],
     });
   }
@@ -151,6 +171,7 @@ describe('Fichier de tests pour charger toutes les aides', () => {
               titre: "Simulez vos aides pour l'achat d'un vélo",
               url: 'vos-aides-velo',
               urlCommencerVotreDemarche: 'urlCommencerVotreDemarche',
+              partenaire: undefined,
             },
             {
               contenu: '<h3>Titre test</h3><p>lorem ipsum dolor test</p>',
@@ -169,6 +190,7 @@ describe('Fichier de tests pour charger toutes les aides', () => {
               titre: 'Simulez vos aides pour convertir votre voiture thermique en électrique',
               url: 'vos-aides-retrofit',
               urlCommencerVotreDemarche: undefined,
+              partenaire: undefined,
             },
           ],
           '🥗 Me nourrir': [
@@ -189,6 +211,7 @@ describe('Fichier de tests pour charger toutes les aides', () => {
               titre: 'Aide test',
               url: 'vos-aides-velo',
               urlCommencerVotreDemarche: undefined,
+              partenaire: undefined,
             },
             {
               contenu: '<h3>Titre test</h3><p>lorem ipsum dolor test</p>',
@@ -207,6 +230,7 @@ describe('Fichier de tests pour charger toutes les aides', () => {
               titre: 'Aide test',
               url: 'vos-aides-velo',
               urlCommencerVotreDemarche: undefined,
+              partenaire: undefined,
             },
             {
               contenu: '<h3>Titre test</h3><p>lorem ipsum dolor test</p>',
@@ -225,12 +249,36 @@ describe('Fichier de tests pour charger toutes les aides', () => {
               titre: 'Aide test',
               url: 'vos-aides-velo',
               urlCommencerVotreDemarche: undefined,
+              partenaire: undefined,
             },
             {
               contenu: '<h3>Titre test</h3><p>lorem ipsum dolor test</p>',
               id: 'id-6',
               isSimulateur: true,
               montantMaximum: undefined,
+              thematiqueLabel: '🥗 Me nourrir',
+              thematiqueTag: {
+                label: 'Me nourrir',
+                style: {
+                  backgroundColor: '#E3FBAF',
+                  color: '#175202',
+                  emoji: '🥗',
+                },
+              },
+              titre: 'Aide test',
+              url: 'vos-aides-velo',
+              urlCommencerVotreDemarche: undefined,
+              partenaire: undefined,
+            },
+            {
+              contenu: '<h3>Titre test</h3><p>lorem ipsum dolor test</p>',
+              id: 'id-7',
+              isSimulateur: true,
+              montantMaximum: undefined,
+              partenaire: {
+                accessibilite: 'proposé par Partenaire test',
+                logoUrl: 'https://',
+              },
               thematiqueLabel: '🥗 Me nourrir',
               thematiqueTag: {
                 label: 'Me nourrir',

@@ -43,6 +43,12 @@ export class ChargementAidesPresenterImpl implements ChargementAidesPresenter {
           style: TagThematique.getTagThematiqueUtilitaire(aide.thematique),
         },
         urlCommencerVotreDemarche: aide.urlCommencerVotreDemarche,
+        partenaire: aide.partenaire
+          ? {
+              logoUrl: aide.partenaire.logoUrl,
+              accessibilite: `proposé par ${aide.partenaire.nom}`,
+            }
+          : undefined,
       };
 
       map[thematiqueLabel].push(aideToPush);
