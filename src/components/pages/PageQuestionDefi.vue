@@ -56,10 +56,11 @@
               <textarea id="explication" v-model="explication" class="fr-input fr-mb-4w" name="explication" />
             </div>
 
-            <AlertSmall
-              v-if="afficheMessageErreur && !isReponseInitialeDifferente"
-              message="Veuillez sélectionner une réponse pour continuer"
-              type="error"
+            <Alert
+              v-if="alerte.isActive && !isReponseInitialeDifferente"
+              :type="alerte.type"
+              :titre="alerte.titre"
+              :message="alerte.message"
               class="fr-mb-4w"
             />
 
@@ -103,12 +104,13 @@
 <script lang="ts" setup>
   import { computed, onMounted, ref } from 'vue';
   import { useRoute } from 'vue-router';
-  import AlertSmall from '@/components/custom/AlertSmall.vue';
+  import Alert from '@/components/custom/Alert.vue';
   import BoutonRadio from '@/components/custom/BoutonRadio.vue';
   import CarteInfo from '@/components/custom/CarteInfo.vue';
   import DefiFin from '@/components/custom/Defi/DefiFin.vue';
   import ThematiqueTag from '@/components/custom/Thematiques/ThematiqueTag.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
+  import { useAlerte } from '@/composables/useAlerte';
   import { DefiPresenterImpl, DefiViewModel, ReponsePossible } from '@/domaines/defi/adapters/defi.presenter.impl';
   import { DefiRepositoryAxios } from '@/domaines/defi/adapters/defi.repository.axios';
   import { EnvoyerReponseDefiUsecase } from '@/domaines/defi/envoyerReponseDefi.usecase';
@@ -151,6 +153,7 @@
     'Christophe',
   ];
   const route = useRoute();
+  const { alerte, afficherAlerte } = useAlerte();
   const questionId = Array.isArray(route.params.id) ? route.params.id[0] : route.params.id;
 
   const isLoading = ref<boolean>(true);
@@ -159,7 +162,6 @@
   const explication = ref<string>('');
   const reponseAEteDonnee = ref<boolean>(false);
   const aDejaRepondu = ref<boolean>(false);
-  const afficheMessageErreur = ref<boolean>(false);
   const reponseInitiale = ref<string>('');
 
   const utilisateurId = utilisateurStore().utilisateur.id;
@@ -201,7 +203,7 @@
 
   const validerLaReponse = async () => {
     if (!isReponseInitialeDifferente.value) {
-      afficheMessageErreur.value = true;
+      afficherAlerte('error', 'Erreur', 'Veuillez sélectionner une réponse pour continuer');
       return;
     }
 
@@ -210,7 +212,7 @@
       ToDoListEventBusImpl.getInstance(),
     );
     await envoyerReponseUsecase.execute(utilisateurId, questionId, reponse.value, explication.value);
-    afficheMessageErreur.value = false;
+    alerte.value.isActive = false;
 
     if (defiViewModel.value?.reponse) {
       aDejaRepondu.value = true;

@@ -39,10 +39,10 @@
             value: reponsePossible.id,
           }))
         "
+        class="fr-mb-0"
         col=""
         legende-size="l"
         orientation="vertical"
-        class="fr-mb-0"
       />
     </div>
     <div v-if="questionViewModel.type === 'choix_multiple'" class="fr-input-group">
@@ -69,10 +69,11 @@
       <textarea id="reponse" v-model="reponse" class="fr-input" name="reponse" />
     </div>
 
-    <AlertSmall
-      v-if="afficherMessageErreur && estIncomplet"
-      message="Veuillez sélectionner une réponse pour continuer"
-      type="error"
+    <Alert
+      v-if="alerte.isActive"
+      :message="alerte.message"
+      :titre="alerte.titre"
+      :type="alerte.type"
       class="fr-mt-1w"
     />
 
@@ -92,11 +93,12 @@
 
 <script lang="ts" setup>
   import { onMounted, ref, watch } from 'vue';
-  import AlertSmall from '@/components/custom/AlertSmall.vue';
+  import Alert from '@/components/custom/Alert.vue';
   import BoutonRadio from '@/components/custom/BoutonRadio.vue';
   import InputNumeric from '@/components/custom/Form/InputNumeric.vue';
   import InputCheckbox from '@/components/custom/InputCheckbox.vue';
   import KYCMosaic from '@/components/custom/KYC/KYCMosaic.vue';
+  import { useAlerte } from '@/composables/useAlerte';
   import {
     QuestionViewModel,
     ReponsePossibleViewModel,
@@ -111,8 +113,8 @@
   const questionViewModel = ref<QuestionViewModel>(props.questionViewModel);
   const reponse = defineModel<string | string[]>('reponse', { default: '' });
   const estIncomplet = ref<boolean>(true);
-  const afficherMessageErreur = ref<boolean>(false);
   const emit = defineEmits<{ (e: 'update:soumissionKyc', value: string[]): void }>();
+  const { alerte, afficherAlerte } = useAlerte();
   onMounted(() => {
     reponse.value =
       props.questionViewModel.type === 'libre' || props.questionViewModel.type === 'entier'
@@ -129,7 +131,7 @@
 
   const validerLaReponse = async () => {
     if (!reponse.value || reponse.value.length === 0) {
-      afficherMessageErreur.value = true;
+      afficherAlerte('error', 'Erreur', 'Veuillez sélectionner une réponse pour continuer');
       return;
     }
     if (
@@ -149,7 +151,6 @@
           boolean_value: reponse.value.includes(r.id),
         })),
       );
-      afficherMessageErreur.value = false;
     } else {
       const envoyerReponseUsecase = new EnvoyerReponseUsecase(
         new QuestionRepositoryAxios(),
@@ -161,7 +162,6 @@
         props.questionViewModel.id,
         reponse.value.toString(),
       );
-      afficherMessageErreur.value = false;
     }
     emit('update:soumissionKyc', [reponse.value].flat());
   };
@@ -187,6 +187,5 @@
     });
 
     emit('update:soumissionKyc', reponse.value);
-    afficherMessageErreur.value = false;
   };
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div class="fr-grid fr-grid-row fr-grid-row--gutters">
-    <div class="fr-col-md-3 fr-col-12">
+    <div class="fr-col-lg-3 fr-col-12">
       <div :class="`fr-input-group ${!codePostalValide && 'fr-input-group--error'}`">
         <label class="fr-label" for="codePostal"
           >Code postal

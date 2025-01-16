@@ -48,7 +48,7 @@
   const { alerte, afficherAlerte } = useAlerte();
 
   const validerLaReponse = async () => {
-    if (onboardingPostCreationCompte().commune.length === 0) {
+    if (!onboardingPostCreationCompte().commune) {
       afficherAlerte('error', 'Erreur lors de la validation de la résidence', 'Veuillez renseigner votre commune');
       return;
     }

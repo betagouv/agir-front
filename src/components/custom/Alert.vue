@@ -1,6 +1,7 @@
 <template>
   <div role="alert" :class="`fr-alert fr-alert--${type} background--white`">
     <h3 class="fr-alert__title">{{ titre }}</h3>
+    <span class="fr-sr-only">: </span>
     <p>{{ message }}</p>
   </div>
 </template>
