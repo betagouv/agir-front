@@ -149,6 +149,7 @@ describe("Fichier de tests concernant la récuperation de service d'un recherche
               nom: 'Près de chez nous',
               description:
                 'Près de chez nous est une cartographie collaborative qui recense l’ensemble des structures qui proposent des produits bio, équitables et locaux.',
+              urlLabel: 'https://presdecheznous.fr/',
               url: 'https://presdecheznous.fr/',
               logo: '/service-proximite-logo.webp',
               screenshot: '/service-proximite.webp',
@@ -193,6 +194,7 @@ describe("Fichier de tests concernant la récuperation de service d'un recherche
               nom: 'Près de chez nous',
               description:
                 'Près de chez nous est une cartographie collaborative qui recense l’ensemble des structures qui proposent des produits bio, équitables et locaux.',
+              urlLabel: 'https://presdecheznous.fr/',
               url: 'https://presdecheznous.fr/',
               logo: '/service-proximite-logo.webp',
               screenshot: '/service-proximite.webp',

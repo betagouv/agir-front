@@ -2,6 +2,7 @@ interface AsideServiceViewModel {
   nom: string;
   description: string;
   url: string;
+  urlLabel: string;
   logo: string;
   screenshot: string;
 }

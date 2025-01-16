@@ -9,7 +9,7 @@
       <p>{{ description }}</p>
       <p>
         <a :href="url" class="fr-link" target="_blank" rel="noopener">
-          {{ url }}
+          {{ urlLabel }}
         </a>
       </p>
       <img v-if="logo" :src="logo" alt="" class="display-block max-full-width" height="32px" />
@@ -18,5 +18,5 @@
 </template>
 
 <script setup lang="ts">
-  defineProps<{ image: string; nom: string; description: string; url: string; logo: string }>();
+  defineProps<{ image: string; nom: string; description: string; url: string; urlLabel?: string; logo: string }>();
 </script>

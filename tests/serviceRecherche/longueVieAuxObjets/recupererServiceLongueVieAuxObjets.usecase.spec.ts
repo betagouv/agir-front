@@ -161,6 +161,7 @@ describe("Fichier de tests concernant la récuperation de service d'un recherche
               nom: 'Que faire de mes objets - ADEME',
               screenshot: '/service-longue-vie-aux-objets.webp',
               url: 'https://quefairedemesobjets.ademe.fr/?mtm_campaign=jagis',
+              urlLabel: 'https://quefairedemesobjets.ademe.fr',
             },
             categories: [
               { code: 'code', label: 'label', estLaCategorieParDefaut: true },
@@ -204,6 +205,7 @@ describe("Fichier de tests concernant la récuperation de service d'un recherche
               logo: '',
               nom: 'Que faire de mes objets - ADEME',
               screenshot: '/service-longue-vie-aux-objets.webp',
+              urlLabel: 'https://quefairedemesobjets.ademe.fr',
               url: 'https://quefairedemesobjets.ademe.fr/?mtm_campaign=jagis',
             },
             categories: [

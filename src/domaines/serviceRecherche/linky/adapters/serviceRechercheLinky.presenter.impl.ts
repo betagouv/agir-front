@@ -28,6 +28,7 @@ export class ServiceRechercheLinkyPresenterImpl implements ServiceRechercheLinky
       aside: {
         nom: 'Winter énergies',
         url: 'https://www.winter-energies.fr/',
+        urlLabel: 'https://www.winter-energies.fr/',
         logo: '/service-winter-logo.webp',
         screenshot: '/service-winter.webp',
         description:
