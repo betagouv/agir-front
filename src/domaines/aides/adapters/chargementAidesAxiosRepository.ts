@@ -18,6 +18,8 @@ interface AideApiModel {
   thematiques: string[];
   montant_max: number;
   url_demande?: string;
+  partenaire_logo_url?: string;
+  partenaire_nom?: string;
 }
 
 export class ChargementAidesAxiosRepository implements ChargementAidesRepository {
@@ -43,6 +45,12 @@ export class ChargementAidesAxiosRepository implements ChargementAidesRepository
           isSimulateur: aide.is_simulateur,
           montantMaximum: aide.montant_max,
           urlCommencerVotreDemarche: aide.url_demande,
+          partenaire: aide.partenaire_logo_url
+            ? {
+                logoUrl: aide.partenaire_logo_url!,
+                nom: aide.partenaire_nom!,
+              }
+            : undefined,
         })),
     };
   }

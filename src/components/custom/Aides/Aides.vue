@@ -12,8 +12,16 @@
           <div v-for="aide in aides" :id="`aide_${aide.id}`" :key="aide.id" class="fr-mb-2w">
             <Accordeon :label="aide.titre" :name-id="aide.id" @click="trackAideClick(aide)">
               <template v-slot:titre>
-                <span class="fr-col-12 fr-pr-2w">
-                  <ThematiqueTag :tag="aide.thematiqueTag" aria-hidden="true" />
+                <div class="fr-col-12 fr-pr-2w">
+                  <div class="flex flex-space-between align-items--center">
+                    <ThematiqueTag :tag="aide.thematiqueTag" aria-hidden="true" />
+                    <img
+                      v-if="aide.partenaire"
+                      :alt="aide.partenaire.accessibilite"
+                      :src="aide.partenaire.logoUrl"
+                      height="50"
+                    />
+                  </div>
                   <span class="aide__titre fr-mt-2w">
                     <span class="fr-h4 text--gris">
                       {{ aide.titre }}
@@ -32,7 +40,7 @@
                       </span>
                     </span>
                   </span>
-                </span>
+                </div>
               </template>
               <template v-slot:contenu>
                 <div class="cms__content" v-html="aide.contenu" />

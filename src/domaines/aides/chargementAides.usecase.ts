@@ -17,6 +17,10 @@ export interface Aide {
   montantMaximum?: number;
   thematique: ClefThematiqueAPI;
   urlCommencerVotreDemarche?: string;
+  partenaire?: {
+    logoUrl: string;
+    nom: string;
+  };
 }
 
 export default class ChargementAidesUsecase {

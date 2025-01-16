@@ -11,6 +11,10 @@ export interface AideViewModel {
   thematiqueLabel: string;
   thematiqueTag: { label: string; style: TagStyle };
   urlCommencerVotreDemarche?: string;
+  partenaire?: {
+    logoUrl: string;
+    accessibilite: string;
+  };
 }
 
 export interface AidesViewModel {
