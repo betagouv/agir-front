@@ -1,14 +1,32 @@
 import {
+  AideLocaleViewModel,
+  ArticleLocalViewModel,
   DonneesCollectivitesPresenter,
   DonneesCollectivitesViewModel,
 } from '@/domaines/collectivites/ports/donneesCollectivites.presenter';
 import { DonneesCollectivites } from '@/domaines/collectivites/recuperationDonneesCollectivites.usecase';
 import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
+import { RouteAidesName } from '@/router/aides/routeAidesName';
+import { RouteArticleName } from '@/router/articles/routes';
 
 export class DonneesCollectivitesPresenterImpl implements DonneesCollectivitesPresenter {
   constructor(private readonly viewModel: (donneesCollectivitesViewModel: DonneesCollectivitesViewModel) => void) {}
 
   displayDonneesCollectivites(donneesCollectivites: DonneesCollectivites, codePostal: string): void {
+    const aidesLocales: AideLocaleViewModel[] = donneesCollectivites.aidesLocales.map(aide => ({
+      ...aide,
+      url: { name: RouteAidesName.AIDE_PREVISUALISATION, params: { id: aide.id } },
+    }));
+    const filtrerAidesLocalesParThematique = (clef: ClefThematiqueAPI) =>
+      aidesLocales.filter(aide => aide.thematiques.includes(clef));
+
+    const articlesLocaux: ArticleLocalViewModel[] = donneesCollectivites.articles.map(article => ({
+      ...article,
+      url: { name: RouteArticleName.ARTICLE_PREVISUALISATION, params: { id: article.id } },
+    }));
+    const filtrerArticlesLocauxParThematique = (clef: ClefThematiqueAPI) =>
+      articlesLocaux.filter(article => article.thematique === clef);
+
     this.viewModel({
       codePostal,
       propositions: [
@@ -49,12 +67,8 @@ export class DonneesCollectivitesPresenterImpl implements DonneesCollectivitesPr
             },
           ]),
           nombreDAides: donneesCollectivites.thematiques.nombre_aides_consommation,
-          aides: donneesCollectivites.aidesLocales.filter(aide =>
-            aide.thematiques.includes(ClefThematiqueAPI.consommation),
-          ),
-          articles: donneesCollectivites.articles.filter(
-            article => article.thematique === ClefThematiqueAPI.consommation,
-          ),
+          aides: filtrerAidesLocalesParThematique(ClefThematiqueAPI.consommation),
+          articles: filtrerArticlesLocauxParThematique(ClefThematiqueAPI.consommation),
         },
         {
           emoji: '🍛',
@@ -88,36 +102,26 @@ export class DonneesCollectivitesPresenterImpl implements DonneesCollectivitesPr
             },
           ]),
           nombreDAides: donneesCollectivites.thematiques.nombre_aides_alimentation,
-          aides: donneesCollectivites.aidesLocales.filter(aide =>
-            aide.thematiques.includes(ClefThematiqueAPI.alimentation),
-          ),
-          articles: donneesCollectivites.articles.filter(
-            article => article.thematique === ClefThematiqueAPI.alimentation,
-          ),
+          aides: filtrerAidesLocalesParThematique(ClefThematiqueAPI.alimentation),
+          articles: filtrerArticlesLocauxParThematique(ClefThematiqueAPI.alimentation),
         },
         {
           emoji: '🚲',
           titre: 'Me déplacer',
           lien: '#',
-          contenu: this.genererListe([]),
+          contenu: [],
           nombreDAides: donneesCollectivites.thematiques.nombre_aides_transport,
-          aides: donneesCollectivites.aidesLocales.filter(aide =>
-            aide.thematiques.includes(ClefThematiqueAPI.transports),
-          ),
-          articles: donneesCollectivites.articles.filter(
-            article => article.thematique === ClefThematiqueAPI.transports,
-          ),
+          aides: filtrerAidesLocalesParThematique(ClefThematiqueAPI.transports),
+          articles: filtrerArticlesLocauxParThematique(ClefThematiqueAPI.transports),
         },
         {
           emoji: '🧱',
           titre: 'Me loger',
           lien: '#',
-          contenu: this.genererListe([]),
+          contenu: [],
           nombreDAides: donneesCollectivites.thematiques.nombre_aides_logement,
-          aides: donneesCollectivites.aidesLocales.filter(aide =>
-            aide.thematiques.includes(ClefThematiqueAPI.logement),
-          ),
-          articles: donneesCollectivites.articles.filter(article => article.thematique === ClefThematiqueAPI.logement),
+          aides: filtrerAidesLocalesParThematique(ClefThematiqueAPI.logement),
+          articles: filtrerArticlesLocauxParThematique(ClefThematiqueAPI.logement),
         },
       ],
     });

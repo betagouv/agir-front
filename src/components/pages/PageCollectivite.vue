@@ -47,8 +47,8 @@
                 </p>
 
                 <ul>
-                  <li v-for="article in proposition.aides" :key="article.id">
-                    {{ article.titre }}
+                  <li v-for="aide in proposition.aides" :key="aide.id">
+                    <router-link :to="aide.url">{{ aide.titre }}</router-link>
                   </li>
                 </ul>
               </div>
@@ -57,7 +57,7 @@
                 <p class="fr-m-0">Quelques <span class="text--bold">articles</span> :</p>
                 <ul>
                   <li v-for="article in proposition.articles" :key="article.id">
-                    <router-link :to="`/article/previsualisation/${article.id}`">{{ article.titre }}</router-link>
+                    <router-link :to="article.url">{{ article.titre }}</router-link>
                   </li>
                 </ul>
               </div>

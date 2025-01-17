@@ -9,8 +9,9 @@ export enum RouteArticlePath {
   ARTICLE_PREVISUALISATION = 'previsualisation/:id',
 }
 
-enum RouteArticleName {
+export enum RouteArticleName {
   ARTICLE = 'article',
+  ARTICLE_PREVISUALISATION = 'article-previsualisation',
 }
 
 const articlesRoutes: RouteRecordRaw[] = [
@@ -33,6 +34,7 @@ const articlesRoutes: RouteRecordRaw[] = [
 
       {
         path: RouteArticlePath.ARTICLE_PREVISUALISATION,
+        name: RouteArticleName.ARTICLE_PREVISUALISATION,
         component: PagePrevisualisationArticle,
         meta: { estPublique: true },
       },
