@@ -30,6 +30,7 @@ describe('Fichier de tests concernant la récupération des informations compteu
           nom: 'Winter énergies',
           screenshot: '/service-winter.webp',
           url: 'https://www.winter-energies.fr/',
+          urlLabel: 'https://www.winter-energies.fr/',
         },
         categories: [],
         informationCompteur: {

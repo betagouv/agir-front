@@ -8,6 +8,7 @@
         :nom="aside.nom"
         :image="aside.screenshot"
         :description="aside.description"
+        :url-label="aside.urlLabel"
         :url="aside.url"
         :logo="aside.logo"
       />

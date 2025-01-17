@@ -50,10 +50,11 @@ export class ServiceRechercheLongueVieAuxObjetsPresenterImpl implements ServiceR
 
   presente(serviceRecherche: ServiceRechercheLongueVieAuxObjets): void {
     const aside = {
-      nom: 'Longue Vie Aux Objets - ADEME',
+      nom: 'Que faire de mes objets - ADEME',
       description:
-        "L'ADEME vous aide à trouver des alternatives à l'achat et à prolonger la vie de vos objets. Pour préserver les ressources de la planète.... et de votre porte-monnaie !",
-      url: 'https://longuevieauxobjets.ademe.fr/',
+        'L’ADEME vous aide à prolonger la vie de vos objets. Pour préserver les ressources de la planète… et de votre porte-monnaie !',
+      url: 'https://quefairedemesobjets.ademe.fr/?mtm_campaign=jagis',
+      urlLabel: 'https://quefairedemesobjets.ademe.fr',
       logo: '',
       screenshot: '/service-longue-vie-aux-objets.webp',
     };

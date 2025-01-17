@@ -25,6 +25,7 @@
           logo="/logo_ngc.webp"
           nom="Nos Gestes Climat"
           url="https://nosgestesclimat.fr/"
+          url-label="https://nosgestesclimat.fr/"
         />
       </div>
     </div>

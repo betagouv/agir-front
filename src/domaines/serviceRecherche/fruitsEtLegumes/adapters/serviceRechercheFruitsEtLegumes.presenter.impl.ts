@@ -34,6 +34,7 @@ export class ServiceRechercheFruitsEtLegumesPresenterImpl implements ServiceRech
       aside: {
         nom: 'Impact CO₂',
         description: 'Des informations fiables et sourcées issues des données environnementales de l’ADEME',
+        urlLabel: 'https://impactco2.fr/',
         url: 'https://impactco2.fr/',
         logo: '/logo_impact_co2.svg',
         screenshot: '/service-fruits.webp',
