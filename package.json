@@ -22,7 +22,7 @@
     "@hotjar/browser": "1.0.9",
     "@iframe-resizer/vue": "^5.3.2",
     "@sentry/vite-plugin": "^3.0.0",
-    "@sentry/vue": "8.48.0",
+    "@sentry/vue": "8.50.0",
     "@vue-leaflet/vue-leaflet": "^0.10.1",
     "chart.js": "4.4.7",
     "jwt-decode": "4.0.0",
