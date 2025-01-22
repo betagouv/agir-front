@@ -1,6 +1,8 @@
 <template>
+  <span ref="mesureurElement" v-text="mesureurTexte" class="hidden-text"></span>
+
   <label :for="id" class="fr-sr-only">{{ label }}</label>
-  <select class="service-select" :id="id" :name="id" @input="updateMois">
+  <select class="service-select" :id="id" :name="id" @input="updateOption">
     <option
       v-for="option in options"
       :key="option.code"
@@ -13,7 +15,10 @@
 </template>
 
 <script setup lang="ts">
-  defineProps<{
+  import { nextTick, onMounted, ref, watch } from 'vue';
+
+  const SELECT_RIGHT_PADDING = 40;
+  const props = defineProps<{
     id: string;
     label: string;
     options: {
@@ -22,13 +27,36 @@
       estLaCategorieParDefaut: boolean;
     }[];
   }>();
-
   const emit = defineEmits<{ (e: 'update', value: string): void }>();
 
-  const updateMois = (event: Event) => {
+  const defaultOption = props.options.find(option => option.estLaCategorieParDefaut);
+  const currentValue = ref(defaultOption?.code);
+
+  const mesureurTexte = ref<string>(defaultOption?.label ?? '');
+  const mesureurElement = ref<HTMLElement | null>(null);
+
+  const updateOption = (event: Event) => {
     const inputElement = event.target as HTMLInputElement;
-    emit('update', inputElement.value);
+    currentValue.value = inputElement.value;
+    emit('update', currentValue.value);
   };
+
+  onMounted(() => {
+    updateWidth();
+  });
+
+  watch(currentValue, async newValue => {
+    const optionLabel = props.options.find(option => option.code === newValue)?.label;
+    mesureurTexte.value = optionLabel ?? '';
+
+    await nextTick();
+    updateWidth();
+  });
+
+  function updateWidth() {
+    const width = mesureurElement.value.offsetWidth + SELECT_RIGHT_PADDING;
+    document.querySelector('select').style.width = width + 'px';
+  }
 </script>
 
 <style>
@@ -45,5 +73,13 @@
 
   .service-select option {
     font-size: 1.25rem;
+  }
+
+  .hidden-text {
+    position: absolute;
+    visibility: hidden;
+    white-space: nowrap;
+    pointer-events: none;
+    overflow: hidden;
   }
 </style>
