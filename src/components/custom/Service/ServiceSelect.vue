@@ -2,22 +2,25 @@
   <span ref="mesureurElement" v-text="mesureurTexte" class="hidden-text"></span>
 
   <label :for="id" class="fr-sr-only">{{ label }}</label>
-  <select class="service-select" :id="id" :name="id" @input="updateOption">
-    <option
-      v-for="option in options"
-      :key="option.code"
-      :value="option.code"
-      :selected="option.estLaCategorieParDefaut"
-    >
+  <select
+    ref="selectElement"
+    v-model="optionSelectionnee"
+    class="service-select"
+    :id="id"
+    :name="id"
+    @change="updateWidth"
+  >
+    <option v-for="option in options" :key="option.code" :value="option.code">
       {{ option.label }}
     </option>
   </select>
 </template>
 
 <script setup lang="ts">
-  import { nextTick, onMounted, ref, watch } from 'vue';
+  import { computed, nextTick, onMounted, ref, watch } from 'vue';
 
   const SELECT_RIGHT_PADDING = 40;
+
   const props = defineProps<{
     id: string;
     label: string;
@@ -29,34 +32,39 @@
   }>();
   const emit = defineEmits<{ (e: 'update', value: string): void }>();
 
-  const defaultOption = props.options.find(option => option.estLaCategorieParDefaut);
-  const currentValue = ref(defaultOption?.code);
-
-  const mesureurTexte = ref<string>(defaultOption?.label ?? '');
+  const mesureurTexte = ref<string>('');
   const mesureurElement = ref<HTMLElement | null>(null);
+  const selectElement = ref<HTMLElement | null>(null);
 
-  const updateOption = (event: Event) => {
-    const inputElement = event.target as HTMLInputElement;
-    currentValue.value = inputElement.value;
-    emit('update', currentValue.value);
-  };
+  const optionSelectionneParDefaut = props.options.find(option => option.estLaCategorieParDefaut);
+  const optionSelectionnee = ref(optionSelectionneParDefaut?.code);
+
+  const texteDeLOptionSelectionnee = computed(() => {
+    return props.options.find(option => option.code === optionSelectionnee.value)?.label ?? '';
+  });
+
+  watch(texteDeLOptionSelectionnee, () => {
+    mesureurTexte.value = texteDeLOptionSelectionnee.value;
+  });
+
+  watch(optionSelectionnee, value => {
+    emit('update', value ?? '');
+  });
+
+  async function updateWidth() {
+    if (mesureurElement.value) {
+      await nextTick();
+      const width = mesureurElement.value.offsetWidth + SELECT_RIGHT_PADDING;
+      if (selectElement.value) {
+        selectElement.value.style.width = width + 'px';
+      }
+    }
+  }
 
   onMounted(() => {
+    mesureurTexte.value = texteDeLOptionSelectionnee.value;
     updateWidth();
   });
-
-  watch(currentValue, async newValue => {
-    const optionLabel = props.options.find(option => option.code === newValue)?.label;
-    mesureurTexte.value = optionLabel ?? '';
-
-    await nextTick();
-    updateWidth();
-  });
-
-  function updateWidth() {
-    const width = mesureurElement.value.offsetWidth + SELECT_RIGHT_PADDING;
-    document.querySelector('select').style.width = width + 'px';
-  }
 </script>
 
 <style>
