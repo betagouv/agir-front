@@ -13,8 +13,8 @@
 </template>
 
 <script setup lang="ts">
-  import InputSearchBar from '@/components/dsfr/InputSearchBar.vue';
   import InputCheckbox from '@/components/dsfr/InputCheckbox.vue';
+  import InputSearchBar from '@/components/dsfr/InputSearchBar.vue';
   import Interrupteur from '@/components/dsfr/Interrupteur.vue';
 
   defineProps<{ filtres: { id: string; label: string; checked: boolean }[] }>();
