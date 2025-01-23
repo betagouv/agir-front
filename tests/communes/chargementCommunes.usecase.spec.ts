@@ -1,11 +1,5 @@
 import { ChargementCommunesUsecase } from '@/domaines/communes/chargementCommunesUsecase';
-import { CommuneRepository } from '@/domaines/communes/ports/communeRepository';
-
-class CommuneRepositoryForTest implements CommuneRepository {
-  async getCommunes(codePostal: string): Promise<string[]> {
-    return ['BOURG EN BRESSE', 'ST DENIS LES BOURG'];
-  }
-}
+import { CommuneRepositoryForTest } from './adapters/commune.repository.mock';
 
 describe('Fichier de test du usecase de chargement des communes', () => {
   it('En donnant un code postal, doit me retourne la liste des communes associées', async () => {
