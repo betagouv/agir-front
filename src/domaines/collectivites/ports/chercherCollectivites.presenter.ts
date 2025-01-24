@@ -1,4 +1,4 @@
-import { Collectivites } from '@/domaines/communes/ports/communeRepository';
+import { Collectivites } from '@/domaines/collectivites/ports/collectivite.repository';
 
 export interface RechercheDeCollectiviteViewModel {
   listeDeCollectivites: Collectivites;

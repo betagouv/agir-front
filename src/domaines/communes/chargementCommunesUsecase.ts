@@ -1,4 +1,4 @@
-import { CommuneRepository } from '@/domaines/communes/ports/communeRepository';
+import { CommuneRepository } from '@/domaines/communes/ports/commune.repository';
 
 export class ChargementCommunesUsecase {
   constructor(private communeRepository: CommuneRepository) {}

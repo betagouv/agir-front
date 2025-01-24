@@ -1,11 +1,7 @@
 import { AxiosFactory } from '@/axios.factory';
-import { CommuneRepository, Communes, Collectivites } from '@/domaines/communes/ports/communeRepository';
+import { CommuneRepository, Communes } from '@/domaines/communes/ports/commune.repository';
 
 type CommuneApiModel = string[];
-export type CommunesApiEPCIModel = {
-  code_insee: string;
-  nom: string;
-}[];
 
 export class CommuneRepositoryAxios implements CommuneRepository {
   async getCommunes(codePostal: string): Promise<Communes> {
@@ -13,15 +9,5 @@ export class CommuneRepositoryAxios implements CommuneRepository {
     const response = await axiosInstance.get<CommuneApiModel>(`/communes?code_postal=${codePostal}`);
 
     return response.data;
-  }
-
-  async findCollectivites(nom: string): Promise<Collectivites> {
-    const axiosInstance = AxiosFactory.getAxios();
-    const response = await axiosInstance.get<CommunesApiEPCIModel>(`/communes_epci?nom=${nom}`);
-
-    return response.data.map(commune => ({
-      codeInsee: commune.code_insee,
-      nom: commune.nom,
-    }));
   }
 }

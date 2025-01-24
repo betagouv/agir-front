@@ -61,10 +61,10 @@
   // import { DonneesCollectivitesPresenterImpl } from '@/domaines/collectivites/adapters/donneesCollectivites.presenter.impl';
   // import { DonneesCollectivitesRepositoryAxios } from '@/domaines/collectivites/adapters/donneesCollectivites.repository.axios';
   // import { RecupererDonneesCollectivitesParInsee } from '@/domaines/collectivites/recupererDonneesCollectivitesParInsee.usecase';
-  import { ChercherCollectivitesPresenterImpl } from '@/domaines/communes/adapters/chercherCollectivites.presenter.impl';
-  import { CommuneRepositoryAxios } from '@/domaines/communes/adapters/commune.repository.axios';
-  import { ChercherCollectivitesUsecase } from '@/domaines/communes/chercherCollectivites.usecase';
-  import { RechercheDeCollectiviteViewModel } from '@/domaines/communes/ports/chercherCollectivites.presenter';
+  import { ChercherCollectivitesPresenterImpl } from '@/domaines/collectivites/adapters/chercherCollectivites.presenter.impl';
+  import { CollectiviteRepositoryAxios } from '@/domaines/collectivites/adapters/collectivite.repository.axios';
+  import { ChercherCollectivitesUsecase } from '@/domaines/collectivites/chercherCollectivites.usecase';
+  import { RechercheDeCollectiviteViewModel } from '@/domaines/collectivites/ports/chercherCollectivites.presenter';
 
   const route = useRoute();
   const router = useRouter();
@@ -74,7 +74,7 @@
   const isLoadingListe = ref<boolean>(false);
   const isLoadingDetail = ref<boolean>(false);
 
-  const chercherCollectivitesUsecase = new ChercherCollectivitesUsecase(new CommuneRepositoryAxios());
+  const chercherCollectivitesUsecase = new ChercherCollectivitesUsecase(new CollectiviteRepositoryAxios());
   // const recupererDonneesCollectivitesParInseeUsecase = new RecupererDonneesCollectivitesParInsee(
   //   new DonneesCollectivitesRepositoryAxios(),
   // );

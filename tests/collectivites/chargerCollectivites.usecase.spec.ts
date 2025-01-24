@@ -1,13 +1,13 @@
-import { CommuneRepositoryForTest } from './adapters/commune.repository.mock';
-import { ChercherCollectivitesUsecase } from '@/domaines/communes/chercherCollectivites.usecase';
-import { ChercherCollectivitesPresenterImpl } from '@/domaines/communes/adapters/chercherCollectivites.presenter.impl';
-import { RechercheDeCollectiviteViewModel } from '@/domaines/communes/ports/chercherCollectivites.presenter';
+import { ChercherCollectivitesUsecase } from '@/domaines/collectivites/chercherCollectivites.usecase';
+import { ChercherCollectivitesPresenterImpl } from '@/domaines/collectivites/adapters/chercherCollectivites.presenter.impl';
+import { RechercheDeCollectiviteViewModel } from '@/domaines/collectivites/ports/chercherCollectivites.presenter';
+import { CollectiviteRepositoryStub } from './adapters/commune.repository.mock';
 
 describe('Fichier de test du usecase de chargement des collectivités EPCI', () => {
   it('En cherchant une collectivité, doit me retourner la liste des collectivités cohérentes', async () => {
     // GIVEN
     const collectiviteRecherche = 'paris';
-    const chercherCollectivitesUsecase = new ChercherCollectivitesUsecase(new CommuneRepositoryForTest());
+    const chercherCollectivitesUsecase = new ChercherCollectivitesUsecase(new CollectiviteRepositoryStub());
 
     // WHEN
     // TODO: FIX les paramètres
@@ -33,7 +33,7 @@ describe('Fichier de test du usecase de chargement des collectivités EPCI', () 
   it('En cherchant une recherche trop large, le nombre de collectivité affiché est bloqué et le message est adapté', async () => {
     // GIVEN
     const collectiviteRecherche = 'c';
-    const chercherCollectivitesUsecase = new ChercherCollectivitesUsecase(new CommuneRepositoryForTest());
+    const chercherCollectivitesUsecase = new ChercherCollectivitesUsecase(new CollectiviteRepositoryStub());
 
     // WHEN
     // TODO: FIX les paramètres
@@ -53,7 +53,7 @@ describe('Fichier de test du usecase de chargement des collectivités EPCI', () 
   it('En cherchant une ville non enregistré, aucune collectivité est affiché et le message est adapté', async () => {
     // GIVEN
     const collectiviteRecherche = 'villeInexistante';
-    const chercherCollectivitesUsecase = new ChercherCollectivitesUsecase(new CommuneRepositoryForTest());
+    const chercherCollectivitesUsecase = new ChercherCollectivitesUsecase(new CollectiviteRepositoryStub());
 
     // WHEN
     // TODO: FIX les paramètres
