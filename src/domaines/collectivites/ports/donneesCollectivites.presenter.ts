@@ -34,5 +34,5 @@ export interface AideLocaleViewModel extends ViewModelWithUrl {
 }
 
 export interface DonneesCollectivitesPresenter {
-  displayDonneesCollectivites(donneesCollectivites: DonneesCollectivites, codePostal: string): void;
+  displayDonneesCodePostal(donneesCollectivites: DonneesCollectivites, codePostal: string): void;
 }
