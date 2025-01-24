@@ -1,10 +1,10 @@
 export type Communes = string[];
-export type CommunesEPCI = {
+export type Collectivites = {
   codeInsee: string;
   nom: string;
 }[];
 
 export interface CommuneRepository {
   getCommunes(codePostal: string): Promise<Communes>;
-  getCommunesEPCI(nom: string): Promise<CommunesEPCI>;
+  findCollectivites(nom: string): Promise<Collectivites>;
 }

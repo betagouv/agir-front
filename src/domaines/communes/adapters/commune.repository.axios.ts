@@ -1,5 +1,5 @@
 import { AxiosFactory } from '@/axios.factory';
-import { CommuneRepository, Communes, CommunesEPCI } from '@/domaines/communes/ports/communeRepository';
+import { CommuneRepository, Communes, Collectivites } from '@/domaines/communes/ports/communeRepository';
 
 type CommuneApiModel = string[];
 export type CommunesApiEPCIModel = {
@@ -15,7 +15,7 @@ export class CommuneRepositoryAxios implements CommuneRepository {
     return response.data;
   }
 
-  async getCommunesEPCI(nom: string): Promise<CommunesEPCI> {
+  async findCollectivites(nom: string): Promise<Collectivites> {
     const axiosInstance = AxiosFactory.getAxios();
     const response = await axiosInstance.get<CommunesApiEPCIModel>(`/communes_epci?nom=${nom}`);
 

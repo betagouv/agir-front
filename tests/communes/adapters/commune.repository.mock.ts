@@ -1,11 +1,11 @@
-import { CommuneRepository, CommunesEPCI } from '@/domaines/communes/ports/communeRepository';
+import { CommuneRepository, Collectivites } from '@/domaines/communes/ports/communeRepository';
 
 export class CommuneRepositoryForTest implements CommuneRepository {
   async getCommunes(codePostal: string): Promise<string[]> {
     return ['BOURG EN BRESSE', 'ST DENIS LES BOURG'];
   }
 
-  async getCommunesEPCI(nom: string): Promise<CommunesEPCI> {
+  async findCollectivites(nom: string): Promise<Collectivites> {
     if (nom === 'paris') {
       return [
         { codeInsee: '75056', nom: 'Paris' },

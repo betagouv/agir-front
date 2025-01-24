@@ -1,27 +1,27 @@
 import {
-  ChargementCommunesEPCIPresenter,
-  CommunesEPCIViewModel,
-} from '@/domaines/communes/ports/chargementCommunesEPCI.presenter';
-import { CommunesEPCI } from '@/domaines/communes/ports/communeRepository';
+  ChercherCollectivitesPresenter,
+  RechercheDeCollectiviteViewModel,
+} from '@/domaines/communes/ports/chercherCollectivites.presenter';
+import { Collectivites } from '@/domaines/communes/ports/communeRepository';
 
 const LIMITE_COMMUNES = 40;
 
-export class ChargementCommunesEPCIPresenterImpl implements ChargementCommunesEPCIPresenter {
+export class ChercherCollectivitesPresenterImpl implements ChercherCollectivitesPresenter {
   constructor(
     private _communeRecherche: string,
-    private _viewModel: (vm: CommunesEPCIViewModel) => void,
+    private _viewModel: (vm: RechercheDeCollectiviteViewModel) => void,
   ) {}
 
-  presente(communes: CommunesEPCI): void {
-    let listeDeCommunes: CommunesEPCI = this.trier(communes);
+  presente(communes: Collectivites): void {
+    let listeDeCommunes: Collectivites = this.trier(communes);
     listeDeCommunes = this.limiter(listeDeCommunes);
 
     const message = this.deduireMessage(listeDeCommunes.length);
 
-    this._viewModel({ listeDeCommunes, message });
+    this._viewModel({ listeDeCollectivites: listeDeCommunes, message });
   }
 
-  private trier(communes: CommunesEPCI): CommunesEPCI {
+  private trier(communes: Collectivites): Collectivites {
     return communes.sort((a, b) => {
       const nomA = a.nom.toLowerCase();
       const nomB = b.nom.toLowerCase();
@@ -39,7 +39,7 @@ export class ChargementCommunesEPCIPresenterImpl implements ChargementCommunesEP
     });
   }
 
-  private limiter(communes: CommunesEPCI): CommunesEPCI {
+  private limiter(communes: Collectivites): Collectivites {
     return communes.slice(0, LIMITE_COMMUNES);
   }
 

@@ -16,28 +16,31 @@
           name="champDeRecherche"
           placeholder="Nom de la collectivité"
           label="Nom de la collectivité"
-          description="Saisissez la commune dont vous voulez extraire les statistiques J'agis"
+          description="Saisissez la collectivité dont vous voulez extraire les statistiques J'agis"
           class="fr-mb-0 full-width"
-          @submit="chargerCommunesEPCI"
+          @submit="chercherCollectivites"
           is-large
         />
       </div>
 
       <CarteSkeleton v-if="isLoadingListe" />
-      <template v-else-if="communesViewmodel">
-        <ul class="listeDeCommunes">
-          <li v-for="commune in communesViewmodel.listeDeCommunes" :key="commune.codeInsee">
-            <button class="fr-btn fr-btn--tertiary" @click="chargerDetailCollectivite(commune.codeInsee)">
-              {{ commune.nom }}
+      <template v-else-if="resultatRechercheCollectivitesViewmodel">
+        <ul class="listeDeCollectivites">
+          <li
+            v-for="collectivite in resultatRechercheCollectivitesViewmodel.listeDeCollectivites"
+            :key="collectivite.codeInsee"
+          >
+            <button class="fr-btn fr-btn--tertiary" @click="chargerDetailCollectivite(collectivite.codeInsee)">
+              {{ collectivite.nom }}
             </button>
           </li>
         </ul>
 
         <Callout
-          v-if="communesViewmodel.message"
+          v-if="resultatRechercheCollectivitesViewmodel.message"
           class="text--left"
           titre="Votre recherche"
-          :texte="communesViewmodel.message"
+          :texte="resultatRechercheCollectivitesViewmodel.message"
         />
       </template>
     </div>
@@ -58,20 +61,20 @@
   // import { DonneesCollectivitesPresenterImpl } from '@/domaines/collectivites/adapters/donneesCollectivites.presenter.impl';
   // import { DonneesCollectivitesRepositoryAxios } from '@/domaines/collectivites/adapters/donneesCollectivites.repository.axios';
   // import { RecupererDonneesCollectivitesParInsee } from '@/domaines/collectivites/recupererDonneesCollectivitesParInsee.usecase';
-  import { ChargementCommunesEPCIPresenterImpl } from '@/domaines/communes/adapters/chargementCommunesEPCI.presenter.impl';
+  import { ChercherCollectivitesPresenterImpl } from '@/domaines/communes/adapters/chercherCollectivites.presenter.impl';
   import { CommuneRepositoryAxios } from '@/domaines/communes/adapters/commune.repository.axios';
-  import { ChargementCommunesEPCIUsecase } from '@/domaines/communes/chargementCommunesEPCIUsecase';
-  import { CommunesEPCIViewModel } from '@/domaines/communes/ports/chargementCommunesEPCI.presenter';
+  import { ChercherCollectivitesUsecase } from '@/domaines/communes/chercherCollectivites.usecase';
+  import { RechercheDeCollectiviteViewModel } from '@/domaines/communes/ports/chercherCollectivites.presenter';
 
   const route = useRoute();
   const router = useRouter();
 
-  let communesViewmodel = ref<CommunesEPCIViewModel>();
+  let resultatRechercheCollectivitesViewmodel = ref<RechercheDeCollectiviteViewModel>();
   // let detailCommunaute = ref<any>({});
   const isLoadingListe = ref<boolean>(false);
   const isLoadingDetail = ref<boolean>(false);
 
-  const chargementCommunesEPCIUsecase = new ChargementCommunesEPCIUsecase(new CommuneRepositoryAxios());
+  const chercherCollectivitesUsecase = new ChercherCollectivitesUsecase(new CommuneRepositoryAxios());
   // const recupererDonneesCollectivitesParInseeUsecase = new RecupererDonneesCollectivitesParInsee(
   //   new DonneesCollectivitesRepositoryAxios(),
   // );
@@ -80,16 +83,19 @@
     chargerDetailCollectivite(route.query.insee as string);
   }
 
-  async function chargerCommunesEPCI(nom: string) {
+  async function chercherCollectivites(nom: string) {
     if (nom.trim() === '') {
-      communesViewmodel.value = { listeDeCommunes: [], message: '' };
+      resultatRechercheCollectivitesViewmodel.value = { listeDeCollectivites: [], message: '' };
       return;
     }
 
     isLoadingListe.value = true;
 
-    await chargementCommunesEPCIUsecase
-      .execute(nom, new ChargementCommunesEPCIPresenterImpl(nom, vm => (communesViewmodel.value = vm)))
+    await chercherCollectivitesUsecase
+      .execute(
+        nom,
+        new ChercherCollectivitesPresenterImpl(nom, vm => (resultatRechercheCollectivitesViewmodel.value = vm)),
+      )
       .finally(() => {
         isLoadingListe.value = false;
       });
@@ -109,7 +115,7 @@
 </script>
 
 <style scoped>
-  .listeDeCommunes {
+  .listeDeCollectivites {
     list-style-type: none;
     padding: 0;
 
