@@ -10,10 +10,9 @@ describe('Fichier de test du usecase de chargement des collectivités EPCI', () 
     const chercherCollectivitesUsecase = new ChercherCollectivitesUsecase(new CollectiviteRepositoryStub());
 
     // WHEN
-    // TODO: FIX les paramètres
     await chercherCollectivitesUsecase.execute(
       collectiviteRecherche,
-      new ChercherCollectivitesPresenterImpl(collectiviteRecherche, expectation),
+      new ChercherCollectivitesPresenterImpl(expectation),
     );
 
     function expectation(viewModel: RechercheDeCollectiviteViewModel) {
@@ -36,10 +35,9 @@ describe('Fichier de test du usecase de chargement des collectivités EPCI', () 
     const chercherCollectivitesUsecase = new ChercherCollectivitesUsecase(new CollectiviteRepositoryStub());
 
     // WHEN
-    // TODO: FIX les paramètres
     await chercherCollectivitesUsecase.execute(
       collectiviteRecherche,
-      new ChercherCollectivitesPresenterImpl(collectiviteRecherche, expectation),
+      new ChercherCollectivitesPresenterImpl(expectation),
     );
 
     function expectation(viewModel: RechercheDeCollectiviteViewModel) {
@@ -56,10 +54,9 @@ describe('Fichier de test du usecase de chargement des collectivités EPCI', () 
     const chercherCollectivitesUsecase = new ChercherCollectivitesUsecase(new CollectiviteRepositoryStub());
 
     // WHEN
-    // TODO: FIX les paramètres
     await chercherCollectivitesUsecase.execute(
       collectiviteRecherche,
-      new ChercherCollectivitesPresenterImpl(collectiviteRecherche, expectation),
+      new ChercherCollectivitesPresenterImpl(expectation),
     );
 
     function expectation(viewModel: RechercheDeCollectiviteViewModel) {

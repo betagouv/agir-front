@@ -83,8 +83,8 @@
     chargerDetailCollectivite(route.query.insee as string);
   }
 
-  async function chercherCollectivites(nom: string) {
-    if (nom.trim() === '') {
+  async function chercherCollectivites(recherche: string) {
+    if (recherche.trim() === '') {
       resultatRechercheCollectivitesViewmodel.value = { listeDeCollectivites: [], message: '' };
       return;
     }
@@ -93,8 +93,8 @@
 
     await chercherCollectivitesUsecase
       .execute(
-        nom,
-        new ChercherCollectivitesPresenterImpl(nom, vm => (resultatRechercheCollectivitesViewmodel.value = vm)),
+        recherche,
+        new ChercherCollectivitesPresenterImpl(vm => (resultatRechercheCollectivitesViewmodel.value = vm)),
       )
       .finally(() => {
         isLoadingListe.value = false;

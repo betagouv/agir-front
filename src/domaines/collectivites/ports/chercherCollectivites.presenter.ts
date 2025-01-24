@@ -6,5 +6,5 @@ export interface RechercheDeCollectiviteViewModel {
 }
 
 export interface ChercherCollectivitesPresenter {
-  presente(communes: Collectivites): void;
+  presente(communes: Collectivites, recherche: string): void;
 }

@@ -4,8 +4,8 @@ import { CollectiviteRepository } from '@/domaines/collectivites/ports/collectiv
 export class ChercherCollectivitesUsecase {
   constructor(private collectiviteRepository: CollectiviteRepository) {}
 
-  async execute(nom: string, presenter: ChercherCollectivitesPresenter) {
-    const communes = await this.collectiviteRepository.findCollectivites(nom);
-    presenter.presente(communes);
+  async execute(recherche: string, presenter: ChercherCollectivitesPresenter) {
+    const communes = await this.collectiviteRepository.findCollectivites(recherche);
+    presenter.presente(communes, recherche);
   }
 }
