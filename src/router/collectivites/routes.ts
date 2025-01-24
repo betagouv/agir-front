@@ -15,7 +15,7 @@ const collectivitesRoutes: RouteRecordRaw[] = [
     name: 'collectivitesEPCI',
     component: () => import('@/components/pages/PageCollectiviteEPCI.vue'),
     meta: {
-      title: 'Commune et collectivités',
+      title: 'Collectivités',
       estPublique: true,
     },
   },

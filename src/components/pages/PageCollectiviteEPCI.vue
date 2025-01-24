@@ -1,12 +1,21 @@
 <template>
+  <section class="fr-container fr-mt-3w">
+    <h1 class="fr-h2">Collectivités</h1>
+    <p>
+      Découvrez tous les contenus <strong>déjà disponibles</strong> pour les habitants de votre collectivité !<br />
+      Les informations sont incomplètes ? Contactez-nous en bas de page.
+    </p>
+  </section>
+
   <section class="fr-container fr-my-6w">
-    <div class="flex flex-column flex-center gap--small fr-mb-8w text--center width--fit-content fr-pb-16w">
+    <h2 class="fr-h3">Renseignez votre collectivité</h2>
+    <div class="flex flex-column flex-center gap--small fr-mb-8w text--center width--fit-content">
       <div class="position--relative">
         <InputSearchBar
           id="champDeRecherche"
           name="champDeRecherche"
-          placeholder="Commune ou collectivité"
-          label="Commune ou collectivité"
+          placeholder="Nom de la collectivité"
+          label="Nom de la collectivité"
           description="Saisissez la commune dont vous voulez extraire les statistiques J'agis"
           class="fr-mb-0 full-width"
           @submit="chargerCommunesEPCI"
@@ -14,30 +23,53 @@
         />
       </div>
 
-      <CarteSkeleton v-if="isLoading" />
+      <CarteSkeleton v-if="isLoadingListe" />
       <template v-else-if="communes">
         <ul class="listeDeCommunes">
           <li v-for="commune in communes" :key="commune.codeInsee">
-            <button class="fr-btn fr-btn--tertiary">{{ commune.nom }}</button>
+            <button class="fr-btn fr-btn--tertiary" @click="chargerDetailCollectivite(commune.codeInsee)">
+              {{ commune.nom }}
+            </button>
           </li>
         </ul>
       </template>
     </div>
   </section>
+
+  <section class="fr-container full-width fr-mb-6w">
+    <LandingCollectivite />
+  </section>
 </template>
 
 <script lang="ts" setup>
   import { ref } from 'vue';
+  import { useRoute, useRouter } from 'vue-router';
+  import LandingCollectivite from '@/components/custom/Landing/LandingCollectivite.vue';
   import CarteSkeleton from '@/components/custom/Skeleton/CarteSkeleton.vue';
   import InputSearchBar from '@/components/dsfr/InputSearchBar.vue';
+  // import { DonneesCollectivitesPresenterImpl } from '@/domaines/collectivites/adapters/donneesCollectivites.presenter.impl';
+  // import { DonneesCollectivitesRepositoryAxios } from '@/domaines/collectivites/adapters/donneesCollectivites.repository.axios';
+  // import { RecupererDonneesCollectivitesParInsee } from '@/domaines/collectivites/recupererDonneesCollectivitesParInsee.usecase';
   import { CommuneRepositoryAxios } from '@/domaines/communes/adapters/communeRepositoryAxios';
   import { ChargementCommunesEPCIUsecase } from '@/domaines/communes/chargementCommunesEPCIUsecase';
   import { CommunesEPCI } from '@/domaines/communes/ports/communeRepository';
 
-  const chargementCommunesEPCIUsecase = new ChargementCommunesEPCIUsecase(new CommuneRepositoryAxios());
-  const isLoading = ref<boolean>(false);
+  const route = useRoute();
+  const router = useRouter();
 
   let communes = ref<CommunesEPCI>([]);
+  // let detailCommunaute = ref<any>({});
+  const isLoadingListe = ref<boolean>(false);
+  const isLoadingDetail = ref<boolean>(false);
+
+  const chargementCommunesEPCIUsecase = new ChargementCommunesEPCIUsecase(new CommuneRepositoryAxios());
+  // const recupererDonneesCollectivitesParInseeUsecase = new RecupererDonneesCollectivitesParInsee(
+  //   new DonneesCollectivitesRepositoryAxios(),
+  // );
+
+  if (route.query?.insee) {
+    chargerDetailCollectivite(route.query.insee as string);
+  }
 
   async function chargerCommunesEPCI(nom: string) {
     if (nom.trim() === '') {
@@ -45,11 +77,23 @@
       return;
     }
 
-    isLoading.value = true;
+    isLoadingListe.value = true;
 
     communes.value = await chargementCommunesEPCIUsecase.execute(nom).finally(() => {
-      isLoading.value = false;
+      isLoadingListe.value = false;
     });
+  }
+
+  async function chargerDetailCollectivite(insee: string) {
+    isLoadingDetail.value = true;
+
+    // detailCommunaute.value = recupererDonneesCollectivitesParInseeUsecase.execute(
+    //   insee,
+    //   new DonneesCollectivitesPresenterImpl(),
+    // );
+    await router.replace({ path: '/collectivitesEPCI', query: { insee } });
+
+    isLoadingDetail.value = false;
   }
 </script>
 
@@ -70,7 +114,7 @@
 
   section > div {
     justify-self: center;
-    width: 50vw;
+    width: 100%;
   }
 
   button {
