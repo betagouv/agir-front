@@ -6,6 +6,7 @@ export type CommunesApiEPCIModel = {
   code_insee: string;
   nom: string;
 }[];
+
 export class CommuneRepositoryAxios implements CommuneRepository {
   async getCommunes(codePostal: string): Promise<Communes> {
     const axiosInstance = AxiosFactory.getAxios();

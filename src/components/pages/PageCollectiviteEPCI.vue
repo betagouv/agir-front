@@ -24,14 +24,21 @@
       </div>
 
       <CarteSkeleton v-if="isLoadingListe" />
-      <template v-else-if="communes">
+      <template v-else-if="communesViewmodel">
         <ul class="listeDeCommunes">
-          <li v-for="commune in communes" :key="commune.codeInsee">
+          <li v-for="commune in communesViewmodel.listeDeCommunes" :key="commune.codeInsee">
             <button class="fr-btn fr-btn--tertiary" @click="chargerDetailCollectivite(commune.codeInsee)">
               {{ commune.nom }}
             </button>
           </li>
         </ul>
+
+        <Callout
+          v-if="communesViewmodel.message"
+          class="text--left"
+          titre="Votre recherche"
+          :texte="communesViewmodel.message"
+        />
       </template>
     </div>
   </section>
@@ -46,18 +53,20 @@
   import { useRoute, useRouter } from 'vue-router';
   import LandingCollectivite from '@/components/custom/Landing/LandingCollectivite.vue';
   import CarteSkeleton from '@/components/custom/Skeleton/CarteSkeleton.vue';
+  import Callout from '@/components/dsfr/Callout.vue';
   import InputSearchBar from '@/components/dsfr/InputSearchBar.vue';
   // import { DonneesCollectivitesPresenterImpl } from '@/domaines/collectivites/adapters/donneesCollectivites.presenter.impl';
   // import { DonneesCollectivitesRepositoryAxios } from '@/domaines/collectivites/adapters/donneesCollectivites.repository.axios';
   // import { RecupererDonneesCollectivitesParInsee } from '@/domaines/collectivites/recupererDonneesCollectivitesParInsee.usecase';
-  import { CommuneRepositoryAxios } from '@/domaines/communes/adapters/communeRepositoryAxios';
+  import { ChargementCommunesEPCIPresenterImpl } from '@/domaines/communes/adapters/chargementCommunesEPCI.presenter.impl';
+  import { CommuneRepositoryAxios } from '@/domaines/communes/adapters/commune.repository.axios';
   import { ChargementCommunesEPCIUsecase } from '@/domaines/communes/chargementCommunesEPCIUsecase';
-  import { CommunesEPCI } from '@/domaines/communes/ports/communeRepository';
+  import { CommunesEPCIViewModel } from '@/domaines/communes/ports/chargementCommunesEPCI.presenter';
 
   const route = useRoute();
   const router = useRouter();
 
-  let communes = ref<CommunesEPCI>([]);
+  let communesViewmodel = ref<CommunesEPCIViewModel>([]);
   // let detailCommunaute = ref<any>({});
   const isLoadingListe = ref<boolean>(false);
   const isLoadingDetail = ref<boolean>(false);
@@ -73,15 +82,17 @@
 
   async function chargerCommunesEPCI(nom: string) {
     if (nom.trim() === '') {
-      communes.value = [];
+      communesViewmodel.value = [];
       return;
     }
 
     isLoadingListe.value = true;
 
-    communes.value = await chargementCommunesEPCIUsecase.execute(nom).finally(() => {
-      isLoadingListe.value = false;
-    });
+    await chargementCommunesEPCIUsecase
+      .execute(nom, new ChargementCommunesEPCIPresenterImpl(nom, vm => (communesViewmodel.value = vm)))
+      .finally(() => {
+        isLoadingListe.value = false;
+      });
   }
 
   async function chargerDetailCollectivite(insee: string) {
