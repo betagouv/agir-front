@@ -66,7 +66,7 @@
   const route = useRoute();
   const router = useRouter();
 
-  let communesViewmodel = ref<CommunesEPCIViewModel>([]);
+  let communesViewmodel = ref<CommunesEPCIViewModel>();
   // let detailCommunaute = ref<any>({});
   const isLoadingListe = ref<boolean>(false);
   const isLoadingDetail = ref<boolean>(false);
@@ -82,7 +82,7 @@
 
   async function chargerCommunesEPCI(nom: string) {
     if (nom.trim() === '') {
-      communesViewmodel.value = [];
+      communesViewmodel.value = { listeDeCommunes: [], message: '' };
       return;
     }
 

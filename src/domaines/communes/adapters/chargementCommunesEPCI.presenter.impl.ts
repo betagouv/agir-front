@@ -46,7 +46,7 @@ export class ChargementCommunesEPCIPresenterImpl implements ChargementCommunesEP
   private deduireMessage(nombreDeCommunes: number) {
     if (nombreDeCommunes === 0) {
       return `Il semble qu'aucune collectivité n'ait été trouvé dans notre base de données avec le nom <i>"${this._communeRecherche}"</i>. Si vous pensez que c'est une erreur, vous pouvez contacter <a href="mailto:contact@jagis.beta.gouv.fr">contact@jagis.beta.gouv.fr</a> avec le nom de la collectivité et son numéro SIREN pour que nous puissions vous aider.`;
-    } else if (nombreDeCommunes === 50) {
+    } else if (nombreDeCommunes === LIMITE_COMMUNES) {
       return `La recherche <i>"${this._communeRecherche}"</i> émet beaucoup de résultats. Veuillez préciser votre recherche pour des résultats plus cohérents.`;
     }
     return `Vous ne parvenez pas à trouver votre collectivité ? Vous pouvez nous contacter à l'adresse <a href="mailto:contact@jagis.beta.gouv.fr">contact@jagis.beta.gouv.fr</a> avec le nom de la collectivité et son numéro SIREN pour que nous puissions vous aider.`;
