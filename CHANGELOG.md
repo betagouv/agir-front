@@ -1,5 +1,33 @@
 # Changelog
 
+## [1.38.0](https://github.com/betagouv/agir-front/compare/v1.37.1...v1.38.0) (2025-01-27)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* affichage partenaire aide ([#874](https://github.com/betagouv/agir-front/issues/874)) ([006b6bd](https://github.com/betagouv/agir-front/commit/006b6bdcd73a236054ef861c53d8da7ea455a49f))
+* ajouter un lien preview des aides dans la page collectivité ([#873](https://github.com/betagouv/agir-front/issues/873)) ([598c067](https://github.com/betagouv/agir-front/commit/598c067b662f4a92cf074fe7c338e3d6ac0b5f24))
+* SelectService avec une largeur variable ([#883](https://github.com/betagouv/agir-front/issues/883)) ([b762341](https://github.com/betagouv/agir-front/commit/b762341e228aede9c366bd5ed99dbf89c6de2793))
+
+
+### 🐛 Corrections de bogues
+
+* quelques erreurs sentry (code postal) ([#871](https://github.com/betagouv/agir-front/issues/871)) ([4cb973a](https://github.com/betagouv/agir-front/commit/4cb973ae2fd3af7ebe0796bbea7d6ded239c378e))
+
+
+### 👷 Autres changements
+
+* Bump @sentry/vite-plugin from 2.23.0 to 3.0.0 ([#876](https://github.com/betagouv/agir-front/issues/876)) ([aeb8421](https://github.com/betagouv/agir-front/commit/aeb84218cc14ed1da85a7a31013eecbd4c98ac72))
+* Bump @sentry/vue from 8.48.0 to 8.50.0 ([#878](https://github.com/betagouv/agir-front/issues/878)) ([05006f7](https://github.com/betagouv/agir-front/commit/05006f70b634cad5ff3211cce47da8ceec99c398))
+* Bump @types/node from 22.10.5 to 22.10.7 ([#877](https://github.com/betagouv/agir-front/issues/877)) ([97beef2](https://github.com/betagouv/agir-front/commit/97beef27393105de34302d1ae959091d3cd65518))
+* Bump cross-spawn from 7.0.3 to 7.0.6 ([#869](https://github.com/betagouv/agir-front/issues/869)) ([7faf740](https://github.com/betagouv/agir-front/commit/7faf7405f4665162385e4227adc42c75273a7240))
+* Bump jsdom from 25.0.1 to 26.0.0 ([#868](https://github.com/betagouv/agir-front/issues/868)) ([e5416a8](https://github.com/betagouv/agir-front/commit/e5416a8f89d48bc2a1795a3fb285cb2e06e73ed0))
+* Bump pinia from 2.3.0 to 2.3.1 ([#879](https://github.com/betagouv/agir-front/issues/879)) ([b270064](https://github.com/betagouv/agir-front/commit/b2700641bb869f0076195b8504502ebf9ae46aca))
+* Bump validate-branch-name from 1.3.1 to 1.3.2 ([#862](https://github.com/betagouv/agir-front/issues/862)) ([f7a4184](https://github.com/betagouv/agir-front/commit/f7a4184305b02c251e3e58335f6b272a05f4e62f))
+* Bump vite from 5.4.11 to 6.0.9 ([#881](https://github.com/betagouv/agir-front/issues/881)) ([7e346d6](https://github.com/betagouv/agir-front/commit/7e346d634a25bb7853b228a8c78bab18a1b5b9c1))
+* Bump vite from 6.0.7 to 6.0.9 ([#880](https://github.com/betagouv/agir-front/issues/880)) ([b93f753](https://github.com/betagouv/agir-front/commit/b93f753fb8c096ef26e8e8d8dbf0c9b04160b4dd))
+* optimiser les SVG d'impact CO2 ([#882](https://github.com/betagouv/agir-front/issues/882)) ([74cc03f](https://github.com/betagouv/agir-front/commit/74cc03f80a8ee6632887c43cac92ab0b390b6138))
+
 ## [1.37.1](https://github.com/betagouv/agir-front/compare/v1.37.0...v1.37.1) (2025-01-14)
 
 
