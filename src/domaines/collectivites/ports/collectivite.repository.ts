@@ -10,7 +10,11 @@ export class Collectivites {
   ) {}
 
   limiteAtteinte(): boolean {
-    return this.collectivites.length === this.limite;
+    return this.collectivites.length > this.limite;
+  }
+
+  aucuneCollectiviteTrouvee(): boolean {
+    return this.collectivites.length === 0;
   }
 
   trierParNom(reference: string): Collectivites {
@@ -32,12 +36,8 @@ export class Collectivites {
     return this;
   }
 
-  aucuneCollectiviteTrouvee(): boolean {
-    return this.collectivites.length === 0;
-  }
-
   getCollectivites(): Collectivite[] {
-    return this.collectivites;
+    return this.collectivites.slice(0, this.limite);
   }
 }
 

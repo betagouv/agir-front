@@ -1,7 +1,10 @@
 import { Collectivites } from '@/domaines/collectivites/ports/collectivite.repository';
 
 export interface RechercheDeCollectiviteViewModel {
-  listeDeCollectivites: Collectivites;
+  listeDeCollectivites: {
+    codeInsee: string;
+    nom: string;
+  }[];
   message: string;
 }
 
