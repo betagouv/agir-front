@@ -1,5 +1,6 @@
 import { AxiosFactory } from '@/axios.factory';
-import { CollectiviteRepository, Collectivites } from '@/domaines/collectivites/ports/collectivite.repository';
+import { Collectivites } from '@/domaines/collectivites/entities/collectivites';
+import { CollectiviteRepository } from '@/domaines/collectivites/ports/collectivite.repository';
 
 export type CollectivitesAPIModel = {
   code_insee: string;

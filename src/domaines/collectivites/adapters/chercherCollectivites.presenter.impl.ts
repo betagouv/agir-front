@@ -1,8 +1,8 @@
+import { Collectivites } from '@/domaines/collectivites/entities/collectivites';
 import {
   ChercherCollectivitesPresenter,
   RechercheDeCollectiviteViewModel,
 } from '@/domaines/collectivites/ports/chercherCollectivites.presenter';
-import { Collectivites } from '@/domaines/collectivites/ports/collectivite.repository';
 
 export class ChercherCollectivitesPresenterImpl implements ChercherCollectivitesPresenter {
   constructor(private _viewModel: (vm: RechercheDeCollectiviteViewModel) => void) {}
