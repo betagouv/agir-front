@@ -1,19 +1,27 @@
 <template>
+  <span ref="mesureurElement" v-text="mesureurTexte" class="hidden-text"></span>
+
   <label :for="id" class="fr-sr-only">{{ label }}</label>
-  <select class="service-select" :id="id" :name="id" @input="updateMois">
-    <option
-      v-for="option in options"
-      :key="option.code"
-      :value="option.code"
-      :selected="option.estLaCategorieParDefaut"
-    >
+  <select
+    ref="selectElement"
+    v-model="optionSelectionnee"
+    class="service-select"
+    :id="id"
+    :name="id"
+    @change="updateWidth"
+  >
+    <option v-for="option in options" :key="option.code" :value="option.code">
       {{ option.label }}
     </option>
   </select>
 </template>
 
 <script setup lang="ts">
-  defineProps<{
+  import { computed, nextTick, onMounted, ref, watch } from 'vue';
+
+  const SELECT_RIGHT_PADDING = 40;
+
+  const props = defineProps<{
     id: string;
     label: string;
     options: {
@@ -22,13 +30,41 @@
       estLaCategorieParDefaut: boolean;
     }[];
   }>();
-
   const emit = defineEmits<{ (e: 'update', value: string): void }>();
 
-  const updateMois = (event: Event) => {
-    const inputElement = event.target as HTMLInputElement;
-    emit('update', inputElement.value);
-  };
+  const mesureurTexte = ref<string>('');
+  const mesureurElement = ref<HTMLElement | null>(null);
+  const selectElement = ref<HTMLElement | null>(null);
+
+  const optionSelectionneParDefaut = props.options.find(option => option.estLaCategorieParDefaut);
+  const optionSelectionnee = ref(optionSelectionneParDefaut?.code);
+
+  const texteDeLOptionSelectionnee = computed(() => {
+    return props.options.find(option => option.code === optionSelectionnee.value)?.label ?? '';
+  });
+
+  watch(texteDeLOptionSelectionnee, () => {
+    mesureurTexte.value = texteDeLOptionSelectionnee.value;
+  });
+
+  watch(optionSelectionnee, value => {
+    emit('update', value ?? '');
+  });
+
+  async function updateWidth() {
+    if (mesureurElement.value) {
+      await nextTick();
+      const width = mesureurElement.value.offsetWidth + SELECT_RIGHT_PADDING;
+      if (selectElement.value) {
+        selectElement.value.style.width = width + 'px';
+      }
+    }
+  }
+
+  onMounted(() => {
+    mesureurTexte.value = texteDeLOptionSelectionnee.value;
+    updateWidth();
+  });
 </script>
 
 <style>
@@ -45,5 +81,13 @@
 
   .service-select option {
     font-size: 1.25rem;
+  }
+
+  .hidden-text {
+    position: absolute;
+    visibility: hidden;
+    white-space: nowrap;
+    pointer-events: none;
+    overflow: hidden;
   }
 </style>

@@ -80,7 +80,6 @@
   });
 
   const lancerRecherche = async () => {
-    isLoading.value = true;
     await usecase.execute(
       utilisateurStore().utilisateur.id,
       typeDeRecettes.value,
