@@ -5,7 +5,8 @@ export class ChercherCollectivitesUsecase {
   constructor(private collectiviteRepository: CollectiviteRepository) {}
 
   async execute(recherche: string, presenter: ChercherCollectivitesPresenter) {
-    const communes = await this.collectiviteRepository.findCollectivites(recherche);
+    const LIMITE_COLLECTIVITES = 40;
+    const communes = await this.collectiviteRepository.findCollectivites(recherche, LIMITE_COLLECTIVITES);
     presenter.presente(communes, recherche);
   }
 }
