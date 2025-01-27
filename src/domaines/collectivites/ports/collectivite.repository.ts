@@ -42,5 +42,5 @@ export class Collectivites {
 }
 
 export interface CollectiviteRepository {
-  findCollectivites(nom: string, limite: number): Promise<Collectivites>;
+  chercherCollectivites(nom: string, limite: number): Promise<Collectivites>;
 }

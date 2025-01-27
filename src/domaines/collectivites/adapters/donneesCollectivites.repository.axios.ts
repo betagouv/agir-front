@@ -49,7 +49,7 @@ interface DonneesCollectivitesModelAPI {
 }
 
 export class DonneesCollectivitesRepositoryAxios implements DonneesCollectivitesRepository {
-  async getDonneesCodePostal(codePostal: string): Promise<DonneesCollectivites> {
+  async recupererDonneesCodePostal(codePostal: string): Promise<DonneesCollectivites> {
     const axios = AxiosFactory.getAxios();
     const response = await axios.get<DonneesCollectivitesModelAPI>(`/code_postal_synthese/${codePostal}`);
     return {

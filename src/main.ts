@@ -24,7 +24,6 @@ import '@gouvfr/dsfr/dist/component/badge/badge.min.css';
 import '@gouvfr/dsfr/dist/dsfr.module.min.js';
 import '@gouvfr/dsfr/dist/component/select/select.min.css';
 import '@gouvfr/dsfr/dist/component/stepper/stepper.min.css';
-import '@gouvfr/dsfr/dist/component/callout/callout.min.css';
 
 import './assets/theme/style.css';
 

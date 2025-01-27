@@ -13,7 +13,7 @@ import { buildUrl } from '@/shell/buildUrl';
 export class DonneesCollectivitesPresenterImpl implements DonneesCollectivitesPresenter {
   constructor(private readonly viewModel: (donneesCollectivitesViewModel: DonneesCollectivitesViewModel) => void) {}
 
-  displayDonneesCodePostal(donneesCollectivites: DonneesCollectivites, codePostal: string): void {
+  afficherDonneesCodePostal(donneesCollectivites: DonneesCollectivites, codePostal: string): void {
     const aidesLocales: AideLocaleViewModel[] = donneesCollectivites.aidesLocales.map(aide => ({
       ...aide,
       url: { name: RouteAidesName.AIDE_CONSULTATION, params: { id: aide.id, titre: buildUrl(aide.titre) } },

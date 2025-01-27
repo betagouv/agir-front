@@ -54,7 +54,7 @@ export class RecuperationDonneesCollectivitesUsecase {
   constructor(private readonly donneesCollectivitesRepository: DonneesCollectivitesRepository) {}
 
   async execute(codePostal: string, presenter: DonneesCollectivitesPresenter): Promise<void> {
-    const donneesCollectivites = await this.donneesCollectivitesRepository.getDonneesCodePostal(codePostal);
-    presenter.displayDonneesCodePostal(donneesCollectivites, codePostal);
+    const donneesCollectivites = await this.donneesCollectivitesRepository.recupererDonneesCodePostal(codePostal);
+    presenter.afficherDonneesCodePostal(donneesCollectivites, codePostal);
   }
 }

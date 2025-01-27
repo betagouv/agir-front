@@ -2,7 +2,8 @@
   <section class="fr-container fr-mt-3w">
     <h1 class="fr-h2">Collectivités</h1>
     <p>
-      Découvrez tous les contenus <strong>déjà disponibles</strong> pour les habitants de votre collectivité !<br />
+      Découvrez tous les contenus <span class="text--bold">déjà disponibles</span> pour les habitants de votre
+      collectivité !<br />
       Les informations sont incomplètes ? Contactez-nous en bas de page.
     </p>
   </section>

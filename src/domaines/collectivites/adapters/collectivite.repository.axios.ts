@@ -7,7 +7,7 @@ export type CollectivitesAPIModel = {
 }[];
 
 export class CollectiviteRepositoryAxios implements CollectiviteRepository {
-  async findCollectivites(nom: string, limite: number): Promise<Collectivites> {
+  async chercherCollectivites(nom: string, limite: number): Promise<Collectivites> {
     const axiosInstance = AxiosFactory.getAxios();
     const response = await axiosInstance.get<CollectivitesAPIModel>(`/communes_epci?nom=${nom}`);
 

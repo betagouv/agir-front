@@ -7,6 +7,8 @@
 </template>
 
 <script setup lang="ts">
+  import '@gouvfr/dsfr/dist/component/callout/callout.min.css';
+
   defineProps<{
     titre: string;
     texte: string;
