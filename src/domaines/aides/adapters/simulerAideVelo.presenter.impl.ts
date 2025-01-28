@@ -4,7 +4,7 @@ import {
   SimulationAideResultatViewModel,
 } from '@/domaines/aides/ports/simulationAideResultat';
 import { SimulerAideVeloPresenter } from '@/domaines/aides/ports/simulerAideVelo.presenter';
-import { SimulationVelo } from '@/domaines/aides/simulerAideVelo.usecase';
+import { AidesVelo, SimulationVelo, TypeVelos } from '@/domaines/aides/simulerAideVelo.usecase';
 
 export class SimulerAideVeloPresenterImpl implements SimulerAideVeloPresenter {
   constructor(private _viewModel: (simulationAideResultatViewModel: SimulationAideResultatViewModel) => void) {}
@@ -13,7 +13,7 @@ export class SimulerAideVeloPresenterImpl implements SimulerAideVeloPresenter {
     const simulationAideResultatViewModel: AideResultats[] = [];
 
     for (const category in simulationVelo) {
-      const aides: AideResultat[] = simulationVelo[category].map(aide => ({
+      const aides: AideResultat[] = simulationVelo[category].map((aide: AidesVelo) => ({
         libelle: aide.libelle,
         description: aide.description,
         lien: aide.lien,
@@ -22,7 +22,7 @@ export class SimulerAideVeloPresenterImpl implements SimulerAideVeloPresenter {
       }));
 
       const simulationAideResultat: AideResultats = {
-        titre: `Acheter un vélo ${category}`,
+        titre: getTitle(category as TypeVelos),
         montantTotal: aides.reduce((total, aide) => total + Math.round(aide.montant), 0),
         aides: aides,
       };
@@ -34,5 +34,20 @@ export class SimulerAideVeloPresenterImpl implements SimulerAideVeloPresenter {
     const aucunResultat = nombreAidesParCategory === 0;
 
     this._viewModel({ resultats: simulationAideResultatViewModel, aucunResultat });
+  }
+}
+
+function getTitle(category: TypeVelos): string {
+  switch (category) {
+    case 'électrique':
+    case 'cargo électrique':
+    case 'pliant électrique':
+      return `Acheter un vélo ${category} ⚡️`;
+    case 'adapté':
+      return 'Acheter un vélo adapté (PMR) 🦽';
+    case 'motorisation':
+      return 'Transformer un vélo classique en vélo électrique 🔋';
+    default:
+      return `Acheter un vélo ${category}`;
   }
 }

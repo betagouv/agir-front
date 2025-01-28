@@ -43,7 +43,7 @@
 </template>
 
 <script setup lang="ts">
-  import Accordeon from '@/components/custom/Aides/AccordeonAides.vue';
+  import Accordeon from '@/components/dsfr/Accordeon.vue';
   import AidesDetail from '@/components/custom/Aides/AidesDetail.vue';
   import CarteSkeleton from '@/components/custom/Skeleton/CarteSkeleton.vue';
   import { SimulationAideResultatViewModel } from '@/domaines/aides/ports/simulationAideResultat';
