@@ -12,6 +12,7 @@ interface UtilisateurApiModel {
   id: string;
   email: string;
   abonnement_transport: boolean;
+  situation_handicap: boolean;
   fonctionnalites_debloquees: string[];
   is_onboarding_done: boolean;
   couverture_aides_ok: boolean;

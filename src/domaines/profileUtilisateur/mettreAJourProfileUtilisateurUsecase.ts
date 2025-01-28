@@ -12,6 +12,7 @@ export class MettreAJourProfileUtilisateurUsecase {
     await this.compteUtilisateuRepository.mettreAjour({
       id: compteUtilisateurInput.id,
       abonnementTransport: compteUtilisateurInput.abonnementTransport,
+      situationHandicap: compteUtilisateurInput.situationHandicap,
       nom: compteUtilisateurInput.nom,
       prenom: compteUtilisateurInput.prenom,
       revenuFiscal: compteUtilisateurInput.revenuFiscal,

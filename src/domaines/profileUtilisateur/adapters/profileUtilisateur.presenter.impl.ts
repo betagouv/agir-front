@@ -10,6 +10,7 @@ export interface ProfileUtilisateurViewModel {
   revenuFiscal: number | null;
   nombreDePartsFiscales: number;
   anneeNaissance?: string;
+  situationHandicap?: boolean;
 }
 
 export class ProfileUtilisateurPresenterImpl implements ProfileUtilisateurPresenter {
@@ -25,6 +26,7 @@ export class ProfileUtilisateurPresenterImpl implements ProfileUtilisateurPresen
       revenuFiscal: profileUtilisateur.revenuFiscal,
       nombreDePartsFiscales: profileUtilisateur.nombreDePartsFiscales,
       anneeNaissance: profileUtilisateur.anneeNaissance ? profileUtilisateur.anneeNaissance.toString() : undefined,
+      situationHandicap: profileUtilisateur.situationHandicap,
     });
   }
 }
