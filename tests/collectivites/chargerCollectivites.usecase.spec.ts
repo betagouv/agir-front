@@ -62,10 +62,10 @@ describe('Fichier de test du usecase de chargement des collectivités EPCI', () 
     }
   });
 
-  it('En cherchant une ville non enregistré, aucune collectivité est affiché et le message est adapté', async () => {
+  it('En cherchant une ville non enregistrée, aucune collectivité est affiché et le message est adapté', async () => {
     // GIVEN
     const collectiviteRecherche = 'villeInexistante';
-    const chercherCollectivitesUsecase = new ChercherCollectivitesUsecase(new CollectiviteRepositoryMock([]));
+    const chercherCollectivitesUsecase = new ChercherCollectivitesUsecase(CollectiviteRepositoryMock.sansResultat());
 
     // WHEN
     await chercherCollectivitesUsecase.execute(

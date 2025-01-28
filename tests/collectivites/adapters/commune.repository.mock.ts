@@ -12,4 +12,8 @@ export class CollectiviteRepositoryMock implements CollectiviteRepository {
   async chercherCollectivites(nom: string, limite: number): Promise<Collectivites> {
     return new Collectivites(this.listeARetourner, limite);
   }
+
+  static sansResultat(): CollectiviteRepositoryMock {
+    return new CollectiviteRepositoryMock([]);
+  }
 }
