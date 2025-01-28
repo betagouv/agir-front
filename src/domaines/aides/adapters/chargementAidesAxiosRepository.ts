@@ -59,7 +59,7 @@ export class ChargementAidesAxiosRepository implements ChargementAidesRepository
   async previsualiser(idAide: string): Promise<Aide> {
     const axios = AxiosFactory.getCMSAxios();
     const aideCMS = await axios.get(
-      `/aides/${idAide}?populate[1]=imageUrl&populate[2]=partenaire&populate[3]=thematique_gamification&populate[4]=rubriques&populate[5]=thematiques&populate[6]=tags&populate[7]=besoin`,
+      `/aides/${idAide}?populate[1]=imageUrl&populate[2]=partenaire,partenaire.logo.media&populate[3]=thematique_gamification&populate[4]=rubriques&populate[5]=thematiques&populate[6]=tags&populate[7]=besoin`,
     );
     return {
       id: aideCMS.data.data.id,
@@ -71,6 +71,12 @@ export class ChargementAidesAxiosRepository implements ChargementAidesRepository
       isSimulateur: aideCMS.data.data.attributes.is_simulateur,
       montantMaximum: aideCMS.data.data.attributes.points,
       urlCommencerVotreDemarche: aideCMS.data.data.url_commencer_votre_demarche,
+      partenaire: aideCMS.data.data.attributes.partenaire.data.attributes.logo.data[0]
+        ? {
+            logoUrl: aideCMS.data.data.attributes.partenaire.data.attributes.logo.data[0].attributes.url,
+            nom: aideCMS.data.data.attributes.partenaire.data.attributes.nom,
+          }
+        : undefined,
     };
   }
 }
