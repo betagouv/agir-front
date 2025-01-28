@@ -12,8 +12,8 @@ export class SimulerAideVeloPresenterImpl implements SimulerAideVeloPresenter {
   presente(simulationVelo: SimulationVelo): void {
     const simulationAideResultatViewModel: AideResultats[] = [];
 
-    for (const category in simulationVelo) {
-      const aides: AideResultat[] = simulationVelo[category].map((aide: AidesVelo) => ({
+    for (const typeVelo in simulationVelo) {
+      const aides: AideResultat[] = simulationVelo[typeVelo].map((aide: AidesVelo) => ({
         libelle: aide.libelle,
         description: aide.description,
         lien: aide.lien,
@@ -22,7 +22,7 @@ export class SimulerAideVeloPresenterImpl implements SimulerAideVeloPresenter {
       }));
 
       const simulationAideResultat: AideResultats = {
-        titre: getTitle(category as TypeVelos),
+        titre: getTitre(typeVelo as TypeVelos),
         montantTotal: aides.reduce((total, aide) => total + Math.round(aide.montant), 0),
         aides: aides,
       };
@@ -37,7 +37,7 @@ export class SimulerAideVeloPresenterImpl implements SimulerAideVeloPresenter {
   }
 }
 
-function getTitle(category: TypeVelos): string {
+function getTitre(category: TypeVelos): string {
   switch (category) {
     case 'électrique':
     case 'cargo électrique':
