@@ -356,7 +356,7 @@ describe('Fichier de tests pour simuler une aide velo', () => {
               },
             ],
             montantTotal: 3300,
-            titre: 'Acheter un vélo électrique ⚡️',
+            titre: 'Acheter un vélo électrique',
           },
           {
             aides: [
@@ -422,7 +422,7 @@ describe('Fichier de tests pour simuler une aide velo', () => {
               },
             ],
             montantTotal: 5200,
-            titre: 'Acheter un vélo cargo électrique ⚡️',
+            titre: 'Acheter un vélo cargo électrique',
           },
           {
             aides: [
@@ -464,7 +464,7 @@ describe('Fichier de tests pour simuler une aide velo', () => {
               },
             ],
             montantTotal: 2550,
-            titre: 'Acheter un vélo pliant électrique ⚡️',
+            titre: 'Acheter un vélo pliant électrique',
           },
           {
             aides: [
@@ -486,7 +486,7 @@ describe('Fichier de tests pour simuler une aide velo', () => {
               },
             ],
             montantTotal: 600,
-            titre: 'Transformer un vélo classique en vélo électrique 🔋',
+            titre: 'Transformer un vélo classique en vélo électrique',
           },
           {
             aides: [
@@ -508,7 +508,7 @@ describe('Fichier de tests pour simuler une aide velo', () => {
               },
             ],
             montantTotal: 600,
-            titre: 'Acheter un vélo adapté (PMR) 🦽',
+            titre: 'Acheter un vélo adapté (PMR)',
           },
         ],
         aucunResultat: false,
@@ -546,7 +546,7 @@ describe('Fichier de tests pour simuler une aide velo', () => {
             {
               aides: [],
               montantTotal: 0,
-              titre: 'Acheter un vélo électrique ⚡️',
+              titre: 'Acheter un vélo électrique',
             },
             {
               aides: [],
@@ -556,7 +556,7 @@ describe('Fichier de tests pour simuler une aide velo', () => {
             {
               aides: [],
               montantTotal: 0,
-              titre: 'Acheter un vélo cargo électrique ⚡️',
+              titre: 'Acheter un vélo cargo électrique',
             },
             {
               aides: [],
@@ -566,17 +566,17 @@ describe('Fichier de tests pour simuler une aide velo', () => {
             {
               aides: [],
               montantTotal: 0,
-              titre: 'Acheter un vélo pliant électrique ⚡️',
+              titre: 'Acheter un vélo pliant électrique',
             },
             {
               aides: [],
               montantTotal: 0,
-              titre: 'Transformer un vélo classique en vélo électrique 🔋',
+              titre: 'Transformer un vélo classique en vélo électrique',
             },
             {
               aides: [],
               montantTotal: 0,
-              titre: 'Acheter un vélo adapté (PMR) 🦽',
+              titre: 'Acheter un vélo adapté (PMR)',
             },
           ],
           aucunResultat: true,

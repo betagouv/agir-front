@@ -12,8 +12,8 @@ export class SimulerAideVeloPresenterImpl implements SimulerAideVeloPresenter {
   presente(simulationVelo: SimulationVelo): void {
     const simulationAideResultatViewModel: AideResultats[] = [];
 
-    for (const category in simulationVelo) {
-      const aides: AideResultat[] = simulationVelo[category].map((aide: AidesVelo) => ({
+    for (const typeVelo in simulationVelo) {
+      const aides: AideResultat[] = simulationVelo[typeVelo].map((aide: AidesVelo) => ({
         libelle: aide.libelle,
         description: aide.description,
         lien: aide.lien,
@@ -22,7 +22,7 @@ export class SimulerAideVeloPresenterImpl implements SimulerAideVeloPresenter {
       }));
 
       const simulationAideResultat: AideResultats = {
-        titre: getTitle(category as TypeVelos),
+        titre: getTitre(typeVelo as TypeVelos),
         montantTotal: aides.reduce((total, aide) => total + Math.round(aide.montant), 0),
         aides: aides,
       };
@@ -37,17 +37,13 @@ export class SimulerAideVeloPresenterImpl implements SimulerAideVeloPresenter {
   }
 }
 
-function getTitle(category: TypeVelos): string {
-  switch (category) {
-    case 'électrique':
-    case 'cargo électrique':
-    case 'pliant électrique':
-      return `Acheter un vélo ${category} ⚡️`;
+function getTitre(typeVelo: TypeVelos): string {
+  switch (typeVelo) {
     case 'adapté':
-      return 'Acheter un vélo adapté (PMR) 🦽';
+      return 'Acheter un vélo adapté (PMR)';
     case 'motorisation':
-      return 'Transformer un vélo classique en vélo électrique 🔋';
+      return 'Transformer un vélo classique en vélo électrique';
     default:
-      return `Acheter un vélo ${category}`;
+      return `Acheter un vélo ${typeVelo}`;
   }
 }
