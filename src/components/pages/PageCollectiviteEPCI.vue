@@ -11,18 +11,24 @@
   <section class="fr-container fr-my-6w">
     <h2 class="fr-h3">Renseignez votre collectivité</h2>
     <div class="flex flex-column flex-center gap--small fr-mb-8w text--center width--fit-content">
-      <div class="position--relative">
-        <InputSearchBar
-          id="champDeRecherche"
-          name="champDeRecherche"
-          placeholder="Nom de la collectivité"
-          label="Nom de la collectivité"
-          description="Saisissez la collectivité dont vous voulez extraire les statistiques J'agis"
-          class="fr-mb-0 full-width"
-          @submit="chercherCollectivites"
-          is-large
-        />
-      </div>
+      <ul class="fr-tags-group fr-mb-1w" v-if="!resultatRechercheCollectivitesViewmodel">
+        <li v-for="ville in villesADisposition" :key="ville.insee">
+          <button href="#" class="fr-tag" @click="chargerDetailCollectivite(ville.insee)">
+            {{ ville.nom }}
+          </button>
+        </li>
+      </ul>
+
+      <InputSearchBar
+        id="champDeRecherche"
+        name="champDeRecherche"
+        placeholder="Nom de la collectivité"
+        label="Nom de la collectivité"
+        description="Saisissez la collectivité dont vous voulez extraire les statistiques J'agis"
+        class="fr-mb-0 full-width"
+        @submit="chercherCollectivites"
+        is-large
+      />
 
       <CarteSkeleton v-if="isLoadingListe" />
       <template v-else-if="resultatRechercheCollectivitesViewmodel">
@@ -59,9 +65,6 @@
   import CarteSkeleton from '@/components/custom/Skeleton/CarteSkeleton.vue';
   import Callout from '@/components/dsfr/Callout.vue';
   import InputSearchBar from '@/components/dsfr/InputSearchBar.vue';
-  // import { DonneesCollectivitesPresenterImpl } from '@/domaines/collectivites/adapters/donneesCollectivites.presenter.impl';
-  // import { DonneesCollectivitesRepositoryAxios } from '@/domaines/collectivites/adapters/donneesCollectivites.repository.axios';
-  // import { RecupererDonneesCollectivitesParInsee } from '@/domaines/collectivites/recupererDonneesCollectivitesParInsee.usecase';
   import { ChercherCollectivitesPresenterImpl } from '@/domaines/collectivites/adapters/chercherCollectivites.presenter.impl';
   import { CollectiviteRepositoryAxios } from '@/domaines/collectivites/adapters/collectivite.repository.axios';
   import { ChercherCollectivitesUsecase } from '@/domaines/collectivites/chercherCollectivites.usecase';
@@ -69,16 +72,22 @@
 
   const route = useRoute();
   const router = useRouter();
+  const villesADisposition: { nom: string; insee: string }[] = [
+    { nom: 'Bordeaux', insee: '33063' },
+    { nom: 'CA du Pays Basque', insee: '64431' },
+    { nom: 'CU du Grand Nancy', insee: '54395' },
+    { nom: 'Dijon', insee: '21231' },
+    { nom: 'Lille', insee: '59350' },
+    { nom: 'Lyon', insee: '69123' },
+    { nom: 'Métropole de Marseille-Provence-Aix', insee: '13201' },
+    { nom: 'Paris', insee: '75056' },
+  ];
 
   let resultatRechercheCollectivitesViewmodel = ref<RechercheDeCollectiviteViewModel>();
-  // let detailCommunaute = ref<any>({});
   const isLoadingListe = ref<boolean>(false);
   const isLoadingDetail = ref<boolean>(false);
 
   const chercherCollectivitesUsecase = new ChercherCollectivitesUsecase(new CollectiviteRepositoryAxios());
-  // const recupererDonneesCollectivitesParInseeUsecase = new RecupererDonneesCollectivitesParInsee(
-  //   new DonneesCollectivitesRepositoryAxios(),
-  // );
 
   if (route.query?.insee) {
     chargerDetailCollectivite(route.query.insee as string);
