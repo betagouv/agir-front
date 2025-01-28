@@ -3,4 +3,5 @@ export enum RouteAidesName {
   VELO = 'aides-velo',
   VELO_FORMULAIRE = 'aides-velo-formulaire',
   AIDE_PREVISUALISATION = 'aide-previsualisation',
+  AIDE_CONSULTATION = 'aide-consulation',
 }

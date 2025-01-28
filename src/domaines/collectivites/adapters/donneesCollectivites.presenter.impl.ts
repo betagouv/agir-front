@@ -8,6 +8,7 @@ import { DonneesCollectivites } from '@/domaines/collectivites/recuperationDonne
 import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 import { RouteAidesName } from '@/router/aides/routeAidesName';
 import { RouteArticleName } from '@/router/articles/routes';
+import { buildUrl } from '@/shell/buildUrl';
 
 export class DonneesCollectivitesPresenterImpl implements DonneesCollectivitesPresenter {
   constructor(private readonly viewModel: (donneesCollectivitesViewModel: DonneesCollectivitesViewModel) => void) {}
@@ -15,7 +16,7 @@ export class DonneesCollectivitesPresenterImpl implements DonneesCollectivitesPr
   displayDonneesCollectivites(donneesCollectivites: DonneesCollectivites, codePostal: string): void {
     const aidesLocales: AideLocaleViewModel[] = donneesCollectivites.aidesLocales.map(aide => ({
       ...aide,
-      url: { name: RouteAidesName.AIDE_PREVISUALISATION, params: { id: aide.id } },
+      url: { name: RouteAidesName.AIDE_CONSULTATION, params: { id: aide.id, titre: buildUrl(aide.titre) } },
     }));
     const filtrerAidesLocalesParThematique = (clef: ClefThematiqueAPI) =>
       aidesLocales.filter(aide => aide.thematiques.includes(clef));

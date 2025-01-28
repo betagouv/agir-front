@@ -71,7 +71,7 @@ export class ChargementAidesAxiosRepository implements ChargementAidesRepository
       isSimulateur: aideCMS.data.data.attributes.is_simulateur,
       montantMaximum: aideCMS.data.data.attributes.points,
       urlCommencerVotreDemarche: aideCMS.data.data.url_commencer_votre_demarche,
-      partenaire: aideCMS.data.data.attributes.partenaire.data.attributes.logo.data[0]
+      partenaire: aideCMS.data.data.attributes.partenaire.data
         ? {
             logoUrl: aideCMS.data.data.attributes.partenaire.data.attributes.logo.data[0].attributes.url,
             nom: aideCMS.data.data.attributes.partenaire.data.attributes.nom,
