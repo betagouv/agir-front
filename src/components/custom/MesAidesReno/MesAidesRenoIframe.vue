@@ -1,5 +1,5 @@
 <template>
-  <iframe title="Formulaire Mes Aides Reno" src="https://mesaidesreno.beta.gouv.fr/"></iframe>
+  <iframe title="Formulaire Mes Aides Reno" src="https://mesaidesreno.beta.gouv.fr/" allow="clipboard-write"></iframe>
 </template>
 
 <script setup></script>
