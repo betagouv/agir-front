@@ -4,7 +4,7 @@ import {
   SimulationAideResultatViewModel,
 } from '@/domaines/aides/ports/simulationAideResultat';
 import { SimulerAideVeloPresenter } from '@/domaines/aides/ports/simulerAideVelo.presenter';
-import { SimulationVelo } from '@/domaines/aides/simulerAideVelo.usecase';
+import { AidesVelo, SimulationVelo, TypeVelos } from '@/domaines/aides/simulerAideVelo.usecase';
 
 export class SimulerAideVeloPresenterImpl implements SimulerAideVeloPresenter {
   constructor(private _viewModel: (simulationAideResultatViewModel: SimulationAideResultatViewModel) => void) {}
@@ -12,8 +12,8 @@ export class SimulerAideVeloPresenterImpl implements SimulerAideVeloPresenter {
   presente(simulationVelo: SimulationVelo): void {
     const simulationAideResultatViewModel: AideResultats[] = [];
 
-    for (const category in simulationVelo) {
-      const aides: AideResultat[] = simulationVelo[category].map(aide => ({
+    for (const typeVelo in simulationVelo) {
+      const aides: AideResultat[] = simulationVelo[typeVelo].map((aide: AidesVelo) => ({
         libelle: aide.libelle,
         description: aide.description,
         lien: aide.lien,
@@ -22,7 +22,7 @@ export class SimulerAideVeloPresenterImpl implements SimulerAideVeloPresenter {
       }));
 
       const simulationAideResultat: AideResultats = {
-        titre: `Acheter un vélo ${category}`,
+        titre: getTitre(typeVelo as TypeVelos),
         montantTotal: aides.reduce((total, aide) => total + Math.round(aide.montant), 0),
         aides: aides,
       };
@@ -34,5 +34,16 @@ export class SimulerAideVeloPresenterImpl implements SimulerAideVeloPresenter {
     const aucunResultat = nombreAidesParCategory === 0;
 
     this._viewModel({ resultats: simulationAideResultatViewModel, aucunResultat });
+  }
+}
+
+function getTitre(typeVelo: TypeVelos): string {
+  switch (typeVelo) {
+    case 'adapté':
+      return 'Acheter un vélo adapté (PMR)';
+    case 'motorisation':
+      return 'Transformer un vélo classique en vélo électrique';
+    default:
+      return `Acheter un vélo ${typeVelo}`;
   }
 }

@@ -56,3 +56,4 @@ package-lock.json
 /playwright/.cache/
 .env.local
 .env.sentry-build-plugin
+.env

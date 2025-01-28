@@ -262,6 +262,34 @@ describe('Fichier de tests pour simuler une aide velo', () => {
           logo: 'https://mesaidesvelo.fr/miniatures/logo_paris.webp',
         },
       ],
+      adapté: [
+        {
+          libelle: 'Île-de-France Mobilités',
+          description:
+            'La région Île-de-France subventionne l’achat d’un kit de motorisation à hauteur de 50% et jusqu’à un plafond de 200 €. Les éventuelles aides locales déjà perçues sont déduites de ce montant.',
+          lien: 'https://www.iledefrance-mobilites.fr/le-reseau/services-de-mobilite/velo/prime-achat-velo',
+          collectivite: {
+            kind: 'région',
+            value: '11',
+          },
+          montant: 200,
+          plafond: 200,
+          logo: 'https://mesaidesvelo.fr/miniatures/logo_ile_de_france.webp',
+        },
+        {
+          libelle: 'Ville de Paris',
+          description:
+            'La ville de Paris subventionne l’achat d’un kit de motorisation à hauteur de 33% et jusqu’à un plafond de 400 €.',
+          lien: 'https://www.paris.fr/pages/lutte-contre-la-pollution-les-aides-a-la-mobilite-5373',
+          collectivite: {
+            kind: 'code insee',
+            value: '75056',
+          },
+          montant: 400,
+          plafond: 400,
+          logo: 'https://mesaidesvelo.fr/miniatures/logo_paris.webp',
+        },
+      ],
     });
 
     // WHEN
@@ -458,7 +486,29 @@ describe('Fichier de tests pour simuler une aide velo', () => {
               },
             ],
             montantTotal: 600,
-            titre: 'Acheter un vélo motorisation',
+            titre: 'Transformer un vélo classique en vélo électrique',
+          },
+          {
+            aides: [
+              {
+                description:
+                  'La région Île-de-France subventionne l’achat d’un kit de motorisation à hauteur de 50% et jusqu’à un plafond de 200 €. Les éventuelles aides locales déjà perçues sont déduites de ce montant.',
+                libelle: 'Île-de-France Mobilités',
+                lien: 'https://www.iledefrance-mobilites.fr/le-reseau/services-de-mobilite/velo/prime-achat-velo',
+                logo: 'https://mesaidesvelo.fr/miniatures/logo_ile_de_france.webp',
+                montant: 200,
+              },
+              {
+                description:
+                  'La ville de Paris subventionne l’achat d’un kit de motorisation à hauteur de 33% et jusqu’à un plafond de 400 €.',
+                libelle: 'Ville de Paris',
+                lien: 'https://www.paris.fr/pages/lutte-contre-la-pollution-les-aides-a-la-mobilite-5373',
+                logo: 'https://mesaidesvelo.fr/miniatures/logo_paris.webp',
+                montant: 400,
+              },
+            ],
+            montantTotal: 600,
+            titre: 'Acheter un vélo adapté (PMR)',
           },
         ],
         aucunResultat: false,
@@ -477,6 +527,7 @@ describe('Fichier de tests pour simuler une aide velo', () => {
         pliant: [],
         'pliant électrique': [],
         motorisation: [],
+        adapté: [],
       });
 
       // WHEN
@@ -520,7 +571,12 @@ describe('Fichier de tests pour simuler une aide velo', () => {
             {
               aides: [],
               montantTotal: 0,
-              titre: 'Acheter un vélo motorisation',
+              titre: 'Transformer un vélo classique en vélo électrique',
+            },
+            {
+              aides: [],
+              montantTotal: 0,
+              titre: 'Acheter un vélo adapté (PMR)',
             },
           ],
           aucunResultat: true,

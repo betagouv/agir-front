@@ -1,7 +1,7 @@
 import { SimulerAideVeloPresenter } from '@/domaines/aides/ports/simulerAideVelo.presenter';
 import { SimulerAideVeloRepository } from '@/domaines/aides/ports/simulerAideVelo.repository';
 
-interface AidesVelo {
+export interface AidesVelo {
   libelle: string;
   montant: number;
   plafond: number;
@@ -17,13 +17,14 @@ interface Collectivite {
   code?: string;
 }
 
-type TypeVelos =
+export type TypeVelos =
   | 'mécanique simple'
   | 'électrique'
   | 'cargo'
   | 'cargo électrique'
   | 'pliant'
   | 'pliant électrique'
+  | 'adapté'
   | 'motorisation';
 
 export type SimulationVelo = {

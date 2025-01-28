@@ -25,6 +25,7 @@ type TypeVelos =
   | 'cargo électrique'
   | 'pliant'
   | 'pliant électrique'
+  | 'adapté'
   | 'motorisation';
 
 type AidesVeloParType = {
@@ -47,6 +48,7 @@ export class SimulerAideVeloRepositoryAxios implements SimulerAideVeloRepository
       pliant: response.data.pliant ?? [],
       'pliant électrique': response.data['pliant électrique'] ?? [],
       motorisation: response.data.motorisation ?? [],
+      adapté: response.data.adapté ?? [],
     };
   }
 }
