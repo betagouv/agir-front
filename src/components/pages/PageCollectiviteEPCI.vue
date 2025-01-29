@@ -11,14 +11,6 @@
   <section class="fr-container fr-my-6w">
     <h2 class="fr-h3">Renseignez votre collectivité</h2>
     <div class="flex flex-column flex-center gap--small fr-mb-8w text--center width--fit-content">
-      <ul class="fr-tags-group fr-mb-1w" v-if="!resultatRechercheCollectivitesViewmodel">
-        <li v-for="ville in villesADisposition" :key="ville.insee">
-          <button href="#" class="fr-tag" @click="chargerDetailCollectivite(ville.insee)">
-            {{ ville.nom }}
-          </button>
-        </li>
-      </ul>
-
       <InputSearchBar
         id="champDeRecherche"
         name="champDeRecherche"
@@ -29,6 +21,23 @@
         @submit="chercherCollectivites"
         is-large
       />
+
+      <div
+        class="fr-grid-row fr-grid-row--middle fr-my-3w"
+        v-if="
+          !resultatRechercheCollectivitesViewmodel ||
+          resultatRechercheCollectivitesViewmodel?.listeDeCollectivites.length === 0
+        "
+      >
+        <p class="fr-mr-2w">Par exemple&nbsp;:</p>
+        <ul class="fr-tags-group fr-mb-1w">
+          <li v-for="ville in villesADisposition" :key="ville.insee">
+            <button href="#" class="fr-tag" @click="chargerDetailCollectivite(ville.insee)">
+              {{ ville.nom }}
+            </button>
+          </li>
+        </ul>
+      </div>
 
       <CarteSkeleton v-if="isLoadingListe" />
       <template v-else-if="resultatRechercheCollectivitesViewmodel">
@@ -73,14 +82,10 @@
   const route = useRoute();
   const router = useRouter();
   const villesADisposition: { nom: string; insee: string }[] = [
-    { nom: 'Bordeaux', insee: '33063' },
+    { nom: 'Lille', insee: '59350' },
     { nom: 'CA du Pays Basque', insee: '64431' },
     { nom: 'CU du Grand Nancy', insee: '54395' },
-    { nom: 'Dijon', insee: '21231' },
-    { nom: 'Lille', insee: '59350' },
-    { nom: 'Lyon', insee: '69123' },
     { nom: 'Métropole de Marseille-Provence-Aix', insee: '13201' },
-    { nom: 'Paris', insee: '75056' },
   ];
 
   let resultatRechercheCollectivitesViewmodel = ref<RechercheDeCollectiviteViewModel>();
