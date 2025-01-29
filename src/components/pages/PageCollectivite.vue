@@ -48,7 +48,7 @@
 
                 <ul>
                   <li v-for="aide in proposition.aides" :key="aide.id">
-                    <router-link :to="aide.url">{{ aide.titre }}</router-link>
+                    <router-link :to="aide.url" target="_blank">{{ aide.titre }}</router-link>
                   </li>
                 </ul>
               </div>
@@ -80,7 +80,8 @@
 </template>
 
 <script lang="ts" setup>
-  import { ref } from 'vue';
+  import { onMounted, ref } from 'vue';
+  import { useRoute, useRouter } from 'vue-router';
   import CarteDecouverte from '@/components/custom/Collectivites/CarteDecouverte.vue';
   import CarteSkeleton from '@/components/custom/Skeleton/CarteSkeleton.vue';
   import InputText from '@/components/dsfr/InputText.vue';
@@ -89,12 +90,22 @@
   import { DonneesCollectivitesViewModel } from '@/domaines/collectivites/ports/donneesCollectivites.presenter';
   import { RecuperationDonneesCollectivitesUsecase } from '@/domaines/collectivites/recuperationDonneesCollectivites.usecase';
 
+  const route = useRoute();
+  const router = useRouter();
+
   const isLoading = ref<boolean>(false);
   const donneesCollectivitesViewmodel = ref<DonneesCollectivitesViewModel>();
 
   const codePostal = ref<string>('');
 
-  function lancerRecherche() {
+  onMounted(() => {
+    if (route.query?.codePostal) {
+      codePostal.value = route.query.codePostal as string;
+      lancerRecherche();
+    }
+  });
+
+  async function lancerRecherche() {
     isLoading.value = true;
     const usecase = new RecuperationDonneesCollectivitesUsecase(new DonneesCollectivitesRepositoryAxios());
     usecase
@@ -105,6 +116,8 @@
       .finally(() => {
         isLoading.value = false;
       });
+
+    await router.replace({ path: '/collectivites', query: { codePostal: codePostal.value } });
   }
 </script>
 
