@@ -1,5 +1,5 @@
-import { SimulationVelo } from '@/domaines/aides/simulerAideVelo.usecase';
+import { EtatVelo, SimulationVelo } from '@/domaines/aides/simulerAideVelo.usecase';
 
 export interface SimulerAideVeloRepository {
-  getSimulation(prixDuVelo: number, utilisateurId: string): Promise<SimulationVelo>;
+  getSimulation(prixDuVelo: number, etatDuVelo: EtatVelo, utilisateurId: string): Promise<SimulationVelo>;
 }

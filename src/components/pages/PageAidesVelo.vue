@@ -2,6 +2,7 @@
   <div class="fr-container fr-pb-6w">
     <FilDAriane :page-courante="titrePage" />
     <CarteSkeleton v-if="isLoadingGlobal" />
+
     <div v-else-if="!simulationAidesVeloViewModel">Problème de chargement</div>
     <AidesResultat
       v-else
@@ -11,6 +12,14 @@
       :titre="titrePage"
       sous-titre="Les aides vélo disponibles"
     >
+      <template v-slot:serviceSelect>
+        <ServiceSelect
+          id="état-vélo"
+          :options="OptionsEtatVelo"
+          @update="updateEtatDuVelo"
+          label="Choisir l'état du vélo"
+        />
+      </template>
       <template v-slot:asideResultatAides>
         <div class="background--white border border-radius--md fr-p-3w fr-mb-3w">
           <h2 class="fr-h5">Paramètres</h2>
@@ -63,12 +72,13 @@
   import AidesResultat from '@/components/custom/Aides/AidesResultat.vue';
   import AsideAideVelo from '@/components/custom/Aides/AidesVeloAside.vue';
   import InputNumberVertical from '@/components/custom/InputNumberVertical.vue';
+  import ServiceSelect from '@/components/custom/Service/ServiceSelect.vue';
   import CarteSkeleton from '@/components/custom/Skeleton/CarteSkeleton.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import { SimulerAideVeloPresenterImpl } from '@/domaines/aides/adapters/simulerAideVelo.presenter.impl';
   import { SimulerAideVeloRepositoryAxios } from '@/domaines/aides/adapters/simulerAideVelo.repository.axios';
   import { SimulationAideResultatViewModel } from '@/domaines/aides/ports/simulationAideResultat';
-  import SimulerAideVeloUsecase from '@/domaines/aides/simulerAideVelo.usecase';
+  import SimulerAideVeloUsecase, { EtatVelo, OptionsEtatVelo } from '@/domaines/aides/simulerAideVelo.usecase';
   import { LogementPresenterImpl } from '@/domaines/logement/adapters/logement.presenter.impl';
   import { LogementRepositoryAxios } from '@/domaines/logement/adapters/logement.repository.axios';
   import { RecupererInformationLogementUseCase } from '@/domaines/logement/recupererInformationLogement.usecase';
@@ -86,6 +96,7 @@
   const revenuFiscal = ref<number | null>(0);
   const nombreDePartsFiscales = ref<number>(0);
   const prixDuVelo = ref<number>(1000);
+  const etatDuVelo = ref<EtatVelo>('neuf');
   const isLoading = ref<boolean>(false);
 
   const isLoadingGlobal = ref<boolean>(true);
@@ -121,6 +132,7 @@
     const simulerAideVeloUsecase = new SimulerAideVeloUsecase(new SimulerAideVeloRepositoryAxios());
     await simulerAideVeloUsecase.execute(
       prixDuVelo.value,
+      etatDuVelo.value,
       idUtilisateur,
       new SimulerAideVeloPresenterImpl(mapResultatAidesVelo),
     );
@@ -133,5 +145,10 @@
 
   const updatePrixDuVelo = (prix: number) => {
     prixDuVelo.value = prix;
+  };
+
+  const updateEtatDuVelo = async (etat: string) => {
+    etatDuVelo.value = etat as EtatVelo;
+    await simulerAideVelo();
   };
 </script>
