@@ -76,8 +76,12 @@
   import InputSearchBar from '@/components/dsfr/InputSearchBar.vue';
   import { ChercherCollectivitesPresenterImpl } from '@/domaines/collectivites/adapters/chercherCollectivites.presenter.impl';
   import { CollectiviteRepositoryAxios } from '@/domaines/collectivites/adapters/collectivite.repository.axios';
+  import { DonneesCollectivitesRepositoryAxios } from '@/domaines/collectivites/adapters/donneesCollectivites.repository.axios';
+  import { DonneesCollectivitesInseePresenterImpl } from '@/domaines/collectivites/adapters/donneesCollectivitesInsee.presenter.impl';
   import { ChercherCollectivitesUsecase } from '@/domaines/collectivites/chercherCollectivites.usecase';
   import { RechercheDeCollectiviteViewModel } from '@/domaines/collectivites/ports/chercherCollectivites.presenter';
+  import { DonneesCollectivitesInseeViewModel } from '@/domaines/collectivites/ports/donneesCollectivitesInsee.presenter';
+  import { RecupererDonneesCollectivitesInsee } from '@/domaines/collectivites/recupererDonneesCollectivitesInsee.usecase';
   import { trackClick } from '@/shell/matomo';
 
   const route = useRoute();
@@ -90,10 +94,14 @@
   ];
 
   let resultatRechercheCollectivitesViewmodel = ref<RechercheDeCollectiviteViewModel>();
+  let donneesCollectivitesInseeViewModel = ref<DonneesCollectivitesInseeViewModel>();
   const isLoadingListe = ref<boolean>(false);
   const isLoadingDetail = ref<boolean>(false);
 
   const chercherCollectivitesUsecase = new ChercherCollectivitesUsecase(new CollectiviteRepositoryAxios());
+  const recupererDonneesCollectivitesInsee = new RecupererDonneesCollectivitesInsee(
+    new DonneesCollectivitesRepositoryAxios(),
+  );
 
   onMounted(() => {
     if (route.query?.insee) {
@@ -124,10 +132,10 @@
 
     isLoadingDetail.value = true;
 
-    // detailCommunaute.value = recupererDonneesCollectivitesParInseeUsecase.execute(
-    //   insee,
-    //   new DonneesCollectivitesPresenterImpl(),
-    // );
+    await recupererDonneesCollectivitesInsee.execute(
+      insee,
+      new DonneesCollectivitesInseePresenterImpl(vm => (donneesCollectivitesInseeViewModel.value = vm)),
+    );
     await router.replace({ path: '/collectivitesEPCI', query: { insee } });
 
     isLoadingDetail.value = false;

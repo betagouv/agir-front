@@ -85,16 +85,16 @@
   import CarteDecouverte from '@/components/custom/Collectivites/CarteDecouverte.vue';
   import CarteSkeleton from '@/components/custom/Skeleton/CarteSkeleton.vue';
   import InputText from '@/components/dsfr/InputText.vue';
-  import { DonneesCollectivitesPresenterImpl } from '@/domaines/collectivites/adapters/donneesCollectivites.presenter.impl';
   import { DonneesCollectivitesRepositoryAxios } from '@/domaines/collectivites/adapters/donneesCollectivites.repository.axios';
-  import { DonneesCollectivitesViewModel } from '@/domaines/collectivites/ports/donneesCollectivites.presenter';
-  import { RecuperationDonneesCollectivitesUsecase } from '@/domaines/collectivites/recuperationDonneesCollectivites.usecase';
+  import { DonneesCollectivitesCPPresenterImpl } from '@/domaines/collectivites/adapters/donneesCollectivitesCP.presenter.impl';
+  import { DonneesCollectivitesCPViewModel } from '@/domaines/collectivites/ports/donneesCollectivitesCP.presenter';
+  import { RecupererDonneesCollectivitesCodePostalUsecase } from '@/domaines/collectivites/recupererDonneesCollectivitesCodePostal.usecase';
 
   const route = useRoute();
   const router = useRouter();
 
   const isLoading = ref<boolean>(false);
-  const donneesCollectivitesViewmodel = ref<DonneesCollectivitesViewModel>();
+  const donneesCollectivitesViewmodel = ref<DonneesCollectivitesCPViewModel>();
 
   const codePostal = ref<string>('');
 
@@ -107,11 +107,11 @@
 
   async function lancerRecherche() {
     isLoading.value = true;
-    const usecase = new RecuperationDonneesCollectivitesUsecase(new DonneesCollectivitesRepositoryAxios());
+    const usecase = new RecupererDonneesCollectivitesCodePostalUsecase(new DonneesCollectivitesRepositoryAxios());
     usecase
       .execute(
         codePostal.value,
-        new DonneesCollectivitesPresenterImpl(vm => (donneesCollectivitesViewmodel.value = vm)),
+        new DonneesCollectivitesCPPresenterImpl(vm => (donneesCollectivitesViewmodel.value = vm)),
       )
       .finally(() => {
         isLoading.value = false;
