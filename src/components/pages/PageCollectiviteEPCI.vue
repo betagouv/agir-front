@@ -13,26 +13,26 @@
     <div class="flex flex-column flex-center gap--small fr-mb-8w text--center width--fit-content">
       <InputSearchBar
         id="champDeRecherche"
+        class="fr-mb-0 full-width"
+        description="Saisissez la collectivité dont vous voulez extraire les statistiques J'agis"
+        is-large
+        label="Nom de la collectivité"
         name="champDeRecherche"
         placeholder="Nom de la collectivité"
-        label="Nom de la collectivité"
-        description="Saisissez la collectivité dont vous voulez extraire les statistiques J'agis"
-        class="fr-mb-0 full-width"
         @submit="chercherCollectivites"
-        is-large
       />
 
       <div
-        class="fr-grid-row fr-grid-row--middle fr-my-3w"
         v-if="
           !resultatRechercheCollectivitesViewmodel ||
           resultatRechercheCollectivitesViewmodel?.listeDeCollectivites.length === 0
         "
+        class="fr-grid-row fr-grid-row--middle fr-my-3w"
       >
         <p class="fr-mr-2w">Par exemple&nbsp;:</p>
         <ul class="fr-tags-group fr-mb-1w">
           <li v-for="ville in villesADisposition" :key="ville.insee">
-            <button href="#" class="fr-tag" @click="chargerDetailCollectivite(ville.insee)">
+            <button class="fr-tag" href="#" @click="chargerDetailCollectivite(ville.insee)">
               {{ ville.nom }}
             </button>
           </li>
@@ -54,9 +54,9 @@
 
         <Callout
           v-if="resultatRechercheCollectivitesViewmodel.message"
+          :texte="resultatRechercheCollectivitesViewmodel.message"
           class="text--left"
           titre="Votre recherche"
-          :texte="resultatRechercheCollectivitesViewmodel.message"
         />
       </template>
     </div>
@@ -134,7 +134,7 @@
   }
 
   const trackCollectivitesClick = insee => {
-    trackClick('Collectivité', insee);
+    trackClick('Collectivité', `Code INSEE : ${insee}`);
   };
 </script>
 
