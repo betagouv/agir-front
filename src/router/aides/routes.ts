@@ -11,6 +11,7 @@ export enum RouteAidesPath {
   FORMULAIRE = 'formulaire',
   VELO = 'velo',
   AIDE_PREVISUALISATION = 'previsualisation/:id',
+  AIDE = '/aide/:titre/:id',
 }
 
 const aidesRoutes: RouteRecordRaw[] = [
@@ -55,6 +56,12 @@ const aidesRoutes: RouteRecordRaw[] = [
         meta: { estPublique: true },
       },
     ],
+  },
+  {
+    path: RouteAidesPath.AIDE,
+    name: RouteAidesName.AIDE_CONSULTATION,
+    component: PagePrevisualisationAide,
+    meta: { estPublique: true },
   },
 ];
 
