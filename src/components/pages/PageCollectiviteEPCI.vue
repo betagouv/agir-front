@@ -68,7 +68,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { ref } from 'vue';
+  import { onMounted, ref } from 'vue';
   import { useRoute, useRouter } from 'vue-router';
   import LandingCollectivite from '@/components/custom/Landing/LandingCollectivite.vue';
   import CarteSkeleton from '@/components/custom/Skeleton/CarteSkeleton.vue';
@@ -78,6 +78,7 @@
   import { CollectiviteRepositoryAxios } from '@/domaines/collectivites/adapters/collectivite.repository.axios';
   import { ChercherCollectivitesUsecase } from '@/domaines/collectivites/chercherCollectivites.usecase';
   import { RechercheDeCollectiviteViewModel } from '@/domaines/collectivites/ports/chercherCollectivites.presenter';
+  import { trackClick } from '@/shell/matomo';
 
   const route = useRoute();
   const router = useRouter();
@@ -94,9 +95,11 @@
 
   const chercherCollectivitesUsecase = new ChercherCollectivitesUsecase(new CollectiviteRepositoryAxios());
 
-  if (route.query?.insee) {
-    chargerDetailCollectivite(route.query.insee as string);
-  }
+  onMounted(() => {
+    if (route.query?.insee) {
+      chargerDetailCollectivite(route.query.insee as string);
+    }
+  });
 
   async function chercherCollectivites(recherche: string) {
     if (recherche.trim() === '') {
@@ -117,6 +120,8 @@
   }
 
   async function chargerDetailCollectivite(insee: string) {
+    trackCollectivitesClick(insee);
+
     isLoadingDetail.value = true;
 
     // detailCommunaute.value = recupererDonneesCollectivitesParInseeUsecase.execute(
@@ -127,6 +132,10 @@
 
     isLoadingDetail.value = false;
   }
+
+  const trackCollectivitesClick = insee => {
+    trackClick('Collectivité', insee);
+  };
 </script>
 
 <style scoped>
