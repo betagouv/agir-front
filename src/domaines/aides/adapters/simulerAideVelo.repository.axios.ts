@@ -1,6 +1,6 @@
 import { AxiosFactory, intercept401 } from '@/axios.factory';
 import { SimulerAideVeloRepository } from '@/domaines/aides/ports/simulerAideVelo.repository';
-import { SimulationVelo } from '@/domaines/aides/simulerAideVelo.usecase';
+import { EtatVelo, SimulationVelo } from '@/domaines/aides/simulerAideVelo.usecase';
 
 interface AidesVelo {
   libelle: string;
@@ -29,15 +29,16 @@ type TypeVelos =
   | 'motorisation';
 
 type AidesVeloParType = {
-  [category in TypeVelos]: AidesVelo[];
+  [typeVelo in TypeVelos]: AidesVelo[];
 };
 
 export class SimulerAideVeloRepositoryAxios implements SimulerAideVeloRepository {
   @intercept401()
-  async getSimulation(prixDuVelo: number, utilisateurId: string): Promise<SimulationVelo> {
+  async getSimulation(prixDuVelo: number, etatDuVelo: EtatVelo, utilisateurId: string): Promise<SimulationVelo> {
     const axiosInstance = AxiosFactory.getAxios();
     const response = await axiosInstance.post<AidesVeloParType>(`/utilisateurs/${utilisateurId}/simulerAideVelo`, {
       prix_du_velo: prixDuVelo,
+      etat_du_velo: etatDuVelo,
     });
 
     return {

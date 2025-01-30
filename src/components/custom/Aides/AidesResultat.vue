@@ -1,11 +1,14 @@
 <template>
-  <h1 class="fr-h2">{{ titre }}</h1>
+  <h1 class="fr-h2">
+    {{ titre }}
+    <slot name="serviceSelect"></slot>
+  </h1>
   <div v-show="!simulationAidesViewModel">
     <slot name="formulaire"></slot>
   </div>
   <div class="fr-grid-row fr-grid-row--gutters">
     <div class="fr-col-lg-4 fr-col-12">
-      <slot name="asideResultatAides"></slot>
+      <slot name="asideResultatAides"> </slot>
     </div>
     <div class="fr-col-lg-8 fr-col-12">
       <div v-if="!isLoading" class="background--white border border-radius--md fr-p-3w">
@@ -43,9 +46,9 @@
 </template>
 
 <script setup lang="ts">
-  import Accordeon from '@/components/dsfr/Accordeon.vue';
   import AidesDetail from '@/components/custom/Aides/AidesDetail.vue';
   import CarteSkeleton from '@/components/custom/Skeleton/CarteSkeleton.vue';
+  import Accordeon from '@/components/dsfr/Accordeon.vue';
   import { SimulationAideResultatViewModel } from '@/domaines/aides/ports/simulationAideResultat';
   defineProps<{
     isLoading: boolean;

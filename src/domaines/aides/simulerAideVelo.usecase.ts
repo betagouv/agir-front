@@ -27,6 +27,13 @@ export type TypeVelos =
   | 'adapté'
   | 'motorisation';
 
+export type EtatVelo = 'neuf' | 'occasion';
+
+export const OptionsEtatVelo: Array<{ label: string; code: EtatVelo; estLaCategorieParDefaut: boolean }> = [
+  { label: 'neuf', code: 'neuf', estLaCategorieParDefaut: true },
+  { label: "d'occasion", code: 'occasion', estLaCategorieParDefaut: false },
+];
+
 export type SimulationVelo = {
   [category in TypeVelos]: AidesVelo[];
 };
@@ -38,8 +45,8 @@ export default class SimulerAideVeloUsecase {
     this._simulationAideVeloRepository = simulationAideVeloRepository;
   }
 
-  async execute(prixDuVelo: number, utilisateurId: string, presenter: SimulerAideVeloPresenter) {
-    const reponse = await this._simulationAideVeloRepository.getSimulation(prixDuVelo, utilisateurId);
+  async execute(prixDuVelo: number, etatDuVelo: EtatVelo, utilisateurId: string, presenter: SimulerAideVeloPresenter) {
+    const reponse = await this._simulationAideVeloRepository.getSimulation(prixDuVelo, etatDuVelo, utilisateurId);
     presenter.presente(reponse);
   }
 }
