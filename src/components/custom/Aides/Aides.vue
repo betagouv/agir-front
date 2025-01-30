@@ -22,11 +22,11 @@
                       height="50"
                     />
                   </div>
-                  <span class="aide__titre fr-mt-2w">
+                  <div class="aide__titre fr-mt-2w">
                     <span class="fr-h4 text--gris">
                       {{ aide.titre }}
                     </span>
-                    <span v-if="aide.isSimulateur || aide.montantMaximum" class="fr-grid-row">
+                    <div v-if="aide.isSimulateur || aide.montantMaximum" class="fr-grid-row">
                       <span
                         v-if="aide.isSimulateur"
                         class="fr-tag background-bleu-light fr-mr-1w fr-icon-money-euro-circle-line fr-tag--icon-left nowrap"
@@ -38,8 +38,8 @@
                         <span class="fr-sr-only">, </span>
                         {{ aide.montantMaximum }}
                       </span>
-                    </span>
-                  </span>
+                    </div>
+                  </div>
                 </div>
               </template>
               <template v-slot:contenu>
