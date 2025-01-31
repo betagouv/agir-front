@@ -12,7 +12,7 @@
     <p v-html="collectiviteInseeViewModel.indicationAidesEtArticles"></p>
 
     <div class="fr-grid-row fr-mt-5w">
-      <div class="fr-col-12 fr-col-sm-6">
+      <div class="fr-col-12 fr-col-sm-6" v-if="collectiviteInseeViewModel.aides.length !== 0">
         <h3 class="fr-h4"><span aria-hidden="true">📌 </span>Les aides</h3>
 
         <div class="fr-accordions-group">
@@ -33,7 +33,7 @@
         </div>
       </div>
 
-      <div class="fr-col-12 fr-col-sm-6">
+      <div class="fr-col-12 fr-col-sm-6" v-if="collectiviteInseeViewModel.articles.length !== 0">
         <h3 class="fr-h4"><span aria-hidden="true">🗞️ </span>Les articles</h3>
         <div class="fr-accordions-group">
           <Accordeon

@@ -50,6 +50,7 @@
     </template>
   </div>
 </template>
+
 <script setup lang="ts">
   import { ref } from 'vue';
   import CarteSkeleton from '@/components/custom/Skeleton/CarteSkeleton.vue';
@@ -60,14 +61,13 @@
   import { ChercherCollectivitesUsecase } from '@/domaines/collectivites/chercherCollectivites.usecase';
   import { RechercheDeCollectiviteViewModel } from '@/domaines/collectivites/ports/chercherCollectivites.presenter';
 
-  defineProps<{ onCollectiviteClick: (insee: string) => void }>();
+  const props = defineProps<{ onCollectiviteClick: (insee: string) => void }>();
 
-  // TODO: revoir ça c'est pas correct
   const villesADisposition: { nom: string; insee: string }[] = [
     { nom: 'Lille', insee: '59350' },
-    { nom: 'CA du Pays Basque', insee: '64431' },
-    { nom: 'CU du Grand Nancy', insee: '54395' },
-    { nom: 'Métropole de Marseille-Provence-Aix', insee: '13201' },
+    { nom: 'CA du Pays Basque', insee: '200067106' },
+    { nom: 'CU du Grand Reims', insee: '200067213' },
+    { nom: "Métropole d'Aix-Marseille-Provence", insee: '200054807' },
   ];
 
   const isLoadingListe = ref<boolean>(false);
@@ -92,7 +92,13 @@
         isLoadingListe.value = false;
       });
   }
+
+  const onCollectiviteClick = (insee: string) => {
+    props.onCollectiviteClick(insee);
+    resultatRechercheCollectivitesViewmodel.value = undefined;
+  };
 </script>
+
 <style scoped>
   .listeDeCollectivites {
     list-style-type: none;

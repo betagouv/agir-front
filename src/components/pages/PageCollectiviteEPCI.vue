@@ -50,6 +50,10 @@
     if (route.query?.insee) {
       chargerDetailCollectivite(route.query.insee as string);
     }
+
+    window.addEventListener('popstate', () => {
+      location.reload();
+    });
   });
 
   async function chargerDetailCollectivite(insee: string) {
@@ -60,7 +64,7 @@
     await recupererDonneesCollectivitesInsee
       .execute(insee, new DonneesCollectivitesInseePresenterImpl(vm => (donneesCollectivitesInseeViewModel.value = vm)))
       .then(async () => {
-        await router.replace({ path: '/collectivitesEPCI', query: { insee } });
+        await router.push({ path: '/collectivitesEPCI', query: { insee } });
       })
       .catch(erreur => {
         // TODO: erreur
@@ -73,6 +77,8 @@
   const trackCollectivitesClick = insee => {
     trackClick('Collectivité', `Code INSEE : ${insee}`);
   };
+
+  const resetAffichage = () => {};
 </script>
 
 <style scoped>
