@@ -1,35 +1,31 @@
+import { ViewModelWithUrl } from '@/domaines/collectivites/ports/donneesCollectivitesCP.presenter';
 import { DonneesCollectivitesINSEE } from '@/domaines/collectivites/recupererDonneesCollectivitesInsee.usecase';
 import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 
-interface ArticleCollectiviteViewModel {
+export interface ArticleOuAideCollectiviteViewModel extends ViewModelWithUrl {
   id: number;
   thematiques: ClefThematiqueAPI[];
   titre: string;
 }
 
-interface AideCollectiviteViewModel {
-  id: number;
-  thematiques: ClefThematiqueAPI[];
+interface AccordeonCollectiviteViewModel {
   titre: string;
+  id: string;
+  contenu: ArticleOuAideCollectiviteViewModel[];
 }
 
 export interface DonneesCollectivitesInseeViewModel {
-  nomDuLieu: string;
+  nom: string;
   departement: string;
   region: string;
-  listeCommunesPourEPCI?: string[];
+  listeCommunesPourEPCI?: string;
 
-  aides: {
-    nationales: AideCollectiviteViewModel[];
-    regionales: AideCollectiviteViewModel[];
-    departementales: AideCollectiviteViewModel[];
-    locales: AideCollectiviteViewModel[];
-  };
-  articles: {
-    regionales: ArticleCollectiviteViewModel[];
-    departementales: ArticleCollectiviteViewModel[];
-    locales: ArticleCollectiviteViewModel[];
-  };
+  indicationNombreUtilisateurs: string;
+  indicationAidesEtArticles: string;
+
+  aides: AccordeonCollectiviteViewModel[];
+  articles: AccordeonCollectiviteViewModel[];
+
   nombreDeDefi: {
     enCours: number;
     realises: number;

@@ -123,7 +123,7 @@ export class DonneesCollectivitesRepositoryAxios implements DonneesCollectivites
     const axios = AxiosFactory.getAxios();
     const response = await axios.get<DonneesCollectivitesINSEEModelAPI>(`/code_postal_synthese_v2/${insee}`);
     return {
-      nomDuLieu: response.data.nom_commune_ou_collectivite,
+      nom: response.data.nom_commune_ou_collectivite,
       departement: response.data.nom_departement,
       region: response.data.nom_region,
       estEPCI: response.data.est_EPCI,

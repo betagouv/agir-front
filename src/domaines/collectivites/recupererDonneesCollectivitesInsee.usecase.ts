@@ -2,14 +2,14 @@ import { DonneesCollectivitesRepository } from '@/domaines/collectivites/ports/d
 import { DonneesCollectivitesInseePresenter } from '@/domaines/collectivites/ports/donneesCollectivitesInsee.presenter';
 import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 
-interface AideOuArticleDeCollectivite {
+export interface AideOuArticleDeCollectivite {
   id: number;
   thematiques: ClefThematiqueAPI[];
   titre: string;
 }
 
 export interface DonneesCollectivitesINSEE {
-  nomDuLieu: string;
+  nom: string;
   departement: string;
   region: string;
   estEPCI: boolean;

@@ -14,7 +14,7 @@ export interface DonneesCollectivitesCPViewModel {
   }[];
 }
 
-interface ViewModelWithUrl {
+export interface ViewModelWithUrl {
   url: {
     name: string;
     params: { id: number };

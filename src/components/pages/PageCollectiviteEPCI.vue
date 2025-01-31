@@ -12,9 +12,10 @@
     <CollectivitesInseeRecherche :on-collectivite-click="chargerDetailCollectivite" />
 
     <CarteSkeleton v-if="isLoadingDetail" />
-    <div class="background--white fr-p-3w border-radius--md shadow" v-else-if="donneesCollectivitesInseeViewModel">
-      <h2 class="fr-h3">{{ donneesCollectivitesInseeViewModel.nomDuLieu }}</h2>
-    </div>
+    <CollectiviteRecapitulatif
+      v-else-if="donneesCollectivitesInseeViewModel"
+      :collectivite-insee-view-model="donneesCollectivitesInseeViewModel"
+    />
   </section>
 
   <section class="fr-container full-width fr-mb-6w">
@@ -25,6 +26,7 @@
 <script lang="ts" setup>
   import { onMounted, ref } from 'vue';
   import { useRoute, useRouter } from 'vue-router';
+  import CollectiviteRecapitulatif from '@/components/custom/Collectivites/CollectiviteRecapitulatif.vue';
   import CollectivitesInseeRecherche from '@/components/custom/Collectivites/CollectivitesInseeRecherche.vue';
   import LandingCollectivite from '@/components/custom/Landing/LandingCollectivite.vue';
   import CarteSkeleton from '@/components/custom/Skeleton/CarteSkeleton.vue';
@@ -55,13 +57,17 @@
 
     isLoadingDetail.value = true;
 
-    await recupererDonneesCollectivitesInsee.execute(
-      insee,
-      new DonneesCollectivitesInseePresenterImpl(vm => (donneesCollectivitesInseeViewModel.value = vm)),
-    );
-    await router.replace({ path: '/collectivitesEPCI', query: { insee } });
-
-    isLoadingDetail.value = false;
+    await recupererDonneesCollectivitesInsee
+      .execute(insee, new DonneesCollectivitesInseePresenterImpl(vm => (donneesCollectivitesInseeViewModel.value = vm)))
+      .then(async () => {
+        await router.replace({ path: '/collectivitesEPCI', query: { insee } });
+      })
+      .catch(erreur => {
+        // TODO: erreur
+      })
+      .finally(() => {
+        isLoadingDetail.value = false;
+      });
   }
 
   const trackCollectivitesClick = insee => {

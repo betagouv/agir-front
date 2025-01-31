@@ -1,6 +1,6 @@
 <template>
   <h2 class="fr-h3">Renseignez votre collectivité</h2>
-  <div class="flex flex-column gap--small fr-mb-8w width--fit-content">
+  <div class="flex flex-column gap--small width--fit-content">
     <InputSearchBar
       id="champDeRecherche"
       class="fr-mb-0 full-width"
