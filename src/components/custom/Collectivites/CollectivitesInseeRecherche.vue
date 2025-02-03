@@ -1,6 +1,6 @@
 <template>
   <h2 class="fr-h3">Renseignez votre collectivité</h2>
-  <div class="flex flex-column gap--small width--fit-content">
+  <div class="flex flex-column gap--small width--fit-content full-width">
     <InputSearchBar
       id="champDeRecherche"
       class="fr-mb-0 full-width"
@@ -108,15 +108,6 @@
     text-align: left;
     flex-wrap: wrap;
     gap: 0.5rem;
-  }
-
-  .propositions li:first-letter {
-    text-transform: capitalize;
-  }
-
-  section > div {
-    justify-self: center;
-    width: 100%;
   }
 
   button {

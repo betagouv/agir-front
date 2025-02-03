@@ -39,6 +39,6 @@ export class RecupererDonneesCollectivitesInsee {
 
   async execute(insee: string, presenter: DonneesCollectivitesInseePresenter): Promise<void> {
     const donneesCollectivites = await this.donneesCollectivitesRepository.recupererDonneesInsee(insee);
-    presenter.afficherDonneesInsee(donneesCollectivites, insee);
+    presenter.afficherDonneesInsee(donneesCollectivites);
   }
 }

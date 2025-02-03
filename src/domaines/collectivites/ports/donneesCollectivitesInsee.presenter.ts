@@ -37,5 +37,5 @@ export interface DonneesCollectivitesInseeViewModel {
 }
 
 export interface DonneesCollectivitesInseePresenter {
-  afficherDonneesInsee(donneesCollectivites: DonneesCollectivitesINSEE, insee: string): void;
+  afficherDonneesInsee(donneesCollectivites: DonneesCollectivitesINSEE): void;
 }

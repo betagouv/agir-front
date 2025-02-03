@@ -14,8 +14,7 @@ export class DonneesCollectivitesInseePresenterImpl implements DonneesCollectivi
     private readonly viewModel: (donneesCollectivitesViewModel: DonneesCollectivitesInseeViewModel) => void,
   ) {}
 
-  // TODO: enlever param insee ?
-  afficherDonneesInsee(donneesCollectivites: DonneesCollectivitesINSEE, insee: string) {
+  afficherDonneesInsee(donneesCollectivites: DonneesCollectivitesINSEE) {
     const listeCommunesPourEPCI = donneesCollectivites.listeCommunesPourEPCI.join(', ');
 
     const indicationNombreUtilisateurs = this.genererIndicationNombreDUtilisateurs(donneesCollectivites);
