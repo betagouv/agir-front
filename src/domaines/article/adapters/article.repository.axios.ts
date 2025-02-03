@@ -90,27 +90,27 @@ export class ArticleRepositoryAxios implements ArticleRepository {
   }
 
   async previsualiser(articleId: string): Promise<Article> {
-    const axiosCMS = AxiosFactory.getCMSAxios();
-    const article = await axiosCMS.get(
-      `/articles/${articleId}?populate[0]=partenaire,partenaire.logo.media&populate[1]=sources`,
-    );
+    const axios = AxiosFactory.getAxios();
+    const article = await axios.get(`/bibliotheque/articles/${articleId}`);
+
     return {
       id: articleId,
-      texte: article.data.data.attributes.contenu,
-      titre: article.data.data.attributes.titre,
-      sousTitre: article.data.data.attributes.sousTitre,
-      estEnFavori: false,
+      texte: article.data.contenu,
+      titre: article.data.titre,
+      sousTitre: article.data.soustitre,
       sources:
-        article.data.data.attributes.sources?.map(source => ({
-          label: source.libelle,
-          url: source.lien,
+        article.data.sources?.map(source => ({
+          label: source.label,
+          url: source.url,
         })) || null,
-      partenaire: article.data.data.attributes.partenaire.data
-        ? {
-            nom: article.data.data.attributes.partenaire.data.attributes.nom,
-            logo: article.data.data.attributes.partenaire.data.attributes.logo.data[0].attributes.url,
-          }
-        : null,
+      partenaire:
+        article.data.partenaire_nom && article.data.partenaire_logo_url
+          ? {
+              nom: article.data.partenaire_nom,
+              logo: article.data.partenaire_logo_url,
+            }
+          : null,
+      estEnFavori: article.data.favoris,
     };
   }
 }
