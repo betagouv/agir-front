@@ -1,5 +1,31 @@
 # Changelog
 
+## [1.39.0](https://github.com/betagouv/agir-front/compare/v1.38.0...v1.39.0) (2025-02-03)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* ajout du partenaire dans la previsualisation d'une aide ([#886](https://github.com/betagouv/agir-front/issues/886)) ([0b5ba8c](https://github.com/betagouv/agir-front/commit/0b5ba8c424c1c6be52e4f56e5f2b405e1feb23e1))
+* Ajoute les aides pour l'achat de vélo d'occasion ([#898](https://github.com/betagouv/agir-front/issues/898)) ([e3b2a4f](https://github.com/betagouv/agir-front/commit/e3b2a4f49330b8de5c206ea8c1f1275bf0c306e9))
+* empêcher le retour à la ligne des tags dans les aides ([#900](https://github.com/betagouv/agir-front/issues/900)) ([f435801](https://github.com/betagouv/agir-front/commit/f4358010ae211fda4f6021c4ccf85616596030a5))
+
+
+### 🐛 Corrections de bogues
+
+* Prise en compte des vélos adapté et légères modifications de l'UI ([#895](https://github.com/betagouv/agir-front/issues/895)) ([0242be1](https://github.com/betagouv/agir-front/commit/0242be1151d7e6422a633295418669756f5959b8))
+
+
+### 👷 Autres changements
+
+* ajout d'une nouvelle url pour les articles ([#901](https://github.com/betagouv/agir-front/issues/901)) ([0f66dd8](https://github.com/betagouv/agir-front/commit/0f66dd870599b2407563a3b93e02d9d5eaa815b3))
+* Bump @sentry/vite-plugin from 3.0.0 to 3.1.0 ([#889](https://github.com/betagouv/agir-front/issues/889)) ([8b7492c](https://github.com/betagouv/agir-front/commit/8b7492cb9e80286234ce4955b52c03eebddc0fce))
+* Bump @sentry/vue from 8.50.0 to 8.51.0 ([#888](https://github.com/betagouv/agir-front/issues/888)) ([5f91f44](https://github.com/betagouv/agir-front/commit/5f91f441ca3b092fc9bb54222fe2ec0a2c3cea29))
+* Bump @types/node from 22.10.7 to 22.10.10 ([#890](https://github.com/betagouv/agir-front/issues/890)) ([ecad444](https://github.com/betagouv/agir-front/commit/ecad44408232bacf9158b90db5116c23a2325cab))
+* Bump lint-staged from 15.3.0 to 15.4.3 ([#887](https://github.com/betagouv/agir-front/issues/887)) ([5f7cb54](https://github.com/betagouv/agir-front/commit/5f7cb547e082d82171ec03cf7d2ff7744b14cc75))
+* Bump vite from 6.0.9 to 6.0.11 ([#891](https://github.com/betagouv/agir-front/issues/891)) ([0568db7](https://github.com/betagouv/agir-front/commit/0568db7376fb2259bc92985d60b317031804162d))
+* construction d'une url publique pour une aide ([#893](https://github.com/betagouv/agir-front/issues/893)) ([97d42e4](https://github.com/betagouv/agir-front/commit/97d42e48d1ebfa6053311b2609e5245d445b184b))
+* prévisualisation d'un article via l'api du back ([#899](https://github.com/betagouv/agir-front/issues/899)) ([91f52e2](https://github.com/betagouv/agir-front/commit/91f52e28816a126c283e90810f7166369ed1204f))
+
 ## [1.38.0](https://github.com/betagouv/agir-front/compare/v1.37.1...v1.38.0) (2025-01-27)
 
 
