@@ -4,41 +4,35 @@ import { RouteRecordRaw } from 'vue-router';
 
 export enum RouteArticlePath {
   ARTICLE = '/article/',
-  ARTICLE_TITRE = ':titre',
-  ARTICLE_ID = '::id',
-  ARTICLE_PREVISUALISATION = 'previsualisation/:id',
+  ARTICLE_PAR_TITRE_ET_ID = '/article/:titre/:id',
+  ARTICLE_PAR_ID = '/article/:id',
+  ARTICLE_PREVISUALISATION = '/article/previsualisation/:id',
 }
 
 export enum RouteArticleName {
-  ARTICLE = 'article',
+  ARTICLE_PAR_TITRE_ET_ID = 'article-par-titre-id',
+  ARTICLE_PAR_ID = 'article-par-id',
   ARTICLE_PREVISUALISATION = 'article-previsualisation',
 }
 
 const articlesRoutes: RouteRecordRaw[] = [
   {
-    path: RouteArticlePath.ARTICLE,
-    name: RouteArticleName.ARTICLE,
-    children: [
-      {
-        path: RouteArticlePath.ARTICLE_TITRE,
-        component: PageArticle,
-        meta: { estPublique: false },
-        children: [
-          {
-            path: RouteArticlePath.ARTICLE_ID,
-            component: PageArticle,
-            meta: { estPublique: false },
-          },
-        ],
-      },
-
-      {
-        path: RouteArticlePath.ARTICLE_PREVISUALISATION,
-        name: RouteArticleName.ARTICLE_PREVISUALISATION,
-        component: PagePrevisualisationArticle,
-        meta: { estPublique: true },
-      },
-    ],
+    path: RouteArticlePath.ARTICLE_PAR_TITRE_ET_ID,
+    name: RouteArticleName.ARTICLE_PAR_TITRE_ET_ID,
+    component: PageArticle,
+    meta: { estPublique: false },
+  },
+  {
+    path: RouteArticlePath.ARTICLE_PAR_ID,
+    name: RouteArticleName.ARTICLE_PAR_ID,
+    component: PageArticle,
+    meta: { estPublique: false },
+  },
+  {
+    path: RouteArticlePath.ARTICLE_PREVISUALISATION,
+    name: RouteArticleName.ARTICLE_PREVISUALISATION,
+    component: PagePrevisualisationArticle,
+    meta: { estPublique: true },
   },
 ];
 

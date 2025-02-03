@@ -24,7 +24,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
   import { onMounted, ref } from 'vue';
   import { useRoute, useRouter } from 'vue-router';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
@@ -44,8 +44,11 @@
 
   onMounted(() => {
     const route = useRoute();
-    const idArticle = route.params.id.toString();
-
+    const idArticle = route.params.id ? route.params.id.toString() : null;
+    if (!idArticle) {
+      router.push({ name: RouteCommuneName.NOT_FOUND });
+      return;
+    }
     const articleRepositoryAxios = new ArticleRepositoryAxios();
     const utilisateurId = utilisateurStore().utilisateur.id;
 
