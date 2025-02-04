@@ -27,7 +27,6 @@
             <ThematiqueTag :tag="defiViewModel.thematiqueTag" />
           </div>
           <form v-if="!reponseAEteDonnee" @submit.prevent="validerLaReponse">
-            reponse ->{{ reponse }} : {{ defiViewModel.reponses_possibles[0].id }}
             <BoutonRadio
               v-model="reponse"
               :default-value="reponse"
@@ -180,10 +179,7 @@
       utilisateurId,
       new DefiPresenterImpl((viewModel: DefiViewModel) => {
         defiViewModel.value = viewModel;
-        reponse.value =
-          defiViewModel.value?.reponses_possibles.filter(r => r.id === defiViewModel.value?.reponse).length > 0
-            ? defiViewModel.value?.reponse
-            : defiViewModel.value?.reponses_possibles[0].id;
+        reponse.value = defiViewModel.value.reponse;
         explication.value = viewModel.explicationRefus || '';
       }),
     );
