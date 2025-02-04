@@ -27,9 +27,10 @@
             <ThematiqueTag :tag="defiViewModel.thematiqueTag" />
           </div>
           <form v-if="!reponseAEteDonnee" @submit.prevent="validerLaReponse">
+            reponse ->{{ reponse }} : {{ defiViewModel.reponses_possibles[0].id }}
             <BoutonRadio
               v-model="reponse"
-              :default-value="reponse ? reponse.toString() : undefined"
+              :default-value="reponse"
               :description="defiViewModel.description"
               :legende="defiViewModel.libelle"
               :options="
@@ -55,14 +56,6 @@
               >
               <textarea id="explication" v-model="explication" class="fr-input fr-mb-4w" name="explication" />
             </div>
-
-            <Alert
-              v-if="alerte.isActive && !isReponseInitialeDifferente"
-              :type="alerte.type"
-              :titre="alerte.titre"
-              :message="alerte.message"
-              class="fr-mb-4w"
-            />
 
             <button class="fr-btn fr-btn--lg fr-mb-2w" title="Valider">Valider</button>
           </form>
@@ -104,13 +97,11 @@
 <script lang="ts" setup>
   import { computed, onMounted, ref } from 'vue';
   import { useRoute } from 'vue-router';
-  import Alert from '@/components/custom/Alert.vue';
   import BoutonRadio from '@/components/custom/BoutonRadio.vue';
   import CarteInfo from '@/components/custom/CarteInfo.vue';
   import DefiFin from '@/components/custom/Defi/DefiFin.vue';
   import ThematiqueTag from '@/components/custom/Thematiques/ThematiqueTag.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
-  import { useAlerte } from '@/composables/useAlerte';
   import { DefiPresenterImpl, DefiViewModel, ReponsePossible } from '@/domaines/defi/adapters/defi.presenter.impl';
   import { DefiRepositoryAxios } from '@/domaines/defi/adapters/defi.repository.axios';
   import { EnvoyerReponseDefiUsecase } from '@/domaines/defi/envoyerReponseDefi.usecase';
@@ -153,7 +144,6 @@
     'Christophe',
   ];
   const route = useRoute();
-  const { alerte, afficherAlerte } = useAlerte();
   const questionId = Array.isArray(route.params.id) ? route.params.id[0] : route.params.id;
 
   const isLoading = ref<boolean>(true);
@@ -165,9 +155,6 @@
   const reponseInitiale = ref<string>('');
 
   const utilisateurId = utilisateurStore().utilisateur.id;
-  const isReponseInitialeDifferente = computed(() => {
-    return reponse.value !== reponseInitiale.value;
-  });
 
   const obtenirPrenomsAleatoires = (count, max) => {
     const indices: number[] = [];
@@ -193,26 +180,24 @@
       utilisateurId,
       new DefiPresenterImpl((viewModel: DefiViewModel) => {
         defiViewModel.value = viewModel;
-        reponse.value = viewModel.reponse;
+        reponse.value =
+          defiViewModel.value?.reponses_possibles.filter(r => r.id === defiViewModel.value?.reponse).length > 0
+            ? defiViewModel.value?.reponse
+            : defiViewModel.value?.reponses_possibles[0].id;
         explication.value = viewModel.explicationRefus || '';
       }),
     );
+
     isLoading.value = false;
     reponseInitiale.value = reponse.value;
   });
 
   const validerLaReponse = async () => {
-    if (!isReponseInitialeDifferente.value) {
-      afficherAlerte('error', 'Erreur', 'Veuillez sélectionner une réponse pour continuer');
-      return;
-    }
-
     const envoyerReponseUsecase = new EnvoyerReponseDefiUsecase(
       new DefiRepositoryAxios(),
       ToDoListEventBusImpl.getInstance(),
     );
     await envoyerReponseUsecase.execute(utilisateurId, questionId, reponse.value, explication.value);
-    alerte.value.isActive = false;
 
     if (defiViewModel.value?.reponse) {
       aDejaRepondu.value = true;
