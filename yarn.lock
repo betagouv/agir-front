@@ -1208,10 +1208,10 @@
     "@sentry/types" "7.120.0"
     "@sentry/utils" "7.120.0"
 
-"@sentry/babel-plugin-component-annotate@3.1.0":
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/@sentry/babel-plugin-component-annotate/-/babel-plugin-component-annotate-3.1.0.tgz#92c71ec74ee0950cfe67b9de426dab1e7735e709"
-  integrity sha512-G6DHlFVNPzUW8ox2YUADwJsXDgT0EF8HA68MpIcoO87eYC8aJLbDU4tHGs/ZLk7gvhNBFEJzaKjNKeLUQ9f36A==
+"@sentry/babel-plugin-component-annotate@3.1.1":
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/@sentry/babel-plugin-component-annotate/-/babel-plugin-component-annotate-3.1.1.tgz#a10f63d642095ffabb42dd30898e3303e2c8c762"
+  integrity sha512-gp6lFDhrpuVQSQ+N7zKCMJOyYkYoUs4AQlNQctZMRCpp6URGy+eGj5YDPdMNCFylVs8M6t1C6gbBqzrd5sz9Pg==
 
 "@sentry/browser@8.51.0":
   version "8.51.0"
@@ -1224,13 +1224,13 @@
     "@sentry-internal/replay-canvas" "8.51.0"
     "@sentry/core" "8.51.0"
 
-"@sentry/bundler-plugin-core@3.1.0":
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/@sentry/bundler-plugin-core/-/bundler-plugin-core-3.1.0.tgz#4a5e1801b40025b005e61f0f184ab7145274a4fb"
-  integrity sha512-4BmgU95tVjsiOvbHwVrtTV2P8M78N9zsWjSBHoRcjmTCp8HY+Q3Ok+/SJb+KaPuRpHe1A6zknl3qdjSUv0BXhA==
+"@sentry/bundler-plugin-core@3.1.1":
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/@sentry/bundler-plugin-core/-/bundler-plugin-core-3.1.1.tgz#330be53ac6e64b93b0d2e8f301612fc0cecb5b30"
+  integrity sha512-FlYucOSGyujmhA5e1eDhwk+OmuM2RO9yljoBMjEFxtX6gIRioolmPvVa+8FowBMEd594KHPt9MyjOuAwsVIXwg==
   dependencies:
     "@babel/core" "^7.18.5"
-    "@sentry/babel-plugin-component-annotate" "3.1.0"
+    "@sentry/babel-plugin-component-annotate" "3.1.1"
     "@sentry/cli" "2.39.1"
     dotenv "^16.3.1"
     find-up "^5.0.0"
@@ -1338,12 +1338,12 @@
   dependencies:
     "@sentry/types" "7.120.0"
 
-"@sentry/vite-plugin@^3.1.0":
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/@sentry/vite-plugin/-/vite-plugin-3.1.0.tgz#0ba73cc907f3ef14b4781b68d08b576ad4048afe"
-  integrity sha512-N9fhLOFGSrb5pRg0vIcNX3r2SciTyxMfyHz/tdSSqVTeEA7i7RuHdL0k6ZYzsDY8QLrXygOS2JSpSSd2ni3eUw==
+"@sentry/vite-plugin@^3.1.1":
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/@sentry/vite-plugin/-/vite-plugin-3.1.1.tgz#e66f5f9f1a6df2209f0afc4584b890b289ce2e6b"
+  integrity sha512-Vdh9twaTT1KTzG92YzGtsLpjydAmU3PSgH/4FEJrwAfT+Tr31qo3eHeagw27jrJduzM8SK1t/t6A/DH3FrtC5g==
   dependencies:
-    "@sentry/bundler-plugin-core" "3.1.0"
+    "@sentry/bundler-plugin-core" "3.1.1"
     unplugin "1.0.1"
 
 "@sentry/vue@8.51.0":
