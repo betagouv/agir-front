@@ -17,7 +17,6 @@
   const { titreEmoji = '😊', titreTexte } = defineProps<{
     titreEmoji: string;
     titreTexte: string;
-    lienBouton: string;
   }>();
 </script>
 

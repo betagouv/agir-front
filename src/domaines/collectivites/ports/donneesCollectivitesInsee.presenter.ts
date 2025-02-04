@@ -8,10 +8,11 @@ export interface ArticleOuAideCollectiviteViewModel extends ViewModelWithUrl {
   titre: string;
 }
 
-interface AccordeonCollectiviteViewModel {
+interface CarteThematique {
+  emoji: string;
   titre: string;
-  id: string;
-  contenu: ArticleOuAideCollectiviteViewModel[];
+  articles: ArticleOuAideCollectiviteViewModel[];
+  aides: ArticleOuAideCollectiviteViewModel[];
 }
 
 export interface DonneesCollectivitesInseeViewModel {
@@ -23,8 +24,7 @@ export interface DonneesCollectivitesInseeViewModel {
   indicationNombreUtilisateurs: string;
   indicationAidesEtArticles: string;
 
-  aides: AccordeonCollectiviteViewModel[];
-  articles: AccordeonCollectiviteViewModel[];
+  cartesThematiques: CarteThematique[];
 
   nombreDeDefi: {
     enCours: number;

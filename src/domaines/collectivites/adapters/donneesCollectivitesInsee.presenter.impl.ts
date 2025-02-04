@@ -7,7 +7,9 @@ import {
   AideOuArticleDeCollectivite,
   DonneesCollectivitesINSEE,
 } from '@/domaines/collectivites/recupererDonneesCollectivitesInsee.usecase';
+import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 import { RouteAidesName } from '@/router/aides/routeAidesName';
+import { RouteArticleName } from '@/router/articles/routes';
 
 export class DonneesCollectivitesInseePresenterImpl implements DonneesCollectivitesInseePresenter {
   constructor(
@@ -20,6 +22,18 @@ export class DonneesCollectivitesInseePresenterImpl implements DonneesCollectivi
     const indicationNombreUtilisateurs = this.genererIndicationNombreDUtilisateurs(donneesCollectivites);
     const indicationAidesEtArticles = this.genererIndicationAidesEtArticles(donneesCollectivites);
 
+    const aides: ArticleOuAideCollectiviteViewModel[] = [
+      ...this.mapToAideViewModel(donneesCollectivites.aides.nationales),
+      ...this.mapToAideViewModel(donneesCollectivites.aides.regionales),
+      ...this.mapToAideViewModel(donneesCollectivites.aides.departementales),
+      ...this.mapToAideViewModel(donneesCollectivites.aides.locales),
+    ];
+    const articles: ArticleOuAideCollectiviteViewModel[] = [
+      ...this.mapToArticleViewModel(donneesCollectivites.articles.regionales),
+      ...this.mapToArticleViewModel(donneesCollectivites.articles.departementales),
+      ...this.mapToArticleViewModel(donneesCollectivites.articles.locales),
+    ];
+
     this.viewModel({
       nom: donneesCollectivites.nom,
       departement: donneesCollectivites.departement,
@@ -29,45 +43,33 @@ export class DonneesCollectivitesInseePresenterImpl implements DonneesCollectivi
       indicationNombreUtilisateurs,
       indicationAidesEtArticles,
 
-      aides: this.retirerCategoriesVides([
+      cartesThematiques: [
         {
-          titre: 'Les aides nationales',
-          id: 'aides-nationales',
-          contenu: this.mapToAideViewModel(donneesCollectivites.aides.nationales),
+          emoji: '📺',
+          titre: 'Mes achats',
+          aides: aides.filter(aide => aide.thematiques.includes(ClefThematiqueAPI.consommation)),
+          articles: articles.filter(aide => aide.thematiques.includes(ClefThematiqueAPI.consommation)),
         },
         {
-          titre: 'Les aides régionales',
-          id: 'aides-regionales',
-          contenu: this.mapToAideViewModel(donneesCollectivites.aides.regionales),
+          emoji: '🍛',
+          titre: 'Me nourrir',
+          aides: aides.filter(aide => aide.thematiques.includes(ClefThematiqueAPI.alimentation)),
+          articles: articles.filter(aide => aide.thematiques.includes(ClefThematiqueAPI.alimentation)),
         },
         {
-          titre: 'Les aides départementales',
-          id: 'aides-departementales',
-          contenu: this.mapToAideViewModel(donneesCollectivites.aides.departementales),
+          emoji: '🚲',
+          titre: 'Me déplacer',
+          aides: aides.filter(aide => aide.thematiques.includes(ClefThematiqueAPI.transports)),
+          articles: articles.filter(aide => aide.thematiques.includes(ClefThematiqueAPI.transports)),
         },
         {
-          titre: 'Les aides locales',
-          id: 'aides-locales',
-          contenu: this.mapToAideViewModel(donneesCollectivites.aides.locales),
+          emoji: '🧱',
+          titre: 'Me loger',
+          aides: aides.filter(aide => aide.thematiques.includes(ClefThematiqueAPI.logement)),
+          articles: articles.filter(aide => aide.thematiques.includes(ClefThematiqueAPI.logement)),
         },
-      ]),
-      articles: this.retirerCategoriesVides([
-        {
-          titre: 'Les articles régionaux',
-          id: 'articles-regionaux',
-          contenu: this.mapToArticleViewModel(donneesCollectivites.articles.regionales),
-        },
-        {
-          titre: 'Les articles départementaux',
-          id: 'articles-departementaux',
-          contenu: this.mapToArticleViewModel(donneesCollectivites.articles.departementales),
-        },
-        {
-          titre: 'Les articles locaux',
-          id: 'articles-locaux',
-          contenu: this.mapToArticleViewModel(donneesCollectivites.articles.locales),
-        },
-      ]),
+      ],
+
       nombreDeDefi: {
         enCours: donneesCollectivites.nombreDefisEnCours,
         realises: donneesCollectivites.nombreDefisRealises,
@@ -90,9 +92,16 @@ export class DonneesCollectivitesInseePresenterImpl implements DonneesCollectivi
       donneesCollectivites.articles.departementales.length +
       donneesCollectivites.articles.locales.length;
 
-    let indicationAidesEtArticles = `<i>J'agis</i> recense <span class="text--bold">${aidesDisponibles}</span> aides`;
+    const aides = aidesDisponibles
+      ? `<span class="text--bold">${aidesDisponibles}</span> ${aidesDisponibles === 1 ? 'aide' : 'aides'}`
+      : undefined;
+    const articles = articlesDisponibles
+      ? `<span class="text--bold">${articlesDisponibles}</span> ${articlesDisponibles === 1 ? 'article' : 'articles'}`
+      : undefined;
+
+    let indicationAidesEtArticles = `<i>J'agis</i> recense ${aides}`;
     if (articlesDisponibles) {
-      indicationAidesEtArticles += `, ainsi que <span class="text--bold">${articlesDisponibles}</span> articles`;
+      indicationAidesEtArticles += `, ainsi que ${articles}`;
     }
     indicationAidesEtArticles += ` pour vos habitants !`;
     return indicationAidesEtArticles;
@@ -120,11 +129,7 @@ export class DonneesCollectivitesInseePresenterImpl implements DonneesCollectivi
   private mapToArticleViewModel(articles: AideOuArticleDeCollectivite[]): ArticleOuAideCollectiviteViewModel[] {
     return articles.map(article => ({
       ...article,
-      url: { name: RouteAidesName.AIDE_PREVISUALISATION, params: { id: article.id } },
+      url: { name: RouteArticleName.ARTICLE_PREVISUALISATION, params: { id: article.id } },
     }));
-  }
-
-  private retirerCategoriesVides(aides) {
-    return aides.filter(aide => aide.contenu && aide.contenu.length > 0);
   }
 }

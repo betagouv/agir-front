@@ -66,9 +66,6 @@
       .then(async () => {
         await router.push({ path: '/collectivitesEPCI', query: { insee } });
       })
-      .catch(erreur => {
-        // TODO: erreur
-      })
       .finally(() => {
         isLoadingDetail.value = false;
       });
@@ -77,8 +74,6 @@
   const trackCollectivitesClick = insee => {
     trackClick('Collectivité', `Code INSEE : ${insee}`);
   };
-
-  const resetAffichage = () => {};
 </script>
 
 <style scoped>
