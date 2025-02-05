@@ -89,7 +89,7 @@ export class ArticleRepositoryAxios implements ArticleRepository {
     };
   }
 
-  async previsualiser(articleId: string): Promise<Article> {
+  async recupererHorsConnexion(articleId: string): Promise<Article> {
     const axios = AxiosFactory.getAxios();
     const article = await axios.get(`/bibliotheque/articles/${articleId}`);
 

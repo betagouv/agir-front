@@ -13,18 +13,23 @@ export class MockArticleRepository implements ArticleRepository {
       estEnFavori: false,
     });
   }
-  previsualiser(articleId: string): Promise<Article> {
+
+  recupererHorsConnexion(articleId: string): Promise<Article> {
     throw new Error('Method not implemented.');
   }
+
   retirerDesFavoris(articleId: string, utilisateurId: string): Promise<void> {
     return Promise.resolve();
   }
+
   ajouterAuxFavoris(idArticle: string, idUtilisateur: string): Promise<void> {
     return Promise.resolve();
   }
+
   noterArticle(interactionId: string, utilisateurId: string, note: 1 | 2 | 3 | 4): Promise<void> {
     return Promise.resolve();
   }
+
   async marquerCommeLu(interactionId, utilisateurId) {
     return;
   }

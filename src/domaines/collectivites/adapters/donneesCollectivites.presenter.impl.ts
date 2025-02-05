@@ -23,7 +23,10 @@ export class DonneesCollectivitesPresenterImpl implements DonneesCollectivitesPr
 
     const articlesLocaux: ArticleLocalViewModel[] = donneesCollectivites.articles.map(article => ({
       ...article,
-      url: { name: RouteArticleName.ARTICLE_PREVISUALISATION, params: { id: article.id } },
+      url: {
+        name: RouteArticleName.ARTICLE_PAR_TITRE_ET_ID,
+        params: { id: article.id, titre: buildUrl(article.titre) },
+      },
     }));
     const filtrerArticlesLocauxParThematique = (clef: ClefThematiqueAPI) =>
       articlesLocaux.filter(article => article.thematique === clef);
