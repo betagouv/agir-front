@@ -15,23 +15,12 @@
     >
       <div v-if="carte.aides.length > 0">
         <p class="fr-m-0">Les <span class="text--bold">aides</span> disponibles :</p>
-
-        <ul>
-          <li v-for="aide in carte.aides" :key="aide.id">
-            <router-link :to="aide.url" target="_blank">{{ aide.titre }}</router-link
-            >&nbsp;<i>({{ aide.indicationGeographique }})</i>
-          </li>
-        </ul>
+        <CollectiviteListeContenu :contenus="carte.aides" />
       </div>
 
       <div v-if="carte.articles.length > 0">
         <p class="fr-m-0">Les <span class="text--bold">articles</span> <i>J'agis</i> :</p>
-        <ul>
-          <li v-for="article in carte.articles" :key="article.id">
-            <router-link :to="article.url">{{ article.titre }}</router-link>
-            ({{ article.indicationGeographique }})
-          </li>
-        </ul>
+        <CollectiviteListeContenu :contenus="carte.articles" />
       </div>
 
       <p v-if="carte.articles.length === 0 && carte.aides.length === 0">Aucun contenu disponible pour l'instant !</p>
@@ -41,6 +30,7 @@
 
 <script setup lang="ts">
   import CarteDecouverte from '@/components/custom/Collectivites/CarteDecouverte.vue';
+  import CollectiviteListeContenu from '@/components/custom/Collectivites/CollectiviteListeContenu.vue';
   import { DonneesCollectivitesInseeViewModel } from '@/domaines/collectivites/ports/donneesCollectivitesInsee.presenter';
 
   defineProps<{
