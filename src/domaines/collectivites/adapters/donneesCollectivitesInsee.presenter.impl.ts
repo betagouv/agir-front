@@ -47,7 +47,7 @@ export class DonneesCollectivitesInseePresenterImpl implements DonneesCollectivi
 
   private transformerAidesVeloEnViewModel(simulationVelo: SimulationVelo): ContenuSupplementaireCollectivitesViewModel {
     const listeAidesVelo = Object.entries(simulationVelo)
-      .filter(([_, aidesList]) => aidesList.length > 0)
+      .filter(([, aidesList]) => aidesList.length > 0)
       .map(([type, aidesList]) => {
         const maxMontant = Math.max(...aidesList.map(aide => aide.plafond));
         const typeVelo = type.charAt(0).toUpperCase() + type.slice(1);

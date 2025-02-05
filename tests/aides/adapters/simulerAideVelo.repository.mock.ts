@@ -7,4 +7,8 @@ export class SimulerAideVeloRepositoryMock implements SimulerAideVeloRepository 
   getSimulation(_prixDuVelo: number, _utilisateurId: string): Promise<SimulationVelo> {
     return Promise.resolve(this.simulationVeloARetourner);
   }
+
+  getSimulationDepuisInsee(_insee: string): Promise<SimulationVelo> {
+    return Promise.resolve(this.simulationVeloARetourner);
+  }
 }
