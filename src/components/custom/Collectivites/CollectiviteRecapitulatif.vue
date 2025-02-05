@@ -23,14 +23,14 @@
         <CollectiviteListeContenu :contenus="carte.articles" />
       </div>
 
-      <div v-if="carte.contenusSupplementaires && carte.contenusSupplementaires.length > 0">
-        <div v-for="contenu in carte.contenusSupplementaires" :key="contenu.titre">
+      <template v-for="contenu in carte.contenusSupplementaires">
+        <div :key="contenu.titre" v-if="contenu.liste.length > 0">
           <p class="fr-m-0" v-html="contenu.titre" />
           <ul>
             <li v-for="item in contenu.liste" :key="item" v-html="item" />
           </ul>
         </div>
-      </div>
+      </template>
 
       <p v-if="carte.articles.length === 0 && carte.aides.length === 0 && carte.contenusSupplementaires.length === 0">
         Aucun contenu disponible pour l'instant !
