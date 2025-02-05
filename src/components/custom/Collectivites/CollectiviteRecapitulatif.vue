@@ -23,7 +23,18 @@
         <CollectiviteListeContenu :contenus="carte.articles" />
       </div>
 
-      <p v-if="carte.articles.length === 0 && carte.aides.length === 0">Aucun contenu disponible pour l'instant !</p>
+      <div v-if="carte.contenusSupplementaires && carte.contenusSupplementaires.length > 0">
+        <div v-for="contenu in carte.contenusSupplementaires" :key="contenu.titre">
+          <p class="fr-m-0" v-html="contenu.titre" />
+          <ul>
+            <li v-for="item in contenu.liste" :key="item" v-html="item" />
+          </ul>
+        </div>
+      </div>
+
+      <p v-if="carte.articles.length === 0 && carte.aides.length === 0 && carte.contenusSupplementaires.length === 0">
+        Aucun contenu disponible pour l'instant !
+      </p>
     </CarteDecouverte>
   </div>
 </template>

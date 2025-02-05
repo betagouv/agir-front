@@ -2,4 +2,5 @@ import { EtatVelo, SimulationVelo } from '@/domaines/aides/simulerAideVelo.useca
 
 export interface SimulerAideVeloRepository {
   getSimulation(prixDuVelo: number, etatDuVelo: EtatVelo, utilisateurId: string): Promise<SimulationVelo>;
+  getSimulationDepuisInsee(insee: string): Promise<SimulationVelo>;
 }

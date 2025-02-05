@@ -1,3 +1,4 @@
+import { SimulerAideVeloRepository } from '@/domaines/aides/ports/simulerAideVelo.repository';
 import { DonneesCollectivitesRepository } from '@/domaines/collectivites/ports/donneesCollectivites.repository';
 import { DonneesCollectivitesInseePresenter } from '@/domaines/collectivites/ports/donneesCollectivitesInsee.presenter';
 import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
@@ -35,10 +36,14 @@ export interface DonneesCollectivitesINSEE {
 }
 
 export class RecupererDonneesCollectivitesInsee {
-  constructor(private readonly donneesCollectivitesRepository: DonneesCollectivitesRepository) {}
+  constructor(
+    private readonly donneesCollectivitesRepository: DonneesCollectivitesRepository,
+    private readonly simulationAideVeloRepository: SimulerAideVeloRepository,
+  ) {}
 
   async execute(insee: string, presenter: DonneesCollectivitesInseePresenter): Promise<void> {
     const donneesCollectivites = await this.donneesCollectivitesRepository.recupererDonneesInsee(insee);
-    presenter.afficherDonneesInsee(donneesCollectivites);
+    const aidesVelos = await this.simulationAideVeloRepository.getSimulationDepuisInsee(insee);
+    presenter.afficherDonneesInsee(donneesCollectivites, aidesVelos);
   }
 }

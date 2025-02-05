@@ -1,5 +1,8 @@
+import { SimulationVelo } from '@/domaines/aides/simulerAideVelo.usecase';
 import {
   ArticleOuAideCollectiviteViewModel,
+  CarteThematique,
+  ContenuSupplementaireCollectivitesViewModel,
   DonneesCollectivitesInseePresenter,
   DonneesCollectivitesInseeViewModel,
   IndicationGeoArticleOuAideViewModel,
@@ -15,7 +18,7 @@ import { RouteArticleName } from '@/router/articles/routes';
 export class DonneesCollectivitesInseePresenterImpl implements DonneesCollectivitesInseePresenter {
   constructor(private readonly viewModel: (vm: DonneesCollectivitesInseeViewModel) => void) {}
 
-  afficherDonneesInsee(donnees: DonneesCollectivitesINSEE) {
+  afficherDonneesInsee(donnees: DonneesCollectivitesINSEE, simulationVelo: SimulationVelo) {
     const scope: IndicationGeoArticleOuAideViewModel = {
       nom: donnees.nom,
       departement: donnees.departement,
@@ -28,15 +31,35 @@ export class DonneesCollectivitesInseePresenterImpl implements DonneesCollectivi
       scope,
     );
 
+    const aidesVelo = this.transformerAidesVeloEnViewModel(simulationVelo);
+    const contenuSupplementaires = [aidesVelo];
+
     this.viewModel({
       ...scope,
       listeCommunesPourEPCI: donnees.estEPCI ? donnees.listeCommunesPourEPCI.join(', ') : undefined,
       indicationNombreUtilisateurs: this.genererIndicationNombreUtilisateurs(donnees),
       indicationAidesEtArticles: this.genererIndicationAidesEtArticles(donnees),
-      cartesThematiques: this.genererCartesThematiques(aides, articles),
+      cartesThematiques: this.genererCartesThematiques(aides, articles, contenuSupplementaires),
       nombreDeDefi: { enCours: donnees.nombreDefisEnCours, realises: donnees.nombreDefisRealises },
       nombreInscrits: { total: donnees.nombreInscrits, local: donnees.nombreInscritsLocaux },
     });
+  }
+
+  private transformerAidesVeloEnViewModel(simulationVelo: SimulationVelo): ContenuSupplementaireCollectivitesViewModel {
+    const listeAidesVelo = Object.entries(simulationVelo)
+      .filter(([_, aidesList]) => aidesList.length > 0)
+      .map(([type, aidesList]) => {
+        const maxMontant = Math.max(...aidesList.map(aide => aide.plafond));
+        const typeVelo = type.charAt(0).toUpperCase() + type.slice(1);
+        return `<span class="text--bold">Vélo ${typeVelo}</span>: ${aidesList.length} aide(s) jusqu'à ${maxMontant} euros.`;
+      });
+
+    return {
+      emoji: '🚲',
+      thematiques: [ClefThematiqueAPI.transports],
+      titre: 'Les <span class="text--bold">aides vélo</span> :',
+      liste: listeAidesVelo,
+    };
   }
 
   private genererIndicationAidesEtArticles(donnees: DonneesCollectivitesINSEE): string {
@@ -68,7 +91,8 @@ export class DonneesCollectivitesInseePresenterImpl implements DonneesCollectivi
   private genererCartesThematiques(
     aides: ArticleOuAideCollectiviteViewModel[],
     articles: ArticleOuAideCollectiviteViewModel[],
-  ) {
+    contenuSupplementaires: ContenuSupplementaireCollectivitesViewModel[],
+  ): CarteThematique[] {
     return [
       { emoji: '📺', titre: 'Mes achats', thematique: ClefThematiqueAPI.consommation },
       { emoji: '🍛', titre: 'Me nourrir', thematique: ClefThematiqueAPI.alimentation },
@@ -79,6 +103,7 @@ export class DonneesCollectivitesInseePresenterImpl implements DonneesCollectivi
       titre,
       aides: aides.filter(a => a.thematiques.includes(thematique)),
       articles: articles.filter(a => a.thematiques.includes(thematique)),
+      contenusSupplementaires: contenuSupplementaires.filter(a => a.thematiques.includes(thematique)),
     }));
   }
 
@@ -87,11 +112,11 @@ export class DonneesCollectivitesInseePresenterImpl implements DonneesCollectivi
     route: string,
     geographieDuContenu: IndicationGeoArticleOuAideViewModel,
   ): ArticleOuAideCollectiviteViewModel[] {
-    return Object.entries(data).flatMap(([scope, liste]) => {
-      return liste.map(item => ({
+    return Object.entries(data).flatMap(([indicationGeographique, contenus]) => {
+      return contenus.map(item => ({
         ...item,
         url: { name: route, params: { id: item.id } },
-        indicationGeographique: this.recupererPrecisionGeographique(geographieDuContenu, scope),
+        indicationGeographique: this.recupererPrecisionGeographique(geographieDuContenu, indicationGeographique),
       }));
     });
   }

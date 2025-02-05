@@ -30,6 +30,7 @@
   import CollectivitesInseeRecherche from '@/components/custom/Collectivites/CollectivitesInseeRecherche.vue';
   import LandingCollectivite from '@/components/custom/Landing/LandingCollectivite.vue';
   import CarteSkeleton from '@/components/custom/Skeleton/CarteSkeleton.vue';
+  import { SimulerAideVeloRepositoryAxios } from '@/domaines/aides/adapters/simulerAideVelo.repository.axios';
   import { DonneesCollectivitesRepositoryAxios } from '@/domaines/collectivites/adapters/donneesCollectivites.repository.axios';
   import { DonneesCollectivitesInseePresenterImpl } from '@/domaines/collectivites/adapters/donneesCollectivitesInsee.presenter.impl';
   import { DonneesCollectivitesInseeViewModel } from '@/domaines/collectivites/ports/donneesCollectivitesInsee.presenter';
@@ -44,6 +45,7 @@
 
   const recupererDonneesCollectivitesInsee = new RecupererDonneesCollectivitesInsee(
     new DonneesCollectivitesRepositoryAxios(),
+    new SimulerAideVeloRepositoryAxios(),
   );
 
   onMounted(() => {
