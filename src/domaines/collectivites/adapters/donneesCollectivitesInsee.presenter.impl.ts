@@ -2,6 +2,7 @@ import {
   ArticleOuAideCollectiviteViewModel,
   DonneesCollectivitesInseePresenter,
   DonneesCollectivitesInseeViewModel,
+  IndicationGeoArticleOuAideViewModel,
 } from '@/domaines/collectivites/ports/donneesCollectivitesInsee.presenter';
 import {
   AideOuArticleDeCollectivite,
@@ -12,124 +13,100 @@ import { RouteAidesName } from '@/router/aides/routeAidesName';
 import { RouteArticleName } from '@/router/articles/routes';
 
 export class DonneesCollectivitesInseePresenterImpl implements DonneesCollectivitesInseePresenter {
-  constructor(
-    private readonly viewModel: (donneesCollectivitesViewModel: DonneesCollectivitesInseeViewModel) => void,
-  ) {}
+  constructor(private readonly viewModel: (vm: DonneesCollectivitesInseeViewModel) => void) {}
 
-  afficherDonneesInsee(donneesCollectivites: DonneesCollectivitesINSEE) {
-    const listeCommunesPourEPCI = donneesCollectivites.listeCommunesPourEPCI.join(', ');
-
-    const indicationNombreUtilisateurs = this.genererIndicationNombreDUtilisateurs(donneesCollectivites);
-    const indicationAidesEtArticles = this.genererIndicationAidesEtArticles(donneesCollectivites);
-
-    const aides: ArticleOuAideCollectiviteViewModel[] = [
-      ...this.mapToAideViewModel(donneesCollectivites.aides.nationales),
-      ...this.mapToAideViewModel(donneesCollectivites.aides.regionales),
-      ...this.mapToAideViewModel(donneesCollectivites.aides.departementales),
-      ...this.mapToAideViewModel(donneesCollectivites.aides.locales),
-    ];
-    const articles: ArticleOuAideCollectiviteViewModel[] = [
-      ...this.mapToArticleViewModel(donneesCollectivites.articles.regionales),
-      ...this.mapToArticleViewModel(donneesCollectivites.articles.departementales),
-      ...this.mapToArticleViewModel(donneesCollectivites.articles.locales),
-    ];
+  afficherDonneesInsee(donnees: DonneesCollectivitesINSEE) {
+    const scope: IndicationGeoArticleOuAideViewModel = {
+      nom: donnees.nom,
+      departement: donnees.departement,
+      region: donnees.region,
+    };
+    const aides = this.transformerObjetEnViewModel(donnees.aides, RouteAidesName.AIDE_PREVISUALISATION, scope);
+    const articles = this.transformerObjetEnViewModel(
+      donnees.articles,
+      RouteArticleName.ARTICLE_PREVISUALISATION,
+      scope,
+    );
 
     this.viewModel({
-      nom: donneesCollectivites.nom,
-      departement: donneesCollectivites.departement,
-      region: donneesCollectivites.region,
-      listeCommunesPourEPCI: donneesCollectivites.estEPCI ? listeCommunesPourEPCI : undefined,
-
-      indicationNombreUtilisateurs,
-      indicationAidesEtArticles,
-
-      cartesThematiques: [
-        {
-          emoji: '📺',
-          titre: 'Mes achats',
-          aides: aides.filter(aide => aide.thematiques.includes(ClefThematiqueAPI.consommation)),
-          articles: articles.filter(aide => aide.thematiques.includes(ClefThematiqueAPI.consommation)),
-        },
-        {
-          emoji: '🍛',
-          titre: 'Me nourrir',
-          aides: aides.filter(aide => aide.thematiques.includes(ClefThematiqueAPI.alimentation)),
-          articles: articles.filter(aide => aide.thematiques.includes(ClefThematiqueAPI.alimentation)),
-        },
-        {
-          emoji: '🚲',
-          titre: 'Me déplacer',
-          aides: aides.filter(aide => aide.thematiques.includes(ClefThematiqueAPI.transports)),
-          articles: articles.filter(aide => aide.thematiques.includes(ClefThematiqueAPI.transports)),
-        },
-        {
-          emoji: '🧱',
-          titre: 'Me loger',
-          aides: aides.filter(aide => aide.thematiques.includes(ClefThematiqueAPI.logement)),
-          articles: articles.filter(aide => aide.thematiques.includes(ClefThematiqueAPI.logement)),
-        },
-      ],
-
-      nombreDeDefi: {
-        enCours: donneesCollectivites.nombreDefisEnCours,
-        realises: donneesCollectivites.nombreDefisRealises,
-      },
-      nombreInscrits: {
-        total: donneesCollectivites.nombreInscrits,
-        local: donneesCollectivites.nombreInscritsLocaux,
-      },
+      ...scope,
+      listeCommunesPourEPCI: donnees.estEPCI ? donnees.listeCommunesPourEPCI.join(', ') : undefined,
+      indicationNombreUtilisateurs: this.genererIndicationNombreUtilisateurs(donnees),
+      indicationAidesEtArticles: this.genererIndicationAidesEtArticles(donnees),
+      cartesThematiques: this.genererCartesThematiques(aides, articles),
+      nombreDeDefi: { enCours: donnees.nombreDefisEnCours, realises: donnees.nombreDefisRealises },
+      nombreInscrits: { total: donnees.nombreInscrits, local: donnees.nombreInscritsLocaux },
     });
   }
 
-  private genererIndicationAidesEtArticles(donneesCollectivites: DonneesCollectivitesINSEE) {
-    const aidesDisponibles =
-      donneesCollectivites.aides.nationales.length +
-      donneesCollectivites.aides.regionales.length +
-      donneesCollectivites.aides.departementales.length +
-      donneesCollectivites.aides.locales.length;
-    const articlesDisponibles =
-      donneesCollectivites.articles.regionales.length +
-      donneesCollectivites.articles.departementales.length +
-      donneesCollectivites.articles.locales.length;
+  private genererIndicationAidesEtArticles(donnees: DonneesCollectivitesINSEE): string {
+    const nombreDaides = this.compterTotal(donnees.aides);
+    const nombreDarticles = this.compterTotal(donnees.articles);
 
-    const aides = aidesDisponibles
-      ? `<span class="text--bold">${aidesDisponibles}</span> ${aidesDisponibles === 1 ? 'aide' : 'aides'}`
+    const aides = nombreDaides
+      ? `<span class="text--bold">${nombreDaides}</span> ${nombreDaides === 1 ? 'aide' : 'aides'}`
       : undefined;
-    const articles = articlesDisponibles
-      ? `<span class="text--bold">${articlesDisponibles}</span> ${articlesDisponibles === 1 ? 'article' : 'articles'}`
+    const articles = nombreDarticles
+      ? `<span class="text--bold">${nombreDarticles}</span> ${nombreDarticles === 1 ? 'article' : 'articles'}`
       : undefined;
 
     let indicationAidesEtArticles = `<i>J'agis</i> recense ${aides}`;
-    if (articlesDisponibles) {
+    if (nombreDarticles) {
       indicationAidesEtArticles += `, ainsi que ${articles}`;
     }
     indicationAidesEtArticles += ` pour vos habitants !`;
     return indicationAidesEtArticles;
   }
 
-  private genererIndicationNombreDUtilisateurs(donneesCollectivites: DonneesCollectivitesINSEE) {
-    if (donneesCollectivites.nombreInscritsLocaux === 0) {
-      return `La collectivité ne compte <span class="text--bold">aucun</span> utilisateur inscrit à hauteur des <span class="text--bold">${donneesCollectivites.nombreInscrits}</span> inscrits.`;
-    }
-
-    if (donneesCollectivites.nombreInscritsLocaux === 1) {
-      return `La collectivité dispose d'<span class="text--bold">un</span> utilisateur inscrit à hauteur des <span class="text--bold">${donneesCollectivites.nombreInscrits}</span> inscrits.`;
-    }
-
-    return `La collectivité dispose de <span class="text--bold">${donneesCollectivites.nombreInscritsLocaux}</span> utilisateurs inscrits parmi les <span class="text--bold">${donneesCollectivites.nombreInscrits}</span> utilisateurs.`;
+  private genererIndicationNombreUtilisateurs(donnees: DonneesCollectivitesINSEE): string {
+    const { nombreInscrits, nombreInscritsLocaux } = donnees;
+    if (!nombreInscritsLocaux)
+      return `La collectivité ne compte <span class="text--bold">aucun</span> utilisateur inscrit sur ${nombreInscrits} inscrits.`;
+    return `La collectivité dispose de <span class="text--bold">${nombreInscritsLocaux}</span> utilisateur(s) inscrit(s) parmi les <span class="text--bold">${nombreInscrits}</span> utilisateurs.`;
   }
 
-  private mapToAideViewModel(aides: AideOuArticleDeCollectivite[]): ArticleOuAideCollectiviteViewModel[] {
-    return aides.map(aide => ({
-      ...aide,
-      url: { name: RouteAidesName.AIDE_PREVISUALISATION, params: { id: aide.id } },
+  private genererCartesThematiques(
+    aides: ArticleOuAideCollectiviteViewModel[],
+    articles: ArticleOuAideCollectiviteViewModel[],
+  ) {
+    return [
+      { emoji: '📺', titre: 'Mes achats', thematique: ClefThematiqueAPI.consommation },
+      { emoji: '🍛', titre: 'Me nourrir', thematique: ClefThematiqueAPI.alimentation },
+      { emoji: '🚲', titre: 'Me déplacer', thematique: ClefThematiqueAPI.transports },
+      { emoji: '🧱', titre: 'Me loger', thematique: ClefThematiqueAPI.logement },
+    ].map(({ emoji, titre, thematique }) => ({
+      emoji,
+      titre,
+      aides: aides.filter(a => a.thematiques.includes(thematique)),
+      articles: articles.filter(a => a.thematiques.includes(thematique)),
     }));
   }
 
-  private mapToArticleViewModel(articles: AideOuArticleDeCollectivite[]): ArticleOuAideCollectiviteViewModel[] {
-    return articles.map(article => ({
-      ...article,
-      url: { name: RouteArticleName.ARTICLE_PREVISUALISATION, params: { id: article.id } },
-    }));
+  private transformerObjetEnViewModel(
+    data: Record<string, AideOuArticleDeCollectivite[]>,
+    route: string,
+    geographieDuContenu: IndicationGeoArticleOuAideViewModel,
+  ): ArticleOuAideCollectiviteViewModel[] {
+    return Object.entries(data).flatMap(([scope, liste]) => {
+      return liste.map(item => ({
+        ...item,
+        url: { name: route, params: { id: item.id } },
+        indicationGeographique: this.recupererPrecisionGeographique(geographieDuContenu, scope),
+      }));
+    });
+  }
+
+  private recupererPrecisionGeographique(
+    geographieDuContenu: IndicationGeoArticleOuAideViewModel,
+    indicationGeographique: string,
+  ) {
+    if (indicationGeographique === 'regionales') return geographieDuContenu.region;
+    if (indicationGeographique === 'departementales') return geographieDuContenu.departement;
+    if (indicationGeographique === 'locales') return geographieDuContenu.nom;
+    return '🇫🇷';
+  }
+
+  private compterTotal(data: Record<string, AideOuArticleDeCollectivite[]>): number {
+    return Object.values(data).flat().length;
   }
 }

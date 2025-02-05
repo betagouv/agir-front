@@ -3,8 +3,8 @@
     <i>J'agis</i> en quelques chiffres pour <i>{{ collectiviteInseeViewModel.nom }}</i> !
   </h2>
 
-  <p v-html="collectiviteInseeViewModel.indicationNombreUtilisateurs"></p>
-  <p v-html="collectiviteInseeViewModel.indicationAidesEtArticles"></p>
+  <p v-html="collectiviteInseeViewModel.indicationNombreUtilisateurs" />
+  <p v-html="collectiviteInseeViewModel.indicationAidesEtArticles" />
 
   <div class="fr-grid-row fr-grid-row--gutters">
     <CarteDecouverte
@@ -18,16 +18,18 @@
 
         <ul>
           <li v-for="aide in carte.aides" :key="aide.id">
-            <router-link :to="aide.url" target="_blank">{{ aide.titre }}</router-link>
+            <router-link :to="aide.url" target="_blank">{{ aide.titre }}</router-link
+            >&nbsp;<i>({{ aide.indicationGeographique }})</i>
           </li>
         </ul>
       </div>
 
       <div v-if="carte.articles.length > 0">
-        <p class="fr-m-0">Quelques <span class="text--bold">articles</span> :</p>
+        <p class="fr-m-0">Les <span class="text--bold">articles</span> <i>J'agis</i> :</p>
         <ul>
           <li v-for="article in carte.articles" :key="article.id">
             <router-link :to="article.url">{{ article.titre }}</router-link>
+            ({{ article.indicationGeographique }})
           </li>
         </ul>
       </div>

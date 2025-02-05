@@ -2,10 +2,17 @@ import { ViewModelWithUrl } from '@/domaines/collectivites/ports/donneesCollecti
 import { DonneesCollectivitesINSEE } from '@/domaines/collectivites/recupererDonneesCollectivitesInsee.usecase';
 import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 
+export interface IndicationGeoArticleOuAideViewModel {
+  nom: string;
+  departement: string;
+  region: string;
+}
+
 export interface ArticleOuAideCollectiviteViewModel extends ViewModelWithUrl {
   id: number;
-  thematiques: ClefThematiqueAPI[];
   titre: string;
+  thematiques: ClefThematiqueAPI[];
+  indicationGeographique: string;
 }
 
 interface CarteThematique {
@@ -15,10 +22,7 @@ interface CarteThematique {
   aides: ArticleOuAideCollectiviteViewModel[];
 }
 
-export interface DonneesCollectivitesInseeViewModel {
-  nom: string;
-  departement: string;
-  region: string;
+export interface DonneesCollectivitesInseeViewModel extends IndicationGeoArticleOuAideViewModel {
   listeCommunesPourEPCI?: string;
 
   indicationNombreUtilisateurs: string;
