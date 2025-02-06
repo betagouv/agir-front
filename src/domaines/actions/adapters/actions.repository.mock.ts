@@ -15,17 +15,17 @@ export class ActionsRepositoryMock implements ActionsRepository {
       recommandations: [
         {
           titre: 'Les bases de l’alimentation végétarienne : par où commencer ?',
-          image: '',
+          image: '/temp_les_bases_alim_vege.png',
           url: '',
         },
         {
-          titre: 'Les bases de l’alimentation végétarienne : par où commencer ?',
-          image: '',
+          titre: 'Comment répondre à ses besoins nutritionnels sans viande ?',
+          image: '/temp_comment_repondre_besoins_nutri.png',
           url: '',
         },
         {
-          titre: 'Les bases de l’alimentation végétarienne : par où commencer ?',
-          image: '',
+          titre: '10 recettes végétariennes pour les fêtes',
+          image: '/temp_10_recettes_pour_fetes.png',
           url: '',
         },
       ],

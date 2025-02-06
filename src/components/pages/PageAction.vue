@@ -10,14 +10,32 @@
       <h1 class="action__titre text--normal" v-html="actionViewModel.titre" />
       <p class="fr-text--lg" v-html="actionViewModel.sousTitre" />
 
-      <section class="background--white border-radius--md fr-p-2w">
+      <section class="background--white border-radius--md fr-p-2w fr-mb-3w shadow">
         <p class="action__corps-introduction fr-p-3w border-radius--md" v-html="actionViewModel.corps.introduction" />
         <p class="action__corps-astuces fr-p-3w border-radius--md" v-html="actionViewModel.corps.astuces" />
       </section>
 
-      <section>
+      <section class="fr-p-2w">
         <h2>Pour aller <span class="text--bold">plus loin</span></h2>
-        <div v-for="article in actionViewModel.recommandations" :key="article.titre">test</div>
+        <div class="fr-grid-row fr-grid-row--gutters">
+          <div
+            v-for="article in actionViewModel.recommandations"
+            :key="article.titre"
+            class="fr-col-12 fr-col-md-6 fr-col-lg-4"
+          >
+            <router-link
+              class="display-block background--white shadow border-radius--md fr-p-1w text--bold full-height background--none"
+              :to="{ path: article.url }"
+            >
+              <img
+                :src="article.image"
+                class="action__recommandations-img full-width fr-mb-1w border-radius--md"
+                alt=""
+              />
+              <h4 class="fr-h5 text--semi-bold" v-html="article.titre" />
+            </router-link>
+          </div>
+        </div>
       </section>
     </div>
     <div v-else>
@@ -80,5 +98,10 @@
   .action__corps-astuces {
     background-color: rgba(249, 251, 251, 1);
     border: 1px solid rgba(57, 130, 108, 0.2);
+  }
+
+  .action__recommandations-img {
+    height: 6rem;
+    object-fit: cover;
   }
 </style>
