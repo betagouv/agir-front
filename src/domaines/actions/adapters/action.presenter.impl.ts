@@ -1,16 +1,22 @@
 import { ActionPresenter, ActionViewModel } from '@/domaines/actions/ports/action.presenter';
 import { Action } from '@/domaines/actions/ports/actions.repository';
+import marked from '@/shell/markdownToHtml';
 
 export class ActionPresenterImpl implements ActionPresenter {
   constructor(private readonly actionViewModel: (viewModel: ActionViewModel) => void) {}
 
-  presenteAction(action: Action) {
+  async presenteAction(action: Action) {
+    const titre = await marked.parseInline(action.titre);
+    const sousTitre = await marked.parseInline(action.sousTitre);
+    const astuces = await marked.parse(action.corps.astuces);
+    const introduction = await marked.parse(action.corps.introduction);
+
     this.actionViewModel({
-      titre: action.titre,
-      sousTitre: action.sousTitre,
+      titre,
+      sousTitre,
       corps: {
-        astuces: action.corps.astuces,
-        introduction: action.corps.introduction,
+        astuces,
+        introduction,
       },
       recommandations: action.recommandations,
     });
