@@ -32,7 +32,7 @@ describe('Fichier de tests pour récuperer un défi', () => {
         libelle: 'Defi libelle',
         points: '10',
         pourquoi: 'Défi pourquoi',
-        reponse: 'todo',
+        reponse: 'en_cours',
         explicationRefus: undefined,
         reponses_possibles: [
           {
@@ -85,7 +85,7 @@ describe('Fichier de tests pour récuperer un défi', () => {
         libelle: 'Defi libelle',
         points: '10',
         pourquoi: 'Défi pourquoi',
-        reponse: 'en_cours',
+        reponse: 'fait',
         explicationRefus: undefined,
         reponses_possibles: [
           {
@@ -136,7 +136,7 @@ describe('Fichier de tests pour récuperer un défi', () => {
         points: '10',
         pourquoi: 'Défi pourquoi',
         explicationRefus: undefined,
-        reponse: 'fait',
+        reponse: 'deja_fait',
         reponses_possibles: [{ id: 'deja_fait', label: '<span aria-hidden="true">✅</span> Déjà fait' }],
         thematiqueTag: {
           label: 'Me déplacer',
@@ -181,7 +181,7 @@ describe('Fichier de tests pour récuperer un défi', () => {
           points: '10',
           pourquoi: 'Défi pourquoi',
           explicationRefus: undefined,
-          reponse: 'fait',
+          reponse: 'deja_fait',
           reponses_possibles: [{ id: 'deja_fait', label: '<span aria-hidden="true">✅</span> Déjà fait' }],
           thematiqueTag: {
             label: 'Me déplacer',
@@ -224,7 +224,7 @@ describe('Fichier de tests pour récuperer un défi', () => {
           points: '10',
           pourquoi: 'Défi pourquoi',
           explicationRefus: undefined,
-          reponse: 'fait',
+          reponse: 'deja_fait',
           reponses_possibles: [{ id: 'deja_fait', label: '<span aria-hidden="true">✅</span> Déjà fait' }],
           thematiqueTag: {
             label: 'Me déplacer',
@@ -267,7 +267,7 @@ describe('Fichier de tests pour récuperer un défi', () => {
           points: '10',
           pourquoi: 'Défi pourquoi',
           explicationRefus: undefined,
-          reponse: 'fait',
+          reponse: 'deja_fait',
           reponses_possibles: [{ id: 'deja_fait', label: '<span aria-hidden="true">✅</span> Déjà fait' }],
           thematiqueTag: {
             label: 'Me déplacer',
@@ -310,7 +310,7 @@ describe('Fichier de tests pour récuperer un défi', () => {
           points: '10',
           pourquoi: 'Défi pourquoi',
           explicationRefus: undefined,
-          reponse: 'fait',
+          reponse: 'deja_fait',
           reponses_possibles: [{ id: 'deja_fait', label: '<span aria-hidden="true">✅</span> Déjà fait' }],
           thematiqueTag: {
             label: 'Me déplacer',

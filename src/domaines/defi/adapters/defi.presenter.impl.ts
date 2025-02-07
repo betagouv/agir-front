@@ -27,17 +27,18 @@ export class DefiPresenterImpl implements DefiPresenter {
   constructor(private readonly questionViewModel: (viewModel: DefiViewModel) => void) {}
 
   presente(defi: Defi) {
+    const reponsePossibles = this.determinerReponsesPossible(defi.status);
     this.questionViewModel({
       id: defi.id,
       libelle: defi.libelle,
       points: defi.points.toLocaleString(),
-      reponses_possibles: this.determinerReponsesPossible(defi.status),
+      reponses_possibles: reponsePossibles,
       thematiqueTag: {
         label: MenuThematiques.getThematiqueData(defi.thematique).labelDansLeMenu,
         style: TagThematique.getTagThematiqueUtilitaire(defi.thematique),
       },
       description: defi.description,
-      reponse: defi.status,
+      reponse: reponsePossibles.filter(r => r.id === defi.status).length > 0 ? defi.status : reponsePossibles[0].id,
       astuces: this.determinerParagrapheVide(defi.astuces),
       pourquoi: this.determinerParagrapheVide(defi.pourquoi),
       explicationRefus: defi.explicationRefus,
