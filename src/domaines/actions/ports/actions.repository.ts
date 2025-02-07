@@ -17,5 +17,5 @@ export interface Action {
 }
 
 export interface ActionsRepository {
-  chargerAction(): Promise<Action>;
+  chargerAction(idUtilisateur: string, idAction: string): Promise<Action>;
 }

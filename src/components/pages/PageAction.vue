@@ -24,15 +24,15 @@
             class="fr-col-12 fr-col-md-6 fr-col-lg-4"
           >
             <router-link
-              class="display-block background--white shadow border-radius--md fr-p-1w text--bold full-height background--none"
               :to="{ path: article.url }"
+              class="display-block background--white shadow border-radius--md fr-p-1w full-height background--none"
             >
               <img
                 :src="article.image"
-                class="action__recommandations-img full-width fr-mb-1w border-radius--md"
                 alt=""
+                class="action__recommandations-img full-width fr-mb-1w border-radius--md"
               />
-              <h4 class="fr-h5 text--semi-bold" v-html="article.titre" />
+              <p class="text--semi-bold" v-html="article.titre" />
             </router-link>
           </div>
         </div>
@@ -45,8 +45,9 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
   import { onMounted, ref } from 'vue';
+  import { useRoute } from 'vue-router';
   import CarteSkeleton from '@/components/custom/Skeleton/CarteSkeleton.vue';
   import { ActionPresenterImpl } from '@/domaines/actions/adapters/action.presenter.impl';
   import { ActionsRepositoryMock } from '@/domaines/actions/adapters/actions.repository.mock';
@@ -57,10 +58,11 @@
   const actionViewModel = ref<ActionViewModel>();
 
   onMounted(() => {
+    const idAction = useRoute().params.id.toString();
     isLoading.value = true;
     const usecase = new ChargerActionUsecase(new ActionsRepositoryMock());
     usecase
-      .execute(0, new ActionPresenterImpl(vm => (actionViewModel.value = vm)))
+      .execute(idAction, new ActionPresenterImpl(vm => (actionViewModel.value = vm)))
       .finally(() => (isLoading.value = false));
   });
 </script>
