@@ -49,6 +49,11 @@ export const utilisateurStore = defineStore('utilisateur', {
       this.$reset();
     },
   },
+  getters: {
+    estConnecte: (state): boolean => {
+      return state.utilisateur.id.length > 0;
+    },
+  },
   persist: {
     storage: localStorage,
   },
