@@ -57,3 +57,5 @@ package-lock.json
 .env.local
 .env.sentry-build-plugin
 .env
+.yarnrc.yml
+.yarn
