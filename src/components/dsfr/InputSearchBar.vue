@@ -1,6 +1,6 @@
 <template>
   <form @submit.prevent="submitSearch">
-    <div class="fr-search-bar" :id="id" role="search">
+    <div class="fr-search-bar" :class="{ 'fr-search-bar--lg': isLarge }" :id="id" role="search">
       <label class="fr-label" :for="name"> Rechercher </label>
       <input
         class="fr-input"
@@ -24,6 +24,7 @@
     id: string;
     name: string;
     placeholder: string;
+    isLarge?: boolean;
   }>();
 
   const search = ref<string>('');

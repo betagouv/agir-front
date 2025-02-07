@@ -1,7 +1,8 @@
 import { AxiosFactory } from '@/axios.factory';
-import { CommuneRepository, Communes } from '@/domaines/communes/ports/communeRepository';
+import { CommuneRepository, Communes } from '@/domaines/communes/ports/commune.repository';
 
 type CommuneApiModel = string[];
+
 export class CommuneRepositoryAxios implements CommuneRepository {
   async getCommunes(codePostal: string): Promise<Communes> {
     const axiosInstance = AxiosFactory.getAxios();

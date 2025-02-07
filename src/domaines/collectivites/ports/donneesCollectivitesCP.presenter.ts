@@ -1,7 +1,7 @@
-import { DonneesCollectivites } from '@/domaines/collectivites/recuperationDonneesCollectivites.usecase';
+import { DonneesCollectivitesCP } from '@/domaines/collectivites/recupererDonneesCollectivitesCodePostal.usecase';
 import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 
-export interface DonneesCollectivitesViewModel {
+export interface DonneesCollectivitesCPViewModel {
   codePostal: string;
   propositions: {
     emoji: string;
@@ -14,7 +14,7 @@ export interface DonneesCollectivitesViewModel {
   }[];
 }
 
-interface ViewModelWithUrl {
+export interface ViewModelWithUrl {
   url: {
     name: string;
     params: { id: number };
@@ -33,6 +33,6 @@ export interface AideLocaleViewModel extends ViewModelWithUrl {
   thematiques: ClefThematiqueAPI[];
 }
 
-export interface DonneesCollectivitesPresenter {
-  displayDonneesCollectivites(donneesCollectivites: DonneesCollectivites, codePostal: string): void;
+export interface DonneesCollectivitesCPPresenter {
+  afficherDonneesCodePostal(donneesCollectivites: DonneesCollectivitesCP, codePostal: string): void;
 }

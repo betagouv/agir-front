@@ -52,4 +52,22 @@ export class SimulerAideVeloRepositoryAxios implements SimulerAideVeloRepository
       adapté: response.data.adapté ?? [],
     };
   }
+
+  async getSimulationDepuisInsee(insee: string): Promise<SimulationVelo> {
+    const axiosInstance = AxiosFactory.getAxios();
+    const response = await axiosInstance.post<AidesVeloParType>(`/aides/simulerAideVelo`, {
+      code_insee: insee,
+    });
+
+    return {
+      'mécanique simple': response.data['mécanique simple'] ?? [],
+      électrique: response.data.électrique ?? [],
+      cargo: response.data.cargo ?? [],
+      'cargo électrique': response.data['cargo électrique'] ?? [],
+      pliant: response.data.pliant ?? [],
+      'pliant électrique': response.data['pliant électrique'] ?? [],
+      motorisation: response.data.motorisation ?? [],
+      adapté: response.data.adapté ?? [],
+    };
+  }
 }

@@ -1,5 +1,7 @@
-import { DonneesCollectivites } from '@/domaines/collectivites/recuperationDonneesCollectivites.usecase';
+import { DonneesCollectivitesCP } from '@/domaines/collectivites/recupererDonneesCollectivitesCodePostal.usecase';
+import { DonneesCollectivitesINSEE } from '@/domaines/collectivites/recupererDonneesCollectivitesInsee.usecase';
 
 export interface DonneesCollectivitesRepository {
-  getDonneesCollectivites(codePostal: string): Promise<DonneesCollectivites>;
+  recupererDonneesCodePostal(codePostal: string): Promise<DonneesCollectivitesCP>;
+  recupererDonneesInsee(insee: string): Promise<DonneesCollectivitesINSEE>;
 }

@@ -1,8 +1,8 @@
-import { DonneesCollectivitesPresenter } from '@/domaines/collectivites/ports/donneesCollectivites.presenter';
 import { DonneesCollectivitesRepository } from '@/domaines/collectivites/ports/donneesCollectivites.repository';
+import { DonneesCollectivitesCPPresenter } from '@/domaines/collectivites/ports/donneesCollectivitesCP.presenter';
 import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 
-export interface DonneesCollectivites {
+export interface DonneesCollectivitesCP {
   listeCommunes: string[];
   nombreInscrits: number;
   nombrePointsMoyen: number;
@@ -50,11 +50,11 @@ export interface DonneesCollectivites {
   }[];
 }
 
-export class RecuperationDonneesCollectivitesUsecase {
+export class RecupererDonneesCollectivitesCodePostalUsecase {
   constructor(private readonly donneesCollectivitesRepository: DonneesCollectivitesRepository) {}
 
-  async execute(codePostal: string, presenter: DonneesCollectivitesPresenter): Promise<void> {
-    const donneesCollectivites = await this.donneesCollectivitesRepository.getDonneesCollectivites(codePostal);
-    presenter.displayDonneesCollectivites(donneesCollectivites, codePostal);
+  async execute(codePostal: string, presenter: DonneesCollectivitesCPPresenter): Promise<void> {
+    const donneesCollectivites = await this.donneesCollectivitesRepository.recupererDonneesCodePostal(codePostal);
+    presenter.afficherDonneesCodePostal(donneesCollectivites, codePostal);
   }
 }

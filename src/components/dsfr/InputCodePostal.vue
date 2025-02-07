@@ -52,7 +52,7 @@
 
 <script setup lang="ts">
   import { ChargementCommunesUsecase } from '@/domaines/communes/chargementCommunesUsecase';
-  import { CommuneRepositoryAxios } from '@/domaines/communes/adapters/communeRepositoryAxios';
+  import { CommuneRepositoryAxios } from '@/domaines/communes/adapters/commune.repository.axios';
   import { onMounted, ref } from 'vue';
 
   const props = defineProps<{
