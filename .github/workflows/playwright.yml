@@ -1,7 +1,7 @@
 name: Playwright Tests
 on:
   pull_request:
-    branches: [ main ]
+    branches: [main]
 jobs:
   test:
     if: github.actor != 'dependabot[bot]'
@@ -19,14 +19,22 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
+
+      - name: Enable corepack
+        run: corepack enable
+
       - name: Install dependencies
-        run: yarn install
+        run: yarn install --immutable
+
       - name: Install Playwright Browsers
         run: yarn playwright install --with-deps
+
       - name: Create playwright-report directory
         run: mkdir playwright-report
+
       - name: Run Playwright tests
         run: yarn test:e2e
+
       - uses: actions/upload-artifact@v4
         if: always()
         with:
