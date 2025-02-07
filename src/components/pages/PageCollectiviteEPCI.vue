@@ -35,6 +35,7 @@
   import { DonneesCollectivitesInseePresenterImpl } from '@/domaines/collectivites/adapters/donneesCollectivitesInsee.presenter.impl';
   import { DonneesCollectivitesInseeViewModel } from '@/domaines/collectivites/ports/donneesCollectivitesInsee.presenter';
   import { RecupererDonneesCollectivitesInsee } from '@/domaines/collectivites/recupererDonneesCollectivitesInsee.usecase';
+  import { RouteCollectiviteName } from '@/router/collectivites/routes';
   import { trackClick } from '@/shell/matomo';
 
   const route = useRoute();
@@ -66,7 +67,7 @@
     await recupererDonneesCollectivitesInsee
       .execute(insee, new DonneesCollectivitesInseePresenterImpl(vm => (donneesCollectivitesInseeViewModel.value = vm)))
       .then(async () => {
-        await router.push({ path: '/collectivitesEPCI', query: { insee } });
+        await router.push({ name: RouteCollectiviteName.COLLECTIVITE_V2, query: { insee } });
       })
       .finally(() => {
         isLoadingDetail.value = false;
