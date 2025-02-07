@@ -71,12 +71,9 @@
   });
 </script>
 
-<style>
-  .action h1,
-  .action h2,
-  .action h3,
-  .action h4 {
-    font-weight: 400;
+<style scoped>
+  .action__titre {
+    font-size: 2rem;
   }
 
   .action__corps-introduction {

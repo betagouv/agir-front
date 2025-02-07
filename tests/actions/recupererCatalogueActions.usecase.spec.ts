@@ -24,6 +24,7 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
       nombreAideDispobible: 0,
       recommandations: [],
     };
+
     // WHEN
     const usecase = new RecupererCatalogueActionsUsecase(new ActionsRepositoryMock(action));
     usecase.execute(new CatalogueActionsPresenterImpl(expected));
@@ -40,8 +41,8 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
             url: {
               name: 'action-individuelle',
               params: {
-                id: 0,
-                titre: 'code-action-test',
+                id: 'code-action-test',
+                titre: 'tester-une-nouvelle-recette-vegetarienne',
               },
             },
           },

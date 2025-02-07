@@ -1,4 +1,9 @@
-
+.action h1,
+.action h2,
+.action h3,
+.action h4 {
+    font-weight: 400;
+}
 
 .action__titre > span.text--bold {
     display: inline-block;
