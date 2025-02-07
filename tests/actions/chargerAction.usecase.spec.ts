@@ -8,6 +8,9 @@ import { Action } from '@/domaines/actions/ports/actions.repository';
 describe("Fichier de tests concernant la récupération d'une action", () => {
   it("En donnant l'id d'une action, on devrait pouvoir récupérer son entiereté", () => {
     const action: Action = {
+      code: 'id-action-test',
+      nombreDePersonnes: 0,
+      nombreAideDispobible: 0,
       titre: 'Tester une nouvelle **recette végétarienne**',
       sousTitre:
         'Faites des économies et le plein de vitamines ! Cette semaine, on cuisine une recette saine et délicieuse !',

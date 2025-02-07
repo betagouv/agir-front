@@ -6,4 +6,8 @@ export class ActionsRepositoryMock implements ActionsRepository {
   chargerAction(idUtilisateur: string, idAction: string): Promise<Action> {
     return Promise.resolve(this.action);
   }
+
+  recupererToutesLesActions(): Promise<Action[]> {
+    return Promise.resolve([this.action]);
+  }
 }

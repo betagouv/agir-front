@@ -22,7 +22,7 @@ export class CatalogueActionsPresenterImpl implements CatalogueActionsPresenter 
       actions: actions.map(action => ({
         code: action.code,
         titre: action.titre,
-        nombreDePersonnes: `${action.nombreDePersones} défis réalisés`,
+        nombreDePersonnes: `${action.nombreDePersonnes} défis réalisés`,
         aidesDisponibles:
           action.nombreAideDispobible > 0
             ? { nombreDaidesDisponibles: `${action.nombreAideDispobible} aides disponibles` }

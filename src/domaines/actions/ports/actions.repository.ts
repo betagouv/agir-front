@@ -15,7 +15,7 @@ export interface Action {
     // FAQ ?
   };
   recommandations: RecommandationArticle[];
-  nombreDePersones: number;
+  nombreDePersonnes: number;
   nombreAideDispobible: number;
 }
 

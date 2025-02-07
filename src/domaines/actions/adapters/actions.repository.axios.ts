@@ -24,7 +24,7 @@ export class ActionsRepositoryAxios implements ActionsRepository {
         astuces: response.data.pourquoi,
       },
       recommandations: [],
-      nombreDePersones: response.data.nombre_actions_en_cours,
+      nombreDePersonnes: response.data.nombre_actions_en_cours,
       nombreAideDispobible: response.data.nombre_aides_disponibles,
     };
   }
@@ -41,7 +41,7 @@ export class ActionsRepositoryAxios implements ActionsRepository {
         astuces: action.pourquoi,
       },
       recommandations: [],
-      nombreDePersones: action.nombre_actions_en_cours,
+      nombreDePersonnes: action.nombre_actions_en_cours,
       nombreAideDispobible: action.nombre_aides_disponibles,
     }));
   }
