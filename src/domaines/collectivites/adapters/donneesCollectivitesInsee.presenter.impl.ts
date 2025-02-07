@@ -84,8 +84,8 @@ export class DonneesCollectivitesInseePresenterImpl implements DonneesCollectivi
   private genererIndicationNombreUtilisateurs(donnees: DonneesCollectivitesINSEE): string {
     const { nombreInscrits, nombreInscritsLocaux } = donnees;
     if (!nombreInscritsLocaux)
-      return `La collectivité ne compte <span class="text--bold">aucun</span> utilisateur inscrit sur ${nombreInscrits} inscrits.`;
-    return `La collectivité dispose de <span class="text--bold">${nombreInscritsLocaux}</span> utilisateur(s) inscrit(s) parmi les <span class="text--bold">${nombreInscrits}</span> utilisateurs.`;
+      return `La collectivité ne compte <span class="text--bold">aucun</span> utilisateur inscrit parmi les <span class="text--bold">${nombreInscrits}</span> utilisateurs.`;
+    return `La collectivité compte <span class="text--bold">${nombreInscritsLocaux}</span> utilisateur(s) inscrit(s) parmi les <span class="text--bold">${nombreInscrits}</span> utilisateurs.`;
   }
 
   private genererCartesThematiques(
@@ -98,6 +98,7 @@ export class DonneesCollectivitesInseePresenterImpl implements DonneesCollectivi
       { emoji: '🍛', titre: 'Me nourrir', thematique: ClefThematiqueAPI.alimentation },
       { emoji: '🚲', titre: 'Me déplacer', thematique: ClefThematiqueAPI.transports },
       { emoji: '🧱', titre: 'Me loger', thematique: ClefThematiqueAPI.logement },
+      { emoji: '☀️', titre: 'Environnement', thematique: ClefThematiqueAPI.climat },
     ].map(({ emoji, titre, thematique }) => ({
       emoji,
       titre,

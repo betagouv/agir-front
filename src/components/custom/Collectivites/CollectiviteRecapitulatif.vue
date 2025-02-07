@@ -14,12 +14,12 @@
       :titre-texte="carte.titre"
     >
       <div v-if="carte.aides.length > 0">
-        <p class="fr-m-0">Les <span class="text--bold">aides</span> disponibles :</p>
+        <p class="fr-m-0">Les <span class="text--bold">aides</span> nationales 🇫🇷 ou locales disponibles :</p>
         <CollectiviteListeContenu :contenus="carte.aides" />
       </div>
 
       <div v-if="carte.articles.length > 0">
-        <p class="fr-m-0">Les <span class="text--bold">articles</span> <i>J'agis</i> :</p>
+        <p class="fr-m-0">Les <span class="text--bold">articles</span> locaux sur <i>J'agis</i> :</p>
         <CollectiviteListeContenu :contenus="carte.articles" />
       </div>
 
