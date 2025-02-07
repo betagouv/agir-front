@@ -37,6 +37,13 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
             titre: 'Tester une nouvelle **recette végétarienne**',
             nombreDePersonnes: '<span class="text--bold">0</span> défis réalisés',
             aidesDisponibles: undefined,
+            url: {
+              name: 'action-individuelle',
+              params: {
+                id: 0,
+                titre: 'code-action-test',
+              },
+            },
           },
         ],
       });
