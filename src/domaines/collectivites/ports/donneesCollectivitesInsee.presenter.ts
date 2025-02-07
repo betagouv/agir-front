@@ -32,17 +32,11 @@ export interface CarteThematique {
 }
 
 export interface DonneesCollectivitesInseeViewModel extends IndicationGeoArticleOuAideViewModel {
-  listeCommunesPourEPCI?: string;
-
   indicationNombreUtilisateurs: string;
   indicationAidesEtArticles: string;
 
   cartesThematiques: CarteThematique[];
 
-  nombreDeDefi: {
-    enCours: number;
-    realises: number;
-  };
   nombreInscrits: {
     total: number;
     local: number;

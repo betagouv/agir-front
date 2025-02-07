@@ -36,11 +36,9 @@ export class DonneesCollectivitesInseePresenterImpl implements DonneesCollectivi
 
     this.viewModel({
       ...scope,
-      listeCommunesPourEPCI: donnees.estEPCI ? donnees.listeCommunesPourEPCI.join(', ') : undefined,
       indicationNombreUtilisateurs: this.genererIndicationNombreUtilisateurs(donnees),
       indicationAidesEtArticles: this.genererIndicationAidesEtArticles(donnees),
       cartesThematiques: this.genererCartesThematiques(aides, articles, contenuSupplementaires),
-      nombreDeDefi: { enCours: donnees.nombreDefisEnCours, realises: donnees.nombreDefisRealises },
       nombreInscrits: { total: donnees.nombreInscrits, local: donnees.nombreInscritsLocaux },
     });
   }
