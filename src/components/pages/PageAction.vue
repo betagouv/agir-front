@@ -1,7 +1,10 @@
 <template>
   <div class="fr-container fr-mt-3w">
     <!--  TODO: Où le bouton retour envoie ?-->
-    <router-link class="fr-btn fr-btn--icon-left fr-btn--tertiary-no-outline fr-icon-arrow-left-line fr-pl-0" to="#">
+    <router-link
+      class="fr-btn fr-btn--icon-left fr-btn--tertiary-no-outline fr-icon-arrow-left-line fr-pl-0"
+      :to="{ name: RouteActionsName.CATALOGUE_ACTION }"
+    >
       Retour
     </router-link>
 
@@ -15,7 +18,7 @@
         <p class="action__corps-astuces fr-p-3w border-radius--md" v-html="actionViewModel.corps.astuces" />
       </section>
 
-      <section class="fr-p-2w">
+      <section class="fr-p-2w" v-if="actionViewModel.recommandations.length > 0">
         <h2>Pour aller <span class="text--bold">plus loin</span></h2>
         <div class="fr-grid-row fr-grid-row--gutters">
           <div
@@ -50,9 +53,10 @@
   import { useRoute } from 'vue-router';
   import CarteSkeleton from '@/components/custom/Skeleton/CarteSkeleton.vue';
   import { ActionPresenterImpl } from '@/domaines/actions/adapters/action.presenter.impl';
-  import { ActionsRepositoryMock } from '@/domaines/actions/adapters/actions.repository.mock';
+  import { ActionsRepositoryAxios } from '@/domaines/actions/adapters/actions.repository.axios';
   import { ChargerActionUsecase } from '@/domaines/actions/chargerAction.usecase';
   import { ActionViewModel } from '@/domaines/actions/ports/action.presenter';
+  import { RouteActionsName } from '@/router/actions/routes';
 
   const isLoading = ref<boolean>(false);
   const actionViewModel = ref<ActionViewModel>();
@@ -60,7 +64,7 @@
   onMounted(() => {
     const idAction = useRoute().params.id.toString();
     isLoading.value = true;
-    const usecase = new ChargerActionUsecase(new ActionsRepositoryMock());
+    const usecase = new ChargerActionUsecase(new ActionsRepositoryAxios());
     usecase
       .execute(idAction, new ActionPresenterImpl(vm => (actionViewModel.value = vm)))
       .finally(() => (isLoading.value = false));
@@ -73,23 +77,6 @@
   .action h3,
   .action h4 {
     font-weight: 400;
-  }
-
-  .action__titre > span.text--bold {
-    display: inline-block;
-    position: relative;
-    z-index: 40;
-  }
-
-  .action__titre > span.text--bold::before {
-    content: '';
-    position: absolute;
-    top: 70%;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: #e3fbaf;
-    z-index: -1;
   }
 
   .action__corps-introduction {

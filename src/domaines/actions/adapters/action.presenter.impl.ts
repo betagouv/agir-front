@@ -6,10 +6,12 @@ export class ActionPresenterImpl implements ActionPresenter {
   constructor(private readonly actionViewModel: (viewModel: ActionViewModel) => void) {}
 
   async presenteAction(action: Action) {
-    const titre = await marked.parseInline(action.titre);
-    const sousTitre = await marked.parseInline(action.sousTitre);
-    const astuces = await marked.parse(action.corps.astuces);
-    const introduction = await marked.parse(action.corps.introduction);
+    const [titre, sousTitre, astuces, introduction] = await Promise.all([
+      marked.parseInline(action.titre),
+      marked.parseInline(action.sousTitre),
+      marked.parse(action.corps.astuces),
+      marked.parse(action.corps.introduction),
+    ]);
 
     this.actionViewModel({
       titre,
