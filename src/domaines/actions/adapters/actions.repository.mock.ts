@@ -3,6 +3,9 @@ import { Action, ActionsRepository } from '@/domaines/actions/ports/actions.repo
 export class ActionsRepositoryMock implements ActionsRepository {
   chargerAction(): Promise<Action> {
     return Promise.resolve({
+      code: 'recette-vegetarienne',
+      nombreAideDispobible: 0,
+      nombreDePersones: 0,
       titre: 'Tester une nouvelle **recette végétarienne**',
       sousTitre:
         'Faites des économies et le plein de vitamines ! Cette semaine, on cuisine une recette saine et délicieuse !',
@@ -30,5 +33,9 @@ export class ActionsRepositoryMock implements ActionsRepository {
         },
       ],
     });
+  }
+
+  recupererToutesLesActions(): Promise<Action[]> {
+    return Promise.resolve([]);
   }
 }

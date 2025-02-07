@@ -5,6 +5,7 @@ interface RecommandationArticle {
 }
 
 export interface Action {
+  code: string;
   titre: string;
   sousTitre: string;
   corps: {
@@ -14,8 +15,12 @@ export interface Action {
     // FAQ ?
   };
   recommandations: RecommandationArticle[];
+  nombreDePersones: number;
+  nombreAideDispobible: number;
 }
 
 export interface ActionsRepository {
+  recupererToutesLesActions(): Promise<Action[]>;
+
   chargerAction(idUtilisateur: string, idAction: string): Promise<Action>;
 }
