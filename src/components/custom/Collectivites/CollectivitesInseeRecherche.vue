@@ -61,7 +61,7 @@
   import { ChercherCollectivitesUsecase } from '@/domaines/collectivites/chercherCollectivites.usecase';
   import { RechercheDeCollectiviteViewModel } from '@/domaines/collectivites/ports/chercherCollectivites.presenter';
 
-  const props = defineProps<{ onCollectiviteClick: (insee: string) => void }>();
+  const props = defineProps<{ onCollectiviteClick: (insee: string) => void; onSearch: () => void }>();
 
   const villesADisposition: { nom: string; insee: string }[] = [
     { nom: 'Lille', insee: '59350' },
@@ -76,6 +76,8 @@
   const chercherCollectivitesUsecase = new ChercherCollectivitesUsecase(new CollectiviteRepositoryAxios());
 
   async function chercherCollectivites(recherche: string) {
+    props.onSearch();
+
     if (recherche.trim() === '') {
       resultatRechercheCollectivitesViewmodel.value = { listeDeCollectivites: [], message: '' };
       return;

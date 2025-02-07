@@ -9,7 +9,7 @@
   </section>
 
   <section class="fr-container fr-my-6w">
-    <CollectivitesInseeRecherche :on-collectivite-click="chargerDetailCollectivite" />
+    <CollectivitesInseeRecherche :on-search="onSearch" :on-collectivite-click="chargerDetailCollectivite" />
 
     <CarteSkeleton v-if="isLoadingDetail" />
     <CollectiviteRecapitulatif
@@ -76,6 +76,10 @@
 
   const trackCollectivitesClick = insee => {
     trackClick('Collectivité', `Code INSEE : ${insee}`);
+  };
+
+  const onSearch = () => {
+    donneesCollectivitesInseeViewModel.value = undefined;
   };
 </script>
 
