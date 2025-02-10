@@ -15,7 +15,7 @@
     >
       <div v-if="carte.aides.length > 0">
         <h4 class="fr-text--xl fr-mt-6v fr-mb-2v">
-          Les <span class="text--bleu">aides</span> nationales 🇫🇷 ou locales disponibles
+          Les <span class="text--bleu">aides</span> nationales <Emoji>🇫🇷</Emoji> ou locales disponibles
         </h4>
         <CollectiviteListeContenu :contenus="carte.aides" />
       </div>
@@ -46,6 +46,7 @@
 <script setup lang="ts">
   import CarteDecouverte from '@/components/custom/Collectivites/CarteDecouverte.vue';
   import CollectiviteListeContenu from '@/components/custom/Collectivites/CollectiviteListeContenu.vue';
+  import Emoji from '@/components/custom/Emoji.vue';
   import { DonneesCollectivitesInseeViewModel } from '@/domaines/collectivites/ports/donneesCollectivitesInsee.presenter';
 
   defineProps<{
