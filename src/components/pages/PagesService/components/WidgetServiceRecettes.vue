@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-space-between align-items--center">
-    <h2 class="fr-h3">Besoin d'inspiration</h2>
+    <h2 class="fr-h3">Besoin <span class="text--bold">d'inspiration</span> ?</h2>
     <p class="text--italic">avec <img alt="manger bouger" class="fr-ml-2w" src="/logo-manger-bouger.svg" /></p>
   </div>
 
@@ -64,4 +64,9 @@
   };
 </script>
 
-<style scoped></style>
+<style scoped>
+  h2 {
+    font-weight: normal;
+    font-size: 1.75rem;
+  }
+</style>

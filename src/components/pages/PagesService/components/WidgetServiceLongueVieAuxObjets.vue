@@ -1,14 +1,22 @@
 <template>
   <div class="flex flex-space-between align-items--center">
-    <h2 class="fr-h3">Où {{ props.parametreDeRecherche }} près de chez moi ?</h2>
+    <h2>Où {{ props.parametreDeRecherche }} <span class="text--bold">près de chez moi</span> ?</h2>
   </div>
-  <ServiceListeCarte
+
+  <ul
     v-if="serviceRechercheLongueVieAuxObjetsViewModel"
-    :suggestions-service-view-model="
-      (serviceRechercheLongueVieAuxObjetsViewModel as ServiceRechercheLongueVieAuxObjetsViewModelAvecResultats)
-        .suggestions
-    "
-  />
+    class="fr-grid-row fr-grid-row--gutters fr-mb-2w list-style-none"
+  >
+    <li
+      v-for="suggestion in (
+        serviceRechercheLongueVieAuxObjetsViewModel as ServiceRechercheLongueVieAuxObjetsViewModelAvecResultats
+      ).suggestions"
+      :key="suggestion.titre"
+      class="fr-col-12 fr-col-md-6"
+    >
+      <ServiceCarteLongueVieAuxObjets :suggestionsServiceViewModel="suggestion" />
+    </li>
+  </ul>
   <router-link
     :to="{
       name: RouteServiceName.LONGUE_VIE_AUX_OBJETS,
@@ -16,12 +24,13 @@
         thematiqueId: MenuThematiques.getThematiqueData(ClefThematiqueAPI.alimentation).url,
       },
     }"
+    class="text--bleu"
     >Voir tous les lieux
   </router-link>
 </template>
 <script lang="ts" setup>
   import { onMounted, ref } from 'vue';
-  import ServiceListeCarte from '@/components/custom/Service/ServiceListeCarte.vue';
+  import ServiceCarteLongueVieAuxObjets from '@/components/custom/Service/ServiceCarteLongueVieAuxObjets.vue';
   import {
     ServiceRechercheLongueVieAuxObjetsPresenterImpl,
     ServiceRechercheLongueVieAuxObjetsViewModel,
@@ -63,4 +72,10 @@
     isLoading.value = false;
   }
 </script>
-<style scoped></style>
+
+<style scoped>
+  h2 {
+    font-weight: normal;
+    font-size: 1.75rem;
+  }
+</style>
