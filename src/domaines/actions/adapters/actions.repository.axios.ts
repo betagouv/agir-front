@@ -20,8 +20,8 @@ export class ActionsRepositoryAxios implements ActionsRepository {
       titre: response.data.titre,
       sousTitre: response.data.sous_titre,
       corps: {
-        introduction: response.data.comment,
-        astuces: response.data.pourquoi,
+        introduction: response.data.pourquoi,
+        astuces: response.data.comment,
       },
       recommandations: [],
       nombreDePersonnes: response.data.nombre_actions_en_cours,

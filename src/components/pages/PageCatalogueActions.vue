@@ -4,10 +4,10 @@
     <div class="fr-grid-row fr-grid-row--gutters">
       <div v-for="action in catalogueViewModel?.actions" class="fr-col-12 fr-col-md-6 fr-col-lg-3" :key="action.code">
         <router-link
-          class="background--white shadow border-radius--md fr-p-3w display-block background--none"
+          class="background--white shadow border-radius--md fr-p-3w display-block background--none full-height"
           :to="action.url"
         >
-          <p class="fr-text--xl text--bold fr-mb-1w">{{ action.titre }}</p>
+          <p class="fr-text--xl text--bold fr-mb-1w" v-html="action.titre" />
           <ul class="list-style-none fr-p-0">
             <li v-if="action.nombreDePersonnes" class="text--bleu fr-icon-team-line">
               <span class="text--gris fr-pl-1w" v-html="action.nombreDePersonnes"></span>
@@ -24,10 +24,8 @@
 <script lang="ts" setup>
   import { onMounted, ref } from 'vue';
   import { ActionsRepositoryAxios } from '@/domaines/actions/adapters/actions.repository.axios';
-  import {
-    CatalogueActionsPresenterImpl,
-    CatalogueActionsViewModel,
-  } from '@/domaines/actions/adapters/catalogueActions.presenter.impl';
+  import { CatalogueActionsPresenterImpl } from '@/domaines/actions/adapters/catalogueActions.presenter.impl';
+  import { CatalogueActionsViewModel } from '@/domaines/actions/ports/catalogueActions.presenter';
   import { RecupererCatalogueActionsUsecase } from '@/domaines/actions/recupererCatalogueActions.usecase';
 
   const catalogueViewModel = ref<CatalogueActionsViewModel>();

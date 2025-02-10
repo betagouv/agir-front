@@ -11,11 +11,19 @@
     <CarteSkeleton v-if="isLoading" />
     <div v-else-if="actionViewModel" class="action fr-my-1w">
       <h1 class="action__titre text--normal" v-html="actionViewModel.titre" />
-      <p class="fr-text--lg" v-html="actionViewModel.sousTitre" />
+      <p v-if="actionViewModel.sousTitre" class="fr-text--lg" v-html="actionViewModel.sousTitre" />
 
       <section class="background--white border-radius--md fr-p-2w fr-mb-3w shadow">
-        <p class="action__corps-introduction fr-p-3w border-radius--md" v-html="actionViewModel.corps.introduction" />
-        <p class="action__corps-astuces fr-p-3w border-radius--md" v-html="actionViewModel.corps.astuces" />
+        <section
+          v-if="actionViewModel.corps.introduction"
+          class="action__corps-introduction fr-p-3w border-radius--md fr-mb-3w"
+          v-html="actionViewModel.corps.introduction"
+        />
+        <section
+          v-if="actionViewModel.corps.astuces"
+          class="action__corps-astuces fr-p-3w border-radius--md"
+          v-html="actionViewModel.corps.astuces"
+        />
       </section>
 
       <section class="fr-p-2w" v-if="actionViewModel.recommandations.length > 0">

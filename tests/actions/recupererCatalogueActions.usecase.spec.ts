@@ -1,10 +1,8 @@
 import { ActionsRepositoryMock } from './adapters/actions.repository.mock';
 import { RecupererCatalogueActionsUsecase } from '@/domaines/actions/recupererCatalogueActions.usecase';
 import { Action } from '@/domaines/actions/ports/actions.repository';
-import {
-  CatalogueActionsPresenterImpl,
-  CatalogueActionsViewModel,
-} from '@/domaines/actions/adapters/catalogueActions.presenter.impl';
+import { CatalogueActionsPresenterImpl } from '@/domaines/actions/adapters/catalogueActions.presenter.impl';
+import { CatalogueActionsViewModel } from '@/domaines/actions/ports/catalogueActions.presenter';
 
 describe("Fichier de tests concernant la récupération du catalogue d'actions", () => {
   it('Doit presenter le catalogue actions', () => {

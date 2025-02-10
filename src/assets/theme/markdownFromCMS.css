@@ -21,3 +21,12 @@
     background-color: #e3fbaf;
     z-index: -1;
 }
+
+.action li p {
+    margin: 0;
+    line-height: 2rem;
+}
+
+.action h2 {
+    font-size: 1.75rem;
+}
