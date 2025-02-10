@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-space-between align-items--center">
-    <h2 class="fr-h3">Longue vie aux objets</h2>
+    <h2 class="fr-h3">Où {{ props.parametreDeRecherche }} près de chez moi ?</h2>
   </div>
   <ServiceListeCarte
     v-if="serviceRechercheLongueVieAuxObjetsViewModel"
