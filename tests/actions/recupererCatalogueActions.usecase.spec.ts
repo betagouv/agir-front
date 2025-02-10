@@ -33,7 +33,7 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
         actions: [
           {
             code: 'code-action-test',
-            titre: 'Tester une nouvelle **recette végétarienne**',
+            titre: 'Tester une nouvelle <span class="text--bold">recette végétarienne</span>',
             nombreDePersonnes: '<span class="text--bold">0</span> défis réalisés',
             aidesDisponibles: undefined,
             url: {
