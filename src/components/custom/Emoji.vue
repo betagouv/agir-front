@@ -4,7 +4,7 @@
 </template>
 
 <script setup lang="ts">
-  const { kind, label } = defineProps<
+  defineProps<
     | {
         kind: 'illustration';
         label: string;

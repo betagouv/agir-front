@@ -31,7 +31,8 @@ export class DonneesCollectivitesInseePresenterImpl implements DonneesCollectivi
       scope,
     );
 
-    const contenuSupplementaires = [this.transformerAidesVeloEnViewModel(aidesVelo)];
+    const aidesVeloSection = this.transformerAidesVeloEnViewModel(aidesVelo);
+    const contenuSupplementaires = [aidesVeloSection];
 
     this.viewModel({
       ...scope,

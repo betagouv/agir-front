@@ -59,13 +59,13 @@ export class SimulerAideVeloRepositoryAxios implements SimulerAideVeloRepository
   }
 
   /**
-   * Récupère les aides disponibles pour une commune ou un EPCI.
-   *
    * @param code - Code INSEE de la commune ou SIREN de l'EPCI.
-   * @returns Les aides disponibles pour la commune ou l'EPCI.
+   * @returns Les aides disponibles pour la commune ou l'EPCI. C'est-à-dire aux
+   * quelles les habitants de la commune ou de l'EPCI peuvent prétendre, mais
+   * ne seront pas nécessairement éligibles comme ça aurait été le cas avec une
+   * simulation.
    */
   async getAidesDisponiblesPourCommuneOuEpci(code: string): Promise<AidesVeloDisponibles> {
-    // NOTE: pourquoi ne pas utiliser une instance
     const axiosInstance = AxiosFactory.getAxios();
     const response = await axiosInstance.post<AideVeloNonCalculeeApiModel[]>(
       `/aides/recupererAideVeloParCodeCommuneOuEPCI`,
