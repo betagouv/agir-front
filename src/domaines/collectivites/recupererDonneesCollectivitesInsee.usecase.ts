@@ -43,7 +43,7 @@ export class RecupererDonneesCollectivitesInsee {
 
   async execute(insee: string, presenter: DonneesCollectivitesInseePresenter): Promise<void> {
     const donneesCollectivites = await this.donneesCollectivitesRepository.recupererDonneesInsee(insee);
-    const aidesVelos = await this.simulationAideVeloRepository.getSimulationDepuisInsee(insee);
+    const aidesVelos = await this.simulationAideVeloRepository.getAidesDisponiblesPourCommuneOuEpci(insee);
     presenter.afficherDonneesInsee(donneesCollectivites, aidesVelos);
   }
 }

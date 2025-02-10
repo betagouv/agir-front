@@ -11,6 +11,8 @@ export interface AidesVelo {
   logo: string;
 }
 
+export type AideVeloNonCalculee = Omit<AidesVelo, 'montant' | 'plafond'>;
+
 interface Collectivite {
   kind: string;
   value: string;
@@ -37,6 +39,8 @@ export const OptionsEtatVelo: Array<{ label: string; code: EtatVelo; estLaCatego
 export type SimulationVelo = {
   [category in TypeVelos]: AidesVelo[];
 };
+
+export type AidesVeloDisponibles = AideVeloNonCalculee[];
 
 export default class SimulerAideVeloUsecase {
   private _simulationAideVeloRepository: SimulerAideVeloRepository;
