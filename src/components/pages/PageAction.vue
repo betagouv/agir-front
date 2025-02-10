@@ -18,7 +18,7 @@
           class="action__corps-introduction fr-p-3w border-radius--md fr-mb-3w"
           v-html="actionViewModel.corps.introduction"
         />
-        <section class="fr-mb-4w">
+        <section class="fr-mb-4w fr-mx-3w">
           <div v-for="service in actionViewModel.services" :key="service.type">
             <WidgetServiceRecettes
               v-if="service.type === 'recettes'"

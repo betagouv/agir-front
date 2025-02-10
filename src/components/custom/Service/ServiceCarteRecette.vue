@@ -1,7 +1,9 @@
 <template>
   <div class="background--white border-radius--md shadow fr-p-1w fr-grid-row full-height">
-    <div class="fr-col-9 position--relative fr-pl-1w fr-grid-row flex-column">
-      <p class="fr-text--lg text--semi-bold text--black fr-mb-0">
+    <div class="position--relative fr-p-1w fr-grid-row flex-column">
+      <img class="service-card__img border-radius--md fr-mb-1w" :src="suggestionsServiceViewModel.img" alt="" />
+
+      <p class="fr-text--lg text--semi-bold text--black fr-mb-1w">
         <router-link
           v-if="suggestionsServiceViewModel.to"
           :to="suggestionsServiceViewModel.to"
@@ -11,26 +13,18 @@
         </router-link>
         <span v-else> {{ suggestionsServiceViewModel.titre }} </span>
       </p>
-      <div v-if="suggestionsServiceViewModel.categories" class="fr-grid-row fr-mb-2w">
-        <span
-          v-for="categorie in suggestionsServiceViewModel.categories"
-          :key="categorie"
-          class="fr-tag jagis-background--bleu-light jagis--text--bleu-dark text--semi-bold fr-mr-1w"
-        >
-          {{ categorie }}
-        </span>
-      </div>
-      <p v-if="suggestionsServiceViewModel.description" class="fr-text--sm text--gris">
-        {{ suggestionsServiceViewModel.description }}
-      </p>
-      <div class="fr-mt-auto">
+
+      <div class="flex align-items--center fr-text--xs text--mention-grey fr-mb-0">
         <span
           v-if="suggestionsServiceViewModel.tag"
           :class="`fr-tag fr-text--xs fr-mr-2w ${suggestionsServiceViewModel.tag.style}`"
         >
           {{ suggestionsServiceViewModel.tag.label }}
         </span>
-        <span class="fr-text--xs text--mention-grey" v-html="suggestionsServiceViewModel.information" />
+        <div>
+          <span class="fr-icon--sm fr-icon-timer-line" aria-hidden="true"></span>
+          <span class="fr-ml-1v" v-html="suggestionsServiceViewModel.information"></span>
+        </div>
       </div>
     </div>
   </div>
@@ -62,5 +56,9 @@
     outline-offset: 2px;
     outline-style: inherit;
     border-radius: 0.5rem;
+  }
+
+  .service-card__img {
+    height: 7rem;
   }
 </style>

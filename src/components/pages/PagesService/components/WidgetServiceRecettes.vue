@@ -3,10 +3,16 @@
     <h2 class="fr-h3">Besoin d'inspiration</h2>
     <p class="text--italic">avec <img alt="manger bouger" class="fr-ml-2w" src="/logo-manger-bouger.svg" /></p>
   </div>
-  <ServiceListeCarte
-    v-if="serviceRecettesViewModel"
-    :suggestions-service-view-model="serviceRecettesViewModel!.suggestions"
-  />
+
+  <ul v-if="serviceRecettesViewModel" class="fr-grid-row fr-grid-row--gutters fr-mb-2w list-style-none">
+    <li
+      v-for="suggestion in serviceRecettesViewModel?.suggestions"
+      :key="suggestion.titre"
+      class="fr-col-6 fr-col-md-3"
+    >
+      <ServiceCarteRecette :suggestionsServiceViewModel="suggestion" />
+    </li>
+  </ul>
   <router-link
     :to="{
       name: RouteServiceName.RECETTES,
@@ -14,12 +20,13 @@
         thematiqueId: MenuThematiques.getThematiqueData(ClefThematiqueAPI.alimentation).url,
       },
     }"
+    class="text--bleu"
     >Voir toutes les recettes
   </router-link>
 </template>
 <script lang="ts" setup>
   import { onMounted, ref } from 'vue';
-  import ServiceListeCarte from '@/components/custom/Service/ServiceListeCarte.vue';
+  import ServiceCarteRecette from '@/components/custom/Service/ServiceCarteRecette.vue';
   import {
     ServiceRechercheRecettesPresenterImpl,
     ServiceRechercheRecettesViewModel,
