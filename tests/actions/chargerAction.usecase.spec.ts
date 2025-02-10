@@ -37,6 +37,16 @@ describe("Fichier de tests concernant la récupération d'une action", () => {
           url: '',
         },
       ],
+      services: [
+        {
+          type: 'recettes',
+          parametreDuService: 'recette-vegetarienne',
+        },
+        {
+          type: 'longue_vie_objets',
+          parametreDuService: 'reparer',
+        },
+      ],
     };
     const usecase = new ChargerActionUsecase(new ActionsRepositoryMock(action));
     usecase.execute('id-action-test', new ActionPresenterImpl(expected));
@@ -72,6 +82,16 @@ describe("Fichier de tests concernant la récupération d'une action", () => {
             image: '/temp_10_recettes_pour_fetes.png',
             titre: '10 recettes végétariennes pour les fêtes',
             url: '',
+          },
+        ],
+        services: [
+          {
+            parametreDuService: 'recette-vegetarienne',
+            type: 'recettes',
+          },
+          {
+            parametreDuService: 'reparer',
+            type: 'longue_vie_objets',
           },
         ],
       });

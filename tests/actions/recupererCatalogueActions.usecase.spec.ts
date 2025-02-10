@@ -21,6 +21,7 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
       nombreDePersonnes: 0,
       nombreAideDispobible: 0,
       recommandations: [],
+      services: [],
     };
 
     // WHEN

@@ -1,9 +1,8 @@
 <template>
   <div class="fr-container fr-mt-3w">
-    <!--  TODO: Où le bouton retour envoie ?-->
     <router-link
-      class="fr-btn fr-btn--icon-left fr-btn--tertiary-no-outline fr-icon-arrow-left-line fr-pl-0"
       :to="{ name: RouteActionsName.CATALOGUE_ACTION }"
+      class="fr-btn fr-btn--icon-left fr-btn--tertiary-no-outline fr-icon-arrow-left-line fr-pl-0"
     >
       Retour
     </router-link>
@@ -19,6 +18,19 @@
           class="action__corps-introduction fr-p-3w border-radius--md fr-mb-3w"
           v-html="actionViewModel.corps.introduction"
         />
+        <section class="fr-mb-4w">
+          <div v-for="service in actionViewModel.services" :key="service.type">
+            <WidgetServiceRecettes
+              v-if="service.type === 'recettes'"
+              :parametre-de-recherche="service.parametreDuService"
+            />
+
+            <WidgetServiceLongueVieAuxObjets
+              v-if="service.type === 'longue_vie_objets'"
+              :parametre-de-recherche="service.parametreDuService"
+            />
+          </div>
+        </section>
         <section
           v-if="actionViewModel.corps.astuces"
           class="action__corps-astuces fr-p-3w border-radius--md"
@@ -26,7 +38,7 @@
         />
       </section>
 
-      <section class="fr-p-2w" v-if="actionViewModel.recommandations.length > 0">
+      <section v-if="actionViewModel.recommandations.length > 0" class="fr-p-2w">
         <h2>Pour aller <span class="text--bold">plus loin</span></h2>
         <div class="fr-grid-row fr-grid-row--gutters">
           <div
@@ -60,6 +72,8 @@
   import { onMounted, ref } from 'vue';
   import { useRoute } from 'vue-router';
   import CarteSkeleton from '@/components/custom/Skeleton/CarteSkeleton.vue';
+  import WidgetServiceLongueVieAuxObjets from '@/components/pages/PagesService/components/WidgetServiceLongueVieAuxObjets.vue';
+  import WidgetServiceRecettes from '@/components/pages/PagesService/components/WidgetServiceRecettes.vue';
   import { ActionPresenterImpl } from '@/domaines/actions/adapters/action.presenter.impl';
   import { ActionsRepositoryAxios } from '@/domaines/actions/adapters/actions.repository.axios';
   import { ChargerActionUsecase } from '@/domaines/actions/chargerAction.usecase';

@@ -9,6 +9,10 @@ interface ActionApiModel {
   pourquoi: string;
   nombre_actions_en_cours: number;
   nombre_aides_disponibles: number;
+  services: {
+    categorie: string;
+    recherche_service_id: string;
+  }[];
 }
 
 export class ActionsRepositoryAxios implements ActionsRepository {
@@ -26,6 +30,10 @@ export class ActionsRepositoryAxios implements ActionsRepository {
       recommandations: [],
       nombreDePersonnes: response.data.nombre_actions_en_cours,
       nombreAideDispobible: response.data.nombre_aides_disponibles,
+      services: response.data.services.map(service => ({
+        type: service.recherche_service_id as 'recettes' | 'longue_vie_objets' | 'pres_de_chez_nous',
+        parametreDuService: service.categorie,
+      })),
     };
   }
 
@@ -43,6 +51,7 @@ export class ActionsRepositoryAxios implements ActionsRepository {
       recommandations: [],
       nombreDePersonnes: action.nombre_actions_en_cours,
       nombreAideDispobible: action.nombre_aides_disponibles,
+      services: [],
     }));
   }
 }

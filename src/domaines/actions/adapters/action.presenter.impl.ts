@@ -21,6 +21,7 @@ export class ActionPresenterImpl implements ActionPresenter {
         introduction,
       },
       recommandations: action.recommandations,
+      services: action.services,
     });
   }
 }
