@@ -1,0 +1,68 @@
+.action h1,
+.action h2,
+.action h3,
+.action h4 {
+    font-weight: 400;
+}
+
+.action__titre > span.text--bold {
+    display: inline-block;
+    position: relative;
+    z-index: 40;
+}
+
+.action__titre > span.text--bold::before {
+    content: '';
+    position: absolute;
+    top: 70%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #e3fbaf;
+    z-index: -1;
+}
+
+.action li p {
+    margin: 0;
+    line-height: 2rem;
+}
+
+.action h2 {
+    font-size: 1.75rem;
+}
+
+.action img {
+    display: block;
+    max-width: 75%;
+    margin: 0 auto;
+    max-height: 50vh;
+}
+
+.action__corps-introduction h2, .action__corps-astuces h2 {
+    position: relative;
+    padding-left: 2rem;
+}
+
+.action__corps-introduction h2::before {
+    content: '';
+    background-image: url('/icons/editor/fr--quote-line-blue.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    position: absolute;
+    left: -0.5rem;
+    width: 2rem;
+    height: 100%;
+}
+
+.action__corps-astuces h2::before {
+    content: '';
+    background-image: url('/icons/others/leaf-line-green.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    position: absolute;
+    left: -0.5rem;
+    width: 2rem;
+    height: 100%;
+}

@@ -26,6 +26,7 @@ import '@gouvfr/dsfr/dist/component/select/select.min.css';
 import '@gouvfr/dsfr/dist/component/stepper/stepper.min.css';
 
 import './assets/theme/style.css';
+import './assets/theme/markdownFromCMS.css';
 
 declare global {
   interface Window {
