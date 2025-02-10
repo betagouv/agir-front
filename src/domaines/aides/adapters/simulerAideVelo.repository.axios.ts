@@ -2,25 +2,25 @@ import { AxiosFactory, intercept401 } from '@/axios.factory';
 import { SimulerAideVeloRepository } from '@/domaines/aides/ports/simulerAideVelo.repository';
 import { AidesVeloDisponibles, EtatVelo, SimulationVelo } from '@/domaines/aides/simulerAideVelo.usecase';
 
-interface AidesVelo {
+type AidesVeloApiModel = {
   libelle: string;
   montant: number;
   plafond: number;
   lien: string;
-  collectivite: Collectivite;
+  collectivite: CollectiviteApiModel;
   description?: string;
   logo: string;
-}
+};
 
-type AideVeloNonCalculee = Omit<AidesVelo, 'montant' | 'plafond'>;
+type AideVeloNonCalculeeApiModel = Omit<AidesVeloApiModel, 'montant' | 'plafond'>;
 
-interface Collectivite {
+type CollectiviteApiModel = {
   kind: string;
   value: string;
   code?: string;
-}
+};
 
-type TypeVelos =
+type TypeVelosApiModel =
   | 'mécanique simple'
   | 'électrique'
   | 'cargo'
@@ -30,18 +30,21 @@ type TypeVelos =
   | 'adapté'
   | 'motorisation';
 
-type AidesVeloParType = {
-  [typeVelo in TypeVelos]: AidesVelo[];
+type AidesVeloParTypeApiModel = {
+  [typeVelo in TypeVelosApiModel]: AidesVeloApiModel[];
 };
 
 export class SimulerAideVeloRepositoryAxios implements SimulerAideVeloRepository {
   @intercept401()
   async getSimulation(prixDuVelo: number, etatDuVelo: EtatVelo, utilisateurId: string): Promise<SimulationVelo> {
     const axiosInstance = AxiosFactory.getAxios();
-    const response = await axiosInstance.post<AidesVeloParType>(`/utilisateurs/${utilisateurId}/simulerAideVelo`, {
-      prix_du_velo: prixDuVelo,
-      etat_du_velo: etatDuVelo,
-    });
+    const response = await axiosInstance.post<AidesVeloParTypeApiModel>(
+      `/utilisateurs/${utilisateurId}/simulerAideVelo`,
+      {
+        prix_du_velo: prixDuVelo,
+        etat_du_velo: etatDuVelo,
+      },
+    );
 
     return {
       'mécanique simple': response.data['mécanique simple'] ?? [],
@@ -64,9 +67,12 @@ export class SimulerAideVeloRepositoryAxios implements SimulerAideVeloRepository
   async getAidesDisponiblesPourCommuneOuEpci(code: string): Promise<AidesVeloDisponibles> {
     // NOTE: pourquoi ne pas utiliser une instance
     const axiosInstance = AxiosFactory.getAxios();
-    const response = await axiosInstance.post<AideVeloNonCalculee[]>(`/aides/recupererAideVeloParCodeCommuneOuEPCI`, {
-      code_insee_ou_siren: code,
-    });
+    const response = await axiosInstance.post<AideVeloNonCalculeeApiModel[]>(
+      `/aides/recupererAideVeloParCodeCommuneOuEPCI`,
+      {
+        code_insee_ou_siren: code,
+      },
+    );
 
     return response.data ?? [];
   }
