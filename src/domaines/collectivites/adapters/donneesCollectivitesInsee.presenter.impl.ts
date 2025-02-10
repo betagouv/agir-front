@@ -56,7 +56,7 @@ export class DonneesCollectivitesInseePresenterImpl implements DonneesCollectivi
     return {
       emoji: '🚲',
       thematiques: [ClefThematiqueAPI.transports],
-      titre: `Les <span class="text--bold">aides pour l'achat d'un vélo</span> :`,
+      titre: `Les <span class="text--bleu">aides</span> pour l'achat d'un vélo`,
       liste: listeAidesVelo,
     };
   }
