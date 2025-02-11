@@ -15,9 +15,7 @@ export interface Action {
   sousTitre: string;
   corps: {
     introduction: string;
-    // SERVICE MANGER BOUGER ?
     astuces: string;
-    // FAQ ?
   };
   recommandations: RecommandationArticle[];
   nombreDePersonnes: number;
@@ -26,7 +24,7 @@ export interface Action {
 }
 
 export interface ActionsRepository {
-  recupererToutesLesActions(): Promise<Action[]>;
+  recupererToutesLesActions(idUtilisateur: string): Promise<Action[]>;
 
   chargerAction(idUtilisateur: string, idAction: string): Promise<Action>;
 }

@@ -18,7 +18,7 @@ interface ActionApiModel {
 export class ActionsRepositoryAxios implements ActionsRepository {
   async chargerAction(idUtilisateur: string, idAction: string): Promise<Action> {
     const axios = AxiosFactory.getAxios();
-    const response = await axios.get<ActionApiModel>(`/actions/${idAction}`);
+    const response = await axios.get<ActionApiModel>(`/utilisateurs/${idUtilisateur}/actions/${idAction}`);
     return {
       code: response.data.code,
       titre: response.data.titre,
@@ -37,9 +37,9 @@ export class ActionsRepositoryAxios implements ActionsRepository {
     };
   }
 
-  async recupererToutesLesActions(): Promise<Action[]> {
+  async recupererToutesLesActions(idUtilisateur: string): Promise<Action[]> {
     const axios = AxiosFactory.getAxios();
-    const response = await axios.get<ActionApiModel[]>(`/actions`);
+    const response = await axios.get<ActionApiModel[]>(`/utilisateurs/${idUtilisateur}/actions`);
     return response.data.map(action => ({
       code: action.code,
       titre: action.titre,

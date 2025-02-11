@@ -79,16 +79,18 @@
   import { ChargerActionUsecase } from '@/domaines/actions/chargerAction.usecase';
   import { ActionViewModel } from '@/domaines/actions/ports/action.presenter';
   import { RouteActionsName } from '@/router/actions/routes';
+  import { utilisateurStore } from '@/store/utilisateur';
 
   const isLoading = ref<boolean>(false);
   const actionViewModel = ref<ActionViewModel>();
 
   onMounted(() => {
+    const idUtilisateur = utilisateurStore().utilisateur.id;
     const idAction = useRoute().params.id.toString();
     isLoading.value = true;
     const usecase = new ChargerActionUsecase(new ActionsRepositoryAxios());
     usecase
-      .execute(idAction, new ActionPresenterImpl(vm => (actionViewModel.value = vm)))
+      .execute(idUtilisateur, idAction, new ActionPresenterImpl(vm => (actionViewModel.value = vm)))
       .finally(() => (isLoading.value = false));
   });
 </script>

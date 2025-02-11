@@ -26,7 +26,7 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
 
     // WHEN
     const usecase = new RecupererCatalogueActionsUsecase(new ActionsRepositoryMock(action));
-    usecase.execute(new CatalogueActionsPresenterImpl(expected));
+    usecase.execute('id-utilisateur', new CatalogueActionsPresenterImpl(expected));
 
     // THEN
     function expected(viewModel: CatalogueActionsViewModel): void {

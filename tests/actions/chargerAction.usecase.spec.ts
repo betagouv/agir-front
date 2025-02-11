@@ -49,7 +49,7 @@ describe("Fichier de tests concernant la récupération d'une action", () => {
       ],
     };
     const usecase = new ChargerActionUsecase(new ActionsRepositoryMock(action));
-    usecase.execute('id-action-test', new ActionPresenterImpl(expected));
+    usecase.execute('id-utilisateur', 'id-action-test', new ActionPresenterImpl(expected));
 
     function expected(viewModel: ActionViewModel): void {
       expect(viewModel).toStrictEqual({
