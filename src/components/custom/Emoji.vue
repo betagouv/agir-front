@@ -1,15 +1,17 @@
 <template>
-  <span v-if="kind === 'illustration'" role="img" :aria-label="label"> <slot /> </span>
-  <span v-else role="presentation" aria-hidden="true" focusable="false"> <slot /> </span>
+  <span v-if="kind === 'illustration'" :aria-label="label" role="img"> <slot /> </span>
+  <span v-else aria-hidden="true" focusable="false" role="presentation"> <slot /> </span>
 </template>
 
-<script setup lang="ts">
-  defineProps<
-    | {
-        kind: 'illustration';
-        label: string;
-      }
-    // NOTE: little hack here to make the decoratif kind by default
-    | { kind?: 'decoratif'; label?: string }
-  >();
+<script lang="ts" setup>
+  withDefaults(
+    defineProps<{
+      kind?: 'illustration' | 'decoratif';
+      label?: string;
+    }>(),
+    {
+      kind: 'decoratif',
+      label: undefined,
+    },
+  );
 </script>
