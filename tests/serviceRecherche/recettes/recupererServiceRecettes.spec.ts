@@ -65,7 +65,7 @@ describe('Fichier de tests concernant le service Recettes', () => {
             description: 'Plat principal',
             nombreMiseEnFavoris: 12,
             img: '',
-            information: '30 min',
+            information: '30&nbsp;min',
             tag: {
               label: 'Intermédiaire',
               style: 'background--bleu-ecume-hover',
@@ -81,7 +81,7 @@ describe('Fichier de tests concernant le service Recettes', () => {
             description: 'Dessert',
             nombreMiseEnFavoris: 2,
             img: '',
-            information: '20 min',
+            information: '20&nbsp;min',
             tag: {
               label: 'Facile',
               style: 'background--vert-bourgeon',
