@@ -12,6 +12,7 @@ interface ImportMetaEnv {
   readonly VITE_API_TOKEN_CMS: string;
   readonly VITE_MATOMO_URL: string;
   readonly VITE_MATOMO_SITE_ID: string;
+  readonly VITE_FRANCE_CONNECT: string;
 }
 
 declare const __APP_VERSION__: string;
