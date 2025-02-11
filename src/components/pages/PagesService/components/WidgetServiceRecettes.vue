@@ -8,7 +8,7 @@
     <li
       v-for="suggestion in serviceRecettesViewModel?.suggestions"
       :key="suggestion.titre"
-      class="fr-col-6 fr-col-md-3"
+      class="fr-col-12 fr-col-sm-6 fr-col-md-3"
     >
       <ServiceCarteRecette :suggestionsServiceViewModel="suggestion" />
     </li>
