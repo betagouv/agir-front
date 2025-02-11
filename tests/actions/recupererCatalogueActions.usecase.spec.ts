@@ -19,8 +19,9 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
           '## Nos **astuces**\n\n- **Revisitez vos classiques** : Lasagnes aux légumes, chili sin carne, redécouvrez vos plats favoris en version végétarienne.',
       },
       nombreDePersonnes: 0,
-      nombreAideDispobible: 0,
+      nombreAidesDisponibles: 0,
       recommandations: [],
+      services: [],
     };
 
     // WHEN

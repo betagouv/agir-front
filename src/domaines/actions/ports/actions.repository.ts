@@ -4,6 +4,11 @@ interface RecommandationArticle {
   url: string;
 }
 
+export interface ActionService {
+  type: 'recettes' | 'longue_vie_objets' | 'pres_de_chez_nous';
+  parametreDuService: string;
+}
+
 export interface Action {
   code: string;
   titre: string;
@@ -16,7 +21,8 @@ export interface Action {
   };
   recommandations: RecommandationArticle[];
   nombreDePersonnes: number;
-  nombreAideDispobible: number;
+  nombreAidesDisponibles: number;
+  services: ActionService[];
 }
 
 export interface ActionsRepository {

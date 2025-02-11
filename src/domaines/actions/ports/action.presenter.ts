@@ -9,11 +9,15 @@ export interface ActionViewModel {
   sousTitre: string;
   corps: {
     introduction: string;
-    // SERVICE MANGER BOUGER ?
     astuces: string;
-    // FAQ ?
   };
   recommandations: RecommandationArticleViewModel[];
+  services: ActionServiceViewModel[];
+}
+
+export interface ActionServiceViewModel {
+  type: 'recettes' | 'longue_vie_objets' | 'pres_de_chez_nous';
+  parametreDuService: string;
 }
 
 interface RecommandationArticleViewModel {

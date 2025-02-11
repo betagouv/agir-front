@@ -34,7 +34,7 @@ export class ServiceRechercheRecettesPresenterImpl implements ServiceRechercheRe
         titre: elem.titre,
         img: elem.img,
         description: elem.typeDePlat,
-        information: `${elem.tempsDePreparation} min`,
+        information: `${elem.tempsDePreparation}&nbsp;min`,
         nombreMiseEnFavoris: elem.nombreFavoris,
         tag: this.determineTag(elem.difficulte),
         to: {

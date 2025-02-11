@@ -10,7 +10,7 @@ describe("Fichier de tests concernant la récupération d'une action", () => {
     const action: Action = {
       code: 'id-action-test',
       nombreDePersonnes: 0,
-      nombreAideDispobible: 0,
+      nombreAidesDisponibles: 0,
       titre: 'Tester une nouvelle **recette végétarienne**',
       sousTitre:
         'Faites des économies et le plein de vitamines ! Cette semaine, on cuisine une recette saine et délicieuse !',
@@ -35,6 +35,16 @@ describe("Fichier de tests concernant la récupération d'une action", () => {
           titre: '10 recettes végétariennes pour les fêtes',
           image: '/temp_10_recettes_pour_fetes.png',
           url: '',
+        },
+      ],
+      services: [
+        {
+          type: 'recettes',
+          parametreDuService: 'recette-vegetarienne',
+        },
+        {
+          type: 'longue_vie_objets',
+          parametreDuService: 'reparer',
         },
       ],
     };
@@ -72,6 +82,16 @@ describe("Fichier de tests concernant la récupération d'une action", () => {
             image: '/temp_10_recettes_pour_fetes.png',
             titre: '10 recettes végétariennes pour les fêtes',
             url: '',
+          },
+        ],
+        services: [
+          {
+            parametreDuService: 'recette-vegetarienne',
+            type: 'recettes',
+          },
+          {
+            parametreDuService: 'reparer',
+            type: 'longue_vie_objets',
           },
         ],
       });

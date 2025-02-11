@@ -1,4 +1,5 @@
 import { RouteRecordRaw } from 'vue-router';
+
 const PageServiceLongueVieAuxObjets = () => import('@/components/pages/PagesService/PageServiceLongueVieAuxObjets.vue');
 const PageServiceLongueVieAuxObjetsDetail = () =>
   import('@/components/pages/PagesService/PageServiceLongueVieAuxObjetsDetail.vue');
@@ -24,9 +25,9 @@ export enum RouteServiceName {
 
 export enum RouteServicePath {
   RECETTES = '/thematique/:thematiqueId/service/recettes',
-  RECETTES_DETAIL = '/thematique/:thematiqueId/service/recettes/:id',
+  RECETTES_DETAIL = '/recettes/:id',
   LONGUE_VIE_AUX_OBJETS = '/thematique/:thematiqueId/service/longue-vie-aux-objets',
-  LONGUE_VIE_AUX_OBJETS_DETAIL = '/thematique/:thematiqueId/service/longue-vie-aux-objets/:id',
+  LONGUE_VIE_AUX_OBJETS_DETAIL = '/service/longue-vie-aux-objets/:id',
   PROXIMITE = '/thematique/:thematiqueId/service/pres-de-chez-nous',
   PROXIMITE_DETAIL = '/thematique/:thematiqueId/service/pres-de-chez-nous/:id',
   FRUITS_ET_LEGUMES = '/thematique/:thematiqueId/service/fruits-et-legumes',
