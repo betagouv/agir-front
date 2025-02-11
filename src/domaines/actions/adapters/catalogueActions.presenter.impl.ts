@@ -1,4 +1,4 @@
-import { Action } from '@/domaines/actions/ports/actions.repository';
+import { ActionDetail } from '@/domaines/actions/ports/actions.repository';
 import {
   CatalogueActionsPresenter,
   CatalogueActionsViewModel,
@@ -12,7 +12,7 @@ import { gererPluriel } from '@/shell/pluriel';
 export class CatalogueActionsPresenterImpl implements CatalogueActionsPresenter {
   constructor(private readonly viewModel: (viewModel: CatalogueActionsViewModel) => void) {}
 
-  async presente(actions: Action[]) {
+  async presente(actions: ActionDetail[]) {
     const actionsViewModel: CatalogueActionViewModel[] = await Promise.all(
       actions.map(async action => {
         const nombreDePersonnes = gererPluriel(

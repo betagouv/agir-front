@@ -28,6 +28,7 @@
             <WidgetServiceLongueVieAuxObjets
               v-if="service.type === 'longue_vie_objets'"
               :parametre-de-recherche="service.parametreDuService"
+              :commune="actionViewModel.commune"
             />
           </div>
         </section>

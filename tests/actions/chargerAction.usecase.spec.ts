@@ -3,17 +3,18 @@ import { ChargerActionUsecase } from '@/domaines/actions/chargerAction.usecase';
 import { ActionsRepositoryMock } from './adapters/actions.repository.mock';
 import { ActionPresenterImpl } from '@/domaines/actions/adapters/action.presenter.impl';
 import { ActionViewModel } from '@/domaines/actions/ports/action.presenter';
-import { Action } from '@/domaines/actions/ports/actions.repository';
+import { ActionDetail } from '@/domaines/actions/ports/actions.repository';
 
 describe("Fichier de tests concernant la récupération d'une action", () => {
   it("En donnant l'id d'une action, on devrait pouvoir récupérer son entiereté", () => {
-    const action: Action = {
+    const action: ActionDetail = {
       code: 'id-action-test',
       nombreDePersonnes: 0,
       nombreAidesDisponibles: 0,
       titre: 'Tester une nouvelle **recette végétarienne**',
       sousTitre:
         'Faites des économies et le plein de vitamines ! Cette semaine, on cuisine une recette saine et délicieuse !',
+      commune: 'Noisiel',
       corps: {
         introduction:
           '## En **quelques mots**\n\n- Les repas à base de légumes sont en moyenne **30% moins chers** que ceux à base de viande.\n- Les nutriments contenus dans les légumes de saison sont une grande aide pour passer l’hiver !',
@@ -48,7 +49,7 @@ describe("Fichier de tests concernant la récupération d'une action", () => {
         },
       ],
     };
-    const usecase = new ChargerActionUsecase(new ActionsRepositoryMock(action));
+    const usecase = new ChargerActionUsecase(ActionsRepositoryMock.avecActionDetail(action));
     usecase.execute('id-utilisateur', 'id-action-test', new ActionPresenterImpl(expected));
 
     function expected(viewModel: ActionViewModel): void {
