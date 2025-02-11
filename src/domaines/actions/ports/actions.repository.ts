@@ -21,7 +21,7 @@ export interface Action {
   };
   recommandations: RecommandationArticle[];
   nombreDePersonnes: number;
-  nombreAideDispobible: number;
+  nombreAidesDisponibles: number;
   services: ActionService[];
 }
 

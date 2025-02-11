@@ -10,7 +10,7 @@ describe("Fichier de tests concernant la récupération d'une action", () => {
     const action: Action = {
       code: 'id-action-test',
       nombreDePersonnes: 0,
-      nombreAideDispobible: 0,
+      nombreAidesDisponibles: 0,
       titre: 'Tester une nouvelle **recette végétarienne**',
       sousTitre:
         'Faites des économies et le plein de vitamines ! Cette semaine, on cuisine une recette saine et délicieuse !',

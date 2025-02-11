@@ -7,10 +7,8 @@ export interface CatalogueActionsViewModel {
 export interface CatalogueActionViewModel {
   code: string;
   titre: string;
-  nombreDePersonnes: string;
-  aidesDisponibles?: {
-    nombreDaidesDisponibles: string;
-  };
+  nombreDePersonnes?: string;
+  aidesDisponibles?: string;
   url: { name: string; params: { id: string; titre: string } };
 }
 
