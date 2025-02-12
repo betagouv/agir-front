@@ -77,6 +77,7 @@ export class ChargementAidesAxiosRepository implements ChargementAidesRepository
             nom: aideCMS.data.data.attributes.partenaire.data.attributes.nom,
           }
         : undefined,
+      derniereMaj: aideCMS.data.data.attributes.updatedAt,
     };
   }
 }

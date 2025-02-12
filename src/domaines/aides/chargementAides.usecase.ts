@@ -21,6 +21,7 @@ export interface Aide {
     logoUrl: string;
     nom: string;
   };
+  derniereMaj?: string;
 }
 
 export default class ChargementAidesUsecase {

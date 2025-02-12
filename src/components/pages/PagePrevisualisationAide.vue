@@ -2,7 +2,7 @@
   <div class="fr-container">
     <div class="fr-grid-row fr-grid-row--gutters">
       <div class="fr-col-12 fr-col-md-8">
-        <div class="fr-mt-2w background--white border border-radius--md fr-p-2w">
+        <div class="fr-my-3w background--white border border-radius--md fr-p-2w">
           <ThematiqueTag
             :tag="{
               label: MenuThematiques.getThematiqueData(aide.thematique).labelDansLeMenu,
@@ -10,9 +10,16 @@
             }"
             aria-hidden="true"
           />
-          <h1 class="fr-h1 fr-mt-2w text--gris">
+
+          <h1 class="fr-h1 fr-mt-2w fr-mb-0">
             {{ aide.titre }}
           </h1>
+
+          <p v-if="derniereMiseAJour" class="text--italic fr-text--sm fr-mt-2w fr-mb-1w">
+            Dernière mise à jour le {{ derniereMiseAJour }}
+          </p>
+          <p v-else class="text--italic fr-text--sm fr-mt-2w fr-mb-1w">Dernière mise à jour en décembre 2024</p>
+
           <span class="fr-col-12 fr-pr-2w">
             <span v-if="aide.isSimulateur || aide.montantMaximum" class="fr-grid-row">
               <span
@@ -50,7 +57,7 @@
         </div>
       </div>
       <div class="fr-col-12 fr-col-md-4">
-        <div v-if="aide.partenaire" class="fr-mt-2w background--white border border-radius--md fr-p-2w">
+        <div v-if="aide.partenaire" class="fr-mt-3w background--white border border-radius--md fr-p-2w">
           <p class="fr-mb-0">Proposé par</p>
           <img :alt="aide.partenaire.nom" :src="aide.partenaire.logoUrl" class="fr-mt-5v max-full-width" />
         </div>
@@ -76,12 +83,17 @@
     url: '',
     isSimulateur: false,
     thematique: ClefThematiqueAPI.services_societaux,
+    derniereMaj: '',
   });
+  const derniereMiseAJour = ref<string>('');
 
   onMounted(async () => {
     const route = useRoute();
     const idArticle = Array.isArray(route.params.id) ? route.params.id[0] : route.params.id;
     const usecase = new PrevisualiserAideUsecase(new ChargementAidesAxiosRepository());
     aide.value = await usecase.execute(idArticle);
+    if (aide.value.derniereMaj) {
+      derniereMiseAJour.value = new Date(aide.value.derniereMaj).toLocaleDateString('fr-FR');
+    }
   });
 </script>
