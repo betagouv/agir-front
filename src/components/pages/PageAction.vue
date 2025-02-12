@@ -8,16 +8,18 @@
     </router-link>
 
     <CarteSkeleton v-if="isLoading" />
-
-    <ActionClassique v-if="actionClassiqueViewModel" :action-classique-view-model="actionClassiqueViewModel" />
-    <ActionQuiz v-if="actionQuizViewModel" :action-quiz-view-model="actionQuizViewModel" />
-    <div v-if="!actionQuizViewModel && !actionClassiqueViewModel">Une erreur est survenue</div>
+    <ActionBase v-else-if="actionBaseViewModel" :action-base-view-model="actionBaseViewModel">
+      <ActionClassique v-if="actionClassiqueViewModel" :action-classique-view-model="actionClassiqueViewModel" />
+      <ActionQuiz v-if="actionQuizViewModel" :action-quiz-view-model="actionQuizViewModel" />
+    </ActionBase>
+    <p v-else>Une erreur est survenue</p>
   </div>
 </template>
 
 <script lang="ts" setup>
-  import { onMounted, ref } from 'vue';
+  import { computed, onMounted, ref } from 'vue';
   import { useRoute } from 'vue-router';
+  import ActionBase from '@/components/custom/Action/ActionBase.vue';
   import ActionClassique from '@/components/custom/Action/ActionClassique.vue';
   import ActionQuiz from '@/components/custom/Action/ActionQuiz.vue';
   import CarteSkeleton from '@/components/custom/Skeleton/CarteSkeleton.vue';
@@ -33,6 +35,7 @@
   const isLoading = ref<boolean>(false);
   const actionClassiqueViewModel = ref<ActionClassiqueViewModel>();
   const actionQuizViewModel = ref<ActionQuizViewModel>();
+  const actionBaseViewModel = computed(() => actionQuizViewModel.value || actionClassiqueViewModel.value);
 
   onMounted(() => {
     const idUtilisateur = utilisateurStore().utilisateur.id;
