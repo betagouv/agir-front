@@ -1,6 +1,8 @@
 <template>
   <div class="flex flex-space-between align-items--center">
-    <h2>Où {{ props.parametreDeRecherche }} <span class="text--bold">près de chez moi</span> ?</h2>
+    <h2>
+      Où {{ props.parametreDeRecherche }} à <span class="text--bold">{{ props.commune }}</span> ?
+    </h2>
   </div>
 
   <ul
@@ -45,6 +47,7 @@
   const isLoading = ref<boolean>(true);
   const serviceRechercheLongueVieAuxObjetsViewModel = ref<ServiceRechercheLongueVieAuxObjetsViewModel>();
   const props = defineProps<{
+    commune: string;
     parametreDeRecherche: string;
   }>();
 

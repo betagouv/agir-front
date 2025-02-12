@@ -13,11 +13,18 @@ export interface Action {
   code: string;
   titre: string;
   sousTitre: string;
+  nombreDePersonnes: number;
+  nombreAidesDisponibles: number;
+}
+
+export interface ActionDetail {
+  code: string;
+  titre: string;
+  sousTitre: string;
+  commune: string;
   corps: {
     introduction: string;
-    // SERVICE MANGER BOUGER ?
     astuces: string;
-    // FAQ ?
   };
   recommandations: RecommandationArticle[];
   nombreDePersonnes: number;
@@ -26,7 +33,7 @@ export interface Action {
 }
 
 export interface ActionsRepository {
-  recupererToutesLesActions(): Promise<Action[]>;
+  recupererToutesLesActions(idUtilisateur: string): Promise<Action[]>;
 
-  chargerAction(idUtilisateur: string, idAction: string): Promise<Action>;
+  chargerAction(idUtilisateur: string, idAction: string): Promise<ActionDetail>;
 }

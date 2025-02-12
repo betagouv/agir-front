@@ -18,7 +18,8 @@
           class="action__corps-introduction fr-p-3w border-radius--md fr-mb-3w"
           v-html="actionViewModel.corps.introduction"
         />
-        <section class="fr-mb-4w fr-mx-3w">
+
+        <section class="fr-mt-2w fr-mb-4w fr-mx-3w">
           <div v-for="service in actionViewModel.services" :key="service.type">
             <WidgetServiceRecettes
               v-if="service.type === 'recettes'"
@@ -28,9 +29,11 @@
             <WidgetServiceLongueVieAuxObjets
               v-if="service.type === 'longue_vie_objets'"
               :parametre-de-recherche="service.parametreDuService"
+              :commune="actionViewModel.commune"
             />
           </div>
         </section>
+
         <section
           v-if="actionViewModel.corps.astuces"
           class="action__corps-astuces fr-p-3w border-radius--md"
@@ -79,16 +82,18 @@
   import { ChargerActionUsecase } from '@/domaines/actions/chargerAction.usecase';
   import { ActionViewModel } from '@/domaines/actions/ports/action.presenter';
   import { RouteActionsName } from '@/router/actions/routes';
+  import { utilisateurStore } from '@/store/utilisateur';
 
   const isLoading = ref<boolean>(false);
   const actionViewModel = ref<ActionViewModel>();
 
   onMounted(() => {
+    const idUtilisateur = utilisateurStore().utilisateur.id;
     const idAction = useRoute().params.id.toString();
     isLoading.value = true;
     const usecase = new ChargerActionUsecase(new ActionsRepositoryAxios());
     usecase
-      .execute(idAction, new ActionPresenterImpl(vm => (actionViewModel.value = vm)))
+      .execute(idUtilisateur, idAction, new ActionPresenterImpl(vm => (actionViewModel.value = vm)))
       .finally(() => (isLoading.value = false));
   });
 </script>

@@ -1,10 +1,26 @@
 import { AxiosFactory } from '@/axios.factory';
-import { Action, ActionsRepository } from '@/domaines/actions/ports/actions.repository';
+import { Action, ActionDetail, ActionsRepository } from '@/domaines/actions/ports/actions.repository';
 
 interface ActionApiModel {
   code: string;
   titre: string;
   sous_titre: string;
+  nom_commune: string;
+  comment: string;
+  pourquoi: string;
+  nombre_actions_en_cours: number;
+  nombre_aides_disponibles: number;
+  services: {
+    categorie: string;
+    recherche_service_id: string;
+  }[];
+}
+
+interface ActionDetailApiModel {
+  code: string;
+  titre: string;
+  sous_titre: string;
+  nom_commune: string;
   comment: string;
   pourquoi: string;
   nombre_actions_en_cours: number;
@@ -16,13 +32,14 @@ interface ActionApiModel {
 }
 
 export class ActionsRepositoryAxios implements ActionsRepository {
-  async chargerAction(idUtilisateur: string, idAction: string): Promise<Action> {
+  async chargerAction(idUtilisateur: string, idAction: string): Promise<ActionDetail> {
     const axios = AxiosFactory.getAxios();
-    const response = await axios.get<ActionApiModel>(`/actions/${idAction}`);
+    const response = await axios.get<ActionDetailApiModel>(`/utilisateurs/${idUtilisateur}/actions/${idAction}`);
     return {
       code: response.data.code,
       titre: response.data.titre,
       sousTitre: response.data.sous_titre,
+      commune: response.data.nom_commune,
       corps: {
         introduction: response.data.pourquoi,
         astuces: response.data.comment,
@@ -37,21 +54,15 @@ export class ActionsRepositoryAxios implements ActionsRepository {
     };
   }
 
-  async recupererToutesLesActions(): Promise<Action[]> {
+  async recupererToutesLesActions(idUtilisateur: string): Promise<Action[]> {
     const axios = AxiosFactory.getAxios();
-    const response = await axios.get<ActionApiModel[]>(`/actions`);
+    const response = await axios.get<ActionApiModel[]>(`/utilisateurs/${idUtilisateur}/actions`);
     return response.data.map(action => ({
       code: action.code,
       titre: action.titre,
       sousTitre: action.sous_titre,
-      corps: {
-        introduction: action.comment,
-        astuces: action.pourquoi,
-      },
-      recommandations: [],
       nombreDePersonnes: action.nombre_actions_en_cours,
       nombreAidesDisponibles: action.nombre_aides_disponibles,
-      services: [],
     }));
   }
 }

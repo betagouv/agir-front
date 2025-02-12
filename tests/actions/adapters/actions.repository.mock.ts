@@ -1,13 +1,24 @@
-import { Action, ActionsRepository } from '@/domaines/actions/ports/actions.repository';
+import { Action, ActionDetail, ActionsRepository } from '@/domaines/actions/ports/actions.repository';
 
 export class ActionsRepositoryMock implements ActionsRepository {
-  constructor(private readonly action: Action) {}
+  private constructor(
+    private readonly actions: Action[],
+    private readonly action?: ActionDetail,
+  ) {}
 
-  chargerAction(idUtilisateur: string, idAction: string): Promise<Action> {
-    return Promise.resolve(this.action);
+  static avecActionDetail(actionDetail: ActionDetail): ActionsRepositoryMock {
+    return new ActionsRepositoryMock([], actionDetail);
+  }
+
+  static avecActions(actions: Action[]): ActionsRepositoryMock {
+    return new ActionsRepositoryMock(actions, undefined);
+  }
+
+  chargerAction(idUtilisateur: string, idAction: string): Promise<ActionDetail> {
+    return Promise.resolve(this.action!);
   }
 
   recupererToutesLesActions(): Promise<Action[]> {
-    return Promise.resolve([this.action]);
+    return Promise.resolve(this.actions);
   }
 }

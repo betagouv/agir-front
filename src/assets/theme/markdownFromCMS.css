@@ -30,3 +30,39 @@
 .action h2 {
     font-size: 1.75rem;
 }
+
+.action img {
+    display: block;
+    max-width: 75%;
+    margin: 0 auto;
+    max-height: 50vh;
+}
+
+.action__corps-introduction h2, .action__corps-astuces h2 {
+    position: relative;
+    padding-left: 2rem;
+}
+
+.action__corps-introduction h2::before {
+    content: '';
+    background-image: url('/icons/editor/fr--quote-line-blue.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    position: absolute;
+    left: -0.5rem;
+    width: 2rem;
+    height: 100%;
+}
+
+.action__corps-astuces h2::before {
+    content: '';
+    background-image: url('/icons/others/leaf-line-green.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    position: absolute;
+    left: -0.5rem;
+    width: 2rem;
+    height: 100%;
+}

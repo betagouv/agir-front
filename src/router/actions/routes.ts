@@ -17,7 +17,6 @@ const compteRoutes: RouteRecordRaw[] = [
     component: () => import('@/components/pages/PageAction.vue'),
     meta: {
       title: 'Action',
-      estPublique: true,
     },
   },
   {
@@ -26,7 +25,6 @@ const compteRoutes: RouteRecordRaw[] = [
     component: () => import('@/components/pages/PageCatalogueActions.vue'),
     meta: {
       title: 'Catalogue Action',
-      estPublique: true,
     },
   },
 ];

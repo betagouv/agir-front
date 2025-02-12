@@ -31,11 +31,14 @@
   import { CatalogueActionsPresenterImpl } from '@/domaines/actions/adapters/catalogueActions.presenter.impl';
   import { CatalogueActionsViewModel } from '@/domaines/actions/ports/catalogueActions.presenter';
   import { RecupererCatalogueActionsUsecase } from '@/domaines/actions/recupererCatalogueActions.usecase';
+  import { utilisateurStore } from '@/store/utilisateur';
 
   const catalogueViewModel = ref<CatalogueActionsViewModel>();
   onMounted(() => {
+    const idUtilisateur = utilisateurStore().utilisateur.id;
     const usecase = new RecupererCatalogueActionsUsecase(new ActionsRepositoryAxios());
     usecase.execute(
+      idUtilisateur,
       new CatalogueActionsPresenterImpl(actions => {
         catalogueViewModel.value = actions;
       }),
