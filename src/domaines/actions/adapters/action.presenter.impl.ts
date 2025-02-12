@@ -1,11 +1,18 @@
-import { ActionPresenter, ActionViewModel } from '@/domaines/actions/ports/action.presenter';
+import {
+  ActionPresenter,
+  ActionClassiqueViewModel,
+  ActionQuizViewModel,
+} from '@/domaines/actions/ports/action.presenter';
 import { ActionDetail } from '@/domaines/actions/ports/actions.repository';
 import marked from '@/shell/actionMarkdownToHtml';
 
 export class ActionPresenterImpl implements ActionPresenter {
-  constructor(private readonly actionViewModel: (viewModel: ActionViewModel) => void) {}
+  constructor(
+    private readonly actionClassiqueViewModel: (viewModel: ActionClassiqueViewModel) => void,
+    private readonly actionQuizViewModel: (viewModel: ActionQuizViewModel) => void,
+  ) {}
 
-  async presenteAction(action: ActionDetail) {
+  async presenteActionClassique(action: ActionDetail) {
     const [titre, sousTitre, astuces, introduction] = await Promise.all([
       marked.parseInline(action.titre),
       marked.parseInline(action.sousTitre ?? ''),
@@ -13,7 +20,7 @@ export class ActionPresenterImpl implements ActionPresenter {
       marked.parse(action.corps.introduction ?? ''),
     ]);
 
-    this.actionViewModel({
+    this.actionClassiqueViewModel({
       titre,
       sousTitre,
       commune: action.commune,
@@ -23,6 +30,22 @@ export class ActionPresenterImpl implements ActionPresenter {
       },
       recommandations: action.recommandations,
       services: action.services,
+    });
+  }
+
+  async presenteActionQuiz(action: ActionDetail) {
+    const [titre, sousTitre] = await Promise.all([
+      marked.parseInline(action.titre),
+      marked.parseInline(action.sousTitre ?? ''),
+    ]);
+
+    this.actionQuizViewModel({
+      titre,
+      sousTitre,
+      quiz: {
+        nombreDeQuestion: 0,
+      },
+      recommandations: action.recommandations,
     });
   }
 }

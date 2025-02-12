@@ -1,10 +1,12 @@
 import { ActionDetail } from '@/domaines/actions/ports/actions.repository';
 
 export interface ActionPresenter {
-  presenteAction(action: ActionDetail): void;
+  presenteActionClassique(action: ActionDetail): void;
+
+  presenteActionQuiz(action: ActionDetail): void;
 }
 
-export interface ActionViewModel {
+export interface ActionClassiqueViewModel {
   titre: string;
   sousTitre: string;
   commune: string;
@@ -14,6 +16,15 @@ export interface ActionViewModel {
   };
   recommandations: RecommandationArticleViewModel[];
   services: ActionServiceViewModel[];
+}
+
+export interface ActionQuizViewModel {
+  titre: string;
+  sousTitre: string;
+  quiz: {
+    nombreDeQuestion: number;
+  };
+  recommandations: RecommandationArticleViewModel[];
 }
 
 export interface ActionServiceViewModel {

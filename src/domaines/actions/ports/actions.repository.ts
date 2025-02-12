@@ -22,10 +22,14 @@ export interface ActionDetail {
   code: string;
   titre: string;
   sousTitre: string;
+  type: 'classique' | 'quiz' | 'kyc';
   commune: string;
   corps: {
     introduction: string;
     astuces: string;
+  };
+  quiz?: {
+    nombreDeQuestions: number;
   };
   recommandations: RecommandationArticle[];
   nombreDePersonnes: number;

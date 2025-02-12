@@ -21,6 +21,7 @@ interface ActionDetailApiModel {
   code: string;
   titre: string;
   sous_titre: string;
+  type: 'classique' | 'quiz' | 'kyc';
   nom_commune: string;
   comment: string;
   pourquoi: string;
@@ -42,6 +43,7 @@ export class ActionsRepositoryAxios implements ActionsRepository {
       code: response.data.code,
       titre: response.data.titre,
       sousTitre: response.data.sous_titre,
+      type: response.data.type,
       commune: response.data.nom_commune,
       corps: {
         introduction: response.data.pourquoi,
