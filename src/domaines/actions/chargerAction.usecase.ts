@@ -15,7 +15,7 @@ export class ChargerActionUsecase {
     const action = await this.actionsRepository.chargerAction(idUtilisateur, actionId, typeAction as TypeAction);
     if (action.type === 'classique') {
       await this.chargerActionClassique.execute(action, this.presenter);
-    } else if (action.type === 'quiz') {
+    } else if (action.type === 'quizz') {
       await this.chargerActionQuiz.execute(action, this.presenter);
     }
   }

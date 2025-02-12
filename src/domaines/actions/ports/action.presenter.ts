@@ -6,25 +6,25 @@ export interface ActionPresenter {
   presenteActionQuiz(action: ActionDetail): void;
 }
 
-export interface ActionClassiqueViewModel {
+export interface ActionBaseViewModel {
   titre: string;
   sousTitre: string;
+  recommandations: RecommandationArticleViewModel[];
+}
+
+export interface ActionClassiqueViewModel extends ActionBaseViewModel {
   commune: string;
   corps: {
     introduction: string;
     astuces: string;
   };
-  recommandations: RecommandationArticleViewModel[];
   services: ActionServiceViewModel[];
 }
 
-export interface ActionQuizViewModel {
-  titre: string;
-  sousTitre: string;
+export interface ActionQuizViewModel extends ActionBaseViewModel {
   quiz: {
     nombreDeQuestion: number;
   };
-  recommandations: RecommandationArticleViewModel[];
 }
 
 export interface ActionServiceViewModel {

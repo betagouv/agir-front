@@ -21,7 +21,7 @@ interface ActionDetailApiModel {
   code: string;
   titre: string;
   sous_titre: string;
-  type: 'classique' | 'quiz' | 'kyc';
+  type: 'classique' | 'quizz' | 'kyc';
   nom_commune: string;
   comment: string;
   pourquoi: string;

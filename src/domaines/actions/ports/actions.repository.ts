@@ -22,7 +22,7 @@ export interface ActionDetail {
   code: string;
   titre: string;
   sousTitre: string;
-  type: 'classique' | 'quiz' | 'kyc';
+  type: 'classique' | 'quizz' | 'kyc';
   commune: string;
   corps: {
     introduction: string;
