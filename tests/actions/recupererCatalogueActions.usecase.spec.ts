@@ -5,7 +5,7 @@ import { CatalogueActionsViewModel } from '@/domaines/actions/ports/catalogueAct
 import { Action } from '@/domaines/actions/ports/actions.repository';
 
 describe("Fichier de tests concernant la récupération du catalogue d'actions", () => {
-  it('Doit presenter le catalogue actions', () => {
+  it('Doit presenter le catalogue actions', async () => {
     // GIVEN
     const actions: Action[] = [
       {
@@ -20,7 +20,7 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
 
     // WHEN
     const usecase = new RecupererCatalogueActionsUsecase(ActionsRepositoryMock.avecActions(actions));
-    usecase.execute('id-utilisateur', new CatalogueActionsPresenterImpl(expected));
+    await usecase.execute('id-utilisateur', new CatalogueActionsPresenterImpl(expected));
 
     // THEN
     function expected(viewModel: CatalogueActionsViewModel): void {

@@ -1,4 +1,3 @@
-import { describe, expect } from 'vitest';
 import { ChargerActionUsecase } from '@/domaines/actions/chargerAction.usecase';
 import { ActionsRepositoryMock } from './adapters/actions.repository.mock';
 import { ActionPresenterImpl } from '@/domaines/actions/adapters/action.presenter.impl';
@@ -6,7 +5,7 @@ import { ActionViewModel } from '@/domaines/actions/ports/action.presenter';
 import { ActionDetail } from '@/domaines/actions/ports/actions.repository';
 
 describe("Fichier de tests concernant la récupération d'une action", () => {
-  it("En donnant l'id d'une action, on devrait pouvoir récupérer son entiereté", () => {
+  it("En donnant l'id d'une action, on devrait pouvoir récupérer son entiereté", async () => {
     const action: ActionDetail = {
       code: 'id-action-test',
       nombreDePersonnes: 0,
@@ -50,13 +49,14 @@ describe("Fichier de tests concernant la récupération d'une action", () => {
       ],
     };
     const usecase = new ChargerActionUsecase(ActionsRepositoryMock.avecActionDetail(action));
-    usecase.execute('id-utilisateur', 'id-action-test', new ActionPresenterImpl(expected));
+    await usecase.execute('id-utilisateur', 'id-action-test', new ActionPresenterImpl(expected));
 
     function expected(viewModel: ActionViewModel): void {
       expect(viewModel).toStrictEqual({
         titre: 'Tester une nouvelle <span class="text--bold">recette végétarienne</span>',
         sousTitre:
           'Faites des économies et le plein de vitamines ! Cette semaine, on cuisine une recette saine et délicieuse !',
+        commune: 'Noisiel',
         corps: {
           astuces: `<h2>Nos <span class="text--bold">astuces</span></h2><ul>
 <li><span class="text--bold">Revisitez vos classiques</span> : Lasagnes aux légumes, chili sin carne, redécouvrez vos plats favoris en version végétarienne.</li>
