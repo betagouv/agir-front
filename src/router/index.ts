@@ -35,7 +35,7 @@ enum RouteCommunePath {
   BETA_FERMEE = '/beta-fermee',
   AUTHENTIFICATION = '/authentification',
   SESSION_EXPIREE = '/session-expiree',
-  LOGIN_CALLBACK = '/fr-login-callback',
+  LOGIN_CALLBACK = '/fc-login-callback',
   LOGOUT_CALLBACK = '/fr-logout-callback',
 }
 

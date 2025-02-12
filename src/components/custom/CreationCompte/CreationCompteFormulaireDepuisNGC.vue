@@ -1,11 +1,11 @@
 <template>
   <div class="fr-grid-row fr-grid-row--gutters">
     <div class="fr-col">
-      <img src="/bg_creation_compte.svg" alt="" />
+      <img alt="" src="/bg_creation_compte.svg" />
     </div>
     <div>
       <div class="fr-grid-row border border-radius--md fr-p-2w align-items--center fr-mb-md-0 fr-mb-5w">
-        <img class="fr-mr-2w" width="60" src="/ic_ngc_small.webp" alt="" />
+        <img alt="" class="fr-mr-2w" src="/ic_ngc_small.webp" width="60" />
         <div class="flex-column text--bold">
           <span class="text--black">MON BILAN</span>
           <div class="fr-grid-row align-items--center text--orange-dark">
@@ -19,10 +19,13 @@
       </div>
     </div>
   </div>
-  <form aria-labelledby="identity-fieldset-legend" @submit.prevent="performCreerCompteUtilisateur" class="fr-mb-4w">
+  <h1 class="fr-mb-4w">Rejoignez-nous pour continuer</h1>
+  <FranceConnect class="fr-mb-2w" />
+
+  <h2>Créez votre compte sur J'agis</h2>
+  <form aria-labelledby="identity-fieldset-legend" class="fr-mb-4w" @submit.prevent="performCreerCompteUtilisateur">
     <fieldset class="fr-fieldset fr-mb-0">
-      <legend class="fr-fieldset__legend" id="identity-fieldset-legend">
-        <h2 class="fr-h4 fr-mb-0">Rejoignez-nous pour continuer</h2>
+      <legend id="identity-fieldset-legend" class="fr-fieldset__legend">
         <span class="fr-text--regular">
           Indiquez votre adresse e-mail et choisissez un mot de passe pour accéder au service.
         </span>
@@ -30,26 +33,26 @@
       <div class="fr-messages-group">
         <Alert
           v-if="creationDeCompteEnErreur"
-          class="fr-col-12 fr-mb-2w"
-          type="error"
-          titre="Erreur lors de la création du compte"
           :message="creationDeCompteMessageErreur"
+          class="fr-col-12 fr-mb-2w"
+          titre="Erreur lors de la création du compte"
+          type="error"
         />
       </div>
       <div class="fr-fieldset__element">
-        <InputMail label="Adresse électronique" name="utilisateur-mail" v-model="compteUtilisateurInput.mail" />
+        <InputMail v-model="compteUtilisateurInput.mail" label="Adresse électronique" name="utilisateur-mail" />
       </div>
 
       <div class="fr-fieldset__element">
         <InputPassword
           v-model="compteUtilisateurInput.motDePasse"
-          @update:mot-de-passe-valide="onMotDePasseValideChanged"
           legende="Votre mot de passe doit contenir :"
+          @update:mot-de-passe-valide="onMotDePasseValideChanged"
         />
       </div>
       <div class="fr-fieldset__element">
         <div class="fr-checkbox-group fr-checkbox-group--sm">
-          <input name="cgu" id="cgu" type="checkbox" v-model="acceptationCGU" />
+          <input id="cgu" v-model="acceptationCGU" name="cgu" type="checkbox" />
           <label class="fr-label fr-mt-1w" for="cgu">
             J'accepte&nbsp;
             <router-link :to="{ name: RouteConformiteName.CGU }" target="_blank"
@@ -64,9 +67,9 @@
       </div>
       <div class="fr-fieldset__element fr-mb-0 fr-mt-1w">
         <button
-          type="submit"
-          class="fr-btn fr-btn--lg display-block full-width"
           :disabled="!formulaireValide || !acceptationCGU"
+          class="fr-btn fr-btn--lg display-block full-width"
+          type="submit"
         >
           S'inscrire
         </button>
@@ -75,11 +78,12 @@
   </form>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
   import { ref } from 'vue';
   import { useRoute } from 'vue-router';
   import Alert from '@/components/custom/Alert.vue';
   import InputPassword from '@/components/custom/InputPassword.vue';
+  import FranceConnect from '@/components/dsfr/FranceConnect.vue';
   import InputMail from '@/components/dsfr/InputMail.vue';
   import { SessionRepositoryStore } from '@/domaines/authentification/adapters/session.repository.store';
   import { CompteUtilisateurRepositoryImpl } from '@/domaines/compte/adapters/compteUtilisateur.repository.impl';

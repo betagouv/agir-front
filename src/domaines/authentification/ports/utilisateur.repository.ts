@@ -30,4 +30,6 @@ export interface UtilisateurRepository {
   commencerRedefinirMotDePasse(email: string): void;
 
   terminerRedefinirMotDePasse(email: string, motDePasse: string, code: string): Promise<void>;
+
+  seConnecterAvecFranceConnect(oidcCode: string, oidcState: string): Promise<Utilisateur>;
 }

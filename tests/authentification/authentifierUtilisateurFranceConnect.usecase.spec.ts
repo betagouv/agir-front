@@ -1,26 +1,64 @@
+import { SpySauvegarderUtilisateurSessionRepository } from '../compte/sessionRepository.sauvegarderUtilisateur.spy';
+import { MockUtilisateurRepository } from './adapters/mockUtilisateurRepository';
 import { Utilisateur } from '@/domaines/authentification/ports/utilisateur.repository';
 import { AuthentifierUtilisateurFranceConnectUsecase } from '@/domaines/authentification/authentifierUtilisateurFranceConnect.usecase';
-import { SpySauvegarderUtilisateurSessionRepository } from '../compte/sessionRepository.sauvegarderUtilisateur.spy';
+import { AuthentificationResultatPresenterImpl } from '@/domaines/authentification/adapters/authentificationResultatPresenterImpl';
 import { UtilisateurRepositoryForTest } from './adapters/utilisateurRepositoryForTest';
+import { RouteComptePath } from '@/router/compte/routes';
+import { RouteCoachPath } from '@/router/coach/routes';
 
 describe("Fichier de tests concernant l'authentification France Connect", () => {
-  it("Lorsque je passe un token doit sauvegarder le nom et l'id", async () => {
+  it("En donnant un state et un code doit valider l'authentification puis le sauvegarder en session", async () => {
     // GIVEN
-    const spySessionRepository = new SpySauvegarderUtilisateurSessionRepository();
-    const utilisateurRepositoryForTest = UtilisateurRepositoryForTest.avecOnBoardingRealise();
-    const usecase = new AuthentifierUtilisateurFranceConnectUsecase(utilisateurRepositoryForTest, spySessionRepository);
     // WHEN
-    await usecase.execute(
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dGlsaXNhdGV1cklkIjoiNGRmNWNkMDEtYWUzZS00NmZhLTk5ZDQtOWMxOGY2OTZiNmJhIiwiaWF0IjoxNjkyMjU5MjI0LCJleHAiOjE2OTIyNTkyODR9.6Qm_REdedxvT5D8ppqtG7igcizs1OkbAD610kulRgWU',
+    const spySessionRepository = SpySauvegarderUtilisateurSessionRepository.sansOnBoardingRealise();
+    const usecase = new AuthentifierUtilisateurFranceConnectUsecase(
+      new MockUtilisateurRepository(),
+      spySessionRepository,
     );
+    await usecase.execute('code', 'state', new AuthentificationResultatPresenterImpl((viewModel: string) => {}));
+
     // THEN
     expect(spySessionRepository.utilisateur).toStrictEqual<Utilisateur>({
-      id: '4df5cd01-ae3e-46fa-99d4-9c18f696b6ba',
-      nom: 'Doe',
-      prenom: 'John',
-      mail: '',
-      onboardingAEteRealise: true,
+      id: 'idUtilisateur',
+      nom: '',
+      prenom: '',
+      mail: 'john@exemple.com',
+      onboardingAEteRealise: false,
       afficherDisclaimerAides: false,
+      token: 'token',
     });
+  });
+
+  it("Lorsque le service me dit que l'onboarding n'est pas fait, je dois repasser par l'onboarding", async () => {
+    // GIVEN
+    const spySessionRepository = SpySauvegarderUtilisateurSessionRepository.sansOnBoardingRealise();
+    const usecase = new AuthentifierUtilisateurFranceConnectUsecase(
+      UtilisateurRepositoryForTest.sansOnBoardingRealise(),
+      spySessionRepository,
+    );
+    // WHEN
+    await usecase.execute('code', 'state', new AuthentificationResultatPresenterImpl(expectToto));
+
+    // THEN
+    function expectToto(viewModel: string) {
+      expect(viewModel).toEqual(RouteComptePath.POST_CREATION_COMPTE_ETAPE_1);
+    }
+  });
+
+  it("Lorsque le service me dit que l'onboarding est fait, doit aller à l'accueil", async () => {
+    // GIVEN
+    const spySessionRepository = SpySauvegarderUtilisateurSessionRepository.avecOnBoardingRealise();
+    const usecase = new AuthentifierUtilisateurFranceConnectUsecase(
+      UtilisateurRepositoryForTest.avecOnBoardingRealise(),
+      spySessionRepository,
+    );
+    // WHEN
+    await usecase.execute('code', 'state', new AuthentificationResultatPresenterImpl(expectToto));
+
+    // THEN
+    function expectToto(viewModel: string) {
+      expect(viewModel).toEqual(RouteCoachPath.COACH);
+    }
   });
 });

@@ -27,7 +27,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
   import AsideNGC from '@/components/custom/CreationCompte/AsideNGC.vue';
   import CreationCompteFormulaireDepuisNGC from '@/components/custom/CreationCompte/CreationCompteFormulaireDepuisNGC.vue';
 </script>

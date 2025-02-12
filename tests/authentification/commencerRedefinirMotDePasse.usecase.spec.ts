@@ -1,5 +1,4 @@
 import {
-  IdUtilisateur,
   Utilisateur,
   UtilisateurConnecte,
   UtilisateurRepository,
@@ -7,10 +6,11 @@ import {
 import { CommencerRedefinirMotDePasseUsecase } from '@/domaines/authentification/commencerRedefinirMotDePasse.usecase';
 
 class SpyUtilisateurRepository implements UtilisateurRepository {
+  private _email: string = '';
+
   get email(): string {
     return this._email;
   }
-  private _email: string = '';
 
   authentifierUtilisateur(email: string, motDePasse: string): Promise<void> {
     throw Error;
@@ -39,7 +39,12 @@ class SpyUtilisateurRepository implements UtilisateurRepository {
   validerLoginOtp(email: string, code: string): Promise<Utilisateur> {
     throw Error;
   }
+
+  seConnecterAvecFranceConnect(oidcCode: string, oidcState: string): Promise<Utilisateur> {
+    throw Error;
+  }
 }
+
 describe('Fichier de tests concernant la réinitialisation du mot de passe', () => {
   test('Commencer la réinitialisation du mot de passe avec succès', async () => {
     // GIVEN

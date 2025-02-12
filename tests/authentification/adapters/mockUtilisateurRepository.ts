@@ -50,4 +50,16 @@ export class MockUtilisateurRepository implements UtilisateurRepository {
       token: 'token',
     });
   }
+
+  seConnecterAvecFranceConnect(oidcCode: string, oidcState: string): Promise<Utilisateur> {
+    return Promise.resolve<Utilisateur>({
+      id: 'idUtilisateur',
+      nom: '',
+      prenom: '',
+      mail: 'john@exemple.com',
+      onboardingAEteRealise: false,
+      afficherDisclaimerAides: false,
+      token: 'token',
+    });
+  }
 }

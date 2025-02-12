@@ -1,22 +1,25 @@
-import { jwtDecode } from 'jwt-decode';
-import { Utilisateur, UtilisateurRepository } from '@/domaines/authentification/ports/utilisateur.repository';
+import { SessionRepository } from '@/domaines/authentification/authentifierUtilisateur.usecase';
+import { AuthentificationResultatPresenter } from '@/domaines/authentification/ports/authentificationResultatPresenter';
+import { UtilisateurRepository } from '@/domaines/authentification/ports/utilisateur.repository';
+import { AuthentificationResultat } from '@/domaines/authentification/validerAuthentificationUtilisateur.usecase';
 
-export interface SessionRepository {
-  sauvegarderUtilisateur(utilisateur: Utilisateur);
-}
 export class AuthentifierUtilisateurFranceConnectUsecase {
-  private _utilisateurRepository: UtilisateurRepository;
-  private _sessionRepository: SessionRepository;
-  constructor(utilisateurRepository: UtilisateurRepository, sessionRepository: SessionRepository) {
-    this._utilisateurRepository = utilisateurRepository;
-    this._sessionRepository = sessionRepository;
-  }
+  constructor(
+    private utilisateurRepository: UtilisateurRepository,
+    private sessionRepository: SessionRepository,
+  ) {}
 
-  async execute(token: string): Promise<void> {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    const utilisateurId = jwtDecode(token).utilisateurId as string;
-    const utilisateur = await this._utilisateurRepository.getUtilisateurAvecId(utilisateurId);
-    this._sessionRepository.sauvegarderUtilisateur(utilisateur);
+  async execute(
+    oidcCode: string,
+    oidcState: string,
+    authentificationResultatPresenter: AuthentificationResultatPresenter,
+  ): Promise<void> {
+    const utilisateur = await this.utilisateurRepository.seConnecterAvecFranceConnect(oidcCode, oidcState);
+    this.sessionRepository.sauvegarderUtilisateur(utilisateur);
+    authentificationResultatPresenter.presente(
+      utilisateur.onboardingAEteRealise
+        ? AuthentificationResultat.PEUT_SE_CONNECTER
+        : AuthentificationResultat.DOIT_FAIRE_ONBOARDING,
+    );
   }
 }
