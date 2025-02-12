@@ -28,13 +28,13 @@
   import { ChargerActionUsecase } from '@/domaines/actions/chargerAction.usecase';
   import { ChargerActionClassiqueUsecase } from '@/domaines/actions/chargerActionClassique.usecase';
   import { ChargerActionQuizUsecase } from '@/domaines/actions/chargerActionQuiz.usecase';
-  import { ActionClassiqueViewModel, ActionQuizViewModel } from '@/domaines/actions/ports/action.presenter';
+  import { ActionClassiqueViewModel, ActionQuizzesViewModel } from '@/domaines/actions/ports/action.presenter';
   import { RouteActionsName } from '@/router/actions/routes';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const isLoading = ref<boolean>(false);
   const actionClassiqueViewModel = ref<ActionClassiqueViewModel>();
-  const actionQuizViewModel = ref<ActionQuizViewModel>();
+  const actionQuizViewModel = ref<ActionQuizzesViewModel>();
   const actionBaseViewModel = computed(() => actionQuizViewModel.value || actionClassiqueViewModel.value);
 
   onMounted(() => {

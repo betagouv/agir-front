@@ -1,7 +1,7 @@
 import {
   ActionPresenter,
   ActionClassiqueViewModel,
-  ActionQuizViewModel,
+  ActionQuizzesViewModel,
 } from '@/domaines/actions/ports/action.presenter';
 import { ActionDetail } from '@/domaines/actions/ports/actions.repository';
 import marked from '@/shell/actionMarkdownToHtml';
@@ -9,7 +9,7 @@ import marked from '@/shell/actionMarkdownToHtml';
 export class ActionPresenterImpl implements ActionPresenter {
   constructor(
     private readonly actionClassiqueViewModel: (viewModel: ActionClassiqueViewModel) => void,
-    private readonly actionQuizViewModel: (viewModel: ActionQuizViewModel) => void,
+    private readonly actionQuizViewModel: (viewModel: ActionQuizzesViewModel) => void,
   ) {}
 
   async presenteActionClassique(action: ActionDetail) {
@@ -43,7 +43,7 @@ export class ActionPresenterImpl implements ActionPresenter {
       titre,
       sousTitre,
       quiz: {
-        nombreDeQuestion: 0,
+        nombreDeQuestions: 0,
       },
       recommandations: action.recommandations,
     });

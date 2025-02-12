@@ -21,9 +21,10 @@ export interface ActionClassiqueViewModel extends ActionBaseViewModel {
   services: ActionServiceViewModel[];
 }
 
-export interface ActionQuizViewModel extends ActionBaseViewModel {
+export interface ActionQuizzesViewModel extends ActionBaseViewModel {
   quiz: {
-    nombreDeQuestion: number;
+    nombreDeQuestions: number;
+    // liste: QuizViewModel[];
   };
 }
 

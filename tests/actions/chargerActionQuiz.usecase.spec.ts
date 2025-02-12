@@ -1,5 +1,5 @@
 import { ActionPresenterImpl } from '@/domaines/actions/adapters/action.presenter.impl';
-import { ActionQuizViewModel } from '@/domaines/actions/ports/action.presenter';
+import { ActionQuizzesViewModel } from '@/domaines/actions/ports/action.presenter';
 import { ActionDetail } from '@/domaines/actions/ports/actions.repository';
 import { ChargerActionClassiqueUsecase } from '@/domaines/actions/chargerActionClassique.usecase';
 import { ChargerActionUsecase } from '@/domaines/actions/chargerAction.usecase';
@@ -67,7 +67,7 @@ describe("Fichier de tests concernant la récupération d'une action", () => {
     );
     await usecase.execute('id-utilisateur', 'id-action');
 
-    function expected(viewModel: ActionQuizViewModel): void {
+    function expected(viewModel: ActionQuizzesViewModel): void {
       expect(viewModel).toStrictEqual({
         titre: 'Quiz <span class="text--bold">de ouf</span>',
         sousTitre:

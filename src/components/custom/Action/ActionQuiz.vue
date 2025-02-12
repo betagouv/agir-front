@@ -1,9 +1,9 @@
 <template>
-  <p>{{ actionQuizViewModel.quiz.nombreDeQuestion }} questions</p>
+  <p>{{ actionQuizViewModel.quiz.nombreDeQuestions }} questions</p>
 </template>
 
 <script setup lang="ts">
-  import { ActionQuizViewModel } from '@/domaines/actions/ports/action.presenter';
+  import { ActionQuizzesViewModel } from '@/domaines/actions/ports/action.presenter';
 
-  defineProps<{ actionQuizViewModel: ActionQuizViewModel }>();
+  defineProps<{ actionQuizViewModel: ActionQuizzesViewModel }>();
 </script>
