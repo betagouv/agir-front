@@ -64,6 +64,6 @@ export class UtilisateurRepositoryMock implements UtilisateurRepository {
   }
 
   deconnecterUtilisateur(idUtilisateur: string): Promise<void> {
-    throw Error('not implemented yet');
+    return Promise.resolve();
   }
 }

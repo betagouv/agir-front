@@ -208,7 +208,7 @@
   import { RouteAidesName } from '@/router/aides/routeAidesName';
   import { RouteThematiquesName } from '@/router/thematiques/routes';
   import { ClefThematiqueAPI, MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
-  import { DeconnecterUtilisateurUsecase } from '@/domaines/authentification/DeconnecterUtilisateur.usecase';
+  import { DeconnecterUtilisateurUsecase } from '@/domaines/authentification/deconnecterUtilisateur.usecase';
   import { UtilisateurRepositoryAxios } from '@/domaines/authentification/adapters/utilisateur.repository.axios';
   import { SessionRepositoryStore } from '@/domaines/authentification/adapters/session.repository.store';
 

@@ -13,6 +13,12 @@ export class UtilisateurRepositorySpy implements UtilisateurRepository {
     return this._authentifierUtilisateurArgs;
   }
 
+  private _utilisateurAEteDeco: boolean = false;
+
+  get utilisateurAEteDeco(): boolean {
+    return this._utilisateurAEteDeco;
+  }
+
   constructor() {}
 
   authentifierUtilisateur(nomUtilisateur: string, motDePasse: string): Promise<void> {
@@ -49,6 +55,7 @@ export class UtilisateurRepositorySpy implements UtilisateurRepository {
   }
 
   deconnecterUtilisateur(idUtilisateur: string): Promise<void> {
-    throw Error('not implemented yet');
+    this._utilisateurAEteDeco = true;
+    return Promise.resolve();
   }
 }

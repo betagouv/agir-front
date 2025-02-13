@@ -69,6 +69,6 @@ export class UtilisateurRepositoryForTest implements UtilisateurRepository {
   }
 
   deconnecterUtilisateur(idUtilisateur: string): Promise<void> {
-    throw Error('not implemented yet');
+    throw Error;
   }
 }

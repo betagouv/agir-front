@@ -30,7 +30,7 @@
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import { SessionRepositoryStore } from '@/domaines/authentification/adapters/session.repository.store';
   import { UtilisateurRepositoryAxios } from '@/domaines/authentification/adapters/utilisateur.repository.axios';
-  import { DeconnecterUtilisateurUsecase } from '@/domaines/authentification/DeconnecterUtilisateur.usecase';
+  import { DeconnecterUtilisateurUsecase } from '@/domaines/authentification/deconnecterUtilisateur.usecase';
   import router from '@/router';
   import { utilisateurStore } from '@/store/utilisateur';
 

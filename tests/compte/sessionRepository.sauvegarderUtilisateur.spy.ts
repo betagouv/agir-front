@@ -37,5 +37,14 @@ export class SpySauvegarderUtilisateurSessionRepository implements SessionReposi
 
   sauvegarderScore(score: Score): void {}
 
-  deconnecterUtilisateur() {}
+  deconnecterUtilisateur() {
+    this._utilisateur = {
+      id: '',
+      mail: '',
+      prenom: '',
+      nom: '',
+      onboardingAEteRealise: false,
+      afficherDisclaimerAides: false,
+    };
+  }
 }
