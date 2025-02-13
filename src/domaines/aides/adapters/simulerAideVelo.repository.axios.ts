@@ -1,24 +1,26 @@
 import { AxiosFactory, intercept401 } from '@/axios.factory';
 import { SimulerAideVeloRepository } from '@/domaines/aides/ports/simulerAideVelo.repository';
-import { EtatVelo, SimulationVelo } from '@/domaines/aides/simulerAideVelo.usecase';
+import { AidesVeloDisponibles, EtatVelo, SimulationVelo } from '@/domaines/aides/simulerAideVelo.usecase';
 
-interface AidesVelo {
+type AidesVeloApiModel = {
   libelle: string;
   montant: number;
   plafond: number;
   lien: string;
-  collectivite: Collectivite;
+  collectivite: CollectiviteApiModel;
   description?: string;
   logo: string;
-}
+};
 
-interface Collectivite {
+type AideVeloNonCalculeeApiModel = Omit<AidesVeloApiModel, 'montant' | 'plafond'>;
+
+type CollectiviteApiModel = {
   kind: string;
   value: string;
   code?: string;
-}
+};
 
-type TypeVelos =
+type TypeVelosApiModel =
   | 'mécanique simple'
   | 'électrique'
   | 'cargo'
@@ -28,18 +30,21 @@ type TypeVelos =
   | 'adapté'
   | 'motorisation';
 
-type AidesVeloParType = {
-  [typeVelo in TypeVelos]: AidesVelo[];
+type AidesVeloParTypeApiModel = {
+  [typeVelo in TypeVelosApiModel]: AidesVeloApiModel[];
 };
 
 export class SimulerAideVeloRepositoryAxios implements SimulerAideVeloRepository {
   @intercept401()
   async getSimulation(prixDuVelo: number, etatDuVelo: EtatVelo, utilisateurId: string): Promise<SimulationVelo> {
     const axiosInstance = AxiosFactory.getAxios();
-    const response = await axiosInstance.post<AidesVeloParType>(`/utilisateurs/${utilisateurId}/simulerAideVelo`, {
-      prix_du_velo: prixDuVelo,
-      etat_du_velo: etatDuVelo,
-    });
+    const response = await axiosInstance.post<AidesVeloParTypeApiModel>(
+      `/utilisateurs/${utilisateurId}/simulerAideVelo`,
+      {
+        prix_du_velo: prixDuVelo,
+        etat_du_velo: etatDuVelo,
+      },
+    );
 
     return {
       'mécanique simple': response.data['mécanique simple'] ?? [],
@@ -53,21 +58,22 @@ export class SimulerAideVeloRepositoryAxios implements SimulerAideVeloRepository
     };
   }
 
-  async getSimulationDepuisInsee(insee: string): Promise<SimulationVelo> {
+  /**
+   * @param code - Code INSEE de la commune ou SIREN de l'EPCI.
+   * @returns Les aides disponibles pour la commune ou l'EPCI. C'est-à-dire aux
+   * quelles les habitants de la commune ou de l'EPCI peuvent prétendre, mais
+   * ne seront pas nécessairement éligibles comme ça aurait été le cas avec une
+   * simulation.
+   */
+  async getAidesDisponiblesPourCommuneOuEpci(code: string): Promise<AidesVeloDisponibles> {
     const axiosInstance = AxiosFactory.getAxios();
-    const response = await axiosInstance.post<AidesVeloParType>(`/aides/simulerAideVelo`, {
-      code_insee: insee,
-    });
+    const response = await axiosInstance.post<AideVeloNonCalculeeApiModel[]>(
+      `/aides/recupererAideVeloParCodeCommuneOuEPCI`,
+      {
+        code_insee_ou_siren: code,
+      },
+    );
 
-    return {
-      'mécanique simple': response.data['mécanique simple'] ?? [],
-      électrique: response.data.électrique ?? [],
-      cargo: response.data.cargo ?? [],
-      'cargo électrique': response.data['cargo électrique'] ?? [],
-      pliant: response.data.pliant ?? [],
-      'pliant électrique': response.data['pliant électrique'] ?? [],
-      motorisation: response.data.motorisation ?? [],
-      adapté: response.data.adapté ?? [],
-    };
+    return response.data ?? [];
   }
 }

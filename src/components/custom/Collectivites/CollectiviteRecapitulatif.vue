@@ -14,18 +14,22 @@
       :titre-texte="carte.titre"
     >
       <div v-if="carte.aides.length > 0">
-        <p class="fr-m-0">Les <span class="text--bold">aides</span> nationales 🇫🇷 ou locales disponibles :</p>
+        <h4 class="fr-text--xl fr-mt-6v fr-mb-2v">
+          Les <span class="text--bleu">aides</span> nationales <span aria-hidden="true">🇫🇷</span> ou locales disponibles
+        </h4>
         <CollectiviteListeContenu :contenus="carte.aides" />
       </div>
 
       <div v-if="carte.articles.length > 0">
-        <p class="fr-m-0">Les <span class="text--bold">articles</span> locaux sur <i>J'agis</i> :</p>
+        <h4 class="fr-text--xl fr-mt-6v fr-mb-2v">
+          Les <span class="text--bleu">articles</span> locaux sur <i>J'agis</i>
+        </h4>
         <CollectiviteListeContenu :contenus="carte.articles" />
       </div>
 
       <template v-for="contenu in carte.contenusSupplementaires">
-        <div :key="contenu.titre" v-if="contenu.liste.length > 0">
-          <p class="fr-m-0" v-html="contenu.titre" />
+        <div v-if="contenu.liste.length > 0" :key="contenu.titre">
+          <h4 class="fr-text--xl fr-mt-6v fr-mb-2v" v-html="contenu.titre" />
           <ul>
             <li v-for="item in contenu.liste" :key="item" v-html="item" />
           </ul>
@@ -39,7 +43,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
   import CarteDecouverte from '@/components/custom/Collectivites/CarteDecouverte.vue';
   import CollectiviteListeContenu from '@/components/custom/Collectivites/CollectiviteListeContenu.vue';
   import { DonneesCollectivitesInseeViewModel } from '@/domaines/collectivites/ports/donneesCollectivitesInsee.presenter';

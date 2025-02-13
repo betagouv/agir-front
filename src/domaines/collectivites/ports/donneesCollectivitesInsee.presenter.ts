@@ -1,4 +1,4 @@
-import { SimulationVelo } from '@/domaines/aides/simulerAideVelo.usecase';
+import { AidesVeloDisponibles } from '@/domaines/aides/simulerAideVelo.usecase';
 import { ViewModelWithUrl } from '@/domaines/collectivites/ports/donneesCollectivitesCP.presenter';
 import { DonneesCollectivitesINSEE } from '@/domaines/collectivites/recupererDonneesCollectivitesInsee.usecase';
 import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
@@ -44,5 +44,5 @@ export interface DonneesCollectivitesInseeViewModel extends IndicationGeoArticle
 }
 
 export interface DonneesCollectivitesInseePresenter {
-  afficherDonneesInsee(donneesCollectivites: DonneesCollectivitesINSEE, aidesVelo: SimulationVelo): void;
+  afficherDonneesInsee(donneesCollectivites: DonneesCollectivitesINSEE, aidesVelo: AidesVeloDisponibles): void;
 }

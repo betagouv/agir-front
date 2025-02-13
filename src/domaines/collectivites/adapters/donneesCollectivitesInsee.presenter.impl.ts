@@ -1,4 +1,4 @@
-import { SimulationVelo } from '@/domaines/aides/simulerAideVelo.usecase';
+import { AidesVeloDisponibles } from '@/domaines/aides/simulerAideVelo.usecase';
 import {
   ArticleOuAideCollectiviteViewModel,
   CarteThematique,
@@ -18,7 +18,7 @@ import { RouteArticleName } from '@/router/articles/routes';
 export class DonneesCollectivitesInseePresenterImpl implements DonneesCollectivitesInseePresenter {
   constructor(private readonly viewModel: (vm: DonneesCollectivitesInseeViewModel) => void) {}
 
-  afficherDonneesInsee(donnees: DonneesCollectivitesINSEE, simulationVelo: SimulationVelo) {
+  afficherDonneesInsee(donnees: DonneesCollectivitesINSEE, aidesVelo: AidesVeloDisponibles) {
     const scope: IndicationGeoArticleOuAideViewModel = {
       nom: donnees.nom,
       departement: donnees.departement,
@@ -31,8 +31,8 @@ export class DonneesCollectivitesInseePresenterImpl implements DonneesCollectivi
       scope,
     );
 
-    const aidesVelo = this.transformerAidesVeloEnViewModel(simulationVelo);
-    const contenuSupplementaires = [aidesVelo];
+    const aidesVeloSection = this.transformerAidesVeloEnViewModel(aidesVelo);
+    const contenuSupplementaires = [aidesVeloSection];
 
     this.viewModel({
       ...scope,
@@ -43,19 +43,21 @@ export class DonneesCollectivitesInseePresenterImpl implements DonneesCollectivi
     });
   }
 
-  private transformerAidesVeloEnViewModel(simulationVelo: SimulationVelo): ContenuSupplementaireCollectivitesViewModel {
-    const listeAidesVelo = Object.entries(simulationVelo)
-      .filter(([, aidesList]) => aidesList.length > 0)
-      .map(([type, aidesList]) => {
-        const maxMontant = Math.max(...aidesList.map(aide => aide.plafond));
-        const typeVelo = type.charAt(0).toUpperCase() + type.slice(1);
-        return `<span class="text--bold">Vélo ${typeVelo}</span>: ${aidesList.length} aide(s) jusqu'à ${maxMontant} euros.`;
-      });
+  private transformerAidesVeloEnViewModel(
+    aidesVelo: AidesVeloDisponibles,
+  ): ContenuSupplementaireCollectivitesViewModel {
+    const listeAidesVelo = aidesVelo.map(({ libelle, description, lien }) => {
+      return `
+<span>
+  <span><a href="${lien}" target="_blank">${libelle}</a></span>
+  <span class="fr-text--sm line-clamp text--italic fr-mb-1v">${description}</span>
+</span>`;
+    });
 
     return {
       emoji: '🚲',
       thematiques: [ClefThematiqueAPI.transports],
-      titre: 'Les <span class="text--bold">aides vélo</span> :',
+      titre: `Les <span class="text--bleu">aides</span> pour l'achat d'un vélo`,
       liste: listeAidesVelo,
     };
   }
