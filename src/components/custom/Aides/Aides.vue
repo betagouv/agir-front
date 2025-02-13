@@ -1,5 +1,9 @@
 <template>
   <h1 class="fr-h2">Mes aides disponibles</h1>
+  <p class="fr-mb-4w">
+    D'après la situation que vous avez décrite, vous êtes a priori éligible à ces aides.<br />Nous vous invitons à vous
+    rapprocher des organismes cités afin d'otenir plus d'informations.
+  </p>
   <div class="fr-grid-row fr-grid-row--gutters">
     <div class="fr-col-12 fr-col-lg-3">
       <h2 class="fr-h4">Filtres</h2>
