@@ -1,4 +1,4 @@
-import { SessionRepository } from '@/domaines/authentification/authentifierUtilisateur.usecase';
+import { SessionRepository } from '@/domaines/authentification/ports/session.repository';
 import { Utilisateur } from '@/domaines/authentification/ports/utilisateur.repository';
 import { Score } from '@/domaines/score/ports/score.repository';
 import { utilisateurStore } from '@/store/utilisateur';
@@ -14,5 +14,9 @@ export class SessionRepositoryStore implements SessionRepository {
 
   sauvegarderScore(score: Score): void {
     utilisateurStore().setScore(score);
+  }
+
+  deconnecterUtilisateur() {
+    utilisateurStore().reset();
   }
 }

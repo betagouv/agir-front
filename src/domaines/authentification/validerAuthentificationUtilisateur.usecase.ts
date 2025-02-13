@@ -1,5 +1,5 @@
-import { SessionRepository } from '@/domaines/authentification/authentifierUtilisateur.usecase';
 import { AuthentificationResultatPresenter } from '@/domaines/authentification/ports/authentificationResultatPresenter';
+import { SessionRepository } from '@/domaines/authentification/ports/session.repository';
 import { UtilisateurRepository } from '@/domaines/authentification/ports/utilisateur.repository';
 
 export enum AuthentificationResultat {

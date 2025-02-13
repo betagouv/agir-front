@@ -1,4 +1,4 @@
-import { SessionRepository } from '@/domaines/authentification/authentifierUtilisateur.usecase';
+import { SessionRepository } from '@/domaines/authentification/ports/session.repository';
 import { ProfileUtilisateurViewModel } from '@/domaines/profileUtilisateur/adapters/profileUtilisateur.presenter.impl';
 import { ProfileUtilisateurRepository } from '@/domaines/profileUtilisateur/ports/profileUtilisateur.repository';
 

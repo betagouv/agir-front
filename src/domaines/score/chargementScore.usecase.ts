@@ -1,4 +1,4 @@
-import { SessionRepository } from '@/domaines/authentification/authentifierUtilisateur.usecase';
+import { SessionRepository } from '@/domaines/authentification/ports/session.repository';
 import { ScoreRepository } from '@/domaines/score/ports/score.repository';
 
 export class ChargementScoreUsecase {
