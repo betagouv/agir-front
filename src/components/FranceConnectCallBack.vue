@@ -14,6 +14,7 @@
   import Alert from '@/components/custom/Alert.vue';
   import { useAlerte } from '@/composables/useAlerte';
   import { AuthentificationResultatPresenterImpl } from '@/domaines/authentification/adapters/authentificationResultatPresenterImpl';
+  import { PostOnboardingRepositoryStore } from '@/domaines/authentification/adapters/postOnboarding.repository.store';
   import { SessionRepositoryStore } from '@/domaines/authentification/adapters/session.repository.store';
   import { UtilisateurRepositoryAxios } from '@/domaines/authentification/adapters/utilisateur.repository.axios';
   import { AuthentifierUtilisateurFranceConnectUsecase } from '@/domaines/authentification/authentifierUtilisateurFranceConnect.usecase';
@@ -28,6 +29,7 @@
     const usecase = new AuthentifierUtilisateurFranceConnectUsecase(
       new UtilisateurRepositoryAxios(),
       new SessionRepositoryStore(),
+      new PostOnboardingRepositoryStore(),
     );
 
     await usecase
