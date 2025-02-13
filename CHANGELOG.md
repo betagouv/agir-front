@@ -1,5 +1,37 @@
 # Changelog
 
+## [1.40.0](https://github.com/betagouv/agir-front/compare/v1.39.0...v1.40.0) (2025-02-13)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* actions nouvelles routes et refactor ([#920](https://github.com/betagouv/agir-front/issues/920)) ([d0de80c](https://github.com/betagouv/agir-front/commit/d0de80c03fba981e4efcbb970f30366885337c79))
+* ajout des services 'recettes' et 'lvao' pour une action ([#916](https://github.com/betagouv/agir-front/issues/916)) ([788355b](https://github.com/betagouv/agir-front/commit/788355b0f96a85447655aa413acf9d23151a0d5d))
+* les articles sont consultables hors connexion ([#909](https://github.com/betagouv/agir-front/issues/909)) ([3b7536b](https://github.com/betagouv/agir-front/commit/3b7536b1b89ed1d879e7159e29bfec0f9eac65ad))
+* page collectivité v2 ([#885](https://github.com/betagouv/agir-front/issues/885)) ([94d0c51](https://github.com/betagouv/agir-front/commit/94d0c51091ff03acb670174bd47d9561019b5aa6))
+* v1 page action ([#910](https://github.com/betagouv/agir-front/issues/910)) ([b010383](https://github.com/betagouv/agir-front/commit/b010383044281586587e133cd142599a7587a039))
+
+
+### 🐛 Corrections de bogues
+
+* **deeplink:** permet le deeplink en mode developpement ([#908](https://github.com/betagouv/agir-front/issues/908)) ([0c64f52](https://github.com/betagouv/agir-front/commit/0c64f528d09314dfe7c26c1278107a1e529cda3d))
+* Récupère la liste des aides vélo disponibles pour une commune ou un EPCI ([#913](https://github.com/betagouv/agir-front/issues/913)) ([7398880](https://github.com/betagouv/agir-front/commit/7398880de765812e9a9694de3275f1da6a0e4d28))
+* utilisation du bon champ pour la couverture des aides dans le catalogue ([#924](https://github.com/betagouv/agir-front/issues/924)) ([69ef94f](https://github.com/betagouv/agir-front/commit/69ef94f823abdbeee083e81598ddeca7aa6150e8))
+* validation question defi ([#907](https://github.com/betagouv/agir-front/issues/907)) ([612ad41](https://github.com/betagouv/agir-front/commit/612ad41625ba78ab40bfcefaa8ac7ce1e2650f56))
+
+
+### 👷 Autres changements
+
+* Bump @playwright/test from 1.49.1 to 1.50.1 ([#903](https://github.com/betagouv/agir-front/issues/903)) ([a12c099](https://github.com/betagouv/agir-front/commit/a12c0990bfc6baa5d24911c6be6cf69f0415b54f))
+* Bump @sentry/vite-plugin from 3.1.0 to 3.1.1 ([#905](https://github.com/betagouv/agir-front/issues/905)) ([2ef7a2f](https://github.com/betagouv/agir-front/commit/2ef7a2fe367ef6ee11f7eca109a875421e4bc287))
+* Bump @sentry/vite-plugin from 3.1.1 to 3.1.2 ([#917](https://github.com/betagouv/agir-front/issues/917)) ([75df123](https://github.com/betagouv/agir-front/commit/75df1234c8c3c8b33bdd83b335fb6f976d3b7cb8))
+* Bump @sentry/vue from 8.51.0 to 8.54.0 ([#902](https://github.com/betagouv/agir-front/issues/902)) ([b3ab033](https://github.com/betagouv/agir-front/commit/b3ab033d62d3024fa81108277132db75f3847915))
+* Bump @types/node from 22.10.10 to 22.13.0 ([#904](https://github.com/betagouv/agir-front/issues/904)) ([0a0506f](https://github.com/betagouv/agir-front/commit/0a0506f31c3feb72628d194507b3a64b0a00a23e))
+* Bump @types/node from 22.13.0 to 22.13.1 ([#918](https://github.com/betagouv/agir-front/issues/918)) ([4b56374](https://github.com/betagouv/agir-front/commit/4b56374fcc517e274d054088f261e983c40c8897))
+* Bump jsonpath-plus from 10.1.0 to 10.2.0 ([#915](https://github.com/betagouv/agir-front/issues/915)) ([a523d54](https://github.com/betagouv/agir-front/commit/a523d54898b5b088578f319021046c9086b10d23))
+* Bump prettier from 3.4.2 to 3.5.0 ([#919](https://github.com/betagouv/agir-front/issues/919)) ([4e29a88](https://github.com/betagouv/agir-front/commit/4e29a88594b0548f31b3379963a34e132edf37b9))
+* Bump vitest from 2.0.5 to 2.1.9 ([#914](https://github.com/betagouv/agir-front/issues/914)) ([50e5496](https://github.com/betagouv/agir-front/commit/50e5496016c8525a67b5f9e57407719e11b15eae))
+
 ## [1.39.0](https://github.com/betagouv/agir-front/compare/v1.38.0...v1.39.0) (2025-02-03)
 
 
