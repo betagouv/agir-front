@@ -1,6 +1,6 @@
 import { Utilisateur } from '@/domaines/authentification/ports/utilisateur.repository';
 import { SpySauvegarderUtilisateurSessionRepository } from '../compte/sessionRepository.sauvegarderUtilisateur.spy';
-import { MockUtilisateurRepository } from './adapters/mockUtilisateurRepository';
+import { UtilisateurRepositoryMock } from './adapters/utilisateur.repository.mock';
 import { AuthentificationResultatPresenterImpl } from '@/domaines/authentification/adapters/authentificationResultatPresenterImpl';
 import { ValiderAuthentificationUtilisateurUsecase } from '@/domaines/authentification/validerAuthentificationUtilisateur.usecase';
 import { RouteComptePath } from '@/router/compte/routes';
@@ -13,14 +13,10 @@ describe("Fichier de tests concernant la validation de l'authentification de l'u
     // WHEN
     const spySessionRepository = SpySauvegarderUtilisateurSessionRepository.sansOnBoardingRealise();
     const usecase = new ValiderAuthentificationUtilisateurUsecase(
-      new MockUtilisateurRepository(),
+      new UtilisateurRepositoryMock(),
       spySessionRepository,
     );
-    await usecase.execute(
-      'john@exemple.com',
-      '123456',
-      new AuthentificationResultatPresenterImpl((viewModel: string) => {}),
-    );
+    await usecase.execute('john@exemple.com', '123456', new AuthentificationResultatPresenterImpl(() => {}));
 
     // THEN
     expect(spySessionRepository.utilisateur).toStrictEqual<Utilisateur>({

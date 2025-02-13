@@ -4,7 +4,7 @@ import {
   UtilisateurRepository,
 } from '@/domaines/authentification/ports/utilisateur.repository';
 
-export class SpyUtilisateurRepository implements UtilisateurRepository {
+export class UtilisateurRepositorySpy implements UtilisateurRepository {
   constructor() {}
 
   private _authentifierUtilisateurArgs: { motDePasse: string; nomUtilisateur: string } | null = null;
@@ -12,6 +12,8 @@ export class SpyUtilisateurRepository implements UtilisateurRepository {
   get authentifierUtilisateurArgs(): { motDePasse: string; nomUtilisateur: string } | null {
     return this._authentifierUtilisateurArgs;
   }
+
+  constructor() {}
 
   authentifierUtilisateur(nomUtilisateur: string, motDePasse: string): Promise<void> {
     this._authentifierUtilisateurArgs = { nomUtilisateur, motDePasse };
@@ -44,5 +46,9 @@ export class SpyUtilisateurRepository implements UtilisateurRepository {
 
   seConnecterAvecFranceConnect(oidcCode: string, oidcState: string): Promise<Utilisateur> {
     throw Error;
+  }
+
+  deconnecterUtilisateur(idUtilisateur: string): Promise<void> {
+    throw Error('not implemented yet');
   }
 }

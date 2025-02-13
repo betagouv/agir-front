@@ -67,4 +67,8 @@ export class UtilisateurRepositoryForTest implements UtilisateurRepository {
       afficherDisclaimerAides: false,
     });
   }
+
+  deconnecterUtilisateur(idUtilisateur: string): Promise<void> {
+    throw Error('not implemented yet');
+  }
 }

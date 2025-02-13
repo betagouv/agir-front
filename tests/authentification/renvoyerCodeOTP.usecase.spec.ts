@@ -44,6 +44,10 @@ class SpyUtilisateurRepository implements UtilisateurRepository {
   seConnecterAvecFranceConnect(oidcCode: string, oidcState: string): Promise<Utilisateur> {
     throw Error;
   }
+
+  deconnecterUtilisateur(idUtilisateur: string): Promise<void> {
+    throw Error('not implemented yet');
+  }
 }
 
 describe('Fichier de tests concernant le renvoie du code OTP', () => {

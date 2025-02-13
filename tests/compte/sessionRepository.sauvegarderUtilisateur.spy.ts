@@ -36,4 +36,6 @@ export class SpySauvegarderUtilisateurSessionRepository implements SessionReposi
   }
 
   sauvegarderScore(score: Score): void {}
+
+  deconnecterUtilisateur() {}
 }

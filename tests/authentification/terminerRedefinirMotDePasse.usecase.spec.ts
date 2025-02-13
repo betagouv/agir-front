@@ -56,6 +56,9 @@ class SpyUtilisateurRepository implements UtilisateurRepository {
   seConnecterAvecFranceConnect(oidcCode: string, oidcState: string): Promise<Utilisateur> {
     throw Error;
   }
+  deconnecterUtilisateur(idUtilisateur: string): Promise<void> {
+    throw Error;
+  }
 }
 
 describe('Fichier de tests concernant la fin de la réinitialisation du mot de passe', () => {
