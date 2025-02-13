@@ -4,7 +4,7 @@ import { ChargementAidesRepository } from '@/domaines/aides/ports/chargementAide
 import { ClefThematiqueAPI, MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
 
 interface AidesApiModel {
-  utilisateur_est_couvert: boolean;
+  couverture_aides_ok: boolean;
   liste_aides: AideApiModel[];
 }
 
@@ -29,7 +29,7 @@ export class ChargementAidesAxiosRepository implements ChargementAidesRepository
     const reponse = await axios.get<AidesApiModel>(`/utilisateurs/${utilisateurId}/aides_v2`);
 
     return {
-      utilisateurEstCouvert: reponse.data.utilisateur_est_couvert,
+      utilisateurEstCouvert: reponse.data.couverture_aides_ok,
       aides: reponse.data.liste_aides
         .filter(aide => {
           const thematique = aide.thematiques[0];
