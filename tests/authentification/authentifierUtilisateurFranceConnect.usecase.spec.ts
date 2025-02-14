@@ -1,5 +1,4 @@
 import { SpySauvegarderUtilisateurSessionRepository } from '../compte/sessionRepository.sauvegarderUtilisateur.spy';
-import { MockUtilisateurRepository } from './adapters/mockUtilisateurRepository';
 import { Utilisateur } from '@/domaines/authentification/ports/utilisateur.repository';
 import { AuthentifierUtilisateurFranceConnectUsecase } from '@/domaines/authentification/authentifierUtilisateurFranceConnect.usecase';
 import { AuthentificationResultatPresenterImpl } from '@/domaines/authentification/adapters/authentificationResultatPresenterImpl';
@@ -7,6 +6,7 @@ import { UtilisateurRepositoryForTest } from './adapters/utilisateurRepositoryFo
 import { RouteComptePath } from '@/router/compte/routes';
 import { RouteCoachPath } from '@/router/coach/routes';
 import { PostOnboardingRepositorySpy } from './adapters/postOnboarding.repository.spy';
+import { UtilisateurRepositoryMock } from './adapters/utilisateur.repository.mock';
 
 describe("Fichier de tests concernant l'authentification France Connect", () => {
   it("En donnant un state et un code doit valider l'authentification puis le sauvegarder en session", async () => {
@@ -15,7 +15,7 @@ describe("Fichier de tests concernant l'authentification France Connect", () => 
     const spySessionRepository = SpySauvegarderUtilisateurSessionRepository.sansOnBoardingRealise();
     const spyPostOnboardingRepositorySpy = new PostOnboardingRepositorySpy();
     const usecase = new AuthentifierUtilisateurFranceConnectUsecase(
-      new MockUtilisateurRepository(),
+      new UtilisateurRepositoryMock(),
       spySessionRepository,
       spyPostOnboardingRepositorySpy,
     );

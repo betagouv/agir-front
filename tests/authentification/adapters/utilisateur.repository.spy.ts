@@ -19,8 +19,6 @@ export class UtilisateurRepositorySpy implements UtilisateurRepository {
     return this._utilisateurAEteDeco;
   }
 
-  constructor() {}
-
   authentifierUtilisateur(nomUtilisateur: string, motDePasse: string): Promise<void> {
     this._authentifierUtilisateurArgs = { nomUtilisateur, motDePasse };
     return Promise.resolve();
