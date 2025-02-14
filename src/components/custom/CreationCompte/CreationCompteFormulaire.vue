@@ -1,38 +1,39 @@
 <template>
-  <form aria-labelledby="identity-fieldset-legend" @submit.prevent="performCreerCompteUtilisateur" class="fr-mb-4w">
+  <img alt="" src="/bg_creation_compte.svg" />
+  <FranceConnect class="fr-mb-2w" />
+  <h1 class="fr-h4 fr-mb-0">Créez votre compte sur J'agis</h1>
+  <form aria-labelledby="identity-fieldset-legend" class="fr-mb-4w" @submit.prevent="performCreerCompteUtilisateur">
     <fieldset class="fr-fieldset fr-mb-0">
-      <legend class="fr-fieldset__legend" id="identity-fieldset-legend">
-        <img src="/bg_creation_compte.svg" alt="" />
-        <h1 class="fr-h4 fr-mb-0">Créez votre compte sur J'agis</h1>
-        <p class="fr-text--regular">
+      <legend id="identity-fieldset-legend" class="fr-fieldset__legend">
+        <span class="fr-text--regular">
           Indiquez votre adresse e-mail et choisissez un mot de passe pour accéder au service.
-        </p>
+        </span>
       </legend>
       <div class="fr-messages-group">
         <Alert
           v-if="creationDeCompteEnErreur"
-          class="fr-col-12 fr-mb-2w"
-          type="error"
-          titre="Erreur lors de la création du compte"
           :message="creationDeCompteMessageErreur"
+          class="fr-col-12 fr-mb-2w"
+          titre="Erreur lors de la création du compte"
+          type="error"
         />
       </div>
       <p class="fr-text--md text--gris-light fr-mt-0 fr-mb-1w fr-ml-1w">Tous les champs sont obligatoires</p>
       <div class="fr-fieldset__element">
-        <InputMail label="Adresse électronique" name="utilisateur-mail" v-model="compteUtilisateurInput.mail" />
+        <InputMail v-model="compteUtilisateurInput.mail" label="Adresse électronique" name="utilisateur-mail" />
       </div>
 
       <div class="fr-fieldset__element">
         <InputPassword
           v-model="compteUtilisateurInput.motDePasse"
-          @update:mot-de-passe-valide="onMotDePasseValideChanged"
-          legende="Votre mot de passe doit contenir :"
           :required="true"
+          legende="Votre mot de passe doit contenir :"
+          @update:mot-de-passe-valide="onMotDePasseValideChanged"
         />
       </div>
       <div class="fr-fieldset__element">
         <div class="fr-checkbox-group fr-checkbox-group--sm">
-          <input name="cgu" id="cgu" type="checkbox" v-model="acceptationCGU" />
+          <input id="cgu" v-model="acceptationCGU" name="cgu" type="checkbox" />
           <label class="fr-label fr-mt-1w" for="cgu">
             J'accepte&nbsp;
             <router-link :to="{ name: RouteConformiteName.CGU }" target="_blank"
@@ -55,10 +56,11 @@
   </router-link>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
   import { ref } from 'vue';
   import Alert from '@/components/custom/Alert.vue';
   import InputPassword from '@/components/custom/InputPassword.vue';
+  import FranceConnect from '@/components/dsfr/FranceConnect.vue';
   import InputMail from '@/components/dsfr/InputMail.vue';
   import { SessionRepositoryStore } from '@/domaines/authentification/adapters/session.repository.store';
   import { CompteUtilisateurRepositoryImpl } from '@/domaines/compte/adapters/compteUtilisateur.repository.impl';

@@ -56,4 +56,15 @@ export class UtilisateurRepositoryForTest implements UtilisateurRepository {
       afficherDisclaimerAides: false,
     });
   }
+
+  seConnecterAvecFranceConnect(oidcCode: string, oidcState: string): Promise<Utilisateur> {
+    return Promise.resolve<Utilisateur>({
+      id: '1',
+      nom: 'Doe',
+      prenom: 'John',
+      mail: '',
+      onboardingAEteRealise: this.onboardingRealise,
+      afficherDisclaimerAides: false,
+    });
+  }
 }

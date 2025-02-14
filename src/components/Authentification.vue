@@ -1,21 +1,22 @@
 <template>
   <div class="fr-container fr-py-6w">
     <div class="fr-col-12 fr-col-lg-6 fr-mx-auto fr-p-4w border border-radius--md background--white">
+      <FranceConnect />
       <form @submit.prevent="login">
-        <fieldset class="fr-mb-0 fr-fieldset" aria-labelledby="login-fieldset-legend">
-          <legend class="fr-fieldset__legend" id="login-fieldset-legend">
+        <fieldset aria-labelledby="login-fieldset-legend" class="fr-mb-0 fr-fieldset">
+          <legend id="login-fieldset-legend" class="fr-fieldset__legend">
             <h1 class="text--center">Se connecter avec son compte</h1>
           </legend>
           <Alert
             v-if="loginEnErreur"
-            class="fr-col-12 fr-mb-2w"
-            type="error"
-            titre="Erreur lors de l'authentification"
             :message="loginMessageErreur"
+            class="fr-col-12 fr-mb-2w"
+            titre="Erreur lors de l'authentification"
+            type="error"
           />
           <p class="fr-text--md text--gris-light fr-mt-0 fr-mb-1w fr-ml-1w">Tous les champs sont obligatoires</p>
           <div class="fr-fieldset__element">
-            <InputMail label="Adresse électronique" v-model="email" name="email" />
+            <InputMail v-model="email" label="Adresse électronique" name="email" />
           </div>
           <div class="fr-fieldset__element">
             <InputPasswordLogin v-model="password" />
@@ -28,7 +29,7 @@
           </div>
         </fieldset>
       </form>
-      <div class="text--center" v-if="premiereConnexion">
+      <div v-if="premiereConnexion" class="background--white fr-p-4w text--center">
         <hr />
         <h2 class="fr-h3">Première visite ?</h2>
         <router-link
@@ -42,11 +43,12 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
   import { ref } from 'vue';
   import '@gouvfr/dsfr/dist/component/password/password.min.css';
   import Alert from '@/components/custom/Alert.vue';
   import InputPasswordLogin from '@/components/custom/InputPasswordLogin.vue';
+  import FranceConnect from '@/components/dsfr/FranceConnect.vue';
   import InputMail from '@/components/dsfr/InputMail.vue';
   import { UtilisateurRepositoryAxios } from '@/domaines/authentification/adapters/utilisateur.repository.axios';
   import { AuthentifierUtilisateurUsecase } from '@/domaines/authentification/authentifierUtilisateur.usecase';

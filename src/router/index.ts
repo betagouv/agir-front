@@ -35,7 +35,8 @@ enum RouteCommunePath {
   BETA_FERMEE = '/beta-fermee',
   AUTHENTIFICATION = '/authentification',
   SESSION_EXPIREE = '/session-expiree',
-  LOGIN_CALLBACK = '/login-callback',
+  LOGIN_CALLBACK = '/fc-login-callback',
+  LOGOUT_CALLBACK = '/fr-logout-callback',
 }
 
 const routes: RouteRecordRaw[] = [

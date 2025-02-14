@@ -1,18 +1,17 @@
 import {
-  IdUtilisateur,
   Utilisateur,
   UtilisateurConnecte,
   UtilisateurRepository,
 } from '@/domaines/authentification/ports/utilisateur.repository';
 
 export class SpyUtilisateurRepository implements UtilisateurRepository {
+  constructor() {}
+
   private _authentifierUtilisateurArgs: { motDePasse: string; nomUtilisateur: string } | null = null;
 
   get authentifierUtilisateurArgs(): { motDePasse: string; nomUtilisateur: string } | null {
     return this._authentifierUtilisateurArgs;
   }
-
-  constructor() {}
 
   authentifierUtilisateur(nomUtilisateur: string, motDePasse: string): Promise<void> {
     this._authentifierUtilisateurArgs = { nomUtilisateur, motDePasse };
@@ -40,6 +39,10 @@ export class SpyUtilisateurRepository implements UtilisateurRepository {
   }
 
   validerLoginOtp(email: string, code: string): Promise<Utilisateur> {
+    throw Error;
+  }
+
+  seConnecterAvecFranceConnect(oidcCode: string, oidcState: string): Promise<Utilisateur> {
     throw Error;
   }
 }
