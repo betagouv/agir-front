@@ -36,7 +36,6 @@
   };
 
   const franceConnectActive = import.meta.env.VITE_FRANCE_CONNECT === 'true';
-  console.log(import.meta.env.VITE_FRANCE_CONNECT);
 </script>
 
 <style scoped>
