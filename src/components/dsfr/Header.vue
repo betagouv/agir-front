@@ -208,6 +208,9 @@
   import { RouteAidesName } from '@/router/aides/routeAidesName';
   import { RouteThematiquesName } from '@/router/thematiques/routes';
   import { ClefThematiqueAPI, MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
+  import { DeconnecterUtilisateurUsecase } from '@/domaines/authentification/deconnecterUtilisateur.usecase';
+  import { UtilisateurRepositoryAxios } from '@/domaines/authentification/adapters/utilisateur.repository.axios';
+  import { SessionRepositoryStore } from '@/domaines/authentification/adapters/session.repository.store';
 
   const route = useRoute();
   const store = utilisateurStore();
@@ -218,9 +221,16 @@
     () => estConnecte.value && !store.utilisateur.onboardingAEteRealise,
   );
 
-  const logout = () => {
-    store.reset();
-    router.replace('/');
+  const utilisateurId = utilisateurStore().utilisateur.id;
+  const seDeconnecterUsecase = new DeconnecterUtilisateurUsecase(
+    new UtilisateurRepositoryAxios(),
+    new SessionRepositoryStore(),
+  );
+
+  const logout = async () => {
+    await seDeconnecterUsecase.execute(utilisateurId).finally(async () => {
+      await router.push('/');
+    });
   };
 </script>
 

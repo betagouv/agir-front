@@ -28,15 +28,23 @@
 <script setup lang="ts">
   import CompteMenuLateral from '@/components/custom/Compte/CompteMenuLateral.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
+  import { SessionRepositoryStore } from '@/domaines/authentification/adapters/session.repository.store';
+  import { UtilisateurRepositoryAxios } from '@/domaines/authentification/adapters/utilisateur.repository.axios';
+  import { DeconnecterUtilisateurUsecase } from '@/domaines/authentification/deconnecterUtilisateur.usecase';
   import router from '@/router';
   import { utilisateurStore } from '@/store/utilisateur';
 
-  const store = utilisateurStore();
-
   defineProps<{ pageCourante: string }>();
 
-  const logout = () => {
-    store.reset();
-    router.replace('/');
+  const utilisateurId = utilisateurStore().utilisateur.id;
+  const seDeconnecterUsecase = new DeconnecterUtilisateurUsecase(
+    new UtilisateurRepositoryAxios(),
+    new SessionRepositoryStore(),
+  );
+
+  const logout = async () => {
+    await seDeconnecterUsecase.execute(utilisateurId).finally(async () => {
+      await router.replace('/');
+    });
   };
 </script>

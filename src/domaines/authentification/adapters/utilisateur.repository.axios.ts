@@ -122,4 +122,9 @@ export class UtilisateurRepositoryAxios implements UtilisateurRepository {
       token: response.data.token,
     };
   }
+
+  async deconnecterUtilisateur(idUtilisateur: string): Promise<void> {
+    const axiosInstance = AxiosFactory.getAxios();
+    await axiosInstance.post(`/utilisateurs/${idUtilisateur}/logout`, {});
+  }
 }

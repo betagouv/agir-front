@@ -1,4 +1,4 @@
-import { SessionRepository } from '@/domaines/authentification/authentifierUtilisateur.usecase';
+import { SessionRepository } from '@/domaines/authentification/ports/session.repository';
 import { UtilisateurRepository } from '@/domaines/authentification/ports/utilisateur.repository';
 
 export class ValiderCompteUtilisateurUsecase {

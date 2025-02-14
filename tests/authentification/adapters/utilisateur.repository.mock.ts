@@ -4,7 +4,7 @@ import {
   UtilisateurRepository,
 } from '@/domaines/authentification/ports/utilisateur.repository';
 
-export class MockUtilisateurRepository implements UtilisateurRepository {
+export class UtilisateurRepositoryMock implements UtilisateurRepository {
   authentifierUtilisateur(email: string, motDePasse: string): Promise<void> {
     throw Error;
   }
@@ -61,5 +61,9 @@ export class MockUtilisateurRepository implements UtilisateurRepository {
       afficherDisclaimerAides: false,
       token: 'token',
     });
+  }
+
+  deconnecterUtilisateur(idUtilisateur: string): Promise<void> {
+    return Promise.resolve();
   }
 }

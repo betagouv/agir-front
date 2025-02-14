@@ -4,13 +4,19 @@ import {
   UtilisateurRepository,
 } from '@/domaines/authentification/ports/utilisateur.repository';
 
-export class SpyUtilisateurRepository implements UtilisateurRepository {
+export class UtilisateurRepositorySpy implements UtilisateurRepository {
   constructor() {}
 
   private _authentifierUtilisateurArgs: { motDePasse: string; nomUtilisateur: string } | null = null;
 
   get authentifierUtilisateurArgs(): { motDePasse: string; nomUtilisateur: string } | null {
     return this._authentifierUtilisateurArgs;
+  }
+
+  private _utilisateurAEteDeco: boolean = false;
+
+  get utilisateurAEteDeco(): boolean {
+    return this._utilisateurAEteDeco;
   }
 
   authentifierUtilisateur(nomUtilisateur: string, motDePasse: string): Promise<void> {
@@ -44,5 +50,10 @@ export class SpyUtilisateurRepository implements UtilisateurRepository {
 
   seConnecterAvecFranceConnect(oidcCode: string, oidcState: string): Promise<Utilisateur> {
     throw Error;
+  }
+
+  deconnecterUtilisateur(idUtilisateur: string): Promise<void> {
+    this._utilisateurAEteDeco = true;
+    return Promise.resolve();
   }
 }

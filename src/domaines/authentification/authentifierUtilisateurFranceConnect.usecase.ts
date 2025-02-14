@@ -1,6 +1,6 @@
-import { SessionRepository } from '@/domaines/authentification/authentifierUtilisateur.usecase';
 import { AuthentificationResultatPresenter } from '@/domaines/authentification/ports/authentificationResultatPresenter';
 import { PostOnboardingRepository } from '@/domaines/authentification/ports/postOnboarding.repository';
+import { SessionRepository } from '@/domaines/authentification/ports/session.repository';
 import { UtilisateurRepository } from '@/domaines/authentification/ports/utilisateur.repository';
 import { AuthentificationResultat } from '@/domaines/authentification/validerAuthentificationUtilisateur.usecase';
 

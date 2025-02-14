@@ -1,4 +1,4 @@
-import { SessionRepository } from '@/domaines/authentification/authentifierUtilisateur.usecase';
+import { SessionRepository } from '@/domaines/authentification/ports/session.repository';
 import { CompteUtilisateurRepository } from '@/domaines/compte/ports/compteUtilisateur.repository';
 import { OnboardingPostCreationCompteState } from '@/store/onboardingPostCreationCompte';
 

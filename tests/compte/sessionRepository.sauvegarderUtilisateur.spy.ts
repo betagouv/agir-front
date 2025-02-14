@@ -1,6 +1,6 @@
-import { SessionRepository } from '@/domaines/authentification/authentifierUtilisateur.usecase';
 import { Utilisateur } from '@/domaines/authentification/ports/utilisateur.repository';
 import { Score } from '@/domaines/score/ports/score.repository';
+import { SessionRepository } from '@/domaines/authentification/ports/session.repository';
 
 export class SpySauvegarderUtilisateurSessionRepository implements SessionRepository {
   private _utilisateur: Utilisateur = {
@@ -36,4 +36,15 @@ export class SpySauvegarderUtilisateurSessionRepository implements SessionReposi
   }
 
   sauvegarderScore(score: Score): void {}
+
+  deconnecterUtilisateur() {
+    this._utilisateur = {
+      id: '',
+      mail: '',
+      prenom: '',
+      nom: '',
+      onboardingAEteRealise: false,
+      afficherDisclaimerAides: false,
+    };
+  }
 }
