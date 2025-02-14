@@ -14,7 +14,7 @@ describe("Fichier de tests concernant la récupération d'une action", () => {
       nombreAidesDisponibles: 0,
       type: 'classique',
       titre: 'Tester une nouvelle **recette végétarienne**',
-      quiz: undefined,
+      quizzes: [],
       sousTitre:
         'Faites des économies et le plein de vitamines ! Cette semaine, on cuisine une recette saine et délicieuse !',
       commune: 'Noisiel',

@@ -28,9 +28,7 @@ describe("Fichier de tests concernant la récupération d'une action", () => {
 </ul>
 `,
       },
-      quiz: {
-        nombreDeQuestions: 3,
-      },
+      quizzes: [],
       recommandations: [
         {
           titre: 'Les bases de l’alimentation végétarienne : par où commencer ?',

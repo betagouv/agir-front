@@ -65,9 +65,13 @@ export class QuizRepositoryAxios implements QuizRepository {
 }
 
 function mapQuizApiResponse(reponse: Response<QuizApiModel>): Quiz {
+  return mapQuizApi(reponse.data);
+}
+
+export function mapQuizApi(quizApiModel: QuizApiModel): Quiz {
   return {
-    titre: reponse.data.titre,
-    questions: reponse.data.questions.map((question, index) => {
+    titre: quizApiModel.titre,
+    questions: quizApiModel.questions.map((question, index) => {
       return {
         intitule: question.libelle,
         reponsesPossibles: question.reponses.map(r => r.reponse),
@@ -77,14 +81,14 @@ function mapQuizApiResponse(reponse: Response<QuizApiModel>): Quiz {
         solution: question.reponses.filter(r => r.exact)[0].reponse,
       };
     }),
-    clefThematiqueAPI: reponse.data.thematique_principale,
-    difficulte: reponse.data.difficulty,
-    nombreDePointsAGagner: reponse.data.points,
+    clefThematiqueAPI: quizApiModel.thematique_principale,
+    difficulte: quizApiModel.difficulty,
+    nombreDePointsAGagner: quizApiModel.points,
     articleAssocie:
-      reponse.data.article_id !== null
+      quizApiModel.article_id !== null
         ? {
-            id: reponse.data.article_id,
-            contenu: reponse.data.article_contenu,
+            id: quizApiModel.article_id,
+            contenu: quizApiModel.article_contenu,
           }
         : null,
   };

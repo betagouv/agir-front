@@ -1,3 +1,5 @@
+import { Quiz } from '@/domaines/quiz/ports/quizRepository';
+
 interface RecommandationArticle {
   titre: string;
   image: string;
@@ -28,9 +30,7 @@ export interface ActionDetail {
     introduction: string;
     astuces: string;
   };
-  quiz?: {
-    nombreDeQuestions: number;
-  };
+  quizzes?: Quiz[];
   recommandations: RecommandationArticle[];
   nombreDePersonnes: number;
   nombreAidesDisponibles: number;
