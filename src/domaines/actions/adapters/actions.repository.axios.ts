@@ -1,5 +1,5 @@
 import { AxiosFactory } from '@/axios.factory';
-import { Action, ActionDetail, ActionsRepository } from '@/domaines/actions/ports/actions.repository';
+import { Action, ActionDetail, ActionsRepository, TypeAction } from '@/domaines/actions/ports/actions.repository';
 
 interface ActionApiModel {
   code: string;
@@ -14,6 +14,7 @@ interface ActionApiModel {
     categorie: string;
     recherche_service_id: string;
   }[];
+  type: string;
 }
 
 interface ActionDetailApiModel {
@@ -32,9 +33,11 @@ interface ActionDetailApiModel {
 }
 
 export class ActionsRepositoryAxios implements ActionsRepository {
-  async chargerAction(idUtilisateur: string, idAction: string): Promise<ActionDetail> {
+  async chargerAction(idUtilisateur: string, idAction: string, typeAction: TypeAction): Promise<ActionDetail> {
     const axios = AxiosFactory.getAxios();
-    const response = await axios.get<ActionDetailApiModel>(`/utilisateurs/${idUtilisateur}/actions/${idAction}`);
+    const response = await axios.get<ActionDetailApiModel>(
+      `/utilisateurs/${idUtilisateur}/actions/${typeAction}/${idAction}`,
+    );
     return {
       code: response.data.code,
       titre: response.data.titre,
@@ -63,6 +66,7 @@ export class ActionsRepositoryAxios implements ActionsRepository {
       sousTitre: action.sous_titre,
       nombreDePersonnes: action.nombre_actions_en_cours,
       nombreAidesDisponibles: action.nombre_aides_disponibles,
+      type: action.type as TypeAction,
     }));
   }
 }
