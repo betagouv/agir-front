@@ -28,8 +28,8 @@
 
             <WidgetServiceLongueVieAuxObjets
               v-if="service.type === 'longue_vie_objets'"
-              :parametre-de-recherche="service.parametreDuService"
               :commune="actionViewModel.commune"
+              :parametre-de-recherche="service.parametreDuService"
             />
           </div>
         </section>
@@ -90,10 +90,11 @@
   onMounted(() => {
     const idUtilisateur = utilisateurStore().utilisateur.id;
     const idAction = useRoute().params.id.toString();
+    const typeAction = useRoute().params.type.toString();
     isLoading.value = true;
     const usecase = new ChargerActionUsecase(new ActionsRepositoryAxios());
     usecase
-      .execute(idUtilisateur, idAction, new ActionPresenterImpl(vm => (actionViewModel.value = vm)))
+      .execute(idUtilisateur, idAction, typeAction, new ActionPresenterImpl(vm => (actionViewModel.value = vm)))
       .finally(() => (isLoading.value = false));
   });
 </script>

@@ -2,7 +2,7 @@ import { ActionsRepositoryMock } from './adapters/actions.repository.mock';
 import { RecupererCatalogueActionsUsecase } from '@/domaines/actions/recupererCatalogueActions.usecase';
 import { CatalogueActionsPresenterImpl } from '@/domaines/actions/adapters/catalogueActions.presenter.impl';
 import { CatalogueActionsViewModel } from '@/domaines/actions/ports/catalogueActions.presenter';
-import { Action } from '@/domaines/actions/ports/actions.repository';
+import { Action, TypeAction } from '@/domaines/actions/ports/actions.repository';
 
 describe("Fichier de tests concernant la récupération du catalogue d'actions", () => {
   it('Doit presenter le catalogue actions', async () => {
@@ -15,6 +15,7 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
           'Faites des économies et le plein de vitamines ! Cette semaine, on cuisine une recette saine et délicieuse !',
         nombreDePersonnes: 0,
         nombreAidesDisponibles: 0,
+        type: TypeAction.CLASSIQUE,
       },
     ];
 
@@ -36,6 +37,7 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
               params: {
                 id: 'code-action-test',
                 titre: 'tester-une-nouvelle-recette-vegetarienne',
+                type: 'classique',
               },
             },
           },

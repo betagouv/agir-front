@@ -15,6 +15,7 @@ export interface Action {
   sousTitre: string;
   nombreDePersonnes: number;
   nombreAidesDisponibles: number;
+  type: TypeAction;
 }
 
 export interface ActionDetail {
@@ -32,8 +33,14 @@ export interface ActionDetail {
   services: ActionService[];
 }
 
+export enum TypeAction {
+  CLASSIQUE = 'classique',
+  BILAN = 'bilan',
+  QUIZZ = 'quizz',
+}
+
 export interface ActionsRepository {
   recupererToutesLesActions(idUtilisateur: string): Promise<Action[]>;
 
-  chargerAction(idUtilisateur: string, idAction: string): Promise<ActionDetail>;
+  chargerAction(idUtilisateur: string, idAction: string, type: TypeAction): Promise<ActionDetail>;
 }
