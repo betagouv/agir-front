@@ -63,7 +63,7 @@ describe("Fichier de tests concernant la récupération d'une action", () => {
       ActionsRepositoryMock.avecActionDetail(action),
       new ActionPresenterImpl(() => {}, expected),
     );
-    await usecase.execute('id-utilisateur', 'id-action');
+    await usecase.execute('id-utilisateur', 'id-action', 'classique');
 
     function expected(viewModel: ActionQuizzesViewModel): void {
       expect(viewModel).toStrictEqual({
