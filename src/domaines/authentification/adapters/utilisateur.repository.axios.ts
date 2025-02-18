@@ -130,7 +130,7 @@ export class UtilisateurRepositoryAxios implements UtilisateurRepository {
     if (reponse.data.fc_logout_url) {
       return {
         doitSeDeconnecterDeFranceConnect: true,
-        urlDeDeconnexion: reponse.data.fc_logout_url,
+        urlDeDeconnexion: reponse.data.france_connect_logout_url,
       };
     } else {
       return {
