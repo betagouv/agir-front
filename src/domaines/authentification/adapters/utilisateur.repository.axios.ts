@@ -127,7 +127,7 @@ export class UtilisateurRepositoryAxios implements UtilisateurRepository {
   async deconnecterUtilisateur(idUtilisateur: string): Promise<DeconnexionFranceConnect> {
     const axiosInstance = AxiosFactory.getAxios();
     const reponse = await axiosInstance.post(`/utilisateurs/${idUtilisateur}/logout`, {});
-    if (reponse.data.fc_logout_url) {
+    if (reponse.data.france_connect_logout_url) {
       return {
         doitSeDeconnecterDeFranceConnect: true,
         urlDeDeconnexion: reponse.data.france_connect_logout_url,
