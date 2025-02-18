@@ -80,9 +80,12 @@ function mapQuizApiResponse(reponse: Response<QuizApiModel>): Quiz {
     clefThematiqueAPI: reponse.data.thematique_principale,
     difficulte: reponse.data.difficulty,
     nombreDePointsAGagner: reponse.data.points,
-    articleAssocie: {
-      id: reponse.data.article_id,
-      contenu: reponse.data.article_contenu,
-    },
+    articleAssocie:
+      reponse.data.article_id !== null
+        ? {
+            id: reponse.data.article_id,
+            contenu: reponse.data.article_contenu,
+          }
+        : null,
   };
 }
