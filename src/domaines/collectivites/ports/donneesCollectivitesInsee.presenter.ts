@@ -1,5 +1,4 @@
 import { AidesVeloDisponibles } from '@/domaines/aides/simulerAideVelo.usecase';
-import { ViewModelWithUrl } from '@/domaines/collectivites/ports/donneesCollectivitesCP.presenter';
 import { DonneesCollectivitesINSEE } from '@/domaines/collectivites/recupererDonneesCollectivitesInsee.usecase';
 import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 
@@ -7,6 +6,13 @@ export interface IndicationGeoArticleOuAideViewModel {
   nom: string;
   departement: string;
   region: string;
+}
+
+export interface ViewModelWithUrl {
+  url: {
+    name: string;
+    params: { id: number };
+  };
 }
 
 export interface ArticleOuAideCollectiviteViewModel extends ViewModelWithUrl {
