@@ -1,16 +1,16 @@
 <template>
   <div class="background--white border-radius--md shadow fr-p-1w fr-grid-row full-height">
-    <div class="fr-col-3 border-radius--md background-image position--relative">
+    <div class="fr-col-md-2 border-radius--md background-image position--relative">
       <span
         v-if="suggestionsServiceViewModel.nombreMiseEnFavoris > 0"
         class="tag--favoris background--white border-radius--md fr-p-1v fr-text--sm fr-text--bold"
       >
         {{ suggestionsServiceViewModel.nombreMiseEnFavoris }}
-        <span class="fr-icon-heart-fill fr-icon--sm" aria-hidden="true"></span>
+        <span aria-hidden="true" class="fr-icon-heart-fill fr-icon--sm"></span>
       </span>
     </div>
 
-    <div class="fr-col-9 position--relative fr-pl-1w fr-grid-row flex-column">
+    <div class="fr-col-9 position--relative fr-pl-2w fr-grid-row flex-column">
       <p class="fr-text--lg text--semi-bold text--black fr-mb-0">
         <router-link
           v-if="suggestionsServiceViewModel.to"
