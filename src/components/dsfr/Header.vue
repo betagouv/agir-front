@@ -228,9 +228,7 @@
   );
 
   const logout = async () => {
-    await seDeconnecterUsecase.execute(utilisateurId).finally(async () => {
-      await router.push('/');
-    });
+    await seDeconnecterUsecase.execute(utilisateurId, url => router.push({ path: url }));
   };
 </script>
 

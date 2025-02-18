@@ -19,6 +19,7 @@ import { utilisateurStore } from '@/store/utilisateur';
 
 const Authentification = () => import('@/components/Authentification.vue');
 const Page404 = () => import('@/components/pages/Page404.vue');
+const FranceConnectLogoutCallBack = () => import('@/components/FranceConnectLogoutCallBack.vue');
 const FranceConnectCallBack = () => import('@/components/FranceConnectCallBack.vue');
 const PageAccueil = () => import('@/components/pages/PageAccueil.vue');
 const PageSessionExpiree = () => import('@/components/pages/PageSessionExpiree.vue');
@@ -29,6 +30,7 @@ export enum RouteCommuneName {
   SESSION_EXPIREE = 'session-expiree',
   NOT_FOUND = 'not-found',
   RETOUR_AUTH_FRANCE_CONNECT = 'retour-auth-france-connect',
+  RETOUR_LOGOUT_FRANCE_CONNECT = 'retour-logout-france-connect',
 }
 
 enum RouteCommunePath {
@@ -36,7 +38,7 @@ enum RouteCommunePath {
   AUTHENTIFICATION = '/authentification',
   SESSION_EXPIREE = '/session-expiree',
   LOGIN_CALLBACK = '/fc-login-callback',
-  LOGOUT_CALLBACK = '/fr-logout-callback',
+  LOGOUT_CALLBACK = '/fc-logout-callback',
 }
 
 const routes: RouteRecordRaw[] = [
@@ -91,6 +93,14 @@ const routes: RouteRecordRaw[] = [
     path: RouteCommunePath.LOGIN_CALLBACK,
     name: RouteCommuneName.RETOUR_AUTH_FRANCE_CONNECT,
     component: FranceConnectCallBack,
+    meta: {
+      estPublique: true,
+    },
+  },
+  {
+    path: RouteCommunePath.LOGOUT_CALLBACK,
+    name: RouteCommuneName.RETOUR_LOGOUT_FRANCE_CONNECT,
+    component: FranceConnectLogoutCallBack,
     meta: {
       estPublique: true,
     },

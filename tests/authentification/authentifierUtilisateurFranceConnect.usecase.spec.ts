@@ -15,7 +15,7 @@ describe("Fichier de tests concernant l'authentification France Connect", () => 
     const spySessionRepository = SpySauvegarderUtilisateurSessionRepository.sansOnBoardingRealise();
     const spyPostOnboardingRepositorySpy = new PostOnboardingRepositorySpy();
     const usecase = new AuthentifierUtilisateurFranceConnectUsecase(
-      new UtilisateurRepositoryMock(),
+      UtilisateurRepositoryMock.nouvelleInstance(),
       spySessionRepository,
       spyPostOnboardingRepositorySpy,
     );

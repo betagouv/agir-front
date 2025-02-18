@@ -1,6 +1,7 @@
 import { jwtDecode } from 'jwt-decode';
 import { AxiosFactory } from '@/axios.factory';
 import {
+  DeconnexionFranceConnect,
   Utilisateur,
   UtilisateurConnecte,
   UtilisateurRepository,
@@ -123,8 +124,19 @@ export class UtilisateurRepositoryAxios implements UtilisateurRepository {
     };
   }
 
-  async deconnecterUtilisateur(idUtilisateur: string): Promise<void> {
+  async deconnecterUtilisateur(idUtilisateur: string): Promise<DeconnexionFranceConnect> {
     const axiosInstance = AxiosFactory.getAxios();
-    await axiosInstance.post(`/utilisateurs/${idUtilisateur}/logout`, {});
+    const reponse = await axiosInstance.post(`/utilisateurs/${idUtilisateur}/logout`, {});
+    if (reponse.data.fc_logout_url) {
+      return {
+        doitSeDeconnecterDeFranceConnect: true,
+        urlDeDeconnexion: reponse.data.fc_logout_url,
+      };
+    } else {
+      return {
+        doitSeDeconnecterDeFranceConnect: false,
+        urlDeDeconnexion: '',
+      };
+    }
   }
 }

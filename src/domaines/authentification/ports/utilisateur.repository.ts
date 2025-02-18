@@ -16,6 +16,11 @@ export interface UtilisateurConnecte {
 export type IdUtilisateur = string;
 export type TokenUtilisateur = string;
 
+export type DeconnexionFranceConnect = {
+  doitSeDeconnecterDeFranceConnect: boolean;
+  urlDeDeconnexion: string;
+};
+
 export interface UtilisateurRepository {
   authentifierUtilisateur(email: string, motDePasse: string): Promise<void>;
 
@@ -33,5 +38,5 @@ export interface UtilisateurRepository {
 
   seConnecterAvecFranceConnect(oidcCode: string, oidcState: string): Promise<Utilisateur>;
 
-  deconnecterUtilisateur(idUtilisateur: string): Promise<void>;
+  deconnecterUtilisateur(idUtilisateur: string): Promise<DeconnexionFranceConnect>;
 }

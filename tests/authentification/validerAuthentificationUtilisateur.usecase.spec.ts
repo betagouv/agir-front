@@ -13,7 +13,7 @@ describe("Fichier de tests concernant la validation de l'authentification de l'u
     // WHEN
     const spySessionRepository = SpySauvegarderUtilisateurSessionRepository.sansOnBoardingRealise();
     const usecase = new ValiderAuthentificationUtilisateurUsecase(
-      new UtilisateurRepositoryMock(),
+      UtilisateurRepositoryMock.nouvelleInstance(),
       spySessionRepository,
     );
     await usecase.execute('john@exemple.com', '123456', new AuthentificationResultatPresenterImpl(() => {}));

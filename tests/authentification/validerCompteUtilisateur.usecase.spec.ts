@@ -8,7 +8,10 @@ describe('Fichier de tests concernant la validation du compte utilisateur', () =
     // GIVEN
     // WHEN
     const spySessionRepository = SpySauvegarderUtilisateurSessionRepository.sansOnBoardingRealise();
-    const usecase = new ValiderCompteUtilisateurUsecase(new UtilisateurRepositoryMock(), spySessionRepository);
+    const usecase = new ValiderCompteUtilisateurUsecase(
+      UtilisateurRepositoryMock.nouvelleInstance(),
+      spySessionRepository,
+    );
     await usecase.execute('john@exemple.com', '123456');
     // THEN
     expect(spySessionRepository.utilisateur).toStrictEqual<Utilisateur>({

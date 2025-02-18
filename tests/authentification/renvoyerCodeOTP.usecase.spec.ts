@@ -1,4 +1,5 @@
 import {
+  DeconnexionFranceConnect,
   Utilisateur,
   UtilisateurConnecte,
   UtilisateurRepository,
@@ -45,7 +46,7 @@ class SpyUtilisateurRepository implements UtilisateurRepository {
     throw Error;
   }
 
-  deconnecterUtilisateur(idUtilisateur: string): Promise<void> {
+  deconnecterUtilisateur(idUtilisateur: string): Promise<DeconnexionFranceConnect> {
     throw Error('not implemented yet');
   }
 }
