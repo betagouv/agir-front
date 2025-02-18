@@ -7,8 +7,13 @@ export class DeconnecterUtilisateurUsecase {
     private sessionRepository: SessionRepository,
   ) {}
 
-  async execute(utilisateurId: string): Promise<void> {
-    await this.utilisateurRepository.deconnecterUtilisateur(utilisateurId);
-    this.sessionRepository.deconnecterUtilisateur();
+  async execute(utilisateurId: string, postDeconnexionUrlCallBack: (url: string) => void): Promise<void> {
+    const deconnexion = await this.utilisateurRepository.deconnecterUtilisateur(utilisateurId);
+    if (deconnexion.doitSeDeconnecterDeFranceConnect) {
+      postDeconnexionUrlCallBack(deconnexion.urlDeDeconnexion);
+    } else {
+      this.sessionRepository.deconnecterUtilisateur();
+      postDeconnexionUrlCallBack('/');
+    }
   }
 }

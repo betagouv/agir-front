@@ -1,10 +1,21 @@
 import {
+  DeconnexionFranceConnect,
   Utilisateur,
   UtilisateurConnecte,
   UtilisateurRepository,
 } from '@/domaines/authentification/ports/utilisateur.repository';
 
 export class UtilisateurRepositoryMock implements UtilisateurRepository {
+  private constructor(private casDeFranceConnect?: boolean) {}
+
+  static nouvelleInstance(): UtilisateurRepositoryMock {
+    return new UtilisateurRepositoryMock();
+  }
+
+  static seDeconnecterDeFranceConnect(): UtilisateurRepositoryMock {
+    return new UtilisateurRepositoryMock(true);
+  }
+
   authentifierUtilisateur(email: string, motDePasse: string): Promise<void> {
     throw Error;
   }
@@ -63,7 +74,17 @@ export class UtilisateurRepositoryMock implements UtilisateurRepository {
     });
   }
 
-  deconnecterUtilisateur(idUtilisateur: string): Promise<void> {
-    return Promise.resolve();
+  deconnecterUtilisateur(idUtilisateur: string): Promise<DeconnexionFranceConnect> {
+    if (this.casDeFranceConnect) {
+      return Promise.resolve({
+        doitSeDeconnecterDeFranceConnect: true,
+        urlDeDeconnexion: 'urlDeDeconnexion',
+      });
+    } else {
+      return Promise.resolve({
+        doitSeDeconnecterDeFranceConnect: false,
+        urlDeDeconnexion: '/',
+      });
+    }
   }
 }

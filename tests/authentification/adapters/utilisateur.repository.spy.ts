@@ -1,4 +1,5 @@
 import {
+  DeconnexionFranceConnect,
   Utilisateur,
   UtilisateurConnecte,
   UtilisateurRepository,
@@ -52,8 +53,11 @@ export class UtilisateurRepositorySpy implements UtilisateurRepository {
     throw Error;
   }
 
-  deconnecterUtilisateur(idUtilisateur: string): Promise<void> {
+  deconnecterUtilisateur(idUtilisateur: string): Promise<DeconnexionFranceConnect> {
     this._utilisateurAEteDeco = true;
-    return Promise.resolve();
+    return Promise.resolve({
+      doitSeDeconnecterDeFranceConnect: false,
+      urlDeDeconnexion: '',
+    });
   }
 }

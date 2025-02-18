@@ -25,13 +25,12 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
   import CompteMenuLateral from '@/components/custom/Compte/CompteMenuLateral.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import { SessionRepositoryStore } from '@/domaines/authentification/adapters/session.repository.store';
   import { UtilisateurRepositoryAxios } from '@/domaines/authentification/adapters/utilisateur.repository.axios';
   import { DeconnecterUtilisateurUsecase } from '@/domaines/authentification/deconnecterUtilisateur.usecase';
-  import router from '@/router';
   import { utilisateurStore } from '@/store/utilisateur';
 
   defineProps<{ pageCourante: string }>();
@@ -43,8 +42,6 @@
   );
 
   const logout = async () => {
-    await seDeconnecterUsecase.execute(utilisateurId).finally(async () => {
-      await router.replace('/');
-    });
+    await seDeconnecterUsecase.execute(utilisateurId, url => (window.location.href = url));
   };
 </script>

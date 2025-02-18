@@ -1,4 +1,5 @@
 import {
+  DeconnexionFranceConnect,
   Utilisateur,
   UtilisateurConnecte,
   UtilisateurRepository,
@@ -68,7 +69,7 @@ export class UtilisateurRepositoryForTest implements UtilisateurRepository {
     });
   }
 
-  deconnecterUtilisateur(idUtilisateur: string): Promise<void> {
+  deconnecterUtilisateur(idUtilisateur: string): Promise<DeconnexionFranceConnect> {
     throw Error;
   }
 }
