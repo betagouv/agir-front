@@ -24,7 +24,7 @@
   import ActionQuiz from '@/components/custom/Action/ActionQuiz.vue';
   import CarteSkeleton from '@/components/custom/Skeleton/CarteSkeleton.vue';
   import { ActionPresenterImpl } from '@/domaines/actions/adapters/action.presenter.impl';
-  import { ActionsRepositoryAxios } from '@/domaines/actions/adapters/actions.repository.axios';
+  import { ActionQuizRepositoryMock } from '@/domaines/actions/adapters/actionQuiz.repository.mock';
   import { ChargerActionUsecase } from '@/domaines/actions/chargerAction.usecase';
   import { ChargerActionClassiqueUsecase } from '@/domaines/actions/chargerActionClassique.usecase';
   import { ChargerActionQuizUsecase } from '@/domaines/actions/chargerActionQuiz.usecase';
@@ -46,7 +46,7 @@
     const usecase = new ChargerActionUsecase(
       new ChargerActionClassiqueUsecase(),
       new ChargerActionQuizUsecase(),
-      new ActionsRepositoryAxios(),
+      new ActionQuizRepositoryMock(),
       new ActionPresenterImpl(
         vm => (actionClassiqueViewModel.value = vm),
         vm => (actionQuizViewModel.value = vm),

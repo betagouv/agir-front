@@ -42,9 +42,22 @@ export class ActionPresenterImpl implements ActionPresenter {
     this.actionQuizViewModel({
       titre,
       sousTitre,
-      quiz: {
-        nombreDeQuestions: 0,
-      },
+      quizzes: action.quizzes!.map(quiz => {
+        return {
+          nombreDePointsAGagner: quiz.nombreDePointsAGagner.toString(),
+          titre: quiz.titre,
+          question: {
+            id: '0',
+            intitule: quiz.questions[0].intitule,
+            reponsesPossibles: quiz.questions[0].reponsesPossibles,
+            ordre: quiz.questions[0].ordre,
+            texteExplicationOK: quiz.questions[0].texteExplicationOK,
+            texteExplicationKO: quiz.questions[0].texteExplicationKO,
+            solution: quiz.questions[0].solution,
+          },
+          articleAssocie: quiz.articleAssocie,
+        };
+      }),
       recommandations: action.recommandations,
     });
   }
