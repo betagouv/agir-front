@@ -19,6 +19,7 @@ export class ActionQuizRepositoryMock implements ActionsRepository {
       services: [],
       quizzes: [
         {
+          id: '0',
           nombreDePointsAGagner: 10,
           difficulte: 1,
           clefThematiqueAPI: ClefThematiqueAPI.consommation,
@@ -33,12 +34,10 @@ export class ActionQuizRepositoryMock implements ActionsRepository {
               solution: 'Reponse 1',
             },
           ],
-          articleAssocie: {
-            id: '1',
-            contenu: '<p>Article de ouf !</p>',
-          },
+          articleAssocie: null,
         },
         {
+          id: '1',
           nombreDePointsAGagner: 10,
           difficulte: 2,
           clefThematiqueAPI: ClefThematiqueAPI.consommation,
@@ -59,6 +58,7 @@ export class ActionQuizRepositoryMock implements ActionsRepository {
           },
         },
         {
+          id: '2',
           nombreDePointsAGagner: 10,
           difficulte: 2,
           clefThematiqueAPI: ClefThematiqueAPI.consommation,

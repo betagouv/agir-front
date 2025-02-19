@@ -1,6 +1,6 @@
 import { Response } from 'redaxios';
 import { AxiosFactory, intercept401 } from '@/axios.factory';
-import { Quiz, QuizRepository } from '@/domaines/quiz/ports/quizRepository';
+import { Quiz, QuizRepository, ScoreQuiz } from '@/domaines/quiz/ports/quizRepository';
 import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 
 export interface QuizApiModel {
@@ -61,6 +61,13 @@ export class QuizRepositoryAxios implements QuizRepository {
     await axiosInstance.patch(`/utilisateurs/${idUtilisateur}/bibliotheque/quizz/${idQuiz}`, {
       pourcent: score,
     });
+  }
+
+  @intercept401()
+  async recupererScoreActionQuiz(idUtilisateur: string, idAction: string): Promise<ScoreQuiz> {
+    const axiosInstance = AxiosFactory.getAxios();
+    const response = await axiosInstance.get(`/utilisateurs/${idUtilisateur}/actions/quizz/${idAction}/score`);
+    return response.data.score;
   }
 }
 

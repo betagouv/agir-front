@@ -16,9 +16,7 @@
           :quiz-id="quizActuel.id"
         />
       </template>
-      <template v-else>
-        <p>Quiz fini !</p>
-      </template>
+      <ActionQuizTerminee v-else :titre="actionQuizViewModel.titre" />
     </div>
   </div>
 </template>
@@ -26,6 +24,7 @@
 <script setup lang="ts">
   import { computed, ref } from 'vue';
   import ActionQuizComposant from '@/components/custom/Action/ActionQuizComposant.vue';
+  import ActionQuizTerminee from '@/components/custom/Action/ActionQuizTerminee.vue';
   import ExamenNavigation from '@/components/custom/Mission/Examen/ExamenNavigation.vue';
   import { ActionQuizViewModel, ActionQuizzesViewModel } from '@/domaines/actions/ports/action.presenter';
 
