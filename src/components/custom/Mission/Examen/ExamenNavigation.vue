@@ -6,7 +6,9 @@
     >
       Retour
     </button>
-    <span class="fr-text--bold"> Question {{ etapeActuelle }} sur {{ etapeTotale }}</span>
+    <span>
+      Question <span class="fr-text--bold">{{ etapeActuelle }} sur {{ etapeTotale }}</span>
+    </span>
   </div>
 </template>
 

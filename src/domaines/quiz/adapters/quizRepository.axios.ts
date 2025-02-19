@@ -70,6 +70,7 @@ function mapQuizApiResponse(reponse: Response<QuizApiModel>): Quiz {
 
 export function mapQuizApi(quizApiModel: QuizApiModel): Quiz {
   return {
+    id: quizApiModel.content_id,
     titre: quizApiModel.titre,
     questions: quizApiModel.questions.map((question, index) => {
       return {

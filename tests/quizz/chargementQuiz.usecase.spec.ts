@@ -14,6 +14,7 @@ class QuizRepositoryForTest implements QuizRepository {
 
   async getQuiz(id: string): Promise<Quiz> {
     return {
+      id: '0',
       nombreDePointsAGagner: 10,
       difficulte: 1,
       clefThematiqueAPI: ClefThematiqueAPI.consommation,

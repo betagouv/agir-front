@@ -57,7 +57,7 @@ describe('Page Quiz Article', () => {
         plugins: [router],
       },
     });
-    boutonValider = page.getByRole('button', { name: 'Valider' });
+    boutonValider = page.getByRole('button', { name: 'Voir la réponse' });
     bonneReponse = page.getByRole('radio', { name: '1' });
     mauvaiseReponse = page.getByRole('radio', { name: '2' });
   });

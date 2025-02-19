@@ -13,6 +13,7 @@
           :article="quizActuel.articleAssocie ?? undefined"
           :question="quizActuel.question"
           :on-click-continuer="passerQuestionSuivante"
+          :quiz-id="quizActuel.id"
         />
       </template>
       <template v-else>

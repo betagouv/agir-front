@@ -44,10 +44,10 @@ export class ActionPresenterImpl implements ActionPresenter {
       sousTitre,
       quizzes: action.quizzes!.map(quiz => {
         return {
+          id: quiz.id,
           nombreDePointsAGagner: quiz.nombreDePointsAGagner.toString(),
           titre: quiz.titre,
           question: {
-            id: '0',
             intitule: quiz.questions[0].intitule,
             reponsesPossibles: quiz.questions[0].reponsesPossibles,
             ordre: quiz.questions[0].ordre,

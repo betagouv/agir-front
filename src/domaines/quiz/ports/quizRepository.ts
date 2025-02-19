@@ -22,6 +22,7 @@ export interface ArticleDuQuiz {
   contenu: string;
 }
 export interface Quiz {
+  id: string;
   titre: string;
   difficulte: QuizDifficulte;
   questions: QuestionsQuiz[];

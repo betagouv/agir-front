@@ -1,7 +1,5 @@
 import { ActionDetail } from '@/domaines/actions/ports/actions.repository';
-import { QuestionViewModel, QuizViewModel } from '@/domaines/quiz/adapters/chargementQuiz.presenter.impl';
 import { ArticleDuQuiz } from '@/domaines/quiz/ports/quizRepository';
-import { TagStyle } from '@/domaines/thematiques/TagThematique';
 
 export interface ActionPresenter {
   presenteActionClassique(action: ActionDetail): void;
@@ -29,6 +27,7 @@ export interface ActionQuizzesViewModel extends ActionBaseViewModel {
 }
 
 export interface ActionQuizViewModel {
+  id: string;
   titre: string;
   question: ActionQuizQuestionViewModel;
   nombreDePointsAGagner: string;
@@ -36,7 +35,6 @@ export interface ActionQuizViewModel {
 }
 
 export interface ActionQuizQuestionViewModel {
-  id: string;
   intitule: string;
   reponsesPossibles: string[];
   ordre: string;
