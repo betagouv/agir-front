@@ -1,6 +1,6 @@
 <template>
   <div class="fr-col-12 fr-col-md-6">
-    <div
+    <section
       class="shadow border-radius--md text--left fr-p-3w full-height flex flex-column flex-space-between background--white"
     >
       <div class="fr-mb-3v">
@@ -9,7 +9,7 @@
         </h3>
         <slot />
       </div>
-    </div>
+    </section>
   </div>
 </template>
 
