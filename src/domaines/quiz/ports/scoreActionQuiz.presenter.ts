@@ -1,13 +1,15 @@
 import { ScoreQuiz } from '@/domaines/quiz/ports/quizRepository';
 
+export type ScoreConfigViewModel = {
+  emoji: string;
+  couleurBackground: string;
+  couleurBordure: string;
+};
+
 export interface ScoreActionQuizViewModel {
-  presentationScore: {
-    emoji: string;
-    phraseScore: string;
-    couleurBackground: string;
-    couleurBordure: string;
-  };
+  phraseScore: string;
   encouragement: string;
+  scoreConfig: ScoreConfigViewModel;
 }
 
 export interface ScoreActionQuizPresenter {

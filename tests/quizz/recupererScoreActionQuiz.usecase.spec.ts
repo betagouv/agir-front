@@ -1,11 +1,11 @@
 import { Quiz, QuizRepository, ScoreQuiz } from '@/domaines/quiz/ports/quizRepository';
 import { RecuperScoreActionQuizUsecase } from '@/domaines/quiz/recupererScoreActionQuiz.usecase';
-import { ScoreExamenPresenterImpl } from '@/domaines/examens/adapters/scoreExamen.presenter.impl';
 import { ScoreActionQuizViewModel } from '@/domaines/quiz/ports/scoreActionQuiz.presenter';
 import { ScoreActionQuizPresenterImpl } from '@/domaines/quiz/adapters/scoreActionQuiz.presenter.impl';
 
 class QuizRepositoryForTest implements QuizRepository {
   constructor(private readonly scoreARetourner: ScoreQuiz) {}
+
   marquerLeQuizArticleCommeLu(_utilisateurId: string, _articleId: string): Promise<void> {
     throw new Error('Method not implemented.');
   }
@@ -41,9 +41,9 @@ describe('Fichier de test pour la récupération du score action quiz', () => {
 
     function expectation(viewmodel: ScoreActionQuizViewModel) {
       expect(viewmodel).toStrictEqual({
-        presentationScore: {
+        phraseScore: 'Vous avez obtenu un score de 39%',
+        scoreConfig: {
           emoji: '😬',
-          phraseScore: 'Vous avez obtenu un score de 39%',
           couleurBackground: '#FEF7F7',
           couleurBordure: '#FFCACA',
         },
@@ -61,9 +61,9 @@ describe('Fichier de test pour la récupération du score action quiz', () => {
 
     function expectation(viewmodel: ScoreActionQuizViewModel) {
       expect(viewmodel).toStrictEqual({
-        presentationScore: {
+        phraseScore: 'Vous avez obtenu un score de 69%',
+        scoreConfig: {
           emoji: '🙃',
-          phraseScore: 'Vous avez obtenu un score de 69%',
           couleurBackground: '#FCFAED',
           couleurBordure: '#E1D9AA',
         },
@@ -81,9 +81,9 @@ describe('Fichier de test pour la récupération du score action quiz', () => {
 
     function expectation(viewmodel: ScoreActionQuizViewModel) {
       expect(viewmodel).toStrictEqual({
-        presentationScore: {
+        phraseScore: 'Vous avez obtenu un score de 80%',
+        scoreConfig: {
           emoji: '👏',
-          phraseScore: 'Vous avez obtenu un score de 80%',
           couleurBackground: '#FAFCED',
           couleurBordure: '#CBE1AA',
         },
