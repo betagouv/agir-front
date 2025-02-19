@@ -7,7 +7,7 @@ export type ScoreConfigViewModel = {
 };
 
 export interface ScoreActionQuizViewModel {
-  phraseScore: string;
+  score: string;
   encouragement: string;
   scoreConfig: ScoreConfigViewModel;
 }

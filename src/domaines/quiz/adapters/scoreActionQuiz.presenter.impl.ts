@@ -25,7 +25,7 @@ export class ScoreActionQuizPresenterImpl implements ScoreActionQuizPresenter {
     const { emoji, couleurBackground, couleurBordure } = scoreStrategies[getScoreCategory(score)];
 
     this.viewModel({
-      phraseScore: `Vous avez obtenu un score de ${score}%`,
+      score: `${score}%`,
       scoreConfig: {
         emoji,
         couleurBackground,

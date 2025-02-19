@@ -1,5 +1,5 @@
 import { Quiz, QuizRepository, ScoreQuiz } from '@/domaines/quiz/ports/quizRepository';
-import { RecuperScoreActionQuizUsecase } from '@/domaines/quiz/recupererScoreActionQuiz.usecase';
+import { RecupererScoreActionQuizUsecase } from '@/domaines/quiz/recupererScoreActionQuiz.usecase';
 import { ScoreActionQuizViewModel } from '@/domaines/quiz/ports/scoreActionQuiz.presenter';
 import { ScoreActionQuizPresenterImpl } from '@/domaines/quiz/adapters/scoreActionQuiz.presenter.impl';
 
@@ -36,7 +36,7 @@ describe('Fichier de test pour la récupération du score action quiz', () => {
     const score = 39;
     const repository = new QuizRepositoryForTest(score);
 
-    const usecase = new RecuperScoreActionQuizUsecase(repository);
+    const usecase = new RecupererScoreActionQuizUsecase(repository);
     usecase.execute('id-utilisateur', 'id-action', new ScoreActionQuizPresenterImpl(expectation));
 
     function expectation(viewmodel: ScoreActionQuizViewModel) {
@@ -56,7 +56,7 @@ describe('Fichier de test pour la récupération du score action quiz', () => {
     const score = 69;
     const repository = new QuizRepositoryForTest(score);
 
-    const usecase = new RecuperScoreActionQuizUsecase(repository);
+    const usecase = new RecupererScoreActionQuizUsecase(repository);
     usecase.execute('id-utilisateur', 'id-action', new ScoreActionQuizPresenterImpl(expectation));
 
     function expectation(viewmodel: ScoreActionQuizViewModel) {
@@ -76,12 +76,12 @@ describe('Fichier de test pour la récupération du score action quiz', () => {
     const score = 80;
     const repository = new QuizRepositoryForTest(score);
 
-    const usecase = new RecuperScoreActionQuizUsecase(repository);
+    const usecase = new RecupererScoreActionQuizUsecase(repository);
     usecase.execute('id-utilisateur', 'id-action', new ScoreActionQuizPresenterImpl(expectation));
 
     function expectation(viewmodel: ScoreActionQuizViewModel) {
       expect(viewmodel).toStrictEqual({
-        phraseScore: 'Vous avez obtenu un score de 80%',
+        score: '80%',
         scoreConfig: {
           emoji: '👏',
           couleurBackground: '#FAFCED',
