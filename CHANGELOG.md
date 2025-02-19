@@ -1,5 +1,32 @@
 # Changelog
 
+## [1.41.0](https://github.com/betagouv/agir-front/compare/v1.40.0...v1.41.0) (2025-02-19)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* ajout d'un disclaimer + affichage de la date de dernière mise à jour pour une aide (page individuelle) ([#922](https://github.com/betagouv/agir-front/issues/922)) ([7c02ff4](https://github.com/betagouv/agir-front/commit/7c02ff4f3ec414aaa876065c014927f86bf15a66))
+* cas de la déconnexion avec France Connect ([#934](https://github.com/betagouv/agir-front/issues/934)) ([143bb3a](https://github.com/betagouv/agir-front/commit/143bb3ab108481bc761cc6334fac3fe775379951))
+* Connexion avec FranceConnect ([#923](https://github.com/betagouv/agir-front/issues/923)) ([02215c5](https://github.com/betagouv/agir-front/commit/02215c5b0f119ca73731780b633381ef6ec959df))
+* route de déconnexion (compat. france connect) ([#926](https://github.com/betagouv/agir-front/issues/926)) ([7b85aef](https://github.com/betagouv/agir-front/commit/7b85aef8e31b4b26621a0e43407c99f279cb7a10))
+
+
+### 🐛 Corrections de bogues
+
+* affichage du texte d'explication pour les quizz ([#936](https://github.com/betagouv/agir-front/issues/936)) ([ca03ef6](https://github.com/betagouv/agir-front/commit/ca03ef647fb5a7ac0359afd3318d2ef9c9f31d34))
+* ui de la carte lvao dans les actions ([#935](https://github.com/betagouv/agir-front/issues/935)) ([7036ca8](https://github.com/betagouv/agir-front/commit/7036ca860d29f115d6456036d284bb9a715725a0))
+
+
+### 👷 Autres changements
+
+* ajouter couverture de test pour la récupération des données collectivités avec INSEE ([#927](https://github.com/betagouv/agir-front/issues/927)) ([79fc054](https://github.com/betagouv/agir-front/commit/79fc054d1fe7643faa1f8d7707020883e2533def))
+* Bump @types/node from 22.13.1 to 22.13.4 ([#932](https://github.com/betagouv/agir-front/issues/932)) ([aa81033](https://github.com/betagouv/agir-front/commit/aa81033cac2ec7c9765ecb7b807e094a22043b97))
+* Bump @vitest/coverage-v8 from 2.0.5 to 3.0.5 ([#930](https://github.com/betagouv/agir-front/issues/930)) ([9794344](https://github.com/betagouv/agir-front/commit/97943447ee5e90600791980203af91f23b0750a1))
+* Bump vite from 6.0.11 to 6.1.0 ([#929](https://github.com/betagouv/agir-front/issues/929)) ([99345e7](https://github.com/betagouv/agir-front/commit/99345e7beb5667ea1a162d44fbc3d78fe19820c3))
+* Bump vitest from 2.1.9 to 3.0.5 ([#931](https://github.com/betagouv/agir-front/issues/931)) ([8477c18](https://github.com/betagouv/agir-front/commit/8477c180f966974910c6e9cbcbfad5362c5432c6))
+* refacto type action ([#928](https://github.com/betagouv/agir-front/issues/928)) ([330bea6](https://github.com/betagouv/agir-front/commit/330bea6d66572a60ebd15d7715db3f3bb24a78ee))
+* suppression collectivité code postal ([#937](https://github.com/betagouv/agir-front/issues/937)) ([43f3f79](https://github.com/betagouv/agir-front/commit/43f3f7960a9f8bf1b3553132e4878f45ca24b417))
+
 ## [1.40.0](https://github.com/betagouv/agir-front/compare/v1.39.0...v1.40.0) (2025-02-13)
 
 
