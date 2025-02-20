@@ -9,6 +9,7 @@ export interface ActionPresenter {
 
 export interface ActionBaseViewModel {
   titre: string;
+  titreAffiche: string;
   sousTitre: string;
   recommandations: RecommandationArticleViewModel[];
 }
@@ -36,7 +37,7 @@ export interface ActionQuizViewModel {
 
 export interface ActionQuizQuestionViewModel {
   intitule: string;
-  reponsesPossibles: string[];
+  reponsesPossibles: { label: string; value: string }[];
   ordre: string;
   texteExplicationOK: string;
   texteExplicationKO: string;

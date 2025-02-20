@@ -8,8 +8,7 @@
   <h2 class="fr-mt-2w text--center">
     <span class="text--bold">Bravo !</span><br />
     <span class="text--bleu fr-text--lead text--normal">
-      Vous avez terminé le quiz "<span class="fr-text--bold">{{ titre }}</span
-      >" !
+      Vous avez terminé le quiz "<span class="fr-text--bold" v-html="titre" />" !
     </span>
   </h2>
 
@@ -34,7 +33,7 @@
 
 <script setup lang="ts">
   import { onMounted, ref } from 'vue';
-  import { useRoute, useRouter } from 'vue-router';
+  import { useRoute } from 'vue-router';
   import { QuizRepositoryAxios } from '@/domaines/quiz/adapters/quizRepository.axios';
   import { ScoreActionQuizPresenterImpl } from '@/domaines/quiz/adapters/scoreActionQuiz.presenter.impl';
   import { ScoreActionQuizViewModel } from '@/domaines/quiz/ports/scoreActionQuiz.presenter';

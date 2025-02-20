@@ -14,6 +14,7 @@
           :question="quizActuel.question"
           :on-click-continuer="passerQuestionSuivante"
           :quiz-id="quizActuel.id"
+          :est-derniere-question="indexQuestionActuelle + 1 === actionQuizViewModel?.quizzes.length"
         />
       </template>
       <ActionQuizTerminee v-else :titre="actionQuizViewModel.titre" />
@@ -36,10 +37,10 @@
   );
 
   const retournerQuestionPrecedente = () => {
-    indexQuestionActuelle.value--;
+    if (indexQuestionActuelle.value > 0) indexQuestionActuelle.value--;
   };
 
   const passerQuestionSuivante = () => {
-    indexQuestionActuelle.value++;
+    if (indexQuestionActuelle.value < props.actionQuizViewModel.quizzes.length) indexQuestionActuelle.value++;
   };
 </script>

@@ -2,30 +2,26 @@
   <QuizQuestion
     v-if="!reponseDonnee"
     :question="question.intitule"
-    :questions="listeDesReponses"
+    :questions="props.question.reponsesPossibles"
     @quiz-termine="afficherArticle"
   />
 
   <div v-if="reponseDonnee">
     <h2 class="fr-h4">{{ question.intitule }}</h2>
-    <p
-      :aria-label="estBienRepondu ? 'Bonne réponse' : 'Mauvaise réponse'"
-      class="text--black"
-      :class="estBienRepondu ? 'action__quiz-reponseBonne' : 'action__quiz-reponseFausse'"
-    >
+
+    <p class="text--black" :class="estBienRepondu ? 'action__quiz-reponseBonne' : 'action__quiz-reponseFausse'">
       <span aria-hidden="true" class="fr-pr-1w">{{ estBienRepondu ? '✅' : '❌' }}</span>
-      Votre réponse&nbsp;: <span class="text--bold">{{ reponseDonnee }}</span>
+      {{ estBienRepondu ? 'Bien joué ! La réponse était' : 'Pas tout à fait... Vous avez répondu' }}
+      &nbsp;: <span class="text--bold">{{ reponseDonnee }}</span>
     </p>
 
     <ActionQuizExplication
       :article-associe="article ?? null"
       :on-click-continuer="passerQuestionSuivante"
-      :quiz-id="article?.id!"
       :reponse-correcte="estBienRepondu"
       :texte-explication-k-o="question.texteExplicationKO"
       :texte-explication-o-k="question.texteExplicationOK"
-      bouton-suivant-libelle="Question suivante"
-      points="5"
+      :bouton-suivant-libelle="estDerniereQuestion ? 'Voir le résultat' : 'Question suivante'"
     />
   </div>
 </template>
@@ -46,17 +42,12 @@
     question: ActionQuizQuestionViewModel;
     article?: ArticleDuQuiz;
     onClickContinuer: () => void;
+    estDerniereQuestion: boolean;
   }>();
 
   const idUtilisateur = utilisateurStore().utilisateur.id;
   const reponseDonnee = ref<string>('');
   const estBienRepondu = ref<boolean>(false);
-  const listeDesReponses = ref(
-    props.question.reponsesPossibles.map(reponse => ({
-      label: reponse,
-      value: reponse,
-    })),
-  );
 
   const passerQuestionSuivante = () => {
     props.onClickContinuer();
@@ -68,23 +59,10 @@
     reponseDonnee.value = reponse;
     estBienRepondu.value = props.question.solution === reponse;
 
-    listeDesReponses.value = props.question.reponsesPossibles.map(possibilite => ({
-      label: possibilite,
-      value: possibilite,
-      disabled: true,
-      customClass: buildCustomClass(props.question.solution, reponse, possibilite),
-    }));
-
     await new EnvoyerDonneesQuizInteractionUsecase(
       new QuizRepositoryAxios(),
       ToDoListEventBusImpl.getInstance(),
     ).execute(idUtilisateur, props.quizId, estBienRepondu.value ? 100 : 0);
-  };
-
-  const buildCustomClass = (reponseCorrecte: string, reponseDonnee: string, reponsePossible: string) => {
-    if (reponsePossible === reponseCorrecte) return 'quiz-article-bien-repondu';
-    if (reponseDonnee !== reponseCorrecte && reponsePossible === reponseDonnee) return 'quiz-article-erreur';
-    if (reponsePossible !== reponseDonnee) return '';
   };
 </script>
 

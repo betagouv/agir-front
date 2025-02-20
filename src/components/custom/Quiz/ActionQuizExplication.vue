@@ -1,6 +1,6 @@
 <template>
   <div class="action__quiz-reponseExplication">
-    <h2 class="fr-h4 fr-mb-2w">Réponse</h2>
+    <h2 class="fr-h3 fr-mb-2w">Réponse</h2>
     <div class="cms__content" v-html="texteExplication" />
   </div>
 
@@ -21,9 +21,6 @@
     texteExplicationOK: string | null;
     reponseCorrecte: boolean;
     articleAssocie: ArticleDuQuiz | null;
-    points: string;
-    quizId: string;
-    afficherBoutonSuivant?: boolean;
     boutonSuivantLibelle?: string;
     onClickContinuer?: () => void;
   }>();

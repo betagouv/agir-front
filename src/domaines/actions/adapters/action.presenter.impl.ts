@@ -22,6 +22,7 @@ export class ActionPresenterImpl implements ActionPresenter {
 
     this.actionClassiqueViewModel({
       titre,
+      titreAffiche: titre,
       sousTitre,
       commune: action.commune,
       corps: {
@@ -41,6 +42,7 @@ export class ActionPresenterImpl implements ActionPresenter {
 
     this.actionQuizViewModel({
       titre,
+      titreAffiche: `Quiz - ${titre}`,
       sousTitre,
       quizzes: action.quizzes!.map(quiz => {
         return {
@@ -49,7 +51,10 @@ export class ActionPresenterImpl implements ActionPresenter {
           titre: quiz.titre,
           question: {
             intitule: quiz.questions[0].intitule,
-            reponsesPossibles: quiz.questions[0].reponsesPossibles,
+            reponsesPossibles: quiz.questions[0].reponsesPossibles.map(reponse => ({
+              label: reponse,
+              value: reponse,
+            })),
             ordre: quiz.questions[0].ordre,
             texteExplicationOK: quiz.questions[0].texteExplicationOK,
             texteExplicationKO: quiz.questions[0].texteExplicationKO,

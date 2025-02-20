@@ -61,8 +61,9 @@ describe("Fichier de tests concernant la récupération d'une action", () => {
     await usecase.execute('id-utilisateur', 'id-action', 'classique');
 
     function expected(viewModel: ActionClassiqueViewModel): void {
-      expect(viewModel).toStrictEqual({
+      expect(viewModel).toStrictEqual<ActionClassiqueViewModel>({
         titre: 'Tester une nouvelle <span class="text--bold">recette végétarienne</span>',
+        titreAffiche: 'Tester une nouvelle <span class="text--bold">recette végétarienne</span>',
         sousTitre:
           'Faites des économies et le plein de vitamines ! Cette semaine, on cuisine une recette saine et délicieuse !',
         commune: 'Noisiel',

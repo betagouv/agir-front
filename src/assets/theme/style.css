@@ -459,6 +459,10 @@
   border-spacing: 0;
 }
 
+.cms__content h3 {
+  font-size: 1.25rem;
+}
+
 .text--lh-0 {
   line-height: 0 !important;
 }

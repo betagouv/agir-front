@@ -40,8 +40,8 @@ describe('Fichier de test pour la récupération du score action quiz', () => {
     usecase.execute('id-utilisateur', 'id-action', new ScoreActionQuizPresenterImpl(expectation));
 
     function expectation(viewmodel: ScoreActionQuizViewModel) {
-      expect(viewmodel).toStrictEqual({
-        phraseScore: 'Vous avez obtenu un score de 39%',
+      expect(viewmodel).toStrictEqual<ScoreActionQuizViewModel>({
+        score: '39%',
         scoreConfig: {
           emoji: '😬',
           couleurBackground: '#FEF7F7',
@@ -60,8 +60,8 @@ describe('Fichier de test pour la récupération du score action quiz', () => {
     usecase.execute('id-utilisateur', 'id-action', new ScoreActionQuizPresenterImpl(expectation));
 
     function expectation(viewmodel: ScoreActionQuizViewModel) {
-      expect(viewmodel).toStrictEqual({
-        phraseScore: 'Vous avez obtenu un score de 69%',
+      expect(viewmodel).toStrictEqual<ScoreActionQuizViewModel>({
+        score: '69%',
         scoreConfig: {
           emoji: '🙃',
           couleurBackground: '#FCFAED',
@@ -80,7 +80,7 @@ describe('Fichier de test pour la récupération du score action quiz', () => {
     usecase.execute('id-utilisateur', 'id-action', new ScoreActionQuizPresenterImpl(expectation));
 
     function expectation(viewmodel: ScoreActionQuizViewModel) {
-      expect(viewmodel).toStrictEqual({
+      expect(viewmodel).toStrictEqual<ScoreActionQuizViewModel>({
         score: '80%',
         scoreConfig: {
           emoji: '👏',
