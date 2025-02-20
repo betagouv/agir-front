@@ -14,10 +14,10 @@
 
     <section>
       <h2>Mes actions recommandées</h2>
-      <div v-if="questionsViewModel" class="background--white border fr-p-4w border-radius--md">
+      <div v-if="idEnchainementKycs" class="background--white border fr-p-4w border-radius--md">
         <p>Afin d’obtenir vos actions personnalisées, pouvez-vous nous en dire un peu plus sur vous ?</p>
         <EnchainementQuestionsKyc
-          :questions-view-model="questionsViewModel"
+          :id-enchainement-kycs="idEnchainementKycs"
           @fin-kyc-atteinte="chargerActionsRecommandeesAvecUnDelai"
         >
           <div>Nous préparons vos recommandations personnalisées...</div>
@@ -40,12 +40,6 @@
   import { ActionsDansUneThematiquePresenterImpl } from '@/domaines/actions/adapters/actionsDansUneThematique.presenter.impl';
   import { CatalogueActionsViewModel } from '@/domaines/actions/ports/catalogueActions.presenter';
   import { RecupererActionsPersonnaliseesUsecase } from '@/domaines/actions/recupererActionsPersonnalisees.usecase';
-  import {
-    ListesQuestionsThematiquePresenter,
-    QuestionsViewModel,
-  } from '@/domaines/kyc/adapters/listeQuestionsThematique.presenter.impl';
-  import { QuestionRepositoryAxios } from '@/domaines/kyc/adapters/question.repository.axios';
-  import { RecupererEnchainementQuestionsUsecase } from '@/domaines/kyc/recupererEnchainementQuestions.usecase';
   import { MenuThematiques, Thematique } from '@/domaines/thematiques/MenuThematiques';
   import { utilisateurStore } from '@/store/utilisateur';
 
@@ -55,8 +49,8 @@
 
   const idUtilisateur = store.utilisateur.id;
   let thematiqueId = thematique.value.clefTechniqueAPI;
-  const questionsViewModel = ref<QuestionsViewModel>();
   const actionsViewModel = ref<CatalogueActionsViewModel>();
+  const idEnchainementKycs = ref<string>();
 
   function chargerActionsRecommandeesAvecUnDelai() {
     setTimeout(() => {
@@ -72,15 +66,10 @@
       new ActionsDansUneThematiquePresenterImpl(
         vm => {
           actionsViewModel.value = vm;
-          questionsViewModel.value = undefined;
+          idEnchainementKycs.value = undefined;
         },
-        (idEnchainementKYCs: string) => {
-          const usecase = new RecupererEnchainementQuestionsUsecase(new QuestionRepositoryAxios());
-          usecase.execute(
-            utilisateurStore().utilisateur.id,
-            idEnchainementKYCs,
-            new ListesQuestionsThematiquePresenter(vm => (questionsViewModel.value = vm)),
-          );
+        (id: string) => {
+          idEnchainementKycs.value = id;
         },
       ),
     );
