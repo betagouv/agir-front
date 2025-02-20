@@ -88,7 +88,7 @@ export class ActionsRepositoryAxios implements ActionsRepository {
     console.log(idUtilisateur);
     console.log(thematiqueId);
     return {
-      doitRepondreAuxKYCs: false,
+      doitRepondreAuxKYCs: true,
       idEnchainementKYCs: 'ENCHAINEMENT_KYC_bilan_transport',
       actions: [
         {

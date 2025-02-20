@@ -4,8 +4,8 @@
       <p class="text--bleu fr-grid-row align-items--center fr-py-2w">
         <button
           v-if="index !== 0"
-          class="fr-btn fr-btn--tertiary-no-outline fr-icon-arrow-left-line"
           :title="`Retour à l'étape ${index}`"
+          class="fr-btn fr-btn--tertiary-no-outline fr-icon-arrow-left-line"
           @click="etapeCourante--"
         >
           Retour à l'étape précédente
@@ -20,22 +20,19 @@
       />
     </div>
   </div>
-  <KYCFin
-    v-if="afficherFinKyc"
-    :a-deja-repondu="false"
-    :phrasePointAGagner="questionsViewModel.phrasePointAGagner"
-    :bouton="{ url: '/agir', label: 'Revenir à l\'accueil' }"
-  />
+  <slot v-if="afficherFinKyc" />
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
   import { ref } from 'vue';
-  import KYCFin from '@/components/custom/KYC/KYCFin.vue';
   import KYCForm from '@/components/custom/KYC/KYCForm.vue';
   import { QuestionsViewModel } from '@/domaines/kyc/adapters/listeQuestionsThematique.presenter.impl';
 
   const props = defineProps<{ questionsViewModel: QuestionsViewModel }>();
 
+  const emit = defineEmits<{
+    (e: 'finKycAtteinte'): void;
+  }>();
   const premiereKycNonRepondu = () => {
     const indexQuestion = props.questionsViewModel.questions.findIndex(question => !question.aDejaEteRepondu);
     return indexQuestion !== -1 ? indexQuestion : 0;
@@ -47,5 +44,8 @@
   const passerEtapeSuivante = () => {
     etapeCourante.value++;
     afficherFinKyc.value = etapeCourante.value === props.questionsViewModel.questions.length;
+    if (afficherFinKyc.value) {
+      emit('finKycAtteinte');
+    }
   };
 </script>

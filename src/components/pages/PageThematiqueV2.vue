@@ -16,7 +16,12 @@
       <h2>Mes actions recommandées</h2>
       <div v-if="questionsViewModel" class="background--white border fr-p-4w border-radius--md">
         <p>Afin d’obtenir vos actions personnalisées, pouvez-vous nous en dire un peu plus sur vous ?</p>
-        <OnboardingQuestionsKyc v-model:questions-view-model="questionsViewModel" />
+        <EnchainementQuestionsKyc
+          :questions-view-model="questionsViewModel"
+          @fin-kyc-atteinte="chargerActionsRecommandeesAvecUnDelai"
+        >
+          <div>Nous préparons vos recommandations personnalisées...</div>
+        </EnchainementQuestionsKyc>
       </div>
       <div v-if="actionsViewModel">
         <CatalogueActionsComposant :catalogue-view-model="actionsViewModel" />
@@ -28,7 +33,7 @@
 <script lang="ts" setup>
   import { onMounted, ref } from 'vue';
   import { onBeforeRouteUpdate, useRoute } from 'vue-router';
-  import OnboardingQuestionsKyc from '@/components/custom/Mission/OnboardingQuestionsKyc.vue';
+  import EnchainementQuestionsKyc from '@/components/custom/KYC/EnchainementQuestionsKyc.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import CatalogueActionsComposant from '@/components/pages/CatalogueActionsComposant.vue';
   import { ActionsRepositoryAxios } from '@/domaines/actions/adapters/actions.repository.axios';
@@ -52,15 +57,23 @@
   let thematiqueId = thematique.value.clefTechniqueAPI;
   const questionsViewModel = ref<QuestionsViewModel>();
   const actionsViewModel = ref<CatalogueActionsViewModel>();
-  const lancerChargementDesDonnees = () => {
-    isLoading.value = true;
 
+  function chargerActionsRecommandeesAvecUnDelai() {
+    setTimeout(() => {
+      chargerActionsRecommandees();
+    }, 500);
+  }
+
+  function chargerActionsRecommandees() {
     const chargerActionsRecommandees = new RecupererActionsPersonnaliseesUsecase(new ActionsRepositoryAxios());
     chargerActionsRecommandees.execute(
       idUtilisateur,
       thematiqueId,
       new ActionsDansUneThematiquePresenterImpl(
-        vm => (actionsViewModel.value = vm),
+        vm => {
+          actionsViewModel.value = vm;
+          questionsViewModel.value = undefined;
+        },
         (idEnchainementKYCs: string) => {
           const usecase = new RecupererEnchainementQuestionsUsecase(new QuestionRepositoryAxios());
           usecase.execute(
@@ -71,6 +84,12 @@
         },
       ),
     );
+  }
+
+  const lancerChargementDesDonnees = () => {
+    isLoading.value = true;
+
+    chargerActionsRecommandees();
 
     isLoading.value = false;
   };

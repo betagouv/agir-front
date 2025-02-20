@@ -4,7 +4,7 @@
     <h1 class="fr-h2 fr-mb-1w">Question pour mieux vous connaître</h1>
     <CarteSkeleton v-if="isLoading" />
     <div v-else-if="questionsViewModel" class="background--white border fr-p-4w border-radius--md">
-      <OnboardingQuestionsKyc v-model:questions-view-model="questionsViewModel" />
+      <EnchainementQuestionsKyc v-model:questions-view-model="questionsViewModel" />
     </div>
     <div v-else>Une erreur est survenue</div>
   </div>
@@ -13,7 +13,7 @@
 <script lang="ts" setup>
   import { onMounted, ref } from 'vue';
   import { useRoute } from 'vue-router';
-  import OnboardingQuestionsKyc from '@/components/custom/Mission/OnboardingQuestionsKyc.vue';
+  import EnchainementQuestionsKyc from '@/components/custom/KYC/EnchainementQuestionsKyc.vue';
   import CarteSkeleton from '@/components/custom/Skeleton/CarteSkeleton.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import {
