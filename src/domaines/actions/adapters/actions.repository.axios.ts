@@ -1,5 +1,11 @@
 import { AxiosFactory } from '@/axios.factory';
-import { Action, ActionDetail, ActionsRepository, TypeAction } from '@/domaines/actions/ports/actions.repository';
+import {
+  Action,
+  ActionDetail,
+  ActionsRecommandeesDansUneThematique,
+  ActionsRepository,
+  TypeAction,
+} from '@/domaines/actions/ports/actions.repository';
 import { mapQuizApi, QuizApiModel } from '@/domaines/quiz/adapters/quizRepository.axios';
 
 interface ActionApiModel {
@@ -73,5 +79,28 @@ export class ActionsRepositoryAxios implements ActionsRepository {
       nombreAidesDisponibles: action.nombre_aides_disponibles,
       type: action.type as TypeAction,
     }));
+  }
+
+  async recupererActionsPersonnalisees(
+    idUtilisateur: string,
+    thematiqueId: string,
+  ): Promise<ActionsRecommandeesDansUneThematique> {
+    console.log(idUtilisateur);
+    console.log(thematiqueId);
+    return {
+      doitRepondreAuxKYCs: false,
+      idEnchainementKYCs: 'ENCHAINEMENT_KYC_bilan_transport',
+      actions: [
+        {
+          code: 'code-action-test',
+          titre: 'Tester une nouvelle **recette végétarienne**',
+          sousTitre:
+            'Faites des économies et le plein de vitamines ! Cette semaine, on cuisine une recette saine et délicieuse !',
+          nombreDePersonnes: 0,
+          nombreAidesDisponibles: 0,
+          type: TypeAction.CLASSIQUE,
+        },
+      ],
+    };
   }
 }
