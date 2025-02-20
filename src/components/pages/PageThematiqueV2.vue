@@ -11,23 +11,40 @@
       />
       <h1 class="fr-h1 fr-col fr-m-0">{{ thematique.labelDansLeMenu }}</h1>
     </div>
-
-    <section>
-      <h2>Mes actions recommandées</h2>
-      <div v-if="idEnchainementKycs" class="background--white border fr-p-4w border-radius--md">
-        <p>Afin d’obtenir vos actions personnalisées, pouvez-vous nous en dire un peu plus sur vous ?</p>
-        <EnchainementQuestionsKyc
-          :id-enchainement-kycs="idEnchainementKycs"
-          @fin-kyc-atteinte="chargerActionsRecommandeesAvecUnDelai"
-        >
-          <div>Nous préparons vos recommandations personnalisées...</div>
-        </EnchainementQuestionsKyc>
-      </div>
-      <div v-if="actionsViewModel">
-        <CatalogueActionsComposant :catalogue-view-model="actionsViewModel" />
-      </div>
-    </section>
   </div>
+
+  <section class="fr-py-3w background-color--gris-galet-950-100">
+    <div class="fr-container">
+      <h2>Mes actions recommandées</h2>
+      <template v-if="idEnchainementKycs">
+        <p>Afin d’obtenir vos actions personnalisées, pouvez-vous nous en dire un peu plus sur vous ?</p>
+        <div class="background--white fr-p-3w position--relative">
+          <div v-if="!aCommenceEnchainement" class="mini-modale background--white fr-p-3w shadow">
+            <p class="text--bold fr-mb-1w fr-text--lg">Envie d'avoir un vrai impact ?</p>
+            <p class="fr-mb-2w">
+              Laissez-vous guider par nos recommandations d’actions <span>choisies pour vous</span> !
+            </p>
+            <button class="fr-btn" @click="fermerModale">Commencer</button>
+          </div>
+
+          <div :class="!aCommenceEnchainement && 'effet-flou'" :aria-hidden="aCommenceEnchainement">
+            <EnchainementQuestionsKyc
+              :id-enchainement-kycs="idEnchainementKycs"
+              @fin-kyc-atteinte="chargerActionsRecommandeesAvecUnDelai"
+              :est-desactive="!aCommenceEnchainement"
+            >
+              <template v-slot:fin>
+                <div>Nous préparons vos recommandations personnalisées...</div>
+              </template>
+            </EnchainementQuestionsKyc>
+          </div>
+        </div>
+      </template>
+      <template v-if="actionsViewModel">
+        <CatalogueActionsComposant :catalogue-view-model="actionsViewModel" />
+      </template>
+    </div>
+  </section>
 </template>
 
 <script lang="ts" setup>
@@ -45,6 +62,7 @@
 
   const store = utilisateurStore();
   const isLoading = ref<boolean>(true);
+  const aCommenceEnchainement = ref<boolean>(false);
   const thematique = ref<Thematique>(MenuThematiques.getFromUrl(useRoute().params.id as string));
 
   const idUtilisateur = store.utilisateur.id;
@@ -82,6 +100,7 @@
 
     isLoading.value = false;
   };
+
   onBeforeRouteUpdate((to, from, next) => {
     next();
     thematique.value = MenuThematiques.getFromUrl(to.params.id as string)!;
@@ -91,4 +110,24 @@
   onMounted(() => {
     lancerChargementDesDonnees();
   });
+
+  function fermerModale() {
+    aCommenceEnchainement.value = true;
+  }
 </script>
+
+<style scoped>
+  .effet-flou {
+    filter: blur(2px);
+    pointer-events: none;
+  }
+
+  .mini-modale {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 30%;
+    transform: translateX(-50%) translateY(-50%);
+    z-index: 10;
+  }
+</style>

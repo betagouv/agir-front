@@ -12,7 +12,7 @@
             Retour à l'étape précédente
           </button>
           <span class="fr-text--bold">Question {{ index + 1 }}</span>
-          &nbsp; sur {{ questionsViewModel.questions.length }}
+          &nbsp;sur {{ questionsViewModel.questions.length }}
         </p>
         <KYCForm
           :question-view-model="questionViewModel"
@@ -22,11 +22,11 @@
       </div>
     </div>
   </div>
-  <slot v-if="afficherFinKyc" />
+  <slot name="fin" v-if="afficherFinKyc" />
 </template>
 
 <script lang="ts" setup>
-  import { onMounted, ref } from 'vue';
+  import { nextTick, onMounted, ref, watch } from 'vue';
   import KYCForm from '@/components/custom/KYC/KYCForm.vue';
   import {
     ListesQuestionsThematiquePresenter,
@@ -36,13 +36,37 @@
   import { RecupererEnchainementQuestionsUsecase } from '@/domaines/kyc/recupererEnchainementQuestions.usecase';
   import { utilisateurStore } from '@/store/utilisateur';
 
-  const props = defineProps<{ idEnchainementKycs: string }>();
+  const props = defineProps<{ idEnchainementKycs: string; estDesactive: boolean }>();
   const questionsViewModel = ref<QuestionsViewModel>();
 
   const emit = defineEmits<{
     (e: 'finKycAtteinte'): void;
     (e: 'questionSuivante'): void;
   }>();
+
+  watch(
+    () => questionsViewModel.value,
+    () => {
+      if (props.estDesactive) {
+        nextTick(() => {
+          document.querySelectorAll('.effet-flou input, .effet-flou button, .effet-flou a').forEach(function (element) {
+            element.setAttribute('tabindex', '-1');
+          });
+        });
+      }
+    },
+  );
+
+  watch(
+    () => props.estDesactive,
+    () => {
+      if (!props.estDesactive) {
+        document.querySelectorAll('.effet-flou input, .effet-flou button, .effet-flou a').forEach(function (element) {
+          element.setAttribute('tabindex', '0');
+        });
+      }
+    },
+  );
 
   const etapeCourante = ref<number>(0);
   const afficherFinKyc = ref<boolean>(false);

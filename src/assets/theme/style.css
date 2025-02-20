@@ -343,6 +343,10 @@
   background-color: #eeeeee;
 }
 
+.background-color--gris-galet-950-100 {
+  background-color: var(--beige-gris-galet-950-100)
+}
+
 .background--glycine {
   background-color: var(--purple-glycine-850-200);
 }
