@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
+import accueilRoutes from '@/router/accueil/routes';
 import actionsRoutes from '@/router/actions/routes';
 import aidesRoutes from '@/router/aides/routes';
 import articlesRoutes from '@/router/articles/routes';
@@ -57,6 +58,7 @@ const routes: RouteRecordRaw[] = [
   ...examenRoutes,
   ...collectiviteRoutes,
   ...actionsRoutes,
+  ...accueilRoutes,
   {
     path: '/',
     name: RouteCommuneName.ACCUEIL,
