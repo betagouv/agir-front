@@ -26,14 +26,14 @@
           <ModaleCommencerParcours v-if="!aCommenceEnchainement" :fermer-modale="fermerModale" />
 
           <div
-            class="enchainementKYC fr-mb-2w"
-            :class="!aCommenceEnchainement && 'effet-flou'"
             :aria-hidden="aCommenceEnchainement"
+            :class="!aCommenceEnchainement && 'effet-flou'"
+            class="enchainementKYC fr-mb-2w"
           >
             <EnchainementQuestionsKyc
+              :est-desactive="!aCommenceEnchainement"
               :id-enchainement-kycs="idEnchainementKycs"
               @fin-kyc-atteinte="chargerActionsRecommandeesAvecUnDelai"
-              :est-desactive="!aCommenceEnchainement"
             >
               <template v-slot:fin>
                 <div>Nous préparons vos recommandations personnalisées...</div>
@@ -61,7 +61,9 @@
   import { ActionsDansUneThematiquePresenterImpl } from '@/domaines/actions/adapters/actionsDansUneThematique.presenter.impl';
   import { CatalogueActionsViewModel } from '@/domaines/actions/ports/catalogueActions.presenter';
   import { RecupererActionsPersonnaliseesUsecase } from '@/domaines/actions/recupererActionsPersonnalisees.usecase';
-  import { MenuThematiques, Thematique } from '@/domaines/thematiques/MenuThematiques';
+  import { ThematiquesRepositoryAxios } from '@/domaines/thematiques/adapters/thematiques.repository.axios';
+  import { ClefThematiqueAPI, MenuThematiques, Thematique } from '@/domaines/thematiques/MenuThematiques';
+  import { PersonnalisationThematiqueEffectueeUsecase } from '@/domaines/thematiques/personnalisationThematiqueEffectuee.usecase';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const store = utilisateurStore();
@@ -75,9 +77,14 @@
   const idEnchainementKycs = ref<string>();
 
   function chargerActionsRecommandeesAvecUnDelai() {
-    setTimeout(() => {
-      chargerActionsRecommandees();
-    }, 500);
+    const personnalisationThematiqueEffectueeUsecase = new PersonnalisationThematiqueEffectueeUsecase(
+      new ThematiquesRepositoryAxios(),
+    );
+    personnalisationThematiqueEffectueeUsecase.execute(idUtilisateur, thematiqueId as ClefThematiqueAPI).then(() => {
+      setTimeout(() => {
+        chargerActionsRecommandees();
+      }, 500);
+    });
   }
 
   function chargerActionsRecommandees() {

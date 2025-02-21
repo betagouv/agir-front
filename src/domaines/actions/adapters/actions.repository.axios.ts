@@ -13,14 +13,8 @@ interface ActionApiModel {
   titre: string;
   sous_titre: string;
   nom_commune: string;
-  comment: string;
-  pourquoi: string;
   nombre_actions_en_cours: number;
   nombre_aides_disponibles: number;
-  services: {
-    categorie: string;
-    recherche_service_id: string;
-  }[];
   type: string;
 }
 
@@ -39,6 +33,12 @@ interface ActionDetailApiModel {
     categorie: string;
     recherche_service_id: string;
   }[];
+}
+
+interface ActionsRecommandeesApiModel {
+  est_personnalisation_necessaire: boolean;
+  enchainement_questions_personnalisation: string;
+  liste_actions_recommandees: ActionApiModel[];
 }
 
 export class ActionsRepositoryAxios implements ActionsRepository {
@@ -85,22 +85,22 @@ export class ActionsRepositoryAxios implements ActionsRepository {
     idUtilisateur: string,
     thematiqueId: string,
   ): Promise<ActionsRecommandeesDansUneThematique> {
-    console.log(idUtilisateur);
-    console.log(thematiqueId);
+    const axios = AxiosFactory.getAxios();
+    const response = await axios.get<ActionsRecommandeesApiModel>(
+      `/utilisateurs/${idUtilisateur}/thematiques/${thematiqueId}`,
+    );
+
     return {
-      doitRepondreAuxKYCs: true,
-      idEnchainementKYCs: 'ENCHAINEMENT_KYC_bilan_transport',
-      actions: [
-        {
-          code: 'code-action-test',
-          titre: 'Tester une nouvelle **recette végétarienne**',
-          sousTitre:
-            'Faites des économies et le plein de vitamines ! Cette semaine, on cuisine une recette saine et délicieuse !',
-          nombreDePersonnes: 0,
-          nombreAidesDisponibles: 0,
-          type: TypeAction.CLASSIQUE,
-        },
-      ],
+      doitRepondreAuxKYCs: response.data.est_personnalisation_necessaire,
+      idEnchainementKYCs: response.data.enchainement_questions_personnalisation,
+      actions: response.data.liste_actions_recommandees.map(action => ({
+        code: action.code,
+        titre: action.titre,
+        sousTitre: action.sous_titre,
+        nombreDePersonnes: action.nombre_actions_en_cours,
+        nombreAidesDisponibles: action.nombre_aides_disponibles,
+        type: action.type as TypeAction,
+      })),
     };
   }
 }
