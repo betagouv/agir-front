@@ -17,7 +17,9 @@
     <div class="fr-container">
       <h2 class="fr-mb-1w">Mes actions recommandées</h2>
 
-      <template v-if="idEnchainementKycs">
+      <div v-if="isLoading" class="placeholder"></div>
+
+      <template v-else-if="idEnchainementKycs">
         <p class="fr-mb-4w">
           Afin d’obtenir vos actions personnalisées, pouvez-vous nous en dire un peu plus sur vous ?
         </p>
@@ -29,7 +31,7 @@
       </template>
 
       <CatalogueActionsComposant
-        v-if="actionsViewModel"
+        v-else-if="actionsViewModel"
         :catalogue-view-model="actionsViewModel"
         card-classes="fr-col-12 fr-col-md-6 fr-col-lg-4"
       />
@@ -64,6 +66,7 @@
   const thematique = ref<Thematique>(MenuThematiques.getFromUrl(useRoute().params.id as string));
   const actionsViewModel = ref<CatalogueActionsViewModel>();
   const idEnchainementKycs = ref<string>();
+  const isLoading = ref<boolean>(true);
 
   const store = utilisateurStore();
   const idUtilisateur = store.utilisateur.id;
@@ -75,13 +78,15 @@
     thematiqueId = thematique.value.clefTechniqueAPI;
   });
 
-  onMounted(() => {
-    chargerActionsRecommandees();
+  onMounted(async () => {
+    isLoading.value = true;
+    await chargerActionsRecommandees();
+    isLoading.value = false;
   });
 
-  function chargerActionsRecommandees() {
+  async function chargerActionsRecommandees() {
     const chargerActionsRecommandees = new RecupererActionsPersonnaliseesUsecase(new ActionsRepositoryAxios());
-    chargerActionsRecommandees.execute(
+    await chargerActionsRecommandees.execute(
       idUtilisateur,
       thematiqueId,
       new ActionsDansUneThematiquePresenterImpl(
@@ -96,15 +101,21 @@
     );
   }
 
-  function chargerActionsRecommandeesAvecUnDelai() {
+  async function chargerActionsRecommandeesAvecUnDelai() {
     const personnalisationThematiqueEffectueeUsecase = new PersonnalisationThematiqueEffectueeUsecase(
       new ThematiquesRepositoryAxios(),
     );
 
     personnalisationThematiqueEffectueeUsecase.execute(idUtilisateur, thematiqueId as ClefThematiqueAPI).then(() => {
-      setTimeout(() => {
-        chargerActionsRecommandees();
+      setTimeout(async () => {
+        await chargerActionsRecommandees();
       }, 2000);
     });
   }
 </script>
+
+<style scoped>
+  .placeholder {
+    min-height: 20rem;
+  }
+</style>

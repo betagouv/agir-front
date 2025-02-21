@@ -1,5 +1,5 @@
 <template>
-  <div class="background--white fr-px-3w fr-pb-3w fr-pt-2w position--relative">
+  <div class="parent background--white fr-px-3w fr-pb-3w fr-pt-2w position--relative">
     <ModaleCommencerParcours v-if="!aCommenceEnchainement" :fermer-modale="() => (aCommenceEnchainement = true)" />
 
     <div
@@ -35,6 +35,10 @@
 </script>
 
 <style scoped>
+  .parent {
+    min-height: 25rem;
+  }
+
   .effet-flou {
     filter: blur(3px);
     pointer-events: none;
