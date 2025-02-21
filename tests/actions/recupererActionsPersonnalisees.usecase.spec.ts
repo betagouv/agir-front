@@ -61,7 +61,7 @@ describe('Fichier de test concernant la récupération des actions personnalisé
               {
                 code: 'code-action-test',
                 titre: 'Tester une nouvelle <span class="text--bold">recette végétarienne</span>',
-                nombreDePersonnes: '<span class="text--bold">0</span> défis réalisés',
+                nombreDePersonnes: '<span class="text--bold">0</span> défi réalisé',
                 aidesDisponibles: undefined,
                 url: {
                   name: 'action-individuelle',
