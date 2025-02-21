@@ -43,9 +43,11 @@
         </div>
       </template>
 
-      <template v-if="actionsViewModel">
-        <CatalogueActionsComposant :catalogue-view-model="actionsViewModel" />
-      </template>
+      <CatalogueActionsComposant
+        v-if="actionsViewModel"
+        :catalogue-view-model="actionsViewModel"
+        card-classes="fr-col-12 fr-col-md-6 fr-col-lg-4"
+      />
     </div>
   </section>
 </template>

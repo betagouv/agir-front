@@ -1,9 +1,11 @@
 <template>
   <section class="fr-container fr-my-3w">
     <h1 class="fr-h1">Toutes <span class="text--bold">les actions</span></h1>
-    <div v-if="catalogueViewModel" class="fr-grid-row fr-grid-row--gutters">
-      <CatalogueActionsComposant :catalogue-view-model="catalogueViewModel" />
-    </div>
+    <CatalogueActionsComposant
+      v-if="catalogueViewModel"
+      :catalogue-view-model="catalogueViewModel"
+      card-classes="fr-col-12 fr-col-md-6 fr-col-lg-3"
+    />
   </section>
 </template>
 <script lang="ts" setup>
