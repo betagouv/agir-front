@@ -9,7 +9,7 @@ export interface CatalogueActionViewModel {
   titre: string;
   nombreDePersonnes?: string;
   aidesDisponibles?: string;
-  url: { name: string; params: { id: string; titre: string } };
+  url: { name: string; params: { id: string; titre: string; type: string } };
 }
 
 export interface CatalogueActionsPresenter {

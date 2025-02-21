@@ -26,6 +26,10 @@
   --custom-background-bleu: #f8f9fc;
   --custom-bleu-dark: #021e52;
   --custom-bleu-light: #cfe5ff;
+
+  --loader-ball-width: 40px;
+  --loader-ball-amplitude: 75px;
+  --loader-ball-amplitude-centree: calc(var(--loader-ball-amplitude) - calc(var(--loader-ball-width)/2));
 }
 
 .flex {
@@ -343,6 +347,10 @@
   background-color: #eeeeee;
 }
 
+.background-color--gris-galet-950-100 {
+  background-color: var(--beige-gris-galet-950-100)
+}
+
 .background--glycine {
   background-color: var(--purple-glycine-850-200);
 }
@@ -558,5 +566,40 @@
   }
   60% {
     transform: rotate(1deg);
+  }
+}
+
+
+.ball-loader {
+  display: block;
+  width: var(--loader-ball-width);
+  height: var(--loader-ball-width);
+  border-radius: 50%;
+  animation:
+          translate 1s ease-in-out infinite alternate,
+          colorChange 3s infinite alternate;
+}
+
+@keyframes translate {
+  0% {
+    transform: translateX(calc(-1 * var(--loader-ball-amplitude-centree)));
+  }
+  100% {
+    transform: translateX(var(--loader-ball-amplitude-centree));
+  }
+}
+
+@keyframes colorChange {
+  0% {
+    background: #ff4500;
+  }
+  33% {
+    background: #32cd32;
+  }
+  66% {
+    background: #1e90ff;
+  }
+  100% {
+    background: #9932cc;
   }
 }

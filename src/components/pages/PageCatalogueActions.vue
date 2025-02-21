@@ -1,32 +1,16 @@
 <template>
   <section class="fr-container fr-my-3w">
     <h1 class="fr-h1">Toutes <span class="text--bold">les actions</span></h1>
-    <div class="fr-grid-row fr-grid-row--gutters">
-      <section
-        v-for="action in catalogueViewModel?.actions"
-        class="fr-col-12 fr-col-md-6 fr-col-lg-3"
-        :key="action.code"
-      >
-        <router-link
-          class="background--white shadow border-radius--md fr-p-3w display-block background--none full-height"
-          :to="action.url"
-        >
-          <h2 class="fr-text--xl text--bold fr-mb-1w text--lh-1-3 fr-mb-2w" v-html="action.titre" />
-          <ul class="list-style-none fr-p-0">
-            <li v-if="action.nombreDePersonnes" class="text--bleu fr-icon-team-line">
-              <span class="text--gris fr-pl-1w" v-html="action.nombreDePersonnes"></span>
-            </li>
-            <li v-if="action.aidesDisponibles" class="text--bleu fr-icon-money-euro-circle-line">
-              <span class="text--gris fr-pl-1w" v-html="action.aidesDisponibles"></span>
-            </li>
-          </ul>
-        </router-link>
-      </section>
-    </div>
+    <CatalogueActionsComposant
+      v-if="catalogueViewModel"
+      :catalogue-view-model="catalogueViewModel"
+      card-classes="fr-col-12 fr-col-md-6 fr-col-lg-3"
+    />
   </section>
 </template>
 <script lang="ts" setup>
   import { onMounted, ref } from 'vue';
+  import CatalogueActionsComposant from '@/components/custom/Action/CatalogueActionsComposant.vue';
   import { ActionsRepositoryAxios } from '@/domaines/actions/adapters/actions.repository.axios';
   import { CatalogueActionsPresenterImpl } from '@/domaines/actions/adapters/catalogueActions.presenter.impl';
   import { CatalogueActionsViewModel } from '@/domaines/actions/ports/catalogueActions.presenter';

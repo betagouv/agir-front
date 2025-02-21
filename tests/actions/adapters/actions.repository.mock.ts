@@ -1,9 +1,15 @@
-import { Action, ActionDetail, ActionsRepository } from '@/domaines/actions/ports/actions.repository';
+import {
+  Action,
+  ActionDetail,
+  ActionsRecommandeesDansUneThematique,
+  ActionsRepository,
+} from '@/domaines/actions/ports/actions.repository';
 
 export class ActionsRepositoryMock implements ActionsRepository {
   private constructor(
     private readonly actions: Action[],
     private readonly action?: ActionDetail,
+    private readonly actionsRecommandeesDansUneThematique?: ActionsRecommandeesDansUneThematique,
   ) {}
 
   static avecActionDetail(actionDetail: ActionDetail): ActionsRepositoryMock {
@@ -14,11 +20,24 @@ export class ActionsRepositoryMock implements ActionsRepository {
     return new ActionsRepositoryMock(actions, undefined);
   }
 
+  static avecActionsRecommandeesDansUneThematique(
+    actionsRecommandeesDansUneThematique: ActionsRecommandeesDansUneThematique,
+  ) {
+    return new ActionsRepositoryMock([], undefined, actionsRecommandeesDansUneThematique);
+  }
+
   chargerAction(idUtilisateur: string, idAction: string): Promise<ActionDetail> {
     return Promise.resolve(this.action!);
   }
 
   recupererToutesLesActions(): Promise<Action[]> {
     return Promise.resolve(this.actions);
+  }
+
+  recupererActionsPersonnalisees(
+    idUtilisateur: string,
+    thematiqueId: string,
+  ): Promise<ActionsRecommandeesDansUneThematique> {
+    return Promise.resolve(this.actionsRecommandeesDansUneThematique!);
   }
 }

@@ -1,4 +1,9 @@
-import { Action, ActionDetail, ActionsRepository } from '@/domaines/actions/ports/actions.repository';
+import {
+  Action,
+  ActionDetail,
+  ActionsRecommandeesDansUneThematique,
+  ActionsRepository,
+} from '@/domaines/actions/ports/actions.repository';
 import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 
 export class ActionQuizRepositoryMock implements ActionsRepository {
@@ -84,5 +89,12 @@ export class ActionQuizRepositoryMock implements ActionsRepository {
 
   recupererToutesLesActions(idUtilisateur: string): Promise<Action[]> {
     return Promise.resolve([]);
+  }
+
+  recupererActionsPersonnalisees(
+    idUtilisateur: string,
+    thematiqueId: string,
+  ): Promise<ActionsRecommandeesDansUneThematique> {
+    throw Error('Not implemented');
   }
 }
