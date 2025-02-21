@@ -36,7 +36,7 @@
               @fin-kyc-atteinte="chargerActionsRecommandeesAvecUnDelai"
             >
               <template v-slot:fin>
-                <div>Nous préparons vos recommandations personnalisées...</div>
+                <LoadingPreparationActionsRecommandees />
               </template>
             </EnchainementQuestionsKyc>
           </div>
@@ -53,10 +53,11 @@
 <script lang="ts" setup>
   import { onMounted, ref } from 'vue';
   import { onBeforeRouteUpdate, useRoute } from 'vue-router';
+  import CatalogueActionsComposant from '@/components/custom/Action/CatalogueActionsComposant.vue';
   import EnchainementQuestionsKyc from '@/components/custom/KYC/EnchainementQuestionsKyc.vue';
+  import LoadingPreparationActionsRecommandees from '@/components/custom/Thematiques/LoadingPreparationActionsRecommandees.vue';
   import ModaleCommencerParcours from '@/components/custom/Thematiques/ModaleCommencerParcours.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
-  import CatalogueActionsComposant from '@/components/pages/CatalogueActionsComposant.vue';
   import { ActionsRepositoryAxios } from '@/domaines/actions/adapters/actions.repository.axios';
   import { ActionsDansUneThematiquePresenterImpl } from '@/domaines/actions/adapters/actionsDansUneThematique.presenter.impl';
   import { CatalogueActionsViewModel } from '@/domaines/actions/ports/catalogueActions.presenter';
@@ -76,14 +77,25 @@
   const actionsViewModel = ref<CatalogueActionsViewModel>();
   const idEnchainementKycs = ref<string>();
 
+  onBeforeRouteUpdate((to, from, next) => {
+    next();
+    thematique.value = MenuThematiques.getFromUrl(to.params.id as string)!;
+    thematiqueId = thematique.value.clefTechniqueAPI;
+  });
+
+  onMounted(() => {
+    lancerChargementDesDonnees();
+  });
+
   function chargerActionsRecommandeesAvecUnDelai() {
     const personnalisationThematiqueEffectueeUsecase = new PersonnalisationThematiqueEffectueeUsecase(
       new ThematiquesRepositoryAxios(),
     );
+
     personnalisationThematiqueEffectueeUsecase.execute(idUtilisateur, thematiqueId as ClefThematiqueAPI).then(() => {
       setTimeout(() => {
         chargerActionsRecommandees();
-      }, 500);
+      }, 2000);
     });
   }
 
@@ -112,16 +124,6 @@
     isLoading.value = false;
   };
 
-  onBeforeRouteUpdate((to, from, next) => {
-    next();
-    thematique.value = MenuThematiques.getFromUrl(to.params.id as string)!;
-    thematiqueId = thematique.value.clefTechniqueAPI;
-  });
-
-  onMounted(() => {
-    lancerChargementDesDonnees();
-  });
-
   function fermerModale() {
     aCommenceEnchainement.value = true;
   }
@@ -133,36 +135,7 @@
     pointer-events: none;
   }
 
-  .mini-modale {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    width: 30%;
-    min-width: 20rem;
-    transform: translateX(-50%) translateY(-50%);
-    z-index: 10;
-  }
-
   .enchainementKYC {
     transition: 0.5s ease filter;
-  }
-
-  .surlignage {
-    position: relative;
-    display: inline-block;
-  }
-
-  .surlignage::before {
-    content: '';
-    position: absolute;
-    top: 70%;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: -1;
-  }
-
-  .surlignage-bleu::before {
-    background-color: #def2ffc7;
   }
 </style>

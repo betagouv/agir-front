@@ -80,7 +80,5 @@ describe('Fichier de test concernant la récupération des actions personnalisé
         },
       ),
     );
-
-    // THEN
   });
 });

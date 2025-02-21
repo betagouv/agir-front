@@ -8,7 +8,7 @@
 </template>
 <script lang="ts" setup>
   import { onMounted, ref } from 'vue';
-  import CatalogueActionsComposant from '@/components/pages/CatalogueActionsComposant.vue';
+  import CatalogueActionsComposant from '@/components/custom/Action/CatalogueActionsComposant.vue';
   import { ActionsRepositoryAxios } from '@/domaines/actions/adapters/actions.repository.axios';
   import { CatalogueActionsPresenterImpl } from '@/domaines/actions/adapters/catalogueActions.presenter.impl';
   import { CatalogueActionsViewModel } from '@/domaines/actions/ports/catalogueActions.presenter';

@@ -16,6 +16,7 @@
     </router-link>
   </section>
 </template>
+
 <script lang="ts" setup>
   import { CatalogueActionsViewModel } from '@/domaines/actions/ports/catalogueActions.presenter';
 
