@@ -15,19 +15,21 @@
 
   <section class="fr-py-3w background-color--gris-galet-950-100">
     <div class="fr-container">
-      <h2>Mes actions recommandées</h2>
-      <template v-if="idEnchainementKycs">
-        <p>Afin d’obtenir vos actions personnalisées, pouvez-vous nous en dire un peu plus sur vous ?</p>
-        <div class="background--white fr-p-3w position--relative">
-          <div v-if="!aCommenceEnchainement" class="mini-modale background--white fr-p-3w shadow">
-            <p class="text--bold fr-mb-1w fr-text--lg">Envie d'avoir un vrai impact ?</p>
-            <p class="fr-mb-2w">
-              Laissez-vous guider par nos recommandations d’actions <span>choisies pour vous</span> !
-            </p>
-            <button class="fr-btn" @click="fermerModale">Commencer</button>
-          </div>
+      <h2 class="fr-mb-1w">Mes actions recommandées</h2>
 
-          <div :class="!aCommenceEnchainement && 'effet-flou'" :aria-hidden="aCommenceEnchainement">
+      <template v-if="idEnchainementKycs">
+        <p class="fr-mb-4w">
+          Afin d’obtenir vos actions personnalisées, pouvez-vous nous en dire un peu plus sur vous ?
+        </p>
+
+        <div class="background--white fr-px-3w fr-pb-3w fr-pt-2w position--relative">
+          <ModaleCommencerParcours v-if="!aCommenceEnchainement" :fermer-modale="fermerModale" />
+
+          <div
+            class="enchainementKYC fr-mb-2w"
+            :class="!aCommenceEnchainement && 'effet-flou'"
+            :aria-hidden="aCommenceEnchainement"
+          >
             <EnchainementQuestionsKyc
               :id-enchainement-kycs="idEnchainementKycs"
               @fin-kyc-atteinte="chargerActionsRecommandeesAvecUnDelai"
@@ -40,6 +42,7 @@
           </div>
         </div>
       </template>
+
       <template v-if="actionsViewModel">
         <CatalogueActionsComposant :catalogue-view-model="actionsViewModel" />
       </template>
@@ -51,6 +54,7 @@
   import { onMounted, ref } from 'vue';
   import { onBeforeRouteUpdate, useRoute } from 'vue-router';
   import EnchainementQuestionsKyc from '@/components/custom/KYC/EnchainementQuestionsKyc.vue';
+  import ModaleCommencerParcours from '@/components/custom/Thematiques/ModaleCommencerParcours.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import CatalogueActionsComposant from '@/components/pages/CatalogueActionsComposant.vue';
   import { ActionsRepositoryAxios } from '@/domaines/actions/adapters/actions.repository.axios';
@@ -118,7 +122,7 @@
 
 <style scoped>
   .effet-flou {
-    filter: blur(2px);
+    filter: blur(3px);
     pointer-events: none;
   }
 
@@ -127,7 +131,31 @@
     left: 50%;
     top: 50%;
     width: 30%;
+    min-width: 20rem;
     transform: translateX(-50%) translateY(-50%);
     z-index: 10;
+  }
+
+  .enchainementKYC {
+    transition: 0.5s ease filter;
+  }
+
+  .surlignage {
+    position: relative;
+    display: inline-block;
+  }
+
+  .surlignage::before {
+    content: '';
+    position: absolute;
+    top: 70%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: -1;
+  }
+
+  .surlignage-bleu::before {
+    background-color: #def2ffc7;
   }
 </style>
