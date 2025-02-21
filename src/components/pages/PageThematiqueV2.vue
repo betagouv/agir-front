@@ -13,7 +13,7 @@
     </div>
   </div>
 
-  <section class="fr-py-3w background-color--gris-galet-950-100">
+  <section class="fr-py-4w background-color--gris-galet-950-100">
     <div class="fr-container">
       <h2 class="fr-mb-1w">Mes actions recommandées</h2>
 
@@ -22,25 +22,10 @@
           Afin d’obtenir vos actions personnalisées, pouvez-vous nous en dire un peu plus sur vous ?
         </p>
 
-        <div class="background--white fr-px-3w fr-pb-3w fr-pt-2w position--relative">
-          <ModaleCommencerParcours v-if="!aCommenceEnchainement" :fermer-modale="fermerModale" />
-
-          <div
-            :aria-hidden="aCommenceEnchainement"
-            :class="!aCommenceEnchainement && 'effet-flou'"
-            class="enchainementKYC fr-mb-2w"
-          >
-            <EnchainementQuestionsKyc
-              :est-desactive="!aCommenceEnchainement"
-              :id-enchainement-kycs="idEnchainementKycs"
-              @fin-kyc-atteinte="chargerActionsRecommandeesAvecUnDelai"
-            >
-              <template v-slot:fin>
-                <LoadingPreparationActionsRecommandees />
-              </template>
-            </EnchainementQuestionsKyc>
-          </div>
-        </div>
+        <ParcoursKYCPourRecommandations
+          :id-enchainement-kycs="idEnchainementKycs"
+          :on-fin-k-y-c="chargerActionsRecommandeesAvecUnDelai"
+        />
       </template>
 
       <CatalogueActionsComposant
@@ -50,15 +35,21 @@
       />
     </div>
   </section>
+
+  <section class="fr-container fr-my-6w flex flex-column align-items--center">
+    <h2>Envie de voir ou de revoir toutes les actions ?</h2>
+
+    <router-link :to="{ name: RouteActionsName.CATALOGUE_ACTION }" class="fr-btn fr-btn--secondary">
+      Accéder au catalogue
+    </router-link>
+  </section>
 </template>
 
 <script lang="ts" setup>
   import { onMounted, ref } from 'vue';
   import { onBeforeRouteUpdate, useRoute } from 'vue-router';
   import CatalogueActionsComposant from '@/components/custom/Action/CatalogueActionsComposant.vue';
-  import EnchainementQuestionsKyc from '@/components/custom/KYC/EnchainementQuestionsKyc.vue';
-  import LoadingPreparationActionsRecommandees from '@/components/custom/Thematiques/LoadingPreparationActionsRecommandees.vue';
-  import ModaleCommencerParcours from '@/components/custom/Thematiques/ModaleCommencerParcours.vue';
+  import ParcoursKYCPourRecommandations from '@/components/custom/Thematiques/ParcoursKYCPourRecommandations.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import { ActionsRepositoryAxios } from '@/domaines/actions/adapters/actions.repository.axios';
   import { ActionsDansUneThematiquePresenterImpl } from '@/domaines/actions/adapters/actionsDansUneThematique.presenter.impl';
@@ -67,17 +58,16 @@
   import { ThematiquesRepositoryAxios } from '@/domaines/thematiques/adapters/thematiques.repository.axios';
   import { ClefThematiqueAPI, MenuThematiques, Thematique } from '@/domaines/thematiques/MenuThematiques';
   import { PersonnalisationThematiqueEffectueeUsecase } from '@/domaines/thematiques/personnalisationThematiqueEffectuee.usecase';
+  import { RouteActionsName } from '@/router/actions/routes';
   import { utilisateurStore } from '@/store/utilisateur';
 
-  const store = utilisateurStore();
-  const isLoading = ref<boolean>(true);
-  const aCommenceEnchainement = ref<boolean>(false);
   const thematique = ref<Thematique>(MenuThematiques.getFromUrl(useRoute().params.id as string));
-
-  const idUtilisateur = store.utilisateur.id;
-  let thematiqueId = thematique.value.clefTechniqueAPI;
   const actionsViewModel = ref<CatalogueActionsViewModel>();
   const idEnchainementKycs = ref<string>();
+
+  const store = utilisateurStore();
+  const idUtilisateur = store.utilisateur.id;
+  let thematiqueId = thematique.value.clefTechniqueAPI;
 
   onBeforeRouteUpdate((to, from, next) => {
     next();
@@ -86,20 +76,8 @@
   });
 
   onMounted(() => {
-    lancerChargementDesDonnees();
+    chargerActionsRecommandees();
   });
-
-  function chargerActionsRecommandeesAvecUnDelai() {
-    const personnalisationThematiqueEffectueeUsecase = new PersonnalisationThematiqueEffectueeUsecase(
-      new ThematiquesRepositoryAxios(),
-    );
-
-    personnalisationThematiqueEffectueeUsecase.execute(idUtilisateur, thematiqueId as ClefThematiqueAPI).then(() => {
-      setTimeout(() => {
-        chargerActionsRecommandees();
-      }, 2000);
-    });
-  }
 
   function chargerActionsRecommandees() {
     const chargerActionsRecommandees = new RecupererActionsPersonnaliseesUsecase(new ActionsRepositoryAxios());
@@ -118,26 +96,15 @@
     );
   }
 
-  const lancerChargementDesDonnees = () => {
-    isLoading.value = true;
+  function chargerActionsRecommandeesAvecUnDelai() {
+    const personnalisationThematiqueEffectueeUsecase = new PersonnalisationThematiqueEffectueeUsecase(
+      new ThematiquesRepositoryAxios(),
+    );
 
-    chargerActionsRecommandees();
-
-    isLoading.value = false;
-  };
-
-  function fermerModale() {
-    aCommenceEnchainement.value = true;
+    personnalisationThematiqueEffectueeUsecase.execute(idUtilisateur, thematiqueId as ClefThematiqueAPI).then(() => {
+      setTimeout(() => {
+        chargerActionsRecommandees();
+      }, 2000);
+    });
   }
 </script>
-
-<style scoped>
-  .effet-flou {
-    filter: blur(3px);
-    pointer-events: none;
-  }
-
-  .enchainementKYC {
-    transition: 0.5s ease filter;
-  }
-</style>

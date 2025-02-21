@@ -14,6 +14,7 @@
           <span class="fr-text--bold">Question {{ index + 1 }}</span>
           &nbsp;sur {{ questionsViewModel.questions.length }}
         </p>
+
         <KYCForm
           :question-view-model="questionViewModel"
           wording-bouton="Continuer"
@@ -22,6 +23,7 @@
       </div>
     </div>
   </div>
+
   <slot name="fin" v-if="afficherFinKyc" />
 </template>
 
@@ -36,40 +38,22 @@
   import { RecupererEnchainementQuestionsUsecase } from '@/domaines/kyc/recupererEnchainementQuestions.usecase';
   import { utilisateurStore } from '@/store/utilisateur';
 
-  const props = defineProps<{ idEnchainementKycs: string; estDesactive: boolean }>();
+  const props = defineProps<{ idEnchainementKycs: string; estActive: boolean }>();
   const questionsViewModel = ref<QuestionsViewModel>();
 
   const emit = defineEmits<{
     (e: 'finKycAtteinte'): void;
-    (e: 'questionSuivante'): void;
   }>();
-
-  watch(
-    () => questionsViewModel.value,
-    () => {
-      if (props.estDesactive) {
-        nextTick(() => {
-          document.querySelectorAll('.effet-flou input, .effet-flou button, .effet-flou a').forEach(function (element) {
-            element.setAttribute('tabindex', '-1');
-          });
-        });
-      }
-    },
-  );
-
-  watch(
-    () => props.estDesactive,
-    () => {
-      if (!props.estDesactive) {
-        document.querySelectorAll('.effet-flou input, .effet-flou button, .effet-flou a').forEach(function (element) {
-          element.setAttribute('tabindex', '0');
-        });
-      }
-    },
-  );
 
   const etapeCourante = ref<number>(0);
   const afficherFinKyc = ref<boolean>(false);
+
+  onMounted(() => {
+    chargerEnchainementKycs();
+    const premiereQuestionNonRep =
+      questionsViewModel.value?.questions.findIndex(question => !question.aDejaEteRepondu) || -1;
+    etapeCourante.value = premiereQuestionNonRep !== -1 ? premiereQuestionNonRep : 0;
+  });
 
   async function chargerEnchainementKycs() {
     const usecase = new RecupererEnchainementQuestionsUsecase(new QuestionRepositoryAxios());
@@ -80,13 +64,6 @@
     );
   }
 
-  onMounted(() => {
-    chargerEnchainementKycs();
-    const premiereQuestionNonRep =
-      questionsViewModel.value?.questions.findIndex(question => !question.aDejaEteRepondu) || -1;
-    etapeCourante.value = premiereQuestionNonRep !== -1 ? premiereQuestionNonRep : 0;
-  });
-
   const passerEtapeSuivante = async () => {
     await chargerEnchainementKycs();
     etapeCourante.value++;
@@ -95,4 +72,27 @@
       emit('finKycAtteinte');
     }
   };
+
+  const toggleNavigationClavier = estActive => {
+    const tabindex = estActive ? '0' : '-1';
+    document
+      .querySelectorAll('.effet-flou input, .effet-flou button, .effet-flou a')
+      .forEach(element => element.setAttribute('tabindex', tabindex));
+  };
+
+  watch(
+    () => questionsViewModel.value,
+    () => {
+      if (!props.estActive) {
+        nextTick(() => toggleNavigationClavier(false));
+      }
+    },
+  );
+
+  watch(
+    () => props.estActive,
+    isActive => {
+      if (isActive) toggleNavigationClavier(true);
+    },
+  );
 </script>

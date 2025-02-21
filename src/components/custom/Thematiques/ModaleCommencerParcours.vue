@@ -36,7 +36,7 @@
   .surlignage::before {
     content: '';
     position: absolute;
-    top: 70%;
+    top: 60%;
     bottom: 0;
     left: 0;
     right: 0;
