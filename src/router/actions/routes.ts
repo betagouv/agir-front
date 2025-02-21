@@ -1,7 +1,7 @@
 import { RouteRecordRaw } from 'vue-router';
 
 export enum RouteActionsPath {
-  ACTION_INDIVIDUELLE = '/action/:type/:titre/:id',
+  ACTION_INDIVIDUELLE = '/action/:type/:id/:titre',
   CATALOGUE_ACTION = '/actions',
 }
 

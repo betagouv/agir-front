@@ -1,6 +1,6 @@
 import { Response } from 'redaxios';
 import { AxiosFactory, intercept401 } from '@/axios.factory';
-import { Quiz, QuizRepository } from '@/domaines/quiz/ports/quizRepository';
+import { Quiz, QuizRepository, ScoreQuiz } from '@/domaines/quiz/ports/quizRepository';
 import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 
 export interface QuizApiModel {
@@ -62,12 +62,24 @@ export class QuizRepositoryAxios implements QuizRepository {
       pourcent: score,
     });
   }
+
+  @intercept401()
+  async recupererScoreActionQuiz(idUtilisateur: string, idAction: string): Promise<ScoreQuiz> {
+    const axiosInstance = AxiosFactory.getAxios();
+    const response = await axiosInstance.get(`/utilisateurs/${idUtilisateur}/actions/quizz/${idAction}/score`);
+    return response.data.score;
+  }
 }
 
 function mapQuizApiResponse(reponse: Response<QuizApiModel>): Quiz {
+  return mapQuizApi(reponse.data);
+}
+
+export function mapQuizApi(quizApiModel: QuizApiModel): Quiz {
   return {
-    titre: reponse.data.titre,
-    questions: reponse.data.questions.map((question, index) => {
+    id: quizApiModel.content_id,
+    titre: quizApiModel.titre,
+    questions: quizApiModel.questions.map((question, index) => {
       return {
         intitule: question.libelle,
         reponsesPossibles: question.reponses.map(r => r.reponse),
@@ -77,14 +89,14 @@ function mapQuizApiResponse(reponse: Response<QuizApiModel>): Quiz {
         solution: question.reponses.filter(r => r.exact)[0].reponse,
       };
     }),
-    clefThematiqueAPI: reponse.data.thematique_principale,
-    difficulte: reponse.data.difficulty,
-    nombreDePointsAGagner: reponse.data.points,
+    clefThematiqueAPI: quizApiModel.thematique_principale,
+    difficulte: quizApiModel.difficulty,
+    nombreDePointsAGagner: quizApiModel.points,
     articleAssocie:
-      reponse.data.article_id !== null
+      quizApiModel.article_id !== null
         ? {
-            id: reponse.data.article_id,
-            contenu: reponse.data.article_contenu,
+            id: quizApiModel.article_id,
+            contenu: quizApiModel.article_contenu,
           }
         : null,
   };

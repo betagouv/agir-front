@@ -1,4 +1,4 @@
-import { Quiz, QuizRepository } from '@/domaines/quiz/ports/quizRepository';
+import { Quiz, QuizRepository, ScoreQuiz } from '@/domaines/quiz/ports/quizRepository';
 import { ChargementQuizUsecase } from '@/domaines/quiz/chargementQuiz.usecase';
 import { ChargementQuizPresenterImpl, QuizViewModel } from '@/domaines/quiz/adapters/chargementQuiz.presenter.impl';
 import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
@@ -14,6 +14,7 @@ class QuizRepositoryForTest implements QuizRepository {
 
   async getQuiz(id: string): Promise<Quiz> {
     return {
+      id: '0',
       nombreDePointsAGagner: 10,
       difficulte: 1,
       clefThematiqueAPI: ClefThematiqueAPI.consommation,
@@ -38,6 +39,10 @@ class QuizRepositoryForTest implements QuizRepository {
 
   getPrevisualisationQuiz(idQuiz: string): Promise<Quiz> {
     throw Error();
+  }
+
+  recupererScoreActionQuiz(idUtilisateur: string, idAction: string): Promise<ScoreQuiz> {
+    throw Error;
   }
 }
 

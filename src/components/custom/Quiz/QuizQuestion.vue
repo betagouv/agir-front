@@ -19,7 +19,7 @@
       class="fr-mb-2w"
     />
 
-    <button v-if="!reponseEstDonnee" class="fr-btn fr-btn--lg fr-mt-1w" type="submit">Valider</button>
+    <button v-if="!reponseEstDonnee" class="fr-btn fr-btn--lg fr-mt-1w" type="submit">Voir la réponse</button>
   </form>
 </template>
 

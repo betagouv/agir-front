@@ -1,8 +1,10 @@
 import { ChargerActionUsecase } from '@/domaines/actions/chargerAction.usecase';
 import { ActionsRepositoryMock } from './adapters/actions.repository.mock';
 import { ActionPresenterImpl } from '@/domaines/actions/adapters/action.presenter.impl';
-import { ActionViewModel } from '@/domaines/actions/ports/action.presenter';
+import { ActionClassiqueViewModel } from '@/domaines/actions/ports/action.presenter';
 import { ActionDetail } from '@/domaines/actions/ports/actions.repository';
+import { ChargerActionClassiqueUsecase } from '@/domaines/actions/chargerActionClassique.usecase';
+import { ChargerActionQuizUsecase } from '@/domaines/actions/chargerActionQuiz.usecase';
 
 describe("Fichier de tests concernant la récupération d'une action", () => {
   it("En donnant l'id d'une action, on devrait pouvoir récupérer son entiereté", async () => {
@@ -10,7 +12,9 @@ describe("Fichier de tests concernant la récupération d'une action", () => {
       code: 'id-action-test',
       nombreDePersonnes: 0,
       nombreAidesDisponibles: 0,
+      type: 'classique',
       titre: 'Tester une nouvelle **recette végétarienne**',
+      quizzes: [],
       sousTitre:
         'Faites des économies et le plein de vitamines ! Cette semaine, on cuisine une recette saine et délicieuse !',
       commune: 'Noisiel',
@@ -48,12 +52,18 @@ describe("Fichier de tests concernant la récupération d'une action", () => {
         },
       ],
     };
-    const usecase = new ChargerActionUsecase(ActionsRepositoryMock.avecActionDetail(action));
-    await usecase.execute('id-utilisateur', 'id-action-test', 'classique', new ActionPresenterImpl(expected));
+    const usecase = new ChargerActionUsecase(
+      new ChargerActionClassiqueUsecase(),
+      new ChargerActionQuizUsecase(),
+      ActionsRepositoryMock.avecActionDetail(action),
+      new ActionPresenterImpl(expected, () => {}),
+    );
+    await usecase.execute('id-utilisateur', 'id-action', 'classique');
 
-    function expected(viewModel: ActionViewModel): void {
-      expect(viewModel).toStrictEqual({
+    function expected(viewModel: ActionClassiqueViewModel): void {
+      expect(viewModel).toStrictEqual<ActionClassiqueViewModel>({
         titre: 'Tester une nouvelle <span class="text--bold">recette végétarienne</span>',
+        titreAffiche: 'Tester une nouvelle <span class="text--bold">recette végétarienne</span>',
         sousTitre:
           'Faites des économies et le plein de vitamines ! Cette semaine, on cuisine une recette saine et délicieuse !',
         commune: 'Noisiel',

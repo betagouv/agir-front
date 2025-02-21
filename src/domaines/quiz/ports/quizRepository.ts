@@ -22,6 +22,7 @@ export interface ArticleDuQuiz {
   contenu: string;
 }
 export interface Quiz {
+  id: string;
   titre: string;
   difficulte: QuizDifficulte;
   questions: QuestionsQuiz[];
@@ -29,10 +30,12 @@ export interface Quiz {
   nombreDePointsAGagner: number;
   articleAssocie: ArticleDuQuiz | null;
 }
+export type ScoreQuiz = number;
 
 export interface QuizRepository {
   getQuiz(idQuiz: string, idUtilisateur: string): Promise<Quiz>;
   getPrevisualisationQuiz(idQuiz: string): Promise<Quiz>;
   terminerQuiz(idUtilisateur: string, idQuiz: string, score: number): Promise<void>;
   noterQuiz(quizId: string, utilisateurId: string, note: 1 | 2 | 3 | 4): Promise<void>;
+  recupererScoreActionQuiz(idUtilisateur: string, idAction: string): Promise<ScoreQuiz>;
 }

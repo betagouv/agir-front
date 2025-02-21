@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-space-between align-items--center">
-    <h2 class="fr-h3">Besoin <span class="text--bold">d'inspiration</span> ?</h2>
+    <h2>Besoin <span class="text--bold">d'inspiration</span> ?</h2>
     <p class="text--italic">avec <img alt="manger bouger" class="fr-ml-2w" src="/logo-manger-bouger.svg" /></p>
   </div>
 

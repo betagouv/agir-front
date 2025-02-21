@@ -1,5 +1,6 @@
 import { AxiosFactory } from '@/axios.factory';
 import { Action, ActionDetail, ActionsRepository, TypeAction } from '@/domaines/actions/ports/actions.repository';
+import { mapQuizApi, QuizApiModel } from '@/domaines/quiz/adapters/quizRepository.axios';
 
 interface ActionApiModel {
   code: string;
@@ -21,11 +22,13 @@ interface ActionDetailApiModel {
   code: string;
   titre: string;
   sous_titre: string;
+  type: 'classique' | 'quizz' | 'kyc';
   nom_commune: string;
   comment: string;
   pourquoi: string;
   nombre_actions_en_cours: number;
   nombre_aides_disponibles: number;
+  quizzes: QuizApiModel[];
   services: {
     categorie: string;
     recherche_service_id: string;
@@ -42,6 +45,7 @@ export class ActionsRepositoryAxios implements ActionsRepository {
       code: response.data.code,
       titre: response.data.titre,
       sousTitre: response.data.sous_titre,
+      type: response.data.type,
       commune: response.data.nom_commune,
       corps: {
         introduction: response.data.pourquoi,
@@ -54,6 +58,7 @@ export class ActionsRepositoryAxios implements ActionsRepository {
         type: service.recherche_service_id as 'recettes' | 'longue_vie_objets' | 'pres_de_chez_nous',
         parametreDuService: service.categorie,
       })),
+      quizzes: response.data.quizzes.map(quiz => mapQuizApi(quiz)),
     };
   }
 
