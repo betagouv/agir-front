@@ -31,6 +31,7 @@ export interface ActionDetail {
     astuces: string;
   };
   quizzes?: Quiz[];
+  quizzFelicitations?: string;
   recommandations: RecommandationArticle[];
   nombreDePersonnes: number;
   nombreAidesDisponibles: number;

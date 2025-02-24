@@ -25,6 +25,7 @@ export interface ActionClassiqueViewModel extends ActionBaseViewModel {
 
 export interface ActionQuizzesViewModel extends ActionBaseViewModel {
   quizzes: ActionQuizViewModel[];
+  quizzFelicitations?: string;
 }
 
 export interface ActionQuizViewModel {
