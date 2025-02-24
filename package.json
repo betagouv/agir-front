@@ -20,7 +20,7 @@
   "dependencies": {
     "@gouvfr/dsfr": "1.13.0",
     "@hotjar/browser": "1.0.9",
-    "@iframe-resizer/vue": "^5.3.2",
+    "@iframe-resizer/vue": "^5.3.3",
     "@sentry/vite-plugin": "^3.1.2",
     "@sentry/vue": "8.54.0",
     "@vue-leaflet/vue-leaflet": "^0.10.1",
