@@ -1,4 +1,4 @@
-import { SyntheseThematiques } from '@/domaines/thematiques/ports/thematique.repository';
+import { SyntheseThematiques } from '@/domaines/thematiques/ports/thematiques.repository';
 
 export interface SyntheseThematiqueViewModel {
   id: string;

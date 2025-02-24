@@ -22,13 +22,13 @@
   import { onMounted, ref } from 'vue';
   import CarteSyntheseThematique from '@/components/custom/Thematiques/CarteSyntheseThematique.vue';
   import { SyntheseThematiquesPresenterImpl } from '@/domaines/thematiques/adapters/syntheseThematiques.presenter.impl';
-  import { ThematiqueRepositoryAxios } from '@/domaines/thematiques/adapters/thematique.repository.axios';
+  import { ThematiquesRepositoryAxios } from '@/domaines/thematiques/adapters/thematiques.repository.axios';
   import { SyntheseThematiquesViewModel } from '@/domaines/thematiques/ports/syntheseThematique.presenter';
   import { RecupererSyntheseThematiques } from '@/domaines/thematiques/recupererSyntheseThematiques.usecase';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const syntheseThematiquesViewModel = ref<SyntheseThematiquesViewModel>();
-  const usecase = new RecupererSyntheseThematiques(new ThematiqueRepositoryAxios());
+  const usecase = new RecupererSyntheseThematiques(new ThematiquesRepositoryAxios());
 
   onMounted(async () => {
     await usecase.execute(

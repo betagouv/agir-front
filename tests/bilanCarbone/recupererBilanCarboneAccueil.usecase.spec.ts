@@ -224,7 +224,7 @@ describe('Fichier de tests concernant le chargement du bilan carbone', () => {
             {
               contentId: 'id4',
               estTermine: true,
-              label: 'Consommer',
+              label: 'Mes achats',
               nombreTotalDeQuestion: 10,
               clefUnivers: ClefThematiqueAPI.consommation,
               pourcentageProgression: 100,

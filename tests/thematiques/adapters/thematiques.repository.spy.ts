@@ -1,5 +1,5 @@
-import { ThematiquesRepository } from '@/domaines/thematiques/ports/thematiques.repository';
 import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
+import { SyntheseThematiques, ThematiquesRepository } from '@/domaines/thematiques/ports/thematiques.repository';
 
 export class ThematiquesRepositorySpy implements ThematiquesRepository {
   private _terminerPersonnalisationArgs: { idUtilisateur: string; clefThematiqueApi: string } = {
@@ -26,5 +26,9 @@ export class ThematiquesRepositorySpy implements ThematiquesRepository {
 
   async resetPersonnalisation(idUtilisateur: string, clefThematiqueApi: ClefThematiqueAPI): Promise<void> {
     this._resetPersonnalisationArgs = { idUtilisateur, clefThematiqueApi };
+  }
+
+  recupererSyntheseThematiques(utilisateurId: string): Promise<SyntheseThematiques> {
+    throw new Error('Method not implemented.');
   }
 }

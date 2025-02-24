@@ -3,7 +3,7 @@ import {
   SyntheseThematiquePresenter,
   SyntheseThematiquesViewModel,
 } from '@/domaines/thematiques/ports/syntheseThematique.presenter';
-import { SyntheseThematiques } from '@/domaines/thematiques/ports/thematique.repository';
+import { SyntheseThematiques } from '@/domaines/thematiques/ports/thematiques.repository';
 
 export class SyntheseThematiquesPresenterImpl implements SyntheseThematiquePresenter {
   constructor(private readonly _syntheseThematiquesViewModel: (viewModel: SyntheseThematiquesViewModel) => void) {}
@@ -15,6 +15,7 @@ export class SyntheseThematiquesPresenterImpl implements SyntheseThematiquePrese
         const thematique = MenuThematiques.getThematiqueData(thematiqueData.thematique as ClefThematiqueAPI);
 
         const bulletPoints: string[] = [];
+
         if (thematique.clefTechniqueAPI === ClefThematiqueAPI.alimentation && thematiqueData.nombreRecettes) {
           bulletPoints.push(
             `<span class="text--bold">${thematiqueData.nombreRecettes}</span> recettes délicieuses, saines et de saison`,
