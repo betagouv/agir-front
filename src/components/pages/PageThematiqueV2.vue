@@ -30,11 +30,15 @@
         />
       </template>
 
-      <CatalogueActionsComposant
-        v-else-if="actionsViewModel"
-        :catalogue-view-model="actionsViewModel"
-        card-classes="fr-col-12 fr-col-md-6 fr-col-lg-4"
-      />
+      <template v-else-if="actionsViewModel">
+        <CatalogueActionsComposant
+          :catalogue-view-model="actionsViewModel"
+          card-classes="fr-col-12 fr-col-md-6 fr-col-lg-4"
+        />
+        <button class="fr-btn fr-mt-4w fr-btn--icon-left fr-icon-refresh-line" @click="resetParcours">
+          Recommencer le parcours
+        </button>
+      </template>
     </div>
   </section>
 
@@ -60,6 +64,7 @@
   import { ThematiquesRepositoryAxios } from '@/domaines/thematiques/adapters/thematiques.repository.axios';
   import { ClefThematiqueAPI, MenuThematiques, Thematique } from '@/domaines/thematiques/MenuThematiques';
   import { PersonnalisationThematiqueEffectueeUsecase } from '@/domaines/thematiques/personnalisationThematiqueEffectuee.usecase';
+  import { ResetPersonnalisationUsecase } from '@/domaines/thematiques/resetPersonnalisation.usecase';
   import { RouteActionsName } from '@/router/actions/routes';
   import { utilisateurStore } from '@/store/utilisateur';
 
@@ -71,6 +76,8 @@
   const store = utilisateurStore();
   const idUtilisateur = store.utilisateur.id;
   let thematiqueId = thematique.value.clefTechniqueAPI;
+
+  const chargerActionsRecommandeesUsecase = new RecupererActionsPersonnaliseesUsecase(new ActionsRepositoryAxios());
 
   onBeforeRouteUpdate((to, from, next) => {
     next();
@@ -85,8 +92,7 @@
   });
 
   async function chargerActionsRecommandees() {
-    const chargerActionsRecommandees = new RecupererActionsPersonnaliseesUsecase(new ActionsRepositoryAxios());
-    await chargerActionsRecommandees.execute(
+    await chargerActionsRecommandeesUsecase.execute(
       idUtilisateur,
       thematiqueId,
       new ActionsDansUneThematiquePresenterImpl(
@@ -111,6 +117,12 @@
         await chargerActionsRecommandees();
       }, 2000);
     });
+  }
+
+  async function resetParcours() {
+    const resetPersonnalisationUsecase = new ResetPersonnalisationUsecase(new ThematiquesRepositoryAxios());
+    await resetPersonnalisationUsecase.execute(idUtilisateur, thematiqueId as ClefThematiqueAPI);
+    await chargerActionsRecommandees();
   }
 </script>
 
