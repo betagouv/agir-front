@@ -8,4 +8,10 @@ export class ThematiquesRepositoryAxios implements ThematiquesRepository {
     const axios = AxiosFactory.getAxios();
     await axios.post(`/utilisateurs/${idUtilisateur}/thematiques/${clefThematiqueApi}/personnalisation_ok`);
   }
+
+  @intercept401()
+  async resetPersonnalisation(idUtilisateur: string, clefThematiqueApi: ClefThematiqueAPI): Promise<void> {
+    const axios = AxiosFactory.getAxios();
+    await axios.post(`/utilisateurs/${idUtilisateur}/thematiques/${clefThematiqueApi}/reset_personnalisation`);
+  }
 }
