@@ -33,6 +33,7 @@ interface ActionDetailApiModel {
     categorie: string;
     recherche_service_id: string;
   }[];
+  quizz_felicitations: string;
 }
 
 interface ActionsRecommandeesApiModel {
@@ -53,6 +54,7 @@ export class ActionsRepositoryAxios implements ActionsRepository {
       sousTitre: response.data.sous_titre,
       type: response.data.type,
       commune: response.data.nom_commune,
+      quizzFelicitations: response.data.quizz_felicitations,
       corps: {
         introduction: response.data.pourquoi,
         astuces: response.data.comment,

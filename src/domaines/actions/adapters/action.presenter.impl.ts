@@ -63,6 +63,7 @@ export class ActionPresenterImpl implements ActionPresenter {
           articleAssocie: quiz.articleAssocie,
         };
       }),
+      quizzFelicitations: action.quizzFelicitations,
       recommandations: action.recommandations,
     });
   }

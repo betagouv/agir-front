@@ -23,7 +23,7 @@
       <span aria-hidden="true" class="fr-pr-1v">{{ scoreViewModel.scoreConfig.emoji }}</span>
       Vous avez obtenu un score de <span class="text--bold">{{ scoreViewModel.score }}</span>
     </p>
-    <p class="bravo-encouragement">{{ scoreViewModel.encouragement }}</p>
+    <p class="bravo-encouragement">{{ felicitations ?? scoreViewModel.encouragement }}</p>
 
     <router-link :to="{ name: RouteActionsName.CATALOGUE_ACTION }" class="fr-btn display-block fr-my-0 fr-mx-auto"
       >Revenir au catalogue</router-link
@@ -43,6 +43,7 @@
 
   defineProps<{
     titre: string;
+    felicitations?: string;
   }>();
   const route = useRoute();
 

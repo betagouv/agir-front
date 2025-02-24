@@ -17,7 +17,11 @@
           :est-derniere-question="indexQuestionActuelle + 1 === actionQuizViewModel?.quizzes.length"
         />
       </template>
-      <ActionQuizTerminee v-else :titre="actionQuizViewModel.titre" />
+      <ActionQuizTerminee
+        v-else
+        :titre="actionQuizViewModel.titre"
+        :felicitations="actionQuizViewModel.quizzFelicitations"
+      />
     </div>
   </div>
 </template>
