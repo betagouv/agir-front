@@ -9,7 +9,7 @@
               v-for="point in syntheseThematique.bulletPoints"
               :key="point"
               v-html="point"
-              class="fr-mb-1w text--lh-1-8 fr-mx-1v"
+              class="fr-mb-1v fr-mx-1v"
             />
           </ul>
         </div>

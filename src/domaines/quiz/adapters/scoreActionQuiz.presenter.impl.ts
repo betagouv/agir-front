@@ -31,7 +31,7 @@ export class ScoreActionQuizPresenterImpl implements ScoreActionQuizPresenter {
         couleurBackground,
         couleurBordure,
       },
-      encouragement: 'Bravo ! Nous espérons que ce quiz vous aura permis d’en apprendre d’avantage !',
+      encouragement: 'Nous espérons que ce quiz vous aura permis d’en apprendre d’avantage !',
     });
   }
 }

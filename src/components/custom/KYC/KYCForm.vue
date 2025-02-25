@@ -77,7 +77,7 @@
       class="fr-mt-1w"
     />
 
-    <button :title="wordingBouton" class="fr-btn fr-btn--lg fr-mt-3w" type="submit">
+    <button :title="wordingBouton" class="fr-btn fr-mt-3w" type="submit">
       {{ wordingBouton }}
     </button>
     <button

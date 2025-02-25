@@ -8,7 +8,7 @@
   <h2 class="fr-mt-2w text--center">
     <span class="text--bold">Bravo !</span><br />
     <span class="text--bleu fr-text--lead text--normal">
-      Vous avez terminé le quiz "<span class="fr-text--bold" v-html="titre" />" !
+      Vous avez terminé le quiz <br />"<span class="fr-text--bold" v-html="titre" />" !
     </span>
   </h2>
 
