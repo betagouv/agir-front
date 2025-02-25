@@ -3,8 +3,10 @@ import { marked } from 'marked';
 const renderer = new marked.Renderer();
 
 renderer.strong = objet => {
-  return `<span class="text--bold">${objet.text}</span>`;
+  const text = marked.parseInline(objet.text);
+  return `<span class="text--bold">${text}</span>`;
 };
+
 renderer.heading = ({ tokens, depth }) => {
   const text = marked.parseInline(tokens.map(token => token.raw).join(''));
   if (depth === 1) {
