@@ -31,9 +31,9 @@
       </template>
 
       <template v-else-if="actionsViewModel">
-        <CatalogueActionsComposant
+        <CatalogueActionsRecommandees
           :catalogue-view-model="actionsViewModel"
-          card-classes="fr-col-12 fr-col-md-6 fr-col-lg-4"
+          card-classes="fr-col-12 fr-col-md-6 fr-col-xl-4"
         />
         <button class="fr-btn fr-mt-4w fr-btn--icon-left fr-icon-refresh-line" @click="resetParcours">
           Recommencer le parcours
@@ -54,7 +54,7 @@
 <script lang="ts" setup>
   import { onMounted, ref } from 'vue';
   import { onBeforeRouteUpdate, useRoute } from 'vue-router';
-  import CatalogueActionsComposant from '@/components/custom/Action/CatalogueActionsComposant.vue';
+  import CatalogueActionsRecommandees from '@/components/custom/Action/CatalogueActionsRecommandees.vue';
   import ParcoursKYCPourRecommandations from '@/components/custom/Thematiques/ParcoursKYCPourRecommandations.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import { ActionsRepositoryAxios } from '@/domaines/actions/adapters/actions.repository.axios';

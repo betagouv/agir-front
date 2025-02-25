@@ -1,10 +1,10 @@
 <template>
   <section class="fr-container fr-my-3w">
-    <h1 class="fr-h1">Toutes <span class="text--bold">les actions</span></h1>
+    <h1 class="fr-h1 fr-mt-4w fr-mb-2w">Catalogue d'actions</h1>
     <CatalogueActionsComposant
       v-if="catalogueViewModel"
       :catalogue-view-model="catalogueViewModel"
-      card-classes="fr-col-12 fr-col-md-6 fr-col-lg-3"
+      card-classes="fr-col-12 fr-col-md-6"
     />
   </section>
 </template>
