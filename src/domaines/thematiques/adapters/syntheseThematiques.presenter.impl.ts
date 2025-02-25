@@ -4,6 +4,9 @@ import {
   SyntheseThematiquesViewModel,
 } from '@/domaines/thematiques/ports/syntheseThematique.presenter';
 import { SyntheseThematiques } from '@/domaines/thematiques/ports/thematiques.repository';
+import { gererPluriel } from '@/shell/pluriel';
+
+type Bulletpoint = { nombre: number; phrase: { singulier: string; pluriel: string } };
 
 export class SyntheseThematiquesPresenterImpl implements SyntheseThematiquePresenter {
   constructor(private readonly _syntheseThematiquesViewModel: (viewModel: SyntheseThematiquesViewModel) => void) {}
@@ -14,36 +17,70 @@ export class SyntheseThematiquesPresenterImpl implements SyntheseThematiquePrese
       cartesThematiques: synthese.listeThematiques.map(thematiqueData => {
         const thematique = MenuThematiques.getThematiqueData(thematiqueData.thematique as ClefThematiqueAPI);
 
-        const bulletPoints: string[] = [];
+        const points: Bulletpoint[] = [
+          this.creerPointSimulateurConditionnellement(
+            thematique.clefTechniqueAPI as ClefThematiqueAPI,
+            thematiqueData.nombreSimulateurs,
+          ),
+          {
+            nombre: thematiqueData.nombreRecettes,
+            phrase: {
+              singulier: 'recette délicieuse, saine et de saison',
+              pluriel: 'recettes délicieuses, saines et de saison',
+            },
+          },
+          {
+            nombre: thematiqueData.nombreAides,
+            phrase: {
+              singulier: 'aide sur votre territoire',
+              pluriel: 'aides sur votre territoire',
+            },
+          },
+          {
+            nombre: thematiqueData.nombreActions,
+            phrase: {
+              singulier: "idée d'actions",
+              pluriel: "idées d'actions",
+            },
+          },
+        ];
 
-        if (thematique.clefTechniqueAPI === ClefThematiqueAPI.alimentation && thematiqueData.nombreRecettes) {
-          bulletPoints.push(
-            `<span class="text--bold">${thematiqueData.nombreRecettes}</span> recettes délicieuses, saines et de saison`,
-          );
-        } else if (thematique.clefTechniqueAPI === ClefThematiqueAPI.logement) {
-          bulletPoints.push(
-            `<span class="text--bold">${thematiqueData.nombreSimulateurs}</span> simulateur Mes Aides Rénov`,
-          );
-        } else if (thematique.clefTechniqueAPI === ClefThematiqueAPI.transports) {
-          bulletPoints.push(
-            `<span class="text--bold">${thematiqueData.nombreSimulateurs}</span> simulateurs vélo et voiture`,
-          );
-        }
-
-        if (thematiqueData.nombreAides) {
-          bulletPoints.push(`<span class="text--bold">${thematiqueData.nombreAides}</span> aides sur votre territoire`);
-        }
-
-        if (thematiqueData.nombreActions) {
-          bulletPoints.push(`<span class="text--bold">${thematiqueData.nombreActions}</span> idées d'actions`);
-        }
+        const bulletPoints: string[] = this.transformerEnHTML(points);
+        const titreHTML = `<span aria-hidden="true">${thematique.emoji}</span>&nbsp ${thematique.labelDansLeMenu}`;
 
         return {
           id: thematique.url,
-          titreHTML: `<span aria-hidden="true">${thematique.emoji}</span>&nbsp ${thematique.labelDansLeMenu}`,
+          titreHTML,
           bulletPoints,
         };
       }),
     });
+  }
+
+  private creerPointSimulateurConditionnellement(clefTechniqueAPI: ClefThematiqueAPI, nombreSimulateurs: number) {
+    if (clefTechniqueAPI === ClefThematiqueAPI.logement) {
+      return {
+        nombre: nombreSimulateurs,
+        phrase: { singulier: 'simulateur Mes Aides Rénov', pluriel: 'simulateurs Mes Aides Rénov' },
+      };
+    } else if (clefTechniqueAPI === ClefThematiqueAPI.transports) {
+      return {
+        nombre: nombreSimulateurs,
+        phrase: { singulier: 'simulateur vélo et voiture', pluriel: 'simulateurs vélo et voiture' },
+      };
+    } else {
+      return {
+        nombre: nombreSimulateurs,
+        phrase: { singulier: 'simulateur', pluriel: 'simulateurs' },
+      };
+    }
+  }
+
+  private transformerEnHTML(points: Bulletpoint[]): string[] {
+    return points
+      .filter(({ nombre }) => nombre !== 0 && nombre !== undefined)
+      .map(({ nombre, phrase }): string => {
+        return `<span class="text--bold">${nombre}</span> ${gererPluriel(nombre, phrase.singulier, phrase.pluriel)}`;
+      });
   }
 }

@@ -1,11 +1,10 @@
 import { RecupererSyntheseThematiques } from '@/domaines/thematiques/recupererSyntheseThematiques.usecase';
 import { SyntheseThematiquesPresenterImpl } from '@/domaines/thematiques/adapters/syntheseThematiques.presenter.impl';
 import { SyntheseThematiquesViewModel } from '@/domaines/thematiques/ports/syntheseThematique.presenter';
-import { ThematiquesRepositorySpy } from './adapters/thematiques.repository.spy';
 import { ThematiquesRepositoryMock } from './adapters/thematiques.repository.mock';
 
 describe('Fichier de tests concernant la récupération de la synthèse des thématiques', () => {
-  it("En donnant l'id de l'utilisateur, devrait préparer des données simples pour l'affichage des cartes thématiques", async () => {
+  it("En donnant l'id de l'utilisateur, devrait préparer des données simples pour l'affichage des cartes thématiques (pluriel)", async () => {
     // WHEN
     const usecase = new RecupererSyntheseThematiques(
       new ThematiquesRepositoryMock({
@@ -21,7 +20,7 @@ describe('Fichier de tests concernant la récupération de la synthèse des thé
           {
             thematique: 'logement',
             nombreRecettes: 0,
-            nombreSimulateurs: 1,
+            nombreSimulateurs: 3,
             nombreAides: 5,
             nombreActions: 3,
           },
@@ -37,7 +36,7 @@ describe('Fichier de tests concernant la récupération de la synthèse des thé
             nombreRecettes: 0,
             nombreSimulateurs: 0,
             nombreAides: 5,
-            nombreActions: 0,
+            nombreActions: 54,
           },
         ],
       }),
@@ -46,7 +45,6 @@ describe('Fichier de tests concernant la récupération de la synthèse des thé
 
     // THEN
     function expectation(viewModel: SyntheseThematiquesViewModel) {
-      console.log(viewModel);
       expect(viewModel).toStrictEqual<SyntheseThematiquesViewModel>({
         commune: 'Paris',
         cartesThematiques: [
@@ -55,7 +53,7 @@ describe('Fichier de tests concernant la récupération de la synthèse des thé
             titreHTML: '<span aria-hidden="true">🍛</span>&nbsp Me nourrir',
             bulletPoints: [
               '<span class="text--bold">10</span> recettes délicieuses, saines et de saison',
-              '<span class="text--bold">1</span> aide sur votre territoire',
+              '<span class="text--bold">5</span> aides sur votre territoire',
               '<span class="text--bold">32</span> idées d\'actions',
             ],
           },
@@ -63,7 +61,7 @@ describe('Fichier de tests concernant la récupération de la synthèse des thé
             id: 'me-loger',
             titreHTML: '<span aria-hidden="true">🧱</span>&nbsp Me loger',
             bulletPoints: [
-              '<span class="text--bold">1</span> simulateur Mes Aides Rénov',
+              '<span class="text--bold">3</span> simulateurs Mes Aides Rénov',
               '<span class="text--bold">5</span> aides sur votre territoire',
               '<span class="text--bold">3</span> idées d\'actions',
             ],
@@ -82,7 +80,60 @@ describe('Fichier de tests concernant la récupération de la synthèse des thé
             titreHTML: '<span aria-hidden="true">📺</span>&nbsp Mes achats',
             bulletPoints: [
               '<span class="text--bold">5</span> aides sur votre territoire',
-              '<span class="text--bold">0</span> idée d\'actions',
+              '<span class="text--bold">54</span> idées d\'actions',
+            ],
+          },
+        ],
+      });
+    }
+  });
+
+  it("En donnant l'id de l'utilisateur, devrait préparer des données simples pour l'affichage des cartes thématiques (singulier)", async () => {
+    // WHEN
+    const usecase = new RecupererSyntheseThematiques(
+      new ThematiquesRepositoryMock({
+        commune: 'Paris',
+        listeThematiques: [
+          {
+            thematique: 'alimentation',
+            nombreRecettes: 1,
+            nombreAides: 1,
+            nombreActions: 1,
+            nombreSimulateurs: 1,
+          },
+          {
+            thematique: 'logement',
+            nombreRecettes: 0,
+            nombreSimulateurs: 0,
+            nombreAides: 1,
+            nombreActions: 1,
+          },
+        ],
+      }),
+    );
+    await usecase.execute('id-utilisateur', new SyntheseThematiquesPresenterImpl(expectation));
+
+    // THEN
+    function expectation(viewModel: SyntheseThematiquesViewModel) {
+      expect(viewModel).toStrictEqual<SyntheseThematiquesViewModel>({
+        commune: 'Paris',
+        cartesThematiques: [
+          {
+            id: 'me-nourrir',
+            titreHTML: '<span aria-hidden="true">🍛</span>&nbsp Me nourrir',
+            bulletPoints: [
+              '<span class="text--bold">1</span> simulateur',
+              '<span class="text--bold">1</span> recette délicieuse, saine et de saison',
+              '<span class="text--bold">1</span> aide sur votre territoire',
+              '<span class="text--bold">1</span> idée d\'actions',
+            ],
+          },
+          {
+            id: 'me-loger',
+            titreHTML: '<span aria-hidden="true">🧱</span>&nbsp Me loger',
+            bulletPoints: [
+              '<span class="text--bold">1</span> aide sur votre territoire',
+              '<span class="text--bold">1</span> idée d\'actions',
             ],
           },
         ],
