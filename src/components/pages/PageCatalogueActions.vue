@@ -1,28 +1,19 @@
 <template>
   <section class="fr-container fr-my-3w">
     <h1 class="fr-h1 fr-mt-4w fr-mb-4w">Catalogue d'actions</h1>
+
     <div class="fr-grid-row fr-grid-row--gutters">
       <div class="fr-col-md-4 fr-col-12">
-        <InputSearchBar
-          id="rechercheParTitre"
-          name="titreRessource"
-          placeholder="Rechercher par titre"
-          class="fr-mb-2w"
-          @submit="rechercherParTitre"
+        <CatalogueActionsFiltres
+          :filtres="filtres"
+          @rechercher-par-deja-vu="rechercherParDejaVu"
+          @rechercher-par-titre="rechercherParTitre"
+          @update-thematiques="updateThematiques"
         />
-        <h2 class="fr-h4">Filtres</h2>
-        <Interrupteur
-          id="deja_vus"
-          label="Déjà consultées"
-          @rechercher-par-favoris="rechercherParFavoris"
-          class="fr-mb-4w"
-        />
-        <InputCheckbox id="thematiqueArticle" label="Thématiques" :options="filtres" @update="updateThematiques" />
-        <hr class="fr-hr" />
       </div>
 
       <div class="fr-col-md-8 fr-col-12">
-        <h4 class="fr-h4">124 actions</h4>
+        <h4 class="fr-h4">??? actions</h4>
 
         <CatalogueActionsComposant
           v-if="catalogueViewModel"
@@ -33,41 +24,59 @@
     </div>
   </section>
 </template>
+
 <script lang="ts" setup>
   import { onMounted, ref } from 'vue';
-  import CatalogueActionsComposant from '@/components/custom/Action/CatalogueActionsComposant.vue';
-  import InputCheckbox from '@/components/dsfr/InputCheckbox.vue';
-  import InputSearchBar from '@/components/dsfr/InputSearchBar.vue';
-  import Interrupteur from '@/components/dsfr/Interrupteur.vue';
+  import CatalogueActionsComposant from '@/components/custom/Action/Catalogue/CatalogueActionsComposant.vue';
+  import CatalogueActionsFiltres from '@/components/custom/Action/Catalogue/CatalogueActionsFiltres.vue';
   import { ActionsRepositoryAxios } from '@/domaines/actions/adapters/actions.repository.axios';
   import { CatalogueActionsPresenterImpl } from '@/domaines/actions/adapters/catalogueActions.presenter.impl';
   import { CatalogueActionsViewModel } from '@/domaines/actions/ports/catalogueActions.presenter';
   import { RecupererCatalogueActionsUsecase } from '@/domaines/actions/recupererCatalogueActions.usecase';
   import { utilisateurStore } from '@/store/utilisateur';
 
-  const catalogueViewModel = ref<CatalogueActionsViewModel>();
-  const filtres = ref([{ id: 'id', label: 'label' }]);
+  const isLoading = ref<boolean>(false);
+  const filtres = [
+    {
+      id: '',
+      label: 'label',
+      checked: false,
+    },
+  ]; // vm
 
-  onMounted(() => {
-    const idUtilisateur = utilisateurStore().utilisateur.id;
-    const usecase = new RecupererCatalogueActionsUsecase(new ActionsRepositoryAxios());
-    usecase.execute(
-      idUtilisateur,
-      new CatalogueActionsPresenterImpl(actions => {
-        catalogueViewModel.value = actions;
-      }),
-    );
+  const rechercheTitre = ref<string>('');
+  const filtresThematiques = ref<string[]>([]);
+  const filtreDejaVu = ref<boolean>(false);
+
+  const idUtilisateur = utilisateurStore().utilisateur.id;
+  const catalogueViewModel = ref<CatalogueActionsViewModel>();
+  const presenter = new CatalogueActionsPresenterImpl(actions => {
+    catalogueViewModel.value = actions;
   });
 
-  function rechercherParFavoris() {}
+  onMounted(async () => {
+    const usecase = new RecupererCatalogueActionsUsecase(new ActionsRepositoryAxios());
+    await usecase.execute(idUtilisateur, presenter);
+  });
 
-  function updateThematiques() {}
+  async function filtrerLaRecherche() {
+    isLoading.value = true;
 
-  function rechercherParTitre() {}
-</script>
-
-<style scoped>
-  h1.fr-h1 {
-    font-weight: 400;
+    isLoading.value = false;
   }
-</style>
+
+  const updateThematiques = async thematiques => {
+    filtresThematiques.value = thematiques;
+    await filtrerLaRecherche();
+  };
+
+  const rechercherParTitre = async titre => {
+    rechercheTitre.value = titre;
+    await filtrerLaRecherche();
+  };
+
+  const rechercherParDejaVu = async checked => {
+    filtreDejaVu.value = checked;
+    await filtrerLaRecherche();
+  };
+</script>

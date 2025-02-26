@@ -56,7 +56,7 @@
 <script lang="ts" setup>
   import { onMounted, ref } from 'vue';
   import { onBeforeRouteUpdate, useRoute } from 'vue-router';
-  import CatalogueActionsRecommandees from '@/components/custom/Action/CatalogueActionsRecommandees.vue';
+  import CatalogueActionsRecommandees from '@/components/custom/Action/Catalogue/CatalogueActionsRecommandees.vue';
   import ParcoursKYCPourRecommandations from '@/components/custom/Thematiques/ParcoursKYCPourRecommandations.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import { ActionsRepositoryAxios } from '@/domaines/actions/adapters/actions.repository.axios';
