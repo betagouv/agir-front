@@ -1,19 +1,22 @@
 <template>
-  <div class="fr-container fr-pt-4w fr-pb-8w fr-pb-1w background-bleu-975-25">
-    <div class="fr-container text--center">
-      <h2 class="fr-h2 fr-mb-2w">Par où souhaitez-vous commencer ?</h2>
-      <p>
-        D’après nos calculs, à <span class="text--bold text--bleu text--italic">Tarascon</span>, voici ce que nous
-        pouvons vous proposer :
-      </p>
-    </div>
+  <div class="fr-pt-4w fr-pb-8w fr-pb-1w background-bleu-975-25">
+    <div class="fr-container">
+      <div class="text--center">
+        <h2 class="fr-h2 fr-mb-2w">Par où souhaitez-vous commencer ?</h2>
+        <p v-if="syntheseThematiquesViewModel?.commune">
+          D’après nos calculs, à
+          <span class="text--bold text--bleu text--italic">{{ syntheseThematiquesViewModel.commune }}</span
+          >, voici ce que nous pouvons vous proposer :
+        </p>
+      </div>
 
-    <div v-if="syntheseThematiquesViewModel" class="fr-grid-row fr-grid-row--gutters">
-      <CarteSyntheseThematique
-        v-for="syntheseThematique in syntheseThematiquesViewModel.cartesThematiques"
-        :key="syntheseThematique.id"
-        :synthese-thematique="syntheseThematique"
-      />
+      <div v-if="syntheseThematiquesViewModel" class="fr-grid-row fr-grid-row--gutters">
+        <CarteSyntheseThematique
+          v-for="syntheseThematique in syntheseThematiquesViewModel.cartesThematiques"
+          :key="syntheseThematique.id"
+          :synthese-thematique="syntheseThematique"
+        />
+      </div>
     </div>
   </div>
 </template>
