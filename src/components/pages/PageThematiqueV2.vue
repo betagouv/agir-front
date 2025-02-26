@@ -33,6 +33,8 @@
       <template v-else-if="actionsViewModel">
         <CatalogueActionsRecommandees
           :catalogue-view-model="actionsViewModel"
+          :thematiqueId="thematiqueId"
+          :rafraichir-actions="chargerActionsRecommandees"
           card-classes="fr-col-12 fr-col-md-6 fr-col-xl-4"
         />
         <button class="fr-btn fr-mt-4w fr-btn--icon-left fr-icon-refresh-line" @click="resetParcours">

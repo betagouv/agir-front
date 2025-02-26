@@ -15,10 +15,13 @@
             </ul>
           </div>
           <div class="fr-card__footer">
-            <ul class="fr-btns-group fr-btns-group--inline fr-btns-group--sm fr-btns-group--icon-left">
+            <ul
+              class="fr-btns-group fr-btns-group--inline fr-btns-group--sm fr-btns-group--icon-left flex-space-between"
+            >
               <li>
                 <button
                   class="fr-btn fr-btn--tertiary-no-outline fr-icon-refresh-line fr-icon--sm fr-btn--icon-left fr-mx-0"
+                  @click="supprimerCarte(action.url.params.type, action.code)"
                 >
                   Proposez-moi autre chose
                 </button>
@@ -37,9 +40,21 @@
 
 <script lang="ts" setup>
   import { CatalogueActionsViewModel } from '@/domaines/actions/ports/catalogueActions.presenter';
+  import { ThematiquesRepositoryAxios } from '@/domaines/thematiques/adapters/thematiques.repository.axios';
+  import { SupprimerActionDesActionsRecommandeesUsecase } from '@/domaines/thematiques/supprimerActionDesActionsRecommandees.usecase';
+  import { utilisateurStore } from '@/store/utilisateur';
 
-  defineProps<{
+  const props = defineProps<{
     catalogueViewModel: CatalogueActionsViewModel;
     cardClasses: string;
+    thematiqueId: string;
+    rafraichirActions: () => Promise<void>;
   }>();
+
+  async function supprimerCarte(actionType: string, actionId: string) {
+    const supprimerAction = new SupprimerActionDesActionsRecommandeesUsecase(new ThematiquesRepositoryAxios());
+    await supprimerAction.execute(utilisateurStore().utilisateur.id, props.thematiqueId, actionType, actionId);
+
+    await props.rafraichirActions();
+  }
 </script>
