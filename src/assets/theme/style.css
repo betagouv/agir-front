@@ -60,6 +60,10 @@
   justify-content: center;
 }
 
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
 .z-index-2 {
   z-index: 2;
 }
