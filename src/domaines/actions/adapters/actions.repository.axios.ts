@@ -88,6 +88,29 @@ export class ActionsRepositoryAxios implements ActionsRepository {
   }
 
   @intercept401()
+  async recupererActionsAvecFiltre(
+    idUtilisateur: string,
+    filtresThematiques: string[],
+    titre: string,
+    filtreDejaVu: boolean,
+  ): Promise<Action[]> {
+    const axios = AxiosFactory.getAxios();
+
+    const params = this.buildFiltres(filtresThematiques, titre, filtreDejaVu);
+    const response = await axios.get<ActionApiModel[]>(`/utilisateurs/${idUtilisateur}/actions${params}`);
+
+    return response.data.map(action => ({
+      code: action.code,
+      titre: action.titre,
+      sousTitre: action.sous_titre,
+      nombreDePersonnes: action.nombre_actions_en_cours,
+      nombreAidesDisponibles: action.nombre_aides_disponibles,
+      type: action.type as TypeAction,
+      dejaVue: action.deja_vue,
+    }));
+  }
+
+  @intercept401()
   async recupererActionsPersonnalisees(
     idUtilisateur: string,
     thematiqueId: string,
@@ -110,5 +133,15 @@ export class ActionsRepositoryAxios implements ActionsRepository {
         dejaVue: action.deja_vue,
       })),
     };
+  }
+
+  private buildFiltres(filtreThematiquesIds: string[], titre: string, filtreDejaVue: boolean): string {
+    const params: string[] = [];
+
+    if (filtreThematiquesIds.length > 0) params.push(`thematique=${filtreThematiquesIds.join(',')}`);
+    if (titre) params.push(`titre=${titre}`);
+    if (filtreDejaVue) params.push('deja_vue=true');
+
+    return params.length > 0 ? `?${params.join('&')}` : '';
   }
 }

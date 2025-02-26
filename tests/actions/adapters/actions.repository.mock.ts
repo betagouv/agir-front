@@ -40,4 +40,13 @@ export class ActionsRepositoryMock implements ActionsRepository {
   ): Promise<ActionsRecommandeesDansUneThematique> {
     return Promise.resolve(this.actionsRecommandeesDansUneThematique!);
   }
+
+  recupererActionsAvecFiltre(
+    idUtilisateur: string,
+    filtresThematiques: string[],
+    titre: string,
+    filtreDejaVu: boolean,
+  ): Promise<Action[]> {
+    return Promise.resolve([]);
+  }
 }

@@ -97,4 +97,13 @@ export class ActionQuizRepositoryMock implements ActionsRepository {
   ): Promise<ActionsRecommandeesDansUneThematique> {
     throw Error('Not implemented');
   }
+
+  recupererActionsAvecFiltre(
+    idUtilisateur: string,
+    filtresThematiques: string[],
+    titre: string,
+    filtreDejaVu: boolean,
+  ): Promise<Action[]> {
+    throw Error('Not implemented');
+  }
 }

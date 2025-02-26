@@ -54,6 +54,13 @@ export interface ActionsRecommandeesDansUneThematique {
 export interface ActionsRepository {
   recupererToutesLesActions(idUtilisateur: string): Promise<Action[]>;
 
+  recupererActionsAvecFiltre(
+    idUtilisateur: string,
+    filtresThematiques: string[],
+    titre: string,
+    filtreDejaVu: boolean,
+  ): Promise<Action[]>;
+
   chargerAction(idUtilisateur: string, idAction: string, type: TypeAction): Promise<ActionDetail>;
 
   recupererActionsPersonnalisees(

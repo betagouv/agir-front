@@ -5,7 +5,8 @@
     <div class="fr-grid-row fr-grid-row--gutters">
       <div class="fr-col-md-4 fr-col-12">
         <CatalogueActionsFiltres
-          :filtres="filtres"
+          v-if="catalogueViewModel"
+          :filtres="catalogueViewModel.filtres"
           @rechercher-par-deja-vu="rechercherParDejaVu"
           @rechercher-par-titre="rechercherParTitre"
           @update-thematiques="updateThematiques"
@@ -31,18 +32,12 @@
   import CatalogueActionsFiltres from '@/components/custom/Action/Catalogue/CatalogueActionsFiltres.vue';
   import { ActionsRepositoryAxios } from '@/domaines/actions/adapters/actions.repository.axios';
   import { CatalogueActionsPresenterImpl } from '@/domaines/actions/adapters/catalogueActions.presenter.impl';
+  import { FiltrerCatalogueActionsUsecase } from '@/domaines/actions/filtrerCatalogueActions.usecase';
   import { CatalogueActionsViewModel } from '@/domaines/actions/ports/catalogueActions.presenter';
   import { RecupererCatalogueActionsUsecase } from '@/domaines/actions/recupererCatalogueActions.usecase';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const isLoading = ref<boolean>(false);
-  const filtres = [
-    {
-      id: '',
-      label: 'label',
-      checked: false,
-    },
-  ]; // vm
 
   const rechercheTitre = ref<string>('');
   const filtresThematiques = ref<string[]>([]);
@@ -59,12 +54,6 @@
     await usecase.execute(idUtilisateur, presenter);
   });
 
-  async function filtrerLaRecherche() {
-    isLoading.value = true;
-
-    isLoading.value = false;
-  }
-
   const updateThematiques = async thematiques => {
     filtresThematiques.value = thematiques;
     await filtrerLaRecherche();
@@ -79,4 +68,11 @@
     filtreDejaVu.value = checked;
     await filtrerLaRecherche();
   };
+
+  async function filtrerLaRecherche() {
+    isLoading.value = true;
+    const usecase = new FiltrerCatalogueActionsUsecase(new ActionsRepositoryAxios());
+    await usecase.execute(idUtilisateur, filtresThematiques.value, rechercheTitre.value, filtreDejaVu.value, presenter);
+    isLoading.value = false;
+  }
 </script>

@@ -44,6 +44,14 @@ export class CatalogueActionsPresenterImpl implements CatalogueActionsPresenter 
       }),
     );
 
-    this.viewModel({ actions: actionsViewModel });
+    this.viewModel({
+      actions: actionsViewModel,
+      phraseNombreActions: `??? action${actions.length > 1 ? 's' : ''}`,
+      // TODO
+      filtres: [
+        { id: 'alimentation', label: 'alimentation', checked: false },
+        { id: 'transport', label: 'transport', checked: false },
+      ],
+    });
   }
 }
