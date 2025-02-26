@@ -24,7 +24,7 @@ const compteRoutes: RouteRecordRaw[] = [
     name: RouteActionsName.CATALOGUE_ACTION,
     component: () => import('@/components/pages/PageCatalogueActions.vue'),
     meta: {
-      title: 'Catalogue Action',
+      title: "Catalogue d'actions",
     },
   },
 ];

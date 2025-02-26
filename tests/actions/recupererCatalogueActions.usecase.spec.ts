@@ -16,6 +16,7 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
         nombreDePersonnes: 0,
         nombreAidesDisponibles: 0,
         type: TypeAction.CLASSIQUE,
+        dejaVue: false,
       },
     ];
 
@@ -31,6 +32,7 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
             code: 'code-action-test',
             titre: 'Tester une nouvelle <span class="text--bold">recette végétarienne</span>',
             nombreDePersonnes: '<span class="text--bold">0</span> défi réalisé',
+            dejaVue: false,
             aidesDisponibles: undefined,
             url: {
               name: 'action-individuelle',

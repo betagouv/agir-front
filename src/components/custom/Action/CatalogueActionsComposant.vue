@@ -1,5 +1,5 @@
 <template>
-  <div class="fr-grid-row fr-grid-row--gutters fr-mt-2w">
+  <div class="fr-grid-row fr-grid-row--gutters">
     <section v-for="action in catalogueViewModel?.actions" :key="action.code" :class="cardClasses">
       <div class="fr-card fr-enlarge-link fr-card--horizontal relative">
         <div class="fr-card__body">
@@ -15,6 +15,7 @@
                 <span class="text--gris fr-pl-1w" v-html="action.aidesDisponibles" />
               </li>
             </ul>
+            {{ action.dejaVue ? 'vu' : 'pas vu' }}
           </div>
         </div>
       </div>

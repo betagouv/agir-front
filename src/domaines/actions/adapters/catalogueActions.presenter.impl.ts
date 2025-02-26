@@ -33,6 +33,7 @@ export class CatalogueActionsPresenterImpl implements CatalogueActionsPresenter 
         return {
           code: action.code,
           titre: await marked.parseInline(action.titre),
+          dejaVue: action.dejaVue,
           url: {
             name: RouteActionsName.ACTION_INDIVIDUELLE,
             params: { id: action.code, titre: buildUrl(action.titre), type: action.type },

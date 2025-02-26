@@ -18,6 +18,7 @@ export interface Action {
   nombreDePersonnes: number;
   nombreAidesDisponibles: number;
   type: TypeAction;
+  dejaVue: boolean;
 }
 
 export interface ActionDetail {

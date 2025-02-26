@@ -16,6 +16,7 @@ interface ActionApiModel {
   nombre_actions_en_cours: number;
   nombre_aides_disponibles: number;
   type: string;
+  deja_vue: boolean;
 }
 
 interface ActionDetailApiModel {
@@ -82,6 +83,7 @@ export class ActionsRepositoryAxios implements ActionsRepository {
       nombreDePersonnes: action.nombre_actions_en_cours,
       nombreAidesDisponibles: action.nombre_aides_disponibles,
       type: action.type as TypeAction,
+      dejaVue: action.deja_vue,
     }));
   }
 
@@ -105,6 +107,7 @@ export class ActionsRepositoryAxios implements ActionsRepository {
         nombreDePersonnes: action.nombre_actions_en_cours,
         nombreAidesDisponibles: action.nombre_aides_disponibles,
         type: action.type as TypeAction,
+        dejaVue: action.deja_vue,
       })),
     };
   }

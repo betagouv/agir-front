@@ -42,6 +42,7 @@ describe('Fichier de test concernant la récupération des actions personnalisé
             titre: 'Tester une nouvelle **recette végétarienne**',
             sousTitre:
               'Faites des économies et le plein de vitamines ! Cette semaine, on cuisine une recette saine et délicieuse !',
+            dejaVue: false,
             nombreDePersonnes: 0,
             nombreAidesDisponibles: 0,
             type: 'classique' as TypeAction,
@@ -63,6 +64,7 @@ describe('Fichier de test concernant la récupération des actions personnalisé
                 titre: 'Tester une nouvelle <span class="text--bold">recette végétarienne</span>',
                 nombreDePersonnes: '<span class="text--bold">0</span> défi réalisé',
                 aidesDisponibles: undefined,
+                dejaVue: false,
                 url: {
                   name: 'action-individuelle',
                   params: {
