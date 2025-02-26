@@ -44,6 +44,15 @@ export class ThematiquesRepositorySpy implements ThematiquesRepository {
     actionId: '',
   };
 
+  get supprimerActionDesActionsRecommandeesArgs(): {
+    utilisateurId: string;
+    codeThematique: string;
+    actionType: string;
+    actionId: string;
+  } {
+    return this._supprimerActionDesActionsRecommandeesArgs;
+  }
+
   async supprimerActionDesActionsRecommandees(
     utilisateurId: string,
     codeThematique: string,
