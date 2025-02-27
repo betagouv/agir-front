@@ -104,7 +104,7 @@ describe('Fichier de tests concernant le chargement du bilan carbone', () => {
       },
       {
         contentId: 'id4',
-        label: 'Consommer',
+        label: 'Mes achats',
         urlImage: 'url4',
         estTermine: true,
         pourcentageProgression: 100,
@@ -152,7 +152,7 @@ describe('Fichier de tests concernant le chargement du bilan carbone', () => {
       },
       {
         contentId: 'id4',
-        label: 'Consommer',
+        label: 'Mes achats',
         urlImage: 'url4',
         estTermine: true,
         pourcentageProgression: 100,
@@ -193,7 +193,7 @@ describe('Fichier de tests concernant le chargement du bilan carbone', () => {
       },
       {
         contentId: 'id4',
-        label: 'Consommer',
+        label: 'Mes achats',
         urlImage: 'url4',
         estTermine: true,
         pourcentageProgression: 100,
@@ -300,7 +300,7 @@ describe('Fichier de tests concernant le chargement du bilan carbone', () => {
                 unite: 'kg',
                 valeur: '450 ',
               },
-              label: 'Consommer',
+              label: 'Mes achats',
               pourcentage: 12,
             },
           ],
@@ -335,7 +335,7 @@ describe('Fichier de tests concernant le chargement du bilan carbone', () => {
             {
               contentId: 'id4',
               estTermine: true,
-              label: 'Consommer',
+              label: 'Mes achats',
               nombreTotalDeQuestion: 10,
               pourcentageProgression: 100,
               urlImage: 'url4',
@@ -431,7 +431,7 @@ describe('Fichier de tests concernant le chargement du bilan carbone', () => {
             {
               contentId: 'id4',
               estTermine: true,
-              label: 'Consommer',
+              label: 'Mes achats',
               nombreTotalDeQuestion: 10,
               pourcentageProgression: 100,
               urlImage: 'url4',
@@ -490,7 +490,7 @@ describe('Fichier de tests concernant le chargement du bilan carbone', () => {
             {
               contentId: 'id4',
               estTermine: true,
-              label: 'Consommer',
+              label: 'Mes achats',
               nombreTotalDeQuestion: 10,
               pourcentageProgression: 100,
               urlImage: 'url4',

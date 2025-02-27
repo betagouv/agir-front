@@ -47,7 +47,7 @@ describe('Fichier de test pour la récupération du score action quiz', () => {
           couleurBackground: '#FEF7F7',
           couleurBordure: '#FFCACA',
         },
-        encouragement: 'Bravo ! Nous espérons que ce quiz vous aura permis d’en apprendre d’avantage !',
+        encouragement: 'Nous espérons que ce quiz vous aura permis d’en apprendre d’avantage !',
       });
     }
   });
@@ -67,7 +67,7 @@ describe('Fichier de test pour la récupération du score action quiz', () => {
           couleurBackground: '#FCFAED',
           couleurBordure: '#E1D9AA',
         },
-        encouragement: 'Bravo ! Nous espérons que ce quiz vous aura permis d’en apprendre d’avantage !',
+        encouragement: 'Nous espérons que ce quiz vous aura permis d’en apprendre d’avantage !',
       });
     }
   });
@@ -87,7 +87,7 @@ describe('Fichier de test pour la récupération du score action quiz', () => {
           couleurBackground: '#FAFCED',
           couleurBordure: '#CBE1AA',
         },
-        encouragement: 'Bravo ! Nous espérons que ce quiz vous aura permis d’en apprendre d’avantage !',
+        encouragement: 'Nous espérons que ce quiz vous aura permis d’en apprendre d’avantage !',
       });
     }
   });

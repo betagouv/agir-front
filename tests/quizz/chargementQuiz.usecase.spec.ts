@@ -60,7 +60,7 @@ describe("Fichier de test du usecase de chargement d'un quizz", () => {
         nombreDePointsAGagner: '10',
         difficulte: 'très facile',
         thematiqueTag: {
-          label: 'Consommer',
+          label: 'Mes achats',
           style: {
             backgroundColor: '#FFE8D7',
             color: '#522E02',
