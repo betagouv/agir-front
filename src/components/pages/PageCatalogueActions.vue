@@ -13,14 +13,10 @@
         />
       </div>
 
-      <div class="fr-col-md-8 fr-col-12">
-        <h4 class="fr-h4">??? actions</h4>
+      <div class="fr-col-md-8 fr-col-12" v-if="catalogueViewModel">
+        <h4 class="fr-h4">{{ catalogueViewModel.phraseNombreActions }}</h4>
 
-        <CatalogueActionsComposant
-          v-if="catalogueViewModel"
-          :catalogue-view-model="catalogueViewModel"
-          card-classes="fr-col-12 fr-col-md-6"
-        />
+        <CatalogueActionsComposant :catalogue-view-model="catalogueViewModel" card-classes="fr-col-12 fr-col-md-6" />
       </div>
     </div>
   </section>
@@ -39,15 +35,15 @@
 
   const isLoading = ref<boolean>(false);
 
-  const rechercheTitre = ref<string>('');
-  const filtresThematiques = ref<string[]>([]);
-  const filtreDejaVu = ref<boolean>(false);
-
   const idUtilisateur = utilisateurStore().utilisateur.id;
   const catalogueViewModel = ref<CatalogueActionsViewModel>();
   const presenter = new CatalogueActionsPresenterImpl(actions => {
     catalogueViewModel.value = actions;
   });
+
+  const rechercheTitre = ref<string>('');
+  const filtresThematiques = ref<string[]>([]);
+  const filtreDejaVu = ref<boolean>(false);
 
   onMounted(async () => {
     const usecase = new RecupererCatalogueActionsUsecase(new ActionsRepositoryAxios());

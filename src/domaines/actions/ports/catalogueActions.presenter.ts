@@ -1,4 +1,4 @@
-import { Action } from '@/domaines/actions/ports/actions.repository';
+import { CatalogueActions } from '@/domaines/actions/ports/actions.repository';
 
 export interface CatalogueActionsViewModel {
   phraseNombreActions: string;
@@ -16,5 +16,5 @@ export interface CatalogueActionViewModel {
 }
 
 export interface CatalogueActionsPresenter {
-  presente(actions: Action[]): void;
+  presente(actions: CatalogueActions): void;
 }

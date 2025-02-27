@@ -15,7 +15,6 @@
                 <span class="text--gris fr-pl-1w" v-html="action.aidesDisponibles" />
               </li>
             </ul>
-            {{ action.dejaVue ? 'vu' : 'pas vu' }}
           </div>
         </div>
       </div>

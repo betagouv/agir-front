@@ -11,7 +11,7 @@ export class FiltrerCatalogueActionsUsecase {
     filtreDejaVu: boolean,
     presenter: CatalogueActionsPresenter,
   ): Promise<void> {
-    const actions = await this.actionsRepository.recupererActionsAvecFiltre(
+    const actions = await this.actionsRepository.filtrerCatalogueActions(
       idUtilisateur,
       filtresThematiques,
       titre,

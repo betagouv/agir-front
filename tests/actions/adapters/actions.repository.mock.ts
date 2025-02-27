@@ -30,7 +30,7 @@ export class ActionsRepositoryMock implements ActionsRepository {
     return Promise.resolve(this.action!);
   }
 
-  recupererToutesLesActions(): Promise<Action[]> {
+  chargerCatalogueActions(): Promise<Action[]> {
     return Promise.resolve(this.actions);
   }
 
@@ -41,7 +41,7 @@ export class ActionsRepositoryMock implements ActionsRepository {
     return Promise.resolve(this.actionsRecommandeesDansUneThematique!);
   }
 
-  recupererActionsAvecFiltre(
+  filtrerCatalogueActions(
     idUtilisateur: string,
     filtresThematiques: string[],
     titre: string,

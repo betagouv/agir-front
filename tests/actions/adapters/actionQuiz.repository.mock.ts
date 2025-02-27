@@ -87,7 +87,7 @@ export class ActionQuizRepositoryMock implements ActionsRepository {
     };
   }
 
-  recupererToutesLesActions(idUtilisateur: string): Promise<Action[]> {
+  chargerCatalogueActions(idUtilisateur: string): Promise<Action[]> {
     return Promise.resolve([]);
   }
 
@@ -98,7 +98,7 @@ export class ActionQuizRepositoryMock implements ActionsRepository {
     throw Error('Not implemented');
   }
 
-  recupererActionsAvecFiltre(
+  filtrerCatalogueActions(
     idUtilisateur: string,
     filtresThematiques: string[],
     titre: string,

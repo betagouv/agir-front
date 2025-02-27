@@ -1,4 +1,4 @@
-import { Action } from '@/domaines/actions/ports/actions.repository';
+import { CatalogueActions } from '@/domaines/actions/ports/actions.repository';
 import {
   CatalogueActionsPresenter,
   CatalogueActionsViewModel,
@@ -12,9 +12,9 @@ import { gererPluriel } from '@/shell/pluriel';
 export class CatalogueActionsPresenterImpl implements CatalogueActionsPresenter {
   constructor(private readonly viewModel: (viewModel: CatalogueActionsViewModel) => void) {}
 
-  async presente(actions: Action[]) {
-    const actionsViewModel: CatalogueActionViewModel[] = await Promise.all(
-      actions.map(async action => {
+  async presente(catalogueActions: CatalogueActions): Promise<void> {
+    const catalogueActionViewModel: CatalogueActionViewModel[] = await Promise.all(
+      catalogueActions.actions.map(async action => {
         const nombreDePersonnes = gererPluriel(
           action.nombreDePersonnes,
           `<span class="text--bold">${action.nombreDePersonnes}</span> défi réalisé`,
@@ -45,13 +45,14 @@ export class CatalogueActionsPresenterImpl implements CatalogueActionsPresenter 
     );
 
     this.viewModel({
-      actions: actionsViewModel,
-      phraseNombreActions: `??? action${actions.length > 1 ? 's' : ''}`,
+      actions: catalogueActionViewModel,
+      phraseNombreActions: `${catalogueActions.actions.length} action${catalogueActions.actions.length > 1 ? 's' : ''}`,
       // TODO
-      filtres: [
-        { id: 'alimentation', label: 'alimentation', checked: false },
-        { id: 'transport', label: 'transport', checked: false },
-      ],
+      filtres: catalogueActions.filtres.map(filtre => ({
+        id: filtre.code,
+        label: filtre.label,
+        checked: filtre.selected,
+      })),
     });
   }
 }
