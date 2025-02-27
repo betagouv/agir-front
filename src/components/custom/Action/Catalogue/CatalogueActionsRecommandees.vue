@@ -1,6 +1,6 @@
 <template>
   <div class="fr-grid-row fr-grid-row--gutters fr-mt-2w">
-    <section v-for="action in catalogueViewModel?.actions" :key="action.code" :class="cardClasses">
+    <section v-for="action in actions" :key="action.code" :class="cardClasses">
       <div v-if="!loadingActions[action.code]" class="fr-card fr-card--horizontal relative">
         <div class="fr-card__body">
           <div class="fr-card__content">
@@ -47,13 +47,13 @@
 
 <script lang="ts" setup>
   import { ref } from 'vue';
-  import { CatalogueActionsViewModel } from '@/domaines/actions/ports/catalogueActions.presenter';
+  import { ActionDuCatalogueViewModel } from '@/domaines/actions/ports/catalogueActions.presenter';
   import { ThematiquesRepositoryAxios } from '@/domaines/thematiques/adapters/thematiques.repository.axios';
   import { SupprimerActionDesActionsRecommandeesUsecase } from '@/domaines/thematiques/supprimerActionDesActionsRecommandees.usecase';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const props = defineProps<{
-    catalogueViewModel: CatalogueActionsViewModel;
+    actions: ActionDuCatalogueViewModel[];
     cardClasses: string;
     thematiqueId: string;
     rafraichirActions: () => Promise<void>;

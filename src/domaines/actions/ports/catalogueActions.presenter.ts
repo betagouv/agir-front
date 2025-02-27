@@ -3,10 +3,10 @@ import { CatalogueActions } from '@/domaines/actions/ports/actions.repository';
 export interface CatalogueActionsViewModel {
   phraseNombreActions: string;
   filtres: { id: string; label: string; checked: boolean }[];
-  actions: CatalogueActionViewModel[];
+  actions: ActionDuCatalogueViewModel[];
 }
 
-export interface CatalogueActionViewModel {
+export interface ActionDuCatalogueViewModel {
   code: string;
   titre: string;
   nombreDePersonnes?: string;
@@ -16,5 +16,5 @@ export interface CatalogueActionViewModel {
 }
 
 export interface CatalogueActionsPresenter {
-  presente(actions: CatalogueActions): void;
+  presente(catalogueActions: CatalogueActions): void;
 }

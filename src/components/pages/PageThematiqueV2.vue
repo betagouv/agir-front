@@ -30,9 +30,9 @@
         />
       </template>
 
-      <template v-else-if="actionsViewModel">
+      <template v-else-if="catalogueActionsViewModel">
         <CatalogueActionsRecommandees
-          :catalogue-view-model="actionsViewModel"
+          :actions="catalogueActionsViewModel.actions"
           :thematiqueId="thematiqueId"
           :rafraichir-actions="chargerActionsRecommandees"
           card-classes="fr-col-12 fr-col-md-6 fr-col-xl-4"
@@ -71,7 +71,7 @@
   import { utilisateurStore } from '@/store/utilisateur';
 
   const thematique = ref<Thematique>(MenuThematiques.getFromUrl(useRoute().params.id as string));
-  const actionsViewModel = ref<CatalogueActionsViewModel>();
+  const catalogueActionsViewModel = ref<CatalogueActionsViewModel>();
   const idEnchainementKycs = ref<string>();
   const isLoading = ref<boolean>(true);
 
@@ -99,7 +99,7 @@
       thematiqueId,
       new ActionsDansUneThematiquePresenterImpl(
         vm => {
-          actionsViewModel.value = vm;
+          catalogueActionsViewModel.value = vm;
           idEnchainementKycs.value = undefined;
         },
         (id: string) => {

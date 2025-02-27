@@ -2,7 +2,7 @@ import { CatalogueActions } from '@/domaines/actions/ports/actions.repository';
 import {
   CatalogueActionsPresenter,
   CatalogueActionsViewModel,
-  CatalogueActionViewModel,
+  ActionDuCatalogueViewModel,
 } from '@/domaines/actions/ports/catalogueActions.presenter';
 import { RouteActionsName } from '@/router/actions/routes';
 import marked from '@/shell/actionMarkdownToHtml';
@@ -13,7 +13,7 @@ export class CatalogueActionsPresenterImpl implements CatalogueActionsPresenter 
   constructor(private readonly viewModel: (viewModel: CatalogueActionsViewModel) => void) {}
 
   async presente(catalogueActions: CatalogueActions): Promise<void> {
-    const catalogueActionViewModel: CatalogueActionViewModel[] = await Promise.all(
+    const catalogueActionViewModel: ActionDuCatalogueViewModel[] = await Promise.all(
       catalogueActions.actions.map(async action => {
         const nombreDePersonnes = gererPluriel(
           action.nombreDePersonnes,
@@ -47,7 +47,6 @@ export class CatalogueActionsPresenterImpl implements CatalogueActionsPresenter 
     this.viewModel({
       actions: catalogueActionViewModel,
       phraseNombreActions: `${catalogueActions.actions.length} action${catalogueActions.actions.length > 1 ? 's' : ''}`,
-      // TODO
       filtres: catalogueActions.filtres.map(filtre => ({
         id: filtre.code,
         label: filtre.label,
