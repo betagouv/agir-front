@@ -3,6 +3,7 @@ import {
   ActionDetail,
   ActionsRecommandeesDansUneThematique,
   ActionsRepository,
+  CatalogueActions,
 } from '@/domaines/actions/ports/actions.repository';
 
 export class ActionsRepositoryMock implements ActionsRepository {
@@ -10,6 +11,7 @@ export class ActionsRepositoryMock implements ActionsRepository {
     private readonly actions: Action[],
     private readonly action?: ActionDetail,
     private readonly actionsRecommandeesDansUneThematique?: ActionsRecommandeesDansUneThematique,
+    private readonly catalogueActions?: CatalogueActions,
   ) {}
 
   static avecActionDetail(actionDetail: ActionDetail): ActionsRepositoryMock {
@@ -18,6 +20,10 @@ export class ActionsRepositoryMock implements ActionsRepository {
 
   static avecActions(actions: Action[]): ActionsRepositoryMock {
     return new ActionsRepositoryMock(actions, undefined);
+  }
+
+  static avecCatalogue(catalogue: CatalogueActions): ActionsRepositoryMock {
+    return new ActionsRepositoryMock([], undefined, undefined, catalogue);
   }
 
   static avecActionsRecommandeesDansUneThematique(
@@ -30,15 +36,8 @@ export class ActionsRepositoryMock implements ActionsRepository {
     return Promise.resolve(this.action!);
   }
 
-  chargerCatalogueActions(): Promise<Action[]> {
-    return Promise.resolve(this.actions);
-  }
-
-  recupererActionsPersonnalisees(
-    idUtilisateur: string,
-    thematiqueId: string,
-  ): Promise<ActionsRecommandeesDansUneThematique> {
-    return Promise.resolve(this.actionsRecommandeesDansUneThematique!);
+  chargerCatalogueActions(): Promise<CatalogueActions> {
+    return Promise.resolve(this.catalogueActions!);
   }
 
   filtrerCatalogueActions(
@@ -46,7 +45,14 @@ export class ActionsRepositoryMock implements ActionsRepository {
     filtresThematiques: string[],
     titre: string,
     filtreDejaVu: boolean,
-  ): Promise<Action[]> {
-    return Promise.resolve([]);
+  ): Promise<CatalogueActions> {
+    return Promise.resolve(this.catalogueActions!);
+  }
+
+  recupererActionsPersonnalisees(
+    idUtilisateur: string,
+    thematiqueId: string,
+  ): Promise<ActionsRecommandeesDansUneThematique> {
+    return Promise.resolve(this.actionsRecommandeesDansUneThematique!);
   }
 }

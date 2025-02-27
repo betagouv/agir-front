@@ -1,3 +1,4 @@
+import { ActionsPresenter } from '@/domaines/actions/ports/actions.presenter';
 import { ActionsRepository } from '@/domaines/actions/ports/actions.repository';
 import { CatalogueActionsPresenter } from '@/domaines/actions/ports/catalogueActions.presenter';
 
@@ -9,14 +10,16 @@ export class FiltrerCatalogueActionsUsecase {
     filtresThematiques: string[],
     titre: string,
     filtreDejaVu: boolean,
-    presenter: CatalogueActionsPresenter,
+    catalogueActionsPresenter: CatalogueActionsPresenter,
+    actionsPresenter: ActionsPresenter,
   ): Promise<void> {
-    const actions = await this.actionsRepository.filtrerCatalogueActions(
+    const catalogue = await this.actionsRepository.filtrerCatalogueActions(
       idUtilisateur,
       filtresThematiques,
       titre,
       filtreDejaVu,
     );
-    presenter.presente(actions);
+    catalogueActionsPresenter.presente(catalogue);
+    actionsPresenter.presente(catalogue.actions);
   }
 }

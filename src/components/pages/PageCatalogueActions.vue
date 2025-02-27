@@ -84,6 +84,7 @@
       rechercheTitre.value,
       filtreDejaVu.value,
       catalogueActionsPresenter,
+      actionsPresenter,
     );
     isLoading.value = false;
   }

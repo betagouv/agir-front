@@ -3,7 +3,7 @@ import { ActionsRepositoryMock } from './adapters/actions.repository.mock';
 import { ActionsDansUneThematiquePresenterImpl } from '@/domaines/actions/adapters/actionsDansUneThematique.presenter.impl';
 import { expect } from 'vitest';
 import { TypeAction } from '@/domaines/actions/ports/actions.repository';
-import { CatalogueActionsViewModel } from '@/domaines/actions/ports/catalogueActions.presenter';
+import { ActionViewModel } from '@/domaines/actions/ports/actions.presenter';
 
 describe('Fichier de test concernant la récupération des actions personnalisées', () => {
   it("Quand la personnalisation n'est pas faite doit presenter le fait de personnaliser avec le bon enchainement de kycs", async () => {
@@ -57,27 +57,23 @@ describe('Fichier de test concernant la récupération des actions personnalisé
       'thematiqueId',
       new ActionsDansUneThematiquePresenterImpl(
         actions => {
-          expect(actions).toStrictEqual<CatalogueActionsViewModel>({
-            actions: [
-              {
-                code: 'code-action-test',
-                titre: 'Tester une nouvelle <span class="text--bold">recette végétarienne</span>',
-                nombreDePersonnes: '<span class="text--bold">0</span> défi réalisé',
-                aidesDisponibles: undefined,
-                dejaVue: false,
-                url: {
-                  name: 'action-individuelle',
-                  params: {
-                    id: 'code-action-test',
-                    titre: 'tester-une-nouvelle-recette-vegetarienne',
-                    type: TypeAction.CLASSIQUE,
-                  },
+          expect(actions).toStrictEqual<ActionViewModel[]>([
+            {
+              code: 'code-action-test',
+              titre: 'Tester une nouvelle <span class="text--bold">recette végétarienne</span>',
+              nombreDePersonnes: '<span class="text--bold">0</span> défi réalisé',
+              aidesDisponibles: undefined,
+              dejaVue: false,
+              url: {
+                name: 'action-individuelle',
+                params: {
+                  id: 'code-action-test',
+                  titre: 'tester-une-nouvelle-recette-vegetarienne',
+                  type: TypeAction.CLASSIQUE,
                 },
               },
-            ],
-            phraseNombreActions: '',
-            filtres: [],
-          });
+            },
+          ]);
         },
         idEnchainementKYCs => {
           expect(idEnchainementKYCs).toStrictEqual('');
