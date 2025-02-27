@@ -1,6 +1,6 @@
 <template>
   <div class="fr-grid-row fr-grid-row--gutters">
-    <section v-for="action in catalogueViewModel?.actions" :key="action.code" :class="cardClasses">
+    <section v-for="action in actions" :key="action.code" :class="cardClasses">
       <div class="fr-card fr-enlarge-link fr-card--horizontal relative">
         <div class="fr-card__body">
           <div class="fr-card__content">
@@ -23,10 +23,10 @@
 </template>
 
 <script lang="ts" setup>
-  import { CatalogueActionsViewModel } from '@/domaines/actions/ports/catalogueActions.presenter';
+  import { ActionViewModel } from '@/domaines/actions/ports/actions.presenter';
 
   defineProps<{
-    catalogueViewModel: CatalogueActionsViewModel;
+    actions: ActionViewModel[];
     cardClasses: string;
   }>();
 </script>

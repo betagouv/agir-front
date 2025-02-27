@@ -47,13 +47,13 @@
 
 <script lang="ts" setup>
   import { ref } from 'vue';
-  import { ActionDuCatalogueViewModel } from '@/domaines/actions/ports/catalogueActions.presenter';
+  import { ActionViewModel } from '@/domaines/actions/ports/actions.presenter';
   import { ThematiquesRepositoryAxios } from '@/domaines/thematiques/adapters/thematiques.repository.axios';
   import { SupprimerActionDesActionsRecommandeesUsecase } from '@/domaines/thematiques/supprimerActionDesActionsRecommandees.usecase';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const props = defineProps<{
-    actions: ActionDuCatalogueViewModel[];
+    actions: ActionViewModel[];
     cardClasses: string;
     thematiqueId: string;
     rafraichirActions: () => Promise<void>;

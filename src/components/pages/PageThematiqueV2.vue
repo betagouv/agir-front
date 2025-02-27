@@ -30,9 +30,9 @@
         />
       </template>
 
-      <template v-else-if="catalogueActionsViewModel">
+      <template v-else-if="actionsViewModel">
         <CatalogueActionsRecommandees
-          :actions="catalogueActionsViewModel.actions"
+          :actions="actionsViewModel"
           :thematiqueId="thematiqueId"
           :rafraichir-actions="chargerActionsRecommandees"
           card-classes="fr-col-12 fr-col-md-6 fr-col-xl-4"
@@ -61,7 +61,7 @@
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import { ActionsRepositoryAxios } from '@/domaines/actions/adapters/actions.repository.axios';
   import { ActionsDansUneThematiquePresenterImpl } from '@/domaines/actions/adapters/actionsDansUneThematique.presenter.impl';
-  import { CatalogueActionsViewModel } from '@/domaines/actions/ports/catalogueActions.presenter';
+  import { ActionViewModel } from '@/domaines/actions/ports/actions.presenter';
   import { RecupererActionsPersonnaliseesUsecase } from '@/domaines/actions/recupererActionsPersonnalisees.usecase';
   import { ThematiquesRepositoryAxios } from '@/domaines/thematiques/adapters/thematiques.repository.axios';
   import { ClefThematiqueAPI, MenuThematiques, Thematique } from '@/domaines/thematiques/MenuThematiques';
@@ -71,7 +71,7 @@
   import { utilisateurStore } from '@/store/utilisateur';
 
   const thematique = ref<Thematique>(MenuThematiques.getFromUrl(useRoute().params.id as string));
-  const catalogueActionsViewModel = ref<CatalogueActionsViewModel>();
+  const actionsViewModel = ref<ActionViewModel[]>();
   const idEnchainementKycs = ref<string>();
   const isLoading = ref<boolean>(true);
 
@@ -99,7 +99,7 @@
       thematiqueId,
       new ActionsDansUneThematiquePresenterImpl(
         vm => {
-          catalogueActionsViewModel.value = vm;
+          actionsViewModel.value = vm;
           idEnchainementKycs.value = undefined;
         },
         (id: string) => {
