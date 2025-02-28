@@ -11,7 +11,7 @@ describe('Composant dédié au formulaire KYC', () => {
         id: 'KYC_entier',
         libelle: 'Quel est votre âge ?',
         type: 'entier',
-        reponses_possibles: [{ id: '0', label: '0' }],
+        reponses_possibles: [{ id: '0', label: '' }],
         points: '5',
         aDejaEteRepondu: false,
         description: 'Description',
@@ -33,9 +33,6 @@ describe('Composant dédié au formulaire KYC', () => {
       page = render(KYCForm, {
         props: entierProps,
       });
-
-      const input = page.getByRole('textbox', { name: 'Quel est votre âge ? Nombre uniquement' });
-      await fireEvent.update(input, '');
 
       const bouton = page.getByRole('button', { name: 'continuer' });
       await fireEvent.click(bouton);
@@ -202,7 +199,7 @@ describe('Composant dédié au formulaire KYC', () => {
         reponses_possibles: [
           {
             id: '0',
-            label: '0',
+            label: '',
           },
         ],
         points: '5',
@@ -225,9 +222,6 @@ describe('Composant dédié au formulaire KYC', () => {
       page = render(KYCForm, {
         props: libreProps,
       });
-
-      const input = page.getByRole('textbox', { name: 'Votre réponse' });
-      await fireEvent.update(input, '');
 
       const bouton = page.getByRole('button', { name: 'continuer' });
       await fireEvent.click(bouton);

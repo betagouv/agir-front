@@ -1,19 +1,11 @@
 <template>
   <form @submit.prevent="validerLaReponse()">
     <div v-if="questionViewModel.type === 'entier'" class="fr-input-group">
-      <InputNumeric
-        :id="questionViewModel.id"
-        :default-value="questionViewModel.reponses_possibles[0].label"
-        :label="{
-          wording: questionViewModel.libelle,
-          cssModifier: 'fr-h4',
-        }"
-        @update:modelValue="(valeur: string) => (reponse = valeur)"
-      />
+      <KYCEntier :question-view-model="questionViewModel" :modifier-valeur="(valeur: string) => (reponse = valeur)" />
     </div>
     <div v-if="questionViewModel.type === 'mosaic_boolean'">
       <KYCMosaic
-        v-model="reponse"
+        v-model="reponse as string[]"
         :legende="questionViewModel.libelle"
         :name="questionViewModel.id"
         :options="
@@ -28,45 +20,17 @@
       />
     </div>
     <div v-if="questionViewModel.type === 'choix_unique'" class="fr-input-group fr-mb-0">
-      <BoutonRadio
-        v-model="reponse"
-        :default-value="questionViewModel.reponses_possibles.filter(r => r.checked)[0]?.id"
-        :legende="questionViewModel.libelle"
-        :name="questionViewModel.id"
-        :options="
-          questionViewModel.reponses_possibles.map((reponsePossible: ReponsePossibleViewModel) => ({
-            label: reponsePossible.label,
-            value: reponsePossible.id,
-          }))
-        "
-        class="fr-mb-0"
-        col=""
-        legende-size="l"
-        orientation="vertical"
-      />
+      <KYCChoixUnique v-model="reponse as string" :question-view-model="questionViewModel" />
     </div>
     <div v-if="questionViewModel.type === 'choix_multiple'" class="fr-input-group">
-      <h2 :class="styleDuTitre ? styleDuTitre : 'fr-h4 fr-mb-2w'">
-        {{ questionViewModel.libelle }}
-      </h2>
-      <InputCheckbox
-        v-model="reponse"
-        :est-resetable="true"
-        :options="
-          questionViewModel.reponses_possibles.map(reponsePossible => ({
-            id: reponsePossible.id,
-            label: reponsePossible.label,
-            checked: reponsePossible.checked,
-          }))
-        "
+      <KYCChoixMultiple
+        v-model="reponse as string[]"
+        :question-view-model="questionViewModel"
+        :style-du-titre="styleDuTitre"
       />
     </div>
     <div v-if="questionViewModel.type === 'libre'" class="fr-input-group">
-      <h2 :class="styleDuTitre ? styleDuTitre : 'fr-h4 fr-mb-2w'">
-        {{ questionViewModel.libelle }}
-      </h2>
-      <label class="fr-label" for="reponse">Votre réponse</label>
-      <textarea id="reponse" v-model="reponse" class="fr-input" name="reponse" />
+      <KYCLibre v-model="reponse as string" :question-view-model="questionViewModel" :style-du-titre="styleDuTitre" />
     </div>
 
     <Alert
@@ -94,15 +58,13 @@
 <script lang="ts" setup>
   import { onMounted, ref, watch } from 'vue';
   import Alert from '@/components/custom/Alert.vue';
-  import BoutonRadio from '@/components/custom/BoutonRadio.vue';
-  import InputNumeric from '@/components/custom/Form/InputNumeric.vue';
-  import InputCheckbox from '@/components/custom/InputCheckbox.vue';
-  import KYCMosaic from '@/components/custom/KYC/KYCMosaic.vue';
+  import KYCChoixMultiple from '@/components/custom/KYC/KYCTypes/KYCChoixMultiple.vue';
+  import KYCChoixUnique from '@/components/custom/KYC/KYCTypes/KYCChoixUnique.vue';
+  import KYCEntier from '@/components/custom/KYC/KYCTypes/KYCEntier.vue';
+  import KYCLibre from '@/components/custom/KYC/KYCTypes/KYCLibre.vue';
+  import KYCMosaic from '@/components/custom/KYC/KYCTypes/KYCMosaic.vue';
   import { useAlerte } from '@/composables/useAlerte';
-  import {
-    QuestionViewModel,
-    ReponsePossibleViewModel,
-  } from '@/domaines/kyc/adapters/listeQuestionsThematique.presenter.impl';
+  import { QuestionViewModel } from '@/domaines/kyc/adapters/listeQuestionsThematique.presenter.impl';
   import { QuestionRepositoryAxios } from '@/domaines/kyc/adapters/question.repository.axios';
   import { EnvoyerReponseUsecase } from '@/domaines/kyc/envoyerReponse.usecase';
   import { EnvoyerReponsesMultiplesUsecase } from '@/domaines/kyc/envoyerReponsesMultiples.usecase';
