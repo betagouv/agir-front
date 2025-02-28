@@ -29,91 +29,118 @@ describe('Composant dédié au formulaire KYC', () => {
       expect(page.getByRole('button', { name: 'continuer' })).toBeDefined();
     });
 
-    describe('Type mosaic_boolean', () => {
-      const mosaicBooleanProps = {
-        questionViewModel: {
-          id: 'KYC_mosaicBool',
-          libelle: 'Quel meuble avez-vous ?',
-          type: 'mosaic_boolean',
-          reponses_possibles: [
-            {
-              id: 'KYC_1',
-              label: 'Armoire',
-              emoji: undefined,
-              checked: false,
-            },
-            {
-              id: 'KYC_2',
-              label: 'Etagere',
-              emoji: undefined,
-              checked: false,
-            },
-          ],
-          points: '5',
-          aDejaEteRepondu: false,
-          description: 'Description',
-        } as QuestionViewModel,
-        wordingBouton: 'continuer',
-      };
-
-      it('devrait afficher des checkbox et un bouton pour "aucune de ces propositions"', () => {
-        page = render(KYCForm, {
-          props: mosaicBooleanProps,
-        });
-
-        expect(page.getByRole('checkbox', { name: 'Armoire' })).toBeDefined();
-        expect(page.getByRole('checkbox', { name: 'Etagere' })).toBeDefined();
-
-        expect(page.getByRole('button', { name: 'continuer' })).toBeDefined();
-        expect(page.getByRole('button', { name: 'Aucune de ces propositions' })).toBeDefined();
+    it("devrait afficher une alerte si aucune réponse n'est sélectionnée", async () => {
+      page = render(KYCForm, {
+        props: entierProps,
       });
+
+      const input = page.getByRole('textbox', { name: 'Quel est votre âge ? Nombre uniquement' });
+      await fireEvent.update(input, '');
+
+      const bouton = page.getByRole('button', { name: 'continuer' });
+      await fireEvent.click(bouton);
+
+      const alertMessage = page.getByRole('alert').textContent;
+      expect(alertMessage).toEqual('Erreur: Veuillez sélectionner une réponse pour continuer');
+    });
+  });
+
+  describe('Type mosaic_boolean', () => {
+    const mosaicBooleanProps = {
+      questionViewModel: {
+        id: 'KYC_mosaicBool',
+        libelle: 'Quel meuble avez-vous ?',
+        type: 'mosaic_boolean',
+        reponses_possibles: [
+          {
+            id: 'KYC_1',
+            label: 'Armoire',
+            emoji: undefined,
+            checked: false,
+          },
+          {
+            id: 'KYC_2',
+            label: 'Etagere',
+            emoji: undefined,
+            checked: false,
+          },
+        ],
+        points: '5',
+        aDejaEteRepondu: false,
+        description: 'Description',
+      } as QuestionViewModel,
+      wordingBouton: 'continuer',
+    };
+
+    it('devrait afficher des checkbox et un bouton pour "aucune de ces propositions"', () => {
+      page = render(KYCForm, {
+        props: mosaicBooleanProps,
+      });
+
+      expect(page.getByRole('checkbox', { name: 'Armoire' })).toBeDefined();
+      expect(page.getByRole('checkbox', { name: 'Etagere' })).toBeDefined();
+
+      expect(page.getByRole('button', { name: 'continuer' })).toBeDefined();
+      expect(page.getByRole('button', { name: 'Aucune de ces propositions' })).toBeDefined();
     });
 
-    describe('Type choix_unique', () => {
-      const uniqueProps = {
-        questionViewModel: {
-          id: 'KYC_choixUnique',
-          libelle: 'Quel meuble choisissez-vous ?',
-          type: 'choix_unique',
-          reponses_possibles: [
-            {
-              id: 'KYC_1',
-              label: 'Armoire',
-            },
-            {
-              id: 'KYC_2',
-              label: 'Etagere',
-            },
-          ],
-          points: '5',
-          aDejaEteRepondu: false,
-          description: 'Description',
-        } as QuestionViewModel,
-        wordingBouton: 'continuer',
-      };
-
-      it('devrait afficher des radios buttons et un bouton pour continuer', () => {
-        page = render(KYCForm, {
-          props: uniqueProps,
-        });
-
-        expect(page.getByRole('radio', { name: 'Armoire' })).toBeDefined();
-        expect(page.getByRole('radio', { name: 'Etagere' })).toBeDefined();
-
-        expect(page.getByRole('button', { name: 'continuer' })).toBeDefined();
+    it("devrait afficher une alerte si aucune réponse n'est sélectionnée", async () => {
+      page = render(KYCForm, {
+        props: mosaicBooleanProps,
       });
 
-      it("devrait afficher une alerte si aucune réponse n'est sélectionnée", async () => {
-        page = render(KYCForm, {
-          props: uniqueProps,
-        });
+      const bouton = page.getByRole('button', { name: 'continuer' });
+      await fireEvent.click(bouton);
 
-        const bouton = page.getByRole('button', { name: 'continuer' });
-        await fireEvent.click(bouton);
+      const alertMessage = page.getByRole('alert').textContent;
+      expect(alertMessage).toEqual('Erreur: Veuillez sélectionner une réponse pour continuer');
+    });
+  });
 
-        const alertMessage = page.getByRole('alert').textContent;
-        expect(alertMessage).toEqual('Erreur: Veuillez sélectionner une réponse pour continuer');
+  describe('Type choix_unique', () => {
+    const uniqueProps = {
+      questionViewModel: {
+        id: 'KYC_choixUnique',
+        libelle: 'Quel meuble choisissez-vous ?',
+        type: 'choix_unique',
+        reponses_possibles: [
+          {
+            id: 'KYC_1',
+            label: 'Armoire',
+          },
+          {
+            id: 'KYC_2',
+            label: 'Etagere',
+          },
+        ],
+        points: '5',
+        aDejaEteRepondu: false,
+        description: 'Description',
+      } as QuestionViewModel,
+      wordingBouton: 'continuer',
+    };
+
+    it('devrait afficher des radios buttons et un bouton pour continuer', () => {
+      page = render(KYCForm, {
+        props: uniqueProps,
       });
+
+      expect(page.getByRole('radio', { name: 'Armoire' })).toBeDefined();
+      expect(page.getByRole('radio', { name: 'Etagere' })).toBeDefined();
+
+      expect(page.getByRole('button', { name: 'continuer' })).toBeDefined();
+    });
+
+    it("devrait afficher une alerte si aucune réponse n'est sélectionnée", async () => {
+      page = render(KYCForm, {
+        props: uniqueProps,
+      });
+
+      const bouton = page.getByRole('button', { name: 'continuer' });
+      await fireEvent.click(bouton);
+
+      const alertMessage = page.getByRole('alert').textContent;
+      expect(alertMessage).toEqual('Erreur: Veuillez sélectionner une réponse pour continuer');
     });
   });
 
@@ -199,7 +226,9 @@ describe('Composant dédié au formulaire KYC', () => {
         props: libreProps,
       });
 
-      console.log(page.getByRole('textbox', { name: 'Votre réponse' }));
+      const input = page.getByRole('textbox', { name: 'Votre réponse' });
+      await fireEvent.update(input, '');
+
       const bouton = page.getByRole('button', { name: 'continuer' });
       await fireEvent.click(bouton);
 
