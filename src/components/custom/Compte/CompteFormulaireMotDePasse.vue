@@ -24,7 +24,7 @@
 <script setup lang="ts">
   import { ref } from 'vue';
   import Alert from '@/components/custom/Alert.vue';
-  import InputPassword from '@/components/custom/InputPassword.vue';
+  import InputPassword from '@/components/custom/Form/InputPassword.vue';
   import { useAlerte } from '@/composables/useAlerte';
   import { CompteUtilisateurRepositoryImpl } from '@/domaines/compte/adapters/compteUtilisateur.repository.impl';
   import { ChangerMotDePasseDepuisLeCompteUsecase } from '@/domaines/compte/changerMotDePasseDepuisLeCompte.usecase';

@@ -15,7 +15,7 @@
   />
 </template>
 <script setup lang="ts">
-  import InputCheckbox from '@/components/custom/InputCheckbox.vue';
+  import InputCheckbox from '@/components/custom/Form/InputCheckbox.vue';
   import { QuestionViewModel } from '@/domaines/kyc/adapters/listeQuestionsThematique.presenter.impl';
 
   defineProps<{ questionViewModel: QuestionViewModel; styleDuTitre?: string }>();

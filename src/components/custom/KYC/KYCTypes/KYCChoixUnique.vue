@@ -1,5 +1,5 @@
 <template>
-  <BoutonRadio
+  <BoutonsRadio
     v-model="reponse"
     :default-value="questionViewModel.reponses_possibles.filter(r => r.checked)[0]?.id"
     :legende="questionViewModel.libelle"
@@ -18,7 +18,7 @@
 </template>
 
 <script setup lang="ts">
-  import BoutonRadio from '@/components/custom/BoutonRadio.vue';
+  import BoutonsRadio from '@/components/custom/Form/BoutonsRadio.vue';
   import {
     QuestionViewModel,
     ReponsePossibleViewModel,

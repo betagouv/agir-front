@@ -71,7 +71,7 @@
   import { onMounted, ref } from 'vue';
   import AidesResultat from '@/components/custom/Aides/AidesResultat.vue';
   import AsideAideVelo from '@/components/custom/Aides/AidesVeloAside.vue';
-  import InputNumberVertical from '@/components/custom/InputNumberVertical.vue';
+  import InputNumberVertical from '@/components/custom/Form/InputNumberVertical.vue';
   import ServiceSelect from '@/components/custom/Service/ServiceSelect.vue';
   import CarteSkeleton from '@/components/custom/Skeleton/CarteSkeleton.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';

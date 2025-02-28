@@ -1,6 +1,6 @@
 <template>
   <form @submit.prevent="validerLaReponse">
-    <BoutonRadio
+    <BoutonsRadio
       :options="questions"
       :legende="question"
       legende-size="l"
@@ -26,7 +26,7 @@
 <script setup lang="ts">
   import { computed, ref } from 'vue';
   import Alert from '@/components/custom/Alert.vue';
-  import BoutonRadio from '@/components/custom/BoutonRadio.vue';
+  import BoutonsRadio from '@/components/custom/Form/BoutonsRadio.vue';
   import { useAlerte } from '@/composables/useAlerte';
 
   defineProps<{
