@@ -9,10 +9,11 @@ export class DeconnecterUtilisateurUsecase {
 
   async execute(utilisateurId: string, postDeconnexionUrlCallBack: (url: string) => void): Promise<void> {
     const deconnexion = await this.utilisateurRepository.deconnecterUtilisateur(utilisateurId);
+    this.sessionRepository.deconnecterUtilisateur();
+
     if (deconnexion.doitSeDeconnecterDeFranceConnect) {
       postDeconnexionUrlCallBack(deconnexion.urlDeDeconnexion);
     } else {
-      this.sessionRepository.deconnecterUtilisateur();
       postDeconnexionUrlCallBack('/');
     }
   }
