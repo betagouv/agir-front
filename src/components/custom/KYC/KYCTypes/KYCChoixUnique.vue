@@ -25,5 +25,5 @@
   } from '@/domaines/kyc/adapters/listeQuestionsThematique.presenter.impl';
 
   defineProps<{ questionViewModel: QuestionViewModel }>();
-  const reponse = defineModel<string>();
+  const reponse = defineModel<string[]>();
 </script>

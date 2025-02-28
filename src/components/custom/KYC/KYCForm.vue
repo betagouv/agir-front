@@ -1,36 +1,33 @@
 <template>
   <form @submit.prevent="validerLaReponse()">
-    <div v-if="questionViewModel.type === 'entier'" class="fr-input-group">
-      <KYCEntier :question-view-model="questionViewModel" :modifier-valeur="(valeur: string) => (reponse = valeur)" />
-    </div>
-    <div v-if="questionViewModel.type === 'mosaic_boolean'">
-      <KYCMosaic
-        v-model="reponse as string[]"
-        :legende="questionViewModel.libelle"
-        :name="questionViewModel.id"
-        :options="
-          questionViewModel.reponses_possibles.map(reponsePossible => ({
-            label: reponsePossible.label,
-            value: reponsePossible.id,
-            picto: reponsePossible.picto,
-            emoji: reponsePossible.emoji,
-            checked: reponsePossible.checked,
-          }))
-        "
+    <div class="fr-input-group">
+      <KYCEntier
+        v-if="questionViewModel.type === 'entier'"
+        v-model="reponse as string"
+        :question-view-model="questionViewModel"
       />
-    </div>
-    <div v-if="questionViewModel.type === 'choix_unique'" class="fr-input-group fr-mb-0">
-      <KYCChoixUnique v-model="reponse as string" :question-view-model="questionViewModel" />
-    </div>
-    <div v-if="questionViewModel.type === 'choix_multiple'" class="fr-input-group">
+      <KYCMosaic
+        v-if="questionViewModel.type === 'mosaic_boolean'"
+        v-model="reponse as string[]"
+        :question-view-model="questionViewModel"
+      />
+      <KYCChoixUnique
+        v-if="questionViewModel.type === 'choix_unique'"
+        v-model="reponse as string[]"
+        :question-view-model="questionViewModel"
+      />
       <KYCChoixMultiple
+        v-if="questionViewModel.type === 'choix_multiple'"
         v-model="reponse as string[]"
         :question-view-model="questionViewModel"
         :style-du-titre="styleDuTitre"
       />
-    </div>
-    <div v-if="questionViewModel.type === 'libre'" class="fr-input-group">
-      <KYCLibre v-model="reponse as string" :question-view-model="questionViewModel" :style-du-titre="styleDuTitre" />
+      <KYCLibre
+        v-if="questionViewModel.type === 'libre'"
+        v-model="reponse as string"
+        :question-view-model="questionViewModel"
+        :style-du-titre="styleDuTitre"
+      />
     </div>
 
     <Alert
@@ -71,24 +68,26 @@
   import { ToDoListEventBusImpl } from '@/domaines/toDoList/toDoListEventBusImpl';
   import { utilisateurStore } from '@/store/utilisateur';
 
+  const reponse = defineModel<string | string[]>('reponse');
   const props = defineProps<{ questionViewModel: QuestionViewModel; wordingBouton: string; styleDuTitre?: string }>();
-  const questionViewModel = ref<QuestionViewModel>(props.questionViewModel);
-  const reponse = defineModel<string | string[]>('reponse', { default: '' });
-  const estIncomplet = ref<boolean>(true);
   const emit = defineEmits<{ (e: 'update:soumissionKyc', value: string[]): void }>();
+
+  const questionViewModel = ref<QuestionViewModel>(props.questionViewModel);
   const { alerte, afficherAlerte } = useAlerte();
+
   onMounted(() => {
     reponse.value =
       props.questionViewModel.type === 'libre' || props.questionViewModel.type === 'entier'
-        ? props.questionViewModel.reponses_possibles[0].label
-        : props.questionViewModel.reponses_possibles.filter(r => r.checked).map(r => r.id);
+        ? (props.questionViewModel.reponses_possibles[0].label ?? '')
+        : (props.questionViewModel.reponses_possibles.filter(r => r.checked).map(r => r.id) ?? []);
   });
 
+  const estIncomplet = ref<boolean>(true);
   watch(reponse, () => {
     estIncomplet.value =
       props.questionViewModel.type === 'libre' || props.questionViewModel.type === 'entier'
         ? !reponse.value
-        : reponse.value.length === 0;
+        : reponse.value!.length === 0;
   });
 
   const validerLaReponse = async () => {
@@ -110,7 +109,7 @@
         props.questionViewModel.id,
         props.questionViewModel.reponses_possibles.map(r => ({
           code: r.id,
-          boolean_value: reponse.value.includes(r.id),
+          boolean_value: reponse.value!.includes(r.id),
         })),
       );
     } else {
