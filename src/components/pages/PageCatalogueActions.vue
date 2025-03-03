@@ -5,16 +5,16 @@
     <div class="fr-grid-row fr-grid-row--gutters">
       <div class="fr-col-md-4 fr-col-12">
         <CatalogueActionsFiltres
-          v-if="catalogueViewModel"
-          :filtres="catalogueViewModel.filtres"
+          v-if="filtresViewModel"
+          :filtres="filtresViewModel.filtres"
           @rechercher-par-deja-vu="rechercherParDejaVu"
           @rechercher-par-titre="rechercherParTitre"
           @update-thematiques="updateThematiques"
         />
       </div>
 
-      <div class="fr-col-md-8 fr-col-12" v-if="catalogueViewModel">
-        <h4 class="fr-h4">{{ catalogueViewModel.phraseNombreActions }}</h4>
+      <div v-if="filtresViewModel" class="fr-col-md-8 fr-col-12">
+        <h4 class="fr-h4">{{ filtresViewModel.phraseNombreActions }}</h4>
 
         <CatalogueActionsComposant
           v-if="actionsViewModel"
@@ -30,12 +30,11 @@
   import { onMounted, ref } from 'vue';
   import CatalogueActionsComposant from '@/components/custom/Action/Catalogue/CatalogueActionsComposant.vue';
   import CatalogueActionsFiltres from '@/components/custom/Action/Catalogue/CatalogueActionsFiltres.vue';
-  import { ActionsPresenterImpl } from '@/domaines/actions/adapters/actions.presenter.impl';
   import { ActionsRepositoryAxios } from '@/domaines/actions/adapters/actions.repository.axios';
   import { CatalogueActionsPresenterImpl } from '@/domaines/actions/adapters/catalogueActions.presenter.impl';
   import { FiltrerCatalogueActionsUsecase } from '@/domaines/actions/filtrerCatalogueActions.usecase';
   import { ActionViewModel } from '@/domaines/actions/ports/actions.presenter';
-  import { CatalogueActionsViewModel } from '@/domaines/actions/ports/catalogueActions.presenter';
+  import { FiltresCatalogueActionsViewModel } from '@/domaines/actions/ports/catalogueActions.presenter';
   import { RecupererCatalogueActionsUsecase } from '@/domaines/actions/recupererCatalogueActions.usecase';
   import { utilisateurStore } from '@/store/utilisateur';
 
@@ -43,13 +42,15 @@
 
   const idUtilisateur = utilisateurStore().utilisateur.id;
   const actionsViewModel = ref<ActionViewModel[]>();
-  const catalogueViewModel = ref<CatalogueActionsViewModel>();
-  const catalogueActionsPresenter = new CatalogueActionsPresenterImpl(catalogue => {
-    catalogueViewModel.value = catalogue;
-  });
-  const actionsPresenter = new ActionsPresenterImpl(actions => {
-    actionsViewModel.value = actions;
-  });
+  const filtresViewModel = ref<FiltresCatalogueActionsViewModel>();
+  const catalogueActionsPresenter = new CatalogueActionsPresenterImpl(
+    filtres => {
+      filtresViewModel.value = filtres;
+    },
+    actions => {
+      actionsViewModel.value = actions;
+    },
+  );
 
   const rechercheTitre = ref<string>('');
   const filtresThematiques = ref<string[]>([]);
@@ -57,7 +58,7 @@
 
   onMounted(async () => {
     const usecase = new RecupererCatalogueActionsUsecase(new ActionsRepositoryAxios());
-    await usecase.execute(idUtilisateur, catalogueActionsPresenter, actionsPresenter);
+    await usecase.execute(idUtilisateur, catalogueActionsPresenter);
   });
 
   const updateThematiques = async thematiques => {
@@ -84,7 +85,6 @@
       rechercheTitre.value,
       filtreDejaVu.value,
       catalogueActionsPresenter,
-      actionsPresenter,
     );
     isLoading.value = false;
   }

@@ -1,10 +1,9 @@
 import { ActionsRepositoryMock } from './adapters/actions.repository.mock';
 import { RecupererCatalogueActionsUsecase } from '@/domaines/actions/recupererCatalogueActions.usecase';
 import { CatalogueActionsPresenterImpl } from '@/domaines/actions/adapters/catalogueActions.presenter.impl';
-import { CatalogueActionsViewModel } from '@/domaines/actions/ports/catalogueActions.presenter';
+import { FiltresCatalogueActionsViewModel } from '@/domaines/actions/ports/catalogueActions.presenter';
 import { Action, CatalogueActions, TypeAction } from '@/domaines/actions/ports/actions.repository';
 import { ActionViewModel } from '@/domaines/actions/ports/actions.presenter';
-import { ActionsPresenterImpl } from '@/domaines/actions/adapters/actions.presenter.impl';
 import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 
 describe("Fichier de tests concernant la récupération du catalogue d'actions", () => {
@@ -52,11 +51,7 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
 
     // WHEN
     const usecase = new RecupererCatalogueActionsUsecase(ActionsRepositoryMock.avecCatalogue(catalogue));
-    await usecase.execute(
-      'id-utilisateur',
-      new CatalogueActionsPresenterImpl(expectedCatalogue),
-      new ActionsPresenterImpl(expectedActions),
-    );
+    await usecase.execute('id-utilisateur', new CatalogueActionsPresenterImpl(expectedFiltres, expectedActions));
 
     // THEN
     function expectedActions(viewModel: ActionViewModel[]): void {
@@ -93,8 +88,9 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
         },
       ]);
     }
-    function expectedCatalogue(viewModel: CatalogueActionsViewModel): void {
-      expect(viewModel).toStrictEqual<CatalogueActionsViewModel>({
+
+    function expectedFiltres(viewModel: FiltresCatalogueActionsViewModel): void {
+      expect(viewModel).toStrictEqual<FiltresCatalogueActionsViewModel>({
         filtres: [
           {
             id: ClefThematiqueAPI.transports,

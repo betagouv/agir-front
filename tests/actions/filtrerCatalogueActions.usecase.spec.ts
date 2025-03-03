@@ -1,9 +1,8 @@
 import { ActionsRepositoryMock } from './adapters/actions.repository.mock';
 import { CatalogueActionsPresenterImpl } from '@/domaines/actions/adapters/catalogueActions.presenter.impl';
-import { CatalogueActionsViewModel } from '@/domaines/actions/ports/catalogueActions.presenter';
+import { FiltresCatalogueActionsViewModel } from '@/domaines/actions/ports/catalogueActions.presenter';
 import { Action, CatalogueActions, TypeAction } from '@/domaines/actions/ports/actions.repository';
 import { ActionViewModel } from '@/domaines/actions/ports/actions.presenter';
-import { ActionsPresenterImpl } from '@/domaines/actions/adapters/actions.presenter.impl';
 import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 import { FiltrerCatalogueActionsUsecase } from '@/domaines/actions/filtrerCatalogueActions.usecase';
 
@@ -47,8 +46,7 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
       [ClefThematiqueAPI.alimentation],
       '2',
       true,
-      new CatalogueActionsPresenterImpl(expectedCatalogue),
-      new ActionsPresenterImpl(expectedActions),
+      new CatalogueActionsPresenterImpl(expectedFiltres, expectedActions),
     );
 
     // THEN
@@ -71,8 +69,9 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
         },
       ]);
     }
-    function expectedCatalogue(viewModel: CatalogueActionsViewModel): void {
-      expect(viewModel).toStrictEqual<CatalogueActionsViewModel>({
+
+    function expectedFiltres(viewModel: FiltresCatalogueActionsViewModel): void {
+      expect(viewModel).toStrictEqual<FiltresCatalogueActionsViewModel>({
         filtres: [
           {
             id: ClefThematiqueAPI.transports,
