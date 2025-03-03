@@ -1,12 +1,15 @@
 <template>
-  Redirection en cours ... veuillez patienter.
-  <Alert
-    v-if="alerte.isActive"
-    :message="alerte.message"
-    :titre="alerte.titre"
-    :type="alerte.type"
-    class="fr-col-12 fr-mt-2w"
-  />
+  <div class="fr-container fr-my-3w">
+    <p class="fr-h3">Redirection en cours ... Veuillez patienter.</p>
+
+    <Alert
+      v-if="alerte.isActive"
+      :message="alerte.message"
+      :titre="alerte.titre"
+      :type="alerte.type"
+      class="fr-col-12 fr-mt-2w"
+    />
+  </div>
 </template>
 <script lang="ts" setup>
   import { onMounted } from 'vue';
@@ -44,6 +47,9 @@
       )
       .catch(reason => {
         afficherAlerte('error', 'Erreur lors de la validation du compte', reason.data.message);
+        setTimeout(() => {
+          window.location.href = '/';
+        }, 500);
       });
   });
 </script>
