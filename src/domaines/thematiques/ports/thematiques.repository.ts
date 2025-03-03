@@ -14,4 +14,10 @@ export interface ThematiquesRepository {
   terminerPersonnalisation(idUtilisateur: string, clefThematiqueApi: ClefThematiqueAPI): Promise<void>;
   resetPersonnalisation(idUtilisateur: string, clefThematiqueApi: ClefThematiqueAPI): Promise<void>;
   recupererSyntheseThematiques(utilisateurId: string): Promise<SyntheseThematiques>;
+  supprimerActionDesActionsRecommandees(
+    utilisateurId: string,
+    codeThematique: string,
+    actionType: string,
+    actionId: string,
+  ): Promise<void>;
 }

@@ -41,4 +41,17 @@ export class ThematiquesRepositoryAxios implements ThematiquesRepository {
       })),
     };
   }
+
+  @intercept401()
+  async supprimerActionDesActionsRecommandees(
+    utilisateurId: string,
+    codeThematique: string,
+    actionType: string,
+    actionId: string,
+  ): Promise<void> {
+    const axios = AxiosFactory.getAxios();
+    await axios.delete(
+      `/utilisateurs/${utilisateurId}/thematiques/${codeThematique}/actions/${actionType}/${actionId}`,
+    );
+  }
 }

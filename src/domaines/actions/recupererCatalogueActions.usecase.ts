@@ -4,8 +4,8 @@ import { CatalogueActionsPresenter } from '@/domaines/actions/ports/catalogueAct
 export class RecupererCatalogueActionsUsecase {
   constructor(private readonly actionsRepository: ActionsRepository) {}
 
-  async execute(idUtilisateur: string, presenter: CatalogueActionsPresenter): Promise<void> {
-    const actions = await this.actionsRepository.recupererToutesLesActions(idUtilisateur);
-    presenter.presente(actions);
+  async execute(idUtilisateur: string, catalogueActionsPresenter: CatalogueActionsPresenter): Promise<void> {
+    const catalogueActions = await this.actionsRepository.chargerCatalogueActions(idUtilisateur);
+    catalogueActionsPresenter.presenteCatalogue(catalogueActions);
   }
 }

@@ -12,11 +12,11 @@
 
   defineProps<{ label: string; id: string }>();
 
-  const emit = defineEmits<{ (event: 'rechercherParFavoris', value: boolean): void }>();
+  const emit = defineEmits<{ (event: 'onChange', value: boolean): void }>();
 
   const onInputChange = (event: Event) => {
     const { checked } = event.target as HTMLInputElement;
-    emit('rechercherParFavoris', checked);
+    emit('onChange', checked);
   };
 </script>
 

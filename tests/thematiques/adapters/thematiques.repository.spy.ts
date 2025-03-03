@@ -31,4 +31,34 @@ export class ThematiquesRepositorySpy implements ThematiquesRepository {
   recupererSyntheseThematiques(utilisateurId: string): Promise<SyntheseThematiques> {
     throw new Error('Method not implemented.');
   }
+
+  private _supprimerActionDesActionsRecommandeesArgs: {
+    utilisateurId: string;
+    codeThematique: string;
+    actionType: string;
+    actionId: string;
+  } = {
+    utilisateurId: '',
+    codeThematique: '',
+    actionType: '',
+    actionId: '',
+  };
+
+  get supprimerActionDesActionsRecommandeesArgs(): {
+    utilisateurId: string;
+    codeThematique: string;
+    actionType: string;
+    actionId: string;
+  } {
+    return this._supprimerActionDesActionsRecommandeesArgs;
+  }
+
+  async supprimerActionDesActionsRecommandees(
+    utilisateurId: string,
+    codeThematique: string,
+    actionType: string,
+    actionId: string,
+  ): Promise<void> {
+    this._supprimerActionDesActionsRecommandeesArgs = { utilisateurId, codeThematique, actionType, actionId };
+  }
 }

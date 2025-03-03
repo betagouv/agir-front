@@ -1,4 +1,5 @@
 import { Quiz } from '@/domaines/quiz/ports/quizRepository';
+import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 
 interface RecommandationArticle {
   titre: string;
@@ -11,6 +12,16 @@ export interface ActionService {
   parametreDuService: string;
 }
 
+export interface CatalogueActions {
+  actions: Action[];
+  filtres: {
+    code: ClefThematiqueAPI;
+    label: string;
+    selected: boolean;
+  }[];
+  consultation: string;
+}
+
 export interface Action {
   code: string;
   titre: string;
@@ -18,6 +29,7 @@ export interface Action {
   nombreDePersonnes: number;
   nombreAidesDisponibles: number;
   type: TypeAction;
+  dejaVue: boolean;
 }
 
 export interface ActionDetail {
@@ -51,7 +63,14 @@ export interface ActionsRecommandeesDansUneThematique {
 }
 
 export interface ActionsRepository {
-  recupererToutesLesActions(idUtilisateur: string): Promise<Action[]>;
+  chargerCatalogueActions(idUtilisateur: string): Promise<CatalogueActions>;
+
+  filtrerCatalogueActions(
+    idUtilisateur: string,
+    filtresThematiques: string[],
+    titre: string,
+    filtreDejaVu: boolean,
+  ): Promise<CatalogueActions>;
 
   chargerAction(idUtilisateur: string, idAction: string, type: TypeAction): Promise<ActionDetail>;
 

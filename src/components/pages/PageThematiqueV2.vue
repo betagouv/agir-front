@@ -31,9 +31,11 @@
       </template>
 
       <template v-else-if="actionsViewModel">
-        <CatalogueActionsComposant
-          :catalogue-view-model="actionsViewModel"
-          card-classes="fr-col-12 fr-col-md-6 fr-col-lg-4"
+        <CatalogueActionsRecommandees
+          :actions="actionsViewModel"
+          :thematiqueId="thematiqueId"
+          :rafraichir-actions="chargerActionsRecommandees"
+          card-classes="fr-col-12 fr-col-md-6 fr-col-xl-4"
         />
         <button class="fr-btn fr-mt-4w fr-btn--icon-left fr-icon-refresh-line" @click="resetParcours">
           Recommencer le parcours
@@ -54,12 +56,12 @@
 <script lang="ts" setup>
   import { onMounted, ref } from 'vue';
   import { onBeforeRouteUpdate, useRoute } from 'vue-router';
-  import CatalogueActionsComposant from '@/components/custom/Action/CatalogueActionsComposant.vue';
+  import CatalogueActionsRecommandees from '@/components/custom/Action/Catalogue/CatalogueActionsRecommandees.vue';
   import ParcoursKYCPourRecommandations from '@/components/custom/Thematiques/ParcoursKYCPourRecommandations.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import { ActionsRepositoryAxios } from '@/domaines/actions/adapters/actions.repository.axios';
   import { ActionsDansUneThematiquePresenterImpl } from '@/domaines/actions/adapters/actionsDansUneThematique.presenter.impl';
-  import { CatalogueActionsViewModel } from '@/domaines/actions/ports/catalogueActions.presenter';
+  import { ActionViewModel } from '@/domaines/actions/ports/actions.presenter';
   import { RecupererActionsPersonnaliseesUsecase } from '@/domaines/actions/recupererActionsPersonnalisees.usecase';
   import { ThematiquesRepositoryAxios } from '@/domaines/thematiques/adapters/thematiques.repository.axios';
   import { ClefThematiqueAPI, MenuThematiques, Thematique } from '@/domaines/thematiques/MenuThematiques';
@@ -69,7 +71,7 @@
   import { utilisateurStore } from '@/store/utilisateur';
 
   const thematique = ref<Thematique>(MenuThematiques.getFromUrl(useRoute().params.id as string));
-  const actionsViewModel = ref<CatalogueActionsViewModel>();
+  const actionsViewModel = ref<ActionViewModel[]>();
   const idEnchainementKycs = ref<string>();
   const isLoading = ref<boolean>(true);
 

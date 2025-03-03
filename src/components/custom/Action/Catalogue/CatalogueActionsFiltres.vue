@@ -7,9 +7,9 @@
     @submit="rechercherParTitre"
   />
   <h2 class="fr-h4">Filtres</h2>
+  <Interrupteur id="deja_vus" label="Déjà consultées" @on-change="rechercherParDejaVu" class="fr-mb-4w" />
   <InputCheckbox id="thematiqueArticle" label="Thématiques" :options="filtres" @update="updateThematiques" />
   <hr class="fr-hr" />
-  <Interrupteur id="favoris" label="Vos favoris" @on-change="rechercherParFavoris" />
 </template>
 
 <script setup lang="ts">
@@ -22,10 +22,10 @@
   const emit = defineEmits<{
     (event: 'rechercherParTitre', value: string): void;
     (event: 'updateThematiques', value: string[]): void;
-    (event: 'rechercherParFavoris', value: boolean): void;
+    (event: 'rechercherParDejaVu', value: boolean): void;
   }>();
 
   const rechercherParTitre = (titre: string) => emit('rechercherParTitre', titre);
   const updateThematiques = (thematiques: string[]) => emit('updateThematiques', thematiques);
-  const rechercherParFavoris = (checked: boolean) => emit('rechercherParFavoris', checked);
+  const rechercherParDejaVu = (checked: boolean) => emit('rechercherParDejaVu', checked);
 </script>

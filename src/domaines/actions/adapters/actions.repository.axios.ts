@@ -4,19 +4,11 @@ import {
   ActionDetail,
   ActionsRecommandeesDansUneThematique,
   ActionsRepository,
+  CatalogueActions,
   TypeAction,
 } from '@/domaines/actions/ports/actions.repository';
 import { mapQuizApi, QuizApiModel } from '@/domaines/quiz/adapters/quizRepository.axios';
-
-interface ActionApiModel {
-  code: string;
-  titre: string;
-  sous_titre: string;
-  nom_commune: string;
-  nombre_actions_en_cours: number;
-  nombre_aides_disponibles: number;
-  type: string;
-}
+import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 
 interface ActionDetailApiModel {
   code: string;
@@ -34,6 +26,27 @@ interface ActionDetailApiModel {
     recherche_service_id: string;
   }[];
   quizz_felicitations: string;
+}
+
+interface CatalogueActionsApiModel {
+  actions: ActionApiModel[];
+  filtres: {
+    code: string;
+    label: string;
+    selected: boolean;
+  }[];
+  consultation: string;
+}
+
+interface ActionApiModel {
+  code: string;
+  titre: string;
+  sous_titre: string;
+  nom_commune: string;
+  nombre_actions_en_cours: number;
+  nombre_aides_disponibles: number;
+  type: string;
+  deja_vue: boolean;
 }
 
 interface ActionsRecommandeesApiModel {
@@ -72,17 +85,42 @@ export class ActionsRepositoryAxios implements ActionsRepository {
   }
 
   @intercept401()
-  async recupererToutesLesActions(idUtilisateur: string): Promise<Action[]> {
+  async chargerCatalogueActions(idUtilisateur: string): Promise<CatalogueActions> {
     const axios = AxiosFactory.getAxios();
-    const response = await axios.get<ActionApiModel[]>(`/utilisateurs/${idUtilisateur}/actions`);
-    return response.data.map(action => ({
-      code: action.code,
-      titre: action.titre,
-      sousTitre: action.sous_titre,
-      nombreDePersonnes: action.nombre_actions_en_cours,
-      nombreAidesDisponibles: action.nombre_aides_disponibles,
-      type: action.type as TypeAction,
-    }));
+    const response = await axios.get<CatalogueActionsApiModel>(`/utilisateurs/${idUtilisateur}/actions`);
+
+    return {
+      actions: response.data.actions.map(this.mapActionApiModelToAction),
+      filtres: response.data.filtres.map(filtre => ({
+        code: filtre.code as ClefThematiqueAPI,
+        label: filtre.label,
+        selected: filtre.selected,
+      })),
+      consultation: response.data.consultation,
+    };
+  }
+
+  @intercept401()
+  async filtrerCatalogueActions(
+    idUtilisateur: string,
+    filtresThematiques: string[],
+    titre: string,
+    filtreDejaVu: boolean,
+  ): Promise<CatalogueActions> {
+    const axios = AxiosFactory.getAxios();
+
+    const params = this.buildFiltres(filtresThematiques, titre, filtreDejaVu);
+    const response = await axios.get<CatalogueActionsApiModel>(`/utilisateurs/${idUtilisateur}/actions${params}`);
+
+    return {
+      actions: response.data.actions.map(this.mapActionApiModelToAction),
+      filtres: response.data.filtres.map(filtre => ({
+        code: filtre.code as ClefThematiqueAPI,
+        label: filtre.label,
+        selected: filtre.selected,
+      })),
+      consultation: response.data.consultation,
+    };
   }
 
   @intercept401()
@@ -98,14 +136,30 @@ export class ActionsRepositoryAxios implements ActionsRepository {
     return {
       doitRepondreAuxKYCs: response.data.est_personnalisation_necessaire,
       idEnchainementKYCs: response.data.enchainement_questions_personnalisation,
-      actions: response.data.liste_actions_recommandees.map(action => ({
-        code: action.code,
-        titre: action.titre,
-        sousTitre: action.sous_titre,
-        nombreDePersonnes: action.nombre_actions_en_cours,
-        nombreAidesDisponibles: action.nombre_aides_disponibles,
-        type: action.type as TypeAction,
-      })),
+      actions: response.data.liste_actions_recommandees.map(this.mapActionApiModelToAction),
     };
+  }
+
+  private mapActionApiModelToAction(action: ActionApiModel): Action {
+    return {
+      code: action.code,
+      titre: action.titre,
+      sousTitre: action.sous_titre,
+      nombreDePersonnes: action.nombre_actions_en_cours,
+      nombreAidesDisponibles: action.nombre_aides_disponibles,
+      type: action.type as TypeAction,
+      dejaVue: action.deja_vue,
+    };
+  }
+
+  private buildFiltres(filtreThematiques: string[], titre: string, filtreDejaVue: boolean): string {
+    const params: string[] = [];
+
+    if (filtreThematiques.length > 0)
+      params.push(filtreThematiques.map(thematique => `thematique=${thematique}`).join('&'));
+    if (titre) params.push(`titre=${titre}`);
+    params.push(`consultation=${filtreDejaVue ? 'vu' : 'tout'}`);
+
+    return params.length > 0 ? `?${params.join('&')}` : '';
   }
 }

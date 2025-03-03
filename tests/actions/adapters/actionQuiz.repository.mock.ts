@@ -1,8 +1,8 @@
 import {
-  Action,
   ActionDetail,
   ActionsRecommandeesDansUneThematique,
   ActionsRepository,
+  CatalogueActions,
 } from '@/domaines/actions/ports/actions.repository';
 import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 
@@ -87,14 +87,23 @@ export class ActionQuizRepositoryMock implements ActionsRepository {
     };
   }
 
-  recupererToutesLesActions(idUtilisateur: string): Promise<Action[]> {
-    return Promise.resolve([]);
+  chargerCatalogueActions(idUtilisateur: string): Promise<CatalogueActions> {
+    throw Error('Not implemented');
   }
 
   recupererActionsPersonnalisees(
     idUtilisateur: string,
     thematiqueId: string,
   ): Promise<ActionsRecommandeesDansUneThematique> {
+    throw Error('Not implemented');
+  }
+
+  filtrerCatalogueActions(
+    idUtilisateur: string,
+    filtresThematiques: string[],
+    titre: string,
+    filtreDejaVu: boolean,
+  ): Promise<CatalogueActions> {
     throw Error('Not implemented');
   }
 }

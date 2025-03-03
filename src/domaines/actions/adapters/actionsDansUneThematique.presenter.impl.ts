@@ -1,14 +1,14 @@
-import { CatalogueActionsPresenterImpl } from '@/domaines/actions/adapters/catalogueActions.presenter.impl';
+import { ActionsPresenterImpl } from '@/domaines/actions/adapters/actions.presenter.impl';
+import { ActionViewModel } from '@/domaines/actions/ports/actions.presenter';
 import { Action } from '@/domaines/actions/ports/actions.repository';
 import { ActionsDansUneThematiquePresenter } from '@/domaines/actions/ports/actionsDansUneThematiquePresenter';
-import { CatalogueActionsViewModel } from '@/domaines/actions/ports/catalogueActions.presenter';
 
 export class ActionsDansUneThematiquePresenterImpl
-  extends CatalogueActionsPresenterImpl
+  extends ActionsPresenterImpl
   implements ActionsDansUneThematiquePresenter
 {
   constructor(
-    private readonly callBackActions: (viewModel: CatalogueActionsViewModel) => void,
+    private readonly callBackActions: (viewModel: ActionViewModel[]) => void,
     private readonly callbackEnchainementKYCs: (idEnchainementKYCs: string) => void,
   ) {
     super(callBackActions);

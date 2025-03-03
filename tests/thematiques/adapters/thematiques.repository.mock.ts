@@ -15,4 +15,13 @@ export class ThematiquesRepositoryMock implements ThematiquesRepository {
   resetPersonnalisation(idUtilisateur: string, clefThematiqueApi: ClefThematiqueAPI): Promise<void> {
     throw new Error('Method not implemented.');
   }
+
+  supprimerActionDesActionsRecommandees(
+    utilisateurId: string,
+    codeThematique: string,
+    actionType: string,
+    actionId: string,
+  ): Promise<void> {
+    throw new Error('Method not implemented.');
+  }
 }
