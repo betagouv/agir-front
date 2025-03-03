@@ -6,19 +6,49 @@
       v-html="actionClassiqueViewModel.corps.introduction"
     />
 
-    <ActionWidgetServices :services="actionClassiqueViewModel.services" :commune="actionClassiqueViewModel.commune" />
+    <ActionWidgetServices :commune="actionClassiqueViewModel.commune" :services="actionClassiqueViewModel.services" />
 
     <section
       v-if="actionClassiqueViewModel.corps.astuces"
       class="action__corps-astuces fr-p-3w border-radius--md"
       v-html="actionClassiqueViewModel.corps.astuces"
     />
+
+    <section v-if="actionClassiqueViewModel.aides.length > 0" class="fr-p-2w">
+      <h2>Aides et bons plans !</h2>
+      <div class="fr-grid-row fr-grid-row--gutters fr-mb-1w">
+        <div v-for="aide in actionClassiqueViewModel.aides" :key="aide.titre" class="fr-col-6">
+          <div class="fr-card fr-enlarge-link">
+            <div class="fr-card__body">
+              <div class="fr-card__content">
+                <h3 class="fr-card__title">
+                  <router-link
+                    :to="{
+                      name: RouteAidesName.AIDE_CONSULTATION,
+                      params: {
+                        id: aide.id,
+                        titre: aide.titreUrl,
+                      },
+                    }"
+                    class="fr-link"
+                  >
+                    {{ aide.titre }}
+                  </router-link>
+                </h3>
+              </div>
+            </div>
+          </div>
+          <div class="background--bleu-info fr-p-2w">Proposé par : {{ aide.partenaireNom }}</div>
+        </div>
+      </div>
+    </section>
   </section>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
   import ActionWidgetServices from '@/components/custom/Action/ActionWidgetServices.vue';
   import { ActionClassiqueViewModel } from '@/domaines/actions/ports/action.presenter';
+  import { RouteAidesName } from '@/router/aides/routeAidesName';
 
   defineProps<{ actionClassiqueViewModel: ActionClassiqueViewModel }>();
 </script>

@@ -1,10 +1,11 @@
 import {
-  ActionPresenter,
   ActionClassiqueViewModel,
+  ActionPresenter,
   ActionQuizzesViewModel,
 } from '@/domaines/actions/ports/action.presenter';
 import { ActionDetail } from '@/domaines/actions/ports/actions.repository';
 import marked from '@/shell/actionMarkdownToHtml';
+import { buildUrl } from '@/shell/buildUrl';
 
 export class ActionPresenterImpl implements ActionPresenter {
   constructor(
@@ -31,6 +32,12 @@ export class ActionPresenterImpl implements ActionPresenter {
       },
       recommandations: action.recommandations,
       services: action.services,
+      aides: action.aides.map(aide => ({
+        titre: aide.titre,
+        titreUrl: buildUrl(aide.titre),
+        id: aide.id,
+        partenaireNom: aide.partenaireNom,
+      })),
     });
   }
 

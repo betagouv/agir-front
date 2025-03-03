@@ -26,6 +26,14 @@ interface ActionDetailApiModel {
     recherche_service_id: string;
   }[];
   quizz_felicitations: string;
+  aides: {
+    content_id: string;
+    titre: string;
+    montant_max: number;
+    partenaire_nom: string;
+    partenaire_url: string;
+    partenaire_logo_url: string;
+  }[];
 }
 
 interface CatalogueActionsApiModel {
@@ -81,6 +89,11 @@ export class ActionsRepositoryAxios implements ActionsRepository {
         parametreDuService: service.categorie,
       })),
       quizzes: response.data.quizzes.map(quiz => mapQuizApi(quiz)),
+      aides: response.data.aides.map(aide => ({
+        titre: aide.titre,
+        id: aide.content_id,
+        partenaireNom: aide.partenaire_nom,
+      })),
     };
   }
 

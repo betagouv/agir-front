@@ -21,6 +21,7 @@ export interface ActionClassiqueViewModel extends ActionBaseViewModel {
     astuces: string;
   };
   services: ActionServiceViewModel[];
+  aides: ActionAideViewModel[];
 }
 
 export interface ActionQuizzesViewModel extends ActionBaseViewModel {
@@ -54,4 +55,11 @@ interface RecommandationArticleViewModel {
   titre: string;
   image: string;
   url: string;
+}
+
+export interface ActionAideViewModel {
+  titre: string;
+  id: string;
+  titreUrl: string;
+  partenaireNom: string;
 }
