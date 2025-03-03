@@ -86,7 +86,7 @@
               <router-link
                 :aria-current="route.name === RouteCoachName.COACH ? 'page' : null"
                 :to="{ name: RouteCoachName.COACH }"
-                class="fr-nav__link fr-py-0"
+                class="fr-nav__link"
               >
                 Accueil
               </router-link>
@@ -105,10 +105,12 @@
                 }"
                 class="fr-nav__link"
               >
-                <span aria-hidden="true" class="fr-mr-1v">{{
-                  MenuThematiques.getThematiqueData(ClefThematiqueAPI.alimentation).emoji
-                }}</span>
-                {{ MenuThematiques.getThematiqueData(ClefThematiqueAPI.alimentation).labelDansLeMenu }}
+                <div>
+                  <span aria-hidden="true" class="fr-mr-1v">{{
+                    MenuThematiques.getThematiqueData(ClefThematiqueAPI.alimentation).emoji
+                  }}</span>
+                  {{ MenuThematiques.getThematiqueData(ClefThematiqueAPI.alimentation).labelDansLeMenu }}
+                </div>
               </router-link>
             </li>
             <li class="fr-nav__item" data-fr-js-navigation-item="true">
@@ -125,10 +127,12 @@
                 }"
                 class="fr-nav__link"
               >
-                <span aria-hidden="true" class="fr-mr-1v">{{
-                  MenuThematiques.getThematiqueData(ClefThematiqueAPI.logement).emoji
-                }}</span>
-                {{ MenuThematiques.getThematiqueData(ClefThematiqueAPI.logement).labelDansLeMenu }}
+                <div>
+                  <span aria-hidden="true" class="fr-mr-1v">{{
+                    MenuThematiques.getThematiqueData(ClefThematiqueAPI.logement).emoji
+                  }}</span>
+                  {{ MenuThematiques.getThematiqueData(ClefThematiqueAPI.logement).labelDansLeMenu }}
+                </div>
               </router-link>
             </li>
             <li class="fr-nav__item" data-fr-js-navigation-item="true">
@@ -145,10 +149,12 @@
                 }"
                 class="fr-nav__link"
               >
-                <span aria-hidden="true" class="fr-mr-1v">{{
-                  MenuThematiques.getThematiqueData(ClefThematiqueAPI.transports).emoji
-                }}</span>
-                {{ MenuThematiques.getThematiqueData(ClefThematiqueAPI.transports).labelDansLeMenu }}
+                <div>
+                  <span aria-hidden="true" class="fr-mr-1v">{{
+                    MenuThematiques.getThematiqueData(ClefThematiqueAPI.transports).emoji
+                  }}</span>
+                  {{ MenuThematiques.getThematiqueData(ClefThematiqueAPI.transports).labelDansLeMenu }}
+                </div>
               </router-link>
             </li>
             <li class="fr-nav__item nav__item--separateur" data-fr-js-navigation-item="true">
@@ -165,10 +171,12 @@
                 }"
                 class="fr-nav__link"
               >
-                <span aria-hidden="true" class="fr-mr-1v">{{
-                  MenuThematiques.getThematiqueData(ClefThematiqueAPI.consommation).emoji
-                }}</span>
-                {{ MenuThematiques.getThematiqueData(ClefThematiqueAPI.consommation).labelDansLeMenu }}
+                <div>
+                  <span aria-hidden="true" class="fr-mr-1v">{{
+                    MenuThematiques.getThematiqueData(ClefThematiqueAPI.consommation).emoji
+                  }}</span>
+                  {{ MenuThematiques.getThematiqueData(ClefThematiqueAPI.consommation).labelDansLeMenu }}
+                </div>
               </router-link>
             </li>
             <li class="fr-nav__item" data-fr-js-navigation-item="true">
