@@ -11,6 +11,7 @@ const PageServicePresDeChezNousDetail = () =>
   import('@/components/pages/PagesService/PageServicePresDeChezNousDetail.vue');
 const PageServiceFruitsEtLegumes = () => import('@/components/pages/PagesService/PageServiceFruitsEtLegumes.vue');
 const PageServiceLinky = () => import('@/components/pages/PagesService/PageServiceLinky.vue');
+const PageServiceMesAideReno = () => import('@/components/pages/PagesService/PageServiceMesAidesReno.vue');
 
 export enum RouteServiceName {
   RECETTES = 'recettes',
@@ -19,6 +20,7 @@ export enum RouteServiceName {
   PROXIMITE_DETAIL = 'pres-de-chez-nous-detail',
   FRUITS_ET_LEGUMES = 'fruits-et-legumes',
   LINKY = 'linky',
+  MES_AIDES_RENO = 'mes-aides-reno',
   LONGUE_VIE_AUX_OBJETS = 'longue-vie-aux-objets',
   LONGUE_VIE_AUX_OBJETS_DETAIL = 'longue-vie-aux-objets-detail',
 }
@@ -32,6 +34,7 @@ export enum RouteServicePath {
   PROXIMITE_DETAIL = '/thematique/:thematiqueId/service/pres-de-chez-nous/:id',
   FRUITS_ET_LEGUMES = '/thematique/:thematiqueId/service/fruits-et-legumes',
   LINKY = '/thematique/:thematiqueId/service/linky',
+  MES_AIDES_RENO = '/thematique/:thematiqueId/service/mes-aides-reno',
 }
 
 const serviceRoutes: RouteRecordRaw[] = [
@@ -81,6 +84,14 @@ const serviceRoutes: RouteRecordRaw[] = [
     component: PageServiceLinky,
     meta: {
       title: 'Service : Linky',
+    },
+  },
+  {
+    path: RouteServicePath.MES_AIDES_RENO,
+    name: RouteServiceName.MES_AIDES_RENO,
+    component: PageServiceMesAideReno,
+    meta: {
+      title: 'Service : Mes Aides Reno',
     },
   },
   {

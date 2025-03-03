@@ -19,6 +19,7 @@ enum ServiceIdInterne {
   PRES_DE_CHEZ_VOUS = 'proximite',
   RECETTES = 'recettes',
   LINKY = 'linky',
+  MES_AIDES_RENO = 'mes_aides_reno',
   LONGUE_VIE_AUX_OBJETS = 'longue_vie_objets',
 }
 
@@ -31,6 +32,7 @@ export class ServiceRecherchePresenterImpl implements ServiceRecherchePresenter 
       [ServiceIdInterne.PRES_DE_CHEZ_VOUS]: `/thematique/${MenuThematiques.getThematiqueData(ClefThematiqueAPI.alimentation).url}/service/pres-de-chez-nous`,
       [ServiceIdInterne.RECETTES]: `/thematique/${MenuThematiques.getThematiqueData(ClefThematiqueAPI.alimentation).url}/service/recettes`,
       [ServiceIdInterne.LINKY]: `/thematique/${MenuThematiques.getThematiqueData(ClefThematiqueAPI.logement).url}/service/linky`,
+      [ServiceIdInterne.MES_AIDES_RENO]: `/thematique/${MenuThematiques.getThematiqueData(ClefThematiqueAPI.logement).url}/service/mes-aides-reno`,
       [ServiceIdInterne.LONGUE_VIE_AUX_OBJETS]: `/thematique/${MenuThematiques.getThematiqueData(ClefThematiqueAPI.consommation).url}/service/longue-vie-aux-objets`,
     };
 
