@@ -1,5 +1,30 @@
 # Changelog
 
+## [1.42.0](https://github.com/betagouv/agir-front/compare/v1.41.0...v1.42.0) (2025-03-03)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* action quiz ([#921](https://github.com/betagouv/agir-front/issues/921)) ([df4eab8](https://github.com/betagouv/agir-front/commit/df4eab8f8302e3bf05798018a38ef0fec7e0ae1d))
+* afficher le message de félicitations ([#941](https://github.com/betagouv/agir-front/issues/941)) ([712a50d](https://github.com/betagouv/agir-front/commit/712a50d7cfd18e54f36e2595451116734f53dff2))
+* ajout d'un bouton temporaire de reset pour la personnalisation thématique ([#942](https://github.com/betagouv/agir-front/issues/942)) ([dcb612b](https://github.com/betagouv/agir-front/commit/dcb612bd4abfee9580200e5cdb8ba74e6f4bc324))
+* catalogue actions + amélioration actions recommandées ([#950](https://github.com/betagouv/agir-front/issues/950)) ([e989778](https://github.com/betagouv/agir-front/commit/e9897783d440c88c958f07d3b2462db6104c4285))
+* homepage v2 ([#948](https://github.com/betagouv/agir-front/issues/948)) ([344e129](https://github.com/betagouv/agir-front/commit/344e129796f046d019b92c9efd7663c008d4db6b))
+* parcours actions recommandées ([#940](https://github.com/betagouv/agir-front/issues/940)) ([0e89201](https://github.com/betagouv/agir-front/commit/0e89201ef3bcdb7323590e675600b04eb413c0f0))
+* permettre le lien + gras depuis le CMS ([#949](https://github.com/betagouv/agir-front/issues/949)) ([2d23b78](https://github.com/betagouv/agir-front/commit/2d23b78b175f5bdbe35ecc200b5f4d5a96119230))
+
+
+### 👷 Autres changements
+
+* Bump @iframe-resizer/vue from 5.3.2 to 5.3.3 ([#945](https://github.com/betagouv/agir-front/issues/945)) ([19e49cf](https://github.com/betagouv/agir-front/commit/19e49cfb81f624a784fe51678604659e94550bac))
+* Bump @types/node from 22.13.4 to 22.13.5 ([#943](https://github.com/betagouv/agir-front/issues/943)) ([37dda10](https://github.com/betagouv/agir-front/commit/37dda1090559eafbcdd10601611573b3e0fee2d6))
+* Bump jsonpath-plus from 10.2.0 to 10.3.0 ([#938](https://github.com/betagouv/agir-front/issues/938)) ([794f21f](https://github.com/betagouv/agir-front/commit/794f21f280347660fdcba8aebbbd305614b3d3e5))
+* Bump marked from 15.0.6 to 15.0.7 ([#947](https://github.com/betagouv/agir-front/issues/947)) ([10bef9f](https://github.com/betagouv/agir-front/commit/10bef9f3c7c0f87e0e86e11202d5356a36353987))
+* Bump pinia from 2.3.1 to 3.0.1 ([#933](https://github.com/betagouv/agir-front/issues/933)) ([0cc2f1b](https://github.com/betagouv/agir-front/commit/0cc2f1b1249542c18146048dfb7b964b9119d6c0))
+* Bump release-please from 16.15.0 to 16.17.0 ([#946](https://github.com/betagouv/agir-front/issues/946)) ([28c5566](https://github.com/betagouv/agir-front/commit/28c5566bb0569c19b65f661f3fa1b4f93fffa58a))
+* Bump vue-tsc from 2.2.0 to 2.2.4 ([#944](https://github.com/betagouv/agir-front/issues/944)) ([d0ab8a8](https://github.com/betagouv/agir-front/commit/d0ab8a8378e5ef3465ed52b4b77ef58291dedd9a))
+* fix déconnexion et retour au site france-connect ([#951](https://github.com/betagouv/agir-front/issues/951)) ([47eb8a6](https://github.com/betagouv/agir-front/commit/47eb8a66c97f7cfb5e690978659a3999ce28e3d6))
+
 ## [1.41.0](https://github.com/betagouv/agir-front/compare/v1.40.0...v1.41.0) (2025-02-19)
 
 
