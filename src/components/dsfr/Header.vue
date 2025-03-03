@@ -105,6 +105,9 @@
                 }"
                 class="fr-nav__link"
               >
+                <span aria-hidden="true" class="fr-mr-1v">{{
+                  MenuThematiques.getThematiqueData(ClefThematiqueAPI.alimentation).emoji
+                }}</span>
                 {{ MenuThematiques.getThematiqueData(ClefThematiqueAPI.alimentation).labelDansLeMenu }}
               </router-link>
             </li>
@@ -122,6 +125,9 @@
                 }"
                 class="fr-nav__link"
               >
+                <span aria-hidden="true" class="fr-mr-1v">{{
+                  MenuThematiques.getThematiqueData(ClefThematiqueAPI.logement).emoji
+                }}</span>
                 {{ MenuThematiques.getThematiqueData(ClefThematiqueAPI.logement).labelDansLeMenu }}
               </router-link>
             </li>
@@ -139,6 +145,9 @@
                 }"
                 class="fr-nav__link"
               >
+                <span aria-hidden="true" class="fr-mr-1v">{{
+                  MenuThematiques.getThematiqueData(ClefThematiqueAPI.transports).emoji
+                }}</span>
                 {{ MenuThematiques.getThematiqueData(ClefThematiqueAPI.transports).labelDansLeMenu }}
               </router-link>
             </li>
@@ -156,6 +165,9 @@
                 }"
                 class="fr-nav__link"
               >
+                <span aria-hidden="true" class="fr-mr-1v">{{
+                  MenuThematiques.getThematiqueData(ClefThematiqueAPI.consommation).emoji
+                }}</span>
                 {{ MenuThematiques.getThematiqueData(ClefThematiqueAPI.consommation).labelDansLeMenu }}
               </router-link>
             </li>

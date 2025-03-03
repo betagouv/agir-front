@@ -34,7 +34,7 @@ describe('Fichier de tests concernant le chargement des recommandations personna
               style: {
                 backgroundColor: '#D2E9FF',
                 color: '#021952',
-                emoji: '🚗',
+                emoji: '🚅',
               },
             },
             titre: 'Premier Quiz',
@@ -58,7 +58,7 @@ describe('Fichier de tests concernant le chargement des recommandations personna
               style: {
                 backgroundColor: '#D2E9FF',
                 color: '#021952',
-                emoji: '🚗',
+                emoji: '🚅',
               },
             },
             titre: 'Article qui doit être en avant',
@@ -82,7 +82,7 @@ describe('Fichier de tests concernant le chargement des recommandations personna
               style: {
                 backgroundColor: '#D2E9FF',
                 color: '#021952',
-                emoji: '🚗',
+                emoji: '🚅',
               },
             },
             titre: 'Aide vélo',
@@ -106,7 +106,7 @@ describe('Fichier de tests concernant le chargement des recommandations personna
               style: {
                 backgroundColor: '#D2E9FF',
                 color: '#021952',
-                emoji: '🚗',
+                emoji: '🚅',
               },
             },
             titre: 'Un KYC',
@@ -132,7 +132,7 @@ describe('Fichier de tests concernant le chargement des recommandations personna
               style: {
                 backgroundColor: '#D2E9FF',
                 color: '#021952',
-                emoji: '🚗',
+                emoji: '🚅',
               },
             },
             titre: 'Un défi',
@@ -156,7 +156,7 @@ describe('Fichier de tests concernant le chargement des recommandations personna
               style: {
                 backgroundColor: '#D2E9FF',
                 color: '#021952',
-                emoji: '🚗',
+                emoji: '🚅',
               },
             },
             titre: 'Un autre défi',

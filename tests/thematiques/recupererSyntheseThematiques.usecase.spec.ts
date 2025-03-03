@@ -59,7 +59,7 @@ describe('Fichier de tests concernant la récupération de la synthèse des thé
           },
           {
             id: 'me-loger',
-            titreHTML: '<span aria-hidden="true">🧱</span>&nbsp Me loger',
+            titreHTML: '<span aria-hidden="true">🏠</span>&nbsp Me loger',
             bulletPoints: [
               '<span class="text--bold">3</span> simulateurs Mes Aides Rénov',
               '<span class="text--bold">5</span> aides sur votre territoire',
@@ -68,7 +68,7 @@ describe('Fichier de tests concernant la récupération de la synthèse des thé
           },
           {
             id: 'me-deplacer',
-            titreHTML: '<span aria-hidden="true">🚲</span>&nbsp Me déplacer',
+            titreHTML: '<span aria-hidden="true">🚅</span>&nbsp Me déplacer',
             bulletPoints: [
               '<span class="text--bold">2</span> simulateurs vélo et voiture',
               '<span class="text--bold">5</span> aides sur votre territoire',
@@ -77,7 +77,7 @@ describe('Fichier de tests concernant la récupération de la synthèse des thé
           },
           {
             id: 'consommer',
-            titreHTML: '<span aria-hidden="true">📺</span>&nbsp Mes achats',
+            titreHTML: '<span aria-hidden="true">👕</span>&nbsp Mes achats',
             bulletPoints: [
               '<span class="text--bold">5</span> aides sur votre territoire',
               '<span class="text--bold">54</span> idées d\'actions',
@@ -130,7 +130,7 @@ describe('Fichier de tests concernant la récupération de la synthèse des thé
           },
           {
             id: 'me-loger',
-            titreHTML: '<span aria-hidden="true">🧱</span>&nbsp Me loger',
+            titreHTML: '<span aria-hidden="true">🏠</span>&nbsp Me loger',
             bulletPoints: [
               '<span class="text--bold">1</span> aide sur votre territoire',
               '<span class="text--bold">1</span> idée d\'actions',

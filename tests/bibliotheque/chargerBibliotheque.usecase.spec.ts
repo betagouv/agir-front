@@ -65,7 +65,7 @@ describe('Fichier de tests concernant le chargement de la bibliotheque', () => {
             {
               checked: false,
               id: '2',
-              label: '🚲 Transports',
+              label: '🚅 Transports',
             },
           ],
         });

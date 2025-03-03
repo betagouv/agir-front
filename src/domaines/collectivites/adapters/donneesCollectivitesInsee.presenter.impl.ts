@@ -55,7 +55,7 @@ export class DonneesCollectivitesInseePresenterImpl implements DonneesCollectivi
     });
 
     return {
-      emoji: '🚲',
+      emoji: '🚅',
       thematiques: [ClefThematiqueAPI.transports],
       titre: `Les <span class="text--bleu">aides</span> pour l'achat d'un vélo`,
       liste: listeAidesVelo,
@@ -94,10 +94,10 @@ export class DonneesCollectivitesInseePresenterImpl implements DonneesCollectivi
     contenuSupplementaires: ContenuSupplementaireCollectivitesViewModel[],
   ): CarteThematique[] {
     return [
-      { emoji: '📺', titre: 'Mes achats', thematique: ClefThematiqueAPI.consommation },
+      { emoji: '👕', titre: 'Mes achats', thematique: ClefThematiqueAPI.consommation },
       { emoji: '🍛', titre: 'Me nourrir', thematique: ClefThematiqueAPI.alimentation },
-      { emoji: '🚲', titre: 'Me déplacer', thematique: ClefThematiqueAPI.transports },
-      { emoji: '🧱', titre: 'Me loger', thematique: ClefThematiqueAPI.logement },
+      { emoji: '🚅', titre: 'Me déplacer', thematique: ClefThematiqueAPI.transports },
+      { emoji: '🏠', titre: 'Me loger', thematique: ClefThematiqueAPI.logement },
       { emoji: '☀️', titre: 'Environnement', thematique: ClefThematiqueAPI.climat },
     ].map(({ emoji, titre, thematique }) => ({
       emoji,

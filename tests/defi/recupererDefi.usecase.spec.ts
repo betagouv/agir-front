@@ -49,7 +49,7 @@ describe('Fichier de tests pour récuperer un défi', () => {
           style: {
             backgroundColor: '#D2E9FF',
             color: '#021952',
-            emoji: '🚗',
+            emoji: '🚅',
           },
         },
         afficherNombreDePersonnes: true,
@@ -99,7 +99,7 @@ describe('Fichier de tests pour récuperer un défi', () => {
           style: {
             backgroundColor: '#D2E9FF',
             color: '#021952',
-            emoji: '🚗',
+            emoji: '🚅',
           },
         },
         afficherNombreDePersonnes: true,
@@ -143,7 +143,7 @@ describe('Fichier de tests pour récuperer un défi', () => {
           style: {
             backgroundColor: '#D2E9FF',
             color: '#021952',
-            emoji: '🚗',
+            emoji: '🚅',
           },
         },
         afficherNombreDePersonnes: true,
@@ -188,7 +188,7 @@ describe('Fichier de tests pour récuperer un défi', () => {
             style: {
               backgroundColor: '#D2E9FF',
               color: '#021952',
-              emoji: '🚗',
+              emoji: '🚅',
             },
           },
           afficherNombreDePersonnes: false,
@@ -231,7 +231,7 @@ describe('Fichier de tests pour récuperer un défi', () => {
             style: {
               backgroundColor: '#D2E9FF',
               color: '#021952',
-              emoji: '🚗',
+              emoji: '🚅',
             },
           },
           afficherNombreDePersonnes: false,
@@ -274,7 +274,7 @@ describe('Fichier de tests pour récuperer un défi', () => {
             style: {
               backgroundColor: '#D2E9FF',
               color: '#021952',
-              emoji: '🚗',
+              emoji: '🚅',
             },
           },
           afficherNombreDePersonnes: false,
@@ -317,7 +317,7 @@ describe('Fichier de tests pour récuperer un défi', () => {
             style: {
               backgroundColor: '#D2E9FF',
               color: '#021952',
-              emoji: '🚗',
+              emoji: '🚅',
             },
           },
           afficherNombreDePersonnes: true,

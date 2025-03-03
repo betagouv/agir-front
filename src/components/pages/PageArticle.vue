@@ -61,6 +61,7 @@
           utilisateurId,
         );
         isLoading.value = false;
+        document.title = `${article.titre as string} - J'agis`;
       })
       .catch(async () => {
         await router.push({ name: RouteCommuneName.NOT_FOUND });

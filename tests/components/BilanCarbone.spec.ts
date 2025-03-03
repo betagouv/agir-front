@@ -51,7 +51,7 @@ describe('BilanCarbone', () => {
             {
               clefUnivers: 'transport',
               contentId: 'contentId1',
-              label: '🚗 Transports',
+              label: '🚅 Transports',
               urlImage: 'image1.svg',
               estTermine: true,
               pourcentageProgression: 100,
@@ -112,9 +112,9 @@ describe('BilanCarbone', () => {
       const titre = page.getByRole('heading', { level: 2, name: 'Affinez mon estimation' });
       expect(titre).toBeDefined();
 
-      const carteThematique1 = page.getByRole('link', { name: '🚗 Transports' });
+      const carteThematique1 = page.getByRole('link', { name: '🚅 Transports' });
       expect(carteThematique1).toBeDefined();
-      expect(carteThematique1).toHaveProperty('title', "Allez sur l'estimation du bilan 🚗 Transports");
+      expect(carteThematique1).toHaveProperty('title', "Allez sur l'estimation du bilan 🚅 Transports");
       const progressThematique1 = page.getByRole('progressbar', { name: 'Progression transport' });
       expect(progressThematique1).toBeDefined();
       expect(progressThematique1.getAttribute('aria-valuenow')).toBe('100');
@@ -222,7 +222,7 @@ describe('BilanCarbone', () => {
                 },
                 { emoji: '🛋️', label: 'Ameublement', impactKgAnnuel: { valeur: '47 ', unite: 'kg' }, pourcentage: 6 },
                 { emoji: '👕', label: 'Textile', impactKgAnnuel: { valeur: '18 ', unite: 'kg' }, pourcentage: 2 },
-                { emoji: '📺', label: 'Numérique', impactKgAnnuel: { valeur: '18 ', unite: 'kg' }, pourcentage: 2 },
+                { emoji: '👕', label: 'Numérique', impactKgAnnuel: { valeur: '18 ', unite: 'kg' }, pourcentage: 2 },
                 { emoji: '🚬', label: 'Tabac', impactKgAnnuel: { valeur: '7 ', unite: 'kg' }, pourcentage: 1 },
               ],
             },
@@ -233,7 +233,7 @@ describe('BilanCarbone', () => {
               emoji: '🏠',
               details: [
                 {
-                  emoji: '🧱',
+                  emoji: '🏠',
                   label: 'Construction',
                   impactKgAnnuel: { valeur: '312 ', unite: 'kg' },
                   pourcentage: 61,
@@ -252,7 +252,7 @@ describe('BilanCarbone', () => {
               ],
             },
             {
-              label: '🚗 Transports',
+              label: '🚅 Transports',
               impactKgAnnuel: { valeur: '262 ', unite: 'kg' },
               pourcentage: 4,
               emoji: '🚦',
@@ -268,7 +268,7 @@ describe('BilanCarbone', () => {
                 { emoji: '🚋', label: 'Train', impactKgAnnuel: { valeur: '9 ', unite: 'kg' }, pourcentage: 3 },
                 { emoji: '🚘️', label: 'Voiture', impactKgAnnuel: { valeur: '0 ', unite: 'kg' }, pourcentage: 0 },
                 { emoji: '🛵', label: '2 roues', impactKgAnnuel: { valeur: '0 ', unite: 'kg' }, pourcentage: 0 },
-                { emoji: '🚲', label: 'Mobilité douce', impactKgAnnuel: { valeur: '0 ', unite: 'kg' }, pourcentage: 0 },
+                { emoji: '🚅', label: 'Mobilité douce', impactKgAnnuel: { valeur: '0 ', unite: 'kg' }, pourcentage: 0 },
                 { emoji: '🏖️', label: 'Vacances', impactKgAnnuel: { valeur: '0 ', unite: 'kg' }, pourcentage: 0 },
               ],
             },
@@ -276,13 +276,13 @@ describe('BilanCarbone', () => {
           top3: [
             { emoji: '🥩', label: 'Viandes', pourcentage: '36' },
             { emoji: '🐶', label: 'Animaux', pourcentage: '6' },
-            { emoji: '🧱', label: 'Construction', pourcentage: '5' },
+            { emoji: '🏠', label: 'Construction', pourcentage: '5' },
           ],
           thematiquesBilan: [
             {
               clefUnivers: 'transport',
               contentId: 'ENCHAINEMENT_KYC_bilan_transport',
-              label: '🚗 Transports',
+              label: '🚅 Transports',
               urlImage: 'https://res.cloudinary.com/dq023imd8/image/upload/v1728466903/Mobilite_df75aefd09.svg',
               estTermine: true,
               pourcentageProgression: 100,
@@ -347,9 +347,9 @@ describe('BilanCarbone', () => {
     });
 
     it('affiche les cartes terminées pour affiner son bilan', () => {
-      const carteThematique1 = page.getByRole('link', { name: '🚗 Transports' });
+      const carteThematique1 = page.getByRole('link', { name: '🚅 Transports' });
       expect(carteThematique1).toBeDefined();
-      expect(carteThematique1).toHaveProperty('title', "Allez sur l'estimation du bilan 🚗 Transports");
+      expect(carteThematique1).toHaveProperty('title', "Allez sur l'estimation du bilan 🚅 Transports");
       const progressThematique1 = page.getByRole('progressbar', { name: 'Progression transport' });
       expect(progressThematique1).toBeDefined();
       expect(progressThematique1.getAttribute('aria-valuenow')).toBe('100');

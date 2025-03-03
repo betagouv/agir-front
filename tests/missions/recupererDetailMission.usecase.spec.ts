@@ -102,7 +102,7 @@ describe("Fichier de tests concernant la récupération d'une mission", () => {
           style: {
             backgroundColor: '#E3FBAF',
             color: '#175202',
-            emoji: '🥗',
+            emoji: '🍛',
           },
         },
         articleEtQuiz: [

@@ -23,7 +23,7 @@ describe('Fichier de tests concernant le chargement du bilan carbone', () => {
               label: 'Voiture',
               pourcentage: 23,
               impactKgAnnuel: 2042.1001241487393,
-              emoji: '🚗',
+              emoji: '🚅',
             },
             {
               label: 'Avion',
@@ -247,7 +247,7 @@ describe('Fichier de tests concernant le chargement du bilan carbone', () => {
             {
               details: [
                 {
-                  emoji: '🚗',
+                  emoji: '🚅',
                   impactKgAnnuel: {
                     unite: 'tonnes',
                     valeur: '2.0',
