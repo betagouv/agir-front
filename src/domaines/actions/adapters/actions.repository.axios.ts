@@ -1,4 +1,4 @@
-import { AxiosFactory } from '@/axios.factory';
+import { AxiosFactory, intercept401 } from '@/axios.factory';
 import {
   Action,
   ActionDetail,
@@ -43,6 +43,7 @@ interface ActionsRecommandeesApiModel {
 }
 
 export class ActionsRepositoryAxios implements ActionsRepository {
+  @intercept401()
   async chargerAction(idUtilisateur: string, idAction: string, typeAction: TypeAction): Promise<ActionDetail> {
     const axios = AxiosFactory.getAxios();
     const response = await axios.get<ActionDetailApiModel>(
@@ -70,6 +71,7 @@ export class ActionsRepositoryAxios implements ActionsRepository {
     };
   }
 
+  @intercept401()
   async recupererToutesLesActions(idUtilisateur: string): Promise<Action[]> {
     const axios = AxiosFactory.getAxios();
     const response = await axios.get<ActionApiModel[]>(`/utilisateurs/${idUtilisateur}/actions`);
@@ -83,6 +85,7 @@ export class ActionsRepositoryAxios implements ActionsRepository {
     }));
   }
 
+  @intercept401()
   async recupererActionsPersonnalisees(
     idUtilisateur: string,
     thematiqueId: string,

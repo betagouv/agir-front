@@ -30,7 +30,7 @@ describe("Fichier de tests concernant la déconnexion d'un compte utilisateur", 
       afficherDisclaimerAides: false,
     });
   });
-  it("L'utilisateur connecté avec France Connect est déconnecté du service doit rédiriger vers la deconnexion france connect", async () => {
+  it("L'utilisateur connecté avec France Connect est déconnecté du service doit rédiriger vers la deconnexion france connect et sa session est terminée", async () => {
     // GIVEN
     const utilisateurRepository = UtilisateurRepositoryMock.seDeconnecterDeFranceConnect();
     const sessionRepository = SpySauvegarderUtilisateurSessionRepository.avecOnBoardingRealise({
@@ -45,6 +45,15 @@ describe("Fichier de tests concernant la déconnexion d'un compte utilisateur", 
     await usecase.execute('utilisateurId', (url: string) => {
       // THEN
       expect(url).toBe('urlDeDeconnexion');
+    });
+    // THEN
+    expect(sessionRepository.utilisateur).toStrictEqual({
+      id: '',
+      mail: '',
+      prenom: '',
+      nom: '',
+      onboardingAEteRealise: false,
+      afficherDisclaimerAides: false,
     });
   });
 });
