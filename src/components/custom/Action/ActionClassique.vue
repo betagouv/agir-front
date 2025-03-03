@@ -18,27 +18,51 @@
       <h2>Aides et bons plans !</h2>
       <div class="fr-grid-row fr-grid-row--gutters fr-mb-1w">
         <div v-for="aide in actionClassiqueViewModel.aides" :key="aide.titre" class="fr-col-6">
-          <div class="fr-card fr-enlarge-link">
-            <div class="fr-card__body">
-              <div class="fr-card__content">
-                <h3 class="fr-card__title">
-                  <router-link
-                    :to="{
-                      name: RouteAidesName.AIDE_CONSULTATION,
-                      params: {
-                        id: aide.id,
-                        titre: aide.titreUrl,
-                      },
-                    }"
-                    class="fr-link"
-                  >
-                    {{ aide.titre }}
-                  </router-link>
-                </h3>
+          <router-link
+            class="fr-card"
+            :to="{
+              name: RouteAidesName.AIDE_CONSULTATION,
+              params: {
+                id: aide.id,
+                titre: aide.titreUrl,
+              },
+            }"
+          >
+            <div class="flex align-items--center flex-space-between fr-p-2w">
+              <div>
+                <h3 class="fr-text--lg fr-mb-0">{{ aide.titre }}</h3>
+                <p class="fr-m-0 fr-text--md fr-mt-1w" v-if="aide.estGratuit">
+                  <span class="text--bleu fr-icon-money-euro-circle-line fr-mr-1v"></span>
+                  <span class="text--bold"> Gratuit</span>
+                </p>
+                <p class="fr-m-0 fr-text--md fr-mt-1w" v-else-if="aide.montantMaximum">
+                  <span class="text--bleu fr-icon-money-euro-circle-line fr-mr-1v"></span>
+                  Jusqu'à
+                  <span class="text--bold"> {{ aide.montantMaximum }}</span>
+                </p>
+              </div>
+              <span class="fr-icon-arrow-right-s-line text--bleu"></span>
+            </div>
+            <div class="background--bleu-info fr-p-1w flex align-items--center">
+              <img :src="aide.partenaireImg" class="partenaire__img" alt="" />
+              <div class="full-width fr-ml-1w">
+                <span class="text--bleu text--italic">Proposée par</span><br />
+                {{ aide.partenaireNom }}
               </div>
             </div>
-          </div>
-          <div class="background--bleu-info fr-p-2w">Proposé par : {{ aide.partenaireNom }}</div>
+          </router-link>
+          <!--                  <router-link-->
+          <!--                              :to="{-->
+          <!--                                name: RouteAidesName.AIDE_CONSULTATION,-->
+          <!--                                params: {-->
+          <!--                                  id: aide.id,-->
+          <!--                                  titre: aide.titreUrl,-->
+          <!--                                },-->
+          <!--                              }"-->
+          <!--                    class="fr-link"-->
+          <!--                  >-->
+          <!--                    {{ aide.titre }}-->
+          <!--                  </router-link>-->
         </div>
       </div>
     </section>
@@ -62,5 +86,14 @@
   .action__corps-astuces {
     background-color: rgba(249, 251, 251, 1);
     border: 1px solid rgba(57, 130, 108, 0.2);
+  }
+
+  .partenaire__img {
+    width: 40px;
+    height: 40px;
+    border-radius: 2px;
+    border: 1px solid #b1b1ff;
+    object-fit: contain;
+    background-color: white;
   }
 </style>

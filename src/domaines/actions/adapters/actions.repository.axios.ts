@@ -33,6 +33,7 @@ interface ActionDetailApiModel {
     partenaire_nom: string;
     partenaire_url: string;
     partenaire_logo_url: string;
+    est_gratuit: boolean;
   }[];
 }
 
@@ -93,7 +94,9 @@ export class ActionsRepositoryAxios implements ActionsRepository {
         titre: aide.titre,
         id: aide.content_id,
         partenaireNom: aide.partenaire_nom,
+        partenaireImg: aide.partenaire_logo_url,
         montantMaximum: aide.montant_max,
+        estGratuit: aide.est_gratuit,
       })),
     };
   }

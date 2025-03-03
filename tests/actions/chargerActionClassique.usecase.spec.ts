@@ -9,6 +9,33 @@ import { ChargerActionQuizUsecase } from '@/domaines/actions/chargerActionQuiz.u
 describe("Fichier de tests concernant la récupération d'une action", () => {
   it("En donnant l'id d'une action, on devrait pouvoir récupérer son entiereté", async () => {
     const action: ActionDetail = {
+      aides: [
+        {
+          titre: 'Titre aide 1',
+          id: 'id-aide-1',
+          partenaireNom: 'Partenaire',
+          partenaireImg: 'partenaire_img.png',
+          montantMaximum: 1200,
+          estGratuit: false,
+        },
+        {
+          titre: 'Titre aide 2',
+          id: 'id-aide-2',
+          partenaireNom: 'Partenaire2',
+          partenaireImg: 'partenaire_img2.png',
+          montantMaximum: 1200,
+          estGratuit: false,
+        },
+        {
+          titre: 'Titre aide 2',
+          id: 'id-aide-2',
+          partenaireNom: 'Partenaire2',
+          partenaireImg: 'partenaire_img2.png',
+          montantMaximum: undefined,
+          estGratuit: true,
+        },
+      ],
+      quizzFelicitations: '',
       code: 'id-action-test',
       nombreDePersonnes: 0,
       nombreAidesDisponibles: 0,
@@ -103,6 +130,35 @@ describe("Fichier de tests concernant la récupération d'une action", () => {
           {
             parametreDuService: 'reparer',
             type: 'longue_vie_objets',
+          },
+        ],
+        aides: [
+          {
+            titre: 'Titre aide 1',
+            id: 'id-aide-1',
+            partenaireNom: 'Partenaire',
+            partenaireImg: 'partenaire_img.png',
+            titreUrl: 'titre-aide-1',
+            montantMaximum: '1200€',
+            estGratuit: false,
+          },
+          {
+            titre: 'Titre aide 2',
+            id: 'id-aide-2',
+            partenaireNom: 'Partenaire2',
+            partenaireImg: 'partenaire_img2.png',
+            titreUrl: 'titre-aide-2',
+            montantMaximum: '1200€',
+            estGratuit: false,
+          },
+          {
+            titre: 'Titre aide 2',
+            id: 'id-aide-2',
+            partenaireNom: 'Partenaire2',
+            partenaireImg: 'partenaire_img2.png',
+            titreUrl: 'titre-aide-2',
+            montantMaximum: undefined,
+            estGratuit: true,
           },
         ],
       });

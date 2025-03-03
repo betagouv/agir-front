@@ -37,7 +37,9 @@ export class ActionPresenterImpl implements ActionPresenter {
         titreUrl: buildUrl(aide.titre),
         id: aide.id,
         partenaireNom: aide.partenaireNom,
-        montantMaximum: aide.montantMaximum ? `${aide.montantMaximum}&nbsp;€` : undefined,
+        partenaireImg: aide.partenaireImg,
+        montantMaximum: aide.montantMaximum ? `${aide.montantMaximum}€` : undefined,
+        estGratuit: aide.estGratuit,
       })),
     });
   }

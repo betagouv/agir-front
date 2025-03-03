@@ -62,5 +62,7 @@ export interface ActionAideViewModel {
   id: string;
   titreUrl: string;
   partenaireNom: string;
+  partenaireImg?: string;
   montantMaximum?: string;
+  estGratuit: boolean;
 }

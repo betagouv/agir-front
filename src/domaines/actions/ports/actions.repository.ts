@@ -67,7 +67,9 @@ export interface ActionAide {
   titre: string;
   id: string;
   partenaireNom: string;
+  partenaireImg?: string;
   montantMaximum?: number;
+  estGratuit: boolean;
 }
 
 export interface ActionsRepository {
