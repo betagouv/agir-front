@@ -62,4 +62,5 @@ export interface ActionAideViewModel {
   id: string;
   titreUrl: string;
   partenaireNom: string;
+  montantMaximum?: string;
 }

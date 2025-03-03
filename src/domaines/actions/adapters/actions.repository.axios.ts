@@ -93,6 +93,7 @@ export class ActionsRepositoryAxios implements ActionsRepository {
         titre: aide.titre,
         id: aide.content_id,
         partenaireNom: aide.partenaire_nom,
+        montantMaximum: aide.montant_max,
       })),
     };
   }

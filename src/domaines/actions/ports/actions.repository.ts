@@ -67,6 +67,7 @@ export interface ActionAide {
   titre: string;
   id: string;
   partenaireNom: string;
+  montantMaximum?: number;
 }
 
 export interface ActionsRepository {
