@@ -88,7 +88,7 @@
                 :to="{ name: RouteCoachName.COACH }"
                 class="fr-nav__link fr-py-0"
               >
-                <img alt="Accueil" class="fr-p-0" src="/icons/buildings/home-4-line.svg" />
+                Accueil
               </router-link>
             </li>
             <li class="fr-nav__item" data-fr-js-navigation-item="true">
