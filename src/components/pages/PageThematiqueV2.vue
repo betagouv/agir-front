@@ -33,9 +33,9 @@
       <template v-else-if="actionsViewModel">
         <CatalogueActionsRecommandees
           :actions="actionsViewModel"
-          :thematiqueId="thematiqueId"
           :rafraichir-actions="chargerActionsRecommandees"
           :reset-parcours="resetParcours"
+          :thematiqueId="thematiqueId"
           card-classes="fr-col-12 fr-col-md-6 fr-col-xl-4"
         />
         <button class="fr-btn fr-mt-4w fr-btn--icon-left fr-icon-refresh-line" @click="resetParcours">
@@ -52,6 +52,10 @@
       Accéder au catalogue
     </router-link>
   </section>
+
+  <section v-if="thematique.clefTechniqueAPI === ClefThematiqueAPI.alimentation">
+    <WidgetServiceFruitsEtLegumes />
+  </section>
 </template>
 
 <script lang="ts" setup>
@@ -60,6 +64,7 @@
   import CatalogueActionsRecommandees from '@/components/custom/Action/Catalogue/CatalogueActionsRecommandees.vue';
   import ParcoursKYCPourRecommandations from '@/components/custom/Thematiques/ParcoursKYCPourRecommandations.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
+  import WidgetServiceFruitsEtLegumes from '@/components/pages/PagesService/components/WidgetServiceFruitsEtLegumes.vue';
   import { ActionsRepositoryAxios } from '@/domaines/actions/adapters/actions.repository.axios';
   import { ActionsDansUneThematiquePresenterImpl } from '@/domaines/actions/adapters/actionsDansUneThematique.presenter.impl';
   import { ActionViewModel } from '@/domaines/actions/ports/actions.presenter';
