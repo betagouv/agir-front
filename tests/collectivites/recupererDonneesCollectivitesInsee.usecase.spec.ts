@@ -136,7 +136,7 @@ describe("Fichier de test du usecase de récupération des données collectivit�
         indicationAidesEtArticles: `<i>J'agis</i> recense <span class="text--bold">20</span> aides, ainsi que <span class="text--bold">16</span> articles pour vos habitants !`,
         cartesThematiques: [
           {
-            emoji: '📺',
+            emoji: '👕',
             titre: 'Mes achats',
             aides: [
               {
@@ -311,7 +311,7 @@ describe("Fichier de test du usecase de récupération des données collectivit�
             contenusSupplementaires: [],
           },
           {
-            emoji: '🚲',
+            emoji: '🚅',
             titre: 'Me déplacer',
             aides: [
               {
@@ -427,7 +427,7 @@ describe("Fichier de test du usecase de récupération des données collectivit�
             ],
             contenusSupplementaires: [
               {
-                emoji: '🚲',
+                emoji: '🚅',
                 titre: 'Les <span class="text--bleu">aides</span> pour l\'achat d\'un vélo',
                 liste: [
                   '\n<span>\n  <span><a href="href" target="_blank">Aide vélo 1</a></span>\n  <span class="fr-text--sm line-clamp text--italic fr-mb-1v">Aide nationale pour les vélos</span>\n</span>',
@@ -439,7 +439,7 @@ describe("Fichier de test du usecase de récupération des données collectivit�
             ],
           },
           {
-            emoji: '🧱',
+            emoji: '🏠',
             titre: 'Me loger',
             aides: [
               {

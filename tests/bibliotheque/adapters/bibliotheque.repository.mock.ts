@@ -50,7 +50,7 @@ export class BibliothequeRepositoryMock implements BibliothequeRepository {
         },
         {
           id: '2',
-          label: '🚲 Transports',
+          label: '🚅 Transports',
           checked: true,
         },
       ],
@@ -106,7 +106,7 @@ export class BibliothequeRepositoryMock implements BibliothequeRepository {
         },
         {
           id: '2',
-          label: '🚲 Transports',
+          label: '🚅 Transports',
           checked: true,
         },
       ],

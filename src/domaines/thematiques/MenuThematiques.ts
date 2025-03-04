@@ -43,21 +43,21 @@ export class MenuThematiques {
       labelDansLeMenu: 'Me déplacer',
       imageUrl:
         'https://res.cloudinary.com/dq023imd8/image/upload/t_media_lib_thumb/v1728466903/Mobilite_df75aefd09.svg',
-      emoji: '🚲',
+      emoji: '🚅',
     },
     [ClefThematiqueAPI.consommation]: {
       clefTechniqueAPI: 'consommation',
       url: 'consommer',
       labelDansLeMenu: 'Mes achats',
       imageUrl: 'https://res.cloudinary.com/dq023imd8/image/upload/t_media_lib_thumb/v1728468852/conso_7522b1950d.svg',
-      emoji: '📺',
+      emoji: '👕',
     },
     [ClefThematiqueAPI.logement]: {
       clefTechniqueAPI: 'logement',
       url: 'me-loger',
       labelDansLeMenu: 'Me loger',
       imageUrl: 'https://res.cloudinary.com/dq023imd8/image/upload/t_media_lib_thumb/v1728468978/maison_80242d91f3.svg',
-      emoji: '🧱',
+      emoji: '🏠',
     },
     [ClefThematiqueAPI.dechets]: {
       clefTechniqueAPI: 'dechet',

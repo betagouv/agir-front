@@ -61,6 +61,7 @@ describe('Fichier de tests concernant la récupération des missions recommandé
     );
     // WHEN
     await usecase.execute('1', new MissionsRecommandeesPresenterImpl(expectation));
+
     // THEN
     function expectation(thematiques) {
       expect(thematiques).toEqual<MissionViewModel[]>([
@@ -77,7 +78,7 @@ describe('Fichier de tests concernant la récupération des missions recommandé
             style: {
               backgroundColor: '#E3FBAF',
               color: '#175202',
-              emoji: '🥗',
+              emoji: '🍛',
             },
           },
           url: {
@@ -98,7 +99,7 @@ describe('Fichier de tests concernant la récupération des missions recommandé
             style: {
               backgroundColor: '#D2E9FF',
               color: '#021952',
-              emoji: '🚗',
+              emoji: '🚅',
             },
           },
           url: {
