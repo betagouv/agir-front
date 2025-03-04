@@ -35,6 +35,10 @@ interface ActionDetailApiModel {
     partenaire_logo_url: string;
     est_gratuit: boolean;
   }[];
+  faqs: {
+    question: string;
+    reponse: string;
+  }[];
 }
 
 interface CatalogueActionsApiModel {
@@ -97,6 +101,10 @@ export class ActionsRepositoryAxios implements ActionsRepository {
         partenaireImg: aide.partenaire_logo_url,
         montantMaximum: aide.montant_max,
         estGratuit: aide.est_gratuit,
+      })),
+      faq: response.data.faqs.map(faq => ({
+        question: faq.question,
+        reponse: faq.reponse,
       })),
     };
   }

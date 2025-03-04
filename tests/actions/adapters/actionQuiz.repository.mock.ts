@@ -86,6 +86,7 @@ export class ActionQuizRepositoryMock implements ActionsRepository {
           },
         },
       ],
+      faq: [],
     };
   }
 

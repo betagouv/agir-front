@@ -49,6 +49,7 @@ export interface ActionDetail {
   nombreAidesDisponibles: number;
   services: ActionService[];
   aides: ActionAide[];
+  faq: ActionFAQ[];
 }
 
 export enum TypeAction {
@@ -70,6 +71,11 @@ export interface ActionAide {
   partenaireImg?: string;
   montantMaximum?: number;
   estGratuit: boolean;
+}
+
+export interface ActionFAQ {
+  question: string;
+  reponse: string;
 }
 
 export interface ActionsRepository {

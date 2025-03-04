@@ -18,12 +18,25 @@
       <h2>Aides et bons plans !</h2>
       <GrilleAidesDUneAction :aides="actionClassiqueViewModel.aides" />
     </section>
+
+    <section v-if="actionClassiqueViewModel.faq?.length > 0" class="fr-p-2w fr-mt-2w">
+      <h2>On répond à vos <span class="fr-text--bold"> questions ! </span></h2>
+      <div class="fr-accordions-group">
+        <Accordeon v-for="faq in actionClassiqueViewModel.faq" :key="faq.question" :name-id="faq.question">
+          <template #titre>{{ faq.question }}</template>
+          <template #contenu>
+            <p v-html="faq.reponse"></p>
+          </template>
+        </Accordeon>
+      </div>
+    </section>
   </section>
 </template>
 
 <script lang="ts" setup>
   import ActionWidgetServices from '@/components/custom/Action/ActionWidgetServices.vue';
   import GrilleAidesDUneAction from '@/components/custom/Aides/GrilleAidesDUneAction.vue';
+  import Accordeon from '@/components/dsfr/Accordeon.vue';
   import { ActionClassiqueViewModel } from '@/domaines/actions/ports/action.presenter';
 
   defineProps<{ actionClassiqueViewModel: ActionClassiqueViewModel }>();
