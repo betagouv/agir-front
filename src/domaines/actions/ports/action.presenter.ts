@@ -22,6 +22,7 @@ export interface ActionClassiqueViewModel extends ActionBaseViewModel {
   };
   services: ActionServiceViewModel[];
   aides: ActionAideViewModel[];
+  faq: ActionFAQViewModel[];
 }
 
 export interface ActionQuizzesViewModel extends ActionBaseViewModel {
@@ -65,4 +66,9 @@ export interface ActionAideViewModel {
   partenaireImg?: string;
   montantMaximum?: string;
   estGratuit: boolean;
+}
+
+export interface ActionFAQViewModel {
+  question: string;
+  reponse: string;
 }

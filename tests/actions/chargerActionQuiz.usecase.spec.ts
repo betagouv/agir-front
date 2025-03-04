@@ -58,6 +58,7 @@ describe("Fichier de tests concernant la récupération d'une action", () => {
           parametreDuService: 'reparer',
         },
       ],
+      faq: [],
     };
     const usecase = new ChargerActionUsecase(
       new ChargerActionClassiqueUsecase(),

@@ -3,16 +3,14 @@
     <div v-for="service in services" :key="service.type">
       <WidgetServiceRecettes v-if="service.type === 'recettes'" :parametre-de-recherche="service.parametreDuService" />
 
-      <WidgetServiceLongueVieAuxObjets
-        v-if="service.type === 'longue_vie_objets'"
-        :parametre-de-recherche="service.parametreDuService"
-        :commune="commune"
-      />
+      <section v-if="service.type === 'longue_vie_objets'" class="fr-mt-4w">
+        <WidgetServiceLongueVieAuxObjets :commune="commune" :parametre-de-recherche="service.parametreDuService" />
+      </section>
     </div>
   </section>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
   import WidgetServiceLongueVieAuxObjets from '@/components/pages/PagesService/components/WidgetServiceLongueVieAuxObjets.vue';
   import WidgetServiceRecettes from '@/components/pages/PagesService/components/WidgetServiceRecettes.vue';
   import { ActionClassiqueViewModel } from '@/domaines/actions/ports/action.presenter';

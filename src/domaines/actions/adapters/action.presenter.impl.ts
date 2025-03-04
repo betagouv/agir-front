@@ -14,11 +14,17 @@ export class ActionPresenterImpl implements ActionPresenter {
   ) {}
 
   async presenteActionClassique(action: ActionDetail) {
-    const [titre, sousTitre, astuces, introduction] = await Promise.all([
+    const [titre, sousTitre, astuces, introduction, faq] = await Promise.all([
       marked.parseInline(action.titre),
       marked.parseInline(action.sousTitre ?? ''),
       marked.parse(action.corps.astuces ?? ''),
       marked.parse(action.corps.introduction ?? ''),
+      Promise.all(
+        action.faq.map(async faq => ({
+          question: faq.question,
+          reponse: await marked.parseInline(faq.reponse),
+        })),
+      ),
     ]);
 
     this.actionClassiqueViewModel({
@@ -41,6 +47,7 @@ export class ActionPresenterImpl implements ActionPresenter {
         montantMaximum: aide.montantMaximum ? `${aide.montantMaximum}€` : undefined,
         estGratuit: aide.estGratuit,
       })),
+      faq: faq,
     });
   }
 

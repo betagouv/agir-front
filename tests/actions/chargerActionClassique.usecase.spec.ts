@@ -78,6 +78,23 @@ describe("Fichier de tests concernant la récupération d'une action", () => {
           parametreDuService: 'reparer',
         },
       ],
+      faq: [
+        {
+          question: "Est-ce qu'un composteur ça coute cher ?",
+          reponse: 'Pas tant que ça !',
+        },
+        {
+          question: 'Quelle distance est considérée comme “locale” ?',
+          reponse:
+            'Il n’y a pas de définition unique, mais en général, on peut considérer un produit comme local **à l’échelle de la région**, ou lorsqu’il provient d’une zone géographique proche, souvent **dans un rayon de 200 km.**',
+        },
+        {
+          question:
+            'Comment faire pour les produits de base qui ne viennent pas de France, comme les huiles, les pâtes ou le riz ?',
+          reponse:
+            'Certains produits peuvent effectivement ne pas être produits localement. Il ne s’agit pas d’arrêter de consommer tout ce qui ne vient pas du village d’à côté, mais plutôt de **réduire les importations**. \nDans la mesure du possible, il vaut mieux privilégier au moins ce qui est **produit en France**, voire en Europe. Pour le reste, vous pouvez par exemple vous tourner vers **les produits labellisés**, qui garantissent des pratiques durables ou le commerce équitable.',
+        },
+      ],
     };
     const usecase = new ChargerActionUsecase(
       new ChargerActionClassiqueUsecase(),
@@ -159,6 +176,23 @@ describe("Fichier de tests concernant la récupération d'une action", () => {
             titreUrl: 'titre-aide-2',
             montantMaximum: undefined,
             estGratuit: true,
+          },
+        ],
+        faq: [
+          {
+            question: "Est-ce qu'un composteur ça coute cher ?",
+            reponse: 'Pas tant que ça !',
+          },
+          {
+            question: 'Quelle distance est considérée comme “locale” ?',
+            reponse:
+              'Il n’y a pas de définition unique, mais en général, on peut considérer un produit comme local <span class="text--bold">à l’échelle de la région</span>, ou lorsqu’il provient d’une zone géographique proche, souvent <span class="text--bold">dans un rayon de 200 km.</span>',
+          },
+          {
+            question:
+              'Comment faire pour les produits de base qui ne viennent pas de France, comme les huiles, les pâtes ou le riz ?',
+            reponse:
+              'Certains produits peuvent effectivement ne pas être produits localement. Il ne s’agit pas d’arrêter de consommer tout ce qui ne vient pas du village d’à côté, mais plutôt de <span class="text--bold">réduire les importations</span>. \nDans la mesure du possible, il vaut mieux privilégier au moins ce qui est <span class="text--bold">produit en France</span>, voire en Europe. Pour le reste, vous pouvez par exemple vous tourner vers <span class="text--bold">les produits labellisés</span>, qui garantissent des pratiques durables ou le commerce équitable.',
           },
         ],
       });
