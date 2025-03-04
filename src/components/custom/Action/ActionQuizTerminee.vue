@@ -25,9 +25,13 @@
     </p>
     <p class="bravo-encouragement">{{ felicitations ?? scoreViewModel.encouragement }}</p>
 
-    <router-link :to="{ name: RouteActionsName.CATALOGUE_ACTION }" class="fr-btn display-block fr-my-0 fr-mx-auto"
-      >Revenir au catalogue</router-link
-    >
+    <div class="flex flex-center align-items--center gap--small">
+      <router-link :to="{ name: RouteActionsName.CATALOGUE_ACTION }" class="fr-btn display-block fr-my-0">
+        Revenir au catalogue
+      </router-link>
+
+      <button class="fr-btn fr-btn--secondary" @click="recommencerQuiz">Recommencer le quiz</button>
+    </div>
   </template>
 </template>
 
@@ -57,6 +61,10 @@
       new ScoreActionQuizPresenterImpl(vm => (scoreViewModel.value = vm)),
     );
   });
+
+  function recommencerQuiz() {
+    window.location.reload();
+  }
 </script>
 
 <style scoped>
