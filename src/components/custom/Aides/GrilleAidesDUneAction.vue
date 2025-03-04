@@ -1,8 +1,8 @@
 <template>
   <div class="fr-grid-row fr-grid-row--gutters fr-mb-1w">
-    <div v-for="aide in aides" :key="aide.titre" class="fr-col-6">
+    <div v-for="aide in aides" :key="aide.titre" class="fr-col-12 fr-col-md-6">
       <router-link
-        class="fr-card"
+        class="fr-card flex-space-between"
         :to="{
           name: RouteAidesName.AIDE_CONSULTATION,
           params: {
@@ -11,7 +11,7 @@
           },
         }"
       >
-        <div class="flex align-items--center flex-space-between fr-p-2w">
+        <div class="flex align-items--center flex-space-between fr-p-2w full-height">
           <div>
             <h3 class="fr-text--lg fr-mb-0">{{ aide.titre }}</h3>
             <p class="fr-m-0 fr-text--md fr-mt-1w" v-if="aide.estGratuit">

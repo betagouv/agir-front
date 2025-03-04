@@ -14,7 +14,7 @@
       v-html="actionClassiqueViewModel.corps.astuces"
     />
 
-    <section v-if="actionClassiqueViewModel.aides?.length > 0" class="fr-p-2w">
+    <section v-if="actionClassiqueViewModel.aides?.length > 0" class="fr-p-2w fr-mt-2w">
       <h2>Aides et bons plans !</h2>
       <GrilleAidesDUneAction :aides="actionClassiqueViewModel.aides" />
     </section>
