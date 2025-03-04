@@ -9,6 +9,8 @@ import { ChargerActionQuizUsecase } from '@/domaines/actions/chargerActionQuiz.u
 describe("Fichier de tests concernant la récupération d'une action", () => {
   it("En donnant l'id d'une action, on devrait pouvoir récupérer son entiereté", async () => {
     const action: ActionDetail = {
+      aides: [],
+      quizzFelicitations: 'Félicitations ! ',
       code: 'id-action-test',
       type: 'classique',
       nombreDePersonnes: 0,

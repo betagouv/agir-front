@@ -30,7 +30,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
   import { ActionBaseViewModel } from '@/domaines/actions/ports/action.presenter';
 
   defineProps<{ actionBaseViewModel: ActionBaseViewModel }>();

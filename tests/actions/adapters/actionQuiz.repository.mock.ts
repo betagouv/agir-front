@@ -9,6 +9,8 @@ import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 export class ActionQuizRepositoryMock implements ActionsRepository {
   async chargerAction(idUtilisateur: string, idAction: string): Promise<ActionDetail> {
     return {
+      aides: [],
+      quizzFelicitations: 'Félicitations !',
       code: 'code',
       titre: 'Titre Quiz',
       sousTitre: 'Sous Titre Quiz',

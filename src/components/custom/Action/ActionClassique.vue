@@ -6,18 +6,24 @@
       v-html="actionClassiqueViewModel.corps.introduction"
     />
 
-    <ActionWidgetServices :services="actionClassiqueViewModel.services" :commune="actionClassiqueViewModel.commune" />
+    <ActionWidgetServices :commune="actionClassiqueViewModel.commune" :services="actionClassiqueViewModel.services" />
 
     <section
       v-if="actionClassiqueViewModel.corps.astuces"
       class="action__corps-astuces fr-p-3w border-radius--md"
       v-html="actionClassiqueViewModel.corps.astuces"
     />
+
+    <section v-if="actionClassiqueViewModel.aides?.length > 0" class="fr-p-2w fr-mt-2w">
+      <h2>Aides et bons plans !</h2>
+      <GrilleAidesDUneAction :aides="actionClassiqueViewModel.aides" />
+    </section>
   </section>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
   import ActionWidgetServices from '@/components/custom/Action/ActionWidgetServices.vue';
+  import GrilleAidesDUneAction from '@/components/custom/Aides/GrilleAidesDUneAction.vue';
   import { ActionClassiqueViewModel } from '@/domaines/actions/ports/action.presenter';
 
   defineProps<{ actionClassiqueViewModel: ActionClassiqueViewModel }>();

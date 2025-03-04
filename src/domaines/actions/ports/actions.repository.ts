@@ -48,6 +48,7 @@ export interface ActionDetail {
   nombreDePersonnes: number;
   nombreAidesDisponibles: number;
   services: ActionService[];
+  aides: ActionAide[];
 }
 
 export enum TypeAction {
@@ -60,6 +61,15 @@ export interface ActionsRecommandeesDansUneThematique {
   doitRepondreAuxKYCs: boolean;
   idEnchainementKYCs: string | null;
   actions: Action[];
+}
+
+export interface ActionAide {
+  titre: string;
+  id: string;
+  partenaireNom: string;
+  partenaireImg?: string;
+  montantMaximum?: number;
+  estGratuit: boolean;
 }
 
 export interface ActionsRepository {
