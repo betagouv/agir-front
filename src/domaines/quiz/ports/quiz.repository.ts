@@ -31,7 +31,8 @@ export interface Quiz {
   nombreDePointsAGagner: number;
   articleAssocie: ArticleDuQuiz | null;
 }
-export type ScoreQuiz = number;
+
+export type ScoreQuiz = { nombreBonnesReponses: number; nombreQuestions: number };
 
 export interface QuizRepository {
   getQuiz(idQuiz: string, idUtilisateur: string): Promise<Quiz>;

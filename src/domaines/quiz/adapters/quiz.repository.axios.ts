@@ -29,6 +29,11 @@ export interface QuizApiModel {
   ];
 }
 
+interface ScoreQuizApiModel {
+  nombre_bonnes_reponses: number;
+  nombre_quizz_done: number;
+}
+
 export class QuizRepositoryAxios implements QuizRepository {
   @intercept401()
   async noterQuiz(quizId: string, utilisateurId: string, note: 1 | 2 | 3 | 4): Promise<void> {
@@ -67,8 +72,13 @@ export class QuizRepositoryAxios implements QuizRepository {
   @intercept401()
   async recupererScoreActionQuiz(idUtilisateur: string, idAction: string): Promise<ScoreQuiz> {
     const axiosInstance = AxiosFactory.getAxios();
-    const response = await axiosInstance.get(`/utilisateurs/${idUtilisateur}/actions/quizz/${idAction}/score`);
-    return response.data.score;
+    const response = await axiosInstance.get<ScoreQuizApiModel>(
+      `/utilisateurs/${idUtilisateur}/actions/quizz/${idAction}/score`,
+    );
+    return {
+      nombreBonnesReponses: response.data.nombre_bonnes_reponses,
+      nombreQuestions: response.data.nombre_quizz_done,
+    };
   }
 }
 

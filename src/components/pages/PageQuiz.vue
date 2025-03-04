@@ -39,6 +39,7 @@
   import { QuizRepositoryAxios } from '@/domaines/quiz/adapters/quiz.repository.axios';
   import { ChargementQuizUsecase } from '@/domaines/quiz/chargementQuiz.usecase';
   import { QuizViewModel } from '@/domaines/quiz/ports/chargementQuizz.presenter';
+  import { MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const quizViewModel = ref<QuizViewModel>();
