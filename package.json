@@ -24,7 +24,7 @@
     "@sentry/vite-plugin": "^3.1.2",
     "@sentry/vue": "8.54.0",
     "@vue-leaflet/vue-leaflet": "^0.10.1",
-    "chart.js": "4.4.7",
+    "chart.js": "4.4.8",
     "jwt-decode": "4.0.0",
     "leaflet": "^1.9.4",
     "marked": "^15.0.7",
