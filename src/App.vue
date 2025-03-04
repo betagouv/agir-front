@@ -29,6 +29,7 @@
   import Header from '@/components/dsfr/Header.vue';
   import router from '@/router';
   import { RouteCompteName } from '@/router/compte/routeCompteName';
+  import { useNavigationStore } from '@/store/navigationStore';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const appName = "- J'agis";
@@ -38,6 +39,12 @@
     if (title) {
       document.title = `${title as string} ${appName}`;
     }
+
+    const navigationStore = useNavigationStore();
+    if (from.fullPath) {
+      navigationStore.addRoute(from.fullPath, from.name as string);
+    }
+
     const estConnecte = utilisateurStore().utilisateur.id.length > 0;
     const onboardingTermine = utilisateurStore().utilisateur.onboardingAEteRealise;
     if (estPublique) {

@@ -1,7 +1,7 @@
 <template>
   <div class="fr-container fr-mt-3w">
     <router-link
-      :to="{ name: RouteActionsName.CATALOGUE_ACTION }"
+      :to="{ path: useNavigationStore().pagePrecedente.path }"
       class="fr-btn fr-btn--icon-left fr-btn--tertiary-no-outline fr-icon-arrow-left-line fr-pl-0"
     >
       Retour
@@ -29,7 +29,7 @@
   import { ChargerActionClassiqueUsecase } from '@/domaines/actions/chargerActionClassique.usecase';
   import { ChargerActionQuizUsecase } from '@/domaines/actions/chargerActionQuiz.usecase';
   import { ActionClassiqueViewModel, ActionQuizzesViewModel } from '@/domaines/actions/ports/action.presenter';
-  import { RouteActionsName } from '@/router/actions/routes';
+  import { useNavigationStore } from '@/store/navigationStore';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const isLoading = ref<boolean>(false);
