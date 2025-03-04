@@ -55,7 +55,7 @@
     "lighthouse": "^12.3.0",
     "lint-staged": "15.4.3",
     "playwright-lighthouse": "^4.0.0",
-    "prettier": "3.5.0",
+    "prettier": "3.5.3",
     "release-please": "16.17.0",
     "sharp": "^0.33.5",
     "ts-node": "10.9.2",
