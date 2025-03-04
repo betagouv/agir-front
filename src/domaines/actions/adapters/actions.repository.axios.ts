@@ -7,7 +7,7 @@ import {
   CatalogueActions,
   TypeAction,
 } from '@/domaines/actions/ports/actions.repository';
-import { mapQuizApi, QuizApiModel } from '@/domaines/quiz/adapters/quizRepository.axios';
+import { mapQuizApi, QuizApiModel } from '@/domaines/quiz/adapters/quiz.repository.axios';
 import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 
 interface ActionDetailApiModel {

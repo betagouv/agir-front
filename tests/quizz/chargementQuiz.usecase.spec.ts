@@ -1,7 +1,8 @@
-import { Quiz, QuizRepository, ScoreQuiz } from '@/domaines/quiz/ports/quizRepository';
+import { Quiz, QuizRepository, ScoreQuiz } from '@/domaines/quiz/ports/quiz.repository';
 import { ChargementQuizUsecase } from '@/domaines/quiz/chargementQuiz.usecase';
-import { ChargementQuizPresenterImpl, QuizViewModel } from '@/domaines/quiz/adapters/chargementQuiz.presenter.impl';
+import { ChargementQuizPresenterImpl } from '@/domaines/quiz/adapters/chargementQuiz.presenter.impl';
 import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
+import { QuizViewModel } from '@/domaines/quiz/ports/chargementQuizz.presenter';
 
 class QuizRepositoryForTest implements QuizRepository {
   marquerLeQuizArticleCommeLu(_utilisateurId: string, _articleId: string): Promise<void> {

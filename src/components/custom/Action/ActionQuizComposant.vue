@@ -31,9 +31,9 @@
   import ActionQuizExplication from '@/components/custom/Quiz/ActionQuizExplication.vue';
   import QuizQuestion from '@/components/custom/Quiz/QuizQuestion.vue';
   import { ActionQuizQuestionViewModel } from '@/domaines/actions/ports/action.presenter';
-  import { QuizRepositoryAxios } from '@/domaines/quiz/adapters/quizRepository.axios';
+  import { QuizRepositoryAxios } from '@/domaines/quiz/adapters/quiz.repository.axios';
   import { EnvoyerDonneesQuizInteractionUsecase } from '@/domaines/quiz/envoyerDonneesQuizInteraction.usecase';
-  import { ArticleDuQuiz } from '@/domaines/quiz/ports/quizRepository';
+  import { ArticleDuQuiz } from '@/domaines/quiz/ports/quiz.repository';
   import { ToDoListEventBusImpl } from '@/domaines/toDoList/toDoListEventBusImpl';
   import { utilisateurStore } from '@/store/utilisateur';
 

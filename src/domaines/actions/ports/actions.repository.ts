@@ -1,4 +1,4 @@
-import { Quiz } from '@/domaines/quiz/ports/quizRepository';
+import { Quiz } from '@/domaines/quiz/ports/quiz.repository';
 import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 
 interface RecommandationArticle {

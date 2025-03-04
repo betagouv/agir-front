@@ -1,4 +1,4 @@
-import { QuizRepository } from '@/domaines/quiz/ports/quizRepository';
+import { QuizRepository } from '@/domaines/quiz/ports/quiz.repository';
 import { ToDoListEvent } from '@/domaines/toDoList/toDoListEventBusImpl';
 import { EventBus } from '@/shell/eventBus';
 

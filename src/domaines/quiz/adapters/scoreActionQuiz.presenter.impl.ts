@@ -1,4 +1,4 @@
-import { ScoreQuiz } from '@/domaines/quiz/ports/quizRepository';
+import { ScoreQuiz } from '@/domaines/quiz/ports/quiz.repository';
 import {
   ScoreActionQuizPresenter,
   ScoreActionQuizViewModel,

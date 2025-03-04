@@ -34,10 +34,10 @@
   import QuizArticle from '@/components/custom/Quiz/QuizArticle.vue';
   import QuizQuestion from '@/components/custom/Quiz/QuizQuestion.vue';
   import ThematiqueTag from '@/components/custom/Thematiques/ThematiqueTag.vue';
-  import { QuizViewModel } from '@/domaines/quiz/adapters/chargementQuiz.presenter.impl';
-  import { QuizRepositoryAxios } from '@/domaines/quiz/adapters/quizRepository.axios';
+  import { QuizRepositoryAxios } from '@/domaines/quiz/adapters/quiz.repository.axios';
   import { EnvoyerDonneesQuizInteractionUsecase } from '@/domaines/quiz/envoyerDonneesQuizInteraction.usecase';
-  import { ArticleDuQuiz } from '@/domaines/quiz/ports/quizRepository';
+  import { QuizViewModel } from '@/domaines/quiz/ports/chargementQuizz.presenter';
+  import { ArticleDuQuiz } from '@/domaines/quiz/ports/quiz.repository';
   import { ToDoListEventBusImpl } from '@/domaines/toDoList/toDoListEventBusImpl';
 
   const props = defineProps<{

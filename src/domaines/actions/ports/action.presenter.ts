@@ -1,5 +1,5 @@
 import { ActionDetail } from '@/domaines/actions/ports/actions.repository';
-import { ArticleDuQuiz } from '@/domaines/quiz/ports/quizRepository';
+import { ArticleDuQuiz } from '@/domaines/quiz/ports/quiz.repository';
 
 export interface ActionPresenter {
   presenteActionClassique(action: ActionDetail): void;

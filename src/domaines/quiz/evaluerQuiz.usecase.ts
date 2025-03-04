@@ -1,4 +1,4 @@
-import { QuizRepository } from '@/domaines/quiz/ports/quizRepository';
+import { QuizRepository } from '@/domaines/quiz/ports/quiz.repository';
 
 export class EvaluerQuizUsecase {
   constructor(private quizRepository: QuizRepository) {}

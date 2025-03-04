@@ -20,6 +20,7 @@ export enum QuizDifficulte {
 export interface ArticleDuQuiz {
   id: string;
   contenu: string;
+  sources: { url: string; label: string }[];
 }
 export interface Quiz {
   id: string;
