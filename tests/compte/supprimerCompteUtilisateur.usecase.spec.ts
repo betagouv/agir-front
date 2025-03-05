@@ -26,6 +26,7 @@ describe('Fichier de tests concernant la suppression du compte utilisateur', () 
       nom: '',
       onboardingAEteRealise: false,
       afficherDisclaimerAides: false,
+      pseudo: '',
     });
   });
 
@@ -51,6 +52,7 @@ describe('Fichier de tests concernant la suppression du compte utilisateur', () 
       nom: '',
       onboardingAEteRealise: false,
       afficherDisclaimerAides: false,
+      pseudo: '',
     });
   });
 });

@@ -10,8 +10,8 @@
             <InputCodePostal
               v-if="logementViewModel"
               v-model="logementViewModel.codePostal"
-              :defaultValue="logementViewModel.codePostal"
               :defaultSelectValue="logementViewModel.commune_utilisee_dans_le_compte"
+              :defaultValue="logementViewModel.codePostal"
               @update:selectedCommune="logementViewModel.commune_utilisee_dans_le_compte = $event"
             />
             <h3 class="fr-h4 fr-mt-3w">Quel est votre revenu ?</h3>
@@ -21,7 +21,7 @@
               @update:isRFREnErreur="value => (isRFREnErreur = value)"
             />
 
-            <button class="fr-mt-2w fr-btn" :disabled="isRFREnErreur">Valider</button>
+            <button :disabled="isRFREnErreur" class="fr-mt-2w fr-btn">Valider</button>
           </form>
         </div>
       </div>
@@ -32,7 +32,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
   import { onMounted, ref } from 'vue';
   import AidesVeloFormulaireAside from '@/components/custom/Aides/AidesInfosUtilisationDesDonnees.vue';
   import CompteFormulaireRevenuFiscal from '@/components/custom/Compte/CompteFormulaireRevenuFiscal.vue';
@@ -44,15 +44,15 @@
   import { EnregistrerInformationsLogementUsecase } from '@/domaines/logement/enregistrerInformationLogement.usecase';
   import { LogementViewModel } from '@/domaines/logement/ports/logement.presenter';
   import { RecupererInformationLogementUseCase } from '@/domaines/logement/recupererInformationLogement.usecase';
-  import {
-    ProfileUtilisateurPresenterImpl,
-    ProfileUtilisateurViewModel,
-  } from '@/domaines/profileUtilisateur/adapters/profileUtilisateur.presenter.impl';
+  import { ProfileUtilisateurPresenterImpl } from '@/domaines/profileUtilisateur/adapters/profileUtilisateur.presenter.impl';
   import {
     ChargerProfileUtilisateurUsecase,
     ProfileUtilisateurRepositoryAxiosImpl,
   } from '@/domaines/profileUtilisateur/chargerProfileUtilisateur.usecase';
-  import { MettreAJourProfileUtilisateurUsecase } from '@/domaines/profileUtilisateur/mettreAJourProfileUtilisateurUsecase';
+  import {
+    MettreAJourProfileUtilisateurUsecase,
+    ProfileAMettreAJour,
+  } from '@/domaines/profileUtilisateur/mettreAJourProfileUtilisateurUsecase';
   import router from '@/router';
   import { RouteAidesName } from '@/router/aides/routeAidesName';
   import { utilisateurStore } from '@/store/utilisateur';
@@ -92,14 +92,14 @@
         new SessionRepositoryStore(),
       );
       const utilisateur = utilisateurStore().utilisateur;
-      const donneeAMettreAjour: ProfileUtilisateurViewModel = {
+      const donneeAMettreAjour: ProfileAMettreAJour = {
         nom: utilisateur.nom,
         id: utilisateur.id,
-        mail: utilisateur.mail,
         prenom: utilisateur.prenom,
         abonnementTransport: abonnementTransport.value,
         revenuFiscal: revenuFiscal.value,
         nombreDePartsFiscales: nombreDePartsFiscales.value,
+        pseudo: utilisateur.pseudo,
       };
       await usecase.execute(donneeAMettreAjour);
 

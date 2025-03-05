@@ -11,12 +11,12 @@ describe("Fichier de tests concernant la validation de l'onboarding après creat
     const usecase = new ValiderOnboardingPostCreationCompteUsecase(compteUtilisateuRepositoy, spySessionRepository);
     // WHEN
     await usecase.execute('1', {
-      prenom: 'Dorian',
+      pseudo: 'Dorian',
       commune: 'Paris',
       codePostal: '75000',
     });
     // THEN
-    expect(spySessionRepository.utilisateur.prenom).toBe('Dorian');
+    expect(spySessionRepository.utilisateur.pseudo).toBe('Dorian');
     expect(spySessionRepository.utilisateur.onboardingAEteRealise).toBe(true);
   });
 });

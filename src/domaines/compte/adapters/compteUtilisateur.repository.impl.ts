@@ -14,6 +14,7 @@ interface CompteUtilisateurApiModel {
   nom: string;
   email: string;
   prenom: string;
+  pseudo: string;
   fonctionnalites_debloquees: string[];
 }
 
@@ -28,6 +29,7 @@ export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurReposit
       mail: response.data.email || '',
       prenom: response.data.prenom || '',
       fonctionnalitesDebloquees: response.data.fonctionnalites_debloquees,
+      pseudo: response.data.pseudo || '',
     };
   }
 
@@ -86,13 +88,13 @@ export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurReposit
   @intercept401()
   async validationOnboardingPostCreationCompte(
     idUtilisateur: string,
-    prenom: string,
+    pseudo: string,
     commune: string,
     codePostal: string,
   ): Promise<void> {
     const axiosInstance = AxiosFactory.getAxios();
     await axiosInstance.patch(`/utilisateurs/${idUtilisateur}/profile`, {
-      prenom,
+      pseudo: pseudo,
     });
 
     await axiosInstance.patch(`/utilisateurs/${idUtilisateur}/logement`, {

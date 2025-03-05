@@ -7,18 +7,19 @@ export class ValiderOnboardingPostCreationCompteUsecase {
     private compteUtilisateurRepository: CompteUtilisateurRepository,
     private sessionRepository: SessionRepository,
   ) {}
+
   async execute(
     idUtilisateur: string,
     onboardingPostCreationCompteState: OnboardingPostCreationCompteState,
   ): Promise<void> {
     await this.compteUtilisateurRepository.validationOnboardingPostCreationCompte(
       idUtilisateur,
-      onboardingPostCreationCompteState.prenom,
+      onboardingPostCreationCompteState.pseudo,
       onboardingPostCreationCompteState.commune,
       onboardingPostCreationCompteState.codePostal,
     );
     this.sessionRepository.sauvegarderUtilisateur({
-      prenom: onboardingPostCreationCompteState.prenom,
+      pseudo: onboardingPostCreationCompteState.pseudo,
       onboardingAEteRealise: true,
     });
   }

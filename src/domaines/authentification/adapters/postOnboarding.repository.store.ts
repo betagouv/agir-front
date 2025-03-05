@@ -4,6 +4,6 @@ import { onboardingPostCreationCompte } from '@/store/onboardingPostCreationComp
 
 export class PostOnboardingRepositoryStore implements PostOnboardingRepository {
   async sauvegarderOnboarding(utilisateur: Utilisateur): Promise<void> {
-    onboardingPostCreationCompte().prenom = utilisateur.prenom;
+    onboardingPostCreationCompte().pseudo = utilisateur.prenom;
   }
 }

@@ -48,7 +48,7 @@ export class ClassementPresenterImpl implements ClassementPresenter {
 
   private determineTopTrois(classement: Classement, idUtilisateur: string): ClassementItemViewModel[] {
     return classement.topTrois.map(utilisateur => ({
-      prenom: utilisateur.prenom,
+      prenom: utilisateur.pseudo,
       rang: utilisateur.rank,
       points: utilisateur.points,
       style: utilisateur.id === idUtilisateur ? 'background-bleu-light border--bleu' : 'background--white',
@@ -60,7 +60,7 @@ export class ClassementPresenterImpl implements ClassementPresenter {
     return classement.utilisateursProche
       .filter(utilisateur => utilisateur.rank !== 1 && utilisateur.rank !== 2 && utilisateur.rank !== 3)
       .map((utilisateur, index) => ({
-        prenom: utilisateur.prenom,
+        prenom: utilisateur.pseudo,
         rang: utilisateur.rank,
         points: utilisateur.points,
         style: this.determineStyle(index, classement.utilisateursProche.length, utilisateur.id, utilisateurId),

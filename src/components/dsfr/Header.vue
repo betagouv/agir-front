@@ -65,7 +65,7 @@
                       class="fr-btn fr-mb-0 fr-text--lg fr-icon-user-fill"
                       title="accéder à mon compte"
                     >
-                      {{ nomUtilisateur }}
+                      {{ pseudoUtilisateur }}
                     </router-link>
                     <ScoreHeader v-if="utilisateurStore().utilisateur.onboardingAEteRealise" />
                   </div>
@@ -235,7 +235,7 @@
   const route = useRoute();
   const store = utilisateurStore();
 
-  const nomUtilisateur = computed(() => store.utilisateur.prenom);
+  const pseudoUtilisateur = computed(() => store.utilisateur.pseudo);
   const estConnecte = computed(() => store.utilisateur.id.length > 0);
   const doitAfficherLeBoutonSeDeconnecter = computed(
     () => estConnecte.value && !store.utilisateur.onboardingAEteRealise,

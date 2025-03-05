@@ -3,25 +3,25 @@
   <div id="scroll-to-alerte">
     <Alert
       v-if="alerte.isActive"
-      class="fr-col-12 fr-mb-2w"
-      :type="alerte.type"
-      :titre="alerte.titre"
       :message="alerte.message"
+      :titre="alerte.titre"
+      :type="alerte.type"
+      class="fr-col-12 fr-mb-2w"
     />
   </div>
   <form class="fr-mb-0" @submit.prevent="modifierInformation">
     <div class="fr-grid-row full-width flex-end fr-mb-4w fr-mb-md-2w">
       <button
-        type="submit"
-        aria-label="Soumettre le formulaire"
         :disabled="formulaireEnErreur"
+        aria-label="Soumettre le formulaire"
         class="fr-btn fr-btn--icon-left fr-btn--lg fr-icon-save-3-fill"
+        type="submit"
       >
         Mettre à jour mes informations
       </button>
     </div>
-    <fieldset class="fr-mb-5v fr-fieldset" aria-labelledby="identité-fieldset-legend">
-      <legend class="fr-fieldset__legend fr-px-0 fr-mx-0" id="identité-fieldset-legend">
+    <fieldset aria-labelledby="identité-fieldset-legend" class="fr-mb-5v fr-fieldset">
+      <legend id="identité-fieldset-legend" class="fr-fieldset__legend fr-px-0 fr-mx-0">
         <h2 class="fr-h3">Mon identité</h2>
       </legend>
       <div class="fr-mb-4w">
@@ -30,22 +30,34 @@
       <div class="fr-grid-row fr-grid-row--gutters">
         <div class="fr-col-lg-6 fr-col-12">
           <InputText
+            v-model="profileUtlisateurViewModel.pseudo"
+            :erreur="champsPseudoStatus"
             :required="true"
             description="obligatoire"
+            label="Pseudonyme"
+            name="pseudo"
+            @blur="onValidationPseudo()"
+          />
+        </div>
+        <div class="fr-col-lg-6 fr-col-12">
+          <InputText
+            v-model="profileUtlisateurViewModel.prenom"
+            :disabled="!profileUtlisateurViewModel.nomPrenomModifiables"
+            :erreur="champsPrenomStatus"
+            description="facultatif"
             label="Prénom"
             name="prenom"
-            v-model="profileUtlisateurViewModel.prenom"
-            :erreur="champsPrenomStatus"
             @blur="onValidationPrenom()"
           />
         </div>
         <div class="fr-col-lg-6 fr-col-12">
           <InputText
+            v-model="profileUtlisateurViewModel.nom"
+            :disabled="!profileUtlisateurViewModel.nomPrenomModifiables"
+            :erreur="champsNomStatus"
             description="facultatif"
             label="Nom"
             name="nom"
-            v-model="profileUtlisateurViewModel.nom"
-            :erreur="champsNomStatus"
             @blur="onValidationNom()"
           />
         </div>
@@ -57,22 +69,22 @@
         </div>
       </div>
     </fieldset>
-    <fieldset class="fr-mb-0 fr-fieldset" aria-labelledby="donnee-fieldset-legend">
-      <legend class="fr-fieldset__legend fr-px-0 fr-mx-0" id="donnee-fieldset-legend">
+    <fieldset aria-labelledby="donnee-fieldset-legend" class="fr-mb-0 fr-fieldset">
+      <legend id="donnee-fieldset-legend" class="fr-fieldset__legend fr-px-0 fr-mx-0">
         <h2 class="fr-h3">Données personnelles</h2>
       </legend>
       <div class="full-width">
         <CompteFormulaireRevenuFiscal
-          class="fr-mb-4w"
           v-model:nombre-de-parts="profileUtlisateurViewModel.nombreDePartsFiscales"
           v-model:revenu-fiscal-de-reference="profileUtlisateurViewModel.revenuFiscal"
+          class="fr-mb-4w"
           @update:isRFREnErreur="value => (isRFREnErreur = value)"
         />
       </div>
     </fieldset>
     <CarteInfo>
       <p class="fr-text--bold">
-        <span class="fr-icon-question-line" aria-hidden="true"></span>
+        <span aria-hidden="true" class="fr-icon-question-line"></span>
         Où trouver ces informations&nbsp;?
       </p>
       <p>
@@ -90,7 +102,7 @@
         avec lequelles vous partagez vos déclarations d’impôts (pour toute l’année) pour vous faire une première idée.
       </p>
       <p class="fr-text--bold">
-        <span class="fr-icon-information-line" aria-hidden="true"></span>
+        <span aria-hidden="true" class="fr-icon-information-line"></span>
         Pourquoi ces questions&nbsp;?
       </p>
       <p class="fr-mb-0">
@@ -101,10 +113,10 @@
 
     <div class="fr-grid-row full-width flex-end">
       <button
-        type="submit"
-        aria-label="Soumettre le formulaire"
         :disabled="formulaireEnErreur"
+        aria-label="Soumettre le formulaire"
         class="fr-btn fr-btn--icon-left fr-btn--lg fr-mt-4w fr-icon-save-3-fill"
+        type="submit"
       >
         Mettre à jour mes informations
       </button>
@@ -112,29 +124,34 @@
   </form>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
   import { computed, ref } from 'vue';
   import Alert from '@/components/custom/Alert.vue';
   import CarteInfo from '@/components/custom/CarteInfo.vue';
   import CompteFormulaireRevenuFiscal from '@/components/custom/Compte/CompteFormulaireRevenuFiscal.vue';
   import InputSelectAnneeDeNaissance from '@/components/custom/CreationCompte/InputSelectAnneeDeNaissance.vue';
   import InputText from '@/components/dsfr/InputText.vue';
-  import { validationNom, validationPrenom } from '@/components/validations/validationsChampsFormulaire';
+  import { validationPrenomOuNomOuPseudo } from '@/components/validations/validationsChampsFormulaire';
   import { useAlerte } from '@/composables/useAlerte';
   import { SessionRepositoryStore } from '@/domaines/authentification/adapters/session.repository.store';
   import { ProfileUtilisateurViewModel } from '@/domaines/profileUtilisateur/adapters/profileUtilisateur.presenter.impl';
   import { ProfileUtilisateurRepositoryAxiosImpl } from '@/domaines/profileUtilisateur/chargerProfileUtilisateur.usecase';
-  import { MettreAJourProfileUtilisateurUsecase } from '@/domaines/profileUtilisateur/mettreAJourProfileUtilisateurUsecase';
+  import {
+    MettreAJourProfileUtilisateurUsecase,
+    ProfileAMettreAJour,
+  } from '@/domaines/profileUtilisateur/mettreAJourProfileUtilisateurUsecase';
 
   const { alerte, afficherAlerte } = useAlerte();
   const props = defineProps<{ compteUtlisateurViewModel: ProfileUtilisateurViewModel }>();
   const profileUtlisateurViewModel = ref<ProfileUtilisateurViewModel>(props.compteUtlisateurViewModel);
   const champsPrenomStatus = ref<{ message: string; afficher: boolean }>({ message: '', afficher: false });
   const champsNomStatus = ref<{ message: string; afficher: boolean }>({ message: '', afficher: false });
+  const champsPseudoStatus = ref<{ message: string; afficher: boolean }>({ message: '', afficher: false });
   const isRFREnErreur = ref(false);
   const formulaireEnErreur = computed(() => {
-    return !onValidationPrenom() || !onValidationNom() || isRFREnErreur.value;
+    return !onValidationPseudo() || !onValidationPrenom() || !onValidationNom() || isRFREnErreur.value;
   });
+
   async function modifierInformation() {
     if (formulaireEnErreur.value) return;
     const usecase = new MettreAJourProfileUtilisateurUsecase(
@@ -142,7 +159,17 @@
       new SessionRepositoryStore(),
     );
 
-    await usecase.execute(profileUtlisateurViewModel.value);
+    const profileAMettreAJour: ProfileAMettreAJour = {
+      id: profileUtlisateurViewModel.value.id,
+      abonnementTransport: profileUtlisateurViewModel.value.abonnementTransport,
+      anneeNaissance: profileUtlisateurViewModel.value.anneeNaissance,
+      nom: profileUtlisateurViewModel.value.nom,
+      prenom: profileUtlisateurViewModel.value.prenom,
+      pseudo: profileUtlisateurViewModel.value.pseudo,
+      revenuFiscal: profileUtlisateurViewModel.value.revenuFiscal,
+      nombreDePartsFiscales: profileUtlisateurViewModel.value.nombreDePartsFiscales,
+    };
+    await usecase.execute(profileAMettreAJour);
     afficherAlerte('success', 'Succès', 'Compte correctement mis à jour.');
 
     const alertElement = document.getElementById('scroll-to-alerte');
@@ -152,7 +179,10 @@
   }
 
   function onValidationPrenom(): boolean {
-    if (!validationPrenom(profileUtlisateurViewModel.value.prenom)) {
+    if (
+      profileUtlisateurViewModel.value.prenom &&
+      !validationPrenomOuNomOuPseudo(profileUtlisateurViewModel.value.prenom)
+    ) {
       champsPrenomStatus.value = { message: 'Le prénom doit contenir uniquement des lettres', afficher: true };
       return false;
     }
@@ -160,8 +190,17 @@
     return true;
   }
 
+  function onValidationPseudo(): boolean {
+    if (!validationPrenomOuNomOuPseudo(profileUtlisateurViewModel.value.pseudo)) {
+      champsPseudoStatus.value = { message: 'Le pseudonyme doit contenir uniquement des lettres', afficher: true };
+      return false;
+    }
+    champsPseudoStatus.value = { message: '', afficher: false };
+    return true;
+  }
+
   function onValidationNom(): boolean {
-    if (!validationNom(profileUtlisateurViewModel.value.nom)) {
+    if (profileUtlisateurViewModel.value.nom && !validationPrenomOuNomOuPseudo(profileUtlisateurViewModel.value.nom)) {
       champsNomStatus.value = { message: 'Le nom doit contenir uniquement des lettres', afficher: true };
       return false;
     }

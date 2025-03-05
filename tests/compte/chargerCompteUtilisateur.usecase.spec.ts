@@ -34,6 +34,7 @@ describe('Fichier de tests concernant le chargement du compte utilisateur', () =
       prenom: 'John',
       onboardingAEteRealise: true,
       afficherDisclaimerAides: false,
+      pseudo: 'JD',
     });
   });
 });

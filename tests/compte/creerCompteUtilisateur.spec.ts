@@ -31,6 +31,7 @@ describe('Fichier de tests concernant la creation du compte utilisateur', () => 
       prenom: '',
       onboardingAEteRealise: false,
       afficherDisclaimerAides: false,
+      pseudo: '',
     });
   });
 });

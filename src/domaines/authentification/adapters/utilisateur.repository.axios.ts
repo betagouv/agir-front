@@ -16,6 +16,7 @@ interface UtilisateurApiModel {
   fonctionnalites_debloquees: string[];
   is_onboarding_done: boolean;
   couverture_aides_ok: boolean;
+  pseudo?: string;
 }
 
 interface LoginApiModel {
@@ -47,6 +48,7 @@ export class UtilisateurRepositoryAxios implements UtilisateurRepository {
       nom: response.data.utilisateur.nom,
       id: response.data.utilisateur.id,
       prenom: response.data.utilisateur.prenom,
+      pseudo: response.data.utilisateur.pseudo || response.data.utilisateur.prenom,
       mail: response.data.utilisateur.email,
       onboardingAEteRealise: response.data.utilisateur.is_onboarding_done,
       afficherDisclaimerAides: !response.data.utilisateur.couverture_aides_ok,
@@ -64,6 +66,7 @@ export class UtilisateurRepositoryAxios implements UtilisateurRepository {
       mail: response.data.email,
       onboardingAEteRealise: response.data.is_onboarding_done,
       afficherDisclaimerAides: !response.data.couverture_aides_ok,
+      pseudo: response.data.pseudo || '',
     };
   }
 
@@ -118,6 +121,7 @@ export class UtilisateurRepositoryAxios implements UtilisateurRepository {
       id: response.data.utilisateur.id,
       prenom: response.data.utilisateur.prenom,
       mail: response.data.utilisateur.email,
+      pseudo: response.data.utilisateur.pseudo || response.data.utilisateur.prenom,
       onboardingAEteRealise: response.data.utilisateur.is_onboarding_done,
       afficherDisclaimerAides: !response.data.utilisateur.couverture_aides_ok,
       token: response.data.token,

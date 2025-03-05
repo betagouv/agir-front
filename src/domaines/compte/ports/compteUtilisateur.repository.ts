@@ -3,6 +3,7 @@ export interface CompteUtilisateur {
   nom: string;
   mail: string;
   prenom: string;
+  pseudo: string;
   fonctionnalitesDebloquees: string[];
 }
 
@@ -32,7 +33,7 @@ export interface CompteUtilisateurRepository {
 
   validationOnboardingPostCreationCompte(
     idUtilisateur: string,
-    prenom: string,
+    pseudo: string,
     commune: string,
     codePostal: string,
   ): Promise<void>;

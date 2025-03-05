@@ -3,8 +3,8 @@
     <div class="fr-col-12 fr-col-md-6 fr-mx-auto fr-mb-0 background--white fr-p-4w border border-radius--md">
       <form aria-labelledby="identity-fieldset-legend" class="fr-mb-4w" @submit.prevent="validerLaReponse()">
         <fieldset class="fr-fieldset fr-mb-0">
-          <legend class="fr-fieldset__legend" id="identity-fieldset-legend">
-            <img src="/bg_creation_compte.svg" alt="" />
+          <legend id="identity-fieldset-legend" class="fr-fieldset__legend">
+            <img alt="" src="/bg_creation_compte.svg" />
             <p class="text--normal text--bleu fr-mt-1w fr-mb-1w"><span class="fr-text--bold">Question 1</span> sur 3</p>
             <h1 class="fr-h4 fr-mb-1w">Bienvenue sur J'agis ! Faisons connaissance...</h1>
             <p class="fr-text--regular fr-text--lg">
@@ -13,13 +13,13 @@
           </legend>
           <div class="fr-fieldset__element">
             <InputText
-              label="Votre prénom"
-              name="utilisateur-prenom"
-              v-model="onboardingPostCreationCompte().prenom"
-              :erreur="champsPrenomStatus"
-              @blur="onValidationPrenom"
-              :required="true"
+              v-model="onboardingPostCreationCompte().pseudo"
               :autofocus="true"
+              :erreur="champsPseudoStatus"
+              :required="true"
+              label="Votre pseudonyme"
+              name="utilisateur-pseudo"
+              @blur="onValidationPseudo"
             />
           </div>
         </fieldset>
@@ -29,26 +29,26 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
   import { ref } from 'vue';
   import InputText from '@/components/dsfr/InputText.vue';
-  import { validationPrenom } from '@/components/validations/validationsChampsFormulaire';
+  import { validationPrenomOuNomOuPseudo } from '@/components/validations/validationsChampsFormulaire';
   import router from '@/router';
   import { RouteCompteName } from '@/router/compte/routeCompteName';
   import { onboardingPostCreationCompte } from '@/store/onboardingPostCreationCompte';
 
   const validerLaReponse = () => {
-    if (!onValidationPrenom()) return;
+    if (!onValidationPseudo()) return;
     router.push({ name: RouteCompteName.POST_CREATION_COMPTE_ETAPE_2 });
   };
-  const champsPrenomStatus = ref({ message: '', afficher: false });
+  const champsPseudoStatus = ref({ message: '', afficher: false });
 
-  function onValidationPrenom(): boolean {
-    if (!validationPrenom(onboardingPostCreationCompte().prenom)) {
-      champsPrenomStatus.value = { message: 'Le prénom doit contenir uniquement des lettres', afficher: true };
+  function onValidationPseudo(): boolean {
+    if (!validationPrenomOuNomOuPseudo(onboardingPostCreationCompte().pseudo)) {
+      champsPseudoStatus.value = { message: 'Le pseudonyme doit contenir uniquement des lettres', afficher: true };
       return false;
     }
-    champsPrenomStatus.value = { message: '', afficher: false };
+    champsPseudoStatus.value = { message: '', afficher: false };
     return true;
   }
 </script>

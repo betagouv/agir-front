@@ -16,6 +16,7 @@ export class ChargerCompteUtilisateurUsecase {
         id: compte.id,
         prenom: compte.prenom,
         mail: compte.mail,
+        pseudo: compte.pseudo,
       });
     });
   }

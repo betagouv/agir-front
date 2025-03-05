@@ -10,6 +10,7 @@ export class InjectUtilisateur {
         mail: 'dorian@agir.dev',
         onboardingAEteRealise: true,
         afficherDisclaimerAides: false,
+        pseudo: 'dorian',
       },
       score: {
         points: 0,

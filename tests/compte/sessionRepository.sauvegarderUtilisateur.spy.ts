@@ -10,6 +10,7 @@ export class SpySauvegarderUtilisateurSessionRepository implements SessionReposi
     nom: '',
     onboardingAEteRealise: false,
     afficherDisclaimerAides: false,
+    pseudo: '',
   };
 
   get utilisateur(): Utilisateur {
@@ -45,6 +46,7 @@ export class SpySauvegarderUtilisateurSessionRepository implements SessionReposi
       nom: '',
       onboardingAEteRealise: false,
       afficherDisclaimerAides: false,
+      pseudo: '',
     };
   }
 }

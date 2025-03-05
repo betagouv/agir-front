@@ -1,7 +1,9 @@
-import { MettreAJourProfileUtilisateurUsecase } from '@/domaines/profileUtilisateur/mettreAJourProfileUtilisateurUsecase';
+import {
+  MettreAJourProfileUtilisateurUsecase,
+  ProfileAMettreAJour,
+} from '@/domaines/profileUtilisateur/mettreAJourProfileUtilisateurUsecase';
 import { Utilisateur } from '@/domaines/authentification/ports/utilisateur.repository';
 import { SpySauvegarderUtilisateurSessionRepository } from '../compte/sessionRepository.sauvegarderUtilisateur.spy';
-import { ProfileUtilisateurViewModel } from '@/domaines/profileUtilisateur/adapters/profileUtilisateur.presenter.impl';
 import { ProfileUtilisateurRepository } from '@/domaines/profileUtilisateur/ports/profileUtilisateur.repository';
 import {
   ProfileUtilisateur,
@@ -17,6 +19,7 @@ class SpyProfileUtilisateurRepository implements ProfileUtilisateurRepository {
     nombreDePartsFiscales: 0,
     abonnementTransport: false,
     anneeNaissance: 1998,
+    pseudo: '',
   };
 
   get profileUtilisateuraMettreAJourArgs(): ProfileUtilisateurAMettreAJour {
@@ -40,17 +43,17 @@ describe('Fichier de tests concernant la mise à jour du profile utilisateur', (
     const repository = new SpyProfileUtilisateurRepository();
     const sessionRepository = SpySauvegarderUtilisateurSessionRepository.avecOnBoardingRealise({
       mail: 'mail@exemple.com',
+      pseudo: 'JD',
     });
     const usecase = new MettreAJourProfileUtilisateurUsecase(repository, sessionRepository);
-    const viewModelInput: ProfileUtilisateurViewModel = {
+    const viewModelInput: ProfileAMettreAJour = {
       id: '1',
       nom: 'Dorian',
-      mail: 'mail@exemple.com',
       prenom: 'John',
       revenuFiscal: 10000,
       nombreDePartsFiscales: 1,
       abonnementTransport: false,
-      anneeNaissance: '',
+      pseudo: 'JD',
     };
     await usecase.execute(viewModelInput);
     // THEN
@@ -62,6 +65,7 @@ describe('Fichier de tests concernant la mise à jour du profile utilisateur', (
       nombreDePartsFiscales: 1,
       abonnementTransport: false,
       anneeNaissance: undefined,
+      pseudo: 'JD',
     });
     expect(sessionRepository.utilisateur).toStrictEqual<Utilisateur>({
       id: '1',
@@ -70,6 +74,7 @@ describe('Fichier de tests concernant la mise à jour du profile utilisateur', (
       prenom: 'John',
       onboardingAEteRealise: true,
       afficherDisclaimerAides: false,
+      pseudo: 'JD',
     });
   });
 });

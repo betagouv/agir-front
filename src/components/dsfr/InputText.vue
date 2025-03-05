@@ -1,27 +1,28 @@
 <template>
-  <div class="fr-input-group" :class="erreur && erreur.afficher ? 'fr-input-group--error' : ''">
-    <label class="fr-label" :for="name">
+  <div :class="erreur && erreur.afficher ? 'fr-input-group--error' : ''" class="fr-input-group">
+    <label :for="name" class="fr-label">
       {{ label }}
       <span v-if="description" class="fr-hint-text">{{ description }}</span>
     </label>
     <input
-      class="fr-input"
-      :class="erreur && erreur.afficher ? 'fr-input--error' : ''"
-      type="text"
-      :required="required"
       :id="name"
-      :name="name"
-      :value="modelValue"
-      @input="updateValue"
-      @blur="handleBlur"
-      :maxlength="maxlength"
       :autofocus="autofocus"
+      :class="erreur && erreur.afficher ? 'fr-input--error' : ''"
+      :disabled="disabled"
+      :maxlength="maxlength"
+      :name="name"
+      :required="required"
+      :value="modelValue"
+      class="fr-input"
+      type="text"
+      @blur="handleBlur"
+      @input="updateValue"
     />
     <p v-if="erreur && erreur.afficher" id="text-input-error-desc-error" class="fr-error-text">{{ erreur.message }}</p>
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
   defineProps<{
     name: string;
     label: string;
@@ -34,6 +35,7 @@
     };
     maxlength?: number;
     autofocus?: boolean;
+    disabled?: boolean;
   }>();
 
   const emit = defineEmits<{
