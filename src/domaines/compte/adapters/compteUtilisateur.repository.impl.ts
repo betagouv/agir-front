@@ -5,6 +5,7 @@ import {
   CompteUtilisateur,
   CompteUtilisateurACreer,
   CompteUtilisateurRepository,
+  SuppressionFranceConnect,
 } from '@/domaines/compte/ports/compteUtilisateur.repository';
 import { RepositoryError } from '@/shell/repositoryError';
 
@@ -58,9 +59,20 @@ export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurReposit
   }
 
   @intercept401()
-  async supprimerCompteUtilisateur(idUtilisateur: string): Promise<void> {
+  async supprimerCompteUtilisateur(idUtilisateur: string): Promise<SuppressionFranceConnect> {
     const axiosInstance = AxiosFactory.getAxios();
-    await axiosInstance.delete(`/utilisateurs/${idUtilisateur}`);
+    const reponse = await axiosInstance.delete(`/utilisateurs/${idUtilisateur}`);
+    if (reponse.data.france_connect_logout_url) {
+      return {
+        doitSeDeconnecterDeFranceConnect: true,
+        urlDeDeconnexion: reponse.data.france_connect_logout_url,
+      };
+    } else {
+      return {
+        doitSeDeconnecterDeFranceConnect: false,
+        urlDeDeconnexion: '',
+      };
+    }
   }
 
   @intercept401()
