@@ -7,16 +7,16 @@
       <strong>Attention, aucune donnée ne pourra être récupérée.</strong>
     </p>
     <button
+      :aria-controls="modaleId"
       class="fr-btn fr-btn--warning fr-btn--icon-left fr-icon-warning-line text--warning border--warning background--white"
       data-fr-opened="false"
-      :aria-controls="modaleId"
     >
       Supprimer mon compte
     </button>
   </div>
 
   <Teleport to="body">
-    <Modale label="Modale de suppression de compte" :id="modaleId" :radius="false" :is-footer-actions="true">
+    <Modale :id="modaleId" :is-footer-actions="true" :radius="false" label="Modale de suppression de compte">
       <template v-slot:contenu>
         <h1 :id="modaleId" class="fr-h4 fr-modal__title">Veuillez confirmer la suppression du compte</h1>
         <p>Voulez-vous vraiment supprimer votre compte ainsi que les données associées ?</p>
@@ -30,7 +30,7 @@
             <button class="fr-btn fr-icon-warning-line" @click="supprimerLeCompte">Confirmer</button>
           </li>
           <li>
-            <button class="fr-btn fr-btn--secondary" :aria-controls="modaleId">Annuler</button>
+            <button :aria-controls="modaleId" class="fr-btn fr-btn--secondary">Annuler</button>
           </li>
         </ul>
       </template>
@@ -38,11 +38,11 @@
   </Teleport>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
   import Modale from '@/components/custom/Modale/Modale.vue';
+  import { SessionRepositoryStore } from '@/domaines/authentification/adapters/session.repository.store';
   import { CompteUtilisateurRepositoryImpl } from '@/domaines/compte/adapters/compteUtilisateur.repository.impl';
   import { SupprimerCompteUtilisateurUsecase } from '@/domaines/compte/supprimerCompteUtilisateur.usecase';
-  import router from '@/router';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const modaleId = 'modale-suppression-compte';
@@ -51,11 +51,11 @@
     const store = utilisateurStore();
     const idUtilisateur = store.utilisateur.id;
 
-    const usecase = new SupprimerCompteUtilisateurUsecase(new CompteUtilisateurRepositoryImpl());
-    usecase.execute(idUtilisateur);
-
-    utilisateurStore().reset();
-    router.replace('/');
+    const usecase = new SupprimerCompteUtilisateurUsecase(
+      new CompteUtilisateurRepositoryImpl(),
+      new SessionRepositoryStore(),
+    );
+    usecase.execute(idUtilisateur, url => (window.location.href = url));
   };
 </script>
 

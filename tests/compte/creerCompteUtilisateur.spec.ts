@@ -1,48 +1,8 @@
 import { CreerCompteUtilisateurUsecase, UserInput } from '@/domaines/compte/creerCompteUtilisateur.usecase';
 import { Utilisateur } from '@/domaines/authentification/ports/utilisateur.repository';
-import { CompteUtilisateur, CompteUtilisateurRepository } from '@/domaines/compte/ports/compteUtilisateur.repository';
 import { SpySauvegarderUtilisateurSessionRepository } from './sessionRepository.sauvegarderUtilisateur.spy';
 import { CreerComptePresenterImpl } from '@/domaines/compte/adapters/creerComptePresenterImpl';
-
-class CompteUtilisateurForTest implements CompteUtilisateurRepository {
-  creerCompteUtilisateur(compteUtilisateurACreer): Promise<CompteUtilisateur> {
-    return Promise.resolve({
-      id: 'id',
-      nom: compteUtilisateurACreer.nom,
-      mail: compteUtilisateurACreer.email,
-      codePostal: '',
-      commune: '',
-      prenom: compteUtilisateurACreer.prenom,
-      revenuFiscal: null,
-      nombreDePartsFiscales: 1,
-      abonnementTransport: false,
-      fonctionnalitesDebloquees: [],
-    });
-  }
-
-  getCompteUtilisateur(idUtilisateur: string): Promise<CompteUtilisateur> {
-    throw Error;
-  }
-
-  mettreAjour(compteUtilisateur: CompteUtilisateur) {}
-
-  supprimerCompteUtilisateur(idUtilisateur: string): Promise<void> {
-    throw new Error();
-  }
-
-  mettreAJourLeMotDePasse(idUtilisateur: string, nouveauMotDePasse: string): Promise<void> {
-    throw new Error();
-  }
-
-  validationOnboardingPostCreationCompte(
-    idUtilisateur: string,
-    prenom: string,
-    commune: string,
-    codePostal: string,
-  ): Promise<void> {
-    return Promise.resolve(undefined);
-  }
-}
+import { CompteUtilisateurRepositoryMock } from './adapters/compteUtilisateur.repository.mock';
 
 describe('Fichier de tests concernant la creation du compte utilisateur', () => {
   it('doit creer un compte temporaire et sauvegarder uniquement le mail en session', async () => {
@@ -54,7 +14,7 @@ describe('Fichier de tests concernant la creation du compte utilisateur', () => 
     };
 
     const sessionRepository = SpySauvegarderUtilisateurSessionRepository.sansOnBoardingRealise();
-    const compteUtilisateurRepository = new CompteUtilisateurForTest();
+    const compteUtilisateurRepository = new CompteUtilisateurRepositoryMock();
     // WHEN
     const usecase = new CreerCompteUtilisateurUsecase(compteUtilisateurRepository, sessionRepository);
     await usecase.execute(
