@@ -54,14 +54,17 @@
   import { EnregistrerInformationsLogementUsecase } from '@/domaines/logement/enregistrerInformationLogement.usecase';
   import { LogementViewModel } from '@/domaines/logement/ports/logement.presenter';
   import { RecupererInformationLogementUseCase } from '@/domaines/logement/recupererInformationLogement.usecase';
-  import { ProfileUtilisateurPresenterImpl } from '@/domaines/profileUtilisateur/adapters/profileUtilisateur.presenter.impl';
+  import {
+    ProfileUtilisateurPresenterImpl,
+    ProfileUtilisateurViewModel,
+  } from '@/domaines/profileUtilisateur/adapters/profileUtilisateur.presenter.impl';
   import {
     ChargerProfileUtilisateurUsecase,
     ProfileUtilisateurRepositoryAxiosImpl,
   } from '@/domaines/profileUtilisateur/chargerProfileUtilisateur.usecase';
   import {
     MettreAJourProfileUtilisateurUsecase,
-    ProfileAMettreAJour,
+    ProfileAMettreAJourInput,
   } from '@/domaines/profileUtilisateur/mettreAJourProfileUtilisateurUsecase';
   import router from '@/router';
   import { RouteAidesName } from '@/router/aides/routeAidesName';
@@ -88,6 +91,19 @@
     );
   });
 
+  const profileUtilisateurViewModel = ref<ProfileUtilisateurViewModel>({
+    id: '',
+    mail: '',
+    abonnementTransport: false,
+    anneeNaissance: '',
+    nom: '',
+    prenom: '',
+    pseudo: '',
+    revenuFiscal: 0,
+    nombreDePartsFiscales: 0,
+    nomPrenomModifiables: false,
+  });
+
   onMounted(() => {
     const informationLogementUseCase = new RecupererInformationLogementUseCase(new LogementRepositoryAxios());
     informationLogementUseCase.execute(
@@ -105,6 +121,7 @@
         revenuFiscal.value = viewModel.revenuFiscal;
         nombreDePartsFiscales.value = viewModel.nombreDePartsFiscales;
         abonnementTransport.value = viewModel.abonnementTransport;
+        profileUtilisateurViewModel.value = viewModel;
       }),
     );
   });
@@ -116,7 +133,7 @@
         new SessionRepositoryStore(),
       );
       const utilisateur = utilisateurStore().utilisateur;
-      const donneeAMettreAjour: ProfileAMettreAJour = {
+      const donneeAMettreAjour: ProfileAMettreAJourInput = {
         nom: utilisateur.nom,
         id: utilisateur.id,
         prenom: utilisateur.prenom,
@@ -124,6 +141,8 @@
         revenuFiscal: revenuFiscal.value,
         nombreDePartsFiscales: nombreDePartsFiscales.value,
         pseudo: utilisateur.pseudo,
+        anneeNaissance: profileUtilisateurViewModel.value.anneeNaissance,
+        nomPrenomModifiables: profileUtilisateurViewModel.value.nomPrenomModifiables,
       };
       await usecase.execute(donneeAMettreAjour);
 

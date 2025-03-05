@@ -41,7 +41,7 @@
   } from '@/domaines/profileUtilisateur/chargerProfileUtilisateur.usecase';
   import {
     MettreAJourProfileUtilisateurUsecase,
-    ProfileAMettreAJour,
+    ProfileAMettreAJourInput,
   } from '@/domaines/profileUtilisateur/mettreAJourProfileUtilisateurUsecase';
   import { ServiceRepositoryAxios } from '@/domaines/services/adapters/service.repository.axios';
   import { LinkyEventBusImpl } from '@/domaines/services/linkyEventBusImpl';
@@ -65,7 +65,7 @@
         new SessionRepositoryStore(),
       );
 
-      const donneesAMettreAjour: ProfileAMettreAJour = {
+      const donneesAMettreAjour: ProfileAMettreAJourInput = {
         ...profileUtilisateurViewModel.value!,
         nom: nomDeFamille.value,
       };

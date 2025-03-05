@@ -138,7 +138,7 @@
   import { ProfileUtilisateurRepositoryAxiosImpl } from '@/domaines/profileUtilisateur/chargerProfileUtilisateur.usecase';
   import {
     MettreAJourProfileUtilisateurUsecase,
-    ProfileAMettreAJour,
+    ProfileAMettreAJourInput,
   } from '@/domaines/profileUtilisateur/mettreAJourProfileUtilisateurUsecase';
 
   const { alerte, afficherAlerte } = useAlerte();
@@ -159,7 +159,7 @@
       new SessionRepositoryStore(),
     );
 
-    const profileAMettreAJour: ProfileAMettreAJour = {
+    const profileAMettreAJour: ProfileAMettreAJourInput = {
       id: profileUtlisateurViewModel.value.id,
       abonnementTransport: profileUtlisateurViewModel.value.abonnementTransport,
       anneeNaissance: profileUtlisateurViewModel.value.anneeNaissance,
@@ -168,6 +168,7 @@
       pseudo: profileUtlisateurViewModel.value.pseudo,
       revenuFiscal: profileUtlisateurViewModel.value.revenuFiscal,
       nombreDePartsFiscales: profileUtlisateurViewModel.value.nombreDePartsFiscales,
+      nomPrenomModifiables: profileUtlisateurViewModel.value.nomPrenomModifiables,
     };
     await usecase.execute(profileAMettreAJour);
     afficherAlerte('success', 'Succès', 'Compte correctement mis à jour.');
