@@ -17,7 +17,7 @@ export class ServiceRechercheRepositoryAxios implements ServiceRechercheReposito
     const axiosInstance = AxiosFactory.getAxios();
 
     const response = await axiosInstance.get<ServiceRechercheApiModel[]>(
-      `/utilisateurs/${idUtilisateur}/recherche_services/${thematiqueId}`,
+      `/utilisateurs/${idUtilisateur}/thematiques/${thematiqueId}/recherche_services`,
     );
 
     return {
