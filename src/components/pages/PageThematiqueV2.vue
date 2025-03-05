@@ -35,6 +35,7 @@
           :actions="actionsViewModel"
           :thematiqueId="thematiqueId"
           :rafraichir-actions="chargerActionsRecommandees"
+          :reset-parcours="resetParcours"
           card-classes="fr-col-12 fr-col-md-6 fr-col-xl-4"
         />
         <button class="fr-btn fr-mt-4w fr-btn--icon-left fr-icon-refresh-line" @click="resetParcours">
@@ -81,10 +82,14 @@
 
   const chargerActionsRecommandeesUsecase = new RecupererActionsPersonnaliseesUsecase(new ActionsRepositoryAxios());
 
-  onBeforeRouteUpdate((to, from, next) => {
+  onBeforeRouteUpdate(async (to, from, next) => {
     next();
     thematique.value = MenuThematiques.getFromUrl(to.params.id as string)!;
     thematiqueId = thematique.value.clefTechniqueAPI;
+
+    isLoading.value = true;
+    await chargerActionsRecommandees();
+    isLoading.value = false;
   });
 
   onMounted(async () => {

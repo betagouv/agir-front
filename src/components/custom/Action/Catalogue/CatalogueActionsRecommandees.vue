@@ -42,14 +42,40 @@
         <div class="ball-loader fr-my-3w fr-mx-auto" />
       </div>
     </section>
+    <section v-if="actions.length === 0" class="width-70 text--center fr-my-4w">
+      <h3 class="fr-h3 fr-mb-2w">C'est tout, pour le moment</h3>
+      <p class="fr-mb-4w">
+        Chaque mois, J’agis s’enrichit en nouveautés pour vous proposer toujours plus d’actions qui vous correspondent.
+        En attendant, découvrez notre
+        <router-link class="text--bleu" :to="{ name: RouteActionsName.CATALOGUE_ACTION }">
+          catalogue complet d’actions
+        </router-link>
+        ou recommencez l’expérience.
+      </p>
+
+      <div class="flex flex-center gap--small">
+        <button class="fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-refresh-line" @click="resetParcours">
+          Recommencer le parcours
+        </button>
+        <router-link
+          class="fr-btn fr-btn--icon-left fr-icon-refresh-line"
+          :to="{ name: RouteThematiquesName.THEMATIQUE_V2, params: { id: redirection.id } }"
+        >
+          Explorer "{{ redirection.label }}"
+        </router-link>
+      </div>
+    </section>
   </div>
 </template>
 
 <script lang="ts" setup>
-  import { ref } from 'vue';
+  import { computed, ref } from 'vue';
   import { ActionViewModel } from '@/domaines/actions/ports/actions.presenter';
   import { ThematiquesRepositoryAxios } from '@/domaines/thematiques/adapters/thematiques.repository.axios';
+  import { ClefThematiqueAPI, MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
   import { SupprimerActionDesActionsRecommandeesUsecase } from '@/domaines/thematiques/supprimerActionDesActionsRecommandees.usecase';
+  import { RouteActionsName } from '@/router/actions/routes';
+  import { RouteThematiquesName } from '@/router/thematiques/routes';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const props = defineProps<{
@@ -57,6 +83,7 @@
     cardClasses: string;
     thematiqueId: string;
     rafraichirActions: () => Promise<void>;
+    resetParcours: () => Promise<void>;
   }>();
 
   const loadingActions = ref<{ [key: string]: boolean }>({});
@@ -71,4 +98,26 @@
       delete loadingActions.value[actionId];
     }, 500);
   }
+
+  const ordreThematique = [
+    ClefThematiqueAPI.alimentation,
+    ClefThematiqueAPI.transports,
+    ClefThematiqueAPI.logement,
+    ClefThematiqueAPI.consommation,
+  ];
+  const redirection = computed(() => {
+    const indexActuel = ordreThematique.indexOf(props.thematiqueId as ClefThematiqueAPI);
+    const prochainIndex = (indexActuel + 1) % ordreThematique.length;
+    const prochaineThematique = ordreThematique[prochainIndex];
+
+    const { url, labelDansLeMenu } = MenuThematiques.getThematiqueData(prochaineThematique);
+    return { id: url, label: labelDansLeMenu };
+  });
 </script>
+
+<style scoped>
+  .width-70 {
+    width: 70%;
+    margin: 0 auto;
+  }
+</style>
