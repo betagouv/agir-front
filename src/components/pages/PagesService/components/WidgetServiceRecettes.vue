@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-space-between align-items--center">
-    <h2>Besoin <span class="text--bold">d'inspiration</span> ?</h2>
+    <slot name="titre" />
     <p class="text--italic">avec <img alt="manger bouger" class="fr-ml-2w" src="/logo-manger-bouger.svg" /></p>
   </div>
 
@@ -13,16 +13,18 @@
       <ServiceCarteRecette :suggestionsServiceViewModel="suggestion" />
     </li>
   </ul>
-  <router-link
-    :to="{
-      name: RouteServiceName.RECETTES,
-      params: {
-        thematiqueId: MenuThematiques.getThematiqueData(ClefThematiqueAPI.alimentation).url,
-      },
-    }"
-    class="text--bleu"
-    >Voir toutes les recettes
-  </router-link>
+  <div>
+    <router-link
+      :to="{
+        name: RouteServiceName.RECETTES,
+        params: {
+          thematiqueId: MenuThematiques.getThematiqueData(ClefThematiqueAPI.alimentation).url,
+        },
+      }"
+      class="text--bleu"
+      >Voir toutes les recettes
+    </router-link>
+  </div>
 </template>
 <script lang="ts" setup>
   import { onMounted, ref } from 'vue';

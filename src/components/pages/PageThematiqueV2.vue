@@ -45,16 +45,23 @@
     </div>
   </section>
 
+  <section v-if="thematique.clefTechniqueAPI === ClefThematiqueAPI.alimentation" class="fr-mt-4w">
+    <WidgetServiceFruitsEtLegumes />
+    <div class="fr-container fr-my-6w">
+      <WidgetServiceRecettes parametre-de-recherche="saison">
+        <template #titre>
+          <h2>Manger sainement et de saison</h2>
+        </template>
+      </WidgetServiceRecettes>
+    </div>
+  </section>
+
   <section class="fr-container fr-my-6w flex flex-column align-items--center">
     <h2>Envie de voir ou de revoir toutes les actions ?</h2>
 
     <router-link :to="{ name: RouteActionsName.CATALOGUE_ACTION }" class="fr-btn fr-btn--secondary">
       Accéder au catalogue
     </router-link>
-  </section>
-
-  <section v-if="thematique.clefTechniqueAPI === ClefThematiqueAPI.alimentation">
-    <WidgetServiceFruitsEtLegumes />
   </section>
 </template>
 
@@ -65,6 +72,7 @@
   import ParcoursKYCPourRecommandations from '@/components/custom/Thematiques/ParcoursKYCPourRecommandations.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import WidgetServiceFruitsEtLegumes from '@/components/pages/PagesService/components/WidgetServiceFruitsEtLegumes.vue';
+  import WidgetServiceRecettes from '@/components/pages/PagesService/components/WidgetServiceRecettes.vue';
   import { ActionsRepositoryAxios } from '@/domaines/actions/adapters/actions.repository.axios';
   import { ActionsDansUneThematiquePresenterImpl } from '@/domaines/actions/adapters/actionsDansUneThematique.presenter.impl';
   import { ActionViewModel } from '@/domaines/actions/ports/actions.presenter';

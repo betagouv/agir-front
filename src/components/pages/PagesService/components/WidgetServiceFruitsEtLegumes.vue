@@ -1,9 +1,20 @@
 <template>
-  <div class="fr-container">
-    <h1 class="fr-h2">
-      Les fruits et légumes pour le mois de
-      <span class="text--bleu">{{ moisCourantLabel }}</span>
-    </h1>
+  <div v-if="serviceFruitsEtLegumesViewModel.length > 0" class="fr-container">
+    <div class="flex flex-space-between">
+      <h2 class="fr-h2">
+        Les fruits et légumes pour le mois de
+        <span class="text--bleu">{{ moisCourantLabel }}</span>
+      </h2>
+      <div>
+        <router-link
+          :to="{
+            name: RouteServiceName.FRUITS_ET_LEGUMES,
+            params: { thematiqueId: MenuThematiques.getThematiqueData(ClefThematiqueAPI.alimentation).url },
+          }"
+          >Voir tout
+        </router-link>
+      </div>
+    </div>
     <div class="flex">
       <ul class="fr-grid-row fr-grid-row--gutters list-style-none fr-mb-4w">
         <li v-for="item in serviceFruitsEtLegumesViewModel" :key="item.nom" class="fr-col-6 fr-col-md-4">
@@ -26,6 +37,8 @@
     ServiceRechercheFruitsEtLegumesWidgetPresenterImpl,
   } from '@/domaines/serviceRecherche/fruitsEtLegumes/adapters/serviceRechercheFruitsEtLegumesWidget.presenter.impl';
   import { RecupererServiceFruitsEtLegumesUsecase } from '@/domaines/serviceRecherche/fruitsEtLegumes/recupererServiceFruitsEtLegumes.usecase';
+  import { ClefThematiqueAPI, MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
+  import { RouteServiceName } from '@/router/services/routes';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const isLoading = ref<boolean>(true);
