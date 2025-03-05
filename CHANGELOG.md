@@ -1,5 +1,27 @@
 # Changelog
 
+## [1.43.0](https://github.com/betagouv/agir-front/compare/v1.42.0...v1.43.0) (2025-03-05)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* aides dans les actions ([#954](https://github.com/betagouv/agir-front/issues/954)) ([5e9c9cd](https://github.com/betagouv/agir-front/commit/5e9c9cda3ac7de6cee73eac74f9bb84275588f93))
+* faq dans les actions classiques ([#961](https://github.com/betagouv/agir-front/issues/961)) ([5e05dce](https://github.com/betagouv/agir-front/commit/5e05dcef8506a18de7089a0240045882e5ae87ea))
+* nouveaux emojis pour les thématiques ([#953](https://github.com/betagouv/agir-front/issues/953)) ([4d7dce0](https://github.com/betagouv/agir-front/commit/4d7dce0437e967e00394b606b958171a4b3f8645))
+
+
+### 🐛 Corrections de bogues
+
+* utilisation de la nouvelle API pour les services d'une thématique ([#965](https://github.com/betagouv/agir-front/issues/965)) ([08a5961](https://github.com/betagouv/agir-front/commit/08a596178f08e6f3d4cbcddc2ce7b110a5f3adcb))
+
+
+### 👷 Autres changements
+
+* Bump @types/node from 22.13.5 to 22.13.9 ([#958](https://github.com/betagouv/agir-front/issues/958)) ([b006594](https://github.com/betagouv/agir-front/commit/b0065945d81cf6f5d8cb82c776e65f4eac210223))
+* Bump chart.js from 4.4.7 to 4.4.8 ([#956](https://github.com/betagouv/agir-front/issues/956)) ([ab2dde6](https://github.com/betagouv/agir-front/commit/ab2dde6036021596f3dba70f974502d119f332dc))
+* Bump prettier from 3.5.0 to 3.5.3 ([#957](https://github.com/betagouv/agir-front/issues/957)) ([9757088](https://github.com/betagouv/agir-front/commit/975708855cd8663fdbd1de0fff9c33f367c89bb7))
+* Bump typescript from 5.7.3 to 5.8.2 ([#959](https://github.com/betagouv/agir-front/issues/959)) ([be1b5e1](https://github.com/betagouv/agir-front/commit/be1b5e18cfa90097cb783dc9183dbf035332d97f))
+
 ## [1.42.0](https://github.com/betagouv/agir-front/compare/v1.41.0...v1.42.0) (2025-03-03)
 
 
