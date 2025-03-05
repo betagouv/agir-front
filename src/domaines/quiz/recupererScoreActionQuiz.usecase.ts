@@ -1,4 +1,4 @@
-import { QuizRepository } from '@/domaines/quiz/ports/quizRepository';
+import { QuizRepository } from '@/domaines/quiz/ports/quiz.repository';
 import { ScoreActionQuizPresenter } from '@/domaines/quiz/ports/scoreActionQuiz.presenter';
 
 export class RecupererScoreActionQuizUsecase {

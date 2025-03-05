@@ -20,6 +20,7 @@ export enum QuizDifficulte {
 export interface ArticleDuQuiz {
   id: string;
   contenu: string;
+  sources: { url: string; label: string }[];
 }
 export interface Quiz {
   id: string;
@@ -30,7 +31,8 @@ export interface Quiz {
   nombreDePointsAGagner: number;
   articleAssocie: ArticleDuQuiz | null;
 }
-export type ScoreQuiz = number;
+
+export type ScoreQuiz = { nombreBonnesReponses: number; nombreQuestions: number };
 
 export interface QuizRepository {
   getQuiz(idQuiz: string, idUtilisateur: string): Promise<Quiz>;

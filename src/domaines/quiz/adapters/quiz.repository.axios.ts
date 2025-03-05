@@ -1,11 +1,12 @@
 import { Response } from 'redaxios';
 import { AxiosFactory, intercept401 } from '@/axios.factory';
-import { Quiz, QuizRepository, ScoreQuiz } from '@/domaines/quiz/ports/quizRepository';
+import { Quiz, QuizRepository, ScoreQuiz } from '@/domaines/quiz/ports/quiz.repository';
 import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 
 export interface QuizApiModel {
   content_id: string;
   article_contenu: string;
+  article_sources: { url: string; label: string }[];
   article_id: string;
   titre: string;
   thematique_principale: ClefThematiqueAPI;
@@ -26,6 +27,11 @@ export interface QuizApiModel {
       ];
     },
   ];
+}
+
+interface ScoreQuizApiModel {
+  nombre_bonnes_reponses: number;
+  nombre_quizz_done: number;
 }
 
 export class QuizRepositoryAxios implements QuizRepository {
@@ -66,8 +72,13 @@ export class QuizRepositoryAxios implements QuizRepository {
   @intercept401()
   async recupererScoreActionQuiz(idUtilisateur: string, idAction: string): Promise<ScoreQuiz> {
     const axiosInstance = AxiosFactory.getAxios();
-    const response = await axiosInstance.get(`/utilisateurs/${idUtilisateur}/actions/quizz/${idAction}/score`);
-    return response.data.score;
+    const response = await axiosInstance.get<ScoreQuizApiModel>(
+      `/utilisateurs/${idUtilisateur}/actions/quizz/${idAction}/score`,
+    );
+    return {
+      nombreBonnesReponses: response.data.nombre_bonnes_reponses,
+      nombreQuestions: response.data.nombre_quizz_done,
+    };
   }
 }
 
@@ -97,6 +108,7 @@ export function mapQuizApi(quizApiModel: QuizApiModel): Quiz {
         ? {
             id: quizApiModel.article_id,
             contenu: quizApiModel.article_contenu,
+            sources: quizApiModel.article_sources,
           }
         : null,
   };

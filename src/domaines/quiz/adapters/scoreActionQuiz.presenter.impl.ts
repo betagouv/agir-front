@@ -1,4 +1,4 @@
-import { ScoreQuiz } from '@/domaines/quiz/ports/quizRepository';
+import { ScoreQuiz } from '@/domaines/quiz/ports/quiz.repository';
 import {
   ScoreActionQuizPresenter,
   ScoreActionQuizViewModel,
@@ -22,10 +22,11 @@ export class ScoreActionQuizPresenterImpl implements ScoreActionQuizPresenter {
         haut: score >= 70,
       }).find(([, condition]) => condition)?.[0] as keyof typeof scoreStrategies;
 
-    const { emoji, couleurBackground, couleurBordure } = scoreStrategies[getScoreCategory(score)];
+    const pourcentageScore = Math.round((score.nombreBonnesReponses / score.nombreQuestions) * 100);
+    const { emoji, couleurBackground, couleurBordure } = scoreStrategies[getScoreCategory(pourcentageScore)];
 
     this.viewModel({
-      score: `${score}%`,
+      score: `${score.nombreBonnesReponses} bonnes réponses sur ${score.nombreQuestions} (${pourcentageScore}%)`,
       scoreConfig: {
         emoji,
         couleurBackground,

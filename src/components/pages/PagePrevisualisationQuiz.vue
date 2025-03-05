@@ -18,8 +18,9 @@
   import { onMounted, ref } from 'vue';
   import { useRoute } from 'vue-router';
   import PageQuizComposant from '@/components/custom/Quiz/PageQuizComposant.vue';
-  import { ChargementQuizPresenterImpl, QuizViewModel } from '@/domaines/quiz/adapters/chargementQuiz.presenter.impl';
-  import { QuizRepositoryAxios } from '@/domaines/quiz/adapters/quizRepository.axios';
+  import { ChargementQuizPresenterImpl } from '@/domaines/quiz/adapters/chargementQuiz.presenter.impl';
+  import { QuizRepositoryAxios } from '@/domaines/quiz/adapters/quiz.repository.axios';
+  import { QuizViewModel } from '@/domaines/quiz/ports/chargementQuizz.presenter';
   import { PrevisualiserQuizUsecase } from '@/domaines/quiz/previsualiserQuiz.usecase';
 
   const quizViewModel = ref<QuizViewModel>();

@@ -19,9 +19,9 @@
   import Notation from '@/components/custom/Notation.vue';
   import QuizReponse from '@/components/custom/Quiz/QuizReponse.vue';
   import { useBoutonRetour } from '@/composables/boutonRetour';
-  import { QuizRepositoryAxios } from '@/domaines/quiz/adapters/quizRepository.axios';
+  import { QuizRepositoryAxios } from '@/domaines/quiz/adapters/quiz.repository.axios';
   import { EvaluerQuizUsecase } from '@/domaines/quiz/evaluerQuiz.usecase';
-  import { ArticleDuQuiz } from '@/domaines/quiz/ports/quizRepository';
+  import { ArticleDuQuiz } from '@/domaines/quiz/ports/quiz.repository';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const props = defineProps<{

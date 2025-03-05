@@ -1,9 +1,9 @@
 import { fireEvent, render } from '@testing-library/vue';
 import PageQuizComposant from '@/components/custom/Quiz/PageQuizComposant.vue';
-import { QuizViewModel } from '@/domaines/quiz/adapters/chargementQuiz.presenter.impl';
-import { ArticleDuQuiz } from '@/domaines/quiz/ports/quizRepository';
+import { ArticleDuQuiz } from '@/domaines/quiz/ports/quiz.repository';
 import { EnvoyerDonneesQuizInteractionUsecase } from '@/domaines/quiz/envoyerDonneesQuizInteraction.usecase';
 import router from '@/router';
+import { QuizViewModel } from '@/domaines/quiz/ports/chargementQuizz.presenter';
 
 const quizViewModel: QuizViewModel = {
   titre: 'A quoi ça sert de manger bio ?',

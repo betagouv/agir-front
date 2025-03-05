@@ -25,20 +25,26 @@
     </p>
     <p class="bravo-encouragement">{{ felicitations ?? scoreViewModel.encouragement }}</p>
 
-    <router-link :to="{ name: RouteActionsName.CATALOGUE_ACTION }" class="fr-btn display-block fr-my-0 fr-mx-auto"
-      >Revenir au catalogue</router-link
-    >
+    <div class="flex flex-center align-items--center gap--small">
+      <router-link :to="{ path: dernierePageStore.path }" class="fr-btn display-block fr-my-0">
+        Revenir {{ labelBouton }}
+      </router-link>
+
+      <button class="fr-btn fr-btn--secondary" @click="recommencerQuiz">Recommencer le quiz</button>
+    </div>
   </template>
 </template>
 
 <script setup lang="ts">
   import { onMounted, ref } from 'vue';
   import { useRoute } from 'vue-router';
-  import { QuizRepositoryAxios } from '@/domaines/quiz/adapters/quizRepository.axios';
+  import { QuizRepositoryAxios } from '@/domaines/quiz/adapters/quiz.repository.axios';
   import { ScoreActionQuizPresenterImpl } from '@/domaines/quiz/adapters/scoreActionQuiz.presenter.impl';
   import { ScoreActionQuizViewModel } from '@/domaines/quiz/ports/scoreActionQuiz.presenter';
   import { RecupererScoreActionQuizUsecase } from '@/domaines/quiz/recupererScoreActionQuiz.usecase';
   import { RouteActionsName } from '@/router/actions/routes';
+  import { RouteThematiquesName } from '@/router/thematiques/routes';
+  import { useNavigationStore } from '@/store/navigationStore';
   import { utilisateurStore } from '@/store/utilisateur';
 
   defineProps<{
@@ -57,6 +63,18 @@
       new ScoreActionQuizPresenterImpl(vm => (scoreViewModel.value = vm)),
     );
   });
+
+  function recommencerQuiz() {
+    window.location.reload();
+  }
+
+  const dernierePageStore = useNavigationStore().pagePrecedente;
+  const labelBouton =
+    dernierePageStore.name === RouteActionsName.CATALOGUE_ACTION
+      ? 'au catalogue'
+      : dernierePageStore.name === RouteThematiquesName.THEMATIQUE_V2
+        ? 'à la thématique'
+        : "à l'accueil";
 </script>
 
 <style scoped>

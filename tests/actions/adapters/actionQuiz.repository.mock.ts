@@ -62,6 +62,12 @@ export class ActionQuizRepositoryMock implements ActionsRepository {
           articleAssocie: {
             id: '1',
             contenu: '<p>Article de ouf 2 !</p>',
+            sources: [
+              {
+                url: 'url',
+                label: 'label',
+              },
+            ],
           },
         },
         {
@@ -83,6 +89,12 @@ export class ActionQuizRepositoryMock implements ActionsRepository {
           articleAssocie: {
             id: '1',
             contenu: '<p>Article de ouf 3!</p>',
+            sources: [
+              {
+                url: 'url',
+                label: 'label',
+              },
+            ],
           },
         },
       ],

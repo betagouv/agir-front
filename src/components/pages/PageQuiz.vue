@@ -35,9 +35,10 @@
   import { useRoute } from 'vue-router';
   import PageQuizComposant from '@/components/custom/Quiz/PageQuizComposant.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
-  import { ChargementQuizPresenterImpl, QuizViewModel } from '@/domaines/quiz/adapters/chargementQuiz.presenter.impl';
-  import { QuizRepositoryAxios } from '@/domaines/quiz/adapters/quizRepository.axios';
+  import { ChargementQuizPresenterImpl } from '@/domaines/quiz/adapters/chargementQuiz.presenter.impl';
+  import { QuizRepositoryAxios } from '@/domaines/quiz/adapters/quiz.repository.axios';
   import { ChargementQuizUsecase } from '@/domaines/quiz/chargementQuiz.usecase';
+  import { QuizViewModel } from '@/domaines/quiz/ports/chargementQuizz.presenter';
   import { MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
   import { utilisateurStore } from '@/store/utilisateur';
 

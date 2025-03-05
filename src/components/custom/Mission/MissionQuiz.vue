@@ -16,9 +16,10 @@
   import { onMounted, ref } from 'vue';
   import MissionEtapeSkeleton from '@/components/custom/Mission/MissionEtapeSkeleton.vue';
   import PageQuizComposant from '@/components/custom/Quiz/PageQuizComposant.vue';
-  import { ChargementQuizPresenterImpl, QuizViewModel } from '@/domaines/quiz/adapters/chargementQuiz.presenter.impl';
-  import { QuizRepositoryAxios } from '@/domaines/quiz/adapters/quizRepository.axios';
+  import { ChargementQuizPresenterImpl } from '@/domaines/quiz/adapters/chargementQuiz.presenter.impl';
+  import { QuizRepositoryAxios } from '@/domaines/quiz/adapters/quiz.repository.axios';
   import { ChargementQuizUsecase } from '@/domaines/quiz/chargementQuiz.usecase';
+  import { QuizViewModel } from '@/domaines/quiz/ports/chargementQuizz.presenter';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const quizViewModel = ref<QuizViewModel>();

@@ -1,4 +1,4 @@
-import { Quiz, QuizRepository, ScoreQuiz } from '@/domaines/quiz/ports/quizRepository';
+import { Quiz, QuizRepository, ScoreQuiz } from '@/domaines/quiz/ports/quiz.repository';
 import { RecupererScoreActionQuizUsecase } from '@/domaines/quiz/recupererScoreActionQuiz.usecase';
 import { ScoreActionQuizViewModel } from '@/domaines/quiz/ports/scoreActionQuiz.presenter';
 import { ScoreActionQuizPresenterImpl } from '@/domaines/quiz/adapters/scoreActionQuiz.presenter.impl';
@@ -33,7 +33,10 @@ class QuizRepositoryForTest implements QuizRepository {
 
 describe('Fichier de test pour la récupération du score action quiz', () => {
   it('Afficher correctement les informations quand le score du quiz est < à 40%', () => {
-    const score = 39;
+    const score: ScoreQuiz = {
+      nombreBonnesReponses: 4,
+      nombreQuestions: 11,
+    };
     const repository = new QuizRepositoryForTest(score);
 
     const usecase = new RecupererScoreActionQuizUsecase(repository);
@@ -41,7 +44,7 @@ describe('Fichier de test pour la récupération du score action quiz', () => {
 
     function expectation(viewmodel: ScoreActionQuizViewModel) {
       expect(viewmodel).toStrictEqual<ScoreActionQuizViewModel>({
-        score: '39%',
+        score: '4 bonnes réponses sur 11 (36%)',
         scoreConfig: {
           emoji: '😬',
           couleurBackground: '#FEF7F7',
@@ -53,7 +56,10 @@ describe('Fichier de test pour la récupération du score action quiz', () => {
   });
 
   it('Afficher correctement les informations quand le score du quiz est < à 70%', () => {
-    const score = 69;
+    const score = {
+      nombreBonnesReponses: 7,
+      nombreQuestions: 11,
+    };
     const repository = new QuizRepositoryForTest(score);
 
     const usecase = new RecupererScoreActionQuizUsecase(repository);
@@ -61,7 +67,7 @@ describe('Fichier de test pour la récupération du score action quiz', () => {
 
     function expectation(viewmodel: ScoreActionQuizViewModel) {
       expect(viewmodel).toStrictEqual<ScoreActionQuizViewModel>({
-        score: '69%',
+        score: '7 bonnes réponses sur 11 (64%)',
         scoreConfig: {
           emoji: '🙃',
           couleurBackground: '#FCFAED',
@@ -73,7 +79,10 @@ describe('Fichier de test pour la récupération du score action quiz', () => {
   });
 
   it('Afficher correctement les informations quand le score du quiz est > à 70%', () => {
-    const score = 80;
+    const score = {
+      nombreBonnesReponses: 10,
+      nombreQuestions: 11,
+    };
     const repository = new QuizRepositoryForTest(score);
 
     const usecase = new RecupererScoreActionQuizUsecase(repository);
@@ -81,7 +90,7 @@ describe('Fichier de test pour la récupération du score action quiz', () => {
 
     function expectation(viewmodel: ScoreActionQuizViewModel) {
       expect(viewmodel).toStrictEqual<ScoreActionQuizViewModel>({
-        score: '80%',
+        score: '10 bonnes réponses sur 11 (91%)',
         scoreConfig: {
           emoji: '👏',
           couleurBackground: '#FAFCED',
