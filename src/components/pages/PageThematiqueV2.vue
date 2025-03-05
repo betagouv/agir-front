@@ -1,16 +1,9 @@
 <template>
   <div class="fr-container">
-    <FilDAriane :page-courante="thematique.labelDansLeMenu" />
-    <div class="fr-grid-row align-items--center fr-mb-4w">
-      <img
-        :src="thematique.imageUrl"
-        alt="thématique"
-        class="border-radius--full img-object-fit-cover fr-mr-2w"
-        height="80"
-        width="80"
-      />
-      <h1 class="fr-h1 fr-col fr-m-0">{{ thematique.labelDansLeMenu }}</h1>
-    </div>
+    <h1 class="fr-h1 fr-col fr-m-0 fr-py-4w">
+      <span aria-hidden="true"> {{ thematique.emoji }}</span>
+      {{ thematique.labelDansLeMenu }}
+    </h1>
   </div>
 
   <section class="fr-py-4w background-color--gris-galet-950-100">
@@ -54,6 +47,9 @@
         </template>
       </WidgetServiceRecettes>
     </div>
+    <div class="fr-container fr-my-6w">
+      <WidgetServicePresDeChezNous />
+    </div>
   </section>
 
   <section class="fr-container fr-my-6w flex flex-column align-items--center">
@@ -70,8 +66,8 @@
   import { onBeforeRouteUpdate, useRoute } from 'vue-router';
   import CatalogueActionsRecommandees from '@/components/custom/Action/Catalogue/CatalogueActionsRecommandees.vue';
   import ParcoursKYCPourRecommandations from '@/components/custom/Thematiques/ParcoursKYCPourRecommandations.vue';
-  import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import WidgetServiceFruitsEtLegumes from '@/components/pages/PagesService/components/WidgetServiceFruitsEtLegumes.vue';
+  import WidgetServicePresDeChezNous from '@/components/pages/PagesService/components/WidgetServicePresDeChezNous.vue';
   import WidgetServiceRecettes from '@/components/pages/PagesService/components/WidgetServiceRecettes.vue';
   import { ActionsRepositoryAxios } from '@/domaines/actions/adapters/actions.repository.axios';
   import { ActionsDansUneThematiquePresenterImpl } from '@/domaines/actions/adapters/actionsDansUneThematique.presenter.impl';
