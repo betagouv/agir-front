@@ -2,6 +2,7 @@ export interface Utilisateur {
   nom: string;
   id: string;
   prenom: string;
+  pseudo: string;
   mail: string;
   onboardingAEteRealise: boolean;
   afficherDisclaimerAides: boolean;

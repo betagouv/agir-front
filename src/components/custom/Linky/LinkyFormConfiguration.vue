@@ -1,30 +1,30 @@
 <template>
   <form @submit.prevent="parametrerLeService()">
-    <InputText name="nom" v-model="nomDeFamille" label="Mon nom de famille" />
+    <InputText v-model="nomDeFamille" label="Mon nom de famille" name="nom" />
     <InputText
-      name="prm"
       v-model="parametreDuService"
-      label="Mon numéro de PRM"
       description="Il s’agit d’une suite de 14 chiffres qui identifie le logement sur le réseau électrique."
+      label="Mon numéro de PRM"
+      name="prm"
     />
     <Alert
       v-if="alerte.isActive"
-      class="fr-col-12 fr-my-2w"
-      :type="alerte.type"
-      :titre="alerte.titre"
       :message="alerte.message"
+      :titre="alerte.titre"
+      :type="alerte.type"
+      class="fr-col-12 fr-my-2w"
     />
     <InputCheckboxUnitaire
-      class="fr-mb-2w"
       id="cgu"
       v-model="acceptationCGU"
+      class="fr-mb-2w"
       label="Je déclare sur l'honneur être titulaire du point ou être mandaté par celui-ci et j'accepte que le service 'J'agis' ait accès à mes données des 2 ans passés et pour les 3 ans à venir. Je peux changer d'avis à tout moment sur mon compte Enedis."
     />
-    <button type="submit" class="fr-btn" :disabled="!acceptationCGU || parametreDuService.length != 14">Valider</button>
+    <button :disabled="!acceptationCGU || parametreDuService.length != 14" class="fr-btn" type="submit">Valider</button>
   </form>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
   import { onMounted, ref } from 'vue';
   import Alert from '@/components/custom/Alert.vue';
   import InputCheckboxUnitaire from '@/components/dsfr/InputCheckboxUnitaire.vue';
@@ -39,7 +39,10 @@
     ChargerProfileUtilisateurUsecase,
     ProfileUtilisateurRepositoryAxiosImpl,
   } from '@/domaines/profileUtilisateur/chargerProfileUtilisateur.usecase';
-  import { MettreAJourProfileUtilisateurUsecase } from '@/domaines/profileUtilisateur/mettreAJourProfileUtilisateurUsecase';
+  import {
+    MettreAJourProfileUtilisateurUsecase,
+    ProfileAMettreAJour,
+  } from '@/domaines/profileUtilisateur/mettreAJourProfileUtilisateurUsecase';
   import { ServiceRepositoryAxios } from '@/domaines/services/adapters/service.repository.axios';
   import { LinkyEventBusImpl } from '@/domaines/services/linkyEventBusImpl';
   import { ParametrerServiceUsecase } from '@/domaines/services/parametrerService.usecase';
@@ -62,7 +65,7 @@
         new SessionRepositoryStore(),
       );
 
-      const donneesAMettreAjour: ProfileUtilisateurViewModel = {
+      const donneesAMettreAjour: ProfileAMettreAJour = {
         ...profileUtilisateurViewModel.value!,
         nom: nomDeFamille.value,
       };

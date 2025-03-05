@@ -12,7 +12,7 @@ interface ClassementItem {
   id: string;
   points: number;
   rank: number;
-  prenom: string;
+  pseudo: string;
 }
 
 export interface Classement {

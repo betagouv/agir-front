@@ -28,6 +28,7 @@ export class UtilisateurRepositoryMock implements UtilisateurRepository {
       mail: 'john@exemple.com',
       onboardingAEteRealise: false,
       afficherDisclaimerAides: false,
+      pseudo: '',
     });
   }
 
@@ -59,6 +60,7 @@ export class UtilisateurRepositoryMock implements UtilisateurRepository {
       onboardingAEteRealise: false,
       afficherDisclaimerAides: false,
       token: 'token',
+      pseudo: '',
     });
   }
 
@@ -71,6 +73,7 @@ export class UtilisateurRepositoryMock implements UtilisateurRepository {
       onboardingAEteRealise: false,
       afficherDisclaimerAides: false,
       token: 'token',
+      pseudo: '',
     });
   }
 

@@ -23,6 +23,7 @@ export const utilisateurStore = defineStore('utilisateur', {
       onboardingAEteRealise: false,
       afficherDisclaimerAides: false,
       token: '',
+      pseudo: '',
     },
     score: {
       points: 0,

@@ -12,7 +12,7 @@ enum PourcentileApiModel {
 interface ClassementItemApiModel {
   id: string;
   points: number;
-  prenom: string;
+  pseudo: string;
   rank: number;
 }
 

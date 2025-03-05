@@ -39,6 +39,7 @@ export class CompteUtilisateurRepositoryMock implements CompteUtilisateurReposit
       nombreDePartsFiscales: 1,
       abonnementTransport: false,
       fonctionnalitesDebloquees: [],
+      pseudo: compteUtilisateurACreer.pseudo,
     });
   }
 
@@ -49,6 +50,7 @@ export class CompteUtilisateurRepositoryMock implements CompteUtilisateurReposit
       mail: 'mail@exemple.com',
       prenom: 'John',
       fonctionnalitesDebloquees: [],
+      pseudo: 'JD',
     });
   }
 

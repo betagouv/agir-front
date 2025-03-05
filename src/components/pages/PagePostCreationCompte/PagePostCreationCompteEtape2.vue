@@ -3,10 +3,10 @@
     <div class="fr-col-12 fr-col-md-6 fr-mx-auto fr-mb-0 background--white fr-p-4w border border-radius--md">
       <form aria-labelledby="identity-fieldset-legend" class="fr-mb-4w" @submit.prevent="validerLaReponse()">
         <fieldset class="fr-fieldset fr-mb-0">
-          <legend class="fr-fieldset__legend" id="identity-fieldset-legend">
-            <img src="/bg_creation_compte_etape_2.svg" alt="" />
+          <legend id="identity-fieldset-legend" class="fr-fieldset__legend">
+            <img alt="" src="/bg_creation_compte_etape_2.svg" />
             <p class="text--normal text--bleu fr-mb-1w fr-mt-1w"><span class="fr-text--bold">Question 2</span> sur 3</p>
-            <h1 class="fr-h4 fr-mb-1w">Enchanté, {{ onboardingPostCreationCompte().prenom }}</h1>
+            <h1 class="fr-h4 fr-mb-1w">Enchanté, {{ onboardingPostCreationCompte().pseudo }}</h1>
             <p class="fr-text--regular fr-text--lg">
               Pour découvrir des aides, services et contenus disponibles proches de chez vous, indiquez-nous votre lieu
               de résidence.
@@ -14,17 +14,17 @@
           </legend>
           <Alert
             v-if="alerte.isActive"
-            class="fr-col-12 fr-mb-4w"
-            :type="alerte.type"
-            :titre="alerte.titre"
             :message="alerte.message"
+            :titre="alerte.titre"
+            :type="alerte.type"
+            class="fr-col-12 fr-mb-4w"
           />
           <div class="fr-fieldset__element">
             <InputCodePostal
               v-model="onboardingPostCreationCompte().codePostal"
-              :default-value="onboardingPostCreationCompte().codePostal"
-              :default-select-value="onboardingPostCreationCompte().commune"
               :autofocus="true"
+              :default-select-value="onboardingPostCreationCompte().commune"
+              :default-value="onboardingPostCreationCompte().codePostal"
               @update:selectedCommune="onboardingPostCreationCompte().commune = $event"
             />
           </div>
@@ -38,13 +38,14 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
   import Alert from '@/components/custom/Alert.vue';
   import InputCodePostal from '@/components/dsfr/InputCodePostal.vue';
   import { useAlerte } from '@/composables/useAlerte';
   import router from '@/router';
   import { RouteCompteName } from '@/router/compte/routeCompteName';
   import { onboardingPostCreationCompte } from '@/store/onboardingPostCreationCompte';
+
   const { alerte, afficherAlerte } = useAlerte();
 
   const validerLaReponse = async () => {

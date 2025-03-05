@@ -27,6 +27,7 @@ describe("Fichier de tests concernant la validation de l'authentification de l'u
       onboardingAEteRealise: false,
       afficherDisclaimerAides: false,
       token: 'token',
+      pseudo: '',
     });
   });
 

@@ -22,6 +22,7 @@ describe('Fichier de tests concernant la validation du compte utilisateur', () =
       onboardingAEteRealise: false,
       afficherDisclaimerAides: false,
       token: 'token',
+      pseudo: '',
     });
   });
 });

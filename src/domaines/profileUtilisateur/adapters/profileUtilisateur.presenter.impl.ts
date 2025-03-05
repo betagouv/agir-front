@@ -6,10 +6,12 @@ export interface ProfileUtilisateurViewModel {
   id: string;
   mail: string;
   prenom: string;
+  pseudo: string;
   abonnementTransport: boolean;
   revenuFiscal: number | null;
   nombreDePartsFiscales: number;
   anneeNaissance?: string;
+  nomPrenomModifiables: boolean;
 }
 
 export class ProfileUtilisateurPresenterImpl implements ProfileUtilisateurPresenter {
@@ -25,6 +27,8 @@ export class ProfileUtilisateurPresenterImpl implements ProfileUtilisateurPresen
       revenuFiscal: profileUtilisateur.revenuFiscal,
       nombreDePartsFiscales: profileUtilisateur.nombreDePartsFiscales,
       anneeNaissance: profileUtilisateur.anneeNaissance ? profileUtilisateur.anneeNaissance.toString() : undefined,
+      pseudo: profileUtilisateur.pseudo,
+      nomPrenomModifiables: profileUtilisateur.nomPrenomModifiables,
     });
   }
 }
