@@ -21,8 +21,15 @@
               v-model:revenu-fiscal-de-reference="revenuFiscal"
               @update:isRFREnErreur="value => (isRFREnErreur = value)"
             />
+            <h3 class="fr-h4 fr-mt-3w">Situation particulière</h3>
+            <InputCheckboxUnitaire
+              id="abonnement-transport"
+              label="Êtes-vous en situation de handicap ?"
+              description="Pour certaines aides, les personnes en situation de handicap peuvent bénéficier de conditions spécifiques. Dans ce cas, il sera nécessaire de justifier votre situation"
+              v-model="situationHandicap"
+            />
             <div v-if="afficherAbonnement">
-              <h3 class="fr-h4">Abonnements et cartes</h3>
+              <h3 class="fr-h4 fr-mt-3w">Abonnements et cartes</h3>
               <InputCheckboxUnitaire
                 id="abonnement-transport"
                 label="En tant qu’habitant d’Angers Loire Métropole, êtes-vous abonnés du TER Pays de la Loire ?"
@@ -71,6 +78,7 @@
   const revenuFiscal = ref<number | null>(0);
   const nombreDePartsFiscales = ref(0);
   const abonnementTransport = ref(false);
+  const situationHandicap = ref(false);
   const logementViewModel = ref<LogementViewModel | null>(null);
   const isRFREnErreur = ref(false);
   const isCodePostalEnErreur = ref(false);
@@ -105,6 +113,9 @@
         revenuFiscal.value = viewModel.revenuFiscal;
         nombreDePartsFiscales.value = viewModel.nombreDePartsFiscales;
         abonnementTransport.value = viewModel.abonnementTransport;
+        if (viewModel.situationHandicap !== undefined) {
+          situationHandicap.value = viewModel.situationHandicap;
+        }
       }),
     );
   });
@@ -122,6 +133,7 @@
         mail: utilisateur.mail,
         prenom: utilisateur.prenom,
         abonnementTransport: abonnementTransport.value,
+        situationHandicap: situationHandicap.value,
         revenuFiscal: revenuFiscal.value,
         nombreDePartsFiscales: nombreDePartsFiscales.value,
       };

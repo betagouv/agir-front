@@ -16,6 +16,7 @@ class SpyProfileUtilisateurRepository implements ProfileUtilisateurRepository {
     revenuFiscal: 0,
     nombreDePartsFiscales: 0,
     abonnementTransport: false,
+    situationHandicap: false,
     anneeNaissance: 1998,
   };
 
@@ -50,6 +51,7 @@ describe('Fichier de tests concernant la mise à jour du profile utilisateur', (
       revenuFiscal: 10000,
       nombreDePartsFiscales: 1,
       abonnementTransport: false,
+      situationHandicap: true,
       anneeNaissance: '',
     };
     await usecase.execute(viewModelInput);
@@ -61,6 +63,7 @@ describe('Fichier de tests concernant la mise à jour du profile utilisateur', (
       revenuFiscal: 10000,
       nombreDePartsFiscales: 1,
       abonnementTransport: false,
+      situationHandicap: true,
       anneeNaissance: undefined,
     });
     expect(sessionRepository.utilisateur).toStrictEqual<Utilisateur>({
