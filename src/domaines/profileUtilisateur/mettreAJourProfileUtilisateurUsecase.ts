@@ -1,7 +1,7 @@
 import { SessionRepository } from '@/domaines/authentification/ports/session.repository';
 import { ProfileUtilisateurRepository } from '@/domaines/profileUtilisateur/ports/profileUtilisateur.repository';
 
-export type ProfileAMettreAJour = {
+export type ProfileAMettreAJourInput = {
   id: string;
   abonnementTransport: boolean;
   nom: string;
@@ -10,6 +10,7 @@ export type ProfileAMettreAJour = {
   nombreDePartsFiscales: number;
   anneeNaissance?: string;
   pseudo: string;
+  nomPrenomModifiables: boolean;
 };
 
 export class MettreAJourProfileUtilisateurUsecase {
@@ -18,17 +19,32 @@ export class MettreAJourProfileUtilisateurUsecase {
     private sessionRepository: SessionRepository,
   ) {}
 
-  async execute(compteUtilisateurInput: ProfileAMettreAJour): Promise<void> {
-    await this.compteUtilisateuRepository.mettreAjour({
-      id: compteUtilisateurInput.id,
-      abonnementTransport: compteUtilisateurInput.abonnementTransport,
-      nom: compteUtilisateurInput.nom,
-      prenom: compteUtilisateurInput.prenom,
-      revenuFiscal: compteUtilisateurInput.revenuFiscal,
-      nombreDePartsFiscales: compteUtilisateurInput.nombreDePartsFiscales,
-      anneeNaissance: compteUtilisateurInput.anneeNaissance ? Number(compteUtilisateurInput.anneeNaissance) : undefined,
-      pseudo: compteUtilisateurInput.pseudo,
-    });
+  async execute(compteUtilisateurInput: ProfileAMettreAJourInput): Promise<void> {
+    if (compteUtilisateurInput.nomPrenomModifiables) {
+      await this.compteUtilisateuRepository.mettreAjour({
+        id: compteUtilisateurInput.id,
+        abonnementTransport: compteUtilisateurInput.abonnementTransport,
+        nom: compteUtilisateurInput.nom,
+        prenom: compteUtilisateurInput.prenom,
+        revenuFiscal: compteUtilisateurInput.revenuFiscal,
+        nombreDePartsFiscales: compteUtilisateurInput.nombreDePartsFiscales,
+        anneeNaissance: compteUtilisateurInput.anneeNaissance
+          ? Number(compteUtilisateurInput.anneeNaissance)
+          : undefined,
+        pseudo: compteUtilisateurInput.pseudo,
+      });
+    } else {
+      await this.compteUtilisateuRepository.mettreAjourUtilisateurFranceConnecte({
+        id: compteUtilisateurInput.id,
+        abonnementTransport: compteUtilisateurInput.abonnementTransport,
+        revenuFiscal: compteUtilisateurInput.revenuFiscal,
+        nombreDePartsFiscales: compteUtilisateurInput.nombreDePartsFiscales,
+        anneeNaissance: compteUtilisateurInput.anneeNaissance
+          ? Number(compteUtilisateurInput.anneeNaissance)
+          : undefined,
+        pseudo: compteUtilisateurInput.pseudo,
+      });
+    }
     this.sessionRepository.sauvegarderUtilisateur({
       id: compteUtilisateurInput.id,
       prenom: compteUtilisateurInput.prenom,

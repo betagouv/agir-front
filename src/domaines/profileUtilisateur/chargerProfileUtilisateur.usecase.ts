@@ -29,10 +29,13 @@ export interface ProfileUtilisateur {
   nomPrenomModifiables: boolean;
 }
 
-export interface ProfileUtilisateurAMettreAJour {
-  id: string;
+export interface ProfileUtilisateurAMettreAJour extends ProfileUtilisateurFranceConnectAMettreAJour {
   nom: string;
   prenom: string;
+}
+
+export interface ProfileUtilisateurFranceConnectAMettreAJour {
+  id: string;
   abonnementTransport: boolean;
   revenuFiscal: number | null;
   nombreDePartsFiscales: number;
@@ -67,6 +70,18 @@ export class ProfileUtilisateurRepositoryAxiosImpl implements ProfileUtilisateur
     await axiosInstance.patch(`/utilisateurs/${profileUtilisateur.id}/profile`, {
       nom: profileUtilisateur.nom,
       prenom: profileUtilisateur.prenom,
+      revenu_fiscal: profileUtilisateur.revenuFiscal,
+      nombre_de_parts_fiscales: profileUtilisateur.nombreDePartsFiscales,
+      abonnement_ter_loire: profileUtilisateur.abonnementTransport,
+      annee_naissance: profileUtilisateur.anneeNaissance,
+      pseudo: profileUtilisateur.pseudo,
+    });
+  }
+
+  @intercept401()
+  async mettreAjourUtilisateurFranceConnecte(profileUtilisateur: ProfileUtilisateurAMettreAJour) {
+    const axiosInstance = AxiosFactory.getAxios();
+    await axiosInstance.patch(`/utilisateurs/${profileUtilisateur.id}/profile`, {
       revenu_fiscal: profileUtilisateur.revenuFiscal,
       nombre_de_parts_fiscales: profileUtilisateur.nombreDePartsFiscales,
       abonnement_ter_loire: profileUtilisateur.abonnementTransport,

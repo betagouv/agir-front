@@ -44,14 +44,17 @@
   import { EnregistrerInformationsLogementUsecase } from '@/domaines/logement/enregistrerInformationLogement.usecase';
   import { LogementViewModel } from '@/domaines/logement/ports/logement.presenter';
   import { RecupererInformationLogementUseCase } from '@/domaines/logement/recupererInformationLogement.usecase';
-  import { ProfileUtilisateurPresenterImpl } from '@/domaines/profileUtilisateur/adapters/profileUtilisateur.presenter.impl';
+  import {
+    ProfileUtilisateurPresenterImpl,
+    ProfileUtilisateurViewModel,
+  } from '@/domaines/profileUtilisateur/adapters/profileUtilisateur.presenter.impl';
   import {
     ChargerProfileUtilisateurUsecase,
     ProfileUtilisateurRepositoryAxiosImpl,
   } from '@/domaines/profileUtilisateur/chargerProfileUtilisateur.usecase';
   import {
     MettreAJourProfileUtilisateurUsecase,
-    ProfileAMettreAJour,
+    ProfileAMettreAJourInput,
   } from '@/domaines/profileUtilisateur/mettreAJourProfileUtilisateurUsecase';
   import router from '@/router';
   import { RouteAidesName } from '@/router/aides/routeAidesName';
@@ -63,6 +66,7 @@
   const logementViewModel = ref<LogementViewModel | null>(null);
   const abonnementTransport = ref(false);
   const isRFREnErreur = ref(false);
+  const profileUtilisateur = ref<ProfileUtilisateurViewModel>();
 
   onMounted(() => {
     const informationLogementUseCase = new RecupererInformationLogementUseCase(new LogementRepositoryAxios());
@@ -92,7 +96,7 @@
         new SessionRepositoryStore(),
       );
       const utilisateur = utilisateurStore().utilisateur;
-      const donneeAMettreAjour: ProfileAMettreAJour = {
+      const donneeAMettreAjour: ProfileAMettreAJourInput = {
         nom: utilisateur.nom,
         id: utilisateur.id,
         prenom: utilisateur.prenom,
@@ -100,6 +104,8 @@
         revenuFiscal: revenuFiscal.value,
         nombreDePartsFiscales: nombreDePartsFiscales.value,
         pseudo: utilisateur.pseudo,
+        anneeNaissance: profileUtilisateur.value!.anneeNaissance,
+        nomPrenomModifiables: profileUtilisateur.value!.nomPrenomModifiables,
       };
       await usecase.execute(donneeAMettreAjour);
 
