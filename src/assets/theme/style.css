@@ -292,6 +292,10 @@
     background-color: var(--blue-france-975-75);
 }
 
+.background--beige-gris-galet-975-75 {
+    background-color: var(--beige-gris-galet-975-75);
+}
+
 .background--green-light {
     background-color: #dcef64;
 }

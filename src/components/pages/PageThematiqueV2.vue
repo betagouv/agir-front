@@ -1,9 +1,23 @@
 <template>
-  <div class="fr-container">
-    <h1 class="fr-h1 fr-col fr-m-0 fr-py-4w">
-      <span aria-hidden="true"> {{ thematique.emoji }}</span>
-      {{ thematique.labelDansLeMenu }}
-    </h1>
+  <div class="heroThematique background--beige-gris-galet-975-75">
+    <div class="fr-container">
+      <h1 class="fr-h1 fr-col fr-m-0 fr-py-5w display-inline-block">
+        <span aria-hidden="true"> {{ thematique.emoji }}</span>
+        {{ thematique.labelDansLeMenu }}
+      </h1>
+      <span class="fr-tag fr-icon-map-pin-2-fill fr-tag--icon-left fr-ml-2w">à ???</span>
+
+      <ul class="list-style-none listeServices flex flex-wrap fr-mb-7w">
+        <li>
+          <router-link
+            to=""
+            class="shadow fr-btn fr-btn--tertiary-no-outline background--white fr-btn--icon-right fr-icon-arrow-right-line text--black"
+          >
+            8 adresses pour manger local
+          </router-link>
+        </li>
+      </ul>
+    </div>
   </div>
 
   <section class="fr-py-4w background-color--gris-galet-950-100">
@@ -88,6 +102,7 @@
   const store = utilisateurStore();
   const idUtilisateur = store.utilisateur.id;
   let thematiqueId = thematique.value.clefTechniqueAPI;
+  const thematiqueIllustrationPath = `url(${thematique.value.illustration})`;
 
   const chargerActionsRecommandeesUsecase = new RecupererActionsPersonnaliseesUsecase(new ActionsRepositoryAxios());
 
@@ -145,5 +160,17 @@
 <style scoped>
   .placeholder {
     min-height: 20rem;
+  }
+
+  .heroThematique {
+    height: 20rem;
+    background-image: v-bind(thematiqueIllustrationPath);
+    background-repeat: no-repeat;
+    background-position: right;
+  }
+
+  .listeServices {
+    width: 60%;
+    gap: 1rem;
   }
 </style>
