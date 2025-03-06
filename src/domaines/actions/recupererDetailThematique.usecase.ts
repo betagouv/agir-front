@@ -1,9 +1,6 @@
 import { ActionsRepository } from '@/domaines/actions/ports/actions.repository';
 import { ActionsDansUneThematiquePresenter } from '@/domaines/actions/ports/actionsDansUneThematiquePresenter';
-import {
-  ThematiqueResumePresenter,
-  ThematiqueResumeViewModel,
-} from '@/domaines/thematiques/ports/thematiqueResume.presenter';
+import { ThematiqueResumePresenter } from '@/domaines/thematiques/ports/thematiqueResume.presenter';
 
 export class RecupererDetailThematiqueUsecase {
   constructor(private actionsRepository: ActionsRepository) {}

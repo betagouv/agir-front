@@ -25,6 +25,8 @@
             {{ information.label }}
           </router-link>
           <a
+            target="_blank"
+            rel="noopener noreferrer"
             v-else-if="information.href"
             :href="information.href"
             class="shadow fr-btn fr-btn--tertiary-no-outline background--white fr-btn--icon-right fr-icon-arrow-right-line text--black"
