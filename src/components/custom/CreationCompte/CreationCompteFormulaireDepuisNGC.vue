@@ -20,7 +20,7 @@
     </div>
   </div>
   <h1 class="fr-mb-4w">Rejoignez-nous pour continuer</h1>
-  <FranceConnect class="fr-mb-2w" />
+  <FranceConnect :situation-id="idNGC" class="fr-mb-2w" />
 
   <h2>Créez votre compte sur J'agis</h2>
   <form aria-labelledby="identity-fieldset-legend" class="fr-mb-4w" @submit.prevent="performCreerCompteUtilisateur">

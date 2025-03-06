@@ -31,11 +31,11 @@
 <script lang="ts" setup>
   import '@gouvfr/dsfr/dist/component/connect/connect.min.css';
 
-  const props = defineProps<{ situationId?: string }>();
+  const props = defineProps<{ situationId?: string | null }>();
 
   const appelerBackPourCommencerFranceConnect = async () => {
     if (props.situationId) {
-      window.location.href = `${import.meta.env.VITE_API_URL}/login_france_connect?situationId=${props.situationId}`;
+      window.location.href = `${import.meta.env.VITE_API_URL}/login_france_connect?situation_ngc_id=${props.situationId}`;
     } else {
       window.location.href = `${import.meta.env.VITE_API_URL}/login_france_connect`;
     }
