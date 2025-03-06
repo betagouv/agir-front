@@ -19,7 +19,12 @@
       </div>
     </div>
   </div>
-  <h1 class="fr-mb-4w">Rejoignez-nous pour continuer</h1>
+  <h1 class="fr-mb-2w">Rejoignez-nous pour continuer</h1>
+  <p>
+    En créant un compte vous acceptez de transférer les données liées à votre bilan
+    <span class="text--bold">Nos Gestes Climat</span>
+    pour profiter d’une expérience d’usage améliorée
+  </p>
   <FranceConnect :situation-id="idNGC" class="fr-mb-2w" />
 
   <h2>Créez votre compte sur J'agis</h2>
