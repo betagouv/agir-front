@@ -39,18 +39,20 @@
 
   <div class="fr-container">
     <div v-if="thematique.clefTechniqueAPI === ClefThematiqueAPI.alimentation" class="fr-mt-4w">
-      <WidgetServiceFruitsEtLegumes />
-
-      <WidgetServiceRecettes parametre-de-recherche="saison" class="fr-my-6w">
+      <WidgetServiceRecettes parametre-de-recherche="saison">
         <template #titre>
           <h2 class="fr-h3">Manger sainement et de saison</h2>
         </template>
       </WidgetServiceRecettes>
 
-      <WidgetServicePresDeChezNous class="fr-my-6w" />
+      <div class="fr-grid-row fr-my-6w">
+        <WidgetServiceFruitsEtLegumes class="fr-col-12 fr-col-lg-6 fr-text--sm fr-pr-3w" />
+
+        <WidgetServicePresDeChezNous class="fr-col-12 fr-col-lg-6 fr-pl-3w" />
+      </div>
     </div>
 
-    <WidgetAides :clef-thematique="thematiqueId" class="fr-my-4w" />
+    <WidgetAides :clef-thematique="thematiqueId as ClefThematiqueAPI" class="fr-my-4w" />
 
     <section class="fr-my-6w flex flex-column align-items--center">
       <h2>Envie de voir ou de revoir toutes les actions ?</h2>

@@ -1,27 +1,29 @@
 <template>
-  <section v-if="serviceFruitsEtLegumesViewModel.length > 0" class="fr-container">
+  <section v-if="serviceFruitsEtLegumesViewModel.length > 0">
     <div class="flex flex-space-between align-items--center fr-mb-3w">
       <h2 class="fr-h3 fr-mb-0">
-        Les fruits et légumes pour le mois de
+        Les fruits et légumes de
         <span class="text--bleu">{{ moisCourantLabel }}</span>
       </h2>
-      <div>
-        <router-link
-          class="fr-link"
-          :to="{
-            name: RouteServiceName.FRUITS_ET_LEGUMES,
-            params: { thematiqueId: MenuThematiques.getThematiqueData(ClefThematiqueAPI.alimentation).url },
-          }"
-          >Voir tout
-        </router-link>
-      </div>
+      <router-link
+        class="fr-link fr-mr-1w"
+        :to="{
+          name: RouteServiceName.FRUITS_ET_LEGUMES,
+          params: { thematiqueId: MenuThematiques.getThematiqueData(ClefThematiqueAPI.alimentation).url },
+        }"
+        >Voir tout
+      </router-link>
     </div>
     <div class="flex">
-      <ul class="fr-grid-row fr-grid-row--gutters list-style-none fr-mb-4w">
-        <li v-for="item in serviceFruitsEtLegumesViewModel" :key="item.nom" class="fr-col-6 fr-col-md-4">
+      <ul class="fr-grid-row list-style-none">
+        <li
+          v-for="item in serviceFruitsEtLegumesViewModel"
+          :key="item.nom"
+          class="fr-col-6 fr-col-md-4 fr-pb-1w fr-pr-1w"
+        >
           <div class="fr-grid-row flex-space-between shadow--light background--white border--gris fr-p-2w">
-            <span>{{ item.nom }}</span>
-            <img :src="item.urlImage" alt="" height="24" />
+            <span class="fr-ellipsis">{{ item.nom }}</span>
+            <img v-if="item.urlImage" :src="item.urlImage" alt="" height="22" />
           </div>
         </li>
       </ul>

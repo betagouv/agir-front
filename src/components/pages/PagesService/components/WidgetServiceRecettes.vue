@@ -11,7 +11,7 @@
         :key="suggestion.titre"
         class="fr-col-12 fr-col-sm-6 fr-col-md-3"
       >
-        <ServiceCarteRecette :suggestionsServiceViewModel="suggestion" />
+        <ServiceCarteDsfr :suggestionsServiceViewModel="suggestion" :options="{ descriptionDesactive: true }" />
       </li>
     </ul>
 
@@ -32,7 +32,7 @@
 
 <script lang="ts" setup>
   import { onMounted, ref } from 'vue';
-  import ServiceCarteRecette from '@/components/custom/Service/ServiceCarteRecette.vue';
+  import ServiceCarteDsfr from '@/components/custom/Service/ServiceCarteDSFR.vue';
   import {
     ServiceRechercheRecettesPresenterImpl,
     ServiceRechercheRecettesViewModel,

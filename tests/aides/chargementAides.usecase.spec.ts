@@ -26,6 +26,7 @@ class ChargementAidesRepositoryForTest implements ChargementAidesRepository {
           illustrationURL: 'https://picsum.photos/200/300',
           url: 'vos-aides-velo',
           isUrlExterne: false,
+          estGratuit: false,
           contenu: '<h3>Titre test</h3><p>lorem ipsum dolor test</p><ul><li>Item 1</li><li>Item 2</li></ul>',
           idDuContenu: '',
           isSimulateur: true,
@@ -41,6 +42,7 @@ class ChargementAidesRepositoryForTest implements ChargementAidesRepository {
           nombreDePointsAGagner: '25',
           miseEnAvant: '',
           type: 'AIDE',
+          estGratuit: false,
           illustrationURL: 'https://picsum.photos/200/300',
           url: 'vos-aides-retrofit',
           isUrlExterne: true,
@@ -57,6 +59,7 @@ class ChargementAidesRepositoryForTest implements ChargementAidesRepository {
           nombreDePointsAGagner: '25',
           miseEnAvant: '',
           type: 'AIDE',
+          estGratuit: true,
           illustrationURL: 'https://picsum.photos/200/300',
           url: 'vos-aides-velo',
           isUrlExterne: false,
@@ -72,6 +75,7 @@ class ChargementAidesRepositoryForTest implements ChargementAidesRepository {
           thematique: ClefThematiqueAPI.alimentation,
           nombreDePointsAGagner: '25',
           miseEnAvant: '',
+          estGratuit: false,
           type: 'AIDE',
           illustrationURL: 'https://picsum.photos/200/300',
           url: 'vos-aides-velo',
@@ -88,6 +92,7 @@ class ChargementAidesRepositoryForTest implements ChargementAidesRepository {
           thematique: ClefThematiqueAPI.alimentation,
           nombreDePointsAGagner: '25',
           miseEnAvant: '',
+          estGratuit: false,
           type: 'AIDE',
           illustrationURL: 'https://picsum.photos/200/300',
           url: 'vos-aides-velo',
@@ -104,6 +109,7 @@ class ChargementAidesRepositoryForTest implements ChargementAidesRepository {
           thematique: ClefThematiqueAPI.alimentation,
           nombreDePointsAGagner: '25',
           miseEnAvant: '',
+          estGratuit: false,
           type: 'AIDE',
           illustrationURL: 'https://picsum.photos/200/300',
           url: 'vos-aides-velo',
@@ -120,6 +126,7 @@ class ChargementAidesRepositoryForTest implements ChargementAidesRepository {
           thematique: ClefThematiqueAPI.alimentation,
           nombreDePointsAGagner: '25',
           miseEnAvant: '',
+          estGratuit: false,
           type: 'AIDE',
           illustrationURL: 'https://picsum.photos/200/300',
           url: 'vos-aides-velo',
@@ -134,6 +141,10 @@ class ChargementAidesRepositoryForTest implements ChargementAidesRepository {
         },
       ],
     });
+  }
+
+  recupererAidesDuneThematique(utilisateurId: string, clefThematique: ClefThematiqueAPI): Promise<Aides> {
+    throw new Error('Method not implemented.');
   }
 
   previsualiser(idAide: string): Promise<Aide> {

@@ -80,6 +80,7 @@
     titre: '',
     categorie: '',
     contenu: '',
+    estGratuit: false,
     url: '',
     isSimulateur: false,
     thematique: ClefThematiqueAPI.services_societaux,
