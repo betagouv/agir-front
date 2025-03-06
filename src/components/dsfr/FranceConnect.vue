@@ -31,8 +31,14 @@
 <script lang="ts" setup>
   import '@gouvfr/dsfr/dist/component/connect/connect.min.css';
 
+  const props = defineProps<{ situationId?: string }>();
+
   const appelerBackPourCommencerFranceConnect = async () => {
-    window.location.href = `${import.meta.env.VITE_API_URL}/login_france_connect`;
+    if (props.situationId) {
+      window.location.href = `${import.meta.env.VITE_API_URL}/login_france_connect?situationId=${props.situationId}`;
+    } else {
+      window.location.href = `${import.meta.env.VITE_API_URL}/login_france_connect`;
+    }
   };
 
   const franceConnectActive = import.meta.env.VITE_FRANCE_CONNECT === 'true';
