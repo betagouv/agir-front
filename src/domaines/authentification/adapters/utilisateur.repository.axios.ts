@@ -111,7 +111,7 @@ export class UtilisateurRepositoryAxios implements UtilisateurRepository {
 
   async seConnecterAvecFranceConnect(code: string, loginId: string): Promise<Utilisateur> {
     const axiosInstance = AxiosFactory.getAxios();
-    const response = await axiosInstance.get<LoginApiModel>(
+    const response = await axiosInstance.post<LoginApiModel>(
       `/login_france_connect_step_2?oidc_code=${code}&oidc_state=${loginId}`,
       {},
     );
