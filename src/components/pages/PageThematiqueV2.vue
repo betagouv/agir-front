@@ -1,24 +1,9 @@
 <template>
-  <div class="heroThematique background--beige-gris-galet-975-75">
-    <div class="fr-container">
-      <h1 class="fr-h1 fr-col fr-m-0 fr-py-5w display-inline-block">
-        <span aria-hidden="true"> {{ thematique.emoji }}</span>
-        {{ thematique.labelDansLeMenu }}
-      </h1>
-      <span class="fr-tag fr-icon-map-pin-2-fill fr-tag--icon-left fr-ml-2w">à ???</span>
-
-      <ul class="list-style-none listeServices flex flex-wrap fr-mb-7w">
-        <li>
-          <router-link
-            to=""
-            class="shadow fr-btn fr-btn--tertiary-no-outline background--white fr-btn--icon-right fr-icon-arrow-right-line text--black"
-          >
-            8 adresses pour manger local
-          </router-link>
-        </li>
-      </ul>
-    </div>
-  </div>
+  <ThematiqueResume
+    v-if="thematiqueResumeViewModel"
+    :thematique="thematique"
+    :thematiqueResume="thematiqueResumeViewModel"
+  />
 
   <section class="fr-py-4w background-color--gris-galet-950-100">
     <div class="fr-container">
@@ -80,31 +65,34 @@
   import { onBeforeRouteUpdate, useRoute } from 'vue-router';
   import CatalogueActionsRecommandees from '@/components/custom/Action/Catalogue/CatalogueActionsRecommandees.vue';
   import ParcoursKYCPourRecommandations from '@/components/custom/Thematiques/ParcoursKYCPourRecommandations.vue';
+  import ThematiqueResume from '@/components/custom/Thematiques/ThematiqueResume.vue';
   import WidgetServiceFruitsEtLegumes from '@/components/pages/PagesService/components/WidgetServiceFruitsEtLegumes.vue';
   import WidgetServicePresDeChezNous from '@/components/pages/PagesService/components/WidgetServicePresDeChezNous.vue';
   import WidgetServiceRecettes from '@/components/pages/PagesService/components/WidgetServiceRecettes.vue';
   import { ActionsRepositoryAxios } from '@/domaines/actions/adapters/actions.repository.axios';
   import { ActionsDansUneThematiquePresenterImpl } from '@/domaines/actions/adapters/actionsDansUneThematique.presenter.impl';
   import { ActionViewModel } from '@/domaines/actions/ports/actions.presenter';
-  import { RecupererActionsPersonnaliseesUsecase } from '@/domaines/actions/recupererActionsPersonnalisees.usecase';
+  import { RecupererDetailThematiqueUsecase } from '@/domaines/actions/recupererDetailThematique.usecase';
+  import { ThematiqueResumePresenterImpl } from '@/domaines/thematiques/adapters/thematiqueResume.presenter.impl';
   import { ThematiquesRepositoryAxios } from '@/domaines/thematiques/adapters/thematiques.repository.axios';
   import { ClefThematiqueAPI, MenuThematiques, Thematique } from '@/domaines/thematiques/MenuThematiques';
   import { PersonnalisationThematiqueEffectueeUsecase } from '@/domaines/thematiques/personnalisationThematiqueEffectuee.usecase';
+  import { ThematiqueResumeViewModel } from '@/domaines/thematiques/ports/thematiqueResume.presenter';
   import { ResetPersonnalisationUsecase } from '@/domaines/thematiques/resetPersonnalisation.usecase';
   import { RouteActionsName } from '@/router/actions/routes';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const thematique = ref<Thematique>(MenuThematiques.getFromUrl(useRoute().params.id as string));
   const actionsViewModel = ref<ActionViewModel[]>();
+  const thematiqueResumeViewModel = ref<ThematiqueResumeViewModel>();
   const idEnchainementKycs = ref<string>();
   const isLoading = ref<boolean>(true);
 
   const store = utilisateurStore();
   const idUtilisateur = store.utilisateur.id;
   let thematiqueId = thematique.value.clefTechniqueAPI;
-  const thematiqueIllustrationPath = `url(${thematique.value.illustration})`;
 
-  const chargerActionsRecommandeesUsecase = new RecupererActionsPersonnaliseesUsecase(new ActionsRepositoryAxios());
+  const chargerActionsRecommandeesUsecase = new RecupererDetailThematiqueUsecase(new ActionsRepositoryAxios());
 
   onBeforeRouteUpdate(async (to, from, next) => {
     next();
@@ -135,6 +123,7 @@
           idEnchainementKycs.value = id;
         },
       ),
+      new ThematiqueResumePresenterImpl(vm => (thematiqueResumeViewModel.value = vm)),
     );
   }
 
@@ -160,17 +149,5 @@
 <style scoped>
   .placeholder {
     min-height: 20rem;
-  }
-
-  .heroThematique {
-    height: 20rem;
-    background-image: v-bind(thematiqueIllustrationPath);
-    background-repeat: no-repeat;
-    background-position: right;
-  }
-
-  .listeServices {
-    width: 60%;
-    gap: 1rem;
   }
 </style>

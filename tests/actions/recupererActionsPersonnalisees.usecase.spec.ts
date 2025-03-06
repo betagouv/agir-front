@@ -1,4 +1,4 @@
-import { RecupererActionsPersonnaliseesUsecase } from '@/domaines/actions/recupererActionsPersonnalisees.usecase';
+import { RecupererDetailThematiqueUsecase } from '@/domaines/actions/recupererDetailThematique.usecase';
 import { ActionsRepositoryMock } from './adapters/actions.repository.mock';
 import { ActionsDansUneThematiquePresenterImpl } from '@/domaines/actions/adapters/actionsDansUneThematique.presenter.impl';
 import { expect } from 'vitest';
@@ -8,7 +8,7 @@ import { ActionViewModel } from '@/domaines/actions/ports/actions.presenter';
 describe('Fichier de test concernant la récupération des actions personnalisées', () => {
   it("Quand la personnalisation n'est pas faite doit presenter le fait de personnaliser avec le bon enchainement de kycs", async () => {
     // GIVEN
-    const usecase = new RecupererActionsPersonnaliseesUsecase(
+    const usecase = new RecupererDetailThematiqueUsecase(
       ActionsRepositoryMock.avecActionsRecommandeesDansUneThematique({
         doitRepondreAuxKYCs: true,
         idEnchainementKYCs: 'idEnchainementKYCs',
@@ -32,7 +32,7 @@ describe('Fichier de test concernant la récupération des actions personnalisé
 
   it('Quand la personnalisation est faite doit presenter les actions', async () => {
     // GIVEN
-    const usecase = new RecupererActionsPersonnaliseesUsecase(
+    const usecase = new RecupererDetailThematiqueUsecase(
       ActionsRepositoryMock.avecActionsRecommandeesDansUneThematique({
         doitRepondreAuxKYCs: false,
         idEnchainementKYCs: 'idEnchainementKYCs',
