@@ -1,6 +1,6 @@
 import {
   ActionDetail,
-  ActionsRecommandeesDansUneThematique,
+  DetailThematique,
   ActionsRepository,
   CatalogueActions,
 } from '@/domaines/actions/ports/actions.repository';
@@ -106,10 +106,7 @@ export class ActionQuizRepositoryMock implements ActionsRepository {
     throw Error('Not implemented');
   }
 
-  recupererActionsPersonnalisees(
-    idUtilisateur: string,
-    thematiqueId: string,
-  ): Promise<ActionsRecommandeesDansUneThematique> {
+  recupererDetailThematique(idUtilisateur: string, thematiqueId: string): Promise<DetailThematique> {
     throw Error('Not implemented');
   }
 

@@ -58,7 +58,17 @@ export enum TypeAction {
   QUIZZ = 'quizz',
 }
 
-export interface ActionsRecommandeesDansUneThematique {
+export interface ResumeThematique {
+  thematique: ClefThematiqueAPI;
+  commune: string;
+  nbRecettes: number;
+  nbActions: number;
+  nbAides: number;
+  nbSimulateurs: number;
+}
+
+export interface DetailThematique {
+  resume: ResumeThematique;
   doitRepondreAuxKYCs: boolean;
   idEnchainementKYCs: string | null;
   actions: Action[];
@@ -90,8 +100,5 @@ export interface ActionsRepository {
 
   chargerAction(idUtilisateur: string, idAction: string, type: TypeAction): Promise<ActionDetail>;
 
-  recupererActionsPersonnalisees(
-    idUtilisateur: string,
-    thematiqueId: string,
-  ): Promise<ActionsRecommandeesDansUneThematique>;
+  recupererDetailThematique(idUtilisateur: string, thematiqueId: string): Promise<DetailThematique>;
 }

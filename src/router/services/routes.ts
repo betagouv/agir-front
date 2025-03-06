@@ -29,7 +29,7 @@ export enum RouteServicePath {
   LONGUE_VIE_AUX_OBJETS = '/thematique/:thematiqueId/service/longue-vie-aux-objets',
   LONGUE_VIE_AUX_OBJETS_DETAIL = '/service/longue-vie-aux-objets/:id',
   PROXIMITE = '/thematique/:thematiqueId/service/pres-de-chez-nous',
-  PROXIMITE_DETAIL = '/thematique/:thematiqueId/service/pres-de-chez-nous/:id',
+  PROXIMITE_DETAIL = '/service/pres-de-chez-nous/:id',
   FRUITS_ET_LEGUMES = '/thematique/:thematiqueId/service/fruits-et-legumes',
   LINKY = '/thematique/:thematiqueId/service/linky',
 }

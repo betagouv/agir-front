@@ -3,6 +3,7 @@ export interface Thematique {
   url: string;
   labelDansLeMenu: string;
   imageUrl: string;
+  illustration?: string;
   emoji?: string;
 }
 
@@ -36,6 +37,7 @@ export class MenuThematiques {
       imageUrl:
         'https://res.cloudinary.com/dq023imd8/image/upload/t_media_lib_thumb/v1728466523/cuisine_da54797693.svg',
       emoji: '🍛',
+      illustration: '/thematique-alimentation.svg',
     },
     [ClefThematiqueAPI.transports]: {
       clefTechniqueAPI: 'transport',
@@ -44,6 +46,7 @@ export class MenuThematiques {
       imageUrl:
         'https://res.cloudinary.com/dq023imd8/image/upload/t_media_lib_thumb/v1728466903/Mobilite_df75aefd09.svg',
       emoji: '🚅',
+      illustration: '/thematique-transport.svg',
     },
     [ClefThematiqueAPI.consommation]: {
       clefTechniqueAPI: 'consommation',
@@ -51,6 +54,7 @@ export class MenuThematiques {
       labelDansLeMenu: 'Mes achats',
       imageUrl: 'https://res.cloudinary.com/dq023imd8/image/upload/t_media_lib_thumb/v1728468852/conso_7522b1950d.svg',
       emoji: '👕',
+      illustration: '/thematique-consommation.svg',
     },
     [ClefThematiqueAPI.logement]: {
       clefTechniqueAPI: 'logement',
@@ -58,6 +62,7 @@ export class MenuThematiques {
       labelDansLeMenu: 'Me loger',
       imageUrl: 'https://res.cloudinary.com/dq023imd8/image/upload/t_media_lib_thumb/v1728468978/maison_80242d91f3.svg',
       emoji: '🏠',
+      illustration: '/thematique-logement.svg',
     },
     [ClefThematiqueAPI.dechets]: {
       clefTechniqueAPI: 'dechet',

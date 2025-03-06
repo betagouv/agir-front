@@ -1,7 +1,7 @@
 import {
   Action,
   ActionDetail,
-  ActionsRecommandeesDansUneThematique,
+  DetailThematique,
   ActionsRepository,
   CatalogueActions,
 } from '@/domaines/actions/ports/actions.repository';
@@ -10,7 +10,7 @@ export class ActionsRepositoryMock implements ActionsRepository {
   private constructor(
     private readonly actions: Action[],
     private readonly action?: ActionDetail,
-    private readonly actionsRecommandeesDansUneThematique?: ActionsRecommandeesDansUneThematique,
+    private readonly actionsRecommandeesDansUneThematique?: DetailThematique,
     private readonly catalogueActions?: CatalogueActions,
   ) {}
 
@@ -26,9 +26,7 @@ export class ActionsRepositoryMock implements ActionsRepository {
     return new ActionsRepositoryMock([], undefined, undefined, catalogue);
   }
 
-  static avecActionsRecommandeesDansUneThematique(
-    actionsRecommandeesDansUneThematique: ActionsRecommandeesDansUneThematique,
-  ) {
+  static avecActionsRecommandeesDansUneThematique(actionsRecommandeesDansUneThematique: DetailThematique) {
     return new ActionsRepositoryMock([], undefined, actionsRecommandeesDansUneThematique);
   }
 
@@ -49,10 +47,7 @@ export class ActionsRepositoryMock implements ActionsRepository {
     return Promise.resolve(this.catalogueActions!);
   }
 
-  recupererActionsPersonnalisees(
-    idUtilisateur: string,
-    thematiqueId: string,
-  ): Promise<ActionsRecommandeesDansUneThematique> {
+  recupererDetailThematique(idUtilisateur: string, thematiqueId: string): Promise<DetailThematique> {
     return Promise.resolve(this.actionsRecommandeesDansUneThematique!);
   }
 }

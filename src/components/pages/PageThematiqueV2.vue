@@ -1,17 +1,9 @@
 <template>
-  <div class="fr-container">
-    <FilDAriane :page-courante="thematique.labelDansLeMenu" />
-    <div class="fr-grid-row align-items--center fr-mb-4w">
-      <img
-        :src="thematique.imageUrl"
-        alt="thématique"
-        class="border-radius--full img-object-fit-cover fr-mr-2w"
-        height="80"
-        width="80"
-      />
-      <h1 class="fr-h1 fr-col fr-m-0">{{ thematique.labelDansLeMenu }}</h1>
-    </div>
-  </div>
+  <ThematiqueResume
+    v-if="thematiqueResumeViewModel"
+    :thematique="thematique"
+    :thematiqueResume="thematiqueResumeViewModel"
+  />
 
   <section class="fr-py-4w background-color--gris-galet-950-100">
     <div class="fr-container">
@@ -33,15 +25,29 @@
       <template v-else-if="actionsViewModel">
         <CatalogueActionsRecommandees
           :actions="actionsViewModel"
-          :thematiqueId="thematiqueId"
           :rafraichir-actions="chargerActionsRecommandees"
           :reset-parcours="resetParcours"
+          :thematiqueId="thematiqueId"
           card-classes="fr-col-12 fr-col-md-6 fr-col-xl-4"
         />
         <button class="fr-btn fr-mt-4w fr-btn--icon-left fr-icon-refresh-line" @click="resetParcours">
           Recommencer le parcours
         </button>
       </template>
+    </div>
+  </section>
+
+  <section v-if="thematique.clefTechniqueAPI === ClefThematiqueAPI.alimentation" class="fr-mt-4w">
+    <WidgetServiceFruitsEtLegumes />
+    <div class="fr-container fr-my-6w">
+      <WidgetServiceRecettes parametre-de-recherche="saison">
+        <template #titre>
+          <h2>Manger sainement et de saison</h2>
+        </template>
+      </WidgetServiceRecettes>
+    </div>
+    <div class="fr-container fr-my-6w">
+      <WidgetServicePresDeChezNous />
     </div>
   </section>
 
@@ -59,20 +65,26 @@
   import { onBeforeRouteUpdate, useRoute } from 'vue-router';
   import CatalogueActionsRecommandees from '@/components/custom/Action/Catalogue/CatalogueActionsRecommandees.vue';
   import ParcoursKYCPourRecommandations from '@/components/custom/Thematiques/ParcoursKYCPourRecommandations.vue';
-  import FilDAriane from '@/components/dsfr/FilDAriane.vue';
+  import ThematiqueResume from '@/components/custom/Thematiques/ThematiqueResume.vue';
+  import WidgetServiceFruitsEtLegumes from '@/components/pages/PagesService/components/WidgetServiceFruitsEtLegumes.vue';
+  import WidgetServicePresDeChezNous from '@/components/pages/PagesService/components/WidgetServicePresDeChezNous.vue';
+  import WidgetServiceRecettes from '@/components/pages/PagesService/components/WidgetServiceRecettes.vue';
   import { ActionsRepositoryAxios } from '@/domaines/actions/adapters/actions.repository.axios';
   import { ActionsDansUneThematiquePresenterImpl } from '@/domaines/actions/adapters/actionsDansUneThematique.presenter.impl';
   import { ActionViewModel } from '@/domaines/actions/ports/actions.presenter';
-  import { RecupererActionsPersonnaliseesUsecase } from '@/domaines/actions/recupererActionsPersonnalisees.usecase';
+  import { RecupererDetailThematiqueUsecase } from '@/domaines/actions/recupererDetailThematique.usecase';
+  import { ThematiqueResumePresenterImpl } from '@/domaines/thematiques/adapters/thematiqueResume.presenter.impl';
   import { ThematiquesRepositoryAxios } from '@/domaines/thematiques/adapters/thematiques.repository.axios';
   import { ClefThematiqueAPI, MenuThematiques, Thematique } from '@/domaines/thematiques/MenuThematiques';
   import { PersonnalisationThematiqueEffectueeUsecase } from '@/domaines/thematiques/personnalisationThematiqueEffectuee.usecase';
+  import { ThematiqueResumeViewModel } from '@/domaines/thematiques/ports/thematiqueResume.presenter';
   import { ResetPersonnalisationUsecase } from '@/domaines/thematiques/resetPersonnalisation.usecase';
   import { RouteActionsName } from '@/router/actions/routes';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const thematique = ref<Thematique>(MenuThematiques.getFromUrl(useRoute().params.id as string));
   const actionsViewModel = ref<ActionViewModel[]>();
+  const thematiqueResumeViewModel = ref<ThematiqueResumeViewModel>();
   const idEnchainementKycs = ref<string>();
   const isLoading = ref<boolean>(true);
 
@@ -80,7 +92,7 @@
   const idUtilisateur = store.utilisateur.id;
   let thematiqueId = thematique.value.clefTechniqueAPI;
 
-  const chargerActionsRecommandeesUsecase = new RecupererActionsPersonnaliseesUsecase(new ActionsRepositoryAxios());
+  const chargerActionsRecommandeesUsecase = new RecupererDetailThematiqueUsecase(new ActionsRepositoryAxios());
 
   onBeforeRouteUpdate(async (to, from, next) => {
     next();
@@ -111,6 +123,7 @@
           idEnchainementKycs.value = id;
         },
       ),
+      new ThematiqueResumePresenterImpl(vm => (thematiqueResumeViewModel.value = vm)),
     );
   }
 

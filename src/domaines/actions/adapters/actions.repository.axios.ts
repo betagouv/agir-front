@@ -2,7 +2,7 @@ import { AxiosFactory, intercept401 } from '@/axios.factory';
 import {
   Action,
   ActionDetail,
-  ActionsRecommandeesDansUneThematique,
+  DetailThematique,
   ActionsRepository,
   CatalogueActions,
   TypeAction,
@@ -62,7 +62,13 @@ interface ActionApiModel {
   deja_vue: boolean;
 }
 
-interface ActionsRecommandeesApiModel {
+interface DetailThematiqueApiModel {
+  thematique: ClefThematiqueAPI;
+  nom_commune: string;
+  nombre_recettes: number;
+  nombre_actions: number;
+  nombre_aides: number;
+  nombre_simulateurs: number;
   est_personnalisation_necessaire: boolean;
   enchainement_questions_personnalisation: string;
   liste_actions_recommandees: ActionApiModel[];
@@ -149,16 +155,21 @@ export class ActionsRepositoryAxios implements ActionsRepository {
   }
 
   @intercept401()
-  async recupererActionsPersonnalisees(
-    idUtilisateur: string,
-    thematiqueId: string,
-  ): Promise<ActionsRecommandeesDansUneThematique> {
+  async recupererDetailThematique(idUtilisateur: string, thematiqueId: string): Promise<DetailThematique> {
     const axios = AxiosFactory.getAxios();
-    const response = await axios.get<ActionsRecommandeesApiModel>(
+    const response = await axios.get<DetailThematiqueApiModel>(
       `/utilisateurs/${idUtilisateur}/thematiques/${thematiqueId}`,
     );
 
     return {
+      resume: {
+        thematique: response.data.thematique,
+        commune: response.data.nom_commune,
+        nbRecettes: response.data.nombre_recettes,
+        nbActions: response.data.nombre_actions,
+        nbAides: response.data.nombre_aides,
+        nbSimulateurs: response.data.nombre_simulateurs,
+      },
       doitRepondreAuxKYCs: response.data.est_personnalisation_necessaire,
       idEnchainementKYCs: response.data.enchainement_questions_personnalisation,
       actions: response.data.liste_actions_recommandees.map(this.mapActionApiModelToAction),
