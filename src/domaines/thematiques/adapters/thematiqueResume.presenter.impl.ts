@@ -6,6 +6,7 @@ import {
 } from '@/domaines/thematiques/ports/thematiqueResume.presenter';
 import { RouteAidesName } from '@/router/aides/routeAidesName';
 import { RouteServiceName } from '@/router/services/routes';
+import { gererPluriel } from '@/shell/pluriel';
 
 export class ThematiqueResumePresenterImpl implements ThematiqueResumePresenter {
   constructor(private readonly _informationsPourThematique: (viewModel: ThematiqueResumeViewModel) => void) {}
@@ -18,22 +19,20 @@ export class ThematiqueResumePresenterImpl implements ThematiqueResumePresenter 
         to: {
           name: RouteAidesName.AIDES,
         },
-        label: `${resumeThematique.nbAides} aides sur votre territoire`,
+        label: `${resumeThematique.nbAides} ${gererPluriel(resumeThematique.nbAides, 'aide', 'aides')} sur votre territoire`,
       });
     }
 
     if (resumeThematique.thematique === ClefThematiqueAPI.alimentation) {
-      if (resumeThematique.nbRecettes) {
-        listeInformations.push({
-          to: {
-            name: RouteServiceName.RECETTES,
-            params: {
-              thematiqueId: MenuThematiques.getThematiqueData(ClefThematiqueAPI.alimentation).url,
-            },
+      listeInformations.push({
+        to: {
+          name: RouteServiceName.RECETTES,
+          params: {
+            thematiqueId: MenuThematiques.getThematiqueData(ClefThematiqueAPI.alimentation).url,
           },
-          label: `1150 recettes délicieuses, saines et de saison`,
-        });
-      }
+        },
+        label: `1150 recettes délicieuses, saines et de saison`,
+      });
       listeInformations.push({
         to: {
           name: RouteServiceName.FRUITS_ET_LEGUMES,
