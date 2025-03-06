@@ -1,31 +1,35 @@
 <template>
-  <div class="flex flex-space-between align-items--center">
-    <slot name="titre" />
-    <p class="text--italic">avec <img alt="manger bouger" class="fr-ml-2w" src="/logo-manger-bouger.svg" /></p>
-  </div>
+  <section>
+    <div class="flex flex-space-between align-items--center">
+      <slot name="titre" />
+      <p class="text--italic">avec <img alt="manger bouger" class="fr-ml-2w" src="/logo-manger-bouger.svg" /></p>
+    </div>
 
-  <ul v-if="serviceRecettesViewModel" class="fr-grid-row fr-grid-row--gutters fr-mb-2w list-style-none">
-    <li
-      v-for="suggestion in serviceRecettesViewModel?.suggestions"
-      :key="suggestion.titre"
-      class="fr-col-12 fr-col-sm-6 fr-col-md-3"
-    >
-      <ServiceCarteRecette :suggestionsServiceViewModel="suggestion" />
-    </li>
-  </ul>
-  <div>
-    <router-link
-      :to="{
-        name: RouteServiceName.RECETTES,
-        params: {
-          thematiqueId: MenuThematiques.getThematiqueData(ClefThematiqueAPI.alimentation).url,
-        },
-      }"
-      class="text--bleu"
-      >Voir toutes les recettes
-    </router-link>
-  </div>
+    <ul v-if="serviceRecettesViewModel" class="fr-grid-row fr-grid-row--gutters fr-mb-2w list-style-none">
+      <li
+        v-for="suggestion in serviceRecettesViewModel?.suggestions"
+        :key="suggestion.titre"
+        class="fr-col-12 fr-col-sm-6 fr-col-md-3"
+      >
+        <ServiceCarteRecette :suggestionsServiceViewModel="suggestion" />
+      </li>
+    </ul>
+
+    <div>
+      <router-link
+        :to="{
+          name: RouteServiceName.RECETTES,
+          params: {
+            thematiqueId: MenuThematiques.getThematiqueData(ClefThematiqueAPI.alimentation).url,
+          },
+        }"
+        class="fr-link"
+        >Voir toutes les recettes
+      </router-link>
+    </div>
+  </section>
 </template>
+
 <script lang="ts" setup>
   import { onMounted, ref } from 'vue';
   import ServiceCarteRecette from '@/components/custom/Service/ServiceCarteRecette.vue';

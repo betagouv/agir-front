@@ -69,7 +69,7 @@
   import { onMounted, ref } from 'vue';
   import { useRoute } from 'vue-router';
   import ThematiqueTag from '@/components/custom/Thematiques/ThematiqueTag.vue';
-  import { ChargementAidesAxiosRepository } from '@/domaines/aides/adapters/chargementAidesAxiosRepository';
+  import { ChargementAidesAxiosRepository } from '@/domaines/aides/adapters/chargementAides.axios.repository';
   import { Aide } from '@/domaines/aides/chargementAides.usecase';
   import { PrevisualiserAideUsecase } from '@/domaines/aides/previsualiserAide.usecase';
   import { ClefThematiqueAPI, MenuThematiques } from '@/domaines/thematiques/MenuThematiques';

@@ -21,8 +21,8 @@
   import { onMounted, ref } from 'vue';
   import Aides from '@/components/custom/Aides/Aides.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
+  import { ChargementAidesAxiosRepository } from '@/domaines/aides/adapters/chargementAides.axios.repository';
   import { ChargementAidesPresenterImpl } from '@/domaines/aides/adapters/chargementAides.presenter.impl';
-  import { ChargementAidesAxiosRepository } from '@/domaines/aides/adapters/chargementAidesAxiosRepository';
   import ChargementAidesUsecase from '@/domaines/aides/chargementAides.usecase';
   import { AidesAvecCouvertureViewModel } from '@/domaines/aides/ports/chargementAides.presenter';
   import { utilisateurStore } from '@/store/utilisateur';

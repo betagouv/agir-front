@@ -1,14 +1,16 @@
 <template>
-  <div v-if="serviceRecherchePresDeChezNousViewModel">
+  <section v-if="serviceRecherchePresDeChezNousViewModel">
     <div class="flex flex-space-between align-items--center">
-      <h2 class="fr-h2">Mes commerces</h2>
+      <h2 class="fr-h3">Mes commerces</h2>
       <div>
         <router-link
           :to="{
             name: RouteServiceName.FRUITS_ET_LEGUMES,
             params: { thematiqueId: MenuThematiques.getThematiqueData(ClefThematiqueAPI.alimentation).url },
           }"
-          >Voir tout
+          class="fr-link"
+        >
+          Voir tout
         </router-link>
       </div>
     </div>
@@ -18,8 +20,9 @@
         (serviceRecherchePresDeChezNousViewModel as ServiceRecherchePresDeChezNousViewModelAvecResultats).suggestions
       "
     />
-  </div>
+  </section>
 </template>
+
 <script lang="ts" setup>
   import { onMounted, ref } from 'vue';
   import ServiceListeCarte from '@/components/custom/Service/ServiceListeCarte.vue';

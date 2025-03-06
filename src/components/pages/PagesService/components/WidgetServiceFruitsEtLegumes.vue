@@ -1,12 +1,13 @@
 <template>
-  <div v-if="serviceFruitsEtLegumesViewModel.length > 0" class="fr-container">
-    <div class="flex flex-space-between">
-      <h2 class="fr-h2">
+  <section v-if="serviceFruitsEtLegumesViewModel.length > 0" class="fr-container">
+    <div class="flex flex-space-between align-items--center fr-mb-3w">
+      <h2 class="fr-h3 fr-mb-0">
         Les fruits et légumes pour le mois de
         <span class="text--bleu">{{ moisCourantLabel }}</span>
       </h2>
       <div>
         <router-link
+          class="fr-link"
           :to="{
             name: RouteServiceName.FRUITS_ET_LEGUMES,
             params: { thematiqueId: MenuThematiques.getThematiqueData(ClefThematiqueAPI.alimentation).url },
@@ -25,7 +26,7 @@
         </li>
       </ul>
     </div>
-  </div>
+  </section>
 </template>
 
 <script lang="ts" setup>
