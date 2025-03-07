@@ -11,8 +11,8 @@
 
     <p class="text--black" :class="estBienRepondu ? 'action__quiz-reponseBonne' : 'action__quiz-reponseFausse'">
       <span aria-hidden="true" class="fr-pr-1w">{{ estBienRepondu ? '✅' : '❌' }}</span>
-      {{ estBienRepondu ? 'Bien joué ! La réponse était' : 'Pas tout à fait... Vous avez répondu' }}
-      &nbsp;: <span class="text--bold">{{ reponseDonnee }}</span>
+      {{ estBienRepondu ? 'Bien joué ! La réponse était' : 'Pas tout à fait... Vous avez répondu' }}&nbsp;:
+      <span class="text--bold">{{ reponseDonnee }}</span>
     </p>
 
     <ActionQuizExplication
@@ -70,14 +70,12 @@
   .action__quiz-reponseBonne {
     background-color: #fafced;
     border: 1px solid #cbe1aa;
-    border-radius: 8px;
     padding: 1rem;
   }
 
   .action__quiz-reponseFausse {
     background-color: #fef7f7;
     border: 1px solid #ffcaca;
-    border-radius: 8px;
     padding: 1rem;
   }
 </style>

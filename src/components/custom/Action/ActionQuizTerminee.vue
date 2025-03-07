@@ -97,13 +97,11 @@
     background-color: var(--couleur-background);
     border: 1px solid var(--couleur-border);
     padding: 1rem;
-    border-radius: 8px;
   }
 
   .bravo-encouragement {
     background-color: rgba(0, 0, 145, 0.03);
     border: 1px solid rgba(229, 229, 248, 1);
-    border-radius: 8px;
     padding: 1rem;
   }
 </style>
