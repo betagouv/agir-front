@@ -20,6 +20,7 @@ interface AideApiModel {
   url_demande?: string;
   partenaire_logo_url?: string;
   partenaire_nom?: string;
+  est_gratuit: boolean;
 }
 
 export class ChargementAidesAxiosRepository implements ChargementAidesRepository {
@@ -44,7 +45,43 @@ export class ChargementAidesAxiosRepository implements ChargementAidesRepository
           url: aide.url_simulateur,
           isSimulateur: aide.is_simulateur,
           montantMaximum: aide.montant_max,
+          estGratuit: aide.est_gratuit,
           urlCommencerVotreDemarche: aide.url_demande,
+          partenaire: aide.partenaire_logo_url
+            ? {
+                logoUrl: aide.partenaire_logo_url!,
+                nom: aide.partenaire_nom!,
+              }
+            : undefined,
+        })),
+    };
+  }
+
+  @intercept401()
+  async recupererAidesDuneThematique(utilisateurId: string, clefThematique: ClefThematiqueAPI): Promise<Aides> {
+    const axios = AxiosFactory.getAxios();
+    const reponse = await axios.get<AidesApiModel>(
+      `/utilisateurs/${utilisateurId}/aides_v2?thematique=${clefThematique}`,
+    );
+
+    return {
+      utilisateurEstCouvert: reponse.data.couverture_aides_ok,
+      aides: reponse.data.liste_aides
+        .filter(aide => {
+          const thematique = aide.thematiques[0];
+          return MenuThematiques.clefsThematiques.includes(thematique as ClefThematiqueAPI);
+        })
+        .map(aide => ({
+          id: aide.content_id,
+          titre: aide.titre,
+          categorie: aide.thematiques_label[0],
+          thematique: aide.thematiques[0] as ClefThematiqueAPI,
+          contenu: aide.contenu,
+          url: aide.url_simulateur,
+          isSimulateur: aide.is_simulateur,
+          montantMaximum: aide.montant_max,
+          urlCommencerVotreDemarche: aide.url_demande,
+          estGratuit: aide.est_gratuit,
           partenaire: aide.partenaire_logo_url
             ? {
                 logoUrl: aide.partenaire_logo_url!,
@@ -71,6 +108,7 @@ export class ChargementAidesAxiosRepository implements ChargementAidesRepository
       isSimulateur: aideCMS.data.data.attributes.is_simulateur,
       montantMaximum: aideCMS.data.data.attributes.points,
       urlCommencerVotreDemarche: aideCMS.data.data.url_commencer_votre_demarche,
+      estGratuit: aideCMS.data.data.est_gratuit,
       partenaire: aideCMS.data.data.attributes.partenaire.data
         ? {
             logoUrl: aideCMS.data.data.attributes.partenaire.data.attributes.logo.data[0].attributes.url,

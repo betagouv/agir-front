@@ -22,6 +22,7 @@ export interface Aide {
     nom: string;
   };
   derniereMaj?: string;
+  estGratuit: boolean;
 }
 
 export default class ChargementAidesUsecase {

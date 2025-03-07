@@ -1,28 +1,39 @@
 <template>
-  <div v-if="serviceRecherchePresDeChezNousViewModel">
-    <div class="flex flex-space-between align-items--center">
-      <h2 class="fr-h2">Mes commerces</h2>
+  <section v-if="serviceRecherchePresDeChezNousViewModel" class="full-height">
+    <div class="flex flex-space-between align-items--center fr-mb-3w">
+      <h2 class="fr-h3 fr-mb-0">Mes commerces</h2>
       <div>
         <router-link
           :to="{
             name: RouteServiceName.FRUITS_ET_LEGUMES,
             params: { thematiqueId: MenuThematiques.getThematiqueData(ClefThematiqueAPI.alimentation).url },
           }"
-          >Voir tout
+          class="fr-link"
+        >
+          Voir tout
         </router-link>
       </div>
     </div>
 
-    <ServiceListeCarte
-      :suggestions-service-view-model="
-        (serviceRecherchePresDeChezNousViewModel as ServiceRecherchePresDeChezNousViewModelAvecResultats).suggestions
-      "
-    />
-  </div>
+    <ul class="flex flex-column list-style-none fr-p-0 fr-m-0" style="gap: 1rem">
+      <li
+        v-for="suggestion in (
+          serviceRecherchePresDeChezNousViewModel as ServiceRecherchePresDeChezNousViewModelAvecResultats
+        ).suggestions"
+        :key="suggestion.titre"
+      >
+        <ServiceCarteDsfr
+          :suggestionsServiceViewModel="suggestion"
+          style-carte="fr-card--horizontal fr-card--horizontal-tier"
+        />
+      </li>
+    </ul>
+  </section>
 </template>
+
 <script lang="ts" setup>
   import { onMounted, ref } from 'vue';
-  import ServiceListeCarte from '@/components/custom/Service/ServiceListeCarte.vue';
+  import ServiceCarteDsfr from '@/components/custom/Service/ServiceCarteDSFR.vue';
   import {
     ServiceRecherchePresDeChezNousPresenterImpl,
     ServiceRecherchePresDeChezNousViewModel,
@@ -46,7 +57,7 @@
     await usecase.execute(
       utilisateurStore().utilisateur.id,
       '',
-      3,
+      2,
       new ServiceRecherchePresDeChezNousPresenterImpl(
         vm => (serviceRecherchePresDeChezNousViewModel.value = vm),
         () => {},

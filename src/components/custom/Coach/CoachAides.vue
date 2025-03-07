@@ -17,7 +17,7 @@
 <script lang="ts" setup>
   import { onMounted, ref } from 'vue';
   import AideLink from '@/components/custom/Aides/AideLink.vue';
-  import { ChargementAidesAxiosRepository } from '@/domaines/aides/adapters/chargementAidesAxiosRepository';
+  import { ChargementAidesAxiosRepository } from '@/domaines/aides/adapters/chargementAides.axios.repository';
   import {
     AideNonGroupeeViewModel,
     ChargementAidesNonGroupeesPresenterImpl,

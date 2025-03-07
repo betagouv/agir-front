@@ -37,33 +37,38 @@
     </div>
   </section>
 
-  <section v-if="thematique.clefTechniqueAPI === ClefThematiqueAPI.alimentation" class="fr-mt-4w">
-    <WidgetServiceFruitsEtLegumes />
-    <div class="fr-container fr-my-6w">
+  <div class="fr-container">
+    <div v-if="thematique.clefTechniqueAPI === ClefThematiqueAPI.alimentation" class="fr-mt-4w">
       <WidgetServiceRecettes parametre-de-recherche="saison">
         <template #titre>
-          <h2>Manger sainement et de saison</h2>
+          <h2 class="fr-h3">Manger sainement et de saison</h2>
         </template>
       </WidgetServiceRecettes>
-    </div>
-    <div class="fr-container fr-my-6w">
-      <WidgetServicePresDeChezNous />
-    </div>
-  </section>
 
-  <section class="fr-container fr-my-6w flex flex-column align-items--center">
-    <h2>Envie de voir ou de revoir toutes les actions ?</h2>
+      <div class="fr-grid-row fr-my-6w">
+        <WidgetServiceFruitsEtLegumes class="fr-col-12 fr-col-lg-6 fr-text--sm fr-pr-3w" />
 
-    <router-link :to="{ name: RouteActionsName.CATALOGUE_ACTION }" class="fr-btn fr-btn--secondary">
-      Accéder au catalogue
-    </router-link>
-  </section>
+        <WidgetServicePresDeChezNous class="fr-col-12 fr-col-lg-6 fr-pl-3w" />
+      </div>
+    </div>
+
+    <WidgetAides :clef-thematique="thematiqueId as ClefThematiqueAPI" class="fr-my-4w" />
+
+    <section class="fr-my-6w flex flex-column align-items--center">
+      <h2>Envie de voir ou de revoir toutes les actions ?</h2>
+
+      <router-link :to="{ name: RouteActionsName.CATALOGUE_ACTION }" class="fr-btn fr-btn--secondary">
+        Accéder au catalogue
+      </router-link>
+    </section>
+  </div>
 </template>
 
 <script lang="ts" setup>
   import { onMounted, ref } from 'vue';
   import { onBeforeRouteUpdate, useRoute } from 'vue-router';
   import CatalogueActionsRecommandees from '@/components/custom/Action/Catalogue/CatalogueActionsRecommandees.vue';
+  import WidgetAides from '@/components/custom/Aides/WidgetAides.vue';
   import ParcoursKYCPourRecommandations from '@/components/custom/Thematiques/ParcoursKYCPourRecommandations.vue';
   import ThematiqueResume from '@/components/custom/Thematiques/ThematiqueResume.vue';
   import WidgetServiceFruitsEtLegumes from '@/components/pages/PagesService/components/WidgetServiceFruitsEtLegumes.vue';
