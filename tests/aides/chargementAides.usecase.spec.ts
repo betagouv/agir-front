@@ -42,7 +42,7 @@ class ChargementAidesRepositoryForTest implements ChargementAidesRepository {
           nombreDePointsAGagner: '25',
           miseEnAvant: '',
           type: 'AIDE',
-          estGratuit: false,
+          estGratuit: true,
           illustrationURL: 'https://picsum.photos/200/300',
           url: 'vos-aides-retrofit',
           isUrlExterne: true,
@@ -59,7 +59,7 @@ class ChargementAidesRepositoryForTest implements ChargementAidesRepository {
           nombreDePointsAGagner: '25',
           miseEnAvant: '',
           type: 'AIDE',
-          estGratuit: true,
+          estGratuit: false,
           illustrationURL: 'https://picsum.photos/200/300',
           url: 'vos-aides-velo',
           isUrlExterne: false,
@@ -182,6 +182,7 @@ describe('Fichier de tests pour charger toutes les aides', () => {
               titre: "Simulez vos aides pour l'achat d'un vélo",
               url: 'vos-aides-velo',
               urlCommencerVotreDemarche: 'urlCommencerVotreDemarche',
+              estGratuit: false,
               partenaire: undefined,
             },
             {
@@ -201,6 +202,7 @@ describe('Fichier de tests pour charger toutes les aides', () => {
               titre: 'Simulez vos aides pour convertir votre voiture thermique en électrique',
               url: 'vos-aides-retrofit',
               urlCommencerVotreDemarche: undefined,
+              estGratuit: true,
               partenaire: undefined,
             },
           ],
@@ -222,6 +224,7 @@ describe('Fichier de tests pour charger toutes les aides', () => {
               titre: 'Aide test',
               url: 'vos-aides-velo',
               urlCommencerVotreDemarche: undefined,
+              estGratuit: false,
               partenaire: undefined,
             },
             {
@@ -241,6 +244,7 @@ describe('Fichier de tests pour charger toutes les aides', () => {
               titre: 'Aide test',
               url: 'vos-aides-velo',
               urlCommencerVotreDemarche: undefined,
+              estGratuit: false,
               partenaire: undefined,
             },
             {
@@ -260,6 +264,7 @@ describe('Fichier de tests pour charger toutes les aides', () => {
               titre: 'Aide test',
               url: 'vos-aides-velo',
               urlCommencerVotreDemarche: undefined,
+              estGratuit: false,
               partenaire: undefined,
             },
             {
@@ -279,6 +284,7 @@ describe('Fichier de tests pour charger toutes les aides', () => {
               titre: 'Aide test',
               url: 'vos-aides-velo',
               urlCommencerVotreDemarche: undefined,
+              estGratuit: false,
               partenaire: undefined,
             },
             {
@@ -302,6 +308,7 @@ describe('Fichier de tests pour charger toutes les aides', () => {
               titre: 'Aide test',
               url: 'vos-aides-velo',
               urlCommencerVotreDemarche: undefined,
+              estGratuit: false,
             },
           ],
         },
