@@ -1,5 +1,23 @@
 # Changelog
 
+## [1.44.0](https://github.com/betagouv/agir-front/compare/v1.43.0...v1.44.0) (2025-03-07)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* affichage quand il n'y a plus d'actions disponibles ([#963](https://github.com/betagouv/agir-front/issues/963)) ([b53e25c](https://github.com/betagouv/agir-front/commit/b53e25c02e86549e5045a5b47eb695bbbd0e9a86))
+* aides et nouveau layout thematique ([#971](https://github.com/betagouv/agir-front/issues/971)) ([514cdce](https://github.com/betagouv/agir-front/commit/514cdceef9f340271d52bd1f09cc0287d9f24602))
+* France Connect depuis NGC ([#970](https://github.com/betagouv/agir-front/issues/970)) ([0e55173](https://github.com/betagouv/agir-front/commit/0e55173359e10f1fe6b89b1e84b61a7f3a906922))
+* mise en place du pseudonyme ([#968](https://github.com/betagouv/agir-front/issues/968)) ([0fbc4ee](https://github.com/betagouv/agir-front/commit/0fbc4ee49919a4bab58d8a0eaa5928a3354c0b9f))
+* page thematique alimenation (ajout des services) ([#964](https://github.com/betagouv/agir-front/issues/964)) ([ef25099](https://github.com/betagouv/agir-front/commit/ef250997786f220d1022b41894ce90549be0b71b))
+* retour sur les quizz, et amélioration fin du parcours ([#962](https://github.com/betagouv/agir-front/issues/962)) ([2cfe4d1](https://github.com/betagouv/agir-front/commit/2cfe4d1aa046448ea7a83180bcfaaf4c69e1751c))
+* suppression de compte avec France Connect ([#967](https://github.com/betagouv/agir-front/issues/967)) ([8231245](https://github.com/betagouv/agir-front/commit/8231245c34d262ba95f6ab3475a8951631870b9d))
+
+
+### 👷 Autres changements
+
+* Bump lighthouse from 12.3.0 to 12.4.0 ([#955](https://github.com/betagouv/agir-front/issues/955)) ([d38860c](https://github.com/betagouv/agir-front/commit/d38860c1d0bcd854338c6faa46053c0995b90cac))
+
 ## [1.43.0](https://github.com/betagouv/agir-front/compare/v1.42.0...v1.43.0) (2025-03-05)
 
 
