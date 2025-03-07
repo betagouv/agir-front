@@ -39,7 +39,7 @@
 <script setup lang="ts">
   import { ref } from 'vue';
   import Alert from '@/components/custom/Alert.vue';
-  import InputPassword from '@/components/custom/InputPassword.vue';
+  import InputPassword from '@/components/custom/Form/InputPassword.vue';
   import InputText from '@/components/dsfr/InputText.vue';
   import { useAlerte } from '@/composables/useAlerte';
   import { UtilisateurRepositoryAxios } from '@/domaines/authentification/adapters/utilisateur.repository.axios';

@@ -27,7 +27,7 @@
             <ThematiqueTag :tag="defiViewModel.thematiqueTag" />
           </div>
           <form v-if="!reponseAEteDonnee" @submit.prevent="validerLaReponse">
-            <BoutonRadio
+            <BoutonsRadio
               v-model="reponse"
               :default-value="reponse"
               :description="defiViewModel.description"
@@ -96,9 +96,9 @@
 <script lang="ts" setup>
   import { computed, onMounted, ref } from 'vue';
   import { useRoute } from 'vue-router';
-  import BoutonRadio from '@/components/custom/BoutonRadio.vue';
   import CarteInfo from '@/components/custom/CarteInfo.vue';
   import DefiFin from '@/components/custom/Defi/DefiFin.vue';
+  import BoutonsRadio from '@/components/custom/Form/BoutonsRadio.vue';
   import ThematiqueTag from '@/components/custom/Thematiques/ThematiqueTag.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import { DefiPresenterImpl, DefiViewModel, ReponsePossible } from '@/domaines/defi/adapters/defi.presenter.impl';

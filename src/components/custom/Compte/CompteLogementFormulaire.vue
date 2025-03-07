@@ -48,7 +48,7 @@
           :default-value="logementViewModel.enfants"
           v-model="logementViewModel.enfants"
         />
-        <BoutonRadio
+        <BoutonsRadio
           class="fr-mb-2w fr-col-12"
           legende="Votre résidence principale est ..."
           legende-size="l"
@@ -59,7 +59,7 @@
           :default-value="logementViewModel.residence.valeur"
           v-model="logementViewModel.residence.valeur"
         />
-        <BoutonRadio
+        <BoutonsRadio
           class="fr-mb-2w fr-col-12"
           legende="Vous êtes propriétaire de votre logement ?"
           legende-size="l"
@@ -70,7 +70,7 @@
           :default-value="logementViewModel.proprietaire.valeur"
           v-model="logementViewModel.proprietaire.valeur"
         />
-        <BoutonRadio
+        <BoutonsRadio
           class="fr-mb-4w fr-col-12"
           legende="Quelle en est la superficie ?"
           legende-size="l"
@@ -81,7 +81,7 @@
           :default-value="logementViewModel.superficie.valeur"
           v-model="logementViewModel.superficie.valeur"
         />
-        <BoutonRadio
+        <BoutonsRadio
           class="fr-mb-4w fr-col-12"
           legende="Votre logement a-t-il plus de 15 ans ?"
           legende-size="l"
@@ -125,10 +125,10 @@
 <script setup lang="ts">
   import { computed, ref } from 'vue';
   import Alert from '@/components/custom/Alert.vue';
-  import BoutonRadio from '@/components/custom/BoutonRadio.vue';
   import CarteInfo from '@/components/custom/CarteInfo.vue';
   import DPE from '@/components/custom/DPE.vue';
-  import InputNumberHorizontal from '@/components/custom/InputNumberHorizontal.vue';
+  import BoutonsRadio from '@/components/custom/Form/BoutonsRadio.vue';
+  import InputNumberHorizontal from '@/components/custom/Form/InputNumberHorizontal.vue';
   import InputCodePostal from '@/components/dsfr/InputCodePostal.vue';
   import { useAlerte } from '@/composables/useAlerte';
   import { LogementRepositoryAxios } from '@/domaines/logement/adapters/logement.repository.axios';

@@ -1,5 +1,5 @@
 import { render } from '@testing-library/vue';
-import InputPassword from '../../src/components/custom/InputPassword.vue';
+import InputPassword from '@/components/custom/Form/InputPassword.vue';
 
 describe('InputPassword', () => {
   describe('au moins 1 chiffre', () => {

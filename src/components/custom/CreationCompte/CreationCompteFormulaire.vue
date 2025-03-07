@@ -59,7 +59,7 @@
 <script lang="ts" setup>
   import { ref } from 'vue';
   import Alert from '@/components/custom/Alert.vue';
-  import InputPassword from '@/components/custom/InputPassword.vue';
+  import InputPassword from '@/components/custom/Form/InputPassword.vue';
   import FranceConnect from '@/components/dsfr/FranceConnect.vue';
   import InputMail from '@/components/dsfr/InputMail.vue';
   import { SessionRepositoryStore } from '@/domaines/authentification/adapters/session.repository.store';

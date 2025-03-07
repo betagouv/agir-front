@@ -114,7 +114,8 @@
 
   .quiz-article-bien-repondu.fr-radio-group input[type='radio']:checked:disabled + label,
   .quiz-article-erreur.fr-radio-group input[type='radio']:checked:disabled + label {
-    background-image: radial-gradient(transparent 10px, var(--border-active-blue-france) 11px, transparent 12px),
+    background-image:
+      radial-gradient(transparent 10px, var(--border-active-blue-france) 11px, transparent 12px),
       radial-gradient(var(--background-active-blue-france) 5px, transparent 6px);
   }
 
