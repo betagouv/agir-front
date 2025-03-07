@@ -1,25 +1,5 @@
-.action h1,
-.action h2,
-.action h3,
-.action h4 {
+.action h1 {
     font-weight: 400;
-}
-
-.action__titre > span.text--bold {
-    display: inline-block;
-    position: relative;
-    z-index: 40;
-}
-
-.action__titre > span.text--bold::before {
-    content: '';
-    position: absolute;
-    top: 70%;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: #e3fbaf;
-    z-index: -1;
 }
 
 .action li p {
@@ -36,6 +16,10 @@
     max-width: 75%;
     margin: 0 auto;
     max-height: 50vh;
+}
+
+.action hr {
+    margin-top: 1.5rem;
 }
 
 .action__corps-introduction h2, .action__corps-astuces h2 {

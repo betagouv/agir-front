@@ -1,6 +1,6 @@
 <template>
   <div class="action fr-my-1w">
-    <h1 class="action__titre text--normal fr-mb-4w" v-html="actionBaseViewModel.titreAffiche" />
+    <h1 class="action__titre text--normal fr-mb-3w" v-html="actionBaseViewModel.titreAffiche" />
     <p v-if="actionBaseViewModel.sousTitre" class="fr-text--lg fr-mb-4w" v-html="actionBaseViewModel.sousTitre" />
 
     <slot />

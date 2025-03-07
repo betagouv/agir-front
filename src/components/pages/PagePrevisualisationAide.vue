@@ -56,8 +56,8 @@
           </div>
         </div>
       </div>
-      <div class="fr-col-12 fr-col-md-4">
-        <div v-if="aide.partenaire" class="fr-mt-3w background--white border border-radius--md fr-p-2w">
+      <div class="fr-col-12 fr-col-md-4 fr-mt-3w fr-mb-4w">
+        <div v-if="aide.partenaire" class="background--white border border-radius--md fr-p-2w">
           <p class="fr-mb-0">Proposé par</p>
           <img :alt="aide.partenaire.nom" :src="aide.partenaire.logoUrl" class="fr-mt-5v max-full-width" />
         </div>

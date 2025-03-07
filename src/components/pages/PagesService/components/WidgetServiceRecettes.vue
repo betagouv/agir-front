@@ -1,6 +1,6 @@
 <template>
   <section>
-    <div class="flex flex-space-between align-items--center">
+    <div class="flex flex-space-between align-items--center flex-wrap">
       <slot name="titre" />
       <p class="text--italic">avec <img alt="manger bouger" class="fr-ml-2w" src="/logo-manger-bouger.svg" /></p>
     </div>

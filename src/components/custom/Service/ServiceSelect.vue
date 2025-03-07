@@ -19,7 +19,7 @@
 <script setup lang="ts">
   import { computed, nextTick, onMounted, ref, watch } from 'vue';
 
-  const SELECT_RIGHT_PADDING = 40;
+  const SELECT_RIGHT_PADDING = 60;
 
   const props = defineProps<{
     id: string;

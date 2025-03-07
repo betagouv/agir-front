@@ -1,21 +1,20 @@
 <template>
-  <div class="headerThematique background--beige-gris-galet-975-75">
+  <div class="headerThematique background--beige-gris-galet-975-75 fr-pb-7w">
     <div class="fr-container">
-      <h1 class="fr-h1 fr-col fr-m-0 fr-py-5w display-inline-block">
-        <span aria-hidden="true"> {{ thematique.emoji }}</span>
-        {{ thematique.labelDansLeMenu }}
-      </h1>
-      <router-link
-        :to="{ name: RouteCompteName.LOGEMENT }"
-        class="fr-tag fr-icon-map-pin-2-fill fr-tag--icon-left fr-ml-2w"
-      >
-        à {{ thematiqueResume.commune }}
-      </router-link>
+      <div class="fr-py-5w">
+        <h1 class="fr-h1 fr-col fr-m-0 fr-pb-2w display-inline-block">
+          <span aria-hidden="true"> {{ thematique.emoji }}</span>
+          {{ thematique.labelDansLeMenu }}
+        </h1>
+        <router-link
+          :to="{ name: RouteCompteName.LOGEMENT }"
+          class="fr-tag fr-icon-map-pin-2-fill fr-tag--icon-left fr-ml-2w"
+        >
+          à {{ thematiqueResume.commune }}
+        </router-link>
+      </div>
 
-      <ul
-        v-if="thematiqueResume.listeInformations"
-        class="list-style-none listeServices flex flex-wrap fr-mb-7w fr-pl-0"
-      >
+      <ul v-if="thematiqueResume.listeInformations" class="list-style-none listeServices flex flex-wrap fr-pl-0">
         <li v-for="information in thematiqueResume.listeInformations" :key="information.label">
           <router-link
             v-if="information.to"
@@ -54,14 +53,16 @@
 
 <style scoped>
   .headerThematique {
-    height: 20rem;
-    background-image: v-bind(thematiqueIllustrationPath);
+    min-height: 20rem;
+    background-image: v-bind(thematiqueIllustrationPath), linear-gradient(var(--beige-gris-galet-975-75), #ffffff);
     background-repeat: no-repeat;
-    background-position: right;
+    background-position: right bottom;
   }
 
   .listeServices {
-    width: 60%;
+    @media all and (min-width: 767px) {
+      width: 60%;
+    }
     gap: 1rem;
   }
 </style>

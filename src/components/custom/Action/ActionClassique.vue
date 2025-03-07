@@ -1,8 +1,8 @@
 <template>
-  <section class="background--white border-radius--md fr-p-2w fr-mb-3w shadow">
+  <section class="background--white fr-p-2w fr-mb-3w shadow">
     <section
       v-if="actionClassiqueViewModel.corps.introduction"
-      class="action__corps-introduction fr-p-3w border-radius--md fr-mb-3w"
+      class="action__corps-introduction fr-p-3w fr-mb-3w"
       v-html="actionClassiqueViewModel.corps.introduction"
     />
 
@@ -10,7 +10,7 @@
 
     <section
       v-if="actionClassiqueViewModel.corps.astuces"
-      class="action__corps-astuces fr-p-3w border-radius--md"
+      class="action__corps-astuces fr-p-3w"
       v-html="actionClassiqueViewModel.corps.astuces"
     />
 
@@ -45,11 +45,9 @@
 <style scoped>
   .action__corps-introduction {
     background-color: rgba(0, 0, 145, 0.03);
-    border: 1px solid #e5e5f8;
   }
 
   .action__corps-astuces {
     background-color: rgba(249, 251, 251, 1);
-    border: 1px solid rgba(57, 130, 108, 0.2);
   }
 </style>
