@@ -30,7 +30,7 @@
                     <span class="fr-h4 text--gris">
                       {{ aide.titre }}
                     </span>
-                    <div v-if="aide.isSimulateur || aide.montantMaximum" class="fr-grid-row">
+                    <div v-if="aide.isSimulateur || aide.montantMaximum || aide.estGratuit" class="fr-grid-row">
                       <span
                         v-if="aide.isSimulateur"
                         class="fr-tag background-bleu-light fr-mr-1w fr-icon-money-euro-circle-line fr-tag--icon-left nowrap"
@@ -41,6 +41,10 @@
                       <span v-if="aide.montantMaximum" class="fr-tag nowrap">
                         <span class="fr-sr-only">, </span>
                         {{ aide.montantMaximum }}
+                      </span>
+                      <span v-if="aide.estGratuit" class="fr-tag nowrap">
+                        <span class="fr-sr-only">, </span>
+                        Gratuit
                       </span>
                     </div>
                   </div>

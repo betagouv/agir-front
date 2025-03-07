@@ -43,6 +43,7 @@ export class ChargementAidesPresenterImpl implements ChargementAidesPresenter {
           style: TagThematique.getTagThematiqueUtilitaire(aide.thematique),
         },
         urlCommencerVotreDemarche: aide.urlCommencerVotreDemarche,
+        estGratuit: aide.estGratuit,
         partenaire: aide.partenaire
           ? {
               logoUrl: aide.partenaire.logoUrl,

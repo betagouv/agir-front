@@ -11,6 +11,7 @@ export interface AideViewModel {
   thematiqueLabel: string;
   thematiqueTag: { label: string; style: TagStyle };
   urlCommencerVotreDemarche?: string;
+  estGratuit: boolean;
   partenaire?: {
     logoUrl: string;
     accessibilite: string;
