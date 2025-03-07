@@ -55,7 +55,6 @@
   .action__quiz-reponseExplication {
     background-color: rgba(0, 0, 145, 0.03);
     border: 1px solid rgba(229, 229, 248, 1);
-    border-radius: 8px;
     padding: 1rem;
   }
 </style>

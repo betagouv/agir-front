@@ -1,7 +1,7 @@
 <template>
   <section v-if="aidesViewModel && aidesViewModel.length > 0">
-    <div class="flex flex-space-between align-items--center">
-      <h2 class="fr-h3">Aides et bons plans</h2>
+    <div class="flex flex-space-between align-items--center fr-mb-2w">
+      <h2 class="fr-h3 fr-mb-0">Aides et bons plans</h2>
       <router-link class="fr-link" :to="{ name: RouteAidesName.AIDES }">Voir tout</router-link>
     </div>
 

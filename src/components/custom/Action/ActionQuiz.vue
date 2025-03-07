@@ -1,6 +1,6 @@
 <template>
-  <div class="fr-grid-row fr-grid-row--gutters fr-mb-4w">
-    <div class="border fr-p-2w border-radius--md background--white fr-col-12 fr-col-lg-8">
+  <div class="fr-grid-row fr-grid-row--gutters fr-mb-4w fr-mt-1w">
+    <div class="fr-p-2w background--white fr-col-12 fr-col-lg-8 shadow">
       <template v-if="indexQuestionActuelle < actionQuizViewModel.quizzes.length">
         <ExamenNavigation
           :etape-totale="actionQuizViewModel.quizzes.length"

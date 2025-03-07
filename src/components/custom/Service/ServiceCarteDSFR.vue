@@ -69,4 +69,8 @@
     outline-style: inherit;
     border-radius: 0.5rem;
   }
+
+  .fr-responsive-img {
+    max-width: 100%;
+  }
 </style>

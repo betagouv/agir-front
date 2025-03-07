@@ -38,8 +38,12 @@
         v-else
         class="fr-card fr-card--horizontal relative flex flex-center items-center justify-center flex-column p-4 full-width"
       >
-        <span class="text--center text--bold" aria-live="polite" role="status">Chargement...</span>
-        <div class="ball-loader fr-my-3w fr-mx-auto" />
+        <div class="fr-card__body">
+          <div class="fr-card__content">
+            <span class="text--center text--bold" aria-live="polite" role="status">Chargement...</span>
+            <div class="ball-loader fr-my-3w fr-mx-auto" />
+          </div>
+        </div>
       </div>
     </section>
     <section v-if="actions.length === 0" class="width-70 text--center fr-my-4w">
