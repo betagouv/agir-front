@@ -1,4 +1,5 @@
 import { ActionDetail } from '@/domaines/actions/ports/actions.repository';
+import { QuestionsViewModel, QuestionViewModel } from '@/domaines/kyc/adapters/listeQuestionsThematique.presenter.impl';
 import { ArticleDuQuiz } from '@/domaines/quiz/ports/quiz.repository';
 
 export interface ActionPresenter {
@@ -34,6 +35,8 @@ export interface ActionQuizzesViewModel extends ActionBaseViewModel {
 
 export interface ActionSimulateurViewModel extends ActionBaseViewModel {
   aides: ActionAideViewModel[];
+  kycs: QuestionViewModel[];
+  actionId: string;
 }
 
 export interface ActionQuizViewModel {

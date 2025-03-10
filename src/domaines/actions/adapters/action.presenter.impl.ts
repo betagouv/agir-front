@@ -5,6 +5,7 @@ import {
   ActionSimulateurViewModel,
 } from '@/domaines/actions/ports/action.presenter';
 import { ActionDetail } from '@/domaines/actions/ports/actions.repository';
+import { QuestionViewModelBuilder } from '@/domaines/kyc/adapters/question.base.presenter';
 import marked from '@/shell/actionMarkdownToHtml';
 import { buildUrl } from '@/shell/buildUrl';
 
@@ -106,7 +107,11 @@ export class ActionPresenterImpl implements ActionPresenter {
         montantMaximum: aide.montantMaximum ? `${aide.montantMaximum}€` : undefined,
         estGratuit: aide.estGratuit,
       })),
-      recommandations: [],
+      recommandations: action.recommandations,
+      kycs: action.kycs.map(kyc => {
+        return QuestionViewModelBuilder.buildFromQuestion(kyc);
+      }),
+      actionId: action.code,
     });
   }
 }
