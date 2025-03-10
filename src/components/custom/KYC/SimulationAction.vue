@@ -1,6 +1,6 @@
 <template>
   <div v-if="kycs && kycs.length > 0">
-    <div v-for="(questionViewModel, index) in kycs" :key="index">
+    <div v-for="(questionViewModel, index) in questionsViewModel" :key="index">
       <div v-if="index === etapeCourante">
         <p class="text--bleu fr-grid-row align-items--center fr-py-2w">
           <button
@@ -12,7 +12,7 @@
             Retour à l'étape précédente
           </button>
           <span class="fr-text--bold">Question {{ index + 1 }}</span>
-          &nbsp;sur {{ kycs.length }}
+          &nbsp;sur {{ questionsViewModel.length }}
         </p>
 
         <KYCForm
@@ -28,37 +28,37 @@
 </template>
 
 <script lang="ts" setup>
-  import { onMounted, ref } from 'vue';
+  import { ref } from 'vue';
   import KYCForm from '@/components/custom/KYC/KYCForm.vue';
+  import { ListeQuestionsDansLeSimulateurPresenterImpl } from '@/domaines/kyc/adapters/listeQuestionsDansLeSimulateur.presenter.impl';
   import { QuestionViewModel } from '@/domaines/kyc/adapters/listeQuestionsThematique.presenter.impl';
+  import { QuestionRepositoryAxios } from '@/domaines/kyc/adapters/question.repository.axios';
+  import { RecupererQuestionsSimulateurUsecase } from '@/domaines/kyc/recupererQuestionsSimulateur.usecase';
+  import { utilisateurStore } from '@/store/utilisateur';
 
-  const props = defineProps<{ kycs: QuestionViewModel[] }>();
+  const props = defineProps<{ kycs: QuestionViewModel[]; actionId: string }>();
 
   const emit = defineEmits<{
     (e: 'finKycAtteinte'): void;
+    (e: 'questionSuivante'): void;
   }>();
 
+  const questionsViewModel = ref<QuestionViewModel[]>(props.kycs || []);
   const etapeCourante = ref<number>(0);
   const afficherFinKyc = ref<boolean>(false);
 
-  onMounted(() => {
-    chargerEnchainementKycs();
-    // const premiereQuestionNonRep =
-    //   questionsViewModel.value?.questions.findIndex(question => !question.aDejaEteRepondu) || -1;
-    // etapeCourante.value = premiereQuestionNonRep !== -1 ? premiereQuestionNonRep : 0;
-  });
-
-  async function chargerEnchainementKycs() {
-    // const usecase = new RecupererEnchainementQuestionsUsecase(new QuestionRepositoryAxios());
-    // await usecase.execute(
-    //   utilisateurStore().utilisateur.id,
-    //   props.idEnchainementKycs,
-    //   new ListesQuestionsThematiquePresenter(vm => (questionsViewModel.value = vm)),
-    // );
+  async function chargerQuestionsSuivantes() {
+    const usecase = new RecupererQuestionsSimulateurUsecase(new QuestionRepositoryAxios());
+    await usecase.execute(
+      utilisateurStore().utilisateur.id,
+      props.actionId,
+      new ListeQuestionsDansLeSimulateurPresenterImpl(vm => (questionsViewModel.value = vm)),
+    );
   }
 
   const passerEtapeSuivante = async () => {
-    await chargerEnchainementKycs();
+    emit('finKycAtteinte');
+    await chargerQuestionsSuivantes();
     etapeCourante.value++;
     if (etapeCourante.value === props.kycs.length) {
       afficherFinKyc.value = true;

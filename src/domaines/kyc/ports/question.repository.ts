@@ -14,4 +14,6 @@ export interface QuestionRepository {
   ): Promise<void>;
 
   recupererQuestionsDepuisMissionOnboarding(utilisateurId: string, contentId: string): Promise<Question[]>;
+
+  recupererQuestionsSimulateur(utilisateurId: string, simulateurActionId: string): Promise<Question[]>;
 }

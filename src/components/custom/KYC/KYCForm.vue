@@ -1,6 +1,11 @@
 <template>
   <form @submit.prevent="validerLaReponse()">
     <div class="fr-input-group">
+      <KYCDecimal
+        v-if="questionViewModel.type === 'decimal'"
+        v-model="reponse as string"
+        :question-view-model="questionViewModel"
+      />
       <KYCEntier
         v-if="questionViewModel.type === 'entier'"
         v-model="reponse as string"
@@ -57,6 +62,7 @@
   import Alert from '@/components/custom/Alert.vue';
   import KYCChoixMultiple from '@/components/custom/KYC/KYCTypes/KYCChoixMultiple.vue';
   import KYCChoixUnique from '@/components/custom/KYC/KYCTypes/KYCChoixUnique.vue';
+  import KYCDecimal from '@/components/custom/KYC/KYCTypes/KYCDecimal.vue';
   import KYCEntier from '@/components/custom/KYC/KYCTypes/KYCEntier.vue';
   import KYCLibre from '@/components/custom/KYC/KYCTypes/KYCLibre.vue';
   import KYCMosaic from '@/components/custom/KYC/KYCTypes/KYCMosaic.vue';
@@ -77,7 +83,9 @@
 
   onMounted(() => {
     reponse.value =
-      props.questionViewModel.type === 'libre' || props.questionViewModel.type === 'entier'
+      props.questionViewModel.type === 'libre' ||
+      props.questionViewModel.type === 'entier' ||
+      props.questionViewModel.type === 'decimal'
         ? (props.questionViewModel.reponses_possibles[0].label ?? '')
         : (props.questionViewModel.reponses_possibles.filter(r => r.checked).map(r => r.id) ?? []);
   });
@@ -85,7 +93,9 @@
   const estIncomplet = ref<boolean>(true);
   watch(reponse, () => {
     estIncomplet.value =
-      props.questionViewModel.type === 'libre' || props.questionViewModel.type === 'entier'
+      props.questionViewModel.type === 'libre' ||
+      props.questionViewModel.type === 'entier' ||
+      props.questionViewModel.type === 'decimal'
         ? !reponse.value
         : reponse.value!.length === 0;
   });
