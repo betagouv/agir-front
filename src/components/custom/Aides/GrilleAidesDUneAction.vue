@@ -27,8 +27,8 @@
           <span class="fr-icon-arrow-right-s-line text--bleu"></span>
         </div>
         <div class="background--bleu-info fr-p-1w flex align-items--center">
-          <img :src="aide.partenaireImg" class="partenaire__img" alt="" />
-          <div class="full-width fr-ml-1w">
+          <img v-if="aide.partenaireImg" :src="aide.partenaireImg" class="partenaire__img" alt="" />
+          <div v-if="aide.partenaireNom" class="full-width fr-ml-1w">
             <span class="text--bleu text--italic">Proposée par</span><br />
             {{ aide.partenaireNom }}
           </div>
