@@ -15,14 +15,12 @@ export interface ActionBaseViewModel {
   titreAffiche: string;
   sousTitre: string;
   recommandations: RecommandationArticleViewModel[];
+  introduction: string;
 }
 
 export interface ActionClassiqueViewModel extends ActionBaseViewModel {
   commune: string;
-  corps: {
-    introduction: string;
-    astuces: string;
-  };
+  astuces: string;
   services: ActionServiceViewModel[];
   aides: ActionAideViewModel[];
   faq: ActionFAQViewModel[];
