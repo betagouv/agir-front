@@ -37,7 +37,7 @@ export interface ActionDetail {
   code: string;
   titre: string;
   sousTitre: string;
-  type: 'classique' | 'quizz' | 'kyc';
+  type: TypeAction;
   commune: string;
   corps: {
     introduction: string;

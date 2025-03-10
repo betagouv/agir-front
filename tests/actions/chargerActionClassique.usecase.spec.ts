@@ -2,12 +2,12 @@ import { ChargerActionUsecase } from '@/domaines/actions/chargerAction.usecase';
 import { ActionsRepositoryMock } from './adapters/actions.repository.mock';
 import { ActionPresenterImpl } from '@/domaines/actions/adapters/action.presenter.impl';
 import { ActionClassiqueViewModel } from '@/domaines/actions/ports/action.presenter';
-import { ActionDetail } from '@/domaines/actions/ports/actions.repository';
+import { ActionDetail, TypeAction } from '@/domaines/actions/ports/actions.repository';
 import { ChargerActionClassiqueUsecase } from '@/domaines/actions/chargerActionClassique.usecase';
 import { ChargerActionQuizUsecase } from '@/domaines/actions/chargerActionQuiz.usecase';
 import { ChargerActionSimulateurUsecase } from '@/domaines/actions/chargerActionSimulateur.usecase';
 
-describe("Fichier de tests concernant la récupération d'une action", () => {
+describe("Fichier de tests concernant la récupération d'une action de type classique", () => {
   it("En donnant l'id d'une action, on devrait pouvoir récupérer son entiereté", async () => {
     const action: ActionDetail = {
       kycs: [],
@@ -41,7 +41,7 @@ describe("Fichier de tests concernant la récupération d'une action", () => {
       code: 'id-action-test',
       nombreDePersonnes: 0,
       nombreAidesDisponibles: 0,
-      type: 'classique',
+      type: TypeAction.CLASSIQUE,
       titre: 'Tester une nouvelle **recette végétarienne**',
       quizzes: [],
       sousTitre:
@@ -109,7 +109,7 @@ describe("Fichier de tests concernant la récupération d'une action", () => {
         () => {},
       ),
     );
-    await usecase.execute('id-utilisateur', 'id-action', 'classique');
+    await usecase.execute('id-utilisateur', 'id-action', TypeAction.CLASSIQUE);
 
     function expected(viewModel: ActionClassiqueViewModel): void {
       expect(viewModel).toStrictEqual<ActionClassiqueViewModel>({

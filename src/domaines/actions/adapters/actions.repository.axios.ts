@@ -94,7 +94,7 @@ export class ActionsRepositoryAxios implements ActionsRepository {
       code: response.data.code,
       titre: response.data.titre,
       sousTitre: response.data.sous_titre,
-      type: response.data.type,
+      type: response.data.type as TypeAction,
       commune: response.data.nom_commune,
       quizzFelicitations: response.data.quizz_felicitations,
       corps: {

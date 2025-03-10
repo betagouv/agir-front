@@ -1,6 +1,6 @@
 import { ActionPresenterImpl } from '@/domaines/actions/adapters/action.presenter.impl';
 import { ActionQuizzesViewModel } from '@/domaines/actions/ports/action.presenter';
-import { ActionDetail } from '@/domaines/actions/ports/actions.repository';
+import { ActionDetail, TypeAction } from '@/domaines/actions/ports/actions.repository';
 import { ChargerActionClassiqueUsecase } from '@/domaines/actions/chargerActionClassique.usecase';
 import { ChargerActionUsecase } from '@/domaines/actions/chargerAction.usecase';
 import { ActionsRepositoryMock } from './adapters/actions.repository.mock';
@@ -9,13 +9,13 @@ import { QuizDifficulte } from '@/domaines/quiz/ports/quiz.repository';
 import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 import { ChargerActionSimulateurUsecase } from '@/domaines/actions/chargerActionSimulateur.usecase';
 
-describe("Fichier de tests concernant la récupération d'une action", () => {
+describe("Fichier de tests concernant la récupération d'une action de type quiz", () => {
   it("En donnant l'id d'une action, on devrait pouvoir récupérer son entiereté", async () => {
     const action: ActionDetail = {
       aides: [],
       quizzFelicitations: 'Félicitations ! ',
       code: 'id-action-test',
-      type: 'quizz',
+      type: TypeAction.QUIZZ,
       nombreDePersonnes: 0,
       nombreAidesDisponibles: 0,
       titre: 'Quiz **de ouf**',
@@ -114,7 +114,7 @@ describe("Fichier de tests concernant la récupération d'une action", () => {
         () => {},
       ),
     );
-    await usecase.execute('id-utilisateur', 'id-action', 'quizz');
+    await usecase.execute('id-utilisateur', 'id-action', TypeAction.QUIZZ);
 
     function expected(viewModel: ActionQuizzesViewModel): void {
       expect(viewModel).toStrictEqual<ActionQuizzesViewModel>({

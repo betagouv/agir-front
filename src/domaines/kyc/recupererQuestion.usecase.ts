@@ -34,7 +34,7 @@ export interface ReponseMultiple {
 export interface Question {
   id: string;
   libelle: string;
-  type: 'libre' | 'choix_multiple' | 'choix_unique' | 'mosaic_boolean' | 'entier';
+  type: 'libre' | 'choix_multiple' | 'choix_unique' | 'mosaic_boolean' | 'entier' | 'decimal';
   points: number;
   thematique: ThematiqueQuestion;
   reponses: ReponseKYCSimple | ReponseMosaic<boolean> | ReponseMultiple;
