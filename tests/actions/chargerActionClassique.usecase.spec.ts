@@ -10,6 +10,7 @@ import { ChargerActionSimulateurUsecase } from '@/domaines/actions/chargerAction
 describe("Fichier de tests concernant la récupération d'une action", () => {
   it("En donnant l'id d'une action, on devrait pouvoir récupérer son entiereté", async () => {
     const action: ActionDetail = {
+      kycs: [],
       aides: [
         {
           titre: 'Titre aide 1',
@@ -117,17 +118,15 @@ describe("Fichier de tests concernant la récupération d'une action", () => {
         sousTitre:
           'Faites des économies et le plein de vitamines ! Cette semaine, on cuisine une recette saine et délicieuse !',
         commune: 'Noisiel',
-        corps: {
-          astuces: `<h2>Nos <span class="text--bold">astuces</span></h2><ul>
+        astuces: `<h2>Nos <span class="text--bold">astuces</span></h2><ul>
 <li><span class="text--bold">Revisitez vos classiques</span> : Lasagnes aux légumes, chili sin carne, redécouvrez vos plats favoris en version végétarienne.</li>
 </ul>
 `,
-          introduction: `<h2>En <span class="text--bold">quelques mots</span></h2><ul>
+        introduction: `<h2>En <span class="text--bold">quelques mots</span></h2><ul>
 <li>Les repas à base de légumes sont en moyenne <span class="text--bold">30% moins chers</span> que ceux à base de viande.</li>
 <li>Les nutriments contenus dans les légumes de saison sont une grande aide pour passer l’hiver !</li>
 </ul>
 `,
-        },
         recommandations: [
           {
             image: '/temp_les_bases_alim_vege.png',

@@ -40,10 +40,10 @@
       :message="alerte.message"
       :titre="alerte.titre"
       :type="alerte.type"
-      class="fr-mt-1w"
+      class="fr-mt-1w fr-mb-3w"
     />
 
-    <button :title="wordingBouton" class="fr-btn fr-mt-3w" type="submit">
+    <button :title="wordingBouton" class="fr-btn fr-mt-0" type="submit">
       {{ wordingBouton }}
     </button>
     <button

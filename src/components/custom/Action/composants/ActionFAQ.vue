@@ -1,5 +1,5 @@
 <template>
-  <section class="fr-p-2w fr-mt-2w">
+  <section v-if="questionsFaq?.length > 0" class="fr-p-2w fr-mt-2w">
     <h2>On répond à vos <span class="fr-text--bold"> questions ! </span></h2>
     <div class="fr-accordions-group">
       <Accordeon v-for="faq in questionsFaq" :key="faq.question" :name-id="faq.question">

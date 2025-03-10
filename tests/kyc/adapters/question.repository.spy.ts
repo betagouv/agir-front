@@ -77,4 +77,8 @@ export class SpyQuestionRepository implements QuestionRepository {
   recupererQuestionsDepuisMissionOnboarding(utilisateurId: string): Promise<Question[]> {
     return Promise.resolve([]);
   }
+
+  recupererQuestionsSimulateur(utilisateurId: string, simulateurActionId: string): Promise<Question[]> {
+    throw new Error('Method not implemented.');
+  }
 }

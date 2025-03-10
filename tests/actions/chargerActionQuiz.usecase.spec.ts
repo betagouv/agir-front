@@ -27,11 +27,7 @@ describe("Fichier de tests concernant la récupération d'une action", () => {
 <li><span class="text--bold">Revisitez vos classiques</span> : Lasagnes aux légumes, chili sin carne, redécouvrez vos plats favoris en version végétarienne.</li>
 </ul>
 `,
-        introduction: `<h2>En <span class="text--bold">quelques mots</span></h2><ul>
-<li>Les repas à base de légumes sont en moyenne <span class="text--bold">30% moins chers</span> que ceux à base de viande.</li>
-<li>Les nutriments contenus dans les légumes de saison sont une grande aide pour passer l’hiver !</li>
-</ul>
-`,
+        introduction: ``,
       },
       quizzes: [
         {
@@ -93,6 +89,7 @@ describe("Fichier de tests concernant la récupération d'une action", () => {
           clefThematiqueAPI: ClefThematiqueAPI.alimentation,
         },
       ],
+      kycs: [],
       recommandations: [],
       services: [
         {
@@ -125,6 +122,7 @@ describe("Fichier de tests concernant la récupération d'une action", () => {
         sousTitre:
           'Faites des économies et le plein de vitamines ! Cette semaine, on cuisine une recette saine et délicieuse !',
         titreAffiche: 'Quiz - Quiz <span class="text--bold">de ouf</span>',
+        introduction: '',
         quizzFelicitations: 'Félicitations ! ',
         quizzes: [
           {

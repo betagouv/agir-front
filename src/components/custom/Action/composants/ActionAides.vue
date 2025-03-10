@@ -1,5 +1,5 @@
 <template>
-  <section class="fr-p-2w fr-mt-2w">
+  <section v-if="aides?.length > 0" class="fr-p-2w fr-mt-2w">
     <h2>Aides et bons plans !</h2>
     <GrilleAidesDUneAction :aides="aides" />
   </section>

@@ -20,6 +20,7 @@ export class ActionQuizRepositoryMock implements ActionsRepository {
         introduction: '',
         astuces: '',
       },
+      kycs: [],
       recommandations: [],
       nombreDePersonnes: 20,
       nombreAidesDisponibles: 10,

@@ -1,5 +1,5 @@
 <template>
-  <section class="action__corps-introduction fr-p-3w fr-mb-3w" v-html="introduction" />
+  <section v-if="introduction" class="action__corps-introduction fr-p-3w fr-mb-3w" v-html="introduction" />
 </template>
 
 <script lang="ts" setup>
