@@ -47,7 +47,7 @@
   import { ref } from 'vue';
   import '@gouvfr/dsfr/dist/component/password/password.min.css';
   import Alert from '@/components/custom/Alert.vue';
-  import InputPasswordLogin from '@/components/custom/InputPasswordLogin.vue';
+  import InputPasswordLogin from '@/components/custom/Form/InputPasswordLogin.vue';
   import FranceConnect from '@/components/dsfr/FranceConnect.vue';
   import InputMail from '@/components/dsfr/InputMail.vue';
   import { UtilisateurRepositoryAxios } from '@/domaines/authentification/adapters/utilisateur.repository.axios';
