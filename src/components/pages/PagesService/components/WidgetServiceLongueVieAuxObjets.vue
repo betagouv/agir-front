@@ -16,7 +16,10 @@
       :key="suggestion.titre"
       class="fr-col-12 fr-col-md-6"
     >
-      <ServiceCarteLongueVieAuxObjets :suggestionsServiceViewModel="suggestion" />
+      <ServiceCarteDSFR
+        :suggestionsServiceViewModel="suggestion"
+        styleCarte="fr-card--horizontal fr-card--horizontal-tier"
+      />
     </li>
   </ul>
   <router-link
@@ -32,7 +35,7 @@
 </template>
 <script lang="ts" setup>
   import { onMounted, ref } from 'vue';
-  import ServiceCarteLongueVieAuxObjets from '@/components/custom/Service/ServiceCarteLongueVieAuxObjets.vue';
+  import ServiceCarteDSFR from '@/components/custom/Service/ServiceCarteDSFR.vue';
   import {
     ServiceRechercheLongueVieAuxObjetsPresenterImpl,
     ServiceRechercheLongueVieAuxObjetsViewModel,

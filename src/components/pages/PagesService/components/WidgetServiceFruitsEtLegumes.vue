@@ -1,6 +1,6 @@
 <template>
   <section v-if="serviceFruitsEtLegumesViewModel.length > 0">
-    <div class="flex flex-space-between align-items--center fr-mb-3w">
+    <div class="flex flex-space-between align-items--center fr-mb-3w flex-wrap">
       <h2 class="fr-h3 fr-mb-0">
         Les fruits et légumes de
         <span class="text--bleu">{{ moisCourantLabel }}</span>
@@ -21,7 +21,7 @@
           :key="item.nom"
           class="fr-col-6 fr-col-md-4 fr-pb-1w fr-pr-1w"
         >
-          <div class="fr-grid-row flex-space-between shadow--light background--white border--gris fr-p-2w">
+          <div class="flex flex-space-between shadow--light background--white border--gris fr-p-3v">
             <span class="fr-ellipsis">{{ item.nom }}</span>
             <img v-if="item.urlImage" :src="item.urlImage" alt="" height="22" />
           </div>

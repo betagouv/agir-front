@@ -46,9 +46,9 @@
       </WidgetServiceRecettes>
 
       <div class="fr-grid-row fr-my-6w">
-        <WidgetServiceFruitsEtLegumes class="fr-col-12 fr-col-lg-6 fr-text--sm fr-pr-3w" />
+        <WidgetServiceFruitsEtLegumes class="fr-col-12 fr-col-md-6 fr-pr-md-3w fr-text--sm" />
 
-        <WidgetServicePresDeChezNous class="fr-col-12 fr-col-lg-6 fr-pl-3w" />
+        <WidgetServicePresDeChezNous class="fr-col-12 fr-col-md-6 fr-pl-md-3w" />
       </div>
     </div>
 
