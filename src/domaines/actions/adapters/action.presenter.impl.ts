@@ -2,6 +2,7 @@ import {
   ActionClassiqueViewModel,
   ActionPresenter,
   ActionQuizzesViewModel,
+  ActionSimulateurViewModel,
 } from '@/domaines/actions/ports/action.presenter';
 import { ActionDetail } from '@/domaines/actions/ports/actions.repository';
 import marked from '@/shell/actionMarkdownToHtml';
@@ -11,6 +12,7 @@ export class ActionPresenterImpl implements ActionPresenter {
   constructor(
     private readonly actionClassiqueViewModel: (viewModel: ActionClassiqueViewModel) => void,
     private readonly actionQuizViewModel: (viewModel: ActionQuizzesViewModel) => void,
+    private readonly actionSimulateurViewModel: (viewModel: ActionSimulateurViewModel) => void,
   ) {}
 
   async presenteActionClassique(action: ActionDetail) {
@@ -82,6 +84,29 @@ export class ActionPresenterImpl implements ActionPresenter {
       }),
       quizzFelicitations: action.quizzFelicitations,
       recommandations: action.recommandations,
+    });
+  }
+
+  async presenteActionSimulateur(action: ActionDetail) {
+    const [titre, sousTitre] = await Promise.all([
+      marked.parseInline(action.titre),
+      marked.parseInline(action.sousTitre ?? ''),
+    ]);
+
+    this.actionSimulateurViewModel({
+      titre,
+      titreAffiche: `Simulateur - ${titre}`,
+      sousTitre,
+      aides: action.aides.map(aide => ({
+        titre: aide.titre,
+        titreUrl: buildUrl(aide.titre),
+        id: aide.id,
+        partenaireNom: aide.partenaireNom,
+        partenaireImg: aide.partenaireImg,
+        montantMaximum: aide.montantMaximum ? `${aide.montantMaximum}€` : undefined,
+        estGratuit: aide.estGratuit,
+      })),
+      recommandations: [],
     });
   }
 }

@@ -54,6 +54,7 @@ export interface ActionDetail {
 
 export enum TypeAction {
   CLASSIQUE = 'classique',
+  SIMULATEUR = 'simulateur',
   BILAN = 'bilan',
   QUIZZ = 'quizz',
 }

@@ -5,6 +5,8 @@ export interface ActionPresenter {
   presenteActionClassique(action: ActionDetail): void;
 
   presenteActionQuiz(action: ActionDetail): void;
+
+  presenteActionSimulateur(action: ActionDetail): void;
 }
 
 export interface ActionBaseViewModel {
@@ -28,6 +30,10 @@ export interface ActionClassiqueViewModel extends ActionBaseViewModel {
 export interface ActionQuizzesViewModel extends ActionBaseViewModel {
   quizzes: ActionQuizViewModel[];
   quizzFelicitations?: string;
+}
+
+export interface ActionSimulateurViewModel extends ActionBaseViewModel {
+  aides: ActionAideViewModel[];
 }
 
 export interface ActionQuizViewModel {

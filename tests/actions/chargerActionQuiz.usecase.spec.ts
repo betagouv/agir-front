@@ -7,6 +7,7 @@ import { ActionsRepositoryMock } from './adapters/actions.repository.mock';
 import { ChargerActionQuizUsecase } from '@/domaines/actions/chargerActionQuiz.usecase';
 import { QuizDifficulte } from '@/domaines/quiz/ports/quiz.repository';
 import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
+import { ChargerActionSimulateurUsecase } from '@/domaines/actions/chargerActionSimulateur.usecase';
 
 describe("Fichier de tests concernant la récupération d'une action", () => {
   it("En donnant l'id d'une action, on devrait pouvoir récupérer son entiereté", async () => {
@@ -108,8 +109,13 @@ describe("Fichier de tests concernant la récupération d'une action", () => {
     const usecase = new ChargerActionUsecase(
       new ChargerActionClassiqueUsecase(),
       new ChargerActionQuizUsecase(),
+      new ChargerActionSimulateurUsecase(),
       ActionsRepositoryMock.avecActionDetail(action),
-      new ActionPresenterImpl(() => {}, expected),
+      new ActionPresenterImpl(
+        () => {},
+        expected,
+        () => {},
+      ),
     );
     await usecase.execute('id-utilisateur', 'id-action', 'quizz');
 
