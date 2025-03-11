@@ -5420,10 +5420,10 @@ regexp.prototype.flags@^1.5.1, regexp.prototype.flags@^1.5.2:
     es-errors "^1.3.0"
     set-function-name "^2.0.1"
 
-release-please@16.17.0:
-  version "16.17.0"
-  resolved "https://registry.yarnpkg.com/release-please/-/release-please-16.17.0.tgz#a1342fbff4356acfec73aa4e955a6bd68d56dc0c"
-  integrity sha512-jJ7oLh0dL4MH3RryActHTILZjfya6JJcttdUJjcROpr/fKxbz3lkhTn+ufQ0kiL5AjC5m28JisurHPn4yo+nqw==
+release-please@16.18.0:
+  version "16.18.0"
+  resolved "https://registry.yarnpkg.com/release-please/-/release-please-16.18.0.tgz#9c4311780fae7d003deffd260c4708644f3a6783"
+  integrity sha512-23AmvwFSvnMqNRHrSTc+rjTZNMY7YN4JbrPMqAZRIpNNpv9GU0XO1U2IQ9QzNuTNp/sxUU/2gT+9pi7Nu7OntQ==
   dependencies:
     "@conventional-commits/parser" "^0.4.1"
     "@google-automations/git-file-utils" "^2.0.0"
