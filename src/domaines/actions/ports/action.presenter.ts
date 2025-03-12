@@ -16,6 +16,8 @@ export interface ActionBaseViewModel {
   sousTitre: string;
   recommandations: RecommandationArticleViewModel[];
   introduction: string;
+  realisee: boolean;
+  nombreDeRealisations: number;
 }
 
 export interface ActionClassiqueViewModel extends ActionBaseViewModel {

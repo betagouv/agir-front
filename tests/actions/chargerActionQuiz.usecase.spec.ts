@@ -16,7 +16,7 @@ describe("Fichier de tests concernant la récupération d'une action de type qui
       quizzFelicitations: 'Félicitations ! ',
       code: 'id-action-test',
       type: TypeAction.QUIZZ,
-      nombreDePersonnes: 0,
+      nombreDeRealisations: 0,
       nombreAidesDisponibles: 0,
       titre: 'Quiz **de ouf**',
       sousTitre:

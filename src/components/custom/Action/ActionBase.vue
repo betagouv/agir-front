@@ -3,7 +3,16 @@
     <h1 class="action__titre text--normal fr-mb-3w" v-html="actionBaseViewModel.titreAffiche" />
     <p v-if="actionBaseViewModel.sousTitre" class="fr-text--lg fr-mb-4w" v-html="actionBaseViewModel.sousTitre" />
 
-    <slot />
+    <div class="fr-grid-row fr-grid-row--gutters">
+      <div class="fr-col-lg-8">
+        <slot name="contenu" />
+      </div>
+      <div class="fr-col-lg-4">
+        <ActionAside :action-base-view-model="actionBaseViewModel">
+          <slot name="aside" />
+        </ActionAside>
+      </div>
+    </div>
 
     <section v-if="actionBaseViewModel.recommandations.length > 0" class="fr-p-2w">
       <h2>Pour aller <span class="text--bold">plus loin</span></h2>
@@ -31,6 +40,7 @@
 </template>
 
 <script lang="ts" setup>
+  import ActionAside from '@/components/custom/Action/ActionAside.vue';
   import { ActionBaseViewModel } from '@/domaines/actions/ports/action.presenter';
 
   defineProps<{ actionBaseViewModel: ActionBaseViewModel }>();

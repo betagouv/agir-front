@@ -38,6 +38,10 @@
 <script setup lang="ts">
   import { onMounted, ref } from 'vue';
   import { useRoute } from 'vue-router';
+  import { ActionsEventBus } from '@/domaines/actions/actions.eventbus';
+  import { ActionsRepositoryAxios } from '@/domaines/actions/adapters/actions.repository.axios';
+  import { TypeAction } from '@/domaines/actions/ports/actions.repository';
+  import { TerminerActionUsecase } from '@/domaines/actions/terminerAction.usecase';
   import { QuizRepositoryAxios } from '@/domaines/quiz/adapters/quiz.repository.axios';
   import { ScoreActionQuizPresenterImpl } from '@/domaines/quiz/adapters/scoreActionQuiz.presenter.impl';
   import { ScoreActionQuizViewModel } from '@/domaines/quiz/ports/scoreActionQuiz.presenter';
@@ -61,6 +65,16 @@
       utilisateurStore().utilisateur.id,
       route.params.id.toString(),
       new ScoreActionQuizPresenterImpl(vm => (scoreViewModel.value = vm)),
+    );
+
+    const terminerActionUsecase = new TerminerActionUsecase(
+      new ActionsRepositoryAxios(),
+      ActionsEventBus.getInstance(),
+    );
+    await terminerActionUsecase.execute(
+      utilisateurStore().utilisateur.id,
+      route.params.id.toString(),
+      TypeAction.QUIZZ,
     );
   });
 

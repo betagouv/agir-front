@@ -30,6 +30,10 @@
 <script lang="ts" setup>
   import { ref } from 'vue';
   import KYCForm from '@/components/custom/KYC/KYCForm.vue';
+  import { ActionsEventBus } from '@/domaines/actions/actions.eventbus';
+  import { ActionsRepositoryAxios } from '@/domaines/actions/adapters/actions.repository.axios';
+  import { TypeAction } from '@/domaines/actions/ports/actions.repository';
+  import { TerminerActionUsecase } from '@/domaines/actions/terminerAction.usecase';
   import { ListeQuestionsDansLeSimulateurPresenterImpl } from '@/domaines/kyc/adapters/listeQuestionsDansLeSimulateur.presenter.impl';
   import { QuestionViewModel } from '@/domaines/kyc/adapters/listeQuestionsThematique.presenter.impl';
   import { QuestionRepositoryAxios } from '@/domaines/kyc/adapters/question.repository.axios';
@@ -63,6 +67,11 @@
     if (etapeCourante.value === props.kycs.length) {
       afficherFinKyc.value = true;
       emit('finKycAtteinte');
+      const terminerActionUsecase = new TerminerActionUsecase(
+        new ActionsRepositoryAxios(),
+        ActionsEventBus.getInstance(),
+      );
+      await terminerActionUsecase.execute(utilisateurStore().utilisateur.id, props.actionId, TypeAction.SIMULATEUR);
     }
   };
 </script>

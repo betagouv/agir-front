@@ -65,7 +65,7 @@ describe("Fichier de tests concernant la récupération d'une action de type sim
       ],
       quizzFelicitations: '',
       code: 'id-action-simulateur-test',
-      nombreDePersonnes: 0,
+      nombreDeRealisations: 0,
       nombreAidesDisponibles: 0,
       type: TypeAction.SIMULATEUR,
       titre: '**Simulateur voiture**',
