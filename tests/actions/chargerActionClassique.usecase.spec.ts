@@ -11,6 +11,7 @@ describe("Fichier de tests concernant la récupération d'une action de type cla
   it("En donnant l'id d'une action, on devrait pouvoir récupérer son entiereté", async () => {
     const action: ActionDetail = {
       kycs: [],
+      realisee: false,
       aides: [
         {
           titre: 'Titre aide 1',
@@ -113,6 +114,9 @@ describe("Fichier de tests concernant la récupération d'une action de type cla
 
     function expected(viewModel: ActionClassiqueViewModel): void {
       expect(viewModel).toStrictEqual<ActionClassiqueViewModel>({
+        realisee: false,
+        nombreDeRealisations: 40,
+        actionId: 'id-action-test',
         titre: 'Tester une nouvelle <span class="text--bold">recette végétarienne</span>',
         titreAffiche: 'Tester une nouvelle <span class="text--bold">recette végétarienne</span>',
         sousTitre:

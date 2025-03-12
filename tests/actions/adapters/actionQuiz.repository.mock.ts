@@ -10,6 +10,7 @@ import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 export class ActionQuizRepositoryMock implements ActionsRepository {
   async chargerAction(idUtilisateur: string, idAction: string): Promise<ActionDetail> {
     return {
+      realisee: false,
       aides: [],
       quizzFelicitations: 'Félicitations !',
       code: 'code',
@@ -118,6 +119,10 @@ export class ActionQuizRepositoryMock implements ActionsRepository {
     titre: string,
     filtreDejaVu: boolean,
   ): Promise<CatalogueActions> {
+    throw Error('Not implemented');
+  }
+
+  terminerAction(idUtilisateur: string, idAction: string, typeAction: TypeAction): Promise<void> {
     throw Error('Not implemented');
   }
 }

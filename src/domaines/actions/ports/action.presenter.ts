@@ -18,6 +18,7 @@ export interface ActionBaseViewModel {
   introduction: string;
   realisee: boolean;
   nombreDeRealisations: number;
+  actionId: string;
 }
 
 export interface ActionClassiqueViewModel extends ActionBaseViewModel {
@@ -36,7 +37,6 @@ export interface ActionQuizzesViewModel extends ActionBaseViewModel {
 export interface ActionSimulateurViewModel extends ActionBaseViewModel {
   aides: ActionAideViewModel[];
   kycs: QuestionViewModel[];
-  actionId: string;
 }
 
 export interface ActionQuizViewModel {

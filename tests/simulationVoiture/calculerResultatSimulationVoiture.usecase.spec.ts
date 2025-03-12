@@ -22,19 +22,19 @@ describe('CalculerResultatSimulationVoitureUsecase', () => {
         resultatVoitureActuelle: {
           gabarit: 'SUV',
           coupAnnuel: '25000',
-          emissionAnnuelle: '120',
+          emissionAnnuelle: '100',
           tag: ['Électricité', 'Électrique'],
         },
         resultatVoiturePlusEconomique: {
           typeDeVoiture: 'Voiture A',
           coutAnnuel: { montant: 18000, difference: -7000 },
-          emission: { montant: 100, difference: -20 },
+          emission: { montant: 80, difference: -20 },
           tag: ['Essence', 'Hybride'],
         },
         resultatVoiturePlusEcologique: {
           typeDeVoiture: 'Voiture B',
           coutAnnuel: { montant: 22000, difference: -3000 },
-          emission: { montant: 90, difference: -30 },
+          emission: { montant: 60, difference: -40 },
           tag: ['Électricité', 'Électrique'],
         },
       });
