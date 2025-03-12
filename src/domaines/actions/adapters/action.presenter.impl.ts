@@ -16,7 +16,13 @@ class ActionViewModelBuilder {
       marked.parseInline(action.sousTitre ?? ''),
       marked.parse(action.corps.introduction ?? ''),
     ]);
-    return { titre, sousTitre, introduction };
+    return {
+      titre,
+      sousTitre,
+      introduction,
+      realisee: action.realisee,
+      nombreDeRealisations: action.nombreDeRealisations,
+    };
   }
 
   private static buildAides(aides: ActionDetail['aides']) {
