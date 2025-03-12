@@ -1,6 +1,6 @@
 <template>
-  <div class="border fr-px-3w fr-pt-1w fr-pb-3w" v-if="kycs && kycs.length > 0">
-    <div v-for="(questionViewModel, index) in questionsViewModel" :key="index">
+  <div class="border fr-px-3w fr-pt-1w fr-pb-3w" v-if="kycs && kycs.length > 0 && !afficherFinKyc">
+    <template v-for="(questionViewModel, index) in questionsViewModel" :key="index">
       <div v-if="index === etapeCourante">
         <p class="text--bleu fr-grid-row align-items--center fr-py-2w">
           <button
@@ -21,7 +21,7 @@
           @update:soumission-kyc="passerEtapeSuivante"
         />
       </div>
-    </div>
+    </template>
   </div>
 
   <slot name="fin" v-if="afficherFinKyc" />

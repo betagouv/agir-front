@@ -3,7 +3,7 @@
     {{ label.wording }}
     <span class="fr-hint-text">Nombre uniquement (décimales autorisées)</span>
   </label>
-  <input class="fr-input" type="number" v-model="internalValue" :id="id" :name="id" inputmode="decimal" step="0.1" />
+  <input class="fr-input" type="number" v-model="internalValue" :id="id" :name="id" inputmode="decimal" step="0.01" />
 </template>
 
 <script setup lang="ts">
