@@ -1,7 +1,6 @@
 <template>
-  <div class="background--white fr-p-2w shadow">
+  <div class="background--white fr-p-2w shadow fr-mb-2w">
     <slot />
-    <p>Aimez-vous cette action ?</p>
   </div>
 </template>
 

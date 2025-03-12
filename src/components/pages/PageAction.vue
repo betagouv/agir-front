@@ -28,13 +28,13 @@
 <script lang="ts" setup>
   import { computed, onMounted, ref } from 'vue';
   import { useRoute } from 'vue-router';
-  import ActionAsideClassique from '@/components/custom/Action/ActionAsideClassique.vue';
-  import ActionAsideQuiz from '@/components/custom/Action/ActionAsideQuiz.vue';
-  import ActionAsideSimulateur from '@/components/custom/Action/ActionAsideSimulateur.vue';
   import ActionBase from '@/components/custom/Action/ActionBase.vue';
   import ActionClassique from '@/components/custom/Action/ActionClassique.vue';
   import ActionQuiz from '@/components/custom/Action/ActionQuiz.vue';
   import ActionSimulateur from '@/components/custom/Action/ActionSimulateur.vue';
+  import ActionAsideClassique from '@/components/custom/Action/Aside/ActionAsideClassique.vue';
+  import ActionAsideQuiz from '@/components/custom/Action/Aside/ActionAsideQuiz.vue';
+  import ActionAsideSimulateur from '@/components/custom/Action/Aside/ActionAsideSimulateur.vue';
   import CarteSkeleton from '@/components/custom/Skeleton/CarteSkeleton.vue';
   import { ActionPresenterImpl } from '@/domaines/actions/adapters/action.presenter.impl';
   import { ActionsRepositoryAxios } from '@/domaines/actions/adapters/actions.repository.axios';

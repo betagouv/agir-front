@@ -3,14 +3,15 @@
     <h1 class="action__titre text--normal fr-mb-3w" v-html="actionBaseViewModel.titreAffiche" />
     <p v-if="actionBaseViewModel.sousTitre" class="fr-text--lg fr-mb-4w" v-html="actionBaseViewModel.sousTitre" />
 
-    <div class="fr-grid-row fr-grid-row--gutters">
-      <div class="fr-col-lg-8">
-        <slot name="contenu" />
-      </div>
-      <div class="fr-col-lg-4">
+    <div class="fr-grid-row fr-grid-row--gutters reverse-on-lg">
+      <div class="fr-col-12 fr-col-lg-4">
         <ActionAside :action-base-view-model="actionBaseViewModel">
           <slot name="aside" />
         </ActionAside>
+      </div>
+
+      <div class="fr-col-12 fr-col-lg-8">
+        <slot name="contenu" />
       </div>
     </div>
 
@@ -40,7 +41,7 @@
 </template>
 
 <script lang="ts" setup>
-  import ActionAside from '@/components/custom/Action/ActionAside.vue';
+  import ActionAside from '@/components/custom/Action/Aside/ActionAside.vue';
   import { ActionBaseViewModel } from '@/domaines/actions/ports/action.presenter';
 
   defineProps<{ actionBaseViewModel: ActionBaseViewModel }>();
@@ -50,5 +51,11 @@
   .action__recommandations-img {
     height: 6rem;
     object-fit: cover;
+  }
+
+  .reverse-on-lg {
+    @media (min-width: 62em) {
+      flex-direction: row-reverse;
+    }
   }
 </style>

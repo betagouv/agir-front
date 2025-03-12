@@ -40,7 +40,7 @@ describe("Fichier de tests concernant la récupération d'une action de type cla
       ],
       quizzFelicitations: '',
       code: 'id-action-test',
-      nombreDeRealisations: 0,
+      nombreDeRealisations: 40,
       nombreAidesDisponibles: 0,
       type: TypeAction.CLASSIQUE,
       titre: 'Tester une nouvelle **recette végétarienne**',
