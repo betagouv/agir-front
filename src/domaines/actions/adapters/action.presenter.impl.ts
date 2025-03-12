@@ -22,6 +22,7 @@ class ActionViewModelBuilder {
       introduction,
       realisee: action.realisee,
       nombreDeRealisations: action.nombreDeRealisations,
+      actionId: action.code,
     };
   }
 
@@ -96,7 +97,6 @@ class ActionViewModelBuilder {
       aides: this.buildAides(action.aides),
       recommandations: action.recommandations,
       kycs: action.kycs.map(kyc => QuestionViewModelBuilder.buildFromQuestion(kyc)),
-      actionId: action.code,
     };
   }
 }

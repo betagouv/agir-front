@@ -1,5 +1,5 @@
 <template>
-  <template v-if="!actionBaseViewModel.realisee">
+  <template v-if="!estRealise">
     <h2 class="fr-h4">On se lance le défi ?</h2>
     <p>Réalisez cette action dans les prochaines semaines et partagez vos retours</p>
     <button class="fr-btn full-width flex flex-center align-items--center gap--small" @click="terminerAction">
@@ -27,10 +27,11 @@
 
   <hr />
 
-  <p>{{ actionBaseViewModel.nombreDeRealisations }} actions réalisées par la communauté</p>
+  <p>{{ nombreActionRealise }} actions réalisées par la communauté</p>
 </template>
 
 <script lang="ts" setup>
+  import { ref } from 'vue';
   import { ActionsEventBus } from '@/domaines/actions/actions.eventbus';
   import { ActionsRepositoryAxios } from '@/domaines/actions/adapters/actions.repository.axios';
   import { ActionBaseViewModel } from '@/domaines/actions/ports/action.presenter';
@@ -38,13 +39,18 @@
   import { TerminerActionUsecase } from '@/domaines/actions/terminerAction.usecase';
   import { utilisateurStore } from '@/store/utilisateur';
 
-  defineProps<{
+  const props = defineProps<{
     actionBaseViewModel: ActionBaseViewModel;
   }>();
 
+  const estRealise = ref<boolean>(props.actionBaseViewModel.realisee);
+  const nombreActionRealise = ref<number>(props.actionBaseViewModel.nombreDeRealisations);
+
   const terminerAction = async () => {
     const usecase = new TerminerActionUsecase(new ActionsRepositoryAxios(), ActionsEventBus.getInstance());
-    await usecase.execute(utilisateurStore().utilisateur.id, actionBaseViewModel.id, TypeAction.QUIZZ);
+    await usecase.execute(utilisateurStore().utilisateur.id, props.actionBaseViewModel.actionId, TypeAction.CLASSIQUE);
+    estRealise.value = true;
+    nombreActionRealise.value = nombreActionRealise.value + 1;
   };
 </script>
 
