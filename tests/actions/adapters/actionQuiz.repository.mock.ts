@@ -1,8 +1,9 @@
 import {
   ActionDetail,
-  DetailThematique,
   ActionsRepository,
   CatalogueActions,
+  DetailThematique,
+  TypeAction,
 } from '@/domaines/actions/ports/actions.repository';
 import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 
@@ -14,12 +15,13 @@ export class ActionQuizRepositoryMock implements ActionsRepository {
       code: 'code',
       titre: 'Titre Quiz',
       sousTitre: 'Sous Titre Quiz',
-      type: 'quizz',
+      type: TypeAction.QUIZZ,
       commune: 'Lillers',
       corps: {
         introduction: '',
         astuces: '',
       },
+      kycs: [],
       recommandations: [],
       nombreDePersonnes: 20,
       nombreAidesDisponibles: 10,

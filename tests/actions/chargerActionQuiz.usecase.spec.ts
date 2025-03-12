@@ -1,20 +1,21 @@
 import { ActionPresenterImpl } from '@/domaines/actions/adapters/action.presenter.impl';
 import { ActionQuizzesViewModel } from '@/domaines/actions/ports/action.presenter';
-import { ActionDetail } from '@/domaines/actions/ports/actions.repository';
+import { ActionDetail, TypeAction } from '@/domaines/actions/ports/actions.repository';
 import { ChargerActionClassiqueUsecase } from '@/domaines/actions/chargerActionClassique.usecase';
 import { ChargerActionUsecase } from '@/domaines/actions/chargerAction.usecase';
 import { ActionsRepositoryMock } from './adapters/actions.repository.mock';
 import { ChargerActionQuizUsecase } from '@/domaines/actions/chargerActionQuiz.usecase';
 import { QuizDifficulte } from '@/domaines/quiz/ports/quiz.repository';
 import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
+import { ChargerActionSimulateurUsecase } from '@/domaines/actions/chargerActionSimulateur.usecase';
 
-describe("Fichier de tests concernant la récupération d'une action", () => {
+describe("Fichier de tests concernant la récupération d'une action de type quiz", () => {
   it("En donnant l'id d'une action, on devrait pouvoir récupérer son entiereté", async () => {
     const action: ActionDetail = {
       aides: [],
       quizzFelicitations: 'Félicitations ! ',
       code: 'id-action-test',
-      type: 'quizz',
+      type: TypeAction.QUIZZ,
       nombreDePersonnes: 0,
       nombreAidesDisponibles: 0,
       titre: 'Quiz **de ouf**',
@@ -26,11 +27,7 @@ describe("Fichier de tests concernant la récupération d'une action", () => {
 <li><span class="text--bold">Revisitez vos classiques</span> : Lasagnes aux légumes, chili sin carne, redécouvrez vos plats favoris en version végétarienne.</li>
 </ul>
 `,
-        introduction: `<h2>En <span class="text--bold">quelques mots</span></h2><ul>
-<li>Les repas à base de légumes sont en moyenne <span class="text--bold">30% moins chers</span> que ceux à base de viande.</li>
-<li>Les nutriments contenus dans les légumes de saison sont une grande aide pour passer l’hiver !</li>
-</ul>
-`,
+        introduction: ``,
       },
       quizzes: [
         {
@@ -92,6 +89,7 @@ describe("Fichier de tests concernant la récupération d'une action", () => {
           clefThematiqueAPI: ClefThematiqueAPI.alimentation,
         },
       ],
+      kycs: [],
       recommandations: [],
       services: [
         {
@@ -108,10 +106,15 @@ describe("Fichier de tests concernant la récupération d'une action", () => {
     const usecase = new ChargerActionUsecase(
       new ChargerActionClassiqueUsecase(),
       new ChargerActionQuizUsecase(),
+      new ChargerActionSimulateurUsecase(),
       ActionsRepositoryMock.avecActionDetail(action),
-      new ActionPresenterImpl(() => {}, expected),
+      new ActionPresenterImpl(
+        () => {},
+        expected,
+        () => {},
+      ),
     );
-    await usecase.execute('id-utilisateur', 'id-action', 'quizz');
+    await usecase.execute('id-utilisateur', 'id-action', TypeAction.QUIZZ);
 
     function expected(viewModel: ActionQuizzesViewModel): void {
       expect(viewModel).toStrictEqual<ActionQuizzesViewModel>({
@@ -119,6 +122,7 @@ describe("Fichier de tests concernant la récupération d'une action", () => {
         sousTitre:
           'Faites des économies et le plein de vitamines ! Cette semaine, on cuisine une recette saine et délicieuse !',
         titreAffiche: 'Quiz - Quiz <span class="text--bold">de ouf</span>',
+        introduction: '',
         quizzFelicitations: 'Félicitations ! ',
         quizzes: [
           {

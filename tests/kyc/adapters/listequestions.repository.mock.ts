@@ -34,4 +34,8 @@ export class MockListeQuestionsRepository implements QuestionRepository {
   recupererQuestionsDepuisMissionOnboarding(utilisateurId: string): Promise<Question[]> {
     return Promise.resolve(this.questionARetourner);
   }
+
+  recupererQuestionsSimulateur(utilisateurId: string, simulateurActionId: string): Promise<Question[]> {
+    throw new Error('Method not implemented.');
+  }
 }

@@ -91,6 +91,14 @@ export class QuestionRepositoryAxios implements QuestionRepository {
     return response.data.map((question: QuestionApiModel) => this.mapQuestionApiModelToQuestion(question));
   }
 
+  @intercept401()
+  async recupererQuestionsSimulateur(utilisateurId: string, simulateurActionId: string): Promise<Question[]> {
+    const axiosInstance = AxiosFactory.getAxios();
+    const response = await axiosInstance.get(`/utilisateurs/${utilisateurId}/actions/simulateur/${simulateurActionId}`);
+
+    return response.data.kycs.map((question: QuestionApiModel) => this.mapQuestionApiModelToQuestion(question));
+  }
+
   private mapQuestionApiModelToQuestion(question: QuestionApiModel): Question {
     return {
       id: question.code,

@@ -7,6 +7,14 @@ import {
   CatalogueActions,
   TypeAction,
 } from '@/domaines/actions/ports/actions.repository';
+import { QuestionApiModel } from '@/domaines/kyc/adapters/question.repository.axios';
+import {
+  Question,
+  ReponseKYCSimple,
+  ReponseMosaic,
+  ReponseMultiple,
+  ThematiqueQuestion,
+} from '@/domaines/kyc/recupererQuestion.usecase';
 import { mapQuizApi, QuizApiModel } from '@/domaines/quiz/adapters/quiz.repository.axios';
 import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 
@@ -39,6 +47,7 @@ interface ActionDetailApiModel {
     question: string;
     reponse: string;
   }[];
+  kycs: QuestionApiModel[];
 }
 
 interface CatalogueActionsApiModel {
@@ -85,7 +94,7 @@ export class ActionsRepositoryAxios implements ActionsRepository {
       code: response.data.code,
       titre: response.data.titre,
       sousTitre: response.data.sous_titre,
-      type: response.data.type,
+      type: response.data.type as TypeAction,
       commune: response.data.nom_commune,
       quizzFelicitations: response.data.quizz_felicitations,
       corps: {
@@ -112,6 +121,7 @@ export class ActionsRepositoryAxios implements ActionsRepository {
         question: faq.question,
         reponse: faq.reponse,
       })),
+      kycs: response.data.kycs.map((question: QuestionApiModel) => this.mapQuestionApiModelToQuestion(question)),
     };
   }
 
@@ -197,5 +207,45 @@ export class ActionsRepositoryAxios implements ActionsRepository {
     params.push(`consultation=${filtreDejaVue ? 'vu' : 'tout'}`);
 
     return params.length > 0 ? `?${params.join('&')}` : '';
+  }
+
+  private mapQuestionApiModelToQuestion(question: QuestionApiModel): Question {
+    return {
+      id: question.code,
+      libelle: question.question,
+      type: question.type,
+      reponses: this.determineReponses(question),
+      points: question.points,
+      thematique: Object.values(ThematiqueQuestion).find(thematique => thematique === question.thematique) as
+        | ThematiqueQuestion
+        | ThematiqueQuestion.AUTRE,
+      aEteRepondu: question.is_answered,
+    };
+  }
+
+  private determineReponses(question: QuestionApiModel): ReponseKYCSimple | ReponseMosaic<boolean> | ReponseMultiple {
+    if (question.type === 'mosaic_boolean') {
+      return {
+        reponse: question.reponse_multiple.map(reponse => ({
+          code: reponse.code,
+          image_url: reponse.image_url,
+          label: reponse.label,
+          valeur: reponse.selected,
+        })),
+      } as ReponseMosaic<boolean>;
+    } else if (question.type === 'choix_multiple' || question.type === 'choix_unique') {
+      return {
+        reponse: question.reponse_multiple.map(reponse => ({
+          code: reponse.code,
+          label: reponse.label,
+          estSelectionnee: reponse.selected,
+        })),
+      } as ReponseMultiple;
+    } else {
+      return {
+        reponses_possibles: [question.reponse_unique.value],
+        reponse: [question.reponse_unique.value],
+      } as ReponseKYCSimple;
+    }
   }
 }

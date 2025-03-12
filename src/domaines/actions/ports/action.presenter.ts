@@ -1,10 +1,13 @@
 import { ActionDetail } from '@/domaines/actions/ports/actions.repository';
+import { QuestionViewModel } from '@/domaines/kyc/adapters/listeQuestionsThematique.presenter.impl';
 import { ArticleDuQuiz } from '@/domaines/quiz/ports/quiz.repository';
 
 export interface ActionPresenter {
   presenteActionClassique(action: ActionDetail): void;
 
   presenteActionQuiz(action: ActionDetail): void;
+
+  presenteActionSimulateur(action: ActionDetail): void;
 }
 
 export interface ActionBaseViewModel {
@@ -12,14 +15,12 @@ export interface ActionBaseViewModel {
   titreAffiche: string;
   sousTitre: string;
   recommandations: RecommandationArticleViewModel[];
+  introduction: string;
 }
 
 export interface ActionClassiqueViewModel extends ActionBaseViewModel {
   commune: string;
-  corps: {
-    introduction: string;
-    astuces: string;
-  };
+  astuces: string;
   services: ActionServiceViewModel[];
   aides: ActionAideViewModel[];
   faq: ActionFAQViewModel[];
@@ -28,6 +29,12 @@ export interface ActionClassiqueViewModel extends ActionBaseViewModel {
 export interface ActionQuizzesViewModel extends ActionBaseViewModel {
   quizzes: ActionQuizViewModel[];
   quizzFelicitations?: string;
+}
+
+export interface ActionSimulateurViewModel extends ActionBaseViewModel {
+  aides: ActionAideViewModel[];
+  kycs: QuestionViewModel[];
+  actionId: string;
 }
 
 export interface ActionQuizViewModel {

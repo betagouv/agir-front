@@ -11,6 +11,7 @@
     <ActionBase v-else-if="actionBaseViewModel" :action-base-view-model="actionBaseViewModel">
       <ActionClassique v-if="actionClassiqueViewModel" :action-classique-view-model="actionClassiqueViewModel" />
       <ActionQuiz v-if="actionQuizViewModel" :action-quiz-view-model="actionQuizViewModel" />
+      <ActionSimulateur v-if="actionSimulateurViewModel" :action-simulateur-view-model="actionSimulateurViewModel" />
     </ActionBase>
     <p v-else>Une erreur est survenue</p>
   </div>
@@ -22,22 +23,31 @@
   import ActionBase from '@/components/custom/Action/ActionBase.vue';
   import ActionClassique from '@/components/custom/Action/ActionClassique.vue';
   import ActionQuiz from '@/components/custom/Action/ActionQuiz.vue';
+  import ActionSimulateur from '@/components/custom/Action/ActionSimulateur.vue';
   import CarteSkeleton from '@/components/custom/Skeleton/CarteSkeleton.vue';
   import { ActionPresenterImpl } from '@/domaines/actions/adapters/action.presenter.impl';
   import { ActionsRepositoryAxios } from '@/domaines/actions/adapters/actions.repository.axios';
   import { ChargerActionUsecase } from '@/domaines/actions/chargerAction.usecase';
   import { ChargerActionClassiqueUsecase } from '@/domaines/actions/chargerActionClassique.usecase';
   import { ChargerActionQuizUsecase } from '@/domaines/actions/chargerActionQuiz.usecase';
-  import { ActionClassiqueViewModel, ActionQuizzesViewModel } from '@/domaines/actions/ports/action.presenter';
+  import { ChargerActionSimulateurUsecase } from '@/domaines/actions/chargerActionSimulateur.usecase';
+  import {
+    ActionClassiqueViewModel,
+    ActionQuizzesViewModel,
+    ActionSimulateurViewModel,
+  } from '@/domaines/actions/ports/action.presenter';
   import { useNavigationStore } from '@/store/navigationStore';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const isLoading = ref<boolean>(false);
   const actionClassiqueViewModel = ref<ActionClassiqueViewModel>();
   const actionQuizViewModel = ref<ActionQuizzesViewModel>();
-  const actionBaseViewModel = computed(() => actionQuizViewModel.value || actionClassiqueViewModel.value);
+  const actionSimulateurViewModel = ref<ActionSimulateurViewModel>();
+  const actionBaseViewModel = computed(
+    () => actionQuizViewModel.value || actionClassiqueViewModel.value || actionSimulateurViewModel.value,
+  );
 
-  onMounted(() => {
+  onMounted(async () => {
     const idUtilisateur = utilisateurStore().utilisateur.id;
     const idAction = useRoute().params.id.toString();
     const typeAction = useRoute().params.type.toString();
@@ -46,12 +56,14 @@
     const usecase = new ChargerActionUsecase(
       new ChargerActionClassiqueUsecase(),
       new ChargerActionQuizUsecase(),
+      new ChargerActionSimulateurUsecase(),
       new ActionsRepositoryAxios(),
       new ActionPresenterImpl(
         vm => (actionClassiqueViewModel.value = vm),
         vm => (actionQuizViewModel.value = vm),
+        vm => (actionSimulateurViewModel.value = vm),
       ),
     );
-    usecase.execute(idUtilisateur, idAction, typeAction).finally(() => (isLoading.value = false));
+    await usecase.execute(idUtilisateur, idAction, typeAction).finally(() => (isLoading.value = false));
   });
 </script>

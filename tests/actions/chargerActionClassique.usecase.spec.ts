@@ -2,13 +2,15 @@ import { ChargerActionUsecase } from '@/domaines/actions/chargerAction.usecase';
 import { ActionsRepositoryMock } from './adapters/actions.repository.mock';
 import { ActionPresenterImpl } from '@/domaines/actions/adapters/action.presenter.impl';
 import { ActionClassiqueViewModel } from '@/domaines/actions/ports/action.presenter';
-import { ActionDetail } from '@/domaines/actions/ports/actions.repository';
+import { ActionDetail, TypeAction } from '@/domaines/actions/ports/actions.repository';
 import { ChargerActionClassiqueUsecase } from '@/domaines/actions/chargerActionClassique.usecase';
 import { ChargerActionQuizUsecase } from '@/domaines/actions/chargerActionQuiz.usecase';
+import { ChargerActionSimulateurUsecase } from '@/domaines/actions/chargerActionSimulateur.usecase';
 
-describe("Fichier de tests concernant la récupération d'une action", () => {
+describe("Fichier de tests concernant la récupération d'une action de type classique", () => {
   it("En donnant l'id d'une action, on devrait pouvoir récupérer son entiereté", async () => {
     const action: ActionDetail = {
+      kycs: [],
       aides: [
         {
           titre: 'Titre aide 1',
@@ -39,7 +41,7 @@ describe("Fichier de tests concernant la récupération d'une action", () => {
       code: 'id-action-test',
       nombreDePersonnes: 0,
       nombreAidesDisponibles: 0,
-      type: 'classique',
+      type: TypeAction.CLASSIQUE,
       titre: 'Tester une nouvelle **recette végétarienne**',
       quizzes: [],
       sousTitre:
@@ -99,10 +101,15 @@ describe("Fichier de tests concernant la récupération d'une action", () => {
     const usecase = new ChargerActionUsecase(
       new ChargerActionClassiqueUsecase(),
       new ChargerActionQuizUsecase(),
+      new ChargerActionSimulateurUsecase(),
       ActionsRepositoryMock.avecActionDetail(action),
-      new ActionPresenterImpl(expected, () => {}),
+      new ActionPresenterImpl(
+        expected,
+        () => {},
+        () => {},
+      ),
     );
-    await usecase.execute('id-utilisateur', 'id-action', 'classique');
+    await usecase.execute('id-utilisateur', 'id-action', TypeAction.CLASSIQUE);
 
     function expected(viewModel: ActionClassiqueViewModel): void {
       expect(viewModel).toStrictEqual<ActionClassiqueViewModel>({
@@ -111,17 +118,15 @@ describe("Fichier de tests concernant la récupération d'une action", () => {
         sousTitre:
           'Faites des économies et le plein de vitamines ! Cette semaine, on cuisine une recette saine et délicieuse !',
         commune: 'Noisiel',
-        corps: {
-          astuces: `<h2>Nos <span class="text--bold">astuces</span></h2><ul>
+        astuces: `<h2>Nos <span class="text--bold">astuces</span></h2><ul>
 <li><span class="text--bold">Revisitez vos classiques</span> : Lasagnes aux légumes, chili sin carne, redécouvrez vos plats favoris en version végétarienne.</li>
 </ul>
 `,
-          introduction: `<h2>En <span class="text--bold">quelques mots</span></h2><ul>
+        introduction: `<h2>En <span class="text--bold">quelques mots</span></h2><ul>
 <li>Les repas à base de légumes sont en moyenne <span class="text--bold">30% moins chers</span> que ceux à base de viande.</li>
 <li>Les nutriments contenus dans les légumes de saison sont une grande aide pour passer l’hiver !</li>
 </ul>
 `,
-        },
         recommandations: [
           {
             image: '/temp_les_bases_alim_vege.png',
