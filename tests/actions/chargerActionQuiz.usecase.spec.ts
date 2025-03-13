@@ -15,6 +15,8 @@ describe("Fichier de tests concernant la récupération d'une action de type qui
       realisee: false,
       points: 20,
       aides: [],
+      consigne: 'Consigne',
+      labelCompteur: '100 quizs réalisés',
       quizzFelicitations: 'Félicitations ! ',
       code: 'id-action-test',
       type: TypeAction.QUIZZ,
@@ -122,6 +124,8 @@ describe("Fichier de tests concernant la récupération d'une action de type qui
       expect(viewModel).toStrictEqual<ActionQuizzesViewModel>({
         realisee: false,
         points: 20,
+        consigne: 'Consigne',
+        labelCompteur: '100 quizs réalisés',
         nombreDeRealisations: 40,
         actionId: 'id-action-test',
         titre: 'Quiz <span class="text--bold">de ouf</span>',

@@ -13,6 +13,8 @@ describe("Fichier de tests concernant la récupération d'une action de type sim
     const action: ActionDetail = {
       realisee: false,
       points: 30,
+      consigne: 'Consigne',
+      labelCompteur: '100 simulateurs réalisés',
       kycs: [
         {
           id: 'questionId',
@@ -117,6 +119,8 @@ describe("Fichier de tests concernant la récupération d'une action de type sim
       expect(viewModel).toStrictEqual<ActionSimulateurViewModel>({
         realisee: false,
         points: 30,
+        consigne: 'Consigne',
+        labelCompteur: '100 simulateurs réalisés',
         nombreDeRealisations: 40,
         titre: '<span class="text--bold">Simulateur voiture</span>',
         titreAffiche: 'Simulateur - <span class="text--bold">Simulateur voiture</span>',

@@ -1,7 +1,7 @@
 <template>
   <template v-if="!estRealise">
     <h2 class="fr-h4">On se lance le défi ?</h2>
-    <p>Réalisez cette action dans les prochaines semaines et partagez vos retours</p>
+    <p>{{ actionBaseViewModel.consigne }}</p>
     <button class="fr-btn full-width flex flex-center align-items--center gap--small" @click="terminerAction">
       J'ai relevé le défi !
       <span class="text--bold flex align-items--center">
