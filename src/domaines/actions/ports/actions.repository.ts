@@ -38,6 +38,8 @@ export interface ActionDetail {
   titre: string;
   sousTitre: string;
   points: number;
+  consigne: string;
+  labelCompteur: string;
   type: TypeAction;
   commune: string;
   corps: {

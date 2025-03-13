@@ -24,6 +24,8 @@ class ActionViewModelBuilder {
       nombreDeRealisations: action.nombreDeRealisations,
       actionId: action.code,
       points: action.points,
+      consigne: action.consigne,
+      labelCompteur: action.labelCompteur,
     };
   }
 

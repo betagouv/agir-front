@@ -14,6 +14,8 @@ export interface ActionBaseViewModel {
   titre: string;
   titreAffiche: string;
   sousTitre: string;
+  consigne: string;
+  labelCompteur: string;
   recommandations: RecommandationArticleViewModel[];
   introduction: string;
   realisee: boolean;

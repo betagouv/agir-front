@@ -81,7 +81,7 @@ export class ServiceRechercheRecettesPresenterImpl implements ServiceRechercheRe
           label: 'Facile',
           style: 'background--vert-bourgeon',
         };
-      case 'Intérmédiaire':
+      case 'Intermédiaire':
         return {
           label: 'Intermédiaire',
           style: 'background--bleu-ecume-hover',
