@@ -37,6 +37,7 @@ export interface ActionDetail {
   code: string;
   titre: string;
   sousTitre: string;
+  points: number;
   type: TypeAction;
   commune: string;
   corps: {

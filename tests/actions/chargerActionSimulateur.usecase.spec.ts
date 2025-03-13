@@ -12,6 +12,7 @@ describe("Fichier de tests concernant la récupération d'une action de type sim
   it("En donnant l'id d'une action, on devrait pouvoir récupérer son entiereté", async () => {
     const action: ActionDetail = {
       realisee: false,
+      points: 30,
       kycs: [
         {
           id: 'questionId',
@@ -115,6 +116,7 @@ describe("Fichier de tests concernant la récupération d'une action de type sim
     function expected(viewModel: ActionSimulateurViewModel): void {
       expect(viewModel).toStrictEqual<ActionSimulateurViewModel>({
         realisee: false,
+        points: 30,
         nombreDeRealisations: 40,
         titre: '<span class="text--bold">Simulateur voiture</span>',
         titreAffiche: 'Simulateur - <span class="text--bold">Simulateur voiture</span>',

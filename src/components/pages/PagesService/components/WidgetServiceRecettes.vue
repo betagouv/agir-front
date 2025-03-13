@@ -9,7 +9,7 @@
       <li
         v-for="suggestion in serviceRecettesViewModel?.suggestions"
         :key="suggestion.titre"
-        class="fr-col-12 fr-col-sm-6 fr-col-md-3"
+        class="col-card fr-col-12 fr-col-sm-6 fr-col-md-4"
       >
         <ServiceCarteDsfr :suggestionsServiceViewModel="suggestion" :options="{ descriptionDesactive: true }" />
       </li>
@@ -51,7 +51,7 @@
 
   const usecase = new RecupererServiceRecettesUsecase(new ServiceRechercheRecettesAxios());
 
-  let nombreMaxResultats = 4;
+  let nombreMaxResultats = 3;
 
   onMounted(() => {
     lancerRecherche();
