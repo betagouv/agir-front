@@ -5,12 +5,12 @@
     <button class="fr-btn full-width flex flex-center align-items--center gap--small" @click="terminerAction">
       J'ai relevé le défi !
       <span class="text--bold flex align-items--center">
-        +50&nbsp;<img src="/ic_score.svg" alt="points" class="full-width full-height" />
+        +{{ actionBaseViewModel.points }}&nbsp;<img src="/ic_score.svg" alt="points" class="full-width full-height" />
       </span>
     </button>
   </template>
 
-  <ActionAsideRealisee v-else :points="50" />
+  <ActionAsideRealisee v-else :points="actionBaseViewModel.points" />
 
   <template v-if="nombreActionRealise > 0">
     <hr />
@@ -45,7 +45,7 @@
   const terminerAction = async () => {
     const usecase = new TerminerActionUsecase(new ActionsRepositoryAxios(), ActionsEventBus.getInstance());
     await usecase.execute(utilisateurStore().utilisateur.id, props.actionBaseViewModel.actionId, TypeAction.CLASSIQUE);
-    estRealise.value = true;
     nombreActionRealise.value = nombreActionRealise.value + 1;
+    estRealise.value = true;
   };
 </script>

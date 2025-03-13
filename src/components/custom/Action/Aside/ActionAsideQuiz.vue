@@ -1,14 +1,18 @@
 <template>
-  <ActionAsideAFaire v-if="!actionBaseViewModel.realisee" sous-titre="Terminez votre quiz et gagnez" :points="50" />
-  <ActionAsideRealisee v-else sous-titre="Vous avez réalisé votre quizz" :points="50" />
+  <ActionAsideAFaire
+    v-if="!estRealise"
+    sous-titre="Terminez votre quiz et gagnez"
+    :points="actionBaseViewModel.points"
+  />
+  <ActionAsideRealisee v-else sous-titre="Vous avez réalisé votre quizz" :points="actionBaseViewModel.points" />
 
-  <template v-if="actionBaseViewModel.nombreDeRealisations > 0">
+  <template v-if="nombreActionRealise > 0">
     <hr />
 
     <p class="fr-mb-1w">
       <span class="text--bold">
-        {{ actionBaseViewModel.nombreDeRealisations }}
-        {{ gererPluriel(actionBaseViewModel.nombreDeRealisations, 'quiz terminé', 'quizs terminés') }}
+        {{ nombreActionRealise }}
+        {{ gererPluriel(nombreActionRealise, 'quiz terminé', 'quizs terminés') }}
       </span>
       par la communauté
     </p>
@@ -16,12 +20,27 @@
 </template>
 
 <script lang="ts" setup>
+  import { onUnmounted, ref } from 'vue';
   import ActionAsideAFaire from '@/components/custom/Action/Aside/ActionAsideAFaire.vue';
   import ActionAsideRealisee from '@/components/custom/Action/Aside/ActionAsideRealisee.vue';
+  import { ActionsEvent, ActionsEventBus } from '@/domaines/actions/actions.eventbus';
   import { ActionBaseViewModel } from '@/domaines/actions/ports/action.presenter';
   import { gererPluriel } from '@/shell/pluriel';
 
-  defineProps<{
+  const props = defineProps<{
     actionBaseViewModel: ActionBaseViewModel;
   }>();
+
+  const estRealise = ref<boolean>(props.actionBaseViewModel.realisee);
+  const nombreActionRealise = ref<number>(props.actionBaseViewModel.nombreDeRealisations);
+
+  ActionsEventBus.getInstance().subscribe('ActionAsideQuiz', ActionsEvent.A_ETE_REALISEE, () => {
+    // gérer quand le quiz n'est pas réussi
+    estRealise.value = true;
+    nombreActionRealise.value = nombreActionRealise.value + 1;
+  });
+
+  onUnmounted(() => {
+    ActionsEventBus.getInstance().unsubscribeToAllEvents('ActionAsideQuiz');
+  });
 </script>

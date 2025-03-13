@@ -13,6 +13,7 @@ describe("Fichier de tests concernant la récupération d'une action de type qui
   it("En donnant l'id d'une action, on devrait pouvoir récupérer son entiereté", async () => {
     const action: ActionDetail = {
       realisee: false,
+      points: 20,
       aides: [],
       quizzFelicitations: 'Félicitations ! ',
       code: 'id-action-test',
@@ -120,6 +121,7 @@ describe("Fichier de tests concernant la récupération d'une action de type qui
     function expected(viewModel: ActionQuizzesViewModel): void {
       expect(viewModel).toStrictEqual<ActionQuizzesViewModel>({
         realisee: false,
+        points: 20,
         nombreDeRealisations: 40,
         actionId: 'id-action-test',
         titre: 'Quiz <span class="text--bold">de ouf</span>',

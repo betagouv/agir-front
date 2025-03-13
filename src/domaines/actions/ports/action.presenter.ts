@@ -19,6 +19,7 @@ export interface ActionBaseViewModel {
   realisee: boolean;
   nombreDeRealisations: number;
   actionId: string;
+  points: number;
 }
 
 export interface ActionClassiqueViewModel extends ActionBaseViewModel {

@@ -23,6 +23,7 @@ class ActionViewModelBuilder {
       realisee: action.realisee,
       nombreDeRealisations: action.nombreDeRealisations,
       actionId: action.code,
+      points: action.points,
     };
   }
 

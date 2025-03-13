@@ -12,6 +12,7 @@ describe("Fichier de tests concernant la récupération d'une action de type cla
     const action: ActionDetail = {
       kycs: [],
       realisee: false,
+      points: 100,
       aides: [
         {
           titre: 'Titre aide 1',
@@ -115,6 +116,7 @@ describe("Fichier de tests concernant la récupération d'une action de type cla
     function expected(viewModel: ActionClassiqueViewModel): void {
       expect(viewModel).toStrictEqual<ActionClassiqueViewModel>({
         realisee: false,
+        points: 100,
         nombreDeRealisations: 40,
         actionId: 'id-action-test',
         titre: 'Tester une nouvelle <span class="text--bold">recette végétarienne</span>',
