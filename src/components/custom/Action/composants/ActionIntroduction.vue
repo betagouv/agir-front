@@ -11,5 +11,6 @@
 <style scoped>
   .action__corps-introduction {
     background-color: rgba(0, 0, 145, 0.03);
+    border: 1px solid #e5e5f8;
   }
 </style>
