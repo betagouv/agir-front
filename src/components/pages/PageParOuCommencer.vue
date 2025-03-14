@@ -1,4 +1,5 @@
 <template>
+  <ModaleAnnonceJagisV2 />
   <div class="fr-pt-4w fr-pb-8w fr-pb-1w background-bleu-975-25">
     <div class="fr-container">
       <div class="text--center">
@@ -23,6 +24,7 @@
 
 <script lang="ts" setup>
   import { onMounted, ref } from 'vue';
+  import ModaleAnnonceJagisV2 from '@/components/custom/AnnonceV2/ModaleAnnonceJagisV2.vue';
   import CarteSyntheseThematique from '@/components/custom/Thematiques/CarteSyntheseThematique.vue';
   import { SyntheseThematiquesPresenterImpl } from '@/domaines/thematiques/adapters/syntheseThematiques.presenter.impl';
   import { ThematiquesRepositoryAxios } from '@/domaines/thematiques/adapters/thematiques.repository.axios';
