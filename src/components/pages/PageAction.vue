@@ -9,9 +9,17 @@
 
     <CarteSkeleton v-if="isLoading" />
     <ActionBase v-else-if="actionBaseViewModel" :action-base-view-model="actionBaseViewModel">
-      <ActionClassique v-if="actionClassiqueViewModel" :action-classique-view-model="actionClassiqueViewModel" />
-      <ActionQuiz v-if="actionQuizViewModel" :action-quiz-view-model="actionQuizViewModel" />
-      <ActionSimulateur v-if="actionSimulateurViewModel" :action-simulateur-view-model="actionSimulateurViewModel" />
+      <template #contenu>
+        <ActionClassique v-if="actionClassiqueViewModel" :action-classique-view-model="actionClassiqueViewModel" />
+        <ActionQuiz v-if="actionQuizViewModel" :action-quiz-view-model="actionQuizViewModel" />
+        <ActionSimulateur v-if="actionSimulateurViewModel" :action-simulateur-view-model="actionSimulateurViewModel" />
+      </template>
+
+      <template #aside>
+        <ActionAsideClassique v-if="actionClassiqueViewModel" :action-base-view-model="actionBaseViewModel" />
+        <ActionAsideQuiz v-if="actionQuizViewModel" :action-base-view-model="actionBaseViewModel" />
+        <ActionAsideSimulateur v-if="actionSimulateurViewModel" :action-base-view-model="actionBaseViewModel" />
+      </template>
     </ActionBase>
     <p v-else>Une erreur est survenue</p>
   </div>
@@ -24,6 +32,9 @@
   import ActionClassique from '@/components/custom/Action/ActionClassique.vue';
   import ActionQuiz from '@/components/custom/Action/ActionQuiz.vue';
   import ActionSimulateur from '@/components/custom/Action/ActionSimulateur.vue';
+  import ActionAsideClassique from '@/components/custom/Action/Aside/ActionAsideClassique.vue';
+  import ActionAsideQuiz from '@/components/custom/Action/Aside/ActionAsideQuiz.vue';
+  import ActionAsideSimulateur from '@/components/custom/Action/Aside/ActionAsideSimulateur.vue';
   import CarteSkeleton from '@/components/custom/Skeleton/CarteSkeleton.vue';
   import { ActionPresenterImpl } from '@/domaines/actions/adapters/action.presenter.impl';
   import { ActionsRepositoryAxios } from '@/domaines/actions/adapters/actions.repository.axios';

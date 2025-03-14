@@ -44,7 +44,9 @@ export class ResultatSimulationVoiturePresenterImpl implements ResultatSimulatio
       },
       emission: {
         montant: Math.round(voiture.getEmpreinte()),
-        difference: Math.round(voiture.getEmpreinte() - voitureActuelle.getEmpreinte()),
+        difference: Math.round(
+          ((voiture.getEmpreinte() - voitureActuelle.getEmpreinte()) / voitureActuelle.getEmpreinte()) * 100,
+        ),
       },
       tag: [voiture.getCarburant(), voiture.getMotorisation()].filter(v => v.length > 0),
     };

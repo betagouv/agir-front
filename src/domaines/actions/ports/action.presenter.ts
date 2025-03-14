@@ -14,8 +14,14 @@ export interface ActionBaseViewModel {
   titre: string;
   titreAffiche: string;
   sousTitre: string;
+  consigne: string;
+  labelCompteur: string;
   recommandations: RecommandationArticleViewModel[];
   introduction: string;
+  realisee: boolean;
+  nombreDeRealisations: number;
+  actionId: string;
+  points: number;
 }
 
 export interface ActionClassiqueViewModel extends ActionBaseViewModel {
@@ -34,7 +40,6 @@ export interface ActionQuizzesViewModel extends ActionBaseViewModel {
 export interface ActionSimulateurViewModel extends ActionBaseViewModel {
   aides: ActionAideViewModel[];
   kycs: QuestionViewModel[];
-  actionId: string;
 }
 
 export interface ActionQuizViewModel {

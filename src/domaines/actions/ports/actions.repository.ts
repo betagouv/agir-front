@@ -37,6 +37,9 @@ export interface ActionDetail {
   code: string;
   titre: string;
   sousTitre: string;
+  points: number;
+  consigne: string;
+  labelCompteur: string;
   type: TypeAction;
   commune: string;
   corps: {
@@ -46,8 +49,9 @@ export interface ActionDetail {
   quizzes?: Quiz[];
   quizzFelicitations?: string;
   recommandations: RecommandationArticle[];
-  nombreDePersonnes: number;
+  nombreDeRealisations: number;
   nombreAidesDisponibles: number;
+  realisee: boolean;
   services: ActionService[];
   aides: ActionAide[];
   faq: ActionFAQ[];
@@ -104,4 +108,6 @@ export interface ActionsRepository {
   chargerAction(idUtilisateur: string, idAction: string, type: TypeAction): Promise<ActionDetail>;
 
   recupererDetailThematique(idUtilisateur: string, thematiqueId: string): Promise<DetailThematique>;
+
+  terminerAction(idUtilisateur: string, idAction: string, typeAction: TypeAction): Promise<void>;
 }

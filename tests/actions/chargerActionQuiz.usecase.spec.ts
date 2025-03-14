@@ -12,11 +12,15 @@ import { ChargerActionSimulateurUsecase } from '@/domaines/actions/chargerAction
 describe("Fichier de tests concernant la récupération d'une action de type quiz", () => {
   it("En donnant l'id d'une action, on devrait pouvoir récupérer son entiereté", async () => {
     const action: ActionDetail = {
+      realisee: false,
+      points: 20,
       aides: [],
+      consigne: 'Consigne',
+      labelCompteur: '100 quizs réalisés',
       quizzFelicitations: 'Félicitations ! ',
       code: 'id-action-test',
       type: TypeAction.QUIZZ,
-      nombreDePersonnes: 0,
+      nombreDeRealisations: 40,
       nombreAidesDisponibles: 0,
       titre: 'Quiz **de ouf**',
       sousTitre:
@@ -118,6 +122,12 @@ describe("Fichier de tests concernant la récupération d'une action de type qui
 
     function expected(viewModel: ActionQuizzesViewModel): void {
       expect(viewModel).toStrictEqual<ActionQuizzesViewModel>({
+        realisee: false,
+        points: 20,
+        consigne: 'Consigne',
+        labelCompteur: '100 quizs réalisés',
+        nombreDeRealisations: 40,
+        actionId: 'id-action-test',
         titre: 'Quiz <span class="text--bold">de ouf</span>',
         sousTitre:
           'Faites des économies et le plein de vitamines ! Cette semaine, on cuisine une recette saine et délicieuse !',

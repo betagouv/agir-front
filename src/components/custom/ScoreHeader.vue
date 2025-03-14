@@ -11,6 +11,7 @@
 <script setup lang="ts">
   import { computed, onMounted, onUnmounted } from 'vue';
   import { useRoute } from 'vue-router';
+  import { ActionsEventBus } from '@/domaines/actions/actions.eventbus';
   import { SessionRepositoryStore } from '@/domaines/authentification/adapters/session.repository.store';
   import { MissionEvent, MissionEventBusImpl } from '@/domaines/missions/missionEventBus.impl';
   import { ScoreRepositoryAxios } from '@/domaines/score/adapters/score.repository.axios';
@@ -37,11 +38,16 @@
     ToDoListEventBusImpl.getInstance().subscribeToAllEvents(subscriberName, () => {
       mettreAJourLeScore();
     });
+
+    ActionsEventBus.getInstance().subscribeToAllEvents(subscriberName, () => {
+      mettreAJourLeScore();
+    });
   });
 
   onUnmounted(() => {
     ToDoListEventBusImpl.getInstance().unsubscribeToAllEvents(subscriberName);
     MissionEventBusImpl.getInstance().unsubscribeToAllEvents(subscriberName);
+    ActionsEventBus.getInstance().unsubscribeToAllEvents(subscriberName);
   });
 
   const mettreAJourLeScore = () => {

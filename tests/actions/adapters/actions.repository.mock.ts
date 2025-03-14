@@ -4,6 +4,7 @@ import {
   DetailThematique,
   ActionsRepository,
   CatalogueActions,
+  TypeAction,
 } from '@/domaines/actions/ports/actions.repository';
 
 export class ActionsRepositoryMock implements ActionsRepository {
@@ -49,5 +50,9 @@ export class ActionsRepositoryMock implements ActionsRepository {
 
   recupererDetailThematique(idUtilisateur: string, thematiqueId: string): Promise<DetailThematique> {
     return Promise.resolve(this.actionsRecommandeesDansUneThematique!);
+  }
+
+  terminerAction(idUtilisateur: string, idAction: string, typeAction: TypeAction): Promise<void> {
+    throw Error('Not implemented');
   }
 }

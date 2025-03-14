@@ -16,7 +16,17 @@ class ActionViewModelBuilder {
       marked.parseInline(action.sousTitre ?? ''),
       marked.parse(action.corps.introduction ?? ''),
     ]);
-    return { titre, sousTitre, introduction };
+    return {
+      titre,
+      sousTitre,
+      introduction,
+      realisee: action.realisee,
+      nombreDeRealisations: action.nombreDeRealisations,
+      actionId: action.code,
+      points: action.points,
+      consigne: action.consigne,
+      labelCompteur: action.labelCompteur,
+    };
   }
 
   private static buildAides(aides: ActionDetail['aides']) {
@@ -90,7 +100,6 @@ class ActionViewModelBuilder {
       aides: this.buildAides(action.aides),
       recommandations: action.recommandations,
       kycs: action.kycs.map(kyc => QuestionViewModelBuilder.buildFromQuestion(kyc)),
-      actionId: action.code,
     };
   }
 }
