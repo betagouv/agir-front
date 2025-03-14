@@ -1,5 +1,31 @@
 # Changelog
 
+## [1.44.0](https://github.com/betagouv/agir-front/compare/v1.43.0...v1.44.0) (2025-03-13)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* affichage quand il n'y a plus d'actions disponibles ([#963](https://github.com/betagouv/agir-front/issues/963)) ([b53e25c](https://github.com/betagouv/agir-front/commit/b53e25c02e86549e5045a5b47eb695bbbd0e9a86))
+* aides et nouveau layout thematique ([#971](https://github.com/betagouv/agir-front/issues/971)) ([514cdce](https://github.com/betagouv/agir-front/commit/514cdceef9f340271d52bd1f09cc0287d9f24602))
+* France Connect depuis NGC ([#970](https://github.com/betagouv/agir-front/issues/970)) ([0e55173](https://github.com/betagouv/agir-front/commit/0e55173359e10f1fe6b89b1e84b61a7f3a906922))
+* harmonisation de l'esthétique ([#972](https://github.com/betagouv/agir-front/issues/972)) ([af3442a](https://github.com/betagouv/agir-front/commit/af3442a5ff935f54babe24c27a0ea02e3a8c591b))
+* mise en place du pseudonyme ([#968](https://github.com/betagouv/agir-front/issues/968)) ([0fbc4ee](https://github.com/betagouv/agir-front/commit/0fbc4ee49919a4bab58d8a0eaa5928a3354c0b9f))
+* page thematique alimenation (ajout des services) ([#964](https://github.com/betagouv/agir-front/issues/964)) ([ef25099](https://github.com/betagouv/agir-front/commit/ef250997786f220d1022b41894ce90549be0b71b))
+* retour sur les quizz, et amélioration fin du parcours ([#962](https://github.com/betagouv/agir-front/issues/962)) ([2cfe4d1](https://github.com/betagouv/agir-front/commit/2cfe4d1aa046448ea7a83180bcfaaf4c69e1751c))
+* simulateur voiture disponible dans les actions ([f14f722](https://github.com/betagouv/agir-front/commit/f14f72282438c6188846f59a9f008fc7f681a540))
+* suppression de compte avec France Connect ([#967](https://github.com/betagouv/agir-front/issues/967)) ([8231245](https://github.com/betagouv/agir-front/commit/8231245c34d262ba95f6ab3475a8951631870b9d))
+
+
+### 👷 Autres changements
+
+* Bump @playwright/test from 1.50.1 to 1.51.0 ([#974](https://github.com/betagouv/agir-front/issues/974)) ([49ddb2d](https://github.com/betagouv/agir-front/commit/49ddb2dbad531a8d1aad8c8f80778447244450c5))
+* Bump @sentry/vue from 8.54.0 to 9.5.0 ([#976](https://github.com/betagouv/agir-front/issues/976)) ([fd68938](https://github.com/betagouv/agir-front/commit/fd6893848c282c2c614ba9ff3a1bfd5e355d96b8))
+* Bump eslint-plugin-vue from 9.32.0 to 9.33.0 ([#975](https://github.com/betagouv/agir-front/issues/975)) ([93b18c5](https://github.com/betagouv/agir-front/commit/93b18c515bc58b88b1553b23873a51246b6a652e))
+* Bump lighthouse from 12.3.0 to 12.4.0 ([#955](https://github.com/betagouv/agir-front/issues/955)) ([d38860c](https://github.com/betagouv/agir-front/commit/d38860c1d0bcd854338c6faa46053c0995b90cac))
+* Bump release-please from 16.17.0 to 16.18.0 ([#973](https://github.com/betagouv/agir-front/issues/973)) ([b165dd4](https://github.com/betagouv/agir-front/commit/b165dd4550c95e5a11fbd540c7c5aafd67a56043))
+* Bump vite from 6.1.0 to 6.2.1 ([#977](https://github.com/betagouv/agir-front/issues/977)) ([5732479](https://github.com/betagouv/agir-front/commit/5732479d599e1bb0e865bbf1085c0a9e3d2c4961))
+* refactor KYC ([#952](https://github.com/betagouv/agir-front/issues/952)) ([910eedc](https://github.com/betagouv/agir-front/commit/910eedcdc10d6ebd6d08245c6f0b3ecc78135b81))
+
 ## [1.43.0](https://github.com/betagouv/agir-front/compare/v1.42.0...v1.43.0) (2025-03-05)
 
 
