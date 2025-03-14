@@ -1,12 +1,13 @@
+import { ActionAideViewModel } from '@/domaines/actions/ports/action.presenter';
 import { Aide, Aides } from '@/domaines/aides/chargementAides.usecase';
 import {
   AidesAvecCouvertureViewModel,
   AidesViewModel,
-  AideViewModel,
   ChargementAidesPresenter,
 } from '@/domaines/aides/ports/chargementAides.presenter';
 import { MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
 import { TagThematique } from '@/domaines/thematiques/TagThematique';
+import { buildUrl } from '@/shell/buildUrl';
 
 export class ChargementAidesPresenterImpl implements ChargementAidesPresenter {
   constructor(private _viewModel: (vm: AidesAvecCouvertureViewModel) => void) {}
@@ -30,26 +31,14 @@ export class ChargementAidesPresenterImpl implements ChargementAidesPresenter {
         map[thematiqueLabel] = [];
       }
 
-      const aideToPush: AideViewModel = {
-        id: aide.id,
+      const aideToPush: ActionAideViewModel = {
         titre: aide.titre,
-        thematiqueLabel: thematiqueLabel,
-        contenu: aide.contenu,
-        isSimulateur: aide.isSimulateur,
-        url: aide.url,
-        montantMaximum: aide.montantMaximum ? this.formatMontantMaximum(aide.montantMaximum) : undefined,
-        thematiqueTag: {
-          label: MenuThematiques.getThematiqueData(aide.thematique).labelDansLeMenu,
-          style: TagThematique.getTagThematiqueUtilitaire(aide.thematique),
-        },
-        urlCommencerVotreDemarche: aide.urlCommencerVotreDemarche,
+        titreUrl: buildUrl(aide.titre),
+        id: aide.id,
+        partenaireNom: aide.partenaire?.nom ?? '',
+        partenaireImg: aide.partenaire?.logoUrl,
+        montantMaximum: aide.montantMaximum ? `${aide.montantMaximum}€` : undefined,
         estGratuit: aide.estGratuit,
-        partenaire: aide.partenaire
-          ? {
-              logoUrl: aide.partenaire.logoUrl,
-              accessibilite: `proposé par ${aide.partenaire.nom}`,
-            }
-          : undefined,
       };
 
       map[thematiqueLabel].push(aideToPush);
@@ -57,12 +46,4 @@ export class ChargementAidesPresenterImpl implements ChargementAidesPresenter {
 
     return map;
   };
-
-  private formatMontantMaximum(montantMaximum: number) {
-    return `Jusqu'à ${new Intl.NumberFormat('fr-FR', {
-      style: 'currency',
-      currency: 'EUR',
-      maximumSignificantDigits: 4,
-    }).format(montantMaximum)}`;
-  }
 }

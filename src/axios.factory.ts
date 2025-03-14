@@ -1,5 +1,5 @@
 import axios from 'redaxios';
-import { NavigationBus, EventBusEvents } from '@/navigationBus';
+import { EventBusEvents, NavigationBus } from '@/navigationBus';
 import { utilisateurStore } from '@/store/utilisateur';
 
 export class AxiosFactory {
@@ -10,17 +10,6 @@ export class AxiosFactory {
         Accept: 'application/json',
         'Content-Type': 'application/json',
         Authorization: `Bearer ${utilisateurStore().utilisateur.token}`,
-      },
-    });
-  }
-
-  public static getCMSAxios() {
-    return axios.create({
-      baseURL: import.meta.env.VITE_API_URL_CMS,
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${import.meta.env.VITE_API_TOKEN_CMS}`,
       },
     });
   }
