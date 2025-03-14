@@ -13,66 +13,7 @@
       <div v-for="(aides, index) in props.aidesGroupesParCategorie" :key="index">
         <div v-if="categoriesActives.length === 0 || categoriesActives.includes(`${index}`)">
           <h2 class="fr-h4">{{ index }}</h2>
-          <div v-for="aide in aides" :id="`aide_${aide.id}`" :key="aide.id" class="fr-mb-2w">
-            <Accordeon :label="aide.titre" :name-id="aide.id" @click="trackAideClick(aide)">
-              <template v-slot:titre>
-                <div class="fr-col-12 fr-pr-2w">
-                  <div class="flex flex-space-between align-items--center">
-                    <ThematiqueTag :tag="aide.thematiqueTag" aria-hidden="true" />
-                    <img
-                      v-if="aide.partenaire"
-                      :alt="aide.partenaire.accessibilite"
-                      :src="aide.partenaire.logoUrl"
-                      height="50"
-                    />
-                  </div>
-                  <div class="aide__titre fr-mt-2w">
-                    <span class="fr-h4 text--gris">
-                      {{ aide.titre }}
-                    </span>
-                    <div v-if="aide.isSimulateur || aide.montantMaximum || aide.estGratuit" class="fr-grid-row">
-                      <span
-                        v-if="aide.isSimulateur"
-                        class="fr-tag background-bleu-light fr-mr-1w fr-icon-money-euro-circle-line fr-tag--icon-left nowrap"
-                      >
-                        <span class="fr-sr-only">: </span>
-                        Simulateur
-                      </span>
-                      <span v-if="aide.montantMaximum" class="fr-tag nowrap">
-                        <span class="fr-sr-only">, </span>
-                        {{ aide.montantMaximum }}
-                      </span>
-                      <span v-if="aide.estGratuit" class="fr-tag nowrap">
-                        <span class="fr-sr-only">, </span>
-                        Gratuit
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </template>
-              <template v-slot:contenu>
-                <div class="cms__content" v-html="aide.contenu" />
-                <div class="flex align-items--center gap--small">
-                  <a
-                    v-if="aide.urlCommencerVotreDemarche"
-                    :href="aide.urlCommencerVotreDemarche"
-                    class="fr-btn"
-                    rel="noopener external"
-                    target="_blank"
-                  >
-                    Commencer votre démarche
-                  </a>
-                  <router-link
-                    v-if="aide.isSimulateur"
-                    :to="{ path: aide.url }"
-                    class="fr-btn fr-btn--icon-left fr-icon-arrow-right-line"
-                  >
-                    Estimer le montant des aides
-                  </router-link>
-                </div>
-              </template>
-            </Accordeon>
-          </div>
+          <GrilleAidesDUneAction :aides="aides" />
         </div>
       </div>
     </div>
@@ -82,11 +23,9 @@
 <script lang="ts" setup>
   import { onMounted, ref } from 'vue';
   import { useRoute } from 'vue-router';
-  import Accordeon from '@/components/custom/Aides/AccordeonAides.vue';
-  import ThematiqueTag from '@/components/custom/Thematiques/ThematiqueTag.vue';
+  import GrilleAidesDUneAction from '@/components/custom/Aides/GrilleAidesDUneAction.vue';
   import InputCheckbox from '@/components/dsfr/InputCheckbox.vue';
   import { AidesViewModel } from '@/domaines/aides/ports/chargementAides.presenter';
-  import { trackClick } from '@/shell/matomo';
 
   const route = useRoute();
 
@@ -105,10 +44,6 @@
 
   const handleValueChange = value => {
     categoriesActives.value = value;
-  };
-
-  const trackAideClick = aide => {
-    trackClick('Aides', aide.titre);
   };
 
   onMounted(() => {

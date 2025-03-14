@@ -1,3 +1,4 @@
+import { ActionAideViewModel } from '@/domaines/actions/ports/action.presenter';
 import { Aides } from '@/domaines/aides/chargementAides.usecase';
 import { TagStyle } from '@/domaines/thematiques/TagThematique';
 
@@ -19,7 +20,7 @@ export interface AideViewModel {
 }
 
 export interface AidesViewModel {
-  [key: AideViewModel['thematiqueLabel']]: AideViewModel[];
+  [key: AideViewModel['thematiqueLabel']]: ActionAideViewModel[];
 }
 
 export interface AidesAvecCouvertureViewModel {

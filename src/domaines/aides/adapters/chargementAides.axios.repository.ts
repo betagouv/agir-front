@@ -21,6 +21,7 @@ interface AideApiModel {
   partenaire_logo_url?: string;
   partenaire_nom?: string;
   est_gratuit: boolean;
+  derniere_maj: string;
 }
 
 export class ChargementAidesAxiosRepository implements ChargementAidesRepository {
@@ -94,28 +95,52 @@ export class ChargementAidesAxiosRepository implements ChargementAidesRepository
 
   @intercept401()
   async previsualiser(idAide: string): Promise<Aide> {
-    const axios = AxiosFactory.getCMSAxios();
-    const aideCMS = await axios.get(
-      `/aides/${idAide}?populate[1]=imageUrl&populate[2]=partenaire,partenaire.logo.media&populate[3]=thematique_gamification&populate[4]=rubriques&populate[5]=thematiques&populate[6]=tags&populate[7]=besoin`,
-    );
+    const axios = AxiosFactory.getAxios();
+    const aide = await axios.get<AideApiModel>(`/aides/${idAide}`);
     return {
-      id: aideCMS.data.data.id,
-      titre: aideCMS.data.data.attributes.titre,
-      categorie: aideCMS.data.data.attributes.thematique_principale_label,
-      thematique: aideCMS.data.data.attributes.thematiques.data[0].attributes.code as ClefThematiqueAPI,
-      contenu: aideCMS.data.data.attributes.description,
-      url: aideCMS.data.data.attributes.url_source,
-      isSimulateur: aideCMS.data.data.attributes.is_simulateur,
-      montantMaximum: aideCMS.data.data.attributes.points,
-      urlCommencerVotreDemarche: aideCMS.data.data.url_commencer_votre_demarche,
-      estGratuit: aideCMS.data.data.est_gratuit,
-      partenaire: aideCMS.data.data.attributes.partenaire.data
+      id: aide.data.content_id,
+      titre: aide.data.titre,
+      categorie: aide.data.thematiques_label[0],
+      thematique: aide.data.thematiques[0] as ClefThematiqueAPI,
+      contenu: aide.data.contenu,
+      url: aide.data.url_simulateur,
+      isSimulateur: aide.data.is_simulateur,
+      montantMaximum: aide.data.montant_max,
+      urlCommencerVotreDemarche: aide.data.url_demande,
+      estGratuit: aide.data.est_gratuit,
+      partenaire: aide.data.partenaire_logo_url
         ? {
-            logoUrl: aideCMS.data.data.attributes.partenaire.data.attributes.logo.data[0].attributes.url,
-            nom: aideCMS.data.data.attributes.partenaire.data.attributes.nom,
+            logoUrl: aide.data.partenaire_logo_url!,
+            nom: aide.data.partenaire_nom!,
           }
         : undefined,
-      derniereMaj: aideCMS.data.data.attributes.updatedAt,
+      derniereMaj: aide.data.derniere_maj,
+    };
+  }
+
+  @intercept401()
+  async recupererDetailAide(utilisateurId: string, idAide: string): Promise<Aide> {
+    const axios = AxiosFactory.getAxios();
+    const aide = await axios.get<AideApiModel>(`/utilisateurs/${utilisateurId}/aides/${idAide}`);
+
+    return {
+      id: aide.data.content_id,
+      titre: aide.data.titre,
+      categorie: aide.data.thematiques_label[0],
+      thematique: aide.data.thematiques[0] as ClefThematiqueAPI,
+      contenu: aide.data.contenu,
+      url: aide.data.url_simulateur,
+      isSimulateur: aide.data.is_simulateur,
+      montantMaximum: aide.data.montant_max,
+      urlCommencerVotreDemarche: aide.data.url_demande,
+      estGratuit: aide.data.est_gratuit,
+      partenaire: aide.data.partenaire_logo_url
+        ? {
+            logoUrl: aide.data.partenaire_logo_url!,
+            nom: aide.data.partenaire_nom!,
+          }
+        : undefined,
+      derniereMaj: aide.data.derniere_maj,
     };
   }
 }

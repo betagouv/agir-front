@@ -144,11 +144,15 @@ class ChargementAidesRepositoryForTest implements ChargementAidesRepository {
   }
 
   recupererAidesDuneThematique(utilisateurId: string, clefThematique: ClefThematiqueAPI): Promise<Aides> {
-    throw new Error('Method not implemented.');
+    throw Error;
   }
 
   previsualiser(idAide: string): Promise<Aide> {
-    throw new Error('Method not implemented.');
+    throw Error;
+  }
+
+  recupererDetailAide(utilisateurId: string, idAide: string): Promise<Aide> {
+    throw Error;
   }
 }
 
@@ -162,153 +166,73 @@ describe('Fichier de tests pour charger toutes les aides', () => {
 
     // THEN
     function expectation(aidesViewModel: AidesAvecCouvertureViewModel) {
-      expect(aidesViewModel).toStrictEqual({
+      expect(aidesViewModel).toStrictEqual<AidesAvecCouvertureViewModel>({
         aides: {
-          '🚅 Me déplacer': [
-            {
-              contenu: '<h3>Titre test</h3><p>lorem ipsum dolor test</p><ul><li>Item 1</li><li>Item 2</li></ul>',
-              id: 'id-1',
-              isSimulateur: true,
-              montantMaximum: "Jusqu'à 15 000 €",
-              thematiqueLabel: '🚅 Me déplacer',
-              thematiqueTag: {
-                label: 'Me déplacer',
-                style: {
-                  backgroundColor: '#D2E9FF',
-                  color: '#021952',
-                  emoji: '🚅',
-                },
-              },
-              titre: "Simulez vos aides pour l'achat d'un vélo",
-              url: 'vos-aides-velo',
-              urlCommencerVotreDemarche: 'urlCommencerVotreDemarche',
-              estGratuit: false,
-              partenaire: undefined,
-            },
-            {
-              contenu: '<h3>Titre test</h3><p>lorem ipsum dolor test</p>',
-              id: 'id-2',
-              isSimulateur: false,
-              montantMaximum: undefined,
-              thematiqueLabel: '🚅 Me déplacer',
-              thematiqueTag: {
-                label: 'Me déplacer',
-                style: {
-                  backgroundColor: '#D2E9FF',
-                  color: '#021952',
-                  emoji: '🚅',
-                },
-              },
-              titre: 'Simulez vos aides pour convertir votre voiture thermique en électrique',
-              url: 'vos-aides-retrofit',
-              urlCommencerVotreDemarche: undefined,
-              estGratuit: true,
-              partenaire: undefined,
-            },
-          ],
           '🍛 Me nourrir': [
             {
-              contenu: '<h3>Titre test</h3><p>lorem ipsum dolor test</p>',
+              estGratuit: false,
               id: 'id-3',
-              isSimulateur: true,
               montantMaximum: undefined,
-              thematiqueLabel: '🍛 Me nourrir',
-              thematiqueTag: {
-                label: 'Me nourrir',
-                style: {
-                  backgroundColor: '#E3FBAF',
-                  color: '#175202',
-                  emoji: '🍛',
-                },
-              },
+              partenaireImg: undefined,
+              partenaireNom: '',
               titre: 'Aide test',
-              url: 'vos-aides-velo',
-              urlCommencerVotreDemarche: undefined,
-              estGratuit: false,
-              partenaire: undefined,
+              titreUrl: 'aide-test',
             },
             {
-              contenu: '<h3>Titre test</h3><p>lorem ipsum dolor test</p>',
+              estGratuit: false,
               id: 'id-4',
-              isSimulateur: true,
               montantMaximum: undefined,
-              thematiqueLabel: '🍛 Me nourrir',
-              thematiqueTag: {
-                label: 'Me nourrir',
-                style: {
-                  backgroundColor: '#E3FBAF',
-                  color: '#175202',
-                  emoji: '🍛',
-                },
-              },
+              partenaireImg: undefined,
+              partenaireNom: '',
               titre: 'Aide test',
-              url: 'vos-aides-velo',
-              urlCommencerVotreDemarche: undefined,
-              estGratuit: false,
-              partenaire: undefined,
+              titreUrl: 'aide-test',
             },
             {
-              contenu: '<h3>Titre test</h3><p>lorem ipsum dolor test</p>',
+              estGratuit: false,
               id: 'id-5',
-              isSimulateur: true,
               montantMaximum: undefined,
-              thematiqueLabel: '🍛 Me nourrir',
-              thematiqueTag: {
-                label: 'Me nourrir',
-                style: {
-                  backgroundColor: '#E3FBAF',
-                  color: '#175202',
-                  emoji: '🍛',
-                },
-              },
+              partenaireImg: undefined,
+              partenaireNom: '',
               titre: 'Aide test',
-              url: 'vos-aides-velo',
-              urlCommencerVotreDemarche: undefined,
-              estGratuit: false,
-              partenaire: undefined,
+              titreUrl: 'aide-test',
             },
             {
-              contenu: '<h3>Titre test</h3><p>lorem ipsum dolor test</p>',
+              estGratuit: false,
               id: 'id-6',
-              isSimulateur: true,
               montantMaximum: undefined,
-              thematiqueLabel: '🍛 Me nourrir',
-              thematiqueTag: {
-                label: 'Me nourrir',
-                style: {
-                  backgroundColor: '#E3FBAF',
-                  color: '#175202',
-                  emoji: '🍛',
-                },
-              },
+              partenaireImg: undefined,
+              partenaireNom: '',
               titre: 'Aide test',
-              url: 'vos-aides-velo',
-              urlCommencerVotreDemarche: undefined,
-              estGratuit: false,
-              partenaire: undefined,
+              titreUrl: 'aide-test',
             },
             {
-              contenu: '<h3>Titre test</h3><p>lorem ipsum dolor test</p>',
-              id: 'id-7',
-              isSimulateur: true,
-              montantMaximum: undefined,
-              partenaire: {
-                accessibilite: 'proposé par Partenaire test',
-                logoUrl: 'https://',
-              },
-              thematiqueLabel: '🍛 Me nourrir',
-              thematiqueTag: {
-                label: 'Me nourrir',
-                style: {
-                  backgroundColor: '#E3FBAF',
-                  color: '#175202',
-                  emoji: '🍛',
-                },
-              },
-              titre: 'Aide test',
-              url: 'vos-aides-velo',
-              urlCommencerVotreDemarche: undefined,
               estGratuit: false,
+              id: 'id-7',
+              montantMaximum: undefined,
+              partenaireImg: 'https://',
+              partenaireNom: 'Partenaire test',
+              titre: 'Aide test',
+              titreUrl: 'aide-test',
+            },
+          ],
+          '🚅 Me déplacer': [
+            {
+              estGratuit: false,
+              id: 'id-1',
+              montantMaximum: '15000€',
+              partenaireImg: undefined,
+              partenaireNom: '',
+              titre: "Simulez vos aides pour l'achat d'un vélo",
+              titreUrl: 'simulez-vos-aides-pour-lachat-dun-velo',
+            },
+            {
+              estGratuit: true,
+              id: 'id-2',
+              montantMaximum: undefined,
+              partenaireImg: undefined,
+              partenaireNom: '',
+              titre: 'Simulez vos aides pour convertir votre voiture thermique en électrique',
+              titreUrl: 'simulez-vos-aides-pour-convertir-votre-voiture-thermique-en-electrique',
             },
           ],
         },
