@@ -1,9 +1,5 @@
 <template>
-  <ActionAsideAFaire
-    v-if="!estRealise"
-    sous-titre="Terminez votre quiz et gagnez"
-    :points="actionBaseViewModel.points"
-  />
+  <ActionAsideAFaire v-if="!estRealise" sous-titre="Obtenez 4 bonnes réponses" :points="actionBaseViewModel.points" />
   <ActionAsideRealisee v-else sous-titre="Vous avez réalisé votre quizz" :points="actionBaseViewModel.points" />
 
   <template v-if="nombreActionRealise > 0">
@@ -35,7 +31,6 @@
   const nombreActionRealise = ref<number>(props.actionBaseViewModel.nombreDeRealisations);
 
   ActionsEventBus.getInstance().subscribe('ActionAsideQuiz', ActionsEvent.A_ETE_REALISEE, () => {
-    // gérer quand le quiz n'est pas réussi
     estRealise.value = true;
     nombreActionRealise.value = nombreActionRealise.value + 1;
   });
