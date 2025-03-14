@@ -62,7 +62,7 @@ const aidesRoutes: RouteRecordRaw[] = [
     path: RouteAidesPath.AIDE,
     name: RouteAidesName.AIDE_CONSULTATION,
     component: PageDetailAide,
-    meta: { estPublique: true },
+    meta: { estPublique: false },
   },
 ];
 
