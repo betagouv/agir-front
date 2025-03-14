@@ -52,7 +52,7 @@
       </div>
     </div>
 
-    <WidgetAides :clef-thematique="thematiqueId as ClefThematiqueAPI" class="fr-my-4w" />
+    <WidgetAides :clef-thematique="thematiqueId as ClefThematiqueAPI" class="fr-my-4w" :nombre-aides-max="4" />
 
     <section class="fr-my-6w flex flex-column align-items--center">
       <h2>Envie de voir ou de revoir toutes les actions ?</h2>

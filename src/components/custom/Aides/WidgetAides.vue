@@ -22,7 +22,7 @@
 
   const props = defineProps<{
     clefThematique: ClefThematiqueAPI;
-    aidesMax: number;
+    nombreAidesMax?: number;
   }>();
 
   const aidesViewModel = ref<ActionAideViewModel[]>();
@@ -34,5 +34,6 @@
     new AidesPresenterImpl(vm => {
       aidesViewModel.value = vm;
     }),
+    props.nombreAidesMax,
   );
 </script>
