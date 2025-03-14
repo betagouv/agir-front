@@ -29,5 +29,5 @@ export interface AidesAvecCouvertureViewModel {
 }
 
 export interface ChargementAidesPresenter {
-  presente(aides: Aides): void;
+  presente(aides: Aides, nombreAidesMax?: number): void;
 }

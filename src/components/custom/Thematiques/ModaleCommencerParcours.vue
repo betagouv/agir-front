@@ -1,7 +1,7 @@
 <template>
   <div class="mini-modale background--white fr-p-3w shadow">
     <p class="text--bold fr-mb-1w fr-text--lg">
-      Envie d'avoir un <span class="surlignage surlignage-bleu">vrai impact ?</span>
+      Envie d'avoir un <span class="surlignage surlignage-bleu">vrai impact</span> ?
     </p>
     <p class="fr-mb-2w">
       Laissez-vous guider par nos recommandations d’actions

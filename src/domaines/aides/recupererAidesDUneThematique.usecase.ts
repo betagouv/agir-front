@@ -5,11 +5,16 @@ import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 export default class RecupererAidesDUneThematiqueUsecase {
   constructor(private chargementAidesRepositoryRepository: ChargementAidesRepository) {}
 
-  async execute(utilisateurId: string, clefThematique: ClefThematiqueAPI, presenter: ChargementAidesPresenter) {
+  async execute(
+    utilisateurId: string,
+    clefThematique: ClefThematiqueAPI,
+    presenter: ChargementAidesPresenter,
+    nombreAidesMax?: number,
+  ) {
     const reponse = await this.chargementAidesRepositoryRepository.recupererAidesDuneThematique(
       utilisateurId,
       clefThematique,
     );
-    presenter.presente(reponse);
+    presenter.presente(reponse, nombreAidesMax);
   }
 }

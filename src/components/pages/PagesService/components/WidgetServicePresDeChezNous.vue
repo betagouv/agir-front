@@ -5,12 +5,12 @@
       <div>
         <router-link
           :to="{
-            name: RouteServiceName.FRUITS_ET_LEGUMES,
-            params: { thematiqueId: MenuThematiques.getThematiqueData(ClefThematiqueAPI.alimentation).url },
+            name: RouteServiceName.PROXIMITE,
+            params: { thematiqueId: MenuThematiques.getThematiqueData(ClefThematiqueAPI.consommation).url },
           }"
           class="fr-link"
         >
-          Voir tout
+          Voir tous les commerces
         </router-link>
       </div>
     </div>

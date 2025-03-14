@@ -42,6 +42,7 @@
   .effet-flou {
     filter: blur(3px);
     pointer-events: none;
+    opacity: 0.5;
   }
   .enchainementKYC {
     transition: 0.5s ease filter;
