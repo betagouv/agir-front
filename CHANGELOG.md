@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.45.0](https://github.com/betagouv/agir-front/compare/v1.44.0...v1.45.0) (2025-03-14)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* catalogue aides avec la nouvelle ui ([#981](https://github.com/betagouv/agir-front/issues/981)) ([7e85811](https://github.com/betagouv/agir-front/commit/7e858116ec778b94abc1000887f309a185f400f6))
+
+
+### 👷 Autres changements
+
+* Bump @babel/helpers from 7.26.0 to 7.26.10 ([#979](https://github.com/betagouv/agir-front/issues/979)) ([29d9d4a](https://github.com/betagouv/agir-front/commit/29d9d4a825c8f0be16ff1fbbed4654913f232d43))
+
 ## [1.44.0](https://github.com/betagouv/agir-front/compare/v1.43.0...v1.44.0) (2025-03-13)
 
 
