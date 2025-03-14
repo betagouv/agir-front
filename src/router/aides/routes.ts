@@ -1,4 +1,5 @@
 import { RouteRecordRaw } from 'vue-router';
+import PageDetailAide from '@/components/pages/PageDetailAide.vue';
 import PagePrevisualisationAide from '@/components/pages/PagePrevisualisationAide.vue';
 import { RouteAidesName } from '@/router/aides/routeAidesName';
 
@@ -60,7 +61,7 @@ const aidesRoutes: RouteRecordRaw[] = [
   {
     path: RouteAidesPath.AIDE,
     name: RouteAidesName.AIDE_CONSULTATION,
-    component: PagePrevisualisationAide,
+    component: PageDetailAide,
     meta: { estPublique: true },
   },
 ];
