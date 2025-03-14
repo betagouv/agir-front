@@ -11,7 +11,7 @@
           name: RouteServiceName.FRUITS_ET_LEGUMES,
           params: { thematiqueId: MenuThematiques.getThematiqueData(ClefThematiqueAPI.alimentation).url },
         }"
-        >Voir tout
+        >Voir tous
       </router-link>
     </div>
     <div class="flex">

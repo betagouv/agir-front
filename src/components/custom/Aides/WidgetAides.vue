@@ -2,7 +2,7 @@
   <section v-if="aidesViewModel && aidesViewModel.length > 0">
     <div class="flex flex-space-between align-items--center fr-mb-2w">
       <h2 class="fr-h3 fr-mb-0">Aides et bons plans</h2>
-      <router-link class="fr-link" :to="{ name: RouteAidesName.AIDES }">Voir tout</router-link>
+      <router-link class="fr-link" :to="{ name: RouteAidesName.AIDES }">Voir toutes les aides</router-link>
     </div>
 
     <GrilleAidesDUneAction :aides="aidesViewModel" />
@@ -22,6 +22,7 @@
 
   const props = defineProps<{
     clefThematique: ClefThematiqueAPI;
+    aidesMax: number;
   }>();
 
   const aidesViewModel = ref<ActionAideViewModel[]>();

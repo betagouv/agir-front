@@ -10,7 +10,7 @@
           }"
           class="fr-link"
         >
-          Voir tout
+          Voir tous les commerces
         </router-link>
       </div>
     </div>
