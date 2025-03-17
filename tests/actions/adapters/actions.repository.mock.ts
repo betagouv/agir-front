@@ -1,9 +1,10 @@
 import {
   Action,
   ActionDetail,
-  DetailThematique,
   ActionsRepository,
   CatalogueActions,
+  DetailThematique,
+  TypeAction,
 } from '@/domaines/actions/ports/actions.repository';
 
 export class ActionsRepositoryMock implements ActionsRepository {
@@ -13,6 +14,10 @@ export class ActionsRepositoryMock implements ActionsRepository {
     private readonly actionsRecommandeesDansUneThematique?: DetailThematique,
     private readonly catalogueActions?: CatalogueActions,
   ) {}
+
+  static empty(): ActionsRepositoryMock {
+    return new ActionsRepositoryMock([]);
+  }
 
   static avecActionDetail(actionDetail: ActionDetail): ActionsRepositoryMock {
     return new ActionsRepositoryMock([], actionDetail);
@@ -49,5 +54,9 @@ export class ActionsRepositoryMock implements ActionsRepository {
 
   recupererDetailThematique(idUtilisateur: string, thematiqueId: string): Promise<DetailThematique> {
     return Promise.resolve(this.actionsRecommandeesDansUneThematique!);
+  }
+
+  terminerAction(idUtilisateur: string, idAction: string, typeAction: TypeAction): Promise<void> {
+    return Promise.resolve();
   }
 }

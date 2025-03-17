@@ -9,7 +9,7 @@
       <li
         v-for="suggestion in serviceRecettesViewModel?.suggestions"
         :key="suggestion.titre"
-        class="fr-col-12 fr-col-sm-6 fr-col-md-3"
+        :class="`col-card fr-col-12 fr-col-sm-6 fr-col-md-${12 / props.nombreDeCartesParLigne}`"
       >
         <ServiceCarteDsfr :suggestionsServiceViewModel="suggestion" :options="{ descriptionDesactive: true }" />
       </li>
@@ -43,15 +43,17 @@
   import { RouteServiceName } from '@/router/services/routes';
   import { utilisateurStore } from '@/store/utilisateur';
 
-  const props = defineProps<{
-    parametreDeRecherche: string;
-  }>();
+  const props = withDefaults(
+    defineProps<{
+      parametreDeRecherche: string;
+      nombreDeCartesParLigne?: number;
+    }>(),
+    { nombreDeCartesParLigne: 4 },
+  );
   const isLoading = ref<boolean>(true);
   const serviceRecettesViewModel = ref<ServiceRechercheRecettesViewModel>();
 
   const usecase = new RecupererServiceRecettesUsecase(new ServiceRechercheRecettesAxios());
-
-  let nombreMaxResultats = 4;
 
   onMounted(() => {
     lancerRecherche();
@@ -61,7 +63,7 @@
     await usecase.execute(
       utilisateurStore().utilisateur.id,
       props.parametreDeRecherche,
-      nombreMaxResultats,
+      props.nombreDeCartesParLigne,
       new ServiceRechercheRecettesPresenterImpl(vm => {
         serviceRecettesViewModel.value = vm;
       }),

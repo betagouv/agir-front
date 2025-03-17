@@ -22,9 +22,13 @@ interface ActionDetailApiModel {
   code: string;
   titre: string;
   sous_titre: string;
+  points: number;
+  consigne: string;
+  label_compteur: string;
   type: 'classique' | 'quizz' | 'kyc';
   nom_commune: string;
   comment: string;
+  deja_faite: boolean;
   pourquoi: string;
   nombre_actions_en_cours: number;
   nombre_aides_disponibles: number;
@@ -96,14 +100,18 @@ export class ActionsRepositoryAxios implements ActionsRepository {
       sousTitre: response.data.sous_titre,
       type: response.data.type as TypeAction,
       commune: response.data.nom_commune,
+      consigne: response.data.consigne,
+      labelCompteur: response.data.label_compteur,
+      points: response.data.points,
       quizzFelicitations: response.data.quizz_felicitations,
       corps: {
         introduction: response.data.pourquoi,
         astuces: response.data.comment,
       },
       recommandations: [],
-      nombreDePersonnes: response.data.nombre_actions_en_cours,
+      nombreDeRealisations: response.data.nombre_actions_en_cours,
       nombreAidesDisponibles: response.data.nombre_aides_disponibles,
+      realisee: response.data.deja_faite,
       services: response.data.services.map(service => ({
         type: service.recherche_service_id as 'recettes' | 'longue_vie_objets' | 'pres_de_chez_nous',
         parametreDuService: service.categorie,
@@ -247,5 +255,11 @@ export class ActionsRepositoryAxios implements ActionsRepository {
         reponse: [question.reponse_unique.value],
       } as ReponseKYCSimple;
     }
+  }
+
+  @intercept401()
+  async terminerAction(idUtilisateur: string, idAction: string, typeAction: TypeAction): Promise<void> {
+    const axios = AxiosFactory.getAxios();
+    await axios.post(`/utilisateurs/${idUtilisateur}/actions/${typeAction}/${idAction}/faite`);
   }
 }

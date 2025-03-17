@@ -17,7 +17,7 @@ describe('Fichier de tests concernant le service Recettes', () => {
           {
             id: 'id1',
             titre: 'Tian de sardines',
-            difficulte: 'Intérmédiaire',
+            difficulte: 'Intermédiaire',
             img: '',
             nombreFavoris: 12,
             tempsDePreparation: 30,

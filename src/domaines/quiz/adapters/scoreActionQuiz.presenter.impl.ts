@@ -18,11 +18,11 @@ export class ScoreActionQuizPresenterImpl implements ScoreActionQuizPresenter {
     const getScoreCategory = (score: number): keyof typeof scoreStrategies =>
       Object.entries({
         bas: score < 40,
-        moyen: score >= 40 && score < 70,
-        haut: score >= 70,
+        moyen: score >= 40 && score < 66,
+        haut: score >= 66,
       }).find(([, condition]) => condition)?.[0] as keyof typeof scoreStrategies;
 
-    const pourcentageScore = Math.round((score.nombreBonnesReponses / score.nombreQuestions) * 100);
+    const pourcentageScore = score.getPourcentage();
     const { emoji, couleurBackground, couleurBordure } = scoreStrategies[getScoreCategory(pourcentageScore)];
 
     this.viewModel({

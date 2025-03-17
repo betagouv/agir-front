@@ -19,7 +19,7 @@
         <li
           v-for="item in serviceFruitsEtLegumesViewModel"
           :key="item.nom"
-          class="fr-col-6 fr-col-md-4 fr-pb-1w fr-pr-1w"
+          class="fr-col-6 fr-col-lg-4 fr-pb-1w fr-pr-1w"
         >
           <div class="flex flex-space-between shadow--light background--white border--gris fr-p-3v">
             <span class="fr-ellipsis">{{ item.nom }}</span>
