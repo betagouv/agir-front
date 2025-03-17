@@ -22,6 +22,7 @@ export interface ArticleDuQuiz {
   contenu: string;
   sources: { url: string; label: string }[];
 }
+
 export interface Quiz {
   id: string;
   titre: string;
@@ -32,12 +33,30 @@ export interface Quiz {
   articleAssocie: ArticleDuQuiz | null;
 }
 
-export type ScoreQuiz = { nombreBonnesReponses: number; nombreQuestions: number };
+export class ScoreQuiz {
+  constructor(
+    readonly nombreBonnesReponses: number,
+    readonly nombreQuestions: number,
+  ) {}
+
+  leQuizzAEteReussi(): boolean {
+    const pourcentageDeReussite = 0.66;
+    return this.nombreBonnesReponses / this.nombreQuestions > pourcentageDeReussite;
+  }
+
+  getPourcentage(): number {
+    return Math.round((this.nombreBonnesReponses / this.nombreQuestions) * 100);
+  }
+}
 
 export interface QuizRepository {
   getQuiz(idQuiz: string, idUtilisateur: string): Promise<Quiz>;
+
   getPrevisualisationQuiz(idQuiz: string): Promise<Quiz>;
+
   terminerQuiz(idUtilisateur: string, idQuiz: string, score: number): Promise<void>;
+
   noterQuiz(quizId: string, utilisateurId: string, note: 1 | 2 | 3 | 4): Promise<void>;
+
   recupererScoreActionQuiz(idUtilisateur: string, idAction: string): Promise<ScoreQuiz>;
 }

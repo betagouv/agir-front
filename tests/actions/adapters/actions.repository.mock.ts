@@ -1,9 +1,9 @@
 import {
   Action,
   ActionDetail,
-  DetailThematique,
   ActionsRepository,
   CatalogueActions,
+  DetailThematique,
   TypeAction,
 } from '@/domaines/actions/ports/actions.repository';
 
@@ -14,6 +14,10 @@ export class ActionsRepositoryMock implements ActionsRepository {
     private readonly actionsRecommandeesDansUneThematique?: DetailThematique,
     private readonly catalogueActions?: CatalogueActions,
   ) {}
+
+  static empty(): ActionsRepositoryMock {
+    return new ActionsRepositoryMock([]);
+  }
 
   static avecActionDetail(actionDetail: ActionDetail): ActionsRepositoryMock {
     return new ActionsRepositoryMock([], actionDetail);
@@ -53,6 +57,6 @@ export class ActionsRepositoryMock implements ActionsRepository {
   }
 
   terminerAction(idUtilisateur: string, idAction: string, typeAction: TypeAction): Promise<void> {
-    throw Error('Not implemented');
+    return Promise.resolve();
   }
 }

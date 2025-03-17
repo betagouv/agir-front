@@ -75,10 +75,7 @@ export class QuizRepositoryAxios implements QuizRepository {
     const response = await axiosInstance.get<ScoreQuizApiModel>(
       `/utilisateurs/${idUtilisateur}/actions/quizz/${idAction}/score`,
     );
-    return {
-      nombreBonnesReponses: response.data.nombre_bonnes_reponses,
-      nombreQuestions: response.data.nombre_quizz_done,
-    };
+    return new ScoreQuiz(response.data.nombre_bonnes_reponses, response.data.nombre_quizz_done);
   }
 }
 
