@@ -17,7 +17,7 @@ export class BilanThematique {
   ) {}
 
   getPourcenterDetail(detail: DetailBilanThematique) {
-    return Math.round(detail.impactAnnuelEnKg / this.impactAnnuelEnKg) * 100;
+    return Math.round((detail.impactAnnuelEnKg / this.impactAnnuelEnKg) * 100);
   }
 }
 
@@ -30,6 +30,6 @@ export class RecupererBilanDepuisThematiqueUsecase {
     presenter: BilanThematiquePresenter,
   ): Promise<void> {
     const bilan = await this.repository.recupererBilanDepuisThematique(idUtilisateur, thematique);
-    presenter.presenteBilanThematique(bilan);
+    presenter.presenteBilanThematique(bilan, thematique);
   }
 }

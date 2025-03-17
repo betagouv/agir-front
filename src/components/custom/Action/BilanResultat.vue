@@ -1,27 +1,29 @@
 <template>
-  <div v-if="bilanThematiqueViewModel">
-    <h2 class="fr-h3">Votre bilan ????</h2>
-    <p>
-      Vous avez terminé votre bilan ! Il est de {{ bilanThematiqueViewModel.impactAnnuelEnTonnes }} de CO2 équivalent
-      par an pour ???
-    </p>
-    <ul class="list-style-none full-width fr-p-0 fr-p-md-2w fr-m-0">
-      <li
-        v-for="(detail, index) in bilanThematiqueViewModel.details"
-        :key="detail.label"
-        :class="bilanThematiqueViewModel.details.length - 1 === index ? 'fr-mb-0' : 'fr-mb-4w'"
-      >
-        <p class="fr-grid-row fr-grid-row--gutters flex-space-between align-items--center fr-mb-1v">
-          <span class="fr-text--bold fr-col-auto">{{ detail.emoji }}</span>
-          <span
-            :class="`text--lh-1-3 fr-col-auto fr-py-1v fr-px-1w fr-mb-0 fr-mr-1w fr-text--sm border-radius--xs tag-impact-fort`"
-          >
-            {{ detail.label }}
-          </span>
-        </p>
-        <div class="progress-bar border-radius--md" aria-hidden="true" />
+  <div v-if="bilanThematiqueViewModel" class="fr-p-1w">
+    <h2 class="fr-h3" v-text="bilanThematiqueViewModel.titreBilan" />
+    <p class="fr-mb-0" v-html="bilanThematiqueViewModel.resume" />
+    <ul class="list-style-none full-width fr-p-0 fr-p-md-3w fr-m-0">
+      <li v-for="detail in bilanThematiqueViewModel.details" :key="detail.label" class="flex fr-mb-3w">
+        <span class="fr-p-1w fr-mr-1w" aria-hidden="true">{{ detail.emoji }}</span>
+        <div class="full-width">
+          <p class="fr-grid-row fr-grid-row--gutters align-items--center fr-mb-1v flex-space-between text--bold">
+            <span>{{ detail.label }}</span>
+            <span>{{ detail.impactAnnuelEnKg }} <span class="text--normal">kg</span></span>
+          </p>
+          <div class="progress-bar background--gris-dark border-radius--md" aria-hidden="true">
+            <div class="progress-bar-inner border-radius--md" :style="`--width: ${detail.pourcentage}%`"></div>
+          </div>
+        </div>
       </li>
     </ul>
+
+    <div class="flex gap--small">
+      <router-link :to="{ path: dernierePageStore.path }" class="fr-btn display-block fr-my-0">
+        Revenir {{ labelBouton }}
+      </router-link>
+
+      <button class="fr-btn fr-btn--secondary" @click="recommencerBilan">Recommencer le bilan</button>
+    </div>
   </div>
 </template>
 
@@ -38,6 +40,9 @@
   } from '@/domaines/bilanCarbone/adapters/bilanThematique.presenter.impl';
   import { RecupererBilanDepuisThematiqueUsecase } from '@/domaines/bilanCarbone/recupererBilanDepuisThematique.usecase';
   import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
+  import { RouteActionsName } from '@/router/actions/routes';
+  import { RouteThematiquesName } from '@/router/thematiques/routes';
+  import { useNavigationStore } from '@/store/navigationStore';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const props = defineProps<{
@@ -59,4 +64,33 @@
       }),
     );
   });
+
+  function recommencerBilan() {
+    window.location.reload();
+  }
+
+  const dernierePageStore = useNavigationStore().pagePrecedente;
+  const labelBouton =
+    dernierePageStore.name === RouteActionsName.CATALOGUE_ACTION
+      ? 'au catalogue'
+      : dernierePageStore.name === RouteThematiquesName.THEMATIQUE_V2
+        ? 'à la thématique'
+        : "à l'accueil";
 </script>
+
+<style scoped>
+  .progress-bar {
+    height: 1rem;
+    width: 100%;
+  }
+
+  .progress-bar-inner {
+    --width: 80%;
+
+    background: #df1351;
+    width: var(--width);
+    height: 100%;
+    border: 2px solid white;
+    min-width: 1.5%;
+  }
+</style>

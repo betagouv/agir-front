@@ -35,6 +35,8 @@
   const nombreActionRealise = ref<number>(props.actionBaseViewModel.nombreDeRealisations);
 
   ActionsEventBus.getInstance().subscribe('ActionAsideBilan', ActionsEvent.A_ETE_REALISEE, () => {
+    if (estRealise.value) return;
+
     estRealise.value = true;
     nombreActionRealise.value = nombreActionRealise.value + 1;
   });
