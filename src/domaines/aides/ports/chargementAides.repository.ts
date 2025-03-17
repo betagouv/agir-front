@@ -6,7 +6,9 @@ export interface ChargementAidesRepository {
 
   recupererAidesDuneThematique(utilisateurId: string, clefThematique: ClefThematiqueAPI): Promise<Aides>;
 
-  previsualiser(idAide: string): Promise<Aide>;
+  consulterEnModeNonConnecte(idAide: string): Promise<Aide>;
 
   recupererDetailAide(utilisateurId: string, idAide: string): Promise<Aide>;
+
+  previsualiser(idAide: string): Promise<Aide>;
 }
