@@ -20,6 +20,7 @@
         <ActionAsideClassique v-if="actionClassiqueViewModel" :action-base-view-model="actionBaseViewModel" />
         <ActionAsideQuiz v-if="actionQuizViewModel" :action-base-view-model="actionBaseViewModel" />
         <ActionAsideSimulateur v-if="actionSimulateurViewModel" :action-base-view-model="actionBaseViewModel" />
+        <ActionAsideBilan v-if="actionBilanViewModel" :action-base-view-model="actionBaseViewModel" />
       </template>
     </ActionBase>
     <p v-else>Une erreur est survenue</p>
@@ -34,6 +35,7 @@
   import ActionClassique from '@/components/custom/Action/ActionClassique.vue';
   import ActionQuiz from '@/components/custom/Action/ActionQuiz.vue';
   import ActionSimulateur from '@/components/custom/Action/ActionSimulateur.vue';
+  import ActionAsideBilan from '@/components/custom/Action/Aside/ActionAsideBilan.vue';
   import ActionAsideClassique from '@/components/custom/Action/Aside/ActionAsideClassique.vue';
   import ActionAsideQuiz from '@/components/custom/Action/Aside/ActionAsideQuiz.vue';
   import ActionAsideSimulateur from '@/components/custom/Action/Aside/ActionAsideSimulateur.vue';

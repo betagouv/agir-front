@@ -4,11 +4,9 @@
     <p v-if="actionBaseViewModel.sousTitre" class="fr-text--lg fr-mb-4w" v-html="actionBaseViewModel.sousTitre" />
 
     <div class="fr-grid-row fr-grid-row--gutters reverse-on-lg">
-      <div class="fr-col-12 fr-col-lg-4">
-        <ActionAside :action-base-view-model="actionBaseViewModel">
-          <slot name="aside" />
-        </ActionAside>
-      </div>
+      <ActionAside class="fr-col-12 fr-col-lg-4" :action-base-view-model="actionBaseViewModel">
+        <slot name="aside" />
+      </ActionAside>
 
       <div class="fr-col-12 fr-col-lg-8">
         <slot name="contenu" />

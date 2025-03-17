@@ -8,7 +8,7 @@
       :type-action="TypeAction.BILAN"
     >
       <template v-slot:fin>
-        <BilanResultat :thematique="actionBilanViewModel.thematique" />
+        <BilanResultat :thematique="actionBilanViewModel.thematique" :id-action="actionBilanViewModel.actionId" />
       </template>
     </KyCsAction>
 

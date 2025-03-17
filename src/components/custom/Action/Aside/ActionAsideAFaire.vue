@@ -2,7 +2,9 @@
   <div class="flex flex-space-between align-items--center">
     <div>
       <h2 class="fr-h4 fr-mb-1w">{{ titre }}</h2>
-      <p class="fr-mb-0">{{ sousTitre }}</p>
+      <p class="fr-mb-0">
+        {{ sousTitre }}
+      </p>
     </div>
 
     <div class="border-radius--md fr-p-1w background--vert-points">
