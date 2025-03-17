@@ -2,7 +2,7 @@
   <div v-if="bilanThematiqueViewModel" class="fr-p-1w">
     <h2 class="fr-h3" v-text="bilanThematiqueViewModel.titreBilan" />
     <p class="fr-mb-0" v-html="bilanThematiqueViewModel.resume" />
-    <ul class="list-style-none full-width fr-p-0 fr-p-md-3w fr-m-0">
+    <ul class="list-style-none full-width fr-py-3w fr-p-0 fr-pr-4w fr-m-0">
       <li v-for="detail in bilanThematiqueViewModel.details" :key="detail.label" class="flex fr-mb-3w">
         <span class="fr-p-1w fr-mr-1w" aria-hidden="true">{{ detail.emoji }}</span>
         <div class="full-width">
