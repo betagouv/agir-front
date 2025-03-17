@@ -1,4 +1,4 @@
-import { ChargerActionUsecase } from '@/domaines/actions/chargerAction.usecase';
+import { ChargerActionStrategyFactory, ChargerActionUsecase } from '@/domaines/actions/chargerAction.usecase';
 import { ActionsRepositoryMock } from './adapters/actions.repository.mock';
 import { ActionPresenterImpl } from '@/domaines/actions/adapters/action.presenter.impl';
 import { ActionClassiqueViewModel } from '@/domaines/actions/ports/action.presenter';
@@ -106,10 +106,12 @@ describe("Fichier de tests concernant la récupération d'une action de type cla
       ],
     };
     const usecase = new ChargerActionUsecase(
-      new ChargerActionClassiqueUsecase(),
-      new ChargerActionQuizUsecase(),
-      new ChargerActionSimulateurUsecase(),
-      new ChargerActionBilanUsecase(),
+      new ChargerActionStrategyFactory(
+        new ChargerActionClassiqueUsecase(),
+        new ChargerActionQuizUsecase(),
+        new ChargerActionSimulateurUsecase(),
+        new ChargerActionBilanUsecase(),
+      ),
       ActionsRepositoryMock.avecActionDetail(action),
       new ActionPresenterImpl(
         expected,

@@ -2,7 +2,7 @@ import { ActionPresenterImpl } from '@/domaines/actions/adapters/action.presente
 import { ActionQuizzesViewModel } from '@/domaines/actions/ports/action.presenter';
 import { ActionDetail, TypeAction } from '@/domaines/actions/ports/actions.repository';
 import { ChargerActionClassiqueUsecase } from '@/domaines/actions/chargerActionClassique.usecase';
-import { ChargerActionUsecase } from '@/domaines/actions/chargerAction.usecase';
+import { ChargerActionStrategyFactory, ChargerActionUsecase } from '@/domaines/actions/chargerAction.usecase';
 import { ActionsRepositoryMock } from './adapters/actions.repository.mock';
 import { ChargerActionQuizUsecase } from '@/domaines/actions/chargerActionQuiz.usecase';
 import { QuizDifficulte } from '@/domaines/quiz/ports/quiz.repository';
@@ -110,10 +110,12 @@ describe("Fichier de tests concernant la récupération d'une action de type qui
       faq: [],
     };
     const usecase = new ChargerActionUsecase(
-      new ChargerActionClassiqueUsecase(),
-      new ChargerActionQuizUsecase(),
-      new ChargerActionSimulateurUsecase(),
-      new ChargerActionBilanUsecase(),
+      new ChargerActionStrategyFactory(
+        new ChargerActionClassiqueUsecase(),
+        new ChargerActionQuizUsecase(),
+        new ChargerActionSimulateurUsecase(),
+        new ChargerActionBilanUsecase(),
+      ),
       ActionsRepositoryMock.avecActionDetail(action),
       new ActionPresenterImpl(
         () => {},

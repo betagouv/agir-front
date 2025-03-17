@@ -40,7 +40,7 @@
   import CarteSkeleton from '@/components/custom/Skeleton/CarteSkeleton.vue';
   import { ActionPresenterImpl } from '@/domaines/actions/adapters/action.presenter.impl';
   import { ActionsRepositoryAxios } from '@/domaines/actions/adapters/actions.repository.axios';
-  import { ChargerActionUsecase } from '@/domaines/actions/chargerAction.usecase';
+  import { ChargerActionStrategyFactory, ChargerActionUsecase } from '@/domaines/actions/chargerAction.usecase';
   import { ChargerActionBilanUsecase } from '@/domaines/actions/chargerActionBilan.usecase';
   import { ChargerActionClassiqueUsecase } from '@/domaines/actions/chargerActionClassique.usecase';
   import { ChargerActionQuizUsecase } from '@/domaines/actions/chargerActionQuiz.usecase';
@@ -74,10 +74,12 @@
     isLoading.value = true;
 
     const usecase = new ChargerActionUsecase(
-      new ChargerActionClassiqueUsecase(),
-      new ChargerActionQuizUsecase(),
-      new ChargerActionSimulateurUsecase(),
-      new ChargerActionBilanUsecase(),
+      new ChargerActionStrategyFactory(
+        new ChargerActionClassiqueUsecase(),
+        new ChargerActionQuizUsecase(),
+        new ChargerActionSimulateurUsecase(),
+        new ChargerActionBilanUsecase(),
+      ),
       new ActionsRepositoryAxios(),
       new ActionPresenterImpl(
         vm => (actionClassiqueViewModel.value = vm),
