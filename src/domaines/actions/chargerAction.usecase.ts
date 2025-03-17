@@ -1,3 +1,4 @@
+import { ChargerActionBilanUsecase } from '@/domaines/actions/chargerActionBilan.usecase';
 import { ChargerActionClassiqueUsecase } from '@/domaines/actions/chargerActionClassique.usecase';
 import { ChargerActionQuizUsecase } from '@/domaines/actions/chargerActionQuiz.usecase';
 import { ChargerActionSimulateurUsecase } from '@/domaines/actions/chargerActionSimulateur.usecase';
@@ -9,6 +10,7 @@ export class ChargerActionUsecase {
     private chargerActionClassique: ChargerActionClassiqueUsecase,
     private chargerActionQuiz: ChargerActionQuizUsecase,
     private chargerActionSimulateur: ChargerActionSimulateurUsecase,
+    private chargerActionBilan: ChargerActionBilanUsecase,
     private readonly actionsRepository: ActionsRepository,
     private readonly presenter: ActionPresenter,
   ) {}
@@ -22,6 +24,8 @@ export class ChargerActionUsecase {
       await this.chargerActionQuiz.execute(action, this.presenter);
     } else if (type === TypeAction.SIMULATEUR) {
       await this.chargerActionSimulateur.execute(action, this.presenter);
+    } else if (type === TypeAction.BILAN) {
+      await this.chargerActionBilan.execute(action, this.presenter);
     }
   }
 }

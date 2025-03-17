@@ -7,10 +7,13 @@ import { ChargerActionClassiqueUsecase } from '@/domaines/actions/chargerActionC
 import { ChargerActionQuizUsecase } from '@/domaines/actions/chargerActionQuiz.usecase';
 import { ChargerActionSimulateurUsecase } from '@/domaines/actions/chargerActionSimulateur.usecase';
 import { ReponseKYCSimple, ThematiqueQuestion } from '@/domaines/kyc/recupererQuestion.usecase';
+import { ChargerActionBilanUsecase } from '@/domaines/actions/chargerActionBilan.usecase';
+import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 
 describe("Fichier de tests concernant la récupération d'une action de type simulateur", () => {
   it("En donnant l'id d'une action, on devrait pouvoir récupérer son entiereté", async () => {
     const action: ActionDetail = {
+      thematique: ClefThematiqueAPI.alimentation,
       realisee: false,
       points: 30,
       consigne: 'Consigne',
@@ -106,11 +109,13 @@ describe("Fichier de tests concernant la récupération d'une action de type sim
       new ChargerActionClassiqueUsecase(),
       new ChargerActionQuizUsecase(),
       new ChargerActionSimulateurUsecase(),
+      new ChargerActionBilanUsecase(),
       ActionsRepositoryMock.avecActionDetail(action),
       new ActionPresenterImpl(
         () => {},
         () => {},
         expected,
+        () => {},
       ),
     );
     await usecase.execute('id-utilisateur', 'id-action', TypeAction.SIMULATEUR);

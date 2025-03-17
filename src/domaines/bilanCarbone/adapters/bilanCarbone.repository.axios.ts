@@ -1,6 +1,7 @@
 import { AxiosFactory, intercept401 } from '@/axios.factory';
 import { BilanCarboneRepository } from '@/domaines/bilanCarbone/ports/bilanCarbone.repository';
 import { BilanCarbone, ThematiqueBilan } from '@/domaines/bilanCarbone/recupererBilanCarbone.usecase';
+import { BilanThematique, DetailBilanThematique } from '@/domaines/bilanCarbone/recupererBilanDepuisThematique.usecase';
 import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 
 interface LienBilanThematiqueAPI_v3 {
@@ -51,6 +52,17 @@ interface BilanCarboneApiModel {
   };
 }
 
+interface BilanThematiqueApiModel {
+  thematique: string;
+  impact_kg_annee: number;
+  emoji: string;
+  details: {
+    label: string;
+    emoji: string;
+    impact_kg_annee: number;
+  }[];
+}
+
 export class BilanCarboneRepositoryAxios implements BilanCarboneRepository {
   @intercept401()
   async recupererBilanCarbone(utilisateurId: string): Promise<BilanCarbone> {
@@ -88,6 +100,19 @@ export class BilanCarboneRepositoryAxios implements BilanCarboneRepository {
       },
       thematiquesBilan: reponse.data.liens_bilans_thematique.map(lien => this.determineThematiqueBilan(lien)),
     };
+  }
+
+  @intercept401()
+  async recupererBilanDepuisThematique(idUtilisateur: string, thematique: ClefThematiqueAPI): Promise<BilanThematique> {
+    const axiosInstance = AxiosFactory.getAxios();
+    const reponse = await axiosInstance.get<BilanThematiqueApiModel>(
+      `/utilisateurs/${idUtilisateur}/bilans/last_v3/${thematique}`,
+    );
+
+    return new BilanThematique(
+      reponse.data.impact_kg_annee,
+      reponse.data.details.map(detail => new DetailBilanThematique(detail.label, detail.emoji, detail.impact_kg_annee)),
+    );
   }
 
   private determineThematiqueBilan(liensBilansThematique: LienBilanThematiqueAPI_v3): ThematiqueBilan {

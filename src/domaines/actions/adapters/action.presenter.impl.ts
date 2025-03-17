@@ -1,4 +1,5 @@
 import {
+  ActionBilanViewModel,
   ActionClassiqueViewModel,
   ActionPresenter,
   ActionQuizzesViewModel,
@@ -10,37 +11,6 @@ import marked from '@/shell/actionMarkdownToHtml';
 import { buildUrl } from '@/shell/buildUrl';
 
 class ActionViewModelBuilder {
-  private static async buildCommonFields(action: ActionDetail) {
-    const [titre, sousTitre, introduction] = await Promise.all([
-      marked.parseInline(action.titre),
-      marked.parseInline(action.sousTitre ?? ''),
-      marked.parse(action.corps.introduction ?? ''),
-    ]);
-    return {
-      titre,
-      sousTitre,
-      introduction,
-      realisee: action.realisee,
-      nombreDeRealisations: action.nombreDeRealisations,
-      actionId: action.code,
-      points: action.points,
-      consigne: action.consigne,
-      labelCompteur: action.labelCompteur,
-    };
-  }
-
-  private static buildAides(aides: ActionDetail['aides']) {
-    return aides.map(aide => ({
-      titre: aide.titre,
-      titreUrl: buildUrl(aide.titre),
-      id: aide.id,
-      partenaireNom: aide.partenaireNom,
-      partenaireImg: aide.partenaireImg,
-      montantMaximum: aide.montantMaximum ? `${aide.montantMaximum}€` : undefined,
-      estGratuit: aide.estGratuit,
-    }));
-  }
-
   static async buildClassique(action: ActionDetail): Promise<ActionClassiqueViewModel> {
     const common = await this.buildCommonFields(action);
     const [astuces, faq] = await Promise.all([
@@ -102,6 +72,49 @@ class ActionViewModelBuilder {
       kycs: action.kycs.map(kyc => QuestionViewModelBuilder.buildFromQuestion(kyc)),
     };
   }
+
+  static async buildBilan(action: ActionDetail): Promise<ActionBilanViewModel> {
+    const common = await this.buildCommonFields(action);
+    return {
+      ...common,
+      titreAffiche: common.titre,
+      aides: this.buildAides(action.aides),
+      recommandations: action.recommandations,
+      kycs: action.kycs.map(kyc => QuestionViewModelBuilder.buildFromQuestion(kyc)),
+      thematique: action.thematique,
+    };
+  }
+
+  private static async buildCommonFields(action: ActionDetail) {
+    const [titre, sousTitre, introduction] = await Promise.all([
+      marked.parseInline(action.titre),
+      marked.parseInline(action.sousTitre ?? ''),
+      marked.parse(action.corps.introduction ?? ''),
+    ]);
+    return {
+      titre,
+      sousTitre,
+      introduction,
+      realisee: action.realisee,
+      nombreDeRealisations: action.nombreDeRealisations,
+      actionId: action.code,
+      points: action.points,
+      consigne: action.consigne,
+      labelCompteur: action.labelCompteur,
+    };
+  }
+
+  private static buildAides(aides: ActionDetail['aides']) {
+    return aides.map(aide => ({
+      titre: aide.titre,
+      titreUrl: buildUrl(aide.titre),
+      id: aide.id,
+      partenaireNom: aide.partenaireNom,
+      partenaireImg: aide.partenaireImg,
+      montantMaximum: aide.montantMaximum ? `${aide.montantMaximum}€` : undefined,
+      estGratuit: aide.estGratuit,
+    }));
+  }
 }
 
 export class ActionPresenterImpl implements ActionPresenter {
@@ -109,6 +122,7 @@ export class ActionPresenterImpl implements ActionPresenter {
     private readonly actionClassiqueViewModel: (viewModel: ActionClassiqueViewModel) => void,
     private readonly actionQuizViewModel: (viewModel: ActionQuizzesViewModel) => void,
     private readonly actionSimulateurViewModel: (viewModel: ActionSimulateurViewModel) => void,
+    private readonly actionBilanViewModel: (viewModel: ActionBilanViewModel) => void,
   ) {}
 
   async presenteActionClassique(action: ActionDetail) {
@@ -121,5 +135,9 @@ export class ActionPresenterImpl implements ActionPresenter {
 
   async presenteActionSimulateur(action: ActionDetail) {
     this.actionSimulateurViewModel(await ActionViewModelBuilder.buildSimulateur(action));
+  }
+
+  async presenteActionBilan(action: ActionDetail) {
+    this.actionBilanViewModel(await ActionViewModelBuilder.buildBilan(action));
   }
 }

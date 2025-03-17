@@ -1,5 +1,5 @@
 <template>
-  <div class="border fr-px-3w fr-pt-1w fr-pb-3w" v-if="kycs && kycs.length > 0 && !afficherFinKyc">
+  <div v-if="kycs && kycs.length > 0 && !afficherFinKyc" class="border fr-px-3w fr-pt-1w fr-pb-3w">
     <template v-for="(questionViewModel, index) in questionsViewModel" :key="index">
       <div v-if="index === etapeCourante">
         <p class="text--bleu fr-grid-row align-items--center fr-py-2w">
@@ -24,7 +24,7 @@
     </template>
   </div>
 
-  <slot name="fin" v-if="afficherFinKyc" />
+  <slot v-if="afficherFinKyc" name="fin" />
 </template>
 
 <script lang="ts" setup>
@@ -37,10 +37,14 @@
   import { ListeQuestionsDansLeSimulateurPresenterImpl } from '@/domaines/kyc/adapters/listeQuestionsDansLeSimulateur.presenter.impl';
   import { QuestionViewModel } from '@/domaines/kyc/adapters/listeQuestionsThematique.presenter.impl';
   import { QuestionRepositoryAxios } from '@/domaines/kyc/adapters/question.repository.axios';
-  import { RecupererQuestionsSimulateurUsecase } from '@/domaines/kyc/recupererQuestionsSimulateur.usecase';
+  import { RecupererQuestionsKYCsUsecase } from '@/domaines/kyc/recupererQuestionsKYCsUsecase';
   import { utilisateurStore } from '@/store/utilisateur';
 
-  const props = defineProps<{ kycs: QuestionViewModel[]; actionId: string }>();
+  const props = defineProps<{
+    kycs: QuestionViewModel[];
+    actionId: string;
+    typeAction: TypeAction;
+  }>();
 
   const emit = defineEmits<{
     (e: 'finKycAtteinte'): void;
@@ -52,10 +56,11 @@
   const afficherFinKyc = ref<boolean>(false);
 
   async function chargerQuestionsSuivantes() {
-    const usecase = new RecupererQuestionsSimulateurUsecase(new QuestionRepositoryAxios());
+    const usecase = new RecupererQuestionsKYCsUsecase(new QuestionRepositoryAxios());
     await usecase.execute(
       utilisateurStore().utilisateur.id,
       props.actionId,
+      props.typeAction,
       new ListeQuestionsDansLeSimulateurPresenterImpl(vm => (questionsViewModel.value = vm)),
     );
   }
@@ -71,7 +76,7 @@
         new ActionsRepositoryAxios(),
         ActionsEventBus.getInstance(),
       );
-      await terminerActionUsecase.execute(utilisateurStore().utilisateur.id, props.actionId, TypeAction.SIMULATEUR);
+      await terminerActionUsecase.execute(utilisateurStore().utilisateur.id, props.actionId, props.typeAction);
     }
   };
 </script>

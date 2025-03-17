@@ -6,10 +6,13 @@ import { ActionDetail, TypeAction } from '@/domaines/actions/ports/actions.repos
 import { ChargerActionClassiqueUsecase } from '@/domaines/actions/chargerActionClassique.usecase';
 import { ChargerActionQuizUsecase } from '@/domaines/actions/chargerActionQuiz.usecase';
 import { ChargerActionSimulateurUsecase } from '@/domaines/actions/chargerActionSimulateur.usecase';
+import { ChargerActionBilanUsecase } from '@/domaines/actions/chargerActionBilan.usecase';
+import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 
 describe("Fichier de tests concernant la récupération d'une action de type classique", () => {
   it("En donnant l'id d'une action, on devrait pouvoir récupérer son entiereté", async () => {
     const action: ActionDetail = {
+      thematique: ClefThematiqueAPI.alimentation,
       kycs: [],
       realisee: false,
       points: 100,
@@ -106,9 +109,11 @@ describe("Fichier de tests concernant la récupération d'une action de type cla
       new ChargerActionClassiqueUsecase(),
       new ChargerActionQuizUsecase(),
       new ChargerActionSimulateurUsecase(),
+      new ChargerActionBilanUsecase(),
       ActionsRepositoryMock.avecActionDetail(action),
       new ActionPresenterImpl(
         expected,
+        () => {},
         () => {},
         () => {},
       ),

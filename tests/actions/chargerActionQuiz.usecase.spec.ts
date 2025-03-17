@@ -8,10 +8,12 @@ import { ChargerActionQuizUsecase } from '@/domaines/actions/chargerActionQuiz.u
 import { QuizDifficulte } from '@/domaines/quiz/ports/quiz.repository';
 import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 import { ChargerActionSimulateurUsecase } from '@/domaines/actions/chargerActionSimulateur.usecase';
+import { ChargerActionBilanUsecase } from '@/domaines/actions/chargerActionBilan.usecase';
 
 describe("Fichier de tests concernant la récupération d'une action de type quiz", () => {
   it("En donnant l'id d'une action, on devrait pouvoir récupérer son entiereté", async () => {
     const action: ActionDetail = {
+      thematique: ClefThematiqueAPI.alimentation,
       realisee: false,
       points: 20,
       aides: [],
@@ -111,10 +113,12 @@ describe("Fichier de tests concernant la récupération d'une action de type qui
       new ChargerActionClassiqueUsecase(),
       new ChargerActionQuizUsecase(),
       new ChargerActionSimulateurUsecase(),
+      new ChargerActionBilanUsecase(),
       ActionsRepositoryMock.avecActionDetail(action),
       new ActionPresenterImpl(
         () => {},
         expected,
+        () => {},
         () => {},
       ),
     );
