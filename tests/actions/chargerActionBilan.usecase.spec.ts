@@ -1,7 +1,7 @@
 import { ChargerActionStrategyFactory, ChargerActionUsecase } from '@/domaines/actions/chargerAction.usecase';
 import { ActionsRepositoryMock } from './adapters/actions.repository.mock';
 import { ActionPresenterImpl } from '@/domaines/actions/adapters/action.presenter.impl';
-import { ActionSimulateurViewModel } from '@/domaines/actions/ports/action.presenter';
+import { ActionBilanViewModel } from '@/domaines/actions/ports/action.presenter';
 import { ActionDetail, TypeAction } from '@/domaines/actions/ports/actions.repository';
 import { ChargerActionClassiqueUsecase } from '@/domaines/actions/chargerActionClassique.usecase';
 import { ChargerActionQuizUsecase } from '@/domaines/actions/chargerActionQuiz.usecase';
@@ -10,14 +10,14 @@ import { ReponseKYCSimple, ThematiqueQuestion } from '@/domaines/kyc/recupererQu
 import { ChargerActionBilanUsecase } from '@/domaines/actions/chargerActionBilan.usecase';
 import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 
-describe("Fichier de tests concernant la récupération d'une action de type simulateur", () => {
+describe("Fichier de tests concernant la récupération d'une action de type bilan", () => {
   it("En donnant l'id d'une action, on devrait pouvoir récupérer son entiereté", async () => {
     const action: ActionDetail = {
       thematique: ClefThematiqueAPI.alimentation,
       realisee: false,
       points: 30,
       consigne: 'Consigne',
-      labelCompteur: '100 simulateurs réalisés',
+      labelCompteur: '100 bilans réalisés',
       kycs: [
         {
           id: 'questionId',
@@ -71,18 +71,16 @@ describe("Fichier de tests concernant la récupération d'une action de type sim
         },
       ],
       quizzFelicitations: '',
-      code: 'id-action-simulateur-test',
+      code: 'id-action-bilan-test',
       nombreDeRealisations: 40,
       nombreAidesDisponibles: 0,
-      type: TypeAction.SIMULATEUR,
-      titre: '**Simulateur voiture**',
+      type: TypeAction.BILAN,
+      titre: '**Bilan logement**',
       quizzes: [],
-      sousTitre:
-        'Quelle voiture allez-vous adopter ? Faites le test pour découvrir la voiture qui vous correspond le mieux !',
+      sousTitre: 'Bilan logement sous titre',
       commune: 'Noisiel',
       corps: {
-        introduction:
-          '## En **quelques mots**\n\n-, Pourquoi est-ce important de bien choisir sa voiture ?\n-, Comment choisir une voiture qui correspond à vos besoins ?\n-, Quels sont les critères à prendre en compte pour choisir une voiture ?',
+        introduction: '## En **quelques mots**\n\n-, Pourquoi est-ce important de faire son bilan ?',
         astuces: '',
       },
       recommandations: [
@@ -116,26 +114,23 @@ describe("Fichier de tests concernant la récupération d'une action de type sim
       new ActionPresenterImpl(
         () => {},
         () => {},
-        expected,
         () => {},
+        expected,
       ),
     );
-    await usecase.execute('id-utilisateur', 'id-action', TypeAction.SIMULATEUR);
+    await usecase.execute('id-utilisateur', 'id-action', TypeAction.BILAN);
 
-    function expected(viewModel: ActionSimulateurViewModel): void {
-      expect(viewModel).toStrictEqual<ActionSimulateurViewModel>({
+    function expected(viewModel: ActionBilanViewModel): void {
+      expect(viewModel).toStrictEqual<ActionBilanViewModel>({
         realisee: false,
         points: 30,
         consigne: 'Consigne',
-        labelCompteur: '100 simulateurs réalisés',
+        labelCompteur: '100 bilans réalisés',
         nombreDeRealisations: 40,
-        titre: '<span class="text--bold">Simulateur voiture</span>',
-        titreAffiche: 'Simulateur - <span class="text--bold">Simulateur voiture</span>',
-        sousTitre:
-          'Quelle voiture allez-vous adopter ? Faites le test pour découvrir la voiture qui vous correspond le mieux !',
-        introduction: `<h2>En <span class="text--bold">quelques mots</span></h2><p>-, Pourquoi est-ce important de bien choisir sa voiture ?
--, Comment choisir une voiture qui correspond à vos besoins ?
--, Quels sont les critères à prendre en compte pour choisir une voiture ?</p>
+        titre: '<span class="text--bold">Bilan logement</span>',
+        titreAffiche: '<span class="text--bold">Bilan logement</span>',
+        sousTitre: 'Bilan logement sous titre',
+        introduction: `<h2>En <span class="text--bold">quelques mots</span></h2><p>-, Pourquoi est-ce important de faire son bilan ?</p>
 `,
         recommandations: [
           {
@@ -205,7 +200,8 @@ describe("Fichier de tests concernant la récupération d'une action de type sim
               "Ces informations permettent à <span class='text--italic'>J'agis</span> de mieux vous conseiller en matière de mobilité",
           },
         ],
-        actionId: 'id-action-simulateur-test',
+        actionId: 'id-action-bilan-test',
+        thematique: ClefThematiqueAPI.alimentation,
       });
     }
   });

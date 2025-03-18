@@ -2,11 +2,15 @@
   <section class="background--white fr-p-2w fr-mb-3w shadow">
     <ActionIntroduction :introduction="actionSimulateurViewModel.introduction" />
 
-    <SimulationAction :kycs="actionSimulateurViewModel.kycs" :action-id="actionSimulateurViewModel.actionId">
+    <KyCsAction
+      :action-id="actionSimulateurViewModel.actionId"
+      :kycs="actionSimulateurViewModel.kycs"
+      :type-action="TypeAction.SIMULATEUR"
+    >
       <template v-slot:fin>
         <SimulationResultatVoiture v-if="actionSimulateurViewModel.actionId === 'action_simulateur_voiture'" />
       </template>
-    </SimulationAction>
+    </KyCsAction>
 
     <ActionAides :aides="actionSimulateurViewModel.aides" />
   </section>
@@ -16,8 +20,9 @@
   import ActionAides from '@/components/custom/Action/composants/ActionAides.vue';
   import ActionIntroduction from '@/components/custom/Action/composants/ActionIntroduction.vue';
   import SimulationResultatVoiture from '@/components/custom/Action/SimulationResultatVoiture.vue';
-  import SimulationAction from '@/components/custom/KYC/SimulationAction.vue';
+  import KyCsAction from '@/components/custom/KYC/KYCsAction.vue';
   import { ActionSimulateurViewModel } from '@/domaines/actions/ports/action.presenter';
+  import { TypeAction } from '@/domaines/actions/ports/actions.repository';
 
   defineProps<{ actionSimulateurViewModel: ActionSimulateurViewModel }>();
 </script>

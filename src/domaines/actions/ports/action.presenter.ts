@@ -1,6 +1,7 @@
 import { ActionDetail } from '@/domaines/actions/ports/actions.repository';
 import { QuestionViewModel } from '@/domaines/kyc/adapters/listeQuestionsThematique.presenter.impl';
 import { ArticleDuQuiz } from '@/domaines/quiz/ports/quiz.repository';
+import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 
 export interface ActionPresenter {
   presenteActionClassique(action: ActionDetail): void;
@@ -8,6 +9,8 @@ export interface ActionPresenter {
   presenteActionQuiz(action: ActionDetail): void;
 
   presenteActionSimulateur(action: ActionDetail): void;
+
+  presenteActionBilan(action: ActionDetail): void;
 }
 
 export interface ActionBaseViewModel {
@@ -40,6 +43,12 @@ export interface ActionQuizzesViewModel extends ActionBaseViewModel {
 export interface ActionSimulateurViewModel extends ActionBaseViewModel {
   aides: ActionAideViewModel[];
   kycs: QuestionViewModel[];
+}
+
+export interface ActionBilanViewModel extends ActionBaseViewModel {
+  aides: ActionAideViewModel[];
+  kycs: QuestionViewModel[];
+  thematique: ClefThematiqueAPI;
 }
 
 export interface ActionQuizViewModel {

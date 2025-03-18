@@ -1,14 +1,43 @@
+import { ChargerActionBilanUsecase } from '@/domaines/actions/chargerActionBilan.usecase';
 import { ChargerActionClassiqueUsecase } from '@/domaines/actions/chargerActionClassique.usecase';
 import { ChargerActionQuizUsecase } from '@/domaines/actions/chargerActionQuiz.usecase';
 import { ChargerActionSimulateurUsecase } from '@/domaines/actions/chargerActionSimulateur.usecase';
 import { ActionPresenter } from '@/domaines/actions/ports/action.presenter';
-import { ActionsRepository, TypeAction } from '@/domaines/actions/ports/actions.repository';
+import { ActionDetail, ActionsRepository, TypeAction } from '@/domaines/actions/ports/actions.repository';
+
+export interface ChargerActionStrategy {
+  execute(action: ActionDetail, presenter: ActionPresenter): Promise<void>;
+}
+
+export class ChargerActionStrategyFactory {
+  private readonly strategies: Record<TypeAction, ChargerActionStrategy>;
+
+  constructor(
+    chargerActionClassique: ChargerActionClassiqueUsecase,
+    chargerActionQuiz: ChargerActionQuizUsecase,
+    chargerActionSimulateur: ChargerActionSimulateurUsecase,
+    chargerActionBilan: ChargerActionBilanUsecase,
+  ) {
+    this.strategies = {
+      [TypeAction.CLASSIQUE]: chargerActionClassique,
+      [TypeAction.QUIZZ]: chargerActionQuiz,
+      [TypeAction.SIMULATEUR]: chargerActionSimulateur,
+      [TypeAction.BILAN]: chargerActionBilan,
+    };
+  }
+
+  getStrategy(type: TypeAction): ChargerActionStrategy {
+    const strategy = this.strategies[type];
+    if (!strategy) {
+      throw new Error(`Aucune stratégie trouvée pour le type d'action : ${type}`);
+    }
+    return this.strategies[type];
+  }
+}
 
 export class ChargerActionUsecase {
   constructor(
-    private chargerActionClassique: ChargerActionClassiqueUsecase,
-    private chargerActionQuiz: ChargerActionQuizUsecase,
-    private chargerActionSimulateur: ChargerActionSimulateurUsecase,
+    private readonly strategyFactory: ChargerActionStrategyFactory,
     private readonly actionsRepository: ActionsRepository,
     private readonly presenter: ActionPresenter,
   ) {}
@@ -16,12 +45,7 @@ export class ChargerActionUsecase {
   async execute(idUtilisateur: string, actionId: string, type: string): Promise<void> {
     const typeAction = type as TypeAction;
     const action = await this.actionsRepository.chargerAction(idUtilisateur, actionId, typeAction);
-    if (type === TypeAction.CLASSIQUE) {
-      await this.chargerActionClassique.execute(action, this.presenter);
-    } else if (type === TypeAction.QUIZZ) {
-      await this.chargerActionQuiz.execute(action, this.presenter);
-    } else if (type === TypeAction.SIMULATEUR) {
-      await this.chargerActionSimulateur.execute(action, this.presenter);
-    }
+    const strategy = this.strategyFactory.getStrategy(typeAction);
+    await strategy.execute(action, this.presenter);
   }
 }

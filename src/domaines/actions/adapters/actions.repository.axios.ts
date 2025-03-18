@@ -2,9 +2,9 @@ import { AxiosFactory, intercept401 } from '@/axios.factory';
 import {
   Action,
   ActionDetail,
-  DetailThematique,
   ActionsRepository,
   CatalogueActions,
+  DetailThematique,
   TypeAction,
 } from '@/domaines/actions/ports/actions.repository';
 import { QuestionApiModel } from '@/domaines/kyc/adapters/question.repository.axios';
@@ -52,6 +52,7 @@ interface ActionDetailApiModel {
     reponse: string;
   }[];
   kycs: QuestionApiModel[];
+  thematique: string;
 }
 
 interface CatalogueActionsApiModel {
@@ -130,6 +131,7 @@ export class ActionsRepositoryAxios implements ActionsRepository {
         reponse: faq.reponse,
       })),
       kycs: response.data.kycs.map((question: QuestionApiModel) => this.mapQuestionApiModelToQuestion(question)),
+      thematique: response.data.thematique as ClefThematiqueAPI,
     };
   }
 
@@ -194,6 +196,12 @@ export class ActionsRepositoryAxios implements ActionsRepository {
     };
   }
 
+  @intercept401()
+  async terminerAction(idUtilisateur: string, idAction: string, typeAction: TypeAction): Promise<void> {
+    const axios = AxiosFactory.getAxios();
+    await axios.post(`/utilisateurs/${idUtilisateur}/actions/${typeAction}/${idAction}/faite`);
+  }
+
   private mapActionApiModelToAction(action: ActionApiModel): Action {
     return {
       code: action.code,
@@ -255,11 +263,5 @@ export class ActionsRepositoryAxios implements ActionsRepository {
         reponse: [question.reponse_unique.value],
       } as ReponseKYCSimple;
     }
-  }
-
-  @intercept401()
-  async terminerAction(idUtilisateur: string, idAction: string, typeAction: TypeAction): Promise<void> {
-    const axios = AxiosFactory.getAxios();
-    await axios.post(`/utilisateurs/${idUtilisateur}/actions/${typeAction}/${idAction}/faite`);
   }
 }

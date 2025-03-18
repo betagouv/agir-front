@@ -1,7 +1,9 @@
 <template>
-  <div class="background--white fr-p-2w shadow fr-mb-2w">
-    <slot />
-  </div>
+  <aside>
+    <div class="background--white fr-p-2w shadow fr-mb-2w">
+      <slot />
+    </div>
+  </aside>
 </template>
 
 <script lang="ts" setup>

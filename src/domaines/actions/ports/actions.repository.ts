@@ -56,6 +56,7 @@ export interface ActionDetail {
   aides: ActionAide[];
   faq: ActionFAQ[];
   kycs: Question[];
+  thematique: ClefThematiqueAPI;
 }
 
 export enum TypeAction {

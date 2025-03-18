@@ -1,10 +1,10 @@
 <template>
   <ActionAsideAFaire
     v-if="!estRealise"
-    sous-titre="Terminez votre simulateur et gagnez"
+    sous-titre="Terminez votre bilan et gagnez"
     :points="actionBaseViewModel.points"
   />
-  <ActionAsideRealisee v-else sous-titre="Vous avez réalisé votre simulateur" :points="actionBaseViewModel.points" />
+  <ActionAsideRealisee v-else sous-titre="Vous avez réalisé votre bilan" :points="actionBaseViewModel.points" />
 
   <template v-if="nombreActionRealise > 0">
     <hr />
@@ -12,7 +12,7 @@
     <p class="fr-mb-1w">
       <span class="text--bold">
         {{ nombreActionRealise }}
-        {{ gererPluriel(nombreActionRealise, 'simulation terminée', 'simulations terminées') }}
+        {{ gererPluriel(nombreActionRealise, 'bilan terminé', 'bilans terminés') }}
       </span>
       par la communauté
     </p>
@@ -34,13 +34,14 @@
   const estRealise = ref<boolean>(props.actionBaseViewModel.realisee);
   const nombreActionRealise = ref<number>(props.actionBaseViewModel.nombreDeRealisations);
 
-  ActionsEventBus.getInstance().subscribe('ActionAsideSimulateur', ActionsEvent.A_ETE_REALISEE, () => {
+  ActionsEventBus.getInstance().subscribe('ActionAsideBilan', ActionsEvent.A_ETE_REALISEE, () => {
     if (estRealise.value) return;
+
     estRealise.value = true;
     nombreActionRealise.value = nombreActionRealise.value + 1;
   });
 
   onUnmounted(() => {
-    ActionsEventBus.getInstance().unsubscribeToAllEvents('ActionAsideSimulateur');
+    ActionsEventBus.getInstance().unsubscribeToAllEvents('ActionAsideBilan');
   });
 </script>
