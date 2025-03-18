@@ -24,6 +24,10 @@ interface AideApiModel {
   derniere_maj: string;
 }
 
+interface CMSAideApiModel {
+  aide: AideApiModel;
+}
+
 export class ChargementAidesAxiosRepository implements ChargementAidesRepository {
   @intercept401()
   async getAides(utilisateurId: string): Promise<Aides> {
@@ -94,7 +98,7 @@ export class ChargementAidesAxiosRepository implements ChargementAidesRepository
   }
 
   @intercept401()
-  async previsualiser(idAide: string): Promise<Aide> {
+  async consulterEnModeNonConnecte(idAide: string): Promise<Aide> {
     const axios = AxiosFactory.getAxios();
     const aide = await axios.get<AideApiModel>(`/aides/${idAide}`);
     return {
@@ -115,6 +119,30 @@ export class ChargementAidesAxiosRepository implements ChargementAidesRepository
           }
         : undefined,
       derniereMaj: aide.data.derniere_maj,
+    };
+  }
+
+  async previsualiser(idAide: string): Promise<Aide> {
+    const axios = AxiosFactory.getAxios();
+    const reponse = await axios.get<CMSAideApiModel>(`/cms_preview/aides/${idAide}`);
+    return {
+      id: reponse.data.aide.content_id,
+      titre: reponse.data.aide.titre,
+      categorie: reponse.data.aide.thematiques_label[0],
+      thematique: reponse.data.aide.thematiques[0] as ClefThematiqueAPI,
+      contenu: reponse.data.aide.contenu,
+      url: reponse.data.aide.url_simulateur,
+      isSimulateur: reponse.data.aide.is_simulateur,
+      montantMaximum: reponse.data.aide.montant_max,
+      urlCommencerVotreDemarche: reponse.data.aide.url_demande,
+      estGratuit: reponse.data.aide.est_gratuit,
+      partenaire: reponse.data.aide.partenaire_logo_url
+        ? {
+            logoUrl: reponse.data.aide.partenaire_logo_url!,
+            nom: reponse.data.aide.partenaire_nom!,
+          }
+        : undefined,
+      derniereMaj: reponse.data.aide.derniere_maj,
     };
   }
 

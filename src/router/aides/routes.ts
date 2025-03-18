@@ -1,16 +1,18 @@
 import { RouteRecordRaw } from 'vue-router';
-import PagePrevisualisationAide from '@/components/pages/PagePrevisualisationAide.vue';
+
 import { RouteAidesName } from '@/router/aides/routeAidesName';
 
 const PageAidesVelo = () => import('@/components/pages/PageAidesVelo.vue');
 const PageAides = () => import('@/components/pages/PageAides.vue');
 const PageAidesVeloFormulaire = () => import('@/components/pages/PageAidesVeloFormulaire.vue');
+const PageDetailAide = () => import('@/components/pages/PageDetailAide.vue');
+const PagePrevisualisationAide = () => import('@/components/pages/PagePrevisualisationAide.vue');
 
 export enum RouteAidesPath {
   AIDES = '/aides',
   FORMULAIRE = 'formulaire',
   VELO = 'velo',
-  AIDE_PREVISUALISATION = 'previsualisation/:id',
+  AIDE_PREVISUALISATION = '/aides/previsualisation/:id',
   AIDE = '/aide/:titre/:id',
 }
 
@@ -49,17 +51,17 @@ const aidesRoutes: RouteRecordRaw[] = [
           },
         ],
       },
-      {
-        path: RouteAidesPath.AIDE_PREVISUALISATION,
-        name: RouteAidesName.AIDE_PREVISUALISATION,
-        component: PagePrevisualisationAide,
-        meta: { estPublique: true },
-      },
     ],
   },
   {
     path: RouteAidesPath.AIDE,
     name: RouteAidesName.AIDE_CONSULTATION,
+    component: PageDetailAide,
+    meta: { estPublique: true },
+  },
+  {
+    path: RouteAidesPath.AIDE_PREVISUALISATION,
+    name: RouteAidesName.AIDE_PREVISUALISATION,
     component: PagePrevisualisationAide,
     meta: { estPublique: true },
   },

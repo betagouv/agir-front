@@ -147,11 +147,15 @@ class ChargementAidesRepositoryForTest implements ChargementAidesRepository {
     throw Error;
   }
 
-  previsualiser(idAide: string): Promise<Aide> {
+  consulterEnModeNonConnecte(idAide: string): Promise<Aide> {
     throw Error;
   }
 
   recupererDetailAide(utilisateurId: string, idAide: string): Promise<Aide> {
+    throw Error;
+  }
+
+  previsualiser(idAide: string): Promise<Aide> {
     throw Error;
   }
 }
