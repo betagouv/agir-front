@@ -1,7 +1,22 @@
 <template>
-  <section></section>
+  <div class="root fr-container flex flex-column flex-center fr-pt-10w fr-pb-16w">
+    <h2 class="text--white text--center flex flex-column flex-center align-items--center">
+      <Compteur :compte="aidesNationalesRealisees ?? 0" />
+      <span class="fr-mt-4w">Actions réalisées ensemble partout en France</span>
+    </h2>
+  </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+  import Compteur from '@/components/custom/AccueilConnectee/Compteur.vue';
 
-<style scoped></style>
+  defineProps<{ aidesNationalesRealisees?: number }>();
+</script>
+
+<style scoped>
+  .root {
+    background-image: url('/public/mains-accueil-connecte.svg');
+    background-repeat: no-repeat;
+    background-position: bottom center;
+  }
+</style>

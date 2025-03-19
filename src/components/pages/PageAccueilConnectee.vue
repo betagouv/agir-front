@@ -11,7 +11,10 @@
     <Raccourcis :commune="accueilConnecteViewModel?.commune" :liste-raccourcis="accueilConnecteViewModel?.raccourcis" />
   </section>
 
-  <CompteurActionsNationales />
+  <section class="background--vert">
+    <CompteurActionsNationales :aides-nationales-realisees="accueilConnecteViewModel?.totalActionsRealisees" />
+  </section>
+
   <ArticlesRecommandees />
 </template>
 
