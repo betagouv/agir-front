@@ -1,14 +1,15 @@
 import { ResumeThematique } from '@/domaines/actions/ports/actions.repository';
 
-export interface Raccourci {
+export interface RaccourciViewModel {
   to?: RouterLinkParams;
   label: string;
   href?: string;
+  emoji?: string;
 }
 
 export interface ThematiqueResumeViewModel {
   commune: string;
-  listeRaccourcis: Raccourci[];
+  listeRaccourcis: RaccourciViewModel[];
 }
 
 export interface RouterLinkParams {

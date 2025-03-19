@@ -1,12 +1,17 @@
 <template>
-  <div class="fr-container fr-py-14w">
-    <h2>Agir à <span class="fr-icon-map-pin-2-fill"></span>{{ commune }}</h2>
+  <div class="fr-container fr-py-15w">
+    <h2>Agir à <span class="fr-icon-map-pin-2-fill"></span>{{ commune || '' }}</h2>
     <p>D’après nos calculs, voici ce que nous pouvons vous proposer :</p>
+
+    <ListeRaccourcis v-if="props.listeRaccourcis" :liste-raccourcis="props.listeRaccourcis" />
   </div>
 </template>
 
 <script setup lang="ts">
-  defineProps<{ commune?: string }>();
+  import ListeRaccourcis from '@/components/custom/Thematiques/ListeRaccourcis.vue';
+  import { RaccourciViewModel } from '@/domaines/thematiques/ports/thematiqueResume.presenter';
+
+  const props = defineProps<{ commune?: string; listeRaccourcis?: RaccourciViewModel[] }>();
 </script>
 
 <style scoped>

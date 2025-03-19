@@ -1,20 +1,15 @@
 import { AccueilConnecte } from '@/domaines/accueilConnecte/ports/accueilConnecte.repository';
+import { RaccourciViewModel } from '@/domaines/thematiques/ports/thematiqueResume.presenter';
 
 type ProgressionViewModel = {
   nombreActionsTerminees: number;
   pourcentageCompletionBilan: number;
 };
 
-type RaccourcisViewModel = {
-  label: string;
-  emoji: string;
-  lien: string;
-};
-
 export interface AccueilConnecteViewModel {
   commune: string;
   progression: ProgressionViewModel;
-  raccourcis: RaccourcisViewModel[];
+  raccourcis: RaccourciViewModel[];
   totalActionsRealisees: number;
 }
 

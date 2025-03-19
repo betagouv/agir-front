@@ -3,6 +3,8 @@ export type AccueilConnecte = {
   totalActionsNationalesFaites: number;
   totalActionsUtilisateurFaites: number;
   pourcentageCompletionBilan: number;
+  nombreAides: number;
+  nombreRecettes: number;
 };
 
 export interface AccueilConnecteRepository {
