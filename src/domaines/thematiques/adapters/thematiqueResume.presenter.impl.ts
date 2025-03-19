@@ -1,9 +1,10 @@
-import { ResumeThematique } from '@/domaines/actions/ports/actions.repository';
+import { ResumeThematique, TypeAction } from '@/domaines/actions/ports/actions.repository';
 import { ClefThematiqueAPI, MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
 import {
   ThematiqueResumePresenter,
   ThematiqueResumeViewModel,
 } from '@/domaines/thematiques/ports/thematiqueResume.presenter';
+import { RouteActionsName } from '@/router/actions/routes';
 import { RouteAidesName } from '@/router/aides/routeAidesName';
 import { RouteServiceName } from '@/router/services/routes';
 import { gererPluriel } from '@/shell/pluriel';
@@ -60,8 +61,15 @@ export class ThematiqueResumePresenterImpl implements ThematiqueResumePresenter 
 
     if (resumeThematique.thematique === ClefThematiqueAPI.transports) {
       listeRaccourcis.push({
-        href: 'https://jechangemavoiture.gouv.fr/jcmv/',
-        label: `1 simulateur Dois-je changer de voiture ?`,
+        label: '1 simulateur Dois-je changer de voiture ?',
+        to: {
+          name: RouteActionsName.ACTION_INDIVIDUELLE,
+          params: {
+            type: TypeAction.SIMULATEUR,
+            id: 'action_simulateur_voiture',
+            titre: 'trouver-le-type-de-voiture-qui-vous-convient-le-mieux',
+          },
+        },
       });
       listeRaccourcis.push({
         to: {
