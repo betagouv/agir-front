@@ -123,7 +123,7 @@
 
   .breaker-placeholder {
     background: white;
-    height: 10vh;
+    height: 7.5vh;
   }
 
   .marginBottomResponsive {
