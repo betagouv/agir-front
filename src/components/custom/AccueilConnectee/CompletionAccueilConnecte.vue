@@ -6,7 +6,7 @@
     <div class="fr-container full-height flex flex-column flex-center marginBottomResponsive fr-pb-md-5w contenu">
       <div class="fr-grid-row fr-grid-row--gutters fr-mb-5w">
         <div class="fr-col-12 fr-col-md-7">
-          <div class="fr-pt-3w fr-pt-md-0">
+          <div class="fr-pt-3w fr-pt-md-0 fr-m-3w">
             <h1 class="fr-h1 fr-mr-3w">Des solutions ensemble, pour la transition écologique</h1>
             <ul class="fr-grid-row fr-grid-row--gutters list-style-none fr-pl-0 fr-mb-2w fr-text--lg">
               <li class="fr-col-auto">
@@ -26,17 +26,19 @@
         </div>
 
         <div class="fr-col-12 fr-col-md-5">
-          <div class="background--white shadow fr-p-2w">
-            <h2 class="fr-h3 fr-mb-1w">Ma progression</h2>
+          <div class="background--white shadow fr-pb-2w">
+            <h2 class="fr-h3 fr-mb-1w fr-p-3w fr-pb-0">Ma progression</h2>
             <div class="fr-grid-row">
-              <div class="fr-col-6 fr-p-1w">
-                <p class="flex flex-column align-items--center fr-mb-1w text--center">
-                  <span class="gros-nombre">0</span> <span>Action terminée</span>
+              <div class="fr-col-6">
+                <p class="flex flex-column align-items--center fr-mb-1w text--center bordure-droite fr-mr-md-3v">
+                  <span class="gros-nombre">{{ progression?.nombreActionsTerminees || 0 }}</span>
+                  <span>Action terminée</span>
                 </p>
               </div>
-              <div class="fr-col-6 fr-p-1w flex flex-column align-items--center">
+              <div class="fr-col-6 flex flex-column align-items--center">
                 <p class="flex flex-column align-items--center fr-mb-3v text--center">
-                  <span class="gros-nombre">0%</span> <span>Mon bilan environnemental</span>
+                  <CercleProgression :pourcentage="progression?.pourcentageCompletionBilan || 0" class="fr-mb-1w" />
+                  <span>Mon bilan environnemental</span>
                 </p>
                 <a class="fr-link fr-link--icon-right fr-icon-arrow-right-line" href="">Compléter</a>
               </div>
@@ -50,6 +52,7 @@
 </template>
 
 <script setup lang="ts">
+  import CercleProgression from '@/components/custom/CercleProgression.vue';
   import { AccueilConnecteViewModel } from '@/domaines/accueilConnecte/ports/accueilConnecte.presenter';
 
   defineProps<{
@@ -103,7 +106,8 @@
   .gros-nombre {
     font-size: 2.5rem;
     font-weight: bold;
-    margin: 1.5rem 0;
+    margin-bottom: 2.5rem;
+    padding-top: 1.75rem;
   }
 
   .breaker {
@@ -121,5 +125,9 @@
 
   .contenu {
     min-height: 70vh;
+  }
+
+  .bordure-droite {
+    border-right: 2px solid #eaeaea;
   }
 </style>
