@@ -12,10 +12,10 @@ export class ThematiqueResumePresenterImpl implements ThematiqueResumePresenter 
   constructor(private readonly _informationsPourThematique: (viewModel: ThematiqueResumeViewModel) => void) {}
 
   async presente(resumeThematique: ResumeThematique): Promise<void> {
-    const listeInformations: ThematiqueResumeViewModel['listeInformations'] = [];
+    const listeRaccourcis: ThematiqueResumeViewModel['listeRaccourcis'] = [];
 
     if (resumeThematique.nbAides) {
-      listeInformations.push({
+      listeRaccourcis.push({
         to: {
           name: RouteAidesName.AIDES,
         },
@@ -24,7 +24,7 @@ export class ThematiqueResumePresenterImpl implements ThematiqueResumePresenter 
     }
 
     if (resumeThematique.thematique === ClefThematiqueAPI.alimentation) {
-      listeInformations.push({
+      listeRaccourcis.push({
         to: {
           name: RouteServiceName.RECETTES,
           params: {
@@ -33,7 +33,7 @@ export class ThematiqueResumePresenterImpl implements ThematiqueResumePresenter 
         },
         label: `1150 recettes délicieuses, saines et de saison`,
       });
-      listeInformations.push({
+      listeRaccourcis.push({
         to: {
           name: RouteServiceName.FRUITS_ET_LEGUMES,
           params: {
@@ -42,7 +42,7 @@ export class ThematiqueResumePresenterImpl implements ThematiqueResumePresenter 
         },
         label: `1 calendrier de fruits et légumes de saison`,
       });
-      listeInformations.push({
+      listeRaccourcis.push({
         to: {
           name: RouteServiceName.PROXIMITE,
           params: { thematiqueId: MenuThematiques.getThematiqueData(ClefThematiqueAPI.alimentation).url },
@@ -52,18 +52,18 @@ export class ThematiqueResumePresenterImpl implements ThematiqueResumePresenter 
     }
 
     if (resumeThematique.thematique === ClefThematiqueAPI.logement) {
-      listeInformations.push({
+      listeRaccourcis.push({
         href: 'https://mesaidesreno.beta.gouv.fr/',
         label: `1 simulateur Mes aides Rénovation`,
       });
     }
 
     if (resumeThematique.thematique === ClefThematiqueAPI.transports) {
-      listeInformations.push({
+      listeRaccourcis.push({
         href: 'https://jechangemavoiture.gouv.fr/jcmv/',
         label: `1 simulateur Dois-je changer de voiture ?`,
       });
-      listeInformations.push({
+      listeRaccourcis.push({
         to: {
           name: RouteAidesName.VELO,
         },
@@ -72,7 +72,7 @@ export class ThematiqueResumePresenterImpl implements ThematiqueResumePresenter 
     }
 
     if (resumeThematique.thematique === ClefThematiqueAPI.consommation) {
-      listeInformations.push({
+      listeRaccourcis.push({
         to: {
           name: RouteServiceName.LONGUE_VIE_AUX_OBJETS,
           params: { thematiqueId: MenuThematiques.getThematiqueData(ClefThematiqueAPI.consommation).url },
@@ -83,7 +83,7 @@ export class ThematiqueResumePresenterImpl implements ThematiqueResumePresenter 
 
     this._informationsPourThematique({
       commune: resumeThematique.commune,
-      listeInformations,
+      listeRaccourcis: listeRaccourcis,
     });
   }
 }
