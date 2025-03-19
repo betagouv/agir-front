@@ -53,15 +53,18 @@
     const articleRepositoryAxios = new ArticleRepositoryAxios();
     const utilisateurId = utilisateurStore().utilisateur.id;
 
-    new RecupererArticleUsecase(articleRepositoryAxios, new SessionRepositoryStore())
+    const sessionRepositoryStore = new SessionRepositoryStore();
+    new RecupererArticleUsecase(articleRepositoryAxios, sessionRepositoryStore)
       .execute(idArticle)
       .then(async article => {
         articleAAfficher.value = article;
-        await new PasserUnArticleCommeLuUsecase(articleRepositoryAxios, ToDoListEventBusImpl.getInstance()).execute(
-          idArticle,
-          utilisateurId,
-        );
         isLoading.value = false;
+        if (sessionRepositoryStore.estConnecte()) {
+          await new PasserUnArticleCommeLuUsecase(articleRepositoryAxios, ToDoListEventBusImpl.getInstance()).execute(
+            idArticle,
+            utilisateurId,
+          );
+        }
         document.title = `${article.titre as string} - J'agis`;
       })
       .catch(async () => {
