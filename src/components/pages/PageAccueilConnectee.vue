@@ -3,7 +3,7 @@
     <CompletionAccueilConnecte :progression="accueilConnecteViewModel?.progression" />
   </section>
 
-  <section>
+  <section class="background--white">
     <ThematiquesAccueilConnecte />
   </section>
   <Raccourcis />
