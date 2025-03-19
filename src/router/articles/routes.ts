@@ -1,4 +1,5 @@
 import { RouteRecordRaw } from 'vue-router';
+import actionsRoutes from '@/router/actions/routes';
 
 const PageArticle = () => import('@/components/pages/PageArticle.vue');
 const PagePrevisualisationArticle = () => import('@/components/pages/PagePrevisualisationArticle.vue');
@@ -21,12 +22,15 @@ const articlesRoutes: RouteRecordRaw[] = [
     component: PageArticle,
     meta: { estPublique: true },
   },
-  {
+];
+
+if (import.meta.env.VITE_ENV === 'dev') {
+  actionsRoutes.push({
     path: RouteArticlePath.ARTICLE_PREVISUALISATION,
     name: RouteArticleName.ARTICLE_PREVISUALISATION,
     component: PagePrevisualisationArticle,
     meta: { estPublique: true },
-  },
-];
+  });
+}
 
 export default articlesRoutes;
