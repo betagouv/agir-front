@@ -7,7 +7,10 @@
     <ThematiquesAccueilConnecte :commune="accueilConnecteViewModel?.commune" />
   </section>
 
-  <Raccourcis />
+  <section class="background--olive-clair">
+    <Raccourcis :commune="accueilConnecteViewModel?.commune" />
+  </section>
+
   <CompteurActionsNationales />
   <ArticlesRecommandees />
 </template>
@@ -35,3 +38,9 @@
     );
   });
 </script>
+
+<style>
+  .background--olive-clair {
+    background: #ecebe0;
+  }
+</style>

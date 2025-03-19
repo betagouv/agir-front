@@ -135,7 +135,7 @@ describe('Fichier de test concernant la récupération des actions personnalisé
         new ThematiqueResumePresenterImpl(vm => {
           expect(vm).toStrictEqual<ThematiqueResumeViewModel>({
             commune: 'Paris',
-            listeInformations: [
+            listeRaccourcis: [
               {
                 to: {
                   name: RouteAidesName.AIDES,
@@ -200,7 +200,7 @@ describe('Fichier de test concernant la récupération des actions personnalisé
         new ThematiqueResumePresenterImpl(vm => {
           expect(vm).toStrictEqual<ThematiqueResumeViewModel>({
             commune: 'Paris',
-            listeInformations: [
+            listeRaccourcis: [
               {
                 to: {
                   name: RouteAidesName.AIDES,
@@ -244,7 +244,7 @@ describe('Fichier de test concernant la récupération des actions personnalisé
         new ThematiqueResumePresenterImpl(vm => {
           expect(vm).toStrictEqual<ThematiqueResumeViewModel>({
             commune: 'Paris',
-            listeInformations: [
+            listeRaccourcis: [
               {
                 href: 'https://jechangemavoiture.gouv.fr/jcmv/',
                 label: `1 simulateur Dois-je changer de voiture ?`,
@@ -289,7 +289,7 @@ describe('Fichier de test concernant la récupération des actions personnalisé
         new ThematiqueResumePresenterImpl(vm => {
           expect(vm).toStrictEqual<ThematiqueResumeViewModel>({
             commune: 'Paris',
-            listeInformations: [
+            listeRaccourcis: [
               {
                 to: {
                   name: RouteAidesName.AIDES,
