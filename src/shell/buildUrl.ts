@@ -23,6 +23,7 @@ export function buildUrl(text: string): string {
   return text
     .toLowerCase()
     .trim()
+    .replace(/['’]/g, '-') // Remplace les apostrophes par des tirets
     .replace(/[^a-z0-9 -]/g, '') // Supprime les caractères non alphanumériques et non tirets
     .replace(/\s+/g, '-') // Remplace les espaces par des tirets
     .replace(/-+/g, '-'); // Remplace les tirets multiples par un seul tiret

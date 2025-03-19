@@ -11,7 +11,7 @@ export interface IndicationGeoArticleOuAideViewModel {
 export interface ViewModelWithUrl {
   url: {
     name: string;
-    params: { id: number };
+    params: { id: number; titre: string };
   };
 }
 

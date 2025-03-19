@@ -145,9 +145,10 @@ describe("Fichier de test du usecase de récupération des données collectivit�
                 titre: 'Aide régionale pour la consommation',
                 indicationGeographique: 'Hauts-de-France',
                 url: {
-                  name: 'aide-previsualisation',
+                  name: 'aide-consultation',
                   params: {
                     id: 9,
+                    titre: 'aide-regionale-pour-la-consommation',
                   },
                 },
               },
@@ -157,9 +158,10 @@ describe("Fichier de test du usecase de récupération des données collectivit�
                 titre: 'Aide départementale pour la consommation',
                 indicationGeographique: 'Pas-De-Calais',
                 url: {
-                  name: 'aide-previsualisation',
+                  name: 'aide-consultation',
                   params: {
                     id: 15,
+                    titre: 'aide-departementale-pour-la-consommation',
                   },
                 },
               },
@@ -169,9 +171,10 @@ describe("Fichier de test du usecase de récupération des données collectivit�
                 titre: 'Aide locale pour la consommation',
                 indicationGeographique: 'Lillers',
                 url: {
-                  name: 'aide-previsualisation',
+                  name: 'aide-consultation',
                   params: {
                     id: 20,
+                    titre: 'aide-locale-pour-la-consommation',
                   },
                 },
               },
@@ -186,6 +189,7 @@ describe("Fichier de test du usecase de récupération des données collectivit�
                   name: 'article-previsualisation',
                   params: {
                     id: 25,
+                    titre: 'article-regional-pour-la-consommation',
                   },
                 },
               },
@@ -198,6 +202,7 @@ describe("Fichier de test du usecase de récupération des données collectivit�
                   name: 'article-previsualisation',
                   params: {
                     id: 30,
+                    titre: 'article-departemental-pour-la-consommation',
                   },
                 },
               },
@@ -210,6 +215,7 @@ describe("Fichier de test du usecase de récupération des données collectivit�
                   name: 'article-previsualisation',
                   params: {
                     id: 35,
+                    titre: 'article-local-pour-la-consommation',
                   },
                 },
               },
@@ -226,9 +232,10 @@ describe("Fichier de test du usecase de récupération des données collectivit�
                 titre: "Aide nationale pour l'alimentation",
                 indicationGeographique: '🇫🇷',
                 url: {
-                  name: 'aide-previsualisation',
+                  name: 'aide-consultation',
                   params: {
                     id: 4,
+                    titre: 'aide-nationale-pour-l-alimentation',
                   },
                 },
               },
@@ -238,9 +245,10 @@ describe("Fichier de test du usecase de récupération des données collectivit�
                 titre: "Aide régionale pour l'alimentation",
                 indicationGeographique: 'Hauts-de-France',
                 url: {
-                  name: 'aide-previsualisation',
+                  name: 'aide-consultation',
                   params: {
                     id: 8,
+                    titre: 'aide-regionale-pour-l-alimentation',
                   },
                 },
               },
@@ -250,9 +258,10 @@ describe("Fichier de test du usecase de récupération des données collectivit�
                 titre: "Aide départementale pour l'alimentation",
                 indicationGeographique: 'Pas-De-Calais',
                 url: {
-                  name: 'aide-previsualisation',
+                  name: 'aide-consultation',
                   params: {
                     id: 14,
+                    titre: 'aide-departementale-pour-l-alimentation',
                   },
                 },
               },
@@ -263,9 +272,10 @@ describe("Fichier de test du usecase de récupération des données collectivit�
                 titre: "Aide locale pour l'alimentation",
                 indicationGeographique: 'Lillers',
                 url: {
-                  name: 'aide-previsualisation',
+                  name: 'aide-consultation',
                   params: {
                     id: 19,
+                    titre: 'aide-locale-pour-l-alimentation',
                   },
                 },
               },
@@ -280,6 +290,7 @@ describe("Fichier de test du usecase de récupération des données collectivit�
                   name: 'article-previsualisation',
                   params: {
                     id: 24,
+                    titre: 'article-regional-pour-l-alimentation',
                   },
                 },
               },
@@ -292,6 +303,7 @@ describe("Fichier de test du usecase de récupération des données collectivit�
                   name: 'article-previsualisation',
                   params: {
                     id: 29,
+                    titre: 'article-departemental-pour-l-alimentation',
                   },
                 },
               },
@@ -304,6 +316,7 @@ describe("Fichier de test du usecase de récupération des données collectivit�
                   name: 'article-previsualisation',
                   params: {
                     id: 34,
+                    titre: 'article-local-pour-l-alimentation',
                   },
                 },
               },
@@ -320,9 +333,10 @@ describe("Fichier de test du usecase de récupération des données collectivit�
                 titre: 'Aide nationale pour se déplacer',
                 indicationGeographique: '🇫🇷',
                 url: {
-                  name: 'aide-previsualisation',
+                  name: 'aide-consultation',
                   params: {
                     id: 1,
+                    titre: 'aide-nationale-pour-se-deplacer',
                   },
                 },
               },
@@ -332,9 +346,10 @@ describe("Fichier de test du usecase de récupération des données collectivit�
                 titre: 'Aide régionale pour se déplacer',
                 indicationGeographique: 'Hauts-de-France',
                 url: {
-                  name: 'aide-previsualisation',
+                  name: 'aide-consultation',
                   params: {
                     id: 5,
+                    titre: 'aide-regionale-pour-se-deplacer',
                   },
                 },
               },
@@ -344,9 +359,10 @@ describe("Fichier de test du usecase de récupération des données collectivit�
                 titre: 'Aide départementale pour se déplacer',
                 indicationGeographique: 'Pas-De-Calais',
                 url: {
-                  name: 'aide-previsualisation',
+                  name: 'aide-consultation',
                   params: {
                     id: 10,
+                    titre: 'aide-departementale-pour-se-deplacer',
                   },
                 },
               },
@@ -356,9 +372,10 @@ describe("Fichier de test du usecase de récupération des données collectivit�
                 titre: 'Aide2 départementale pour se déplacer',
                 indicationGeographique: 'Pas-De-Calais',
                 url: {
-                  name: 'aide-previsualisation',
+                  name: 'aide-consultation',
                   params: {
                     id: 11,
+                    titre: 'aide2-departementale-pour-se-deplacer',
                   },
                 },
               },
@@ -368,9 +385,10 @@ describe("Fichier de test du usecase de récupération des données collectivit�
                 titre: 'Aide locale pour se déplacer',
                 indicationGeographique: 'Lillers',
                 url: {
-                  name: 'aide-previsualisation',
+                  name: 'aide-consultation',
                   params: {
                     id: 16,
+                    titre: 'aide-locale-pour-se-deplacer',
                   },
                 },
               },
@@ -385,6 +403,7 @@ describe("Fichier de test du usecase de récupération des données collectivit�
                   name: 'article-previsualisation',
                   params: {
                     id: 21,
+                    titre: 'article-regional-pour-se-deplacer',
                   },
                 },
               },
@@ -397,6 +416,7 @@ describe("Fichier de test du usecase de récupération des données collectivit�
                   name: 'article-previsualisation',
                   params: {
                     id: 25,
+                    titre: 'article-departemental-pour-se-deplacer',
                   },
                 },
               },
@@ -409,6 +429,7 @@ describe("Fichier de test du usecase de récupération des données collectivit�
                   name: 'article-previsualisation',
                   params: {
                     id: 26,
+                    titre: 'article2-departemental-pour-se-deplacer',
                   },
                 },
               },
@@ -421,6 +442,7 @@ describe("Fichier de test du usecase de récupération des données collectivit�
                   name: 'article-previsualisation',
                   params: {
                     id: 31,
+                    titre: 'article-local-pour-se-deplacer',
                   },
                 },
               },
@@ -448,9 +470,10 @@ describe("Fichier de test du usecase de récupération des données collectivit�
                 titre: 'Aide nationale pour le logement',
                 indicationGeographique: '🇫🇷',
                 url: {
-                  name: 'aide-previsualisation',
+                  name: 'aide-consultation',
                   params: {
                     id: 3,
+                    titre: 'aide-nationale-pour-le-logement',
                   },
                 },
               },
@@ -460,9 +483,10 @@ describe("Fichier de test du usecase de récupération des données collectivit�
                 titre: 'Aide régionale pour le logement',
                 indicationGeographique: 'Hauts-de-France',
                 url: {
-                  name: 'aide-previsualisation',
+                  name: 'aide-consultation',
                   params: {
                     id: 7,
+                    titre: 'aide-regionale-pour-le-logement',
                   },
                 },
               },
@@ -472,9 +496,10 @@ describe("Fichier de test du usecase de récupération des données collectivit�
                 titre: 'Aide départementale pour le logement',
                 indicationGeographique: 'Pas-De-Calais',
                 url: {
-                  name: 'aide-previsualisation',
+                  name: 'aide-consultation',
                   params: {
                     id: 13,
+                    titre: 'aide-departementale-pour-le-logement',
                   },
                 },
               },
@@ -484,9 +509,10 @@ describe("Fichier de test du usecase de récupération des données collectivit�
                 titre: 'Aide locale pour le logement',
                 indicationGeographique: 'Lillers',
                 url: {
-                  name: 'aide-previsualisation',
+                  name: 'aide-consultation',
                   params: {
                     id: 18,
+                    titre: 'aide-locale-pour-le-logement',
                   },
                 },
               },
@@ -501,6 +527,7 @@ describe("Fichier de test du usecase de récupération des données collectivit�
                   name: 'article-previsualisation',
                   params: {
                     id: 23,
+                    titre: 'article-regional-pour-le-logement',
                   },
                 },
               },
@@ -513,6 +540,7 @@ describe("Fichier de test du usecase de récupération des données collectivit�
                   name: 'article-previsualisation',
                   params: {
                     id: 28,
+                    titre: 'article-departemental-pour-le-logement',
                   },
                 },
               },
@@ -525,6 +553,7 @@ describe("Fichier de test du usecase de récupération des données collectivit�
                   name: 'article-previsualisation',
                   params: {
                     id: 33,
+                    titre: 'article-local-pour-le-logement',
                   },
                 },
               },
@@ -541,9 +570,10 @@ describe("Fichier de test du usecase de récupération des données collectivit�
                 titre: "Aide nationale pour l'environnement",
                 indicationGeographique: '🇫🇷',
                 url: {
-                  name: 'aide-previsualisation',
+                  name: 'aide-consultation',
                   params: {
                     id: 2,
+                    titre: 'aide-nationale-pour-l-environnement',
                   },
                 },
               },
@@ -553,9 +583,10 @@ describe("Fichier de test du usecase de récupération des données collectivit�
                 titre: "Aide régionale pour l'environnement",
                 indicationGeographique: 'Hauts-de-France',
                 url: {
-                  name: 'aide-previsualisation',
+                  name: 'aide-consultation',
                   params: {
                     id: 6,
+                    titre: 'aide-regionale-pour-l-environnement',
                   },
                 },
               },
@@ -565,9 +596,10 @@ describe("Fichier de test du usecase de récupération des données collectivit�
                 titre: "Aide départementale pour l'environnement",
                 indicationGeographique: 'Pas-De-Calais',
                 url: {
-                  name: 'aide-previsualisation',
+                  name: 'aide-consultation',
                   params: {
                     id: 12,
+                    titre: 'aide-departementale-pour-l-environnement',
                   },
                 },
               },
@@ -577,9 +609,10 @@ describe("Fichier de test du usecase de récupération des données collectivit�
                 titre: "Aide locale pour l'environnement",
                 indicationGeographique: 'Lillers',
                 url: {
-                  name: 'aide-previsualisation',
+                  name: 'aide-consultation',
                   params: {
                     id: 17,
+                    titre: 'aide-locale-pour-l-environnement',
                   },
                 },
               },
@@ -594,6 +627,7 @@ describe("Fichier de test du usecase de récupération des données collectivit�
                   name: 'article-previsualisation',
                   params: {
                     id: 22,
+                    titre: 'article-regional-pour-l-environnement',
                   },
                 },
               },
@@ -606,6 +640,7 @@ describe("Fichier de test du usecase de récupération des données collectivit�
                   name: 'article-previsualisation',
                   params: {
                     id: 27,
+                    titre: 'article-departemental-pour-l-environnement',
                   },
                 },
               },
@@ -618,6 +653,7 @@ describe("Fichier de test du usecase de récupération des données collectivit�
                   name: 'article-previsualisation',
                   params: {
                     id: 32,
+                    titre: 'article-local-pour-l-environnement',
                   },
                 },
               },
