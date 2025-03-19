@@ -1,6 +1,11 @@
 <template>
-  <CompletionAccueilConnecte />
-  <ThematiquesAccueilConnecte />
+  <section>
+    <CompletionAccueilConnecte :progression="accueilConnecteViewModel?.progression" />
+  </section>
+
+  <section>
+    <ThematiquesAccueilConnecte />
+  </section>
   <Raccourcis />
   <CompteurActionsNationales />
   <ArticlesRecommandees />
