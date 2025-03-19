@@ -14,6 +14,7 @@ import {
 import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 import { RouteAidesName } from '@/router/aides/routeAidesName';
 import { RouteArticleName } from '@/router/articles/routes';
+import { buildUrl } from '@/shell/buildUrl';
 
 export class DonneesCollectivitesInseePresenterImpl implements DonneesCollectivitesInseePresenter {
   constructor(private readonly viewModel: (vm: DonneesCollectivitesInseeViewModel) => void) {}
@@ -24,7 +25,7 @@ export class DonneesCollectivitesInseePresenterImpl implements DonneesCollectivi
       departement: donnees.departement,
       region: donnees.region,
     };
-    const aides = this.transformerObjetEnViewModel(donnees.aides, RouteAidesName.AIDE_PREVISUALISATION, scope);
+    const aides = this.transformerObjetEnViewModel(donnees.aides, RouteAidesName.AIDE_CONSULTATION, scope);
     const articles = this.transformerObjetEnViewModel(
       donnees.articles,
       RouteArticleName.ARTICLE_PREVISUALISATION,
@@ -116,7 +117,7 @@ export class DonneesCollectivitesInseePresenterImpl implements DonneesCollectivi
     return Object.entries(data).flatMap(([indicationGeographique, contenus]) => {
       return contenus.map(item => ({
         ...item,
-        url: { name: route, params: { id: item.id } },
+        url: { name: route, params: { id: item.id, titre: buildUrl(item.titre) } },
         indicationGeographique: this.recupererPrecisionGeographique(geographieDuContenu, indicationGeographique),
       }));
     });

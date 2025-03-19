@@ -227,7 +227,7 @@ describe('Fichier de tests pour charger toutes les aides', () => {
               partenaireImg: undefined,
               partenaireNom: '',
               titre: "Simulez vos aides pour l'achat d'un vélo",
-              titreUrl: 'simulez-vos-aides-pour-lachat-dun-velo',
+              titreUrl: 'simulez-vos-aides-pour-l-achat-d-un-velo',
             },
             {
               estGratuit: true,
