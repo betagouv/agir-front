@@ -44,6 +44,5 @@
     @media all and (min-width: 767px) {
       width: 60%;
     }
-    gap: 1rem;
   }
 </style>

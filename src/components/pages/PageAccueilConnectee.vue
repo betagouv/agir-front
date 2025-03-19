@@ -8,7 +8,7 @@
   </section>
 
   <section class="background--olive-clair">
-    <Raccourcis :commune="accueilConnecteViewModel?.commune" />
+    <Raccourcis :commune="accueilConnecteViewModel?.commune" :liste-raccourcis="accueilConnecteViewModel?.raccourcis" />
   </section>
 
   <CompteurActionsNationales />
