@@ -4,8 +4,9 @@
   </section>
 
   <section class="background--white">
-    <ThematiquesAccueilConnecte />
+    <ThematiquesAccueilConnecte :commune="accueilConnecteViewModel?.commune" />
   </section>
+
   <Raccourcis />
   <CompteurActionsNationales />
   <ArticlesRecommandees />
