@@ -111,4 +111,6 @@ export interface ActionsRepository {
   recupererDetailThematique(idUtilisateur: string, thematiqueId: string): Promise<DetailThematique>;
 
   terminerAction(idUtilisateur: string, idAction: string, typeAction: TypeAction): Promise<void>;
+
+  previsualiser(actionId: string, typeAction: TypeAction): Promise<ActionDetail>;
 }

@@ -55,6 +55,10 @@ interface ActionDetailApiModel {
   thematique: string;
 }
 
+interface ActionDetailCMSApiModel {
+  action: ActionDetailApiModel;
+}
+
 interface CatalogueActionsApiModel {
   actions: ActionApiModel[];
   filtres: {
@@ -95,43 +99,15 @@ export class ActionsRepositoryAxios implements ActionsRepository {
     const response = await axios.get<ActionDetailApiModel>(
       `/utilisateurs/${idUtilisateur}/actions/${typeAction}/${idAction}`,
     );
+    return this.transformeActionDetailApiToActionDetail(response.data);
+  }
+
+  async previsualiser(idAction: string, typeAction: TypeAction): Promise<ActionDetail> {
+    const axios = AxiosFactory.getAxios();
+    const response = await axios.get<ActionDetailCMSApiModel>(`/cms_preview/actions/${typeAction}/${idAction}`);
     return {
-      code: response.data.code,
-      titre: response.data.titre,
-      sousTitre: response.data.sous_titre,
-      type: response.data.type as TypeAction,
-      commune: response.data.nom_commune,
-      consigne: response.data.consigne,
-      labelCompteur: response.data.label_compteur,
-      points: response.data.points,
-      quizzFelicitations: response.data.quizz_felicitations,
-      corps: {
-        introduction: response.data.pourquoi,
-        astuces: response.data.comment,
-      },
-      recommandations: [],
-      nombreDeRealisations: response.data.nombre_actions_en_cours,
-      nombreAidesDisponibles: response.data.nombre_aides_disponibles,
-      realisee: response.data.deja_faite,
-      services: response.data.services.map(service => ({
-        type: service.recherche_service_id as 'recettes' | 'longue_vie_objets' | 'pres_de_chez_nous',
-        parametreDuService: service.categorie,
-      })),
-      quizzes: response.data.quizzes.map(quiz => mapQuizApi(quiz)),
-      aides: response.data.aides.map(aide => ({
-        titre: aide.titre,
-        id: aide.content_id,
-        partenaireNom: aide.partenaire_nom,
-        partenaireImg: aide.partenaire_logo_url,
-        montantMaximum: aide.montant_max,
-        estGratuit: aide.est_gratuit,
-      })),
-      faq: response.data.faqs.map(faq => ({
-        question: faq.question,
-        reponse: faq.reponse,
-      })),
-      kycs: response.data.kycs.map((question: QuestionApiModel) => this.mapQuestionApiModelToQuestion(question)),
-      thematique: response.data.thematique as ClefThematiqueAPI,
+      ...this.transformeActionDetailApiToActionDetail(response.data.action),
+      services: [],
     };
   }
 
@@ -200,6 +176,47 @@ export class ActionsRepositoryAxios implements ActionsRepository {
   async terminerAction(idUtilisateur: string, idAction: string, typeAction: TypeAction): Promise<void> {
     const axios = AxiosFactory.getAxios();
     await axios.post(`/utilisateurs/${idUtilisateur}/actions/${typeAction}/${idAction}/faite`);
+  }
+
+  private transformeActionDetailApiToActionDetail(actionDetailApiModel: ActionDetailApiModel): ActionDetail {
+    return {
+      code: actionDetailApiModel.code,
+      titre: actionDetailApiModel.titre,
+      sousTitre: actionDetailApiModel.sous_titre,
+      type: actionDetailApiModel.type as TypeAction,
+      commune: actionDetailApiModel.nom_commune,
+      consigne: actionDetailApiModel.consigne,
+      labelCompteur: actionDetailApiModel.label_compteur,
+      points: actionDetailApiModel.points,
+      quizzFelicitations: actionDetailApiModel.quizz_felicitations,
+      corps: {
+        introduction: actionDetailApiModel.pourquoi,
+        astuces: actionDetailApiModel.comment,
+      },
+      recommandations: [],
+      nombreDeRealisations: actionDetailApiModel.nombre_actions_en_cours,
+      nombreAidesDisponibles: actionDetailApiModel.nombre_aides_disponibles,
+      realisee: actionDetailApiModel.deja_faite,
+      services: actionDetailApiModel.services.map(service => ({
+        type: service.recherche_service_id as 'recettes' | 'longue_vie_objets' | 'pres_de_chez_nous',
+        parametreDuService: service.categorie,
+      })),
+      quizzes: actionDetailApiModel.quizzes.map(quiz => mapQuizApi(quiz)),
+      aides: actionDetailApiModel.aides.map(aide => ({
+        titre: aide.titre,
+        id: aide.content_id,
+        partenaireNom: aide.partenaire_nom,
+        partenaireImg: aide.partenaire_logo_url,
+        montantMaximum: aide.montant_max,
+        estGratuit: aide.est_gratuit,
+      })),
+      faq: actionDetailApiModel.faqs.map(faq => ({
+        question: faq.question,
+        reponse: faq.reponse,
+      })),
+      kycs: actionDetailApiModel.kycs.map((question: QuestionApiModel) => this.mapQuestionApiModelToQuestion(question)),
+      thematique: actionDetailApiModel.thematique as ClefThematiqueAPI,
+    };
   }
 
   private mapActionApiModelToAction(action: ActionApiModel): Action {

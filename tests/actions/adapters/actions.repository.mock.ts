@@ -59,4 +59,8 @@ export class ActionsRepositoryMock implements ActionsRepository {
   terminerAction(idUtilisateur: string, idAction: string, typeAction: TypeAction): Promise<void> {
     return Promise.resolve();
   }
+
+  previsualiser(actionId: string, typeAction: TypeAction): Promise<ActionDetail> {
+    return Promise.resolve(this.action!);
+  }
 }
