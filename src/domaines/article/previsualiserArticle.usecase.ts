@@ -5,6 +5,6 @@ export class PrevisualiserArticleUsecase {
   constructor(private readonly articleRepository: ArticleRepository) {}
 
   async execute(articleId: string): Promise<Article> {
-    return this.articleRepository.recupererHorsConnexion(articleId);
+    return this.articleRepository.previsualiser(articleId);
   }
 }

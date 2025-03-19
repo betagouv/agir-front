@@ -43,16 +43,7 @@ export class SpyArticleRepository implements ArticleRepository {
   }
 
   recupererHorsConnexion(articleId: string): Promise<Article> {
-    this._previsualiserAEteAppele = true;
-    return Promise.resolve({
-      id: 'articleId',
-      texte: 'texte',
-      titre: 'titre',
-      sousTitre: 'sousTitre',
-      estEnFavori: false,
-      sources: null,
-      partenaire: null,
-    });
+    throw Error;
   }
 
   ajouterAuxFavoris(articleId: string, utilisateurId: string): Promise<void> {
@@ -81,6 +72,15 @@ export class SpyArticleRepository implements ArticleRepository {
   }
 
   previsualiser(articleId: string): Promise<Article> {
-    throw Error;
+    this._previsualiserAEteAppele = true;
+    return Promise.resolve({
+      id: 'articleId',
+      texte: 'texte',
+      titre: 'titre',
+      sousTitre: 'sousTitre',
+      estEnFavori: false,
+      sources: null,
+      partenaire: null,
+    });
   }
 }
