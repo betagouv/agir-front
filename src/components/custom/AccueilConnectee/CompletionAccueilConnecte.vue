@@ -49,6 +49,7 @@
     </div>
   </div>
   <div class="breaker"></div>
+  <div class="breaker-placeholder"></div>
 </template>
 
 <script setup lang="ts">
@@ -111,12 +112,18 @@
   }
 
   .breaker {
-    position: relative;
+    position: absolute;
     z-index: 1;
     background: white;
     height: 10vh;
-    width: 120%;
-    transform: translateX(-10%) translateY(-6vh) rotate(3deg);
+    width: 100%;
+    transform: translateY(-6vh);
+    clip-path: polygon(0 0, 100% 30%, 100% 100%, 0 100%);
+  }
+
+  .breaker-placeholder {
+    background: white;
+    height: 10vh;
   }
 
   .marginBottomResponsive {
