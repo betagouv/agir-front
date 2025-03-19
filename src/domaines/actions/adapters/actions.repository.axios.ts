@@ -30,7 +30,7 @@ interface ActionDetailApiModel {
   comment: string;
   deja_faite: boolean;
   pourquoi: string;
-  nombre_actions_en_cours: number;
+  nombre_actions_faites: number;
   nombre_aides_disponibles: number;
   quizzes: QuizApiModel[];
   services: {
@@ -74,7 +74,7 @@ interface ActionApiModel {
   titre: string;
   sous_titre: string;
   nom_commune: string;
-  nombre_actions_en_cours: number;
+  nombre_actions_faites: number;
   nombre_aides_disponibles: number;
   type: string;
   deja_vue: boolean;
@@ -194,7 +194,7 @@ export class ActionsRepositoryAxios implements ActionsRepository {
         astuces: actionDetailApiModel.comment,
       },
       recommandations: [],
-      nombreDeRealisations: actionDetailApiModel.nombre_actions_en_cours,
+      nombreDeRealisations: actionDetailApiModel.nombre_actions_faites,
       nombreAidesDisponibles: actionDetailApiModel.nombre_aides_disponibles,
       realisee: actionDetailApiModel.deja_faite,
       services: actionDetailApiModel.services.map(service => ({
@@ -224,7 +224,7 @@ export class ActionsRepositoryAxios implements ActionsRepository {
       code: action.code,
       titre: action.titre,
       sousTitre: action.sous_titre,
-      nombreDePersonnes: action.nombre_actions_en_cours,
+      nombreDePersonnes: action.nombre_actions_faites,
       nombreAidesDisponibles: action.nombre_aides_disponibles,
       type: action.type as TypeAction,
       dejaVue: action.deja_vue,
