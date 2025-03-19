@@ -9,6 +9,7 @@ import { ThematiqueResumePresenterImpl } from '@/domaines/thematiques/adapters/t
 import { ThematiqueResumeViewModel } from '@/domaines/thematiques/ports/thematiqueResume.presenter';
 import { RouteServiceName } from '@/router/services/routes';
 import { RouteAidesName } from '@/router/aides/routeAidesName';
+import { RouteActionsName } from '@/router/actions/routes';
 
 describe('Fichier de test concernant la récupération des actions personnalisées', () => {
   it("Quand la personnalisation n'est pas faite doit presenter le fait de personnaliser avec le bon enchainement de kycs", async () => {
@@ -246,7 +247,14 @@ describe('Fichier de test concernant la récupération des actions personnalisé
             commune: 'Paris',
             listeRaccourcis: [
               {
-                href: 'https://jechangemavoiture.gouv.fr/jcmv/',
+                to: {
+                  name: RouteActionsName.ACTION_INDIVIDUELLE,
+                  params: {
+                    id: 'action_simulateur_voiture',
+                    titre: 'trouver-le-type-de-voiture-qui-vous-convient-le-mieux',
+                    type: TypeAction.SIMULATEUR,
+                  },
+                },
                 label: `1 simulateur Dois-je changer de voiture ?`,
               },
               {
