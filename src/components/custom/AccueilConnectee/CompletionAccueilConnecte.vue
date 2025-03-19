@@ -6,7 +6,7 @@
     <div class="fr-container full-height flex flex-column flex-center marginBottomResponsive fr-pb-md-5w contenu">
       <div class="fr-grid-row fr-grid-row--gutters fr-mb-5w">
         <div class="fr-col-12 fr-col-md-7">
-          <div class="fr-pt-3w fr-pt-md-0 fr-m-3w">
+          <div class="fr-pt-3w fr-pt-md-0 fr-my-3w fr-mr-3w">
             <h1 class="fr-h1 fr-mr-3w">Des solutions ensemble, pour la transition écologique</h1>
             <ul class="fr-grid-row fr-grid-row--gutters list-style-none fr-pl-0 fr-mb-2w fr-text--lg">
               <li class="fr-col-auto">
@@ -92,7 +92,7 @@
 
   .fleche {
     position: absolute;
-    bottom: -2%;
+    bottom: -5%;
     left: 20%;
     width: 12.5rem;
     height: 12.5rem;
@@ -118,7 +118,7 @@
     height: 10vh;
     width: 100%;
     transform: translateY(-6vh);
-    clip-path: polygon(0 0, 100% 30%, 100% 100%, 0 100%);
+    clip-path: polygon(0 0, 100% 40%, 100% 100%, 0 100%);
   }
 
   .breaker-placeholder {
