@@ -8,7 +8,7 @@
   import { useRoute, useRouter } from 'vue-router';
   import PageArticleComposant from '@/components/PageArticleComposant.vue';
   import { ArticleRepositoryAxios } from '@/domaines/article/adapters/article.repository.axios';
-  import { ChargerArticleHorsConnexionUsecase } from '@/domaines/article/chargerArticleHorsConnexionUsecase';
+  import { PrevisualiserArticleUsecase } from '@/domaines/article/previsualiserArticle.usecase';
   import { Article } from '@/domaines/article/recupererArticle.usecase';
   import { RouteCommuneName } from '@/router';
 
@@ -30,9 +30,7 @@
   onMounted(async () => {
     const route = useRoute();
     const idArticle = Array.isArray(route.params.id) ? route.params.id[0] : route.params.id;
-    const articleRecupere = await new ChargerArticleHorsConnexionUsecase(new ArticleRepositoryAxios()).execute(
-      idArticle,
-    );
+    const articleRecupere = await new PrevisualiserArticleUsecase(new ArticleRepositoryAxios()).execute(idArticle);
     if (articleRecupere) {
       article.value = articleRecupere;
     } else {

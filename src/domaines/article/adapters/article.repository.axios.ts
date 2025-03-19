@@ -25,6 +25,10 @@ interface ArticleAPI {
   ];
 }
 
+interface ArticleCMPApi {
+  article: ArticleAPI;
+}
+
 export class ArticleRepositoryAxios implements ArticleRepository {
   @intercept401()
   async ajouterAuxFavoris(articleId: string, utilisateurId: string): Promise<void> {
@@ -111,6 +115,31 @@ export class ArticleRepositoryAxios implements ArticleRepository {
             }
           : null,
       estEnFavori: article.data.favoris,
+    };
+  }
+
+  async previsualiser(articleId: string): Promise<Article> {
+    const axios = AxiosFactory.getAxios();
+    const reponse = await axios.get<ArticleCMPApi>(`/cms_preview/articles/${articleId}`);
+
+    return {
+      id: articleId,
+      texte: reponse.data.article.contenu,
+      titre: reponse.data.article.titre,
+      sousTitre: reponse.data.article.soustitre,
+      sources:
+        reponse.data.article.sources?.map(source => ({
+          label: source.label,
+          url: source.url,
+        })) || null,
+      partenaire:
+        reponse.data.article.partenaire_nom && reponse.data.article.partenaire_logo_url
+          ? {
+              nom: reponse.data.article.partenaire_nom,
+              logo: reponse.data.article.partenaire_logo_url,
+            }
+          : null,
+      estEnFavori: reponse.data.article.favoris,
     };
   }
 }

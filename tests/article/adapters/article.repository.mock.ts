@@ -14,8 +14,20 @@ export class MockArticleRepository implements ArticleRepository {
     });
   }
 
-  recupererHorsConnexion(articleId: string): Promise<Article> {
+  previsualiser(articleId: string): Promise<Article> {
     throw new Error('Method not implemented.');
+  }
+
+  recupererHorsConnexion(articleId: string): Promise<Article> {
+    return Promise.resolve({
+      id: articleId,
+      texte: 'texte',
+      titre: 'titre - hors connexion',
+      sousTitre: 'sousTitre',
+      sources: null,
+      partenaire: null,
+      estEnFavori: false,
+    });
   }
 
   retirerDesFavoris(articleId: string, utilisateurId: string): Promise<void> {

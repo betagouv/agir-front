@@ -1,5 +1,5 @@
 <template>
-  <MissionEtapeSkeleton :view-model-existe="articleViewModel !== undefined" :is-loading="isLoading">
+  <MissionEtapeSkeleton :is-loading="isLoading" :view-model-existe="articleViewModel !== undefined">
     <PageArticleComposant
       :article="articleViewModel!"
       :est-enchainement-mission="true"
@@ -10,13 +10,14 @@
   </MissionEtapeSkeleton>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
   import { onMounted, ref } from 'vue';
   import MissionEtapeSkeleton from '@/components/custom/Mission/MissionEtapeSkeleton.vue';
   import PageArticleComposant from '@/components/PageArticleComposant.vue';
   import { ArticleRepositoryAxios } from '@/domaines/article/adapters/article.repository.axios';
   import { PasserUnArticleCommeLuUsecase } from '@/domaines/article/passerUnArticleCommeLu.usecase';
   import { Article, RecupererArticleUsecase } from '@/domaines/article/recupererArticle.usecase';
+  import { SessionRepositoryStore } from '@/domaines/authentification/adapters/session.repository.store';
   import { ToDoListEventBusImpl } from '@/domaines/toDoList/toDoListEventBusImpl';
   import { utilisateurStore } from '@/store/utilisateur';
 
@@ -31,8 +32,8 @@
     const articleRepositoryAxios = new ArticleRepositoryAxios();
     const utilisateurId = utilisateurStore().utilisateur.id;
 
-    new RecupererArticleUsecase(articleRepositoryAxios)
-      .execute(utilisateurId, idArticle)
+    new RecupererArticleUsecase(articleRepositoryAxios, new SessionRepositoryStore())
+      .execute(idArticle)
       .then(async article => {
         articleViewModel.value = article;
         await new PasserUnArticleCommeLuUsecase(articleRepositoryAxios, ToDoListEventBusImpl.getInstance()).execute(

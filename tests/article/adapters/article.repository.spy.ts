@@ -79,4 +79,8 @@ export class SpyArticleRepository implements ArticleRepository {
   recuperer(articleId: string): Promise<Article> {
     throw Error;
   }
+
+  previsualiser(articleId: string): Promise<Article> {
+    throw Error;
+  }
 }

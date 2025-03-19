@@ -16,4 +16,12 @@ export class SauvergarderScoreSessionRepositorySpy implements SessionRepository 
   sauvegarderUtilisateur(utilisateur: Partial<Utilisateur>): void {}
 
   deconnecterUtilisateur() {}
+
+  getUtilisateurId(): string {
+    return '';
+  }
+
+  estConnecte(): boolean {
+    return false;
+  }
 }

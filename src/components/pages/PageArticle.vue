@@ -32,6 +32,7 @@
   import { ArticleRepositoryAxios } from '@/domaines/article/adapters/article.repository.axios';
   import { PasserUnArticleCommeLuUsecase } from '@/domaines/article/passerUnArticleCommeLu.usecase';
   import { Article, RecupererArticleUsecase } from '@/domaines/article/recupererArticle.usecase';
+  import { SessionRepositoryStore } from '@/domaines/authentification/adapters/session.repository.store';
   import { MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
   import { ToDoListEventBusImpl } from '@/domaines/toDoList/toDoListEventBusImpl';
   import { RouteCommuneName } from '@/router';
@@ -52,8 +53,8 @@
     const articleRepositoryAxios = new ArticleRepositoryAxios();
     const utilisateurId = utilisateurStore().utilisateur.id;
 
-    new RecupererArticleUsecase(articleRepositoryAxios)
-      .execute(utilisateurId, idArticle)
+    new RecupererArticleUsecase(articleRepositoryAxios, new SessionRepositoryStore())
+      .execute(idArticle)
       .then(async article => {
         articleAAfficher.value = article;
         await new PasserUnArticleCommeLuUsecase(articleRepositoryAxios, ToDoListEventBusImpl.getInstance()).execute(

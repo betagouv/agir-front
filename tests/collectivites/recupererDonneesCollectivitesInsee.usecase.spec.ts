@@ -186,7 +186,7 @@ describe("Fichier de test du usecase de récupération des données collectivit�
                 titre: 'Article régional pour la consommation',
                 indicationGeographique: 'Hauts-de-France',
                 url: {
-                  name: 'article-previsualisation',
+                  name: 'article-consultation',
                   params: {
                     id: 25,
                     titre: 'article-regional-pour-la-consommation',
@@ -199,7 +199,7 @@ describe("Fichier de test du usecase de récupération des données collectivit�
                 titre: 'Article départemental pour la consommation',
                 indicationGeographique: 'Pas-De-Calais',
                 url: {
-                  name: 'article-previsualisation',
+                  name: 'article-consultation',
                   params: {
                     id: 30,
                     titre: 'article-departemental-pour-la-consommation',
@@ -212,7 +212,7 @@ describe("Fichier de test du usecase de récupération des données collectivit�
                 titre: 'Article local pour la consommation',
                 indicationGeographique: 'Lillers',
                 url: {
-                  name: 'article-previsualisation',
+                  name: 'article-consultation',
                   params: {
                     id: 35,
                     titre: 'article-local-pour-la-consommation',
@@ -287,7 +287,7 @@ describe("Fichier de test du usecase de récupération des données collectivit�
                 titre: "Article régional pour l'alimentation",
                 indicationGeographique: 'Hauts-de-France',
                 url: {
-                  name: 'article-previsualisation',
+                  name: 'article-consultation',
                   params: {
                     id: 24,
                     titre: 'article-regional-pour-l-alimentation',
@@ -300,7 +300,7 @@ describe("Fichier de test du usecase de récupération des données collectivit�
                 titre: "Article départemental pour l'alimentation",
                 indicationGeographique: 'Pas-De-Calais',
                 url: {
-                  name: 'article-previsualisation',
+                  name: 'article-consultation',
                   params: {
                     id: 29,
                     titre: 'article-departemental-pour-l-alimentation',
@@ -313,7 +313,7 @@ describe("Fichier de test du usecase de récupération des données collectivit�
                 titre: "Article local pour l'alimentation",
                 indicationGeographique: 'Lillers',
                 url: {
-                  name: 'article-previsualisation',
+                  name: 'article-consultation',
                   params: {
                     id: 34,
                     titre: 'article-local-pour-l-alimentation',
@@ -400,7 +400,7 @@ describe("Fichier de test du usecase de récupération des données collectivit�
                 titre: 'Article régional pour se déplacer',
                 indicationGeographique: 'Hauts-de-France',
                 url: {
-                  name: 'article-previsualisation',
+                  name: 'article-consultation',
                   params: {
                     id: 21,
                     titre: 'article-regional-pour-se-deplacer',
@@ -413,7 +413,7 @@ describe("Fichier de test du usecase de récupération des données collectivit�
                 titre: 'Article départemental pour se déplacer',
                 indicationGeographique: 'Pas-De-Calais',
                 url: {
-                  name: 'article-previsualisation',
+                  name: 'article-consultation',
                   params: {
                     id: 25,
                     titre: 'article-departemental-pour-se-deplacer',
@@ -426,7 +426,7 @@ describe("Fichier de test du usecase de récupération des données collectivit�
                 titre: 'Article2 départemental pour se déplacer',
                 indicationGeographique: 'Pas-De-Calais',
                 url: {
-                  name: 'article-previsualisation',
+                  name: 'article-consultation',
                   params: {
                     id: 26,
                     titre: 'article2-departemental-pour-se-deplacer',
@@ -439,7 +439,7 @@ describe("Fichier de test du usecase de récupération des données collectivit�
                 titre: 'Article local pour se déplacer',
                 indicationGeographique: 'Lillers',
                 url: {
-                  name: 'article-previsualisation',
+                  name: 'article-consultation',
                   params: {
                     id: 31,
                     titre: 'article-local-pour-se-deplacer',
@@ -524,7 +524,7 @@ describe("Fichier de test du usecase de récupération des données collectivit�
                 titre: 'Article régional pour le logement',
                 indicationGeographique: 'Hauts-de-France',
                 url: {
-                  name: 'article-previsualisation',
+                  name: 'article-consultation',
                   params: {
                     id: 23,
                     titre: 'article-regional-pour-le-logement',
@@ -537,7 +537,7 @@ describe("Fichier de test du usecase de récupération des données collectivit�
                 titre: 'Article départemental pour le logement',
                 indicationGeographique: 'Pas-De-Calais',
                 url: {
-                  name: 'article-previsualisation',
+                  name: 'article-consultation',
                   params: {
                     id: 28,
                     titre: 'article-departemental-pour-le-logement',
@@ -550,7 +550,7 @@ describe("Fichier de test du usecase de récupération des données collectivit�
                 titre: 'Article local pour le logement',
                 indicationGeographique: 'Lillers',
                 url: {
-                  name: 'article-previsualisation',
+                  name: 'article-consultation',
                   params: {
                     id: 33,
                     titre: 'article-local-pour-le-logement',
@@ -624,7 +624,7 @@ describe("Fichier de test du usecase de récupération des données collectivit�
                 titre: "Article régional pour l'environnement",
                 indicationGeographique: 'Hauts-de-France',
                 url: {
-                  name: 'article-previsualisation',
+                  name: 'article-consultation',
                   params: {
                     id: 22,
                     titre: 'article-regional-pour-l-environnement',
@@ -637,7 +637,7 @@ describe("Fichier de test du usecase de récupération des données collectivit�
                 titre: "Article départemental pour l'environnement",
                 indicationGeographique: 'Pas-De-Calais',
                 url: {
-                  name: 'article-previsualisation',
+                  name: 'article-consultation',
                   params: {
                     id: 27,
                     titre: 'article-departemental-pour-l-environnement',
@@ -650,7 +650,7 @@ describe("Fichier de test du usecase de récupération des données collectivit�
                 titre: "Article local pour l'environnement",
                 indicationGeographique: 'Lillers',
                 url: {
-                  name: 'article-previsualisation',
+                  name: 'article-consultation',
                   params: {
                     id: 32,
                     titre: 'article-local-pour-l-environnement',

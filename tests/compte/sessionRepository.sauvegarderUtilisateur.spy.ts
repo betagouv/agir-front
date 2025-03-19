@@ -49,4 +49,12 @@ export class SpySauvegarderUtilisateurSessionRepository implements SessionReposi
       pseudo: '',
     };
   }
+
+  estConnecte(): boolean {
+    return false;
+  }
+
+  getUtilisateurId(): string {
+    return '';
+  }
 }
