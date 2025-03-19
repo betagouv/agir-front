@@ -17,6 +17,7 @@ export class ThematiqueResumePresenterImpl implements ThematiqueResumePresenter 
 
     if (resumeThematique.nbAides) {
       listeRaccourcis.push({
+        emoji: '💶',
         to: {
           name: RouteAidesName.AIDES,
         },
@@ -26,6 +27,7 @@ export class ThematiqueResumePresenterImpl implements ThematiqueResumePresenter 
 
     if (resumeThematique.thematique === ClefThematiqueAPI.alimentation) {
       listeRaccourcis.push({
+        emoji: '🥘',
         to: {
           name: RouteServiceName.RECETTES,
           params: {
@@ -35,6 +37,7 @@ export class ThematiqueResumePresenterImpl implements ThematiqueResumePresenter 
         label: `1150 recettes délicieuses, saines et de saison`,
       });
       listeRaccourcis.push({
+        emoji: '🍓',
         to: {
           name: RouteServiceName.FRUITS_ET_LEGUMES,
           params: {
@@ -44,6 +47,7 @@ export class ThematiqueResumePresenterImpl implements ThematiqueResumePresenter 
         label: `1 calendrier de fruits et légumes de saison`,
       });
       listeRaccourcis.push({
+        emoji: '🛒',
         to: {
           name: RouteServiceName.PROXIMITE,
           params: { thematiqueId: MenuThematiques.getThematiqueData(ClefThematiqueAPI.alimentation).url },
@@ -54,6 +58,7 @@ export class ThematiqueResumePresenterImpl implements ThematiqueResumePresenter 
 
     if (resumeThematique.thematique === ClefThematiqueAPI.logement) {
       listeRaccourcis.push({
+        emoji: '🧱',
         href: 'https://mesaidesreno.beta.gouv.fr/',
         label: `1 simulateur Mes aides Rénovation`,
       });
@@ -61,6 +66,7 @@ export class ThematiqueResumePresenterImpl implements ThematiqueResumePresenter 
 
     if (resumeThematique.thematique === ClefThematiqueAPI.transports) {
       listeRaccourcis.push({
+        emoji: '🚙',
         label: '1 simulateur Dois-je changer de voiture ?',
         to: {
           name: RouteActionsName.ACTION_INDIVIDUELLE,
@@ -72,6 +78,7 @@ export class ThematiqueResumePresenterImpl implements ThematiqueResumePresenter 
         },
       });
       listeRaccourcis.push({
+        emoji: '🚲',
         to: {
           name: RouteAidesName.VELO,
         },
@@ -81,6 +88,7 @@ export class ThematiqueResumePresenterImpl implements ThematiqueResumePresenter 
 
     if (resumeThematique.thematique === ClefThematiqueAPI.consommation) {
       listeRaccourcis.push({
+        emoji: '🔧',
         to: {
           name: RouteServiceName.LONGUE_VIE_AUX_OBJETS,
           params: { thematiqueId: MenuThematiques.getThematiqueData(ClefThematiqueAPI.consommation).url },
