@@ -19,4 +19,12 @@ export class SessionRepositoryStore implements SessionRepository {
   deconnecterUtilisateur() {
     utilisateurStore().reset();
   }
+
+  getUtilisateurId() {
+    return utilisateurStore().utilisateur.id;
+  }
+
+  estConnecte(): boolean {
+    return !!utilisateurStore().utilisateur.id;
+  }
 }

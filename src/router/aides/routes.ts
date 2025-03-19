@@ -59,12 +59,15 @@ const aidesRoutes: RouteRecordRaw[] = [
     component: PageDetailAide,
     meta: { estPublique: true },
   },
-  {
+];
+
+if (import.meta.env.VITE_ENV === 'dev') {
+  aidesRoutes.push({
     path: RouteAidesPath.AIDE_PREVISUALISATION,
     name: RouteAidesName.AIDE_PREVISUALISATION,
     component: PagePrevisualisationAide,
     meta: { estPublique: true },
-  },
-];
+  });
+}
 
 export default aidesRoutes;

@@ -1,46 +1,36 @@
 import { RouteRecordRaw } from 'vue-router';
-import { utilisateurStore } from '@/store/utilisateur';
+import actionsRoutes from '@/router/actions/routes';
 
 const PageArticle = () => import('@/components/pages/PageArticle.vue');
-const PagePrevisualisationArticle = () => import('@/components/pages/PageArticleHorsConnexion.vue');
+const PagePrevisualisationArticle = () => import('@/components/pages/PagePrevisualisationArticle.vue');
 
 export enum RouteArticlePath {
   ARTICLE = '/article/',
-  ARTICLE_PAR_TITRE_ET_ID = '/article/:titre/:id',
-  ARTICLE_PAR_ID = '/article/:id',
-  ARTICLE_PREVISUALISATION = '/article/previsualisation/:id',
+  ARTICLE_CONSULTATION = '/article/:titre/:id',
+  ARTICLE_PREVISUALISATION = '/articles/previsualisation/:id',
 }
 
 export enum RouteArticleName {
-  ARTICLE_PAR_TITRE_ET_ID = 'article-par-titre-id',
-  ARTICLE_PAR_ID = 'article-par-id',
+  ARTICLE_CONSULTATION = 'article-consultation',
   ARTICLE_PREVISUALISATION = 'article-previsualisation',
 }
 
-const resolveArticleComponent = async () => {
-  const estConnecte = utilisateurStore().utilisateur.id.length > 0;
-  return estConnecte ? PageArticle() : PagePrevisualisationArticle();
-};
-
 const articlesRoutes: RouteRecordRaw[] = [
   {
-    path: RouteArticlePath.ARTICLE_PAR_TITRE_ET_ID,
-    name: RouteArticleName.ARTICLE_PAR_TITRE_ET_ID,
-    component: resolveArticleComponent,
+    path: RouteArticlePath.ARTICLE_CONSULTATION,
+    name: RouteArticleName.ARTICLE_CONSULTATION,
+    component: PageArticle,
     meta: { estPublique: true },
   },
-  {
-    path: RouteArticlePath.ARTICLE_PAR_ID,
-    name: RouteArticleName.ARTICLE_PAR_ID,
-    component: resolveArticleComponent,
-    meta: { estPublique: true },
-  },
-  {
+];
+
+if (import.meta.env.VITE_ENV === 'dev') {
+  actionsRoutes.push({
     path: RouteArticlePath.ARTICLE_PREVISUALISATION,
     name: RouteArticleName.ARTICLE_PREVISUALISATION,
     component: PagePrevisualisationArticle,
     meta: { estPublique: true },
-  },
-];
+  });
+}
 
 export default articlesRoutes;

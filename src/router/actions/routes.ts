@@ -29,12 +29,15 @@ const actionsRoutes: RouteRecordRaw[] = [
       title: "Catalogue d'actions",
     },
   },
-  {
+];
+
+if (import.meta.env.VITE_ENV === 'dev') {
+  actionsRoutes.push({
     path: RouteActionsPath.PREVISUALISER_ACTION,
     name: RouteActionsName.PREVISUALISER_ACTION,
     component: () => import('@/components/pages/PagePrevisualisationAction.vue'),
     meta: { estPublique: true },
-  },
-];
+  });
+}
 
 export default actionsRoutes;

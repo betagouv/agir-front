@@ -26,11 +26,7 @@ export class DonneesCollectivitesInseePresenterImpl implements DonneesCollectivi
       region: donnees.region,
     };
     const aides = this.transformerObjetEnViewModel(donnees.aides, RouteAidesName.AIDE_CONSULTATION, scope);
-    const articles = this.transformerObjetEnViewModel(
-      donnees.articles,
-      RouteArticleName.ARTICLE_PREVISUALISATION,
-      scope,
-    );
+    const articles = this.transformerObjetEnViewModel(donnees.articles, RouteArticleName.ARTICLE_CONSULTATION, scope);
 
     const aidesVeloSection = this.transformerAidesVeloEnViewModel(aidesVelo);
     const contenuSupplementaires = [aidesVeloSection];

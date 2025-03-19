@@ -7,4 +7,8 @@ export interface SessionRepository {
   sauvegarderScore(score: Score): void;
 
   deconnecterUtilisateur(): void;
+
+  getUtilisateurId(): string;
+
+  estConnecte(): boolean;
 }

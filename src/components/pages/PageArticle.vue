@@ -32,6 +32,7 @@
   import { ArticleRepositoryAxios } from '@/domaines/article/adapters/article.repository.axios';
   import { PasserUnArticleCommeLuUsecase } from '@/domaines/article/passerUnArticleCommeLu.usecase';
   import { Article, RecupererArticleUsecase } from '@/domaines/article/recupererArticle.usecase';
+  import { SessionRepositoryStore } from '@/domaines/authentification/adapters/session.repository.store';
   import { MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
   import { ToDoListEventBusImpl } from '@/domaines/toDoList/toDoListEventBusImpl';
   import { RouteCommuneName } from '@/router';
@@ -52,15 +53,18 @@
     const articleRepositoryAxios = new ArticleRepositoryAxios();
     const utilisateurId = utilisateurStore().utilisateur.id;
 
-    new RecupererArticleUsecase(articleRepositoryAxios)
-      .execute(utilisateurId, idArticle)
+    const sessionRepositoryStore = new SessionRepositoryStore();
+    new RecupererArticleUsecase(articleRepositoryAxios, sessionRepositoryStore)
+      .execute(idArticle)
       .then(async article => {
         articleAAfficher.value = article;
-        await new PasserUnArticleCommeLuUsecase(articleRepositoryAxios, ToDoListEventBusImpl.getInstance()).execute(
-          idArticle,
-          utilisateurId,
-        );
         isLoading.value = false;
+        if (sessionRepositoryStore.estConnecte()) {
+          await new PasserUnArticleCommeLuUsecase(articleRepositoryAxios, ToDoListEventBusImpl.getInstance()).execute(
+            idArticle,
+            utilisateurId,
+          );
+        }
         document.title = `${article.titre as string} - J'agis`;
       })
       .catch(async () => {

@@ -1,4 +1,5 @@
 import { ArticleRepository } from '@/domaines/article/ports/article.repository';
+import { SessionRepository } from '@/domaines/authentification/ports/session.repository';
 
 export interface Partenaire {
   nom: string;
@@ -21,9 +22,16 @@ export interface Article {
 }
 
 export class RecupererArticleUsecase {
-  constructor(private readonly articleRepository: ArticleRepository) {}
+  constructor(
+    private readonly articleRepository: ArticleRepository,
+    private readonly sessionRepository: SessionRepository,
+  ) {}
 
-  async execute(utilisateurId: string, articleId: string): Promise<Article> {
-    return this.articleRepository.recuperer(utilisateurId, articleId);
+  async execute(articleId: string): Promise<Article> {
+    if (this.sessionRepository.estConnecte()) {
+      return this.articleRepository.recuperer(this.sessionRepository.getUtilisateurId(), articleId);
+    } else {
+      return this.articleRepository.recupererHorsConnexion(articleId);
+    }
   }
 }

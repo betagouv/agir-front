@@ -5,6 +5,8 @@ export interface ArticleRepository {
 
   recupererHorsConnexion(articleId: string): Promise<Article>;
 
+  previsualiser(articleId: string): Promise<Article>;
+
   marquerCommeLu(articleId: string, utilisateurId: string): Promise<void>;
 
   noterArticle(articleId: string, utilisateurId: string, note: 1 | 2 | 3 | 4): Promise<void>;
