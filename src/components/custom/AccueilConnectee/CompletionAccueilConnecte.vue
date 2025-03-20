@@ -1,7 +1,7 @@
 <template>
   <div class="background">
     <img class="illustration" src="/accueil-connecte-illustration.svg" alt="" />
-    <img class="fleche" src="/accueil-connecte-fleche.png" alt="" />
+    <img class="fleche" src="/accueil-connecte-fleche.webp" alt="" />
 
     <div class="fr-container full-height flex flex-column flex-center marginBottomResponsive fr-pb-md-5w contenu">
       <div class="fr-grid-row fr-grid-row--gutters fr-mb-5w">

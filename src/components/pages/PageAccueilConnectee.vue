@@ -15,7 +15,13 @@
     <CompteurActionsNationales :aides-nationales-realisees="accueilConnecteViewModel?.totalActionsRealisees" />
   </section>
 
-  <ArticlesRecommandees />
+  <section class="background--white">
+    <ArticlesRecommandees />
+  </section>
+
+  <section class="background--brown-cafe-creme-main-782">
+    <RedirectionMobile />
+  </section>
 </template>
 
 <script lang="ts" setup>
@@ -24,6 +30,7 @@
   import CompletionAccueilConnecte from '@/components/custom/AccueilConnectee/CompletionAccueilConnecte.vue';
   import CompteurActionsNationales from '@/components/custom/AccueilConnectee/CompteurActionsNationales.vue';
   import Raccourcis from '@/components/custom/AccueilConnectee/Raccourcis.vue';
+  import RedirectionMobile from '@/components/custom/AccueilConnectee/RedirectionMobile.vue';
   import ThematiquesAccueilConnecte from '@/components/custom/AccueilConnectee/ThematiquesAccueilConnecte.vue';
   import { AccueilConnectePresenterImpl } from '@/domaines/accueilConnecte/adapters/accueilConnecte.presenter.impl';
   import { AccueilConnecteRepositoryAxios } from '@/domaines/accueilConnecte/adapters/accueilConnecte.repository.axios';
@@ -45,5 +52,9 @@
 <style>
   .background--olive-clair {
     background: #ecebe0;
+  }
+
+  .background--brown-cafe-creme-main-782 {
+    background: var(--brown-cafe-creme-main-782);
   }
 </style>

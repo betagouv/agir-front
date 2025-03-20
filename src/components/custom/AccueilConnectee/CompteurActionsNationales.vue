@@ -15,7 +15,7 @@
 
 <style scoped>
   .root {
-    background-image: url('/public/mains-accueil-connecte.svg');
+    background-image: url('/mains-accueil-connecte.svg');
     background-repeat: no-repeat;
     background-position: bottom center;
   }
