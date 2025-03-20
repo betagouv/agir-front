@@ -11,7 +11,7 @@ export interface ArticleRecommandeViewModel {
 }
 
 export class ArticlesRecommandesPresenterImpl implements ArticlesRecommandesPresenter {
-  constructor(private viewModel: (recommandationPersonnaliseeViewModels: ArticleRecommandeViewModel[]) => void) {}
+  constructor(private viewModel: (articleRecommandeViewModels: ArticleRecommandeViewModel[]) => void) {}
 
   presente(recommandationsPersonnalisees: RecommandationPersonnalisee[]): void {
     this.viewModel(
