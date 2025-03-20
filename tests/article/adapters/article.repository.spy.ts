@@ -1,5 +1,5 @@
 import { Article } from '@/domaines/article/recupererArticle.usecase';
-import { ArticleRepository } from '@/domaines/article/ports/article.repository';
+import { ArticleRecommande, ArticleRepository } from '@/domaines/article/ports/article.repository';
 
 export class SpyArticleRepository implements ArticleRepository {
   private _previsualiserAEteAppele: boolean = false;
@@ -69,6 +69,10 @@ export class SpyArticleRepository implements ArticleRepository {
 
   recuperer(articleId: string): Promise<Article> {
     throw Error;
+  }
+
+  recupererArticlesPersonnalisees(idUtilisateur: string, nombreMax: number): Promise<ArticleRecommande[]> {
+    return Promise.resolve([]);
   }
 
   previsualiser(articleId: string): Promise<Article> {

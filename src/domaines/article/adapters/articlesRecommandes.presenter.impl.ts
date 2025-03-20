@@ -1,4 +1,4 @@
-import { RecommandationsPersonnaliseesPresenter } from '@/domaines/recommandationsPersonnalisees/ports/recommandationsPersonnalisees.presenter';
+import { ArticlesRecommandesPresenter } from '@/domaines/article/ports/articlesRecommandes.presenter';
 import { RecommandationPersonnalisee } from '@/domaines/recommandationsPersonnalisees/recupererRecommandationsPersonnalisees.usecase';
 import { RouteArticlePath } from '@/router/articles/routes';
 import { buildUrl } from '@/shell/buildUrl';
@@ -10,7 +10,7 @@ export interface ArticleRecommandeViewModel {
   url: string;
 }
 
-export class RecommandationsPersonnaliseesArticlesPresenterImpl implements RecommandationsPersonnaliseesPresenter {
+export class ArticlesRecommandesPresenterImpl implements ArticlesRecommandesPresenter {
   constructor(private viewModel: (recommandationPersonnaliseeViewModels: ArticleRecommandeViewModel[]) => void) {}
 
   presente(recommandationsPersonnalisees: RecommandationPersonnalisee[]): void {

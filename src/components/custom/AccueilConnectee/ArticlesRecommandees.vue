@@ -29,16 +29,16 @@
   import { onMounted, ref } from 'vue';
   import Skeleton from '@/components/custom/Skeleton/Skeleton.vue';
   import CarteSimple from '@/components/dsfr/CarteSimple.vue';
+  import { ArticleRepositoryAxios } from '@/domaines/article/adapters/article.repository.axios';
   import {
     ArticleRecommandeViewModel,
-    RecommandationsPersonnaliseesArticlesPresenterImpl,
-  } from '@/domaines/recommandationsPersonnalisees/adapters/recommandationsPersonnalisees.presenter.articlesImpl';
-  import { RecommandationsPersonnaliseesRepositoryAxios } from '@/domaines/recommandationsPersonnalisees/adapters/recommandationsPersonnalisees.repository.axios';
-  import { RecupererArticlesPersonnaliseesUsecase } from '@/domaines/recommandationsPersonnalisees/recupererArticlesPersonnalisees.usecase';
+    ArticlesRecommandesPresenterImpl,
+  } from '@/domaines/article/adapters/articlesRecommandes.presenter.impl';
+  import { RecupererArticlesPersonnaliseesUsecase } from '@/domaines/article/recupererArticlesPersonnalisees.usecase';
   import { RouteCoachName } from '@/router/coach/routeCoachName';
   import { utilisateurStore } from '@/store/utilisateur';
 
-  const usecase = new RecupererArticlesPersonnaliseesUsecase(new RecommandationsPersonnaliseesRepositoryAxios());
+  const usecase = new RecupererArticlesPersonnaliseesUsecase(new ArticleRepositoryAxios());
   const NOMBRE_ARTICLES = 4;
   const articlesRecommandes = ref<ArticleRecommandeViewModel[]>();
   const isLoading = ref<boolean>(true);
@@ -47,7 +47,7 @@
     await usecase.execute(
       utilisateurStore().utilisateur.id,
       NOMBRE_ARTICLES,
-      new RecommandationsPersonnaliseesArticlesPresenterImpl(vm => (articlesRecommandes.value = vm)),
+      new ArticlesRecommandesPresenterImpl(vm => (articlesRecommandes.value = vm)),
     );
     isLoading.value = false;
   });

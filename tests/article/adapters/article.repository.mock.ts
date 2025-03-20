@@ -1,4 +1,4 @@
-import { ArticleRepository } from '@/domaines/article/ports/article.repository';
+import { ArticleRecommande, ArticleRepository } from '@/domaines/article/ports/article.repository';
 import { Article } from '@/domaines/article/recupererArticle.usecase';
 
 export class MockArticleRepository implements ArticleRepository {
@@ -44,5 +44,9 @@ export class MockArticleRepository implements ArticleRepository {
 
   async marquerCommeLu(interactionId, utilisateurId) {
     return;
+  }
+
+  recupererArticlesPersonnalisees(idUtilisateur: string, nombreMax: number): Promise<ArticleRecommande[]> {
+    return Promise.resolve([]);
   }
 }

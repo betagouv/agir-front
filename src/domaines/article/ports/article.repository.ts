@@ -1,4 +1,14 @@
 import { Article } from '@/domaines/article/recupererArticle.usecase';
+import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
+import { InteractionType } from '@/shell/interactionType';
+
+export interface ArticleRecommande {
+  type: InteractionType;
+  titre: string;
+  clefThematiqueAPI: ClefThematiqueAPI;
+  illustrationURL: string;
+  idDuContenu: string;
+}
 
 export interface ArticleRepository {
   recuperer(utilisateurId: string, articleId: string): Promise<Article>;
@@ -14,4 +24,6 @@ export interface ArticleRepository {
   ajouterAuxFavoris(articleId: string, utilisateurId: string): Promise<void>;
 
   retirerDesFavoris(articleId: string, utilisateurId: string): Promise<void>;
+
+  recupererArticlesPersonnalisees(idUtilisateur: string, nombreMax: number): Promise<ArticleRecommande[]>;
 }

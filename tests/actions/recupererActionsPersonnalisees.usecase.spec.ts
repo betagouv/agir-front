@@ -138,12 +138,14 @@ describe('Fichier de test concernant la récupération des actions personnalisé
             commune: 'Paris',
             listeRaccourcis: [
               {
+                emoji: '💶',
                 to: {
                   name: RouteAidesName.AIDES,
                 },
                 label: `50 aides sur votre territoire`,
               },
               {
+                emoji: '🥘',
                 to: {
                   name: RouteServiceName.RECETTES,
                   params: {
@@ -153,6 +155,7 @@ describe('Fichier de test concernant la récupération des actions personnalisé
                 label: `1150 recettes délicieuses, saines et de saison`,
               },
               {
+                emoji: '🍓',
                 to: {
                   name: RouteServiceName.FRUITS_ET_LEGUMES,
                   params: {
@@ -162,6 +165,7 @@ describe('Fichier de test concernant la récupération des actions personnalisé
                 label: `1 calendrier de fruits et légumes de saison`,
               },
               {
+                emoji: '🛒',
                 to: {
                   name: RouteServiceName.PROXIMITE,
                   params: { thematiqueId: MenuThematiques.getThematiqueData(ClefThematiqueAPI.alimentation).url },
@@ -203,12 +207,14 @@ describe('Fichier de test concernant la récupération des actions personnalisé
             commune: 'Paris',
             listeRaccourcis: [
               {
+                emoji: '💶',
                 to: {
                   name: RouteAidesName.AIDES,
                 },
                 label: `50 aides sur votre territoire`,
               },
               {
+                emoji: '🧱',
                 href: 'https://mesaidesreno.beta.gouv.fr/',
                 label: `1 simulateur Mes aides Rénovation`,
               },
@@ -247,6 +253,7 @@ describe('Fichier de test concernant la récupération des actions personnalisé
             commune: 'Paris',
             listeRaccourcis: [
               {
+                emoji: '🚙',
                 to: {
                   name: RouteActionsName.ACTION_INDIVIDUELLE,
                   params: {
@@ -258,6 +265,7 @@ describe('Fichier de test concernant la récupération des actions personnalisé
                 label: `1 simulateur Dois-je changer de voiture ?`,
               },
               {
+                emoji: '🚲',
                 to: {
                   name: RouteAidesName.VELO,
                 },
@@ -299,12 +307,14 @@ describe('Fichier de test concernant la récupération des actions personnalisé
             commune: 'Paris',
             listeRaccourcis: [
               {
+                emoji: '💶',
                 to: {
                   name: RouteAidesName.AIDES,
                 },
                 label: `1 aide sur votre territoire`,
               },
               {
+                emoji: '🔧',
                 to: {
                   name: RouteServiceName.LONGUE_VIE_AUX_OBJETS,
                   params: { thematiqueId: MenuThematiques.getThematiqueData(ClefThematiqueAPI.consommation).url },
