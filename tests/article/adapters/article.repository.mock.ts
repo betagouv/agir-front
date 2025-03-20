@@ -2,6 +2,8 @@ import { ArticleRecommande, ArticleRepository } from '@/domaines/article/ports/a
 import { Article } from '@/domaines/article/recupererArticle.usecase';
 
 export class MockArticleRepository implements ArticleRepository {
+  constructor(private readonly articlesPersonnalises?: ArticleRecommande[]) {}
+
   recuperer(utilisateurId: string, articleId: string): Promise<Article> {
     return Promise.resolve({
       id: articleId,
@@ -47,6 +49,6 @@ export class MockArticleRepository implements ArticleRepository {
   }
 
   recupererArticlesPersonnalisees(idUtilisateur: string, nombreMax: number): Promise<ArticleRecommande[]> {
-    return Promise.resolve([]);
+    return Promise.resolve(this.articlesPersonnalises ?? []);
   }
 }
