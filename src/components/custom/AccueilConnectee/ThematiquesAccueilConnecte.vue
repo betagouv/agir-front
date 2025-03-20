@@ -11,7 +11,7 @@
         </p>
       </div>
 
-      <ul class="list-style-none fr-grid-row fr-grid-row--gutters fr-pb-16w">
+      <ul class="list-style-none fr-grid-row fr-grid-row--gutters fr-pb-8w fr-pb-md-16w">
         <li
           v-for="(description, clefThematique) in thematiques"
           :key="clefThematique"

@@ -6,7 +6,7 @@
       <img src="/accueil-connecte-mobile.webp" loading="lazy" class="image-mobile fr-hidden fr-unhidden-lg" alt="" />
       <div class="fr-col-12 fr-col-lg-5"></div>
       <div class="fr-col-12 fr-col-lg-7">
-        <h2><i>J'agis</i> est sur mobile !</h2>
+        <h2 class="fr-h2"><i>J'agis</i> est sur mobile !</h2>
 
         <p>
           L'application <i class="text--italic">J'agis</i> répond à toutes vos questions et guide vos réflexions du
