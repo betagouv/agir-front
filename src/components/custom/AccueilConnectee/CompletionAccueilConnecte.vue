@@ -32,7 +32,9 @@
               <div class="fr-col-6">
                 <p class="flex flex-column align-items--center fr-mb-1w text--center bordure-droite fr-mr-md-3v">
                   <span class="gros-nombre">{{ progression?.nombreActionsTerminees || 0 }}</span>
-                  <span>Action terminée</span>
+                  <span>
+                    {{ gererPluriel(progression?.nombreActionsTerminees || 0, 'Action terminée', 'Actions terminées') }}
+                  </span>
                 </p>
               </div>
               <div class="fr-col-6 flex flex-column align-items--center">
@@ -55,6 +57,7 @@
 <script setup lang="ts">
   import CercleProgression from '@/components/custom/CercleProgression.vue';
   import { AccueilConnecteViewModel } from '@/domaines/accueilConnecte/ports/accueilConnecte.presenter';
+  import { gererPluriel } from '@/shell/pluriel';
 
   defineProps<{
     progression: AccueilConnecteViewModel['progression'] | undefined;

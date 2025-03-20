@@ -72,30 +72,4 @@ export class RecommandationsPersonnaliseesRepositoryAxios implements Recommandat
       return recommandationPersonnalisee;
     });
   }
-
-  async chargerArticlesPersonnalisees(
-    idUtilisateur: string,
-    nombreMax: number,
-  ): Promise<RecommandationPersonnalisee[]> {
-    const axiosInstance = AxiosFactory.getAxios();
-    const params = `?nombre_max=${nombreMax}&type=article`;
-    const response = await axiosInstance.get<RecommandationApiModel[]>(
-      `/utilisateurs/${idUtilisateur}/recommandations_v3${params}`,
-    );
-
-    return response.data.map((apiModel: RecommandationApiModel) => {
-      const recommandationPersonnalisee: RecommandationPersonnalisee = {
-        type: apiModel.type as InteractionType,
-        titre: apiModel.titre,
-        clefThematiqueAPI: apiModel.thematique_principale as ClefThematiqueAPI,
-        nombreDePointsAGagner: apiModel.points.toString(),
-        illustrationURL: apiModel.image_url,
-        idDuContenu: apiModel.content_id,
-        joursRestants: apiModel.jours_restants,
-        points: apiModel.points,
-      };
-
-      return recommandationPersonnalisee;
-    });
-  }
 }

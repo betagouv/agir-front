@@ -1,6 +1,9 @@
 import { AxiosFactory, intercept401 } from '@/axios.factory';
-import { ArticleRepository } from '@/domaines/article/ports/article.repository';
+import { ArticleRecommande, ArticleRepository } from '@/domaines/article/ports/article.repository';
 import { Article } from '@/domaines/article/recupererArticle.usecase';
+import { RecommandationApiModel } from '@/domaines/recommandationsPersonnalisees/adapters/recommandationsPersonnalisees.repository.axios';
+import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
+import { InteractionType } from '@/shell/interactionType';
 
 interface ArticleAPI {
   titre: string;
@@ -141,5 +144,25 @@ export class ArticleRepositoryAxios implements ArticleRepository {
           : null,
       estEnFavori: reponse.data.article.favoris,
     };
+  }
+
+  async recupererArticlesPersonnalisees(idUtilisateur: string, nombreMax: number): Promise<ArticleRecommande[]> {
+    const axiosInstance = AxiosFactory.getAxios();
+    const params = `?nombre_max=${nombreMax}&type=article`;
+    const response = await axiosInstance.get<RecommandationApiModel[]>(
+      `/utilisateurs/${idUtilisateur}/recommandations_v3${params}`,
+    );
+
+    return response.data.map((apiModel: RecommandationApiModel) => {
+      const recommandationPersonnalisee: ArticleRecommande = {
+        type: apiModel.type as InteractionType,
+        titre: apiModel.titre,
+        clefThematiqueAPI: apiModel.thematique_principale as ClefThematiqueAPI,
+        illustrationURL: apiModel.image_url,
+        idDuContenu: apiModel.content_id,
+      };
+
+      return recommandationPersonnalisee;
+    });
   }
 }
