@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="zindex-4">
     <router-link
       class="fr-btn shadow full-width flex flex-space-between fr-p-2w fr-mb-2w"
       :to="{ name: RouteThematiquesName.THEMATIQUE_V2, params: { id: thematique.url } }"
@@ -23,3 +23,10 @@
 
   const thematique = MenuThematiques.getThematiqueData(clefThematique);
 </script>
+
+<style scoped>
+  .zindex-4 {
+    position: relative;
+    z-index: 4;
+  }
+</style>

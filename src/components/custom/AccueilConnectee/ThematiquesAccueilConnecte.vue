@@ -1,6 +1,19 @@
 <template>
-  <div>
-    <div class="fr-container">
+  <div class="position--relative overflow-x-clip">
+    <FakeCarteAction
+      label="🧺 Faire mes courses dans une épicerie locale"
+      :customStyle="{ top: '-10%', left: '-1%', transform: 'rotate(-5deg)' }"
+    />
+    <FakeCarteAction
+      label="🚗 Est-ce le moment de changer de voiture ?"
+      :customStyle="{ bottom: '0', left: '30%', transform: 'rotate(8deg)' }"
+    />
+    <FakeCarteAction
+      label="🥾 Réparer une paire de chaussures"
+      :customStyle="{ top: '20%', right: '-0.5%', transform: 'rotate(5deg)' }"
+    />
+
+    <div class="fr-container fr-py-5w">
       <div class="text--center fr-mb-10w">
         <h2 class="text--semi-bold">
           <span class="text--bold">{{ prenom }}</span
@@ -29,6 +42,7 @@
 
 <script setup lang="ts">
   import BlocThematiqueAccueilConnecte from '@/components/custom/AccueilConnectee/BlocThematiqueAccueilConnecte.vue';
+  import FakeCarteAction from '@/components/custom/AccueilConnectee/FakeCarteAction.vue';
   import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
   import { utilisateurStore } from '@/store/utilisateur';
 
@@ -45,3 +59,9 @@
     [ClefThematiqueAPI.consommation]: 'Réparer, donner, acheter autrement : les solutions économiques et responsables',
   } as Record<ClefThematiqueAPI, string>;
 </script>
+
+<style scoped>
+  .overflow-x-clip {
+    overflow-x: clip;
+  }
+</style>

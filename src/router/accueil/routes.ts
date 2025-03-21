@@ -11,7 +11,7 @@ const accueilRoutes: RouteRecordRaw[] = [
     name: RouteAccueilName.COMMENCER,
     component: PageAccueilConnectee,
     meta: {
-      title: 'Thématique',
+      title: 'Agir',
     },
   },
 ];
