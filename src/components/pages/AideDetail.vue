@@ -20,7 +20,7 @@
         <p v-else class="text--italic fr-text--sm fr-mt-2w fr-mb-1w">Dernière mise à jour en décembre 2024</p>
 
         <span class="fr-col-12 fr-pr-2w">
-          <span v-if="aide.isSimulateur || aide.montantMaximum" class="fr-grid-row">
+          <span v-if="aide.isSimulateur || aide.montantMaximum || aide.estGratuit" class="fr-grid-row">
             <span
               v-if="aide.isSimulateur"
               class="fr-tag background-bleu-light fr-mr-1w fr-icon-money-euro-circle-line fr-tag--icon-left"
@@ -30,7 +30,11 @@
             </span>
             <span v-if="aide.montantMaximum" class="fr-tag">
               <span class="fr-sr-only">, </span>
-              {{ aide.montantMaximum }}
+              Jusqu'à {{ aide.montantMaximum }} €
+            </span>
+            <span v-if="aide.estGratuit" class="fr-tag">
+              <span class="fr-sr-only">, </span>
+              Gratuit
             </span>
           </span>
         </span>

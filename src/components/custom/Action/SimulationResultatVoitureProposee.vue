@@ -17,7 +17,8 @@
           :class="resultatSimulationVoiture.coutAnnuel.difference < 0 ? 'fr-badge--success ' : 'fr-badge--warning'"
           :aria-label="`Différence par rapport à votre véhicule actuel : ${resultatSimulationVoiture.coutAnnuel.difference}`"
         >
-          {{ resultatSimulationVoiture.coutAnnuel.difference }}€
+          {{ resultatSimulationVoiture.coutAnnuel.difference > 0 ? '+' : ''
+          }}{{ resultatSimulationVoiture.coutAnnuel.difference }}€
         </span>
       </p>
 

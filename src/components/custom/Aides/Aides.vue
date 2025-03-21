@@ -11,7 +11,7 @@
     </div>
     <div class="fr-col-12 fr-col-lg-9">
       <div v-for="(aides, index) in props.aidesGroupesParCategorie" :key="index">
-        <div v-if="categoriesActives.length === 0 || categoriesActives.includes(`${index}`)">
+        <div v-if="categoriesActives.length === 0 || categoriesActives.includes(`${index}`)" class="fr-mb-4w">
           <h2 class="fr-h4">{{ index }}</h2>
           <GrilleAidesDUneAction :aides="aides" />
         </div>
@@ -61,13 +61,3 @@
     }
   });
 </script>
-
-<style scoped>
-  .aide__titre {
-    display: flex;
-    padding-right: 1rem;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-  }
-</style>
