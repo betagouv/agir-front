@@ -7,7 +7,7 @@
     <ThematiquesAccueilConnecte :commune="accueilConnecteViewModel?.commune" />
   </section>
 
-  <section class="background--olive-clair">
+  <section class="background--olive-clair zindex-3">
     <Raccourcis :commune="accueilConnecteViewModel?.commune" :liste-raccourcis="accueilConnecteViewModel?.raccourcis" />
   </section>
 
@@ -49,12 +49,17 @@
   });
 </script>
 
-<style>
+<style scoped>
   .background--olive-clair {
     background: #ecebe0;
   }
 
   .background--brown-cafe-creme-main-782 {
     background: var(--brown-cafe-creme-main-782);
+  }
+
+  .zindex-3 {
+    position: relative;
+    z-index: 3;
   }
 </style>
