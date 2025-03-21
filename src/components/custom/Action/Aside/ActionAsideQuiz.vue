@@ -8,7 +8,7 @@
     <p class="fr-mb-1w">
       <span class="text--bold">
         {{ nombreActionRealise }}
-        {{ gererPluriel(nombreActionRealise, 'quiz terminé', 'quizs terminés') }}
+        {{ gererPluriel(nombreActionRealise, 'quiz terminé', 'quiz terminés') }}
       </span>
       par la communauté
     </p>
