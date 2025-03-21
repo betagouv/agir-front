@@ -1,5 +1,26 @@
 # Changelog
 
+## [1.45.0](https://github.com/betagouv/agir-front/compare/v1.44.0...v1.45.0) (2025-03-19)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* action de type bilan ([#984](https://github.com/betagouv/agir-front/issues/984)) ([55acffb](https://github.com/betagouv/agir-front/commit/55acffb64a8bb180c878e1b7d60f3960f7b1d5a9))
+* action est terminée ([#980](https://github.com/betagouv/agir-front/issues/980)) ([2e90b45](https://github.com/betagouv/agir-front/commit/2e90b45da8fe1c8ef2a28e3c5f4f16c94eb95740))
+* catalogue aides avec la nouvelle ui ([#981](https://github.com/betagouv/agir-front/issues/981)) ([7e85811](https://github.com/betagouv/agir-front/commit/7e858116ec778b94abc1000887f309a185f400f6))
+* previsualiser la page aide depuis le CMS et afficher une page aide en mode non connecté ([#985](https://github.com/betagouv/agir-front/issues/985)) ([06b7271](https://github.com/betagouv/agir-front/commit/06b72712628c04b681dcd4ce16f5a97cb1d889b6))
+* previsualiser une action dans le cms ([#992](https://github.com/betagouv/agir-front/issues/992)) ([c592042](https://github.com/betagouv/agir-front/commit/c5920425f937bcb1f1dbf1029e5df66c1a6434c4))
+* retour de la recette des actions ([#983](https://github.com/betagouv/agir-front/issues/983)) ([738443f](https://github.com/betagouv/agir-front/commit/738443f491c5f80ed0a04ca2b379befcf5d0c355))
+
+
+### 👷 Autres changements
+
+* Bump @babel/helpers from 7.26.0 to 7.26.10 ([#979](https://github.com/betagouv/agir-front/issues/979)) ([29d9d4a](https://github.com/betagouv/agir-front/commit/29d9d4a825c8f0be16ff1fbbed4654913f232d43))
+* Bump @playwright/test from 1.51.0 to 1.51.1 ([#986](https://github.com/betagouv/agir-front/issues/986)) ([565970b](https://github.com/betagouv/agir-front/commit/565970bdd43b20288392e73ee92090b5b9db4f0a))
+* Bump @sentry/vite-plugin from 3.1.2 to 3.2.2 ([#989](https://github.com/betagouv/agir-front/issues/989)) ([442a358](https://github.com/betagouv/agir-front/commit/442a358012eebdfa14a0944c27ccc27e98d0da26))
+* Bump @types/node from 22.13.9 to 22.13.10 ([#988](https://github.com/betagouv/agir-front/issues/988)) ([90264cb](https://github.com/betagouv/agir-front/commit/90264cbefa6d3462e00dbe94039012992b014e3a))
+* Bump lint-staged from 15.4.3 to 15.5.0 ([#990](https://github.com/betagouv/agir-front/issues/990)) ([c1037c6](https://github.com/betagouv/agir-front/commit/c1037c6d932e77ea2dc58ccdb39013eeb5279f7f))
+
 ## [1.44.0](https://github.com/betagouv/agir-front/compare/v1.43.0...v1.44.0) (2025-03-13)
 
 
