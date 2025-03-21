@@ -1,5 +1,5 @@
 import { RouteRecordRaw } from 'vue-router';
-const PageParOuCommencer = () => import('@/components/pages/PageParOuCommencer.vue');
+const PageAccueilConnectee = () => import('@/components/pages/PageAccueilConnectee.vue');
 
 export enum RouteAccueilName {
   COMMENCER = 'agir_v2',
@@ -9,9 +9,9 @@ const accueilRoutes: RouteRecordRaw[] = [
   {
     path: `/v2/agir`,
     name: RouteAccueilName.COMMENCER,
-    component: PageParOuCommencer,
+    component: PageAccueilConnectee,
     meta: {
-      title: 'Thématique',
+      title: 'Agir',
     },
   },
 ];
