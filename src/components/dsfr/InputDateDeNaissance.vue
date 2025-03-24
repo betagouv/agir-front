@@ -5,7 +5,9 @@
     class="fr-fieldset"
     role="group"
   >
-    <legend id="date-default-1578-fieldset-legend" class="fr-fieldset__legend">Date de naissance</legend>
+    <legend id="date-default-1578-fieldset-legend" class="fr-fieldset__legend text--normal fr-mb-0">
+      Date de naissance
+    </legend>
     <div class="fr-fieldset__element fr-fieldset__element--inline fr-fieldset__element--number">
       <div class="fr-input-group">
         <label class="fr-label" for="date-default-1578-bday-day">
@@ -66,7 +68,7 @@
   const props = withDefaults(
     defineProps<{
       modelValue: { jour: string; mois: string; annee: string };
-      disabled: boolean;
+      disabled?: boolean;
     }>(),
     {
       disabled: false,

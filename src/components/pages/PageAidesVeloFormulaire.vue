@@ -95,7 +95,7 @@
     id: '',
     mail: '',
     abonnementTransport: false,
-    anneeNaissance: '',
+    dateNaissance: { jour: '', mois: '', annee: '' },
     nom: '',
     prenom: '',
     pseudo: '',
@@ -141,7 +141,7 @@
         revenuFiscal: revenuFiscal.value,
         nombreDePartsFiscales: nombreDePartsFiscales.value,
         pseudo: utilisateur.pseudo,
-        anneeNaissance: profileUtilisateurViewModel.value.anneeNaissance,
+        dateNaissance: profileUtilisateurViewModel.value.dateNaissance,
         nomPrenomModifiables: profileUtilisateurViewModel.value.nomPrenomModifiables,
       };
       await usecase.execute(donneeAMettreAjour);

@@ -61,7 +61,7 @@
             @blur="onValidationNom()"
           />
         </div>
-        <div class="fr-col-lg-6 fr-col-12">
+        <div class="fr-col-12">
           <InputDateDeNaissance
             :disabled="utilisateurStore().utilisateur.estUnUtilisateurFranceConnect"
             v-model="profileUtlisateurViewModel.dateNaissance"
