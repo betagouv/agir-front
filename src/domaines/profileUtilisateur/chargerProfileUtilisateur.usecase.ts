@@ -11,6 +11,8 @@ export interface ProfileUtilisateurApiModel {
   revenu_fiscal: number | null;
   nombre_de_parts_fiscales: number;
   abonnement_ter_loire: boolean;
+  jour_naissance?: number;
+  mois_naissance?: number;
   annee_naissance?: number;
   pseudo: string;
   is_nom_prenom_modifiable: boolean;
@@ -24,7 +26,11 @@ export interface ProfileUtilisateur {
   abonnementTransport: boolean;
   revenuFiscal: number | null;
   nombreDePartsFiscales: number;
-  anneeNaissance?: number;
+  dateNaissance?: {
+    jour: number;
+    mois: number;
+    annee: number;
+  };
   pseudo: string;
   nomPrenomModifiables: boolean;
 }
@@ -32,6 +38,11 @@ export interface ProfileUtilisateur {
 export interface ProfileUtilisateurAMettreAJour extends ProfileUtilisateurFranceConnectAMettreAJour {
   nom: string;
   prenom: string;
+  dateNaissance: {
+    jour: number;
+    mois: number;
+    annee: number;
+  };
 }
 
 export interface ProfileUtilisateurFranceConnectAMettreAJour {
@@ -39,7 +50,6 @@ export interface ProfileUtilisateurFranceConnectAMettreAJour {
   abonnementTransport: boolean;
   revenuFiscal: number | null;
   nombreDePartsFiscales: number;
-  anneeNaissance?: number;
   pseudo: string;
 }
 
@@ -58,7 +68,13 @@ export class ProfileUtilisateurRepositoryAxiosImpl implements ProfileUtilisateur
       revenuFiscal: response.data.revenu_fiscal,
       nombreDePartsFiscales: response.data.nombre_de_parts_fiscales,
       abonnementTransport: response.data.abonnement_ter_loire,
-      anneeNaissance: response.data.annee_naissance,
+      dateNaissance: response.data.jour_naissance
+        ? {
+            jour: response.data.jour_naissance,
+            mois: response.data.mois_naissance!,
+            annee: response.data.annee_naissance!,
+          }
+        : undefined,
       pseudo: response.data.pseudo || '',
       nomPrenomModifiables: response.data.is_nom_prenom_modifiable,
     };
@@ -73,7 +89,9 @@ export class ProfileUtilisateurRepositoryAxiosImpl implements ProfileUtilisateur
       revenu_fiscal: profileUtilisateur.revenuFiscal,
       nombre_de_parts_fiscales: profileUtilisateur.nombreDePartsFiscales,
       abonnement_ter_loire: profileUtilisateur.abonnementTransport,
-      annee_naissance: profileUtilisateur.anneeNaissance,
+      jour_naissance: profileUtilisateur.dateNaissance.jour,
+      mois_naissance: profileUtilisateur.dateNaissance.mois,
+      annee_naissance: profileUtilisateur.dateNaissance.annee,
       pseudo: profileUtilisateur.pseudo,
     });
   }
@@ -85,7 +103,6 @@ export class ProfileUtilisateurRepositoryAxiosImpl implements ProfileUtilisateur
       revenu_fiscal: profileUtilisateur.revenuFiscal,
       nombre_de_parts_fiscales: profileUtilisateur.nombreDePartsFiscales,
       abonnement_ter_loire: profileUtilisateur.abonnementTransport,
-      annee_naissance: profileUtilisateur.anneeNaissance,
       pseudo: profileUtilisateur.pseudo,
     });
   }

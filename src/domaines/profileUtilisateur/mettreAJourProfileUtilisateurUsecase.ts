@@ -8,7 +8,11 @@ export type ProfileAMettreAJourInput = {
   prenom: string;
   revenuFiscal: number | null;
   nombreDePartsFiscales: number;
-  anneeNaissance?: string;
+  dateNaissance: {
+    jour: string;
+    mois: string;
+    annee: string;
+  };
   pseudo: string;
   nomPrenomModifiables: boolean;
 };
@@ -28,9 +32,11 @@ export class MettreAJourProfileUtilisateurUsecase {
         prenom: compteUtilisateurInput.prenom,
         revenuFiscal: compteUtilisateurInput.revenuFiscal,
         nombreDePartsFiscales: compteUtilisateurInput.nombreDePartsFiscales,
-        anneeNaissance: compteUtilisateurInput.anneeNaissance
-          ? Number(compteUtilisateurInput.anneeNaissance)
-          : undefined,
+        dateNaissance: {
+          jour: parseInt(compteUtilisateurInput.dateNaissance.jour),
+          mois: parseInt(compteUtilisateurInput.dateNaissance.mois),
+          annee: parseInt(compteUtilisateurInput.dateNaissance.annee),
+        },
         pseudo: compteUtilisateurInput.pseudo,
       });
     } else {
@@ -39,9 +45,6 @@ export class MettreAJourProfileUtilisateurUsecase {
         abonnementTransport: compteUtilisateurInput.abonnementTransport,
         revenuFiscal: compteUtilisateurInput.revenuFiscal,
         nombreDePartsFiscales: compteUtilisateurInput.nombreDePartsFiscales,
-        anneeNaissance: compteUtilisateurInput.anneeNaissance
-          ? Number(compteUtilisateurInput.anneeNaissance)
-          : undefined,
         pseudo: compteUtilisateurInput.pseudo,
       });
     }

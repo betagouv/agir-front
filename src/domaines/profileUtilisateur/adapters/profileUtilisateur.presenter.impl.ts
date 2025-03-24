@@ -10,7 +10,11 @@ export interface ProfileUtilisateurViewModel {
   abonnementTransport: boolean;
   revenuFiscal: number | null;
   nombreDePartsFiscales: number;
-  anneeNaissance?: string;
+  dateNaissance: {
+    jour: string;
+    mois: string;
+    annee: string;
+  };
   nomPrenomModifiables: boolean;
 }
 
@@ -26,7 +30,11 @@ export class ProfileUtilisateurPresenterImpl implements ProfileUtilisateurPresen
       prenom: profileUtilisateur.prenom,
       revenuFiscal: profileUtilisateur.revenuFiscal,
       nombreDePartsFiscales: profileUtilisateur.nombreDePartsFiscales,
-      anneeNaissance: profileUtilisateur.anneeNaissance ? profileUtilisateur.anneeNaissance.toString() : undefined,
+      dateNaissance: {
+        jour: profileUtilisateur.dateNaissance?.jour.toString() || '',
+        mois: profileUtilisateur.dateNaissance?.mois.toString() || '',
+        annee: profileUtilisateur.dateNaissance?.annee.toString() || '',
+      },
       pseudo: profileUtilisateur.pseudo,
       nomPrenomModifiables: profileUtilisateur.nomPrenomModifiables,
     });

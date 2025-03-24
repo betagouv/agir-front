@@ -17,7 +17,6 @@ class SpyProfileUtilisateurRepository implements ProfileUtilisateurRepository {
     revenuFiscal: 0,
     nombreDePartsFiscales: 0,
     abonnementTransport: false,
-    anneeNaissance: 1998,
     pseudo: '',
   };
 
@@ -32,7 +31,11 @@ class SpyProfileUtilisateurRepository implements ProfileUtilisateurRepository {
     revenuFiscal: 0,
     nombreDePartsFiscales: 0,
     abonnementTransport: false,
-    anneeNaissance: -1,
+    dateNaissance: {
+      jour: -1,
+      mois: -1,
+      annee: -1,
+    },
     pseudo: '',
   };
 
@@ -74,6 +77,11 @@ describe('Fichier de tests concernant la mise à jour du profile utilisateur', (
       abonnementTransport: false,
       pseudo: 'JD',
       nomPrenomModifiables: true,
+      dateNaissance: {
+        jour: '1',
+        mois: '1',
+        annee: '1998',
+      },
     };
     await usecase.execute(viewModelInput);
     // THEN
@@ -84,7 +92,11 @@ describe('Fichier de tests concernant la mise à jour du profile utilisateur', (
       revenuFiscal: 10000,
       nombreDePartsFiscales: 1,
       abonnementTransport: false,
-      anneeNaissance: undefined,
+      dateNaissance: {
+        jour: 1,
+        mois: 1,
+        annee: 1998,
+      },
       pseudo: 'JD',
     });
     expect(sessionRepository.utilisateur).toStrictEqual<Utilisateur>({
@@ -98,7 +110,7 @@ describe('Fichier de tests concernant la mise à jour du profile utilisateur', (
       estUnUtilisateurFranceConnect: false,
     });
   });
-  it('Cas de France Connect : le nom et prenom ne peuvent pas être mis à jour et la mise à jour doit appeler le repository et mettre à jour la session', async () => {
+  it('Cas de France Connect : le nom, prenom et date de naissance ne peuvent pas être mis à jour et la mise à jour doit appeler le repository et mettre à jour la session', async () => {
     // GIVEN
     // WHEN
     const repository = new SpyProfileUtilisateurRepository();
@@ -117,6 +129,11 @@ describe('Fichier de tests concernant la mise à jour du profile utilisateur', (
       abonnementTransport: false,
       pseudo: 'nouveauPseudo',
       nomPrenomModifiables: false,
+      dateNaissance: {
+        jour: '1',
+        mois: '1',
+        annee: '1998',
+      },
     };
     await usecase.execute(viewModelInput);
     // THEN
@@ -127,7 +144,6 @@ describe('Fichier de tests concernant la mise à jour du profile utilisateur', (
       revenuFiscal: 10000,
       nombreDePartsFiscales: 1,
       abonnementTransport: false,
-      anneeNaissance: undefined,
       pseudo: 'nouveauPseudo',
     });
     expect(sessionRepository.utilisateur).toStrictEqual<Utilisateur>({
