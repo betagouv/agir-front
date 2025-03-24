@@ -62,9 +62,9 @@
           />
         </div>
         <div class="fr-col-lg-6 fr-col-12">
-          <InputSelectAnneeDeNaissance
-            v-model="profileUtlisateurViewModel.anneeNaissance"
-            :default-select-value="profileUtlisateurViewModel.anneeNaissance"
+          <InputDateDeNaissance
+            :disabled="utilisateurStore().utilisateur.estUnUtilisateurFranceConnect"
+            v-model="profileUtlisateurViewModel.dateNaissance"
           />
         </div>
       </div>
@@ -129,7 +129,7 @@
   import Alert from '@/components/custom/Alert.vue';
   import CarteInfo from '@/components/custom/CarteInfo.vue';
   import CompteFormulaireRevenuFiscal from '@/components/custom/Compte/CompteFormulaireRevenuFiscal.vue';
-  import InputSelectAnneeDeNaissance from '@/components/custom/CreationCompte/InputSelectAnneeDeNaissance.vue';
+  import InputDateDeNaissance from '@/components/dsfr/InputDateDeNaissance.vue';
   import InputText from '@/components/dsfr/InputText.vue';
   import { validationPrenomOuNomOuPseudo } from '@/components/validations/validationsChampsFormulaire';
   import { useAlerte } from '@/composables/useAlerte';
@@ -140,6 +140,7 @@
     MettreAJourProfileUtilisateurUsecase,
     ProfileAMettreAJourInput,
   } from '@/domaines/profileUtilisateur/mettreAJourProfileUtilisateurUsecase';
+  import { utilisateurStore } from '@/store/utilisateur';
 
   const { alerte, afficherAlerte } = useAlerte();
   const props = defineProps<{ compteUtlisateurViewModel: ProfileUtilisateurViewModel }>();
@@ -162,7 +163,7 @@
     const profileAMettreAJour: ProfileAMettreAJourInput = {
       id: profileUtlisateurViewModel.value.id,
       abonnementTransport: profileUtlisateurViewModel.value.abonnementTransport,
-      anneeNaissance: profileUtlisateurViewModel.value.anneeNaissance,
+      dateNaissance: profileUtlisateurViewModel.value.dateNaissance,
       nom: profileUtlisateurViewModel.value.nom,
       prenom: profileUtlisateurViewModel.value.prenom,
       pseudo: profileUtlisateurViewModel.value.pseudo,
