@@ -30,6 +30,7 @@ export class UtilisateurRepositoryMock implements UtilisateurRepository {
       afficherDisclaimerAides: false,
       pseudo: '',
       estUnUtilisateurFranceConnect: false,
+      afficherMessageReset: false,
     });
   }
 
@@ -63,6 +64,7 @@ export class UtilisateurRepositoryMock implements UtilisateurRepository {
       token: 'token',
       pseudo: '',
       estUnUtilisateurFranceConnect: false,
+      afficherMessageReset: false,
     });
   }
 
@@ -77,6 +79,7 @@ export class UtilisateurRepositoryMock implements UtilisateurRepository {
       token: 'token',
       pseudo: '',
       estUnUtilisateurFranceConnect: true,
+      afficherMessageReset: false,
     });
   }
 
@@ -92,5 +95,9 @@ export class UtilisateurRepositoryMock implements UtilisateurRepository {
         urlDeDeconnexion: '/',
       });
     }
+  }
+
+  terminerMessageReset(idUtilisateur: string): Promise<void> {
+    throw Error;
   }
 }

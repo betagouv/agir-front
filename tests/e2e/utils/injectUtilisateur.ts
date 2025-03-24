@@ -12,6 +12,7 @@ export class InjectUtilisateur {
         afficherDisclaimerAides: false,
         pseudo: 'dorian',
         estUnUtilisateurFranceConnect: false,
+        afficherMessageReset: false,
       },
       score: {
         points: 0,

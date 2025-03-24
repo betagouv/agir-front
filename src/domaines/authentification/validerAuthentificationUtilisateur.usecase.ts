@@ -1,10 +1,44 @@
 import { AuthentificationResultatPresenter } from '@/domaines/authentification/ports/authentificationResultatPresenter';
 import { SessionRepository } from '@/domaines/authentification/ports/session.repository';
-import { UtilisateurRepository } from '@/domaines/authentification/ports/utilisateur.repository';
+import { Utilisateur, UtilisateurRepository } from '@/domaines/authentification/ports/utilisateur.repository';
 
 export enum AuthentificationResultat {
   PEUT_SE_CONNECTER = 'peut_se_connecter',
   DOIT_FAIRE_ONBOARDING = 'doit_faire_onboarding',
+  DOIT_VOIR_MESSAGE_RESET = 'doit_voir_message_reset',
+}
+
+interface ProchaineEtapeAuthentification {
+  prochaineEtape(): AuthentificationResultat;
+}
+
+class ProchaineEtapeOnboarding implements ProchaineEtapeAuthentification {
+  prochaineEtape(): AuthentificationResultat {
+    return AuthentificationResultat.DOIT_FAIRE_ONBOARDING;
+  }
+}
+
+class ProchaineEtapeResetMessage implements ProchaineEtapeAuthentification {
+  prochaineEtape(): AuthentificationResultat {
+    return AuthentificationResultat.DOIT_VOIR_MESSAGE_RESET;
+  }
+}
+
+class ProchaineEtapeConnexion implements ProchaineEtapeAuthentification {
+  prochaineEtape(): AuthentificationResultat {
+    return AuthentificationResultat.PEUT_SE_CONNECTER;
+  }
+}
+
+export class ProchaineEtapeAuthentificationStrategy {
+  static determinerProchaineEtape(utilisateur: Utilisateur): ProchaineEtapeAuthentification {
+    if (!utilisateur.onboardingAEteRealise) {
+      return new ProchaineEtapeOnboarding();
+    } else if (utilisateur.onboardingAEteRealise && utilisateur.afficherMessageReset) {
+      return new ProchaineEtapeResetMessage();
+    }
+    return new ProchaineEtapeConnexion();
+  }
 }
 
 export class ValiderAuthentificationUtilisateurUsecase {
@@ -20,10 +54,8 @@ export class ValiderAuthentificationUtilisateurUsecase {
   ) {
     const utilisateur = await this.utilisateurRepository.validerLoginOtp(email, code);
     this.sessionRepository.sauvegarderUtilisateur(utilisateur);
-    authentificationResultatPresenter.presente(
-      utilisateur.onboardingAEteRealise
-        ? AuthentificationResultat.PEUT_SE_CONNECTER
-        : AuthentificationResultat.DOIT_FAIRE_ONBOARDING,
-    );
+
+    const prochaineEtape = ProchaineEtapeAuthentificationStrategy.determinerProchaineEtape(utilisateur);
+    authentificationResultatPresenter.presente(prochaineEtape.prochaineEtape());
   }
 }

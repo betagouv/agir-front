@@ -12,6 +12,7 @@ export class SpySauvegarderUtilisateurSessionRepository implements SessionReposi
     afficherDisclaimerAides: false,
     pseudo: '',
     estUnUtilisateurFranceConnect: false,
+    afficherMessageReset: false,
   };
 
   get utilisateur(): Utilisateur {
@@ -49,6 +50,7 @@ export class SpySauvegarderUtilisateurSessionRepository implements SessionReposi
       afficherDisclaimerAides: false,
       pseudo: '',
       estUnUtilisateurFranceConnect: false,
+      afficherMessageReset: false,
     };
   }
 

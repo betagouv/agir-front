@@ -24,6 +24,7 @@ describe('Fichier de tests concernant la validation du compte utilisateur', () =
       token: 'token',
       pseudo: '',
       estUnUtilisateurFranceConnect: false,
+      afficherMessageReset: false,
     });
   });
 });

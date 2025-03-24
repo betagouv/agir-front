@@ -33,6 +33,7 @@ describe('Fichier de tests concernant la creation du compte utilisateur', () => 
       afficherDisclaimerAides: false,
       pseudo: '',
       estUnUtilisateurFranceConnect: false,
+      afficherMessageReset: false,
     });
   });
 });

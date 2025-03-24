@@ -30,6 +30,7 @@ export class UtilisateurRepositoryForTest implements UtilisateurRepository {
       afficherDisclaimerAides: false,
       pseudo: 'johndoe',
       estUnUtilisateurFranceConnect: false,
+      afficherMessageReset: false,
     });
   }
 
@@ -59,6 +60,7 @@ export class UtilisateurRepositoryForTest implements UtilisateurRepository {
       afficherDisclaimerAides: false,
       pseudo: 'johndoe',
       estUnUtilisateurFranceConnect: false,
+      afficherMessageReset: false,
     });
   }
 
@@ -72,10 +74,15 @@ export class UtilisateurRepositoryForTest implements UtilisateurRepository {
       afficherDisclaimerAides: false,
       pseudo: 'johndoe',
       estUnUtilisateurFranceConnect: true,
+      afficherMessageReset: false,
     });
   }
 
   deconnecterUtilisateur(idUtilisateur: string): Promise<DeconnexionFranceConnect> {
+    throw Error;
+  }
+
+  terminerMessageReset(idUtilisateur: string): Promise<void> {
     throw Error;
   }
 }

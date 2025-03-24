@@ -108,6 +108,7 @@ describe('Fichier de tests concernant la mise à jour du profile utilisateur', (
       afficherDisclaimerAides: false,
       pseudo: 'JD',
       estUnUtilisateurFranceConnect: false,
+      afficherMessageReset: false,
     });
   });
   it('Cas de France Connect : le nom, prenom et date de naissance ne peuvent pas être mis à jour et la mise à jour doit appeler le repository et mettre à jour la session', async () => {
@@ -155,6 +156,7 @@ describe('Fichier de tests concernant la mise à jour du profile utilisateur', (
       afficherDisclaimerAides: false,
       pseudo: 'nouveauPseudo',
       estUnUtilisateurFranceConnect: true,
+      afficherMessageReset: false,
     });
   });
 });
