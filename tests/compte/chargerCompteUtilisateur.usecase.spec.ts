@@ -35,6 +35,7 @@ describe('Fichier de tests concernant le chargement du compte utilisateur', () =
       onboardingAEteRealise: true,
       afficherDisclaimerAides: false,
       pseudo: 'JD',
+      estUnUtilisateurFranceConnect: false,
     });
   });
 });

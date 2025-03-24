@@ -17,6 +17,7 @@ interface UtilisateurApiModel {
   is_onboarding_done: boolean;
   couverture_aides_ok: boolean;
   pseudo?: string;
+  is_nom_prenom_modifiable: boolean;
 }
 
 interface LoginApiModel {
@@ -53,6 +54,7 @@ export class UtilisateurRepositoryAxios implements UtilisateurRepository {
       onboardingAEteRealise: response.data.utilisateur.is_onboarding_done,
       afficherDisclaimerAides: !response.data.utilisateur.couverture_aides_ok,
       token: response.data.token,
+      estUnUtilisateurFranceConnect: !response.data.utilisateur.is_nom_prenom_modifiable,
     };
   }
 
@@ -67,6 +69,7 @@ export class UtilisateurRepositoryAxios implements UtilisateurRepository {
       onboardingAEteRealise: response.data.is_onboarding_done,
       afficherDisclaimerAides: !response.data.couverture_aides_ok,
       pseudo: response.data.pseudo || '',
+      estUnUtilisateurFranceConnect: !response.data.is_nom_prenom_modifiable,
     };
   }
 
@@ -125,6 +128,7 @@ export class UtilisateurRepositoryAxios implements UtilisateurRepository {
       onboardingAEteRealise: response.data.utilisateur.is_onboarding_done,
       afficherDisclaimerAides: !response.data.utilisateur.couverture_aides_ok,
       token: response.data.token,
+      estUnUtilisateurFranceConnect: true,
     };
   }
 

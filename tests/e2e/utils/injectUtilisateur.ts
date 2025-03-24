@@ -11,6 +11,7 @@ export class InjectUtilisateur {
         onboardingAEteRealise: true,
         afficherDisclaimerAides: false,
         pseudo: 'dorian',
+        estUnUtilisateurFranceConnect: false,
       },
       score: {
         points: 0,

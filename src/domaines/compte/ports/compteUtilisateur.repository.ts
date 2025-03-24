@@ -36,5 +36,10 @@ export interface CompteUtilisateurRepository {
     pseudo: string,
     commune: string,
     codePostal: string,
+    dateNaissance?: {
+      jour: number;
+      mois: number;
+      annee: number;
+    },
   ): Promise<void>;
 }

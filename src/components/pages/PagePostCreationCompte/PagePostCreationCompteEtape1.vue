@@ -22,6 +22,10 @@
               @blur="onValidationPseudo"
             />
           </div>
+          <InputDateDeNaissance
+            v-if="!utilisateurStore().utilisateur.estUnUtilisateurFranceConnect"
+            v-model="onboardingPostCreationCompte().dateDeNaissance"
+          />
         </fieldset>
         <button class="fr-btn fr-mr-4w">Continuer</button>
       </form>
@@ -31,11 +35,13 @@
 
 <script lang="ts" setup>
   import { ref } from 'vue';
+  import InputDateDeNaissance from '@/components/dsfr/InputDateDeNaissance.vue';
   import InputText from '@/components/dsfr/InputText.vue';
   import { validationPrenomOuNomOuPseudo } from '@/components/validations/validationsChampsFormulaire';
   import router from '@/router';
   import { RouteCompteName } from '@/router/compte/routeCompteName';
   import { onboardingPostCreationCompte } from '@/store/onboardingPostCreationCompte';
+  import { utilisateurStore } from '@/store/utilisateur';
 
   const validerLaReponse = () => {
     if (!onValidationPseudo()) return;

@@ -28,6 +28,7 @@ describe("Fichier de tests concernant la validation de l'authentification de l'u
       afficherDisclaimerAides: false,
       token: 'token',
       pseudo: '',
+      estUnUtilisateurFranceConnect: false,
     });
   });
 

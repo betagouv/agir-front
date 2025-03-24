@@ -29,6 +29,7 @@ describe("Fichier de tests concernant la déconnexion d'un compte utilisateur", 
       onboardingAEteRealise: false,
       afficherDisclaimerAides: false,
       pseudo: '',
+      estUnUtilisateurFranceConnect: false,
     });
   });
   it("L'utilisateur connecté avec France Connect est déconnecté du service doit rédiriger vers la deconnexion france connect et sa session est terminée", async () => {
@@ -56,6 +57,7 @@ describe("Fichier de tests concernant la déconnexion d'un compte utilisateur", 
       onboardingAEteRealise: false,
       afficherDisclaimerAides: false,
       pseudo: '',
+      estUnUtilisateurFranceConnect: false,
     });
   });
 });

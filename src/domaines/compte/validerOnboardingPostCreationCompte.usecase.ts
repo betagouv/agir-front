@@ -17,6 +17,13 @@ export class ValiderOnboardingPostCreationCompteUsecase {
       onboardingPostCreationCompteState.pseudo,
       onboardingPostCreationCompteState.commune,
       onboardingPostCreationCompteState.codePostal,
+      onboardingPostCreationCompteState.dateDeNaissance.jour === ''
+        ? undefined
+        : {
+            jour: parseInt(onboardingPostCreationCompteState.dateDeNaissance.jour),
+            mois: parseInt(onboardingPostCreationCompteState.dateDeNaissance.mois),
+            annee: parseInt(onboardingPostCreationCompteState.dateDeNaissance.annee),
+          },
     );
     this.sessionRepository.sauvegarderUtilisateur({
       pseudo: onboardingPostCreationCompteState.pseudo,

@@ -14,6 +14,7 @@
 <script lang="ts" setup>
   import { onMounted } from 'vue';
   import { useRoute } from 'vue-router';
+  import { AxiosFactory } from '@/axios.factory';
   import Alert from '@/components/custom/Alert.vue';
   import { useAlerte } from '@/composables/useAlerte';
   import { AuthentificationResultatPresenterImpl } from '@/domaines/authentification/adapters/authentificationResultatPresenterImpl';
@@ -46,10 +47,18 @@
         }),
       )
       .catch(reason => {
-        afficherAlerte('error', 'Erreur lors de la validation du compte', reason.data.message);
+        afficherAlerte(
+          'error',
+          'Erreur lors la connexion à France Connect. Deconnexion en cours veuillez patienter.',
+          reason.data.message,
+        );
+
         setTimeout(() => {
-          window.location.href = '/';
-        }, 500);
+          const axios = AxiosFactory.getAxios();
+          axios.post('/logout', { oidc_state: oidcState }).then(reponse => {
+            window.location.href = reponse.data.france_connect_logout_url;
+          });
+        }, 3000);
       });
   });
 </script>

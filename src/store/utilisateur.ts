@@ -24,6 +24,7 @@ export const utilisateurStore = defineStore('utilisateur', {
       afficherDisclaimerAides: false,
       token: '',
       pseudo: '',
+      estUnUtilisateurFranceConnect: false,
     },
     score: {
       points: 0,

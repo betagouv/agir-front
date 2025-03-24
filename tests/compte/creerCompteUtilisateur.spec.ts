@@ -32,6 +32,7 @@ describe('Fichier de tests concernant la creation du compte utilisateur', () => 
       onboardingAEteRealise: false,
       afficherDisclaimerAides: false,
       pseudo: '',
+      estUnUtilisateurFranceConnect: false,
     });
   });
 });

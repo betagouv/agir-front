@@ -4,6 +4,7 @@ export interface OnboardingPostCreationCompteState {
   pseudo: string;
   commune: string;
   codePostal: string;
+  dateDeNaissance: { jour: string; mois: string; annee: string };
 }
 
 export const onboardingPostCreationCompte = defineStore('onboardingPostCreationCompteState', {
@@ -11,6 +12,7 @@ export const onboardingPostCreationCompte = defineStore('onboardingPostCreationC
     pseudo: '',
     commune: '',
     codePostal: '',
+    dateDeNaissance: { jour: '', mois: '', annee: '' },
   }),
 
   persist: {

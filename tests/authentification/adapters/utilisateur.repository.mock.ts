@@ -29,6 +29,7 @@ export class UtilisateurRepositoryMock implements UtilisateurRepository {
       onboardingAEteRealise: false,
       afficherDisclaimerAides: false,
       pseudo: '',
+      estUnUtilisateurFranceConnect: false,
     });
   }
 
@@ -61,6 +62,7 @@ export class UtilisateurRepositoryMock implements UtilisateurRepository {
       afficherDisclaimerAides: false,
       token: 'token',
       pseudo: '',
+      estUnUtilisateurFranceConnect: false,
     });
   }
 
@@ -74,6 +76,7 @@ export class UtilisateurRepositoryMock implements UtilisateurRepository {
       afficherDisclaimerAides: false,
       token: 'token',
       pseudo: '',
+      estUnUtilisateurFranceConnect: true,
     });
   }
 

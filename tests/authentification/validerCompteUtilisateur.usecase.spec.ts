@@ -23,6 +23,7 @@ describe('Fichier de tests concernant la validation du compte utilisateur', () =
       afficherDisclaimerAides: false,
       token: 'token',
       pseudo: '',
+      estUnUtilisateurFranceConnect: false,
     });
   });
 });

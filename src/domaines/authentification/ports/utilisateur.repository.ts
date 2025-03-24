@@ -7,6 +7,7 @@ export interface Utilisateur {
   onboardingAEteRealise: boolean;
   afficherDisclaimerAides: boolean;
   token?: string;
+  estUnUtilisateurFranceConnect: boolean;
 }
 
 export interface UtilisateurConnecte {

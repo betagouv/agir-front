@@ -31,6 +31,7 @@ describe("Fichier de tests concernant l'authentification France Connect", () => 
       afficherDisclaimerAides: false,
       token: 'token',
       pseudo: '',
+      estUnUtilisateurFranceConnect: true,
     });
   });
 

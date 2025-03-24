@@ -27,6 +27,7 @@ describe('Fichier de tests concernant la suppression du compte utilisateur', () 
       onboardingAEteRealise: false,
       afficherDisclaimerAides: false,
       pseudo: '',
+      estUnUtilisateurFranceConnect: false,
     });
   });
 
@@ -53,6 +54,7 @@ describe('Fichier de tests concernant la suppression du compte utilisateur', () 
       onboardingAEteRealise: false,
       afficherDisclaimerAides: false,
       pseudo: '',
+      estUnUtilisateurFranceConnect: false,
     });
   });
 });

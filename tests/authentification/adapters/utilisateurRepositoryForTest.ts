@@ -29,6 +29,7 @@ export class UtilisateurRepositoryForTest implements UtilisateurRepository {
       onboardingAEteRealise: this.onboardingRealise,
       afficherDisclaimerAides: false,
       pseudo: 'johndoe',
+      estUnUtilisateurFranceConnect: false,
     });
   }
 
@@ -57,6 +58,7 @@ export class UtilisateurRepositoryForTest implements UtilisateurRepository {
       onboardingAEteRealise: this.onboardingRealise,
       afficherDisclaimerAides: false,
       pseudo: 'johndoe',
+      estUnUtilisateurFranceConnect: false,
     });
   }
 
@@ -69,6 +71,7 @@ export class UtilisateurRepositoryForTest implements UtilisateurRepository {
       onboardingAEteRealise: this.onboardingRealise,
       afficherDisclaimerAides: false,
       pseudo: 'johndoe',
+      estUnUtilisateurFranceConnect: true,
     });
   }
 

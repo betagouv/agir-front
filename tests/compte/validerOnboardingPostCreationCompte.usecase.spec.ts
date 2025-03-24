@@ -14,6 +14,11 @@ describe("Fichier de tests concernant la validation de l'onboarding après creat
       pseudo: 'Dorian',
       commune: 'Paris',
       codePostal: '75000',
+      dateDeNaissance: {
+        jour: '01',
+        mois: '01',
+        annee: '2000',
+      },
     });
     // THEN
     expect(spySessionRepository.utilisateur.pseudo).toBe('Dorian');

@@ -95,6 +95,7 @@ describe('Fichier de tests concernant la mise à jour du profile utilisateur', (
       onboardingAEteRealise: true,
       afficherDisclaimerAides: false,
       pseudo: 'JD',
+      estUnUtilisateurFranceConnect: false,
     });
   });
   it('Cas de France Connect : le nom et prenom ne peuvent pas être mis à jour et la mise à jour doit appeler le repository et mettre à jour la session', async () => {
@@ -104,6 +105,7 @@ describe('Fichier de tests concernant la mise à jour du profile utilisateur', (
     const sessionRepository = SpySauvegarderUtilisateurSessionRepository.avecOnBoardingRealise({
       mail: 'mail@exemple.com',
       pseudo: 'JD',
+      estUnUtilisateurFranceConnect: true,
     });
     const usecase = new MettreAJourProfileUtilisateurUsecase(repository, sessionRepository);
     const viewModelInput: ProfileAMettreAJourInput = {
@@ -136,6 +138,7 @@ describe('Fichier de tests concernant la mise à jour du profile utilisateur', (
       onboardingAEteRealise: true,
       afficherDisclaimerAides: false,
       pseudo: 'nouveauPseudo',
+      estUnUtilisateurFranceConnect: true,
     });
   });
 });
