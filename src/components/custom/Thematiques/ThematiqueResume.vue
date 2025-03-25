@@ -14,31 +14,13 @@
         </router-link>
       </div>
 
-      <ul v-if="thematiqueResume.listeInformations" class="list-style-none listeServices flex flex-wrap fr-pl-0">
-        <li v-for="information in thematiqueResume.listeInformations" :key="information.label">
-          <router-link
-            v-if="information.to"
-            :to="information.to"
-            class="shadow fr-btn fr-btn--tertiary-no-outline background--white fr-btn--icon-right fr-icon-arrow-right-line text--black"
-          >
-            {{ information.label }}
-          </router-link>
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            v-else-if="information.href"
-            :href="information.href"
-            class="shadow fr-btn fr-btn--tertiary-no-outline background--white fr-btn--icon-right fr-icon-arrow-right-line text--black"
-          >
-            {{ information.label }}
-          </a>
-        </li>
-      </ul>
+      <ListeRaccourcis :liste-raccourcis="thematiqueResume.listeRaccourcis" class="listeServices" />
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
+  import ListeRaccourcis from '@/components/custom/Thematiques/ListeRaccourcis.vue';
   import { Thematique } from '@/domaines/thematiques/MenuThematiques';
   import { ThematiqueResumeViewModel } from '@/domaines/thematiques/ports/thematiqueResume.presenter';
   import { RouteCompteName } from '@/router/compte/routeCompteName';
@@ -58,11 +40,9 @@
     background-repeat: no-repeat;
     background-position: right bottom;
   }
-
   .listeServices {
     @media all and (min-width: 767px) {
       width: 60%;
     }
-    gap: 1rem;
   }
 </style>
