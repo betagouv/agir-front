@@ -104,6 +104,7 @@ export interface ActionsRepository {
     filtresThematiques: string[],
     titre: string,
     filtreDejaVu: boolean,
+    filtreDejaRealisees: boolean,
   ): Promise<CatalogueActions>;
 
   chargerAction(idUtilisateur: string, idAction: string, type: TypeAction): Promise<ActionDetail>;
