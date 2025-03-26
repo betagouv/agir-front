@@ -12,6 +12,7 @@ describe('Fichier de tests concernant le chargement de la bibliotheque', () => {
       [],
       '',
       false,
+      false,
       new BibliothequePresenterImpl(viewModel => {
         expect(viewModel.articles).toStrictEqual([
           {

@@ -57,7 +57,13 @@ export class BibliothequeRepositoryMock implements BibliothequeRepository {
     });
   }
 
-  filtrerBibliotheque(_utilisateurId: string, _filtreThematiquesIds: string[], _titre: string): Promise<Bibliotheque> {
+  filtrerBibliotheque(
+    _utilisateurId: string,
+    _filtreThematiquesIds: string[],
+    _titre: string,
+    _filtreFavoris: boolean,
+    _filtreArticleLus: boolean,
+  ): Promise<Bibliotheque> {
     return Promise.resolve({
       ressources: [
         {
