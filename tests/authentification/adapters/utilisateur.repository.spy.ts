@@ -60,4 +60,8 @@ export class UtilisateurRepositorySpy implements UtilisateurRepository {
       urlDeDeconnexion: '',
     });
   }
+
+  terminerMessageReset(idUtilisateur: string): Promise<void> {
+    throw Error;
+  }
 }

@@ -2,6 +2,7 @@ import { AuthentificationResultatPresenter } from '@/domaines/authentification/p
 import { AuthentificationResultat } from '@/domaines/authentification/validerAuthentificationUtilisateur.usecase';
 import { RouteCoachPath } from '@/router/coach/routes';
 import { RouteComptePath } from '@/router/compte/routes';
+import { RouteResetPath } from '@/router/reset/routes';
 
 export class AuthentificationResultatPresenterImpl implements AuthentificationResultatPresenter {
   constructor(private readonly routeViewModel: (viewModel: string) => void) {}
@@ -13,6 +14,9 @@ export class AuthentificationResultatPresenterImpl implements AuthentificationRe
         break;
       case AuthentificationResultat.PEUT_SE_CONNECTER:
         this.routeViewModel(RouteCoachPath.COACH);
+        break;
+      case AuthentificationResultat.DOIT_VOIR_MESSAGE_RESET:
+        this.routeViewModel(RouteResetPath.RESET_1);
         break;
     }
   }

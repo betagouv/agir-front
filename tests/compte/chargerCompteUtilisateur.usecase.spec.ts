@@ -36,6 +36,7 @@ describe('Fichier de tests concernant le chargement du compte utilisateur', () =
       afficherDisclaimerAides: false,
       pseudo: 'JD',
       estUnUtilisateurFranceConnect: false,
+      afficherMessageReset: false,
     });
   });
 });

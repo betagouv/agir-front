@@ -185,7 +185,17 @@
                 :to="{ name: RouteAidesName.AIDES }"
                 class="fr-nav__link"
               >
-                Mes aides
+                Aides
+              </router-link>
+            </li>
+
+            <li class="fr-nav__item" data-fr-js-navigation-item="true">
+              <router-link
+                :aria-current="route.name === RouteBilanCarboneName.BILAN_CARBONE ? 'page' : null"
+                :to="{ name: RouteBilanCarboneName.BILAN_CARBONE }"
+                class="fr-nav__link"
+              >
+                Bilan
               </router-link>
             </li>
             <li class="fr-nav__item" data-fr-js-navigation-item="true">
@@ -194,16 +204,7 @@
                 :to="{ name: RouteCoachName.BIBLIOTHEQUE }"
                 class="fr-nav__link"
               >
-                Ma bibliothèque
-              </router-link>
-            </li>
-            <li class="fr-nav__item" data-fr-js-navigation-item="true">
-              <router-link
-                :aria-current="route.name === RouteBilanCarboneName.BILAN_CARBONE ? 'page' : null"
-                :to="{ name: RouteBilanCarboneName.BILAN_CARBONE }"
-                class="fr-nav__link"
-              >
-                Mon bilan
+                Bibliothèque
               </router-link>
             </li>
           </ul>
@@ -225,12 +226,12 @@
   import { RouteBilanCarboneName } from '@/router/bilanCarbone/routes';
   import { RouteCoachName } from '@/router/coach/routeCoachName';
   import { RouteCompteName } from '@/router/compte/routeCompteName';
-  import { RouteAidesName } from '@/router/aides/routeAidesName';
   import { RouteThematiquesName } from '@/router/thematiques/routes';
   import { ClefThematiqueAPI, MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
   import { DeconnecterUtilisateurUsecase } from '@/domaines/authentification/deconnecterUtilisateur.usecase';
   import { UtilisateurRepositoryAxios } from '@/domaines/authentification/adapters/utilisateur.repository.axios';
   import { SessionRepositoryStore } from '@/domaines/authentification/adapters/session.repository.store';
+  import { RouteAidesName } from '@/router/aides/routeAidesName';
 
   const route = useRoute();
   const store = utilisateurStore();

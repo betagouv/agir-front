@@ -18,6 +18,7 @@ interface UtilisateurApiModel {
   couverture_aides_ok: boolean;
   pseudo?: string;
   is_nom_prenom_modifiable: boolean;
+  popup_reset_est_vue: boolean;
 }
 
 interface LoginApiModel {
@@ -55,6 +56,7 @@ export class UtilisateurRepositoryAxios implements UtilisateurRepository {
       afficherDisclaimerAides: !response.data.utilisateur.couverture_aides_ok,
       token: response.data.token,
       estUnUtilisateurFranceConnect: !response.data.utilisateur.is_nom_prenom_modifiable,
+      afficherMessageReset: !response.data.utilisateur.popup_reset_est_vue,
     };
   }
 
@@ -70,6 +72,7 @@ export class UtilisateurRepositoryAxios implements UtilisateurRepository {
       afficherDisclaimerAides: !response.data.couverture_aides_ok,
       pseudo: response.data.pseudo || '',
       estUnUtilisateurFranceConnect: !response.data.is_nom_prenom_modifiable,
+      afficherMessageReset: !response.data.popup_reset_est_vue,
     };
   }
 
@@ -129,6 +132,7 @@ export class UtilisateurRepositoryAxios implements UtilisateurRepository {
       afficherDisclaimerAides: !response.data.utilisateur.couverture_aides_ok,
       token: response.data.token,
       estUnUtilisateurFranceConnect: true,
+      afficherMessageReset: !response.data.utilisateur.popup_reset_est_vue,
     };
   }
 
@@ -146,5 +150,10 @@ export class UtilisateurRepositoryAxios implements UtilisateurRepository {
         urlDeDeconnexion: '',
       };
     }
+  }
+
+  async terminerMessageReset(idUtilisateur: string): Promise<void> {
+    const axiosInstance = AxiosFactory.getAxios();
+    await axiosInstance.post(`/utilisateurs/${idUtilisateur}/gamification/popup_reset_vue`);
   }
 }

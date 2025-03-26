@@ -6,6 +6,7 @@ import { ValiderAuthentificationUtilisateurUsecase } from '@/domaines/authentifi
 import { RouteComptePath } from '@/router/compte/routes';
 import { RouteCoachPath } from '@/router/coach/routes';
 import { UtilisateurRepositoryForTest } from './adapters/utilisateurRepositoryForTest';
+import { RouteResetPath } from '@/router/reset/routes';
 
 describe("Fichier de tests concernant la validation de l'authentification de l'utilisateur", () => {
   it("En donnant un mail et un code doit valider l'authentification puis le sauvegarder en session", async () => {
@@ -29,6 +30,7 @@ describe("Fichier de tests concernant la validation de l'authentification de l'u
       token: 'token',
       pseudo: '',
       estUnUtilisateurFranceConnect: false,
+      afficherMessageReset: false,
     });
   });
 
@@ -61,6 +63,22 @@ describe("Fichier de tests concernant la validation de l'authentification de l'u
     // THEN
     function expectToto(viewModel: string) {
       expect(viewModel).toEqual(RouteCoachPath.COACH);
+    }
+  });
+
+  it("Lorsque le service me dit que l'onboarding est fait, et que l'utilisateur doit afficher la page de reset, doit l'afficher", async () => {
+    // GIVEN
+    const spySessionRepository = SpySauvegarderUtilisateurSessionRepository.avecOnBoardingRealise();
+    const usecase = new ValiderAuthentificationUtilisateurUsecase(
+      UtilisateurRepositoryForTest.avecOnBoardingRealiseEtAvecPageReset(),
+      spySessionRepository,
+    );
+    // WHEN
+    await usecase.execute('Dorian', '123', new AuthentificationResultatPresenterImpl(expectToto));
+
+    // THEN
+    function expectToto(viewModel: string) {
+      expect(viewModel).toEqual(RouteResetPath.RESET_1);
     }
   });
 });

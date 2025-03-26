@@ -61,6 +61,10 @@ class SpyUtilisateurRepository implements UtilisateurRepository {
   deconnecterUtilisateur(idUtilisateur: string): Promise<DeconnexionFranceConnect> {
     throw Error;
   }
+
+  terminerMessageReset(idUtilisateur: string): Promise<void> {
+    throw Error;
+  }
 }
 
 describe('Fichier de tests concernant la fin de la réinitialisation du mot de passe', () => {

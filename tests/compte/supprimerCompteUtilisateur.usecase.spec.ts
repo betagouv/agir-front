@@ -2,6 +2,7 @@ import { SupprimerCompteUtilisateurUsecase } from '@/domaines/compte/supprimerCo
 import { CompteUtilisateurRepositoryMock } from './adapters/compteUtilisateur.repository.mock';
 import { SpySauvegarderUtilisateurSessionRepository } from './sessionRepository.sauvegarderUtilisateur.spy';
 import { expect } from 'vitest';
+import { Utilisateur } from '@/domaines/authentification/ports/utilisateur.repository';
 
 describe('Fichier de tests concernant la suppression du compte utilisateur', () => {
   it('La suppression doit appeler le repository', async () => {
@@ -19,7 +20,7 @@ describe('Fichier de tests concernant la suppression du compte utilisateur', () 
       expect(url).toBe('/');
     });
     // THEN
-    expect(sessionRepository.utilisateur).toStrictEqual({
+    expect(sessionRepository.utilisateur).toStrictEqual<Utilisateur>({
       id: '',
       mail: '',
       prenom: '',
@@ -28,6 +29,7 @@ describe('Fichier de tests concernant la suppression du compte utilisateur', () 
       afficherDisclaimerAides: false,
       pseudo: '',
       estUnUtilisateurFranceConnect: false,
+      afficherMessageReset: false,
     });
   });
 
@@ -46,7 +48,7 @@ describe('Fichier de tests concernant la suppression du compte utilisateur', () 
       expect(url).toBe('urlDeDeconnexion');
     });
     // THEN
-    expect(sessionRepository.utilisateur).toStrictEqual({
+    expect(sessionRepository.utilisateur).toStrictEqual<Utilisateur>({
       id: '',
       mail: '',
       prenom: '',
@@ -55,6 +57,7 @@ describe('Fichier de tests concernant la suppression du compte utilisateur', () 
       afficherDisclaimerAides: false,
       pseudo: '',
       estUnUtilisateurFranceConnect: false,
+      afficherMessageReset: false,
     });
   });
 });

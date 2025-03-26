@@ -8,6 +8,7 @@ export interface Utilisateur {
   afficherDisclaimerAides: boolean;
   token?: string;
   estUnUtilisateurFranceConnect: boolean;
+  afficherMessageReset: boolean;
 }
 
 export interface UtilisateurConnecte {
@@ -41,4 +42,6 @@ export interface UtilisateurRepository {
   seConnecterAvecFranceConnect(oidcCode: string, oidcState: string): Promise<Utilisateur>;
 
   deconnecterUtilisateur(idUtilisateur: string): Promise<DeconnexionFranceConnect>;
+
+  terminerMessageReset(idUtilisateur: string): Promise<void>;
 }

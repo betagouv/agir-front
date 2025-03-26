@@ -8,12 +8,12 @@
       <span class="text--bold">choisies pour vous</span> !
     </p>
     <button class="fr-btn animation__button--shake" @click="fermerModale">
-      Commencer&nbsp;<span class="text--bold">+90&nbsp;<img src="/ic_score.svg" alt="points" /></span>
+      Commencer&nbsp;<span class="text--bold">+25&nbsp;<img alt="points" src="/ic_score.svg" /></span>
     </button>
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
   defineProps<{ fermerModale: () => void }>();
 </script>
 

@@ -14,6 +14,7 @@ import defiRoutes from '@/router/defis/routes';
 import examenRoutes from '@/router/examen/routes';
 import kycRoutes from '@/router/kyc/routes';
 import quizRoutes from '@/router/quiz/routes';
+import resetRoutes from '@/router/reset/routes';
 import serviceRoutes from '@/router/services/routes';
 import thematiqueRoutes from '@/router/thematiques/routes';
 import { utilisateurStore } from '@/store/utilisateur';
@@ -59,6 +60,7 @@ const routes: RouteRecordRaw[] = [
   ...collectiviteRoutes,
   ...actionsRoutes,
   ...accueilRoutes,
+  ...resetRoutes,
   {
     path: '/',
     name: RouteCommuneName.ACCUEIL,

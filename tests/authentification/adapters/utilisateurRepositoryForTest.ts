@@ -6,7 +6,14 @@ import {
 } from '@/domaines/authentification/ports/utilisateur.repository';
 
 export class UtilisateurRepositoryForTest implements UtilisateurRepository {
-  private constructor(private onboardingRealise = true) {}
+  private constructor(
+    private onboardingRealise = true,
+    private avecPageReset = false,
+  ) {}
+
+  static avecOnBoardingRealiseEtAvecPageReset() {
+    return new UtilisateurRepositoryForTest(true, true);
+  }
 
   static avecOnBoardingRealise() {
     return new UtilisateurRepositoryForTest(true);
@@ -30,6 +37,7 @@ export class UtilisateurRepositoryForTest implements UtilisateurRepository {
       afficherDisclaimerAides: false,
       pseudo: 'johndoe',
       estUnUtilisateurFranceConnect: false,
+      afficherMessageReset: this.avecPageReset,
     });
   }
 
@@ -59,6 +67,7 @@ export class UtilisateurRepositoryForTest implements UtilisateurRepository {
       afficherDisclaimerAides: false,
       pseudo: 'johndoe',
       estUnUtilisateurFranceConnect: false,
+      afficherMessageReset: this.avecPageReset,
     });
   }
 
@@ -72,10 +81,15 @@ export class UtilisateurRepositoryForTest implements UtilisateurRepository {
       afficherDisclaimerAides: false,
       pseudo: 'johndoe',
       estUnUtilisateurFranceConnect: true,
+      afficherMessageReset: this.avecPageReset,
     });
   }
 
   deconnecterUtilisateur(idUtilisateur: string): Promise<DeconnexionFranceConnect> {
+    throw Error;
+  }
+
+  terminerMessageReset(idUtilisateur: string): Promise<void> {
     throw Error;
   }
 }
