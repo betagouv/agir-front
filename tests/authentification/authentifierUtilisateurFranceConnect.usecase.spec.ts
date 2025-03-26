@@ -74,7 +74,7 @@ describe("Fichier de tests concernant l'authentification France Connect", () => 
 
     // THEN
     function expectToto(viewModel: string) {
-      expect(viewModel).toEqual(RouteCoachPath.COACH);
+      expect(viewModel).toEqual(RouteCoachPath.ACCUEIL_CONNECTEE);
     }
 
     expect(spyPostOnboardingRepositorySpy.utiliserArgs).toStrictEqual({});

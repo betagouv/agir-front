@@ -17,7 +17,7 @@ export const useBoutonRetour = () => {
   }
   return {
     url: {
-      name: RouteCoachName.COACH,
+      name: RouteCoachName.ACCUEIL_CONNECTEE,
     },
     label: "Revenir à l'accueil",
   };

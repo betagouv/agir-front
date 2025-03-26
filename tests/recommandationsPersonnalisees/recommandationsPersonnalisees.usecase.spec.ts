@@ -116,56 +116,6 @@ describe('Fichier de tests concernant le chargement des recommandations personna
             },
           },
         ],
-        defis: [
-          {
-            bouton: {
-              libelle: 'Faire le suivi',
-              style: 'fr-btn--icon-left fr-icon-check-line',
-              url: '/defi/1',
-            },
-            idDuContenu: '1',
-            image: '/reco_defi.webp',
-            nombreDePointsAGagner: 'nombreDePointsAGagner',
-            points: 10,
-            thematiqueTag: {
-              label: 'Me déplacer',
-              style: {
-                backgroundColor: '#D2E9FF',
-                color: '#021952',
-                emoji: '🚅',
-              },
-            },
-            titre: 'Un défi',
-            type: {
-              libelle: 'Action',
-              style: 'background--bleu-ecume-hover',
-            },
-          },
-          {
-            bouton: {
-              libelle: 'Relever le défi',
-              style: 'fr-btn--icon-left fr-icon-check-line',
-              url: '/defi/1',
-            },
-            idDuContenu: '1',
-            image: '/reco_defi.webp',
-            nombreDePointsAGagner: 'nombreDePointsAGagner',
-            points: 10,
-            thematiqueTag: {
-              label: 'Me déplacer',
-              style: {
-                backgroundColor: '#D2E9FF',
-                color: '#021952',
-                emoji: '🚅',
-              },
-            },
-            titre: 'Un autre défi',
-            type: {
-              libelle: 'Action',
-              style: 'background--bleu-ecume-hover',
-            },
-          },
-        ],
       });
     }
   });

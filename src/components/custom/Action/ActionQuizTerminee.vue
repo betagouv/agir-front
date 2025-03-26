@@ -78,7 +78,7 @@
   const labelBouton =
     dernierePageStore.name === RouteActionsName.CATALOGUE_ACTION
       ? 'au catalogue'
-      : dernierePageStore.name === RouteThematiquesName.THEMATIQUE_V2
+      : dernierePageStore.name === RouteThematiquesName.THEMATIQUE
         ? 'à la thématique'
         : "à l'accueil";
 </script>

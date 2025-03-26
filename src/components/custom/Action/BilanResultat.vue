@@ -4,14 +4,14 @@
     <p class="fr-mb-0" v-html="bilanThematiqueViewModel.resume" />
     <ul class="list-style-none full-width fr-py-3w fr-p-0 fr-pr-4w fr-m-0">
       <li v-for="detail in bilanThematiqueViewModel.details" :key="detail.label" class="flex fr-mb-3w">
-        <span class="fr-p-1w fr-mr-1w" aria-hidden="true">{{ detail.emoji }}</span>
+        <span aria-hidden="true" class="fr-p-1w fr-mr-1w">{{ detail.emoji }}</span>
         <div class="full-width">
           <p class="fr-grid-row fr-grid-row--gutters align-items--center fr-mb-1v flex-space-between text--bold">
             <span>{{ detail.label }}</span>
             <span>{{ detail.impactAnnuelEnKg }} <span class="text--normal">kg</span></span>
           </p>
-          <div class="progress-bar background--gris-dark border-radius--md" aria-hidden="true">
-            <div class="progress-bar-inner border-radius--md" :style="`--width: ${detail.pourcentage}%`"></div>
+          <div aria-hidden="true" class="progress-bar background--gris-dark border-radius--md">
+            <div :style="`--width: ${detail.pourcentage}%`" class="progress-bar-inner border-radius--md"></div>
           </div>
         </div>
       </li>
@@ -73,7 +73,7 @@
   const labelBouton =
     dernierePageStore.name === RouteActionsName.CATALOGUE_ACTION
       ? 'au catalogue'
-      : dernierePageStore.name === RouteThematiquesName.THEMATIQUE_V2
+      : dernierePageStore.name === RouteThematiquesName.THEMATIQUE
         ? 'à la thématique'
         : "à l'accueil";
 </script>

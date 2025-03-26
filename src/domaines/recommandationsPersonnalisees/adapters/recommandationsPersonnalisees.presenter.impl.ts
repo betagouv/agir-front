@@ -4,7 +4,6 @@ import { MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
 import { TagStyle, TagThematique } from '@/domaines/thematiques/TagThematique';
 import { RouteAidesPath } from '@/router/aides/routes';
 import { RouteArticlePath } from '@/router/articles/routes';
-import { RouteDefiPath } from '@/router/defis/routes';
 import { RouteKycPath } from '@/router/kyc/routes';
 import { RouteQuizPath } from '@/router/quiz/routes';
 import { buildUrl } from '@/shell/buildUrl';
@@ -31,8 +30,8 @@ export interface RecommandationViewModel {
   thematiqueTag: { label: string; style: TagStyle };
   points: number;
 }
+
 export interface RecommandationPersonnaliseeViewModel {
-  defis: RecommandationViewModel[];
   autresRecommandations: RecommandationViewModel[];
 }
 
@@ -40,6 +39,7 @@ export class RecommandationsPersonnaliseesPresenterImpl implements Recommandatio
   constructor(
     private viewModel: (recommandationPersonnaliseeViewModels: RecommandationPersonnaliseeViewModel) => void,
   ) {}
+
   presente(recommandationsPersonnalisees: RecommandationPersonnalisee[]): void {
     const mapRecommandation = (recommandationPersonnalisee: RecommandationPersonnalisee) => {
       return {
@@ -60,9 +60,6 @@ export class RecommandationsPersonnaliseesPresenterImpl implements Recommandatio
     this.viewModel({
       autresRecommandations: recommandationsPersonnalisees
         .filter(recommandationPersonnalisee => recommandationPersonnalisee.type !== 'defi')
-        .map(mapRecommandation),
-      defis: recommandationsPersonnalisees
-        .filter(recommandationPersonnalisee => recommandationPersonnalisee.type === 'defi')
         .map(mapRecommandation),
     });
   }
@@ -86,12 +83,6 @@ export class RecommandationsPersonnaliseesPresenterImpl implements Recommandatio
           libelle: "Lire l'article",
           url: `${RouteArticlePath.ARTICLE}${buildUrl(recommandationPersonnalisee.titre)}/${recommandationPersonnalisee.idDuContenu}`,
           style: 'fr-btn--secondary fr-btn--icon-left fr-icon-newspaper-line',
-        };
-      case InteractionType.DEFIS:
-        return {
-          libelle: recommandationPersonnalisee.joursRestants ? 'Faire le suivi' : 'Relever le défi',
-          url: `${RouteDefiPath.DEFI + recommandationPersonnalisee.idDuContenu}`,
-          style: 'fr-btn--icon-left fr-icon-check-line',
         };
       case InteractionType.KYC: {
         return {

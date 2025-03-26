@@ -7,7 +7,6 @@ const PageMotDePasseOublie = () => import('@/components/pages/PageMotDePasseOubl
 const PageCompteOptionsAvancees = () => import('@/components/pages/PageCompteOptionsAvancees.vue');
 const PageCompteMieuxVousConnaitre = () => import('@/components/pages/PageCompteMieuxVousConnaitre.vue');
 const PageCompteLogement = () => import('@/components/pages/PageCompteLogement.vue');
-const PageCompteVosDefis = () => import('@/components/pages/PageCompteVosDefis.vue');
 const PagePostCreationCompteEtape1 = () =>
   import('@/components/pages/PagePostCreationCompte/PagePostCreationCompteEtape1.vue');
 const PagePostCreationCompteEtape2 = () =>
@@ -70,11 +69,6 @@ const compteRoutes: RouteRecordRaw[] = [
         path: RouteComptePath.LOGEMENT,
         name: RouteCompteName.LOGEMENT,
         component: PageCompteLogement,
-      },
-      {
-        path: RouteComptePath.DEFIS,
-        name: RouteCompteName.DEFIS,
-        component: PageCompteVosDefis,
       },
     ],
   },

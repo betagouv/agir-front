@@ -18,48 +18,39 @@
       />
       <MissionIntroduction
         v-if="etapeCourante.type === 'INTRO'"
+        :on-click-continuer="() => miseAJourEtatCourant('KYC', 0)"
+        :tag="missionViewModel.tag"
+        :texte="missionViewModel.intro"
         :titre="missionViewModel.titre"
         :url-image="missionViewModel.urlImage"
-        :texte="missionViewModel.intro"
-        :tag="missionViewModel.tag"
-        :on-click-continuer="() => miseAJourEtatCourant('KYC', 0)"
       />
       <MissionsQuestionsKyc
         v-if="etapeCourante.type === 'KYC'"
-        :kycs="missionViewModel.kyc.kycs"
-        :on-kyc-termine="() => miseAJourEtatCourant('QUIZ_ARTICLE', 0)"
-        :on-click-revenir-etape-precedente="() => miseAJourEtatCourant('INTRO', 0)"
         :etape-courante-defaut="etapeCourante.etapeDansLetape"
+        :kycs="missionViewModel.kyc.kycs"
         :nombre-etapes-mission="missionViewModel.nombreEtapesMission"
+        :on-click-revenir-etape-precedente="() => miseAJourEtatCourant('INTRO', 0)"
+        :on-kyc-termine="() => miseAJourEtatCourant('QUIZ_ARTICLE', 0)"
       />
       <MissionQuizArticles
         v-if="etapeCourante.type === 'QUIZ_ARTICLE'"
+        :etape-courante-defaut="etapeCourante.etapeDansLetape"
         :missions="missionViewModel.articleEtQuiz"
+        :nombre-detapes-precendentes="missionViewModel.kyc.progression.etapeTotal"
+        :nombre-etapes-mission="missionViewModel.nombreEtapesMission"
         :on-click-fin-quiz-article="() => miseAJourEtatCourant('DEFI', 0)"
         :on-click-revenir-etape-precedente="
           () => miseAJourEtatCourant('KYC', missionViewModel!.kyc.progression.etapeTotal - 1)
         "
-        :etape-courante-defaut="etapeCourante.etapeDansLetape"
-        :nombre-etapes-mission="missionViewModel.nombreEtapesMission"
-        :nombre-detapes-precendentes="missionViewModel.kyc.progression.etapeTotal"
-      />
-      <MissionDefis
-        v-if="etapeCourante.type === 'DEFI'"
-        :defis="missionViewModel.defis"
-        :on-click-retour="() => miseAJourEtatCourant('QUIZ_ARTICLE', missionViewModel!.articleEtQuiz.length - 1)"
-        :on-click-fin-defis="() => miseAJourEtatCourant('FIN', 0)"
-        :nombre-etapes-mission="missionViewModel.nombreEtapesMission"
-        :afficher-terminer-mission="missionViewModel.estTerminable && !missionViewModel.estTerminee"
       />
       <MissionTerminee v-if="etapeCourante.type === 'FIN'" :titre="missionViewModel.titre" />
     </template>
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
   import { onMounted, onUnmounted, ref } from 'vue';
   import { useRoute } from 'vue-router';
-  import MissionDefis from '@/components/custom/Mission/MissionDefis.vue';
   import MissionIntroduction from '@/components/custom/Mission/MissionIntroduction.vue';
   import MissionQuizArticles from '@/components/custom/Mission/MissionQuizArticles.vue';
   import MissionsQuestionsKyc from '@/components/custom/Mission/MissionsQuestionsKyc.vue';

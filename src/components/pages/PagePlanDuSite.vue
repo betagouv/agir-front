@@ -33,7 +33,6 @@
         <li><a href="/compte">Mes informations</a></li>
         <li><a href="/compte/logement">Mon logement</a></li>
         <li><a href="/compte/mieux-vous-connaitre">Mieux vous connaître</a></li>
-        <li><a href="/compte/mes-actions">Mes actions</a></li>
         <li><a href="/compte/options-avancees">Options avancées</a></li>
       </ul>
 
@@ -49,7 +48,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
   import { utilisateurStore } from '@/store/utilisateur';
 
   const estConnecte = utilisateurStore().utilisateur.id.length > 0;

@@ -13,7 +13,7 @@ export class AuthentificationResultatPresenterImpl implements AuthentificationRe
         this.routeViewModel(RouteComptePath.POST_CREATION_COMPTE_ETAPE_1);
         break;
       case AuthentificationResultat.PEUT_SE_CONNECTER:
-        this.routeViewModel(RouteCoachPath.COACH);
+        this.routeViewModel(RouteCoachPath.ACCUEIL_CONNECTEE);
         break;
       case AuthentificationResultat.DOIT_VOIR_MESSAGE_RESET:
         this.routeViewModel(RouteResetPath.RESET_1);

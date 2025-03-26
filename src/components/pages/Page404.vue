@@ -12,11 +12,11 @@
           plus disponible.<br />
           Dans ce cas, pour continuer votre visite vous pouvez consulter notre page d’accueil.
         </p>
-        <router-link class="fr-btn" :to="{ name: RouteCoachName.COACH }">Page d'accueil</router-link>
+        <router-link :to="{ name: RouteCoachName.ACCUEIL_CONNECTEE }" class="fr-btn">Page d'accueil</router-link>
       </div>
     </div>
   </div>
 </template>
-<script setup lang="ts">
+<script lang="ts" setup>
   import { RouteCoachName } from '@/router/coach/routeCoachName';
 </script>

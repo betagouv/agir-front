@@ -1,4 +1,4 @@
-import { test, expect, chromium, Page } from '@playwright/test';
+import { chromium, expect, Page, test } from '@playwright/test';
 import { InjectUtilisateur } from './utils/injectUtilisateur';
 import { InjectGamification } from './utils/injectGamification';
 import { RouteCoachPath } from '@/router/coach/routes';
@@ -42,7 +42,7 @@ test.describe('Bilan carbone', () => {
 
     const lienAccueil = elementsBreadcrumb[0].getByRole('link', { name: 'Accueil', exact: true });
     await expect(lienAccueil).toBeVisible();
-    await expect(lienAccueil).toHaveAttribute('href', RouteCoachPath.COACH);
+    await expect(lienAccueil).toHaveAttribute('href', RouteCoachPath.ACCUEIL_CONNECTEE);
 
     const lienCourant = elementsBreadcrumb[1].getByText('Mon bilan environnemental');
     await expect(lienCourant).toBeVisible();
