@@ -11,6 +11,7 @@
           @rechercher-par-titre="rechercherParTitre"
           @update-thematiques="updateThematiques"
           @rechercher-par-favoris="rechercherParFavoris"
+          @rechercher-articles-lus="rechercherArticlesLus"
         />
       </div>
       <div class="fr-col-md-8 fr-col-12">
@@ -67,6 +68,7 @@
   const searchTitre = ref<string>('');
   const filtresThematiques = ref<string[]>([]);
   const filtreFavoris = ref<boolean>(false);
+  const filtreArticlesLus = ref<boolean>(false);
 
   const bibliothequePresenterImpl = new BibliothequePresenterImpl(
     viewModel => (bibliothequeViewModel.value = viewModel),
@@ -99,6 +101,13 @@
     isLoadingFiltre.value = false;
   };
 
+  const rechercherArticlesLus = async checked => {
+    isLoadingFiltre.value = true;
+    filtreArticlesLus.value = checked;
+    await lancerLaRecherche();
+    isLoadingFiltre.value = false;
+  };
+
   const lancerLaRecherche = async () => {
     const filterBibliothequeUsecase = new FiltrerBibliothequeUsecase(new BibliothequeRepositoryAxios());
     await filterBibliothequeUsecase.execute(
@@ -106,6 +115,7 @@
       filtresThematiques.value,
       searchTitre.value,
       filtreFavoris.value,
+      filtreArticlesLus.value,
       bibliothequePresenterImpl,
     );
   };

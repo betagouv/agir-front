@@ -9,6 +9,7 @@ export class FiltrerBibliothequeUsecase {
     filtresThematiques: string[],
     titre: string,
     filtreFavoris: boolean,
+    filtreArticleLus: boolean,
     presenter: BibliothequePresenter,
   ): Promise<void> {
     const bibliotheque = await this.bibliothequeRepository.filtrerBibliotheque(
@@ -16,6 +17,7 @@ export class FiltrerBibliothequeUsecase {
       filtresThematiques,
       titre,
       filtreFavoris,
+      filtreArticleLus,
     );
     presenter.presente(bibliotheque);
   }
