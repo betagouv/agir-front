@@ -28,7 +28,15 @@ export class Voiture {
   }
 }
 
-export class VoitureActuelle extends Voiture {}
+export class VoitureActuelle extends Voiture {
+  public getDifferenceCountAnnuel(voiture: Voiture): number {
+    return Math.round(voiture.getCout() - this.getCout());
+  }
+
+  public getPourcentageDifferenceEmission(voiture: Voiture): number {
+    return Math.round(((voiture.getEmpreinte() - this.getEmpreinte()) / this.getEmpreinte()) * 100);
+  }
+}
 
 export class VoitureAlternative extends Voiture {
   constructor(

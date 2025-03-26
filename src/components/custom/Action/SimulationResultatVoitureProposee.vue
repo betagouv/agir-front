@@ -13,12 +13,12 @@
         >&nbsp;€
 
         <span
-          class="fr-badge fr-badge--no-icon"
-          :class="resultatSimulationVoiture.coutAnnuel.difference < 0 ? 'fr-badge--success ' : 'fr-badge--warning'"
           :aria-label="`Différence par rapport à votre véhicule actuel : ${resultatSimulationVoiture.coutAnnuel.difference}`"
+          :class="resultatSimulationVoiture.coutAnnuel.style"
+          class="fr-badge fr-badge--no-icon"
         >
-          {{ resultatSimulationVoiture.coutAnnuel.difference }}€
-        </span>
+          {{ resultatSimulationVoiture.coutAnnuel.label }}</span
+        >
       </p>
 
       <p>
@@ -26,16 +26,16 @@
         >&nbsp;kgCO2e
 
         <span
-          class="fr-badge fr-badge--no-icon"
-          :class="resultatSimulationVoiture.emission.difference < 0 ? 'fr-badge--success ' : 'fr-badge--warning'"
           :aria-label="`Différence par rapport à votre véhicule actuel : ${resultatSimulationVoiture.emission.difference}`"
+          :class="resultatSimulationVoiture.emission.style"
+          class="fr-badge fr-badge--no-icon"
         >
-          {{ resultatSimulationVoiture.emission.difference }}%
+          {{ resultatSimulationVoiture.emission.difference }}
         </span>
       </p>
 
       <hr />
-      <ul class="fr-grid-row list-style-none" aria-label="Catégories">
+      <ul aria-label="Catégories" class="fr-grid-row list-style-none">
         <li
           v-for="tag in resultatSimulationVoiture.tag"
           :key="tag"

@@ -29,14 +29,6 @@ const aidesRoutes: RouteRecordRaw[] = [
         },
       },
       {
-        path: RouteAidesPath.AIDES,
-        name: RouteAidesName.AIDES,
-        component: PageAides,
-        meta: {
-          title: 'Aides',
-        },
-      },
-      {
         path: RouteAidesPath.VELO,
         children: [
           {

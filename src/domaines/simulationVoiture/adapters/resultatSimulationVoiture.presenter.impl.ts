@@ -21,36 +21,20 @@ export type ResultatSimulationVoitureProposeeViewModel = {
   coutAnnuel: {
     montant: number;
     difference: number;
+    style: string;
+    label: string;
   };
   emission: {
     montant: number;
     difference: number;
+    style: string;
+    label: string;
   };
   tag: string[];
 };
 
 export class ResultatSimulationVoiturePresenterImpl implements ResultatSimulationVoiturePresenter {
   constructor(private readonly callback: (viewModel: ResultatSimulationVoitureViewModel) => void) {}
-
-  private transformeVoitureProposee(
-    voiture: VoitureAlternative,
-    voitureActuelle: VoitureActuelle,
-  ): ResultatSimulationVoitureProposeeViewModel {
-    return {
-      typeDeVoiture: voiture.getLabel(),
-      coutAnnuel: {
-        montant: Math.round(voiture.getCout()),
-        difference: Math.round(voiture.getCout() - voitureActuelle.getCout()),
-      },
-      emission: {
-        montant: Math.round(voiture.getEmpreinte()),
-        difference: Math.round(
-          ((voiture.getEmpreinte() - voitureActuelle.getEmpreinte()) / voitureActuelle.getEmpreinte()) * 100,
-        ),
-      },
-      tag: [voiture.getCarburant(), voiture.getMotorisation()].filter(v => v.length > 0),
-    };
-  }
 
   presente(resultat: ResultatSimulationVoiture): void {
     const voitureActuelle = resultat.getVoitureActuelle();
@@ -67,5 +51,29 @@ export class ResultatSimulationVoiturePresenterImpl implements ResultatSimulatio
       resultatVoiturePlusEconomique: this.transformeVoitureProposee(voiturePlusEconomique, voitureActuelle),
       resultatVoiturePlusEcologique: this.transformeVoitureProposee(voiturePlusEcologique, voitureActuelle),
     });
+  }
+
+  private transformeVoitureProposee(
+    voiture: VoitureAlternative,
+    voitureActuelle: VoitureActuelle,
+  ): ResultatSimulationVoitureProposeeViewModel {
+    const countAnnuelDifference = voitureActuelle.getDifferenceCountAnnuel(voiture);
+    const pourcentageDifferenceEmission = voitureActuelle.getPourcentageDifferenceEmission(voiture);
+    return {
+      typeDeVoiture: voiture.getLabel(),
+      coutAnnuel: {
+        montant: Math.round(voiture.getCout()),
+        difference: countAnnuelDifference,
+        label: countAnnuelDifference > 0 ? `+${countAnnuelDifference}€` : `${countAnnuelDifference}€`,
+        style: countAnnuelDifference < 0 ? 'fr-badge--success' : 'fr-badge--warning',
+      },
+      emission: {
+        montant: Math.round(voiture.getEmpreinte()),
+        difference: pourcentageDifferenceEmission,
+        label: `${pourcentageDifferenceEmission}%`,
+        style: pourcentageDifferenceEmission < 0 ? 'fr-badge--success' : 'fr-badge--warning',
+      },
+      tag: [voiture.getCarburant(), voiture.getMotorisation()].filter(v => v.length > 0),
+    };
   }
 }

@@ -1,16 +1,16 @@
 <template>
   <div class="position--relative overflow-x-clip">
     <FakeCarteAction
-      label="🧺 Faire mes courses dans une épicerie locale"
       :customStyle="{ top: '-10%', left: '-1%', transform: 'rotate(-5deg)' }"
+      label="🧺 Faire mes courses dans une épicerie locale"
     />
     <FakeCarteAction
-      label="🚗 Est-ce le moment de changer de voiture ?"
       :customStyle="{ bottom: '0', left: '30%', transform: 'rotate(8deg)' }"
+      label="🚗 Est-ce le moment de changer de voiture ?"
     />
     <FakeCarteAction
-      label="🥾 Réparer une paire de chaussures"
       :customStyle="{ top: '20%', right: '-0.5%', transform: 'rotate(5deg)' }"
+      label="🥾 Réparer une paire de chaussures"
     />
 
     <div class="fr-container fr-py-5w">
@@ -20,7 +20,8 @@
           >, dans quel domaine souhaitez-vous agir ?
         </h2>
         <p>
-          Découvrez des actions personnalisées pour vous<template v-if="commune">, à {{ commune }}</template>
+          Découvrez des actions personnalisées pour vous
+          <template v-if="commune">, à {{ commune }}</template>
         </p>
       </div>
 
@@ -31,8 +32,8 @@
           class="fr-col-12 fr-col-sm-6 fr-col-md-3"
         >
           <BlocThematiqueAccueilConnecte
-            :description="description"
             :clef-thematique="clefThematique as ClefThematiqueAPI"
+            :description="description"
           />
         </li>
       </ul>
@@ -40,7 +41,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
   import BlocThematiqueAccueilConnecte from '@/components/custom/AccueilConnectee/BlocThematiqueAccueilConnecte.vue';
   import FakeCarteAction from '@/components/custom/AccueilConnectee/FakeCarteAction.vue';
   import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
@@ -50,7 +51,7 @@
     commune?: string;
   }>();
 
-  const prenom = utilisateurStore().utilisateur.prenom;
+  const prenom = utilisateurStore().utilisateur.pseudo;
 
   const thematiques: Record<ClefThematiqueAPI, string> = {
     [ClefThematiqueAPI.alimentation]: 'Des recettes, commerces locaux et alternatives pour bien manger',
