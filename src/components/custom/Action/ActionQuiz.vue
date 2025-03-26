@@ -1,34 +1,34 @@
 <template>
   <section class="fr-mb-4w fr-p-2w background--white shadow">
     <template v-if="indexQuestionActuelle < actionQuizViewModel.quizzes.length">
-      <ExamenNavigation
-        :etape-totale="actionQuizViewModel.quizzes.length"
+      <Navigation
         :etape-actuelle="indexQuestionActuelle + 1"
+        :etape-totale="actionQuizViewModel.quizzes.length"
         :on-click-revenir-etape-precedente="retournerQuestionPrecedente"
       />
       <ActionQuizComposant
         v-if="quizActuel"
         :key="indexQuestionActuelle"
         :article="quizActuel.articleAssocie ?? undefined"
-        :question="quizActuel.question"
-        :on-click-continuer="passerQuestionSuivante"
-        :quiz-id="quizActuel.id"
         :est-derniere-question="indexQuestionActuelle + 1 === actionQuizViewModel?.quizzes.length"
+        :on-click-continuer="passerQuestionSuivante"
+        :question="quizActuel.question"
+        :quiz-id="quizActuel.id"
       />
     </template>
     <ActionQuizTerminee
       v-else
-      :titre="actionQuizViewModel.titre"
       :felicitations="actionQuizViewModel.quizzFelicitations"
+      :titre="actionQuizViewModel.titre"
     />
   </section>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
   import { computed, ref } from 'vue';
   import ActionQuizComposant from '@/components/custom/Action/ActionQuizComposant.vue';
   import ActionQuizTerminee from '@/components/custom/Action/ActionQuizTerminee.vue';
-  import ExamenNavigation from '@/components/custom/Mission/Examen/ExamenNavigation.vue';
+  import Navigation from '@/components/custom/Navigation.vue';
   import { ActionQuizViewModel, ActionQuizzesViewModel } from '@/domaines/actions/ports/action.presenter';
 
   const props = defineProps<{ actionQuizViewModel: ActionQuizzesViewModel }>();
