@@ -9,6 +9,7 @@ export class FiltrerCatalogueActionsUsecase {
     filtresThematiques: string[],
     titre: string,
     filtreDejaVu: boolean,
+    filtreDejaRealisees: boolean,
     catalogueActionsPresenter: CatalogueActionsPresenter,
   ): Promise<void> {
     const catalogue = await this.actionsRepository.filtrerCatalogueActions(
@@ -16,6 +17,7 @@ export class FiltrerCatalogueActionsUsecase {
       filtresThematiques,
       titre,
       filtreDejaVu,
+      filtreDejaRealisees,
     );
     catalogueActionsPresenter.presenteCatalogue(catalogue);
   }

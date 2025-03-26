@@ -48,6 +48,7 @@ export class ActionsRepositoryMock implements ActionsRepository {
     filtresThematiques: string[],
     titre: string,
     filtreDejaVu: boolean,
+    filtreDejaRealisees: boolean,
   ): Promise<CatalogueActions> {
     return Promise.resolve(this.catalogueActions!);
   }

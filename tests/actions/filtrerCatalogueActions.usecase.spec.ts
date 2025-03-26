@@ -46,6 +46,7 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
       [ClefThematiqueAPI.alimentation],
       '2',
       true,
+      false,
       new CatalogueActionsPresenterImpl(expectedFiltres, expectedActions),
     );
 

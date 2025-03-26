@@ -10,6 +10,7 @@
           @rechercher-par-deja-vu="rechercherParDejaVu"
           @rechercher-par-titre="rechercherParTitre"
           @update-thematiques="updateThematiques"
+          @rechercher-par-deja-realisees="rechercherParDejaRealisees"
         />
       </div>
 
@@ -55,6 +56,7 @@
   const rechercheTitre = ref<string>('');
   const filtresThematiques = ref<string[]>([]);
   const filtreDejaVu = ref<boolean>(false);
+  const filtreDejaRealisees = ref<boolean>(false);
 
   onMounted(async () => {
     const usecase = new RecupererCatalogueActionsUsecase(new ActionsRepositoryAxios());
@@ -76,6 +78,11 @@
     await filtrerLaRecherche();
   };
 
+  const rechercherParDejaRealisees = async checked => {
+    filtreDejaRealisees.value = checked;
+    await filtrerLaRecherche();
+  };
+
   async function filtrerLaRecherche() {
     isLoading.value = true;
     const usecase = new FiltrerCatalogueActionsUsecase(new ActionsRepositoryAxios());
@@ -84,6 +91,7 @@
       filtresThematiques.value,
       rechercheTitre.value,
       filtreDejaVu.value,
+      filtreDejaRealisees.value,
       catalogueActionsPresenter,
     );
     isLoading.value = false;
