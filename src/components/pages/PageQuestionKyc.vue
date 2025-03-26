@@ -48,7 +48,7 @@
 
   const buttonRetour = {
     label: `Retour à l'accueil`,
-    url: `/${RouteCoachName.COACH}`,
+    url: `/${RouteCoachName.ACCUEIL_CONNECTEE}`,
   };
   onMounted(async () => {
     if (route.name === RouteKycName.KYC_COMPTE) {

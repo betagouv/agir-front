@@ -28,7 +28,7 @@
               </li>
 
               <li>
-                <router-link class="fr-btn" :to="action.url">Découvrir</router-link>
+                <router-link :to="action.url" class="fr-btn">Découvrir</router-link>
               </li>
             </ul>
           </div>
@@ -40,7 +40,7 @@
       >
         <div class="fr-card__body">
           <div class="fr-card__content">
-            <span class="text--center text--bold" aria-live="polite" role="status">Chargement...</span>
+            <span aria-live="polite" class="text--center text--bold" role="status">Chargement...</span>
             <div class="ball-loader fr-my-3w fr-mx-auto" />
           </div>
         </div>
@@ -51,7 +51,7 @@
       <p class="fr-mb-4w">
         Chaque mois, J’agis s’enrichit en nouveautés pour vous proposer toujours plus d’actions qui vous correspondent.
         En attendant, découvrez notre
-        <router-link class="text--bleu" :to="{ name: RouteActionsName.CATALOGUE_ACTION }">
+        <router-link :to="{ name: RouteActionsName.CATALOGUE_ACTION }" class="text--bleu">
           catalogue complet d’actions
         </router-link>
         ou recommencez l’expérience.
@@ -62,8 +62,8 @@
           Recommencer le parcours
         </button>
         <router-link
+          :to="{ name: RouteThematiquesName.THEMATIQUE, params: { id: redirection.id } }"
           class="fr-btn fr-btn--icon-left fr-icon-refresh-line"
-          :to="{ name: RouteThematiquesName.THEMATIQUE_V2, params: { id: redirection.id } }"
         >
           Explorer "{{ redirection.label }}"
         </router-link>

@@ -1,24 +1,25 @@
-const Coach = () => import('@/components/Coach.vue');
 const PageBibliotheque = () => import('@/components/pages/PageBibliotheque.vue');
 const PageSeDesabonnerDesNotificationsMails = () =>
   import('@/components/pages/PageSeDesabonnerDesNotificationsMails.vue');
+const PageAccueilConnectee = () => import('@/components/pages/PageAccueilConnectee.vue');
+
 import { RouteRecordRaw } from 'vue-router';
 import { RouteCoachName } from '@/router/coach/routeCoachName';
 
 export enum RouteCoachPath {
-  COACH = '/agir',
+  ACCUEIL_CONNECTEE = '/agir',
   BIBLIOTHEQUE = 'bibliotheque',
   SE_DESABONNER_DES_NOTIFICATIONS_MAILS = '/se-desabonner',
 }
 
 const coachRoutes: RouteRecordRaw[] = [
   {
-    path: RouteCoachPath.COACH,
+    path: RouteCoachPath.ACCUEIL_CONNECTEE,
     children: [
       {
-        path: RouteCoachPath.COACH,
-        name: RouteCoachName.COACH,
-        component: Coach,
+        path: RouteCoachPath.ACCUEIL_CONNECTEE,
+        name: RouteCoachName.ACCUEIL_CONNECTEE,
+        component: PageAccueilConnectee,
         meta: {
           title: 'Agir',
         },

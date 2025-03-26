@@ -7,10 +7,10 @@
     <div v-else-if="!isLoadingGlobal && bibliothequeViewModel" class="fr-grid-row fr-grid-row--gutters">
       <div class="fr-col-md-4 fr-col-12">
         <BibliothequeFiltres
+          :filtres="bibliothequeViewModel.filtres"
           @rechercher-par-titre="rechercherParTitre"
           @update-thematiques="updateThematiques"
           @rechercher-par-favoris="rechercherParFavoris"
-          :filtres="bibliothequeViewModel.filtres"
         />
       </div>
       <div class="fr-col-md-8 fr-col-12">
@@ -20,23 +20,23 @@
         <div v-if="isLoadingFiltre">Chargement en cours ...</div>
         <div v-else-if="bibliothequeViewModel.articles.length === 0">
           <div class="text--center">
-            <img src="/bibliotheque_illustration.svg" alt="" />
+            <img alt="" src="/bibliotheque_illustration.svg" />
             <h3 class="fr-h4 fr-mt-2w">Débloquez des articles en complétant des missions !</h3>
-            <router-link class="fr-btn fr-btn--lg" :to="{ name: RouteCoachName.COACH }">
+            <router-link :to="{ name: RouteCoachName.ACCUEIL_CONNECTEE }" class="fr-btn fr-btn--lg">
               Retourner à l'accueil
             </router-link>
           </div>
         </div>
         <div v-else class="fr-grid-row fr-grid-row--gutters">
-          <div class="fr-col-md-6 fr-col-12" v-for="article in bibliothequeViewModel.articles" :key="article.titre">
+          <div v-for="article in bibliothequeViewModel.articles" :key="article.titre" class="fr-col-md-6 fr-col-12">
             <BibliothequeCard
               :id="article.idDuContenu"
-              :titre="article.titre"
-              :image="article.image"
               :description="article.description"
-              :thematique="article.thematique"
-              :url="article.url"
               :favoris="article.favoris"
+              :image="article.image"
+              :thematique="article.thematique"
+              :titre="article.titre"
+              :url="article.url"
             />
           </div>
         </div>
@@ -46,7 +46,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
   import { onMounted, ref } from 'vue';
   import BibliothequeCard from '@/components/custom/Bibliotheque/BibliothequeCard.vue';
   import BibliothequeFiltres from '@/components/custom/Bibliotheque/BibliothequeFiltres.vue';

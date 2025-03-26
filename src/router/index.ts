@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
-import accueilRoutes from '@/router/accueil/routes';
 import actionsRoutes from '@/router/actions/routes';
 import aidesRoutes from '@/router/aides/routes';
 import articlesRoutes from '@/router/articles/routes';
@@ -10,7 +9,6 @@ import coachRoutes from '@/router/coach/routes';
 import collectiviteRoutes from '@/router/collectivites/routes';
 import compteRoutes from '@/router/compte/routes';
 import conformiteRoutes from '@/router/conformite/routes';
-import defiRoutes from '@/router/defis/routes';
 import examenRoutes from '@/router/examen/routes';
 import kycRoutes from '@/router/kyc/routes';
 import quizRoutes from '@/router/quiz/routes';
@@ -45,7 +43,6 @@ enum RouteCommunePath {
 
 const routes: RouteRecordRaw[] = [
   ...conformiteRoutes,
-  ...defiRoutes,
   ...kycRoutes,
   ...compteRoutes,
   ...coachRoutes,
@@ -59,7 +56,6 @@ const routes: RouteRecordRaw[] = [
   ...examenRoutes,
   ...collectiviteRoutes,
   ...actionsRoutes,
-  ...accueilRoutes,
   ...resetRoutes,
   {
     path: '/',
@@ -71,7 +67,7 @@ const routes: RouteRecordRaw[] = [
     },
     beforeEnter: () => {
       if (utilisateurStore().utilisateur.id.length > 0) {
-        router.replace({ name: RouteCoachName.COACH });
+        router.replace({ name: RouteCoachName.ACCUEIL_CONNECTEE });
       }
     },
   },

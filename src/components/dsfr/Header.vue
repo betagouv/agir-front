@@ -29,7 +29,7 @@
               </div>
             </div>
             <div class="fr-header__service">
-              <router-link :to="{ name: estConnecte ? RouteCoachName.COACH : RouteCommuneName.ACCUEIL }">
+              <router-link :to="{ name: estConnecte ? RouteCoachName.ACCUEIL_CONNECTEE : RouteCommuneName.ACCUEIL }">
                 <p class="fr-header__service-title">J'agis</p>
               </router-link>
             </div>
@@ -84,8 +84,8 @@
           <ul v-if="utilisateurStore().utilisateur.onboardingAEteRealise" class="fr-nav__list">
             <li class="fr-nav__item nav__item--separateur" data-fr-js-navigation-item="true">
               <router-link
-                :aria-current="route.name === RouteCoachName.COACH ? 'page' : null"
-                :to="{ name: RouteCoachName.COACH }"
+                :aria-current="route.name === RouteCoachName.ACCUEIL_CONNECTEE ? 'page' : null"
+                :to="{ name: RouteCoachName.ACCUEIL_CONNECTEE }"
                 class="fr-nav__link"
               >
                 Accueil
@@ -191,6 +191,16 @@
 
             <li class="fr-nav__item" data-fr-js-navigation-item="true">
               <router-link
+                :aria-current="route.name === RouteActionsName.CATALOGUE_ACTION ? 'page' : null"
+                :to="{ name: RouteActionsName.CATALOGUE_ACTION }"
+                class="fr-nav__link"
+              >
+                Actions
+              </router-link>
+            </li>
+
+            <li class="fr-nav__item" data-fr-js-navigation-item="true">
+              <router-link
                 :aria-current="route.name === RouteBilanCarboneName.BILAN_CARBONE ? 'page' : null"
                 :to="{ name: RouteBilanCarboneName.BILAN_CARBONE }"
                 class="fr-nav__link"
@@ -232,6 +242,7 @@
   import { UtilisateurRepositoryAxios } from '@/domaines/authentification/adapters/utilisateur.repository.axios';
   import { SessionRepositoryStore } from '@/domaines/authentification/adapters/session.repository.store';
   import { RouteAidesName } from '@/router/aides/routeAidesName';
+  import { RouteActionsName } from '@/router/actions/routes';
 
   const route = useRoute();
   const store = utilisateurStore();
