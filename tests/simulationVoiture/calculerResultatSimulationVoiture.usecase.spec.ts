@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { SimulateurVoitureRepositoryMock } from './adapters/simulateurVoiture.repository.mock';
 import {
   ResultatSimulationVoiturePresenterImpl,
@@ -27,14 +27,14 @@ describe('CalculerResultatSimulationVoitureUsecase', () => {
         },
         resultatVoiturePlusEconomique: {
           typeDeVoiture: 'Voiture A',
-          coutAnnuel: { montant: 18000, difference: -7000 },
-          emission: { montant: 80, difference: -20 },
+          coutAnnuel: { montant: 18000, difference: -7000, label: '-7000€', style: 'fr-badge--success' },
+          emission: { montant: 80, difference: -20, label: '-20%', style: 'fr-badge--success' },
           tag: ['Essence', 'Hybride'],
         },
         resultatVoiturePlusEcologique: {
           typeDeVoiture: 'Voiture B',
-          coutAnnuel: { montant: 22000, difference: -3000 },
-          emission: { montant: 60, difference: -40 },
+          coutAnnuel: { montant: 22000, difference: -3000, label: '-3000€', style: 'fr-badge--success' },
+          emission: { montant: 60, difference: -40, label: '-40%', style: 'fr-badge--success' },
           tag: ['Électricité', 'Électrique'],
         },
       });
