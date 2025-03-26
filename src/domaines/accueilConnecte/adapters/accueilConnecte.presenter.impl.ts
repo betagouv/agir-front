@@ -17,8 +17,8 @@ export class AccueilConnectePresenterImpl implements AccueilConnectePresenter {
     this.accueilConnecteViewModel({
       commune: accueilConnecte.commune,
       progression: {
-        nombreActionsTerminees: 3,
-        pourcentageCompletionBilan: 50,
+        nombreActionsTerminees: accueilConnecte.totalActionsUtilisateurFaites,
+        pourcentageCompletionBilan: accueilConnecte.pourcentageCompletionBilan,
       },
       raccourcis: [
         {
@@ -89,7 +89,7 @@ export class AccueilConnectePresenterImpl implements AccueilConnectePresenter {
           },
         },
       ],
-      totalActionsRealisees: 6,
+      totalActionsRealisees: accueilConnecte.totalActionsNationalesFaites,
     });
   }
 }

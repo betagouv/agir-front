@@ -1,35 +1,35 @@
 <template>
   <div class="fr-container fr-py-6w">
-    <div class="fr-col-12 fr-col-lg-8 fr-mx-auto fr-mb-0 background--white fr-p-6w border border-radius--md">
-      <div class="fr-grid-row fr-grid-row--gutters align-items--start flex-center fr-mb-1w">
-        <div class="fr-col-12 fr-col-md-8 fr-pr-md-3w">
-          <h1 class="fr-h2">Merci pour votre soutien !</h1>
+    <div class="fr-col-12 fr-col-lg-8 fr-mx-auto fr-mb-0 background--white fr-p-2w fr-p-md-6w border border-radius--md">
+      <h1 class="fr-h2">Merci pour votre soutien&nbsp;!</h1>
+      <div class="fr-grid-row fr-grid-row--gutters">
+        <div class="fr-col-12 fr-col-md-8">
           <p>
             Vous avez fait partie des <span class="text--bold">premiers utilisateurs</span> à tester ce nouveau service,
             à nous faire vos retours, et nous permettre de nous améliorer.
           </p>
           <p>
             Pour cela, nous aimerions vous remercier avec <span class="text--bold">ce badge</span> et 200
-            <img src="/ic_score.svg" alt="points" /> pour commencer cette
+            <img alt="points" src="/ic_score.svg" /> pour commencer cette
             <span class="text--bold">nouvelle aventure</span>...
           </p>
-          <div class="badge flex align-items--center fr-my-4w fr-p-1w">
-            <img src="/badge-pionnier.png" alt="" />
-            <div>
-              <p class="fr-h4 fr-mb-0">Pionnier</p>
-              <p class="fr-mb-0">Présent depuis les premiers jours</p>
-            </div>
+        </div>
+        <div class="fr-hidden fr-unhidden-lg fr-col-4">
+          <div class="flex align-items--baseline">
+            <img alt="" src="/badge-pionnier-illustration.webp" width="140" />
           </div>
         </div>
-        <div class="fr-col-12 fr-col-sm-6 fr-col-md-4 fr-pt-4w">
-          <img src="/badge-pionnier-illustration.png" alt="" class="illustration full-width" />
+      </div>
+      <div class="badge fr-col-12 fr-col-md-8 flex align-items--start fr-my-4w fr-p-1w">
+        <img alt="" src="/badge-pionnier.webp" />
+        <div class="fr-mt-1w fr-ml-2w">
+          <p class="fr-h4 fr-mb-0">Pionnier</p>
+          <p class="fr-mb-0">Présent depuis les premiers jours</p>
         </div>
       </div>
-      <div
-        class="fr-btns-group fr-btns-group--right fr-btns-group--inline-reverse fr-btns-group--inline-lg fr-btns-group--icon-left"
-      >
-        <button class="fr-btn fr-icon-arrow-right-line fr-btn--icon-right" @click="terminerReset">
-          Récolter 200&nbsp;<img src="/ic_score.svg" alt="points" />
+      <div class="flex flex-end">
+        <button class="fr-btn fr-icon-arrow-right-line fr-btn--icon-right" @click="continuer()">
+          Continer avec 200&nbsp;<img alt="points" src="/ic_score.svg" />
         </button>
       </div>
     </div>
@@ -38,19 +38,12 @@
 
 <script lang="ts" setup>
   import { useRouter } from 'vue-router';
-  import { UtilisateurRepositoryAxios } from '@/domaines/authentification/adapters/utilisateur.repository.axios';
-  import { FermerMessageResetUsecase } from '@/domaines/compte/fermerMessageReset.usecase';
   import { RouteCommuneName } from '@/router';
-  import { utilisateurStore } from '@/store/utilisateur';
 
   const router = useRouter();
-
-  const fermerMessageResetUsecase = new FermerMessageResetUsecase(new UtilisateurRepositoryAxios());
-
-  async function terminerReset() {
-    await fermerMessageResetUsecase.execute(utilisateurStore().utilisateur.id);
+  const continuer = async () => {
     await router.push({ name: RouteCommuneName.ACCUEIL });
-  }
+  };
 </script>
 
 <style scoped>

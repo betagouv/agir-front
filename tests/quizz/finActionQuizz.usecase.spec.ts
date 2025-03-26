@@ -38,6 +38,7 @@ class QuizRepositoryForTest implements QuizRepository {
 export class SpyActionsEventBus extends EventBus<ActionsEvent> {
   eventSubscribers: Record<ActionsEvent, { subscriberName: string; callback: () => void }[]> = {
     [ActionsEvent.A_ETE_REALISEE]: [],
+    [ActionsEvent.RESET_VU]: [],
   };
 
   private _eventName: ActionsEvent | null = null;

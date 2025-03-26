@@ -6,7 +6,7 @@
     role="group"
   >
     <legend id="date-default-1578-fieldset-legend" class="fr-fieldset__legend text--normal fr-mb-0">
-      Date de naissance
+      Votre date de naissance
     </legend>
     <div class="fr-fieldset__element fr-fieldset__element--inline fr-fieldset__element--number">
       <div class="fr-input-group">
@@ -17,10 +17,10 @@
         <input
           id="date-default-1578-bday-day"
           v-model="dateDeNaissance.jour"
+          :disabled="disabled"
           class="fr-input"
           name="day"
           type="text"
-          :disabled="disabled"
         />
       </div>
     </div>
@@ -33,10 +33,10 @@
         <input
           id="date-default-1578-bday-month"
           v-model="dateDeNaissance.mois"
+          :disabled="disabled"
           class="fr-input"
           name="month"
           type="text"
-          :disabled="disabled"
         />
       </div>
     </div>
@@ -51,10 +51,10 @@
         <input
           id="date-default-1578-bday-year"
           v-model="dateDeNaissance.annee"
+          :disabled="disabled"
           class="fr-input"
           name="year"
           type="text"
-          :disabled="disabled"
         />
       </div>
     </div>

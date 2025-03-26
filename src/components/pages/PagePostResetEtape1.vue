@@ -16,7 +16,7 @@
           </p>
         </div>
         <div class="fr-col-12 fr-col-sm-6 fr-col-md-4">
-          <img src="/pop-in-v2-illustration.svg" alt="" class="full-width img" />
+          <img alt="" class="full-width img" src="/pop-in-v2-illustration.svg" />
         </div>
       </div>
       <div
@@ -34,7 +34,17 @@
 </template>
 
 <script lang="ts" setup>
+  import { onMounted } from 'vue';
+  import { ActionsEventBus } from '@/domaines/actions/actions.eventbus';
+  import { UtilisateurRepositoryAxios } from '@/domaines/authentification/adapters/utilisateur.repository.axios';
+  import { FermerMessageResetUsecase } from '@/domaines/compte/fermerMessageReset.usecase';
   import { RouteResetName } from '@/router/reset/routes';
+  import { utilisateurStore } from '@/store/utilisateur';
+
+  onMounted(async () => {
+    const fermerMessageResetUsecase = new FermerMessageResetUsecase(new UtilisateurRepositoryAxios());
+    await fermerMessageResetUsecase.execute(utilisateurStore().utilisateur.id, ActionsEventBus.getInstance());
+  });
 </script>
 
 <style scoped>

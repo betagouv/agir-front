@@ -98,6 +98,6 @@ export class UtilisateurRepositoryMock implements UtilisateurRepository {
   }
 
   terminerMessageReset(idUtilisateur: string): Promise<void> {
-    throw Error;
+    return Promise.resolve();
   }
 }

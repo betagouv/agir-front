@@ -1,7 +1,7 @@
 <template>
   <div class="background">
-    <img class="illustration" src="/accueil-connecte-illustration.svg" alt="" />
-    <img class="fleche" src="/accueil-connecte-fleche.webp" alt="" />
+    <img alt="" class="illustration" src="/accueil-connecte-illustration.svg" />
+    <img alt="" class="fleche" src="/accueil-connecte-fleche.webp" />
 
     <div class="fr-container full-height flex flex-column flex-center marginBottomResponsive fr-pb-md-5w contenu">
       <div class="fr-grid-row fr-grid-row--gutters fr-mb-5w">
@@ -10,15 +10,15 @@
             <h1 class="fr-h1 fr-mr-3w">Des solutions ensemble, pour la transition écologique</h1>
             <ul class="fr-grid-row fr-grid-row--gutters list-style-none fr-pl-0 fr-mb-2w fr-text--lg">
               <li class="fr-col-auto">
-                <span class="fr-icon-check-line text--vert" aria-hidden="true" />
+                <span aria-hidden="true" class="fr-icon-check-line text--vert" />
                 Selon mes moyens
               </li>
               <li class="fr-col-auto">
-                <span class="fr-icon-check-line text--vert" aria-hidden="true" />
+                <span aria-hidden="true" class="fr-icon-check-line text--vert" />
                 Selon mes lieux de vie
               </li>
               <li class="fr-col-auto">
-                <span class="fr-icon-check-line text--vert" aria-hidden="true" />
+                <span aria-hidden="true" class="fr-icon-check-line text--vert" />
                 Selon mes envies
               </li>
             </ul>
@@ -42,7 +42,11 @@
                   <CercleProgression :pourcentage="progression?.pourcentageCompletionBilan || 0" class="fr-mb-1w" />
                   <span>Mon bilan environnemental</span>
                 </p>
-                <a class="fr-link fr-link--icon-right fr-icon-arrow-right-line" href="">Compléter</a>
+                <router-link
+                  :to="{ name: RouteBilanCarboneName.BILAN_CARBONE }"
+                  class="fr-link fr-link--icon-right fr-icon-arrow-right-line"
+                  >Compléter
+                </router-link>
               </div>
             </div>
           </div>
@@ -54,9 +58,10 @@
   <div class="breaker-placeholder"></div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
   import CercleProgression from '@/components/custom/CercleProgression.vue';
   import { AccueilConnecteViewModel } from '@/domaines/accueilConnecte/ports/accueilConnecte.presenter';
+  import { RouteBilanCarboneName } from '@/router/bilanCarbone/routes';
   import { gererPluriel } from '@/shell/pluriel';
 
   defineProps<{
