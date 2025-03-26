@@ -1,19 +1,18 @@
 <template>
   <router-link
-    :to="{ name: RouteClassementName.CLASSEMENT }"
     :aria-current="route.name === RouteClassementName.CLASSEMENT ? 'page' : null"
+    :to="{ name: RouteClassementName.CLASSEMENT }"
     class="tag__progression tag__progression--score fr-text--bold"
   >
-    {{ score.points }} <img width="16" src="/ic_score.svg" alt="score" />
+    {{ score.points }} <img alt="score" src="/ic_score.svg" width="16" />
   </router-link>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
   import { computed, onMounted, onUnmounted } from 'vue';
   import { useRoute } from 'vue-router';
   import { ActionsEventBus } from '@/domaines/actions/actions.eventbus';
   import { SessionRepositoryStore } from '@/domaines/authentification/adapters/session.repository.store';
-  import { MissionEvent, MissionEventBusImpl } from '@/domaines/missions/missionEventBus.impl';
   import { ScoreRepositoryAxios } from '@/domaines/score/adapters/score.repository.axios';
   import { ChargementScoreUsecase } from '@/domaines/score/chargementScore.usecase';
   import { ToDoListEventBusImpl } from '@/domaines/toDoList/toDoListEventBusImpl';
@@ -27,14 +26,6 @@
   onMounted(() => {
     mettreAJourLeScore();
 
-    MissionEventBusImpl.getInstance().subscribe(
-      subscriberName,
-      MissionEvent.OBJECTIF_MISSION_POINTS_ONT_ETE_RECUPERE,
-      () => {
-        mettreAJourLeScore();
-      },
-    );
-
     ToDoListEventBusImpl.getInstance().subscribeToAllEvents(subscriberName, () => {
       mettreAJourLeScore();
     });
@@ -46,7 +37,6 @@
 
   onUnmounted(() => {
     ToDoListEventBusImpl.getInstance().unsubscribeToAllEvents(subscriberName);
-    MissionEventBusImpl.getInstance().unsubscribeToAllEvents(subscriberName);
     ActionsEventBus.getInstance().unsubscribeToAllEvents(subscriberName);
   });
 

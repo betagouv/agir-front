@@ -1,10 +1,10 @@
 import { ActionsEvent } from '@/domaines/actions/actions.eventbus';
-import { MissionEvent } from '@/domaines/missions/missionEventBus.impl';
 import { LinkyEvent } from '@/domaines/services/linkyEventBusImpl';
 import { ToDoListEvent } from '@/domaines/toDoList/toDoListEventBusImpl';
 
-export abstract class EventBus<T extends ToDoListEvent | MissionEvent | LinkyEvent | ActionsEvent> {
+export abstract class EventBus<T extends ToDoListEvent | LinkyEvent | ActionsEvent> {
   protected abstract eventSubscribers: Record<T, { subscriberName: string; callback: () => void }[]>;
+
   publish(eventName: T): void {
     const subscribers = this.eventSubscribers[eventName] || [];
     subscribers.forEach(subscriber => {

@@ -9,7 +9,6 @@ import coachRoutes from '@/router/coach/routes';
 import collectiviteRoutes from '@/router/collectivites/routes';
 import compteRoutes from '@/router/compte/routes';
 import conformiteRoutes from '@/router/conformite/routes';
-import examenRoutes from '@/router/examen/routes';
 import kycRoutes from '@/router/kyc/routes';
 import quizRoutes from '@/router/quiz/routes';
 import resetRoutes from '@/router/reset/routes';
@@ -53,7 +52,6 @@ const routes: RouteRecordRaw[] = [
   ...serviceRoutes,
   ...bilanCarboneRoutes,
   ...classementRoutes,
-  ...examenRoutes,
   ...collectiviteRoutes,
   ...actionsRoutes,
   ...resetRoutes,
