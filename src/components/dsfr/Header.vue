@@ -253,13 +253,13 @@
     () => estConnecte.value && !store.utilisateur.onboardingAEteRealise,
   );
 
-  const utilisateurId = utilisateurStore().utilisateur.id;
   const seDeconnecterUsecase = new DeconnecterUtilisateurUsecase(
     new UtilisateurRepositoryAxios(),
     new SessionRepositoryStore(),
   );
 
   const logout = async () => {
+    const utilisateurId = utilisateurStore().utilisateur.id;
     await seDeconnecterUsecase.execute(utilisateurId, url => router.push({ path: url }));
   };
 </script>
