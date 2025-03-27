@@ -1,5 +1,6 @@
 import { ClassementPresenter } from '@/domaines/classement/ports/classement.presenter';
 import { ClassementRepository } from '@/domaines/classement/ports/classement.repository';
+import { Badge } from '@/domaines/score/ports/score.repository';
 
 export enum ClassementPourcentage {
   top5 = 'pourcent_5',
@@ -26,6 +27,7 @@ export interface ClassementGlobal {
   commune: string;
   classementLocal: Classement;
   classementNational: Classement;
+  badges: Badge[];
 }
 
 export class RecupererClassementUsecase {

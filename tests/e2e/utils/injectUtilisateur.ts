@@ -14,9 +14,6 @@ export class InjectUtilisateur {
         estUnUtilisateurFranceConnect: false,
         afficherMessageReset: false,
       },
-      score: {
-        points: 0,
-      },
       tracking: {
         matomoEstInactif: true,
       },

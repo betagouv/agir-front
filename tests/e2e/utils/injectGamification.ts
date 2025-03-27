@@ -9,6 +9,7 @@ export class InjectGamification {
       niveau: 0,
       current_points_in_niveau: 0,
       point_target_in_niveau: 0,
+      badges: [],
     };
   }
 

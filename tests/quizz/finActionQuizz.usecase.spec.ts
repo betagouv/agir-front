@@ -39,6 +39,7 @@ export class SpyActionsEventBus extends EventBus<ActionsEvent> {
   eventSubscribers: Record<ActionsEvent, { subscriberName: string; callback: () => void }[]> = {
     [ActionsEvent.A_ETE_REALISEE]: [],
     [ActionsEvent.RESET_VU]: [],
+    [ActionsEvent.PERSONNALISATION_FAITE]: [],
   };
 
   private _eventName: ActionsEvent | null = null;

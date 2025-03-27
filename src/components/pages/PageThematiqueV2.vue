@@ -49,7 +49,7 @@
       </div>
     </div>
 
-    <WidgetAides :clef-thematique="thematiqueId as ClefThematiqueAPI" class="fr-my-4w" :nombre-aides-max="4" />
+    <WidgetAides :clef-thematique="thematiqueId as ClefThematiqueAPI" :nombre-aides-max="4" class="fr-my-4w" />
 
     <section class="fr-my-6w flex flex-column align-items--center">
       <h2>Envie de voir ou de revoir toutes les actions ?</h2>
@@ -71,6 +71,7 @@
   import WidgetServiceFruitsEtLegumes from '@/components/pages/PagesService/components/WidgetServiceFruitsEtLegumes.vue';
   import WidgetServicePresDeChezNous from '@/components/pages/PagesService/components/WidgetServicePresDeChezNous.vue';
   import WidgetServiceRecettes from '@/components/pages/PagesService/components/WidgetServiceRecettes.vue';
+  import { ActionsEventBus } from '@/domaines/actions/actions.eventbus';
   import { ActionsRepositoryAxios } from '@/domaines/actions/adapters/actions.repository.axios';
   import { ActionsDansUneThematiquePresenterImpl } from '@/domaines/actions/adapters/actionsDansUneThematique.presenter.impl';
   import { ActionViewModel } from '@/domaines/actions/ports/actions.presenter';
@@ -134,11 +135,13 @@
       new ThematiquesRepositoryAxios(),
     );
 
-    personnalisationThematiqueEffectueeUsecase.execute(idUtilisateur, thematiqueId as ClefThematiqueAPI).then(() => {
-      setTimeout(async () => {
-        await chargerActionsRecommandees();
-      }, 2000);
-    });
+    personnalisationThematiqueEffectueeUsecase
+      .execute(idUtilisateur, thematiqueId as ClefThematiqueAPI, ActionsEventBus.getInstance())
+      .then(() => {
+        setTimeout(async () => {
+          await chargerActionsRecommandees();
+        }, 2000);
+      });
   }
 
   async function resetParcours() {
