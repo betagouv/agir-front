@@ -19,14 +19,17 @@
               label="Votre pseudonyme"
               name="utilisateur-pseudo"
               @blur="onValidationPseudo"
-              :maxlength="40"
+              :maxlength="30"
             />
 
             <InputDateDeNaissance
+              id="3"
+              description="Nécessaire pour faciliter votre identification"
               v-if="!utilisateurStore().utilisateur.estUnUtilisateurFranceConnect"
               v-model="onboardingPostCreationCompte().dateDeNaissance"
               :erreur="champsDateDeNaissanceStatus"
               class="fr-mt-4w"
+              required
             />
           </div>
         </fieldset>
@@ -42,7 +45,8 @@
   import InputText from '@/components/dsfr/InputText.vue';
   import {
     validationAnnee,
-    validationDate,
+    validationDateEstPassee,
+    validationDateExiste,
     validationJour,
     validationMois,
     validationPrenomOuNomOuPseudo,
@@ -66,6 +70,16 @@
     afficher: false,
   });
 
+  function resetDateDeNaissanceStatus() {
+    champsDateDeNaissanceStatus.value = {
+      message_jour: '',
+      message_mois: '',
+      message_annee: '',
+      message_general: '',
+      afficher: false,
+    };
+  }
+
   function onValidationPseudo(): boolean {
     if (!validationPrenomOuNomOuPseudo(onboardingPostCreationCompte().pseudo)) {
       champsPseudoStatus.value = { message: 'Le pseudonyme doit contenir uniquement des lettres', afficher: true };
@@ -76,17 +90,10 @@
   }
 
   function onValidationDateDeNaissance(): boolean {
-    champsDateDeNaissanceStatus.value = {
-      message_jour: '',
-      message_mois: '',
-      message_annee: '',
-      message_general: '',
-      afficher: false,
-    };
+    resetDateDeNaissanceStatus();
 
     let hasError = false;
     if (!validationJour(onboardingPostCreationCompte().dateDeNaissance.jour)) {
-      // gérer focus sur erreur
       hasError = true;
       champsDateDeNaissanceStatus.value.afficher = true;
       champsDateDeNaissanceStatus.value.message_jour = 'Le jour doit être compris entre 1 et 31';
@@ -105,7 +112,13 @@
       champsDateDeNaissanceStatus.value.message_annee = `L'annee doit être comprise entre 1900 et ${anneeActuelle}`;
     }
 
-    if (!hasError && !validationDate(onboardingPostCreationCompte().dateDeNaissance)) {
+    if (!validationDateEstPassee(onboardingPostCreationCompte().dateDeNaissance)) {
+      hasError = true;
+      champsDateDeNaissanceStatus.value.afficher = true;
+      champsDateDeNaissanceStatus.value.message_general = 'La date de naissance ne peut être dans le futur';
+    }
+
+    if (!hasError && !validationDateExiste(onboardingPostCreationCompte().dateDeNaissance)) {
       hasError = true;
       champsDateDeNaissanceStatus.value.afficher = true;
       champsDateDeNaissanceStatus.value.message_general = "La date de naissance n'existe pas";
@@ -113,13 +126,7 @@
 
     if (hasError) return false;
 
-    champsDateDeNaissanceStatus.value = {
-      message_jour: '',
-      message_mois: '',
-      message_annee: '',
-      message_general: '',
-      afficher: false,
-    };
+    resetDateDeNaissanceStatus();
     return true;
   }
 </script>

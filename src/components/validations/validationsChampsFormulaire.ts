@@ -20,7 +20,7 @@ export function validationAnnee(annee: string): boolean {
   return !isNaN(anneeNumber) && anneeNumber >= 1900 && anneeNumber <= currentYear;
 }
 
-export function validationDate(date: { jour: string; mois: string; annee: string }) {
+export function validationDateExiste(date: { jour: string; mois: string; annee: string }) {
   const j = parseInt(date.jour);
   const m = parseInt(date.mois);
   const a = parseInt(date.annee);
@@ -29,9 +29,17 @@ export function validationDate(date: { jour: string; mois: string; annee: string
 
   const dateHypothetique = new Date(a, m - 1, j);
   return (
-    dateHypothetique.getFullYear() === a &&
-    dateHypothetique.getMonth() === m - 1 &&
-    dateHypothetique.getDate() === j &&
-    dateHypothetique.getTime() <= new Date().getTime()
+    dateHypothetique.getFullYear() === a && dateHypothetique.getMonth() === m - 1 && dateHypothetique.getDate() === j
   );
+}
+
+export function validationDateEstPassee(date: { jour: string; mois: string; annee: string }) {
+  const j = parseInt(date.jour);
+  const m = parseInt(date.mois);
+  const a = parseInt(date.annee);
+
+  if (isNaN(j) || isNaN(m) || isNaN(a)) return false;
+
+  const dateHypothetique = new Date(a, m - 1, j);
+  return dateHypothetique.getTime() <= new Date().getTime();
 }
