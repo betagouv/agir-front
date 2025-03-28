@@ -1,14 +1,14 @@
 <template>
   <div>
     <fieldset
-      :id="`date-default-${keyName}-fieldset`"
-      :aria-labelledby="`date-default-${keyName}-fieldset-legend date-default-${keyName}-fieldset-messages`"
+      :id="`date-naissance-${keyName}-fieldset`"
+      :aria-labelledby="`date-naissance-${keyName}-fieldset-legend date-naissance-${keyName}-${cleDateDeNaissance.DATE_NEXISTE_PAS}-error`"
       class="fr-fieldset"
       :class="statusErreurs?.afficher ? 'fr-fieldset--error' : ''"
       role="group"
     >
       <legend
-        :id="`date-default-${keyName}-fieldset-legend`"
+        :id="`date-naissance-${keyName}-fieldset-legend`"
         class="fr-fieldset__legend text--normal fr-mb-0"
         ref="fieldsetRef"
       >
@@ -18,14 +18,14 @@
 
       <div class="fr-fieldset__element fr-fieldset__element--inline fr-fieldset__element--number">
         <div class="fr-input-group">
-          <label class="fr-label" :for="`date-default-${keyName}-bday-day`">
+          <label class="fr-label" :for="`date-naissance-${keyName}-${cleDateDeNaissance.JOUR}`">
             Jour
             <span class="fr-hint-text">Exemple : 14</span>
           </label>
           <input
             ref="jourInputRef"
-            :id="`date-default-${keyName}-bday-day`"
-            :aria-describedby="`date-default-${keyName}-bday-day-error`"
+            :id="`date-naissance-${keyName}-${cleDateDeNaissance.JOUR}`"
+            :aria-describedby="`date-naissance-${keyName}-${cleDateDeNaissance.JOUR}-error`"
             v-model="dateDeNaissance.jour"
             :disabled="disabled"
             class="fr-input"
@@ -38,14 +38,14 @@
       </div>
       <div class="fr-fieldset__element fr-fieldset__element--inline fr-fieldset__element--number">
         <div class="fr-input-group">
-          <label class="fr-label" :for="`date-default-${keyName}-bday-month`">
+          <label class="fr-label" :for="`date-naissance-${keyName}-${cleDateDeNaissance.MOIS}`">
             Mois
             <span class="fr-hint-text">Exemple : 12</span>
           </label>
           <input
             ref="moisInputRef"
-            :id="`date-default-${keyName}-bday-month`"
-            :aria-describedby="`date-default-${keyName}-bday-month-error`"
+            :id="`date-naissance-${keyName}-${cleDateDeNaissance.MOIS}`"
+            :aria-describedby="`date-naissance-${keyName}-${cleDateDeNaissance.MOIS}-error`"
             v-model="dateDeNaissance.mois"
             :disabled="disabled"
             class="fr-input"
@@ -60,14 +60,14 @@
         class="fr-fieldset__element fr-fieldset__element--inline fr-fieldset__element--inline-grow fr-fieldset__element--year"
       >
         <div class="fr-input-group">
-          <label class="fr-label" :for="`date-default-${keyName}-bday-year`">
+          <label class="fr-label" :for="`date-naissance-${keyName}-${cleDateDeNaissance.ANNEE}`">
             Année
             <span class="fr-hint-text">Exemple : 1984</span>
           </label>
           <input
             ref="anneeInputRef"
-            :id="`date-default-${keyName}-bday-year`"
-            :aria-describedby="`date-default-${keyName}-bday-year-error`"
+            :id="`date-naissance-${keyName}-${cleDateDeNaissance.ANNEE}`"
+            :aria-describedby="`date-naissance-${keyName}-${cleDateDeNaissance.ANNEE}-error`"
             v-model="dateDeNaissance.annee"
             :disabled="disabled"
             class="fr-input"
@@ -80,28 +80,11 @@
       </div>
       <ul v-if="statusErreurs?.afficher" class="list-style-none fr-px-1w fr-mt-0">
         <li
-          v-if="statusErreurs.erreurJour"
-          v-text="statusErreurs.erreurJour"
+          :key="key"
+          v-for="(message, key) in erreursFiltrees"
+          v-text="message"
           class="fr-error-text fr-mt-0"
-          :id="`date-default-${keyName}-bday-day-error`"
-        />
-        <li
-          v-if="statusErreurs.erreurMois"
-          v-text="statusErreurs.erreurMois"
-          class="fr-error-text fr-mt-0"
-          :id="`date-default-${keyName}-bday-month-error`"
-        />
-        <li
-          v-if="statusErreurs.erreurAnnee"
-          v-text="statusErreurs.erreurAnnee"
-          class="fr-error-text fr-mt-0"
-          :id="`date-default-${keyName}-bday-year-error`"
-        />
-        <li
-          v-if="statusErreurs.erreurFieldset"
-          v-text="statusErreurs.erreurFieldset"
-          class="fr-error-text fr-mt-0"
-          :id="`date-default-${keyName}-fieldset-messages`"
+          :id="`date-naissance-${keyName}-${key}-error`"
         />
       </ul>
     </fieldset>
@@ -109,7 +92,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { defineProps, defineModel, ref } from 'vue';
+  import { defineProps, defineModel, ref, computed } from 'vue';
   import {
     validationAnnee,
     validationDateEstPassee,
@@ -130,6 +113,13 @@
     disabled?: boolean;
     required?: boolean;
   }>();
+
+  enum cleDateDeNaissance {
+    JOUR = 'jour',
+    MOIS = 'mois',
+    ANNEE = 'anneee',
+    DATE_NEXISTE_PAS = 'date-ko',
+  }
 
   const jourInputRef = ref<HTMLInputElement | null>();
   const moisInputRef = ref<HTMLInputElement | null>();
@@ -152,6 +142,19 @@
       afficher: false,
     };
   }
+
+  const erreursFiltrees = computed(() => {
+    if (!statusErreurs) return {};
+
+    return Object.fromEntries(
+      Object.entries({
+        [cleDateDeNaissance.JOUR]: statusErreurs.value.erreurJour,
+        [cleDateDeNaissance.MOIS]: statusErreurs.value.erreurMois,
+        [cleDateDeNaissance.ANNEE]: statusErreurs.value.erreurAnnee,
+        [cleDateDeNaissance.DATE_NEXISTE_PAS]: statusErreurs.value.erreurFieldset,
+      }).filter(([, message]) => message),
+    );
+  });
 
   function validation(): boolean {
     resetDateDeNaissanceStatus();

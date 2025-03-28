@@ -1,5 +1,5 @@
 <template>
-  <div role="alert" :class="`fr-alert fr-alert--${type} background--white`" :id="id">
+  <div role="alert" :class="`fr-alert fr-alert--${type} background--white`">
     <h3 class="fr-alert__title">{{ titre }}</h3>
     <span class="fr-sr-only">: </span>
     <p>{{ message }}</p>
@@ -13,6 +13,5 @@
     titre: string;
     message: string;
     type: 'success' | 'error' | 'info';
-    id?: string;
   }>();
 </script>
