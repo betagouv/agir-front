@@ -1,6 +1,6 @@
 import { RouteRecordRaw } from 'vue-router';
 
-const PageThematiqueV2 = () => import('@/components/pages/PageThematiqueV2.vue');
+const PageThematique = () => import('@/components/pages/PageThematique.vue');
 
 export enum RouteThematiquesName {
   THEMATIQUE = 'thematique',
@@ -15,7 +15,7 @@ const thematiqueRoutes: RouteRecordRaw[] = [
   {
     path: `/${RouteThematiquesPath.THEMATIQUE}/:id`,
     name: RouteThematiquesName.THEMATIQUE,
-    component: PageThematiqueV2,
+    component: PageThematique,
     meta: {
       title: 'Thématique',
     },

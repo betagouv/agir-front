@@ -47,6 +47,7 @@
       </div>
     </section>
     <section v-if="actions.length === 0" class="width-70 text--center fr-my-4w">
+      <img src="/etagere-vide.webp" alt="" class="fr-mb-3w" width="170" />
       <h3 class="fr-h3 fr-mb-2w">C'est tout, pour le moment</h3>
       <p class="fr-mb-4w">
         Chaque mois, J’agis s’enrichit en nouveautés pour vous proposer toujours plus d’actions qui vous correspondent.

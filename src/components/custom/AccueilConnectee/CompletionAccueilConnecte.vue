@@ -72,7 +72,7 @@
 <style scoped>
   .background {
     position: relative;
-    background-image: url('/accueil-connecte-background.webp');
+    background-color: #f6f4f0;
     background-size: cover;
   }
 

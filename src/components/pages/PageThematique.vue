@@ -51,8 +51,10 @@
 
     <WidgetAides :clef-thematique="thematiqueId as ClefThematiqueAPI" :nombre-aides-max="4" class="fr-my-4w" />
 
-    <section class="fr-my-6w flex flex-column align-items--center">
-      <h2>Envie de voir ou de revoir toutes les actions ?</h2>
+    <section class="fr-mt-8w fr-mb-12w flex flex-column align-items--center">
+      <img src="/jumelle.svg" alt="" class="fr-mt-6w fr-mb-2w" />
+
+      <h2 class="fr-h3">Envie de voir ou de revoir toutes les actions ?</h2>
 
       <router-link :to="{ name: RouteActionsName.CATALOGUE_ACTION }" class="fr-btn fr-btn--secondary">
         Accéder au catalogue
