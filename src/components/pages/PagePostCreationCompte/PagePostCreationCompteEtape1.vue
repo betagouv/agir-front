@@ -19,11 +19,13 @@
               label="Votre pseudonyme"
               name="utilisateur-pseudo"
               @blur="onValidationPseudo"
+              :maxlength="40"
             />
 
             <InputDateDeNaissance
               v-if="!utilisateurStore().utilisateur.estUnUtilisateurFranceConnect"
               v-model="onboardingPostCreationCompte().dateDeNaissance"
+              :erreur="champsDateDeNaissanceStatus"
               class="fr-mt-4w"
             />
           </div>
@@ -38,7 +40,13 @@
   import { ref } from 'vue';
   import InputDateDeNaissance from '@/components/dsfr/InputDateDeNaissance.vue';
   import InputText from '@/components/dsfr/InputText.vue';
-  import { validationPrenomOuNomOuPseudo } from '@/components/validations/validationsChampsFormulaire';
+  import {
+    validationAnnee,
+    validationDate,
+    validationJour,
+    validationMois,
+    validationPrenomOuNomOuPseudo,
+  } from '@/components/validations/validationsChampsFormulaire';
   import router from '@/router';
   import { RouteCompteName } from '@/router/compte/routeCompteName';
   import { onboardingPostCreationCompte } from '@/store/onboardingPostCreationCompte';
@@ -46,9 +54,17 @@
 
   const validerLaReponse = () => {
     if (!onValidationPseudo()) return;
+    if (!onValidationDateDeNaissance()) return;
     router.push({ name: RouteCompteName.POST_CREATION_COMPTE_ETAPE_2 });
   };
   const champsPseudoStatus = ref({ message: '', afficher: false });
+  const champsDateDeNaissanceStatus = ref({
+    message_jour: '',
+    message_mois: '',
+    message_annee: '',
+    message_general: '',
+    afficher: false,
+  });
 
   function onValidationPseudo(): boolean {
     if (!validationPrenomOuNomOuPseudo(onboardingPostCreationCompte().pseudo)) {
@@ -56,6 +72,54 @@
       return false;
     }
     champsPseudoStatus.value = { message: '', afficher: false };
+    return true;
+  }
+
+  function onValidationDateDeNaissance(): boolean {
+    champsDateDeNaissanceStatus.value = {
+      message_jour: '',
+      message_mois: '',
+      message_annee: '',
+      message_general: '',
+      afficher: false,
+    };
+
+    let hasError = false;
+    if (!validationJour(onboardingPostCreationCompte().dateDeNaissance.jour)) {
+      // gérer focus sur erreur
+      hasError = true;
+      champsDateDeNaissanceStatus.value.afficher = true;
+      champsDateDeNaissanceStatus.value.message_jour = 'Le jour doit être compris entre 1 et 31';
+    }
+
+    if (!validationMois(onboardingPostCreationCompte().dateDeNaissance.mois)) {
+      hasError = true;
+      champsDateDeNaissanceStatus.value.afficher = true;
+      champsDateDeNaissanceStatus.value.message_mois = 'Le mois doit être compris entre 1 et 12';
+    }
+
+    if (!validationAnnee(onboardingPostCreationCompte().dateDeNaissance.annee)) {
+      hasError = true;
+      const anneeActuelle = new Date().getFullYear();
+      champsDateDeNaissanceStatus.value.afficher = true;
+      champsDateDeNaissanceStatus.value.message_annee = `L'annee doit être comprise entre 1900 et ${anneeActuelle}`;
+    }
+
+    if (!hasError && !validationDate(onboardingPostCreationCompte().dateDeNaissance)) {
+      hasError = true;
+      champsDateDeNaissanceStatus.value.afficher = true;
+      champsDateDeNaissanceStatus.value.message_general = "La date de naissance n'existe pas";
+    }
+
+    if (hasError) return false;
+
+    champsDateDeNaissanceStatus.value = {
+      message_jour: '',
+      message_mois: '',
+      message_annee: '',
+      message_general: '',
+      afficher: false,
+    };
     return true;
   }
 </script>
