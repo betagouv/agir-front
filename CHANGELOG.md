@@ -1,5 +1,46 @@
 # Changelog
 
+## [1.45.0](https://github.com/betagouv/agir-front/compare/v1.44.0...v1.45.0) (2025-03-28)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* action de type bilan ([#984](https://github.com/betagouv/agir-front/issues/984)) ([55acffb](https://github.com/betagouv/agir-front/commit/55acffb64a8bb180c878e1b7d60f3960f7b1d5a9))
+* action est terminée ([#980](https://github.com/betagouv/agir-front/issues/980)) ([2e90b45](https://github.com/betagouv/agir-front/commit/2e90b45da8fe1c8ef2a28e3c5f4f16c94eb95740))
+* ajout de crisp ([8c30080](https://github.com/betagouv/agir-front/commit/8c30080b64be39189de3d31770d1693e43209d58))
+* cas de la date de naissance pour france connect ([726fd51](https://github.com/betagouv/agir-front/commit/726fd51c272bdbc1b5d82b6d1f59e4b2a0cbd9d9))
+* catalogue aides avec la nouvelle ui ([#981](https://github.com/betagouv/agir-front/issues/981)) ([7e85811](https://github.com/betagouv/agir-front/commit/7e858116ec778b94abc1000887f309a185f400f6))
+* date de naissance ([#996](https://github.com/betagouv/agir-front/issues/996)) ([25e1c9d](https://github.com/betagouv/agir-front/commit/25e1c9d4cc00665755e3a57234fb07a771457ede))
+* les badges sont visibles dans le header et classement ([#1007](https://github.com/betagouv/agir-front/issues/1007)) ([7969c53](https://github.com/betagouv/agir-front/commit/7969c5320ea9ae5b82b437f43ad74fcb35b73881))
+* message pour le reset ([#997](https://github.com/betagouv/agir-front/issues/997)) ([d5ad784](https://github.com/betagouv/agir-front/commit/d5ad78413a9bb1739ca5786d27583111331eb456))
+* nouveau footer ([#1006](https://github.com/betagouv/agir-front/issues/1006)) ([81e2daa](https://github.com/betagouv/agir-front/commit/81e2daaff2c4e7f4371303206f180aacdd729948))
+* on peut maintenant voir les articles lus dans la bibliotheque ([#1003](https://github.com/betagouv/agir-front/issues/1003)) ([616455e](https://github.com/betagouv/agir-front/commit/616455ebed529aaea27fd9bbdb2d0e1ac5703f6a))
+* page accueil connecté v2 ([#994](https://github.com/betagouv/agir-front/issues/994)) ([806bd6f](https://github.com/betagouv/agir-front/commit/806bd6fbc46f1201489380b626ede750f84e8c80))
+* previsualiser la page aide depuis le CMS et afficher une page aide en mode non connecté ([#985](https://github.com/betagouv/agir-front/issues/985)) ([06b7271](https://github.com/betagouv/agir-front/commit/06b72712628c04b681dcd4ce16f5a97cb1d889b6))
+* previsualiser une action dans le cms ([#992](https://github.com/betagouv/agir-front/issues/992)) ([c592042](https://github.com/betagouv/agir-front/commit/c5920425f937bcb1f1dbf1029e5df66c1a6434c4))
+* retour de la recette des actions ([#983](https://github.com/betagouv/agir-front/issues/983)) ([738443f](https://github.com/betagouv/agir-front/commit/738443f491c5f80ed0a04ca2b379befcf5d0c355))
+* voir les actions réalisées dans le catalogue ([#1004](https://github.com/betagouv/agir-front/issues/1004)) ([cd0f906](https://github.com/betagouv/agir-front/commit/cd0f90650c5437f318e36f72a21fde26db776d95))
+
+
+### 🐛 Corrections de bogues
+
+* retour recettes ([#995](https://github.com/betagouv/agir-front/issues/995)) ([71a60b7](https://github.com/betagouv/agir-front/commit/71a60b7353bd3bc0db22e020bb8e59cfb8049d8e))
+
+
+### 👷 Autres changements
+
+* Bump @babel/helpers from 7.26.0 to 7.26.10 ([#979](https://github.com/betagouv/agir-front/issues/979)) ([29d9d4a](https://github.com/betagouv/agir-front/commit/29d9d4a825c8f0be16ff1fbbed4654913f232d43))
+* Bump @playwright/test from 1.51.0 to 1.51.1 ([#986](https://github.com/betagouv/agir-front/issues/986)) ([565970b](https://github.com/betagouv/agir-front/commit/565970bdd43b20288392e73ee92090b5b9db4f0a))
+* Bump @sentry/vite-plugin from 3.1.2 to 3.2.2 ([#989](https://github.com/betagouv/agir-front/issues/989)) ([442a358](https://github.com/betagouv/agir-front/commit/442a358012eebdfa14a0944c27ccc27e98d0da26))
+* Bump @sentry/vue from 9.5.0 to 9.9.0 ([#1000](https://github.com/betagouv/agir-front/issues/1000)) ([b16349a](https://github.com/betagouv/agir-front/commit/b16349ac2c79964c196f33e36901441d9e7b39ed))
+* Bump @types/node from 22.13.10 to 22.13.13 ([#999](https://github.com/betagouv/agir-front/issues/999)) ([6e9d522](https://github.com/betagouv/agir-front/commit/6e9d52207cce92c7d9aa8845257797ebff28ea3e))
+* Bump @types/node from 22.13.9 to 22.13.10 ([#988](https://github.com/betagouv/agir-front/issues/988)) ([90264cb](https://github.com/betagouv/agir-front/commit/90264cbefa6d3462e00dbe94039012992b014e3a))
+* Bump @vitejs/plugin-vue from 5.2.1 to 5.2.3 ([#998](https://github.com/betagouv/agir-front/issues/998)) ([66e8e38](https://github.com/betagouv/agir-front/commit/66e8e383c9c8e38ab8e468692b610c335be207be))
+* Bump lint-staged from 15.4.3 to 15.5.0 ([#990](https://github.com/betagouv/agir-front/issues/990)) ([c1037c6](https://github.com/betagouv/agir-front/commit/c1037c6d932e77ea2dc58ccdb39013eeb5279f7f))
+* Bump vite from 6.2.1 to 6.2.3 ([#1001](https://github.com/betagouv/agir-front/issues/1001)) ([0e7637d](https://github.com/betagouv/agir-front/commit/0e7637da8244b6a809c9bd4090a026e2d5511f97))
+* passage en v2, et, suppression des défis ([#1002](https://github.com/betagouv/agir-front/issues/1002)) ([da08e1d](https://github.com/betagouv/agir-front/commit/da08e1d034a64c0f832be3a82c39a8712e64cae1))
+* supression missions et examen ([#1005](https://github.com/betagouv/agir-front/issues/1005)) ([8c7acba](https://github.com/betagouv/agir-front/commit/8c7acba6f07132054c1e0c7ad2baf81b786c0f9d))
+
 ## [1.44.0](https://github.com/betagouv/agir-front/compare/v1.43.0...v1.44.0) (2025-03-13)
 
 
