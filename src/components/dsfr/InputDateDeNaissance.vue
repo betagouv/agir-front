@@ -80,26 +80,26 @@
       </div>
       <ul v-if="statusErreurs?.afficher" class="list-style-none fr-px-1w fr-mt-0">
         <li
-          v-if="statusErreurs.message_jour"
-          v-text="statusErreurs.message_jour"
+          v-if="statusErreurs.erreurJour"
+          v-text="statusErreurs.erreurJour"
           class="fr-error-text fr-mt-0"
           :id="`date-default-${keyName}-bday-day-error`"
         />
         <li
-          v-if="statusErreurs.message_mois"
-          v-text="statusErreurs.message_mois"
+          v-if="statusErreurs.erreurMois"
+          v-text="statusErreurs.erreurMois"
           class="fr-error-text fr-mt-0"
           :id="`date-default-${keyName}-bday-month-error`"
         />
         <li
-          v-if="statusErreurs.message_annee"
-          v-text="statusErreurs.message_annee"
+          v-if="statusErreurs.erreurAnnee"
+          v-text="statusErreurs.erreurAnnee"
           class="fr-error-text fr-mt-0"
           :id="`date-default-${keyName}-bday-year-error`"
         />
         <li
-          v-if="statusErreurs.message_general"
-          v-text="statusErreurs.message_general"
+          v-if="statusErreurs.erreurFieldset"
+          v-text="statusErreurs.erreurFieldset"
           class="fr-error-text fr-mt-0"
           :id="`date-default-${keyName}-fieldset-messages`"
         />
@@ -136,64 +136,76 @@
   const anneeInputRef = ref<HTMLInputElement | null>();
   const fieldsetRef = ref<HTMLInputElement | null>();
   const statusErreurs = ref({
-    message_jour: '',
-    message_mois: '',
-    message_annee: '',
-    message_general: '',
+    erreurJour: '',
+    erreurMois: '',
+    erreurAnnee: '',
+    erreurFieldset: '',
     afficher: false,
   });
 
   function resetDateDeNaissanceStatus() {
     statusErreurs.value = {
-      message_jour: '',
-      message_mois: '',
-      message_annee: '',
-      message_general: '',
+      erreurJour: '',
+      erreurMois: '',
+      erreurAnnee: '',
+      erreurFieldset: '',
       afficher: false,
     };
   }
 
   function validation(): boolean {
-    let hasError = false;
     resetDateDeNaissanceStatus();
 
-    if (!validationJour(dateDeNaissance.value.jour)) {
-      jourInputRef.value?.focus();
-      hasError = true;
-      statusErreurs.value.afficher = true;
-      statusErreurs.value.message_jour = 'Le jour doit être compris entre 1 et 31';
+    type Validation = {
+      estEnErreur: boolean;
+      focusComposantEnErreur: () => void;
+      champsStatusErreurs: 'erreurJour' | 'erreurMois' | 'erreurAnnee' | 'erreurFieldset';
+      message: string;
+    };
+    const validations: Validation[] = [
+      {
+        estEnErreur: !validationJour(dateDeNaissance.value.jour),
+        focusComposantEnErreur: () => jourInputRef.value?.focus(),
+        champsStatusErreurs: 'erreurJour',
+        message: 'Le jour doit être compris entre 1 et 31',
+      },
+      {
+        estEnErreur: !validationMois(dateDeNaissance.value.mois),
+        focusComposantEnErreur: () => moisInputRef.value?.focus(),
+        champsStatusErreurs: 'erreurMois',
+        message: 'Le mois doit être compris entre 1 et 12',
+      },
+      {
+        estEnErreur: !validationAnnee(dateDeNaissance.value.annee),
+        focusComposantEnErreur: () => anneeInputRef.value?.focus(),
+        champsStatusErreurs: 'erreurAnnee',
+        message: `L'année doit être comprise entre 1900 et ${new Date().getFullYear()}`,
+      },
+      {
+        estEnErreur: !validationDateEstPassee(dateDeNaissance.value),
+        focusComposantEnErreur: () => fieldsetRef.value?.focus(),
+        champsStatusErreurs: 'erreurFieldset',
+        message: 'La date de naissance ne peut être dans le futur',
+      },
+      {
+        estEnErreur: !validationDateExiste(dateDeNaissance.value),
+        focusComposantEnErreur: () => fieldsetRef.value?.focus(),
+        champsStatusErreurs: 'erreurFieldset',
+        message: "La date de naissance n'existe pas",
+      },
+    ];
+
+    let formulaireEnErreur = false;
+    for (const validation of validations) {
+      if (validation.estEnErreur) {
+        if (!formulaireEnErreur) validation.focusComposantEnErreur();
+        formulaireEnErreur = true;
+        statusErreurs.value.afficher = true;
+        statusErreurs.value[validation.champsStatusErreurs] = validation.message;
+      }
     }
 
-    if (!validationMois(dateDeNaissance.value.mois)) {
-      if (!hasError) moisInputRef.value?.focus();
-      hasError = true;
-      statusErreurs.value.afficher = true;
-      statusErreurs.value.message_mois = 'Le mois doit être compris entre 1 et 12';
-    }
-
-    if (!validationAnnee(dateDeNaissance.value.annee)) {
-      if (!hasError) anneeInputRef.value?.focus();
-      hasError = true;
-      const anneeActuelle = new Date().getFullYear();
-      statusErreurs.value.afficher = true;
-      statusErreurs.value.message_annee = `L'annee doit être comprise entre 1900 et ${anneeActuelle}`;
-    }
-
-    if (!validationDateEstPassee(dateDeNaissance.value)) {
-      if (!hasError) fieldsetRef.value?.focus();
-      hasError = true;
-      statusErreurs.value.afficher = true;
-      statusErreurs.value.message_general = 'La date de naissance ne peut être dans le futur';
-    }
-
-    if (!hasError && !validationDateExiste(dateDeNaissance.value)) {
-      if (!hasError) fieldsetRef.value?.focus();
-      hasError = true;
-      statusErreurs.value.afficher = true;
-      statusErreurs.value.message_general = "La date de naissance n'existe pas";
-    }
-
-    if (hasError) return false;
+    if (formulaireEnErreur) return false;
 
     resetDateDeNaissanceStatus();
     return true;

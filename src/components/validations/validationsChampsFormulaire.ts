@@ -5,17 +5,17 @@ export function validationPrenomOuNomOuPseudo(prenom: string): boolean {
 }
 
 export function validationJour(jour: string): boolean {
-  const jourNumber = parseInt(jour, 10);
+  const jourNumber = parseInt(jour);
   return !isNaN(jourNumber) && jourNumber >= 1 && jourNumber <= 31;
 }
 
 export function validationMois(mois: string): boolean {
-  const moisNumber = parseInt(mois, 10);
+  const moisNumber = parseInt(mois);
   return !isNaN(moisNumber) && moisNumber >= 1 && moisNumber <= 12;
 }
 
 export function validationAnnee(annee: string): boolean {
-  const anneeNumber = parseInt(annee, 10);
+  const anneeNumber = parseInt(annee);
   const currentYear = new Date().getFullYear();
   return !isNaN(anneeNumber) && anneeNumber >= 1900 && anneeNumber <= currentYear;
 }
