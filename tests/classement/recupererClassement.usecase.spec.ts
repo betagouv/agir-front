@@ -4,6 +4,7 @@ import {
 } from '@/domaines/classement/adapters/classement.presenter.impl';
 import { ClassementPourcentage, RecupererClassementUsecase } from '@/domaines/classement/recupererClassement.usecase';
 import { ClassementRepositoryMock } from './adapters/classement.repository.mock';
+import { Badge, TypeDeBadge } from '@/domaines/score/ports/score.repository';
 
 describe('Fichier de test du usecase de chargement du classement', () => {
   it("En donnant l'id d'un utilisateur, doit me retourner son classement", async () => {
@@ -132,6 +133,7 @@ describe('Fichier de test du usecase de chargement du classement', () => {
         ],
         pourcentage: ClassementPourcentage.top5,
       },
+      badges: [new Badge(TypeDeBadge.PIONNIER, 'Pionnier', 'Vous êtes un pionnier')],
     });
     const recupererClassementUsecase = new RecupererClassementUsecase(classementRepositoryMock);
 
@@ -260,6 +262,13 @@ describe('Fichier de test du usecase de chargement du classement', () => {
           ],
           phraseClassement: 'Wouah ! Vous faites partie du <strong>top 5%</strong> à <strong>Dijon&nbsp;!</strong>',
         },
+        badges: [
+          {
+            illustration: '/badge-pionnier.webp',
+            libelle: 'Pionnier',
+            description: 'Vous êtes un pionnier',
+          },
+        ],
       });
     }
   });

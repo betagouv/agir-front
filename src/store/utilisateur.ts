@@ -1,10 +1,8 @@
 import { defineStore } from 'pinia';
 import { Utilisateur } from '@/domaines/authentification/ports/utilisateur.repository';
-import { Score } from '@/domaines/score/ports/score.repository';
 
 export interface UtilisateurStore {
   utilisateur: Utilisateur;
-  score: Score;
   tracking: {
     matomoEstInactif: boolean;
   };
@@ -27,9 +25,6 @@ export const utilisateurStore = defineStore('utilisateur', {
       estUnUtilisateurFranceConnect: false,
       afficherMessageReset: false,
     },
-    score: {
-      points: 0,
-    },
     tracking: {
       matomoEstInactif: false,
     },
@@ -44,10 +39,6 @@ export const utilisateurStore = defineStore('utilisateur', {
         ...utilisateur,
       };
     },
-    setScore(score: Score) {
-      this.score = score;
-    },
-
     reset() {
       this.$reset();
     },

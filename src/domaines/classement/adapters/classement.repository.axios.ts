@@ -1,6 +1,7 @@
 import { AxiosFactory, intercept401 } from '@/axios.factory';
 import { ClassementRepository } from '@/domaines/classement/ports/classement.repository';
 import { ClassementGlobal, ClassementPourcentage } from '@/domaines/classement/recupererClassement.usecase';
+import { Badge, TypeDeBadge } from '@/domaines/score/ports/score.repository';
 
 enum PourcentileApiModel {
   pourcent_5 = 'pourcent_5',
@@ -23,6 +24,11 @@ interface ClassementApiModel {
   classement_utilisateur: ClassementItemApiModel[];
   code_postal: string;
   commune_label: string;
+  badges: {
+    type: string;
+    titre: string;
+    description: string;
+  }[];
 }
 
 export class ClassementRepositoryAxios implements ClassementRepository {
@@ -49,6 +55,9 @@ export class ClassementRepositoryAxios implements ClassementRepository {
         utilisateursProche: reponseClassementNational.data.classement_utilisateur,
         pourcentage: this.mapPourcentileToClassement(reponseClassementNational.data.pourcentile),
       },
+      badges: reponseClassementNational.data.badges.map(badge => {
+        return new Badge(badge.type as TypeDeBadge, badge.titre, badge.description);
+      }),
     };
   }
 

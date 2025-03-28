@@ -18,6 +18,11 @@ export interface ClassementGlobalViewModel {
   commune: string;
   classementNational: ClassementViewModel;
   classementLocal: ClassementViewModel;
+  badges: {
+    illustration: string;
+    libelle: string;
+    description: string;
+  }[];
 }
 
 export class ClassementPresenterImpl implements ClassementPresenter {
@@ -43,6 +48,11 @@ export class ClassementPresenterImpl implements ClassementPresenter {
           ...this.determineUtilisateursProche(classementLocal, utilisateurId),
         ],
       },
+      badges: classement.badges.map(badge => ({
+        illustration: badge.getIllustration(),
+        libelle: badge.libelle,
+        description: badge.description,
+      })),
     });
   }
 

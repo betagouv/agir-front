@@ -3,6 +3,7 @@ import { EventBus } from '@/shell/eventBus';
 export enum ActionsEvent {
   A_ETE_REALISEE,
   RESET_VU,
+  PERSONNALISATION_FAITE,
 }
 
 export class ActionsEventBus extends EventBus<ActionsEvent> {
@@ -11,6 +12,7 @@ export class ActionsEventBus extends EventBus<ActionsEvent> {
   protected eventSubscribers: Record<ActionsEvent, { subscriberName: string; callback: () => void }[]> = {
     [ActionsEvent.A_ETE_REALISEE]: [],
     [ActionsEvent.RESET_VU]: [],
+    [ActionsEvent.PERSONNALISATION_FAITE]: [],
   };
 
   private constructor() {

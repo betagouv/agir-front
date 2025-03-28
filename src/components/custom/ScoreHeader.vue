@@ -1,18 +1,31 @@
 <template>
-  <router-link
-    :aria-current="route.name === RouteClassementName.CLASSEMENT ? 'page' : null"
-    :to="{ name: RouteClassementName.CLASSEMENT }"
-    class="tag__progression tag__progression--score fr-text--bold"
-  >
-    {{ score.points }} <img alt="score" src="/ic_score.svg" width="16" />
-  </router-link>
+  <div v-if="gamificationViewModel" class="flex">
+    <router-link
+      :aria-current="route.name === RouteClassementName.CLASSEMENT ? 'page' : null"
+      :to="{ name: RouteClassementName.CLASSEMENT }"
+      class="tag__progression tag__progression--score fr-text--bold"
+    >
+      {{ gamificationViewModel.points }} <img alt="score" src="/ic_score.svg" width="16" />
+    </router-link>
+    <router-link
+      v-if="gamificationViewModel.nombreDeBadges > 0"
+      :aria-current="route.name === RouteClassementName.CLASSEMENT ? 'page' : null"
+      :to="{ name: RouteClassementName.CLASSEMENT }"
+      class="tag__progression tag__progression--badge fr-text--bold fr-ml-2w"
+    >
+      {{ gamificationViewModel.nombreDeBadges }} <img alt="badge" src="/ic_badge.svg" width="16" />
+    </router-link>
+  </div>
 </template>
 
 <script lang="ts" setup>
-  import { computed, onMounted, onUnmounted } from 'vue';
+  import { onMounted, onUnmounted, ref } from 'vue';
   import { useRoute } from 'vue-router';
   import { ActionsEventBus } from '@/domaines/actions/actions.eventbus';
-  import { SessionRepositoryStore } from '@/domaines/authentification/adapters/session.repository.store';
+  import {
+    GamificationPresenterImpl,
+    GamificationViewModel,
+  } from '@/domaines/score/adapters/gamification.presenter.impl';
   import { ScoreRepositoryAxios } from '@/domaines/score/adapters/score.repository.axios';
   import { ChargementScoreUsecase } from '@/domaines/score/chargementScore.usecase';
   import { ToDoListEventBusImpl } from '@/domaines/toDoList/toDoListEventBusImpl';
@@ -20,9 +33,8 @@
   import { utilisateurStore } from '@/store/utilisateur';
 
   const route = useRoute();
-  const score = computed(() => utilisateurStore().score);
   const subscriberName = 'ScoreHeader';
-
+  const gamificationViewModel = ref<GamificationViewModel>();
   onMounted(() => {
     mettreAJourLeScore();
 
@@ -41,8 +53,13 @@
   });
 
   const mettreAJourLeScore = () => {
-    const chargerScoreUseCase = new ChargementScoreUsecase(new ScoreRepositoryAxios(), new SessionRepositoryStore());
-    chargerScoreUseCase.execute(utilisateurStore().utilisateur.id);
+    const chargerScoreUseCase = new ChargementScoreUsecase(new ScoreRepositoryAxios());
+    chargerScoreUseCase.execute(
+      utilisateurStore().utilisateur.id,
+      new GamificationPresenterImpl((viewModel: GamificationViewModel) => {
+        gamificationViewModel.value = viewModel;
+      }),
+    );
   };
 </script>
 
@@ -52,7 +69,6 @@
     padding: 0.5rem;
     align-items: center;
     gap: 0.5rem;
-    border-radius: 8px;
   }
 
   .tag__progression--score {
@@ -64,7 +80,11 @@
     background: rgba(104, 165, 50, 0.25);
   }
 
-  .tag__progression--niveau {
-    background: rgba(237, 142, 0, 0.1);
+  .tag__progression--badge {
+    background: rgba(254, 236, 194, 0.6);
+  }
+
+  .tag__progression--badge:hover {
+    background: rgba(254, 236, 194, 0.9);
   }
 </style>

@@ -1,9 +1,9 @@
-import { Score, ScoreRepository } from '@/domaines/score/ports/score.repository';
+import { Gamification, ScoreRepository } from '@/domaines/score/ports/score.repository';
 
 export class MockScoreRepository implements ScoreRepository {
-  constructor(private scoreARetourner: Score) {}
+  constructor(private scoreARetourner: Gamification) {}
 
-  async getScore(_utilisateur: string): Promise<Score> {
+  async getGamification(_utilisateur: string): Promise<Gamification> {
     return Promise.resolve(this.scoreARetourner);
   }
 }

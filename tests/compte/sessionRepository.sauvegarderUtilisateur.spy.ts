@@ -1,5 +1,5 @@
 import { Utilisateur } from '@/domaines/authentification/ports/utilisateur.repository';
-import { Score } from '@/domaines/score/ports/score.repository';
+import { Gamification } from '@/domaines/score/ports/score.repository';
 import { SessionRepository } from '@/domaines/authentification/ports/session.repository';
 
 export class SpySauvegarderUtilisateurSessionRepository implements SessionRepository {
@@ -38,7 +38,7 @@ export class SpySauvegarderUtilisateurSessionRepository implements SessionReposi
     };
   }
 
-  sauvegarderScore(score: Score): void {}
+  sauvegarderScore(score: Gamification): void {}
 
   deconnecterUtilisateur() {
     this._utilisateur = {
