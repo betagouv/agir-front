@@ -12,10 +12,7 @@ describe('Fichier de test du usecase de chargement du score', () => {
   it('Cas avec score et sans badge', async () => {
     // GIVEN
     const sauvergarderScoreSessionRepositorySpy = new SauvergarderScoreSessionRepositorySpy();
-    const chargementScoreUsecase = new ChargementScoreUsecase(
-      new MockScoreRepository(new Gamification(10, [])),
-      sauvergarderScoreSessionRepositorySpy,
-    );
+    const chargementScoreUsecase = new ChargementScoreUsecase(new MockScoreRepository(new Gamification(10, [])));
 
     // THEN
     // WHEN
@@ -24,17 +21,15 @@ describe('Fichier de test du usecase de chargement du score', () => {
       new GamificationPresenterImpl(vm => {
         expect(vm).toStrictEqual<GamificationViewModel>({
           points: 10,
-          badges: [],
+          nombreDeBadges: 0,
         });
       }),
     );
   });
   it('Cas avec score et avec badge', async () => {
     // GIVEN
-    const sauvergarderScoreSessionRepositorySpy = new SauvergarderScoreSessionRepositorySpy();
     const chargementScoreUsecase = new ChargementScoreUsecase(
       new MockScoreRepository(new Gamification(10, [new Badge(TypeDeBadge.PIONNIER, 'labelBadge', 'description')])),
-      sauvergarderScoreSessionRepositorySpy,
     );
 
     // THEN
@@ -44,13 +39,7 @@ describe('Fichier de test du usecase de chargement du score', () => {
       new GamificationPresenterImpl(vm => {
         expect(vm).toStrictEqual<GamificationViewModel>({
           points: 10,
-          badges: [
-            {
-              description: 'description',
-              illustration: '/badge-pionnier.webp',
-              libelle: 'labelBadge',
-            },
-          ],
+          nombreDeBadges: 1,
         });
       }),
     );

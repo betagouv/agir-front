@@ -8,12 +8,12 @@
       {{ gamificationViewModel.points }} <img alt="score" src="/ic_score.svg" width="16" />
     </router-link>
     <router-link
-      v-if="gamificationViewModel.badges.length > 0"
+      v-if="gamificationViewModel.nombreDeBadges > 0"
       :aria-current="route.name === RouteClassementName.CLASSEMENT ? 'page' : null"
       :to="{ name: RouteClassementName.CLASSEMENT }"
       class="tag__progression tag__progression--badge fr-text--bold fr-ml-2w"
     >
-      {{ gamificationViewModel.badges.length }} <img alt="badge" src="/ic_badge.svg" width="16" />
+      {{ gamificationViewModel.nombreDeBadges }} <img alt="badge" src="/ic_badge.svg" width="16" />
     </router-link>
   </div>
 </template>
@@ -22,7 +22,6 @@
   import { onMounted, onUnmounted, ref } from 'vue';
   import { useRoute } from 'vue-router';
   import { ActionsEventBus } from '@/domaines/actions/actions.eventbus';
-  import { SessionRepositoryStore } from '@/domaines/authentification/adapters/session.repository.store';
   import {
     GamificationPresenterImpl,
     GamificationViewModel,
@@ -54,7 +53,7 @@
   });
 
   const mettreAJourLeScore = () => {
-    const chargerScoreUseCase = new ChargementScoreUsecase(new ScoreRepositoryAxios(), new SessionRepositoryStore());
+    const chargerScoreUseCase = new ChargementScoreUsecase(new ScoreRepositoryAxios());
     chargerScoreUseCase.execute(
       utilisateurStore().utilisateur.id,
       new GamificationPresenterImpl((viewModel: GamificationViewModel) => {

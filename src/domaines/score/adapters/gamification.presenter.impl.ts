@@ -3,11 +3,7 @@ import { Gamification } from '@/domaines/score/ports/score.repository';
 
 export type GamificationViewModel = {
   points: number;
-  badges: {
-    illustration: string;
-    libelle: string;
-    description: string;
-  }[];
+  nombreDeBadges: number;
 };
 
 export class GamificationPresenterImpl implements GamificationPresenter {
@@ -16,13 +12,7 @@ export class GamificationPresenterImpl implements GamificationPresenter {
   presente(gamification: Gamification): void {
     this.callback({
       points: gamification.nombreDePoints,
-      badges: gamification.badges.map(badge => {
-        return {
-          illustration: badge.getIllustration(),
-          libelle: badge.libelle,
-          description: badge.description,
-        };
-      }),
+      nombreDeBadges: gamification.badges.length,
     });
   }
 }
