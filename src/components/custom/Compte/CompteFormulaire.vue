@@ -65,7 +65,7 @@
           <InputDateDeNaissance
             :disabled="utilisateurStore().utilisateur.estUnUtilisateurFranceConnect"
             v-model="profileUtlisateurViewModel.dateNaissance"
-            id="2"
+            key="2"
           />
         </div>
       </div>

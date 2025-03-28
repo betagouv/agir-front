@@ -23,7 +23,8 @@
             />
 
             <InputDateDeNaissance
-              id="3"
+              ref="dateDeNaissanceComposant"
+              :key="DATE_DE_NAISSANCE_FORMULAIRE_ID"
               description="Nécessaire pour faciliter votre identification"
               v-if="!utilisateurStore().utilisateur.estUnUtilisateurFranceConnect"
               v-model="onboardingPostCreationCompte().dateDeNaissance"
@@ -40,7 +41,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { ref } from 'vue';
+  import { ref, useTemplateRef } from 'vue';
   import InputDateDeNaissance from '@/components/dsfr/InputDateDeNaissance.vue';
   import InputText from '@/components/dsfr/InputText.vue';
   import {
@@ -55,6 +56,9 @@
   import { RouteCompteName } from '@/router/compte/routeCompteName';
   import { onboardingPostCreationCompte } from '@/store/onboardingPostCreationCompte';
   import { utilisateurStore } from '@/store/utilisateur';
+
+  const DATE_DE_NAISSANCE_FORMULAIRE_ID = 'formulaire-inscription';
+  const dateDeNaissanceComposant = useTemplateRef('dateDeNaissanceComposant');
 
   const validerLaReponse = () => {
     if (!onValidationPseudo()) return;
@@ -90,22 +94,25 @@
   }
 
   function onValidationDateDeNaissance(): boolean {
+    let hasError = false;
     resetDateDeNaissanceStatus();
 
-    let hasError = false;
     if (!validationJour(onboardingPostCreationCompte().dateDeNaissance.jour)) {
+      dateDeNaissanceComposant.value.focusInput('jour');
       hasError = true;
       champsDateDeNaissanceStatus.value.afficher = true;
       champsDateDeNaissanceStatus.value.message_jour = 'Le jour doit être compris entre 1 et 31';
     }
 
     if (!validationMois(onboardingPostCreationCompte().dateDeNaissance.mois)) {
+      if (!hasError) dateDeNaissanceComposant.value.focusInput('mois');
       hasError = true;
       champsDateDeNaissanceStatus.value.afficher = true;
       champsDateDeNaissanceStatus.value.message_mois = 'Le mois doit être compris entre 1 et 12';
     }
 
     if (!validationAnnee(onboardingPostCreationCompte().dateDeNaissance.annee)) {
+      if (!hasError) dateDeNaissanceComposant.value.focusInput('annee');
       hasError = true;
       const anneeActuelle = new Date().getFullYear();
       champsDateDeNaissanceStatus.value.afficher = true;
@@ -113,12 +120,14 @@
     }
 
     if (!validationDateEstPassee(onboardingPostCreationCompte().dateDeNaissance)) {
+      if (!hasError) dateDeNaissanceComposant.value.focusInput('general');
       hasError = true;
       champsDateDeNaissanceStatus.value.afficher = true;
       champsDateDeNaissanceStatus.value.message_general = 'La date de naissance ne peut être dans le futur';
     }
 
     if (!hasError && !validationDateExiste(onboardingPostCreationCompte().dateDeNaissance)) {
+      if (!hasError) dateDeNaissanceComposant.value.focusInput('general');
       hasError = true;
       champsDateDeNaissanceStatus.value.afficher = true;
       champsDateDeNaissanceStatus.value.message_general = "La date de naissance n'existe pas";

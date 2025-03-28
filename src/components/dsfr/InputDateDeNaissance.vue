@@ -1,25 +1,30 @@
 <template>
   <div>
     <fieldset
-      :id="`date-default-${id}-fieldset`"
-      :aria-labelledby="`date-default-${id}-fieldset-legend date-default-${id}-fieldset-messages`"
+      :id="`date-default-${key}-fieldset`"
+      :aria-labelledby="`date-default-${key}-fieldset-legend date-default-${key}-fieldset-messages`"
       class="fr-fieldset"
       :class="erreur?.afficher ? 'fr-fieldset--error' : ''"
       role="group"
     >
-      <legend :id="`date-default-${id}-fieldset-legend`" class="fr-fieldset__legend text--normal fr-mb-0">
+      <legend
+        :id="`date-default-${key}-fieldset-legend`"
+        class="fr-fieldset__legend text--normal fr-mb-0"
+        ref="general-input"
+      >
         Votre date de naissance
         <span v-if="description" class="fr-hint-text">{{ description }}</span>
       </legend>
       <div class="fr-fieldset__element fr-fieldset__element--inline fr-fieldset__element--number">
         <div class="fr-input-group">
-          <label class="fr-label" :for="`date-default-${id}-bday-day`">
+          <label class="fr-label" :for="`date-default-${key}-bday-day`">
             Jour
             <span class="fr-hint-text">Exemple : 14</span>
           </label>
           <input
-            :id="`date-default-${id}-bday-day`"
-            :aria-describedby="`date-default-${id}-bday-day-error`"
+            ref="jour-input"
+            :id="`date-default-${key}-bday-day`"
+            :aria-describedby="`date-default-${key}-bday-day-error`"
             v-model="dateDeNaissance.jour"
             :disabled="disabled"
             class="fr-input"
@@ -32,13 +37,14 @@
       </div>
       <div class="fr-fieldset__element fr-fieldset__element--inline fr-fieldset__element--number">
         <div class="fr-input-group">
-          <label class="fr-label" :for="`date-default-${id}-bday-month`">
+          <label class="fr-label" :for="`date-default-${key}-bday-month`">
             Mois
             <span class="fr-hint-text">Exemple : 12</span>
           </label>
           <input
-            :id="`date-default-${id}-bday-month`"
-            :aria-describedby="`date-default-${id}-bday-month-error`"
+            ref="mois-input"
+            :id="`date-default-${key}-bday-month`"
+            :aria-describedby="`date-default-${key}-bday-month-error`"
             v-model="dateDeNaissance.mois"
             :disabled="disabled"
             class="fr-input"
@@ -53,13 +59,14 @@
         class="fr-fieldset__element fr-fieldset__element--inline fr-fieldset__element--inline-grow fr-fieldset__element--year"
       >
         <div class="fr-input-group">
-          <label class="fr-label" :for="`date-default-${id}-bday-year`">
+          <label class="fr-label" :for="`date-default-${key}-bday-year`">
             Année
             <span class="fr-hint-text">Exemple : 1984</span>
           </label>
           <input
-            :id="`date-default-${id}-bday-year`"
-            :aria-describedby="`date-default-${id}-bday-year-error`"
+            ref="annee-input"
+            :id="`date-default-${key}-bday-year`"
+            :aria-describedby="`date-default-${key}-bday-year-error`"
             v-model="dateDeNaissance.annee"
             :disabled="disabled"
             class="fr-input"
@@ -75,25 +82,25 @@
           v-if="erreur.message_jour"
           v-text="erreur.message_jour"
           class="fr-error-text fr-mt-0"
-          :id="`date-default-${id}-bday-day-error`"
+          :id="`date-default-${key}-bday-day-error`"
         />
         <li
           v-if="erreur.message_mois"
           v-text="erreur.message_mois"
           class="fr-error-text fr-mt-0"
-          :id="`date-default-${id}-bday-month-error`"
+          :id="`date-default-${key}-bday-month-error`"
         />
         <li
           v-if="erreur.message_annee"
           v-text="erreur.message_annee"
           class="fr-error-text fr-mt-0"
-          :id="`date-default-${id}-bday-year-error`"
+          :id="`date-default-${key}-bday-year-error`"
         />
         <li
           v-if="erreur.message_general"
           v-text="erreur.message_general"
           class="fr-error-text fr-mt-0"
-          :id="`date-default-${id}-fieldset-messages`"
+          :id="`date-default-${key}-fieldset-messages`"
         />
       </ul>
     </fieldset>
@@ -109,7 +116,7 @@
 
   const props = withDefaults(
     defineProps<{
-      id: string;
+      key: string;
       description?: string;
       disabled?: boolean;
       required?: boolean;
@@ -125,4 +132,13 @@
       disabled: false,
     },
   );
+
+  function focusInput(type: 'jour' | 'mois' | 'annee' | 'general') {
+    const input: HTMLInputElement = this.$refs[`${type}-input`];
+    input.focus();
+  }
+
+  defineExpose({
+    focusInput,
+  });
 </script>
