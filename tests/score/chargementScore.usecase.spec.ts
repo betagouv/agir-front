@@ -1,6 +1,5 @@
 import { ChargementScoreUsecase } from '@/domaines/score/chargementScore.usecase';
 import { MockScoreRepository } from './adapters/score.repository.mock';
-import { SauvergarderScoreSessionRepositorySpy } from './adapters/sauvergarderScore.session.repository.spy';
 import { Badge, Gamification, TypeDeBadge } from '@/domaines/score/ports/score.repository';
 import {
   GamificationPresenterImpl,
@@ -11,7 +10,6 @@ import { expect } from 'vitest';
 describe('Fichier de test du usecase de chargement du score', () => {
   it('Cas avec score et sans badge', async () => {
     // GIVEN
-    const sauvergarderScoreSessionRepositorySpy = new SauvergarderScoreSessionRepositorySpy();
     const chargementScoreUsecase = new ChargementScoreUsecase(new MockScoreRepository(new Gamification(10, [])));
 
     // THEN
