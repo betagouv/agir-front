@@ -26,7 +26,7 @@ interface ClassementApiModel {
   commune_label: string;
   badges: {
     type: string;
-    label: string;
+    titre: string;
     description: string;
   }[];
 }
@@ -56,7 +56,7 @@ export class ClassementRepositoryAxios implements ClassementRepository {
         pourcentage: this.mapPourcentileToClassement(reponseClassementNational.data.pourcentile),
       },
       badges: reponseClassementNational.data.badges.map(badge => {
-        return new Badge(badge.type as TypeDeBadge, badge.label, badge.description);
+        return new Badge(badge.type as TypeDeBadge, badge.titre, badge.description);
       }),
     };
   }

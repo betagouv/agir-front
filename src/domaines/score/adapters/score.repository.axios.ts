@@ -8,7 +8,7 @@ export interface ScoreApiModel {
   point_target_in_niveau: number;
   badges: {
     type: string;
-    label: string;
+    titre: string;
     description: string;
   }[];
 }
@@ -22,7 +22,7 @@ export class ScoreRepositoryAxios implements ScoreRepository {
     return new Gamification(
       response.data.points,
       response.data.badges.map(badge => {
-        return new Badge(badge.type as TypeDeBadge, badge.label, badge.description);
+        return new Badge(badge.type as TypeDeBadge, badge.titre, badge.description);
       }),
     );
   }
