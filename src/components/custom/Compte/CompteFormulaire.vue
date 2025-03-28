@@ -63,8 +63,9 @@
         </div>
         <div class="fr-col-12">
           <InputDateDeNaissance
-            :disabled="utilisateurStore().utilisateur.estUnUtilisateurFranceConnect"
+            ref="dateDeNaissanceComposant"
             v-model="profileUtlisateurViewModel.dateNaissance"
+            :disabled="utilisateurStore().utilisateur.estUnUtilisateurFranceConnect"
             keyName="2"
           />
         </div>
@@ -126,7 +127,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { computed, ref } from 'vue';
+  import { computed, ref, useTemplateRef } from 'vue';
   import Alert from '@/components/custom/Alert.vue';
   import CarteInfo from '@/components/custom/CarteInfo.vue';
   import CompteFormulaireRevenuFiscal from '@/components/custom/Compte/CompteFormulaireRevenuFiscal.vue';
@@ -150,8 +151,15 @@
   const champsNomStatus = ref<{ message: string; afficher: boolean }>({ message: '', afficher: false });
   const champsPseudoStatus = ref<{ message: string; afficher: boolean }>({ message: '', afficher: false });
   const isRFREnErreur = ref(false);
+  const dateDeNaissanceComposant = useTemplateRef('dateDeNaissanceComposant');
   const formulaireEnErreur = computed(() => {
-    return !onValidationPseudo() || !onValidationPrenom() || !onValidationNom() || isRFREnErreur.value;
+    return (
+      !onValidationPseudo() ||
+      !onValidationPrenom() ||
+      !onValidationNom() ||
+      isRFREnErreur.value ||
+      !dateDeNaissanceComposant.value?.validation()
+    );
   });
 
   async function modifierInformation() {
