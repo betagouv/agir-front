@@ -179,6 +179,12 @@ export class ActionsRepositoryAxios implements ActionsRepository {
     await axios.post(`/utilisateurs/${idUtilisateur}/actions/${typeAction}/${idAction}/faite`);
   }
 
+  async compterActions(): Promise<number> {
+    const axios = AxiosFactory.getAxios();
+    const response = await axios.get<{ nombre_total_actions_faites: number }>('/compteur_actions');
+    return response.data.nombre_total_actions_faites;
+  }
+
   private transformeActionDetailApiToActionDetail(actionDetailApiModel: ActionDetailApiModel): ActionDetail {
     return {
       code: actionDetailApiModel.code,

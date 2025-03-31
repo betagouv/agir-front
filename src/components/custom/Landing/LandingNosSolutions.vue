@@ -14,9 +14,11 @@
   import ListeRaccourcis from '@/components/custom/Thematiques/ListeRaccourcis.vue';
   import { TypeAction } from '@/domaines/actions/ports/actions.repository';
   import { ClefThematiqueAPI, MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
+  import { RaccourciViewModel } from '@/domaines/thematiques/ports/thematiqueResume.presenter';
   import { RouteActionsName } from '@/router/actions/routes';
   import { RouteAidesName } from '@/router/aides/routeAidesName';
   import { RouteServiceName } from '@/router/services/routes';
+  import { RouteThematiquesName } from '@/router/thematiques/routes';
 
   const alimentation = MenuThematiques.getThematiqueData(ClefThematiqueAPI.alimentation);
   const transport = MenuThematiques.getThematiqueData(ClefThematiqueAPI.transports);
@@ -54,9 +56,35 @@
               thematiqueId: MenuThematiques.getThematiqueData(ClefThematiqueAPI.alimentation).url,
             },
           },
-          label: `1 calendrier de fruits et légumes de saison`,
+          label: `1 Calendrier de fruits et légumes de saison`,
         },
-      ],
+        {
+          emoji: '🎯',
+          to: {
+            name: RouteThematiquesName.THEMATIQUE,
+            params: {
+              id: ClefThematiqueAPI.alimentation,
+            },
+          },
+          label: `27 idées d’action`,
+        },
+      ] as RaccourciViewModel[],
+    },
+    {
+      titre: logement.labelDansLeMenu,
+      emoji: logement.emoji,
+      raccourcis: [
+        {
+          emoji: '🎯',
+          to: {
+            name: RouteThematiquesName.THEMATIQUE,
+            params: {
+              id: ClefThematiqueAPI.logement,
+            },
+          },
+          label: `30 idées d’action`,
+        },
+      ] as RaccourciViewModel[],
     },
     {
       titre: transport.labelDansLeMenu,
@@ -64,7 +92,7 @@
       raccourcis: [
         {
           emoji: '🚙',
-          label: '1 simulateur Changer de voiture ?',
+          label: '1 simulateur Changer de voiture',
           to: {
             name: RouteActionsName.ACTION_INDIVIDUELLE,
             params: {
@@ -81,28 +109,17 @@
           },
           label: `1 simulateur aides vélo`,
         },
-
         {
-          emoji: '💶',
+          emoji: '🎯',
           to: {
-            name: RouteAidesName.AIDES,
+            name: RouteThematiquesName.THEMATIQUE,
+            params: {
+              id: ClefThematiqueAPI.transports,
+            },
           },
-          label: `105 aides financières`,
+          label: `13 idées d’action`,
         },
-      ],
-    },
-    {
-      titre: logement.labelDansLeMenu,
-      emoji: logement.emoji,
-      raccourcis: [
-        {
-          emoji: '💶',
-          to: {
-            name: RouteAidesName.AIDES,
-          },
-          label: `3 aides financières`,
-        },
-      ],
+      ] as RaccourciViewModel[],
     },
     {
       titre: consommation.labelDansLeMenu,
@@ -117,13 +134,16 @@
           label: `Des points de réparation de proximité`,
         },
         {
-          emoji: '💶',
+          emoji: '🎯',
           to: {
-            name: RouteAidesName.AIDES,
+            name: RouteThematiquesName.THEMATIQUE,
+            params: {
+              id: ClefThematiqueAPI.consommation,
+            },
           },
-          label: `105 aides financières`,
+          label: `15 idées d’action`,
         },
-      ],
+      ] as RaccourciViewModel[],
     },
   ];
 </script>

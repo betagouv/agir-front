@@ -63,7 +63,7 @@
     <h2
       class="fr-h2 text--white text--center flex flex-column flex-center align-items--center compteur-absolute full-width"
     >
-      <CompteurDynamique :valeur="9998" background="rgb(52, 68, 159)" />
+      <CompteurDynamique :valeur="nombreActions ?? 0" background="rgb(52, 68, 159)" />
       <span class="fr-mt-2w text-olive fr-text--xl">
         Actions réalisées ensemble
         <br aria-hidden="true" />
@@ -78,8 +78,17 @@
 </template>
 
 <script setup lang="ts">
+  import { onMounted, ref } from 'vue';
   import CompteurDynamique from '@/components/custom/AccueilConnectee/CompteurDynamique.vue';
+  import { ActionsRepositoryAxios } from '@/domaines/actions/adapters/actions.repository.axios';
+  import { CompterActionsUsecase } from '@/domaines/actions/compterActions.usecase';
   import { RouteCompteName } from '@/router/compte/routeCompteName';
+
+  const nombreActions = ref<number>(0);
+  const compterActionsUsecase = new CompterActionsUsecase(new ActionsRepositoryAxios());
+  onMounted(async () => {
+    nombreActions.value = await compterActionsUsecase.execute();
+  });
 </script>
 
 <style scoped>

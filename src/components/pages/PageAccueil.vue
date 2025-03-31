@@ -62,20 +62,4 @@
       background-size: auto 90%;
     }
   }
-
-  @media (min-width: 62rem) {
-    .rappel-app {
-      background-image: url('/hp-background-rappel-app.webp');
-      background-position: 5% bottom;
-      background-repeat: no-repeat;
-      background-size: auto 80%;
-    }
-  }
-
-  @media (min-width: 78rem) {
-    .rappel-app {
-      background-position: 10% bottom;
-      background-size: contain;
-    }
-  }
 </style>

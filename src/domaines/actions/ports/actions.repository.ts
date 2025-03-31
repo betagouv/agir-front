@@ -114,4 +114,6 @@ export interface ActionsRepository {
   terminerAction(idUtilisateur: string, idAction: string, typeAction: TypeAction): Promise<void>;
 
   previsualiser(actionId: string, typeAction: TypeAction): Promise<ActionDetail>;
+
+  compterActions(): Promise<number>;
 }

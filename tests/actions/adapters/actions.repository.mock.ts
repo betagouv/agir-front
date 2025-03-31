@@ -64,4 +64,8 @@ export class ActionsRepositoryMock implements ActionsRepository {
   previsualiser(actionId: string, typeAction: TypeAction): Promise<ActionDetail> {
     return Promise.resolve(this.action!);
   }
+
+  compterActions(): Promise<number> {
+    return Promise.resolve(0);
+  }
 }
