@@ -54,7 +54,7 @@
                 </router-link>
               </div>
               <div v-else class="fr-col-6 flex flex-column align-items--center flex-space-around">
-                <p :aria-label="`${progression.tonneBilan} Tonnes par an`" class="text--center">
+                <p :aria-label="`${progression.tonneBilan} Tonnes par an`" class="text--center fr-mb-0">
                   <span class="gros-nombre fr-text--bold fr-mt-4w">{{ progression.tonneBilan }}</span
                   ><span class="text--3xl fr-text--bold">T</span>
                   / an
@@ -62,7 +62,7 @@
                 <router-link
                   :to="{ name: RouteBilanCarboneName.BILAN_CARBONE }"
                   class="fr-link fr-link--icon-right fr-icon-arrow-right-line text--center"
-                  >Mon bilan <br />
+                  >Mon bilan<br />
                   environnemental
                 </router-link>
               </div>
