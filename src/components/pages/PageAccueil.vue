@@ -1,8 +1,6 @@
 <template>
-  <section class="background--main fr-pt-4w fr-py-md-16w background-image-header">
-    <div class="fr-container">
-      <LandingHeader />
-    </div>
+  <section class="background--main">
+    <LandingHeader />
   </section>
   <section class="fr-py-8w background--beige">
     <div class="fr-container">
@@ -75,22 +73,7 @@
     background-repeat: no-repeat;
   }
 
-  .background-image-header {
-    --height-background-img-mobile: 20rem;
-
-    background-image: url('/hp-background-header.webp');
-    background-repeat: no-repeat;
-    background-size: auto var(--height-background-img-mobile);
-    background-position: right bottom;
-    padding-bottom: calc(var(--height-background-img-mobile) + 2rem);
-  }
-
   @media (min-width: 48rem) {
-    .background-image-header {
-      background-position: right bottom;
-      background-size: 45%;
-    }
-
     .rappel-app-cta {
       background-image: url('/hp-background-rappel-app-cta.webp');
       background-position: 70% bottom;
