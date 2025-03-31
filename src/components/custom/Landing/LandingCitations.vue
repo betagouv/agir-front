@@ -23,7 +23,7 @@
     </div>
     <div class="fr-col-12">
       <LandingCitation
-        citation="C'est super concret pour <strong>agir localement</strong>, c'est ce dont j'avais besoin."
+        citation="Des idées pour <strong>agir localement</strong>, c'est ce dont j'avais besoin."
         image="/hp-user-3.webp"
         autheur="Matthieu"
         activite="Étudiant, Dijon"

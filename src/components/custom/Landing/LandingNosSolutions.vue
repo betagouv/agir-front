@@ -5,7 +5,7 @@
       <h3 class="fr-h4 fr-mb-3w">
         <span aria-hidden="true">{{ item.emoji }}</span> {{ item.titre }}
       </h3>
-      <ListeRaccourcis :liste-raccourcis="item.raccourcis" />
+      <ListeRaccourcis :liste-raccourcis="item.raccourcis" :full-width="true" />
     </li>
   </ul>
 </template>
@@ -84,6 +84,13 @@
           },
           label: `30 idées d’action`,
         },
+        {
+          emoji: '💶',
+          to: {
+            name: RouteAidesName.AIDES,
+          },
+          label: `321 aides locales partout en France`,
+        },
       ] as RaccourciViewModel[],
     },
     {
@@ -118,6 +125,13 @@
             },
           },
           label: `13 idées d’action`,
+        },
+        {
+          emoji: '💶',
+          to: {
+            name: RouteAidesName.AIDES,
+          },
+          label: `105 aides locales partout en France`,
         },
       ] as RaccourciViewModel[],
     },
