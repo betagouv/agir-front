@@ -19,12 +19,17 @@
               label="Votre pseudonyme"
               name="utilisateur-pseudo"
               @blur="onValidationPseudo"
+              :maxlength="30"
             />
 
             <InputDateDeNaissance
+              class="fr-mt-4w"
+              keyName="formulaire-inscription"
+              description="Nécessaire pour faciliter votre identification"
               v-if="!utilisateurStore().utilisateur.estUnUtilisateurFranceConnect"
               v-model="onboardingPostCreationCompte().dateDeNaissance"
-              class="fr-mt-4w"
+              ref="dateDeNaissanceComposant"
+              required
             />
           </div>
         </fieldset>
@@ -35,7 +40,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { ref } from 'vue';
+  import { ref, useTemplateRef } from 'vue';
   import InputDateDeNaissance from '@/components/dsfr/InputDateDeNaissance.vue';
   import InputText from '@/components/dsfr/InputText.vue';
   import { validationPrenomOuNomOuPseudo } from '@/components/validations/validationsChampsFormulaire';
@@ -44,8 +49,11 @@
   import { onboardingPostCreationCompte } from '@/store/onboardingPostCreationCompte';
   import { utilisateurStore } from '@/store/utilisateur';
 
+  const dateDeNaissanceComposant = useTemplateRef('dateDeNaissanceComposant');
+
   const validerLaReponse = () => {
     if (!onValidationPseudo()) return;
+    if (!dateDeNaissanceComposant.value?.validation()) return;
     router.push({ name: RouteCompteName.POST_CREATION_COMPTE_ETAPE_2 });
   };
   const champsPseudoStatus = ref({ message: '', afficher: false });
