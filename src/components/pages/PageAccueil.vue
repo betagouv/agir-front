@@ -2,10 +2,10 @@
   <section class="background--main">
     <LandingHeader />
   </section>
-  <section class="fr-py-8w background--beige">
+  <section class="fr-pt-4w fr-pb-8w background--olive-clair">
     <div class="fr-container">
-      <div class="fr-col-md-10 fr-mx-auto">
-        <LandingPourquoi />
+      <div class="fr-mx-auto">
+        <LandingNosSolutions />
       </div>
     </div>
   </section>
@@ -57,9 +57,9 @@
   import LandingCollectivite from '@/components/custom/Landing/LandingCollectivite.vue';
   import LandingEnsemble from '@/components/custom/Landing/LandingEnsemble.vue';
   import LandingHeader from '@/components/custom/Landing/LandingHeader.vue';
+  import LandingNosSolutions from '@/components/custom/Landing/LandingNosSolutions.vue';
   import LandingNotreApproche from '@/components/custom/Landing/LandingNotreApproche.vue';
   import LandingOnglet from '@/components/custom/Landing/LandingOnglet.vue';
-  import LandingPourquoi from '@/components/custom/Landing/LandingPourquoi.vue';
   import LandingRappelAppCTA from '@/components/custom/Landing/LandingRappelAppCTA.vue';
   import LandingRappelCTA from '@/components/custom/Landing/LandingRappelCTA.vue';
 </script>
