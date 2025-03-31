@@ -1,6 +1,6 @@
 <template>
   <div ref="HTMLDuCompteur" class="flex justify-center items-center">
-    <div class="compteur border-radius--lg shadow" :style="{ backgroundColor: props.background ?? 'inherit' }">
+    <div class="compteur border-radius--lg shadow" :style="{ backgroundColor: props.background }">
       <span v-for="(chiffre, index) in chiffresAvecAnimation" :key="index" class="digit fr-p-2w">
         {{ chiffre }}
       </span>
