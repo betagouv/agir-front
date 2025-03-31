@@ -3,7 +3,7 @@
     <h2 class="fr-h2 fr-mb-6w text--white">Pourquoi agir ?</h2>
 
     <ul class="fr-grid-row fr-grid-row--gutters list-style-none">
-      <li class="fr-col-lg-3 fr-col-md-6 fr-col-12">
+      <li class="fr-col-lg-3 fr-col-6">
         <span
           class="fr-icon-money-euro-circle-line fr-mb-1w fr-p-2w display-inline-block background--bleu-picto border-radius--full fr-mb-3w"
           aria-hidden="true"
@@ -12,7 +12,7 @@
         <p>Alléger le budget et les factures liées à votre consommation</p>
       </li>
 
-      <li class="fr-col-lg-3 fr-col-md-6 fr-col-12">
+      <li class="fr-col-lg-3 fr-col-6">
         <span
           class="fr-icon-lungs-line fr-mb-1w fr-p-2w display-inline-block background--bleu-picto border-radius--full fr-mb-3w"
           aria-hidden="true"
@@ -21,7 +21,7 @@
         <p>Qualité de l'air, pollutions, impacts actuels</p>
       </li>
 
-      <li class="fr-col-lg-3 fr-col-md-6 fr-col-12">
+      <li class="fr-col-lg-3 fr-col-6">
         <span
           class="fr-icon-parent-line fr-mb-1w fr-p-2w display-inline-block background--bleu-picto border-radius--full fr-mb-3w"
           aria-hidden="true"
@@ -30,7 +30,7 @@
         <p>Faire des choix éclairés pour les générations futures</p>
       </li>
 
-      <li class="fr-col-lg-3 fr-col-md-6 fr-col-12">
+      <li class="fr-col-lg-3 fr-col-6">
         <span
           class="fr-icon-heart-line fr-mb-1w fr-p-2w display-inline-block background--bleu-picto border-radius--full fr-mb-3w"
           aria-hidden="true"
