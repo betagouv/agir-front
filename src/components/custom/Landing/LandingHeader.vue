@@ -2,7 +2,7 @@
   <div class="position--relative">
     <div class="fr-container fr-py-md-16w fr-py-6w">
       <div class="fr-mx-auto fr-col-md-7 text--center flex flex-column align-items--center">
-        <h1>Des solutions pour la transition écologique à mon échelle</h1>
+        <h1 class="fr-h1 fr-display--xs">Des solutions pour la transition écologique à mon échelle</h1>
         <ul class="fr-grid-row fr-grid-row--gutters list-style-none fr-pl-0 fr-mb-2w flex-center">
           <li class="fr-col-auto">
             <span class="fr-icon-check-line text--vert" aria-hidden="true" />
@@ -117,6 +117,7 @@
     position: absolute;
     bottom: 0;
     max-height: 80%;
+    max-width: 40%;
 
     @media (max-width: 48em) {
       position: relative;
