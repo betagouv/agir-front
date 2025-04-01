@@ -1,6 +1,6 @@
 <template>
   <div ref="HTMLDuCompteur" class="flex justify-center items-center">
-    <div class="compteur border-radius--lg">
+    <div class="compteur border-radius--lg shadow" :style="{ backgroundColor: props.background }">
       <span v-for="(chiffre, index) in chiffresAvecAnimation" :key="index" class="digit fr-p-2w">
         {{ chiffre }}
       </span>
@@ -11,7 +11,7 @@
 <script setup lang="ts">
   import { ref, watch, onMounted, onUnmounted } from 'vue';
 
-  const props = defineProps<{ valeur: number }>();
+  const props = defineProps<{ valeur: number; background?: string }>();
 
   const NOMBRE_DE_CHIFFRES = 4;
   const DUREE_ANIMATION = 1000;

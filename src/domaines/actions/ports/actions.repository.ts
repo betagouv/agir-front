@@ -96,6 +96,8 @@ export interface ActionFAQ {
   reponse: string;
 }
 
+export type CompteurActions = number;
+
 export interface ActionsRepository {
   chargerCatalogueActions(idUtilisateur: string): Promise<CatalogueActions>;
 
@@ -114,4 +116,6 @@ export interface ActionsRepository {
   terminerAction(idUtilisateur: string, idAction: string, typeAction: TypeAction): Promise<void>;
 
   previsualiser(actionId: string, typeAction: TypeAction): Promise<ActionDetail>;
+
+  compterActions(): Promise<CompteurActions>;
 }

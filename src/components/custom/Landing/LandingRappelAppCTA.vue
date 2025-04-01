@@ -1,8 +1,9 @@
 <template>
   <div class="fr-col-md-6 fr-col-12 text--white">
-    <h2 class="fr-h2 fr-mb-1w text--white">Je télécharge l'application <strong class="text--italic">J'agis</strong></h2>
+    <h2 class="fr-h2 fr-mb-1w text--white"><i class="text--italic">J'agis</i> sur l'application mobile</h2>
     <p class="text--lh-1-8">
-      L'application J'agis pour mon smartphone : tout pour faire les bons choix, au moment où j'en ai besoin.
+      L'application <i class="text--italic">J'agis</i> répond à toutes vos questions et guide vos réflexions du
+      quotidien, au moment où vous en avez besoin.
     </p>
     <div class="fr-grid-row fr-col-md-6 fr-col-12">
       <div class="fr-col-6 fr-p-1v">
@@ -26,3 +27,4 @@
     </div>
   </div>
 </template>
+<script setup></script>

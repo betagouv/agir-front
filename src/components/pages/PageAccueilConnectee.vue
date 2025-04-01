@@ -50,10 +50,6 @@
 </script>
 
 <style scoped>
-  .background--olive-clair {
-    background: #ecebe0;
-  }
-
   .background--brown-cafe-creme-main-782 {
     background: var(--brown-cafe-creme-main-782);
   }

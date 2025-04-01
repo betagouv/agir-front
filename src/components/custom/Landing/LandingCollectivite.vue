@@ -1,5 +1,5 @@
 <template>
-  <div class="background--vert text--white border-radius--md fr-p-3w fr-p-md-5w">
+  <div class="background--vert text--white border-radius--md fr-p-3w fr-p-md-5w" id="collectivite">
     <img src="/france-localization.svg" alt="" class="fr-mb-3w" />
 
     <h3 class="fr-h2 text--white">Collectivités locales et territoires</h3>

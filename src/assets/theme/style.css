@@ -332,6 +332,10 @@
     color: var(--brown-caramel-sun-425-moon-901);
 }
 
+.background--olive-clair {
+    background: #ecebe0;
+}
+
 .background--pink {
     background-color: var(--pink-tuile-925-125);
 }

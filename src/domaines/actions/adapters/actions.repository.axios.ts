@@ -4,6 +4,7 @@ import {
   ActionDetail,
   ActionsRepository,
   CatalogueActions,
+  CompteurActions,
   DetailThematique,
   TypeAction,
 } from '@/domaines/actions/ports/actions.repository';
@@ -177,6 +178,12 @@ export class ActionsRepositoryAxios implements ActionsRepository {
   async terminerAction(idUtilisateur: string, idAction: string, typeAction: TypeAction): Promise<void> {
     const axios = AxiosFactory.getAxios();
     await axios.post(`/utilisateurs/${idUtilisateur}/actions/${typeAction}/${idAction}/faite`);
+  }
+
+  async compterActions(): Promise<CompteurActions> {
+    const axios = AxiosFactory.getAxios();
+    const response = await axios.get<{ nombre_total_actions_faites: number }>('/compteur_actions');
+    return response.data.nombre_total_actions_faites;
   }
 
   private transformeActionDetailApiToActionDetail(actionDetailApiModel: ActionDetailApiModel): ActionDetail {
