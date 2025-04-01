@@ -20,7 +20,7 @@ export class BibliothequeRepositoryAxios implements BibliothequeRepository {
   @intercept401()
   async chargerBibliotheque(utilisateurId: string): Promise<Bibliotheque> {
     const axiosInstance = AxiosFactory.getAxios();
-    const response = await axiosInstance.get<BibliothequeApiModel>(`/utilisateurs/${utilisateurId}/bibliotheque`);
+    const response = await axiosInstance.get<BibliothequeApiModel>(`/utilisateurs/${utilisateurId}/bibliotheque_v2`);
 
     return {
       ressources: response.data.contenu.map(ressource => ({
