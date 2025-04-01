@@ -7,6 +7,7 @@ import VueMatomo from 'vue-matomo';
 import { createSentry } from './sentry/sentry';
 import App from '@/App.vue';
 import { NavigationBus } from '@/navigationBus';
+import CrispPlugin from '@/plugins/crisp';
 import router from '@/router';
 // ordre des css important
 import '@gouvfr/dsfr/dist/component/modal/modal.min.css';
@@ -32,6 +33,7 @@ import './assets/theme/markdownFromCMS.css';
 declare global {
   interface Window {
     _paq: any;
+
     dsfr(element: HTMLElement | null): {
       modal: {
         conceal(): void;
@@ -39,12 +41,14 @@ declare global {
       };
     };
   }
+
   interface HTMLElement {
     addEventListener(
       type: 'dsfr.conceal',
       listener: (event: Event) => void,
       options?: boolean | AddEventListenerOptions,
     ): void;
+
     removeEventListener(
       type: 'dsfr.conceal',
       listener: (event: Event) => void,
@@ -59,6 +63,7 @@ pinia.use(piniaPluginPersistedstate);
 NavigationBus.getInstance().setRouter(router);
 app.use(router);
 app.use(pinia);
+app.use(CrispPlugin, { siteId: import.meta.env.VITE_CRISP_WEBSITE_ID });
 
 app.use(VueMatomo, {
   host: import.meta.env.VITE_MATOMO_URL,
