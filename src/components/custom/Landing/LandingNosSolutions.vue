@@ -58,7 +58,7 @@
               thematiqueId: MenuThematiques.getThematiqueData(ClefThematiqueAPI.alimentation).url,
             },
           },
-          label: `1150 recettes délicieuses`,
+          label: `1150 recettes durables`,
         },
         {
           emoji: '🍓',
@@ -68,7 +68,7 @@
               thematiqueId: MenuThematiques.getThematiqueData(ClefThematiqueAPI.alimentation).url,
             },
           },
-          label: `1 Calendrier de fruits et légumes de saison`,
+          label: `1 calendrier de fruits et légumes de saison`,
         },
         {
           emoji: '🎯',
@@ -78,7 +78,7 @@
               id: ClefThematiqueAPI.alimentation,
             },
           },
-          label: `27 idées d’action`,
+          label: `27 idées d’actions`,
         },
       ] as RaccourciViewModel[],
     },
@@ -94,7 +94,7 @@
               id: ClefThematiqueAPI.logement,
             },
           },
-          label: `30 idées d’action`,
+          label: `30 idées d’actions`,
         },
         {
           emoji: '💶',
@@ -126,7 +126,7 @@
           to: {
             name: RouteAidesName.VELO,
           },
-          label: `1 simulateur aides vélo`,
+          label: `1 simulateur Mes aides vélo`,
         },
         {
           emoji: '🎯',
@@ -136,7 +136,7 @@
               id: ClefThematiqueAPI.transports,
             },
           },
-          label: `13 idées d’action`,
+          label: `13 idées d’actions`,
         },
         {
           emoji: '💶',
@@ -157,7 +157,7 @@
             name: RouteServiceName.LONGUE_VIE_AUX_OBJETS,
             params: { thematiqueId: MenuThematiques.getThematiqueData(ClefThematiqueAPI.consommation).url },
           },
-          label: `Des points de réparation de proximité`,
+          label: `Des commerces de seconde main à proximité`,
         },
         {
           emoji: '🎯',
@@ -167,7 +167,7 @@
               id: ClefThematiqueAPI.consommation,
             },
           },
-          label: `15 idées d’action`,
+          label: `15 idées d’actions`,
         },
       ] as RaccourciViewModel[],
     },

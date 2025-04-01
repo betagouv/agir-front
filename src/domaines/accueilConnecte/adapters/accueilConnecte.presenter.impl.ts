@@ -73,7 +73,7 @@ export class AccueilConnectePresenterImpl implements AccueilConnectePresenter {
         },
         {
           emoji: '🍓',
-          label: `1 Calendrier de fruits et légumes de saison`,
+          label: `1 calendrier de fruits et légumes de saison`,
           to: {
             name: RouteServiceName.FRUITS_ET_LEGUMES,
             params: {

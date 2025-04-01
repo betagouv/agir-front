@@ -3,7 +3,7 @@
   <div class="fr-grid-row fr-grid-row--gutters fr-pb-3w">
     <div class="fr-col-md-6">
       <LandingCitation
-        citation="J’ai enfin eu des réponses à mes <strong>questions concrètes</strong> du quotidien."
+        citation="J’ai enfin eu des réponses à mes <span class='text--bold'>questions concrètes</span> du quotidien."
         image="/hp-user-2.webp"
         autheur="Sarah"
         activite="Infirmière, Angers"
@@ -15,7 +15,7 @@
     <div class="fr-col-md-6">
       <div class="empty-card empty-card--top background--vert border-radius--md fr-mb-2w fr-hidden fr-unhidden-md" />
       <LandingCitation
-        citation="Beaucoup plus <strong>facile à prendre en main</strong> que ce que je pensais."
+        citation="Beaucoup plus <span class='text--bold'>facile à prendre en main</span> que ce que je pensais."
         image="/hp-user-1.webp"
         autheur="Jean-Yves"
         activite="Retraité, Besançon"
@@ -23,7 +23,7 @@
     </div>
     <div class="fr-col-12">
       <LandingCitation
-        citation="Des idées pour <strong>agir localement</strong>, c'est ce dont j'avais besoin."
+        citation="Des idées pour <span class='text--bold'>agir localement</span>, c'est ce dont j'avais besoin."
         image="/hp-user-3.webp"
         autheur="Matthieu"
         activite="Étudiant, Dijon"
