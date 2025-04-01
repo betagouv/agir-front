@@ -25,27 +25,45 @@
           </div>
         </div>
 
-        <div class="fr-col-12 fr-col-md-5">
+        <div v-if="progression" class="fr-col-12 fr-col-md-5">
           <div class="background--white shadow fr-pb-2w">
             <h2 class="fr-h3 fr-mb-1w fr-p-3w fr-pb-0">Ma progression</h2>
             <div class="fr-grid-row">
               <div class="fr-col-6">
-                <p class="flex flex-column align-items--center fr-mb-1w text--center bordure-droite fr-mr-md-3v">
-                  <span class="gros-nombre">{{ progression?.nombreActionsTerminees || 0 }}</span>
+                <p
+                  class="flex flex-column align-items--center flex-space-around text--center bordure-droite fr-mr-md-3v"
+                >
+                  <span class="gros-nombre">{{ progression.nombreActionsTerminees || 0 }}</span>
                   <span>
-                    {{ gererPluriel(progression?.nombreActionsTerminees || 0, 'Action terminée', 'Actions terminées') }}
+                    {{ gererPluriel(progression.nombreActionsTerminees || 0, 'Action terminée', 'Actions terminées') }}
                   </span>
                 </p>
               </div>
-              <div class="fr-col-6 flex flex-column align-items--center">
+              <div
+                v-if="progression.pourcentageCompletionBilan < 100"
+                class="fr-col-6 flex flex-column align-items--center"
+              >
                 <p class="flex flex-column align-items--center fr-mb-3v text--center">
-                  <CercleProgression :pourcentage="progression?.pourcentageCompletionBilan || 0" class="fr-mb-1w" />
+                  <CercleProgression :pourcentage="progression.pourcentageCompletionBilan || 0" class="fr-mb-1w" />
                   <span>Mon bilan environnemental</span>
                 </p>
                 <router-link
                   :to="{ name: RouteBilanCarboneName.BILAN_CARBONE }"
                   class="fr-link fr-link--icon-right fr-icon-arrow-right-line"
                   >Compléter
+                </router-link>
+              </div>
+              <div v-else class="fr-col-6 flex flex-column align-items--center flex-space-around">
+                <p :aria-label="`${progression.tonneBilan} Tonnes par an`" class="text--center fr-mb-0">
+                  <span class="gros-nombre fr-text--bold fr-mt-4w">{{ progression.tonneBilan }}</span
+                  ><span class="text--3xl fr-text--bold">T</span>
+                  / an
+                </p>
+                <router-link
+                  :to="{ name: RouteBilanCarboneName.BILAN_CARBONE }"
+                  class="fr-link fr-link--icon-right fr-icon-arrow-right-line text--center"
+                  >Mon bilan<br />
+                  environnemental
                 </router-link>
               </div>
             </div>

@@ -11,6 +11,7 @@ export type AccueilConnecteApiModel = {
   pourcentage_bilan_done: number;
   nombre_aides: number;
   nombre_recettes: number;
+  bilan_carbone_total_kg: number;
 };
 
 export class AccueilConnecteRepositoryAxios implements AccueilConnecteRepository {
@@ -24,6 +25,7 @@ export class AccueilConnecteRepositoryAxios implements AccueilConnecteRepository
       pourcentageCompletionBilan: response.data.pourcentage_bilan_done,
       nombreAides: response.data.nombre_aides,
       nombreRecettes: response.data.nombre_recettes,
+      bilanCarboneTotalKg: response.data.bilan_carbone_total_kg,
     };
   }
 }
