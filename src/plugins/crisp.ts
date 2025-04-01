@@ -14,7 +14,9 @@ declare global {
 export default {
   install(app: App, options: CrispOptions) {
     if (!options.siteId) {
-      throw Error('Crisp siteId is required');
+      // eslint-disable-next-line
+      console.warn('Crisp siteId is required');
+      return;
     }
 
     window.$crisp = [];
