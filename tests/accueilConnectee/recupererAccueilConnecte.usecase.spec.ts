@@ -88,7 +88,7 @@ describe('Fichier de tests concernant la home connectée', () => {
             },
             {
               emoji: '🍓',
-              label: '1 Calendrier de fruits et légumes de saison',
+              label: '1 calendrier de fruits et légumes de saison',
               to: {
                 name: 'fruits-et-legumes',
                 params: {
