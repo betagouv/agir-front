@@ -13,8 +13,8 @@ export class ActionsPresenterImpl implements ActionsPresenter {
       actions.map(async action => {
         const nombreDePersonnes = gererPluriel(
           action.nombreDePersonnes,
-          `<span class="text--bold">${action.nombreDePersonnes}</span> défi réalisé`,
-          `<span class="text--bold">${action.nombreDePersonnes}</span> défis réalisés`,
+          `<span class="text--bold">${action.nombreDePersonnes}</span> action réalisée`,
+          `<span class="text--bold">${action.nombreDePersonnes}</span> actions réalisées`,
         );
 
         const aidesDisponibles =

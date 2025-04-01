@@ -1,15 +1,12 @@
 <template>
-  <ActionAsideAFaire v-if="!estRealise" sous-titre="Obtenez 4 bonnes réponses" :points="actionBaseViewModel.points" />
-  <ActionAsideRealisee v-else sous-titre="Vous avez réalisé votre quizz" :points="actionBaseViewModel.points" />
+  <ActionAsideAFaire v-if="!estRealise" :points="actionBaseViewModel.points" sous-titre="Obtenez 4 bonnes réponses" />
+  <ActionAsideRealisee v-else :points="actionBaseViewModel.points" sous-titre="Vous avez réalisé votre quizz" />
 
-  <template v-if="nombreActionRealise > 0">
+  <template v-if="nombreActionRealise > 1">
     <hr />
 
     <p class="fr-mb-1w">
-      <span class="text--bold">
-        {{ nombreActionRealise }}
-        {{ gererPluriel(nombreActionRealise, 'quiz terminé', 'quiz terminés') }}
-      </span>
+      <span class="text--bold"> {{ nombreActionRealise }} quiz terminés </span>
       par la communauté
     </p>
   </template>
@@ -21,7 +18,6 @@
   import ActionAsideRealisee from '@/components/custom/Action/Aside/ActionAsideRealisee.vue';
   import { ActionsEvent, ActionsEventBus } from '@/domaines/actions/actions.eventbus';
   import { ActionBaseViewModel } from '@/domaines/actions/ports/action.presenter';
-  import { gererPluriel } from '@/shell/pluriel';
 
   const props = defineProps<{
     actionBaseViewModel: ActionBaseViewModel;
