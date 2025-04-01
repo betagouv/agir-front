@@ -2,7 +2,7 @@
   <div class="zindex-4">
     <router-link
       :to="{ name: RouteThematiquesName.THEMATIQUE, params: { id: thematique.url } }"
-      class="fr-btn shadow full-width flex flex-space-between fr-p-2w fr-mb-2w"
+      class="fr-btn fr-btn--lg shadow full-width flex flex-space-between fr-p-2w fr-mb-2w"
     >
       <span><span aria-hidden="true" v-text="thematique.emoji" />&nbsp;{{ thematique.labelDansLeMenu }}</span>
       <span class="fr-btn--icon-right fr-icon-arrow-right-s-line"></span>

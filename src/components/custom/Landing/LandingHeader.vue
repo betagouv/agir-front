@@ -72,8 +72,8 @@
     </h2>
   </div>
 
-  <div class="background--olive-clair fr-pt-16w">
-    <img src="/ciseau-decoupe.svg" alt="" class="ciseau" />
+  <div class="background--olive-clair fr-pt-16w fr-pb-2w">
+    <div class="ciseau-bg"></div>
   </div>
 </template>
 
@@ -165,8 +165,12 @@
     color: #656357;
   }
 
-  .ciseau {
+  .ciseau-bg {
+    min-height: 3rem;
     width: 100%;
+    background-image: url('/ciseau-decoupe.svg');
+    background-repeat: no-repeat;
+    background-position: 15% center;
   }
 
   .breaker {

@@ -2,7 +2,7 @@
   <section class="background--main">
     <LandingHeader />
   </section>
-  <section class="fr-pt-4w fr-pb-8w background--olive-clair">
+  <section class="fr-pt-4w fr-pb-12w background--olive-clair">
     <div class="fr-container">
       <div class="fr-mx-auto">
         <LandingNosSolutions />
