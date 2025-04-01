@@ -64,7 +64,7 @@
       class="fr-h2 text--white text--center flex flex-column flex-center align-items--center compteur-absolute full-width"
     >
       <CompteurDynamique :valeur="nombreActions ?? 0" background="rgb(52, 68, 159)" />
-      <span class="fr-mt-2w text-olive fr-text--xl">
+      <span class="fr-mt-2w text-olive fr-text--xl text--lh-1-3">
         Actions réalisées ensemble
         <br aria-hidden="true" />
         partout en France
