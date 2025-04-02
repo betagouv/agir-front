@@ -2,6 +2,7 @@ import { sentryVitePlugin } from '@sentry/vite-plugin';
 import vue from '@vitejs/plugin-vue';
 import * as path from 'path';
 import { defineConfig } from 'vite';
+import { version } from './package.json';
 
 // https://vitejs.dev/config/
 export const viteConfig = {
@@ -30,7 +31,7 @@ export const viteConfig = {
     },
   },
   define: {
-    __APP_VERSION__: JSON.stringify(process.env.npm_package_version),
+    __APP_VERSION__: JSON.stringify(version),
     __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: false,
   },
 };

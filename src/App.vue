@@ -4,13 +4,13 @@
       <Header />
       <DisclaimerGeneral
         v-if="afficherLeDisclaimer"
-        titre="J'agis est un nouveau service !"
-        description="Cette version est encore très incomplète et de nombreuses évolutions et nouvelles fonctionnalités sont mises en ligne chaque semaine. N'hésitez pas à nous communiquer vos commentaires pour améliorer l'expérience."
         :onClick="
           () => {
             utilisateurStore().disclaimer.afficherDisclaimerGeneral = false;
           }
         "
+        description="Cette version est encore très incomplète et de nombreuses évolutions et nouvelles fonctionnalités sont mises en ligne chaque semaine. N'hésitez pas à nous communiquer vos commentaires pour améliorer l'expérience."
+        titre="J'agis est un nouveau service !"
       />
     </div>
     <main id="contenu" class="background--main">
@@ -18,11 +18,13 @@
     </main>
 
     <Footer class="print-hidden" />
+    <p v-if="!estEnvDeProduction">Version : {{ appVersion }}</p>
   </div>
 </template>
 
-<script setup lang="ts">
-  import { computed } from 'vue';
+<script lang="ts" setup>
+  import axios from 'redaxios';
+  import { computed, onMounted, ref } from 'vue';
   import { NavigationGuardNext, RouteLocationNormalized } from 'vue-router';
   import DisclaimerGeneral from '@/components/dsfr/DisclaimerGeneral.vue';
   import Footer from '@/components/dsfr/Footer.vue';
@@ -32,7 +34,13 @@
   import { useNavigationStore } from '@/store/navigationStore';
   import { utilisateurStore } from '@/store/utilisateur';
 
+  const estEnvDeProduction = import.meta.env.VITE_ENV === 'production';
+
   const appName = "- J'agis";
+  // eslint-disable-next-line no-undef
+  const appVersion = __APP_VERSION__;
+  const latestVersion = ref(appVersion);
+
   router.beforeEach((to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
     const { title, estPublique } = to.meta;
 
@@ -63,6 +71,31 @@
     return (
       utilisateurStore().utilisateur.onboardingAEteRealise && utilisateurStore().disclaimer.afficherDisclaimerGeneral
     );
+  });
+
+  const checkVersion = async () => {
+    if (import.meta.env.DEV) return;
+    try {
+      const response = await axios.get('/version.json', {
+        headers: {
+          'Cache-Control': 'no-cache, no-store, must-revalidate',
+          Pragma: 'no-cache',
+          Expires: '0',
+        },
+      });
+      latestVersion.value = response.data.version;
+
+      if (latestVersion.value !== appVersion) {
+        window.location.reload();
+      }
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error('Erreur lors de la récupération de la version :', error);
+    }
+  };
+
+  onMounted(() => {
+    checkVersion();
   });
 </script>
 
