@@ -37,6 +37,7 @@
             label="Pseudonyme"
             name="pseudo"
             @blur="onValidationPseudo()"
+            :maxlength="12"
           />
         </div>
         <div class="fr-col-lg-6 fr-col-12">

@@ -19,7 +19,7 @@
               label="Votre pseudonyme"
               name="utilisateur-pseudo"
               @blur="onValidationPseudo"
-              :maxlength="30"
+              :maxlength="12"
             />
 
             <InputDateDeNaissance
