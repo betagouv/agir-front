@@ -16,7 +16,7 @@
       <div v-for="option in options" :key="option.label" :class="`fr-fieldset__element ${col}`">
         <div
           class="fr-radio-group border fr-col background--white"
-          :class="`${option.value === selectedValue ? 'fr-text--bold border--bleu-dark' : ''} ${option.customClass ?? ''}`"
+          :class="`${option.value === selectedValue ? 'fr-text--bold border--bleu-dark' : ''} ${optionsSize === 'md' ? 'radio-size--md' : ''} ${option.customClass ?? ''}`"
         >
           <input
             :id="`${option.value}-${name}`"
@@ -45,6 +45,7 @@
     orientation: 'vertical' | 'horizontal';
     name: string;
     options: { label: string; value: string | boolean; disabled?: boolean; customClass?: string }[];
+    optionsSize?: 'md' | 'lg';
     col: string;
     defaultValue?: string | boolean;
     description?: string;
@@ -93,6 +94,18 @@
   .fr-radio-group input[type='radio'] + label:before {
     top: 1rem;
     left: calc(3rem + 3px);
+  }
+
+  .radio-size--md.fr-radio-group input[type='radio'] + label {
+    padding: 0.5rem 0.5rem 0.5rem 2.5rem;
+    background-position: 0.5rem;
+  }
+
+  .radio-size--md.fr-radio-group input[type='radio'] + label:before {
+    top: 0.5rem;
+    left: calc(2.5rem + 3px);
+    width: 0.5rem;
+    height: 0.5rem;
   }
 
   .boutonRadio--horizontal .fr-fieldset__element {
