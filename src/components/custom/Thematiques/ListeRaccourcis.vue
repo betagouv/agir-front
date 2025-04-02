@@ -1,6 +1,6 @@
 <template>
   <ul v-if="listeRaccourcis" class="list-style-none flex flex-wrap fr-pl-0 liste">
-    <li v-for="raccourci in listeRaccourcis" :key="raccourci.label" class="full-width">
+    <li v-for="raccourci in listeRaccourcis" :key="raccourci.label" :class="fullWidth ? 'full-width' : ''">
       <router-link
         v-if="raccourci.to"
         :to="raccourci.to"

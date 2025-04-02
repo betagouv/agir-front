@@ -168,11 +168,24 @@
   }
 
   .ciseau-bg {
-    min-height: 3rem;
+    height: 4rem;
     width: 100%;
     background-image: url('/ciseau-decoupe.svg');
     background-repeat: no-repeat;
+    background-size: 350%;
     background-position: 15% center;
+
+    @media (min-width: 36em) {
+      background-size: 250%;
+    }
+
+    @media (min-width: 48em) {
+      background-size: 200%;
+    }
+
+    @media (min-width: 62em) {
+      background-size: 100%;
+    }
   }
 
   .breaker {
