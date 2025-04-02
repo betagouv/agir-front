@@ -73,7 +73,7 @@
 
 <script lang="ts" setup>
   import Notation from '@/components/custom/Notation.vue';
-  import PartageReseauxSociaux from '@/components/PartageReseauxSociaux.vue';
+  import PartageReseauxSociaux from '@/components/dsfr/PartageReseauxSociaux.vue';
   import { useBoutonRetour } from '@/composables/boutonRetour';
   import { ArticleRepositoryAxios } from '@/domaines/article/adapters/article.repository.axios';
   import { AjouterAuxFavorisUsecase } from '@/domaines/article/ajouterAuxFavoris.usecase';
