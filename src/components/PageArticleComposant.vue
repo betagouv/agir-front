@@ -41,6 +41,7 @@
     </div>
     <div class="fr-col-12 fr-col-md-4 print-hidden">
       <div class="fr-grid-row flex-center background--white border border-radius--md fr-p-2w gap--small">
+        <PartageReseauxSociaux />
         <div v-if="utilisateurStore().estConnecte">
           <button
             v-if="!article.estEnFavori"
@@ -72,6 +73,7 @@
 
 <script lang="ts" setup>
   import Notation from '@/components/custom/Notation.vue';
+  import PartageReseauxSociaux from '@/components/PartageReseauxSociaux.vue';
   import { useBoutonRetour } from '@/composables/boutonRetour';
   import { ArticleRepositoryAxios } from '@/domaines/article/adapters/article.repository.axios';
   import { AjouterAuxFavorisUsecase } from '@/domaines/article/ajouterAuxFavoris.usecase';
