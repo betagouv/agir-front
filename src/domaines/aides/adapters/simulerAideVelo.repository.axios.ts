@@ -36,13 +36,19 @@ type AidesVeloParTypeApiModel = {
 
 export class SimulerAideVeloRepositoryAxios implements SimulerAideVeloRepository {
   @intercept401()
-  async getSimulation(prixDuVelo: number, etatDuVelo: EtatVelo, utilisateurId: string): Promise<SimulationVelo> {
+  async getSimulation(
+    prixDuVelo: number,
+    etatDuVelo: EtatVelo,
+    situationHandicap: boolean,
+    utilisateurId: string,
+  ): Promise<SimulationVelo> {
     const axiosInstance = AxiosFactory.getAxios();
     const response = await axiosInstance.post<AidesVeloParTypeApiModel>(
       `/utilisateurs/${utilisateurId}/simulerAideVelo`,
       {
         prix_du_velo: prixDuVelo,
         etat_du_velo: etatDuVelo,
+        situation_handicap: situationHandicap,
       },
     );
 
