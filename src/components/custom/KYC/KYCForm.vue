@@ -58,7 +58,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { onMounted, ref, watch } from 'vue';
+  import { onMounted, ref } from 'vue';
   import Alert from '@/components/custom/Alert.vue';
   import KYCChoixMultiple from '@/components/custom/KYC/KYCTypes/KYCChoixMultiple.vue';
   import KYCChoixUnique from '@/components/custom/KYC/KYCTypes/KYCChoixUnique.vue';
@@ -88,16 +88,6 @@
       props.questionViewModel.type === 'decimal'
         ? (props.questionViewModel.reponses_possibles[0].label ?? '')
         : (props.questionViewModel.reponses_possibles.filter(r => r.checked).map(r => r.id) ?? []);
-  });
-
-  const estIncomplet = ref<boolean>(true);
-  watch(reponse, () => {
-    estIncomplet.value =
-      props.questionViewModel.type === 'libre' ||
-      props.questionViewModel.type === 'entier' ||
-      props.questionViewModel.type === 'decimal'
-        ? !reponse.value
-        : reponse.value!.length === 0;
   });
 
   const validerLaReponse = async () => {
