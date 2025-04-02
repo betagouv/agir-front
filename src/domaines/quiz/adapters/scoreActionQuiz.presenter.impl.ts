@@ -4,6 +4,7 @@ import {
   ScoreActionQuizViewModel,
   ScoreConfigViewModel,
 } from '@/domaines/quiz/ports/scoreActionQuiz.presenter';
+import { gererPluriel } from '@/shell/pluriel';
 
 export class ScoreActionQuizPresenterImpl implements ScoreActionQuizPresenter {
   constructor(private readonly viewModel: (scoreActionQuizViewModel: ScoreActionQuizViewModel) => void) {}
@@ -26,7 +27,7 @@ export class ScoreActionQuizPresenterImpl implements ScoreActionQuizPresenter {
     const { emoji, couleurBackground, couleurBordure } = scoreStrategies[getScoreCategory(pourcentageScore)];
 
     this.viewModel({
-      score: `${score.nombreBonnesReponses} bonnes réponses sur ${score.nombreQuestions} (${pourcentageScore}%)`,
+      score: `${score.nombreBonnesReponses} ${gererPluriel(score.nombreBonnesReponses, 'bonne réponse', 'bonnes réponses')} sur ${score.nombreQuestions} (${pourcentageScore}%)`,
       scoreConfig: {
         emoji,
         couleurBackground,
