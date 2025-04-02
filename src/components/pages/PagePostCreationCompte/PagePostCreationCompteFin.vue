@@ -1,6 +1,6 @@
 <template>
   <div class="fr-container fr-py-6w">
-    <div class="fr-col-12 fr-col-md-6 fr-mx-auto fr-mb-0 background--white fr-p-4w border border-radius--md">
+    <div class="fr-col-12 fr-col-md-6 fr-mx-auto fr-mb-0 background--white fr-p-4w border">
       <img alt="" src="/bg_creation_compte_fin.svg" />
       <h1 class="fr-h4 fr-mb-3w">Tout est prêt !</h1>
       <ul class="list-style-none fr-text--regular fr-text--lg">

@@ -1,6 +1,6 @@
 <template>
   <div class="fr-container fr-py-6w">
-    <div class="fr-col-12 fr-col-md-6 fr-mx-auto fr-mb-0 background--white fr-p-4w border border-radius--md">
+    <div class="fr-col-12 fr-col-md-6 fr-mx-auto fr-mb-0 background--white fr-p-4w border">
       <form aria-labelledby="identity-fieldset-legend" class="fr-mb-4w" @submit.prevent="validerLaReponse()">
         <fieldset class="fr-fieldset fr-mb-0">
           <legend id="identity-fieldset-legend" class="fr-fieldset__legend">

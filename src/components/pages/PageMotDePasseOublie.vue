@@ -1,6 +1,6 @@
 <template>
   <div class="fr-container fr-py-6w">
-    <div class="fr-col-12 fr-col-lg-5 fr-mx-auto fr-mb-0 background--white fr-p-4w border border-radius--md">
+    <div class="fr-col-12 fr-col-lg-5 fr-mx-auto fr-mb-0 background--white fr-p-4w border">
       <button
         v-if="etape === Etapes.ETAPE_REDEFINIR"
         class="fr-btn fr-btn--tertiary-no-outline fr-btn--icon-left fr-icon-arrow-left-line fr-pl-0"
@@ -17,8 +17,8 @@
 
 <script setup lang="ts">
   import { ref } from 'vue';
-  import MotDePasseOublieRedefinir from '@/components/custom/MotDePasseOublie/MotDePasseOublieRedefinir.vue';
   import MotDePasseOublieFormulaire from '@/components/custom/MotDePasseOublie/MotDePasseOublieFormulaire.vue';
+  import MotDePasseOublieRedefinir from '@/components/custom/MotDePasseOublie/MotDePasseOublieRedefinir.vue';
 
   enum Etapes {
     ETAPE_FORMULAIRE = 1,
