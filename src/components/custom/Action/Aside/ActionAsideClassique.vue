@@ -15,10 +15,7 @@
   <template v-if="nombreActionRealise > 1">
     <hr />
 
-    <p class="fr-mb-1w">
-      <span class="text--bold"> {{ nombreActionRealise }} actions terminées </span>
-      par la communauté
-    </p>
+    <p v-html="actionBaseViewModel.labelCompteur"></p>
   </template>
 </template>
 
