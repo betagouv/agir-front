@@ -15,7 +15,8 @@
     "test:e2e": "playwright test --workers=1",
     "test:e2e--dev": "npx playwright test  --workers=1 --project='chromium' --ui",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "postbuild": "node scripts/generate-version.js"
   },
   "dependencies": {
     "@gouvfr/dsfr": "1.13.1",
