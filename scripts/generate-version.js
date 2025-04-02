@@ -10,4 +10,5 @@ const packageJson = JSON.parse(await readFile(__dirname + '/../package.json', 'u
 const version = packageJson.version;
 
 writeFileSync(__dirname + '/../dist/version.json', JSON.stringify({ version }, null, 2));
+// eslint-disable-next-line no-console
 console.log('✅ version.json généré avec succès !');
