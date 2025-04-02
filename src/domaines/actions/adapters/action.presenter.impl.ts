@@ -86,10 +86,11 @@ class ActionViewModelBuilder {
   }
 
   private static async buildCommonFields(action: ActionDetail) {
-    const [titre, sousTitre, introduction] = await Promise.all([
+    const [titre, sousTitre, introduction, labelCompteur] = await Promise.all([
       marked.parseInline(action.titre),
       marked.parseInline(action.sousTitre ?? ''),
       marked.parse(action.corps.introduction ?? ''),
+      marked.parseInline(action.labelCompteur ?? ''),
     ]);
     return {
       titre,
@@ -100,7 +101,7 @@ class ActionViewModelBuilder {
       actionId: action.code,
       points: action.points,
       consigne: action.consigne,
-      labelCompteur: action.labelCompteur,
+      labelCompteur,
     };
   }
 
