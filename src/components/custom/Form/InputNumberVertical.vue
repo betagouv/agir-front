@@ -3,7 +3,7 @@
     <label class="fr-label" :for="name">
       {{ label }}
     </label>
-    <div class="fr-input-wrap fr-icon-money-euro-circle-line">
+    <div class="fr-input-wrap">
       <input
         class="fr-input fr-mr-1w"
         pattern="[0-9]*"

@@ -49,8 +49,19 @@ export default class SimulerAideVeloUsecase {
     this._simulationAideVeloRepository = simulationAideVeloRepository;
   }
 
-  async execute(prixDuVelo: number, etatDuVelo: EtatVelo, utilisateurId: string, presenter: SimulerAideVeloPresenter) {
-    const reponse = await this._simulationAideVeloRepository.getSimulation(prixDuVelo, etatDuVelo, utilisateurId);
+  async execute(
+    prixDuVelo: number,
+    etatDuVelo: EtatVelo,
+    situationHandicap: boolean,
+    utilisateurId: string,
+    presenter: SimulerAideVeloPresenter,
+  ) {
+    const reponse = await this._simulationAideVeloRepository.getSimulation(
+      prixDuVelo,
+      etatDuVelo,
+      situationHandicap,
+      utilisateurId,
+    );
     presenter.presente(reponse);
   }
 }

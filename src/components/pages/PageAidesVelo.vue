@@ -24,37 +24,53 @@
         <div class="background--white border border-radius--md fr-p-3w fr-mb-3w">
           <h2 class="fr-h5">Paramètres</h2>
           <form class="fr-mb-1w">
-            <div class="fr-grid-row align-items--end">
+            <div class="fr-grid-col justify-content--start">
+              <BoutonsRadio
+                name="situation-handicap"
+                legende="Êtes-vous en situation de handicap ?"
+                legende-size="m"
+                orientation="horizontal"
+                col="fr-col"
+                :options="[
+                  { label: 'Oui', value: true },
+                  { label: 'Non', value: false },
+                ]"
+                options-size="md"
+                :default-value="estEnSituationDeHandicap"
+                v-model="estEnSituationDeHandicap"
+              />
               <InputNumberVertical
                 v-model="prixDuVelo"
                 :default-value="prixDuVelo"
                 :min-value="0"
                 name="prix-du-velo"
-                label="Prix du velo"
+                label="Prix du vélo (€)"
                 size="md"
               />
-              <button class="fr-btn fr-btn--secondary" @click.prevent="simulerAideVelo">Valider</button>
+              <div class="fr-mt-2v">
+                <span class="fr-text--sm fr-text--bold">À titre indicatif, voici quelques prix moyens</span>
+                <ul class="fr-text--sm fr-m-0">
+                  <li class="fr-p-0">
+                    Vélo mécanique :
+                    <button class="text--underline" @click="updatePrixDuVelo(250)">250 €</button>
+                  </li>
+                  <li class="fr-p-0">
+                    Vélo pliant standard :
+                    <button class="text--underline" @click="updatePrixDuVelo(500)">500 €</button>
+                  </li>
+                  <li class="fr-p-0">
+                    Vélo électrique standard :
+                    <button class="text--underline" @click="updatePrixDuVelo(2000)">2 000 €</button>
+                  </li>
+                  <li class="fr-p-0">
+                    Vélo cargo électrique :
+                    <button class="text--underline" @click="updatePrixDuVelo(7000)">7 000 €</button>
+                  </li>
+                </ul>
+              </div>
             </div>
+            <button class="fr-btn fr-btn--secondary fr-mt-3w" @click.prevent="simulerAideVelo">Valider</button>
           </form>
-          <span class="fr-text--sm fr-text--bold">À titre indicatif, voici quelques prix moyens</span>
-          <ul class="fr-text--sm fr-m-0 fr-mt-1v">
-            <li class="fr-p-0">
-              Vélo mécanique :
-              <button class="text--underline" @click="updatePrixDuVelo(250)">250 €</button>
-            </li>
-            <li class="fr-p-0">
-              Vélo pliant standard :
-              <button class="text--underline" @click="updatePrixDuVelo(500)">500 €</button>
-            </li>
-            <li class="fr-p-0">
-              Vélo électrique standard :
-              <button class="text--underline" @click="updatePrixDuVelo(2000)">2 000 €</button>
-            </li>
-            <li class="fr-p-0">
-              Vélo cargo électrique :
-              <button class="text--underline" @click="updatePrixDuVelo(7000)">7 000 €</button>
-            </li>
-          </ul>
         </div>
         <AsideAideVelo
           :code-postal="codePostal"
@@ -71,6 +87,7 @@
   import { onMounted, ref } from 'vue';
   import AidesResultat from '@/components/custom/Aides/AidesResultat.vue';
   import AsideAideVelo from '@/components/custom/Aides/AidesVeloAside.vue';
+  import BoutonsRadio from '@/components/custom/Form/BoutonsRadio.vue';
   import InputNumberVertical from '@/components/custom/Form/InputNumberVertical.vue';
   import ServiceSelect from '@/components/custom/Service/ServiceSelect.vue';
   import CarteSkeleton from '@/components/custom/Skeleton/CarteSkeleton.vue';
@@ -97,6 +114,7 @@
   const nombreDePartsFiscales = ref<number>(0);
   const prixDuVelo = ref<number>(1000);
   const etatDuVelo = ref<EtatVelo>('neuf');
+  const estEnSituationDeHandicap = ref<boolean>(false);
   const isLoading = ref<boolean>(false);
 
   const isLoadingGlobal = ref<boolean>(true);
@@ -133,6 +151,7 @@
     await simulerAideVeloUsecase.execute(
       prixDuVelo.value,
       etatDuVelo.value,
+      estEnSituationDeHandicap.value,
       idUtilisateur,
       new SimulerAideVeloPresenterImpl(mapResultatAidesVelo),
     );

@@ -294,7 +294,7 @@ describe('Fichier de tests pour simuler une aide velo', () => {
 
     // WHEN
     const useCase = new SimulerAideVeloUsecase(simulerAideVeloRepositoryMock);
-    await useCase.execute(999.9, 'neuf', 'utilisateurId', new SimulerAideVeloPresenterImpl(expectation));
+    await useCase.execute(999.9, 'neuf', false, 'utilisateurId', new SimulerAideVeloPresenterImpl(expectation));
 
     // THEN
     function expectation(simulationAidesVeloViewModel: SimulationAideResultatViewModel) {
@@ -532,7 +532,7 @@ describe('Fichier de tests pour simuler une aide velo', () => {
 
       // WHEN
       const useCase = new SimulerAideVeloUsecase(simulerAideVeloRepositoryMock);
-      await useCase.execute(999.9, 'occasion', 'utilisateurId', new SimulerAideVeloPresenterImpl(expectation));
+      await useCase.execute(999.9, 'occasion', false, 'utilisateurId', new SimulerAideVeloPresenterImpl(expectation));
 
       // THEN
       function expectation(simulationAidesVeloViewModel: SimulationAideResultatViewModel) {
