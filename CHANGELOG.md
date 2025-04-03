@@ -1,5 +1,18 @@
 # Changelog
 
+## [2.0.1](https://github.com/betagouv/agir-front/compare/v2.0.0...v2.0.1) (2025-04-03)
+
+
+### 🐛 Corrections de bogues
+
+* ajustement design ([#1019](https://github.com/betagouv/agir-front/issues/1019)) ([6448e2a](https://github.com/betagouv/agir-front/commit/6448e2a3fcfe24acf3ad3a81489498fddf452f4f))
+* remontees recette v1 ([#1020](https://github.com/betagouv/agir-front/issues/1020)) ([b2e51ed](https://github.com/betagouv/agir-front/commit/b2e51eddd7850690817795cd0d801b175abbb341))
+
+
+### 👷 Autres changements
+
+* mise à jour automatique ([#1017](https://github.com/betagouv/agir-front/issues/1017)) ([76be2af](https://github.com/betagouv/agir-front/commit/76be2af2f660a6561942bbd9139b9e88b48d81f1))
+
 ## [2.0.0](https://github.com/betagouv/agir-front/compare/v1.44.0...v2.0.0) (2025-04-02)
 
 
