@@ -11,7 +11,7 @@
     font-size: 1.75rem;
 }
 
-.action img {
+.action .action--cms img {
     display: block;
     max-width: 75%;
     margin: 0 auto;
