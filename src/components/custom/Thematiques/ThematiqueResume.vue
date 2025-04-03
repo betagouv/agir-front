@@ -20,6 +20,7 @@
 </template>
 
 <script lang="ts" setup>
+  import { computed } from 'vue';
   import ListeRaccourcis from '@/components/custom/Thematiques/ListeRaccourcis.vue';
   import { Thematique } from '@/domaines/thematiques/MenuThematiques';
   import { ThematiqueResumeViewModel } from '@/domaines/thematiques/ports/thematiqueResume.presenter';
@@ -30,7 +31,9 @@
     thematiqueResume: ThematiqueResumeViewModel;
   }>();
 
-  const thematiqueIllustrationPath = `url(${props.thematique.illustration})`;
+  const thematiqueIllustrationPath = computed(() => {
+    return `url(${props.thematique.illustration})`;
+  });
 </script>
 
 <style scoped>

@@ -1,7 +1,7 @@
 <template>
   <div class="fr-container fr-pb-6w">
     <FilDAriane :page-courante="pageCourante" />
-    <div class="background--white fr-p-4w border border-radius--md">
+    <div class="background--white fr-p-4w border">
       <div class="fr-grid-row fr-mb-4w">
         <h1 class="fr-h2 fr-mb-0 fr-col">Mon profil</h1>
       </div>

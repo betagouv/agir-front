@@ -11,7 +11,7 @@
       <div class="progress-bar-content" :style="progressBarStyle" />
     </div>
     <p class="fr-mb-0 text--lh-1-3">
-      A titre de comparaison, la moyenne française est de <span class="fr-text--bold">9,2 tonnes</span>
+      A titre de comparaison, la moyenne française est de <span class="fr-text--bold">9,4 tonnes</span> en&nbsp;2023
     </p>
   </div>
 </template>

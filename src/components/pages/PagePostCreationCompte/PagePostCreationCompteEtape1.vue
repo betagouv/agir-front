@@ -1,6 +1,6 @@
 <template>
   <div class="fr-container fr-py-6w">
-    <div class="fr-col-12 fr-col-md-6 fr-mx-auto fr-mb-0 background--white fr-p-4w border border-radius--md">
+    <div class="fr-col-12 fr-col-md-6 fr-mx-auto fr-mb-0 background--white fr-p-4w border">
       <img alt="" src="/bg_creation_compte.svg" />
       <p class="text--normal text--bleu fr-mt-1w fr-mb-1w"><span class="fr-text--bold">Question 1</span> sur 3</p>
       <h1 class="fr-h4 fr-mb-1w">Bienvenue sur J'agis ! Faisons connaissance...</h1>

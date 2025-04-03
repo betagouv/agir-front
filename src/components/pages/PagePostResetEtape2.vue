@@ -1,6 +1,6 @@
 <template>
   <div class="fr-container fr-py-6w">
-    <div class="fr-col-12 fr-col-lg-8 fr-mx-auto fr-mb-0 background--white fr-p-2w fr-p-md-6w border border-radius--md">
+    <div class="fr-col-12 fr-col-lg-8 fr-mx-auto fr-mb-0 background--white fr-p-2w fr-p-md-6w border">
       <h1 class="fr-h2">Merci pour votre soutien&nbsp;!</h1>
       <div class="fr-grid-row fr-grid-row--gutters">
         <div class="fr-col-12 fr-col-md-8">
@@ -55,9 +55,5 @@
   .badge > img {
     width: 5rem;
     height: 5rem;
-  }
-
-  .illustration {
-    object-fit: contain;
   }
 </style>

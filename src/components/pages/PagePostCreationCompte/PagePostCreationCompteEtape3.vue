@@ -1,6 +1,6 @@
 <template>
   <div class="fr-container fr-py-6w">
-    <div class="fr-col-12 fr-col-md-6 fr-mx-auto fr-mb-0 background--white fr-p-4w border border-radius--md">
+    <div class="fr-col-12 fr-col-md-6 fr-mx-auto fr-mb-0 background--white fr-p-4w border">
       <img src="/bg_creation_compte_etape_3.svg" alt="" />
       <p class="text--normal text--bleu fr-mb-1w fr-mt-1w"><span class="fr-text--bold">Question 3</span> sur 3</p>
       <h1 class="fr-h4 fr-mb-1w">C'est presque terminé !</h1>
