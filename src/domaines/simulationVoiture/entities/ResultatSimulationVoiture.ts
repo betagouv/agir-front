@@ -66,12 +66,18 @@ export class ResultatSimulationVoiture {
   }
 
   public getVoitureLaPLusEconomique(): VoitureAlternative {
-    return this.voituresAlternative.reduce((prev, current) => (current.getCout() < prev.getCout() ? current : prev));
+    const alternatives = this.getVoituresAlternativesMemeGabarit();
+
+    return alternatives.reduce((prev, current) => (current.getCout() < prev.getCout() ? current : prev));
   }
 
   public getVoitureLaPLusEcologique(): VoitureAlternative {
-    return this.voituresAlternative.reduce((prev, current) =>
-      current.getEmpreinte() < prev.getEmpreinte() ? current : prev,
-    );
+    const alternatives = this.getVoituresAlternativesMemeGabarit();
+
+    return alternatives.reduce((prev, current) => (current.getEmpreinte() < prev.getEmpreinte() ? current : prev));
+  }
+
+  private getVoituresAlternativesMemeGabarit(): VoitureAlternative[] {
+    return this.voituresAlternative.filter(voiture => voiture.getGabarit() === this.voitureActuelle.getGabarit());
   }
 }

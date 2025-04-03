@@ -20,22 +20,42 @@ describe('CalculerResultatSimulationVoitureUsecase', () => {
     function expectation(vm: ResultatSimulationVoitureViewModel) {
       expect(vm).toStrictEqual<ResultatSimulationVoitureViewModel>({
         resultatVoitureActuelle: {
-          gabarit: 'SUV',
           coupAnnuel: '25000',
           emissionAnnuelle: '100',
+          gabarit: 'SUV',
           tag: ['Électricité', 'Électrique'],
-        },
-        resultatVoiturePlusEconomique: {
-          typeDeVoiture: 'Voiture A',
-          coutAnnuel: { montant: 18000, difference: -7000, label: '-7000€', style: 'fr-badge--success' },
-          emission: { montant: 80, difference: -20, label: '-20%', style: 'fr-badge--success' },
-          tag: ['Essence', 'Hybride'],
         },
         resultatVoiturePlusEcologique: {
-          typeDeVoiture: 'Voiture B',
-          coutAnnuel: { montant: 22000, difference: -3000, label: '-3000€', style: 'fr-badge--success' },
-          emission: { montant: 60, difference: -40, label: '-40%', style: 'fr-badge--success' },
-          tag: ['Électricité', 'Électrique'],
+          coutAnnuel: {
+            difference: 1000,
+            label: '+1000€',
+            montant: 26000,
+            style: 'fr-badge--warning',
+          },
+          emission: {
+            difference: 10,
+            label: '10%',
+            montant: 110,
+            style: 'fr-badge--warning',
+          },
+          tag: ['Diesel', 'Diesel'],
+          typeDeVoiture: 'Voiture C',
+        },
+        resultatVoiturePlusEconomique: {
+          coutAnnuel: {
+            difference: 1000,
+            label: '+1000€',
+            montant: 26000,
+            style: 'fr-badge--warning',
+          },
+          emission: {
+            difference: 10,
+            label: '10%',
+            montant: 110,
+            style: 'fr-badge--warning',
+          },
+          tag: ['Diesel', 'Diesel'],
+          typeDeVoiture: 'Voiture C',
         },
       });
     }

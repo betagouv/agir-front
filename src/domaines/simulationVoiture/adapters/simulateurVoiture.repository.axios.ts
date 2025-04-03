@@ -62,7 +62,7 @@ export class SimulateurVoitureRepositoryAxios implements SimulationVoitureReposi
       voitureActuelleData.empreinte,
       voitureActuelleData.gabarit.label,
       voitureActuelleData.motorisation.label,
-      voitureActuelleData.carburant.label,
+      voitureActuelleData.carburant?.label || '',
     );
 
     const voituresAlternatives = voituresAlternativesData.map(
