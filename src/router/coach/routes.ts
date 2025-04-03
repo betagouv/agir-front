@@ -8,7 +8,7 @@ import { RouteCoachName } from '@/router/coach/routeCoachName';
 
 export enum RouteCoachPath {
   ACCUEIL_CONNECTEE = '/agir',
-  BIBLIOTHEQUE = 'bibliotheque',
+  BIBLIOTHEQUE = '/bibliotheque',
   SE_DESABONNER_DES_NOTIFICATIONS_MAILS = '/se-desabonner',
 }
 
@@ -24,15 +24,15 @@ const coachRoutes: RouteRecordRaw[] = [
           title: 'Agir',
         },
       },
-      {
-        path: RouteCoachPath.BIBLIOTHEQUE,
-        name: RouteCoachName.BIBLIOTHEQUE,
-        component: PageBibliotheque,
-        meta: {
-          title: 'Bibliothèque',
-        },
-      },
     ],
+  },
+  {
+    path: RouteCoachPath.BIBLIOTHEQUE,
+    name: RouteCoachName.BIBLIOTHEQUE,
+    component: PageBibliotheque,
+    meta: {
+      title: 'Bibliothèque',
+    },
   },
   {
     path: RouteCoachPath.SE_DESABONNER_DES_NOTIFICATIONS_MAILS,

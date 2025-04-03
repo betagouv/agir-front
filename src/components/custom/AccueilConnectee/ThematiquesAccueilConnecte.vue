@@ -20,8 +20,7 @@
           >, dans quel domaine souhaitez-vous agir ?
         </h2>
         <p>
-          Découvrez des actions personnalisées pour vous
-          <template v-if="commune">, à {{ commune }}</template>
+          Découvrez des actions personnalisées pour vous<template v-if="commune">, à {{ commune }}</template>
         </p>
       </div>
 

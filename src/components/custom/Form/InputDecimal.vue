@@ -22,6 +22,6 @@
   const internalValue = ref(props.defaultValue || '');
 
   watch(internalValue, newValue => {
-    emit('update:modelValue', newValue);
+    emit('update:modelValue', newValue.toString() as string);
   });
 </script>

@@ -12,7 +12,6 @@
   <form class="fr-mb-0" @submit.prevent="modifierInformation">
     <div class="fr-grid-row full-width flex-end fr-mb-4w fr-mb-md-2w">
       <button
-        :disabled="formulaireEnErreur"
         aria-label="Soumettre le formulaire"
         class="fr-btn fr-btn--icon-left fr-btn--lg fr-icon-save-3-fill"
         type="submit"
@@ -37,6 +36,7 @@
             label="Pseudonyme"
             name="pseudo"
             @blur="onValidationPseudo()"
+            :maxlength="12"
           />
         </div>
         <div class="fr-col-lg-6 fr-col-12">
@@ -115,7 +115,6 @@
 
     <div class="fr-grid-row full-width flex-end">
       <button
-        :disabled="formulaireEnErreur"
         aria-label="Soumettre le formulaire"
         class="fr-btn fr-btn--icon-left fr-btn--lg fr-mt-4w fr-icon-save-3-fill"
         type="submit"
@@ -127,7 +126,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { computed, ref, useTemplateRef } from 'vue';
+  import { ref, useTemplateRef } from 'vue';
   import Alert from '@/components/custom/Alert.vue';
   import CarteInfo from '@/components/custom/CarteInfo.vue';
   import CompteFormulaireRevenuFiscal from '@/components/custom/Compte/CompteFormulaireRevenuFiscal.vue';
@@ -152,18 +151,16 @@
   const champsPseudoStatus = ref<{ message: string; afficher: boolean }>({ message: '', afficher: false });
   const isRFREnErreur = ref(false);
   const dateDeNaissanceComposant = useTemplateRef('dateDeNaissanceComposant');
-  const formulaireEnErreur = computed(() => {
-    return (
+
+  async function modifierInformation() {
+    const formulaireEnErreur =
       !onValidationPseudo() ||
       !onValidationPrenom() ||
       !onValidationNom() ||
       isRFREnErreur.value ||
-      !dateDeNaissanceComposant.value?.validation()
-    );
-  });
+      !dateDeNaissanceComposant.value?.validation();
 
-  async function modifierInformation() {
-    if (formulaireEnErreur.value) return;
+    if (formulaireEnErreur) return;
     const usecase = new MettreAJourProfileUtilisateurUsecase(
       new ProfileUtilisateurRepositoryAxiosImpl(),
       new SessionRepositoryStore(),

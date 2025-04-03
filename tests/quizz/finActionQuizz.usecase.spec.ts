@@ -55,7 +55,36 @@ export class SpyActionsEventBus extends EventBus<ActionsEvent> {
 }
 
 describe("Fichier de test pour la fin d'une action quiz", () => {
-  it("Afficher correctement les informations quand le score du quiz est < à 40% et n'appelle le usecase terminer action", async () => {
+  it("Afficher correctement les informations quand le score du quiz est bas et n'appelle pas le usecase terminer action", async () => {
+    // GIVEN
+    const score = new ScoreQuiz(0, 11);
+    const repository = new QuizRepositoryForTest(score);
+    const spyActionBus = new SpyActionsEventBus();
+    const usecase = new FinActionQuizUsecase(
+      repository,
+      new TerminerActionUsecase(ActionsRepositoryMock.empty(), spyActionBus),
+    );
+    // WHEN
+    await usecase.execute('id-utilisateur', 'id-action', new ScoreActionQuizPresenterImpl(expectation));
+
+    // THEN
+
+    function expectation(viewmodel: ScoreActionQuizViewModel) {
+      expect(viewmodel).toStrictEqual<ScoreActionQuizViewModel>({
+        score: '0 bonne réponse sur 11 (0%)',
+        scoreConfig: {
+          emoji: '😬',
+          couleurBackground: '#FEF7F7',
+          couleurBordure: '#FFCACA',
+        },
+        encouragement: 'Nous espérons que ce quiz vous aura permis d’en apprendre d’avantage !',
+      });
+    }
+
+    expect(spyActionBus.eventName).toBeNull();
+  });
+
+  it("Afficher correctement les informations quand le score du quiz est < à 40% et n'appelle pas le usecase terminer action", async () => {
     // GIVEN
     const score = new ScoreQuiz(4, 11);
     const repository = new QuizRepositoryForTest(score);
