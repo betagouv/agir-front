@@ -1,4 +1,4 @@
-.action h1 {
+.action h1:not(.fr-modal__title) {
     font-weight: 400;
 }
 

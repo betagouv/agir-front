@@ -15,7 +15,7 @@
               </button>
             </div>
             <div class="fr-modal__content">
-              <h1 id="fr-modal-title-modal-1" class="fr-modal__title">Qu'avez-vous pensé de cette action ?</h1>
+              <h1 id="fr-modal-title-modal-1" class="fr-modal__title">Qu'avez-vous pensé de cette aide ?</h1>
               <div class="fr-grid-row">
                 <div class="fr-col-9">
                   <p>
@@ -29,9 +29,41 @@
                       :total="4"
                     />
 
+                    <fieldset class="fr-fieldset">
+                      <legend class="fr-fieldset__legend">Connaissiez-vous cette aide ?</legend>
+                      <div class="fr-fieldset__element fr-fieldset__element--inline">
+                        <div class="fr-radio-group">
+                          <input type="radio" id="radio-inline-1" name="radio-inline" />
+                          <label class="fr-label" for="radio-inline-1">Oui</label>
+                        </div>
+                      </div>
+                      <div class="fr-fieldset__element fr-fieldset__element--inline">
+                        <div class="fr-radio-group">
+                          <input type="radio" id="radio-inline-2" name="radio-inline" />
+                          <label class="fr-label" for="radio-inline-2">Non</label>
+                        </div>
+                      </div>
+                    </fieldset>
+
+                    <fieldset class="fr-fieldset">
+                      <legend class="fr-fieldset__legend">Comptez-vous demander cette aide ?</legend>
+                      <div class="fr-fieldset__element fr-fieldset__element--inline">
+                        <div class="fr-radio-group">
+                          <input type="radio" id="radio-inline-2" name="radio-inline-2" />
+                          <label class="fr-label" for="radio-inline-2">Oui</label>
+                        </div>
+                      </div>
+                      <div class="fr-fieldset__element fr-fieldset__element--inline">
+                        <div class="fr-radio-group">
+                          <input type="radio" id="radio-inline-3" name="radio-inline-2" />
+                          <label class="fr-label" for="radio-inline-3">Non</label>
+                        </div>
+                      </div>
+                    </fieldset>
+
                     <div class="flex flex-column fr-input-group">
-                      <label class="fr-label" for="commentaire">Comment pourrions-nous l'améliorer ?</label>
-                      <textarea v-model="commentaire" id="commentaire" name="commentaire" rows="4" class="fr-input" />
+                      <label class="fr-label" for="pourquoi">Pourquoi ?</label>
+                      <textarea v-model="pourquoi" id="pourquoi" name="pourquoi" rows="4" class="fr-input" />
                     </div>
 
                     <button
@@ -64,7 +96,7 @@
   }>();
 
   const notation = ref<number>(props.notation ?? 0);
-  const commentaire = defineModel<string>('commentaire');
+  const pourquoi = defineModel<string>('pourquoi');
 
   watch(
     () => props.notation,
@@ -75,6 +107,6 @@
 
   function envoyerFeedbackAction() {
     console.log(notation);
-    console.log(commentaire);
+    console.log(pourquoi);
   }
 </script>

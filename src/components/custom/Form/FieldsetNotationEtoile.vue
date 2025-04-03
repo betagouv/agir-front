@@ -12,7 +12,7 @@
         name="rating"
         :value="index"
         :id="`rating${index}`"
-        :aria-label="`${index} étoile(s)`"
+        :aria-label="`${index} étoiles`"
         @change.prevent="modifierNote(index)"
         @focus="setFocus(index)"
         @blur="unsetFocus()"
