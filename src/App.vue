@@ -13,7 +13,8 @@
         titre="J'agis est un nouveau service !"
       />
     </div>
-    <main id="contenu" class="background--main">
+
+    <main id="contenu" class="background--main" role="main">
       <router-view />
     </main>
 

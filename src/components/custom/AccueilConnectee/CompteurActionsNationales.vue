@@ -1,6 +1,9 @@
 <template>
   <div class="root fr-container flex flex-column flex-center fr-pt-10w fr-pb-16w">
-    <h2 class="fr-h2 text--white text--center flex flex-column flex-center align-items--center">
+    <h2
+      class="fr-h2 text--white text--center flex flex-column flex-center align-items--center"
+      :aria-label="`${aidesNationalesRealisees ?? 0} actions réalisées ensemble partout en France`"
+    >
       <CompteurDynamique :valeur="aidesNationalesRealisees ?? 0" />
       <span class="fr-mt-4w">Actions réalisées ensemble partout en France</span>
     </h2>
