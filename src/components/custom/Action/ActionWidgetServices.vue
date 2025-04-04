@@ -1,5 +1,5 @@
 <template>
-  <section class="fr-mt-2w fr-mb-4w fr-mx-3w">
+  <section class="fr-mt-2w fr-mb-4w fr-mx-3w" v-if="services.length > 0">
     <div v-for="service in services" :key="service.type">
       <WidgetServiceRecettes
         v-if="service.type === 'recettes'"
