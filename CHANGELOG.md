@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.1.0](https://github.com/betagouv/agir-front/compare/v2.0.1...v2.1.0) (2025-04-04)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* Ajout du paramètre pour les personnes en situation de handicap dans le simulateur aide vélo ([#1021](https://github.com/betagouv/agir-front/issues/1021)) ([0ae3243](https://github.com/betagouv/agir-front/commit/0ae32431a14cae6220f401a0b67af215c57d2055))
+
+
+### 🐛 Corrections de bogues
+
+* navigation enchainement kycs ([#1026](https://github.com/betagouv/agir-front/issues/1026)) ([f90b42a](https://github.com/betagouv/agir-front/commit/f90b42a866328c3e6229da8012d8c43204062048))
+
 ## [2.0.1](https://github.com/betagouv/agir-front/compare/v2.0.0...v2.0.1) (2025-04-03)
 
 
