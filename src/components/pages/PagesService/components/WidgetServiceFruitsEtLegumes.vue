@@ -11,7 +11,9 @@
           name: RouteServiceName.FRUITS_ET_LEGUMES,
           params: { thematiqueId: MenuThematiques.getThematiqueData(ClefThematiqueAPI.alimentation).url },
         }"
-        >Voir tous
+        :title="`Voir tous les fruits et légumes pour le mois de ${moisCourantLabel}`"
+      >
+        Voir tous
       </router-link>
     </div>
     <div class="flex">
