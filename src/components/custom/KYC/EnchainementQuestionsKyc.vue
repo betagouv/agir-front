@@ -1,7 +1,9 @@
 <template>
   <div v-if="!afficherFinKyc && questionsViewModel">
+    {{ etapeCourante + 1 }}
+    {{ questionsViewModel.questions.map(q => q.id) }}
     <div v-for="(questionViewModel, index) in questionsViewModel.questions" :key="index">
-      <div v-show="index === etapeCourante">
+      <div v-if="index === etapeCourante">
         <p class="text--bleu fr-grid-row align-items--center fr-py-2w">
           <button
             v-if="index !== 0"
@@ -24,7 +26,7 @@
     </div>
   </div>
 
-  <slot name="fin" v-if="afficherFinKyc" />
+  <slot v-if="afficherFinKyc" name="fin" />
 </template>
 
 <script lang="ts" setup>
@@ -48,12 +50,15 @@
   const etapeCourante = ref<number>(0);
   const afficherFinKyc = ref<boolean>(false);
 
-  onMounted(() => {
-    chargerEnchainementKycs();
-    const premiereQuestionNonRep =
-      questionsViewModel.value?.questions.findIndex(question => !question.aDejaEteRepondu) || -1;
-    etapeCourante.value = premiereQuestionNonRep !== -1 ? premiereQuestionNonRep : 0;
+  onMounted(async () => {
+    await chargerEnchainementKycs();
+    etapeCourante.value = premierChargement();
   });
+
+  function premierChargement() {
+    const index = questionsViewModel.value?.questions.findIndex(q => !q.aDejaEteRepondu);
+    return index !== undefined && index !== -1 ? index : 0;
+  }
 
   async function chargerEnchainementKycs() {
     const usecase = new RecupererEnchainementQuestionsUsecase(new QuestionRepositoryAxios());
@@ -66,10 +71,18 @@
 
   const passerEtapeSuivante = async () => {
     await chargerEnchainementKycs();
-    etapeCourante.value++;
+
+    const indexNonRepondu = questionsViewModel.value?.questions.findIndex(q => !q.aDejaEteRepondu);
+    console.log(indexNonRepondu);
     if (etapeCourante.value === questionsViewModel.value?.questions.length) {
       afficherFinKyc.value = true;
       emit('finKycAtteinte');
+      return;
+    } else if (indexNonRepondu === -1 && etapeCourante.value !== questionsViewModel.value?.questions.length) {
+      etapeCourante.value++;
+      console.log('coouco');
+    } else {
+      etapeCourante.value = indexNonRepondu || 0;
     }
   };
 
