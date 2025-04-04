@@ -36,8 +36,3 @@
     await router.push({ path: RouteBilanCarbonePath.BILAN_CARBONE });
   };
 </script>
-<style scoped>
-  .fr-btn {
-    min-height: auto;
-  }
-</style>

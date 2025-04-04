@@ -1,7 +1,5 @@
 <template>
   <div v-if="!afficherFinKyc && questionsViewModel">
-    {{ etapeCourante + 1 }}
-    {{ questionsViewModel.questions.map(q => q.id) }}
     <div v-for="(questionViewModel, index) in questionsViewModel.questions" :key="index">
       <div v-if="index === etapeCourante">
         <p class="text--bleu fr-grid-row align-items--center fr-py-2w">
@@ -51,13 +49,17 @@
   const afficherFinKyc = ref<boolean>(false);
 
   onMounted(async () => {
+    etapeCourante.value = trouverIndexNonReponduSinon0();
     await chargerEnchainementKycs();
-    etapeCourante.value = premierChargement();
   });
 
-  function premierChargement() {
-    const index = questionsViewModel.value?.questions.findIndex(q => !q.aDejaEteRepondu);
+  function trouverIndexNonReponduSinon0() {
+    const index = trouverIndexNonRepondu();
     return index !== undefined && index !== -1 ? index : 0;
+  }
+
+  function trouverIndexNonRepondu(): number {
+    return questionsViewModel.value?.questions.findIndex(q => !q.aDejaEteRepondu) ?? -1;
   }
 
   async function chargerEnchainementKycs() {
@@ -71,19 +73,15 @@
 
   const passerEtapeSuivante = async () => {
     await chargerEnchainementKycs();
+    const indexNonRepondu = trouverIndexNonRepondu();
+    const nouvelleEtapeCourante = indexNonRepondu !== -1 ? indexNonRepondu : etapeCourante.value + 1;
 
-    const indexNonRepondu = questionsViewModel.value?.questions.findIndex(q => !q.aDejaEteRepondu);
-    console.log(indexNonRepondu);
-    if (etapeCourante.value === questionsViewModel.value?.questions.length) {
+    if (nouvelleEtapeCourante === questionsViewModel.value?.questions.length) {
       afficherFinKyc.value = true;
       emit('finKycAtteinte');
-      return;
-    } else if (indexNonRepondu === -1 && etapeCourante.value !== questionsViewModel.value?.questions.length) {
-      etapeCourante.value++;
-      console.log('coouco');
-    } else {
-      etapeCourante.value = indexNonRepondu || 0;
     }
+
+    etapeCourante.value = nouvelleEtapeCourante;
   };
 
   const toggleNavigationClavier = estActive => {
