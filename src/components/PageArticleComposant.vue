@@ -24,7 +24,7 @@
         </div>
         <div
           v-if="utilisateurStore().estConnecte"
-          class="print-hidden fr-grid-row fr-grid-row--middle flex-space-between border border-radius--md fr-p-2w"
+          class="print-hidden fr-grid-row fr-grid-row--middle flex-space-between border fr-p-2w"
         >
           <span class="fr-m-0 fr-text--bold fr-text--md">Comment avez-vous trouvé cet article ?</span>
           <Notation @rated="noterLarticle" />
@@ -40,8 +40,7 @@
       </div>
     </div>
     <div class="fr-col-12 fr-col-md-4 print-hidden">
-      <div class="fr-grid-row flex-center background--white border border-radius--md fr-p-2w gap--small">
-        <PartageReseauxSociaux />
+      <div class="fr-grid-row flex-center background--white border fr-p-2w gap--small">
         <div v-if="utilisateurStore().estConnecte">
           <button
             v-if="!article.estEnFavori"
@@ -63,9 +62,13 @@
         </button>
       </div>
 
-      <div v-if="article.partenaire" class="fr-mt-2w background--white border border-radius--md fr-p-2w">
+      <div v-if="article.partenaire" class="fr-mt-2w background--white border fr-p-2w">
         <p class="fr-mb-0">Proposé par</p>
         <img :alt="article.partenaire.nom" :src="article.partenaire.logo" class="fr-mt-5v max-full-width" />
+      </div>
+
+      <div class="flex flex-center fr-mt-2w fr-p-2w background--white border">
+        <PartageReseauxSociaux />
       </div>
     </div>
   </div>

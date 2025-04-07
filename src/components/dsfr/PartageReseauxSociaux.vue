@@ -16,7 +16,6 @@
         </a>
       </li>
       <li>
-        <!-- Les paramètres de la reqûete doivent être URI-encodés (ex: encodeURIComponent() en js) -->
         <a
           id="share-7095"
           :href="`https://twitter.com/intent/tweet?url=${url}`"
@@ -70,5 +69,5 @@
   import '@gouvfr/dsfr/dist/component/share/share.min.css';
   import { ref } from 'vue';
 
-  const url = ref<string>('https://agir-front-dev.osc-fr1.scalingo.io/article/xxx/163');
+  const url = ref<string>(window.location.href);
 </script>
