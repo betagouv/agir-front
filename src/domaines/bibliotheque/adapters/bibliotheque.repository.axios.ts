@@ -87,7 +87,9 @@ export class BibliothequeRepositoryAxios implements BibliothequeRepository {
     if (titreParam) {
       paramsArray.push(titreParam);
     }
-    if (filtreFavoris) {
+    if (filtreFavoris && articleLus) {
+      paramsArray.push('include=favoris&include=lu');
+    } else if (filtreFavoris) {
       paramsArray.push('include=favoris');
     } else if (articleLus) {
       paramsArray.push('include=lu');

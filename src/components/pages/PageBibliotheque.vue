@@ -22,10 +22,7 @@
         <div v-else-if="bibliothequeViewModel.articles.length === 0">
           <div class="text--center">
             <img alt="" src="/bibliotheque_illustration.svg" />
-            <h3 class="fr-h4 fr-mt-2w">Débloquez des articles en complétant des missions !</h3>
-            <router-link :to="{ name: RouteCoachName.ACCUEIL_CONNECTEE }" class="fr-btn fr-btn--lg">
-              Retourner à l'accueil
-            </router-link>
+            <p class="fr-h4 fr-mt-2w">Aucun article ne correspond à votre recherche</p>
           </div>
         </div>
         <div v-else class="fr-grid-row fr-grid-row--gutters">
@@ -57,7 +54,6 @@
   import { ChargerBibliothequeUsecase } from '@/domaines/bibliotheque/chargerBibliotheque.usecase';
   import { FiltrerBibliothequeUsecase } from '@/domaines/bibliotheque/filtrerBibliotheque.usecase';
   import { BibliothequeViewModel } from '@/domaines/bibliotheque/ports/bibliotheque.presenter';
-  import { RouteCoachName } from '@/router/coach/routeCoachName';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const { id: utilisateurId } = utilisateurStore().utilisateur;
