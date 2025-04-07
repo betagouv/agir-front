@@ -553,17 +553,19 @@
   resolved "https://registry.yarnpkg.com/@iarna/toml/-/toml-3.0.0.tgz#ccde5292fe9d348bbe93fe90d579fc442b72b0b3"
   integrity sha512-td6ZUkz2oS3VeleBcN+m//Q6HlCFCPrnI0FZhrt/h4XqLEdOyYp2u21nd8MdsR+WJy5r9PTDaHTDDfhf4H4l6Q==
 
-"@iframe-resizer/core@5.3.3":
-  version "5.3.3"
-  resolved "https://registry.yarnpkg.com/@iframe-resizer/core/-/core-5.3.3.tgz#d03fe7c27be44d456aafa9b4c3a80d8a8757356c"
-  integrity sha512-DnR8PwoG5Nmv8Xgzop39cIRMeOg3bLsvsApw+LlKqfmN6I8miUAlFXB+vpuYm62l/jWjaQ6r8sTsvBHBof8Esg==
-
-"@iframe-resizer/vue@^5.3.3":
-  version "5.3.3"
-  resolved "https://registry.yarnpkg.com/@iframe-resizer/vue/-/vue-5.3.3.tgz#4fd0be5e0131ac583480ae813006b508736073be"
-  integrity sha512-T5NkOP98a2NdIFEEBENjvhBCxhtPRqxIuIXMticMnAxS56xogSElY2qD3uJu2wnJMHhntyAlk4PHrRTf9gyZEQ==
+"@iframe-resizer/core@5.4.4":
+  version "5.4.4"
+  resolved "https://registry.yarnpkg.com/@iframe-resizer/core/-/core-5.4.4.tgz#ae9c0d754e86fa86285831e45d1141f23962f8bf"
+  integrity sha512-4gUll8twzfrGOKsCHRCZM45E+q/EmTaQqwXjKUdBPJZaQauN3OPZo217h36Q3L8bUV7K6iKSaHQxngjA5/mLmg==
   dependencies:
-    "@iframe-resizer/core" "5.3.3"
+    auto-console-group "1.2.5"
+
+"@iframe-resizer/vue@^5.4.4":
+  version "5.4.4"
+  resolved "https://registry.yarnpkg.com/@iframe-resizer/vue/-/vue-5.4.4.tgz#2535a325a71b78368b2a97bee0b911de5d8466b7"
+  integrity sha512-CnMX7hBxlTo3Aaa8XrT3TzJ1d0zx4f9xHv1/07Y2jufxBbut4YX/YrNiKHpkPSrYBfFKXVabCr8iE3qfc2wqjA==
+  dependencies:
+    "@iframe-resizer/core" "5.4.4"
 
 "@img/sharp-darwin-arm64@0.33.5":
   version "0.33.5"
@@ -1959,6 +1961,11 @@ asynckit@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/asynckit/-/asynckit-0.4.0.tgz#c79ed97f7f34cb8f2ba1bc9790bcc366474b4b79"
   integrity sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q==
+
+auto-console-group@1.2.5:
+  version "1.2.5"
+  resolved "https://registry.yarnpkg.com/auto-console-group/-/auto-console-group-1.2.5.tgz#fdf48f00a4853b50f57c15a7e239786c3a87310c"
+  integrity sha512-04gZ21WgVHlzfC/Kp+Zvel7tKGgSXX9KSm3pezrh1OU4KElxiEJCdRm2T8ntiOWkTHfFMIrX0/OhiTUO74K27Q==
 
 available-typed-arrays@^1.0.6, available-typed-arrays@^1.0.7:
   version "1.0.7"
