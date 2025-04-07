@@ -1,6 +1,7 @@
 import { ServiceRechercheBase } from '@/domaines/serviceRecherche/catalogue/serviceRecherche';
 import { ServiceRecherchePresDeChezNousPresenter } from '@/domaines/serviceRecherche/presDeChezNous/ports/serviceRecherchePresDeChezNous.presenter';
 import { ServiceRecherchePresDeChezNousRepository } from '@/domaines/serviceRecherche/presDeChezNous/ports/serviceRecherchePresDeChezNous.repository';
+import { Coordonnees } from '@/shell/coordonneesType';
 
 interface ServiceRecherchePresDeChezNousResultat {
   id: string;
@@ -27,11 +28,13 @@ export class RecupererServicePresDeChezNousUsecase {
     idService: string,
     nombreMaxResultats: number,
     recupererServiceRecherchePresDeChezNousPresenter: ServiceRecherchePresDeChezNousPresenter,
+    coordonnees?: Coordonnees,
   ) {
     const service = await this.serviceRecherchePresDeChezNousRepository.recupererService(
       idUtilisateur,
       idService,
       nombreMaxResultats,
+      coordonnees,
     );
     if (service.estEnErreur) {
       recupererServiceRecherchePresDeChezNousPresenter.presenteErreur();

@@ -2,6 +2,7 @@ import { AxiosFactory, intercept401 } from '@/axios.factory';
 import { ServiceRecherchePresDeChezNousRepository } from '@/domaines/serviceRecherche/presDeChezNous/ports/serviceRecherchePresDeChezNous.repository';
 import { ServiceRecherchePresDeChezNousResultatDetail } from '@/domaines/serviceRecherche/presDeChezNous/recupererDetailServicePresDeChezNous.usecase';
 import { ServiceRecherchePresDeChezNous } from '@/domaines/serviceRecherche/presDeChezNous/recupererServicePresDeChezNous.usecase';
+import { Coordonnees } from '@/shell/coordonneesType';
 
 interface ServiceRechercheApiModelResultatsModel {
   resultats: ServiceRechercheApiModel[];
@@ -51,6 +52,7 @@ export class ServiceRecherchePresDeChezNousAxios implements ServiceRecherchePres
     idUtilisateur: string,
     categorie: string,
     nombreMaxResultats: number,
+    coordonnees?: Coordonnees,
   ): Promise<ServiceRecherchePresDeChezNous> {
     const idService = 'proximite';
     const axiosInstance = AxiosFactory.getAxios();
@@ -66,6 +68,8 @@ export class ServiceRecherchePresDeChezNousAxios implements ServiceRecherchePres
           categorie,
           nombre_max_resultats: nombreMaxResultats,
           rayon_metres: 5000,
+          latitude: coordonnees?.latitude,
+          longitude: coordonnees?.longitude,
         },
       );
 

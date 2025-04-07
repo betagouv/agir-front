@@ -31,12 +31,8 @@
           :key="adresse.label"
           aria-selected="false"
           @click="envoyerCoordonnees(adresse)"
-          @mouseenter="
-            () => {
-              console.log('mettre le aria-selected');
-            }
-          "
         />
+        <!--        mettre aria selected sur hover-->
       </ul>
     </dialog>
   </div>
@@ -46,13 +42,13 @@
   import axios from 'redaxios';
   import { ref } from 'vue';
   import { useDebouncedFn } from '@/composables/useDebounce';
+  import { Coordonnees } from '@/shell/coordonneesType';
 
   type FeatureApiModel = {
     geometry: { coordinates: number[] };
     properties: { label: string };
   };
-  type Coordonnees = { latitude: number; longitude: number };
-  type Adresse = { label: string; latitude: number; longitude: number };
+  type Adresse = { label: string; coordonnees: Coordonnees };
 
   const coordonnees = defineModel<Coordonnees>();
   const adressesAffichees = ref<Adresse[]>([]);
@@ -75,8 +71,10 @@
     axios.get(url).then(response => {
       adressesAffichees.value = response.data.features.map((feature: FeatureApiModel) => ({
         label: feature.properties.label,
-        latitude: feature.geometry.coordinates[1],
-        longitude: feature.geometry.coordinates[0],
+        coordonnees: {
+          latitude: feature.geometry.coordinates[1],
+          longitude: feature.geometry.coordinates[0],
+        },
       }));
     });
 
@@ -87,8 +85,8 @@
     recherche.value = adresse.label;
     adressesAffichees.value = [];
     coordonnees.value = {
-      latitude: adresse.latitude,
-      longitude: adresse.longitude,
+      latitude: adresse.coordonnees.latitude,
+      longitude: adresse.coordonnees.longitude,
     };
     dialogOuverte.value = false;
   }

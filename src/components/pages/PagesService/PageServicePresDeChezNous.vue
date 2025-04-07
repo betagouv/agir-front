@@ -121,8 +121,8 @@
   let nombreMaxResultats = 10;
   const typeDeRecherche = ref<string>('');
 
-  watch(coordonnees, (newValue, oldValue) => {
-    console.log('Coordonnées changées:', oldValue, '→', newValue);
+  watch(coordonnees, () => {
+    lancerRecherche();
   });
 
   async function lancerRecherche() {
@@ -134,6 +134,7 @@
         vm => (serviceRecherchePresDeChezNousViewModel.value = vm),
         error => (serviceErreur.value = error),
       ),
+      coordonnees.value,
     );
 
     isLoading.value = false;
