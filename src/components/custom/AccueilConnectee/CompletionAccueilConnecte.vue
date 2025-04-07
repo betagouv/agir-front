@@ -34,9 +34,7 @@
                   class="flex flex-column align-items--center flex-space-around text--center bordure-droite fr-mr-md-3v"
                 >
                   <span class="gros-nombre">{{ progression.nombreActionsTerminees || 0 }}</span>
-                  <span>
-                    {{ gererPluriel(progression.nombreActionsTerminees || 0, 'Action terminée', 'Actions terminées') }}
-                  </span>
+                  {{ gererPluriel(progression.nombreActionsTerminees || 0, 'Action terminée', 'Actions terminées') }}
                 </p>
               </div>
               <div
