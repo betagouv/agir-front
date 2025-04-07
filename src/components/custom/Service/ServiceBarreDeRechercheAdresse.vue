@@ -10,18 +10,18 @@
         aria-autocomplete="list"
         :aria-expanded="dialogOuverte"
         v-model="recherche"
-        @input="onInput"
+        @input="chargerAdresses"
+        @focus="ouvrirDialogueSiNecessaire"
         @blur="cacherDialogue"
         class="fr-input"
         placeholder="Rechercher"
         type="search"
         id="recherche-adresse-input"
         name="recherche-adresse-input"
-        @focus="ouvrirDialogueSiNecessaire"
       />
     </div>
 
-    <dialog class="adresseDialogue shadow" :open="dialogOuverte">
+    <dialog class="adresseDialogue shadow" :open="dialogOuverte" ref="dialogRef">
       <ul v-if="adressesAffichees" id="adresse-menu" role="listbox" class="list-style-none fr-p-0 fr-m-0">
         <li
           role="option"
@@ -54,8 +54,9 @@
   const adressesAffichees = ref<Adresse[]>([]);
   const recherche = ref<string>('');
   const dialogOuverte = ref<boolean>(false);
+  const dialogRef = ref<HTMLDialogElement>();
 
-  const { debounced: onInput } = useDebouncedFn(() => {
+  const { debounced: chargerAdresses } = useDebouncedFn(() => {
     chargerAdressesSimilaires(recherche.value);
   }, 500);
 
@@ -93,9 +94,14 @@
 
   function cacherDialogue() {
     // Pour ne pas clash avec le @click sur le li
-    setTimeout(() => {
-      dialogOuverte.value = false;
-    }, 100);
+    requestAnimationFrame(() => {
+      const active = document.activeElement;
+      const clickedInsideDialog = dialogRef.value?.contains(active);
+
+      if (!clickedInsideDialog) {
+        dialogOuverte.value = false;
+      }
+    });
   }
 
   function ouvrirDialogueSiNecessaire() {
@@ -108,7 +114,7 @@
 <style>
   .adresseDialogue {
     width: 100%;
-    z-index: 1;
+    z-index: 5;
     overflow: visible;
     padding: 0;
     border: none;
