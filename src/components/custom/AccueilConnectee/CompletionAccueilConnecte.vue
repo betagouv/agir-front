@@ -32,10 +32,9 @@
               <div class="fr-col-6">
                 <p
                   class="flex flex-column align-items--center flex-space-around text--center bordure-droite fr-mr-md-3v"
-                  :aria-label="`${progression.nombreActionsTerminees || 0} actions terminées`"
                 >
-                  <span aria-hidden="true" class="gros-nombre">{{ progression.nombreActionsTerminees || 0 }}</span>
-                  <span aria-hidden="true">
+                  <span class="gros-nombre">{{ progression.nombreActionsTerminees || 0 }}</span>
+                  <span>
                     {{ gererPluriel(progression.nombreActionsTerminees || 0, 'Action terminée', 'Actions terminées') }}
                   </span>
                 </p>
@@ -44,16 +43,9 @@
                 v-if="progression.pourcentageCompletionBilan < 100"
                 class="fr-col-6 flex flex-column align-items--center"
               >
-                <p
-                  class="flex flex-column align-items--center fr-mb-3v text--center"
-                  :aria-label="`${progression.pourcentageCompletionBilan || 0} % Mon bilan environnemental - complétion`"
-                >
-                  <CercleProgression
-                    :pourcentage="progression.pourcentageCompletionBilan || 0"
-                    class="fr-mb-1w"
-                    aria-hidden="true"
-                  />
-                  <span aria-hidden="true">Mon bilan environnemental</span>
+                <p class="flex flex-column align-items--center fr-mb-3v text--center">
+                  <CercleProgression :pourcentage="progression.pourcentageCompletionBilan || 0" class="fr-mb-1w" />
+                  <span>Mon bilan environnemental</span>
                 </p>
                 <router-link
                   :to="{ name: RouteBilanCarboneName.BILAN_CARBONE }"
@@ -62,10 +54,10 @@
                 </router-link>
               </div>
               <div v-else class="fr-col-6 flex flex-column align-items--center flex-space-around">
-                <p :aria-label="`${progression.tonneBilan} Tonnes par an`" class="text--center fr-mb-0">
-                  <span aria-hidden="true" class="gros-nombre fr-text--bold fr-mt-4w" v-text="progression.tonneBilan" />
-                  <span aria-hidden="true" class="text--3xl fr-text--bold">T</span>
-                  <span aria-hidden="true">/ an</span>
+                <p class="text--center fr-mb-0">
+                  <span class="gros-nombre fr-text--bold fr-mt-4w" v-text="progression.tonneBilan" />
+                  <span class="text--3xl fr-text--bold">T</span>
+                  <span>/ an</span>
                 </p>
                 <router-link
                   :to="{ name: RouteBilanCarboneName.BILAN_CARBONE }"
