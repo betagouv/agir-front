@@ -77,7 +77,7 @@
         </div>
       </div>
     </div>
-    <div id="modal-menu" aria-labelledby="button-menu" class="fr-header__menu fr-modal">
+    <div id="modal-menu" aria-label="Menu" class="fr-header__menu fr-modal">
       <div class="fr-container">
         <button aria-controls="modal-menu" class="fr-btn--close fr-btn" title="Fermer">Fermer</button>
         <div class="fr-header__menu-links"></div>

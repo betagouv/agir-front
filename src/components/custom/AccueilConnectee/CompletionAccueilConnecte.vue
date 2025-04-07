@@ -34,9 +34,7 @@
                   class="flex flex-column align-items--center flex-space-around text--center bordure-droite fr-mr-md-3v"
                 >
                   <span class="gros-nombre">{{ progression.nombreActionsTerminees || 0 }}</span>
-                  <span>
-                    {{ gererPluriel(progression.nombreActionsTerminees || 0, 'Action terminée', 'Actions terminées') }}
-                  </span>
+                  {{ gererPluriel(progression.nombreActionsTerminees || 0, 'Action terminée', 'Actions terminées') }}
                 </p>
               </div>
               <div
@@ -54,15 +52,15 @@
                 </router-link>
               </div>
               <div v-else class="fr-col-6 flex flex-column align-items--center flex-space-around">
-                <p :aria-label="`${progression.tonneBilan} Tonnes par an`" class="text--center fr-mb-0">
-                  <span class="gros-nombre fr-text--bold fr-mt-4w">{{ progression.tonneBilan }}</span
-                  ><span class="text--3xl fr-text--bold">T</span>
-                  / an
+                <p class="text--center fr-mb-0">
+                  <span class="gros-nombre fr-text--bold fr-mt-4w" v-text="progression.tonneBilan" />
+                  <span class="text--3xl fr-text--bold">T</span>
+                  <span>/ an</span>
                 </p>
                 <router-link
                   :to="{ name: RouteBilanCarboneName.BILAN_CARBONE }"
                   class="fr-link fr-link--icon-right fr-icon-arrow-right-line text--center"
-                  >Mon bilan<br />
+                  >Mon bilan<br aria-hidden="true" />
                   environnemental
                 </router-link>
               </div>

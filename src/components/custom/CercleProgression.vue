@@ -1,12 +1,14 @@
 <template>
-  <div class="cercle-progression">
-    <svg viewBox="0 0 100 100" class="cercle">
+  <span class="cercle-progression">
+    <svg viewBox="0 0 100 100" class="cercle" aria-hidden="true">
       <circle cx="50" cy="50" r="45" class="background" />
 
       <circle cx="50" cy="50" r="45" class="progression" :style="progressionStyle" />
     </svg>
-    <div class="pourcentage fr-mt-1v">{{ pourcentage }}<span class="pourcent">%</span></div>
-  </div>
+    <span class="pourcentage fr-mt-1v">
+      {{ pourcentage }}<span class="pourcent">%</span><span class="fr-sr-only">de complétion pour</span>
+    </span>
+  </span>
 </template>
 
 <script setup lang="ts">
