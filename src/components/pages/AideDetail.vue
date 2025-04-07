@@ -46,6 +46,7 @@
             class="fr-btn"
             rel="noopener external"
             target="_blank"
+            @click="trackAide(aide.id, AIDE_TRACKING.DEMANDE)"
           >
             Commencer votre démarche
           </a>
@@ -57,6 +58,19 @@
             Estimer le montant des aides
           </router-link>
         </div>
+
+        <h3 class="fr-h6">En savoir plus</h3>
+        <p>
+          Pour plus d'information, vous pouvez vous rendre sur la page dédiée
+          <a
+            :href="aide.urlSource"
+            rel="noopener external"
+            target="_blank"
+            @click="trackAide(aide.id, AIDE_TRACKING.INFOS)"
+          >
+            en cliquant ici
+          </a>
+        </p>
       </div>
     </div>
     <div class="fr-col-12 fr-col-md-4 fr-mt-3w fr-mb-4w">
@@ -80,6 +94,7 @@
   import { Aide } from '@/domaines/aides/chargementAides.usecase';
   import { MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
   import { TagThematique } from '@/domaines/thematiques/TagThematique';
+  import { AIDE_TRACKING, trackAide } from '@/shell/tracking/aideTracking';
 
   const props = defineProps<{ aide: Aide }>();
   const notation = ref<number>(0);

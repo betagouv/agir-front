@@ -32,6 +32,7 @@ class ChargementAidesRepositoryForTest implements ChargementAidesRepository {
           isSimulateur: true,
           montantMaximum: 15000,
           urlCommencerVotreDemarche: 'urlCommencerVotreDemarche',
+          urlSource: '',
         },
         {
           id: 'id-2',
@@ -49,6 +50,7 @@ class ChargementAidesRepositoryForTest implements ChargementAidesRepository {
           contenu: '<h3>Titre test</h3><p>lorem ipsum dolor test</p>',
           idDuContenu: '',
           isSimulateur: false,
+          urlSource: '',
         },
         {
           id: 'id-3',
@@ -66,6 +68,7 @@ class ChargementAidesRepositoryForTest implements ChargementAidesRepository {
           contenu: '<h3>Titre test</h3><p>lorem ipsum dolor test</p>',
           idDuContenu: '',
           isSimulateur: true,
+          urlSource: '',
         },
         {
           id: 'id-4',
@@ -83,6 +86,7 @@ class ChargementAidesRepositoryForTest implements ChargementAidesRepository {
           contenu: '<h3>Titre test</h3><p>lorem ipsum dolor test</p>',
           idDuContenu: '',
           isSimulateur: true,
+          urlSource: '',
         },
         {
           id: 'id-5',
@@ -100,6 +104,7 @@ class ChargementAidesRepositoryForTest implements ChargementAidesRepository {
           contenu: '<h3>Titre test</h3><p>lorem ipsum dolor test</p>',
           idDuContenu: '',
           isSimulateur: true,
+          urlSource: '',
         },
         {
           id: 'id-6',
@@ -117,6 +122,7 @@ class ChargementAidesRepositoryForTest implements ChargementAidesRepository {
           contenu: '<h3>Titre test</h3><p>lorem ipsum dolor test</p>',
           idDuContenu: '',
           isSimulateur: true,
+          urlSource: '',
         },
         {
           id: 'id-7',
@@ -138,6 +144,7 @@ class ChargementAidesRepositoryForTest implements ChargementAidesRepository {
             logoUrl: 'https://',
             nom: 'Partenaire test',
           },
+          urlSource: '',
         },
       ],
     });
