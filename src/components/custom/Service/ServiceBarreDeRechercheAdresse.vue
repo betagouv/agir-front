@@ -47,9 +47,12 @@
           @click="envoyerCoordonnees(adresse)"
           @mouseenter="indexSelectionne = index"
         >
-          <div class="flex flex-space-between align-items--center">
-            <span class="text--semi-bold">{{ adresse.nom }}</span>
-            <span>{{ adresse.ville }} ({{ adresse.contexte }})</span>
+          <span class="fr-hidden-sm" v-text="adresse.label" />
+          <div class="fr-hidden fr-unhidden-sm">
+            <div class="flex flex-space-between align-items--center">
+              <span class="text--semi-bold">{{ adresse.nom }}</span>
+              <span>{{ adresse.ville }} ({{ adresse.contexte }})</span>
+            </div>
           </div>
         </li>
       </ul>
@@ -65,9 +68,16 @@
 
   type FeatureApiModel = {
     geometry: { coordinates: number[] };
-    properties: { name: string; city: string; context: string; postcode: string };
+    properties: { label: string; name: string; city: string; context: string; postcode: string };
   };
-  type Adresse = { nom: string; ville: string; contexte: string; codePostal: string; coordonnees: Coordonnees };
+  type Adresse = {
+    label: string;
+    nom: string;
+    ville: string;
+    contexte: string;
+    codePostal: string;
+    coordonnees: Coordonnees;
+  };
 
   const coordonnees = defineModel<Coordonnees>();
   const adressesAffichees = ref<Adresse[]>([]);
@@ -94,6 +104,7 @@
     axios.get(url).then(response => {
       adressesAffichees.value = response.data.features.map(
         (feature: FeatureApiModel): Adresse => ({
+          label: feature.properties.label,
           nom: feature.properties.name,
           ville: feature.properties.city,
           contexte: feature.properties.context,
