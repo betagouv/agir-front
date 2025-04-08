@@ -1,10 +1,10 @@
 <template>
-  <section class="fr-mt-2w fr-mb-4w fr-mx-3w" v-if="services.length > 0">
+  <section v-if="services.length > 0" class="fr-mt-2w fr-mb-4w fr-mx-3w">
     <div v-for="service in services" :key="service.type">
       <WidgetServiceRecettes
         v-if="service.type === 'recettes'"
+        :nombre-de-cartes-par-ligne="3"
         :parametre-de-recherche="service.parametreDuService"
-        nombre-de-cartes-par-ligne="3"
       >
         <template #titre>
           <h2>Besoin <span class="text--bold">d'inspiration</span> ?</h2>
