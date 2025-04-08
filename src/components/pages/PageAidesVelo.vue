@@ -7,44 +7,44 @@
     <AidesResultat
       v-else
       :is-loading="isLoading"
-      titre-categorie-aide="Acheter un vélo neuf"
       :simulation-aides-view-model="simulationAidesVeloViewModel"
       :titre="titrePage"
       sous-titre="Les aides vélo disponibles"
+      titre-categorie-aide="Acheter un vélo neuf"
     >
       <template v-slot:serviceSelect>
         <ServiceSelect
           id="état-vélo"
           :options="OptionsEtatVelo"
-          @update="updateEtatDuVelo"
           label="Choisir l'état du vélo"
+          @update="updateEtatDuVelo"
         />
       </template>
       <template v-slot:asideResultatAides>
         <div class="background--white border border-radius--md fr-p-3w fr-mb-3w">
           <h2 class="fr-h5">Paramètres</h2>
-          <form class="fr-mb-1w">
+          <form class="fr-mb-1w" @submit.prevent="simulerAideVelo">
             <div class="fr-grid-col justify-content--start">
               <BoutonsRadio
-                name="situation-handicap"
-                legende="Êtes-vous en situation de handicap ?"
-                legende-size="m"
-                orientation="horizontal"
-                col="fr-col"
+                v-model="estEnSituationDeHandicap"
+                :default-value="estEnSituationDeHandicap"
                 :options="[
                   { label: 'Oui', value: true },
                   { label: 'Non', value: false },
                 ]"
+                col="fr-col"
+                legende="Êtes-vous en situation de handicap ?"
+                legende-size="m"
+                name="situation-handicap"
                 options-size="md"
-                :default-value="estEnSituationDeHandicap"
-                v-model="estEnSituationDeHandicap"
+                orientation="horizontal"
               />
               <InputNumberVertical
                 v-model="prixDuVelo"
                 :default-value="prixDuVelo"
                 :min-value="0"
-                name="prix-du-velo"
                 label="Prix du vélo (€)"
+                name="prix-du-velo"
                 size="md"
               />
               <div class="fr-mt-2v">
@@ -74,16 +74,16 @@
         </div>
         <AsideAideVelo
           :code-postal="codePostal"
-          :ville="commune"
-          :revenu-fiscal="revenuFiscal"
           :nombre-de-parts-fiscales="nombreDePartsFiscales"
+          :revenu-fiscal="revenuFiscal"
+          :ville="commune"
         />
       </template>
     </AidesResultat>
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
   import { onMounted, ref } from 'vue';
   import AidesResultat from '@/components/custom/Aides/AidesResultat.vue';
   import AsideAideVelo from '@/components/custom/Aides/AidesVeloAside.vue';
