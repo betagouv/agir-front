@@ -1,7 +1,13 @@
 <template>
-  <div class="fr-search-bar position--relative" id="header-search" role="search" @blur="cacherDialogue">
+  <form
+    @submit.prevent
+    class="fr-search-bar position--relative"
+    id="header-search"
+    role="search"
+    @blur="cacherDialogue"
+  >
     <label class="fr-label" for="recherche-adresse-input">Recherche</label>
-    <div class="fr-input-wrap fr-icon-search-line">
+    <div class="fr-input-wrap fr-icon-search-line full-width">
       <input
         role="combobox"
         autocomplete="off"
@@ -25,17 +31,21 @@
       <ul v-if="adressesAffichees" id="adresse-menu" role="listbox" class="list-style-none fr-p-0 fr-m-0">
         <li
           role="option"
-          class="fr-p-1w text--semi-bold"
+          class="fr-p-1w"
           v-for="adresse in adressesAffichees"
-          v-text="adresse.label"
-          :key="adresse.label"
+          :key="adresse.nom"
           aria-selected="false"
           @click="envoyerCoordonnees(adresse)"
-        />
+        >
+          <div class="flex flex-space-between align-items--center">
+            <span class="text--semi-bold">{{ adresse.nom }}</span>
+            <span>{{ adresse.ville }} ({{ adresse.contexte }})</span>
+          </div>
+        </li>
         <!--        mettre aria selected sur hover-->
       </ul>
     </dialog>
-  </div>
+  </form>
 </template>
 
 <script setup lang="ts">
@@ -46,9 +56,9 @@
 
   type FeatureApiModel = {
     geometry: { coordinates: number[] };
-    properties: { label: string };
+    properties: { name: string; city: string; context: string; postcode: string };
   };
-  type Adresse = { label: string; coordonnees: Coordonnees };
+  type Adresse = { nom: string; ville: string; contexte: string; codePostal: string; coordonnees: Coordonnees };
 
   const coordonnees = defineModel<Coordonnees>();
   const adressesAffichees = ref<Adresse[]>([]);
@@ -61,8 +71,8 @@
   }, 500);
 
   const chargerAdressesSimilaires = (adresse: string) => {
+    adressesAffichees.value = [];
     if (adresse.length <= 3) {
-      adressesAffichees.value = [];
       cacherDialogue();
       return;
     }
@@ -70,21 +80,25 @@
     const adresseEncodee = encodeURIComponent(adresse).replace('%20', '+');
     const url = `https://api-adresse.data.gouv.fr/search/?q=${adresseEncodee}&limit=8`;
     axios.get(url).then(response => {
-      adressesAffichees.value = response.data.features.map((feature: FeatureApiModel) => ({
-        label: feature.properties.label,
-        coordonnees: {
-          latitude: feature.geometry.coordinates[1],
-          longitude: feature.geometry.coordinates[0],
-        },
-      }));
+      adressesAffichees.value = response.data.features.map(
+        (feature: FeatureApiModel): Adresse => ({
+          nom: feature.properties.name,
+          ville: feature.properties.city,
+          contexte: feature.properties.context,
+          codePostal: feature.properties.postcode,
+          coordonnees: {
+            latitude: feature.geometry.coordinates[1],
+            longitude: feature.geometry.coordinates[0],
+          },
+        }),
+      );
     });
 
     dialogOuverte.value = true;
   };
 
   function envoyerCoordonnees(adresse: Adresse) {
-    recherche.value = adresse.label;
-    adressesAffichees.value = [];
+    recherche.value = `${adresse.nom}, ${adresse.ville} (${adresse.codePostal})`;
     coordonnees.value = {
       latitude: adresse.coordonnees.latitude,
       longitude: adresse.coordonnees.longitude,
@@ -118,6 +132,7 @@
     overflow: visible;
     padding: 0;
     border: none;
+    top: 100%;
   }
 
   .adresseDialogue li {
