@@ -19,6 +19,7 @@
           :question-view-model="questionViewModel"
           wording-bouton="Continuer"
           @update:soumission-kyc="passerEtapeSuivante"
+          @update:passer-la-question="passerLaQuestion"
         />
       </div>
     </template>
@@ -64,6 +65,10 @@
       new ListeQuestionsDansLeSimulateurPresenterImpl(vm => (questionsViewModel.value = vm)),
     );
   }
+
+  const passerLaQuestion = () => {
+    passerEtapeSuivante();
+  };
 
   const passerEtapeSuivante = async () => {
     await chargerQuestionsSuivantes();
