@@ -1,5 +1,31 @@
 # Changelog
 
+## [2.2.0](https://github.com/betagouv/agir-front/compare/v2.1.0...v2.2.0) (2025-04-08)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* amelioration rapide a11y ([#1027](https://github.com/betagouv/agir-front/issues/1027)) ([a7e9dfa](https://github.com/betagouv/agir-front/commit/a7e9dfa2d32bdad23f6346f25a4442ac3a1555de))
+* les articles lus ne rapportent plus de points ([#1025](https://github.com/betagouv/agir-front/issues/1025)) ([ccdf4fc](https://github.com/betagouv/agir-front/commit/ccdf4fc5fca3fbf81b51b67aa6a7707999ca3a07))
+
+
+### 🐛 Corrections de bogues
+
+* aide velo - validation du formulaire ([#1036](https://github.com/betagouv/agir-front/issues/1036)) ([b2b8a01](https://github.com/betagouv/agir-front/commit/b2b8a01746561a7aed27ed1f4476dbf8b5d2dddd))
+* filtrer favoris et non lu sur la bibliotheque ([#1023](https://github.com/betagouv/agir-front/issues/1023)) ([1d684fe](https://github.com/betagouv/agir-front/commit/1d684fe135ec2c2d17d8e261c69ac910a8d13a1b))
+* resultats du simulateur voiture ([#1024](https://github.com/betagouv/agir-front/issues/1024)) ([f4cddf9](https://github.com/betagouv/agir-front/commit/f4cddf9b0e9cae5deb81bf666f77bb1826da1c25))
+
+
+### 👷 Autres changements
+
+* amélioration rendu du contenu CMS ([#1037](https://github.com/betagouv/agir-front/issues/1037)) ([47b9433](https://github.com/betagouv/agir-front/commit/47b94331b29c8caa45d9e960166baea4f26e2e51))
+* Bump @iframe-resizer/vue from 5.3.3 to 5.4.4 ([#1031](https://github.com/betagouv/agir-front/issues/1031)) ([4d3f1e2](https://github.com/betagouv/agir-front/commit/4d3f1e2022c354cf82e1d053ab54079ea2e07746))
+* Bump @sentry/vite-plugin from 3.2.2 to 3.3.1 ([#1034](https://github.com/betagouv/agir-front/issues/1034)) ([9d33c94](https://github.com/betagouv/agir-front/commit/9d33c942e8fd3a3bdeabdeb72f6bb1b0e8dcf6a8))
+* Bump marked from 15.0.7 to 15.0.8 ([#1035](https://github.com/betagouv/agir-front/issues/1035)) ([c717478](https://github.com/betagouv/agir-front/commit/c71747829083c92261e6529294c65b632ca2c7f7))
+* Bump sharp from 0.33.5 to 0.34.0 ([#1033](https://github.com/betagouv/agir-front/issues/1033)) ([fcbb0ad](https://github.com/betagouv/agir-front/commit/fcbb0ad48ccbb0f3607a4bcd2c798e6e8c10d908))
+* Bump vite from 6.2.4 to 6.2.5 ([#1028](https://github.com/betagouv/agir-front/issues/1028)) ([1b25dee](https://github.com/betagouv/agir-front/commit/1b25deeca5e588a0772f551016eec6c08a067395))
+* Bump vue-tsc from 2.2.4 to 2.2.8 ([#1032](https://github.com/betagouv/agir-front/issues/1032)) ([5d14d6c](https://github.com/betagouv/agir-front/commit/5d14d6c4f3443341ed643b70384f6f4baa6bb0df))
+
 ## [2.1.0](https://github.com/betagouv/agir-front/compare/v2.0.1...v2.1.0) (2025-04-04)
 
 
