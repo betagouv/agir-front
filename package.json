@@ -22,7 +22,7 @@
     "@gouvfr/dsfr": "1.13.1",
     "@hotjar/browser": "1.0.9",
     "@iframe-resizer/vue": "^5.4.4",
-    "@sentry/vite-plugin": "^3.2.2",
+    "@sentry/vite-plugin": "^3.3.1",
     "@sentry/vue": "9.10.1",
     "@vue-leaflet/vue-leaflet": "^0.10.1",
     "chart.js": "4.4.8",
