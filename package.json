@@ -28,7 +28,7 @@
     "chart.js": "4.4.8",
     "jwt-decode": "4.0.0",
     "leaflet": "^1.9.4",
-    "marked": "^15.0.7",
+    "marked": "^15.0.8",
     "pinia": "3.0.1",
     "pinia-plugin-persistedstate": "4.2.0",
     "redaxios": "0.5.1",
