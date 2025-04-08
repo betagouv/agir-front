@@ -71,10 +71,9 @@
   };
 
   const passerEtapeSuivante = async () => {
-    emit('finKycAtteinte');
     await chargerQuestionsSuivantes();
     etapeCourante.value++;
-    if (etapeCourante.value === props.kycs.length) {
+    if (etapeCourante.value === questionsViewModel.value.length) {
       afficherFinKyc.value = true;
       emit('finKycAtteinte');
       const terminerActionUsecase = new TerminerActionUsecase(
