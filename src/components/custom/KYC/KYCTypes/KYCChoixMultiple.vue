@@ -4,7 +4,7 @@
   </h2>
   <InputCheckbox
     v-model="reponse"
-    :est-resetable="true"
+    :est-resetable="false"
     :options="
       questionViewModel.reponses_possibles.map(reponsePossible => ({
         id: reponsePossible.id,
@@ -14,7 +14,7 @@
     "
   />
 </template>
-<script setup lang="ts">
+<script lang="ts" setup>
   import InputCheckbox from '@/components/custom/Form/InputCheckbox.vue';
   import { QuestionViewModel } from '@/domaines/kyc/adapters/listeQuestionsThematique.presenter.impl';
 
