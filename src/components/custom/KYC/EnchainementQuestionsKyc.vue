@@ -19,6 +19,7 @@
           :question-view-model="questionViewModel"
           wording-bouton="Continuer"
           @update:soumission-kyc="passerEtapeSuivante"
+          @update:passer-la-question="passerLaQuestion"
         />
       </div>
     </div>
@@ -70,6 +71,15 @@
       new ListesQuestionsThematiquePresenter(vm => (questionsViewModel.value = vm)),
     );
   }
+
+  const passerLaQuestion = () => {
+    if (etapeCourante.value + 1 === questionsViewModel.value?.questions.length) {
+      afficherFinKyc.value = true;
+      emit('finKycAtteinte');
+    } else {
+      etapeCourante.value++;
+    }
+  };
 
   const passerEtapeSuivante = async () => {
     await chargerEnchainementKycs();

@@ -19,6 +19,7 @@
           :question-view-model="questionViewModel"
           wording-bouton="Continuer"
           @update:soumission-kyc="passerEtapeSuivante"
+          @update:passer-la-question="passerLaQuestion"
         />
       </div>
     </template>
@@ -65,11 +66,14 @@
     );
   }
 
+  const passerLaQuestion = () => {
+    passerEtapeSuivante();
+  };
+
   const passerEtapeSuivante = async () => {
-    emit('finKycAtteinte');
     await chargerQuestionsSuivantes();
     etapeCourante.value++;
-    if (etapeCourante.value === props.kycs.length) {
+    if (etapeCourante.value === questionsViewModel.value.length) {
       afficherFinKyc.value = true;
       emit('finKycAtteinte');
       const terminerActionUsecase = new TerminerActionUsecase(

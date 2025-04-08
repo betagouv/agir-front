@@ -43,7 +43,10 @@
       class="fr-mt-1w fr-mb-3w"
     />
 
-    <button :title="wordingBouton" class="fr-btn fr-mt-0" type="submit">
+    <button v-if="!reponse || reponse?.length === 0" class="fr-btn fr-btn--secondary" @click.prevent="passerLaQuestion">
+      Passer la question
+    </button>
+    <button v-else :title="wordingBouton" class="fr-btn fr-mt-0" type="submit">
       {{ wordingBouton }}
     </button>
     <button
@@ -76,7 +79,10 @@
 
   const reponse = defineModel<string | string[]>('reponse');
   const props = defineProps<{ questionViewModel: QuestionViewModel; wordingBouton: string; styleDuTitre?: string }>();
-  const emit = defineEmits<{ (e: 'update:soumissionKyc', value: string[]): void }>();
+  const emit = defineEmits<{
+    (e: 'update:soumissionKyc', value: string[]): void;
+    (e: 'update:passer-la-question'): void;
+  }>();
 
   const questionViewModel = ref<QuestionViewModel>(props.questionViewModel);
   const { alerte, afficherAlerte } = useAlerte();
@@ -86,7 +92,7 @@
       props.questionViewModel.type === 'libre' ||
       props.questionViewModel.type === 'entier' ||
       props.questionViewModel.type === 'decimal'
-        ? (props.questionViewModel.reponses_possibles[0].label ?? '')
+        ? (props.questionViewModel.reponses_possibles[0]?.label ?? '')
         : (props.questionViewModel.reponses_possibles.filter(r => r.checked).map(r => r.id) ?? []);
   });
 
@@ -125,6 +131,10 @@
       );
     }
     emit('update:soumissionKyc', [reponse.value].flat());
+  };
+
+  const passerLaQuestion = () => {
+    emit('update:passer-la-question');
   };
 
   const validerChoixAucuneReponse = async () => {
