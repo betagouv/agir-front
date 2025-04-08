@@ -2,6 +2,7 @@ import { AxiosFactory, intercept401 } from '@/axios.factory';
 import { ServiceRechercheLongueVieAuxObjetsRepository } from '@/domaines/serviceRecherche/longueVieAuxObjets/ports/serviceRechercheLongueVieAuxObjets.repository';
 import { ServiceRechercheLongueVieAuxObjetsResultatDetail } from '@/domaines/serviceRecherche/longueVieAuxObjets/recupererDetailServiceLongueVieAuxObjets.usecase';
 import { ServiceRechercheLongueVieAuxObjets } from '@/domaines/serviceRecherche/longueVieAuxObjets/recupererServiceLongueVieAuxObjets.usecase';
+import { Coordonnees } from '@/shell/coordonneesType';
 
 interface ServiceRechercheApiModel {
   id: string;
@@ -52,6 +53,7 @@ export class ServiceRechercheLongueVieAuxObjetsAxios implements ServiceRecherche
     idUtilisateur: string,
     categorie: string,
     nombreMaxResultats: number,
+    coordonnees?: Coordonnees,
   ): Promise<ServiceRechercheLongueVieAuxObjets> {
     const idService = 'longue_vie_objets';
     const axiosInstance = AxiosFactory.getAxios();
@@ -67,6 +69,8 @@ export class ServiceRechercheLongueVieAuxObjetsAxios implements ServiceRecherche
           categorie,
           nombre_max_resultats: nombreMaxResultats,
           rayon_metres: 5000,
+          latitude: coordonnees?.latitude,
+          longitude: coordonnees?.longitude,
         },
       );
 

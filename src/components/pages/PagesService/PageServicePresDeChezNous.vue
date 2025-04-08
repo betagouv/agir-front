@@ -120,7 +120,7 @@
   const usecase = new RecupererServicePresDeChezNousUsecase(new ServiceRecherchePresDeChezNousAxios());
 
   const serviceErreur = ref<string | null>(null);
-  let nombreMaxResultats = 10;
+  let nombreMaxResultats = 9;
   const typeDeRecherche = ref<string>('');
 
   watch(coordonnees, () => {
@@ -147,12 +147,12 @@
   });
 
   const chargerPlusDeResultats = () => {
-    nombreMaxResultats += 10;
+    nombreMaxResultats += 9;
     lancerRecherche();
   };
 
   const updateType = (type: string) => {
-    nombreMaxResultats = 10;
+    nombreMaxResultats = 9;
     typeDeRecherche.value = type;
     lancerRecherche();
   };

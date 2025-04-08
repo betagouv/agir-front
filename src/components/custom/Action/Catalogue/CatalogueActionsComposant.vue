@@ -1,7 +1,7 @@
 <template>
   <div class="fr-grid-row fr-grid-row--gutters">
     <section v-for="action in actions" :key="action.code" :class="cardClasses">
-      <div class="fr-card fr-enlarge-link fr-card--horizontal relative">
+      <div class="fr-card fr-enlarge-link fr-card--horizontal relative fr-card--sm">
         <div class="fr-card__body">
           <div class="fr-card__content">
             <h2 class="fr-card__title">
