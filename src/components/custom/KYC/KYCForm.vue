@@ -43,7 +43,7 @@
       class="fr-mt-1w fr-mb-3w"
     />
 
-    <button v-if="!reponse || reponse?.length === 0" class="fr-btn" @click.prevent="passerLaQuestion">
+    <button v-if="!reponse || reponse?.length === 0" class="fr-btn fr-btn--secondary" @click.prevent="passerLaQuestion">
       Passer la question
     </button>
     <button v-else :title="wordingBouton" class="fr-btn fr-mt-0" type="submit">
@@ -92,7 +92,7 @@
       props.questionViewModel.type === 'libre' ||
       props.questionViewModel.type === 'entier' ||
       props.questionViewModel.type === 'decimal'
-        ? (props.questionViewModel.reponses_possibles[0].label ?? '')
+        ? (props.questionViewModel.reponses_possibles[0]?.label ?? '')
         : (props.questionViewModel.reponses_possibles.filter(r => r.checked).map(r => r.id) ?? []);
   });
 
