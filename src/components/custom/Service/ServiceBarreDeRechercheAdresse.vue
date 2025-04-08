@@ -12,13 +12,14 @@
         role="combobox"
         autocomplete="off"
         aria-controls="adresse-menu"
-        aria-activedescendant="mettre-descendant-hovered"
+        :aria-activedescendant="indexSelectionne >= 0 ? `option-${indexSelectionne}` : ''"
         aria-autocomplete="list"
         :aria-expanded="dialogOuverte"
         v-model="recherche"
         @input="chargerAdresses"
         @focus="ouvrirDialogueSiNecessaire"
         @blur="cacherDialogue"
+        @keydown="naviguerListe"
         class="fr-input"
         placeholder="Rechercher"
         type="search"
@@ -28,21 +29,29 @@
     </div>
 
     <dialog class="adresseDialogue shadow" :open="dialogOuverte" ref="dialogRef">
-      <ul v-if="adressesAffichees" id="adresse-menu" role="listbox" class="list-style-none fr-p-0 fr-m-0">
+      <ul
+        v-if="adressesAffichees"
+        id="adresse-menu"
+        role="listbox"
+        class="list-style-none fr-p-0 fr-m-0"
+        @mouseleave="indexSelectionne = -1"
+      >
         <li
           role="option"
           class="fr-p-1w"
-          v-for="adresse in adressesAffichees"
+          :id="`option-${index}`"
+          v-for="(adresse, index) in adressesAffichees"
+          :class="indexSelectionne === index ? 'adresseSelectionee' : ''"
           :key="adresse.nom"
-          aria-selected="false"
+          :aria-selected="indexSelectionne === index"
           @click="envoyerCoordonnees(adresse)"
+          @mouseenter="indexSelectionne = index"
         >
           <div class="flex flex-space-between align-items--center">
             <span class="text--semi-bold">{{ adresse.nom }}</span>
             <span>{{ adresse.ville }} ({{ adresse.contexte }})</span>
           </div>
         </li>
-        <!--        mettre aria selected sur hover-->
       </ul>
     </dialog>
   </form>
@@ -65,6 +74,7 @@
   const recherche = ref<string>('');
   const dialogOuverte = ref<boolean>(false);
   const dialogRef = ref<HTMLDialogElement>();
+  const indexSelectionne = ref<number>(-1);
 
   const { debounced: chargerAdresses } = useDebouncedFn(() => {
     chargerAdressesSimilaires(recherche.value);
@@ -72,6 +82,8 @@
 
   const chargerAdressesSimilaires = (adresse: string) => {
     adressesAffichees.value = [];
+    indexSelectionne.value = -1;
+
     if (adresse.length <= 3) {
       cacherDialogue();
       return;
@@ -98,6 +110,7 @@
   };
 
   function envoyerCoordonnees(adresse: Adresse) {
+    indexSelectionne.value = -1;
     recherche.value = `${adresse.nom}, ${adresse.ville} (${adresse.codePostal})`;
     coordonnees.value = {
       latitude: adresse.coordonnees.latitude,
@@ -123,6 +136,30 @@
       dialogOuverte.value = true;
     }
   }
+
+  function naviguerListe(event: KeyboardEvent) {
+    if (!adressesAffichees.value.length) return;
+
+    switch (event.key) {
+      case 'ArrowDown':
+        dialogOuverte.value = true;
+        indexSelectionne.value = (indexSelectionne.value + 1) % adressesAffichees.value.length;
+        event.preventDefault();
+        break;
+      case 'ArrowUp':
+        dialogOuverte.value = true;
+        indexSelectionne.value =
+          (indexSelectionne.value - 1 + adressesAffichees.value.length) % adressesAffichees.value.length;
+        event.preventDefault();
+        break;
+      case 'Enter':
+        if (indexSelectionne.value >= 0) {
+          envoyerCoordonnees(adressesAffichees.value[indexSelectionne.value]);
+          event.preventDefault();
+        }
+        break;
+    }
+  }
 </script>
 
 <style>
@@ -139,7 +176,7 @@
     cursor: pointer;
   }
 
-  .adresseDialogue li:hover {
+  .adresseSelectionee {
     background-color: #0a76f6;
     color: white;
   }
