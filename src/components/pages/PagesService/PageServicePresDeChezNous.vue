@@ -29,7 +29,9 @@
           />
           à proximité de chez moi
         </h1>
-        <p>Produits locaux, bio, de saisons et vendeurs de vrac, pour une cuisine savoureuse et responsable</p>
+        <p class="fr-mb-4w">
+          Produits locaux, bio, de saisons et vendeurs de vrac, pour une cuisine savoureuse et responsable
+        </p>
 
         <section class="fr-my-3w">
           <h2 class="fr-h3 fr-mb-2w">Recherche par adresse</h2>

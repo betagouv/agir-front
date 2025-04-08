@@ -6,25 +6,25 @@
     role="search"
     @blur="cacherDialogue"
   >
-    <label class="fr-label" for="recherche-adresse-input">Recherche</label>
+    <label class="fr-label" for="recherche-adresse-input">Renseignez votre adresse</label>
     <div class="fr-input-wrap fr-icon-search-line full-width">
       <input
+        type="search"
         role="combobox"
+        placeholder="Une adresse, une ville, un code postal, ..."
         autocomplete="off"
-        aria-controls="adresse-menu"
+        id="recherche-adresse-input"
+        name="recherche-adresse-input"
+        class="fr-input"
         :aria-activedescendant="indexSelectionne >= 0 ? `option-${indexSelectionne}` : ''"
         aria-autocomplete="list"
+        aria-controls="adresse-menu"
         :aria-expanded="dialogOuverte"
         v-model="recherche"
         @input="chargerAdresses"
         @focus="ouvrirDialogueSiNecessaire"
         @blur="cacherDialogue"
         @keydown="naviguerListe"
-        class="fr-input"
-        placeholder="Rechercher"
-        type="search"
-        id="recherche-adresse-input"
-        name="recherche-adresse-input"
       />
     </div>
 
@@ -81,14 +81,15 @@
 
   const coordonnees = defineModel<Coordonnees>();
   const adressesAffichees = ref<Adresse[]>([]);
-  const recherche = ref<string>('');
+  const indexSelectionne = ref<number>(-1);
   const dialogOuverte = ref<boolean>(false);
   const dialogRef = ref<HTMLDialogElement>();
-  const indexSelectionne = ref<number>(-1);
+  const recherche = ref<string>('');
+  const DELAI_DEBOUNCE = 500;
 
   const { debounced: chargerAdresses } = useDebouncedFn(() => {
     chargerAdressesSimilaires(recherche.value);
-  }, 500);
+  }, DELAI_DEBOUNCE);
 
   const chargerAdressesSimilaires = (adresse: string) => {
     adressesAffichees.value = [];
@@ -99,7 +100,7 @@
       return;
     }
 
-    const adresseEncodee = encodeURIComponent(adresse).replace('%20', '+');
+    const adresseEncodee = encodeURIComponent(adresse).replaceAll('%20', '+');
     const url = `https://api-adresse.data.gouv.fr/search/?q=${adresseEncodee}&limit=8`;
     axios.get(url).then(response => {
       adressesAffichees.value = response.data.features.map(
