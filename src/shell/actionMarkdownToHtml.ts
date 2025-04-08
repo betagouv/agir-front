@@ -15,6 +15,11 @@ renderer.heading = ({ tokens, depth }) => {
   return `<h${depth}>${text}</h${depth}>`;
 };
 
+renderer.link = ({ href, title, text }) => {
+  const parsedText = marked.parseInline(text);
+  return `<a href="${href}" title="${title}" target="_blank" rel="noopener noreferrer">${parsedText}</a>`;
+};
+
 marked.setOptions({
   renderer: renderer,
 });

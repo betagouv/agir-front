@@ -2,18 +2,19 @@
   <h1>{{ article.titre }}</h1>
   <div class="fr-grid-row fr-grid-row--gutters">
     <div class="fr-col-12 fr-col-md-8">
-      <div class="border fr-p-6v background--white border-radius--md">
+      <div class="border fr-p-6v background--white">
         <h2 class="fr-h3">{{ article.sousTitre }}</h2>
         <div class="cms__content" v-html="article.texte" />
-        <div v-if="article.sources && article.sources.length > 0" class="fr-mb-4w print-hidden">
+        <div v-if="article.sources && article.sources.length > 0" class="fr-mt-2w fr-mb-4w print-hidden">
+          <hr />
           <p v-if="article.sources.length === 1" class="fr-text--xs">
-            <span class="fr-mr-1w">Source :</span>
+            <span class="fr-mr-1w text--bold">Source :</span>
             <a :href="article.sources[0].url" rel="noopener noreferrer" target="_blank">{{
               article.sources[0].label
             }}</a>
           </p>
           <div v-else class="fr-text--xs">
-            <span class="fr-mr-1w">Sources :</span>
+            <span class="fr-mr-1w text--bold">Sources :</span>
             <ul>
               <li v-for="source in article.sources" :key="source.label">
                 <a :href="source.url" rel="noopener noreferrer" target="_blank">{{ source.label }}</a>
