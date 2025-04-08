@@ -11,6 +11,10 @@
     font-size: 1.75rem;
 }
 
+.action h3 {
+    font-size: 1.35rem;
+}
+
 .action img {
     display: block;
     max-width: 75%;

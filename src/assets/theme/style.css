@@ -489,6 +489,10 @@
     border-spacing: 0;
 }
 
+.cms__content h2 {
+    font-size: 1.50rem;
+}
+
 .cms__content h3 {
     font-size: 1.25rem;
 }
