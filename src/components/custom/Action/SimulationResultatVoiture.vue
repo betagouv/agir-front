@@ -1,6 +1,6 @@
 <template>
   <div v-if="isLoading">
-    <p>Calcul de vos recommandations...</p>
+    <p>Calcul du résultat...</p>
     <div class="ball-loader fr-my-3w fr-mx-auto"></div>
   </div>
   <section v-else-if="resultatSimulationVoiture" class="fr-p-2w">
@@ -37,14 +37,14 @@
       </h2>
       <div class="fr-grid-row fr-grid-row--gutters">
         <SimulationResultatVoitureProposee
-          type="economique"
           v-if="resultatSimulationVoiture.resultatVoiturePlusEconomique"
           :resultat-simulation-voiture="resultatSimulationVoiture.resultatVoiturePlusEconomique"
+          type="economique"
         />
         <SimulationResultatVoitureProposee
-          type="ecologique"
           v-if="resultatSimulationVoiture.resultatVoiturePlusEcologique"
           :resultat-simulation-voiture="resultatSimulationVoiture.resultatVoiturePlusEcologique"
+          type="ecologique"
         />
       </div>
     </div>
