@@ -15,20 +15,20 @@
               v-model="onboardingPostCreationCompte().pseudo"
               :autofocus="true"
               :erreur="champsPseudoStatus"
+              :maxlength="12"
               :required="true"
               label="Votre pseudonyme"
               name="utilisateur-pseudo"
               @blur="onValidationPseudo"
-              :maxlength="12"
             />
 
             <InputDateDeNaissance
-              class="fr-mt-4w"
-              keyName="formulaire-inscription"
-              description="Nécessaire pour faciliter votre identification"
               v-if="!utilisateurStore().utilisateur.estUnUtilisateurFranceConnect"
-              v-model="onboardingPostCreationCompte().dateDeNaissance"
               ref="dateDeNaissanceComposant"
+              v-model="onboardingPostCreationCompte().dateDeNaissance"
+              class="fr-mt-4w"
+              description="Nécessaire pour faciliter votre identification"
+              keyName="formulaire-inscription"
               required
             />
           </div>
@@ -53,7 +53,8 @@
 
   const validerLaReponse = () => {
     if (!onValidationPseudo()) return;
-    if (!dateDeNaissanceComposant.value?.validation()) return;
+    if (!utilisateurStore().utilisateur.estUnUtilisateurFranceConnect && !dateDeNaissanceComposant.value?.validation())
+      return;
     router.push({ name: RouteCompteName.POST_CREATION_COMPTE_ETAPE_2 });
   };
   const champsPseudoStatus = ref({ message: '', afficher: false });
