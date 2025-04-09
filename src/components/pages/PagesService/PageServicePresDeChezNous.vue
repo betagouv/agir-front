@@ -35,7 +35,7 @@
 
         <section class="fr-my-3w">
           <h2 class="fr-h3 fr-mb-2w">Recherche par adresse</h2>
-          <p class="fr-mb-2w">Envie d'un résultat plus précis ?</p>
+          <p class="fr-mb-2w">Envie d'un résultat plus précis&nbsp;?</p>
           <ServiceBarreDeRechercheAdresse v-model="coordonnees" class="fr-col-12 fr-col-md-7" />
         </section>
 
