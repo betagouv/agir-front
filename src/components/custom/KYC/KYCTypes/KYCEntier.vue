@@ -1,16 +1,17 @@
 <template>
   <InputNumeric
-    v-model="reponse"
     :id="questionViewModel.id"
+    v-model="reponse"
     :default-value="questionViewModel.reponses_possibles[0].label"
     :label="{
       wording: questionViewModel.libelle,
       cssModifier: 'fr-h4',
     }"
+    :unite="questionViewModel.reponses_possibles[0].unite"
   />
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
   import InputNumeric from '@/components/custom/Form/InputNumeric.vue';
   import { QuestionViewModel } from '@/domaines/kyc/adapters/listeQuestionsThematique.presenter.impl';
 

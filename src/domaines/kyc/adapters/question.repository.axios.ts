@@ -15,7 +15,10 @@ export interface QuestionApiModel extends QuestionMosaicBooleanApiModel {
   type: 'libre' | 'choix_multiple' | 'choix_unique' | 'mosaic_boolean' | 'entier';
   reponse_unique: {
     value: string;
-    unite: string;
+    unite: {
+      abreviation: string;
+      long: string;
+    };
   };
   points: number;
   reponse_multiple: [
@@ -142,6 +145,12 @@ export class QuestionRepositoryAxios implements QuestionRepository {
       return {
         reponses_possibles: [question.reponse_unique.value],
         reponse: [question.reponse_unique.value],
+        unite: question.reponse_unique.unite
+          ? {
+              abreviation: question.reponse_unique.unite.abreviation,
+              libelleLong: question.reponse_unique.unite.long,
+            }
+          : undefined,
       } as ReponseKYCSimple;
     }
   }

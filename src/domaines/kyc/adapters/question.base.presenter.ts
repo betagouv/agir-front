@@ -106,6 +106,7 @@ export class QuestionViewModelBuilder {
       return (question.reponses as ReponseKYCSimple).reponses_possibles.map(reponse => ({
         id: reponse,
         label: reponse,
+        unite: (question.reponses as ReponseKYCSimple).unite,
       }));
   }
 }
