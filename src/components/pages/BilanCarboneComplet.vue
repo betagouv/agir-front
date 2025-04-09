@@ -70,7 +70,7 @@
     <BilanThematiquesListeCartes
       :thematiques-bilan="bilanCarboneViewModel.thematiquesBilan"
       colonnes="fr-col-md-3 fr-col-6"
-      sous-titre="Et obtenir des recommandations toujours plus personnalisées sur <span class='text--italic fr-text--bold'>J'Agis</span>"
+      sous-titre="Et obtenir des recommandations toujours plus personnalisées sur <span class='text--italic fr-text--bold'>J'agis</span>"
       titre="Affiner ou modifier mon bilan"
     />
   </section>

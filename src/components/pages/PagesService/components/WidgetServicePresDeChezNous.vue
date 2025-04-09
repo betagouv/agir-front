@@ -15,7 +15,11 @@
       </div>
     </div>
 
-    <ul class="flex flex-column list-style-none fr-p-0 fr-m-0" style="gap: 1rem">
+    <ul
+      class="flex flex-column list-style-none fr-p-0 fr-m-0"
+      style="gap: 1rem"
+      v-if="!serviceRecherchePresDeChezNousViewModel.aucunResultat"
+    >
       <li
         v-for="suggestion in (
           serviceRecherchePresDeChezNousViewModel as ServiceRecherchePresDeChezNousViewModelAvecResultats
@@ -28,6 +32,10 @@
         />
       </li>
     </ul>
+    <div v-else class="text--center fr-pt-md-5w">
+      <img alt="" height="250" src="/service_aucun_resultat.svg" />
+      <p class="fr-text--lg">😢 Aucun résultat n’est encore disponible pour votre localisation</p>
+    </div>
   </section>
 </template>
 
