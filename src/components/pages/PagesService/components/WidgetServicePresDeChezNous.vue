@@ -24,7 +24,7 @@
       >
         <ServiceCarteDsfr
           :suggestionsServiceViewModel="suggestion"
-          style-carte="fr-card--horizontal fr-card--horizontal-tier"
+          style-carte="fr-card--horizontal fr-card--horizontal-tier fr-card--sm"
         />
       </li>
     </ul>

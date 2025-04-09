@@ -616,15 +616,15 @@
 
 @keyframes colorChange {
     0% {
-        background: #ff4500;
+        background: #00A081;
     }
     33% {
-        background: #32cd32;
+        background: #DDB7E6;
     }
     66% {
-        background: #1e90ff;
+        background:#00A081;
     }
     100% {
-        background: #9932cc;
+        background: #DDB7E6;
     }
 }

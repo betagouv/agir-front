@@ -29,7 +29,16 @@
           />
           à proximité de chez moi
         </h1>
-        <p>Produits locaux, bio, de saisons et vendeurs de vrac, pour une cuisine savoureuse et responsable</p>
+        <p class="fr-mb-4w">
+          Produits locaux, bio, de saisons et vendeurs de vrac, pour une cuisine savoureuse et responsable
+        </p>
+
+        <section class="fr-my-3w">
+          <h2 class="fr-h3 fr-mb-2w">Recherche par adresse</h2>
+          <p class="fr-mb-2w">Envie d'un résultat plus précis&nbsp;?</p>
+          <ServiceBarreDeRechercheAdresse v-model="coordonnees" class="fr-col-12 fr-col-md-7" />
+        </section>
+
         <PageServiceTemplate :aside="(serviceRecherchePresDeChezNousViewModel as ServiceRechercheViewModelBase).aside">
           <div
             v-if="
@@ -84,9 +93,10 @@
 </template>
 
 <script lang="ts" setup>
-  import { onMounted, ref } from 'vue';
+  import { onMounted, ref, watch } from 'vue';
   import { useRoute } from 'vue-router';
   import PageServiceTemplate from '@/components/custom/Service/PageServiceTemplate.vue';
+  import ServiceBarreDeRechercheAdresse from '@/components/custom/Service/ServiceBarreDeRechercheAdresse.vue';
   import ServiceFavoris from '@/components/custom/Service/ServiceFavoris.vue';
   import ServiceListeCarte from '@/components/custom/Service/ServiceListeCarte.vue';
   import ServiceSelect from '@/components/custom/Service/ServiceSelect.vue';
@@ -104,13 +114,18 @@
   import { utilisateurStore } from '@/store/utilisateur';
 
   const isLoading = ref<boolean>(true);
+  const coordonnees = ref<{ latitude: number; longitude: number }>();
   const serviceRecherchePresDeChezNousViewModel = ref<ServiceRecherchePresDeChezNousViewModel>();
 
   const usecase = new RecupererServicePresDeChezNousUsecase(new ServiceRecherchePresDeChezNousAxios());
 
   const serviceErreur = ref<string | null>(null);
-  let nombreMaxResultats = 10;
+  let nombreMaxResultats = 9;
   const typeDeRecherche = ref<string>('');
+
+  watch(coordonnees, () => {
+    lancerRecherche();
+  });
 
   async function lancerRecherche() {
     await usecase.execute(
@@ -121,6 +136,7 @@
         vm => (serviceRecherchePresDeChezNousViewModel.value = vm),
         error => (serviceErreur.value = error),
       ),
+      coordonnees.value,
     );
 
     isLoading.value = false;
@@ -131,12 +147,12 @@
   });
 
   const chargerPlusDeResultats = () => {
-    nombreMaxResultats += 10;
+    nombreMaxResultats += 9;
     lancerRecherche();
   };
 
   const updateType = (type: string) => {
-    nombreMaxResultats = 10;
+    nombreMaxResultats = 9;
     typeDeRecherche.value = type;
     lancerRecherche();
   };
