@@ -1,5 +1,19 @@
 # Changelog
 
+## [2.3.0](https://github.com/betagouv/agir-front/compare/v2.2.0...v2.3.0) (2025-04-09)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* ajout des unités pour les kycs ([#1041](https://github.com/betagouv/agir-front/issues/1041)) ([9ed35d3](https://github.com/betagouv/agir-front/commit/9ed35d3a61d7a9ace49b20cb071a32ffb8a5d2c9))
+* partage d'un article par mail ou lien direct ([#1016](https://github.com/betagouv/agir-front/issues/1016)) ([5618ef2](https://github.com/betagouv/agir-front/commit/5618ef24f973f92f809e7ad0c387d3a23d184c58))
+* recherche par adresse service ([#1039](https://github.com/betagouv/agir-front/issues/1039)) ([224ca73](https://github.com/betagouv/agir-front/commit/224ca73c9fb532550d6854cbf517a339a48cd5d2))
+
+
+### 🐛 Corrections de bogues
+
+* questions dans les actions ([#1042](https://github.com/betagouv/agir-front/issues/1042)) ([5821e3e](https://github.com/betagouv/agir-front/commit/5821e3eb0c238032065a8aaa1196bdf39108929c))
+
 ## [2.2.0](https://github.com/betagouv/agir-front/compare/v2.1.0...v2.2.0) (2025-04-08)
 
 
