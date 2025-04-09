@@ -230,7 +230,7 @@
   import '@gouvfr/dsfr/dist/component/navigation/navigation.min.css';
   import { computed } from 'vue';
   import { useRoute } from 'vue-router';
-  import router, { RouteCommuneName } from '@/router';
+  import { RouteCommuneName } from '@/router';
   import { utilisateurStore } from '@/store/utilisateur';
   import ScoreHeader from '@/components/custom/ScoreHeader.vue';
   import LienDEvitement from '@/components/dsfr/LienDEvitement.vue';
@@ -261,7 +261,7 @@
 
   const logout = async () => {
     const utilisateurId = utilisateurStore().utilisateur.id;
-    await seDeconnecterUsecase.execute(utilisateurId, url => router.push({ path: url }));
+    await seDeconnecterUsecase.execute(utilisateurId, url => (window.location.href = url));
   };
 </script>
 
