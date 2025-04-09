@@ -12,6 +12,10 @@ export enum ThematiqueQuestion {
 export interface ReponseKYCSimple {
   reponses_possibles: string[];
   reponse: string[];
+  unite?: {
+    abreviation: string;
+    libelleLong: string;
+  };
 }
 
 export interface ReponseMosaic<T> {
@@ -31,6 +35,7 @@ export interface ReponseMultiple {
     estSelectionnee: boolean;
   }[];
 }
+
 export interface Question {
   id: string;
   libelle: string;

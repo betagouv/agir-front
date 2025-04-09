@@ -8,6 +8,10 @@ export interface ReponsePossibleViewModel {
   picto?: string;
   checked?: boolean;
   emoji?: string;
+  unite?: {
+    abreviation: string;
+    libelleLong: string;
+  };
 }
 
 export interface QuestionsViewModel {
