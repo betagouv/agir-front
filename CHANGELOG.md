@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.3.1](https://github.com/betagouv/agir-front/compare/v2.3.0...v2.3.1) (2025-04-09)
+
+
+### 🐛 Corrections de bogues
+
+* deconnexion ([#1045](https://github.com/betagouv/agir-front/issues/1045)) ([4951dee](https://github.com/betagouv/agir-front/commit/4951dee676e0785f0aeec36d736b2bc55264182d))
+* ne pas checker la date de naissance pour france connect ([#1044](https://github.com/betagouv/agir-front/issues/1044)) ([2869b35](https://github.com/betagouv/agir-front/commit/2869b35a0afe98bf969bdcc20efbbd008e420d5f))
+
 ## [2.3.0](https://github.com/betagouv/agir-front/compare/v2.2.0...v2.3.0) (2025-04-09)
 
 
