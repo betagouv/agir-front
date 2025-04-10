@@ -1,87 +1,70 @@
 <template>
   <div class="fr-container">
-    <div v-if="isLoading">
-      <BallLoader />
-    </div>
-    <div v-else>
-      <div v-if="serviceErreur">
-        <h1>Service indisponible</h1>
-        <p>{{ serviceErreur }}</p>
-      </div>
-      <div v-else>
-        <PageServiceTemplate :aside="(serviceRecherchePresDeChezNousViewModel as ServiceRechercheViewModelBase).aside">
-          <div
-            v-if="
-              (serviceRecherchePresDeChezNousViewModel as ServiceRecherchePresDeChezNousViewModelSansResultats)
-                .aucunResultat
-            "
-            class="text--center"
-          >
-            <img alt="" height="250" src="/service_aucun_resultat.svg" />
-            <p class="fr-text--lg">😢 Aucun résultat n’est encore disponible pour votre localisation</p>
-          </div>
-          <div v-else>
-            <h1 class="fr-h2 fr-mb-1w">
-              <ServiceSelect
-                id="categories"
-                :options="(serviceRecherchePresDeChezNousViewModel as ServiceRechercheViewModelBase).categories"
-                label="Choisir une catégorie"
-                @update="updateType"
-              />
-              à proximité de chez moi
-            </h1>
-            <p class="fr-mb-5w">
-              Produits locaux, bio, de saisons et vendeurs de vrac, pour une cuisine savoureuse et responsable
-            </p>
+    <ServiceSkeletonConditionnel
+      :is-loading="isLoading"
+      :view-model-existe="serviceRecherchePresDeChezNousViewModel !== undefined"
+      :message-erreur="serviceErreur"
+    >
+      <PageServiceTemplate
+        v-if="serviceRecherchePresDeChezNousViewModel?.aside"
+        :aside="serviceRecherchePresDeChezNousViewModel.aside"
+      >
+        <div v-if="serviceRecherchePresDeChezNousViewModel.aucunResultat" class="text--center">
+          <img alt="" height="250" src="/service_aucun_resultat.svg" />
+          <p class="fr-text--lg">😢 Aucun résultat n’est encore disponible pour votre localisation</p>
+        </div>
+        <div v-else>
+          <h1 class="fr-h2 fr-mb-1w">
+            <ServiceSelect
+              id="categories"
+              :options="serviceRecherchePresDeChezNousViewModel.categories"
+              label="Choisir une catégorie"
+              @update="updateType"
+            />
+            à proximité de chez moi
+          </h1>
+          <p class="fr-mb-5w">
+            Produits locaux, bio, de saisons et vendeurs de vrac, pour une cuisine savoureuse et responsable
+          </p>
 
-            <section
-              class="fr-my-6w background--white fr-px-2w fr-py-3w flex flex-space-between align-items--center flex-wrap gap--small"
-            >
-              <h2 class="fr-h4 fr-mb-0" id="recherche-par-adresse-label">Recherche par adresse</h2>
-              <ServiceBarreDeRechercheAdresse
-                v-model="coordonnees"
-                class="fr-col-12 fr-col-md-7"
-                labelId="recherche-par-adresse-label"
-              />
-            </section>
-            <section
-              v-if="
-                serviceRecherchePresDeChezNousViewModel &&
+          <section
+            class="fr-my-6w background--white fr-px-2w fr-py-3w flex flex-space-between align-items--center flex-wrap gap--small"
+          >
+            <h2 class="fr-h4 fr-mb-0" id="recherche-par-adresse-label">Recherche par adresse</h2>
+            <ServiceBarreDeRechercheAdresse
+              v-model="coordonnees"
+              class="fr-col-12 fr-col-md-7"
+              labelId="recherche-par-adresse-label"
+            />
+          </section>
+          <section v-if="serviceRecherchePresDeChezNousViewModel.favoris">
+            <ServiceFavoris
+              :services-recherche-favoris-view-model="serviceRecherchePresDeChezNousViewModel.favoris"
+              titre="Mes lieux favoris"
+            />
+          </section>
+          <section>
+            <h2 class="fr-h3">Suggestions</h2>
+            <ServiceListeCarte
+              :suggestions-service-view-model="
                 (serviceRecherchePresDeChezNousViewModel as ServiceRecherchePresDeChezNousViewModelAvecResultats)
-                  .favoris
+                  .suggestions
               "
+            />
+            <button
+              v-if="
+                (serviceRecherchePresDeChezNousViewModel as ServiceRecherchePresDeChezNousViewModelAvecResultats)
+                  .plusDeResultatsDisponibles
+              "
+              class="fr-link text--underline"
+              @click="chargerPlusDeResultats()"
             >
-              <ServiceFavoris
-                :services-recherche-favoris-view-model="
-                  (serviceRecherchePresDeChezNousViewModel as ServiceRecherchePresDeChezNousViewModelAvecResultats)
-                    .favoris!
-                "
-                titre="Mes lieux favoris"
-              />
-            </section>
-            <section>
-              <h2 class="fr-h3">Suggestions</h2>
-              <ServiceListeCarte
-                :suggestions-service-view-model="
-                  (serviceRecherchePresDeChezNousViewModel as ServiceRecherchePresDeChezNousViewModelAvecResultats)
-                    .suggestions
-                "
-              />
-              <button
-                v-if="
-                  (serviceRecherchePresDeChezNousViewModel as ServiceRecherchePresDeChezNousViewModelAvecResultats)
-                    .plusDeResultatsDisponibles
-                "
-                class="fr-link text--underline"
-                @click="chargerPlusDeResultats()"
-              >
-                Voir plus de résultats
-              </button>
-            </section>
-          </div>
-        </PageServiceTemplate>
-      </div>
-    </div>
+              Voir plus de résultats
+            </button>
+          </section>
+        </div>
+      </PageServiceTemplate>
+    </ServiceSkeletonConditionnel>
   </div>
 </template>
 
@@ -92,13 +75,11 @@
   import ServiceFavoris from '@/components/custom/Service/ServiceFavoris.vue';
   import ServiceListeCarte from '@/components/custom/Service/ServiceListeCarte.vue';
   import ServiceSelect from '@/components/custom/Service/ServiceSelect.vue';
-  import BallLoader from '@/components/custom/Thematiques/BallLoader.vue';
-  import { ServiceRechercheViewModelBase } from '@/domaines/serviceRecherche/catalogue/adapters/serviceRechercheViewModel';
+  import ServiceSkeletonConditionnel from '@/components/custom/Service/ServiceSkeletonConditionnel.vue';
   import {
     ServiceRecherchePresDeChezNousPresenterImpl,
     ServiceRecherchePresDeChezNousViewModel,
     ServiceRecherchePresDeChezNousViewModelAvecResultats,
-    ServiceRecherchePresDeChezNousViewModelSansResultats,
   } from '@/domaines/serviceRecherche/presDeChezNous/adapters/serviceRecherchePresDeChezNous.presenter.impl';
   import { ServiceRecherchePresDeChezNousAxios } from '@/domaines/serviceRecherche/presDeChezNous/adapters/serviceRecherchePresDeChezNous.repository.axios';
   import { RecupererServicePresDeChezNousUsecase } from '@/domaines/serviceRecherche/presDeChezNous/recupererServicePresDeChezNous.usecase';

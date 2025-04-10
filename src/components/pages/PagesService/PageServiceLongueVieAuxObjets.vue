@@ -1,19 +1,5 @@
 <template>
   <div class="fr-container">
-    <FilDAriane
-      :page-hierarchie="
-        useRoute().params.thematiqueId
-          ? [
-              {
-                label: `${MenuThematiques.getFromUrl(useRoute().params.thematiqueId as string).labelDansLeMenu}`,
-                url: `/thematique/${useRoute().params.thematiqueId}`,
-              },
-            ]
-          : []
-      "
-      page-courante="Service : Longue vie aux objets"
-    />
-
     <ServiceSkeletonConditionnel
       :is-loading="isLoading"
       :view-model-existe="serviceRechercheLongueVieAuxObjetsViewModel !== undefined"
@@ -23,18 +9,12 @@
         v-if="serviceRechercheLongueVieAuxObjetsViewModel?.aside"
         :aside="serviceRechercheLongueVieAuxObjetsViewModel.aside"
       >
-        <div
-          v-if="
-            (serviceRechercheLongueVieAuxObjetsViewModel as ServiceRechercheLongueVieAuxObjetsViewModelSansResultats)
-              .aucunResultat
-          "
-          class="text--center"
-        >
+        <div v-if="serviceRechercheLongueVieAuxObjetsViewModel.aucunResultat" class="text--center">
           <img alt="" height="250" src="/service_aucun_resultat.svg" />
           <p class="fr-text--lg">😢 Aucun résultat n’est encore disponible pour votre localisation</p>
         </div>
         <div v-else>
-          <h1 class="fr-h2">
+          <h1 class="fr-h2 fr-mb-1w">
             <ServiceSelect
               v-if="serviceRechercheLongueVieAuxObjetsViewModel?.categories"
               id="categories"
@@ -102,7 +82,6 @@
 
 <script lang="ts" setup>
   import { onMounted, ref, watch } from 'vue';
-  import { useRoute } from 'vue-router';
   import PageServiceTemplate from '@/components/custom/Service/PageServiceTemplate.vue';
   import ServiceBarreDeRechercheAdresse from '@/components/custom/Service/ServiceBarreDeRechercheAdresse.vue';
   import ServiceFavoris from '@/components/custom/Service/ServiceFavoris.vue';
@@ -110,16 +89,13 @@
   import ServiceSelect from '@/components/custom/Service/ServiceSelect.vue';
   import ServiceSkeletonCartes from '@/components/custom/Service/ServiceSkeletonCartes.vue';
   import ServiceSkeletonConditionnel from '@/components/custom/Service/ServiceSkeletonConditionnel.vue';
-  import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import {
     ServiceRechercheLongueVieAuxObjetsPresenterImpl,
     ServiceRechercheLongueVieAuxObjetsViewModel,
     ServiceRechercheLongueVieAuxObjetsViewModelAvecResultats,
-    ServiceRechercheLongueVieAuxObjetsViewModelSansResultats,
   } from '@/domaines/serviceRecherche/longueVieAuxObjets/adapters/serviceRechercheLongueVieAuxObjets.presenter.impl';
   import { ServiceRechercheLongueVieAuxObjetsAxios } from '@/domaines/serviceRecherche/longueVieAuxObjets/adapters/serviceRechercheLongueVieAuxObjets.repository.axios';
   import { RecupererServiceLongueVieAuxObjetsUsecase } from '@/domaines/serviceRecherche/longueVieAuxObjets/recupererServiceLongueVieAuxObjets.usecase';
-  import { MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const isLoading = ref<boolean>(true);
