@@ -6,12 +6,12 @@
     role="search"
     @blur="cacherDialogue"
   >
-    <label class="fr-label" for="recherche-adresse-input">Renseignez votre adresse</label>
+    <label class="fr-label" for="recherche-adresse-input" v-if="!labelId">Renseignez votre adresse</label>
     <div class="fr-input-wrap fr-icon-search-line full-width">
       <input
         type="search"
         role="combobox"
-        placeholder="Une adresse, une ville, un code postal, ..."
+        placeholder="Rechercher l'adresse de votre choix..."
         autocomplete="off"
         id="recherche-adresse-input"
         name="recherche-adresse-input"
@@ -20,6 +20,7 @@
         aria-autocomplete="list"
         aria-controls="adresse-menu"
         :aria-expanded="dialogOuverte"
+        :aria-labelledby="labelId"
         v-model="recherche"
         @input="chargerAdresses"
         @focus="ouvrirDialogueSiNecessaire"
@@ -65,6 +66,10 @@
   import { ref } from 'vue';
   import { useDebouncedFn } from '@/composables/useDebounce';
   import { Coordonnees } from '@/shell/coordonneesType';
+
+  defineProps<{
+    labelId?: string;
+  }>();
 
   type FeatureApiModel = {
     geometry: { coordinates: number[] };

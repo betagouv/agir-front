@@ -19,24 +19,6 @@
       :view-model-existe="serviceRechercheLongueVieAuxObjetsViewModel !== undefined"
       :message-erreur="serviceErreur"
     >
-      <h1 class="fr-h2">
-        <ServiceSelect
-          v-if="serviceRechercheLongueVieAuxObjetsViewModel?.categories"
-          id="categories"
-          :options="serviceRechercheLongueVieAuxObjetsViewModel.categories"
-          label="Choisir une catégorie"
-          @update="updateType"
-        />
-        à proximité de chez moi
-      </h1>
-      <p>Redonnez vie à vos objets et trouvez les nouveaux en seconde main</p>
-
-      <section class="fr-my-3w">
-        <h2 class="fr-h3 fr-mb-2w">Recherche par adresse</h2>
-        <p class="fr-mb-2w">Envie d'un résultat plus précis&nbsp;?</p>
-        <ServiceBarreDeRechercheAdresse v-model="coordonnees" class="fr-col-12 fr-col-md-7" />
-      </section>
-
       <PageServiceTemplate
         v-if="serviceRechercheLongueVieAuxObjetsViewModel?.aside"
         :aside="serviceRechercheLongueVieAuxObjetsViewModel.aside"
@@ -52,6 +34,28 @@
           <p class="fr-text--lg">😢 Aucun résultat n’est encore disponible pour votre localisation</p>
         </div>
         <div v-else>
+          <h1 class="fr-h2">
+            <ServiceSelect
+              v-if="serviceRechercheLongueVieAuxObjetsViewModel?.categories"
+              id="categories"
+              :options="serviceRechercheLongueVieAuxObjetsViewModel.categories"
+              label="Choisir une catégorie"
+              @update="updateType"
+            />
+            à proximité de chez moi
+          </h1>
+          <p>Redonnez vie à vos objets et trouvez les nouveaux en seconde main</p>
+
+          <section
+            class="fr-my-6w background--white fr-px-2w fr-py-3w flex flex-space-between align-items--center flex-wrap gap--small"
+          >
+            <h2 class="fr-h4 fr-mb-0" id="recherche-par-adresse-label">Recherche par adresse</h2>
+            <ServiceBarreDeRechercheAdresse
+              v-model="coordonnees"
+              class="fr-col-12 fr-col-md-7"
+              labelId="recherche-par-adresse-label"
+            />
+          </section>
           <section
             v-if="
               serviceRechercheLongueVieAuxObjetsViewModel &&
