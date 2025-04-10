@@ -114,6 +114,7 @@
   });
 
   watch(coordonnees, () => {
+    nombreMaxResultats = 9;
     lancerRecherche();
   });
 
