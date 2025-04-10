@@ -1,11 +1,5 @@
 <template>
   <div class="fr-container">
-    <router-link
-      :to="{ path: useNavigationStore().pagePrecedente.path }"
-      class="fr-btn fr-btn--icon-left fr-btn--tertiary-no-outline fr-icon-arrow-left-line fr-pl-0"
-    >
-      Retour
-    </router-link>
     <AideDetail v-if="aide" :aide="aide" />
   </div>
 </template>
@@ -17,7 +11,6 @@
   import { Aide } from '@/domaines/aides/chargementAides.usecase';
   import { ConsulterAideEnModeNonConnecteUsecase } from '@/domaines/aides/consulterAideEnModeNonConnecte.usecase';
   import { RecupererDetailAideUsecase } from '@/domaines/aides/recupererDetailAide.usecase';
-  import { useNavigationStore } from '@/store/navigationStore';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const aide = ref<Aide>();

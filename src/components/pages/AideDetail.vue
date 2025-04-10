@@ -1,4 +1,18 @@
 <template>
+  <Alert
+    v-if="feedbackNote !== -1"
+    titre="Merci pour votre retour ! Notre équipe en prendra connaissance très prochainement"
+    message=""
+    type="success"
+    class="fr-my-3w"
+  />
+
+  <router-link
+    :to="{ path: useNavigationStore().pagePrecedente.path }"
+    class="fr-btn fr-btn--icon-left fr-btn--tertiary-no-outline fr-icon-arrow-left-line fr-pl-0"
+  >
+    Retour
+  </router-link>
   <div class="fr-grid-row fr-grid-row--gutters">
     <div class="fr-col-12 fr-col-md-8">
       <div class="fr-my-3w background--white border border-radius--md fr-p-2w">
@@ -65,27 +79,36 @@
           <p class="fr-mb-0">Proposé par</p>
           <img :alt="aide.partenaire.nom" :src="aide.partenaire.logoUrl" class="fr-mt-5v max-full-width" />
         </div>
-        <BandeauAimezVousCettePage v-model:notation="premiereNotation" />
+        <BandeauAimezVousCettePage v-model:notation="notation" :feedbackNote="feedbackNote" />
       </div>
     </div>
 
-    <AideModaleFeedback :notation="premiereNotation" />
+    <AideModaleFeedback :notation="notation" :aideId="props.aide.id" @feedback-envoye="updateNotation" />
   </div>
 </template>
 <script lang="ts" setup>
   import { ref } from 'vue';
   import BandeauAimezVousCettePage from '@/components/custom/Action/Aside/BandeauAimezVousCettePage.vue';
   import AideModaleFeedback from '@/components/custom/Aides/AideModaleFeedback.vue';
+  import Alert from '@/components/custom/Alert.vue';
   import ThematiqueTag from '@/components/custom/Thematiques/ThematiqueTag.vue';
   import { Aide } from '@/domaines/aides/chargementAides.usecase';
   import { MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
   import { TagThematique } from '@/domaines/thematiques/TagThematique';
+  import { useNavigationStore } from '@/store/navigationStore';
 
   const props = defineProps<{ aide: Aide }>();
-  const premiereNotation = ref<number>(0);
+  const notation = ref<number>(0);
+  const feedbackNote = ref<number>(-1);
 
   const derniereMiseAJour = ref<string>('');
   if (props.aide.derniereMaj) {
     derniereMiseAJour.value = new Date(props.aide.derniereMaj).toLocaleDateString('fr-FR');
+  }
+
+  function updateNotation(note: number) {
+    notation.value = note;
+    feedbackNote.value = note;
+    // afficher flash
   }
 </script>

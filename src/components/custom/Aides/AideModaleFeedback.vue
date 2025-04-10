@@ -10,6 +10,7 @@
                 title="Fermer la fenêtre modale"
                 aria-controls="fr-modal-1"
                 target="_self"
+                ref="boutonFermer"
               >
                 Fermer
               </button>
@@ -22,7 +23,7 @@
                     Vos retours sont précieux et façonnent ce service. Partagez-nous vos impressions, nous nous
                     efforcerons d’y répondre prochainement.
                   </p>
-                  <form @submit.prevent="envoyerFeedbackAction">
+                  <form @submit.prevent="envoyerFeedbackAide">
                     <FieldsetNotationEtoile
                       v-model:notation="notation"
                       legend="Avez-vous aimé cette page ?"
@@ -30,33 +31,59 @@
                     />
 
                     <fieldset class="fr-fieldset">
-                      <legend class="fr-fieldset__legend">Connaissiez-vous cette aide ?</legend>
+                      <legend class="fr-fieldset__legend text--normal">Connaissiez-vous cette aide ?</legend>
                       <div class="fr-fieldset__element fr-fieldset__element--inline">
                         <div class="fr-radio-group">
-                          <input type="radio" id="radio-inline-1" name="radio-inline" />
+                          <input
+                            type="radio"
+                            id="radio-inline-1"
+                            name="radio-inline"
+                            v-model="estConnue"
+                            :value="true"
+                          />
                           <label class="fr-label" for="radio-inline-1">Oui</label>
                         </div>
                       </div>
                       <div class="fr-fieldset__element fr-fieldset__element--inline">
                         <div class="fr-radio-group">
-                          <input type="radio" id="radio-inline-2" name="radio-inline" />
+                          <input
+                            type="radio"
+                            id="radio-inline-2"
+                            name="radio-inline"
+                            v-model="estConnue"
+                            :value="false"
+                            checked
+                          />
                           <label class="fr-label" for="radio-inline-2">Non</label>
                         </div>
                       </div>
                     </fieldset>
 
                     <fieldset class="fr-fieldset">
-                      <legend class="fr-fieldset__legend">Comptez-vous demander cette aide ?</legend>
+                      <legend class="fr-fieldset__legend text--normal">Comptez-vous demander cette aide ?</legend>
                       <div class="fr-fieldset__element fr-fieldset__element--inline">
                         <div class="fr-radio-group">
-                          <input type="radio" id="radio-inline-2" name="radio-inline-2" />
-                          <label class="fr-label" for="radio-inline-2">Oui</label>
+                          <input
+                            type="radio"
+                            id="radio-inline-3"
+                            name="radio-inline-2"
+                            v-model="seraSollicite"
+                            :value="true"
+                          />
+                          <label class="fr-label" for="radio-inline-3">Oui</label>
                         </div>
                       </div>
                       <div class="fr-fieldset__element fr-fieldset__element--inline">
                         <div class="fr-radio-group">
-                          <input type="radio" id="radio-inline-3" name="radio-inline-2" />
-                          <label class="fr-label" for="radio-inline-3">Non</label>
+                          <input
+                            type="radio"
+                            id="radio-inline-4"
+                            name="radio-inline-2"
+                            v-model="seraSollicite"
+                            :value="false"
+                            checked
+                          />
+                          <label class="fr-label" for="radio-inline-4">Non</label>
                         </div>
                       </div>
                     </fieldset>
@@ -90,13 +117,27 @@
 <script setup lang="ts">
   import { ref, watch } from 'vue';
   import FieldsetNotationEtoile from '@/components/custom/Form/FieldsetNotationEtoile.vue';
+  import { FeedbackRepositoryAxios } from '@/domaines/feedback/adapters/feedback.repository.axios';
+  import { AideFeedback, EnvoyerFeedbackAideUsecase } from '@/domaines/feedback/envoyerFeedbackAide.usecase';
+  import { utilisateurStore } from '@/store/utilisateur';
 
   const props = defineProps<{
     notation?: number;
+    aideId: string;
   }>();
 
+  const emit = defineEmits<{
+    (e: 'feedback-envoye', notation: number): void;
+  }>();
+
+  const boutonFermer = ref<HTMLButtonElement>();
+  const envoyerFeedback = new EnvoyerFeedbackAideUsecase(new FeedbackRepositoryAxios());
+  const utilisateurId = utilisateurStore().utilisateur.id;
+
   const notation = ref<number>(props.notation ?? 0);
-  const pourquoi = defineModel<string>('pourquoi');
+  const estConnue = ref<boolean>(false);
+  const seraSollicite = ref<boolean>(false);
+  const pourquoi = ref<string>('');
 
   watch(
     () => props.notation,
@@ -105,8 +146,15 @@
     },
   );
 
-  function envoyerFeedbackAction() {
-    console.log(notation);
-    console.log(pourquoi);
+  async function envoyerFeedbackAide() {
+    const feedback: AideFeedback = {
+      note: notation.value,
+      estConnue: estConnue.value,
+      seraSollicite: seraSollicite.value,
+      commentaire: pourquoi.value,
+    };
+    boutonFermer.value?.click();
+    emit('feedback-envoye', notation.value);
+    await envoyerFeedback.execute(utilisateurId, props.aideId, feedback);
   }
 </script>

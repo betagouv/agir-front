@@ -6,7 +6,8 @@
         v-for="index in 4"
         :key="index"
         :aria-label="`${index} étoiles`"
-        class="fr-icon fr-mr-1v fr-icon-star-line fr-px-0"
+        class="fr-icon fr-mr-1v fr-px-0"
+        :class="[feedbackNote > 0 && index <= feedbackNote ? 'fr-icon-star-fill text--bleu' : 'fr-icon-star-line']"
         data-fr-opened="false"
         aria-controls="fr-modal-1"
         @click="premiereNotation = index"
@@ -16,5 +17,8 @@
 </template>
 
 <script setup lang="ts">
+  defineProps<{
+    feedbackNote: number;
+  }>();
   const premiereNotation = defineModel('notation');
 </script>
