@@ -8,27 +8,27 @@
         <slot name="contenu" />
       </div>
 
-      <ActionAside class="fr-col-12 fr-col-lg-4" :action-base-view-model="actionBaseViewModel">
+      <ActionAside :action-base-view-model="actionBaseViewModel" class="fr-col-12 fr-col-lg-4">
         <slot name="aside" />
       </ActionAside>
     </div>
 
-    <section v-if="actionBaseViewModel.recommandations.length > 0" class="fr-p-2w">
+    <section v-if="actionBaseViewModel.articlesRecommandes.length > 0" class="fr-mb-4w">
       <h2>Pour aller <span class="text--bold">plus loin</span></h2>
       <div class="fr-grid-row fr-grid-row--gutters">
         <div
-          v-for="article in actionBaseViewModel.recommandations"
+          v-for="article in actionBaseViewModel.articlesRecommandes"
           :key="article.titre"
           class="fr-col-12 fr-col-md-6 fr-col-lg-4"
         >
           <router-link
             :to="{ path: article.url }"
-            class="display-block background--white shadow border-radius--md fr-p-1w full-height background--none"
+            class="display-block background--white shadow fr-p-1w full-height background--none"
           >
             <img
               :src="article.image"
               alt=""
-              class="action__recommandations-img full-width fr-mb-1w border-radius--md"
+              class="action__recommandations-img img-object-fit-cover full-width max-full-width fr-mb-1w"
             />
             <p class="text--semi-bold" v-html="article.titre" />
           </router-link>

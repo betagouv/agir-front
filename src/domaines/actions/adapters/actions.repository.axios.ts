@@ -54,6 +54,12 @@ interface ActionDetailApiModel {
   }[];
   kycs: QuestionApiModel[];
   thematique: string;
+  articles: {
+    content_id: string;
+    titre: string;
+    soustitre?: string;
+    image_url: string;
+  }[];
 }
 
 interface ActionDetailCMSApiModel {
@@ -201,7 +207,11 @@ export class ActionsRepositoryAxios implements ActionsRepository {
         introduction: actionDetailApiModel.pourquoi,
         astuces: actionDetailApiModel.comment,
       },
-      recommandations: [],
+      articles: actionDetailApiModel.articles.map(article => ({
+        titre: article.titre,
+        image: article.image_url,
+        id: article.content_id,
+      })),
       nombreDeRealisations: actionDetailApiModel.nombre_actions_faites,
       nombreAidesDisponibles: actionDetailApiModel.nombre_aides_disponibles,
       realisee: actionDetailApiModel.deja_faite,

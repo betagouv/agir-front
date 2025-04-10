@@ -19,7 +19,7 @@ export interface ActionBaseViewModel {
   sousTitre: string;
   consigne: string;
   labelCompteur: string;
-  recommandations: RecommandationArticleViewModel[];
+  articlesRecommandes: RecommandationArticleViewModel[];
   introduction: string;
   realisee: boolean;
   nombreDeRealisations: number;
