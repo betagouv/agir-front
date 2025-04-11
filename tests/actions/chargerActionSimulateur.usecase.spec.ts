@@ -85,21 +85,21 @@ describe("Fichier de tests concernant la récupération d'une action de type sim
           '## En **quelques mots**\n\n-, Pourquoi est-ce important de bien choisir sa voiture ?\n-, Comment choisir une voiture qui correspond à vos besoins ?\n-, Quels sont les critères à prendre en compte pour choisir une voiture ?',
         astuces: '',
       },
-      recommandations: [
+      articles: [
         {
           titre: 'Les bases de l’alimentation végétarienne : par où commencer ?',
           image: '/temp_les_bases_alim_vege.png',
-          url: '',
+          id: '1',
         },
         {
           titre: 'Comment répondre à ses besoins nutritionnels sans viande ?',
           image: '/temp_comment_repondre_besoins_nutri.png',
-          url: '',
+          id: '2',
         },
         {
           titre: '10 recettes végétariennes pour les fêtes',
           image: '/temp_10_recettes_pour_fetes.png',
-          url: '',
+          id: '3',
         },
       ],
       services: [],
@@ -137,21 +137,21 @@ describe("Fichier de tests concernant la récupération d'une action de type sim
 -, Comment choisir une voiture qui correspond à vos besoins ?
 -, Quels sont les critères à prendre en compte pour choisir une voiture ?</p>
 `,
-        recommandations: [
+        articlesRecommandes: [
           {
             image: '/temp_les_bases_alim_vege.png',
             titre: 'Les bases de l’alimentation végétarienne : par où commencer ?',
-            url: '',
+            url: '/article/les-bases-de-l-alimentation-vegetarienne-par-ou-commencer-/1',
           },
           {
             image: '/temp_comment_repondre_besoins_nutri.png',
             titre: 'Comment répondre à ses besoins nutritionnels sans viande ?',
-            url: '',
+            url: '/article/comment-repondre-a-ses-besoins-nutritionnels-sans-viande-/2',
           },
           {
             image: '/temp_10_recettes_pour_fetes.png',
             titre: '10 recettes végétariennes pour les fêtes',
-            url: '',
+            url: '/article/10-recettes-vegetariennes-pour-les-fetes/3',
           },
         ],
         aides: [

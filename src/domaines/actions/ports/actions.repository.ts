@@ -5,7 +5,7 @@ import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 interface RecommandationArticle {
   titre: string;
   image: string;
-  url: string;
+  id: string;
 }
 
 export interface ActionService {
@@ -48,7 +48,7 @@ export interface ActionDetail {
   };
   quizzes?: Quiz[];
   quizzFelicitations?: string;
-  recommandations: RecommandationArticle[];
+  articles: RecommandationArticle[];
   nombreDeRealisations: number;
   nombreAidesDisponibles: number;
   realisee: boolean;

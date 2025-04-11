@@ -28,7 +28,11 @@ class ActionViewModelBuilder {
       titreAffiche: common.titre,
       commune: action.commune,
       astuces,
-      recommandations: action.recommandations,
+      articlesRecommandes: action.articles.map(article => ({
+        titre: article.titre,
+        image: article.image,
+        url: `/article/${buildUrl(article.titre)}/${article.id}`,
+      })),
       services: action.services,
       aides: this.buildAides(action.aides),
       faq,
@@ -58,7 +62,11 @@ class ActionViewModelBuilder {
         articleAssocie: quiz.articleAssocie,
       })),
       quizzFelicitations: action.quizzFelicitations,
-      recommandations: action.recommandations,
+      articlesRecommandes: action.articles.map(article => ({
+        titre: article.titre,
+        image: article.image,
+        url: `/article/${buildUrl(article.titre)}/${article.id}`,
+      })),
     };
   }
 
@@ -68,7 +76,11 @@ class ActionViewModelBuilder {
       ...common,
       titreAffiche: `Simulateur - ${common.titre}`,
       aides: this.buildAides(action.aides),
-      recommandations: action.recommandations,
+      articlesRecommandes: action.articles.map(article => ({
+        titre: article.titre,
+        image: article.image,
+        url: `/article/${buildUrl(article.titre)}/${article.id}`,
+      })),
       kycs: action.kycs.map(kyc => QuestionViewModelBuilder.buildFromQuestion(kyc)),
     };
   }
@@ -79,7 +91,11 @@ class ActionViewModelBuilder {
       ...common,
       titreAffiche: common.titre,
       aides: this.buildAides(action.aides),
-      recommandations: action.recommandations,
+      articlesRecommandes: action.articles.map(article => ({
+        titre: article.titre,
+        image: article.image,
+        url: `/article/${buildUrl(article.titre)}/${article.id}`,
+      })),
       kycs: action.kycs.map(kyc => QuestionViewModelBuilder.buildFromQuestion(kyc)),
       thematique: action.thematique,
     };

@@ -83,21 +83,21 @@ describe("Fichier de tests concernant la récupération d'une action de type bil
         introduction: '## En **quelques mots**\n\n-, Pourquoi est-ce important de faire son bilan ?',
         astuces: '',
       },
-      recommandations: [
+      articles: [
         {
           titre: 'Les bases de l’alimentation végétarienne : par où commencer ?',
           image: '/temp_les_bases_alim_vege.png',
-          url: '',
+          id: '1',
         },
         {
           titre: 'Comment répondre à ses besoins nutritionnels sans viande ?',
           image: '/temp_comment_repondre_besoins_nutri.png',
-          url: '',
+          id: '2',
         },
         {
           titre: '10 recettes végétariennes pour les fêtes',
           image: '/temp_10_recettes_pour_fetes.png',
-          url: '',
+          id: '3',
         },
       ],
       services: [],
@@ -132,21 +132,21 @@ describe("Fichier de tests concernant la récupération d'une action de type bil
         sousTitre: 'Bilan logement sous titre',
         introduction: `<h2>En <span class="text--bold">quelques mots</span></h2><p>-, Pourquoi est-ce important de faire son bilan ?</p>
 `,
-        recommandations: [
+        articlesRecommandes: [
           {
             image: '/temp_les_bases_alim_vege.png',
             titre: 'Les bases de l’alimentation végétarienne : par où commencer ?',
-            url: '',
+            url: '/article/les-bases-de-l-alimentation-vegetarienne-par-ou-commencer-/1',
           },
           {
             image: '/temp_comment_repondre_besoins_nutri.png',
             titre: 'Comment répondre à ses besoins nutritionnels sans viande ?',
-            url: '',
+            url: '/article/comment-repondre-a-ses-besoins-nutritionnels-sans-viande-/2',
           },
           {
             image: '/temp_10_recettes_pour_fetes.png',
             titre: '10 recettes végétariennes pour les fêtes',
-            url: '',
+            url: '/article/10-recettes-vegetariennes-pour-les-fetes/3',
           },
         ],
         aides: [

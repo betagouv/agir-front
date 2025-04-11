@@ -96,7 +96,7 @@ describe("Fichier de tests concernant la récupération d'une action de type qui
         },
       ],
       kycs: [],
-      recommandations: [],
+      articles: [],
       services: [
         {
           type: 'recettes',
@@ -198,7 +198,7 @@ describe("Fichier de tests concernant la récupération d'une action de type qui
             },
           },
         ],
-        recommandations: [],
+        articlesRecommandes: [],
       });
     }
   });
