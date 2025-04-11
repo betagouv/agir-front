@@ -4,7 +4,7 @@
       <div class="background--white fr-p-2w">
         <slot />
       </div>
-      <BandeauAimezVousCettePage v-model:notation="premiereNotation" />
+      <BandeauAimezVousCettePage v-model:notation="premiereNotation" :feedback-note="-1" />
     </div>
 
     <ActionModaleFeedback :notation="premiereNotation" />
