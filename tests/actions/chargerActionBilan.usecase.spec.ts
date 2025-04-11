@@ -135,6 +135,7 @@ describe("Fichier de tests concernant la récupération d'une action de type bil
         nombreDeRealisations: 40,
         titre: '<span class="text--bold">Bilan logement</span>',
         titreAffiche: '<span class="text--bold">Bilan logement</span>',
+        titrePropre: 'Bilan logement',
         sousTitre: 'Bilan logement sous titre',
         introduction: `<h2>En <span class="text--bold">quelques mots</span></h2><p>-, Pourquoi est-ce important de faire son bilan ?</p>
 `,

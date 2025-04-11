@@ -9,6 +9,7 @@ import { ActionDetail } from '@/domaines/actions/ports/actions.repository';
 import { QuestionViewModelBuilder } from '@/domaines/kyc/adapters/question.base.presenter';
 import marked from '@/shell/actionMarkdownToHtml';
 import { buildUrl } from '@/shell/buildUrl';
+import { nettoyerEtGarderContenuTextuel } from '@/shell/nettoyerEtGarderContenuTextuel';
 
 class ActionViewModelBuilder {
   static async buildClassique(action: ActionDetail): Promise<ActionClassiqueViewModel> {
@@ -112,6 +113,7 @@ class ActionViewModelBuilder {
       titre,
       sousTitre,
       introduction,
+      titrePropre: nettoyerEtGarderContenuTextuel(action.titre),
       realisee: action.realisee,
       nombreDeRealisations: action.nombreDeRealisations,
       actionId: action.code,
