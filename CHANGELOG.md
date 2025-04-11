@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.4.0](https://github.com/betagouv/agir-front/compare/v2.3.1...v2.4.0) (2025-04-11)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* affichage du bloc 'pour aller plus loin' dans les actions ([#1048](https://github.com/betagouv/agir-front/issues/1048)) ([93aae35](https://github.com/betagouv/agir-front/commit/93aae356458e612110890093a3c913d6a79e8a90))
+* recherche par adresse ameliorée ([#1047](https://github.com/betagouv/agir-front/issues/1047)) ([1ccb06d](https://github.com/betagouv/agir-front/commit/1ccb06dde4ea27ca5ac3f81c984414511288ee37))
+
 ## [2.3.1](https://github.com/betagouv/agir-front/compare/v2.3.0...v2.3.1) (2025-04-09)
 
 
