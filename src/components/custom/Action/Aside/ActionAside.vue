@@ -4,10 +4,14 @@
       <div class="background--white fr-p-2w">
         <slot />
       </div>
-      <BandeauAimezVousCettePage v-model:notation="premiereNotation" :feedback-note="-1" />
+      <BandeauAimezVousCettePage v-model:notation="notation" :feedback-note="feedbackNote" />
     </div>
 
-    <ActionModaleFeedback :notation="premiereNotation" />
+    <ActionModaleFeedback
+      :notation="notation"
+      :action-id="actionBaseViewModel.actionId"
+      @feedback-envoye="updateNotation"
+    />
   </aside>
 </template>
 
@@ -21,5 +25,11 @@
     actionBaseViewModel: ActionBaseViewModel;
   }>();
 
-  const premiereNotation = ref<number>(0);
+  const notation = ref<number>(0);
+  const feedbackNote = ref<number>(-1);
+
+  function updateNotation(note: number) {
+    notation.value = note;
+    feedbackNote.value = note;
+  }
 </script>

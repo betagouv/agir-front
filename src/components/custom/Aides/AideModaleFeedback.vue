@@ -90,7 +90,14 @@
 
                     <div class="flex flex-column fr-input-group">
                       <label class="fr-label" for="pourquoi">Pourquoi ?</label>
-                      <textarea v-model="pourquoi" id="pourquoi" name="pourquoi" rows="4" class="fr-input" />
+                      <textarea
+                        v-model="pourquoi"
+                        id="pourquoi"
+                        name="pourquoi"
+                        rows="4"
+                        class="fr-input"
+                        maxlength="500"
+                      />
                     </div>
 
                     <button
@@ -117,6 +124,7 @@
 <script setup lang="ts">
   import { ref, watch } from 'vue';
   import FieldsetNotationEtoile from '@/components/custom/Form/FieldsetNotationEtoile.vue';
+  import { useFlashMessage } from '@/composables/useFlashMessage';
   import { FeedbackRepositoryAxios } from '@/domaines/feedback/adapters/feedback.repository.axios';
   import { AideFeedback, EnvoyerFeedbackAideUsecase } from '@/domaines/feedback/envoyerFeedbackAide.usecase';
   import { utilisateurStore } from '@/store/utilisateur';
@@ -133,6 +141,7 @@
   const boutonFermer = ref<HTMLButtonElement>();
   const envoyerFeedback = new EnvoyerFeedbackAideUsecase(new FeedbackRepositoryAxios());
   const utilisateurId = utilisateurStore().utilisateur.id;
+  const { showFlashMessage } = useFlashMessage();
 
   const notation = ref<number>(props.notation ?? 0);
   const estConnue = ref<boolean>(false);
@@ -153,8 +162,15 @@
       seraSollicite: seraSollicite.value,
       commentaire: pourquoi.value,
     };
-    boutonFermer.value?.click();
-    emit('feedback-envoye', notation.value);
-    await envoyerFeedback.execute(utilisateurId, props.aideId, feedback);
+
+    await envoyerFeedback.execute(utilisateurId, props.aideId, feedback).then(() => {
+      boutonFermer.value?.click();
+      emit('feedback-envoye', notation.value);
+
+      showFlashMessage({
+        message: 'Merci pour votre retour ! Notre équipe en prendra connaissance très prochainement',
+        type: 'success',
+      });
+    });
   }
 </script>

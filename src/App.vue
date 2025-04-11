@@ -15,6 +15,8 @@
     </div>
 
     <main id="contenu" class="background--main" role="main">
+      <MessageFlash />
+
       <router-view />
     </main>
 
@@ -27,6 +29,7 @@
   import axios from 'redaxios';
   import { computed, onMounted, ref } from 'vue';
   import { NavigationGuardNext, RouteLocationNormalized } from 'vue-router';
+  import MessageFlash from '@/components/custom/MessageFlash.vue';
   import DisclaimerGeneral from '@/components/dsfr/DisclaimerGeneral.vue';
   import Footer from '@/components/dsfr/Footer.vue';
   import Header from '@/components/dsfr/Header.vue';

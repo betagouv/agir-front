@@ -1,12 +1,4 @@
 <template>
-  <Alert
-    v-if="feedbackNote !== -1"
-    titre="Merci pour votre retour ! Notre équipe en prendra connaissance très prochainement"
-    message=""
-    type="success"
-    class="fr-my-3w"
-  />
-
   <router-link
     :to="{ path: useNavigationStore().pagePrecedente.path }"
     class="fr-btn fr-btn--icon-left fr-btn--tertiary-no-outline fr-icon-arrow-left-line fr-pl-0"
@@ -90,7 +82,6 @@
   import { ref } from 'vue';
   import BandeauAimezVousCettePage from '@/components/custom/Action/Aside/BandeauAimezVousCettePage.vue';
   import AideModaleFeedback from '@/components/custom/Aides/AideModaleFeedback.vue';
-  import Alert from '@/components/custom/Alert.vue';
   import ThematiqueTag from '@/components/custom/Thematiques/ThematiqueTag.vue';
   import { Aide } from '@/domaines/aides/chargementAides.usecase';
   import { MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
@@ -109,6 +100,5 @@
   function updateNotation(note: number) {
     notation.value = note;
     feedbackNote.value = note;
-    // afficher flash
   }
 </script>

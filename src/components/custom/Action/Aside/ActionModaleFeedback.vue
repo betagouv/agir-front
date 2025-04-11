@@ -10,6 +10,7 @@
                 title="Fermer la fenêtre modale"
                 aria-controls="fr-modal-1"
                 target="_self"
+                ref="boutonFermer"
               >
                 Fermer
               </button>
@@ -25,13 +26,20 @@
                   <form @submit.prevent="envoyerFeedbackAction">
                     <FieldsetNotationEtoile
                       v-model:notation="notation"
-                      legend="Avez-vous aimé cette page ?"
+                      legend="Avez-vous aimé cette page?"
                       :total="4"
                     />
 
                     <div class="flex flex-column fr-input-group">
                       <label class="fr-label" for="commentaire">Comment pourrions-nous l'améliorer ?</label>
-                      <textarea v-model="commentaire" id="commentaire" name="commentaire" rows="4" class="fr-input" />
+                      <textarea
+                        v-model="commentaire"
+                        id="commentaire"
+                        name="commentaire"
+                        rows="4"
+                        class="fr-input"
+                        maxlength="500"
+                      />
                     </div>
 
                     <button
@@ -57,14 +65,31 @@
 
 <script setup lang="ts">
   import { ref, watch } from 'vue';
+  import { useRoute } from 'vue-router';
   import FieldsetNotationEtoile from '@/components/custom/Form/FieldsetNotationEtoile.vue';
+  import { useFlashMessage } from '@/composables/useFlashMessage';
+  import { TypeAction } from '@/domaines/actions/ports/actions.repository';
+  import { FeedbackRepositoryAxios } from '@/domaines/feedback/adapters/feedback.repository.axios';
+  import { ActionFeedback, EnvoyerFeedbackActionUsecase } from '@/domaines/feedback/envoyerFeedbackAction.usecase';
+  import { utilisateurStore } from '@/store/utilisateur';
 
   const props = defineProps<{
+    actionId: string;
     notation?: number;
   }>();
 
+  const emit = defineEmits<{
+    (e: 'feedback-envoye', notation: number): void;
+  }>();
+
+  const boutonFermer = ref<HTMLButtonElement>();
+  const envoyerFeedback = new EnvoyerFeedbackActionUsecase(new FeedbackRepositoryAxios());
+  const utilisateurId = utilisateurStore().utilisateur.id;
+  const typeAction = useRoute().params.type.toString() as TypeAction;
+  const { showFlashMessage } = useFlashMessage();
+
   const notation = ref<number>(props.notation ?? 0);
-  const commentaire = defineModel<string>('commentaire');
+  const commentaire = ref<string>();
 
   watch(
     () => props.notation,
@@ -73,8 +98,20 @@
     },
   );
 
-  function envoyerFeedbackAction() {
-    console.log(notation);
-    console.log(commentaire);
+  async function envoyerFeedbackAction() {
+    const feedback: ActionFeedback = {
+      note: notation.value,
+      commentaire: commentaire.value,
+    };
+
+    await envoyerFeedback.execute(utilisateurId, props.actionId, typeAction, feedback).then(() => {
+      emit('feedback-envoye', notation.value);
+      boutonFermer.value?.click();
+
+      showFlashMessage({
+        message: 'Merci pour votre retour ! Notre équipe en prendra connaissance très prochainement',
+        type: 'success',
+      });
+    });
   }
 </script>
