@@ -6,48 +6,20 @@
     <div class="fr-grid-row fr-grid-row--gutters">
       <div class="fr-col-12 fr-col-lg-8">
         <slot name="contenu" />
+        <ActionArticlesRecommandees :action-base-view-model="actionBaseViewModel" />
       </div>
 
       <ActionAside :action-base-view-model="actionBaseViewModel" class="fr-col-12 fr-col-lg-4">
         <slot name="aside" />
       </ActionAside>
     </div>
-
-    <section v-if="actionBaseViewModel.articlesRecommandes.length > 0" class="fr-mb-4w">
-      <h2>Pour aller <span class="text--bold">plus loin</span></h2>
-      <div class="fr-grid-row fr-grid-row--gutters">
-        <div
-          v-for="article in actionBaseViewModel.articlesRecommandes"
-          :key="article.titre"
-          class="fr-col-12 fr-col-md-6 fr-col-lg-4"
-        >
-          <router-link
-            :to="{ path: article.url }"
-            class="display-block background--white shadow fr-p-1w full-height background--none"
-          >
-            <img
-              :src="article.image"
-              alt=""
-              class="action__recommandations-img img-object-fit-cover full-width max-full-width fr-mb-1w"
-            />
-            <p class="text--semi-bold" v-html="article.titre" />
-          </router-link>
-        </div>
-      </div>
-    </section>
   </div>
 </template>
 
 <script lang="ts" setup>
+  import ActionArticlesRecommandees from '@/components/custom/Action/ActionArticlesRecommandees.vue';
   import ActionAside from '@/components/custom/Action/Aside/ActionAside.vue';
   import { ActionBaseViewModel } from '@/domaines/actions/ports/action.presenter';
 
   defineProps<{ actionBaseViewModel: ActionBaseViewModel }>();
 </script>
-
-<style scoped>
-  .action__recommandations-img {
-    height: 6rem;
-    object-fit: cover;
-  }
-</style>
