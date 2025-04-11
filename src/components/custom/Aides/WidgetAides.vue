@@ -10,7 +10,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { ref } from 'vue';
+  import { ref, watch } from 'vue';
   import GrilleAidesDUneAction from '@/components/custom/Aides/GrilleAidesDUneAction.vue';
   import { ActionAideViewModel } from '@/domaines/actions/ports/action.presenter';
   import { AidesPresenterImpl } from '@/domaines/aides/adapters/aides.presenter.impl';
@@ -28,12 +28,17 @@
   const aidesViewModel = ref<ActionAideViewModel[]>();
 
   const recupererAidesDuneThematique = new RecupererAidesDUneThematiqueUsecase(new ChargementAidesAxiosRepository());
-  recupererAidesDuneThematique.execute(
-    utilisateurStore().utilisateur.id,
-    props.clefThematique,
-    new AidesPresenterImpl(vm => {
-      aidesViewModel.value = vm;
-    }),
-    props.nombreAidesMax,
+  watch(
+    () => props.clefThematique,
+    () => {
+      recupererAidesDuneThematique.execute(
+        utilisateurStore().utilisateur.id,
+        props.clefThematique,
+        new AidesPresenterImpl(vm => {
+          aidesViewModel.value = vm;
+        }),
+        props.nombreAidesMax,
+      );
+    },
   );
 </script>

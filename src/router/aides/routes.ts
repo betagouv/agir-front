@@ -35,11 +35,17 @@ const aidesRoutes: RouteRecordRaw[] = [
             path: '',
             name: RouteAidesName.VELO,
             component: PageAidesVelo,
+            meta: {
+              title: 'Les aides vélos',
+            },
           },
           {
             path: RouteAidesPath.FORMULAIRE,
             name: RouteAidesName.VELO_FORMULAIRE,
             component: PageAidesVeloFormulaire,
+            meta: {
+              title: 'Les aides vélos - Formulaire',
+            },
           },
         ],
       },

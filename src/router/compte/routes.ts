@@ -54,21 +54,33 @@ const compteRoutes: RouteRecordRaw[] = [
         path: RouteComptePath.MON_COMPTE,
         name: RouteCompteName.MON_COMPTE,
         component: PageCompte,
+        meta: {
+          title: 'Mes informations',
+        },
       },
       {
         path: RouteComptePath.OPTIONS_AVANCEES,
         name: RouteCompteName.OPTIONS_AVANCEES,
         component: PageCompteOptionsAvancees,
+        meta: {
+          title: 'Options avancées',
+        },
       },
       {
         path: RouteComptePath.MIEUX_VOUS_CONNAITRE,
         name: RouteCompteName.MIEUX_VOUS_CONNAITRE,
         component: PageCompteMieuxVousConnaitre,
+        meta: {
+          title: 'Mieux vous connaitre',
+        },
       },
       {
         path: RouteComptePath.LOGEMENT,
         name: RouteCompteName.LOGEMENT,
         component: PageCompteLogement,
+        meta: {
+          title: 'Logement',
+        },
       },
     ],
   },
@@ -165,7 +177,7 @@ const compteRoutes: RouteRecordRaw[] = [
     name: RouteCompteName.POST_CREATION_COMPTE_DISCLAIMER,
     component: PagePostCreationCompteDisclaimer,
     meta: {
-      title: 'Création de compte - Expirementation',
+      title: 'Création de compte - Experimentation',
       estPublique: true,
     },
   },
