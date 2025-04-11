@@ -34,7 +34,9 @@
     </ul>
     <div v-else class="text--center fr-pt-md-5w">
       <img alt="" height="250" src="/service_aucun_resultat.svg" />
-      <p class="fr-text--lg">😢 Aucun résultat n’est encore disponible pour votre localisation</p>
+      <p class="fr-text--lg">
+        <span aria-hidden="true">😢 </span>Aucun résultat n’est encore disponible pour votre localisation
+      </p>
     </div>
   </section>
 </template>

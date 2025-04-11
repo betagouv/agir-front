@@ -11,7 +11,7 @@
       >
         <div v-if="serviceRecherchePresDeChezNousViewModel.aucunResultat" class="text--center">
           <img alt="" height="250" src="/service_aucun_resultat.svg" />
-          <p class="fr-text--lg">😢 Aucun résultat n’est encore disponible pour votre localisation</p>
+          <p class="fr-text--lg"><span aria-hidden="true">😢 </span>Aucun résultat n’est encore disponible pour votre localisation</p>
         </div>
         <div v-else>
           <h1 class="fr-h2 fr-mb-1w">
