@@ -384,8 +384,16 @@
     list-style: none;
 }
 
+.outline {
+    outline: solid var(--blue-france-sun-113-625);
+}
+
 .border {
     border: 1px solid rgba(0, 0, 0, 0.19);
+}
+
+.border--top--grey {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .border--bottom--grey {

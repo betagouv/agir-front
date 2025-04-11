@@ -1,4 +1,4 @@
-.action h1 {
+.action h1:not(.fr-modal__title) {
     font-weight: 400;
 }
 
@@ -15,7 +15,7 @@
     font-size: 1.35rem;
 }
 
-.action img {
+.action .action--cms img {
     display: block;
     max-width: 75%;
     margin: 0 auto;

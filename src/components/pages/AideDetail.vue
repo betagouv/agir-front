@@ -60,24 +60,38 @@
       </div>
     </div>
     <div class="fr-col-12 fr-col-md-4 fr-mt-3w fr-mb-4w">
-      <div v-if="aide.partenaire" class="background--white border border-radius--md fr-p-2w">
-        <p class="fr-mb-0">Proposé par</p>
-        <img :alt="aide.partenaire.nom" :src="aide.partenaire.logoUrl" class="fr-mt-5v max-full-width" />
+      <div v-if="aide.partenaire" class="background--white border">
+        <div class="fr-p-2w">
+          <p class="fr-mb-0">Proposé par</p>
+          <img :alt="aide.partenaire.nom" :src="aide.partenaire.logoUrl" class="fr-mt-5v max-full-width" />
+        </div>
+        <BandeauAimezVousCettePage v-model:notation="notation" :feedbackNote="feedbackNote" />
       </div>
     </div>
+
+    <AideModaleFeedback :notation="notation" :aideId="props.aide.id" @feedback-envoye="updateNotation" />
   </div>
 </template>
 <script lang="ts" setup>
   import { ref } from 'vue';
+  import BandeauAimezVousCettePage from '@/components/custom/Action/Aside/BandeauAimezVousCettePage.vue';
+  import AideModaleFeedback from '@/components/custom/Aides/AideModaleFeedback.vue';
   import ThematiqueTag from '@/components/custom/Thematiques/ThematiqueTag.vue';
   import { Aide } from '@/domaines/aides/chargementAides.usecase';
   import { MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
   import { TagThematique } from '@/domaines/thematiques/TagThematique';
 
   const props = defineProps<{ aide: Aide }>();
+  const notation = ref<number>(0);
+  const feedbackNote = ref<number>(-1);
 
   const derniereMiseAJour = ref<string>('');
   if (props.aide.derniereMaj) {
     derniereMiseAJour.value = new Date(props.aide.derniereMaj).toLocaleDateString('fr-FR');
+  }
+
+  function updateNotation(note: number) {
+    notation.value = note;
+    feedbackNote.value = note;
   }
 </script>

@@ -3,14 +3,14 @@
     <h1 class="action__titre text--normal fr-mb-3w" v-html="actionBaseViewModel.titreAffiche" />
     <p v-if="actionBaseViewModel.sousTitre" class="fr-text--lg fr-mb-4w" v-html="actionBaseViewModel.sousTitre" />
 
-    <div class="fr-grid-row fr-grid-row--gutters reverse-on-lg">
-      <ActionAside class="fr-col-12 fr-col-lg-4" :action-base-view-model="actionBaseViewModel">
-        <slot name="aside" />
-      </ActionAside>
-
+    <div class="fr-grid-row fr-grid-row--gutters">
       <div class="fr-col-12 fr-col-lg-8">
         <slot name="contenu" />
       </div>
+
+      <ActionAside class="fr-col-12 fr-col-lg-4" :action-base-view-model="actionBaseViewModel">
+        <slot name="aside" />
+      </ActionAside>
     </div>
 
     <section v-if="actionBaseViewModel.recommandations.length > 0" class="fr-p-2w">
@@ -49,11 +49,5 @@
   .action__recommandations-img {
     height: 6rem;
     object-fit: cover;
-  }
-
-  .reverse-on-lg {
-    @media (min-width: 62em) {
-      flex-direction: row-reverse;
-    }
   }
 </style>
