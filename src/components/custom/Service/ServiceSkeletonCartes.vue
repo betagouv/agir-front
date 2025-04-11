@@ -1,6 +1,6 @@
 <template>
   <ul class="fr-grid-row fr-grid-row--gutters fr-mb-2w list-style-none">
-    <li v-for="n in 6" :key="n" class="fr-col-12 fr-col-md-6">
+    <li v-for="n in 9" :key="n" class="fr-col-12 fr-col-md-4">
       <ServiceSkeletonCarte />
     </li>
   </ul>

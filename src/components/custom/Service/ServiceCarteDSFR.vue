@@ -32,22 +32,29 @@
     </div>
     <div class="fr-card__header">
       <div class="fr-card__img">
-        <img class="fr-responsive-img" :src="suggestionsServiceViewModel.img" alt="" />
+        <img class="fr-responsive-img" :src="imageSrc" @error="gererImageEnErreur" alt="" />
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
+  import { ref } from 'vue';
   import { SuggestionServiceViewModel } from '@/domaines/serviceRecherche/presDeChezNous/adapters/serviceRecherchePresDeChezNous.presenter.impl';
 
-  defineProps<{
+  const props = defineProps<{
     suggestionsServiceViewModel: SuggestionServiceViewModel;
     styleCarte?: string;
     options?: {
       descriptionDesactive: boolean;
     };
   }>();
+
+  const imageSrc = ref<string>(props.suggestionsServiceViewModel.img);
+
+  function gererImageEnErreur() {
+    imageSrc.value = '/ic_services.svg';
+  }
 </script>
 
 <style scoped>

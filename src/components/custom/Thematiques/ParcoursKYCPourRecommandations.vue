@@ -13,7 +13,7 @@
         @fin-kyc-atteinte="onFinKYC"
       >
         <template v-slot:fin>
-          <LoadingPreparationActionsRecommandees />
+          <BallLoader text="Nous préparons vos recommandations personnalisées..." />
         </template>
       </EnchainementQuestionsKyc>
     </div>
@@ -23,7 +23,7 @@
 <script setup lang="ts">
   import { ref } from 'vue';
   import EnchainementQuestionsKyc from '@/components/custom/KYC/EnchainementQuestionsKyc.vue';
-  import LoadingPreparationActionsRecommandees from '@/components/custom/Thematiques/LoadingPreparationActionsRecommandees.vue';
+  import BallLoader from '@/components/custom/Thematiques/BallLoader.vue';
   import ModaleCommencerParcours from '@/components/custom/Thematiques/ModaleCommencerParcours.vue';
 
   defineProps<{

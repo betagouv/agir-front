@@ -1,57 +1,41 @@
 <template>
   <div class="fr-container">
-    <FilDAriane
-      :page-hierarchie="
-        useRoute().params.thematiqueId
-          ? [
-              {
-                label: `${MenuThematiques.getFromUrl(useRoute().params.thematiqueId as string).labelDansLeMenu}`,
-                url: `/thematique/${useRoute().params.thematiqueId}`,
-              },
-            ]
-          : []
-      "
-      page-courante="Service : Longue vie aux objets"
-    />
-
     <ServiceSkeletonConditionnel
       :is-loading="isLoading"
       :view-model-existe="serviceRechercheLongueVieAuxObjetsViewModel !== undefined"
       :message-erreur="serviceErreur"
     >
-      <h1 class="fr-h2">
-        <ServiceSelect
-          v-if="serviceRechercheLongueVieAuxObjetsViewModel?.categories"
-          id="categories"
-          :options="serviceRechercheLongueVieAuxObjetsViewModel.categories"
-          label="Choisir une catégorie"
-          @update="updateType"
-        />
-        à proximité de chez moi
-      </h1>
-      <p>Redonnez vie à vos objets et trouvez les nouveaux en seconde main</p>
-
-      <section class="fr-my-3w">
-        <h2 class="fr-h3 fr-mb-2w">Recherche par adresse</h2>
-        <p class="fr-mb-2w">Envie d'un résultat plus précis&nbsp;?</p>
-        <ServiceBarreDeRechercheAdresse v-model="coordonnees" class="fr-col-12 fr-col-md-7" />
-      </section>
-
       <PageServiceTemplate
         v-if="serviceRechercheLongueVieAuxObjetsViewModel?.aside"
         :aside="serviceRechercheLongueVieAuxObjetsViewModel.aside"
       >
-        <div
-          v-if="
-            (serviceRechercheLongueVieAuxObjetsViewModel as ServiceRechercheLongueVieAuxObjetsViewModelSansResultats)
-              .aucunResultat
-          "
-          class="text--center"
-        >
+        <div v-if="serviceRechercheLongueVieAuxObjetsViewModel.aucunResultat" class="text--center">
           <img alt="" height="250" src="/service_aucun_resultat.svg" />
           <p class="fr-text--lg">😢 Aucun résultat n’est encore disponible pour votre localisation</p>
         </div>
         <div v-else>
+          <h1 class="fr-h2 fr-mb-1w">
+            <ServiceSelect
+              v-if="serviceRechercheLongueVieAuxObjetsViewModel?.categories"
+              id="categories"
+              :options="serviceRechercheLongueVieAuxObjetsViewModel.categories"
+              label="Choisir une catégorie"
+              @update="updateType"
+            />
+            à proximité de chez moi
+          </h1>
+          <p>Redonnez vie à vos objets et trouvez les nouveaux en seconde main</p>
+
+          <section
+            class="fr-my-6w background--white fr-px-2w fr-py-3w flex flex-space-between align-items--center flex-wrap gap--small"
+          >
+            <h2 class="fr-h4 fr-mb-0" id="recherche-par-adresse-label">Recherche par adresse</h2>
+            <ServiceBarreDeRechercheAdresse
+              v-model="coordonnees"
+              class="fr-col-12 fr-col-md-7"
+              labelId="recherche-par-adresse-label"
+            />
+          </section>
           <section
             v-if="
               serviceRechercheLongueVieAuxObjetsViewModel &&
@@ -98,7 +82,6 @@
 
 <script lang="ts" setup>
   import { onMounted, ref, watch } from 'vue';
-  import { useRoute } from 'vue-router';
   import PageServiceTemplate from '@/components/custom/Service/PageServiceTemplate.vue';
   import ServiceBarreDeRechercheAdresse from '@/components/custom/Service/ServiceBarreDeRechercheAdresse.vue';
   import ServiceFavoris from '@/components/custom/Service/ServiceFavoris.vue';
@@ -106,16 +89,13 @@
   import ServiceSelect from '@/components/custom/Service/ServiceSelect.vue';
   import ServiceSkeletonCartes from '@/components/custom/Service/ServiceSkeletonCartes.vue';
   import ServiceSkeletonConditionnel from '@/components/custom/Service/ServiceSkeletonConditionnel.vue';
-  import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import {
     ServiceRechercheLongueVieAuxObjetsPresenterImpl,
     ServiceRechercheLongueVieAuxObjetsViewModel,
     ServiceRechercheLongueVieAuxObjetsViewModelAvecResultats,
-    ServiceRechercheLongueVieAuxObjetsViewModelSansResultats,
   } from '@/domaines/serviceRecherche/longueVieAuxObjets/adapters/serviceRechercheLongueVieAuxObjets.presenter.impl';
   import { ServiceRechercheLongueVieAuxObjetsAxios } from '@/domaines/serviceRecherche/longueVieAuxObjets/adapters/serviceRechercheLongueVieAuxObjets.repository.axios';
   import { RecupererServiceLongueVieAuxObjetsUsecase } from '@/domaines/serviceRecherche/longueVieAuxObjets/recupererServiceLongueVieAuxObjets.usecase';
-  import { MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const isLoading = ref<boolean>(true);
@@ -134,6 +114,7 @@
   });
 
   watch(coordonnees, () => {
+    nombreMaxResultats = 9;
     lancerRecherche();
   });
 
