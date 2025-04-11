@@ -49,7 +49,7 @@
       </div>
     </div>
 
-    <WidgetAides :clef-thematique="thematiqueId as ClefThematiqueAPI" :nombre-aides-max="4" class="fr-my-4w" />
+    <WidgetAides :clef-thematique="thematiqueId" :nombre-aides-max="4" class="fr-my-4w" />
 
     <section class="fr-mt-8w fr-mb-12w flex flex-column align-items--center">
       <img src="/jumelle.svg" alt="" class="fr-mt-6w fr-mb-2w" />
@@ -64,8 +64,9 @@
 </template>
 
 <script lang="ts" setup>
-  import { onMounted, ref } from 'vue';
-  import { onBeforeRouteUpdate, useRoute } from 'vue-router';
+  import { useHead } from '@unhead/vue';
+  import { computed, onMounted, ref, watch } from 'vue';
+  import { useRoute } from 'vue-router';
   import CatalogueActionsRecommandees from '@/components/custom/Action/Catalogue/CatalogueActionsRecommandees.vue';
   import WidgetAides from '@/components/custom/Aides/WidgetAides.vue';
   import ParcoursKYCPourRecommandations from '@/components/custom/Thematiques/ParcoursKYCPourRecommandations.vue';
@@ -87,26 +88,33 @@
   import { RouteActionsName } from '@/router/actions/routes';
   import { utilisateurStore } from '@/store/utilisateur';
 
+  const route = useRoute();
   const thematique = ref<Thematique>(MenuThematiques.getFromUrl(useRoute().params.id as string));
+  const thematiqueId = ref<ClefThematiqueAPI>(thematique.value.clefTechniqueAPI as ClefThematiqueAPI);
+  const idUtilisateur = utilisateurStore().utilisateur.id;
+
+  watch(
+    () => route.params.id,
+    async newValue => {
+      isLoading.value = true;
+
+      thematique.value = MenuThematiques.getFromUrl(newValue as string);
+      thematiqueId.value = thematique.value.clefTechniqueAPI as ClefThematiqueAPI;
+      await chargerActionsRecommandees();
+
+      isLoading.value = false;
+    },
+  );
+
   const actionsViewModel = ref<ActionViewModel[]>();
   const thematiqueResumeViewModel = ref<ThematiqueResumeViewModel>();
   const idEnchainementKycs = ref<string>();
   const isLoading = ref<boolean>(true);
 
-  const store = utilisateurStore();
-  const idUtilisateur = store.utilisateur.id;
-  let thematiqueId = thematique.value.clefTechniqueAPI;
-
   const chargerActionsRecommandeesUsecase = new RecupererDetailThematiqueUsecase(new ActionsRepositoryAxios());
 
-  onBeforeRouteUpdate(async (to, from, next) => {
-    next();
-    thematique.value = MenuThematiques.getFromUrl(to.params.id as string)!;
-    thematiqueId = thematique.value.clefTechniqueAPI;
-
-    isLoading.value = true;
-    await chargerActionsRecommandees();
-    isLoading.value = false;
+  useHead({
+    title: computed(() => thematique.value && `${thematique.value.labelDansLeMenu} - J'agis`),
   });
 
   onMounted(async () => {
@@ -118,7 +126,7 @@
   async function chargerActionsRecommandees() {
     await chargerActionsRecommandeesUsecase.execute(
       idUtilisateur,
-      thematiqueId,
+      thematiqueId.value,
       new ActionsDansUneThematiquePresenterImpl(
         vm => {
           actionsViewModel.value = vm;
@@ -138,7 +146,7 @@
     );
 
     personnalisationThematiqueEffectueeUsecase
-      .execute(idUtilisateur, thematiqueId as ClefThematiqueAPI, ActionsEventBus.getInstance())
+      .execute(idUtilisateur, thematiqueId.value, ActionsEventBus.getInstance())
       .then(() => {
         setTimeout(async () => {
           await chargerActionsRecommandees();
@@ -148,7 +156,7 @@
 
   async function resetParcours() {
     const resetPersonnalisationUsecase = new ResetPersonnalisationUsecase(new ThematiquesRepositoryAxios());
-    await resetPersonnalisationUsecase.execute(idUtilisateur, thematiqueId as ClefThematiqueAPI);
+    await resetPersonnalisationUsecase.execute(idUtilisateur, thematiqueId.value);
     await chargerActionsRecommandees();
   }
 </script>

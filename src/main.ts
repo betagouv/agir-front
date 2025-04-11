@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Hotjar from '@hotjar/browser';
+import { createHead } from '@unhead/vue/client';
 import { createPinia } from 'pinia';
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate';
 import { createApp } from 'vue';
@@ -64,6 +65,9 @@ NavigationBus.getInstance().setRouter(router);
 app.use(router);
 app.use(pinia);
 app.use(CrispPlugin, { siteId: import.meta.env.VITE_CRISP_WEBSITE_ID });
+
+const head = createHead();
+app.use(head);
 
 app.use(VueMatomo, {
   host: import.meta.env.VITE_MATOMO_URL,
