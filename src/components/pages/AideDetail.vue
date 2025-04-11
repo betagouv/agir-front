@@ -1,10 +1,4 @@
 <template>
-  <router-link
-    :to="{ path: useNavigationStore().pagePrecedente.path }"
-    class="fr-btn fr-btn--icon-left fr-btn--tertiary-no-outline fr-icon-arrow-left-line fr-pl-0"
-  >
-    Retour
-  </router-link>
   <div class="fr-grid-row fr-grid-row--gutters">
     <div class="fr-col-12 fr-col-md-8">
       <div class="fr-my-3w background--white border border-radius--md fr-p-2w">
@@ -86,7 +80,6 @@
   import { Aide } from '@/domaines/aides/chargementAides.usecase';
   import { MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
   import { TagThematique } from '@/domaines/thematiques/TagThematique';
-  import { useNavigationStore } from '@/store/navigationStore';
 
   const props = defineProps<{ aide: Aide }>();
   const notation = ref<number>(0);
