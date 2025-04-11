@@ -20,7 +20,7 @@
     <h2 class="fr-h3 fr-mt-4w">Étapes</h2>
     <ol>
       <li v-for="etape in recetteViewModel.etapes" :key="etape">
-        {{ etape }}
+        {{ decodeUnicode(etape) }}
       </li>
     </ol>
     <div class="fr-grid-row flex-column fr-mb-4w"></div>
@@ -52,6 +52,12 @@
 
     isLoading.value = false;
   });
+
+  function decodeUnicode(str) {
+    return str.replace(/\\u[\dA-F]{4}/gi, match => {
+      return String.fromCharCode(parseInt(match.replace('\\u', ''), 16));
+    });
+  }
 </script>
 <style scoped>
   .recette--image {

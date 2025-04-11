@@ -15,6 +15,10 @@
     font-size: 1.35rem;
 }
 
+.action h4 {
+    font-size: 1.25rem;
+}
+
 .action .action--cms img {
     display: block;
     max-width: 75%;

@@ -505,6 +505,10 @@
     font-size: 1.25rem;
 }
 
+.cms__content h4 {
+    font-size: 1.15rem;
+}
+
 .text--lh-0 {
     line-height: 0 !important;
 }
