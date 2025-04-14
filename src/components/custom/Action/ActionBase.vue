@@ -17,15 +17,9 @@
 </template>
 
 <script lang="ts" setup>
-  import { useHead } from '@unhead/vue';
-  import { computed } from 'vue';
   import ActionArticlesRecommandees from '@/components/custom/Action/ActionArticlesRecommandees.vue';
   import ActionAside from '@/components/custom/Action/Aside/ActionAside.vue';
   import { ActionBaseViewModel } from '@/domaines/actions/ports/action.presenter';
 
-  const { actionBaseViewModel } = defineProps<{ actionBaseViewModel: ActionBaseViewModel }>();
-
-  useHead({
-    title: computed(() => actionBaseViewModel.titrePropre && `${actionBaseViewModel.titrePropre} - J'agis`),
-  });
+  defineProps<{ actionBaseViewModel: ActionBaseViewModel }>();
 </script>

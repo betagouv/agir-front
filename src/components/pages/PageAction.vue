@@ -28,6 +28,7 @@
 </template>
 
 <script lang="ts" setup>
+  import { useHead } from '@unhead/vue';
   import { computed, onMounted, ref } from 'vue';
   import { useRoute } from 'vue-router';
   import ActionBase from '@/components/custom/Action/ActionBase.vue';
@@ -53,6 +54,7 @@
     ActionQuizzesViewModel,
     ActionSimulateurViewModel,
   } from '@/domaines/actions/ports/action.presenter';
+  import useHeadProperties from '@/shell/useHeadProperties';
   import { useNavigationStore } from '@/store/navigationStore';
   import { utilisateurStore } from '@/store/utilisateur';
 
@@ -68,6 +70,11 @@
       actionSimulateurViewModel.value ||
       actionBilanViewModel.value,
   );
+
+  useHead({
+    ...useHeadProperties,
+    title: computed(() => actionBaseViewModel.value?.titrePropre && `${actionBaseViewModel.value.titrePropre}`),
+  });
 
   onMounted(async () => {
     const idUtilisateur = utilisateurStore().utilisateur.id;

@@ -26,6 +26,7 @@
 </template>
 
 <script lang="ts" setup>
+  import { useHead } from '@unhead/vue';
   import axios from 'redaxios';
   import { computed, onMounted, ref } from 'vue';
   import { NavigationGuardNext, RouteLocationNormalized } from 'vue-router';
@@ -35,12 +36,12 @@
   import Header from '@/components/dsfr/Header.vue';
   import router from '@/router';
   import { RouteCompteName } from '@/router/compte/routeCompteName';
+  import useHeadProperties from '@/shell/useHeadProperties';
   import { useNavigationStore } from '@/store/navigationStore';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const estEnvDeProduction = import.meta.env.VITE_ENV === 'production';
 
-  const appName = "- J'agis";
   // eslint-disable-next-line no-undef
   const appVersion = __APP_VERSION__;
   const latestVersion = ref(appVersion);
@@ -49,7 +50,7 @@
     const { title, estPublique } = to.meta;
 
     if (title) {
-      document.title = `${title as string} ${appName}`;
+      useHead({ ...useHeadProperties, title: `${title as string}` });
     }
 
     const navigationStore = useNavigationStore();

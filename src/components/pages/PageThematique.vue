@@ -66,7 +66,7 @@
 <script lang="ts" setup>
   import { useHead } from '@unhead/vue';
   import { computed, onMounted, ref, watch } from 'vue';
-  import { useRoute } from 'vue-router';
+  import { onBeforeRouteUpdate, useRoute } from 'vue-router';
   import CatalogueActionsRecommandees from '@/components/custom/Action/Catalogue/CatalogueActionsRecommandees.vue';
   import WidgetAides from '@/components/custom/Aides/WidgetAides.vue';
   import ParcoursKYCPourRecommandations from '@/components/custom/Thematiques/ParcoursKYCPourRecommandations.vue';
@@ -86,12 +86,26 @@
   import { ThematiqueResumeViewModel } from '@/domaines/thematiques/ports/thematiqueResume.presenter';
   import { ResetPersonnalisationUsecase } from '@/domaines/thematiques/resetPersonnalisation.usecase';
   import { RouteActionsName } from '@/router/actions/routes';
+  import useHeadProperties from '@/shell/useHeadProperties';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const route = useRoute();
   const thematique = ref<Thematique>(MenuThematiques.getFromUrl(useRoute().params.id as string));
   const thematiqueId = ref<ClefThematiqueAPI>(thematique.value.clefTechniqueAPI as ClefThematiqueAPI);
   const idUtilisateur = utilisateurStore().utilisateur.id;
+
+  useHead({
+    ...useHeadProperties,
+    title: computed(() => thematique.value && `${thematique.value.labelDansLeMenu}`),
+  });
+
+  onBeforeRouteUpdate(async (to, from, next) => {
+    useHead({
+      ...useHeadProperties,
+      title: computed(() => thematique.value && `${thematique.value.labelDansLeMenu}`),
+    });
+    next();
+  });
 
   watch(
     () => route.params.id,
@@ -112,10 +126,6 @@
   const isLoading = ref<boolean>(true);
 
   const chargerActionsRecommandeesUsecase = new RecupererDetailThematiqueUsecase(new ActionsRepositoryAxios());
-
-  useHead({
-    title: computed(() => thematique.value && `${thematique.value.labelDansLeMenu} - J'agis`),
-  });
 
   onMounted(async () => {
     isLoading.value = true;

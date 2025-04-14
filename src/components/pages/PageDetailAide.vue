@@ -18,13 +18,15 @@
   import { Aide } from '@/domaines/aides/chargementAides.usecase';
   import { ConsulterAideEnModeNonConnecteUsecase } from '@/domaines/aides/consulterAideEnModeNonConnecte.usecase';
   import { RecupererDetailAideUsecase } from '@/domaines/aides/recupererDetailAide.usecase';
+  import useHeadProperties from '@/shell/useHeadProperties';
   import { useNavigationStore } from '@/store/navigationStore';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const aide = ref<Aide>();
 
   useHead({
-    title: computed(() => aide.value?.titre && `${aide.value.titre} - J'agis`),
+    ...useHeadProperties,
+    title: computed(() => aide.value?.titre && `${aide.value.titre}`),
   });
 
   onMounted(async () => {
