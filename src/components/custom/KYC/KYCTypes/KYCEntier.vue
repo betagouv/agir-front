@@ -7,7 +7,7 @@
       wording: questionViewModel.libelle,
       cssModifier: 'fr-h4',
     }"
-    :unite="questionViewModel.reponses_possibles[0].unite"
+    :unite="questionViewModel.reponses_possibles[0]?.unite"
   />
 </template>
 

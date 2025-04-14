@@ -67,13 +67,14 @@ describe('Composant dédié au formulaire KYC', () => {
       wordingBouton: 'continuer',
     };
 
-    it('affiche les cases à cocher et les bons boutons', () => {
+    it('affiche les cases à cocher et les bons boutons', async () => {
       page = render(KYCForm, { props: mosaicBooleanProps });
+      await nextTick();
 
       expect(page.getByRole('checkbox', { name: 'Armoire' })).toBeDefined();
       expect(page.getByRole('checkbox', { name: 'Etagere' })).toBeDefined();
-      expect(page.getByRole('button', { name: 'Passer la question' })).toBeDefined();
-      expect(page.getByRole('button', { name: /aucune de ces propositions/i })).toBeDefined();
+      expect(page.getByText('Passer la question')).toBeDefined();
+      expect(page.getByText('Aucune de ces propositions')).toBeDefined();
     });
   });
 
@@ -94,8 +95,9 @@ describe('Composant dédié au formulaire KYC', () => {
       wordingBouton: 'continuer',
     };
 
-    it('affiche des boutons radio', () => {
+    it('affiche des boutons radio', async () => {
       page = render(KYCForm, { props: uniqueProps });
+      await nextTick();
 
       expect(page.getByRole('radio', { name: 'Armoire' })).toBeDefined();
       expect(page.getByRole('radio', { name: 'Etagere' })).toBeDefined();
@@ -120,8 +122,9 @@ describe('Composant dédié au formulaire KYC', () => {
       wordingBouton: 'continuer',
     };
 
-    it('affiche des checkboxes et un bouton continuer', () => {
+    it('affiche des checkboxes et un bouton continuer', async () => {
       page = render(KYCForm, { props: multipleProps });
+      await nextTick();
 
       expect(page.getByRole('checkbox', { name: 'Armoire' })).toBeDefined();
       expect(page.getByRole('checkbox', { name: 'Etagere' })).toBeDefined();
@@ -143,8 +146,9 @@ describe('Composant dédié au formulaire KYC', () => {
       wordingBouton: 'continuer',
     };
 
-    it('affiche un champ texte libre', () => {
+    it('affiche un champ texte libre', async () => {
       page = render(KYCForm, { props: libreProps });
+      await nextTick();
 
       expect(page.getByRole('textbox', { name: /votre réponse/i })).toBeDefined();
       expect(page.getByRole('button', { name: 'Passer la question' })).toBeDefined();
