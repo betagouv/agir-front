@@ -1,5 +1,25 @@
 # Changelog
 
+## [2.4.0](https://github.com/betagouv/agir-front/compare/v2.3.1...v2.4.0) (2025-04-14)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* affichage des sources sur les actions ([#1053](https://github.com/betagouv/agir-front/issues/1053)) ([38faed9](https://github.com/betagouv/agir-front/commit/38faed9c87f3483788de1d92557d74d3ea1a04ac))
+* affichage du bloc 'pour aller plus loin' dans les actions ([#1048](https://github.com/betagouv/agir-front/issues/1048)) ([93aae35](https://github.com/betagouv/agir-front/commit/93aae356458e612110890093a3c913d6a79e8a90))
+* possibilité de passer une question ([#1038](https://github.com/betagouv/agir-front/issues/1038)) ([964aba6](https://github.com/betagouv/agir-front/commit/964aba60d767beba0addf1360fa0ef679a3c9746))
+* recherche par adresse ameliorée ([#1047](https://github.com/betagouv/agir-front/issues/1047)) ([1ccb06d](https://github.com/betagouv/agir-front/commit/1ccb06dde4ea27ca5ac3f81c984414511288ee37))
+
+
+### 🐛 Corrections de bogues
+
+* retours recettes 2 ([#1043](https://github.com/betagouv/agir-front/issues/1043)) ([e02967a](https://github.com/betagouv/agir-front/commit/e02967a383a3d2d15fbe09641bac5b2c93cf504a))
+
+
+### 👷 Autres changements
+
+* Bump vite from 6.2.5 to 6.2.6 ([#1052](https://github.com/betagouv/agir-front/issues/1052)) ([80f4aaa](https://github.com/betagouv/agir-front/commit/80f4aaab2636978dc22f496e9865238f61a559b2))
+
 ## [2.3.1](https://github.com/betagouv/agir-front/compare/v2.3.0...v2.3.1) (2025-04-09)
 
 
