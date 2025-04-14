@@ -104,6 +104,7 @@ describe("Fichier de tests concernant la récupération d'une action de type cla
             'Certains produits peuvent effectivement ne pas être produits localement. Il ne s’agit pas d’arrêter de consommer tout ce qui ne vient pas du village d’à côté, mais plutôt de **réduire les importations**. \nDans la mesure du possible, il vaut mieux privilégier au moins ce qui est **produit en France**, voire en Europe. Pour le reste, vous pouvez par exemple vous tourner vers **les produits labellisés**, qui garantissent des pratiques durables ou le commerce équitable.',
         },
       ],
+      sources: [],
     };
     const usecase = new ChargerActionUsecase(
       new ChargerActionStrategyFactory(
@@ -217,6 +218,7 @@ describe("Fichier de tests concernant la récupération d'une action de type cla
               'Certains produits peuvent effectivement ne pas être produits localement. Il ne s’agit pas d’arrêter de consommer tout ce qui ne vient pas du village d’à côté, mais plutôt de <span class="text--bold">réduire les importations</span>. \nDans la mesure du possible, il vaut mieux privilégier au moins ce qui est <span class="text--bold">produit en France</span>, voire en Europe. Pour le reste, vous pouvez par exemple vous tourner vers <span class="text--bold">les produits labellisés</span>, qui garantissent des pratiques durables ou le commerce équitable.',
           },
         ],
+        sources: [],
       });
     }
   });

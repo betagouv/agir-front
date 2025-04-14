@@ -1,6 +1,9 @@
 <template>
   <section class="background--white fr-p-2w fr-mb-3w shadow">
-    <ActionIntroduction :introduction="actionClassiqueViewModel.introduction" />
+    <ActionIntroduction
+      :introduction="actionClassiqueViewModel.introduction"
+      :sources="actionClassiqueViewModel.sources"
+    />
 
     <ActionWidgetServices :commune="actionClassiqueViewModel.commune" :services="actionClassiqueViewModel.services" />
 

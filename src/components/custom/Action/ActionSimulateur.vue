@@ -1,6 +1,9 @@
 <template>
   <section class="background--white fr-p-2w fr-mb-3w shadow">
-    <ActionIntroduction :introduction="actionSimulateurViewModel.introduction" />
+    <ActionIntroduction
+      :introduction="actionSimulateurViewModel.introduction"
+      :sources="actionSimulateurViewModel.sources"
+    />
 
     <KyCsAction
       :action-id="actionSimulateurViewModel.actionId"
