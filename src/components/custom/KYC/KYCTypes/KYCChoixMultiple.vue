@@ -4,7 +4,7 @@
   </h2>
   <InputCheckbox
     v-model="reponse"
-    :est-resetable="false"
+    :est-resetable="true"
     :options="
       questionViewModel.reponses_possibles.map(reponsePossible => ({
         id: reponsePossible.id,
