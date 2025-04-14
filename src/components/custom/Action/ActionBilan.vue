@@ -1,6 +1,6 @@
 <template>
   <section class="background--white fr-p-2w fr-mb-3w shadow">
-    <ActionIntroduction :introduction="actionBilanViewModel.introduction" />
+    <ActionIntroduction :introduction="actionBilanViewModel.introduction" :sources="actionBilanViewModel.sources" />
 
     <KyCsAction
       :action-id="actionBilanViewModel.actionId"
@@ -8,7 +8,7 @@
       :type-action="TypeAction.BILAN"
     >
       <template v-slot:fin>
-        <BilanResultat :thematique="actionBilanViewModel.thematique" :id-action="actionBilanViewModel.actionId" />
+        <BilanResultat :id-action="actionBilanViewModel.actionId" :thematique="actionBilanViewModel.thematique" />
       </template>
     </KyCsAction>
 

@@ -102,6 +102,12 @@ describe("Fichier de tests concernant la récupération d'une action de type bil
       ],
       services: [],
       faq: [],
+      sources: [
+        {
+          label: 'Sources',
+          url: 'https://www.ademe.fr/particuliers-eco-citoyens/eco-gestes/guide-eco-gestes',
+        },
+      ],
     };
     const usecase = new ChargerActionUsecase(
       new ChargerActionStrategyFactory(
@@ -202,6 +208,12 @@ describe("Fichier de tests concernant la récupération d'une action de type bil
         ],
         actionId: 'id-action-bilan-test',
         thematique: ClefThematiqueAPI.alimentation,
+        sources: [
+          {
+            label: 'Sources',
+            url: 'https://www.ademe.fr/particuliers-eco-citoyens/eco-gestes/guide-eco-gestes',
+          },
+        ],
       });
     }
   });

@@ -118,6 +118,10 @@ class ActionViewModelBuilder {
       points: action.points,
       consigne: action.consigne,
       labelCompteur,
+      sources: action.sources.map(source => ({
+        label: source.label,
+        url: source.url,
+      })),
     };
   }
 

@@ -13,6 +13,11 @@ export interface ActionPresenter {
   presenteActionBilan(action: ActionDetail): void;
 }
 
+export type SourceActionViewModel = {
+  label: string;
+  url: string;
+};
+
 export interface ActionBaseViewModel {
   titre: string;
   titreAffiche: string;
@@ -25,6 +30,7 @@ export interface ActionBaseViewModel {
   nombreDeRealisations: number;
   actionId: string;
   points: number;
+  sources: SourceActionViewModel[];
 }
 
 export interface ActionClassiqueViewModel extends ActionBaseViewModel {

@@ -108,6 +108,7 @@ describe("Fichier de tests concernant la récupération d'une action de type qui
         },
       ],
       faq: [],
+      sources: [],
     };
     const usecase = new ChargerActionUsecase(
       new ChargerActionStrategyFactory(
@@ -199,6 +200,7 @@ describe("Fichier de tests concernant la récupération d'une action de type qui
           },
         ],
         articlesRecommandes: [],
+        sources: [],
       });
     }
   });

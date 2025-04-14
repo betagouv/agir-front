@@ -60,6 +60,10 @@ interface ActionDetailApiModel {
     soustitre?: string;
     image_url: string;
   }[];
+  sources: {
+    label: string;
+    url: string;
+  }[];
 }
 
 interface ActionDetailCMSApiModel {
@@ -234,6 +238,10 @@ export class ActionsRepositoryAxios implements ActionsRepository {
       })),
       kycs: actionDetailApiModel.kycs.map((question: QuestionApiModel) => this.mapQuestionApiModelToQuestion(question)),
       thematique: actionDetailApiModel.thematique as ClefThematiqueAPI,
+      sources: actionDetailApiModel.sources.map(article => ({
+        label: article.label,
+        url: article.url,
+      })),
     };
   }
 
