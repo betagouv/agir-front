@@ -36,6 +36,12 @@ export interface ReponseMultiple {
   }[];
 }
 
+export interface QuestionMetaData {
+  question: Question;
+  nombreTotalDeQuestions: number;
+  etapeCourante: number;
+}
+
 export interface Question {
   id: string;
   libelle: string;
@@ -51,6 +57,10 @@ export class RecupererQuestionUsecase {
 
   async execute(questionId: string, utilisateurId: string, questionPresenter: QuestionPresenter): Promise<void> {
     const question = await this.questionRepository.recupererQuestion(questionId, utilisateurId);
-    questionPresenter.presente(question);
+    questionPresenter.presente({
+      question,
+      nombreTotalDeQuestions: 1,
+      etapeCourante: 1,
+    });
   }
 }

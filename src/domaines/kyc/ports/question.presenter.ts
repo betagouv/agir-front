@@ -1,5 +1,7 @@
-import { Question } from '@/domaines/kyc/recupererQuestion.usecase';
+import { QuestionMetaData } from '@/domaines/kyc/recupererQuestion.usecase';
 
 export interface QuestionPresenter {
-  presente(question: Question): void;
+  presente(question: QuestionMetaData): void;
+
+  finAtteinte(): void;
 }

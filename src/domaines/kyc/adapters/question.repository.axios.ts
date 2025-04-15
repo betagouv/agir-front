@@ -3,11 +3,25 @@ import { TypeAction } from '@/domaines/actions/ports/actions.repository';
 import { QuestionRepository } from '@/domaines/kyc/ports/question.repository';
 import {
   Question,
+  QuestionMetaData,
   ReponseKYCSimple,
   ReponseMosaic,
   ReponseMultiple,
   ThematiqueQuestion,
 } from '@/domaines/kyc/recupererQuestion.usecase';
+
+export class FinAtteinteException extends Error {
+  constructor() {
+    super('Fin atteinte');
+    this.name = 'FinAtteinteException';
+  }
+}
+
+export interface QuestionMetaDataApiModel {
+  nombre_total_questions_effectives: number;
+  position_courante: number;
+  question_courante: QuestionApiModel;
+}
 
 export interface QuestionApiModel extends QuestionMosaicBooleanApiModel {
   code: string;
@@ -107,6 +121,64 @@ export class QuestionRepositoryAxios implements QuestionRepository {
     );
 
     return response.data.kycs.map((question: QuestionApiModel) => this.mapQuestionApiModelToQuestion(question));
+  }
+
+  @intercept401()
+  async recupererPremiereQuestion(utilisateurId: string, enchainementId: string): Promise<QuestionMetaData> {
+    const axiosInstance = AxiosFactory.getAxios();
+    const response = await axiosInstance.get<QuestionMetaDataApiModel>(
+      `/utilisateurs/${utilisateurId}/enchainementQuestionsKYC_v2/${enchainementId}/first`,
+    );
+
+    return {
+      question: this.mapQuestionApiModelToQuestion(response.data.question_courante),
+      nombreTotalDeQuestions: response.data.nombre_total_questions_effectives,
+      etapeCourante: response.data.position_courante,
+    };
+  }
+
+  @intercept401()
+  async recupererProchaineQuestion(
+    utilisateurId: string,
+    enchainementId: string,
+    questionCouranteId: string,
+  ): Promise<QuestionMetaData> {
+    const axiosInstance = AxiosFactory.getAxios();
+    const response = await axiosInstance.get<QuestionMetaDataApiModel>(
+      `/utilisateurs/${utilisateurId}/enchainementQuestionsKYC_v2/${enchainementId}/following/${questionCouranteId}?exclude=non_eligible`,
+    );
+
+    if (!response.data.question_courante) {
+      throw new FinAtteinteException();
+    }
+
+    return {
+      question: this.mapQuestionApiModelToQuestion(response.data.question_courante),
+      nombreTotalDeQuestions: response.data.nombre_total_questions_effectives,
+      etapeCourante: response.data.position_courante,
+    };
+  }
+
+  @intercept401()
+  async recupererPrecedenteQuestion(
+    utilisateurId: string,
+    enchainementId: string,
+    questionCouranteId: string,
+  ): Promise<QuestionMetaData> {
+    const axiosInstance = AxiosFactory.getAxios();
+    const response = await axiosInstance.get<QuestionMetaDataApiModel>(
+      `/utilisateurs/${utilisateurId}/enchainementQuestionsKYC_v2/${enchainementId}/preceding/${questionCouranteId}?exclude=non_eligible`,
+    );
+
+    if (!response.data.question_courante) {
+      throw new FinAtteinteException();
+    }
+
+    return {
+      question: this.mapQuestionApiModelToQuestion(response.data.question_courante),
+      nombreTotalDeQuestions: response.data.nombre_total_questions_effectives,
+      etapeCourante: response.data.position_courante,
+    };
   }
 
   private mapQuestionApiModelToQuestion(question: QuestionApiModel): Question {

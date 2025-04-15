@@ -1,9 +1,7 @@
-import {
-  QuestionViewModel,
-  ReponsePossibleViewModel,
-} from '@/domaines/kyc/adapters/listeQuestionsThematique.presenter.impl';
+import { QuestionViewModel, ReponsePossibleViewModel } from '@/domaines/kyc/adapters/question.presenter.impl';
 import {
   Question,
+  QuestionMetaData,
   ReponseKYCSimple,
   ReponseMosaic,
   ReponseMultiple,
@@ -17,9 +15,9 @@ export class QuestionViewModelBuilder {
     return new QuestionViewModelBuilder();
   }
 
-  static buildFromQuestion(question: Question): QuestionViewModel {
+  static buildFromQuestion(questionMetaData: QuestionMetaData): QuestionViewModel {
     const builder = QuestionViewModelBuilder.init();
-
+    const question = questionMetaData.question;
     return builder
       .withId(question.id)
       .withLibelle(question.libelle)
@@ -28,7 +26,19 @@ export class QuestionViewModelBuilder {
       .withReponsesPossibles(builder.determineReponsePossibles(question))
       .withADejaEteRepondu(question.aEteRepondu)
       .withDescription(builder.determineDescription(question.thematique))
+      .withEtapeCourante(questionMetaData.etapeCourante)
+      .withNombreTotalDeQuestions(questionMetaData.nombreTotalDeQuestions)
       .build();
+  }
+
+  withEtapeCourante(etapeCourant: number): QuestionViewModelBuilder {
+    this.questionViewModel.etapeCourante = etapeCourant;
+    return this;
+  }
+
+  withNombreTotalDeQuestions(nombreTotalDeQuestion: number): QuestionViewModelBuilder {
+    this.questionViewModel.nombreTotalDeQuestions = nombreTotalDeQuestion;
+    return this;
   }
 
   withId(id: string): QuestionViewModelBuilder {

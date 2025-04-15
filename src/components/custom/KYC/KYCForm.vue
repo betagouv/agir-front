@@ -70,7 +70,7 @@
   import KYCLibre from '@/components/custom/KYC/KYCTypes/KYCLibre.vue';
   import KYCMosaic from '@/components/custom/KYC/KYCTypes/KYCMosaic.vue';
   import { useAlerte } from '@/composables/useAlerte';
-  import { QuestionViewModel } from '@/domaines/kyc/adapters/listeQuestionsThematique.presenter.impl';
+  import { QuestionViewModel } from '@/domaines/kyc/adapters/question.presenter.impl';
   import { QuestionRepositoryAxios } from '@/domaines/kyc/adapters/question.repository.axios';
   import { EnvoyerReponseUsecase } from '@/domaines/kyc/envoyerReponse.usecase';
   import { EnvoyerReponsesMultiplesUsecase } from '@/domaines/kyc/envoyerReponsesMultiples.usecase';
