@@ -1,7 +1,7 @@
 <template>
   <div class="fr-container">
     <ServiceSkeletonConditionnel
-      :is-loading="isLoading"
+      :is-loading="pageEstEnChargement"
       :view-model-existe="serviceRechercheLongueVieAuxObjetsViewModel !== undefined"
       :message-erreur="serviceErreur"
     >
@@ -60,7 +60,7 @@
                 .suggestions
             "
           />
-          <ServiceSkeletonCartes v-if="isLoadingMore" />
+          <ServiceSkeletonCartes v-if="cartesSontEnChargement" />
           <button
             v-if="
               (serviceRechercheLongueVieAuxObjetsViewModel as ServiceRechercheLongueVieAuxObjetsViewModelAvecResultats)
@@ -78,8 +78,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { onMounted, ref, watch } from 'vue';
-  import { useRoute, useRouter } from 'vue-router';
+  import { ref } from 'vue';
   import PageServiceTemplate from '@/components/custom/Service/PageServiceTemplate.vue';
   import ServiceBarreDeRechercheAdresse from '@/components/custom/Service/ServiceBarreDeRechercheAdresse.vue';
   import ServiceFavoris from '@/components/custom/Service/ServiceFavoris.vue';
@@ -87,6 +86,7 @@
   import ServiceSelect from '@/components/custom/Service/ServiceSelect.vue';
   import ServiceSkeletonCartes from '@/components/custom/Service/ServiceSkeletonCartes.vue';
   import ServiceSkeletonConditionnel from '@/components/custom/Service/ServiceSkeletonConditionnel.vue';
+  import { useRechercheLieuService } from '@/composables/useRechercheLieuService';
   import {
     ServiceRechercheLongueVieAuxObjetsPresenterImpl,
     ServiceRechercheLongueVieAuxObjetsViewModel,
@@ -96,58 +96,26 @@
   import { RecupererServiceLongueVieAuxObjetsUsecase } from '@/domaines/serviceRecherche/longueVieAuxObjets/recupererServiceLongueVieAuxObjets.usecase';
   import { utilisateurStore } from '@/store/utilisateur';
 
-  const route = useRoute();
-  const router = useRouter();
-  const isLoading = ref<boolean>(true);
   const coordonnees = ref<{ latitude: number; longitude: number }>();
-  const isLoadingMore = ref<boolean>(false);
   const serviceRechercheLongueVieAuxObjetsViewModel = ref<ServiceRechercheLongueVieAuxObjetsViewModel>();
-
   const usecase = new RecupererServiceLongueVieAuxObjetsUsecase(new ServiceRechercheLongueVieAuxObjetsAxios());
 
   const serviceErreur = ref<string | null>(null);
-  let nombreMaxResultats = 9;
   const typeDeRecherche = ref<string>('vos_objets');
 
-  onMounted(() => {
-    const lat = parseFloat(route.query.latitude as string);
-    const lng = parseFloat(route.query.longitude as string);
-    if (!isNaN(lat) && !isNaN(lng)) {
-      coordonnees.value = { latitude: lat, longitude: lng };
-    }
-    lancerRecherche();
-  });
+  const {
+    chargerPlusDeResultats,
+    resetNombreDeResultats,
+    lancerLaRecherche,
+    pageEstEnChargement,
+    cartesSontEnChargement,
+  } = useRechercheLieuService(lancerLeUseCase, coordonnees);
 
-  watch(
-    () => route.query.latitude && route.query.longitude,
-    () => {
-      const lat = parseFloat(route.query.latitude as string);
-      const lng = parseFloat(route.query.longitude as string);
-      if (isNaN(lat) && isNaN(lng)) {
-        coordonnees.value = undefined;
-        return;
-      }
-      coordonnees.value = { latitude: lat, longitude: lng };
-    },
-  );
-
-  watch(coordonnees, nouvelleCoordonnees => {
-    nombreMaxResultats = 9;
-    router.push({
-      query: {
-        ...route.query,
-        latitude: nouvelleCoordonnees?.latitude.toString(),
-        longitude: nouvelleCoordonnees?.longitude.toString(),
-      },
-    });
-    lancerRecherche();
-  });
-
-  async function lancerRecherche(): Promise<void> {
+  async function lancerLeUseCase(limit: number): Promise<void> {
     await usecase.execute(
       utilisateurStore().utilisateur.id,
       typeDeRecherche.value,
-      nombreMaxResultats,
+      limit,
       new ServiceRechercheLongueVieAuxObjetsPresenterImpl(
         vm => {
           serviceRechercheLongueVieAuxObjetsViewModel.value = vm;
@@ -156,19 +124,11 @@
       ),
       coordonnees.value,
     );
-    isLoading.value = false;
   }
 
-  const chargerPlusDeResultats = async () => {
-    isLoadingMore.value = true;
-    nombreMaxResultats += 9;
-    await lancerRecherche();
-    isLoadingMore.value = false;
-  };
-
   const updateType = (type: string) => {
-    nombreMaxResultats = 9;
+    resetNombreDeResultats();
     typeDeRecherche.value = type;
-    lancerRecherche();
+    lancerLaRecherche();
   };
 </script>

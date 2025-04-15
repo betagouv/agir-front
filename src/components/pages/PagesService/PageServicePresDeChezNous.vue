@@ -1,7 +1,7 @@
 <template>
   <div class="fr-container">
     <ServiceSkeletonConditionnel
-      :is-loading="isLoading"
+      :is-loading="pageEstEnChargement"
       :view-model-existe="serviceRecherchePresDeChezNousViewModel !== undefined"
       :message-erreur="serviceErreur"
     >
@@ -55,11 +55,13 @@
         <section v-else>
           <h2 class="fr-h3">Suggestions</h2>
           <ServiceListeCarte
+            v-if="!cartesSontEnChargement"
             :suggestions-service-view-model="
               (serviceRecherchePresDeChezNousViewModel as ServiceRecherchePresDeChezNousViewModelAvecResultats)
                 .suggestions
             "
           />
+          <ServiceSkeletonCartes v-if="cartesSontEnChargement" />
           <button
             v-if="
               (serviceRecherchePresDeChezNousViewModel as ServiceRecherchePresDeChezNousViewModelAvecResultats)
@@ -77,14 +79,15 @@
 </template>
 
 <script lang="ts" setup>
-  import { onMounted, ref, watch } from 'vue';
-  import { useRoute, useRouter } from 'vue-router';
+  import { ref } from 'vue';
   import PageServiceTemplate from '@/components/custom/Service/PageServiceTemplate.vue';
   import ServiceBarreDeRechercheAdresse from '@/components/custom/Service/ServiceBarreDeRechercheAdresse.vue';
   import ServiceFavoris from '@/components/custom/Service/ServiceFavoris.vue';
   import ServiceListeCarte from '@/components/custom/Service/ServiceListeCarte.vue';
   import ServiceSelect from '@/components/custom/Service/ServiceSelect.vue';
+  import ServiceSkeletonCartes from '@/components/custom/Service/ServiceSkeletonCartes.vue';
   import ServiceSkeletonConditionnel from '@/components/custom/Service/ServiceSkeletonConditionnel.vue';
+  import { useRechercheLieuService } from '@/composables/useRechercheLieuService';
   import {
     ServiceRecherchePresDeChezNousPresenterImpl,
     ServiceRecherchePresDeChezNousViewModel,
@@ -94,75 +97,37 @@
   import { RecupererServicePresDeChezNousUsecase } from '@/domaines/serviceRecherche/presDeChezNous/recupererServicePresDeChezNous.usecase';
   import { utilisateurStore } from '@/store/utilisateur';
 
-  const route = useRoute();
-  const router = useRouter();
-  const isLoading = ref<boolean>(true);
   const coordonnees = ref<{ latitude: number; longitude: number }>();
-  const serviceRecherchePresDeChezNousViewModel = ref<ServiceRecherchePresDeChezNousViewModel>();
+  const {
+    chargerPlusDeResultats,
+    resetNombreDeResultats,
+    lancerLaRecherche,
+    pageEstEnChargement,
+    cartesSontEnChargement,
+  } = useRechercheLieuService(lancerLeUseCase, coordonnees);
 
+  const serviceRecherchePresDeChezNousViewModel = ref<ServiceRecherchePresDeChezNousViewModel>();
   const usecase = new RecupererServicePresDeChezNousUsecase(new ServiceRecherchePresDeChezNousAxios());
 
   const serviceErreur = ref<string | null>(null);
-  let nombreMaxResultats = 9;
   const typeDeRecherche = ref<string>('');
 
-  onMounted(async () => {
-    const lat = parseFloat(route.query.latitude as string);
-    const lng = parseFloat(route.query.longitude as string);
-    if (!isNaN(lat) && !isNaN(lng)) {
-      coordonnees.value = { latitude: lat, longitude: lng };
-    }
-    await lancerRecherche();
-  });
-
-  watch(
-    () => route.query.latitude && route.query.longitude,
-    () => {
-      const lat = parseFloat(route.query.latitude as string);
-      const lng = parseFloat(route.query.longitude as string);
-      if (isNaN(lat) && isNaN(lng)) {
-        coordonnees.value = undefined;
-        return;
-      }
-      coordonnees.value = { latitude: lat, longitude: lng };
-    },
-  );
-
-  watch(coordonnees, nouvelleCoordonnees => {
-    nombreMaxResultats = 9;
-    router.push({
-      query: {
-        ...route.query,
-        latitude: nouvelleCoordonnees?.latitude.toString(),
-        longitude: nouvelleCoordonnees?.longitude.toString(),
-      },
-    });
-    lancerRecherche();
-  });
-
-  async function lancerRecherche() {
+  async function lancerLeUseCase(limit: number) {
     await usecase.execute(
       utilisateurStore().utilisateur.id,
       typeDeRecherche.value,
-      nombreMaxResultats,
+      limit,
       new ServiceRecherchePresDeChezNousPresenterImpl(
         vm => (serviceRecherchePresDeChezNousViewModel.value = vm),
         error => (serviceErreur.value = error),
       ),
       coordonnees.value,
     );
-
-    isLoading.value = false;
   }
 
-  const chargerPlusDeResultats = () => {
-    nombreMaxResultats += 9;
-    lancerRecherche();
-  };
-
-  const updateType = (type: string) => {
-    nombreMaxResultats = 9;
+  const updateType = async (type: string) => {
+    resetNombreDeResultats();
     typeDeRecherche.value = type;
-    lancerRecherche();
+    await lancerLaRecherche();
   };
 </script>
