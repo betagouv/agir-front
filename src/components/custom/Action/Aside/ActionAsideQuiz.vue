@@ -1,6 +1,6 @@
 <template>
   <ActionAsideAFaire v-if="!estRealise" :points="actionBaseViewModel.points" sous-titre="Obtenez 4 bonnes réponses" />
-  <ActionAsideRealisee v-else :points="actionBaseViewModel.points" sous-titre="Vous avez réalisé votre quizz" />
+  <ActionAsideRealisee v-else :points="actionBaseViewModel.points" sous-titre="Vous avez réalisé votre quiz" />
 
   <template v-if="nombreActionRealise > 1">
     <hr />
