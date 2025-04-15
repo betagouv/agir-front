@@ -1,5 +1,5 @@
 <template>
-  <footer class="fr-footer" role="contentinfo" id="footer">
+  <footer id="footer" class="fr-footer" role="contentinfo">
     <div class="fr-container">
       <div class="fr-footer__body">
         <div class="fr-footer__brand fr-enlarge-link">
@@ -7,8 +7,8 @@
             République
             <br />Française
           </p>
-          <router-link title="Retour à l'accueil du site - J'agis" :to="{ name: RouteCommuneName.ACCUEIL }">
-            <img class="logo-jagis" src="/logo-jagis-full.svg" alt="J'agis" />
+          <router-link :to="{ name: RouteCommuneName.ACCUEIL }" title="Retour à l'accueil du site - J'agis">
+            <img alt="J'agis" class="logo-jagis" src="/logo-jagis-full.svg" />
           </router-link>
         </div>
         <div class="fr-footer__content">
@@ -20,48 +20,48 @@
           <ul class="fr-footer__content-list">
             <li class="fr-footer__content-item">
               <a
-                target="_blank"
-                rel="noopener external"
-                title="info.gouv.fr - nouvelle fenêtre"
                 id="footer__content-link-7654"
                 class="fr-footer__content-link"
                 href="https://info.gouv.fr"
+                rel="noopener external"
+                target="_blank"
+                title="info.gouv.fr - nouvelle fenêtre"
               >
                 info.gouv.fr
               </a>
             </li>
             <li class="fr-footer__content-item">
               <a
-                target="_blank"
-                rel="noopener external"
-                title="service-public.fr - nouvelle fenêtre"
                 id="footer__content-link-7655"
                 class="fr-footer__content-link"
                 href="https://service-public.fr"
+                rel="noopener external"
+                target="_blank"
+                title="service-public.fr - nouvelle fenêtre"
               >
                 service-public.fr
               </a>
             </li>
             <li class="fr-footer__content-item">
               <a
-                target="_blank"
-                rel="noopener external"
-                title="legifrance.gouv.fr - nouvelle fenêtre"
                 id="footer__content-link-7656"
                 class="fr-footer__content-link"
                 href="https://legifrance.gouv.fr"
+                rel="noopener external"
+                target="_blank"
+                title="legifrance.gouv.fr - nouvelle fenêtre"
               >
                 legifrance.gouv.fr
               </a>
             </li>
             <li class="fr-footer__content-item">
               <a
-                target="_blank"
-                rel="noopener external"
-                title="data.gouv.fr - nouvelle fenêtre"
                 id="footer__content-link-7657"
                 class="fr-footer__content-link"
                 href="https://data.gouv.fr"
+                rel="noopener external"
+                target="_blank"
+                title="data.gouv.fr - nouvelle fenêtre"
               >
                 data.gouv.fr
               </a>
@@ -75,13 +75,16 @@
           <div class="fr-footer__partners-main">
             <ul class="fr-grid-row fr-grid-row--gutters fr-grid-row--middle">
               <li class="fr-col">
-                <img src="/logo-dinum.webp" alt="DINUM : Direction interministérielle du numérique" height="80px" />
+                <img alt="DINUM : Direction interministérielle du numérique" height="80px" src="/logo-dinum.webp" />
               </li>
               <li class="fr-col">
-                <img src="/logo-ademe.svg" alt="ADEME: Agence de la transition écologique " height="80px" />
+                <img alt="ADEME: Agence de la transition écologique " height="80px" src="/logo-ademe.svg" />
               </li>
               <li class="fr-col">
-                <img src="/logo_fnv.webp" alt="France Nation Verte" height="80px" />
+                <img alt="France Nation Verte" height="80px" src="/logo_fnv.webp" />
+              </li>
+              <li class="fr-col">
+                <img alt="Office Français de la Biodiversité" height="80px" src="/ic_ofb.svg" />
               </li>
             </ul>
           </div>
@@ -93,35 +96,35 @@
             <a class="fr-footer__bottom-link" href="#">Plan du site</a>
           </li> -->
           <li class="fr-footer__bottom-item">
-            <router-link class="fr-footer__bottom-link fr-pt-1w" :to="{ name: RouteConformiteName.ACCESSIBILITE }"
+            <router-link :to="{ name: RouteConformiteName.ACCESSIBILITE }" class="fr-footer__bottom-link fr-pt-1w"
               >Accessibilité : non-conforme
             </router-link>
           </li>
           <li class="fr-footer__bottom-item">
-            <router-link class="fr-footer__bottom-link fr-pt-1w" :to="{ name: RouteConformiteName.MENTIONS_LEGALES }"
+            <router-link :to="{ name: RouteConformiteName.MENTIONS_LEGALES }" class="fr-footer__bottom-link fr-pt-1w"
               >Mentions légales
             </router-link>
           </li>
           <li class="fr-footer__bottom-item">
-            <router-link class="fr-footer__bottom-link fr-pt-1w" :to="{ name: RouteConformiteName.CGU }"
+            <router-link :to="{ name: RouteConformiteName.CGU }" class="fr-footer__bottom-link fr-pt-1w"
               >Conditions générales d'utilisation
             </router-link>
           </li>
           <li class="fr-footer__bottom-item">
             <router-link
-              class="fr-footer__bottom-link fr-pt-1w"
               :to="{ name: RouteConformiteName.POLITIQUE_DE_CONFIDENTIALITE }"
+              class="fr-footer__bottom-link fr-pt-1w"
             >
               Politique de confidentialité
             </router-link>
           </li>
           <li class="fr-footer__bottom-item">
-            <router-link class="fr-footer__bottom-link fr-pt-1w" :to="{ name: RouteConformiteName.STATISTIQUES }">
+            <router-link :to="{ name: RouteConformiteName.STATISTIQUES }" class="fr-footer__bottom-link fr-pt-1w">
               Statistiques
             </router-link>
           </li>
           <li class="fr-footer__bottom-item">
-            <router-link class="fr-footer__bottom-link fr-pt-1w" :to="{ name: RouteConformiteName.PLAN_DU_SITE }">
+            <router-link :to="{ name: RouteConformiteName.PLAN_DU_SITE }" class="fr-footer__bottom-link fr-pt-1w">
               Plan du site
             </router-link>
           </li>
@@ -138,7 +141,7 @@
   </footer>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
   import '@gouvfr/dsfr/dist/component/footer/footer.min.css';
   import { RouteCommuneName } from '@/router';
   import { RouteConformiteName } from '@/router/conformite/routes';
