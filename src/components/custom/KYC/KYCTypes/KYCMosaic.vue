@@ -14,9 +14,10 @@
     "
   />
 </template>
-<script setup lang="ts">
+<script lang="ts" setup>
   import Mosaic from '@/components/custom/Form/Mosaic.vue';
-  import { QuestionViewModel } from '@/domaines/kyc/adapters/listeQuestionsThematique.presenter.impl';
+  import { QuestionViewModel } from '@/domaines/kyc/adapters/question.presenter.impl';
+
   defineProps<{ questionViewModel: QuestionViewModel }>();
   const reponse = defineModel<string[]>();
 </script>

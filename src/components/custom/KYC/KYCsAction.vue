@@ -36,7 +36,7 @@
   import { TypeAction } from '@/domaines/actions/ports/actions.repository';
   import { TerminerActionUsecase } from '@/domaines/actions/terminerAction.usecase';
   import { ListeQuestionsDansLeSimulateurPresenterImpl } from '@/domaines/kyc/adapters/listeQuestionsDansLeSimulateur.presenter.impl';
-  import { QuestionViewModel } from '@/domaines/kyc/adapters/listeQuestionsThematique.presenter.impl';
+  import { QuestionViewModel } from '@/domaines/kyc/adapters/question.presenter.impl';
   import { QuestionRepositoryAxios } from '@/domaines/kyc/adapters/question.repository.axios';
   import { RecupererQuestionsKYCsUsecase } from '@/domaines/kyc/recupererQuestionsKYCsUsecase';
   import { utilisateurStore } from '@/store/utilisateur';

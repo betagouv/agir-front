@@ -5,7 +5,7 @@
     :legende="questionViewModel.libelle"
     :name="questionViewModel.id"
     :options="
-      questionViewModel.reponses_possibles.map((reponsePossible: ReponsePossibleViewModel) => ({
+      questionViewModel.reponses_possibles.map(reponsePossible => ({
         label: reponsePossible.label,
         value: reponsePossible.id,
       }))
@@ -17,12 +17,9 @@
   />
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
   import BoutonsRadio from '@/components/custom/Form/BoutonsRadio.vue';
-  import {
-    QuestionViewModel,
-    ReponsePossibleViewModel,
-  } from '@/domaines/kyc/adapters/listeQuestionsThematique.presenter.impl';
+  import { QuestionViewModel } from '@/domaines/kyc/adapters/question.presenter.impl';
 
   defineProps<{ questionViewModel: QuestionViewModel }>();
   const reponse = defineModel<string[]>();

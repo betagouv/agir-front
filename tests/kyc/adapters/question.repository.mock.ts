@@ -1,5 +1,5 @@
 import { QuestionRepository } from '@/domaines/kyc/ports/question.repository';
-import { Question } from '@/domaines/kyc/recupererQuestion.usecase';
+import { Question, QuestionMetaData } from '@/domaines/kyc/recupererQuestion.usecase';
 
 export class MockQuestionRepository implements QuestionRepository {
   constructor(private questionARetourner: Question) {}
@@ -36,6 +36,26 @@ export class MockQuestionRepository implements QuestionRepository {
   }
 
   recupererQuestionsSimulateur(utilisateurId: string, simulateurActionId: string): Promise<Question[]> {
+    throw new Error('Method not implemented.');
+  }
+
+  recupererProchaineQuestion(
+    utilisateurId: string,
+    enchainementId: string,
+    questionCouranteId: string,
+  ): Promise<QuestionMetaData> {
+    throw new Error('Method not implemented.');
+  }
+
+  recupererPrecedenteQuestion(
+    utilisateurId: string,
+    enchainementId: string,
+    questionCouranteId: string,
+  ): Promise<QuestionMetaData> {
+    throw new Error('Method not implemented.');
+  }
+
+  recupererPremiereQuestion(utilisateurId: string, enchainementId: string): Promise<QuestionMetaData> {
     throw new Error('Method not implemented.');
   }
 }

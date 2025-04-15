@@ -187,6 +187,8 @@ describe("Fichier de tests concernant la récupération d'une action de type sim
         ],
         kycs: [
           {
+            etapeCourante: 1,
+            nombreTotalDeQuestions: 2,
             id: 'questionId',
             libelle: 'Une question',
             type: 'libre',
@@ -197,6 +199,8 @@ describe("Fichier de tests concernant la récupération d'une action de type sim
               "Ces informations permettent à <span class='text--italic'>J'agis</span> de mieux comprendre vos habitudes alimentaires",
           },
           {
+            etapeCourante: 1,
+            nombreTotalDeQuestions: 2,
             id: 'questionId2',
             libelle: 'Une question 2 ?',
             type: 'decimal',

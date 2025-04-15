@@ -23,8 +23,7 @@
 <script lang="ts" setup>
   import { onMounted, ref } from 'vue';
   import KYCForm from '@/components/custom/KYC/KYCForm.vue';
-  import { QuestionViewModel } from '@/domaines/kyc/adapters/listeQuestionsThematique.presenter.impl';
-  import { QuestionPresenterImpl } from '@/domaines/kyc/adapters/question.presenter.impl';
+  import { QuestionPresenterImpl, QuestionViewModel } from '@/domaines/kyc/adapters/question.presenter.impl';
   import { QuestionRepositoryAxios } from '@/domaines/kyc/adapters/question.repository.axios';
   import { RecupererQuestionUsecase } from '@/domaines/kyc/recupererQuestion.usecase';
   import router from '@/router';
@@ -38,9 +37,12 @@
     await recupereQuestionUsecase.execute(
       'KYC_preference',
       utilisateurStore().utilisateur.id,
-      new QuestionPresenterImpl((viewModel: QuestionViewModel) => {
-        questionViewModel.value = viewModel;
-      }),
+      new QuestionPresenterImpl(
+        (viewModel: QuestionViewModel) => {
+          questionViewModel.value = viewModel;
+        },
+        () => {},
+      ),
     );
   });
 

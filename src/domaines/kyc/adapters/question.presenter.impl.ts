@@ -24,7 +24,6 @@ export interface QuestionViewModel {
   description: string;
   etapeCourante: number;
   nombreTotalDeQuestions: number;
-  finAtteinte: boolean;
 }
 
 export class QuestionPresenterImpl implements QuestionPresenter {
