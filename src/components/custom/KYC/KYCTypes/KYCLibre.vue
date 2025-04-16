@@ -7,7 +7,8 @@
 </template>
 
 <script lang="ts" setup>
-  import { QuestionViewModel } from '@/domaines/kyc/adapters/listeQuestionsThematique.presenter.impl';
+  import { QuestionViewModel } from '@/domaines/kyc/adapters/question.presenter.impl';
+
   defineProps<{ questionViewModel: QuestionViewModel; styleDuTitre?: string }>();
   const reponse = defineModel<string>();
 </script>

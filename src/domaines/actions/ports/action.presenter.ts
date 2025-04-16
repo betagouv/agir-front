@@ -1,5 +1,5 @@
 import { ActionDetail } from '@/domaines/actions/ports/actions.repository';
-import { QuestionViewModel } from '@/domaines/kyc/adapters/listeQuestionsThematique.presenter.impl';
+import { QuestionViewModel } from '@/domaines/kyc/adapters/question.presenter.impl';
 import { ArticleDuQuiz } from '@/domaines/quiz/ports/quiz.repository';
 import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 

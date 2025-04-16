@@ -82,7 +82,13 @@ class ActionViewModelBuilder {
         image: article.image,
         url: `/article/${buildUrl(article.titre)}/${article.id}`,
       })),
-      kycs: action.kycs.map(kyc => QuestionViewModelBuilder.buildFromQuestion(kyc)),
+      kycs: action.kycs.map(kyc =>
+        QuestionViewModelBuilder.buildFromQuestion({
+          question: kyc,
+          nombreTotalDeQuestions: action.kycs.length,
+          etapeCourante: 1,
+        }),
+      ),
     };
   }
 
@@ -97,7 +103,13 @@ class ActionViewModelBuilder {
         image: article.image,
         url: `/article/${buildUrl(article.titre)}/${article.id}`,
       })),
-      kycs: action.kycs.map(kyc => QuestionViewModelBuilder.buildFromQuestion(kyc)),
+      kycs: action.kycs.map(kyc =>
+        QuestionViewModelBuilder.buildFromQuestion({
+          question: kyc,
+          nombreTotalDeQuestions: action.kycs.length,
+          etapeCourante: 1,
+        }),
+      ),
       thematique: action.thematique,
     };
   }

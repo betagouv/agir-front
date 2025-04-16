@@ -5,8 +5,8 @@ import {
   ReponseMosaic,
   ThematiqueQuestion,
 } from '@/domaines/kyc/recupererQuestion.usecase';
-import { QuestionPresenterImpl } from '@/domaines/kyc/adapters/question.presenter.impl';
-import { QuestionViewModel } from '@/domaines/kyc/adapters/listeQuestionsThematique.presenter.impl';
+import { QuestionPresenterImpl, QuestionViewModel } from '@/domaines/kyc/adapters/question.presenter.impl';
+import { expect } from 'vitest';
 
 describe('Fichier de tests pour récuperer une question KYC', () => {
   it("En donnant un id d'utilisateur et l'id de la question KYC doit appeler le back pour récuperer la question pour un type libre", async () => {
@@ -26,11 +26,17 @@ describe('Fichier de tests pour récuperer une question KYC', () => {
 
     // WHEN
     const usecase = new RecupererQuestionUsecase(questionRepository);
-    await usecase.execute('utilisateurId', 'questionId', new QuestionPresenterImpl(expectation));
+    await usecase.execute(
+      'utilisateurId',
+      'questionId',
+      new QuestionPresenterImpl(expectation, finAtteinte => expect(finAtteinte).toBeFalsy()),
+    );
 
     // THEN
     function expectation(viewModel: QuestionViewModel) {
       expect(viewModel).toStrictEqual<QuestionViewModel>({
+        etapeCourante: 1,
+        nombreTotalDeQuestions: 1,
         id: 'questionId',
         libelle: 'Une question',
         type: 'libre',
@@ -75,11 +81,19 @@ describe('Fichier de tests pour récuperer une question KYC', () => {
 
     // WHEN
     const usecase = new RecupererQuestionUsecase(questionRepository);
-    await usecase.execute('utilisateurId', 'questionId', new QuestionPresenterImpl(expectation));
+    await usecase.execute(
+      'utilisateurId',
+      'questionId',
+      new QuestionPresenterImpl(expectation, finAtteinte => {
+        expect(finAtteinte).toBeFalsy();
+      }),
+    );
 
     // THEN
     function expectation(viewModel: QuestionViewModel) {
       expect(viewModel).toStrictEqual<QuestionViewModel>({
+        etapeCourante: 1,
+        nombreTotalDeQuestions: 1,
         id: 'questionId',
         libelle: 'Une question',
         type: 'choix_multiple',
@@ -141,11 +155,17 @@ describe('Fichier de tests pour récuperer une question KYC', () => {
 
     // WHEN
     const usecase = new RecupererQuestionUsecase(questionRepository);
-    await usecase.execute('utilisateurId', 'questionId', new QuestionPresenterImpl(expectation));
+    await usecase.execute(
+      'utilisateurId',
+      'questionId',
+      new QuestionPresenterImpl(expectation, finAtteinte => expect(finAtteinte).toBeFalsy()),
+    );
 
     // THEN
     function expectation(viewModel: QuestionViewModel) {
       expect(viewModel).toStrictEqual<QuestionViewModel>({
+        etapeCourante: 1,
+        nombreTotalDeQuestions: 1,
         id: 'questionId',
         libelle: 'Une question',
         points: 'Récoltez vos + 10 points',
@@ -205,11 +225,17 @@ describe('Fichier de tests pour récuperer une question KYC', () => {
 
     // WHEN
     const usecase = new RecupererQuestionUsecase(questionRepository);
-    await usecase.execute('utilisateurId', 'questionId', new QuestionPresenterImpl(expectation));
+    await usecase.execute(
+      'utilisateurId',
+      'questionId',
+      new QuestionPresenterImpl(expectation, finAtteinte => expect(finAtteinte).toBeFalsy()),
+    );
 
     // THEN
     function expectation(viewModel: QuestionViewModel) {
       expect(viewModel).toStrictEqual<QuestionViewModel>({
+        etapeCourante: 1,
+        nombreTotalDeQuestions: 1,
         id: 'questionId',
         libelle: 'Une question',
         points: 'Récoltez vos + 10 points',

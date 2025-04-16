@@ -1,8 +1,22 @@
 import { TypeAction } from '@/domaines/actions/ports/actions.repository';
-import { Question } from '@/domaines/kyc/recupererQuestion.usecase';
+import { Question, QuestionMetaData } from '@/domaines/kyc/recupererQuestion.usecase';
 
 export interface QuestionRepository {
   recupererQuestion(questionId: string, utilisateurId: string): Promise<Question>;
+
+  recupererPremiereQuestion(utilisateurId: string, enchainementId: string): Promise<QuestionMetaData>;
+
+  recupererProchaineQuestion(
+    utilisateurId: string,
+    enchainementId: string,
+    questionCouranteId: string,
+  ): Promise<QuestionMetaData>;
+
+  recupererPrecedenteQuestion(
+    utilisateurId: string,
+    enchainementId: string,
+    questionCouranteId: string,
+  ): Promise<QuestionMetaData>;
 
   envoyerReponse(questionId: string, utilisateurId: string, reponse: string): Promise<void>;
 

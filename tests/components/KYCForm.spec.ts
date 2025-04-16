@@ -1,7 +1,7 @@
 import KYCForm from '@/components/custom/KYC/KYCForm.vue';
-import { QuestionViewModel } from '@/domaines/kyc/adapters/listeQuestionsThematique.presenter.impl';
 import { render, RenderResult } from '@testing-library/vue';
 import { nextTick } from 'vue';
+import { QuestionViewModel } from '@/domaines/kyc/adapters/question.presenter.impl';
 
 let page: RenderResult;
 
@@ -28,6 +28,8 @@ describe('Composant dédié au formulaire KYC', () => {
         points: '5',
         aDejaEteRepondu: false,
         description: 'Description',
+        etapeCourante: 1,
+        nombreTotalDeQuestions: 1,
       } as QuestionViewModel,
       wordingBouton: 'continuer',
     };
