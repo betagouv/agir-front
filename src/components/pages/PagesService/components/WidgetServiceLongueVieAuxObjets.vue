@@ -14,7 +14,7 @@
         serviceRechercheLongueVieAuxObjetsViewModel as ServiceRechercheLongueVieAuxObjetsViewModelAvecResultats
       ).suggestions"
       :key="suggestion.titre"
-      class="fr-col-12 fr-col-md-6"
+      class="fr-col-sm-6 fr-col"
     >
       <ServiceCarteDSFR
         :suggestionsServiceViewModel="suggestion"

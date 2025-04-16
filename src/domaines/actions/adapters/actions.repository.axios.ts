@@ -220,7 +220,7 @@ export class ActionsRepositoryAxios implements ActionsRepository {
       nombreAidesDisponibles: actionDetailApiModel.nombre_aides_disponibles,
       realisee: actionDetailApiModel.deja_faite,
       services: actionDetailApiModel.services.map(service => ({
-        type: service.recherche_service_id as 'recettes' | 'longue_vie_objets' | 'pres_de_chez_nous',
+        type: service.recherche_service_id as 'recettes' | 'longue_vie_objets' | 'proximite',
         parametreDuService: service.categorie,
       })),
       quizzes: actionDetailApiModel.quizzes.map(quiz => mapQuizApi(quiz)),

@@ -1,6 +1,6 @@
 <template>
   <section v-if="serviceRecherchePresDeChezNousViewModel" class="full-height">
-    <div class="flex flex-space-between align-items--center fr-mb-3w">
+    <div class="flex flex-space-between flex-wrap align-items--center fr-mb-1w">
       <h2 class="fr-h3 fr-mb-0">Mes commerces</h2>
       <div>
         <router-link
@@ -16,8 +16,7 @@
     </div>
 
     <ul
-      class="flex flex-column list-style-none fr-p-0 fr-m-0"
-      style="gap: 1rem"
+      class="fr-grid-row fr-grid-row--gutters list-style-none full-width fr-m-0"
       v-if="!serviceRecherchePresDeChezNousViewModel.aucunResultat"
     >
       <li
@@ -25,6 +24,7 @@
           serviceRecherchePresDeChezNousViewModel as ServiceRecherchePresDeChezNousViewModelAvecResultats
         ).suggestions"
         :key="suggestion.titre"
+        :class="`fr-col-sm-${12 / nombreDeCartesParLigne} fr-col`"
       >
         <ServiceCarteDsfr
           :suggestionsServiceViewModel="suggestion"
@@ -54,6 +54,10 @@
   import { ClefThematiqueAPI, MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
   import { RouteServiceName } from '@/router/services/routes';
   import { utilisateurStore } from '@/store/utilisateur';
+
+  defineProps<{
+    nombreDeCartesParLigne: number;
+  }>();
 
   const isLoading = ref<boolean>(true);
   const serviceRecherchePresDeChezNousViewModel = ref<ServiceRecherchePresDeChezNousViewModel>();
