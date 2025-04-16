@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import Hotjar from '@hotjar/browser';
 import { createHead } from '@unhead/vue/client';
 import { createPinia } from 'pinia';
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate';
@@ -34,27 +33,6 @@ import './assets/theme/markdownFromCMS.css';
 declare global {
   interface Window {
     _paq: any;
-
-    dsfr(element: HTMLElement | null): {
-      modal: {
-        conceal(): void;
-        disclose(): void;
-      };
-    };
-  }
-
-  interface HTMLElement {
-    addEventListener(
-      type: 'dsfr.conceal',
-      listener: (event: Event) => void,
-      options?: boolean | AddEventListenerOptions,
-    ): void;
-
-    removeEventListener(
-      type: 'dsfr.conceal',
-      listener: (event: Event) => void,
-      options?: boolean | EventListenerOptions,
-    ): void;
   }
 }
 
@@ -76,10 +54,6 @@ app.use(VueMatomo, {
 });
 
 if (import.meta.env.VITE_ENV === 'production') {
-  Hotjar.init(import.meta.env.VITE_HOTJAR_ID, import.meta.env.VITE_HOTJAR_SNIPPET_VERSION, {
-    debug: false,
-  });
-
   createSentry(app, router);
 }
 
