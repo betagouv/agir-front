@@ -1,8 +1,10 @@
 <template>
   <section>
-    <div class="flex flex-space-between align-items--center flex-wrap">
+    <div class="flex flex-space-between align-items--center flex-wrap fr-mb-3w">
       <slot name="titre" />
-      <p class="text--italic">avec <img alt="manger bouger" class="fr-ml-2w" src="/logo-manger-bouger.svg" /></p>
+      <p class="text--italic fr-mb-0">
+        avec <img alt="manger bouger" class="fr-ml-2w" src="/logo-manger-bouger.svg" />
+      </p>
     </div>
 
     <ul v-if="serviceRecettesViewModel" class="fr-grid-row fr-grid-row--gutters fr-mb-2w list-style-none">

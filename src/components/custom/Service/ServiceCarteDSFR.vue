@@ -2,7 +2,7 @@
   <div class="fr-card fr-enlarge-link" :class="styleCarte">
     <div class="fr-card__body">
       <div class="fr-card__content">
-        <h4 class="fr-card__title">
+        <h3 class="fr-card__title">
           <router-link
             v-if="suggestionsServiceViewModel.to"
             :to="suggestionsServiceViewModel.to"
@@ -10,7 +10,7 @@
           >
             {{ suggestionsServiceViewModel.titre }}
           </router-link>
-        </h4>
+        </h3>
         <p class="fr-card__desc" v-if="!options?.descriptionDesactive">{{ suggestionsServiceViewModel.description }}</p>
         <div class="fr-card__start">
           <ul
