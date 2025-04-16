@@ -27,6 +27,7 @@
     </button>
     <p class="fr-text--lg fr-mb-0">Définissez votre nouveau mot de passe</p>
     <InputPassword
+      autocomplete-value="new-password"
       class="fr-my-2w"
       v-model="motDePasse"
       @update:mot-de-passe-valide="onMotDePasseValideChanged"

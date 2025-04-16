@@ -50,6 +50,7 @@
 
       <div class="fr-fieldset__element">
         <InputPassword
+          autocomplete-value="new-password"
           v-model="compteUtilisateurInput.motDePasse"
           legende="Votre mot de passe doit contenir :"
           @update:mot-de-passe-valide="onMotDePasseValideChanged"
@@ -63,10 +64,10 @@
             <router-link :to="{ name: RouteConformiteName.CGU }" target="_blank"
               >les conditions générales d'utilisation
             </router-link>
-            <p>
+            <span class="display-block">
               et de transférer les informations issues de mon bilan
               <span class="text--bold">Nos Gestes Climat</span> pour profiter d’une expérience d’usage améliorée
-            </p>
+            </span>
           </label>
         </div>
       </div>

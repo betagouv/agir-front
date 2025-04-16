@@ -74,11 +74,15 @@
 <script setup lang="ts">
   import '@gouvfr/dsfr/dist/component/password/password.min.css';
 
-  defineProps<{
-    modelValue: string;
-    legende: string;
-    required?: boolean;
-  }>();
+  withDefaults(
+    defineProps<{
+      modelValue: string;
+      legende: string;
+      autocompleteValue: 'new-password' | 'current-password';
+      required?: boolean;
+    }>(),
+    { autocompleteValue: 'current-password' },
+  );
 
   const emit = defineEmits<{
     (e: 'update:modelValue', value: string): void;

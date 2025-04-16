@@ -25,6 +25,7 @@
 
       <div class="fr-fieldset__element">
         <InputPassword
+          autocomplete-value="new-password"
           v-model="compteUtilisateurInput.motDePasse"
           :required="true"
           legende="Votre mot de passe doit contenir :"

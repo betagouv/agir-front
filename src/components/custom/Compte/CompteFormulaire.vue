@@ -29,6 +29,7 @@
       <div class="fr-grid-row fr-grid-row--gutters">
         <div class="fr-col-lg-6 fr-col-12">
           <InputText
+            autocomplete="username"
             v-model="profileUtlisateurViewModel.pseudo"
             :erreur="champsPseudoStatus"
             :required="true"
@@ -41,6 +42,7 @@
         </div>
         <div class="fr-col-lg-6 fr-col-12">
           <InputText
+            autocomplete="given-name"
             v-model="profileUtlisateurViewModel.prenom"
             :disabled="!profileUtlisateurViewModel.nomPrenomModifiables"
             :erreur="champsPrenomStatus"
@@ -52,6 +54,7 @@
         </div>
         <div class="fr-col-lg-6 fr-col-12">
           <InputText
+            autocomplete="family-name"
             v-model="profileUtlisateurViewModel.nom"
             :disabled="!profileUtlisateurViewModel.nomPrenomModifiables"
             :erreur="champsNomStatus"

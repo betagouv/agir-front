@@ -12,6 +12,7 @@
           </legend>
           <div class="fr-fieldset__element">
             <InputText
+              autocomplete="username"
               v-model="onboardingPostCreationCompte().pseudo"
               :autofocus="true"
               :erreur="champsPseudoStatus"

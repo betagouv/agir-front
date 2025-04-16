@@ -1,6 +1,6 @@
 <template>
   <form @submit.prevent="parametrerLeService()">
-    <InputText v-model="nomDeFamille" label="Mon nom de famille" name="nom" />
+    <InputText v-model="nomDeFamille" label="Mon nom de famille" name="nom" autocomplete="family-name" />
     <InputText
       v-model="parametreDuService"
       description="Il s’agit d’une suite de 14 chiffres qui identifie le logement sur le réseau électrique."

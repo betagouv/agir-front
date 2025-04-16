@@ -7,7 +7,7 @@
         aria-describedby="password-input-messages"
         aria-required="true"
         name="password"
-        autocomplete="new-password"
+        autocomplete="current-password"
         id="password"
         type="password"
         :value="modelValue"

@@ -4,6 +4,7 @@
       <h3 class="fr-h6">Changer mon mot de passe</h3>
       <div class="fr-col-12 fr-py-0 fr-mb-4w">
         <InputPassword
+          autocomplete-value="new-password"
           v-model="motDePasse"
           @update:mot-de-passe-valide="onMotDePasseValideChanged"
           legende="Votre nouveau mot de passe doit contenir :"

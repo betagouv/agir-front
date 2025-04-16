@@ -7,6 +7,7 @@
           <span class="fr-hint-text">Format 5 chiffres</span>
         </label>
         <input
+          autocomplete="postal-code"
           class="fr-input"
           name="codePostal"
           id="codePostal"

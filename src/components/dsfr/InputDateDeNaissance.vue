@@ -23,6 +23,7 @@
             <span class="fr-hint-text">Exemple : 14</span>
           </label>
           <input
+            autocomplete="bday-day"
             ref="jourInputRef"
             :id="`date-naissance-${keyName}-${cleDateDeNaissance.JOUR}`"
             :aria-describedby="`date-naissance-${keyName}-${cleDateDeNaissance.JOUR}-error`"
@@ -43,6 +44,7 @@
             <span class="fr-hint-text">Exemple : 12</span>
           </label>
           <input
+            autocomplete="bday-month"
             ref="moisInputRef"
             :id="`date-naissance-${keyName}-${cleDateDeNaissance.MOIS}`"
             :aria-describedby="`date-naissance-${keyName}-${cleDateDeNaissance.MOIS}-error`"
@@ -65,6 +67,7 @@
             <span class="fr-hint-text">Exemple : 1984</span>
           </label>
           <input
+            autocomplete="bday-year"
             ref="anneeInputRef"
             :id="`date-naissance-${keyName}-${cleDateDeNaissance.ANNEE}`"
             :aria-describedby="`date-naissance-${keyName}-${cleDateDeNaissance.ANNEE}-error`"
