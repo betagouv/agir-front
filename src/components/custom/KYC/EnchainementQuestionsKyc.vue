@@ -69,7 +69,7 @@
 
   async function chargerEnchainementKycs() {
     const recupererPremiereQuestionUsecase = new RecupererPremiereKYCUsecase(new QuestionRepositoryAxios());
-    await recupererPremiereQuestionUsecase.recupererPremiereKYC(
+    await recupererPremiereQuestionUsecase.execute(
       utilisateurStore().utilisateur.id,
       props.idEnchainementKycs,
       questionPresenterImpl,

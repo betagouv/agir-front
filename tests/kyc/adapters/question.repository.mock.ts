@@ -1,8 +1,9 @@
 import { QuestionRepository } from '@/domaines/kyc/ports/question.repository';
 import { Question, QuestionMetaData } from '@/domaines/kyc/recupererQuestion.usecase';
+import { FinAtteinteException } from '@/domaines/kyc/adapters/question.repository.axios';
 
 export class MockQuestionRepository implements QuestionRepository {
-  constructor(private questionARetourner: Question) {}
+  constructor(private questionARetourner?: Question) {}
 
   recupererQuestionsThematique(_utilisateurId: string, _thematiqueId: string): Promise<Question[]> {
     throw new Error('Method not implemented.');
@@ -13,7 +14,7 @@ export class MockQuestionRepository implements QuestionRepository {
   }
 
   recupererQuestion(_questionId: string, _utilisateurId: string): Promise<Question> {
-    return Promise.resolve(this.questionARetourner);
+    return Promise.resolve(this.questionARetourner!);
   }
 
   envoyerReponse(_questionId: string, _utilisateurId: string, _reponse: string): Promise<void> {
@@ -44,7 +45,14 @@ export class MockQuestionRepository implements QuestionRepository {
     enchainementId: string,
     questionCouranteId: string,
   ): Promise<QuestionMetaData> {
-    throw new Error('Method not implemented.');
+    if (!this.questionARetourner) {
+      throw new FinAtteinteException();
+    }
+    return Promise.resolve<QuestionMetaData>({
+      question: this.questionARetourner,
+      nombreTotalDeQuestions: 10,
+      etapeCourante: 1,
+    });
   }
 
   recupererPrecedenteQuestion(
@@ -52,10 +60,18 @@ export class MockQuestionRepository implements QuestionRepository {
     enchainementId: string,
     questionCouranteId: string,
   ): Promise<QuestionMetaData> {
-    throw new Error('Method not implemented.');
+    return Promise.resolve<QuestionMetaData>({
+      question: this.questionARetourner!,
+      nombreTotalDeQuestions: 10,
+      etapeCourante: 1,
+    });
   }
 
   recupererPremiereQuestion(utilisateurId: string, enchainementId: string): Promise<QuestionMetaData> {
-    throw new Error('Method not implemented.');
+    return Promise.resolve<QuestionMetaData>({
+      question: this.questionARetourner!,
+      nombreTotalDeQuestions: 10,
+      etapeCourante: 1,
+    });
   }
 }
