@@ -50,9 +50,9 @@
         >
           <span class="fr-hidden-sm" v-text="adresse.label" />
           <div class="fr-hidden fr-unhidden-sm">
-            <div class="flex flex-space-between align-items--center">
-              <span class="text--semi-bold">{{ adresse.nom }}</span>
-              <span>{{ adresse.ville }} ({{ adresse.contexte }})</span>
+            <div class="flex flex-space-between">
+              <span class="text--semi-bold defined-max-width">{{ adresse.nom }}</span>
+              <span class="defined-max-width text--right">{{ adresse.ville }} ({{ adresse.contexte }})</span>
             </div>
           </div>
         </li>
@@ -196,5 +196,10 @@
   .adresseSelectionee {
     background-color: #0a76f6;
     color: white;
+  }
+
+  .defined-max-width {
+    max-width: 70%;
+    min-width: 40%;
   }
 </style>
