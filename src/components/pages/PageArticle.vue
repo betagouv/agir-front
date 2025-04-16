@@ -19,13 +19,18 @@
             : []
         "
       />
-      <PageArticleComposant :article="articleAAfficher" @update:article-modifie="onArticleModifie" />
+      <PageArticleComposant
+        v-if="articleAAfficher"
+        :article="articleAAfficher"
+        @update:article-modifie="onArticleModifie"
+      />
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-  import { onMounted, ref } from 'vue';
+  import { useHead } from '@unhead/vue';
+  import { computed, onMounted, ref } from 'vue';
   import { useRoute, useRouter } from 'vue-router';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import PageArticleComposant from '@/components/PageArticleComposant.vue';
@@ -34,11 +39,17 @@
   import { SessionRepositoryStore } from '@/domaines/authentification/adapters/session.repository.store';
   import { MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
   import { RouteCommuneName } from '@/router';
+  import useHeadProperties from '@/shell/useHeadProperties';
 
   const router = useRouter();
 
   const isLoading = ref<boolean>(true);
-  const articleAAfficher = ref<Article | null>(null);
+  const articleAAfficher = ref<Article>();
+
+  useHead({
+    ...useHeadProperties,
+    title: computed(() => articleAAfficher.value?.titre && `${articleAAfficher.value.titre}`),
+  });
 
   onMounted(() => {
     const route = useRoute();
@@ -55,7 +66,6 @@
       .then(async article => {
         articleAAfficher.value = article;
         isLoading.value = false;
-        document.title = `${article.titre as string} - J'agis`;
       })
       .catch(async () => {
         await router.push({ name: RouteCommuneName.NOT_FOUND });

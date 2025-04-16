@@ -139,6 +139,7 @@ describe("Fichier de tests concernant la récupération d'une action de type qui
         sousTitre:
           'Faites des économies et le plein de vitamines ! Cette semaine, on cuisine une recette saine et délicieuse !',
         titreAffiche: 'Quiz - Quiz <span class="text--bold">de ouf</span>',
+        titrePropre: 'Quiz de ouf',
         introduction: '',
         quizzFelicitations: 'Félicitations ! ',
         quizzes: [

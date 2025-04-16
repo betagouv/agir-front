@@ -10,17 +10,24 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { onMounted, ref } from 'vue';
+  import { useHead } from '@unhead/vue';
+  import { computed, onMounted, ref } from 'vue';
   import { useRoute } from 'vue-router';
   import AideDetail from '@/components/pages/AideDetail.vue';
   import { ChargementAidesAxiosRepository } from '@/domaines/aides/adapters/chargementAides.axios.repository';
   import { Aide } from '@/domaines/aides/chargementAides.usecase';
   import { ConsulterAideEnModeNonConnecteUsecase } from '@/domaines/aides/consulterAideEnModeNonConnecte.usecase';
   import { RecupererDetailAideUsecase } from '@/domaines/aides/recupererDetailAide.usecase';
+  import useHeadProperties from '@/shell/useHeadProperties';
   import { useNavigationStore } from '@/store/navigationStore';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const aide = ref<Aide>();
+
+  useHead({
+    ...useHeadProperties,
+    title: computed(() => aide.value?.titre && `${aide.value.titre}`),
+  });
 
   onMounted(async () => {
     const route = useRoute();

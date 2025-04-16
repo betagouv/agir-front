@@ -133,6 +133,7 @@ describe("Fichier de tests concernant la récupération d'une action de type cla
         actionId: 'id-action-test',
         titre: 'Tester une nouvelle <span class="text--bold">recette végétarienne</span>',
         titreAffiche: 'Tester une nouvelle <span class="text--bold">recette végétarienne</span>',
+        titrePropre: 'Tester une nouvelle recette végétarienne',
         sousTitre:
           'Faites des économies et le plein de vitamines ! Cette semaine, on cuisine une recette saine et délicieuse !',
         commune: 'Noisiel',

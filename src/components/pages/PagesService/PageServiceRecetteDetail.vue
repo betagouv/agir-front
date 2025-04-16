@@ -28,7 +28,8 @@
 </template>
 
 <script setup lang="ts">
-  import { onMounted, ref } from 'vue';
+  import { useHead } from '@unhead/vue';
+  import { computed, onMounted, ref } from 'vue';
   import { useRoute } from 'vue-router';
   import {
     RecettePresenterImpl,
@@ -42,6 +43,10 @@
   const recetteViewModel = ref<RecetteViewModel>();
 
   const usecase = new RecupererDetailServiceRecettesUsecase(new ServiceRechercheRecettesAxios());
+
+  useHead({
+    title: computed(() => recetteViewModel.value?.titre && `${recetteViewModel.value.titre} - J'agis`),
+  });
 
   onMounted(async () => {
     await usecase.execute(

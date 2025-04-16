@@ -21,6 +21,7 @@ export type SourceActionViewModel = {
 export interface ActionBaseViewModel {
   titre: string;
   titreAffiche: string;
+  titrePropre: string;
   sousTitre: string;
   consigne: string;
   labelCompteur: string;

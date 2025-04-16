@@ -132,6 +132,7 @@ describe("Fichier de tests concernant la récupération d'une action de type sim
         nombreDeRealisations: 40,
         titre: '<span class="text--bold">Simulateur voiture</span>',
         titreAffiche: 'Simulateur - <span class="text--bold">Simulateur voiture</span>',
+        titrePropre: 'Simulateur voiture',
         sousTitre:
           'Quelle voiture allez-vous adopter ? Faites le test pour découvrir la voiture qui vous correspond le mieux !',
         introduction: `<h2>En <span class="text--bold">quelques mots</span></h2><p>-, Pourquoi est-ce important de bien choisir sa voiture ?
