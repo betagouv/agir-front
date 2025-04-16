@@ -9,7 +9,7 @@ interface RecommandationArticle {
 }
 
 export interface ActionService {
-  type: 'recettes' | 'longue_vie_objets' | 'pres_de_chez_nous';
+  type: 'recettes' | 'longue_vie_objets' | 'proximite';
   parametreDuService: string;
 }
 

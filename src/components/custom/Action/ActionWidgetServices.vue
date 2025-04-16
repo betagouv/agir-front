@@ -14,12 +14,17 @@
       <section v-if="service.type === 'longue_vie_objets'" class="fr-mt-4w">
         <WidgetServiceLongueVieAuxObjets :commune="commune" :parametre-de-recherche="service.parametreDuService" />
       </section>
+
+      <section v-if="service.type === 'proximite'" class="fr-mt-4w">
+        <WidgetServicePresDeChezNous :commune="commune" :parametre-de-recherche="service.parametreDuService" />
+      </section>
     </div>
   </section>
 </template>
 
 <script lang="ts" setup>
   import WidgetServiceLongueVieAuxObjets from '@/components/pages/PagesService/components/WidgetServiceLongueVieAuxObjets.vue';
+  import WidgetServicePresDeChezNous from '@/components/pages/PagesService/components/WidgetServicePresDeChezNous.vue';
   import WidgetServiceRecettes from '@/components/pages/PagesService/components/WidgetServiceRecettes.vue';
   import { ActionClassiqueViewModel } from '@/domaines/actions/ports/action.presenter';
 
