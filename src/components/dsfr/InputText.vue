@@ -5,6 +5,7 @@
       <span v-if="description" class="fr-hint-text">{{ description }}</span>
     </label>
     <input
+      :autocomplete="autocomplete"
       :id="name"
       :autofocus="autofocus"
       :class="erreur && erreur.afficher ? 'fr-input--error' : ''"
@@ -36,6 +37,7 @@
     maxlength?: number;
     autofocus?: boolean;
     disabled?: boolean;
+    autocomplete?: string;
   }>();
 
   const emit = defineEmits<{

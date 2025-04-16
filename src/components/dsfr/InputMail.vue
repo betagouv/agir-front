@@ -10,7 +10,7 @@
       @input="updateValue"
       class="fr-input"
       :name="name"
-      autocomplete="on"
+      autocomplete="email"
       type="email"
       :disabled="disable"
       required
