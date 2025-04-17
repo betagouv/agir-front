@@ -64,6 +64,7 @@ interface ActionDetailApiModel {
     label: string;
     url: string;
   }[];
+  enchainement_id: string;
 }
 
 interface ActionDetailCMSApiModel {
@@ -236,7 +237,7 @@ export class ActionsRepositoryAxios implements ActionsRepository {
         question: faq.question,
         reponse: faq.reponse,
       })),
-      kycs: actionDetailApiModel.kycs.map((question: QuestionApiModel) => this.mapQuestionApiModelToQuestion(question)),
+      idEnchainementKYCs: actionDetailApiModel.enchainement_id,
       thematique: actionDetailApiModel.thematique as ClefThematiqueAPI,
       sources: actionDetailApiModel.sources.map(article => ({
         label: article.label,

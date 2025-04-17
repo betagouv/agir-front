@@ -1,4 +1,3 @@
-import { Question } from '@/domaines/kyc/recupererQuestion.usecase';
 import { Quiz } from '@/domaines/quiz/ports/quiz.repository';
 import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 
@@ -55,7 +54,7 @@ export interface ActionDetail {
   services: ActionService[];
   aides: ActionAide[];
   faq: ActionFAQ[];
-  kycs: Question[];
+  idEnchainementKYCs: string;
   thematique: ClefThematiqueAPI;
   sources: {
     label: string;

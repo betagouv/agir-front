@@ -1,48 +1,26 @@
 <template>
-  <div v-if="kycs && kycs.length > 0 && !afficherFinKyc" class="border fr-px-3w fr-pt-1w fr-pb-3w">
-    <template v-for="(questionViewModel, index) in questionsViewModel" :key="index">
-      <div v-if="index === etapeCourante">
-        <p class="text--bleu fr-grid-row align-items--center fr-py-2w">
-          <button
-            v-if="index !== 0"
-            :title="`Retour à l'étape ${index}`"
-            class="fr-btn fr-btn--tertiary-no-outline fr-icon-arrow-left-line"
-            @click="etapeCourante--"
-          >
-            Retour à l'étape précédente
-          </button>
-          <span class="fr-text--bold">Question {{ index + 1 }}</span>
-          &nbsp;sur {{ questionsViewModel.length }}
-        </p>
-
-        <KYCForm
-          :question-view-model="questionViewModel"
-          wording-bouton="Continuer"
-          @update:soumission-kyc="passerEtapeSuivante"
-          @update:passer-la-question="passerLaQuestion"
-        />
-      </div>
-    </template>
+  <div>
+    <EnchainementQuestionsKyc
+      :est-active="true"
+      :id-enchainement-kycs="idEnchainementKycs"
+      class="fr-p-4w"
+      @fin-kyc-atteinte="onFinKYC"
+    />
+    <slot v-if="afficherFinKyc" name="fin" />
   </div>
-
-  <slot v-if="afficherFinKyc" name="fin" />
 </template>
 
 <script lang="ts" setup>
   import { ref } from 'vue';
-  import KYCForm from '@/components/custom/KYC/KYCForm.vue';
+  import EnchainementQuestionsKyc from '@/components/custom/KYC/EnchainementQuestionsKyc.vue';
   import { ActionsEventBus } from '@/domaines/actions/actions.eventbus';
   import { ActionsRepositoryAxios } from '@/domaines/actions/adapters/actions.repository.axios';
   import { TypeAction } from '@/domaines/actions/ports/actions.repository';
   import { TerminerActionUsecase } from '@/domaines/actions/terminerAction.usecase';
-  import { ListeQuestionsDansLeSimulateurPresenterImpl } from '@/domaines/kyc/adapters/listeQuestionsDansLeSimulateur.presenter.impl';
-  import { QuestionViewModel } from '@/domaines/kyc/adapters/question.presenter.impl';
-  import { QuestionRepositoryAxios } from '@/domaines/kyc/adapters/question.repository.axios';
-  import { RecupererQuestionsKYCsUsecase } from '@/domaines/kyc/recupererQuestionsKYCsUsecase';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const props = defineProps<{
-    kycs: QuestionViewModel[];
+    idEnchainementKycs: string;
     actionId: string;
     typeAction: TypeAction;
   }>();
@@ -52,38 +30,14 @@
     (e: 'questionSuivante'): void;
   }>();
 
-  const questionsViewModel = ref<QuestionViewModel[]>(props.kycs || []);
-  const etapeCourante = ref<number>(0);
   const afficherFinKyc = ref<boolean>(false);
-
-  async function chargerQuestionsSuivantes() {
-    const usecase = new RecupererQuestionsKYCsUsecase(new QuestionRepositoryAxios());
-    await usecase.execute(
-      utilisateurStore().utilisateur.id,
-      props.actionId,
-      props.typeAction,
-      new ListeQuestionsDansLeSimulateurPresenterImpl(vm => (questionsViewModel.value = vm)),
+  const onFinKYC = async () => {
+    afficherFinKyc.value = true;
+    emit('finKycAtteinte');
+    const terminerActionUsecase = new TerminerActionUsecase(
+      new ActionsRepositoryAxios(),
+      ActionsEventBus.getInstance(),
     );
-  }
-
-  const passerLaQuestion = () => {
-    passerEtapeSuivante();
-  };
-
-  const passerEtapeSuivante = async () => {
-    await chargerQuestionsSuivantes();
-    etapeCourante.value++;
-    if (
-      etapeCourante.value === questionsViewModel.value.length &&
-      questionsViewModel.value.findIndex(q => !q.aDejaEteRepondu) === -1
-    ) {
-      afficherFinKyc.value = true;
-      emit('finKycAtteinte');
-      const terminerActionUsecase = new TerminerActionUsecase(
-        new ActionsRepositoryAxios(),
-        ActionsEventBus.getInstance(),
-      );
-      await terminerActionUsecase.execute(utilisateurStore().utilisateur.id, props.actionId, props.typeAction);
-    }
+    await terminerActionUsecase.execute(utilisateurStore().utilisateur.id, props.actionId, props.typeAction);
   };
 </script>

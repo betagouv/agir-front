@@ -6,7 +6,6 @@ import { ActionDetail, TypeAction } from '@/domaines/actions/ports/actions.repos
 import { ChargerActionClassiqueUsecase } from '@/domaines/actions/chargerActionClassique.usecase';
 import { ChargerActionQuizUsecase } from '@/domaines/actions/chargerActionQuiz.usecase';
 import { ChargerActionSimulateurUsecase } from '@/domaines/actions/chargerActionSimulateur.usecase';
-import { ReponseKYCSimple, ThematiqueQuestion } from '@/domaines/kyc/recupererQuestion.usecase';
 import { ChargerActionBilanUsecase } from '@/domaines/actions/chargerActionBilan.usecase';
 import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 
@@ -18,32 +17,6 @@ describe("Fichier de tests concernant la récupération d'une action de type bil
       points: 30,
       consigne: 'Consigne',
       labelCompteur: '100 bilans réalisés',
-      kycs: [
-        {
-          id: 'questionId',
-          libelle: 'Une question',
-          type: 'libre',
-          points: 10,
-          thematique: ThematiqueQuestion.ALIMENTATION,
-          reponses: {
-            reponses_possibles: [],
-            reponse: [],
-          } as ReponseKYCSimple,
-          aEteRepondu: false,
-        },
-        {
-          id: 'questionId2',
-          libelle: 'Une question 2 ?',
-          type: 'decimal',
-          points: 20,
-          thematique: ThematiqueQuestion.TRANSPORT,
-          reponses: {
-            reponses_possibles: [],
-            reponse: [],
-          } as ReponseKYCSimple,
-          aEteRepondu: false,
-        },
-      ],
       aides: [
         {
           titre: 'Titre aide 1',
@@ -108,6 +81,7 @@ describe("Fichier de tests concernant la récupération d'une action de type bil
           url: 'https://www.ademe.fr/particuliers-eco-citoyens/eco-gestes/guide-eco-gestes',
         },
       ],
+      idEnchainementKYCs: 'id-enchainement-bilan',
     };
     const usecase = new ChargerActionUsecase(
       new ChargerActionStrategyFactory(
@@ -185,32 +159,6 @@ describe("Fichier de tests concernant la récupération d'une action de type bil
             estGratuit: true,
           },
         ],
-        kycs: [
-          {
-            etapeCourante: 1,
-            nombreTotalDeQuestions: 2,
-            id: 'questionId',
-            libelle: 'Une question',
-            type: 'libre',
-            points: 'Récoltez vos + 10 points',
-            reponses_possibles: [],
-            aDejaEteRepondu: false,
-            description:
-              "Ces informations permettent à <span class='text--italic'>J'agis</span> de mieux comprendre vos habitudes alimentaires",
-          },
-          {
-            etapeCourante: 1,
-            nombreTotalDeQuestions: 2,
-            id: 'questionId2',
-            libelle: 'Une question 2 ?',
-            type: 'decimal',
-            points: 'Récoltez vos + 20 points',
-            reponses_possibles: [],
-            aDejaEteRepondu: false,
-            description:
-              "Ces informations permettent à <span class='text--italic'>J'agis</span> de mieux vous conseiller en matière de mobilité",
-          },
-        ],
         actionId: 'id-action-bilan-test',
         thematique: ClefThematiqueAPI.alimentation,
         sources: [
@@ -219,6 +167,7 @@ describe("Fichier de tests concernant la récupération d'une action de type bil
             url: 'https://www.ademe.fr/particuliers-eco-citoyens/eco-gestes/guide-eco-gestes',
           },
         ],
+        idEnchainementKYCs: 'id-enchainement-bilan',
       });
     }
   });

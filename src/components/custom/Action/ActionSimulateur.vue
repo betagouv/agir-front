@@ -7,8 +7,9 @@
 
     <KyCsAction
       :action-id="actionSimulateurViewModel.actionId"
-      :kycs="actionSimulateurViewModel.kycs"
+      :idEnchainementKycs="actionSimulateurViewModel.idEnchainementKYCs"
       :type-action="TypeAction.SIMULATEUR"
+      class="fr-px-2w"
     >
       <template v-slot:fin>
         <SimulationResultatVoiture v-if="actionSimulateurViewModel.actionId === 'action_simulateur_voiture'" />

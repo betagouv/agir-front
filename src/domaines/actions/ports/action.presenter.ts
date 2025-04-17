@@ -1,5 +1,4 @@
 import { ActionDetail } from '@/domaines/actions/ports/actions.repository';
-import { QuestionViewModel } from '@/domaines/kyc/adapters/question.presenter.impl';
 import { ArticleDuQuiz } from '@/domaines/quiz/ports/quiz.repository';
 import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 
@@ -49,12 +48,12 @@ export interface ActionQuizzesViewModel extends ActionBaseViewModel {
 
 export interface ActionSimulateurViewModel extends ActionBaseViewModel {
   aides: ActionAideViewModel[];
-  kycs: QuestionViewModel[];
+  idEnchainementKYCs: string;
 }
 
 export interface ActionBilanViewModel extends ActionBaseViewModel {
   aides: ActionAideViewModel[];
-  kycs: QuestionViewModel[];
+  idEnchainementKYCs: string;
   thematique: ClefThematiqueAPI;
 }
 
