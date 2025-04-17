@@ -5,10 +5,6 @@ import { FinAtteinteException } from '@/domaines/kyc/adapters/question.repositor
 export class MockQuestionRepository implements QuestionRepository {
   constructor(private questionARetourner?: Question) {}
 
-  recupererQuestionsThematique(_utilisateurId: string, _thematiqueId: string): Promise<Question[]> {
-    throw new Error('Method not implemented.');
-  }
-
   recupererListeQuestions(_utilisateurId: string): Promise<Question[]> {
     throw new Error('Method not implemented.');
   }
@@ -22,9 +18,9 @@ export class MockQuestionRepository implements QuestionRepository {
   }
 
   envoyerReponsesMultiples(
-    utilisateurId: string,
-    questionId: string,
-    reponses: {
+    _utilisateurId: string,
+    _questionId: string,
+    _reponses: {
       code: string;
       boolean_value: boolean;
     }[],
@@ -32,18 +28,14 @@ export class MockQuestionRepository implements QuestionRepository {
     return Promise.resolve(undefined);
   }
 
-  recupererQuestionsDepuisMissionOnboarding(utilisateurId: string): Promise<Question[]> {
+  recupererQuestionsDepuisMissionOnboarding(_utilisateurId: string): Promise<Question[]> {
     return Promise.resolve([]);
   }
 
-  recupererQuestionsSimulateur(utilisateurId: string, simulateurActionId: string): Promise<Question[]> {
-    throw new Error('Method not implemented.');
-  }
-
   recupererProchaineQuestion(
-    utilisateurId: string,
-    enchainementId: string,
-    questionCouranteId: string,
+    _utilisateurId: string,
+    _enchainementId: string,
+    _questionCouranteId: string,
   ): Promise<QuestionMetaData> {
     if (!this.questionARetourner) {
       throw new FinAtteinteException();
@@ -56,9 +48,9 @@ export class MockQuestionRepository implements QuestionRepository {
   }
 
   recupererPrecedenteQuestion(
-    utilisateurId: string,
-    enchainementId: string,
-    questionCouranteId: string,
+    _utilisateurId: string,
+    _enchainementId: string,
+    _questionCouranteId: string,
   ): Promise<QuestionMetaData> {
     return Promise.resolve<QuestionMetaData>({
       question: this.questionARetourner!,
@@ -67,7 +59,7 @@ export class MockQuestionRepository implements QuestionRepository {
     });
   }
 
-  recupererPremiereQuestion(utilisateurId: string, enchainementId: string): Promise<QuestionMetaData> {
+  recupererPremiereQuestion(_utilisateurId: string, _enchainementId: string): Promise<QuestionMetaData> {
     return Promise.resolve<QuestionMetaData>({
       question: this.questionARetourner!,
       nombreTotalDeQuestions: 10,

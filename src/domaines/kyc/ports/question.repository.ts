@@ -1,4 +1,3 @@
-import { TypeAction } from '@/domaines/actions/ports/actions.repository';
 import { Question, QuestionMetaData } from '@/domaines/kyc/recupererQuestion.usecase';
 
 export interface QuestionRepository {
@@ -29,10 +28,4 @@ export interface QuestionRepository {
   ): Promise<void>;
 
   recupererQuestionsDepuisMissionOnboarding(utilisateurId: string, contentId: string): Promise<Question[]>;
-
-  recupererQuestionsSimulateur(
-    utilisateurId: string,
-    simulateurActionId: string,
-    typeAction: TypeAction,
-  ): Promise<Question[]>;
 }

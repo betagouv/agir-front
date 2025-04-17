@@ -1,5 +1,4 @@
 import { AxiosFactory, intercept401 } from '@/axios.factory';
-import { TypeAction } from '@/domaines/actions/ports/actions.repository';
 import { QuestionRepository } from '@/domaines/kyc/ports/question.repository';
 import {
   Question,
@@ -107,20 +106,6 @@ export class QuestionRepositoryAxios implements QuestionRepository {
     );
 
     return response.data.map((question: QuestionApiModel) => this.mapQuestionApiModelToQuestion(question));
-  }
-
-  @intercept401()
-  async recupererQuestionsSimulateur(
-    utilisateurId: string,
-    simulateurActionId: string,
-    typeAction: TypeAction,
-  ): Promise<Question[]> {
-    const axiosInstance = AxiosFactory.getAxios();
-    const response = await axiosInstance.get(
-      `/utilisateurs/${utilisateurId}/actions/${typeAction}/${simulateurActionId}`,
-    );
-
-    return response.data.kycs.map((question: QuestionApiModel) => this.mapQuestionApiModelToQuestion(question));
   }
 
   @intercept401()
