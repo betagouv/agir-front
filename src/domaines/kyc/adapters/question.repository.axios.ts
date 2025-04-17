@@ -112,7 +112,7 @@ export class QuestionRepositoryAxios implements QuestionRepository {
   async recupererPremiereQuestion(utilisateurId: string, enchainementId: string): Promise<QuestionMetaData> {
     const axiosInstance = AxiosFactory.getAxios();
     const response = await axiosInstance.get<QuestionMetaDataApiModel>(
-      `/utilisateurs/${utilisateurId}/enchainementQuestionsKYC_v2/${enchainementId}/first`,
+      `/utilisateurs/${utilisateurId}/enchainementQuestionsKYC_v2/${enchainementId}/first?exclude=non_eligible`,
     );
 
     return {
