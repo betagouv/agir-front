@@ -1,7 +1,6 @@
 import { chromium, expect, Page, test } from '@playwright/test';
 import { InjectService } from './utils/injectService';
 import { InjectUtilisateur } from './utils/injectUtilisateur';
-import { InjectRecommandations } from './utils/injectRecommandations';
 import { InjectGamification } from './utils/injectGamification';
 
 let page: Page;
@@ -32,14 +31,6 @@ test.beforeAll(async () => {
       status: 200,
       contentType: 'application/json',
       body: JSON.stringify(new InjectGamification().build()),
-    });
-  });
-
-  await page.route(`${process.env.VITE_API_URL}/utilisateurs/dorian/recommandations`, route => {
-    route.fulfill({
-      status: 200,
-      contentType: 'application/json',
-      body: JSON.stringify(new InjectRecommandations().vierge()),
     });
   });
 

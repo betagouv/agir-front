@@ -1,5 +1,5 @@
+import { ArticleRecommande } from '@/domaines/article/ports/article.repository';
 import { ArticlesRecommandesPresenter } from '@/domaines/article/ports/articlesRecommandes.presenter';
-import { RecommandationPersonnalisee } from '@/domaines/recommandationsPersonnalisees/recupererRecommandationsPersonnalisees.usecase';
 import { RouteArticlePath } from '@/router/articles/routes';
 import { buildUrl } from '@/shell/buildUrl';
 
@@ -13,7 +13,7 @@ export interface ArticleRecommandeViewModel {
 export class ArticlesRecommandesPresenterImpl implements ArticlesRecommandesPresenter {
   constructor(private viewModel: (articleRecommandeViewModels: ArticleRecommandeViewModel[]) => void) {}
 
-  presente(recommandationsPersonnalisees: RecommandationPersonnalisee[]): void {
+  presente(recommandationsPersonnalisees: ArticleRecommande[]): void {
     this.viewModel(
       recommandationsPersonnalisees.map(recommandationPersonnalisee => {
         return {
