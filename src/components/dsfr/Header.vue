@@ -63,7 +63,7 @@
                     <router-link
                       :to="{ name: RouteCompteName.MON_COMPTE }"
                       class="fr-btn fr-mb-0 fr-text--lg"
-                      title="accéder à mon compte"
+                      :aria-label="`${pseudoUtilisateur}: accéder à la page du compte`"
                     >
                       <span class="fr-icon-user-line fr-icon--md fr-mr-1w" aria-hidden="true"></span>
                       {{ pseudoUtilisateur }}
