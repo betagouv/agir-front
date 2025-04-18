@@ -4,7 +4,7 @@
       <div v-if="!loadingActions[action.code]" class="fr-card fr-card--horizontal fr-card--sm relative">
         <div class="fr-card__body">
           <div class="fr-card__content">
-            <h2 class="fr-card__title" v-html="action.titre"></h2>
+            <h3 class="fr-card__title" v-html="action.titre" />
             <ul class="fr-card__desc list-style-none fr-p-0 flex gap--small flex-wrap">
               <li v-if="action.nombreDePersonnes" class="text--bleu fr-icon-team-line fr-pb-0">
                 <span class="text--gris fr-pl-1w" v-html="action.nombreDePersonnes" />&nbsp;

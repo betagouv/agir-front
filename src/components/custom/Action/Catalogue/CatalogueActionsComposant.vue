@@ -4,9 +4,9 @@
       <div class="fr-card fr-enlarge-link fr-card--horizontal relative fr-card--sm">
         <div class="fr-card__body">
           <div class="fr-card__content">
-            <h2 class="fr-card__title">
+            <h3 class="fr-card__title">
               <router-link :to="action.url"><span v-html="action.titre" /></router-link>
-            </h2>
+            </h3>
             <ul class="fr-card__desc list-style-none fr-p-0 flex gap--small">
               <li v-if="action.nombreDePersonnes" class="text--bleu fr-icon-team-line">
                 <span class="text--gris fr-pl-1w" v-html="action.nombreDePersonnes" />&nbsp;
