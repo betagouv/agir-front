@@ -3,7 +3,6 @@
     <EnchainementQuestionsKyc
       :est-active="true"
       :id-enchainement-kycs="idEnchainementKycs"
-      class="fr-p-4w"
       @fin-kyc-atteinte="onFinKYC"
     />
     <slot v-if="afficherFinKyc" name="fin" />
