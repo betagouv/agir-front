@@ -8,6 +8,7 @@ import {
 import { ActionDetail } from '@/domaines/actions/ports/actions.repository';
 import marked from '@/shell/actionMarkdownToHtml';
 import { buildUrl } from '@/shell/buildUrl';
+import cacherEmojisAuxLecteursDecrans from '@/shell/cacherEmojisAuxLecteursDecrans';
 import { nettoyerEtGarderContenuTextuel } from '@/shell/nettoyerEtGarderContenuTextuel';
 
 class ActionViewModelBuilder {
@@ -27,7 +28,7 @@ class ActionViewModelBuilder {
       ...common,
       titreAffiche: common.titre,
       commune: action.commune,
-      astuces,
+      astuces: cacherEmojisAuxLecteursDecrans(astuces),
       articlesRecommandes: action.articles.map(article => ({
         titre: article.titre,
         image: article.image,
@@ -59,7 +60,13 @@ class ActionViewModelBuilder {
           texteExplicationKO: quiz.questions[0].texteExplicationKO,
           solution: quiz.questions[0].solution,
         },
-        articleAssocie: quiz.articleAssocie,
+        articleAssocie: quiz.articleAssocie?.id
+          ? {
+              id: quiz.articleAssocie?.id,
+              contenu: cacherEmojisAuxLecteursDecrans(quiz.articleAssocie?.contenu ?? ''),
+              sources: quiz.articleAssocie?.sources,
+            }
+          : null,
       })),
       quizzFelicitations: action.quizzFelicitations,
       articlesRecommandes: action.articles.map(article => ({
@@ -111,7 +118,7 @@ class ActionViewModelBuilder {
     return {
       titre,
       sousTitre,
-      introduction,
+      introduction: cacherEmojisAuxLecteursDecrans(introduction),
       titrePropre: nettoyerEtGarderContenuTextuel(action.titre),
       realisee: action.realisee,
       nombreDeRealisations: action.nombreDeRealisations,

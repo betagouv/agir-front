@@ -4,7 +4,7 @@
     <div class="fr-col-12 fr-col-md-8">
       <div class="border fr-p-6v background--white">
         <h2 class="fr-h3">{{ article.sousTitre }}</h2>
-        <div class="cms__content" v-html="article.texte" />
+        <div class="cms__content" v-html="cacherEmojisAuxLecteursDecrans(article.texte)" />
         <div v-if="article.sources && article.sources.length > 0" class="fr-mt-2w fr-mb-4w print-hidden">
           <hr />
           <p v-if="article.sources.length === 1" class="fr-text--xs">
@@ -83,6 +83,7 @@
   import { EvaluerArticleUsecase } from '@/domaines/article/evaluerArticle.usecase';
   import { Article } from '@/domaines/article/recupererArticle.usecase';
   import { RetirerDesFavorisUsecase } from '@/domaines/article/retirerDesFavoris.usecase';
+  import cacherEmojisAuxLecteursDecrans from '@/shell/cacherEmojisAuxLecteursDecrans';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const props = defineProps<{

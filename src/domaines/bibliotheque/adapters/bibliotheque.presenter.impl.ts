@@ -1,6 +1,7 @@
 import { Bibliotheque } from '../ports/bibliotheque.repository';
 import { BibliothequePresenter, BibliothequeViewModel } from '@/domaines/bibliotheque/ports/bibliotheque.presenter';
 import { buildUrl } from '@/shell/buildUrl';
+import cacherEmojisAuxLecteursDecrans from '@/shell/cacherEmojisAuxLecteursDecrans';
 
 export class BibliothequePresenterImpl implements BibliothequePresenter {
   constructor(private readonly bibliothequeViewModel: (viewModel: BibliothequeViewModel) => void) {}
@@ -13,7 +14,7 @@ export class BibliothequePresenterImpl implements BibliothequePresenter {
       articles: bibliotheque.ressources.map(ressource => ({
         idDuContenu: ressource.idDuContenu,
         titre: ressource.titre,
-        thematique: ressource.thematique,
+        thematique: cacherEmojisAuxLecteursDecrans(ressource.thematique),
         description: ressource.description,
         url: `/article/${buildUrl(ressource.titre)}/${ressource.idDuContenu}`,
         image: ressource.image,
