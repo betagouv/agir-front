@@ -59,7 +59,7 @@ export class ServiceRechercheRecettesPresenterImpl implements ServiceRechercheRe
             }))
           : undefined,
       aside: {
-        nom: 'La fabrique à menus',
+        nom: 'La Fabrique à menus',
         description: 'Pour vous aider jour après jour à manger varié et équilibré.',
         urlLabel: 'https://www.mangerbouger.fr/manger-mieux/la-fabrique-a-menus/',
         url: 'https://www.mangerbouger.fr/manger-mieux/la-fabrique-a-menus/',
