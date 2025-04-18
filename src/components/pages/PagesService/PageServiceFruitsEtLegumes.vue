@@ -30,6 +30,7 @@
       <PageServiceTemplate :aside="serviceFruitsEtLegumesViewModel.aside">
         <Onglet label-aria="Sélection de fruits ou légumes" :tab-panel="['Fruits', 'Légumes']">
           <template v-slot:tab-0>
+            <h2 class="fr-h3">Les fruits</h2>
             <ServiceListeFruitsEtLegumes
               v-if="serviceFruitsEtLegumesViewModel.fruits.peuConsommateurs.length > 0"
               titre="Peu consommateurs"
@@ -50,6 +51,7 @@
             />
           </template>
           <template v-slot:tab-1>
+            <h2 class="fr-h3">Les légumes</h2>
             <ServiceListeFruitsEtLegumes
               v-if="serviceFruitsEtLegumesViewModel.legumes.peuConsommateurs.length > 0"
               titre="Peu consommateurs"

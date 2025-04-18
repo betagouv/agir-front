@@ -15,7 +15,7 @@
       </div>
 
       <div v-if="filtresViewModel" class="fr-col-md-8 fr-col-12">
-        <h4 class="fr-h4">{{ filtresViewModel.phraseNombreActions }}</h4>
+        <h2 class="fr-h4">{{ filtresViewModel.phraseNombreActions }}</h2>
 
         <CatalogueActionsComposant
           v-if="actionsViewModel"
