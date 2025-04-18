@@ -70,10 +70,6 @@ export class SpyQuestionRepository implements QuestionRepository {
     return Promise.resolve();
   }
 
-  recupererQuestionsDepuisMissionOnboarding(_utilisateurId: string): Promise<Question[]> {
-    return Promise.resolve([]);
-  }
-
   recupererProchaineQuestion(
     _utilisateurId: string,
     _enchainementId: string,

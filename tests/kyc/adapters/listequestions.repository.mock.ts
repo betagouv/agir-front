@@ -27,10 +27,6 @@ export class MockListeQuestionsRepository implements QuestionRepository {
     throw new Error('Method not implemented.');
   }
 
-  recupererQuestionsDepuisMissionOnboarding(_utilisateurId: string): Promise<Question[]> {
-    return Promise.resolve(this.questionARetourner);
-  }
-
   recupererPremiereQuestion(_utilisateurId: string, _enchainementId: string): Promise<QuestionMetaData> {
     throw new Error('Method not implemented.');
   }

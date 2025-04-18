@@ -28,10 +28,6 @@ export class MockQuestionRepository implements QuestionRepository {
     return Promise.resolve(undefined);
   }
 
-  recupererQuestionsDepuisMissionOnboarding(_utilisateurId: string): Promise<Question[]> {
-    return Promise.resolve([]);
-  }
-
   recupererProchaineQuestion(
     _utilisateurId: string,
     _enchainementId: string,

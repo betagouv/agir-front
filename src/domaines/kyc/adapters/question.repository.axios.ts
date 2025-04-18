@@ -99,16 +99,6 @@ export class QuestionRepositoryAxios implements QuestionRepository {
   }
 
   @intercept401()
-  async recupererQuestionsDepuisMissionOnboarding(utilisateurId: string, contentId: string): Promise<Question[]> {
-    const axiosInstance = AxiosFactory.getAxios();
-    const response = await axiosInstance.get<QuestionApiModel[]>(
-      `/utilisateurs/${utilisateurId}/enchainementQuestionsKYC_v2/${contentId}`,
-    );
-
-    return response.data.map((question: QuestionApiModel) => this.mapQuestionApiModelToQuestion(question));
-  }
-
-  @intercept401()
   async recupererPremiereQuestion(utilisateurId: string, enchainementId: string): Promise<QuestionMetaData> {
     const axiosInstance = AxiosFactory.getAxios();
     const response = await axiosInstance.get<QuestionMetaDataApiModel>(
