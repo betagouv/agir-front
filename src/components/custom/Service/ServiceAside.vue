@@ -1,8 +1,8 @@
 <template>
-  <aside class="background--white overflow--hidden">
+  <aside class="background--white overflow--hidden shadow--light">
     <img :src="image" alt="" class="img-object-fit-cover full-width display-block background--white" height="150" />
     <div class="fr-px-2w fr-py-3w">
-      <h2 class="text--lh-1-3 fr-h3">
+      <h2 class="text--lh-1-3 fr-h4">
         <span class="text--normal text--bleu text--italic fr-text--md">Proposé par</span><br />
         {{ nom }}
       </h2>
@@ -12,7 +12,7 @@
           {{ urlLabel }}
         </a>
       </p>
-      <img v-if="logo" :src="logo" alt="" class="display-block max-full-width" height="32px" />
+      <img v-if="logo" :src="logo" alt="" class="display-block max-full-width" height="24px" />
     </div>
   </aside>
 </template>
