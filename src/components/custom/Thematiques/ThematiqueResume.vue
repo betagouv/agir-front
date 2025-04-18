@@ -1,7 +1,7 @@
 <template>
   <div class="headerThematique background--beige-gris-galet-975-75 fr-pb-7w">
     <div class="fr-container">
-      <div class="fr-py-5w">
+      <div class="fr-pt-5w fr-pb-1w">
         <h1 class="fr-h1 fr-col fr-m-0 fr-pb-2w display-inline-block">
           <span aria-hidden="true"> {{ thematique.emoji }}</span>
           {{ thematique.labelDansLeMenu }}
@@ -45,7 +45,7 @@
   }
   .listeServices {
     @media all and (min-width: 767px) {
-      width: 60%;
+      width: 70%;
     }
   }
 </style>
