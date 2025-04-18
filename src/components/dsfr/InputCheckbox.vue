@@ -12,9 +12,7 @@
           @change.prevent="onInputChange"
           :checked="option.checked"
         />
-        <label class="fr-label" :for="option.id">
-          {{ option.label }}
-        </label>
+        <label class="fr-label" :for="option.id" v-html="cacherEmojisAuxLecteursDecrans(option.label)" />
       </div>
     </div>
   </fieldset>
@@ -22,6 +20,7 @@
 
 <script setup lang="ts">
   import { ref, onMounted } from 'vue';
+  import cacherEmojisAuxLecteursDecrans from '@/shell/cacherEmojisAuxLecteursDecrans';
 
   const props = defineProps<{
     id: string;
