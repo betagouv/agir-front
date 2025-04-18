@@ -6,7 +6,6 @@ import {
   ActionSimulateurViewModel,
 } from '@/domaines/actions/ports/action.presenter';
 import { ActionDetail } from '@/domaines/actions/ports/actions.repository';
-import { QuestionViewModelBuilder } from '@/domaines/kyc/adapters/question.base.presenter';
 import marked from '@/shell/actionMarkdownToHtml';
 import { buildUrl } from '@/shell/buildUrl';
 import { nettoyerEtGarderContenuTextuel } from '@/shell/nettoyerEtGarderContenuTextuel';
@@ -82,13 +81,7 @@ class ActionViewModelBuilder {
         image: article.image,
         url: `/article/${buildUrl(article.titre)}/${article.id}`,
       })),
-      kycs: action.kycs.map(kyc =>
-        QuestionViewModelBuilder.buildFromQuestion({
-          question: kyc,
-          nombreTotalDeQuestions: action.kycs.length,
-          etapeCourante: 1,
-        }),
-      ),
+      idEnchainementKYCs: action.idEnchainementKYCs,
     };
   }
 
@@ -103,13 +96,7 @@ class ActionViewModelBuilder {
         image: article.image,
         url: `/article/${buildUrl(article.titre)}/${article.id}`,
       })),
-      kycs: action.kycs.map(kyc =>
-        QuestionViewModelBuilder.buildFromQuestion({
-          question: kyc,
-          nombreTotalDeQuestions: action.kycs.length,
-          etapeCourante: 1,
-        }),
-      ),
+      idEnchainementKYCs: action.idEnchainementKYCs,
       thematique: action.thematique,
     };
   }

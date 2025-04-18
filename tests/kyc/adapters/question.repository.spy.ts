@@ -36,10 +36,6 @@ export class SpyQuestionRepository implements QuestionRepository {
     return this._envoyerQuestionArgs;
   }
 
-  recupererQuestionsThematique(_utilisateurId: string, _thematiqueId: string): Promise<Question[]> {
-    throw new Error('Method not implemented.');
-  }
-
   recupererListeQuestions(_utilisateurId: string): Promise<Question[]> {
     throw new Error('Method not implemented.');
   }
@@ -74,31 +70,23 @@ export class SpyQuestionRepository implements QuestionRepository {
     return Promise.resolve();
   }
 
-  recupererQuestionsDepuisMissionOnboarding(utilisateurId: string): Promise<Question[]> {
-    return Promise.resolve([]);
-  }
-
-  recupererQuestionsSimulateur(utilisateurId: string, simulateurActionId: string): Promise<Question[]> {
-    throw new Error('Method not implemented.');
-  }
-
   recupererProchaineQuestion(
-    utilisateurId: string,
-    enchainementId: string,
-    questionCouranteId: string,
+    _utilisateurId: string,
+    _enchainementId: string,
+    _questionCouranteId: string,
   ): Promise<QuestionMetaData> {
     throw new Error('Method not implemented.');
   }
 
   recupererPrecedenteQuestion(
-    utilisateurId: string,
-    enchainementId: string,
-    questionCouranteId: string,
+    _utilisateurId: string,
+    _enchainementId: string,
+    _questionCouranteId: string,
   ): Promise<QuestionMetaData> {
     throw new Error('Method not implemented.');
   }
 
-  recupererPremiereQuestion(utilisateurId: string, enchainementId: string): Promise<QuestionMetaData> {
+  recupererPremiereQuestion(_utilisateurId: string, _enchainementId: string): Promise<QuestionMetaData> {
     throw new Error('Method not implemented.');
   }
 }

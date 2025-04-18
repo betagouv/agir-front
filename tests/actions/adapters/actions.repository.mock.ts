@@ -1,5 +1,4 @@
 import {
-  Action,
   ActionDetail,
   ActionsRepository,
   CatalogueActions,
@@ -9,30 +8,25 @@ import {
 
 export class ActionsRepositoryMock implements ActionsRepository {
   private constructor(
-    private readonly actions: Action[],
     private readonly action?: ActionDetail,
     private readonly actionsRecommandeesDansUneThematique?: DetailThematique,
     private readonly catalogueActions?: CatalogueActions,
   ) {}
 
   static empty(): ActionsRepositoryMock {
-    return new ActionsRepositoryMock([]);
+    return new ActionsRepositoryMock();
   }
 
   static avecActionDetail(actionDetail: ActionDetail): ActionsRepositoryMock {
-    return new ActionsRepositoryMock([], actionDetail);
-  }
-
-  static avecActions(actions: Action[]): ActionsRepositoryMock {
-    return new ActionsRepositoryMock(actions, undefined);
+    return new ActionsRepositoryMock(actionDetail);
   }
 
   static avecCatalogue(catalogue: CatalogueActions): ActionsRepositoryMock {
-    return new ActionsRepositoryMock([], undefined, undefined, catalogue);
+    return new ActionsRepositoryMock(undefined, undefined, catalogue);
   }
 
   static avecActionsRecommandeesDansUneThematique(actionsRecommandeesDansUneThematique: DetailThematique) {
-    return new ActionsRepositoryMock([], undefined, actionsRecommandeesDansUneThematique);
+    return new ActionsRepositoryMock(undefined, actionsRecommandeesDansUneThematique);
   }
 
   chargerAction(idUtilisateur: string, idAction: string): Promise<ActionDetail> {

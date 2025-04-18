@@ -1,9 +1,19 @@
 import { AxiosFactory, intercept401 } from '@/axios.factory';
 import { ArticleRecommande, ArticleRepository } from '@/domaines/article/ports/article.repository';
 import { Article } from '@/domaines/article/recupererArticle.usecase';
-import { RecommandationApiModel } from '@/domaines/recommandationsPersonnalisees/adapters/recommandationsPersonnalisees.repository.axios';
 import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 import { InteractionType } from '@/shell/interactionType';
+
+export interface RecommandationApiModel {
+  type: string;
+  titre: string;
+  jours_restants: number | null;
+  image_url: string;
+  points: number;
+  content_id: string;
+  thematique_principale: string;
+  status_defi: 'todo' | 'en_cours' | 'pas_envie' | 'deja_fait' | 'abondon' | 'fait';
+}
 
 interface ArticleAPI {
   titre: string;

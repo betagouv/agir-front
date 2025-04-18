@@ -33,6 +33,7 @@
     label: { wording: string; cssModifier?: string };
     defaultValue?: string;
     unite?: { abreviation: string; libelleLong: string };
+    modelValue: string | undefined;
   }>();
 
   const emit = defineEmits<{

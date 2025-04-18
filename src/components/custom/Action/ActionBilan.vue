@@ -4,8 +4,9 @@
 
     <KyCsAction
       :action-id="actionBilanViewModel.actionId"
-      :kycs="actionBilanViewModel.kycs"
+      :idEnchainementKycs="actionBilanViewModel.idEnchainementKYCs"
       :type-action="TypeAction.BILAN"
+      class="fr-px-2w"
     >
       <template v-slot:fin>
         <BilanResultat :id-action="actionBilanViewModel.actionId" :thematique="actionBilanViewModel.thematique" />

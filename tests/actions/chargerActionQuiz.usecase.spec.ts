@@ -95,7 +95,6 @@ describe("Fichier de tests concernant la récupération d'une action de type qui
           clefThematiqueAPI: ClefThematiqueAPI.alimentation,
         },
       ],
-      kycs: [],
       articles: [],
       services: [
         {
@@ -109,6 +108,7 @@ describe("Fichier de tests concernant la récupération d'une action de type qui
       ],
       faq: [],
       sources: [],
+      idEnchainementKYCs: '',
     };
     const usecase = new ChargerActionUsecase(
       new ChargerActionStrategyFactory(
