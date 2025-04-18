@@ -112,7 +112,7 @@ export class QuestionRepositoryAxios implements QuestionRepository {
   async recupererPremiereQuestion(utilisateurId: string, enchainementId: string): Promise<QuestionMetaData> {
     const axiosInstance = AxiosFactory.getAxios();
     const response = await axiosInstance.get<QuestionMetaDataApiModel>(
-      `/utilisateurs/${utilisateurId}/enchainementQuestionsKYC_v2/${enchainementId}/first?exclude=non_eligible`,
+      `/utilisateurs/${utilisateurId}/enchainementQuestionsKYC_v2/${enchainementId}/first`,
     );
 
     return {
@@ -130,7 +130,7 @@ export class QuestionRepositoryAxios implements QuestionRepository {
   ): Promise<QuestionMetaData> {
     const axiosInstance = AxiosFactory.getAxios();
     const response = await axiosInstance.get<QuestionMetaDataApiModel>(
-      `/utilisateurs/${utilisateurId}/enchainementQuestionsKYC_v2/${enchainementId}/following/${questionCouranteId}?exclude=non_eligible`,
+      `/utilisateurs/${utilisateurId}/enchainementQuestionsKYC_v2/${enchainementId}/following/${questionCouranteId}`,
     );
 
     if (!response.data.question_courante) {
@@ -152,7 +152,7 @@ export class QuestionRepositoryAxios implements QuestionRepository {
   ): Promise<QuestionMetaData> {
     const axiosInstance = AxiosFactory.getAxios();
     const response = await axiosInstance.get<QuestionMetaDataApiModel>(
-      `/utilisateurs/${utilisateurId}/enchainementQuestionsKYC_v2/${enchainementId}/preceding/${questionCouranteId}?exclude=non_eligible`,
+      `/utilisateurs/${utilisateurId}/enchainementQuestionsKYC_v2/${enchainementId}/preceding/${questionCouranteId}`,
     );
 
     if (!response.data.question_courante) {
