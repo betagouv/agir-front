@@ -13,13 +13,13 @@
 
   const props = defineProps<{ valeur: number; background?: string }>();
 
-  const NOMBRE_DE_CHIFFRES = 4;
+  const nombreDeChiffres = Math.max(4, String(props.valeur).length);
   const DUREE_ANIMATION = 1000;
 
   const estVisible = ref(false);
   const HTMLDuCompteur = ref<HTMLElement | null>(null);
   const valeurPrecedentes = ref(props.valeur);
-  const chiffresAvecAnimation = ref<string[]>(Array(NOMBRE_DE_CHIFFRES).fill('0'));
+  const chiffresAvecAnimation = ref<string[]>(Array(nombreDeChiffres).fill('0'));
 
   const lancerAnimation = (from: string, to: string, index: number) => {
     let startTime: number | null = null;
@@ -43,7 +43,7 @@
   const miseAJourDuCompteur = () => {
     if (!estVisible.value) return;
 
-    const nouvelleValeur = String(props.valeur).padStart(NOMBRE_DE_CHIFFRES, '0').split('');
+    const nouvelleValeur = String(props.valeur).padStart(nombreDeChiffres, '0').split('');
 
     nouvelleValeur.forEach((newDigit, index) => {
       const ancienneValeur = chiffresAvecAnimation.value[index] || '0';
