@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "@gouvfr/dsfr": "1.13.1",
-    "@iframe-resizer/vue": "^5.4.4",
+    "@iframe-resizer/vue": "^5.4.5",
     "@sentry/vite-plugin": "^3.3.1",
     "@sentry/vue": "9.13.0",
     "@unhead/vue": "^2.0.5",
