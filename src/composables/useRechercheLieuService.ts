@@ -21,23 +21,11 @@ export function useRechercheLieuService(
     const lng = parseFloat(route.query.longitude as string);
     if (!isNaN(lat) && !isNaN(lng)) {
       coordonnees.value = { latitude: lat, longitude: lng };
+    } else {
+      await lancerLaRecherche();
     }
-    await lancerLaRecherche();
     pageEstEnChargement.value = false;
   });
-
-  watch(
-    () => route.query.latitude && route.query.longitude,
-    () => {
-      const lat = parseFloat(route.query.latitude as string);
-      const lng = parseFloat(route.query.longitude as string);
-      if (isNaN(lat) && isNaN(lng)) {
-        coordonnees.value = undefined;
-        return;
-      }
-      coordonnees.value = { latitude: lat, longitude: lng };
-    },
-  );
 
   watch(coordonnees, async nouvelleCoordonnees => {
     cartesSontEnChargement.value = true;
@@ -52,6 +40,23 @@ export function useRechercheLieuService(
     await lancerLaRecherche();
     cartesSontEnChargement.value = false;
   });
+
+  watch(
+    () => route.query.latitude && route.query.longitude,
+    () => {
+      const lat = parseFloat(route.query.latitude as string);
+      const lng = parseFloat(route.query.longitude as string);
+      if (isNaN(lat) || isNaN(lng)) {
+        coordonnees.value = undefined;
+        return;
+      }
+
+      if (lat === coordonnees.value?.latitude && lng === coordonnees.value?.longitude) {
+        return;
+      }
+      coordonnees.value = { latitude: lat, longitude: lng };
+    },
+  );
 
   const chargerPlusDeResultats = async () => {
     cartesSontEnChargement.value = true;
