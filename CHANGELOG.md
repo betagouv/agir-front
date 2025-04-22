@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.5.1](https://github.com/betagouv/agir-front/compare/v2.5.0...v2.5.1) (2025-04-22)
+
+
+### 🐛 Corrections de bogues
+
+* afficher les aides aux chargement d'une page thématique ([#1074](https://github.com/betagouv/agir-front/issues/1074)) ([be96c8d](https://github.com/betagouv/agir-front/commit/be96c8d5b5c532e4e05d96d1c845d0d8d2e75035))
+
 ## [2.5.0](https://github.com/betagouv/agir-front/compare/v2.4.0...v2.5.0) (2025-04-22)
 
 
