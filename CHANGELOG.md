@@ -1,5 +1,37 @@
 # Changelog
 
+## [2.5.0](https://github.com/betagouv/agir-front/compare/v2.4.0...v2.5.0) (2025-04-22)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* amelioration barre recherche avec historique ([#1061](https://github.com/betagouv/agir-front/issues/1061)) ([a5e4df4](https://github.com/betagouv/agir-front/commit/a5e4df459aefab07e312d11e3bfc647db2f7c96e))
+* page recette aside ajustement et espacement titre page thématique ([#1067](https://github.com/betagouv/agir-front/issues/1067)) ([de067c5](https://github.com/betagouv/agir-front/commit/de067c58247cf7df0797112830efc6221dde318b))
+* titre sur pages ([#1051](https://github.com/betagouv/agir-front/issues/1051)) ([cfe8f87](https://github.com/betagouv/agir-front/commit/cfe8f87716957cccb119183e01f1256e26b7caf1))
+* utilisation du champs autocomplete ([#1064](https://github.com/betagouv/agir-front/issues/1064)) ([2cc1fe8](https://github.com/betagouv/agir-front/commit/2cc1fe8ee708a603344215f2e0c362f254acc3a6))
+
+
+### 🐛 Corrections de bogues
+
+* footer et label quiz ([#1059](https://github.com/betagouv/agir-front/issues/1059)) ([596f0d7](https://github.com/betagouv/agir-front/commit/596f0d743e210d3f24b5e7c12bb0be102cec244b))
+* service pres de chez nous dans les actions ([#1065](https://github.com/betagouv/agir-front/issues/1065)) ([3d13823](https://github.com/betagouv/agir-front/commit/3d138234464f5fb0f67d6ea75335de42c4459d36))
+
+
+### 👷 Autres changements
+
+* Bump @sentry/vue from 9.10.1 to 9.12.0 ([#1058](https://github.com/betagouv/agir-front/issues/1058)) ([7fa6f41](https://github.com/betagouv/agir-front/commit/7fa6f41828722a682e6b8868d55974455c1355d4))
+* Bump @sentry/vue from 9.10.1 to 9.13.0 ([#1071](https://github.com/betagouv/agir-front/issues/1071)) ([867fc5f](https://github.com/betagouv/agir-front/commit/867fc5fece6bee908f729a8cfe0b353cb31c16d1))
+* Bump @types/node from 22.13.13 to 22.14.1 ([#1069](https://github.com/betagouv/agir-front/issues/1069)) ([efed630](https://github.com/betagouv/agir-front/commit/efed630298df7e070796bf22c4f2d4d898916591))
+* Bump dotenv from 16.4.7 to 16.5.0 ([#1054](https://github.com/betagouv/agir-front/issues/1054)) ([655db39](https://github.com/betagouv/agir-front/commit/655db395e98f5da6be205d4efd6c65f5d2c4d3f3))
+* Bump jsdom from 26.0.0 to 26.1.0 ([#1057](https://github.com/betagouv/agir-front/issues/1057)) ([5c85703](https://github.com/betagouv/agir-front/commit/5c85703d6088d40b6e73cef2e1d3a3b170890272))
+* Bump lint-staged from 15.5.0 to 15.5.1 ([#1068](https://github.com/betagouv/agir-front/issues/1068)) ([77fcd8f](https://github.com/betagouv/agir-front/commit/77fcd8ff9b52baf02c0e756a2349123c6211bafc))
+* Bump pinia from 3.0.1 to 3.0.2 ([#1055](https://github.com/betagouv/agir-front/issues/1055)) ([500bf7d](https://github.com/betagouv/agir-front/commit/500bf7d788c8502b60295c8d2c900605da13149f))
+* Bump sharp from 0.34.0 to 0.34.1 ([#1056](https://github.com/betagouv/agir-front/issues/1056)) ([066dcf2](https://github.com/betagouv/agir-front/commit/066dcf2a6228eaf4d675e9c59c5cc5cb225489a7))
+* Bump vite from 6.2.6 to 6.3.2 ([#1070](https://github.com/betagouv/agir-front/issues/1070)) ([5360709](https://github.com/betagouv/agir-front/commit/53607097a2269ce6219bc28cd1f456fb5286db29))
+* suppression hotjar ([#1063](https://github.com/betagouv/agir-front/issues/1063)) ([6ec8b50](https://github.com/betagouv/agir-front/commit/6ec8b50df1668808430d7bc5ee6b318989a80191))
+* utilisation nouvelles APIs pour les KYCs dans les actions ([#1066](https://github.com/betagouv/agir-front/issues/1066)) ([bc7b367](https://github.com/betagouv/agir-front/commit/bc7b367da0e3295626eca749081512147170ac9e))
+* utilisations nouvelles APIs pour les KYCs ([#1062](https://github.com/betagouv/agir-front/issues/1062)) ([88d91b5](https://github.com/betagouv/agir-front/commit/88d91b5df5256096be0aed036899c8973018406a))
+
 ## [2.4.0](https://github.com/betagouv/agir-front/compare/v2.3.1...v2.4.0) (2025-04-14)
 
 
