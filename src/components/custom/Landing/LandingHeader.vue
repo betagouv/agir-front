@@ -64,6 +64,7 @@
 
     <h2
       class="fr-h2 text--white text--center flex flex-column flex-center align-items--center compteur-absolute full-width"
+      :aria-label="`${nombreActions ?? 0} actions réalisées ensemble partout en France`"
     >
       <CompteurDynamique :valeur="nombreActions ?? 0" background="rgb(52, 68, 159)" />
       <span class="fr-mt-2w text-olive fr-text--xl text--lh-1-3">
