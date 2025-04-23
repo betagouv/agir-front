@@ -1,9 +1,11 @@
 <template>
-  <div ref="HTMLDuCompteur" class="flex justify-center items-center">
+  <div ref="HTMLDuCompteur" class="flex justify-center items-center" aria-hidden="true">
     <div class="compteur border-radius--lg shadow" :style="{ backgroundColor: props.background }">
-      <span v-for="(chiffre, index) in chiffresAvecAnimation" :key="index" class="digit fr-p-2w">
-        {{ chiffre }}
-      </span>
+      <div v-for="(chiffre, index) in chiffres" :key="index" class="digit">
+        <div class="digit-inner" :style="translateALaBonneHauteur(chiffre)">
+          <span v-for="n in 10" :key="n" class="digit-number">{{ n - 1 }}</span>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -13,46 +15,21 @@
 
   const props = defineProps<{ valeur: number; background?: string }>();
 
-  const nombreDeChiffres = Math.max(4, String(props.valeur).length);
-  const DUREE_ANIMATION = 1000;
-
-  const estVisible = ref(false);
   const HTMLDuCompteur = ref<HTMLElement | null>(null);
-  const valeurPrecedentes = ref(props.valeur);
-  const chiffresAvecAnimation = ref<string[]>(Array(nombreDeChiffres).fill('0'));
+  const estVisible = ref(false);
+  const nombreDeChiffres = Math.max(4, String(props.valeur).length);
 
-  const lancerAnimation = (from: string, to: string, index: number) => {
-    let startTime: number | null = null;
+  const chiffres = ref<number[]>(Array(nombreDeChiffres).fill(0));
 
-    const step = (timestamp: number) => {
-      if (!startTime) startTime = timestamp;
-      const progress = (timestamp - startTime) / DUREE_ANIMATION;
-
-      if (progress < 1) {
-        const interpolated = Math.floor(Number(from) + (Number(to) - Number(from)) * progress);
-        chiffresAvecAnimation.value[index] = String(interpolated);
-        requestAnimationFrame(step);
-      } else {
-        chiffresAvecAnimation.value[index] = to;
-      }
-    };
-
-    requestAnimationFrame(step);
-  };
+  const translateALaBonneHauteur = (digit: number) => ({
+    transform: `translateY(-${digit * 10}%)`,
+  });
 
   const miseAJourDuCompteur = () => {
     if (!estVisible.value) return;
 
-    const nouvelleValeur = String(props.valeur).padStart(nombreDeChiffres, '0').split('');
-
-    nouvelleValeur.forEach((newDigit, index) => {
-      const ancienneValeur = chiffresAvecAnimation.value[index] || '0';
-      if (ancienneValeur !== newDigit) {
-        lancerAnimation(ancienneValeur, newDigit, index);
-      }
-    });
-
-    valeurPrecedentes.value = props.valeur;
+    const nouvelleValeur = String(props.valeur).padStart(nombreDeChiffres, '0').split('').map(Number);
+    chiffres.value = nouvelleValeur;
   };
 
   const observer = new IntersectionObserver(
@@ -76,16 +53,33 @@
 
 <style>
   .compteur {
+    display: flex;
+    overflow: hidden;
     border: 5px solid white;
+    font-size: 2rem;
   }
 
   .digit {
-    display: inline-block;
-    border-right: 1px solid white;
     width: 3.5rem;
+    height: 2em;
+    overflow: hidden;
+    position: relative;
+    border-right: 1px solid white;
   }
 
   .digit:last-child {
     border-right: none;
+  }
+
+  .digit-inner {
+    display: flex;
+    flex-direction: column;
+    transition: transform 1s cubic-bezier(0.3, 1.25, 0.5, 1);
+  }
+
+  .digit-number {
+    height: 2em;
+    line-height: 2em;
+    text-align: center;
   }
 </style>
