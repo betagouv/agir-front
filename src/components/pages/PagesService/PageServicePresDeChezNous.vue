@@ -110,7 +110,7 @@
   const usecase = new RecupererServicePresDeChezNousUsecase(new ServiceRecherchePresDeChezNousAxios());
 
   const serviceErreur = ref<string | null>(null);
-  const typeDeRecherche = ref<string>('');
+  const typeDeRecherche = ref<string>('nourriture');
 
   async function lancerLeUseCase(limit: number) {
     await usecase.execute(
