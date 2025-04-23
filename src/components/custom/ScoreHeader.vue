@@ -5,7 +5,7 @@
       :to="{ name: RouteClassementName.CLASSEMENT }"
       class="tag__progression tag__progression--score fr-text--bold"
     >
-      {{ gamificationViewModel.points }} <img alt="score" src="/ic_score.svg" width="16" />
+      {{ gamificationViewModel.points }} <img alt="points récoltés" src="/ic_score.svg" width="16" />
     </router-link>
     <router-link
       v-if="gamificationViewModel.nombreDeBadges > 0"

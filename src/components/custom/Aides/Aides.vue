@@ -10,9 +10,9 @@
       <InputCheckbox id="categoriesAides" :options="optionsCheckbox" label="Catégories" @update="handleValueChange" />
     </div>
     <div class="fr-col-12 fr-col-lg-9">
-      <div v-for="(aides, index) in props.aidesGroupesParCategorie" :key="index">
-        <div v-if="categoriesActives.length === 0 || categoriesActives.includes(`${index}`)" class="fr-mb-4w">
-          <h2 class="fr-h4">{{ index }}</h2>
+      <div v-for="(aides, nomThematique) in props.aidesGroupesParCategorie" :key="nomThematique">
+        <div v-if="categoriesActives.length === 0 || categoriesActives.includes(`${nomThematique}`)" class="fr-mb-4w">
+          <h2 class="fr-h4" v-html="cacherEmojisAuxLecteursDecrans(nomThematique as string)" />
           <GrilleAidesDUneAction :aides="aides" />
         </div>
       </div>
@@ -23,6 +23,7 @@
 <script lang="ts" setup>
   import { onMounted, ref } from 'vue';
   import { useRoute } from 'vue-router';
+  import cacherEmojisAuxLecteursDecrans from '../../../shell/cacherEmojisAuxLecteursDecrans';
   import GrilleAidesDUneAction from '@/components/custom/Aides/GrilleAidesDUneAction.vue';
   import InputCheckbox from '@/components/dsfr/InputCheckbox.vue';
   import { AidesViewModel } from '@/domaines/aides/ports/chargementAides.presenter';

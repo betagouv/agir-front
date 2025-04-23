@@ -1,5 +1,5 @@
 <template>
-  <h2 class="fr-h5 fr-mb-1v">{{ titre }}</h2>
+  <h3 class="fr-h5 fr-mb-1v">{{ titre }}</h3>
   <p class="text--mention-grey">{{ sousTitre }}</p>
   <ul class="fr-grid-row fr-grid-row--gutters list-style-none fr-mb-4w">
     <li v-for="item in liste" :key="item.nom" class="fr-col-6 fr-col-md-4">

@@ -9,6 +9,7 @@
         <router-link
           :to="{ name: RouteCompteName.LOGEMENT }"
           class="fr-tag fr-icon-map-pin-2-fill fr-tag--icon-left fr-ml-2w"
+          :title="`à ${thematiqueResume.commune}: modifier cette commune`"
         >
           à {{ thematiqueResume.commune }}
         </router-link>

@@ -3,7 +3,7 @@
     <img :src="image" class="bibliotheque-card__image" alt="" />
     <div class="fr-px-3w fr-py-2w full-height flex flex-column">
       <div class="fr-grid-row flex-space-between fr-grid-row--middle">
-        <span class="fr-text--xs fr-text--bold fr-m-0">{{ thematique }}</span>
+        <span class="fr-text--xs fr-text--bold fr-m-0" v-html="thematique" />
         <button
           v-if="estFavoris"
           @click="retirerDesFavoris"
