@@ -15,7 +15,6 @@
             @update="modifierType"
             :code-derniere-recherche-type="typeDeRecherche"
           />
-          <!--          dqsdqdsqdsq -->
           à proximité de chez moi
         </h1>
         <p>Redonnez vie à vos objets et trouvez les nouveaux en seconde main</p>
@@ -25,7 +24,8 @@
         >
           <h2 class="fr-h4 fr-mb-0" id="recherche-par-adresse-label">Recherche par adresse</h2>
           <ServiceBarreDeRechercheAdresse
-            v-model="coordonnees"
+            v-model:recherche="recherche"
+            v-model:coordonnees="coordonnees"
             class="fr-col-12 fr-col-md-7"
             labelId="recherche-par-adresse-label"
           />
@@ -90,6 +90,7 @@
   );
 
   const {
+    recherche,
     typeDeRecherche,
     coordonnees,
     nombreDeResultats,

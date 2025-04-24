@@ -10,6 +10,7 @@ export function useRechercheService(lancerRecherche: () => Promise<void>, typePa
   const pageEstEnChargement = ref<boolean>(false);
   const cartesSontEnChargement = ref<boolean>(false);
 
+  const adresseDepuisQueryParams = route.query.adresse as string;
   const latDepuisQueryParams = parseFloat(route.query.latitude as string);
   const lngDepuisQueryParams = parseFloat(route.query.longitude as string);
   const coordonnesDepuisQueryParams: Coordonnees | undefined =
@@ -19,13 +20,14 @@ export function useRechercheService(lancerRecherche: () => Promise<void>, typePa
   const typeDepuisQueryParams: string = route.query?.type as string;
   const nombreDeResultatsDepuisQueryParams: number = parseInt(route.query?.nombre as string);
 
+  const recherche = ref<string>(adresseDepuisQueryParams ?? '');
   const coordonnees = ref<Coordonnees | undefined>(coordonnesDepuisQueryParams);
   const typeDeRecherche = ref<string>(typeDepuisQueryParams ?? typeParDefaut);
   const nombreDeResultats = ref<number>(
     isNaN(nombreDeResultatsDepuisQueryParams) ? 9 : nombreDeResultatsDepuisQueryParams,
   );
 
-  useCoordonneesQueryParams(coordonnees);
+  useCoordonneesQueryParams(coordonnees, recherche);
 
   onMounted(async () => {
     pageEstEnChargement.value = true;
@@ -70,6 +72,7 @@ export function useRechercheService(lancerRecherche: () => Promise<void>, typePa
   };
 
   return {
+    recherche,
     typeDeRecherche,
     coordonnees,
     nombreDeResultats,

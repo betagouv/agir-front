@@ -2,7 +2,7 @@ import { Ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { Coordonnees } from '@/shell/coordonneesType';
 
-export function useCoordonneesQueryParams(coordonnees: Ref<Coordonnees | undefined>) {
+export function useCoordonneesQueryParams(coordonnees: Ref<Coordonnees | undefined>, recherche: Ref<string>) {
   const route = useRoute();
   const router = useRouter();
 
@@ -12,6 +12,7 @@ export function useCoordonneesQueryParams(coordonnees: Ref<Coordonnees | undefin
         ...route.query,
         latitude: nouvelleCoordonnees?.latitude.toString(),
         longitude: nouvelleCoordonnees?.longitude.toString(),
+        adresse: recherche.value,
       },
     });
   });
