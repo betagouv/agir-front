@@ -27,14 +27,14 @@ export class RecupererServiceLongueVieAuxObjetsUsecase {
 
   async execute(
     idUtilisateur: string,
-    idService: string,
+    categorie: string,
     nombreMaxResultats: number,
     recupererServiceRechercheLongueVieAuxObjetsPresenter: ServiceRechercheLongueVieAuxObjetsPresenter,
     coordonnees?: Coordonnees,
   ) {
     const service = await this.serviceRechercheLongueVieAuxObjetsRepository.recupererService(
       idUtilisateur,
-      idService,
+      categorie,
       nombreMaxResultats,
       coordonnees,
     );

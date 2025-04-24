@@ -14,7 +14,8 @@
             id="categories"
             :options="serviceRecherchePresDeChezNousViewModel.categories"
             label="Choisir une catégorie"
-            @update="updateType"
+            @update="modifierType"
+            :code-derniere-recherche-type="typeDeRecherche"
           />
           à proximité de chez moi
         </h1>
@@ -68,7 +69,7 @@
                 .plusDeResultatsDisponibles
             "
             class="fr-link text--underline"
-            @click="chargerPlusDeResultats()"
+            @click="chargerPlusDeCartes()"
           >
             Voir plus de résultats
           </button>
@@ -87,7 +88,7 @@
   import ServiceSelect from '@/components/custom/Service/ServiceSelect.vue';
   import ServiceSkeletonCartes from '@/components/custom/Service/ServiceSkeletonCartes.vue';
   import ServiceSkeletonConditionnel from '@/components/custom/Service/ServiceSkeletonConditionnel.vue';
-  import { useRechercheLieuService } from '@/composables/useRechercheLieuService';
+  import { useRechercheService } from '@/composables/useRechercheService';
   import {
     ServiceRecherchePresDeChezNousPresenterImpl,
     ServiceRecherchePresDeChezNousViewModel,
@@ -97,26 +98,25 @@
   import { RecupererServicePresDeChezNousUsecase } from '@/domaines/serviceRecherche/presDeChezNous/recupererServicePresDeChezNous.usecase';
   import { utilisateurStore } from '@/store/utilisateur';
 
-  const coordonnees = ref<{ latitude: number; longitude: number }>();
-  const {
-    chargerPlusDeResultats,
-    resetNombreDeResultats,
-    lancerLaRecherche,
-    pageEstEnChargement,
-    cartesSontEnChargement,
-  } = useRechercheLieuService(lancerLeUseCase, coordonnees);
-
   const serviceRecherchePresDeChezNousViewModel = ref<ServiceRecherchePresDeChezNousViewModel>();
   const usecase = new RecupererServicePresDeChezNousUsecase(new ServiceRecherchePresDeChezNousAxios());
 
-  const serviceErreur = ref<string | null>(null);
-  const typeDeRecherche = ref<string>('nourriture');
+  const {
+    typeDeRecherche,
+    coordonnees,
+    nombreDeResultats,
+    chargerPlusDeCartes,
+    modifierType,
+    serviceErreur,
+    pageEstEnChargement,
+    cartesSontEnChargement,
+  } = useRechercheService(lancerRecherche, 'nourriture');
 
-  async function lancerLeUseCase(limit: number) {
+  async function lancerRecherche() {
     await usecase.execute(
       utilisateurStore().utilisateur.id,
       typeDeRecherche.value,
-      limit,
+      nombreDeResultats.value,
       new ServiceRecherchePresDeChezNousPresenterImpl(
         vm => (serviceRecherchePresDeChezNousViewModel.value = vm),
         error => (serviceErreur.value = error),
@@ -124,10 +124,4 @@
       coordonnees.value,
     );
   }
-
-  const updateType = async (type: string) => {
-    resetNombreDeResultats();
-    typeDeRecherche.value = type;
-    await lancerLaRecherche();
-  };
 </script>
