@@ -8,8 +8,8 @@
           class="fr-icon-money-euro-circle-line fr-mb-1w fr-p-2w display-inline-block background--bleu-picto border-radius--full fr-mb-3w"
           aria-hidden="true"
         />
-        <h3 class="fr-h4 text--white fr-mb-1w">Faire des économies</h3>
-        <p>Alléger le budget et les factures liées à votre consommation</p>
+        <h3 class="fr-h4 text--white fr-mb-1w">Pour faire des économies</h3>
+        <p>Toutes les aides financières et des astuces pour réduire vos factures d’eau, d’énergie…</p>
       </li>
 
       <li class="fr-col-lg-3 fr-col-6">
@@ -17,8 +17,8 @@
           class="fr-icon-lungs-line fr-mb-1w fr-p-2w display-inline-block background--bleu-picto border-radius--full fr-mb-3w"
           aria-hidden="true"
         />
-        <h3 class="fr-h4 text--white fr-mb-1w">Être en bonne santé</h3>
-        <p>Qualité de l'air, pollutions, impacts actuels</p>
+        <h3 class="fr-h4 text--white fr-mb-1w">Pour être en bonne santé</h3>
+        <p>Des recettes saines et gourmandes, des conseils pour choisir de bons produits...</p>
       </li>
 
       <li class="fr-col-lg-3 fr-col-6">
@@ -26,8 +26,11 @@
           class="fr-icon-parent-line fr-mb-1w fr-p-2w display-inline-block background--bleu-picto border-radius--full fr-mb-3w"
           aria-hidden="true"
         />
-        <h3 class="fr-h4 text--white fr-mb-1w">Protéger sa famille</h3>
-        <p>Faire des choix éclairés pour les générations futures</p>
+        <h3 class="fr-h4 text--white fr-mb-1w">Pour guider vos choix</h3>
+        <p>
+          Changer de voiture, réparer des vêtements, faire des travaux, récupérer l’eau de pluie… Toutes les solutions
+          sont sur J’agis !
+        </p>
       </li>
 
       <li class="fr-col-lg-3 fr-col-6">
@@ -35,8 +38,11 @@
           class="fr-icon-heart-line fr-mb-1w fr-p-2w display-inline-block background--bleu-picto border-radius--full fr-mb-3w"
           aria-hidden="true"
         />
-        <h3 class="fr-h4 text--white fr-mb-1w">Préserver la nature</h3>
-        <p>Limiter les conséquences des changements déjà visibles</p>
+        <h3 class="fr-h4 text--white fr-mb-1w">Pour s'adapter au climat</h3>
+        <p>
+          Des solutions pour nous préparer et mieux vivre les canicules et les sécheresses, tout en limitant nos impacts
+          aujourd’hui.
+        </p>
       </li>
     </ul>
   </div>
