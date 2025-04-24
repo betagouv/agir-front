@@ -34,11 +34,4 @@
   import { SimulateursSupportes } from '@/shell/simulateursSupportes';
 
   defineProps<{ actionSimulateurViewModel: ActionSimulateurViewModel }>();
-
-  window.addEventListener('message', (event: MessageEvent) => {
-    if (event.data.kind === 'mesaidesreno-resize-height') {
-      const iframe = document.getElementById('mesaidesreno') as HTMLIFrameElement;
-      iframe.style.height = `${event.data.value}px`;
-    }
-  });
 </script>
