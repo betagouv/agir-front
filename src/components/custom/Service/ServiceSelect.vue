@@ -29,6 +29,7 @@
       code: string;
       estLaCategorieParDefaut: boolean;
     }[];
+    codeDerniereRechercheType?: string;
   }>();
   const emit = defineEmits<{ (e: 'update', value: string): void }>();
 
@@ -36,7 +37,11 @@
   const mesureurElement = ref<HTMLElement | null>(null);
   const selectElement = ref<HTMLElement | null>(null);
 
-  const optionSelectionneParDefaut = props.options.find(option => option.estLaCategorieParDefaut);
+  const optionSelectionneDerniereRecherche = props.options.find(
+    option => option.code === props.codeDerniereRechercheType,
+  );
+  const optionSelectionneParDefaut =
+    optionSelectionneDerniereRecherche ?? props.options.find(option => option.estLaCategorieParDefaut);
   const optionSelectionnee = ref(optionSelectionneParDefaut?.code);
 
   const texteDeLOptionSelectionnee = computed(() => {

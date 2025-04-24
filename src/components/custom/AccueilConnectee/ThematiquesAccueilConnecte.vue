@@ -13,7 +13,7 @@
       label="🥾 Réparer une paire de chaussures"
     />
 
-    <div class="fr-container fr-py-5w">
+    <div class="fr-container fr-py-5w position--relative z-index-3">
       <div class="text--center fr-mb-10w">
         <h2 class="text--semi-bold">
           <span class="text--bold">{{ prenom }}</span
@@ -63,5 +63,9 @@
 <style scoped>
   .overflow-x-clip {
     overflow-x: clip;
+  }
+
+  .z-index-3 {
+    z-index: 3;
   }
 </style>

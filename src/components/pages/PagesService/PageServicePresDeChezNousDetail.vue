@@ -1,6 +1,12 @@
 <template>
   <div class="fr-container fr-pb-4w" v-if="detailServiceViewModel">
-    <img alt="" :src="detailServiceViewModel?.img" />
+    <router-link
+      class="fr-btn fr-btn--tertiary-no-outline fr-btn--icon-left fr-icon-arrow-left-line fr-pl-0 fr-my-2w"
+      :to="{ path: useNavigationStore().pagePrecedente.path, query: useNavigationStore().pagePrecedente.query }"
+    >
+      Retour
+    </router-link>
+    <img class="display-block fr-mb-2w" alt="" v-if="detailServiceViewModel?.img" :src="detailServiceViewModel?.img" />
     <div class="fr-mt-auto">
       <span
         v-if="detailServiceViewModel.tag"
@@ -55,6 +61,7 @@
     ServiceRecherchePresDeChezNousPresenterDetailImpl,
   } from '@/domaines/serviceRecherche/presDeChezNous/adapters/serviceRecherchePresDeChezNousDetail.presenter.impl';
   import { RecupererDetailServicePresDeChezNousUsecase } from '@/domaines/serviceRecherche/presDeChezNous/recupererDetailServicePresDeChezNous.usecase';
+  import { useNavigationStore } from '@/store/navigationStore';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const isLoading = ref<boolean>(true);

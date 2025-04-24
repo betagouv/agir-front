@@ -2,20 +2,18 @@
   <div class="fr-container">
     <ServiceSkeletonConditionnel
       :is-loading="pageEstEnChargement"
-      :view-model-existe="serviceRechercheLongueVieAuxObjetsViewModel !== undefined"
+      :view-model-existe="viewModel !== undefined"
       :message-erreur="serviceErreur"
     >
-      <PageServiceTemplate
-        v-if="serviceRechercheLongueVieAuxObjetsViewModel?.aside"
-        :aside="serviceRechercheLongueVieAuxObjetsViewModel.aside"
-      >
+      <PageServiceTemplate v-if="viewModel?.aside" :aside="viewModel.aside">
         <h1 class="fr-h2 fr-mb-1w">
           <ServiceSelect
-            v-if="serviceRechercheLongueVieAuxObjetsViewModel?.categories"
+            v-if="viewModel?.categories"
             id="categories"
-            :options="serviceRechercheLongueVieAuxObjetsViewModel.categories"
+            :options="viewModel.categories"
             label="Choisir une catégorie"
-            @update="updateType"
+            @update="modifierType"
+            :code-derniere-recherche-type="typeDeRecherche"
           />
           à proximité de chez moi
         </h1>
@@ -26,27 +24,21 @@
         >
           <h2 class="fr-h4 fr-mb-0" id="recherche-par-adresse-label">Recherche par adresse</h2>
           <ServiceBarreDeRechercheAdresse
-            v-model="coordonnees"
+            v-model:recherche="recherche"
+            v-model:coordonnees="coordonnees"
             class="fr-col-12 fr-col-md-7"
             labelId="recherche-par-adresse-label"
           />
         </section>
-        <section
-          v-if="
-            serviceRechercheLongueVieAuxObjetsViewModel &&
-            (serviceRechercheLongueVieAuxObjetsViewModel as ServiceRechercheLongueVieAuxObjetsViewModelAvecResultats)
-              .favoris
-          "
-        >
+        <section v-if="viewModel && (viewModel as ServiceRechercheLongueVieAuxObjetsViewModelAvecResultats).favoris">
           <ServiceFavoris
             :services-recherche-favoris-view-model="
-              (serviceRechercheLongueVieAuxObjetsViewModel as ServiceRechercheLongueVieAuxObjetsViewModelAvecResultats)
-                .favoris!
+              (viewModel as ServiceRechercheLongueVieAuxObjetsViewModelAvecResultats).favoris!
             "
             titre="Mes lieux favoris"
           />
         </section>
-        <section v-if="serviceRechercheLongueVieAuxObjetsViewModel.aucunResultat" class="text--center">
+        <section v-if="viewModel.aucunResultat" class="text--center">
           <img alt="" height="250" src="/service_aucun_resultat.svg" />
           <p class="fr-text--lg">
             <span aria-hidden="true">😢 </span>Aucun résultat n’est encore disponible pour votre localisation
@@ -56,18 +48,14 @@
           <h2 class="fr-h3">Suggestions</h2>
           <ServiceListeCarte
             :suggestions-service-view-model="
-              (serviceRechercheLongueVieAuxObjetsViewModel as ServiceRechercheLongueVieAuxObjetsViewModelAvecResultats)
-                .suggestions
+              (viewModel as ServiceRechercheLongueVieAuxObjetsViewModelAvecResultats).suggestions
             "
           />
           <ServiceSkeletonCartes v-if="cartesSontEnChargement" />
           <button
-            v-if="
-              (serviceRechercheLongueVieAuxObjetsViewModel as ServiceRechercheLongueVieAuxObjetsViewModelAvecResultats)
-                .plusDeResultatsDisponibles
-            "
+            v-if="(viewModel as ServiceRechercheLongueVieAuxObjetsViewModelAvecResultats).plusDeResultatsDisponibles"
             class="fr-link text--underline"
-            @click="chargerPlusDeResultats()"
+            @click="chargerPlusDeCartes()"
           >
             Voir plus de résultats
           </button>
@@ -86,7 +74,7 @@
   import ServiceSelect from '@/components/custom/Service/ServiceSelect.vue';
   import ServiceSkeletonCartes from '@/components/custom/Service/ServiceSkeletonCartes.vue';
   import ServiceSkeletonConditionnel from '@/components/custom/Service/ServiceSkeletonConditionnel.vue';
-  import { useRechercheLieuService } from '@/composables/useRechercheLieuService';
+  import { useRechercheService } from '@/composables/useRechercheService';
   import {
     ServiceRechercheLongueVieAuxObjetsPresenterImpl,
     ServiceRechercheLongueVieAuxObjetsViewModel,
@@ -96,39 +84,35 @@
   import { RecupererServiceLongueVieAuxObjetsUsecase } from '@/domaines/serviceRecherche/longueVieAuxObjets/recupererServiceLongueVieAuxObjets.usecase';
   import { utilisateurStore } from '@/store/utilisateur';
 
-  const coordonnees = ref<{ latitude: number; longitude: number }>();
-  const serviceRechercheLongueVieAuxObjetsViewModel = ref<ServiceRechercheLongueVieAuxObjetsViewModel>();
-  const usecase = new RecupererServiceLongueVieAuxObjetsUsecase(new ServiceRechercheLongueVieAuxObjetsAxios());
-
-  const serviceErreur = ref<string | null>(null);
-  const typeDeRecherche = ref<string>('vos_objets');
+  const viewModel = ref<ServiceRechercheLongueVieAuxObjetsViewModel>();
+  const recupererServiceLongueVieAuxObjetsUsecase = new RecupererServiceLongueVieAuxObjetsUsecase(
+    new ServiceRechercheLongueVieAuxObjetsAxios(),
+  );
 
   const {
-    chargerPlusDeResultats,
-    resetNombreDeResultats,
-    lancerLaRecherche,
+    recherche,
+    typeDeRecherche,
+    coordonnees,
+    nombreDeResultats,
+    chargerPlusDeCartes,
+    modifierType,
+    serviceErreur,
     pageEstEnChargement,
     cartesSontEnChargement,
-  } = useRechercheLieuService(lancerLeUseCase, coordonnees);
+  } = useRechercheService(lancerRecherche, 'vos_objets');
 
-  async function lancerLeUseCase(limit: number): Promise<void> {
-    await usecase.execute(
+  async function lancerRecherche(): Promise<void> {
+    await recupererServiceLongueVieAuxObjetsUsecase.execute(
       utilisateurStore().utilisateur.id,
       typeDeRecherche.value,
-      limit,
+      nombreDeResultats.value,
       new ServiceRechercheLongueVieAuxObjetsPresenterImpl(
         vm => {
-          serviceRechercheLongueVieAuxObjetsViewModel.value = vm;
+          viewModel.value = vm;
         },
         error => (serviceErreur.value = error),
       ),
       coordonnees.value,
     );
   }
-
-  const updateType = (type: string) => {
-    resetNombreDeResultats();
-    typeDeRecherche.value = type;
-    lancerLaRecherche();
-  };
 </script>

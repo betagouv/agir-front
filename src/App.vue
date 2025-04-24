@@ -55,7 +55,7 @@
 
     const navigationStore = useNavigationStore();
     if (from.fullPath) {
-      navigationStore.addRoute(from.fullPath, from.name as string);
+      navigationStore.addRoute(from.fullPath, from.name as string, from.query);
     }
 
     const estConnecte = utilisateurStore().utilisateur.id.length > 0;

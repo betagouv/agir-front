@@ -84,16 +84,20 @@
     coordonnees: Coordonnees;
   };
 
-  const coordonnees = defineModel<Coordonnees>();
+  const coordonnees = defineModel<Coordonnees>('coordonnees');
+  const recherche = defineModel<string>('recherche');
   const adressesAffichees = ref<Adresse[]>([]);
   const indexSelectionne = ref<number>(-1);
   const dialogOuverte = ref<boolean>(false);
   const dialogRef = ref<HTMLDialogElement>();
-  const recherche = ref<string>('');
   const DELAI_DEBOUNCE = 500;
 
+  const emit = defineEmits<{
+    (e: 'update:adresseModifiee', value: string): void;
+  }>();
+
   const { debounced: chargerAdresses } = useDebouncedFn(() => {
-    chargerAdressesSimilaires(recherche.value);
+    chargerAdressesSimilaires(recherche.value ?? '');
   }, DELAI_DEBOUNCE);
 
   const chargerAdressesSimilaires = (adresse: string) => {
@@ -129,6 +133,7 @@
   function envoyerCoordonnees(adresse: Adresse) {
     indexSelectionne.value = -1;
     recherche.value = `${adresse.nom}, ${adresse.ville} (${adresse.codePostal})`;
+    emit('update:adresseModifiee', recherche.value);
     coordonnees.value = {
       latitude: adresse.coordonnees.latitude,
       longitude: adresse.coordonnees.longitude,

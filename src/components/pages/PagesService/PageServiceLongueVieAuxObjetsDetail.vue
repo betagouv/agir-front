@@ -2,7 +2,7 @@
   <div v-if="detailServiceViewModel" class="fr-container fr-pb-4w">
     <router-link
       class="fr-btn fr-btn--tertiary-no-outline fr-btn--icon-left fr-icon-arrow-left-line fr-pl-0 fr-my-2w"
-      to="/thematique/consommer/service/longue-vie-aux-objets"
+      :to="{ path: useNavigationStore().pagePrecedente.path, query: useNavigationStore().pagePrecedente.query }"
     >
       Retour
     </router-link>
@@ -70,6 +70,7 @@
     ServiceRechercheLongueVieAuxObjetsPresenterDetailImpl,
   } from '@/domaines/serviceRecherche/longueVieAuxObjets/adapters/serviceRechercheLongueVieAuxObjetsDetail.presenter.impl';
   import { RecupererDetailServiceLongueVieAuxObjetsUsecase } from '@/domaines/serviceRecherche/longueVieAuxObjets/recupererDetailServiceLongueVieAuxObjets.usecase';
+  import { useNavigationStore } from '@/store/navigationStore';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const isLoading = ref<boolean>(true);
