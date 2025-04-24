@@ -11,7 +11,7 @@
 
     <ActionAides :aides="actionClassiqueViewModel.aides" />
 
-    <ActionFAQ :questions-faq="actionClassiqueViewModel.faq" />
+    <ActionFAQ :action-id="actionClassiqueViewModel.actionId" :questions-faq="actionClassiqueViewModel.faq" />
   </section>
 </template>
 
