@@ -2,7 +2,7 @@
   <div class="fr-container fr-pb-6w">
     <FilDAriane page-courante="Ma bibliothèque" />
     <h1 class="fr-h2 fr-mb-1w">Ma bibliothèque</h1>
-    <p>Retrouver ici vos articles déjà consultés ainsi que vos favoris</p>
+    <p>Découvrez ici tous les articles d’information disponibles sur <i class="text--bold">J’agis</i>.</p>
     <div v-if="isLoadingGlobal">Chargement en cours ...</div>
     <div v-else-if="!isLoadingGlobal && bibliothequeViewModel" class="fr-grid-row fr-grid-row--gutters">
       <div class="fr-col-md-4 fr-col-12">
