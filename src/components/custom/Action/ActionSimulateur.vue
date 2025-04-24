@@ -6,7 +6,7 @@
     />
 
     <KyCsAction
-      v-if="actionSimulateurViewModel.actionId === 'action_simulateur_voiture'"
+      v-if="actionSimulateurViewModel.actionId !== 'action_simulateur_voiture'"
       :action-id="actionSimulateurViewModel.actionId"
       :idEnchainementKycs="actionSimulateurViewModel.idEnchainementKYCs"
       :type-action="TypeAction.SIMULATEUR"
@@ -17,12 +17,7 @@
       </template>
     </KyCsAction>
     <div v-else>
-      <iframe
-        id="mesaidesreno"
-        allow="clipboard-read; clipboard-write"
-        src="https://mesaidesreno.beta.gouv.fr/"
-        style="width: 100%"
-      ></iframe>
+      <SimulationAideRenos />
     </div>
     <ActionAides :aides="actionSimulateurViewModel.aides" />
   </section>
@@ -31,17 +26,11 @@
 <script lang="ts" setup>
   import ActionAides from '@/components/custom/Action/composants/ActionAides.vue';
   import ActionIntroduction from '@/components/custom/Action/composants/ActionIntroduction.vue';
+  import SimulationAideRenos from '@/components/custom/Action/SimulationAideRenos.vue';
   import SimulationResultatVoiture from '@/components/custom/Action/SimulationResultatVoiture.vue';
   import KyCsAction from '@/components/custom/KYC/KYCsAction.vue';
   import { ActionSimulateurViewModel } from '@/domaines/actions/ports/action.presenter';
   import { TypeAction } from '@/domaines/actions/ports/actions.repository';
 
   defineProps<{ actionSimulateurViewModel: ActionSimulateurViewModel }>();
-
-  window.addEventListener('message', (event: MessageEvent) => {
-    if (event.data.kind === 'mesaidesreno-resize-height') {
-      const iframe = document.getElementById('mesaidesreno') as HTMLIFrameElement;
-      iframe.style.height = `${event.data.value}px`;
-    }
-  });
 </script>
