@@ -11,13 +11,13 @@
     </div>
     <div>
       <p>
-        <button class="fr-link text--underline fr-p-0 fr-mt-2w" @click.prevent="poserUneQuestion = true">
+        <button class="fr-link text--underline fr-p-0 fr-mt-2w" @click.prevent="questionEtat = QuestionEtat.OUVERTE">
           Posez votre question
         </button>
         , notre equipe vous répond&nbsp;!
       </p>
 
-      <div v-if="poserUneQuestion" class="background--main fr-py-3w fr-px-2w fr-mt-2w">
+      <div v-if="questionEtat === QuestionEtat.OUVERTE" class="background--main fr-py-3w fr-px-2w fr-mt-2w">
         <div class="fr-grid-row fr-grid-row--gutters">
           <form class="fr-col-12 fr-col-md-9">
             <h3 id="question-label" class="fr-h4">Posez une question</h3>
@@ -34,26 +34,51 @@
               id="textarea"
               class="fr-input fr-mb-3w"
               name="textarea"
+              maxlength="500"
             />
 
-            <button class="fr-btn fr-btn--secondary fr-btn--icon-right fr-icon-arrow-right-s-line">Envoyer</button>
+            <button
+              class="fr-btn fr-btn--secondary fr-btn--icon-right fr-icon-arrow-right-s-line"
+              @click="envoyerReponse"
+            >
+              Envoyer
+            </button>
           </form>
           <div class="fr-col-md-3 fr-hidden fr-unhidden-md">
             <img alt="" class="full-width" src="/ic_faq.svg" />
           </div>
         </div>
       </div>
+
+      <Alert
+        v-if="questionEtat === QuestionEtat.ENVOYEE"
+        titre="Merci pour votre retour !"
+        message="Notre équipe en prendra connaissance très prochainement."
+        type="success"
+        :on-close="() => (questionEtat = QuestionEtat.PAS_OUVERTE)"
+      />
     </div>
   </section>
 </template>
 
 <script lang="ts" setup>
   import { ref } from 'vue';
+  import Alert from '@/components/custom/Alert.vue';
   import Accordeon from '@/components/dsfr/Accordeon.vue';
   import { ActionFAQ } from '@/domaines/actions/ports/actions.repository';
 
   defineProps<{ questionsFaq: ActionFAQ[] }>();
-  const poserUneQuestion = ref<boolean>(false);
+  enum QuestionEtat {
+    PAS_OUVERTE,
+    OUVERTE,
+    ENVOYEE,
+  }
+
+  const questionEtat = ref<QuestionEtat>(QuestionEtat.PAS_OUVERTE);
+
+  function envoyerReponse() {
+    questionEtat.value = QuestionEtat.ENVOYEE;
+  }
 </script>
 
 <style scoped>
