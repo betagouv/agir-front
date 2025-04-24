@@ -28,7 +28,8 @@
         >
           <h2 class="fr-h4 fr-mb-0" id="recherche-par-adresse-label">Recherche par adresse</h2>
           <ServiceBarreDeRechercheAdresse
-            v-model="coordonnees"
+            v-model:recherche="recherche"
+            v-model:coordonnees="coordonnees"
             class="fr-col-12 fr-col-md-7"
             labelId="recherche-par-adresse-label"
           />
@@ -102,6 +103,7 @@
   const usecase = new RecupererServicePresDeChezNousUsecase(new ServiceRecherchePresDeChezNousAxios());
 
   const {
+    recherche,
     typeDeRecherche,
     coordonnees,
     nombreDeResultats,
