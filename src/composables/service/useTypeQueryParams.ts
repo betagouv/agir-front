@@ -10,7 +10,8 @@ export function useTypeQueryParams(lancerRecherche: () => Promise<void>, typePar
   const cartesSontEnChargement = ref(false);
 
   const categorie = ref<string>((route.query.type as string) ?? typeParDefaut);
-  const nombreDeResultats = ref<number>(parseInt(route.query.nombre as string) ?? 9);
+  const nombreDepuisQueryParams = parseInt(route.query.nombre as string);
+  const nombreDeResultats = ref<number>(isNaN(nombreDepuisQueryParams) ? 9 : nombreDepuisQueryParams);
 
   onMounted(async () => {
     pageEstEnChargement.value = true;

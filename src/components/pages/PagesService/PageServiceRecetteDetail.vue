@@ -1,6 +1,18 @@
 <template>
   <div class="fr-container fr-pb-4w" v-if="recetteViewModel">
-    <img class="recette--image fr-mb-2w" alt="" :src="recetteViewModel?.image" />
+    <router-link
+      class="fr-btn fr-btn--tertiary-no-outline fr-btn--icon-left fr-icon-arrow-left-line fr-pl-0 fr-my-2w"
+      :to="{ path: useNavigationStore().pagePrecedente.path, query: useNavigationStore().pagePrecedente.query }"
+    >
+      Retour
+    </router-link>
+
+    <img
+      v-if="recetteViewModel?.image"
+      class="display-block recette--image fr-mb-2w"
+      alt=""
+      :src="recetteViewModel?.image"
+    />
     <div class="fr-mt-auto">
       <span v-if="recetteViewModel.tag" :class="`fr-tag fr-text--xs fr-mr-2w ${recetteViewModel.tag.style}`">
         {{ recetteViewModel.tag.label }}
@@ -37,6 +49,7 @@
   } from '@/domaines/serviceRecherche/recettes/adapters/recette.presenter.impl';
   import { ServiceRechercheRecettesAxios } from '@/domaines/serviceRecherche/recettes/adapters/serviceRechercheRecettes.repository.axios';
   import { RecupererDetailServiceRecettesUsecase } from '@/domaines/serviceRecherche/recettes/recupererDetailServiceRecettes.usecase';
+  import { useNavigationStore } from '@/store/navigationStore';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const isLoading = ref<boolean>(true);

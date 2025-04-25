@@ -4,7 +4,13 @@
       <PageServiceTemplate :aside="viewModel!.aside">
         <h1 class="fr-h2">
           Recettes
-          <ServiceSelect id="mois" :options="viewModel!.categories" @update="modifierType" label="Choisir un type" />
+          <ServiceSelect
+            id="mois"
+            :options="viewModel!.categories"
+            @update="modifierType"
+            label="Choisir un type"
+            :code-derniere-recherche-type="categorie"
+          />
         </h1>
 
         <section v-if="viewModel!.favoris" class="fr-pb-6w">
