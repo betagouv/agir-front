@@ -1,9 +1,7 @@
 <template>
-  <h2 :class="styleDuTitre ? styleDuTitre : 'fr-h4 fr-mb-2w'">
-    {{ questionViewModel.libelle }}
-  </h2>
   <InputCheckbox
     v-model="reponse"
+    :titre="questionViewModel.libelle"
     :est-resetable="true"
     :options="
       questionViewModel.reponses_possibles.map(reponsePossible => ({
