@@ -16,7 +16,6 @@
             class="fr-col-12 fr-mb-2w"
             titre="Erreur lors de l'authentification"
             type="error"
-            tabindex="-1"
             aria-live="assertive"
           />
           <div class="fr-fieldset__element">

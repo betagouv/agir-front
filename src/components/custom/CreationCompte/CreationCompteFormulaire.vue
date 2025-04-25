@@ -1,7 +1,8 @@
 <template>
+  <h1 class="fr-h2">Créer un compte sur <i>J'agis</i></h1>
   <img alt="" src="/bg_creation_compte.svg" />
-  <FranceConnect class="fr-mb-2w" />
-  <h1 class="fr-h4 fr-mb-0">Créez votre compte sur J'agis</h1>
+  <FranceConnect class="fr-mb-2w" title-class="fr-h3" />
+  <h2 class="fr-h3">Se créer un compte en choisissant un identifiant</h2>
   <form aria-labelledby="identity-fieldset-legend" class="fr-mb-4w" @submit.prevent="performCreerCompteUtilisateur">
     <fieldset class="fr-fieldset fr-mb-0">
       <legend id="identity-fieldset-legend" class="fr-fieldset__legend">
@@ -16,9 +17,12 @@
           class="fr-col-12 fr-mb-2w"
           titre="Erreur lors de la création du compte"
           type="error"
+          aria-live="assertive"
         />
       </div>
-      <p class="fr-text--md text--gris-light fr-mt-0 fr-mb-1w fr-ml-1w">Tous les champs sont obligatoires</p>
+      <div class="fr-fieldset__element">
+        <p class="fr-hint-text">Tous les champs sont obligatoires</p>
+      </div>
       <div class="fr-fieldset__element">
         <InputMail v-model="compteUtilisateurInput.mail" label="Adresse électronique" name="utilisateur-mail" />
       </div>
@@ -34,7 +38,7 @@
       </div>
       <div class="fr-fieldset__element">
         <div class="fr-checkbox-group fr-checkbox-group--sm">
-          <input id="cgu" v-model="acceptationCGU" name="cgu" type="checkbox" />
+          <input id="cgu" v-model="acceptationCGU" name="cgu" type="checkbox" ref="inputCGU" />
           <label class="fr-label fr-mt-1w" for="cgu">
             J'accepte&nbsp;
             <router-link :to="{ name: RouteConformiteName.CGU }" target="_blank"
@@ -58,7 +62,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { ref } from 'vue';
+  import { onMounted, ref, useTemplateRef } from 'vue';
   import Alert from '@/components/custom/Alert.vue';
   import InputPassword from '@/components/custom/Form/InputPassword.vue';
   import FranceConnect from '@/components/dsfr/FranceConnect.vue';
@@ -82,19 +86,30 @@
   let acceptationCGU = ref<boolean>(false);
   utilisateurStore().reset();
 
+  const inputCGU = useTemplateRef<HTMLInputElement>('inputCGU');
+  const inputPassword = ref<HTMLInputElement | undefined>();
+
+  onMounted(() => {
+    inputPassword.value = document.querySelector('#password') as HTMLInputElement;
+  });
+
   function onMotDePasseValideChanged(isMotDePasseValide: boolean) {
     formulaireValide.value = isMotDePasseValide;
   }
 
   const performCreerCompteUtilisateur = async () => {
     creationDeCompteEnErreur.value = false;
+    creationDeCompteMessageErreur.value = '';
     if (acceptationCGU.value === false) {
+      if (inputCGU.value) {
+        inputCGU.value.focus();
+      }
       creationDeCompteMessageErreur.value =
         "Vous devez accepter les conditions générales d'utilisation pour continuer.";
       creationDeCompteEnErreur.value = true;
-      window.scrollTo(0, 0);
       return;
     }
+
     const creeCompteUseCase = new CreerCompteUtilisateurUsecase(
       new CompteUtilisateurRepositoryImpl(),
       new SessionRepositoryStore(),
@@ -109,7 +124,15 @@
       .catch(reason => {
         creationDeCompteMessageErreur.value = reason.message;
         creationDeCompteEnErreur.value = true;
-        window.scrollTo(0, 0);
+        if (inputPassword.value) {
+          inputPassword.value.focus();
+        }
       });
   };
 </script>
+
+<style scoped>
+  #cgu:focus {
+    outline: solid var(--blue-france-sun-113-625);
+  }
+</style>
