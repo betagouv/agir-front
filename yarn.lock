@@ -548,19 +548,19 @@
   resolved "https://registry.yarnpkg.com/@iarna/toml/-/toml-3.0.0.tgz#ccde5292fe9d348bbe93fe90d579fc442b72b0b3"
   integrity sha512-td6ZUkz2oS3VeleBcN+m//Q6HlCFCPrnI0FZhrt/h4XqLEdOyYp2u21nd8MdsR+WJy5r9PTDaHTDDfhf4H4l6Q==
 
-"@iframe-resizer/core@5.4.5":
-  version "5.4.5"
-  resolved "https://registry.yarnpkg.com/@iframe-resizer/core/-/core-5.4.5.tgz#be1d81ebc81cb2378641ba5e34e42ad40106062d"
-  integrity sha512-Z5euppksu94VgJ+kM15eE3H0LDHpYjEq9Hh64HpswL2N3dt9i0ryD4AKAq0AcqJMDAUls4tkRfS9bGd1ZC+t4w==
+"@iframe-resizer/core@5.4.6":
+  version "5.4.6"
+  resolved "https://registry.yarnpkg.com/@iframe-resizer/core/-/core-5.4.6.tgz#f4e61e408e17dba82721548bb33ee7071328d6f6"
+  integrity sha512-LfBQ2hyZuGEuAUpj5SENgFlmaNT1LugXdJzQKyIGP8Q+mpcd3ltciXa5qDur362Y0GQMgej8mD+XrEuRj5IAsQ==
   dependencies:
     auto-console-group "1.2.9"
 
-"@iframe-resizer/vue@^5.4.5":
-  version "5.4.5"
-  resolved "https://registry.yarnpkg.com/@iframe-resizer/vue/-/vue-5.4.5.tgz#feec194e0902572a2647492b5a8b0d86e1b474b8"
-  integrity sha512-1YB5AETOS8Ry7WyhRSjOIPpSCGUJNNxW29n8uUOUVAaXGAu71/NsFnJB4P9Lf5RVtWEpb0W35c5byIT6ToOprA==
+"@iframe-resizer/vue@^5.4.6":
+  version "5.4.6"
+  resolved "https://registry.yarnpkg.com/@iframe-resizer/vue/-/vue-5.4.6.tgz#adbcff0a63cd9045385731d3972507c98ad4965f"
+  integrity sha512-xSPnPA7Sns/Nvhx+Jw/HcBAye5/G0/UbfOdilZkHE2ZmxgQj0G9KHJe+yhkS1kaG/glWMYAh5tsESbBfKOfjVA==
   dependencies:
-    "@iframe-resizer/core" "5.4.5"
+    "@iframe-resizer/core" "5.4.6"
     auto-console-group "1.2.9"
 
 "@img/sharp-darwin-arm64@0.34.1":
