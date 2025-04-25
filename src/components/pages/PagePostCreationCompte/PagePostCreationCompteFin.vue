@@ -29,7 +29,7 @@
           <span aria-hidden="true" class="fr-icon-arrow-right-line text--bleu" />
           <p class="fr-col fr-text--lg fr-mb-0">
             <span class="fr-text--bold">Gagnez des </span>
-            <img alt="points" src="/ic_score.svg" /> en progressant avec <span class="text--italic">J'agis</span>.
+            <img alt="points" src="/ic_score.svg" /> en progressant avec <i>J'agis</i>.
           </p>
         </li>
       </ul>

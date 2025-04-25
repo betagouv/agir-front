@@ -2,7 +2,7 @@
   <div class="fr-container fr-py-6w">
     <div class="fr-col-12 fr-col-md-6 fr-mx-auto fr-mb-0 background--white fr-p-4w border">
       <img alt="" src="/bg_creation_compte.svg" />
-      <p class="text--normal text--bleu fr-mt-1w fr-mb-1w"><span class="fr-text--bold">Question 1</span> sur 3</p>
+      <p class="text--normal text--bleu fr-mt-1w fr-mb-1w"><span class="fr-text--bold">Étape 1</span> sur 3</p>
       <h1 class="fr-h4 fr-mb-1w">Bienvenue sur J'agis&nbsp;! Faisons connaissance...</h1>
 
       <form aria-labelledby="identity-fieldset-legend" class="fr-mb-4w" @submit.prevent="validerLaReponse()">
@@ -19,8 +19,8 @@
               :maxlength="12"
               :required="true"
               label="Votre pseudonyme"
+              description="Doit être composés de 3 à 12 caractères. Lettres et chiffres uniquement."
               name="utilisateur-pseudo"
-              @blur="onValidationPseudo"
             />
 
             <InputDateDeNaissance
@@ -34,23 +34,28 @@
             />
           </div>
         </fieldset>
-        <button class="fr-btn fr-mr-4w">Continuer</button>
+        <button class="fr-btn fr-mr-4w">Passer à l'étape suivante</button>
       </form>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-  import { ref, useTemplateRef } from 'vue';
+  import { onMounted, ref, useTemplateRef } from 'vue';
   import InputDateDeNaissance from '@/components/dsfr/InputDateDeNaissance.vue';
   import InputText from '@/components/dsfr/InputText.vue';
-  import { validationPrenomOuNomOuPseudo } from '@/components/validations/validationsChampsFormulaire';
+  import { validationPseudo } from '@/components/validations/validationsChampsFormulaire';
   import router from '@/router';
   import { RouteCompteName } from '@/router/compte/routeCompteName';
   import { onboardingPostCreationCompte } from '@/store/onboardingPostCreationCompte';
   import { utilisateurStore } from '@/store/utilisateur';
 
+  const inputPseudo = ref<HTMLInputElement>();
   const dateDeNaissanceComposant = useTemplateRef('dateDeNaissanceComposant');
+
+  onMounted(() => {
+    inputPseudo.value = document.querySelector('#utilisateur-pseudo') as HTMLInputElement;
+  });
 
   const validerLaReponse = () => {
     if (!onValidationPseudo()) return;
@@ -61,8 +66,12 @@
   const champsPseudoStatus = ref({ message: '', afficher: false });
 
   function onValidationPseudo(): boolean {
-    if (!validationPrenomOuNomOuPseudo(onboardingPostCreationCompte().pseudo)) {
-      champsPseudoStatus.value = { message: 'Le pseudonyme doit contenir uniquement des lettres', afficher: true };
+    if (!validationPseudo(onboardingPostCreationCompte().pseudo)) {
+      inputPseudo.value?.focus();
+      champsPseudoStatus.value = {
+        message: 'Le pseudonyme ne peut contenir que des lettres, des chiffres ou les caractères spéciaux - et _',
+        afficher: true,
+      };
       return false;
     }
     champsPseudoStatus.value = { message: '', afficher: false };

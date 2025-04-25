@@ -135,7 +135,7 @@
   import CompteFormulaireRevenuFiscal from '@/components/custom/Compte/CompteFormulaireRevenuFiscal.vue';
   import InputDateDeNaissance from '@/components/dsfr/InputDateDeNaissance.vue';
   import InputText from '@/components/dsfr/InputText.vue';
-  import { validationPrenomOuNomOuPseudo } from '@/components/validations/validationsChampsFormulaire';
+  import { validationPrenomOuNom } from '@/components/validations/validationsChampsFormulaire';
   import { useAlerte } from '@/composables/useAlerte';
   import { SessionRepositoryStore } from '@/domaines/authentification/adapters/session.repository.store';
   import { ProfileUtilisateurViewModel } from '@/domaines/profileUtilisateur/adapters/profileUtilisateur.presenter.impl';
@@ -190,10 +190,7 @@
   }
 
   function onValidationPrenom(): boolean {
-    if (
-      profileUtlisateurViewModel.value.prenom &&
-      !validationPrenomOuNomOuPseudo(profileUtlisateurViewModel.value.prenom)
-    ) {
+    if (profileUtlisateurViewModel.value.prenom && !validationPrenomOuNom(profileUtlisateurViewModel.value.prenom)) {
       champsPrenomStatus.value = { message: 'Le prénom doit contenir uniquement des lettres', afficher: true };
       return false;
     }
@@ -202,7 +199,7 @@
   }
 
   function onValidationPseudo(): boolean {
-    if (!validationPrenomOuNomOuPseudo(profileUtlisateurViewModel.value.pseudo)) {
+    if (!validationPrenomOuNom(profileUtlisateurViewModel.value.pseudo)) {
       champsPseudoStatus.value = { message: 'Le pseudonyme doit contenir uniquement des lettres', afficher: true };
       return false;
     }
@@ -211,7 +208,7 @@
   }
 
   function onValidationNom(): boolean {
-    if (profileUtlisateurViewModel.value.nom && !validationPrenomOuNomOuPseudo(profileUtlisateurViewModel.value.nom)) {
+    if (profileUtlisateurViewModel.value.nom && !validationPrenomOuNom(profileUtlisateurViewModel.value.nom)) {
       champsNomStatus.value = { message: 'Le nom doit contenir uniquement des lettres', afficher: true };
       return false;
     }

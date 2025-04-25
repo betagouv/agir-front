@@ -1,7 +1,10 @@
 <template>
   <div class="fr-grid fr-grid-row fr-grid-row--gutters">
     <div class="fr-col-lg-3 fr-col-12">
-      <div :class="`fr-input-group ${!codePostalValide && 'fr-input-group--error'}`">
+      <div
+        :class="`fr-input-group ${!codePostalValide && 'fr-input-group--error'}
+        ${codePostalValide && communes.length === 0 && 'fr-input-group--error'}`"
+      >
         <label class="fr-label" for="codePostal"
           >Code postal
           <span class="fr-hint-text">Format 5 chiffres</span>
@@ -12,14 +15,21 @@
           name="codePostal"
           id="codePostal"
           required
-          aria-describedby="text-input-error-desc-error"
+          aria-describedby="text-input-error-desc-error-invalide text-input-error-desc-error-commune"
           type="text"
           @input="updateValue"
           :value="defaultValue"
           :autofocus="autofocus"
         />
-        <p v-if="!codePostalValide" id="text-input-error-desc-error" class="fr-error-text">
+        <p v-if="!codePostalValide" id="text-input-error-desc-error-invalide" class="fr-error-text">
           Ce code postal n'est pas valide
+        </p>
+        <p
+          v-if="codePostalValide && communes.length === 0"
+          id="text-input-error-desc-error-commune"
+          class="fr-error-text"
+        >
+          Ce code postal n'existe pas
         </p>
       </div>
     </div>

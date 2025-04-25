@@ -1,4 +1,9 @@
-export function validationPrenomOuNomOuPseudo(prenom: string): boolean {
+export function validationPseudo(pseudo: string): boolean {
+  const regex = /^[a-zA-Z0-9_-]+$/;
+  return regex.test(pseudo);
+}
+
+export function validationPrenomOuNom(prenom: string): boolean {
   const regex =
     /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžæÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/;
   return regex.test(prenom);

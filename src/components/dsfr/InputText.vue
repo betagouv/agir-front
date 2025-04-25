@@ -5,6 +5,7 @@
       <span v-if="description" class="fr-hint-text">{{ description }}</span>
     </label>
     <input
+      aria-describedby="text-input-error-desc-error"
       :autocomplete="autocomplete"
       :id="name"
       :autofocus="autofocus"
@@ -19,7 +20,9 @@
       @blur="handleBlur"
       @input="updateValue"
     />
-    <p v-if="erreur && erreur.afficher" id="text-input-error-desc-error" class="fr-error-text">{{ erreur.message }}</p>
+    <p v-if="erreur && erreur.afficher" id="text-input-error-desc-error" class="fr-error-text" aria-live="assertive">
+      {{ erreur.message }}
+    </p>
   </div>
 </template>
 
