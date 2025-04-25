@@ -108,18 +108,16 @@ describe('Fichier de tests concernant la récupération des KYC répondues', () 
             libelle: 'Une question',
             reponse: 'une réponse',
             description:
-              "Ces informations permettent à <span class='text--italic'>J'agis</span> de mieux vous conseiller sur les aides auxquelles vous pourriez avoir droit",
+              "Ces informations permettent à <i>J'agis</i> de mieux vous conseiller sur les aides auxquelles vous pourriez avoir droit",
           },
           {
             id: 'questionId3',
             libelle: 'Une question2',
             reponse: 'une réponse - une autre réponse',
-            description:
-              "Ces informations permettent à <span class='text--italic'>J'agis</span> de mieux vous conseiller en matière de mobilité",
+            description: "Ces informations permettent à <i>J'agis</i> de mieux vous conseiller en matière de mobilité",
           },
           {
-            description:
-              "Ces informations permettent à <span class='text--italic'>J'agis</span> de mieux vous conseiller en matière de mobilité",
+            description: "Ces informations permettent à <i>J'agis</i> de mieux vous conseiller en matière de mobilité",
             id: 'questionId3',
             libelle: 'Une question2',
             reponse: 'ma valeur 1 - ma valeur 3',

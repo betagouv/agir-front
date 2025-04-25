@@ -43,8 +43,7 @@ describe('Fichier de tests pour récuperer une question KYC', () => {
         reponses_possibles: [],
         points: 'Récoltez vos + 10 points',
         aDejaEteRepondu: false,
-        description:
-          "Ces informations permettent à <span class='text--italic'>J'agis</span> de mieux comprendre vos habitudes alimentaires",
+        description: "Ces informations permettent à <i>J'agis</i> de mieux comprendre vos habitudes alimentaires",
       });
     }
   });
@@ -117,7 +116,7 @@ describe('Fichier de tests pour récuperer une question KYC', () => {
         ],
         aDejaEteRepondu: false,
         description:
-          "Ces informations permettent à <span class='text--italic'>J'agis</span> de mieux vous conseiller en matière de gestion des déchets et d'alimentation",
+          "Ces informations permettent à <i>J'agis</i> de mieux vous conseiller en matière de gestion des déchets et d'alimentation",
       });
     }
   });
@@ -188,8 +187,7 @@ describe('Fichier de tests pour récuperer une question KYC', () => {
           },
         ],
         aDejaEteRepondu: false,
-        description:
-          "Ces informations permettent à <span class='text--italic'>J'agis</span> de mieux vous conseiller en matière de mobilité",
+        description: "Ces informations permettent à <i>J'agis</i> de mieux vous conseiller en matière de mobilité",
       });
     }
   });
@@ -257,8 +255,7 @@ describe('Fichier de tests pour récuperer une question KYC', () => {
           },
         ],
         aDejaEteRepondu: false,
-        description:
-          "Ces informations permettent à <span class='text--italic'>J'agis</span> de mieux vous conseiller en matière de mobilité",
+        description: "Ces informations permettent à <i>J'agis</i> de mieux vous conseiller en matière de mobilité",
       });
     }
   });
