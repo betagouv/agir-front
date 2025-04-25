@@ -24,6 +24,9 @@
           params: {
             thematiqueId: MenuThematiques.getThematiqueData(ClefThematiqueAPI.alimentation).url,
           },
+          query: {
+            type: parametreDeRecherche,
+          },
         }"
         class="fr-link"
         >Voir toutes les recettes
