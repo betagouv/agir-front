@@ -92,10 +92,6 @@
   const dialogRef = ref<HTMLDialogElement>();
   const DELAI_DEBOUNCE = 500;
 
-  const emit = defineEmits<{
-    (e: 'update:adresseModifiee', value: string): void;
-  }>();
-
   const { debounced: chargerAdresses } = useDebouncedFn(() => {
     chargerAdressesSimilaires(recherche.value ?? '');
   }, DELAI_DEBOUNCE);
@@ -133,7 +129,6 @@
   function envoyerCoordonnees(adresse: Adresse) {
     indexSelectionne.value = -1;
     recherche.value = `${adresse.nom}, ${adresse.ville} (${adresse.codePostal})`;
-    emit('update:adresseModifiee', recherche.value);
     coordonnees.value = {
       latitude: adresse.coordonnees.latitude,
       longitude: adresse.coordonnees.longitude,

@@ -89,7 +89,7 @@
   import ServiceSelect from '@/components/custom/Service/ServiceSelect.vue';
   import ServiceSkeletonCartes from '@/components/custom/Service/ServiceSkeletonCartes.vue';
   import ServiceSkeletonConditionnel from '@/components/custom/Service/ServiceSkeletonConditionnel.vue';
-  import { useRechercheService } from '@/composables/useRechercheService';
+  import { useRechercheService } from '@/composables/service/useRechercheService';
   import {
     ServiceRecherchePresDeChezNousPresenterImpl,
     ServiceRecherchePresDeChezNousViewModel,

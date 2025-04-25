@@ -1,30 +1,23 @@
 <template>
   <div class="fr-container">
-    <ServiceSkeletonConditionnel :is-loading="isLoading" :view-model-existe="serviceRecettesViewModel !== undefined">
-      <PageServiceTemplate :aside="serviceRecettesViewModel!.aside">
+    <ServiceSkeletonConditionnel :is-loading="pageEstEnChargement" :view-model-existe="viewModel !== undefined">
+      <PageServiceTemplate :aside="viewModel!.aside">
         <h1 class="fr-h2">
           Recettes
-          <ServiceSelect
-            id="mois"
-            :options="serviceRecettesViewModel!.categories"
-            @update="updateType"
-            label="Choisir un type"
-          />
+          <ServiceSelect id="mois" :options="viewModel!.categories" @update="modifierType" label="Choisir un type" />
         </h1>
 
-        <section v-if="serviceRecettesViewModel!.favoris" class="fr-pb-6w">
-          <ServiceFavoris
-            titre="Mes recettes favorites"
-            :services-recherche-favoris-view-model="serviceRecettesViewModel!.favoris"
-          />
+        <section v-if="viewModel!.favoris" class="fr-pb-6w">
+          <ServiceFavoris titre="Mes recettes favorites" :services-recherche-favoris-view-model="viewModel!.favoris" />
         </section>
-        <section v-if="serviceRecettesViewModel!.suggestions">
+        <section v-if="viewModel!.suggestions">
           <h2 class="fr-h3">Suggestions</h2>
-          <ServiceListeCarte :suggestions-service-view-model="serviceRecettesViewModel!.suggestions" />
+          <ServiceListeCarte :suggestions-service-view-model="viewModel!.suggestions" />
+          <ServiceSkeletonCartes v-if="cartesSontEnChargement" />
           <button
-            v-if="serviceRecettesViewModel!.plusDeResultatsDisponibles"
+            v-if="viewModel!.plusDeResultatsDisponibles"
             class="fr-link text--underline"
-            @click="chargerPlusDeRecettes()"
+            @click="chargerPlusDeCartes()"
           >
             Voir plus de recettes
           </button>
@@ -35,12 +28,14 @@
 </template>
 
 <script setup lang="ts">
-  import { onMounted, ref } from 'vue';
+  import { ref } from 'vue';
   import PageServiceTemplate from '@/components/custom/Service/PageServiceTemplate.vue';
   import ServiceFavoris from '@/components/custom/Service/ServiceFavoris.vue';
   import ServiceListeCarte from '@/components/custom/Service/ServiceListeCarte.vue';
   import ServiceSelect from '@/components/custom/Service/ServiceSelect.vue';
+  import ServiceSkeletonCartes from '@/components/custom/Service/ServiceSkeletonCartes.vue';
   import ServiceSkeletonConditionnel from '@/components/custom/Service/ServiceSkeletonConditionnel.vue';
+  import { useTypeQueryParams } from '@/composables/service/useTypeQueryParams';
   import {
     ServiceRechercheRecettesViewModel,
     ServiceRechercheRecettesPresenterImpl,
@@ -49,41 +44,26 @@
   import { RecupererServiceRecettesUsecase } from '@/domaines/serviceRecherche/recettes/recupererServiceRecettes.usecase';
   import { utilisateurStore } from '@/store/utilisateur';
 
-  const isLoading = ref<boolean>(true);
-  const isLoadingMore = ref<boolean>(false);
-  const serviceRecettesViewModel = ref<ServiceRechercheRecettesViewModel>();
-
   const usecase = new RecupererServiceRecettesUsecase(new ServiceRechercheRecettesAxios());
+  const viewModel = ref<ServiceRechercheRecettesViewModel>();
 
-  let nombreMaxResultats = 9;
-  const typeDeRecettes = ref<string>('saison');
+  const {
+    categorie,
+    nombreDeResultats,
+    pageEstEnChargement,
+    cartesSontEnChargement,
+    chargerPlusDeCartes,
+    modifierType,
+  } = useTypeQueryParams(lancerRecherche, 'saison');
 
-  onMounted(() => {
-    lancerRecherche();
-  });
-
-  const lancerRecherche = async () => {
+  async function lancerRecherche() {
     await usecase.execute(
       utilisateurStore().utilisateur.id,
-      typeDeRecettes.value,
-      nombreMaxResultats,
+      categorie.value,
+      nombreDeResultats.value,
       new ServiceRechercheRecettesPresenterImpl(vm => {
-        serviceRecettesViewModel.value = vm;
+        viewModel.value = vm;
       }),
     );
-    isLoading.value = false;
-  };
-
-  const chargerPlusDeRecettes = async () => {
-    isLoadingMore.value = true;
-    nombreMaxResultats += 9;
-    await lancerRecherche();
-    isLoadingMore.value = false;
-  };
-
-  const updateType = (type: string) => {
-    nombreMaxResultats = 9;
-    typeDeRecettes.value = type;
-    lancerRecherche();
-  };
+  }
 </script>
