@@ -1,3 +1,6 @@
+import { SimulateurMaifPresenter } from '@/domaines/simulationMaif/ports/simulateurMaif.presenter';
+import { ResultatSimulationMaif, RisqueMaifImpact } from '@/domaines/simulationMaif/ports/simulateurMaif.repository';
+
 export type SimulateurMaifViewModel = {
   commune: string;
   chiffresCles: {
@@ -18,77 +21,49 @@ export type SimulateurMaifViewModel = {
   lienKit?: string;
 };
 
-export class SimulateurMaifPresenterImpl {
+export class SimulateurMaifPresenterImpl implements SimulateurMaifPresenter {
   constructor(private readonly callback: (simulateur: SimulateurMaifViewModel) => void) {}
 
-  presente(): void {
-    const simulateur: SimulateurMaifViewModel = {
-      commune: 'Bordeaux',
-      chiffresCles: [
-        {
-          valeur: '8',
-          label: '<span class="text--bold">arrêtés CATNAT</span> depuis 1982',
-        },
-        {
-          valeur: '87%',
-          label: 'de la surface exposée <span class="text--bold">à la sécheresse géotechnique</span>',
-        },
-        {
-          valeur: '22%',
-          label: 'de la surface exposée <span class="text--bold">à l’inondation</span>',
-        },
-      ],
-    };
-
-    this.callback(simulateur);
+  presente(resultatSimulateur: ResultatSimulationMaif): void {
+    this.callback({
+      commune: resultatSimulateur.commune,
+      chiffresCles: resultatSimulateur.chiffresCles.map(chiffre => ({
+        valeur: chiffre.valeur,
+        label: chiffre.label,
+      })),
+      adresse: resultatSimulateur.adresse,
+      risques: resultatSimulateur.risques?.map(risque => ({
+        nom: risque.nom,
+        description: risque.description,
+        image: risque.image,
+        badge: this.genererBadgeDepuisImpact(risque.impact),
+      })),
+      lienKit: resultatSimulateur.lienKit,
+    });
   }
 
-  presenteAvecAdresse(): void {
-    const simulateur: SimulateurMaifViewModel = {
-      commune: 'Bordeaux',
-      chiffresCles: [
-        {
-          valeur: '8',
-          label: '<span class="text--bold">arrêtés CATNAT</span> depuis 1982',
-        },
-        {
-          valeur: '87%',
-          label: 'de la surface exposée <span class="text--bold">à la sécheresse géotechnique</span>',
-        },
-        {
-          valeur: '22%',
-          label: 'de la surface exposée <span class="text--bold">à l’inondation</span>',
-        },
-      ],
-      adresse: '1 rue de la République, 33000 Bordeaux',
-      risques: [
-        {
-          nom: 'Sécheresse géotechnique',
-          description: '',
-          image: 'maif-risque-defaut.webp',
-          badge: {
-            label: 'Très fort',
-            class: 'fr-badge--error fr-badge--no-icon',
-          },
-        },
-        {
-          nom: 'Evolution du trait de côte',
-          description: '',
-          image: 'maif-risque-defaut.webp',
-        },
-        {
-          nom: 'Séisme',
-          description: '',
-          image: 'maif-risque-defaut.webp',
-          badge: {
-            label: 'Faible',
-            class: 'fr-badge--green-tilleul-verveine fr-badge--no-icon',
-          },
-        },
-      ],
-      lienKit: '#',
-    };
-
-    this.callback(simulateur);
+  genererBadgeDepuisImpact(impact: RisqueMaifImpact) {
+    switch (impact) {
+      case RisqueMaifImpact.TRES_FAIBLE:
+        return {
+          label: 'Très faible',
+          class: 'fr-badge--new',
+        };
+      case RisqueMaifImpact.FAIBLE:
+        return {
+          label: 'Faible',
+          class: 'fr-badge--green-tilleul-verveine',
+        };
+      case RisqueMaifImpact.FORT:
+        return {
+          label: 'Fort',
+          class: 'fr-badge--warning',
+        };
+      case RisqueMaifImpact.TRES_FORT:
+        return {
+          label: 'Très fort',
+          class: 'fr-badge--error',
+        };
+    }
   }
 }
