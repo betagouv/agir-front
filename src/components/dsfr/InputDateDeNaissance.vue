@@ -95,7 +95,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { defineProps, defineModel, ref, computed } from 'vue';
+  import { ref, computed } from 'vue';
   import {
     validationAnnee,
     validationDateEstPassee,

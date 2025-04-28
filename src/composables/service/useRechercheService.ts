@@ -1,11 +1,12 @@
 import { onMounted, ref, watch } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
-import { useCoordonneesQueryParams } from '@/composables/useCoordonneesQueryParams';
+import { useRoute } from 'vue-router';
+import { useCoordonneesQueryParams } from './useCoordonneesQueryParams';
+import { useQueryParamsReplacer } from '@/composables/useQueryParamsReplacer';
 import { Coordonnees } from '@/shell/coordonneesType';
 
 export function useRechercheService(lancerRecherche: () => Promise<void>, typeParDefaut: string) {
   const route = useRoute();
-  const router = useRouter();
+  const queryParamsReplacer = useQueryParamsReplacer();
 
   const serviceErreur = ref<string | null>(null);
   const pageEstEnChargement = ref(false);
@@ -29,18 +30,11 @@ export function useRechercheService(lancerRecherche: () => Promise<void>, typePa
     nombreDeResultats.value = isNaN(nombre) ? 9 : nombre;
   }
 
-  async function mettreAJourQuery(params: Record<string, string>) {
-    await router.replace({
-      name: route.name,
-      query: { ...route.query, ...params },
-    });
-  }
-
   const chargerPlusDeCartes = async () => {
     cartesSontEnChargement.value = true;
 
     nombreDeResultats.value += 9;
-    await mettreAJourQuery({ nombre: nombreDeResultats.value.toString() });
+    await queryParamsReplacer({ nombre: nombreDeResultats.value.toString() });
     await lancerRecherche();
 
     cartesSontEnChargement.value = false;
@@ -52,7 +46,7 @@ export function useRechercheService(lancerRecherche: () => Promise<void>, typePa
     typeDeRecherche.value = type;
     nombreDeResultats.value = 9;
 
-    await mettreAJourQuery({ type, nombre: nombreDeResultats.value.toString() });
+    await queryParamsReplacer({ type, nombre: nombreDeResultats.value.toString() });
     await lancerRecherche();
 
     cartesSontEnChargement.value = false;
