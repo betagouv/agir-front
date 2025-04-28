@@ -45,6 +45,7 @@
       <Callout
         v-if="resultatRechercheCollectivitesViewmodel.message"
         :texte="resultatRechercheCollectivitesViewmodel.message"
+        :icone-information="true"
         titre="Votre recherche"
       />
     </template>
