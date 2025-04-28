@@ -1,8 +1,8 @@
 <template>
-  <div class="fr-callout fr-icon-information-line">
-    <h3 class="fr-callout__title" v-text="titre" />
-    <p class="fr-callout__text" v-html="texte" />
-    <button v-if="buttonText && onClick" class="fr-btn" @click="onClick">{{ buttonText }}</button>
+  <div :class="`fr-callout ${iconeInformation ? 'fr-icon-information-line' : ''}`">
+    <h3 class="fr-callout__title" v-if="titre" v-text="titre" />
+    <p class="fr-callout__text" v-if="texte" v-html="texte" />
+    <button v-if="buttonText && onClick" class="fr-btn fr-btn--secondary" @click="onClick">{{ buttonText }}</button>
   </div>
 </template>
 
@@ -10,9 +10,10 @@
   import '@gouvfr/dsfr/dist/component/callout/callout.min.css';
 
   defineProps<{
-    titre: string;
-    texte: string;
+    titre?: string;
+    texte?: string;
     buttonText?: string;
     onClick?: () => void;
+    iconeInformation?: boolean;
   }>();
 </script>
