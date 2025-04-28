@@ -5,24 +5,27 @@
       :sources="actionSimulateurViewModel.sources"
     />
 
-    <KyCsAction
-      :action-id="actionSimulateurViewModel.actionId"
-      :idEnchainementKycs="actionSimulateurViewModel.idEnchainementKYCs"
-      :type-action="TypeAction.SIMULATEUR"
-      class="fr-px-2w"
-    >
-      <template v-slot:fin>
-        <SimulationResultatVoiture v-if="actionSimulateurViewModel.actionId === 'action_simulateur_voiture'" />
-      </template>
-    </KyCsAction>
+    <!--    <KyCsAction-->
+    <!--      :action-id="actionSimulateurViewModel.actionId"-->
+    <!--      :idEnchainementKycs="actionSimulateurViewModel.idEnchainementKYCs"-->
+    <!--      :type-action="TypeAction.SIMULATEUR"-->
+    <!--      class="fr-px-2w"-->
+    <!--    >-->
+    <!--      <template v-slot:fin>-->
+    <!--        <SimulationResultatVoiture v-if="actionSimulateurViewModel.actionId === 'action_simulateur_voiture'" />-->
+    <!--      </template>-->
+    <!--    </KyCsAction>-->
 
-    <ActionAides :aides="actionSimulateurViewModel.aides" />
+    <SimulationMaif v-if="actionSimulateurViewModel.actionId === 'action_simulateur_voiture'" />
+
+    <!--    <ActionAides :aides="actionSimulateurViewModel.aides" />-->
   </section>
 </template>
 
 <script lang="ts" setup>
   import ActionAides from '@/components/custom/Action/composants/ActionAides.vue';
   import ActionIntroduction from '@/components/custom/Action/composants/ActionIntroduction.vue';
+  import SimulationMaif from '@/components/custom/Action/SimulationMaif.vue';
   import SimulationResultatVoiture from '@/components/custom/Action/SimulationResultatVoiture.vue';
   import KyCsAction from '@/components/custom/KYC/KYCsAction.vue';
   import { ActionSimulateurViewModel } from '@/domaines/actions/ports/action.presenter';
