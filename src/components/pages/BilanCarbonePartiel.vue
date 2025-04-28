@@ -43,7 +43,7 @@
         <template #titre> Comment est calculée mon empreinte ?</template>
         <template #contenu>
           <p>
-            Votre bilan environnemental est calculé à partir de vos réponses grâce au calculateur carbone de
+            Votre empreinte écologique est calculé à partir de vos réponses grâce au calculateur carbone de
             <a href="https://nosgestesclimat.fr/documentation/bilan" target="_blank" rel="noopener noreferrer">
               Nos Gestes Climat</a
             >

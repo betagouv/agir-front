@@ -1,6 +1,6 @@
 <template>
   <div class="fr-container fr-pb-2w">
-    <FilDAriane page-courante="Mon bilan environnemental" />
+    <FilDAriane page-courante="Mon empreinte écologique" />
     <div class="fr-grid-row fr-grid-row--gutters">
       <div class="fr-col-12 fr-col-md-9">
         <p v-if="isLoading">Chargement en cours ...</p>

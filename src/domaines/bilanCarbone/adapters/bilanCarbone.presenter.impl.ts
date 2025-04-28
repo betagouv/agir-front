@@ -67,7 +67,7 @@ export class BilanCarbonePresenterImpl extends BilanCarboneBasePresenter impleme
 
   presenteBilanComplet(bilanCarbone: BilanCarbone): void {
     this.bilanCarboneViewModel({
-      titre: 'Mon bilan <span class="text--bleu">environnemental</span>',
+      titre: 'Mon empreinte <span class="text--bleu">écologique</span>',
       pourcentageProgressBar: this.calculPourcentageProgressBar(bilanCarbone.bilanComplet!.impactKgAnnuel),
       nombreDeTonnesAnnuel: this.calculTonnesAnnuel(bilanCarbone.bilanComplet!.impactKgAnnuel),
       impactKgAnnuel: this.formateKg(bilanCarbone.bilanComplet!.impactKgAnnuel),

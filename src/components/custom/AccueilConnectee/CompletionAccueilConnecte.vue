@@ -43,7 +43,7 @@
               >
                 <p class="flex flex-column align-items--center fr-mb-3v text--center">
                   <CercleProgression :pourcentage="progression.pourcentageCompletionBilan || 0" class="fr-mb-1w" />
-                  <span>Mon bilan environnemental</span>
+                  <span>Mon empreinte écologique</span>
                 </p>
                 <router-link
                   :to="{ name: RouteBilanCarboneName.BILAN_CARBONE }"
@@ -60,8 +60,8 @@
                 <router-link
                   :to="{ name: RouteBilanCarboneName.BILAN_CARBONE }"
                   class="fr-link fr-link--icon-right fr-icon-arrow-right-line text--center"
-                  >Mon bilan<br aria-hidden="true" />
-                  environnemental
+                  >Mon empreinte<br aria-hidden="true" />
+                  écologique
                 </router-link>
               </div>
             </div>

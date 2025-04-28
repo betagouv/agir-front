@@ -7,7 +7,7 @@
       <div class="fr-grid-row border border-radius--md fr-p-2w align-items--center fr-mb-md-0 fr-mb-5w">
         <img alt="" class="fr-mr-2w" src="/ic_ngc_small.webp" width="60" />
         <div class="flex-column text--bold">
-          <span class="text--black">MON BILAN</span>
+          <span class="text--black">MON EMPREINTE</span>
           <div class="fr-grid-row align-items--center text--orange-dark">
             <span class="text--4xl fr-mr-1v">{{ bilanTonnes }}</span>
             <span class="text--lh-1">
@@ -65,7 +65,7 @@
               >les conditions générales d'utilisation
             </router-link>
             <span class="display-block">
-              et de transférer les informations issues de mon bilan
+              et de transférer les informations issues de mon empreinte
               <span class="text--bold">Nos Gestes Climat</span> pour profiter d’une expérience d’usage améliorée
             </span>
           </label>

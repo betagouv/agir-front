@@ -206,7 +206,7 @@
                 :to="{ name: RouteBilanCarboneName.BILAN_CARBONE }"
                 class="fr-nav__link"
               >
-                Bilan
+                Empreinte
               </router-link>
             </li>
             <li class="fr-nav__item" data-fr-js-navigation-item="true">

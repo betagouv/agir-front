@@ -8,8 +8,8 @@
           class="fr-icon-money-euro-circle-line fr-mb-1w fr-p-2w display-inline-block background--bleu-picto border-radius--full fr-mb-3w"
           aria-hidden="true"
         />
-        <h3 class="fr-h4 text--white fr-mb-1w">Pour faire des économies</h3>
-        <p>Toutes les aides financières et des astuces pour réduire vos factures d’eau, d’énergie…</p>
+        <h3 class="fr-h4 text--white fr-mb-1w">Pour vos économies</h3>
+        <p>Toutes les aides financières et des astuces pour réduire vos factures d’eau, d’énergie, de chauffage…</p>
       </li>
 
       <li class="fr-col-lg-3 fr-col-6">
@@ -17,8 +17,8 @@
           class="fr-icon-lungs-line fr-mb-1w fr-p-2w display-inline-block background--bleu-picto border-radius--full fr-mb-3w"
           aria-hidden="true"
         />
-        <h3 class="fr-h4 text--white fr-mb-1w">Pour être en bonne santé</h3>
-        <p>Des recettes saines et gourmandes, des conseils pour choisir de bons produits...</p>
+        <h3 class="fr-h4 text--white fr-mb-1w">Pour votre santé</h3>
+        <p>Des recettes saines et gourmandes, des conseils pour choisir de bons produits au quotidien…</p>
       </li>
 
       <li class="fr-col-lg-3 fr-col-6">
@@ -28,8 +28,7 @@
         />
         <h3 class="fr-h4 text--white fr-mb-1w">Pour guider vos choix</h3>
         <p>
-          Changer de voiture, réparer des vêtements, faire des travaux, récupérer l’eau de pluie… Toutes les solutions
-          sont sur J’agis !
+          Changer de voiture, isoler votre logement, récupérer l'eau de pluie… Toutes les solutions sont sur J’agis !
         </p>
       </li>
 
@@ -40,8 +39,7 @@
         />
         <h3 class="fr-h4 text--white fr-mb-1w">Pour s'adapter au climat</h3>
         <p>
-          Des solutions pour nous préparer et mieux vivre les canicules et les sécheresses, tout en limitant nos impacts
-          aujourd’hui.
+          Des solutions pour vous préparer et mieux vivre les fortes températures, tout en agissant dès aujourd’hui.
         </p>
       </li>
     </ul>

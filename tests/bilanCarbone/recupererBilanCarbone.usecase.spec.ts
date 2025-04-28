@@ -221,7 +221,7 @@ describe('Fichier de tests concernant le chargement du bilan carbone', () => {
       // THEN
       function expectation(bilanCarboneViewModel: BilanCarboneCompletViewModel) {
         expect(bilanCarboneViewModel).toStrictEqual<BilanCarboneCompletViewModel>({
-          titre: 'Mon bilan <span class="text--bleu">environnemental</span>',
+          titre: 'Mon empreinte <span class="text--bleu">écologique</span>',
           impactKgAnnuel: {
             unite: 'tonnes',
             valeur: '9.6',

@@ -1,6 +1,6 @@
 <template>
   <section class="fr-pb-2w">
-    <h1>Mon bilan environnemental</h1>
+    <h1>Mon empreinte écologique</h1>
     <BilanThematiquesListeCartes
       :thematiques-bilan="thematiques"
       colonnes="fr-col-md-3 fr-col-6"
