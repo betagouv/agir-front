@@ -68,19 +68,27 @@
     SimulateurMaifPresenterImpl,
     SimulateurMaifViewModel,
   } from '@/domaines/simulationMaif/adapters/simulateurMaif.presenter.impl';
+  import { SimulateurMaifRepositoryMock } from '@/domaines/simulationMaif/adapters/simulateurMaif.repository.mock';
+  import { CalculerResultatSimulationMaifUsecase } from '@/domaines/simulationMaif/calculerResultatSimulationMaif.usecase';
   import { Coordonnees } from '@/shell/coordonneesType';
+  import { utilisateurStore } from '@/store/utilisateur';
 
   const recherche = ref<string>('');
   const coordonnees = ref<Coordonnees>();
   const avecAdressePrivee = ref<boolean>(false);
   const avecAdressePriveeEnregistree = ref<boolean>(false);
   const simulateurMaifViewModel = ref<SimulateurMaifViewModel>();
-  const simulateurMaifPresenterImpl = new SimulateurMaifPresenterImpl((vm: SimulateurMaifViewModel) => {
-    simulateurMaifViewModel.value = vm;
-  });
+
+  const recupererResultatSimulateurMaif = new CalculerResultatSimulationMaifUsecase(new SimulateurMaifRepositoryMock());
+  const utilisateurId = utilisateurStore().utilisateur.id;
 
   onMounted(() => {
-    simulateurMaifPresenterImpl.presenteAvecAdresse();
+    recupererResultatSimulateurMaif.execute(
+      utilisateurId,
+      new SimulateurMaifPresenterImpl((vm: SimulateurMaifViewModel) => {
+        simulateurMaifViewModel.value = vm;
+      }),
+    );
   });
 
   watch(

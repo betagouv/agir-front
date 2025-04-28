@@ -7,7 +7,11 @@
         </div>
         <div class="fr-p-2w">
           <h4 class="fr-h5" v-text="risque.nom" />
-          <span v-if="risque.badge" :class="`fr-badge ${risque.badge?.class}`" v-text="risque.badge?.label" />
+          <span
+            v-if="risque.badge"
+            :class="`fr-badge ${risque.badge?.class} fr-badge--no-icon`"
+            v-text="risque.badge?.label"
+          />
         </div>
       </div>
     </div>
