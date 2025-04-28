@@ -2,7 +2,10 @@ name: Mise en production
 
 on:
   workflow_dispatch:
-
+    
+permissions:
+  contents: read
+  pull-requests: read
 jobs:
   scalingo:
     name: Déployer le code sur Scalingo
