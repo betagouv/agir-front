@@ -11,6 +11,7 @@ export interface ServiceRechercheLongueVieAuxObjetsResultatDetail {
   distance?: number;
   description?: string;
   position?: { latitude: number; longitude: number };
+  sources?: string[];
 }
 
 export class RecupererDetailServiceLongueVieAuxObjetsUsecase {
