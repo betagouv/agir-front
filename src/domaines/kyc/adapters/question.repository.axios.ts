@@ -178,6 +178,7 @@ export class QuestionRepositoryAxios implements QuestionRepository {
           image_url: reponse.image_url,
           label: reponse.label,
           valeur: reponse.selected,
+          emoji: reponse.emoji,
         })),
       } as ReponseMosaic<boolean>;
     } else if (question.type === 'choix_multiple' || question.type === 'choix_unique') {
