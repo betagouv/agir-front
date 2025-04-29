@@ -7,7 +7,7 @@
       <div class="fr-grid-row fr-grid-row--gutters fr-mb-5w">
         <div class="fr-col-12 fr-col-md-7">
           <div class="fr-pt-3w fr-pt-md-0 fr-my-3w fr-mr-3w">
-            <h1 class="fr-h1 fr-mr-3w">Des solutions ensemble, pour la transition écologique</h1>
+            <h1 class="fr-h1 fr-mr-3w">Des solutions pour la transition écologique à mon échelle</h1>
             <ul class="fr-grid-row fr-grid-row--gutters list-style-none fr-pl-0 fr-mb-2w fr-text--lg">
               <li class="fr-col-auto">
                 <span aria-hidden="true" class="fr-icon-check-line text--vert" />
