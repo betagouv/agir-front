@@ -1,5 +1,36 @@
 # Changelog
 
+## [2.6.0](https://github.com/betagouv/agir-front/compare/v2.5.1...v2.6.0) (2025-04-29)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* "pourquoi agir" wording ([#1079](https://github.com/betagouv/agir-front/issues/1079)) ([a28f813](https://github.com/betagouv/agir-front/commit/a28f81328008d28f3b6ea40fafde0de4773016e9))
+* ajout des sources dans longue vie aux objets ([#1084](https://github.com/betagouv/agir-front/issues/1084)) ([3d89163](https://github.com/betagouv/agir-front/commit/3d891633ad9b393701131f5308d1c1bf1bb873cd))
+* amelioration esthétique de la homepage connectée ([#1077](https://github.com/betagouv/agir-front/issues/1077)) ([aff7613](https://github.com/betagouv/agir-front/commit/aff76131e7525d4b18980dac54cb431177cac314))
+* amélioration lvao/pcdn avec URL ([#1080](https://github.com/betagouv/agir-front/issues/1080)) ([f64a20a](https://github.com/betagouv/agir-front/commit/f64a20a6af355b14315fb8e8809c71ba96ad9028))
+* amélioration wording ([#1085](https://github.com/betagouv/agir-front/issues/1085)) ([64dd680](https://github.com/betagouv/agir-front/commit/64dd680bff34326a7f3b5022ab768590db232e76))
+* envoyer une question depuis la FAQ sur les actions (classiques) ([#1081](https://github.com/betagouv/agir-front/issues/1081)) ([4b10db5](https://github.com/betagouv/agir-front/commit/4b10db5dd5507c5494cc8d64f1e9329cc604c830))
+* heading, emoji et homepage accessibilité ([#1073](https://github.com/betagouv/agir-front/issues/1073)) ([31958e5](https://github.com/betagouv/agir-front/commit/31958e5ba87b8b16c8ec69b0186d917e1ecfab61))
+* recettes query params ([#1082](https://github.com/betagouv/agir-front/issues/1082)) ([38b2928](https://github.com/betagouv/agir-front/commit/38b292870840b3685c29a8ccd2c58e321d3db254))
+
+
+### 🐛 Corrections de bogues
+
+* aides en mode non connecte ([#1091](https://github.com/betagouv/agir-front/issues/1091)) ([782efc2](https://github.com/betagouv/agir-front/commit/782efc2510a6c32506fc3a8ce43368b63e70102d))
+* éviter les boucles d'appels pour les services à recherche ([#1076](https://github.com/betagouv/agir-front/issues/1076)) ([b18c0d5](https://github.com/betagouv/agir-front/commit/b18c0d57bacfb342b645756e583f7e50e9122a4a))
+* permission github workflows ([3e182bb](https://github.com/betagouv/agir-front/commit/3e182bbf75b1c2bce8308a78193b321fbb2737be))
+
+
+### 👷 Autres changements
+
+* Bump @iframe-resizer/vue from 5.4.4 to 5.4.6 ([#1072](https://github.com/betagouv/agir-front/issues/1072)) ([3e6634a](https://github.com/betagouv/agir-front/commit/3e6634a24ea3ec48f0779fc4ed8bd5dea9a1e7f4))
+* Bump @sentry/vue from 9.13.0 to 9.14.0 ([#1087](https://github.com/betagouv/agir-front/issues/1087)) ([4105570](https://github.com/betagouv/agir-front/commit/4105570f8a50f36056b140ca8c8ab74432090c40))
+* Bump lighthouse from 12.5.1 to 12.6.0 ([#1088](https://github.com/betagouv/agir-front/issues/1088)) ([ec859ad](https://github.com/betagouv/agir-front/commit/ec859adcb0af48447bf7cd4a74c3deafba22bab6))
+* Bump marked from 15.0.8 to 15.0.11 ([#1089](https://github.com/betagouv/agir-front/issues/1089)) ([ae2eb26](https://github.com/betagouv/agir-front/commit/ae2eb269180b7edaedc3765961305e27df78fa14))
+* Bump vue-router from 4.5.0 to 4.5.1 ([#1090](https://github.com/betagouv/agir-front/issues/1090)) ([17ff99a](https://github.com/betagouv/agir-front/commit/17ff99a9cfb2c3bf45d47c8c41d8a5914a752d61))
+* Bump vue-tsc from 2.2.8 to 2.2.10 ([#1086](https://github.com/betagouv/agir-front/issues/1086)) ([a4a9e6f](https://github.com/betagouv/agir-front/commit/a4a9e6f93158306eef498e22c93eccab1361ff37))
+
 ## [2.5.1](https://github.com/betagouv/agir-front/compare/v2.5.0...v2.5.1) (2025-04-22)
 
 
