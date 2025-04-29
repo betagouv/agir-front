@@ -1,9 +1,9 @@
 import { ServiceRechercheLongueVieAuxObjetsRepositoryMock } from './adapters/serviceRechercheLongueVieAuxObjets.repository.mock';
-import { RecupererDetailServiceLongueVieAuxObjetsUsecase } from '../../../src/domaines/serviceRecherche/longueVieAuxObjets/recupererDetailServiceLongueVieAuxObjets.usecase';
+import { RecupererDetailServiceLongueVieAuxObjetsUsecase } from '@/domaines/serviceRecherche/longueVieAuxObjets/recupererDetailServiceLongueVieAuxObjets.usecase';
 import {
   DetailServiceViewModel,
   ServiceRechercheLongueVieAuxObjetsPresenterDetailImpl,
-} from '../../../src/domaines/serviceRecherche/longueVieAuxObjets/adapters/serviceRechercheLongueVieAuxObjetsDetail.presenter.impl';
+} from '@/domaines/serviceRecherche/longueVieAuxObjets/adapters/serviceRechercheLongueVieAuxObjetsDetail.presenter.impl';
 
 describe('Fichier de tests concernant le détail du Service Près de chez nous ', () => {
   it("en donnant l'id d'un utilisateur et d'une entrée du service près de chez nous, renvoie les informations de détail", async () => {
@@ -19,6 +19,7 @@ describe('Fichier de tests concernant le détail du Service Près de chez nous '
         distance: 282,
         description: 'Description de mon service',
         position: { latitude: 48.7123, longitude: 2.2084 },
+        sources: ['source1', 'source2'],
       }),
     );
 
@@ -44,6 +45,7 @@ describe('Fichier de tests concernant le détail du Service Près de chez nous '
           style: 'background--caramel text--background-caramel',
         },
         position: { latitude: 48.7123, longitude: 2.2084 },
+        sources: ['source1', 'source2'],
       });
     }
   });

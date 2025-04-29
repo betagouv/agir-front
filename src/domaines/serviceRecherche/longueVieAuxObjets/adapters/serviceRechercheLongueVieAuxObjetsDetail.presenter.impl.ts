@@ -14,6 +14,7 @@ export interface DetailServiceViewModel {
   adresse?: string;
   description?: string;
   position?: { latitude: number; longitude: number };
+  sources?: string[];
 }
 
 export class ServiceRechercheLongueVieAuxObjetsPresenterDetailImpl
@@ -37,6 +38,7 @@ export class ServiceRechercheLongueVieAuxObjetsPresenterDetailImpl
       adresse: serviceRecherche.adresse,
       description: serviceRecherche.description,
       position: serviceRecherche.position,
+      sources: serviceRecherche.sources,
     };
 
     this.serviceRechercheViewModel(serviceRechercheViewModel);

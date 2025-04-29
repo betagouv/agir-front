@@ -34,6 +34,7 @@ interface ServiceRechercheDetailApiModel {
   commitment: string;
   latitude: number;
   longitude: number;
+  sources?: string[];
 }
 
 export interface ServiceRechercheCategorieApiModel {
@@ -161,6 +162,7 @@ export class ServiceRechercheLongueVieAuxObjetsAxios implements ServiceRecherche
               longitude: reponse.data.longitude,
             }
           : undefined,
+      sources: reponse.data.sources,
     };
   }
 }

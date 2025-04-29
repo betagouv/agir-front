@@ -1,8 +1,8 @@
 <template>
   <div v-if="detailServiceViewModel" class="fr-container fr-pb-4w">
     <router-link
-      class="fr-btn fr-btn--tertiary-no-outline fr-btn--icon-left fr-icon-arrow-left-line fr-pl-0 fr-my-2w"
       :to="{ path: useNavigationStore().pagePrecedente.path, query: useNavigationStore().pagePrecedente.query }"
+      class="fr-btn fr-btn--tertiary-no-outline fr-btn--icon-left fr-icon-arrow-left-line fr-pl-0 fr-my-2w"
     >
       Retour
     </router-link>
@@ -44,6 +44,7 @@
         <span class="fr-ml-1w text--black"> {{ detailServiceViewModel.telephone }}</span>
       </span>
     </div>
+
     <a
       v-if="detailServiceViewModel.siteWeb"
       :href="detailServiceViewModel.siteWeb"
@@ -56,6 +57,21 @@
     <a :href="urlModification" class="fr-btn fr-btn--secondary" rel="noopener noreferrer" target="_blank"
       >Proposer une modification</a
     >
+    <div v-if="detailServiceViewModel.sources && detailServiceViewModel.sources.length > 0" class="fr-mt-4w fr-mb-4w">
+      <hr />
+      <p v-if="detailServiceViewModel.sources.length === 1" class="fr-text--xs">
+        <span class="fr-mr-1w text--bold">Source :</span>
+        {{ detailServiceViewModel.sources[0] }}
+      </p>
+      <div v-else class="fr-text--xs">
+        <span class="fr-mr-1w text--bold">Sources :</span>
+        <ul>
+          <li v-for="source in detailServiceViewModel.sources" :key="source">
+            {{ source }}
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
 </template>
 
