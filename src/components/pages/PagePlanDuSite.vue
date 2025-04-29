@@ -22,7 +22,7 @@
         <li><router-link :to="{ name: RouteAidesName.AIDES }">Mes aides</router-link></li>
         <li><router-link :to="{ name: RouteCoachName.BIBLIOTHEQUE }">Ma bibliothèque</router-link></li>
         <li>
-          <router-link :to="{ name: RouteBilanCarboneName.BILAN_CARBONE }">Mon bilan environnemental</router-link>
+          <router-link :to="{ name: RouteBilanCarboneName.BILAN_CARBONE }">Mon empreinte écologique</router-link>
         </li>
         <li><router-link :to="{ name: RouteClassementName.CLASSEMENT }">Classement</router-link></li>
       </ul>

@@ -14,7 +14,7 @@
         <button class="fr-link text--underline fr-p-0 fr-mt-2w" @click.prevent="questionEtat = QuestionEtat.OUVERTE">
           Posez votre question
         </button>
-        , notre equipe vous répond&nbsp;!
+        , notre équipe vous répond&nbsp;!
       </p>
 
       <div v-if="questionEtat === QuestionEtat.OUVERTE" class="background--main fr-py-3w fr-px-2w fr-mt-2w">

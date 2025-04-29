@@ -6,7 +6,9 @@
     :pourcentage-progress-bar="pourcentageProgressBar"
     class="fr-col-md-6 fr-mb-4w"
   />
-  <router-link :to="{ name: RouteBilanCarboneName.BILAN_CARBONE }" class="fr-link">Voir mon bilan détaillé</router-link>
+  <router-link :to="{ name: RouteBilanCarboneName.BILAN_CARBONE }" class="fr-link"
+    >Voir mon empreinte détaillée</router-link
+  >
 </template>
 
 <script setup lang="ts">

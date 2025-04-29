@@ -32,7 +32,7 @@ test.describe('Bilan carbone', () => {
     await page.route(`${process.env.VITE_API_URL}/utilisateurs/dorian/bilans/last_v3`, async _route => {});
     await page.goto('/bilan-environnemental');
 
-    await expect(page).toHaveTitle("Mon bilan environnemental - J'agis");
+    await expect(page).toHaveTitle("Mon empreinte écologique - J'agis");
 
     const breadcrumb = page.getByRole('navigation', { name: 'Vous êtes ici :', exact: true });
     await expect(breadcrumb).toBeVisible();
@@ -44,7 +44,7 @@ test.describe('Bilan carbone', () => {
     await expect(lienAccueil).toBeVisible();
     await expect(lienAccueil).toHaveAttribute('href', RouteCoachPath.ACCUEIL_CONNECTEE);
 
-    const lienCourant = elementsBreadcrumb[1].getByText('Mon bilan environnemental');
+    const lienCourant = elementsBreadcrumb[1].getByText('Mon empreinte écologique');
     await expect(lienCourant).toBeVisible();
     await expect(lienCourant).toHaveAttribute('aria-current', 'page');
 
@@ -64,7 +64,7 @@ test.describe('Bilan carbone', () => {
 
       const titrePrincipal = page.getByRole('heading', {
         level: 1,
-        name: 'Estimez mon bilan environnemental',
+        name: 'Estimez mon empreinte écologique',
         exact: true,
       });
       await expect(titrePrincipal).not.toBeVisible();

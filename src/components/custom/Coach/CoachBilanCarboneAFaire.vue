@@ -9,7 +9,7 @@
     ✨ Estimation complète à
     <span class="text--bleu fr-text--bold">{{ pourcentageCompletion }}%</span>
   </p>
-  <router-link :to="{ name: RouteBilanCarboneName.BILAN_CARBONE }" class="fr-link">Voir mon bilan</router-link>
+  <router-link :to="{ name: RouteBilanCarboneName.BILAN_CARBONE }" class="fr-link">Voir mon empreinte</router-link>
 </template>
 
 <script lang="ts" setup>
