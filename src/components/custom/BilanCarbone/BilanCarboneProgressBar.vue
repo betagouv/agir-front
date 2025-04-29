@@ -12,7 +12,7 @@
     </div>
     <p class="fr-mb-1w text--lh-1-3">
       À titre de comparaison, la moyenne des utilisateurs est de
-      <span class="fr-text--bold">8,9 tonnes</span> sur <i>J'agis</i>
+      <span class="fr-text--bold">8,9&nbsp;tonnes</span> sur <i>J'agis</i>
     </p>
   </div>
 </template>
