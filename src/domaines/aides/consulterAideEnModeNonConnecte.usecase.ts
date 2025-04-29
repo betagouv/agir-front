@@ -5,6 +5,6 @@ export class ConsulterAideEnModeNonConnecteUsecase {
   constructor(private readonly aideRepository: ChargementAidesRepository) {}
 
   async execute(idAide: string): Promise<Aide> {
-    return this.aideRepository.previsualiser(idAide);
+    return this.aideRepository.consulterEnModeNonConnecte(idAide);
   }
 }
