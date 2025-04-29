@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.6.1](https://github.com/betagouv/agir-front/compare/v2.6.0...v2.6.1) (2025-04-29)
+
+
+### 🐛 Corrections de bogues
+
+* wording hp connectée "Des solutions pour la transition écologique à mon échelle" ([#1092](https://github.com/betagouv/agir-front/issues/1092)) ([0fa981d](https://github.com/betagouv/agir-front/commit/0fa981d1f123a6faa775fce29da5345ec23255d9))
+
 ## [2.6.0](https://github.com/betagouv/agir-front/compare/v2.5.1...v2.6.0) (2025-04-29)
 
 
