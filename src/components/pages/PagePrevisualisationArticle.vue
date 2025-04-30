@@ -25,6 +25,7 @@
       logo: '',
     },
     sources: null,
+    image: '',
   });
 
   onMounted(async () => {

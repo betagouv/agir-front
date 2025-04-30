@@ -19,6 +19,7 @@ export interface Article {
   estEnFavori: boolean;
   sources: Source[] | null;
   partenaire: Partenaire | null;
+  image: string | null;
 }
 
 export class RecupererArticleUsecase {

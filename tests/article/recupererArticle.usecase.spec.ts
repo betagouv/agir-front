@@ -21,6 +21,7 @@ describe("Fichier de tests concernant la récupération d'un Article", () => {
       estEnFavori: false,
       sources: null,
       partenaire: null,
+      image: 'image',
     });
   });
   it("Si utilisateur n'est pas connecté et en donnant un id d'article doit le charger", async () => {
@@ -39,6 +40,7 @@ describe("Fichier de tests concernant la récupération d'un Article", () => {
       estEnFavori: false,
       sources: null,
       partenaire: null,
+      image: 'image',
     });
   });
 });

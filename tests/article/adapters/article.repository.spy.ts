@@ -85,6 +85,7 @@ export class SpyArticleRepository implements ArticleRepository {
       estEnFavori: false,
       sources: null,
       partenaire: null,
+      image: 'image',
     });
   }
 }

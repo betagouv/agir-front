@@ -13,6 +13,7 @@ export class MockArticleRepository implements ArticleRepository {
       sources: null,
       partenaire: null,
       estEnFavori: false,
+      image: 'image',
     });
   }
 
@@ -29,6 +30,7 @@ export class MockArticleRepository implements ArticleRepository {
       sources: null,
       partenaire: null,
       estEnFavori: false,
+      image: 'image',
     });
   }
 

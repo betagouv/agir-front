@@ -2,7 +2,8 @@
   <h1>{{ article.titre }}</h1>
   <div class="fr-grid-row fr-grid-row--gutters">
     <div class="fr-col-12 fr-col-md-8">
-      <div class="border fr-p-6v background--white">
+      <div class="fr-p-6v background--white shadow--light">
+        <img v-if="article.image" :src="article.image" alt="" class="full-width" />
         <h2 class="fr-h3">{{ article.sousTitre }}</h2>
         <div class="cms__content" v-html="cacherEmojisAuxLecteursDecrans(article.texte)" />
         <div v-if="article.sources && article.sources.length > 0" class="fr-mt-2w fr-mb-4w print-hidden">
@@ -40,35 +41,42 @@
       </div>
     </div>
     <div class="fr-col-12 fr-col-md-4 print-hidden">
-      <div class="fr-grid-row flex-center background--white border fr-p-2w gap--small">
-        <div v-if="utilisateurStore().estConnecte">
-          <button
-            v-if="!article.estEnFavori"
-            class="fr-btn fr-btn--tertiary fr-icon-heart-line fr-btn--icon-right icon-favoris--off"
-            @click="ajouterAuxFavoris"
-          >
-            Ajouter aux favoris
-          </button>
-          <button
-            v-else
-            class="fr-btn fr-btn--tertiary fr-icon-heart-fill fr-btn--icon-right icon-favoris--on"
-            @click="retirerDesFavoris"
-          >
-            Retirer des favoris
+      <div class="background--white shadow--light fr-p-2w gap--small">
+        <div class="fr-grid-row flex-center">
+          <div v-if="utilisateurStore().estConnecte">
+            <button
+              v-if="!article.estEnFavori"
+              class="fr-btn fr-btn--tertiary fr-icon-heart-line fr-btn--icon-right icon-favoris--off"
+              @click="ajouterAuxFavoris"
+            >
+              Ajouter aux favoris
+            </button>
+            <button
+              v-else
+              class="fr-btn fr-btn--tertiary fr-icon-heart-fill fr-btn--icon-right icon-favoris--on"
+              @click="retirerDesFavoris"
+            >
+              Retirer des favoris
+            </button>
+          </div>
+          <button class="fr-btn fr-btn--tertiary fr-btn--icon-left fr-icon-printer-fill fr-ml-1w" @click="imprimer">
+            Imprimer
           </button>
         </div>
-        <button class="fr-btn fr-btn--tertiary fr-btn--icon-left fr-icon-printer-fill fr-ml-1w" @click="imprimer">
-          Imprimer
-        </button>
-      </div>
 
-      <div v-if="article.partenaire" class="fr-mt-2w background--white border fr-p-2w">
-        <p class="fr-mb-0">Proposé par</p>
-        <img :alt="article.partenaire.nom" :src="article.partenaire.logo" class="fr-mt-5v max-full-width" />
-      </div>
+        <hr class="full-width fr-mt-2w" />
 
-      <div class="flex flex-center fr-mt-2w fr-p-2w background--white border">
         <PartageReseauxSociaux />
+      </div>
+
+      <div v-if="article.partenaire" class="fr-mt-3w shadow--light">
+        <div class="fr-grid-row flex-space-between align-items--center full-width background--white fr-p-2w">
+          <p class="text--lh-1-3 fr-h5 fr-mb-0 fr-col-8">
+            <span class="text--normal text--bleu text--italic fr-text--md">Proposé par</span><br />
+            {{ article.partenaire.nom }}
+          </p>
+          <img v-if="article.partenaire.logo" :src="article.partenaire.logo" alt="" class="fr-col-4 full-width" />
+        </div>
       </div>
     </div>
   </div>
