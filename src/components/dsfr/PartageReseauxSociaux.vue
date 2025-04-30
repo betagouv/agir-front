@@ -1,12 +1,12 @@
 <template>
   <div class="fr-share align-items--center">
-    <div class="flex fr-grid-row fr-grid-row--gutters flex-space-between full-width align-items--center">
-      <p>Partager la page</p>
+    <div class="flex fr-grid-row fr-grid-row--gutters flex-space-between full-width align-items--center fr-pb-1w">
+      <p class="fr-mb-0">Partager la page</p>
       <ul class="fr-btns-group">
         <li>
           <a
             :href="`mailto:?subject=&body=${url}`"
-            class="fr-btn--mail fr-btn"
+            class="fr-btn--mail fr-btn fr-mb-0"
             rel="noopener external"
             target="_blank"
             title="Partager par email - nouvelle fenêtre"
@@ -16,7 +16,7 @@
         </li>
         <li>
           <button
-            class="fr-btn--copy fr-btn"
+            class="fr-btn--copy fr-btn fr-mb-0"
             onclick="navigator.clipboard.writeText(window.location).then(function() {alert('Adresse copiée dans le presse papier.')});"
           >
             Copier dans le presse-papier

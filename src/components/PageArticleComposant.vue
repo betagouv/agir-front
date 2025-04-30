@@ -4,7 +4,7 @@
     <div class="fr-col-12 fr-col-md-8">
       <div class="fr-p-6v background--white shadow--light">
         <img v-if="article.image" :src="article.image" alt="" class="full-width" />
-        <h2 class="fr-h3">{{ article.sousTitre }}</h2>
+        <h2 v-if="article.sousTitre" class="fr-h3">{{ article.sousTitre }}</h2>
         <div class="cms__content" v-html="cacherEmojisAuxLecteursDecrans(article.texte)" />
         <div v-if="article.sources && article.sources.length > 0" class="fr-mt-2w fr-mb-4w print-hidden">
           <hr />
@@ -27,7 +27,7 @@
           v-if="utilisateurStore().estConnecte"
           class="print-hidden fr-grid-row fr-grid-row--middle flex-space-between border fr-p-2w"
         >
-          <span class="fr-m-0 fr-text--bold fr-text--md">Comment avez-vous trouvé cet article ?</span>
+          <span class="fr-m-0 fr-tefxt--bold fr-text--md">Comment avez-vous trouvé cet article ?</span>
           <Notation @rated="noterLarticle" />
         </div>
         <div v-if="estEnchainementMission">
@@ -41,25 +41,25 @@
       </div>
     </div>
     <div class="fr-col-12 fr-col-md-4 print-hidden">
-      <div class="background--white shadow--light fr-p-2w gap--small">
-        <div class="fr-grid-row flex-center">
-          <div v-if="utilisateurStore().estConnecte">
+      <div class="background--white shadow--light gap--small fr-px-2w fr-pb-2w">
+        <div class="fr-grid-row flex-space-between full-width">
+          <template v-if="utilisateurStore().estConnecte">
             <button
               v-if="!article.estEnFavori"
-              class="fr-btn fr-btn--tertiary fr-icon-heart-line fr-btn--icon-right icon-favoris--off"
+              class="fr-btn fr-btn--tertiary fr-icon-heart-line fr-btn--icon-right icon-favoris--off fr-mt-2w"
               @click="ajouterAuxFavoris"
             >
               Ajouter aux favoris
             </button>
             <button
               v-else
-              class="fr-btn fr-btn--tertiary fr-icon-heart-fill fr-btn--icon-right icon-favoris--on"
+              class="fr-btn fr-btn--tertiary fr-icon-heart-fill fr-btn--icon-right icon-favoris--on fr-mt-2w"
               @click="retirerDesFavoris"
             >
               Retirer des favoris
             </button>
-          </div>
-          <button class="fr-btn fr-btn--tertiary fr-btn--icon-left fr-icon-printer-fill fr-ml-1w" @click="imprimer">
+          </template>
+          <button class="fr-btn fr-btn--tertiary fr-btn--icon-left fr-icon-printer-fill fr-mt-2w" @click="imprimer">
             Imprimer
           </button>
         </div>
@@ -75,7 +75,14 @@
             <span class="text--normal text--bleu text--italic fr-text--md">Proposé par</span><br />
             {{ article.partenaire.nom }}
           </p>
-          <img v-if="article.partenaire.logo" :src="article.partenaire.logo" alt="" class="fr-col-4 full-width" />
+          <div class="fr-col-4">
+            <img
+              v-if="article.partenaire.logo"
+              :src="article.partenaire.logo"
+              alt=""
+              class="full-width img-partenaire"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -132,5 +139,10 @@
 
   .icon-favoris--off::after {
     color: var(--blue-france-sun-113-625);
+  }
+
+  .img-partenaire {
+    max-height: 5rem;
+    object-fit: contain;
   }
 </style>
