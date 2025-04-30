@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 24 24">
-    <path fill="#000091"
-          d="M12,22c-5.5,0-10-4.5-10-10S6.5,2,12,2s10,4.5,10,10-4.5,10-10,10ZM11,16l7.1-7.1-1.4-1.4-5.7,5.7-2.8-2.8-1.4,1.4,4.2,4.2Z"/>
-    <polygon fill="#f7f8f8" points="6.8 11.8 8.2 10.3 11 13.2 16.7 7.5 18.1 8.9 11 16 6.8 11.8"/>
+<svg viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="1" y="0.5" width="15" height="15" rx="3.5" fill="#000091" stroke="#000091"/>
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M7.16649 10.115L13.2945 3.98633L14.2378 4.92899L7.16649 12.0003L2.92383 7.75766L3.86649 6.81499L7.16649 10.115Z" fill="#F5F5FE"/>
 </svg>
+

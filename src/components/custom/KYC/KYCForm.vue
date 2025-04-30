@@ -49,13 +49,6 @@
     <button v-else :title="wordingBouton" class="fr-btn fr-mt-0" type="submit">
       {{ wordingBouton }}
     </button>
-    <button
-      v-if="questionViewModel.type === 'mosaic_boolean'"
-      class="fr-link fr-icon-checkbox-circle-fill text--underline fr-ml-2w"
-      @click.prevent="validerChoixAucuneReponse"
-    >
-      Aucune de ces propositions
-    </button>
     <slot></slot>
   </form>
 </template>
@@ -135,28 +128,5 @@
 
   const passerLaQuestion = () => {
     emit('update:passer-la-question');
-  };
-
-  const validerChoixAucuneReponse = async () => {
-    const envoyerReponsesMultiplesUsecase = new EnvoyerReponsesMultiplesUsecase(
-      new QuestionRepositoryAxios(),
-      ToDoListEventBusImpl.getInstance(),
-    );
-    await envoyerReponsesMultiplesUsecase.execute(
-      utilisateurStore().utilisateur.id,
-      props.questionViewModel.id,
-      props.questionViewModel.reponses_possibles.map(r => ({
-        code: r.id,
-        boolean_value: false,
-      })),
-    );
-
-    reponse.value = [];
-    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-    checkboxes.forEach(checkbox => {
-      (checkbox as HTMLInputElement).checked = false;
-    });
-
-    emit('update:soumissionKyc', reponse.value);
   };
 </script>

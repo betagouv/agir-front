@@ -16,9 +16,13 @@
     <KYCForm
       :key="questionViewModel.id"
       :question-view-model="questionViewModel"
-      wording-bouton="Continuer"
       @update:soumission-kyc="passerEtapeSuivante"
       @update:passer-la-question="passerEtapeSuivante"
+      :wording-bouton="
+        questionViewModel.etapeCourante === questionViewModel.nombreTotalDeQuestions
+          ? wordingDernierBouton
+          : 'Question suivante'
+      "
     />
   </div>
 
@@ -35,7 +39,10 @@
   import { RecupererProchaineKYCUsecase } from '@/domaines/kyc/recupererProchaineKYC.usecase';
   import { utilisateurStore } from '@/store/utilisateur';
 
-  const props = defineProps<{ idEnchainementKycs: string; estActive: boolean }>();
+  const props = withDefaults(
+    defineProps<{ idEnchainementKycs: string; estActive: boolean; wordingDernierBouton?: string }>(),
+    { wordingDernierBouton: 'Passer à la suite' },
+  );
   const questionViewModel = ref<QuestionViewModel>();
 
   const emit = defineEmits<{

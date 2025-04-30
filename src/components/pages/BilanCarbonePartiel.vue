@@ -23,17 +23,17 @@
     <h2 class="fr-h3">Une question&nbsp;?</h2>
     <div class="fr-accordions-group background--white">
       <Accordeon name-id="bilan-carbone">
-        <template #titre>Qu’est-ce qu’un bilan carbone ?</template>
+        <template #titre>Qu’est-ce qu’une empreinte écologique ?</template>
         <template #contenu>
           <p>
             Que l’on se rende dans un magasin de quartier pour faire ses courses, qu’on allume la lumière ou qu’on
             chauffe son logement, l’ensemble de nos actions quotidiennes a un impact sur l’environnement. Cet impact,
-            c’est ce que l’on appelle le <span class="text--bold">bilan environnemental</span>, comme une trace
-            invisible que nous laissons derrière nous. L’empreinte mesure la quantité totale de gaz à effet de serre
-            (dioxyde de carbone (CO2), protoxyde d'azote, méthane, ...) liés à notre consommation et permet donc de
-            quantifier nos émissions selon notre mode de vie. Elle peut concerner les émissions d’un individu (son mode
-            de vie), d’une entreprise (ses activités) ou d’une population, d'un territoire.<br />Calculer son
-            <span class="text--bold">bilan environnemental</span>
+            c’est ce que l’on appelle l'<span class="text--bold">empreinte écologique</span>, comme une trace invisible
+            que nous laissons derrière nous. L’empreinte mesure la quantité totale de gaz à effet de serre (dioxyde de
+            carbone (CO2), protoxyde d'azote, méthane, ...) liés à notre consommation et permet donc de quantifier nos
+            émissions selon notre mode de vie. Elle peut concerner les émissions d’un individu (son mode de vie), d’une
+            entreprise (ses activités) ou d’une population, d'un territoire.<br />Calculer son
+            <span class="text--bold">empreinte écologique</span>
             permet de comprendre quels sont nos usages qui contribuent le plus au changement climatique, et de saisir
             les actions qui auraient le plus d’impact pour le réduire.
           </p>
