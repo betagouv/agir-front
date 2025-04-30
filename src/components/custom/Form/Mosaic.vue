@@ -18,7 +18,7 @@
           :src="option.checked ? '/ic-check-mosaic.svg' : '/ic-unchecked-mosaic.svg'"
         />
 
-        <span class="mosaic__label border">
+        <span class="mosaic__label border full-height">
           <span class="text--3xl fr-mb-1w" v-if="option.emoji" aria-hidden="true">{{ option.emoji }}</span>
           {{ option.label }}
         </span>

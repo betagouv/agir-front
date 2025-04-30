@@ -11,6 +11,7 @@
         :est-active="aCommenceEnchainement"
         :id-enchainement-kycs="idEnchainementKycs"
         @fin-kyc-atteinte="onFinKYC"
+        wording-dernier-bouton="Voir mes recommandations personnalisées"
       >
         <template v-slot:fin>
           <BallLoader text="Nous préparons vos recommandations personnalisées..." />

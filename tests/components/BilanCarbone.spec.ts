@@ -138,7 +138,7 @@ describe('BilanCarbone', () => {
       const titre = page.getByRole('heading', { level: 2, name: /Une question ?/ });
       expect(titre).toBeDefined();
 
-      expect(page.getByRole('button', { name: 'Qu’est-ce qu’un bilan carbone ?' })).toBeDefined();
+      expect(page.getByRole('button', { name: 'Qu’est-ce qu’une empreinte écologique ?' })).toBeDefined();
       expect(page.getByRole('button', { name: 'Comment est calculée mon empreinte ?' })).toBeDefined();
     });
   });

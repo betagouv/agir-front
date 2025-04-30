@@ -1,20 +1,24 @@
 <template>
   <div class="fr-container">
     <FilDAriane
-      :page-hierarchie="[{ label: 'Bilan carbone', url: `${RouteBilanCarbonePath.BILAN_CARBONE}` }]"
-      page-courante="Estimation du bilan"
+      :page-hierarchie="[{ label: 'Empreinte écologique', url: `${RouteBilanCarbonePath.BILAN_CARBONE}` }]"
+      :page-courante="`Estimation de mon empreinte ${
+        MenuThematiques.getThematiqueData(thematiqueId as ClefThematiqueAPI).labelDansLeMenu
+      }`"
     />
     <h1>
-      Estimation du bilan
-      <span class="text--bleu">{{
-        MenuThematiques.getThematiqueData(thematiqueId as ClefThematiqueAPI).labelDansLeMenu
-      }}</span>
+      Estimation de mon empreinte
+      <span
+        class="text--bleu"
+        v-text="MenuThematiques.getThematiqueData(thematiqueId as ClefThematiqueAPI).labelDansLeMenu"
+      />
     </h1>
     <div class="fr-pb-4w">
       <EnchainementQuestionsKyc
         :est-active="true"
         :id-enchainement-kycs="idEnchainementKycs"
         @fin-kyc-atteinte="onFinKYC"
+        wording-dernier-bouton="Finir mon estimation"
       />
     </div>
   </div>
