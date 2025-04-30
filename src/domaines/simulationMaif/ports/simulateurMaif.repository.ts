@@ -9,11 +9,11 @@ export type ResultatSimulationMaif = {
 };
 
 export enum RisqueMaifImpact {
-  TRES_FAIBLE = 'tres_faible',
-  FAIBLE = 'faible',
-  MOYEN = 'moyen',
-  FORT = 'fort',
-  TRES_FORT = 'tres_fort',
+  TRES_FAIBLE = 0,
+  FAIBLE = 1,
+  MOYEN = 2,
+  FORT = 3,
+  TRES_FORT = 4,
 }
 
 export interface SimulateurMaifRepository {
