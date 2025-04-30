@@ -19,9 +19,17 @@ type ResultatSimulationMaifApiModel = {
     id: string;
     titre: string;
     description: string;
-    niveau_risque: string;
+    niveau_risque: RisqueMaifImpactApiModel;
   }[];
 };
+
+export enum RisqueMaifImpactApiModel {
+  TRES_FAIBLE = 'tres_faible',
+  FAIBLE = 'faible',
+  MOYEN = 'moyen',
+  FORT = 'fort',
+  TRES_FORT = 'tres_fort',
+}
 
 export class SimulateurMaifRepositoryAxios implements SimulateurMaifRepository {
   async recupererStatistiquesCommune(utilisateurId: string): Promise<StatistiquesCommuneMaif> {
@@ -51,8 +59,23 @@ export class SimulateurMaifRepositoryAxios implements SimulateurMaifRepository {
     return {
       risques: response.data.resultats.map(risque => ({
         nom: risque.titre,
-        impact: risque.niveau_risque as RisqueMaifImpact,
+        impact: this.mapRisqueMaifImpactApiModelToRisqueMaifImpact(risque.niveau_risque),
       })),
     };
+  }
+
+  private mapRisqueMaifImpactApiModelToRisqueMaifImpact(impact: RisqueMaifImpactApiModel): RisqueMaifImpact {
+    switch (impact) {
+      case RisqueMaifImpactApiModel.TRES_FAIBLE:
+        return RisqueMaifImpact.TRES_FAIBLE;
+      case RisqueMaifImpactApiModel.FAIBLE:
+        return RisqueMaifImpact.FAIBLE;
+      case RisqueMaifImpactApiModel.MOYEN:
+        return RisqueMaifImpact.MOYEN;
+      case RisqueMaifImpactApiModel.FORT:
+        return RisqueMaifImpact.FORT;
+      case RisqueMaifImpactApiModel.TRES_FORT:
+        return RisqueMaifImpact.TRES_FORT;
+    }
   }
 }

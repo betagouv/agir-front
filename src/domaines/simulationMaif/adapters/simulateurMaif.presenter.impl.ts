@@ -17,10 +17,12 @@ export class SimulateurMaifPresenterImpl implements SimulateurMaifPresenter {
 
   presente(resultatSimulateur: ResultatSimulationMaif): void {
     this.callback({
-      risques: resultatSimulateur.risques?.map(risque => ({
-        nom: risque.nom,
-        badge: this.genererBadgeDepuisImpact(risque.impact),
-      })),
+      risques: resultatSimulateur.risques
+        ?.sort((a, b) => b.impact - a.impact)
+        .map(risque => ({
+          nom: risque.nom,
+          badge: this.genererBadgeDepuisImpact(risque.impact),
+        })),
       // lienKit: resultatSimulateur.lienKit,
     });
   }
@@ -36,6 +38,11 @@ export class SimulateurMaifPresenterImpl implements SimulateurMaifPresenter {
         return {
           label: 'Faible',
           class: 'fr-badge--green-tilleul-verveine',
+        };
+      case RisqueMaifImpact.MOYEN:
+        return {
+          label: 'Moyen',
+          class: 'fr-badge--brown-cafe-creme',
         };
       case RisqueMaifImpact.FORT:
         return {
