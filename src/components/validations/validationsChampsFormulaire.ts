@@ -1,6 +1,11 @@
 export function validationPseudo(pseudo: string): boolean {
-  const regex = /^[a-zA-Z0-9_-]+$/;
+  const regex =
+    /^[a-zA-Z0-9àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžæÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ]+$/;
   return regex.test(pseudo);
+}
+
+export function validationPseudoTaille(pseudo: string): boolean {
+  return pseudo.length >= 3 && pseudo.length <= 21;
 }
 
 export function validationPrenomOuNom(prenom: string): boolean {

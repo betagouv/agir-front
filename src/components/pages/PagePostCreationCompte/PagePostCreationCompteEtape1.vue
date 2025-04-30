@@ -19,7 +19,7 @@
               :maxlength="12"
               :required="true"
               label="Votre pseudonyme"
-              description="Doit être composés de 3 à 12 caractères. Lettres et chiffres uniquement."
+              description="Doit être composés de 3 à 21 caractères. Lettres et chiffres uniquement."
               name="utilisateur-pseudo"
             />
 
@@ -44,7 +44,7 @@
   import { onMounted, ref, useTemplateRef } from 'vue';
   import InputDateDeNaissance from '@/components/dsfr/InputDateDeNaissance.vue';
   import InputText from '@/components/dsfr/InputText.vue';
-  import { validationPseudo } from '@/components/validations/validationsChampsFormulaire';
+  import { validationPseudo, validationPseudoTaille } from '@/components/validations/validationsChampsFormulaire';
   import router from '@/router';
   import { RouteCompteName } from '@/router/compte/routeCompteName';
   import { onboardingPostCreationCompte } from '@/store/onboardingPostCreationCompte';
@@ -66,12 +66,18 @@
   const champsPseudoStatus = ref({ message: '', afficher: false });
 
   function onValidationPseudo(): boolean {
-    if (!validationPseudo(onboardingPostCreationCompte().pseudo)) {
+    const pseudo = onboardingPostCreationCompte().pseudo;
+    if (!validationPseudo(pseudo)) {
       inputPseudo.value?.focus();
       champsPseudoStatus.value = {
-        message: 'Le pseudonyme ne peut contenir que des lettres, des chiffres ou les caractères spéciaux - et _',
+        message: 'Le pseudonyme ne peut contenir que des lettres ou des chiffres',
         afficher: true,
       };
+      return false;
+    }
+    if (!validationPseudoTaille(pseudo)) {
+      inputPseudo.value?.focus();
+      champsPseudoStatus.value = { message: 'Le pseudonyme doit contenir entre 3 et 21 caractères', afficher: true };
       return false;
     }
     champsPseudoStatus.value = { message: '', afficher: false };
