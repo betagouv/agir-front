@@ -27,7 +27,7 @@
           v-if="utilisateurStore().estConnecte"
           class="print-hidden fr-grid-row fr-grid-row--middle flex-space-between border fr-p-2w"
         >
-          <span class="fr-m-0 fr-tefxt--bold fr-text--md">Comment avez-vous trouvé cet article ?</span>
+          <span class="fr-m-0 fr-text--bold fr-text--md">Comment avez-vous trouvé cet article ?</span>
           <Notation @rated="noterLarticle" />
         </div>
         <div v-if="estEnchainementMission">
