@@ -1,27 +1,23 @@
-export type ResultatSimulationMaif = {
-  commune: string;
-  chiffresCles: {
-    valeur: string;
-    label: string;
-  }[];
+import { StatistiquesCommuneMaif } from '@/domaines/simulationMaif/recupererStatistiquesCommuneMaif.usecase';
+import { Coordonnees } from '@/shell/coordonneesType';
 
-  adresse?: string;
-  risques?: {
+export type ResultatSimulationMaif = {
+  risques: {
     nom: string;
-    description: string;
-    image: string;
     impact: RisqueMaifImpact;
   }[];
-  lienKit?: string;
 };
 
 export enum RisqueMaifImpact {
-  TRES_FAIBLE = 'tres-faible',
+  TRES_FAIBLE = 'tres_faible',
   FAIBLE = 'faible',
+  MOYEN = 'moyen',
   FORT = 'fort',
-  TRES_FORT = 'tres-fort',
+  TRES_FORT = 'tres_fort',
 }
 
 export interface SimulateurMaifRepository {
-  recupererResultats(utilisateurId: string): Promise<ResultatSimulationMaif>;
+  recupererStatistiquesCommune(utilisateurId: string): Promise<StatistiquesCommuneMaif>;
+
+  recupererResultats(utilisateurId: string, coordonnees: Coordonnees): Promise<ResultatSimulationMaif>;
 }
