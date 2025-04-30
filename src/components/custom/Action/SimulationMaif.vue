@@ -17,12 +17,12 @@
     />
 
     <section class="fr-mb-3w fr-mt-5w">
-      <template v-if="simulateurMaifViewModel?.risques">
+      <template v-if="resultatSimulationMaifViewModel?.risques">
         <h3 class="fr-h4">Vos risques</h3>
-        <MaifRisques class="fr-mb-2w" :risques="simulateurMaifViewModel?.risques" />
+        <MaifRisques class="fr-mb-2w" :risques="resultatSimulationMaifViewModel.risques" />
       </template>
 
-      <template v-if="simulateurMaifViewModel?.lienKit">
+      <template v-if="resultatSimulationMaifViewModel?.lienKit">
         <h3 class="fr-h4 fr-mb-1w fr-mt-3w">Votre kit de prévention Maif</h3>
         <p class="fr-my-2w">
           Vous habitez dans une zone inondable ou argileuse, découvrez votre kit de prévention pour agir - vous aussi -
@@ -38,7 +38,7 @@
     <div class="fr-grid-row fr-grid-row--gutters">
       <div
         class="fr-col-12 fr-col-md-4"
-        v-for="chiffreCle in simulateurMaifViewModel?.chiffresCles"
+        v-for="chiffreCle in statistiquesCommuneMaifViewModel?.chiffresCles"
         :key="chiffreCle.label"
       >
         <div class="flex flex-column align-items--center fr-p-3w shadow full-height">
@@ -60,7 +60,7 @@
 
 <script setup lang="ts">
   import { onMounted, ref, watch } from 'vue';
-  import MaifRisques from '@/components/custom/Action/MaifRisqueCarte.vue';
+  import MaifRisques from '@/components/custom/Action/MaifRisques.vue';
   import ServiceBarreDeRechercheAdresse from '@/components/custom/Service/ServiceBarreDeRechercheAdresse.vue';
   import Callout from '@/components/dsfr/Callout.vue';
   import CarteExterne from '@/components/dsfr/CarteExterne.vue';
@@ -68,8 +68,13 @@
     SimulateurMaifPresenterImpl,
     SimulateurMaifViewModel,
   } from '@/domaines/simulationMaif/adapters/simulateurMaif.presenter.impl';
-  import { SimulateurMaifRepositoryMock } from '@/domaines/simulationMaif/adapters/simulateurMaif.repository.mock';
+  import { SimulateurMaifRepositoryAxios } from '@/domaines/simulationMaif/adapters/simulateurMaif.repository.axios';
+  import {
+    StatistiquesCommuneMaifViewModel,
+    StatistiquesCommunesMaifPresenter,
+  } from '@/domaines/simulationMaif/adapters/statistiquesCommuneMaif.presenter.impl';
   import { CalculerResultatSimulationMaifUsecase } from '@/domaines/simulationMaif/calculerResultatSimulationMaif.usecase';
+  import { RecupererStatistiquesCommuneMaifUsecase } from '@/domaines/simulationMaif/recupererStatistiquesCommuneMaif.usecase';
   import { Coordonnees } from '@/shell/coordonneesType';
   import { utilisateurStore } from '@/store/utilisateur';
 
@@ -77,16 +82,19 @@
   const coordonnees = ref<Coordonnees>();
   const avecAdressePrivee = ref<boolean>(false);
   const avecAdressePriveeEnregistree = ref<boolean>(false);
-  const simulateurMaifViewModel = ref<SimulateurMaifViewModel>();
+  const statistiquesCommuneMaifViewModel = ref<StatistiquesCommuneMaifViewModel>();
+  const resultatSimulationMaifViewModel = ref<SimulateurMaifViewModel>();
 
-  const recupererResultatSimulateurMaif = new CalculerResultatSimulationMaifUsecase(new SimulateurMaifRepositoryMock());
+  const simulateurMaifRepository = new SimulateurMaifRepositoryAxios();
+  const recupererStatistiquesCommuneMaifUsecase = new RecupererStatistiquesCommuneMaifUsecase(simulateurMaifRepository);
+  const calculerResultatSimulationMaifUsecase = new CalculerResultatSimulationMaifUsecase(simulateurMaifRepository);
   const utilisateurId = utilisateurStore().utilisateur.id;
 
   onMounted(() => {
-    recupererResultatSimulateurMaif.execute(
+    recupererStatistiquesCommuneMaifUsecase.execute(
       utilisateurId,
-      new SimulateurMaifPresenterImpl((vm: SimulateurMaifViewModel) => {
-        simulateurMaifViewModel.value = vm;
+      new StatistiquesCommunesMaifPresenter((vm: StatistiquesCommuneMaifViewModel) => {
+        statistiquesCommuneMaifViewModel.value = vm;
       }),
     );
   });
@@ -94,8 +102,17 @@
   watch(
     () => coordonnees.value,
     () => {
-      avecAdressePrivee.value = true;
-      console.log('new coordonnées', coordonnees.value);
+      if (coordonnees.value) {
+        avecAdressePrivee.value = true;
+        calculerResultatSimulationMaifUsecase.execute(
+          utilisateurId,
+          coordonnees.value,
+          new SimulateurMaifPresenterImpl((vm: SimulateurMaifViewModel) => {
+            resultatSimulationMaifViewModel.value = vm;
+          }),
+        );
+        console.log('new coordonnées', coordonnees.value);
+      }
     },
   );
 

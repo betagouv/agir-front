@@ -2,17 +2,8 @@ import { SimulateurMaifPresenter } from '@/domaines/simulationMaif/ports/simulat
 import { ResultatSimulationMaif, RisqueMaifImpact } from '@/domaines/simulationMaif/ports/simulateurMaif.repository';
 
 export type SimulateurMaifViewModel = {
-  commune: string;
-  chiffresCles: {
-    valeur: string;
-    label: string;
-  }[];
-
-  adresse?: string;
-  risques?: {
+  risques: {
     nom: string;
-    description: string;
-    image: string;
     badge?: {
       label: string;
       class: string;
@@ -26,19 +17,11 @@ export class SimulateurMaifPresenterImpl implements SimulateurMaifPresenter {
 
   presente(resultatSimulateur: ResultatSimulationMaif): void {
     this.callback({
-      commune: resultatSimulateur.commune,
-      chiffresCles: resultatSimulateur.chiffresCles.map(chiffre => ({
-        valeur: chiffre.valeur,
-        label: chiffre.label,
-      })),
-      adresse: resultatSimulateur.adresse,
       risques: resultatSimulateur.risques?.map(risque => ({
         nom: risque.nom,
-        description: risque.description,
-        image: risque.image,
         badge: this.genererBadgeDepuisImpact(risque.impact),
       })),
-      lienKit: resultatSimulateur.lienKit,
+      // lienKit: resultatSimulateur.lienKit,
     });
   }
 
