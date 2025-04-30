@@ -43,16 +43,16 @@
           :id="`option-${index}`"
           v-for="(adresse, index) in adressesAffichees"
           :class="indexSelectionne === index ? 'adresseSelectionee' : ''"
-          :key="adresse.nom"
+          :key="adresse.numeroEtRue"
           :aria-selected="indexSelectionne === index"
           @click="envoyerCoordonnees(adresse)"
           @mouseenter="indexSelectionne = index"
         >
-          <span class="fr-hidden-sm" v-text="adresse.label" />
+          <span class="fr-hidden-sm" v-text="adresse.numeroEtRueEtCodePostal" />
           <div class="fr-hidden fr-unhidden-sm">
             <div class="flex flex-space-between">
-              <span class="text--semi-bold defined-max-width">{{ adresse.nom }}</span>
-              <span class="defined-max-width text--right">{{ adresse.ville }} ({{ adresse.contexte }})</span>
+              <span class="text--semi-bold defined-max-width">{{ adresse.numeroEtRue }}</span>
+              <span class="defined-max-width text--right">{{ adresse.commune }} ({{ adresse.departement }})</span>
             </div>
           </div>
         </li>
@@ -65,7 +65,7 @@
   import axios from 'redaxios';
   import { ref } from 'vue';
   import { useDebouncedFn } from '@/composables/useDebounce';
-  import { Coordonnees } from '@/shell/coordonneesType';
+  import { Adresse, Coordonnees } from '@/shell/coordonneesType';
 
   defineProps<{
     labelId?: string;
@@ -73,17 +73,18 @@
 
   type FeatureApiModel = {
     geometry: { coordinates: number[] };
-    properties: { label: string; name: string; city: string; context: string; postcode: string };
-  };
-  type Adresse = {
-    label: string;
-    nom: string;
-    ville: string;
-    contexte: string;
-    codePostal: string;
-    coordonnees: Coordonnees;
+    properties: {
+      label: string;
+      name: string;
+      city: string;
+      context: string;
+      postcode: string;
+      housenumber: string;
+      street: string;
+    };
   };
 
+  const adresseRef = defineModel<Adresse>('adresse');
   const coordonnees = defineModel<Coordonnees>('coordonnees');
   const recherche = defineModel<string>('recherche');
   const adressesAffichees = ref<Adresse[]>([]);
@@ -110,15 +111,17 @@
     axios.get(url).then(response => {
       adressesAffichees.value = response.data.features.map(
         (feature: FeatureApiModel): Adresse => ({
-          label: feature.properties.label,
-          nom: feature.properties.name,
-          ville: feature.properties.city,
-          contexte: feature.properties.context,
+          numeroEtRueEtCodePostal: feature.properties.label,
+          numeroEtRue: feature.properties.name,
+          commune: feature.properties.city,
+          departement: feature.properties.context,
           codePostal: feature.properties.postcode,
           coordonnees: {
             latitude: feature.geometry.coordinates[1],
             longitude: feature.geometry.coordinates[0],
           },
+          numeroRue: feature.properties.housenumber,
+          rue: feature.properties.street,
         }),
       );
     });
@@ -128,11 +131,12 @@
 
   function envoyerCoordonnees(adresse: Adresse) {
     indexSelectionne.value = -1;
-    recherche.value = `${adresse.nom}, ${adresse.ville} (${adresse.codePostal})`;
+    recherche.value = `${adresse.numeroEtRue}, ${adresse.commune} (${adresse.codePostal})`;
     coordonnees.value = {
       latitude: adresse.coordonnees.latitude,
       longitude: adresse.coordonnees.longitude,
     };
+    adresseRef.value = adresse;
     dialogOuverte.value = false;
   }
 
