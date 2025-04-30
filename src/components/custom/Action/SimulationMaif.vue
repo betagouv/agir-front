@@ -1,7 +1,24 @@
 <template>
   <section class="fr-mb-4w border fr-p-4w">
-    <h2 class="fr-h3" id="label-barre-de-recherche">Choisissez une adresse</h2>
+    <h2 class="fr-h">
+      Mes chiffres clés à <span class="text--bleu" v-text="statistiquesCommuneMaifViewModel?.commune" />
+    </h2>
+    <div class="fr-grid-row fr-grid-row--gutters">
+      <div
+        class="fr-col-12 fr-col-md-4"
+        v-for="chiffreCle in statistiquesCommuneMaifViewModel?.chiffresCles"
+        :key="chiffreCle.label"
+      >
+        <div class="flex flex-column align-items--center fr-p-3w shadow full-height">
+          <span class="text--3xl text--bold text--bleu-minor fr-pb-2w" v-text="chiffreCle.valeur" />
+          <span class="text--center fr-mb-0" v-html="chiffreCle.label" />
+        </div>
+      </div>
+    </div>
+
+    <h2 class="fr-h3 fr-mt-4w" id="label-barre-de-recherche">Choisissez une adresse</h2>
     <ServiceBarreDeRechercheAdresse
+      v-model:adresse="adresse"
       v-model:coordonnees="coordonnees"
       v-model:recherche="recherche"
       label-id="label-barre-de-recherche"
@@ -9,7 +26,7 @@
 
     <Callout
       class="fr-mt-3w"
-      v-if="avecAdressePrivee && !avecAdressePriveeEnregistree"
+      v-if="avecAdressePrivee"
       texte="Voulez-vous utiliser cette adresse comme votre adresse principale à l’avenir ?"
       button-text="Choisir comme adresse principale"
       :icone-information="false"
@@ -17,9 +34,14 @@
     />
 
     <section class="fr-mb-3w fr-mt-5w">
-      <template v-if="resultatSimulationMaifViewModel?.risques">
+      <template v-if="resultatsEnChargement || resultatSimulationMaifViewModel?.risques">
         <h3 class="fr-h4">Vos risques</h3>
-        <MaifRisques class="fr-mb-2w" :risques="resultatSimulationMaifViewModel.risques" />
+        <BallLoader v-if="resultatsEnChargement" />
+        <MaifRisques
+          v-else-if="resultatSimulationMaifViewModel?.risques"
+          class="fr-mb-2w"
+          :risques="resultatSimulationMaifViewModel.risques"
+        />
       </template>
 
       <template v-if="resultatSimulationMaifViewModel?.lienKit">
@@ -33,20 +55,6 @@
         </a>
       </template>
     </section>
-
-    <h2 class="fr-h3 fr-mt-4w">Les chiffres clés de <span class="text--bleu">Bordeaux</span></h2>
-    <div class="fr-grid-row fr-grid-row--gutters">
-      <div
-        class="fr-col-12 fr-col-md-4"
-        v-for="chiffreCle in statistiquesCommuneMaifViewModel?.chiffresCles"
-        :key="chiffreCle.label"
-      >
-        <div class="flex flex-column align-items--center fr-p-3w shadow full-height">
-          <span class="text--3xl text--bold text--bleu-minor fr-pb-2w" v-text="chiffreCle.valeur" />
-          <span class="text--center fr-mb-0" v-html="chiffreCle.label" />
-        </div>
-      </div>
-    </div>
   </section>
 
   <CarteExterne
@@ -62,8 +70,12 @@
   import { onMounted, ref, watch } from 'vue';
   import MaifRisques from '@/components/custom/Action/MaifRisques.vue';
   import ServiceBarreDeRechercheAdresse from '@/components/custom/Service/ServiceBarreDeRechercheAdresse.vue';
+  import BallLoader from '@/components/custom/Thematiques/BallLoader.vue';
   import Callout from '@/components/dsfr/Callout.vue';
   import CarteExterne from '@/components/dsfr/CarteExterne.vue';
+  import { LogementRepositoryAxios } from '@/domaines/logement/adapters/logement.repository.axios';
+  import { PatcherInformationLogementUsecase } from '@/domaines/logement/patcherInformationLogement.usecase';
+  import { Logement } from '@/domaines/logement/recupererInformationLogement.usecase';
   import {
     SimulateurMaifPresenterImpl,
     SimulateurMaifViewModel,
@@ -75,13 +87,14 @@
   } from '@/domaines/simulationMaif/adapters/statistiquesCommuneMaif.presenter.impl';
   import { CalculerResultatSimulationMaifUsecase } from '@/domaines/simulationMaif/calculerResultatSimulationMaif.usecase';
   import { RecupererStatistiquesCommuneMaifUsecase } from '@/domaines/simulationMaif/recupererStatistiquesCommuneMaif.usecase';
-  import { Coordonnees } from '@/shell/coordonneesType';
+  import { Adresse, Coordonnees } from '@/shell/coordonneesType';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const recherche = ref<string>('');
   const coordonnees = ref<Coordonnees>();
+  const adresse = ref<Adresse>();
+  const resultatsEnChargement = ref<boolean>(false);
   const avecAdressePrivee = ref<boolean>(false);
-  const avecAdressePriveeEnregistree = ref<boolean>(false);
   const statistiquesCommuneMaifViewModel = ref<StatistiquesCommuneMaifViewModel>();
   const resultatSimulationMaifViewModel = ref<SimulateurMaifViewModel>();
 
@@ -90,34 +103,62 @@
   const calculerResultatSimulationMaifUsecase = new CalculerResultatSimulationMaifUsecase(simulateurMaifRepository);
   const utilisateurId = utilisateurStore().utilisateur.id;
 
-  onMounted(() => {
-    recupererStatistiquesCommuneMaifUsecase.execute(
+  async function lancerRecuperationStatistiquesCommune() {
+    await recupererStatistiquesCommuneMaifUsecase.execute(
       utilisateurId,
       new StatistiquesCommunesMaifPresenter((vm: StatistiquesCommuneMaifViewModel) => {
         statistiquesCommuneMaifViewModel.value = vm;
       }),
     );
+  }
+
+  onMounted(async () => {
+    await lancerRecuperationStatistiquesCommune();
   });
 
   watch(
     () => coordonnees.value,
-    () => {
-      if (coordonnees.value) {
-        avecAdressePrivee.value = true;
-        calculerResultatSimulationMaifUsecase.execute(
+    async () => {
+      if (!coordonnees.value) return;
+      resultatsEnChargement.value = true;
+
+      avecAdressePrivee.value = true;
+      await calculerResultatSimulationMaifUsecase
+        .execute(
           utilisateurId,
           coordonnees.value,
           new SimulateurMaifPresenterImpl((vm: SimulateurMaifViewModel) => {
             resultatSimulationMaifViewModel.value = vm;
           }),
-        );
-        console.log('new coordonnées', coordonnees.value);
-      }
+        )
+        .finally(() => {
+          resultatsEnChargement.value = false;
+        });
     },
   );
 
   function definirAdressePrincipale() {
-    avecAdressePriveeEnregistree.value = true;
-    console.log('adresse principale définie :', coordonnees.value, recherche.value);
+    if (!adresse.value || !coordonnees.value) return;
+    const nouveauLogement: Partial<Logement> = {
+      coordonnees: {
+        latitude: coordonnees.value.latitude,
+        longitude: coordonnees.value.longitude,
+      },
+      codePostal: adresse.value.codePostal,
+      commune_utilisee_dans_le_compte: adresse.value.commune.toUpperCase(),
+      numeroRue: adresse.value.numeroRue,
+      rue: adresse.value.rue,
+      commune_label: adresse.value.commune,
+    };
+
+    const patcherInformationLogementUsecase = new PatcherInformationLogementUsecase(new LogementRepositoryAxios());
+    patcherInformationLogementUsecase
+      .execute(utilisateurId, nouveauLogement)
+      .then(async () => {
+        avecAdressePrivee.value = false;
+      })
+      .then(async () => {
+        await lancerRecuperationStatistiquesCommune();
+      });
   }
 </script>

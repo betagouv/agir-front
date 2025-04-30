@@ -23,7 +23,6 @@ export class SimulateurMaifPresenterImpl implements SimulateurMaifPresenter {
           nom: risque.nom,
           badge: this.genererBadgeDepuisImpact(risque.impact),
         })),
-      // lienKit: resultatSimulateur.lienKit,
     });
   }
 

@@ -1,6 +1,7 @@
 import { LogementApiModel } from '@/domaines/logement/adapters/logement.repository.axios';
 import { LogementPresenter } from '@/domaines/logement/ports/logement.presenter';
 import { LogementRepository } from '@/domaines/logement/ports/logement.repository';
+import { Coordonnees } from '@/shell/coordonneesType';
 
 export interface Logement {
   codePostal: string;
@@ -13,6 +14,9 @@ export interface Logement {
   superficie: LogementApiModel['superficie'];
   plusDeQuinzeAns: boolean;
   dpe: LogementApiModel['dpe'];
+  coordonnees: Coordonnees;
+  numeroRue: string;
+  rue: string;
 }
 
 export class RecupererInformationLogementUseCase {
