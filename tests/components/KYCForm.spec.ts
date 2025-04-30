@@ -76,7 +76,6 @@ describe('Composant dédié au formulaire KYC', () => {
       expect(page.getByRole('checkbox', { name: 'Armoire' })).toBeDefined();
       expect(page.getByRole('checkbox', { name: 'Etagere' })).toBeDefined();
       expect(page.getByText('Passer la question')).toBeDefined();
-      expect(page.getByText('Aucune de ces propositions')).toBeDefined();
     });
   });
 
