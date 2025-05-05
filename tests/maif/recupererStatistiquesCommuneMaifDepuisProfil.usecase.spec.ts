@@ -38,15 +38,17 @@ describe('Fichier de tests concernant la récupération des statistiques MAIF de
       expect(viewModel).toStrictEqual({
         chiffresCles: [
           {
-            label: "<span class='text--bold'>arrêtés CATNAT</span> depuis 1982",
+            label: "<span class='text--bold display-block'>arrêtés CATNAT</span> depuis 1982",
             valeur: '12',
           },
           {
-            label: "de la surface exposée <span class='text--bold'>à la sécheresse géotechnique</span>",
+            illustration: '/maif/argiles.svg',
+            label: "de la surface exposée <span class='text--bold display-block'>à la sécheresse géotechnique</span>",
             valeur: '25.5 %',
           },
           {
-            label: "de la surface exposée <span class='text--bold'>à l’inondation</span>",
+            illustration: '/maif/inondations.svg',
+            label: "de la surface exposée <span class='text--bold display-block'>à l’inondation</span>",
             valeur: '15.3 %',
           },
         ],

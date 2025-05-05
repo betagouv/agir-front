@@ -4,15 +4,11 @@ import {
 } from '@/domaines/simulationMaif/recupererStatistiquesEndroitMaif.usecase';
 import { SimulateurMaifRepository } from '@/domaines/simulationMaif/ports/simulateurMaif.repository';
 import { StatistiquesCommunesMaifPresenterImpl } from '@/domaines/simulationMaif/adapters/statistiquesCommuneMaif.presenter.impl';
-import { Coordonnees } from '@/shell/coordonneesType';
 
 class SimulateurMaifRepositoryMock implements SimulateurMaifRepository {
   constructor(private readonly statistiques: StatistiquesEndroitMaif) {}
 
-  async recupererStatistiquesEndroit(
-    _utilisateurId: string,
-    _coordonnees: Coordonnees,
-  ): Promise<StatistiquesEndroitMaif> {
+  async recupererStatistiquesEndroit(_utilisateurId: string, _codeEPCI: string): Promise<StatistiquesEndroitMaif> {
     return this.statistiques;
   }
 
@@ -28,11 +24,6 @@ class SimulateurMaifRepositoryMock implements SimulateurMaifRepository {
 describe("Fichier de tests concernant la récupération des statistiques MAIF d'un endroit", () => {
   it("Devrait récupérer et présenter les statistiques de l'endroit", async () => {
     // GIVEN
-    const coordonnees: Coordonnees = {
-      latitude: 48.856614,
-      longitude: 2.3522219,
-    };
-
     const commune = 'Paris';
 
     const statistiquesAttendues: StatistiquesEndroitMaif = {
@@ -48,15 +39,17 @@ describe("Fichier de tests concernant la récupération des statistiques MAIF d'
       expect(viewModel).toStrictEqual({
         chiffresCles: [
           {
-            label: "<span class='text--bold'>arrêtés CATNAT</span> depuis 1982",
+            label: "<span class='text--bold display-block'>arrêtés CATNAT</span> depuis 1982",
             valeur: '8',
           },
           {
-            label: "de la surface exposée <span class='text--bold'>à la sécheresse géotechnique</span>",
+            illustration: '/maif/argiles.svg',
+            label: "de la surface exposée <span class='text--bold display-block'>à la sécheresse géotechnique</span>",
             valeur: '18.7 %',
           },
           {
-            label: "de la surface exposée <span class='text--bold'>à l’inondation</span>",
+            illustration: '/maif/inondations.svg',
+            label: "de la surface exposée <span class='text--bold display-block'>à l’inondation</span>",
             valeur: '22.4 %',
           },
         ],
@@ -65,6 +58,6 @@ describe("Fichier de tests concernant la récupération des statistiques MAIF d'
     });
 
     const usecase = new RecupererStatistiquesEndroitMaifUsecase(simulateurMaifRepository);
-    await usecase.execute('id-utilisateur', commune, coordonnees, statistiquesCommuneMaifPresenter);
+    await usecase.execute('id-utilisateur', commune, '75036', statistiquesCommuneMaifPresenter);
   });
 });
