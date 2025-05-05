@@ -91,7 +91,8 @@
     StatistiquesCommunesMaifPresenter,
   } from '@/domaines/simulationMaif/adapters/statistiquesCommuneMaif.presenter.impl';
   import { CalculerResultatSimulationMaifUsecase } from '@/domaines/simulationMaif/calculerResultatSimulationMaif.usecase';
-  import { RecupererStatistiquesCommuneMaifUsecase } from '@/domaines/simulationMaif/recupererStatistiquesCommuneMaif.usecase';
+  import { RecupererStatistiquesCommuneMaifUsecase } from '@/domaines/simulationMaif/recupererStatistiquesCommuneMaifDepuisProfil.usecase';
+  import { RecupererStatistiquesEndroitMaifUsecase } from '@/domaines/simulationMaif/recupererStatistiquesEndroitMaif.usecase';
   import { Adresse, Coordonnees } from '@/shell/coordonneesType';
   import { utilisateurStore } from '@/store/utilisateur';
 
@@ -105,20 +106,17 @@
 
   const simulateurMaifRepository = new SimulateurMaifRepositoryAxios();
   const recupererStatistiquesCommuneMaifUsecase = new RecupererStatistiquesCommuneMaifUsecase(simulateurMaifRepository);
+  const recupererStatistiquesEndroitMaifUsecase = new RecupererStatistiquesEndroitMaifUsecase(simulateurMaifRepository);
   const calculerResultatSimulationMaifUsecase = new CalculerResultatSimulationMaifUsecase(simulateurMaifRepository);
   const utilisateurId = utilisateurStore().utilisateur.id;
 
-  async function lancerRecuperationStatistiquesCommune() {
+  onMounted(async () => {
     await recupererStatistiquesCommuneMaifUsecase.execute(
       utilisateurId,
       new StatistiquesCommunesMaifPresenter((vm: StatistiquesCommuneMaifViewModel) => {
         statistiquesCommuneMaifViewModel.value = vm;
       }),
     );
-  }
-
-  onMounted(async () => {
-    await lancerRecuperationStatistiquesCommune();
   });
 
   watch(
@@ -139,6 +137,18 @@
         .finally(() => {
           resultatsEnChargement.value = false;
         });
+
+      console.log(adresse.value);
+      if (adresse.value?.commune && adresse.value?.coordonnees) {
+        await recupererStatistiquesEndroitMaifUsecase.execute(
+          utilisateurId,
+          adresse.value.commune,
+          adresse.value.coordonnees,
+          new StatistiquesCommunesMaifPresenter((vm: StatistiquesCommuneMaifViewModel) => {
+            statistiquesCommuneMaifViewModel.value = vm;
+          }),
+        );
+      }
     },
   );
 
@@ -157,13 +167,8 @@
     };
 
     const patcherInformationLogementUsecase = new PatcherInformationLogementUsecase(new LogementRepositoryAxios());
-    patcherInformationLogementUsecase
-      .execute(utilisateurId, nouveauLogement)
-      .then(async () => {
-        avecAdressePrivee.value = false;
-      })
-      .then(async () => {
-        await lancerRecuperationStatistiquesCommune();
-      });
+    patcherInformationLogementUsecase.execute(utilisateurId, nouveauLogement).then(async () => {
+      avecAdressePrivee.value = false;
+    });
   }
 </script>
