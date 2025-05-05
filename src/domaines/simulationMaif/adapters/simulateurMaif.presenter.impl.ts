@@ -9,6 +9,7 @@ export type SimulateurMaifViewModel = {
       label: string;
       class: string;
     };
+    illustration?: string;
   }[];
   lienKit?: string;
 };
@@ -23,6 +24,7 @@ export class SimulateurMaifPresenterImpl implements SimulateurMaifPresenter {
         .map(risque => ({
           nom: risque.nom,
           badge: this.genererBadgeDepuisImpact(risque.impact),
+          illustration: this.recupererLienIllustration(risque.id),
         })),
       lienKit: `https://api.aux-alentours.1934.io/report/pdf/v2/_byLatLon?lat=${coordonnees.latitude}&lon=${coordonnees.longitude}`,
     });
@@ -33,28 +35,49 @@ export class SimulateurMaifPresenterImpl implements SimulateurMaifPresenter {
       case RisqueMaifImpact.TRES_FAIBLE:
         return {
           label: 'Très faible',
-          class: 'fr-badge--new',
+          class: 'badge--tres-faible',
         };
       case RisqueMaifImpact.FAIBLE:
         return {
           label: 'Faible',
-          class: 'fr-badge--green-tilleul-verveine',
+          class: 'badge--faible',
         };
       case RisqueMaifImpact.MOYEN:
         return {
           label: 'Moyen',
-          class: 'fr-badge--brown-cafe-creme',
+          class: 'badge--moyen',
         };
       case RisqueMaifImpact.FORT:
         return {
           label: 'Fort',
-          class: 'fr-badge--warning',
+          class: 'badge--fort',
         };
       case RisqueMaifImpact.TRES_FORT:
         return {
           label: 'Très fort',
-          class: 'fr-badge--error',
+          class: 'badge--tres-fort',
         };
+    }
+  }
+
+  recupererLienIllustration(id: string): string | undefined {
+    switch (id) {
+      case 'score_secheresse':
+        return '/maif/argiles.svg';
+      case 'score_inondation':
+        return '/maif/inondations.svg';
+      case 'score_submersion':
+        return '/maif/submersions.svg';
+      case 'score_tempete':
+        return '/maif/tempetes.svg';
+      case 'score_argile':
+        return '/maif/argiles.svg';
+      case 'score_seisme':
+        return '/maif/seismes.svg';
+      case 'score_radon':
+        return '/maif/radon.svg';
+      default:
+        return '';
     }
   }
 }
