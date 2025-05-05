@@ -4,6 +4,7 @@ import { StatistiquesCommuneMaif } from '@/domaines/simulationMaif/recupererStat
 export type StatistiquesCommuneMaifViewModel = {
   commune: string;
   chiffresCles: {
+    illustration?: string;
     valeur: string;
     label: string;
   }[];
@@ -18,15 +19,17 @@ export class StatistiquesCommunesMaifPresenterImpl implements StatistiquesCommun
       chiffresCles: [
         {
           valeur: statistiquesCommuneMaif.nombreArretsCatnat.toString(),
-          label: "<span class='text--bold'>arrêtés CATNAT</span> depuis 1982",
+          label: "<span class='text--bold display-block'>arrêtés CATNAT</span> depuis 1982",
         },
         {
+          illustration: '/maif/argiles.svg',
           valeur: `${statistiquesCommuneMaif.pourcentageSurfaceSecheresseGeotech} %`,
-          label: "de la surface exposée <span class='text--bold'>à la sécheresse géotechnique</span>",
+          label: "de la surface exposée <span class='text--bold display-block'>à la sécheresse géotechnique</span>",
         },
         {
+          illustration: '/maif/inondations.svg',
           valeur: `${statistiquesCommuneMaif.pourcentageSurfaceInondation} %`,
-          label: "de la surface exposée <span class='text--bold'>à l’inondation</span>",
+          label: "de la surface exposée <span class='text--bold display-block'>à l’inondation</span>",
         },
       ],
     });

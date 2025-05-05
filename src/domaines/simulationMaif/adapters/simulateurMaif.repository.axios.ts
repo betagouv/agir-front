@@ -118,6 +118,7 @@ export class SimulateurMaifRepositoryAxios implements SimulateurMaifRepository {
       risques: response.data.resultats.map(risque => ({
         nom: risque.titre,
         impact: this.mapRisqueMaifImpactApiModelToRisqueMaifImpact(risque.niveau_risque),
+        id: risque.id,
       })),
     };
   }
