@@ -4,7 +4,8 @@ import {
   RisqueMaifImpact,
   SimulateurMaifRepository,
 } from '@/domaines/simulationMaif/ports/simulateurMaif.repository';
-import { StatistiquesCommuneMaif } from '@/domaines/simulationMaif/recupererStatistiquesCommuneMaif.usecase';
+import { StatistiquesCommuneMaif } from '@/domaines/simulationMaif/recupererStatistiquesCommuneMaifDepuisProfil.usecase';
+import { StatistiquesEndroitMaif } from '@/domaines/simulationMaif/recupererStatistiquesEndroitMaif.usecase';
 import { Coordonnees } from '@/shell/coordonneesType';
 
 type StatistiquesCommuneApiModel = {
@@ -12,6 +13,14 @@ type StatistiquesCommuneApiModel = {
   pourcentage_surface_secheresse_geotech: number;
   pourcentage_surface_inondation: number;
   commune_label: string;
+};
+
+type RequetesMaifApiModel = {
+  resultats: {
+    id: string;
+    titre: string;
+    pourcentage: number;
+  }[];
 };
 
 type ResultatSimulationMaifApiModel = {
@@ -42,6 +51,53 @@ export class SimulateurMaifRepositoryAxios implements SimulateurMaifRepository {
       nombreArretsCatnat: response.data.nombre_arrets_catnat,
       pourcentageSurfaceInondation: response.data.pourcentage_surface_inondation,
       pourcentageSurfaceSecheresseGeotech: response.data.pourcentage_surface_secheresse_geotech,
+    };
+  }
+
+  @intercept401()
+  async recupererStatistiquesEndroit(
+    utilisateurId: string,
+    coordonnees: Coordonnees,
+  ): Promise<StatistiquesEndroitMaif> {
+    const axios = AxiosFactory.getAxios();
+
+    const responseCatNat = await axios.post<RequetesMaifApiModel>(
+      `/utilisateurs/${utilisateurId}/recherche_services/maif/search2`,
+      {
+        categorie: 'catnat',
+        longitude: coordonnees.longitude,
+        latitude: coordonnees.latitude,
+      },
+    );
+    const responseSecheresse = await axios.post<RequetesMaifApiModel>(
+      `/utilisateurs/${utilisateurId}/recherche_services/maif/search2`,
+      {
+        categorie: 'zones_secheresse',
+        longitude: coordonnees.longitude,
+        latitude: coordonnees.latitude,
+      },
+    );
+    const responseInnondation = await axios.post<RequetesMaifApiModel>(
+      `/utilisateurs/${utilisateurId}/recherche_services/maif/search2`,
+      {
+        categorie: 'zones_inondation',
+        longitude: coordonnees.longitude,
+        latitude: coordonnees.latitude,
+      },
+    );
+
+    await Promise.all([responseCatNat, responseSecheresse, responseInnondation]);
+
+    const pourcentageSurfaceInondation =
+      responseInnondation.data.resultats.find(resultat => resultat.id === 'zone_total')?.pourcentage ?? 0;
+
+    const pourcentageSurfaceSecheresseGeotech =
+      responseSecheresse.data.resultats.find(resultat => resultat.id === 'zone_total')?.pourcentage ?? 0;
+
+    return {
+      nombreArretsCatnat: responseCatNat.data.resultats.length,
+      pourcentageSurfaceInondation,
+      pourcentageSurfaceSecheresseGeotech,
     };
   }
 
