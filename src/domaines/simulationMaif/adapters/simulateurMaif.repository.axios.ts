@@ -55,34 +55,28 @@ export class SimulateurMaifRepositoryAxios implements SimulateurMaifRepository {
   }
 
   @intercept401()
-  async recupererStatistiquesEndroit(
-    utilisateurId: string,
-    coordonnees: Coordonnees,
-  ): Promise<StatistiquesEndroitMaif> {
+  async recupererStatistiquesEndroit(utilisateurId: string, codeEPCI: string): Promise<StatistiquesEndroitMaif> {
     const axios = AxiosFactory.getAxios();
 
     const responseCatNat = await axios.post<RequetesMaifApiModel>(
       `/utilisateurs/${utilisateurId}/recherche_services/maif/search2`,
       {
         categorie: 'catnat',
-        longitude: coordonnees.longitude,
-        latitude: coordonnees.latitude,
+        code_commune: codeEPCI,
       },
     );
     const responseSecheresse = await axios.post<RequetesMaifApiModel>(
       `/utilisateurs/${utilisateurId}/recherche_services/maif/search2`,
       {
         categorie: 'zones_secheresse',
-        longitude: coordonnees.longitude,
-        latitude: coordonnees.latitude,
+        code_commune: codeEPCI,
       },
     );
     const responseInnondation = await axios.post<RequetesMaifApiModel>(
       `/utilisateurs/${utilisateurId}/recherche_services/maif/search2`,
       {
         categorie: 'zones_inondation',
-        longitude: coordonnees.longitude,
-        latitude: coordonnees.latitude,
+        code_commune: codeEPCI,
       },
     );
 
