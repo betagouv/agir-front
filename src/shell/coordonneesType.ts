@@ -5,6 +5,7 @@ export type Adresse = {
   commune: string;
   departement: string;
   codePostal: string;
+  codeEPCI: string;
   coordonnees: Coordonnees;
   numeroRue: string;
   rue: string;
