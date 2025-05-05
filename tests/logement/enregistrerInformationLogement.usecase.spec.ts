@@ -23,6 +23,12 @@ describe("Fichier de tests concernant l'enregistrement des informations du logem
       proprietaire: true,
       plusDeQuinzeAns: false,
       dpe: DPELogementApiModel.B,
+      coordonnees: {
+        latitude: 48.865,
+        longitude: 2.331,
+      },
+      numeroRue: '34',
+      rue: "avenue de l'Opéra",
     };
     const spyLogementRepository = new LogementRepositorySpy();
     const spyAppRawDataStorage = new SpyAppRawDataStorage();
@@ -44,6 +50,12 @@ describe("Fichier de tests concernant l'enregistrement des informations du logem
       proprietaire: true,
       plusDeQuinzeAns: false,
       dpe: DPELogementApiModel.B,
+      coordonnees: {
+        latitude: 48.865,
+        longitude: 2.331,
+      },
+      numeroRue: '34',
+      rue: "avenue de l'Opéra",
     });
     expect(spyAppRawDataStorage.clearAllItems).toHaveBeenCalled();
   });
