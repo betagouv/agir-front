@@ -1,5 +1,5 @@
 <template>
-  <section class="fr-mb-4w border fr-p-4w">
+  <section class="fr-mb-4w fr-p-1v">
     <h2 id="label-barre-de-recherche" class="fr-h3">Choisissez une adresse</h2>
     <ServiceBarreDeRechercheAdresse
       v-model:adresse="adresse"
@@ -54,9 +54,10 @@
         :key="chiffreCle.label"
         class="fr-col-12 fr-col-md-4"
       >
-        <div class="flex flex-column align-items--center fr-p-3w shadow full-height">
-          <span class="text--3xl text--bold text--bleu-minor fr-pb-2w" v-text="chiffreCle.valeur" />
-          <span class="text--center fr-mb-0" v-html="chiffreCle.label" />
+        <div class="flex flex-column align-items--center fr-p-1w fr-py-6w shadow full-height position--relative">
+          <span class="text--4xl text--bold fr-pb-2w" v-text="chiffreCle.valeur" />
+          <span class="text--sm text--center fr-mb-0" v-html="chiffreCle.label" />
+          <img v-if="chiffreCle.illustration" :src="chiffreCle.illustration" alt="" class="illustration-chiffre-cles" />
         </div>
       </div>
     </div>
@@ -142,7 +143,7 @@
         await recupererStatistiquesEndroitMaifUsecase.execute(
           utilisateurId,
           adresse.value.commune,
-          adresse.value.coordonnees,
+          coordonnees.value,
           new StatistiquesCommunesMaifPresenterImpl((vm: StatistiquesCommuneMaifViewModel) => {
             statistiquesCommuneMaifViewModel.value = vm;
           }),
@@ -171,3 +172,18 @@
     });
   }
 </script>
+
+<style scoped>
+  .illustration-chiffre-cles {
+    position: absolute;
+    top: 0.5rem;
+    left: 0.5rem;
+    width: 27px;
+    height: 27px;
+  }
+
+  .text--sm {
+    font-size: 0.95rem;
+    line-height: 1.25rem;
+  }
+</style>

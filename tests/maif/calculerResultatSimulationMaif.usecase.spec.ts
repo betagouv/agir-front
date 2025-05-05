@@ -34,10 +34,12 @@ describe('Fichier de tests concernant le calcul du résultat de la simulation MA
     const data: ResultatSimulationMaif = {
       risques: [
         {
+          id: 'score_inondation',
           nom: 'Inondation',
           impact: RisqueMaifImpact.MOYEN,
         },
         {
+          id: 'score_secheresse',
           nom: 'Tempête',
           impact: RisqueMaifImpact.FAIBLE,
         },
@@ -52,17 +54,19 @@ describe('Fichier de tests concernant le calcul du résultat de la simulation MA
         risques: [
           {
             badge: {
-              class: 'fr-badge--brown-cafe-creme',
+              class: 'badge--moyen',
               label: 'Moyen',
             },
             nom: 'Inondation',
+            illustration: '/maif/inondations.svg',
           },
           {
             badge: {
-              class: 'fr-badge--green-tilleul-verveine',
+              class: 'badge--faible',
               label: 'Faible',
             },
             nom: 'Tempête',
+            illustration: '/maif/argiles.svg',
           },
         ],
       });
