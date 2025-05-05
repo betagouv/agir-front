@@ -1,6 +1,6 @@
 <template>
   <div v-if="franceConnectActive" class="fr-connect-group">
-    <h2 class="fr-m-0">Utiliser FranceConnect</h2>
+    <h2 :class="`fr-m-0 ${titleClass}`">Utiliser FranceConnect</h2>
     <p class="fr-mt-0">
       FranceConnect est la solution proposée par l’État pour sécuriser et simplifier la connexion à vos services en
       ligne.
@@ -31,7 +31,7 @@
 <script lang="ts" setup>
   import '@gouvfr/dsfr/dist/component/connect/connect.min.css';
 
-  const props = defineProps<{ situationId?: string | null }>();
+  const props = defineProps<{ situationId?: string | null; titleClass?: string }>();
 
   const appelerBackPourCommencerFranceConnect = async () => {
     if (props.situationId) {

@@ -6,18 +6,22 @@
       :type="alerte.type"
       :titre="alerte.titre"
       :message="alerte.message"
+      aria-live="assertive"
     />
   </div>
-  <p class="fr-text--lg">
-    Saisissez le code envoyé à l’adresse suivante :
+
+  <h2 class="fr-text--lg text--normal">
+    Saisissez le code envoyé à l’adresse suivante&nbsp;:
     <strong>{{ email }}</strong>
-  </p>
+  </h2>
+
   <form @submit.prevent="definirMotDePasse">
     <InputText
-      class="fr-col-md-5 fr-mt-2w"
+      class="fr-col-md-7 fr-mt-2w"
       v-model="code"
       name="code"
       label="Code à usage unique"
+      description="La réception du mail peut prendre quelques minutes."
       :required="true"
       :maxlength="6"
     />
@@ -25,7 +29,8 @@
     <button class="fr-link fr-icon-mail-line fr-link--icon-left text--underline fr-mb-2w" @click.prevent="renvoyerCode">
       Renvoyer le code
     </button>
-    <p class="fr-text--lg fr-mb-0">Définissez votre nouveau mot de passe</p>
+
+    <h2 class="fr-text--lg text--normal fr-mt-3w">Définissez votre nouveau mot de passe</h2>
     <InputPassword
       autocomplete-value="new-password"
       class="fr-my-2w"
@@ -38,7 +43,7 @@
 </template>
 
 <script setup lang="ts">
-  import { ref } from 'vue';
+  import { onMounted, ref } from 'vue';
   import Alert from '@/components/custom/Alert.vue';
   import InputPassword from '@/components/custom/Form/InputPassword.vue';
   import InputText from '@/components/dsfr/InputText.vue';
@@ -52,8 +57,13 @@
   const code = ref<string>('');
   const motDePasse = ref<string>('');
   const motDePasseValide = ref(false);
+  const inputPassword = ref<HTMLInputElement>();
 
   const { alerte, afficherAlerte } = useAlerte();
+
+  onMounted(() => {
+    inputPassword.value = document.querySelector('#password') as HTMLInputElement;
+  });
 
   const onMotDePasseValideChanged = (value: boolean) => {
     motDePasseValide.value = value;
@@ -67,6 +77,7 @@
         router.push({ name: RouteCommuneName.AUTHENTIFICATION });
       })
       .catch(reason => {
+        inputPassword.value?.focus();
         afficherAlerte('error', 'Erreur lors de la modification du mot de passe', reason.data.message);
       });
   };

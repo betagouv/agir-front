@@ -1,9 +1,12 @@
 <template>
   <div class="fr-grid fr-grid-row fr-grid-row--gutters">
     <div class="fr-col-lg-3 fr-col-12">
-      <div :class="`fr-input-group ${!codePostalValide && 'fr-input-group--error'}`">
-        <label class="fr-label" for="codePostal"
-          >Code postal
+      <div
+        :class="`fr-input-group ${!codePostalValide && 'fr-input-group--error'}
+        ${codePostalNexistePas && 'fr-input-group--error'}`"
+      >
+        <label class="fr-label" for="codePostal">
+          Code postal
           <span class="fr-hint-text">Format 5 chiffres</span>
         </label>
         <input
@@ -12,14 +15,17 @@
           name="codePostal"
           id="codePostal"
           required
-          aria-describedby="text-input-error-desc-error"
+          aria-describedby="text-input-error-desc-error-invalide text-input-error-desc-error-commune"
           type="text"
           @input="updateValue"
           :value="defaultValue"
           :autofocus="autofocus"
         />
-        <p v-if="!codePostalValide" id="text-input-error-desc-error" class="fr-error-text">
+        <p v-if="!codePostalValide" id="text-input-error-desc-error-invalide" class="fr-error-text">
           Ce code postal n'est pas valide
+        </p>
+        <p v-if="codePostalNexistePas" id="text-input-error-desc-error-commune" class="fr-error-text">
+          Ce code postal n'existe pas
         </p>
       </div>
     </div>
@@ -54,7 +60,7 @@
 <script setup lang="ts">
   import { ChargementCommunesUsecase } from '@/domaines/communes/chargementCommunesUsecase';
   import { CommuneRepositoryAxios } from '@/domaines/communes/adapters/commune.repository.axios';
-  import { onMounted, ref } from 'vue';
+  import { computed, onMounted, ref } from 'vue';
 
   const props = defineProps<{
     defaultValue?: string;
@@ -63,7 +69,11 @@
   }>();
 
   const communes = ref<string[]>([]);
+  const codePostal = ref<number>();
   const codePostalValide = ref<boolean>(true);
+  const codePostalNexistePas = computed(
+    () => codePostalValide.value && codePostal.value?.toString().length === 5 && communes.value?.length === 0,
+  );
   const usecase = new ChargementCommunesUsecase(new CommuneRepositoryAxios());
 
   onMounted(async () => {
@@ -80,6 +90,7 @@
 
   const updateValue = async event => {
     const inputElement = event.target as HTMLInputElement;
+    codePostal.value = isNaN(parseInt(inputElement.value)) ? 0 : parseInt(inputElement.value);
 
     if (/^\d{5}$/.test(inputElement.value)) {
       communes.value = await usecase.execute(inputElement.value);

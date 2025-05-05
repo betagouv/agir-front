@@ -33,11 +33,12 @@
             v-model="profileUtlisateurViewModel.pseudo"
             :erreur="champsPseudoStatus"
             :required="true"
-            description="obligatoire"
+            description="Obligatoire. Doit être composés de 3 à 21 caractères. Lettres et chiffres uniquement."
             label="Pseudonyme"
             name="pseudo"
             @blur="onValidationPseudo()"
-            :maxlength="12"
+            :maxlength="21"
+            :minlength="3"
           />
         </div>
         <div class="fr-col-lg-6 fr-col-12">
@@ -46,7 +47,7 @@
             v-model="profileUtlisateurViewModel.prenom"
             :disabled="!profileUtlisateurViewModel.nomPrenomModifiables"
             :erreur="champsPrenomStatus"
-            description="facultatif"
+            description="Facultatif"
             label="Prénom"
             name="prenom"
             @blur="onValidationPrenom()"
@@ -58,7 +59,7 @@
             v-model="profileUtlisateurViewModel.nom"
             :disabled="!profileUtlisateurViewModel.nomPrenomModifiables"
             :erreur="champsNomStatus"
-            description="facultatif"
+            description="Facultatif"
             label="Nom"
             name="nom"
             @blur="onValidationNom()"
@@ -135,7 +136,7 @@
   import CompteFormulaireRevenuFiscal from '@/components/custom/Compte/CompteFormulaireRevenuFiscal.vue';
   import InputDateDeNaissance from '@/components/dsfr/InputDateDeNaissance.vue';
   import InputText from '@/components/dsfr/InputText.vue';
-  import { validationPrenomOuNomOuPseudo } from '@/components/validations/validationsChampsFormulaire';
+  import { validationPrenomOuNom, validationPseudoTaille } from '@/components/validations/validationsChampsFormulaire';
   import { useAlerte } from '@/composables/useAlerte';
   import { SessionRepositoryStore } from '@/domaines/authentification/adapters/session.repository.store';
   import { ProfileUtilisateurViewModel } from '@/domaines/profileUtilisateur/adapters/profileUtilisateur.presenter.impl';
@@ -190,10 +191,7 @@
   }
 
   function onValidationPrenom(): boolean {
-    if (
-      profileUtlisateurViewModel.value.prenom &&
-      !validationPrenomOuNomOuPseudo(profileUtlisateurViewModel.value.prenom)
-    ) {
+    if (profileUtlisateurViewModel.value.prenom && !validationPrenomOuNom(profileUtlisateurViewModel.value.prenom)) {
       champsPrenomStatus.value = { message: 'Le prénom doit contenir uniquement des lettres', afficher: true };
       return false;
     }
@@ -202,8 +200,15 @@
   }
 
   function onValidationPseudo(): boolean {
-    if (!validationPrenomOuNomOuPseudo(profileUtlisateurViewModel.value.pseudo)) {
-      champsPseudoStatus.value = { message: 'Le pseudonyme doit contenir uniquement des lettres', afficher: true };
+    if (!validationPrenomOuNom(profileUtlisateurViewModel.value.pseudo)) {
+      champsPseudoStatus.value = {
+        message: 'Le pseudonyme ne peut contenir que des lettres ou des chiffres',
+        afficher: true,
+      };
+      return false;
+    }
+    if (!validationPseudoTaille(profileUtlisateurViewModel.value.pseudo)) {
+      champsPseudoStatus.value = { message: 'Le pseudonyme doit contenir entre 3 et 21 caractères', afficher: true };
       return false;
     }
     champsPseudoStatus.value = { message: '', afficher: false };
@@ -211,7 +216,7 @@
   }
 
   function onValidationNom(): boolean {
-    if (profileUtlisateurViewModel.value.nom && !validationPrenomOuNomOuPseudo(profileUtlisateurViewModel.value.nom)) {
+    if (profileUtlisateurViewModel.value.nom && !validationPrenomOuNom(profileUtlisateurViewModel.value.nom)) {
       champsNomStatus.value = { message: 'Le nom doit contenir uniquement des lettres', afficher: true };
       return false;
     }

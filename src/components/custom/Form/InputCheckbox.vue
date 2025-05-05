@@ -1,7 +1,7 @@
 <template>
   <fieldset class="fr-fieldset" id="checkboxes" aria-labelledby="checkboxes-legend">
     <legend class="fr-fieldset__legend--regular fr-fieldset__legend" id="checkboxes-legend">
-      Plusieurs réponses sont possibles
+      <span class="fr-h4 display-block" v-text="titre" /> Plusieurs réponses sont possibles
     </legend>
     <div class="fr-fieldset__element" v-for="(option, index) in updatedOptions" :key="option.id">
       <div
@@ -26,6 +26,7 @@
   import { ref } from 'vue';
 
   const props = defineProps<{
+    titre?: string;
     options: {
       id: string;
       label: string;

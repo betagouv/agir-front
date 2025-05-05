@@ -9,10 +9,11 @@
       </p>
       <Alert
         v-if="alerte.isActive"
-        class="fr-col-12 fr-mt-2w"
+        class="fr-col-12 fr-mb-3w"
         :type="alerte.type"
         :titre="alerte.titre"
         :message="alerte.message"
+        aria-live="assertive"
       />
       <form @submit.prevent="validerCode">
         <InputText
@@ -33,7 +34,7 @@
 </template>
 
 <script setup lang="ts">
-  import { ref } from 'vue';
+  import { onMounted, ref } from 'vue';
   import Alert from '@/components/custom/Alert.vue';
   import InputText from '@/components/dsfr/InputText.vue';
   import { useAlerte } from '@/composables/useAlerte';
@@ -48,6 +49,11 @@
   const code = ref('');
   const email = utilisateurStore().utilisateur.mail || new URLSearchParams(window.location.search).get('email') || '';
   const { alerte, afficherAlerte } = useAlerte();
+  const codeInput = ref<HTMLInputElement>();
+
+  onMounted(() => {
+    codeInput.value = document.querySelector('#code') as HTMLInputElement;
+  });
 
   const validerCode = async () => {
     const validerCompteUtilisateurUsecase = new ValiderCompteUtilisateurUsecase(
@@ -60,6 +66,7 @@
         router.push({ name: RouteCompteName.POST_CREATION_COMPTE_ETAPE_1 });
       })
       .catch(reason => {
+        codeInput.value?.focus();
         afficherAlerte('error', 'Erreur lors de la validation du compte', reason.data.message);
       });
   };

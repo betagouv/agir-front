@@ -2,7 +2,7 @@
   <div class="fr-container fr-py-6w">
     <div class="fr-col-12 fr-col-md-6 fr-mx-auto fr-mb-0 background--white fr-p-4w border">
       <img src="/bg_creation_compte_disclaimer.svg" alt="" />
-      <h1 class="fr-h4 fr-mb-3w">J'agis est encore en expérimentation&nbsp;!</h1>
+      <h1 class="fr-h4 fr-mb-3w"><i>J'agis</i> est encore en expérimentation&nbsp;!</h1>
       <p class="fr-text--regular fr-text--lg">
         Nous ajoutons progressivement les aides et contenus locaux à
         <strong class="text--bleu"> {{ onboardingPostCreationCompte().commune }} et sa région. </strong>

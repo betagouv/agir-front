@@ -31,8 +31,7 @@ describe("Tests unitaires pour 'RecupererProchaineKYC'", () => {
         question => {
           expect(question).toEqual({
             aDejaEteRepondu: false,
-            description:
-              "Ces informations permettent à <span class='text--italic'>J'agis</span> de mieux vous conseiller en matière de mobilité",
+            description: "Ces informations permettent à <i>J'agis</i> de mieux vous conseiller en matière de mobilité",
             etapeCourante: 1,
             id: 'questionId',
             libelle: 'Question',
