@@ -24,7 +24,21 @@ export class LogementRepositorySpy implements LogementRepository {
     throw new Error('Method not implemented.');
   }
 
+  private _patcherLesInformationsAEteAppele: boolean = false;
+
+  get patcherLesInformationsAEteAppele(): boolean {
+    return this._patcherLesInformationsAEteAppele;
+  }
+
+  private _patcherLesInformationsArgs: Partial<Logement> | null = null;
+
+  get patcherLesInformationsArgs(): Partial<Logement> | null {
+    return this._patcherLesInformationsArgs;
+  }
+
   patcherLesInformations(utilisateurId: string, logement: Partial<Logement>): Promise<void> {
-    return Promise.resolve(undefined);
+    this._patcherLesInformationsAEteAppele = true;
+    this._patcherLesInformationsArgs = logement;
+    return Promise.resolve();
   }
 }

@@ -159,6 +159,9 @@
       proprietaire: props.value.proprietaire.valeur,
       plusDeQuinzeAns: props.value.plusDeQuinzeAns.valeur,
       dpe: props.value.dpe.valeur,
+      coordonnees: props.value.coordonnees,
+      rue: props.value.rue,
+      numeroRue: props.value.numeroRue,
     });
 
     afficherAlerte('success', 'Succès', 'Vos informations ont été correctement mises à jour.');

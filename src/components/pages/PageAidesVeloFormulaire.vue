@@ -51,7 +51,7 @@
   import { SessionRepositoryStore } from '@/domaines/authentification/adapters/session.repository.store';
   import { LogementPresenterImpl } from '@/domaines/logement/adapters/logement.presenter.impl';
   import { LogementRepositoryAxios } from '@/domaines/logement/adapters/logement.repository.axios';
-  import { EnregistrerInformationsLogementUsecase } from '@/domaines/logement/enregistrerInformationLogement.usecase';
+  import { PatcherInformationLogementUsecase } from '@/domaines/logement/patcherInformationLogement.usecase';
   import { LogementViewModel } from '@/domaines/logement/ports/logement.presenter';
   import { RecupererInformationLogementUseCase } from '@/domaines/logement/recupererInformationLogement.usecase';
   import {
@@ -147,11 +147,8 @@
       };
       await usecase.execute(donneeAMettreAjour);
 
-      const enregistrerInformationsLogementUsecase = new EnregistrerInformationsLogementUsecase(
-        new LogementRepositoryAxios(),
-        sessionAppRawDataStorage,
-      );
-      await enregistrerInformationsLogementUsecase.execute(utilisateurStore().utilisateur.id, {
+      const patcherInformationsLogementUsecase = new PatcherInformationLogementUsecase(new LogementRepositoryAxios());
+      await patcherInformationsLogementUsecase.execute(utilisateurStore().utilisateur.id, {
         adultes: logementViewModel.value!.adultes,
         enfants: logementViewModel.value!.enfants,
         codePostal: logementViewModel.value!.codePostal,
