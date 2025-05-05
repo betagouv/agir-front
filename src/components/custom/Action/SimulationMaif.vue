@@ -1,6 +1,6 @@
 <template>
   <section class="fr-mb-4w border fr-p-4w">
-    <h2 class="fr-h3" id="label-barre-de-recherche">Choisissez une adresse</h2>
+    <h2 id="label-barre-de-recherche" class="fr-h3">Choisissez une adresse</h2>
     <ServiceBarreDeRechercheAdresse
       v-model:adresse="adresse"
       v-model:coordonnees="coordonnees"
@@ -9,12 +9,12 @@
     />
 
     <Callout
-      class="fr-mt-3w"
       v-if="avecAdressePrivee"
-      texte="Voulez-vous utiliser cette adresse comme votre adresse principale à l’avenir ?"
-      button-text="Choisir comme adresse principale"
       :icone-information="false"
       :on-click="definirAdressePrincipale"
+      button-text="Choisir comme adresse principale"
+      class="fr-mt-3w"
+      texte="Voulez-vous utiliser cette adresse comme votre adresse principale à l’avenir ?"
     />
 
     <section class="fr-mb-3w fr-mt-5w">
@@ -23,8 +23,8 @@
         <BallLoader v-if="resultatsEnChargement" />
         <MaifRisques
           v-else-if="resultatSimulationMaifViewModel?.risques"
-          class="fr-mb-2w"
           :risques="resultatSimulationMaifViewModel.risques"
+          class="fr-mb-2w"
         />
       </template>
 
@@ -35,10 +35,10 @@
           à votre échelle.
         </p>
         <a
-          class="fr-btn fr-btn--secondary"
-          target="_blank"
-          rel="noopener noreferrer"
           :href="resultatSimulationMaifViewModel?.lienKit"
+          class="fr-btn fr-btn--secondary"
+          rel="noopener noreferrer"
+          target="_blank"
         >
           Télécharger mon kit de prévention
         </a>
@@ -50,9 +50,9 @@
     </h2>
     <div class="fr-grid-row fr-grid-row--gutters">
       <div
-        class="fr-col-12 fr-col-md-4"
         v-for="chiffreCle in statistiquesCommuneMaifViewModel?.chiffresCles"
         :key="chiffreCle.label"
+        class="fr-col-12 fr-col-md-4"
       >
         <div class="flex flex-column align-items--center fr-p-3w shadow full-height">
           <span class="text--3xl text--bold text--bleu-minor fr-pb-2w" v-text="chiffreCle.valeur" />
@@ -63,15 +63,15 @@
   </section>
 
   <CarteExterne
-    class="shadow fr-mb-2w"
-    titre="MAIF - Aux alentours"
-    description="Exposition aux risques climatiques, services de proximité, prix de l’immobilier… Retrouvez toutes les informations utiles aux alentours de votre adresse !"
     :lien="{ url: 'https://auxalentours.maif.fr/', urlAffichee: 'https://auxalentours.maif.fr/' }"
+    class="shadow fr-mb-2w"
+    description="Exposition aux risques climatiques, services de proximité, prix de l’immobilier… Retrouvez toutes les informations utiles aux alentours de votre adresse !"
     image-src="/maif-aux-alentours.webp"
+    titre="MAIF - Aux alentours"
   />
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
   import { onMounted, ref, watch } from 'vue';
   import MaifRisques from '@/components/custom/Action/MaifRisques.vue';
   import ServiceBarreDeRechercheAdresse from '@/components/custom/Service/ServiceBarreDeRechercheAdresse.vue';
@@ -88,7 +88,7 @@
   import { SimulateurMaifRepositoryAxios } from '@/domaines/simulationMaif/adapters/simulateurMaif.repository.axios';
   import {
     StatistiquesCommuneMaifViewModel,
-    StatistiquesCommunesMaifPresenter,
+    StatistiquesCommunesMaifPresenterImpl,
   } from '@/domaines/simulationMaif/adapters/statistiquesCommuneMaif.presenter.impl';
   import { CalculerResultatSimulationMaifUsecase } from '@/domaines/simulationMaif/calculerResultatSimulationMaif.usecase';
   import { RecupererStatistiquesCommuneMaifUsecase } from '@/domaines/simulationMaif/recupererStatistiquesCommuneMaifDepuisProfil.usecase';
@@ -113,7 +113,7 @@
   onMounted(async () => {
     await recupererStatistiquesCommuneMaifUsecase.execute(
       utilisateurId,
-      new StatistiquesCommunesMaifPresenter((vm: StatistiquesCommuneMaifViewModel) => {
+      new StatistiquesCommunesMaifPresenterImpl((vm: StatistiquesCommuneMaifViewModel) => {
         statistiquesCommuneMaifViewModel.value = vm;
       }),
     );
@@ -138,13 +138,12 @@
           resultatsEnChargement.value = false;
         });
 
-      console.log(adresse.value);
       if (adresse.value?.commune && adresse.value?.coordonnees) {
         await recupererStatistiquesEndroitMaifUsecase.execute(
           utilisateurId,
           adresse.value.commune,
           adresse.value.coordonnees,
-          new StatistiquesCommunesMaifPresenter((vm: StatistiquesCommuneMaifViewModel) => {
+          new StatistiquesCommunesMaifPresenterImpl((vm: StatistiquesCommuneMaifViewModel) => {
             statistiquesCommuneMaifViewModel.value = vm;
           }),
         );

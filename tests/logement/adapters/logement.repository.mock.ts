@@ -11,4 +11,8 @@ export class MockLogementRepository implements LogementRepository {
   enregistrerLesInformations(utilisateurId: string, logement: Logement): Promise<void> {
     throw new Error('Method not implemented.');
   }
+
+  patcherLesInformations(utilisateurId: string, logement: Partial<Logement>): Promise<void> {
+    return Promise.resolve(undefined);
+  }
 }

@@ -4,7 +4,15 @@ import { LogementRepository } from '@/domaines/logement/ports/logement.repositor
 export class LogementRepositorySpy implements LogementRepository {
   private _enregistrerLesInformationsAEteAppele: boolean = false;
 
+  get enregistrerLesInformationsAEteAppele(): boolean {
+    return this._enregistrerLesInformationsAEteAppele;
+  }
+
   private _enregistrerLesInformationsArgs: Logement | null = null;
+
+  get enregistrerLesInformationsArgs(): Logement | null {
+    return this._enregistrerLesInformationsArgs;
+  }
 
   enregistrerLesInformations(_utilisateurId, logement): Promise<void> {
     this._enregistrerLesInformationsAEteAppele = true;
@@ -16,11 +24,7 @@ export class LogementRepositorySpy implements LogementRepository {
     throw new Error('Method not implemented.');
   }
 
-  get enregistrerLesInformationsAEteAppele(): boolean {
-    return this._enregistrerLesInformationsAEteAppele;
-  }
-
-  get enregistrerLesInformationsArgs(): Logement | null {
-    return this._enregistrerLesInformationsArgs;
+  patcherLesInformations(utilisateurId: string, logement: Partial<Logement>): Promise<void> {
+    return Promise.resolve(undefined);
   }
 }

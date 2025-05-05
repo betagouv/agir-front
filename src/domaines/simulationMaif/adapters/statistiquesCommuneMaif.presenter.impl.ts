@@ -9,7 +9,7 @@ export type StatistiquesCommuneMaifViewModel = {
   }[];
 };
 
-export class StatistiquesCommunesMaifPresenter implements StatistiquesCommuneMaifPresenter {
+export class StatistiquesCommunesMaifPresenterImpl implements StatistiquesCommuneMaifPresenter {
   constructor(private readonly callback: (simulateur: StatistiquesCommuneMaifViewModel) => void) {}
 
   presente(statistiquesCommuneMaif: StatistiquesCommuneMaif): void {
@@ -18,15 +18,15 @@ export class StatistiquesCommunesMaifPresenter implements StatistiquesCommuneMai
       chiffresCles: [
         {
           valeur: statistiquesCommuneMaif.nombreArretsCatnat.toString(),
-          label: '<span class="text--bold">arrêtés CATNAT</span> depuis 1982',
+          label: "<span class='text--bold'>arrêtés CATNAT</span> depuis 1982",
         },
         {
           valeur: `${statistiquesCommuneMaif.pourcentageSurfaceSecheresseGeotech} %`,
-          label: 'de la surface exposée <span class="text--bold">à la sécheresse géotechnique</span>',
+          label: "de la surface exposée <span class='text--bold'>à la sécheresse géotechnique</span>",
         },
         {
           valeur: `${statistiquesCommuneMaif.pourcentageSurfaceInondation} %`,
-          label: 'de la surface exposée <span class="text--bold">à l’inondation</span>',
+          label: "de la surface exposée <span class='text--bold'>à l’inondation</span>",
         },
       ],
     });
