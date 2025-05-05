@@ -1,22 +1,6 @@
 <template>
   <section class="fr-mb-4w border fr-p-4w">
-    <h2 class="fr-h">
-      Mes chiffres clés à <span class="text--bleu" v-text="statistiquesCommuneMaifViewModel?.commune" />
-    </h2>
-    <div class="fr-grid-row fr-grid-row--gutters">
-      <div
-        class="fr-col-12 fr-col-md-4"
-        v-for="chiffreCle in statistiquesCommuneMaifViewModel?.chiffresCles"
-        :key="chiffreCle.label"
-      >
-        <div class="flex flex-column align-items--center fr-p-3w shadow full-height">
-          <span class="text--3xl text--bold text--bleu-minor fr-pb-2w" v-text="chiffreCle.valeur" />
-          <span class="text--center fr-mb-0" v-html="chiffreCle.label" />
-        </div>
-      </div>
-    </div>
-
-    <h2 class="fr-h3 fr-mt-4w" id="label-barre-de-recherche">Choisissez une adresse</h2>
+    <h2 class="fr-h3" id="label-barre-de-recherche">Choisissez une adresse</h2>
     <ServiceBarreDeRechercheAdresse
       v-model:adresse="adresse"
       v-model:coordonnees="coordonnees"
@@ -50,11 +34,32 @@
           Vous habitez dans une zone inondable ou argileuse, découvrez votre kit de prévention pour agir - vous aussi -
           à votre échelle.
         </p>
-        <a class="fr-btn fr-btn--secondary" target="_blank" rel="noopener noreferrer">
+        <a
+          class="fr-btn fr-btn--secondary"
+          target="_blank"
+          rel="noopener noreferrer"
+          :href="resultatSimulationMaifViewModel?.lienKit"
+        >
           Télécharger mon kit de prévention
         </a>
       </template>
     </section>
+
+    <h2 class="fr-h3 fr-mt-4w">
+      Mes chiffres clés à <span class="text--bleu" v-text="statistiquesCommuneMaifViewModel?.commune" />
+    </h2>
+    <div class="fr-grid-row fr-grid-row--gutters">
+      <div
+        class="fr-col-12 fr-col-md-4"
+        v-for="chiffreCle in statistiquesCommuneMaifViewModel?.chiffresCles"
+        :key="chiffreCle.label"
+      >
+        <div class="flex flex-column align-items--center fr-p-3w shadow full-height">
+          <span class="text--3xl text--bold text--bleu-minor fr-pb-2w" v-text="chiffreCle.valeur" />
+          <span class="text--center fr-mb-0" v-html="chiffreCle.label" />
+        </div>
+      </div>
+    </div>
   </section>
 
   <CarteExterne

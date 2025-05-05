@@ -11,6 +11,6 @@ export class CalculerResultatSimulationMaifUsecase {
     simulateurMaifPresenter: SimulateurMaifPresenter,
   ): Promise<void> {
     const resultat = await this.simulationMaifRepository.recupererResultats(utilisateurId, coordonnees);
-    simulateurMaifPresenter.presente(resultat);
+    simulateurMaifPresenter.presente(resultat, coordonnees);
   }
 }
