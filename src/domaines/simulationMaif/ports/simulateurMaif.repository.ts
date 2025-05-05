@@ -4,6 +4,7 @@ import { Coordonnees } from '@/shell/coordonneesType';
 
 export type ResultatSimulationMaif = {
   risques: {
+    id: string;
     nom: string;
     impact: RisqueMaifImpact;
   }[];
