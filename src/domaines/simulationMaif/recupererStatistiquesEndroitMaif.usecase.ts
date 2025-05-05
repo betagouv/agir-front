@@ -1,6 +1,5 @@
 import { SimulateurMaifRepository } from '@/domaines/simulationMaif/ports/simulateurMaif.repository';
 import { StatistiquesCommuneMaifPresenter } from '@/domaines/simulationMaif/ports/statistiquesCommuneMaif.presenter';
-import { Coordonnees } from '@/shell/coordonneesType';
 
 export type StatistiquesEndroitMaif = {
   nombreArretsCatnat: number;
@@ -14,12 +13,12 @@ export class RecupererStatistiquesEndroitMaifUsecase {
   async execute(
     utilisateurId: string,
     commune: string,
-    coordonnees: Coordonnees,
+    codeEPCI: string,
     statistiquesCommuneMaifPresenter: StatistiquesCommuneMaifPresenter,
   ): Promise<void> {
     const statistiquesCommune = await this.simulationMaifRepository.recupererStatistiquesEndroit(
       utilisateurId,
-      coordonnees,
+      codeEPCI,
     );
     statistiquesCommuneMaifPresenter.presente({ commune, ...statistiquesCommune });
   }

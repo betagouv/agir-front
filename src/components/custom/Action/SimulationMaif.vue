@@ -14,7 +14,7 @@
       :on-click="definirAdressePrincipale"
       button-text="Choisir comme adresse principale"
       class="fr-mt-3w"
-      texte="Voulez-vous utiliser cette adresse comme votre adresse principale à l’avenir ?"
+      texte="Voulez-vous utiliser cette adresse comme votre adresse principale à l’avenir&nbsp;?"
     />
 
     <section class="fr-mb-3w fr-mt-5w">
@@ -143,7 +143,7 @@
         await recupererStatistiquesEndroitMaifUsecase.execute(
           utilisateurId,
           adresse.value.commune,
-          coordonnees.value,
+          adresse.value.codeEPCI,
           new StatistiquesCommunesMaifPresenterImpl((vm: StatistiquesCommuneMaifViewModel) => {
             statistiquesCommuneMaifViewModel.value = vm;
           }),
