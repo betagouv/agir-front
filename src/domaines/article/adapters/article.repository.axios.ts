@@ -103,6 +103,7 @@ export class ArticleRepositoryAxios implements ArticleRepository {
             }
           : null,
       estEnFavori: article.data.favoris,
+      image: article.data.image_url,
     };
   }
 
@@ -128,6 +129,7 @@ export class ArticleRepositoryAxios implements ArticleRepository {
             }
           : null,
       estEnFavori: article.data.favoris,
+      image: article.data.image_url,
     };
   }
 
@@ -153,6 +155,7 @@ export class ArticleRepositoryAxios implements ArticleRepository {
             }
           : null,
       estEnFavori: reponse.data.article.favoris,
+      image: reponse.data.article.image_url,
     };
   }
 
