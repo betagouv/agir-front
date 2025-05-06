@@ -21,7 +21,7 @@ export type AdresseDansLeCompte = {
 
 export type StatistiquesCommuneEtAdresse = {
   statistiquesCommune: StatistiquesCommuneMaif;
-  adresse: AdresseDansLeCompte;
+  adresseDansLeCompte: AdresseDansLeCompte;
 };
 
 export class RecupererAdresseEtStatistiquesCommuneMaifUsecase {
@@ -30,11 +30,11 @@ export class RecupererAdresseEtStatistiquesCommuneMaifUsecase {
   async execute(
     utilisateurId: string,
     statistiquesCommuneMaifPresenter: StatistiquesCommuneMaifPresenter,
-    adresseDansLeComptePresenter: BarreDeRecherchePresenter,
+    barreDeRecherchePresenter: BarreDeRecherchePresenter,
   ): Promise<void> {
-    const { statistiquesCommune, adresse } =
+    const { statistiquesCommune, adresseDansLeCompte } =
       await this.simulationMaifRepository.recupererStatistiquesCommuneEtAdresse(utilisateurId);
     statistiquesCommuneMaifPresenter.presente(statistiquesCommune);
-    adresseDansLeComptePresenter.presente(adresse);
+    barreDeRecherchePresenter.presente(adresseDansLeCompte);
   }
 }
