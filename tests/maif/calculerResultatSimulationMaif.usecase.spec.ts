@@ -14,7 +14,7 @@ class SimulateurMaifRepositoryMock implements SimulateurMaifRepository {
     return this.resultat;
   }
 
-  async recupererStatistiquesCommune(): Promise<any> {
+  async recupererStatistiquesCommuneEtAdresse(): Promise<any> {
     return { risques: [] };
   }
 

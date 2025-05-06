@@ -4,7 +4,11 @@ import {
   RisqueMaifImpact,
   SimulateurMaifRepository,
 } from '@/domaines/simulationMaif/ports/simulateurMaif.repository';
-import { StatistiquesCommuneMaif } from '@/domaines/simulationMaif/recupererStatistiquesCommuneMaifDepuisProfil.usecase';
+import {
+  AdresseDansLeCompte,
+  StatistiquesCommuneEtAdresse,
+  StatistiquesCommuneMaif,
+} from '@/domaines/simulationMaif/recupererStatistiquesCommuneMaifDepuisProfil.usecase';
 import { StatistiquesEndroitMaif } from '@/domaines/simulationMaif/recupererStatistiquesEndroitMaif.usecase';
 import { Coordonnees } from '@/shell/coordonneesType';
 
@@ -12,7 +16,14 @@ type StatistiquesCommuneApiModel = {
   nombre_arrets_catnat: number;
   pourcentage_surface_secheresse_geotech: number;
   pourcentage_surface_inondation: number;
+
+  code_postal: string;
+  commune: string;
   commune_label: string;
+  latitude: number;
+  longitude: number;
+  rue: string;
+  numero_rue: string;
 };
 
 type RequetesMaifApiModel = {
@@ -42,16 +53,28 @@ export enum RisqueMaifImpactApiModel {
 
 export class SimulateurMaifRepositoryAxios implements SimulateurMaifRepository {
   @intercept401()
-  async recupererStatistiquesCommune(utilisateurId: string): Promise<StatistiquesCommuneMaif> {
+  async recupererStatistiquesCommuneEtAdresse(utilisateurId: string): Promise<StatistiquesCommuneEtAdresse> {
     const axios = AxiosFactory.getAxios();
 
     const response = await axios.get<StatistiquesCommuneApiModel>(`/utilisateurs/${utilisateurId}/logement`);
-    return {
+    const statistiquesCommune: StatistiquesCommuneMaif = {
       commune: response.data.commune_label,
       nombreArretsCatnat: response.data.nombre_arrets_catnat,
       pourcentageSurfaceInondation: response.data.pourcentage_surface_inondation,
       pourcentageSurfaceSecheresseGeotech: response.data.pourcentage_surface_secheresse_geotech,
     };
+    const adresse: AdresseDansLeCompte = {
+      codePostal: response.data.code_postal,
+      commune: response.data.commune,
+      communeLabel: response.data.commune_label,
+      rue: response.data.rue,
+      numeroRue: response.data.numero_rue,
+      coordonnees: {
+        latitude: response.data.latitude,
+        longitude: response.data.longitude,
+      },
+    };
+    return { statistiquesCommune, adresse };
   }
 
   @intercept401()
