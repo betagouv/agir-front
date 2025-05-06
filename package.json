@@ -23,7 +23,7 @@
     "@iframe-resizer/vue": "^5.4.6",
     "@sentry/vite-plugin": "^3.3.1",
     "@sentry/vue": "9.14.0",
-    "@unhead/vue": "^2.0.5",
+    "@unhead/vue": "^2.0.8",
     "@vue-leaflet/vue-leaflet": "^0.10.1",
     "chart.js": "4.4.9",
     "jwt-decode": "4.0.0",
