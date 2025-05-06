@@ -1477,13 +1477,13 @@
   resolved "https://registry.yarnpkg.com/@ungap/structured-clone/-/structured-clone-1.2.0.tgz#756641adb587851b5ccb3e095daf27ae581c8406"
   integrity sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==
 
-"@unhead/vue@^2.0.5":
-  version "2.0.5"
-  resolved "https://registry.yarnpkg.com/@unhead/vue/-/vue-2.0.5.tgz#7c34b598cf1a3381bda6b43ea4edd2483ca575fd"
-  integrity sha512-csjNmBHvJGzSestlpApOpgxqaTdXSN2zwNIPFuWB+C4rtLX4x3+Tm7C5rQwU0iYy3CNJGjJT9cCcSyV55Jg4EQ==
+"@unhead/vue@^2.0.8":
+  version "2.0.8"
+  resolved "https://registry.yarnpkg.com/@unhead/vue/-/vue-2.0.8.tgz#80ee7c4aa76d3c5e4ce0eaf457fc3a909a7fa4d4"
+  integrity sha512-e30+CfCl1avR+hzFtpvnBSesZ5TN2KbShStdT2Z+zs5WIBUvobQwVxSR0arX43To6KfwtCXAfi0iOOIH0kufHQ==
   dependencies:
     hookable "^5.5.3"
-    unhead "2.0.5"
+    unhead "2.0.8"
 
 "@vitejs/plugin-vue@5.2.3":
   version "5.2.3"
@@ -6328,10 +6328,10 @@ undici-types@~6.21.0:
   resolved "https://registry.yarnpkg.com/undici-types/-/undici-types-6.21.0.tgz#691d00af3909be93a7faa13be61b3a5b50ef12cb"
   integrity sha512-iwDZqg0QAGrg9Rav5H4n0M64c3mkR59cJ6wQp+7C4nI0gsmExaedaYLNO44eT4AtBBwjbTiGPMlt2Md0T9H9JQ==
 
-unhead@2.0.5:
-  version "2.0.5"
-  resolved "https://registry.yarnpkg.com/unhead/-/unhead-2.0.5.tgz#66ad4b3bddbcb19d90eff38bf680e1407c04075e"
-  integrity sha512-bG4wyp+KuW+ivQYtTQvnvtMM55ziIrQ9Yq1/VAm099buBgH0CoBWgu39jkSUoE4oZ4Qki8SsnMbq2gL0h3/sUA==
+unhead@2.0.8:
+  version "2.0.8"
+  resolved "https://registry.yarnpkg.com/unhead/-/unhead-2.0.8.tgz#84ab71657cc299c2866d77cb2ca9834caca9e6df"
+  integrity sha512-63WR+y08RZE7ChiFdgNY64haAkhCtUS5/HM7xo4Q83NA63txWbEh2WGmrKbArdQmSct+XlqbFN8ZL1yWpQEHEA==
   dependencies:
     hookable "^5.5.3"
 
