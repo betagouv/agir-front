@@ -16,7 +16,10 @@ export class ActionsDansUneThematiquePresenterImpl
 
   presenteActions(actions: Action[]): void {
     const actionsFiltrees = actions.filter(
-      action => action.type !== TypeAction.SIMULATEUR || action.code === 'action_simulateur_voiture',
+      action =>
+        action.type !== TypeAction.SIMULATEUR ||
+        action.code === 'action_simulateur_voiture' ||
+        action.code === 'simu_aides_reno',
     );
     super.presente(actionsFiltrees);
   }
