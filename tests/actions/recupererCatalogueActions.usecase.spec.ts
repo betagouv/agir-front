@@ -107,4 +107,61 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
       });
     }
   });
+
+  it('Doit filtrer les simulateurs et ne garder que le simulateur voiture', async () => {
+    // GIVEN
+    const actions: Action[] = [
+      {
+        code: 'action_simulateur_voiture',
+        titre: 'Simulateur voiture',
+        sousTitre: 'Calculez vos émissions',
+        nombreDePersonnes: 0,
+        nombreAidesDisponibles: 0,
+        type: TypeAction.SIMULATEUR,
+        dejaVue: false,
+      },
+      {
+        code: 'action_simulateur_logement',
+        titre: 'Simulateur logement',
+        sousTitre: 'Calculez vos émissions logement',
+        nombreDePersonnes: 0,
+        nombreAidesDisponibles: 0,
+        type: TypeAction.SIMULATEUR,
+        dejaVue: false,
+      },
+      {
+        code: 'action_classique',
+        titre: 'Action classique',
+        sousTitre: 'Une action normale',
+        nombreDePersonnes: 0,
+        nombreAidesDisponibles: 0,
+        type: TypeAction.CLASSIQUE,
+        dejaVue: false,
+      },
+    ];
+
+    const catalogue: CatalogueActions = {
+      actions,
+      filtres: [],
+      consultation: 'tout',
+    };
+
+    // WHEN
+    const usecase = new RecupererCatalogueActionsUsecase(ActionsRepositoryMock.avecCatalogue(catalogue));
+    await usecase.execute('id-utilisateur', new CatalogueActionsPresenterImpl(expectedFiltres, expectedActions));
+
+    // THEN
+    function expectedActions(viewModel: ActionViewModel[]): void {
+      expect(viewModel).toHaveLength(2);
+      expect(viewModel.map(vm => vm.code)).toEqual(['action_simulateur_voiture', 'action_classique']);
+    }
+
+    function expectedFiltres(viewModel: FiltresCatalogueActionsViewModel): void {
+      console.log(viewModel);
+      expect(viewModel).toStrictEqual<FiltresCatalogueActionsViewModel>({
+        filtres: [],
+        phraseNombreActions: '2 actions',
+      });
+    }
+  });
 });
