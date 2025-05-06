@@ -108,7 +108,7 @@
     }
 
     const adresseEncodee = encodeURIComponent(adresse).replaceAll('%20', '+');
-    const url = `https://api-adresse.data.gouv.fr/search/?q=${adresseEncodee}&limit=8`;
+    const url = `https://data.geopf.fr/geocodage/search/?q=${adresseEncodee}&limit=8&index=address&type=housenumber&autocomplete=1`;
     axios.get(url).then(response => {
       adressesAffichees.value = response.data.features.map(
         (feature: FeatureApiModel): Adresse => ({
