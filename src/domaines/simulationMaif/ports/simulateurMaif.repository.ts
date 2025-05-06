@@ -1,4 +1,4 @@
-import { StatistiquesCommuneMaif } from '@/domaines/simulationMaif/recupererStatistiquesCommuneMaifDepuisProfil.usecase';
+import { StatistiquesCommuneEtAdresse } from '@/domaines/simulationMaif/recupererStatistiquesCommuneMaifDepuisProfil.usecase';
 import { StatistiquesEndroitMaif } from '@/domaines/simulationMaif/recupererStatistiquesEndroitMaif.usecase';
 import { Coordonnees } from '@/shell/coordonneesType';
 
@@ -19,7 +19,7 @@ export enum RisqueMaifImpact {
 }
 
 export interface SimulateurMaifRepository {
-  recupererStatistiquesCommune(utilisateurId: string): Promise<StatistiquesCommuneMaif>;
+  recupererStatistiquesCommuneEtAdresse(utilisateurId: string): Promise<StatistiquesCommuneEtAdresse>;
 
   recupererStatistiquesEndroit(utilisateurId: string, codeEPCI: string): Promise<StatistiquesEndroitMaif>;
 

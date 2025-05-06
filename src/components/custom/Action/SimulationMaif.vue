@@ -2,6 +2,7 @@
   <section class="fr-mb-4w fr-p-1v">
     <h2 id="label-barre-de-recherche" class="fr-h3">Choisissez une adresse</h2>
     <ServiceBarreDeRechercheAdresse
+      @update:coordonnees="chargerDonneesPourNouvelleAdresse"
       v-model:adresse="adresse"
       v-model:coordonnees="coordonnees"
       v-model:recherche="recherche"
@@ -48,7 +49,9 @@
     <h2 class="fr-h3 fr-mt-4w">
       Mes chiffres clés à <span class="text--bleu" v-text="statistiquesCommuneMaifViewModel?.commune" />
     </h2>
-    <div class="fr-grid-row fr-grid-row--gutters">
+
+    <BallLoader v-if="chiffresClesEnChargement" />
+    <div v-else class="fr-grid-row fr-grid-row--gutters">
       <div
         v-for="chiffreCle in statistiquesCommuneMaifViewModel?.chiffresCles"
         :key="chiffreCle.label"
@@ -73,12 +76,16 @@
 </template>
 
 <script lang="ts" setup>
-  import { onMounted, ref, watch } from 'vue';
+  import { nextTick, onMounted, ref } from 'vue';
   import MaifRisques from '@/components/custom/Action/MaifRisques.vue';
   import ServiceBarreDeRechercheAdresse from '@/components/custom/Service/ServiceBarreDeRechercheAdresse.vue';
   import BallLoader from '@/components/custom/Thematiques/BallLoader.vue';
   import Callout from '@/components/dsfr/Callout.vue';
   import CarteExterne from '@/components/dsfr/CarteExterne.vue';
+  import {
+    BarreDeRecherchePresenterImpl,
+    BarreDeRechercheViewModel,
+  } from '@/domaines/logement/adapters/barreDeRecherche.presenter.impl';
   import { LogementRepositoryAxios } from '@/domaines/logement/adapters/logement.repository.axios';
   import { PatcherInformationLogementUsecase } from '@/domaines/logement/patcherInformationLogement.usecase';
   import { Logement } from '@/domaines/logement/recupererInformationLogement.usecase';
@@ -92,7 +99,7 @@
     StatistiquesCommunesMaifPresenterImpl,
   } from '@/domaines/simulationMaif/adapters/statistiquesCommuneMaif.presenter.impl';
   import { CalculerResultatSimulationMaifUsecase } from '@/domaines/simulationMaif/calculerResultatSimulationMaif.usecase';
-  import { RecupererStatistiquesCommuneMaifUsecase } from '@/domaines/simulationMaif/recupererStatistiquesCommuneMaifDepuisProfil.usecase';
+  import { RecupererAdresseEtStatistiquesCommuneMaifUsecase } from '@/domaines/simulationMaif/recupererStatistiquesCommuneMaifDepuisProfil.usecase';
   import { RecupererStatistiquesEndroitMaifUsecase } from '@/domaines/simulationMaif/recupererStatistiquesEndroitMaif.usecase';
   import { Adresse, Coordonnees } from '@/shell/coordonneesType';
   import { utilisateurStore } from '@/store/utilisateur';
@@ -101,56 +108,71 @@
   const coordonnees = ref<Coordonnees>();
   const adresse = ref<Adresse>();
   const resultatsEnChargement = ref<boolean>(false);
+  const chiffresClesEnChargement = ref<boolean>(false);
   const avecAdressePrivee = ref<boolean>(false);
   const statistiquesCommuneMaifViewModel = ref<StatistiquesCommuneMaifViewModel>();
   const resultatSimulationMaifViewModel = ref<SimulateurMaifViewModel>();
 
   const simulateurMaifRepository = new SimulateurMaifRepositoryAxios();
-  const recupererStatistiquesCommuneMaifUsecase = new RecupererStatistiquesCommuneMaifUsecase(simulateurMaifRepository);
+  const recupererAdresseEtStatistiquesCommuneMaifUsecase = new RecupererAdresseEtStatistiquesCommuneMaifUsecase(
+    simulateurMaifRepository,
+  );
   const recupererStatistiquesEndroitMaifUsecase = new RecupererStatistiquesEndroitMaifUsecase(simulateurMaifRepository);
   const calculerResultatSimulationMaifUsecase = new CalculerResultatSimulationMaifUsecase(simulateurMaifRepository);
   const utilisateurId = utilisateurStore().utilisateur.id;
 
   onMounted(async () => {
-    await recupererStatistiquesCommuneMaifUsecase.execute(
+    chiffresClesEnChargement.value = true;
+    await recupererAdresseEtStatistiquesCommuneMaifUsecase.execute(
       utilisateurId,
       new StatistiquesCommunesMaifPresenterImpl((vm: StatistiquesCommuneMaifViewModel) => {
         statistiquesCommuneMaifViewModel.value = vm;
       }),
+      new BarreDeRecherchePresenterImpl(async (adresseDuProfil: BarreDeRechercheViewModel) => {
+        coordonnees.value = adresseDuProfil.coordonnees;
+        recherche.value = adresseDuProfil.recherche;
+        await calculerResultatsSimulation();
+      }),
     );
+    chiffresClesEnChargement.value = false;
   });
 
-  watch(
-    () => coordonnees.value,
-    async () => {
-      if (!coordonnees.value) return;
-      resultatsEnChargement.value = true;
+  async function chargerDonneesPourNouvelleAdresse() {
+    await nextTick();
+    avecAdressePrivee.value = true;
+    chiffresClesEnChargement.value = true;
 
-      avecAdressePrivee.value = true;
-      await calculerResultatSimulationMaifUsecase
-        .execute(
-          utilisateurId,
-          coordonnees.value,
-          new SimulateurMaifPresenterImpl((vm: SimulateurMaifViewModel) => {
-            resultatSimulationMaifViewModel.value = vm;
-          }),
-        )
-        .finally(() => {
-          resultatsEnChargement.value = false;
-        });
+    await calculerResultatsSimulation();
 
-      if (adresse.value?.commune && adresse.value?.coordonnees) {
-        await recupererStatistiquesEndroitMaifUsecase.execute(
-          utilisateurId,
-          adresse.value.commune,
-          adresse.value.codeEPCI,
-          new StatistiquesCommunesMaifPresenterImpl((vm: StatistiquesCommuneMaifViewModel) => {
-            statistiquesCommuneMaifViewModel.value = vm;
-          }),
-        );
-      }
-    },
-  );
+    if (adresse.value?.commune && adresse.value?.coordonnees) {
+      await recupererStatistiquesEndroitMaifUsecase.execute(
+        utilisateurId,
+        adresse.value.commune,
+        adresse.value.codeEPCI,
+        new StatistiquesCommunesMaifPresenterImpl((vm: StatistiquesCommuneMaifViewModel) => {
+          statistiquesCommuneMaifViewModel.value = vm;
+        }),
+      );
+      chiffresClesEnChargement.value = false;
+    }
+  }
+
+  async function calculerResultatsSimulation() {
+    if (!coordonnees.value) return;
+
+    resultatsEnChargement.value = true;
+    await calculerResultatSimulationMaifUsecase
+      .execute(
+        utilisateurId,
+        coordonnees.value,
+        new SimulateurMaifPresenterImpl((vm: SimulateurMaifViewModel) => {
+          resultatSimulationMaifViewModel.value = vm;
+        }),
+      )
+      .finally(() => {
+        resultatsEnChargement.value = false;
+      });
+  }
 
   function definirAdressePrincipale() {
     if (!adresse.value || !coordonnees.value) return;
