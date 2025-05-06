@@ -18,14 +18,21 @@
       </div>
       <div class="fr-mb-4w">
         <h3 class="fr-h4">Où habitez-vous ?</h3>
+        <ServiceBarreDeRechercheAdresse
+          v-if="doitAfficherBarreAdresse"
+          v-model:adresse="adresse"
+          v-model:recherche="recherche"
+        />
         <InputCodePostal
-          v-model="logementViewModel.codePostal"
-          :default-select-value="logementViewModel.commune_utilisee_dans_le_compte"
+          v-else
           :default-value="logementViewModel.codePostal"
+          :default-select-value="logementViewModel.commune_utilisee_dans_le_compte"
+          v-model="logementViewModel.codePostal"
           @update:selectedCommune="logementViewModel.commune_utilisee_dans_le_compte = $event"
           @update:isCodePostalEnErreur="isCodePostalEnErreur = $event"
         />
       </div>
+
       <h3 class="fr-h4">Combien êtes-vous dans votre logement (vous inclus) ?</h3>
       <div class="fr-grid-row fr-mb-4w">
         <InputNumberHorizontal
@@ -121,24 +128,46 @@
   import DPE from '@/components/custom/DPE.vue';
   import BoutonsRadio from '@/components/custom/Form/BoutonsRadio.vue';
   import InputNumberHorizontal from '@/components/custom/Form/InputNumberHorizontal.vue';
+  import ServiceBarreDeRechercheAdresse from '@/components/custom/Service/ServiceBarreDeRechercheAdresse.vue';
   import InputCodePostal from '@/components/dsfr/InputCodePostal.vue';
   import { useAlerte } from '@/composables/useAlerte';
+  import {
+    BarreDeRecherchePresenterImpl,
+    BarreDeRechercheViewModel,
+  } from '@/domaines/logement/adapters/barreDeRecherche.presenter.impl';
   import { LogementRepositoryAxios } from '@/domaines/logement/adapters/logement.repository.axios';
-  import { EnregistrerInformationsLogementUsecase } from '@/domaines/logement/enregistrerInformationLogement.usecase';
+  import { PatcherInformationLogementUsecase } from '@/domaines/logement/patcherInformationLogement.usecase';
   import { LogementViewModel } from '@/domaines/logement/ports/logement.presenter';
-  import { sessionAppRawDataStorage } from '@/shell/appRawDataStorage';
+  import { Adresse } from '@/shell/coordonneesType';
   import { utilisateurStore } from '@/store/utilisateur';
 
-  const props = defineModel<LogementViewModel>('logementViewModel', {
+  const logementViewModel = defineModel<LogementViewModel>('logementViewModel', {
     type: Object,
     required: true,
   });
+  const barreDeRechercheViewModel = ref<BarreDeRechercheViewModel>();
+  new BarreDeRecherchePresenterImpl(vm => (barreDeRechercheViewModel.value = vm)).presente({
+    codePostal: logementViewModel.value?.codePostal,
+    commune: logementViewModel.value?.commune_utilisee_dans_le_compte,
+    communeLabel: logementViewModel.value?.commune_label,
+    rue: logementViewModel.value?.rue,
+    numeroRue: logementViewModel.value?.numeroRue,
+    coordonnees: logementViewModel.value?.coordonnees,
+  });
+  const adresse = ref<Adresse>();
+  const recherche = ref<string>(barreDeRechercheViewModel.value?.recherche ?? '');
 
   const { alerte, afficherAlerte } = useAlerte();
 
+  const doitAfficherBarreAdresse = computed(
+    () =>
+      logementViewModel.value.coordonnees.longitude !== undefined &&
+      logementViewModel.value.coordonnees.latitude !== undefined &&
+      logementViewModel.value.rue !== undefined,
+  );
   const isCodePostalEnErreur = ref(false);
   const codePostalEstValide = computed(() => {
-    return !isCodePostalEnErreur.value && props.value.commune_utilisee_dans_le_compte;
+    return !isCodePostalEnErreur.value && logementViewModel.value.commune_utilisee_dans_le_compte;
   });
 
   const enregistrerLesInformations = () => {
@@ -147,21 +176,21 @@
       return;
     }
 
-    const usecase = new EnregistrerInformationsLogementUsecase(new LogementRepositoryAxios(), sessionAppRawDataStorage);
+    const usecase = new PatcherInformationLogementUsecase(new LogementRepositoryAxios());
     usecase.execute(utilisateurStore().utilisateur.id, {
-      adultes: props.value.adultes,
-      enfants: props.value.enfants,
-      codePostal: props.value.codePostal,
-      commune_utilisee_dans_le_compte: props.value.commune_utilisee_dans_le_compte,
-      commune_label: '',
-      residence: props.value.residence.valeur,
-      superficie: props.value.superficie.valeur,
-      proprietaire: props.value.proprietaire.valeur,
-      plusDeQuinzeAns: props.value.plusDeQuinzeAns.valeur,
-      dpe: props.value.dpe.valeur,
-      coordonnees: props.value.coordonnees,
-      rue: props.value.rue,
-      numeroRue: props.value.numeroRue,
+      adultes: logementViewModel.value.adultes,
+      enfants: logementViewModel.value.enfants,
+      residence: logementViewModel.value.residence.valeur,
+      superficie: logementViewModel.value.superficie.valeur,
+      proprietaire: logementViewModel.value.proprietaire.valeur,
+      plusDeQuinzeAns: logementViewModel.value.plusDeQuinzeAns.valeur,
+      dpe: logementViewModel.value.dpe.valeur,
+      coordonnees: adresse.value?.coordonnees,
+      rue: adresse.value?.rue,
+      numeroRue: adresse.value?.numeroRue,
+      codePostal: adresse.value?.codePostal ?? logementViewModel.value.codePostal,
+      commune_utilisee_dans_le_compte:
+        adresse.value?.commune.toUpperCase() ?? logementViewModel.value.commune_utilisee_dans_le_compte,
     });
 
     afficherAlerte('success', 'Succès', 'Vos informations ont été correctement mises à jour.');
