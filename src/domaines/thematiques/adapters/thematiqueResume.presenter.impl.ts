@@ -59,8 +59,15 @@ export class ThematiqueResumePresenterImpl implements ThematiqueResumePresenter 
     if (resumeThematique.thematique === ClefThematiqueAPI.logement) {
       listeRaccourcis.push({
         emoji: '🧱',
-        href: 'https://mesaidesreno.beta.gouv.fr/',
         label: `1 simulateur Mes aides Rénovation`,
+        to: {
+          name: RouteActionsName.ACTION_INDIVIDUELLE,
+          params: {
+            type: TypeAction.SIMULATEUR,
+            id: 'simu_aides_reno',
+            titre: 'calculer-vos-aides-pour-renover-votre-logement',
+          },
+        },
       });
     }
 

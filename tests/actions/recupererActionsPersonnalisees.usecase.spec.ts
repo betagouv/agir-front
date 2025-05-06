@@ -215,8 +215,15 @@ describe('Fichier de test concernant la récupération des actions personnalisé
               },
               {
                 emoji: '🧱',
-                href: 'https://mesaidesreno.beta.gouv.fr/',
                 label: `1 simulateur Mes aides Rénovation`,
+                to: {
+                  name: 'action-individuelle',
+                  params: {
+                    id: 'simu_aides_reno',
+                    titre: 'calculer-vos-aides-pour-renover-votre-logement',
+                    type: 'simulateur',
+                  },
+                },
               },
             ],
           });
