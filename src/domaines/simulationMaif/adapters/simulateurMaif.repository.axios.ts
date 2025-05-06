@@ -74,7 +74,7 @@ export class SimulateurMaifRepositoryAxios implements SimulateurMaifRepository {
         longitude: response.data.longitude,
       },
     };
-    return { statistiquesCommune, adresse };
+    return { statistiquesCommune, adresseDansLeCompte: adresse };
   }
 
   @intercept401()

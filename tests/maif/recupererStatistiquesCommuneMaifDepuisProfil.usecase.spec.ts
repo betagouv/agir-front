@@ -36,7 +36,7 @@ describe('Fichier de tests concernant la récupération des statistiques MAIF de
         pourcentageSurfaceSecheresseGeotech: 25.5,
         pourcentageSurfaceInondation: 15.3,
       },
-      adresse: {
+      adresseDansLeCompte: {
         commune: 'PARIS',
         communeLabel: 'Paris',
         rue: "Avenue de l'Opéra",

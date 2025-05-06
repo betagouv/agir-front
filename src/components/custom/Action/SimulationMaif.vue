@@ -128,9 +128,9 @@
       new StatistiquesCommunesMaifPresenterImpl((vm: StatistiquesCommuneMaifViewModel) => {
         statistiquesCommuneMaifViewModel.value = vm;
       }),
-      new BarreDeRecherchePresenterImpl(async (adresseDuProfil: BarreDeRechercheViewModel) => {
-        coordonnees.value = adresseDuProfil.coordonnees;
-        recherche.value = adresseDuProfil.recherche;
+      new BarreDeRecherchePresenterImpl(async (barreDeRechercheViewModel: BarreDeRechercheViewModel) => {
+        coordonnees.value = barreDeRechercheViewModel.coordonnees;
+        recherche.value = barreDeRechercheViewModel.recherche;
         await calculerResultatsSimulation();
       }),
     );
