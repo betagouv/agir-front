@@ -1,5 +1,19 @@
 # Changelog
 
+## [2.7.0](https://github.com/betagouv/agir-front/compare/v2.6.1...v2.7.0) (2025-05-06)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* ne prendre en compte que les simulateurs connus ([#1098](https://github.com/betagouv/agir-front/issues/1098)) ([fff9e7a](https://github.com/betagouv/agir-front/commit/fff9e7a165d8c5ef67eed50dc94e6bbb37daa187))
+
+
+### 👷 Autres changements
+
+* a11y formulaire ([#1083](https://github.com/betagouv/agir-front/issues/1083)) ([d414d10](https://github.com/betagouv/agir-front/commit/d414d101156fbd0a5747a38eab412b338b43a08d))
+* amelioration ui article ([#1095](https://github.com/betagouv/agir-front/issues/1095)) ([f98e0e6](https://github.com/betagouv/agir-front/commit/f98e0e681c77ccc1169166ca9986c4a409502bae))
+* Bump vite from 6.3.2 to 6.3.4 ([#1096](https://github.com/betagouv/agir-front/issues/1096)) ([dacb975](https://github.com/betagouv/agir-front/commit/dacb9751628a2c9b4d21ba5d3898d1eec6c57510))
+
 ## [2.6.1](https://github.com/betagouv/agir-front/compare/v2.6.0...v2.6.1) (2025-04-29)
 
 
