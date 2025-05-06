@@ -6,7 +6,7 @@
     />
 
     <KyCsAction
-      v-if="actionSimulateurViewModel.actionId !== 'action_simulateur_voiture'"
+      v-if="actionSimulateurViewModel.actionId === 'action_simulateur_voiture'"
       :action-id="actionSimulateurViewModel.actionId"
       :idEnchainementKycs="actionSimulateurViewModel.idEnchainementKYCs"
       :type-action="TypeAction.SIMULATEUR"
@@ -16,7 +16,7 @@
         <SimulationResultatVoiture v-if="actionSimulateurViewModel.actionId === 'action_simulateur_voiture'" />
       </template>
     </KyCsAction>
-    <div v-else>
+    <div v-else-if="actionSimulateurViewModel.actionId === 'simu_aides_reno'">
       <SimulationAideRenos />
     </div>
     <ActionAides :aides="actionSimulateurViewModel.aides" />

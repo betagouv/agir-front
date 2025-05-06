@@ -18,8 +18,8 @@
 
   onMounted(async () => {
     const axios = AxiosFactory.getAxios();
-    const data = await axios.get(`/utilisateurs/${utilisateurStore().utilisateur.id}/mes_aides_reno/iframe_url`);
-    url.value = data.data;
+    const data = await axios.get(`/utilisateurs/${utilisateurStore().utilisateur.id}/mes_aides_reno/get_iframe_urls`);
+    url.value = data.data.iframe_url;
   });
 </script>
 
