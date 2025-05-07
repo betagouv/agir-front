@@ -49,6 +49,7 @@ export enum RisqueMaifImpactApiModel {
   MOYEN = 'moyen',
   FORT = 'fort',
   TRES_FORT = 'tres_fort',
+  INCONNU = 'inconnu',
 }
 
 export class SimulateurMaifRepositoryAxios implements SimulateurMaifRepository {
@@ -152,6 +153,8 @@ export class SimulateurMaifRepositoryAxios implements SimulateurMaifRepository {
         return RisqueMaifImpact.FORT;
       case RisqueMaifImpactApiModel.TRES_FORT:
         return RisqueMaifImpact.TRES_FORT;
+      case RisqueMaifImpactApiModel.INCONNU:
+        return RisqueMaifImpact.INCONNU;
     }
   }
 }
