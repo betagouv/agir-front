@@ -13,7 +13,6 @@ export interface CompteTemporaire {
 
 export interface CompteUtilisateurACreer {
   email: string;
-  motDePasse: string;
   situationId: string | null;
 }
 

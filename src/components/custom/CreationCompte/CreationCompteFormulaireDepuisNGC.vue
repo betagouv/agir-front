@@ -49,14 +49,6 @@
       </div>
 
       <div class="fr-fieldset__element">
-        <InputPassword
-          autocomplete-value="new-password"
-          v-model="compteUtilisateurInput.motDePasse"
-          legende="Votre mot de passe doit contenir :"
-          @update:mot-de-passe-valide="onMotDePasseValideChanged"
-        />
-      </div>
-      <div class="fr-fieldset__element">
         <div class="fr-checkbox-group fr-checkbox-group--sm">
           <input id="cgu" v-model="acceptationCGU" name="cgu" type="checkbox" />
           <label class="fr-label fr-mt-1w" for="cgu">
@@ -73,7 +65,7 @@
       </div>
       <div class="fr-fieldset__element fr-mb-0 fr-mt-1w">
         <button
-          :disabled="!formulaireValide || !acceptationCGU"
+          :disabled="!compteUtilisateurInput.mail || !acceptationCGU"
           class="fr-btn fr-btn--lg display-block full-width"
           type="submit"
         >
@@ -88,7 +80,6 @@
   import { ref } from 'vue';
   import { useRoute } from 'vue-router';
   import Alert from '@/components/custom/Alert.vue';
-  import InputPassword from '@/components/custom/Form/InputPassword.vue';
   import FranceConnect from '@/components/dsfr/FranceConnect.vue';
   import InputMail from '@/components/dsfr/InputMail.vue';
   import { SessionRepositoryStore } from '@/domaines/authentification/adapters/session.repository.store';
@@ -101,21 +92,15 @@
 
   let compteUtilisateurInput = ref<UserInput>({
     mail: '',
-    motDePasse: '',
     situationId: null,
   });
   let creationDeCompteEnErreur = ref<boolean>();
   let creationDeCompteMessageErreur = ref<string>('');
-  let formulaireValide = ref<boolean>(false);
   let acceptationCGU = ref<boolean>(false);
   utilisateurStore().reset();
   const route = useRoute();
   const idNGC = ref<string | null>(route.query.situationId as string | null);
   const bilanTonnes = ref<string | null>(route.query.bilan_tonnes as string | null);
-
-  function onMotDePasseValideChanged(isMotDePasseValide: boolean) {
-    formulaireValide.value = isMotDePasseValide;
-  }
 
   const performCreerCompteUtilisateur = async () => {
     const creeCompteUseCase = new CreerCompteUtilisateurUsecase(

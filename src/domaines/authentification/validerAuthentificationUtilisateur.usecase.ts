@@ -52,7 +52,7 @@ export class ValiderAuthentificationUtilisateurUsecase {
     code: string,
     authentificationResultatPresenter: AuthentificationResultatPresenter,
   ) {
-    const utilisateur = await this.utilisateurRepository.validerLoginOtp(email, code);
+    const utilisateur = await this.utilisateurRepository.validerMagicLink(email, code);
     this.sessionRepository.sauvegarderUtilisateur(utilisateur);
 
     const prochaineEtape = ProchaineEtapeAuthentificationStrategy.determinerProchaineEtape(utilisateur);

@@ -7,11 +7,10 @@ describe("Fichier de tests concernant l'authentification ", () => {
     const spyUtilisateurRepository = new UtilisateurRepositorySpy();
     const usecase = new AuthentifierUtilisateurUsecase(spyUtilisateurRepository);
     // WHEN
-    await usecase.execute('john.doe@example.com', '123');
+    await usecase.execute('john.doe@example.com');
     // THEN
-    expect(spyUtilisateurRepository.authentifierUtilisateurArgs).toStrictEqual({
-      motDePasse: '123',
-      nomUtilisateur: 'john.doe@example.com',
+    expect(spyUtilisateurRepository.envoyerUnMagicLinkArgs).toStrictEqual({
+      email: 'john.doe@example.com',
     });
   });
 });

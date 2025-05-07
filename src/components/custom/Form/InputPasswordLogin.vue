@@ -1,3 +1,4 @@
+
 <template>
   <div class="fr-password" id="password-1138">
     <label class="fr-label" for="password"> Mot de passe </label>

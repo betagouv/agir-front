@@ -14,10 +14,10 @@
         <Alert
           v-if="creationDeCompteEnErreur"
           :message="creationDeCompteMessageErreur"
+          aria-live="assertive"
           class="fr-col-12 fr-mb-2w"
           titre="Erreur lors de la création du compte"
           type="error"
-          aria-live="assertive"
         />
       </div>
       <div class="fr-fieldset__element">
@@ -28,17 +28,8 @@
       </div>
 
       <div class="fr-fieldset__element">
-        <InputPassword
-          autocomplete-value="new-password"
-          v-model="compteUtilisateurInput.motDePasse"
-          :required="true"
-          legende="Votre mot de passe doit contenir :"
-          @update:mot-de-passe-valide="onMotDePasseValideChanged"
-        />
-      </div>
-      <div class="fr-fieldset__element">
         <div class="fr-checkbox-group fr-checkbox-group--sm">
-          <input id="cgu" v-model="acceptationCGU" name="cgu" type="checkbox" ref="inputCGU" />
+          <input id="cgu" ref="inputCGU" v-model="acceptationCGU" name="cgu" type="checkbox" />
           <label class="fr-label fr-mt-1w" for="cgu">
             J'accepte&nbsp;
             <router-link :to="{ name: RouteConformiteName.CGU }" target="_blank"
@@ -62,9 +53,8 @@
 </template>
 
 <script lang="ts" setup>
-  import { onMounted, ref, useTemplateRef } from 'vue';
+  import { ref, useTemplateRef } from 'vue';
   import Alert from '@/components/custom/Alert.vue';
-  import InputPassword from '@/components/custom/Form/InputPassword.vue';
   import FranceConnect from '@/components/dsfr/FranceConnect.vue';
   import InputMail from '@/components/dsfr/InputMail.vue';
   import { SessionRepositoryStore } from '@/domaines/authentification/adapters/session.repository.store';
@@ -77,25 +67,14 @@
 
   let compteUtilisateurInput = ref<UserInput>({
     mail: '',
-    motDePasse: '',
     situationId: null,
   });
   let creationDeCompteEnErreur = ref<boolean>();
   let creationDeCompteMessageErreur = ref<string>('');
-  let formulaireValide = ref<boolean>(false);
   let acceptationCGU = ref<boolean>(false);
   utilisateurStore().reset();
 
   const inputCGU = useTemplateRef<HTMLInputElement>('inputCGU');
-  const inputPassword = ref<HTMLInputElement | undefined>();
-
-  onMounted(() => {
-    inputPassword.value = document.querySelector('#password') as HTMLInputElement;
-  });
-
-  function onMotDePasseValideChanged(isMotDePasseValide: boolean) {
-    formulaireValide.value = isMotDePasseValide;
-  }
 
   const performCreerCompteUtilisateur = async () => {
     creationDeCompteEnErreur.value = false;
@@ -124,9 +103,6 @@
       .catch(reason => {
         creationDeCompteMessageErreur.value = reason.message;
         creationDeCompteEnErreur.value = true;
-        if (inputPassword.value) {
-          inputPassword.value.focus();
-        }
       });
   };
 </script>
