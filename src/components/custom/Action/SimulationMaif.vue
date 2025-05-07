@@ -148,7 +148,7 @@
       await recupererStatistiquesEndroitMaifUsecase.execute(
         utilisateurId,
         adresse.value.commune,
-        adresse.value.codeEPCI,
+        adresse.value.codeEpci,
         new StatistiquesCommunesMaifPresenterImpl((vm: StatistiquesCommuneMaifViewModel) => {
           statistiquesCommuneMaifViewModel.value = vm;
         }),

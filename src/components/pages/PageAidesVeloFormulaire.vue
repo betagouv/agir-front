@@ -9,10 +9,8 @@
             <h3 class="fr-h4">Où habitez-vous ?</h3>
             <InputCodePostal
               v-if="logementViewModel"
-              v-model="logementViewModel.codePostal"
-              :defaultSelectValue="logementViewModel.commune_utilisee_dans_le_compte"
-              :defaultValue="logementViewModel.codePostal"
-              @update:selectedCommune="logementViewModel.commune_utilisee_dans_le_compte = $event"
+              v-model:code-postal="logementViewModel.codePostal"
+              v-model:code-epci="logementViewModel.codeEpci"
               @update:isCodePostalEnErreur="isCodePostalEnErreur = $event"
             />
             <h3 class="fr-h4 fr-mt-3w">Quel est votre revenu ?</h3>
@@ -149,16 +147,8 @@
 
       const patcherInformationsLogementUsecase = new PatcherInformationLogementUsecase(new LogementRepositoryAxios());
       await patcherInformationsLogementUsecase.execute(utilisateurStore().utilisateur.id, {
-        adultes: logementViewModel.value!.adultes,
-        enfants: logementViewModel.value!.enfants,
-        codePostal: logementViewModel.value!.codePostal,
-        commune_utilisee_dans_le_compte: logementViewModel.value!.commune_utilisee_dans_le_compte,
-        commune_label: '',
-        residence: logementViewModel.value!.residence.valeur,
-        superficie: logementViewModel.value!.superficie.valeur,
-        proprietaire: logementViewModel.value!.proprietaire.valeur,
-        plusDeQuinzeAns: logementViewModel.value!.plusDeQuinzeAns.valeur,
-        dpe: logementViewModel.value!.dpe.valeur,
+        codePostal: logementViewModel.value?.codePostal,
+        codeEpci: logementViewModel.value?.codeEpci,
       });
 
       await router.push({ name: RouteAidesName.VELO });

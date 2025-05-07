@@ -8,7 +8,7 @@ import { StatistiquesCommunesMaifPresenterImpl } from '@/domaines/simulationMaif
 class SimulateurMaifRepositoryMock implements SimulateurMaifRepository {
   constructor(private readonly statistiques: StatistiquesEndroitMaif) {}
 
-  async recupererStatistiquesEndroit(_utilisateurId: string, _codeEPCI: string): Promise<StatistiquesEndroitMaif> {
+  async recupererStatistiquesEndroit(_utilisateurId: string, _codeEpci: string): Promise<StatistiquesEndroitMaif> {
     return this.statistiques;
   }
 

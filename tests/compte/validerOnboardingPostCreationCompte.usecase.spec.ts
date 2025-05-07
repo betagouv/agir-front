@@ -12,6 +12,7 @@ describe("Fichier de tests concernant la validation de l'onboarding après creat
     // WHEN
     await usecase.execute('1', {
       pseudo: 'Dorian',
+      codeEpci: '75021',
       commune: 'Paris',
       codePostal: '75000',
       dateDeNaissance: {

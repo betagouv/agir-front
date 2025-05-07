@@ -15,7 +15,7 @@ export class ValiderOnboardingPostCreationCompteUsecase {
     await this.compteUtilisateurRepository.validationOnboardingPostCreationCompte(
       idUtilisateur,
       onboardingPostCreationCompteState.pseudo,
-      onboardingPostCreationCompteState.commune,
+      onboardingPostCreationCompteState.codeEpci,
       onboardingPostCreationCompteState.codePostal,
       onboardingPostCreationCompteState.dateDeNaissance.jour === ''
         ? undefined

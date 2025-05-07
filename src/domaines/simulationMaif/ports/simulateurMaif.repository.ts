@@ -21,7 +21,7 @@ export enum RisqueMaifImpact {
 export interface SimulateurMaifRepository {
   recupererStatistiquesCommuneEtAdresse(utilisateurId: string): Promise<StatistiquesCommuneEtAdresse>;
 
-  recupererStatistiquesEndroit(utilisateurId: string, codeEPCI: string): Promise<StatistiquesEndroitMaif>;
+  recupererStatistiquesEndroit(utilisateurId: string, codeEpci: string): Promise<StatistiquesEndroitMaif>;
 
   recupererResultats(utilisateurId: string, coordonnees: Coordonnees): Promise<ResultatSimulationMaif>;
 }
