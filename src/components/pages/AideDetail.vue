@@ -39,6 +39,18 @@
           </span>
         </span>
         <div class="cms__content" v-html="aide.contenu" />
+        <h3 class="fr-h6">En savoir plus</h3>
+        <p>
+          Pour plus d'information, vous pouvez vous rendre sur la page dédiée
+          <a
+            :href="aide.urlSource"
+            rel="noopener external"
+            target="_blank"
+            @click="trackAide(aide.id, AIDE_TRACKING.INFOS)"
+          >
+            en cliquant ici
+          </a>
+        </p>
         <div class="flex align-items--center gap--small">
           <a
             v-if="aide.urlCommencerVotreDemarche"
@@ -58,19 +70,6 @@
             Estimer le montant des aides
           </router-link>
         </div>
-
-        <h3 class="fr-h6">En savoir plus</h3>
-        <p>
-          Pour plus d'information, vous pouvez vous rendre sur la page dédiée
-          <a
-            :href="aide.urlSource"
-            rel="noopener external"
-            target="_blank"
-            @click="trackAide(aide.id, AIDE_TRACKING.INFOS)"
-          >
-            en cliquant ici
-          </a>
-        </p>
       </div>
     </div>
     <div class="fr-col-12 fr-col-md-4 fr-mt-3w fr-mb-4w">
@@ -83,7 +82,7 @@
       </div>
     </div>
 
-    <AideModaleFeedback :notation="notation" :aideId="props.aide.id" @feedback-envoye="updateNotation" />
+    <AideModaleFeedback :aideId="props.aide.id" :notation="notation" @feedback-envoye="updateNotation" />
   </div>
 </template>
 <script lang="ts" setup>
