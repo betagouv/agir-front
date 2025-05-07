@@ -5,8 +5,10 @@ import { Coordonnees } from '@/shell/coordonneesType';
 
 export interface Logement {
   codePostal: string;
+  codeEpci: string;
   commune_utilisee_dans_le_compte: string;
   commune_label: string;
+  code: string;
   adultes: number;
   enfants: number;
   residence: LogementApiModel['type'];

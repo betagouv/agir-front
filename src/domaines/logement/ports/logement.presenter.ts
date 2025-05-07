@@ -24,6 +24,7 @@ export interface LogementViewModel {
   coordonnees: Coordonnees;
   numeroRue: string;
   rue: string;
+  codeEpci: string;
 }
 
 export interface LogementPresenter {
