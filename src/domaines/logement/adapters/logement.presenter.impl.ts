@@ -7,7 +7,11 @@ export class LogementPresenterImpl implements LogementPresenter {
 
   presente(logement: Logement) {
     this.logementViewModel({
+      coordonnees: logement.coordonnees,
+      numeroRue: logement.numeroRue,
+      rue: logement.rue,
       codePostal: logement.codePostal,
+      codeEpci: logement.codeEpci,
       commune_utilisee_dans_le_compte: logement.commune_utilisee_dans_le_compte,
       commune_label: logement.commune_label,
       adultes: logement.adultes,

@@ -2,25 +2,25 @@ import { Logement } from '@/domaines/logement/recupererInformationLogement.useca
 import { LogementRepository } from '@/domaines/logement/ports/logement.repository';
 
 export class LogementRepositorySpy implements LogementRepository {
-  private _enregistrerLesInformationsAEteAppele: boolean = false;
-
-  private _enregistrerLesInformationsArgs: Logement | null = null;
-
-  enregistrerLesInformations(_utilisateurId, logement): Promise<void> {
-    this._enregistrerLesInformationsAEteAppele = true;
-    this._enregistrerLesInformationsArgs = logement;
-    return Promise.resolve();
-  }
-
   recupererInformation(_utilisateurId: string): Promise<Logement> {
     throw new Error('Method not implemented.');
   }
 
-  get enregistrerLesInformationsAEteAppele(): boolean {
-    return this._enregistrerLesInformationsAEteAppele;
+  private _patcherLesInformationsAEteAppele: boolean = false;
+
+  get patcherLesInformationsAEteAppele(): boolean {
+    return this._patcherLesInformationsAEteAppele;
   }
 
-  get enregistrerLesInformationsArgs(): Logement | null {
-    return this._enregistrerLesInformationsArgs;
+  private _patcherLesInformationsArgs: Partial<Logement> | null = null;
+
+  get patcherLesInformationsArgs(): Partial<Logement> | null {
+    return this._patcherLesInformationsArgs;
+  }
+
+  patcherLesInformations(utilisateurId: string, logement: Partial<Logement>): Promise<void> {
+    this._patcherLesInformationsAEteAppele = true;
+    this._patcherLesInformationsArgs = logement;
+    return Promise.resolve();
   }
 }

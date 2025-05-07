@@ -1,5 +1,8 @@
 import { LogementPresenterImpl } from '@/domaines/logement/adapters/logement.presenter.impl';
-import { RecupererInformationLogementUseCase } from '@/domaines/logement/recupererInformationLogement.usecase';
+import {
+  Logement,
+  RecupererInformationLogementUseCase,
+} from '@/domaines/logement/recupererInformationLogement.usecase';
 import { MockLogementRepository } from './adapters/logement.repository.mock';
 import {
   ChauffageLogementApiModel,
@@ -15,6 +18,7 @@ describe('Fichier de tests concernant la récuperations des informations du loge
     const usecase = new RecupererInformationLogementUseCase(
       new MockLogementRepository({
         codePostal: '75001',
+        codeEpci: '75021',
         commune_utilisee_dans_le_compte: 'PARIS 01',
         commune_label: 'Paris 01',
         adultes: 2,
@@ -24,6 +28,12 @@ describe('Fichier de tests concernant la récuperations des informations du loge
         superficie: SuperficieLogementApiModel.Superficie_100,
         plusDeQuinzeAns: true,
         dpe: DPELogementApiModel.B,
+        coordonnees: {
+          latitude: 48.865,
+          longitude: 2.331,
+        },
+        numeroRue: '34',
+        rue: "avenue de l'Opéra",
       }),
     );
 
@@ -32,7 +42,14 @@ describe('Fichier de tests concernant la récuperations des informations du loge
       'idUtilisateur',
       new LogementPresenterImpl(viewModel => {
         expect(viewModel).toEqual({
+          coordonnees: {
+            latitude: 48.865,
+            longitude: 2.331,
+          },
+          numeroRue: '34',
+          rue: "avenue de l'Opéra",
           codePostal: '75001',
+          codeEpci: '75021',
           commune_utilisee_dans_le_compte: 'PARIS 01',
           commune_label: 'Paris 01',
           adultes: 2,
