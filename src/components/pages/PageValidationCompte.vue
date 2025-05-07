@@ -7,12 +7,23 @@
         Pour vérifier votre adresse email et vous permettre d’accéder à votre compte, nous vous avons envoyé un email à
         l’adresse : <strong>{{ email }}</strong>
       </p>
+
+      <div v-if="!estEnvDeProduction">
+        <router-link
+          :to="{ name: RouteCommuneName.MAGIC_LINK_CALLBACK, query: { email, code: '999999' } }"
+          class="fr-btn fr-btn--secondary"
+        >
+          Se connecter avec le lien magique (sans mail)
+        </router-link>
+      </div>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
+  import { RouteCommuneName } from '@/router';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const email = utilisateurStore().utilisateur.mail || new URLSearchParams(window.location.search).get('email') || '';
+  const estEnvDeProduction = import.meta.env.VITE_ENV === 'production';
 </script>
