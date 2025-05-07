@@ -91,14 +91,6 @@ const routes: RouteRecordRaw[] = [
     },
   },
   {
-    path: RouteCommunePath.LOGIN_CALLBACK,
-    name: RouteCommuneName.RETOUR_AUTH_FRANCE_CONNECT,
-    component: FranceConnectCallBack,
-    meta: {
-      estPublique: true,
-    },
-  },
-  {
     path: RouteCommunePath.MAGIC_LINK_CALLBACK,
     name: RouteCommuneName.MAGIC_LINK_CALLBACK,
     component: MagicLinkCallBack,
