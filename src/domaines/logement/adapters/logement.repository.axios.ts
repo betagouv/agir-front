@@ -62,7 +62,6 @@ export class LogementRepositoryAxios implements LogementRepository {
       codePostal: reponse.data.code_postal,
       commune_utilisee_dans_le_compte: reponse.data.commune,
       commune_label: reponse.data.commune_label,
-      code: reponse.data.code_commune,
       adultes: reponse.data.nombre_adultes,
       enfants: reponse.data.nombre_enfants,
       residence: reponse.data.type,
@@ -96,7 +95,7 @@ export class LogementRepositoryAxios implements LogementRepository {
     if (logement.coordonnees?.latitude !== undefined) patchData.latitude = logement.coordonnees.latitude;
     if (logement.numeroRue !== undefined) patchData.numero_rue = logement.numeroRue;
     if (logement.rue !== undefined) patchData.rue = logement.rue;
-    if (logement.code !== undefined) patchData.code_commune = logement.code;
+    if (logement.codeEpci !== undefined) patchData.code_commune = logement.codeEpci;
 
     await AxiosFactory.getAxios().patch(`utilisateurs/${utilisateurId}/logement`, patchData);
   }

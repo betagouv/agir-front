@@ -78,28 +78,28 @@ export class SimulateurMaifRepositoryAxios implements SimulateurMaifRepository {
   }
 
   @intercept401()
-  async recupererStatistiquesEndroit(utilisateurId: string, codeEPCI: string): Promise<StatistiquesEndroitMaif> {
+  async recupererStatistiquesEndroit(utilisateurId: string, codeEpci: string): Promise<StatistiquesEndroitMaif> {
     const axios = AxiosFactory.getAxios();
 
     const responseCatNat = await axios.post<RequetesMaifApiModel>(
       `/utilisateurs/${utilisateurId}/recherche_services/maif/search2`,
       {
         categorie: 'catnat',
-        code_commune: codeEPCI,
+        code_commune: codeEpci,
       },
     );
     const responseSecheresse = await axios.post<RequetesMaifApiModel>(
       `/utilisateurs/${utilisateurId}/recherche_services/maif/search2`,
       {
         categorie: 'zones_secheresse',
-        code_commune: codeEPCI,
+        code_commune: codeEpci,
       },
     );
     const responseInnondation = await axios.post<RequetesMaifApiModel>(
       `/utilisateurs/${utilisateurId}/recherche_services/maif/search2`,
       {
         categorie: 'zones_inondation',
-        code_commune: codeEPCI,
+        code_commune: codeEpci,
       },
     );
 
