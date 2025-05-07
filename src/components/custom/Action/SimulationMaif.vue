@@ -182,10 +182,9 @@
         longitude: coordonnees.value.longitude,
       },
       codePostal: adresse.value.codePostal,
-      commune_utilisee_dans_le_compte: adresse.value.commune.toUpperCase(),
+      codeEpci: adresse.value.codeEpci,
       numeroRue: adresse.value.numeroRue,
       rue: adresse.value.rue,
-      commune_label: adresse.value.commune,
     };
 
     const patcherInformationLogementUsecase = new PatcherInformationLogementUsecase(new LogementRepositoryAxios());

@@ -57,6 +57,11 @@ export class SimulateurMaifPresenterImpl implements SimulateurMaifPresenter {
           label: 'Très fort',
           class: 'badge--tres-fort',
         };
+      case RisqueMaifImpact.INCONNU:
+        return {
+          label: 'Non disponible',
+          class: '',
+        };
     }
   }
 
