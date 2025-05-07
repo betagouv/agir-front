@@ -49,6 +49,7 @@
   import Alert from '@/components/custom/Alert.vue';
   import FranceConnect from '@/components/dsfr/FranceConnect.vue';
   import InputMail from '@/components/dsfr/InputMail.vue';
+  import { SessionRepositoryStore } from '@/domaines/authentification/adapters/session.repository.store';
   import { UtilisateurRepositoryAxios } from '@/domaines/authentification/adapters/utilisateur.repository.axios';
   import { AuthentifierUtilisateurUsecase } from '@/domaines/authentification/authentifierUtilisateur.usecase';
   import router from '@/router';
@@ -72,7 +73,7 @@
     loginMessageErreur.value = '';
     loginEnErreur.value = false;
 
-    const usecase = new AuthentifierUtilisateurUsecase(new UtilisateurRepositoryAxios());
+    const usecase = new AuthentifierUtilisateurUsecase(new UtilisateurRepositoryAxios(), new SessionRepositoryStore());
     usecase
       .execute(email.value)
       .then(() => {
