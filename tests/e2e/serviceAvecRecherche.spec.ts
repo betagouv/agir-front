@@ -97,7 +97,6 @@ test.describe('PageServiceLongueVieAuxObjets', () => {
   test('doit permettre la recherche par adresse', async () => {
     await page.goto('/thematique/consommer/service/longue-vie-aux-objets');
 
-    // Simuler une réponse API pour la recherche
     await page.route('**/utilisateurs/dorian/recherche_services/longue_vie_objets/search2', route => {
       route.fulfill({
         status: 200,
@@ -125,9 +124,9 @@ test.describe('PageServiceLongueVieAuxObjets', () => {
     });
 
     const rechercheInput = page.getByRole('combobox', { name: 'Recherche par adresse' });
-    await rechercheInput.fill('Paris');
+    await rechercheInput.fill("34 Avenue de l'Opera");
     await page.click('#option-0');
-    expect(page.url()).toContain('adresse=Paris,+Paris+(75001)');
+    expect(page.url()).toContain('adresse=34+Avenue+de+l%27Op%C3%A9ra');
     expect(page.url()).toContain('latitude=');
     expect(page.url()).toContain('longitude=');
 
@@ -294,7 +293,7 @@ test.describe('PageServiceLongueVieAuxObjets', () => {
     });
 
     const rechercheInput = page.getByRole('combobox', { name: 'Recherche par adresse' });
-    await rechercheInput.fill('Paris');
+    await rechercheInput.fill("34 Avenue de l'Opera");
     await page.click('#option-0');
     await expect(page.getByText('Suggestion 1 à Paris')).toBeVisible();
 
@@ -361,7 +360,7 @@ test.describe('PageServiceLongueVieAuxObjets', () => {
     await expect(page.getByText('Suggestion donner')).toBeVisible();
     expect(page.url()).toContain('type=donner');
     expect(page.url()).toContain('nombre=9');
-    expect(page.url()).toContain('adresse=Paris,+Paris+(75001)');
+    expect(page.url()).toContain('adresse=34+Avenue+de+l%27Op%C3%A9ra,');
   });
 });
 
