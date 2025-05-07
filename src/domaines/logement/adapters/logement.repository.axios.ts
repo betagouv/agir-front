@@ -40,6 +40,7 @@ export interface LogementApiModel {
   code_postal: string;
   commune: string;
   commune_label: string;
+  code_commune: string;
   type: TypeLogementApiModel;
   superficie: SuperficieLogementApiModel;
   proprietaire: boolean;
@@ -54,21 +55,6 @@ export interface LogementApiModel {
 
 export class LogementRepositoryAxios implements LogementRepository {
   @intercept401()
-  async enregistrerLesInformations(utilisateurId: string, logement: Logement): Promise<void> {
-    await AxiosFactory.getAxios().patch(`utilisateurs/${utilisateurId}/logement`, {
-      code_postal: logement.codePostal,
-      commune: logement.commune_utilisee_dans_le_compte,
-      nombre_adultes: logement.adultes,
-      nombre_enfants: logement.enfants,
-      type: logement.residence,
-      proprietaire: logement.proprietaire,
-      superficie: logement.superficie,
-      plus_de_15_ans: logement.plusDeQuinzeAns,
-      dpe: logement.dpe,
-    });
-  }
-
-  @intercept401()
   async recupererInformation(utilisateurId: string): Promise<Logement> {
     const reponse = await AxiosFactory.getAxios().get<LogementApiModel>(`utilisateurs/${utilisateurId}/logement`);
 
@@ -76,6 +62,7 @@ export class LogementRepositoryAxios implements LogementRepository {
       codePostal: reponse.data.code_postal,
       commune_utilisee_dans_le_compte: reponse.data.commune,
       commune_label: reponse.data.commune_label,
+      code: reponse.data.code_commune,
       adultes: reponse.data.nombre_adultes,
       enfants: reponse.data.nombre_enfants,
       residence: reponse.data.type,
@@ -86,6 +73,7 @@ export class LogementRepositoryAxios implements LogementRepository {
       coordonnees: { latitude: reponse.data.latitude, longitude: reponse.data.longitude },
       numeroRue: reponse.data.numero_rue,
       rue: reponse.data.rue,
+      codeEpci: reponse.data.code_commune,
     };
   }
 
@@ -108,6 +96,7 @@ export class LogementRepositoryAxios implements LogementRepository {
     if (logement.coordonnees?.latitude !== undefined) patchData.latitude = logement.coordonnees.latitude;
     if (logement.numeroRue !== undefined) patchData.numero_rue = logement.numeroRue;
     if (logement.rue !== undefined) patchData.rue = logement.rue;
+    if (logement.code !== undefined) patchData.code_commune = logement.code;
 
     await AxiosFactory.getAxios().patch(`utilisateurs/${utilisateurId}/logement`, patchData);
   }

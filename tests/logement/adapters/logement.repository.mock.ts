@@ -8,10 +8,6 @@ export class MockLogementRepository implements LogementRepository {
     return Promise.resolve(this.logement);
   }
 
-  enregistrerLesInformations(utilisateurId: string, logement: Logement): Promise<void> {
-    throw new Error('Method not implemented.');
-  }
-
   patcherLesInformations(utilisateurId: string, logement: Partial<Logement>): Promise<void> {
     return Promise.resolve(undefined);
   }
