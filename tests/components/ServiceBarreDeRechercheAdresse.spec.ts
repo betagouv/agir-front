@@ -34,7 +34,7 @@ describe('Tests pour le composant ServiceBarreDeRechercheAdresse', () => {
 
     await waitFor(() => {
       expect(axios.get).toHaveBeenCalledWith(
-        "https://api-adresse.data.gouv.fr/search/?q=chauss%C3%A9e+d'antin+paris+75000&limit=8",
+        "https://data.geopf.fr/geocodage/search/?q=chauss%C3%A9e+d'antin+paris+75000&limit=8&index=address&type=housenumber&autocomplete=1",
       );
     });
   });
