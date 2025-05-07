@@ -3,7 +3,6 @@ const PageCreationCompte = () => import('@/components/pages/PageCreationCompte.v
 const PageCreationCompteDepuisNGC = () => import('@/components/pages/PageCreationCompteDepuisNGC.vue');
 const PageValidationCompte = () => import('@/components/pages/PageValidationCompte.vue');
 const PageValidationAuthentification = () => import('@/components/pages/PageValidationAuthentification.vue');
-const PageMotDePasseOublie = () => import('@/components/pages/PageMotDePasseOublie.vue');
 const PageCompteOptionsAvancees = () => import('@/components/pages/PageCompteOptionsAvancees.vue');
 const PageCompteMieuxVousConnaitre = () => import('@/components/pages/PageCompteMieuxVousConnaitre.vue');
 const PageCompteLogement = () => import('@/components/pages/PageCompteLogement.vue');
@@ -120,20 +119,6 @@ const compteRoutes: RouteRecordRaw[] = [
       title: "Validation de l'authentification",
       estPublique: true,
     },
-  },
-  {
-    path: RouteComptePath.MOT_DE_PASSE_OUBLIE,
-    children: [
-      {
-        path: RouteComptePath.MOT_DE_PASSE_OUBLIE,
-        name: RouteCompteName.MOT_DE_PASSE_OUBLIE,
-        component: PageMotDePasseOublie,
-        meta: {
-          title: 'Mot de passe oublié',
-          estPublique: true,
-        },
-      },
-    ],
   },
   {
     beforeEnter: onboardingGuard,

@@ -16,10 +16,6 @@ export class UtilisateurRepositoryMock implements UtilisateurRepository {
     return new UtilisateurRepositoryMock(true);
   }
 
-  authentifierUtilisateur(email: string, motDePasse: string): Promise<void> {
-    throw Error;
-  }
-
   getUtilisateurAvecId(idUtilisateur: string): Promise<Utilisateur> {
     return Promise.resolve<Utilisateur>({
       id: idUtilisateur,
@@ -38,14 +34,6 @@ export class UtilisateurRepositoryMock implements UtilisateurRepository {
     throw Error;
   }
 
-  commencerRedefinirMotDePasse(email: string): void {
-    throw Error;
-  }
-
-  terminerRedefinirMotDePasse(email: string, motDePasse: string, code: string): Promise<void> {
-    throw Error;
-  }
-
   validerCompteUtilisateur(email: string, code: string): Promise<UtilisateurConnecte> {
     return Promise.resolve({
       id: 'utilisateurId',
@@ -53,7 +41,7 @@ export class UtilisateurRepositoryMock implements UtilisateurRepository {
     });
   }
 
-  validerLoginOtp(email: string, code: string): Promise<Utilisateur> {
+  validerMagicLink(email: string, code: string): Promise<Utilisateur> {
     return Promise.resolve<Utilisateur>({
       id: 'id',
       nom: '',
@@ -97,7 +85,11 @@ export class UtilisateurRepositoryMock implements UtilisateurRepository {
     }
   }
 
-  terminerMessageReset(idUtilisateur: string): Promise<void> {
+  terminerMessageReset(_idUtilisateur: string): Promise<void> {
     return Promise.resolve();
+  }
+
+  envoyerUnMagicLink(_email: string): Promise<void> {
+    return Promise.resolve(undefined);
   }
 }

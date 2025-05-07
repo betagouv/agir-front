@@ -23,10 +23,6 @@ export class UtilisateurRepositoryForTest implements UtilisateurRepository {
     return new UtilisateurRepositoryForTest(false);
   }
 
-  authentifierUtilisateur(nomUtilisateur: string, motDePasse: string): Promise<void> {
-    return Promise.resolve();
-  }
-
   getUtilisateurAvecId(idUtilisateur: string): Promise<Utilisateur> {
     return Promise.resolve<Utilisateur>({
       id: idUtilisateur,
@@ -49,15 +45,7 @@ export class UtilisateurRepositoryForTest implements UtilisateurRepository {
     throw Error;
   }
 
-  commencerRedefinirMotDePasse(email: string): void {
-    throw Error;
-  }
-
-  terminerRedefinirMotDePasse(email: string, motDePasse: string, code: string): Promise<void> {
-    throw Error;
-  }
-
-  validerLoginOtp(email: string, code: string): Promise<Utilisateur> {
+  validerMagicLink(email: string, code: string): Promise<Utilisateur> {
     return Promise.resolve<Utilisateur>({
       id: '1',
       nom: 'Doe',
@@ -85,11 +73,15 @@ export class UtilisateurRepositoryForTest implements UtilisateurRepository {
     });
   }
 
-  deconnecterUtilisateur(idUtilisateur: string): Promise<DeconnexionFranceConnect> {
+  deconnecterUtilisateur(_idUtilisateur: string): Promise<DeconnexionFranceConnect> {
     throw Error;
   }
 
-  terminerMessageReset(idUtilisateur: string): Promise<void> {
+  terminerMessageReset(_idUtilisateur: string): Promise<void> {
     throw Error;
+  }
+
+  envoyerUnMagicLink(_email: string): Promise<void> {
+    return Promise.resolve(undefined);
   }
 }

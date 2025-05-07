@@ -4,9 +4,9 @@ import { CreerComptePresenter } from '@/domaines/compte/ports/creerComptePresent
 
 export interface UserInput {
   mail: string;
-  motDePasse: string;
   situationId: string | null;
 }
+
 export class CreerCompteUtilisateurUsecase {
   constructor(
     private compteUtilisateuRepository: CompteUtilisateurRepository,
@@ -14,14 +14,13 @@ export class CreerCompteUtilisateurUsecase {
   ) {}
 
   async execute(creerComptePresenter: CreerComptePresenter, compteUtilisateurACreerInput: UserInput): Promise<void> {
-    const utilisateurCree = await this.compteUtilisateuRepository.creerCompteUtilisateur({
+    await this.compteUtilisateuRepository.creerCompteUtilisateur({
       email: compteUtilisateurACreerInput.mail,
-      motDePasse: compteUtilisateurACreerInput.motDePasse,
       situationId: compteUtilisateurACreerInput.situationId,
     });
 
     this.sessionRepository.sauvegarderUtilisateur({
-      mail: utilisateurCree.mail,
+      mail: compteUtilisateurACreerInput.mail,
     });
     creerComptePresenter.present();
   }

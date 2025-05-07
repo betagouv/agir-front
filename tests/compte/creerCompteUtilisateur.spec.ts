@@ -9,7 +9,6 @@ describe('Fichier de tests concernant la creation du compte utilisateur', () => 
     // GIVEN
     const compteACreer: UserInput = {
       mail: 'john@skynet.com',
-      motDePasse: 'motDePasse',
       situationId: 'situationId',
     };
 

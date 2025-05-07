@@ -6,23 +6,20 @@ import {
 } from '@/domaines/authentification/ports/utilisateur.repository';
 
 export class UtilisateurRepositorySpy implements UtilisateurRepository {
+  private _utilisateurAEteDeco: boolean = false;
+
   constructor() {}
+
+  private _envoyerUnMagicLinkArgs: { email: string } = { email: '' };
+
+  get envoyerUnMagicLinkArgs(): { email: string } {
+    return this._envoyerUnMagicLinkArgs;
+  }
 
   private _authentifierUtilisateurArgs: { motDePasse: string; nomUtilisateur: string } | null = null;
 
   get authentifierUtilisateurArgs(): { motDePasse: string; nomUtilisateur: string } | null {
     return this._authentifierUtilisateurArgs;
-  }
-
-  private _utilisateurAEteDeco: boolean = false;
-
-  get utilisateurAEteDeco(): boolean {
-    return this._utilisateurAEteDeco;
-  }
-
-  authentifierUtilisateur(nomUtilisateur: string, motDePasse: string): Promise<void> {
-    this._authentifierUtilisateurArgs = { nomUtilisateur, motDePasse };
-    return Promise.resolve();
   }
 
   getUtilisateurAvecId(idUtilisateur: string): Promise<Utilisateur> {
@@ -37,15 +34,7 @@ export class UtilisateurRepositorySpy implements UtilisateurRepository {
     throw Error;
   }
 
-  commencerRedefinirMotDePasse(email: string): void {
-    throw Error;
-  }
-
-  terminerRedefinirMotDePasse(email: string, motDePasse: string, code: string): Promise<void> {
-    throw Error;
-  }
-
-  validerLoginOtp(email: string, code: string): Promise<Utilisateur> {
+  validerMagicLink(email: string, code: string): Promise<Utilisateur> {
     throw Error;
   }
 
@@ -63,5 +52,10 @@ export class UtilisateurRepositorySpy implements UtilisateurRepository {
 
   terminerMessageReset(idUtilisateur: string): Promise<void> {
     throw Error;
+  }
+
+  envoyerUnMagicLink(email: string): Promise<void> {
+    this._envoyerUnMagicLinkArgs = { email };
+    return Promise.resolve(undefined);
   }
 }
