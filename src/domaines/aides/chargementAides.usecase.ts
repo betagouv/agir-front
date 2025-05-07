@@ -23,6 +23,7 @@ export interface Aide {
   };
   derniereMaj?: string;
   estGratuit: boolean;
+  urlSource: string;
 }
 
 export default class ChargementAidesUsecase {
