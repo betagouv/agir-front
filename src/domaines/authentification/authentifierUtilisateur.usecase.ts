@@ -3,7 +3,7 @@ import { UtilisateurRepository } from '@/domaines/authentification/ports/utilisa
 export class AuthentifierUtilisateurUsecase {
   constructor(private readonly utilisateurRepository: UtilisateurRepository) {}
 
-  async execute(email: string, password: string): Promise<void> {
-    await this.utilisateurRepository.authentifierUtilisateur(email, password);
+  async execute(email: string): Promise<void> {
+    await this.utilisateurRepository.envoyerUnMagicLink(email);
   }
 }
