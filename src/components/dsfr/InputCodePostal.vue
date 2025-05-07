@@ -2,7 +2,7 @@
   <div class="fr-grid fr-grid-row fr-grid-row--gutters">
     <div class="fr-col-lg-3 fr-col-12">
       <div
-        :class="`fr-input-group ${!codePostalValide && 'fr-input-group--error'}
+        :class="`fr-input-group ${codePostal && !codePostalValide && 'fr-input-group--error'}
         ${codePostalNexistePas && 'fr-input-group--error'}`"
       >
         <label class="fr-label" for="codePostal">
@@ -21,7 +21,7 @@
           @input="onCodePostalInput"
           :autofocus="autofocus"
         />
-        <p v-if="!codePostalValide" id="text-input-error-desc-error-invalide" class="fr-error-text">
+        <p v-if="codePostal && !codePostalValide" id="text-input-error-desc-error-invalide" class="fr-error-text">
           Ce code postal n'est pas valide
         </p>
         <p v-if="codePostalNexistePas" id="text-input-error-desc-error-commune" class="fr-error-text">
@@ -83,11 +83,11 @@
   const usecase = new ChargementCommunesUsecase(new CommuneRepositoryAxios());
   const communes = ref<Commune[]>([]);
 
-  const codePostalValide = computed(() => codePostal.value?.toString().length === 5);
+  const codePostalValide = computed(() => /^\d{5}$/.test(codePostal.value));
   const codePostalNexistePas = computed(() => codePostalValide.value && communes.value?.length === 0);
 
   onMounted(async () => {
-    if (codePostal.value && /^\d{5}$/.test(codePostal.value)) {
+    if (codePostalValide.value) {
       communes.value = await usecase.execute(codePostal.value);
     }
   });
