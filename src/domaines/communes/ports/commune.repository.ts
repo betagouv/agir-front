@@ -1,5 +1,5 @@
-export type Communes = string[];
+export type Commune = { codeEpci: string; label: string };
 
 export interface CommuneRepository {
-  getCommunes(codePostal: string): Promise<Communes>;
+  getCommunes(codePostal: string): Promise<Commune[]>;
 }

@@ -18,6 +18,7 @@ describe('Fichier de tests concernant la récuperations des informations du loge
     const usecase = new RecupererInformationLogementUseCase(
       new MockLogementRepository({
         codePostal: '75001',
+        codeEpci: '75021',
         commune_utilisee_dans_le_compte: 'PARIS 01',
         commune_label: 'Paris 01',
         adultes: 2,
@@ -48,6 +49,7 @@ describe('Fichier de tests concernant la récuperations des informations du loge
           numeroRue: '34',
           rue: "avenue de l'Opéra",
           codePostal: '75001',
+          codeEpci: '75021',
           commune_utilisee_dans_le_compte: 'PARIS 01',
           commune_label: 'Paris 01',
           adultes: 2,

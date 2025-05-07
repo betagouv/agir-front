@@ -117,7 +117,7 @@
           commune: feature.properties.city,
           departement: feature.properties.context,
           codePostal: feature.properties.postcode,
-          codeEPCI: feature.properties.citycode,
+          codeEpci: feature.properties.citycode,
           coordonnees: {
             latitude: feature.geometry.coordinates[1],
             longitude: feature.geometry.coordinates[0],

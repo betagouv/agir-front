@@ -25,10 +25,8 @@
         />
         <InputCodePostal
           v-else
-          :default-value="logementViewModel.codePostal"
-          :default-select-value="logementViewModel.commune_utilisee_dans_le_compte"
-          v-model="logementViewModel.codePostal"
-          @update:selectedCommune="logementViewModel.commune_utilisee_dans_le_compte = $event"
+          v-model:code-postal="logementViewModel.codePostal"
+          v-model:code-epci="logementViewModel.codeEpci"
           @update:isCodePostalEnErreur="isCodePostalEnErreur = $event"
         />
       </div>
@@ -145,6 +143,7 @@
     type: Object,
     required: true,
   });
+
   const barreDeRechercheViewModel = ref<BarreDeRechercheViewModel>();
   new BarreDeRecherchePresenterImpl(vm => (barreDeRechercheViewModel.value = vm)).presente({
     codePostal: logementViewModel.value?.codePostal,
@@ -154,8 +153,8 @@
     numeroRue: logementViewModel.value?.numeroRue,
     coordonnees: logementViewModel.value?.coordonnees,
   });
-  const adresse = ref<Adresse>();
   const recherche = ref<string>(barreDeRechercheViewModel.value?.recherche ?? '');
+  const adresse = ref<Adresse>();
 
   const { alerte, afficherAlerte } = useAlerte();
 
@@ -177,23 +176,27 @@
     }
 
     const usecase = new PatcherInformationLogementUsecase(new LogementRepositoryAxios());
-    usecase.execute(utilisateurStore().utilisateur.id, {
-      adultes: logementViewModel.value.adultes,
-      enfants: logementViewModel.value.enfants,
-      residence: logementViewModel.value.residence.valeur,
-      superficie: logementViewModel.value.superficie.valeur,
-      proprietaire: logementViewModel.value.proprietaire.valeur,
-      plusDeQuinzeAns: logementViewModel.value.plusDeQuinzeAns.valeur,
-      dpe: logementViewModel.value.dpe.valeur,
-      coordonnees: adresse.value?.coordonnees,
-      rue: adresse.value?.rue,
-      numeroRue: adresse.value?.numeroRue,
-      codePostal: adresse.value?.codePostal ?? logementViewModel.value.codePostal,
-      commune_utilisee_dans_le_compte:
-        adresse.value?.commune.toUpperCase() ?? logementViewModel.value.commune_utilisee_dans_le_compte,
-    });
-
-    afficherAlerte('success', 'Succès', 'Vos informations ont été correctement mises à jour.');
+    usecase
+      .execute(utilisateurStore().utilisateur.id, {
+        adultes: logementViewModel.value.adultes,
+        enfants: logementViewModel.value.enfants,
+        residence: logementViewModel.value.residence.valeur,
+        superficie: logementViewModel.value.superficie.valeur,
+        proprietaire: logementViewModel.value.proprietaire.valeur,
+        plusDeQuinzeAns: logementViewModel.value.plusDeQuinzeAns.valeur,
+        dpe: logementViewModel.value.dpe.valeur,
+        coordonnees: adresse.value?.coordonnees,
+        rue: adresse.value?.rue,
+        numeroRue: adresse.value?.numeroRue,
+        codePostal: adresse.value?.codePostal ?? logementViewModel.value.codePostal,
+        codeEpci: adresse.value?.codeEpci ?? logementViewModel.value.codeEpci,
+      })
+      .then(() => {
+        afficherAlerte('success', 'Succès', 'Vos informations ont été correctement mises à jour.');
+      })
+      .catch(() => {
+        afficherAlerte('error', 'Erreur', 'Une erreur interne est survenue. Veuillez réessayer plus tard.');
+      });
 
     const alertElement = document.getElementById('scroll-to-alerte');
     if (alertElement) {

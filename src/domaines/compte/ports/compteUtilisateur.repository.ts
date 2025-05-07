@@ -33,7 +33,7 @@ export interface CompteUtilisateurRepository {
   validationOnboardingPostCreationCompte(
     idUtilisateur: string,
     pseudo: string,
-    commune: string,
+    codeEpci: string,
     codePostal: string,
     dateNaissance?: {
       jour: number;

@@ -13,12 +13,12 @@ export class RecupererStatistiquesEndroitMaifUsecase {
   async execute(
     utilisateurId: string,
     commune: string,
-    codeEPCI: string,
+    codeEpci: string,
     statistiquesCommuneMaifPresenter: StatistiquesCommuneMaifPresenter,
   ): Promise<void> {
     const statistiquesCommune = await this.simulationMaifRepository.recupererStatistiquesEndroit(
       utilisateurId,
-      codeEPCI,
+      codeEpci,
     );
     statistiquesCommuneMaifPresenter.presente({ commune, ...statistiquesCommune });
   }

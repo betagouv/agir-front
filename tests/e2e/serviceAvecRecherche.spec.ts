@@ -118,7 +118,7 @@ test.describe('PageServiceLongueVieAuxObjets', () => {
               sources: ['Longue Vie Aux Objets', 'ADEME', 'Communauté Longue Vie Aux Objets'],
             },
           ],
-          encore_plus_resultats_dispo: false,
+          encore_plus_resultats_dispo: true,
         }),
       });
     });
