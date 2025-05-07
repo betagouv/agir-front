@@ -69,7 +69,7 @@
   <CarteExterne
     :lien="{ url: 'https://auxalentours.maif.fr/', urlAffichee: 'https://auxalentours.maif.fr/' }"
     class="shadow fr-mb-2w"
-    description="Exposition aux risques climatiques, services de proximité, prix de l’immobilier… Retrouvez toutes les informations utiles aux alentours de votre adresse !"
+    description="Exposition aux risques climatiques, services de proximité, prix de l’immobilier… Retrouvez toutes les informations utiles aux alentours de votre adresse&nbsp;!"
     image-src="/maif-aux-alentours.webp"
     titre="MAIF - Aux alentours"
   />

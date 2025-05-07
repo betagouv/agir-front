@@ -6,7 +6,7 @@
           <span class="display-block text--normal fr-text--sm fr-mb-0 text--italic">Proposé par</span>
           <a :href="lien.url" target="_blank" rel="noopener noreferrer">{{ titre }}</a>
         </h3>
-        <p class="fr-card__desc" v-text="description" />
+        <p class="fr-card__desc" v-html="description" />
         <div class="fr-card__end">
           <p class="fr-card__detail fr-icon-links-fill" v-text="lien.urlAffichee"></p>
         </div>
