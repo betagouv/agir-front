@@ -42,8 +42,7 @@
           :disabled="communes.length === 0"
           @change="updateSelectedCommune"
         >
-          <option value="" selected disabled hidden>Selectionnez une option</option>
-          // ???
+          <option value="" :selected="!defaultSelectValue" disabled hidden>Selectionnez une option</option>
           <option
             :value="commune"
             :selected="defaultSelectValue === commune"
