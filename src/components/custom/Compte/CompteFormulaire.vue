@@ -38,7 +38,6 @@
             name="pseudo"
             @blur="onValidationPseudo()"
             :maxlength="21"
-            :minlength="3"
           />
         </div>
         <div class="fr-col-lg-6 fr-col-12">

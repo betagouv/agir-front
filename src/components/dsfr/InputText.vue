@@ -5,7 +5,7 @@
       <span v-if="description" class="fr-hint-text">{{ description }}</span>
     </label>
     <input
-      aria-describedby="text-input-error-desc-error"
+      :aria-describedby="erreur && erreur.afficher ? `text-input-error-desc-error` : ''"
       :autocomplete="autocomplete"
       :id="name"
       :autofocus="autofocus"

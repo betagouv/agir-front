@@ -16,9 +16,9 @@
   </div>
 
   <Teleport to="body">
-    <Modale :id="modaleId" :is-footer-actions="true" :radius="false" label="Modale de suppression de compte">
+    <Modale :id="modaleId" :is-footer-actions="true" :radius="false" labelId="label-id">
       <template v-slot:contenu>
-        <h1 :id="modaleId" class="fr-h4 fr-modal__title">Veuillez confirmer la suppression du compte</h1>
+        <h1 id="label-id" class="fr-h4 fr-modal__title">Veuillez confirmer la suppression du compte</h1>
         <p>Voulez-vous vraiment supprimer votre compte ainsi que les données associées ?</p>
         <p><strong>Attention : Aucune donnée ne pourra être récupérée.</strong></p>
       </template>

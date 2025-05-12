@@ -2,7 +2,7 @@
   <div>
     <fieldset
       :id="`date-naissance-${keyName}-fieldset`"
-      :aria-labelledby="`date-naissance-${keyName}-fieldset-legend date-naissance-${keyName}-${cleDateDeNaissance.DATE_NEXISTE_PAS}-error`"
+      :aria-labelledby="`date-naissance-${keyName}-fieldset-legend ${statusErreurs.erreurFieldset ? `date-naissance-${keyName}-${cleDateDeNaissance.DATE_NEXISTE_PAS}-error` : ''}`"
       class="fr-fieldset"
       :class="statusErreurs?.afficher ? 'fr-fieldset--error' : ''"
       role="group"
@@ -26,7 +26,9 @@
             autocomplete="bday-day"
             ref="jourInputRef"
             :id="`date-naissance-${keyName}-${cleDateDeNaissance.JOUR}`"
-            :aria-describedby="`date-naissance-${keyName}-${cleDateDeNaissance.JOUR}-error`"
+            :aria-describedby="
+              statusErreurs.erreurJour ? `date-naissance-${keyName}-${cleDateDeNaissance.JOUR}-error` : ''
+            "
             v-model="dateDeNaissance.jour"
             :disabled="disabled"
             class="fr-input"
@@ -47,7 +49,9 @@
             autocomplete="bday-month"
             ref="moisInputRef"
             :id="`date-naissance-${keyName}-${cleDateDeNaissance.MOIS}`"
-            :aria-describedby="`date-naissance-${keyName}-${cleDateDeNaissance.MOIS}-error`"
+            :aria-describedby="
+              statusErreurs.erreurMois ? `date-naissance-${keyName}-${cleDateDeNaissance.MOIS}-error` : ''
+            "
             v-model="dateDeNaissance.mois"
             :disabled="disabled"
             class="fr-input"
@@ -70,7 +74,9 @@
             autocomplete="bday-year"
             ref="anneeInputRef"
             :id="`date-naissance-${keyName}-${cleDateDeNaissance.ANNEE}`"
-            :aria-describedby="`date-naissance-${keyName}-${cleDateDeNaissance.ANNEE}-error`"
+            :aria-describedby="
+              statusErreurs.erreurJour ? `date-naissance-${keyName}-${cleDateDeNaissance.ANNEE}-error` : ''
+            "
             v-model="dateDeNaissance.annee"
             :disabled="disabled"
             class="fr-input"

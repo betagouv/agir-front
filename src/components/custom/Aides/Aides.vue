@@ -27,6 +27,7 @@
   import GrilleAidesDUneAction from '@/components/custom/Aides/GrilleAidesDUneAction.vue';
   import InputCheckbox from '@/components/dsfr/InputCheckbox.vue';
   import { AidesViewModel } from '@/domaines/aides/ports/chargementAides.presenter';
+  import { nettoyerEtGarderLettres } from '@/shell/nettoyerEtGarderLettres';
 
   const route = useRoute();
 
@@ -35,7 +36,7 @@
   }>();
 
   const optionsCheckbox = Object.keys(props.aidesGroupesParCategorie).map(option => ({
-    id: option,
+    id: nettoyerEtGarderLettres(option),
     label: option,
     checked: false,
   }));

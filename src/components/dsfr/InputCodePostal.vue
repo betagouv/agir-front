@@ -15,7 +15,7 @@
           name="codePostal"
           id="codePostal"
           required
-          aria-describedby="text-input-error-desc-error-invalide text-input-error-desc-error-commune"
+          :aria-describedby="`${!codePostalValide ? 'text-input-error-desc-error-invalide' : ''} ${codePostalNexistePas ? 'text-input-error-desc-error-commune' : ''}`"
           type="text"
           @input="updateValue"
           :value="defaultValue"
@@ -43,6 +43,7 @@
           @change="updateSelectedCommune"
         >
           <option value="" selected disabled hidden>Selectionnez une option</option>
+          // ???
           <option
             :value="commune"
             :selected="defaultSelectValue === commune"

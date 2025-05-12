@@ -1,5 +1,5 @@
 <template>
-  <dialog :aria-labelledby="label" :id="id" class="fr-modal">
+  <dialog :aria-labelledby="labelId" :id="id" class="fr-modal">
     <div class="fr-container fr-container--fluid fr-container-md">
       <div class="fr-grid-row fr-grid-row--center">
         <div :class="`fr-col-12 ${modaleSize(size)}`">
@@ -24,7 +24,7 @@
   withDefaults(
     defineProps<{
       id: string;
-      label: string;
+      labelId: string;
       radius: boolean;
       isFooterActions: boolean;
       size?: 's' | 'sm' | 'm';

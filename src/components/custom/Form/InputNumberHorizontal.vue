@@ -3,7 +3,6 @@
     <input
       :class="inputSize()"
       class="fr-input fr-mr-1w"
-      pattern="[0-9]*"
       inputmode="numeric"
       type="number"
       :id="name"

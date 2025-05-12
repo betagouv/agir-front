@@ -14,7 +14,7 @@
           @keydown="handleKeydown($event)"
         >
           <span class="personna">
-            <img :src="item.imgPersonna" width="26px" height="26px" class="border-radius--full" alt="" />
+            <img :src="item.imgPersonna" width="26" height="26" class="border-radius--full" alt="" />
             {{ item.personna }}
           </span>
           <span class="fr-text--xl fr-text--bold fr-mb-0">

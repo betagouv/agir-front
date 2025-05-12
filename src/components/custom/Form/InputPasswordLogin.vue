@@ -4,7 +4,6 @@
     <div class="fr-input-wrap">
       <input
         class="fr-password__input fr-input"
-        aria-describedby="password-input-messages"
         aria-required="true"
         name="password"
         autocomplete="current-password"
