@@ -64,17 +64,17 @@ export class SimulateurMaifRepositoryAxios implements SimulateurMaifRepository {
       pourcentageSurfaceInondation: response.data.pourcentage_surface_inondation,
       pourcentageSurfaceSecheresseGeotech: response.data.pourcentage_surface_secheresse_geotech,
     };
-    const adresse: AdresseDansLeCompte = {
-      codePostal: response.data.code_postal,
-      commune: response.data.commune,
-      communeLabel: response.data.commune_label,
-      rue: response.data.rue,
-      numeroRue: response.data.numero_rue,
-      coordonnees: {
+    const adresse = new AdresseDansLeCompte(
+      response.data.code_postal,
+      response.data.commune,
+      response.data.commune_label,
+      response.data.rue,
+      response.data.numero_rue,
+      {
         latitude: response.data.latitude,
         longitude: response.data.longitude,
       },
-    };
+    );
     return { statistiquesCommune, adresseDansLeCompte: adresse };
   }
 

@@ -5,20 +5,21 @@
       :sources="actionSimulateurViewModel.sources"
     />
 
-    <!--    <KyCsAction-->
-    <!--      :action-id="actionSimulateurViewModel.actionId"-->
-    <!--      :idEnchainementKycs="actionSimulateurViewModel.idEnchainementKYCs"-->
-    <!--      :type-action="TypeAction.SIMULATEUR"-->
-    <!--      class="fr-px-2w"-->
-    <!--    >-->
-    <!--      <template v-slot:fin>-->
-    <!--        <SimulationResultatVoiture v-if="actionSimulateurViewModel.actionId === 'action_simulateur_voiture'" />-->
-    <!--      </template>-->
-    <!--    </KyCsAction>-->
+    <KyCsAction
+      v-if="actionSimulateurViewModel.actionId === 'action_simulateur_voiture'"
+      :action-id="actionSimulateurViewModel.actionId"
+      :idEnchainementKycs="actionSimulateurViewModel.idEnchainementKYCs"
+      :type-action="TypeAction.SIMULATEUR"
+      class="fr-px-2w"
+    >
+      <template v-slot:fin>
+        <SimulationResultatVoiture v-if="actionSimulateurViewModel.actionId === 'action_simulateur_voiture'" />
+      </template>
+    </KyCsAction>
 
-    <SimulationMaif v-if="actionSimulateurViewModel.actionId === 'action_simulateur_voiture'" />
+    <SimulationMaif v-else-if="actionSimulateurViewModel.actionId === 'action_simulateur_maif'" />
 
-    <!--    <ActionAides :aides="actionSimulateurViewModel.aides" />-->
+    <ActionAides :aides="actionSimulateurViewModel.aides" />
   </section>
 </template>
 

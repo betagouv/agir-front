@@ -16,7 +16,10 @@ export class CatalogueActionsPresenterImpl extends ActionsPresenterImpl implemen
 
   async presenteCatalogue(catalogueActions: CatalogueActions): Promise<void> {
     const actionsFiltrees = catalogueActions.actions.filter(
-      action => action.type !== TypeAction.SIMULATEUR || action.code === 'action_simulateur_voiture',
+      action =>
+        action.type !== TypeAction.SIMULATEUR ||
+        action.code === 'action_simulateur_voiture' ||
+        action.code === 'action_simulateur_maif',
     );
     await super.presente(actionsFiltrees);
     this.filtresCallBack({

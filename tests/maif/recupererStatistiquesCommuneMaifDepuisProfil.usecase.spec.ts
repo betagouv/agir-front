@@ -1,7 +1,7 @@
 import {
+  AdresseDansLeCompte,
   RecupererAdresseEtStatistiquesCommuneMaifUsecase,
   StatistiquesCommuneEtAdresse,
-  StatistiquesCommuneMaif,
 } from '@/domaines/simulationMaif/recupererStatistiquesCommuneMaifDepuisProfil.usecase';
 import { SimulateurMaifRepository } from '@/domaines/simulationMaif/ports/simulateurMaif.repository';
 import { StatistiquesCommunesMaifPresenterImpl } from '@/domaines/simulationMaif/adapters/statistiquesCommuneMaif.presenter.impl';
@@ -36,17 +36,10 @@ describe('Fichier de tests concernant la récupération des statistiques MAIF de
         pourcentageSurfaceSecheresseGeotech: 25.5,
         pourcentageSurfaceInondation: 15.3,
       },
-      adresseDansLeCompte: {
-        commune: 'PARIS',
-        communeLabel: 'Paris',
-        rue: "Avenue de l'Opéra",
-        numeroRue: '34',
-        codePostal: '75002',
-        coordonnees: {
-          latitude: 48.8606,
-          longitude: 2.3376,
-        },
-      },
+      adresseDansLeCompte: new AdresseDansLeCompte('75002', 'PARIS', 'Paris', "Avenue de l'Opéra", '34', {
+        latitude: 48.8606,
+        longitude: 2.3376,
+      }),
     };
 
     const simulateurMaifRepository = new SimulateurMaifRepositoryMock(statistiquesAttendues);

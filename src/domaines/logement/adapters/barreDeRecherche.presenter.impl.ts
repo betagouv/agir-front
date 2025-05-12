@@ -13,12 +13,12 @@ export class BarreDeRecherchePresenterImpl implements BarreDeRecherchePresenter 
   constructor(private barreDeRechercheViewModel: (viewModel: BarreDeRechercheViewModel) => void) {}
 
   presente(adresse: AdresseDansLeCompte): void {
-    if (!adresse.coordonnees || !adresse.rue || !adresse.numeroRue) return;
+    if (!adresse.estAdresseComplete()) return;
 
     this.barreDeRechercheViewModel({
       coordonnees: {
-        latitude: adresse.coordonnees.latitude,
-        longitude: adresse.coordonnees.longitude,
+        latitude: adresse.latitude,
+        longitude: adresse.longitude,
       },
       recherche: `${adresse.numeroRue} ${adresse.rue}, ${adresse.communeLabel} (${adresse.codePostal})`,
     });
