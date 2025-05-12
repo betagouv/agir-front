@@ -2,18 +2,20 @@
   <section class="fr-mb-4w fr-p-1v">
     <h2 id="label-barre-de-recherche" class="fr-h3">Choisissez une adresse</h2>
     <ServiceBarreDeRechercheAdresse
-      @update:coordonnees="chargerDonneesPourNouvelleAdresse"
       v-model:adresse="adresse"
       v-model:coordonnees="coordonnees"
       v-model:recherche="recherche"
       label-id="label-barre-de-recherche"
+      @update:coordonnees="chargerDonneesPourNouvelleAdresse"
     />
 
     <Callout
       v-if="avecAdressePrivee"
+      :button="{
+        text: 'Choisir comme adresse principale',
+        onClick: definirAdressePrincipale,
+      }"
       :icone-information="false"
-      :on-click="definirAdressePrincipale"
-      button-text="Choisir comme adresse principale"
       class="fr-mt-3w"
       texte="Voulez-vous utiliser cette adresse comme votre adresse principale à l’avenir&nbsp;?"
     />
