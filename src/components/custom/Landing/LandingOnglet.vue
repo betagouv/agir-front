@@ -17,9 +17,9 @@
             <img :src="item.imgPersonna" width="26" height="26" class="border-radius--full" alt="" />
             {{ item.personna }}
           </span>
-          <span class="fr-text--xl fr-text--bold fr-mb-0">
+          <q class="fr-text--xl fr-text--bold fr-mb-0">
             {{ item.titre }}
-          </span>
+          </q>
         </button>
       </li>
     </ul>
@@ -114,5 +114,9 @@
   button[role='tab'][aria-selected='true'] {
     opacity: 1;
     border-bottom: 3px solid var(--blue-france-sun-113-625);
+  }
+
+  q {
+    quotes: none;
   }
 </style>
