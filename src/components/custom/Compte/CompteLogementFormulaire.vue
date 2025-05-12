@@ -25,8 +25,8 @@
         />
         <InputCodePostal
           v-else
-          v-model:code-postal="logementViewModel.codePostal"
           v-model:code-epci="logementViewModel.codeEpci"
+          v-model:code-postal="logementViewModel.codePostal"
           @update:isCodePostalEnErreur="isCodePostalEnErreur = $event"
         />
       </div>
@@ -136,6 +136,7 @@
   import { LogementRepositoryAxios } from '@/domaines/logement/adapters/logement.repository.axios';
   import { PatcherInformationLogementUsecase } from '@/domaines/logement/patcherInformationLogement.usecase';
   import { LogementViewModel } from '@/domaines/logement/ports/logement.presenter';
+  import { AdresseDansLeCompte } from '@/domaines/simulationMaif/recupererStatistiquesCommuneMaifDepuisProfil.usecase';
   import { Adresse } from '@/shell/coordonneesType';
   import { utilisateurStore } from '@/store/utilisateur';
 
@@ -145,14 +146,16 @@
   });
 
   const barreDeRechercheViewModel = ref<BarreDeRechercheViewModel>();
-  new BarreDeRecherchePresenterImpl(vm => (barreDeRechercheViewModel.value = vm)).presente({
-    codePostal: logementViewModel.value?.codePostal,
-    commune: logementViewModel.value?.commune_utilisee_dans_le_compte,
-    communeLabel: logementViewModel.value?.commune_label,
-    rue: logementViewModel.value?.rue,
-    numeroRue: logementViewModel.value?.numeroRue,
-    coordonnees: logementViewModel.value?.coordonnees,
-  });
+  new BarreDeRecherchePresenterImpl(vm => (barreDeRechercheViewModel.value = vm)).presente(
+    new AdresseDansLeCompte(
+      logementViewModel.value?.codePostal,
+      logementViewModel.value?.commune_utilisee_dans_le_compte,
+      logementViewModel.value?.commune_label,
+      logementViewModel.value?.rue,
+      logementViewModel.value?.numeroRue,
+      logementViewModel.value?.coordonnees,
+    ),
+  );
   const recherche = ref<string>(barreDeRechercheViewModel.value?.recherche ?? '');
   const adresse = ref<Adresse>();
 

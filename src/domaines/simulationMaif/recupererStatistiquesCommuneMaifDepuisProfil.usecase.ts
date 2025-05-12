@@ -10,14 +10,48 @@ export type StatistiquesCommuneMaif = {
   pourcentageSurfaceInondation: number;
 };
 
-export type AdresseDansLeCompte = {
-  codePostal: string;
-  commune: string;
-  communeLabel: string;
-  rue: string;
-  numeroRue: string;
-  coordonnees: Coordonnees;
-};
+export class AdresseDansLeCompte {
+  constructor(
+    private readonly _codePostal: string,
+    private readonly _commune: string,
+    private readonly _communeLabel: string,
+    private readonly _rue: string,
+    private readonly _numeroRue: string,
+    private readonly coordonnees: Coordonnees,
+  ) {}
+
+  get codePostal(): string {
+    return this._codePostal;
+  }
+
+  get commune(): string {
+    return this._commune;
+  }
+
+  get communeLabel(): string {
+    return this._communeLabel;
+  }
+
+  get rue(): string {
+    return this._rue;
+  }
+
+  get numeroRue(): string {
+    return this._numeroRue;
+  }
+
+  get latitude(): number {
+    return this.coordonnees.latitude;
+  }
+
+  get longitude(): number {
+    return this.coordonnees.longitude;
+  }
+
+  estAdresseComplete(): boolean {
+    return !(!this.coordonnees || !this._rue || !this._numeroRue);
+  }
+}
 
 export type StatistiquesCommuneEtAdresse = {
   statistiquesCommune: StatistiquesCommuneMaif;
