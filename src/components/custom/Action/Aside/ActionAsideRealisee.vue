@@ -6,8 +6,8 @@
     </div>
 
     <div class="border-radius--md background--vert-points grayscaled fr-p-1w">
-      <span class="flex align-items--center text--bold" :aria-label="`Vous avez déjà obtenu ${points} points`">
-        <img src="/ic_score.svg" alt="points" class="full-width full-height fr-mr-1v" /> {{ points }}
+      <span class="flex align-items--center text--bold" :aria-label="`${points} points ont déjà été obtenus`">
+        <img src="/ic_score.svg" alt="" class="full-width full-height fr-mr-1v" /> {{ points }}
       </span>
     </div>
   </div>

@@ -3,7 +3,6 @@
     <p class="text--bleu fr-grid-row align-items--center fr-py-2w">
       <button
         v-if="questionViewModel.etapeCourante > 1"
-        :title="`Retour à l'étape précédente`"
         class="fr-btn fr-btn--tertiary-no-outline fr-icon-arrow-left-line"
         @click="recupererPrecendeteKYC"
       >

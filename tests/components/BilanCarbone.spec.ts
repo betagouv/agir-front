@@ -114,21 +114,30 @@ describe('BilanCarbone', () => {
 
       const carteThematique1 = page.getByRole('link', { name: '🚅 Transports' });
       expect(carteThematique1).toBeDefined();
-      expect(carteThematique1).toHaveProperty('title', "Allez sur l'estimation du bilan 🚅 Transports");
+      expect(carteThematique1).toHaveProperty(
+        'title',
+        '🚅 Transports: affiner votre empreinte écologique sur cette thématique',
+      );
       const progressThematique1 = page.getByRole('progressbar', { name: 'Progression transport' });
       expect(progressThematique1).toBeDefined();
       expect(progressThematique1.getAttribute('aria-valuenow')).toBe('100');
 
       const carteThematique2 = page.getByRole('link', { name: '🥦 Alimentation' });
       expect(carteThematique2).toBeDefined();
-      expect(carteThematique2).toHaveProperty('title', "Allez sur l'estimation du bilan 🥦 Alimentation");
+      expect(carteThematique2).toHaveProperty(
+        'title',
+        '🥦 Alimentation: affiner votre empreinte écologique sur cette thématique',
+      );
       const progressThematique2 = page.getByRole('progressbar', { name: 'Progression alimentation' });
       expect(progressThematique2).toBeDefined();
       expect(progressThematique2.getAttribute('aria-valuenow')).toBe('33');
 
       const carteThematique3 = page.getByRole('link', { name: '🏡 Logement' });
       expect(carteThematique3).toBeDefined();
-      expect(carteThematique3).toHaveProperty('title', "Allez sur l'estimation du bilan 🏡 Logement");
+      expect(carteThematique3).toHaveProperty(
+        'title',
+        '🏡 Logement: affiner votre empreinte écologique sur cette thématique',
+      );
       const progressThematique3 = page.getByRole('progressbar', { name: 'Progression logement' });
       expect(progressThematique3).toBeDefined();
       expect(progressThematique3.getAttribute('aria-valuenow')).toBe('12');
@@ -349,28 +358,40 @@ describe('BilanCarbone', () => {
     it('affiche les cartes terminées pour affiner son bilan', () => {
       const carteThematique1 = page.getByRole('link', { name: '🚅 Transports' });
       expect(carteThematique1).toBeDefined();
-      expect(carteThematique1).toHaveProperty('title', "Allez sur l'estimation du bilan 🚅 Transports");
+      expect(carteThematique1).toHaveProperty(
+        'title',
+        '🚅 Transports: affiner votre empreinte écologique sur cette thématique',
+      );
       const progressThematique1 = page.getByRole('progressbar', { name: 'Progression transport' });
       expect(progressThematique1).toBeDefined();
       expect(progressThematique1.getAttribute('aria-valuenow')).toBe('100');
 
       const carteThematique2 = page.getByRole('link', { name: '🥦 Alimentation' });
       expect(carteThematique2).toBeDefined();
-      expect(carteThematique2).toHaveProperty('title', "Allez sur l'estimation du bilan 🥦 Alimentation");
+      expect(carteThematique2).toHaveProperty(
+        'title',
+        '🥦 Alimentation: affiner votre empreinte écologique sur cette thématique',
+      );
       const progressThematique2 = page.getByRole('progressbar', { name: 'Progression alimentation' });
       expect(progressThematique2).toBeDefined();
       expect(progressThematique2.getAttribute('aria-valuenow')).toBe('100');
 
       const carteThematique3 = page.getByRole('link', { name: '🏡 Logement' });
       expect(carteThematique3).toBeDefined();
-      expect(carteThematique3).toHaveProperty('title', "Allez sur l'estimation du bilan 🏡 Logement");
+      expect(carteThematique3).toHaveProperty(
+        'title',
+        '🏡 Logement: affiner votre empreinte écologique sur cette thématique',
+      );
       const progressThematique3 = page.getByRole('progressbar', { name: 'Progression logement' });
       expect(progressThematique3).toBeDefined();
       expect(progressThematique3.getAttribute('aria-valuenow')).toBe('100');
 
       const carteThematique4 = page.getByRole('link', { name: '🛒 Consommation durable' });
       expect(carteThematique4).toBeDefined();
-      expect(carteThematique4).toHaveProperty('title', "Allez sur l'estimation du bilan 🛒 Consommation durable");
+      expect(carteThematique4).toHaveProperty(
+        'title',
+        '🛒 Consommation durable: affiner votre empreinte écologique sur cette thématique',
+      );
       const progressThematique4 = page.getByRole('progressbar', { name: 'Progression logement' });
       expect(progressThematique4).toBeDefined();
       expect(progressThematique4.getAttribute('aria-valuenow')).toBe('100');

@@ -25,7 +25,7 @@
         <router-link
           :to="url"
           class="fr-link fr-icon-arrow-right-line fr-link--icon-right width--fit-content"
-          :title="titre"
+          :title="`Continuer la lecture de ${titre}`"
         >
           Continuer la lecture
         </router-link>

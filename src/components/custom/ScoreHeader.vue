@@ -4,6 +4,7 @@
       :aria-current="route.name === RouteClassementName.CLASSEMENT ? 'page' : null"
       :to="{ name: RouteClassementName.CLASSEMENT }"
       class="tag__progression tag__progression--score fr-text--bold"
+      :title="`${gamificationViewModel.points} points récoltés : voir mon classement`"
     >
       {{ gamificationViewModel.points }} <img alt="points récoltés" src="/ic_score.svg" width="16" />
     </router-link>

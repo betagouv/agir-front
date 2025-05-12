@@ -23,7 +23,7 @@
             id: contentId,
           },
         }"
-        :title="`Allez sur l'estimation du bilan ${label}`"
+        :title="`${label}: affiner votre empreinte écologique sur cette thématique`"
       >
         {{ label }}
       </router-link>

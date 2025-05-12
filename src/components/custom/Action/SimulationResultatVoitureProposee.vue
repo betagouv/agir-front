@@ -9,16 +9,17 @@
       <h3 class="fr-h4" v-html="resultatSimulationVoiture.typeDeVoiture" />
 
       <p>
-        Coût annuel: <span class="text--bold">{{ resultatSimulationVoiture.coutAnnuel.montant }}</span
+        Coût annuel:
+        <span class="text--bold">{{ resultatSimulationVoiture.coutAnnuel.montant }}</span
         >&nbsp;€
 
         <span
-          :aria-label="`Différence par rapport à votre véhicule actuel : ${resultatSimulationVoiture.coutAnnuel.difference}`"
+          :aria-label="`${resultatSimulationVoiture.coutAnnuel.difference} euros de différence par rapport à votre véhicule actuel`"
           :class="resultatSimulationVoiture.coutAnnuel.style"
           class="fr-badge fr-badge--no-icon"
         >
-          {{ resultatSimulationVoiture.coutAnnuel.label }}</span
-        >
+          {{ resultatSimulationVoiture.coutAnnuel.label }}
+        </span>
       </p>
 
       <p>
@@ -26,7 +27,7 @@
         >&nbsp;kgCO2e
 
         <span
-          :aria-label="`Différence par rapport à votre véhicule actuel : ${resultatSimulationVoiture.emission.difference}`"
+          :aria-label="`${resultatSimulationVoiture.emission.difference} kilogrammes de CO2 équivalents de différence par rapport à votre véhicule actuel`"
           :class="resultatSimulationVoiture.emission.style"
           class="fr-badge fr-badge--no-icon"
         >
