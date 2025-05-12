@@ -169,7 +169,7 @@
   );
   const isCodePostalEnErreur = ref(false);
   const codePostalEstValide = computed(() => {
-    return !isCodePostalEnErreur.value && logementViewModel.value.commune_utilisee_dans_le_compte;
+    return !isCodePostalEnErreur.value && logementViewModel.value.codeEpci !== undefined;
   });
 
   const enregistrerLesInformations = () => {
