@@ -39,18 +39,6 @@
           </span>
         </span>
         <div class="cms__content" v-html="aide.contenu" />
-        <h3 class="fr-h6">En savoir plus</h3>
-        <p>
-          Pour plus d'information, vous pouvez vous rendre sur la page dédiée
-          <a
-            :href="aide.urlSource"
-            rel="noopener external"
-            target="_blank"
-            @click="trackAide(aide.id, AIDE_TRACKING.INFOS)"
-          >
-            en cliquant ici
-          </a>
-        </p>
         <div class="flex align-items--center gap--small">
           <a
             v-if="aide.urlCommencerVotreDemarche"
