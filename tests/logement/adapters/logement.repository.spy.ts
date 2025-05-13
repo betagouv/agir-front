@@ -1,7 +1,12 @@
 import { Logement } from '@/domaines/logement/recupererInformationLogement.usecase';
 import { LogementRepository } from '@/domaines/logement/ports/logement.repository';
+import { Adresse } from '@/domaines/logement/recupererAdressePourBarreDeRecherche.usecase';
 
 export class LogementRepositorySpy implements LogementRepository {
+  recupererAdresse(utilisateurId: string): Promise<Adresse> {
+    throw new Error('Method not implemented.');
+  }
+
   recupererInformation(_utilisateurId: string): Promise<Logement> {
     throw new Error('Method not implemented.');
   }

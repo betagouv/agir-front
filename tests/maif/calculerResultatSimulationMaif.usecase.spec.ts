@@ -14,11 +14,7 @@ class SimulateurMaifRepositoryMock implements SimulateurMaifRepository {
     return this.resultat;
   }
 
-  async recupererStatistiquesCommuneEtAdresse(): Promise<any> {
-    return { risques: [] };
-  }
-
-  async recupererStatistiquesEndroit(): Promise<any> {
+  async recupererStatistiquesCommune(): Promise<any> {
     return { risques: [] };
   }
 }
@@ -34,12 +30,12 @@ describe('Fichier de tests concernant le calcul du résultat de la simulation MA
     const data: ResultatSimulationMaif = {
       risques: [
         {
-          id: 'score_inondation',
+          id: 'inondation',
           nom: 'Inondation',
           impact: RisqueMaifImpact.MOYEN,
         },
         {
-          id: 'score_secheresse',
+          id: 'secheresse',
           nom: 'Tempête',
           impact: RisqueMaifImpact.FAIBLE,
         },
