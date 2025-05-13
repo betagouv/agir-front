@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.8.1](https://github.com/betagouv/agir-front/compare/v2.8.0...v2.8.1) (2025-05-13)
+
+
+### 👷 Autres changements
+
+* a11y (label, description, ids,) et w3c validator ([#1107](https://github.com/betagouv/agir-front/issues/1107)) ([88f05b5](https://github.com/betagouv/agir-front/commit/88f05b59b19eed8dbb02acf85c691f2806023359))
+
 ## [2.8.0](https://github.com/betagouv/agir-front/compare/v2.7.0...v2.8.0) (2025-05-13)
 
 
