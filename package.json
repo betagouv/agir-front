@@ -22,7 +22,7 @@
     "@gouvfr/dsfr": "1.13.1",
     "@iframe-resizer/vue": "^5.4.6",
     "@sentry/vite-plugin": "^3.4.0",
-    "@sentry/vue": "9.14.0",
+    "@sentry/vue": "9.17.0",
     "@unhead/vue": "^2.0.8",
     "@vue-leaflet/vue-leaflet": "^0.10.1",
     "chart.js": "4.4.9",
