@@ -1,5 +1,6 @@
 import { AxiosFactory, intercept401 } from '@/axios.factory';
 import { LogementRepository } from '@/domaines/logement/ports/logement.repository';
+import { Adresse } from '@/domaines/logement/recupererAdresse.usecase';
 import { Logement } from '@/domaines/logement/recupererInformationLogement.usecase';
 
 export enum TypeLogementApiModel {
@@ -69,6 +70,20 @@ export class LogementRepositoryAxios implements LogementRepository {
       superficie: reponse.data.superficie,
       plusDeQuinzeAns: reponse.data.plus_de_15_ans,
       dpe: reponse.data.dpe,
+      coordonnees: { latitude: reponse.data.latitude, longitude: reponse.data.longitude },
+      numeroRue: reponse.data.numero_rue,
+      rue: reponse.data.rue,
+      codeEpci: reponse.data.code_commune,
+    };
+  }
+
+  @intercept401()
+  async recupererAdresse(utilisateurId: string): Promise<Adresse> {
+    const reponse = await AxiosFactory.getAxios().get<LogementApiModel>(`utilisateurs/${utilisateurId}/logement`);
+    return {
+      codePostal: reponse.data.code_postal,
+      commune_utilisee_dans_le_compte: reponse.data.commune,
+      commune_label: reponse.data.commune_label,
       coordonnees: { latitude: reponse.data.latitude, longitude: reponse.data.longitude },
       numeroRue: reponse.data.numero_rue,
       rue: reponse.data.rue,
