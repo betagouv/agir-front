@@ -67,19 +67,19 @@ export class SimulateurMaifPresenterImpl implements SimulateurMaifPresenter {
 
   recupererLienIllustration(id: string): string | undefined {
     switch (id) {
-      case 'score_secheresse':
+      case 'secheresse':
         return '/maif/argiles.svg';
-      case 'score_inondation':
+      case 'inondation':
         return '/maif/inondations.svg';
-      case 'score_submersion':
+      case 'submersion':
         return '/maif/submersions.svg';
-      case 'score_tempete':
+      case 'tempete':
         return '/maif/tempetes.svg';
-      case 'score_argile':
+      case 'argile':
         return '/maif/argiles.svg';
-      case 'score_seisme':
+      case 'seisme':
         return '/maif/seismes.svg';
-      case 'score_radon':
+      case 'radon':
         return '/maif/radon.svg';
       default:
         return '';

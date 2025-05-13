@@ -4,44 +4,22 @@ import {
   RisqueMaifImpact,
   SimulateurMaifRepository,
 } from '@/domaines/simulationMaif/ports/simulateurMaif.repository';
-import {
-  AdresseDansLeCompte,
-  StatistiquesCommuneEtAdresse,
-  StatistiquesCommuneMaif,
-} from '@/domaines/simulationMaif/recupererStatistiquesCommuneMaifDepuisProfil.usecase';
-import { StatistiquesEndroitMaif } from '@/domaines/simulationMaif/recupererStatistiquesEndroitMaif.usecase';
+import { StatistiquesCommuneMaif } from '@/domaines/simulationMaif/recupererStatistiquesCommuneMaifDepuisProfil.usecase';
 import { Coordonnees } from '@/shell/coordonneesType';
 
 type StatistiquesCommuneApiModel = {
-  nombre_arrets_catnat: number;
-  pourcentage_surface_secheresse_geotech: number;
-  pourcentage_surface_inondation: number;
-
-  code_postal: string;
-  commune: string;
-  commune_label: string;
-  latitude: number;
-  longitude: number;
-  rue: string;
-  numero_rue: string;
+  code_commune: string;
+  nom_commune: string;
+  nombre_catastrophes_naturels: number;
+  pourcentage_commune_risque_inondation: number;
+  pourcentage_commune_risque_secheresse_geotechnique: number;
 };
 
-type RequetesMaifApiModel = {
-  resultats: {
-    id: string;
-    titre: string;
-    pourcentage: number;
-  }[];
-};
-
-type ResultatSimulationMaifApiModel = {
-  resultats: {
-    id: string;
-    titre: string;
-    description: string;
-    niveau_risque: RisqueMaifImpactApiModel;
-  }[];
-};
+type ResultatsSimulationMaifApiModel = {
+  type_risque: string;
+  titre: string;
+  niveau_risque: RisqueMaifImpactApiModel;
+}[];
 
 export enum RisqueMaifImpactApiModel {
   TRES_FAIBLE = 'tres_faible',
@@ -54,68 +32,20 @@ export enum RisqueMaifImpactApiModel {
 
 export class SimulateurMaifRepositoryAxios implements SimulateurMaifRepository {
   @intercept401()
-  async recupererStatistiquesCommuneEtAdresse(utilisateurId: string): Promise<StatistiquesCommuneEtAdresse> {
+  async recupererStatistiquesCommune(utilisateurId: string, codeEpci?: string): Promise<StatistiquesCommuneMaif> {
     const axios = AxiosFactory.getAxios();
 
-    const response = await axios.get<StatistiquesCommuneApiModel>(`/utilisateurs/${utilisateurId}/logement`);
-    const statistiquesCommune: StatistiquesCommuneMaif = {
-      commune: response.data.commune_label,
-      nombreArretsCatnat: response.data.nombre_arrets_catnat,
-      pourcentageSurfaceInondation: response.data.pourcentage_surface_inondation,
-      pourcentageSurfaceSecheresseGeotech: response.data.pourcentage_surface_secheresse_geotech,
-    };
-    const adresse = new AdresseDansLeCompte(
-      response.data.code_postal,
-      response.data.commune,
-      response.data.commune_label,
-      response.data.rue,
-      response.data.numero_rue,
-      {
-        latitude: response.data.latitude,
-        longitude: response.data.longitude,
+    const response = await axios.get<StatistiquesCommuneApiModel>(`/utilisateurs/${utilisateurId}/risques_commune`, {
+      params: {
+        code_commune: codeEpci ?? '',
       },
-    );
-    return { statistiquesCommune, adresseDansLeCompte: adresse };
-  }
-
-  @intercept401()
-  async recupererStatistiquesEndroit(utilisateurId: string, codeEpci: string): Promise<StatistiquesEndroitMaif> {
-    const axios = AxiosFactory.getAxios();
-
-    const responseCatNat = await axios.post<RequetesMaifApiModel>(
-      `/utilisateurs/${utilisateurId}/recherche_services/maif/search2`,
-      {
-        categorie: 'catnat',
-        code_commune: codeEpci,
-      },
-    );
-    const responseSecheresse = await axios.post<RequetesMaifApiModel>(
-      `/utilisateurs/${utilisateurId}/recherche_services/maif/search2`,
-      {
-        categorie: 'zones_secheresse',
-        code_commune: codeEpci,
-      },
-    );
-    const responseInnondation = await axios.post<RequetesMaifApiModel>(
-      `/utilisateurs/${utilisateurId}/recherche_services/maif/search2`,
-      {
-        categorie: 'zones_inondation',
-        code_commune: codeEpci,
-      },
-    );
-
-    await Promise.all([responseCatNat, responseSecheresse, responseInnondation]);
-
-    const pourcentageSurfaceInondation =
-      responseInnondation.data.resultats.find(resultat => resultat.id === 'zone_total')?.pourcentage ?? 0;
-
-    const pourcentageSurfaceSecheresseGeotech =
-      responseSecheresse.data.resultats.find(resultat => resultat.id === 'zone_total')?.pourcentage ?? 0;
+    });
 
     return {
-      nombreArretsCatnat: responseCatNat.data.resultats.length,
-      pourcentageSurfaceInondation,
-      pourcentageSurfaceSecheresseGeotech,
+      commune: response.data.nom_commune,
+      nombreArretsCatnat: response.data.nombre_catastrophes_naturels,
+      pourcentageSurfaceInondation: response.data.pourcentage_commune_risque_inondation,
+      pourcentageSurfaceSecheresseGeotech: response.data.pourcentage_commune_risque_secheresse_geotechnique,
     };
   }
 
@@ -123,20 +53,21 @@ export class SimulateurMaifRepositoryAxios implements SimulateurMaifRepository {
   async recupererResultats(utilisateurId: string, coordonnees: Coordonnees): Promise<ResultatSimulationMaif> {
     const axios = AxiosFactory.getAxios();
 
-    const response = await axios.post<ResultatSimulationMaifApiModel>(
-      `/utilisateurs/${utilisateurId}/recherche_services/maif/search2`,
+    const response = await axios.get<ResultatsSimulationMaifApiModel>(
+      `/utilisateurs/${utilisateurId}/risques_adresse`,
       {
-        categorie: 'score_risque',
-        longitude: coordonnees.longitude,
-        latitude: coordonnees.latitude,
+        params: {
+          longitude: coordonnees.longitude,
+          latitude: coordonnees.latitude,
+        },
       },
     );
 
     return {
-      risques: response.data.resultats.map(risque => ({
+      risques: response.data.map(risque => ({
         nom: risque.titre,
         impact: this.mapRisqueMaifImpactApiModelToRisqueMaifImpact(risque.niveau_risque),
-        id: risque.id,
+        id: risque.type_risque,
       })),
     };
   }

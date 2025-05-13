@@ -137,7 +137,7 @@
   import { PatcherInformationLogementUsecase } from '@/domaines/logement/patcherInformationLogement.usecase';
   import { LogementViewModel } from '@/domaines/logement/ports/logement.presenter';
   import { AdresseDansLeCompte } from '@/domaines/simulationMaif/recupererStatistiquesCommuneMaifDepuisProfil.usecase';
-  import { Adresse } from '@/shell/coordonneesType';
+  import { DonneesAdresseBarreDeRecherche } from '@/shell/coordonneesType';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const logementViewModel = defineModel<LogementViewModel>('logementViewModel', {
@@ -157,7 +157,7 @@
     ),
   );
   const recherche = ref<string>(barreDeRechercheViewModel.value?.recherche ?? '');
-  const adresse = ref<Adresse>();
+  const adresse = ref<DonneesAdresseBarreDeRecherche>();
 
   const { alerte, afficherAlerte } = useAlerte();
 

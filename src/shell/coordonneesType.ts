@@ -1,5 +1,5 @@
 export type Coordonnees = { latitude: number; longitude: number };
-export type Adresse = {
+export type DonneesAdresseBarreDeRecherche = {
   numeroEtRueEtCodePostal: string;
   numeroEtRue: string;
   commune: string;

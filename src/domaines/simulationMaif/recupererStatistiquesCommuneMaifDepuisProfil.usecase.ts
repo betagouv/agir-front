@@ -1,4 +1,3 @@
-import { BarreDeRecherchePresenter } from '@/domaines/logement/ports/barreDeRecherche.presenter';
 import { SimulateurMaifRepository } from '@/domaines/simulationMaif/ports/simulateurMaif.repository';
 import { StatistiquesCommuneMaifPresenter } from '@/domaines/simulationMaif/ports/statistiquesCommuneMaif.presenter';
 import { Coordonnees } from '@/shell/coordonneesType';
@@ -58,17 +57,18 @@ export type StatistiquesCommuneEtAdresse = {
   adresseDansLeCompte: AdresseDansLeCompte;
 };
 
-export class RecupererAdresseEtStatistiquesCommuneMaifUsecase {
+export class RecupererStatistiquesCommuneMaifUsecase {
   constructor(private readonly simulationMaifRepository: SimulateurMaifRepository) {}
 
   async execute(
     utilisateurId: string,
     statistiquesCommuneMaifPresenter: StatistiquesCommuneMaifPresenter,
-    barreDeRecherchePresenter: BarreDeRecherchePresenter,
+    codeEpci?: string,
   ): Promise<void> {
-    const { statistiquesCommune, adresseDansLeCompte } =
-      await this.simulationMaifRepository.recupererStatistiquesCommuneEtAdresse(utilisateurId);
+    const statistiquesCommune = await this.simulationMaifRepository.recupererStatistiquesCommune(
+      utilisateurId,
+      codeEpci,
+    );
     statistiquesCommuneMaifPresenter.presente(statistiquesCommune);
-    barreDeRecherchePresenter.presente(adresseDansLeCompte);
   }
 }

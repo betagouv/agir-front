@@ -73,7 +73,7 @@
     class="shadow fr-mb-2w"
     description="Exposition aux risques climatiques, services de proximité, prix de l’immobilier… Retrouvez toutes les informations utiles aux alentours de votre adresse&nbsp;!"
     image-src="/maif-aux-alentours.webp"
-    titre="MAIF - Aux alentours"
+    titre="Aux Alentours par MAIF"
   />
 </template>
 
@@ -94,6 +94,7 @@
   } from '@/domaines/logement/adapters/barreDeRecherche.presenter.impl';
   import { LogementRepositoryAxios } from '@/domaines/logement/adapters/logement.repository.axios';
   import { PatcherInformationLogementUsecase } from '@/domaines/logement/patcherInformationLogement.usecase';
+  import { RecupererAdressePourBarreDeRechercheUsecase } from '@/domaines/logement/recupererAdresse.usecase';
   import { Logement } from '@/domaines/logement/recupererInformationLogement.usecase';
   import {
     SimulateurMaifPresenterImpl,
@@ -105,63 +106,62 @@
     StatistiquesCommunesMaifPresenterImpl,
   } from '@/domaines/simulationMaif/adapters/statistiquesCommuneMaif.presenter.impl';
   import { CalculerResultatSimulationMaifUsecase } from '@/domaines/simulationMaif/calculerResultatSimulationMaif.usecase';
-  import { RecupererAdresseEtStatistiquesCommuneMaifUsecase } from '@/domaines/simulationMaif/recupererStatistiquesCommuneMaifDepuisProfil.usecase';
-  import { RecupererStatistiquesEndroitMaifUsecase } from '@/domaines/simulationMaif/recupererStatistiquesEndroitMaif.usecase';
-  import { Adresse, Coordonnees } from '@/shell/coordonneesType';
+  import { RecupererStatistiquesCommuneMaifUsecase } from '@/domaines/simulationMaif/recupererStatistiquesCommuneMaifDepuisProfil.usecase';
+  import { DonneesAdresseBarreDeRecherche, Coordonnees } from '@/shell/coordonneesType';
   import { SimulateursSupportes } from '@/shell/simulateursSupportes';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const recherche = ref<string>('');
   const coordonnees = ref<Coordonnees>();
-  const adresse = ref<Adresse>();
-  const resultatsEnChargement = ref<boolean>(false);
-  const chiffresClesEnChargement = ref<boolean>(false);
-  const avecAdressePrivee = ref<boolean>(false);
+  const adresse = ref<DonneesAdresseBarreDeRecherche>();
   const statistiquesCommuneMaifViewModel = ref<StatistiquesCommuneMaifViewModel>();
   const resultatSimulationMaifViewModel = ref<SimulateurMaifViewModel>();
 
-  const simulateurMaifRepository = new SimulateurMaifRepositoryAxios();
-  const recupererAdresseEtStatistiquesCommuneMaifUsecase = new RecupererAdresseEtStatistiquesCommuneMaifUsecase(
-    simulateurMaifRepository,
-  );
-  const recupererStatistiquesEndroitMaifUsecase = new RecupererStatistiquesEndroitMaifUsecase(simulateurMaifRepository);
-  const calculerResultatSimulationMaifUsecase = new CalculerResultatSimulationMaifUsecase(simulateurMaifRepository);
+  const resultatsEnChargement = ref<boolean>(false);
+  const chiffresClesEnChargement = ref<boolean>(false);
+  const avecAdressePrivee = ref<boolean>(false);
   const utilisateurId = utilisateurStore().utilisateur.id;
 
+  const logementRepository = new LogementRepositoryAxios();
+  const simulateurMaifRepository = new SimulateurMaifRepositoryAxios();
+
+  const recupererAdressePourBarreDeRechercheUsecase = new RecupererAdressePourBarreDeRechercheUsecase(
+    logementRepository,
+  );
+  const recupererStatistiquesCommuneMaifUsecase = new RecupererStatistiquesCommuneMaifUsecase(simulateurMaifRepository);
+  const calculerResultatSimulationMaifUsecase = new CalculerResultatSimulationMaifUsecase(simulateurMaifRepository);
+
   onMounted(async () => {
-    chiffresClesEnChargement.value = true;
-    await recupererAdresseEtStatistiquesCommuneMaifUsecase.execute(
+    await recupererAdressePourBarreDeRechercheUsecase.execute(
       utilisateurId,
-      new StatistiquesCommunesMaifPresenterImpl((vm: StatistiquesCommuneMaifViewModel) => {
-        statistiquesCommuneMaifViewModel.value = vm;
-      }),
       new BarreDeRecherchePresenterImpl(async (barreDeRechercheViewModel: BarreDeRechercheViewModel) => {
         coordonnees.value = barreDeRechercheViewModel.coordonnees;
         recherche.value = barreDeRechercheViewModel.recherche;
         await calculerResultatsSimulation();
       }),
     );
-    chiffresClesEnChargement.value = false;
+
+    await recupererChiffresCles();
   });
 
   async function chargerDonneesPourNouvelleAdresse() {
     await nextTick();
     avecAdressePrivee.value = true;
-    chiffresClesEnChargement.value = true;
 
+    await recupererChiffresCles(adresse.value?.codeEpci);
     await calculerResultatsSimulation();
+  }
 
-    if (adresse.value?.commune && adresse.value?.coordonnees) {
-      await recupererStatistiquesEndroitMaifUsecase.execute(
-        utilisateurId,
-        adresse.value.commune,
-        adresse.value.codeEpci,
-        new StatistiquesCommunesMaifPresenterImpl((vm: StatistiquesCommuneMaifViewModel) => {
-          statistiquesCommuneMaifViewModel.value = vm;
-        }),
-      );
-      chiffresClesEnChargement.value = false;
-    }
+  async function recupererChiffresCles(codeEpci?: string) {
+    chiffresClesEnChargement.value = true;
+    await recupererStatistiquesCommuneMaifUsecase.execute(
+      utilisateurId,
+      new StatistiquesCommunesMaifPresenterImpl((vm: StatistiquesCommuneMaifViewModel) => {
+        statistiquesCommuneMaifViewModel.value = vm;
+      }),
+      codeEpci,
+    );
+    chiffresClesEnChargement.value = false;
   }
 
   async function calculerResultatsSimulation() {
@@ -184,6 +184,7 @@
 
   function definirAdressePrincipale() {
     if (!adresse.value || !coordonnees.value) return;
+
     const nouveauLogement: Partial<Logement> = {
       coordonnees: {
         latitude: coordonnees.value.latitude,
