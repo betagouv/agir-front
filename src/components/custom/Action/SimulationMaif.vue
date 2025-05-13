@@ -84,6 +84,10 @@
   import BallLoader from '@/components/custom/Thematiques/BallLoader.vue';
   import Callout from '@/components/dsfr/Callout.vue';
   import CarteExterne from '@/components/dsfr/CarteExterne.vue';
+  import { ActionsEventBus } from '@/domaines/actions/actions.eventbus';
+  import { ActionsRepositoryAxios } from '@/domaines/actions/adapters/actions.repository.axios';
+  import { TypeAction } from '@/domaines/actions/ports/actions.repository';
+  import { TerminerActionUsecase } from '@/domaines/actions/terminerAction.usecase';
   import {
     BarreDeRecherchePresenterImpl,
     BarreDeRechercheViewModel,
@@ -104,6 +108,7 @@
   import { RecupererAdresseEtStatistiquesCommuneMaifUsecase } from '@/domaines/simulationMaif/recupererStatistiquesCommuneMaifDepuisProfil.usecase';
   import { RecupererStatistiquesEndroitMaifUsecase } from '@/domaines/simulationMaif/recupererStatistiquesEndroitMaif.usecase';
   import { Adresse, Coordonnees } from '@/shell/coordonneesType';
+  import { SimulateursSupportes } from '@/shell/simulateursSupportes';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const recherche = ref<string>('');
@@ -171,8 +176,9 @@
           resultatSimulationMaifViewModel.value = vm;
         }),
       )
-      .finally(() => {
+      .finally(async () => {
         resultatsEnChargement.value = false;
+        await terminerAction();
       });
   }
 
@@ -193,6 +199,14 @@
     patcherInformationLogementUsecase.execute(utilisateurId, nouveauLogement).then(async () => {
       avecAdressePrivee.value = false;
     });
+  }
+
+  async function terminerAction() {
+    const terminerActionUsecase = new TerminerActionUsecase(
+      new ActionsRepositoryAxios(),
+      ActionsEventBus.getInstance(),
+    );
+    await terminerActionUsecase.execute(utilisateurId, SimulateursSupportes.MAIF, TypeAction.SIMULATEUR);
   }
 </script>
 
