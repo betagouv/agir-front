@@ -1,5 +1,26 @@
 # Changelog
 
+## [2.8.0](https://github.com/betagouv/agir-front/compare/v2.7.0...v2.8.0) (2025-05-13)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* tracking des aides pour les demandes ou la navigation vers la source ([#1030](https://github.com/betagouv/agir-front/issues/1030)) ([f4a7fb7](https://github.com/betagouv/agir-front/commit/f4a7fb7455e7a0980825d9b77207ee2db5123b91))
+
+
+### 👷 Autres changements
+
+* Bump @playwright/test from 1.51.1 to 1.52.0 ([#1103](https://github.com/betagouv/agir-front/issues/1103)) ([0133cb0](https://github.com/betagouv/agir-front/commit/0133cb02bcc406aa11a13913ff52f0eb85438937))
+* Bump @sentry/vite-plugin from 3.3.1 to 3.4.0 ([#1109](https://github.com/betagouv/agir-front/issues/1109)) ([c36e180](https://github.com/betagouv/agir-front/commit/c36e180b01530c8583c3df1875fb4038bc2ffc56))
+* Bump @sentry/vue from 9.14.0 to 9.17.0 ([#1112](https://github.com/betagouv/agir-front/issues/1112)) ([df43711](https://github.com/betagouv/agir-front/commit/df437116fb9285045e8ec356d1161294b1f0cbf1))
+* Bump @types/node from 22.14.1 to 22.15.17 ([#1111](https://github.com/betagouv/agir-front/issues/1111)) ([b301000](https://github.com/betagouv/agir-front/commit/b301000d22c338a5102fd97a0e1f2839023a9b66))
+* Bump @unhead/vue from 2.0.5 to 2.0.8 ([#1102](https://github.com/betagouv/agir-front/issues/1102)) ([caeee7b](https://github.com/betagouv/agir-front/commit/caeee7bcc86455b9bdb1a27246d18d99ab27e1b0))
+* Bump @vitejs/plugin-vue from 5.2.3 to 5.2.4 ([#1108](https://github.com/betagouv/agir-front/issues/1108)) ([5501888](https://github.com/betagouv/agir-front/commit/5501888ebefa0a27d8811895e2807dd96d4df62c))
+* Bump chart.js from 4.4.8 to 4.4.9 ([#1100](https://github.com/betagouv/agir-front/issues/1100)) ([84f7302](https://github.com/betagouv/agir-front/commit/84f73022e6e308fc706da5fea1fad7899959734e))
+* Bump lint-staged from 15.5.1 to 16.0.0 ([#1110](https://github.com/betagouv/agir-front/issues/1110)) ([47fa90f](https://github.com/betagouv/agir-front/commit/47fa90f539a36e4b1db6696da0a77301cb2e6d4a))
+* Bump typescript from 5.8.2 to 5.8.3 ([#1101](https://github.com/betagouv/agir-front/issues/1101)) ([bb203cf](https://github.com/betagouv/agir-front/commit/bb203cffd4bb5c35307e7e75a9d3444445309a6d))
+* Bump vite from 6.3.4 to 6.3.5 ([#1099](https://github.com/betagouv/agir-front/issues/1099)) ([5928e17](https://github.com/betagouv/agir-front/commit/5928e1732260e2373dd9c9e76afe3c64e8ace29f))
+
 ## [2.7.0](https://github.com/betagouv/agir-front/compare/v2.6.1...v2.7.0) (2025-05-06)
 
 
