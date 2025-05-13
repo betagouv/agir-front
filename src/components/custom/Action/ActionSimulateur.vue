@@ -6,18 +6,18 @@
     />
 
     <KyCsAction
-      v-if="actionSimulateurViewModel.actionId === 'action_simulateur_voiture'"
+      v-if="actionSimulateurViewModel.actionId === SimulateursSupportes.VOITURE"
       :action-id="actionSimulateurViewModel.actionId"
       :idEnchainementKycs="actionSimulateurViewModel.idEnchainementKYCs"
       :type-action="TypeAction.SIMULATEUR"
       class="fr-px-2w"
     >
       <template v-slot:fin>
-        <SimulationResultatVoiture v-if="actionSimulateurViewModel.actionId === 'action_simulateur_voiture'" />
+        <SimulationResultatVoiture v-if="actionSimulateurViewModel.actionId === SimulateursSupportes.VOITURE" />
       </template>
     </KyCsAction>
 
-    <SimulationMaif v-else-if="actionSimulateurViewModel.actionId === 'action_simulateur_maif'" />
+    <SimulationMaif v-else-if="actionSimulateurViewModel.actionId === SimulateursSupportes.MAIF" />
 
     <ActionAides :aides="actionSimulateurViewModel.aides" />
   </section>
@@ -31,6 +31,7 @@
   import KyCsAction from '@/components/custom/KYC/KYCsAction.vue';
   import { ActionSimulateurViewModel } from '@/domaines/actions/ports/action.presenter';
   import { TypeAction } from '@/domaines/actions/ports/actions.repository';
+  import { SimulateursSupportes } from '@/shell/simulateursSupportes';
 
   defineProps<{ actionSimulateurViewModel: ActionSimulateurViewModel }>();
 </script>
