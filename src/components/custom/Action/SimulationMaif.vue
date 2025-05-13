@@ -94,7 +94,7 @@
   } from '@/domaines/logement/adapters/barreDeRecherche.presenter.impl';
   import { LogementRepositoryAxios } from '@/domaines/logement/adapters/logement.repository.axios';
   import { PatcherInformationLogementUsecase } from '@/domaines/logement/patcherInformationLogement.usecase';
-  import { RecupererAdressePourBarreDeRechercheUsecase } from '@/domaines/logement/recupererAdresse.usecase';
+  import { RecupererAdressePourBarreDeRechercheUsecase } from '@/domaines/logement/recupererAdressePourBarreDeRecherche.usecase';
   import { Logement } from '@/domaines/logement/recupererInformationLogement.usecase';
   import {
     SimulateurMaifPresenterImpl,

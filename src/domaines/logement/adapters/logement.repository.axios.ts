@@ -1,6 +1,6 @@
 import { AxiosFactory, intercept401 } from '@/axios.factory';
 import { LogementRepository } from '@/domaines/logement/ports/logement.repository';
-import { Adresse } from '@/domaines/logement/recupererAdresse.usecase';
+import { Adresse } from '@/domaines/logement/recupererAdressePourBarreDeRecherche.usecase';
 import { Logement } from '@/domaines/logement/recupererInformationLogement.usecase';
 
 export enum TypeLogementApiModel {
