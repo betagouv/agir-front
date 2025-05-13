@@ -1,18 +1,18 @@
 <template>
   <QuizQuestion
-    v-if="!reponseDonnee"
+    v-if="!reponseDonneeLabel"
     :question="question.intitule"
     :questions="props.question.reponsesPossibles"
     @quiz-termine="afficherArticle"
   />
 
-  <div v-if="reponseDonnee">
+  <div v-if="reponseDonneeLabel">
     <h2 class="fr-h4">{{ question.intitule }}</h2>
 
     <p class="text--black" :class="estBienRepondu ? 'action__quiz-reponseBonne' : 'action__quiz-reponseFausse'">
       <span aria-hidden="true" class="fr-pr-1w">{{ estBienRepondu ? '✅' : '❌' }}</span>
       {{ estBienRepondu ? 'Bien joué ! La réponse était' : 'Pas tout à fait... Vous avez répondu' }}&nbsp;:
-      <span class="text--bold">{{ reponseDonnee }}</span>
+      <span class="text--bold">{{ reponseDonneeLabel }}</span>
     </p>
 
     <ActionQuizExplication
@@ -46,17 +46,18 @@
   }>();
 
   const idUtilisateur = utilisateurStore().utilisateur.id;
-  const reponseDonnee = ref<string>('');
+  const reponseDonneeLabel = ref<string>('');
   const estBienRepondu = ref<boolean>(false);
 
   const passerQuestionSuivante = () => {
     props.onClickContinuer();
-    reponseDonnee.value = '';
+    reponseDonneeLabel.value = '';
     estBienRepondu.value = false;
   };
 
   const afficherArticle = async reponse => {
-    reponseDonnee.value = reponse;
+    reponseDonneeLabel.value =
+      props.question.reponsesPossibles.find(reponsePossible => reponsePossible.value === reponse)?.label ?? reponse;
     estBienRepondu.value = props.question.solution === reponse;
 
     await new EnvoyerDonneesQuizInteractionUsecase(

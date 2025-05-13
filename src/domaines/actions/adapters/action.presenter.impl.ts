@@ -10,6 +10,7 @@ import marked from '@/shell/actionMarkdownToHtml';
 import { buildUrl } from '@/shell/buildUrl';
 import cacherEmojisAuxLecteursDecrans from '@/shell/cacherEmojisAuxLecteursDecrans';
 import { nettoyerEtGarderContenuTextuel } from '@/shell/nettoyerEtGarderContenuTextuel';
+import { nettoyerEtGarderLettres } from '@/shell/nettoyerEtGarderLettres';
 
 class ActionViewModelBuilder {
   static async buildClassique(action: ActionDetail): Promise<ActionClassiqueViewModel> {
@@ -53,12 +54,12 @@ class ActionViewModelBuilder {
           intitule: quiz.questions[0].intitule,
           reponsesPossibles: quiz.questions[0].reponsesPossibles.map(reponse => ({
             label: reponse,
-            value: reponse,
+            value: nettoyerEtGarderLettres(reponse),
           })),
           ordre: quiz.questions[0].ordre,
           texteExplicationOK: quiz.questions[0].texteExplicationOK,
           texteExplicationKO: quiz.questions[0].texteExplicationKO,
-          solution: quiz.questions[0].solution,
+          solution: nettoyerEtGarderLettres(quiz.questions[0].solution),
         },
         articleAssocie: quiz.articleAssocie?.id
           ? {

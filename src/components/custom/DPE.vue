@@ -13,7 +13,7 @@
           id="dpe-A"
           name="dpe"
         />
-        <label class="fr-label fr-label--dpe" for="dpe-A"><div class="dpe dpe--a">A</div></label>
+        <label class="fr-label fr-label--dpe" for="dpe-A"><span class="dpe dpe--a">A</span></label>
       </div>
     </div>
     <div class="fr-fieldset__element">
@@ -26,7 +26,7 @@
           id="dpe-B"
           name="dpe"
         />
-        <label class="fr-label fr-label--dpe" for="dpe-B"> <div class="dpe dpe--b">B</div></label>
+        <label class="fr-label fr-label--dpe" for="dpe-B"> <span class="dpe dpe--b">B</span></label>
       </div>
     </div>
     <div class="fr-fieldset__element">
@@ -39,7 +39,7 @@
           id="dpe-C"
           name="dpe"
         />
-        <label class="fr-label fr-label--dpe" for="dpe-C"><div class="dpe dpe--c">C</div></label>
+        <label class="fr-label fr-label--dpe" for="dpe-C"><span class="dpe dpe--c">C</span></label>
       </div>
     </div>
     <div class="fr-fieldset__element">
@@ -52,7 +52,7 @@
           id="dpe-D"
           name="dpe"
         />
-        <label class="fr-label fr-label--dpe" for="dpe-D"> <div class="dpe dpe--d">D</div> </label>
+        <label class="fr-label fr-label--dpe" for="dpe-D"> <span class="dpe dpe--d">D</span> </label>
       </div>
     </div>
     <div class="fr-fieldset__element">
@@ -65,7 +65,7 @@
           id="dpe-E"
           name="dpe"
         />
-        <label class="fr-label fr-label--dpe" for="dpe-E"> <div class="dpe dpe--e active">E</div></label>
+        <label class="fr-label fr-label--dpe" for="dpe-E"> <span class="dpe dpe--e active">E</span></label>
       </div>
     </div>
     <div class="fr-fieldset__element">
@@ -78,7 +78,7 @@
           id="dpe-F"
           name="dpe"
         />
-        <label class="fr-label fr-label--dpe" for="dpe-F"> <div class="dpe dpe--f">F</div></label>
+        <label class="fr-label fr-label--dpe" for="dpe-F"> <span class="dpe dpe--f">F</span></label>
       </div>
     </div>
     <div class="fr-fieldset__element">
@@ -91,7 +91,7 @@
           id="dpe-G"
           name="dpe"
         />
-        <label class="fr-label fr-label--dpe" for="dpe-G"> <div class="dpe dpe--g">G</div></label>
+        <label class="fr-label fr-label--dpe" for="dpe-G"> <span class="dpe dpe--g">G</span></label>
       </div>
     </div>
     <div class="fr-fieldset__element">

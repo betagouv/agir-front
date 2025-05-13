@@ -75,16 +75,16 @@
           <div class="fr-footer__partners-main">
             <ul class="fr-grid-row fr-grid-row--gutters fr-grid-row--middle">
               <li class="fr-col">
-                <img alt="DINUM : Direction interministérielle du numérique" height="80px" src="/logo-dinum.webp" />
+                <img alt="DINUM : Direction interministérielle du numérique" height="80" src="/logo-dinum.webp" />
               </li>
               <li class="fr-col">
-                <img alt="ADEME: Agence de la transition écologique " height="80px" src="/logo-ademe.svg" />
+                <img alt="ADEME: Agence de la transition écologique " height="80" src="/logo-ademe.svg" />
               </li>
               <li class="fr-col">
-                <img alt="France Nation Verte" height="80px" src="/logo_fnv.webp" />
+                <img alt="France Nation Verte" height="80" src="/logo_fnv.webp" />
               </li>
               <li class="fr-col">
-                <img alt="Office Français de la Biodiversité" height="80px" src="/ic_ofb.svg" />
+                <img alt="Office Français de la Biodiversité" height="80" src="/ic_ofb.svg" />
               </li>
             </ul>
           </div>

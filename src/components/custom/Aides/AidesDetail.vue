@@ -4,7 +4,12 @@
     <div class="fr-col-8">
       <h4 class="fr-text--md fr-mb-1w">{{ titre }}</h4>
       <p v-if="description" class="fr-my-2w">{{ description }}</p>
-      <a :title="`Consultez ${titre} - ouvre une nouvelle fenêtre`" :href="urlExterne" target="_blank" rel="noopener">
+      <a
+        :title="`En savoir plus sur ${titre} - ouvre une nouvelle fenêtre`"
+        :href="urlExterne"
+        target="_blank"
+        rel="noopener"
+      >
         En savoir plus
       </a>
     </div>

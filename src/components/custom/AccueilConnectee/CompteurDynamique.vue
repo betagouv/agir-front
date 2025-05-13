@@ -1,13 +1,13 @@
 <template>
-  <div ref="HTMLDuCompteur" class="flex justify-center items-center" aria-hidden="true">
-    <div class="compteur border-radius--lg shadow" :style="{ backgroundColor: props.background }">
-      <div v-for="(chiffre, index) in chiffres" :key="index" class="digit">
-        <div class="digit-inner" :style="translateALaBonneHauteur(chiffre)">
+  <span ref="HTMLDuCompteur" class="flex justify-center items-center" aria-hidden="true">
+    <span class="compteur border-radius--lg shadow" :style="{ backgroundColor: props.background }">
+      <span v-for="(chiffre, index) in chiffres" :key="index" class="digit">
+        <span class="digit-inner" :style="translateALaBonneHauteur(chiffre)">
           <span v-for="n in 10" :key="n" class="digit-number">{{ n - 1 }}</span>
-        </div>
-      </div>
-    </div>
-  </div>
+        </span>
+      </span>
+    </span>
+  </span>
 </template>
 
 <script setup lang="ts">

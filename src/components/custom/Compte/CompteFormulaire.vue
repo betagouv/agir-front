@@ -11,11 +11,7 @@
   </div>
   <form class="fr-mb-0" @submit.prevent="modifierInformation">
     <div class="fr-grid-row full-width flex-end fr-mb-4w fr-mb-md-2w">
-      <button
-        aria-label="Soumettre le formulaire"
-        class="fr-btn fr-btn--icon-left fr-btn--lg fr-icon-save-3-fill"
-        type="submit"
-      >
+      <button class="fr-btn fr-btn--icon-left fr-btn--lg fr-icon-save-3-fill" type="submit">
         Mettre à jour mes informations
       </button>
     </div>
@@ -38,7 +34,6 @@
             name="pseudo"
             @blur="onValidationPseudo()"
             :maxlength="21"
-            :minlength="3"
           />
         </div>
         <div class="fr-col-lg-6 fr-col-12">
@@ -118,11 +113,7 @@
     </CarteInfo>
 
     <div class="fr-grid-row full-width flex-end">
-      <button
-        aria-label="Soumettre le formulaire"
-        class="fr-btn fr-btn--icon-left fr-btn--lg fr-mt-4w fr-icon-save-3-fill"
-        type="submit"
-      >
+      <button class="fr-btn fr-btn--icon-left fr-btn--lg fr-mt-4w fr-icon-save-3-fill" type="submit">
         Mettre à jour mes informations
       </button>
     </div>

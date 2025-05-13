@@ -4,7 +4,7 @@
     <blockquote class="fr-text--xl" v-html="citation" />
     <div class="fr-grid-row fr-grid-row--gutters">
       <div class="fr-col-auto">
-        <img :src="image" alt="" width="48px" height="48px" />
+        <img :src="image" alt="" width="48" height="48" />
       </div>
       <p class="fr-col-auto fr-mb-0">
         <span class="fr-text--bold">{{ autheur }}</span>

@@ -12,11 +12,7 @@
     </div>
     <form @submit.prevent="enregistrerLesInformations">
       <div class="fr-grid-row full-width flex-end fr-mb-4w fr-mb-md-2w">
-        <button
-          type="submit"
-          aria-label="Soumettre le formulaire"
-          class="fr-btn fr-btn--icon-left fr-btn--lg fr-icon-save-3-fill"
-        >
+        <button type="submit" class="fr-btn fr-btn--icon-left fr-btn--lg fr-icon-save-3-fill">
           Mettre à jour mes informations
         </button>
       </div>
@@ -109,11 +105,7 @@
           </p>
         </CarteInfo>
         <div class="fr-grid-row full-width flex-end">
-          <button
-            type="submit"
-            aria-label="Soumettre le formulaire"
-            class="fr-btn fr-btn--icon-left fr-btn--lg fr-mt-4w fr-icon-save-3-fill"
-          >
+          <button type="submit" class="fr-btn fr-btn--icon-left fr-btn--lg fr-mt-4w fr-icon-save-3-fill">
             Mettre à jour mes informations
           </button>
         </div>

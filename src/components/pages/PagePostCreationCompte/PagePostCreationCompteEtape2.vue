@@ -5,12 +5,14 @@
         <fieldset class="fr-fieldset fr-mb-0">
           <legend id="identity-fieldset-legend" class="fr-fieldset__legend">
             <img alt="" src="/bg_creation_compte_etape_2.svg" />
-            <p class="text--normal text--bleu fr-mb-1w fr-mt-1w"><span class="fr-text--bold">Étape 2</span> sur 3</p>
+            <span class="text--normal text--bleu fr-mb-1w fr-mt-1w display-block">
+              <span class="fr-text--bold">Étape 2</span> sur 3
+            </span>
             <h1 class="fr-h4 fr-mb-1w">Enchanté, {{ onboardingPostCreationCompte().pseudo }}</h1>
-            <p class="fr-text--regular fr-text--lg">
+            <span class="fr-text--regular fr-text--lg display-block">
               Pour découvrir des aides, services et contenus disponibles proches de chez vous, indiquez-nous votre lieu
               de résidence.
-            </p>
+            </span>
           </legend>
           <Alert
             v-if="alerte.isActive"

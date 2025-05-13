@@ -12,7 +12,7 @@
           {{ urlLabel }}
         </a>
       </p>
-      <img v-if="logo" :src="logo" alt="" class="display-block max-full-width" height="24px" />
+      <img v-if="logo" :src="logo" alt="" class="display-block max-full-width" height="24" />
     </div>
   </aside>
 </template>

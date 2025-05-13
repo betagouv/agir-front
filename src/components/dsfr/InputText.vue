@@ -5,7 +5,7 @@
       <span v-if="description" class="fr-hint-text">{{ description }}</span>
     </label>
     <input
-      aria-describedby="text-input-error-desc-error"
+      :aria-describedby="erreur && erreur.afficher ? errorId : ''"
       :autocomplete="autocomplete"
       :id="name"
       :autofocus="autofocus"
@@ -20,14 +20,16 @@
       @blur="handleBlur"
       @input="updateValue"
     />
-    <p v-if="erreur && erreur.afficher" id="text-input-error-desc-error" class="fr-error-text" aria-live="assertive">
+    <p v-if="erreur && erreur.afficher" :id="errorId" class="fr-error-text" aria-live="assertive">
       {{ erreur.message }}
     </p>
   </div>
 </template>
 
 <script lang="ts" setup>
-  defineProps<{
+  import { computed } from 'vue';
+
+  const props = defineProps<{
     name: string;
     label: string;
     modelValue: string;
@@ -47,6 +49,10 @@
     (e: 'update:modelValue', value: string): void;
     (e: 'blur'): void;
   }>();
+
+  const errorId = computed(() => {
+    return `${props.name}-text-input-error-desc-error`;
+  });
 
   const updateValue = (event: Event) => {
     const inputElement = event.target as HTMLInputElement;

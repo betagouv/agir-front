@@ -9,7 +9,6 @@
                 class="fr-btn--close fr-btn"
                 title="Fermer la fenêtre modale"
                 aria-controls="fr-modal-1"
-                target="_self"
                 ref="boutonFermer"
               >
                 Fermer
