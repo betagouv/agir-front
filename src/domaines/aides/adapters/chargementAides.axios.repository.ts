@@ -22,6 +22,7 @@ interface AideApiModel {
   partenaire_nom?: string;
   est_gratuit: boolean;
   derniere_maj: string;
+  url_source: string;
 }
 
 interface CMSAideApiModel {
@@ -58,6 +59,7 @@ export class ChargementAidesAxiosRepository implements ChargementAidesRepository
                 nom: aide.partenaire_nom!,
               }
             : undefined,
+          urlSource: aide.url_source,
         })),
     };
   }
@@ -93,6 +95,7 @@ export class ChargementAidesAxiosRepository implements ChargementAidesRepository
                 nom: aide.partenaire_nom!,
               }
             : undefined,
+          urlSource: aide.url_source,
         })),
     };
   }
@@ -119,6 +122,7 @@ export class ChargementAidesAxiosRepository implements ChargementAidesRepository
           }
         : undefined,
       derniereMaj: aide.data.derniere_maj,
+      urlSource: aide.data.url_source,
     };
   }
 
@@ -143,6 +147,7 @@ export class ChargementAidesAxiosRepository implements ChargementAidesRepository
           }
         : undefined,
       derniereMaj: reponse.data.aide.derniere_maj,
+      urlSource: reponse.data.aide.url_source,
     };
   }
 
@@ -169,6 +174,7 @@ export class ChargementAidesAxiosRepository implements ChargementAidesRepository
           }
         : undefined,
       derniereMaj: aide.data.derniere_maj,
+      urlSource: aide.data.url_source,
     };
   }
 }

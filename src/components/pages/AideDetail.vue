@@ -46,6 +46,7 @@
             class="fr-btn"
             rel="noopener external"
             target="_blank"
+            @click="trackAide(aide.id, AIDE_TRACKING.DEMANDE)"
           >
             Commencer votre démarche
           </a>
@@ -69,7 +70,7 @@
       </div>
     </div>
 
-    <AideModaleFeedback :notation="notation" :aideId="props.aide.id" @feedback-envoye="updateNotation" />
+    <AideModaleFeedback :aideId="props.aide.id" :notation="notation" @feedback-envoye="updateNotation" />
   </div>
 </template>
 <script lang="ts" setup>
@@ -80,6 +81,7 @@
   import { Aide } from '@/domaines/aides/chargementAides.usecase';
   import { MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
   import { TagThematique } from '@/domaines/thematiques/TagThematique';
+  import { AIDE_TRACKING, trackAide } from '@/shell/tracking/aideTracking';
 
   const props = defineProps<{ aide: Aide }>();
   const notation = ref<number>(0);
