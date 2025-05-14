@@ -47,6 +47,7 @@
         <section v-else>
           <h2 class="fr-h3">Suggestions</h2>
           <ServiceListeCarte
+            ref="serviceListeCarte"
             :suggestions-service-view-model="
               (viewModel as ServiceRechercheLongueVieAuxObjetsViewModelAvecResultats).suggestions
             "
@@ -55,7 +56,7 @@
           <button
             v-if="(viewModel as ServiceRechercheLongueVieAuxObjetsViewModelAvecResultats).plusDeResultatsDisponibles"
             class="fr-link text--underline"
-            @click="chargerPlusDeCartes()"
+            @click="chargerPlusDeCartesEtFocus()"
           >
             Voir plus de résultats
           </button>
@@ -66,7 +67,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { ref } from 'vue';
+  import { nextTick, ref } from 'vue';
   import PageServiceTemplate from '@/components/custom/Service/PageServiceTemplate.vue';
   import ServiceBarreDeRechercheAdresse from '@/components/custom/Service/ServiceBarreDeRechercheAdresse.vue';
   import ServiceFavoris from '@/components/custom/Service/ServiceFavoris.vue';
@@ -84,6 +85,7 @@
   import { RecupererServiceLongueVieAuxObjetsUsecase } from '@/domaines/serviceRecherche/longueVieAuxObjets/recupererServiceLongueVieAuxObjets.usecase';
   import { utilisateurStore } from '@/store/utilisateur';
 
+  const serviceListeCarte = ref<InstanceType<typeof ServiceListeCarte>>();
   const viewModel = ref<ServiceRechercheLongueVieAuxObjetsViewModel>();
   const recupererServiceLongueVieAuxObjetsUsecase = new RecupererServiceLongueVieAuxObjetsUsecase(
     new ServiceRechercheLongueVieAuxObjetsAxios(),
@@ -100,6 +102,17 @@
     pageEstEnChargement,
     cartesSontEnChargement,
   } = useRechercheService(lancerRecherche, 'vos_objets');
+
+  async function chargerPlusDeCartesEtFocus() {
+    const ancienNombreDeResultats = nombreDeResultats.value;
+    await chargerPlusDeCartes();
+
+    await nextTick(() => {
+      if (serviceListeCarte.value) {
+        serviceListeCarte.value.focusCarteParIndex(ancienNombreDeResultats + 1);
+      }
+    });
+  }
 
   async function lancerRecherche(): Promise<void> {
     await recupererServiceLongueVieAuxObjetsUsecase.execute(
