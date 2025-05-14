@@ -27,8 +27,14 @@
           v-if="utilisateurStore().estConnecte"
           class="print-hidden fr-grid-row fr-grid-row--middle flex-space-between border fr-p-2w"
         >
-          <span class="fr-m-0 fr-text--bold fr-text--md">Comment avez-vous trouvé cet article ?</span>
-          <Notation @rated="noterLarticle" />
+          <FieldsetNotationEtoile
+            class="full-width fr-m-1w"
+            legend="Comment avez-vous trouvé cet article ?"
+            legend-class="fr-m-0 fr-text--bold"
+            @update:notation="noterLarticle"
+            :total="4"
+            :a-des-indicateurs="true"
+          />
         </div>
         <div v-if="estEnchainementMission">
           <slot />
@@ -90,7 +96,7 @@
 </template>
 
 <script lang="ts" setup>
-  import Notation from '@/components/custom/Notation.vue';
+  import FieldsetNotationEtoile from '@/components/custom/Form/FieldsetNotationEtoile.vue';
   import PartageReseauxSociaux from '@/components/dsfr/PartageReseauxSociaux.vue';
   import { useBoutonRetour } from '@/composables/boutonRetour';
   import { ArticleRepositoryAxios } from '@/domaines/article/adapters/article.repository.axios';
