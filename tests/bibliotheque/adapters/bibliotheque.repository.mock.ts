@@ -1,4 +1,5 @@
 import { Bibliotheque, BibliothequeRepository } from '@/domaines/bibliotheque/ports/bibliotheque.repository';
+import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 
 export class BibliothequeRepositoryMock implements BibliothequeRepository {
   chargerBibliotheque(_utilisateurId: string): Promise<Bibliotheque> {
@@ -6,7 +7,8 @@ export class BibliothequeRepositoryMock implements BibliothequeRepository {
       ressources: [
         {
           titre: 'Par où commencer la rénovation de sa maison ?',
-          thematique: '🌍 Global',
+          thematique: ClefThematiqueAPI.transports,
+          thematiqueLabel: '🌍 Transports',
           description: 'lorem ipsum dolor description un peu longue hello',
           idDuContenu: '1',
           image: 'https://picsum.photos/300/200',
@@ -14,7 +16,8 @@ export class BibliothequeRepositoryMock implements BibliothequeRepository {
         },
         {
           titre: 'Le coût carbone d’un t-shirt',
-          thematique: '🌍 Global',
+          thematique: ClefThematiqueAPI.alimentation,
+          thematiqueLabel: '🌍 Alimentation',
           description: 'lorem ipsum dolor description un peu longue hello',
           idDuContenu: '2',
           image: 'https://picsum.photos/400/400',
@@ -22,7 +25,8 @@ export class BibliothequeRepositoryMock implements BibliothequeRepository {
         },
         {
           titre: 'C’est quoi 5 tonnes de CO2e ?',
-          thematique: '🌍 Global',
+          thematique: ClefThematiqueAPI.consommation,
+          thematiqueLabel: '🌍 Consommation',
           description: 'lorem ipsum dolor description un peu longue hello',
           idDuContenu: '3',
           image: 'https://picsum.photos/400/400',
@@ -30,7 +34,8 @@ export class BibliothequeRepositoryMock implements BibliothequeRepository {
         },
         {
           titre: 'Quelle est la mission de l’ADEME ?',
-          thematique: '🌍 Global',
+          thematique: ClefThematiqueAPI.transports,
+          thematiqueLabel: '🌍 Transports',
           description: 'lorem ipsum dolor description un peu longue hello',
           idDuContenu: '4',
           image: 'https://picsum.photos/300/200',
@@ -68,7 +73,8 @@ export class BibliothequeRepositoryMock implements BibliothequeRepository {
       ressources: [
         {
           titre: 'Par où commencer la rénovation de sa maison ?',
-          thematique: '🌍 Global',
+          thematique: ClefThematiqueAPI.transports,
+          thematiqueLabel: '🌍 Transports',
           description: 'lorem ipsum dolor description un peu longue hello',
           idDuContenu: '1',
           image: 'https://picsum.photos/300/200',
@@ -76,7 +82,8 @@ export class BibliothequeRepositoryMock implements BibliothequeRepository {
         },
         {
           titre: 'Le coût carbone d’un t-shirt',
-          thematique: '🌍 Global',
+          thematique: ClefThematiqueAPI.alimentation,
+          thematiqueLabel: '🌍 Alimentation',
           description: 'lorem ipsum dolor description un peu longue hello',
           idDuContenu: '2',
           image: 'https://picsum.photos/400/400',
@@ -84,7 +91,8 @@ export class BibliothequeRepositoryMock implements BibliothequeRepository {
         },
         {
           titre: 'C’est quoi 5 tonnes de CO2e ?',
-          thematique: '🌍 Global',
+          thematique: ClefThematiqueAPI.consommation,
+          thematiqueLabel: '🌍 Consommation',
           description: 'lorem ipsum dolor description un peu longue hello',
           idDuContenu: '3',
           image: 'https://picsum.photos/400/400',
@@ -92,7 +100,8 @@ export class BibliothequeRepositoryMock implements BibliothequeRepository {
         },
         {
           titre: 'Quelle est la mission de l’ADEME ?',
-          thematique: '🌍 Global',
+          thematique: ClefThematiqueAPI.transports,
+          thematiqueLabel: '🌍 Transports',
           description: 'lorem ipsum dolor description un peu longue hello',
           idDuContenu: '4',
           image: 'https://picsum.photos/300/200',
