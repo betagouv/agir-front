@@ -43,7 +43,7 @@
           :disabled="communes.length === 0"
           @change="updateSelectedCommune"
         >
-          <option value="" :selected="!defaultSelectValue" disabled hidden>Selectionnez une option</option>
+          <option value="" :selected="!commune" disabled hidden>Selectionnez une option</option>
           <option
             v-for="commune in communes"
             :key="commune.label"
