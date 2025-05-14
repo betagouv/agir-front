@@ -5,13 +5,13 @@ import { Coordonnees } from '@/shell/coordonneesType';
 export type SimulateurMaifViewModel = {
   risques: {
     nom: string;
-    badge?: {
+    badge: {
       label: string;
       class: string;
     };
-    illustration?: string;
+    illustration: string;
   }[];
-  lienKit?: string;
+  lienKit: string;
 };
 
 export class SimulateurMaifPresenterImpl implements SimulateurMaifPresenter {
@@ -65,7 +65,7 @@ export class SimulateurMaifPresenterImpl implements SimulateurMaifPresenter {
     }
   }
 
-  recupererLienIllustration(id: string): string | undefined {
+  recupererLienIllustration(id: string): string {
     switch (id) {
       case 'secheresse':
         return '/maif/argiles.svg';

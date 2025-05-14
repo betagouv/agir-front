@@ -20,7 +20,7 @@
         <h3 class="fr-h4">Où habitez-vous ?</h3>
         <ServiceBarreDeRechercheAdresse
           v-if="doitAfficherBarreAdresse"
-          v-model:adresse="adresse"
+          v-model:adresse="adresseBarreDeRecherche"
           v-model:recherche="recherche"
         />
         <InputCodePostal
@@ -137,7 +137,7 @@
   import { PatcherInformationLogementUsecase } from '@/domaines/logement/patcherInformationLogement.usecase';
   import { LogementViewModel } from '@/domaines/logement/ports/logement.presenter';
   import { AdresseDansLeCompte } from '@/domaines/simulationMaif/recupererStatistiquesCommuneMaifDepuisProfil.usecase';
-  import { DonneesAdresseBarreDeRecherche } from '@/shell/coordonneesType';
+  import { AdresseBarreDeRecherche } from '@/shell/coordonneesType';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const logementViewModel = defineModel<LogementViewModel>('logementViewModel', {
@@ -145,28 +145,22 @@
     required: true,
   });
 
-  const barreDeRechercheViewModel = ref<BarreDeRechercheViewModel>();
-  new BarreDeRecherchePresenterImpl(vm => (barreDeRechercheViewModel.value = vm)).presente(
-    new AdresseDansLeCompte(
-      logementViewModel.value?.codePostal,
-      logementViewModel.value?.commune_utilisee_dans_le_compte,
-      logementViewModel.value?.commune_label,
-      logementViewModel.value?.rue,
-      logementViewModel.value?.numeroRue,
-      logementViewModel.value?.coordonnees,
-    ),
-  );
-  const recherche = ref<string>(barreDeRechercheViewModel.value?.recherche ?? '');
-  const adresse = ref<DonneesAdresseBarreDeRecherche>();
-
   const { alerte, afficherAlerte } = useAlerte();
 
-  const doitAfficherBarreAdresse = computed(
-    () =>
-      logementViewModel.value.coordonnees.longitude !== undefined &&
-      logementViewModel.value.coordonnees.latitude !== undefined &&
-      logementViewModel.value.rue !== undefined,
+  const adresseDansLeCompte = new AdresseDansLeCompte(
+    logementViewModel.value?.codePostal,
+    logementViewModel.value?.commune_utilisee_dans_le_compte,
+    logementViewModel.value?.commune_label,
+    logementViewModel.value?.rue,
+    logementViewModel.value?.numeroRue,
+    logementViewModel.value?.coordonnees,
   );
+  const adresseBarreDeRecherche = ref<AdresseBarreDeRecherche>();
+  const barreDeRechercheViewModel = ref<BarreDeRechercheViewModel>();
+  new BarreDeRecherchePresenterImpl(vm => (barreDeRechercheViewModel.value = vm)).presente(adresseDansLeCompte);
+  const recherche = ref<string>(barreDeRechercheViewModel.value?.recherche ?? '');
+
+  const doitAfficherBarreAdresse = computed(() => adresseDansLeCompte.estAdresseComplete());
   const isCodePostalEnErreur = ref(false);
   const codePostalEstValide = computed(() => {
     return !isCodePostalEnErreur.value && logementViewModel.value.codeEpci !== undefined;
@@ -188,11 +182,11 @@
         proprietaire: logementViewModel.value.proprietaire.valeur,
         plusDeQuinzeAns: logementViewModel.value.plusDeQuinzeAns.valeur,
         dpe: logementViewModel.value.dpe.valeur,
-        coordonnees: adresse.value?.coordonnees,
-        rue: adresse.value?.rue,
-        numeroRue: adresse.value?.numeroRue,
-        codePostal: adresse.value?.codePostal ?? logementViewModel.value.codePostal,
-        codeEpci: adresse.value?.codeEpci ?? logementViewModel.value.codeEpci,
+        coordonnees: adresseBarreDeRecherche.value?.coordonnees,
+        rue: adresseBarreDeRecherche.value?.rue,
+        numeroRue: adresseBarreDeRecherche.value?.numeroRue,
+        codePostal: adresseBarreDeRecherche.value?.codePostal ?? logementViewModel.value.codePostal,
+        codeEpci: adresseBarreDeRecherche.value?.codeEpci ?? logementViewModel.value.codeEpci,
       })
       .then(() => {
         afficherAlerte('success', 'Succès', 'Vos informations ont été correctement mises à jour.');
