@@ -27,7 +27,7 @@
         </div>
         <div v-else class="fr-grid-row fr-grid-row--gutters">
           <div v-for="article in bibliothequeViewModel.articles" :key="article.titre" class="fr-col-md-6 fr-col-12">
-            <BibliothequeCard
+            <BibliothequeCarte
               :id="article.idDuContenu"
               :description="article.description"
               :favoris="article.favoris"
@@ -46,7 +46,7 @@
 
 <script lang="ts" setup>
   import { onMounted, ref } from 'vue';
-  import BibliothequeCard from '@/components/custom/Bibliotheque/BibliothequeCard.vue';
+  import BibliothequeCarte from '@/components/custom/Bibliotheque/BibliothequeCarte.vue';
   import BibliothequeFiltres from '@/components/custom/Bibliotheque/BibliothequeFiltres.vue';
   import FilDAriane from '@/components/dsfr/FilDAriane.vue';
   import { BibliothequePresenterImpl } from '@/domaines/bibliotheque/adapters/bibliotheque.presenter.impl';

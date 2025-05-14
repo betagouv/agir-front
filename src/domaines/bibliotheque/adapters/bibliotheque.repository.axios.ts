@@ -1,11 +1,13 @@
 import { AxiosFactory, intercept401 } from '@/axios.factory';
 import { Bibliotheque, BibliothequeRepository } from '@/domaines/bibliotheque/ports/bibliotheque.repository';
+import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 
 interface BibliothequeApiModel {
   contenu: {
     titre: string;
     soustitre: string;
     image_url: string;
+    thematique_principale: string;
     thematique_principale_label: string;
     content_id: string;
     favoris: boolean;
@@ -27,7 +29,8 @@ export class BibliothequeRepositoryAxios implements BibliothequeRepository {
         titre: ressource.titre,
         description: ressource.soustitre || '',
         idDuContenu: ressource.content_id,
-        thematique: ressource.thematique_principale_label,
+        thematique: ressource.thematique_principale as ClefThematiqueAPI,
+        thematiqueLabel: ressource.thematique_principale_label,
         image: ressource.image_url,
         favoris: ressource.favoris,
       })),
@@ -59,7 +62,8 @@ export class BibliothequeRepositoryAxios implements BibliothequeRepository {
         titre: ressource.titre,
         description: ressource.soustitre || '',
         idDuContenu: ressource.content_id,
-        thematique: ressource.thematique_principale_label,
+        thematiqueLabel: ressource.thematique_principale_label,
+        thematique: ressource.thematique_principale as ClefThematiqueAPI,
         image: ressource.image_url,
         favoris: ressource.favoris,
       })),
