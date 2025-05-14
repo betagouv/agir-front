@@ -52,11 +52,6 @@ export class AdresseDansLeCompte {
   }
 }
 
-export type StatistiquesCommuneEtAdresse = {
-  statistiquesCommune: StatistiquesCommuneMaif;
-  adresseDansLeCompte: AdresseDansLeCompte;
-};
-
 export class RecupererStatistiquesCommuneMaifUsecase {
   constructor(private readonly simulationMaifRepository: SimulateurMaifRepository) {}
 

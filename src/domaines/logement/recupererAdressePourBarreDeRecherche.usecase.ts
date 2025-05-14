@@ -18,7 +18,6 @@ export class RecupererAdressePourBarreDeRechercheUsecase {
 
   async execute(idUtilisateur: string, barreDeRecherchePresenter: BarreDeRecherchePresenter) {
     const adresse = await this.logementRepository.recupererAdresse(idUtilisateur);
-    // TODO: on en fait quoi ?
     const adresseDansLeCompte = new AdresseDansLeCompte(
       adresse.codePostal,
       adresse.commune_utilisee_dans_le_compte,
