@@ -18,12 +18,12 @@
         </section>
         <section v-if="viewModel!.suggestions">
           <h2 class="fr-h3">Suggestions</h2>
-          <ServiceListeCarte :suggestions-service-view-model="viewModel!.suggestions" />
+          <ServiceListeCarte :suggestions-service-view-model="viewModel!.suggestions" ref="serviceListeCarte" />
           <ServiceSkeletonCartes v-if="cartesSontEnChargement" />
           <button
             v-if="viewModel!.plusDeResultatsDisponibles"
             class="fr-link text--underline"
-            @click="chargerPlusDeCartes()"
+            @click="chargerPlusDeCartesEtFocus()"
           >
             Voir plus de recettes
           </button>
@@ -34,7 +34,7 @@
 </template>
 
 <script setup lang="ts">
-  import { ref } from 'vue';
+  import { nextTick, ref } from 'vue';
   import PageServiceTemplate from '@/components/custom/Service/PageServiceTemplate.vue';
   import ServiceFavoris from '@/components/custom/Service/ServiceFavoris.vue';
   import ServiceListeCarte from '@/components/custom/Service/ServiceListeCarte.vue';
@@ -50,6 +50,7 @@
   import { RecupererServiceRecettesUsecase } from '@/domaines/serviceRecherche/recettes/recupererServiceRecettes.usecase';
   import { utilisateurStore } from '@/store/utilisateur';
 
+  const serviceListeCarte = ref<InstanceType<typeof ServiceListeCarte>>();
   const usecase = new RecupererServiceRecettesUsecase(new ServiceRechercheRecettesAxios());
   const viewModel = ref<ServiceRechercheRecettesViewModel>();
 
@@ -61,6 +62,17 @@
     chargerPlusDeCartes,
     modifierType,
   } = useTypeQueryParams(lancerRecherche, 'saison');
+
+  async function chargerPlusDeCartesEtFocus() {
+    const ancienNombreDeResultats = nombreDeResultats.value;
+    await chargerPlusDeCartes();
+
+    await nextTick(() => {
+      if (serviceListeCarte.value) {
+        serviceListeCarte.value.focusCarteParIndex(ancienNombreDeResultats);
+      }
+    });
+  }
 
   async function lancerRecherche() {
     await usecase.execute(

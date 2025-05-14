@@ -57,6 +57,7 @@
         <section v-else>
           <h2 class="fr-h3">Suggestions</h2>
           <ServiceListeCarte
+            ref="serviceListeCarte"
             v-if="!cartesSontEnChargement"
             :suggestions-service-view-model="
               (serviceRecherchePresDeChezNousViewModel as ServiceRecherchePresDeChezNousViewModelAvecResultats)
@@ -70,7 +71,7 @@
                 .plusDeResultatsDisponibles
             "
             class="fr-link text--underline"
-            @click="chargerPlusDeCartes()"
+            @click="chargerPlusDeCartesEtFocus()"
           >
             Voir plus de résultats
           </button>
@@ -81,7 +82,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { ref } from 'vue';
+  import { nextTick, ref } from 'vue';
   import PageServiceTemplate from '@/components/custom/Service/PageServiceTemplate.vue';
   import ServiceBarreDeRechercheAdresse from '@/components/custom/Service/ServiceBarreDeRechercheAdresse.vue';
   import ServiceFavoris from '@/components/custom/Service/ServiceFavoris.vue';
@@ -99,6 +100,7 @@
   import { RecupererServicePresDeChezNousUsecase } from '@/domaines/serviceRecherche/presDeChezNous/recupererServicePresDeChezNous.usecase';
   import { utilisateurStore } from '@/store/utilisateur';
 
+  const serviceListeCarte = ref<InstanceType<typeof ServiceListeCarte>>();
   const serviceRecherchePresDeChezNousViewModel = ref<ServiceRecherchePresDeChezNousViewModel>();
   const usecase = new RecupererServicePresDeChezNousUsecase(new ServiceRecherchePresDeChezNousAxios());
 
@@ -113,6 +115,17 @@
     pageEstEnChargement,
     cartesSontEnChargement,
   } = useRechercheService(lancerRecherche, 'nourriture');
+
+  async function chargerPlusDeCartesEtFocus() {
+    const ancienNombreDeResultats = nombreDeResultats.value;
+    await chargerPlusDeCartes();
+
+    await nextTick(() => {
+      if (serviceListeCarte.value) {
+        serviceListeCarte.value.focusCarteParIndex(ancienNombreDeResultats);
+      }
+    });
+  }
 
   async function lancerRecherche() {
     await usecase.execute(
