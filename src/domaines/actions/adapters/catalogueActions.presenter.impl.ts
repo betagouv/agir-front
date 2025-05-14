@@ -5,6 +5,7 @@ import {
   CatalogueActionsPresenter,
   FiltresCatalogueActionsViewModel,
 } from '@/domaines/actions/ports/catalogueActions.presenter';
+import { SimulateursSupportes } from '@/shell/simulateursSupportes';
 
 export class CatalogueActionsPresenterImpl extends ActionsPresenterImpl implements CatalogueActionsPresenter {
   constructor(
@@ -16,7 +17,10 @@ export class CatalogueActionsPresenterImpl extends ActionsPresenterImpl implemen
 
   async presenteCatalogue(catalogueActions: CatalogueActions): Promise<void> {
     const actionsFiltrees = catalogueActions.actions.filter(
-      action => action.type !== TypeAction.SIMULATEUR || action.code === 'action_simulateur_voiture',
+      action =>
+        action.type !== TypeAction.SIMULATEUR ||
+        action.code === SimulateursSupportes.VOITURE ||
+        action.code === SimulateursSupportes.MAIF,
     );
     await super.presente(actionsFiltrees);
     this.filtresCallBack({

@@ -25,10 +25,9 @@
           <div class="fr-fieldset__element fr-mb-4w">
             <InputCodePostal
               autofocus
-              v-model="onboardingPostCreationCompte().codePostal"
-              :default-select-value="onboardingPostCreationCompte().commune"
-              :default-value="onboardingPostCreationCompte().codePostal"
-              @update:selectedCommune="onboardingPostCreationCompte().commune = $event"
+              v-model:code-epci="onboardingPostCreationCompte().codeEpci"
+              v-model:code-postal="onboardingPostCreationCompte().codePostal"
+              v-model:commune="onboardingPostCreationCompte().commune"
             />
           </div>
         </fieldset>

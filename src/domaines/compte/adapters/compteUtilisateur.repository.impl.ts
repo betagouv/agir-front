@@ -89,7 +89,7 @@ export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurReposit
   async validationOnboardingPostCreationCompte(
     idUtilisateur: string,
     pseudo: string,
-    commune: string,
+    codeEpci: string,
     codePostal: string,
     dateNaissance?: { jour: number; mois: number; annee: number },
   ): Promise<void> {
@@ -107,7 +107,7 @@ export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurReposit
     }
 
     await axiosInstance.patch(`/utilisateurs/${idUtilisateur}/logement`, {
-      commune,
+      code_commune: codeEpci,
       code_postal: codePostal,
     });
   }

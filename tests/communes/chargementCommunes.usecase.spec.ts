@@ -11,6 +11,9 @@ describe('Fichier de test du usecase de chargement des communes', () => {
     const listeDesCommunes = await chargementCommunesUsecase.execute(codePostal);
 
     // THEN
-    expect(listeDesCommunes).toStrictEqual(['BOURG EN BRESSE', 'ST DENIS LES BOURG']);
+    expect(listeDesCommunes).toStrictEqual([
+      { label: 'BOURG EN BRESSE', codeEpci: '01923' },
+      { label: 'ST DENIS LES BOURG', codeEpci: '01943' },
+    ]);
   });
 });
