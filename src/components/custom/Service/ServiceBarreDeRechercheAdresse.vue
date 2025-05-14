@@ -65,7 +65,7 @@
   import axios from 'redaxios';
   import { ref } from 'vue';
   import { useDebouncedFn } from '@/composables/useDebounce';
-  import { DonneesAdresseBarreDeRecherche, Coordonnees } from '@/shell/coordonneesType';
+  import { AdresseBarreDeRecherche, Coordonnees } from '@/shell/coordonneesType';
 
   defineProps<{
     labelId?: string;
@@ -85,10 +85,10 @@
     };
   };
 
-  const adresseRef = defineModel<DonneesAdresseBarreDeRecherche>('adresse');
+  const adresseRef = defineModel<AdresseBarreDeRecherche>('adresse');
   const coordonnees = defineModel<Coordonnees>('coordonnees');
   const recherche = defineModel<string>('recherche');
-  const adressesAffichees = ref<DonneesAdresseBarreDeRecherche[]>([]);
+  const adressesAffichees = ref<AdresseBarreDeRecherche[]>([]);
   const indexSelectionne = ref<number>(-1);
   const dialogOuverte = ref<boolean>(false);
   const dialogRef = ref<HTMLDialogElement>();
@@ -111,7 +111,7 @@
     const url = `https://data.geopf.fr/geocodage/search/?q=${adresseEncodee}&limit=8&index=address&type=housenumber&autocomplete=1`;
     axios.get(url).then(response => {
       adressesAffichees.value = response.data.features.map(
-        (feature: FeatureApiModel): DonneesAdresseBarreDeRecherche => ({
+        (feature: FeatureApiModel): AdresseBarreDeRecherche => ({
           numeroEtRueEtCodePostal: feature.properties.label,
           numeroEtRue: feature.properties.name,
           commune: feature.properties.city,
@@ -131,13 +131,10 @@
     dialogOuverte.value = true;
   };
 
-  function envoyerCoordonnees(adresse: DonneesAdresseBarreDeRecherche) {
+  function envoyerCoordonnees(adresse: AdresseBarreDeRecherche) {
     indexSelectionne.value = -1;
     recherche.value = `${adresse.numeroEtRue}, ${adresse.commune} (${adresse.codePostal})`;
-    coordonnees.value = {
-      latitude: adresse.coordonnees.latitude,
-      longitude: adresse.coordonnees.longitude,
-    };
+    coordonnees.value = adresse.coordonnees;
     adresseRef.value = adresse;
     dialogOuverte.value = false;
   }

@@ -38,7 +38,7 @@
           à votre échelle.
         </p>
         <a
-          :href="resultatSimulationMaifViewModel?.lienKit"
+          :href="resultatSimulationMaifViewModel.lienKit"
           class="fr-btn fr-btn--secondary"
           rel="noopener noreferrer"
           target="_blank"
@@ -107,13 +107,13 @@
   } from '@/domaines/simulationMaif/adapters/statistiquesCommuneMaif.presenter.impl';
   import { CalculerResultatSimulationMaifUsecase } from '@/domaines/simulationMaif/calculerResultatSimulationMaif.usecase';
   import { RecupererStatistiquesCommuneMaifUsecase } from '@/domaines/simulationMaif/recupererStatistiquesCommuneMaifDepuisProfil.usecase';
-  import { DonneesAdresseBarreDeRecherche, Coordonnees } from '@/shell/coordonneesType';
+  import { AdresseBarreDeRecherche, Coordonnees } from '@/shell/coordonneesType';
   import { SimulateursSupportes } from '@/shell/simulateursSupportes';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const recherche = ref<string>('');
   const coordonnees = ref<Coordonnees>();
-  const adresse = ref<DonneesAdresseBarreDeRecherche>();
+  const adresse = ref<AdresseBarreDeRecherche>();
   const statistiquesCommuneMaifViewModel = ref<StatistiquesCommuneMaifViewModel>();
   const resultatSimulationMaifViewModel = ref<SimulateurMaifViewModel>();
 
