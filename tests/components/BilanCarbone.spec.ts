@@ -112,33 +112,33 @@ describe('BilanCarbone', () => {
       const titre = page.getByRole('heading', { level: 2, name: 'Affinez mon estimation' });
       expect(titre).toBeDefined();
 
-      const carteThematique1 = page.getByRole('link', { name: '🚅 Transports' });
+      const carteThematique1 = page.getByRole('link', { name: '🚅 Transports , 9 questions , 100 % Terminé !' });
       expect(carteThematique1).toBeDefined();
       expect(carteThematique1).toHaveProperty(
         'title',
-        '🚅 Transports: affiner votre empreinte écologique sur cette thématique',
+        '🚅 Transports: affiner votre empreinte écologique avec 9 questions (Terminé)',
       );
-      const progressThematique1 = page.getByRole('progressbar', { name: 'Progression transport' });
+      const progressThematique1 = page.getByRole('progressbar', { name: 'Progression transport: 100%' });
       expect(progressThematique1).toBeDefined();
       expect(progressThematique1.getAttribute('aria-valuenow')).toBe('100');
 
-      const carteThematique2 = page.getByRole('link', { name: '🥦 Alimentation' });
+      const carteThematique2 = page.getByRole('link', { name: '🥦 Alimentation , 6 questions , 33 %' });
       expect(carteThematique2).toBeDefined();
       expect(carteThematique2).toHaveProperty(
         'title',
-        '🥦 Alimentation: affiner votre empreinte écologique sur cette thématique',
+        '🥦 Alimentation: affiner votre empreinte écologique avec 6 questions (achevé à 33%)',
       );
-      const progressThematique2 = page.getByRole('progressbar', { name: 'Progression alimentation' });
+      const progressThematique2 = page.getByRole('progressbar', { name: 'Progression alimentation: 33%' });
       expect(progressThematique2).toBeDefined();
       expect(progressThematique2.getAttribute('aria-valuenow')).toBe('33');
 
-      const carteThematique3 = page.getByRole('link', { name: '🏡 Logement' });
+      const carteThematique3 = page.getByRole('link', { name: '🏡 Logement , 8 questions , 12 %' });
       expect(carteThematique3).toBeDefined();
       expect(carteThematique3).toHaveProperty(
         'title',
-        '🏡 Logement: affiner votre empreinte écologique sur cette thématique',
+        '🏡 Logement: affiner votre empreinte écologique avec 8 questions (achevé à 12%)',
       );
-      const progressThematique3 = page.getByRole('progressbar', { name: 'Progression logement' });
+      const progressThematique3 = page.getByRole('progressbar', { name: 'Progression logement: 12%' });
       expect(progressThematique3).toBeDefined();
       expect(progressThematique3.getAttribute('aria-valuenow')).toBe('12');
     });
@@ -356,43 +356,45 @@ describe('BilanCarbone', () => {
     });
 
     it('affiche les cartes terminées pour affiner son bilan', () => {
-      const carteThematique1 = page.getByRole('link', { name: '🚅 Transports' });
+      const carteThematique1 = page.getByRole('link', { name: '🚅 Transports , 9 questions , 100 % Terminé !' });
       expect(carteThematique1).toBeDefined();
       expect(carteThematique1).toHaveProperty(
         'title',
-        '🚅 Transports: affiner votre empreinte écologique sur cette thématique',
+        '🚅 Transports: affiner votre empreinte écologique avec 9 questions (Terminé)',
       );
-      const progressThematique1 = page.getByRole('progressbar', { name: 'Progression transport' });
+      const progressThematique1 = page.getByRole('progressbar', { name: 'Progression transport: 100%' });
       expect(progressThematique1).toBeDefined();
       expect(progressThematique1.getAttribute('aria-valuenow')).toBe('100');
 
-      const carteThematique2 = page.getByRole('link', { name: '🥦 Alimentation' });
+      const carteThematique2 = page.getByRole('link', { name: '🥦 Alimentation , 6 questions , 100 % Terminé !' });
       expect(carteThematique2).toBeDefined();
       expect(carteThematique2).toHaveProperty(
         'title',
-        '🥦 Alimentation: affiner votre empreinte écologique sur cette thématique',
+        '🥦 Alimentation: affiner votre empreinte écologique avec 6 questions (Terminé)',
       );
-      const progressThematique2 = page.getByRole('progressbar', { name: 'Progression alimentation' });
+      const progressThematique2 = page.getByRole('progressbar', { name: 'Progression alimentation: 100%' });
       expect(progressThematique2).toBeDefined();
       expect(progressThematique2.getAttribute('aria-valuenow')).toBe('100');
 
-      const carteThematique3 = page.getByRole('link', { name: '🏡 Logement' });
+      const carteThematique3 = page.getByRole('link', { name: '🏡 Logement , 8 questions , 100 % Terminé !' });
       expect(carteThematique3).toBeDefined();
       expect(carteThematique3).toHaveProperty(
         'title',
-        '🏡 Logement: affiner votre empreinte écologique sur cette thématique',
+        '🏡 Logement: affiner votre empreinte écologique avec 8 questions (Terminé)',
       );
-      const progressThematique3 = page.getByRole('progressbar', { name: 'Progression logement' });
+      const progressThematique3 = page.getByRole('progressbar', { name: 'Progression logement: 100%' });
       expect(progressThematique3).toBeDefined();
       expect(progressThematique3.getAttribute('aria-valuenow')).toBe('100');
 
-      const carteThematique4 = page.getByRole('link', { name: '🛒 Consommation durable' });
+      const carteThematique4 = page.getByRole('link', {
+        name: '🛒 Consommation durable , 8 questions , 100 % Terminé !',
+      });
       expect(carteThematique4).toBeDefined();
       expect(carteThematique4).toHaveProperty(
         'title',
-        '🛒 Consommation durable: affiner votre empreinte écologique sur cette thématique',
+        '🛒 Consommation durable: affiner votre empreinte écologique avec 8 questions (Terminé)',
       );
-      const progressThematique4 = page.getByRole('progressbar', { name: 'Progression logement' });
+      const progressThematique4 = page.getByRole('progressbar', { name: 'Progression logement: 100%' });
       expect(progressThematique4).toBeDefined();
       expect(progressThematique4.getAttribute('aria-valuenow')).toBe('100');
 
