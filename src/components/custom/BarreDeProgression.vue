@@ -9,6 +9,7 @@
   >
     <div class="jauge-remplissage full-height" aria-hidden="true" :style="{ width: `${valeurToWidth()}%` }" />
   </div>
+  <span class="fr-sr-only">%</span>
 </template>
 
 <script setup lang="ts">

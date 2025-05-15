@@ -8,20 +8,18 @@
         id: contentId,
       },
     }"
-    :title="`${label}: affiner votre empreinte écologique avec ${nombreDeQuestions} questions ${estTermine ? '(Terminé) ' : `(achevé à ${progression}%)`}`"
+    :title="`${label}: affiner votre empreinte écologique avec ${nombreDeQuestions} questions ${estTermine ? '(Terminé)' : `(achevé à ${progression}%)`}`"
   >
     <div>
       <h3 class="fr-text--lg text--semi-bold text--black fr-mb-1v text--lh-1-3 fr-pt-1w">
-        {{ label }}
+        {{ label }}<span class="fr-sr-only">,</span>
       </h3>
-      <span class="fr-sr-only">,</span>
-      <p class="fr-m-0">{{ nombreDeQuestions }} questions</p>
-      <span class="fr-sr-only">,</span>
+      <p class="fr-m-0">{{ nombreDeQuestions }} questions<span class="fr-sr-only">,</span></p>
     </div>
 
     <BarreDeProgression
       class="fr-mb-1w"
-      :label="`Progression ${thematique} : ${progression}%`"
+      :label="`Progression ${thematique}: ${progression}%`"
       :value="progression"
       :value-max="100"
       :couleur="estTermine ? '#18753c' : '#0063CB'"
