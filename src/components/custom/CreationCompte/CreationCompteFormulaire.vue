@@ -4,9 +4,9 @@
   <div class="flex flex-reverse-col fr-mb-3w">
     <p class="text--center">
       <span class="display-block"> En m’inscrivant (y compris avec FranceConnect) j'accepte les </span>
-      <router-link :to="{ name: RouteConformiteName.CGU }" class="fr-link">
-        Conditions générales d’utilisation
-      </router-link>
+      <router-link :to="{ name: RouteConformiteName.CGU }" class="fr-link" target="_blank"
+        >Conditions générales d’utilisation</router-link
+      >
     </p>
 
     <div>
@@ -85,13 +85,3 @@
       });
   };
 </script>
-
-<style scoped>
-  #cgu:focus {
-    outline: solid var(--blue-france-sun-113-625);
-  }
-
-  .flex-reverse-col {
-    flex-direction: column-reverse;
-  }
-</style>

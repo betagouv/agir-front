@@ -1,5 +1,5 @@
 <template>
-  <aside class="full-width fr-p-2w fr-pb-5w border-radius--md background--white position--relative fr-mt-6w shadow">
+  <aside class="full-width fr-p-2w fr-pb-5w background--white position--relative fr-mt-6w shadow">
     <span class="fr-text--xl text--bold fr-mb-2w display-block">Envie d'en savoir plus ?</span>
     <router-link class="fr-btn fr-btn--secondary" target="_blank" :to="{ name: RouteCommuneName.ACCUEIL }"
       >Découvrir</router-link
