@@ -1,7 +1,7 @@
 <template>
   <div class="fr-container fr-py-6w">
     <div class="fr-col-12 fr-col-lg-7 fr-mx-auto border background--white fr-p-3w">
-      <h1 class="fr-h1 fr-mb-4w">Connexion à <i>J'agis</i></h1>
+      <h1 class="fr-h1 fr-mb-4w">Se connecter</h1>
 
       <FranceConnect class="fr-mb-3w" />
 
