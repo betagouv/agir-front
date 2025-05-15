@@ -35,7 +35,7 @@
   <hr />
   <div class="fr-my-3w text--center">
     <router-link
-      :to="{ name: RouteCompteName.CREATION_COMPTE }"
+      :to="{ name: RouteCommuneName.AUTHENTIFICATION }"
       class="fr-link fr-link--icon-right full-width fr-icon-arrow-right-line"
       >J'ai déjà un compte</router-link
     >
@@ -51,8 +51,7 @@
   import { CompteUtilisateurRepositoryImpl } from '@/domaines/compte/adapters/compteUtilisateur.repository.impl';
   import { CreerComptePresenterImpl } from '@/domaines/compte/adapters/creerComptePresenterImpl';
   import { CreerCompteUtilisateurUsecase, UserInput } from '@/domaines/compte/creerCompteUtilisateur.usecase';
-  import router from '@/router';
-  import { RouteCompteName } from '@/router/compte/routeCompteName';
+  import router, { RouteCommuneName } from '@/router';
   import { RouteConformiteName } from '@/router/conformite/routes';
   import { utilisateurStore } from '@/store/utilisateur';
 

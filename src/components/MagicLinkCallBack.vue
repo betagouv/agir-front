@@ -39,7 +39,7 @@
         new AuthentificationResultatPresenterImpl(route => {
           const requestedRoute = sessionStorage.getItem('requestedRoute');
           sessionStorage.removeItem('requestedRoute');
-          router.push(requestedRoute || route);
+          router.replace(requestedRoute || route);
         }),
       )
       .catch(reason => {
