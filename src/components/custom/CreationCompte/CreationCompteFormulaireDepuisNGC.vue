@@ -34,7 +34,7 @@
     <div>
       <FranceConnect :situation-id="idNGC" class="fr-mb-3w" />
 
-      <h2>Avec mon adresse e-mail</h2>
+      <h2 class="fr-h3">Avec mon adresse e-mail</h2>
       <form class="fr-mb-4w" @submit.prevent="performCreerCompteUtilisateur">
         <div class="fr-messages-group">
           <Alert

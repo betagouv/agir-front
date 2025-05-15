@@ -5,26 +5,18 @@
 
       <FranceConnect class="fr-mb-3w" />
 
+      <h2 class="fr-h3">Avec mon adresse e-mail</h2>
       <form @submit.prevent="login">
-        <fieldset aria-labelledby="login-fieldset-legend" class="fr-mb-0 fr-fieldset">
-          <legend id="login-fieldset-legend" class="fr-fieldset__legend">
-            <h2 class="fr-mt-2w fr-h3">Avec mon adresse e-mail</h2>
-          </legend>
-          <Alert
-            v-if="loginEnErreur"
-            :message="loginMessageErreur"
-            aria-live="assertive"
-            class="fr-col-12 fr-mb-2w"
-            titre="Erreur lors de l'authentification"
-            type="error"
-          />
-          <div class="fr-fieldset__element">
-            <InputMail v-model="email" label="Mon adresse email" name="email" />
-          </div>
-          <div class="fr-fieldset__element fr-mt-2w">
-            <button class="fr-btn fr-btn--lg display-block full-width" type="submit">Se connecter</button>
-          </div>
-        </fieldset>
+        <Alert
+          v-if="loginEnErreur"
+          :message="loginMessageErreur"
+          aria-live="assertive"
+          class="fr-col-12 fr-mb-2w"
+          titre="Erreur lors de l'authentification"
+          type="error"
+        />
+        <InputMail v-model="email" label="Mon adresse e-mail" name="email" />
+        <button class="fr-btn fr-btn--lg display-block full-width" type="submit">Se connecter</button>
       </form>
       <div v-if="premiereConnexion" class="background--white fr-pt-4w text--center">
         <hr />
