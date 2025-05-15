@@ -64,6 +64,10 @@
     flex-wrap: wrap;
 }
 
+.flex-reverse-col {
+    flex-direction: column-reverse;
+}
+
 .z-index-2 {
     z-index: 2;
 }

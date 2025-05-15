@@ -1,5 +1,5 @@
 import { playAudit } from 'playwright-lighthouse';
-import { test, chromium, BrowserContext, Page } from '@playwright/test';
+import { BrowserContext, chromium, Page, test } from '@playwright/test';
 import fs from 'fs';
 
 test.describe('Audit a11y - pages non connectées', () => {
@@ -46,12 +46,12 @@ test.describe('Audit a11y - pages connectées', () => {
 
     await page.goto('/authentification');
 
-    await page.getByRole('textbox', { name: 'Adresse électronique Format' }).fill(`${process.env.PLAYWRIGHT_EMAIL}`);
-    await page.getByRole('textbox', { name: 'Mot de passe' }).fill(`${process.env.PLAYWRIGHT_PASSWORD}`);
+    await page
+      .getByRole('textbox', { name: 'Mon adresse e-mail Format attendu : nom@domaine.fr' })
+      .fill(`${process.env.PLAYWRIGHT_EMAIL}`);
     await page.getByRole('button', { name: 'Se connecter' }).click({ force: true });
-    await page.getByRole('textbox', { name: 'code' }).fill('999999');
-    await page.getByRole('button', { name: 'Valider' }).click({ force: true });
-    await page.waitForTimeout(1500);
+    await page.waitForURL(`/validation-authentification?email=${process.env.PLAYWRIGHT_EMAIL}`);
+    await page.goto(`/authentification/validation-lien-magique?email=${process.env.PLAYWRIGHT_EMAIL}&code=999999`);
   });
 
   test("Page d'accueil connectée", async () => {
@@ -64,42 +64,27 @@ test.describe('Audit a11y - pages connectées', () => {
   });
 
   test('Page bibliothèque', async () => {
-    await page.goto('/agir/bibliotheque');
+    await page.goto('/bibliotheque');
     await playAuditA11y(page);
   });
 
   test('Page mon compte - informations', async () => {
-    await page.goto('/mon-compte/');
+    await page.goto('/compte/');
     await playAuditA11y(page);
   });
 
   test('Page mon compte - mieux vous connaître', async () => {
-    await page.goto('/mon-compte/mieux-vous-connaitre');
+    await page.goto('/compte/mieux-vous-connaitre');
     await playAuditA11y(page);
   });
 
   test('Page mon compte - logement', async () => {
-    await page.goto('/mon-compte/logement');
-    await playAuditA11y(page);
-  });
-
-  test('Page mon compte - défis', async () => {
-    await page.goto('/mon-compte/mes-actions');
+    await page.goto('/compte/logement');
     await playAuditA11y(page);
   });
 
   test('Page mon compte - options avancées', async () => {
-    await page.goto('/mon-compte/options-avancees');
-    await playAuditA11y(page);
-  });
-
-  test('Page service linky', async () => {
-    await page.goto('/agir/services/linky');
-    await playAuditA11y(page);
-  });
-
-  test('Page défi', async () => {
-    await page.goto('/defi/18');
+    await page.goto('/compte/options-avancees');
     await playAuditA11y(page);
   });
 
@@ -140,6 +125,16 @@ test.describe('Audit a11y - pages connectées', () => {
 
   test('Page bilan carbone', async () => {
     await page.goto('/bilan-environnemental');
+    await playAuditA11y(page);
+  });
+
+  test('Page Action Quiz', async () => {
+    await page.goto('/action/quizz/action_quiz_local/comprendre-les-produits-locaux');
+    await playAuditA11y(page);
+  });
+
+  test('Page Action Classique', async () => {
+    await page.goto('/action/classique/action_recette_produitmer/diversifier-les-produits-de-la-mer-dans-vos-repas');
     await playAuditA11y(page);
   });
 

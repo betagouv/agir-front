@@ -31,17 +31,16 @@ interface ValiderCompteApiModel {
 }
 
 export class UtilisateurRepositoryAxios implements UtilisateurRepository {
-  async authentifierUtilisateur(mail: string, password: string): Promise<void> {
+  async authentifierUtilisateur(mail: string): Promise<void> {
     const axiosInstance = AxiosFactory.getAxios();
-    await axiosInstance.post(`/utilisateurs/login_v2`, {
+    await axiosInstance.post(`/utilisateurs/send_magic_link`, {
       email: mail,
-      mot_de_passe: password,
     });
   }
 
-  async validerLoginOtp(email: string, code: string): Promise<Utilisateur> {
+  async validerMagicLink(email: string, code: string): Promise<Utilisateur> {
     const axiosInstance = AxiosFactory.getAxios();
-    const response = await axiosInstance.post<LoginApiModel>(`/utilisateurs/login_v2_code`, {
+    const response = await axiosInstance.post<LoginApiModel>(`/utilisateurs/magic_link_login`, {
       email,
       code,
     });
@@ -99,22 +98,6 @@ export class UtilisateurRepositoryAxios implements UtilisateurRepository {
     });
   }
 
-  async commencerRedefinirMotDePasse(email: string): Promise<void> {
-    const axiosInstance = AxiosFactory.getAxios();
-    await axiosInstance.post(`/utilisateurs/oubli_mot_de_passe`, {
-      email,
-    });
-  }
-
-  async terminerRedefinirMotDePasse(email: string, motDePasse: string, code: string): Promise<void> {
-    const axiosInstance = AxiosFactory.getAxios();
-    await axiosInstance.post(`/utilisateurs/modifier_mot_de_passe`, {
-      email,
-      mot_de_passe: motDePasse,
-      code,
-    });
-  }
-
   async seConnecterAvecFranceConnect(code: string, loginId: string): Promise<Utilisateur> {
     const axiosInstance = AxiosFactory.getAxios();
     const response = await axiosInstance.post<LoginApiModel>(`/login_france_connect_step_2`, {
@@ -155,5 +138,12 @@ export class UtilisateurRepositoryAxios implements UtilisateurRepository {
   async terminerMessageReset(idUtilisateur: string): Promise<void> {
     const axiosInstance = AxiosFactory.getAxios();
     await axiosInstance.post(`/utilisateurs/${idUtilisateur}/gamification/popup_reset_vue`);
+  }
+
+  async envoyerUnMagicLink(email: string): Promise<void> {
+    const axiosInstance = AxiosFactory.getAxios();
+    await axiosInstance.post(`/utilisateurs/send_magic_link`, {
+      email,
+    });
   }
 }
