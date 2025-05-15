@@ -1,8 +1,7 @@
 const PageCompte = () => import('@/components/pages/PageCompte.vue');
 const PageCreationCompte = () => import('@/components/pages/PageCreationCompte.vue');
 const PageCreationCompteDepuisNGC = () => import('@/components/pages/PageCreationCompteDepuisNGC.vue');
-const PageValidationCompte = () => import('@/components/pages/PageValidationCompte.vue');
-const PageValidationAuthentification = () => import('@/components/pages/PageValidationAuthentification.vue');
+const PageVerificationAdresseMail = () => import('@/components/pages/PageVerificationAdresseMail.vue');
 const PageCompteOptionsAvancees = () => import('@/components/pages/PageCompteOptionsAvancees.vue');
 const PageCompteMieuxVousConnaitre = () => import('@/components/pages/PageCompteMieuxVousConnaitre.vue');
 const PageCompteLogement = () => import('@/components/pages/PageCompteLogement.vue');
@@ -105,7 +104,7 @@ const compteRoutes: RouteRecordRaw[] = [
     beforeEnter: onboardingGuard,
     path: RouteComptePath.VALIDATION_COMPTE,
     name: RouteCompteName.VALIDATION_COMPTE,
-    component: PageValidationCompte,
+    component: PageVerificationAdresseMail,
     meta: {
       title: 'Validation du compte',
       estPublique: true,
@@ -114,7 +113,7 @@ const compteRoutes: RouteRecordRaw[] = [
   {
     path: RouteComptePath.VALIDATION_AUTHENTIFICATION,
     name: RouteCompteName.VALIDATION_AUTHENTIFICATION,
-    component: PageValidationAuthentification,
+    component: PageVerificationAdresseMail,
     meta: {
       title: "Validation de l'authentification",
       estPublique: true,
