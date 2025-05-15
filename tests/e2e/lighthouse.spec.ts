@@ -46,7 +46,9 @@ test.describe('Audit a11y - pages connectées', () => {
 
     await page.goto('/authentification');
 
-    await page.getByRole('textbox', { name: 'Adresse électronique Format' }).fill(`${process.env.PLAYWRIGHT_EMAIL}`);
+    await page
+      .getByRole('textbox', { name: 'Mon adresse email Format attendu : nom@domaine.fr' })
+      .fill(`${process.env.PLAYWRIGHT_EMAIL}`);
     await page.getByRole('button', { name: 'Se connecter' }).click({ force: true });
     await page.waitForURL(`/validation-authentification?email=${process.env.PLAYWRIGHT_EMAIL}`);
     await page.goto(`/authentification/validation-lien-magique?email=${process.env.PLAYWRIGHT_EMAIL}&code=999999`);
