@@ -1,14 +1,14 @@
 <template>
   <div class="fr-container fr-py-6w">
-    <div class="fr-col-12 fr-col-lg-6 fr-mx-auto fr-p-4w border border-radius--md background--white">
-      <h1>Connexion à <i>J'agis</i></h1>
+    <div class="fr-col-12 fr-col-lg-7 fr-mx-auto border background--white fr-p-3w">
+      <h1 class="fr-h1 fr-mb-4w">Connexion à <i>J'agis</i></h1>
 
-      <FranceConnect />
+      <FranceConnect class="fr-mb-3w" />
 
       <form @submit.prevent="login">
         <fieldset aria-labelledby="login-fieldset-legend" class="fr-mb-0 fr-fieldset">
           <legend id="login-fieldset-legend" class="fr-fieldset__legend">
-            <h2 class="fr-mt-2w">Se connecter avec son e-mail et recevoir un lien magique</h2>
+            <h2 class="fr-mt-2w fr-h3">Avec mon adresse e-mail</h2>
           </legend>
           <Alert
             v-if="loginEnErreur"
@@ -19,25 +19,22 @@
             type="error"
           />
           <div class="fr-fieldset__element">
-            <span class="fr-hint-text">Tous les champs sont obligatoires.</span>
-          </div>
-          <div class="fr-fieldset__element">
-            <InputMail v-model="email" label="Adresse électronique" name="email" />
+            <InputMail v-model="email" label="Mon adresse email" name="email" />
           </div>
           <div class="fr-fieldset__element fr-mt-2w">
             <button class="fr-btn fr-btn--lg display-block full-width" type="submit">Se connecter</button>
           </div>
         </fieldset>
       </form>
-      <div v-if="premiereConnexion" class="background--white fr-p-4w text--center">
+      <div v-if="premiereConnexion" class="background--white fr-pt-4w text--center">
         <hr />
-        <h2 class="fr-h3">Première visite ?</h2>
-        <router-link
-          :to="{ name: RouteCompteName.CREATION_COMPTE }"
-          class="fr-btn fr-btn--lg fr-btn--secondary display-block full-width"
-        >
-          Créer un compte
-        </router-link>
+        <div class="fr-my-3w">
+          <router-link
+            :to="{ name: RouteCompteName.CREATION_COMPTE }"
+            class="fr-link fr-link--icon-right full-width fr-icon-arrow-right-line"
+            >Je crée mon compte</router-link
+          >
+        </div>
       </div>
     </div>
   </div>

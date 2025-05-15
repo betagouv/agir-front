@@ -1,7 +1,7 @@
 <template>
   <h1 class="fr-h2">Créer un compte sur <i>J'agis</i></h1>
   <img alt="" src="/bg_creation_compte.svg" />
-  <FranceConnect class="fr-mb-2w" title-class="fr-h3" />
+  <FranceConnect class="fr-mb-2w" />
   <h2 class="fr-h3">Se créer un compte en choisissant un identifiant</h2>
   <form aria-labelledby="identity-fieldset-legend" class="fr-mb-4w" @submit.prevent="performCreerCompteUtilisateur">
     <fieldset class="fr-fieldset fr-mb-0">
