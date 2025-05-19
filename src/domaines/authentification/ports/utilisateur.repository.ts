@@ -25,9 +25,7 @@ export type DeconnexionFranceConnect = {
 };
 
 export interface UtilisateurRepository {
-  authentifierUtilisateur(email: string, motDePasse: string): Promise<void>;
-
-  validerLoginOtp(email: string, code: string): Promise<Utilisateur>;
+  validerMagicLink(email: string, code: string): Promise<Utilisateur>;
 
   getUtilisateurAvecId(idUtilisateur: string): Promise<Utilisateur>;
 
@@ -35,13 +33,11 @@ export interface UtilisateurRepository {
 
   renvoyerCodeOTP(email: string): Promise<void>;
 
-  commencerRedefinirMotDePasse(email: string): void;
-
-  terminerRedefinirMotDePasse(email: string, motDePasse: string, code: string): Promise<void>;
-
   seConnecterAvecFranceConnect(oidcCode: string, oidcState: string): Promise<Utilisateur>;
 
   deconnecterUtilisateur(idUtilisateur: string): Promise<DeconnexionFranceConnect>;
 
   terminerMessageReset(idUtilisateur: string): Promise<void>;
+
+  envoyerUnMagicLink(email: string): Promise<void>;
 }

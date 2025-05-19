@@ -16,6 +16,7 @@ import serviceRoutes from '@/router/services/routes';
 import thematiqueRoutes from '@/router/thematiques/routes';
 import { utilisateurStore } from '@/store/utilisateur';
 
+const MagicLinkCallBack = () => import('@/components/MagicLinkCallBack.vue');
 const Authentification = () => import('@/components/Authentification.vue');
 const Page404 = () => import('@/components/pages/Page404.vue');
 const FranceConnectLogoutCallBack = () => import('@/components/FranceConnectLogoutCallBack.vue');
@@ -30,6 +31,7 @@ export enum RouteCommuneName {
   NOT_FOUND = 'not-found',
   RETOUR_AUTH_FRANCE_CONNECT = 'retour-auth-france-connect',
   RETOUR_LOGOUT_FRANCE_CONNECT = 'retour-logout-france-connect',
+  MAGIC_LINK_CALLBACK = 'magic-link-callback',
 }
 
 enum RouteCommunePath {
@@ -38,6 +40,7 @@ enum RouteCommunePath {
   SESSION_EXPIREE = '/session-expiree',
   LOGIN_CALLBACK = '/fc-login-callback',
   LOGOUT_CALLBACK = '/fc-logout-callback',
+  MAGIC_LINK_CALLBACK = '/authentification/validation-lien-magique',
 }
 
 const routes: RouteRecordRaw[] = [
@@ -84,6 +87,14 @@ const routes: RouteRecordRaw[] = [
     component: PageSessionExpiree,
     meta: {
       title: 'Session expirée',
+      estPublique: true,
+    },
+  },
+  {
+    path: RouteCommunePath.MAGIC_LINK_CALLBACK,
+    name: RouteCommuneName.MAGIC_LINK_CALLBACK,
+    component: MagicLinkCallBack,
+    meta: {
       estPublique: true,
     },
   },
