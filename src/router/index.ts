@@ -125,6 +125,10 @@ const router = createRouter({
   history: createWebHistory(),
   routes,
   scrollBehavior: (to, from, savedPosition) => {
+    if (from.path === to.path && to.hash === from.hash) {
+      return false;
+    }
+
     if (to.hash) {
       return {
         el: to.hash,
