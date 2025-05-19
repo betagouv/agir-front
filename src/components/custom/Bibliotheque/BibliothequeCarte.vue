@@ -5,9 +5,7 @@
         <h3 class="fr-card__title">
           <router-link :to="url" :title="`Continuer la lecture de &quot;${titre}&quot;`">{{ titre }}</router-link>
         </h3>
-        <p class="fr-card__desc">
-          <span>{{ description }}</span>
-        </p>
+        <p class="fr-card__desc">{{ description }}</p>
         <div class="fr-grid-row flex-space-between fr-grid-row--middle fr-mb-3v">
           <span>
             <span class="fr-sr-only">de la thématique :</span>
