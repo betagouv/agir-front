@@ -18,7 +18,7 @@
           :aria-describedby="`${!codePostalValide ? 'text-input-error-desc-error-invalide' : ''} ${codePostalNexistePas ? 'text-input-error-desc-error-commune' : ''}`"
           type="text"
           @input="updateValue"
-          :value="defaultValue"
+          :value="codePostalInput"
           :autofocus="autofocus"
         />
         <p v-if="!codePostalValide" id="text-input-error-desc-error-invalide" class="fr-error-text">
@@ -69,6 +69,7 @@
   }>();
 
   const communes = ref<string[]>([]);
+  const codePostalInput = ref<string>(props.defaultValue ?? '');
   const codePostal = ref<number>();
   const codePostalValide = ref<boolean>(true);
   const codePostalNexistePas = computed(
@@ -90,6 +91,7 @@
 
   const updateValue = async event => {
     const inputElement = event.target as HTMLInputElement;
+    codePostalInput.value = inputElement.value;
     codePostal.value = isNaN(parseInt(inputElement.value)) ? 0 : parseInt(inputElement.value);
 
     if (/^\d{5}$/.test(inputElement.value)) {
