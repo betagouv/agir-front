@@ -1,5 +1,19 @@
 # Changelog
 
+## [2.9.0](https://github.com/betagouv/agir-front/compare/v2.8.0...v2.9.0) (2025-05-19)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* amelioration a11y (UI carte bilan, charger + avec focus, bouton radio notation article) ([#1115](https://github.com/betagouv/agir-front/issues/1115)) ([ef8c363](https://github.com/betagouv/agir-front/commit/ef8c3634bc43f1cd2bb301ad646f9d75cf4531a0))
+* intégration du magic link ([#1106](https://github.com/betagouv/agir-front/issues/1106)) ([cbaf3da](https://github.com/betagouv/agir-front/commit/cbaf3dab8892a04b7929130ef560af0db7ccc775))
+* nouvelle UI pour cartes dans bibliothèque ([#1114](https://github.com/betagouv/agir-front/issues/1114)) ([d78c2b1](https://github.com/betagouv/agir-front/commit/d78c2b1a0f3b294d9944a77e650dbb6d4b0b0060))
+
+
+### 👷 Autres changements
+
+* a11y (label, description, ids,) et w3c validator ([#1107](https://github.com/betagouv/agir-front/issues/1107)) ([88f05b5](https://github.com/betagouv/agir-front/commit/88f05b59b19eed8dbb02acf85c691f2806023359))
+
 ## [2.8.0](https://github.com/betagouv/agir-front/compare/v2.7.0...v2.8.0) (2025-05-13)
 
 
