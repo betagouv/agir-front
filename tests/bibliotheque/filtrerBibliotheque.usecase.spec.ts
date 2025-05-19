@@ -36,8 +36,8 @@ describe('Fichier de tests concernant le chargement de la bibliotheque', () => {
             thematique: {
               label: 'Me nourrir',
               style: {
-                backgroundColor: '#E3FBAF',
-                color: '#175202',
+                backgroundColor: '#D2E9FF',
+                color: '#021952',
                 emoji: '🍛',
               },
             },
@@ -52,8 +52,8 @@ describe('Fichier de tests concernant le chargement de la bibliotheque', () => {
             thematique: {
               label: 'Mes achats',
               style: {
-                backgroundColor: '#FFE8D7',
-                color: '#522E02',
+                backgroundColor: '#D2E9FF',
+                color: '#021952',
                 emoji: '👕',
               },
             },
