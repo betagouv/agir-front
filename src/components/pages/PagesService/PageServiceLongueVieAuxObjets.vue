@@ -109,7 +109,7 @@
 
     await nextTick(() => {
       if (serviceListeCarte.value) {
-        serviceListeCarte.value.focusCarteParIndex(ancienNombreDeResultats + 1);
+        serviceListeCarte.value.focusCarteParIndex(ancienNombreDeResultats);
       }
     });
   }

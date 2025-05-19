@@ -1,7 +1,7 @@
 import { Bibliotheque } from '../ports/bibliotheque.repository';
 import { BibliothequePresenter, BibliothequeViewModel } from '@/domaines/bibliotheque/ports/bibliotheque.presenter';
 import { MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
-import { TagThematique } from '@/domaines/thematiques/TagThematique';
+import { TagStyle, TagThematique } from '@/domaines/thematiques/TagThematique';
 import { buildUrl } from '@/shell/buildUrl';
 
 export class BibliothequePresenterImpl implements BibliothequePresenter {
@@ -16,7 +16,7 @@ export class BibliothequePresenterImpl implements BibliothequePresenter {
         titre: ressource.titre,
         thematique: {
           label: MenuThematiques.getThematiqueData(ressource.thematique).labelDansLeMenu,
-          style: TagThematique.getTagThematiqueUtilitaire(ressource.thematique),
+          style: this.tweakTagStyle(ressource.thematique),
         },
         description: ressource.description,
         url: `/article/${buildUrl(ressource.titre)}/${ressource.idDuContenu}`,
@@ -29,5 +29,14 @@ export class BibliothequePresenterImpl implements BibliothequePresenter {
         checked: false,
       })),
     });
+  }
+
+  tweakTagStyle(clefTechniqueAPI: string): TagStyle {
+    const tagThematique = TagThematique.getTagThematiqueUtilitaire(clefTechniqueAPI);
+    return {
+      backgroundColor: '#D2E9FF',
+      color: '#021952',
+      emoji: tagThematique.emoji,
+    };
   }
 }
