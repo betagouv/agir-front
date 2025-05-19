@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.9.1](https://github.com/betagouv/agir-front/compare/v2.9.0...v2.9.1) (2025-05-19)
+
+
+### 🐛 Corrections de bogues
+
+* auto-complétion du navigateur fonctionnel sur code postal ([#1116](https://github.com/betagouv/agir-front/issues/1116)) ([838a7ad](https://github.com/betagouv/agir-front/commit/838a7adfd62980d53f8989932b446ca2efd9cb42))
+
 ## [2.9.0](https://github.com/betagouv/agir-front/compare/v2.8.0...v2.9.0) (2025-05-19)
 
 
