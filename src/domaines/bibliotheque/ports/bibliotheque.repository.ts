@@ -1,8 +1,11 @@
+import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
+
 export interface Ressource {
   titre: string;
   description: string;
   idDuContenu: string;
-  thematique: string;
+  thematiqueLabel: string;
+  thematique: ClefThematiqueAPI;
   image: string;
   favoris: boolean;
 }

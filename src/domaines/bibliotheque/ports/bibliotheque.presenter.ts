@@ -1,4 +1,5 @@
 import { Bibliotheque } from '@/domaines/bibliotheque/ports/bibliotheque.repository';
+import { TagStyle } from '@/domaines/thematiques/TagThematique';
 
 export interface BibliothequePresenter {
   presente(bibliotheque: Bibliotheque): void;
@@ -9,7 +10,10 @@ export interface BibliothequeViewModel {
   articles: {
     idDuContenu: string;
     titre: string;
-    thematique: string;
+    thematique: {
+      label: string;
+      style: TagStyle;
+    };
     description: string;
     url: string;
     image: string;
