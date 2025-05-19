@@ -22,7 +22,7 @@
   import { SessionRepositoryStore } from '@/domaines/authentification/adapters/session.repository.store';
   import { UtilisateurRepositoryAxios } from '@/domaines/authentification/adapters/utilisateur.repository.axios';
   import { AuthentifierUtilisateurFranceConnectUsecase } from '@/domaines/authentification/authentifierUtilisateurFranceConnect.usecase';
-  import router from '@/router';
+  import router, { RouteCommuneName } from '@/router';
 
   const { alerte, afficherAlerte } = useAlerte();
 
@@ -30,35 +30,40 @@
     const route = useRoute();
     const oidcCode = route.query.code as string;
     const oidcState = route.query.state as string;
-    const usecase = new AuthentifierUtilisateurFranceConnectUsecase(
-      new UtilisateurRepositoryAxios(),
-      new SessionRepositoryStore(),
-      new PostOnboardingRepositoryStore(),
-    );
 
-    await usecase
-      .execute(
-        oidcCode,
-        oidcState,
-        new AuthentificationResultatPresenterImpl(route => {
-          const requestedRoute = sessionStorage.getItem('requestedRoute');
-          sessionStorage.removeItem('requestedRoute');
-          router.push(requestedRoute || route);
-        }),
-      )
-      .catch(reason => {
-        afficherAlerte(
-          'error',
-          'Erreur lors la connexion à France Connect. Deconnexion en cours veuillez patienter.',
-          reason.data.message,
-        );
+    if (route.query.error === 'access_denied') {
+      await router.push({ name: RouteCommuneName.ACCUEIL });
+    } else {
+      const usecase = new AuthentifierUtilisateurFranceConnectUsecase(
+        new UtilisateurRepositoryAxios(),
+        new SessionRepositoryStore(),
+        new PostOnboardingRepositoryStore(),
+      );
 
-        setTimeout(() => {
-          const axios = AxiosFactory.getAxios();
-          axios.post('/logout', { oidc_state: oidcState }).then(reponse => {
-            window.location.href = reponse.data.france_connect_logout_url;
-          });
-        }, 3000);
-      });
+      await usecase
+        .execute(
+          oidcCode,
+          oidcState,
+          new AuthentificationResultatPresenterImpl(route => {
+            const requestedRoute = sessionStorage.getItem('requestedRoute');
+            sessionStorage.removeItem('requestedRoute');
+            router.push(requestedRoute || route);
+          }),
+        )
+        .catch(reason => {
+          afficherAlerte(
+            'error',
+            'Erreur lors la connexion à France Connect. Deconnexion en cours veuillez patienter.',
+            reason.data.message,
+          );
+
+          setTimeout(() => {
+            const axios = AxiosFactory.getAxios();
+            axios.post('/logout', { oidc_state: oidcState }).then(reponse => {
+              window.location.href = reponse.data.france_connect_logout_url;
+            });
+          }, 3000);
+        });
+    }
   });
 </script>
