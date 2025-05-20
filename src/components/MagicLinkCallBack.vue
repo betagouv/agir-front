@@ -1,7 +1,9 @@
 <template>
   <div class="fr-container fr-my-3w">
     <div v-if="!alerte.isActive">
-      <a v-if="inscritDepuisLeMobile && estSurMobile" :href="magicLinkMobileUrl">Continuer sur l'application mobile</a>
+      <a v-if="inscritDepuisLeMobile && estSurMobile" :href="magicLinkMobileUrl" class="fr-btn"
+        >Continuer sur l'application mobile</a
+      >
       <p v-else class="fr-h3">Redirection en cours ... Veuillez patienter.</p>
     </div>
 
