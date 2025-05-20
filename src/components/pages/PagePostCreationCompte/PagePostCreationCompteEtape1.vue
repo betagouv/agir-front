@@ -19,7 +19,7 @@
               :maxlength="20"
               :required="true"
               label="Votre pseudonyme"
-              description="Doit être composés de 3 à 21 caractères. Lettres et chiffres uniquement."
+              description="Doit être composé de 3 à 21 caractères. Lettres et chiffres uniquement."
               name="utilisateur-pseudo"
             />
 
