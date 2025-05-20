@@ -6,6 +6,7 @@ import { createApp } from 'vue';
 import VueMatomo from 'vue-matomo';
 import { createSentry } from './sentry/sentry';
 import App from '@/App.vue';
+import { useMatomoContentTracking } from '@/composables/useMatomoContentTracking';
 import { NavigationBus } from '@/navigationBus';
 import CrispPlugin from '@/plugins/crisp';
 import router from '@/router';
@@ -50,7 +51,12 @@ app.use(head);
 app.use(VueMatomo, {
   host: import.meta.env.VITE_MATOMO_URL,
   siteId: import.meta.env.VITE_MATOMO_SITE_ID,
-  router: router,
+  router,
+  enableLinkTracking: true,
+  trackInitialView: true,
+  requireConsent: false,
+  enableHeartBeatTimer: true,
+  heartBeatTimerInterval: 15,
 });
 
 if (import.meta.env.VITE_ENV === 'production') {
@@ -58,7 +64,4 @@ if (import.meta.env.VITE_ENV === 'production') {
 }
 
 app.mount('#app');
-
-window._paq.push(['trackPageView']);
-window._paq.push(['trackAllContentImpressions']);
-window._paq.push(['enableLinkTracking']);
+useMatomoContentTracking(router);
