@@ -1,9 +1,14 @@
 <template>
   <div class="fr-container fr-my-3w">
     <div v-if="!alerte.isActive">
-      <a v-if="inscritDepuisLeMobile && estSurMobile" :href="magicLinkMobileUrl" class="fr-btn"
-        >Continuer sur l'application mobile</a
-      >
+      <div v-if="inscritDepuisLeMobile && estSurMobile">
+        <p>Vous êtes sur le point de finaliser votre inscription.</p>
+        <div class="flex flex-column align-items--center">
+          <a :href="magicLinkMobileAppUrl" class="fr-btn fr-mb-3w">Continuer sur l'application mobile</a>
+          <a :href="magicLinkMobileNavigateurUrl" class="fr-btn fr-btn--secondary">Continuer sur ce navigateur</a>
+        </div>
+      </div>
+
       <p v-else class="fr-h3">Redirection en cours ... Veuillez patienter.</p>
     </div>
 
@@ -30,17 +35,18 @@
   import router, { RouteCommuneName } from '@/router';
 
   const route = useRoute();
+  const { alerte, afficherAlerte } = useAlerte();
   const origin = route.query.origin as string;
 
   const inscritDepuisLeMobile = origin === 'mobile';
   const estSurMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 
-  const magicLinkMobileUrl = computed(() => window.location.href.replace(/^https?:\/\//, 'jagis://'));
-  const { alerte, afficherAlerte } = useAlerte();
+  const magicLinkMobileAppUrl = computed(() => window.location.href.replace(/^https?:\/\//, 'jagis://'));
+  const magicLinkMobileNavigateurUrl = computed(() => window.location.href.replace('origin=mobile', ''));
 
   onMounted(async () => {
     if (inscritDepuisLeMobile && estSurMobile) {
-      window.location.href = magicLinkMobileUrl.value;
+      window.location.href = magicLinkMobileAppUrl.value;
       return;
     }
 
