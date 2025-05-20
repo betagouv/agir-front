@@ -24,26 +24,16 @@
         >
           Se connecter avec le lien magique (sans mail)
         </router-link>
-
-        <a :href="magicLinkMobileUrl" class="fr-btn fr-btn--secondary">Se connecter avec l'application mobile</a>
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-  import { computed } from 'vue';
   import { RouteCommuneName } from '@/router';
   import { useNavigationStore } from '@/store/navigationStore';
   import { utilisateurStore } from '@/store/utilisateur';
 
-  const estEnvDeProduction = import.meta.env.VITE_ENV === 'production';
   const email = utilisateurStore().utilisateur.mail || new URLSearchParams(window.location.search).get('email') || '';
-
-  const baseHost = window.location.host;
-  const path = '/authentification/validation-lien-magique';
-
-  const magicLinkMobileUrl = computed(() => {
-    return `jagis://${baseHost}${path}?email=${email}&code=999999`;
-  });
+  const estEnvDeProduction = import.meta.env.VITE_ENV === 'production';
 </script>
