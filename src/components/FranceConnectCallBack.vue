@@ -53,7 +53,7 @@
         .catch(reason => {
           afficherAlerte(
             'error',
-            'Erreur lors la connexion à France Connect. Deconnexion en cours veuillez patienter.',
+            'Erreur lors la connexion à France Connect. Deconnexion en cours, veuillez patienter...',
             reason.data.message,
           );
 
