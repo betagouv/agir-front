@@ -26,8 +26,8 @@
 <script lang="ts" setup>
   import { onMounted, ref } from 'vue';
   import { useRoute, useRouter } from 'vue-router';
-  import CollectiviteRecapitulatif from '@/components/custom/Collectivites/CollectiviteRecapitulatif.vue';
-  import CollectivitesInseeRecherche from '@/components/custom/Collectivites/CollectivitesInseeRecherche.vue';
+  import CollectiviteRecapitulatif from '@/components/custom/CollectivitesContenus/CollectiviteRecapitulatif.vue';
+  import CollectivitesInseeRecherche from '@/components/custom/CollectivitesContenus/CollectivitesInseeRecherche.vue';
   import LandingCollectivite from '@/components/custom/Landing/LandingCollectivite.vue';
   import CarteSkeleton from '@/components/custom/Skeleton/CarteSkeleton.vue';
   import { SimulerAideVeloRepositoryAxios } from '@/domaines/aides/adapters/simulerAideVelo.repository.axios';
@@ -67,7 +67,7 @@
     await recupererDonneesCollectivitesInsee
       .execute(insee, new DonneesCollectivitesInseePresenterImpl(vm => (donneesCollectivitesInseeViewModel.value = vm)))
       .then(async () => {
-        await router.push({ name: RouteCollectiviteName.COLLECTIVITE_V2, query: { insee } });
+        await router.push({ name: RouteCollectiviteName.CONTENUS, query: { insee } });
       })
       .finally(() => {
         isLoadingDetail.value = false;
