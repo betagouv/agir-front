@@ -29,7 +29,7 @@
             v-model="profileUtlisateurViewModel.pseudo"
             :erreur="champsPseudoStatus"
             :required="true"
-            description="Obligatoire. Doit être composés de 3 à 21 caractères. Lettres et chiffres uniquement."
+            description="Obligatoire. Doit être composé de 3 à 21 caractères. Lettres et chiffres uniquement."
             label="Pseudonyme"
             name="pseudo"
             @blur="onValidationPseudo()"
