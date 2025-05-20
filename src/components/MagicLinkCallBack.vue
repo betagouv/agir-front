@@ -1,15 +1,18 @@
 <template>
   <div class="fr-container fr-my-3w">
-    <a v-if="inscritDepuisLeMobile && estSurMobile" :href="magicLinkMobileUrl">Continuer sur l'application mobile</a>
-    <p v-else class="fr-h3">Redirection en cours ... Veuillez patienter.</p>
+    <div v-if="!alerte.isActive">
+      <a v-if="inscritDepuisLeMobile && estSurMobile" :href="magicLinkMobileUrl">Continuer sur l'application mobile</a>
+      <p v-else class="fr-h3">Redirection en cours ... Veuillez patienter.</p>
+    </div>
 
-    <Alert
-      v-if="alerte.isActive"
-      :message="alerte.message"
-      :titre="alerte.titre"
-      :type="alerte.type"
-      class="fr-col-12 fr-mt-2w"
-    />
+    <div v-if="alerte.isActive">
+      <Alert :message="alerte.message" :titre="alerte.titre" :type="alerte.type" class="fr-col-12 fr-mt-2w fr-mb-3w" />
+      <router-link
+        class="fr-btn fr-btn--secondary fr-btn--icon-right fr-icon-arrow-right-line"
+        :to="{ name: RouteCommuneName.ACCUEIL }"
+        >Je retourne à l'accueil</router-link
+      >
+    </div>
   </div>
 </template>
 
@@ -22,10 +25,10 @@
   import { SessionRepositoryStore } from '@/domaines/authentification/adapters/session.repository.store';
   import { UtilisateurRepositoryAxios } from '@/domaines/authentification/adapters/utilisateur.repository.axios';
   import { ValiderAuthentificationUtilisateurUsecase } from '@/domaines/authentification/validerAuthentificationUtilisateur.usecase';
-  import router from '@/router';
+  import router, { RouteCommuneName } from '@/router';
 
   const route = useRoute();
-  const origin = route.query.email as string;
+  const origin = route.query.origin as string;
 
   const inscritDepuisLeMobile = origin === 'mobile';
   const estSurMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
