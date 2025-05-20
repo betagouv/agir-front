@@ -32,7 +32,7 @@
     const oidcState = route.query.state as string;
 
     if (route.query.error === 'access_denied') {
-      await router.push({ name: RouteCommuneName.ACCUEIL });
+      await router.replace({ name: RouteCommuneName.ACCUEIL });
     } else {
       const usecase = new AuthentifierUtilisateurFranceConnectUsecase(
         new UtilisateurRepositoryAxios(),
