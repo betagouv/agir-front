@@ -1,6 +1,7 @@
 <template>
   <div class="fr-container fr-my-3w">
-    <p class="fr-h3">Redirection en cours ... Veuillez patienter.</p>
+    <a v-if="inscritDepuisLeMobile && estSurMobile" :href="magicLinkMobileUrl">Continuer sur l'application mobile</a>
+    <p v-else class="fr-h3">Redirection en cours ... Veuillez patienter.</p>
 
     <Alert
       v-if="alerte.isActive"
@@ -11,8 +12,9 @@
     />
   </div>
 </template>
+
 <script lang="ts" setup>
-  import { onMounted } from 'vue';
+  import { computed, onMounted } from 'vue';
   import { useRoute } from 'vue-router';
   import Alert from '@/components/custom/Alert.vue';
   import { useAlerte } from '@/composables/useAlerte';
@@ -22,10 +24,21 @@
   import { ValiderAuthentificationUtilisateurUsecase } from '@/domaines/authentification/validerAuthentificationUtilisateur.usecase';
   import router from '@/router';
 
+  const route = useRoute();
+  const origin = route.query.email as string;
+
+  const inscritDepuisLeMobile = origin === 'mobile';
+  const estSurMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+  const magicLinkMobileUrl = computed(() => window.location.href.replace(/^https?:\/\//, 'jagis://'));
   const { alerte, afficherAlerte } = useAlerte();
 
   onMounted(async () => {
-    const route = useRoute();
+    if (inscritDepuisLeMobile && estSurMobile) {
+      window.location.href = magicLinkMobileUrl.value;
+      return;
+    }
+
     const email = route.query.email as string;
     const code = route.query.code as string;
     const validerCompteUtilisateurUsecase = new ValiderAuthentificationUtilisateurUsecase(
