@@ -2,6 +2,8 @@ import { AxiosFactory, intercept401 } from '@/axios.factory';
 import { Aide, Aides } from '@/domaines/aides/chargementAides.usecase';
 import { ChargementAidesRepository } from '@/domaines/aides/ports/chargementAides.repository';
 import { ClefThematiqueAPI, MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
+import { sessionAppRawDataStorage } from '@/shell/appRawDataStorage';
+import { cache } from '@/shell/cacheDecorator';
 
 interface AidesApiModel {
   couverture_aides_ok: boolean;
@@ -31,6 +33,10 @@ interface CMSAideApiModel {
 
 export class ChargementAidesAxiosRepository implements ChargementAidesRepository {
   @intercept401()
+  @cache({
+    key: 'aides',
+    storage: sessionAppRawDataStorage,
+  })
   async getAides(utilisateurId: string): Promise<Aides> {
     const axios = AxiosFactory.getAxios();
     const reponse = await axios.get<AidesApiModel>(`/utilisateurs/${utilisateurId}/aides_v2`);
