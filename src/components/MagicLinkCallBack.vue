@@ -33,19 +33,26 @@
   import { UtilisateurRepositoryAxios } from '@/domaines/authentification/adapters/utilisateur.repository.axios';
   import { ValiderAuthentificationUtilisateurUsecase } from '@/domaines/authentification/validerAuthentificationUtilisateur.usecase';
   import router, { RouteCommuneName } from '@/router';
+  import estSurNavigationMobile from '@/shell/estSurNavigationMobile';
 
   const route = useRoute();
   const { alerte, afficherAlerte } = useAlerte();
   const origin = route.query.origin as string;
 
   const inscritDepuisLeMobile = origin === 'mobile';
-  const estSurMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  const estSurMobile = computed(() => {
+    return estSurNavigationMobile();
+  });
 
   const magicLinkMobileAppUrl = computed(() => window.location.href.replace(/^https?:\/\//, 'jagis://'));
-  const magicLinkMobileNavigateurUrl = computed(() => window.location.href.replace('origin=mobile', ''));
+  const magicLinkMobileNavigateurUrl = computed(() => {
+    const url = new URL(window.location.href);
+    url.searchParams.delete('origin');
+    return url.toString();
+  });
 
   onMounted(async () => {
-    if (inscritDepuisLeMobile && estSurMobile) {
+    if (inscritDepuisLeMobile && estSurMobile.value) {
       window.location.href = magicLinkMobileAppUrl.value;
       return;
     }
