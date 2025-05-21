@@ -61,11 +61,11 @@
                 <li v-if="utilisateurStore().utilisateur.onboardingAEteRealise">
                   <div class="utilisateur">
                     <router-link
+                      :aria-label="`${pseudoUtilisateur}: accéder à la page du compte`"
                       :to="{ name: RouteCompteName.MON_COMPTE }"
                       class="fr-btn fr-mb-0 fr-text--lg"
-                      :aria-label="`${pseudoUtilisateur}: accéder à la page du compte`"
                     >
-                      <span class="fr-icon-user-line fr-icon--md fr-mr-1w" aria-hidden="true"></span>
+                      <span aria-hidden="true" class="fr-icon-user-line fr-icon--md fr-mr-1w"></span>
                       {{ pseudoUtilisateur }}
                     </router-link>
                     <ScoreHeader v-if="utilisateurStore().utilisateur.onboardingAEteRealise" />
@@ -244,6 +244,7 @@
   import { SessionRepositoryStore } from '@/domaines/authentification/adapters/session.repository.store';
   import { RouteAidesName } from '@/router/aides/routeAidesName';
   import { RouteActionsName } from '@/router/actions/routes';
+  import { sessionAppRawDataStorage } from '@/shell/appRawDataStorage';
 
   const route = useRoute();
   const store = utilisateurStore();
@@ -257,6 +258,7 @@
   const seDeconnecterUsecase = new DeconnecterUtilisateurUsecase(
     new UtilisateurRepositoryAxios(),
     new SessionRepositoryStore(),
+    sessionAppRawDataStorage,
   );
 
   const logout = async () => {

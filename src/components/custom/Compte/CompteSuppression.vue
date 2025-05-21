@@ -43,6 +43,7 @@
   import { SessionRepositoryStore } from '@/domaines/authentification/adapters/session.repository.store';
   import { CompteUtilisateurRepositoryImpl } from '@/domaines/compte/adapters/compteUtilisateur.repository.impl';
   import { SupprimerCompteUtilisateurUsecase } from '@/domaines/compte/supprimerCompteUtilisateur.usecase';
+  import { sessionAppRawDataStorage } from '@/shell/appRawDataStorage';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const modaleId = 'modale-suppression-compte';
@@ -54,6 +55,7 @@
     const usecase = new SupprimerCompteUtilisateurUsecase(
       new CompteUtilisateurRepositoryImpl(),
       new SessionRepositoryStore(),
+      sessionAppRawDataStorage,
     );
     usecase.execute(idUtilisateur, url => (window.location.href = url));
   };

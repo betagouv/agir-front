@@ -1,7 +1,10 @@
 export interface AppRawDataStorage {
   get<T>(key: string): T | null;
+
   set<T>(key: string, value: T): void;
+
   clearItem(key: string, usePrefixDeletion?: boolean): void;
+
   clearAllItems(): void;
 }
 
@@ -55,7 +58,10 @@ class SessionAppRawDataStorage implements AppRawDataStorage {
   }
 
   private addCachedKey(key: string): void {
-    sessionStorage.setItem(this.KEYS_IN_CACHE_KEY, JSON.stringify([...this.getCachedKeys(), key]));
+    const currentKeys = this.getCachedKeys();
+    if (!currentKeys.includes(key)) {
+      sessionStorage.setItem(this.KEYS_IN_CACHE_KEY, JSON.stringify([...currentKeys, key]));
+    }
   }
 }
 

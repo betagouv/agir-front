@@ -4,24 +4,24 @@
     <div id="scroll-to-alerte">
       <Alert
         v-if="alerte.isActive"
-        class="fr-col-12 fr-mb-2w"
-        :type="alerte.type"
-        :titre="alerte.titre"
         :message="alerte.message"
+        :titre="alerte.titre"
+        :type="alerte.type"
+        class="fr-col-12 fr-mb-2w"
       />
     </div>
     <form @submit.prevent="enregistrerLesInformations">
       <div class="fr-grid-row full-width flex-end fr-mb-4w fr-mb-md-2w">
-        <button type="submit" class="fr-btn fr-btn--icon-left fr-btn--lg fr-icon-save-3-fill">
+        <button class="fr-btn fr-btn--icon-left fr-btn--lg fr-icon-save-3-fill" type="submit">
           Mettre à jour mes informations
         </button>
       </div>
       <div class="fr-mb-4w">
         <h3 class="fr-h4">Où habitez-vous ?</h3>
         <InputCodePostal
-          :default-value="logementViewModel.codePostal"
-          :default-select-value="logementViewModel.commune_utilisee_dans_le_compte"
           v-model="logementViewModel.codePostal"
+          :default-select-value="logementViewModel.commune_utilisee_dans_le_compte"
+          :default-value="logementViewModel.codePostal"
           @update:selectedCommune="logementViewModel.commune_utilisee_dans_le_compte = $event"
           @update:isCodePostalEnErreur="isCodePostalEnErreur = $event"
         />
@@ -29,71 +29,71 @@
       <h3 class="fr-h4">Combien êtes-vous dans votre logement (vous inclus) ?</h3>
       <div class="fr-grid-row fr-mb-4w">
         <InputNumberHorizontal
+          v-model="logementViewModel.adultes"
+          :default-value="logementViewModel.adultes"
+          :min-value="1"
+          class="fr-mr-8w fr-mb-2w"
           label="Adulte(s)"
           name="nombre-adulte"
-          class="fr-mr-8w fr-mb-2w"
-          :min-value="1"
-          :default-value="logementViewModel.adultes"
-          v-model="logementViewModel.adultes"
         />
         <InputNumberHorizontal
+          v-model="logementViewModel.enfants"
+          :default-value="logementViewModel.enfants"
+          :min-value="0"
+          class="fr-mb-2w"
           label="Enfant(s) - moins de 18 ans"
           name="nombre-enfant"
-          class="fr-mb-2w"
-          :min-value="0"
-          :default-value="logementViewModel.enfants"
-          v-model="logementViewModel.enfants"
         />
         <BoutonsRadio
+          v-model="logementViewModel.residence.valeur"
+          :default-value="logementViewModel.residence.valeur"
+          :options="logementViewModel.residence.reponsesPossibles"
           class="fr-mb-2w fr-col-12"
+          col="fr-col"
           legende="Votre résidence principale est ..."
           legende-size="l"
-          orientation="horizontal"
           name="residence"
-          col="fr-col"
-          :options="logementViewModel.residence.reponsesPossibles"
-          :default-value="logementViewModel.residence.valeur"
-          v-model="logementViewModel.residence.valeur"
+          orientation="horizontal"
         />
         <BoutonsRadio
+          v-model="logementViewModel.proprietaire.valeur"
+          :default-value="logementViewModel.proprietaire.valeur"
+          :options="logementViewModel.proprietaire.reponsesPossibles"
           class="fr-mb-2w fr-col-12"
+          col="fr-col"
           legende="Vous êtes propriétaire de votre logement ?"
           legende-size="l"
-          orientation="horizontal"
           name="proprietaire"
-          col="fr-col"
-          :options="logementViewModel.proprietaire.reponsesPossibles"
-          :default-value="logementViewModel.proprietaire.valeur"
-          v-model="logementViewModel.proprietaire.valeur"
+          orientation="horizontal"
         />
         <BoutonsRadio
+          v-model="logementViewModel.superficie.valeur"
+          :default-value="logementViewModel.superficie.valeur"
+          :options="logementViewModel.superficie.reponsesPossibles"
           class="fr-mb-4w fr-col-12"
+          col="fr-col"
           legende="Quelle en est la superficie ?"
           legende-size="l"
           name="superficie"
           orientation="horizontal"
-          col="fr-col"
-          :options="logementViewModel.superficie.reponsesPossibles"
-          :default-value="logementViewModel.superficie.valeur"
-          v-model="logementViewModel.superficie.valeur"
         />
         <BoutonsRadio
+          v-model="logementViewModel.plusDeQuinzeAns.valeur"
+          :default-value="logementViewModel.plusDeQuinzeAns.valeur"
+          :options="logementViewModel.plusDeQuinzeAns.reponsesPossibles"
           class="fr-mb-4w fr-col-12"
+          col="fr-col"
           legende="Votre logement a-t-il plus de 15 ans ?"
           legende-size="l"
           name="anciennete"
           orientation="horizontal"
-          col="fr-col"
-          :options="logementViewModel.plusDeQuinzeAns.reponsesPossibles"
-          :default-value="logementViewModel.plusDeQuinzeAns.valeur"
-          v-model="logementViewModel.plusDeQuinzeAns.valeur"
         />
         <div class="fr-col-12">
-          <DPE :default-value="logementViewModel.dpe.valeur" v-model="logementViewModel.dpe.valeur" />
+          <DPE v-model="logementViewModel.dpe.valeur" :default-value="logementViewModel.dpe.valeur" />
         </div>
         <CarteInfo>
           <p class="fr-text--bold">
-            <span class="fr-icon-question-line" aria-hidden="true"></span>
+            <span aria-hidden="true" class="fr-icon-question-line"></span>
             Qu'est-ce qu'un DPE ?
           </p>
           <p class="fr-m-0">
@@ -101,11 +101,11 @@
             côté l'énergie nécessaire pour y maintenir une température standard, et de l'autre l'empreinte climat
             associée. Le DPE est exprimé comme une note de A (très bon) à G (passoire thermique). Vous pouvez obtenir
             une estimation de votre DPE en 2 clics avec le service
-            <a href="https://particulier.gorenove.fr" target="_blank" rel="noreferrer">Go Renov</a>.
+            <a href="https://particulier.gorenove.fr" rel="noreferrer" target="_blank">Go Renov</a>.
           </p>
         </CarteInfo>
         <div class="fr-grid-row full-width flex-end">
-          <button type="submit" class="fr-btn fr-btn--icon-left fr-btn--lg fr-mt-4w fr-icon-save-3-fill">
+          <button class="fr-btn fr-btn--icon-left fr-btn--lg fr-mt-4w fr-icon-save-3-fill" type="submit">
             Mettre à jour mes informations
           </button>
         </div>
@@ -114,7 +114,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
   import { computed, ref } from 'vue';
   import Alert from '@/components/custom/Alert.vue';
   import CarteInfo from '@/components/custom/CarteInfo.vue';
@@ -126,6 +126,7 @@
   import { LogementRepositoryAxios } from '@/domaines/logement/adapters/logement.repository.axios';
   import { EnregistrerInformationsLogementUsecase } from '@/domaines/logement/enregistrerInformationLogement.usecase';
   import { LogementViewModel } from '@/domaines/logement/ports/logement.presenter';
+  import { sessionAppRawDataStorage } from '@/shell/appRawDataStorage';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const props = defineModel<LogementViewModel>('logementViewModel', {
@@ -146,7 +147,7 @@
       return;
     }
 
-    const usecase = new EnregistrerInformationsLogementUsecase(new LogementRepositoryAxios());
+    const usecase = new EnregistrerInformationsLogementUsecase(new LogementRepositoryAxios(), sessionAppRawDataStorage);
     usecase.execute(utilisateurStore().utilisateur.id, {
       adultes: props.value.adultes,
       enfants: props.value.enfants,

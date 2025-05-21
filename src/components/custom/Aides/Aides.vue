@@ -11,7 +11,7 @@
     </div>
     <div class="fr-col-12 fr-col-lg-9">
       <div v-for="(aides, nomThematique) in props.aidesGroupesParCategorie" :key="nomThematique">
-        <div v-if="categoriesActives.length === 0 || categoriesActives.includes(`${nomThematique}`)" class="fr-mb-4w">
+        <div v-if="doitAfficher(nomThematique as string)" class="fr-mb-4w">
           <h2 class="fr-h4" v-html="cacherEmojisAuxLecteursDecrans(nomThematique as string)" />
           <GrilleAidesDUneAction :aides="aides" />
         </div>
@@ -23,10 +23,10 @@
 <script lang="ts" setup>
   import { onMounted, ref } from 'vue';
   import { useRoute } from 'vue-router';
-  import cacherEmojisAuxLecteursDecrans from '../../../shell/cacherEmojisAuxLecteursDecrans';
   import GrilleAidesDUneAction from '@/components/custom/Aides/GrilleAidesDUneAction.vue';
   import InputCheckbox from '@/components/dsfr/InputCheckbox.vue';
   import { AidesViewModel } from '@/domaines/aides/ports/chargementAides.presenter';
+  import cacherEmojisAuxLecteursDecrans from '@/shell/cacherEmojisAuxLecteursDecrans';
   import { nettoyerEtGarderLettres } from '@/shell/nettoyerEtGarderLettres';
 
   const route = useRoute();
@@ -47,6 +47,12 @@
   const handleValueChange = value => {
     categoriesActives.value = value;
   };
+
+  function doitAfficher(nomThematique: string) {
+    return (
+      categoriesActives.value.length === 0 || categoriesActives.value.includes(nettoyerEtGarderLettres(nomThematique))
+    );
+  }
 
   onMounted(() => {
     const hash = route.hash;

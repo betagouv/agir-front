@@ -31,6 +31,7 @@
   import { SessionRepositoryStore } from '@/domaines/authentification/adapters/session.repository.store';
   import { UtilisateurRepositoryAxios } from '@/domaines/authentification/adapters/utilisateur.repository.axios';
   import { DeconnecterUtilisateurUsecase } from '@/domaines/authentification/deconnecterUtilisateur.usecase';
+  import { sessionAppRawDataStorage } from '@/shell/appRawDataStorage';
   import { utilisateurStore } from '@/store/utilisateur';
 
   defineProps<{ pageCourante: string }>();
@@ -39,6 +40,7 @@
   const seDeconnecterUsecase = new DeconnecterUtilisateurUsecase(
     new UtilisateurRepositoryAxios(),
     new SessionRepositoryStore(),
+    sessionAppRawDataStorage,
   );
 
   const logout = async () => {
