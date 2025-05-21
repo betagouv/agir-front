@@ -21,7 +21,7 @@
         />
       </template>
       <template v-slot:asideResultatAides>
-        <div class="background--white border border-radius--md fr-p-3w fr-mb-3w">
+        <div class="background--white border fr-p-3w fr-mb-3w">
           <h2 class="fr-h5">Paramètres</h2>
           <form class="fr-mb-1w" @submit.prevent="simulerAideVelo">
             <div class="fr-grid-col justify-content--start">

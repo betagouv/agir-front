@@ -8,12 +8,10 @@
         autheur="Sarah"
         activite="Infirmière, Angers"
       />
-      <div
-        class="empty-card empty-card--bottom fr-mt-2w background--vert-light border-radius--md fr-hidden fr-unhidden-md"
-      />
+      <div class="empty-card empty-card--bottom fr-mt-2w background--vert-light fr-hidden fr-unhidden-md" />
     </div>
     <div class="fr-col-md-6">
-      <div class="empty-card empty-card--top background--vert border-radius--md fr-mb-2w fr-hidden fr-unhidden-md" />
+      <div class="empty-card empty-card--top background--vert fr-mb-2w fr-hidden fr-unhidden-md" />
       <LandingCitation
         citation="Beaucoup plus <span class='text--bold'>facile à prendre en main</span> que ce que je pensais."
         image="/hp-user-1.webp"

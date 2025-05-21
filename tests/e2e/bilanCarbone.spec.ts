@@ -89,7 +89,7 @@ test.describe('Bilan carbone', () => {
 
       const titrePrincipal = page.getByRole('heading', {
         level: 1,
-        name: 'Estimez mon bilan environnemental',
+        name: 'Estimer mon empreinte écologique',
         exact: true,
       });
       await expect(titrePrincipal).not.toBeVisible();
@@ -152,7 +152,7 @@ test.describe('Bilan carbone', () => {
 
       const titrePrincipal = page.getByRole('heading', {
         level: 1,
-        name: 'Estimez mon bilan environnemental',
+        name: 'Estimer mon empreinte écologique',
         exact: true,
       });
       await expect(titrePrincipal).toBeVisible();

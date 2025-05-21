@@ -102,7 +102,7 @@ export class BilanCarbonePresenterImpl extends BilanCarboneBasePresenter impleme
 
   presenteBilanPartiel(bilanCarbone: BilanCarbone): void {
     this.bilanCarbonePartielViewModel({
-      titre: 'Estimez mon <span class="text--bleu">bilan environnemental</span>',
+      titre: 'Estimer mon <span class="text--bleu">empreinte écologique</span>',
       pourcentageCompletionTotal: bilanCarbone.bilanPartiel!.pourcentageCompletionTotal,
       categories: [
         {

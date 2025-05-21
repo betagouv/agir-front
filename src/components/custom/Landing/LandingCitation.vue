@@ -1,5 +1,5 @@
 <template>
-  <div class="citation border-radius--md background--gris fr-p-3w">
+  <div class="citation background--gris fr-p-3w">
     <span class="fr-icon-quote-line display-block text--bleu fr-mb-2w" aria-hidden="true"></span>
     <blockquote class="fr-text--xl" v-html="citation" />
     <div class="fr-grid-row fr-grid-row--gutters">

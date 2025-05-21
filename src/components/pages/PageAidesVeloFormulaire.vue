@@ -3,7 +3,7 @@
     <FilDAriane page-courante="Acheter un vélo" />
     <div class="fr-grid-row fr-grid-row--gutters">
       <div class="fr-col-lg-8">
-        <div class="background--white border border-radius--md fr-p-3w fr-mb-4w">
+        <div class="background--white border fr-p-3w fr-mb-4w">
           <h2 class="fr-h3">Quelques questions nécessaires à l’estimation des aides</h2>
           <form @submit.prevent="mettreAJourLesInfos">
             <h3 class="fr-h4">Où habitez-vous ?</h3>
