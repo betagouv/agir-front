@@ -1,5 +1,23 @@
 # Changelog
 
+## [2.9.2](https://github.com/betagouv/agir-front/compare/v2.9.1...v2.9.2) (2025-05-21)
+
+
+### 🐛 Corrections de bogues
+
+* faute description pseudo ([#1125](https://github.com/betagouv/agir-front/issues/1125)) ([9a91e8d](https://github.com/betagouv/agir-front/commit/9a91e8d0543abda418c9f65d4abba5f5cddbfae2))
+* retour sur le site après annulation france connect ([#1118](https://github.com/betagouv/agir-front/issues/1118)) ([143f548](https://github.com/betagouv/agir-front/commit/143f5483a416de6d43db1c26a2bcea906dd3520c))
+
+
+### 👷 Autres changements
+
+* Bump @gouvfr/dsfr from 1.13.1 to 1.13.2 ([#1123](https://github.com/betagouv/agir-front/issues/1123)) ([7ebb605](https://github.com/betagouv/agir-front/commit/7ebb605c2c8dac29b94870ce9104d13fef9e36b3))
+* Bump @sentry/vue from 9.17.0 to 9.20.0 ([#1119](https://github.com/betagouv/agir-front/issues/1119)) ([cd6d25a](https://github.com/betagouv/agir-front/commit/cd6d25af13ce587ae420b35a6e597cfc2a8dbb53))
+* Bump @types/node from 22.15.17 to 22.15.19 ([#1121](https://github.com/betagouv/agir-front/issues/1121)) ([ba61775](https://github.com/betagouv/agir-front/commit/ba6177578388babdb5a0b8331d5062ce68156d9f))
+* Bump pinia-plugin-persistedstate from 4.2.0 to 4.3.0 ([#1120](https://github.com/betagouv/agir-front/issues/1120)) ([efe9590](https://github.com/betagouv/agir-front/commit/efe9590505f0014a107c2fbad8d7b5d013b07a03))
+* Bump vue from 3.5.13 to 3.5.14 ([#1122](https://github.com/betagouv/agir-front/issues/1122)) ([806f51a](https://github.com/betagouv/agir-front/commit/806f51ac54511fb1bfec9ec061b84577e2159c0d))
+* mobile lien redirection ([#1127](https://github.com/betagouv/agir-front/issues/1127)) ([cd77727](https://github.com/betagouv/agir-front/commit/cd777274693d326090135d929eaf64d19aadb7a5))
+
 ## [2.9.1](https://github.com/betagouv/agir-front/compare/v2.9.0...v2.9.1) (2025-05-19)
 
 
