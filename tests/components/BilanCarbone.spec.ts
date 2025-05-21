@@ -23,7 +23,7 @@ describe('BilanCarbone', () => {
         bilanCarboneComplet?: BilanCarboneCompletViewModel;
       } = {
         bilanCarbonePartiel: {
-          titre: 'Estimez mon <span class="text--bleu">bilan environnemental</span>',
+          titre: 'Estimer mon <span class="text--bleu">empreinte écologique</span>',
           pourcentageCompletionTotal: 89,
           categories: [
             {
