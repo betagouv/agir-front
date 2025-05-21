@@ -1,15 +1,11 @@
 <template>
   <div class="fr-container fr-my-3w">
     <div v-if="!alerte.isActive">
-      <div v-if="inscritDepuisLeMobile && estSurMobile">
-        <p>Vous êtes sur le point de finaliser votre inscription.</p>
-        <div class="flex flex-column align-items--center">
-          <a :href="magicLinkMobileAppUrl" class="fr-btn fr-mb-3w">Continuer sur l'application mobile</a>
-          <a :href="magicLinkMobileNavigateurUrl" class="fr-btn fr-btn--secondary">Continuer sur ce navigateur</a>
-        </div>
-      </div>
-
-      <p v-else class="fr-h3">Redirection en cours ... Veuillez patienter.</p>
+      <MagicLinkCallbackRedirection
+        :inscrit-depuis-le-mobile="inscritDepuisLeMobile"
+        :est-sur-mobile="estSurMobile"
+        :valider-compte-utilisateur="validerCompteUtilisateur"
+      />
     </div>
 
     <div v-if="alerte.isActive">
@@ -24,9 +20,10 @@
 </template>
 
 <script lang="ts" setup>
-  import { computed, onMounted } from 'vue';
+  import { computed } from 'vue';
   import { useRoute } from 'vue-router';
   import Alert from '@/components/custom/Alert.vue';
+  import MagicLinkCallbackRedirection from '@/components/custom/ValidationCompte/MagicLinkCallbackRedirection.vue';
   import { useAlerte } from '@/composables/useAlerte';
   import { AuthentificationResultatPresenterImpl } from '@/domaines/authentification/adapters/authentificationResultatPresenterImpl';
   import { SessionRepositoryStore } from '@/domaines/authentification/adapters/session.repository.store';
@@ -37,32 +34,20 @@
 
   const route = useRoute();
   const { alerte, afficherAlerte } = useAlerte();
-  const origin = route.query.origin as string;
 
-  const inscritDepuisLeMobile = origin === 'mobile';
+  const email = route.query.email as string;
+  const code = route.query.code as string;
+  const inscritDepuisLeMobile = (route.query.origin as string) === 'mobile';
   const estSurMobile = computed(() => {
     return estSurNavigationMobile();
   });
 
-  const magicLinkMobileAppUrl = computed(() => window.location.href.replace(/^https?:\/\//, 'jagis://'));
-  const magicLinkMobileNavigateurUrl = computed(() => {
-    const url = new URL(window.location.href);
-    url.searchParams.delete('origin');
-    return url.toString();
-  });
+  const validerCompteUtilisateurUsecase = new ValiderAuthentificationUtilisateurUsecase(
+    new UtilisateurRepositoryAxios(),
+    new SessionRepositoryStore(),
+  );
 
-  onMounted(async () => {
-    if (inscritDepuisLeMobile && estSurMobile.value) {
-      window.location.href = magicLinkMobileAppUrl.value;
-      return;
-    }
-
-    const email = route.query.email as string;
-    const code = route.query.code as string;
-    const validerCompteUtilisateurUsecase = new ValiderAuthentificationUtilisateurUsecase(
-      new UtilisateurRepositoryAxios(),
-      new SessionRepositoryStore(),
-    );
+  async function validerCompteUtilisateur() {
     validerCompteUtilisateurUsecase
       .execute(
         email,
@@ -76,5 +61,5 @@
       .catch(reason => {
         afficherAlerte('error', 'Erreur lors de la validation du compte', reason.data.message);
       });
-  });
+  }
 </script>
