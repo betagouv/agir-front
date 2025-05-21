@@ -68,6 +68,7 @@
   } from '@/domaines/profileUtilisateur/mettreAJourProfileUtilisateurUsecase';
   import router from '@/router';
   import { RouteAidesName } from '@/router/aides/routeAidesName';
+  import { sessionAppRawDataStorage } from '@/shell/appRawDataStorage';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const store = utilisateurStore();
@@ -148,6 +149,7 @@
 
       const enregistrerInformationsLogementUsecase = new EnregistrerInformationsLogementUsecase(
         new LogementRepositoryAxios(),
+        sessionAppRawDataStorage,
       );
       await enregistrerInformationsLogementUsecase.execute(utilisateurStore().utilisateur.id, {
         adultes: logementViewModel.value!.adultes,
