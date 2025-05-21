@@ -16,7 +16,7 @@ import serviceRoutes from '@/router/services/routes';
 import thematiqueRoutes from '@/router/thematiques/routes';
 import { utilisateurStore } from '@/store/utilisateur';
 
-const MagicLinkCallBack = () => import('@/components/MagicLinkCallBack.vue');
+const MagicLinkCallBack = () => import('@/components/pages/PageMagicLinkCallback.vue');
 const Authentification = () => import('@/components/Authentification.vue');
 const Page404 = () => import('@/components/pages/Page404.vue');
 const FranceConnectLogoutCallBack = () => import('@/components/FranceConnectLogoutCallBack.vue');
