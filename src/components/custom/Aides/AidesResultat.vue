@@ -11,7 +11,7 @@
       <slot name="asideResultatAides"> </slot>
     </div>
     <div class="fr-col-lg-8 fr-col-12">
-      <div v-if="!isLoading" class="background--white border border-radius--md fr-p-3w">
+      <div v-if="!isLoading" class="background--white border fr-p-3w">
         <h2 class="fr-h4">{{ sousTitre }}</h2>
         <p v-if="simulationAidesViewModel.aucunResultat">Aucune aide n'est disponible dans votre situation.</p>
         <div v-else v-for="(aides, index) in simulationAidesViewModel.resultats" :key="index">
