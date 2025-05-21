@@ -1,5 +1,19 @@
 # Changelog
 
+## [2.9.3](https://github.com/betagouv/agir-front/compare/v2.9.2...v2.9.3) (2025-05-21)
+
+
+### 🐛 Corrections de bogues
+
+* wording empreinte et bords arrondis ([#1131](https://github.com/betagouv/agir-front/issues/1131)) ([31889cd](https://github.com/betagouv/agir-front/commit/31889cde976cdcee3b09d2fc7faab0ec703312d8))
+
+
+### 👷 Autres changements
+
+* ajout de la possibilité de mettre du cache sur un repos ([#1126](https://github.com/betagouv/agir-front/issues/1126)) ([9f2e334](https://github.com/betagouv/agir-front/commit/9f2e3341c9d38652258330e292d72efbde7a6078))
+* ajout de tests pour la redirection mobile ([#1130](https://github.com/betagouv/agir-front/issues/1130)) ([30d9985](https://github.com/betagouv/agir-front/commit/30d9985e3a32d48e4ef9b55722b235179f571f94))
+* amelioration tracking matomo ([#1128](https://github.com/betagouv/agir-front/issues/1128)) ([cc3b44f](https://github.com/betagouv/agir-front/commit/cc3b44f1afc0522f9c55920a5e76bba05ede289c))
+
 ## [2.9.2](https://github.com/betagouv/agir-front/compare/v2.9.1...v2.9.2) (2025-05-21)
 
 
