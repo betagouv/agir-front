@@ -1,18 +1,30 @@
 <template>
   <div class="fr-container fr-my-3w">
-    <p class="fr-h3">Redirection en cours ... Veuillez patienter.</p>
+    <div v-if="!alerte.isActive">
+      <div v-if="inscritDepuisLeMobile && estSurMobile">
+        <p>Vous êtes sur le point de finaliser votre inscription.</p>
+        <div class="flex flex-column align-items--center">
+          <a :href="magicLinkMobileAppUrl" class="fr-btn fr-mb-3w">Continuer sur l'application mobile</a>
+          <a :href="magicLinkMobileNavigateurUrl" class="fr-btn fr-btn--secondary">Continuer sur ce navigateur</a>
+        </div>
+      </div>
 
-    <Alert
-      v-if="alerte.isActive"
-      :message="alerte.message"
-      :titre="alerte.titre"
-      :type="alerte.type"
-      class="fr-col-12 fr-mt-2w"
-    />
+      <p v-else class="fr-h3">Redirection en cours ... Veuillez patienter.</p>
+    </div>
+
+    <div v-if="alerte.isActive">
+      <Alert :message="alerte.message" :titre="alerte.titre" :type="alerte.type" class="fr-col-12 fr-mt-2w fr-mb-3w" />
+      <router-link
+        class="fr-btn fr-btn--secondary fr-btn--icon-right fr-icon-arrow-right-line"
+        :to="{ name: RouteCommuneName.ACCUEIL }"
+        >Je retourne à l'accueil</router-link
+      >
+    </div>
   </div>
 </template>
+
 <script lang="ts" setup>
-  import { onMounted } from 'vue';
+  import { computed, onMounted } from 'vue';
   import { useRoute } from 'vue-router';
   import Alert from '@/components/custom/Alert.vue';
   import { useAlerte } from '@/composables/useAlerte';
@@ -20,12 +32,31 @@
   import { SessionRepositoryStore } from '@/domaines/authentification/adapters/session.repository.store';
   import { UtilisateurRepositoryAxios } from '@/domaines/authentification/adapters/utilisateur.repository.axios';
   import { ValiderAuthentificationUtilisateurUsecase } from '@/domaines/authentification/validerAuthentificationUtilisateur.usecase';
-  import router from '@/router';
+  import router, { RouteCommuneName } from '@/router';
+  import estSurNavigationMobile from '@/shell/estSurNavigationMobile';
 
+  const route = useRoute();
   const { alerte, afficherAlerte } = useAlerte();
+  const origin = route.query.origin as string;
+
+  const inscritDepuisLeMobile = origin === 'mobile';
+  const estSurMobile = computed(() => {
+    return estSurNavigationMobile();
+  });
+
+  const magicLinkMobileAppUrl = computed(() => window.location.href.replace(/^https?:\/\//, 'jagis://'));
+  const magicLinkMobileNavigateurUrl = computed(() => {
+    const url = new URL(window.location.href);
+    url.searchParams.delete('origin');
+    return url.toString();
+  });
 
   onMounted(async () => {
-    const route = useRoute();
+    if (inscritDepuisLeMobile && estSurMobile.value) {
+      window.location.href = magicLinkMobileAppUrl.value;
+      return;
+    }
+
     const email = route.query.email as string;
     const code = route.query.code as string;
     const validerCompteUtilisateurUsecase = new ValiderAuthentificationUtilisateurUsecase(
