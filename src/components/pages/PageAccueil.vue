@@ -20,10 +20,8 @@
       <LandingOnglet />
     </div>
   </section>
-  <section class="fr-py-12w background--vert rappel-app-cta">
-    <div class="fr-container">
-      <LandingRappelAppCTA />
-    </div>
+  <section>
+    <LandingRappelAppCTA />
   </section>
   <section class="fr-py-8w fr-pb-3w background--white">
     <div class="fr-container">
@@ -52,14 +50,5 @@
     background-size: contain;
     background-position: center bottom;
     background-repeat: no-repeat;
-  }
-
-  @media (min-width: 48rem) {
-    .rappel-app-cta {
-      background-image: url('/hp-background-rappel-app-cta.webp');
-      background-position: 70% bottom;
-      background-repeat: no-repeat;
-      background-size: auto 90%;
-    }
   }
 </style>

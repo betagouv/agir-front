@@ -1,19 +1,21 @@
 <template>
-  <div class="banniere-collectivite position--relative fr-pt-10w">
+  <div class="banniere-collectivite position--relative fr-py-10w">
     <img src="/hp-hero-perso1-feuille.svg" alt="" class="feuilles-bottom-left" />
     <img src="/hp-hero-perso2-feuille.svg" alt="" class="feuilles-bottom-right" />
     <img src="/hp-hero-liere.svg" alt="" class="liere-right" />
     <img src="/liere-2.svg" alt="" class="liere-left" />
 
-    <div class="fr-container text--center fr-pb-5w">
+    <div class="fr-container text--center">
       <div class="heading--container">
         <h1 class="fr-display--xs">Comment engager vos habitants dans la transition écologique ?</h1>
       </div>
-      <p class="fr-mb-4w">
-        <strong class="display-block fr-mb-1w">Déployez J’agis dans votre collectivité.</strong>
+
+      <p class="fr-mb-5w">
+        <strong class="display-block fr-mb-2w">Déployez J’agis dans votre collectivité.</strong>
         <i>J’agis</i> s’adapte à votre collectivité pour accompagner vos habitants et valoriser vos initiatives locales
       </p>
-      <div class="position--relative">
+
+      <div class="position--relative fr-mb-10w">
         <!--        TODO: tracker le lien-->
         <a
           href="https://calendly.com/abdellah-bouhend-beta/rencontre-j-agis-pour-les-collectivites"
@@ -70,7 +72,6 @@
 
 <style scoped>
   .banniere-collectivite__partenaires {
-    margin-top: 4rem;
     gap: 3rem;
   }
 
