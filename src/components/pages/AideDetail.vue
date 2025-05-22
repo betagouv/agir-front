@@ -76,7 +76,11 @@
             />
           </div>
         </div>
-        <BandeauAimezVousCettePage v-model:notation="notation" :feedbackNote="feedbackNote" />
+        <BandeauAimezVousCettePage
+          v-if="utilisateurStore().estConnecte"
+          v-model:notation="notation"
+          :feedbackNote="feedbackNote"
+        />
       </div>
 
       <div class="fr-mt-3w fr-pt-3w align-items--center shadow--light full-width background--white fr-p-2w">
@@ -97,6 +101,7 @@
   import { MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
   import { TagThematique } from '@/domaines/thematiques/TagThematique';
   import { AIDE_TRACKING, trackAide } from '@/shell/tracking/aideTracking';
+  import { utilisateurStore } from '@/store/utilisateur';
 
   const props = defineProps<{ aide: Aide }>();
   const notation = ref<number>(0);
