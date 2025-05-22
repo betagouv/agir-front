@@ -1,7 +1,7 @@
 <template>
   <div class="fr-grid-row fr-grid-row--gutters">
     <div class="fr-col-12 fr-col-md-8">
-      <div class="fr-my-3w background--white border border-radius--md fr-p-2w">
+      <div class="fr-my-3w background--white shadow--light fr-p-2w">
         <ThematiqueTag
           :tag="{
             label: MenuThematiques.getThematiqueData(aide.thematique).labelDansLeMenu,
@@ -60,13 +60,31 @@
         </div>
       </div>
     </div>
-    <div class="fr-col-12 fr-col-md-4 fr-mt-3w fr-mb-4w">
-      <div v-if="aide.partenaire" class="background--white border">
-        <div class="fr-p-2w">
-          <p class="fr-mb-0">Proposé par</p>
-          <img :alt="aide.partenaire.nom" :src="aide.partenaire.logoUrl" class="fr-mt-5v max-full-width" />
+    <div class="fr-col-12 fr-col-md-4">
+      <div v-if="aide.partenaire" class="fr-mt-3w shadow--light">
+        <div class="fr-grid-row flex-space-between align-items--center full-width background--white fr-p-2w">
+          <p class="text--lh-1-3 fr-h5 fr-mb-0 fr-col-8">
+            <span class="text--normal text--bleu text--italic fr-text--md">Proposé par</span><br />
+            {{ aide.partenaire.nom }}
+          </p>
+          <div class="fr-col-4">
+            <img
+              v-if="aide.partenaire.logoUrl"
+              :src="aide.partenaire.logoUrl"
+              alt=""
+              class="full-width img-partenaire"
+            />
+          </div>
         </div>
-        <BandeauAimezVousCettePage v-model:notation="notation" :feedbackNote="feedbackNote" />
+        <BandeauAimezVousCettePage
+          v-if="utilisateurStore().estConnecte"
+          v-model:notation="notation"
+          :feedbackNote="feedbackNote"
+        />
+      </div>
+
+      <div class="fr-mt-3w fr-pt-3w align-items--center shadow--light full-width background--white fr-p-2w">
+        <PartageReseauxSociaux />
       </div>
     </div>
 
@@ -78,10 +96,12 @@
   import BandeauAimezVousCettePage from '@/components/custom/Action/Aside/BandeauAimezVousCettePage.vue';
   import AideModaleFeedback from '@/components/custom/Aides/AideModaleFeedback.vue';
   import ThematiqueTag from '@/components/custom/Thematiques/ThematiqueTag.vue';
+  import PartageReseauxSociaux from '@/components/dsfr/PartageReseauxSociaux.vue';
   import { Aide } from '@/domaines/aides/chargementAides.usecase';
   import { MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
   import { TagThematique } from '@/domaines/thematiques/TagThematique';
   import { AIDE_TRACKING, trackAide } from '@/shell/tracking/aideTracking';
+  import { utilisateurStore } from '@/store/utilisateur';
 
   const props = defineProps<{ aide: Aide }>();
   const notation = ref<number>(0);
