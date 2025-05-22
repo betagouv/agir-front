@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.10.0](https://github.com/betagouv/agir-front/compare/v2.9.3...v2.10.0) (2025-05-22)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* redesign du détail d'une aide et ajout de la fonctionnalité de partage ([#1132](https://github.com/betagouv/agir-front/issues/1132)) ([8f511bd](https://github.com/betagouv/agir-front/commit/8f511bd213e58fd524894180b1359724f34a2db2))
+
 ## [2.9.3](https://github.com/betagouv/agir-front/compare/v2.9.2...v2.9.3) (2025-05-21)
 
 
