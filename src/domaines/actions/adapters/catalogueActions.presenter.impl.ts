@@ -1,6 +1,6 @@
 import { ActionsPresenterImpl } from '@/domaines/actions/adapters/actions.presenter.impl';
 import { ActionViewModel } from '@/domaines/actions/ports/actions.presenter';
-import { CatalogueActions, TypeAction } from '@/domaines/actions/ports/actions.repository';
+import { CatalogueActions } from '@/domaines/actions/ports/actions.repository';
 import {
   CatalogueActionsPresenter,
   FiltresCatalogueActionsViewModel,
@@ -15,12 +15,9 @@ export class CatalogueActionsPresenterImpl extends ActionsPresenterImpl implemen
   }
 
   async presenteCatalogue(catalogueActions: CatalogueActions): Promise<void> {
-    const actionsFiltrees = catalogueActions.actions.filter(
-      action => action.type !== TypeAction.SIMULATEUR || action.code === 'action_simulateur_voiture',
-    );
-    await super.presente(actionsFiltrees);
+    await super.presente(catalogueActions.actions);
     this.filtresCallBack({
-      phraseNombreActions: `${actionsFiltrees.length} action${actionsFiltrees.length > 1 ? 's' : ''}`,
+      phraseNombreActions: `${catalogueActions.actions.length} action${catalogueActions.actions.length > 1 ? 's' : ''}`,
       filtres: catalogueActions.filtres.map(filtre => ({
         id: filtre.code,
         label: filtre.label,

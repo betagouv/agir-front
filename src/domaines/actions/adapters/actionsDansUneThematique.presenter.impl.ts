@@ -1,6 +1,6 @@
 import { ActionsPresenterImpl } from '@/domaines/actions/adapters/actions.presenter.impl';
 import { ActionViewModel } from '@/domaines/actions/ports/actions.presenter';
-import { Action, TypeAction } from '@/domaines/actions/ports/actions.repository';
+import { Action } from '@/domaines/actions/ports/actions.repository';
 import { ActionsDansUneThematiquePresenter } from '@/domaines/actions/ports/actionsDansUneThematiquePresenter';
 
 export class ActionsDansUneThematiquePresenterImpl
@@ -15,10 +15,7 @@ export class ActionsDansUneThematiquePresenterImpl
   }
 
   presenteActions(actions: Action[]): void {
-    const actionsFiltrees = actions.filter(
-      action => action.type !== TypeAction.SIMULATEUR || action.code === 'action_simulateur_voiture',
-    );
-    super.presente(actionsFiltrees);
+    super.presente(actions);
   }
 
   presenteEnchainementKYCs(idEnchainementKYCs: string) {
