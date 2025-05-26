@@ -18,14 +18,12 @@
       </li>
     </ul>
 
-    <a
-      href="https://thread-origami-ae6.notion.site/150576eceac180e2a952fc3d28b17967?pvs=105"
+    <router-link
+      :to="{ name: RouteCollectiviteName.LANDING }"
       class="fr-btn fr-btn--secondary fr-btn--lg fr-btn--icon-right fr-icon-arrow-right-s-line shadow--none"
-      target="_blank"
-      rel="noopener external"
     >
       Prendre contact avec l'équipe
-    </a>
+    </router-link>
   </div>
 </template>
 
@@ -43,4 +41,6 @@
     margin-right: 0.75rem;
   }
 </style>
-<script setup></script>
+<script setup>
+  import { RouteCollectiviteName } from '@/router/collectivites/routes.js';
+</script>

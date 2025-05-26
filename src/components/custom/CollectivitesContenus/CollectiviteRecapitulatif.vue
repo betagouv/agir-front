@@ -44,8 +44,8 @@
 </template>
 
 <script lang="ts" setup>
-  import CarteDecouverte from '@/components/custom/Collectivites/CarteDecouverte.vue';
-  import CollectiviteListeContenu from '@/components/custom/Collectivites/CollectiviteListeContenu.vue';
+  import CarteDecouverte from '@/components/custom/CollectivitesContenus/CarteDecouverte.vue';
+  import CollectiviteListeContenu from '@/components/custom/CollectivitesContenus/CollectiviteListeContenu.vue';
   import { DonneesCollectivitesInseeViewModel } from '@/domaines/collectivites/ports/donneesCollectivitesInsee.presenter';
 
   defineProps<{

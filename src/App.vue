@@ -1,17 +1,22 @@
 <template>
   <div class="page-container">
     <div class="print-hidden">
-      <Header />
-      <DisclaimerGeneral
-        v-if="afficherLeDisclaimer"
-        :onClick="
-          () => {
-            utilisateurStore().disclaimer.afficherDisclaimerGeneral = false;
-          }
-        "
-        description="Cette version est encore très incomplète et de nombreuses évolutions et nouvelles fonctionnalités sont mises en ligne chaque semaine. N'hésitez pas à nous communiquer vos commentaires pour améliorer l'expérience."
-        titre="J'agis est un nouveau service !"
-      />
+      <template v-if="aHeaderCollectivite">
+        <HeaderCollectivite />
+      </template>
+      <template v-else>
+        <Header />
+        <DisclaimerGeneral
+          v-if="afficherLeDisclaimer"
+          :onClick="
+            () => {
+              utilisateurStore().disclaimer.afficherDisclaimerGeneral = false;
+            }
+          "
+          description="Cette version est encore très incomplète et de nombreuses évolutions et nouvelles fonctionnalités sont mises en ligne chaque semaine. N'hésitez pas à nous communiquer vos commentaires pour améliorer l'expérience."
+          titre="J'agis est un nouveau service !"
+        />
+      </template>
     </div>
 
     <main id="contenu" class="background--main" role="main">
@@ -29,11 +34,12 @@
   import { useHead } from '@unhead/vue';
   import axios from 'redaxios';
   import { computed, onMounted, ref } from 'vue';
-  import { NavigationGuardNext, RouteLocationNormalized } from 'vue-router';
+  import { NavigationGuardNext, RouteLocationNormalized, useRoute } from 'vue-router';
   import MessageFlash from '@/components/custom/MessageFlash.vue';
   import DisclaimerGeneral from '@/components/dsfr/DisclaimerGeneral.vue';
   import Footer from '@/components/dsfr/Footer.vue';
   import Header from '@/components/dsfr/Header.vue';
+  import HeaderCollectivite from '@/components/dsfr/HeaderCollectivite.vue';
   import router from '@/router';
   import { RouteCompteName } from '@/router/compte/routeCompteName';
   import useHeadProperties from '@/shell/useHeadProperties';
@@ -45,6 +51,11 @@
   // eslint-disable-next-line no-undef
   const appVersion = __APP_VERSION__;
   const latestVersion = ref(appVersion);
+
+  const route = useRoute();
+  const aHeaderCollectivite = computed(() => {
+    return route.meta?.headerCollectivite;
+  });
 
   router.beforeEach((to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
     const { title, estPublique } = to.meta;
