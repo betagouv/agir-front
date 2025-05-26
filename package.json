@@ -1,7 +1,7 @@
 {
   "name": "agir-front",
   "private": true,
-  "version": "2.9.3",
+  "version": "2.10.0",
   "type": "module",
   "scripts": {
     "convert:webp": "node convertToWebP.js",
