@@ -1,5 +1,19 @@
 # Changelog
 
+## [2.10.0](https://github.com/betagouv/agir-front/compare/v2.9.3...v2.10.0) (2025-05-26)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* landing collectivite ([#1134](https://github.com/betagouv/agir-front/issues/1134)) ([452edc1](https://github.com/betagouv/agir-front/commit/452edc1d3d4a47adb57a1769281a5f91b7e559aa))
+* redesign du détail d'une aide et ajout de la fonctionnalité de partage ([#1132](https://github.com/betagouv/agir-front/issues/1132)) ([8f511bd](https://github.com/betagouv/agir-front/commit/8f511bd213e58fd524894180b1359724f34a2db2))
+* tableaux, baisse du margin-bottom h3 ([#1136](https://github.com/betagouv/agir-front/issues/1136)) ([2cf55c7](https://github.com/betagouv/agir-front/commit/2cf55c73b8fe4b91181bd56567e31e15590dc00b))
+
+
+### 👷 Autres changements
+
+* revert le filtrage des actions simulateurs ([#1135](https://github.com/betagouv/agir-front/issues/1135)) ([e7e56e9](https://github.com/betagouv/agir-front/commit/e7e56e92b428123248188fad95fc53542ff7c2c3))
+
 ## [2.9.3](https://github.com/betagouv/agir-front/compare/v2.9.2...v2.9.3) (2025-05-21)
 
 
