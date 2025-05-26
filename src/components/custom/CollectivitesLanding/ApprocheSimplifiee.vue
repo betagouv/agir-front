@@ -22,6 +22,8 @@
             class="fr-link fr-link fr-link--icon-right fr-icon-arrow-right-line"
             :href="lienRdv.lien"
             @click="lienRdv.fonctionTracking"
+            target="_blank"
+            rel="noopener external"
             >Prendre rendez-vous</a
           >
         </div>
@@ -46,6 +48,8 @@
               class="fr-link fr-link fr-link--icon-right fr-icon-arrow-right-line"
               :href="lienRdv.lien"
               @click="lienRdv.fonctionTracking"
+              target="_blank"
+              rel="noopener external"
               >Prendre rendez-vous</a
             >
           </div>
