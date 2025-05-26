@@ -18,7 +18,10 @@
             Grâce à nos outils d'animation de communautés, engagez les habitants de votre collectivité avec un guide
             pratique et de nombreux outils pour les aider à passer à l'action
           </p>
-          <a class="fr-link fr-link fr-link--icon-right fr-icon-arrow-right-line" :href="lienRdv"
+          <a
+            class="fr-link fr-link fr-link--icon-right fr-icon-arrow-right-line"
+            :href="lienRdv.lien"
+            @click="lienRdv.fonctionTracking"
             >Prendre rendez-vous</a
           >
         </div>
@@ -39,7 +42,10 @@
               Nous simplifions la mobilisation citoyenne pour l’environnement en centralisant toutes les ressources
               utiles à la transition autour d'un commun numérique
             </p>
-            <a class="fr-link fr-link fr-link--icon-right fr-icon-arrow-right-line" :href="lienRdv"
+            <a
+              class="fr-link fr-link fr-link--icon-right fr-icon-arrow-right-line"
+              :href="lienRdv.lien"
+              @click="lienRdv.fonctionTracking"
               >Prendre rendez-vous</a
             >
           </div>
@@ -58,7 +64,10 @@
 
 <script setup lang="ts">
   defineProps<{
-    lienRdv: string;
+    lienRdv: {
+      lien: string;
+      fonctionTracking: () => void;
+    };
   }>();
 </script>
 

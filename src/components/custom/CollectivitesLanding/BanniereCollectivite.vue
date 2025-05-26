@@ -16,7 +16,13 @@
       </p>
 
       <div class="position--relative fr-mb-10w">
-        <a :href="lienRdv" class="fr-btn shadow" aria-describedby="bouton-rdv-description">Prendre rendez-vous</a>
+        <a
+          :href="lienRdv.lien"
+          @click="lienRdv.fonctionTracking"
+          class="fr-btn shadow"
+          aria-describedby="bouton-rdv-description"
+          >Prendre rendez-vous</a
+        >
 
         <div class="fleche" aria-hidden="true"><img src="/collectivites-bouton-fleche.webp" alt="" /></div>
         <div class="bouton-description">
@@ -41,7 +47,10 @@
 
 <script setup lang="ts">
   defineProps<{
-    lienRdv: string;
+    lienRdv: {
+      lien: string;
+      fonctionTracking: () => void;
+    };
   }>();
   const partenaires: { name: string; logo: string }[] = [
     {
