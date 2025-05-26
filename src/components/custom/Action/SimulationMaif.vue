@@ -107,6 +107,7 @@
   } from '@/domaines/simulationMaif/adapters/statistiquesCommuneMaif.presenter.impl';
   import { CalculerResultatSimulationMaifUsecase } from '@/domaines/simulationMaif/calculerResultatSimulationMaif.usecase';
   import { RecupererStatistiquesCommuneMaifUsecase } from '@/domaines/simulationMaif/recupererStatistiquesCommuneMaifDepuisProfil.usecase';
+  import { sessionAppRawDataStorage } from '@/shell/appRawDataStorage';
   import { AdresseBarreDeRecherche, Coordonnees } from '@/shell/coordonneesType';
   import { SimulateursSupportes } from '@/shell/simulateursSupportes';
   import { utilisateurStore } from '@/store/utilisateur';
@@ -196,7 +197,10 @@
       rue: adresse.value.rue,
     };
 
-    const patcherInformationLogementUsecase = new PatcherInformationLogementUsecase(new LogementRepositoryAxios());
+    const patcherInformationLogementUsecase = new PatcherInformationLogementUsecase(
+      new LogementRepositoryAxios(),
+      sessionAppRawDataStorage,
+    );
     patcherInformationLogementUsecase.execute(utilisateurId, nouveauLogement).then(async () => {
       avecAdressePrivee.value = false;
     });

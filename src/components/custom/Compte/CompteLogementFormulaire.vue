@@ -137,6 +137,7 @@
   import { PatcherInformationLogementUsecase } from '@/domaines/logement/patcherInformationLogement.usecase';
   import { LogementViewModel } from '@/domaines/logement/ports/logement.presenter';
   import { AdresseDansLeCompte } from '@/domaines/simulationMaif/recupererStatistiquesCommuneMaifDepuisProfil.usecase';
+  import { sessionAppRawDataStorage } from '@/shell/appRawDataStorage';
   import { AdresseBarreDeRecherche } from '@/shell/coordonneesType';
   import { utilisateurStore } from '@/store/utilisateur';
 
@@ -172,7 +173,7 @@
       return;
     }
 
-    const usecase = new PatcherInformationLogementUsecase(new LogementRepositoryAxios());
+    const usecase = new PatcherInformationLogementUsecase(new LogementRepositoryAxios(), sessionAppRawDataStorage);
     usecase
       .execute(utilisateurStore().utilisateur.id, {
         adultes: logementViewModel.value.adultes,

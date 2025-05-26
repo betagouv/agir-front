@@ -1,6 +1,7 @@
 import { Logement } from '@/domaines/logement/recupererInformationLogement.usecase';
 import { LogementRepositorySpy } from './adapters/logement.repository.spy';
 import { PatcherInformationLogementUsecase } from '@/domaines/logement/patcherInformationLogement.usecase';
+import { SpyAppRawDataStorage } from '../shell/spyAppRawDataStorage';
 
 describe("Fichier de tests concernant l'enregistrement des informations du logement", () => {
   it('Doit patcher les informations du back-end', async () => {
@@ -17,9 +18,10 @@ describe("Fichier de tests concernant l'enregistrement des informations du logem
       rue: "avenue de l'Opéra",
     };
     const spyLogementRepository = new LogementRepositorySpy();
+    const spyAppRawDataStorage = new SpyAppRawDataStorage();
 
     // WHEN
-    const usecase = new PatcherInformationLogementUsecase(spyLogementRepository);
+    const usecase = new PatcherInformationLogementUsecase(spyLogementRepository, spyAppRawDataStorage);
     await usecase.execute('idUtilisateur', logementAMettreAJour);
 
     // THEN
@@ -35,5 +37,6 @@ describe("Fichier de tests concernant l'enregistrement des informations du logem
       numeroRue: '34',
       rue: "avenue de l'Opéra",
     });
+    expect(spyAppRawDataStorage.clearAllItems).toHaveBeenCalledOnce();
   });
 });
