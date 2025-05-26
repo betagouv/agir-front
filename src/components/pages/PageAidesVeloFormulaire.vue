@@ -145,7 +145,10 @@
       };
       await usecase.execute(donneeAMettreAjour);
 
-      const patcherInformationsLogementUsecase = new PatcherInformationLogementUsecase(new LogementRepositoryAxios());
+      const patcherInformationsLogementUsecase = new PatcherInformationLogementUsecase(
+        new LogementRepositoryAxios(),
+        sessionAppRawDataStorage,
+      );
       await patcherInformationsLogementUsecase.execute(utilisateurStore().utilisateur.id, {
         codePostal: logementViewModel.value?.codePostal,
         codeEpci: logementViewModel.value?.codeEpci,
