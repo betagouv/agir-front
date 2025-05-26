@@ -1,6 +1,6 @@
 <template>
   <section>
-    <BanniereCollectivite />
+    <BanniereCollectivite :lien-rdv="lienPriseDeRdv" />
   </section>
 
   <section>
@@ -8,7 +8,7 @@
   </section>
 
   <section>
-    <ApprocheSimplifiee lien-rdv="google.com" />
+    <ApprocheSimplifiee :lien-rdv="lienPriseDeRdv" />
   </section>
 
   <section>
@@ -26,4 +26,7 @@
   import CommuniquerSurJagis from '@/components/custom/CollectivitesLanding/CommuniquerSurJagis.vue';
   import ResponsableMobilisationCitoyenne from '@/components/custom/CollectivitesLanding/ResponsableMobilisationCitoyenne.vue';
   import LandingRappelAppCTA from '@/components/custom/Landing/LandingRappelAppCTA.vue';
+
+  // TODO: tracker le lien
+  const lienPriseDeRdv = 'https://calendly.com/abdellah-bouhend-beta/rencontre-j-agis-pour-les-collectivites';
 </script>

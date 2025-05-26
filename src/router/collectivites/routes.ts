@@ -13,6 +13,7 @@ const collectivitesRoutes: RouteRecordRaw[] = [
     meta: {
       title: 'Collectivités',
       estPublique: true,
+      headerCollectivite: true,
     },
   },
   {
@@ -22,6 +23,7 @@ const collectivitesRoutes: RouteRecordRaw[] = [
     meta: {
       title: 'Collectivités',
       estPublique: true,
+      headerCollectivite: true,
     },
   },
 ];

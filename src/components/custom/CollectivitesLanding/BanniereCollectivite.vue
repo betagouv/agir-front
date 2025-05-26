@@ -16,13 +16,7 @@
       </p>
 
       <div class="position--relative fr-mb-10w">
-        <!--        TODO: tracker le lien-->
-        <a
-          href="https://calendly.com/abdellah-bouhend-beta/rencontre-j-agis-pour-les-collectivites"
-          class="fr-btn shadow"
-          aria-describedby="bouton-rdv-description"
-          >Prendre rendez-vous</a
-        >
+        <a :href="lienRdv" class="fr-btn shadow" aria-describedby="bouton-rdv-description">Prendre rendez-vous</a>
 
         <div class="fleche" aria-hidden="true"><img src="/collectivites-bouton-fleche.webp" alt="" /></div>
         <div class="bouton-description">
@@ -46,6 +40,9 @@
 </template>
 
 <script setup lang="ts">
+  defineProps<{
+    lienRdv: string;
+  }>();
   const partenaires: { name: string; logo: string }[] = [
     {
       name: 'Métropole de Dijon',
@@ -71,6 +68,9 @@
 </script>
 
 <style scoped>
+  .banniere-collectivite {
+    overflow: hidden;
+  }
   .banniere-collectivite__partenaires {
     gap: 3rem;
   }
