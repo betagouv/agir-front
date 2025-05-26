@@ -511,10 +511,29 @@
 
 .cms__content h3 {
     font-size: 1.25rem;
+    margin-bottom: 1rem;
+    line-height: 2rem;
 }
 
 .cms__content h4 {
     font-size: 1.15rem;
+}
+
+.cms__content table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+.cms__content table {
+    margin-bottom: 1rem;
+}
+
+.cms__content td {
+    padding: 0.5rem;
+}
+
+.cms__content td p {
+    margin: 0;
 }
 
 .text--lh-0 {
