@@ -1,5 +1,21 @@
 # Changelog
 
+## [2.10.1](https://github.com/betagouv/agir-front/compare/v2.10.0...v2.10.1) (2025-05-27)
+
+
+### 🐛 Corrections de bogues
+
+* retour landing collectivité ([#1143](https://github.com/betagouv/agir-front/issues/1143)) ([b5034d0](https://github.com/betagouv/agir-front/commit/b5034d06479c608eb35c5d95c2ead7eb1137a079))
+
+
+### 👷 Autres changements
+
+* Bump @sentry/vite-plugin from 3.4.0 to 3.5.0 ([#1137](https://github.com/betagouv/agir-front/issues/1137)) ([09bb155](https://github.com/betagouv/agir-front/commit/09bb15565d58988d41c89fabd2c3bb72578dcc26))
+* Bump @sentry/vue from 9.20.0 to 9.22.0 ([#1141](https://github.com/betagouv/agir-front/issues/1141)) ([874cfcf](https://github.com/betagouv/agir-front/commit/874cfcfb3fbfee924989bbd541d89eb2424724ab))
+* Bump @types/node from 22.15.19 to 22.15.21 ([#1139](https://github.com/betagouv/agir-front/issues/1139)) ([c6cce07](https://github.com/betagouv/agir-front/commit/c6cce07289df7e68aab9233a740858300157eddd))
+* Bump @unhead/vue from 2.0.8 to 2.0.10 ([#1140](https://github.com/betagouv/agir-front/issues/1140)) ([0ecab61](https://github.com/betagouv/agir-front/commit/0ecab6153f0821b720dd4d91edaded641874fcb1))
+* Bump vue from 3.5.14 to 3.5.15 ([#1138](https://github.com/betagouv/agir-front/issues/1138)) ([877562c](https://github.com/betagouv/agir-front/commit/877562c652e88282520c66b7393798c7e4460e48))
+
 ## [2.10.0](https://github.com/betagouv/agir-front/compare/v2.9.3...v2.10.0) (2025-05-26)
 
 
