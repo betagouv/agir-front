@@ -180,7 +180,7 @@ describe("Fichier de tests concernant la récupération d'une action de type cla
             partenaireNom: 'Partenaire',
             partenaireImg: 'partenaire_img.png',
             titreUrl: 'titre-aide-1',
-            montantMaximum: '1200€',
+            montantMaximum: '1 200&nbsp;€',
             estGratuit: false,
           },
           {
@@ -189,7 +189,7 @@ describe("Fichier de tests concernant la récupération d'une action de type cla
             partenaireNom: 'Partenaire2',
             partenaireImg: 'partenaire_img2.png',
             titreUrl: 'titre-aide-2',
-            montantMaximum: '1200€',
+            montantMaximum: '1 200&nbsp;€',
             estGratuit: false,
           },
           {

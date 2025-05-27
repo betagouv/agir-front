@@ -20,7 +20,7 @@ describe('CalculerResultatSimulationVoitureUsecase', () => {
     function expectation(vm: ResultatSimulationVoitureViewModel) {
       expect(vm).toStrictEqual<ResultatSimulationVoitureViewModel>({
         resultatVoitureActuelle: {
-          coupAnnuel: '25000',
+          coutAnnuel: '25 000',
           emissionAnnuelle: '100',
           gabarit: 'SUV',
           tag: ['Électricité', 'Électrique'],
@@ -28,14 +28,14 @@ describe('CalculerResultatSimulationVoitureUsecase', () => {
         resultatVoiturePlusEcologique: {
           coutAnnuel: {
             difference: 1000,
-            label: '+1000€',
-            montant: 26000,
+            label: '+1 000€',
+            montant: '26 000',
             style: 'fr-badge--warning',
           },
           emission: {
             difference: 10,
             label: '10%',
-            montant: 110,
+            montant: '110',
             style: 'fr-badge--warning',
           },
           tag: ['Diesel', 'Diesel'],
@@ -44,14 +44,14 @@ describe('CalculerResultatSimulationVoitureUsecase', () => {
         resultatVoiturePlusEconomique: {
           coutAnnuel: {
             difference: 1000,
-            label: '+1000€',
-            montant: 26000,
+            label: '+1 000€',
+            montant: '26 000',
             style: 'fr-badge--warning',
           },
           emission: {
             difference: 10,
             label: '10%',
-            montant: 110,
+            montant: '110',
             style: 'fr-badge--warning',
           },
           tag: ['Diesel', 'Diesel'],

@@ -15,7 +15,7 @@ export class AidesPresenterImpl implements ChargementAidesPresenter {
           id: aide.id,
           partenaireNom: aide.partenaire?.nom ?? '',
           partenaireImg: aide.partenaire?.logoUrl,
-          montantMaximum: aide.montantMaximum ? `${aide.montantMaximum}€` : undefined,
+          montantMaximum: aide.montantMaximum ? `${aide.montantMaximum.toLocaleString('fr-FR')}&nbsp;€` : undefined,
           estGratuit: aide.estGratuit,
         }))
         .slice(0, nombreAidesMax),

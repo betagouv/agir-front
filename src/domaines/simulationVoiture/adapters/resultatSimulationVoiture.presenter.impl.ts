@@ -12,20 +12,20 @@ export type ResultatSimulationVoitureViewModel = {
 };
 export type ResultatSimulationVoitureActuelleViewModel = {
   gabarit: string;
-  coupAnnuel: string;
+  coutAnnuel: string;
   emissionAnnuelle: string;
   tag: string[];
 };
 export type ResultatSimulationVoitureProposeeViewModel = {
   typeDeVoiture: string;
   coutAnnuel: {
-    montant: number;
+    montant: string;
     difference: number;
     style: string;
     label: string;
   };
   emission: {
-    montant: number;
+    montant: string;
     difference: number;
     style: string;
     label: string;
@@ -44,8 +44,8 @@ export class ResultatSimulationVoiturePresenterImpl implements ResultatSimulatio
     this.callback({
       resultatVoitureActuelle: {
         gabarit: voitureActuelle.getGabarit(),
-        coupAnnuel: Math.round(voitureActuelle.getCout()).toString(),
-        emissionAnnuelle: Math.round(voitureActuelle.getEmpreinte()).toString(),
+        coutAnnuel: Math.round(voitureActuelle.getCout()).toLocaleString('fr-FR'),
+        emissionAnnuelle: Math.round(voitureActuelle.getEmpreinte()).toLocaleString('fr-FR'),
         tag: [voitureActuelle.getCarburant(), voitureActuelle.getMotorisation()].filter(v => v.length > 0),
       },
       resultatVoiturePlusEconomique: this.transformeVoitureProposee(voiturePlusEconomique, voitureActuelle),
@@ -62,13 +62,16 @@ export class ResultatSimulationVoiturePresenterImpl implements ResultatSimulatio
     return {
       typeDeVoiture: voiture.getLabel(),
       coutAnnuel: {
-        montant: Math.round(voiture.getCout()),
+        montant: Math.round(voiture.getCout()).toLocaleString('fr-FR'),
         difference: countAnnuelDifference,
-        label: countAnnuelDifference > 0 ? `+${countAnnuelDifference}€` : `${countAnnuelDifference}€`,
+        label:
+          countAnnuelDifference > 0
+            ? `+${countAnnuelDifference.toLocaleString('fr-FR')}€`
+            : `${countAnnuelDifference.toLocaleString('fr-FR')}€`,
         style: countAnnuelDifference < 0 ? 'fr-badge--success' : 'fr-badge--warning',
       },
       emission: {
-        montant: Math.round(voiture.getEmpreinte()),
+        montant: Math.round(voiture.getEmpreinte()).toLocaleString('fr-FR'),
         difference: pourcentageDifferenceEmission,
         label: `${pourcentageDifferenceEmission}%`,
         style: pourcentageDifferenceEmission < 0 ? 'fr-badge--success' : 'fr-badge--warning',

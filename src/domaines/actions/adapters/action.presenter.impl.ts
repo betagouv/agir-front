@@ -141,7 +141,7 @@ class ActionViewModelBuilder {
       id: aide.id,
       partenaireNom: aide.partenaireNom,
       partenaireImg: aide.partenaireImg,
-      montantMaximum: aide.montantMaximum ? `${aide.montantMaximum}€` : undefined,
+      montantMaximum: aide.montantMaximum ? `${aide.montantMaximum.toLocaleString('fr-FR')}&nbsp;€` : undefined,
       estGratuit: aide.estGratuit,
     }));
   }

@@ -18,7 +18,7 @@ describe('Fichier de test du usecase de chargement du score', () => {
       'idUtilisateur',
       new GamificationPresenterImpl(vm => {
         expect(vm).toStrictEqual<GamificationViewModel>({
-          points: 10,
+          points: '10',
           nombreDeBadges: 0,
         });
       }),
@@ -36,7 +36,7 @@ describe('Fichier de test du usecase de chargement du score', () => {
       'idUtilisateur',
       new GamificationPresenterImpl(vm => {
         expect(vm).toStrictEqual<GamificationViewModel>({
-          points: 10,
+          points: '10',
           nombreDeBadges: 1,
         });
       }),

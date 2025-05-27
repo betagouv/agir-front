@@ -17,12 +17,12 @@
             <h3 class="fr-text--lg fr-mb-0">{{ aide.titre }}</h3>
             <p v-if="aide.estGratuit" class="fr-m-0 fr-text--md fr-mt-1w">
               <span class="text--bleu fr-icon-money-euro-circle-line fr-mr-1v"></span>
-              <span class="text--bold"> Gratuit</span>
+              <span class="text--bold">Gratuit</span>
             </p>
             <p v-else-if="aide.montantMaximum" class="fr-m-0 fr-text--md fr-mt-1w">
               <span class="text--bleu fr-icon-money-euro-circle-line fr-mr-1v"></span>
               Jusqu'à
-              <span class="text--bold"> {{ aide.montantMaximum }}</span>
+              <span class="text--bold" v-html="aide.montantMaximum" />
             </p>
           </div>
           <span class="fr-icon-arrow-right-s-line text--bleu"></span>

@@ -30,7 +30,7 @@
             </span>
             <span v-if="aide.montantMaximum" class="fr-tag">
               <span class="fr-sr-only">, </span>
-              Jusqu'à {{ aide.montantMaximum }} €
+              Jusqu'à {{ aide.montantMaximum.toLocaleString('fr-FR') }}&nbsp;€
             </span>
             <span v-if="aide.estGratuit" class="fr-tag">
               <span class="fr-sr-only">, </span>

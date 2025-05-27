@@ -4,7 +4,7 @@ import { Classement, ClassementGlobal, ClassementPourcentage } from '@/domaines/
 interface ClassementItemViewModel {
   prenom: string;
   rang: number;
-  points: number;
+  points: string;
   style: string;
   medailleTopTrois?: string;
 }
@@ -60,7 +60,7 @@ export class ClassementPresenterImpl implements ClassementPresenter {
     return classement.topTrois.map(utilisateur => ({
       prenom: utilisateur.pseudo,
       rang: utilisateur.rank,
-      points: utilisateur.points,
+      points: utilisateur.points.toLocaleString('fr-FR'),
       style: utilisateur.id === idUtilisateur ? 'background-bleu-light border--bleu' : 'background--white',
       medailleTopTrois: this.determineMedaille(utilisateur.rank),
     }));
@@ -72,7 +72,7 @@ export class ClassementPresenterImpl implements ClassementPresenter {
       .map((utilisateur, index) => ({
         prenom: utilisateur.pseudo,
         rang: utilisateur.rank,
-        points: utilisateur.points,
+        points: utilisateur.points.toLocaleString('fr-FR'),
         style: this.determineStyle(index, classement.utilisateursProche.length, utilisateur.id, utilisateurId),
       }));
   }
