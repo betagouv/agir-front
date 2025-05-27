@@ -1,6 +1,5 @@
 import { SimulateurMaifPresenter } from '@/domaines/simulationMaif/ports/simulateurMaif.presenter';
 import { ResultatSimulationMaif, RisqueMaifImpact } from '@/domaines/simulationMaif/ports/simulateurMaif.repository';
-import { Coordonnees } from '@/shell/coordonneesType';
 
 export type SimulateurMaifViewModel = {
   risques: {
@@ -11,13 +10,12 @@ export type SimulateurMaifViewModel = {
     };
     illustration: string;
   }[];
-  lienKit: string;
 };
 
 export class SimulateurMaifPresenterImpl implements SimulateurMaifPresenter {
   constructor(private readonly callback: (simulateur: SimulateurMaifViewModel) => void) {}
 
-  presente(resultatSimulateur: ResultatSimulationMaif, coordonnees: Coordonnees): void {
+  presente(resultatSimulateur: ResultatSimulationMaif): void {
     this.callback({
       risques: resultatSimulateur.risques
         ?.sort((a, b) => b.impact - a.impact)
@@ -26,7 +24,6 @@ export class SimulateurMaifPresenterImpl implements SimulateurMaifPresenter {
           badge: this.genererBadgeDepuisImpact(risque.impact),
           illustration: this.recupererLienIllustration(risque.id),
         })),
-      lienKit: `https://api.aux-alentours.1934.io/report/pdf/v2/_byLatLon?lat=${coordonnees.latitude}&lon=${coordonnees.longitude}`,
     });
   }
 

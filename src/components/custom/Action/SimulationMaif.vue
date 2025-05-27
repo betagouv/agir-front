@@ -30,22 +30,6 @@
           class="fr-mb-2w"
         />
       </template>
-
-      <template v-if="resultatSimulationMaifViewModel?.lienKit">
-        <h3 class="fr-h4 fr-mb-1w fr-mt-3w">Votre kit de prévention Maif</h3>
-        <p class="fr-my-2w">
-          Vous habitez dans une zone inondable ou argileuse, découvrez votre kit de prévention pour agir - vous aussi -
-          à votre échelle.
-        </p>
-        <a
-          :href="resultatSimulationMaifViewModel.lienKit"
-          class="fr-btn fr-btn--secondary"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          Télécharger mon kit de prévention
-        </a>
-      </template>
     </section>
 
     <h2 class="fr-h3 fr-mt-4w">
