@@ -16,7 +16,7 @@
   </section>
 
   <section class="background--white">
-    <ArticlesRecommandees />
+    <ArticlesRecommandees class="fr-container fr-py-5w fr-py-md-10w" />
   </section>
 
   <section class="background--brown-cafe-creme-main-782">

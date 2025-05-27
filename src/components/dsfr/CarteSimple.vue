@@ -2,6 +2,7 @@
   <div class="fr-card fr-enlarge-link fr-card--sm">
     <div class="fr-card__body">
       <div class="fr-card__content">
+        <slot name="contenu" />
         <h3 class="fr-card__title">
           <router-link :to="{ path: url }">{{ titre }}</router-link>
         </h3>

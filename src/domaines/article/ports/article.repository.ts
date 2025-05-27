@@ -8,6 +8,7 @@ export interface ArticleRecommande {
   clefThematiqueAPI: ClefThematiqueAPI;
   illustrationURL: string;
   idDuContenu: string;
+  estLocal: boolean;
 }
 
 export interface ArticleRepository {
@@ -25,5 +26,9 @@ export interface ArticleRepository {
 
   retirerDesFavoris(articleId: string, utilisateurId: string): Promise<void>;
 
-  recupererArticlesPersonnalisees(idUtilisateur: string, nombreMax: number): Promise<ArticleRecommande[]>;
+  recupererArticlesPersonnalisees(
+    idUtilisateur: string,
+    nombreMax: number,
+    thematique?: ClefThematiqueAPI,
+  ): Promise<ArticleRecommande[]>;
 }

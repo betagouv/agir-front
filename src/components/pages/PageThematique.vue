@@ -51,6 +51,12 @@
 
     <WidgetAides :clef-thematique="thematiqueId" :nombre-aides-max="4" class="fr-my-4w" />
 
+    <ArticlesRecommandees :clef-thematique="thematiqueId" :key="thematiqueId">
+      <template v-slot:title>
+        <h2 class="fr-h3 fr-mb-0">Pour aller plus loin</h2>
+      </template>
+    </ArticlesRecommandees>
+
     <section class="fr-mt-8w fr-mb-12w flex flex-column align-items--center">
       <img src="/jumelle.svg" alt="" class="fr-mt-6w fr-mb-2w" />
 
@@ -67,6 +73,7 @@
   import { useHead } from '@unhead/vue';
   import { computed, onMounted, ref, watch } from 'vue';
   import { onBeforeRouteUpdate, useRoute } from 'vue-router';
+  import ArticlesRecommandees from '@/components/custom/AccueilConnectee/ArticlesRecommandees.vue';
   import CatalogueActionsRecommandees from '@/components/custom/Action/Catalogue/CatalogueActionsRecommandees.vue';
   import WidgetAides from '@/components/custom/Aides/WidgetAides.vue';
   import ParcoursKYCPourRecommandations from '@/components/custom/Thematiques/ParcoursKYCPourRecommandations.vue';
