@@ -11,7 +11,7 @@
       </div>
 
       <p class="fr-mb-5w">
-        <strong class="display-block fr-mb-2w">Déployez J’agis dans votre collectivité.</strong>
+        <strong class="display-block fr-mb-2w fr-text--lg">Déployez J’agis dans votre collectivité</strong>
         <i>J’agis</i> s’adapte à votre collectivité pour accompagner vos habitants et valoriser vos initiatives locales
       </p>
 
@@ -19,7 +19,7 @@
         <a
           :href="lienRdv.lien"
           @click="lienRdv.fonctionTracking"
-          class="fr-btn shadow"
+          class="fr-btn shadow fr-btn--lg"
           aria-describedby="bouton-rdv-description"
           >Prendre rendez-vous</a
         >
@@ -66,10 +66,6 @@
       logo: '/Logo_Bordeaux_Metropole.svg',
     },
     {
-      name: 'Métropole de Toulouse',
-      logo: '/Logo_Toulouse_Metropole.svg',
-    },
-    {
       name: 'Métropole du Grand Besançon',
       logo: '/Logo_Grand_Besancon_Metropole.svg',
     },
@@ -85,7 +81,7 @@
   }
 
   .banniere-collectivite__partenaires img {
-    max-width: 11rem;
+    max-width: 10rem;
     height: 5rem;
   }
 
