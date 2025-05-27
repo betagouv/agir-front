@@ -37,6 +37,6 @@
     fonctionTracking: () => {
       trackClick('Collectivité', `Prise de RDV`);
     },
-    lien: 'https://calendly.com/abdellah-bouhend-beta/rencontre-j-agis-pour-les-collectivites',
+    lien: 'https://meet.brevo.com/jagis',
   };
 </script>
