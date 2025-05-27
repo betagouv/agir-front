@@ -5,7 +5,10 @@ import {
   SimulateurMaifRepository,
 } from '@/domaines/simulationMaif/ports/simulateurMaif.repository';
 import { Coordonnees } from '@/shell/coordonneesType';
-import { SimulateurMaifPresenterImpl } from '@/domaines/simulationMaif/adapters/simulateurMaif.presenter.impl';
+import {
+  SimulateurMaifPresenterImpl,
+  SimulateurMaifViewModel,
+} from '@/domaines/simulationMaif/adapters/simulateurMaif.presenter.impl';
 
 class SimulateurMaifRepositoryMock implements SimulateurMaifRepository {
   constructor(private readonly resultat: ResultatSimulationMaif) {}
@@ -45,8 +48,7 @@ describe('Fichier de tests concernant le calcul du résultat de la simulation MA
 
     // WHEN - THEN
     const simulateurMaifPresenter = new SimulateurMaifPresenterImpl(vm => {
-      expect(vm).toStrictEqual({
-        lienKit: 'https://api.aux-alentours.1934.io/report/pdf/v2/_byLatLon?lat=48.856614&lon=2.3522219',
+      expect(vm).toStrictEqual<SimulateurMaifViewModel>({
         risques: [
           {
             badge: {
