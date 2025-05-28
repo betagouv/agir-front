@@ -9,10 +9,8 @@
             <h3 class="fr-h4">Où habitez-vous ?</h3>
             <InputCodePostal
               v-if="logementViewModel"
-              v-model="logementViewModel.codePostal"
-              :defaultSelectValue="logementViewModel.commune_utilisee_dans_le_compte"
-              :defaultValue="logementViewModel.codePostal"
-              @update:selectedCommune="logementViewModel.commune_utilisee_dans_le_compte = $event"
+              v-model:code-postal="logementViewModel.codePostal"
+              v-model:code-epci="logementViewModel.codeEpci"
               @update:isCodePostalEnErreur="isCodePostalEnErreur = $event"
             />
             <h3 class="fr-h4 fr-mt-3w">Quel est votre revenu ?</h3>
@@ -51,7 +49,7 @@
   import { SessionRepositoryStore } from '@/domaines/authentification/adapters/session.repository.store';
   import { LogementPresenterImpl } from '@/domaines/logement/adapters/logement.presenter.impl';
   import { LogementRepositoryAxios } from '@/domaines/logement/adapters/logement.repository.axios';
-  import { EnregistrerInformationsLogementUsecase } from '@/domaines/logement/enregistrerInformationLogement.usecase';
+  import { PatcherInformationLogementUsecase } from '@/domaines/logement/patcherInformationLogement.usecase';
   import { LogementViewModel } from '@/domaines/logement/ports/logement.presenter';
   import { RecupererInformationLogementUseCase } from '@/domaines/logement/recupererInformationLogement.usecase';
   import {
@@ -147,21 +145,13 @@
       };
       await usecase.execute(donneeAMettreAjour);
 
-      const enregistrerInformationsLogementUsecase = new EnregistrerInformationsLogementUsecase(
+      const patcherInformationsLogementUsecase = new PatcherInformationLogementUsecase(
         new LogementRepositoryAxios(),
         sessionAppRawDataStorage,
       );
-      await enregistrerInformationsLogementUsecase.execute(utilisateurStore().utilisateur.id, {
-        adultes: logementViewModel.value!.adultes,
-        enfants: logementViewModel.value!.enfants,
-        codePostal: logementViewModel.value!.codePostal,
-        commune_utilisee_dans_le_compte: logementViewModel.value!.commune_utilisee_dans_le_compte,
-        commune_label: '',
-        residence: logementViewModel.value!.residence.valeur,
-        superficie: logementViewModel.value!.superficie.valeur,
-        proprietaire: logementViewModel.value!.proprietaire.valeur,
-        plusDeQuinzeAns: logementViewModel.value!.plusDeQuinzeAns.valeur,
-        dpe: logementViewModel.value!.dpe.valeur,
+      await patcherInformationsLogementUsecase.execute(utilisateurStore().utilisateur.id, {
+        codePostal: logementViewModel.value?.codePostal,
+        codeEpci: logementViewModel.value?.codeEpci,
       });
 
       await router.push({ name: RouteAidesName.VELO });
