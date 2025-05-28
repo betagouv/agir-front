@@ -27,7 +27,7 @@
   import InputCheckbox from '@/components/dsfr/InputCheckbox.vue';
   import { AidesViewModel } from '@/domaines/aides/ports/chargementAides.presenter';
   import cacherEmojisAuxLecteursDecrans from '@/shell/cacherEmojisAuxLecteursDecrans';
-  import { nettoyerEtGarderLettres } from '@/shell/nettoyerEtGarderLettres';
+  import { nettoyerEtGarderLettresEtChiffres } from '@/shell/nettoyerEtGarderLettresEtChiffres';
 
   const route = useRoute();
 
@@ -36,7 +36,7 @@
   }>();
 
   const optionsCheckbox = Object.keys(props.aidesGroupesParCategorie).map(option => ({
-    id: nettoyerEtGarderLettres(option),
+    id: nettoyerEtGarderLettresEtChiffres(option),
     label: option,
     checked: false,
   }));
@@ -50,7 +50,8 @@
 
   function doitAfficher(nomThematique: string) {
     return (
-      categoriesActives.value.length === 0 || categoriesActives.value.includes(nettoyerEtGarderLettres(nomThematique))
+      categoriesActives.value.length === 0 ||
+      categoriesActives.value.includes(nettoyerEtGarderLettresEtChiffres(nomThematique))
     );
   }
 
