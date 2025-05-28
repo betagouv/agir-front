@@ -1,9 +1,10 @@
 import { GamificationPresenter } from '@/domaines/score/ports/gamification.presenter';
 import { Gamification } from '@/domaines/score/ports/score.repository';
+import { NombreAfficheEnFR, NombreAfficheEnFRBuilder } from '@/shell/nombreAfficheEnFRBuilder';
 
 export type GamificationViewModel = {
-  points: string;
-  nombreDeBadges: number;
+  points: NombreAfficheEnFR;
+  nombreDeBadges: NombreAfficheEnFR | undefined;
 };
 
 export class GamificationPresenterImpl implements GamificationPresenter {
@@ -11,8 +12,9 @@ export class GamificationPresenterImpl implements GamificationPresenter {
 
   presente(gamification: Gamification): void {
     this.callback({
-      points: gamification.nombreDePoints.toLocaleString('fr-FR'),
-      nombreDeBadges: gamification.badges.length,
+      points: NombreAfficheEnFRBuilder.build(gamification.nombreDePoints),
+      nombreDeBadges:
+        gamification.badges.length === 0 ? undefined : NombreAfficheEnFRBuilder.build(gamification.badges.length),
     });
   }
 }

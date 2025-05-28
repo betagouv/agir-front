@@ -1,10 +1,11 @@
 import { ClassementPresenter } from '@/domaines/classement/ports/classement.presenter';
 import { Classement, ClassementGlobal, ClassementPourcentage } from '@/domaines/classement/recupererClassement.usecase';
+import { NombreAfficheEnFR, NombreAfficheEnFRBuilder } from '@/shell/nombreAfficheEnFRBuilder';
 
 interface ClassementItemViewModel {
   prenom: string;
-  rang: number;
-  points: string;
+  rang: NombreAfficheEnFR;
+  points: NombreAfficheEnFR;
   style: string;
   medailleTopTrois?: string;
 }
@@ -59,8 +60,8 @@ export class ClassementPresenterImpl implements ClassementPresenter {
   private determineTopTrois(classement: Classement, idUtilisateur: string): ClassementItemViewModel[] {
     return classement.topTrois.map(utilisateur => ({
       prenom: utilisateur.pseudo,
-      rang: utilisateur.rank,
-      points: utilisateur.points.toLocaleString('fr-FR'),
+      rang: NombreAfficheEnFRBuilder.build(utilisateur.rank),
+      points: NombreAfficheEnFRBuilder.build(utilisateur.points),
       style: utilisateur.id === idUtilisateur ? 'background-bleu-light border--bleu' : 'background--white',
       medailleTopTrois: this.determineMedaille(utilisateur.rank),
     }));
@@ -71,8 +72,8 @@ export class ClassementPresenterImpl implements ClassementPresenter {
       .filter(utilisateur => utilisateur.rank !== 1 && utilisateur.rank !== 2 && utilisateur.rank !== 3)
       .map((utilisateur, index) => ({
         prenom: utilisateur.pseudo,
-        rang: utilisateur.rank,
-        points: utilisateur.points.toLocaleString('fr-FR'),
+        rang: NombreAfficheEnFRBuilder.build(utilisateur.rank),
+        points: NombreAfficheEnFRBuilder.build(utilisateur.points),
         style: this.determineStyle(index, classement.utilisateursProche.length, utilisateur.id, utilisateurId),
       }));
   }

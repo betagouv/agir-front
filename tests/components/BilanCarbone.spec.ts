@@ -6,6 +6,7 @@ import {
 } from '@/domaines/bilanCarbone/adapters/bilanCarbone.presenter.impl';
 import { beforeEach } from 'vitest';
 import { config } from '@vue/test-utils';
+import { NombreAfficheEnFR } from '@/shell/nombreAfficheEnFRBuilder';
 
 config.global.stubs = {
   'router-link': {
@@ -163,7 +164,7 @@ describe('BilanCarbone', () => {
         bilanCarboneComplet: {
           titre: 'Mon bilan <span class="text--bleu">environnemental</span>',
           pourcentageProgressBar: 52.18743032269549,
-          nombreDeTonnesAnnuel: '6,3',
+          nombreDeTonnesAnnuel: '6,3' as NombreAfficheEnFR,
           impactKgAnnuel: { valeur: '6.3', unite: 'tonnes' },
           univers: [
             {

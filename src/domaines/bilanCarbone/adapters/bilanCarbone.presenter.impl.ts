@@ -2,6 +2,7 @@ import { BilanCarboneBasePresenter } from '@/domaines/bilanCarbone/adapters/bila
 import { BilanCarbonePresenter, ThematiqueBilanViewModel } from '@/domaines/bilanCarbone/ports/bilanCarbone.presenter';
 import { BilanCarbone, NiveauImpactBilanCarbone } from '@/domaines/bilanCarbone/recupererBilanCarbone.usecase';
 import { ClefThematiqueAPI, MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
+import { NombreAfficheEnFR } from '@/shell/nombreAfficheEnFRBuilder';
 
 interface BilanCarbonDetailItemViewModel {
   label: string;
@@ -24,7 +25,7 @@ export interface BilanCarboneViewModelBase {
 
 export interface BilanCarboneCompletViewModel extends BilanCarboneViewModelBase {
   pourcentageProgressBar: number;
-  nombreDeTonnesAnnuel: string;
+  nombreDeTonnesAnnuel: NombreAfficheEnFR;
   impactKgAnnuel: {
     valeur: string;
     unite: string;

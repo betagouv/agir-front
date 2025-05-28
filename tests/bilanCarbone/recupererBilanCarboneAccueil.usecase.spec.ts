@@ -6,6 +6,7 @@ import {
 } from '@/domaines/bilanCarbone/adapters/bilanCarboneAccueil.presenter.impl';
 import { RecupererBilanCarboneAccueilUsecase } from '@/domaines/bilanCarbone/recupererBilanCarboneAccueil.usecase';
 import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
+import { NombreAfficheEnFR } from '@/shell/nombreAfficheEnFRBuilder';
 
 describe('Fichier de tests concernant le chargement du bilan carbone', () => {
   const bilanCarboneCompletMock = new BilanCarboneRepositoryMock({
@@ -172,7 +173,7 @@ describe('Fichier de tests concernant le chargement du bilan carbone', () => {
       function expectation(bilanCarboneViewModel: BilanCarboneCompletAccueilViewModel) {
         expect(bilanCarboneViewModel).toStrictEqual<BilanCarboneCompletAccueilViewModel>({
           pourcentageProgressBar: 80,
-          nombreDeTonnesAnnuel: '9,6',
+          nombreDeTonnesAnnuel: '9,6' as NombreAfficheEnFR,
         });
       }
     });

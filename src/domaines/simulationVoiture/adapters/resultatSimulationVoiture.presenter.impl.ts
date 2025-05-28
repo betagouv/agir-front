@@ -4,6 +4,12 @@ import {
   VoitureAlternative,
 } from '@/domaines/simulationVoiture/entities/ResultatSimulationVoiture';
 import { ResultatSimulationVoiturePresenter } from '@/domaines/simulationVoiture/ports/resultatSimulationVoiture.presenter';
+import {
+  MontantAfficheEnFR,
+  MontantAfficheEnFRBuilder,
+  NombreAfficheEnFR,
+  NombreAfficheEnFRBuilder,
+} from '@/shell/nombreAfficheEnFRBuilder';
 
 export type ResultatSimulationVoitureViewModel = {
   resultatVoitureActuelle: ResultatSimulationVoitureActuelleViewModel;
@@ -12,23 +18,23 @@ export type ResultatSimulationVoitureViewModel = {
 };
 export type ResultatSimulationVoitureActuelleViewModel = {
   gabarit: string;
-  coutAnnuel: string;
-  emissionAnnuelle: string;
+  coutAnnuel: MontantAfficheEnFR;
+  emissionAnnuelle: NombreAfficheEnFR;
   tag: string[];
 };
 export type ResultatSimulationVoitureProposeeViewModel = {
   typeDeVoiture: string;
   coutAnnuel: {
-    montant: string;
+    montant: MontantAfficheEnFR;
     difference: number;
     style: string;
-    label: string;
+    labelDifference: string;
   };
   emission: {
-    montant: string;
+    montant: NombreAfficheEnFR;
     difference: number;
     style: string;
-    label: string;
+    labelDifference: string;
   };
   tag: string[];
 };
@@ -44,8 +50,8 @@ export class ResultatSimulationVoiturePresenterImpl implements ResultatSimulatio
     this.callback({
       resultatVoitureActuelle: {
         gabarit: voitureActuelle.getGabarit(),
-        coutAnnuel: Math.round(voitureActuelle.getCout()).toLocaleString('fr-FR'),
-        emissionAnnuelle: Math.round(voitureActuelle.getEmpreinte()).toLocaleString('fr-FR'),
+        coutAnnuel: MontantAfficheEnFRBuilder.build(Math.round(voitureActuelle.getCout())),
+        emissionAnnuelle: NombreAfficheEnFRBuilder.build(Math.round(voitureActuelle.getEmpreinte())),
         tag: [voitureActuelle.getCarburant(), voitureActuelle.getMotorisation()].filter(v => v.length > 0),
       },
       resultatVoiturePlusEconomique: this.transformeVoitureProposee(voiturePlusEconomique, voitureActuelle),
@@ -62,18 +68,18 @@ export class ResultatSimulationVoiturePresenterImpl implements ResultatSimulatio
     return {
       typeDeVoiture: voiture.getLabel(),
       coutAnnuel: {
-        montant: Math.round(voiture.getCout()).toLocaleString('fr-FR'),
+        montant: MontantAfficheEnFRBuilder.build(Math.round(voiture.getCout())),
         difference: countAnnuelDifference,
-        label:
+        labelDifference:
           countAnnuelDifference > 0
-            ? `+${countAnnuelDifference.toLocaleString('fr-FR')}€`
-            : `${countAnnuelDifference.toLocaleString('fr-FR')}€`,
+            ? `+${MontantAfficheEnFRBuilder.build(countAnnuelDifference)}`
+            : MontantAfficheEnFRBuilder.build(countAnnuelDifference),
         style: countAnnuelDifference < 0 ? 'fr-badge--success' : 'fr-badge--warning',
       },
       emission: {
-        montant: Math.round(voiture.getEmpreinte()).toLocaleString('fr-FR'),
+        montant: NombreAfficheEnFRBuilder.build(Math.round(voiture.getEmpreinte())),
         difference: pourcentageDifferenceEmission,
-        label: `${pourcentageDifferenceEmission}%`,
+        labelDifference: `${pourcentageDifferenceEmission}%`,
         style: pourcentageDifferenceEmission < 0 ? 'fr-badge--success' : 'fr-badge--warning',
       },
       tag: [voiture.getCarburant(), voiture.getMotorisation()].filter(v => v.length > 0),

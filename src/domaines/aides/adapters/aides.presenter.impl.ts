@@ -2,6 +2,7 @@ import { ActionAideViewModel } from '@/domaines/actions/ports/action.presenter';
 import { Aides } from '@/domaines/aides/chargementAides.usecase';
 import { ChargementAidesPresenter } from '@/domaines/aides/ports/chargementAides.presenter';
 import { buildUrl } from '@/shell/buildUrl';
+import { MontantAfficheEnFRBuilder } from '@/shell/nombreAfficheEnFRBuilder';
 
 export class AidesPresenterImpl implements ChargementAidesPresenter {
   constructor(private _viewModel: (vm: ActionAideViewModel[]) => void) {}
@@ -15,7 +16,7 @@ export class AidesPresenterImpl implements ChargementAidesPresenter {
           id: aide.id,
           partenaireNom: aide.partenaire?.nom ?? '',
           partenaireImg: aide.partenaire?.logoUrl,
-          montantMaximum: aide.montantMaximum ? `${aide.montantMaximum.toLocaleString('fr-FR')}&nbsp;€` : undefined,
+          montantMaximum: aide.montantMaximum ? MontantAfficheEnFRBuilder.build(aide.montantMaximum) : undefined,
           estGratuit: aide.estGratuit,
         }))
         .slice(0, nombreAidesMax),

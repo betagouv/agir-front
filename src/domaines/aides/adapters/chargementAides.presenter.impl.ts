@@ -8,6 +8,7 @@ import {
 import { MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
 import { TagThematique } from '@/domaines/thematiques/TagThematique';
 import { buildUrl } from '@/shell/buildUrl';
+import { MontantAfficheEnFRBuilder } from '@/shell/nombreAfficheEnFRBuilder';
 
 export class ChargementAidesPresenterImpl implements ChargementAidesPresenter {
   constructor(private _viewModel: (vm: AidesAvecCouvertureViewModel) => void) {}
@@ -37,7 +38,7 @@ export class ChargementAidesPresenterImpl implements ChargementAidesPresenter {
         id: aide.id,
         partenaireNom: aide.partenaire?.nom ?? '',
         partenaireImg: aide.partenaire?.logoUrl,
-        montantMaximum: aide.montantMaximum ? `${aide.montantMaximum.toLocaleString('fr-FR')}&nbsp;€` : undefined,
+        montantMaximum: aide.montantMaximum ? MontantAfficheEnFRBuilder.build(aide.montantMaximum) : undefined,
         estGratuit: aide.estGratuit,
       };
 

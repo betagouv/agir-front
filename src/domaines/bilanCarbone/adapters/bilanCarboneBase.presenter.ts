@@ -1,3 +1,5 @@
+import { NombreAfficheEnFR, NombreAfficheEnFRBuilder } from '@/shell/nombreAfficheEnFRBuilder';
+
 export class BilanCarboneBasePresenter {
   calculPourcentageProgressBar(nombreDeKg: number): number {
     const maxKg = 12000;
@@ -6,7 +8,7 @@ export class BilanCarboneBasePresenter {
     return Math.min(Math.max(pourcentage, 0), 100);
   }
 
-  calculTonnesAnnuel(nombreDeKg: number): string {
-    return (nombreDeKg / 1000).toLocaleString('fr-FR', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+  calculTonnesAnnuel(nombreDeKg: number): NombreAfficheEnFR {
+    return NombreAfficheEnFRBuilder.build(nombreDeKg / 1000, { minimumFractionDigits: 1, maximumFractionDigits: 1 });
   }
 }
