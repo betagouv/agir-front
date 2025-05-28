@@ -11,6 +11,7 @@ import { buildUrl } from '@/shell/buildUrl';
 import cacherEmojisAuxLecteursDecrans from '@/shell/cacherEmojisAuxLecteursDecrans';
 import { nettoyerEtGarderContenuTextuel } from '@/shell/nettoyerEtGarderContenuTextuel';
 import { nettoyerEtGarderLettres } from '@/shell/nettoyerEtGarderLettres';
+import { MontantAfficheEnFRBuilder } from '@/shell/nombreAfficheEnFRBuilder';
 
 class ActionViewModelBuilder {
   static async buildClassique(action: ActionDetail): Promise<ActionClassiqueViewModel> {
@@ -141,7 +142,7 @@ class ActionViewModelBuilder {
       id: aide.id,
       partenaireNom: aide.partenaireNom,
       partenaireImg: aide.partenaireImg,
-      montantMaximum: aide.montantMaximum ? `${aide.montantMaximum}€` : undefined,
+      montantMaximum: aide.montantMaximum ? `${MontantAfficheEnFRBuilder.build(aide.montantMaximum)}` : undefined,
       estGratuit: aide.estGratuit,
     }));
   }

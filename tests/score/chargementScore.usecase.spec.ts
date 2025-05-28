@@ -6,6 +6,7 @@ import {
   GamificationViewModel,
 } from '@/domaines/score/adapters/gamification.presenter.impl';
 import { expect } from 'vitest';
+import { NombreAfficheEnFR } from '@/shell/nombreAfficheEnFRBuilder';
 
 describe('Fichier de test du usecase de chargement du score', () => {
   it('Cas avec score et sans badge', async () => {
@@ -18,8 +19,8 @@ describe('Fichier de test du usecase de chargement du score', () => {
       'idUtilisateur',
       new GamificationPresenterImpl(vm => {
         expect(vm).toStrictEqual<GamificationViewModel>({
-          points: 10,
-          nombreDeBadges: 0,
+          points: '10' as NombreAfficheEnFR,
+          nombreDeBadges: undefined,
         });
       }),
     );
@@ -36,8 +37,8 @@ describe('Fichier de test du usecase de chargement du score', () => {
       'idUtilisateur',
       new GamificationPresenterImpl(vm => {
         expect(vm).toStrictEqual<GamificationViewModel>({
-          points: 10,
-          nombreDeBadges: 1,
+          points: '10' as NombreAfficheEnFR,
+          nombreDeBadges: '1' as NombreAfficheEnFR,
         });
       }),
     );

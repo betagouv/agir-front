@@ -30,7 +30,7 @@
             </span>
             <span v-if="aide.montantMaximum" class="fr-tag">
               <span class="fr-sr-only">, </span>
-              Jusqu'à {{ aide.montantMaximum }} €
+              Jusqu'à {{ MontantAfficheEnFRBuilder.build(aide.montantMaximum) }}
             </span>
             <span v-if="aide.estGratuit" class="fr-tag">
               <span class="fr-sr-only">, </span>
@@ -100,6 +100,7 @@
   import { Aide } from '@/domaines/aides/chargementAides.usecase';
   import { MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
   import { TagThematique } from '@/domaines/thematiques/TagThematique';
+  import { MontantAfficheEnFRBuilder } from '@/shell/nombreAfficheEnFRBuilder';
   import { AIDE_TRACKING, trackAide } from '@/shell/tracking/aideTracking';
   import { utilisateurStore } from '@/store/utilisateur';
 

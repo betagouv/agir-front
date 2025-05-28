@@ -58,7 +58,7 @@
               thematiqueId: MenuThematiques.getThematiqueData(ClefThematiqueAPI.alimentation).url,
             },
           },
-          label: `1150 recettes durables`,
+          label: `1 150 recettes durables`,
         },
         {
           emoji: '🍓',

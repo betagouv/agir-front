@@ -5,6 +5,7 @@ import {
   ResultatSimulationVoitureViewModel,
 } from '@/domaines/simulationVoiture/adapters/resultatSimulationVoiture.presenter.impl';
 import { CalculerResultatSimulationVoitureUsecase } from '@/domaines/simulationVoiture/calculerResultatSimulationVoiture.usecase';
+import { MontantAfficheEnFR, NombreAfficheEnFR } from '@/shell/nombreAfficheEnFRBuilder';
 
 describe('CalculerResultatSimulationVoitureUsecase', () => {
   it('Renvoie les résultats de simulation correctement', async () => {
@@ -20,22 +21,22 @@ describe('CalculerResultatSimulationVoitureUsecase', () => {
     function expectation(vm: ResultatSimulationVoitureViewModel) {
       expect(vm).toStrictEqual<ResultatSimulationVoitureViewModel>({
         resultatVoitureActuelle: {
-          coupAnnuel: '25000',
-          emissionAnnuelle: '100',
+          coutAnnuel: '25 000 €' as MontantAfficheEnFR,
+          emissionAnnuelle: '100' as NombreAfficheEnFR,
           gabarit: 'SUV',
           tag: ['Électricité', 'Électrique'],
         },
         resultatVoiturePlusEcologique: {
           coutAnnuel: {
             difference: 1000,
-            label: '+1000€',
-            montant: 26000,
+            labelDifference: '+1 000 €',
+            montant: '26 000 €' as MontantAfficheEnFR,
             style: 'fr-badge--warning',
           },
           emission: {
             difference: 10,
-            label: '10%',
-            montant: 110,
+            labelDifference: '10%',
+            montant: '110' as NombreAfficheEnFR,
             style: 'fr-badge--warning',
           },
           tag: ['Diesel', 'Diesel'],
@@ -44,14 +45,14 @@ describe('CalculerResultatSimulationVoitureUsecase', () => {
         resultatVoiturePlusEconomique: {
           coutAnnuel: {
             difference: 1000,
-            label: '+1000€',
-            montant: 26000,
+            labelDifference: '+1 000 €',
+            montant: '26 000 €' as MontantAfficheEnFR,
             style: 'fr-badge--warning',
           },
           emission: {
             difference: 10,
-            label: '10%',
-            montant: 110,
+            labelDifference: '10%',
+            montant: '110' as NombreAfficheEnFR,
             style: 'fr-badge--warning',
           },
           tag: ['Diesel', 'Diesel'],

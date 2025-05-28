@@ -152,7 +152,7 @@ describe('Fichier de test concernant la récupération des actions personnalisé
                     thematiqueId: MenuThematiques.getThematiqueData(ClefThematiqueAPI.alimentation).url,
                   },
                 },
-                label: `1150 recettes délicieuses, saines et de saison`,
+                label: `1 150 recettes délicieuses, saines et de saison`,
               },
               {
                 emoji: '🍓',

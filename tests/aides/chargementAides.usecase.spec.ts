@@ -230,7 +230,7 @@ describe('Fichier de tests pour charger toutes les aides', () => {
             {
               estGratuit: false,
               id: 'id-1',
-              montantMaximum: '15000€',
+              montantMaximum: '15 000 €',
               partenaireImg: undefined,
               partenaireNom: '',
               titre: "Simulez vos aides pour l'achat d'un vélo",

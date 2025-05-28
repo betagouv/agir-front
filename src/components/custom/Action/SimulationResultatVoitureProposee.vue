@@ -10,15 +10,14 @@
 
       <p>
         Coût annuel:
-        <span class="text--bold">{{ resultatSimulationVoiture.coutAnnuel.montant }}</span
-        >&nbsp;€
+        <span class="text--bold">{{ resultatSimulationVoiture.coutAnnuel.montant }}</span>
 
         <span
           :aria-label="`${resultatSimulationVoiture.coutAnnuel.difference} euros de différence par rapport à votre véhicule actuel`"
           :class="resultatSimulationVoiture.coutAnnuel.style"
           class="fr-badge fr-badge--no-icon"
         >
-          {{ resultatSimulationVoiture.coutAnnuel.label }}
+          {{ resultatSimulationVoiture.coutAnnuel.labelDifference }}
         </span>
       </p>
 

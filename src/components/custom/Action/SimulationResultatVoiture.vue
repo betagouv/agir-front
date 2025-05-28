@@ -8,8 +8,8 @@
       <h2 class="fr-h3">Votre véhicule actuel</h2>
       <div class="background--white shadow fr-p-2w fr-mb-4w">
         <p>
-          Coût annuel: <span class="text--bold">{{ resultatSimulationVoiture.resultatVoitureActuelle.coupAnnuel }}</span
-          >&nbsp;€
+          Coût annuel:
+          <span class="text--bold">{{ resultatSimulationVoiture.resultatVoitureActuelle.coutAnnuel }}</span>
         </p>
 
         <p>

@@ -34,7 +34,7 @@ export class ThematiqueResumePresenterImpl implements ThematiqueResumePresenter 
             thematiqueId: MenuThematiques.getThematiqueData(ClefThematiqueAPI.alimentation).url,
           },
         },
-        label: `1150 recettes délicieuses, saines et de saison`,
+        label: `1 150 recettes délicieuses, saines et de saison`,
       });
       listeRaccourcis.push({
         emoji: '🍓',

@@ -2,14 +2,14 @@
   <div v-if="gamificationViewModel" class="flex">
     <router-link
       :aria-current="route.name === RouteClassementName.CLASSEMENT ? 'page' : null"
+      :title="`${gamificationViewModel.points} points récoltés : voir mon classement`"
       :to="{ name: RouteClassementName.CLASSEMENT }"
       class="tag__progression tag__progression--score fr-text--bold"
-      :title="`${gamificationViewModel.points} points récoltés : voir mon classement`"
     >
       {{ gamificationViewModel.points }} <img alt="points récoltés" src="/ic_score.svg" width="16" />
     </router-link>
     <router-link
-      v-if="gamificationViewModel.nombreDeBadges > 0"
+      v-if="gamificationViewModel.nombreDeBadges"
       :aria-current="route.name === RouteClassementName.CLASSEMENT ? 'page' : null"
       :to="{ name: RouteClassementName.CLASSEMENT }"
       class="tag__progression tag__progression--badge fr-text--bold fr-ml-2w"
