@@ -10,7 +10,7 @@ import marked from '@/shell/actionMarkdownToHtml';
 import { buildUrl } from '@/shell/buildUrl';
 import cacherEmojisAuxLecteursDecrans from '@/shell/cacherEmojisAuxLecteursDecrans';
 import { nettoyerEtGarderContenuTextuel } from '@/shell/nettoyerEtGarderContenuTextuel';
-import { nettoyerEtGarderLettres } from '@/shell/nettoyerEtGarderLettres';
+import { nettoyerEtGarderLettresEtChiffres } from '@/shell/nettoyerEtGarderLettresEtChiffres';
 import { MontantAfficheEnFRBuilder } from '@/shell/nombreAfficheEnFRBuilder';
 
 class ActionViewModelBuilder {
@@ -55,12 +55,12 @@ class ActionViewModelBuilder {
           intitule: quiz.questions[0].intitule,
           reponsesPossibles: quiz.questions[0].reponsesPossibles.map(reponse => ({
             label: reponse,
-            value: nettoyerEtGarderLettres(reponse),
+            value: nettoyerEtGarderLettresEtChiffres(reponse),
           })),
           ordre: quiz.questions[0].ordre,
           texteExplicationOK: quiz.questions[0].texteExplicationOK,
           texteExplicationKO: quiz.questions[0].texteExplicationKO,
-          solution: nettoyerEtGarderLettres(quiz.questions[0].solution),
+          solution: nettoyerEtGarderLettresEtChiffres(quiz.questions[0].solution),
         },
         articleAssocie: quiz.articleAssocie?.id
           ? {
