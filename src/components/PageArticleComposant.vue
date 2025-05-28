@@ -40,9 +40,7 @@
           <slot />
         </div>
         <div v-else class="print-hidden fr-grid-row fr-mt-5v fr-grid-row--middle flex-space-between">
-          <router-link :to="{ path: dernierePageStore.path }" class="fr-btn display-block fr-my-0">
-            {{ labelBouton ? `Revenir ${labelBouton}` : 'Retour' }}
-          </router-link>
+          <BoutonRetourAutomatique />
         </div>
       </div>
     </div>
@@ -96,6 +94,7 @@
 </template>
 
 <script lang="ts" setup>
+  import BoutonRetourAutomatique from '@/components/custom/BoutonRetourAutomatique.vue';
   import FieldsetNotationEtoile from '@/components/custom/Form/FieldsetNotationEtoile.vue';
   import PartageReseauxSociaux from '@/components/dsfr/PartageReseauxSociaux.vue';
   import { ArticleRepositoryAxios } from '@/domaines/article/adapters/article.repository.axios';
@@ -103,24 +102,13 @@
   import { EvaluerArticleUsecase } from '@/domaines/article/evaluerArticle.usecase';
   import { Article } from '@/domaines/article/recupererArticle.usecase';
   import { RetirerDesFavorisUsecase } from '@/domaines/article/retirerDesFavoris.usecase';
-  import { RouteCoachName } from '@/router/coach/routeCoachName';
-  import { RouteThematiquesName } from '@/router/thematiques/routes';
   import cacherEmojisAuxLecteursDecrans from '@/shell/cacherEmojisAuxLecteursDecrans';
-  import { useNavigationStore } from '@/store/navigationStore';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const props = defineProps<{
     article: Article;
     estEnchainementMission?: boolean;
   }>();
-
-  const dernierePageStore = useNavigationStore().pagePrecedente;
-  const labelBouton =
-    dernierePageStore.name === RouteThematiquesName.THEMATIQUE
-      ? 'à la thématique'
-      : dernierePageStore.name === RouteCoachName.BIBLIOTHEQUE
-        ? 'à la bibliothèque'
-        : undefined;
 
   const emit = defineEmits<{
     (e: 'update:articleModifie', value: Article): void;

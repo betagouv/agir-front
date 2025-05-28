@@ -18,9 +18,7 @@
     </ul>
 
     <div class="flex gap--small">
-      <router-link :to="{ path: dernierePageStore.path }" class="fr-btn display-block fr-my-0">
-        Revenir {{ labelBouton }}
-      </router-link>
+      <BoutonRetourAutomatique custom-class="fr-btn display-block fr-my-0" />
 
       <button class="fr-btn fr-btn--secondary" @click="recommencerBilan">Recommencer le bilan</button>
     </div>
@@ -29,6 +27,7 @@
 
 <script lang="ts" setup>
   import { onMounted, ref } from 'vue';
+  import BoutonRetourAutomatique from '@/components/custom/BoutonRetourAutomatique.vue';
   import { ActionsEventBus } from '@/domaines/actions/actions.eventbus';
   import { ActionsRepositoryAxios } from '@/domaines/actions/adapters/actions.repository.axios';
   import { TypeAction } from '@/domaines/actions/ports/actions.repository';
@@ -40,9 +39,6 @@
   } from '@/domaines/bilanCarbone/adapters/bilanThematique.presenter.impl';
   import { RecupererBilanDepuisThematiqueUsecase } from '@/domaines/bilanCarbone/recupererBilanDepuisThematique.usecase';
   import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
-  import { RouteActionsName } from '@/router/actions/routes';
-  import { RouteThematiquesName } from '@/router/thematiques/routes';
-  import { useNavigationStore } from '@/store/navigationStore';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const props = defineProps<{
@@ -68,14 +64,6 @@
   function recommencerBilan() {
     window.location.reload();
   }
-
-  const dernierePageStore = useNavigationStore().pagePrecedente;
-  const labelBouton =
-    dernierePageStore.name === RouteActionsName.CATALOGUE_ACTION
-      ? 'au catalogue'
-      : dernierePageStore.name === RouteThematiquesName.THEMATIQUE
-        ? 'à la thématique'
-        : "à l'accueil";
 </script>
 
 <style scoped>

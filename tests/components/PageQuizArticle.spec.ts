@@ -4,6 +4,7 @@ import { ArticleDuQuiz } from '@/domaines/quiz/ports/quiz.repository';
 import { EnvoyerDonneesQuizInteractionUsecase } from '@/domaines/quiz/envoyerDonneesQuizInteraction.usecase';
 import router from '@/router';
 import { QuizViewModel } from '@/domaines/quiz/ports/chargementQuizz.presenter';
+import { createPinia, setActivePinia } from 'pinia';
 
 const quizViewModel: QuizViewModel = {
   titre: 'A quoi ça sert de manger bio ?',
@@ -50,6 +51,8 @@ let mauvaiseReponse: HTMLInputElement;
 
 describe('Page Quiz Article', () => {
   beforeEach(() => {
+    setActivePinia(createPinia());
+
     vi.spyOn(EnvoyerDonneesQuizInteractionUsecase.prototype, 'execute').mockImplementation(() => Promise.resolve());
     page = render(PageQuizComposant, {
       props: pageQuizComposantprops,
@@ -109,7 +112,7 @@ describe('Page Quiz Article', () => {
           expect(radio.disabled).toBeTruthy();
         });
 
-        expect(page.getByText("Revenir à l'accueil")).toBeDefined();
+        expect(page.getByText('Retour')).toBeDefined();
       });
 
       describe('quand la réponse est correcte', () => {

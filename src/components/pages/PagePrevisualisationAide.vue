@@ -1,11 +1,6 @@
 <template>
   <div class="fr-container">
-    <router-link
-      :to="{ path: useNavigationStore().pagePrecedente.path }"
-      class="fr-btn fr-btn--icon-left fr-btn--tertiary-no-outline fr-icon-arrow-left-line fr-pl-0"
-    >
-      Retour
-    </router-link>
+    <BoutonRetour />
 
     <AideDetail v-if="aide" :aide="aide" />
   </div>
@@ -13,11 +8,11 @@
 <script lang="ts" setup>
   import { onMounted, ref } from 'vue';
   import { useRoute } from 'vue-router';
+  import BoutonRetour from '@/components/custom/BoutonRetour.vue';
   import AideDetail from '@/components/pages/AideDetail.vue';
   import { ChargementAidesAxiosRepository } from '@/domaines/aides/adapters/chargementAides.axios.repository';
   import { Aide } from '@/domaines/aides/chargementAides.usecase';
   import { PrevisualiserAideUsecase } from '@/domaines/aides/previsualiserAide.usecase';
-  import { useNavigationStore } from '@/store/navigationStore';
 
   const aide = ref<Aide>();
 

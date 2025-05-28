@@ -12,13 +12,13 @@
   </div>
   <button v-if="estEnchainementMission" class="fr-btn fr-btn--lg fr-mt-3w" @click="onClickContinuer">Continuer</button>
 
-  <router-link v-else class="fr-btn fr-mt-3w" :to="useBoutonRetour().url"> {{ useBoutonRetour().label }}</router-link>
+  <BoutonRetourAutomatique v-else />
 </template>
 
 <script setup lang="ts">
+  import BoutonRetourAutomatique from '@/components/custom/BoutonRetourAutomatique.vue';
   import Notation from '@/components/custom/Notation.vue';
   import QuizReponse from '@/components/custom/Quiz/QuizReponse.vue';
-  import { useBoutonRetour } from '@/composables/boutonRetour';
   import { QuizRepositoryAxios } from '@/domaines/quiz/adapters/quiz.repository.axios';
   import { EvaluerQuizUsecase } from '@/domaines/quiz/evaluerQuiz.usecase';
   import { ArticleDuQuiz } from '@/domaines/quiz/ports/quiz.repository';

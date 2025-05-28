@@ -1,11 +1,6 @@
 <template>
   <div v-if="detailServiceViewModel" class="fr-container fr-pb-4w">
-    <router-link
-      :to="{ path: useNavigationStore().pagePrecedente.path, query: useNavigationStore().pagePrecedente.query }"
-      class="fr-btn fr-btn--tertiary-no-outline fr-btn--icon-left fr-icon-arrow-left-line fr-pl-0 fr-my-2w"
-    >
-      Retour
-    </router-link>
+    <BoutonRetourAutomatique class="fr-my-2w fr-pl-0" />
     <img v-if="detailServiceViewModel.img" :src="detailServiceViewModel.img" alt="" />
     <div class="fr-mt-auto">
       <span
@@ -80,13 +75,13 @@
   import { LMap, LMarker, LTileLayer } from '@vue-leaflet/vue-leaflet';
   import { computed, onMounted, ref } from 'vue';
   import { useRoute } from 'vue-router';
+  import BoutonRetourAutomatique from '@/components/custom/BoutonRetourAutomatique.vue';
   import { ServiceRechercheLongueVieAuxObjetsAxios } from '@/domaines/serviceRecherche/longueVieAuxObjets/adapters/serviceRechercheLongueVieAuxObjets.repository.axios';
   import {
     DetailServiceViewModel,
     ServiceRechercheLongueVieAuxObjetsPresenterDetailImpl,
   } from '@/domaines/serviceRecherche/longueVieAuxObjets/adapters/serviceRechercheLongueVieAuxObjetsDetail.presenter.impl';
   import { RecupererDetailServiceLongueVieAuxObjetsUsecase } from '@/domaines/serviceRecherche/longueVieAuxObjets/recupererDetailServiceLongueVieAuxObjets.usecase';
-  import { useNavigationStore } from '@/store/navigationStore';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const isLoading = ref<boolean>(true);
