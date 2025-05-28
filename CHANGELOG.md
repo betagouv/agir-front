@@ -1,5 +1,19 @@
 # Changelog
 
+## [2.11.0](https://github.com/betagouv/agir-front/compare/v2.10.1...v2.11.0) (2025-05-28)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* afficher les nombres au format français ([#1145](https://github.com/betagouv/agir-front/issues/1145)) ([9d2d3d7](https://github.com/betagouv/agir-front/commit/9d2d3d7cc351e916ef900adf1e4869d4b2b54907))
+* articles recommandées dans les pages thématiques ([#1144](https://github.com/betagouv/agir-front/issues/1144)) ([f451ea0](https://github.com/betagouv/agir-front/commit/f451ea08166d974b0c085fefa174d147de8f0c2a))
+
+
+### 🐛 Corrections de bogues
+
+* ajout de la source_inscription à l'envoie d'un magic link ([#1148](https://github.com/betagouv/agir-front/issues/1148)) ([27beff1](https://github.com/betagouv/agir-front/commit/27beff173bdc8b43486f973086d27368b2a57fad))
+* articles recommandés nuls ([#1147](https://github.com/betagouv/agir-front/issues/1147)) ([212d93c](https://github.com/betagouv/agir-front/commit/212d93c97ed1a3aadd361584969d343aa02f17cc))
+
 ## [2.10.1](https://github.com/betagouv/agir-front/compare/v2.10.0...v2.10.1) (2025-05-27)
 
 
