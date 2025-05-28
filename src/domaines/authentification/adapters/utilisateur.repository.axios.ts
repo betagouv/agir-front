@@ -31,13 +31,6 @@ interface ValiderCompteApiModel {
 }
 
 export class UtilisateurRepositoryAxios implements UtilisateurRepository {
-  async authentifierUtilisateur(mail: string): Promise<void> {
-    const axiosInstance = AxiosFactory.getAxios();
-    await axiosInstance.post(`/utilisateurs/send_magic_link`, {
-      email: mail,
-    });
-  }
-
   async validerMagicLink(email: string, code: string): Promise<Utilisateur> {
     const axiosInstance = AxiosFactory.getAxios();
     const response = await axiosInstance.post<LoginApiModel>(`/utilisateurs/magic_link_login`, {
@@ -144,6 +137,7 @@ export class UtilisateurRepositoryAxios implements UtilisateurRepository {
     const axiosInstance = AxiosFactory.getAxios();
     await axiosInstance.post(`/utilisateurs/send_magic_link`, {
       email,
+      source_inscription: 'web',
     });
   }
 }
