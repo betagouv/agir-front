@@ -8,6 +8,7 @@ export interface ArticleRecommandeViewModel {
   image: string;
   id: string;
   url: string;
+  estLocal: boolean;
 }
 
 export class ArticlesRecommandesPresenterImpl implements ArticlesRecommandesPresenter {
@@ -21,6 +22,7 @@ export class ArticlesRecommandesPresenterImpl implements ArticlesRecommandesPres
           image: recommandationPersonnalisee.illustrationURL,
           id: recommandationPersonnalisee.idDuContenu,
           url: `${RouteArticlePath.ARTICLE}${buildUrl(recommandationPersonnalisee.titre)}/${recommandationPersonnalisee.idDuContenu}`,
+          estLocal: recommandationPersonnalisee.estLocal,
         };
       }),
     );

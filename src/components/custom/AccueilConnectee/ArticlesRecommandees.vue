@@ -1,7 +1,7 @@
 <template>
-  <div class="fr-container fr-py-5w fr-py-md-10w">
+  <div>
     <div class="fr-grid-row flex-space-between align-items--center fr-mb-3w">
-      <h2 class="fr-h2 fr-mb-0">Quoi de neuf ?</h2>
+      <slot name="title"><h2 class="fr-h2 fr-mb-0">Quoi de neuf ?</h2></slot>
       <router-link :to="{ name: RouteCoachName.BIBLIOTHEQUE }" class="fr-link">Voir tous les articles</router-link>
     </div>
 
@@ -19,7 +19,13 @@
     </template>
     <ul v-else-if="articlesRecommandes" class="fr-grid-row fr-grid-row--gutters list-style-none">
       <li v-for="article in articlesRecommandes" :key="article.id" class="fr-col-12 fr-col-sm-6 fr-col-md-3">
-        <CarteSimple :titre="article.titre" :image="article.image" :url="article.url" />
+        <CarteSimple :titre="article.titre" :image="article.image" :url="article.url">
+          <template v-slot:contenu v-if="article.estLocal">
+            <div class="fr-card__start fr-mb-3v">
+              <p class="fr-tag fr-icon-map-pin-2-fill fr-tag--icon-left tag--pdcn">Près de chez moi</p>
+            </div>
+          </template>
+        </CarteSimple>
       </li>
     </ul>
   </div>
@@ -35,6 +41,7 @@
     ArticlesRecommandesPresenterImpl,
   } from '@/domaines/article/adapters/articlesRecommandes.presenter.impl';
   import { RecupererArticlesPersonnaliseesUsecase } from '@/domaines/article/recupererArticlesPersonnalisees.usecase';
+  import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
   import { RouteCoachName } from '@/router/coach/routeCoachName';
   import { utilisateurStore } from '@/store/utilisateur';
 
@@ -43,12 +50,24 @@
   const articlesRecommandes = ref<ArticleRecommandeViewModel[]>();
   const isLoading = ref<boolean>(true);
 
+  const props = defineProps<{
+    clefThematique?: ClefThematiqueAPI;
+  }>();
+
   onMounted(async () => {
     await usecase.execute(
       utilisateurStore().utilisateur.id,
       NOMBRE_ARTICLES,
       new ArticlesRecommandesPresenterImpl(vm => (articlesRecommandes.value = vm)),
+      props.clefThematique,
     );
     isLoading.value = false;
   });
 </script>
+
+<style scoped>
+  .tag--pdcn {
+    color: var(--pink-macaron-sun-406-moon-833);
+    background-color: var(--pink-macaron-950-100);
+  }
+</style>

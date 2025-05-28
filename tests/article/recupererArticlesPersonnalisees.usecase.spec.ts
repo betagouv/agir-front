@@ -18,6 +18,7 @@ describe('Fichier de tests concernant le chargement des articles recommandées',
           titre: 'Article qui doit être en avant',
           type: InteractionType.ARTICLE,
           clefThematiqueAPI: ClefThematiqueAPI.consommation,
+          estLocal: true,
         },
       ]),
     );
@@ -33,6 +34,39 @@ describe('Fichier de tests concernant le chargement des articles recommandées',
           image: 'illustrationURL',
           titre: 'Article qui doit être en avant',
           url: '/article/article-qui-doit-etre-en-avant/1',
+          estLocal: true,
+        },
+      ]);
+    }
+  });
+
+  it('En donnant un id utilisateur et une thématique, doit charger et mettre en forme les articles personnalisées', async () => {
+    // GIVEN
+    const usecase = new RecupererArticlesPersonnaliseesUsecase(
+      new MockArticleRepository([
+        {
+          idDuContenu: '1',
+          illustrationURL: 'illustrationURL',
+          titre: 'Article qui doit être en avant',
+          type: InteractionType.ARTICLE,
+          clefThematiqueAPI: ClefThematiqueAPI.consommation,
+          estLocal: false,
+        },
+      ]),
+    );
+
+    // WHEN
+    await usecase.execute('1', 4, new ArticlesRecommandesPresenterImpl(expectation), ClefThematiqueAPI.consommation);
+
+    // THEN
+    function expectation(articlesRecommandes: ArticleRecommandeViewModel[]) {
+      expect(articlesRecommandes).toStrictEqual<ArticleRecommandeViewModel[]>([
+        {
+          id: '1',
+          image: 'illustrationURL',
+          titre: 'Article qui doit être en avant',
+          url: '/article/article-qui-doit-etre-en-avant/1',
+          estLocal: false,
         },
       ]);
     }

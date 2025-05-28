@@ -13,6 +13,7 @@ export interface RecommandationApiModel {
   content_id: string;
   thematique_principale: string;
   status_defi: 'todo' | 'en_cours' | 'pas_envie' | 'deja_fait' | 'abondon' | 'fait';
+  is_local: boolean;
 }
 
 interface ArticleAPI {
@@ -159,11 +160,24 @@ export class ArticleRepositoryAxios implements ArticleRepository {
     };
   }
 
-  async recupererArticlesPersonnalisees(idUtilisateur: string, nombreMax: number): Promise<ArticleRecommande[]> {
+  async recupererArticlesPersonnalisees(
+    idUtilisateur: string,
+    nombreMax: number,
+    thematique?: ClefThematiqueAPI,
+  ): Promise<ArticleRecommande[]> {
     const axiosInstance = AxiosFactory.getAxios();
-    const params = `?nombre_max=${nombreMax}&type=article`;
+
+    const params: Record<string, string | number> = {
+      type: 'article',
+      nombre_max: nombreMax,
+    };
+    if (thematique) {
+      params.thematique = thematique;
+    }
+
     const response = await axiosInstance.get<RecommandationApiModel[]>(
-      `/utilisateurs/${idUtilisateur}/recommandations_v3${params}`,
+      `/utilisateurs/${idUtilisateur}/recommandations_v3`,
+      { params },
     );
 
     return response.data.map((apiModel: RecommandationApiModel) => {
@@ -173,6 +187,7 @@ export class ArticleRepositoryAxios implements ArticleRepository {
         clefThematiqueAPI: apiModel.thematique_principale as ClefThematiqueAPI,
         illustrationURL: apiModel.image_url,
         idDuContenu: apiModel.content_id,
+        estLocal: apiModel.is_local,
       };
 
       return recommandationPersonnalisee;
