@@ -1,11 +1,6 @@
 <template>
   <div class="fr-container fr-mt-3w">
-    <router-link
-      :to="{ path: useNavigationStore().pagePrecedente.path }"
-      class="fr-btn fr-btn--icon-left fr-btn--tertiary-no-outline fr-icon-arrow-left-line fr-pl-0"
-    >
-      Retour
-    </router-link>
+    <BoutonRetour />
 
     <CarteSkeleton v-if="isLoading" />
     <ActionBase v-else-if="actionBaseViewModel" :action-base-view-model="actionBaseViewModel">
@@ -40,6 +35,7 @@
   import ActionAsideClassique from '@/components/custom/Action/Aside/ActionAsideClassique.vue';
   import ActionAsideQuiz from '@/components/custom/Action/Aside/ActionAsideQuiz.vue';
   import ActionAsideSimulateur from '@/components/custom/Action/Aside/ActionAsideSimulateur.vue';
+  import BoutonRetour from '@/components/custom/BoutonRetour.vue';
   import CarteSkeleton from '@/components/custom/Skeleton/CarteSkeleton.vue';
   import { ActionPresenterImpl } from '@/domaines/actions/adapters/action.presenter.impl';
   import { ActionsRepositoryAxios } from '@/domaines/actions/adapters/actions.repository.axios';
@@ -55,7 +51,6 @@
     ActionSimulateurViewModel,
   } from '@/domaines/actions/ports/action.presenter';
   import useHeadProperties from '@/shell/useHeadProperties';
-  import { useNavigationStore } from '@/store/navigationStore';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const isLoading = ref<boolean>(false);
