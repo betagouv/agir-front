@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="!isLoading && articlesRecommandes && articlesRecommandes?.length > 0">
     <div class="fr-grid-row flex-space-between align-items--center fr-mb-3w">
       <slot name="title"><h2 class="fr-h2 fr-mb-0">Quoi de neuf ?</h2></slot>
       <router-link :to="{ name: RouteCoachName.BIBLIOTHEQUE }" class="fr-link">Voir tous les articles</router-link>
