@@ -6,6 +6,7 @@
     />
 
     <KyCsAction
+      v-if="actionSimulateurViewModel.actionId === 'action_simulateur_voiture'"
       :action-id="actionSimulateurViewModel.actionId"
       :idEnchainementKycs="actionSimulateurViewModel.idEnchainementKYCs"
       :type-action="TypeAction.SIMULATEUR"
@@ -15,7 +16,9 @@
         <SimulationResultatVoiture v-if="actionSimulateurViewModel.actionId === 'action_simulateur_voiture'" />
       </template>
     </KyCsAction>
-
+    <div v-else-if="actionSimulateurViewModel.actionId === 'simu_aides_reno'">
+      <SimulationAideRenos />
+    </div>
     <ActionAides :aides="actionSimulateurViewModel.aides" />
   </section>
 </template>
@@ -23,6 +26,7 @@
 <script lang="ts" setup>
   import ActionAides from '@/components/custom/Action/composants/ActionAides.vue';
   import ActionIntroduction from '@/components/custom/Action/composants/ActionIntroduction.vue';
+  import SimulationAideRenos from '@/components/custom/Action/SimulationAideRenos.vue';
   import SimulationResultatVoiture from '@/components/custom/Action/SimulationResultatVoiture.vue';
   import KyCsAction from '@/components/custom/KYC/KYCsAction.vue';
   import { ActionSimulateurViewModel } from '@/domaines/actions/ports/action.presenter';

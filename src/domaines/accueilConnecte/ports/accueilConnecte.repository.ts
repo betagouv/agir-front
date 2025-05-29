@@ -3,7 +3,7 @@ export type AccueilConnecte = {
   totalActionsNationalesFaites: number;
   totalActionsUtilisateurFaites: number;
   pourcentageCompletionBilan: number;
-  bilanCarboneTotalKg;
+  bilanCarboneTotalKg: number;
   nombreAides: number;
   nombreRecettes: number;
 };
