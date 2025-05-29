@@ -61,7 +61,7 @@ export class SyntheseThematiquesPresenterImpl implements SyntheseThematiquePrese
     if (clefTechniqueAPI === ClefThematiqueAPI.logement) {
       return {
         nombre: nombreSimulateurs,
-        phrase: { singulier: 'simulateur Mes Aides Rénov', pluriel: 'simulateurs Mes Aides Rénov' },
+        phrase: { singulier: 'simulateur Mes Aides Réno', pluriel: 'simulateurs Mes Aides Réno' },
       };
     } else if (clefTechniqueAPI === ClefThematiqueAPI.transports) {
       return {

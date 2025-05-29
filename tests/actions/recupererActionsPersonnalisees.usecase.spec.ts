@@ -41,7 +41,7 @@ describe('Fichier de test concernant la récupération des actions personnalisé
           expect(idEnchainementKYCs).toStrictEqual(idEnchainementKYCs);
         },
       ),
-      new ThematiqueResumePresenterImpl(vm => {}),
+      new ThematiqueResumePresenterImpl(_vm => {}),
     );
   });
 
@@ -102,7 +102,7 @@ describe('Fichier de test concernant la récupération des actions personnalisé
           expect(idEnchainementKYCs).toStrictEqual('');
         },
       ),
-      new ThematiqueResumePresenterImpl(vm => {}),
+      new ThematiqueResumePresenterImpl(_vm => {}),
     );
   });
 
@@ -116,7 +116,7 @@ describe('Fichier de test concernant la récupération des actions personnalisé
             thematique: ClefThematiqueAPI.alimentation,
             nbSimulateurs: 0,
             nbAides: 50,
-            nbRecettes: 0,
+            nbRecettes: 1150,
             nbActions: 30,
           },
           doitRepondreAuxKYCs: false,
@@ -130,11 +130,11 @@ describe('Fichier de test concernant la récupération des actions personnalisé
         'idUtilisateur',
         'thematiqueId',
         new ActionsDansUneThematiquePresenterImpl(
-          actions => {},
-          idEnchainementKYCs => {},
+          _actions => {},
+          _idEnchainementKYCs => {},
         ),
         new ThematiqueResumePresenterImpl(vm => {
-          expect(vm).toStrictEqual<ThematiqueResumeViewModel>({
+          expect(vm).toEqual<ThematiqueResumeViewModel>({
             commune: 'Paris',
             listeRaccourcis: [
               {
@@ -142,7 +142,7 @@ describe('Fichier de test concernant la récupération des actions personnalisé
                 to: {
                   name: RouteAidesName.AIDES,
                 },
-                label: `50 aides sur votre territoire`,
+                label: `50 aides financières sur votre territoire`,
               },
               {
                 emoji: '🥘',
@@ -152,7 +152,7 @@ describe('Fichier de test concernant la récupération des actions personnalisé
                     thematiqueId: MenuThematiques.getThematiqueData(ClefThematiqueAPI.alimentation).url,
                   },
                 },
-                label: `1 150 recettes délicieuses, saines et de saison`,
+                label: `1 150 recettes délicieuses, saines et de saison`,
               },
               {
                 emoji: '🍓',
@@ -199,8 +199,8 @@ describe('Fichier de test concernant la récupération des actions personnalisé
         'idUtilisateur',
         'thematiqueId',
         new ActionsDansUneThematiquePresenterImpl(
-          actions => {},
-          idEnchainementKYCs => {},
+          _actions => {},
+          _idEnchainementKYCs => {},
         ),
         new ThematiqueResumePresenterImpl(vm => {
           expect(vm).toStrictEqual<ThematiqueResumeViewModel>({
@@ -211,11 +211,11 @@ describe('Fichier de test concernant la récupération des actions personnalisé
                 to: {
                   name: RouteAidesName.AIDES,
                 },
-                label: `50 aides sur votre territoire`,
+                label: `50 aides financières sur votre territoire`,
               },
               {
                 emoji: '🧱',
-                label: `1 simulateur Mes aides Rénovation`,
+                label: `1 simulateur Mes Aides Réno`,
                 to: {
                   name: 'action-individuelle',
                   params: {
@@ -252,8 +252,8 @@ describe('Fichier de test concernant la récupération des actions personnalisé
         'idUtilisateur',
         'thematiqueId',
         new ActionsDansUneThematiquePresenterImpl(
-          actions => {},
-          idEnchainementKYCs => {},
+          _actions => {},
+          _idEnchainementKYCs => {},
         ),
         new ThematiqueResumePresenterImpl(vm => {
           expect(vm).toStrictEqual<ThematiqueResumeViewModel>({
@@ -269,14 +269,14 @@ describe('Fichier de test concernant la récupération des actions personnalisé
                     type: TypeAction.SIMULATEUR,
                   },
                 },
-                label: `1 simulateur Dois-je changer de voiture ?`,
+                label: `1 simulateur Changer de voiture`,
               },
               {
                 emoji: '🚲',
                 to: {
                   name: RouteAidesName.VELO,
                 },
-                label: `1 simulateur aides vélo`,
+                label: `1 simulateur Mes Aides Vélo`,
               },
             ],
           });
@@ -306,8 +306,8 @@ describe('Fichier de test concernant la récupération des actions personnalisé
         'idUtilisateur',
         'thematiqueId',
         new ActionsDansUneThematiquePresenterImpl(
-          actions => {},
-          idEnchainementKYCs => {},
+          _actions => {},
+          _idEnchainementKYCs => {},
         ),
         new ThematiqueResumePresenterImpl(vm => {
           expect(vm).toStrictEqual<ThematiqueResumeViewModel>({
@@ -318,7 +318,7 @@ describe('Fichier de test concernant la récupération des actions personnalisé
                 to: {
                   name: RouteAidesName.AIDES,
                 },
-                label: `1 aide sur votre territoire`,
+                label: `1 aide financière sur votre territoire`,
               },
               {
                 emoji: '🔧',
@@ -326,7 +326,7 @@ describe('Fichier de test concernant la récupération des actions personnalisé
                   name: RouteServiceName.LONGUE_VIE_AUX_OBJETS,
                   params: { thematiqueId: MenuThematiques.getThematiqueData(ClefThematiqueAPI.consommation).url },
                 },
-                label: `Des adresses de réparateur près de chez moi`,
+                label: `Des points de réparation près de chez moi`,
               },
             ],
           });
