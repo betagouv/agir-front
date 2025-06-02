@@ -1,6 +1,6 @@
 <template>
   <div class="background--gris text--gris-light fr-p-2w flex align-items--center flex-center border--top--grey">
-    <p class="fr-mb-0 text--center">Avez-vous aimé cette page&nbsp;?</p>
+    <p class="fr-mb-0">Avez-vous aimé cette page&nbsp;?</p>
     <div class="flex fr-pl-1w">
       <button
         v-for="index in 4"
