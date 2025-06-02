@@ -68,7 +68,7 @@ export class CompteUtilisateurRepositoryMock implements CompteUtilisateurReposit
   validationOnboardingPostCreationCompte(
     idUtilisateur: string,
     prenom: string,
-    commune: string,
+    codeEpci: string,
     codePostal: string,
   ): Promise<void> {
     return Promise.resolve();

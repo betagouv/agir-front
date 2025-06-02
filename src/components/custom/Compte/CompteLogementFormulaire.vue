@@ -18,14 +18,19 @@
       </div>
       <div class="fr-mb-4w">
         <h3 class="fr-h4">Où habitez-vous ?</h3>
+        <ServiceBarreDeRechercheAdresse
+          v-if="doitAfficherBarreAdresse"
+          v-model:adresse="adresseBarreDeRecherche"
+          v-model:recherche="recherche"
+        />
         <InputCodePostal
-          v-model="logementViewModel.codePostal"
-          :default-select-value="logementViewModel.commune_utilisee_dans_le_compte"
-          :default-value="logementViewModel.codePostal"
-          @update:selectedCommune="logementViewModel.commune_utilisee_dans_le_compte = $event"
+          v-else
+          v-model:code-epci="logementViewModel.codeEpci"
+          v-model:code-postal="logementViewModel.codePostal"
           @update:isCodePostalEnErreur="isCodePostalEnErreur = $event"
         />
       </div>
+
       <h3 class="fr-h4">Combien êtes-vous dans votre logement (vous inclus) ?</h3>
       <div class="fr-grid-row fr-mb-4w">
         <InputNumberHorizontal
@@ -121,24 +126,45 @@
   import DPE from '@/components/custom/DPE.vue';
   import BoutonsRadio from '@/components/custom/Form/BoutonsRadio.vue';
   import InputNumberHorizontal from '@/components/custom/Form/InputNumberHorizontal.vue';
+  import ServiceBarreDeRechercheAdresse from '@/components/custom/Service/ServiceBarreDeRechercheAdresse.vue';
   import InputCodePostal from '@/components/dsfr/InputCodePostal.vue';
   import { useAlerte } from '@/composables/useAlerte';
+  import {
+    BarreDeRecherchePresenterImpl,
+    BarreDeRechercheViewModel,
+  } from '@/domaines/logement/adapters/barreDeRecherche.presenter.impl';
   import { LogementRepositoryAxios } from '@/domaines/logement/adapters/logement.repository.axios';
-  import { EnregistrerInformationsLogementUsecase } from '@/domaines/logement/enregistrerInformationLogement.usecase';
+  import { PatcherInformationLogementUsecase } from '@/domaines/logement/patcherInformationLogement.usecase';
   import { LogementViewModel } from '@/domaines/logement/ports/logement.presenter';
+  import { AdresseDansLeCompte } from '@/domaines/simulationMaif/recupererStatistiquesCommuneMaifDepuisProfil.usecase';
   import { sessionAppRawDataStorage } from '@/shell/appRawDataStorage';
+  import { AdresseBarreDeRecherche } from '@/shell/coordonneesType';
   import { utilisateurStore } from '@/store/utilisateur';
 
-  const props = defineModel<LogementViewModel>('logementViewModel', {
+  const logementViewModel = defineModel<LogementViewModel>('logementViewModel', {
     type: Object,
     required: true,
   });
 
   const { alerte, afficherAlerte } = useAlerte();
 
+  const adresseDansLeCompte = new AdresseDansLeCompte(
+    logementViewModel.value?.codePostal,
+    logementViewModel.value?.commune_utilisee_dans_le_compte,
+    logementViewModel.value?.commune_label,
+    logementViewModel.value?.rue,
+    logementViewModel.value?.numeroRue,
+    logementViewModel.value?.coordonnees,
+  );
+  const adresseBarreDeRecherche = ref<AdresseBarreDeRecherche>();
+  const barreDeRechercheViewModel = ref<BarreDeRechercheViewModel>();
+  new BarreDeRecherchePresenterImpl(vm => (barreDeRechercheViewModel.value = vm)).presente(adresseDansLeCompte);
+  const recherche = ref<string>(barreDeRechercheViewModel.value?.recherche ?? '');
+
+  const doitAfficherBarreAdresse = computed(() => adresseDansLeCompte.estAdresseComplete());
   const isCodePostalEnErreur = ref(false);
   const codePostalEstValide = computed(() => {
-    return !isCodePostalEnErreur.value && props.value.commune_utilisee_dans_le_compte;
+    return !isCodePostalEnErreur.value && logementViewModel.value.codeEpci !== undefined;
   });
 
   const enregistrerLesInformations = () => {
@@ -147,21 +173,28 @@
       return;
     }
 
-    const usecase = new EnregistrerInformationsLogementUsecase(new LogementRepositoryAxios(), sessionAppRawDataStorage);
-    usecase.execute(utilisateurStore().utilisateur.id, {
-      adultes: props.value.adultes,
-      enfants: props.value.enfants,
-      codePostal: props.value.codePostal,
-      commune_utilisee_dans_le_compte: props.value.commune_utilisee_dans_le_compte,
-      commune_label: '',
-      residence: props.value.residence.valeur,
-      superficie: props.value.superficie.valeur,
-      proprietaire: props.value.proprietaire.valeur,
-      plusDeQuinzeAns: props.value.plusDeQuinzeAns.valeur,
-      dpe: props.value.dpe.valeur,
-    });
-
-    afficherAlerte('success', 'Succès', 'Vos informations ont été correctement mises à jour.');
+    const usecase = new PatcherInformationLogementUsecase(new LogementRepositoryAxios(), sessionAppRawDataStorage);
+    usecase
+      .execute(utilisateurStore().utilisateur.id, {
+        adultes: logementViewModel.value.adultes,
+        enfants: logementViewModel.value.enfants,
+        residence: logementViewModel.value.residence.valeur,
+        superficie: logementViewModel.value.superficie.valeur,
+        proprietaire: logementViewModel.value.proprietaire.valeur,
+        plusDeQuinzeAns: logementViewModel.value.plusDeQuinzeAns.valeur,
+        dpe: logementViewModel.value.dpe.valeur,
+        coordonnees: adresseBarreDeRecherche.value?.coordonnees,
+        rue: adresseBarreDeRecherche.value?.rue,
+        numeroRue: adresseBarreDeRecherche.value?.numeroRue,
+        codePostal: adresseBarreDeRecherche.value?.codePostal ?? logementViewModel.value.codePostal,
+        codeEpci: adresseBarreDeRecherche.value?.codeEpci ?? logementViewModel.value.codeEpci,
+      })
+      .then(() => {
+        afficherAlerte('success', 'Succès', 'Vos informations ont été correctement mises à jour.');
+      })
+      .catch(() => {
+        afficherAlerte('error', 'Erreur', 'Une erreur interne est survenue. Veuillez réessayer plus tard.');
+      });
 
     const alertElement = document.getElementById('scroll-to-alerte');
     if (alertElement) {

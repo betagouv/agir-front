@@ -1,5 +1,6 @@
 import { LogementRepository } from '@/domaines/logement/ports/logement.repository';
 import { Logement } from '@/domaines/logement/recupererInformationLogement.usecase';
+import { Adresse } from '@/domaines/logement/recupererAdressePourBarreDeRecherche.usecase';
 
 export class MockLogementRepository implements LogementRepository {
   constructor(private logement: Logement) {}
@@ -8,7 +9,11 @@ export class MockLogementRepository implements LogementRepository {
     return Promise.resolve(this.logement);
   }
 
-  enregistrerLesInformations(utilisateurId: string, logement: Logement): Promise<void> {
-    throw new Error('Method not implemented.');
+  recupererAdresse(_utilisateurId: string): Promise<Adresse> {
+    return Promise.resolve(this.logement);
+  }
+
+  patcherLesInformations(utilisateurId: string, logement: Partial<Logement>): Promise<void> {
+    return Promise.resolve(undefined);
   }
 }

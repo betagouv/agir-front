@@ -2,7 +2,7 @@
   <div class="fr-grid fr-grid-row fr-grid-row--gutters">
     <div class="fr-col-lg-3 fr-col-12">
       <div
-        :class="`fr-input-group ${!codePostalValide && 'fr-input-group--error'}
+        :class="`fr-input-group ${codePostal && !codePostalValide && 'fr-input-group--error'}
         ${codePostalNexistePas && 'fr-input-group--error'}`"
       >
         <label class="fr-label" for="codePostal">
@@ -17,11 +17,11 @@
           required
           :aria-describedby="`${!codePostalValide ? 'text-input-error-desc-error-invalide' : ''} ${codePostalNexistePas ? 'text-input-error-desc-error-commune' : ''}`"
           type="text"
-          @input="updateValue"
-          :value="codePostalInput"
+          v-model="codePostal"
+          @input="onCodePostalInput"
           :autofocus="autofocus"
         />
-        <p v-if="!codePostalValide" id="text-input-error-desc-error-invalide" class="fr-error-text">
+        <p v-if="codePostal && !codePostalValide" id="text-input-error-desc-error-invalide" class="fr-error-text">
           Ce code postal n'est pas valide
         </p>
         <p v-if="codePostalNexistePas" id="text-input-error-desc-error-commune" class="fr-error-text">
@@ -29,6 +29,7 @@
         </p>
       </div>
     </div>
+
     <div class="fr-col-md-9 fr-col-12">
       <div class="fr-select-group">
         <label class="fr-label" for="selectCommune">
@@ -42,14 +43,14 @@
           :disabled="communes.length === 0"
           @change="updateSelectedCommune"
         >
-          <option value="" :selected="!defaultSelectValue" disabled hidden>Selectionnez une option</option>
+          <option value="" :selected="!commune" disabled hidden>Selectionnez une option</option>
           <option
-            :value="commune"
-            :selected="defaultSelectValue === commune"
             v-for="commune in communes"
-            :key="commune"
+            :key="commune.label"
+            :value="commune.codeEpci"
+            :selected="codeEpci === commune.codeEpci"
           >
-            {{ commune }}
+            {{ commune.label }}
           </option>
         </select>
       </div>
@@ -61,57 +62,57 @@
   import { ChargementCommunesUsecase } from '@/domaines/communes/chargementCommunesUsecase';
   import { CommuneRepositoryAxios } from '@/domaines/communes/adapters/commune.repository.axios';
   import { computed, onMounted, ref } from 'vue';
+  import { Commune } from '@/domaines/communes/ports/commune.repository';
+
+  const codePostal = defineModel<string>('codePostal', {
+    required: true,
+  });
+  const codeEpci = defineModel<string>('codeEpci', {
+    required: true,
+  });
+  const commune = defineModel<string>('commune');
 
   const props = defineProps<{
-    defaultValue?: string;
-    defaultSelectValue?: string;
     autofocus?: boolean;
   }>();
 
-  const communes = ref<string[]>([]);
-  const codePostalInput = ref<string>(props.defaultValue ?? '');
-  const codePostal = ref<number>();
-  const codePostalValide = ref<boolean>(true);
-  const codePostalNexistePas = computed(
-    () => codePostalValide.value && codePostal.value?.toString().length === 5 && communes.value?.length === 0,
-  );
-  const usecase = new ChargementCommunesUsecase(new CommuneRepositoryAxios());
-
-  onMounted(async () => {
-    if (props.defaultValue) {
-      communes.value = await usecase.execute(props.defaultValue);
-    }
-  });
-
   const emit = defineEmits<{
-    (e: 'update:modelValue', value: string): void;
-    (e: 'update:selectedCommune', commune: string): void;
     (e: 'update:isCodePostalEnErreur', value: boolean): void;
   }>();
 
-  const updateValue = async event => {
-    const inputElement = event.target as HTMLInputElement;
-    codePostalInput.value = inputElement.value;
-    codePostal.value = isNaN(parseInt(inputElement.value)) ? 0 : parseInt(inputElement.value);
+  const usecase = new ChargementCommunesUsecase(new CommuneRepositoryAxios());
+  const communes = ref<Commune[]>([]);
 
-    if (/^\d{5}$/.test(inputElement.value)) {
-      communes.value = await usecase.execute(inputElement.value);
-      emit('update:selectedCommune', communes.value[0]);
-      codePostalValide.value = true;
+  const codePostalValide = computed(() => /^\d{5}$/.test(codePostal.value));
+  const codePostalNexistePas = computed(() => codePostalValide.value && communes.value?.length === 0);
+
+  onMounted(async () => {
+    if (codePostalValide.value) {
+      communes.value = await usecase.execute(codePostal.value);
+    }
+  });
+
+  const onCodePostalInput = async () => {
+    if (codePostalValide.value) {
+      communes.value = await usecase.execute(codePostal.value);
+      if (codePostalNexistePas.value) return;
+      codeEpci.value = communes.value[0].codeEpci;
+      commune.value = communes.value[0].label;
     } else {
       communes.value = [];
-      codePostalValide.value = false;
-      emit('update:selectedCommune', '');
+      commune.value = '';
+      codeEpci.value = '';
     }
 
-    emit('update:modelValue', inputElement.value);
-    emit('update:isCodePostalEnErreur', !codePostalValide.value);
+    emit('update:isCodePostalEnErreur', !codePostalValide.value && codePostalNexistePas.value);
   };
 
   const updateSelectedCommune = (event: Event) => {
-    const selectElement = event.target as HTMLSelectElement;
-    codePostalValide.value = selectElement.value !== '';
-
-    emit('update:selectedCommune', selectElement.value);
+    const selectedLabel = (event.target as HTMLSelectElement).value;
+    const selected = communes.value.find(c => c.codeEpci === selectedLabel);
+    if (selected) {
+      codeEpci.value = selected.codeEpci;
+      commune.value = selected.label;
+    }
   };
 </script>

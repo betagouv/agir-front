@@ -1,5 +1,6 @@
 import { LogementApiModel } from '@/domaines/logement/adapters/logement.repository.axios';
 import { Logement } from '@/domaines/logement/recupererInformationLogement.usecase';
+import { Coordonnees } from '@/shell/coordonneesType';
 
 interface LogementPlusieursReponsesPossiblesViewModel<T> {
   valeur: T;
@@ -20,6 +21,10 @@ export interface LogementViewModel {
   superficie: LogementPlusieursReponsesPossiblesViewModel<LogementApiModel['superficie']>;
   plusDeQuinzeAns: LogementPlusieursReponsesPossiblesViewModel<boolean>;
   dpe: LogementPlusieursReponsesPossiblesViewModel<LogementApiModel['dpe']>;
+  coordonnees: Coordonnees;
+  numeroRue: string;
+  rue: string;
+  codeEpci: string;
 }
 
 export interface LogementPresenter {

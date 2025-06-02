@@ -2,14 +2,14 @@ import { LogementRepository } from '@/domaines/logement/ports/logement.repositor
 import { Logement } from '@/domaines/logement/recupererInformationLogement.usecase';
 import { AppRawDataStorage } from '@/shell/appRawDataStorage';
 
-export class EnregistrerInformationsLogementUsecase {
+export class PatcherInformationLogementUsecase {
   constructor(
     private readonly logementRepository: LogementRepository,
     private readonly appRawDataStorage: AppRawDataStorage,
   ) {}
 
-  async execute(idUtilsateur: string, logement: Logement) {
-    await this.logementRepository.enregistrerLesInformations(idUtilsateur, logement);
+  async execute(idUtilisateur: string, logement: Partial<Logement>): Promise<void> {
+    await this.logementRepository.patcherLesInformations(idUtilisateur, logement);
     this.appRawDataStorage.clearAllItems();
   }
 }
