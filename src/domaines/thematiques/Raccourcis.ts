@@ -4,6 +4,7 @@ import { RaccourciViewModel } from '@/domaines/thematiques/ports/thematiqueResum
 import { RouteActionsName } from '@/router/actions/routes';
 import { RouteAidesName } from '@/router/aides/routeAidesName';
 import { RouteServiceName } from '@/router/services/routes';
+import { NombreAfficheEnFRBuilder } from '@/shell/nombreAfficheEnFRBuilder';
 import { gererPluriel } from '@/shell/pluriel';
 
 export class Raccourcis {
@@ -18,7 +19,7 @@ export class Raccourcis {
 
   static serviceRecettes = (nbRecettes: number): RaccourciViewModel => ({
     emoji: '🥘',
-    label: `${this.formatNumber(nbRecettes)} recettes délicieuses, saines et de saison`,
+    label: `${NombreAfficheEnFRBuilder.build(nbRecettes)} recettes délicieuses, saines et de saison`,
     to: {
       name: RouteServiceName.RECETTES,
       params: {
@@ -49,7 +50,7 @@ export class Raccourcis {
 
   static aides = (nbAides: number): RaccourciViewModel => ({
     emoji: '💶',
-    label: `${this.formatNumber(nbAides)} ${gererPluriel(nbAides, 'aide financière', 'aides financières')} sur votre territoire`,
+    label: `${NombreAfficheEnFRBuilder.build(nbAides)} ${gererPluriel(nbAides, 'aide financière', 'aides financières')} sur votre territoire`,
     to: {
       name: RouteAidesName.AIDES,
     },
@@ -88,8 +89,4 @@ export class Raccourcis {
       },
     },
   };
-
-  private static formatNumber(n: number): string {
-    return n.toLocaleString('FR-fr');
-  }
 }

@@ -19,6 +19,8 @@
 
     <SimulationMaif v-else-if="actionSimulateurViewModel.actionId === SimulateursSupportes.MAIF" />
 
+    <SimulationAideRenos v-else-if="actionSimulateurViewModel.actionId === SimulateursSupportes.MES_AIDES_RENO" />
+
     <ActionAides :aides="actionSimulateurViewModel.aides" />
   </section>
 </template>
@@ -26,6 +28,7 @@
 <script lang="ts" setup>
   import ActionAides from '@/components/custom/Action/composants/ActionAides.vue';
   import ActionIntroduction from '@/components/custom/Action/composants/ActionIntroduction.vue';
+  import SimulationAideRenos from '@/components/custom/Action/SimulationAideRenos.vue';
   import SimulationMaif from '@/components/custom/Action/SimulationMaif.vue';
   import SimulationResultatVoiture from '@/components/custom/Action/SimulationResultatVoiture.vue';
   import KyCsAction from '@/components/custom/KYC/KYCsAction.vue';
