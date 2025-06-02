@@ -1,11 +1,6 @@
 <template>
   <div class="fr-container fr-pb-4w" v-if="detailServiceViewModel">
-    <router-link
-      class="fr-btn fr-btn--tertiary-no-outline fr-btn--icon-left fr-icon-arrow-left-line fr-pl-0 fr-my-2w"
-      :to="{ path: useNavigationStore().pagePrecedente.path, query: useNavigationStore().pagePrecedente.query }"
-    >
-      Retour
-    </router-link>
+    <BoutonRetourAutomatique class="fr-my-2w fr-pl-0" />
     <img class="display-block fr-mb-2w" alt="" v-if="detailServiceViewModel?.img" :src="detailServiceViewModel?.img" />
     <div class="fr-mt-auto">
       <span
@@ -55,13 +50,13 @@
   import { LMap, LMarker, LTileLayer } from '@vue-leaflet/vue-leaflet';
   import { onMounted, ref } from 'vue';
   import { useRoute } from 'vue-router';
+  import BoutonRetourAutomatique from '@/components/custom/BoutonRetourAutomatique.vue';
   import { ServiceRecherchePresDeChezNousAxios } from '@/domaines/serviceRecherche/presDeChezNous/adapters/serviceRecherchePresDeChezNous.repository.axios';
   import {
     DetailServiceViewModel,
     ServiceRecherchePresDeChezNousPresenterDetailImpl,
   } from '@/domaines/serviceRecherche/presDeChezNous/adapters/serviceRecherchePresDeChezNousDetail.presenter.impl';
   import { RecupererDetailServicePresDeChezNousUsecase } from '@/domaines/serviceRecherche/presDeChezNous/recupererDetailServicePresDeChezNous.usecase';
-  import { useNavigationStore } from '@/store/navigationStore';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const isLoading = ref<boolean>(true);

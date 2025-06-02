@@ -1,11 +1,6 @@
 <template>
   <div class="fr-container fr-pb-4w" v-if="recetteViewModel">
-    <router-link
-      class="fr-btn fr-btn--tertiary-no-outline fr-btn--icon-left fr-icon-arrow-left-line fr-pl-0 fr-my-2w"
-      :to="{ path: useNavigationStore().pagePrecedente.path, query: useNavigationStore().pagePrecedente.query }"
-    >
-      Retour
-    </router-link>
+    <BoutonRetourAutomatique class="fr-my-2w fr-pl-0" />
 
     <img
       v-if="recetteViewModel?.image"
@@ -43,13 +38,13 @@
   import { useHead } from '@unhead/vue';
   import { computed, onMounted, ref } from 'vue';
   import { useRoute } from 'vue-router';
+  import BoutonRetourAutomatique from '@/components/custom/BoutonRetourAutomatique.vue';
   import {
     RecettePresenterImpl,
     RecetteViewModel,
   } from '@/domaines/serviceRecherche/recettes/adapters/recette.presenter.impl';
   import { ServiceRechercheRecettesAxios } from '@/domaines/serviceRecherche/recettes/adapters/serviceRechercheRecettes.repository.axios';
   import { RecupererDetailServiceRecettesUsecase } from '@/domaines/serviceRecherche/recettes/recupererDetailServiceRecettes.usecase';
-  import { useNavigationStore } from '@/store/navigationStore';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const isLoading = ref<boolean>(true);

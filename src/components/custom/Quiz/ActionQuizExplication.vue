@@ -25,12 +25,12 @@
     {{ boutonSuivantLibelle }}
   </button>
 
-  <router-link v-else class="fr-btn fr-mt-3w" :to="useBoutonRetour().url"> {{ useBoutonRetour().label }}</router-link>
+  <BoutonRetourAutomatique v-else />
 </template>
 
 <script setup lang="ts">
   import { computed } from 'vue';
-  import { useBoutonRetour } from '@/composables/boutonRetour';
+  import BoutonRetourAutomatique from '@/components/custom/BoutonRetourAutomatique.vue';
   import { ArticleDuQuiz } from '@/domaines/quiz/ports/quiz.repository';
 
   const props = defineProps<{
