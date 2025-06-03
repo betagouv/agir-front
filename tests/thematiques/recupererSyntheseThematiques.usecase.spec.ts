@@ -61,7 +61,7 @@ describe('Fichier de tests concernant la récupération de la synthèse des thé
             id: 'me-loger',
             titreHTML: '<span aria-hidden="true">🏠</span>&nbsp Me loger',
             bulletPoints: [
-              '<span class="text--bold">3</span> simulateurs Mes Aides Rénov',
+              '<span class="text--bold">3</span> simulateurs Mes Aides Réno',
               '<span class="text--bold">5</span> aides sur votre territoire',
               '<span class="text--bold">3</span> idées d\'actions',
             ],

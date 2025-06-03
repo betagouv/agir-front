@@ -54,15 +54,22 @@ describe('Fichier de tests concernant la home connectée', () => {
             },
             {
               emoji: '🚲',
-              label: '1 simulateur Mes aides vélo',
+              label: '1 simulateur Mes Aides Vélo',
               to: {
                 name: 'aides-velo',
               },
             },
             {
               emoji: '🧱',
-              href: 'https://mesaidesreno.beta.gouv.fr/',
-              label: '1 simulateur Mes aides Rénov',
+              label: '1 simulateur Mes Aides Réno',
+              to: {
+                name: 'action-individuelle',
+                params: {
+                  id: 'simu_aides_reno',
+                  titre: 'calculer-vos-aides-pour-renover-votre-logement',
+                  type: 'simulateur',
+                },
+              },
             },
             {
               emoji: '🥘',
