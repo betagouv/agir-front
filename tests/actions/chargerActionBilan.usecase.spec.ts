@@ -82,6 +82,10 @@ describe("Fichier de tests concernant la récupération d'une action de type bil
         },
       ],
       idEnchainementKYCs: 'id-enchainement-bilan',
+      explicationsRecommandations: {
+        inclusion: [{ libelle: 'Vous mangez de la viande' }, { libelle: 'Vous habitez en appartement' }],
+        exclusion: [],
+      },
     };
     const usecase = new ChargerActionUsecase(
       new ChargerActionStrategyFactory(
@@ -168,6 +172,10 @@ describe("Fichier de tests concernant la récupération d'une action de type bil
           },
         ],
         idEnchainementKYCs: 'id-enchainement-bilan',
+        explicationsRecommandation: {
+          titre: '<span class="text--bold">Recommandée</span> pour vous',
+          justifications: ['Vous mangez de la viande', 'Vous habitez en appartement'],
+        },
       });
     }
   });

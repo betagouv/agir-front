@@ -79,6 +79,10 @@ describe("Fichier de tests concernant la récupération d'une action de type sim
       faq: [],
       sources: [],
       idEnchainementKYCs: 'id-enchainement-action-simulateur-test',
+      explicationsRecommandations: {
+        inclusion: [{ libelle: 'Vous avez une voiture' }],
+        exclusion: [],
+      },
     };
     const usecase = new ChargerActionUsecase(
       new ChargerActionStrategyFactory(
@@ -162,6 +166,10 @@ describe("Fichier de tests concernant la récupération d'une action de type sim
         actionId: 'id-action-simulateur-test',
         idEnchainementKYCs: 'id-enchainement-action-simulateur-test',
         sources: [],
+        explicationsRecommandation: {
+          titre: '<span class="text--bold">Recommandée</span> pour vous',
+          justifications: ['Vous avez une voiture'],
+        },
       });
     }
   });
