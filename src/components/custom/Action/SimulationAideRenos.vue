@@ -1,5 +1,6 @@
 <template>
   <iframe
+    v-if="iframe_href !== null"
     ref="iframe_ref"
     id="mesaidesreno-iframe"
     :src="iframe_href"
@@ -18,7 +19,7 @@
   import { SimulateursSupportes } from '@/shell/simulateursSupportes';
   import { utilisateurStore } from '@/store/utilisateur';
 
-  const iframe_href = ref<string>('https://mesaidesreno.beta.gouv.fr');
+  const iframe_href = ref<string | null>(null);
   const iframe_ref = ref<HTMLIFrameElement | null>(null);
   const situation = ref<object | null>(null);
   const axios = AxiosFactory.getAxios();
