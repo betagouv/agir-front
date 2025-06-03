@@ -109,6 +109,10 @@ describe("Fichier de tests concernant la récupération d'une action de type qui
       faq: [],
       sources: [],
       idEnchainementKYCs: '',
+      explicationsRecommandations: {
+        inclusion: [],
+        exclusion: [{ libelle: "Vous n'aimez pas les quizz" }],
+      },
     };
     const usecase = new ChargerActionUsecase(
       new ChargerActionStrategyFactory(
@@ -202,6 +206,7 @@ describe("Fichier de tests concernant la récupération d'une action de type qui
         ],
         articlesRecommandes: [],
         sources: [],
+        explicationsRecommandation: undefined,
       });
     }
   });
