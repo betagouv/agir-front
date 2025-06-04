@@ -28,7 +28,7 @@
 
 <script setup lang="ts">
   import { ref } from 'vue';
-  import ActionQuizExplication from '@/components/custom/Quiz/ActionQuizExplication.vue';
+  import ActionQuizExplication from '@/components/custom/Action/composants/ActionQuizExplication.vue';
   import QuizQuestion from '@/components/custom/Quiz/QuizQuestion.vue';
   import { ActionQuizQuestionViewModel } from '@/domaines/actions/ports/action.presenter';
   import { QuizRepositoryAxios } from '@/domaines/quiz/adapters/quiz.repository.axios';

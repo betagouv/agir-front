@@ -26,8 +26,8 @@
 
 <script lang="ts" setup>
   import { computed, ref } from 'vue';
-  import ActionQuizComposant from '@/components/custom/Action/ActionQuizComposant.vue';
-  import ActionQuizTerminee from '@/components/custom/Action/ActionQuizTerminee.vue';
+  import ActionQuizComposant from '@/components/custom/Action/composants/ActionQuizComposant.vue';
+  import ActionQuizTerminee from '@/components/custom/Action/composants/ActionQuizTerminee.vue';
   import Navigation from '@/components/custom/Navigation.vue';
   import { ActionQuizViewModel, ActionQuizzesViewModel } from '@/domaines/actions/ports/action.presenter';
 
