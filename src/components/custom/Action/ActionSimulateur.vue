@@ -11,7 +11,7 @@
     />
     <SimulationMaif v-else-if="actionSimulateurViewModel.actionId === SimulateursSupportes.MAIF" />
     <SimulationAideRenos v-else-if="actionSimulateurViewModel.actionId === SimulateursSupportes.MES_AIDES_RENO" />
-    <SimulationWinter
+    <SimulationWw
       v-else-if="actionSimulateurViewModel.actionId === SimulateursSupportes.WINTER"
       :id-enchainement-kycs="actionSimulateurViewModel.idEnchainementKYCs"
     />
@@ -26,7 +26,7 @@
   import SimulationAideRenos from '@/components/custom/Action/Simulation/AidesReno/SimulationAideRenos.vue';
   import SimulationMaif from '@/components/custom/Action/Simulation/Maif/SimulationMaif.vue';
   import SimulationVoiture from '@/components/custom/Action/Simulation/Voiture/SimulationVoiture.vue';
-  import SimulationWinter from '@/components/custom/Action/Simulation/Winter/SimulationWinter.vue';
+  import SimulationWw from '@/components/custom/Action/Simulation/WattWatchers/SimulationWW.vue';
   import { ActionSimulateurViewModel } from '@/domaines/actions/ports/action.presenter';
   import { SimulateursSupportes } from '@/shell/simulateursSupportes';
 
