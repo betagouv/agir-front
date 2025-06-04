@@ -36,11 +36,16 @@
   const props = defineProps<{ situationId?: string | null; titleClass?: string }>();
 
   const appelerBackPourCommencerFranceConnect = async () => {
+    const baseUrl = `${import.meta.env.VITE_API_URL}/login_france_connect`;
+    const params = new URLSearchParams({
+      source_inscription: props.situationId ? 'web_ngc' : 'web',
+    });
+
     if (props.situationId) {
-      window.location.href = `${import.meta.env.VITE_API_URL}/login_france_connect?situation_ngc_id=${props.situationId}`;
-    } else {
-      window.location.href = `${import.meta.env.VITE_API_URL}/login_france_connect`;
+      params.append('situation_ngc_id', props.situationId);
     }
+
+    window.location.href = `${baseUrl}?${params.toString()}`;
   };
 
   const franceConnectActive = import.meta.env.VITE_FRANCE_CONNECT === 'true';
