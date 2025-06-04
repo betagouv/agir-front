@@ -1,5 +1,30 @@
 # Changelog
 
+## [2.12.0](https://github.com/betagouv/agir-front/compare/v2.11.0...v2.12.0) (2025-06-04)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* ajout du simulateur aide reno en tant qu'action ([#991](https://github.com/betagouv/agir-front/issues/991)) ([632b05c](https://github.com/betagouv/agir-front/commit/632b05c1b0d3369e84493a0ac505e0c6e9eacf24))
+* maif simulateur ([#1105](https://github.com/betagouv/agir-front/issues/1105)) ([87bf79a](https://github.com/betagouv/agir-front/commit/87bf79ae0c0ac5f77ceaf6bab0389c32b0abaf9a))
+
+
+### 🐛 Corrections de bogues
+
+* ajouter les nombres dans les ids des boutons radios ([#1150](https://github.com/betagouv/agir-front/issues/1150)) ([a447c07](https://github.com/betagouv/agir-front/commit/a447c074cc22969093f5991a417aa740ec01a114))
+
+
+### 👷 Autres changements
+
+* ajouter la source inscription de france connect ([#1160](https://github.com/betagouv/agir-front/issues/1160)) ([419f69c](https://github.com/betagouv/agir-front/commit/419f69cddf987716a2d6952a970444ac03f17b49))
+* btn retour automatique ([#1149](https://github.com/betagouv/agir-front/issues/1149)) ([1f66cad](https://github.com/betagouv/agir-front/commit/1f66caddb550e22e382670b0495d228aa32ce904))
+* Bump @sentry/vue from 9.22.0 to 9.24.0 ([#1153](https://github.com/betagouv/agir-front/issues/1153)) ([4756981](https://github.com/betagouv/agir-front/commit/47569813a9850658e396bfa50e6c6b20ddd9df67))
+* Bump lint-staged from 16.0.0 to 16.1.0 ([#1156](https://github.com/betagouv/agir-front/issues/1156)) ([f36cf1c](https://github.com/betagouv/agir-front/commit/f36cf1c809535768911d8fce3ce086cb57f573ab))
+* Bump marked from 15.0.11 to 15.0.12 ([#1154](https://github.com/betagouv/agir-front/issues/1154)) ([85b8925](https://github.com/betagouv/agir-front/commit/85b89250fd9637695122ca1967313034a9b9c9a6))
+* Bump sharp from 0.34.1 to 0.34.2 ([#1152](https://github.com/betagouv/agir-front/issues/1152)) ([4be0865](https://github.com/betagouv/agir-front/commit/4be0865a5eb74276ffcf228283d336d397d05074))
+* Bump tar-fs from 3.0.8 to 3.0.9 ([#1157](https://github.com/betagouv/agir-front/issues/1157)) ([caf46d4](https://github.com/betagouv/agir-front/commit/caf46d46f37135f72c46e57713b46138f832652b))
+* Bump vue from 3.5.15 to 3.5.16 ([#1155](https://github.com/betagouv/agir-front/issues/1155)) ([3635a13](https://github.com/betagouv/agir-front/commit/3635a13abeda4977d60af5d71b52aec8f48e50cf))
+
 ## [2.11.0](https://github.com/betagouv/agir-front/compare/v2.10.1...v2.11.0) (2025-05-28)
 
 
