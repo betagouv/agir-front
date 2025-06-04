@@ -53,7 +53,7 @@
 
 <script lang="ts" setup>
   import { onMounted, ref } from 'vue';
-  import SimulationResultatVoitureProposee from '@/components/custom/Action/SimulationResultatVoitureProposee.vue';
+  import SimulationResultatVoitureProposee from '@/components/custom/Action/Simulation/Voiture/SimulationResultatVoitureProposee.vue';
   import {
     ResultatSimulationVoiturePresenterImpl,
     ResultatSimulationVoitureViewModel,

@@ -17,8 +17,8 @@
 </template>
 
 <script lang="ts" setup>
-  import ActionArticlesRecommandees from '@/components/custom/Action/ActionArticlesRecommandees.vue';
   import ActionAside from '@/components/custom/Action/Aside/ActionAside.vue';
+  import ActionArticlesRecommandees from '@/components/custom/Action/composants/ActionArticlesRecommandees.vue';
   import { ActionBaseViewModel } from '@/domaines/actions/ports/action.presenter';
 
   defineProps<{ actionBaseViewModel: ActionBaseViewModel }>();

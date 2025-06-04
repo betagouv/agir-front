@@ -63,7 +63,7 @@
 
 <script lang="ts" setup>
   import { nextTick, onMounted, ref } from 'vue';
-  import MaifRisques from '@/components/custom/Action/MaifRisques.vue';
+  import MaifRisques from '@/components/custom/Action/Simulation/Maif/MaifRisques.vue';
   import ServiceBarreDeRechercheAdresse from '@/components/custom/Service/ServiceBarreDeRechercheAdresse.vue';
   import BallLoader from '@/components/custom/Thematiques/BallLoader.vue';
   import Callout from '@/components/dsfr/Callout.vue';
