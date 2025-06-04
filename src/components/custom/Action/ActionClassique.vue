@@ -16,11 +16,11 @@
 </template>
 
 <script lang="ts" setup>
-  import ActionWidgetServices from '@/components/custom/Action/ActionWidgetServices.vue';
   import ActionAides from '@/components/custom/Action/composants/ActionAides.vue';
   import ActionAstuces from '@/components/custom/Action/composants/ActionAstuces.vue';
   import ActionFAQ from '@/components/custom/Action/composants/ActionFAQ.vue';
   import ActionIntroduction from '@/components/custom/Action/composants/ActionIntroduction.vue';
+  import ActionWidgetServices from '@/components/custom/Action/composants/ActionWidgetServices.vue';
   import { ActionClassiqueViewModel } from '@/domaines/actions/ports/action.presenter';
 
   defineProps<{ actionClassiqueViewModel: ActionClassiqueViewModel }>();

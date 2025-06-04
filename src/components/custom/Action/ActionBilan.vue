@@ -9,7 +9,7 @@
       class="fr-px-2w"
     >
       <template v-slot:fin>
-        <BilanResultat :id-action="actionBilanViewModel.actionId" :thematique="actionBilanViewModel.thematique" />
+        <ActionBilanResultat :id-action="actionBilanViewModel.actionId" :thematique="actionBilanViewModel.thematique" />
       </template>
     </KyCsAction>
 
@@ -18,8 +18,8 @@
 </template>
 
 <script lang="ts" setup>
-  import BilanResultat from '@/components/custom/Action/BilanResultat.vue';
   import ActionAides from '@/components/custom/Action/composants/ActionAides.vue';
+  import ActionBilanResultat from '@/components/custom/Action/composants/ActionBilanResultat.vue';
   import ActionIntroduction from '@/components/custom/Action/composants/ActionIntroduction.vue';
   import KyCsAction from '@/components/custom/KYC/KYCsAction.vue';
   import { ActionBilanViewModel } from '@/domaines/actions/ports/action.presenter';
