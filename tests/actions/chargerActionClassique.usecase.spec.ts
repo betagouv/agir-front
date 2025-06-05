@@ -105,6 +105,10 @@ describe("Fichier de tests concernant la récupération d'une action de type cla
       ],
       sources: [],
       idEnchainementKYCs: '',
+      explicationsRecommandations: {
+        estExclu: true,
+        listeExplications: [{ labelExplication: 'Vous êtes végétarien', tag: 'est-vegetarien' }],
+      },
     };
     const usecase = new ChargerActionUsecase(
       new ChargerActionStrategyFactory(
@@ -220,6 +224,7 @@ describe("Fichier de tests concernant la récupération d'une action de type cla
           },
         ],
         sources: [],
+        explicationsRecommandation: undefined,
       });
     }
   });

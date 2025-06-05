@@ -17,6 +17,11 @@ export type SourceActionViewModel = {
   url: string;
 };
 
+export type ExplicationRecommandationViewModel = {
+  titre: string;
+  justifications: string[];
+};
+
 export interface ActionBaseViewModel {
   titre: string;
   titreAffiche: string;
@@ -31,6 +36,7 @@ export interface ActionBaseViewModel {
   actionId: string;
   points: number;
   sources: SourceActionViewModel[];
+  explicationsRecommandation?: ExplicationRecommandationViewModel;
 }
 
 export interface ActionClassiqueViewModel extends ActionBaseViewModel {

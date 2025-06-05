@@ -60,6 +60,15 @@ export interface ActionDetail {
     label: string;
     url: string;
   }[];
+  explicationsRecommandations: ExplicationRecommandation;
+}
+
+export interface ExplicationRecommandation {
+  estExclu: boolean;
+  listeExplications: {
+    tag: string;
+    labelExplication: string;
+  }[];
 }
 
 export enum TypeAction {

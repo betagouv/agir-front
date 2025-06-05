@@ -4,8 +4,9 @@ import {
   ActionPresenter,
   ActionQuizzesViewModel,
   ActionSimulateurViewModel,
+  ExplicationRecommandationViewModel,
 } from '@/domaines/actions/ports/action.presenter';
-import { ActionDetail } from '@/domaines/actions/ports/actions.repository';
+import { ActionDetail, ExplicationRecommandation } from '@/domaines/actions/ports/actions.repository';
 import marked from '@/shell/actionMarkdownToHtml';
 import { buildUrl } from '@/shell/buildUrl';
 import cacherEmojisAuxLecteursDecrans from '@/shell/cacherEmojisAuxLecteursDecrans';
@@ -132,6 +133,7 @@ class ActionViewModelBuilder {
         label: source.label,
         url: source.url,
       })),
+      explicationsRecommandation: this.buildExplicationsRecommandations(action.explicationsRecommandations),
     };
   }
 
@@ -145,6 +147,21 @@ class ActionViewModelBuilder {
       montantMaximum: aide.montantMaximum ? `${MontantAfficheEnFRBuilder.build(aide.montantMaximum)}` : undefined,
       estGratuit: aide.estGratuit,
     }));
+  }
+
+  private static buildExplicationsRecommandations(
+    explicationsRecommandations: ExplicationRecommandation,
+  ): ExplicationRecommandationViewModel | undefined {
+    if (explicationsRecommandations.estExclu || explicationsRecommandations.listeExplications?.length > 0) {
+      return undefined;
+    }
+
+    return {
+      titre: '<span class="text--bold">Recommandée</span> pour vous car',
+      justifications: explicationsRecommandations.listeExplications?.map(explicationInclusion => {
+        return explicationInclusion.labelExplication;
+      }),
+    };
   }
 }
 
