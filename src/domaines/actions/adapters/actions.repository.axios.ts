@@ -59,11 +59,10 @@ interface ActionDetailApiModel {
   }[];
   enchainement_id: string;
   explications_recommandation: {
-    inclusion: {
-      libelle: string;
-    }[];
-    exclusion: {
-      libelle: string;
+    est_exclu: boolean;
+    liste_explications: {
+      tag: string;
+      label_explication: string;
     }[];
   };
 }
@@ -244,7 +243,13 @@ export class ActionsRepositoryAxios implements ActionsRepository {
         label: article.label,
         url: article.url,
       })),
-      explicationsRecommandations: actionDetailApiModel.explications_recommandation,
+      explicationsRecommandations: {
+        estExclu: actionDetailApiModel.explications_recommandation.est_exclu,
+        listeExplications: actionDetailApiModel.explications_recommandation.liste_explications.map(explication => ({
+          tag: explication.tag,
+          labelExplication: explication.label_explication,
+        })),
+      },
     };
   }
 
