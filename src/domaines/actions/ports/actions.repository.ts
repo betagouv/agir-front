@@ -64,11 +64,10 @@ export interface ActionDetail {
 }
 
 export interface ExplicationRecommandation {
-  inclusion: {
-    libelle: string;
-  }[];
-  exclusion: {
-    libelle: string;
+  estExclu: boolean;
+  listeExplications: {
+    tag: string;
+    labelExplication: string;
   }[];
 }
 

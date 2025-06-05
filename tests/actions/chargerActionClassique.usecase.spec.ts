@@ -106,8 +106,8 @@ describe("Fichier de tests concernant la récupération d'une action de type cla
       sources: [],
       idEnchainementKYCs: '',
       explicationsRecommandations: {
-        inclusion: [{ libelle: 'Vous essayez de consommer différemment' }],
-        exclusion: [{ libelle: 'Vous êtes végétarien' }],
+        estExclu: true,
+        listeExplications: [{ labelExplication: 'Vous êtes végétarien', tag: 'est-vegetarien' }],
       },
     };
     const usecase = new ChargerActionUsecase(

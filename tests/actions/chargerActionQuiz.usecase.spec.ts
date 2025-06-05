@@ -110,8 +110,8 @@ describe("Fichier de tests concernant la récupération d'une action de type qui
       sources: [],
       idEnchainementKYCs: '',
       explicationsRecommandations: {
-        inclusion: [],
-        exclusion: [{ libelle: "Vous n'aimez pas les quizz" }],
+        estExclu: true,
+        listeExplications: [{ labelExplication: "Vous n'aimez pas les quizz", tag: 'pas-quizz' }],
       },
     };
     const usecase = new ChargerActionUsecase(

@@ -83,8 +83,11 @@ describe("Fichier de tests concernant la récupération d'une action de type bil
       ],
       idEnchainementKYCs: 'id-enchainement-bilan',
       explicationsRecommandations: {
-        inclusion: [{ libelle: 'Vous mangez de la viande' }, { libelle: 'Vous habitez en appartement' }],
-        exclusion: [],
+        estExclu: false,
+        listeExplications: [
+          { labelExplication: 'Vous mangez de la viande', tag: 'manger-viande' },
+          { labelExplication: 'Vous habitez en appartement', tag: 'vivre-appartement' },
+        ],
       },
     };
     const usecase = new ChargerActionUsecase(

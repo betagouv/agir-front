@@ -80,8 +80,8 @@ describe("Fichier de tests concernant la récupération d'une action de type sim
       sources: [],
       idEnchainementKYCs: 'id-enchainement-action-simulateur-test',
       explicationsRecommandations: {
-        inclusion: [{ libelle: 'Vous avez une voiture' }],
-        exclusion: [],
+        estExclu: false,
+        listeExplications: [{ labelExplication: 'Vous avez une voiture', tag: 'possede-voiture' }],
       },
     };
     const usecase = new ChargerActionUsecase(
