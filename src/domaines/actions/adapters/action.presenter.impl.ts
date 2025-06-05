@@ -152,18 +152,16 @@ class ActionViewModelBuilder {
   private static buildExplicationsRecommandations(
     explicationsRecommandations: ExplicationRecommandation,
   ): ExplicationRecommandationViewModel | undefined {
-    if (explicationsRecommandations.estExclu) {
+    if (explicationsRecommandations.estExclu || explicationsRecommandations.listeExplications?.length > 0) {
       return undefined;
     }
 
-    if (explicationsRecommandations.listeExplications?.length > 0) {
-      return {
-        titre: '<span class="text--bold">Recommandée</span> pour vous car',
-        justifications: explicationsRecommandations.listeExplications?.map(explicationInclusion => {
-          return explicationInclusion.labelExplication;
-        }),
-      };
-    }
+    return {
+      titre: '<span class="text--bold">Recommandée</span> pour vous car',
+      justifications: explicationsRecommandations.listeExplications?.map(explicationInclusion => {
+        return explicationInclusion.labelExplication;
+      }),
+    };
   }
 }
 
