@@ -1,24 +1,22 @@
 <template>
   <section class="fr-mb-4w fr-p-1v">
     <h2 id="label-barre-de-recherche" class="fr-h3">Choisissez une adresse</h2>
-    <ServiceBarreDeRechercheAdresse
-      v-model:adresse="adresse"
-      v-model:coordonnees="coordonnees"
-      v-model:recherche="recherche"
-      label-id="label-barre-de-recherche"
-      @update:coordonnees="chargerDonneesPourNouvelleAdresse"
-    />
+    <form @submit.prevent>
+      <BarreDeRechercheAdresse
+        v-model:adresse="adresse"
+        v-model:coordonnees="coordonnees"
+        v-model:recherche="recherche"
+        label-id="label-barre-de-recherche"
+        @update:coordonnees="chargerDonneesPourNouvelleAdresse"
+      />
 
-    <Callout
-      v-if="avecAdressePrivee"
-      :button="{
-        text: 'Choisir comme adresse principale',
-        onClick: definirAdressePrincipale,
-      }"
-      :icone-information="false"
-      class="fr-mt-3w"
-      texte="Voulez-vous utiliser cette adresse comme votre adresse principale à l’avenir&nbsp;?"
-    />
+      <EnregistreurAdressePrincipale
+        v-if="adresse && coordonnees && avecAdressePrivee"
+        :adresse="adresse"
+        :coordonnees="coordonnees"
+        @enregistrementNouvelleAdresse="avecAdressePrivee = false"
+      />
+    </form>
 
     <section class="fr-mb-3w fr-mt-5w">
       <template v-if="resultatsEnChargement || resultatSimulationMaifViewModel?.risques">
@@ -63,10 +61,10 @@
 
 <script lang="ts" setup>
   import { nextTick, onMounted, ref } from 'vue';
-  import MaifRisques from '@/components/custom/Action/MaifRisques.vue';
-  import ServiceBarreDeRechercheAdresse from '@/components/custom/Service/ServiceBarreDeRechercheAdresse.vue';
+  import MaifRisques from '@/components/custom/Action/Simulation/Maif/MaifRisques.vue';
+  import BarreDeRechercheAdresse from '@/components/custom/Form/BarreDeRechercheAdresse.vue';
+  import EnregistreurAdressePrincipale from '@/components/custom/Form/EnregistreurAdressePrincipale.vue';
   import BallLoader from '@/components/custom/Thematiques/BallLoader.vue';
-  import Callout from '@/components/dsfr/Callout.vue';
   import CarteExterne from '@/components/dsfr/CarteExterne.vue';
   import { ActionsEventBus } from '@/domaines/actions/actions.eventbus';
   import { ActionsRepositoryAxios } from '@/domaines/actions/adapters/actions.repository.axios';
@@ -77,9 +75,7 @@
     BarreDeRechercheViewModel,
   } from '@/domaines/logement/adapters/barreDeRecherche.presenter.impl';
   import { LogementRepositoryAxios } from '@/domaines/logement/adapters/logement.repository.axios';
-  import { PatcherInformationLogementUsecase } from '@/domaines/logement/patcherInformationLogement.usecase';
   import { RecupererAdressePourBarreDeRechercheUsecase } from '@/domaines/logement/recupererAdressePourBarreDeRecherche.usecase';
-  import { Logement } from '@/domaines/logement/recupererInformationLogement.usecase';
   import {
     SimulateurMaifPresenterImpl,
     SimulateurMaifViewModel,
@@ -91,7 +87,6 @@
   } from '@/domaines/simulationMaif/adapters/statistiquesCommuneMaif.presenter.impl';
   import { CalculerResultatSimulationMaifUsecase } from '@/domaines/simulationMaif/calculerResultatSimulationMaif.usecase';
   import { RecupererStatistiquesCommuneMaifUsecase } from '@/domaines/simulationMaif/recupererStatistiquesCommuneMaifDepuisProfil.usecase';
-  import { sessionAppRawDataStorage } from '@/shell/appRawDataStorage';
   import { AdresseBarreDeRecherche, Coordonnees } from '@/shell/coordonneesType';
   import { SimulateursSupportes } from '@/shell/simulateursSupportes';
   import { utilisateurStore } from '@/store/utilisateur';
@@ -165,29 +160,6 @@
         resultatsEnChargement.value = false;
         await terminerAction();
       });
-  }
-
-  function definirAdressePrincipale() {
-    if (!adresse.value || !coordonnees.value) return;
-
-    const nouveauLogement: Partial<Logement> = {
-      coordonnees: {
-        latitude: coordonnees.value.latitude,
-        longitude: coordonnees.value.longitude,
-      },
-      codePostal: adresse.value.codePostal,
-      codeEpci: adresse.value.codeEpci,
-      numeroRue: adresse.value.numeroRue,
-      rue: adresse.value.rue,
-    };
-
-    const patcherInformationLogementUsecase = new PatcherInformationLogementUsecase(
-      new LogementRepositoryAxios(),
-      sessionAppRawDataStorage,
-    );
-    patcherInformationLogementUsecase.execute(utilisateurId, nouveauLogement).then(async () => {
-      avecAdressePrivee.value = false;
-    });
   }
 
   async function terminerAction() {

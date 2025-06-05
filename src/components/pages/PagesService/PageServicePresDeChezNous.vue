@@ -27,12 +27,13 @@
           class="fr-my-6w background--white fr-px-2w fr-py-3w flex flex-space-between align-items--center flex-wrap gap--small"
         >
           <h2 class="fr-h4 fr-mb-0" id="recherche-par-adresse-label">Recherche par adresse</h2>
-          <ServiceBarreDeRechercheAdresse
-            v-model:recherche="recherche"
-            v-model:coordonnees="coordonnees"
-            class="fr-col-12 fr-col-md-7"
-            labelId="recherche-par-adresse-label"
-          />
+          <form @submit.prevent class="fr-col-12 fr-col-md-7">
+            <BarreDeRechercheAdresse
+              v-model:recherche="recherche"
+              v-model:coordonnees="coordonnees"
+              labelId="recherche-par-adresse-label"
+            />
+          </form>
         </section>
         <section
           v-if="
@@ -83,8 +84,8 @@
 
 <script lang="ts" setup>
   import { nextTick, ref } from 'vue';
+  import BarreDeRechercheAdresse from '@/components/custom/Form/BarreDeRechercheAdresse.vue';
   import PageServiceTemplate from '@/components/custom/Service/PageServiceTemplate.vue';
-  import ServiceBarreDeRechercheAdresse from '@/components/custom/Service/ServiceBarreDeRechercheAdresse.vue';
   import ServiceFavoris from '@/components/custom/Service/ServiceFavoris.vue';
   import ServiceListeCarte from '@/components/custom/Service/ServiceListeCarte.vue';
   import ServiceSelect from '@/components/custom/Service/ServiceSelect.vue';
