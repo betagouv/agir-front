@@ -31,6 +31,56 @@
         description="Obligatoire"
       />
 
+      <button
+        class="fr-btn fr-btn--tertiary fr-btn--icon-left fr-mb-3w"
+        :class="affichagePRM ? 'fr-icon-eye-off-fill' : 'fr-icon-settings-5-fill'"
+        @click="toggleAffichagePRM"
+        v-text="
+          !affichagePRM ? 'Je préfère renseigner mon numéro de compteur' : 'Masquer le champ du numéro de compteur'
+        "
+      />
+
+      <template v-if="affichagePRM">
+        <InputText
+          label="Numéro de PRM"
+          description="Il s’agit d’une suite de 14 chiffres qui identifie le logement sur le réseau électrique"
+          :model-value="numeroCompteurInput"
+          name="prm"
+        />
+
+        <section class="accordeon-prm">
+          <Accordeon name-id="accordeon-prm" class="fr-mb-3w">
+            <template #titre>
+              <span class="fr-icon-information-line fr-pr-1w" aria-hidden="true" />
+              Où trouver le numéro de PRM&nbsp;?
+            </template>
+
+            <template #contenu>
+              <div class="fr-grid-row fr-grid-row--gutters">
+                <section class="fr-col-12 fr-col-md-6 flex fr-pr-2w">
+                  <img src="/facture-linky-exemple.webp" class="fr-pt-1w fr-mr-2w" alt="" />
+                  <div>
+                    <h4 class="fr-mb-1w">Sur votre facture</h4>
+                    <p>Vous trouverez votre numéro de PRM sur votre facture</p>
+                  </div>
+                </section>
+
+                <section class="fr-col-12 fr-col-md-6 flex fr-pr-2w left-border">
+                  <img src="/compteur-linky-exemple.webp" class="fr-pt-1w fr-mr-2w" alt="" />
+                  <div>
+                    <h4 class="fr-mb-1w">Sur votre compteur Linky</h4>
+                    <p>
+                      Faire défiler les affichages du compteur (appui sur la touche +) jusqu’à lire la valeur du “numéro
+                      de PRM”
+                    </p>
+                  </div>
+                </section>
+              </div>
+            </template>
+          </Accordeon>
+        </section>
+      </template>
+
       <InputCheckboxUnitaire
         class="fr-mb-4w"
         id="cguWW"
@@ -50,7 +100,7 @@
     <Modale :id="MODALE_ID" :is-footer-actions="true" :radius="false" labelId="label-id" size="s">
       <template v-slot:contenu>
         <template v-if="estEnTentativeConnexion"><BallLoader text="Localisation de votre compteur..." /></template>
-        <template v-else-if="numeroCompteur">
+        <template v-else-if="numeroCompteurInput">
           <div class="flex flex-center fr-mb-2w">
             <img src="/prise-fonctionnelle.svg" alt="" class="margin-x-auto" />
           </div>
@@ -62,7 +112,7 @@
               <li class="text--normal fr-mb-1w">
                 <span class="fr-tag fr-icon-map-pin-2-fill fr-tag--icon-left">à Commune</span>
               </li>
-              <li>Compteur #{{ numeroCompteur }}</li>
+              <li>Compteur #{{ numeroCompteurInput }}</li>
             </ul>
           </div>
         </template>
@@ -76,7 +126,7 @@
       </template>
       <template v-slot:footer>
         <template v-if="estEnTentativeConnexion"></template>
-        <template v-else-if="numeroCompteur">
+        <template v-else-if="numeroCompteurInput">
           <ul
             class="fr-btns-group fr-btns-group--right fr-btns-group--inline-reverse fr-btns-group--inline-lg fr-btns-group--icon-left"
           >
@@ -111,6 +161,7 @@
   import EnregistreurAdressePrincipale from '@/components/custom/Form/EnregistreurAdressePrincipale.vue';
   import Modale from '@/components/custom/Modale/Modale.vue';
   import BallLoader from '@/components/custom/Thematiques/BallLoader.vue';
+  import Accordeon from '@/components/dsfr/Accordeon.vue';
   import InputCheckboxUnitaire from '@/components/dsfr/InputCheckboxUnitaire.vue';
   import InputText from '@/components/dsfr/InputText.vue';
   import {
@@ -133,7 +184,8 @@
 
   const avecAdressePrivee = ref<boolean>(false);
   const estEnTentativeConnexion = ref<boolean>(true);
-  const numeroCompteur = ref<number>();
+  const affichagePRM = ref<boolean>(false);
+  const numeroCompteurInput = ref<string>('');
 
   const logementRepository = new LogementRepositoryAxios();
   const recupererAdressePourBarreDeRechercheUsecase = new RecupererAdressePourBarreDeRechercheUsecase(
@@ -155,13 +207,41 @@
 
     setTimeout(() => {
       estEnTentativeConnexion.value = false;
-      numeroCompteur.value = 283918274;
+      numeroCompteurInput.value = '283918274';
     }, 1000);
+  }
+
+  function toggleAffichagePRM() {
+    affichagePRM.value = !affichagePRM.value;
   }
 </script>
 
 <style scoped>
   .recapitulatif {
     background-color: #f7f7fc;
+  }
+
+  .accordeon-prm img {
+    height: 7.5rem;
+  }
+
+  .accordeon-prm h4 {
+    font-size: 1.1rem;
+  }
+
+  .left-border {
+    position: relative;
+    padding-left: 1rem;
+  }
+
+  .left-border::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    height: 50%;
+    width: 1px;
+    background-color: #e0e0e0;
+    transform: translate(-50%, -50%);
   }
 </style>
