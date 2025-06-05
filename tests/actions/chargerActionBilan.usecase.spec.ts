@@ -176,7 +176,7 @@ describe("Fichier de tests concernant la récupération d'une action de type bil
         ],
         idEnchainementKYCs: 'id-enchainement-bilan',
         explicationsRecommandation: {
-          titre: '<span class="text--bold">Recommandée</span> pour vous',
+          titre: '<span class="text--bold">Recommandée</span> pour vous car',
           justifications: ['Vous mangez de la viande', 'Vous habitez en appartement'],
         },
       });
