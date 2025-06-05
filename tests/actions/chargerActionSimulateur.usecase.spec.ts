@@ -167,7 +167,7 @@ describe("Fichier de tests concernant la récupération d'une action de type sim
         idEnchainementKYCs: 'id-enchainement-action-simulateur-test',
         sources: [],
         explicationsRecommandation: {
-          titre: '<span class="text--bold">Recommandée</span> pour vous',
+          titre: '<span class="text--bold">Recommandée</span> pour vous car',
           justifications: ['Vous avez une voiture'],
         },
       });
