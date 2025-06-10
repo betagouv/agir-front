@@ -1,4 +1,5 @@
 import { AxiosFactory, intercept401 } from '@/axios.factory';
+import { ExplicationsRecommandation } from '@/domaines/actions/explicationsRecommandation';
 import {
   Action,
   ActionDetail,
@@ -243,13 +244,13 @@ export class ActionsRepositoryAxios implements ActionsRepository {
         label: article.label,
         url: article.url,
       })),
-      explicationsRecommandations: {
-        estExclu: actionDetailApiModel.explications_recommandation.est_exclu,
-        listeExplications: actionDetailApiModel.explications_recommandation.liste_explications.map(explication => ({
+      explicationsRecommandations: new ExplicationsRecommandation(
+        actionDetailApiModel.explications_recommandation.est_exclu,
+        actionDetailApiModel.explications_recommandation.liste_explications.map(explication => ({
           tag: explication.tag,
           labelExplication: explication.label_explication,
         })),
-      },
+      ),
     };
   }
 

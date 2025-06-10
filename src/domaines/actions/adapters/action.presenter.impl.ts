@@ -1,3 +1,4 @@
+import { ExplicationsRecommandation } from '@/domaines/actions/explicationsRecommandation';
 import {
   ActionBilanViewModel,
   ActionClassiqueViewModel,
@@ -6,7 +7,7 @@ import {
   ActionSimulateurViewModel,
   ExplicationRecommandationViewModel,
 } from '@/domaines/actions/ports/action.presenter';
-import { ActionDetail, ExplicationRecommandation } from '@/domaines/actions/ports/actions.repository';
+import { ActionDetail } from '@/domaines/actions/ports/actions.repository';
 import marked from '@/shell/actionMarkdownToHtml';
 import { buildUrl } from '@/shell/buildUrl';
 import cacherEmojisAuxLecteursDecrans from '@/shell/cacherEmojisAuxLecteursDecrans';
@@ -150,15 +151,15 @@ class ActionViewModelBuilder {
   }
 
   private static buildExplicationsRecommandations(
-    explicationsRecommandations: ExplicationRecommandation,
+    explicationsRecommandations: ExplicationsRecommandation,
   ): ExplicationRecommandationViewModel | undefined {
-    if (explicationsRecommandations.estExclu || explicationsRecommandations.listeExplications?.length === 0) {
+    if (!explicationsRecommandations.doiventEtreAffiches()) {
       return undefined;
     }
 
     return {
       titre: '<span class="text--bold">Recommandée</span> pour vous car',
-      justifications: explicationsRecommandations.listeExplications?.map(explicationInclusion => {
+      justifications: explicationsRecommandations.explications.map(explicationInclusion => {
         return explicationInclusion.labelExplication;
       }),
     };

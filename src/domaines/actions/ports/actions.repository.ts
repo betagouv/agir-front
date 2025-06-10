@@ -1,3 +1,4 @@
+import { ExplicationsRecommandation } from '@/domaines/actions/explicationsRecommandation';
 import { Quiz } from '@/domaines/quiz/ports/quiz.repository';
 import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 
@@ -60,15 +61,7 @@ export interface ActionDetail {
     label: string;
     url: string;
   }[];
-  explicationsRecommandations: ExplicationRecommandation;
-}
-
-export interface ExplicationRecommandation {
-  estExclu: boolean;
-  listeExplications: {
-    tag: string;
-    labelExplication: string;
-  }[];
+  explicationsRecommandations: ExplicationsRecommandation;
 }
 
 export enum TypeAction {
