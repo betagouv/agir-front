@@ -152,7 +152,7 @@ class ActionViewModelBuilder {
   private static buildExplicationsRecommandations(
     explicationsRecommandations: ExplicationRecommandation,
   ): ExplicationRecommandationViewModel | undefined {
-    if (explicationsRecommandations.estExclu || explicationsRecommandations.listeExplications?.length > 0) {
+    if (explicationsRecommandations.estExclu || explicationsRecommandations.listeExplications?.length === 0) {
       return undefined;
     }
 
