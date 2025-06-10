@@ -20,6 +20,7 @@
         @focus="ouvrirDialogueSiNecessaire"
         @blur="cacherDialogue"
         @keydown="naviguerListe"
+        :disabled="inputOptions?.disabled"
       />
     </div>
 
@@ -63,6 +64,10 @@
 
   defineProps<{
     labelId?: string;
+    inputOptions?: {
+      disabled?: boolean;
+      describedBy?: string;
+    };
   }>();
 
   type FeatureApiModel = {
@@ -95,6 +100,8 @@
   const chargerAdressesSimilaires = (adresse: string) => {
     adressesAffichees.value = [];
     indexSelectionne.value = -1;
+    coordonnees.value = undefined;
+    adresseRef.value = undefined;
 
     if (adresse.length <= 3) {
       cacherDialogue();

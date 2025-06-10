@@ -29,16 +29,18 @@
 <script lang="ts" setup>
   import { computed } from 'vue';
 
+  export type InputErreur = {
+    message: string;
+    afficher: boolean;
+  };
+
   const props = defineProps<{
     name: string;
     label: string;
     modelValue: string;
     description?: string;
     required?: boolean;
-    erreur?: {
-      message: string;
-      afficher: boolean;
-    };
+    erreur?: InputErreur;
     maxlength?: number;
     autofocus?: boolean;
     disabled?: boolean;
