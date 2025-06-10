@@ -4,15 +4,25 @@
     <p class="fr-mb-3w">Nous en avons besoin pour localiser votre compteur</p>
 
     <form @submit.prevent>
-      <div class="fr-mb-4w">
-        <label for="adresse" class="fr-mb-2w">Votre adresse <span class="fr-hint-text">Obligatoire</span></label>
+      <div class="fr-mb-4w fr-input-group" :class="erreurAdresse ? 'fr-input-group--error' : ''">
+        <label for="adresse" class="fr-mb-2w">
+          Votre adresse <span class="fr-hint-text" v-if="!affichagePRM">Obligatoire</span>
+        </label>
         <BarreDeRechercheAdresse
           class="fr-mt-1w"
           label-id="adresse"
           v-model:adresse="adresse"
           v-model:coordonnees="coordonnees"
           v-model:recherche="recherche"
+          :input-options="{
+            disabled: affichagePRM,
+            describedBy: erreurAdresse ? 'adresse-text-input-error-desc-error' : '',
+          }"
         />
+        <p v-if="erreurAdresse" id="adresse-text-input-error-desc-error" class="fr-error-text" aria-live="assertive">
+          {{ erreurAdresse }}
+        </p>
+
         <EnregistreurAdressePrincipale
           v-if="adresse && coordonnees && avecAdressePrivee"
           :adresse="adresse"
@@ -22,13 +32,15 @@
       </div>
 
       <InputText
+        v-model="nomDeFamille"
         class="fr-mb-4w"
         required
         name="nom-de-famille"
         label="Nom de famille (du titulaire du contrat électrique)"
-        :model-value="nomDeFamille"
         autocomplete="family-name"
-        description="Obligatoire"
+        :description="!affichagePRM ? 'Obligatoire' : ''"
+        :disabled="affichagePRM"
+        :erreur="erreurNomDeFamille"
       />
 
       <button
@@ -42,9 +54,10 @@
 
       <template v-if="affichagePRM">
         <InputText
+          autofocus
           label="Numéro de PRM"
           description="Il s’agit d’une suite de 14 chiffres qui identifie le logement sur le réseau électrique"
-          :model-value="numeroCompteurInput"
+          v-model="numeroCompteurInput"
           name="prm"
         />
 
@@ -88,9 +101,10 @@
           mandaté par celui-ci. J’autorise Watt Watchers à recueillir mon historique de consommation d’électricité sur 3
           ans (demi-heure, journée et puissance maximum quotidienne), ainsi qu’à analyser mes consommations."
         :model-value="acceptationCguWw"
+        :erreur="erreurCgu"
       />
 
-      <button class="fr-btn" @click="localiserMonCompteur" :aria-controls="MODALE_ID" data-fr-opened="false">
+      <button class="fr-btn" @click.prevent="localiserMonCompteur" :aria-controls="MODALE_ID" data-fr-opened="false">
         Localiser mon compteur
       </button>
     </form>
@@ -163,7 +177,8 @@
   import BallLoader from '@/components/custom/Thematiques/BallLoader.vue';
   import Accordeon from '@/components/dsfr/Accordeon.vue';
   import InputCheckboxUnitaire from '@/components/dsfr/InputCheckboxUnitaire.vue';
-  import InputText from '@/components/dsfr/InputText.vue';
+  import InputText, { InputErreur } from '@/components/dsfr/InputText.vue';
+  import { validationPrenomOuNom } from '@/components/validations/validationsChampsFormulaire';
   import {
     BarreDeRecherchePresenterImpl,
     BarreDeRechercheViewModel,
@@ -180,6 +195,12 @@
   const coordonnees = ref<Coordonnees>();
   const adresse = ref<AdresseBarreDeRecherche>();
   const nomDeFamille = ref<string>(utilisateur.nom);
+  const erreurCgu = ref<string>('');
+  const erreurAdresse = ref<string>('');
+  const erreurNomDeFamille = ref<InputErreur>({
+    message: 'Le nom de famille possède des caractères interdits',
+    afficher: false,
+  });
   const acceptationCguWw = ref<boolean>(false);
 
   const avecAdressePrivee = ref<boolean>(false);
@@ -203,12 +224,39 @@
   });
 
   function localiserMonCompteur() {
+    if (formulaireEstEnErreur()) return;
+
     estEnTentativeConnexion.value = true;
 
     setTimeout(() => {
       estEnTentativeConnexion.value = false;
       numeroCompteurInput.value = '283918274';
     }, 1000);
+  }
+
+  function formulaireEstEnErreur() {
+    let formulaireAUneErreur = false;
+
+    if (!acceptationCguWw.value) {
+      erreurCgu.value = 'Veuillez accepter les conditions générales d’utilisation de Watt Watchers pour continuer';
+      formulaireAUneErreur = true;
+    }
+
+    if (affichagePRM.value) {
+      return;
+    }
+
+    if (!validationPrenomOuNom(nomDeFamille.value)) {
+      erreurNomDeFamille.value.afficher = true;
+      formulaireAUneErreur = true;
+    }
+
+    if (!recherche.value && !coordonnees.value) {
+      erreurAdresse.value = 'Veuillez renseigner une adresse, puis la sélectionner dans le menu déroulant';
+      formulaireAUneErreur = true;
+    }
+
+    return formulaireAUneErreur;
   }
 
   function toggleAffichagePRM() {

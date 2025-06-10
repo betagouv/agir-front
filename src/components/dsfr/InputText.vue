@@ -30,6 +30,11 @@
 <script lang="ts" setup>
   import { computed } from 'vue';
 
+  export type InputErreur = {
+    message: string;
+    afficher: boolean;
+  };
+
   const props = defineProps<{
     name: string;
     label: string;
@@ -37,10 +42,7 @@
     description?: string;
     descriptionClass?: string;
     required?: boolean;
-    erreur?: {
-      message: string;
-      afficher: boolean;
-    };
+    erreur?: InputErreur;
     maxlength?: number;
     autofocus?: boolean;
     disabled?: boolean;

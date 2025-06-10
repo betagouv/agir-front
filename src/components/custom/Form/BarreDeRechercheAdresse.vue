@@ -21,6 +21,7 @@
         @focus="ouvrirDialogueSiNecessaire"
         @input="chargerAdresses"
         @keydown="naviguerListe"
+        :disabled="inputOptions?.disabled"
       />
     </div>
     <dialog ref="dialogRef" :open="dialogOuverte" class="adresseDialogue shadow">
@@ -64,6 +65,10 @@
 
   defineProps<{
     labelId?: string;
+    inputOptions?: {
+      disabled?: boolean;
+      describedBy?: string;
+    };
   }>();
 
   type FeatureApiModel = {
@@ -98,6 +103,8 @@
     erreurApi.value = '';
     adressesAffichees.value = [];
     indexSelectionne.value = -1;
+    coordonnees.value = undefined;
+    adresseRef.value = undefined;
 
     if (adresse.length <= 3) {
       cacherDialogue();
