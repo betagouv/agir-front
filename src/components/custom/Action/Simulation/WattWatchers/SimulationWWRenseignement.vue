@@ -58,8 +58,9 @@
           autofocus
           label="Numéro de PRM"
           description="Il s’agit d’une suite de 14 chiffres qui identifie le logement sur le réseau électrique"
-          v-model="numeroCompteurInput"
+          v-model="numeroPrmInput"
           name="prm"
+          :erreur="erreurNumeroPrm"
         />
 
         <section class="accordeon-prm">
@@ -110,7 +111,7 @@
   </section>
 
   <RenseignementModale
-    :numero-compteur-input="numeroCompteurInput"
+    :numero-compteur-input="numeroPrmInput"
     :modale-id="MODALE_ID"
     :connexion-prm-status="connexionPrmStatus"
   />
@@ -148,12 +149,16 @@
     message: 'Le nom de famille possède des caractères interdits',
     afficher: false,
   });
+  const erreurNumeroPrm = ref<InputErreur>({
+    message: 'Le numéro de PRM doit contenir 14 chiffres',
+    afficher: false,
+  });
   const acceptationCguWw = ref<boolean>(false);
 
   const avecAdressePrivee = ref<boolean>(false);
   const connexionPrmStatus = ref<ConnexionPRMStatus>(ConnexionPRMStatus.PAS_COMMENCE);
   const affichagePRM = ref<boolean>(false);
-  const numeroCompteurInput = ref<string>('');
+  const numeroPrmInput = ref<string>('');
 
   const logementRepository = new LogementRepositoryAxios();
   const recupererAdressePourBarreDeRechercheUsecase = new RecupererAdressePourBarreDeRechercheUsecase(
@@ -178,18 +183,28 @@
     if (formulaireEstEnErreur()) return;
 
     const modalElement = document.getElementById(MODALE_ID);
-    window.dsfr(modalElement).modal.disclose();
+    if (modalElement && window.dsfr) {
+      window.dsfr(modalElement).modal.disclose();
+    }
 
     connexionPrmStatus.value = ConnexionPRMStatus.EN_COURS;
 
     setTimeout(() => {
       connexionPrmStatus.value = ConnexionPRMStatus.SUCCES;
-      numeroCompteurInput.value = '283918274';
+      numeroPrmInput.value = '283918274';
     }, 1000);
+  }
+
+  function resetErreursFormulaires() {
+    erreurCgu.value = '';
+    erreurNumeroPrm.value.afficher = false;
+    erreurNomDeFamille.value.afficher = false;
+    erreurAdresse.value = '';
   }
 
   function formulaireEstEnErreur() {
     let formulaireAUneErreur = false;
+    resetErreursFormulaires();
 
     if (!acceptationCguWw.value) {
       erreurCgu.value = 'Veuillez accepter les conditions générales d’utilisation de Watt Watchers pour continuer';
@@ -197,6 +212,10 @@
     }
 
     if (affichagePRM.value) {
+      if (numeroPrmInput.value.length !== 14 || !/^\d+$/.test(numeroPrmInput.value)) {
+        erreurNumeroPrm.value.afficher = true;
+        formulaireAUneErreur = true;
+      }
       return formulaireAUneErreur;
     }
 
