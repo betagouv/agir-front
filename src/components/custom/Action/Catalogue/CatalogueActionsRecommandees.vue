@@ -133,4 +133,8 @@
     width: 70%;
     margin: 0 auto;
   }
+
+  .fr-card__content {
+    padding-bottom: 0.5rem !important;
+  }
 </style>

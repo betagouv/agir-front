@@ -1,5 +1,5 @@
 <template>
-  <section class="fr-pb-3w headerThematique background--beige-gris-galet-950-100">
+  <section class="fr-pb-1w headerThematique background--beige-gris-galet-950-100">
     <div class="fr-container">
       <div class="fr-pt-7w fr-pb-3w fr-pb-1w">
         <h1 class="fr-h1 fr-col fr-m-0 fr-pb-2w display-inline-block">
