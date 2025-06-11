@@ -28,10 +28,7 @@ export class ActionsPresenterImpl implements ActionsPresenter {
 
         return {
           code: action.code,
-          titre:
-            action.type === 'quizz'
-              ? `Quiz - ${await marked.parseInline(action.titre)}`
-              : await marked.parseInline(action.titre),
+          titre: await marked.parseInline(action.titre),
           dejaVue: action.dejaVue,
           url: {
             name: RouteActionsName.ACTION_INDIVIDUELLE,
