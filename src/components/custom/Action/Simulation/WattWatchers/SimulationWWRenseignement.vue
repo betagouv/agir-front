@@ -3,7 +3,7 @@
     <h2 class="fr-h3 fr-mb-1w">Quelle est votre adresse ?</h2>
     <p class="fr-mb-3w">Nous en avons besoin pour localiser votre compteur</p>
 
-    <form @submit.prevent>
+    <form @submit.prevent="localiserMonCompteur">
       <div class="fr-mb-4w fr-input-group" :class="erreurAdresse ? 'fr-input-group--error' : ''">
         <label for="adresse" class="fr-mb-2w">
           Votre adresse <span class="fr-hint-text" v-if="!affichagePRM">Obligatoire</span>
@@ -44,6 +44,7 @@
       />
 
       <button
+        type="button"
         class="fr-btn fr-btn--tertiary fr-btn--icon-left fr-mb-3w"
         :class="affichagePRM ? 'fr-icon-eye-off-fill' : 'fr-icon-settings-5-fill'"
         @click="toggleAffichagePRM"
@@ -100,81 +101,27 @@
         label="En activant le suivi de ma consommation, je déclare sur l’honneur être titulaire du compte électrique ou être
           mandaté par celui-ci. J’autorise Watt Watchers à recueillir mon historique de consommation d’électricité sur 3
           ans (demi-heure, journée et puissance maximum quotidienne), ainsi qu’à analyser mes consommations."
-        :model-value="acceptationCguWw"
+        v-model="acceptationCguWw"
         :erreur="erreurCgu"
       />
 
-      <button class="fr-btn" @click.prevent="localiserMonCompteur" :aria-controls="MODALE_ID" data-fr-opened="false">
-        Localiser mon compteur
-      </button>
+      <button type="submit" class="fr-btn">Localiser mon compteur</button>
     </form>
   </section>
 
-  <Teleport to="body">
-    <Modale :id="MODALE_ID" :is-footer-actions="true" :radius="false" labelId="label-id" size="s">
-      <template v-slot:contenu>
-        <template v-if="estEnTentativeConnexion"><BallLoader text="Localisation de votre compteur..." /></template>
-        <template v-else-if="numeroCompteurInput">
-          <div class="flex flex-center fr-mb-2w">
-            <img src="/prise-fonctionnelle.svg" alt="" class="margin-x-auto" />
-          </div>
-          <h1 id="label-id" class="fr-modal__title">Connexion établie</h1>
-          <p class="fr-mb-1w">Ces informations sont-elles correctes ?</p>
-          <div class="recapitulatif">
-            <ul class="text--bold list-style-none fr-p-2w">
-              <li class="fr-mb-1w">Mr. NOM</li>
-              <li class="text--normal fr-mb-1w">
-                <span class="fr-tag fr-icon-map-pin-2-fill fr-tag--icon-left">à Commune</span>
-              </li>
-              <li>Compteur #{{ numeroCompteurInput }}</li>
-            </ul>
-          </div>
-        </template>
-        <template v-else>
-          <div class="flex flex-center fr-mb-2w">
-            <img src="/prise-non-fonctionnelle.svg" alt="" class="margin-x-auto" />
-          </div>
-          <h1 id="label-id" class="fr-modal__title">La connexion a échouée</h1>
-          <p class="fr-mb-1w">Nous n’avons pas trouvé de compteur relié aux informations que nous vous avez données.</p>
-        </template>
-      </template>
-      <template v-slot:footer>
-        <template v-if="estEnTentativeConnexion"></template>
-        <template v-else-if="numeroCompteurInput">
-          <ul
-            class="fr-btns-group fr-btns-group--right fr-btns-group--inline-reverse fr-btns-group--inline-lg fr-btns-group--icon-left"
-          >
-            <li>
-              <button class="fr-btn">Continuer</button>
-            </li>
-            <li>
-              <button :aria-controls="MODALE_ID" class="fr-btn fr-btn--secondary">Modifier le numéro</button>
-            </li>
-          </ul>
-        </template>
-        <template v-else>
-          <ul
-            class="fr-btns-group fr-btns-group--right fr-btns-group--inline-reverse fr-btns-group--inline-lg fr-btns-group--icon-left"
-          >
-            <li>
-              <button class="fr-btn">Renseigner mon numéro de compteur</button>
-            </li>
-            <li>
-              <button :aria-controls="MODALE_ID" class="fr-btn fr-btn--secondary">Retour</button>
-            </li>
-          </ul>
-        </template>
-      </template>
-    </Modale>
-  </Teleport>
+  <RenseignementModale
+    :numero-compteur-input="numeroCompteurInput"
+    :modale-id="MODALE_ID"
+    :connexion-prm-status="connexionPrmStatus"
+  />
 </template>
 
 <script setup lang="ts">
   import { onMounted, ref } from 'vue';
+  import { ConnexionPRMStatus } from '@/components/custom/Action/Simulation/WattWatchers/connexionPrmStatus';
+  import RenseignementModale from '@/components/custom/Action/Simulation/WattWatchers/RenseignementModale.vue';
   import BarreDeRechercheAdresse from '@/components/custom/Form/BarreDeRechercheAdresse.vue';
   import EnregistreurAdressePrincipale from '@/components/custom/Form/EnregistreurAdressePrincipale.vue';
-  import Modale from '@/components/custom/Modale/Modale.vue';
-  import BallLoader from '@/components/custom/Thematiques/BallLoader.vue';
   import Accordeon from '@/components/dsfr/Accordeon.vue';
   import InputCheckboxUnitaire from '@/components/dsfr/InputCheckboxUnitaire.vue';
   import InputText, { InputErreur } from '@/components/dsfr/InputText.vue';
@@ -204,7 +151,7 @@
   const acceptationCguWw = ref<boolean>(false);
 
   const avecAdressePrivee = ref<boolean>(false);
-  const estEnTentativeConnexion = ref<boolean>(true);
+  const connexionPrmStatus = ref<ConnexionPRMStatus>(ConnexionPRMStatus.PAS_COMMENCE);
   const affichagePRM = ref<boolean>(false);
   const numeroCompteurInput = ref<string>('');
 
@@ -223,13 +170,20 @@
     );
   });
 
+  function toggleAffichagePRM() {
+    affichagePRM.value = !affichagePRM.value;
+  }
+
   function localiserMonCompteur() {
     if (formulaireEstEnErreur()) return;
 
-    estEnTentativeConnexion.value = true;
+    const modalElement = document.getElementById(MODALE_ID);
+    window.dsfr(modalElement).modal.disclose();
+
+    connexionPrmStatus.value = ConnexionPRMStatus.EN_COURS;
 
     setTimeout(() => {
-      estEnTentativeConnexion.value = false;
+      connexionPrmStatus.value = ConnexionPRMStatus.SUCCES;
       numeroCompteurInput.value = '283918274';
     }, 1000);
   }
@@ -243,7 +197,7 @@
     }
 
     if (affichagePRM.value) {
-      return;
+      return formulaireAUneErreur;
     }
 
     if (!validationPrenomOuNom(nomDeFamille.value)) {
@@ -258,17 +212,9 @@
 
     return formulaireAUneErreur;
   }
-
-  function toggleAffichagePRM() {
-    affichagePRM.value = !affichagePRM.value;
-  }
 </script>
 
 <style scoped>
-  .recapitulatif {
-    background-color: #f7f7fc;
-  }
-
   .accordeon-prm img {
     height: 7.5rem;
   }

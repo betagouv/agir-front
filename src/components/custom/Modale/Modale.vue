@@ -7,6 +7,7 @@
             <div class="fr-modal__header">
               <button class="fr-btn--close fr-btn" :aria-controls="id">Fermer</button>
             </div>
+            <slot name="contenuEtFooter" />
             <div class="fr-modal__content fr-mb-0">
               <slot name="contenu" />
             </div>
