@@ -1,9 +1,11 @@
+import { ExplicationsRecommandation } from '@/domaines/actions/explicationsRecommandation';
 import {
   ActionBilanViewModel,
   ActionClassiqueViewModel,
   ActionPresenter,
   ActionQuizzesViewModel,
   ActionSimulateurViewModel,
+  ExplicationRecommandationViewModel,
 } from '@/domaines/actions/ports/action.presenter';
 import { ActionDetail } from '@/domaines/actions/ports/actions.repository';
 import marked from '@/shell/actionMarkdownToHtml';
@@ -132,6 +134,7 @@ class ActionViewModelBuilder {
         label: source.label,
         url: source.url,
       })),
+      explicationsRecommandation: this.buildExplicationsRecommandations(action.explicationsRecommandations),
     };
   }
 
@@ -145,6 +148,21 @@ class ActionViewModelBuilder {
       montantMaximum: aide.montantMaximum ? `${MontantAfficheEnFRBuilder.build(aide.montantMaximum)}` : undefined,
       estGratuit: aide.estGratuit,
     }));
+  }
+
+  private static buildExplicationsRecommandations(
+    explicationsRecommandations: ExplicationsRecommandation,
+  ): ExplicationRecommandationViewModel | undefined {
+    if (!explicationsRecommandations.doiventEtreAffiches()) {
+      return undefined;
+    }
+
+    return {
+      titre: '<span class="text--bold">Recommandée</span> pour vous car',
+      justifications: explicationsRecommandations.explications.map(explicationInclusion => {
+        return explicationInclusion.labelExplication;
+      }),
+    };
   }
 }
 

@@ -9,6 +9,7 @@ import { QuizDifficulte } from '@/domaines/quiz/ports/quiz.repository';
 import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 import { ChargerActionSimulateurUsecase } from '@/domaines/actions/chargerActionSimulateur.usecase';
 import { ChargerActionBilanUsecase } from '@/domaines/actions/chargerActionBilan.usecase';
+import { ExplicationsRecommandation } from '@/domaines/actions/explicationsRecommandation';
 
 describe("Fichier de tests concernant la récupération d'une action de type quiz", () => {
   it("En donnant l'id d'une action, on devrait pouvoir récupérer son entiereté", async () => {
@@ -109,6 +110,9 @@ describe("Fichier de tests concernant la récupération d'une action de type qui
       faq: [],
       sources: [],
       idEnchainementKYCs: '',
+      explicationsRecommandations: new ExplicationsRecommandation(true, [
+        { labelExplication: "Vous n'aimez pas les quizz", tag: 'pas-quizz' },
+      ]),
     };
     const usecase = new ChargerActionUsecase(
       new ChargerActionStrategyFactory(
@@ -202,6 +206,7 @@ describe("Fichier de tests concernant la récupération d'une action de type qui
         ],
         articlesRecommandes: [],
         sources: [],
+        explicationsRecommandation: undefined,
       });
     }
   });
