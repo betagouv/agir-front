@@ -56,11 +56,12 @@
       <template v-if="affichagePRM">
         <InputText
           autofocus
+          name="prm"
           label="Numéro de PRM"
           description="Il s’agit d’une suite de 14 chiffres qui identifie le logement sur le réseau électrique"
           v-model="numeroPrmInput"
-          name="prm"
           :erreur="erreurNumeroPrm"
+          :maxlength="14"
         />
 
         <section class="accordeon-prm">
@@ -150,7 +151,7 @@
     afficher: false,
   });
   const erreurNumeroPrm = ref<InputErreur>({
-    message: 'Le numéro de PRM doit contenir 14 chiffres',
+    message: '',
     afficher: false,
   });
   const acceptationCguWw = ref<boolean>(false);
@@ -212,10 +213,18 @@
     }
 
     if (affichagePRM.value) {
-      if (numeroPrmInput.value.length !== 14 || !/^\d+$/.test(numeroPrmInput.value)) {
-        erreurNumeroPrm.value.afficher = true;
-        formulaireAUneErreur = true;
+      const estUnNombreValide = /^\d+$/.test(numeroPrmInput.value);
+      const longueurCorrecte = numeroPrmInput.value.length === 14;
+
+      if (estUnNombreValide && longueurCorrecte) {
+        return formulaireAUneErreur;
       }
+
+      erreurNumeroPrm.value.message = !estUnNombreValide
+        ? 'Le numéro de PRM ne doit contenir que des chiffres.'
+        : `Le numéro de PRM doit contenir 14 chiffres. Votre numéro comptabilise actuellement ${numeroPrmInput.value.length} chiffres.`;
+      erreurNumeroPrm.value.afficher = true;
+      formulaireAUneErreur = true;
       return formulaireAUneErreur;
     }
 
