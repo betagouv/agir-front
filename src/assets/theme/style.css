@@ -576,11 +576,6 @@
     white-space: nowrap;
 }
 
-.background--image--coach {
-    background-image: url('/bg_changement_situation.webp');
-    background-size: cover;
-}
-
 .opacity-6 {
     opacity: 0.6;
 }
@@ -661,9 +656,16 @@
         background: #DDB7E6;
     }
     66% {
-        background:#00A081;
+        background: #00A081;
     }
     100% {
         background: #DDB7E6;
     }
+}
+
+.fr-card--sm.fr-enlarge-button:not(.fr-card--no-icon) .fr-card__title a:after,
+.fr-card--sm.fr-enlarge-button:not(.fr-card--no-icon) .fr-card__title button:after,
+.fr-card--sm.fr-enlarge-link:not(.fr-card--no-icon) .fr-card__title a:after,
+.fr-card--sm.fr-enlarge-link:not(.fr-card--no-icon) .fr-card__title button:after {
+    --icon-size: 1.5rem !important;
 }

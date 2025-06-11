@@ -1,6 +1,6 @@
 <template>
   <div class="fr-grid-row fr-grid-row--gutters fr-mb-1w">
-    <div v-for="aide in aides" :key="aide.titre" class="fr-col-12 fr-col-md-6">
+    <div v-for="aide in aides" :key="aide.titre" :class="['fr-col-12', troisColonnes ? 'fr-col-md-4' : 'fr-col-md-6']">
       <router-link
         :to="{
           name: RouteAidesName.AIDE_CONSULTATION,
@@ -46,6 +46,7 @@
 
   defineProps<{
     aides: ActionAideViewModel[];
+    troisColonnes?: boolean;
   }>();
 
   const trackAideClick = aide => {

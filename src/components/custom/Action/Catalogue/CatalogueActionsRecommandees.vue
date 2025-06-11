@@ -1,10 +1,14 @@
 <template>
-  <div class="fr-grid-row fr-grid-row--gutters fr-mt-2w">
-    <section v-for="action in actions" :key="action.code" :class="cardClasses">
-      <div v-if="!loadingActions[action.code]" class="fr-card fr-card--horizontal fr-card--sm relative">
+  <section class="fr-grid-row fr-grid-row--gutters">
+    <div v-for="action in actions" :key="action.code" :class="cardClasses">
+      <div class="fr-card fr-enlarge-link fr-card--horizontal fr-card--sm relative">
         <div class="fr-card__body">
           <div class="fr-card__content">
-            <h3 class="fr-card__title" v-html="action.titre" />
+            <h3 class="fr-card__title">
+              <router-link :to="action.url">
+                <span class="text--black" v-html="action.titre" />
+              </router-link>
+            </h3>
             <ul class="fr-card__desc list-style-none fr-p-0 flex gap--small flex-wrap">
               <li v-if="action.nombreDePersonnes" class="text--bleu fr-icon-team-line fr-pb-0">
                 <span class="text--gris fr-pl-1w" v-html="action.nombreDePersonnes" />&nbsp;
@@ -18,63 +22,47 @@
             <ul
               class="fr-btns-group fr-btns-group--inline fr-btns-group--sm fr-btns-group--icon-left flex-space-between"
             >
-              <li>
-                <button
-                  class="fr-btn fr-btn--tertiary-no-outline fr-icon-refresh-line fr-icon--sm fr-btn--icon-left fr-mx-0"
-                  @click="supprimerCarte(action.url.params.type, action.code)"
-                >
-                  Proposez moi autre chose
-                </button>
-              </li>
-
-              <li>
-                <router-link :to="action.url" class="fr-btn fr-btn--secondary">Découvrir</router-link>
-              </li>
+              <li></li>
             </ul>
           </div>
         </div>
       </div>
-      <div
-        v-else
-        class="fr-card fr-card--horizontal relative flex flex-center items-center justify-center flex-column p-4 full-width"
-      >
-        <div class="fr-card__body">
-          <div class="fr-card__content">
-            <span aria-live="polite" class="text--center text--bold" role="status">Chargement...</span>
-            <div class="ball-loader fr-my-3w fr-mx-auto" />
-          </div>
-        </div>
-      </div>
-    </section>
-    <section v-if="actions.length === 0" class="width-70 text--center fr-my-4w">
-      <img src="/etagere-vide.webp" alt="" class="fr-mb-3w" width="170" />
-      <h3 class="fr-h3 fr-mb-2w">C'est tout, pour le moment</h3>
-      <p class="fr-mb-4w">
-        Chaque mois, J’agis s’enrichit en nouveautés pour vous proposer toujours plus d’actions qui vous correspondent.
-        En attendant, découvrez notre
-        <router-link :to="{ name: RouteActionsName.CATALOGUE_ACTION }" class="text--bleu">
-          catalogue complet d’actions
-        </router-link>
-        ou recommencez l’expérience.
-      </p>
+    </div>
+    <button
+      class="fr-btn fr-btn--tertiary-no-outline fr-icon-refresh-line fr-icon--sm fr-btn--icon-left fr-mx-0"
+      @click="supprimerCarte"
+    >
+      Proposez moi autre chose
+    </button>
+  </section>
+  <section v-if="actions.length === 0" class="width-70 text--center fr-my-4w">
+    <img alt="" class="fr-mb-3w" src="/etagere-vide.webp" width="170" />
+    <h3 class="fr-h3 fr-mb-2w">C'est tout, pour le moment</h3>
+    <p class="fr-mb-4w">
+      Chaque mois, J’agis s’enrichit en nouveautés pour vous proposer toujours plus d’actions qui vous correspondent. En
+      attendant, découvrez notre
+      <router-link :to="{ name: RouteActionsName.CATALOGUE_ACTION }" class="text--bleu">
+        catalogue complet d’actions
+      </router-link>
+      ou recommencez l’expérience.
+    </p>
 
-      <div class="flex flex-center gap--small">
-        <button class="fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-refresh-line" @click="resetParcours">
-          Recommencer le parcours
-        </button>
-        <router-link
-          :to="{ name: RouteThematiquesName.THEMATIQUE, params: { id: redirection.id } }"
-          class="fr-btn fr-btn--icon-left fr-icon-refresh-line"
-        >
-          Explorer "{{ redirection.label }}"
-        </router-link>
-      </div>
-    </section>
-  </div>
+    <div class="flex flex-center gap--small">
+      <button class="fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-refresh-line" @click="resetParcours">
+        Recommencer le parcours
+      </button>
+      <router-link
+        :to="{ name: RouteThematiquesName.THEMATIQUE, params: { id: redirection.id } }"
+        class="fr-btn fr-btn--icon-left fr-icon-refresh-line"
+      >
+        Explorer "{{ redirection.label }}"
+      </router-link>
+    </div>
+  </section>
 </template>
 
 <script lang="ts" setup>
-  import { computed, ref } from 'vue';
+  import { computed } from 'vue';
   import { ActionViewModel } from '@/domaines/actions/ports/actions.presenter';
   import { ThematiquesRepositoryAxios } from '@/domaines/thematiques/adapters/thematiques.repository.axios';
   import { ClefThematiqueAPI, MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
@@ -91,16 +79,18 @@
     resetParcours: () => Promise<void>;
   }>();
 
-  const loadingActions = ref<{ [key: string]: boolean }>({});
-
-  async function supprimerCarte(actionType: string, actionId: string) {
-    loadingActions.value[actionId] = true;
-    const supprimerAction = new SupprimerActionDesActionsRecommandeesUsecase(new ThematiquesRepositoryAxios());
-    await supprimerAction.execute(utilisateurStore().utilisateur.id, props.thematiqueId, actionType, actionId);
-
+  async function supprimerCarte() {
+    for (const action of props.actions) {
+      const supprimerAction = new SupprimerActionDesActionsRecommandeesUsecase(new ThematiquesRepositoryAxios());
+      await supprimerAction.execute(
+        utilisateurStore().utilisateur.id,
+        props.thematiqueId,
+        action.url.params.type,
+        action.code,
+      );
+    }
     setTimeout(async () => {
       await props.rafraichirActions();
-      delete loadingActions.value[actionId];
     }, 500);
   }
 
