@@ -1,11 +1,5 @@
 <template>
-  <form
-    @submit.prevent
-    class="fr-search-bar position--relative"
-    id="header-search"
-    role="search"
-    @blur="cacherDialogue"
-  >
+  <div class="fr-search-bar position--relative" id="header-search" @blur="cacherDialogue">
     <label class="fr-label" for="recherche-adresse-input" v-if="!labelId">Renseignez votre adresse</label>
     <div class="fr-input-wrap fr-icon-search-line full-width">
       <input
@@ -58,7 +52,7 @@
         </li>
       </ul>
     </dialog>
-  </form>
+  </div>
 </template>
 
 <script setup lang="ts">

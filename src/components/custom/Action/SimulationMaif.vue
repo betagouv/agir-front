@@ -1,13 +1,15 @@
 <template>
   <section class="fr-mb-4w fr-p-1v">
     <h2 id="label-barre-de-recherche" class="fr-h3">Choisissez une adresse</h2>
-    <ServiceBarreDeRechercheAdresse
-      v-model:adresse="adresse"
-      v-model:coordonnees="coordonnees"
-      v-model:recherche="recherche"
-      label-id="label-barre-de-recherche"
-      @update:coordonnees="chargerDonneesPourNouvelleAdresse"
-    />
+    <form @submit.prevent>
+      <BarreDeRechercheAdresse
+        v-model:adresse="adresse"
+        v-model:coordonnees="coordonnees"
+        v-model:recherche="recherche"
+        label-id="label-barre-de-recherche"
+        @update:coordonnees="chargerDonneesPourNouvelleAdresse"
+      />
+    </form>
 
     <Callout
       v-if="avecAdressePrivee"
@@ -64,7 +66,7 @@
 <script lang="ts" setup>
   import { nextTick, onMounted, ref } from 'vue';
   import MaifRisques from '@/components/custom/Action/MaifRisques.vue';
-  import ServiceBarreDeRechercheAdresse from '@/components/custom/Service/ServiceBarreDeRechercheAdresse.vue';
+  import BarreDeRechercheAdresse from '@/components/custom/Form/BarreDeRechercheAdresse.vue';
   import BallLoader from '@/components/custom/Thematiques/BallLoader.vue';
   import Callout from '@/components/dsfr/Callout.vue';
   import CarteExterne from '@/components/dsfr/CarteExterne.vue';

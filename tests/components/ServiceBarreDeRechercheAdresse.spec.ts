@@ -1,5 +1,5 @@
 import { fireEvent, render, RenderResult, waitFor } from '@testing-library/vue';
-import ServiceBarreDeRechercheAdresse from '@/components/custom/Service/ServiceBarreDeRechercheAdresse.vue';
+import BarreDeRechercheAdresse from '@/components/custom/Form/BarreDeRechercheAdresse.vue';
 import axios from 'redaxios';
 import { beforeEach } from 'vitest';
 
@@ -12,7 +12,7 @@ describe('Tests pour le composant ServiceBarreDeRechercheAdresse', () => {
   });
 
   it('Input doit avoir les bons attributs au chargement', () => {
-    page = render(ServiceBarreDeRechercheAdresse);
+    page = render(BarreDeRechercheAdresse);
     const input: HTMLInputElement = page.getByRole('combobox', { name: 'Renseignez votre adresse' });
     expect(input).toBeDefined();
     expect(input.getAttribute('autocomplete')).toBe('off');
@@ -28,7 +28,7 @@ describe('Tests pour le composant ServiceBarreDeRechercheAdresse', () => {
         features: [],
       },
     });
-    page = render(ServiceBarreDeRechercheAdresse);
+    page = render(BarreDeRechercheAdresse);
     const input = page.getByRole('combobox');
     await fireEvent.update(input, "chaussée d'antin paris 75000");
 
@@ -68,7 +68,7 @@ describe('Tests pour le composant ServiceBarreDeRechercheAdresse', () => {
         },
       });
 
-      page = render(ServiceBarreDeRechercheAdresse);
+      page = render(BarreDeRechercheAdresse);
       const input = page.getByRole('combobox');
       await fireEvent.update(input, 'rue de');
 

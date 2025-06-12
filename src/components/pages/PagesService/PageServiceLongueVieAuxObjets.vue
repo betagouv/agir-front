@@ -2,18 +2,18 @@
   <div class="fr-container">
     <ServiceSkeletonConditionnel
       :is-loading="pageEstEnChargement"
-      :view-model-existe="viewModel !== undefined"
       :message-erreur="serviceErreur"
+      :view-model-existe="viewModel !== undefined"
     >
       <PageServiceTemplate v-if="viewModel?.aside" :aside="viewModel.aside">
         <h1 class="fr-h2 fr-mb-1w">
           <ServiceSelect
             v-if="viewModel?.categories"
             id="categories"
+            :code-derniere-recherche-type="typeDeRecherche"
             :options="viewModel.categories"
             label="Choisir une catégorie"
             @update="modifierType"
-            :code-derniere-recherche-type="typeDeRecherche"
           />
           à proximité de chez moi
         </h1>
@@ -22,12 +22,25 @@
         <section
           class="fr-my-6w background--white fr-px-2w fr-py-3w flex flex-space-between align-items--center flex-wrap gap--small"
         >
-          <h2 class="fr-h4 fr-mb-0" id="recherche-par-adresse-label">Recherche par adresse</h2>
-          <ServiceBarreDeRechercheAdresse
-            v-model:recherche="recherche"
-            v-model:coordonnees="coordonnees"
-            class="fr-col-12 fr-col-md-7"
-            labelId="recherche-par-adresse-label"
+          <h2 id="recherche-par-adresse-label" class="fr-h4 fr-mb-0">Recherche par adresse</h2>
+          <form class="fr-col-12 fr-col-md-7" @submit.prevent>
+            <BarreDeRechercheAdresse
+              v-model:adresse="adresse"
+              v-model:coordonnees="coordonnees"
+              v-model:recherche="recherche"
+              labelId="recherche-par-adresse-label"
+              @update:coordonnees="chargerDonneesPourNouvelleAdresse"
+            />
+          </form>
+          <Callout
+            v-if="avecAdressePrivee"
+            :button="{
+              text: 'Choisir comme adresse principale',
+              onClick: definirAdressePrincipale,
+            }"
+            :icone-information="false"
+            class="fr-mt-3w"
+            texte="Voulez-vous utiliser cette adresse comme votre adresse principale à l’avenir&nbsp;?"
           />
         </section>
         <section v-if="viewModel && (viewModel as ServiceRechercheLongueVieAuxObjetsViewModelAvecResultats).favoris">
@@ -67,15 +80,24 @@
 </template>
 
 <script lang="ts" setup>
-  import { nextTick, ref } from 'vue';
+  import { nextTick, onMounted, ref } from 'vue';
+  import BarreDeRechercheAdresse from '@/components/custom/Form/BarreDeRechercheAdresse.vue';
   import PageServiceTemplate from '@/components/custom/Service/PageServiceTemplate.vue';
-  import ServiceBarreDeRechercheAdresse from '@/components/custom/Service/ServiceBarreDeRechercheAdresse.vue';
   import ServiceFavoris from '@/components/custom/Service/ServiceFavoris.vue';
   import ServiceListeCarte from '@/components/custom/Service/ServiceListeCarte.vue';
   import ServiceSelect from '@/components/custom/Service/ServiceSelect.vue';
   import ServiceSkeletonCartes from '@/components/custom/Service/ServiceSkeletonCartes.vue';
   import ServiceSkeletonConditionnel from '@/components/custom/Service/ServiceSkeletonConditionnel.vue';
+  import Callout from '@/components/dsfr/Callout.vue';
   import { useRechercheService } from '@/composables/service/useRechercheService';
+  import {
+    BarreDeRecherchePresenterImpl,
+    BarreDeRechercheViewModel,
+  } from '@/domaines/logement/adapters/barreDeRecherche.presenter.impl';
+  import { LogementRepositoryAxios } from '@/domaines/logement/adapters/logement.repository.axios';
+  import { PatcherInformationLogementUsecase } from '@/domaines/logement/patcherInformationLogement.usecase';
+  import { RecupererAdressePourBarreDeRechercheUsecase } from '@/domaines/logement/recupererAdressePourBarreDeRecherche.usecase';
+  import { Logement } from '@/domaines/logement/recupererInformationLogement.usecase';
   import {
     ServiceRechercheLongueVieAuxObjetsPresenterImpl,
     ServiceRechercheLongueVieAuxObjetsViewModel,
@@ -83,6 +105,8 @@
   } from '@/domaines/serviceRecherche/longueVieAuxObjets/adapters/serviceRechercheLongueVieAuxObjets.presenter.impl';
   import { ServiceRechercheLongueVieAuxObjetsAxios } from '@/domaines/serviceRecherche/longueVieAuxObjets/adapters/serviceRechercheLongueVieAuxObjets.repository.axios';
   import { RecupererServiceLongueVieAuxObjetsUsecase } from '@/domaines/serviceRecherche/longueVieAuxObjets/recupererServiceLongueVieAuxObjets.usecase';
+  import { sessionAppRawDataStorage } from '@/shell/appRawDataStorage';
+  import { AdresseBarreDeRecherche } from '@/shell/coordonneesType';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const serviceListeCarte = ref<InstanceType<typeof ServiceListeCarte>>();
@@ -90,6 +114,12 @@
   const recupererServiceLongueVieAuxObjetsUsecase = new RecupererServiceLongueVieAuxObjetsUsecase(
     new ServiceRechercheLongueVieAuxObjetsAxios(),
   );
+  const adresse = ref<AdresseBarreDeRecherche>();
+  const logementRepository = new LogementRepositoryAxios();
+  const recupererAdressePourBarreDeRechercheUsecase = new RecupererAdressePourBarreDeRechercheUsecase(
+    logementRepository,
+  );
+  const avecAdressePrivee = ref<boolean>(false);
 
   const {
     recherche,
@@ -128,4 +158,43 @@
       coordonnees.value,
     );
   }
+
+  function definirAdressePrincipale() {
+    if (!adresse.value || !coordonnees.value) return;
+
+    const nouveauLogement: Partial<Logement> = {
+      coordonnees: {
+        latitude: coordonnees.value.latitude,
+        longitude: coordonnees.value.longitude,
+      },
+      codePostal: adresse.value.codePostal,
+      codeEpci: adresse.value.codeEpci,
+      numeroRue: adresse.value.numeroRue,
+      rue: adresse.value.rue,
+    };
+
+    const patcherInformationLogementUsecase = new PatcherInformationLogementUsecase(
+      new LogementRepositoryAxios(),
+      sessionAppRawDataStorage,
+    );
+    patcherInformationLogementUsecase.execute(utilisateurStore().utilisateur.id, nouveauLogement).then(async () => {
+      avecAdressePrivee.value = false;
+    });
+  }
+
+  async function chargerDonneesPourNouvelleAdresse() {
+    await nextTick();
+    avecAdressePrivee.value = true;
+  }
+
+  onMounted(async () => {
+    await recupererAdressePourBarreDeRechercheUsecase.execute(
+      utilisateurStore().utilisateur.id,
+      new BarreDeRecherchePresenterImpl(async (barreDeRechercheViewModel: BarreDeRechercheViewModel) => {
+        coordonnees.value = barreDeRechercheViewModel.coordonnees;
+        recherche.value = barreDeRechercheViewModel.recherche;
+        await lancerRecherche();
+      }),
+    );
+  });
 </script>
