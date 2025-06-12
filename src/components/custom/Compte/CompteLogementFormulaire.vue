@@ -18,7 +18,7 @@
       </div>
       <div class="fr-mb-4w">
         <h3 class="fr-h4">Où habitez-vous ?</h3>
-        <ServiceBarreDeRechercheAdresse
+        <BarreDeRechercheAdresse
           v-if="doitAfficherBarreAdresse"
           v-model:adresse="adresseBarreDeRecherche"
           v-model:recherche="recherche"
@@ -124,9 +124,9 @@
   import Alert from '@/components/custom/Alert.vue';
   import CarteInfo from '@/components/custom/CarteInfo.vue';
   import DPE from '@/components/custom/DPE.vue';
+  import BarreDeRechercheAdresse from '@/components/custom/Form/BarreDeRechercheAdresse.vue';
   import BoutonsRadio from '@/components/custom/Form/BoutonsRadio.vue';
   import InputNumberHorizontal from '@/components/custom/Form/InputNumberHorizontal.vue';
-  import ServiceBarreDeRechercheAdresse from '@/components/custom/Service/ServiceBarreDeRechercheAdresse.vue';
   import InputCodePostal from '@/components/dsfr/InputCodePostal.vue';
   import { useAlerte } from '@/composables/useAlerte';
   import {

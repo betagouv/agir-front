@@ -1,11 +1,5 @@
 <template>
-  <form
-    @submit.prevent
-    class="fr-search-bar position--relative"
-    id="header-search"
-    role="search"
-    @blur="cacherDialogue"
-  >
+  <div class="fr-search-bar position--relative" id="header-search" @blur="cacherDialogue">
     <label class="fr-label" for="recherche-adresse-input" v-if="!labelId">Renseignez votre adresse</label>
     <div class="fr-input-wrap fr-icon-search-line full-width">
       <input
@@ -26,6 +20,7 @@
         @focus="ouvrirDialogueSiNecessaire"
         @blur="cacherDialogue"
         @keydown="naviguerListe"
+        :disabled="inputOptions?.disabled"
       />
     </div>
 
@@ -58,7 +53,7 @@
         </li>
       </ul>
     </dialog>
-  </form>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -69,6 +64,10 @@
 
   defineProps<{
     labelId?: string;
+    inputOptions?: {
+      disabled?: boolean;
+      describedBy?: string;
+    };
   }>();
 
   type FeatureApiModel = {
@@ -101,6 +100,8 @@
   const chargerAdressesSimilaires = (adresse: string) => {
     adressesAffichees.value = [];
     indexSelectionne.value = -1;
+    coordonnees.value = undefined;
+    adresseRef.value = undefined;
 
     if (adresse.length <= 3) {
       cacherDialogue();
