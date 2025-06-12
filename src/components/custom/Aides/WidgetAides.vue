@@ -2,10 +2,10 @@
   <section v-if="aidesViewModel && aidesViewModel.length > 0">
     <div class="flex flex-space-between align-items--center fr-mb-2w">
       <h2 class="fr-h3 fr-mb-0">Aides et bons plans</h2>
-      <router-link class="fr-link" :to="{ name: RouteAidesName.AIDES }">Voir toutes les aides</router-link>
+      <router-link :to="{ name: RouteAidesName.AIDES }" class="fr-link">Voir toutes les aides</router-link>
     </div>
 
-    <GrilleAidesDUneAction :aides="aidesViewModel" />
+    <GrilleAidesDUneAction :aides="aidesViewModel" :trois-colonnes="true" />
   </section>
 </template>
 
