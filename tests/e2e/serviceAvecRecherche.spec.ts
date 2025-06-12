@@ -52,6 +52,31 @@ test.beforeAll(async () => {
     });
   });
 
+  await page.route(`**/utilisateurs/dorian/logement`, route => {
+    route.fulfill({
+      status: 200,
+      contentType: 'application/json',
+      body: JSON.stringify({}),
+    });
+  });
+
+  await page.route(`**/utilisateurs/dorian/adresse`, route => {
+    route.fulfill({
+      status: 200,
+      contentType: 'application/json',
+      body: JSON.stringify({
+        codeEpci: '75056',
+        codePostal: '75001',
+        numeroRue: '34',
+        rue: "Avenue de l'Opera",
+        coordonnees: {
+          latitude: 48.8699,
+          longitude: 2.3322,
+        },
+      }),
+    });
+  });
+
   await page.route('**/utilisateurs/dorian/recherche_services/longue_vie_objets/search2', route => {
     route.fulfill({
       status: 200,
