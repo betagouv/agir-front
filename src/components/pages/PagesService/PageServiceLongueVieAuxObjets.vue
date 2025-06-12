@@ -90,14 +90,8 @@
   import ServiceSkeletonConditionnel from '@/components/custom/Service/ServiceSkeletonConditionnel.vue';
   import Callout from '@/components/dsfr/Callout.vue';
   import { useRechercheService } from '@/composables/service/useRechercheService';
-  import {
-    BarreDeRecherchePresenterImpl,
-    BarreDeRechercheViewModel,
-  } from '@/domaines/logement/adapters/barreDeRecherche.presenter.impl';
-  import { LogementRepositoryAxios } from '@/domaines/logement/adapters/logement.repository.axios';
-  import { PatcherInformationLogementUsecase } from '@/domaines/logement/patcherInformationLogement.usecase';
-  import { RecupererAdressePourBarreDeRechercheUsecase } from '@/domaines/logement/recupererAdressePourBarreDeRecherche.usecase';
-  import { Logement } from '@/domaines/logement/recupererInformationLogement.usecase';
+  import { useAdressePrincipale } from '@/composables/useAdressePrincipale';
+  import { BarreDeRechercheViewModel } from '@/domaines/logement/adapters/barreDeRecherche.presenter.impl';
   import {
     ServiceRechercheLongueVieAuxObjetsPresenterImpl,
     ServiceRechercheLongueVieAuxObjetsViewModel,
@@ -105,7 +99,6 @@
   } from '@/domaines/serviceRecherche/longueVieAuxObjets/adapters/serviceRechercheLongueVieAuxObjets.presenter.impl';
   import { ServiceRechercheLongueVieAuxObjetsAxios } from '@/domaines/serviceRecherche/longueVieAuxObjets/adapters/serviceRechercheLongueVieAuxObjets.repository.axios';
   import { RecupererServiceLongueVieAuxObjetsUsecase } from '@/domaines/serviceRecherche/longueVieAuxObjets/recupererServiceLongueVieAuxObjets.usecase';
-  import { sessionAppRawDataStorage } from '@/shell/appRawDataStorage';
   import { AdresseBarreDeRecherche } from '@/shell/coordonneesType';
   import { utilisateurStore } from '@/store/utilisateur';
 
@@ -115,11 +108,11 @@
     new ServiceRechercheLongueVieAuxObjetsAxios(),
   );
   const adresse = ref<AdresseBarreDeRecherche>();
-  const logementRepository = new LogementRepositoryAxios();
-  const recupererAdressePourBarreDeRechercheUsecase = new RecupererAdressePourBarreDeRechercheUsecase(
-    logementRepository,
-  );
-  const avecAdressePrivee = ref<boolean>(false);
+  const {
+    avecAdressePrivee,
+    definirAdressePrincipale: definirAdressePrincipaleComposable,
+    recupererAdressePourBarreDeRecherche,
+  } = useAdressePrincipale();
 
   const {
     recherche,
@@ -160,26 +153,7 @@
   }
 
   function definirAdressePrincipale() {
-    if (!adresse.value || !coordonnees.value) return;
-
-    const nouveauLogement: Partial<Logement> = {
-      coordonnees: {
-        latitude: coordonnees.value.latitude,
-        longitude: coordonnees.value.longitude,
-      },
-      codePostal: adresse.value.codePostal,
-      codeEpci: adresse.value.codeEpci,
-      numeroRue: adresse.value.numeroRue,
-      rue: adresse.value.rue,
-    };
-
-    const patcherInformationLogementUsecase = new PatcherInformationLogementUsecase(
-      new LogementRepositoryAxios(),
-      sessionAppRawDataStorage,
-    );
-    patcherInformationLogementUsecase.execute(utilisateurStore().utilisateur.id, nouveauLogement).then(async () => {
-      avecAdressePrivee.value = false;
-    });
+    definirAdressePrincipaleComposable(utilisateurStore().utilisateur.id, adresse.value, coordonnees.value);
   }
 
   async function chargerDonneesPourNouvelleAdresse() {
@@ -188,13 +162,13 @@
   }
 
   onMounted(async () => {
-    await recupererAdressePourBarreDeRechercheUsecase.execute(
+    await recupererAdressePourBarreDeRecherche(
       utilisateurStore().utilisateur.id,
-      new BarreDeRecherchePresenterImpl(async (barreDeRechercheViewModel: BarreDeRechercheViewModel) => {
+      async (barreDeRechercheViewModel: BarreDeRechercheViewModel) => {
         coordonnees.value = barreDeRechercheViewModel.coordonnees;
         recherche.value = barreDeRechercheViewModel.recherche;
         await lancerRecherche();
-      }),
+      },
     );
   });
 </script>
