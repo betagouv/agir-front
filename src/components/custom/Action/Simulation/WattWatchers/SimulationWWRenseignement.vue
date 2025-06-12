@@ -64,37 +64,7 @@
           :maxlength="14"
         />
 
-        <section class="accordeon-prm">
-          <Accordeon name-id="accordeon-prm" class="fr-mb-3w">
-            <template #titre>
-              <span class="fr-icon-information-line fr-pr-1w" aria-hidden="true" />
-              Où trouver le numéro de PRM&nbsp;?
-            </template>
-
-            <template #contenu>
-              <div class="fr-grid-row fr-grid-row--gutters">
-                <section class="fr-col-12 fr-col-md-6 flex fr-pr-2w">
-                  <img src="/facture-linky-exemple.webp" class="fr-pt-1w fr-mr-2w" alt="" />
-                  <div>
-                    <h4 class="fr-mb-1w">Sur votre facture</h4>
-                    <p>Vous trouverez votre numéro de PRM sur votre facture</p>
-                  </div>
-                </section>
-
-                <section class="fr-col-12 fr-col-md-6 flex fr-pr-2w left-border">
-                  <img src="/compteur-linky-exemple.webp" class="fr-pt-1w fr-mr-2w" alt="" />
-                  <div>
-                    <h4 class="fr-mb-1w">Sur votre compteur Linky</h4>
-                    <p>
-                      Faire défiler les affichages du compteur (appui sur la touche +) jusqu’à lire la valeur du “numéro
-                      de PRM”
-                    </p>
-                  </div>
-                </section>
-              </div>
-            </template>
-          </Accordeon>
-        </section>
+        <RenseignementAccordeon />
       </template>
 
       <InputCheckboxUnitaire
@@ -119,24 +89,25 @@
     :modifier-numero="
       () => {
         affichagePRM = true;
-        closeModale();
+        fermerModale();
         nextTick(() => numeroPrmInput?.focus());
       }
     "
-    :retour="closeModale"
+    :retour="fermerModale"
   />
 </template>
 
 <script setup lang="ts">
   import { nextTick, onMounted, ref } from 'vue';
   import { ConnexionPRMStatus } from '@/components/custom/Action/Simulation/WattWatchers/connexionPrmStatus';
+  import RenseignementAccordeon from '@/components/custom/Action/Simulation/WattWatchers/RenseignementAccordeon.vue';
   import RenseignementModale from '@/components/custom/Action/Simulation/WattWatchers/RenseignementModale.vue';
   import BarreDeRechercheAdresse from '@/components/custom/Form/BarreDeRechercheAdresse.vue';
   import EnregistreurAdressePrincipale from '@/components/custom/Form/EnregistreurAdressePrincipale.vue';
-  import Accordeon from '@/components/dsfr/Accordeon.vue';
   import InputCheckboxUnitaire from '@/components/dsfr/InputCheckboxUnitaire.vue';
   import InputText, { InputErreur } from '@/components/dsfr/InputText.vue';
   import { validationPrenomOuNom } from '@/components/validations/validationsChampsFormulaire';
+  import { useDsfrModale } from '@/composables/useDsfrModale';
   import {
     BarreDeRecherchePresenterImpl,
     BarreDeRechercheViewModel,
@@ -150,13 +121,19 @@
     passerEtapeSuivante: () => void;
   }>();
 
-  const utilisateur = utilisateurStore().utilisateur;
   const MODALE_ID = 'localisation-compteur-modal';
+  const { ouvrirModale, fermerModale } = useDsfrModale(MODALE_ID);
+  const utilisateur = utilisateurStore().utilisateur;
 
   const recherche = ref<string>('');
   const coordonnees = ref<Coordonnees>();
   const adresse = ref<AdresseBarreDeRecherche>();
+
   const nomDeFamille = ref<string>(utilisateur.nom);
+  const acceptationCguWw = ref<boolean>(false);
+  const numeroPrmInput = ref<InstanceType<typeof InputText>>();
+  const numeroPrmValue = ref<string>('');
+
   const erreurCgu = ref<string>('');
   const erreurAdresse = ref<string>('');
   const erreurNomDeFamille = ref<InputErreur>({
@@ -167,20 +144,16 @@
     message: '',
     afficher: false,
   });
-  const acceptationCguWw = ref<boolean>(false);
 
-  const avecAdressePrivee = ref<boolean>(false);
   const connexionPrmStatus = ref<ConnexionPRMStatus>(ConnexionPRMStatus.PAS_COMMENCE);
+  const avecAdressePrivee = ref<boolean>(false);
   const affichagePRM = ref<boolean>(false);
-  const numeroPrmValue = ref<string>('');
-  const numeroPrmInput = ref<InstanceType<typeof InputText>>();
-
-  const logementRepository = new LogementRepositoryAxios();
-  const recupererAdressePourBarreDeRechercheUsecase = new RecupererAdressePourBarreDeRechercheUsecase(
-    logementRepository,
-  );
 
   onMounted(async () => {
+    const recupererAdressePourBarreDeRechercheUsecase = new RecupererAdressePourBarreDeRechercheUsecase(
+      new LogementRepositoryAxios(),
+    );
+
     await recupererAdressePourBarreDeRechercheUsecase.execute(
       utilisateur.id,
       new BarreDeRecherchePresenterImpl(async (barreDeRechercheViewModel: BarreDeRechercheViewModel) => {
@@ -194,25 +167,10 @@
     affichagePRM.value = !affichagePRM.value;
   }
 
-  function openModale() {
-    const modalElement = document.getElementById(MODALE_ID);
-    if (modalElement && window.dsfr) {
-      window.dsfr(modalElement).modal.disclose();
-    }
-  }
-
-  function closeModale() {
-    const modalElement = document.getElementById(MODALE_ID);
-    if (modalElement && window.dsfr) {
-      window.dsfr(modalElement).modal.conceal();
-    }
-  }
-
   function localiserMonCompteur() {
     if (formulaireEstEnErreur()) return;
 
-    openModale();
-
+    ouvrirModale();
     connexionPrmStatus.value = ConnexionPRMStatus.EN_COURS;
 
     setTimeout(() => {
@@ -222,10 +180,10 @@
   }
 
   function resetErreursFormulaires() {
-    erreurCgu.value = '';
-    erreurNumeroPrm.value.afficher = false;
-    erreurNomDeFamille.value.afficher = false;
     erreurAdresse.value = '';
+    erreurNomDeFamille.value.afficher = false;
+    erreurNumeroPrm.value.afficher = false;
+    erreurCgu.value = '';
   }
 
   function formulaireEstEnErreur() {
@@ -266,29 +224,3 @@
     return formulaireAUneErreur;
   }
 </script>
-
-<style scoped>
-  .accordeon-prm img {
-    height: 7.5rem;
-  }
-
-  .accordeon-prm h4 {
-    font-size: 1.1rem;
-  }
-
-  .left-border {
-    position: relative;
-    padding-left: 1rem;
-  }
-
-  .left-border::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 0;
-    height: 50%;
-    width: 1px;
-    background-color: #e0e0e0;
-    transform: translate(-50%, -50%);
-  }
-</style>
