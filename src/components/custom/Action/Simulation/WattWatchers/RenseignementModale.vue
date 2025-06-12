@@ -6,10 +6,15 @@
           <BallLoader text="Localisation de votre compteur..." />
         </template>
         <template v-else-if="connexionPrmStatus === ConnexionPRMStatus.SUCCES">
-          <ModaleSucces :modale-id="modaleId" :numero-compteur-input="numeroCompteurInput" />
+          <ModaleSucces
+            :modale-id="modaleId"
+            :numero-compteur-input="numeroCompteurInput"
+            :passer-etape-suivante="passerEtapeSuivante"
+            :retour="retour"
+          />
         </template>
         <template v-else-if="connexionPrmStatus === ConnexionPRMStatus.ECHEC">
-          <ModaleEchec :modale-id="modaleId" />
+          <ModaleEchec :modale-id="modaleId" :modifier-numero="modifierNumero" :retour="retour" />
         </template>
       </template>
     </Modale>
@@ -27,6 +32,9 @@
     modaleId: string;
     connexionPrmStatus: ConnexionPRMStatus;
     numeroCompteurInput: string;
+    passerEtapeSuivante: () => void;
+    modifierNumero: () => void;
+    retour: () => void;
   }>();
 </script>
 

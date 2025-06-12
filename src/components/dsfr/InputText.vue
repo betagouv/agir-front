@@ -5,6 +5,7 @@
       <span v-if="description" class="fr-hint-text" :class="descriptionClass">{{ description }}</span>
     </label>
     <input
+      ref="inputRef"
       :aria-describedby="erreur && erreur.afficher ? errorId : ''"
       :autocomplete="autocomplete"
       :id="name"
@@ -28,7 +29,10 @@
 </template>
 
 <script lang="ts" setup>
-  import { computed } from 'vue';
+  import { computed, ref } from 'vue';
+
+  const inputRef = ref<HTMLInputElement>();
+  defineExpose({ focus: () => inputRef.value?.focus() });
 
   export type InputErreur = {
     message: string;

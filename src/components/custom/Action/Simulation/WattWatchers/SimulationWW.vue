@@ -8,7 +8,14 @@
     "
   />
 
-  <SimulationWwRenseignement v-if="etapeActuelle === EtapeSimulateur.RENSEIGNEMENT" />
+  <SimulationWwRenseignement
+    v-if="etapeActuelle === EtapeSimulateur.RENSEIGNEMENT"
+    :passer-etape-suivante="
+      () => {
+        etapeActuelle = EtapeSimulateur.SIMULATEUR;
+      }
+    "
+  />
 
   <KyCsAction
     v-if="etapeActuelle === EtapeSimulateur.SIMULATEUR"

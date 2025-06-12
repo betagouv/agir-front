@@ -20,10 +20,10 @@
       class="fr-btns-group fr-btns-group--right fr-btns-group--inline-reverse fr-btns-group--inline-lg fr-btns-group--icon-left"
     >
       <li>
-        <button class="fr-btn">Continuer</button>
+        <button class="fr-btn" @click="passerEtapeSuivante">Continuer</button>
       </li>
       <li>
-        <button :aria-controls="modaleId" class="fr-btn fr-btn--secondary">Modifier le numéro</button>
+        <button class="fr-btn fr-btn--secondary" @click="retour">Modifier le numéro</button>
       </li>
     </ul>
   </div>
@@ -33,6 +33,8 @@
   defineProps<{
     modaleId: string;
     numeroCompteurInput: string;
+    passerEtapeSuivante: () => void;
+    retour: () => void;
   }>();
 </script>
 

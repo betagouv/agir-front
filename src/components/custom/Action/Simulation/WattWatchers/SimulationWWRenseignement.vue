@@ -55,11 +55,11 @@
 
       <template v-if="affichagePRM">
         <InputText
-          autofocus
+          ref="numeroPrmInput"
           name="prm"
           label="Numéro de PRM"
           description="Il s’agit d’une suite de 14 chiffres qui identifie le logement sur le réseau électrique"
-          v-model="numeroPrmInput"
+          v-model="numeroPrmValue"
           :erreur="erreurNumeroPrm"
           :maxlength="14"
         />
@@ -112,14 +112,23 @@
   </section>
 
   <RenseignementModale
-    :numero-compteur-input="numeroPrmInput"
+    :numero-compteur-input="numeroPrmValue"
     :modale-id="MODALE_ID"
     :connexion-prm-status="connexionPrmStatus"
+    :passer-etape-suivante="passerEtapeSuivante"
+    :modifier-numero="
+      () => {
+        affichagePRM = true;
+        closeModale();
+        nextTick(() => numeroPrmInput?.focus());
+      }
+    "
+    :retour="closeModale"
   />
 </template>
 
 <script setup lang="ts">
-  import { onMounted, ref } from 'vue';
+  import { nextTick, onMounted, ref } from 'vue';
   import { ConnexionPRMStatus } from '@/components/custom/Action/Simulation/WattWatchers/connexionPrmStatus';
   import RenseignementModale from '@/components/custom/Action/Simulation/WattWatchers/RenseignementModale.vue';
   import BarreDeRechercheAdresse from '@/components/custom/Form/BarreDeRechercheAdresse.vue';
@@ -136,6 +145,10 @@
   import { RecupererAdressePourBarreDeRechercheUsecase } from '@/domaines/logement/recupererAdressePourBarreDeRecherche.usecase';
   import { AdresseBarreDeRecherche, Coordonnees } from '@/shell/coordonneesType.js';
   import { utilisateurStore } from '@/store/utilisateur';
+
+  defineProps<{
+    passerEtapeSuivante: () => void;
+  }>();
 
   const utilisateur = utilisateurStore().utilisateur;
   const MODALE_ID = 'localisation-compteur-modal';
@@ -159,7 +172,8 @@
   const avecAdressePrivee = ref<boolean>(false);
   const connexionPrmStatus = ref<ConnexionPRMStatus>(ConnexionPRMStatus.PAS_COMMENCE);
   const affichagePRM = ref<boolean>(false);
-  const numeroPrmInput = ref<string>('');
+  const numeroPrmValue = ref<string>('');
+  const numeroPrmInput = ref<InstanceType<typeof InputText>>();
 
   const logementRepository = new LogementRepositoryAxios();
   const recupererAdressePourBarreDeRechercheUsecase = new RecupererAdressePourBarreDeRechercheUsecase(
@@ -180,19 +194,30 @@
     affichagePRM.value = !affichagePRM.value;
   }
 
-  function localiserMonCompteur() {
-    if (formulaireEstEnErreur()) return;
-
+  function openModale() {
     const modalElement = document.getElementById(MODALE_ID);
     if (modalElement && window.dsfr) {
       window.dsfr(modalElement).modal.disclose();
     }
+  }
+
+  function closeModale() {
+    const modalElement = document.getElementById(MODALE_ID);
+    if (modalElement && window.dsfr) {
+      window.dsfr(modalElement).modal.conceal();
+    }
+  }
+
+  function localiserMonCompteur() {
+    if (formulaireEstEnErreur()) return;
+
+    openModale();
 
     connexionPrmStatus.value = ConnexionPRMStatus.EN_COURS;
 
     setTimeout(() => {
       connexionPrmStatus.value = ConnexionPRMStatus.SUCCES;
-      numeroPrmInput.value = '283918274';
+      numeroPrmValue.value = '283918274';
     }, 1000);
   }
 
@@ -213,8 +238,8 @@
     }
 
     if (affichagePRM.value) {
-      const estUnNombreValide = /^\d+$/.test(numeroPrmInput.value);
-      const longueurCorrecte = numeroPrmInput.value.length === 14;
+      const estUnNombreValide = /^\d+$/.test(numeroPrmValue.value);
+      const longueurCorrecte = numeroPrmValue.value.length === 14;
 
       if (estUnNombreValide && longueurCorrecte) {
         return formulaireAUneErreur;
@@ -222,7 +247,7 @@
 
       erreurNumeroPrm.value.message = !estUnNombreValide
         ? 'Le numéro de PRM ne doit contenir que des chiffres.'
-        : `Le numéro de PRM doit contenir 14 chiffres. Votre numéro comptabilise actuellement ${numeroPrmInput.value.length} chiffres.`;
+        : `Le numéro de PRM doit contenir 14 chiffres. Votre numéro comptabilise actuellement ${numeroPrmValue.value.length} chiffres.`;
       erreurNumeroPrm.value.afficher = true;
       formulaireAUneErreur = true;
       return formulaireAUneErreur;
