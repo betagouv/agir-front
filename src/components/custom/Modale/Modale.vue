@@ -8,10 +8,10 @@
               <button class="fr-btn--close fr-btn" :aria-controls="id">Fermer</button>
             </div>
             <slot name="contenuEtFooter" />
-            <div class="fr-modal__content fr-mb-0">
+            <div class="fr-modal__content fr-mb-0" v-if="!slots.contenuEtFooter">
               <slot name="contenu" />
             </div>
-            <div class="fr-modal__footer fr-mt-0" v-if="isFooterActions">
+            <div class="fr-modal__footer fr-mt-0" v-if="!slots.contenuEtFooter && isFooterActions">
               <slot name="footer" />
             </div>
           </div>
@@ -22,6 +22,10 @@
 </template>
 
 <script setup lang="ts">
+  import { useSlots } from 'vue';
+
+  const slots = useSlots();
+
   withDefaults(
     defineProps<{
       id: string;
