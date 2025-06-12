@@ -1,5 +1,21 @@
 # Changelog
 
+## [2.13.0](https://github.com/betagouv/agir-front/compare/v2.12.0...v2.13.0) (2025-06-12)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* barre d'adresse postale dans les services ([#1168](https://github.com/betagouv/agir-front/issues/1168)) ([9e1d0bb](https://github.com/betagouv/agir-front/commit/9e1d0bba72b382a122ef4328b71eb803b9114664))
+* explication des recommandations d'actions ([#1158](https://github.com/betagouv/agir-front/issues/1158)) ([63e4dec](https://github.com/betagouv/agir-front/commit/63e4dec03940a09ff2df7bc2789cd0804e215dab))
+
+
+### 👷 Autres changements
+
+* Bump @sentry/vue from 9.24.0 to 9.27.0 ([#1163](https://github.com/betagouv/agir-front/issues/1163)) ([b7220bd](https://github.com/betagouv/agir-front/commit/b7220bd4728f454c300547672788c679246f60ab))
+* Bump @types/node from 22.15.21 to 22.15.30 ([#1165](https://github.com/betagouv/agir-front/issues/1165)) ([d7ecb44](https://github.com/betagouv/agir-front/commit/d7ecb44ad1a87c473cb19920a379700313001edd))
+* Bump lighthouse from 12.6.0 to 12.6.1 ([#1164](https://github.com/betagouv/agir-front/issues/1164)) ([a17776d](https://github.com/betagouv/agir-front/commit/a17776df9220543fb2b95d8b796350b2493e192c))
+* Bump pinia from 3.0.2 to 3.0.3 ([#1162](https://github.com/betagouv/agir-front/issues/1162)) ([54b1a19](https://github.com/betagouv/agir-front/commit/54b1a192d0c85134dbce4674eec9e297c7fa02f2))
+
 ## [2.12.0](https://github.com/betagouv/agir-front/compare/v2.11.0...v2.12.0) (2025-06-04)
 
 
