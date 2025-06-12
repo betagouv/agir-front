@@ -1,13 +1,15 @@
 <template>
   <section class="fr-mb-4w fr-p-1v">
     <h2 id="label-barre-de-recherche" class="fr-h3">Choisissez une adresse</h2>
-    <ServiceBarreDeRechercheAdresse
-      v-model:adresse="adresse"
-      v-model:coordonnees="coordonnees"
-      v-model:recherche="recherche"
-      label-id="label-barre-de-recherche"
-      @update:coordonnees="chargerDonneesPourNouvelleAdresse"
-    />
+    <form @submit.prevent>
+      <BarreDeRechercheAdresse
+        v-model:adresse="adresse"
+        v-model:coordonnees="coordonnees"
+        v-model:recherche="recherche"
+        label-id="label-barre-de-recherche"
+        @update:coordonnees="chargerDonneesPourNouvelleAdresse"
+      />
+    </form>
 
     <Callout
       v-if="avecAdressePrivee"
@@ -64,22 +66,16 @@
 <script lang="ts" setup>
   import { nextTick, onMounted, ref } from 'vue';
   import MaifRisques from '@/components/custom/Action/MaifRisques.vue';
-  import ServiceBarreDeRechercheAdresse from '@/components/custom/Service/ServiceBarreDeRechercheAdresse.vue';
+  import BarreDeRechercheAdresse from '@/components/custom/Form/BarreDeRechercheAdresse.vue';
   import BallLoader from '@/components/custom/Thematiques/BallLoader.vue';
   import Callout from '@/components/dsfr/Callout.vue';
   import CarteExterne from '@/components/dsfr/CarteExterne.vue';
+  import { useAdressePrincipale } from '@/composables/useAdressePrincipale';
   import { ActionsEventBus } from '@/domaines/actions/actions.eventbus';
   import { ActionsRepositoryAxios } from '@/domaines/actions/adapters/actions.repository.axios';
   import { TypeAction } from '@/domaines/actions/ports/actions.repository';
   import { TerminerActionUsecase } from '@/domaines/actions/terminerAction.usecase';
-  import {
-    BarreDeRecherchePresenterImpl,
-    BarreDeRechercheViewModel,
-  } from '@/domaines/logement/adapters/barreDeRecherche.presenter.impl';
-  import { LogementRepositoryAxios } from '@/domaines/logement/adapters/logement.repository.axios';
-  import { PatcherInformationLogementUsecase } from '@/domaines/logement/patcherInformationLogement.usecase';
-  import { RecupererAdressePourBarreDeRechercheUsecase } from '@/domaines/logement/recupererAdressePourBarreDeRecherche.usecase';
-  import { Logement } from '@/domaines/logement/recupererInformationLogement.usecase';
+  import { BarreDeRechercheViewModel } from '@/domaines/logement/adapters/barreDeRecherche.presenter.impl';
   import {
     SimulateurMaifPresenterImpl,
     SimulateurMaifViewModel,
@@ -91,7 +87,6 @@
   } from '@/domaines/simulationMaif/adapters/statistiquesCommuneMaif.presenter.impl';
   import { CalculerResultatSimulationMaifUsecase } from '@/domaines/simulationMaif/calculerResultatSimulationMaif.usecase';
   import { RecupererStatistiquesCommuneMaifUsecase } from '@/domaines/simulationMaif/recupererStatistiquesCommuneMaifDepuisProfil.usecase';
-  import { sessionAppRawDataStorage } from '@/shell/appRawDataStorage';
   import { AdresseBarreDeRecherche, Coordonnees } from '@/shell/coordonneesType';
   import { SimulateursSupportes } from '@/shell/simulateursSupportes';
   import { utilisateurStore } from '@/store/utilisateur';
@@ -104,26 +99,26 @@
 
   const resultatsEnChargement = ref<boolean>(false);
   const chiffresClesEnChargement = ref<boolean>(false);
-  const avecAdressePrivee = ref<boolean>(false);
   const utilisateurId = utilisateurStore().utilisateur.id;
+  const {
+    avecAdressePrivee,
+    definirAdressePrincipale: definirAdressePrincipaleComposable,
+    recupererAdressePourBarreDeRecherche,
+  } = useAdressePrincipale();
 
-  const logementRepository = new LogementRepositoryAxios();
   const simulateurMaifRepository = new SimulateurMaifRepositoryAxios();
 
-  const recupererAdressePourBarreDeRechercheUsecase = new RecupererAdressePourBarreDeRechercheUsecase(
-    logementRepository,
-  );
   const recupererStatistiquesCommuneMaifUsecase = new RecupererStatistiquesCommuneMaifUsecase(simulateurMaifRepository);
   const calculerResultatSimulationMaifUsecase = new CalculerResultatSimulationMaifUsecase(simulateurMaifRepository);
 
   onMounted(async () => {
-    await recupererAdressePourBarreDeRechercheUsecase.execute(
+    await recupererAdressePourBarreDeRecherche(
       utilisateurId,
-      new BarreDeRecherchePresenterImpl(async (barreDeRechercheViewModel: BarreDeRechercheViewModel) => {
+      async (barreDeRechercheViewModel: BarreDeRechercheViewModel) => {
         coordonnees.value = barreDeRechercheViewModel.coordonnees;
         recherche.value = barreDeRechercheViewModel.recherche;
         await calculerResultatsSimulation();
-      }),
+      },
     );
 
     await recupererChiffresCles();
@@ -168,26 +163,7 @@
   }
 
   function definirAdressePrincipale() {
-    if (!adresse.value || !coordonnees.value) return;
-
-    const nouveauLogement: Partial<Logement> = {
-      coordonnees: {
-        latitude: coordonnees.value.latitude,
-        longitude: coordonnees.value.longitude,
-      },
-      codePostal: adresse.value.codePostal,
-      codeEpci: adresse.value.codeEpci,
-      numeroRue: adresse.value.numeroRue,
-      rue: adresse.value.rue,
-    };
-
-    const patcherInformationLogementUsecase = new PatcherInformationLogementUsecase(
-      new LogementRepositoryAxios(),
-      sessionAppRawDataStorage,
-    );
-    patcherInformationLogementUsecase.execute(utilisateurId, nouveauLogement).then(async () => {
-      avecAdressePrivee.value = false;
-    });
+    definirAdressePrincipaleComposable(utilisateurId, adresse.value, coordonnees.value);
   }
 
   async function terminerAction() {

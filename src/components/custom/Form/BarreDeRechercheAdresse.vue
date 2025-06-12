@@ -1,50 +1,44 @@
 <template>
-  <form
-    @submit.prevent
-    class="fr-search-bar position--relative"
-    id="header-search"
-    role="search"
-    @blur="cacherDialogue"
-  >
-    <label class="fr-label" for="recherche-adresse-input" v-if="!labelId">Renseignez votre adresse</label>
+  <div id="header-search" class="fr-search-bar position--relative" role="search" @blur="cacherDialogue">
+    <label v-if="!labelId" class="fr-label" for="recherche-adresse-input">Renseignez votre adresse</label>
     <div class="fr-input-wrap fr-icon-search-line full-width">
       <input
-        type="search"
-        role="combobox"
-        placeholder="Rechercher l'adresse de votre choix..."
-        autocomplete="off"
         id="recherche-adresse-input"
-        name="recherche-adresse-input"
-        class="fr-input"
+        v-model="recherche"
         :aria-activedescendant="indexSelectionne >= 0 ? `option-${indexSelectionne}` : ''"
-        aria-autocomplete="list"
-        aria-controls="adresse-menu"
         :aria-expanded="dialogOuverte"
         :aria-labelledby="labelId"
-        v-model="recherche"
-        @input="chargerAdresses"
-        @focus="ouvrirDialogueSiNecessaire"
+        aria-autocomplete="list"
+        aria-controls="adresse-menu"
+        autocomplete="off"
+        class="fr-input"
+        name="recherche-adresse-input"
+        placeholder="Rechercher l'adresse de votre choix..."
+        role="combobox"
+        type="search"
         @blur="cacherDialogue"
+        @focus="ouvrirDialogueSiNecessaire"
+        @input="chargerAdresses"
         @keydown="naviguerListe"
       />
     </div>
 
-    <dialog class="adresseDialogue shadow" :open="dialogOuverte" ref="dialogRef">
+    <dialog ref="dialogRef" :open="dialogOuverte" class="adresseDialogue shadow">
       <ul
         v-if="adressesAffichees"
         id="adresse-menu"
-        role="listbox"
         class="list-style-none fr-p-0 fr-m-0"
+        role="listbox"
         @mouseleave="indexSelectionne = -1"
       >
         <li
-          role="option"
-          class="fr-p-1w"
-          :id="`option-${index}`"
           v-for="(adresse, index) in adressesAffichees"
-          :class="indexSelectionne === index ? 'adresseSelectionee' : ''"
+          :id="`option-${index}`"
           :key="adresse.numeroEtRue"
           :aria-selected="indexSelectionne === index"
+          :class="indexSelectionne === index ? 'adresseSelectionee' : ''"
+          class="fr-p-1w"
+          role="option"
           @click="envoyerCoordonnees(adresse)"
           @mouseenter="indexSelectionne = index"
         >
@@ -58,10 +52,10 @@
         </li>
       </ul>
     </dialog>
-  </form>
+  </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
   import axios from 'redaxios';
   import { ref } from 'vue';
   import { useDebouncedFn } from '@/composables/useDebounce';
