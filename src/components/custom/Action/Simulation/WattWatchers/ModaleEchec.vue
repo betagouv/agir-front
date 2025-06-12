@@ -10,11 +10,11 @@
     <ul
       class="fr-btns-group fr-btns-group--right fr-btns-group--inline-reverse fr-btns-group--inline-lg fr-btns-group--icon-left"
     >
-      <li>
-        <button class="fr-btn">Renseigner mon numéro de compteur</button>
+      <li class="force-full-width">
+        <button class="fr-btn force-full-width" @click="modifierNumero">Renseigner mon numéro de compteur</button>
       </li>
-      <li>
-        <button :aria-controls="modaleId" class="fr-btn fr-btn--secondary">Retour</button>
+      <li class="force-full-width">
+        <button class="fr-btn fr-btn--secondary force-full-width" @click="retour">Retour</button>
       </li>
     </ul>
   </div>
@@ -23,6 +23,8 @@
 <script setup lang="ts">
   defineProps<{
     modaleId: string;
+    modifierNumero: () => void;
+    retour: () => void;
   }>();
 </script>
 
@@ -33,5 +35,9 @@
 
   .accordeon-prm h4 {
     font-size: 1.1rem;
+  }
+
+  .force-full-width {
+    width: 100%;
   }
 </style>
