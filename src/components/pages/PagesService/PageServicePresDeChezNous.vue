@@ -2,8 +2,8 @@
   <div class="fr-container">
     <ServiceSkeletonConditionnel
       :is-loading="pageEstEnChargement"
-      :view-model-existe="serviceRecherchePresDeChezNousViewModel !== undefined"
       :message-erreur="serviceErreur"
+      :view-model-existe="serviceRecherchePresDeChezNousViewModel !== undefined"
     >
       <PageServiceTemplate
         v-if="serviceRecherchePresDeChezNousViewModel?.aside"
@@ -12,10 +12,10 @@
         <h1 class="fr-h2 fr-mb-1w">
           <ServiceSelect
             id="categories"
+            :code-derniere-recherche-type="typeDeRecherche"
             :options="serviceRecherchePresDeChezNousViewModel.categories"
             label="Choisir une catégorie"
             @update="modifierType"
-            :code-derniere-recherche-type="typeDeRecherche"
           />
           à proximité de chez moi
         </h1>
@@ -26,14 +26,26 @@
         <section
           class="fr-my-6w background--white fr-px-2w fr-py-3w flex flex-space-between align-items--center flex-wrap gap--small"
         >
-          <h2 class="fr-h4 fr-mb-0" id="recherche-par-adresse-label">Recherche par adresse</h2>
-          <form @submit.prevent class="fr-col-12 fr-col-md-7">
+          <h2 id="recherche-par-adresse-label" class="fr-h4 fr-mb-0">Recherche par adresse</h2>
+          <form class="fr-col-12 fr-col-md-7" @submit.prevent>
             <BarreDeRechercheAdresse
-              v-model:recherche="recherche"
+              v-model:adresse="adresse"
               v-model:coordonnees="coordonnees"
+              v-model:recherche="recherche"
               labelId="recherche-par-adresse-label"
+              @update:coordonnees="chargerDonneesPourNouvelleAdresse"
             />
           </form>
+          <Callout
+            v-if="avecAdressePrivee"
+            :button="{
+              text: 'Choisir comme adresse principale',
+              onClick: definirAdressePrincipale,
+            }"
+            :icone-information="false"
+            class="fr-mt-3w"
+            texte="Voulez-vous utiliser cette adresse comme votre adresse principale à l'avenir&nbsp;?"
+          />
         </section>
         <section
           v-if="
@@ -58,8 +70,8 @@
         <section v-else>
           <h2 class="fr-h3">Suggestions</h2>
           <ServiceListeCarte
-            ref="serviceListeCarte"
             v-if="!cartesSontEnChargement"
+            ref="serviceListeCarte"
             :suggestions-service-view-model="
               (serviceRecherchePresDeChezNousViewModel as ServiceRecherchePresDeChezNousViewModelAvecResultats)
                 .suggestions
@@ -83,7 +95,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { nextTick, ref } from 'vue';
+  import { nextTick, onMounted, ref } from 'vue';
   import BarreDeRechercheAdresse from '@/components/custom/Form/BarreDeRechercheAdresse.vue';
   import PageServiceTemplate from '@/components/custom/Service/PageServiceTemplate.vue';
   import ServiceFavoris from '@/components/custom/Service/ServiceFavoris.vue';
@@ -91,7 +103,10 @@
   import ServiceSelect from '@/components/custom/Service/ServiceSelect.vue';
   import ServiceSkeletonCartes from '@/components/custom/Service/ServiceSkeletonCartes.vue';
   import ServiceSkeletonConditionnel from '@/components/custom/Service/ServiceSkeletonConditionnel.vue';
+  import Callout from '@/components/dsfr/Callout.vue';
   import { useRechercheService } from '@/composables/service/useRechercheService';
+  import { useAdressePrincipale } from '@/composables/useAdressePrincipale';
+  import { BarreDeRechercheViewModel } from '@/domaines/logement/adapters/barreDeRecherche.presenter.impl';
   import {
     ServiceRecherchePresDeChezNousPresenterImpl,
     ServiceRecherchePresDeChezNousViewModel,
@@ -99,11 +114,19 @@
   } from '@/domaines/serviceRecherche/presDeChezNous/adapters/serviceRecherchePresDeChezNous.presenter.impl';
   import { ServiceRecherchePresDeChezNousAxios } from '@/domaines/serviceRecherche/presDeChezNous/adapters/serviceRecherchePresDeChezNous.repository.axios';
   import { RecupererServicePresDeChezNousUsecase } from '@/domaines/serviceRecherche/presDeChezNous/recupererServicePresDeChezNous.usecase';
+  import { AdresseBarreDeRecherche } from '@/shell/coordonneesType';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const serviceListeCarte = ref<InstanceType<typeof ServiceListeCarte>>();
   const serviceRecherchePresDeChezNousViewModel = ref<ServiceRecherchePresDeChezNousViewModel>();
   const usecase = new RecupererServicePresDeChezNousUsecase(new ServiceRecherchePresDeChezNousAxios());
+  const adresse = ref<AdresseBarreDeRecherche>();
+  const utilisateurId = utilisateurStore().utilisateur.id;
+  const {
+    avecAdressePrivee,
+    definirAdressePrincipale: definirAdressePrincipaleComposable,
+    recupererAdressePourBarreDeRecherche,
+  } = useAdressePrincipale();
 
   const {
     recherche,
@@ -140,4 +163,24 @@
       coordonnees.value,
     );
   }
+
+  function definirAdressePrincipale() {
+    definirAdressePrincipaleComposable(utilisateurId, adresse.value, coordonnees.value);
+  }
+
+  async function chargerDonneesPourNouvelleAdresse() {
+    await nextTick();
+    avecAdressePrivee.value = true;
+  }
+
+  onMounted(async () => {
+    await recupererAdressePourBarreDeRecherche(
+      utilisateurId,
+      async (barreDeRechercheViewModel: BarreDeRechercheViewModel) => {
+        coordonnees.value = barreDeRechercheViewModel.coordonnees;
+        recherche.value = barreDeRechercheViewModel.recherche;
+        await lancerRecherche();
+      },
+    );
+  });
 </script>
