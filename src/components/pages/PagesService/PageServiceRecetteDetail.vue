@@ -1,12 +1,12 @@
 <template>
-  <div class="fr-container fr-pb-4w" v-if="recetteViewModel">
+  <div v-if="recetteViewModel" class="fr-container fr-pb-4w">
     <BoutonRetourAutomatique class="fr-my-2w fr-pl-0" />
 
     <img
       v-if="recetteViewModel?.image"
-      class="display-block recette--image fr-mb-2w"
-      alt=""
       :src="recetteViewModel?.image"
+      alt=""
+      class="display-block recette--image fr-mb-2w"
     />
     <div class="fr-mt-auto">
       <span v-if="recetteViewModel.tag" :class="`fr-tag fr-text--xs fr-mr-2w ${recetteViewModel.tag.style}`">
@@ -30,11 +30,11 @@
         {{ decodeUnicode(etape) }}
       </li>
     </ol>
-    <div class="fr-grid-row flex-column fr-mb-4w"></div>
+    <div class="flex flex-center fr-mt-4w">© Santé publique France</div>
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
   import { useHead } from '@unhead/vue';
   import { computed, onMounted, ref } from 'vue';
   import { useRoute } from 'vue-router';
