@@ -2,44 +2,74 @@
   <h2 class="fr-h3">Ma consommation</h2>
   <div class="fr-grid-row fr-grid-row--gutters">
     <div class="fr-col-md-6 fr-col-12">
-      <div class="shadow">
-        <div class="position--relative full-width full-height fr-px-2w fr-py-3w">
-          <Doughnut :data="data" :options="options" ref="chartRef" aria-hidden="true" />
-          <div
-            aria-hidden="true"
-            v-for="(item, index) in donneesConsommation"
-            :key="item.label"
-            class="emoji-bubble"
-            :style="bubbleStyle(index, item.color)"
-          >
-            {{ item.emoji }}
+      <div class="shadow full-height">
+        <div>
+          <div class="position--relative full-width full-height fr-px-2w fr-py-3w flex flex-center">
+            <Doughnut :data="data" :options="options" ref="chartRef" aria-hidden="true" />
+            <div
+              aria-hidden="true"
+              v-for="(item, index) in donneesConsommation"
+              :key="item.label"
+              class="emoji-bubble"
+              :style="bubbleStyle(index, item.color)"
+            >
+              {{ item.emoji }}
+            </div>
+            <p class="texte-au-centre fr-mb-0">
+              <span class="display-block text--bold text--3xl fr-mb-1w">2823€</span>
+              consommés
+              <span class="display-block text--gris-light">par an</span>
+            </p>
           </div>
-          <p class="texte-au-centre fr-mb-0">
-            <span class="display-block text--bold text--3xl fr-mb-1w">2823€</span>
-            consommés
+
+          <ul class="fr-px-2w list-style-none liste-categories fr-pb-3w fr-my-0">
+            <li
+              v-for="categorie in donneesConsommation"
+              :key="categorie.label"
+              class="custom-disc flex align-items--center"
+              :class="`disc-${categorie.id}`"
+            >
+              <div class="flex flex-space-between full-width align-items--baseline">
+                <span class="fr-text--sm fr-mb-0">
+                  {{ categorie.label }}
+                </span>
+                <span class="text--bold">{{ categorie.pourcentage }}</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="fr-col-md-6 fr-col-12">
+      <div class="shadow full-height">
+        <div class="fr-pt-5w fr-px-5w fr-grid-row">
+          <p class="fr-col-12 fr-col-md-6 fr-text--sm">
+            <span class="display-block text--3xl text--bold fr-mb-1w fr-py-3v">0€</span>
+            économisés
+            <span class="display-block text--gris-light">par an</span>
+          </p>
+
+          <p class="fr-col-12 fr-col-md-6 fr-text--sm">
+            <span class="display-inline-block text--3xl text--bold fr-mb-1w prix-highlight fr-py-3v fr-px-1w"
+              >2577€</span
+            >
+            économies possibles
             <span class="display-block text--gris-light">par an</span>
           </p>
         </div>
 
-        <ul class="fr-px-2w list-style-none liste-categories fr-pb-3w">
-          <li
-            v-for="categorie in donneesConsommation"
-            :key="categorie.label"
-            class="custom-disc flex align-items--center"
-            :class="`disc-${categorie.id}`"
-          >
-            <div class="flex flex-space-between full-width align-items--baseline">
-              <span class="fr-text--sm fr-mb-0">
-                {{ categorie.label }}
-              </span>
-              <span class="text--bold">{{ categorie.pourcentage }}</span>
-            </div>
-          </li>
-        </ul>
+        <div class="fr-pb-5w fr-px-5w">
+          <BarreDeProgression label="" :value="0" :value-max="2577" couleur="#EAB420" couleur-background="#F8EED1" />
+        </div>
+
+        <section class="actions fr-m-3w text--center fr-p-2w">
+          <h3>Faites des économies</h3>
+          <p>
+            Découvrez des actions personnalisées pour réduire votre facture d’électricité sans sacrifier votre confort.
+          </p>
+          <a href="" class="fr-btn fr-btn--lg">Découvrir ** actions</a>
+        </section>
       </div>
-    </div>
-    <div class="fr-col-md-6 fr-col-12">
-      <div class="shadow"></div>
     </div>
   </div>
 </template>
@@ -55,8 +85,9 @@
     LinearScale,
     ArcElement,
   } from 'chart.js';
-  import { nextTick, onMounted, ref } from 'vue';
+  import { nextTick, onMounted, onUnmounted, ref } from 'vue';
   import { Doughnut } from 'vue-chartjs';
+  import BarreDeProgression from '@/components/custom/BarreDeProgression.vue';
 
   ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale, ArcElement);
 
@@ -97,12 +128,23 @@
     emojiLabels: ['🔥', '🛁', '✳️', '🍳', '🧺', '📺', '💡'],
   };
 
-  onMounted(async () => {
+  const updateChartSize = async () => {
     await nextTick();
-    chartSize.value = {
-      height: chartRef.value.$el.clientHeight,
-      width: chartRef.value.$el.clientWidth,
-    };
+    if (chartRef.value && chartRef.value.$el) {
+      chartSize.value = {
+        height: chartRef.value.$el.clientHeight,
+        width: chartRef.value.$el.clientWidth,
+      };
+    }
+  };
+
+  onMounted(async () => {
+    await updateChartSize();
+    window.addEventListener('resize', updateChartSize);
+  });
+
+  onUnmounted(() => {
+    window.removeEventListener('resize', updateChartSize);
   });
 
   const bubbleStyle = (index: number, color: string) => {
@@ -164,6 +206,16 @@
     @media (min-width: 32rem) {
       columns: 2;
     }
+  }
+
+  .prix-highlight {
+    background-color: #ffefc2;
+    color: #502400;
+    border-radius: 1rem;
+  }
+
+  .actions {
+    background-color: #f7f7fc;
   }
 
   .disc-chauffage::before {
