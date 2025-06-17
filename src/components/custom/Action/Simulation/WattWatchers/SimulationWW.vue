@@ -17,22 +17,24 @@
     "
   />
 
-  <KyCsAction
-    v-if="etapeActuelle === EtapeSimulateur.SIMULATEUR"
-    :action-id="SimulateursSupportes.WINTER"
-    :idEnchainementKycs="idEnchainementKycs"
-    :type-action="TypeAction.SIMULATEUR"
-    class="fr-px-2w"
-  >
-    <template v-slot:fin>
-      <SimulationResultatVoiture />
-    </template>
-  </KyCsAction>
+  <SimulationResultatWW />
+
+  <!--  <KyCsAction-->
+  <!--    v-if="etapeActuelle === EtapeSimulateur.SIMULATEUR"-->
+  <!--    :action-id="SimulateursSupportes.WINTER"-->
+  <!--    :idEnchainementKycs="idEnchainementKycs"-->
+  <!--    :type-action="TypeAction.SIMULATEUR"-->
+  <!--    class="fr-px-2w"-->
+  <!--  >-->
+  <!--    <template v-slot:fin>-->
+  <!--      <SimulationResultatWW />-->
+  <!--    </template>-->
+  <!--  </KyCsAction>-->
 </template>
 
 <script setup lang="ts">
   import { ref } from 'vue';
-  import SimulationResultatVoiture from '@/components/custom/Action/Simulation/Voiture/SimulationResultatVoiture.vue';
+  import SimulationResultatWW from '@/components/custom/Action/Simulation/WattWatchers/SimulationResultatWW.vue';
   import SimulationWwIntroduction from '@/components/custom/Action/Simulation/WattWatchers/SimulationWWIntroduction.vue';
   import SimulationWwRenseignement from '@/components/custom/Action/Simulation/WattWatchers/SimulationWWRenseignement.vue';
   import KyCsAction from '@/components/custom/KYC/KYCsAction.vue';
@@ -49,5 +51,5 @@
     SIMULATEUR = 'resultat',
   }
 
-  const etapeActuelle = ref<EtapeSimulateur>(EtapeSimulateur.RENSEIGNEMENT);
+  const etapeActuelle = ref<EtapeSimulateur>(EtapeSimulateur.SIMULATEUR);
 </script>
