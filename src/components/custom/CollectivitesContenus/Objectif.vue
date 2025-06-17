@@ -4,7 +4,7 @@
       <h2 class="fr-h3 text--white text--lh-0 fr-pt-2w fr-pb-1v">Prochain objectif :</h2>
       <p class="fr-mb-2w fr-text--lg">{{ objectifInscription }} inscrits sur J'agis dans votre commune</p>
       <BarreDeProgression
-        label="test"
+        label=""
         :value="nombreInscription"
         :value-max="objectifInscription"
         couleur="green"
