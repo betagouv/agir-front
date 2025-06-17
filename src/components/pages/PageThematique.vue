@@ -199,5 +199,8 @@
       linear-gradient(var(--beige-gris-galet-950-100), var(--beige-gris-galet-950-100));
     background-repeat: no-repeat;
     background-position: right top;
+    @media all and (max-width: 767px) {
+      background-image: none;
+    }
   }
 </style>

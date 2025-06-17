@@ -10,14 +10,14 @@
       </button>
     </div>
 
-    <div class="decalage-droite">
+    <div class="decalage-droite fr-hidden fr-unhidden-md">
       <div class="flex flex-column">
         <div class="flex flex-center">
-          <img :src="buildIllustrationFilePath(1)" class="action-illustration" alt="" />
-          <img :src="buildIllustrationFilePath(2)" class="action-illustration" alt="" />
+          <img :src="buildIllustrationFilePath(1)" alt="" class="action-illustration" />
+          <img :src="buildIllustrationFilePath(2)" alt="" class="action-illustration" />
         </div>
         <div class="flex flex-center">
-          <img :src="buildIllustrationFilePath(3)" class="action-illustration" alt="" />
+          <img :src="buildIllustrationFilePath(3)" alt="" class="action-illustration" />
         </div>
       </div>
     </div>
@@ -34,6 +34,7 @@
 
   const thematique = ref<Thematique>(MenuThematiques.getFromUrl(useRoute().params.id as string));
   const thematiqueId = ref<ClefThematiqueAPI>(thematique.value.clefTechniqueAPI as ClefThematiqueAPI);
+
   function buildIllustrationFilePath(id: number) {
     return `/${thematiqueId.value}-action-${id}.webp`;
   }
