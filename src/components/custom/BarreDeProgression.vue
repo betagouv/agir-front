@@ -19,7 +19,7 @@
       value: number;
       valueMax: number;
       couleur: string;
-      couleurBackground: string;
+      couleurBackground?: string;
       minWidth?: string;
     }>(),
     { minWidth: '8%', couleurBackground: '#dddddd' },
