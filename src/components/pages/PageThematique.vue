@@ -1,21 +1,24 @@
 <template>
-  <ThematiqueResume
-    v-if="thematiqueResumeViewModel"
-    :thematique="thematique"
-    :thematiqueResume="thematiqueResumeViewModel"
-  />
-
-  <section class="fr-py-4w background-color--gris-galet-950-100">
+  <section class="fr-pb-1w headerThematique background--beige-gris-galet-950-100">
     <div class="fr-container">
-      <h2 class="fr-mb-1w">Mes actions recommandées</h2>
-
+      <div class="fr-pt-7w fr-pb-3w fr-pb-1w">
+        <h1 class="fr-h1 fr-col fr-m-0 fr-pb-2w display-inline-block">
+          <span aria-hidden="true"> {{ thematique.emoji }}</span>
+          {{ thematique.labelDansLeMenu }}
+        </h1>
+        <router-link
+          :title="`à ${thematiqueResumeViewModel?.commune}: modifier cette commune`"
+          :to="{ name: RouteCompteName.LOGEMENT }"
+          class="fr-tag fr-icon-map-pin-2-fill fr-tag--icon-left fr-ml-2w"
+        >
+          à {{ thematiqueResumeViewModel?.commune }}
+        </router-link>
+      </div>
+    </div>
+    <div class="fr-container">
       <div v-if="isLoading" class="placeholder"></div>
 
       <template v-else-if="idEnchainementKycs">
-        <p class="fr-mb-4w">
-          Afin d’obtenir vos actions personnalisées, pouvez-vous nous en dire un peu plus sur vous ?
-        </p>
-
         <ParcoursKYCPourRecommandations
           :id-enchainement-kycs="idEnchainementKycs"
           :on-fin-k-y-c="chargerActionsRecommandeesAvecUnDelai"
@@ -45,20 +48,20 @@
       <div class="fr-grid-row fr-my-6w">
         <WidgetServiceFruitsEtLegumes class="fr-col-12 fr-col-md-6 fr-pr-md-3w fr-text--sm" />
 
-        <WidgetServicePresDeChezNous class="fr-col-12 fr-col-md-6 fr-pl-md-3w" :nombre-de-cartes-par-ligne="1" />
+        <WidgetServicePresDeChezNous :nombre-de-cartes-par-ligne="1" class="fr-col-12 fr-col-md-6 fr-pl-md-3w" />
       </div>
     </div>
 
-    <WidgetAides :clef-thematique="thematiqueId" :nombre-aides-max="4" class="fr-my-4w" />
+    <WidgetAides :clef-thematique="thematiqueId" :nombre-aides-max="3" class="fr-my-4w" />
 
-    <ArticlesRecommandees :clef-thematique="thematiqueId" :key="thematiqueId">
+    <ArticlesRecommandees :key="thematiqueId" :clef-thematique="thematiqueId">
       <template v-slot:title>
         <h2 class="fr-h3 fr-mb-0">Pour aller plus loin</h2>
       </template>
     </ArticlesRecommandees>
 
     <section class="fr-mt-8w fr-mb-12w flex flex-column align-items--center">
-      <img src="/jumelle.svg" alt="" class="fr-mt-6w fr-mb-2w" />
+      <img alt="" class="fr-mt-6w fr-mb-2w" src="/jumelle.svg" />
 
       <h2 class="fr-h3">Envie de voir ou de revoir toutes les actions ?</h2>
 
@@ -77,7 +80,6 @@
   import CatalogueActionsRecommandees from '@/components/custom/Action/Catalogue/CatalogueActionsRecommandees.vue';
   import WidgetAides from '@/components/custom/Aides/WidgetAides.vue';
   import ParcoursKYCPourRecommandations from '@/components/custom/Thematiques/ParcoursKYCPourRecommandations.vue';
-  import ThematiqueResume from '@/components/custom/Thematiques/ThematiqueResume.vue';
   import WidgetServiceFruitsEtLegumes from '@/components/pages/PagesService/components/WidgetServiceFruitsEtLegumes.vue';
   import WidgetServicePresDeChezNous from '@/components/pages/PagesService/components/WidgetServicePresDeChezNous.vue';
   import WidgetServiceRecettes from '@/components/pages/PagesService/components/WidgetServiceRecettes.vue';
@@ -93,6 +95,7 @@
   import { ThematiqueResumeViewModel } from '@/domaines/thematiques/ports/thematiqueResume.presenter';
   import { ResetPersonnalisationUsecase } from '@/domaines/thematiques/resetPersonnalisation.usecase';
   import { RouteActionsName } from '@/router/actions/routes';
+  import { RouteCompteName } from '@/router/compte/routeCompteName';
   import useHeadProperties from '@/shell/useHeadProperties';
   import { utilisateurStore } from '@/store/utilisateur';
 
@@ -131,7 +134,9 @@
   const thematiqueResumeViewModel = ref<ThematiqueResumeViewModel>();
   const idEnchainementKycs = ref<string>();
   const isLoading = ref<boolean>(true);
-
+  const thematiqueIllustrationPath = computed(() => {
+    return `url(${thematique.value.illustration})`;
+  });
   const chargerActionsRecommandeesUsecase = new RecupererDetailThematiqueUsecase(new ActionsRepositoryAxios());
 
   onMounted(async () => {
@@ -181,5 +186,17 @@
 <style scoped>
   .placeholder {
     min-height: 20rem;
+  }
+
+  .headerThematique {
+    min-height: 20rem;
+    background-image:
+      v-bind(thematiqueIllustrationPath),
+      linear-gradient(var(--beige-gris-galet-950-100), var(--beige-gris-galet-950-100));
+    background-repeat: no-repeat;
+    background-position: right top;
+    @media all and (max-width: 767px) {
+      background-image: linear-gradient(var(--beige-gris-galet-950-100), var(--beige-gris-galet-950-100));
+    }
   }
 </style>
