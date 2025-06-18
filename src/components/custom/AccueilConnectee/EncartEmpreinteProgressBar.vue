@@ -1,17 +1,21 @@
 <template>
   <div>
     <div class="cercle-vert"></div>
-    <div class="completion flex flex-column align-items--center">
-      <div class="text--bold fr-mb-1w">
-        <span class="text--4xl fr-pl-1v">{{ progression }}</span>
-        <span class="fr-text--lg">%</span>
-      </div>
+    <p class="completion flex flex-column align-items--center fr-mb-0">
+      <span
+        class="text--bold fr-mb-1w"
+        :aria-label="`${progression}% de progression pour votre empreinte environnementale`"
+      >
+        <span class="text--4xl fr-pl-1v" v-text="progression" />
+        <span class="fr-text--lg" v-text="'%'" />
+      </span>
       <router-link
         :to="{ name: RouteBilanCarboneName.BILAN_CARBONE }"
         class="fr-link fr-link--icon-right full-width fr-icon-arrow-right-line text--white"
+        title="Compléter mon empreinte environnementale"
         >Compléter
       </router-link>
-    </div>
+    </p>
 
     <svg
       class="progress-bar-incurve"
@@ -20,6 +24,7 @@
       viewBox="0 0 113 39"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
     >
       <path
         d="M3 36C13.002 16.3993 33.2053 3 56.5 3C79.7947 3 99.998 16.3993 110 36"
@@ -92,6 +97,6 @@
     position: absolute;
     z-index: 3;
     right: 0.5rem;
-    bottom: 23%;
+    bottom: 20%;
   }
 </style>

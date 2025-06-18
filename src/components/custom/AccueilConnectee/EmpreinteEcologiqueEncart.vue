@@ -9,7 +9,7 @@
             :to="{ name: RouteBilanCarboneName.BILAN_CARBONE }"
             class="enlever-background-actif-dsfr text--bold fr-icon-arrow-right-s-line fr-link--icon-right fr-text--lg fr-m-0 fr-my-3w text--white"
           >
-            Calculer mon empreinte écologique
+            {{ empreinteIncomplete ? 'Calculer mon empreinte écologique' : 'Mon empreinte écologique' }}
           </router-link>
         </div>
 
@@ -17,7 +17,7 @@
           <img src="/illustration-encart-empreinte.svg" alt="" class="fr-hidden fr-unhidden-lg full-height" />
         </div>
 
-        <EncartEmpreinteProgressBar v-if="progression < 100" :progression="props.progression" />
+        <EncartEmpreinteProgressBar v-if="empreinteIncomplete" :progression="props.progression" />
         <EncartEmpreinteResultat v-else :tonnes="props.tonnes" />
       </div>
     </div>
@@ -25,11 +25,15 @@
 </template>
 
 <script setup lang="ts">
+  import { computed } from 'vue';
   import EncartEmpreinteProgressBar from '@/components/custom/AccueilConnectee/EncartEmpreinteProgressBar.vue';
   import EncartEmpreinteResultat from '@/components/custom/AccueilConnectee/EncartEmpreinteResultat.vue';
   import { RouteBilanCarboneName } from '@/router/bilanCarbone/routes.js';
 
   const props = defineProps<{ progression: number; tonnes: number }>();
+  const empreinteIncomplete = computed(() => {
+    return props.progression < 100;
+  });
 </script>
 
 <style scoped>

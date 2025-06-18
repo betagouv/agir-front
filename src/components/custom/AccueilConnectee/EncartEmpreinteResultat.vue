@@ -5,7 +5,7 @@
     <p class="completion flex flex-column align-items--center text--center text--bold fr-mb-0 text--lh-1">
       <span class="text--4xl">{{ tonnes }}</span>
       <span class="fr-text--lg fr-mb-0 display-block">tonnes</span>
-      <span class="text--normal">de CO2e par an</span>
+      <span class="text--normal" aria-label="de CO2 équivalent par an">de CO2e par an</span>
     </p>
 
     <svg
@@ -15,6 +15,7 @@
       height="39"
       viewBox="0 0 113 39"
       fill="none"
+      aria-hidden="true"
     >
       <defs>
         <linearGradient id="degrade_progressbar" gradientUnits="userSpaceOnUse">
