@@ -38,7 +38,7 @@
           </div>
         </div>
       </div>
-      <div v-if="actions.length !== 0" class="flex flex-center fr-mt-3w">
+      <div v-if="actions.length !== 0" class="flex flex-center fr-mt-3w fr-mb-1w">
         <button
           class="fr-btn fr-btn--tertiary-no-outline fr-icon-refresh-line fr-icon--sm fr-btn--icon-left fr-mx-0"
           @click="supprimerCarte"

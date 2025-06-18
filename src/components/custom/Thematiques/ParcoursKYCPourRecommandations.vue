@@ -1,6 +1,6 @@
 <template>
   <div
-    class="parent background--white fr-px-3w fr-pb-3w fr-pt-2w position--relative overflow--hidden flex flex-column flex-center"
+    class="parent background--white fr-px-3w fr-pb-3w fr-pt-2w position--relative overflow--hidden flex flex-column flex-center fr-mb-3w"
   >
     <CommencerParcours v-if="!aCommenceEnchainement" :continuer="() => (aCommenceEnchainement = true)" />
 

@@ -19,10 +19,6 @@
       <div v-if="isLoading" class="placeholder"></div>
 
       <template v-else-if="idEnchainementKycs">
-        <p class="fr-mb-4w">
-          Afin d’obtenir vos actions personnalisées, pouvez-vous nous en dire un peu plus sur vous ?
-        </p>
-
         <ParcoursKYCPourRecommandations
           :id-enchainement-kycs="idEnchainementKycs"
           :on-fin-k-y-c="chargerActionsRecommandeesAvecUnDelai"
@@ -200,7 +196,7 @@
     background-repeat: no-repeat;
     background-position: right top;
     @media all and (max-width: 767px) {
-      background-image: none;
+      background-image: linear-gradient(var(--beige-gris-galet-950-100), var(--beige-gris-galet-950-100));
     }
   }
 </style>
