@@ -1,6 +1,6 @@
 <template>
   <section>
-    <EmpreinteEcologiqueEncart :progression="42" />
+    <EmpreinteEcologiqueEncart :progression="100" :tonnes="5" />
   </section>
 
   <section>
