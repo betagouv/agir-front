@@ -1,5 +1,35 @@
 # Changelog
 
+## [2.13.0](https://github.com/betagouv/agir-front/compare/v2.12.0...v2.13.0) (2025-06-19)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* ajout du copyright spf sur les recettes ([#1169](https://github.com/betagouv/agir-front/issues/1169)) ([308e946](https://github.com/betagouv/agir-front/commit/308e9467450130586c57338728cfdae1ec592b20))
+* barre d'adresse postale dans les services ([#1168](https://github.com/betagouv/agir-front/issues/1168)) ([9e1d0bb](https://github.com/betagouv/agir-front/commit/9e1d0bba72b382a122ef4328b71eb803b9114664))
+* explication des recommandations d'actions ([#1158](https://github.com/betagouv/agir-front/issues/1158)) ([63e4dec](https://github.com/betagouv/agir-front/commit/63e4dec03940a09ff2df7bc2789cd0804e215dab))
+* mise à jour du bandeau de la home ([#1176](https://github.com/betagouv/agir-front/issues/1176)) ([19ac9d2](https://github.com/betagouv/agir-front/commit/19ac9d25d21ea9d123a357e119334af37e4196e3))
+* nouvelle page thematique ([#1167](https://github.com/betagouv/agir-front/issues/1167)) ([710b2ee](https://github.com/betagouv/agir-front/commit/710b2ee88928ccbe33fcc8d5154412590d803879))
+
+
+### 🐛 Corrections de bogues
+
+* problème code postal n'existe pas ([#1177](https://github.com/betagouv/agir-front/issues/1177)) ([83ae665](https://github.com/betagouv/agir-front/commit/83ae665eb69bad63144b0cbec4ead54eca49dd27))
+
+
+### 👷 Autres changements
+
+* Bump @playwright/test from 1.52.0 to 1.53.0 ([#1170](https://github.com/betagouv/agir-front/issues/1170)) ([075cbae](https://github.com/betagouv/agir-front/commit/075cbae37135bb020c785877f221263a91b10c79))
+* Bump @sentry/vue from 9.24.0 to 9.27.0 ([#1163](https://github.com/betagouv/agir-front/issues/1163)) ([b7220bd](https://github.com/betagouv/agir-front/commit/b7220bd4728f454c300547672788c679246f60ab))
+* Bump @sentry/vue from 9.27.0 to 9.29.0 ([#1173](https://github.com/betagouv/agir-front/issues/1173)) ([ffa9ef3](https://github.com/betagouv/agir-front/commit/ffa9ef336c38a7f48ff711c993429a972cba9435))
+* Bump @types/node from 22.15.21 to 22.15.30 ([#1165](https://github.com/betagouv/agir-front/issues/1165)) ([d7ecb44](https://github.com/betagouv/agir-front/commit/d7ecb44ad1a87c473cb19920a379700313001edd))
+* Bump @types/node from 24.0.0 to 24.0.3 ([#1174](https://github.com/betagouv/agir-front/issues/1174)) ([b4187cf](https://github.com/betagouv/agir-front/commit/b4187cf98181107e12e113962932741755a04bf2))
+* Bump chart.js from 4.4.9 to 4.5.0 ([#1172](https://github.com/betagouv/agir-front/issues/1172)) ([d083299](https://github.com/betagouv/agir-front/commit/d0832996c51a2095e06b57b7df9c5802b008a4b5))
+* Bump lighthouse from 12.6.0 to 12.6.1 ([#1164](https://github.com/betagouv/agir-front/issues/1164)) ([a17776d](https://github.com/betagouv/agir-front/commit/a17776df9220543fb2b95d8b796350b2493e192c))
+* Bump lint-staged from 16.1.0 to 16.1.2 ([#1171](https://github.com/betagouv/agir-front/issues/1171)) ([f8f6c17](https://github.com/betagouv/agir-front/commit/f8f6c17609036532f8718a7b8549ce884b1d1b92))
+* Bump pinia from 3.0.2 to 3.0.3 ([#1162](https://github.com/betagouv/agir-front/issues/1162)) ([54b1a19](https://github.com/betagouv/agir-front/commit/54b1a192d0c85134dbce4674eec9e297c7fa02f2))
+* suppression des images non utilisées ([#1175](https://github.com/betagouv/agir-front/issues/1175)) ([efc0e32](https://github.com/betagouv/agir-front/commit/efc0e32b4f22f6dc1293f73122a79379aa1b2e30))
+
 ## [2.12.0](https://github.com/betagouv/agir-front/compare/v2.11.0...v2.12.0) (2025-06-04)
 
 
