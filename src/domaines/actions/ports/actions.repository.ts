@@ -106,6 +106,8 @@ export type CompteurActions = number;
 export interface ActionsRepository {
   chargerCatalogueActions(idUtilisateur: string): Promise<CatalogueActions>;
 
+  chargerActionsRecommandees(idUtilisateur: string): Promise<Action[]>;
+
   filtrerCatalogueActions(
     idUtilisateur: string,
     filtresThematiques: string[],

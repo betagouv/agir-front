@@ -3,7 +3,7 @@
     <EmpreinteEcologiqueEncart :progression="100" :tonnes="5" />
   </section>
 
-  <section>
+  <section class="background--beige-clair">
     <RecommandationAccueilConnecte />
   </section>
 
@@ -47,6 +47,10 @@
 <style scoped>
   .background--brown-cafe-creme-main-782 {
     background: var(--brown-cafe-creme-main-782);
+  }
+
+  .background--beige-clair {
+    background-color: #f6f4ef;
   }
 
   .zindex-3 {

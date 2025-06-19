@@ -2,42 +2,7 @@
   <section>
     <BallLoader v-if="estEnRefresh" text="Nous préparons vos recommandations personnalisées..." />
     <div v-else>
-      <div class="fr-grid-row fr-grid-row--gutters">
-        <div v-for="action in actions" :key="action.code" :class="cardClasses">
-          <div class="fr-card fr-enlarge-link fr-card--horizontal fr-card--sm relative">
-            <div class="fr-card__body">
-              <div class="fr-card__content">
-                <h3 class="fr-card__title">
-                  <router-link :to="action.url">
-                    <span class="text--black" v-html="action.titre" />
-                  </router-link>
-                </h3>
-                <ul class="fr-card__desc list-style-none fr-p-0 flex gap--small flex-wrap">
-                  <li v-if="action.url.params.type === 'quizz'" class="fr-pb-0">
-                    <span class="fr-badge background-bleu-light text--bleu fr-pl-1w">QUIZ</span>&nbsp;
-                  </li>
-                  <li v-if="action.url.params.type === 'simulateur'" class="fr-pb-0">
-                    <span class="fr-badge background-bleu-light text--bleu fr-pl-1w">SIMULATEUR</span>&nbsp;
-                  </li>
-                  <li v-if="action.aidesDisponibles" class="text--bleu fr-icon-money-euro-circle-line fr-pb-0">
-                    <span class="text--gris fr-pl-1w" v-html="action.aidesDisponibles" />
-                  </li>
-                  <li v-else-if="action.nombreDePersonnes" class="text--bleu fr-icon-team-line fr-pb-0">
-                    <span class="text--gris fr-pl-1w" v-html="action.nombreDePersonnes" />&nbsp;
-                  </li>
-                </ul>
-              </div>
-              <div class="fr-card__footer">
-                <ul
-                  class="fr-btns-group fr-btns-group--inline fr-btns-group--sm fr-btns-group--icon-left flex-space-between"
-                >
-                  <li></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <ListeCartesActions :actions="actions" :card-classes="cardClasses" />
       <div v-if="actions.length !== 0" class="flex flex-center fr-mt-3w fr-mb-1w">
         <button
           class="fr-btn fr-btn--tertiary-no-outline fr-icon-refresh-line fr-icon--sm fr-btn--icon-left fr-mx-0"
@@ -76,6 +41,7 @@
 
 <script lang="ts" setup>
   import { computed, ref } from 'vue';
+  import ListeCartesActions from '@/components/custom/Action/Catalogue/ListeCartesActions.vue';
   import BallLoader from '@/components/custom/Thematiques/BallLoader.vue';
   import { ActionViewModel } from '@/domaines/actions/ports/actions.presenter';
   import { ThematiquesRepositoryAxios } from '@/domaines/thematiques/adapters/thematiques.repository.axios';
@@ -135,6 +101,6 @@
   }
 
   .fr-card__content {
-    padding-bottom: 0.5rem !important;
+    padding-bottom: 2.5rem !important;
   }
 </style>
