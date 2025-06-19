@@ -61,7 +61,7 @@
 <script setup lang="ts">
   import { ChargementCommunesUsecase } from '@/domaines/communes/chargementCommunesUsecase';
   import { CommuneRepositoryAxios } from '@/domaines/communes/adapters/commune.repository.axios';
-  import { computed, onMounted, ref } from 'vue';
+  import { computed, nextTick, onMounted, ref } from 'vue';
   import { Commune } from '@/domaines/communes/ports/commune.repository';
 
   const codePostal = defineModel<string>('codePostal', {
@@ -93,6 +93,7 @@
   });
 
   const onCodePostalInput = async () => {
+    await nextTick();
     if (codePostalValide.value) {
       communes.value = await usecase.execute(codePostal.value);
       if (codePostalNexistePas.value) return;
