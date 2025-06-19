@@ -4,6 +4,7 @@
       <Doughnut :data="graphData" :options="graphOptions" ref="chartRef" aria-hidden="true" />
 
       <p class="texte-au-centre fr-mb-0">
+        <!--        TODO: mettre le formatteur de prix dans le presenter-->
         <span class="display-block text--bold text--3xl fr-mb-1w">{{ totalConsommation }}€</span>
         consommés
         <span class="display-block text--gris-light">par an</span>
