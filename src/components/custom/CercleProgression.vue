@@ -5,7 +5,7 @@
 
       <circle cx="50" cy="50" r="45" class="progression" :style="progressionStyle" />
     </svg>
-    <span class="pourcentage fr-mt-1v">
+    <span class="pourcentage fr-text--sm fr-mb-0">
       {{ pourcentage }}<span class="pourcent">%</span><span class="fr-sr-only">de complétion pour</span>
     </span>
   </span>
@@ -32,8 +32,8 @@
 <style scoped>
   .cercle-progression {
     position: relative;
-    width: 5.5rem;
-    height: 5.5rem;
+    width: 2.5rem;
+    height: 2.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -45,13 +45,13 @@
 
   .background {
     fill: none;
-    stroke: #e7e3dc;
+    stroke: #d1c9b4;
     stroke-width: 5;
   }
 
   .progression {
     fill: none;
-    stroke: #a89f8e;
+    stroke: #9c8653;
     stroke-width: 5;
     stroke-linecap: round;
     transition: stroke-dashoffset 0.6s ease-in-out;
@@ -59,7 +59,6 @@
 
   .pourcentage {
     position: absolute;
-    font-size: 2rem;
     font-weight: bold;
   }
 
