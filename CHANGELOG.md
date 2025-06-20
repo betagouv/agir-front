@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.13.1](https://github.com/betagouv/agir-front/compare/v2.13.0...v2.13.1) (2025-06-20)
+
+
+### 🐛 Corrections de bogues
+
+* image ngc manquante ([#1178](https://github.com/betagouv/agir-front/issues/1178)) ([890a99e](https://github.com/betagouv/agir-front/commit/890a99e071e61ce1d9218aaca0fe6face403a86b))
+
 ## [2.13.0](https://github.com/betagouv/agir-front/compare/v2.12.0...v2.13.0) (2025-06-19)
 
 
