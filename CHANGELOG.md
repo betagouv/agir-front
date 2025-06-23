@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.13.2](https://github.com/betagouv/agir-front/compare/v2.13.1...v2.13.2) (2025-06-23)
+
+
+### 🐛 Corrections de bogues
+
+* **liens profonds:** ajout de relation pour android ([#1182](https://github.com/betagouv/agir-front/issues/1182)) ([acf7edf](https://github.com/betagouv/agir-front/commit/acf7edf83e35a412d53431b4ffd7dda9056983ca))
+* **liens profonds:** ajout de relation pour android en prod ([#1185](https://github.com/betagouv/agir-front/issues/1185)) ([201327f](https://github.com/betagouv/agir-front/commit/201327f9acab6f0c88ff42d872c8e5db9b7d25ca))
+
 ## [2.13.1](https://github.com/betagouv/agir-front/compare/v2.13.0...v2.13.1) (2025-06-20)
 
 
