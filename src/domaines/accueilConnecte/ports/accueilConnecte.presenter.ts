@@ -4,7 +4,7 @@ import { RaccourciViewModel } from '@/domaines/thematiques/ports/thematiqueResum
 type ProgressionViewModel = {
   nombreActionsTerminees: number;
   pourcentageCompletionBilan: number;
-  tonneBilan: string;
+  tonneBilan: number;
 };
 
 export interface AccueilConnecteViewModel {

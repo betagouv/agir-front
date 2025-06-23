@@ -1,6 +1,9 @@
 <template>
   <section>
-    <EmpreinteEcologiqueEncart :progression="100" :tonnes="5" />
+    <EmpreinteEcologiqueEncart
+      :progression="accueilConnecteViewModel?.progression.pourcentageCompletionBilan ?? 0"
+      :tonnes="accueilConnecteViewModel?.progression.tonneBilan ?? 0"
+    />
   </section>
 
   <section class="background--beige-clair">

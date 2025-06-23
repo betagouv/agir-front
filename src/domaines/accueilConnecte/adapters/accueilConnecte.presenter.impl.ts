@@ -14,7 +14,7 @@ export class AccueilConnectePresenterImpl implements AccueilConnectePresenter {
       progression: {
         nombreActionsTerminees: accueilConnecte.totalActionsUtilisateurFaites,
         pourcentageCompletionBilan: accueilConnecte.pourcentageCompletionBilan,
-        tonneBilan: Math.round(accueilConnecte.bilanCarboneTotalKg / 1000).toString(),
+        tonneBilan: Math.round(accueilConnecte.bilanCarboneTotalKg / 1000),
       },
       raccourcis: [
         Raccourcis.serviceProximite,
