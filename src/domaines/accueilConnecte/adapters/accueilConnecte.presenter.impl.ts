@@ -12,7 +12,6 @@ export class AccueilConnectePresenterImpl implements AccueilConnectePresenter {
     this.accueilConnecteViewModel({
       commune: accueilConnecte.commune,
       progression: {
-        nombreActionsTerminees: accueilConnecte.totalActionsUtilisateurFaites,
         pourcentageCompletionBilan: accueilConnecte.pourcentageCompletionBilan,
         tonneBilan: Math.round(accueilConnecte.bilanCarboneTotalKg / 1000),
       },

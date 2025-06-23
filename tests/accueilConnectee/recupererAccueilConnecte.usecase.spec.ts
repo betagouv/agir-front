@@ -30,9 +30,8 @@ describe('Fichier de tests concernant la home connectée', () => {
         expect(vm).toStrictEqual<AccueilConnecteViewModel>({
           commune: 'commune',
           progression: {
-            nombreActionsTerminees: 5,
             pourcentageCompletionBilan: 10,
-            tonneBilan: '0',
+            tonneBilan: 0,
           },
           raccourcis: [
             {
@@ -118,6 +117,5 @@ describe('Fichier de tests concernant la home connectée', () => {
         });
       }),
     );
-    // THEN
   });
 });

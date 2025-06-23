@@ -2,7 +2,6 @@ import { AccueilConnecte } from '@/domaines/accueilConnecte/ports/accueilConnect
 import { RaccourciViewModel } from '@/domaines/thematiques/ports/thematiqueResume.presenter';
 
 type ProgressionViewModel = {
-  nombreActionsTerminees: number;
   pourcentageCompletionBilan: number;
   tonneBilan: number;
 };

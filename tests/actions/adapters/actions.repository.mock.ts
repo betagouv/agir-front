@@ -1,4 +1,5 @@
 import {
+  Action,
   ActionDetail,
   ActionsRepository,
   CatalogueActions,
@@ -11,6 +12,7 @@ export class ActionsRepositoryMock implements ActionsRepository {
     private readonly action?: ActionDetail,
     private readonly actionsRecommandeesDansUneThematique?: DetailThematique,
     private readonly catalogueActions?: CatalogueActions,
+    private readonly actions?: Action[],
   ) {}
 
   static empty(): ActionsRepositoryMock {
@@ -21,16 +23,24 @@ export class ActionsRepositoryMock implements ActionsRepository {
     return new ActionsRepositoryMock(actionDetail);
   }
 
-  static avecCatalogue(catalogue: CatalogueActions): ActionsRepositoryMock {
-    return new ActionsRepositoryMock(undefined, undefined, catalogue);
-  }
-
   static avecActionsRecommandeesDansUneThematique(actionsRecommandeesDansUneThematique: DetailThematique) {
     return new ActionsRepositoryMock(undefined, actionsRecommandeesDansUneThematique);
   }
 
+  static avecCatalogue(catalogue: CatalogueActions): ActionsRepositoryMock {
+    return new ActionsRepositoryMock(undefined, undefined, catalogue);
+  }
+
+  static avecActions(actions: Action[]): ActionsRepositoryMock {
+    return new ActionsRepositoryMock(undefined, undefined, undefined, actions);
+  }
+
   chargerAction(idUtilisateur: string, idAction: string): Promise<ActionDetail> {
     return Promise.resolve(this.action!);
+  }
+
+  chargerActionsRecommandees(idUtilisateur: string): Promise<Action[]> {
+    return Promise.resolve(this.actions!);
   }
 
   chargerCatalogueActions(): Promise<CatalogueActions> {

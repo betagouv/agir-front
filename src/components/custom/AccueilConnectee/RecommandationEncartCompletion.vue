@@ -1,7 +1,7 @@
 <template>
   <div class="background--marron-clair flex flex-space-between align-items--center fr-py-2w fr-px-4w">
     <div class="flex align-items--center">
-      <CercleProgression pourcentage="13" />
+      <CercleProgression :pourcentage="13" />
       <div class="fr-ml-2w">
         <h2 class="fr-h4 fr-mb-0">Affinez vos recommandations</h2>
         <p class="fr-mb-0">Répondez à 5 questions sur le thème de votre choix</p>
