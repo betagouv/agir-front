@@ -156,10 +156,12 @@
     logementViewModel.value?.numeroRue,
     logementViewModel.value?.coordonnees,
   );
+  const barreDeRechercheInitialisationViewModel = ref<BarreDeRechercheViewModel>();
   const adresseBarreDeRecherche = ref<AdresseBarreDeRecherche>();
-  const barreDeRechercheViewModel = ref<BarreDeRechercheViewModel>();
-  new BarreDeRecherchePresenterImpl(vm => (barreDeRechercheViewModel.value = vm)).presente(adresseDansLeCompte);
-  const recherche = ref<string>(barreDeRechercheViewModel.value?.recherche ?? '');
+  new BarreDeRecherchePresenterImpl(vm => (barreDeRechercheInitialisationViewModel.value = vm)).presente(
+    adresseDansLeCompte,
+  );
+  const recherche = ref<string>(barreDeRechercheInitialisationViewModel.value?.recherche ?? '');
 
   const doitAfficherBarreAdresse = computed(() => adresseDansLeCompte.estAdresseComplete());
   const isCodePostalEnErreur = ref(false);
@@ -170,6 +172,15 @@
   const enregistrerLesInformations = () => {
     if (!codePostalEstValide.value) {
       afficherAlerte('error', 'Erreur', 'Veuillez renseigner votre commune.');
+      return;
+    }
+
+    if (
+      doitAfficherBarreAdresse.value &&
+      recherche.value !== barreDeRechercheInitialisationViewModel.value?.recherche &&
+      !adresseBarreDeRecherche.value
+    ) {
+      afficherAlerte('error', 'Erreur', 'Veuillez renseigner une adresse.');
       return;
     }
 
