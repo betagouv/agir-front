@@ -8,18 +8,25 @@
       <form aria-labelledby="identity-fieldset-legend" class="fr-mb-4w" @submit.prevent="validerLaReponse()">
         <fieldset class="fr-fieldset fr-mb-0">
           <legend id="identity-fieldset-legend" class="fr-fieldset__legend fr-text--regular fr-text--lg">
-            Nous avons quelques questions à vous poser pour personnaliser votre expérience !
+            Nous avons quelques questions à vous poser pour personnaliser votre expérience&nbsp;!
           </legend>
+          <Alert
+            v-if="alerte.isActive"
+            :message="alerte.message"
+            :titre="alerte.titre"
+            :type="'error'"
+            class="fr-col-12 fr-mb-2w"
+          />
           <div class="fr-fieldset__element">
             <InputText
-              autocomplete="username"
               v-model="onboardingPostCreationCompte().pseudo"
               :autofocus="true"
               :erreur="champsPseudoStatus"
               :maxlength="20"
               :required="true"
-              label="Votre pseudonyme"
+              autocomplete="username"
               description="Doit être composé de 3 à 21 caractères. Lettres et chiffres uniquement."
+              label="Votre pseudonyme"
               name="utilisateur-pseudo"
             />
 
@@ -34,6 +41,7 @@
             />
           </div>
         </fieldset>
+
         <button class="fr-btn fr-mr-4w">Passer à l'étape suivante</button>
       </form>
     </div>
@@ -42,9 +50,13 @@
 
 <script lang="ts" setup>
   import { onMounted, ref, useTemplateRef } from 'vue';
+  import Alert from '@/components/custom/Alert.vue';
   import InputDateDeNaissance from '@/components/dsfr/InputDateDeNaissance.vue';
   import InputText from '@/components/dsfr/InputText.vue';
   import { validationPseudo, validationPseudoTaille } from '@/components/validations/validationsChampsFormulaire';
+  import { useAlerte } from '@/composables/useAlerte';
+  import { OnboardingRepositoryAxios } from '@/domaines/onboarding/adapters/onboarding.repository.axios';
+  import { OnboardingEtape1Usecase } from '@/domaines/onboarding/onboardingEtape1.usecase';
   import router from '@/router';
   import { RouteCompteName } from '@/router/compte/routeCompteName';
   import { onboardingPostCreationCompte } from '@/store/onboardingPostCreationCompte';
@@ -53,6 +65,7 @@
   const inputPseudo = ref<HTMLInputElement>();
   const dateDeNaissanceComposant = useTemplateRef('dateDeNaissanceComposant');
 
+  const { alerte, afficherAlerte } = useAlerte();
   onMounted(() => {
     inputPseudo.value = document.querySelector('#utilisateur-pseudo') as HTMLInputElement;
   });
@@ -61,7 +74,24 @@
     if (!onValidationPseudo()) return;
     if (!utilisateurStore().utilisateur.estUnUtilisateurFranceConnect && !dateDeNaissanceComposant.value?.validation())
       return;
-    router.push({ name: RouteCompteName.POST_CREATION_COMPTE_ETAPE_2 });
+
+    const onboardingEtape1Usecase = new OnboardingEtape1Usecase(new OnboardingRepositoryAxios());
+    onboardingEtape1Usecase
+      .execute(
+        utilisateurStore().utilisateur.id,
+        onboardingPostCreationCompte().pseudo,
+        onboardingPostCreationCompte().dateDeNaissance,
+      )
+      .then(() => {
+        router.push({ name: RouteCompteName.POST_CREATION_COMPTE_ETAPE_2 });
+      })
+      .catch(error => {
+        afficherAlerte(
+          'error',
+          'Erreur lors de la création du compte',
+          error.data.message ? 'erreur inconnue' : error.data.message,
+        );
+      });
   };
   const champsPseudoStatus = ref({ message: '', afficher: false });
 
