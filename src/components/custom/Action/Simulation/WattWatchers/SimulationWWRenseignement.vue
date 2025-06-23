@@ -23,11 +23,15 @@
           {{ erreurAdresse }}
         </p>
 
-        <EnregistreurAdressePrincipale
-          v-if="adresse && coordonnees && avecAdressePrivee"
-          :adresse="adresse"
-          :coordonnees="coordonnees"
-          @enregistrementNouvelleAdresse="avecAdressePrivee = false"
+        <Callout
+          v-if="avecAdressePrivee"
+          :button="{
+            text: 'Choisir comme adresse principale',
+            onClick: definirAdressePrincipale,
+          }"
+          :icone-information="false"
+          class="fr-mt-3w"
+          texte="Voulez-vous utiliser cette adresse comme votre adresse principale à l’avenir&nbsp;?"
         />
       </div>
 
@@ -103,17 +107,13 @@
   import RenseignementAccordeon from '@/components/custom/Action/Simulation/WattWatchers/RenseignementAccordeon.vue';
   import RenseignementModale from '@/components/custom/Action/Simulation/WattWatchers/RenseignementModale.vue';
   import BarreDeRechercheAdresse from '@/components/custom/Form/BarreDeRechercheAdresse.vue';
-  import EnregistreurAdressePrincipale from '@/components/custom/Form/EnregistreurAdressePrincipale.vue';
+  import Callout from '@/components/dsfr/Callout.vue';
   import InputCheckboxUnitaire from '@/components/dsfr/InputCheckboxUnitaire.vue';
   import InputText, { InputErreur } from '@/components/dsfr/InputText.vue';
   import { validationPrenomOuNom } from '@/components/validations/validationsChampsFormulaire';
+  import { useAdressePrincipale } from '@/composables/useAdressePrincipale';
   import { useDsfrModale } from '@/composables/useDsfrModale';
-  import {
-    BarreDeRecherchePresenterImpl,
-    BarreDeRechercheViewModel,
-  } from '@/domaines/logement/adapters/barreDeRecherche.presenter.impl';
-  import { LogementRepositoryAxios } from '@/domaines/logement/adapters/logement.repository.axios';
-  import { RecupererAdressePourBarreDeRechercheUsecase } from '@/domaines/logement/recupererAdressePourBarreDeRecherche.usecase';
+  import { BarreDeRechercheViewModel } from '@/domaines/logement/adapters/barreDeRecherche.presenter.impl';
   import { AdresseBarreDeRecherche, Coordonnees } from '@/shell/coordonneesType.js';
   import { utilisateurStore } from '@/store/utilisateur';
 
@@ -124,6 +124,11 @@
   const MODALE_ID = 'localisation-compteur-modal';
   const { ouvrirModale, fermerModale } = useDsfrModale(MODALE_ID);
   const utilisateur = utilisateurStore().utilisateur;
+  const {
+    avecAdressePrivee,
+    definirAdressePrincipale: definirAdressePrincipaleComposable,
+    recupererAdressePourBarreDeRecherche,
+  } = useAdressePrincipale();
 
   const recherche = ref<string>('');
   const coordonnees = ref<Coordonnees>();
@@ -146,20 +151,15 @@
   });
 
   const connexionPrmStatus = ref<ConnexionPRMStatus>(ConnexionPRMStatus.PAS_COMMENCE);
-  const avecAdressePrivee = ref<boolean>(false);
   const affichagePRM = ref<boolean>(false);
 
   onMounted(async () => {
-    const recupererAdressePourBarreDeRechercheUsecase = new RecupererAdressePourBarreDeRechercheUsecase(
-      new LogementRepositoryAxios(),
-    );
-
-    await recupererAdressePourBarreDeRechercheUsecase.execute(
+    await recupererAdressePourBarreDeRecherche(
       utilisateur.id,
-      new BarreDeRecherchePresenterImpl(async (barreDeRechercheViewModel: BarreDeRechercheViewModel) => {
+      async (barreDeRechercheViewModel: BarreDeRechercheViewModel) => {
         coordonnees.value = barreDeRechercheViewModel.coordonnees;
         recherche.value = barreDeRechercheViewModel.recherche;
-      }),
+      },
     );
   });
 
@@ -177,6 +177,10 @@
       connexionPrmStatus.value = ConnexionPRMStatus.SUCCES;
       numeroPrmValue.value = '283918274';
     }, 1000);
+  }
+
+  function definirAdressePrincipale() {
+    definirAdressePrincipaleComposable(utilisateur.id, adresse.value, coordonnees.value);
   }
 
   function resetErreursFormulaires() {
