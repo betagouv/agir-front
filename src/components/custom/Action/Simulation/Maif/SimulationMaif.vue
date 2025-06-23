@@ -10,11 +10,15 @@
         @update:coordonnees="chargerDonneesPourNouvelleAdresse"
       />
 
-      <EnregistreurAdressePrincipale
-        v-if="adresse && coordonnees && avecAdressePrivee"
-        :adresse="adresse"
-        :coordonnees="coordonnees"
-        @enregistrementNouvelleAdresse="avecAdressePrivee = false"
+      <Callout
+        v-if="avecAdressePrivee"
+        :button="{
+          text: 'Choisir comme adresse principale',
+          onClick: definirAdressePrincipale,
+        }"
+        :icone-information="false"
+        class="fr-mt-3w"
+        texte="Voulez-vous utiliser cette adresse comme votre adresse principale à l’avenir&nbsp;?"
       />
     </form>
 
@@ -63,8 +67,8 @@
   import { nextTick, onMounted, ref } from 'vue';
   import MaifRisques from '@/components/custom/Action/MaifRisques.vue';
   import BarreDeRechercheAdresse from '@/components/custom/Form/BarreDeRechercheAdresse.vue';
-  import EnregistreurAdressePrincipale from '@/components/custom/Form/EnregistreurAdressePrincipale.vue';
   import BallLoader from '@/components/custom/Thematiques/BallLoader.vue';
+  import Callout from '@/components/dsfr/Callout.vue';
   import CarteExterne from '@/components/dsfr/CarteExterne.vue';
   import { useAdressePrincipale } from '@/composables/useAdressePrincipale';
   import { ActionsEventBus } from '@/domaines/actions/actions.eventbus';
