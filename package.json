@@ -48,7 +48,7 @@
     "@vue/test-utils": "2.4.6",
     "dotenv": "16.5.0",
     "eslint": "8.57.0",
-    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-vue": "9.33.0",
     "husky": "9.1.7",
     "jsdom": "26.1.0",
