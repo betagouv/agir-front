@@ -84,11 +84,7 @@ export class ServiceRechercheLongueVieAuxObjetsAxios implements ServiceRecherche
         responseFavorisPromise,
       ]);
       const mapServiceRecherche = (elem: ServiceRechercheApiModel) => {
-        const adresse_rue = elem.adresse_rue ? elem.adresse_rue + ', ' : '';
-        const adresse_nom_ville = elem.adresse_nom_ville ? elem.adresse_nom_ville + ' - ' : '';
-        const adresse_code_postal = elem.adresse_code_postal ? elem.adresse_code_postal : '';
-
-        const adresseFinale = `${adresse_rue}${adresse_nom_ville}${adresse_code_postal}`;
+        const adresseFinale = elem.adresse_rue?.replace(/,\s*$/, '');
 
         return {
           id: elem.id,
