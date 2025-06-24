@@ -40,23 +40,14 @@
 </template>
 
 <script lang="ts" setup>
-  import { SessionRepositoryStore } from '@/domaines/authentification/adapters/session.repository.store';
-  import { CompteUtilisateurRepositoryImpl } from '@/domaines/compte/adapters/compteUtilisateur.repository.impl';
-  import { ValiderOnboardingPostCreationCompteUsecase } from '@/domaines/compte/validerOnboardingPostCreationCompte.usecase';
   import router from '@/router';
   import { RouteCoachName } from '@/router/coach/routeCoachName';
   import { onboardingPostCreationCompte } from '@/store/onboardingPostCreationCompte';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const validerLaReponse = async () => {
-    const validerOnboardingPostCreationCompteUsecase = new ValiderOnboardingPostCreationCompteUsecase(
-      new CompteUtilisateurRepositoryImpl(),
-      new SessionRepositoryStore(),
-    );
-    await validerOnboardingPostCreationCompteUsecase.execute(
-      utilisateurStore().utilisateur.id,
-      onboardingPostCreationCompte(),
-    );
+    utilisateurStore().utilisateur.pseudo = onboardingPostCreationCompte().pseudo;
+    utilisateurStore().utilisateur.onboardingAEteRealise = true;
     onboardingPostCreationCompte().$reset();
     await router.replace({ name: RouteCoachName.ACCUEIL_CONNECTEE });
   };

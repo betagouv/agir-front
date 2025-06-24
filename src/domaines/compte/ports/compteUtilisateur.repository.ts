@@ -29,16 +29,4 @@ export interface CompteUtilisateurRepository {
   supprimerCompteUtilisateur(idUtilisateur: string): Promise<SuppressionFranceConnect>;
 
   mettreAJourLeMotDePasse(idUtilisateur: string, nouveauMotDePasse: string): Promise<void>;
-
-  validationOnboardingPostCreationCompte(
-    idUtilisateur: string,
-    pseudo: string,
-    codeEpci: string,
-    codePostal: string,
-    dateNaissance?: {
-      jour: number;
-      mois: number;
-      annee: number;
-    },
-  ): Promise<void>;
 }

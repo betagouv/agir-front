@@ -83,31 +83,4 @@ export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurReposit
       mot_de_passe: nouveauMotDePasse,
     });
   }
-
-  @intercept401()
-  async validationOnboardingPostCreationCompte(
-    idUtilisateur: string,
-    pseudo: string,
-    codeEpci: string,
-    codePostal: string,
-    dateNaissance?: { jour: number; mois: number; annee: number },
-  ): Promise<void> {
-    const axiosInstance = AxiosFactory.getAxios();
-    await axiosInstance.patch(`/utilisateurs/${idUtilisateur}/profile`, {
-      pseudo: pseudo,
-    });
-
-    if (dateNaissance) {
-      await axiosInstance.patch(`/utilisateurs/${idUtilisateur}/profile`, {
-        annee_naissance: dateNaissance.annee,
-        mois_naissance: dateNaissance.mois,
-        jour_naissance: dateNaissance.jour,
-      });
-    }
-
-    await axiosInstance.patch(`/utilisateurs/${idUtilisateur}/logement`, {
-      code_commune: codeEpci,
-      code_postal: codePostal,
-    });
-  }
 }

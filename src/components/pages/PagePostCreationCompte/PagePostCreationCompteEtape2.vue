@@ -19,15 +19,15 @@
             :message="alerte.message"
             :titre="alerte.titre"
             :type="alerte.type"
-            class="fr-col-12 fr-mb-4w"
             aria-live="assertive"
+            class="fr-col-12 fr-mb-4w"
           />
           <div class="fr-fieldset__element fr-mb-4w">
             <InputCodePostal
-              autofocus
               v-model:code-epci="onboardingPostCreationCompte().codeEpci"
               v-model:code-postal="onboardingPostCreationCompte().codePostal"
               v-model:commune="onboardingPostCreationCompte().commune"
+              autofocus
             />
           </div>
         </fieldset>
@@ -45,9 +45,12 @@
   import Alert from '@/components/custom/Alert.vue';
   import InputCodePostal from '@/components/dsfr/InputCodePostal.vue';
   import { useAlerte } from '@/composables/useAlerte';
+  import { OnboardingRepositoryAxios } from '@/domaines/onboarding/adapters/onboarding.repository.axios';
+  import { OnboardingEtape2Usecase } from '@/domaines/onboarding/onboardingEtape2.usecase';
   import router from '@/router';
   import { RouteCompteName } from '@/router/compte/routeCompteName';
   import { onboardingPostCreationCompte } from '@/store/onboardingPostCreationCompte';
+  import { utilisateurStore } from '@/store/utilisateur';
 
   const { alerte, afficherAlerte } = useAlerte();
 
@@ -63,6 +66,22 @@
       afficherAlerte('error', 'Erreur lors de la validation de la résidence', 'Veuillez renseigner votre commune');
       return;
     }
-    await router.replace({ name: RouteCompteName.POST_CREATION_COMPTE_DISCLAIMER });
+
+    const usecase = new OnboardingEtape2Usecase(new OnboardingRepositoryAxios());
+    usecase
+      .execute(utilisateurStore().utilisateur.id, {
+        codeEpci: onboardingPostCreationCompte().codeEpci,
+        codePostal: onboardingPostCreationCompte().codePostal,
+      })
+      .then(async () => {
+        await router.replace({ name: RouteCompteName.POST_CREATION_COMPTE_DISCLAIMER });
+      })
+      .catch(error => {
+        afficherAlerte(
+          'error',
+          'Erreur lors de la validation de la résidence',
+          error.data.message || 'Une erreur est survenue, veuillez réessayer plus tard.',
+        );
+      });
   };
 </script>
