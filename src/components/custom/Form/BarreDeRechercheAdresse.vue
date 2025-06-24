@@ -10,6 +10,7 @@
         :aria-labelledby="labelId"
         aria-autocomplete="list"
         aria-controls="adresse-menu"
+        :aria-describedby="erreurApi ? 'text-input-error-desc-error' : ''"
         autocomplete="off"
         class="fr-input"
         name="recherche-adresse-input"
@@ -22,7 +23,6 @@
         @keydown="naviguerListe"
       />
     </div>
-
     <dialog ref="dialogRef" :open="dialogOuverte" class="adresseDialogue shadow">
       <ul
         v-if="adressesAffichees"
@@ -53,6 +53,7 @@
       </ul>
     </dialog>
   </div>
+  <p v-if="erreurApi" id="text-input-error-desc-error" class="fr-error-text" v-text="erreurApi" />
 </template>
 
 <script lang="ts" setup>
@@ -87,12 +88,14 @@
   const dialogOuverte = ref<boolean>(false);
   const dialogRef = ref<HTMLDialogElement>();
   const DELAI_DEBOUNCE = 500;
+  const erreurApi = ref<string>('');
 
   const { debounced: chargerAdresses } = useDebouncedFn(() => {
     chargerAdressesSimilaires(recherche.value ?? '');
   }, DELAI_DEBOUNCE);
 
   const chargerAdressesSimilaires = (adresse: string) => {
+    erreurApi.value = '';
     adressesAffichees.value = [];
     indexSelectionne.value = -1;
 
@@ -103,24 +106,29 @@
 
     const adresseEncodee = encodeURIComponent(adresse).replaceAll('%20', '+');
     const url = `https://data.geopf.fr/geocodage/search/?q=${adresseEncodee}&limit=8&index=address&type=housenumber&autocomplete=1`;
-    axios.get(url).then(response => {
-      adressesAffichees.value = response.data.features.map(
-        (feature: FeatureApiModel): AdresseBarreDeRecherche => ({
-          numeroEtRueEtCodePostal: feature.properties.label,
-          numeroEtRue: feature.properties.name,
-          commune: feature.properties.city,
-          departement: feature.properties.context,
-          codePostal: feature.properties.postcode,
-          codeEpci: feature.properties.citycode,
-          coordonnees: {
-            latitude: feature.geometry.coordinates[1],
-            longitude: feature.geometry.coordinates[0],
-          },
-          numeroRue: feature.properties.housenumber,
-          rue: feature.properties.street,
-        }),
-      );
-    });
+    axios
+      .get(url)
+      .then(response => {
+        adressesAffichees.value = response.data.features.map(
+          (feature: FeatureApiModel): AdresseBarreDeRecherche => ({
+            numeroEtRueEtCodePostal: feature.properties.label,
+            numeroEtRue: feature.properties.name,
+            commune: feature.properties.city,
+            departement: feature.properties.context,
+            codePostal: feature.properties.postcode,
+            codeEpci: feature.properties.citycode,
+            coordonnees: {
+              latitude: feature.geometry.coordinates[1],
+              longitude: feature.geometry.coordinates[0],
+            },
+            numeroRue: feature.properties.housenumber,
+            rue: feature.properties.street,
+          }),
+        );
+      })
+      .catch(() => {
+        erreurApi.value = 'Le service de géocodage est indisponible pour le moment. Veuillez réessayer.';
+      });
 
     dialogOuverte.value = true;
   };
@@ -167,10 +175,12 @@
         event.preventDefault();
         break;
       case 'Enter':
-        if (indexSelectionne.value >= 0) {
+        if (indexSelectionne.value === -1) {
+          envoyerCoordonnees(adressesAffichees.value[0]);
+        } else if (indexSelectionne.value >= 0) {
           envoyerCoordonnees(adressesAffichees.value[indexSelectionne.value]);
-          event.preventDefault();
         }
+        event.preventDefault();
         break;
     }
   }
