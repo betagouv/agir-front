@@ -5,7 +5,7 @@
     </div>
     <h1 id="label-id" class="fr-modal__title">Connexion établie</h1>
     <p class="fr-mb-1w">Ces informations sont-elles correctes ?</p>
-    <div class="recapitulatif">
+    <div class="jagis-background--bleu-light">
       <ul class="text--bold list-style-none fr-p-2w">
         <li class="fr-mb-1w">Mr. NOM</li>
         <li class="text--normal fr-mb-1w">
@@ -39,10 +39,6 @@
 </script>
 
 <style scoped>
-  .recapitulatif {
-    background-color: #f7f7fc;
-  }
-
   .accordeon-prm img {
     height: 7.5rem;
   }
