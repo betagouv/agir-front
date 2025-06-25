@@ -167,7 +167,6 @@
       async (barreDeRechercheViewModel: BarreDeRechercheViewModel) => {
         coordonnees.value = barreDeRechercheViewModel.coordonnees;
         recherche.value = barreDeRechercheViewModel.recherche;
-        await lancerRecherche();
       },
     );
   });

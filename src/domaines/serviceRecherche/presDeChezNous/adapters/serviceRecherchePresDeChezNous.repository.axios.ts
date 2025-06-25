@@ -83,10 +83,10 @@ export class ServiceRecherchePresDeChezNousAxios implements ServiceRecherchePres
       ]);
       const mapServiceRecherche = (elem: ServiceRechercheApiModel) => {
         const adresse_rue = elem.adresse_rue ? elem.adresse_rue + ', ' : '';
-        const adresse_nom_ville = elem.adresse_nom_ville ? elem.adresse_nom_ville + ' - ' : '';
-        const adresse_code_postal = elem.adresse_code_postal ? elem.adresse_code_postal : '';
+        const adresse_code_postal = elem.adresse_code_postal ? elem.adresse_code_postal + ', ' : '';
+        const adresse_nom_ville = elem.adresse_nom_ville ? elem.adresse_nom_ville : '';
 
-        const adresseFinale = `${adresse_rue}${adresse_nom_ville}${adresse_code_postal}`;
+        const adresseFinale = `${adresse_rue}${adresse_code_postal}${adresse_nom_ville}`;
 
         return {
           id: elem.id,

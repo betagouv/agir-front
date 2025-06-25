@@ -57,9 +57,11 @@ export function useRechercheService(lancerRecherche: () => Promise<void>, typePa
   useCoordonneesQueryParams(coordonnees, recherche);
 
   onMounted(async () => {
-    pageEstEnChargement.value = true;
-    await lancerRecherche();
-    pageEstEnChargement.value = false;
+    if (!coordonnees.value) {
+      pageEstEnChargement.value = true;
+      await lancerRecherche();
+      pageEstEnChargement.value = false;
+    }
   });
 
   watch(coordonnees, async () => {
