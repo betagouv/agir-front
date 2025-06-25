@@ -1,55 +1,19 @@
 <template>
   <form @submit.prevent="localiserMonCompteur">
-    <fieldset class="fr-fieldset" id="radio-inline" aria-labelledby="radio-inline-legend radio-inline-messages">
-      <legend class="fr-fieldset__legend--regular fr-fieldset__legend" id="radio-inline-legend">
-        <h2 class="fr-h3 fr-mb-1w">Localiser mon compteur</h2>
-      </legend>
-
-      <div class="fr-grid-row fr-grid-row--gutters full-width fr-m-1w jagis-background--bleu-light fr-p-1w">
-        <div class="fr-col-12 fr-col-md-6">
-          <div class="fr-radio-group">
-            <input
-              type="radio"
-              value="adresse-postale"
-              id="adresse-postale"
-              name="choix-localisateur"
-              v-model="choixLocalisateur"
-            />
-            <label class="fr-label" for="adresse-postale">
-              <span
-                >Avec mon adresse postale
-                <span class="fr-badge badge--conseille">conseillé</span>
-              </span>
-            </label>
-          </div>
-        </div>
-        <div class="fr-col-12 fr-col-md-6">
-          <div class="fr-radio-group">
-            <input
-              type="radio"
-              value="numero-prm"
-              id="numero-prm"
-              name="choix-localisateur"
-              v-model="choixLocalisateur"
-            />
-            <label class="fr-label" for="numero-prm">Avec mon numéro de PRM</label>
-          </div>
-        </div>
-      </div>
-    </fieldset>
+    <ChoixDuLocalisateur v-model:choix-localisateur="choixLocalisateur" />
 
     <template v-if="!affichagePRM">
       <div class="fr-mb-4w fr-input-group" :class="erreurAdresse ? 'fr-input-group--error' : ''">
-        <label for="recherche-adresse-input" class="fr-mb-3w">
-          Votre adresse <span class="fr-hint-text">Obligatoire</span>
-        </label>
+        <label for="recherche-adresse-input" class="fr-mb-3w">Mon adresse</label>
         <BarreDeRechercheAdresse
           v-model:adresse="adresse"
           v-model:coordonnees="coordonnees"
           v-model:recherche="recherche"
           @update:coordonnees="
             () => {
-              avecAdressePrivee = true;
+              if (coordonnees) {
+                avecAdressePrivee = true;
+              }
             }
           "
           :input-options="{
@@ -129,6 +93,7 @@
 
 <script setup lang="ts">
   import { nextTick, onMounted, ref, watch } from 'vue';
+  import ChoixDuLocalisateur from '@/components/custom/Action/Simulation/WattWatchers/ChoixDuLocalisateur.vue';
   import { ConnexionPRMStatus } from '@/components/custom/Action/Simulation/WattWatchers/connexionPrmStatus';
   import RenseignementAccordeon from '@/components/custom/Action/Simulation/WattWatchers/RenseignementAccordeon.vue';
   import RenseignementModale from '@/components/custom/Action/Simulation/WattWatchers/RenseignementModale.vue';
@@ -177,9 +142,8 @@
   });
 
   const connexionPrmStatus = ref<ConnexionPRMStatus>(ConnexionPRMStatus.PAS_COMMENCE);
-  const choixLocalisateur = ref<string>('adresse-postale');
+  const choixLocalisateur = ref<string>();
   const affichagePRM = ref<boolean>(false);
-
   watch(choixLocalisateur, nouvelleValeur => {
     affichagePRM.value = nouvelleValeur === 'numero-prm';
   });
@@ -255,10 +219,3 @@
     return formulaireAUneErreur;
   }
 </script>
-
-<style scoped>
-  .badge--conseille {
-    background-color: #e4eaff;
-    color: #1e0c89;
-  }
-</style>
