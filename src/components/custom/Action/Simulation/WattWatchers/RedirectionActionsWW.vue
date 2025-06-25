@@ -1,5 +1,5 @@
 <template>
-  <section class="actions fr-m-3w text--center fr-px-1w fr-py-2w">
+  <section class="actions fr-m-3w text--center fr-px-1w fr-py-2w jagis-background--bleu-light">
     <h3 class="fr-h4 fr-mb-1w">Faites des économies</h3>
     <p class="fr-mb-2w">
       Découvrez des actions personnalisées pour réduire votre facture d’électricité sans sacrifier votre confort.
@@ -13,9 +13,3 @@
 
   defineProps<{ nombreActions: ResultatWWViewModel['nombreActions'] }>();
 </script>
-
-<style scoped>
-  .actions {
-    background-color: #f7f7fc;
-  }
-</style>

@@ -12,7 +12,7 @@
             <img src="/facture-linky-exemple.webp" class="fr-pt-1w fr-mr-2w" alt="" />
             <div>
               <h4 class="fr-mb-1w">Sur votre facture</h4>
-              <p>Vous trouverez votre numéro de PRM sur votre facture</p>
+              <p class="fr-mb-0">Vous trouverez votre numéro de PRM sur votre facture</p>
             </div>
           </section>
 
@@ -20,7 +20,7 @@
             <img src="/compteur-linky-exemple.webp" class="fr-pt-1w fr-mr-2w" alt="" />
             <div>
               <h4 class="fr-mb-1w">Sur votre compteur Linky</h4>
-              <p>
+              <p class="fr-mb-0">
                 Faire défiler les affichages du compteur (appui sur la touche +) jusqu’à lire la valeur du “numéro de
                 PRM”
               </p>

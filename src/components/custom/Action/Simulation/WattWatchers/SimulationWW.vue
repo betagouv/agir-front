@@ -17,19 +17,17 @@
     "
   />
 
-  <SimulationResultatWW />
-
-  <!--  <KyCsAction-->
-  <!--    v-if="etapeActuelle === EtapeSimulateur.SIMULATEUR"-->
-  <!--    :action-id="SimulateursSupportes.WINTER"-->
-  <!--    :idEnchainementKycs="idEnchainementKycs"-->
-  <!--    :type-action="TypeAction.SIMULATEUR"-->
-  <!--    class="fr-px-2w"-->
-  <!--  >-->
-  <!--    <template v-slot:fin>-->
-  <!--      <SimulationResultatWW />-->
-  <!--    </template>-->
-  <!--  </KyCsAction>-->
+  <KyCsAction
+    v-if="etapeActuelle === EtapeSimulateur.SIMULATEUR"
+    :action-id="SimulateursSupportes.WINTER"
+    :idEnchainementKycs="idEnchainementKycs"
+    :type-action="TypeAction.SIMULATEUR"
+    class="fr-px-2w"
+  >
+    <template v-slot:fin>
+      <SimulationResultatWW />
+    </template>
+  </KyCsAction>
 </template>
 
 <script setup lang="ts">
@@ -51,5 +49,5 @@
     SIMULATEUR = 'resultat',
   }
 
-  const etapeActuelle = ref<EtapeSimulateur>(EtapeSimulateur.SIMULATEUR);
+  const etapeActuelle = ref<EtapeSimulateur>(EtapeSimulateur.RENSEIGNEMENT);
 </script>
