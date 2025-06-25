@@ -5,9 +5,7 @@
 
       <circle cx="50" cy="50" r="45" class="progression" :style="progressionStyle" />
     </svg>
-    <span class="pourcentage fr-text--sm fr-mb-0">
-      {{ pourcentage }}<span class="pourcent">%</span><span class="fr-sr-only">de complétion pour</span>
-    </span>
+    <span class="pourcentage fr-text--sm fr-mb-0"> {{ pourcentage }}<span class="pourcent">%</span></span>
   </span>
 </template>
 

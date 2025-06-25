@@ -2,6 +2,8 @@
   <div class="background--marron-clair flex flex-space-between align-items--center fr-py-2w fr-px-4w">
     <div class="flex align-items--center">
       <CercleProgression :pourcentage="completionGlobaleRecommandations" />
+      <span class="fr-sr-only">de complétion pour vos recommandations personnalisés</span>
+
       <div class="fr-ml-2w">
         <h2 class="fr-h4 fr-mb-0">Affinez vos recommandations</h2>
         <p class="fr-mb-0">Répondez à quelques questions sur le thème de votre choix</p>
