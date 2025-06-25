@@ -141,6 +141,19 @@ export class ActionsRepositoryAxios implements ActionsRepository {
   }
 
   @intercept401()
+  async chargerActionsRecommandees(idUtilisateur: string): Promise<Action[]> {
+    const axios = AxiosFactory.getAxios();
+    const response = await axios.get<CatalogueActionsApiModel>(`/utilisateurs/${idUtilisateur}/actions`, {
+      params: {
+        ordre: 'recommandee_filtre_perso',
+        take: 6,
+      },
+    });
+
+    return response.data.actions.map(this.mapActionApiModelToAction);
+  }
+
+  @intercept401()
   async filtrerCatalogueActions(
     idUtilisateur: string,
     filtresThematiques: string[],

@@ -12,6 +12,11 @@ export type AccueilConnecteApiModel = {
   nombre_aides: number;
   nombre_recettes: number;
   bilan_carbone_total_kg: number;
+  pourcentage_global_reco_done: number;
+  pourcentage_alimentation_reco_done: number;
+  pourcentage_consommation_reco_done: number;
+  pourcentage_logement_reco_done: number;
+  pourcentage_transport_reco_done: number;
 };
 
 export class AccueilConnecteRepositoryAxios implements AccueilConnecteRepository {
@@ -26,6 +31,11 @@ export class AccueilConnecteRepositoryAxios implements AccueilConnecteRepository
       nombreAides: response.data.nombre_aides,
       nombreRecettes: response.data.nombre_recettes,
       bilanCarboneTotalKg: response.data.bilan_carbone_total_kg,
+      pourcentageGlobalRecommandations: response.data.pourcentage_global_reco_done,
+      pourcentageAlimentationRecommandations: response.data.pourcentage_alimentation_reco_done,
+      pourcentageTransportRecommandations: response.data.pourcentage_transport_reco_done,
+      pourcentageLogementRecommandations: response.data.pourcentage_logement_reco_done,
+      pourcentageConsommationRecommandations: response.data.pourcentage_consommation_reco_done,
     };
   }
 }

@@ -83,7 +83,7 @@
         <div class="fr-header__menu-links"></div>
         <nav id="navigation" aria-label="Menu principal" class="fr-nav" data-fr-js-navigation="true" role="navigation">
           <ul v-if="utilisateurStore().utilisateur.onboardingAEteRealise" class="fr-nav__list">
-            <li class="fr-nav__item nav__item--separateur" data-fr-js-navigation-item="true">
+            <li class="fr-nav__item" data-fr-js-navigation-item="true">
               <router-link
                 :aria-current="route.name === RouteCoachName.ACCUEIL_CONNECTEE ? 'page' : null"
                 :to="{ name: RouteCoachName.ACCUEIL_CONNECTEE }"
@@ -200,15 +200,6 @@
               </router-link>
             </li>
 
-            <li class="fr-nav__item" data-fr-js-navigation-item="true">
-              <router-link
-                :aria-current="route.name === RouteBilanCarboneName.BILAN_CARBONE ? 'page' : null"
-                :to="{ name: RouteBilanCarboneName.BILAN_CARBONE }"
-                class="fr-nav__link"
-              >
-                Empreinte
-              </router-link>
-            </li>
             <li class="fr-nav__item" data-fr-js-navigation-item="true">
               <router-link
                 :aria-current="route.name === RouteCoachName.BIBLIOTHEQUE ? 'page' : null"

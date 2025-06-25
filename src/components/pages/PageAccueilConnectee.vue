@@ -1,22 +1,24 @@
 <template>
   <section>
-    <CompletionAccueilConnecte :progression="accueilConnecteViewModel?.progression" />
+    <EmpreinteEcologiqueEncart
+      :progression="accueilConnecteViewModel?.progression.pourcentageCompletionBilan ?? 0"
+      :tonnes="accueilConnecteViewModel?.progression.tonneBilan ?? 0"
+    />
   </section>
 
-  <section class="background--white">
-    <ThematiquesAccueilConnecte :commune="accueilConnecteViewModel?.commune" />
-  </section>
-
-  <section class="background--olive-clair zindex-3">
-    <Raccourcis :commune="accueilConnecteViewModel?.commune" :liste-raccourcis="accueilConnecteViewModel?.raccourcis" />
-  </section>
-
-  <section class="background--vert">
-    <CompteurActionsNationales :aides-nationales-realisees="accueilConnecteViewModel?.totalActionsRealisees" />
+  <section class="background--beige-clair">
+    <RecommandationAccueilConnecte
+      :completionGlobaleRecommandations="accueilConnecteViewModel?.completionGlobaleRecommandations ?? 0"
+      :thematiquesEtCompletion="accueilConnecteViewModel?.thematiquesEtCompletion ?? []"
+    />
   </section>
 
   <section class="background--white">
     <ArticlesRecommandees class="fr-container fr-py-5w fr-py-md-10w" />
+  </section>
+
+  <section class="background--olive-clair zindex-3">
+    <Raccourcis :commune="accueilConnecteViewModel?.commune" :liste-raccourcis="accueilConnecteViewModel?.raccourcis" />
   </section>
 
   <section class="background--brown-cafe-creme-main-782">
@@ -27,11 +29,10 @@
 <script lang="ts" setup>
   import { onMounted, ref } from 'vue';
   import ArticlesRecommandees from '@/components/custom/AccueilConnectee/ArticlesRecommandees.vue';
-  import CompletionAccueilConnecte from '@/components/custom/AccueilConnectee/CompletionAccueilConnecte.vue';
-  import CompteurActionsNationales from '@/components/custom/AccueilConnectee/CompteurActionsNationales.vue';
+  import EmpreinteEcologiqueEncart from '@/components/custom/AccueilConnectee/EmpreinteEcologiqueEncart.vue';
   import Raccourcis from '@/components/custom/AccueilConnectee/Raccourcis.vue';
+  import RecommandationAccueilConnecte from '@/components/custom/AccueilConnectee/RecommandationAccueilConnecte.vue';
   import RedirectionMobile from '@/components/custom/AccueilConnectee/RedirectionMobile.vue';
-  import ThematiquesAccueilConnecte from '@/components/custom/AccueilConnectee/ThematiquesAccueilConnecte.vue';
   import { AccueilConnectePresenterImpl } from '@/domaines/accueilConnecte/adapters/accueilConnecte.presenter.impl';
   import { AccueilConnecteRepositoryAxios } from '@/domaines/accueilConnecte/adapters/accueilConnecte.repository.axios';
   import { AccueilConnecteViewModel } from '@/domaines/accueilConnecte/ports/accueilConnecte.presenter';
@@ -52,6 +53,10 @@
 <style scoped>
   .background--brown-cafe-creme-main-782 {
     background: var(--brown-cafe-creme-main-782);
+  }
+
+  .background--beige-clair {
+    background-color: #f6f4ef;
   }
 
   .zindex-3 {

@@ -3,6 +3,7 @@ import {
   AccueilConnecteViewModel,
 } from '@/domaines/accueilConnecte/ports/accueilConnecte.presenter';
 import { AccueilConnecte } from '@/domaines/accueilConnecte/ports/accueilConnecte.repository';
+import { ClefThematiqueAPI, MenuThematiques, Thematique } from '@/domaines/thematiques/MenuThematiques';
 import { Raccourcis } from '@/domaines/thematiques/Raccourcis';
 
 export class AccueilConnectePresenterImpl implements AccueilConnectePresenter {
@@ -12,9 +13,8 @@ export class AccueilConnectePresenterImpl implements AccueilConnectePresenter {
     this.accueilConnecteViewModel({
       commune: accueilConnecte.commune,
       progression: {
-        nombreActionsTerminees: accueilConnecte.totalActionsUtilisateurFaites,
         pourcentageCompletionBilan: accueilConnecte.pourcentageCompletionBilan,
-        tonneBilan: Math.round(accueilConnecte.bilanCarboneTotalKg / 1000).toString(),
+        tonneBilan: Math.round(accueilConnecte.bilanCarboneTotalKg / 1000),
       },
       raccourcis: [
         Raccourcis.serviceProximite,
@@ -26,7 +26,22 @@ export class AccueilConnectePresenterImpl implements AccueilConnectePresenter {
         Raccourcis.serviceFruitsEtLegumes,
         Raccourcis.serviceLongueVieAuxObjets,
       ],
-      totalActionsRealisees: accueilConnecte.totalActionsNationalesFaites,
+      completionGlobaleRecommandations: accueilConnecte.pourcentageGlobalRecommandations,
+      thematiquesEtCompletion: this.identifierThematiquesACompleter(accueilConnecte),
     });
+  }
+
+  private identifierThematiquesACompleter(accueilConnecte: AccueilConnecte): (Thematique & { estComplete: boolean })[] {
+    const progressionParThematique = {
+      [ClefThematiqueAPI.alimentation]: accueilConnecte.pourcentageAlimentationRecommandations,
+      [ClefThematiqueAPI.logement]: accueilConnecte.pourcentageLogementRecommandations,
+      [ClefThematiqueAPI.transports]: accueilConnecte.pourcentageTransportRecommandations,
+      [ClefThematiqueAPI.consommation]: accueilConnecte.pourcentageConsommationRecommandations,
+    };
+
+    return Object.entries(progressionParThematique).map(([clef, pourcentage]) => ({
+      ...MenuThematiques.getThematiqueData(clef as ClefThematiqueAPI),
+      estComplete: pourcentage >= 100,
+    }));
   }
 }

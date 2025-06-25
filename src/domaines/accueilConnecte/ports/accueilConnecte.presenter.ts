@@ -1,17 +1,18 @@
 import { AccueilConnecte } from '@/domaines/accueilConnecte/ports/accueilConnecte.repository';
+import { Thematique } from '@/domaines/thematiques/MenuThematiques';
 import { RaccourciViewModel } from '@/domaines/thematiques/ports/thematiqueResume.presenter';
 
 type ProgressionViewModel = {
-  nombreActionsTerminees: number;
   pourcentageCompletionBilan: number;
-  tonneBilan: string;
+  tonneBilan: number;
 };
 
 export interface AccueilConnecteViewModel {
   commune: string;
   progression: ProgressionViewModel;
   raccourcis: RaccourciViewModel[];
-  totalActionsRealisees: number;
+  completionGlobaleRecommandations: number;
+  thematiquesEtCompletion: (Thematique & { estComplete: boolean })[];
 }
 
 export interface AccueilConnectePresenter {
