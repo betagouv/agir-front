@@ -5,6 +5,7 @@
       <span v-if="description" class="fr-hint-text">{{ description }}</span>
     </label>
     <input
+      ref="inputRef"
       :aria-describedby="erreur && erreur.afficher ? errorId : ''"
       :autocomplete="autocomplete"
       :id="name"
@@ -27,7 +28,15 @@
 </template>
 
 <script lang="ts" setup>
-  import { computed } from 'vue';
+  import { computed, ref } from 'vue';
+
+  const inputRef = ref<HTMLInputElement>();
+  defineExpose({ focus: () => inputRef.value?.focus() });
+
+  export type InputErreur = {
+    message: string;
+    afficher: boolean;
+  };
 
   const props = defineProps<{
     name: string;
@@ -35,10 +44,7 @@
     modelValue: string;
     description?: string;
     required?: boolean;
-    erreur?: {
-      message: string;
-      afficher: boolean;
-    };
+    erreur?: InputErreur;
     maxlength?: number;
     autofocus?: boolean;
     disabled?: boolean;
