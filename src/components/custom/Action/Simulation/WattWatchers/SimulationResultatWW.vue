@@ -27,7 +27,7 @@
   import ProgressionEconomie from '@/components/custom/Action/Simulation/WattWatchers/ProgressionEconomie.vue';
   import RedirectionActionsWW from '@/components/custom/Action/Simulation/WattWatchers/RedirectionActionsWW.vue';
   import ResultatWW from '@/components/custom/Action/Simulation/WattWatchers/ResultatWW.vue';
-  import { ResultatWWViewModel } from '@/domaines/wattWatchers/ports/wattWatchers.repository';
+  import { ResultatWWViewModel } from '@/domaines/simulationWattWatchers/adapters/resultatWattWatchers.presenter.impl';
 
   const resultatWWViewModel: ResultatWWViewModel = {
     totalConsommation: 2820,

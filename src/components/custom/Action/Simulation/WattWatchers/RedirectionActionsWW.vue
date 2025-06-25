@@ -9,7 +9,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { ResultatWWViewModel } from '@/domaines/wattWatchers/ports/wattWatchers.repository';
+  import { ResultatWWViewModel } from '@/domaines/simulationWattWatchers/adapters/resultatWattWatchers.presenter.impl';
 
   defineProps<{ nombreActions: ResultatWWViewModel['nombreActions'] }>();
 </script>

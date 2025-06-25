@@ -28,7 +28,7 @@
 
 <script lang="ts" setup>
   import BarreDeProgression from '@/components/custom/BarreDeProgression.vue';
-  import { ResultatWWViewModel } from '@/domaines/wattWatchers/ports/wattWatchers.repository';
+  import { ResultatWWViewModel } from '@/domaines/simulationWattWatchers/adapters/resultatWattWatchers.presenter.impl';
 
   defineProps<{
     economiePossible: ResultatWWViewModel['economiePotentielle'];
