@@ -30,7 +30,7 @@
   import { computed, nextTick, onMounted, onUnmounted, ref } from 'vue';
   import { Doughnut } from 'vue-chartjs';
   import ListeDetailConsommation from '@/components/custom/Action/Simulation/WattWatchers/ListeDetailConsommation.vue';
-  import { ResultatWWViewModel } from '@/domaines/wattWatchers/ports/wattWatchers.repository';
+  import { ResultatWWViewModel } from '@/domaines/simulationWattWatchers/adapters/resultatWattWatchers.presenter.impl';
 
   ChartJS.register(ArcElement);
 
