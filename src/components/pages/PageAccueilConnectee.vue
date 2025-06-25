@@ -7,7 +7,10 @@
   </section>
 
   <section class="background--beige-clair">
-    <RecommandationAccueilConnecte />
+    <RecommandationAccueilConnecte
+      :completionGlobaleRecommandations="accueilConnecteViewModel?.completionGlobaleRecommandations ?? 0"
+      :thematiquesEtCompletion="accueilConnecteViewModel?.thematiquesEtCompletion ?? []"
+    />
   </section>
 
   <section class="background--white">

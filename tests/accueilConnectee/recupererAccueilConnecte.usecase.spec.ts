@@ -14,6 +14,11 @@ class AccueilConnecteeMockRepository implements AccueilConnecteRepository {
       nombreAides: 20,
       nombreRecettes: 30,
       bilanCarboneTotalKg: 5,
+      pourcentageGlobalRecommandations: 25,
+      pourcentageAlimentationRecommandations: 100,
+      pourcentageTransportRecommandations: 100,
+      pourcentageConsommationRecommandations: 50,
+      pourcentageLogementRecommandations: 0,
     };
   }
 }
@@ -113,7 +118,49 @@ describe('Fichier de tests concernant la home connectée', () => {
               },
             },
           ],
-          totalActionsRealisees: 10,
+          completionGlobaleRecommandations: 25,
+          thematiquesEtCompletion: [
+            {
+              clefTechniqueAPI: 'alimentation',
+              url: 'me-nourrir',
+              labelDansLeMenu: 'Me nourrir',
+              imageUrl:
+                'https://res.cloudinary.com/dq023imd8/image/upload/t_media_lib_thumb/v1728466523/cuisine_da54797693.svg',
+              emoji: '🍛',
+              illustration: '/thematique-alimentation.svg',
+              estComplete: true,
+            },
+            {
+              clefTechniqueAPI: 'logement',
+              url: 'me-loger',
+              labelDansLeMenu: 'Me loger',
+              imageUrl:
+                'https://res.cloudinary.com/dq023imd8/image/upload/t_media_lib_thumb/v1728468978/maison_80242d91f3.svg',
+              emoji: '🏠',
+              illustration: '/thematique-logement.svg',
+              estComplete: false,
+            },
+            {
+              clefTechniqueAPI: 'transport',
+              url: 'me-deplacer',
+              labelDansLeMenu: 'Me déplacer',
+              imageUrl:
+                'https://res.cloudinary.com/dq023imd8/image/upload/t_media_lib_thumb/v1728466903/Mobilite_df75aefd09.svg',
+              emoji: '🚅',
+              illustration: '/thematique-transport.svg',
+              estComplete: true,
+            },
+            {
+              clefTechniqueAPI: 'consommation',
+              url: 'consommer',
+              labelDansLeMenu: 'Mes achats',
+              imageUrl:
+                'https://res.cloudinary.com/dq023imd8/image/upload/t_media_lib_thumb/v1728468852/conso_7522b1950d.svg',
+              emoji: '👕',
+              illustration: '/thematique-consommation.svg',
+              estComplete: false,
+            },
+          ],
         });
       }),
     );

@@ -90,15 +90,6 @@ export class MenuThematiques {
     },
   };
 
-  static getThematiquesPrincipalesData(): Thematique[] {
-    return [
-      this.thematiquesData[ClefThematiqueAPI.alimentation],
-      this.thematiquesData[ClefThematiqueAPI.logement],
-      this.thematiquesData[ClefThematiqueAPI.transports],
-      this.thematiquesData[ClefThematiqueAPI.consommation],
-    ];
-  }
-
   static getThematiqueData(clefTechniqueAPI: ClefThematiqueAPI): Thematique {
     return this.thematiquesData[clefTechniqueAPI];
   }

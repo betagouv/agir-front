@@ -6,6 +6,11 @@ export type AccueilConnecte = {
   bilanCarboneTotalKg: number;
   nombreAides: number;
   nombreRecettes: number;
+  pourcentageGlobalRecommandations: number;
+  pourcentageAlimentationRecommandations: number;
+  pourcentageConsommationRecommandations: number;
+  pourcentageLogementRecommandations: number;
+  pourcentageTransportRecommandations: number;
 };
 
 export interface AccueilConnecteRepository {
