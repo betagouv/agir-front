@@ -2,7 +2,10 @@
   <div class="fr-grid-row fr-grid-row--gutters">
     <div class="fr-col-lg-6 fr-col-12">
       <div class="fr-input-group">
-        <label class="fr-label" for="text-input-rfr"> Nombre de parts fiscales de votre foyer </label>
+        <label class="fr-label" for="text-input-rfr">
+          Nombre de parts fiscales de votre foyer
+          <span class="fr-hint-text">Facultatif</span>
+        </label>
         <input
           required
           class="fr-input fr-col-4"
@@ -34,6 +37,7 @@
         icon="fr-icon-money-euro-circle-line"
         :erreur="champsRFRStatus"
         @blur="onValidationRFR"
+        description="Facultatif"
       />
     </div>
   </div>

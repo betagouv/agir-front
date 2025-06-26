@@ -19,6 +19,7 @@
       type="text"
       @blur="handleBlur"
       @input="updateValue"
+      spellcheck="false"
     />
     <p v-if="erreur && erreur.afficher" :id="errorId" class="fr-error-text" aria-live="assertive">
       {{ erreur.message }}
