@@ -1,5 +1,29 @@
 # Changelog
 
+## [2.14.0](https://github.com/betagouv/agir-front/compare/v2.13.2...v2.14.0) (2025-06-26)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* amélioration affichage des adresses des services, et, optimisation de chargement ([#1192](https://github.com/betagouv/agir-front/issues/1192)) ([3bd4de3](https://github.com/betagouv/agir-front/commit/3bd4de311adc878656668db825611a0613d5376c))
+* nouvelle hp connecte ([#1180](https://github.com/betagouv/agir-front/issues/1180)) ([2716eec](https://github.com/betagouv/agir-front/commit/2716eec22e57c4bb1e26e6b062191cbf3f23d6f2))
+* passage par l'onboarding si celui n'est pas fait ([#1193](https://github.com/betagouv/agir-front/issues/1193)) ([d250228](https://github.com/betagouv/agir-front/commit/d2502283d1ab425af9dd048f3c3fafff8b3018f6))
+
+
+### 🐛 Corrections de bogues
+
+* recherche par adresse vide ([#1183](https://github.com/betagouv/agir-front/issues/1183)) ([c27d151](https://github.com/betagouv/agir-front/commit/c27d15152159efd62f947a3e0612eeb528b502a5))
+
+
+### 👷 Autres changements
+
+* Bump @playwright/test from 1.53.0 to 1.53.1 ([#1189](https://github.com/betagouv/agir-front/issues/1189)) ([85c8917](https://github.com/betagouv/agir-front/commit/85c891741a16d0e7fc0da39ea42971d9ed3eb73d))
+* Bump @sentry/vue from 9.30.0 to 9.31.0 ([#1190](https://github.com/betagouv/agir-front/issues/1190)) ([164ff94](https://github.com/betagouv/agir-front/commit/164ff94e83413ecdcbf35f306286618af65e3240))
+* Bump eslint-plugin-import from 2.31.0 to 2.32.0 ([#1187](https://github.com/betagouv/agir-front/issues/1187)) ([d245916](https://github.com/betagouv/agir-front/commit/d245916215cd91412584ef0499115dc90a270e62))
+* Bump prettier from 3.5.3 to 3.6.0 ([#1186](https://github.com/betagouv/agir-front/issues/1186)) ([4ebf1af](https://github.com/betagouv/agir-front/commit/4ebf1afccc3dec3a03ddbdba0d4777d0bc5a5ae3))
+* Bump vue from 3.5.16 to 3.5.17 ([#1188](https://github.com/betagouv/agir-front/issues/1188)) ([94cc974](https://github.com/betagouv/agir-front/commit/94cc974685848b60e2fe68117c854e1cfd3433fb))
+* refactoring onboarding etape par etape (api) ([#1181](https://github.com/betagouv/agir-front/issues/1181)) ([4211e06](https://github.com/betagouv/agir-front/commit/4211e06cf433794a9b96b7c40c2223378a289ef9))
+
 ## [2.13.2](https://github.com/betagouv/agir-front/compare/v2.13.1...v2.13.2) (2025-06-23)
 
 
