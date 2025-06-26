@@ -13,7 +13,7 @@ export class RecupererDetailThematiqueUsecase {
   ): Promise<void> {
     const actions = await this.actionsRepository.recupererDetailThematique(idUtilisateur, thematiqueId);
     if (actions.idEnchainementKYCs && actions.doitRepondreAuxKYCs) {
-      actionsDansUneThematiquePresenter.presenteEnchainementKYCs(actions.idEnchainementKYCs);
+      actionsDansUneThematiquePresenter.presenteEnchainementKYCs(actions.idEnchainementKYCs, actions.estUtilisateurNgc);
     } else {
       actionsDansUneThematiquePresenter.presenteActions(actions.actions);
     }

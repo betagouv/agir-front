@@ -103,6 +103,7 @@ interface DetailThematiqueApiModel {
   est_personnalisation_necessaire: boolean;
   enchainement_questions_personnalisation: string;
   liste_actions_recommandees: ActionApiModel[];
+  est_utilisateur_ngc: boolean;
 }
 
 export class ActionsRepositoryAxios implements ActionsRepository {
@@ -196,6 +197,7 @@ export class ActionsRepositoryAxios implements ActionsRepository {
       doitRepondreAuxKYCs: response.data.est_personnalisation_necessaire,
       idEnchainementKYCs: response.data.enchainement_questions_personnalisation,
       actions: response.data.liste_actions_recommandees.map(this.mapActionApiModelToAction),
+      estUtilisateurNgc: response.data.est_utilisateur_ngc,
     };
   }
 

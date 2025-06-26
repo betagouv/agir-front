@@ -2,17 +2,29 @@
   <section class="fr-pb-1w headerThematique background--beige-gris-galet-950-100">
     <div class="fr-container">
       <div class="fr-pt-7w fr-pb-3w fr-pb-1w">
-        <h1 class="fr-h1 fr-col fr-m-0 fr-pb-2w display-inline-block">
-          <span aria-hidden="true"> {{ thematique.emoji }}</span>
-          {{ thematique.labelDansLeMenu }}
-        </h1>
-        <router-link
-          :title="`à ${thematiqueResumeViewModel?.commune}: modifier cette commune`"
-          :to="{ name: RouteCompteName.LOGEMENT }"
-          class="fr-tag fr-icon-map-pin-2-fill fr-tag--icon-left fr-ml-2w"
-        >
-          à {{ thematiqueResumeViewModel?.commune }}
-        </router-link>
+        <div class="flex flex-space-between align-items--center flex-wrap">
+          <div>
+            <h1 class="fr-h1 fr-col fr-m-0 fr-pb-2w display-inline-block">
+              <span aria-hidden="true"> {{ thematique.emoji }}</span>
+              {{ thematique.labelDansLeMenu }}
+            </h1>
+            <router-link
+              :title="`à ${thematiqueResumeViewModel?.commune}: modifier cette commune`"
+              :to="{ name: RouteCompteName.LOGEMENT }"
+              class="fr-tag fr-icon-map-pin-2-fill fr-tag--icon-left fr-ml-2w"
+            >
+              à {{ thematiqueResumeViewModel?.commune }}
+            </router-link>
+          </div>
+          <div>
+            <Alert class="fr-text--sm" v-if="messageNgc" type="info" taille="small" @close="messageNgc = ''">
+              <template v-slot:message>
+                Vous n’avez pas renseigné vos habitudes sur ce thème lors de votre bilan
+                <span class="display-block">Nos Gestes Climat</span>
+              </template>
+            </Alert>
+          </div>
+        </div>
       </div>
     </div>
     <div class="fr-container">
@@ -79,6 +91,7 @@
   import ArticlesRecommandees from '@/components/custom/AccueilConnectee/ArticlesRecommandees.vue';
   import CatalogueActionsRecommandees from '@/components/custom/Action/Catalogue/CatalogueActionsRecommandees.vue';
   import WidgetAides from '@/components/custom/Aides/WidgetAides.vue';
+  import Alert from '@/components/custom/Alert.vue';
   import ParcoursKYCPourRecommandations from '@/components/custom/Thematiques/ParcoursKYCPourRecommandations.vue';
   import WidgetServiceFruitsEtLegumes from '@/components/pages/PagesService/components/WidgetServiceFruitsEtLegumes.vue';
   import WidgetServicePresDeChezNous from '@/components/pages/PagesService/components/WidgetServicePresDeChezNous.vue';
@@ -103,6 +116,7 @@
   const thematique = ref<Thematique>(MenuThematiques.getFromUrl(useRoute().params.id as string));
   const thematiqueId = ref<ClefThematiqueAPI>(thematique.value.clefTechniqueAPI as ClefThematiqueAPI);
   const idUtilisateur = utilisateurStore().utilisateur.id;
+  const messageNgc = ref<string>('');
 
   useHead({
     ...useHeadProperties,
@@ -154,8 +168,9 @@
           actionsViewModel.value = vm;
           idEnchainementKycs.value = undefined;
         },
-        (id: string) => {
+        (id: string, message: string) => {
           idEnchainementKycs.value = id;
+          messageNgc.value = message;
         },
       ),
       new ThematiqueResumePresenterImpl(vm => (thematiqueResumeViewModel.value = vm)),

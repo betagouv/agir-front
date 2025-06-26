@@ -9,7 +9,7 @@ export class ActionsDansUneThematiquePresenterImpl
 {
   constructor(
     private readonly callBackActions: (viewModel: ActionViewModel[]) => void,
-    private readonly callbackEnchainementKYCs: (idEnchainementKYCs: string) => void,
+    private readonly callbackEnchainementKYCs: (idEnchainementKYCs: string, messageNgc: string) => void,
   ) {
     super(callBackActions);
   }
@@ -18,7 +18,12 @@ export class ActionsDansUneThematiquePresenterImpl
     super.presente(actions);
   }
 
-  presenteEnchainementKYCs(idEnchainementKYCs: string) {
-    this.callbackEnchainementKYCs(idEnchainementKYCs);
+  presenteEnchainementKYCs(idEnchainementKYCs: string, estUtilisateurNgc: boolean) {
+    this.callbackEnchainementKYCs(
+      idEnchainementKYCs,
+      estUtilisateurNgc
+        ? 'Vous n’avez pas renseigné vos habitudes sur ce thème lors de votre bilan Nos Gestes Climat'
+        : '',
+    );
   }
 }
