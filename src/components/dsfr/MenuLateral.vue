@@ -1,11 +1,10 @@
 <template>
-  <nav class="fr-sidemenu fr-sidemenu--sticky" aria-labelledby="fr-sidemenu-title">
+  <nav class="fr-sidemenu fr-sidemenu--sticky-full-height" aria-labelledby="fr-sidemenu-title">
     <div class="fr-sidemenu__inner">
       <button class="fr-sidemenu__btn" hidden aria-controls="fr-sidemenu-wrapper" aria-expanded="false">
-        Dans cette rubrique
+        Ouvrir la navigation
       </button>
       <div class="fr-collapse" id="fr-sidemenu-wrapper">
-        <div class="fr-sidemenu__title" id="fr-sidemenu-title">Sommaire profil</div>
         <ul class="fr-sidemenu__list">
           <li
             v-for="lien in liens"
