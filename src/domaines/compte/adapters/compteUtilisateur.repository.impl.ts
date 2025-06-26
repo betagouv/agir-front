@@ -1,5 +1,5 @@
 import { Response } from 'redaxios';
-import { AxiosError, AxiosFactory, intercept401 } from '@/axios.factory';
+import { AxiosError, AxiosFactory, intercept40X } from '@/axios.factory';
 import {
   CompteTemporaire,
   CompteUtilisateur,
@@ -19,7 +19,7 @@ interface CompteUtilisateurApiModel {
 }
 
 export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurRepository {
-  @intercept401()
+  @intercept40X()
   async getCompteUtilisateur(idUtilisateur: string): Promise<CompteUtilisateur> {
     const axiosInstance = AxiosFactory.getAxios();
     const response: Response<CompteUtilisateurApiModel> = await axiosInstance.get(`/utilisateurs/${idUtilisateur}`);
@@ -59,7 +59,7 @@ export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurReposit
     }
   }
 
-  @intercept401()
+  @intercept40X()
   async supprimerCompteUtilisateur(idUtilisateur: string): Promise<SuppressionFranceConnect> {
     const axiosInstance = AxiosFactory.getAxios();
     const reponse = await axiosInstance.delete(`/utilisateurs/${idUtilisateur}`);
@@ -76,7 +76,7 @@ export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurReposit
     }
   }
 
-  @intercept401()
+  @intercept40X()
   async mettreAJourLeMotDePasse(idUtilisateur: string, nouveauMotDePasse: string): Promise<void> {
     const axiosInstance = AxiosFactory.getAxios();
     await axiosInstance.patch(`/utilisateurs/${idUtilisateur}/profile`, {

@@ -1,4 +1,4 @@
-import { AxiosFactory, intercept401 } from '@/axios.factory';
+import { AxiosFactory, intercept40X } from '@/axios.factory';
 import { ServiceRecherchePresDeChezNousRepository } from '@/domaines/serviceRecherche/presDeChezNous/ports/serviceRecherchePresDeChezNous.repository';
 import { ServiceRecherchePresDeChezNousResultatDetail } from '@/domaines/serviceRecherche/presDeChezNous/recupererDetailServicePresDeChezNous.usecase';
 import { ServiceRecherchePresDeChezNous } from '@/domaines/serviceRecherche/presDeChezNous/recupererServicePresDeChezNous.usecase';
@@ -47,7 +47,7 @@ export interface ServiceRechercheCategorieApiModel {
 }
 
 export class ServiceRecherchePresDeChezNousAxios implements ServiceRecherchePresDeChezNousRepository {
-  @intercept401()
+  @intercept40X()
   async recupererService(
     idUtilisateur: string,
     categorie: string,
@@ -122,7 +122,7 @@ export class ServiceRecherchePresDeChezNousAxios implements ServiceRecherchePres
     }
   }
 
-  @intercept401()
+  @intercept40X()
   async recupererDetail(
     idUtilisateur: string,
     idService: string,

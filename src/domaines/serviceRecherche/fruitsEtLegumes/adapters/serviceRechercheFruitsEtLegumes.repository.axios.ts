@@ -1,4 +1,4 @@
-import { AxiosFactory, intercept401 } from '@/axios.factory';
+import { AxiosFactory, intercept40X } from '@/axios.factory';
 import { ServiceRechercheFruitsEtLegumesRepository } from '@/domaines/serviceRecherche/fruitsEtLegumes/ports/serviceRechercheFruitsEtLegumes.repository';
 import { ServiceRechercheFruitsEtLegumes } from '@/domaines/serviceRecherche/fruitsEtLegumes/recupererServiceFruitsEtLegumes.usecase';
 import { ServiceRechercheCategorieApiModel } from '@/domaines/serviceRecherche/presDeChezNous/adapters/serviceRecherchePresDeChezNous.repository.axios';
@@ -16,7 +16,7 @@ interface ServiceRechercheFruitsEtLegumesApiModel {
 }
 
 export class ServiceRechercheFruitsEtLegumesAxios implements ServiceRechercheFruitsEtLegumesRepository {
-  @intercept401()
+  @intercept40X()
   async recupererService(idUtilisateur: string, mois: string): Promise<ServiceRechercheFruitsEtLegumes> {
     const idService = 'fruits_legumes';
     const axiosInstance = AxiosFactory.getAxios();

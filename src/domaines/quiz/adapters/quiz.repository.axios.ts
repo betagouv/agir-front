@@ -1,5 +1,5 @@
 import { Response } from 'redaxios';
-import { AxiosFactory, intercept401 } from '@/axios.factory';
+import { AxiosFactory, intercept40X } from '@/axios.factory';
 import { Quiz, QuizRepository, ScoreQuiz } from '@/domaines/quiz/ports/quiz.repository';
 import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 
@@ -35,7 +35,7 @@ interface ScoreQuizApiModel {
 }
 
 export class QuizRepositoryAxios implements QuizRepository {
-  @intercept401()
+  @intercept40X()
   async noterQuiz(quizId: string, utilisateurId: string, note: 1 | 2 | 3 | 4): Promise<void> {
     const axios = AxiosFactory.getAxios();
     await axios.post(`/utilisateurs/${utilisateurId}/events`, {
@@ -46,7 +46,7 @@ export class QuizRepositoryAxios implements QuizRepository {
     });
   }
 
-  @intercept401()
+  @intercept40X()
   async getQuiz(idQuizz: string, idUtilisateur: string): Promise<Quiz> {
     const axiosInstance = AxiosFactory.getAxios();
     const response: Response<QuizApiModel> = await axiosInstance.get<QuizApiModel>(
@@ -61,7 +61,7 @@ export class QuizRepositoryAxios implements QuizRepository {
     return mapQuizApiResponse(response);
   }
 
-  @intercept401()
+  @intercept40X()
   async terminerQuiz(idUtilisateur: string, idQuiz: string, score: number): Promise<void> {
     const axiosInstance = AxiosFactory.getAxios();
     await axiosInstance.patch(`/utilisateurs/${idUtilisateur}/bibliotheque/quizz/${idQuiz}`, {
@@ -69,7 +69,7 @@ export class QuizRepositoryAxios implements QuizRepository {
     });
   }
 
-  @intercept401()
+  @intercept40X()
   async recupererScoreActionQuiz(idUtilisateur: string, idAction: string): Promise<ScoreQuiz> {
     const axiosInstance = AxiosFactory.getAxios();
     const response = await axiosInstance.get<ScoreQuizApiModel>(

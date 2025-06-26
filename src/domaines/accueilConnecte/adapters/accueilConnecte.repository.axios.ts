@@ -1,8 +1,9 @@
-import { AxiosFactory } from '@/axios.factory';
+import { AxiosFactory, intercept40X } from '@/axios.factory';
 import {
   AccueilConnecte,
   AccueilConnecteRepository,
 } from '@/domaines/accueilConnecte/ports/accueilConnecte.repository';
+import { utilisateurStore } from '@/store/utilisateur';
 
 export type AccueilConnecteApiModel = {
   nom_commune: string;
@@ -20,9 +21,11 @@ export type AccueilConnecteApiModel = {
 };
 
 export class AccueilConnecteRepositoryAxios implements AccueilConnecteRepository {
+  @intercept40X()
   async recupererAccueilConnecte(utilisateurId: string): Promise<AccueilConnecte> {
     const axios = AxiosFactory.getAxios();
     const response = await axios.get<AccueilConnecteApiModel>(`/utilisateurs/${utilisateurId}/home_board`);
+    utilisateurStore().utilisateur.onboardingAEteRealise = true;
     return {
       commune: response.data.nom_commune,
       totalActionsNationalesFaites: response.data.total_national_actions_faites,

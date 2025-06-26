@@ -1,4 +1,4 @@
-import { AxiosFactory, intercept401 } from '@/axios.factory';
+import { AxiosFactory, intercept40X } from '@/axios.factory';
 import {
   ResultatSimulationMaif,
   RisqueMaifImpact,
@@ -31,7 +31,7 @@ export enum RisqueMaifImpactApiModel {
 }
 
 export class SimulateurMaifRepositoryAxios implements SimulateurMaifRepository {
-  @intercept401()
+  @intercept40X()
   async recupererStatistiquesCommune(utilisateurId: string, codeEpci?: string): Promise<StatistiquesCommuneMaif> {
     const axios = AxiosFactory.getAxios();
 
@@ -49,7 +49,7 @@ export class SimulateurMaifRepositoryAxios implements SimulateurMaifRepository {
     };
   }
 
-  @intercept401()
+  @intercept40X()
   async recupererResultats(utilisateurId: string, coordonnees: Coordonnees): Promise<ResultatSimulationMaif> {
     const axios = AxiosFactory.getAxios();
 

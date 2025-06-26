@@ -21,7 +21,7 @@ export interface AxiosError {
   data: any;
 }
 
-export function intercept401() {
+export function intercept40X() {
   return (
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     target: any,
@@ -29,6 +29,7 @@ export function intercept401() {
     propertyKey: any,
     descriptor?: PropertyDescriptor,
   ) => {
+    const ONBOARDING_NON_REALISE = '159';
     if (descriptor) {
       const originalMethod = descriptor.value;
       descriptor.value = async function (...args: unknown[]) {
@@ -39,8 +40,12 @@ export function intercept401() {
             return Promise.resolve(result);
           } catch (exception) {
             //Session Expired
-            if ((exception as AxiosError).status === 401) {
+            const status = (exception as AxiosError).status;
+            if (status === 401) {
               await NavigationBus.getInstance().on(EventBusEvents.SESSION_EXPIREE);
+            } else if (status === 400 && (exception as AxiosError).data?.code === ONBOARDING_NON_REALISE) {
+              utilisateurStore().utilisateur.onboardingAEteRealise = false;
+              await NavigationBus.getInstance().on(EventBusEvents.ONBOARDING);
             } else {
               throw exception;
             }

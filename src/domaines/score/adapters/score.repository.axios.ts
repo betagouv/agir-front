@@ -1,4 +1,4 @@
-import { AxiosFactory, intercept401 } from '@/axios.factory';
+import { AxiosFactory, intercept40X } from '@/axios.factory';
 import { Badge, Gamification, ScoreRepository, TypeDeBadge } from '@/domaines/score/ports/score.repository';
 
 export interface ScoreApiModel {
@@ -14,7 +14,7 @@ export interface ScoreApiModel {
 }
 
 export class ScoreRepositoryAxios implements ScoreRepository {
-  @intercept401()
+  @intercept40X()
   async getGamification(idUtilisateur: string): Promise<Gamification> {
     const axiosInstance = AxiosFactory.getAxios();
     const response = await axiosInstance.get<ScoreApiModel>(`/utilisateurs/${idUtilisateur}/gamification`);

@@ -1,4 +1,4 @@
-import { AxiosFactory, intercept401 } from '@/axios.factory';
+import { AxiosFactory, intercept40X } from '@/axios.factory';
 import { ArticleRecommande, ArticleRepository } from '@/domaines/article/ports/article.repository';
 import { Article } from '@/domaines/article/recupererArticle.usecase';
 import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
@@ -44,7 +44,7 @@ interface ArticleCMPApi {
 }
 
 export class ArticleRepositoryAxios implements ArticleRepository {
-  @intercept401()
+  @intercept40X()
   async ajouterAuxFavoris(articleId: string, utilisateurId: string): Promise<void> {
     const axios = AxiosFactory.getAxios();
     await axios.post(`/utilisateurs/${utilisateurId}/events`, {
@@ -53,7 +53,7 @@ export class ArticleRepositoryAxios implements ArticleRepository {
     });
   }
 
-  @intercept401()
+  @intercept40X()
   async retirerDesFavoris(articleId: string, utilisateurId: string): Promise<void> {
     const axios = AxiosFactory.getAxios();
     await axios.post(`/utilisateurs/${utilisateurId}/events`, {
@@ -62,7 +62,7 @@ export class ArticleRepositoryAxios implements ArticleRepository {
     });
   }
 
-  @intercept401()
+  @intercept40X()
   async noterArticle(articleId: string, utilisateurId: string, note: 1 | 2 | 3 | 4): Promise<void> {
     const axios = AxiosFactory.getAxios();
     await axios.post(`/utilisateurs/${utilisateurId}/events`, {
@@ -73,7 +73,7 @@ export class ArticleRepositoryAxios implements ArticleRepository {
     });
   }
 
-  @intercept401()
+  @intercept40X()
   async marquerCommeLu(articleId: string, utilisateurId: string): Promise<void> {
     const axios = AxiosFactory.getAxios();
     await axios.post(`/utilisateurs/${utilisateurId}/events`, {
@@ -82,7 +82,7 @@ export class ArticleRepositoryAxios implements ArticleRepository {
     });
   }
 
-  @intercept401()
+  @intercept40X()
   async recuperer(utilisateurId: string, articleId: string): Promise<Article> {
     const axios = AxiosFactory.getAxios();
     const article = await axios.get<ArticleAPI>(`/utilisateurs/${utilisateurId}/bibliotheque/articles/${articleId}`);

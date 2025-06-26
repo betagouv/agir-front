@@ -1,4 +1,4 @@
-import { AxiosFactory, intercept401 } from '@/axios.factory';
+import { AxiosFactory, intercept40X } from '@/axios.factory';
 import { ConsommationElectriqueGlobal } from '@/domaines/serviceRecherche/linky//recupererConsommationElectrique.usecase';
 import { InformationCompteur } from '@/domaines/serviceRecherche/linky/obtenirInformationCompteur.usecase';
 import { ServiceRechercheLinkyRepository } from '@/domaines/serviceRecherche/linky/ports/serviceRechercheLinky.repository';
@@ -25,7 +25,7 @@ interface InformationCompteurApiModel {
 }
 
 export class ServiceRechercheLinkyRepositoryAxios implements ServiceRechercheLinkyRepository {
-  @intercept401()
+  @intercept40X()
   async recupererConsommationElectrique(idUtilsateur: string): Promise<ConsommationElectriqueGlobal> {
     const axiosInstance = AxiosFactory.getAxios();
     const reponseAnnuelle = await axiosInstance.get<ConsommationElectriqueApiModel>(
@@ -47,7 +47,7 @@ export class ServiceRechercheLinkyRepositoryAxios implements ServiceRechercheLin
     };
   }
 
-  @intercept401()
+  @intercept40X()
   async recupererInformationCompteur(idUtilsateur: string): Promise<InformationCompteur> {
     const axiosInstance = AxiosFactory.getAxios();
     const reponse = await axiosInstance.get<InformationCompteurApiModel>(
@@ -65,7 +65,7 @@ export class ServiceRechercheLinkyRepositoryAxios implements ServiceRechercheLin
     };
   }
 
-  @intercept401()
+  @intercept40X()
   async seDesabonner(idUtilsateur: string): Promise<void> {
     const axiosInstance = AxiosFactory.getAxios();
     await axiosInstance.delete(`/utilisateurs/${idUtilsateur}/services/linky`);

@@ -1,4 +1,4 @@
-import { AxiosFactory, intercept401 } from '@/axios.factory';
+import { AxiosFactory, intercept40X } from '@/axios.factory';
 import { SimulerAideVeloRepository } from '@/domaines/aides/ports/simulerAideVelo.repository';
 import { AidesVeloDisponibles, EtatVelo, SimulationVelo } from '@/domaines/aides/simulerAideVelo.usecase';
 
@@ -35,7 +35,7 @@ type AidesVeloParTypeApiModel = {
 };
 
 export class SimulerAideVeloRepositoryAxios implements SimulerAideVeloRepository {
-  @intercept401()
+  @intercept40X()
   async getSimulation(
     prixDuVelo: number,
     etatDuVelo: EtatVelo,
