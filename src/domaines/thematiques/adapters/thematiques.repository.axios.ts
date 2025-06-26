@@ -1,4 +1,4 @@
-import { AxiosFactory, intercept401 } from '@/axios.factory';
+import { AxiosFactory, intercept40X } from '@/axios.factory';
 import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 import { SyntheseThematiques, ThematiquesRepository } from '@/domaines/thematiques/ports/thematiques.repository';
 
@@ -14,13 +14,13 @@ interface SyntheseThematiquesApiModel {
 }
 
 export class ThematiquesRepositoryAxios implements ThematiquesRepository {
-  @intercept401()
+  @intercept40X()
   async terminerPersonnalisation(idUtilisateur: string, clefThematiqueApi: ClefThematiqueAPI): Promise<void> {
     const axios = AxiosFactory.getAxios();
     await axios.post(`/utilisateurs/${idUtilisateur}/thematiques/${clefThematiqueApi}/personnalisation_ok`);
   }
 
-  @intercept401()
+  @intercept40X()
   async resetPersonnalisation(idUtilisateur: string, clefThematiqueApi: ClefThematiqueAPI): Promise<void> {
     const axios = AxiosFactory.getAxios();
     await axios.post(`/utilisateurs/${idUtilisateur}/thematiques/${clefThematiqueApi}/reset_personnalisation`);
@@ -42,7 +42,7 @@ export class ThematiquesRepositoryAxios implements ThematiquesRepository {
     };
   }
 
-  @intercept401()
+  @intercept40X()
   async supprimerActionDesActionsRecommandees(
     utilisateurId: string,
     codeThematique: string,

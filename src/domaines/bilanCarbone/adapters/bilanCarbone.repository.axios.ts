@@ -1,4 +1,4 @@
-import { AxiosFactory, intercept401 } from '@/axios.factory';
+import { AxiosFactory, intercept40X } from '@/axios.factory';
 import { BilanCarboneRepository } from '@/domaines/bilanCarbone/ports/bilanCarbone.repository';
 import { BilanCarbone, ThematiqueBilan } from '@/domaines/bilanCarbone/recupererBilanCarbone.usecase';
 import { BilanThematique, DetailBilanThematique } from '@/domaines/bilanCarbone/recupererBilanDepuisThematique.usecase';
@@ -64,7 +64,7 @@ interface BilanThematiqueApiModel {
 }
 
 export class BilanCarboneRepositoryAxios implements BilanCarboneRepository {
-  @intercept401()
+  @intercept40X()
   async recupererBilanCarbone(utilisateurId: string): Promise<BilanCarbone> {
     const axiosInstance = AxiosFactory.getAxios();
     const reponse = await axiosInstance.get<BilanCarboneApiModel>(`/utilisateurs/${utilisateurId}/bilans/last_v3`);
@@ -102,7 +102,7 @@ export class BilanCarboneRepositoryAxios implements BilanCarboneRepository {
     };
   }
 
-  @intercept401()
+  @intercept40X()
   async recupererBilanDepuisThematique(idUtilisateur: string, thematique: ClefThematiqueAPI): Promise<BilanThematique> {
     const axiosInstance = AxiosFactory.getAxios();
     const reponse = await axiosInstance.get<BilanThematiqueApiModel>(

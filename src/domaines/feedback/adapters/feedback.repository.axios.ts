@@ -1,4 +1,4 @@
-import { AxiosFactory, intercept401 } from '@/axios.factory';
+import { AxiosFactory, intercept40X } from '@/axios.factory';
 import { TypeAction } from '@/domaines/actions/ports/actions.repository';
 import { ActionFeedback } from '@/domaines/feedback/envoyerFeedbackAction.usecase';
 import { AideFeedback } from '@/domaines/feedback/envoyerFeedbackAide.usecase';
@@ -17,7 +17,7 @@ type ActionFeedbackPostApiModel = {
 };
 
 export class FeedbackRepositoryAxios implements FeedbackRepository {
-  @intercept401()
+  @intercept40X()
   async envoyerFeedbackAide(idUtilisateur: string, idAide: string, aideFeedback: AideFeedback): Promise<void> {
     const axios = AxiosFactory.getAxios();
     const feedback: AideFeedbackPostApiModel = {
@@ -29,7 +29,7 @@ export class FeedbackRepositoryAxios implements FeedbackRepository {
     await axios.post(`/utilisateurs/${idUtilisateur}/aides/${idAide}/feedback`, feedback);
   }
 
-  @intercept401()
+  @intercept40X()
   async envoyerFeedbackAction(
     idUtilisateur: string,
     idAction: string,

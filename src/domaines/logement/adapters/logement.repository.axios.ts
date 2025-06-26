@@ -1,4 +1,4 @@
-import { AxiosFactory, intercept401 } from '@/axios.factory';
+import { AxiosFactory, intercept40X } from '@/axios.factory';
 import { LogementRepository } from '@/domaines/logement/ports/logement.repository';
 import { Adresse } from '@/domaines/logement/recupererAdressePourBarreDeRecherche.usecase';
 import { Logement } from '@/domaines/logement/recupererInformationLogement.usecase';
@@ -55,7 +55,7 @@ export interface LogementApiModel {
 }
 
 export class LogementRepositoryAxios implements LogementRepository {
-  @intercept401()
+  @intercept40X()
   async recupererInformation(utilisateurId: string): Promise<Logement> {
     const reponse = await AxiosFactory.getAxios().get<LogementApiModel>(`utilisateurs/${utilisateurId}/logement`);
 
@@ -77,7 +77,7 @@ export class LogementRepositoryAxios implements LogementRepository {
     };
   }
 
-  @intercept401()
+  @intercept40X()
   async recupererAdresse(utilisateurId: string): Promise<Adresse> {
     const reponse = await AxiosFactory.getAxios().get<LogementApiModel>(`utilisateurs/${utilisateurId}/logement`);
     return {
@@ -91,7 +91,7 @@ export class LogementRepositoryAxios implements LogementRepository {
     };
   }
 
-  @intercept401()
+  @intercept40X()
   async patcherLesInformations(utilisateurId: string, logement: Partial<Logement>): Promise<void> {
     const patchData: Partial<LogementApiModel> = {};
 

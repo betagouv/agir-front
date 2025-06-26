@@ -1,4 +1,4 @@
-import { AxiosFactory, intercept401 } from '@/axios.factory';
+import { AxiosFactory, intercept40X } from '@/axios.factory';
 import { ClassementRepository } from '@/domaines/classement/ports/classement.repository';
 import { ClassementGlobal, ClassementPourcentage } from '@/domaines/classement/recupererClassement.usecase';
 import { Badge, TypeDeBadge } from '@/domaines/score/ports/score.repository';
@@ -32,7 +32,7 @@ interface ClassementApiModel {
 }
 
 export class ClassementRepositoryAxios implements ClassementRepository {
-  @intercept401()
+  @intercept40X()
   async recupererClassementNational(utilisateurId: string): Promise<ClassementGlobal> {
     const axiosInstance = AxiosFactory.getAxios();
     const reponseClassementNational = await axiosInstance.get<ClassementApiModel>(

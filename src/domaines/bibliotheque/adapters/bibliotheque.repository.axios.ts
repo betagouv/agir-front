@@ -1,4 +1,4 @@
-import { AxiosFactory, intercept401 } from '@/axios.factory';
+import { AxiosFactory, intercept40X } from '@/axios.factory';
 import { Bibliotheque, BibliothequeRepository } from '@/domaines/bibliotheque/ports/bibliotheque.repository';
 import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 
@@ -19,7 +19,7 @@ interface BibliothequeApiModel {
 }
 
 export class BibliothequeRepositoryAxios implements BibliothequeRepository {
-  @intercept401()
+  @intercept40X()
   async chargerBibliotheque(utilisateurId: string): Promise<Bibliotheque> {
     const axiosInstance = AxiosFactory.getAxios();
     const response = await axiosInstance.get<BibliothequeApiModel>(`/utilisateurs/${utilisateurId}/bibliotheque_v2`);
@@ -41,7 +41,7 @@ export class BibliothequeRepositoryAxios implements BibliothequeRepository {
     };
   }
 
-  @intercept401()
+  @intercept40X()
   async filtrerBibliotheque(
     utilisateurId: string,
     filtreThematiquesIds: string[],

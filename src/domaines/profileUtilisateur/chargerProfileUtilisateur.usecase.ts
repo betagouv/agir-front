@@ -1,5 +1,5 @@
 import { Response } from 'redaxios';
-import { AxiosFactory, intercept401 } from '@/axios.factory';
+import { AxiosFactory, intercept40X } from '@/axios.factory';
 import { ProfileUtilisateurPresenter } from '@/domaines/profileUtilisateur/ports/profileUtilisateur.presenter';
 import { ProfileUtilisateurRepository } from '@/domaines/profileUtilisateur/ports/profileUtilisateur.repository';
 
@@ -54,7 +54,7 @@ export interface ProfileUtilisateurFranceConnectAMettreAJour {
 }
 
 export class ProfileUtilisateurRepositoryAxiosImpl implements ProfileUtilisateurRepository {
-  @intercept401()
+  @intercept40X()
   async getProfileUtilisateur(idUtilisateur: string): Promise<ProfileUtilisateur> {
     const axiosInstance = AxiosFactory.getAxios();
     const response: Response<ProfileUtilisateurApiModel> = await axiosInstance.get(
@@ -80,7 +80,7 @@ export class ProfileUtilisateurRepositoryAxiosImpl implements ProfileUtilisateur
     };
   }
 
-  @intercept401()
+  @intercept40X()
   async mettreAjour(profileUtilisateur: ProfileUtilisateurAMettreAJour) {
     const axiosInstance = AxiosFactory.getAxios();
     await axiosInstance.patch(`/utilisateurs/${profileUtilisateur.id}/profile`, {
@@ -96,7 +96,7 @@ export class ProfileUtilisateurRepositoryAxiosImpl implements ProfileUtilisateur
     });
   }
 
-  @intercept401()
+  @intercept40X()
   async mettreAjourUtilisateurFranceConnecte(profileUtilisateur: ProfileUtilisateurAMettreAJour) {
     const axiosInstance = AxiosFactory.getAxios();
     await axiosInstance.patch(`/utilisateurs/${profileUtilisateur.id}/profile`, {

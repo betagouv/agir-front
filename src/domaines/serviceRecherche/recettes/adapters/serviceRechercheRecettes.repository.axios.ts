@@ -1,4 +1,4 @@
-import { AxiosFactory, intercept401 } from '@/axios.factory';
+import { AxiosFactory, intercept40X } from '@/axios.factory';
 import { ServiceRechercheRecettesRepository } from '@/domaines/serviceRecherche/recettes/ports/serviceRechercheRecettes.repository';
 import { Recette } from '@/domaines/serviceRecherche/recettes/recupererDetailServiceRecettes.usecase';
 import { ServiceRechercheRecettes } from '@/domaines/serviceRecherche/recettes/recupererServiceRecettes.usecase';
@@ -13,6 +13,7 @@ interface ServiceRechercheRecettesApiResultatsModel {
   resultats: ServiceRechercheRecettesApiModel[];
   encore_plus_resultats_dispo: boolean;
 }
+
 interface ServiceRechercheRecettesApiModel {
   id: string;
   difficulty_plat: string;
@@ -43,7 +44,7 @@ export interface RecetteApiModel {
 }
 
 export class ServiceRechercheRecettesAxios implements ServiceRechercheRecettesRepository {
-  @intercept401()
+  @intercept40X()
   async recupererService(
     idUtilisateur: string,
     type: string,
@@ -98,7 +99,7 @@ export class ServiceRechercheRecettesAxios implements ServiceRechercheRecettesRe
     };
   }
 
-  @intercept401()
+  @intercept40X()
   async recupererDetailRecette(idUtilisateur: string, idRecette: string): Promise<Recette> {
     const idService = 'recettes';
     const axiosInstance = AxiosFactory.getAxios();

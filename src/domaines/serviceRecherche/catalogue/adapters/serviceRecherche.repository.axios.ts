@@ -1,4 +1,4 @@
-import { AxiosFactory, intercept401 } from '@/axios.factory';
+import { AxiosFactory, intercept40X } from '@/axios.factory';
 import { ServiceRechercheRepository } from '@/domaines/serviceRecherche/catalogue/ports/serviceRecherche.repository';
 import { ServicesRecherche } from '@/domaines/serviceRecherche/catalogue/recupererServicesRechercheParThematique.usecase';
 
@@ -12,7 +12,7 @@ interface ServiceRechercheApiModel {
 }
 
 export class ServiceRechercheRepositoryAxios implements ServiceRechercheRepository {
-  @intercept401()
+  @intercept40X()
   async recupererServicesParThematique(idUtilisateur: string, thematiqueId: string): Promise<ServicesRecherche> {
     const axiosInstance = AxiosFactory.getAxios();
 
@@ -32,7 +32,7 @@ export class ServiceRechercheRepositoryAxios implements ServiceRechercheReposito
     };
   }
 
-  @intercept401()
+  @intercept40X()
   async recupererServicesPageAccueil(idUtilisateur: string): Promise<ServicesRecherche> {
     const axiosInstance = AxiosFactory.getAxios();
 

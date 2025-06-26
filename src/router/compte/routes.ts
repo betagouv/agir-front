@@ -17,7 +17,6 @@ const PagePostCreationCompteDisclaimer = () =>
   import('@/components/pages/PagePostCreationCompte/PagePostCreationCompteDisclaimer.vue');
 import { RouteRecordRaw } from 'vue-router';
 import { RouteCompteName } from '@/router/compte/routeCompteName';
-import { utilisateurStore } from '@/store/utilisateur';
 
 export enum RouteComptePath {
   MON_COMPTE = '/compte/',
@@ -26,23 +25,14 @@ export enum RouteComptePath {
   CREATION_COMPTE_NGC = '/creation-compte/nos-gestes-climat',
   VALIDATION_COMPTE = '/validation-compte',
   VALIDATION_AUTHENTIFICATION = '/validation-authentification',
-  MOT_DE_PASSE_OUBLIE = '/mot-de-passe-oublie',
   MIEUX_VOUS_CONNAITRE = '/compte/mieux-vous-connaitre',
   LOGEMENT = '/compte/logement',
-  DEFIS = '/compte/mes-actions',
   POST_CREATION_COMPTE_ETAPE_1 = '/creation-compte/etape-1',
   POST_CREATION_COMPTE_ETAPE_2 = '/creation-compte/etape-2',
   POST_CREATION_COMPTE_ETAPE_3 = '/creation-compte/etape-3',
   POST_CREATION_COMPTE_FIN = '/creation-compte/fin',
   POST_CREATION_COMPTE_DISCLAIMER = '/creation-compte/experimentation',
 }
-
-const onboardingGuard = () => {
-  const { utilisateur } = utilisateurStore();
-  if (utilisateur.onboardingAEteRealise) {
-    return false;
-  }
-};
 
 const compteRoutes: RouteRecordRaw[] = [
   {
@@ -101,7 +91,6 @@ const compteRoutes: RouteRecordRaw[] = [
     },
   },
   {
-    beforeEnter: onboardingGuard,
     path: RouteComptePath.VALIDATION_COMPTE,
     name: RouteCompteName.VALIDATION_COMPTE,
     component: PageVerificationAdresseMail,
@@ -120,7 +109,6 @@ const compteRoutes: RouteRecordRaw[] = [
     },
   },
   {
-    beforeEnter: onboardingGuard,
     path: RouteComptePath.POST_CREATION_COMPTE_ETAPE_1,
     name: RouteCompteName.POST_CREATION_COMPTE_ETAPE_1,
     component: PagePostCreationCompteEtape1,

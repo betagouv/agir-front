@@ -1,4 +1,4 @@
-import { AxiosFactory, intercept401 } from '@/axios.factory';
+import { AxiosFactory, intercept40X } from '@/axios.factory';
 import { QuestionRepository } from '@/domaines/kyc/ports/question.repository';
 import {
   Question,
@@ -54,7 +54,7 @@ export interface QuestionMosaicBooleanApiModel {
 }
 
 export class QuestionRepositoryAxios implements QuestionRepository {
-  @intercept401()
+  @intercept40X()
   async recupererListeQuestions(utilisateurId: string): Promise<Question[]> {
     const response = await AxiosFactory.getAxios().get<QuestionApiModel[]>(
       `utilisateurs/${utilisateurId}/questionsKYC_v2`,
@@ -64,7 +64,7 @@ export class QuestionRepositoryAxios implements QuestionRepository {
       .map(question => this.mapQuestionApiModelToQuestion(question));
   }
 
-  @intercept401()
+  @intercept40X()
   async recupererQuestion(questionId: string, utilisateurId: string): Promise<Question> {
     const response = await AxiosFactory.getAxios().get<QuestionApiModel>(
       `utilisateurs/${utilisateurId}/questionsKYC_v2/${questionId}`,
@@ -73,7 +73,7 @@ export class QuestionRepositoryAxios implements QuestionRepository {
     return this.mapQuestionApiModelToQuestion(response.data);
   }
 
-  @intercept401()
+  @intercept40X()
   async envoyerReponse(utilisateurId: string, questionId: string, reponse: string): Promise<void> {
     const axios = AxiosFactory.getAxios();
     await axios.put(`/utilisateurs/${utilisateurId}/questionsKYC_v2/${questionId}`, [
@@ -83,7 +83,7 @@ export class QuestionRepositoryAxios implements QuestionRepository {
     ]);
   }
 
-  @intercept401()
+  @intercept40X()
   async envoyerReponsesMultiples(
     utilisateurId: string,
     questionId: string,
@@ -98,7 +98,7 @@ export class QuestionRepositoryAxios implements QuestionRepository {
     );
   }
 
-  @intercept401()
+  @intercept40X()
   async recupererPremiereQuestion(utilisateurId: string, enchainementId: string): Promise<QuestionMetaData> {
     const axiosInstance = AxiosFactory.getAxios();
     const response = await axiosInstance.get<QuestionMetaDataApiModel>(
@@ -112,7 +112,7 @@ export class QuestionRepositoryAxios implements QuestionRepository {
     };
   }
 
-  @intercept401()
+  @intercept40X()
   async recupererProchaineQuestion(
     utilisateurId: string,
     enchainementId: string,
@@ -134,7 +134,7 @@ export class QuestionRepositoryAxios implements QuestionRepository {
     };
   }
 
-  @intercept401()
+  @intercept40X()
   async recupererPrecedenteQuestion(
     utilisateurId: string,
     enchainementId: string,

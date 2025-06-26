@@ -1,4 +1,4 @@
-import { AxiosFactory, intercept401 } from '@/axios.factory';
+import { AxiosFactory, intercept40X } from '@/axios.factory';
 import { ServiceRechercheLongueVieAuxObjetsRepository } from '@/domaines/serviceRecherche/longueVieAuxObjets/ports/serviceRechercheLongueVieAuxObjets.repository';
 import { ServiceRechercheLongueVieAuxObjetsResultatDetail } from '@/domaines/serviceRecherche/longueVieAuxObjets/recupererDetailServiceLongueVieAuxObjets.usecase';
 import { ServiceRechercheLongueVieAuxObjets } from '@/domaines/serviceRecherche/longueVieAuxObjets/recupererServiceLongueVieAuxObjets.usecase';
@@ -49,7 +49,7 @@ interface ServiceRechercheLongueVieAuxObjetsApiResultatsModel {
 }
 
 export class ServiceRechercheLongueVieAuxObjetsAxios implements ServiceRechercheLongueVieAuxObjetsRepository {
-  @intercept401()
+  @intercept40X()
   async recupererService(
     idUtilisateur: string,
     categorie: string,
@@ -123,7 +123,7 @@ export class ServiceRechercheLongueVieAuxObjetsAxios implements ServiceRecherche
     }
   }
 
-  @intercept401()
+  @intercept40X()
   async recupererDetail(
     idUtilisateur: string,
     idService: string,

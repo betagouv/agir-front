@@ -1,4 +1,4 @@
-import { AxiosFactory, intercept401 } from '@/axios.factory';
+import { AxiosFactory, intercept40X } from '@/axios.factory';
 import {
   ResultatSimulationVoiture,
   VoitureActuelle,
@@ -43,7 +43,7 @@ type VoitureAlternativeAPIModel = {
 };
 
 export class SimulateurVoitureRepositoryAxios implements SimulationVoitureRepository {
-  @intercept401()
+  @intercept40X()
   async recupererResultats(utilisateurId: string): Promise<ResultatSimulationVoiture> {
     const axios = AxiosFactory.getAxios();
 

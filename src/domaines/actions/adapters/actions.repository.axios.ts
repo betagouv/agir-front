@@ -1,4 +1,4 @@
-import { AxiosFactory, intercept401 } from '@/axios.factory';
+import { AxiosFactory, intercept40X } from '@/axios.factory';
 import { ExplicationsRecommandation } from '@/domaines/actions/explicationsRecommandation';
 import {
   Action,
@@ -106,7 +106,7 @@ interface DetailThematiqueApiModel {
 }
 
 export class ActionsRepositoryAxios implements ActionsRepository {
-  @intercept401()
+  @intercept40X()
   async chargerAction(idUtilisateur: string, idAction: string, typeAction: TypeAction): Promise<ActionDetail> {
     const axios = AxiosFactory.getAxios();
     const response = await axios.get<ActionDetailApiModel>(
@@ -124,7 +124,7 @@ export class ActionsRepositoryAxios implements ActionsRepository {
     };
   }
 
-  @intercept401()
+  @intercept40X()
   async chargerCatalogueActions(idUtilisateur: string): Promise<CatalogueActions> {
     const axios = AxiosFactory.getAxios();
     const response = await axios.get<CatalogueActionsApiModel>(`/utilisateurs/${idUtilisateur}/actions`);
@@ -140,7 +140,7 @@ export class ActionsRepositoryAxios implements ActionsRepository {
     };
   }
 
-  @intercept401()
+  @intercept40X()
   async chargerActionsRecommandees(idUtilisateur: string): Promise<Action[]> {
     const axios = AxiosFactory.getAxios();
     const response = await axios.get<CatalogueActionsApiModel>(`/utilisateurs/${idUtilisateur}/actions`, {
@@ -153,7 +153,7 @@ export class ActionsRepositoryAxios implements ActionsRepository {
     return response.data.actions.map(this.mapActionApiModelToAction);
   }
 
-  @intercept401()
+  @intercept40X()
   async filtrerCatalogueActions(
     idUtilisateur: string,
     filtresThematiques: string[],
@@ -177,7 +177,7 @@ export class ActionsRepositoryAxios implements ActionsRepository {
     };
   }
 
-  @intercept401()
+  @intercept40X()
   async recupererDetailThematique(idUtilisateur: string, thematiqueId: string): Promise<DetailThematique> {
     const axios = AxiosFactory.getAxios();
     const response = await axios.get<DetailThematiqueApiModel>(
@@ -199,7 +199,7 @@ export class ActionsRepositoryAxios implements ActionsRepository {
     };
   }
 
-  @intercept401()
+  @intercept40X()
   async terminerAction(idUtilisateur: string, idAction: string, typeAction: TypeAction): Promise<void> {
     const axios = AxiosFactory.getAxios();
     await axios.post(`/utilisateurs/${idUtilisateur}/actions/${typeAction}/${idAction}/faite`);

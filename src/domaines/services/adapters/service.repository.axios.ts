@@ -1,4 +1,4 @@
-import { AxiosFactory, intercept401 } from '@/axios.factory';
+import { AxiosFactory, intercept40X } from '@/axios.factory';
 import { ServiceRepository } from '@/domaines/services/ports/service.repository';
 
 export interface ServiceApiModel {
@@ -10,7 +10,7 @@ export interface ServiceApiModel {
 }
 
 export class ServiceRepositoryAxios implements ServiceRepository {
-  @intercept401()
+  @intercept40X()
   async parametrerService(
     utilisateurId: string,
     serviceId: string,

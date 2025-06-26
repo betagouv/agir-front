@@ -1,9 +1,9 @@
-import { AxiosFactory, intercept401 } from '@/axios.factory';
+import { AxiosFactory, intercept40X } from '@/axios.factory';
 import { TypeAction } from '@/domaines/actions/ports/actions.repository';
 import { FaqRepository } from '@/domaines/faq/ports/faq.repository';
 
 export class FaqRepositoryAxios implements FaqRepository {
-  @intercept401()
+  @intercept40X()
   async envoyerQuestion(
     idUtilisateur: string,
     idAction: string,

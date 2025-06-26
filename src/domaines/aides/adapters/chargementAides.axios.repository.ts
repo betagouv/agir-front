@@ -1,4 +1,4 @@
-import { AxiosFactory, intercept401 } from '@/axios.factory';
+import { AxiosFactory, intercept40X } from '@/axios.factory';
 import { Aide, Aides } from '@/domaines/aides/chargementAides.usecase';
 import { ChargementAidesRepository } from '@/domaines/aides/ports/chargementAides.repository';
 import { ClefThematiqueAPI, MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
@@ -32,7 +32,7 @@ interface CMSAideApiModel {
 }
 
 export class ChargementAidesAxiosRepository implements ChargementAidesRepository {
-  @intercept401()
+  @intercept40X()
   @cache({
     key: 'aides',
     storage: sessionAppRawDataStorage,
@@ -70,7 +70,7 @@ export class ChargementAidesAxiosRepository implements ChargementAidesRepository
     };
   }
 
-  @intercept401()
+  @intercept40X()
   async recupererAidesDuneThematique(utilisateurId: string, clefThematique: ClefThematiqueAPI): Promise<Aides> {
     const axios = AxiosFactory.getAxios();
     const reponse = await axios.get<AidesApiModel>(
@@ -106,7 +106,7 @@ export class ChargementAidesAxiosRepository implements ChargementAidesRepository
     };
   }
 
-  @intercept401()
+  @intercept40X()
   async consulterEnModeNonConnecte(idAide: string): Promise<Aide> {
     const axios = AxiosFactory.getAxios();
     const aide = await axios.get<AideApiModel>(`/aides/${idAide}`);
@@ -157,7 +157,7 @@ export class ChargementAidesAxiosRepository implements ChargementAidesRepository
     };
   }
 
-  @intercept401()
+  @intercept40X()
   async recupererDetailAide(utilisateurId: string, idAide: string): Promise<Aide> {
     const axios = AxiosFactory.getAxios();
     const aide = await axios.get<AideApiModel>(`/utilisateurs/${utilisateurId}/aides/${idAide}`);
