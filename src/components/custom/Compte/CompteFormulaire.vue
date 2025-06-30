@@ -1,6 +1,6 @@
 <template>
   <section>
-    <h2 class="fr-h3">Mes informations</h2>
+    <h1 class="fr-h2 fr-mb-4w">Mes informations</h1>
     <div id="scroll-to-alerte">
       <Alert
         v-if="alerte.isActive"
@@ -11,14 +11,9 @@
       />
     </div>
     <form class="fr-mb-0" @submit.prevent="modifierInformation">
-      <div class="fr-grid-row full-width flex-end fr-mb-3w fr-mb-md-2w">
-        <button class="fr-btn fr-btn--icon-left fr-icon-save-3-fill" type="submit">
-          Mettre à jour mes informations
-        </button>
-      </div>
       <fieldset aria-labelledby="identité-fieldset-legend" class="fr-mb-1w fr-fieldset fr-px-0 fr-mx-0">
         <legend id="identité-fieldset-legend" class="fr-fieldset__legend fr-px-0 fr-mx-0">
-          <h3 class="fr-h4">Mon identité</h3>
+          <h2 class="fr-h3">Mon identité</h2>
         </legend>
         <div class="fr-mb-3w">
           Adresse email : <strong>{{ profileUtlisateurViewModel.mail }}</strong>
@@ -76,7 +71,7 @@
 
       <fieldset aria-labelledby="donnee-fieldset-legend" class="fr-mb-0 fr-fieldset fr-px-0 fr-mx-0">
         <legend id="donnee-fieldset-legend" class="fr-fieldset__legend fr-px-0 fr-mx-0">
-          <h3 class="fr-h4">Données personnelles</h3>
+          <h2 class="fr-h3">Données personnelles</h2>
         </legend>
         <div class="full-width">
           <CompteFormulaireRevenuFiscal
@@ -90,7 +85,7 @@
 
       <div class="fr-accordions-group background--white">
         <Accordeon name-id="ou-trouver">
-          <template #titre> Où trouver ces informations&nbsp;? </template>
+          <template #titre>Où trouver ces informations&nbsp;?</template>
           <template #contenu>
             <p>
               Le revenu fiscal de référence et votre nombre de parts se trouvent sur la 1ère page de votre dernier avis
@@ -120,8 +115,8 @@
         </Accordeon>
       </div>
 
-      <div class="fr-grid-row full-width flex-end">
-        <button class="fr-btn fr-btn--icon-left fr-mt-4w fr-icon-save-3-fill" type="submit">
+      <div class="fr-grid-row full-width flex-end position--sticky bouton-enregistrer">
+        <button class="fr-btn fr-btn--icon-left fr-icon-save-3-fill" type="submit">
           Mettre à jour mes informations
         </button>
       </div>
@@ -225,3 +220,12 @@
     return true;
   }
 </script>
+
+<style scoped>
+  .bouton-enregistrer {
+    bottom: 0;
+    background: white;
+    padding: 1rem 0;
+    border-top: 1px solid var(--border-default-grey);
+  }
+</style>

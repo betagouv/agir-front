@@ -1,6 +1,6 @@
 <template>
-  <nav class="fr-sidemenu fr-sidemenu--sticky-full-height" aria-labelledby="fr-sidemenu-title">
-    <div class="fr-sidemenu__inner">
+  <nav class="fr-sidemenu fr-sidemenu--sticky full-height" aria-labelledby="fr-sidemenu-title">
+    <div class="fr-sidemenu__inner full-height fr-py-2w">
       <button class="fr-sidemenu__btn" hidden aria-controls="fr-sidemenu-wrapper" aria-expanded="false">
         Ouvrir la navigation
       </button>
