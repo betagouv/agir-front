@@ -1,5 +1,5 @@
 <template>
-  <CompteSkeleton page-courante="Logement">
+  <CompteSkeleton page-courante="Mon Compte - Mon logement">
     <CompteLogementFormulaire v-if="logementViewModel" :logement-view-model="logementViewModel" />
   </CompteSkeleton>
 </template>

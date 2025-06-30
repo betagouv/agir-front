@@ -71,7 +71,7 @@
 
       <fieldset aria-labelledby="donnee-fieldset-legend" class="fr-mb-0 fr-fieldset fr-px-0 fr-mx-0">
         <legend id="donnee-fieldset-legend" class="fr-fieldset__legend fr-px-0 fr-mx-0">
-          <h2 class="fr-h3">Données personnelles</h2>
+          <h2 class="fr-h3">Mes données personnelles</h2>
         </legend>
         <div class="full-width">
           <CompteFormulaireRevenuFiscal
