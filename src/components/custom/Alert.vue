@@ -1,8 +1,16 @@
 <template>
-  <div role="alert" :class="`fr-alert fr-alert--${type} background--white`">
-    <h3 class="fr-alert__title">{{ titre }}</h3>
+  <div
+    :role="aUnRoleAlert ? 'alert' : ''"
+    :class="`fr-alert fr-alert--${type} ${taille === 'small' ? 'fr-alert--sm' : ''} background--white`"
+  >
+    <h3 v-if="titre" class="fr-alert__title" v-text="titre" />
     <span class="fr-sr-only">: </span>
-    <p>{{ message }}</p>
+
+    <template v-if="$slots.message">
+      <slot name="message"></slot>
+    </template>
+    <p v-else-if="message">{{ message }}</p>
+
     <button v-if="onClose" class="fr-btn--close fr-btn" title="Masquer le message" @click="onClose">
       Masquer le message
     </button>
@@ -12,10 +20,15 @@
 <script setup lang="ts">
   import '@gouvfr/dsfr/dist/component/alert/alert.min.css';
 
-  defineProps<{
-    titre: string;
-    message: string;
-    type: 'success' | 'error' | 'info';
-    onClose?: () => void;
-  }>();
+  withDefaults(
+    defineProps<{
+      aUnRoleAlert?: boolean;
+      titre?: string;
+      message?: string;
+      type: 'success' | 'error' | 'info';
+      taille?: 'small' | 'medium';
+      onClose?: () => void;
+    }>(),
+    { aUnRoleAlert: true },
+  );
 </script>

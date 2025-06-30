@@ -83,6 +83,7 @@ export interface ResumeThematique {
 export interface DetailThematique {
   resume: ResumeThematique;
   doitRepondreAuxKYCs: boolean;
+  estUtilisateurNgc: boolean;
   idEnchainementKYCs: string | null;
   actions: Action[];
 }
