@@ -1,7 +1,7 @@
 <template>
   <div class="background--vert text--white">
     <div class="fr-container">
-      <div class="position--relative flex flex-space-between full-height">
+      <div class="position--relative flex flex-space-between full-height z-index-751">
         <div class="flex align-items--center">
           <img src="/ic_ngc_small.webp" class="logo-ngc fr-mr-1w" alt="" />
 
@@ -44,5 +44,9 @@
 
   .enlever-background-actif-dsfr:active {
     background-color: transparent;
+  }
+
+  .z-index-751 {
+    z-index: 751;
   }
 </style>
