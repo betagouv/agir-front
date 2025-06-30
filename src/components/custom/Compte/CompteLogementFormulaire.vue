@@ -31,6 +31,8 @@
         />
       </div>
 
+      <h2 class="fr-h3">Ma situation</h2>
+
       <fieldset class="fr-fieldset" aria-describedby="combien-dans-logement-legend">
         <legend id="combien-dans-logement-legend" class="fr-fieldset__legend fr-fieldset__legend--regular">
           Combien êtes-vous dans votre logement (vous inclus) ?
@@ -67,17 +69,36 @@
         name="residence"
         orientation="horizontal"
       />
-      <BoutonsRadio
-        v-model="logementViewModel.proprietaire.valeur"
-        :default-value="logementViewModel.proprietaire.valeur"
-        :options="logementViewModel.proprietaire.reponsesPossibles"
-        class="fr-mb-2w fr-col-12"
-        col="fr-col"
-        legende="Vous êtes propriétaire de votre logement ?"
-        legende-size="m"
-        name="proprietaire"
-        orientation="horizontal"
-      />
+
+      <div class="fr-grid-row">
+        <div class="fr-col-md-6 fr-col-12">
+          <BoutonsRadio
+            v-model="logementViewModel.proprietaire.valeur"
+            :default-value="logementViewModel.proprietaire.valeur"
+            :options="logementViewModel.proprietaire.reponsesPossibles"
+            class="fr-mb-2w fr-col-12"
+            col="fr-col"
+            legende="Êtes-vous propriétaire de votre logement ?"
+            legende-size="m"
+            name="proprietaire"
+            orientation="horizontal"
+          />
+        </div>
+        <div class="fr-col-md-6 fr-col-12">
+          <BoutonsRadio
+            v-model="logementViewModel.plusDeQuinzeAns.valeur"
+            :default-value="logementViewModel.plusDeQuinzeAns.valeur"
+            :options="logementViewModel.plusDeQuinzeAns.reponsesPossibles"
+            class="fr-mb-4w fr-col-12"
+            col="fr-col"
+            legende="Votre logement a-t-il plus de 15 ans ?"
+            legende-size="m"
+            name="anciennete"
+            orientation="horizontal"
+          />
+        </div>
+      </div>
+
       <BoutonsRadio
         v-model="logementViewModel.superficie.valeur"
         :default-value="logementViewModel.superficie.valeur"
@@ -87,17 +108,6 @@
         legende="Quelle en est la superficie ?"
         legende-size="m"
         name="superficie"
-        orientation="horizontal"
-      />
-      <BoutonsRadio
-        v-model="logementViewModel.plusDeQuinzeAns.valeur"
-        :default-value="logementViewModel.plusDeQuinzeAns.valeur"
-        :options="logementViewModel.plusDeQuinzeAns.reponsesPossibles"
-        class="fr-mb-4w fr-col-12"
-        col="fr-col"
-        legende="Votre logement a-t-il plus de 15 ans ?"
-        legende-size="m"
-        name="anciennete"
         orientation="horizontal"
       />
       <div class="fr-col-12">
