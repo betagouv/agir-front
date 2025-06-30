@@ -30,6 +30,16 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
         type: TypeAction.BILAN,
         dejaVue: true,
       },
+      {
+        code: 'code-action-test3',
+        titre: 'Tester une nouvelle **recette végétarienne** 3',
+        sousTitre:
+          'Faites des économies et le plein de vitamines ! Cette semaine, on cuisine une recette saine et délicieuse !',
+        nombreDePersonnes: 1,
+        nombreAidesDisponibles: 1,
+        type: TypeAction.BILAN,
+        dejaVue: true,
+      },
     ];
 
     const catalogue: CatalogueActions = {
@@ -59,7 +69,7 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
         {
           code: 'code-action-test',
           titre: 'Tester une nouvelle <span class="text--bold">recette végétarienne</span>',
-          nombreDePersonnes: '<span class="text--bold">0</span> action réalisée',
+          nombreDePersonnes: undefined,
           dejaVue: false,
           aidesDisponibles: undefined,
           url: {
@@ -86,6 +96,21 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
             },
           },
         },
+        {
+          code: 'code-action-test3',
+          titre: 'Tester une nouvelle <span class="text--bold">recette végétarienne</span> 3',
+          nombreDePersonnes: '<span class="text--bold">1</span> action réalisée',
+          aidesDisponibles: '<span class="text--bold">1</span> aide disponible',
+          dejaVue: true,
+          url: {
+            name: 'action-individuelle',
+            params: {
+              id: 'code-action-test3',
+              titre: 'tester-une-nouvelle-recette-vegetarienne-3',
+              type: 'bilan',
+            },
+          },
+        },
       ]);
     }
 
@@ -103,7 +128,7 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
             checked: false,
           },
         ],
-        phraseNombreActions: '2 actions',
+        phraseNombreActions: '3 actions',
       });
     }
   });

@@ -40,7 +40,7 @@ describe('Fichier de tests concernant la récupération des actions recommandée
             aidesDisponibles: undefined,
             code: 'code-action-test',
             dejaVue: false,
-            nombreDePersonnes: '<span class="text--bold">0</span> action réalisée',
+            nombreDePersonnes: undefined,
             titre: 'Tester une nouvelle <span class="text--bold">recette végétarienne</span>',
             url: {
               name: 'action-individuelle',

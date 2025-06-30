@@ -11,11 +11,14 @@ export class ActionsPresenterImpl implements ActionsPresenter {
   async presente(actions: Action[]): Promise<void> {
     const vm: ActionViewModel[] = await Promise.all(
       actions.map(async action => {
-        const nombreDePersonnes = gererPluriel(
-          action.nombreDePersonnes,
-          `<span class="text--bold">${action.nombreDePersonnes}</span> action réalisée`,
-          `<span class="text--bold">${action.nombreDePersonnes}</span> actions réalisées`,
-        );
+        const nombreDePersonnes =
+          action.nombreDePersonnes === 0
+            ? undefined
+            : gererPluriel(
+                action.nombreDePersonnes,
+                `<span class="text--bold">${action.nombreDePersonnes}</span> action réalisée`,
+                `<span class="text--bold">${action.nombreDePersonnes}</span> actions réalisées`,
+              );
 
         const aidesDisponibles =
           action.nombreAidesDisponibles === 0

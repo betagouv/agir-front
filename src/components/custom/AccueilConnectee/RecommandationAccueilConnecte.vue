@@ -1,6 +1,6 @@
 <template>
   <div class="fr-container fr-pt-5w fr-pb-3w">
-    <p class="fr-h2 fr-mb-1w">Bonjour {{ utilisateur.prenom }},</p>
+    <p class="fr-h2 fr-mb-1w">Bonjour {{ utilisateur.pseudo }},</p>
     <h1 class="text--normal fr-text--lg">Il est temps d'agir, choisissez votre prochaine action !</h1>
 
     <BallLoader v-if="estEnChargement" text="Nous préparons vos recommandations personnalisées..." />
