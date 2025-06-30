@@ -115,11 +115,7 @@
         </Accordeon>
       </div>
 
-      <div class="fr-grid-row full-width flex-end position--sticky bouton-enregistrer">
-        <button class="fr-btn fr-btn--icon-left fr-icon-save-3-fill" type="submit">
-          Mettre à jour mes informations
-        </button>
-      </div>
+      <CompteFormulaireBoutonEnregistrer />
     </form>
   </section>
 </template>
@@ -127,6 +123,7 @@
 <script lang="ts" setup>
   import { ref, useTemplateRef } from 'vue';
   import Alert from '@/components/custom/Alert.vue';
+  import CompteFormulaireBoutonEnregistrer from '@/components/custom/Compte/CompteFormulaireBoutonEnregistrer.vue';
   import CompteFormulaireRevenuFiscal from '@/components/custom/Compte/CompteFormulaireRevenuFiscal.vue';
   import Accordeon from '@/components/dsfr/Accordeon.vue';
   import InputDateDeNaissance from '@/components/dsfr/InputDateDeNaissance.vue';
@@ -220,12 +217,3 @@
     return true;
   }
 </script>
-
-<style scoped>
-  .bouton-enregistrer {
-    bottom: 0;
-    background: white;
-    padding: 1rem 0;
-    border-top: 1px solid var(--border-default-grey);
-  }
-</style>
