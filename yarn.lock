@@ -513,10 +513,10 @@
     "@octokit/types" "^9.0.0"
     minimatch "^5.1.0"
 
-"@gouvfr/dsfr@1.13.2":
-  version "1.13.2"
-  resolved "https://registry.yarnpkg.com/@gouvfr/dsfr/-/dsfr-1.13.2.tgz#ef789c35dd73cc5e406253f31bf4892892c2c285"
-  integrity sha512-4Q9ggFFzwD/KFr37sJO1hFH9PcqlZ7F3jMiFJXnBLJfkH1+s28vnQp/oXoY8TosWsLMSjdhNCrxvrUdm5XzBlg==
+"@gouvfr/dsfr@1.14.0":
+  version "1.14.0"
+  resolved "https://registry.yarnpkg.com/@gouvfr/dsfr/-/dsfr-1.14.0.tgz#cf753fae982f5b6a746bc9d31a471eb0c66ce428"
+  integrity sha512-lF02JujHsr4J39gnC7y+qe0LLnh01cb6JwbMIKK2YcNjzvmfb26C0uW0+gyugD41wjFQQcIFWz07g6ynqxjNzA==
 
 "@humanwhocodes/config-array@^0.11.14":
   version "0.11.14"

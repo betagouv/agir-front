@@ -19,7 +19,7 @@
     "postbuild": "node scripts/generate-version.js"
   },
   "dependencies": {
-    "@gouvfr/dsfr": "1.13.2",
+    "@gouvfr/dsfr": "1.14.0",
     "@iframe-resizer/vue": "^5.4.6",
     "@sentry/vite-plugin": "^3.5.0",
     "@sentry/vue": "9.31.0",
