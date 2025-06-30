@@ -31,6 +31,7 @@
               :erreur="champsPseudoStatus"
               :required="true"
               description="Obligatoire. Doit être composé de 3 à 21 caractères. Lettres et chiffres uniquement."
+              description-class="fr-mt-2w fr-mb-2w"
               label="Pseudonyme"
               name="pseudo"
               @blur="onValidationPseudo()"
