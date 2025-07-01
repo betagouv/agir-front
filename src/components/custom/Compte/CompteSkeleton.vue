@@ -2,15 +2,12 @@
   <div class="fr-container fr-pb-6w">
     <FilDAriane :page-courante="pageCourante" />
     <div class="background--white fr-p-4w border">
-      <div class="fr-grid-row fr-mb-4w">
-        <h1 class="fr-h2 fr-mb-0 fr-col">Mon profil</h1>
-      </div>
       <div class="fr-grid-row">
         <div class="fr-col-lg-4 fr-col-12 fr-mb-4w fr-mb-md-0">
-          <div class="full-height fr-grid-row flex-column flex-space-between">
-            <CompteMenuLateral class="fr-mb-2w fr-mb-md-6w" />
+          <div class="full-height flex flex-column flex-space-between">
+            <CompteMenuLateral />
             <button
-              class="fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-logout-box-r-line fr-btn--lg fr-mr-auto"
+              class="fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-logout-box-r-line fr-btn--lg fr-mr-auto position--sticky bottom-1 fr-mt-2w"
               @click="logout"
             >
               Se déconnecter
@@ -47,3 +44,9 @@
     await seDeconnecterUsecase.execute(utilisateurId, url => (window.location.href = url));
   };
 </script>
+
+<style scoped>
+  .bottom-1 {
+    bottom: 1rem;
+  }
+</style>

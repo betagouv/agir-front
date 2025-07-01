@@ -80,6 +80,10 @@
     position: relative;
 }
 
+.position--sticky {
+    position: sticky;
+}
+
 .display-block {
     display: block;
 }

@@ -2,7 +2,7 @@
   <div :class="erreur && erreur.afficher ? 'fr-input-group--error' : ''" class="fr-input-group">
     <label :for="name" class="fr-label">
       {{ label }}
-      <span v-if="description" class="fr-hint-text">{{ description }}</span>
+      <span v-if="description" class="fr-hint-text" :class="descriptionClass">{{ description }}</span>
     </label>
     <input
       :aria-describedby="erreur && erreur.afficher ? errorId : ''"
@@ -19,6 +19,7 @@
       type="text"
       @blur="handleBlur"
       @input="updateValue"
+      spellcheck="false"
     />
     <p v-if="erreur && erreur.afficher" :id="errorId" class="fr-error-text" aria-live="assertive">
       {{ erreur.message }}
@@ -34,6 +35,7 @@
     label: string;
     modelValue: string;
     description?: string;
+    descriptionClass?: string;
     required?: boolean;
     erreur?: {
       message: string;

@@ -1,7 +1,7 @@
 <template>
   <section class="fr-accordion">
     <h3 class="fr-accordion__title">
-      <button class="fr-accordion__btn" aria-expanded="false" :aria-controls="nameId">
+      <button type="button" class="fr-accordion__btn" aria-expanded="false" :aria-controls="nameId">
         <slot name="titre" />
       </button>
     </h3>

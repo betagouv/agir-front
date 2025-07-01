@@ -52,7 +52,7 @@
   onMounted(async () => {
     if (route.name === RouteKycName.KYC_COMPTE) {
       buttonRetour.label = 'Retour à mon compte';
-      buttonRetour.url = `${RouteComptePath.MIEUX_VOUS_CONNAITRE}`;
+      buttonRetour.url = `${RouteComptePath.MES_REPONSES}`;
     }
     const recupereQuestionUsecase = new RecupererQuestionUsecase(new QuestionRepositoryAxios());
     await recupereQuestionUsecase.execute(

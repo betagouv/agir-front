@@ -1,5 +1,5 @@
 <template>
-  <div id="header-search" class="fr-search-bar position--relative" role="search" @blur="cacherDialogue">
+  <div id="header-search" class="fr-search-bar position--relative" @blur="cacherDialogue">
     <label v-if="!labelId" class="fr-label" for="recherche-adresse-input">Renseignez votre adresse</label>
     <div class="fr-input-wrap fr-icon-search-line full-width">
       <input

@@ -1,9 +1,9 @@
 <template>
-  <fieldset class="fr-fieldset" id="dpe">
-    <legend class="fr-fieldset__legend--regular fr-fieldset__legend fr-h4 fr-pb-0" id="radio-legende-dpe">
-      Légende pour l’ensemble des éléments
+  <fieldset class="fr-fieldset" id="dpe" aria-labelledby="radio-legende-dpe">
+    <legend class="fr-fieldset__legend--regular fr-fieldset__legend" id="radio-legende-dpe">
+      Quelle est l’étiquette DPE de votre logement ?
     </legend>
-    <div class="fr-fieldset__element">
+    <div class="fr-fieldset__element fr-mb-1w">
       <div class="fr-radio-group">
         <input
           @change.prevent="onInputChange"
@@ -16,7 +16,7 @@
         <label class="fr-label fr-label--dpe" for="dpe-A"><span class="dpe dpe--a">A</span></label>
       </div>
     </div>
-    <div class="fr-fieldset__element">
+    <div class="fr-fieldset__element fr-mb-1w">
       <div class="fr-radio-group">
         <input
           @change.prevent="onInputChange"
@@ -29,7 +29,7 @@
         <label class="fr-label fr-label--dpe" for="dpe-B"> <span class="dpe dpe--b">B</span></label>
       </div>
     </div>
-    <div class="fr-fieldset__element">
+    <div class="fr-fieldset__element fr-mb-1w">
       <div class="fr-radio-group">
         <input
           @change.prevent="onInputChange"
@@ -42,7 +42,7 @@
         <label class="fr-label fr-label--dpe" for="dpe-C"><span class="dpe dpe--c">C</span></label>
       </div>
     </div>
-    <div class="fr-fieldset__element">
+    <div class="fr-fieldset__element fr-mb-1w">
       <div class="fr-radio-group">
         <input
           @change.prevent="onInputChange"
@@ -55,7 +55,7 @@
         <label class="fr-label fr-label--dpe" for="dpe-D"> <span class="dpe dpe--d">D</span> </label>
       </div>
     </div>
-    <div class="fr-fieldset__element">
+    <div class="fr-fieldset__element fr-mb-1w">
       <div class="fr-radio-group">
         <input
           @change.prevent="onInputChange"
@@ -68,7 +68,7 @@
         <label class="fr-label fr-label--dpe" for="dpe-E"> <span class="dpe dpe--e active">E</span></label>
       </div>
     </div>
-    <div class="fr-fieldset__element">
+    <div class="fr-fieldset__element fr-mb-1w">
       <div class="fr-radio-group">
         <input
           @change.prevent="onInputChange"
@@ -81,7 +81,7 @@
         <label class="fr-label fr-label--dpe" for="dpe-F"> <span class="dpe dpe--f">F</span></label>
       </div>
     </div>
-    <div class="fr-fieldset__element">
+    <div class="fr-fieldset__element fr-mb-1w">
       <div class="fr-radio-group">
         <input
           @change.prevent="onInputChange"
@@ -94,7 +94,7 @@
         <label class="fr-label fr-label--dpe" for="dpe-G"> <span class="dpe dpe--g">G</span></label>
       </div>
     </div>
-    <div class="fr-fieldset__element">
+    <div class="fr-fieldset__element fr-mb-1w">
       <div class="fr-radio-group fr-py-1v">
         <input
           @change.prevent="onInputChange"
