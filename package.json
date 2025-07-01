@@ -30,7 +30,7 @@
     "leaflet": "^1.9.4",
     "marked": "^16.0.0",
     "pinia": "3.0.3",
-    "pinia-plugin-persistedstate": "4.3.0",
+    "pinia-plugin-persistedstate": "4.4.1",
     "redaxios": "0.5.1",
     "vue": "3.5.17",
     "vue-chartjs": "5.3.2",
