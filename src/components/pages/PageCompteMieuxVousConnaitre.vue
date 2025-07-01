@@ -1,6 +1,6 @@
 <template>
-  <CompteSkeleton page-courante="Mon Compte - Mieux vous connaître">
-    <h1 class="fr-h2">Mieux vous connaître</h1>
+  <CompteSkeleton page-courante="Mon Compte - Mes réponses">
+    <h1 class="fr-h2">Mes réponses</h1>
     <template v-if="questionsViewModel.length > 0">
       <div class="fr-grid-row fr-grid-row--gutters">
         <div class="fr-col-md-6 fr-col-12" v-for="questionViewModel in questionsViewModel" :key="questionViewModel.id">

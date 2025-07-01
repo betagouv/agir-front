@@ -25,7 +25,7 @@ export enum RouteComptePath {
   CREATION_COMPTE_NGC = '/creation-compte/nos-gestes-climat',
   VALIDATION_COMPTE = '/validation-compte',
   VALIDATION_AUTHENTIFICATION = '/validation-authentification',
-  MIEUX_VOUS_CONNAITRE = '/compte/mieux-vous-connaitre',
+  MIEUX_VOUS_CONNAITRE = '/compte/mes-reponses',
   LOGEMENT = '/compte/logement',
   POST_CREATION_COMPTE_ETAPE_1 = '/creation-compte/etape-1',
   POST_CREATION_COMPTE_ETAPE_2 = '/creation-compte/etape-2',
@@ -59,7 +59,7 @@ const compteRoutes: RouteRecordRaw[] = [
         name: RouteCompteName.MIEUX_VOUS_CONNAITRE,
         component: PageCompteMieuxVousConnaitre,
         meta: {
-          title: 'Mieux vous connaitre',
+          title: 'Mes réponses',
         },
       },
       {

@@ -3,7 +3,7 @@
     :liens="[
       { label: 'Mes informations', url: RouteCompteName.MON_COMPTE },
       { label: 'Mon logement', url: RouteCompteName.LOGEMENT },
-      { label: 'Mieux vous connaître', url: RouteCompteName.MIEUX_VOUS_CONNAITRE },
+      { label: 'Mes réponses', url: RouteCompteName.MIEUX_VOUS_CONNAITRE },
       { label: 'Options avancées', url: RouteCompteName.OPTIONS_AVANCEES },
     ]"
   />
