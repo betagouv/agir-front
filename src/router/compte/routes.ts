@@ -3,7 +3,7 @@ const PageCreationCompte = () => import('@/components/pages/PageCreationCompte.v
 const PageCreationCompteDepuisNGC = () => import('@/components/pages/PageCreationCompteDepuisNGC.vue');
 const PageVerificationAdresseMail = () => import('@/components/pages/PageVerificationAdresseMail.vue');
 const PageCompteOptionsAvancees = () => import('@/components/pages/PageCompteOptionsAvancees.vue');
-const PageCompteMieuxVousConnaitre = () => import('@/components/pages/PageCompteMieuxVousConnaitre.vue');
+const PageCompteMesReponses = () => import('@/components/pages/PageCompteMesReponses.vue');
 const PageCompteLogement = () => import('@/components/pages/PageCompteLogement.vue');
 const PagePostCreationCompteEtape1 = () =>
   import('@/components/pages/PagePostCreationCompte/PagePostCreationCompteEtape1.vue');
@@ -25,7 +25,7 @@ export enum RouteComptePath {
   CREATION_COMPTE_NGC = '/creation-compte/nos-gestes-climat',
   VALIDATION_COMPTE = '/validation-compte',
   VALIDATION_AUTHENTIFICATION = '/validation-authentification',
-  MIEUX_VOUS_CONNAITRE = '/compte/mes-reponses',
+  MES_REPONSES = '/compte/mes-reponses',
   LOGEMENT = '/compte/logement',
   POST_CREATION_COMPTE_ETAPE_1 = '/creation-compte/etape-1',
   POST_CREATION_COMPTE_ETAPE_2 = '/creation-compte/etape-2',
@@ -55,9 +55,9 @@ const compteRoutes: RouteRecordRaw[] = [
         },
       },
       {
-        path: RouteComptePath.MIEUX_VOUS_CONNAITRE,
-        name: RouteCompteName.MIEUX_VOUS_CONNAITRE,
-        component: PageCompteMieuxVousConnaitre,
+        path: RouteComptePath.MES_REPONSES,
+        name: RouteCompteName.MES_REPONSES,
+        component: PageCompteMesReponses,
         meta: {
           title: 'Mes réponses',
         },

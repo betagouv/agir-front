@@ -6,7 +6,7 @@
       <ul class="flex flex-column fr-pl-0 fr-m-0 list-style-none">
         <li v-for="justification in explicationsRecommandation.justifications" :key="justification" class="fr-mb-3v">
           <router-link
-            :to="{ name: RouteCompteName.MIEUX_VOUS_CONNAITRE }"
+            :to="{ name: RouteCompteName.MES_REPONSES }"
             class="fr-tag fr-tag--recommandations fr-icon-edit-line fr-tag--icon-left"
           >
             {{ justification }}

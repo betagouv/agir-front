@@ -4,11 +4,11 @@
       <div class="fr-card fr-enlarge-link fr-card--horizontal fr-card--sm relative">
         <div class="fr-card__body">
           <div class="fr-card__content">
-            <h3 class="fr-card__title">
+            <h2 class="fr-card__title">
               <router-link :to="action.url">
                 <span class="text--black" v-html="action.titre" />
               </router-link>
-            </h3>
+            </h2>
             <ul class="fr-card__desc list-style-none fr-p-0 flex gap--small flex-wrap">
               <li v-if="action.url.params.type === 'quizz'" class="fr-pb-0">
                 <span class="fr-badge background-bleu-light text--bleu fr-pl-1w">QUIZ</span>&nbsp;

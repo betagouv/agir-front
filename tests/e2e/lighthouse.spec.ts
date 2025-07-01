@@ -73,8 +73,8 @@ test.describe('Audit a11y - pages connectées', () => {
     await playAuditA11y(page);
   });
 
-  test('Page mon compte - mieux vous connaître', async () => {
-    await page.goto('/compte/mieux-vous-connaitre');
+  test('Page mon compte - mes réponses', async () => {
+    await page.goto('/compte/mes-reponses');
     await playAuditA11y(page);
   });
 
