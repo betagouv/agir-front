@@ -108,7 +108,7 @@
   import { useDsfrModale } from '@/composables/useDsfrModale';
   import { BarreDeRechercheViewModel } from '@/domaines/logement/adapters/barreDeRecherche.presenter.impl';
   import { InscriptionPresenterImpl } from '@/domaines/simulationWattWatchers/adapters/inscription.presenter.impl';
-  import { WattWatchersRepositoryAxios } from '@/domaines/simulationWattWatchers/adapters/WattWatchers.repository.axios';
+  import { WattWatchersRepositoryAxios } from '@/domaines/simulationWattWatchers/adapters/wattWatchers.repository.axios';
   import { InscriptionParAdresseUsecase } from '@/domaines/simulationWattWatchers/inscriptionParAdresse.usecase';
   import { InscriptionParPRMUsecase } from '@/domaines/simulationWattWatchers/inscriptionParPRM.usecase';
   import { AdresseBarreDeRecherche, Coordonnees } from '@/shell/coordonneesType.js';
