@@ -19,12 +19,14 @@
         alt=""
         class="display-block recette--image fr-mb-2w"
       />
+
       <h2 class="fr-h3 fr-mt-4w">Les ingrédients</h2>
       <ul :class="recetteViewModel.ingredients.length > 5 ? 'columns-2' : ''">
         <li v-for="ingredient in recetteViewModel.ingredients" :key="ingredient">
           {{ ingredient }}
         </li>
       </ul>
+
       <h2 class="fr-h3 fr-mt-4w">Étapes</h2>
       <ol>
         <li v-for="etape in recetteViewModel.etapes" :key="etape">

@@ -1,34 +1,26 @@
 import { ServiceRechercheLongueVieAuxObjetsPresenterDetail } from '@/domaines/serviceRecherche/longueVieAuxObjets/ports/serviceRechercheLongueVieAuxObjetsDetail.presenter';
 import { ServiceRechercheLongueVieAuxObjetsResultatDetail } from '@/domaines/serviceRecherche/longueVieAuxObjets/recupererDetailServiceLongueVieAuxObjets.usecase';
+import { Coordonnees } from '@/shell/coordonneesType';
 
-export interface DetailServiceViewModel {
+export interface DetailLVAOViewModel {
   titre: string;
-  img: string;
-  heuresOuvertures?: string;
-  telephone?: string;
-  siteWeb?: string;
   tag?: {
     label: string;
     style: string;
   };
   adresse?: string;
-  description?: string;
-  position?: { latitude: number; longitude: number };
+  position?: Coordonnees;
   sources?: string[];
 }
 
 export class ServiceRechercheLongueVieAuxObjetsPresenterDetailImpl
   implements ServiceRechercheLongueVieAuxObjetsPresenterDetail
 {
-  constructor(private serviceRechercheViewModel: (viewModel: DetailServiceViewModel) => void) {}
+  constructor(private serviceRechercheViewModel: (viewModel: DetailLVAOViewModel) => void) {}
 
   presente(serviceRecherche: ServiceRechercheLongueVieAuxObjetsResultatDetail): void {
-    const serviceRechercheViewModel: DetailServiceViewModel = {
+    const serviceRechercheViewModel: DetailLVAOViewModel = {
       titre: serviceRecherche.titre,
-      img: serviceRecherche.image,
-      heuresOuvertures: serviceRecherche.heuresOuvertures,
-      telephone: serviceRecherche.telephone,
-      siteWeb: serviceRecherche.siteWeb,
       tag: serviceRecherche.distance
         ? {
             label: this.construireTag(serviceRecherche.distance),
@@ -36,7 +28,6 @@ export class ServiceRechercheLongueVieAuxObjetsPresenterDetailImpl
           }
         : undefined,
       adresse: serviceRecherche.adresse,
-      description: serviceRecherche.description,
       position: serviceRecherche.position,
       sources: serviceRecherche.sources,
     };

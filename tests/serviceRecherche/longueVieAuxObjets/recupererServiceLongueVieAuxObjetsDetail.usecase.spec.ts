@@ -1,7 +1,7 @@
 import { ServiceRechercheLongueVieAuxObjetsRepositoryMock } from './adapters/serviceRechercheLongueVieAuxObjets.repository.mock';
 import { RecupererDetailServiceLongueVieAuxObjetsUsecase } from '@/domaines/serviceRecherche/longueVieAuxObjets/recupererDetailServiceLongueVieAuxObjets.usecase';
 import {
-  DetailServiceViewModel,
+  DetailLVAOViewModel,
   ServiceRechercheLongueVieAuxObjetsPresenterDetailImpl,
 } from '@/domaines/serviceRecherche/longueVieAuxObjets/adapters/serviceRechercheLongueVieAuxObjetsDetail.presenter.impl';
 
@@ -31,8 +31,8 @@ describe('Fichier de tests concernant le détail du Service Près de chez nous '
     );
 
     // THEN
-    function expectation(serviceRechercheLongueVieAuxObjetsViewModel: DetailServiceViewModel) {
-      expect(serviceRechercheLongueVieAuxObjetsViewModel).toStrictEqual<DetailServiceViewModel>({
+    function expectation(serviceRechercheLongueVieAuxObjetsViewModel: DetailLVAOViewModel) {
+      expect(serviceRechercheLongueVieAuxObjetsViewModel).toStrictEqual<DetailLVAOViewModel>({
         titre: 'Mon service',
         img: '',
         adresse: '2 Avenue de la République, Palaiseau - 91120',
