@@ -40,14 +40,14 @@
       <a :href="urlModification" class="fr-btn fr-btn--secondary" rel="noopener noreferrer" target="_blank"
         >Proposer une modification</a
       >
-      <div v-if="detailServiceViewModel.sources && detailServiceViewModel.sources.length > 0" class="fr-mt-4w fr-mb-4w">
+      <div v-if="detailServiceViewModel.sources && detailServiceViewModel.sources.length > 0" class="fr-mt-4w">
         <hr />
         <p v-if="detailServiceViewModel.sources.length === 1" class="fr-text--xs">
           <span class="fr-mr-1w text--bold">Source :</span>
           {{ detailServiceViewModel.sources[0] }}
         </p>
         <div v-else class="fr-text--xs">
-          <span class="fr-mr-1w text--bold">Sources :</span>
+          <p class="fr-mr-1w text--bold">Sources :</p>
           <ul>
             <li v-for="source in detailServiceViewModel.sources" :key="source">
               {{ source }}
