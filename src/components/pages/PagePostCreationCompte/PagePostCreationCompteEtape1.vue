@@ -25,7 +25,7 @@
               :maxlength="20"
               :required="true"
               autocomplete="username"
-              description="Doit être composé de 3 à 21 caractères. Lettres et chiffres uniquement."
+              description="Doit être composé de 3 à 21 caractères. Lettres, chiffres et espaces uniquement."
               label="Votre pseudonyme"
               name="utilisateur-pseudo"
             />
