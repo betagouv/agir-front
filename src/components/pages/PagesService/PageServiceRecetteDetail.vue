@@ -1,36 +1,38 @@
 <template>
-  <div v-if="recetteViewModel" class="fr-container fr-pb-4w">
+  <div class="fr-container">
     <BoutonRetourAutomatique class="fr-my-2w fr-pl-0" />
 
-    <img
-      v-if="recetteViewModel?.image"
-      :src="recetteViewModel?.image"
-      alt=""
-      class="display-block recette--image fr-mb-2w"
-    />
-    <div class="fr-mt-auto">
-      <span v-if="recetteViewModel.tag" :class="`fr-tag fr-text--xs fr-mr-2w ${recetteViewModel.tag.style}`">
-        {{ recetteViewModel.tag.label }}
-      </span>
+    <div v-if="recetteViewModel" class="fr-p-4w background--white shadow--light fr-mb-3w">
+      <h1 class="fr-mb-1w">{{ recetteViewModel.titre }}</h1>
+      <p class="flex align-items--center">
+        <span v-if="recetteViewModel.tag" class="fr-tag fr-text--xs fr-mr-2w" :class="`${recetteViewModel.tag.style}`">
+          {{ recetteViewModel.tag.label }}
+        </span>
+        <span class="fr-icon-timer-line">
+          {{ recetteViewModel.tempsDePreparation }}
+        </span>
+      </p>
+
+      <img
+        v-if="recetteViewModel?.image"
+        :src="recetteViewModel?.image"
+        alt=""
+        class="display-block recette--image fr-mb-2w"
+      />
+      <h2 class="fr-h3 fr-mt-4w">Les ingrédients</h2>
+      <ul :class="recetteViewModel.ingredients.length > 5 ? 'columns-2' : ''">
+        <li v-for="ingredient in recetteViewModel.ingredients" :key="ingredient">
+          {{ ingredient }}
+        </li>
+      </ul>
+      <h2 class="fr-h3 fr-mt-4w">Étapes</h2>
+      <ol>
+        <li v-for="etape in recetteViewModel.etapes" :key="etape">
+          {{ decodeUnicode(etape) }}
+        </li>
+      </ol>
+      <p class="flex flex-center fr-mt-4w fr-mb-0">© Santé publique France</p>
     </div>
-    <h1 class="fr-mt-2w">{{ recetteViewModel.titre }}</h1>
-    <p>
-      <span class="fr-icon-timer-line" />
-      {{ recetteViewModel.tempsDePreparation }}
-    </p>
-    <h2 class="fr-h3 fr-mt-4w">Ingrédients</h2>
-    <ul>
-      <li v-for="ingredient in recetteViewModel.ingredients" :key="ingredient">
-        {{ ingredient }}
-      </li>
-    </ul>
-    <h2 class="fr-h3 fr-mt-4w">Étapes</h2>
-    <ol>
-      <li v-for="etape in recetteViewModel.etapes" :key="etape">
-        {{ decodeUnicode(etape) }}
-      </li>
-    </ol>
-    <div class="flex flex-center fr-mt-4w">© Santé publique France</div>
   </div>
 </template>
 
@@ -74,9 +76,13 @@
 </script>
 <style scoped>
   .recette--image {
-    height: 20vh;
+    max-height: 40vh;
     display: block;
     object-fit: cover;
     width: 100%;
+  }
+
+  .columns-2 {
+    columns: 2;
   }
 </style>
