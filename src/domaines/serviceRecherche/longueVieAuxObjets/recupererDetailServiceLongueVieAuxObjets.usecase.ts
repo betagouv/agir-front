@@ -3,13 +3,8 @@ import { ServiceRechercheLongueVieAuxObjetsPresenterDetail } from '@/domaines/se
 
 export interface ServiceRechercheLongueVieAuxObjetsResultatDetail {
   titre: string;
-  image: string;
   adresse?: string;
-  telephone?: string;
-  heuresOuvertures?: string;
-  siteWeb?: string;
   distance?: number;
-  description?: string;
   position?: { latitude: number; longitude: number };
   sources?: string[];
 }

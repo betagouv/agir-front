@@ -143,14 +143,7 @@ export class ServiceRechercheLongueVieAuxObjetsAxios implements ServiceRecherche
     return {
       titre: reponse.data.titre,
       adresse: adresseFinale,
-      telephone: reponse.data.phone?.toString(),
-      image: reponse.data.image_url,
-      siteWeb: reponse.data.site_web,
       distance: reponse.data.distance_metres,
-      heuresOuvertures: reponse.data.openhours_more_infos,
-      description: reponse.data.description
-        ? `${reponse.data.description} ${reponse.data.description_more || ''}`
-        : undefined,
       position:
         reponse.data.latitude && reponse.data.longitude
           ? {
