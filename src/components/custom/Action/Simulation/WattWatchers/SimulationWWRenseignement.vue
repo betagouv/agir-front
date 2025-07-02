@@ -110,7 +110,7 @@
   import { InscriptionPresenterImpl } from '@/domaines/simulationWattWatchers/adapters/inscription.presenter.impl';
   import { WattWatchersRepositoryAxios } from '@/domaines/simulationWattWatchers/adapters/WattWatchers.repository.axios';
   import { InscriptionParAdresseUsecase } from '@/domaines/simulationWattWatchers/inscriptionParAdresse.usecase';
-  import { TenterInscriptionParPrmUsecase } from '@/domaines/simulationWattWatchers/tenterInscriptionParPrm.usecase';
+  import { InscriptionParPRMUsecase } from '@/domaines/simulationWattWatchers/inscriptionParPRM.usecase';
   import { AdresseBarreDeRecherche, Coordonnees } from '@/shell/coordonneesType.js';
   import { utilisateurStore } from '@/store/utilisateur';
 
@@ -168,7 +168,7 @@
     if (formulaireEstEnErreur()) return;
 
     if (choixLocalisateur.value === 'numero-prm') {
-      const usecase = new TenterInscriptionParPrmUsecase(new WattWatchersRepositoryAxios());
+      const usecase = new InscriptionParPRMUsecase(new WattWatchersRepositoryAxios());
       usecase.execute(
         utilisateurStore().utilisateur.id,
         numeroPrmValue.value,
