@@ -1,5 +1,5 @@
 import { InscriptionPresenter } from '@/domaines/simulationWattWatchers/ports/inscription.presenter';
-import { WattWatchersRepository } from '@/domaines/simulationWattWatchers/ports/WattWatchers.repository';
+import { WattWatchersRepository } from '@/domaines/simulationWattWatchers/ports/wattWatchers.repository';
 
 export class InscriptionParPRMUsecase {
   constructor(private readonly repository: WattWatchersRepository) {}
