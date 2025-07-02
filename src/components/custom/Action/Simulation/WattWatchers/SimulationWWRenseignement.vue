@@ -3,12 +3,15 @@
     <ChoixDuLocalisateur v-model:choix-localisateur="choixLocalisateur" />
 
     <template v-if="!affichagePRM">
-      <div class="fr-mb-4w fr-input-group" :class="erreurAdresse ? 'fr-input-group--error' : ''">
-        <label for="recherche-adresse-input" class="fr-mb-3w">Mon adresse</label>
+      <div :class="erreurAdresse ? 'fr-input-group--error' : ''" class="fr-mb-4w fr-input-group">
+        <label class="fr-mb-3w" for="recherche-adresse-input">Mon adresse</label>
         <BarreDeRechercheAdresse
           v-model:adresse="adresse"
           v-model:coordonnees="coordonnees"
           v-model:recherche="recherche"
+          :input-options="{
+            describedBy: erreurAdresse ? 'adresse-text-input-error-desc-error' : '',
+          }"
           @update:coordonnees="
             () => {
               if (coordonnees) {
@@ -16,11 +19,8 @@
               }
             }
           "
-          :input-options="{
-            describedBy: erreurAdresse ? 'adresse-text-input-error-desc-error' : '',
-          }"
         />
-        <p v-if="erreurAdresse" id="adresse-text-input-error-desc-error" class="fr-error-text" aria-live="assertive">
+        <p v-if="erreurAdresse" id="adresse-text-input-error-desc-error" aria-live="assertive" class="fr-error-text">
           {{ erreurAdresse }}
         </p>
 
@@ -36,50 +36,49 @@
           texte="Pratique : souhaitez-vous enregistrer votre adresse principale pour une prochaine fois&nbsp;?"
         />
       </div>
-
-      <InputText
-        v-model="nomDeFamille"
-        class="fr-mb-4w"
-        required
-        name="nom-de-famille"
-        label="Nom de famille (du titulaire du contrat électrique)"
-        autocomplete="family-name"
-        :erreur="erreurNomDeFamille"
-      />
     </template>
 
     <template v-else>
       <InputText
         ref="numeroPrmInput"
-        name="prm"
-        label="Numéro de PRM"
-        description="Il s’agit d’une suite de 14 chiffres qui identifie le logement sur le réseau électrique"
         v-model="numeroPrmValue"
         :erreur="erreurNumeroPrm"
         :maxlength="14"
+        description="Il s’agit d’une suite de 14 chiffres qui identifie le logement sur le réseau électrique"
+        label="Numéro de PRM"
+        name="prm"
       />
 
       <RenseignementAccordeon />
     </template>
 
-    <InputCheckboxUnitaire
+    <InputText
+      v-model="nomDeFamille"
+      :erreur="erreurNomDeFamille"
+      autocomplete="family-name"
       class="fr-mb-4w"
+      label="Nom de famille (du titulaire du contrat électrique)"
+      name="nom-de-famille"
+      required
+    />
+
+    <InputCheckboxUnitaire
       id="cguWW"
+      v-model="acceptationCguWw"
+      :erreur="erreurCgu"
+      class="fr-mb-4w"
       label="En activant le suivi de ma consommation, je déclare sur l’honneur être titulaire du compte électrique ou être
           mandaté par celui-ci. J’autorise Watt Watchers à recueillir mon historique de consommation d’électricité sur 3
           ans (demi-heure, journée et puissance maximum quotidienne), ainsi qu’à analyser mes consommations."
-      v-model="acceptationCguWw"
-      :erreur="erreurCgu"
     />
 
-    <button type="submit" class="fr-btn">Localiser mon compteur</button>
+    <button class="fr-btn" type="submit">Localiser mon compteur</button>
   </form>
 
   <RenseignementModale
-    :numero-compteur-input="numeroPrmValue"
-    :modale-id="MODALE_ID"
+    :commune="adresse?.commune || ''"
     :connexion-prm-status="connexionPrmStatus"
-    :passer-etape-suivante="passerEtapeSuivante"
+    :modale-id="MODALE_ID"
     :modifier-numero="
       () => {
         affichagePRM = true;
@@ -87,11 +86,14 @@
         nextTick(() => numeroPrmInput?.focus());
       }
     "
+    :nom="nomDeFamille"
+    :numero-compteur-input="numeroPrmValue"
+    :passer-etape-suivante="passerEtapeSuivante"
     :retour="fermerModale"
   />
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
   import { nextTick, onMounted, ref, watch } from 'vue';
   import ChoixDuLocalisateur from '@/components/custom/Action/Simulation/WattWatchers/ChoixDuLocalisateur.vue';
   import { ConnexionPRMStatus } from '@/components/custom/Action/Simulation/WattWatchers/connexionPrmStatus';
@@ -105,6 +107,10 @@
   import { useAdressePrincipale } from '@/composables/useAdressePrincipale';
   import { useDsfrModale } from '@/composables/useDsfrModale';
   import { BarreDeRechercheViewModel } from '@/domaines/logement/adapters/barreDeRecherche.presenter.impl';
+  import { InscriptionPresenterImpl } from '@/domaines/simulationWattWatchers/adapters/inscription.presenter.impl';
+  import { WattWatchersRepositoryAxios } from '@/domaines/simulationWattWatchers/adapters/WattWatchers.repository.axios';
+  import { InscriptionParAdresseUsecase } from '@/domaines/simulationWattWatchers/inscriptionParAdresse.usecase';
+  import { TenterInscriptionParPrmUsecase } from '@/domaines/simulationWattWatchers/tenterInscriptionParPrm.usecase';
   import { AdresseBarreDeRecherche, Coordonnees } from '@/shell/coordonneesType.js';
   import { utilisateurStore } from '@/store/utilisateur';
 
@@ -161,13 +167,55 @@
   function localiserMonCompteur() {
     if (formulaireEstEnErreur()) return;
 
-    ouvrirModale();
-    connexionPrmStatus.value = ConnexionPRMStatus.EN_COURS;
+    if (choixLocalisateur.value === 'numero-prm') {
+      const usecase = new TenterInscriptionParPrmUsecase(new WattWatchersRepositoryAxios());
+      usecase.execute(
+        utilisateurStore().utilisateur.id,
+        numeroPrmValue.value,
+        nomDeFamille.value,
+        new InscriptionPresenterImpl(
+          (): void => {
+            ouvrirModale();
+            connexionPrmStatus.value = ConnexionPRMStatus.EN_COURS;
 
-    setTimeout(() => {
-      connexionPrmStatus.value = ConnexionPRMStatus.SUCCES;
-      numeroPrmValue.value = '283918274';
-    }, 1000);
+            setTimeout(() => {
+              connexionPrmStatus.value = ConnexionPRMStatus.SUCCES;
+            }, 1000);
+          },
+          (): void => {
+            //Todo: erreur lors de l'inscription
+          },
+        ),
+      );
+    } else {
+      const usecase = new InscriptionParAdresseUsecase(new WattWatchersRepositoryAxios());
+      usecase.execute(
+        utilisateurStore().utilisateur.id,
+        nomDeFamille.value,
+        {
+          commune_label: adresse.value!.commune,
+          numeroRue: adresse.value!.numeroRue,
+          rue: adresse.value!.rue,
+          codePostal: adresse.value!.codePostal,
+          codeEpci: adresse.value!.codeEpci,
+          coordonnees: adresse.value!.coordonnees,
+          commune_utilisee_dans_le_compte: '',
+        },
+        new InscriptionPresenterImpl(
+          (): void => {
+            ouvrirModale();
+            connexionPrmStatus.value = ConnexionPRMStatus.EN_COURS;
+
+            setTimeout(() => {
+              connexionPrmStatus.value = ConnexionPRMStatus.SUCCES;
+            }, 1000);
+          },
+          (): void => {
+            //Todo: erreur lors de l'inscription
+          },
+        ),
+      );
+    }
   }
 
   function definirAdressePrincipale() {

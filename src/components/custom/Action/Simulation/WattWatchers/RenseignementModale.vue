@@ -7,7 +7,9 @@
         </template>
         <template v-else-if="connexionPrmStatus === ConnexionPRMStatus.SUCCES">
           <ModaleSucces
+            :commune="commune"
             :modale-id="modaleId"
+            :nom="nom"
             :numero-compteur-input="numeroCompteurInput"
             :passer-etape-suivante="passerEtapeSuivante"
             :retour="retour"
@@ -21,7 +23,7 @@
   </Teleport>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
   import { ConnexionPRMStatus } from '@/components/custom/Action/Simulation/WattWatchers/connexionPrmStatus';
   import ModaleEchec from '@/components/custom/Action/Simulation/WattWatchers/ModaleEchec.vue';
   import ModaleSucces from '@/components/custom/Action/Simulation/WattWatchers/ModaleSucces.vue';
@@ -32,6 +34,8 @@
     modaleId: string;
     connexionPrmStatus: ConnexionPRMStatus;
     numeroCompteurInput: string;
+    nom: string;
+    commune: string;
     passerEtapeSuivante: () => void;
     modifierNumero: () => void;
     retour: () => void;
