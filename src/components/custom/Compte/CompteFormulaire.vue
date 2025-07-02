@@ -25,7 +25,7 @@
               v-model="profileUtlisateurViewModel.pseudo"
               :erreur="champsPseudoStatus"
               :required="true"
-              description="Obligatoire. Doit être composé de 3 à 21 caractères. Lettres et chiffres uniquement."
+              description="Obligatoire. Doit être composé de 3 à 21 caractères. Lettres, chiffres et espaces uniquement."
               description-class="fr-mt-2w fr-mb-2w"
               label="Pseudonyme"
               name="pseudo"
@@ -98,7 +98,11 @@
   import CompteFormulaireRevenuFiscal from '@/components/custom/Compte/CompteFormulaireRevenuFiscal.vue';
   import InputDateDeNaissance from '@/components/dsfr/InputDateDeNaissance.vue';
   import InputText from '@/components/dsfr/InputText.vue';
-  import { validationPrenomOuNom, validationPseudoTaille } from '@/components/validations/validationsChampsFormulaire';
+  import {
+    validationPrenomOuNom,
+    validationPseudo,
+    validationPseudoTaille,
+  } from '@/components/validations/validationsChampsFormulaire';
   import { useAlerte } from '@/composables/useAlerte';
   import { SessionRepositoryStore } from '@/domaines/authentification/adapters/session.repository.store';
   import { ProfileUtilisateurViewModel } from '@/domaines/profileUtilisateur/adapters/profileUtilisateur.presenter.impl';
@@ -163,7 +167,7 @@
   }
 
   function onValidationPseudo(): boolean {
-    if (!validationPrenomOuNom(profileUtlisateurViewModel.value.pseudo)) {
+    if (!validationPseudo(profileUtlisateurViewModel.value.pseudo)) {
       champsPseudoStatus.value = {
         message: 'Le pseudonyme ne peut contenir que des lettres ou des chiffres',
         afficher: true,
