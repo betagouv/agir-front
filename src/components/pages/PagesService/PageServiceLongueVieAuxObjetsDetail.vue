@@ -3,7 +3,7 @@
     <BoutonRetourAutomatique class="fr-my-2w fr-pl-0" />
 
     <div class="fr-p-4w background--white shadow--light fr-mb-3w" v-if="detailServiceViewModel">
-      <h1 class="fr-h2">{{ detailServiceViewModel.titre }}</h1>
+      <h1 class="fr-h2 fr-mb-2w">{{ detailServiceViewModel.titre }}</h1>
 
       <p class="flex align-items--center">
         <span
