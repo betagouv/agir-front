@@ -1,5 +1,8 @@
 import { ResultatWattWatcherPresenter } from '@/domaines/simulationWattWatchers/ports/resultatWattWatcher.presenter';
-import { ResultatWattWatchers } from '@/domaines/simulationWattWatchers/recupererConsommation.usecase';
+import {
+  ResultatWattWatchers,
+  TypeConsommation,
+} from '@/domaines/simulationWattWatchers/recupererConsommation.usecase';
 
 export type ResultatWWViewModel = {
   totalConsommation: number;
@@ -10,7 +13,6 @@ export type ResultatWWViewModel = {
   detailConsommations: {
     color: string;
     emoji: string;
-    id: string;
     label: string;
     value: number;
     pourcentage: string;
@@ -28,13 +30,29 @@ export class ResultatWWPresenterImpl implements ResultatWattWatcherPresenter {
       nombreActions: resultat.nombreActionsAssociees,
 
       detailConsommations: resultat.detailsUsages.map(detail => ({
-        color: detail.couleur,
+        color: `#${detail.couleur}`,
         emoji: detail.emoji,
-        id: detail.type,
-        label: detail.type,
+        label: this.genererLabel(detail.type),
         value: detail.eur,
         pourcentage: `${detail.percent}%`,
       })),
     });
+  }
+
+  genererLabel(type: TypeConsommation): string {
+    const mappingTypeVersLabel: Record<TypeConsommation, string> = {
+      [TypeConsommation.Chauffage]: 'Chauffage',
+      [TypeConsommation.EauChaude]: 'Eau chaude',
+      [TypeConsommation.Cuisson]: 'Cuisson',
+      [TypeConsommation.Electromenager]: 'Électroménager',
+      [TypeConsommation.Multimedia]: 'Multimédia',
+      [TypeConsommation.Climatisation]: 'Climatisation',
+      [TypeConsommation.Eclairage]: 'Éclairage',
+      [TypeConsommation.Mobilite]: 'Mobilité',
+      [TypeConsommation.Piscine]: 'Piscine',
+      [TypeConsommation.Autres]: 'Autres',
+    };
+
+    return mappingTypeVersLabel[type] || 'Autres';
   }
 }
