@@ -2,11 +2,24 @@ import { ResultatWattWatcherPresenter } from '@/domaines/simulationWattWatchers/
 import { WattWatchersRepository } from '@/domaines/simulationWattWatchers/ports/wattWatchers.repository';
 
 export interface DetailUsage {
-  type: string;
+  type: TypeConsommation;
   eur: number;
   percent: number;
   couleur: string;
   emoji: string;
+}
+
+export enum TypeConsommation {
+  Chauffage = 'heating',
+  EauChaude = 'hotWater',
+  Cuisson = 'cooking',
+  Electromenager = 'appliances',
+  Multimedia = 'multimedia',
+  Climatisation = 'airConditioning',
+  Eclairage = 'lighting',
+  Mobilite = 'mobility',
+  Piscine = 'swimmingPool',
+  Autres = 'other',
 }
 
 export interface ResultatWattWatchers {

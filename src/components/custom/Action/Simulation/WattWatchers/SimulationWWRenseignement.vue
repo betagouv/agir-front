@@ -131,7 +131,7 @@
   const coordonnees = ref<Coordonnees>();
   const adresse = ref<AdresseBarreDeRecherche>();
 
-  const nomDeFamille = ref<string>(utilisateur.nom);
+  const nomDeFamille = ref<string>(utilisateur.nom ?? '');
   const acceptationCguWw = ref<boolean>(false);
   const numeroPrmInput = ref<InstanceType<typeof InputText>>();
   const numeroPrmValue = ref<string>('');

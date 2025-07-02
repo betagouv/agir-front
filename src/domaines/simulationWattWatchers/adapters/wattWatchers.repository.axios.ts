@@ -1,11 +1,26 @@
 import { AxiosFactory, intercept401 } from '@/axios.factory';
 import { Adresse } from '@/domaines/logement/recupererAdressePourBarreDeRecherche.usecase';
 import { WattWatchersRepository } from '@/domaines/simulationWattWatchers/ports/wattWatchers.repository';
-import { ResultatWattWatchers } from '@/domaines/simulationWattWatchers/recupererConsommation.usecase';
+import {
+  ResultatWattWatchers,
+  TypeConsommation,
+} from '@/domaines/simulationWattWatchers/recupererConsommation.usecase';
 
 interface RetourInscriptionParPrmApiModel {
   test: string;
 }
+
+type TypeConsommationApiModel =
+  | 'heating'
+  | 'hotWater'
+  | 'cooking'
+  | 'appliances'
+  | 'multimedia'
+  | 'airConditioning'
+  | 'lighting'
+  | 'mobility'
+  | 'swimmingPool'
+  | 'other';
 
 interface WattWatchersApiModel {
   consommation_totale_euros: number;
@@ -14,7 +29,7 @@ interface WattWatchersApiModel {
   nombre_actions_associees: number;
   detail_usages: [
     {
-      type: string;
+      type: TypeConsommationApiModel;
       eur: number;
       percent: number;
       couleur: string;
@@ -60,7 +75,7 @@ export class WattWatchersRepositoryAxios implements WattWatchersRepository {
       economiesRealiseesEnEuros: data.data.economies_realisees_euros,
       nombreActionsAssociees: data.data.nombre_actions_associees,
       detailsUsages: data.data.detail_usages.map(usage => ({
-        type: usage.type,
+        type: usage.type as TypeConsommation,
         eur: usage.eur,
         percent: usage.percent,
         couleur: usage.couleur,
