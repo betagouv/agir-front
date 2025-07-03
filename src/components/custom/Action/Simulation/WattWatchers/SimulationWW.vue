@@ -22,7 +22,7 @@
     :action-id="SimulateursSupportes.WINTER"
     :idEnchainementKycs="idEnchainementKycs"
     :type-action="TypeAction.SIMULATEUR"
-    class="fr-px-2w"
+    class="fr-px-2w fr-mb-2w"
   >
     <template v-slot:fin>
       <SimulationResultatWW />

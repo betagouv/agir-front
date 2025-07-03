@@ -1,15 +1,16 @@
 <template>
   <div class="fr-pt-5w fr-px-5w fr-grid-row">
     <p class="fr-col-6 fr-text--sm">
-      <span class="display-block text--3xl text--bold fr-mb-1w fr-py-3v">{{ economieActuelle }}€</span>
+      <span class="display-block text--3xl text--bold fr-mb-1w fr-py-3v" v-text="economieActuelle.enEuro" />
       économisés
       <span class="display-block text--gris-light">par an</span>
     </p>
 
     <p class="fr-col-6 fr-text--sm">
-      <span class="display-inline-block text--3xl text--bold fr-mb-1w prix-highlight fr-py-3v fr-px-1w"
-        >{{ economiePossible }}€</span
-      >
+      <span
+        class="display-inline-block text--3xl text--bold fr-mb-1w prix-highlight fr-py-3v fr-px-1w"
+        v-text="economiePossible.enEuro"
+      />
       économies possibles
       <span class="display-block text--gris-light">par an</span>
     </p>
@@ -18,8 +19,8 @@
   <div class="fr-pb-2w fr-px-5w">
     <BarreDeProgression
       label=""
-      :value="economieActuelle"
-      :value-max="economiePossible"
+      :value="economieActuelle.valeur"
+      :value-max="economiePossible.valeur"
       couleur="#EAB420"
       couleur-background="#F8EED1"
     />
