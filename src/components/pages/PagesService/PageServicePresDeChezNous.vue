@@ -43,7 +43,7 @@
               onClick: definirAdressePrincipale,
             }"
             :icone-information="false"
-            class="fr-mt-3w"
+            class="fr-mt-3w full-width"
             texte="Voulez-vous utiliser cette adresse comme votre adresse principale à l'avenir&nbsp;?"
           />
         </section>

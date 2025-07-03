@@ -3,11 +3,12 @@ import {
   ResultatWattWatchers,
   TypeConsommation,
 } from '@/domaines/simulationWattWatchers/recupererConsommation.usecase';
+import { MontantAfficheEnFR, MontantAfficheEnFRBuilder } from '@/shell/nombreAfficheEnFRBuilder';
 
 export type ResultatWWViewModel = {
-  totalConsommation: number;
-  economieActuelle: number;
-  economiePotentielle: number;
+  totalConsommation: MontantAfficheEnFR;
+  economieActuelle: { valeur: number; enEuro: MontantAfficheEnFR };
+  economiePotentielle: { valeur: number; enEuro: MontantAfficheEnFR };
   nombreActions: number;
 
   detailConsommations: {
@@ -24,9 +25,15 @@ export class ResultatWWPresenterImpl implements ResultatWattWatcherPresenter {
 
   presenteResultatWattWatcher(resultat: ResultatWattWatchers) {
     this.callback({
-      totalConsommation: resultat.consommationTotaleEnEuros,
-      economieActuelle: resultat.economiesRealiseesEnEuros,
-      economiePotentielle: resultat.economiesPossiblesEnEuros,
+      totalConsommation: MontantAfficheEnFRBuilder.build(resultat.consommationTotaleEnEuros),
+      economieActuelle: {
+        valeur: resultat.economiesRealiseesEnEuros,
+        enEuro: MontantAfficheEnFRBuilder.build(resultat.economiesRealiseesEnEuros),
+      },
+      economiePotentielle: {
+        valeur: resultat.economiesPossiblesEnEuros,
+        enEuro: MontantAfficheEnFRBuilder.build(resultat.economiesPossiblesEnEuros),
+      },
       nombreActions: resultat.nombreActionsAssociees,
 
       detailConsommations: resultat.detailsUsages.map(detail => ({
