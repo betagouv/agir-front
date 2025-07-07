@@ -11,6 +11,7 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
     // GIVEN
     const actions: Action[] = [
       {
+        emoji: '🍽',
         code: 'code-action-test',
         titre: 'Tester une nouvelle **recette végétarienne**',
         sousTitre:
@@ -22,6 +23,7 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
       },
       {
         code: 'code-action-test2',
+        emoji: '🍽',
         titre: 'Tester une nouvelle **recette végétarienne** 2',
         sousTitre:
           'Faites des économies et le plein de vitamines ! Cette semaine, on cuisine une recette saine et délicieuse !',
@@ -40,6 +42,7 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
         type: TypeAction.BILAN,
         dejaVue: true,
       },
+      //   TODO: mettre différent type d'actions
     ];
 
     const catalogue: CatalogueActions = {
@@ -68,7 +71,8 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
       expect(viewModel).toStrictEqual<ActionViewModel[]>([
         {
           code: 'code-action-test',
-          titre: 'Tester une nouvelle <span class="text--bold">recette végétarienne</span>',
+          titre:
+            '<span aria-hidden="true">🍽</span> Tester une nouvelle <span class="text--bold">recette végétarienne</span>',
           nombreDePersonnes: undefined,
           dejaVue: false,
           aidesDisponibles: undefined,
@@ -83,7 +87,8 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
         },
         {
           code: 'code-action-test2',
-          titre: 'Tester une nouvelle <span class="text--bold">recette végétarienne</span> 2',
+          titre:
+            '<span aria-hidden="true">🍽</span> Tester une nouvelle <span class="text--bold">recette végétarienne</span> 2',
           nombreDePersonnes: '<span class="text--bold">4</span> actions réalisées',
           aidesDisponibles: '<span class="text--bold">5</span> aides disponibles',
           dejaVue: true,

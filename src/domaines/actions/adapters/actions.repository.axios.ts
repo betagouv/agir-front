@@ -16,6 +16,7 @@ import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 interface ActionDetailApiModel {
   code: string;
   titre: string;
+  emoji: string;
   sous_titre: string;
   points: number;
   consigne: string;
@@ -85,6 +86,7 @@ interface CatalogueActionsApiModel {
 interface ActionApiModel {
   code: string;
   titre: string;
+  emoji: string;
   sous_titre: string;
   nom_commune: string;
   nombre_actions_faites: number;
@@ -242,6 +244,7 @@ export class ActionsRepositoryAxios implements ActionsRepository {
     return {
       code: actionDetailApiModel.code,
       titre: actionDetailApiModel.titre,
+      emoji: actionDetailApiModel.emoji,
       sousTitre: actionDetailApiModel.sous_titre,
       type: actionDetailApiModel.type as TypeAction,
       commune: actionDetailApiModel.nom_commune,
@@ -298,6 +301,7 @@ export class ActionsRepositoryAxios implements ActionsRepository {
     return {
       code: action.code,
       titre: action.titre,
+      emoji: action.emoji,
       sousTitre: action.sous_titre,
       nombreDePersonnes: action.nombre_actions_faites,
       nombreAidesDisponibles: action.nombre_aides_disponibles,

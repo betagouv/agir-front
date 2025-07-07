@@ -119,8 +119,10 @@ class ActionViewModelBuilder {
       marked.parse(action.corps.introduction ?? ''),
       marked.parseInline(action.labelCompteur ?? ''),
     ]);
+    const emoji = action.emoji ? `${cacherEmojisAuxLecteursDecrans(action.emoji)} ` : '';
+
     return {
-      titre,
+      titre: `${emoji}${titre}`,
       sousTitre,
       introduction: cacherEmojisAuxLecteursDecrans(introduction),
       titrePropre: nettoyerEtGarderContenuTextuel(action.titre),
