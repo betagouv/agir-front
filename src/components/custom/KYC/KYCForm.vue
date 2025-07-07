@@ -67,6 +67,7 @@
   import { QuestionRepositoryAxios } from '@/domaines/kyc/adapters/question.repository.axios';
   import { EnvoyerReponseUsecase } from '@/domaines/kyc/envoyerReponse.usecase';
   import { EnvoyerReponsesMultiplesUsecase } from '@/domaines/kyc/envoyerReponsesMultiples.usecase';
+  import { PasserUneKYCUsecase } from '@/domaines/kyc/passerUneKYC.usecase';
   import { ToDoListEventBusImpl } from '@/domaines/toDoList/toDoListEventBusImpl';
   import { utilisateurStore } from '@/store/utilisateur';
 
@@ -127,6 +128,9 @@
   };
 
   const passerLaQuestion = () => {
-    emit('update:passer-la-question');
+    const passerLaQuestion = new PasserUneKYCUsecase(new QuestionRepositoryAxios());
+    passerLaQuestion
+      .execute(utilisateurStore().utilisateur.id, props.questionViewModel.id)
+      .then(() => emit('update:passer-la-question'));
   };
 </script>

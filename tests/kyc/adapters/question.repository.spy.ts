@@ -89,4 +89,8 @@ export class SpyQuestionRepository implements QuestionRepository {
   recupererPremiereQuestion(_utilisateurId: string, _enchainementId: string): Promise<QuestionMetaData> {
     throw new Error('Method not implemented.');
   }
+
+  passerLaQuestion(utilisateurId: string, questionId: string): Promise<void> {
+    return Promise.resolve(undefined);
+  }
 }

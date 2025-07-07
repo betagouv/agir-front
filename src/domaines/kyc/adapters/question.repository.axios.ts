@@ -156,6 +156,11 @@ export class QuestionRepositoryAxios implements QuestionRepository {
     };
   }
 
+  @intercept40X()
+  async passerLaQuestion(utilisateurId: string, questionId: string): Promise<void> {
+    await AxiosFactory.getAxios().post(`/utilisateurs/${utilisateurId}/questionsKYC_v2/${questionId}/skip`);
+  }
+
   private mapQuestionApiModelToQuestion(question: QuestionApiModel): Question {
     return {
       id: question.code,
