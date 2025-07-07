@@ -1,4 +1,4 @@
-import { AxiosFactory, intercept401 } from '@/axios.factory';
+import { AxiosFactory, intercept40X } from '@/axios.factory';
 import { Adresse } from '@/domaines/logement/recupererAdressePourBarreDeRecherche.usecase';
 import { WattWatchersRepository } from '@/domaines/simulationWattWatchers/ports/wattWatchers.repository';
 import {
@@ -39,7 +39,7 @@ interface WattWatchersApiModel {
 }
 
 export class WattWatchersRepositoryAxios implements WattWatchersRepository {
-  @intercept401()
+  @intercept40X()
   async inscriptionParPrm(utilisateurId: string, prm: string, nom: string): Promise<void> {
     const axios = AxiosFactory.getAxios();
 
@@ -49,7 +49,7 @@ export class WattWatchersRepositoryAxios implements WattWatchersRepository {
     });
   }
 
-  @intercept401()
+  @intercept40X()
   async inscriptionParAdresse(utilisateurId: string, nom: string, adresse: Adresse): Promise<void> {
     const axios = AxiosFactory.getAxios();
     await axios.post(
@@ -64,7 +64,7 @@ export class WattWatchersRepositoryAxios implements WattWatchersRepository {
     );
   }
 
-  @intercept401()
+  @intercept40X()
   async recupererConsommation(utilisateurId: string): Promise<ResultatWattWatchers> {
     const axios = AxiosFactory.getAxios();
     const data = await axios.get<WattWatchersApiModel>(`/utilisateurs/${utilisateurId}/winter/consommation`);

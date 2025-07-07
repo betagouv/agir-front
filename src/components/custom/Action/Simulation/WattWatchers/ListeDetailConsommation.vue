@@ -7,10 +7,8 @@
       :style="getDiscStyle(categorie.color)"
     >
       <div class="flex flex-space-between full-width align-items--baseline">
-        <span class="fr-text--sm fr-mb-0">
-          {{ categorie.label }}
-        </span>
-        <span class="text--bold">{{ categorie.pourcentage }}</span>
+        <span class="fr-text--sm fr-mb-0" v-text="categorie.label" />
+        <span class="text--bold" v-text="categorie.pourcentage" />
       </div>
     </li>
   </ul>

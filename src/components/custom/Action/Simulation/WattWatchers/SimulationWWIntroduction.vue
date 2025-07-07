@@ -12,7 +12,7 @@
       </div>
 
       <div class="fr-col-12 fr-col-md-5 flex flex-center flex-column">
-        <img src="/wattwatchers-preview.png" alt="" class="preview" />
+        <img src="/wattwatchers-preview.webp" alt="" class="preview" />
       </div>
     </div>
   </section>

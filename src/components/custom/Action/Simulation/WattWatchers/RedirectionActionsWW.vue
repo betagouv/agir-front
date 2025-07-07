@@ -4,7 +4,8 @@
     <p class="fr-mb-2w">
       Découvrez des actions personnalisées pour réduire votre facture d’électricité sans sacrifier votre confort.
     </p>
-    <a href="" class="fr-btn fr-btn--lg fr-mb-1w">Découvrir {{ nombreActions }} actions</a>
+    <!--    todo-->
+    <a href="#" class="fr-btn fr-btn--lg fr-mb-1w">Découvrir {{ nombreActions }} actions</a>
   </section>
 </template>
 
