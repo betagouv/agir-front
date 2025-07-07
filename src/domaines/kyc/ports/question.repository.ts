@@ -26,4 +26,6 @@ export interface QuestionRepository {
     questionId: string,
     reponses: { code: string; boolean_value: boolean }[],
   ): Promise<void>;
+
+  passerLaQuestion(utilisateurId: string, questionId: string): Promise<void>;
 }

@@ -62,4 +62,8 @@ export class MockQuestionRepository implements QuestionRepository {
       etapeCourante: 1,
     });
   }
+
+  passerLaQuestion(utilisateurId: string, questionId: string): Promise<void> {
+    return Promise.resolve(undefined);
+  }
 }

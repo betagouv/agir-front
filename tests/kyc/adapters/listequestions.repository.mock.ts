@@ -46,4 +46,8 @@ export class MockListeQuestionsRepository implements QuestionRepository {
   ): Promise<QuestionMetaData> {
     throw new Error('Method not implemented.');
   }
+
+  passerLaQuestion(utilisateurId: string, questionId: string): Promise<void> {
+    return Promise.resolve(undefined);
+  }
 }
