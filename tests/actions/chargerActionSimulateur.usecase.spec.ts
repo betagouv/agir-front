@@ -111,7 +111,7 @@ describe("Fichier de tests concernant la récupération d'une action de type sim
         nombreDeRealisations: 40,
         titre: '<span aria-hidden="true">🚗</span> <span class="text--bold">Simulateur voiture</span>',
         titreAffiche:
-          '<span aria-hidden="true">🚗</span> Simulateur - <span class="text--bold">Simulateur voiture</span>',
+          'Simulateur - <span aria-hidden="true">🚗</span> <span class="text--bold">Simulateur voiture</span>',
         titrePropre: 'Simulateur voiture',
         sousTitre:
           'Quelle voiture allez-vous adopter ? Faites le test pour découvrir la voiture qui vous correspond le mieux !',

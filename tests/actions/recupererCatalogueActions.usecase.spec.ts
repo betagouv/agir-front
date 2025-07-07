@@ -11,7 +11,6 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
     // GIVEN
     const actions: Action[] = [
       {
-        emoji: '🍽',
         code: 'code-action-test',
         titre: 'Tester une nouvelle **recette végétarienne**',
         sousTitre:
@@ -29,11 +28,12 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
           'Faites des économies et le plein de vitamines ! Cette semaine, on cuisine une recette saine et délicieuse !',
         nombreDePersonnes: 4,
         nombreAidesDisponibles: 5,
-        type: TypeAction.BILAN,
+        type: TypeAction.SIMULATEUR,
         dejaVue: true,
       },
       {
         code: 'code-action-test3',
+        emoji: '🍽',
         titre: 'Tester une nouvelle **recette végétarienne** 3',
         sousTitre:
           'Faites des économies et le plein de vitamines ! Cette semaine, on cuisine une recette saine et délicieuse !',
@@ -42,7 +42,17 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
         type: TypeAction.BILAN,
         dejaVue: true,
       },
-      //   TODO: mettre différent type d'actions
+      {
+        code: 'code-action-test4',
+        emoji: '🍽',
+        titre: 'Tester une nouvelle **recette végétarienne** 4',
+        sousTitre:
+          'Faites des économies et le plein de vitamines ! Cette semaine, on cuisine une recette saine et délicieuse !',
+        nombreDePersonnes: 1,
+        nombreAidesDisponibles: 1,
+        type: TypeAction.QUIZZ,
+        dejaVue: true,
+      },
     ];
 
     const catalogue: CatalogueActions = {
@@ -71,8 +81,7 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
       expect(viewModel).toStrictEqual<ActionViewModel[]>([
         {
           code: 'code-action-test',
-          titre:
-            '<span aria-hidden="true">🍽</span> Tester une nouvelle <span class="text--bold">recette végétarienne</span>',
+          titre: 'Tester une nouvelle <span class="text--bold">recette végétarienne</span>',
           nombreDePersonnes: undefined,
           dejaVue: false,
           aidesDisponibles: undefined,
@@ -97,13 +106,14 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
             params: {
               id: 'code-action-test2',
               titre: 'tester-une-nouvelle-recette-vegetarienne-2',
-              type: 'bilan',
+              type: 'simulateur',
             },
           },
         },
         {
           code: 'code-action-test3',
-          titre: 'Tester une nouvelle <span class="text--bold">recette végétarienne</span> 3',
+          titre:
+            '<span aria-hidden="true">🍽</span> Tester une nouvelle <span class="text--bold">recette végétarienne</span> 3',
           nombreDePersonnes: '<span class="text--bold">1</span> action réalisée',
           aidesDisponibles: '<span class="text--bold">1</span> aide disponible',
           dejaVue: true,
@@ -113,6 +123,22 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
               id: 'code-action-test3',
               titre: 'tester-une-nouvelle-recette-vegetarienne-3',
               type: 'bilan',
+            },
+          },
+        },
+        {
+          code: 'code-action-test4',
+          titre:
+            '<span aria-hidden="true">🍽</span> Tester une nouvelle <span class="text--bold">recette végétarienne</span> 4',
+          nombreDePersonnes: '<span class="text--bold">1</span> action réalisée',
+          aidesDisponibles: '<span class="text--bold">1</span> aide disponible',
+          dejaVue: true,
+          url: {
+            name: 'action-individuelle',
+            params: {
+              id: 'code-action-test4',
+              titre: 'tester-une-nouvelle-recette-vegetarienne-4',
+              type: 'quizz',
             },
           },
         },
@@ -133,7 +159,7 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
             checked: false,
           },
         ],
-        phraseNombreActions: '3 actions',
+        phraseNombreActions: '4 actions',
       });
     }
   });
