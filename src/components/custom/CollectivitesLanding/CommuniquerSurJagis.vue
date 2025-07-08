@@ -15,7 +15,7 @@
             >
           </div>
           <div class="fr-col-12 fr-col-sm-6">
-            <img src="/collectivite-communiquer-jagis.png" alt="" class="full-width" />
+            <img src="/collectivite-communiquer-jagis.webp" alt="" class="full-width" />
           </div>
         </div>
       </div>

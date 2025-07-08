@@ -1,5 +1,5 @@
 <template>
-  <dialog :aria-labelledby="labelId" :id="id" class="fr-modal">
+  <dialog :aria-labelledby="labelId" :id="id" class="fr-modal" role="dialog">
     <div class="fr-container fr-container--fluid fr-container-md">
       <div class="fr-grid-row fr-grid-row--center">
         <div :class="`fr-col-12 ${modaleSize(size)}`">
@@ -7,10 +7,11 @@
             <div class="fr-modal__header">
               <button class="fr-btn--close fr-btn" :aria-controls="id">Fermer</button>
             </div>
-            <div class="fr-modal__content fr-mb-0">
+            <slot name="contenuEtFooter" />
+            <div class="fr-modal__content fr-mb-0" v-if="!slots.contenuEtFooter">
               <slot name="contenu" />
             </div>
-            <div class="fr-modal__footer fr-mt-0" v-if="isFooterActions">
+            <div class="fr-modal__footer fr-mt-0" v-if="!slots.contenuEtFooter && isFooterActions">
               <slot name="footer" />
             </div>
           </div>
@@ -21,6 +22,10 @@
 </template>
 
 <script setup lang="ts">
+  import { useSlots } from 'vue';
+
+  const slots = useSlots();
+
   withDefaults(
     defineProps<{
       id: string;

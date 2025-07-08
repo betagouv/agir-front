@@ -39,7 +39,7 @@
               onClick: definirAdressePrincipale,
             }"
             :icone-information="false"
-            class="fr-mt-3w"
+            class="fr-mt-3w full-width"
             texte="Voulez-vous utiliser cette adresse comme votre adresse principale à l’avenir&nbsp;?"
           />
         </section>
@@ -81,6 +81,7 @@
 
 <script lang="ts" setup>
   import { nextTick, onMounted, ref } from 'vue';
+  import { useRoute } from 'vue-router';
   import BarreDeRechercheAdresse from '@/components/custom/Form/BarreDeRechercheAdresse.vue';
   import PageServiceTemplate from '@/components/custom/Service/PageServiceTemplate.vue';
   import ServiceFavoris from '@/components/custom/Service/ServiceFavoris.vue';
@@ -113,6 +114,7 @@
     definirAdressePrincipale: definirAdressePrincipaleComposable,
     recupererAdressePourBarreDeRecherche,
   } = useAdressePrincipale();
+  const route = useRoute();
 
   const {
     recherche,
@@ -162,6 +164,7 @@
   }
 
   onMounted(async () => {
+    if (route.query.adresse) return;
     await recupererAdressePourBarreDeRecherche(
       utilisateurStore().utilisateur.id,
       async (barreDeRechercheViewModel: BarreDeRechercheViewModel) => {

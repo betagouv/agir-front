@@ -19,9 +19,10 @@
       value: number;
       valueMax: number;
       couleur: string;
+      couleurBackground?: string;
       minWidth?: string;
     }>(),
-    { minWidth: '8%' },
+    { minWidth: '8%', couleurBackground: '#dddddd' },
   );
 
   const valeurToWidth = () => {
@@ -33,7 +34,7 @@
   .jauge-background {
     --jauge-color: v-bind(props.couleur);
 
-    background-color: #dddddd;
+    background-color: v-bind(props.couleurBackground);
     height: 0.75rem;
     border-radius: 10px;
   }
