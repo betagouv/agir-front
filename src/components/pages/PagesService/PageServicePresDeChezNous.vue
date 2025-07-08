@@ -96,6 +96,7 @@
 
 <script lang="ts" setup>
   import { nextTick, onMounted, ref } from 'vue';
+  import { useRouter } from 'vue-router';
   import BarreDeRechercheAdresse from '@/components/custom/Form/BarreDeRechercheAdresse.vue';
   import PageServiceTemplate from '@/components/custom/Service/PageServiceTemplate.vue';
   import ServiceFavoris from '@/components/custom/Service/ServiceFavoris.vue';
@@ -174,12 +175,20 @@
   }
 
   onMounted(async () => {
-    await recupererAdressePourBarreDeRecherche(
-      utilisateurId,
-      async (barreDeRechercheViewModel: BarreDeRechercheViewModel) => {
-        coordonnees.value = barreDeRechercheViewModel.coordonnees;
-        recherche.value = barreDeRechercheViewModel.recherche;
-      },
-    );
+    const query = useRouter().currentRoute.value.query;
+    const latitude = query.latitude as string;
+    const longitude = query.longitude as string;
+
+    if (latitude && longitude) {
+      coordonnees.value = { latitude: parseFloat(latitude), longitude: parseFloat(longitude) };
+    } else {
+      await recupererAdressePourBarreDeRecherche(
+        utilisateurId,
+        async (barreDeRechercheViewModel: BarreDeRechercheViewModel) => {
+          coordonnees.value = barreDeRechercheViewModel.coordonnees;
+          recherche.value = barreDeRechercheViewModel.recherche;
+        },
+      );
+    }
   });
 </script>
