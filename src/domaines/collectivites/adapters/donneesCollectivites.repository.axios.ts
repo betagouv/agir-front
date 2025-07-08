@@ -27,9 +27,15 @@ interface DonneesCollectivitesINSEEModelAPI {
 
   nombre_inscrits_total: number;
   nombre_inscrits_local: number;
+  nombre_inscrits_local_dernier_mois: number;
   nombre_points_moyen: number;
   nombre_defis_encours: number;
   nombre_defis_realises: number;
+
+  pourcent_actions_logement: number;
+  pourcent_actions_transport: number;
+  pourcent_actions_consommation: number;
+  pourcent_actions_alimentation: number;
 }
 
 export class DonneesCollectivitesRepositoryAxios implements DonneesCollectivitesRepository {
@@ -53,9 +59,16 @@ export class DonneesCollectivitesRepositoryAxios implements DonneesCollectivites
         departementales: response.data.liste_articles_departement,
         locales: response.data.liste_articles_locales,
       },
+      actionsRepartitionParThematiques: {
+        logement: response.data.pourcent_actions_logement,
+        transport: response.data.pourcent_actions_transport,
+        consommation: response.data.pourcent_actions_consommation,
+        alimentation: response.data.pourcent_actions_alimentation,
+      },
 
       nombreInscrits: response.data.nombre_inscrits_total,
       nombreInscritsLocaux: response.data.nombre_inscrits_local,
+      nombreInscritsLocauxDernierMois: response.data.nombre_inscrits_local_dernier_mois,
       nombrePointsMoyen: response.data.nombre_points_moyen,
       nombreDefisEnCours: response.data.nombre_defis_encours,
       nombreDefisRealises: response.data.nombre_defis_realises,
