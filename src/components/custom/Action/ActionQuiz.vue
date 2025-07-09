@@ -2,6 +2,7 @@
   <section class="fr-mb-4w fr-p-2w background--white shadow">
     <template v-if="indexQuestionActuelle < actionQuizViewModel.quizzes.length">
       <Navigation
+        ref="navigationRef"
         :etape-actuelle="indexQuestionActuelle + 1"
         :etape-totale="actionQuizViewModel.quizzes.length"
         :on-click-revenir-etape-precedente="retournerQuestionPrecedente"
@@ -31,6 +32,7 @@
   import Navigation from '@/components/custom/Navigation.vue';
   import { ActionQuizViewModel, ActionQuizzesViewModel } from '@/domaines/actions/ports/action.presenter';
 
+  const navigationRef = ref<InstanceType<typeof Navigation>>();
   const props = defineProps<{ actionQuizViewModel: ActionQuizzesViewModel }>();
 
   const indexQuestionActuelle = ref<number>(0);
@@ -39,10 +41,16 @@
   );
 
   const retournerQuestionPrecedente = () => {
-    if (indexQuestionActuelle.value > 0) indexQuestionActuelle.value--;
+    if (indexQuestionActuelle.value > 0) {
+      indexQuestionActuelle.value--;
+      navigationRef.value?.focus();
+    }
   };
 
   const passerQuestionSuivante = () => {
-    if (indexQuestionActuelle.value < props.actionQuizViewModel.quizzes.length) indexQuestionActuelle.value++;
+    if (indexQuestionActuelle.value < props.actionQuizViewModel.quizzes.length) {
+      indexQuestionActuelle.value++;
+      navigationRef.value?.focus();
+    }
   };
 </script>

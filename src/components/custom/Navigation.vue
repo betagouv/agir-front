@@ -7,16 +7,24 @@
     >
       Retour
     </button>
-    <span class="fr-py-1w fr-pl-1v">
+    <span class="fr-py-1w fr-pl-1v" ref="indicateurNavigationRef" tabindex="-1">
       Question <span class="fr-text--bold">{{ etapeActuelle }} sur {{ etapeTotale }}</span>
     </span>
   </div>
 </template>
 
 <script lang="ts" setup>
+  import { ref } from 'vue';
+
   defineProps<{
     etapeTotale: number;
     etapeActuelle: number;
     onClickRevenirEtapePrecedente: () => void;
   }>();
+
+  const indicateurNavigationRef = ref<HTMLSpanElement>();
+
+  defineExpose({
+    focus: () => indicateurNavigationRef.value?.focus(),
+  });
 </script>

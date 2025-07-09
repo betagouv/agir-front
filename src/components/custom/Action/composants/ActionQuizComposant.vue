@@ -9,7 +9,12 @@
   <div v-if="reponseDonneeLabel">
     <h2 class="fr-h4">{{ question.intitule }}</h2>
 
-    <p class="text--black" :class="estBienRepondu ? 'action__quiz-reponseBonne' : 'action__quiz-reponseFausse'">
+    <p
+      class="text--black"
+      ref="reponsePElement"
+      tabindex="-1"
+      :class="estBienRepondu ? 'action__quiz-reponseBonne' : 'action__quiz-reponseFausse'"
+    >
       <span aria-hidden="true" class="fr-pr-1w">{{ estBienRepondu ? '✅' : '❌' }}</span>
       {{ estBienRepondu ? 'Bien joué ! La réponse était' : 'Pas tout à fait... Vous avez répondu' }}&nbsp;:
       <span class="text--bold">{{ reponseDonneeLabel }}</span>
@@ -27,7 +32,7 @@
 </template>
 
 <script setup lang="ts">
-  import { ref } from 'vue';
+  import { nextTick, ref } from 'vue';
   import ActionQuizExplication from '@/components/custom/Action/composants/ActionQuizExplication.vue';
   import QuizQuestion from '@/components/custom/Quiz/QuizQuestion.vue';
   import { ActionQuizQuestionViewModel } from '@/domaines/actions/ports/action.presenter';
@@ -48,6 +53,7 @@
   const idUtilisateur = utilisateurStore().utilisateur.id;
   const reponseDonneeLabel = ref<string>('');
   const estBienRepondu = ref<boolean>(false);
+  const reponsePElement = ref<HTMLParagraphElement>();
 
   const passerQuestionSuivante = () => {
     props.onClickContinuer();
@@ -64,6 +70,9 @@
       new QuizRepositoryAxios(),
       ToDoListEventBusImpl.getInstance(),
     ).execute(idUtilisateur, props.quizId, estBienRepondu.value ? 100 : 0);
+
+    await nextTick();
+    reponsePElement.value?.focus();
   };
 </script>
 
