@@ -39,6 +39,7 @@
 
       <template v-else-if="actionsViewModel">
         <CatalogueActionsRecommandees
+          ref="catalogueActionsRecoRef"
           :actions="actionsViewModel"
           :rafraichir-actions="chargerActionsRecommandees"
           :reset-parcours="resetParcours"
@@ -86,7 +87,7 @@
 
 <script lang="ts" setup>
   import { useHead } from '@unhead/vue';
-  import { computed, onMounted, ref, watch } from 'vue';
+  import { computed, nextTick, onMounted, ref, watch } from 'vue';
   import { onBeforeRouteUpdate, useRoute } from 'vue-router';
   import ArticlesRecommandees from '@/components/custom/AccueilConnectee/ArticlesRecommandees.vue';
   import CatalogueActionsRecommandees from '@/components/custom/Action/Catalogue/CatalogueActionsRecommandees.vue';
@@ -117,6 +118,7 @@
   const thematiqueId = ref<ClefThematiqueAPI>(thematique.value.clefTechniqueAPI as ClefThematiqueAPI);
   const idUtilisateur = utilisateurStore().utilisateur.id;
   const messageNgc = ref<string>('');
+  const catalogueActionsRecoRef = ref<InstanceType<typeof CatalogueActionsRecommandees>>();
 
   useHead({
     ...useHeadProperties,
@@ -187,6 +189,8 @@
       .then(() => {
         setTimeout(async () => {
           await chargerActionsRecommandees();
+          await nextTick();
+          catalogueActionsRecoRef.value?.focus();
         }, 2000);
       });
   }
