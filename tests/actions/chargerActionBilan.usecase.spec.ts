@@ -188,6 +188,7 @@ describe("Fichier de tests concernant la récupération d'une action de type bil
       thematique: ClefThematiqueAPI.alimentation,
       realisee: false,
       points: 30,
+      emoji: '',
       code: 'id-action-bilan-test',
       type: TypeAction.BILAN,
       titre: 'Titre bilan',
