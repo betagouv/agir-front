@@ -1,5 +1,5 @@
 <template>
-  <div class="fr-grid-row full-width flex-end position--sticky bouton-enregistrer">
+  <div class="fr-grid-row full-width flex-end position--sticky bouton-enregistrer z-index-2">
     <button class="fr-btn fr-btn--icon-left fr-icon-save-3-fill" type="submit">Mettre à jour mes informations</button>
   </div>
 </template>
