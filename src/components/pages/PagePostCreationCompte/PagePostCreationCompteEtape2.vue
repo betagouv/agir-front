@@ -1,18 +1,20 @@
 <template>
   <div class="fr-container fr-py-6w">
     <div class="fr-col-12 fr-col-md-6 fr-mx-auto fr-mb-0 background--white fr-p-4w border">
+      <img alt="" src="/bg_creation_compte_etape_2.svg" />
+      <span class="text--normal text--bleu fr-mb-1w fr-mt-1w display-block">
+        <span class="fr-text--bold">Étape 2</span> sur 3
+      </span>
+      <h1 class="fr-h4 fr-mb-1w">Enchanté, {{ onboardingPostCreationCompte().pseudo }}</h1>
+
       <form aria-labelledby="identity-fieldset-legend" class="fr-mb-4w" @submit.prevent="validerLaReponse()">
         <fieldset class="fr-fieldset fr-mb-0">
-          <legend id="identity-fieldset-legend" class="fr-fieldset__legend">
-            <img alt="" src="/bg_creation_compte_etape_2.svg" />
-            <span class="text--normal text--bleu fr-mb-1w fr-mt-1w display-block">
-              <span class="fr-text--bold">Étape 2</span> sur 3
-            </span>
-            <h1 class="fr-h4 fr-mb-1w">Enchanté, {{ onboardingPostCreationCompte().pseudo }}</h1>
-            <span class="fr-text--regular fr-text--lg display-block">
+          <legend id="identity-fieldset-legend" class="fr-fieldset__legend fr-text--regular fr-text--lg">
+            <span class="fr-text--regular fr-text--lg display-block fr-mb-1w">
               Pour découvrir des aides, services et contenus disponibles proches de chez vous, indiquez-nous votre lieu
               de résidence.
             </span>
+            <span class="fr-hint-text fr-text--sm fr-mt-1w fr-mb-0">Tous les champs sont obligatoires.</span>
           </legend>
           <Alert
             v-if="alerte.isActive"

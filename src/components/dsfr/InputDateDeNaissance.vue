@@ -1,7 +1,13 @@
 <template>
   <fieldset
     :id="`date-naissance-${keyName}-fieldset`"
-    :aria-labelledby="`date-naissance-${keyName}-fieldset-legend ${statusErreurs.erreurFieldset ? `date-naissance-${keyName}-${cleDateDeNaissance.DATE_NEXISTE_PAS}-error` : ''}`"
+    v-bind="
+      statusErreurs.erreurFieldset
+        ? {
+            'aria-labelledby': `date-naissance-${keyName}-fieldset-legend date-naissance-${keyName}-${cleDateDeNaissance.DATE_NEXISTE_PAS}-error`,
+          }
+        : { 'aria-labelledby': `date-naissance-${keyName}-fieldset-legend` }
+    "
     class="fr-fieldset"
     :class="statusErreurs?.afficher ? 'fr-fieldset--error' : ''"
     role="group"
@@ -25,8 +31,10 @@
           autocomplete="bday-day"
           ref="jourInputRef"
           :id="`date-naissance-${keyName}-${cleDateDeNaissance.JOUR}`"
-          :aria-describedby="
-            statusErreurs.erreurJour ? `date-naissance-${keyName}-${cleDateDeNaissance.JOUR}-error` : ''
+          v-bind="
+            statusErreurs.erreurJour
+              ? { 'aria-describedby': `date-naissance-${keyName}-${cleDateDeNaissance.JOUR}-error` }
+              : {}
           "
           v-model="dateDeNaissance.jour"
           :disabled="disabled"
@@ -35,6 +43,7 @@
           type="text"
           :maxlength="2"
           :required="required"
+          pattern="[0-9]*"
         />
       </div>
     </div>
@@ -48,8 +57,10 @@
           autocomplete="bday-month"
           ref="moisInputRef"
           :id="`date-naissance-${keyName}-${cleDateDeNaissance.MOIS}`"
-          :aria-describedby="
-            statusErreurs.erreurMois ? `date-naissance-${keyName}-${cleDateDeNaissance.MOIS}-error` : ''
+          v-bind="
+            statusErreurs.erreurMois
+              ? { 'aria-describedby': `date-naissance-${keyName}-${cleDateDeNaissance.MOIS}-error` }
+              : {}
           "
           v-model="dateDeNaissance.mois"
           :disabled="disabled"
@@ -58,6 +69,7 @@
           type="text"
           :maxlength="2"
           :required="required"
+          pattern="[0-9]*"
         />
       </div>
     </div>
@@ -73,8 +85,10 @@
           autocomplete="bday-year"
           ref="anneeInputRef"
           :id="`date-naissance-${keyName}-${cleDateDeNaissance.ANNEE}`"
-          :aria-describedby="
-            statusErreurs.erreurJour ? `date-naissance-${keyName}-${cleDateDeNaissance.ANNEE}-error` : ''
+          v-bind="
+            statusErreurs.erreurAnnee
+              ? { 'aria-describedby': `date-naissance-${keyName}-${cleDateDeNaissance.ANNEE}-error` }
+              : {}
           "
           v-model="dateDeNaissance.annee"
           :disabled="disabled"
@@ -83,6 +97,7 @@
           type="text"
           :maxlength="4"
           :required="required"
+          pattern="[0-9]*"
         />
       </div>
     </div>
@@ -150,6 +165,13 @@
     };
   }
 
+  function resetValiditeComposant() {
+    jourInputRef.value?.setAttribute('aria-invalid', 'false');
+    moisInputRef.value?.setAttribute('aria-invalid', 'false');
+    anneeInputRef.value?.setAttribute('aria-invalid', 'false');
+    fieldsetRef.value?.setAttribute('aria-invalid', 'false');
+  }
+
   const erreursFiltrees = computed(() => {
     if (!statusErreurs) return {};
 
@@ -169,6 +191,7 @@
     type Validation = {
       estEnErreur: boolean;
       focusComposantEnErreur: () => void;
+      invaliderComposantEnErreur?: () => void;
       champsStatusErreurs: 'erreurJour' | 'erreurMois' | 'erreurAnnee' | 'erreurFieldset';
       message: string;
     };
@@ -176,18 +199,21 @@
       {
         estEnErreur: !validationJour(dateDeNaissance.value.jour),
         focusComposantEnErreur: () => jourInputRef.value?.focus(),
+        invaliderComposantEnErreur: () => jourInputRef.value?.setAttribute('aria-invalid', 'true'),
         champsStatusErreurs: 'erreurJour',
         message: 'Le jour doit être compris entre 1 et 31',
       },
       {
         estEnErreur: !validationMois(dateDeNaissance.value.mois),
         focusComposantEnErreur: () => moisInputRef.value?.focus(),
+        invaliderComposantEnErreur: () => moisInputRef.value?.setAttribute('aria-invalid', 'true'),
         champsStatusErreurs: 'erreurMois',
         message: 'Le mois doit être compris entre 1 et 12',
       },
       {
         estEnErreur: !validationAnnee(dateDeNaissance.value.annee),
         focusComposantEnErreur: () => anneeInputRef.value?.focus(),
+        invaliderComposantEnErreur: () => anneeInputRef.value?.setAttribute('aria-invalid', 'true'),
         champsStatusErreurs: 'erreurAnnee',
         message: `L'année doit être comprise entre 1900 et ${new Date().getFullYear()}`,
       },
@@ -206,9 +232,14 @@
     ];
 
     let formulaireEnErreur = false;
+    resetValiditeComposant();
+
     for (const validation of validations) {
       if (validation.estEnErreur) {
-        if (!formulaireEnErreur) validation.focusComposantEnErreur();
+        if (!formulaireEnErreur) {
+          validation.focusComposantEnErreur();
+          if (validation.invaliderComposantEnErreur) validation.invaliderComposantEnErreur();
+        }
         formulaireEnErreur = true;
         statusErreurs.value.afficher = true;
         statusErreurs.value[validation.champsStatusErreurs] = validation.message;

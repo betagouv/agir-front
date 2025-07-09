@@ -6,16 +6,18 @@
     </label>
     <input
       ref="inputRef"
-      :aria-describedby="erreur && erreur.afficher ? errorId : ''"
+      v-bind="erreur && erreur.afficher ? { 'aria-describedby': errorId } : {}"
       :autocomplete="autocomplete"
       :id="name"
       :autofocus="autofocus"
       :class="erreur && erreur.afficher ? 'fr-input--error' : ''"
       :disabled="disabled"
+      :minlength="minlength"
       :maxlength="maxlength"
       :name="name"
       :required="required"
       :value="modelValue"
+      :pattern="pattern"
       class="fr-input"
       type="text"
       @blur="handleBlur"
@@ -48,9 +50,11 @@
     required?: boolean;
     erreur?: InputErreur;
     maxlength?: number;
+    minlength?: number;
     autofocus?: boolean;
     disabled?: boolean;
     autocomplete?: string;
+    pattern?: string;
   }>();
 
   const emit = defineEmits<{

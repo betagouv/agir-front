@@ -10,7 +10,7 @@
         :aria-labelledby="labelId"
         aria-autocomplete="list"
         aria-controls="adresse-menu"
-        :aria-describedby="erreurApi ? 'text-input-error-desc-error' : ''"
+        v-bind="erreurApi ? { 'aria-describedby': 'text-input-error-desc-error' } : {}"
         autocomplete="off"
         class="fr-input"
         name="recherche-adresse-input"

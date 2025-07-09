@@ -6,7 +6,7 @@
       type="checkbox"
       :checked="modelValue"
       @input="updateValue"
-      :aria-describedby="erreur ? 'checkbox-error-messages' : ''"
+      v-bind="erreur ? { 'aria-describedby': 'checkbox-error-messages' } : {}"
     />
     <label class="fr-label" :for="id">
       {{ label }}

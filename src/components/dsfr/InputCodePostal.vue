@@ -15,11 +15,20 @@
           name="codePostal"
           id="codePostal"
           required
-          :aria-describedby="`${!codePostalValide ? 'text-input-error-desc-error-invalide' : ''} ${codePostalNexistePas ? 'text-input-error-desc-error-commune' : ''}`"
+          v-bind="
+            (codePostal && !codePostalValide) || codePostalNexistePas
+              ? {
+                  'aria-describedby': `${codePostal && !codePostalValide ? 'text-input-error-desc-error-invalide ' : ''}${codePostalNexistePas ? 'text-input-error-desc-error-commune' : ''}`,
+                }
+              : {}
+          "
           type="text"
           v-model="codePostal"
           @input="onCodePostalInput"
           :autofocus="autofocus"
+          minlength="5"
+          maxlength="5"
+          pattern="[0-9]*"
         />
         <p v-if="codePostal && !codePostalValide" id="text-input-error-desc-error-invalide" class="fr-error-text">
           Ce code postal n'est pas valide
