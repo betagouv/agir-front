@@ -8,8 +8,10 @@
       >
         Retour à l'étape précédente
       </button>
-      <span class="fr-text--bold">Question {{ questionViewModel.etapeCourante }}</span>
-      &nbsp;sur {{ questionViewModel.nombreTotalDeQuestions }}
+      <span ref="navigationRef" tabindex="-1">
+        <span class="fr-text--bold">Question {{ questionViewModel.etapeCourante }}</span>
+        sur {{ questionViewModel.nombreTotalDeQuestions }}
+      </span>
     </p>
 
     <KYCForm
@@ -29,7 +31,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { nextTick, onMounted, ref, watch } from 'vue';
+  import { onMounted, ref } from 'vue';
   import KYCForm from '@/components/custom/KYC/KYCForm.vue';
   import { QuestionPresenterImpl, QuestionViewModel } from '@/domaines/kyc/adapters/question.presenter.impl';
   import { QuestionRepositoryAxios } from '@/domaines/kyc/adapters/question.repository.axios';
@@ -42,12 +44,13 @@
     defineProps<{ idEnchainementKycs: string; estActive: boolean; wordingDernierBouton?: string }>(),
     { wordingDernierBouton: 'Passer à la suite' },
   );
-  const questionViewModel = ref<QuestionViewModel>();
 
   const emit = defineEmits<{
     (e: 'finKycAtteinte'): void;
   }>();
 
+  const questionViewModel = ref<QuestionViewModel>();
+  const navigationRef = ref<HTMLSpanElement>();
   const afficherFinKyc = ref<boolean>(false);
   const questionPresenterImpl = new QuestionPresenterImpl(
     vm => (questionViewModel.value = vm),
@@ -58,6 +61,7 @@
       }
     },
   );
+
   onMounted(async () => {
     await chargerEnchainementKycs();
   });
@@ -71,6 +75,8 @@
       questionViewModel.value!.id,
       questionPresenterImpl,
     );
+
+    navigationRef.value?.focus();
   }
 
   async function chargerEnchainementKycs() {
@@ -80,6 +86,7 @@
       props.idEnchainementKycs,
       questionPresenterImpl,
     );
+    navigationRef.value?.focus();
   }
 
   async function recupererPrecendeteKYC() {
@@ -90,28 +97,6 @@
       questionViewModel.value!.id,
       questionPresenterImpl,
     );
+    navigationRef.value?.focus();
   }
-
-  const toggleNavigationClavier = estActive => {
-    const tabindex = estActive ? '0' : '-1';
-    document
-      .querySelectorAll('.effet-flou input, .effet-flou button, .effet-flou a')
-      .forEach(element => element.setAttribute('tabindex', tabindex));
-  };
-
-  watch(
-    () => questionViewModel.value,
-    () => {
-      if (!props.estActive) {
-        nextTick(() => toggleNavigationClavier(false));
-      }
-    },
-  );
-
-  watch(
-    () => props.estActive,
-    isActive => {
-      if (isActive) toggleNavigationClavier(true);
-    },
-  );
 </script>
