@@ -14,6 +14,7 @@ describe("Fichier de tests concernant la récupération d'une action de type bil
   it("En donnant l'id d'une action, on devrait pouvoir récupérer son entiereté", async () => {
     const action: ActionDetail = {
       thematique: ClefThematiqueAPI.alimentation,
+      emoji: '🏠',
       realisee: false,
       points: 30,
       consigne: 'Consigne',
@@ -112,8 +113,8 @@ describe("Fichier de tests concernant la récupération d'une action de type bil
         consigne: 'Consigne',
         labelCompteur: '100 bilans réalisés',
         nombreDeRealisations: 40,
-        titre: '<span class="text--bold">Bilan logement</span>',
-        titreAffiche: '<span class="text--bold">Bilan logement</span>',
+        titre: '<span aria-hidden="true">🏠</span> <span class="text--bold">Bilan logement</span>',
+        titreAffiche: '<span aria-hidden="true">🏠</span> <span class="text--bold">Bilan logement</span>',
         titrePropre: 'Bilan logement',
         sousTitre: 'Bilan logement sous titre',
         introduction: `<h2>En <span class="text--bold">quelques mots</span></h2><p>-, Pourquoi est-ce important de faire son bilan ?</p>
@@ -187,6 +188,7 @@ describe("Fichier de tests concernant la récupération d'une action de type bil
       thematique: ClefThematiqueAPI.alimentation,
       realisee: false,
       points: 30,
+      emoji: '',
       code: 'id-action-bilan-test',
       type: TypeAction.BILAN,
       titre: 'Titre bilan',

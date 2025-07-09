@@ -3,6 +3,7 @@ import { Action } from '@/domaines/actions/ports/actions.repository';
 import { RouteActionsName } from '@/router/actions/routes';
 import marked from '@/shell/actionMarkdownToHtml';
 import { buildUrl } from '@/shell/buildUrl';
+import cacherEmojisAuxLecteursDecrans from '@/shell/cacherEmojisAuxLecteursDecrans';
 import { gererPluriel } from '@/shell/pluriel';
 
 export class ActionsPresenterImpl implements ActionsPresenter {
@@ -29,9 +30,11 @@ export class ActionsPresenterImpl implements ActionsPresenter {
                 `<span class="text--bold">${action.nombreAidesDisponibles}</span> aides disponibles`,
               );
 
+        const titre = await marked.parseInline(action.titre);
+        const emoji = action.emoji ? `${cacherEmojisAuxLecteursDecrans(action.emoji)} ` : '';
         return {
           code: action.code,
-          titre: await marked.parseInline(action.titre),
+          titre: `${emoji}${titre}`,
           dejaVue: action.dejaVue,
           url: {
             name: RouteActionsName.ACTION_INDIVIDUELLE,

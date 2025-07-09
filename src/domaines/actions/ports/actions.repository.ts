@@ -31,12 +31,14 @@ export interface Action {
   nombreAidesDisponibles: number;
   type: TypeAction;
   dejaVue: boolean;
+  emoji?: string;
 }
 
 export interface ActionDetail {
   code: string;
   titre: string;
   sousTitre: string;
+  emoji: string;
   points: number;
   consigne: string;
   labelCompteur: string;

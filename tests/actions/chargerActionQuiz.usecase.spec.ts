@@ -15,6 +15,7 @@ describe("Fichier de tests concernant la récupération d'une action de type qui
   it("En donnant l'id d'une action, on devrait pouvoir récupérer son entiereté", async () => {
     const action: ActionDetail = {
       thematique: ClefThematiqueAPI.alimentation,
+      emoji: '🍽️',
       realisee: false,
       points: 20,
       aides: [],
@@ -139,10 +140,10 @@ describe("Fichier de tests concernant la récupération d'une action de type qui
         labelCompteur: '100 quizs réalisés',
         nombreDeRealisations: 40,
         actionId: 'id-action-test',
-        titre: 'Quiz <span class="text--bold">de ouf</span>',
+        titre: '<span aria-hidden="true">🍽</span>️ Quiz <span class="text--bold">de ouf</span>',
         sousTitre:
           'Faites des économies et le plein de vitamines ! Cette semaine, on cuisine une recette saine et délicieuse !',
-        titreAffiche: 'Quiz - Quiz <span class="text--bold">de ouf</span>',
+        titreAffiche: 'Quiz - <span aria-hidden="true">🍽</span>️ Quiz <span class="text--bold">de ouf</span>',
         titrePropre: 'Quiz de ouf',
         introduction: '',
         quizzFelicitations: 'Félicitations ! ',

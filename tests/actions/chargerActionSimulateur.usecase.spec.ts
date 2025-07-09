@@ -14,6 +14,7 @@ describe("Fichier de tests concernant la récupération d'une action de type sim
   it("En donnant l'id d'une action, on devrait pouvoir récupérer son entiereté", async () => {
     const action: ActionDetail = {
       thematique: ClefThematiqueAPI.alimentation,
+      emoji: '🚗',
       realisee: false,
       points: 30,
       consigne: 'Consigne',
@@ -108,8 +109,9 @@ describe("Fichier de tests concernant la récupération d'une action de type sim
         consigne: 'Consigne',
         labelCompteur: '100 simulateurs réalisés',
         nombreDeRealisations: 40,
-        titre: '<span class="text--bold">Simulateur voiture</span>',
-        titreAffiche: 'Simulateur - <span class="text--bold">Simulateur voiture</span>',
+        titre: '<span aria-hidden="true">🚗</span> <span class="text--bold">Simulateur voiture</span>',
+        titreAffiche:
+          'Simulateur - <span aria-hidden="true">🚗</span> <span class="text--bold">Simulateur voiture</span>',
         titrePropre: 'Simulateur voiture',
         sousTitre:
           'Quelle voiture allez-vous adopter ? Faites le test pour découvrir la voiture qui vous correspond le mieux !',

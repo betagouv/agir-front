@@ -14,6 +14,7 @@ describe("Fichier de tests concernant la récupération d'une action de type cla
   it("En donnant l'id d'une action, on devrait pouvoir récupérer son entiereté", async () => {
     const action: ActionDetail = {
       thematique: ClefThematiqueAPI.alimentation,
+      emoji: '🥗',
       realisee: false,
       points: 100,
       consigne: 'Consigne',
@@ -135,8 +136,10 @@ describe("Fichier de tests concernant la récupération d'une action de type cla
         consigne: 'Consigne',
         labelCompteur: '100 actions réalisées',
         actionId: 'id-action-test',
-        titre: 'Tester une nouvelle <span class="text--bold">recette végétarienne</span>',
-        titreAffiche: 'Tester une nouvelle <span class="text--bold">recette végétarienne</span>',
+        titre:
+          '<span aria-hidden="true">🥗</span> Tester une nouvelle <span class="text--bold">recette végétarienne</span>',
+        titreAffiche:
+          '<span aria-hidden="true">🥗</span> Tester une nouvelle <span class="text--bold">recette végétarienne</span>',
         titrePropre: 'Tester une nouvelle recette végétarienne',
         sousTitre:
           'Faites des économies et le plein de vitamines ! Cette semaine, on cuisine une recette saine et délicieuse !',
