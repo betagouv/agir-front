@@ -19,6 +19,7 @@ const actionsRoutes: RouteRecordRaw[] = [
     component: () => import('@/components/pages/PageAction.vue'),
     meta: {
       title: 'Action',
+      estPublique: true,
     },
   },
   {
@@ -27,6 +28,7 @@ const actionsRoutes: RouteRecordRaw[] = [
     component: () => import('@/components/pages/PageCatalogueActions.vue'),
     meta: {
       title: "Catalogue d'actions",
+      estPublique: true,
     },
   },
 ];

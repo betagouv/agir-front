@@ -7,8 +7,20 @@
     @submit="rechercherParTitre"
   />
   <h2 class="fr-h4">Filtres</h2>
-  <Interrupteur id="deja_vus" class="fr-mb-4w" label="Déjà consultées" @on-change="rechercherParDejaVu" />
-  <Interrupteur id="deja_realisees" class="fr-mb-4w" label="Déjà réalisées" @on-change="rechercherParDejaRealisees" />
+  <Interrupteur
+    v-if="utilisateurStore().estConnecte"
+    id="deja_vus"
+    class="fr-mb-4w"
+    label="Déjà consultées"
+    @on-change="rechercherParDejaVu"
+  />
+  <Interrupteur
+    v-if="utilisateurStore().estConnecte"
+    id="deja_realisees"
+    class="fr-mb-4w"
+    label="Déjà réalisées"
+    @on-change="rechercherParDejaRealisees"
+  />
   <InputCheckbox id="thematiqueArticle" :options="filtres" label="Thématiques" @update="updateThematiques" />
   <hr class="fr-hr" />
 </template>
@@ -17,6 +29,7 @@
   import InputCheckbox from '@/components/dsfr/InputCheckbox.vue';
   import InputSearchBar from '@/components/dsfr/InputSearchBar.vue';
   import Interrupteur from '@/components/dsfr/Interrupteur.vue';
+  import { utilisateurStore } from '@/store/utilisateur';
 
   defineProps<{ filtres: { id: string; label: string; checked: boolean }[] }>();
 

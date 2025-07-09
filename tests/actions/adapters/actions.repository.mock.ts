@@ -35,7 +35,7 @@ export class ActionsRepositoryMock implements ActionsRepository {
     return new ActionsRepositoryMock(undefined, undefined, undefined, actions);
   }
 
-  chargerAction(idUtilisateur: string, idAction: string): Promise<ActionDetail> {
+  chargerActionUtilisateur(idUtilisateur: string, idAction: string): Promise<ActionDetail> {
     return Promise.resolve(this.action!);
   }
 
@@ -43,7 +43,7 @@ export class ActionsRepositoryMock implements ActionsRepository {
     return Promise.resolve(this.actions!);
   }
 
-  chargerCatalogueActions(): Promise<CatalogueActions> {
+  chargerCatalogueActionsUtilisateur(): Promise<CatalogueActions> {
     return Promise.resolve(this.catalogueActions!);
   }
 
@@ -71,5 +71,13 @@ export class ActionsRepositoryMock implements ActionsRepository {
 
   compterActions(): Promise<number> {
     return Promise.resolve(0);
+  }
+
+  chargerAction(idAction: string, type: TypeAction): Promise<ActionDetail> {
+    return Promise.resolve(this.action!);
+  }
+
+  chargerCatalogueActions(): Promise<CatalogueActions> {
+    return Promise.resolve(this.catalogueActions!);
   }
 }

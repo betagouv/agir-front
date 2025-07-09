@@ -105,7 +105,9 @@ export interface ActionFAQ {
 export type CompteurActions = number;
 
 export interface ActionsRepository {
-  chargerCatalogueActions(idUtilisateur: string): Promise<CatalogueActions>;
+  chargerCatalogueActionsUtilisateur(idUtilisateur: string): Promise<CatalogueActions>;
+
+  chargerCatalogueActions(): Promise<CatalogueActions>;
 
   chargerActionsRecommandees(idUtilisateur: string): Promise<Action[]>;
 
@@ -117,7 +119,9 @@ export interface ActionsRepository {
     filtreDejaRealisees: boolean,
   ): Promise<CatalogueActions>;
 
-  chargerAction(idUtilisateur: string, idAction: string, type: TypeAction): Promise<ActionDetail>;
+  chargerActionUtilisateur(idUtilisateur: string, idAction: string, type: TypeAction): Promise<ActionDetail>;
+
+  chargerAction(idAction: string, type: TypeAction): Promise<ActionDetail>;
 
   recupererDetailThematique(idUtilisateur: string, thematiqueId: string): Promise<DetailThematique>;
 
