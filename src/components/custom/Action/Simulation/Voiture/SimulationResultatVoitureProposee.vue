@@ -15,7 +15,7 @@
         <span
           :aria-label="`${resultatSimulationVoiture.coutAnnuel.difference} euros de différence par rapport à votre véhicule actuel`"
           :class="resultatSimulationVoiture.coutAnnuel.style"
-          class="fr-badge fr-badge--no-icon"
+          class="fr-badge fr-badge--no-icon fr-ml-1v"
         >
           {{ resultatSimulationVoiture.coutAnnuel.labelDifference }}
         </span>
@@ -30,7 +30,7 @@
           :class="resultatSimulationVoiture.emission.style"
           class="fr-badge fr-badge--no-icon"
         >
-          {{ resultatSimulationVoiture.emission.difference }}
+          {{ resultatSimulationVoiture.emission.labelDifference }}
         </span>
       </p>
 
