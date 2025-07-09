@@ -132,4 +132,26 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
       });
     }
   });
+
+  it('Devrait appeler le repository même sans id utilisateur', async () => {
+    const catalogue: CatalogueActions = {
+      actions: [],
+      filtres: [],
+      consultation: 'tout',
+    };
+
+    const actionsRepository = ActionsRepositoryMock.avecCatalogue(catalogue);
+    const spy = vi.spyOn(actionsRepository, 'chargerCatalogueActions');
+
+    const usecase = new RecupererCatalogueActionsUsecase(actionsRepository);
+    await usecase.execute(
+      '',
+      new CatalogueActionsPresenterImpl(
+        () => {},
+        () => {},
+      ),
+    );
+
+    expect(spy).toHaveBeenCalled();
+  });
 });

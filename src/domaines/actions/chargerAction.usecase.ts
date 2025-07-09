@@ -44,7 +44,9 @@ export class ChargerActionUsecase {
 
   async execute(idUtilisateur: string, actionId: string, type: string): Promise<void> {
     const typeAction = type as TypeAction;
-    const action = await this.actionsRepository.chargerAction(idUtilisateur, actionId, typeAction);
+    const action = !idUtilisateur
+      ? await this.actionsRepository.chargerAction(actionId, typeAction)
+      : await this.actionsRepository.chargerActionUtilisateur(idUtilisateur, actionId, typeAction);
     const strategy = this.strategyFactory.getStrategy(typeAction);
     await strategy.execute(action, this.presenter);
   }

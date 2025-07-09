@@ -5,7 +5,10 @@ export class RecupererCatalogueActionsUsecase {
   constructor(private readonly actionsRepository: ActionsRepository) {}
 
   async execute(idUtilisateur: string, catalogueActionsPresenter: CatalogueActionsPresenter): Promise<void> {
-    const catalogueActions = await this.actionsRepository.chargerCatalogueActions(idUtilisateur);
-    catalogueActionsPresenter.presenteCatalogue(catalogueActions);
+    const catalogueActions = !idUtilisateur
+      ? await this.actionsRepository.chargerCatalogueActions()
+      : await this.actionsRepository.chargerCatalogueActionsUtilisateur(idUtilisateur);
+
+    await catalogueActionsPresenter.presenteCatalogue(catalogueActions);
   }
 }

@@ -180,4 +180,60 @@ describe("Fichier de tests concernant la récupération d'une action de type bil
       });
     }
   });
+
+  it('Devrait appeler le repository même sans id utilisateur', async () => {
+    // GIVEN
+    const action: ActionDetail = {
+      thematique: ClefThematiqueAPI.alimentation,
+      realisee: false,
+      points: 30,
+      code: 'id-action-bilan-test',
+      type: TypeAction.BILAN,
+      titre: 'Titre bilan',
+      sousTitre: 'Sous-titre bilan',
+      consigne: 'Consigne bilan',
+      labelCompteur: '0 bilans réalisés',
+      commune: 'Paris',
+      nombreDeRealisations: 0,
+      nombreAidesDisponibles: 0,
+      quizzFelicitations: '',
+      quizzes: [],
+      corps: {
+        introduction: 'Introduction',
+        astuces: '',
+      },
+      articles: [],
+      services: [],
+      faq: [],
+      sources: [],
+      aides: [],
+      idEnchainementKYCs: '',
+      explicationsRecommandations: new ExplicationsRecommandation(false, []),
+    };
+
+    const actionsRepository = ActionsRepositoryMock.avecActionDetail(action);
+    const spy = vi.spyOn(actionsRepository, 'chargerAction');
+
+    // WHEN
+    const usecase = new ChargerActionUsecase(
+      new ChargerActionStrategyFactory(
+        new ChargerActionClassiqueUsecase(),
+        new ChargerActionQuizUsecase(),
+        new ChargerActionSimulateurUsecase(),
+        new ChargerActionBilanUsecase(),
+      ),
+      actionsRepository,
+      new ActionPresenterImpl(
+        () => {},
+        () => {},
+        () => {},
+        () => {},
+      ),
+    );
+
+    //THEN
+    await usecase.execute('', 'id-action', TypeAction.BILAN);
+
+    expect(spy).toHaveBeenCalledWith('id-action', TypeAction.BILAN);
+  });
 });

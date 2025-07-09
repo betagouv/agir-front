@@ -108,11 +108,21 @@ interface DetailThematiqueApiModel {
 
 export class ActionsRepositoryAxios implements ActionsRepository {
   @intercept40X()
-  async chargerAction(idUtilisateur: string, idAction: string, typeAction: TypeAction): Promise<ActionDetail> {
+  async chargerActionUtilisateur(
+    idUtilisateur: string,
+    idAction: string,
+    typeAction: TypeAction,
+  ): Promise<ActionDetail> {
     const axios = AxiosFactory.getAxios();
     const response = await axios.get<ActionDetailApiModel>(
       `/utilisateurs/${idUtilisateur}/actions/${typeAction}/${idAction}`,
     );
+    return this.transformeActionDetailApiToActionDetail(response.data);
+  }
+
+  async chargerAction(idAction: string, typeAction: TypeAction): Promise<ActionDetail> {
+    const axios = AxiosFactory.getAxios();
+    const response = await axios.get<ActionDetailApiModel>(`/actions/${typeAction}/${idAction}`);
     return this.transformeActionDetailApiToActionDetail(response.data);
   }
 
@@ -126,9 +136,24 @@ export class ActionsRepositoryAxios implements ActionsRepository {
   }
 
   @intercept40X()
-  async chargerCatalogueActions(idUtilisateur: string): Promise<CatalogueActions> {
+  async chargerCatalogueActionsUtilisateur(idUtilisateur: string): Promise<CatalogueActions> {
     const axios = AxiosFactory.getAxios();
     const response = await axios.get<CatalogueActionsApiModel>(`/utilisateurs/${idUtilisateur}/actions`);
+
+    return {
+      actions: response.data.actions.map(this.mapActionApiModelToAction),
+      filtres: response.data.filtres.map(filtre => ({
+        code: filtre.code as ClefThematiqueAPI,
+        label: filtre.label,
+        selected: filtre.selected,
+      })),
+      consultation: response.data.consultation,
+    };
+  }
+
+  async chargerCatalogueActions(): Promise<CatalogueActions> {
+    const axios = AxiosFactory.getAxios();
+    const response = await axios.get<CatalogueActionsApiModel>(`/actions`);
 
     return {
       actions: response.data.actions.map(this.mapActionApiModelToAction),
