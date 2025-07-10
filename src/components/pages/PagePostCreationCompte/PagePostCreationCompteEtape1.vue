@@ -9,6 +9,7 @@
         <fieldset class="fr-fieldset fr-mb-0">
           <legend id="identity-fieldset-legend" class="fr-fieldset__legend fr-text--regular fr-text--lg">
             Nous avons quelques questions à vous poser pour personnaliser votre expérience&nbsp;!
+            <span class="fr-hint-text fr-text--sm fr-mt-1w fr-mb-0">Tous les champs sont obligatoires.</span>
           </legend>
           <Alert
             v-if="alerte.isActive"
@@ -22,12 +23,14 @@
               v-model="onboardingPostCreationCompte().pseudo"
               :autofocus="true"
               :erreur="champsPseudoStatus"
-              :maxlength="20"
+              :minlength="3"
+              :maxlength="21"
               :required="true"
               autocomplete="username"
               description="Doit être composé de 3 à 21 caractères. Lettres, chiffres et espaces uniquement."
               label="Votre pseudonyme"
               name="utilisateur-pseudo"
+              pattern="[0-9a-zA-ZàáâäãåąćęèéêëłńóôöõøùúûüÿýżźñçœæšžÀÁÂÄÃÅĄĆĘÈÉÊËÌÍÎÏŁŃÒÓÔÖÕØÙÚÛÜŸÝŻŹÑÇŒÆŠŽ,.' \-]*"
             />
 
             <InputDateDeNaissance
@@ -100,7 +103,7 @@
     if (!validationPseudo(pseudo)) {
       inputPseudo.value?.focus();
       champsPseudoStatus.value = {
-        message: 'Le pseudonyme ne peut contenir que des lettres ou des chiffres',
+        message: 'Le pseudonyme ne peut contenir que des lettres, chiffres et espaces. Exemple: Pseudo123',
         afficher: true,
       };
       return false;

@@ -37,7 +37,7 @@
         icon="fr-icon-money-euro-circle-line"
         :erreur="champsRFRStatus"
         @blur="onValidationRFR"
-        description="Facultatif"
+        description="Facultatif. En euros, sans espaces ni séparateurs de milliers."
       />
     </div>
   </div>
