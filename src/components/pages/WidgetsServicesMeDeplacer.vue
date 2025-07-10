@@ -33,7 +33,7 @@
               titre: 'trouver-le-type-de-voiture-qui-vous-convient-le-mieux',
             },
           }"
-          image="/carte_service_aides_velo.svg"
+          image="/carte_service_simu_voiture.svg"
           size="sm"
           titre="Dois-je changer de voiture ?"
           variations="shadow"
