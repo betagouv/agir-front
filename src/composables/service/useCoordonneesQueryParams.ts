@@ -7,7 +7,7 @@ export function useCoordonneesQueryParams(coordonnees: Ref<Coordonnees | undefin
   const router = useRouter();
 
   watch(coordonnees, async nouvelleCoordonnees => {
-    await router.push({
+    await router.replace({
       query: {
         ...route.query,
         latitude: nouvelleCoordonnees?.latitude.toString(),
