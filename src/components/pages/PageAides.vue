@@ -1,9 +1,9 @@
 <template>
   <div class="fr-container fr-pb-3w">
     <FilDAriane page-courante="Mes aides" />
-    <div v-if="isLoading">Chargement ...</div>
-    <div v-else-if="!aides">Une erreur est survenue</div>
-    <div v-else>
+    <p v-if="isLoading">Chargement ...</p>
+    <p v-else-if="!aides">Une erreur est survenue</p>
+    <template v-else>
       <div v-if="!aides.utilisateurEstCouvert" class="fr-alert fr-alert--info fr-mb-4w">
         <h3 class="fr-alert__title">Votre ville n’est pas encore couverte par le service J'agis.</h3>
         <p>
@@ -12,7 +12,7 @@
         </p>
       </div>
       <Aides :aidesGroupesParCategorie="aides.aides" />
-    </div>
+    </template>
   </div>
 </template>
 
