@@ -13,14 +13,16 @@
     <form @submit.prevent="enregistrerLesInformations">
       <div class="fr-mb-4w">
         <div v-if="doitAfficherBarreAdresse" class="fr-input-group">
-          <label class="fr-label fr-mb-2w" id="recherche-par-adresse-label" for="recherche-adresse-input"
+          <label id="recherche-par-adresse-label" class="fr-label fr-mb-2w" for="recherche-adresse-input"
             >Où habitez-vous ?</label
           >
           <BarreDeRechercheAdresse
-            label-id="recherche-par-adresse-label"
             v-model:adresse="adresseBarreDeRecherche"
             v-model:recherche="recherche"
+            label-id="recherche-par-adresse-label"
           />
+
+          <button class="fr-btn fr-mt-2w" @click.prevent="supprimerMonAdresse()">Supprimer mon adresse</button>
         </div>
 
         <InputCodePostal
@@ -33,7 +35,7 @@
 
       <h2 class="fr-h3">Ma situation</h2>
 
-      <fieldset class="fr-fieldset" aria-describedby="combien-dans-logement-legend">
+      <fieldset aria-describedby="combien-dans-logement-legend" class="fr-fieldset">
         <legend id="combien-dans-logement-legend" class="fr-fieldset__legend fr-fieldset__legend--regular">
           Combien êtes-vous dans votre logement (vous inclus) ?
         </legend>
@@ -162,22 +164,24 @@
 
   const { alerte, afficherAlerte } = useAlerte();
 
-  const adresseDansLeCompte = new AdresseDansLeCompte(
-    logementViewModel.value?.codePostal,
-    logementViewModel.value?.commune_utilisee_dans_le_compte,
-    logementViewModel.value?.commune_label,
-    logementViewModel.value?.rue,
-    logementViewModel.value?.numeroRue,
-    logementViewModel.value?.coordonnees,
+  const adresseDansLeCompte = ref<AdresseDansLeCompte>(
+    new AdresseDansLeCompte(
+      logementViewModel.value?.codePostal,
+      logementViewModel.value?.commune_utilisee_dans_le_compte,
+      logementViewModel.value?.commune_label,
+      logementViewModel.value?.rue,
+      logementViewModel.value?.numeroRue,
+      logementViewModel.value?.coordonnees,
+    ),
   );
   const barreDeRechercheInitialisationViewModel = ref<BarreDeRechercheViewModel>();
   const adresseBarreDeRecherche = ref<AdresseBarreDeRecherche>();
   new BarreDeRecherchePresenterImpl(vm => (barreDeRechercheInitialisationViewModel.value = vm)).presente(
-    adresseDansLeCompte,
+    adresseDansLeCompte.value as AdresseDansLeCompte,
   );
   const recherche = ref<string>(barreDeRechercheInitialisationViewModel.value?.recherche ?? '');
 
-  const doitAfficherBarreAdresse = computed(() => adresseDansLeCompte.estAdresseComplete());
+  const doitAfficherBarreAdresse = computed(() => adresseDansLeCompte.value.estAdresseComplete());
   const isCodePostalEnErreur = ref(false);
   const codePostalEstValide = computed(() => {
     return !isCodePostalEnErreur.value && logementViewModel.value.codeEpci !== undefined;
@@ -211,6 +215,40 @@
         coordonnees: adresseBarreDeRecherche.value?.coordonnees,
         rue: adresseBarreDeRecherche.value?.rue,
         numeroRue: adresseBarreDeRecherche.value?.numeroRue,
+        codePostal: adresseBarreDeRecherche.value?.codePostal ?? logementViewModel.value.codePostal,
+        codeEpci: adresseBarreDeRecherche.value?.codeEpci ?? logementViewModel.value.codeEpci,
+      })
+      .then(() => {
+        afficherAlerte('success', 'Succès', 'Vos informations ont été correctement mises à jour.');
+      })
+      .catch(() => {
+        afficherAlerte('error', 'Erreur', 'Une erreur interne est survenue. Veuillez réessayer plus tard.');
+      });
+
+    const alertElement = document.getElementById('scroll-to-alerte');
+    if (alertElement) {
+      alertElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
+  const supprimerMonAdresse = () => {
+    adresseDansLeCompte.value = new AdresseDansLeCompte(
+      logementViewModel.value?.codePostal,
+      logementViewModel.value?.commune_utilisee_dans_le_compte,
+      logementViewModel.value?.commune_label,
+      null!,
+      null!,
+      null!,
+    );
+    const usecase = new PatcherInformationLogementUsecase(new LogementRepositoryAxios(), sessionAppRawDataStorage);
+    usecase
+      .execute(utilisateurStore().utilisateur.id, {
+        coordonnees: {
+          latitude: null!,
+          longitude: null!,
+        },
+        rue: null!,
+        numeroRue: null!,
         codePostal: adresseBarreDeRecherche.value?.codePostal ?? logementViewModel.value.codePostal,
         codeEpci: adresseBarreDeRecherche.value?.codeEpci ?? logementViewModel.value.codeEpci,
       })
