@@ -54,6 +54,7 @@
     <WidgetsServicesAlimentation v-if="thematique.clefTechniqueAPI === ClefThematiqueAPI.alimentation" />
     <WidgetsServicesMeLoger v-if="thematique.clefTechniqueAPI === ClefThematiqueAPI.logement" />
     <WidgetsServicesMeDeplacer v-if="thematique.clefTechniqueAPI === ClefThematiqueAPI.transports" />
+    <WidgetsServicesMesAchats v-if="thematique.clefTechniqueAPI === ClefThematiqueAPI.consommation" />
 
     <WidgetAides :clef-thematique="thematiqueId" :nombre-aides-max="3" class="fr-my-4w" />
 
@@ -87,6 +88,7 @@
   import WidgetsServicesAlimentation from '@/components/pages/WidgetsServicesAlimentation.vue';
   import WidgetsServicesMeDeplacer from '@/components/pages/WidgetsServicesMeDeplacer.vue';
   import WidgetsServicesMeLoger from '@/components/pages/WidgetsServicesMeLoger.vue';
+  import WidgetsServicesMesAchats from '@/components/pages/WidgetsServicesMesAchats.vue';
   import { ActionsEventBus } from '@/domaines/actions/actions.eventbus';
   import { ActionsRepositoryAxios } from '@/domaines/actions/adapters/actions.repository.axios';
   import { ActionsDansUneThematiquePresenterImpl } from '@/domaines/actions/adapters/actionsDansUneThematique.presenter.impl';
