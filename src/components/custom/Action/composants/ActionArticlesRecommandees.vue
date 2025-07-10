@@ -7,13 +7,13 @@
         :key="article.titre"
         class="fr-col-12 fr-col-sm-6 fr-col-md-4"
       >
-        <CarteSimple :titre="article.titre" :image="article.image" :url="article.url" />
+        <CarteDsfr :titre="article.titre" :image="article.image" :to="{ path: article.url }" />
       </div>
     </div>
   </section>
 </template>
 <script setup lang="ts">
-  import CarteSimple from '@/components/dsfr/CarteSimple.vue';
+  import CarteDsfr from '@/components/dsfr/CarteDsfr.vue';
   import { ActionBaseViewModel } from '@/domaines/actions/ports/action.presenter';
 
   defineProps<{

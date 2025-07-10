@@ -1,5 +1,5 @@
 <template>
-  <div class="fr-card fr-enlarge-link" :class="styleCarte">
+  <div class="fr-card fr-card--sm fr-enlarge-link" :class="styleCarte">
     <div class="fr-card__body">
       <div class="fr-card__content">
         <h3 class="fr-card__title">
@@ -12,7 +12,7 @@
           </router-link>
         </h3>
         <p class="fr-card__desc" v-if="!options?.descriptionDesactive">{{ suggestionsServiceViewModel.description }}</p>
-        <div class="fr-card__start">
+        <div class="fr-card__end">
           <ul
             class="fr-tags-group"
             v-if="
@@ -20,11 +20,11 @@
               (suggestionsServiceViewModel.categories && suggestionsServiceViewModel.categories?.length > 0)
             "
           >
-            <li v-if="suggestionsServiceViewModel.tag">
-              <p class="fr-tag">{{ suggestionsServiceViewModel.tag.label }}</p>
+            <li class="text--lh-0" v-if="suggestionsServiceViewModel.tag">
+              <p class="fr-tag fr-m-0">{{ suggestionsServiceViewModel.tag.label }}</p>
             </li>
-            <li v-for="categorie in suggestionsServiceViewModel.categories" :key="categorie">
-              <p class="fr-tag">{{ categorie }}</p>
+            <li class="text--lh-0" v-for="categorie in suggestionsServiceViewModel.categories" :key="categorie">
+              <p class="fr-tag fr-m-0">{{ categorie }}</p>
             </li>
           </ul>
         </div>

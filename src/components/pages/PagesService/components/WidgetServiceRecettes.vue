@@ -2,9 +2,19 @@
   <section>
     <div class="flex flex-space-between align-items--center flex-wrap fr-mb-3w">
       <slot name="titre" />
-      <p class="text--italic fr-mb-0">
+      <p class="text--italic fr-mb-0" v-if="afficherMangerBouge">
         avec <img alt="manger bouger" class="fr-ml-2w" src="/logo-manger-bouger.svg" />
       </p>
+      <router-link
+        v-else
+        :to="{
+          name: RouteServiceName.RECETTES,
+          params: { thematiqueId: MenuThematiques.getThematiqueData(ClefThematiqueAPI.alimentation).url },
+          query: { type: parametreDeRecherche },
+        }"
+        class="fr-link"
+        >Voir tout
+      </router-link>
     </div>
 
     <ul v-if="serviceRecettesViewModel" class="fr-grid-row fr-grid-row--gutters fr-mb-2w list-style-none">
@@ -17,21 +27,20 @@
       </li>
     </ul>
 
-    <div>
-      <router-link
-        :to="{
-          name: RouteServiceName.RECETTES,
-          params: {
-            thematiqueId: MenuThematiques.getThematiqueData(ClefThematiqueAPI.alimentation).url,
-          },
-          query: {
-            type: parametreDeRecherche,
-          },
-        }"
-        class="fr-link"
-        >Voir toutes les recettes
-      </router-link>
-    </div>
+    <router-link
+      v-if="afficherMangerBouge"
+      :to="{
+        name: RouteServiceName.RECETTES,
+        params: {
+          thematiqueId: MenuThematiques.getThematiqueData(ClefThematiqueAPI.alimentation).url,
+        },
+        query: {
+          type: parametreDeRecherche,
+        },
+      }"
+      class="fr-link"
+      >Voir toutes les recettes
+    </router-link>
   </section>
 </template>
 
@@ -52,8 +61,9 @@
     defineProps<{
       parametreDeRecherche: string;
       nombreDeCartesParLigne?: number;
+      afficherMangerBouge?: boolean;
     }>(),
-    { nombreDeCartesParLigne: 4 },
+    { nombreDeCartesParLigne: 4, afficherMangerBouge: true },
   );
   const isLoading = ref<boolean>(true);
   const serviceRecettesViewModel = ref<ServiceRechercheRecettesViewModel>();
