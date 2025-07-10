@@ -1,7 +1,12 @@
 <template>
   <h2 class="fr-h2 fr-mb-6w text--center">Toutes nos solutions pour mieux...</h2>
   <ul class="fr-grid-row flex-space-around fr-grid-row--gutters">
-    <li v-for="item in items" :key="item.titre" class="fr-col-lg-3 fr-col-md-6 fr-col-12 list-style-none thematique">
+    <li
+      v-for="item in items"
+      :key="item.titre"
+      class="fr-col-lg-3 fr-col-md-6 fr-col-12 list-style-none thematique"
+      tabindex="-1"
+    >
       <h3 class="fr-h4 fr-mb-3w">
         <span aria-hidden="true">{{ item.emoji }}</span> {{ item.titre }}
       </h3>
@@ -12,14 +17,14 @@
   <button
     v-if="!afficherToutesLesThematiquesMobile"
     class="fr-btn fr-btn--secondary full-width flex-center fr-mt-3w fr-hidden-md"
-    @click="afficherToutesLesThematiquesMobile = true"
+    @click="afficherToutesLesThematiquesSurMobile()"
   >
     Voir 2 autres
   </button>
 </template>
 
 <script setup lang="ts">
-  import { computed, ref } from 'vue';
+  import { computed, nextTick, ref } from 'vue';
   import ListeRaccourcis from '@/components/custom/Thematiques/ListeRaccourcis.vue';
   import { TypeAction } from '@/domaines/actions/ports/actions.repository';
   import { ClefThematiqueAPI, MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
@@ -36,6 +41,14 @@
   const transport = MenuThematiques.getThematiqueData(ClefThematiqueAPI.transports);
   const logement = MenuThematiques.getThematiqueData(ClefThematiqueAPI.logement);
   const consommation = MenuThematiques.getThematiqueData(ClefThematiqueAPI.consommation);
+
+  async function afficherToutesLesThematiquesSurMobile() {
+    afficherToutesLesThematiquesMobile.value = true;
+    await nextTick();
+    const thematiques = document.querySelectorAll<HTMLLIElement>('.thematique');
+    const thematiqueAPresentVisible: HTMLLIElement = thematiques[2];
+    thematiqueAPresentVisible.focus();
+  }
 
   const items = [
     {

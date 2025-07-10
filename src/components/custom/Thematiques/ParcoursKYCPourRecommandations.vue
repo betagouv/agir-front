@@ -8,11 +8,11 @@
       <EnchainementQuestionsKyc
         :est-active="aCommenceEnchainement"
         :id-enchainement-kycs="idEnchainementKycs"
-        @fin-kyc-atteinte="onFinKYC"
+        @fin-kyc-atteinte="onFinKYCEtFocus"
         wording-dernier-bouton="Voir mes recommandations personnalisées"
       >
         <template v-slot:fin>
-          <BallLoader text="Nous préparons vos recommandations personnalisées..." />
+          <BallLoader text="Nous préparons vos recommandations personnalisées..." ref="ballLoaderRef" />
         </template>
       </EnchainementQuestionsKyc>
     </div>
@@ -20,15 +20,23 @@
 </template>
 
 <script setup lang="ts">
-  import { ref } from 'vue';
+  import { nextTick, ref } from 'vue';
   import EnchainementQuestionsKyc from '@/components/custom/KYC/EnchainementQuestionsKyc.vue';
   import BallLoader from '@/components/custom/Thematiques/BallLoader.vue';
   import CommencerParcours from '@/components/custom/Thematiques/CommencerParcours.vue';
 
-  defineProps<{
+  const props = defineProps<{
     idEnchainementKycs: string;
     onFinKYC: () => void;
   }>();
+
+  const ballLoaderRef = ref<InstanceType<typeof BallLoader>>();
+
+  async function onFinKYCEtFocus() {
+    props.onFinKYC();
+    await nextTick();
+    ballLoaderRef.value?.focus();
+  }
 
   const aCommenceEnchainement = ref<boolean>(false);
 </script>

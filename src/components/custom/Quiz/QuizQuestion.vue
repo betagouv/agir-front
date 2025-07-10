@@ -16,6 +16,7 @@
       :type="alerte.type"
       :titre="alerte.titre"
       :message="alerte.message"
+      ref="alertRef"
       class="fr-mb-2w"
     />
 
@@ -24,7 +25,7 @@
 </template>
 
 <script setup lang="ts">
-  import { computed, ref } from 'vue';
+  import { computed, nextTick, ref } from 'vue';
   import Alert from '@/components/custom/Alert.vue';
   import BoutonsRadio from '@/components/custom/Form/BoutonsRadio.vue';
   import { useAlerte } from '@/composables/useAlerte';
@@ -37,14 +38,17 @@
   const { alerte, afficherAlerte } = useAlerte();
   const valueInput = ref<string>('');
   const reponseEstDonnee = ref<boolean>(false);
+  const alertRef = ref<HTMLDivElement>();
 
   const estIncomplet = computed(() => valueInput.value === '');
 
   const emit = defineEmits<{ (e: 'quizTermine', value: string): void }>();
 
-  const validerLaReponse = () => {
+  const validerLaReponse = async () => {
     if (estIncomplet.value) {
       afficherAlerte('error', 'Erreur', 'Veuillez sélectionner une réponse pour continuer');
+      await nextTick();
+      alertRef.value?.focus();
       return;
     }
     reponseEstDonnee.value = true;

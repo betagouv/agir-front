@@ -1,7 +1,9 @@
 <template>
   <div
+    ref="alertEl"
     :role="aUnRoleAlert ? 'alert' : ''"
     :class="`fr-alert fr-alert--${type} ${taille === 'small' ? 'fr-alert--sm' : ''} background--white`"
+    tabindex="-1"
   >
     <h3 v-if="titre" class="fr-alert__title" v-text="titre" />
     <span class="fr-sr-only">: </span>
@@ -19,6 +21,7 @@
 
 <script setup lang="ts">
   import '@gouvfr/dsfr/dist/component/alert/alert.min.css';
+  import { ref } from 'vue';
 
   withDefaults(
     defineProps<{
@@ -31,4 +34,10 @@
     }>(),
     { aUnRoleAlert: true },
   );
+
+  const alertEl = ref<HTMLDivElement>();
+
+  defineExpose({
+    focus: () => alertEl.value?.focus(),
+  });
 </script>
