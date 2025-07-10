@@ -1,6 +1,6 @@
 <template>
-  <section class="flex flex-space-between full-height position--relative z-index-2">
-    <div class="fr-p-5w">
+  <section class="fr-grid-row flex-space-between full-height position--relative z-index-2">
+    <div class="fr-p-5w fr-col-md-5 fr-col-12">
       <h2 class="text--normal fr-mb-4w">
         <span class="display-block text--bold">5 questions pour ...</span>
         <span class="fr-text--xl">Mieux comprendre vos habitudes</span>
@@ -10,7 +10,7 @@
       </button>
     </div>
 
-    <div class="decalage-droite fr-hidden fr-unhidden-md">
+    <div class="decalage-droite fr-hidden fr-unhidden-md fr-col-6">
       <div class="flex flex-column">
         <div class="flex flex-center">
           <img :src="buildIllustrationFilePath(1)" alt="" class="action-illustration" />
@@ -58,9 +58,5 @@
     background-color: #f3ede5;
     opacity: 30%;
     pointer-events: none;
-  }
-
-  .decalage-droite {
-    margin-right: -8%;
   }
 </style>

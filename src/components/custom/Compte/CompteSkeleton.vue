@@ -3,7 +3,7 @@
     <FilDAriane :page-courante="pageCourante" />
     <div class="background--white fr-p-4w border">
       <div class="fr-grid-row">
-        <div class="fr-col-lg-4 fr-col-12 fr-mb-4w fr-mb-md-0">
+        <div class="fr-col-md-4 fr-col-12 fr-mb-4w fr-mb-md-0">
           <div class="full-height flex flex-column flex-space-between">
             <CompteMenuLateral />
             <button
@@ -14,7 +14,7 @@
             </button>
           </div>
         </div>
-        <div class="fr-col-lg-8 fr-col-12">
+        <div class="fr-col-md-8 fr-col-12">
           <slot />
         </div>
       </div>
