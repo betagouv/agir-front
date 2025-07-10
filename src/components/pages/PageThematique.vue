@@ -53,6 +53,7 @@
   <div class="fr-container">
     <WidgetsServicesAlimentation v-if="thematique.clefTechniqueAPI === ClefThematiqueAPI.alimentation" />
     <WidgetsServicesMeLoger v-if="thematique.clefTechniqueAPI === ClefThematiqueAPI.logement" />
+    <WidgetsServicesMeDeplacer v-if="thematique.clefTechniqueAPI === ClefThematiqueAPI.transports" />
 
     <WidgetAides :clef-thematique="thematiqueId" :nombre-aides-max="3" class="fr-my-4w" />
 
@@ -84,6 +85,7 @@
   import Alert from '@/components/custom/Alert.vue';
   import ParcoursKYCPourRecommandations from '@/components/custom/Thematiques/ParcoursKYCPourRecommandations.vue';
   import WidgetsServicesAlimentation from '@/components/pages/WidgetsServicesAlimentation.vue';
+  import WidgetsServicesMeDeplacer from '@/components/pages/WidgetsServicesMeDeplacer.vue';
   import WidgetsServicesMeLoger from '@/components/pages/WidgetsServicesMeLoger.vue';
   import { ActionsEventBus } from '@/domaines/actions/actions.eventbus';
   import { ActionsRepositoryAxios } from '@/domaines/actions/adapters/actions.repository.axios';

@@ -6,7 +6,12 @@
         <CarteDsfr
           :horizontal="true"
           :to="{
-            path: '/action/simulateur/simu_aides_reno/calculer-vos-aides-pour-renover-votre-logement',
+            name: RouteActionsName.ACTION_INDIVIDUELLE,
+            params: {
+              type: TypeAction.SIMULATEUR,
+              id: 'simu_aides_reno',
+              titre: 'calculer-vos-aides-pour-renover-votre-logement',
+            },
           }"
           image="/carte_service_aides_reno.svg"
           size="sm"
@@ -26,4 +31,6 @@
 </template>
 <script lang="ts" setup>
   import CarteDsfr from '@/components/dsfr/CarteDsfr.vue';
+  import { TypeAction } from '@/domaines/actions/ports/actions.repository';
+  import { RouteActionsName } from '@/router/actions/routes';
 </script>
