@@ -1,10 +1,11 @@
 <template>
   <div class="fr-container fr-pt-5w fr-pb-3w">
-    <p class="fr-h2 fr-mb-1w">Bonjour {{ utilisateur.pseudo }},</p>
-    <h1 class="text--normal fr-text--lg">Il est temps d'agir, choisissez votre prochaine action !</h1>
+    <h1 class="fr-h2 fr-mb-1w">Bonjour {{ utilisateur.pseudo }},</h1>
+    <h2 class="text--normal fr-text--lg">Il est temps d'agir, choisissez votre prochaine action !</h2>
 
     <BallLoader v-if="estEnChargement" text="Nous préparons vos recommandations personnalisées..." />
     <ListeCartesActions
+      heading-type="h3"
       class="fr-mb-3w"
       v-else-if="actionsViewModel"
       :actions="actionsViewModel"
