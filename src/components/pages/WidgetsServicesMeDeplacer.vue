@@ -10,13 +10,13 @@
           }"
           image="/carte_service_aides_velo.svg"
           size="sm"
-          titre="Estimer mes aides vélo"
+          titre="Un coup de pouce pour pédaler"
           variations="shadow"
         >
           <template #contenuEnd>
             <p class="fr-card__desc">
-              Une rénovation énergétique pour des factures moins élevées dans un logement plus confortable et plus
-              écologique.
+              Vous souhaitez acheter un vélo neuf ou d'occasion, qu'il soit électrique ou classique ? Des aides locales
+              existent, venez les découvrir.
             </p>
           </template>
         </CarteDsfr>
@@ -40,8 +40,7 @@
         >
           <template #contenuEnd>
             <p class="fr-card__desc">
-              Une rénovation énergétique pour des factures moins élevées dans un logement plus confortable et plus
-              écologique.
+              Comparez les coûts et les émissions de votre voiture à des alternatives économiques et écologiques.
             </p>
           </template>
         </CarteDsfr>

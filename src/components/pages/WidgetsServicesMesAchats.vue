@@ -9,7 +9,7 @@
             name: RouteServiceName.LONGUE_VIE_AUX_OBJETS,
             params: { thematiqueId: MenuThematiques.getThematiqueData(ClefThematiqueAPI.consommation).url },
           }"
-          image="/carte_service_aides_reno.svg"
+          image="/carte_service_lvao.svg"
           size="sm"
           titre="Réparez, vendez, louez vos objets"
           variations="shadow"
