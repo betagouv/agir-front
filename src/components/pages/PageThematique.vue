@@ -17,7 +17,7 @@
             </router-link>
           </div>
           <div>
-            <Alert class="fr-text--sm" v-if="messageNgc" type="info" taille="small" @close="messageNgc = ''">
+            <Alert v-if="messageNgc" class="fr-text--sm" taille="small" type="info" @close="messageNgc = ''">
               <template v-slot:message>
                 Vous n’avez pas renseigné vos habitudes sur ce thème lors de votre bilan
                 <span class="display-block">Nos Gestes Climat</span>
@@ -52,6 +52,7 @@
 
   <div class="fr-container">
     <WidgetsServicesAlimentation v-if="thematique.clefTechniqueAPI === ClefThematiqueAPI.alimentation" />
+    <WidgetsServicesMeLoger v-if="thematique.clefTechniqueAPI === ClefThematiqueAPI.logement" />
 
     <WidgetAides :clef-thematique="thematiqueId" :nombre-aides-max="3" class="fr-my-4w" />
 
@@ -83,6 +84,7 @@
   import Alert from '@/components/custom/Alert.vue';
   import ParcoursKYCPourRecommandations from '@/components/custom/Thematiques/ParcoursKYCPourRecommandations.vue';
   import WidgetsServicesAlimentation from '@/components/pages/WidgetsServicesAlimentation.vue';
+  import WidgetsServicesMeLoger from '@/components/pages/WidgetsServicesMeLoger.vue';
   import { ActionsEventBus } from '@/domaines/actions/actions.eventbus';
   import { ActionsRepositoryAxios } from '@/domaines/actions/adapters/actions.repository.axios';
   import { ActionsDansUneThematiquePresenterImpl } from '@/domaines/actions/adapters/actionsDansUneThematique.presenter.impl';
