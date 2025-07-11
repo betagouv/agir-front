@@ -155,7 +155,7 @@ class ActionViewModelBuilder {
   private static buildExplicationsRecommandations(
     explicationsRecommandations: ExplicationsRecommandation,
   ): ExplicationRecommandationViewModel | undefined {
-    if (!explicationsRecommandations.doiventEtreAffiches()) {
+    if (!explicationsRecommandations.estRecommandee()) {
       return undefined;
     }
 
