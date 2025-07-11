@@ -17,7 +17,7 @@
             </router-link>
           </div>
           <div>
-            <Alert class="fr-text--sm" v-if="messageNgc" type="info" taille="small" @close="messageNgc = ''">
+            <Alert v-if="messageNgc" class="fr-text--sm" taille="small" type="info" @close="messageNgc = ''">
               <template v-slot:message>
                 Vous n’avez pas renseigné vos habitudes sur ce thème lors de votre bilan
                 <span class="display-block">Nos Gestes Climat</span>
@@ -51,19 +51,10 @@
   </section>
 
   <div class="fr-container">
-    <div v-if="thematique.clefTechniqueAPI === ClefThematiqueAPI.alimentation" class="fr-mt-4w">
-      <WidgetServiceRecettes parametre-de-recherche="saison">
-        <template #titre>
-          <h2 class="fr-h3">Manger sainement et de saison</h2>
-        </template>
-      </WidgetServiceRecettes>
-
-      <div class="fr-grid-row fr-my-6w">
-        <WidgetServiceFruitsEtLegumes class="fr-col-12 fr-col-md-6 fr-pr-md-3w fr-text--sm" />
-
-        <WidgetServicePresDeChezNous :nombre-de-cartes-par-ligne="1" class="fr-col-12 fr-col-md-6 fr-pl-md-3w" />
-      </div>
-    </div>
+    <WidgetsServicesAlimentation v-if="thematique.clefTechniqueAPI === ClefThematiqueAPI.alimentation" />
+    <WidgetsServicesMeLoger v-if="thematique.clefTechniqueAPI === ClefThematiqueAPI.logement" />
+    <WidgetsServicesMeDeplacer v-if="thematique.clefTechniqueAPI === ClefThematiqueAPI.transports" />
+    <WidgetsServicesMesAchats v-if="thematique.clefTechniqueAPI === ClefThematiqueAPI.consommation" />
 
     <WidgetAides :clef-thematique="thematiqueId" :nombre-aides-max="3" class="fr-my-4w" />
 
@@ -94,9 +85,10 @@
   import WidgetAides from '@/components/custom/Aides/WidgetAides.vue';
   import Alert from '@/components/custom/Alert.vue';
   import ParcoursKYCPourRecommandations from '@/components/custom/Thematiques/ParcoursKYCPourRecommandations.vue';
-  import WidgetServiceFruitsEtLegumes from '@/components/pages/PagesService/components/WidgetServiceFruitsEtLegumes.vue';
-  import WidgetServicePresDeChezNous from '@/components/pages/PagesService/components/WidgetServicePresDeChezNous.vue';
-  import WidgetServiceRecettes from '@/components/pages/PagesService/components/WidgetServiceRecettes.vue';
+  import WidgetsServicesAlimentation from '@/components/pages/WidgetsServicesAlimentation.vue';
+  import WidgetsServicesMeDeplacer from '@/components/pages/WidgetsServicesMeDeplacer.vue';
+  import WidgetsServicesMeLoger from '@/components/pages/WidgetsServicesMeLoger.vue';
+  import WidgetsServicesMesAchats from '@/components/pages/WidgetsServicesMesAchats.vue';
   import { ActionsEventBus } from '@/domaines/actions/actions.eventbus';
   import { ActionsRepositoryAxios } from '@/domaines/actions/adapters/actions.repository.axios';
   import { ActionsDansUneThematiquePresenterImpl } from '@/domaines/actions/adapters/actionsDansUneThematique.presenter.impl';

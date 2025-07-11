@@ -18,7 +18,7 @@ export class ServiceRechercheFruitsEtLegumesWidgetPresenterImpl implements Servi
           nom: item.titre,
           urlImage: item.urlImage,
         }))
-        .slice(0, 21),
+        .slice(0, 18),
     );
   }
 }

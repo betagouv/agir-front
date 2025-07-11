@@ -19,13 +19,13 @@
     </template>
     <ul v-else-if="articlesRecommandes" class="fr-grid-row fr-grid-row--gutters list-style-none">
       <li v-for="article in articlesRecommandes" :key="article.id" class="fr-col-12 fr-col-sm-6 fr-col-md-3">
-        <CarteSimple :titre="article.titre" :image="article.image" :url="article.url">
-          <template v-slot:contenu v-if="article.estLocal">
+        <CarteDsfr :titre="article.titre" :image="article.image" :to="{ path: article.url }">
+          <template v-slot:contenuStart v-if="article.estLocal">
             <div class="fr-card__start fr-mb-3v">
               <p class="fr-tag fr-icon-map-pin-2-fill fr-tag--icon-left tag--pdcn">Près de chez moi</p>
             </div>
           </template>
-        </CarteSimple>
+        </CarteDsfr>
       </li>
     </ul>
   </div>
@@ -34,7 +34,7 @@
 <script setup lang="ts">
   import { onMounted, ref } from 'vue';
   import Skeleton from '@/components/custom/Skeleton/Skeleton.vue';
-  import CarteSimple from '@/components/dsfr/CarteSimple.vue';
+  import CarteDsfr from '@/components/dsfr/CarteDsfr.vue';
   import { ArticleRepositoryAxios } from '@/domaines/article/adapters/article.repository.axios';
   import {
     ArticleRecommandeViewModel,
