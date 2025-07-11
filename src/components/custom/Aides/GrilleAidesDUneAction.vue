@@ -1,5 +1,5 @@
 <template>
-  <ul class="fr-grid-row fr-grid-row--gutters fr-mb-1w">
+  <ul class="fr-grid-row fr-grid-row--gutters fr-mb-1w list-style-none">
     <li v-for="aide in aides" :key="aide.titre" :class="['fr-col-12', troisColonnes ? 'fr-col-md-4' : 'fr-col-md-6']">
       <router-link
         :to="{
