@@ -1,5 +1,37 @@
 # Changelog
 
+## [2.15.0](https://github.com/betagouv/agir-front/compare/v2.14.0...v2.15.0) (2025-07-11)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* ajouter emojis dans les actions ([#1206](https://github.com/betagouv/agir-front/issues/1206)) ([720ae8d](https://github.com/betagouv/agir-front/commit/720ae8de2d27869362599cdf93e29287b458d790))
+* cartes de service dans les pages thématiques ([#1220](https://github.com/betagouv/agir-front/issues/1220)) ([dddb1d5](https://github.com/betagouv/agir-front/commit/dddb1d58734cf6c7e47e31cc9b9e348a1b65e0ef))
+* catalogue actions disponible sans compte ([#1215](https://github.com/betagouv/agir-front/issues/1215)) ([72ce7bd](https://github.com/betagouv/agir-front/commit/72ce7bde3fded12c71516e490715a507d8e5238b))
+* intégration Watt Watchers ([#1159](https://github.com/betagouv/agir-front/issues/1159)) ([35b6fc9](https://github.com/betagouv/agir-front/commit/35b6fc9d62dab3b24b9c9446d1ca17688741674b))
+* passer la question devient un état, mettant à jour les pourcentages d'avancement ([#1204](https://github.com/betagouv/agir-front/issues/1204)) ([be3107c](https://github.com/betagouv/agir-front/commit/be3107c2c7d8536b0fe6aac0940283f8f8aa03a2))
+* suppression d'une adresse depuis le compte ([#1217](https://github.com/betagouv/agir-front/issues/1217)) ([166aabb](https://github.com/betagouv/agir-front/commit/166aabbe1894710357549b833f33d7f51fece3e9))
+
+
+### 🐛 Corrections de bogues
+
+* affichage des pourcentages pour le simulateur voiture ([#1205](https://github.com/betagouv/agir-front/issues/1205)) ([9162210](https://github.com/betagouv/agir-front/commit/9162210d9dd76b20792a7994dccffc81c188e579))
+* bouton retour pour les services pdc et lvao ([#1213](https://github.com/betagouv/agir-front/issues/1213)) ([1913014](https://github.com/betagouv/agir-front/commit/191301401d65112984b01896a0b1346ed1a07836))
+* enlever style liste pour les aides ([#1223](https://github.com/betagouv/agir-front/issues/1223)) ([7c4d065](https://github.com/betagouv/agir-front/commit/7c4d06537ca0e6d726770339e1fddc441179d698))
+* texte carte voiture ([#1222](https://github.com/betagouv/agir-front/issues/1222)) ([64299b4](https://github.com/betagouv/agir-front/commit/64299b48b7bbee283caef876d6706c9681116bf3))
+
+
+### 👷 Autres changements
+
+* a11y divers audit flash ([#1219](https://github.com/betagouv/agir-front/issues/1219)) ([6205b67](https://github.com/betagouv/agir-front/commit/6205b67bda9afb1312450fd2d93446ad508c73c6))
+* a11y et navigation clavier ([#1216](https://github.com/betagouv/agir-front/issues/1216)) ([96a7778](https://github.com/betagouv/agir-front/commit/96a7778d8fc844127fd246bcc24691abb7bab2f4))
+* Bump @playwright/test from 1.53.1 to 1.53.2 ([#1210](https://github.com/betagouv/agir-front/issues/1210)) ([bf93bbc](https://github.com/betagouv/agir-front/commit/bf93bbc70f120fcff42a3c10715f9cc97b663102))
+* Bump @types/node from 24.0.3 to 24.0.10 ([#1209](https://github.com/betagouv/agir-front/issues/1209)) ([ca64068](https://github.com/betagouv/agir-front/commit/ca640688dab4ed9d98f8a94f310bf3321f3738aa))
+* Bump @unhead/vue from 2.0.11 to 2.0.12 ([#1212](https://github.com/betagouv/agir-front/issues/1212)) ([6b219cb](https://github.com/betagouv/agir-front/commit/6b219cbeaa2fe8764cb0c96df3793b0d42355a93))
+* Bump dotenv from 17.0.0 to 17.0.1 ([#1211](https://github.com/betagouv/agir-front/issues/1211)) ([9b6972d](https://github.com/betagouv/agir-front/commit/9b6972d086a49f6906d97044e26bd1feeedb4231))
+* Bump vue-tsc from 2.2.10 to 3.0.1 ([#1208](https://github.com/betagouv/agir-front/issues/1208)) ([772d4b1](https://github.com/betagouv/agir-front/commit/772d4b116f16f5e397ce8ac7d2614569a90895fd))
+* sign-up étiquettes et meilleurs gestions des attributs ([#1218](https://github.com/betagouv/agir-front/issues/1218)) ([183e319](https://github.com/betagouv/agir-front/commit/183e3198bc748e3672d6b561e7a5a1f5c2a953d9))
+
 ## [2.14.0](https://github.com/betagouv/agir-front/compare/v2.13.2...v2.14.0) (2025-07-07)
 
 
