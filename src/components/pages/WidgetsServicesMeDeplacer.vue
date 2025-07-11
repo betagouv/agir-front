@@ -35,7 +35,7 @@
           }"
           image="/carte_service_simu_voiture.svg"
           size="sm"
-          titre="Dois-je changer de voiture ?"
+          titre="Ma voiture : je fais le point"
           variations="shadow"
         >
           <template #contenuEnd>
