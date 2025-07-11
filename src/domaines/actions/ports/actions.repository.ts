@@ -35,6 +35,9 @@ export interface Action {
   type: TypeAction;
   dejaVue: boolean;
   emoji?: string;
+  dejaFaite: boolean;
+  labelCompteur: string;
+  explicationsRecommandations: ExplicationsRecommandation;
 }
 
 export interface ActionDetail {

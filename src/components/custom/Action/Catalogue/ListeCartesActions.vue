@@ -19,8 +19,8 @@
               <li v-if="action.aidesDisponibles" class="text--bleu fr-icon-money-euro-circle-line fr-pb-0">
                 <span class="text--gris fr-pl-1w" v-html="action.aidesDisponibles" />
               </li>
-              <li v-else-if="action.nombreDePersonnes" class="text--bleu fr-icon-team-line fr-pb-0">
-                <span class="text--gris fr-pl-1w" v-html="action.nombreDePersonnes" />&nbsp;
+              <li v-else-if="action.nombreDeParticipants" class="text--bleu fr-icon-team-line fr-pb-0">
+                <span class="text--gris fr-pl-1w" v-html="action.nombreDeParticipants" />&nbsp;
               </li>
             </ul>
           </div>
