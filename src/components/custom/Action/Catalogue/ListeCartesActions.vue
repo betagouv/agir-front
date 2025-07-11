@@ -10,17 +10,17 @@
               </router-link>
             </component>
             <ul class="fr-card__desc list-style-none fr-p-0 flex gap--small flex-wrap">
-              <li v-if="action.url.params.type === 'quizz'" class="fr-pb-0">
-                <span class="fr-badge background-bleu-light text--bleu fr-pl-1w">QUIZ</span>&nbsp;
-              </li>
-              <li v-if="action.url.params.type === 'simulateur'" class="fr-pb-0">
-                <span class="fr-badge background-bleu-light text--bleu fr-pl-1w">SIMULATEUR</span>&nbsp;
-              </li>
               <li v-if="action.aidesDisponibles" class="text--bleu fr-icon-money-euro-circle-line fr-pb-0">
                 <span class="text--gris fr-pl-1w" v-html="action.aidesDisponibles" />
               </li>
               <li v-else-if="action.nombreDeParticipants" class="text--bleu fr-icon-team-line fr-pb-0">
                 <span class="text--gris fr-pl-1w" v-html="action.nombreDeParticipants" />&nbsp;
+              </li>
+              <li v-if="action.url.params.type === 'quizz'" class="fr-pb-0">
+                <span class="fr-badge background-bleu-light text--bleu fr-pl-1w">QUIZ</span>&nbsp;
+              </li>
+              <li v-if="action.url.params.type === 'simulateur'" class="fr-pb-0">
+                <span class="fr-badge background-bleu-light text--bleu fr-pl-1w">SIMULATEUR</span>&nbsp;
               </li>
             </ul>
           </div>

@@ -81,7 +81,7 @@ describe('Fichier de tests concernant la récupération des actions recommandée
               text: 'Déjà consultée',
             },
             nombreDeParticipants: '<span class="text--bold">4 actions</span> réalisées',
-            aidesDisponibles: '<span aria-hidden="true">💰</span><span class="text--bold">5</span> aides disponibles',
+            aidesDisponibles: '<span class="text--bold">5</span> aides disponibles',
           },
         ]);
       }),

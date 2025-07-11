@@ -76,7 +76,7 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
           ],
           label: { text: 'Déjà consultée', color: '' },
           nombreDeParticipants: '0 action réalisée',
-          aidesDisponibles: '<span aria-hidden="true">💰</span><span class="text--bold">5</span> aides disponibles',
+          aidesDisponibles: '<span class="text--bold">5</span> aides disponibles',
         },
       ]);
     }
