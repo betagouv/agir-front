@@ -13,7 +13,11 @@
           id="dpe-A"
           name="dpe"
         />
-        <label class="fr-label fr-label--dpe" for="dpe-A"><span class="dpe dpe--a">A</span></label>
+        <label class="fr-label" for="dpe-A">
+          <span class="dpe dpe--a">
+            <span class="cercle-blanc">A</span>
+          </span>
+        </label>
       </div>
     </div>
     <div class="fr-fieldset__element fr-mb-1w">
@@ -26,7 +30,11 @@
           id="dpe-B"
           name="dpe"
         />
-        <label class="fr-label fr-label--dpe" for="dpe-B"> <span class="dpe dpe--b">B</span></label>
+        <label class="fr-label" for="dpe-B">
+          <span class="dpe dpe--b">
+            <span class="cercle-blanc">B</span>
+          </span>
+        </label>
       </div>
     </div>
     <div class="fr-fieldset__element fr-mb-1w">
@@ -39,7 +47,11 @@
           id="dpe-C"
           name="dpe"
         />
-        <label class="fr-label fr-label--dpe" for="dpe-C"><span class="dpe dpe--c">C</span></label>
+        <label class="fr-label" for="dpe-C">
+          <span class="dpe dpe--c">
+            <span class="cercle-blanc">C</span>
+          </span>
+        </label>
       </div>
     </div>
     <div class="fr-fieldset__element fr-mb-1w">
@@ -52,7 +64,11 @@
           id="dpe-D"
           name="dpe"
         />
-        <label class="fr-label fr-label--dpe" for="dpe-D"> <span class="dpe dpe--d">D</span> </label>
+        <label class="fr-label" for="dpe-D">
+          <span class="dpe dpe--d">
+            <span class="cercle-blanc">D</span>
+          </span>
+        </label>
       </div>
     </div>
     <div class="fr-fieldset__element fr-mb-1w">
@@ -65,7 +81,11 @@
           id="dpe-E"
           name="dpe"
         />
-        <label class="fr-label fr-label--dpe" for="dpe-E"> <span class="dpe dpe--e active">E</span></label>
+        <label class="fr-label" for="dpe-E">
+          <span class="dpe dpe--e active">
+            <span class="cercle-blanc">E</span>
+          </span>
+        </label>
       </div>
     </div>
     <div class="fr-fieldset__element fr-mb-1w">
@@ -78,7 +98,11 @@
           id="dpe-F"
           name="dpe"
         />
-        <label class="fr-label fr-label--dpe" for="dpe-F"> <span class="dpe dpe--f">F</span></label>
+        <label class="fr-label" for="dpe-F">
+          <span class="dpe dpe--f">
+            <span class="cercle-blanc">F</span>
+          </span>
+        </label>
       </div>
     </div>
     <div class="fr-fieldset__element fr-mb-1w">
@@ -91,7 +115,11 @@
           id="dpe-G"
           name="dpe"
         />
-        <label class="fr-label fr-label--dpe" for="dpe-G"> <span class="dpe dpe--g">G</span></label>
+        <label class="fr-label" for="dpe-G">
+          <span class="dpe dpe--g">
+            <span class="cercle-blanc">G</span>
+          </span>
+        </label>
       </div>
     </div>
     <div class="fr-fieldset__element fr-mb-1w">
@@ -163,6 +191,7 @@
   .dpe--a {
     width: 20%;
     background-color: #009c6d;
+    color: #0c6b48;
   }
 
   .dpe--a::after {
@@ -172,6 +201,7 @@
   .dpe--b {
     width: 30%;
     background-color: #52b153;
+    color: #346c35;
   }
 
   .dpe--b::after {
@@ -181,6 +211,7 @@
   .dpe--c {
     width: 40%;
     background-color: #78bd0b;
+    color: #4d7c04;
   }
 
   .dpe--c::after {
@@ -190,6 +221,7 @@
   .dpe--d {
     width: 50%;
     background-color: #f4e70f;
+    color: #757200;
   }
 
   .dpe--d::after {
@@ -199,6 +231,7 @@
   .dpe--e {
     width: 60%;
     background-color: #f0b50f;
+    color: #795a00;
   }
 
   .dpe--e::after {
@@ -208,6 +241,7 @@
   .dpe--f {
     width: 70%;
     background-color: #eb8235;
+    color: #9d541f;
   }
 
   .dpe--f::after {
@@ -217,6 +251,7 @@
   .dpe--g {
     width: 80%;
     background-color: #d7221f;
+    color: #d7221f;
   }
 
   .dpe--g::after {
@@ -247,5 +282,15 @@
     border-width: 25px 0 25px 25px;
     border-color: transparent transparent transparent blue;
     transform: translateY(-50%);
+  }
+
+  .cercle-blanc {
+    background: white;
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 </style>

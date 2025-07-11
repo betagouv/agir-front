@@ -36,7 +36,7 @@
   @media (min-width: 48rem) {
     .rappel-app-cta {
       background-image: url('/hp-background-rappel-app-cta.webp');
-      background-position: 70% bottom;
+      background-position: 75% bottom;
       background-repeat: no-repeat;
       background-size: auto 90%;
     }

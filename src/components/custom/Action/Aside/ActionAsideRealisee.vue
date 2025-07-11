@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-space-between align-items--center">
     <div>
-      <h2 class="fr-h4 fr-mb-1w" v-text="titre" />
+      <h2 class="fr-h4 fr-mb-1w" v-html="titre" />
       <p class="fr-mb-0" v-text="sousTitre" />
     </div>
 
@@ -21,7 +21,7 @@
       sousTitre?: string;
     }>(),
     {
-      titre: 'Bravo ! 🎉',
+      titre: 'Bravo ! <span aria-hidden="true">🎉</span>',
       sousTitre: 'Vous avez réalisé cette action',
     },
   );

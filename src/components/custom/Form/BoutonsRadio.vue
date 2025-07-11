@@ -9,7 +9,7 @@
       :class="legendeSize === 'l' ? 'fr-h4' : 'fr-mb-1w'"
       class="fr-fieldset__legend--regular fr-fieldset__legend fr-pb-0"
     >
-      {{ legende }}
+      <slot name="legende">{{ legende }}</slot>
       <span v-if="description" class="fr-hint-text">{{ description }}</span>
     </legend>
     <div class="fr-grid-row">

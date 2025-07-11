@@ -2,14 +2,18 @@
   <form @submit.prevent="validerLaReponse">
     <BoutonsRadio
       :options="questions"
-      :legende="question"
       legende-size="l"
+      legende=""
       col=""
       orientation="vertical"
       name="questionDuQuiz"
       v-model="valueInput"
       :defaultValue="valueInput"
-    />
+    >
+      <template #legende>
+        <h2 class="fr-h4" v-text="question" />
+      </template>
+    </BoutonsRadio>
 
     <Alert
       v-if="alerte.isActive"
