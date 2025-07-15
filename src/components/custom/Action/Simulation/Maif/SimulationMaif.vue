@@ -53,14 +53,6 @@
       </div>
     </div>
   </section>
-
-  <CarteExterne
-    :lien="{ url: 'https://auxalentours.maif.fr/', urlAffichee: 'https://auxalentours.maif.fr/' }"
-    class="shadow fr-mb-2w"
-    description="Exposition aux risques climatiques, services de proximité, prix de l’immobilier… Retrouvez toutes les informations utiles aux alentours de votre adresse&nbsp;!"
-    image-src="/maif-aux-alentours.webp"
-    titre="Aux Alentours par MAIF"
-  />
 </template>
 
 <script lang="ts" setup>
@@ -69,7 +61,6 @@
   import BarreDeRechercheAdresse from '@/components/custom/Form/BarreDeRechercheAdresse.vue';
   import BallLoader from '@/components/custom/Thematiques/BallLoader.vue';
   import Callout from '@/components/dsfr/Callout.vue';
-  import CarteExterne from '@/components/dsfr/CarteExterne.vue';
   import { useAdressePrincipale } from '@/composables/useAdressePrincipale';
   import { ActionsEventBus } from '@/domaines/actions/actions.eventbus';
   import { ActionsRepositoryAxios } from '@/domaines/actions/adapters/actions.repository.axios';

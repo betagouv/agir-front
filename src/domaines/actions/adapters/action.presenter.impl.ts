@@ -2,6 +2,7 @@ import { ExplicationsRecommandation } from '@/domaines/actions/explicationsRecom
 import {
   ActionBilanViewModel,
   ActionClassiqueViewModel,
+  ActionPartenaireViewModel,
   ActionPresenter,
   ActionQuizzesViewModel,
   ActionSimulateurViewModel,
@@ -14,6 +15,7 @@ import cacherEmojisAuxLecteursDecrans from '@/shell/cacherEmojisAuxLecteursDecra
 import { nettoyerEtGarderContenuTextuel } from '@/shell/nettoyerEtGarderContenuTextuel';
 import { nettoyerEtGarderLettresEtChiffres } from '@/shell/nettoyerEtGarderLettresEtChiffres';
 import { MontantAfficheEnFRBuilder } from '@/shell/nombreAfficheEnFRBuilder';
+import { SimulateursSupportes } from '@/shell/simulateursSupportes';
 
 class ActionViewModelBuilder {
   static async buildClassique(action: ActionDetail): Promise<ActionClassiqueViewModel> {
@@ -83,6 +85,8 @@ class ActionViewModelBuilder {
 
   static async buildSimulateur(action: ActionDetail): Promise<ActionSimulateurViewModel> {
     const common = await this.buildCommonFields(action);
+    const partenaire = this.buildSimulateurPartenaire(action.code);
+
     return {
       ...common,
       titreAffiche: `Simulateur - ${common.titre}`,
@@ -93,6 +97,7 @@ class ActionViewModelBuilder {
         url: `/article/${buildUrl(article.titre)}/${article.id}`,
       })),
       idEnchainementKYCs: action.idEnchainementKYCs,
+      partenaire,
     };
   }
 
@@ -165,6 +170,15 @@ class ActionViewModelBuilder {
         return explicationInclusion.labelExplication;
       }),
     };
+  }
+
+  private static buildSimulateurPartenaire(code: string): ActionPartenaireViewModel | undefined {
+    if (code === SimulateursSupportes.MAIF)
+      return {
+        nom: 'Aux Alentours par MAIF',
+        url: 'https://auxalentours.maif.fr/',
+        logo: '/maif-aux-alentours.webp',
+      };
   }
 }
 
