@@ -17,7 +17,7 @@ import { nettoyerEtGarderLettresEtChiffres } from '@/shell/nettoyerEtGarderLettr
 import { MontantAfficheEnFRBuilder } from '@/shell/nombreAfficheEnFRBuilder';
 import { SimulateursSupportes } from '@/shell/simulateursSupportes';
 
-class ActionViewModelBuilder {
+export class ActionViewModelBuilder {
   static async buildClassique(action: ActionDetail): Promise<ActionClassiqueViewModel> {
     const common = await this.buildCommonFields(action);
     const [astuces, faq] = await Promise.all([

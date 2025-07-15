@@ -1,6 +1,6 @@
 import { ChargerActionStrategyFactory, ChargerActionUsecase } from '@/domaines/actions/chargerAction.usecase';
 import { ActionsRepositoryMock } from './adapters/actions.repository.mock';
-import { ActionPresenterImpl } from '@/domaines/actions/adapters/action.presenter.impl';
+import { ActionPresenterImpl, ActionViewModelBuilder } from '@/domaines/actions/adapters/action.presenter.impl';
 import { ActionSimulateurViewModel } from '@/domaines/actions/ports/action.presenter';
 import { ActionDetail, TypeAction } from '@/domaines/actions/ports/actions.repository';
 import { ChargerActionClassiqueUsecase } from '@/domaines/actions/chargerActionClassique.usecase';
@@ -9,6 +9,7 @@ import { ChargerActionSimulateurUsecase } from '@/domaines/actions/chargerAction
 import { ChargerActionBilanUsecase } from '@/domaines/actions/chargerActionBilan.usecase';
 import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 import { ExplicationsRecommandation } from '@/domaines/actions/explicationsRecommandation';
+import { SimulateursSupportes } from '@/shell/simulateursSupportes';
 
 describe("Fichier de tests concernant la récupération d'une action de type simulateur", () => {
   it("En donnant l'id d'une action, on devrait pouvoir récupérer son entiereté", async () => {
@@ -105,6 +106,7 @@ describe("Fichier de tests concernant la récupération d'une action de type sim
     function expected(viewModel: ActionSimulateurViewModel): void {
       expect(viewModel).toStrictEqual<ActionSimulateurViewModel>({
         realisee: false,
+        partenaire: undefined,
         points: 30,
         consigne: 'Consigne',
         labelCompteur: '100 simulateurs réalisés',
@@ -174,5 +176,42 @@ describe("Fichier de tests concernant la récupération d'une action de type sim
         },
       });
     }
+  });
+
+  it('devrait inclure les informations du partenaire MAIF', async () => {
+    // Given
+    const actionMinimale: ActionDetail = {
+      corps: { astuces: '', introduction: '' },
+      commune: '',
+      explicationsRecommandations: new ExplicationsRecommandation(false, []),
+      idEnchainementKYCs: '',
+      nombreAidesDisponibles: 0,
+      thematique: ClefThematiqueAPI.alimentation,
+      type: TypeAction.SIMULATEUR,
+      code: SimulateursSupportes.MAIF,
+      titre: 'Titre simulateur',
+      sousTitre: 'Sous-titre',
+      emoji: '',
+      realisee: false,
+      nombreDeRealisations: 0,
+      points: 10,
+      consigne: '',
+      labelCompteur: '',
+      sources: [],
+      articles: [],
+      aides: [],
+      services: [],
+      faq: [],
+    };
+
+    // When
+    const resultat = await ActionViewModelBuilder.buildSimulateur(actionMinimale);
+
+    // Then
+    expect(resultat.partenaire).toEqual({
+      nom: 'Aux Alentours par MAIF',
+      url: 'https://auxalentours.maif.fr/',
+      logo: '/maif-aux-alentours.webp',
+    });
   });
 });
