@@ -47,7 +47,10 @@ export class ServiceRechercheRecettesAxios implements ServiceRechercheRecettesRe
   @intercept40X()
   async recupererService(
     idUtilisateur: string,
-    type: string,
+    type: {
+      categorie: string;
+      sousCategorie?: string;
+    },
     nombreMaxResultats: number,
   ): Promise<ServiceRechercheRecettes> {
     const idService = 'recettes';
@@ -60,7 +63,8 @@ export class ServiceRechercheRecettesAxios implements ServiceRechercheRecettesRe
     const response = await axiosInstance.post<ServiceRechercheRecettesApiResultatsModel>(
       `/utilisateurs/${idUtilisateur}/recherche_services/${idService}/search2`,
       {
-        categorie: type,
+        categorie: type.categorie,
+        sous_categorie: type.sousCategorie,
         nombre_max_resultats: nombreMaxResultats,
         rayon_metres: 5000,
       },

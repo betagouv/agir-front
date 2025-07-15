@@ -24,7 +24,10 @@ export class RecupererServiceRecettesUsecase {
 
   async execute(
     idUtilisateur: string,
-    typeRecette: string,
+    typeRecette: {
+      categorie: string;
+      sous_catagorie?: string;
+    },
     nombreMaxResultats: number,
     recupererServiceRechercheRecettesPresenter: ServiceRechercheRecettesPresenter,
   ) {

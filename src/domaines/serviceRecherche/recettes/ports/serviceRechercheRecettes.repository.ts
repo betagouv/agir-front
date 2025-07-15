@@ -4,8 +4,12 @@ import { ServiceRechercheRecettes } from '@/domaines/serviceRecherche/recettes/r
 export interface ServiceRechercheRecettesRepository {
   recupererService(
     idUtilisateur: string,
-    typeRecette: string,
+    typeRecette: {
+      categorie: string;
+      sous_catagorie?: string;
+    },
     nombreMaxResultats: number,
   ): Promise<ServiceRechercheRecettes>;
+
   recupererDetailRecette(idUtilisateur: string, idRecette: string): Promise<Recette>;
 }

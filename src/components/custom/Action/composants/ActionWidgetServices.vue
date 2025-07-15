@@ -12,14 +12,17 @@
       </WidgetServiceRecettes>
 
       <section v-if="service.type === 'longue_vie_objets'" class="fr-mt-4w">
-        <WidgetServiceLongueVieAuxObjets :commune="commune" :parametre-de-recherche="service.parametreDuService" />
+        <WidgetServiceLongueVieAuxObjets
+          :commune="commune"
+          :parametre-de-recherche="service.parametreDuService.categorie"
+        />
       </section>
 
       <section v-if="service.type === 'proximite'" class="fr-mt-4w">
         <WidgetServicePresDeChezNous
           :commune="commune"
-          :parametre-de-recherche="service.parametreDuService"
           :nombre-de-cartes-par-ligne="2"
+          :parametre-de-recherche="service.parametreDuService"
         />
       </section>
     </div>

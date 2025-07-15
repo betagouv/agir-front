@@ -81,11 +81,11 @@ describe("Fichier de tests concernant la récupération d'une action de type cla
       services: [
         {
           type: 'recettes',
-          parametreDuService: 'recette-vegetarienne',
+          parametreDuService: { categorie: 'recette-vegetarienne' },
         },
         {
           type: 'longue_vie_objets',
-          parametreDuService: 'reparer',
+          parametreDuService: { categorie: 'reparer' },
         },
       ],
       faq: [
@@ -172,11 +172,15 @@ describe("Fichier de tests concernant la récupération d'une action de type cla
         ],
         services: [
           {
-            parametreDuService: 'recette-vegetarienne',
+            parametreDuService: {
+              categorie: 'recette-vegetarienne',
+            },
             type: 'recettes',
           },
           {
-            parametreDuService: 'reparer',
+            parametreDuService: {
+              categorie: 'reparer',
+            },
             type: 'longue_vie_objets',
           },
         ],

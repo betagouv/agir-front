@@ -32,6 +32,7 @@ interface ActionDetailApiModel {
   services: {
     categorie: string;
     recherche_service_id: string;
+    sous_categorie?: string;
   }[];
   quizz_felicitations: string;
   aides: {
@@ -266,7 +267,10 @@ export class ActionsRepositoryAxios implements ActionsRepository {
       realisee: actionDetailApiModel.deja_faite,
       services: actionDetailApiModel.services.map(service => ({
         type: service.recherche_service_id as 'recettes' | 'longue_vie_objets' | 'proximite',
-        parametreDuService: service.categorie,
+        parametreDuService: {
+          categorie: service.categorie,
+          sousCategorie: service.sous_categorie,
+        },
       })),
       quizzes: actionDetailApiModel.quizzes.map(quiz => mapQuizApi(quiz)),
       aides: actionDetailApiModel.aides.map(aide => ({

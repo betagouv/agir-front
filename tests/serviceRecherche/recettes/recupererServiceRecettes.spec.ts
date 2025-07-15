@@ -1,10 +1,10 @@
 import {
   ServiceRechercheRecettesPresenterImpl,
   ServiceRechercheRecettesViewModel,
-} from '../../../src/domaines/serviceRecherche/recettes/adapters/serviceRechercheRecettes.presenter.impl';
-import { RecupererServiceRecettesUsecase } from '../../../src/domaines/serviceRecherche/recettes/recupererServiceRecettes.usecase';
+} from '@/domaines/serviceRecherche/recettes/adapters/serviceRechercheRecettes.presenter.impl';
+import { RecupererServiceRecettesUsecase } from '@/domaines/serviceRecherche/recettes/recupererServiceRecettes.usecase';
 import { ServiceRechercheRecettesMock } from './adapters/serviceRechercheRecettes.repository.mock';
-import { RouteServiceName } from '../../../src/router/services/routes';
+import { RouteServiceName } from '@/router/services/routes';
 
 describe('Fichier de tests concernant le service Recettes', () => {
   it("en donnant l'id d'un utilisateur et un type de catégorie, renvoie les recettes associées", async () => {
@@ -52,7 +52,14 @@ describe('Fichier de tests concernant le service Recettes', () => {
     );
 
     // WHEN
-    await usecase.execute('idUtilisateur', 'idService', 10, new ServiceRechercheRecettesPresenterImpl(expectation));
+    await usecase.execute(
+      'idUtilisateur',
+      {
+        categorie: 'categorie',
+      },
+      10,
+      new ServiceRechercheRecettesPresenterImpl(expectation),
+    );
 
     // THEN
     function expectation(serviceRechercheRecettesViewModel: ServiceRechercheRecettesViewModel) {
