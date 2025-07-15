@@ -76,7 +76,7 @@
         codePostal: onboardingPostCreationCompte().codePostal,
       })
       .then(async () => {
-        await router.replace({ name: RouteCompteName.POST_CREATION_COMPTE_DISCLAIMER });
+        await router.replace({ name: RouteCompteName.POST_CREATION_COMPTE_ETAPE_3 });
       })
       .catch(error => {
         afficherAlerte(

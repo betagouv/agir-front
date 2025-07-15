@@ -5,10 +5,10 @@
     <p v-else-if="!aides">Une erreur est survenue</p>
     <template v-else>
       <div v-if="!aides.utilisateurEstCouvert" class="fr-alert fr-alert--info fr-mb-4w">
-        <h3 class="fr-alert__title">Votre ville n’est pas encore couverte par le service J'agis.</h3>
+        <h3 class="fr-alert__title">Plus de 1000 aides sont listées dans J'agis</h3>
         <p>
-          Nous mettons les informations à jour progressivement. N'hésitez pas à nous en partager à
-          <a href="mailto:contact@jagis.beta.gouv.fr">contact@jagis.beta.gouv.fr</a> !
+          Une erreur ou une aide manquante&nbsp;? N'hésitez pas à nous écrire à
+          <a href="mailto:contact@jagis.beta.gouv.fr">contact@jagis.beta.gouv.fr</a>&nbsp;!
         </p>
       </div>
       <Aides :aidesGroupesParCategorie="aides.aides" />
