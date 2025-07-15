@@ -1,0 +1,45 @@
+import { PersonnalisationRepository } from '@/domaines/personnalisation/ports/personnalisation.repository';
+
+export class PersonnalisationRepositoryAxios implements PersonnalisationRepository {
+  async recupererTagsPersonnalisation(): Promise<string[]> {
+    return [
+      'est_proprietaire',
+      'n_est_pas_proprietaire',
+      'est_locataire',
+      'mange_de_la_viande',
+      'prend_l_avion',
+      'a_une_voiture',
+      'n_a_pas_de_voiture',
+      'ne_prend_pas_avion',
+      'a_un_velo',
+      'a_une_voiture_thermique',
+      'a_une_voiture_electrique',
+      'ne_mange_pas_de_viande_rouge',
+      'ne_mange_pas_de_viande',
+      'mange_de_saison',
+      'ne_mange_pas_de_saison',
+      'composte',
+      'ne_composte_pas',
+      'ne_mange_pas_local',
+      'mange_local',
+      'a_un_jardin',
+      'n_a_pas_de_jardin',
+      'a_chauffage_elec',
+      'n_a_pas_chauffage_elec',
+      'a_fait_travaux_recents',
+      'prend_soin_objets',
+      'achete_peu_et_occasion',
+      'vit_en_appart',
+      'vit_en_maison',
+      'est_un_contenu_local',
+      'appetence_thematique_logement',
+      'appetence_thematique_transport',
+      'appetence_thematique_consommation',
+      'appetence_thematique_alimentation',
+      'habite_zone_peri_urbaine',
+      'habite_zone_urbaine',
+      'habite_zone_rurale',
+      'contenu_important',
+    ];
+  }
+}
