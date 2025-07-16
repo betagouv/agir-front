@@ -162,6 +162,14 @@
         recherche.value = barreDeRechercheViewModel.recherche;
         adresse.value = {
           ...barreDeRechercheViewModel.adresse,
+          numeroEtRueEtCodePostal: '',
+          numeroEtRue: '',
+          commune: '',
+          departement: '',
+          coordonnees: {
+            latitude: coordonnees.value?.latitude ?? 0,
+            longitude: coordonnees.value?.longitude ?? 0,
+          },
         };
       },
     );
