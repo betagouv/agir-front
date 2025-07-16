@@ -25,7 +25,9 @@ export class BarreDeRecherchePresenterImpl implements BarreDeRecherchePresenter 
         latitude: adresse.coordonnees.latitude,
         longitude: adresse.coordonnees.longitude,
       },
-      recherche: `${adresse.numeroRue} ${adresse.rue}, ${adresse.commune_label} (${adresse.codePostal})`,
+      recherche: adresse.numeroRue
+        ? `${adresse.numeroRue} ${adresse.rue}, ${adresse.commune_label} (${adresse.codePostal})`
+        : '',
       adresse: {
         codePostal: adresse.codePostal,
         numeroRue: adresse.numeroRue,

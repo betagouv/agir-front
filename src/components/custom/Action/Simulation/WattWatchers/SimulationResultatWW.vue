@@ -25,7 +25,7 @@
       <h2>Paramètres</h2>
       <p>Vous avez changé d’adresse ou effectué des travaux importants dans votre habitation&nbsp;?</p>
       <button class="fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-refresh-line" @click="onRecommencerClicked">
-        Recommencer
+        Recommencer le questionnaire
       </button>
     </div>
   </div>
