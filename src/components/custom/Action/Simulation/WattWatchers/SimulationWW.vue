@@ -49,5 +49,5 @@
     SIMULATEUR = 'resultat',
   }
 
-  const etapeActuelle = ref<EtapeSimulateur>(EtapeSimulateur.RENSEIGNEMENT);
+  const etapeActuelle = ref<EtapeSimulateur>(EtapeSimulateur.INTRODUCTION);
 </script>
