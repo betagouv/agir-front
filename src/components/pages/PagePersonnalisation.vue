@@ -12,11 +12,11 @@
         label="Thématiques"
       />
 
-      <button class="fr-btn">Charger la personnalisation</button>
+      <button class="fr-btn fr-mb-4w">Charger la personnalisation</button>
     </form>
 
     <section v-if="previewActions">
-      <h2 class="fr-h2 fr-mt-4w fr-mb-1w">Actions personnalisées</h2>
+      <h2 class="fr-h2 fr-mb-1w">Actions personnalisées</h2>
 
       <ThematiquePreview titre="Me nourrir" :actions="previewActions.alimentation" />
       <ThematiquePreview titre="Me loger" :actions="previewActions.logement" />
@@ -34,6 +34,7 @@
   import { PreviewActionsParThematique } from '@/domaines/personnalisation/ports/personnalisation.repository';
   import { RecupererTousLesTagsPersonnalisation } from '@/domaines/personnalisation/recupererTousLesTagsPersonnalisation.usecase';
 
+  const CLE_STORAGE_OPTIONS = 'personnalisation_options_checkbox';
   const personnalisationRepository = new PersonnalisationRepositoryAxios();
   const tags = ref<string[]>([]);
   const previewActions = ref<PreviewActionsParThematique>();
@@ -56,11 +57,36 @@
       label: tag,
       checked: false,
     }));
+
+    restaurerOptionsCheckbox();
   });
+
+  function restaurerOptionsCheckbox() {
+    try {
+      const optionsSauvegardees = localStorage.getItem(CLE_STORAGE_OPTIONS);
+
+      if (optionsSauvegardees) {
+        const optionsCochees = JSON.parse(optionsSauvegardees) as string[];
+
+        optionsCheckbox.value = optionsCheckbox.value.map(option => ({
+          ...option,
+          checked: optionsCochees.includes(option.id),
+        }));
+      }
+    } catch (error) {
+      return;
+    }
+  }
+
+  function sauvegarderOptionsCheckbox(nouvellesOptions) {
+    optionsCheckbox.value = nouvellesOptions;
+    localStorage.setItem(CLE_STORAGE_OPTIONS, JSON.stringify(nouvellesOptions));
+  }
 
   async function chargerActionsPersonnalisees() {
     const tagsSelectionnes = optionsCheckbox.value.filter(option => option.checked).map(option => option.id);
     previewActions.value = await personnalisationRepository.recupererActionsAvecTags(tagsSelectionnes);
+    sauvegarderOptionsCheckbox(tagsSelectionnes);
   }
 </script>
 
