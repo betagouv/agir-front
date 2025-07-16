@@ -182,6 +182,7 @@ describe('Fichier de tests pour charger toutes les aides', () => {
           '🍛 Me nourrir': [
             {
               estGratuit: false,
+              estSimulateur: true,
               id: 'id-3',
               montantMaximum: undefined,
               partenaireImg: undefined,
@@ -191,6 +192,7 @@ describe('Fichier de tests pour charger toutes les aides', () => {
             },
             {
               estGratuit: false,
+              estSimulateur: true,
               id: 'id-4',
               montantMaximum: undefined,
               partenaireImg: undefined,
@@ -200,6 +202,7 @@ describe('Fichier de tests pour charger toutes les aides', () => {
             },
             {
               estGratuit: false,
+              estSimulateur: true,
               id: 'id-5',
               montantMaximum: undefined,
               partenaireImg: undefined,
@@ -209,6 +212,7 @@ describe('Fichier de tests pour charger toutes les aides', () => {
             },
             {
               estGratuit: false,
+              estSimulateur: true,
               id: 'id-6',
               montantMaximum: undefined,
               partenaireImg: undefined,
@@ -218,6 +222,7 @@ describe('Fichier de tests pour charger toutes les aides', () => {
             },
             {
               estGratuit: false,
+              estSimulateur: true,
               id: 'id-7',
               montantMaximum: undefined,
               partenaireImg: 'https://',
@@ -229,6 +234,7 @@ describe('Fichier de tests pour charger toutes les aides', () => {
           '🚅 Me déplacer': [
             {
               estGratuit: false,
+              estSimulateur: true,
               id: 'id-1',
               montantMaximum: '15 000 €',
               partenaireImg: undefined,
@@ -238,6 +244,7 @@ describe('Fichier de tests pour charger toutes les aides', () => {
             },
             {
               estGratuit: true,
+              estSimulateur: false,
               id: 'id-2',
               montantMaximum: undefined,
               partenaireImg: undefined,

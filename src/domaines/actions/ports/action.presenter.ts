@@ -99,6 +99,7 @@ export interface ActionAideViewModel {
   partenaireImg?: string;
   montantMaximum?: string;
   estGratuit: boolean;
+  estSimulateur?: boolean;
 }
 
 export interface ActionFAQViewModel {

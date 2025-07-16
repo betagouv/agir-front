@@ -140,7 +140,7 @@ class ActionViewModelBuilder {
     };
   }
 
-  private static buildAides(aides: ActionDetail['aides']) {
+  private static buildAides(aides: ActionDetail['aides']): ActionClassiqueViewModel['aides'] {
     return aides.map(aide => ({
       titre: aide.titre,
       titreUrl: buildUrl(aide.titre),
