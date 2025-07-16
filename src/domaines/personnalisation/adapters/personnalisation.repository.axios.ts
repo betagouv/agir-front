@@ -1,4 +1,24 @@
-import { PersonnalisationRepository } from '@/domaines/personnalisation/ports/personnalisation.repository';
+import { AxiosFactory } from '@/axios.factory';
+import {
+  PersonnalisationRepository,
+  PreviewActionsParThematique,
+} from '@/domaines/personnalisation/ports/personnalisation.repository';
+import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
+
+type PersonnalisationDuneActionApiModel = {
+  thematique: ClefThematiqueAPI;
+  titre: string;
+  type: 'classique' | 'exclue';
+  pourcentage_reco: number;
+  est_exclue: boolean;
+};
+
+interface PreviewActionsParThematiqueApiModel {
+  logement: PersonnalisationDuneActionApiModel[];
+  transport: PersonnalisationDuneActionApiModel[];
+  consommation: PersonnalisationDuneActionApiModel[];
+  alimentation: PersonnalisationDuneActionApiModel[];
+}
 
 export class PersonnalisationRepositoryAxios implements PersonnalisationRepository {
   async recupererTagsPersonnalisation(): Promise<string[]> {
@@ -41,5 +61,50 @@ export class PersonnalisationRepositoryAxios implements PersonnalisationReposito
       'habite_zone_rurale',
       'contenu_important',
     ];
+  }
+
+  async recupererActionsAvecTags(tags: string[]): Promise<PreviewActionsParThematique> {
+    const axios = AxiosFactory.getAxios();
+
+    const params = new URLSearchParams();
+    tags.forEach(tag => params.append('tag', tag));
+
+    const response = await axios.get<PreviewActionsParThematiqueApiModel>(
+      `/recommandation/simulateur_actions_recommandees`,
+      {
+        params,
+      },
+    );
+
+    return {
+      logement: response.data.logement.map(action => ({
+        thematique: action.thematique,
+        titre: action.titre,
+        type: action.type,
+        pourcentageReco: action.pourcentage_reco,
+        estExclue: action.est_exclue,
+      })),
+      transport: response.data.transport.map(action => ({
+        thematique: action.thematique,
+        titre: action.titre,
+        type: action.type,
+        pourcentageReco: action.pourcentage_reco,
+        estExclue: action.est_exclue,
+      })),
+      consommation: response.data.consommation.map(action => ({
+        thematique: action.thematique,
+        titre: action.titre,
+        type: action.type,
+        pourcentageReco: action.pourcentage_reco,
+        estExclue: action.est_exclue,
+      })),
+      alimentation: response.data.alimentation.map(action => ({
+        thematique: action.thematique,
+        titre: action.titre,
+        type: action.type,
+        pourcentageReco: action.pourcentage_reco,
+        estExclue: action.est_exclue,
+      })),
+    };
   }
 }
