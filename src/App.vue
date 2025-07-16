@@ -13,7 +13,7 @@
               utilisateurStore().disclaimer.afficherDisclaimerGeneral = false;
             }
           "
-          description="Cette version est encore très incomplète et de nombreuses évolutions et fonctionnalités sont mises en ligne chaque semaine. Inscrivez votre adresse email pour rejoindre notre panel de testeurs et contribuer à améliorer le service en <a href='https://b029fbad.sibforms.com/serve/MUIFALN3NABQgqBf5ZPVBIgPB_bi1GkicKmIAdE7dqg63tpTI7WQsyfjqlsPcqWUUiVxjNekJiDFJa06h8OEVnxxq43owLJUx65lJJ2xL2EbtQC23pezmw3ZfNItzJ78mNnslLcUJhXA-jQRpX2kOxq1VkC9C0sj-NRQ9vME_ubn2H-vsNe3v_4_48bajjrJZHHaYHUiTHA3Esof' rel='noopener noreferrer' target='_blank' >cliquant ici.</a>"
+          description="De nombreuses évolutions et fonctionnalités sont mises en ligne chaque semaine. Rejoignez notre panel de testeurs pour nous aider à améliorer le service en <a href='https://b029fbad.sibforms.com/serve/MUIFALN3NABQgqBf5ZPVBIgPB_bi1GkicKmIAdE7dqg63tpTI7WQsyfjqlsPcqWUUiVxjNekJiDFJa06h8OEVnxxq43owLJUx65lJJ2xL2EbtQC23pezmw3ZfNItzJ78mNnslLcUJhXA-jQRpX2kOxq1VkC9C0sj-NRQ9vME_ubn2H-vsNe3v_4_48bajjrJZHHaYHUiTHA3Esof' rel='noopener noreferrer' target='_blank' >cliquant ici.</a>"
           titre="J'agis est un nouveau service !"
         />
       </template>

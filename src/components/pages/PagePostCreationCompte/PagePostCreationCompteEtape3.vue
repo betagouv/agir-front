@@ -12,7 +12,7 @@
         @update:soumission-kyc="validerLaReponse"
         @update:passer-la-question="validerLaReponse"
       >
-        <router-link :to="{ name: RouteCompteName.POST_CREATION_COMPTE_DISCLAIMER }" class="fr-link fr-ml-4w fr-mt-1v">
+        <router-link :to="{ name: RouteCompteName.POST_CREATION_COMPTE_ETAPE_2 }" class="fr-link fr-ml-4w fr-mt-1v">
           Retour
         </router-link>
       </KYCForm>
