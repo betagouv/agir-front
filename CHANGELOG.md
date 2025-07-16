@@ -1,5 +1,28 @@
 # Changelog
 
+## [2.16.0](https://github.com/betagouv/agir-front/compare/v2.15.0...v2.16.0) (2025-07-16)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* mise à jour de l'onboarding et textes des disclaimers ([#1234](https://github.com/betagouv/agir-front/issues/1234)) ([bde6caa](https://github.com/betagouv/agir-front/commit/bde6caa29863bad5a938e4cbe45c13c2ec46e2dc))
+* mise à jour de la footnote ([#1235](https://github.com/betagouv/agir-front/issues/1235)) ([1c2e93f](https://github.com/betagouv/agir-front/commit/1c2e93ff27485316e236c64b84b6a5118bf0cd32))
+
+
+### 🐛 Corrections de bogues
+
+* esthetique carte maif ([#1233](https://github.com/betagouv/agir-front/issues/1233)) ([da4a61c](https://github.com/betagouv/agir-front/commit/da4a61c31a1056e2139a4924918b34cd43669aff))
+
+
+### 👷 Autres changements
+
+* Bump @sentry/vue from 9.31.0 to 9.38.0 ([#1225](https://github.com/betagouv/agir-front/issues/1225)) ([6f178d6](https://github.com/betagouv/agir-front/commit/6f178d6d59f400da0af7160d946c8018e60ead24))
+* Bump @vitejs/plugin-vue from 5.2.4 to 6.0.0 ([#1228](https://github.com/betagouv/agir-front/issues/1228)) ([c5b0399](https://github.com/betagouv/agir-front/commit/c5b0399a84614f86c3fc6dbf52f7f3b87db5464a))
+* Bump dotenv from 17.0.1 to 17.2.0 ([#1227](https://github.com/betagouv/agir-front/issues/1227)) ([c41d7ba](https://github.com/betagouv/agir-front/commit/c41d7ba80804b409c5daab3c61a7bf6fb1dbce67))
+* Bump lighthouse from 12.6.1 to 12.8.0 ([#1226](https://github.com/betagouv/agir-front/issues/1226)) ([5869f47](https://github.com/betagouv/agir-front/commit/5869f473833d95d51f5aef2cbea639d8753c482d))
+* Bump prettier from 3.6.0 to 3.6.2 ([#1224](https://github.com/betagouv/agir-front/issues/1224)) ([99c31cd](https://github.com/betagouv/agir-front/commit/99c31cdf642a1b49d03acee0588cbc6c6e34705e))
+* passage de sous categorie pour les recettes à l'api ([#1232](https://github.com/betagouv/agir-front/issues/1232)) ([4de18ff](https://github.com/betagouv/agir-front/commit/4de18ffd9d6b0f4141211f8486a28027b2e439fa))
+
 ## [2.15.0](https://github.com/betagouv/agir-front/compare/v2.14.0...v2.15.0) (2025-07-11)
 
 
