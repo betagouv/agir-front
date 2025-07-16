@@ -5,25 +5,18 @@
     </div>
     <h1 id="label-id" class="fr-modal__title">Connexion établie</h1>
     <p class="fr-mb-1w">
-      La connexion a été établie avec succès. Dans le futur, pour modifier vos informations, rendez-vous dans votre
-      profil.
+      La connexion a été établie avec succès. Dans le futur, pour modifier vos informations, rendez-vous dans
+      <router-link :to="{ name: RouteCompteName.LOGEMENT }" class="fr-link">votre profil.</router-link>
     </p>
   </div>
   <div class="fr-modal__footer fr-mt-0">
-    <ul
-      class="fr-btns-group fr-btns-group--right fr-btns-group--inline-reverse fr-btns-group--inline-lg fr-btns-group--icon-left"
-    >
-      <li>
-        <button class="fr-btn" @click="passerEtapeSuivante">Continuer</button>
-      </li>
-      <li>
-        <button class="fr-btn fr-btn--secondary" @click="retour">Modifier le numéro</button>
-      </li>
-    </ul>
+    <button class="fr-btn full-width flex-center" @click="passerEtapeSuivante">Continuer</button>
   </div>
 </template>
 
 <script lang="ts" setup>
+  import { RouteCompteName } from '@/router/compte/routeCompteName';
+
   defineProps<{
     modaleId: string;
     numeroCompteurInput?: string;
