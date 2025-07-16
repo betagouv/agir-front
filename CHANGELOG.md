@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.17.0](https://github.com/betagouv/agir-front/compare/v2.16.0...v2.17.0) (2025-07-16)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* ajout du service maif dans la thematique logement ([#1231](https://github.com/betagouv/agir-front/issues/1231)) ([4ee5968](https://github.com/betagouv/agir-front/commit/4ee5968b9ee6a5df51d6ccf1414db8b7ba0a3a85))
+
 ## [2.16.0](https://github.com/betagouv/agir-front/compare/v2.15.0...v2.16.0) (2025-07-16)
 
 
