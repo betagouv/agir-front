@@ -1,6 +1,6 @@
 import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 
-type PersonnalisationDuneAction = {
+export type PersonnalisationDuneAction = {
   thematique: ClefThematiqueAPI;
   titre: string;
   type: 'classique' | 'exclue';

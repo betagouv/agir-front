@@ -10,11 +10,6 @@
         :options="optionsCheckbox"
         id="thematiqueArticle"
         label="Thématiques"
-        @update="
-          e => {
-            console.log(e);
-          }
-        "
       />
 
       <button class="fr-btn">Charger la personnalisation</button>
@@ -22,17 +17,11 @@
 
     <section v-if="previewActions">
       <h2 class="fr-h2 fr-mt-4w fr-mb-1w">Actions personnalisées</h2>
-      <h3>Me nourrir</h3>
-      <ul>
-        <li v-for="action in previewActions.alimentation" :key="action?.titre">
-          <p class="fr-text--bold">{{ action?.titre }}</p>
-          <p>{{ action?.type }}</p>
-          <p>{{ action?.pourcentageReco }}% recommandé</p>
-        </li>
-      </ul>
-      <h3>Me loger</h3>
-      <h3>Me déplacer</h3>
-      <h3>Mes achats</h3>
+
+      <ThematiquePreview titre="Me nourrir" :actions="previewActions.alimentation" />
+      <ThematiquePreview titre="Me loger" :actions="previewActions.logement" />
+      <ThematiquePreview titre="Me déplacer" :actions="previewActions.transport" />
+      <ThematiquePreview titre="Mes achats" :actions="previewActions.consommation" />
     </section>
   </section>
 </template>
@@ -40,6 +29,7 @@
 <script setup lang="ts">
   import { onMounted, ref } from 'vue';
   import InputCheckbox from '@/components/custom/Form/InputCheckbox.vue';
+  import ThematiquePreview from '@/components/custom/Personnalisation/ThematiquePreview.vue';
   import { PersonnalisationRepositoryAxios } from '@/domaines/personnalisation/adapters/personnalisation.repository.axios';
   import { PreviewActionsParThematique } from '@/domaines/personnalisation/ports/personnalisation.repository';
   import { RecupererTousLesTagsPersonnalisation } from '@/domaines/personnalisation/recupererTousLesTagsPersonnalisation.usecase';
