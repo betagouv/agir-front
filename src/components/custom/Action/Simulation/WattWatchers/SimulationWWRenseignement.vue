@@ -4,25 +4,32 @@
 
     <template v-if="!affichagePRM">
       <div :class="erreurAdresse ? 'fr-input-group--error' : ''" class="fr-mb-4w fr-input-group">
-        <label class="fr-mb-3w" for="recherche-adresse-input">Mon adresse</label>
-        <BarreDeRechercheAdresse
-          v-model:adresse="adresse"
-          v-model:coordonnees="coordonnees"
-          v-model:recherche="recherche"
-          :input-options="{
-            describedBy: erreurAdresse ? 'adresse-text-input-error-desc-error' : '',
-          }"
-          @update:coordonnees="
-            () => {
-              if (coordonnees) {
-                avecAdressePrivee = true;
-              }
-            }
-          "
+        <InputText
+          v-if="adresseDejaConnue?.rue"
+          ref="adresseInput"
+          v-model="recherche"
+          disabled
+          label="L’adresse de ma résidence principale"
+          name="adresse"
         />
-        <p v-if="erreurAdresse" id="adresse-text-input-error-desc-error" aria-live="assertive" class="fr-error-text">
-          {{ erreurAdresse }}
-        </p>
+        <div v-else>
+          <label class="fr-mb-3w" for="recherche-adresse-input">L’adresse de ma résidence principale</label>
+
+          <BarreDeRechercheAdresse
+            v-model:adresse="adresseBarreDeRecherche"
+            v-model:coordonnees="coordonnees"
+            v-model:recherche="recherche"
+            :input-options="{
+              describedBy: erreurAdresse ? 'adresse-text-input-error-desc-error info-adresse' : 'info-adresse',
+            }"
+          />
+          <p id="info-adresse" class="fr-hint-text fr-info-text fr-icon-info-fill">
+            Elle sera enregistrée dans votre profil
+          </p>
+          <p v-if="erreurAdresse" id="adresse-text-input-error-desc-error" aria-live="assertive" class="fr-error-text">
+            {{ erreurAdresse }}
+          </p>
+        </div>
 
         <Callout
           v-if="avecAdressePrivee"
@@ -76,7 +83,7 @@
   </form>
 
   <RenseignementModale
-    :commune="adresse?.commune || ''"
+    :commune="adresseBarreDeRecherche?.commune || ''"
     :connexion-prm-status="connexionPrmStatus"
     :modale-id="MODALE_ID"
     :modifier-numero="
@@ -129,7 +136,8 @@
 
   const recherche = ref<string>('');
   const coordonnees = ref<Coordonnees>();
-  const adresse = ref<AdresseBarreDeRecherche>();
+  const adresseBarreDeRecherche = ref<AdresseBarreDeRecherche>();
+  const adresseDejaConnue = ref<AdresseBarreDeRecherche>();
 
   const nomDeFamille = ref<string>(utilisateur.nom ?? '');
   const acceptationCguWw = ref<boolean>(false);
@@ -160,7 +168,8 @@
       async (barreDeRechercheViewModel: BarreDeRechercheViewModel) => {
         coordonnees.value = barreDeRechercheViewModel.coordonnees;
         recherche.value = barreDeRechercheViewModel.recherche;
-        adresse.value = {
+
+        adresseBarreDeRecherche.value = {
           ...barreDeRechercheViewModel.adresse,
           numeroEtRueEtCodePostal: '',
           numeroEtRue: '',
@@ -171,6 +180,7 @@
             longitude: coordonnees.value?.longitude ?? 0,
           },
         };
+        adresseDejaConnue.value = adresseBarreDeRecherche.value;
       },
     );
   });
@@ -205,12 +215,12 @@
         utilisateurStore().utilisateur.id,
         nomDeFamille.value,
         {
-          commune_label: adresse.value!.commune,
-          numeroRue: adresse.value!.numeroRue,
-          rue: adresse.value!.rue,
-          codePostal: adresse.value!.codePostal,
-          codeEpci: adresse.value!.codeEpci,
-          coordonnees: adresse.value!.coordonnees,
+          commune_label: adresseBarreDeRecherche.value!.commune,
+          numeroRue: adresseBarreDeRecherche.value!.numeroRue,
+          rue: adresseBarreDeRecherche.value!.rue,
+          codePostal: adresseBarreDeRecherche.value!.codePostal,
+          codeEpci: adresseBarreDeRecherche.value!.codeEpci,
+          coordonnees: adresseBarreDeRecherche.value!.coordonnees,
           commune_utilisee_dans_le_compte: '',
         },
         new InscriptionPresenterImpl(
@@ -232,7 +242,7 @@
   }
 
   function definirAdressePrincipale() {
-    definirAdressePrincipaleComposable(utilisateur.id, adresse.value, coordonnees.value);
+    definirAdressePrincipaleComposable(utilisateur.id, adresseBarreDeRecherche.value, coordonnees.value);
   }
 
   function resetErreursFormulaires() {
