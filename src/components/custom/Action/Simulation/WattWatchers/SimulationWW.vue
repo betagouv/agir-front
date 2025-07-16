@@ -17,20 +17,25 @@
     "
   />
 
+  <SimulationResultatWW
+    v-if="aDejaEteSimule && etapeActuelle === EtapeSimulateur.SIMULATEUR"
+    :on-recommencer-clicked="onRecommencerClicked"
+  />
+
   <KyCsAction
-    v-if="etapeActuelle === EtapeSimulateur.SIMULATEUR"
+    v-else-if="etapeActuelle === EtapeSimulateur.SIMULATEUR"
     :action-id="SimulateursSupportes.WINTER"
     :idEnchainementKycs="idEnchainementKycs"
     :type-action="TypeAction.SIMULATEUR"
     class="fr-px-2w fr-mb-2w"
   >
     <template v-slot:fin>
-      <SimulationResultatWW />
+      <SimulationResultatWW :on-recommencer-clicked="onRecommencerClicked" />
     </template>
   </KyCsAction>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
   import { ref } from 'vue';
   import SimulationResultatWW from '@/components/custom/Action/Simulation/WattWatchers/SimulationResultatWW.vue';
   import SimulationWwIntroduction from '@/components/custom/Action/Simulation/WattWatchers/SimulationWWIntroduction.vue';
@@ -39,8 +44,9 @@
   import { TypeAction } from '@/domaines/actions/ports/actions.repository.js';
   import { SimulateursSupportes } from '@/shell/simulateursSupportes.js';
 
-  defineProps<{
+  const props = defineProps<{
     idEnchainementKycs: string;
+    aDejaEteSimule: boolean;
   }>();
 
   enum EtapeSimulateur {
@@ -49,5 +55,10 @@
     SIMULATEUR = 'resultat',
   }
 
-  const etapeActuelle = ref<EtapeSimulateur>(EtapeSimulateur.INTRODUCTION);
+  const etapeActuelle = ref<EtapeSimulateur>();
+  etapeActuelle.value = props.aDejaEteSimule ? EtapeSimulateur.SIMULATEUR : EtapeSimulateur.INTRODUCTION;
+
+  const onRecommencerClicked = () => {
+    etapeActuelle.value = EtapeSimulateur.INTRODUCTION;
+  };
 </script>
