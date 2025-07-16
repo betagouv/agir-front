@@ -98,6 +98,7 @@ export class ActionViewModelBuilder {
       })),
       idEnchainementKYCs: action.idEnchainementKYCs,
       partenaire,
+      aDejaEteSimule: action.realisee,
     };
   }
 
