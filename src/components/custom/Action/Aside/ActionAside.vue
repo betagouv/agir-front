@@ -13,6 +13,8 @@
       @feedback-envoye="updateNotation"
     />
 
+    <ActionEncartPartenaire v-if="actionBaseViewModel.partenaire" :partenaire="actionBaseViewModel.partenaire" />
+
     <ExplicationsRecommandations
       v-if="actionBaseViewModel.explicationsRecommandation"
       :explications-recommandation="actionBaseViewModel.explicationsRecommandation"
@@ -22,6 +24,7 @@
 
 <script lang="ts" setup>
   import { ref } from 'vue';
+  import ActionEncartPartenaire from '@/components/custom/Action/Aside/ActionEncartPartenaire.vue';
   import ActionModaleFeedback from '@/components/custom/Action/Aside/ActionModaleFeedback.vue';
   import BandeauAimezVousCettePage from '@/components/custom/Action/Aside/BandeauAimezVousCettePage.vue';
   import ExplicationsRecommandations from '@/components/custom/Action/Aside/ExplicationsRecommandations.vue';

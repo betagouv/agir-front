@@ -1,8 +1,8 @@
 <template>
   <div class="fr-grid-row fr-grid-row--gutters">
-    <div class="fr-col-12 fr-col-md-4" v-for="risque in risques" :key="risque.nom">
-      <div class="background--white shadow full-height">
-        <div class="fr-p-2w position--relative full-height">
+    <div class="fr-col-12 fr-col-md-6 fr-col-xl-4" v-for="risque in risques" :key="risque.nom">
+      <div class="background--white shadow full-height height-170">
+        <div class="fr-p-2w position--relative full-height flex flex-column flex-space-between">
           <h4 class="fr-h6" v-text="risque.nom" />
           <span
             v-if="risque.badge"
@@ -56,5 +56,9 @@
   .badge--tres-faible {
     background-color: #f1faf2;
     color: #006207;
+  }
+
+  .height-170 {
+    height: 10.625rem;
   }
 </style>

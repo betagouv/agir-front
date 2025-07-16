@@ -22,7 +22,9 @@
             label-id="recherche-par-adresse-label"
           />
 
-          <button class="fr-btn fr-mt-2w" @click.prevent="supprimerMonAdresse()">Supprimer mon adresse</button>
+          <button class="fr-btn fr-btn--tertiary fr-mt-2w" @click.prevent="supprimerMonAdresse()">
+            Supprimer mon adresse
+          </button>
         </div>
 
         <InputCodePostal
