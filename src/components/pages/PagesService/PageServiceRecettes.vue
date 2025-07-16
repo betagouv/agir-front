@@ -6,19 +6,19 @@
           Recettes
           <ServiceSelect
             id="mois"
-            :options="viewModel!.categories"
-            @update="modifierType"
-            label="Choisir un type"
             :code-derniere-recherche-type="categorie"
+            :options="viewModel!.categories"
+            label="Choisir un type"
+            @update="modifierType"
           />
         </h1>
 
         <section v-if="viewModel!.favoris" class="fr-pb-6w">
-          <ServiceFavoris titre="Mes recettes favorites" :services-recherche-favoris-view-model="viewModel!.favoris" />
+          <ServiceFavoris :services-recherche-favoris-view-model="viewModel!.favoris" titre="Mes recettes favorites" />
         </section>
         <section v-if="viewModel!.suggestions">
           <h2 class="fr-h3">Suggestions</h2>
-          <ServiceListeCarte :suggestions-service-view-model="viewModel!.suggestions" ref="serviceListeCarte" />
+          <ServiceListeCarte ref="serviceListeCarte" :suggestions-service-view-model="viewModel!.suggestions" />
           <ServiceSkeletonCartes v-if="cartesSontEnChargement" />
           <button
             v-if="viewModel!.plusDeResultatsDisponibles"
@@ -33,7 +33,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
   import { nextTick, ref } from 'vue';
   import PageServiceTemplate from '@/components/custom/Service/PageServiceTemplate.vue';
   import ServiceFavoris from '@/components/custom/Service/ServiceFavoris.vue';
@@ -77,7 +77,7 @@
   async function lancerRecherche() {
     await usecase.execute(
       utilisateurStore().utilisateur.id,
-      categorie.value,
+      { categorie: categorie.value },
       nombreDeResultats.value,
       new ServiceRechercheRecettesPresenterImpl(vm => {
         viewModel.value = vm;

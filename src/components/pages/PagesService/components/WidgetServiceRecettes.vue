@@ -2,7 +2,7 @@
   <section>
     <div class="flex flex-space-between align-items--center flex-wrap fr-mb-3w">
       <slot name="titre" />
-      <p class="text--italic fr-mb-0" v-if="afficherMangerBouge">
+      <p v-if="afficherMangerBouge" class="text--italic fr-mb-0">
         avec <img alt="manger bouger" class="fr-ml-2w" src="/logo-manger-bouger.svg" />
       </p>
       <router-link
@@ -10,7 +10,7 @@
         :to="{
           name: RouteServiceName.RECETTES,
           params: { thematiqueId: MenuThematiques.getThematiqueData(ClefThematiqueAPI.alimentation).url },
-          query: { type: parametreDeRecherche },
+          query: { type: parametreDeRecherche.categorie, sous_catagorie: parametreDeRecherche.sous_catagorie },
         }"
         class="fr-link"
         >Voir tout
@@ -23,7 +23,7 @@
         :key="suggestion.titre"
         :class="`col-card fr-col-12 fr-col-sm-6 fr-col-md-${12 / props.nombreDeCartesParLigne}`"
       >
-        <ServiceCarteDsfr :suggestionsServiceViewModel="suggestion" :options="{ descriptionDesactive: true }" />
+        <ServiceCarteDsfr :options="{ descriptionDesactive: true }" :suggestionsServiceViewModel="suggestion" />
       </li>
     </ul>
 
@@ -35,7 +35,8 @@
           thematiqueId: MenuThematiques.getThematiqueData(ClefThematiqueAPI.alimentation).url,
         },
         query: {
-          type: parametreDeRecherche,
+          type: parametreDeRecherche.categorie,
+          sous_catagorie: parametreDeRecherche.sous_catagorie,
         },
       }"
       class="fr-link"
@@ -59,7 +60,10 @@
 
   const props = withDefaults(
     defineProps<{
-      parametreDeRecherche: string;
+      parametreDeRecherche: {
+        categorie: string;
+        sous_catagorie?: string;
+      };
       nombreDeCartesParLigne?: number;
       afficherMangerBouge?: boolean;
     }>(),

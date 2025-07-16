@@ -101,11 +101,11 @@ describe("Fichier de tests concernant la récupération d'une action de type qui
       services: [
         {
           type: 'recettes',
-          parametreDuService: 'recette-vegetarienne',
+          parametreDuService: { categorie: 'recette-vegetarienne' },
         },
         {
           type: 'longue_vie_objets',
-          parametreDuService: 'reparer',
+          parametreDuService: { categorie: 'reparer' },
         },
       ],
       faq: [],

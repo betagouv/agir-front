@@ -82,7 +82,10 @@ export interface ActionQuizQuestionViewModel {
 
 export interface ActionServiceViewModel {
   type: 'recettes' | 'longue_vie_objets' | 'proximite';
-  parametreDuService: string;
+  parametreDuService: {
+    categorie: string;
+    sous_catagorie?: string;
+  };
 }
 
 interface RecommandationArticleViewModel {

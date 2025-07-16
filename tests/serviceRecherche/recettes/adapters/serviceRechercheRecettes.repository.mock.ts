@@ -16,7 +16,14 @@ export class ServiceRechercheRecettesMock implements ServiceRechercheRecettesRep
     return new ServiceRechercheRecettesMock(null, recetteARetourner);
   }
 
-  recupererService(_idUtilisateur: string, _idService: string): Promise<ServiceRechercheRecettes> {
+  recupererService(
+    idUtilisateur: string,
+    typeRecette: {
+      categorie: string;
+      sous_catagorie?: string;
+    },
+    nombreMaxResultats: number,
+  ): Promise<ServiceRechercheRecettes> {
     return Promise.resolve(this.serviceRechercheARetourner!);
   }
 

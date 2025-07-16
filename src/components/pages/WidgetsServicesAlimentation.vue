@@ -3,9 +3,9 @@
     <div class="fr-grid-row fr-grid-row--gutters fr-my-6w">
       <div class="fr-col-12 fr-col-md-6 fr-pr-md-2w">
         <WidgetServiceRecettes
-          parametre-de-recherche="saison"
-          :nombreDeCartesParLigne="3"
           :afficher-manger-bouge="false"
+          :nombreDeCartesParLigne="3"
+          :parametre-de-recherche="{ categorie: 'saison' }"
         >
           <template #titre>
             <h2 class="fr-h3 fr-mb-0">Manger sainement et de saison</h2>
@@ -20,17 +20,17 @@
       <section class="full-height fr-col-12 fr-col-md-6 fr-pr-md-2w">
         <h2 class="fr-h3">Les commerces de proximité</h2>
         <CarteDsfr
-          titre="Où trouver des produits locaux ?"
-          image="/carte_service_pdcn.svg"
+          :horizontal="true"
           :to="{
             name: RouteServiceName.PROXIMITE,
             params: {
               thematiqueId: ClefThematiqueAPI.alimentation,
             },
           }"
-          :horizontal="true"
-          variations="shadow"
+          image="/carte_service_pdcn.svg"
           size="sm"
+          titre="Où trouver des produits locaux ?"
+          variations="shadow"
         >
           <template #contenuEnd>
             <p class="fr-card__desc">

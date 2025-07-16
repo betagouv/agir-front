@@ -10,7 +10,10 @@ interface RecommandationArticle {
 
 export interface ActionService {
   type: 'recettes' | 'longue_vie_objets' | 'proximite';
-  parametreDuService: string;
+  parametreDuService: {
+    categorie: string;
+    sousCategorie?: string;
+  };
 }
 
 export interface CatalogueActions {
