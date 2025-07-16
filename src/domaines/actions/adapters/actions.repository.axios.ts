@@ -176,6 +176,24 @@ export class ActionsRepositoryAxios implements ActionsRepository {
   }
 
   @intercept40X()
+  async chargerCatalogueActionsWinter(idUtilisateur: string): Promise<CatalogueActions> {
+    const axios = AxiosFactory.getAxios();
+    const response = await axios.get<CatalogueActionsApiModel>(
+      `/utilisateurs/${idUtilisateur}/actions?ordre=recommandee&sous_thematique=logement_economie_energie`,
+    );
+
+    return {
+      actions: response.data.actions.map(this.mapActionApiModelToAction),
+      filtres: response.data.filtres.map(filtre => ({
+        code: filtre.code as ClefThematiqueAPI,
+        label: filtre.label,
+        selected: filtre.selected,
+      })),
+      consultation: response.data.consultation,
+    };
+  }
+
+  @intercept40X()
   async chargerActionsRecommandees(idUtilisateur: string): Promise<Action[]> {
     const axios = AxiosFactory.getAxios();
     const response = await axios.get<CatalogueActionsApiModel>(`/utilisateurs/${idUtilisateur}/actions`, {
