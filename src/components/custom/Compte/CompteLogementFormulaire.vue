@@ -158,7 +158,6 @@
   import { sessionAppRawDataStorage } from '@/shell/appRawDataStorage';
   import { AdresseBarreDeRecherche } from '@/shell/coordonneesType';
   import { utilisateurStore } from '@/store/utilisateur';
-  import { Adresse } from '@/domaines/logement/recupererAdressePourBarreDeRecherche.usecase';
 
   const logementViewModel = defineModel<LogementViewModel>('logementViewModel', {
     type: Object,
@@ -179,9 +178,18 @@
   );
   const barreDeRechercheInitialisationViewModel = ref<BarreDeRechercheViewModel>();
   const adresseBarreDeRecherche = ref<AdresseBarreDeRecherche>();
-  new BarreDeRecherchePresenterImpl(vm => (barreDeRechercheInitialisationViewModel.value = vm)).presente(
-    adresseDansLeCompte.value as Adresse,
-  );
+  new BarreDeRecherchePresenterImpl(vm => (barreDeRechercheInitialisationViewModel.value = vm)).presente({
+    codePostal: adresseDansLeCompte.value.codePostal,
+    codeEpci: '',
+    commune_utilisee_dans_le_compte: adresseDansLeCompte.value.commune,
+    commune_label: adresseDansLeCompte.value.communeLabel,
+    coordonnees: {
+      latitude: adresseDansLeCompte.value.latitude,
+      longitude: adresseDansLeCompte.value.longitude,
+    },
+    numeroRue: adresseDansLeCompte.value.numeroRue,
+    rue: adresseDansLeCompte.value.rue,
+  });
   const recherche = ref<string>(barreDeRechercheInitialisationViewModel.value?.recherche ?? '');
 
   const doitAfficherBarreAdresse = computed(() => adresseDansLeCompte.value.estAdresseComplete());

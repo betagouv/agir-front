@@ -59,7 +59,7 @@ export class WattWatchersRepositoryAxios implements WattWatchersRepository {
         nom: nom,
         adresse: `${adresse.numeroRue} ${adresse.rue}`,
         code_postal: adresse.codePostal,
-        code_communes: adresse.codeEpci,
+        code_commune: adresse.codeEpci,
       },
     );
   }
