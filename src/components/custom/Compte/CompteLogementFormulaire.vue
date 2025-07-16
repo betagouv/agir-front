@@ -158,6 +158,7 @@
   import { sessionAppRawDataStorage } from '@/shell/appRawDataStorage';
   import { AdresseBarreDeRecherche } from '@/shell/coordonneesType';
   import { utilisateurStore } from '@/store/utilisateur';
+  import { Adresse } from '@/domaines/logement/recupererAdressePourBarreDeRecherche.usecase';
 
   const logementViewModel = defineModel<LogementViewModel>('logementViewModel', {
     type: Object,
@@ -179,7 +180,7 @@
   const barreDeRechercheInitialisationViewModel = ref<BarreDeRechercheViewModel>();
   const adresseBarreDeRecherche = ref<AdresseBarreDeRecherche>();
   new BarreDeRecherchePresenterImpl(vm => (barreDeRechercheInitialisationViewModel.value = vm)).presente(
-    adresseDansLeCompte.value as AdresseDansLeCompte,
+    adresseDansLeCompte.value as Adresse,
   );
   const recherche = ref<string>(barreDeRechercheInitialisationViewModel.value?.recherche ?? '');
 

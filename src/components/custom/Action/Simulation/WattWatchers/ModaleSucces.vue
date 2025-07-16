@@ -4,16 +4,10 @@
       <img alt="" class="margin-x-auto" src="/prise-fonctionnelle.svg" />
     </div>
     <h1 id="label-id" class="fr-modal__title">Connexion établie</h1>
-    <p class="fr-mb-1w">Ces informations sont-elles correctes ?</p>
-    <div class="jagis-background--bleu-light">
-      <ul class="text--bold list-style-none fr-p-2w">
-        <li class="fr-mb-1w">{{ nom }}</li>
-        <li class="text--normal fr-mb-1w">
-          <span class="fr-tag fr-icon-map-pin-2-fill fr-tag--icon-left">à {{ commune }}</span>
-        </li>
-        <li v-if="numeroCompteurInput">Compteur #{{ numeroCompteurInput }}</li>
-      </ul>
-    </div>
+    <p class="fr-mb-1w">
+      La connexion a été établie avec succès. Dans le futur, pour modifier vos informations, rendez-vous dans votre
+      profil.
+    </p>
   </div>
   <div class="fr-modal__footer fr-mt-0">
     <ul

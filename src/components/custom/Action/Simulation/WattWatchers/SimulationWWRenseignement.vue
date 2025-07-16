@@ -160,6 +160,9 @@
       async (barreDeRechercheViewModel: BarreDeRechercheViewModel) => {
         coordonnees.value = barreDeRechercheViewModel.coordonnees;
         recherche.value = barreDeRechercheViewModel.recherche;
+        adresse.value = {
+          ...barreDeRechercheViewModel.adresse,
+        };
       },
     );
   });
@@ -183,7 +186,8 @@
             }, 1000);
           },
           (): void => {
-            //Todo: erreur lors de l'inscription
+            ouvrirModale();
+            connexionPrmStatus.value = ConnexionPRMStatus.ECHEC;
           },
         ),
       );
@@ -211,7 +215,8 @@
             }, 1000);
           },
           (): void => {
-            //Todo: erreur lors de l'inscription
+            ouvrirModale();
+            connexionPrmStatus.value = ConnexionPRMStatus.ECHEC;
           },
         ),
       );
