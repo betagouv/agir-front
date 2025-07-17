@@ -180,6 +180,12 @@ export class ActionViewModelBuilder {
         url: 'https://auxalentours.maif.fr/',
         logo: '/maif-aux-alentours.webp',
       };
+    else if (code === SimulateursSupportes.WINTER)
+      return {
+        nom: 'Watt Watchers',
+        url: 'https://www.wattwatchers.fr/',
+        logo: '/watt-watchers-partenaire.webp',
+      };
   }
 }
 

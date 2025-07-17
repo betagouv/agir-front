@@ -34,7 +34,7 @@
     height: 9px;
     border-radius: 12px;
     background-color: var(--disc-color, #0a76f6);
-    margin-right: 0.75rem;
+    margin-right: 0.5rem;
   }
 
   .liste-categories {
