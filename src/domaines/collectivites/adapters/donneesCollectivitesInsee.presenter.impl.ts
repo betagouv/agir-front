@@ -36,7 +36,25 @@ export class DonneesCollectivitesInseePresenterImpl implements DonneesCollectivi
       indicationNombreUtilisateurs: this.genererIndicationNombreUtilisateurs(donnees),
       indicationAidesEtArticles: this.genererIndicationAidesEtArticles(donnees),
       cartesThematiques: this.genererCartesThematiques(aides, articles, contenuSupplementaires),
-      nombreInscrits: { total: donnees.nombreInscrits, local: donnees.nombreInscritsLocaux },
+      nombreInscrits: {
+        total: donnees.nombreInscrits,
+        local: donnees.nombreInscritsLocaux,
+        localDernierMois: donnees.nombreInscritsLocauxDernierMois,
+      },
+      graphiqueActionsRepartitionParThematiquesData: {
+        labels: ['Alimentation', 'Transport', 'Consommation', 'Logement'],
+        datasets: [
+          {
+            data: [
+              donnees.actionsRepartitionParThematiques.alimentation,
+              donnees.actionsRepartitionParThematiques.transport,
+              donnees.actionsRepartitionParThematiques.consommation,
+              donnees.actionsRepartitionParThematiques.logement,
+            ],
+            backgroundColor: ['rgb(255, 99, 132)', 'rgb(54, 162, 235)', 'rgb(255, 205, 86)', 'rgb(75, 192, 192)'],
+          },
+        ],
+      },
     });
   }
 
@@ -79,10 +97,9 @@ export class DonneesCollectivitesInseePresenterImpl implements DonneesCollectivi
   }
 
   private genererIndicationNombreUtilisateurs(donnees: DonneesCollectivitesINSEE): string {
-    const { nombreInscrits, nombreInscritsLocaux } = donnees;
-    if (!nombreInscritsLocaux)
-      return `La collectivité ne compte <span class="text--bold">aucun</span> utilisateur inscrit parmi les <span class="text--bold">${nombreInscrits}</span> utilisateurs.`;
-    return `La collectivité compte <span class="text--bold">${nombreInscritsLocaux}</span> utilisateur(s) inscrit(s) parmi les <span class="text--bold">${nombreInscrits}</span> utilisateurs.`;
+    const { nombreInscritsLocaux } = donnees;
+    if (!nombreInscritsLocaux) return `Aucun utilisateur`;
+    return `${nombreInscritsLocaux}`;
   }
 
   private genererCartesThematiques(
