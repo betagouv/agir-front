@@ -1,16 +1,14 @@
 <template>
   <section class="fr-container fr-my-3w">
     <h1 class="fr-h1 fr-mt-4w fr-mb-4w">Actions</h1>
-    <div class="fr-grid-row fr-grid-row--gutters">
-      <div v-if="filtresViewModel" class="fr-col-md-8 fr-col-12">
-        <h2 class="fr-h4">{{ filtresViewModel.phraseNombreActions }}</h2>
+    <div v-if="filtresViewModel">
+      <h2 class="fr-h4">{{ filtresViewModel.phraseNombreActions }}</h2>
 
-        <CatalogueActionsComposant
-          v-if="actionsViewModel"
-          :actions="actionsViewModel"
-          card-classes="fr-col-12 fr-col-md-6"
-        />
-      </div>
+      <CatalogueActionsComposant
+        v-if="actionsViewModel"
+        :actions="actionsViewModel"
+        card-classes="fr-col-12 fr-col-md-6 fr-col-lg-4"
+      />
     </div>
   </section>
 </template>
