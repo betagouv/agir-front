@@ -20,18 +20,18 @@
       "
     />
 
-    <SimulationResultatWW
-      v-if="aDeteEteSimuleRef && etapeActuelle === EtapeSimulateur.SIMULATEUR"
-      :on-recommencer-clicked="onRecommencerClicked"
-    />
-
     <KyCsAction
-      v-else-if="etapeActuelle === EtapeSimulateur.SIMULATEUR"
+      v-if="!aDejaEteSimuleRef && etapeActuelle === EtapeSimulateur.SIMULATEUR"
       :action-id="SimulateursSupportes.WINTER"
       :idEnchainementKycs="idEnchainementKycs"
       :type-action="TypeAction.SIMULATEUR"
       class="fr-px-2w fr-mb-2w"
       @fin-kyc-atteinte="onFin"
+    />
+
+    <SimulationResultatWW
+      v-else-if="etapeActuelle === EtapeSimulateur.SIMULATEUR"
+      :on-recommencer-clicked="onRecommencerClicked"
     />
   </div>
 </template>
@@ -50,7 +50,7 @@
     aDejaEteSimule: boolean;
   }>();
 
-  const aDeteEteSimuleRef = ref<boolean>(props.aDejaEteSimule);
+  const aDejaEteSimuleRef = ref<boolean>(props.aDejaEteSimule);
 
   enum EtapeSimulateur {
     INTRODUCTION = 'introduction',
@@ -63,12 +63,12 @@
   etapeActuelle.value = props.aDejaEteSimule ? EtapeSimulateur.SIMULATEUR : EtapeSimulateur.INTRODUCTION;
 
   const onRecommencerClicked = () => {
-    aDeteEteSimuleRef.value = false;
+    aDejaEteSimuleRef.value = false;
     etapeActuelle.value = EtapeSimulateur.SIMULATEUR;
   };
 
   const onFin = () => {
-    aDeteEteSimuleRef.value = true;
+    aDejaEteSimuleRef.value = true;
     etapeActuelle.value = EtapeSimulateur.SIMULATEUR;
   };
 
