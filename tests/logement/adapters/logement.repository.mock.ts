@@ -3,17 +3,31 @@ import { Logement } from '@/domaines/logement/recupererInformationLogement.useca
 import { Adresse } from '@/domaines/logement/recupererAdressePourBarreDeRecherche.usecase';
 
 export class MockLogementRepository implements LogementRepository {
-  constructor(private logement: Logement) {}
+  constructor(private readonly donnees: Logement | Adresse) {}
 
   recupererInformation(_utilisateurId: string): Promise<Logement> {
-    return Promise.resolve(this.logement);
+    if (!this.estLogement(this.donnees)) {
+      throw new Error('Les données fournies ne sont pas du type Logement');
+    }
+    return Promise.resolve(this.donnees);
   }
 
   recupererAdresse(_utilisateurId: string): Promise<Adresse> {
-    return Promise.resolve(this.logement);
+    if (!this.estAdresse(this.donnees)) {
+      throw new Error('Les données fournies ne sont pas du type Adresse');
+    }
+    return Promise.resolve(this.donnees);
   }
 
-  patcherLesInformations(utilisateurId: string, logement: Partial<Logement>): Promise<void> {
+  patcherLesInformations(_utilisateurId: string, _logement: Partial<Logement>): Promise<void> {
     return Promise.resolve(undefined);
+  }
+
+  private estLogement(donnees: any): donnees is Logement {
+    return 'adultes' in donnees;
+  }
+
+  private estAdresse(donnees: any): donnees is Adresse {
+    return 'commune_label' in donnees && 'codePostal' in donnees;
   }
 }

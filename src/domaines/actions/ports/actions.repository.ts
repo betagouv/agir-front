@@ -135,4 +135,6 @@ export interface ActionsRepository {
   previsualiser(actionId: string, typeAction: TypeAction): Promise<ActionDetail>;
 
   compterActions(): Promise<CompteurActions>;
+
+  chargerCatalogueActionsWinter(idUtilisateur: string): Promise<CatalogueActions>;
 }

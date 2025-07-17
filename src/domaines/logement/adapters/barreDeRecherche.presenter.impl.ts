@@ -1,5 +1,5 @@
 import { BarreDeRecherchePresenter } from '@/domaines/logement/ports/barreDeRecherche.presenter';
-import { AdresseDansLeCompte } from '@/domaines/simulationMaif/recupererStatistiquesCommuneMaifDepuisProfil.usecase';
+import { Adresse } from '@/domaines/logement/recupererAdressePourBarreDeRecherche.usecase';
 
 export type BarreDeRechercheViewModel = {
   recherche: string;
@@ -7,20 +7,34 @@ export type BarreDeRechercheViewModel = {
     latitude: number;
     longitude: number;
   };
+  adresse: {
+    codePostal: string;
+    numeroRue: string;
+    rue: string;
+    communeLabel: string;
+    codeEpci: string;
+  };
 };
 
 export class BarreDeRecherchePresenterImpl implements BarreDeRecherchePresenter {
   constructor(private barreDeRechercheViewModel: (viewModel: BarreDeRechercheViewModel) => void) {}
 
-  presente(adresse: AdresseDansLeCompte): void {
-    if (!adresse.estAdresseComplete()) return;
-
+  presente(adresse: Adresse): void {
     this.barreDeRechercheViewModel({
       coordonnees: {
-        latitude: adresse.latitude,
-        longitude: adresse.longitude,
+        latitude: adresse.coordonnees.latitude,
+        longitude: adresse.coordonnees.longitude,
       },
-      recherche: `${adresse.numeroRue} ${adresse.rue}, ${adresse.communeLabel} (${adresse.codePostal})`,
+      recherche: adresse.numeroRue
+        ? `${adresse.numeroRue} ${adresse.rue}, ${adresse.commune_label} (${adresse.codePostal})`
+        : '',
+      adresse: {
+        codePostal: adresse.codePostal,
+        numeroRue: adresse.numeroRue,
+        rue: adresse.rue,
+        communeLabel: adresse.commune_label,
+        codeEpci: adresse.codeEpci,
+      },
     });
   }
 }

@@ -98,6 +98,7 @@ export class ActionViewModelBuilder {
       })),
       idEnchainementKYCs: action.idEnchainementKYCs,
       partenaire,
+      aDejaEteSimule: action.realisee,
     };
   }
 
@@ -178,6 +179,12 @@ export class ActionViewModelBuilder {
         nom: 'Aux Alentours par MAIF',
         url: 'https://auxalentours.maif.fr/',
         logo: '/maif-aux-alentours.webp',
+      };
+    else if (code === SimulateursSupportes.WINTER)
+      return {
+        nom: 'Watt Watchers',
+        url: 'https://www.wattwatchers.fr/',
+        logo: '/watt-watchers-partenaire.webp',
       };
   }
 }

@@ -1,36 +1,42 @@
 <template>
-  <SimulationWwIntroduction
-    v-if="etapeActuelle === EtapeSimulateur.INTRODUCTION"
-    :passer-etape-suivante="
-      () => {
-        etapeActuelle = EtapeSimulateur.RENSEIGNEMENT;
-      }
-    "
-  />
+  <div ref="containerRef" tabindex="-1">
+    <SimulationWwIntroduction
+      v-if="etapeActuelle === EtapeSimulateur.INTRODUCTION"
+      :passer-etape-suivante="
+        () => {
+          etapeActuelle = EtapeSimulateur.RENSEIGNEMENT;
+          resetFocus();
+        }
+      "
+    />
 
-  <SimulationWwRenseignement
-    v-if="etapeActuelle === EtapeSimulateur.RENSEIGNEMENT"
-    :passer-etape-suivante="
-      () => {
-        etapeActuelle = EtapeSimulateur.SIMULATEUR;
-      }
-    "
-  />
+    <SimulationWwRenseignement
+      v-if="etapeActuelle === EtapeSimulateur.RENSEIGNEMENT"
+      :passer-etape-suivante="
+        () => {
+          etapeActuelle = EtapeSimulateur.SIMULATEUR;
+          resetFocus();
+        }
+      "
+    />
 
-  <KyCsAction
-    v-if="etapeActuelle === EtapeSimulateur.SIMULATEUR"
-    :action-id="SimulateursSupportes.WINTER"
-    :idEnchainementKycs="idEnchainementKycs"
-    :type-action="TypeAction.SIMULATEUR"
-    class="fr-px-2w fr-mb-2w"
-  >
-    <template v-slot:fin>
-      <SimulationResultatWW />
-    </template>
-  </KyCsAction>
+    <KyCsAction
+      v-if="!aDejaEteSimuleRef && etapeActuelle === EtapeSimulateur.SIMULATEUR"
+      :action-id="SimulateursSupportes.WINTER"
+      :idEnchainementKycs="idEnchainementKycs"
+      :type-action="TypeAction.SIMULATEUR"
+      class="fr-px-2w fr-mb-2w"
+      @fin-kyc-atteinte="onFin"
+    />
+
+    <SimulationResultatWW
+      v-else-if="etapeActuelle === EtapeSimulateur.SIMULATEUR"
+      :on-recommencer-clicked="onRecommencerClicked"
+    />
+  </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
   import { ref } from 'vue';
   import SimulationResultatWW from '@/components/custom/Action/Simulation/WattWatchers/SimulationResultatWW.vue';
   import SimulationWwIntroduction from '@/components/custom/Action/Simulation/WattWatchers/SimulationWWIntroduction.vue';
@@ -39,9 +45,12 @@
   import { TypeAction } from '@/domaines/actions/ports/actions.repository.js';
   import { SimulateursSupportes } from '@/shell/simulateursSupportes.js';
 
-  defineProps<{
+  const props = defineProps<{
     idEnchainementKycs: string;
+    aDejaEteSimule: boolean;
   }>();
+
+  const aDejaEteSimuleRef = ref<boolean>(props.aDejaEteSimule);
 
   enum EtapeSimulateur {
     INTRODUCTION = 'introduction',
@@ -49,5 +58,21 @@
     SIMULATEUR = 'resultat',
   }
 
-  const etapeActuelle = ref<EtapeSimulateur>(EtapeSimulateur.RENSEIGNEMENT);
+  const containerRef = ref<HTMLDivElement>();
+  const etapeActuelle = ref<EtapeSimulateur>();
+  etapeActuelle.value = props.aDejaEteSimule ? EtapeSimulateur.SIMULATEUR : EtapeSimulateur.INTRODUCTION;
+
+  const onRecommencerClicked = () => {
+    aDejaEteSimuleRef.value = false;
+    etapeActuelle.value = EtapeSimulateur.SIMULATEUR;
+  };
+
+  const onFin = () => {
+    aDejaEteSimuleRef.value = true;
+    etapeActuelle.value = EtapeSimulateur.SIMULATEUR;
+  };
+
+  const resetFocus = () => {
+    containerRef.value?.focus();
+  };
 </script>

@@ -41,7 +41,7 @@ export class ResultatWWPresenterImpl implements ResultatWattWatcherPresenter {
         emoji: detail.emoji,
         label: this.genererLabel(detail.type),
         value: detail.eur,
-        pourcentage: `${detail.percent}%`,
+        pourcentage: `${Math.round(detail.percent)}%`,
       })),
     });
   }
