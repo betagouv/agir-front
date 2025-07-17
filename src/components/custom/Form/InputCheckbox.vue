@@ -3,11 +3,15 @@
     <legend class="fr-fieldset__legend--regular fr-fieldset__legend" id="checkboxes-legend">
       <span class="fr-h4 display-block" v-text="titre" /> Plusieurs réponses sont possibles
     </legend>
-    <div class="fr-fieldset__element" v-for="(option, index) in updatedOptions" :key="option.id">
+    <div
+      class="fr-fieldset__element"
+      :class="{ 'fr-fieldset__element--inline': estInline }"
+      v-for="(option, index) in updatedOptions"
+      :key="option.id"
+    >
       <div
-        :class="`fr-checkbox-group checkbox-group--custom border ${
-          option.checked ? 'fr-text--bold border--bleu-dark' : ''
-        }`"
+        class="fr-checkbox-group checkbox-group--custom border"
+        :class="{ 'fr-text--bold border--bleu-dark': option.checked, 'fr-checkbox-group--sm': estSmall }"
       >
         <input
           :id="option.id"
@@ -33,6 +37,8 @@
       checked?: boolean;
     }[];
     estResetable?: boolean;
+    estInline?: boolean;
+    estSmall?: boolean;
   }>();
 
   const emit = defineEmits<{
