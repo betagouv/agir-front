@@ -1,6 +1,5 @@
 import {
   ResultatSimulationVoiture,
-  VoitureActuelle,
   VoitureAlternative,
 } from '@/domaines/simulationVoiture/entities/ResultatSimulationVoiture';
 import { ResultatSimulationVoiturePresenter } from '@/domaines/simulationVoiture/ports/resultatSimulationVoiture.presenter';
@@ -16,12 +15,21 @@ export type ResultatSimulationVoitureViewModel = {
   resultatVoiturePlusEconomique: ResultatSimulationVoitureProposeeViewModel;
   resultatVoiturePlusEcologique: ResultatSimulationVoitureProposeeViewModel;
 };
+
+export type Hypotheses = {
+  label: string;
+  valeur: string;
+  unite?: string;
+};
+
 export type ResultatSimulationVoitureActuelleViewModel = {
   gabarit: string;
   coutAnnuel: MontantAfficheEnFR;
   emissionAnnuelle: NombreAfficheEnFR;
+  hypotheses: Hypotheses[];
   tag: string[];
 };
+
 export type ResultatSimulationVoitureProposeeViewModel = {
   typeDeVoiture: string;
   coutAnnuel: {
@@ -52,19 +60,21 @@ export class ResultatSimulationVoiturePresenterImpl implements ResultatSimulatio
         gabarit: voitureActuelle.getGabarit(),
         coutAnnuel: MontantAfficheEnFRBuilder.build(Math.round(voitureActuelle.getCout())),
         emissionAnnuelle: NombreAfficheEnFRBuilder.build(Math.round(voitureActuelle.getEmpreinte())),
+        hypotheses: voitureActuelle.getParams().map(param => ({
+          label: param.getNom(),
+          valeur: param.getValeur(),
+          unite: param.getUnite(),
+        })),
         tag: [voitureActuelle.getCarburant(), voitureActuelle.getMotorisation()].filter(v => v.length > 0),
       },
-      resultatVoiturePlusEconomique: this.transformeVoitureProposee(voiturePlusEconomique, voitureActuelle),
-      resultatVoiturePlusEcologique: this.transformeVoitureProposee(voiturePlusEcologique, voitureActuelle),
+      resultatVoiturePlusEconomique: this.transformeVoitureProposee(voiturePlusEconomique),
+      resultatVoiturePlusEcologique: this.transformeVoitureProposee(voiturePlusEcologique),
     });
   }
 
-  private transformeVoitureProposee(
-    voiture: VoitureAlternative,
-    voitureActuelle: VoitureActuelle,
-  ): ResultatSimulationVoitureProposeeViewModel {
-    const countAnnuelDifference = voitureActuelle.getDifferenceCountAnnuel(voiture);
-    const pourcentageDifferenceEmission = voitureActuelle.getPourcentageDifferenceEmission(voiture);
+  private transformeVoitureProposee(voiture: VoitureAlternative): ResultatSimulationVoitureProposeeViewModel {
+    const countAnnuelDifference = voiture.getDifferenceCoutAnnuel();
+    const pourcentageDifferenceEmission = voiture.getDifferenceEmission();
     return {
       typeDeVoiture: voiture.getLabel(),
       coutAnnuel: {
