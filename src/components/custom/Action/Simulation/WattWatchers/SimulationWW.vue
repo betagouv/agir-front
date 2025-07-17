@@ -18,7 +18,7 @@
   />
 
   <SimulationResultatWW
-    v-if="aDejaEteSimule && etapeActuelle === EtapeSimulateur.SIMULATEUR"
+    v-if="aDeteEteSimuleRef && etapeActuelle === EtapeSimulateur.SIMULATEUR"
     :on-recommencer-clicked="onRecommencerClicked"
   />
 
@@ -28,10 +28,8 @@
     :idEnchainementKycs="idEnchainementKycs"
     :type-action="TypeAction.SIMULATEUR"
     class="fr-px-2w fr-mb-2w"
+    @fin-kyc-atteinte="onFin"
   >
-    <template v-slot:fin>
-      <SimulationResultatWW :on-recommencer-clicked="onRecommencerClicked" />
-    </template>
   </KyCsAction>
 </template>
 
@@ -49,6 +47,8 @@
     aDejaEteSimule: boolean;
   }>();
 
+  const aDeteEteSimuleRef = ref<boolean>(props.aDejaEteSimule);
+
   enum EtapeSimulateur {
     INTRODUCTION = 'introduction',
     RENSEIGNEMENT = 'question',
@@ -59,6 +59,12 @@
   etapeActuelle.value = props.aDejaEteSimule ? EtapeSimulateur.SIMULATEUR : EtapeSimulateur.INTRODUCTION;
 
   const onRecommencerClicked = () => {
-    etapeActuelle.value = EtapeSimulateur.INTRODUCTION;
+    aDeteEteSimuleRef.value = false;
+    etapeActuelle.value = EtapeSimulateur.SIMULATEUR;
+  };
+
+  const onFin = () => {
+    aDeteEteSimuleRef.value = true;
+    etapeActuelle.value = EtapeSimulateur.SIMULATEUR;
   };
 </script>
