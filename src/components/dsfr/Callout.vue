@@ -1,7 +1,12 @@
 <template>
   <div :class="`fr-callout ${iconeInformation ? 'fr-icon-information-line' : ''}`">
     <h3 v-if="titre" class="fr-callout__title" v-text="titre" />
-    <p v-if="texte" class="fr-callout__text" v-html="texte" />
+
+    <template v-if="$slots.texte">
+      <slot name="texte"></slot>
+    </template>
+    <p v-else-if="texte">{{ texte }}</p>
+
     <button
       v-if="button"
       @click="button.onClick"

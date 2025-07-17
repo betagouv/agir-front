@@ -1,5 +1,6 @@
 import { AxiosFactory } from '@/axios.factory';
 import {
+  MappingTagKYC,
   PersonnalisationRepository,
   PreviewActionsParThematique,
 } from '@/domaines/personnalisation/ports/personnalisation.repository';
@@ -18,6 +19,36 @@ interface PreviewActionsParThematiqueApiModel {
   transport: PersonnalisationDuneActionApiModel[];
   consommation: PersonnalisationDuneActionApiModel[];
   alimentation: PersonnalisationDuneActionApiModel[];
+}
+
+interface MappingTacKYCApiModel {
+  mapped_kyc_liste: {
+    kyc: string;
+    tags: string[];
+  }[];
+  reachable_tags_via_kycs: string[];
+  unreachable_tags_via_kyc: string[];
+  dynamic_tags: {
+    tag: string;
+    explication: string;
+  }[];
+  cms_tags_not_in_backend: {
+    id_cms: string;
+    tag_id: string;
+    label_explication_front: string;
+    description_interne: string;
+    ponderation: number;
+    boost: number;
+  }[];
+  backend_tags_not_in_cms: string[];
+  full_cms_tag_collection: {
+    id_cms: string;
+    tag_id: string;
+    label_explication_front: string;
+    description_interne: string;
+    ponderation: number;
+    boost: number;
+  }[];
 }
 
 export class PersonnalisationRepositoryAxios implements PersonnalisationRepository {
@@ -104,6 +135,41 @@ export class PersonnalisationRepositoryAxios implements PersonnalisationReposito
         type: action.type,
         pourcentageReco: action.pourcentage_reco,
         estExclue: action.est_exclue,
+      })),
+    };
+  }
+
+  async recupererMappingTagKYC(): Promise<MappingTagKYC> {
+    const axios = AxiosFactory.getAxios();
+    const response = await axios.get<MappingTacKYCApiModel>(`/recommandation/mapping_kyc_tags`);
+
+    return {
+      mappedKYCListe: response.data.mapped_kyc_liste.map(item => ({
+        kyc: item.kyc,
+        tags: item.tags,
+      })),
+      tagAtteignableViaKYC: response.data.reachable_tags_via_kycs,
+      tagInatteignableViaKYC: response.data.unreachable_tags_via_kyc,
+      tagsDynamiques: response.data.dynamic_tags.map(tag => ({
+        tag: tag.tag,
+        explication: tag.explication,
+      })),
+      tagsCmsHorsDuBackend: response.data.cms_tags_not_in_backend.map(tag => ({
+        idCms: tag.id_cms,
+        tagId: tag.tag_id,
+        labelExplicationFront: tag.label_explication_front,
+        descriptionInterne: tag.description_interne,
+        ponderation: tag.ponderation,
+        boost: tag.boost,
+      })),
+      backEndTagHorsDuCms: response.data.backend_tags_not_in_cms,
+      tousLesTagsDansCms: response.data.full_cms_tag_collection.map(tag => ({
+        id_cms: tag.id_cms,
+        tag_id: tag.tag_id,
+        label_explication_front: tag.label_explication_front,
+        description_interne: tag.description_interne,
+        ponderation: tag.ponderation,
+        boost: tag.boost,
       })),
     };
   }
