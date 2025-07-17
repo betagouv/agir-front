@@ -1,36 +1,39 @@
 <template>
-  <SimulationWwIntroduction
-    v-if="etapeActuelle === EtapeSimulateur.INTRODUCTION"
-    :passer-etape-suivante="
-      () => {
-        etapeActuelle = EtapeSimulateur.RENSEIGNEMENT;
-      }
-    "
-  />
+  <div ref="containerRef" tabindex="-1">
+    <SimulationWwIntroduction
+      v-if="etapeActuelle === EtapeSimulateur.INTRODUCTION"
+      :passer-etape-suivante="
+        () => {
+          etapeActuelle = EtapeSimulateur.RENSEIGNEMENT;
+          resetFocus();
+        }
+      "
+    />
 
-  <SimulationWwRenseignement
-    v-if="etapeActuelle === EtapeSimulateur.RENSEIGNEMENT"
-    :passer-etape-suivante="
-      () => {
-        etapeActuelle = EtapeSimulateur.SIMULATEUR;
-      }
-    "
-  />
+    <SimulationWwRenseignement
+      v-if="etapeActuelle === EtapeSimulateur.RENSEIGNEMENT"
+      :passer-etape-suivante="
+        () => {
+          etapeActuelle = EtapeSimulateur.SIMULATEUR;
+          resetFocus();
+        }
+      "
+    />
 
-  <SimulationResultatWW
-    v-if="aDeteEteSimuleRef && etapeActuelle === EtapeSimulateur.SIMULATEUR"
-    :on-recommencer-clicked="onRecommencerClicked"
-  />
+    <SimulationResultatWW
+      v-if="aDeteEteSimuleRef && etapeActuelle === EtapeSimulateur.SIMULATEUR"
+      :on-recommencer-clicked="onRecommencerClicked"
+    />
 
-  <KyCsAction
-    v-else-if="etapeActuelle === EtapeSimulateur.SIMULATEUR"
-    :action-id="SimulateursSupportes.WINTER"
-    :idEnchainementKycs="idEnchainementKycs"
-    :type-action="TypeAction.SIMULATEUR"
-    class="fr-px-2w fr-mb-2w"
-    @fin-kyc-atteinte="onFin"
-  >
-  </KyCsAction>
+    <KyCsAction
+      v-else-if="etapeActuelle === EtapeSimulateur.SIMULATEUR"
+      :action-id="SimulateursSupportes.WINTER"
+      :idEnchainementKycs="idEnchainementKycs"
+      :type-action="TypeAction.SIMULATEUR"
+      class="fr-px-2w fr-mb-2w"
+      @fin-kyc-atteinte="onFin"
+    />
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -55,6 +58,7 @@
     SIMULATEUR = 'resultat',
   }
 
+  const containerRef = ref<HTMLDivElement>();
   const etapeActuelle = ref<EtapeSimulateur>();
   etapeActuelle.value = props.aDejaEteSimule ? EtapeSimulateur.SIMULATEUR : EtapeSimulateur.INTRODUCTION;
 
@@ -66,5 +70,9 @@
   const onFin = () => {
     aDeteEteSimuleRef.value = true;
     etapeActuelle.value = EtapeSimulateur.SIMULATEUR;
+  };
+
+  const resetFocus = () => {
+    containerRef.value?.focus();
   };
 </script>

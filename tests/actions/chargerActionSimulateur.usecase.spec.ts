@@ -179,4 +179,41 @@ describe("Fichier de tests concernant la récupération d'une action de type sim
       logo: '/maif-aux-alentours.webp',
     });
   });
+
+  it('devrait inclure les informations du partenaire WattWatchers', async () => {
+    // Given
+    const actionMinimale: ActionDetail = {
+      corps: { astuces: '', introduction: '' },
+      commune: '',
+      explicationsRecommandations: new ExplicationsRecommandation(false, []),
+      idEnchainementKYCs: '',
+      nombreAidesDisponibles: 0,
+      thematique: ClefThematiqueAPI.alimentation,
+      type: TypeAction.SIMULATEUR,
+      code: SimulateursSupportes.WINTER,
+      titre: 'Titre simulateur',
+      sousTitre: 'Sous-titre',
+      emoji: '',
+      realisee: false,
+      nombreDeRealisations: 0,
+      points: 10,
+      consigne: '',
+      labelCompteur: '',
+      sources: [],
+      articles: [],
+      aides: [],
+      services: [],
+      faq: [],
+    };
+
+    // When
+    const resultat = await ActionViewModelBuilder.buildSimulateur(actionMinimale);
+
+    // Then
+    expect(resultat.partenaire).toEqual({
+      nom: 'Watt Watchers',
+      url: 'https://www.wattwatchers.fr/',
+      logo: '/watt-watchers-partenaire.webp',
+    });
+  });
 });
