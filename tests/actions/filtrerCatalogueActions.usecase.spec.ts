@@ -5,6 +5,7 @@ import { Action, CatalogueActions, TypeAction } from '@/domaines/actions/ports/a
 import { ActionViewModel } from '@/domaines/actions/ports/actions.presenter';
 import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 import { FiltrerCatalogueActionsUsecase } from '@/domaines/actions/filtrerCatalogueActions.usecase';
+import { ExplicationsRecommandation } from '@/domaines/actions/explicationsRecommandation';
 
 describe("Fichier de tests concernant la récupération du catalogue d'actions", () => {
   it('Doit filtrer correctement le catalogue actions et les actions', async () => {
@@ -19,6 +20,9 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
         nombreAidesDisponibles: 5,
         type: TypeAction.BILAN,
         dejaVue: true,
+        dejaFaite: false,
+        explicationsRecommandations: new ExplicationsRecommandation(false, []),
+        labelCompteur: '0 action réalisée',
       },
     ];
 
@@ -56,9 +60,6 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
         {
           code: 'code-action-test2',
           titre: 'Tester une nouvelle <span class="text--bold">recette végétarienne</span> 2',
-          nombreDePersonnes: '<span class="text--bold">4</span> actions réalisées',
-          aidesDisponibles: '<span class="text--bold">5</span> aides disponibles',
-          dejaVue: true,
           url: {
             name: 'action-individuelle',
             params: {
@@ -67,6 +68,15 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
               type: 'bilan',
             },
           },
+          badges: [
+            {
+              text: '<span aria-hidden="true">💰</span><span class="text--bold">5</span> aides disponibles',
+              color: 'background--vert-badge text--white',
+            },
+          ],
+          label: { text: 'Déjà consultée', color: '' },
+          nombreDeParticipants: '0 action réalisée',
+          aidesDisponibles: '<span class="text--bold">5</span> aides disponibles',
         },
       ]);
     }

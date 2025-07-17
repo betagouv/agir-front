@@ -13,7 +13,7 @@ export class ExplicationsRecommandation {
     return this.listeExplications;
   }
 
-  public doiventEtreAffiches(): boolean {
+  public estRecommandee(): boolean {
     return !this.estExclu && this.listeExplications?.length > 0;
   }
 }

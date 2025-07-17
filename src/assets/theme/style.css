@@ -340,6 +340,10 @@
     background-color: var(--success-425-625);
 }
 
+.background--vert-badge {
+    background-color: #50B678;
+}
+
 .background--caramel {
     background-color: var(--brown-caramel-925-125);
 }
@@ -402,6 +406,11 @@
 
 .outline {
     outline: solid var(--blue-france-sun-113-625);
+}
+
+.fr-label--vert {
+    background-color: #EFF8E2;
+    color: #535809;
 }
 
 .border {

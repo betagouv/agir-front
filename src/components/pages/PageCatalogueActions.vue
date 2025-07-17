@@ -3,7 +3,7 @@
     <h1 class="fr-h1 fr-mt-4w fr-mb-4w">Catalogue d'actions</h1>
 
     <div class="fr-grid-row fr-grid-row--gutters">
-      <div class="fr-col-md-4 fr-col-12">
+      <div class="fr-col-md-3 fr-col-12">
         <CatalogueActionsFiltres
           v-if="filtresViewModel"
           :filtres="filtresViewModel.filtres"
@@ -14,13 +14,13 @@
         />
       </div>
 
-      <div v-if="filtresViewModel" class="fr-col-md-8 fr-col-12">
+      <div v-if="filtresViewModel" class="fr-col-md-9 fr-col-12">
         <h2 class="fr-h4">{{ filtresViewModel.phraseNombreActions }}</h2>
 
         <CatalogueActionsComposant
           v-if="actionsViewModel"
           :actions="actionsViewModel"
-          card-classes="fr-col-12 fr-col-md-6"
+          card-classes="fr-col-12 fr-col-md-4"
         />
       </div>
     </div>
