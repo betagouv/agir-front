@@ -79,7 +79,6 @@
   }
 
   function sauvegarderOptionsCheckbox(nouvellesOptions) {
-    optionsCheckbox.value = nouvellesOptions;
     localStorage.setItem(CLE_STORAGE_OPTIONS, JSON.stringify(nouvellesOptions));
   }
 
