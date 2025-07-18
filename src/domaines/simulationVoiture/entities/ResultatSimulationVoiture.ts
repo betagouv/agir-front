@@ -87,7 +87,7 @@ export class VoitureAlternative extends Voiture {
   }
 
   public getLabel(): string {
-    return this.label;
+    return this.label + (this.getIsOccasion() ? " d'occasion" : '');
   }
 
   public getDifferenceEmission(): number {
