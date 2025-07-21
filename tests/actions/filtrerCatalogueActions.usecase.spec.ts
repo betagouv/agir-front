@@ -23,6 +23,7 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
         dejaFaite: false,
         explicationsRecommandations: new ExplicationsRecommandation(false, []),
         labelCompteur: '0 action réalisée',
+        montantMaxEconomiesEnEuros: 0,
       },
     ];
 
@@ -70,13 +71,17 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
           },
           badges: [
             {
-              text: '<span aria-hidden="true">💰</span><span class="text--bold">5</span> aides disponibles',
+              text: '<span aria-hidden="true">💰</span> <span class="text--bold">5</span> aides',
               color: 'background--vert-badge text--white',
             },
+            {
+              color: 'background-bleu-light text--bleu',
+              text: 'BILAN',
+            },
           ],
-          label: { text: 'Déjà consultée', color: '' },
+          label: undefined,
           nombreDeParticipants: '0 action réalisée',
-          aidesDisponibles: '<span class="text--bold">5</span> aides disponibles',
+          aidesDisponibles: '<span class="text--bold">5</span> aides',
         },
       ]);
     }

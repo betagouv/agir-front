@@ -368,6 +368,11 @@
     background-color: var(--yellow-tournesol-925-125);
 }
 
+.prix-highlight {
+    background-color: #ffefc2;
+    color: #502400;
+}
+
 .background--marron-caramel {
     background-color: var(--brown-caramel-950-100);
 }

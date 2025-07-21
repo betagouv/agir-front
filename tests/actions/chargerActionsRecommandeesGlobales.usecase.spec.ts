@@ -21,6 +21,7 @@ describe('Fichier de tests concernant la récupération des actions recommandée
         dejaFaite: false,
         explicationsRecommandations: new ExplicationsRecommandation(false, []),
         labelCompteur: '0 action réalisée',
+        montantMaxEconomiesEnEuros: 0,
       },
       {
         code: 'code-action-test2',
@@ -34,6 +35,7 @@ describe('Fichier de tests concernant la récupération des actions recommandée
         dejaFaite: false,
         explicationsRecommandations: new ExplicationsRecommandation(false, []),
         labelCompteur: '**4 actions** réalisées',
+        montantMaxEconomiesEnEuros: 300,
       },
     ];
 
@@ -72,16 +74,21 @@ describe('Fichier de tests concernant la récupération des actions recommandée
             },
             badges: [
               {
-                text: '<span aria-hidden="true">💰</span><span class="text--bold">5</span> aides disponibles',
+                text: '<span aria-hidden="true">💰</span> <span class="text--bold">5</span> aides',
                 color: 'background--vert-badge text--white',
               },
+              {
+                color: 'background-bleu-light text--bleu',
+                text: 'BILAN',
+              },
+              {
+                color: 'prix-highlight',
+                text: '<span aria-hidden="true">💶</span> 300 € d\'économies',
+              },
             ],
-            label: {
-              color: '',
-              text: 'Déjà consultée',
-            },
+            label: undefined,
             nombreDeParticipants: '<span class="text--bold">4 actions</span> réalisées',
-            aidesDisponibles: '<span class="text--bold">5</span> aides disponibles',
+            aidesDisponibles: '<span class="text--bold">5</span> aides',
           },
         ]);
       }),

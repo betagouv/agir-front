@@ -96,6 +96,7 @@ interface ActionApiModel {
   nombre_aides_disponibles: number;
   type: string;
   deja_vue: boolean;
+  montant_max_economies_euros: number;
   deja_faite: boolean;
   label_compteur: string;
   explications_recommandation: ExplicationsRecommandationApiModel;
@@ -316,6 +317,7 @@ export class ActionsRepositoryAxios implements ActionsRepository {
       nombreAidesDisponibles: action.nombre_aides_disponibles,
       type: action.type as TypeAction,
       dejaVue: action.deja_vue,
+      montantMaxEconomiesEnEuros: action.montant_max_economies_euros,
       dejaFaite: action.deja_faite,
       labelCompteur: action.label_compteur,
       explicationsRecommandations: new ExplicationsRecommandation(

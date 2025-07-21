@@ -4,6 +4,7 @@ import { RouteActionsName } from '@/router/actions/routes';
 import marked from '@/shell/actionMarkdownToHtml';
 import { buildUrl } from '@/shell/buildUrl';
 import cacherEmojisAuxLecteursDecrans from '@/shell/cacherEmojisAuxLecteursDecrans';
+import { MontantAfficheEnFRBuilder } from '@/shell/nombreAfficheEnFRBuilder';
 import { gererPluriel } from '@/shell/pluriel';
 
 export class ActionsPresenterImpl implements ActionsPresenter {
@@ -63,7 +64,7 @@ export class ActionsPresenterImpl implements ActionsPresenter {
 
     if (aidesDisponibles) {
       badges.push({
-        text: `<span aria-hidden="true">💰</span>${aidesDisponibles}`,
+        text: `<span aria-hidden="true">💰</span> ${aidesDisponibles}`,
         color: 'background--vert-badge text--white',
       });
     }
@@ -89,16 +90,20 @@ export class ActionsPresenterImpl implements ActionsPresenter {
       });
     }
 
+    if (action.montantMaxEconomiesEnEuros > 0) {
+      const montantMaxEconomiesEnEuros = MontantAfficheEnFRBuilder.build(action.montantMaxEconomiesEnEuros);
+      badges.push({
+        text: `<span aria-hidden="true">💶</span> ${montantMaxEconomiesEnEuros} d'économies`,
+        color: 'prix-highlight',
+      });
+    }
+
     return badges;
   }
 
   private determinerLabel(action: Action): { text: string; color: string } | undefined {
     if (action.dejaFaite) {
       return { text: 'Réalisée', color: 'fr-label--vert' };
-    }
-
-    if (action.dejaVue) {
-      return { text: 'Déjà consultée', color: '' };
     }
 
     if (action.explicationsRecommandations.estRecommandee()) {

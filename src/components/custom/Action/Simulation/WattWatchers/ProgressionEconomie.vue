@@ -39,8 +39,6 @@
 
 <style scoped>
   .prix-highlight {
-    background-color: #ffefc2;
-    color: #502400;
     border-radius: 1rem;
   }
 </style>

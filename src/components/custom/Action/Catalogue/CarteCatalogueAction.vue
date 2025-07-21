@@ -12,8 +12,8 @@
             </li>
           </ul>
         </div>
-        <div class="fr-card__end fr-mt-1w fr-pt-0">
-          <p class="fr-card__detail fr-icon-team-line fr-mb-0" v-if="action.nombreDeParticipants">
+        <div class="fr-card__end fr-mt-2w fr-p-0">
+          <p class="fr-card__detail fr-icon-team-line fr-mb-2w line-height--2" v-if="action.nombreDeParticipants">
             <span v-html="action.nombreDeParticipants" />
           </p>
 
@@ -49,5 +49,13 @@
 
   .height-3 {
     height: 3rem;
+  }
+
+  .fr-card__end {
+    justify-content: flex-start !important;
+  }
+
+  .fr-card {
+    min-height: 20.3rem;
   }
 </style>
