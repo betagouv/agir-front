@@ -35,6 +35,10 @@ export interface Action {
   type: TypeAction;
   dejaVue: boolean;
   emoji?: string;
+  montantMaxEconomiesEnEuros: number;
+  dejaFaite: boolean;
+  labelCompteur: string;
+  explicationsRecommandations: ExplicationsRecommandation;
 }
 
 export interface ActionDetail {

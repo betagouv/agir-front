@@ -5,6 +5,7 @@ import { FiltresCatalogueActionsViewModel } from '@/domaines/actions/ports/catal
 import { Action, CatalogueActions, TypeAction } from '@/domaines/actions/ports/actions.repository';
 import { ActionViewModel } from '@/domaines/actions/ports/actions.presenter';
 import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
+import { ExplicationsRecommandation } from '@/domaines/actions/explicationsRecommandation';
 
 describe("Fichier de tests concernant la récupération du catalogue d'actions", () => {
   it('Doit presenter le catalogue actions et les actions', async () => {
@@ -19,6 +20,10 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
         nombreAidesDisponibles: 0,
         type: TypeAction.CLASSIQUE,
         dejaVue: false,
+        dejaFaite: false,
+        explicationsRecommandations: new ExplicationsRecommandation(false, []),
+        labelCompteur: '0 action réalisée',
+        montantMaxEconomiesEnEuros: 10,
       },
       {
         code: 'code-action-test2',
@@ -29,7 +34,13 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
         nombreDePersonnes: 4,
         nombreAidesDisponibles: 5,
         type: TypeAction.SIMULATEUR,
-        dejaVue: true,
+        dejaVue: false,
+        dejaFaite: false,
+        explicationsRecommandations: new ExplicationsRecommandation(false, [
+          { tag: 'economies', labelExplication: 'veut faire des économies' },
+        ]),
+        labelCompteur: '4 actions personnalisées réalisées',
+        montantMaxEconomiesEnEuros: 0,
       },
       {
         code: 'code-action-test3',
@@ -41,6 +52,10 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
         nombreAidesDisponibles: 1,
         type: TypeAction.BILAN,
         dejaVue: true,
+        dejaFaite: true,
+        explicationsRecommandations: new ExplicationsRecommandation(false, []),
+        labelCompteur: '',
+        montantMaxEconomiesEnEuros: 25,
       },
       {
         code: 'code-action-test4',
@@ -52,6 +67,10 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
         nombreAidesDisponibles: 1,
         type: TypeAction.QUIZZ,
         dejaVue: true,
+        dejaFaite: false,
+        explicationsRecommandations: new ExplicationsRecommandation(false, []),
+        labelCompteur: '0 action réalisée',
+        montantMaxEconomiesEnEuros: 0,
       },
     ];
 
@@ -82,9 +101,7 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
         {
           code: 'code-action-test',
           titre: 'Tester une nouvelle <span class="text--bold">recette végétarienne</span>',
-          nombreDePersonnes: undefined,
-          dejaVue: false,
-          aidesDisponibles: undefined,
+          nombreDeParticipants: undefined,
           url: {
             name: 'action-individuelle',
             params: {
@@ -93,14 +110,19 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
               type: 'classique',
             },
           },
+          badges: [
+            {
+              color: 'prix-highlight',
+              text: '<span aria-hidden="true">💶</span> 10 € d\'économies',
+            },
+          ],
+          label: undefined,
+          aidesDisponibles: undefined,
         },
         {
           code: 'code-action-test2',
           titre:
             '<span aria-hidden="true">🍽</span> Tester une nouvelle <span class="text--bold">recette végétarienne</span> 2',
-          nombreDePersonnes: '<span class="text--bold">4</span> actions réalisées',
-          aidesDisponibles: '<span class="text--bold">5</span> aides disponibles',
-          dejaVue: true,
           url: {
             name: 'action-individuelle',
             params: {
@@ -109,14 +131,21 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
               type: 'simulateur',
             },
           },
+          badges: [
+            {
+              text: '<span aria-hidden="true">💰</span> <span class="text--bold">5</span> aides',
+              color: 'background--vert-badge text--white',
+            },
+            { text: 'SIMULATEUR', color: 'background-bleu-light text--bleu' },
+          ],
+          label: { text: 'Recommandée pour moi', color: 'background-bleu-light text--bleu' },
+          nombreDeParticipants: '4 actions personnalisées réalisées',
+          aidesDisponibles: '<span class="text--bold">5</span> aides',
         },
         {
           code: 'code-action-test3',
           titre:
             '<span aria-hidden="true">🍽</span> Tester une nouvelle <span class="text--bold">recette végétarienne</span> 3',
-          nombreDePersonnes: '<span class="text--bold">1</span> action réalisée',
-          aidesDisponibles: '<span class="text--bold">1</span> aide disponible',
-          dejaVue: true,
           url: {
             name: 'action-individuelle',
             params: {
@@ -125,14 +154,28 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
               type: 'bilan',
             },
           },
+          badges: [
+            {
+              text: '<span aria-hidden="true">💰</span> <span class="text--bold">1</span> aide',
+              color: 'background--vert-badge text--white',
+            },
+            {
+              color: 'background-bleu-light text--bleu',
+              text: 'BILAN',
+            },
+            {
+              color: 'prix-highlight',
+              text: '<span aria-hidden="true">💶</span> 25 € d\'économies',
+            },
+          ],
+          label: { text: 'Réalisée', color: 'fr-label--vert' },
+          nombreDeParticipants: undefined,
+          aidesDisponibles: '<span class="text--bold">1</span> aide',
         },
         {
           code: 'code-action-test4',
           titre:
             '<span aria-hidden="true">🍽</span> Tester une nouvelle <span class="text--bold">recette végétarienne</span> 4',
-          nombreDePersonnes: '<span class="text--bold">1</span> action réalisée',
-          aidesDisponibles: '<span class="text--bold">1</span> aide disponible',
-          dejaVue: true,
           url: {
             name: 'action-individuelle',
             params: {
@@ -141,6 +184,16 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
               type: 'quizz',
             },
           },
+          badges: [
+            {
+              text: '<span aria-hidden="true">💰</span> <span class="text--bold">1</span> aide',
+              color: 'background--vert-badge text--white',
+            },
+            { text: 'QUIZ', color: 'background-bleu-light text--bleu' },
+          ],
+          label: undefined,
+          nombreDeParticipants: undefined,
+          aidesDisponibles: '<span class="text--bold">1</span> aide',
         },
       ]);
     }

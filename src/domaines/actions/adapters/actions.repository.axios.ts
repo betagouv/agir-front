@@ -61,13 +61,15 @@ interface ActionDetailApiModel {
     url: string;
   }[];
   enchainement_id: string;
-  explications_recommandation: {
-    est_exclu: boolean;
-    liste_explications: {
-      tag: string;
-      label_explication: string;
-    }[];
-  };
+  explications_recommandation: ExplicationsRecommandationApiModel;
+}
+
+interface ExplicationsRecommandationApiModel {
+  est_exclu: boolean;
+  liste_explications: {
+    tag: string;
+    label_explication: string;
+  }[];
 }
 
 interface ActionDetailCMSApiModel {
@@ -94,6 +96,10 @@ interface ActionApiModel {
   nombre_aides_disponibles: number;
   type: string;
   deja_vue: boolean;
+  montant_max_economies_euros: number;
+  deja_faite: boolean;
+  label_compteur: string;
+  explications_recommandation: ExplicationsRecommandationApiModel;
 }
 
 interface DetailThematiqueApiModel {
@@ -311,6 +317,16 @@ export class ActionsRepositoryAxios implements ActionsRepository {
       nombreAidesDisponibles: action.nombre_aides_disponibles,
       type: action.type as TypeAction,
       dejaVue: action.deja_vue,
+      montantMaxEconomiesEnEuros: action.montant_max_economies_euros,
+      dejaFaite: action.deja_faite,
+      labelCompteur: action.label_compteur,
+      explicationsRecommandations: new ExplicationsRecommandation(
+        action.explications_recommandation.est_exclu,
+        action.explications_recommandation.liste_explications.map(explication => ({
+          tag: explication.tag,
+          labelExplication: explication.label_explication,
+        })),
+      ),
     };
   }
 

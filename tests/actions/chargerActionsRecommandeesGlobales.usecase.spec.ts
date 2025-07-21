@@ -3,6 +3,7 @@ import { ActionsRepositoryMock } from './adapters/actions.repository.mock';
 import { ChargerActionsRecommandeesGlobalesUsecase } from '@/domaines/actions/chargerActionsRecommandeesGlobales.usecase';
 import { ActionsPresenterImpl } from '@/domaines/actions/adapters/actions.presenter.impl';
 import { ActionViewModel } from '@/domaines/actions/ports/actions.presenter';
+import { ExplicationsRecommandation } from '@/domaines/actions/explicationsRecommandation';
 
 describe('Fichier de tests concernant la récupération des actions recommandées inter-thématiques', () => {
   it('Doit presenter les actions sous forme de tableau', async () => {
@@ -17,6 +18,10 @@ describe('Fichier de tests concernant la récupération des actions recommandée
         nombreAidesDisponibles: 0,
         type: TypeAction.CLASSIQUE,
         dejaVue: false,
+        dejaFaite: false,
+        explicationsRecommandations: new ExplicationsRecommandation(false, []),
+        labelCompteur: '0 action réalisée',
+        montantMaxEconomiesEnEuros: 0,
       },
       {
         code: 'code-action-test2',
@@ -27,6 +32,10 @@ describe('Fichier de tests concernant la récupération des actions recommandée
         nombreAidesDisponibles: 5,
         type: TypeAction.BILAN,
         dejaVue: true,
+        dejaFaite: false,
+        explicationsRecommandations: new ExplicationsRecommandation(false, []),
+        labelCompteur: '**4 actions** réalisées',
+        montantMaxEconomiesEnEuros: 300,
       },
     ];
 
@@ -37,10 +46,7 @@ describe('Fichier de tests concernant la récupération des actions recommandée
       new ActionsPresenterImpl(actionsViewModel => {
         expect(actionsViewModel).toStrictEqual<ActionViewModel[]>([
           {
-            aidesDisponibles: undefined,
             code: 'code-action-test',
-            dejaVue: false,
-            nombreDePersonnes: undefined,
             titre: 'Tester une nouvelle <span class="text--bold">recette végétarienne</span>',
             url: {
               name: 'action-individuelle',
@@ -50,12 +56,13 @@ describe('Fichier de tests concernant la récupération des actions recommandée
                 type: 'classique',
               },
             },
+            badges: [],
+            label: undefined,
+            nombreDeParticipants: undefined,
+            aidesDisponibles: undefined,
           },
           {
-            aidesDisponibles: '<span class="text--bold">5</span> aides disponibles',
             code: 'code-action-test2',
-            dejaVue: true,
-            nombreDePersonnes: '<span class="text--bold">4</span> actions réalisées',
             titre: 'Tester une nouvelle <span class="text--bold">recette végétarienne</span> 2',
             url: {
               name: 'action-individuelle',
@@ -65,6 +72,23 @@ describe('Fichier de tests concernant la récupération des actions recommandée
                 type: 'bilan',
               },
             },
+            badges: [
+              {
+                text: '<span aria-hidden="true">💰</span> <span class="text--bold">5</span> aides',
+                color: 'background--vert-badge text--white',
+              },
+              {
+                color: 'background-bleu-light text--bleu',
+                text: 'BILAN',
+              },
+              {
+                color: 'prix-highlight',
+                text: '<span aria-hidden="true">💶</span> 300 € d\'économies',
+              },
+            ],
+            label: undefined,
+            nombreDeParticipants: '<span class="text--bold">4 actions</span> réalisées',
+            aidesDisponibles: '<span class="text--bold">5</span> aides',
           },
         ]);
       }),
