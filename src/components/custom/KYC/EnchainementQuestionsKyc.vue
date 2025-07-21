@@ -24,7 +24,17 @@
           ? wordingDernierBouton
           : 'Question suivante'
       "
-    />
+    >
+      <template v-slot:complement v-if="afficherStepper">
+        <div class="fr-stepper fr-mt-2w fr-mb-3w">
+          <div
+            class="fr-stepper__steps"
+            :data-fr-current-step="questionViewModel.etapeCourante"
+            :data-fr-steps="questionViewModel.nombreTotalDeQuestions"
+          />
+        </div>
+      </template>
+    </KYCForm>
   </div>
 
   <slot v-if="afficherFinKyc" name="fin" />
@@ -41,8 +51,13 @@
   import { utilisateurStore } from '@/store/utilisateur';
 
   const props = withDefaults(
-    defineProps<{ idEnchainementKycs: string; estActive: boolean; wordingDernierBouton?: string }>(),
-    { wordingDernierBouton: 'Passer à la suite' },
+    defineProps<{
+      idEnchainementKycs: string;
+      estActive: boolean;
+      afficherStepper?: boolean;
+      wordingDernierBouton?: string;
+    }>(),
+    { wordingDernierBouton: 'Passer à la suite', afficherStepper: false },
   );
 
   const emit = defineEmits<{

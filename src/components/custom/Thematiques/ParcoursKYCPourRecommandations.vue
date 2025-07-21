@@ -8,6 +8,7 @@
       <EnchainementQuestionsKyc
         :est-active="aCommenceEnchainement"
         :id-enchainement-kycs="idEnchainementKycs"
+        :afficher-stepper="true"
         @fin-kyc-atteinte="onFinKYCEtFocus"
         wording-dernier-bouton="Voir mes recommandations personnalisées"
       >
