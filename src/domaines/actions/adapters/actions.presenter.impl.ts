@@ -53,8 +53,8 @@ export class ActionsPresenterImpl implements ActionsPresenter {
 
     return gererPluriel(
       action.nombreAidesDisponibles,
-      `<span class="text--bold">${action.nombreAidesDisponibles}</span> aide disponible`,
-      `<span class="text--bold">${action.nombreAidesDisponibles}</span> aides disponibles`,
+      `<span class="text--bold">${action.nombreAidesDisponibles}</span> aide`,
+      `<span class="text--bold">${action.nombreAidesDisponibles}</span> aides`,
     );
   }
 
@@ -78,6 +78,13 @@ export class ActionsPresenterImpl implements ActionsPresenter {
     if (action.type === TypeAction.QUIZZ) {
       badges.push({
         text: 'QUIZ',
+        color: 'background-bleu-light text--bleu',
+      });
+    }
+
+    if (action.type === TypeAction.BILAN) {
+      badges.push({
+        text: 'BILAN',
         color: 'background-bleu-light text--bleu',
       });
     }

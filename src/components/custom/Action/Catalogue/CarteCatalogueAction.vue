@@ -5,8 +5,8 @@
         <h3 class="fr-card__title">
           <router-link :to="action.url"><span v-html="action.titre" /></router-link>
         </h3>
-        <div class="fr-card__start" v-if="action.label">
-          <ul class="fr-tags-group">
+        <div class="fr-card__start height-3 flex flex-space-between">
+          <ul class="fr-tags-group" v-if="action.label">
             <li class="line-height--2">
               <p :class="`fr-tag fr-m-0 ${action.label.color}`" v-text="action.label.text" />
             </li>
@@ -18,9 +18,7 @@
           </p>
 
           <template v-if="action.badges && action.badges?.length > 0">
-            <hr class="full-width fr-mt-2w" />
-
-            <ul class="fr-badges-group">
+            <ul class="fr-badges-group fr-mt-2w">
               <li v-for="badge in action.badges" :key="badge.text">
                 <p :class="`fr-badge ${badge.color}`"><span v-html="badge.text" /></p>
               </li>
@@ -47,5 +45,9 @@
 
   .fr-card__detail {
     line-height: 1.5;
+  }
+
+  .height-3 {
+    height: 3rem;
   }
 </style>
