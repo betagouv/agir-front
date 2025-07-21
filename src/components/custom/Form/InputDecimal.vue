@@ -3,6 +3,7 @@
     {{ label.wording }}
     <span class="fr-hint-text">Nombre uniquement (décimales autorisées)</span>
   </label>
+  <slot name="complement" />
   <span v-if="unite" id="unite" class="fr-hint-text fr-sr-only">
     exprimé en {{ unite.libelleLong ?? unite.abreviation }}</span
   >

@@ -1,38 +1,11 @@
 <template>
   <form @submit.prevent="validerLaReponse()">
     <div class="fr-input-group">
-      <KYCDecimal
-        v-if="questionViewModel.type === 'decimal'"
-        v-model="reponse as string"
-        :question-view-model="questionViewModel"
-      />
-      <KYCEntier
-        v-if="questionViewModel.type === 'entier'"
-        v-model="reponse as string"
-        :question-view-model="questionViewModel"
-      />
-      <KYCMosaic
-        v-if="questionViewModel.type === 'mosaic_boolean'"
-        v-model="reponse as string[]"
-        :question-view-model="questionViewModel"
-      />
-      <KYCChoixUnique
-        v-if="questionViewModel.type === 'choix_unique'"
-        v-model="reponse as string[]"
-        :question-view-model="questionViewModel"
-      />
-      <KYCChoixMultiple
-        v-if="questionViewModel.type === 'choix_multiple'"
-        v-model="reponse as string[]"
-        :question-view-model="questionViewModel"
-        :style-du-titre="styleDuTitre"
-      />
-      <KYCLibre
-        v-if="questionViewModel.type === 'libre'"
-        v-model="reponse as string"
-        :question-view-model="questionViewModel"
-        :style-du-titre="styleDuTitre"
-      />
+      <KYCInputWrapper v-model="reponse" :question-view-model="questionViewModel" :style-du-titre="styleDuTitre">
+        <template #complement>
+          <slot name="complement" />
+        </template>
+      </KYCInputWrapper>
     </div>
 
     <Alert
@@ -56,12 +29,7 @@
 <script lang="ts" setup>
   import { onMounted, ref } from 'vue';
   import Alert from '@/components/custom/Alert.vue';
-  import KYCChoixMultiple from '@/components/custom/KYC/KYCTypes/KYCChoixMultiple.vue';
-  import KYCChoixUnique from '@/components/custom/KYC/KYCTypes/KYCChoixUnique.vue';
-  import KYCDecimal from '@/components/custom/KYC/KYCTypes/KYCDecimal.vue';
-  import KYCEntier from '@/components/custom/KYC/KYCTypes/KYCEntier.vue';
-  import KYCLibre from '@/components/custom/KYC/KYCTypes/KYCLibre.vue';
-  import KYCMosaic from '@/components/custom/KYC/KYCTypes/KYCMosaic.vue';
+  import KYCInputWrapper from '@/components/custom/KYC/KYCInputWrapper.vue';
   import { useAlerte } from '@/composables/useAlerte';
   import { QuestionViewModel } from '@/domaines/kyc/adapters/question.presenter.impl';
   import { QuestionRepositoryAxios } from '@/domaines/kyc/adapters/question.repository.axios';
