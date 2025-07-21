@@ -23,10 +23,19 @@
 
     <div class="fr-col-12">
       <h2>Paramètres</h2>
-      <p>Vous avez changé d’adresse ou effectué des travaux importants dans votre habitation&nbsp;?</p>
-      <button class="fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-refresh-line" @click="onRecommencerClicked">
-        Recommencer le questionnaire
-      </button>
+      <p class="fr-m-0">Vous souhaitez modifier certaines informations ?</p>
+      <div class="flex flex-reverse-col">
+        <p class="fr-hint-text fr-icon-question-fill fr-m-0">
+          Pour <span class="text--bold">supprimer</span> les données liées au service ou
+          <span class="text--bold">modifier</span> l’adresse de votre résidence principale, rendez-vous dans le profil.
+        </p>
+        <button
+          class="fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-refresh-line fr-my-2w"
+          @click="onRecommencerClicked"
+        >
+          Recommencer le questionnaire
+        </button>
+      </div>
     </div>
   </div>
 </template>
