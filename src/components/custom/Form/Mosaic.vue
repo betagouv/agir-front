@@ -1,6 +1,8 @@
 <template>
   <fieldset class="mosaic fr-mb-2w">
-    <legend class="fr-h4">{{ legende }}</legend>
+    <legend class="fr-h4 full-width">
+      <slot name="legende">{{ legende }}</slot>
+    </legend>
     <div class="fr-grid-row fr-grid-row--gutters">
       <label v-for="option in localOptions" :key="option.label" class="fr-col-6 fr-col-md-3 position--relative">
         <input
