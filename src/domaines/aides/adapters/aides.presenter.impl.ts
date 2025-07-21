@@ -18,6 +18,7 @@ export class AidesPresenterImpl implements ChargementAidesPresenter {
           partenaireImg: aide.partenaire?.logoUrl,
           montantMaximum: aide.montantMaximum ? MontantAfficheEnFRBuilder.build(aide.montantMaximum) : undefined,
           estGratuit: aide.estGratuit,
+          estSimulateur: aide.isSimulateur,
         }))
         .slice(0, nombreAidesMax),
     );
