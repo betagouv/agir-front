@@ -13,7 +13,7 @@
         @click="trackAideClick"
         :aria-label="aide.titre"
       >
-        <div class="flex flex-space-between fr-p-2w full-height">
+        <div class="flex flex-space-between fr-p-2w min-height-110">
           <div class="text--black">
             <h3 class="fr-text--lg fr-mb-0 text--normal text--lh-1-3">{{ aide.titre }}</h3>
             <p v-if="aide.estGratuit" class="fr-m-0 fr-text--md fr-mt-1w">
@@ -78,5 +78,9 @@
   .fr-text--lavande {
     color: #7878d5;
     background-color: #dee3f5;
+  }
+
+  .min-height-110 {
+    min-height: 6.8rem;
   }
 </style>
