@@ -1,6 +1,7 @@
 <template>
   <section class="fr-container fr-my-3w">
-    <h1 class="fr-h1 fr-mt-4w fr-mb-4w">Actions</h1>
+    <BoutonRetourAutomatique />
+    <h1 class="fr-h1 fr-mt-2w fr-mb-4w">Actions</h1>
     <div v-if="filtresViewModel">
       <h2 class="fr-h4">{{ filtresViewModel.phraseNombreActions }}</h2>
 
@@ -16,6 +17,7 @@
 <script lang="ts" setup>
   import { onMounted, ref } from 'vue';
   import CatalogueActionsComposant from '@/components/custom/Action/Catalogue/CatalogueActionsComposant.vue';
+  import BoutonRetourAutomatique from '@/components/custom/BoutonRetourAutomatique.vue';
   import { ActionsRepositoryAxios } from '@/domaines/actions/adapters/actions.repository.axios';
   import { CatalogueActionsPresenterImpl } from '@/domaines/actions/adapters/catalogueActions.presenter.impl';
   import { ActionViewModel } from '@/domaines/actions/ports/actions.presenter';

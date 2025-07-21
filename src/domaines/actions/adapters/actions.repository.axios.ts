@@ -179,7 +179,7 @@ export class ActionsRepositoryAxios implements ActionsRepository {
   async chargerCatalogueActionsWinter(idUtilisateur: string): Promise<CatalogueActions> {
     const axios = AxiosFactory.getAxios();
     const response = await axios.get<CatalogueActionsApiModel>(
-      `/utilisateurs/${idUtilisateur}/actions?ordre=recommandee&sous_thematique=logement_economie_energie`,
+      `/utilisateurs/${idUtilisateur}/actions?recommandation=recommandee&realisation=pas_faite&selection=actions_winter`,
     );
 
     return {
