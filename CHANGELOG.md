@@ -1,5 +1,23 @@
 # Changelog
 
+## [2.18.0](https://github.com/betagouv/agir-front/compare/v2.17.0...v2.18.0) (2025-07-22)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* affichage carte aide ([#1236](https://github.com/betagouv/agir-front/issues/1236)) ([9021bf2](https://github.com/betagouv/agir-front/commit/9021bf285445e79f643b89f6c412e9b44b4f0952))
+* complément collectivités contenus ([#1214](https://github.com/betagouv/agir-front/issues/1214)) ([fccc70d](https://github.com/betagouv/agir-front/commit/fccc70d2d81281ede76bd8a075d3e9e6996bc808))
+* nouvelles cartes actions ([#1230](https://github.com/betagouv/agir-front/issues/1230)) ([b9aeb28](https://github.com/betagouv/agir-front/commit/b9aeb282d94374cc321c3049643e1f20e32664d5))
+* POC personnalisation ([#1238](https://github.com/betagouv/agir-front/issues/1238)) ([1162870](https://github.com/betagouv/agir-front/commit/11628707b68c8a4b3653535afd4304e3de3a6a1a))
+
+
+### 👷 Autres changements
+
+* Bump @iframe-resizer/vue from 5.4.6 to 5.4.7 ([#1243](https://github.com/betagouv/agir-front/issues/1243)) ([9643993](https://github.com/betagouv/agir-front/commit/96439931dfc0fe9dd27417efc7c462185977b77c))
+* Bump @types/node from 24.0.10 to 24.0.15 ([#1245](https://github.com/betagouv/agir-front/issues/1245)) ([05a21fc](https://github.com/betagouv/agir-front/commit/05a21fc2275b4533ebb5cb1251a43aa861b5bf43))
+* Bump marked from 16.0.0 to 16.1.1 ([#1246](https://github.com/betagouv/agir-front/issues/1246)) ([ab760e7](https://github.com/betagouv/agir-front/commit/ab760e7d87351b26247c25710950758a3c78d96e))
+* Bump vue-tsc from 3.0.1 to 3.0.3 ([#1244](https://github.com/betagouv/agir-front/issues/1244)) ([b5c9aab](https://github.com/betagouv/agir-front/commit/b5c9aab1d4ea4bd57072186fa84911543d397e42))
+
 ## [2.17.0](https://github.com/betagouv/agir-front/compare/v2.16.0...v2.17.0) (2025-07-16)
 
 
