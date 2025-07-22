@@ -64,8 +64,8 @@
             name: RouteActionsName.ACTION_INDIVIDUELLE,
             params: {
               type: TypeAction.SIMULATEUR,
-              id: SimulateursSupportes.MES_AIDES_RENO,
-              titre: 'calculer-vos-aides-pour-renover-votre-logement',
+              id: SimulateursSupportes.WINTER,
+              titre: 'faire-des-economies-sur-ma-facture-d-energie',
             },
           }"
           image="/carte_service_wattwatchers.svg"
