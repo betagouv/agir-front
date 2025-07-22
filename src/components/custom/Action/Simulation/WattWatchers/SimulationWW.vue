@@ -1,8 +1,11 @@
 <template>
   <div ref="containerRef" tabindex="-1">
-    <Alert type="warning" v-if="etapeActuelle === EtapeSimulateur.RENSEIGNEMENT && messageWarning">
-      <p>{{ messageWarning }}</p>
-    </Alert>
+    <Alert
+      type="warning"
+      v-if="etapeActuelle === EtapeSimulateur.RENSEIGNEMENT && messageWarning"
+      :message="messageWarning"
+      class="fr-mb-2w"
+    />
 
     <SimulationWwIntroduction
       v-if="etapeActuelle === EtapeSimulateur.INTRODUCTION"
