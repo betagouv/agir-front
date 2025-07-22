@@ -1,5 +1,9 @@
 <template>
   <div ref="containerRef" tabindex="-1">
+    <Alert type="warning" v-if="etapeActuelle === EtapeSimulateur.RENSEIGNEMENT && messageWarning">
+      <p>{{ messageWarning }}</p>
+    </Alert>
+
     <SimulationWwIntroduction
       v-if="etapeActuelle === EtapeSimulateur.INTRODUCTION"
       :passer-etape-suivante="
@@ -41,6 +45,7 @@
   import SimulationResultatWW from '@/components/custom/Action/Simulation/WattWatchers/SimulationResultatWW.vue';
   import SimulationWwIntroduction from '@/components/custom/Action/Simulation/WattWatchers/SimulationWWIntroduction.vue';
   import SimulationWwRenseignement from '@/components/custom/Action/Simulation/WattWatchers/SimulationWWRenseignement.vue';
+  import Alert from '@/components/custom/Alert.vue';
   import KyCsAction from '@/components/custom/KYC/KYCsAction.vue';
   import { TypeAction } from '@/domaines/actions/ports/actions.repository.js';
   import { LogementRepositoryAxios } from '@/domaines/logement/adapters/logement.repository.axios';
@@ -78,7 +83,7 @@
 
   const onFin = () => {
     aDejaEteSimuleRef.value = true;
-    etapeActuelle.value = EtapeSimulateur.SIMULATEUR;
+    etapeActuelle.value = EtapeSimulateur.RESULTAT;
   };
 
   const containerRef = ref<HTMLDivElement>();
