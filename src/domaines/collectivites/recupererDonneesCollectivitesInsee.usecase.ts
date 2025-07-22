@@ -27,9 +27,17 @@ export interface DonneesCollectivitesINSEE {
     departementales: AideOuArticleDeCollectivite[];
     locales: AideOuArticleDeCollectivite[];
   };
+  actionsRepartitionParThematiques: {
+    logement: number;
+    transport: number;
+    consommation: number;
+    alimentation: number;
+  };
 
+  nombreActifsLocauxDernierMois: number;
   nombreInscrits: number;
   nombreInscritsLocaux: number;
+  nombreInscritsLocauxDernierMois: number;
   nombrePointsMoyen: number;
   nombreDefisEnCours: number;
   nombreDefisRealises: number;

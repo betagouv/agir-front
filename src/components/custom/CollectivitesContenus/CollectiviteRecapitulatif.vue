@@ -3,8 +3,48 @@
     <i>J'agis</i> en quelques chiffres pour <i>{{ collectiviteInseeViewModel.nom }}</i> !
   </h2>
 
-  <p v-html="collectiviteInseeViewModel.indicationNombreUtilisateurs" />
   <p v-html="collectiviteInseeViewModel.indicationAidesEtArticles" />
+
+  <div class="fr-grid-row fr-grid-row--gutters fr-mb-2w">
+    <div class="fr-col-12 fr-col-md-4">
+      <div class="shadow background--white fr-p-2w fr-px-3w flex flex-column full-height">
+        <h3 class="fr-h4 fr-mb-1w">Nombre d'inscrits sur J'agis</h3>
+        <p class="fr-mb-0 flex flex-column flex-space-between full-height">
+          <span class="display-block text--normal fr-text fr-text--lg">
+            {{ collectiviteInseeViewModel.indicationNombreUtilisateurs }} utilisateurs
+          </span>
+
+          <span
+            v-if="collectiviteInseeViewModel.nombreInscrits.localDernierMois > 0"
+            class="display-block fr-text--sm text--normal fr-mb-0"
+          >
+            <span class="display-block fr-mb-0 fr-text--xl"
+              >+{{ collectiviteInseeViewModel.nombreInscrits.localDernierMois }}</span
+            >
+            nouvelles inscriptions ce mois-ci
+          </span>
+        </p>
+      </div>
+    </div>
+
+    <div class="fr-col-12 fr-col-md-4">
+      <section class="shadow background--white fr-p-2w fr-px-3w flex flex-column full-height">
+        <h3 class="fr-h4 fr-mb-1w">Nombre d'utilisateurs actifs ce dernier mois</h3>
+        <p class="fr-mb-0 flex flex-column flex-space-between full-height fr-text--lg">
+          {{ collectiviteInseeViewModel.indicationNombreUtilisateurs }} utilisateurs
+        </p>
+      </section>
+    </div>
+
+    <div class="fr-col-12 fr-col-md-4">
+      <div class="shadow background--white fr-p-2w fr-px-3w full-height">
+        <h3 class="fr-h4 fr-mb-1w">Actions par thématique</h3>
+        <CollectiviteActionsParThematiqueGraph
+          :chart-data="collectiviteInseeViewModel.graphiqueActionsRepartitionParThematiquesData"
+        />
+      </div>
+    </div>
+  </div>
 
   <div class="fr-grid-row fr-grid-row--gutters">
     <CarteDecouverte
@@ -45,6 +85,7 @@
 
 <script lang="ts" setup>
   import CarteDecouverte from '@/components/custom/CollectivitesContenus/CarteDecouverte.vue';
+  import CollectiviteActionsParThematiqueGraph from '@/components/custom/CollectivitesContenus/CollectiviteActionsParThematiqueGraph.vue';
   import CollectiviteListeContenu from '@/components/custom/CollectivitesContenus/CollectiviteListeContenu.vue';
   import { DonneesCollectivitesInseeViewModel } from '@/domaines/collectivites/ports/donneesCollectivitesInsee.presenter';
 

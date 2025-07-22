@@ -40,12 +40,19 @@ export interface CarteThematique {
 export interface DonneesCollectivitesInseeViewModel extends IndicationGeoArticleOuAideViewModel {
   indicationNombreUtilisateurs: string;
   indicationAidesEtArticles: string;
-
   cartesThematiques: CarteThematique[];
-
+  nombreActifsLocalDernierMois: number;
   nombreInscrits: {
     total: number;
     local: number;
+    localDernierMois: number;
+  };
+  graphiqueActionsRepartitionParThematiquesData: {
+    labels: string[];
+    datasets: {
+      data: number[];
+      backgroundColor: string[];
+    }[];
   };
 }
 
