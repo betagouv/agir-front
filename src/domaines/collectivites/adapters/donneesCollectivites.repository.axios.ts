@@ -25,6 +25,7 @@ interface DonneesCollectivitesINSEEModelAPI {
   liste_communes_dans_EPCI: string[];
   est_EPCI: boolean;
 
+  nombre_actifs_local_dernier_mois: number;
   nombre_inscrits_total: number;
   nombre_inscrits_local: number;
   nombre_inscrits_local_dernier_mois: number;
@@ -66,6 +67,7 @@ export class DonneesCollectivitesRepositoryAxios implements DonneesCollectivites
         alimentation: response.data.pourcent_actions_alimentation,
       },
 
+      nombreActifsLocauxDernierMois: response.data.nombre_actifs_local_dernier_mois,
       nombreInscrits: response.data.nombre_inscrits_total,
       nombreInscritsLocaux: response.data.nombre_inscrits_local,
       nombreInscritsLocauxDernierMois: response.data.nombre_inscrits_local_dernier_mois,

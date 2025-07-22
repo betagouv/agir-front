@@ -36,6 +36,7 @@ export class DonneesCollectivitesInseePresenterImpl implements DonneesCollectivi
       indicationNombreUtilisateurs: this.genererIndicationNombreUtilisateurs(donnees),
       indicationAidesEtArticles: this.genererIndicationAidesEtArticles(donnees),
       cartesThematiques: this.genererCartesThematiques(aides, articles, contenuSupplementaires),
+      nombreActifsLocalDernierMois: donnees.nombreActifsLocauxDernierMois,
       nombreInscrits: {
         total: donnees.nombreInscrits,
         local: donnees.nombreInscritsLocaux,

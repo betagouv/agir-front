@@ -71,11 +71,19 @@ describe("Fichier de test du usecase de récupération des données collectivit�
           { id: 35, thematiques: [ClefThematiqueAPI.consommation], titre: 'Article local pour la consommation' },
         ],
       },
+      actionsRepartitionParThematiques: {
+        logement: 1,
+        transport: 2,
+        consommation: 3,
+        alimentation: 4,
+      },
       nom: 'Lillers',
       departement: 'Pas-De-Calais',
       region: 'Hauts-de-France',
       estEPCI: false,
       listeCommunesPourEPCI: [],
+      nombreActifsLocauxDernierMois: 3,
+      nombreInscritsLocauxDernierMois: 3,
       nombreDefisEnCours: 5,
       nombreDefisRealises: 2,
       nombreInscrits: 230,
@@ -131,8 +139,7 @@ describe("Fichier de test du usecase de récupération des données collectivit�
         nom: 'Lillers',
         departement: 'Pas-De-Calais',
         region: 'Hauts-de-France',
-        indicationNombreUtilisateurs:
-          'La collectivité compte <span class="text--bold">10</span> utilisateur(s) inscrit(s) parmi les <span class="text--bold">230</span> utilisateurs.',
+        indicationNombreUtilisateurs: '10',
         indicationAidesEtArticles: `<i>J'agis</i> recense <span class="text--bold">20</span> aides, ainsi que <span class="text--bold">16</span> articles pour vos habitants !`,
         cartesThematiques: [
           {
@@ -661,7 +668,17 @@ describe("Fichier de test du usecase de récupération des données collectivit�
             contenusSupplementaires: [],
           },
         ],
-        nombreInscrits: { total: 230, local: 10 },
+        nombreInscrits: { total: 230, local: 10, localDernierMois: 3 },
+        nombreActifsLocalDernierMois: 3,
+        graphiqueActionsRepartitionParThematiquesData: {
+          labels: ['Alimentation', 'Transport', 'Consommation', 'Logement'],
+          datasets: [
+            {
+              data: [4, 2, 3, 1],
+              backgroundColor: ['rgb(255, 99, 132)', 'rgb(54, 162, 235)', 'rgb(255, 205, 86)', 'rgb(75, 192, 192)'],
+            },
+          ],
+        },
       });
     }
   });

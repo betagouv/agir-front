@@ -34,6 +34,7 @@ export interface DonneesCollectivitesINSEE {
     alimentation: number;
   };
 
+  nombreActifsLocauxDernierMois: number;
   nombreInscrits: number;
   nombreInscritsLocaux: number;
   nombreInscritsLocauxDernierMois: number;

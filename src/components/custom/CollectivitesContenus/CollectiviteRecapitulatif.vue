@@ -7,21 +7,20 @@
 
   <div class="fr-grid-row fr-grid-row--gutters fr-mb-2w">
     <div class="fr-col-12 fr-col-md-4">
-      <div class="shadow background--white fr-p-2w fr-px-3w full-height">
-        <p class="fr-h4 fr-mb-0 flex flex-column flex-space-between full-height">
-          <span class="display-block">
-            Nombre d'inscrits sur J'agis
-            <span
-              class="display-block text--normal fr-text"
-              v-text="collectiviteInseeViewModel.indicationNombreUtilisateurs"
-            />
+      <div class="shadow background--white fr-p-2w fr-px-3w flex flex-column full-height">
+        <h3 class="fr-h4 fr-mb-1w">Nombre d'inscrits sur J'agis</h3>
+        <p class="fr-mb-0 flex flex-column flex-space-between full-height">
+          <span class="display-block text--normal fr-text fr-text--lg">
+            {{ collectiviteInseeViewModel.indicationNombreUtilisateurs }} utilisateurs
           </span>
 
           <span
             v-if="collectiviteInseeViewModel.nombreInscrits.localDernierMois > 0"
             class="display-block fr-text--sm text--normal fr-mb-0"
           >
-            <span class="display-block fr-mb-0" v-text="collectiviteInseeViewModel.nombreInscrits.localDernierMois" />
+            <span class="display-block fr-mb-0 fr-text--xl"
+              >+{{ collectiviteInseeViewModel.nombreInscrits.localDernierMois }}</span
+            >
             nouvelles inscriptions ce mois-ci
           </span>
         </p>
@@ -29,27 +28,17 @@
     </div>
 
     <div class="fr-col-12 fr-col-md-4">
-      <div class="shadow background--white fr-p-2w fr-px-3w full-height">
-        <p class="fr-h4 fr-mb-0 flex flex-column flex-space-between full-height">
-          <span class="display-block">
-            Nombre d'utilisateurs actifs
-            <span
-              class="display-block text--normal fr-text"
-              v-text="collectiviteInseeViewModel.indicationNombreUtilisateurs"
-            />
-          </span>
-
-          <span class="fr-text--sm text--normal fr-mb-0">
-            <span class="display-block fr-mb-0">blabla</span>
-            nouvelles inscriptions ce mois-ci
-          </span>
+      <section class="shadow background--white fr-p-2w fr-px-3w flex flex-column full-height">
+        <h3 class="fr-h4 fr-mb-1w">Nombre d'utilisateurs actifs ce dernier mois</h3>
+        <p class="fr-mb-0 flex flex-column flex-space-between full-height fr-text--lg">
+          {{ collectiviteInseeViewModel.indicationNombreUtilisateurs }} utilisateurs
         </p>
-      </div>
+      </section>
     </div>
 
     <div class="fr-col-12 fr-col-md-4">
       <div class="shadow background--white fr-p-2w fr-px-3w full-height">
-        <p class="fr-h4 fr-mb-0">Actions par thématique</p>
+        <h3 class="fr-h4 fr-mb-1w">Actions par thématique</h3>
         <CollectiviteActionsParThematiqueGraph
           :chart-data="collectiviteInseeViewModel.graphiqueActionsRepartitionParThematiquesData"
         />

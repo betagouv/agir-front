@@ -41,6 +41,7 @@ export interface DonneesCollectivitesInseeViewModel extends IndicationGeoArticle
   indicationNombreUtilisateurs: string;
   indicationAidesEtArticles: string;
   cartesThematiques: CarteThematique[];
+  nombreActifsLocalDernierMois: number;
   nombreInscrits: {
     total: number;
     local: number;
