@@ -26,9 +26,13 @@
           <p id="info-adresse" class="fr-hint-text fr-info-text fr-icon-info-fill">
             Elle sera enregistrée dans votre profil
           </p>
-          <p v-if="erreurAdresse" id="adresse-text-input-error-desc-error" aria-live="assertive" class="fr-error-text">
-            {{ erreurAdresse }}
-          </p>
+          <p
+            v-if="erreurAdresse"
+            id="adresse-text-input-error-desc-error"
+            aria-live="assertive"
+            class="fr-error-text"
+            v-text="erreurAdresse"
+          />
         </div>
 
         <Callout
@@ -185,12 +189,12 @@
     );
   });
 
-  function localiserMonCompteur() {
+  async function localiserMonCompteur() {
     if (formulaireEstEnErreur()) return;
 
     if (choixLocalisateur.value === 'numero-prm') {
       const usecase = new InscriptionParPRMUsecase(new WattWatchersRepositoryAxios());
-      usecase.execute(
+      await usecase.execute(
         utilisateurStore().utilisateur.id,
         numeroPrmValue.value,
         nomDeFamille.value,
@@ -211,7 +215,7 @@
       );
     } else {
       const usecase = new InscriptionParAdresseUsecase(new WattWatchersRepositoryAxios());
-      usecase.execute(
+      await usecase.execute(
         utilisateurStore().utilisateur.id,
         nomDeFamille.value,
         {
