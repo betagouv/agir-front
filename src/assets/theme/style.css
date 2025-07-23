@@ -405,6 +405,10 @@
     background-color: var(--background-beige);
 }
 
+.background--sable {
+    background-color: #d1b781;
+}
+
 .fr-tag--custom-bleu {
     background-color: #e2eafb;
     color: #000091;
