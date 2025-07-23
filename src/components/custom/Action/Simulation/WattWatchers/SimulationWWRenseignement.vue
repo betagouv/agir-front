@@ -192,6 +192,9 @@
   async function localiserMonCompteur() {
     if (formulaireEstEnErreur()) return;
 
+    connexionPrmStatus.value = ConnexionPRMStatus.EN_COURS;
+    ouvrirModale();
+
     if (choixLocalisateur.value === 'numero-prm') {
       const usecase = new InscriptionParPRMUsecase(new WattWatchersRepositoryAxios());
       await usecase.execute(
@@ -200,15 +203,9 @@
         nomDeFamille.value,
         new InscriptionPresenterImpl(
           (): void => {
-            ouvrirModale();
-            connexionPrmStatus.value = ConnexionPRMStatus.EN_COURS;
-
-            setTimeout(() => {
-              connexionPrmStatus.value = ConnexionPRMStatus.SUCCES;
-            }, 1000);
+            connexionPrmStatus.value = ConnexionPRMStatus.SUCCES;
           },
           (): void => {
-            ouvrirModale();
             connexionPrmStatus.value = ConnexionPRMStatus.ECHEC;
           },
         ),
@@ -229,15 +226,9 @@
         },
         new InscriptionPresenterImpl(
           (): void => {
-            ouvrirModale();
-            connexionPrmStatus.value = ConnexionPRMStatus.EN_COURS;
-
-            setTimeout(() => {
-              connexionPrmStatus.value = ConnexionPRMStatus.SUCCES;
-            }, 1000);
+            connexionPrmStatus.value = ConnexionPRMStatus.SUCCES;
           },
           (): void => {
-            ouvrirModale();
             connexionPrmStatus.value = ConnexionPRMStatus.ECHEC;
           },
         ),
