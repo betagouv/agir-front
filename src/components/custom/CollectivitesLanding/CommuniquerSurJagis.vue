@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-sable fr-py-5w">
+  <div class="background--sable fr-py-5w">
     <div class="fr-grid-row">
       <div
         class="fr-col-11 fr-col-md-10 fr-col-lg-8 fr-col-xl-6 fr-mx-auto bg-sable-clair fr-px-4w fr-py-2w border-radius--md"
@@ -24,10 +24,6 @@
 </template>
 
 <style scoped>
-  .bg-sable {
-    background-color: #d1b781;
-  }
-
   .bg-sable-clair {
     background-color: #e4ca96;
   }

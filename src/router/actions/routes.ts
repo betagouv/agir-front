@@ -5,6 +5,7 @@ export enum RouteActionsPath {
   CATALOGUE_ACTION = '/actions',
   CATALOGUE_ACTION_WINTER = '/actions/winter',
   PREVISUALISER_ACTION = '/actions/previsualisation/:type/:id/',
+  SELECTION_ACTIONS = '/actions/selection',
 }
 
 export enum RouteActionsName {
@@ -12,6 +13,7 @@ export enum RouteActionsName {
   CATALOGUE_ACTION = 'catalogue-action',
   PREVISUALISER_ACTION = 'previsualiser-action',
   CATALOGUE_ACTION_WINTER = 'catalogue-action-winter',
+  SELECTION_ACTIONS = 'selection-actions',
 }
 
 const actionsRoutes: RouteRecordRaw[] = [
@@ -39,6 +41,15 @@ const actionsRoutes: RouteRecordRaw[] = [
     component: () => import('@/components/pages/PageCatalogueActionsWinter.vue'),
     meta: {
       title: "Catalogue d'actions pour Winter",
+      estPublique: true,
+    },
+  },
+  {
+    path: RouteActionsPath.SELECTION_ACTIONS,
+    name: RouteActionsName.SELECTION_ACTIONS,
+    component: () => import('@/components/pages/PageSelectionActions.vue'),
+    meta: {
+      title: "Ma sélection d'actions",
       estPublique: true,
     },
   },
