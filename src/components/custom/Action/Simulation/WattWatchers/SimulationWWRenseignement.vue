@@ -87,7 +87,6 @@
   </form>
 
   <RenseignementModale
-    :commune="adresseBarreDeRecherche?.commune || ''"
     :connexion-prm-status="connexionPrmStatus"
     :modale-id="MODALE_ID"
     :modifier-numero="
@@ -97,8 +96,6 @@
         nextTick(() => numeroPrmInput?.focus());
       }
     "
-    :nom="nomDeFamille"
-    :numero-compteur-input="numeroPrmValue"
     :passer-etape-suivante="passerEtapeSuivante"
     :retour="fermerModale"
   />

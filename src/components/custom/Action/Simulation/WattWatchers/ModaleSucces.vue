@@ -19,11 +19,7 @@
 
   defineProps<{
     modaleId: string;
-    numeroCompteurInput?: string;
-    nom: string;
-    commune: string;
     passerEtapeSuivante: () => void;
-    retour: () => void;
   }>();
 </script>
 

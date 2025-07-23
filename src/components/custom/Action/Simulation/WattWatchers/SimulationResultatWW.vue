@@ -2,7 +2,7 @@
   <h2 class="fr-h3">Ma consommation</h2>
 
   <div v-if="resultatWWViewModel" class="fr-grid-row fr-grid-row--gutters">
-    <div class="fr-col-md-6 fr-col-12">
+    <div class="fr-col-md-6 fr-col-12" v-if="resultatWWViewModel.detailConsommations">
       <div class="shadow full-height">
         <ResultatWW
           :detail-consommations="resultatWWViewModel.detailConsommations"
@@ -11,8 +11,9 @@
       </div>
     </div>
     <div class="fr-col-md-6 fr-col-12">
-      <div class="shadow full-height">
+      <div class="shadow full-height fr-py-3w">
         <ProgressionEconomie
+          v-if="resultatWWViewModel.economiePotentielle.valeur"
           :economie-actuelle="resultatWWViewModel.economieActuelle"
           :economie-possible="resultatWWViewModel.economiePotentielle"
         />

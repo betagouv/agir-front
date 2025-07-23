@@ -27,8 +27,4 @@
   .accordeon-prm h4 {
     font-size: 1.1rem;
   }
-
-  .force-full-width {
-    width: 100%;
-  }
 </style>
