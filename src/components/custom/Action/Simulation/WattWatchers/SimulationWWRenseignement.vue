@@ -4,25 +4,36 @@
 
     <template v-if="!affichagePRM">
       <div :class="erreurAdresse ? 'fr-input-group--error' : ''" class="fr-mb-4w fr-input-group">
-        <label class="fr-mb-3w" for="recherche-adresse-input">Mon adresse</label>
-        <BarreDeRechercheAdresse
-          v-model:adresse="adresse"
-          v-model:coordonnees="coordonnees"
-          v-model:recherche="recherche"
-          :input-options="{
-            describedBy: erreurAdresse ? 'adresse-text-input-error-desc-error' : '',
-          }"
-          @update:coordonnees="
-            () => {
-              if (coordonnees) {
-                avecAdressePrivee = true;
-              }
-            }
-          "
+        <InputText
+          v-if="adresseDejaConnue?.rue"
+          ref="adresseInput"
+          v-model="recherche"
+          disabled
+          label="L’adresse de ma résidence principale"
+          name="adresse"
         />
-        <p v-if="erreurAdresse" id="adresse-text-input-error-desc-error" aria-live="assertive" class="fr-error-text">
-          {{ erreurAdresse }}
-        </p>
+        <div v-else>
+          <label class="fr-mb-3w" for="recherche-adresse-input">L’adresse de ma résidence principale</label>
+
+          <BarreDeRechercheAdresse
+            v-model:adresse="adresseBarreDeRecherche"
+            v-model:coordonnees="coordonnees"
+            v-model:recherche="recherche"
+            :input-options="{
+              describedBy: erreurAdresse ? 'adresse-text-input-error-desc-error info-adresse' : 'info-adresse',
+            }"
+          />
+          <p id="info-adresse" class="fr-hint-text fr-info-text fr-icon-info-fill">
+            Elle sera enregistrée dans votre profil
+          </p>
+          <p
+            v-if="erreurAdresse"
+            id="adresse-text-input-error-desc-error"
+            aria-live="assertive"
+            class="fr-error-text"
+            v-text="erreurAdresse"
+          />
+        </div>
 
         <Callout
           v-if="avecAdressePrivee"
@@ -76,7 +87,6 @@
   </form>
 
   <RenseignementModale
-    :commune="adresse?.commune || ''"
     :connexion-prm-status="connexionPrmStatus"
     :modale-id="MODALE_ID"
     :modifier-numero="
@@ -86,8 +96,6 @@
         nextTick(() => numeroPrmInput?.focus());
       }
     "
-    :nom="nomDeFamille"
-    :numero-compteur-input="numeroPrmValue"
     :passer-etape-suivante="passerEtapeSuivante"
     :retour="fermerModale"
   />
@@ -129,7 +137,8 @@
 
   const recherche = ref<string>('');
   const coordonnees = ref<Coordonnees>();
-  const adresse = ref<AdresseBarreDeRecherche>();
+  const adresseBarreDeRecherche = ref<AdresseBarreDeRecherche>();
+  const adresseDejaConnue = ref<AdresseBarreDeRecherche>();
 
   const nomDeFamille = ref<string>(utilisateur.nom ?? '');
   const acceptationCguWw = ref<boolean>(false);
@@ -160,58 +169,64 @@
       async (barreDeRechercheViewModel: BarreDeRechercheViewModel) => {
         coordonnees.value = barreDeRechercheViewModel.coordonnees;
         recherche.value = barreDeRechercheViewModel.recherche;
+
+        adresseBarreDeRecherche.value = {
+          ...barreDeRechercheViewModel.adresse,
+          numeroEtRueEtCodePostal: '',
+          numeroEtRue: '',
+          commune: '',
+          departement: '',
+          coordonnees: {
+            latitude: coordonnees.value?.latitude ?? 0,
+            longitude: coordonnees.value?.longitude ?? 0,
+          },
+        };
+        adresseDejaConnue.value = adresseBarreDeRecherche.value;
       },
     );
   });
 
-  function localiserMonCompteur() {
+  async function localiserMonCompteur() {
     if (formulaireEstEnErreur()) return;
+
+    connexionPrmStatus.value = ConnexionPRMStatus.EN_COURS;
+    ouvrirModale();
 
     if (choixLocalisateur.value === 'numero-prm') {
       const usecase = new InscriptionParPRMUsecase(new WattWatchersRepositoryAxios());
-      usecase.execute(
+      await usecase.execute(
         utilisateurStore().utilisateur.id,
         numeroPrmValue.value,
         nomDeFamille.value,
         new InscriptionPresenterImpl(
           (): void => {
-            ouvrirModale();
-            connexionPrmStatus.value = ConnexionPRMStatus.EN_COURS;
-
-            setTimeout(() => {
-              connexionPrmStatus.value = ConnexionPRMStatus.SUCCES;
-            }, 1000);
+            connexionPrmStatus.value = ConnexionPRMStatus.SUCCES;
           },
           (): void => {
-            //Todo: erreur lors de l'inscription
+            connexionPrmStatus.value = ConnexionPRMStatus.ECHEC;
           },
         ),
       );
     } else {
       const usecase = new InscriptionParAdresseUsecase(new WattWatchersRepositoryAxios());
-      usecase.execute(
+      await usecase.execute(
         utilisateurStore().utilisateur.id,
         nomDeFamille.value,
         {
-          commune_label: adresse.value!.commune,
-          numeroRue: adresse.value!.numeroRue,
-          rue: adresse.value!.rue,
-          codePostal: adresse.value!.codePostal,
-          codeEpci: adresse.value!.codeEpci,
-          coordonnees: adresse.value!.coordonnees,
+          rue: adresseBarreDeRecherche.value!.rue,
+          codeEpci: adresseBarreDeRecherche.value!.codeEpci,
+          codePostal: adresseBarreDeRecherche.value!.codePostal,
+          numeroRue: adresseBarreDeRecherche.value!.numeroRue,
+          commune_label: adresseBarreDeRecherche.value!.commune,
+          coordonnees: adresseBarreDeRecherche.value!.coordonnees,
           commune_utilisee_dans_le_compte: '',
         },
         new InscriptionPresenterImpl(
           (): void => {
-            ouvrirModale();
-            connexionPrmStatus.value = ConnexionPRMStatus.EN_COURS;
-
-            setTimeout(() => {
-              connexionPrmStatus.value = ConnexionPRMStatus.SUCCES;
-            }, 1000);
+            connexionPrmStatus.value = ConnexionPRMStatus.SUCCES;
           },
           (): void => {
-            //Todo: erreur lors de l'inscription
+            connexionPrmStatus.value = ConnexionPRMStatus.ECHEC;
           },
         ),
       );
@@ -219,7 +234,7 @@
   }
 
   function definirAdressePrincipale() {
-    definirAdressePrincipaleComposable(utilisateur.id, adresse.value, coordonnees.value);
+    definirAdressePrincipaleComposable(utilisateur.id, adresseBarreDeRecherche.value, coordonnees.value);
   }
 
   function resetErreursFormulaires() {

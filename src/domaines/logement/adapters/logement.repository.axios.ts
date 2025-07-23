@@ -2,6 +2,7 @@ import { AxiosFactory, intercept40X } from '@/axios.factory';
 import { LogementRepository } from '@/domaines/logement/ports/logement.repository';
 import { Adresse } from '@/domaines/logement/recupererAdressePourBarreDeRecherche.usecase';
 import { Logement } from '@/domaines/logement/recupererInformationLogement.usecase';
+import { EtatPrm } from '@/domaines/simulationWattWatchers/recupererEtatPrm.usecase';
 
 export enum TypeLogementApiModel {
   Maison = 'maison',
@@ -52,6 +53,8 @@ export interface LogementApiModel {
   longitude: number;
   numero_rue: string;
   rue: string;
+  est_prm_present: boolean;
+  est_prm_obsolete: boolean;
 }
 
 export class LogementRepositoryAxios implements LogementRepository {
@@ -88,6 +91,14 @@ export class LogementRepositoryAxios implements LogementRepository {
       numeroRue: reponse.data.numero_rue,
       rue: reponse.data.rue,
       codeEpci: reponse.data.code_commune,
+    };
+  }
+
+  async recupererEtatPrm(utilisateurId: string): Promise<EtatPrm> {
+    const reponse = await AxiosFactory.getAxios().get<LogementApiModel>(`utilisateurs/${utilisateurId}/logement`);
+    return {
+      estPrmPresent: reponse.data.est_prm_present,
+      estPrmObsolete: reponse.data.est_prm_obsolete,
     };
   }
 

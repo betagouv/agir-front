@@ -57,9 +57,12 @@ export class WattWatchersRepositoryAxios implements WattWatchersRepository {
 
       {
         nom: nom,
-        adresse: `${adresse.numeroRue} ${adresse.rue}`,
+        rue: adresse.rue,
+        code_commune: adresse.codeEpci,
         code_postal: adresse.codePostal,
-        code_commune: adresse.commune_label,
+        latitude: adresse.coordonnees.latitude,
+        longitude: adresse.coordonnees.longitude,
+        numero_rue: adresse.numeroRue,
       },
     );
   }

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="detailConsommations.length > 0">
     <div class="position--relative full-width full-height fr-px-2w fr-py-3w flex flex-center">
       <Doughnut :data="graphData" :options="graphOptions" ref="chartRef" aria-hidden="true" />
 
@@ -21,6 +21,15 @@
     </div>
 
     <ListeDetailConsommation :detail-consommations="detailConsommations" />
+  </div>
+
+  <div v-else class="fr-p-3w flex flex-center flex-column align-items--center full-height">
+    <p class="text--center" v-if="totalConsommation">
+      <span class="text--bold text--3xl" v-text="totalConsommation" />
+      consommés par an
+    </p>
+
+    <p class="fr-mb-0 text--center fr-text--sm">Le détail de votre consommation n'est disponible pour le moment.</p>
   </div>
 </template>
 
