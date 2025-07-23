@@ -24,7 +24,7 @@
   </div>
 
   <div v-else class="fr-p-3w flex flex-center flex-column align-items--center full-height">
-    <p class="text--center">
+    <p class="text--center" v-if="totalConsommation">
       <span class="text--bold text--3xl" v-text="totalConsommation" />
       consommés par an
     </p>
