@@ -1,5 +1,5 @@
 <template>
-  <div class="fr-card fr-card--sm fr-enlarge-link">
+  <div class="fr-card fr-card--sm fr-enlarge-link fr-card--shadow">
     <div class="fr-card__body">
       <div class="fr-card__content">
         <h3 class="fr-card__title">

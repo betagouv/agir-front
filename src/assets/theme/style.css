@@ -405,6 +405,10 @@
     background-color: var(--background-beige);
 }
 
+.background--sable {
+    background-color: #d1b781;
+}
+
 .list-style-none {
     list-style: none;
 }
