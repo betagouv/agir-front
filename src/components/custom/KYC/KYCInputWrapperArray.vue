@@ -10,30 +10,16 @@
   import { computed, defineModel, defineProps } from 'vue';
   import KYCChoixMultiple from './KYCTypes/KYCChoixMultiple.vue';
   import KYCChoixUnique from './KYCTypes/KYCChoixUnique.vue';
-  import KYCDecimal from './KYCTypes/KYCDecimal.vue';
-  import KYCEntier from './KYCTypes/KYCEntier.vue';
-  import KYCLibre from './KYCTypes/KYCLibre.vue';
   import KYCMosaic from './KYCTypes/KYCMosaic.vue';
   import { QuestionViewModel } from '@/domaines/kyc/adapters/question.presenter.impl';
 
-  const modelValue = defineModel<string | string[]>(); // two-way binding
+  const modelValue = defineModel<string[]>();
   const props = defineProps<{
     questionViewModel: QuestionViewModel;
     styleDuTitre?: string;
   }>();
 
-  const componentMap: Record<
-    string,
-    | typeof KYCDecimal
-    | typeof KYCEntier
-    | typeof KYCLibre
-    | typeof KYCMosaic
-    | typeof KYCChoixUnique
-    | typeof KYCChoixMultiple
-  > = {
-    decimal: KYCDecimal,
-    entier: KYCEntier,
-    libre: KYCLibre,
+  const componentMap: Record<string, typeof KYCMosaic | typeof KYCChoixUnique | typeof KYCChoixMultiple> = {
     mosaic_boolean: KYCMosaic,
     choix_unique: KYCChoixUnique,
     choix_multiple: KYCChoixMultiple,
