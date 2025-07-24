@@ -14,7 +14,12 @@
     col=""
     legende-size="l"
     orientation="vertical"
-  />
+  >
+    <template v-slot:legende>
+      {{ questionViewModel.libelle }}
+      <slot name="complement" />
+    </template>
+  </BoutonsRadio>
 </template>
 
 <script lang="ts" setup>

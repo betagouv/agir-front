@@ -8,7 +8,11 @@
       cssModifier: 'fr-h4',
     }"
     :unite="questionViewModel.reponses_possibles[0]?.unite"
-  />
+  >
+    <template #complement>
+      <slot name="complement" />
+    </template>
+  </InputNumeric>
 </template>
 
 <script lang="ts" setup>

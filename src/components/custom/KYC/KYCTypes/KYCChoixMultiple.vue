@@ -10,7 +10,11 @@
         checked: reponsePossible.checked,
       }))
     "
-  />
+  >
+    <template #complement>
+      <slot name="complement" />
+    </template>
+  </InputCheckbox>
 </template>
 <script lang="ts" setup>
   import InputCheckbox from '@/components/custom/Form/InputCheckbox.vue';
