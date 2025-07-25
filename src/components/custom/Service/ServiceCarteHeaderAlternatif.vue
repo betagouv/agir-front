@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="fr-card fr-card--sm fr-enlarge-link fr-card--horizontal fr-card--horizontal-cinquieme"
-    :class="styleCarte"
-  >
+  <div class="fr-card fr-card--sm fr-enlarge-link fr-card--horizontal fr-card--horizontal-cinquieme">
     <div class="fr-card__body full-width">
       <div class="fr-card__content">
         <h3 class="fr-card__title full-width">
@@ -11,9 +8,7 @@
             :to="suggestionsServiceViewModel.to"
             class="service-card__link fr-text--lg"
           >
-            <span class="ellipsis">
-              {{ suggestionsServiceViewModel.titre }}
-            </span>
+            <span class="ellipsis" v-text="suggestionsServiceViewModel.titre" />
           </router-link>
         </h3>
 
@@ -31,14 +26,17 @@
             <span
               class="ellipsis"
               :class="{ 'ellipsis-test--two-lines': !suggestionsServiceViewModel.categories?.length }"
-            >
-              {{ suggestionsServiceViewModel.description }}
-            </span>
+              v-text="suggestionsServiceViewModel.description"
+            />
           </span>
         </p>
 
         <div class="fr-card__end fr-mt-0">
-          <p class="fr-tag fr-m-0 fr-tag--custom-bleu">{{ suggestionsServiceViewModel.tag?.label }}</p>
+          <p
+            class="fr-tag fr-m-0"
+            :class="suggestionsServiceViewModel.tag?.style"
+            v-text="suggestionsServiceViewModel.tag?.label"
+          />
         </div>
       </div>
     </div>
@@ -58,33 +56,10 @@
 
   defineProps<{
     suggestionsServiceViewModel: SuggestionServiceViewModel;
-    styleCarte?: string;
-    options?: {
-      descriptionDesactive: boolean;
-    };
   }>();
 </script>
 
 <style scoped>
-  .service-card__link {
-    background-image: none;
-    outline-width: 0;
-  }
-
-  .service-card__link::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 2;
-    outline-color: inherit;
-    outline-offset: 2px;
-    outline-style: inherit;
-    border-radius: 0.5rem;
-  }
-
   .ellipsis {
     -webkit-box-orient: vertical;
     display: -webkit-box;
@@ -98,15 +73,6 @@
     -webkit-line-clamp: 2;
   }
 
-  .fr-tag--custom-bleu {
-    background-color: #e2eafb;
-    color: #000091;
-  }
-
-  .fr-card__header {
-    background-color: v-bind(suggestionsServiceViewModel.headerAlternatif.backgroundColor);
-  }
-
   .min-height-img {
     min-height: 4rem;
   }
@@ -116,5 +82,9 @@
       flex: 0 0 20%;
       width: 20%;
     }
+  }
+
+  .fr-card__header {
+    background-color: v-bind(suggestionsServiceViewModel.headerAlternatif.backgroundColor);
   }
 </style>

@@ -10,8 +10,8 @@
         }
       "
     >
-      <ServiceCarteImage v-if="isRecette" :suggestionsServiceViewModel="suggestion" style-carte="fr-card--sm" />
-      <ServiceCarteHeaderAlternatif v-else :suggestionsServiceViewModel="suggestion" style-carte="fr-card--sm" />
+      <ServiceCarteImage v-if="isRecette" :suggestionsServiceViewModel="suggestion" />
+      <ServiceCarteHeaderAlternatif v-else :suggestionsServiceViewModel="suggestion" />
     </li>
   </ul>
 </template>

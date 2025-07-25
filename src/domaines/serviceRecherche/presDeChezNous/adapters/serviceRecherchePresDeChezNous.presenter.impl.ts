@@ -63,7 +63,7 @@ export class ServiceRecherchePresDeChezNousPresenterImpl implements ServiceReche
           tag: elem.distance
             ? {
                 label: this.construireTag(elem.distance),
-                style: 'background--caramel text--background-caramel',
+                style: 'fr-tag--custom-bleu',
               }
             : undefined,
           to: { name: RouteServiceName.PROXIMITE_DETAIL, params: { id: elem.id } },
