@@ -18,7 +18,11 @@
         </section>
         <section v-if="viewModel!.suggestions">
           <h2 class="fr-h3">Suggestions</h2>
-          <ServiceListeCarte ref="serviceListeCarte" :suggestions-service-view-model="viewModel!.suggestions" />
+          <ServiceListeCarte
+            :is-recette="true"
+            ref="serviceListeCarte"
+            :suggestions-service-view-model="viewModel!.suggestions"
+          />
           <ServiceSkeletonCartes v-if="cartesSontEnChargement" />
           <button
             v-if="viewModel!.plusDeResultatsDisponibles"

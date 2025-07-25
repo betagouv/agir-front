@@ -26,7 +26,7 @@
         :key="suggestion.titre"
         :class="`fr-col-sm-${12 / nombreDeCartesParLigne} fr-col`"
       >
-        <ServiceCarteDsfr
+        <ServiceCarteRecette
           :suggestionsServiceViewModel="suggestion"
           style-carte="fr-card--horizontal fr-card--horizontal-tier fr-card--sm"
         />
@@ -43,7 +43,7 @@
 
 <script lang="ts" setup>
   import { onMounted, ref } from 'vue';
-  import ServiceCarteDsfr from '@/components/custom/Service/ServiceCarteDSFR.vue';
+  import ServiceCarteRecette from '@/components/custom/Service/ServiceCarteRecette.vue';
   import {
     ServiceRecherchePresDeChezNousPresenterImpl,
     ServiceRecherchePresDeChezNousViewModel,

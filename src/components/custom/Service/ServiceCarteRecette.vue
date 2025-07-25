@@ -1,10 +1,8 @@
 <template>
-  <div class="background--white border-radius--md shadow fr-p-1w fr-grid-row full-height">
-    <div class="service-card position--relative fr-p-1w fr-grid-row flex-column">
-      <img class="service-card__img border-radius--md fr-mb-1w" :src="suggestionsServiceViewModel.img" alt="" />
-
-      <div class="flex flex-column full-height flex-space-between">
-        <p class="fr-text--lg text--semi-bold text--black fr-mb-1w">
+  <div class="fr-card fr-card--sm fr-enlarge-link" :class="styleCarte">
+    <div class="fr-card__body">
+      <div class="fr-card__content">
+        <h3 class="fr-card__title">
           <router-link
             v-if="suggestionsServiceViewModel.to"
             :to="suggestionsServiceViewModel.to"
@@ -12,39 +10,54 @@
           >
             {{ suggestionsServiceViewModel.titre }}
           </router-link>
-          <span v-else> {{ suggestionsServiceViewModel.titre }} </span>
-        </p>
-
-        <div class="flex align-items--center fr-text--xs text--mention-grey fr-mb-0">
-          <span
-            v-if="suggestionsServiceViewModel.tag"
-            :class="`fr-tag fr-text--xs fr-mr-2w ${suggestionsServiceViewModel.tag.style}`"
+        </h3>
+        <p class="fr-card__desc" v-if="!options?.descriptionDesactive">{{ suggestionsServiceViewModel.description }}</p>
+        <div class="fr-card__end">
+          <ul
+            class="fr-tags-group"
+            v-if="
+              suggestionsServiceViewModel.tag ||
+              (suggestionsServiceViewModel.categories && suggestionsServiceViewModel.categories?.length > 0)
+            "
           >
-            {{ suggestionsServiceViewModel.tag.label }}
-          </span>
-          <div>
-            <span class="fr-icon--sm fr-icon-timer-line" aria-hidden="true"></span>
-            <span class="fr-ml-1v" v-html="suggestionsServiceViewModel.information"></span>
-          </div>
+            <li class="text--lh-0" v-if="suggestionsServiceViewModel.tag">
+              <p class="fr-tag fr-m-0">{{ suggestionsServiceViewModel.tag.label }}</p>
+            </li>
+            <li class="text--lh-0" v-for="categorie in suggestionsServiceViewModel.categories" :key="categorie">
+              <p class="fr-tag fr-m-0">{{ categorie }}</p>
+            </li>
+          </ul>
         </div>
+      </div>
+    </div>
+    <div class="fr-card__header">
+      <div class="fr-card__img">
+        <img class="fr-responsive-img" :src="imageSrc" @error="gererImageEnErreur" alt="" />
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
+  import { ref } from 'vue';
   import { SuggestionServiceViewModel } from '@/domaines/serviceRecherche/presDeChezNous/adapters/serviceRecherchePresDeChezNous.presenter.impl';
 
-  defineProps<{
+  const props = defineProps<{
     suggestionsServiceViewModel: SuggestionServiceViewModel;
+    styleCarte?: string;
+    options?: {
+      descriptionDesactive: boolean;
+    };
   }>();
+
+  const imageSrc = ref<string>(props.suggestionsServiceViewModel.img);
+
+  function gererImageEnErreur() {
+    imageSrc.value = '/ic_services.svg';
+  }
 </script>
 
 <style scoped>
-  .service-card {
-    flex-wrap: nowrap;
-  }
-
   .service-card__link {
     background-image: none;
     outline-width: 0;
@@ -64,7 +77,7 @@
     border-radius: 0.5rem;
   }
 
-  .service-card__img {
-    height: 7rem;
+  .fr-responsive-img {
+    max-width: 100%;
   }
 </style>
