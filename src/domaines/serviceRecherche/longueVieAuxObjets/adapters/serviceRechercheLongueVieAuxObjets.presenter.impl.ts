@@ -1,10 +1,12 @@
-import { ServiceRechercheViewModelBase } from '@/domaines/serviceRecherche/catalogue/adapters/serviceRechercheViewModel';
 import { ServiceRechercheLongueVieAuxObjetsPresenter } from '@/domaines/serviceRecherche/longueVieAuxObjets/ports/serviceRechercheLongueVieAuxObjets.presenter';
 import {
   ServiceRechercheLongueVieAuxObjets,
   ServiceRechercheLongueVieAuxObjetsResultat,
 } from '@/domaines/serviceRecherche/longueVieAuxObjets/recupererServiceLongueVieAuxObjets.usecase';
-import { SuggestionServiceViewModel } from '@/domaines/serviceRecherche/suggestionServiceViewModel';
+import {
+  ServiceRechercheViewModelBase,
+  SuggestionServiceViewModel,
+} from '@/domaines/serviceRecherche/suggestionServiceViewModel';
 import { RouteServiceName } from '@/router/services/routes';
 
 export interface ServiceRechercheLongueVieAuxObjetsViewModelAvecResultats extends ServiceRechercheViewModelBase {

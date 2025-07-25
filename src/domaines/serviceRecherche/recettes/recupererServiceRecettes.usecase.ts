@@ -1,6 +1,6 @@
-import { ServiceRechercheBase } from '@/domaines/serviceRecherche/catalogue/serviceRecherche';
 import { ServiceRechercheRecettesPresenter } from '@/domaines/serviceRecherche/recettes/ports/serviceRechercheRecettes.presenter';
 import { ServiceRechercheRecettesRepository } from '@/domaines/serviceRecherche/recettes/ports/serviceRechercheRecettes.repository';
+import { ServiceRechercheBase } from '@/domaines/serviceRecherche/suggestionServiceViewModel';
 
 interface ServiceRechercheRecettesResultat {
   id: string;
