@@ -3,29 +3,36 @@
     <li
       v-for="(suggestion, index) in suggestionsServiceViewModel"
       :key="`${suggestion.titre}${index}`"
-      class="fr-col-12 fr-col-sm-6"
+      :class="columnClass"
       :ref="
         el => {
           if (el) cartesRefs[index] = el as HTMLElement;
         }
       "
     >
-      <ServiceCarteRecette v-if="isRecette" :suggestionsServiceViewModel="suggestion" style-carte="fr-card--sm" />
-      <ServiceCarteDSFR v-else :suggestionsServiceViewModel="suggestion" style-carte="fr-card--sm" />
+      <ServiceCarteImage v-if="isRecette" :suggestionsServiceViewModel="suggestion" style-carte="fr-card--sm" />
+      <ServiceCarteHeaderAlternatif v-else :suggestionsServiceViewModel="suggestion" style-carte="fr-card--sm" />
     </li>
   </ul>
 </template>
 
 <script lang="ts" setup>
   import { ref } from 'vue';
-  import ServiceCarteDSFR from '@/components/custom/Service/ServiceCarteDSFR.vue';
-  import ServiceCarteRecette from '@/components/custom/Service/ServiceCarteRecette.vue';
-  import { SuggestionServiceViewModel } from '@/domaines/serviceRecherche/presDeChezNous/adapters/serviceRecherchePresDeChezNous.presenter.impl';
+  import ServiceCarteHeaderAlternatif from '@/components/custom/Service/ServiceCarteHeaderAlternatif.vue';
+  import ServiceCarteImage from '@/components/custom/Service/ServiceCarteImage.vue';
 
-  defineProps<{
-    suggestionsServiceViewModel: SuggestionServiceViewModel[];
-    isRecette?: boolean;
-  }>();
+  import { SuggestionServiceViewModel } from '@/domaines/serviceRecherche/suggestionServiceViewModel';
+
+  withDefaults(
+    defineProps<{
+      suggestionsServiceViewModel: SuggestionServiceViewModel[];
+      isRecette?: boolean;
+      columnClass?: string;
+    }>(),
+    {
+      columnClass: 'fr-col-12 fr-col-sm-6',
+    },
+  );
 
   const cartesRefs = ref<HTMLElement[]>([]);
 
