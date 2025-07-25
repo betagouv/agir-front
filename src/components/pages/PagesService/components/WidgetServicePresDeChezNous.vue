@@ -26,10 +26,7 @@
         :key="suggestion.titre"
         :class="`fr-col-sm-${12 / nombreDeCartesParLigne} fr-col`"
       >
-        <ServiceCarteHeaderAlternatif
-          :suggestionsServiceViewModel="suggestion"
-          style-carte="fr-card--horizontal fr-card--horizontal-tier fr-card--sm"
-        />
+        <ServiceCarteHeaderAlternatif :suggestionsServiceViewModel="suggestion" />
       </li>
     </ul>
     <div v-else class="text--center fr-pt-md-5w">

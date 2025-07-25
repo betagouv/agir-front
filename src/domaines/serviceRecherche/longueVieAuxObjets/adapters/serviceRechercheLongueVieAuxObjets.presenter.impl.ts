@@ -87,7 +87,7 @@ export class ServiceRechercheLongueVieAuxObjetsPresenterImpl implements ServiceR
       tag: elem.distance
         ? {
             label: this.construireTag(elem.distance),
-            style: 'background--caramel text--background-caramel',
+            style: 'fr-tag--custom-bleu',
           }
         : undefined,
       to: { name: RouteServiceName.LONGUE_VIE_AUX_OBJETS_DETAIL, params: { id: elem.id } },

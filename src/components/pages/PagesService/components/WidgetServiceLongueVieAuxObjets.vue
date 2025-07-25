@@ -16,10 +16,7 @@
       :key="suggestion.titre"
       class="fr-col-sm-6 fr-col"
     >
-      <ServiceCarteHeaderAlternatif
-        :suggestionsServiceViewModel="suggestion"
-        styleCarte="fr-card--horizontal fr-card--horizontal-tier fr-card--sm"
-      />
+      <ServiceCarteHeaderAlternatif :suggestionsServiceViewModel="suggestion" />
     </li>
   </ul>
   <router-link
