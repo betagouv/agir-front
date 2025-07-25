@@ -4,22 +4,8 @@ import {
   ServiceRechercheLongueVieAuxObjets,
   ServiceRechercheLongueVieAuxObjetsResultat,
 } from '@/domaines/serviceRecherche/longueVieAuxObjets/recupererServiceLongueVieAuxObjets.usecase';
+import { SuggestionServiceViewModel } from '@/domaines/serviceRecherche/presDeChezNous/adapters/serviceRecherchePresDeChezNous.presenter.impl';
 import { RouteServiceName } from '@/router/services/routes';
-
-export interface SuggestionServiceViewModel {
-  id: string;
-  titre: string;
-  img: string;
-  description?: string;
-  information?: string;
-  nombreMiseEnFavoris: number;
-  tag?: {
-    label: string;
-    style: string;
-  };
-  categories?: string[];
-  to: { name: string; params: { id: string } } | null;
-}
 
 export interface ServiceRechercheLongueVieAuxObjetsViewModelAvecResultats extends ServiceRechercheViewModelBase {
   favoris?: SuggestionServiceViewModel[];
@@ -111,6 +97,10 @@ export class ServiceRechercheLongueVieAuxObjetsPresenterImpl implements ServiceR
     if (distanceArrondie >= 1000) {
       const distanceKm = distanceArrondie / 1000;
       return `À ${distanceKm.toFixed(1).replace('.', ',')} km`;
+    }
+
+    if (distanceArrondie === 0) {
+      return 'À deux pas';
     }
 
     return `À ${distanceArrondie} m`;

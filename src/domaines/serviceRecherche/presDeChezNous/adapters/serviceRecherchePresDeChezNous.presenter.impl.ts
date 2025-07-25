@@ -114,6 +114,10 @@ export class ServiceRecherchePresDeChezNousPresenterImpl implements ServiceReche
       return `À ${distanceKm.toFixed(1).replace('.', ',')} km`;
     }
 
+    if (distanceArrondie === 0) {
+      return 'À deux pas';
+    }
+
     return `À ${distanceArrondie} m`;
   }
 }
