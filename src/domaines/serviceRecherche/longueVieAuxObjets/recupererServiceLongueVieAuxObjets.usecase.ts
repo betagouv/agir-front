@@ -1,6 +1,6 @@
-import { ServiceRechercheBase } from '@/domaines/serviceRecherche/catalogue/serviceRecherche';
 import { ServiceRechercheLongueVieAuxObjetsPresenter } from '@/domaines/serviceRecherche/longueVieAuxObjets/ports/serviceRechercheLongueVieAuxObjets.presenter';
 import { ServiceRechercheLongueVieAuxObjetsRepository } from '@/domaines/serviceRecherche/longueVieAuxObjets/ports/serviceRechercheLongueVieAuxObjets.repository';
+import { ServiceRechercheBase } from '@/domaines/serviceRecherche/suggestionServiceViewModel';
 import { Coordonnees } from '@/shell/coordonneesType';
 
 export interface ServiceRechercheLongueVieAuxObjetsResultat {

@@ -16,9 +16,15 @@
         <section v-if="viewModel!.favoris" class="fr-pb-6w">
           <ServiceFavoris :services-recherche-favoris-view-model="viewModel!.favoris" titre="Mes recettes favorites" />
         </section>
+
         <section v-if="viewModel!.suggestions">
           <h2 class="fr-h3">Suggestions</h2>
-          <ServiceListeCarte ref="serviceListeCarte" :suggestions-service-view-model="viewModel!.suggestions" />
+          <ServiceListeCarte
+            column-class="fr-col-12 fr-col-sm-6 fr-col-md-4"
+            :is-recette="true"
+            ref="serviceListeCarte"
+            :suggestions-service-view-model="viewModel!.suggestions"
+          />
           <ServiceSkeletonCartes v-if="cartesSontEnChargement" />
           <button
             v-if="viewModel!.plusDeResultatsDisponibles"

@@ -1,20 +1,18 @@
 <template>
-  <div class="skeleton-card background--white border-radius--md shadow fr-p-1w fr-grid-row">
-    <Skeleton height="7rem" has-margin-bottom />
+  <div class="background--white border-radius--md shadow fr-grid-row">
+    <div class="fr-col-3">
+      <Skeleton height="100%" />
+    </div>
 
-    <div class="skeleton-card__details fr-col-9 position--relative fr-pl-1w fr-grid-row flex-column flex-space-between">
-      <Skeleton width="35%" has-margin-bottom />
-      <Skeleton width="60%" has-margin-bottom />
-      <Skeleton width="75%" has-margin-bottom />
+    <div class="skeleton-card__details fr-col-9 fr-pl-1w fr-grid-row flex-column fr-p-1w">
+      <Skeleton width="70%" class="fr-mb-3v" />
+      <Skeleton width="35%" class="fr-mb-3v" />
+      <Skeleton width="80%" class="fr-mb-3v" />
+      <Skeleton width="15%" class="fr-mb-3v" />
     </div>
   </div>
 </template>
 
-<style scoped>
-  .skeleton-card {
-    height: 16rem;
-  }
-</style>
 <script setup>
   import Skeleton from '@/components/custom/Skeleton/Skeleton.vue';
 </script>
