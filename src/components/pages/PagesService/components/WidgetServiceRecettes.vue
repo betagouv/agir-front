@@ -23,7 +23,7 @@
         :key="suggestion.titre"
         :class="`col-card fr-col-12 fr-col-sm-6 fr-col-md-${12 / props.nombreDeCartesParLigne}`"
       >
-        <ServiceCarteRecette :options="{ descriptionDesactive: true }" :suggestionsServiceViewModel="suggestion" />
+        <ServiceCarteImage :options="{ descriptionDesactive: true }" :suggestionsServiceViewModel="suggestion" />
       </li>
     </ul>
 
@@ -47,7 +47,7 @@
 
 <script lang="ts" setup>
   import { onMounted, ref } from 'vue';
-  import ServiceCarteRecette from '@/components/custom/Service/ServiceCarteRecette.vue';
+  import ServiceCarteImage from '@/components/custom/Service/ServiceCarteImage.vue';
   import {
     ServiceRechercheRecettesPresenterImpl,
     ServiceRechercheRecettesViewModel,

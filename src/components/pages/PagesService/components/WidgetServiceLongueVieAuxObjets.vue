@@ -16,7 +16,7 @@
       :key="suggestion.titre"
       class="fr-col-sm-6 fr-col"
     >
-      <ServiceCarteRecette
+      <ServiceCarteHeaderAlternatif
         :suggestionsServiceViewModel="suggestion"
         styleCarte="fr-card--horizontal fr-card--horizontal-tier fr-card--sm"
       />
@@ -35,7 +35,7 @@
 </template>
 <script lang="ts" setup>
   import { onMounted, ref } from 'vue';
-  import ServiceCarteRecette from '@/components/custom/Service/ServiceCarteRecette.vue';
+  import ServiceCarteHeaderAlternatif from '@/components/custom/Service/ServiceCarteHeaderAlternatif.vue';
   import {
     ServiceRechercheLongueVieAuxObjetsPresenterImpl,
     ServiceRechercheLongueVieAuxObjetsViewModel,

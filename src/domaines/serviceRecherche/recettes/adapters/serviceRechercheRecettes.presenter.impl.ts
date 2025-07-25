@@ -3,7 +3,7 @@ import { ServiceRechercheRecettesPresenter } from '@/domaines/serviceRecherche/r
 import { ServiceRechercheRecettes } from '@/domaines/serviceRecherche/recettes/recupererServiceRecettes.usecase';
 import { RouteServiceName } from '@/router/services/routes';
 
-interface SuggestionRecetteServiceViewModel {
+export interface SuggestionRecetteServiceViewModel {
   id: string;
   titre: string;
   img: string;

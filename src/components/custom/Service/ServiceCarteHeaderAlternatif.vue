@@ -18,15 +18,12 @@
         </h3>
 
         <p class="fr-card__desc flex flex-column flex-end">
-          <span class="ellipsis fr-mb-1v" v-if="suggestionsServiceViewModel?.categories?.length > 0">
-            <span class="fr-sr-only">Catégories:</span>
-            <span
-              class="text--lh-0 fr-text--sm text--bold"
-              v-for="(categorie, index) in suggestionsServiceViewModel.categories"
-              :key="categorie"
-            >
-              {{ categorie }}{{ index < suggestionsServiceViewModel?.categories?.length - 1 ? ', ' : '' }} </span
-            ><br />
+          <span
+            class="ellipsis fr-mb-1v"
+            v-if="suggestionsServiceViewModel.categories && suggestionsServiceViewModel.categories?.length > 0"
+          >
+            <span class="fr-sr-only">Vous pourrez:</span>
+            <span class="text--lh-0 fr-text--sm text--bold" v-text="suggestionsServiceViewModel.categories" /><br />
           </span>
 
           <span>
@@ -47,14 +44,17 @@
     </div>
     <div class="fr-card__header min-height-img" aria-hidden="true">
       <div class="fr-card__img full-height">
-        <span class="full-height full-width flex flex-center align-items--center text--3xl">🛠️</span>
+        <span
+          class="full-height full-width flex flex-center align-items--center text--3xl"
+          v-text="suggestionsServiceViewModel?.headerAlternatif?.emoji"
+        />
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-  import { SuggestionServiceViewModel } from '@/domaines/serviceRecherche/presDeChezNous/adapters/serviceRecherchePresDeChezNous.presenter.impl';
+  import { SuggestionServiceViewModel } from '@/domaines/serviceRecherche/suggestionServiceViewModel';
 
   defineProps<{
     suggestionsServiceViewModel: SuggestionServiceViewModel;
@@ -104,7 +104,7 @@
   }
 
   .fr-card__header {
-    background-color: #eff9f9;
+    background-color: v-bind(suggestionsServiceViewModel.headerAlternatif.backgroundColor);
   }
 
   .min-height-img {

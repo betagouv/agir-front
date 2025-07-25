@@ -85,7 +85,10 @@ describe("Fichier de tests concernant la récuperation de service d'un recherche
                 titre: 'titre 1',
                 description: '2 Avenue de la République, Palaiseau - 91120',
                 nombreMiseEnFavoris: 12,
-                img: '/ic_service_longue_vie_aux_objets.svg',
+                headerAlternatif: {
+                  backgroundColor: '#EFF9F9',
+                  emoji: '🛠️',
+                },
                 tag: {
                   label: 'À 300 m',
                   style: 'background--caramel text--background-caramel',
@@ -101,7 +104,10 @@ describe("Fichier de tests concernant la récuperation de service d'un recherche
                 titre: 'titre 2',
                 description: undefined,
                 nombreMiseEnFavoris: 0,
-                img: '/ic_service_longue_vie_aux_objets.svg',
+                headerAlternatif: {
+                  backgroundColor: '#EFF9F9',
+                  emoji: '🛠️',
+                },
                 tag: undefined,
                 to: {
                   name: RouteServiceName.LONGUE_VIE_AUX_OBJETS_DETAIL,
@@ -112,7 +118,10 @@ describe("Fichier de tests concernant la récuperation de service d'un recherche
               {
                 id: 'id3',
                 description: undefined,
-                img: '/ic_service_longue_vie_aux_objets.svg',
+                headerAlternatif: {
+                  backgroundColor: '#EFF9F9',
+                  emoji: '🛠️',
+                },
                 nombreMiseEnFavoris: 0,
                 tag: {
                   label: 'À 2,1 km',
@@ -132,7 +141,10 @@ describe("Fichier de tests concernant la récuperation de service d'un recherche
                 titre: 'titre 1',
                 description: '2 Avenue de la République, Palaiseau - 91120',
                 nombreMiseEnFavoris: 12,
-                img: '/ic_service_longue_vie_aux_objets.svg',
+                headerAlternatif: {
+                  backgroundColor: '#EFF9F9',
+                  emoji: '🛠️',
+                },
                 to: {
                   name: RouteServiceName.LONGUE_VIE_AUX_OBJETS_DETAIL,
                   params: { id: 'id4' },
@@ -145,7 +157,10 @@ describe("Fichier de tests concernant la récuperation de service d'un recherche
                 titre: 'titre 1',
                 description: undefined,
                 nombreMiseEnFavoris: 0,
-                img: '/ic_service_longue_vie_aux_objets.svg',
+                headerAlternatif: {
+                  backgroundColor: '#EFF9F9',
+                  emoji: '🛠️',
+                },
                 to: {
                   name: RouteServiceName.LONGUE_VIE_AUX_OBJETS_DETAIL,
                   params: { id: 'id5' },

@@ -4,7 +4,7 @@ import {
   ServiceRechercheLongueVieAuxObjets,
   ServiceRechercheLongueVieAuxObjetsResultat,
 } from '@/domaines/serviceRecherche/longueVieAuxObjets/recupererServiceLongueVieAuxObjets.usecase';
-import { SuggestionServiceViewModel } from '@/domaines/serviceRecherche/presDeChezNous/adapters/serviceRecherchePresDeChezNous.presenter.impl';
+import { SuggestionServiceViewModel } from '@/domaines/serviceRecherche/suggestionServiceViewModel';
 import { RouteServiceName } from '@/router/services/routes';
 
 export interface ServiceRechercheLongueVieAuxObjetsViewModelAvecResultats extends ServiceRechercheViewModelBase {
@@ -79,8 +79,11 @@ export class ServiceRechercheLongueVieAuxObjetsPresenterImpl implements ServiceR
       titre: elem.titre,
       description: elem.adresse,
       nombreMiseEnFavoris: elem.nombreMiseEnFavoris,
-      img: elem.image ? elem.image : '/ic_service_longue_vie_aux_objets.svg',
-      categories: elem.categories,
+      headerAlternatif: {
+        emoji: '🛠️',
+        backgroundColor: '#EFF9F9',
+      },
+      categories: elem.categories?.length ? elem.categories.join(', ') : undefined,
       tag: elem.distance
         ? {
             label: this.construireTag(elem.distance),

@@ -1,22 +1,8 @@
 import { ServiceRechercheViewModelBase } from '@/domaines/serviceRecherche/catalogue/adapters/serviceRechercheViewModel';
 import { ServiceRecherchePresDeChezNousPresenter } from '@/domaines/serviceRecherche/presDeChezNous/ports/serviceRecherchePresDeChezNous.presenter';
 import { ServiceRecherchePresDeChezNous } from '@/domaines/serviceRecherche/presDeChezNous/recupererServicePresDeChezNous.usecase';
+import { SuggestionServiceViewModel } from '@/domaines/serviceRecherche/suggestionServiceViewModel';
 import { RouteServiceName } from '@/router/services/routes';
-
-export interface SuggestionServiceViewModel {
-  id: string;
-  titre: string;
-  img: string;
-  description?: string;
-  information?: string;
-  nombreMiseEnFavoris: number;
-  tag?: {
-    label: string;
-    style: string;
-  };
-  categories?: string[];
-  to: { name: string; params: { id: string } } | null;
-}
 
 export interface ServiceRecherchePresDeChezNousViewModelAvecResultats extends ServiceRechercheViewModelBase {
   favoris?: SuggestionServiceViewModel[];
@@ -70,7 +56,10 @@ export class ServiceRecherchePresDeChezNousPresenterImpl implements ServiceReche
           titre: elem.titre,
           description: elem.adresse,
           nombreMiseEnFavoris: elem.nombreMiseEnFavoris,
-          img: elem.image ? elem.image : '/ic_services.svg',
+          headerAlternatif: {
+            emoji: '🥘',
+            backgroundColor: '#fff0e6',
+          },
           tag: elem.distance
             ? {
                 label: this.construireTag(elem.distance),

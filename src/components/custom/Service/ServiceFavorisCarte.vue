@@ -27,18 +27,10 @@
 </template>
 
 <script setup lang="ts">
+  import { SuggestionServiceViewModel } from '@/domaines/serviceRecherche/suggestionServiceViewModel';
+
   defineProps<{
-    servicesRechercheFavoris: {
-      titre: string;
-      img: string;
-      description?: string;
-      information?: string;
-      nombreMiseEnFavoris: number;
-      tag?: {
-        label: string;
-        style: string;
-      };
-    };
+    servicesRechercheFavoris: SuggestionServiceViewModel;
   }>();
 </script>
 

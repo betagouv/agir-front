@@ -40,7 +40,8 @@
 
 <script lang="ts" setup>
   import { ref } from 'vue';
-  import { SuggestionServiceViewModel } from '@/domaines/serviceRecherche/presDeChezNous/adapters/serviceRecherchePresDeChezNous.presenter.impl';
+
+  import { SuggestionServiceViewModel } from '@/domaines/serviceRecherche/suggestionServiceViewModel';
 
   const props = defineProps<{
     suggestionsServiceViewModel: SuggestionServiceViewModel;
@@ -50,7 +51,7 @@
     };
   }>();
 
-  const imageSrc = ref<string>(props.suggestionsServiceViewModel.img);
+  const imageSrc = ref<string>(props.suggestionsServiceViewModel?.img ?? '/ic_services.svg');
 
   function gererImageEnErreur() {
     imageSrc.value = '/ic_services.svg';
