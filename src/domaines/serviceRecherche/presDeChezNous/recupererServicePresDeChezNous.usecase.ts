@@ -1,6 +1,6 @@
-import { ServiceRechercheBase } from '@/domaines/serviceRecherche/catalogue/serviceRecherche';
 import { ServiceRecherchePresDeChezNousPresenter } from '@/domaines/serviceRecherche/presDeChezNous/ports/serviceRecherchePresDeChezNous.presenter';
 import { ServiceRecherchePresDeChezNousRepository } from '@/domaines/serviceRecherche/presDeChezNous/ports/serviceRecherchePresDeChezNous.repository';
+import { ServiceRechercheBase } from '@/domaines/serviceRecherche/suggestionServiceViewModel';
 import { Coordonnees } from '@/shell/coordonneesType';
 
 interface ServiceRecherchePresDeChezNousResultat {

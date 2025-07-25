@@ -18,7 +18,7 @@
 
 <script setup lang="ts">
   import ServiceAside from '@/components/custom/Service/ServiceAside.vue';
-  import { ServiceRechercheViewModelBase } from '@/domaines/serviceRecherche/catalogue/adapters/serviceRechercheViewModel';
+  import { ServiceRechercheViewModelBase } from '@/domaines/serviceRecherche/suggestionServiceViewModel';
 
   defineProps<{ aside: ServiceRechercheViewModelBase['aside'] }>();
 </script>

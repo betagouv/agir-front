@@ -1,7 +1,9 @@
-import { ServiceRechercheViewModelBase } from '@/domaines/serviceRecherche/catalogue/adapters/serviceRechercheViewModel';
 import { ServiceRecherchePresDeChezNousPresenter } from '@/domaines/serviceRecherche/presDeChezNous/ports/serviceRecherchePresDeChezNous.presenter';
 import { ServiceRecherchePresDeChezNous } from '@/domaines/serviceRecherche/presDeChezNous/recupererServicePresDeChezNous.usecase';
-import { SuggestionServiceViewModel } from '@/domaines/serviceRecherche/suggestionServiceViewModel';
+import {
+  ServiceRechercheViewModelBase,
+  SuggestionServiceViewModel,
+} from '@/domaines/serviceRecherche/suggestionServiceViewModel';
 import { RouteServiceName } from '@/router/services/routes';
 
 export interface ServiceRecherchePresDeChezNousViewModelAvecResultats extends ServiceRechercheViewModelBase {

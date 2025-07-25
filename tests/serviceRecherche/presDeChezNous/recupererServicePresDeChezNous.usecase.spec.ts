@@ -89,7 +89,7 @@ describe("Fichier de tests concernant la récuperation de service d'un recherche
                 },
                 tag: {
                   label: 'À 300 m',
-                  style: 'background--caramel text--background-caramel',
+                  style: 'fr-tag--custom-bleu',
                 },
                 to: {
                   name: RouteServiceName.PROXIMITE_DETAIL,
@@ -121,7 +121,7 @@ describe("Fichier de tests concernant la récuperation de service d'un recherche
                 nombreMiseEnFavoris: 0,
                 tag: {
                   label: 'À 2,1 km',
-                  style: 'background--caramel text--background-caramel',
+                  style: 'fr-tag--custom-bleu',
                 },
                 titre: 'titre 3',
                 to: {

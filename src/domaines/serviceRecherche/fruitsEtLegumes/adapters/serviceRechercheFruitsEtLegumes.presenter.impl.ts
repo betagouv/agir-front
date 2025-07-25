@@ -1,6 +1,6 @@
-import { ServiceRechercheViewModelBase } from '@/domaines/serviceRecherche/catalogue/adapters/serviceRechercheViewModel';
 import { ServiceRechercheFruitsEtLegumesPresenter } from '@/domaines/serviceRecherche/fruitsEtLegumes/ports/serviceRechercheFruitsEtLegumes.presenter';
 import { ServiceRechercheFruitsEtLegumes } from '@/domaines/serviceRecherche/fruitsEtLegumes/recupererServiceFruitsEtLegumes.usecase';
+import { ServiceRechercheViewModelBase } from '@/domaines/serviceRecherche/suggestionServiceViewModel';
 
 export interface ServiceFruitsEtLegumesDetailViewModel {
   nom: string;

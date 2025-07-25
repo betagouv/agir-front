@@ -1,6 +1,6 @@
-import { ServiceRechercheViewModelBase } from '@/domaines/serviceRecherche/catalogue/adapters/serviceRechercheViewModel';
 import { ServiceRechercheRecettesPresenter } from '@/domaines/serviceRecherche/recettes/ports/serviceRechercheRecettes.presenter';
 import { ServiceRechercheRecettes } from '@/domaines/serviceRecherche/recettes/recupererServiceRecettes.usecase';
+import { ServiceRechercheViewModelBase } from '@/domaines/serviceRecherche/suggestionServiceViewModel';
 import { RouteServiceName } from '@/router/services/routes';
 
 export interface SuggestionRecetteServiceViewModel {
