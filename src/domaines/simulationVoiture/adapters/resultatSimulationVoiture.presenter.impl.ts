@@ -87,7 +87,7 @@ export class ResultatSimulationVoiturePresenterImpl implements ResultatSimulatio
     const montantAide = voiture.getMontantAides();
     const normalizeDifference = (value: number) => ({
       difference: value,
-      labelDifference: `${value < 0 ? '+' : '-'}${Math.round(value)}`,
+      labelDifference: `${value < 0 ? '+' : '-'}${Math.round(Math.abs(value))}`,
       style: value > 0 ? 'fr-badge--success' : 'fr-badge--warning',
     });
 
