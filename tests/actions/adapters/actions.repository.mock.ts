@@ -80,4 +80,8 @@ export class ActionsRepositoryMock implements ActionsRepository {
   chargerCatalogueActions(): Promise<CatalogueActions> {
     return Promise.resolve(this.catalogueActions!);
   }
+
+  chargerCatalogueActionsWinter(idUtilisateur: string): Promise<CatalogueActions> {
+    return Promise.resolve(this.catalogueActions!);
+  }
 }

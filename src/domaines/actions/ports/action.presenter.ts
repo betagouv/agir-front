@@ -62,6 +62,7 @@ export interface ActionQuizzesViewModel extends ActionBaseViewModel {
 export interface ActionSimulateurViewModel extends ActionBaseViewModel {
   aides: ActionAideViewModel[];
   idEnchainementKYCs: string;
+  aDejaEteSimule: boolean;
 }
 
 export interface ActionBilanViewModel extends ActionBaseViewModel {

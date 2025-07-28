@@ -6,7 +6,7 @@
     tabindex="-1"
   >
     <h3 v-if="titre" class="fr-alert__title" v-text="titre" />
-    <span class="fr-sr-only">: </span>
+    <span v-if="titre" class="fr-sr-only">: </span>
 
     <template v-if="$slots.message">
       <slot name="message"></slot>
@@ -28,7 +28,7 @@
       aUnRoleAlert?: boolean;
       titre?: string;
       message?: string;
-      type: 'success' | 'error' | 'info';
+      type: 'success' | 'error' | 'info' | 'warning';
       taille?: 'small' | 'medium';
       onClose?: () => void;
     }>(),

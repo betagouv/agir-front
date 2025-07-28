@@ -1,5 +1,5 @@
-import { AdresseDansLeCompte } from '@/domaines/simulationMaif/recupererStatistiquesCommuneMaifDepuisProfil.usecase';
+import { Adresse } from '@/domaines/logement/recupererAdressePourBarreDeRecherche.usecase';
 
 export interface BarreDeRecherchePresenter {
-  presente(adresse: AdresseDansLeCompte): void;
+  presente(adresse: Adresse): void;
 }

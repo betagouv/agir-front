@@ -18,13 +18,6 @@ describe('Fichier de tests concernant la récuperations des informations du loge
         codeEpci: '75021',
         commune_utilisee_dans_le_compte: 'PARIS 01',
         commune_label: 'Paris 01',
-        adultes: 2,
-        enfants: 1,
-        residence: TypeLogementApiModel.Appartement,
-        proprietaire: true,
-        superficie: SuperficieLogementApiModel.Superficie_100,
-        plusDeQuinzeAns: true,
-        dpe: DPELogementApiModel.B,
         coordonnees: {
           latitude: 48.865,
           longitude: 2.331,
@@ -39,6 +32,13 @@ describe('Fichier de tests concernant la récuperations des informations du loge
       'idUtilisateur',
       new BarreDeRecherchePresenterImpl(viewModel => {
         expect(viewModel).toEqual({
+          adresse: {
+            codeEpci: '75021',
+            codePostal: '75001',
+            communeLabel: 'Paris 01',
+            numeroRue: '34',
+            rue: "avenue de l'Opéra",
+          },
           coordonnees: {
             latitude: 48.865,
             longitude: 2.331,

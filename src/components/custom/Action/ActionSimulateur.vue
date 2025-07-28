@@ -13,6 +13,7 @@
     <SimulationAideRenos v-else-if="actionSimulateurViewModel.actionId === SimulateursSupportes.MES_AIDES_RENO" />
     <SimulationWw
       v-else-if="actionSimulateurViewModel.actionId === SimulateursSupportes.WINTER"
+      :a-deja-ete-simule="actionSimulateurViewModel.aDejaEteSimule"
       :id-enchainement-kycs="actionSimulateurViewModel.idEnchainementKYCs"
     />
 

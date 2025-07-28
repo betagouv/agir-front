@@ -1,6 +1,5 @@
 import { BarreDeRecherchePresenter } from '@/domaines/logement/ports/barreDeRecherche.presenter';
 import { LogementRepository } from '@/domaines/logement/ports/logement.repository';
-import { AdresseDansLeCompte } from '@/domaines/simulationMaif/recupererStatistiquesCommuneMaifDepuisProfil.usecase';
 import { Coordonnees } from '@/shell/coordonneesType';
 
 export interface Adresse {
@@ -18,14 +17,7 @@ export class RecupererAdressePourBarreDeRechercheUsecase {
 
   async execute(idUtilisateur: string, barreDeRecherchePresenter: BarreDeRecherchePresenter) {
     const adresse = await this.logementRepository.recupererAdresse(idUtilisateur);
-    const adresseDansLeCompte = new AdresseDansLeCompte(
-      adresse.codePostal,
-      adresse.commune_utilisee_dans_le_compte,
-      adresse.commune_label,
-      adresse.rue,
-      adresse.numeroRue,
-      adresse.coordonnees,
-    );
-    barreDeRecherchePresenter.presente(adresseDansLeCompte);
+
+    barreDeRecherchePresenter.presente(adresse);
   }
 }

@@ -5,9 +5,11 @@ export class InscriptionParPRMUsecase {
   constructor(private readonly repository: WattWatchersRepository) {}
 
   async execute(utilisateurId: string, prm: string, nom: string, presenter: InscriptionPresenter): Promise<void> {
-    await this.repository
-      .inscriptionParPrm(utilisateurId, prm, nom)
-      .then(() => presenter.presenteInscriptionOk())
-      .catch(() => presenter.presenteInscriptionErreur());
+    try {
+      await this.repository.inscriptionParPrm(utilisateurId, prm, nom);
+      presenter.presenteInscriptionOk();
+    } catch (error) {
+      presenter.presenteInscriptionErreur();
+    }
   }
 }
