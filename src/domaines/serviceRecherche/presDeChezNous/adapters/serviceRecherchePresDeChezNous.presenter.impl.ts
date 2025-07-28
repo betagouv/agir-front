@@ -56,11 +56,11 @@ export class ServiceRecherchePresDeChezNousPresenterImpl implements ServiceReche
         suggestions: serviceRecherche.suggestions.map(elem => ({
           id: elem.id,
           titre: elem.titre,
-          description: elem.adresse,
+          description: elem.adresse || 'Voir plus de détails',
           nombreMiseEnFavoris: elem.nombreMiseEnFavoris,
           headerAlternatif: {
-            emoji: '🥘',
-            backgroundColor: '#fff0e6',
+            emoji: '🌽',
+            backgroundColor: '#F5F9EF ',
           },
           tag: elem.distance
             ? {

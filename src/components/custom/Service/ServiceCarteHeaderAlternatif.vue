@@ -1,5 +1,5 @@
 <template>
-  <div class="fr-card fr-card--sm fr-enlarge-link fr-card--horizontal fr-card--horizontal-cinquieme">
+  <div class="fr-card fr-card--sm fr-enlarge-link fr-card--horizontal fr-card--horizontal-cinquieme min-height-card">
     <div class="fr-card__body full-width">
       <div class="fr-card__content">
         <h3 class="fr-card__title full-width">
@@ -21,7 +21,7 @@
             <span class="text--lh-0 fr-text--sm text--bold" v-text="suggestionsServiceViewModel.categories" /><br />
           </span>
 
-          <span>
+          <span v-if="suggestionsServiceViewModel.description">
             <span class="fr-sr-only">Adresse:</span>
             <span
               class="ellipsis"
@@ -75,6 +75,10 @@
 
   .min-height-img {
     min-height: 4rem;
+  }
+
+  .min-height-card {
+    min-height: 10.3rem;
   }
 
   .fr-card--horizontal-cinquieme > .fr-card__header {
