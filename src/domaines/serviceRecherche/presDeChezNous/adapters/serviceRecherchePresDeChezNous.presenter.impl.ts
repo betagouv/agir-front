@@ -60,7 +60,7 @@ export class ServiceRecherchePresDeChezNousPresenterImpl implements ServiceReche
           nombreMiseEnFavoris: elem.nombreMiseEnFavoris,
           headerAlternatif: {
             emoji: '🌽',
-            backgroundColor: '#F5F9EF ',
+            backgroundColor: '#F5F9EF',
           },
           tag: elem.distance
             ? {

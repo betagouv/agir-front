@@ -84,8 +84,8 @@ describe("Fichier de tests concernant la récuperation de service d'un recherche
                 description: '2 Avenue de la République, Palaiseau - 91120',
                 nombreMiseEnFavoris: 12,
                 headerAlternatif: {
-                  backgroundColor: '#fff0e6',
-                  emoji: '🥘',
+                  backgroundColor: '#F5F9EF',
+                  emoji: '🌽',
                 },
                 tag: {
                   label: 'À 300 m',
@@ -99,11 +99,11 @@ describe("Fichier de tests concernant la récuperation de service d'un recherche
               {
                 id: 'id2',
                 titre: 'titre 2',
-                description: undefined,
                 nombreMiseEnFavoris: 0,
+                description: 'Voir plus de détails',
                 headerAlternatif: {
-                  backgroundColor: '#fff0e6',
-                  emoji: '🥘',
+                  backgroundColor: '#F5F9EF',
+                  emoji: '🌽',
                 },
                 tag: undefined,
                 to: {
@@ -113,10 +113,10 @@ describe("Fichier de tests concernant la récuperation de service d'un recherche
               },
               {
                 id: 'id3',
-                description: undefined,
+                description: 'Voir plus de détails',
                 headerAlternatif: {
-                  backgroundColor: '#fff0e6',
-                  emoji: '🥘',
+                  backgroundColor: '#F5F9EF',
+                  emoji: '🌽',
                 },
                 nombreMiseEnFavoris: 0,
                 tag: {
