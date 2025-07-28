@@ -240,6 +240,29 @@
     text-decoration: underline;
 }
 
+.underline-courbe {
+    position: relative;
+}
+
+.underline-courbe::after {
+    content: '';
+    position: absolute;
+    top: 95%;
+    left: 0;
+    height: 7px;
+    width: 100%;
+    border: solid 3px;
+    border-radius: 50%;
+}
+
+.underline-courbe--turquoise::after {
+    border-color: #00bcd4 transparent transparent transparent;
+}
+
+.underline-courbe--vert::after {
+    border-color: #027F68 transparent transparent transparent;
+}
+
 .text--decoration-none {
     text-decoration: none;
 }

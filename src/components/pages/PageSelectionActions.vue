@@ -20,7 +20,8 @@
         <template #custom-card>
           <div class="full-height full-width background--bleu-dark text--white fr-p-2w">
             <h2 class="fr-h6 text--white fr-mb-2w">
-              Envie de voir des actions qui <span class="underline-courbe-turquoise">vous</span> correspondent ?
+              Envie de voir des actions qui
+              <span class="underline-courbe underline-courbe--turquoise">vous</span> correspondent ?
             </h2>
             <p>
               Agissez selon vos <span class="text--bold">envies</span>, vos <span class="text--bold">moyens</span> et
@@ -100,21 +101,5 @@
     @media all and (max-width: 767px) {
       background-image: none;
     }
-  }
-
-  .underline-courbe-turquoise {
-    position: relative;
-  }
-
-  .underline-courbe-turquoise::after {
-    content: '';
-    position: absolute;
-    top: 95%;
-    left: 0;
-    height: 7px;
-    width: 100%;
-    border: solid 3px;
-    border-color: #00bcd4 transparent transparent transparent;
-    border-radius: 50%;
   }
 </style>
