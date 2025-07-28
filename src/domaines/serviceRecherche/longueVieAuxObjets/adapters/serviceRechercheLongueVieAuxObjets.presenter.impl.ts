@@ -1,25 +1,13 @@
-import { ServiceRechercheViewModelBase } from '@/domaines/serviceRecherche/catalogue/adapters/serviceRechercheViewModel';
 import { ServiceRechercheLongueVieAuxObjetsPresenter } from '@/domaines/serviceRecherche/longueVieAuxObjets/ports/serviceRechercheLongueVieAuxObjets.presenter';
 import {
   ServiceRechercheLongueVieAuxObjets,
   ServiceRechercheLongueVieAuxObjetsResultat,
 } from '@/domaines/serviceRecherche/longueVieAuxObjets/recupererServiceLongueVieAuxObjets.usecase';
+import {
+  ServiceRechercheViewModelBase,
+  SuggestionServiceViewModel,
+} from '@/domaines/serviceRecherche/suggestionServiceViewModel';
 import { RouteServiceName } from '@/router/services/routes';
-
-export interface SuggestionServiceViewModel {
-  id: string;
-  titre: string;
-  img: string;
-  description?: string;
-  information?: string;
-  nombreMiseEnFavoris: number;
-  tag?: {
-    label: string;
-    style: string;
-  };
-  categories?: string[];
-  to: { name: string; params: { id: string } } | null;
-}
 
 export interface ServiceRechercheLongueVieAuxObjetsViewModelAvecResultats extends ServiceRechercheViewModelBase {
   favoris?: SuggestionServiceViewModel[];
@@ -93,12 +81,15 @@ export class ServiceRechercheLongueVieAuxObjetsPresenterImpl implements ServiceR
       titre: elem.titre,
       description: elem.adresse,
       nombreMiseEnFavoris: elem.nombreMiseEnFavoris,
-      img: elem.image ? elem.image : '/ic_service_longue_vie_aux_objets.svg',
-      categories: elem.categories,
+      headerAlternatif: {
+        emoji: '🛠️',
+        backgroundColor: '#EFF9F9',
+      },
+      categories: elem.categories?.length ? elem.categories.join(', ') : undefined,
       tag: elem.distance
         ? {
             label: this.construireTag(elem.distance),
-            style: 'background--caramel text--background-caramel',
+            style: 'fr-tag--custom-bleu',
           }
         : undefined,
       to: { name: RouteServiceName.LONGUE_VIE_AUX_OBJETS_DETAIL, params: { id: elem.id } },
@@ -111,6 +102,10 @@ export class ServiceRechercheLongueVieAuxObjetsPresenterImpl implements ServiceR
     if (distanceArrondie >= 1000) {
       const distanceKm = distanceArrondie / 1000;
       return `À ${distanceKm.toFixed(1).replace('.', ',')} km`;
+    }
+
+    if (distanceArrondie === 0) {
+      return 'À deux pas';
     }
 
     return `À ${distanceArrondie} m`;

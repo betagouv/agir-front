@@ -1,6 +1,6 @@
-import { ServiceRechercheBase } from '@/domaines/serviceRecherche/catalogue/serviceRecherche';
 import { ServiceRechercheFruitsEtLegumesPresenter } from '@/domaines/serviceRecherche/fruitsEtLegumes/ports/serviceRechercheFruitsEtLegumes.presenter';
 import { ServiceRechercheFruitsEtLegumesRepository } from '@/domaines/serviceRecherche/fruitsEtLegumes/ports/serviceRechercheFruitsEtLegumes.repository';
+import { ServiceRechercheBase } from '@/domaines/serviceRecherche/suggestionServiceViewModel';
 
 export interface ServiceRechercheFruitsEtLegumes extends ServiceRechercheBase {
   listeFruitsEtLegumes: {

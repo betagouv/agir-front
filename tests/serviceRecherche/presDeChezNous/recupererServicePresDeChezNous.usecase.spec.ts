@@ -83,10 +83,13 @@ describe("Fichier de tests concernant la récuperation de service d'un recherche
                 titre: 'titre 1',
                 description: '2 Avenue de la République, Palaiseau - 91120',
                 nombreMiseEnFavoris: 12,
-                img: '/ic_services.svg',
+                headerAlternatif: {
+                  backgroundColor: '#F5F9EF',
+                  emoji: '🌽',
+                },
                 tag: {
                   label: 'À 300 m',
-                  style: 'background--caramel text--background-caramel',
+                  style: 'fr-tag--custom-bleu',
                 },
                 to: {
                   name: RouteServiceName.PROXIMITE_DETAIL,
@@ -96,9 +99,12 @@ describe("Fichier de tests concernant la récuperation de service d'un recherche
               {
                 id: 'id2',
                 titre: 'titre 2',
-                description: undefined,
                 nombreMiseEnFavoris: 0,
-                img: '/ic_services.svg',
+                description: 'Voir plus de détails',
+                headerAlternatif: {
+                  backgroundColor: '#F5F9EF',
+                  emoji: '🌽',
+                },
                 tag: undefined,
                 to: {
                   name: RouteServiceName.PROXIMITE_DETAIL,
@@ -107,12 +113,15 @@ describe("Fichier de tests concernant la récuperation de service d'un recherche
               },
               {
                 id: 'id3',
-                description: undefined,
-                img: '/ic_services.svg',
+                description: 'Voir plus de détails',
+                headerAlternatif: {
+                  backgroundColor: '#F5F9EF',
+                  emoji: '🌽',
+                },
                 nombreMiseEnFavoris: 0,
                 tag: {
                   label: 'À 2,1 km',
-                  style: 'background--caramel text--background-caramel',
+                  style: 'fr-tag--custom-bleu',
                 },
                 titre: 'titre 3',
                 to: {

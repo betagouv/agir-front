@@ -1,22 +1,10 @@
-import { ServiceRechercheViewModelBase } from '@/domaines/serviceRecherche/catalogue/adapters/serviceRechercheViewModel';
 import { ServiceRecherchePresDeChezNousPresenter } from '@/domaines/serviceRecherche/presDeChezNous/ports/serviceRecherchePresDeChezNous.presenter';
 import { ServiceRecherchePresDeChezNous } from '@/domaines/serviceRecherche/presDeChezNous/recupererServicePresDeChezNous.usecase';
+import {
+  ServiceRechercheViewModelBase,
+  SuggestionServiceViewModel,
+} from '@/domaines/serviceRecherche/suggestionServiceViewModel';
 import { RouteServiceName } from '@/router/services/routes';
-
-export interface SuggestionServiceViewModel {
-  id: string;
-  titre: string;
-  img: string;
-  description?: string;
-  information?: string;
-  nombreMiseEnFavoris: number;
-  tag?: {
-    label: string;
-    style: string;
-  };
-  categories?: string[];
-  to: { name: string; params: { id: string } } | null;
-}
 
 export interface ServiceRecherchePresDeChezNousViewModelAvecResultats extends ServiceRechercheViewModelBase {
   favoris?: SuggestionServiceViewModel[];
@@ -68,13 +56,16 @@ export class ServiceRecherchePresDeChezNousPresenterImpl implements ServiceReche
         suggestions: serviceRecherche.suggestions.map(elem => ({
           id: elem.id,
           titre: elem.titre,
-          description: elem.adresse,
+          description: elem.adresse || 'Voir plus de détails',
           nombreMiseEnFavoris: elem.nombreMiseEnFavoris,
-          img: elem.image ? elem.image : '/ic_services.svg',
+          headerAlternatif: {
+            emoji: '🌽',
+            backgroundColor: '#F5F9EF',
+          },
           tag: elem.distance
             ? {
                 label: this.construireTag(elem.distance),
-                style: 'background--caramel text--background-caramel',
+                style: 'fr-tag--custom-bleu',
               }
             : undefined,
           to: { name: RouteServiceName.PROXIMITE_DETAIL, params: { id: elem.id } },
@@ -112,6 +103,10 @@ export class ServiceRecherchePresDeChezNousPresenterImpl implements ServiceReche
     if (distanceArrondie >= 1000) {
       const distanceKm = distanceArrondie / 1000;
       return `À ${distanceKm.toFixed(1).replace('.', ',')} km`;
+    }
+
+    if (distanceArrondie === 0) {
+      return 'À deux pas';
     }
 
     return `À ${distanceArrondie} m`;

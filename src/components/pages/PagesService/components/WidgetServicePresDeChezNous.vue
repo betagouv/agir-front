@@ -26,10 +26,7 @@
         :key="suggestion.titre"
         :class="`fr-col-sm-${12 / nombreDeCartesParLigne} fr-col`"
       >
-        <ServiceCarteDsfr
-          :suggestionsServiceViewModel="suggestion"
-          style-carte="fr-card--horizontal fr-card--horizontal-tier fr-card--sm"
-        />
+        <ServiceCarteHeaderAlternatif :suggestionsServiceViewModel="suggestion" />
       </li>
     </ul>
     <div v-else class="text--center fr-pt-md-5w">
@@ -43,7 +40,7 @@
 
 <script lang="ts" setup>
   import { onMounted, ref } from 'vue';
-  import ServiceCarteDsfr from '@/components/custom/Service/ServiceCarteDSFR.vue';
+  import ServiceCarteHeaderAlternatif from '@/components/custom/Service/ServiceCarteHeaderAlternatif.vue';
   import {
     ServiceRecherchePresDeChezNousPresenterImpl,
     ServiceRecherchePresDeChezNousViewModel,
