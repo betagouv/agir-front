@@ -4,14 +4,21 @@
 
     <template v-if="!affichagePRM">
       <div :class="erreurAdresse ? 'fr-input-group--error' : ''" class="fr-mb-4w fr-input-group">
-        <InputText
-          v-if="adresseDejaConnue?.rue"
-          ref="adresseInput"
-          v-model="recherche"
-          disabled
-          label="L’adresse de ma résidence principale"
-          name="adresse"
-        />
+        <div v-if="adresseDejaConnue?.rue">
+          <InputText
+            ref="adresseInput"
+            v-model="recherche"
+            disabled
+            label="L’adresse de ma résidence principale"
+            name="adresse"
+            class="fr-mb-0"
+          />
+
+          <p class="fr-hint-text fr-info-text fr-icon-info-fill fr-mt-2w">
+            Besoin de modifier l’adresse de votre résidence principale ? Rendez-vous dans le profil !
+          </p>
+        </div>
+
         <div v-else>
           <label class="fr-mb-3w" for="recherche-adresse-input">L’adresse de ma résidence principale</label>
 
