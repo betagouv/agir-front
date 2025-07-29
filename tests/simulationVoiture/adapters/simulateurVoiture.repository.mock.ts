@@ -7,7 +7,7 @@ import {
 import { SimulationVoitureRepository } from '@/domaines/simulationVoiture/ports/simulateurVoiture.repository';
 
 export class SimulateurVoitureRepositoryMock implements SimulationVoitureRepository {
-  recupererResultats(utilisateurId: string): Promise<ResultatSimulationVoiture> {
+  recupererResultats(_utilisateurId: string): Promise<ResultatSimulationVoiture> {
     const voitureActuelle = new VoitureActuelle(
       25000,
       100,
@@ -37,6 +37,23 @@ export class SimulateurVoitureRepositoryMock implements SimulationVoitureReposit
         8000,
         4000,
         10,
+        1000000,
+      ),
+      new VoitureAlternative(
+        22000,
+        80,
+        'Berline',
+        'Hybride',
+        'Essence',
+        false,
+        "Voiture A moins économique mais moins cher à l'achat",
+        100 - 80,
+        25000 - 22000,
+        5000,
+        10000,
+        8000,
+        4000,
+        5,
         1000000,
       ),
       new VoitureAlternative(
