@@ -27,7 +27,6 @@ export type ResultatSimulationVoitureActuelleViewModel = {
   coutAnnuel: MontantAfficheEnFR;
   emissionAnnuelle: NombreAfficheEnFR;
   hypotheses: Hypotheses[];
-  tag: string[];
 };
 
 export type ResultatSimulationVoitureProposeeViewModel = {
@@ -72,7 +71,6 @@ export class ResultatSimulationVoiturePresenterImpl implements ResultatSimulatio
           valeur: param.getValeur(),
           unite: param.getUnite(),
         })),
-        tag: [voitureActuelle.getCarburant(), voitureActuelle.getMotorisation()].filter(v => v.length > 0),
       },
       resultatVoiturePlusEconomique: this.transformeVoitureProposee(voiturePlusEconomique),
       resultatVoiturePlusEcologique: this.transformeVoitureProposee(voiturePlusEcologique),
@@ -82,8 +80,8 @@ export class ResultatSimulationVoiturePresenterImpl implements ResultatSimulatio
   private transformeVoitureProposee(voiture: VoitureAlternative): ResultatSimulationVoitureProposeeViewModel {
     const countAnnuelDifference = voiture.getDifferenceCoutAnnuel();
     const pourcentageDifferenceEmission = voiture.getDifferenceEmission();
-    const dureeSeuilRentabilite =
-      voiture.getDureeSeuilRentabilite() !== null ? Math.round(voiture.getDureeSeuilRentabilite()) : null;
+    let dureeSeuilRentabilite = voiture.getDureeSeuilRentabilite();
+    dureeSeuilRentabilite = dureeSeuilRentabilite !== null ? Math.round(dureeSeuilRentabilite) : null;
     const economiesTotales = voiture.getEconomiesTotales();
     const montantAide = voiture.getMontantAides();
     const normalizeDifference = (value: number) => ({

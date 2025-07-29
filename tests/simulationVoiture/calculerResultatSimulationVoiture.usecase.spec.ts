@@ -36,39 +36,52 @@ describe('CalculerResultatSimulationVoitureUsecase', () => {
               unite: '€/l',
             },
           ],
-          tag: ['Essence', 'Thermique'],
         },
         resultatVoiturePlusEcologique: {
-          coutAnnuel: {
+          economies: {
             difference: 3000,
-            labelDifference: '+3 000 €',
-            montant: '22 000 €' as MontantAfficheEnFR,
-            style: 'fr-badge--warning',
+            labelDifference: '-3000',
+            style: 'fr-badge--success',
           },
           emission: {
             difference: 40,
-            labelDifference: '40%',
-            montant: '60' as NombreAfficheEnFR,
-            style: 'fr-badge--warning',
+            labelDifference: '-40',
+            style: 'fr-badge--success',
           },
-          tag: ['Électricité', 'Électrique'],
-          typeDeVoiture: 'Voiture B',
+          typeDeVoiture: "Voiture B d'occasion",
+          cout: {
+            coutAchatNet: '10 000 €' as MontantAfficheEnFR,
+            prixAchat: '20 000 €' as MontantAfficheEnFR,
+          },
+          dureeSeuilRentabilite: {
+            valeur: 10,
+            unite: 'ans',
+          },
+          economiesTotales: '100 000 €' as MontantAfficheEnFR,
+          montantAide: undefined,
         },
         resultatVoiturePlusEconomique: {
-          coutAnnuel: {
-            difference: 7000,
-            labelDifference: '+7 000 €',
-            montant: '18 000 €' as MontantAfficheEnFR,
-            style: 'fr-badge--warning',
+          economies: {
+            difference: 3000,
+            labelDifference: '-3000',
+            style: 'fr-badge--success',
           },
           emission: {
             difference: 20,
-            labelDifference: '20%',
-            montant: '80' as NombreAfficheEnFR,
-            style: 'fr-badge--warning',
+            labelDifference: '-20',
+            style: 'fr-badge--success',
           },
-          tag: ['Essence', 'Hybride'],
-          typeDeVoiture: 'Voiture A',
+          typeDeVoiture: "Voiture A moins économique mais moins cher à l'achat",
+          cout: {
+            coutAchatNet: '5 000 €' as MontantAfficheEnFR,
+            prixAchat: '10 000 €' as MontantAfficheEnFR,
+          },
+          dureeSeuilRentabilite: {
+            valeur: 5,
+            unite: 'ans',
+          },
+          economiesTotales: '1 000 000 €' as MontantAfficheEnFR,
+          montantAide: '4 000 €' as MontantAfficheEnFR,
         },
       });
     }
