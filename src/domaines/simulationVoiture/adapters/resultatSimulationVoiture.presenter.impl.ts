@@ -47,7 +47,7 @@ export type ResultatSimulationVoitureProposeeViewModel = {
     labelDifference: string;
   };
   dureeSeuilRentabilite: {
-    valeur: number;
+    valeur: number | null;
     unite: string;
   };
   economiesTotales: MontantAfficheEnFR | undefined;
@@ -82,7 +82,8 @@ export class ResultatSimulationVoiturePresenterImpl implements ResultatSimulatio
   private transformeVoitureProposee(voiture: VoitureAlternative): ResultatSimulationVoitureProposeeViewModel {
     const countAnnuelDifference = voiture.getDifferenceCoutAnnuel();
     const pourcentageDifferenceEmission = voiture.getDifferenceEmission();
-    const durreeSeuilRentabilite = Math.round(voiture.getDureeSeuilRentabilite());
+    const dureeSeuilRentabilite =
+      voiture.getDureeSeuilRentabilite() !== null ? Math.round(voiture.getDureeSeuilRentabilite()) : null;
     const economiesTotales = voiture.getEconomiesTotales();
     const montantAide = voiture.getMontantAides();
     const normalizeDifference = (value: number) => ({
@@ -100,8 +101,15 @@ export class ResultatSimulationVoiturePresenterImpl implements ResultatSimulatio
       economies: normalizeDifference(countAnnuelDifference),
       emission: normalizeDifference(pourcentageDifferenceEmission),
       dureeSeuilRentabilite: {
-        valeur: durreeSeuilRentabilite,
-        unite: durreeSeuilRentabilite > 1 ? 'ans' : durreeSeuilRentabilite <= 0 ? '' : 'an',
+        valeur: dureeSeuilRentabilite,
+        unite:
+          dureeSeuilRentabilite === null
+            ? ''
+            : dureeSeuilRentabilite > 1
+              ? 'ans'
+              : dureeSeuilRentabilite <= 0
+                ? ''
+                : 'an',
       },
       economiesTotales: economiesTotales > 0 ? MontantAfficheEnFRBuilder.build(economiesTotales) : undefined,
       montantAide: montantAide > 0 ? MontantAfficheEnFRBuilder.build(montantAide) : undefined,

@@ -50,7 +50,11 @@
           </span>
           d'aide à l'achat
         </p>
-        <p v-if="resultatSimulationVoiture.dureeSeuilRentabilite.valeur > 0">
+        <p v-if="resultatSimulationVoiture.dureeSeuilRentabilite.valeur === null">
+          <span class="fr-icon-money-euro-circle-line icone" aria-hidden="true"></span>
+          <span class="text--bold text--bleu">Non rentable</span>
+        </p>
+        <p v-else-if="resultatSimulationVoiture.dureeSeuilRentabilite.valeur > 0">
           <span class="fr-icon-money-euro-circle-line icone" aria-hidden="true"></span>
           Rentable à partir de
           <span class="text--bold text--bleu">

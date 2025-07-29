@@ -80,7 +80,7 @@ export class VoitureAlternative extends Voiture {
     private readonly prixAchat: number,
     private readonly valeurReventeVoitureActuelle: number,
     private readonly montantAides: number,
-    private readonly dureeSeuilRentabilite: number,
+    private readonly dureeSeuilRentabilite: number | null,
     private readonly economiesTotales: number,
   ) {
     super(cout, empreinte, gabarit, motorisation, carburant, [], est_occasion);
@@ -114,7 +114,7 @@ export class VoitureAlternative extends Voiture {
     return this.montantAides;
   }
 
-  public getDureeSeuilRentabilite(): number {
+  public getDureeSeuilRentabilite(): number | null {
     return this.dureeSeuilRentabilite;
   }
 
@@ -130,9 +130,11 @@ export class ResultatSimulationVoiture {
     private readonly voitureActuelle: VoitureActuelle,
     private readonly voituresAlternative: VoitureAlternative[],
   ) {
-    this.voituresAlternativeMemeGabarit = this.voituresAlternative.filter(
-      voiture => voiture.getGabarit() === this.voitureActuelle.getGabarit(),
-    );
+    // TODO: souhaitons-nous filtrer par rapport au gabarits ?
+    // this.voituresAlternativeMemeGabarit = this.voituresAlternative.filter(
+    //   voiture => voiture.getGabarit() === this.voitureActuelle.getGabarit(),
+    // );
+    this.voituresAlternativeMemeGabarit = this.voituresAlternative;
   }
 
   public getVoitureActuelle(): VoitureActuelle {
@@ -140,9 +142,21 @@ export class ResultatSimulationVoiture {
   }
 
   public getVoitureLaPLusEconomique(): VoitureAlternative {
-    return this.voituresAlternativeMemeGabarit.reduce((prev, current) =>
-      current.getCout() < prev.getCout() ? current : prev,
-    );
+    return this.voituresAlternativeMemeGabarit.reduce((prev, current) => {
+      const currentSeuil = current.getDureeSeuilRentabilite();
+      const prevSeuil = prev.getDureeSeuilRentabilite();
+
+      if (currentSeuil === null) {
+        return prev;
+      }
+      if (prevSeuil === null) {
+        return current;
+      }
+      if (currentSeuil < prevSeuil) {
+        return current;
+      }
+      return prev;
+    });
   }
 
   public getVoitureLaPLusEcologique(): VoitureAlternative {
