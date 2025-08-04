@@ -2,20 +2,18 @@
   <section>
     <div class="background--vert-clair fr-py-6w headerSelectionActions">
       <div class="fr-container">
-        <!--    TODO: changer le titre-->
-        <h1 class="fr-h1 fr-mt-4w fr-mb-4w">Vous déménagez ?</h1>
+        <h1 class="fr-h1 fr-mt-4w fr-mb-4w">{{ titre?.titre }}</h1>
 
-        <!--    TODO: changer la description-->
-        <p>Découvrez les bons plans pour votre porte-monnaie et pour le climat !</p>
+        <p>{{ titre?.description }}</p>
       </div>
     </div>
 
     <div class="fr-container fr-mt-n4w">
       <CatalogueActionsComposant
-        card-classes="fr-col-12 fr-col-md-3"
         v-if="actionsViewModel"
         :actions="actionsViewModel"
         :insert-custom-card-at="2"
+        card-classes="fr-col-12 fr-col-md-3"
       >
         <template #custom-card>
           <div class="full-height full-width background--bleu-dark text--white fr-p-2w">
@@ -27,16 +25,15 @@
               Agissez selon vos <span class="text--bold">envies</span>, vos <span class="text--bold">moyens</span> et
               <span class="text--bold">mode de vie</span> !
             </p>
-            <form @submit.prevent class="flex align-items--end flex-column">
+            <form class="flex align-items--end flex-column" @submit.prevent="performCreerCompteUtilisateur">
               <InputText
-                class="full-width fr-mb-2w"
-                v-model="email"
-                label="Mon adresse e-mail"
-                name="email"
+                v-model="compteUtilisateurInput.mail"
                 autocomplete="email"
+                class="full-width fr-mb-2w"
+                label="Mon adresse e-mail"
                 label-class="text--white"
+                name="email"
               />
-              <!--              TODO-->
               <button class="fr-btn border--white">Valider</button>
             </form>
           </div>
@@ -50,30 +47,35 @@
   </section>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
   import { useHead } from '@unhead/vue';
   import { computed, onMounted, ref } from 'vue';
+  import { useRouter } from 'vue-router';
   import RedirectionMobile from '@/components/custom/AccueilConnectee/RedirectionMobile.vue';
   import CatalogueActionsComposant from '@/components/custom/Action/Catalogue/CatalogueActionsComposant.vue';
-  import InputMail from '@/components/dsfr/InputMail.vue';
   import InputText from '@/components/dsfr/InputText.vue';
   import { ActionsRepositoryAxios } from '@/domaines/actions/adapters/actions.repository.axios';
   import { CatalogueActionsPresenterImpl } from '@/domaines/actions/adapters/catalogueActions.presenter.impl';
+  import { TitreCatalogueRepositoryAxios } from '@/domaines/actions/adapters/titreCatalogue.repository.axios';
   import { ActionViewModel } from '@/domaines/actions/ports/actions.presenter';
-  import { FiltresCatalogueActionsViewModel } from '@/domaines/actions/ports/catalogueActions.presenter';
-  import { RecupererCatalogueActionsUsecase } from '@/domaines/actions/recupererCatalogueActions.usecase';
+  import { TitreCatalogue } from '@/domaines/actions/ports/titreCatalogue.repository';
+  import { RecupererCatalogueActionsMaifUsecase } from '@/domaines/actions/recupererCatalogueActionsMaif.usecase';
+  import { RecupererCatalogueActionsWinterUsecase } from '@/domaines/actions/recupererCatalogueActionsWinter.usecase';
+  import { RecupererTitreCataloguePartenaireUsecase } from '@/domaines/actions/recupererTitreCataloguePartenaireUsecase';
+  import { SessionRepositoryStore } from '@/domaines/authentification/adapters/session.repository.store';
+  import { CompteUtilisateurRepositoryImpl } from '@/domaines/compte/adapters/compteUtilisateur.repository.impl';
+  import { CreerComptePresenterImpl } from '@/domaines/compte/adapters/creerComptePresenterImpl';
+  import { CreerCompteUtilisateurUsecase, UserInput } from '@/domaines/compte/creerCompteUtilisateur.usecase';
+  import router from '@/router';
   import useHeadProperties from '@/shell/useHeadProperties';
-  import { utilisateurStore } from '@/store/utilisateur';
 
-  // TODO: Mettre en titre le titre
-  // useHead({
-  //   ...useHeadProperties,
-  //   title: computed(() => actionBaseViewModel.value?.titrePropre && `${actionBaseViewModel.value.titrePropre}`),
-  // });
-  // TODO: Mettre l'url
+  const titre = ref<TitreCatalogue>();
+
+  useHead({
+    ...useHeadProperties,
+    title: computed(() => titre.value?.titre && `${titre.value.titre}`),
+  });
   const imagePath = ref<string>('url(/thematique-logement.svg)');
-  const email = ref<string>('');
-
   const actionsViewModel = ref<ActionViewModel[]>();
   const catalogueActionsPresenter = new CatalogueActionsPresenterImpl(
     () => {},
@@ -83,10 +85,38 @@
   );
 
   onMounted(async () => {
-    const usecase = new RecupererCatalogueActionsUsecase(new ActionsRepositoryAxios());
-    const idUtilisateur = utilisateurStore().utilisateur.id;
-    await usecase.execute(idUtilisateur, catalogueActionsPresenter);
+    const selection = useRouter().currentRoute.value.query.selection as 'actions_watt_watchers' | 'risques_naturels';
+    const titreUsecase = new RecupererTitreCataloguePartenaireUsecase(new TitreCatalogueRepositoryAxios());
+    await titreUsecase.execute(selection, titreRecupere => {
+      imagePath.value = titreRecupere.image;
+      titre.value = titreRecupere;
+    });
+
+    if (selection === 'actions_watt_watchers') {
+      const usecase = new RecupererCatalogueActionsWinterUsecase(new ActionsRepositoryAxios());
+      await usecase.execute('', catalogueActionsPresenter);
+    } else if (selection === 'risques_naturels') {
+      const usecase = new RecupererCatalogueActionsMaifUsecase(new ActionsRepositoryAxios());
+      await usecase.execute(catalogueActionsPresenter);
+    }
   });
+
+  let compteUtilisateurInput = ref<UserInput>({
+    mail: '',
+    situationId: null,
+  });
+  const performCreerCompteUtilisateur = async () => {
+    const creeCompteUseCase = new CreerCompteUtilisateurUsecase(
+      new CompteUtilisateurRepositoryImpl(),
+      new SessionRepositoryStore(),
+    );
+    await creeCompteUseCase.execute(
+      new CreerComptePresenterImpl(viewModel => {
+        router.push({ name: viewModel.route });
+      }),
+      { ...compteUtilisateurInput.value, situationId: null },
+    );
+  };
 </script>
 
 <style scoped>

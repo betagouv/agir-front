@@ -140,5 +140,9 @@ export interface ActionsRepository {
 
   compterActions(): Promise<CompteurActions>;
 
-  chargerCatalogueActionsWinter(idUtilisateur: string): Promise<CatalogueActions>;
+  chargerCatalogueActionsUtilisateurWinter(idUtilisateur: string): Promise<CatalogueActions>;
+
+  chargerCatalogueActionsWinter(): Promise<CatalogueActions>;
+
+  chargerCatalogueActionsMaif(): Promise<CatalogueActions>;
 }
