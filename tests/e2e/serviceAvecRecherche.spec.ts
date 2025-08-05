@@ -116,6 +116,14 @@ test.beforeAll(async () => {
       }),
     });
   });
+
+  await page.route('**/utilisateurs/dorian/adresses_recentes', route => {
+    route.fulfill({
+      status: 200,
+      contentType: 'application/json',
+      body: JSON.stringify([]),
+    });
+  });
 });
 
 test.describe('PageServiceLongueVieAuxObjets', () => {
