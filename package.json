@@ -53,7 +53,7 @@
     "husky": "9.1.7",
     "jsdom": "26.1.0",
     "jsdom-global": "3.0.2",
-    "lighthouse": "^12.8.0",
+    "lighthouse": "^12.8.1",
     "lint-staged": "16.1.2",
     "playwright-lighthouse": "^4.0.0",
     "prettier": "3.6.2",
