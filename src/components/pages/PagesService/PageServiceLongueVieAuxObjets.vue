@@ -32,6 +32,10 @@
               @update:coordonnees="chargerDonneesPourNouvelleAdresse"
             />
           </form>
+          <AdressesRecentesComponent
+            :on-adresse-recente-selectionnee="chercherAvecAdresseRecente"
+            :on-adresse-residence-principale-selectionnee="chercherAvecAdressePrincipale"
+          />
           <Callout
             v-if="avecAdressePrivee"
             :button="{
@@ -90,8 +94,10 @@
   import ServiceSkeletonCartes from '@/components/custom/Service/ServiceSkeletonCartes.vue';
   import ServiceSkeletonConditionnel from '@/components/custom/Service/ServiceSkeletonConditionnel.vue';
   import Callout from '@/components/dsfr/Callout.vue';
+  import AdressesRecentesComponent from '@/components/pages/PagesService/AdressesRecentesComponent.vue';
   import { useRechercheService } from '@/composables/service/useRechercheService';
   import { useAdressePrincipale } from '@/composables/useAdressePrincipale';
+  import { AdresseHistorique } from '@/domaines/adresses/recupererHistoriqueAdresse.usecase';
   import { BarreDeRechercheViewModel } from '@/domaines/logement/adapters/barreDeRecherche.presenter.impl';
   import {
     ServiceRechercheLongueVieAuxObjetsPresenterImpl,
@@ -161,6 +167,32 @@
     await nextTick();
     avecAdressePrivee.value = true;
   }
+
+  const chercherAvecAdresseRecente = (adresseRecente: AdresseHistorique) => {
+    coordonnees.value = {
+      latitude: adresseRecente.latitude,
+      longitude: adresseRecente.longitude,
+    };
+    recherche.value = `${adresseRecente.numero_rue} ${adresseRecente.rue} ${adresseRecente.code_postal} ${adresseRecente.commmune}`;
+    lancerRecherche();
+  };
+
+  const chercherAvecAdressePrincipale = async () => {
+    await recupererAdressePourBarreDeRecherche(
+      utilisateurStore().utilisateur.id,
+      async (barreDeRechercheViewModel: BarreDeRechercheViewModel) => {
+        coordonnees.value = barreDeRechercheViewModel.coordonnees;
+        if (barreDeRechercheViewModel.adresse) {
+          const adressePrincipale = barreDeRechercheViewModel.adresse;
+          recherche.value =
+            adressePrincipale.numeroRue && adressePrincipale.rue
+              ? `${adressePrincipale.numeroRue} ${adressePrincipale.rue} ${adressePrincipale.codePostal} ${adressePrincipale.communeLabel}`
+              : `${adressePrincipale.codePostal} ${adressePrincipale.communeLabel}`;
+        }
+        lancerRecherche();
+      },
+    );
+  };
 
   onMounted(async () => {
     const query = useRouter().currentRoute.value.query;
