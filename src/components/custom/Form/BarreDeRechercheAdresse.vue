@@ -8,20 +8,20 @@
         :aria-activedescendant="indexSelectionne >= 0 ? `option-${indexSelectionne}` : ''"
         :aria-expanded="dialogOuverte"
         :aria-labelledby="labelId"
+        :disabled="inputOptions?.disabled"
         aria-autocomplete="list"
         aria-controls="adresse-menu"
-        v-bind="erreurApi ? { 'aria-describedby': 'text-input-error-desc-error' } : {}"
         autocomplete="off"
         class="fr-input"
         name="recherche-adresse-input"
         placeholder="Rechercher l'adresse de votre choix..."
         role="combobox"
         type="search"
+        v-bind="erreurApi ? { 'aria-describedby': 'text-input-error-desc-error' } : {}"
         @blur="cacherDialogue"
         @focus="ouvrirDialogueSiNecessaire"
         @input="chargerAdresses"
         @keydown="naviguerListe"
-        :disabled="inputOptions?.disabled"
       />
     </div>
     <dialog ref="dialogRef" :open="dialogOuverte" class="adresseDialogue shadow">
@@ -61,7 +61,10 @@
   import axios from 'redaxios';
   import { ref } from 'vue';
   import { useDebouncedFn } from '@/composables/useDebounce';
+  import { HistoriqueAdresseRepositoryAxios } from '@/domaines/adresses/adapters/historiqueAdresse.repository.axios';
+  import { AjouterHistoriqueAdresseUsecase } from '@/domaines/adresses/ajouterHistoriqueAdresse.usecase';
   import { AdresseBarreDeRecherche, Coordonnees } from '@/shell/coordonneesType';
+  import { utilisateurStore } from '@/store/utilisateur';
 
   defineProps<{
     labelId?: string;
@@ -146,6 +149,18 @@
     coordonnees.value = adresse.coordonnees;
     adresseRef.value = adresse;
     dialogOuverte.value = false;
+    const ajouterAdresseRecente = new AjouterHistoriqueAdresseUsecase(new HistoriqueAdresseRepositoryAxios());
+    ajouterAdresseRecente.execute(utilisateurStore().utilisateur.id, {
+      id: '',
+      code_commune: adresse.codeEpci,
+      commmune: adresse.commune,
+      code_postal: adresse.codePostal,
+      numero_rue: adresse.numeroRue,
+      rue: adresse.rue,
+      longitude: adresse.coordonnees.longitude,
+      latitude: adresse.coordonnees.latitude,
+      date_creation: '',
+    });
   }
 
   function cacherDialogue() {
