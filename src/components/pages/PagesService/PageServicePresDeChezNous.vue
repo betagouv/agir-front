@@ -38,9 +38,8 @@
           </form>
 
           <AdressesRecentesComponent
-            :a-une-adresse-principale="false"
             :on-adresse-recente-selectionnee="chercherAvecAdresseRecente"
-            :on-adresse-residence-principale-selectionnee="() => {}"
+            :on-adresse-residence-principale-selectionnee="chercherAvecAdressePrincipale"
           />
           <Callout
             v-if="avecAdressePrivee"
@@ -191,6 +190,23 @@
     lancerRecherche();
   };
 
+  const chercherAvecAdressePrincipale = async () => {
+    await recupererAdressePourBarreDeRecherche(
+      utilisateurId,
+      async (barreDeRechercheViewModel: BarreDeRechercheViewModel) => {
+        coordonnees.value = barreDeRechercheViewModel.coordonnees;
+        if (barreDeRechercheViewModel.adresse) {
+          const adressePrincipale = barreDeRechercheViewModel.adresse;
+          recherche.value =
+            adressePrincipale.numeroRue && adressePrincipale.rue
+              ? `${adressePrincipale.numeroRue} ${adressePrincipale.rue} ${adressePrincipale.codePostal} ${adressePrincipale.communeLabel}`
+              : `${adressePrincipale.codePostal} ${adressePrincipale.communeLabel}`;
+        }
+        lancerRecherche();
+      },
+    );
+  };
+
   onMounted(async () => {
     const query = useRouter().currentRoute.value.query;
     const latitude = query.latitude as string;
@@ -203,7 +219,6 @@
         utilisateurId,
         async (barreDeRechercheViewModel: BarreDeRechercheViewModel) => {
           coordonnees.value = barreDeRechercheViewModel.coordonnees;
-          recherche.value = barreDeRechercheViewModel.recherche;
         },
       );
     }

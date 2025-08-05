@@ -1,7 +1,18 @@
 <template>
   <ul class="fr-tags-group fr-grid-row fr-grid-row--gutters list-style-none fr-mt-2w">
-    <li v-if="aUneAdressePrincipale" class="fr-pb-1w fr-px-1v">
-      <button class="fr-tag fr-icon-home-4-fill fr-tag--icon-left fr-m-0" type="button">Chez moi</button>
+    <li class="fr-pb-1w fr-px-1v">
+      <button
+        class="fr-tag fr-icon-home-4-fill fr-tag--icon-left fr-m-0"
+        type="button"
+        @click.prevent="
+          () => {
+            trackClick('Adresse Recente', 'Adresse Chez moi selectionnee');
+            onAdresseResidencePrincipaleSelectionnee();
+          }
+        "
+      >
+        Chez moi
+      </button>
     </li>
     <li v-for="adresse in adressesRecentes" :key="adressesRecentes.indexOf(adresse)" class="fr-pb-1w fr-px-1v">
       <div>
@@ -42,7 +53,6 @@
   import { utilisateurStore } from '@/store/utilisateur';
 
   defineProps<{
-    aUneAdressePrincipale: boolean;
     onAdresseRecenteSelectionnee: (adresse: AdresseHistorique) => void;
     onAdresseResidencePrincipaleSelectionnee: () => void;
   }>();
