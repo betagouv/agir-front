@@ -32,8 +32,8 @@
               v-model:adresse="adresse"
               v-model:coordonnees="coordonnees"
               v-model:recherche="recherche"
+              :on-coordonnees-envoyees="chargerDonneesPourNouvelleAdresse"
               labelId="recherche-par-adresse-label"
-              @update:coordonnees="chargerDonneesPourNouvelleAdresse"
             />
           </form>
 

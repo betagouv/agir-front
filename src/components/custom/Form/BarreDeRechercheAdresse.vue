@@ -66,12 +66,13 @@
   import { AdresseBarreDeRecherche, Coordonnees } from '@/shell/coordonneesType';
   import { utilisateurStore } from '@/store/utilisateur';
 
-  defineProps<{
+  const props = defineProps<{
     labelId?: string;
     inputOptions?: {
       disabled?: boolean;
       describedBy?: string;
     };
+    onCoordonneesEnvoyees?: () => void;
   }>();
 
   type FeatureApiModel = {
@@ -161,6 +162,9 @@
       latitude: adresse.coordonnees.latitude,
       date_creation: '',
     });
+    if (props.onCoordonneesEnvoyees) {
+      props.onCoordonneesEnvoyees();
+    }
   }
 
   function cacherDialogue() {
