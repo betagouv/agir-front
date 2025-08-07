@@ -1,5 +1,22 @@
 # Changelog
 
+## [2.19.0](https://github.com/betagouv/agir-front/compare/v2.18.0...v2.19.0) (2025-08-07)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* catalogue actions selection ([#1249](https://github.com/betagouv/agir-front/issues/1249)) ([7baa38e](https://github.com/betagouv/agir-front/commit/7baa38e40bec4f3a0dc54d268a9786d3461f762f))
+
+
+### 👷 Autres changements
+
+* Bump @types/node from 24.0.15 to 24.2.0 ([#1254](https://github.com/betagouv/agir-front/issues/1254)) ([341af53](https://github.com/betagouv/agir-front/commit/341af5321b49a7166e971d569d7a0957b4eaf633))
+* Bump @vitejs/plugin-vue from 6.0.0 to 6.0.1 ([#1255](https://github.com/betagouv/agir-front/issues/1255)) ([285b494](https://github.com/betagouv/agir-front/commit/285b494d5150a181f800357bca9af46f3d0a364b))
+* Bump lighthouse from 12.8.0 to 12.8.1 ([#1257](https://github.com/betagouv/agir-front/issues/1257)) ([5069f71](https://github.com/betagouv/agir-front/commit/5069f7135c7f8fdaa131d04dca88e2ff4222416e))
+* Bump vite from 6.3.5 to 7.0.5 ([#1242](https://github.com/betagouv/agir-front/issues/1242)) ([24a7fef](https://github.com/betagouv/agir-front/commit/24a7fef9cb44d4896752b6ea43131447b60e2387))
+* Bump vue from 3.5.17 to 3.5.18 ([#1256](https://github.com/betagouv/agir-front/issues/1256)) ([2d54571](https://github.com/betagouv/agir-front/commit/2d545719405285a08801ad1c52f4910d65a35090))
+* Bump vue-tsc from 3.0.3 to 3.0.5 ([#1253](https://github.com/betagouv/agir-front/issues/1253)) ([ac67d35](https://github.com/betagouv/agir-front/commit/ac67d3587c22be5cae368bf5baf108729da681c2))
+
 ## [2.18.0](https://github.com/betagouv/agir-front/compare/v2.17.0...v2.18.0) (2025-07-28)
 
 
