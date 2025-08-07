@@ -17,6 +17,7 @@
     <li v-for="adresse in adressesRecentes" :key="adressesRecentes.indexOf(adresse)" class="fr-pb-1w fr-px-1v">
       <div>
         <button
+          :id="adresse.id"
           class="fr-tag adresses-recentes fr-m-0 background-bleu-light text--bleu fr-pr-4w"
           type="button"
           @click.prevent="
@@ -28,7 +29,7 @@
         >
           {{ adresse.numero_rue }} {{ adresse.rue }}, {{ adresse.commmune }} ({{ adresse.code_postal }})
         </button>
-        <button aria-label="supprimer l'adresse" class="btn-suppression">
+        <button :aria-labelledby="`trash ${adresse.id}`" class="btn-suppression">
           <img
             id="trash"
             alt="Supprimer"
