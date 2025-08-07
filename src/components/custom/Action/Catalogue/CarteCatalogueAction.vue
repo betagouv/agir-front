@@ -1,19 +1,19 @@
 <template>
-  <div class="fr-card fr-card--sm fr-enlarge-link">
+  <div class="fr-card fr-card--sm fr-enlarge-link fr-card--shadow">
     <div class="fr-card__body">
       <div class="fr-card__content">
         <h3 class="fr-card__title">
           <router-link :to="action.url"><span v-html="action.titre" /></router-link>
         </h3>
-        <div class="fr-card__start height-3 flex flex-space-between">
-          <ul class="fr-tags-group" v-if="action.label">
+        <div v-if="action.label" class="fr-card__start height-3 flex flex-space-between">
+          <ul class="fr-tags-group">
             <li class="line-height--2">
               <p :class="`fr-tag fr-m-0 ${action.label.color}`" v-text="action.label.text" />
             </li>
           </ul>
         </div>
         <div class="fr-card__end fr-mt-2w fr-p-0">
-          <p class="fr-card__detail fr-icon-team-line fr-mb-2w line-height--2" v-if="action.nombreDeParticipants">
+          <p v-if="action.nombreDeParticipants" class="fr-card__detail fr-icon-team-line fr-mb-2w line-height--2">
             <span v-html="action.nombreDeParticipants" />
           </p>
 

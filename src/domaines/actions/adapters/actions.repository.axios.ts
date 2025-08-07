@@ -176,11 +176,41 @@ export class ActionsRepositoryAxios implements ActionsRepository {
   }
 
   @intercept40X()
-  async chargerCatalogueActionsWinter(idUtilisateur: string): Promise<CatalogueActions> {
+  async chargerCatalogueActionsUtilisateurWinter(idUtilisateur: string): Promise<CatalogueActions> {
     const axios = AxiosFactory.getAxios();
     const response = await axios.get<CatalogueActionsApiModel>(
       `/utilisateurs/${idUtilisateur}/actions?recommandation=recommandee&realisation=pas_faite&selection=actions_watt_watchers`,
     );
+
+    return {
+      actions: response.data.actions.map(this.mapActionApiModelToAction),
+      filtres: response.data.filtres.map(filtre => ({
+        code: filtre.code as ClefThematiqueAPI,
+        label: filtre.label,
+        selected: filtre.selected,
+      })),
+      consultation: response.data.consultation,
+    };
+  }
+
+  async chargerCatalogueActionsWinter(): Promise<CatalogueActions> {
+    const axios = AxiosFactory.getAxios();
+    const response = await axios.get<CatalogueActionsApiModel>(`/actions?selection=actions_watt_watchers`);
+
+    return {
+      actions: response.data.actions.map(this.mapActionApiModelToAction),
+      filtres: response.data.filtres.map(filtre => ({
+        code: filtre.code as ClefThematiqueAPI,
+        label: filtre.label,
+        selected: filtre.selected,
+      })),
+      consultation: response.data.consultation,
+    };
+  }
+
+  async chargerCatalogueActionsMaif(): Promise<CatalogueActions> {
+    const axios = AxiosFactory.getAxios();
+    const response = await axios.get<CatalogueActionsApiModel>(`/actions?selection=risques_naturels`);
 
     return {
       actions: response.data.actions.map(this.mapActionApiModelToAction),
