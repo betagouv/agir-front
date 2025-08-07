@@ -1,6 +1,6 @@
 <template>
   <ul class="fr-tags-group fr-grid-row fr-grid-row--gutters list-style-none fr-mt-2w">
-    <li class="fr-pb-1w fr-px-1v">
+    <li v-if="adressePrincipaleComplete" class="fr-pb-1w fr-px-1v">
       <button
         class="fr-tag fr-icon-home-4-fill fr-tag--icon-left fr-m-0"
         type="button"
@@ -41,6 +41,7 @@
     </li>
   </ul>
 </template>
+
 <script lang="ts" setup>
   import { ref } from 'vue';
   import { HistoriqueAdresseRepositoryAxios } from '@/domaines/adresses/adapters/historiqueAdresse.repository.axios';
@@ -55,6 +56,7 @@
   defineProps<{
     onAdresseRecenteSelectionnee: (adresse: AdresseHistorique) => void;
     onAdresseResidencePrincipaleSelectionnee: () => void;
+    adressePrincipaleComplete?: boolean;
   }>();
   const adressesRecentes = ref<AdresseHistorique[]>([]);
   const historiqueAdresseRepositoryAxios = new HistoriqueAdresseRepositoryAxios();
@@ -75,6 +77,7 @@
     chargerAdressesRecentes();
   };
 </script>
+
 <style lang="css" scoped>
   .adresses-recentes {
     max-width: 20rem;

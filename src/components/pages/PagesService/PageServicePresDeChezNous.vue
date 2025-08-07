@@ -38,6 +38,7 @@
           </form>
 
           <AdressesRecentesComponent
+            :adresse-principale-complete="utilisateurStore().utilisateur.possedeUneAdresseComplete"
             :on-adresse-recente-selectionnee="chercherAvecAdresseRecente"
             :on-adresse-residence-principale-selectionnee="chercherAvecAdressePrincipale"
           />
@@ -174,6 +175,7 @@
 
   function definirAdressePrincipale() {
     definirAdressePrincipaleComposable(utilisateurId, adresse.value, coordonnees.value);
+    utilisateurStore().utilisateur.possedeUneAdresseComplete = true;
   }
 
   async function chargerDonneesPourNouvelleAdresse() {
@@ -219,6 +221,9 @@
         utilisateurId,
         async (barreDeRechercheViewModel: BarreDeRechercheViewModel) => {
           coordonnees.value = barreDeRechercheViewModel.coordonnees;
+          if (barreDeRechercheViewModel.adresse.rue) {
+            utilisateurStore().utilisateur.possedeUneAdresseComplete = true;
+          }
         },
       );
     }

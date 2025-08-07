@@ -264,6 +264,7 @@
         codeEpci: adresseBarreDeRecherche.value?.codeEpci ?? logementViewModel.value.codeEpci,
       })
       .then(() => {
+        utilisateurStore().utilisateur.possedeUneAdresseComplete = false;
         afficherAlerte('success', 'Succès', 'Vos informations ont été correctement mises à jour.');
       })
       .catch(() => {
