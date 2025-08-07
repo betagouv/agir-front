@@ -24,6 +24,7 @@ export const utilisateurStore = defineStore('utilisateur', {
       pseudo: '',
       estUnUtilisateurFranceConnect: false,
       afficherMessageReset: false,
+      possedeUneAdresseComplete: false,
     },
     tracking: {
       matomoEstInactif: false,
