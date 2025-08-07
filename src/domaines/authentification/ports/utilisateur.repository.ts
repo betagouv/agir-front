@@ -9,6 +9,7 @@ export interface Utilisateur {
   token?: string;
   estUnUtilisateurFranceConnect: boolean;
   afficherMessageReset: boolean;
+  possedeUneAdresseComplete?: boolean;
 }
 
 export interface UtilisateurConnecte {

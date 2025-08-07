@@ -32,10 +32,16 @@
               v-model:adresse="adresse"
               v-model:coordonnees="coordonnees"
               v-model:recherche="recherche"
+              :on-coordonnees-envoyees="chargerDonneesPourNouvelleAdresse"
               labelId="recherche-par-adresse-label"
-              @update:coordonnees="chargerDonneesPourNouvelleAdresse"
             />
           </form>
+
+          <AdressesRecentesComponent
+            :adresse-principale-complete="utilisateurStore().utilisateur.possedeUneAdresseComplete"
+            :on-adresse-recente-selectionnee="chercherAvecAdresseRecente"
+            :on-adresse-residence-principale-selectionnee="chercherAvecAdressePrincipale"
+          />
           <Callout
             v-if="avecAdressePrivee"
             :button="{
@@ -105,8 +111,10 @@
   import ServiceSkeletonCartes from '@/components/custom/Service/ServiceSkeletonCartes.vue';
   import ServiceSkeletonConditionnel from '@/components/custom/Service/ServiceSkeletonConditionnel.vue';
   import Callout from '@/components/dsfr/Callout.vue';
+  import AdressesRecentesComponent from '@/components/pages/PagesService/AdressesRecentesComponent.vue';
   import { useRechercheService } from '@/composables/service/useRechercheService';
   import { useAdressePrincipale } from '@/composables/useAdressePrincipale';
+  import { AdresseHistorique } from '@/domaines/adresses/recupererHistoriqueAdresse.usecase';
   import { BarreDeRechercheViewModel } from '@/domaines/logement/adapters/barreDeRecherche.presenter.impl';
   import {
     ServiceRecherchePresDeChezNousPresenterImpl,
@@ -167,12 +175,39 @@
 
   function definirAdressePrincipale() {
     definirAdressePrincipaleComposable(utilisateurId, adresse.value, coordonnees.value);
+    utilisateurStore().utilisateur.possedeUneAdresseComplete = true;
   }
 
   async function chargerDonneesPourNouvelleAdresse() {
     await nextTick();
     avecAdressePrivee.value = true;
   }
+
+  const chercherAvecAdresseRecente = (adresseRecente: AdresseHistorique) => {
+    coordonnees.value = {
+      latitude: adresseRecente.latitude,
+      longitude: adresseRecente.longitude,
+    };
+    recherche.value = `${adresseRecente.numero_rue} ${adresseRecente.rue} ${adresseRecente.code_postal} ${adresseRecente.commmune}`;
+    lancerRecherche();
+  };
+
+  const chercherAvecAdressePrincipale = async () => {
+    await recupererAdressePourBarreDeRecherche(
+      utilisateurId,
+      async (barreDeRechercheViewModel: BarreDeRechercheViewModel) => {
+        coordonnees.value = barreDeRechercheViewModel.coordonnees;
+        if (barreDeRechercheViewModel.adresse) {
+          const adressePrincipale = barreDeRechercheViewModel.adresse;
+          recherche.value =
+            adressePrincipale.numeroRue && adressePrincipale.rue
+              ? `${adressePrincipale.numeroRue} ${adressePrincipale.rue} ${adressePrincipale.codePostal} ${adressePrincipale.communeLabel}`
+              : `${adressePrincipale.codePostal} ${adressePrincipale.communeLabel}`;
+        }
+        lancerRecherche();
+      },
+    );
+  };
 
   onMounted(async () => {
     const query = useRouter().currentRoute.value.query;
@@ -186,7 +221,9 @@
         utilisateurId,
         async (barreDeRechercheViewModel: BarreDeRechercheViewModel) => {
           coordonnees.value = barreDeRechercheViewModel.coordonnees;
-          recherche.value = barreDeRechercheViewModel.recherche;
+          if (barreDeRechercheViewModel.adresse.rue) {
+            utilisateurStore().utilisateur.possedeUneAdresseComplete = true;
+          }
         },
       );
     }
