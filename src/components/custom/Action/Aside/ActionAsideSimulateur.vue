@@ -9,10 +9,7 @@
   <template v-if="nombreActionRealise > 1">
     <hr />
 
-    <p class="fr-mb-1w">
-      <span class="text--bold"> {{ nombreActionRealise }} simulations terminées </span>
-      par la communauté
-    </p>
+    <p class="fr-mb-1w" v-html="actionBaseViewModel.labelCompteur" />
   </template>
 </template>
 
