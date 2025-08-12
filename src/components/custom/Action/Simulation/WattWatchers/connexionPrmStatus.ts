@@ -3,4 +3,5 @@ export enum ConnexionPRMStatus {
   EN_COURS,
   SUCCES,
   ECHEC,
+  DEJA_ASSOCIE,
 }

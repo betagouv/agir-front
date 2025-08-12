@@ -4,6 +4,7 @@ export class InscriptionPresenterImpl implements InscriptionPresenter {
   constructor(
     private readonly onInscriptionOK: () => void,
     private readonly onInscriptionKO: () => void,
+    private readonly onDejaAssocie: () => void,
   ) {}
 
   public presenteInscriptionOk(): void {
@@ -12,5 +13,9 @@ export class InscriptionPresenterImpl implements InscriptionPresenter {
 
   public presenteInscriptionErreur(): void {
     this.onInscriptionKO();
+  }
+
+  public presenteInscriptionDejaAssocie(): void {
+    this.onDejaAssocie();
   }
 }
