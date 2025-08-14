@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.19.1](https://github.com/betagouv/agir-front/compare/v2.19.0...v2.19.1) (2025-08-14)
+
+
+### 👷 Autres changements
+
+* release-please-v4 ([30873b9](https://github.com/betagouv/agir-front/commit/30873b9e04959368a031fade464e42b368e42abb))
+
 ## [2.19.0](https://github.com/betagouv/agir-front/compare/v2.18.0...v2.19.0) (2025-08-14)
 
 
