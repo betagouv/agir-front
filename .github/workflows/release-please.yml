@@ -13,8 +13,7 @@ jobs:
   release-please:
     runs-on: ubuntu-latest
     steps:
-      - uses: google-github-actions/release-please-action@v3
+      - uses: googleapis/release-please-action@v4
         with:
           release-type: node
-          package-name: release-please-action
-          changelog-types: '[{"type":"feat","section":"✨ Nouvelles fonctionnalités","hidden":false},{"type":"fix","section":"🐛 Corrections de bogues","hidden":false},{"type":"chore","section":"👷 Autres changements","hidden":false},{"type":"tech","section":"👷 Autres changements","hidden":false},{"type":"ci","section":"👷 Autres changements","hidden":false},{"type":"refacto","section":"👷 Autres changements","hidden":false},{"type":"build","section":"👷 Autres changements","hidden":false},{"type":"docs","section":"📚 Documentation","hidden":false}]'
+          manifest-file: .release-please-manifest.json
