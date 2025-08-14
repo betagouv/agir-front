@@ -1,3 +1,4 @@
+import { AxiosError } from '@/axios.factory';
 import { InscriptionPresenter } from '@/domaines/simulationWattWatchers/ports/inscription.presenter';
 import { WattWatchersRepository } from '@/domaines/simulationWattWatchers/ports/wattWatchers.repository';
 
@@ -9,7 +10,15 @@ export class InscriptionParPRMUsecase {
       await this.repository.inscriptionParPrm(utilisateurId, prm, nom);
       presenter.presenteInscriptionOk();
     } catch (error) {
-      presenter.presenteInscriptionErreur();
+      if (this.isDejaAssocie(error)) {
+        presenter.presenteInscriptionDejaAssocie();
+      } else {
+        presenter.presenteInscriptionErreur();
+      }
     }
+  }
+
+  private isDejaAssocie(error: unknown): error is AxiosError {
+    return error !== null && (error as AxiosError).data.code === '160';
   }
 }

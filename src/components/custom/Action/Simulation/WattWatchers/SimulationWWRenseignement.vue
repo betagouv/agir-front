@@ -205,6 +205,9 @@
           (): void => {
             connexionPrmStatus.value = ConnexionPRMStatus.ECHEC;
           },
+          (): void => {
+            connexionPrmStatus.value = ConnexionPRMStatus.DEJA_ASSOCIE;
+          },
         ),
       );
     } else {
@@ -227,6 +230,9 @@
           },
           (): void => {
             connexionPrmStatus.value = ConnexionPRMStatus.ECHEC;
+          },
+          (): void => {
+            connexionPrmStatus.value = ConnexionPRMStatus.DEJA_ASSOCIE;
           },
         ),
       );

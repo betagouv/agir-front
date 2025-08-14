@@ -11,6 +11,9 @@
         <template v-else-if="connexionPrmStatus === ConnexionPRMStatus.ECHEC">
           <ModaleEchec :modale-id="modaleId" :modifier-numero="modifierNumero" :retour="retour" />
         </template>
+        <template v-else-if="connexionPrmStatus === ConnexionPRMStatus.DEJA_ASSOCIE">
+          <ModaleDejaAssocie :modale-id="modaleId" :retour="retour" />
+        </template>
       </template>
     </Modale>
   </Teleport>
@@ -18,6 +21,7 @@
 
 <script lang="ts" setup>
   import { ConnexionPRMStatus } from '@/components/custom/Action/Simulation/WattWatchers/connexionPrmStatus';
+  import ModaleDejaAssocie from '@/components/custom/Action/Simulation/WattWatchers/ModaleDejaAssocie.vue';
   import ModaleEchec from '@/components/custom/Action/Simulation/WattWatchers/ModaleEchec.vue';
   import ModaleSucces from '@/components/custom/Action/Simulation/WattWatchers/ModaleSucces.vue';
   import Modale from '@/components/custom/Modale/Modale.vue';
