@@ -1,8 +1,8 @@
 <template>
-  <div class="fr-input-group">
+  <div class="fr-input-group" :class="{ 'fr-input-group--error': messageErreur }">
     <label class="fr-label" :class="classLabel" :for="name">
       {{ label }}
-      <span class="text--normal fr-hint-text">Format attendu : nom@domaine.fr</span>
+      <span class="text--normal fr-hint-text" v-if="hasHint">Format attendu : nom@domaine.fr</span>
     </label>
     <input
       :id="name"
@@ -14,18 +14,29 @@
       type="email"
       :disabled="disable"
       required
+      v-bind="messageErreur ? { 'aria-describedby': `${name}-messages` } : {}"
     />
+    <div class="fr-messages-group" :id="`${name}-messages`" aria-live="polite" v-if="messageErreur">
+      <p class="fr-message fr-message--error fr-mt-1w" :id="`${name}-message-error`" v-text="messageErreur" />
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-  defineProps<{
-    name: string;
-    label: string;
-    modelValue: string;
-    classLabel?: string;
-    disable?: boolean;
-  }>();
+  withDefaults(
+    defineProps<{
+      name: string;
+      label: string;
+      messageErreur?: string;
+      modelValue: string;
+      classLabel?: string;
+      disable?: boolean;
+      hasHint?: boolean;
+    }>(),
+    {
+      hasHint: true,
+    },
+  );
 
   const emit = defineEmits<{
     (e: 'update:modelValue', value: string): void;
@@ -36,3 +47,14 @@
     emit('update:modelValue', inputElement.value);
   };
 </script>
+
+<style scoped>
+  .fr-input-group--error::before {
+    content: none;
+  }
+
+  .fr-label,
+  .fr-message--error {
+    color: white;
+  }
+</style>
