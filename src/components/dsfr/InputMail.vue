@@ -53,8 +53,8 @@
     content: none;
   }
 
-  .fr-label,
-  .fr-message--error {
+  .label-blanc.fr-input-group--error label,
+  .label-blanc.fr-input-group--error .fr-message--error {
     color: white;
   }
 </style>

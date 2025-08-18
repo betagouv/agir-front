@@ -32,7 +32,7 @@
               <InputMail
                 v-model="compteUtilisateurInput.mail"
                 autocomplete="email"
-                class="full-width fr-mb-1w"
+                class="label-blanc full-width fr-mb-1w"
                 label="Mon adresse e-mail"
                 class-label="text--white"
                 name="email"
