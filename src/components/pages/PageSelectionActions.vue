@@ -4,7 +4,7 @@
       <div class="fr-container">
         <h1 class="fr-h1 fr-mt-4w fr-mb-4w">{{ titre?.titre }}</h1>
 
-        <p>{{ titre?.description }}</p>
+        <p v-if="titre?.description">{{ titre?.description }}</p>
       </div>
     </div>
 
@@ -64,7 +64,7 @@
   import { TitreCatalogueRepositoryAxios } from '@/domaines/actions/adapters/titreCatalogue.repository.axios';
   import { ActionViewModel } from '@/domaines/actions/ports/actions.presenter';
   import { TitreCatalogue } from '@/domaines/actions/ports/titreCatalogue.repository';
-  import { RecupererCatalogueActionsMaifUsecase } from '@/domaines/actions/recupererCatalogueActionsMaif.usecase';
+  import { RecupererSelectionActionsUsecase } from '@/domaines/actions/recupererCatalogueActionsSelection.usecase';
   import { RecupererCatalogueActionsWinterUsecase } from '@/domaines/actions/recupererCatalogueActionsWinter.usecase';
   import { RecupererTitreCataloguePartenaireUsecase } from '@/domaines/actions/recupererTitreCataloguePartenaireUsecase';
   import { SessionRepositoryStore } from '@/domaines/authentification/adapters/session.repository.store';
@@ -83,7 +83,7 @@
     ...useHeadProperties,
     title: computed(() => titre.value?.titre && `${titre.value.titre}`),
   });
-  const imagePath = ref<string>('url(/thematique-logement.svg)');
+  const imagePath = ref<string>(`url(/${titre.value?.image})`);
   const actionsViewModel = ref<ActionViewModel[]>();
   const catalogueActionsPresenter = new CatalogueActionsPresenterImpl(
     () => {},
@@ -93,19 +93,22 @@
   );
 
   onMounted(async () => {
-    const selection = useRouter().currentRoute.value.query.selection as 'actions_watt_watchers' | 'risques_naturels';
+    const selection = useRouter().currentRoute.value.query.selection as
+      | 'actions_watt_watchers'
+      | 'risques_naturels'
+      | 'semaine_mobilite';
     const titreUsecase = new RecupererTitreCataloguePartenaireUsecase(new TitreCatalogueRepositoryAxios());
     await titreUsecase.execute(selection, titreRecupere => {
-      imagePath.value = titreRecupere.image;
+      imagePath.value = `url(${titreRecupere.image})`;
       titre.value = titreRecupere;
     });
 
     if (selection === 'actions_watt_watchers') {
       const usecase = new RecupererCatalogueActionsWinterUsecase(new ActionsRepositoryAxios());
       await usecase.execute('', catalogueActionsPresenter);
-    } else if (selection === 'risques_naturels') {
-      const usecase = new RecupererCatalogueActionsMaifUsecase(new ActionsRepositoryAxios());
-      await usecase.execute(catalogueActionsPresenter);
+    } else {
+      const usecase = new RecupererSelectionActionsUsecase(new ActionsRepositoryAxios());
+      await usecase.execute(selection, catalogueActionsPresenter);
     }
   });
 

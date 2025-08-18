@@ -208,9 +208,9 @@ export class ActionsRepositoryAxios implements ActionsRepository {
     };
   }
 
-  async chargerCatalogueActionsMaif(): Promise<CatalogueActions> {
+  async chargerSelectionActions(selection: string): Promise<CatalogueActions> {
     const axios = AxiosFactory.getAxios();
-    const response = await axios.get<CatalogueActionsApiModel>(`/actions?selection=risques_naturels`);
+    const response = await axios.get<CatalogueActionsApiModel>(`/actions?selection=${selection}`);
 
     return {
       actions: response.data.actions.map(this.mapActionApiModelToAction),
