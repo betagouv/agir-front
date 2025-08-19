@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.20.0](https://github.com/betagouv/agir-front/compare/v2.19.0...v2.20.0) (2025-08-19)
+
+
+### Features
+
+* release please manifest update ([8e95d04](https://github.com/betagouv/agir-front/commit/8e95d04b79ef189319a844b52e5b035a12340c29))
+* release please manifest update ([a599be1](https://github.com/betagouv/agir-front/commit/a599be1fe75cee97336ebba4a2869c0cc34564e1))
+
 ## [2.19.0](https://github.com/betagouv/agir-front/compare/v2.18.0...v2.19.0) (2025-08-14)
 
 
