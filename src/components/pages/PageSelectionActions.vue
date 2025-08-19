@@ -147,6 +147,7 @@
     background-image: v-bind('imagePath');
     background-repeat: no-repeat;
     background-position: right top;
+    background-size: contain;
     @media all and (max-width: 767px) {
       background-image: none;
     }
