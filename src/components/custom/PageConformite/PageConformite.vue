@@ -4,6 +4,7 @@
     <div class="cms__content" v-html="contenuDeLaPage?.texte"></div>
   </div>
 </template>
+
 <script lang="ts" setup>
   import '@gouvfr/dsfr/dist/component/table/table.min.css';
   import { onMounted, ref } from 'vue';
@@ -22,4 +23,3 @@
     contenuDeLaPage.value = await usecase.execute(props.type);
   });
 </script>
-<style scoped></style>
