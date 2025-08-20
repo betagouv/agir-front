@@ -723,3 +723,39 @@
 .fr-card--sm.fr-enlarge-link:not(.fr-card--no-icon) .fr-card__title button:after {
     --icon-size: 1.5rem !important;
 }
+
+.fr-stepper__steps-large[data-fr-steps="9"] { --steps: 9;  --step-width: 11.1111%; }
+.fr-stepper__steps-large[data-fr-steps="10"] { --steps: 10; --step-width: 10%; }
+.fr-stepper__steps-large[data-fr-steps="11"] { --steps: 11; --step-width: 9.0909%; }
+.fr-stepper__steps-large[data-fr-steps="12"] { --steps: 12; --step-width: 8.3333%; }
+.fr-stepper__steps-large[data-fr-steps="13"] { --steps: 13; --step-width: 7.6923%; }
+.fr-stepper__steps-large[data-fr-steps="14"] { --steps: 14; --step-width: 7.1429%; }
+.fr-stepper__steps-large[data-fr-steps="15"] { --steps: 15; --step-width: 6.6667%; }
+.fr-stepper__steps-large[data-fr-steps="16"] { --steps: 16; --step-width: 6.25%; }
+.fr-stepper__steps-large[data-fr-steps="17"] { --steps: 17; --step-width: 5.8824%; }
+.fr-stepper__steps-large[data-fr-steps="18"] { --steps: 18; --step-width: 5.5556%; }
+.fr-stepper__steps-large[data-fr-steps="19"] { --steps: 19; --step-width: 5.2632%; }
+.fr-stepper__steps-large[data-fr-steps="20"] { --steps: 20; --step-width: 5%; }
+.fr-stepper__steps-large[data-fr-steps="21"] { --steps: 21; --step-width: 4.7619%; }
+.fr-stepper__steps-large[data-fr-steps="22"] { --steps: 22; --step-width: 4.5455%; }
+.fr-stepper__steps-large[data-fr-steps="23"] { --steps: 23; --step-width: 4.3478%; }
+.fr-stepper__steps-large[data-fr-steps="24"] { --steps: 24; --step-width: 4.1667%; }
+.fr-stepper__steps-large[data-fr-steps="25"] { --steps: 25; --step-width: 4%; }
+
+.fr-stepper__steps-large[data-fr-current-step="9"] { --current-step: 9; }
+.fr-stepper__steps-large[data-fr-current-step="10"] { --current-step: 10; }
+.fr-stepper__steps-large[data-fr-current-step="11"] { --current-step: 11; }
+.fr-stepper__steps-large[data-fr-current-step="12"] { --current-step: 12; }
+.fr-stepper__steps-large[data-fr-current-step="13"] { --current-step: 13; }
+.fr-stepper__steps-large[data-fr-current-step="14"] { --current-step: 14; }
+.fr-stepper__steps-large[data-fr-current-step="15"] { --current-step: 15; }
+.fr-stepper__steps-large[data-fr-current-step="16"] { --current-step: 16; }
+.fr-stepper__steps-large[data-fr-current-step="17"] { --current-step: 17; }
+.fr-stepper__steps-large[data-fr-current-step="18"] { --current-step: 18; }
+.fr-stepper__steps-large[data-fr-current-step="19"] { --current-step: 19; }
+.fr-stepper__steps-large[data-fr-current-step="20"] { --current-step: 20; }
+.fr-stepper__steps-large[data-fr-current-step="21"] { --current-step: 21; }
+.fr-stepper__steps-large[data-fr-current-step="22"] { --current-step: 22; }
+.fr-stepper__steps-large[data-fr-current-step="23"] { --current-step: 23; }
+.fr-stepper__steps-large[data-fr-current-step="24"] { --current-step: 24; }
+.fr-stepper__steps-large[data-fr-current-step="25"] { --current-step: 25; }

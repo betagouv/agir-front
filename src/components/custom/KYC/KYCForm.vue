@@ -1,38 +1,27 @@
 <template>
   <form @submit.prevent="validerLaReponse()">
-    <div class="fr-input-group">
-      <KYCDecimal
-        v-if="questionViewModel.type === 'decimal'"
-        v-model="reponse as string"
-        :question-view-model="questionViewModel"
-      />
-      <KYCEntier
-        v-if="questionViewModel.type === 'entier'"
-        v-model="reponse as string"
-        :question-view-model="questionViewModel"
-      />
-      <KYCMosaic
-        v-if="questionViewModel.type === 'mosaic_boolean'"
-        v-model="reponse as string[]"
-        :question-view-model="questionViewModel"
-      />
-      <KYCChoixUnique
-        v-if="questionViewModel.type === 'choix_unique'"
-        v-model="reponse as string[]"
-        :question-view-model="questionViewModel"
-      />
-      <KYCChoixMultiple
-        v-if="questionViewModel.type === 'choix_multiple'"
+    <div class="fr-input-group" v-if="aReponsesPredefinies">
+      <KYCInputWrapperArray
         v-model="reponse as string[]"
         :question-view-model="questionViewModel"
         :style-du-titre="styleDuTitre"
-      />
-      <KYCLibre
-        v-if="questionViewModel.type === 'libre'"
+      >
+        <template #complement>
+          <slot name="complement" />
+        </template>
+      </KYCInputWrapperArray>
+    </div>
+
+    <div class="fr-input-group" v-else>
+      <KycInputWrapperString
         v-model="reponse as string"
         :question-view-model="questionViewModel"
         :style-du-titre="styleDuTitre"
-      />
+      >
+        <template #complement>
+          <slot name="complement" />
+        </template>
+      </KycInputWrapperString>
     </div>
 
     <Alert
@@ -56,12 +45,8 @@
 <script lang="ts" setup>
   import { onMounted, ref } from 'vue';
   import Alert from '@/components/custom/Alert.vue';
-  import KYCChoixMultiple from '@/components/custom/KYC/KYCTypes/KYCChoixMultiple.vue';
-  import KYCChoixUnique from '@/components/custom/KYC/KYCTypes/KYCChoixUnique.vue';
-  import KYCDecimal from '@/components/custom/KYC/KYCTypes/KYCDecimal.vue';
-  import KYCEntier from '@/components/custom/KYC/KYCTypes/KYCEntier.vue';
-  import KYCLibre from '@/components/custom/KYC/KYCTypes/KYCLibre.vue';
-  import KYCMosaic from '@/components/custom/KYC/KYCTypes/KYCMosaic.vue';
+  import KYCInputWrapperArray from '@/components/custom/KYC/KYCInputWrapperArray.vue';
+  import KycInputWrapperString from '@/components/custom/KYC/KYCInputWrapperString.vue';
   import { useAlerte } from '@/composables/useAlerte';
   import { QuestionViewModel } from '@/domaines/kyc/adapters/question.presenter.impl';
   import { QuestionRepositoryAxios } from '@/domaines/kyc/adapters/question.repository.axios';
@@ -71,8 +56,14 @@
   import { ToDoListEventBusImpl } from '@/domaines/toDoList/toDoListEventBusImpl';
   import { utilisateurStore } from '@/store/utilisateur';
 
-  const reponse = defineModel<string | string[]>('reponse');
   const props = defineProps<{ questionViewModel: QuestionViewModel; wordingBouton: string; styleDuTitre?: string }>();
+
+  const aReponsesPredefinies =
+    props.questionViewModel.type === 'mosaic_boolean' ||
+    props.questionViewModel.type === 'choix_multiple' ||
+    props.questionViewModel.type === 'choix_unique';
+
+  const reponse = defineModel<string | string[]>('reponse');
   const emit = defineEmits<{
     (e: 'update:soumissionKyc', value: string[]): void;
     (e: 'update:passer-la-question'): void;
@@ -82,12 +73,11 @@
   const { alerte, afficherAlerte } = useAlerte();
 
   onMounted(() => {
-    reponse.value =
-      props.questionViewModel.type === 'libre' ||
-      props.questionViewModel.type === 'entier' ||
-      props.questionViewModel.type === 'decimal'
-        ? (props.questionViewModel.reponses_possibles[0]?.label ?? '')
-        : (props.questionViewModel.reponses_possibles.filter(r => r.checked).map(r => r.id) ?? []);
+    reponse.value = (
+      aReponsesPredefinies
+        ? (props.questionViewModel.reponses_possibles?.filter(r => r.checked)?.map(r => r.id) ?? [])
+        : (props.questionViewModel.reponses_possibles[0]?.label ?? '')
+    ) as typeof reponse.value;
   });
 
   const validerLaReponse = async () => {
@@ -95,11 +85,9 @@
       afficherAlerte('error', 'Erreur', 'Veuillez sélectionner une réponse pour continuer');
       return;
     }
-    if (
-      props.questionViewModel.type === 'mosaic_boolean' ||
-      props.questionViewModel.type === 'choix_multiple' ||
-      props.questionViewModel.type === 'choix_unique'
-    ) {
+
+    if (aReponsesPredefinies) {
+      const reponseArray = Array.isArray(reponse.value) ? reponse.value : [reponse.value];
       const envoyerReponsesMultiplesUsecase = new EnvoyerReponsesMultiplesUsecase(
         new QuestionRepositoryAxios(),
         ToDoListEventBusImpl.getInstance(),
@@ -109,7 +97,7 @@
         props.questionViewModel.id,
         props.questionViewModel.reponses_possibles.map(r => ({
           code: r.id,
-          boolean_value: reponse.value!.includes(r.id),
+          boolean_value: reponseArray.includes(r.id),
         })),
       );
     } else {
@@ -117,13 +105,13 @@
         new QuestionRepositoryAxios(),
         ToDoListEventBusImpl.getInstance(),
       );
-
       await envoyerReponseUsecase.execute(
         utilisateurStore().utilisateur.id,
         props.questionViewModel.id,
         reponse.value.toString(),
       );
     }
+
     emit('update:soumissionKyc', [reponse.value].flat());
   };
 
