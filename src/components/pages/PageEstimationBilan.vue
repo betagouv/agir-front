@@ -12,7 +12,6 @@
       <EnchainementQuestionsKyc
         :est-active="true"
         :id-enchainement-kycs="idEnchainementKycs"
-        :afficher-stepper="true"
         @fin-kyc-atteinte="onFinKYC"
         wording-dernier-bouton="Finir mon estimation"
       />

@@ -28,7 +28,7 @@
       <template v-slot:complement v-if="afficherStepper">
         <div class="fr-stepper fr-mt-2w fr-mb-3w">
           <div
-            class="fr-stepper__steps"
+            class="fr-stepper__steps fr-stepper__steps-large"
             :data-fr-current-step="questionViewModel.etapeCourante"
             :data-fr-steps="questionViewModel.nombreTotalDeQuestions"
           />
