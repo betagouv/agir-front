@@ -1,5 +1,49 @@
 # Changelog
 
+## [2.20.0](https://github.com/betagouv/agir-front/compare/v2.19.0...v2.20.0) (2025-08-20)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* release please manifest update ([8e95d04](https://github.com/betagouv/agir-front/commit/8e95d04b79ef189319a844b52e5b035a12340c29))
+* release please manifest update ([a599be1](https://github.com/betagouv/agir-front/commit/a599be1fe75cee97336ebba4a2869c0cc34564e1))
+* vérifier que release-please met à jour la PR ([5d8ee13](https://github.com/betagouv/agir-front/commit/5d8ee13a39ae271ff8df52ca01a29421ce88ffff))
+
+
+### 🐛 Corrections de bogues
+
+* changelog sections dans le config.json ([bb4c233](https://github.com/betagouv/agir-front/commit/bb4c233ad98455b2536411f6cfa2fe50f80419cf))
+* changelog sections dans le package ([0cd1f97](https://github.com/betagouv/agir-front/commit/0cd1f9793ce6cda8cf49cca8e79b1d71aa67bacb))
+* enlever release-type: node ([a9e4e5f](https://github.com/betagouv/agir-front/commit/a9e4e5fa0840cfde3eb309ff0b143e20bcdd57f7))
+
+
+### 👷 Autres changements
+
+* "gestion des dépendances" pour les type build ([018e4ce](https://github.com/betagouv/agir-front/commit/018e4cedccd71225a0ff9b6ae1cfacca3a0723e4))
+* ajouter changelog-path ([73bd568](https://github.com/betagouv/agir-front/commit/73bd56849302046d88efba243ea46af44acd36e0))
+* changelog section in manifest config ([3e7ecfa](https://github.com/betagouv/agir-front/commit/3e7ecfaf51bd99e1373d7d519f799e340e520709))
+* changelog section in package config ([cd98f2d](https://github.com/betagouv/agir-front/commit/cd98f2d4b1ffeb802378e3e27d85029d3c766f16))
+* release-please "always-update" property ([7291c92](https://github.com/betagouv/agir-front/commit/7291c92a5acbb8e8b22b2d0b6049dfe328b34e7a))
+* release-please config files ([860ecef](https://github.com/betagouv/agir-front/commit/860ecefcef12ac187965967015f383e881f64c09))
+* release-please-v4 ([30873b9](https://github.com/betagouv/agir-front/commit/30873b9e04959368a031fade464e42b368e42abb))
+* serialize changelog sections ([c3b3060](https://github.com/betagouv/agir-front/commit/c3b30608e1a71630df13dae0a4c753964020d388))
+* useless code conformité ([#1277](https://github.com/betagouv/agir-front/issues/1277)) ([59cfbae](https://github.com/betagouv/agir-front/commit/59cfbaeeec4d3b93ea49ababca6f61b55e365d66))
+
+
+### 👷 Gestion des dépendances
+
+* Bump @sentry/vite-plugin from 4.1.0 to 4.1.1 ([#1272](https://github.com/betagouv/agir-front/issues/1272)) ([18bfe49](https://github.com/betagouv/agir-front/commit/18bfe491b9ae8d9d8998cc57721326d9598a4152))
+* Bump @sentry/vue from 9.38.0 to 10.5.0 ([#1286](https://github.com/betagouv/agir-front/issues/1286)) ([675cb43](https://github.com/betagouv/agir-front/commit/675cb43f27b1ef866343b672e96abf6180950446))
+* Bump @types/node from 24.2.1 to 24.3.0 ([#1279](https://github.com/betagouv/agir-front/issues/1279)) ([f977eed](https://github.com/betagouv/agir-front/commit/f977eedf9c4fd579a16f1f37a25316a2cd195314))
+* Bump @unhead/vue from 2.0.12 to 2.0.14 ([#1275](https://github.com/betagouv/agir-front/issues/1275)) ([ef8b09b](https://github.com/betagouv/agir-front/commit/ef8b09b23b1bb3f59068ed5c25b14bba32dfd92f))
+* Bump marked from 16.1.2 to 16.2.0 ([#1273](https://github.com/betagouv/agir-front/issues/1273)) ([14a76a6](https://github.com/betagouv/agir-front/commit/14a76a61a89345bd142f68877dd0a59ebea37a6b))
+* Bump pinia-plugin-persistedstate from 4.4.1 to 4.5.0 ([#1280](https://github.com/betagouv/agir-front/issues/1280)) ([703dba4](https://github.com/betagouv/agir-front/commit/703dba421309af5499ead5b18c2d416f31130162))
+* Bump release-please from 16.18.0 to 17.1.1 ([#1281](https://github.com/betagouv/agir-front/issues/1281)) ([7df5560](https://github.com/betagouv/agir-front/commit/7df5560c8d5d8973127554234d796233f9c471d2))
+* Bump release-please from 17.1.1 to 17.1.2 ([#1289](https://github.com/betagouv/agir-front/issues/1289)) ([1907b4c](https://github.com/betagouv/agir-front/commit/1907b4c8df58167b310ebccdfe101ff526a15c61))
+* Bump sharp from 0.34.2 to 0.34.3 ([#1274](https://github.com/betagouv/agir-front/issues/1274)) ([fb49432](https://github.com/betagouv/agir-front/commit/fb494324183e2f87081e10bb9c1f0b42bd8d2637))
+* Bump vite from 7.1.1 to 7.1.2 ([#1276](https://github.com/betagouv/agir-front/issues/1276)) ([4dfd5aa](https://github.com/betagouv/agir-front/commit/4dfd5aa823d6a32a545de96453cb7fd018de65e2))
+* Bump vite from 7.1.2 to 7.1.3 ([#1288](https://github.com/betagouv/agir-front/issues/1288)) ([14ddb00](https://github.com/betagouv/agir-front/commit/14ddb00300794ad63a40d72c49f7e6cc3cb98114))
+
 ## [2.19.0](https://github.com/betagouv/agir-front/compare/v2.18.0...v2.19.0) (2025-08-14)
 
 
