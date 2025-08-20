@@ -1,15 +1,42 @@
 <template>
-  <section class="fr-container fr-my-3w">
-    <h1 class="fr-h1 fr-mt-4w fr-mb-4w">Catalogue d'actions</h1>
+  <div class="background-brown-opera-950 headerActions">
+    <div class="fr-container">
+      <h1 class="fr-h1 fr-mb-1w fr-pt-5w">Explorer toutes nos actions</h1>
+      <p class="fr-text--xl fr-mb-5w">
+        Et découvrez nos conseils, adresses et aides financières pour vous accompagner !
+      </p>
 
+      <div class="full-width background--white fr-grid-row border-top--bleu">
+        <div class="fr-col-12 fr-col-sm-6 fr-col-md-3 fr-p-2w"></div>
+        <div class="fr-col-12 fr-col-sm-6 fr-col-md-3 fr-p-2w">
+          <CatalogueBoutonFiltreThematiques
+            v-if="filtresViewModel?.filtres"
+            :filtres="filtresViewModel.filtres"
+            @update-thematiques="updateThematiques"
+          />
+        </div>
+        <div class="fr-col-12 fr-col-sm-6 fr-col-md-3 fr-p-2w"></div>
+        <div class="fr-col-12 fr-col-sm-6 fr-col-md-3 fr-p-2w">
+          <div class="flex align-items--center flex-center full-height">
+            <InputSearchBar
+              id="rechercheParTitre"
+              name="titreRessource"
+              placeholder="Rechercher"
+              @submit="rechercherParTitre"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="fr-container fr-my-3w">
     <div class="fr-grid-row fr-grid-row--gutters">
       <div class="fr-col-md-3 fr-col-12">
         <CatalogueActionsFiltres
           v-if="filtresViewModel"
           :filtres="filtresViewModel.filtres"
           @rechercher-par-deja-vu="rechercherParDejaVu"
-          @rechercher-par-titre="rechercherParTitre"
-          @update-thematiques="updateThematiques"
           @rechercher-par-deja-realisees="rechercherParDejaRealisees"
         />
       </div>
@@ -31,6 +58,8 @@
   import { onMounted, ref } from 'vue';
   import CatalogueActionsComposant from '@/components/custom/Action/Catalogue/CatalogueActionsComposant.vue';
   import CatalogueActionsFiltres from '@/components/custom/Action/Catalogue/CatalogueActionsFiltres.vue';
+  import CatalogueBoutonFiltreThematiques from '@/components/custom/Action/Catalogue/CatalogueBoutonFiltreThematiques.vue';
+  import InputSearchBar from '@/components/dsfr/InputSearchBar.vue';
   import { ActionsRepositoryAxios } from '@/domaines/actions/adapters/actions.repository.axios';
   import { CatalogueActionsPresenterImpl } from '@/domaines/actions/adapters/catalogueActions.presenter.impl';
   import { FiltrerCatalogueActionsUsecase } from '@/domaines/actions/filtrerCatalogueActions.usecase';
@@ -97,3 +126,23 @@
     isLoading.value = false;
   }
 </script>
+
+<style scoped>
+  .background-brown-opera-950 {
+    background-color: var(--brown-opera-950-100);
+  }
+
+  .headerActions {
+    min-height: 20rem;
+    background-image: url('/actions-illustration.svg');
+    background-repeat: no-repeat;
+    background-position: right top;
+    @media all and (max-width: 767px) {
+      background-image: none;
+    }
+  }
+
+  .border-top--bleu {
+    border-top: 2px solid var(--blue-france-sun-113-625);
+  }
+</style>
