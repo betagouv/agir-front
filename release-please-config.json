@@ -9,7 +9,7 @@
     { "type": "docs", "section": "📚 Documentation", "hidden": false },
     { "type": "chore", "section": "👷 Autres changements", "hidden": false },
     { "type": "refactor", "section": "👷 Autres changements", "hidden": false },
-    { "type": "build", "section": "👷 Autres changements", "hidden": false },
+    { "type": "build", "section": "👷 Gestion des dépendances", "hidden": false },
     { "type": "ci", "section": "👷 Autres changements", "hidden": false },
     { "type": "tech", "section": "👷 Autres changements", "hidden": false },
     { "type": "refacto", "section": "👷 Autres changements", "hidden": false },
