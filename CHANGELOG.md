@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.21.0](https://github.com/betagouv/agir-front/compare/v2.20.0...v2.21.0) (2025-08-20)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* proposer la creation d'un compte dans une sélection action ([#1271](https://github.com/betagouv/agir-front/issues/1271)) ([df6c3a0](https://github.com/betagouv/agir-front/commit/df6c3a0092e295fc8efb60cbd50ae798ff82901b))
+
 ## [2.20.0](https://github.com/betagouv/agir-front/compare/v2.19.0...v2.20.0) (2025-08-20)
 
 
