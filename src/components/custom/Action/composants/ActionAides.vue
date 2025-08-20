@@ -4,6 +4,7 @@
     <GrilleAidesDUneAction :aides="aides" />
   </section>
 </template>
+
 <script lang="ts" setup>
   import GrilleAidesDUneAction from '@/components/custom/Aides/GrilleAidesDUneAction.vue';
   import { ActionAideViewModel } from '@/domaines/actions/ports/action.presenter';

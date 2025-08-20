@@ -144,5 +144,5 @@ export interface ActionsRepository {
 
   chargerCatalogueActionsWinter(): Promise<CatalogueActions>;
 
-  chargerCatalogueActionsMaif(): Promise<CatalogueActions>;
+  chargerSelectionActions(selection: string): Promise<CatalogueActions>;
 }

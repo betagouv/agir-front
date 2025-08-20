@@ -46,18 +46,46 @@
         </div>
       </router-link>
     </li>
+
+    <li :class="['fr-col-12', troisColonnes ? 'fr-col-md-4' : 'fr-col-md-6']" v-if="!estConnecte">
+      <div class="fr-card flex-space-between">
+        <div class="text--center fr-p-2w min-height-110">
+          <div>
+            <router-link
+              :to="{ name: RouteCompteName.CREATION_COMPTE }"
+              class="fr-text--lg fr-mb-0 text--normal text--lh-1-3 fr-link"
+            >
+              Découvrir mes aides locales
+            </router-link>
+            <p class="fr-m-0 fr-text--md fr-mt-1w">Inscrivez-vous dès maintenant !</p>
+          </div>
+        </div>
+        <div class="background--bleu-info fr-p-1w flex align-items--center">
+          <img src="/icons/map/france-fill.svg" alt="" class="partenaire__img" />
+          <div class="full-width fr-ml-1w">
+            <span class="text--bleu text--italic display-block">Proposée par</span>
+            Mon département
+          </div>
+        </div>
+      </div>
+    </li>
   </ul>
 </template>
 
 <script lang="ts" setup>
+  import { computed } from 'vue';
   import { ActionAideViewModel } from '@/domaines/actions/ports/action.presenter';
   import { RouteAidesName } from '@/router/aides/routeAidesName';
+  import { RouteCompteName } from '@/router/compte/routeCompteName';
   import { trackClick } from '@/shell/matomo';
+  import { utilisateurStore } from '@/store/utilisateur';
 
   defineProps<{
     aides: ActionAideViewModel[];
     troisColonnes?: boolean;
   }>();
+
+  const estConnecte = computed(() => utilisateurStore().estConnecte);
 
   const trackAideClick = aide => {
     trackClick('Aides', aide.titre);
