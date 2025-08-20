@@ -14,6 +14,7 @@
         :id-enchainement-kycs="idEnchainementKycs"
         @fin-kyc-atteinte="onFinKYC"
         wording-dernier-bouton="Finir mon estimation"
+        :afficher-stepper="true"
       />
     </div>
   </div>
