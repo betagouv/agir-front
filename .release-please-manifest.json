@@ -1,21 +1,3 @@
 {
-  ".": "2.19.0",
-  "packages": {
-    ".": {
-      "changelog-sections": [
-        { "type": "feat", "section": "✨ Nouvelles fonctionnalités", "hidden": false },
-        { "type": "feature", "section": "✨ Nouvelles fonctionnalités", "hidden": false },
-        { "type": "fix", "section": "🐛 Corrections de bogues", "hidden": false },
-        { "type": "perf", "section": "🚀 Améliorations de performance", "hidden": false },
-        { "type": "docs", "section": "📚 Documentation", "hidden": false },
-        { "type": "chore", "section": "👷 Autres changements", "hidden": false },
-        { "type": "refactor", "section": "👷 Autres changements", "hidden": false },
-        { "type": "build", "section": "👷 Autres changements", "hidden": false },
-        { "type": "ci", "section": "👷 Autres changements", "hidden": false },
-        { "type": "tech", "section": "👷 Autres changements", "hidden": false },
-        { "type": "refacto", "section": "👷 Autres changements", "hidden": false },
-        { "type": "test", "section": "🧪 Tests", "hidden": true }
-      ]
-    }
-  }
+  ".": "2.19.0"
 }
