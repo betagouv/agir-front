@@ -16,6 +16,8 @@
     { "type": "test", "section": "🧪 Tests", "hidden": true }
   ],
   "packages": {
-    ".": {}
+    ".": {
+      "changelog-path": "CHANGELOG.md"
+    }
   }
 }
