@@ -8,7 +8,7 @@
     </template>
 
     <template #menu-contenu>
-      <InputCheckbox id="thematiques" :options="filtres" @update="updateThematiques">
+      <InputCheckbox id="thematiques" :options="filtresInternes" @update="updateThematiques">
         <template #label>
           <span class="fr-text--lg fr-mb-0 text--normal text--bleu display-block">Thématiques</span>
         </template>
@@ -18,24 +18,41 @@
 </template>
 
 <script setup lang="ts">
-  import { computed } from 'vue';
+  import { computed, ref, watch } from 'vue';
   import CatalogueDropDownMenu from '@/components/custom/Action/Catalogue/CatalogueDropDownMenu.vue';
   import InputCheckbox from '@/components/dsfr/InputCheckbox.vue';
 
   const props = defineProps<{ filtres: { id: string; label: string; checked: boolean }[] }>();
 
   const emit = defineEmits<{ (event: 'updateThematiques', value: string[]): void }>();
-  const updateThematiques = (thematiques: string[]) => emit('updateThematiques', thematiques);
+
+  const filtresInternes = ref(props.filtres);
+
+  watch(
+    () => props.filtres,
+    nouveauxFiltres => {
+      filtresInternes.value = nouveauxFiltres;
+    },
+    { deep: true },
+  );
+
+  const updateThematiques = (thematiques: string[]) => {
+    filtresInternes.value.forEach(filtre => {
+      filtre.checked = thematiques.includes(filtre.id);
+    });
+
+    emit('updateThematiques', thematiques);
+  };
 
   const filtreResume = computed(() => {
-    const filtresSelectionne = props.filtres.filter(filtre => filtre.checked);
+    const filtresSelectionnes = filtresInternes.value.filter(filtre => filtre.checked);
 
-    if (filtresSelectionne.length === 0 || filtresSelectionne.length === props.filtres.length) {
+    if (filtresSelectionnes.length === 0 || filtresSelectionnes.length === filtresInternes.value.length) {
       return 'Toutes';
-    } else if (filtresSelectionne.length === 1) {
-      return filtresSelectionne[0].label;
+    } else if (filtresSelectionnes.length === 1) {
+      return filtresSelectionnes[0].label;
     } else {
-      return `${filtresSelectionne[0].label} <span class="fr-tag fr-tag--custom-bleu fr-tag--sm fr-ml-1w">+${filtresSelectionne.length - 1}</span>`;
+      return `${filtresSelectionnes[0].label} <span class="fr-tag fr-tag--custom-bleu fr-tag--sm fr-ml-1w">+${filtresSelectionnes.length - 1}</span>`;
     }
   });
 </script>

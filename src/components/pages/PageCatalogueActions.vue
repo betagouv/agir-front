@@ -1,5 +1,5 @@
 <template>
-  <div class="background-brown-opera-950 headerActions">
+  <section class="background-brown-opera-950 headerActions">
     <div class="fr-container">
       <h1 class="fr-h1 fr-mb-1w fr-pt-5w">Explorer toutes nos actions</h1>
       <p class="fr-text--xl fr-mb-5w">
@@ -8,6 +8,7 @@
 
       <div class="full-width background--white fr-grid-row border-top--bleu">
         <div class="fr-col-12 fr-col-sm-6 fr-col-md-3 fr-p-2w"></div>
+
         <div class="fr-col-12 fr-col-sm-6 fr-col-md-3 fr-p-2w">
           <CatalogueFiltreThematiques
             v-if="filtresViewModel?.filtres"
@@ -15,12 +16,14 @@
             @update-thematiques="updateThematiques"
           />
         </div>
+
         <div class="fr-col-12 fr-col-sm-6 fr-col-md-3 fr-p-2w">
           <CatalogueFiltreStatut
             @rechercher-par-deja-vu="rechercherParDejaVu"
             @rechercher-par-deja-realisees="rechercherParDejaRealisees"
           />
         </div>
+
         <div class="fr-col-12 fr-col-sm-6 fr-col-md-3 fr-p-2w">
           <div class="flex align-items--center flex-center full-height">
             <InputSearchBar
@@ -33,36 +36,22 @@
         </div>
       </div>
     </div>
-  </div>
+  </section>
 
   <section class="fr-container fr-my-3w">
-    <div class="fr-grid-row fr-grid-row--gutters">
-      <div class="fr-col-md-3 fr-col-12">
-        <CatalogueActionsFiltres
-          v-if="filtresViewModel"
-          :filtres="filtresViewModel.filtres"
-          @rechercher-par-deja-vu="rechercherParDejaVu"
-          @rechercher-par-deja-realisees="rechercherParDejaRealisees"
-        />
-      </div>
+    <h2 v-if="filtresViewModel" class="fr-h4">{{ filtresViewModel.phraseNombreActions }} disponibles</h2>
 
-      <div v-if="filtresViewModel" class="fr-col-md-9 fr-col-12">
-        <h2 class="fr-h4">{{ filtresViewModel.phraseNombreActions }}</h2>
-
-        <CatalogueActionsComposant
-          v-if="actionsViewModel"
-          :actions="actionsViewModel"
-          card-classes="fr-col-12 fr-col-md-4"
-        />
-      </div>
-    </div>
+    <CatalogueActionsComposant
+      v-if="actionsViewModel"
+      :actions="actionsViewModel"
+      card-classes="fr-col-12 fr-col-md-3"
+    />
   </section>
 </template>
 
 <script lang="ts" setup>
   import { onMounted, ref } from 'vue';
   import CatalogueActionsComposant from '@/components/custom/Action/Catalogue/CatalogueActionsComposant.vue';
-  import CatalogueActionsFiltres from '@/components/custom/Action/Catalogue/CatalogueActionsFiltres.vue';
   import CatalogueFiltreStatut from '@/components/custom/Action/Catalogue/CatalogueFiltreStatut.vue';
   import CatalogueFiltreThematiques from '@/components/custom/Action/Catalogue/CatalogueFiltreThematiques.vue';
   import InputSearchBar from '@/components/dsfr/InputSearchBar.vue';
