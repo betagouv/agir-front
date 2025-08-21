@@ -7,8 +7,12 @@
     <p class="fr-mb-2w">
       Découvrez des actions personnalisées pour réduire votre facture d’électricité sans sacrifier votre confort.
     </p>
-    <router-link :to="{ name: RouteActionsName.CATALOGUE_ACTION_WINTER }" class="fr-btn fr-btn--lg fr-mb-1w"
-      >Découvrir {{ nombreActions }} actions
+
+    <router-link
+      :to="{ name: RouteActionsName.SELECTION_ACTIONS, query: { selection: SimulateursSupportes.WINTER } }"
+      class="fr-btn fr-btn--lg fr-mb-1w"
+    >
+      Découvrir {{ nombreActions }} actions
     </router-link>
   </section>
 </template>
@@ -16,6 +20,7 @@
 <script lang="ts" setup>
   import { ResultatWWViewModel } from '@/domaines/simulationWattWatchers/adapters/resultatWattWatchers.presenter.impl';
   import { RouteActionsName } from '@/router/actions/routes';
+  import { SimulateursSupportes } from '@/shell/simulateursSupportes';
 
   defineProps<{ nombreActions: ResultatWWViewModel['nombreActions'] }>();
 </script>
