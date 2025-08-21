@@ -120,7 +120,9 @@ export interface ActionsRepository {
 
   chargerActionsRecommandees(idUtilisateur: string): Promise<Action[]>;
 
-  filtrerCatalogueActions(
+  filtrerCatalogueActions(filtresThematiques: string[], titre: string): Promise<CatalogueActions>;
+
+  filtrerCatalogueActionsUtilisateur(
     idUtilisateur: string,
     filtresThematiques: string[],
     titre: string,
