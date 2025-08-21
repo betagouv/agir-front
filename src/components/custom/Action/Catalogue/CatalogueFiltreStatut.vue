@@ -16,7 +16,7 @@
           <Interrupteur
             v-if="utilisateurStore().estConnecte"
             id="deja_vus"
-            label="Déjà consultées"
+            label="Consultées"
             @on-change="rechercherParDejaVu"
           />
         </div>
@@ -25,7 +25,7 @@
           <Interrupteur
             v-if="utilisateurStore().estConnecte"
             id="deja_realisees"
-            label="Déjà réalisées"
+            label="Réalisées"
             @on-change="rechercherParDejaRealisees"
           />
         </div>
@@ -60,8 +60,8 @@
 
   const filtreResume = computed(() => {
     const filtresStatut = [
-      { checked: dejaVu.value, label: 'Déjà consultées' },
-      { checked: dejaRealisees.value, label: 'Déjà réalisées' },
+      { checked: dejaVu.value, label: 'Consultées' },
+      { checked: dejaRealisees.value, label: 'Réalisées' },
     ];
 
     const filtresSelectionnes = filtresStatut.filter(filtre => filtre.checked).map(filtre => filtre.label);
