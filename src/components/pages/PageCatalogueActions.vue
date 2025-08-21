@@ -9,13 +9,18 @@
       <div class="full-width background--white fr-grid-row border-top--bleu">
         <div class="fr-col-12 fr-col-sm-6 fr-col-md-3 fr-p-2w"></div>
         <div class="fr-col-12 fr-col-sm-6 fr-col-md-3 fr-p-2w">
-          <CatalogueBoutonFiltreThematiques
+          <CatalogueFiltreThematiques
             v-if="filtresViewModel?.filtres"
             :filtres="filtresViewModel.filtres"
             @update-thematiques="updateThematiques"
           />
         </div>
-        <div class="fr-col-12 fr-col-sm-6 fr-col-md-3 fr-p-2w"></div>
+        <div class="fr-col-12 fr-col-sm-6 fr-col-md-3 fr-p-2w">
+          <CatalogueFiltreStatut
+            @rechercher-par-deja-vu="rechercherParDejaVu"
+            @rechercher-par-deja-realisees="rechercherParDejaRealisees"
+          />
+        </div>
         <div class="fr-col-12 fr-col-sm-6 fr-col-md-3 fr-p-2w">
           <div class="flex align-items--center flex-center full-height">
             <InputSearchBar
@@ -58,7 +63,8 @@
   import { onMounted, ref } from 'vue';
   import CatalogueActionsComposant from '@/components/custom/Action/Catalogue/CatalogueActionsComposant.vue';
   import CatalogueActionsFiltres from '@/components/custom/Action/Catalogue/CatalogueActionsFiltres.vue';
-  import CatalogueBoutonFiltreThematiques from '@/components/custom/Action/Catalogue/CatalogueBoutonFiltreThematiques.vue';
+  import CatalogueFiltreStatut from '@/components/custom/Action/Catalogue/CatalogueFiltreStatut.vue';
+  import CatalogueFiltreThematiques from '@/components/custom/Action/Catalogue/CatalogueFiltreThematiques.vue';
   import InputSearchBar from '@/components/dsfr/InputSearchBar.vue';
   import { ActionsRepositoryAxios } from '@/domaines/actions/adapters/actions.repository.axios';
   import { CatalogueActionsPresenterImpl } from '@/domaines/actions/adapters/catalogueActions.presenter.impl';
