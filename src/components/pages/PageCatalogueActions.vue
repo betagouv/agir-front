@@ -7,9 +7,7 @@
       </p>
 
       <div class="full-width background--white fr-grid-row border-top--bleu">
-        <div class="fr-col-12 fr-col-sm-6 fr-col-md-3 fr-p-2w"></div>
-
-        <div class="fr-col-12 fr-col-sm-6 fr-col-md-3 fr-p-2w">
+        <div :class="filtresColonnes" class="fr-p-2w">
           <CatalogueFiltreThematiques
             v-if="filtresViewModel?.filtres"
             :filtres="filtresViewModel.filtres"
@@ -17,20 +15,21 @@
           />
         </div>
 
-        <div class="fr-col-12 fr-col-sm-6 fr-col-md-3 fr-p-2w">
+        <div :class="filtresColonnes" class="fr-p-2w" v-if="estConnecte">
           <CatalogueFiltreStatut
             @rechercher-par-deja-vu="rechercherParDejaVu"
             @rechercher-par-deja-realisees="rechercherParDejaRealisees"
           />
         </div>
 
-        <div class="fr-col-12 fr-col-sm-6 fr-col-md-3 fr-p-2w">
+        <div :class="filtresColonnes" class="fr-p-2w">
           <div class="flex align-items--center flex-center full-height">
             <InputSearchBar
               id="rechercheParTitre"
               name="titreRessource"
               placeholder="Rechercher"
               @submit="rechercherParTitre"
+              class="full-width"
             />
           </div>
         </div>
@@ -66,6 +65,9 @@
   const isLoading = ref<boolean>(false);
 
   const idUtilisateur = utilisateurStore().utilisateur.id;
+  const estConnecte = utilisateurStore().estConnecte;
+  const filtresColonnes = estConnecte ? 'fr-col-12 fr-col-sm-6 fr-col-md-4' : 'fr-col-12 fr-col-sm-6';
+
   const actionsViewModel = ref<ActionViewModel[]>();
   const filtresViewModel = ref<FiltresCatalogueActionsViewModel>();
   const catalogueActionsPresenter = new CatalogueActionsPresenterImpl(

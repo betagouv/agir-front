@@ -236,8 +236,25 @@ export class ActionsRepositoryAxios implements ActionsRepository {
     return response.data.actions.map(this.mapActionApiModelToAction);
   }
 
+  async filtrerCatalogueActions(filtresThematiques: string[], titre: string): Promise<CatalogueActions> {
+    const axios = AxiosFactory.getAxios();
+
+    const params = this.buildFiltres(filtresThematiques, titre);
+    const response = await axios.get<CatalogueActionsApiModel>(`/actions${params}`);
+
+    return {
+      actions: response.data.actions.map(this.mapActionApiModelToAction),
+      filtres: response.data.filtres.map(filtre => ({
+        code: filtre.code as ClefThematiqueAPI,
+        label: filtre.label,
+        selected: filtre.selected,
+      })),
+      consultation: response.data.consultation,
+    };
+  }
+
   @intercept40X()
-  async filtrerCatalogueActions(
+  async filtrerCatalogueActionsUtilisateur(
     idUtilisateur: string,
     filtresThematiques: string[],
     titre: string,
@@ -381,16 +398,16 @@ export class ActionsRepositoryAxios implements ActionsRepository {
   private buildFiltres(
     filtreThematiques: string[],
     titre: string,
-    filtreDejaVue: boolean,
-    filtreDejaRealisees: boolean,
+    filtreDejaVue?: boolean,
+    filtreDejaRealisees?: boolean,
   ): string {
     const params: string[] = [];
 
     if (filtreThematiques.length > 0)
       params.push(filtreThematiques.map(thematique => `thematique=${thematique}`).join('&'));
     if (titre) params.push(`titre=${titre}`);
-    params.push(`consultation=${filtreDejaVue ? 'vu' : 'tout'}`);
-    params.push(`realisation=${filtreDejaRealisees ? 'faite' : 'tout'}`);
+    if (filtreDejaVue) params.push(`consultation=${filtreDejaVue ? 'vu' : 'tout'}`);
+    if (filtreDejaRealisees) params.push(`realisation=${filtreDejaRealisees ? 'faite' : 'tout'}`);
     return params.length > 0 ? `?${params.join('&')}` : '';
   }
 }

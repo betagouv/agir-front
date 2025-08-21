@@ -12,13 +12,15 @@ export class FiltrerCatalogueActionsUsecase {
     filtreDejaRealisees: boolean,
     catalogueActionsPresenter: CatalogueActionsPresenter,
   ): Promise<void> {
-    const catalogue = await this.actionsRepository.filtrerCatalogueActions(
-      idUtilisateur,
-      filtresThematiques,
-      titre,
-      filtreDejaVu,
-      filtreDejaRealisees,
-    );
-    catalogueActionsPresenter.presenteCatalogue(catalogue);
+    const catalogue = !idUtilisateur
+      ? await this.actionsRepository.filtrerCatalogueActions(filtresThematiques, titre)
+      : await this.actionsRepository.filtrerCatalogueActionsUtilisateur(
+          idUtilisateur,
+          filtresThematiques,
+          titre,
+          filtreDejaVu,
+          filtreDejaRealisees,
+        );
+    await catalogueActionsPresenter.presenteCatalogue(catalogue);
   }
 }

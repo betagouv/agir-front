@@ -8,7 +8,7 @@ import { FiltrerCatalogueActionsUsecase } from '@/domaines/actions/filtrerCatalo
 import { ExplicationsRecommandation } from '@/domaines/actions/explicationsRecommandation';
 
 describe("Fichier de tests concernant la récupération du catalogue d'actions", () => {
-  it('Doit filtrer correctement le catalogue actions et les actions', async () => {
+  it('Doit filtrer correctement le catalogue actions et les actions quand un utilisateur est connecté', async () => {
     // GIVEN
     const actions: Action[] = [
       {
@@ -103,5 +103,31 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
         phraseNombreActions: '1 action',
       });
     }
+  });
+
+  it('Devrait appeler le repository même sans id utilisateur', async () => {
+    const catalogue: CatalogueActions = {
+      actions: [],
+      filtres: [],
+      consultation: 'tout',
+    };
+
+    const actionsRepository = ActionsRepositoryMock.avecCatalogue(catalogue);
+    const spy = vi.spyOn(actionsRepository, 'filtrerCatalogueActions');
+
+    const usecase = new FiltrerCatalogueActionsUsecase(actionsRepository);
+    await usecase.execute(
+      '',
+      ['transport'],
+      'titre',
+      false,
+      false,
+      new CatalogueActionsPresenterImpl(
+        () => {},
+        () => {},
+      ),
+    );
+
+    expect(spy).toHaveBeenCalled();
   });
 });
