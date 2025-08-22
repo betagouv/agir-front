@@ -4,7 +4,6 @@
     :idEnchainementKycs="idEnchainementKycs"
     :type-action="TypeAction.SIMULATEUR"
     @fin-kyc-atteinte="focusResultat"
-    class="fr-px-2w"
   >
     <template v-slot:fin>
       <SimulationResultatVoiture ref="simulationResultatVoitureRef" />
