@@ -69,24 +69,28 @@ export class MenuThematiques {
       url: 'dechet',
       labelDansLeMenu: 'Déchets',
       imageUrl: '',
+      emoji: '🗑️',
     },
     [ClefThematiqueAPI.climat]: {
       clefTechniqueAPI: 'climat',
       url: 'climat',
       labelDansLeMenu: 'Environnement',
       imageUrl: '',
+      emoji: '🌍',
     },
     [ClefThematiqueAPI.loisir]: {
       clefTechniqueAPI: 'loisir',
       url: 'loisir',
       labelDansLeMenu: 'Loisir',
       imageUrl: '',
+      emoji: '🎭',
     },
     [ClefThematiqueAPI.services_societaux]: {
       clefTechniqueAPI: 'services_societaux',
       url: 'services_societaux',
       labelDansLeMenu: 'Services sociétaux',
       imageUrl: '',
+      emoji: '🏛️',
     },
   };
 
