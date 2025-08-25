@@ -6,11 +6,13 @@
     <div class="fr-fieldset__element" v-for="option in options" :key="option.id">
       <div class="fr-checkbox-group">
         <input
+          :role="!isInMenu ? 'checkbox' : 'menuitemcheckbox'"
           :name="option.id"
           :id="option.id"
           type="checkbox"
           @change.prevent="onInputChange"
           :checked="option.checked"
+          :aria-checked="option.checked"
         />
         <label class="fr-label" :for="option.id" v-html="cacherEmojisAuxLecteursDecrans(option.label)" />
       </div>
@@ -30,6 +32,7 @@
       label: string;
       checked?: boolean;
     }[];
+    isInMenu?: boolean;
   }>();
 
   const emit = defineEmits<{ (event: 'update', optionsSelectionnees: string[]): void }>();
