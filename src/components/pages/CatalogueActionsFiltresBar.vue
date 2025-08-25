@@ -1,5 +1,6 @@
 <template>
   <div
+    aria-label="Filtrage des actions"
     class="full-width background--white fr-grid-row border-top--bleu"
     role="menubar"
     @keydown="gererEntreesClavier"
@@ -97,58 +98,59 @@
     isLoading.value = false;
   }
 
+  function getAllSubMenus(): HTMLElement[] {
+    return menuBar.value
+      ? Array.from(menuBar.value.querySelectorAll<HTMLElement>('[data-nouvelle-colonne="true"]'))
+      : [];
+  }
+
+  function focusFirstMenuItemInSubMenu(subMenu: HTMLElement | null) {
+    const firstMenuItem = subMenu?.querySelector<HTMLElement>('[role="menuitem"]');
+    if (firstMenuItem) {
+      firstMenuItem.click();
+      firstMenuItem.focus();
+    }
+  }
+
+  function focusAdjacentSubMenu(currentSubMenu: HTMLElement, direction: 1 | -1) {
+    const allSubMenus = getAllSubMenus();
+    const currentIndex = allSubMenus.indexOf(currentSubMenu);
+    const nextIndex = (currentIndex + direction + allSubMenus.length) % allSubMenus.length;
+    focusFirstMenuItemInSubMenu(allSubMenus[nextIndex]);
+  }
+
+  function focusAdjacentMenuItem(currentItem: HTMLElement, items: HTMLElement[], direction: 1 | -1) {
+    const currentIndex = items.indexOf(currentItem);
+    const nextIndex = (currentIndex + direction + items.length) % items.length;
+    items[nextIndex].focus();
+  }
+
   function gererEntreesClavier(e: KeyboardEvent) {
-    const focusedMenuItem = (e.target as HTMLElement).closest<HTMLElement>(
+    const target = e.target as HTMLElement;
+    const focusedMenuItem = target.closest<HTMLElement>(
       '[role="menuitem"], [role="menuitemcheckbox"], [role="menuitemradio"]',
     );
-    const currentSubMenu = (e.target as HTMLElement).closest<HTMLElement>('[data-nouvelle-colonne="true"]');
+    const currentSubMenu = target.closest<HTMLElement>('[data-nouvelle-colonne="true"]');
     const currentSubMenuItems = currentSubMenu?.querySelectorAll<HTMLElement>(
       ':not(button)[role="menuitem"], [role="menuitemcheckbox"], [role="menuitemradio"]',
     );
 
-    switch (e.key) {
-      case 'ArrowRight': {
-        if (currentSubMenu && menuBar.value) {
-          const allSubMenus = menuBar.value.querySelectorAll<HTMLElement>('[data-nouvelle-colonne="true"]');
-          const currentSubMenuIndex = Array.from(allSubMenus).indexOf(currentSubMenu);
-          const nextSubMenuIndex = (currentSubMenuIndex + 1) % allSubMenus.length;
-          const firstMenuItem = allSubMenus[nextSubMenuIndex].querySelector<HTMLElement>('[role="menuitem"]');
-          firstMenuItem?.click();
-          firstMenuItem?.focus();
-          e.preventDefault();
-        }
-        break;
-      }
-      case 'ArrowLeft': {
-        if (currentSubMenu && menuBar.value) {
-          const allSubMenus = menuBar.value.querySelectorAll<HTMLElement>('[data-nouvelle-colonne="true"]');
-          const currentSubMenuIndex = Array.from(allSubMenus).indexOf(currentSubMenu);
-          const nextSubMenuIndex = (currentSubMenuIndex - 1 + allSubMenus.length) % allSubMenus.length;
-          const firstMenuItem = allSubMenus[nextSubMenuIndex].querySelector<HTMLElement>('[role="menuitem"]');
-          firstMenuItem?.click();
-          firstMenuItem?.focus();
-          e.preventDefault();
-        }
-        break;
-      }
-      case 'ArrowDown': {
-        if (focusedMenuItem && currentSubMenuItems) {
-          const currentIndex = Array.from(currentSubMenuItems).indexOf(focusedMenuItem);
-          const nextIndex = (currentIndex + 1) % currentSubMenuItems.length;
-          currentSubMenuItems[nextIndex].focus();
-          e.preventDefault();
-        }
-        break;
-      }
-      case 'ArrowUp': {
-        if (focusedMenuItem && currentSubMenuItems) {
-          const currentIndex = Array.from(currentSubMenuItems).indexOf(focusedMenuItem);
-          const nextIndex = (currentIndex - 1 + currentSubMenuItems.length) % currentSubMenuItems.length;
-          currentSubMenuItems[nextIndex].focus();
-          e.preventDefault();
-        }
-        break;
-      }
+    const handlers: Record<string, () => void> = {
+      ArrowRight: () => currentSubMenu && focusAdjacentSubMenu(currentSubMenu, 1),
+      ArrowLeft: () => currentSubMenu && focusAdjacentSubMenu(currentSubMenu, -1),
+      ArrowDown: () =>
+        focusedMenuItem &&
+        currentSubMenuItems &&
+        focusAdjacentMenuItem(focusedMenuItem, Array.from(currentSubMenuItems), 1),
+      ArrowUp: () =>
+        focusedMenuItem &&
+        currentSubMenuItems &&
+        focusAdjacentMenuItem(focusedMenuItem, Array.from(currentSubMenuItems), -1),
+    };
+
+    if (handlers[e.key]) {
+      handlers[e.key]();
+      e.preventDefault();
     }
   }
 </script>
