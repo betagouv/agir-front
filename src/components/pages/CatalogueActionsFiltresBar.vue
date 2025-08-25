@@ -1,6 +1,11 @@
 <template>
-  <div class="full-width background--white fr-grid-row border-top--bleu">
-    <div :class="filtresColonnes" class="fr-p-2w">
+  <div
+    class="full-width background--white fr-grid-row border-top--bleu"
+    role="menubar"
+    @keydown="gererEntreesClavier"
+    ref="menuBar"
+  >
+    <div :class="filtresColonnes" class="fr-p-2w" data-nouvelle-colonne="true">
       <CatalogueFiltreThematiques
         v-if="filtresViewModel?.filtres"
         :filtres="filtresViewModel.filtres"
@@ -8,15 +13,15 @@
       />
     </div>
 
-    <div :class="filtresColonnes" class="fr-p-2w" v-if="estConnecte">
+    <div :class="filtresColonnes" class="fr-p-2w" v-if="estConnecte" data-nouvelle-colonne="true">
       <CatalogueFiltreStatut
         @rechercher-par-deja-vu="rechercherParDejaVu"
         @rechercher-par-deja-realisees="rechercherParDejaRealisees"
       />
     </div>
 
-    <div :class="filtresColonnes" class="fr-p-2w">
-      <div class="flex align-items--center flex-center full-height">
+    <div :class="filtresColonnes" class="fr-p-2w" data-nouvelle-colonne="true">
+      <div class="flex align-items--center flex-center full-height" role="menuitem" tabindex="-1">
         <InputSearchBar
           id="rechercheParTitre"
           name="titreRessource"
@@ -52,6 +57,7 @@
   const estConnecte = utilisateurStore().estConnecte;
   const filtresColonnes = estConnecte ? 'fr-col-12 fr-col-sm-6 fr-col-md-4' : 'fr-col-12 fr-col-sm-6';
 
+  const menuBar = ref<HTMLDivElement>();
   const rechercheTitre = ref<string>('');
   const filtresThematiques = ref<string[]>([]);
   const filtreDejaVu = ref<boolean>(false);
@@ -89,6 +95,61 @@
       catalogueActionsPresenter,
     );
     isLoading.value = false;
+  }
+
+  function gererEntreesClavier(e: KeyboardEvent) {
+    const focusedMenuItem = (e.target as HTMLElement).closest<HTMLElement>(
+      '[role="menuitem"], [role="menuitemcheckbox"], [role="menuitemradio"]',
+    );
+    const currentSubMenu = (e.target as HTMLElement).closest<HTMLElement>('[data-nouvelle-colonne="true"]');
+    const currentSubMenuItems = currentSubMenu?.querySelectorAll<HTMLElement>(
+      ':not(button)[role="menuitem"], [role="menuitemcheckbox"], [role="menuitemradio"]',
+    );
+
+    switch (e.key) {
+      case 'ArrowRight': {
+        if (currentSubMenu && menuBar.value) {
+          const allSubMenus = menuBar.value.querySelectorAll<HTMLElement>('[data-nouvelle-colonne="true"]');
+          const currentSubMenuIndex = Array.from(allSubMenus).indexOf(currentSubMenu);
+          const nextSubMenuIndex = (currentSubMenuIndex + 1) % allSubMenus.length;
+          const firstMenuItem = allSubMenus[nextSubMenuIndex].querySelector<HTMLElement>('[role="menuitem"]');
+          firstMenuItem?.click();
+          firstMenuItem?.focus();
+          e.preventDefault();
+        }
+        break;
+      }
+      case 'ArrowLeft': {
+        if (currentSubMenu && menuBar.value) {
+          const allSubMenus = menuBar.value.querySelectorAll<HTMLElement>('[data-nouvelle-colonne="true"]');
+          const currentSubMenuIndex = Array.from(allSubMenus).indexOf(currentSubMenu);
+          const nextSubMenuIndex = (currentSubMenuIndex - 1 + allSubMenus.length) % allSubMenus.length;
+          const firstMenuItem = allSubMenus[nextSubMenuIndex].querySelector<HTMLElement>('[role="menuitem"]');
+          firstMenuItem?.click();
+          firstMenuItem?.focus();
+          e.preventDefault();
+        }
+        break;
+      }
+      case 'ArrowDown': {
+        if (focusedMenuItem && currentSubMenuItems) {
+          const currentIndex = Array.from(currentSubMenuItems).indexOf(focusedMenuItem);
+          const nextIndex = (currentIndex + 1) % currentSubMenuItems.length;
+          currentSubMenuItems[nextIndex].focus();
+          e.preventDefault();
+        }
+        break;
+      }
+      case 'ArrowUp': {
+        if (focusedMenuItem && currentSubMenuItems) {
+          const currentIndex = Array.from(currentSubMenuItems).indexOf(focusedMenuItem);
+          const nextIndex = (currentIndex - 1 + currentSubMenuItems.length) % currentSubMenuItems.length;
+          currentSubMenuItems[nextIndex].focus();
+          e.preventDefault();
+        }
+        break;
+      }
+    }
   }
 </script>
 

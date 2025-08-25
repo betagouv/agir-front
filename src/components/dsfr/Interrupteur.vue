@@ -6,6 +6,7 @@
       class="fr-toggle__input"
       :id="id"
       @change.prevent="onInputChange"
+      :aria-checked="isChecked"
     />
     <label class="fr-toggle__label" :for="id">
       {{ label }}
@@ -15,13 +16,16 @@
 
 <script setup lang="ts">
   import '@gouvfr/dsfr/dist/component/toggle/toggle.min.css';
+  import { ref } from 'vue';
 
   defineProps<{ label: string; id: string; isInMenu?: boolean }>();
 
+  const isChecked = ref<boolean>(false);
   const emit = defineEmits<{ (event: 'onChange', value: boolean): void }>();
 
   const onInputChange = (event: Event) => {
     const { checked } = event.target as HTMLInputElement;
+    isChecked.value = checked;
     emit('onChange', checked);
   };
 </script>

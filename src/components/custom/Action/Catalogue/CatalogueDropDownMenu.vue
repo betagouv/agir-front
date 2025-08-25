@@ -1,5 +1,6 @@
 <template>
   <button
+    :role="!isButtonMenuItem ? 'button' : 'menuitem'"
     ref="boutonRef"
     type="button"
     :id="`menu-${id}-bouton`"
@@ -38,7 +39,7 @@
 <script setup lang="ts">
   import { ref, onMounted, onBeforeUnmount, nextTick } from 'vue';
 
-  defineProps<{ id: string }>();
+  defineProps<{ id: string; isButtonMenuItem?: boolean }>();
 
   const menuRef = ref<HTMLDivElement>();
   const boutonRef = ref<HTMLButtonElement>();
