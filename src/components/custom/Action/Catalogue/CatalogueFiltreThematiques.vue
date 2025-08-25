@@ -1,5 +1,5 @@
 <template>
-  <CatalogueDropDownMenu id="thematiques">
+  <CatalogueDropDownMenu id="thematiques" :is-button-menu-item="true">
     <template #bouton-contenu>
       <span>
         <span class="fr-text--lg fr-mb-1w text--normal text--bleu display-block">Thématiques</span>
