@@ -1,6 +1,12 @@
 <template>
   <div class="fr-toggle">
-    <input type="checkbox" class="fr-toggle__input" :id="id" @change.prevent="onInputChange" />
+    <input
+      :role="!isInMenu ? 'checkbox' : 'menuitemcheckbox'"
+      type="checkbox"
+      class="fr-toggle__input"
+      :id="id"
+      @change.prevent="onInputChange"
+    />
     <label class="fr-toggle__label" :for="id">
       {{ label }}
     </label>
@@ -10,7 +16,7 @@
 <script setup lang="ts">
   import '@gouvfr/dsfr/dist/component/toggle/toggle.min.css';
 
-  defineProps<{ label: string; id: string }>();
+  defineProps<{ label: string; id: string; isInMenu?: boolean }>();
 
   const emit = defineEmits<{ (event: 'onChange', value: boolean): void }>();
 

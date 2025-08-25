@@ -8,7 +8,7 @@
     </template>
 
     <template #menu-contenu>
-      <InputCheckbox id="thematiques" :options="filtresInternes" @update="updateThematiques">
+      <InputCheckbox id="thematiques" :options="filtresInternes" @update="updateThematiques" :is-in-menu="true">
         <template #label>
           <span class="fr-text--lg fr-mb-0 text--normal text--bleu display-block">Thématiques</span>
         </template>

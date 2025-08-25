@@ -7,7 +7,8 @@
     :aria-expanded="menuOuvert"
     :aria-controls="`menu-${id}`"
     @click="toggleMenu"
-    class="position--relative text--left full-width flex flex-space-between align-items--center fr-p-2w"
+    @keydown.down.prevent="toggleMenu"
+    class="position--relative text--left full-width flex flex-space-between align-items--center fr-p-1w"
   >
     <slot name="bouton-contenu" :menu-ouvert="menuOuvert" />
 

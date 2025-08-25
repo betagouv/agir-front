@@ -14,6 +14,7 @@
         </legend>
         <div class="fr-fieldset__element">
           <Interrupteur
+            :is-in-menu="true"
             v-if="utilisateurStore().estConnecte"
             id="deja_vus"
             label="Consultées"
@@ -23,6 +24,7 @@
 
         <div class="fr-fieldset__element">
           <Interrupteur
+            :is-in-menu="true"
             v-if="utilisateurStore().estConnecte"
             id="deja_realisees"
             label="Réalisées"
