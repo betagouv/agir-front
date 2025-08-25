@@ -203,12 +203,12 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
         filtres: [
           {
             id: ClefThematiqueAPI.transports,
-            label: 'Transport !',
+            label: '<span class="fr-pr-1v" aria-hidden="true">🚅</span> Me déplacer',
             checked: false,
           },
           {
             id: ClefThematiqueAPI.alimentation,
-            label: 'Alimentation !',
+            label: '<span class="fr-pr-1v" aria-hidden="true">🍛</span> Me nourrir',
             checked: false,
           },
         ],
