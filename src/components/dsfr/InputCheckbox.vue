@@ -1,16 +1,18 @@
 <template>
   <fieldset class="fr-fieldset" :id="id" :aria-labelledby="`${id}-checkboxes-legend`">
     <legend class="fr-fieldset__legend--regular fr-fieldset__legend text--bold" :id="`${id}-checkboxes-legend`">
-      {{ label }}
+      <slot name="label">{{ label }}</slot>
     </legend>
     <div class="fr-fieldset__element" v-for="option in options" :key="option.id">
       <div class="fr-checkbox-group">
         <input
+          :role="!isInMenu ? 'checkbox' : 'menuitemcheckbox'"
           :name="option.id"
           :id="option.id"
           type="checkbox"
           @change.prevent="onInputChange"
           :checked="option.checked"
+          :aria-checked="option.checked"
         />
         <label class="fr-label" :for="option.id" v-html="cacherEmojisAuxLecteursDecrans(option.label)" />
       </div>
@@ -24,12 +26,13 @@
 
   const props = defineProps<{
     id: string;
-    label: string;
+    label?: string;
     options: {
       id: string;
       label: string;
       checked?: boolean;
     }[];
+    isInMenu?: boolean;
   }>();
 
   const emit = defineEmits<{ (event: 'update', optionsSelectionnees: string[]): void }>();
