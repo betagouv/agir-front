@@ -16,13 +16,14 @@
     customClass?: string;
   }>();
 
+  const navigationStore = useNavigationStore();
+  const dernierePage = computed(() => navigationStore.dernierePage);
   const labelBouton = computed(() => {
     return nomDeLaPage.value ? `Revenir ${nomDeLaPage.value}` : 'Retour';
   });
-  const dernierePageStore = useNavigationStore().pagePrecedente;
 
   const nomDeLaPage = computed(() => {
-    switch (dernierePageStore.name) {
+    switch (dernierePage.value.name) {
       case RouteCoachName.ACCUEIL_CONNECTEE:
         return "à l'accueil";
       case RouteActionsName.CATALOGUE_ACTION:

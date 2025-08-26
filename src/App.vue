@@ -65,7 +65,7 @@
     }
 
     const navigationStore = useNavigationStore();
-    if (from.fullPath) {
+    if (from.fullPath && from.name) {
       navigationStore.addRoute(from.fullPath, from.name as string, from.query);
     }
 
