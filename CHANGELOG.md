@@ -1,5 +1,25 @@
 # Changelog
 
+## [2.21.0](https://github.com/betagouv/agir-front/compare/v2.20.0...v2.21.0) (2025-08-26)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* proposer la creation d'un compte dans une sélection action ([#1271](https://github.com/betagouv/agir-front/issues/1271)) ([df6c3a0](https://github.com/betagouv/agir-front/commit/df6c3a0092e295fc8efb60cbd50ae798ff82901b))
+
+
+### 🐛 Corrections de bogues
+
+* texte selection actions réduit ([3d3aacc](https://github.com/betagouv/agir-front/commit/3d3aaccd42a08d594374e48a549720e193f88ffa))
+
+
+### 👷 Gestion des dépendances
+
+* Bump @iframe-resizer/vue from 5.5.2 to 5.5.3 ([#1295](https://github.com/betagouv/agir-front/issues/1295)) ([68da447](https://github.com/betagouv/agir-front/commit/68da447f202d5acc4ee273d54050f0ee129b7983))
+* Bump @playwright/test from 1.54.2 to 1.55.0 ([#1294](https://github.com/betagouv/agir-front/issues/1294)) ([223caca](https://github.com/betagouv/agir-front/commit/223cacac05007a04d41c234cf29cf9123030c709))
+* Bump vue from 3.5.18 to 3.5.20 ([#1297](https://github.com/betagouv/agir-front/issues/1297)) ([2761608](https://github.com/betagouv/agir-front/commit/2761608c1c485d37b5f0a429267d4e5dcc4d7358))
+* Bump vue-tsc from 3.0.5 to 3.0.6 ([#1296](https://github.com/betagouv/agir-front/issues/1296)) ([0a50997](https://github.com/betagouv/agir-front/commit/0a5099757deef4b97bba00703c8a096bb7eed992))
+
 ## [2.20.0](https://github.com/betagouv/agir-front/compare/v2.19.0...v2.20.0) (2025-08-20)
 
 
