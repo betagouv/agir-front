@@ -11,7 +11,6 @@ import compteRoutes from '@/router/compte/routes';
 import conformiteRoutes from '@/router/conformite/routes';
 import kycRoutes from '@/router/kyc/routes';
 import personnalisationRoutes from '@/router/personnalisation/routes';
-import quizRoutes from '@/router/quiz/routes';
 import resetRoutes from '@/router/reset/routes';
 import serviceRoutes from '@/router/services/routes';
 import thematiqueRoutes from '@/router/thematiques/routes';
@@ -52,7 +51,6 @@ const routes: RouteRecordRaw[] = [
   ...articlesRoutes,
   ...aidesRoutes,
   ...thematiqueRoutes,
-  ...quizRoutes,
   ...serviceRoutes,
   ...bilanCarboneRoutes,
   ...classementRoutes,
