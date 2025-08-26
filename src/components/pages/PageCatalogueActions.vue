@@ -6,7 +6,7 @@
         Et découvrez nos conseils, adresses et aides financières pour vous accompagner !
       </p>
 
-      <CatalogueActionsFiltresBar
+      <CatalogueActionsBarreDeFiltres
         v-if="filtresViewModel"
         :catalogue-actions-presenter="catalogueActionsPresenter"
         :filtres-view-model="filtresViewModel"
@@ -28,7 +28,7 @@
 <script lang="ts" setup>
   import { onMounted, ref } from 'vue';
   import CatalogueActionsComposant from '@/components/custom/Action/Catalogue/CatalogueActionsComposant.vue';
-  import CatalogueActionsFiltresBar from '@/components/pages/CatalogueActionsFiltresBar.vue';
+  import CatalogueActionsBarreDeFiltres from '@/components/pages/CatalogueActionsBarreDeFiltres.vue';
   import { ActionsRepositoryAxios } from '@/domaines/actions/adapters/actions.repository.axios';
   import { CatalogueActionsPresenterImpl } from '@/domaines/actions/adapters/catalogueActions.presenter.impl';
   import { ActionViewModel } from '@/domaines/actions/ports/actions.presenter';
