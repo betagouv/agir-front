@@ -26,13 +26,7 @@
       "
     >
       <template v-slot:complement v-if="afficherStepper">
-        <div
-          class="fr-stepper fr-mt-2w fr-mb-3w"
-          v-if="
-            questionViewModel.etapeCourante !== questionViewModel.nombreTotalDeQuestions &&
-            questionViewModel.nombreTotalDeQuestions > 1
-          "
-        >
+        <div class="fr-stepper fr-mt-2w fr-mb-3w" v-if="questionViewModel.nombreTotalDeQuestions > 1">
           <div
             class="fr-stepper__steps fr-stepper__steps-large"
             :data-fr-current-step="questionViewModel.etapeCourante"
