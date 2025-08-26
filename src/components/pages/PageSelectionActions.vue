@@ -2,9 +2,9 @@
   <section>
     <div class="background--vert-clair fr-py-6w headerSelectionActions">
       <div class="fr-container">
-        <h1 class="fr-h1 fr-mt-4w fr-mb-4w">{{ titre?.titre }}</h1>
+        <h1 class="fr-h1 fr-mt-3w fr-mb-4w">{{ titre?.titre }}</h1>
 
-        <p v-if="titre?.description">{{ titre?.description }}</p>
+        <p class="width--50" v-if="titre?.description">{{ titre?.description }}</p>
       </div>
     </div>
 
@@ -151,5 +151,9 @@
     @media all and (max-width: 767px) {
       background-image: none;
     }
+  }
+
+  .width--50 {
+    width: 70%;
   }
 </style>
