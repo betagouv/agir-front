@@ -12,7 +12,12 @@
         checked: reponsePossible.checked,
       }))
     "
-  />
+  >
+    <template v-slot:legende>
+      {{ questionViewModel.libelle }}
+      <slot name="complement" />
+    </template>
+  </Mosaic>
 </template>
 <script lang="ts" setup>
   import Mosaic from '@/components/custom/Form/Mosaic.vue';

@@ -4,6 +4,7 @@
       :est-active="true"
       :id-enchainement-kycs="idEnchainementKycs"
       @fin-kyc-atteinte="onFinKYC"
+      :afficher-stepper="true"
     />
     <slot v-if="afficherFinKyc" name="fin" />
   </div>

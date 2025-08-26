@@ -1,7 +1,8 @@
 <template>
   <fieldset class="fr-fieldset" id="checkboxes" aria-labelledby="checkboxes-legend">
     <legend class="fr-fieldset__legend--regular fr-fieldset__legend" id="checkboxes-legend">
-      <span class="fr-h4 display-block" v-text="titre" /> Plusieurs réponses sont possibles
+      <span class="fr-h4 display-block">{{ titre }}</span> Plusieurs réponses sont possibles
+      <slot name="complement" />
     </legend>
     <div
       class="fr-fieldset__element"
