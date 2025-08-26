@@ -34,7 +34,7 @@
 <script setup lang="ts">
   import { nextTick, ref } from 'vue';
   import ActionQuizExplication from '@/components/custom/Action/composants/ActionQuizExplication.vue';
-  import ActionQuizQuestion from '@/components/custom/Quiz/ActionQuizQuestion.vue';
+  import ActionQuizQuestion from '@/components/custom/Action/composants/ActionQuizQuestion.vue';
   import { ActionQuizQuestionViewModel } from '@/domaines/actions/ports/action.presenter';
   import { QuizRepositoryAxios } from '@/domaines/quiz/adapters/quiz.repository.axios';
   import { EnvoyerDonneesQuizInteractionUsecase } from '@/domaines/quiz/envoyerDonneesQuizInteraction.usecase';
