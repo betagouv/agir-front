@@ -47,7 +47,11 @@ export class ActionsRepositoryMock implements ActionsRepository {
     return Promise.resolve(this.catalogueActions!);
   }
 
-  filtrerCatalogueActions(
+  filtrerCatalogueActions(filtresThematiques: string[], titre: string): Promise<CatalogueActions> {
+    return Promise.resolve(this.catalogueActions!);
+  }
+
+  filtrerCatalogueActionsUtilisateur(
     idUtilisateur: string,
     filtresThematiques: string[],
     titre: string,

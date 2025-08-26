@@ -5,6 +5,7 @@ import {
   CatalogueActionsPresenter,
   FiltresCatalogueActionsViewModel,
 } from '@/domaines/actions/ports/catalogueActions.presenter';
+import { MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
 
 export class CatalogueActionsPresenterImpl extends ActionsPresenterImpl implements CatalogueActionsPresenter {
   constructor(
@@ -18,11 +19,18 @@ export class CatalogueActionsPresenterImpl extends ActionsPresenterImpl implemen
     await super.presente(catalogueActions.actions);
     this.filtresCallBack({
       phraseNombreActions: `${catalogueActions.actions.length} action${catalogueActions.actions.length > 1 ? 's' : ''}`,
-      filtres: catalogueActions.filtres.map(filtre => ({
-        id: filtre.code,
-        label: filtre.label,
-        checked: filtre.selected,
-      })),
+      filtres: catalogueActions.filtres.map(filtre => {
+        const label = MenuThematiques.getThematiqueData(filtre.code).labelDansLeMenu ?? filtre.label;
+        const emoji = MenuThematiques.getThematiqueData(filtre.code).emoji ?? '';
+        const emojiHtml = emoji ? `<span class="fr-pr-1v" aria-hidden="true">${emoji}</span> ` : '';
+        const labelHtml = `${emojiHtml}${label}`;
+
+        return {
+          id: filtre.code,
+          label: labelHtml,
+          checked: filtre.selected,
+        };
+      }),
     });
   }
 }
