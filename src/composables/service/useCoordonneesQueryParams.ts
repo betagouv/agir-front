@@ -10,8 +10,8 @@ export function useCoordonneesQueryParams(coordonnees: Ref<Coordonnees | undefin
     await router.replace({
       query: {
         ...route.query,
-        latitude: nouvelleCoordonnees?.latitude.toString(),
-        longitude: nouvelleCoordonnees?.longitude.toString(),
+        latitude: nouvelleCoordonnees?.latitude?.toString(),
+        longitude: nouvelleCoordonnees?.longitude?.toString(),
         adresse: recherche.value,
       },
     });

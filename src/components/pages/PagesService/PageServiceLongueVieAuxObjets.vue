@@ -33,12 +33,13 @@
             />
           </form>
           <AdressesRecentesComponent
+            ref="adressesRecentesComponent"
             :adresse-principale-complete="utilisateurStore().utilisateur.possedeUneAdresseComplete"
             :on-adresse-recente-selectionnee="chercherAvecAdresseRecente"
             :on-adresse-residence-principale-selectionnee="chercherAvecAdressePrincipale"
           />
           <Callout
-            v-if="avecAdressePrivee"
+            v-if="avecAdressePrivee && !utilisateurStore().utilisateur.possedeUneAdresseComplete"
             :button="{
               text: 'Choisir comme adresse principale',
               onClick: definirAdressePrincipale,
@@ -116,6 +117,7 @@
     new ServiceRechercheLongueVieAuxObjetsAxios(),
   );
   const adresse = ref<AdresseBarreDeRecherche>();
+  const adressesRecentesComponent = ref<InstanceType<typeof AdressesRecentesComponent>>();
   const {
     avecAdressePrivee,
     definirAdressePrincipale: definirAdressePrincipaleComposable,
@@ -158,10 +160,14 @@
       ),
       coordonnees.value,
     );
+
+    if (adressesRecentesComponent.value) {
+      adressesRecentesComponent.value.chargerAdressesRecentes();
+    }
   }
 
-  function definirAdressePrincipale() {
-    definirAdressePrincipaleComposable(utilisateurStore().utilisateur.id, adresse.value, coordonnees.value);
+  async function definirAdressePrincipale() {
+    await definirAdressePrincipaleComposable(utilisateurStore().utilisateur.id, adresse.value, coordonnees.value);
     utilisateurStore().utilisateur.possedeUneAdresseComplete = true;
   }
 
@@ -191,7 +197,7 @@
               ? `${adressePrincipale.numeroRue} ${adressePrincipale.rue} ${adressePrincipale.codePostal} ${adressePrincipale.communeLabel}`
               : `${adressePrincipale.codePostal} ${adressePrincipale.communeLabel}`;
         }
-        lancerRecherche();
+        await lancerRecherche();
       },
     );
   };
