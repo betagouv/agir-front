@@ -11,6 +11,8 @@
       />
     </div>
     <form @submit.prevent="enregistrerLesInformations">
+      <h2 class="fr-h3">Ma résidence principale</h2>
+
       <div class="fr-mb-4w">
         <div v-if="doitAfficherBarreAdresse" class="fr-input-group">
           <label id="recherche-par-adresse-label" class="fr-label fr-mb-2w" for="recherche-adresse-input"

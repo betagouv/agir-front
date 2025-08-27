@@ -14,6 +14,7 @@
         Chez moi
       </button>
     </li>
+
     <li v-for="adresse in adressesRecentes" :key="adressesRecentes.indexOf(adresse)" class="fr-pb-1w fr-px-1v">
       <div>
         <button
@@ -29,10 +30,11 @@
         >
           {{ adresse.numero_rue }} {{ adresse.rue }}, {{ adresse.commmune }} ({{ adresse.code_postal }})
         </button>
-        <button :aria-labelledby="`trash ${adresse.id}`" class="btn-suppression">
+
+        <button class="btn-suppression">
           <img
             id="trash"
-            alt="Supprimer"
+            :alt="`Supprimer l'adresse ${adresse.rue}`"
             src="/ic-blue-delete-bin-line.svg"
             width="16"
             @click.prevent="supprimerAdresseRecente(adresse.id)"
@@ -44,7 +46,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { ref } from 'vue';
+  import { onMounted, ref } from 'vue';
   import { HistoriqueAdresseRepositoryAxios } from '@/domaines/adresses/adapters/historiqueAdresse.repository.axios';
   import {
     AdresseHistorique,
@@ -62,13 +64,17 @@
   const adressesRecentes = ref<AdresseHistorique[]>([]);
   const historiqueAdresseRepositoryAxios = new HistoriqueAdresseRepositoryAxios();
 
+  onMounted(() => {
+    chargerAdressesRecentes();
+  });
+
   const chargerAdressesRecentes = () => {
     const usecase = new RecupererHistoriqueAdresseUsecase(historiqueAdresseRepositoryAxios);
     usecase.execute(utilisateurStore().utilisateur.id, adresses => {
       adressesRecentes.value = adresses;
     });
   };
-  chargerAdressesRecentes();
+
   const supprimerAdresseRecente = async (idAdresseASupprimer: string) => {
     await new SupprimerHistoriqueAdresseUsecase(historiqueAdresseRepositoryAxios).execute(
       utilisateurStore().utilisateur.id,
@@ -77,6 +83,10 @@
 
     chargerAdressesRecentes();
   };
+
+  defineExpose({
+    chargerAdressesRecentes,
+  });
 </script>
 
 <style lang="css" scoped>
