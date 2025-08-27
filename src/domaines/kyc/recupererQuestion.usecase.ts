@@ -50,6 +50,7 @@ export interface Question {
   thematique: ThematiqueQuestion;
   reponses: ReponseKYCSimple | ReponseMosaic<boolean> | ReponseMultiple;
   aEteRepondu: boolean;
+  estObligatoire: boolean;
 }
 
 export class RecupererQuestionUsecase {

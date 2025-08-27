@@ -17,6 +17,7 @@ describe("Tests unitaires pour 'RecupererPremiereKYC'", () => {
         reponse: [],
       },
       aEteRepondu: false,
+      estObligatoire: true,
     };
 
     // WHEN
@@ -38,6 +39,7 @@ describe("Tests unitaires pour 'RecupererPremiereKYC'", () => {
             points: 'Récoltez vos + 5 points',
             reponses_possibles: [],
             type: 'choix_unique',
+            estObligatoire: true,
           });
         },
         finAtteinte => {

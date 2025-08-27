@@ -26,6 +26,7 @@ export class QuestionViewModelBuilder {
       .withReponsesPossibles(builder.determineReponsePossibles(question))
       .withADejaEteRepondu(question.aEteRepondu)
       .withDescription(builder.determineDescription(question.thematique))
+      .withObligatoire(question.estObligatoire)
       .withEtapeCourante(questionMetaData.etapeCourante)
       .withNombreTotalDeQuestions(questionMetaData.nombreTotalDeQuestions)
       .build();
@@ -75,6 +76,11 @@ export class QuestionViewModelBuilder {
 
   withDescription(description: string): QuestionViewModelBuilder {
     this.questionViewModel.description = description;
+    return this;
+  }
+
+  withObligatoire(estObligatoire: boolean): QuestionViewModelBuilder {
+    this.questionViewModel.estObligatoire = estObligatoire;
     return this;
   }
 

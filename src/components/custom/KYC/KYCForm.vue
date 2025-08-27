@@ -29,21 +29,26 @@
       :message="alerte.message"
       :titre="alerte.titre"
       :type="alerte.type"
+      ref="alertRef"
       class="fr-mt-1w fr-mb-3w"
+      a-un-role-alert
     />
 
-    <button v-if="!reponse || reponse?.length === 0" class="fr-btn fr-btn--secondary" @click.prevent="passerLaQuestion">
-      Passer la question
-    </button>
-    <button v-else :title="wordingBouton" class="fr-btn fr-mt-0" type="submit">
+    <button
+      v-if="questionViewModel.estObligatoire || !estSansReponse"
+      :title="wordingBouton"
+      class="fr-btn fr-mt-0"
+      type="submit"
+    >
       {{ wordingBouton }}
     </button>
+    <button v-else class="fr-btn fr-btn--secondary" @click.prevent="passerLaQuestion">Passer la question</button>
     <slot></slot>
   </form>
 </template>
 
 <script lang="ts" setup>
-  import { onMounted, ref } from 'vue';
+  import { computed, nextTick, onMounted, ref } from 'vue';
   import Alert from '@/components/custom/Alert.vue';
   import KYCInputWrapperArray from '@/components/custom/KYC/KYCInputWrapperArray.vue';
   import KycInputWrapperString from '@/components/custom/KYC/KYCInputWrapperString.vue';
@@ -71,6 +76,8 @@
 
   const questionViewModel = ref<QuestionViewModel>(props.questionViewModel);
   const { alerte, afficherAlerte } = useAlerte();
+  const alertRef = ref<HTMLDivElement>();
+  const estSansReponse = computed(() => !reponse.value || reponse.value.length === 0);
 
   onMounted(() => {
     reponse.value = (
@@ -81,8 +88,8 @@
   });
 
   const validerLaReponse = async () => {
-    if (!reponse.value || reponse.value.length === 0) {
-      afficherAlerte('error', 'Erreur', 'Veuillez sélectionner une réponse pour continuer');
+    if (estSansReponse.value) {
+      await afficherAlerteErreur();
       return;
     }
 
@@ -108,17 +115,36 @@
       await envoyerReponseUsecase.execute(
         utilisateurStore().utilisateur.id,
         props.questionViewModel.id,
-        reponse.value.toString(),
+        reponse.value!.toString(),
       );
     }
 
-    emit('update:soumissionKyc', [reponse.value].flat());
+    emit('update:soumissionKyc', [reponse.value!].flat());
   };
 
   const passerLaQuestion = () => {
+    if (props.questionViewModel.estObligatoire) return;
+
     const passerLaQuestion = new PasserUneKYCUsecase(new QuestionRepositoryAxios());
     passerLaQuestion
       .execute(utilisateurStore().utilisateur.id, props.questionViewModel.id)
       .then(() => emit('update:passer-la-question'));
   };
+
+  async function afficherAlerteErreur() {
+    const messagesParType = {
+      choix_multiple: 'Veuillez sélectionner au moins une option pour continuer',
+      choix_unique: 'Veuillez sélectionner une option pour continuer',
+      mosaic_boolean: 'Veuillez sélectionner une option pour continuer',
+      decimal: 'Veuillez saisir une valeur numérique pour continuer',
+      entier: 'Veuillez saisir une valeur numérique pour continuer',
+      libre: 'Veuillez renseigner une réponse pour continuer',
+    };
+    const messageErreur =
+      messagesParType[props.questionViewModel.type] || 'Veuillez renseigner une réponse pour continuer';
+    afficherAlerte('error', 'Erreur', messageErreur);
+
+    await nextTick();
+    alertRef.value?.focus();
+  }
 </script>

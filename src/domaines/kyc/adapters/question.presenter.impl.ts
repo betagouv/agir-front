@@ -22,6 +22,7 @@ export interface QuestionViewModel {
   points: string;
   aDejaEteRepondu: boolean;
   description: string;
+  estObligatoire: boolean;
   etapeCourante: number;
   nombreTotalDeQuestions: number;
 }

@@ -22,6 +22,7 @@ describe('Fichier de tests pour récuperer une question KYC', () => {
         reponse: [],
       } as ReponseKYCSimple,
       aEteRepondu: false,
+      estObligatoire: false,
     });
 
     // WHEN
@@ -44,6 +45,7 @@ describe('Fichier de tests pour récuperer une question KYC', () => {
         points: 'Récoltez vos + 10 points',
         aDejaEteRepondu: false,
         description: "Ces informations permettent à <i>J'agis</i> de mieux comprendre vos habitudes alimentaires",
+        estObligatoire: false,
       });
     }
   });
@@ -76,6 +78,7 @@ describe('Fichier de tests pour récuperer une question KYC', () => {
       },
       thematique: ThematiqueQuestion.DECHET,
       aEteRepondu: false,
+      estObligatoire: true,
     });
 
     // WHEN
@@ -115,6 +118,7 @@ describe('Fichier de tests pour récuperer une question KYC', () => {
           },
         ],
         aDejaEteRepondu: false,
+        estObligatoire: true,
         description:
           "Ces informations permettent à <i>J'agis</i> de mieux vous conseiller en matière de gestion des déchets et d'alimentation",
       });
@@ -148,8 +152,8 @@ describe('Fichier de tests pour récuperer une question KYC', () => {
           },
         ],
       },
-
       aEteRepondu: false,
+      estObligatoire: false,
     });
 
     // WHEN
@@ -187,6 +191,7 @@ describe('Fichier de tests pour récuperer une question KYC', () => {
           },
         ],
         aDejaEteRepondu: false,
+        estObligatoire: false,
         description: "Ces informations permettent à <i>J'agis</i> de mieux vous conseiller en matière de mobilité",
       });
     }
@@ -219,6 +224,7 @@ describe('Fichier de tests pour récuperer une question KYC', () => {
         ],
       } as ReponseMosaic<boolean>,
       aEteRepondu: false,
+      estObligatoire: false,
     });
 
     // WHEN
@@ -256,6 +262,7 @@ describe('Fichier de tests pour récuperer une question KYC', () => {
         ],
         aDejaEteRepondu: false,
         description: "Ces informations permettent à <i>J'agis</i> de mieux vous conseiller en matière de mobilité",
+        estObligatoire: false,
       });
     }
   });

@@ -26,6 +26,7 @@ describe('Fichier de tests concernant la récupération des KYC répondues', () 
           } as ReponseKYCSimple,
           thematique: ThematiqueQuestion.LOGEMENT,
           aEteRepondu: true,
+          estObligatoire: true,
         },
         {
           id: 'questionId2',
@@ -38,6 +39,7 @@ describe('Fichier de tests concernant la récupération des KYC répondues', () 
           } as ReponseKYCSimple,
           thematique: ThematiqueQuestion.TRANSPORT,
           aEteRepondu: false,
+          estObligatoire: false,
         },
         {
           id: 'questionId3',
@@ -65,6 +67,7 @@ describe('Fichier de tests concernant la récupération des KYC répondues', () 
           } as ReponseMultiple,
           thematique: ThematiqueQuestion.TRANSPORT,
           aEteRepondu: true,
+          estObligatoire: false,
         },
         {
           id: 'questionId3',
@@ -95,6 +98,7 @@ describe('Fichier de tests concernant la récupération des KYC répondues', () 
           } as ReponseMosaic<boolean>,
           thematique: ThematiqueQuestion.TRANSPORT,
           aEteRepondu: true,
+          estObligatoire: false,
         },
       ]),
     );
