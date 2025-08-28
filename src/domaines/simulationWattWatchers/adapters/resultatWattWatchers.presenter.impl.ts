@@ -25,14 +25,14 @@ export class ResultatWWPresenterImpl implements ResultatWattWatcherPresenter {
 
   presenteResultatWattWatcher(resultat: ResultatWattWatchers) {
     this.callback({
-      totalConsommation: MontantAfficheEnFRBuilder.build(resultat.consommationTotaleEnEuros),
+      totalConsommation: MontantAfficheEnFRBuilder.build(resultat.consommationTotaleEnEuros ?? 0),
       economieActuelle: {
         valeur: resultat.economiesRealiseesEnEuros,
-        enEuro: MontantAfficheEnFRBuilder.build(resultat.economiesRealiseesEnEuros),
+        enEuro: MontantAfficheEnFRBuilder.build(resultat.economiesRealiseesEnEuros ?? 0),
       },
       economiePotentielle: {
         valeur: resultat.economiesPossiblesEnEuros,
-        enEuro: MontantAfficheEnFRBuilder.build(resultat.economiesPossiblesEnEuros),
+        enEuro: MontantAfficheEnFRBuilder.build(resultat.economiesPossiblesEnEuros ?? 0),
       },
       nombreActions: resultat.nombreActionsAssociees,
 

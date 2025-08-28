@@ -47,6 +47,7 @@ export interface QuestionApiModel extends QuestionMosaicBooleanApiModel {
   categorie: string;
   thematique: string;
   is_answered: boolean;
+  is_mandatory: boolean;
 }
 
 export interface QuestionMosaicBooleanApiModel {
@@ -172,6 +173,7 @@ export class QuestionRepositoryAxios implements QuestionRepository {
         | ThematiqueQuestion
         | ThematiqueQuestion.AUTRE,
       aEteRepondu: question.is_answered,
+      estObligatoire: question.is_mandatory,
     };
   }
 

@@ -17,6 +17,7 @@ describe("Tests unitaires pour 'RecupererPrecedenteKYCUsecase'", () => {
         reponse: [],
       },
       aEteRepondu: false,
+      estObligatoire: false,
     };
 
     // WHEN
@@ -39,6 +40,7 @@ describe("Tests unitaires pour 'RecupererPrecedenteKYCUsecase'", () => {
             points: 'Récoltez vos + 5 points',
             reponses_possibles: [],
             type: 'choix_unique',
+            estObligatoire: false,
           });
         },
         finAtteinte => {
