@@ -1,5 +1,20 @@
 <template>
   <ul class="fr-tags-group fr-grid-row fr-grid-row--gutters list-style-none fr-mt-2w">
+    <li class="fr-pb-1w fr-px-1v" v-if="onGeolocalisationSelectionne">
+      <button
+        class="fr-tag fr-icon-map-pin-2-line fr-tag--icon-left fr-m-0"
+        type="button"
+        @click.prevent="
+          () => {
+            trackClick('Adresse Recente', 'Geolocalisation sélectionnée');
+            onGeolocalisationSelectionne!();
+          }
+        "
+      >
+        Ma position
+      </button>
+    </li>
+
     <li v-if="adressePrincipaleComplete" class="fr-pb-1w fr-px-1v">
       <button
         class="fr-tag fr-icon-home-4-fill fr-tag--icon-left fr-m-0"
@@ -59,6 +74,7 @@
   defineProps<{
     onAdresseRecenteSelectionnee: (adresse: AdresseHistorique) => void;
     onAdresseResidencePrincipaleSelectionnee: () => void;
+    onGeolocalisationSelectionne?: () => void;
     adressePrincipaleComplete?: boolean;
   }>();
   const adressesRecentes = ref<AdresseHistorique[]>([]);
@@ -91,7 +107,7 @@
 
 <style lang="css" scoped>
   .adresses-recentes {
-    max-width: 20rem;
+    max-width: 18rem;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
