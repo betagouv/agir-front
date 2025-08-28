@@ -1,5 +1,23 @@
 # Changelog
 
+## [2.22.0](https://github.com/betagouv/agir-front/compare/v2.21.0...v2.22.0) (2025-08-28)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* KYC obligatoire ([#1300](https://github.com/betagouv/agir-front/issues/1300)) ([022dd53](https://github.com/betagouv/agir-front/commit/022dd5394a73f2dd781d39d2e4e8bf05b835c92b))
+
+
+### 🐛 Corrections de bogues
+
+* adresses recentes ([#1299](https://github.com/betagouv/agir-front/issues/1299)) ([de3c68c](https://github.com/betagouv/agir-front/commit/de3c68ce6b04fb22b09b21be29b826c5e972d1cb))
+
+
+### 👷 Autres changements
+
+* refactor KYC et stepper ([#1248](https://github.com/betagouv/agir-front/issues/1248)) ([af6e0a4](https://github.com/betagouv/agir-front/commit/af6e0a4cae631ad8b55e755532bf8c638fcd0d3b))
+* restructuration du navigationStore ([#1293](https://github.com/betagouv/agir-front/issues/1293)) ([015e705](https://github.com/betagouv/agir-front/commit/015e705d7ab8782c7683d515cf3a695a1909edf8))
+
 ## [2.21.0](https://github.com/betagouv/agir-front/compare/v2.20.0...v2.21.0) (2025-08-26)
 
 
