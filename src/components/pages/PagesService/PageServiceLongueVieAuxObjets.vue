@@ -37,6 +37,7 @@
             :adresse-principale-complete="utilisateurStore().utilisateur.possedeUneAdresseComplete"
             :on-adresse-recente-selectionnee="chercherAvecAdresseRecente"
             :on-adresse-residence-principale-selectionnee="chercherAvecAdressePrincipale"
+            :on-geolocalisation-selectionne="chercherAvecGeolocalisation"
           />
           <Callout
             v-if="avecAdressePrivee && !utilisateurStore().utilisateur.possedeUneAdresseComplete"
@@ -82,6 +83,8 @@
         </section>
       </PageServiceTemplate>
     </ServiceSkeletonConditionnel>
+
+    <ModaleErreurGeolocalisation />
   </div>
 </template>
 
@@ -89,6 +92,7 @@
   import { nextTick, onMounted, ref } from 'vue';
   import { useRouter } from 'vue-router';
   import BarreDeRechercheAdresse from '@/components/custom/Form/BarreDeRechercheAdresse.vue';
+  import ModaleErreurGeolocalisation from '@/components/custom/Modale/ModaleErreurGeolocalisation.vue';
   import PageServiceTemplate from '@/components/custom/Service/PageServiceTemplate.vue';
   import ServiceFavoris from '@/components/custom/Service/ServiceFavoris.vue';
   import ServiceListeCarte from '@/components/custom/Service/ServiceListeCarte.vue';
@@ -99,6 +103,7 @@
   import AdressesRecentesComponent from '@/components/pages/PagesService/AdressesRecentesComponent.vue';
   import { useRechercheService } from '@/composables/service/useRechercheService';
   import { useAdressePrincipale } from '@/composables/useAdressePrincipale';
+  import { useDsfrModale } from '@/composables/useDsfrModale';
   import { AdresseHistorique } from '@/domaines/adresses/recupererHistoriqueAdresse.usecase';
   import { BarreDeRechercheViewModel } from '@/domaines/logement/adapters/barreDeRecherche.presenter.impl';
   import {
@@ -109,6 +114,7 @@
   import { ServiceRechercheLongueVieAuxObjetsAxios } from '@/domaines/serviceRecherche/longueVieAuxObjets/adapters/serviceRechercheLongueVieAuxObjets.repository.axios';
   import { RecupererServiceLongueVieAuxObjetsUsecase } from '@/domaines/serviceRecherche/longueVieAuxObjets/recupererServiceLongueVieAuxObjets.usecase';
   import { AdresseBarreDeRecherche } from '@/shell/coordonneesType';
+  import { MODALE_GEOLOCALISATION_ID } from '@/shell/modaleGeolocalisationId';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const serviceListeCarte = ref<InstanceType<typeof ServiceListeCarte>>();
@@ -135,6 +141,8 @@
     pageEstEnChargement,
     cartesSontEnChargement,
   } = useRechercheService(lancerRecherche, 'vos_objets');
+
+  const { ouvrirModale: ouvrirModaleErreurGeoloc } = useDsfrModale(MODALE_GEOLOCALISATION_ID);
 
   async function chargerPlusDeCartesEtFocus() {
     const ancienNombreDeResultats = nombreDeResultats.value;
@@ -201,6 +209,27 @@
       },
     );
   };
+
+  function chercherAvecGeolocalisation() {
+    if (!navigator.geolocation) {
+      ouvrirModaleErreurGeoloc();
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        coordonnees.value = {
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+        };
+        recherche.value = 'Ma position actuelle';
+        lancerRecherche();
+      },
+      () => {
+        ouvrirModaleErreurGeoloc();
+      },
+    );
+  }
 
   onMounted(async () => {
     const query = useRouter().currentRoute.value.query;
