@@ -7,7 +7,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { computed, defineModel, defineProps } from 'vue';
+  import { computed } from 'vue';
   import KYCChoixMultiple from './KYCTypes/KYCChoixMultiple.vue';
   import KYCChoixUnique from './KYCTypes/KYCChoixUnique.vue';
   import KYCMosaic from './KYCTypes/KYCMosaic.vue';
