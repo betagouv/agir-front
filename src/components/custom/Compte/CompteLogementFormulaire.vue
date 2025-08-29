@@ -10,31 +10,44 @@
         class="fr-col-12 fr-mb-2w"
       />
     </div>
+
     <form @submit.prevent="enregistrerLesInformations">
       <h2 class="fr-h3">Ma résidence principale</h2>
 
       <div class="fr-mb-4w">
         <div v-if="doitAfficherBarreAdresse" class="fr-input-group">
-          <label id="recherche-par-adresse-label" class="fr-label fr-mb-2w" for="recherche-adresse-input"
-            >Où habitez-vous ?</label
-          >
+          <label id="recherche-par-adresse-label" class="fr-label fr-mb-2w" for="recherche-adresse-input">
+            Où habitez-vous ?
+          </label>
+
           <BarreDeRechercheAdresse
             v-model:adresse="adresseBarreDeRecherche"
             v-model:recherche="recherche"
             label-id="recherche-par-adresse-label"
           />
 
-          <button class="fr-btn fr-btn--tertiary fr-mt-2w" @click.prevent="supprimerMonAdresse()">
+          <button
+            class="fr-btn fr-icon-delete-line fr-btn--icon-left fr-btn--tertiary fr-mt-2w"
+            @click.prevent="supprimerMonAdresse()"
+          >
             Supprimer mon adresse
           </button>
         </div>
 
-        <InputCodePostal
-          v-else
-          v-model:code-epci="logementViewModel.codeEpci"
-          v-model:code-postal="logementViewModel.codePostal"
-          @update:isCodePostalEnErreur="isCodePostalEnErreur = $event"
-        />
+        <template v-else>
+          <InputCodePostal
+            v-model:code-epci="logementViewModel.codeEpci"
+            v-model:code-postal="logementViewModel.codePostal"
+            @update:isCodePostalEnErreur="isCodePostalEnErreur = $event"
+          />
+
+          <button
+            class="fr-btn fr-icon-ball-pen-line fr-btn--icon-left fr-btn--tertiary fr-mt-2w"
+            @click.prevent="doitAfficherBarreAdresse = true"
+          >
+            Renseigner mon adresse
+          </button>
+        </template>
       </div>
 
       <h2 class="fr-h3">Ma situation</h2>
@@ -178,8 +191,8 @@
       logementViewModel.value?.coordonnees,
     ),
   );
-  const barreDeRechercheInitialisationViewModel = ref<BarreDeRechercheViewModel>();
   const adresseBarreDeRecherche = ref<AdresseBarreDeRecherche>();
+  const barreDeRechercheInitialisationViewModel = ref<BarreDeRechercheViewModel>();
   new BarreDeRecherchePresenterImpl(vm => (barreDeRechercheInitialisationViewModel.value = vm)).presente({
     codePostal: adresseDansLeCompte.value.codePostal,
     codeEpci: '',
@@ -194,7 +207,7 @@
   });
   const recherche = ref<string>(barreDeRechercheInitialisationViewModel.value?.recherche ?? '');
 
-  const doitAfficherBarreAdresse = computed(() => adresseDansLeCompte.value.estAdresseComplete());
+  const doitAfficherBarreAdresse = ref<boolean>(adresseDansLeCompte.value.estAdresseComplete());
   const isCodePostalEnErreur = ref(false);
   const codePostalEstValide = computed(() => {
     return !isCodePostalEnErreur.value && logementViewModel.value.codeEpci !== undefined;
@@ -235,7 +248,7 @@
         afficherAlerte('success', 'Succès', 'Vos informations ont été correctement mises à jour.');
       })
       .catch(() => {
-        afficherAlerte('error', 'Erreur', 'Une erreur interne est survenue. Veuillez réessayer plus tard.');
+        afficherAlerte('error', 'Erreur', 'Une erreur est survenue. Vérifiez vos informations ou réessayez plus tard.');
       });
 
     const alertElement = document.getElementById('scroll-to-alerte');
@@ -268,6 +281,8 @@
       .then(() => {
         utilisateurStore().utilisateur.possedeUneAdresseComplete = false;
         afficherAlerte('success', 'Succès', 'Vos informations ont été correctement mises à jour.');
+        doitAfficherBarreAdresse.value = false;
+        recherche.value = '';
       })
       .catch(() => {
         afficherAlerte('error', 'Erreur', 'Une erreur interne est survenue. Veuillez réessayer plus tard.');

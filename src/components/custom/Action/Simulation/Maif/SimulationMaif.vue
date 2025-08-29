@@ -6,6 +6,7 @@
         v-model:adresse="adresse"
         v-model:coordonnees="coordonnees"
         v-model:recherche="recherche"
+        :enregistrer-adresse-dans-historique="true"
         label-id="label-barre-de-recherche"
         @update:coordonnees="chargerDonneesPourNouvelleAdresse"
       />
