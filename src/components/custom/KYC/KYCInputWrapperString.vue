@@ -7,7 +7,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { computed, defineModel, defineProps } from 'vue';
+  import { computed } from 'vue';
   import KYCDecimal from './KYCTypes/KYCDecimal.vue';
   import KYCEntier from './KYCTypes/KYCEntier.vue';
   import KYCLibre from './KYCTypes/KYCLibre.vue';

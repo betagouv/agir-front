@@ -73,6 +73,7 @@
       describedBy?: string;
     };
     onCoordonneesEnvoyees?: () => void;
+    enregistrerAdresseDansHistorique?: boolean;
   }>();
 
   type FeatureApiModel = {
@@ -150,18 +151,22 @@
     coordonnees.value = adresse.coordonnees;
     adresseRef.value = adresse;
     dialogOuverte.value = false;
-    const ajouterAdresseRecente = new AjouterHistoriqueAdresseUsecase(new HistoriqueAdresseRepositoryAxios());
-    ajouterAdresseRecente.execute(utilisateurStore().utilisateur.id, {
-      id: '',
-      code_commune: adresse.codeEpci,
-      commmune: adresse.commune,
-      code_postal: adresse.codePostal,
-      numero_rue: adresse.numeroRue,
-      rue: adresse.rue,
-      longitude: adresse.coordonnees.longitude,
-      latitude: adresse.coordonnees.latitude,
-      date_creation: '',
-    });
+
+    if (props.enregistrerAdresseDansHistorique) {
+      const ajouterAdresseRecente = new AjouterHistoriqueAdresseUsecase(new HistoriqueAdresseRepositoryAxios());
+      ajouterAdresseRecente.execute(utilisateurStore().utilisateur.id, {
+        id: '',
+        code_commune: adresse.codeEpci,
+        commmune: adresse.commune,
+        code_postal: adresse.codePostal,
+        numero_rue: adresse.numeroRue,
+        rue: adresse.rue,
+        longitude: adresse.coordonnees.longitude,
+        latitude: adresse.coordonnees.latitude,
+        date_creation: '',
+      });
+    }
+
     if (props.onCoordonneesEnvoyees) {
       props.onCoordonneesEnvoyees();
     }

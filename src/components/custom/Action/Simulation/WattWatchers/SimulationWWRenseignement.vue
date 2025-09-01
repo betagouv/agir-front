@@ -22,6 +22,7 @@
             :input-options="{
               describedBy: erreurAdresse ? 'adresse-text-input-error-desc-error info-adresse' : 'info-adresse',
             }"
+            :enregistrer-adresse-dans-historique="true"
           />
           <p id="info-adresse" class="fr-hint-text fr-info-text fr-icon-info-fill">
             Elle sera enregistrée dans votre profil

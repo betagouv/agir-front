@@ -29,6 +29,7 @@
               v-model:coordonnees="coordonnees"
               v-model:recherche="recherche"
               :on-coordonnees-envoyees="chargerDonneesPourNouvelleAdresse"
+              :enregistrer-adresse-dans-historique="true"
               labelId="recherche-par-adresse-label"
             />
           </form>
