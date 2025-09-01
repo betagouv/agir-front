@@ -15,33 +15,36 @@ export interface PreviewActionsParThematique {
   alimentation: PersonnalisationDuneAction[];
 }
 
-export interface MappingTagKYC {
-  mappedKYCListe: {
-    kyc: string;
-    tags: string[];
-  }[];
-  tagAtteignableViaKYC: string[];
-  tagInatteignableViaKYC: string[];
-  tagsDynamiques: {
-    tag: string;
-    explication: string;
-  }[];
-  tagsCmsHorsDuBackend: {
+export interface DefinitionTag {
+  code: string;
+  labelRecommandation: string;
+  descriptionInterne: string;
+  warnings: {
+    estCmsDeclarationManquante: boolean;
+    estBackendDeclarationManquante: boolean;
+    estActivationFonctionnelleAbsente: boolean;
+  };
+  type: 'user_kyc' | 'user_computed' | 'editorial';
+  pourcentageUserAvecTag: number;
+  nombreUserAvecTag: number;
+  kycCreationTag: {
     idCms: string;
-    tagId: string;
-    labelExplicationFront: string;
-    descriptionInterne: string;
-    ponderation: number;
-    boost: number;
+    code: string;
+    question: string;
   }[];
-  backEndTagHorsDuCms: string[];
-  tousLesTagsDansCms: {
-    id_cms: string;
-    tag_id: string;
-    label_explication_front: string;
-    description_interne: string;
-    ponderation: number;
-    boost: number;
+  actionsIncluantes: {
+    idCms: string;
+    code: string;
+    type: string;
+    titre: string;
+    thematique: ClefThematiqueAPI;
+  }[];
+  actionsExcluantes: {
+    idCms: string;
+    code: string;
+    type: string;
+    titre: string;
+    thematique: ClefThematiqueAPI;
   }[];
 }
 
@@ -50,5 +53,5 @@ export interface PersonnalisationRepository {
 
   recupererActionsAvecTags(tags: string[]): Promise<PreviewActionsParThematique>;
 
-  recupererMappingTagKYC(): Promise<MappingTagKYC>;
+  recupererDictionnaireTags(): Promise<DefinitionTag[]>;
 }

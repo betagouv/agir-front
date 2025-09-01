@@ -1,7 +1,7 @@
 import { RouteRecordRaw } from 'vue-router';
 
 const PagePersonnalisation = () => import('@/components/pages/PagePersonnalisation.vue');
-const PageMappingTagKYC = () => import('@/components/pages/PageMappingTagKYC.vue');
+const PageDictionnaireTags = () => import('@/components/pages/PageDictionnaireTags.vue');
 
 export enum RoutePersonnalisationName {
   PERSONNALISATION = 'personnalisation',
@@ -10,7 +10,7 @@ export enum RoutePersonnalisationName {
 
 export enum RoutePersonnalisationPath {
   PERSONNALISATION = '/personnalisation/',
-  MAPPING_TAG_KYC = '/mapping_tag_kyc/',
+  MAPPING_TAG_KYC = '/dictionnaire_tags/',
 }
 const personnalisationRoutes: RouteRecordRaw[] = [];
 
@@ -18,9 +18,9 @@ if (import.meta.env.VITE_ENV === 'dev') {
   personnalisationRoutes.push({
     path: RoutePersonnalisationPath.MAPPING_TAG_KYC,
     name: RoutePersonnalisationName.MAPPING_TAG_KYC,
-    component: PageMappingTagKYC,
+    component: PageDictionnaireTags,
     meta: {
-      title: 'Mapping TAG/KYC',
+      title: 'Dictionnaire des tags',
     },
   });
 }
