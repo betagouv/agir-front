@@ -72,7 +72,10 @@ describe("Fichier de tests concernant la récuperation de service d'un recherche
     // WHEN
     await usecase.execute(
       'idUtilisateur',
-      'idService',
+      {
+        categorie: 'categorie',
+        sousCategorie: 'sousCategorie',
+      },
       10,
       new ServiceRechercheLongueVieAuxObjetsPresenterImpl(
         vm =>
@@ -208,7 +211,10 @@ describe("Fichier de tests concernant la récuperation de service d'un recherche
     // WHEN
     await usecase.execute(
       'idUtilisateur',
-      'idService',
+      {
+        categorie: 'categorie',
+        sousCategorie: 'sousCategorie',
+      },
       10,
       new ServiceRechercheLongueVieAuxObjetsPresenterImpl(
         vm =>
@@ -242,7 +248,10 @@ describe("Fichier de tests concernant la récuperation de service d'un recherche
     // WHEN
     await usecase.execute(
       'idUtilisateur',
-      'idService',
+      {
+        categorie: 'categorie',
+        sousCategorie: 'sousCategorie',
+      },
       10,
       new ServiceRechercheLongueVieAuxObjetsPresenterImpl(
         vm => expect(vm).toEqual(null),

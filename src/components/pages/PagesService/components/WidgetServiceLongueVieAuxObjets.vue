@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-space-between align-items--center">
     <h2>
-      Où {{ props.parametreDeRecherche }} à <span class="text--bold">{{ props.commune }}</span> ?
+      Où {{ props.parametreDeRecherche.categorie }} à <span class="text--bold">{{ props.commune }}</span> ?
     </h2>
   </div>
 
@@ -48,7 +48,10 @@
   const serviceRechercheLongueVieAuxObjetsViewModel = ref<ServiceRechercheLongueVieAuxObjetsViewModel>();
   const props = defineProps<{
     commune: string;
-    parametreDeRecherche: string;
+    parametreDeRecherche: {
+      categorie: string;
+      sous_catagorie?: string;
+    };
   }>();
 
   const usecase = new RecupererServiceLongueVieAuxObjetsUsecase(new ServiceRechercheLongueVieAuxObjetsAxios());

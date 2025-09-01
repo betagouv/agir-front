@@ -12,10 +12,7 @@
       </WidgetServiceRecettes>
 
       <section v-if="service.type === 'longue_vie_objets'" class="fr-mt-4w">
-        <WidgetServiceLongueVieAuxObjets
-          :commune="commune"
-          :parametre-de-recherche="service.parametreDuService.categorie"
-        />
+        <WidgetServiceLongueVieAuxObjets :commune="commune" :parametre-de-recherche="service.parametreDuService" />
       </section>
 
       <section v-if="service.type === 'proximite'" class="fr-mt-4w">
