@@ -3,7 +3,7 @@ import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 export type PersonnalisationDuneAction = {
   thematique: ClefThematiqueAPI;
   titre: string;
-  type: 'classique' | 'exclue';
+  type: 'classique' | 'exclue' | 'bilan' | 'simulateur' | 'quizz';
   pourcentageReco: number;
   estExclue: boolean;
 };
