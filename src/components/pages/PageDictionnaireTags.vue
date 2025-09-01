@@ -14,7 +14,7 @@
   import { AfficherDictionnaireTagsPresenterImpl } from '@/domaines/personnalisation/adapters/afficherDictionnaireTags.presenter.impl';
   import { PersonnalisationRepositoryAxios } from '@/domaines/personnalisation/adapters/personnalisation.repository.axios';
   import { DictionnaireTagsViewModel } from '@/domaines/personnalisation/ports/afficherDictionnaireTagsPresenter';
-  import { RecupererDictionnaireTagsUsecase } from '@/domaines/personnalisation/recupererDictionnaireTagsUsecase';
+  import { RecupererDictionnaireTagsUsecase } from '@/domaines/personnalisation/recupererDictionnaireTags.usecase';
 
   const viewModel = ref<DictionnaireTagsViewModel>();
   const personnalisationRepository = new PersonnalisationRepositoryAxios();
