@@ -25,6 +25,7 @@
       params: {
         thematiqueId: MenuThematiques.getThematiqueData(ClefThematiqueAPI.alimentation).url,
       },
+      query: { type: parametreDeRecherche.categorie, sous_catagorie: parametreDeRecherche.sous_catagorie },
     }"
     class="text--bleu"
     >Voir tous les lieux
