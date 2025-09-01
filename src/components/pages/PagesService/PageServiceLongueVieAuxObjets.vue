@@ -159,7 +159,7 @@
   async function lancerRecherche(): Promise<void> {
     await recupererServiceLongueVieAuxObjetsUsecase.execute(
       utilisateurStore().utilisateur.id,
-      typeDeRecherche.value,
+      { categorie: typeDeRecherche.value },
       nombreDeResultats.value,
       new ServiceRechercheLongueVieAuxObjetsPresenterImpl(
         vm => {

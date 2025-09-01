@@ -52,7 +52,10 @@ export class ServiceRechercheLongueVieAuxObjetsAxios implements ServiceRecherche
   @intercept40X()
   async recupererService(
     idUtilisateur: string,
-    categorie: string,
+    typeRecherche: {
+      categorie: string;
+      sousCategorie?: string;
+    },
     nombreMaxResultats: number,
     coordonnees?: Coordonnees,
   ): Promise<ServiceRechercheLongueVieAuxObjets> {
@@ -67,7 +70,8 @@ export class ServiceRechercheLongueVieAuxObjetsAxios implements ServiceRecherche
       const responseSuggestionsPromise = axiosInstance.post<ServiceRechercheLongueVieAuxObjetsApiResultatsModel>(
         `/utilisateurs/${idUtilisateur}/recherche_services/${idService}/search2`,
         {
-          categorie,
+          categorie: typeRecherche.categorie,
+          sous_categorie: typeRecherche.sousCategorie,
           nombre_max_resultats: nombreMaxResultats,
           rayon_metres: 5000,
           latitude: coordonnees?.latitude,

@@ -1,20 +1,28 @@
 import { ServiceRechercheLongueVieAuxObjetsRepository } from '@/domaines/serviceRecherche/longueVieAuxObjets/ports/serviceRechercheLongueVieAuxObjets.repository';
 import { ServiceRechercheLongueVieAuxObjets } from '@/domaines/serviceRecherche/longueVieAuxObjets/recupererServiceLongueVieAuxObjets.usecase';
 import { ServiceRechercheLongueVieAuxObjetsResultatDetail } from '@/domaines/serviceRecherche/longueVieAuxObjets/recupererDetailServiceLongueVieAuxObjets.usecase';
+import { Coordonnees } from '@/shell/coordonneesType';
 
 export class ServiceRechercheLongueVieAuxObjetsRepositoryEnErreur
   implements ServiceRechercheLongueVieAuxObjetsRepository
 {
-  recupererService(idUtilisateur: string, idService: string): Promise<ServiceRechercheLongueVieAuxObjets> {
+  recupererService(
+    idUtilisateur: string,
+    typeRecherche: {
+      categorie: string;
+      sous_catagorie?: string;
+    },
+    nombreMaxResultats: number,
+    coordonnees?: Coordonnees,
+  ): Promise<ServiceRechercheLongueVieAuxObjets> {
     return Promise.resolve({
       titre: '',
       suggestions: [],
-      favoris: [],
-      categories: [],
       estEnErreur: true,
       plusDeResultatsDisponibles: false,
-      nombreMaxResultats: 10,
-    } as ServiceRechercheLongueVieAuxObjets);
+      nombreMaxResultats: nombreMaxResultats,
+      categories: [],
+    });
   }
 
   recupererDetail(idUtilisateur: string, idService: string): Promise<ServiceRechercheLongueVieAuxObjetsResultatDetail> {
@@ -40,7 +48,11 @@ export class ServiceRechercheLongueVieAuxObjetsRepositoryMock implements Service
     return new ServiceRechercheLongueVieAuxObjetsRepositoryMock(null, service);
   }
 
-  recupererService(_idUtilisateur: string, _idService: string): Promise<ServiceRechercheLongueVieAuxObjets> {
+  recupererService(
+    idUtilisateur: string,
+    typeRecherche: { categorie: string; sousCategorie?: string },
+    nombreMaxResultats: number,
+  ): Promise<ServiceRechercheLongueVieAuxObjets> {
     return Promise.resolve(this.service!);
   }
 

@@ -5,7 +5,10 @@ import { Coordonnees } from '@/shell/coordonneesType';
 export interface ServiceRechercheLongueVieAuxObjetsRepository {
   recupererService(
     idUtilisateur: string,
-    categorie: string,
+    typeRecherche: {
+      categorie: string;
+      sous_catagorie?: string;
+    },
     nombreMaxResultats: number,
     coordonnees?: Coordonnees,
   ): Promise<ServiceRechercheLongueVieAuxObjets>;
