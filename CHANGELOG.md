@@ -1,5 +1,38 @@
 # Changelog
 
+## [2.22.0](https://github.com/betagouv/agir-front/compare/v2.21.0...v2.22.0) (2025-09-02)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* géolocalisation lvao / pdcn ([#1302](https://github.com/betagouv/agir-front/issues/1302)) ([ae493ec](https://github.com/betagouv/agir-front/commit/ae493ecbfc9b33e3a77922a050c56f8a79242335))
+* KYC obligatoire ([#1300](https://github.com/betagouv/agir-front/issues/1300)) ([022dd53](https://github.com/betagouv/agir-front/commit/022dd5394a73f2dd781d39d2e4e8bf05b835c92b))
+* lien vers lvao filtre depuis la categorie de recherche de l'action ([#1304](https://github.com/betagouv/agir-front/issues/1304)) ([a639e3a](https://github.com/betagouv/agir-front/commit/a639e3a5825828501b1d4c6fd41e176437b79480))
+* pouvoir rentrer son adresse depuis son code postal ([#1301](https://github.com/betagouv/agir-front/issues/1301)) ([8eb3e4a](https://github.com/betagouv/agir-front/commit/8eb3e4ab5d159f565c8a2a1e6fc49c0cf05d9e78))
+
+
+### 🐛 Corrections de bogues
+
+* adresses recentes ([#1299](https://github.com/betagouv/agir-front/issues/1299)) ([de3c68c](https://github.com/betagouv/agir-front/commit/de3c68ce6b04fb22b09b21be29b826c5e972d1cb))
+* gerer pluriel action watt watchers ([#1306](https://github.com/betagouv/agir-front/issues/1306)) ([77c1398](https://github.com/betagouv/agir-front/commit/77c1398cd18f842a1c7d1fc2061a3d6bf5dfc833))
+
+
+### 👷 Autres changements
+
+* filtrer lvao sur les actions avec les sous catégories ([#1303](https://github.com/betagouv/agir-front/issues/1303)) ([aa2ae8b](https://github.com/betagouv/agir-front/commit/aa2ae8b2e4f896e35ada2b913feb8d9b9f3c7306))
+* personnalisation & dictionnaire tags ([#1305](https://github.com/betagouv/agir-front/issues/1305)) ([3747472](https://github.com/betagouv/agir-front/commit/37474723c8d21236dfde3a9d3cf13c284989a79e))
+* refactor KYC et stepper ([#1248](https://github.com/betagouv/agir-front/issues/1248)) ([af6e0a4](https://github.com/betagouv/agir-front/commit/af6e0a4cae631ad8b55e755532bf8c638fcd0d3b))
+* restructuration du navigationStore ([#1293](https://github.com/betagouv/agir-front/issues/1293)) ([015e705](https://github.com/betagouv/agir-front/commit/015e705d7ab8782c7683d515cf3a695a1909edf8))
+
+
+### 👷 Gestion des dépendances
+
+* Bump @gouvfr/dsfr from 1.14.0 to 1.14.1 ([#1309](https://github.com/betagouv/agir-front/issues/1309)) ([1d363d1](https://github.com/betagouv/agir-front/commit/1d363d1e55f7e2d15b33e6574e7dd5d6bcebb50d))
+* Bump @sentry/vite-plugin from 4.1.1 to 4.2.0 ([#1310](https://github.com/betagouv/agir-front/issues/1310)) ([cd037b6](https://github.com/betagouv/agir-front/commit/cd037b6276216a54189491d0f2403039871e8c2e))
+* Bump @sentry/vue from 10.5.0 to 10.8.0 ([#1308](https://github.com/betagouv/agir-front/issues/1308)) ([bdcc0eb](https://github.com/betagouv/agir-front/commit/bdcc0eb01307c2073f52852dd9043987b8e8be03))
+* Bump marked from 16.2.0 to 16.2.1 ([#1307](https://github.com/betagouv/agir-front/issues/1307)) ([f06c356](https://github.com/betagouv/agir-front/commit/f06c35649d008f7ad0d9181a7324a7308de98d7e))
+* Bump vite from 7.1.3 to 7.1.4 ([#1311](https://github.com/betagouv/agir-front/issues/1311)) ([8f2cb04](https://github.com/betagouv/agir-front/commit/8f2cb0494d816d237ffb1ac078ccb4f788c875b5))
+
 ## [2.21.0](https://github.com/betagouv/agir-front/compare/v2.20.0...v2.21.0) (2025-08-26)
 
 
