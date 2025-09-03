@@ -36,10 +36,13 @@ export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurReposit
   async creerCompteUtilisateur(compteUtilisateurACreer: CompteUtilisateurACreer): Promise<CompteTemporaire> {
     try {
       const axiosInstance = AxiosFactory.getAxios();
+
       const response: Response<CompteUtilisateurApiModel> = await axiosInstance.post(`/utilisateurs/send_magic_link`, {
         email: compteUtilisateurACreer.email,
         situation_ngc_id: compteUtilisateurACreer.situationId,
         source_inscription: compteUtilisateurACreer.situationId ? 'web_ngc' : 'web',
+        referer: compteUtilisateurACreer.referer,
+        referer_keyword: compteUtilisateurACreer.refererKeyword,
       });
       return {
         mail: response.data.email || '',

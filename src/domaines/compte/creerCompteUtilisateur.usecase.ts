@@ -5,6 +5,8 @@ import { CreerComptePresenter } from '@/domaines/compte/ports/creerComptePresent
 export interface UserInput {
   mail: string;
   situationId: string | null;
+  referer?: string;
+  refererKeyword?: string;
 }
 
 export class CreerCompteUtilisateurUsecase {
@@ -17,6 +19,8 @@ export class CreerCompteUtilisateurUsecase {
     await this.compteUtilisateuRepository.creerCompteUtilisateur({
       email: compteUtilisateurACreerInput.mail,
       situationId: compteUtilisateurACreerInput.situationId,
+      referer: compteUtilisateurACreerInput.referer,
+      refererKeyword: compteUtilisateurACreerInput.refererKeyword,
     });
 
     this.sessionRepository.sauvegarderUtilisateur({

@@ -15,8 +15,8 @@ export class CatalogueActionsPresenterImpl extends ActionsPresenterImpl implemen
     super(actionsCallBack);
   }
 
-  async presenteCatalogue(catalogueActions: CatalogueActions): Promise<void> {
-    await super.presente(catalogueActions.actions);
+  async presenteCatalogue(catalogueActions: CatalogueActions, query?: Record<string, string>): Promise<void> {
+    await super.presente(catalogueActions.actions, query);
     this.filtresCallBack({
       phraseNombreActions: `${catalogueActions.actions.length} action${catalogueActions.actions.length > 1 ? 's' : ''}`,
       filtres: catalogueActions.filtres.map(filtre => {

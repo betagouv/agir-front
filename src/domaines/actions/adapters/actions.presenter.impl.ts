@@ -10,7 +10,7 @@ import { gererPluriel } from '@/shell/pluriel';
 export class ActionsPresenterImpl implements ActionsPresenter {
   constructor(private readonly viewModel: (viewModel: ActionViewModel[]) => void) {}
 
-  async presente(actions: Action[]): Promise<void> {
+  async presente(actions: Action[], query?: Record<string, string>): Promise<void> {
     const vm: ActionViewModel[] = await Promise.all(
       actions.map(async (action): Promise<ActionViewModel> => {
         const titre = await this.formaterTitre(action);
@@ -25,6 +25,7 @@ export class ActionsPresenterImpl implements ActionsPresenter {
           url: {
             name: RouteActionsName.ACTION_INDIVIDUELLE,
             params: { id: action.code, titre: buildUrl(action.titre), type: action.type },
+            query,
           },
           nombreDeParticipants,
           badges,

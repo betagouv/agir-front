@@ -8,7 +8,7 @@
       <CatalogueActionsComposant
         v-if="actionsViewModel"
         :actions="actionsViewModel"
-        card-classes="fr-col-12 fr-col-md-6 fr-col-lg-4"
+        card-classes="fr-col-12 fr-col-md-6 fr-col-lg-3"
       />
     </div>
   </section>
