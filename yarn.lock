@@ -1151,10 +1151,10 @@
   dependencies:
     "@opentelemetry/core" "^1.1.0"
 
-"@paulirish/trace_engine@0.0.57":
-  version "0.0.57"
-  resolved "https://registry.yarnpkg.com/@paulirish/trace_engine/-/trace_engine-0.0.57.tgz#051a49b07c93fb36e57074859ab1dcc97bbc1ba1"
-  integrity sha512-s+JNJ53B1MiEqCOD2hnK96wFTRRStxFmtm6QaIe2jiNI+lkS9mYEgnHOH2caQ/dEPn6wY+f2u5dW6aFYjmbaiw==
+"@paulirish/trace_engine@0.0.59":
+  version "0.0.59"
+  resolved "https://registry.yarnpkg.com/@paulirish/trace_engine/-/trace_engine-0.0.59.tgz#962ab03d85350e5133e300fe68a20ca0fcddbd0a"
+  integrity sha512-439NUzQGmH+9Y017/xCchBP9571J4bzhpcNhrxorf7r37wcyJZkgUfrUsRL3xl+JDcZ6ORhoFCzCw98c6S3YHw==
   dependencies:
     legacy-javascript latest
     third-party-web latest
@@ -1178,17 +1178,17 @@
   dependencies:
     "@opentelemetry/instrumentation" "^0.52.0 || ^0.53.0 || ^0.54.0 || ^0.55.0 || ^0.56.0 || ^0.57.0"
 
-"@puppeteer/browsers@2.10.5":
-  version "2.10.5"
-  resolved "https://registry.yarnpkg.com/@puppeteer/browsers/-/browsers-2.10.5.tgz#dddb8f8716ae6364f6f2d31125e76f311dd4a49d"
-  integrity sha512-eifa0o+i8dERnngJwKrfp3dEq7ia5XFyoqB17S4gK8GhsQE4/P8nxOfQSE0zQHxzzLo/cmF+7+ywEQ7wK7Fb+w==
+"@puppeteer/browsers@2.10.8":
+  version "2.10.8"
+  resolved "https://registry.yarnpkg.com/@puppeteer/browsers/-/browsers-2.10.8.tgz#80e983ca0365478b39c4c0f559785345393f8fa2"
+  integrity sha512-f02QYEnBDE0p8cteNoPYHHjbDuwyfbe4cCIVlNi8/MRicIxFW4w4CfgU0LNgWEID6s06P+hRJ1qjpBLMhPRCiQ==
   dependencies:
     debug "^4.4.1"
     extract-zip "^2.0.1"
     progress "^2.0.3"
     proxy-agent "^6.5.0"
     semver "^7.7.2"
-    tar-fs "^3.0.8"
+    tar-fs "^3.1.0"
     yargs "^17.7.2"
 
 "@rolldown/pluginutils@1.0.0-beta.29":
@@ -2552,10 +2552,10 @@ chrome-launcher@^1.2.0:
     is-wsl "^2.2.0"
     lighthouse-logger "^2.0.1"
 
-chromium-bidi@5.1.0:
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/chromium-bidi/-/chromium-bidi-5.1.0.tgz#8d0e47f7ac9270262df29792318dd5378e983e62"
-  integrity sha512-9MSRhWRVoRPDG0TgzkHrshFSJJNZzfY5UFqUMuksg7zL1yoZIZ3jLB0YAgHclbiAxPI86pBnwDX1tbzoiV8aFw==
+chromium-bidi@8.0.0:
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/chromium-bidi/-/chromium-bidi-8.0.0.tgz#d73c9beed40317adf2bcfeb9a47087003cd467ec"
+  integrity sha512-d1VmE0FD7lxZQHzcDUCKZSNRtRwISXDsdg4HjdTR5+Ll5nQ/vzU12JeNmupD6VWffrPSlrnGhEWlLESKH3VO+g==
   dependencies:
     mitt "^3.0.1"
     zod "^3.24.1"
@@ -3010,15 +3010,15 @@ detect-libc@^2.0.4:
   resolved "https://registry.yarnpkg.com/detect-libc/-/detect-libc-2.0.4.tgz#f04715b8ba815e53b4d8109655b6508a6865a7e8"
   integrity sha512-3UDv+G9CsCKO1WKMGw9fwq/SWJYbI0c5Y7LU1AXYoDdbhE2AHQ6N6Nb34sG8Fj7T5APy8qXDCKuuIHd1BR0tVA==
 
-devtools-protocol@0.0.1464554:
-  version "0.0.1464554"
-  resolved "https://registry.yarnpkg.com/devtools-protocol/-/devtools-protocol-0.0.1464554.tgz#54d88398c99ad93fc81c35569fba9473b6e223d0"
-  integrity sha512-CAoP3lYfwAGQTaAXYvA6JZR0fjGUb7qec1qf4mToyoH2TZgUFeIqYcjh6f9jNuhHfuZiEdH+PONHYrLhRQX6aw==
+devtools-protocol@0.0.1475386:
+  version "0.0.1475386"
+  resolved "https://registry.yarnpkg.com/devtools-protocol/-/devtools-protocol-0.0.1475386.tgz#5378401a2c5698ab68c3482c9b7816ff62ec652b"
+  integrity sha512-RQ809ykTfJ+dgj9bftdeL2vRVxASAuGU+I9LEx9Ij5TXU5HrgAQVmzi72VA+mkzscE12uzlRv5/tWWv9R9J1SA==
 
-devtools-protocol@0.0.1478340:
-  version "0.0.1478340"
-  resolved "https://registry.yarnpkg.com/devtools-protocol/-/devtools-protocol-0.0.1478340.tgz#95c71711751d9444c96c9c235ee5e95d8489aba1"
-  integrity sha512-EqhRVWo+j3O1a5LEvZi5fFlBRhvciqYoCHpsEfPcIpA/Abh0W1LF+V3AIvQD9Z4Apj0+p3U07vb7uXfn2hm3HQ==
+devtools-protocol@0.0.1507524:
+  version "0.0.1507524"
+  resolved "https://registry.yarnpkg.com/devtools-protocol/-/devtools-protocol-0.0.1507524.tgz#8c9156a5765ee6c0a76a7ed40c0cc114ee796833"
+  integrity sha512-OjaNE7qpk6GRTXtqQjAE5bGx6+c4F1zZH0YXtpZQLM92HNXx4zMAaqlKhP4T52DosG6hDW8gPMNhGOF8xbwk/w==
 
 diff@^4.0.1:
   version "4.0.2"
@@ -4895,18 +4895,18 @@ lighthouse-stack-packs@1.12.2:
   resolved "https://registry.yarnpkg.com/lighthouse-stack-packs/-/lighthouse-stack-packs-1.12.2.tgz#dbe0ccdbc381784ef176f4f8c2367ac5b077d6ca"
   integrity sha512-Ug8feS/A+92TMTCK6yHYLwaFMuelK/hAKRMdldYkMNwv+d9PtWxjXEg6rwKtsUXTADajhdrhXyuNCJ5/sfmPFw==
 
-lighthouse@^12.8.1:
-  version "12.8.1"
-  resolved "https://registry.yarnpkg.com/lighthouse/-/lighthouse-12.8.1.tgz#f9e18537187691e6d077099a7bb5bc57e8cfff3f"
-  integrity sha512-z0ceMjEM16C0HuADzMFgXe32BGJ7aJMSx48qTCcQYYjMUPxF1XWTP3rGXJEgB6P/VvS+yfp3TOMR3FpmLo0W3w==
+lighthouse@^12.8.2:
+  version "12.8.2"
+  resolved "https://registry.yarnpkg.com/lighthouse/-/lighthouse-12.8.2.tgz#b55eb747148f807987f0e4c518f5fc4d97b7e230"
+  integrity sha512-+5SKYzVaTFj22MgoYDPNrP9tlD2/Ay7j3SxPSFD9FpPyVxGr4UtOQGKyrdZ7wCmcnBaFk0mCkPfARU3CsE0nvA==
   dependencies:
-    "@paulirish/trace_engine" "0.0.57"
+    "@paulirish/trace_engine" "0.0.59"
     "@sentry/node" "^9.28.1"
     axe-core "^4.10.3"
     chrome-launcher "^1.2.0"
     configstore "^7.0.0"
     csp_evaluator "1.1.5"
-    devtools-protocol "0.0.1478340"
+    devtools-protocol "0.0.1507524"
     enquirer "^2.3.6"
     http-link-header "^1.1.1"
     intl-messageformat "^10.5.3"
@@ -4919,12 +4919,11 @@ lighthouse@^12.8.1:
     metaviewport-parser "0.3.0"
     open "^8.4.0"
     parse-cache-control "1.0.1"
-    puppeteer-core "^24.10.2"
+    puppeteer-core "^24.17.1"
     robots-parser "^3.0.1"
-    semver "^5.3.0"
     speedline-core "^1.4.3"
     third-party-web "^0.27.0"
-    tldts-icann "^6.1.16"
+    tldts-icann "^7.0.12"
     ws "^7.0.0"
     yargs "^17.3.1"
     yargs-parser "^21.0.0"
@@ -5823,15 +5822,15 @@ punycode@^2.1.0, punycode@^2.3.1:
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-2.3.1.tgz#027422e2faec0b25e1549c3e1bd8309b9133b6e5"
   integrity sha512-vYt7UD1U9Wg6138shLtLOvdAu+8DsC/ilFtEVHcH+wydcSpNE20AfSOduf6MkRFahL5FY7X1oU7nKVZFtfq8Fg==
 
-puppeteer-core@^24.10.2:
-  version "24.12.1"
-  resolved "https://registry.yarnpkg.com/puppeteer-core/-/puppeteer-core-24.12.1.tgz#66338926570ae904ce8ea0acb68b1bda361f5884"
-  integrity sha512-8odp6d3ERKBa3BAVaYWXn95UxQv3sxvP1reD+xZamaX6ed8nCykhwlOiHSaHR9t/MtmIB+rJmNencI6Zy4Gxvg==
+puppeteer-core@^24.17.1:
+  version "24.18.0"
+  resolved "https://registry.yarnpkg.com/puppeteer-core/-/puppeteer-core-24.18.0.tgz#444388d619de422f1d325b313942f46fa2925d96"
+  integrity sha512-As0BvfXxek2MbV0m7iqBmQKFnfSrzSvTM4zGipjd4cL+9f2Ccgut6RvHlc8+qBieKHqCMFy9BSI4QyveoYXTug==
   dependencies:
-    "@puppeteer/browsers" "2.10.5"
-    chromium-bidi "5.1.0"
+    "@puppeteer/browsers" "2.10.8"
+    chromium-bidi "8.0.0"
     debug "^4.4.1"
-    devtools-protocol "0.0.1464554"
+    devtools-protocol "0.0.1475386"
     typed-query-selector "^2.12.0"
     ws "^8.18.3"
 
@@ -6144,7 +6143,7 @@ saxes@^6.0.0:
   dependencies:
     xmlchars "^2.2.0"
 
-"semver@2 || 3 || 4 || 5", semver@7.5.3, semver@^5.3.0, semver@^6.3.1, semver@^7.0.0, semver@^7.3.4, semver@^7.3.6, semver@^7.5.2, semver@^7.5.3, semver@^7.6.0, semver@^7.6.3, semver@^7.7.2:
+"semver@2 || 3 || 4 || 5", semver@7.5.3, semver@^6.3.1, semver@^7.0.0, semver@^7.3.4, semver@^7.3.6, semver@^7.5.2, semver@^7.5.3, semver@^7.6.0, semver@^7.6.3, semver@^7.7.2:
   version "7.5.3"
   resolved "https://registry.yarnpkg.com/semver/-/semver-7.5.3.tgz#161ce8c2c6b4b3bdca6caadc9fa3317a4c4fe88e"
   integrity sha512-QBlUtyVk/5EeHbi7X0fw6liDZc7BBmEaSYn01fMU1OUYbf6GPsbTtd8WmnqbI20SeycoHSeiybkE/q1Q+qlThQ==
@@ -6597,10 +6596,10 @@ symbol-tree@^3.2.4:
   resolved "https://registry.yarnpkg.com/symbol-tree/-/symbol-tree-3.2.4.tgz#430637d248ba77e078883951fb9aa0eed7c63fa2"
   integrity sha512-9QNk5KwDF+Bvz+PyObkmSYjI5ksVUYtjW7AU22r2NKcfLJcXp96hkDWU3+XndOsUb+AQ9QhfzfCT2O+CNWT5Tw==
 
-tar-fs@^3.0.8:
-  version "3.0.9"
-  resolved "https://registry.yarnpkg.com/tar-fs/-/tar-fs-3.0.9.tgz#d570793c6370d7078926c41fa422891566a0b617"
-  integrity sha512-XF4w9Xp+ZQgifKakjZYmFdkLoSWd34VGKcsTCwlNWM7QG3ZbaxnTsaBwnjFZqHRf/rROxaR8rXnbtwdvaDI+lA==
+tar-fs@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/tar-fs/-/tar-fs-3.1.0.tgz#4675e2254d81410e609d91581a762608de999d25"
+  integrity sha512-5Mty5y/sOF1YWj1J6GiBodjlDc05CUR8PKXrsnFAiSG0xA+GHeWLovaZPYUDXkH/1iKRf2+M5+OrRgzC7O9b7w==
   dependencies:
     pump "^3.0.0"
     tar-stream "^3.1.5"
@@ -6686,22 +6685,22 @@ tinyspy@^3.0.2:
   resolved "https://registry.yarnpkg.com/tinyspy/-/tinyspy-3.0.2.tgz#86dd3cf3d737b15adcf17d7887c84a75201df20a"
   integrity sha512-n1cw8k1k0x4pgA2+9XrOkFydTerNcJ1zWCO5Nn9scWHTD+5tp8dghT2x1uduQePZTZgd3Tupf+x9BxJjeJi77Q==
 
-tldts-core@^6.1.43:
-  version "6.1.43"
-  resolved "https://registry.yarnpkg.com/tldts-core/-/tldts-core-6.1.43.tgz#ed90a48d746a59280108df1e3b612ffc170b21f6"
-  integrity sha512-iO1G3F2NqtmJUYlTfcH2liSdaqDnjpYn6iGftbLRNx8DF6IRIjbknVt+q0ijwZ2KGZX3J8zeYGFoiI+ZtHT5MQ==
-
 tldts-core@^6.1.47:
   version "6.1.47"
   resolved "https://registry.yarnpkg.com/tldts-core/-/tldts-core-6.1.47.tgz#bb6deb97abb6ef04243af60968d2d0055a65cbd7"
   integrity sha512-6SWyFMnlst1fEt7GQVAAu16EGgFK0cLouH/2Mk6Ftlwhv3Ol40L0dlpGMcnnNiiOMyD2EV/aF3S+U2nKvvLvrA==
 
-tldts-icann@^6.1.16:
-  version "6.1.43"
-  resolved "https://registry.yarnpkg.com/tldts-icann/-/tldts-icann-6.1.43.tgz#f854c6069ccf652b05f8dde6f900d33900adaa04"
-  integrity sha512-eAfHh8vSnCK4FjsNQA02qvdpOlj7SD4ojeivKSVnSqa3bvr3bMw3Ou4MZmiHYpPt8xjX4q2MfwJN55TfpaV/Pg==
+tldts-core@^7.0.12:
+  version "7.0.12"
+  resolved "https://registry.yarnpkg.com/tldts-core/-/tldts-core-7.0.12.tgz#b471e773dc23ff881a9d187ec145e36edde57c27"
+  integrity sha512-3K76aXywJFduGRsOYoY5JzINLs/WMlOkeDwPL+8OCPq2Rh39gkSDtWAxdJQlWjpun/xF/LHf29yqCi6VC/rHDA==
+
+tldts-icann@^7.0.12:
+  version "7.0.12"
+  resolved "https://registry.yarnpkg.com/tldts-icann/-/tldts-icann-7.0.12.tgz#fcad14a07c7eb00823d669ce180b4b737ef721b6"
+  integrity sha512-Lk1sJ3Soq97iG6gFj95YQWMWCNQD9b9LkZMooM6ojnTdmo8xpGBv6J+ycwTpY98Xz1RTqdzR/tCYpW7e/g+2xw==
   dependencies:
-    tldts-core "^6.1.43"
+    tldts-core "^7.0.12"
 
 tldts@^6.1.32:
   version "6.1.47"
