@@ -3,7 +3,7 @@ import { Utilisateur } from '@/domaines/authentification/ports/utilisateur.repos
 import { SpySauvegarderUtilisateurSessionRepository } from './sessionRepository.sauvegarderUtilisateur.spy';
 import { CreerComptePresenterImpl } from '@/domaines/compte/adapters/creerComptePresenterImpl';
 import { CompteUtilisateurRepositoryMock } from './adapters/compteUtilisateur.repository.mock';
-import { RefererRepositoryStore } from '@/domaines/compte/adapters/referer.repository.store';
+import { RefererRepositoryMock } from './adapters/referer.repository.mock';
 
 describe('Fichier de tests concernant la creation du compte utilisateur', () => {
   it('doit creer un compte temporaire et sauvegarder uniquement le mail en session', async () => {
@@ -15,19 +15,29 @@ describe('Fichier de tests concernant la creation du compte utilisateur', () => 
 
     const sessionRepository = SpySauvegarderUtilisateurSessionRepository.sansOnBoardingRealise();
     const compteUtilisateurRepository = new CompteUtilisateurRepositoryMock();
+    const refererRepository = new RefererRepositoryMock('monservice', 'keyword');
+    const spyReinitialisation = vi.spyOn(refererRepository, 'reinitialiserLeReferer');
+
     // WHEN
     const usecase = new CreerCompteUtilisateurUsecase(
       compteUtilisateurRepository,
       sessionRepository,
-      new RefererRepositoryStore(),
+      refererRepository,
     );
+
     await usecase.execute(
       new CreerComptePresenterImpl(viewModel => {
         expect(viewModel.route).toBe('validation-compte');
       }),
       compteACreer,
     );
+
     // THEN
+    expect(refererRepository.recupererLeReferer()).toEqual({
+      referer: 'monservice',
+      refererKeyword: 'keyword',
+    });
+
     expect(sessionRepository.utilisateur).toStrictEqual<Partial<Utilisateur>>({
       id: '',
       mail: 'john@skynet.com',
@@ -39,5 +49,7 @@ describe('Fichier de tests concernant la creation du compte utilisateur', () => 
       estUnUtilisateurFranceConnect: false,
       afficherMessageReset: false,
     });
+
+    expect(spyReinitialisation).toHaveBeenCalledOnce();
   });
 });

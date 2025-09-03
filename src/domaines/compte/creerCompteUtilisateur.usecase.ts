@@ -29,7 +29,9 @@ export class CreerCompteUtilisateurUsecase {
     this.sessionRepository.sauvegarderUtilisateur({
       mail: compteUtilisateurACreerInput.mail,
     });
-    creerComptePresenter.present();
+
     this.refererRepository.reinitialiserLeReferer();
+
+    creerComptePresenter.present();
   }
 }
