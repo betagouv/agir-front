@@ -23,7 +23,7 @@
             </h2>
             <p class="fr-mb-2w">
               Agissez selon vos <span class="text--bold">envies</span>, vos <span class="text--bold">moyens</span> et
-              <span class="text--bold">mode de vie</span> !
+              <span class="text--bold">votre mode de vie</span> !
             </p>
             <form
               class="flex align-items--end flex-column flex-space-between full-height"
