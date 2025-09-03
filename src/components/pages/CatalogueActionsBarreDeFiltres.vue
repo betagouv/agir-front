@@ -1,10 +1,10 @@
 <template>
   <div
+    ref="menuBar"
     aria-label="Filtrage des actions"
     class="full-width background--white fr-grid-row border-top--bleu"
     role="menubar"
     @keydown="gererEntreesClavier"
-    ref="menuBar"
   >
     <div :class="filtresColonnes" class="fr-p-2w" data-nouvelle-colonne="true">
       <CatalogueFiltreThematiques
@@ -14,28 +14,25 @@
       />
     </div>
 
-    <div :class="filtresColonnes" class="fr-p-2w" v-if="estConnecte" data-nouvelle-colonne="true">
-      <CatalogueFiltreStatut
-        @rechercher-par-deja-vu="rechercherParDejaVu"
-        @rechercher-par-deja-realisees="rechercherParDejaRealisees"
-      />
+    <div v-if="estConnecte" :class="filtresColonnes" class="fr-p-2w" data-nouvelle-colonne="true">
+      <CatalogueFiltreStatut @update-status="updateStatus" />
     </div>
 
     <div :class="filtresColonnes" class="fr-p-2w" data-nouvelle-colonne="true">
       <div class="flex align-items--center flex-center full-height" role="menuitem" tabindex="-1">
         <InputSearchBar
           id="rechercheParTitre"
+          class="full-width"
           name="titreRessource"
           placeholder="Rechercher"
           @submit="rechercherParTitre"
-          class="full-width"
         />
       </div>
     </div>
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
   import { ref } from 'vue';
   import CatalogueFiltreStatut from '@/components/custom/Action/Catalogue/CatalogueFiltreStatut.vue';
   import CatalogueFiltreThematiques from '@/components/custom/Action/Catalogue/CatalogueFiltreThematiques.vue';
@@ -74,13 +71,9 @@
     await filtrerLaRecherche();
   };
 
-  const rechercherParDejaVu = async checked => {
-    filtreDejaVu.value = checked;
-    await filtrerLaRecherche();
-  };
-
-  const rechercherParDejaRealisees = async checked => {
-    filtreDejaRealisees.value = checked;
+  const updateStatus = async ({ dejaVu, dejaRealisees }) => {
+    filtreDejaVu.value = dejaVu;
+    filtreDejaRealisees.value = dejaRealisees;
     await filtrerLaRecherche();
   };
 
