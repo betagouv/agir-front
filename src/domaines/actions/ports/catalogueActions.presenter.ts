@@ -6,5 +6,5 @@ export interface FiltresCatalogueActionsViewModel {
 }
 
 export interface CatalogueActionsPresenter {
-  presenteCatalogue(catalogueActions: CatalogueActions, actionQueryParams?: Record<string, string>): Promise<void>;
+  presenteCatalogue(catalogueActions: CatalogueActions): Promise<void>;
 }

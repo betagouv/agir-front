@@ -3,6 +3,7 @@ import { Utilisateur } from '@/domaines/authentification/ports/utilisateur.repos
 import { SpySauvegarderUtilisateurSessionRepository } from './sessionRepository.sauvegarderUtilisateur.spy';
 import { CreerComptePresenterImpl } from '@/domaines/compte/adapters/creerComptePresenterImpl';
 import { CompteUtilisateurRepositoryMock } from './adapters/compteUtilisateur.repository.mock';
+import { RefererRepositoryStore } from '@/domaines/compte/adapters/referer.repository.store';
 
 describe('Fichier de tests concernant la creation du compte utilisateur', () => {
   it('doit creer un compte temporaire et sauvegarder uniquement le mail en session', async () => {
@@ -15,7 +16,11 @@ describe('Fichier de tests concernant la creation du compte utilisateur', () => 
     const sessionRepository = SpySauvegarderUtilisateurSessionRepository.sansOnBoardingRealise();
     const compteUtilisateurRepository = new CompteUtilisateurRepositoryMock();
     // WHEN
-    const usecase = new CreerCompteUtilisateurUsecase(compteUtilisateurRepository, sessionRepository);
+    const usecase = new CreerCompteUtilisateurUsecase(
+      compteUtilisateurRepository,
+      sessionRepository,
+      new RefererRepositoryStore(),
+    );
     await usecase.execute(
       new CreerComptePresenterImpl(viewModel => {
         expect(viewModel.route).toBe('validation-compte');

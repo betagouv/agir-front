@@ -15,12 +15,13 @@
 </template>
 
 <script setup lang="ts">
-  import { computed, ref } from 'vue';
+  import { ref } from 'vue';
   import { useRouter } from 'vue-router';
   import InputMail from '@/components/dsfr/InputMail.vue';
   import { SessionRepositoryStore } from '@/domaines/authentification/adapters/session.repository.store';
   import { CompteUtilisateurRepositoryImpl } from '@/domaines/compte/adapters/compteUtilisateur.repository.impl';
   import { CreerComptePresenterImpl } from '@/domaines/compte/adapters/creerComptePresenterImpl';
+  import { RefererRepositoryStore } from '@/domaines/compte/adapters/referer.repository.store';
   import { CreerCompteUtilisateurUsecase } from '@/domaines/compte/creerCompteUtilisateur.usecase';
 
   defineProps<{
@@ -36,8 +37,6 @@
   }>();
 
   const router = useRouter();
-  const refererQueryParams = computed(() => router?.currentRoute.value.query.referer as string);
-  const refererKeywordQueryParams = computed(() => router?.currentRoute.value.query.referer_keyword as string);
   const mail = ref<string>('');
   const messageErreurEmail = ref<string>();
 
@@ -47,6 +46,7 @@
     const creeCompteUseCase = new CreerCompteUtilisateurUsecase(
       new CompteUtilisateurRepositoryImpl(),
       new SessionRepositoryStore(),
+      new RefererRepositoryStore(),
     );
     await creeCompteUseCase
       .execute(
@@ -56,8 +56,6 @@
         {
           mail: mail.value,
           situationId: null,
-          referer: refererQueryParams.value,
-          refererKeyword: refererKeywordQueryParams.value,
         },
       )
       .catch(error => {

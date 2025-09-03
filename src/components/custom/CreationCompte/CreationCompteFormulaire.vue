@@ -43,7 +43,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { computed, ref } from 'vue';
+  import { ref } from 'vue';
   import { useRouter } from 'vue-router';
   import Alert from '@/components/custom/Alert.vue';
   import FranceConnect from '@/components/dsfr/FranceConnect.vue';
@@ -51,6 +51,7 @@
   import { SessionRepositoryStore } from '@/domaines/authentification/adapters/session.repository.store';
   import { CompteUtilisateurRepositoryImpl } from '@/domaines/compte/adapters/compteUtilisateur.repository.impl';
   import { CreerComptePresenterImpl } from '@/domaines/compte/adapters/creerComptePresenterImpl';
+  import { RefererRepositoryStore } from '@/domaines/compte/adapters/referer.repository.store';
   import { CreerCompteUtilisateurUsecase, UserInput } from '@/domaines/compte/creerCompteUtilisateur.usecase';
   import { RouteCommuneName } from '@/router';
   import { RouteConformiteName } from '@/router/conformite/routes';
@@ -65,8 +66,6 @@
   utilisateurStore().reset();
 
   const router = useRouter();
-  const refererQueryParams = computed(() => router?.currentRoute.value.query.referer as string);
-  const refererKeywordQueryParams = computed(() => router?.currentRoute.value.query.referer_keyword as string);
 
   const performCreerCompteUtilisateur = async () => {
     creationDeCompteEnErreur.value = false;
@@ -75,6 +74,7 @@
     const creeCompteUseCase = new CreerCompteUtilisateurUsecase(
       new CompteUtilisateurRepositoryImpl(),
       new SessionRepositoryStore(),
+      new RefererRepositoryStore(),
     );
     await creeCompteUseCase
       .execute(
@@ -84,8 +84,6 @@
         {
           ...compteUtilisateurInput.value,
           situationId: null,
-          referer: refererQueryParams.value,
-          refererKeyword: refererKeywordQueryParams.value,
         },
       )
       .catch(reason => {

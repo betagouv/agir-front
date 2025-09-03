@@ -4,13 +4,9 @@ import { CatalogueActionsPresenter } from '@/domaines/actions/ports/catalogueAct
 export class RecupererSelectionActionsUsecase {
   constructor(private readonly actionsRepository: ActionsRepository) {}
 
-  async execute(
-    selection: string,
-    catalogueActionsPresenter: CatalogueActionsPresenter,
-    actionQueryParams?: Record<string, string>,
-  ): Promise<void> {
+  async execute(selection: string, catalogueActionsPresenter: CatalogueActionsPresenter): Promise<void> {
     const actionsSemaineMobilite = await this.actionsRepository.chargerSelectionActions(selection);
 
-    await catalogueActionsPresenter.presenteCatalogue(actionsSemaineMobilite, actionQueryParams);
+    await catalogueActionsPresenter.presenteCatalogue(actionsSemaineMobilite);
   }
 }

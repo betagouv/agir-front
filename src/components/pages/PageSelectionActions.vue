@@ -57,18 +57,14 @@
   import { RecupererSelectionActionsUsecase } from '@/domaines/actions/recupererCatalogueActionsSelection.usecase';
   import { RecupererCatalogueActionsWinterUsecase } from '@/domaines/actions/recupererCatalogueActionsWinter.usecase';
   import { RecupererTitreCataloguePartenaireUsecase } from '@/domaines/actions/recupererTitreCataloguePartenaireUsecase';
+  import { RefererRepositoryStore } from '@/domaines/compte/adapters/referer.repository.store';
+  import { EnregistrerRefererUsecase } from '@/domaines/compte/enregistrerReferer.usecase';
   import useHeadProperties from '@/shell/useHeadProperties';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const titre = ref<TitreCatalogue>();
   const router = useRouter();
   const estConnecte = computed(() => utilisateurStore().estConnecte);
-  const selectionQueryParams = computed(() => {
-    const params: Record<string, string> = {};
-    params.referer = router?.currentRoute.value.query.referer as string;
-    params.referer_keyword = router?.currentRoute.value.query.referer_keyword as string;
-    return params;
-  });
 
   useHead({
     ...useHeadProperties,
@@ -99,7 +95,14 @@
       await usecase.execute('', catalogueActionsPresenter);
     } else {
       const usecase = new RecupererSelectionActionsUsecase(new ActionsRepositoryAxios());
-      await usecase.execute(selection, catalogueActionsPresenter, selectionQueryParams.value);
+      await usecase.execute(selection, catalogueActionsPresenter);
+    }
+
+    if (!estConnecte.value) {
+      const referer = router.currentRoute.value.query.referer as string;
+      const refererKeyword = router.currentRoute.value.query.referer_keyword as string;
+      const enregistrerRefererUsecase = new EnregistrerRefererUsecase(new RefererRepositoryStore());
+      enregistrerRefererUsecase.execute(referer, refererKeyword);
     }
   });
 </script>

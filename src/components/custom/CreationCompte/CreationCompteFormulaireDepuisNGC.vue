@@ -67,6 +67,7 @@
   import { SessionRepositoryStore } from '@/domaines/authentification/adapters/session.repository.store';
   import { CompteUtilisateurRepositoryImpl } from '@/domaines/compte/adapters/compteUtilisateur.repository.impl';
   import { CreerComptePresenterImpl } from '@/domaines/compte/adapters/creerComptePresenterImpl';
+  import { RefererRepositoryStore } from '@/domaines/compte/adapters/referer.repository.store';
   import { CreerCompteUtilisateurUsecase, UserInput } from '@/domaines/compte/creerCompteUtilisateur.usecase';
   import router from '@/router';
   import { RouteConformiteName } from '@/router/conformite/routes';
@@ -87,6 +88,7 @@
     const creeCompteUseCase = new CreerCompteUtilisateurUsecase(
       new CompteUtilisateurRepositoryImpl(),
       new SessionRepositoryStore(),
+      new RefererRepositoryStore(),
     );
     await creeCompteUseCase
       .execute(
