@@ -6,8 +6,6 @@ import { RefererRepository } from '@/domaines/compte/ports/referer.repository';
 export interface UserInput {
   mail: string;
   situationId: string | null;
-  referer?: string;
-  refererKeyword?: string;
 }
 
 export class CreerCompteUtilisateurUsecase {
