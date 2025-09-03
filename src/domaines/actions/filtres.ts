@@ -1,33 +1,38 @@
+export interface FiltreStatut {
+  dejaVu: boolean;
+  dejaRealisees: boolean;
+  recommandePourMoi: boolean;
+}
+
+export class FiltreStatutBuilder {
+  static defaut(): FiltreStatut {
+    return {
+      dejaVu: false,
+      dejaRealisees: false,
+      recommandePourMoi: false,
+    };
+  }
+}
+
 export class Filtres {
   constructor(
     public readonly idUtilisateur: string,
     private readonly filtresThematiques: string[],
     private readonly titre: string,
-    private readonly filtreDejaVu: boolean,
-    private readonly filtreDejaRealisees: boolean,
-    private readonly filtreRecommandePourMoi: boolean,
+    private readonly statut: FiltreStatut,
   ) {}
 
   static pourUtilisateurConnecte(
     idUtilisateur: string,
     filtresThematiques: string[],
     titre: string,
-    filtreDejaVu: boolean,
-    filtreDejaRealisees: boolean,
-    filtreRecommandePourMoi: boolean,
+    statut: FiltreStatut,
   ): Filtres {
-    return new Filtres(
-      idUtilisateur,
-      filtresThematiques,
-      titre,
-      filtreDejaVu,
-      filtreDejaRealisees,
-      filtreRecommandePourMoi,
-    );
+    return new Filtres(idUtilisateur, filtresThematiques, titre, statut);
   }
 
   static pourUtilisateurNonConnecte(filtresThematiques: string[], titre: string): Filtres {
-    return new Filtres('', filtresThematiques, titre, false, false, false);
+    return new Filtres('', filtresThematiques, titre, FiltreStatutBuilder.defaut());
   }
 
   public estPourUtilisateurConnecte(): boolean {
@@ -45,15 +50,15 @@ export class Filtres {
       params.titre = this.titre;
     }
 
-    if (this.filtreDejaVu) {
+    if (this.statut.dejaVu) {
       params.consultation = 'vu';
     }
 
-    if (this.filtreDejaRealisees) {
+    if (this.statut.dejaRealisees) {
       params.realisation = 'faite';
     }
 
-    if (this.filtreRecommandePourMoi) {
+    if (this.statut.recommandePourMoi) {
       params.recommandation = 'recommandee';
     }
 

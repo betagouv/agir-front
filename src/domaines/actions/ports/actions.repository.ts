@@ -1,5 +1,5 @@
 import { ExplicationsRecommandation } from '@/domaines/actions/explicationsRecommandation';
-import { Filtres } from '@/domaines/actions/Filtres';
+import { Filtres } from '@/domaines/actions/filtres';
 import { Quiz } from '@/domaines/quiz/ports/quiz.repository';
 import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 

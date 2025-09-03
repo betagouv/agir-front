@@ -6,7 +6,7 @@ import { ActionViewModel } from '@/domaines/actions/ports/actions.presenter';
 import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 import { FiltrerCatalogueActionsUsecase } from '@/domaines/actions/filtrerCatalogueActions.usecase';
 import { ExplicationsRecommandation } from '@/domaines/actions/explicationsRecommandation';
-import { Filtres } from '@/domaines/actions/Filtres';
+import { Filtres, FiltreStatut, FiltreStatutBuilder } from '@/domaines/actions/filtres';
 
 describe("Fichier de tests concernant la récupération du catalogue d'actions", () => {
   it('Doit filtrer correctement le catalogue actions et les actions quand un utilisateur est connecté', async () => {
@@ -48,14 +48,18 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
     const actionsRepository = ActionsRepositoryMock.avecCatalogue(catalogue);
     const usecase = new FiltrerCatalogueActionsUsecase(actionsRepository);
 
+    const statut: FiltreStatut = {
+      dejaVu: true,
+      dejaRealisees: false,
+      recommandePourMoi: false,
+    };
+
     // WHEN
     await usecase.execute(
       'id-utilisateur',
       [ClefThematiqueAPI.alimentation],
       '2',
-      true,
-      false,
-      false,
+      statut,
       new CatalogueActionsPresenterImpl(expectedFiltres, expectedActions),
     );
 
@@ -124,9 +128,7 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
       '',
       [],
       '',
-      false,
-      false,
-      false,
+      FiltreStatutBuilder.defaut(),
       new CatalogueActionsPresenterImpl(
         () => {},
         () => {},
@@ -146,21 +148,23 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
     const spy = vi.spyOn(actionsRepository, 'filtrerCatalogueActions');
     const usecase = new FiltrerCatalogueActionsUsecase(actionsRepository);
 
+    const statut: FiltreStatut = {
+      dejaVu: false,
+      dejaRealisees: false,
+      recommandePourMoi: false,
+    };
+
     await usecase.execute(
       'user1',
       ['transport'],
       'titre',
-      false,
-      false,
-      false,
+      statut,
       new CatalogueActionsPresenterImpl(
         () => {},
         () => {},
       ),
     );
 
-    expect(spy).toHaveBeenCalledWith(
-      Filtres.pourUtilisateurConnecte('user1', ['transport'], 'titre', false, false, false),
-    );
+    expect(spy).toHaveBeenCalledWith(Filtres.pourUtilisateurConnecte('user1', ['transport'], 'titre', statut));
   });
 });

@@ -1,6 +1,6 @@
 import { AxiosFactory, intercept40X } from '@/axios.factory';
 import { ExplicationsRecommandation } from '@/domaines/actions/explicationsRecommandation';
-import { Filtres } from '@/domaines/actions/Filtres';
+import { Filtres } from '@/domaines/actions/filtres';
 import {
   Action,
   ActionDetail,

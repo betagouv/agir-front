@@ -15,7 +15,7 @@
     </div>
 
     <div v-if="estConnecte" :class="filtresColonnes" class="fr-p-2w" data-nouvelle-colonne="true">
-      <CatalogueFiltreStatut @update-status="updateStatus" />
+      <CatalogueFiltreStatut :initial-statut="currentStatut" @update-status="updateStatus" />
     </div>
 
     <div :class="filtresColonnes" class="fr-p-2w" data-nouvelle-colonne="true">
@@ -39,6 +39,7 @@
   import InputSearchBar from '@/components/dsfr/InputSearchBar.vue';
   import { ActionsRepositoryAxios } from '@/domaines/actions/adapters/actions.repository.axios';
   import { FiltrerCatalogueActionsUsecase } from '@/domaines/actions/filtrerCatalogueActions.usecase';
+  import { FiltreStatut } from '@/domaines/actions/filtres';
   import {
     CatalogueActionsPresenter,
     FiltresCatalogueActionsViewModel,
@@ -58,9 +59,11 @@
   const menuBar = ref<HTMLDivElement>();
   const rechercheTitre = ref<string>('');
   const filtresThematiques = ref<string[]>([]);
-  const filtreDejaVu = ref<boolean>(false);
-  const filtreDejaRealisees = ref<boolean>(false);
-  const filtreRecommandePourMoi = ref<boolean>(false);
+  const currentStatut = ref<FiltreStatut>({
+    dejaVu: false,
+    dejaRealisees: false,
+    recommandePourMoi: false,
+  });
 
   const updateThematiques = async thematiques => {
     filtresThematiques.value = thematiques;
@@ -72,10 +75,8 @@
     await filtrerLaRecherche();
   };
 
-  const updateStatus = async ({ dejaVu, dejaRealisees, recommandePourMoi }) => {
-    filtreDejaVu.value = dejaVu;
-    filtreDejaRealisees.value = dejaRealisees;
-    filtreRecommandePourMoi.value = recommandePourMoi;
+  const updateStatus = async (statut: FiltreStatut) => {
+    currentStatut.value = statut;
     await filtrerLaRecherche();
   };
 
@@ -86,9 +87,7 @@
       idUtilisateur,
       filtresThematiques.value,
       rechercheTitre.value,
-      filtreDejaVu.value,
-      filtreDejaRealisees.value,
-      filtreRecommandePourMoi.value,
+      currentStatut.value,
       catalogueActionsPresenter,
     );
     isLoading.value = false;

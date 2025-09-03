@@ -15,17 +15,17 @@
           {
             id: 'dejaVu',
             label: 'Consultées',
-            checked: dejaVu,
+            checked: statut.dejaVu,
           },
           {
             id: 'dejaRealisees',
             label: 'Réalisées',
-            checked: dejaRealisees,
+            checked: statut.dejaRealisees,
           },
           {
             id: 'recommandePourMoi',
             label: 'Recommandée pour moi',
-            checked: recommandePourMoi,
+            checked: statut.recommandePourMoi,
           },
         ]"
         @update="onStatusSelected"
@@ -39,38 +39,44 @@
 </template>
 
 <script lang="ts" setup>
-  import { computed, ref } from 'vue';
+  import { computed, ref, watch } from 'vue';
   import CatalogueDropDownMenu from '@/components/custom/Action/Catalogue/CatalogueDropDownMenu.vue';
   import InputCheckbox from '@/components/dsfr/InputCheckbox.vue';
+  import { FiltreStatut, FiltreStatutBuilder } from '@/domaines/actions/filtres';
 
-  const emit = defineEmits<{
-    (event: 'updateStatus', value: { dejaVu: boolean; dejaRealisees: boolean; recommandePourMoi: boolean }): void;
+  const props = defineProps<{
+    initialStatut?: FiltreStatut;
   }>();
 
-  const dejaVu = ref(false);
-  const dejaRealisees = ref(false);
-  const recommandePourMoi = ref(false);
+  const emit = defineEmits<{
+    (event: 'updateStatus', value: FiltreStatut): void;
+  }>();
+
+  const statut = ref<FiltreStatut>(props.initialStatut || FiltreStatutBuilder.defaut());
+
+  watch(
+    () => props.initialStatut,
+    newStatut => {
+      if (newStatut) {
+        statut.value = newStatut;
+      }
+    },
+  );
 
   const onStatusSelected = (status: string[]) => {
-    const newDejaVu = status.includes('dejaVu');
-    const newDejaRealisees = status.includes('dejaRealisees');
-    const newRecommandePourMoi = status.includes('recommandePourMoi');
-
-    dejaVu.value = newDejaVu;
-    dejaRealisees.value = newDejaRealisees;
-    recommandePourMoi.value = newRecommandePourMoi;
-    emit('updateStatus', {
-      dejaVu: newDejaVu,
-      dejaRealisees: newDejaRealisees,
-      recommandePourMoi: newRecommandePourMoi,
-    });
+    statut.value = {
+      dejaVu: status.includes('dejaVu'),
+      dejaRealisees: status.includes('dejaRealisees'),
+      recommandePourMoi: status.includes('recommandePourMoi'),
+    };
+    emit('updateStatus', statut.value);
   };
 
   const filtreResume = computed(() => {
     const filtresStatut = [
-      { checked: dejaVu.value, label: 'Consultées' },
-      { checked: dejaRealisees.value, label: 'Réalisées' },
-      { checked: recommandePourMoi.value, label: 'Recommandée pour moi' },
+      { checked: statut.value.dejaVu, label: 'Consultées' },
+      { checked: statut.value.dejaRealisees, label: 'Réalisées' },
+      { checked: statut.value.recommandePourMoi, label: 'Recommandée pour moi' },
     ];
 
     const filtresSelectionnes = filtresStatut.filter(filtre => filtre.checked).map(filtre => filtre.label);

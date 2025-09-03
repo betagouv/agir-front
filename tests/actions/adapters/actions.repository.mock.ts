@@ -1,4 +1,4 @@
-import { Filtres } from '@/domaines/actions/Filtres';
+import { Filtres } from '@/domaines/actions/filtres';
 import {
   Action,
   ActionDetail,
