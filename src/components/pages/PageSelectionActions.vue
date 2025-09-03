@@ -102,7 +102,7 @@
       const referer = router.currentRoute.value.query.referer as string;
       const refererKeyword = router.currentRoute.value.query.referer_keyword as string;
       const enregistrerRefererUsecase = new EnregistrerRefererUsecase(new RefererRepositoryStore());
-      enregistrerRefererUsecase.execute(referer, refererKeyword);
+      if (referer) enregistrerRefererUsecase.execute(referer, refererKeyword);
     }
   });
 </script>
