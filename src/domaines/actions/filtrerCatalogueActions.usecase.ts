@@ -1,3 +1,4 @@
+import { Filtres } from '@/domaines/actions/Filtres';
 import { ActionsRepository } from '@/domaines/actions/ports/actions.repository';
 import { CatalogueActionsPresenter } from '@/domaines/actions/ports/catalogueActions.presenter';
 
@@ -13,16 +14,18 @@ export class FiltrerCatalogueActionsUsecase {
     filtreRecommandePourMoi: boolean,
     catalogueActionsPresenter: CatalogueActionsPresenter,
   ): Promise<void> {
-    const catalogue = !idUtilisateur
-      ? await this.actionsRepository.filtrerCatalogueActions(filtresThematiques, titre)
-      : await this.actionsRepository.filtrerCatalogueActionsUtilisateur(
+    const filtres = idUtilisateur
+      ? Filtres.pourUtilisateurConnecte(
           idUtilisateur,
           filtresThematiques,
           titre,
           filtreDejaVu,
           filtreDejaRealisees,
           filtreRecommandePourMoi,
-        );
+        )
+      : Filtres.pourUtilisateurNonConnecte(filtresThematiques, titre);
+
+    const catalogue = await this.actionsRepository.filtrerCatalogueActions(filtres);
     await catalogueActionsPresenter.presenteCatalogue(catalogue);
   }
 }

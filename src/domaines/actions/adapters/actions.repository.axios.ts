@@ -1,5 +1,6 @@
 import { AxiosFactory, intercept40X } from '@/axios.factory';
 import { ExplicationsRecommandation } from '@/domaines/actions/explicationsRecommandation';
+import { Filtres } from '@/domaines/actions/Filtres';
 import {
   Action,
   ActionDetail,
@@ -236,42 +237,12 @@ export class ActionsRepositoryAxios implements ActionsRepository {
     return response.data.actions.map(this.mapActionApiModelToAction);
   }
 
-  async filtrerCatalogueActions(filtresThematiques: string[], titre: string): Promise<CatalogueActions> {
+  async filtrerCatalogueActions(filtres: Filtres): Promise<CatalogueActions> {
     const axios = AxiosFactory.getAxios();
 
-    const params = this.buildFiltres(filtresThematiques, titre);
-    const response = await axios.get<CatalogueActionsApiModel>(`/actions${params}`);
-
-    return {
-      actions: response.data.actions.map(this.mapActionApiModelToAction),
-      filtres: response.data.filtres.map(filtre => ({
-        code: filtre.code as ClefThematiqueAPI,
-        label: filtre.label,
-        selected: filtre.selected,
-      })),
-      consultation: response.data.consultation,
-    };
-  }
-
-  @intercept40X()
-  async filtrerCatalogueActionsUtilisateur(
-    idUtilisateur: string,
-    filtresThematiques: string[],
-    titre: string,
-    filtreDejaVu: boolean,
-    filtreDejaRealisees: boolean,
-    filtreRecommandePourMoi: boolean,
-  ): Promise<CatalogueActions> {
-    const axios = AxiosFactory.getAxios();
-
-    const params = this.buildFiltres(
-      filtresThematiques,
-      titre,
-      filtreDejaVu,
-      filtreDejaRealisees,
-      filtreRecommandePourMoi,
-    );
-    const response = await axios.get<CatalogueActionsApiModel>(`/utilisateurs/${idUtilisateur}/actions${params}`);
+    const params = filtres.buildQueryParams();
+    const url = filtres.estPourUtilisateurConnecte() ? `/utilisateurs/${filtres.idUtilisateur}/actions` : '/actions';
+    const response = await axios.get<CatalogueActionsApiModel>(url, { params });
 
     return {
       actions: response.data.actions.map(this.mapActionApiModelToAction),
@@ -400,23 +371,5 @@ export class ActionsRepositoryAxios implements ActionsRepository {
         })),
       ),
     };
-  }
-
-  private buildFiltres(
-    filtreThematiques: string[],
-    titre: string,
-    filtreDejaVue?: boolean,
-    filtreDejaRealisees?: boolean,
-    filtreRecommandePourMoi?: boolean,
-  ): string {
-    const params: string[] = [];
-
-    if (filtreThematiques.length > 0)
-      params.push(filtreThematiques.map(thematique => `thematique=${thematique}`).join('&'));
-    if (titre) params.push(`titre=${titre}`);
-    if (filtreDejaVue) params.push(`consultation=${filtreDejaVue ? 'vu' : 'tout'}`);
-    if (filtreDejaRealisees) params.push(`realisation=${filtreDejaRealisees ? 'faite' : 'tout'}`);
-    if (filtreRecommandePourMoi) params.push('recommandation=recommandee');
-    return params.length > 0 ? `?${params.join('&')}` : '';
   }
 }

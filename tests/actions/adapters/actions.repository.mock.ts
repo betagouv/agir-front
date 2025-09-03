@@ -1,3 +1,4 @@
+import { Filtres } from '@/domaines/actions/Filtres';
 import {
   Action,
   ActionDetail,
@@ -47,25 +48,7 @@ export class ActionsRepositoryMock implements ActionsRepository {
     return Promise.resolve(this.catalogueActions!);
   }
 
-  filtrerCatalogueActions(
-    idUtilisateurOuFiltres: string | string[],
-    filtresThematiquesOuTitre: string[] | string,
-    rechercheTitre?: string,
-    filtreDejaVu?: boolean,
-    filtreDejaRealisees?: boolean,
-    filtreRecommandePourMoi?: boolean,
-  ): Promise<CatalogueActions> {
-    return Promise.resolve(this.catalogueActions!);
-  }
-
-  filtrerCatalogueActionsUtilisateur(
-    idUtilisateur: string,
-    filtresThematiques: string[],
-    titre: string,
-    filtreDejaVu: boolean,
-    filtreDejaRealisees: boolean,
-    filtreRecommandePourMoi: boolean,
-  ): Promise<CatalogueActions> {
+  filtrerCatalogueActions(filtres: Filtres): Promise<CatalogueActions> {
     return Promise.resolve(this.catalogueActions!);
   }
 
