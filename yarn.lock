@@ -542,20 +542,20 @@
   resolved "https://registry.yarnpkg.com/@iarna/toml/-/toml-3.0.0.tgz#ccde5292fe9d348bbe93fe90d579fc442b72b0b3"
   integrity sha512-td6ZUkz2oS3VeleBcN+m//Q6HlCFCPrnI0FZhrt/h4XqLEdOyYp2u21nd8MdsR+WJy5r9PTDaHTDDfhf4H4l6Q==
 
-"@iframe-resizer/core@5.5.3":
-  version "5.5.3"
-  resolved "https://registry.yarnpkg.com/@iframe-resizer/core/-/core-5.5.3.tgz#9bb70f5bae2fbfd485b2f3502fc900af3c4f3684"
-  integrity sha512-r6p/N19TL2X0fQLRBakXthudNh1hF/5PjzFfTzb/ZOlC+jdBh8Po9zHfoOXM3VJu/FHx+cDRa20EfWUnJ3aaLA==
+"@iframe-resizer/core@5.5.5":
+  version "5.5.5"
+  resolved "https://registry.yarnpkg.com/@iframe-resizer/core/-/core-5.5.5.tgz#f79cf5c630561e5e12c3814bbfd9f2e1b4939449"
+  integrity sha512-rJpVl5DMPumuNmQVl9O8CoiqdAhaF0eszrQc36vm5f8gDcm0nmBi/XyDFd8UmN3rGOlFUOSJLUHTTp8uZtQdMA==
   dependencies:
-    auto-console-group "1.2.10"
+    auto-console-group "1.2.11"
 
-"@iframe-resizer/vue@^5.5.3":
-  version "5.5.3"
-  resolved "https://registry.yarnpkg.com/@iframe-resizer/vue/-/vue-5.5.3.tgz#72eaf24a6f89b205515ef2931b380b16a337a4ed"
-  integrity sha512-NNqA5X1ulJW211S7k9pyAdCdip/V5J7VedbBy2aPFkj8zUh3yZbzua+7ycbgK7MJ+KlzG3NPzxjzY+ALsXQtrw==
+"@iframe-resizer/vue@^5.5.5":
+  version "5.5.5"
+  resolved "https://registry.yarnpkg.com/@iframe-resizer/vue/-/vue-5.5.5.tgz#d6cb7ed7695e2e37a3e9ab580dbe4e1d8d00ebdd"
+  integrity sha512-UkM4nmsHjt6JUTZZ6QGP6AXmFM2DUFOsTpIEm35yOtX9zLD3gQC59R77xRyboXz+66XqvqaUW2u0yPLcskLwoA==
   dependencies:
-    "@iframe-resizer/core" "5.5.3"
-    auto-console-group "1.2.10"
+    "@iframe-resizer/core" "5.5.5"
+    auto-console-group "1.2.11"
 
 "@img/sharp-darwin-arm64@0.34.3":
   version "0.34.3"
@@ -2294,10 +2294,10 @@ atomically@^2.0.3:
     stubborn-fs "^1.2.5"
     when-exit "^2.1.1"
 
-auto-console-group@1.2.10:
-  version "1.2.10"
-  resolved "https://registry.yarnpkg.com/auto-console-group/-/auto-console-group-1.2.10.tgz#7bb266f6a2aa9a8ec4404b6a02a483aaf9ef628e"
-  integrity sha512-u4X/G6Fkd6bfUjFMh+40lmEN439UEUJDMLdeUxp6jD6XaklbZA/m8UQAxZ2X9YR81o31mOVPZ2Dri/i5mljdbw==
+auto-console-group@1.2.11:
+  version "1.2.11"
+  resolved "https://registry.yarnpkg.com/auto-console-group/-/auto-console-group-1.2.11.tgz#a2e7a97db3ad5a5d60ac3cb49dd934127f0860f2"
+  integrity sha512-/RFCswabfQZR4CDYser0V+AC+6+Q1ro2+RrP0AinOXDYnWsm3w14uc2MVdEaaSCDfpiTtETfahE9N7z9Yb1JiA==
 
 available-typed-arrays@^1.0.6, available-typed-arrays@^1.0.7:
   version "1.0.7"
