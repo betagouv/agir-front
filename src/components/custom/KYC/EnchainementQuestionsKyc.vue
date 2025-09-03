@@ -25,7 +25,7 @@
           : 'Question suivante'
       "
     >
-      <template v-slot:complement v-if="afficherStepper">
+      <template v-slot:complement v-if="afficherStepper && questionViewModel.nombreTotalDeQuestions <= 25">
         <div class="fr-stepper fr-mt-2w fr-mb-3w" v-if="questionViewModel.nombreTotalDeQuestions > 1">
           <div
             class="fr-stepper__steps fr-stepper__steps-large"
