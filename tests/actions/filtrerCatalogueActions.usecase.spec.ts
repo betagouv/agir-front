@@ -52,6 +52,7 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
       '2',
       true,
       false,
+      false,
       new CatalogueActionsPresenterImpl(expectedFiltres, expectedActions),
     );
 
@@ -118,8 +119,9 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
     const usecase = new FiltrerCatalogueActionsUsecase(actionsRepository);
     await usecase.execute(
       '',
-      ['transport'],
-      'titre',
+      [],
+      '',
+      false,
       false,
       false,
       new CatalogueActionsPresenterImpl(
@@ -128,6 +130,32 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
       ),
     );
 
-    expect(spy).toHaveBeenCalled();
+    expect(spy).toHaveBeenCalledWith([], '');
+  });
+  it('Devrait appeler le repository et les bons filtres pour un utilisateur', async () => {
+    const catalogue: CatalogueActions = {
+      actions: [],
+      filtres: [],
+      consultation: 'tout',
+    };
+
+    const actionsRepository = ActionsRepositoryMock.avecCatalogue(catalogue);
+    const spy = vi.spyOn(actionsRepository, 'filtrerCatalogueActionsUtilisateur');
+
+    const usecase = new FiltrerCatalogueActionsUsecase(actionsRepository);
+    await usecase.execute(
+      'idUtilisateur',
+      [],
+      '',
+      false,
+      false,
+      false,
+      new CatalogueActionsPresenterImpl(
+        () => {},
+        () => {},
+      ),
+    );
+
+    expect(spy).toHaveBeenCalledWith('idUtilisateur', [], '', false, false, false);
   });
 });

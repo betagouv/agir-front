@@ -47,7 +47,14 @@ export class ActionsRepositoryMock implements ActionsRepository {
     return Promise.resolve(this.catalogueActions!);
   }
 
-  filtrerCatalogueActions(filtresThematiques: string[], titre: string): Promise<CatalogueActions> {
+  filtrerCatalogueActions(
+    idUtilisateurOuFiltres: string | string[],
+    filtresThematiquesOuTitre: string[] | string,
+    rechercheTitre?: string,
+    filtreDejaVu?: boolean,
+    filtreDejaRealisees?: boolean,
+    filtreRecommandePourMoi?: boolean,
+  ): Promise<CatalogueActions> {
     return Promise.resolve(this.catalogueActions!);
   }
 
@@ -57,6 +64,7 @@ export class ActionsRepositoryMock implements ActionsRepository {
     titre: string,
     filtreDejaVu: boolean,
     filtreDejaRealisees: boolean,
+    filtreRecommandePourMoi: boolean,
   ): Promise<CatalogueActions> {
     return Promise.resolve(this.catalogueActions!);
   }
@@ -94,6 +102,10 @@ export class ActionsRepositoryMock implements ActionsRepository {
   }
 
   chargerSelectionActions(selection: string): Promise<CatalogueActions> {
+    return Promise.resolve(this.catalogueActions!);
+  }
+
+  recupererCatalogueActions(idUtilisateur: string): Promise<CatalogueActions> {
     return Promise.resolve(this.catalogueActions!);
   }
 }

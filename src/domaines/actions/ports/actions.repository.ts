@@ -128,6 +128,7 @@ export interface ActionsRepository {
     titre: string,
     filtreDejaVu: boolean,
     filtreDejaRealisees: boolean,
+    filtreRecommandePourMoi: boolean,
   ): Promise<CatalogueActions>;
 
   chargerActionUtilisateur(idUtilisateur: string, idAction: string, type: TypeAction): Promise<ActionDetail>;

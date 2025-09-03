@@ -60,6 +60,7 @@
   const filtresThematiques = ref<string[]>([]);
   const filtreDejaVu = ref<boolean>(false);
   const filtreDejaRealisees = ref<boolean>(false);
+  const filtreRecommandePourMoi = ref<boolean>(false);
 
   const updateThematiques = async thematiques => {
     filtresThematiques.value = thematiques;
@@ -71,9 +72,10 @@
     await filtrerLaRecherche();
   };
 
-  const updateStatus = async ({ dejaVu, dejaRealisees }) => {
+  const updateStatus = async ({ dejaVu, dejaRealisees, recommandePourMoi }) => {
     filtreDejaVu.value = dejaVu;
     filtreDejaRealisees.value = dejaRealisees;
+    filtreRecommandePourMoi.value = recommandePourMoi;
     await filtrerLaRecherche();
   };
 
@@ -86,6 +88,7 @@
       rechercheTitre.value,
       filtreDejaVu.value,
       filtreDejaRealisees.value,
+      filtreRecommandePourMoi.value,
       catalogueActionsPresenter,
     );
     isLoading.value = false;

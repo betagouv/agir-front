@@ -22,6 +22,11 @@
             label: 'Réalisées',
             checked: dejaRealisees,
           },
+          {
+            id: 'recommandePourMoi',
+            label: 'Recommandée pour moi',
+            checked: recommandePourMoi,
+          },
         ]"
         @update="onStatusSelected"
       >
@@ -39,22 +44,25 @@
   import InputCheckbox from '@/components/dsfr/InputCheckbox.vue';
 
   const emit = defineEmits<{
-    (event: 'updateStatus', value: { dejaVu: boolean; dejaRealisees: boolean }): void;
+    (event: 'updateStatus', value: { dejaVu: boolean; dejaRealisees: boolean; recommandePourMoi: boolean }): void;
   }>();
 
   const dejaVu = ref(false);
   const dejaRealisees = ref(false);
+  const recommandePourMoi = ref(false);
 
   const onStatusSelected = (status: string[]) => {
     const newDejaVu = status.includes('dejaVu');
     const newDejaRealisees = status.includes('dejaRealisees');
+    const newRecommandePourMoi = status.includes('recommandePourMoi');
 
     dejaVu.value = newDejaVu;
     dejaRealisees.value = newDejaRealisees;
-
+    recommandePourMoi.value = newRecommandePourMoi;
     emit('updateStatus', {
       dejaVu: newDejaVu,
       dejaRealisees: newDejaRealisees,
+      recommandePourMoi: newRecommandePourMoi,
     });
   };
 
@@ -62,6 +70,7 @@
     const filtresStatut = [
       { checked: dejaVu.value, label: 'Consultées' },
       { checked: dejaRealisees.value, label: 'Réalisées' },
+      { checked: recommandePourMoi.value, label: 'Recommandée pour moi' },
     ];
 
     const filtresSelectionnes = filtresStatut.filter(filtre => filtre.checked).map(filtre => filtre.label);

@@ -260,10 +260,17 @@ export class ActionsRepositoryAxios implements ActionsRepository {
     titre: string,
     filtreDejaVu: boolean,
     filtreDejaRealisees: boolean,
+    filtreRecommandePourMoi: boolean,
   ): Promise<CatalogueActions> {
     const axios = AxiosFactory.getAxios();
 
-    const params = this.buildFiltres(filtresThematiques, titre, filtreDejaVu, filtreDejaRealisees);
+    const params = this.buildFiltres(
+      filtresThematiques,
+      titre,
+      filtreDejaVu,
+      filtreDejaRealisees,
+      filtreRecommandePourMoi,
+    );
     const response = await axios.get<CatalogueActionsApiModel>(`/utilisateurs/${idUtilisateur}/actions${params}`);
 
     return {
@@ -400,6 +407,7 @@ export class ActionsRepositoryAxios implements ActionsRepository {
     titre: string,
     filtreDejaVue?: boolean,
     filtreDejaRealisees?: boolean,
+    filtreRecommandePourMoi?: boolean,
   ): string {
     const params: string[] = [];
 
@@ -408,6 +416,7 @@ export class ActionsRepositoryAxios implements ActionsRepository {
     if (titre) params.push(`titre=${titre}`);
     if (filtreDejaVue) params.push(`consultation=${filtreDejaVue ? 'vu' : 'tout'}`);
     if (filtreDejaRealisees) params.push(`realisation=${filtreDejaRealisees ? 'faite' : 'tout'}`);
+    if (filtreRecommandePourMoi) params.push('recommandation=recommandee');
     return params.length > 0 ? `?${params.join('&')}` : '';
   }
 }

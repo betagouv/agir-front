@@ -10,6 +10,7 @@ export class FiltrerCatalogueActionsUsecase {
     titre: string,
     filtreDejaVu: boolean,
     filtreDejaRealisees: boolean,
+    filtreRecommandePourMoi: boolean,
     catalogueActionsPresenter: CatalogueActionsPresenter,
   ): Promise<void> {
     const catalogue = !idUtilisateur
@@ -20,6 +21,7 @@ export class FiltrerCatalogueActionsUsecase {
           titre,
           filtreDejaVu,
           filtreDejaRealisees,
+          filtreRecommandePourMoi,
         );
     await catalogueActionsPresenter.presenteCatalogue(catalogue);
   }
