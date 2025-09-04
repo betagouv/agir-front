@@ -4,13 +4,13 @@ import { refererStore } from '@/store/refererStore';
 export class RefererRepositoryStore implements RefererRepository {
   enregistrerLeReferer(referer: string, refererKeyword?: string) {
     const store = refererStore();
-    store.setReferer(referer);
-    if (refererKeyword) store.setRefererKeyword(refererKeyword);
+    store.referer = referer;
+    if (refererKeyword) store.refererKeyword = refererKeyword;
   }
 
   recupererLeReferer(): Referer | undefined {
     const store = refererStore();
-    return store.getReferer;
+    return { refererKeyword: store.refererKeyword, referer: store.referer };
   }
 
   reinitialiserLeReferer() {
