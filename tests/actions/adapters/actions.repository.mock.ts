@@ -1,3 +1,4 @@
+import { Filtres } from '@/domaines/actions/filtres';
 import {
   Action,
   ActionDetail,
@@ -47,17 +48,7 @@ export class ActionsRepositoryMock implements ActionsRepository {
     return Promise.resolve(this.catalogueActions!);
   }
 
-  filtrerCatalogueActions(filtresThematiques: string[], titre: string): Promise<CatalogueActions> {
-    return Promise.resolve(this.catalogueActions!);
-  }
-
-  filtrerCatalogueActionsUtilisateur(
-    idUtilisateur: string,
-    filtresThematiques: string[],
-    titre: string,
-    filtreDejaVu: boolean,
-    filtreDejaRealisees: boolean,
-  ): Promise<CatalogueActions> {
+  filtrerCatalogueActions(filtres: Filtres): Promise<CatalogueActions> {
     return Promise.resolve(this.catalogueActions!);
   }
 
@@ -94,6 +85,10 @@ export class ActionsRepositoryMock implements ActionsRepository {
   }
 
   chargerSelectionActions(selection: string): Promise<CatalogueActions> {
+    return Promise.resolve(this.catalogueActions!);
+  }
+
+  recupererCatalogueActions(idUtilisateur: string): Promise<CatalogueActions> {
     return Promise.resolve(this.catalogueActions!);
   }
 }

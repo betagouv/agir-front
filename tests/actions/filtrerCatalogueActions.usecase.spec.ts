@@ -6,6 +6,7 @@ import { ActionViewModel } from '@/domaines/actions/ports/actions.presenter';
 import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 import { FiltrerCatalogueActionsUsecase } from '@/domaines/actions/filtrerCatalogueActions.usecase';
 import { ExplicationsRecommandation } from '@/domaines/actions/explicationsRecommandation';
+import { Filtres, FiltreStatut, FiltreStatutBuilder } from '@/domaines/actions/filtres';
 
 describe("Fichier de tests concernant la récupération du catalogue d'actions", () => {
   it('Doit filtrer correctement le catalogue actions et les actions quand un utilisateur est connecté', async () => {
@@ -44,14 +45,21 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
       consultation: 'tout',
     };
 
+    const actionsRepository = ActionsRepositoryMock.avecCatalogue(catalogue);
+    const usecase = new FiltrerCatalogueActionsUsecase(actionsRepository);
+
+    const statut: FiltreStatut = {
+      dejaVu: true,
+      dejaRealisees: false,
+      recommandePourMoi: false,
+    };
+
     // WHEN
-    const usecase = new FiltrerCatalogueActionsUsecase(ActionsRepositoryMock.avecCatalogue(catalogue));
     await usecase.execute(
       'id-utilisateur',
       [ClefThematiqueAPI.alimentation],
       '2',
-      true,
-      false,
+      statut,
       new CatalogueActionsPresenterImpl(expectedFiltres, expectedActions),
     );
 
@@ -114,20 +122,49 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
 
     const actionsRepository = ActionsRepositoryMock.avecCatalogue(catalogue);
     const spy = vi.spyOn(actionsRepository, 'filtrerCatalogueActions');
-
     const usecase = new FiltrerCatalogueActionsUsecase(actionsRepository);
+
     await usecase.execute(
       '',
-      ['transport'],
-      'titre',
-      false,
-      false,
+      [],
+      '',
+      FiltreStatutBuilder.defaut(),
       new CatalogueActionsPresenterImpl(
         () => {},
         () => {},
       ),
     );
 
-    expect(spy).toHaveBeenCalled();
+    expect(spy).toHaveBeenCalledWith(Filtres.pourUtilisateurNonConnecte([], ''));
+  });
+
+  it('doit transmettre les paramètres au repository', async () => {
+    const catalogue: CatalogueActions = {
+      actions: [],
+      filtres: [],
+      consultation: 'tout',
+    };
+    const actionsRepository = ActionsRepositoryMock.avecCatalogue(catalogue);
+    const spy = vi.spyOn(actionsRepository, 'filtrerCatalogueActions');
+    const usecase = new FiltrerCatalogueActionsUsecase(actionsRepository);
+
+    const statut: FiltreStatut = {
+      dejaVu: false,
+      dejaRealisees: false,
+      recommandePourMoi: false,
+    };
+
+    await usecase.execute(
+      'user1',
+      ['transport'],
+      'titre',
+      statut,
+      new CatalogueActionsPresenterImpl(
+        () => {},
+        () => {},
+      ),
+    );
+
+    expect(spy).toHaveBeenCalledWith(Filtres.pourUtilisateurConnecte('user1', ['transport'], 'titre', statut));
   });
 });

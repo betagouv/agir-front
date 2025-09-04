@@ -1,4 +1,5 @@
 import { ExplicationsRecommandation } from '@/domaines/actions/explicationsRecommandation';
+import { Filtres } from '@/domaines/actions/filtres';
 import { Quiz } from '@/domaines/quiz/ports/quiz.repository';
 import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 
@@ -120,15 +121,7 @@ export interface ActionsRepository {
 
   chargerActionsRecommandees(idUtilisateur: string): Promise<Action[]>;
 
-  filtrerCatalogueActions(filtresThematiques: string[], titre: string): Promise<CatalogueActions>;
-
-  filtrerCatalogueActionsUtilisateur(
-    idUtilisateur: string,
-    filtresThematiques: string[],
-    titre: string,
-    filtreDejaVu: boolean,
-    filtreDejaRealisees: boolean,
-  ): Promise<CatalogueActions>;
+  filtrerCatalogueActions(filtres: Filtres): Promise<CatalogueActions>;
 
   chargerActionUtilisateur(idUtilisateur: string, idAction: string, type: TypeAction): Promise<ActionDetail>;
 

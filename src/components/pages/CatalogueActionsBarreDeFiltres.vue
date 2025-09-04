@@ -1,10 +1,10 @@
 <template>
   <div
+    ref="menuBar"
     aria-label="Filtrage des actions"
     class="full-width background--white fr-grid-row border-top--bleu"
     role="menubar"
     @keydown="gererEntreesClavier"
-    ref="menuBar"
   >
     <div :class="filtresColonnes" class="fr-p-2w" data-nouvelle-colonne="true">
       <CatalogueFiltreThematiques
@@ -14,34 +14,32 @@
       />
     </div>
 
-    <div :class="filtresColonnes" class="fr-p-2w" v-if="estConnecte" data-nouvelle-colonne="true">
-      <CatalogueFiltreStatut
-        @rechercher-par-deja-vu="rechercherParDejaVu"
-        @rechercher-par-deja-realisees="rechercherParDejaRealisees"
-      />
+    <div v-if="estConnecte" :class="filtresColonnes" class="fr-p-2w" data-nouvelle-colonne="true">
+      <CatalogueFiltreStatut :initial-statut="currentStatut" @update-status="updateStatus" />
     </div>
 
     <div :class="filtresColonnes" class="fr-p-2w" data-nouvelle-colonne="true">
       <div class="flex align-items--center flex-center full-height" role="menuitem" tabindex="-1">
         <InputSearchBar
           id="rechercheParTitre"
+          class="full-width"
           name="titreRessource"
           placeholder="Rechercher"
           @submit="rechercherParTitre"
-          class="full-width"
         />
       </div>
     </div>
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
   import { ref } from 'vue';
   import CatalogueFiltreStatut from '@/components/custom/Action/Catalogue/CatalogueFiltreStatut.vue';
   import CatalogueFiltreThematiques from '@/components/custom/Action/Catalogue/CatalogueFiltreThematiques.vue';
   import InputSearchBar from '@/components/dsfr/InputSearchBar.vue';
   import { ActionsRepositoryAxios } from '@/domaines/actions/adapters/actions.repository.axios';
   import { FiltrerCatalogueActionsUsecase } from '@/domaines/actions/filtrerCatalogueActions.usecase';
+  import { FiltreStatut } from '@/domaines/actions/filtres';
   import {
     CatalogueActionsPresenter,
     FiltresCatalogueActionsViewModel,
@@ -61,8 +59,11 @@
   const menuBar = ref<HTMLDivElement>();
   const rechercheTitre = ref<string>('');
   const filtresThematiques = ref<string[]>([]);
-  const filtreDejaVu = ref<boolean>(false);
-  const filtreDejaRealisees = ref<boolean>(false);
+  const currentStatut = ref<FiltreStatut>({
+    dejaVu: false,
+    dejaRealisees: false,
+    recommandePourMoi: false,
+  });
 
   const updateThematiques = async thematiques => {
     filtresThematiques.value = thematiques;
@@ -74,13 +75,8 @@
     await filtrerLaRecherche();
   };
 
-  const rechercherParDejaVu = async checked => {
-    filtreDejaVu.value = checked;
-    await filtrerLaRecherche();
-  };
-
-  const rechercherParDejaRealisees = async checked => {
-    filtreDejaRealisees.value = checked;
+  const updateStatus = async (statut: FiltreStatut) => {
+    currentStatut.value = statut;
     await filtrerLaRecherche();
   };
 
@@ -91,8 +87,7 @@
       idUtilisateur,
       filtresThematiques.value,
       rechercheTitre.value,
-      filtreDejaVu.value,
-      filtreDejaRealisees.value,
+      currentStatut.value,
       catalogueActionsPresenter,
     );
     isLoading.value = false;
