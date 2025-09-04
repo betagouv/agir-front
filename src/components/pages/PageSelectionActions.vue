@@ -23,24 +23,14 @@
             </h2>
             <p class="fr-mb-2w">
               Agissez selon vos <span class="text--bold">envies</span>, vos <span class="text--bold">moyens</span> et
-              <span class="text--bold">mode de vie</span> !
+              <span class="text--bold">votre mode de vie</span> !
             </p>
-            <form
+            <CreationCompteRapideFormulaire
               class="flex align-items--end flex-column flex-space-between full-height"
-              @submit.prevent="performCreerCompteUtilisateur"
-            >
-              <InputMail
-                v-model="compteUtilisateurInput.mail"
-                autocomplete="email"
-                class="label-blanc full-width fr-mb-1w"
-                label="Mon adresse e-mail"
-                class-label="text--white"
-                name="email"
-                :has-hint="false"
-                :message-erreur="messageErreurEmail"
-              />
-              <button class="fr-btn border--white">Valider</button>
-            </form>
+              :label="{ class: 'text--white' }"
+              :bouton="{ class: 'fr-btn border--white' }"
+              input-class="full-width fr-mb-1w"
+            />
           </div>
         </template>
       </CatalogueActionsComposant>
@@ -58,7 +48,7 @@
   import { useRouter } from 'vue-router';
   import RedirectionMobile from '@/components/custom/AccueilConnectee/RedirectionMobile.vue';
   import CatalogueActionsComposant from '@/components/custom/Action/Catalogue/CatalogueActionsComposant.vue';
-  import InputMail from '@/components/dsfr/InputMail.vue';
+  import CreationCompteRapideFormulaire from '@/components/custom/CreationCompte/CreationCompteRapideFormulaire.vue';
   import { ActionsRepositoryAxios } from '@/domaines/actions/adapters/actions.repository.axios';
   import { CatalogueActionsPresenterImpl } from '@/domaines/actions/adapters/catalogueActions.presenter.impl';
   import { TitreCatalogueRepositoryAxios } from '@/domaines/actions/adapters/titreCatalogue.repository.axios';
@@ -67,17 +57,14 @@
   import { RecupererSelectionActionsUsecase } from '@/domaines/actions/recupererCatalogueActionsSelection.usecase';
   import { RecupererCatalogueActionsWinterUsecase } from '@/domaines/actions/recupererCatalogueActionsWinter.usecase';
   import { RecupererTitreCataloguePartenaireUsecase } from '@/domaines/actions/recupererTitreCataloguePartenaireUsecase';
-  import { SessionRepositoryStore } from '@/domaines/authentification/adapters/session.repository.store';
-  import { CompteUtilisateurRepositoryImpl } from '@/domaines/compte/adapters/compteUtilisateur.repository.impl';
-  import { CreerComptePresenterImpl } from '@/domaines/compte/adapters/creerComptePresenterImpl';
-  import { CreerCompteUtilisateurUsecase, UserInput } from '@/domaines/compte/creerCompteUtilisateur.usecase';
-  import router from '@/router';
+  import { RefererRepositoryStore } from '@/domaines/compte/adapters/referer.repository.store';
+  import { EnregistrerRefererUsecase } from '@/domaines/compte/enregistrerReferer.usecase';
   import useHeadProperties from '@/shell/useHeadProperties';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const titre = ref<TitreCatalogue>();
+  const router = useRouter();
   const estConnecte = computed(() => utilisateurStore().estConnecte);
-  const messageErreurEmail = ref<string>();
 
   useHead({
     ...useHeadProperties,
@@ -93,7 +80,7 @@
   );
 
   onMounted(async () => {
-    const selection = useRouter().currentRoute.value.query.selection as
+    const selection = router.currentRoute.value.query.selection as
       | 'actions_watt_watchers'
       | 'risques_naturels'
       | 'semaine_mobilite';
@@ -110,32 +97,14 @@
       const usecase = new RecupererSelectionActionsUsecase(new ActionsRepositoryAxios());
       await usecase.execute(selection, catalogueActionsPresenter);
     }
-  });
 
-  let compteUtilisateurInput = ref<UserInput>({
-    mail: '',
-    situationId: null,
+    if (!estConnecte.value) {
+      const referer = router.currentRoute.value.query.referer as string;
+      const refererKeyword = router.currentRoute.value.query.referer_keyword as string;
+      const enregistrerRefererUsecase = new EnregistrerRefererUsecase(new RefererRepositoryStore());
+      if (referer) enregistrerRefererUsecase.execute(referer, refererKeyword);
+    }
   });
-  const performCreerCompteUtilisateur = async () => {
-    const creeCompteUseCase = new CreerCompteUtilisateurUsecase(
-      new CompteUtilisateurRepositoryImpl(),
-      new SessionRepositoryStore(),
-    );
-    await creeCompteUseCase
-      .execute(
-        new CreerComptePresenterImpl(viewModel => {
-          router.push({ name: viewModel.route });
-        }),
-        { ...compteUtilisateurInput.value, situationId: null },
-      )
-      .catch(error => {
-        if (error.code === '020') {
-          messageErreurEmail.value = "Le format de l'email n'est pas valide. Format attendu : nom@domaine.fr";
-        } else {
-          messageErreurEmail.value = 'Une erreur est survenue.';
-        }
-      });
-  };
 </script>
 
 <style scoped>

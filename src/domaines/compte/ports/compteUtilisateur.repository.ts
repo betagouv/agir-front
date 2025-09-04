@@ -14,6 +14,8 @@ export interface CompteTemporaire {
 export interface CompteUtilisateurACreer {
   email: string;
   situationId: string | null;
+  referer?: string;
+  refererKeyword?: string;
 }
 
 export type SuppressionFranceConnect = {

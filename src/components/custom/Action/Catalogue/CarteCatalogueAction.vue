@@ -55,7 +55,9 @@
     justify-content: flex-start !important;
   }
 
-  .fr-card {
-    min-height: 20.3rem;
+  @media all and (min-width: 62em) {
+    .fr-card {
+      min-height: 20.3rem;
+    }
   }
 </style>

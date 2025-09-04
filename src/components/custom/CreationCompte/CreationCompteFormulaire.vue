@@ -44,14 +44,16 @@
 
 <script lang="ts" setup>
   import { ref } from 'vue';
+  import { useRouter } from 'vue-router';
   import Alert from '@/components/custom/Alert.vue';
   import FranceConnect from '@/components/dsfr/FranceConnect.vue';
   import InputMail from '@/components/dsfr/InputMail.vue';
   import { SessionRepositoryStore } from '@/domaines/authentification/adapters/session.repository.store';
   import { CompteUtilisateurRepositoryImpl } from '@/domaines/compte/adapters/compteUtilisateur.repository.impl';
   import { CreerComptePresenterImpl } from '@/domaines/compte/adapters/creerComptePresenterImpl';
+  import { RefererRepositoryStore } from '@/domaines/compte/adapters/referer.repository.store';
   import { CreerCompteUtilisateurUsecase, UserInput } from '@/domaines/compte/creerCompteUtilisateur.usecase';
-  import router, { RouteCommuneName } from '@/router';
+  import { RouteCommuneName } from '@/router';
   import { RouteConformiteName } from '@/router/conformite/routes';
   import { utilisateurStore } from '@/store/utilisateur';
 
@@ -63,6 +65,8 @@
   let creationDeCompteMessageErreur = ref<string>('');
   utilisateurStore().reset();
 
+  const router = useRouter();
+
   const performCreerCompteUtilisateur = async () => {
     creationDeCompteEnErreur.value = false;
     creationDeCompteMessageErreur.value = '';
@@ -70,13 +74,17 @@
     const creeCompteUseCase = new CreerCompteUtilisateurUsecase(
       new CompteUtilisateurRepositoryImpl(),
       new SessionRepositoryStore(),
+      new RefererRepositoryStore(),
     );
     await creeCompteUseCase
       .execute(
         new CreerComptePresenterImpl(viewModel => {
           router.push({ name: viewModel.route });
         }),
-        { ...compteUtilisateurInput.value, situationId: null },
+        {
+          ...compteUtilisateurInput.value,
+          situationId: null,
+        },
       )
       .catch(reason => {
         creationDeCompteMessageErreur.value = reason.message;
