@@ -107,19 +107,18 @@
 
 <style lang="css" scoped>
   .adresses-recentes {
-    max-width: 18rem;
+    max-width: 15.5rem;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     display: inline-block;
   }
-
   div:has(button + button) {
     position: relative;
   }
 
   div > button {
-    padding-block-end: var(1rem); /* Probablement un truc du genre 1ch ou 1rem si l'icône est carré */
+    padding-block-end: var(1rem);
   }
 
   div > button + button {

@@ -246,6 +246,9 @@
       })
       .then(() => {
         afficherAlerte('success', 'Succès', 'Vos informations ont été correctement mises à jour.');
+        if (adresseBarreDeRecherche.value?.rue) {
+          utilisateurStore().utilisateur.possedeUneAdresseComplete = true;
+        }
       })
       .catch(() => {
         afficherAlerte('error', 'Erreur', 'Une erreur est survenue. Vérifiez vos informations ou réessayez plus tard.');
