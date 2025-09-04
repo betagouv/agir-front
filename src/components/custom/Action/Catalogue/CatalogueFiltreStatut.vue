@@ -31,7 +31,7 @@
         @update="onStatusSelected"
       >
         <template #label>
-          <span class="fr-text--lg fr-mb-0 text--normal text--bleu display-block">Thématiques</span>
+          <span class="fr-text--lg fr-mb-0 text--normal text--bleu display-block">Statut</span>
         </template>
       </InputCheckbox>
     </template>
