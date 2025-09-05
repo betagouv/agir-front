@@ -10,15 +10,21 @@
         label-id="label-barre-de-recherche"
         @update:coordonnees="chargerDonneesPourNouvelleAdresse"
       />
-
+      <AdressesRecentesComponent
+        ref="adressesRecentesComponent"
+        :adresse-principale-complete="possedeAdresseComplete"
+        :on-adresse-recente-selectionnee="chercherAvecAdresseRecente"
+        :on-adresse-residence-principale-selectionnee="chercherAvecAdressePrincipale"
+        :on-geolocalisation-selectionne="chercherAvecGeolocalisation"
+      />
       <Callout
-        v-if="avecAdressePrivee"
+        v-if="avecAdressePrivee && !possedeAdresseComplete"
         :button="{
           text: 'Choisir comme adresse principale',
           onClick: definirAdressePrincipale,
         }"
         :icone-information="false"
-        class="fr-mt-3w"
+        class="fr-mt-3w full-width"
         texte="Voulez-vous utiliser cette adresse comme votre adresse principale à l’avenir&nbsp;?"
       />
     </form>
@@ -54,19 +60,25 @@
       </div>
     </div>
   </section>
+
+  <ModaleErreurGeolocalisation />
 </template>
 
 <script lang="ts" setup>
-  import { nextTick, onMounted, ref } from 'vue';
+  import { computed, nextTick, onMounted, ref } from 'vue';
   import MaifRisques from '@/components/custom/Action/Simulation/Maif/MaifRisques.vue';
   import BarreDeRechercheAdresse from '@/components/custom/Form/BarreDeRechercheAdresse.vue';
+  import ModaleErreurGeolocalisation from '@/components/custom/Modale/ModaleErreurGeolocalisation.vue';
   import BallLoader from '@/components/custom/Thematiques/BallLoader.vue';
   import Callout from '@/components/dsfr/Callout.vue';
+  import AdressesRecentesComponent from '@/components/pages/PagesService/AdressesRecentesComponent.vue';
   import { useAdressePrincipale } from '@/composables/useAdressePrincipale';
+  import { useDsfrModale } from '@/composables/useDsfrModale';
   import { ActionsEventBus } from '@/domaines/actions/actions.eventbus';
   import { ActionsRepositoryAxios } from '@/domaines/actions/adapters/actions.repository.axios';
   import { TypeAction } from '@/domaines/actions/ports/actions.repository';
   import { TerminerActionUsecase } from '@/domaines/actions/terminerAction.usecase';
+  import { AdresseHistorique } from '@/domaines/adresses/recupererHistoriqueAdresse.usecase';
   import { BarreDeRechercheViewModel } from '@/domaines/logement/adapters/barreDeRecherche.presenter.impl';
   import {
     SimulateurMaifPresenterImpl,
@@ -80,6 +92,7 @@
   import { CalculerResultatSimulationMaifUsecase } from '@/domaines/simulationMaif/calculerResultatSimulationMaif.usecase';
   import { RecupererStatistiquesCommuneMaifUsecase } from '@/domaines/simulationMaif/recupererStatistiquesCommuneMaifDepuisProfil.usecase';
   import { AdresseBarreDeRecherche, Coordonnees } from '@/shell/coordonneesType';
+  import { MODALE_GEOLOCALISATION_ID } from '@/shell/modaleGeolocalisationId';
   import { SimulateursSupportes } from '@/shell/simulateursSupportes';
   import { utilisateurStore } from '@/store/utilisateur';
 
@@ -89,6 +102,7 @@
   const statistiquesCommuneMaifViewModel = ref<StatistiquesCommuneMaifViewModel>();
   const resultatSimulationMaifViewModel = ref<SimulateurMaifViewModel>();
 
+  const { ouvrirModale: ouvrirModaleErreurGeoloc } = useDsfrModale(MODALE_GEOLOCALISATION_ID);
   const resultatsEnChargement = ref<boolean>(false);
   const chiffresClesEnChargement = ref<boolean>(false);
   const utilisateurId = utilisateurStore().utilisateur.id;
@@ -97,6 +111,7 @@
     definirAdressePrincipale: definirAdressePrincipaleComposable,
     recupererAdressePourBarreDeRecherche,
   } = useAdressePrincipale();
+  const possedeAdresseComplete = computed(() => utilisateurStore().utilisateur.possedeUneAdresseComplete);
 
   const simulateurMaifRepository = new SimulateurMaifRepositoryAxios();
 
@@ -156,6 +171,53 @@
 
   function definirAdressePrincipale() {
     definirAdressePrincipaleComposable(utilisateurId, adresse.value, coordonnees.value);
+  }
+
+  const chercherAvecAdresseRecente = (adresseRecente: AdresseHistorique) => {
+    coordonnees.value = {
+      latitude: adresseRecente.latitude,
+      longitude: adresseRecente.longitude,
+    };
+    recherche.value = `${adresseRecente.numero_rue} ${adresseRecente.rue} ${adresseRecente.code_postal} ${adresseRecente.commmune}`;
+    chargerDonneesPourNouvelleAdresse();
+  };
+
+  const chercherAvecAdressePrincipale = async () => {
+    await recupererAdressePourBarreDeRecherche(
+      utilisateurStore().utilisateur.id,
+      async (barreDeRechercheViewModel: BarreDeRechercheViewModel) => {
+        coordonnees.value = barreDeRechercheViewModel.coordonnees;
+        if (barreDeRechercheViewModel.adresse) {
+          const adressePrincipale = barreDeRechercheViewModel.adresse;
+          recherche.value =
+            adressePrincipale.numeroRue && adressePrincipale.rue
+              ? `${adressePrincipale.numeroRue} ${adressePrincipale.rue} ${adressePrincipale.codePostal} ${adressePrincipale.communeLabel}`
+              : `${adressePrincipale.codePostal} ${adressePrincipale.communeLabel}`;
+        }
+        await chargerDonneesPourNouvelleAdresse();
+      },
+    );
+  };
+
+  function chercherAvecGeolocalisation() {
+    if (!navigator.geolocation) {
+      ouvrirModaleErreurGeoloc();
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        coordonnees.value = {
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+        };
+        recherche.value = 'Ma position actuelle';
+        chargerDonneesPourNouvelleAdresse();
+      },
+      () => {
+        ouvrirModaleErreurGeoloc();
+      },
+    );
   }
 
   async function terminerAction() {
