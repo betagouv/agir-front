@@ -25,7 +25,10 @@
           : 'Question suivante'
       "
     >
-      <template v-slot:complement v-if="afficherStepper && questionViewModel.nombreTotalDeQuestions <= 25">
+      <template
+        v-slot:complement
+        v-if="afficherStepper && questionViewModel.nombreTotalDeQuestions <= MAX_KYCS_FOR_STEPPER"
+      >
         <div class="fr-stepper fr-mt-2w fr-mb-3w" v-if="questionViewModel.nombreTotalDeQuestions > 1">
           <div
             class="fr-stepper__steps fr-stepper__steps-large"
@@ -49,6 +52,8 @@
   import { RecupererPremiereKYCUsecase } from '@/domaines/kyc/recupererPremiereKYC.usecase';
   import { RecupererProchaineKYCUsecase } from '@/domaines/kyc/recupererProchaineKYC.usecase';
   import { utilisateurStore } from '@/store/utilisateur';
+
+  const MAX_KYCS_FOR_STEPPER = 25;
 
   const props = withDefaults(
     defineProps<{
