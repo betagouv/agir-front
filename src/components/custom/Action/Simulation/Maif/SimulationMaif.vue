@@ -101,6 +101,7 @@
   const adresse = ref<AdresseBarreDeRecherche>();
   const statistiquesCommuneMaifViewModel = ref<StatistiquesCommuneMaifViewModel>();
   const resultatSimulationMaifViewModel = ref<SimulateurMaifViewModel>();
+  const adressesRecentesComponent = ref<InstanceType<typeof AdressesRecentesComponent>>();
 
   const { ouvrirModale: ouvrirModaleErreurGeoloc } = useDsfrModale(MODALE_GEOLOCALISATION_ID);
   const resultatsEnChargement = ref<boolean>(false);
@@ -132,11 +133,17 @@
   });
 
   async function chargerDonneesPourNouvelleAdresse() {
+    if (!coordonnees.value) return;
+
     await nextTick();
     avecAdressePrivee.value = true;
 
     await recupererChiffresCles(adresse.value?.codeEpci);
     await calculerResultatsSimulation();
+
+    if (adressesRecentesComponent.value) {
+      adressesRecentesComponent.value.chargerAdressesRecentes();
+    }
   }
 
   async function recupererChiffresCles(codeEpci?: string) {
