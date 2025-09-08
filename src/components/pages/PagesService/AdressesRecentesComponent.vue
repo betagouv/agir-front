@@ -7,7 +7,7 @@
         @click.prevent="
           () => {
             trackClick('Adresse Recente', 'Geolocalisation sélectionnée');
-            onGeolocalisationSelectionne!();
+            selectionnerGeolocalisation!();
           }
         "
       >
@@ -22,7 +22,7 @@
         @click.prevent="
           () => {
             trackClick('Adresse Recente', 'Adresse Chez moi selectionnee');
-            onAdresseResidencePrincipaleSelectionnee();
+            selectionnerAdressePrincipale();
           }
         "
       >
@@ -39,7 +39,7 @@
           @click.prevent="
             () => {
               trackClick('Adresse Recente', 'Adresse recente selectionnee');
-              onAdresseRecenteSelectionnee(adresse);
+              selectionnerAdresseRecente(adresse);
             }
           "
         >
@@ -74,20 +74,31 @@
     RecupererHistoriqueAdresseUsecase,
   } from '@/domaines/adresses/recupererHistoriqueAdresse.usecase';
   import { SupprimerHistoriqueAdresseUsecase } from '@/domaines/adresses/supprimerHistoriqueAdresse.usecase';
+  import {
+    BarreDeRecherchePresenterImpl,
+    BarreDeRechercheViewModel,
+  } from '@/domaines/logement/adapters/barreDeRecherche.presenter.impl';
+  import { LogementRepositoryAxios } from '@/domaines/logement/adapters/logement.repository.axios';
+  import { RecupererAdressePourBarreDeRechercheUsecase } from '@/domaines/logement/recupererAdressePourBarreDeRecherche.usecase';
+  import { Coordonnees } from '@/shell/coordonneesType';
+  import formaterAdresse from '@/shell/formaterAdresseBarreDeRecherche';
   import { trackClick } from '@/shell/matomo';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const props = defineProps<{
     onAdresseRecenteSelectionnee: (adresse: AdresseHistorique) => void;
     onAdresseResidencePrincipaleSelectionnee: () => void;
-    onGeolocalisationSelectionne?: (position: globalThis.GeolocationPosition) => void;
+    onGeolocalisationSelectionne?: () => void;
     adressePrincipaleComplete?: boolean;
   }>();
+  const coordonnees = defineModel<Coordonnees>('coordonnees');
+  const recherche = defineModel<string>('recherche');
 
   const MODALE_GEOLOCALISATION_ID = 'erreur-geolocalisation';
   const { ouvrirModale: ouvrirModaleErreurGeoloc } = useDsfrModale(MODALE_GEOLOCALISATION_ID);
   const adressesRecentes = ref<AdresseHistorique[]>([]);
   const historiqueAdresseRepositoryAxios = new HistoriqueAdresseRepositoryAxios();
+  const utilisateurId = utilisateurStore().utilisateur.id;
 
   onMounted(() => {
     chargerAdressesRecentes();
@@ -109,7 +120,7 @@
     chargerAdressesRecentes();
   };
 
-  const onGeolocalisationSelectionne = () => {
+  const selectionnerGeolocalisation = () => {
     if (!navigator.geolocation) {
       ouvrirModaleErreurGeoloc();
       return;
@@ -117,12 +128,41 @@
 
     navigator.geolocation.getCurrentPosition(
       position => {
-        props.onGeolocalisationSelectionne?.(position);
+        coordonnees.value = {
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+        };
+        recherche.value = 'Ma position actuelle';
+        props.onGeolocalisationSelectionne?.();
       },
       () => {
         ouvrirModaleErreurGeoloc();
       },
     );
+  };
+
+  const selectionnerAdressePrincipale = async () => {
+    const recupererAdressePourBarreDeRechercheUsecase = new RecupererAdressePourBarreDeRechercheUsecase(
+      new LogementRepositoryAxios(),
+    );
+
+    await recupererAdressePourBarreDeRechercheUsecase.execute(
+      utilisateurId,
+      new BarreDeRecherchePresenterImpl(async (barreDeRechercheViewModel: BarreDeRechercheViewModel) => {
+        coordonnees.value = barreDeRechercheViewModel.coordonnees;
+        recherche.value = barreDeRechercheViewModel.recherche;
+        props.onAdresseResidencePrincipaleSelectionnee();
+      }),
+    );
+  };
+
+  const selectionnerAdresseRecente = (adresse: AdresseHistorique) => {
+    coordonnees.value = {
+      latitude: adresse.latitude,
+      longitude: adresse.longitude,
+    };
+    recherche.value = formaterAdresse(adresse);
+    props.onAdresseRecenteSelectionnee(adresse);
   };
 
   defineExpose({

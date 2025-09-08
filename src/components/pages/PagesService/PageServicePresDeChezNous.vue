@@ -23,39 +23,46 @@
           Produits locaux, bio, de saisons et vendeurs de vrac, pour une cuisine savoureuse et responsable
         </p>
 
-        <section
-          class="fr-my-6w background--white fr-px-2w fr-py-3w flex flex-space-between align-items--center flex-wrap gap--small"
-        >
-          <h2 id="recherche-par-adresse-label" class="fr-h4 fr-mb-0">Recherche par adresse</h2>
-          <form class="fr-col-12 fr-col-md-7" @submit.prevent>
-            <BarreDeRechercheAdresse
-              v-model:adresse="adresse"
+        <section class="fr-my-6w background--white fr-px-2w fr-py-3w">
+          <form @submit.prevent>
+            <div class="flex flex-space-between align-items--center flex-wrap gap--small">
+              <h2 id="recherche-par-adresse-label" class="fr-h4 fr-mb-0">Recherche par adresse</h2>
+
+              <div class="fr-col-12 fr-col-md-7">
+                <BarreDeRechercheAdresse
+                  v-model:adresse="adresse"
+                  v-model:coordonnees="coordonnees"
+                  v-model:recherche="recherche"
+                  :on-coordonnees-envoyees="chargerDonneesPourNouvelleAdresse"
+                  :enregistrer-adresse-dans-historique="true"
+                  labelId="recherche-par-adresse-label"
+                />
+              </div>
+            </div>
+
+            <AdressesRecentesComponent
+              ref="adressesRecentesComponent"
               v-model:coordonnees="coordonnees"
               v-model:recherche="recherche"
-              :on-coordonnees-envoyees="chargerDonneesPourNouvelleAdresse"
-              :enregistrer-adresse-dans-historique="true"
-              labelId="recherche-par-adresse-label"
+              :adresse-principale-complete="utilisateurStore().utilisateur.possedeUneAdresseComplete"
+              :on-adresse-recente-selectionnee="lancerRecherche"
+              :on-adresse-residence-principale-selectionnee="lancerRecherche"
+              :on-geolocalisation-selectionne="lancerRecherche"
+            />
+
+            <Callout
+              v-if="avecAdressePrivee && !utilisateurStore().utilisateur.possedeUneAdresseComplete"
+              :button="{
+                text: 'Choisir comme adresse principale',
+                onClick: definirAdressePrincipale,
+              }"
+              :icone-information="false"
+              class="fr-mt-3w full-width"
+              texte="Voulez-vous utiliser cette adresse comme votre adresse principale à l’avenir&nbsp;?"
             />
           </form>
-
-          <AdressesRecentesComponent
-            ref="adressesRecentesComponent"
-            :adresse-principale-complete="utilisateurStore().utilisateur.possedeUneAdresseComplete"
-            :on-adresse-recente-selectionnee="chercherAvecAdresseRecente"
-            :on-adresse-residence-principale-selectionnee="chercherAvecAdressePrincipale"
-            :on-geolocalisation-selectionne="chercherAvecGeolocalisation"
-          />
-          <Callout
-            v-if="avecAdressePrivee && !utilisateurStore().utilisateur.possedeUneAdresseComplete"
-            :button="{
-              text: 'Choisir comme adresse principale',
-              onClick: definirAdressePrincipale,
-            }"
-            :icone-information="false"
-            class="fr-mt-3w full-width"
-            texte="Voulez-vous utiliser cette adresse comme votre adresse principale à l'avenir&nbsp;?"
-          />
         </section>
+
         <section
           v-if="
             (serviceRecherchePresDeChezNousViewModel as ServiceRecherchePresDeChezNousViewModelAvecResultats).favoris
@@ -117,7 +124,6 @@
   import AdressesRecentesComponent from '@/components/pages/PagesService/AdressesRecentesComponent.vue';
   import { useRechercheService } from '@/composables/service/useRechercheService';
   import { useAdressePrincipale } from '@/composables/useAdressePrincipale';
-  import { AdresseHistorique } from '@/domaines/adresses/recupererHistoriqueAdresse.usecase';
   import { BarreDeRechercheViewModel } from '@/domaines/logement/adapters/barreDeRecherche.presenter.impl';
   import {
     ServiceRecherchePresDeChezNousPresenterImpl,
@@ -127,7 +133,6 @@
   import { ServiceRecherchePresDeChezNousAxios } from '@/domaines/serviceRecherche/presDeChezNous/adapters/serviceRecherchePresDeChezNous.repository.axios';
   import { RecupererServicePresDeChezNousUsecase } from '@/domaines/serviceRecherche/presDeChezNous/recupererServicePresDeChezNous.usecase';
   import { AdresseBarreDeRecherche } from '@/shell/coordonneesType';
-  import formaterAdresse from '@/shell/formaterAdresseBarreDeRecherche';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const serviceListeCarte = ref<InstanceType<typeof ServiceListeCarte>>();
@@ -191,35 +196,6 @@
     avecAdressePrivee.value = true;
   }
 
-  const chercherAvecAdresseRecente = (adresseRecente: AdresseHistorique) => {
-    coordonnees.value = {
-      latitude: adresseRecente.latitude,
-      longitude: adresseRecente.longitude,
-    };
-    recherche.value = formaterAdresse(adresseRecente);
-    lancerRecherche();
-  };
-
-  const chercherAvecAdressePrincipale = async () => {
-    await recupererAdressePourBarreDeRecherche(
-      utilisateurId,
-      async (barreDeRechercheViewModel: BarreDeRechercheViewModel) => {
-        coordonnees.value = barreDeRechercheViewModel.coordonnees;
-        recherche.value = barreDeRechercheViewModel.recherche;
-        await lancerRecherche();
-      },
-    );
-  };
-
-  function chercherAvecGeolocalisation(position: globalThis.GeolocationPosition) {
-    coordonnees.value = {
-      latitude: position.coords.latitude,
-      longitude: position.coords.longitude,
-    };
-    recherche.value = 'Ma position actuelle';
-    lancerRecherche();
-  }
-
   onMounted(async () => {
     const query = useRouter().currentRoute.value.query;
     const latitude = query.latitude as string;
@@ -232,6 +208,7 @@
         utilisateurId,
         async (barreDeRechercheViewModel: BarreDeRechercheViewModel) => {
           coordonnees.value = barreDeRechercheViewModel.coordonnees;
+          recherche.value = barreDeRechercheViewModel.recherche;
           if (barreDeRechercheViewModel.adresse.rue) {
             utilisateurStore().utilisateur.possedeUneAdresseComplete = true;
           }

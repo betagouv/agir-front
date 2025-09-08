@@ -8,10 +8,12 @@
         v-model:recherche="recherche"
         :enregistrer-adresse-dans-historique="true"
         label-id="label-barre-de-recherche"
-        @update:coordonnees="chargerDonneesPourNouvelleAdresse"
+        @update:coordonnees="chercherAvecBarreDeRecherche"
       />
       <AdressesRecentesComponent
         ref="adressesRecentesComponent"
+        v-model:coordonnees="coordonnees"
+        v-model:recherche="recherche"
         :adresse-principale-complete="possedeAdresseComplete"
         :on-adresse-recente-selectionnee="chercherAvecAdresseRecente"
         :on-adresse-residence-principale-selectionnee="chercherAvecAdressePrincipale"
@@ -41,24 +43,31 @@
       </template>
     </section>
 
-    <h2 class="fr-h3 fr-mt-4w">
-      Mes chiffres clés à <span class="text--bleu" v-text="statistiquesCommuneMaifViewModel?.commune" />
-    </h2>
+    <section v-if="!utilisationGeolocalisation">
+      <h3 class="fr-h3 fr-mt-4w">
+        Mes chiffres clés à <span class="text--bleu" v-text="statistiquesCommuneMaifViewModel?.commune" />
+      </h3>
 
-    <BallLoader v-if="chiffresClesEnChargement" />
-    <div v-else class="fr-grid-row fr-grid-row--gutters">
-      <div
-        v-for="chiffreCle in statistiquesCommuneMaifViewModel?.chiffresCles"
-        :key="chiffreCle.label"
-        class="fr-col-12 fr-col-md-4"
-      >
-        <div class="flex flex-column align-items--center fr-p-1w fr-py-6w shadow full-height position--relative">
-          <span class="text--4xl text--bold fr-pb-2w" v-text="chiffreCle.valeur" />
-          <span class="text--sm text--center fr-mb-0" v-html="chiffreCle.label" />
-          <img v-if="chiffreCle.illustration" :src="chiffreCle.illustration" alt="" class="illustration-chiffre-cles" />
+      <BallLoader v-if="chiffresClesEnChargement" />
+      <div v-else class="fr-grid-row fr-grid-row--gutters">
+        <div
+          v-for="chiffreCle in statistiquesCommuneMaifViewModel?.chiffresCles"
+          :key="chiffreCle.label"
+          class="fr-col-12 fr-col-md-4"
+        >
+          <div class="flex flex-column align-items--center fr-p-1w fr-py-6w shadow full-height position--relative">
+            <span class="text--4xl text--bold fr-pb-2w" v-text="chiffreCle.valeur" />
+            <span class="text--sm text--center fr-mb-0" v-html="chiffreCle.label" />
+            <img
+              v-if="chiffreCle.illustration"
+              :src="chiffreCle.illustration"
+              alt=""
+              class="illustration-chiffre-cles"
+            />
+          </div>
         </div>
       </div>
-    </div>
+    </section>
   </section>
 </template>
 
@@ -88,7 +97,6 @@
   import { CalculerResultatSimulationMaifUsecase } from '@/domaines/simulationMaif/calculerResultatSimulationMaif.usecase';
   import { RecupererStatistiquesCommuneMaifUsecase } from '@/domaines/simulationMaif/recupererStatistiquesCommuneMaifDepuisProfil.usecase';
   import { AdresseBarreDeRecherche, Coordonnees } from '@/shell/coordonneesType';
-  import formaterAdresse from '@/shell/formaterAdresseBarreDeRecherche';
   import { SimulateursSupportes } from '@/shell/simulateursSupportes';
   import { utilisateurStore } from '@/store/utilisateur';
 
@@ -101,6 +109,7 @@
 
   const resultatsEnChargement = ref<boolean>(false);
   const chiffresClesEnChargement = ref<boolean>(false);
+  const utilisationGeolocalisation = ref<boolean>(false);
   const utilisateurId = utilisateurStore().utilisateur.id;
   const {
     avecAdressePrivee,
@@ -115,14 +124,27 @@
   const calculerResultatSimulationMaifUsecase = new CalculerResultatSimulationMaifUsecase(simulateurMaifRepository);
 
   onMounted(async () => {
-    await recupererAdressePrincipale();
+    await recupererAdressePourBarreDeRecherche(
+      utilisateurId,
+      async (barreDeRechercheViewModel: BarreDeRechercheViewModel) => {
+        coordonnees.value = barreDeRechercheViewModel.coordonnees;
+        recherche.value = barreDeRechercheViewModel.recherche;
+        if (barreDeRechercheViewModel.adresse.rue) {
+          utilisateurStore().utilisateur.possedeUneAdresseComplete = true;
+        }
+        await calculerResultatsSimulation();
+      },
+    );
+
+    await recupererChiffresCles();
   });
 
-  async function chargerDonneesPourNouvelleAdresse() {
+  async function chercherAvecBarreDeRecherche() {
     if (!coordonnees.value) return;
 
     await nextTick();
-    if (adresse.value) avecAdressePrivee.value = true;
+    utilisationGeolocalisation.value = false;
+    avecAdressePrivee.value = true;
 
     await recupererChiffresCles(adresse.value?.codeEpci);
     await calculerResultatsSimulation();
@@ -131,6 +153,23 @@
       adressesRecentesComponent.value.chargerAdressesRecentes();
     }
   }
+
+  const chercherAvecAdresseRecente = async (adresseRecente: AdresseHistorique) => {
+    utilisationGeolocalisation.value = false;
+    await calculerResultatsSimulation();
+    await recupererChiffresCles(adresseRecente.code_commune);
+  };
+
+  const chercherAvecAdressePrincipale = async () => {
+    utilisationGeolocalisation.value = false;
+    await calculerResultatsSimulation();
+    await recupererChiffresCles();
+  };
+
+  const chercherAvecGeolocalisation = async () => {
+    utilisationGeolocalisation.value = true;
+    await calculerResultatsSimulation();
+  };
 
   async function recupererChiffresCles(codeEpci?: string) {
     chiffresClesEnChargement.value = true;
@@ -162,45 +201,8 @@
       });
   }
 
-  async function recupererAdressePrincipale() {
-    await recupererAdressePourBarreDeRecherche(
-      utilisateurId,
-      async (barreDeRechercheViewModel: BarreDeRechercheViewModel) => {
-        coordonnees.value = barreDeRechercheViewModel.coordonnees;
-        recherche.value = barreDeRechercheViewModel.recherche;
-        await calculerResultatsSimulation();
-      },
-    );
-
-    await recupererChiffresCles();
-  }
-
   function definirAdressePrincipale() {
     definirAdressePrincipaleComposable(utilisateurId, adresse.value, coordonnees.value);
-  }
-
-  const chercherAvecAdresseRecente = async (adresseRecente: AdresseHistorique) => {
-    coordonnees.value = {
-      latitude: adresseRecente.latitude,
-      longitude: adresseRecente.longitude,
-    };
-    recherche.value = formaterAdresse(adresseRecente);
-
-    await recupererChiffresCles(adresseRecente.code_commune);
-    await calculerResultatsSimulation();
-  };
-
-  const chercherAvecAdressePrincipale = async () => {
-    await recupererAdressePrincipale();
-  };
-
-  function chercherAvecGeolocalisation(position: globalThis.GeolocationPosition) {
-    coordonnees.value = {
-      latitude: position.coords.latitude,
-      longitude: position.coords.longitude,
-    };
-    recherche.value = 'Ma position actuelle';
-    chargerDonneesPourNouvelleAdresse();
   }
 
   async function terminerAction() {
