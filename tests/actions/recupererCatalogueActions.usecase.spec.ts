@@ -6,6 +6,7 @@ import { Action, CatalogueActions, TypeAction } from '@/domaines/actions/ports/a
 import { ActionViewModel } from '@/domaines/actions/ports/actions.presenter';
 import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 import { ExplicationsRecommandation } from '@/domaines/actions/explicationsRecommandation';
+import { TagThematique } from '@/domaines/thematiques/TagThematique';
 
 describe("Fichier de tests concernant la récupération du catalogue d'actions", () => {
   it('Doit presenter le catalogue actions et les actions', async () => {
@@ -24,6 +25,7 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
         explicationsRecommandations: new ExplicationsRecommandation(false, []),
         labelCompteur: '0 action réalisée',
         montantMaxEconomiesEnEuros: 10,
+        thematique: ClefThematiqueAPI.alimentation,
       },
       {
         code: 'code-action-test2',
@@ -41,6 +43,7 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
         ]),
         labelCompteur: '4 actions personnalisées réalisées',
         montantMaxEconomiesEnEuros: 0,
+        thematique: ClefThematiqueAPI.alimentation,
       },
       {
         code: 'code-action-test3',
@@ -56,6 +59,7 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
         explicationsRecommandations: new ExplicationsRecommandation(false, []),
         labelCompteur: '',
         montantMaxEconomiesEnEuros: 25,
+        thematique: ClefThematiqueAPI.alimentation,
       },
       {
         code: 'code-action-test4',
@@ -71,6 +75,7 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
         explicationsRecommandations: new ExplicationsRecommandation(false, []),
         labelCompteur: '0 action réalisée',
         montantMaxEconomiesEnEuros: 0,
+        thematique: ClefThematiqueAPI.alimentation,
       },
     ];
 
@@ -118,6 +123,10 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
           ],
           label: undefined,
           aidesDisponibles: undefined,
+          thematiqueTag: {
+            label: 'Me nourrir',
+            style: TagThematique.getTagThematiqueUtilitaire('alimentation'),
+          },
         },
         {
           code: 'code-action-test2',
@@ -138,9 +147,13 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
             },
             { text: 'SIMULATEUR', color: 'background-bleu-light text--bleu' },
           ],
-          label: { text: 'Recommandée pour moi', color: 'background-bleu-light text--bleu' },
+          label: { text: 'Recommandé', color: 'background-bleu-light text--bleu' },
           nombreDeParticipants: '4 actions personnalisées réalisées',
           aidesDisponibles: '<span class="text--bold">5</span> aides',
+          thematiqueTag: {
+            label: 'Me nourrir',
+            style: TagThematique.getTagThematiqueUtilitaire('alimentation'),
+          },
         },
         {
           code: 'code-action-test3',
@@ -171,6 +184,10 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
           label: { text: 'Réalisée', color: 'fr-label--vert' },
           nombreDeParticipants: undefined,
           aidesDisponibles: '<span class="text--bold">1</span> aide',
+          thematiqueTag: {
+            label: 'Me nourrir',
+            style: TagThematique.getTagThematiqueUtilitaire('alimentation'),
+          },
         },
         {
           code: 'code-action-test4',
@@ -194,6 +211,10 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
           label: undefined,
           nombreDeParticipants: undefined,
           aidesDisponibles: '<span class="text--bold">1</span> aide',
+          thematiqueTag: {
+            label: 'Me nourrir',
+            style: TagThematique.getTagThematiqueUtilitaire('alimentation'),
+          },
         },
       ]);
     }

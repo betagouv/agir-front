@@ -5,9 +5,17 @@
         <h3 class="fr-card__title">
           <router-link :to="action.url"><span v-html="action.titre" /></router-link>
         </h3>
-        <div v-if="action.label" class="fr-card__start height-3 flex flex-space-between">
+        <div class="fr-card__start flex fr-mb-1w">
           <ul class="fr-tags-group">
-            <li class="line-height--2">
+            <li>
+              <ThematiqueTag
+                :tag="{
+                  label: action.thematiqueTag.label,
+                  style: action.thematiqueTag.style,
+                }"
+              />
+            </li>
+            <li v-if="action.label" class="line-height--2">
               <p :class="`fr-tag fr-m-0 ${action.label.color}`" v-text="action.label.text" />
             </li>
           </ul>
@@ -31,6 +39,7 @@
 </template>
 
 <script lang="ts" setup>
+  import ThematiqueTag from '@/components/custom/Thematiques/ThematiqueTag.vue';
   import { ActionViewModel } from '@/domaines/actions/ports/actions.presenter';
 
   defineProps<{
