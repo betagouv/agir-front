@@ -92,6 +92,7 @@
   import { CalculerResultatSimulationMaifUsecase } from '@/domaines/simulationMaif/calculerResultatSimulationMaif.usecase';
   import { RecupererStatistiquesCommuneMaifUsecase } from '@/domaines/simulationMaif/recupererStatistiquesCommuneMaifDepuisProfil.usecase';
   import { AdresseBarreDeRecherche, Coordonnees } from '@/shell/coordonneesType';
+  import formaterAdresse from '@/shell/formaterAdresseBarreDeRecherche';
   import { MODALE_GEOLOCALISATION_ID } from '@/shell/modaleGeolocalisationId';
   import { SimulateursSupportes } from '@/shell/simulateursSupportes';
   import { utilisateurStore } from '@/store/utilisateur';
@@ -120,23 +121,14 @@
   const calculerResultatSimulationMaifUsecase = new CalculerResultatSimulationMaifUsecase(simulateurMaifRepository);
 
   onMounted(async () => {
-    await recupererAdressePourBarreDeRecherche(
-      utilisateurId,
-      async (barreDeRechercheViewModel: BarreDeRechercheViewModel) => {
-        coordonnees.value = barreDeRechercheViewModel.coordonnees;
-        recherche.value = barreDeRechercheViewModel.recherche;
-        await calculerResultatsSimulation();
-      },
-    );
-
-    await recupererChiffresCles();
+    await recupererAdressePrincipale();
   });
 
   async function chargerDonneesPourNouvelleAdresse() {
     if (!coordonnees.value) return;
 
     await nextTick();
-    avecAdressePrivee.value = true;
+    if (adresse.value) avecAdressePrivee.value = true;
 
     await recupererChiffresCles(adresse.value?.codeEpci);
     await calculerResultatsSimulation();
@@ -159,7 +151,7 @@
   }
 
   async function calculerResultatsSimulation() {
-    if (!coordonnees.value) return;
+    if (!coordonnees.value || !coordonnees.value.longitude || !coordonnees.value.longitude) return;
 
     resultatsEnChargement.value = true;
     await calculerResultatSimulationMaifUsecase
@@ -176,34 +168,36 @@
       });
   }
 
+  async function recupererAdressePrincipale() {
+    await recupererAdressePourBarreDeRecherche(
+      utilisateurId,
+      async (barreDeRechercheViewModel: BarreDeRechercheViewModel) => {
+        coordonnees.value = barreDeRechercheViewModel.coordonnees;
+        recherche.value = barreDeRechercheViewModel.recherche;
+        await calculerResultatsSimulation();
+      },
+    );
+
+    await recupererChiffresCles();
+  }
+
   function definirAdressePrincipale() {
     definirAdressePrincipaleComposable(utilisateurId, adresse.value, coordonnees.value);
   }
 
-  const chercherAvecAdresseRecente = (adresseRecente: AdresseHistorique) => {
+  const chercherAvecAdresseRecente = async (adresseRecente: AdresseHistorique) => {
     coordonnees.value = {
       latitude: adresseRecente.latitude,
       longitude: adresseRecente.longitude,
     };
-    recherche.value = `${adresseRecente.numero_rue} ${adresseRecente.rue} ${adresseRecente.code_postal} ${adresseRecente.commmune}`;
-    chargerDonneesPourNouvelleAdresse();
+    recherche.value = formaterAdresse(adresseRecente);
+
+    await recupererChiffresCles(adresseRecente.code_commune);
+    await calculerResultatsSimulation();
   };
 
   const chercherAvecAdressePrincipale = async () => {
-    await recupererAdressePourBarreDeRecherche(
-      utilisateurStore().utilisateur.id,
-      async (barreDeRechercheViewModel: BarreDeRechercheViewModel) => {
-        coordonnees.value = barreDeRechercheViewModel.coordonnees;
-        if (barreDeRechercheViewModel.adresse) {
-          const adressePrincipale = barreDeRechercheViewModel.adresse;
-          recherche.value =
-            adressePrincipale.numeroRue && adressePrincipale.rue
-              ? `${adressePrincipale.numeroRue} ${adressePrincipale.rue} ${adressePrincipale.codePostal} ${adressePrincipale.communeLabel}`
-              : `${adressePrincipale.codePostal} ${adressePrincipale.communeLabel}`;
-        }
-        await chargerDonneesPourNouvelleAdresse();
-      },
-    );
+    await recupererAdressePrincipale();
   };
 
   function chercherAvecGeolocalisation() {

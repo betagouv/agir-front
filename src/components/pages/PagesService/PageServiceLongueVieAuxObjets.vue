@@ -115,6 +115,7 @@
   import { ServiceRechercheLongueVieAuxObjetsAxios } from '@/domaines/serviceRecherche/longueVieAuxObjets/adapters/serviceRechercheLongueVieAuxObjets.repository.axios';
   import { RecupererServiceLongueVieAuxObjetsUsecase } from '@/domaines/serviceRecherche/longueVieAuxObjets/recupererServiceLongueVieAuxObjets.usecase';
   import { AdresseBarreDeRecherche } from '@/shell/coordonneesType';
+  import formaterAdresse from '@/shell/formaterAdresseBarreDeRecherche';
   import { MODALE_GEOLOCALISATION_ID } from '@/shell/modaleGeolocalisationId';
   import { utilisateurStore } from '@/store/utilisateur';
 
@@ -177,7 +178,6 @@
 
   async function definirAdressePrincipale() {
     await definirAdressePrincipaleComposable(utilisateurStore().utilisateur.id, adresse.value, coordonnees.value);
-    utilisateurStore().utilisateur.possedeUneAdresseComplete = true;
   }
 
   async function chargerDonneesPourNouvelleAdresse() {
@@ -190,7 +190,7 @@
       latitude: adresseRecente.latitude,
       longitude: adresseRecente.longitude,
     };
-    recherche.value = `${adresseRecente.numero_rue} ${adresseRecente.rue} ${adresseRecente.code_postal} ${adresseRecente.commmune}`;
+    recherche.value = formaterAdresse(adresseRecente);
     lancerRecherche();
   };
 

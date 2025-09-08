@@ -64,6 +64,7 @@
   import { HistoriqueAdresseRepositoryAxios } from '@/domaines/adresses/adapters/historiqueAdresse.repository.axios';
   import { AjouterHistoriqueAdresseUsecase } from '@/domaines/adresses/ajouterHistoriqueAdresse.usecase';
   import { AdresseBarreDeRecherche, Coordonnees } from '@/shell/coordonneesType';
+  import formaterAdresse from '@/shell/formaterAdresseBarreDeRecherche';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const props = defineProps<{
@@ -147,7 +148,7 @@
 
   function envoyerCoordonnees(adresse: AdresseBarreDeRecherche) {
     indexSelectionne.value = -1;
-    recherche.value = `${adresse.numeroEtRue}, ${adresse.commune} (${adresse.codePostal})`;
+    recherche.value = formaterAdresse(adresse);
     coordonnees.value = adresse.coordonnees;
     adresseRef.value = adresse;
     dialogOuverte.value = false;
