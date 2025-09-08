@@ -1,9 +1,10 @@
 <template>
   <div class="fr-p-3w contenu-indisponible">
-    <h2>Inscrivez-vous pour accéder à ce {{ contenu }} !</h2>
+    <h2>Inscrivez-vous pour accéder au {{ contenu }}</h2>
     <p>
-      Ce {{ contenu }} n'est pas encore disponible au grand public ! Vous pouvez vous inscrire à <i>J'agis</i> pour en
-      bénéficier en avant-première.
+      Votre compte nous permet de mieux vous connaître. En créant un compte <i>J’agis</i>, vous pourrez accéder au
+      {{ contenu }} et profiter de
+      <span class="text--bold">recommandations personnalisées selon vos habitudes, vos besoins et vos envies</span> !
     </p>
 
     <div class="fr-btns-group fr-btns-group--inline">
