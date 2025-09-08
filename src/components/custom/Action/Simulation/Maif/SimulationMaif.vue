@@ -60,20 +60,16 @@
       </div>
     </div>
   </section>
-
-  <ModaleErreurGeolocalisation />
 </template>
 
 <script lang="ts" setup>
   import { computed, nextTick, onMounted, ref } from 'vue';
   import MaifRisques from '@/components/custom/Action/Simulation/Maif/MaifRisques.vue';
   import BarreDeRechercheAdresse from '@/components/custom/Form/BarreDeRechercheAdresse.vue';
-  import ModaleErreurGeolocalisation from '@/components/custom/Modale/ModaleErreurGeolocalisation.vue';
   import BallLoader from '@/components/custom/Thematiques/BallLoader.vue';
   import Callout from '@/components/dsfr/Callout.vue';
   import AdressesRecentesComponent from '@/components/pages/PagesService/AdressesRecentesComponent.vue';
   import { useAdressePrincipale } from '@/composables/useAdressePrincipale';
-  import { useDsfrModale } from '@/composables/useDsfrModale';
   import { ActionsEventBus } from '@/domaines/actions/actions.eventbus';
   import { ActionsRepositoryAxios } from '@/domaines/actions/adapters/actions.repository.axios';
   import { TypeAction } from '@/domaines/actions/ports/actions.repository';
@@ -93,7 +89,6 @@
   import { RecupererStatistiquesCommuneMaifUsecase } from '@/domaines/simulationMaif/recupererStatistiquesCommuneMaifDepuisProfil.usecase';
   import { AdresseBarreDeRecherche, Coordonnees } from '@/shell/coordonneesType';
   import formaterAdresse from '@/shell/formaterAdresseBarreDeRecherche';
-  import { MODALE_GEOLOCALISATION_ID } from '@/shell/modaleGeolocalisationId';
   import { SimulateursSupportes } from '@/shell/simulateursSupportes';
   import { utilisateurStore } from '@/store/utilisateur';
 
@@ -104,7 +99,6 @@
   const resultatSimulationMaifViewModel = ref<SimulateurMaifViewModel>();
   const adressesRecentesComponent = ref<InstanceType<typeof AdressesRecentesComponent>>();
 
-  const { ouvrirModale: ouvrirModaleErreurGeoloc } = useDsfrModale(MODALE_GEOLOCALISATION_ID);
   const resultatsEnChargement = ref<boolean>(false);
   const chiffresClesEnChargement = ref<boolean>(false);
   const utilisateurId = utilisateurStore().utilisateur.id;
@@ -200,25 +194,13 @@
     await recupererAdressePrincipale();
   };
 
-  function chercherAvecGeolocalisation() {
-    if (!navigator.geolocation) {
-      ouvrirModaleErreurGeoloc();
-      return;
-    }
-
-    navigator.geolocation.getCurrentPosition(
-      position => {
-        coordonnees.value = {
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
-        };
-        recherche.value = 'Ma position actuelle';
-        chargerDonneesPourNouvelleAdresse();
-      },
-      () => {
-        ouvrirModaleErreurGeoloc();
-      },
-    );
+  function chercherAvecGeolocalisation(position: globalThis.GeolocationPosition) {
+    coordonnees.value = {
+      latitude: position.coords.latitude,
+      longitude: position.coords.longitude,
+    };
+    recherche.value = 'Ma position actuelle';
+    chargerDonneesPourNouvelleAdresse();
   }
 
   async function terminerAction() {

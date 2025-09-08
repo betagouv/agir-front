@@ -84,8 +84,6 @@
         </section>
       </PageServiceTemplate>
     </ServiceSkeletonConditionnel>
-
-    <ModaleErreurGeolocalisation />
   </div>
 </template>
 
@@ -93,7 +91,6 @@
   import { nextTick, onMounted, ref } from 'vue';
   import { useRouter } from 'vue-router';
   import BarreDeRechercheAdresse from '@/components/custom/Form/BarreDeRechercheAdresse.vue';
-  import ModaleErreurGeolocalisation from '@/components/custom/Modale/ModaleErreurGeolocalisation.vue';
   import PageServiceTemplate from '@/components/custom/Service/PageServiceTemplate.vue';
   import ServiceFavoris from '@/components/custom/Service/ServiceFavoris.vue';
   import ServiceListeCarte from '@/components/custom/Service/ServiceListeCarte.vue';
@@ -104,7 +101,6 @@
   import AdressesRecentesComponent from '@/components/pages/PagesService/AdressesRecentesComponent.vue';
   import { useRechercheService } from '@/composables/service/useRechercheService';
   import { useAdressePrincipale } from '@/composables/useAdressePrincipale';
-  import { useDsfrModale } from '@/composables/useDsfrModale';
   import { AdresseHistorique } from '@/domaines/adresses/recupererHistoriqueAdresse.usecase';
   import { BarreDeRechercheViewModel } from '@/domaines/logement/adapters/barreDeRecherche.presenter.impl';
   import {
@@ -116,7 +112,6 @@
   import { RecupererServiceLongueVieAuxObjetsUsecase } from '@/domaines/serviceRecherche/longueVieAuxObjets/recupererServiceLongueVieAuxObjets.usecase';
   import { AdresseBarreDeRecherche } from '@/shell/coordonneesType';
   import formaterAdresse from '@/shell/formaterAdresseBarreDeRecherche';
-  import { MODALE_GEOLOCALISATION_ID } from '@/shell/modaleGeolocalisationId';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const serviceListeCarte = ref<InstanceType<typeof ServiceListeCarte>>();
@@ -143,8 +138,6 @@
     pageEstEnChargement,
     cartesSontEnChargement,
   } = useRechercheService(lancerRecherche, 'vos_objets');
-
-  const { ouvrirModale: ouvrirModaleErreurGeoloc } = useDsfrModale(MODALE_GEOLOCALISATION_ID);
 
   async function chargerPlusDeCartesEtFocus() {
     const ancienNombreDeResultats = nombreDeResultats.value;
@@ -199,37 +192,19 @@
       utilisateurStore().utilisateur.id,
       async (barreDeRechercheViewModel: BarreDeRechercheViewModel) => {
         coordonnees.value = barreDeRechercheViewModel.coordonnees;
-        if (barreDeRechercheViewModel.adresse) {
-          const adressePrincipale = barreDeRechercheViewModel.adresse;
-          recherche.value =
-            adressePrincipale.numeroRue && adressePrincipale.rue
-              ? `${adressePrincipale.numeroRue} ${adressePrincipale.rue} ${adressePrincipale.codePostal} ${adressePrincipale.communeLabel}`
-              : `${adressePrincipale.codePostal} ${adressePrincipale.communeLabel}`;
-        }
+        recherche.value = barreDeRechercheViewModel.recherche;
         await lancerRecherche();
       },
     );
   };
 
-  function chercherAvecGeolocalisation() {
-    if (!navigator.geolocation) {
-      ouvrirModaleErreurGeoloc();
-      return;
-    }
-
-    navigator.geolocation.getCurrentPosition(
-      position => {
-        coordonnees.value = {
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
-        };
-        recherche.value = 'Ma position actuelle';
-        lancerRecherche();
-      },
-      () => {
-        ouvrirModaleErreurGeoloc();
-      },
-    );
+  function chercherAvecGeolocalisation(position: globalThis.GeolocationPosition) {
+    coordonnees.value = {
+      latitude: position.coords.latitude,
+      longitude: position.coords.longitude,
+    };
+    recherche.value = 'Ma position actuelle';
+    lancerRecherche();
   }
 
   onMounted(async () => {

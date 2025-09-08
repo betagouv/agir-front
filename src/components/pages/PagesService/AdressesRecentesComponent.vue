@@ -58,10 +58,16 @@
       </div>
     </li>
   </ul>
+
+  <Teleport to="body">
+    <ModaleErreurGeolocalisation :modale-id="MODALE_GEOLOCALISATION_ID" />
+  </Teleport>
 </template>
 
 <script lang="ts" setup>
   import { onMounted, ref } from 'vue';
+  import ModaleErreurGeolocalisation from '@/components/custom/Modale/ModaleErreurGeolocalisation.vue';
+  import { useDsfrModale } from '@/composables/useDsfrModale';
   import { HistoriqueAdresseRepositoryAxios } from '@/domaines/adresses/adapters/historiqueAdresse.repository.axios';
   import {
     AdresseHistorique,
@@ -71,12 +77,15 @@
   import { trackClick } from '@/shell/matomo';
   import { utilisateurStore } from '@/store/utilisateur';
 
-  defineProps<{
+  const props = defineProps<{
     onAdresseRecenteSelectionnee: (adresse: AdresseHistorique) => void;
     onAdresseResidencePrincipaleSelectionnee: () => void;
-    onGeolocalisationSelectionne?: () => void;
+    onGeolocalisationSelectionne?: (position: globalThis.GeolocationPosition) => void;
     adressePrincipaleComplete?: boolean;
   }>();
+
+  const MODALE_GEOLOCALISATION_ID = 'erreur-geolocalisation';
+  const { ouvrirModale: ouvrirModaleErreurGeoloc } = useDsfrModale(MODALE_GEOLOCALISATION_ID);
   const adressesRecentes = ref<AdresseHistorique[]>([]);
   const historiqueAdresseRepositoryAxios = new HistoriqueAdresseRepositoryAxios();
 
@@ -98,6 +107,22 @@
     );
 
     chargerAdressesRecentes();
+  };
+
+  const onGeolocalisationSelectionne = () => {
+    if (!navigator.geolocation) {
+      ouvrirModaleErreurGeoloc();
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        props.onGeolocalisationSelectionne?.(position);
+      },
+      () => {
+        ouvrirModaleErreurGeoloc();
+      },
+    );
   };
 
   defineExpose({
