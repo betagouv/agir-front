@@ -4,6 +4,8 @@ import { ChargerActionsRecommandeesGlobalesUsecase } from '@/domaines/actions/ch
 import { ActionsPresenterImpl } from '@/domaines/actions/adapters/actions.presenter.impl';
 import { ActionViewModel } from '@/domaines/actions/ports/actions.presenter';
 import { ExplicationsRecommandation } from '@/domaines/actions/explicationsRecommandation';
+import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
+import { TagThematique } from '@/domaines/thematiques/TagThematique';
 
 describe('Fichier de tests concernant la récupération des actions recommandées inter-thématiques', () => {
   it('Doit presenter les actions sous forme de tableau', async () => {
@@ -22,6 +24,7 @@ describe('Fichier de tests concernant la récupération des actions recommandée
         explicationsRecommandations: new ExplicationsRecommandation(false, []),
         labelCompteur: '0 action réalisée',
         montantMaxEconomiesEnEuros: 0,
+        thematique: ClefThematiqueAPI.alimentation,
       },
       {
         code: 'code-action-test2',
@@ -36,6 +39,7 @@ describe('Fichier de tests concernant la récupération des actions recommandée
         explicationsRecommandations: new ExplicationsRecommandation(false, []),
         labelCompteur: '**4 actions** réalisées',
         montantMaxEconomiesEnEuros: 300,
+        thematique: ClefThematiqueAPI.alimentation,
       },
     ];
 
@@ -60,6 +64,10 @@ describe('Fichier de tests concernant la récupération des actions recommandée
             label: undefined,
             nombreDeParticipants: undefined,
             aidesDisponibles: undefined,
+            thematiqueTag: {
+              label: 'Me nourrir',
+              style: TagThematique.getTagThematiqueUtilitaire('alimentation'),
+            },
           },
           {
             code: 'code-action-test2',
@@ -89,6 +97,10 @@ describe('Fichier de tests concernant la récupération des actions recommandée
             label: undefined,
             nombreDeParticipants: '<span class="text--bold">4 actions</span> réalisées',
             aidesDisponibles: '<span class="text--bold">5</span> aides',
+            thematiqueTag: {
+              label: 'Me nourrir',
+              style: TagThematique.getTagThematiqueUtilitaire('alimentation'),
+            },
           },
         ]);
       }),

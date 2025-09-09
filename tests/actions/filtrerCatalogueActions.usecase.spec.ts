@@ -7,6 +7,7 @@ import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 import { FiltrerCatalogueActionsUsecase } from '@/domaines/actions/filtrerCatalogueActions.usecase';
 import { ExplicationsRecommandation } from '@/domaines/actions/explicationsRecommandation';
 import { Filtres, FiltreStatut, FiltreStatutBuilder } from '@/domaines/actions/filtres';
+import { TagThematique } from '@/domaines/thematiques/TagThematique';
 
 describe("Fichier de tests concernant la récupération du catalogue d'actions", () => {
   it('Doit filtrer correctement le catalogue actions et les actions quand un utilisateur est connecté', async () => {
@@ -25,6 +26,7 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
         explicationsRecommandations: new ExplicationsRecommandation(false, []),
         labelCompteur: '0 action réalisée',
         montantMaxEconomiesEnEuros: 0,
+        thematique: ClefThematiqueAPI.alimentation,
       },
     ];
 
@@ -90,6 +92,10 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
           label: undefined,
           nombreDeParticipants: '0 action réalisée',
           aidesDisponibles: '<span class="text--bold">5</span> aides',
+          thematiqueTag: {
+            label: 'Me nourrir',
+            style: TagThematique.getTagThematiqueUtilitaire('alimentation'),
+          },
         },
       ]);
     }
