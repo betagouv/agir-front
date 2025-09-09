@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.23.1](https://github.com/betagouv/agir-front/compare/v2.23.0...v2.23.1) (2025-09-09)
+
+
+### 🐛 Corrections de bogues
+
+* cacher maif temporairement ([#1330](https://github.com/betagouv/agir-front/issues/1330)) ([aa790eb](https://github.com/betagouv/agir-front/commit/aa790ebd1292944cc0a60dc3b1a898ecb2a00ed6))
+
 ## [2.23.0](https://github.com/betagouv/agir-front/compare/v2.22.0...v2.23.0) (2025-09-09)
 
 
