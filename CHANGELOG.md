@@ -1,5 +1,34 @@
 # Changelog
 
+## [2.23.0](https://github.com/betagouv/agir-front/compare/v2.22.0...v2.23.0) (2025-09-09)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* ajout d'un fallback de connexion pour les actions complexes hors connexion ([#1319](https://github.com/betagouv/agir-front/issues/1319)) ([ac70f75](https://github.com/betagouv/agir-front/commit/ac70f753cfee9e95ae308658a85f6fa3a13b126e))
+* ajout des adresses récentes dans l'action MAIF ([#1320](https://github.com/betagouv/agir-front/issues/1320)) ([9926de5](https://github.com/betagouv/agir-front/commit/9926de5d0ba520f57ce0606bfccb6e6baf115eb6))
+* ajout du tag thematique dans la carte action ([#1322](https://github.com/betagouv/agir-front/issues/1322)) ([f700cc5](https://github.com/betagouv/agir-front/commit/f700cc5fe6819145c0f5d93ad66082ed79b109af))
+* filtres statuts dans le catalogue actions ([#1314](https://github.com/betagouv/agir-front/issues/1314)) ([7bed5fe](https://github.com/betagouv/agir-front/commit/7bed5fea324b0e3ed62069fe25202946e1172a6c))
+
+
+### 🐛 Corrections de bogues
+
+* cacher stepper quand il y a plus de 25 questions ([#1313](https://github.com/betagouv/agir-front/issues/1313)) ([9a766c2](https://github.com/betagouv/agir-front/commit/9a766c26d5d2cff4b3a1315b2d063220375827a3))
+* maif adresse recente ([#1321](https://github.com/betagouv/agir-front/issues/1321)) ([6b01251](https://github.com/betagouv/agir-front/commit/6b012518b364c87a8a80ef2939833063ff0b7f05))
+
+
+### 👷 Gestion des dépendances
+
+* Bump @iframe-resizer/vue from 5.5.3 to 5.5.5 ([#1315](https://github.com/betagouv/agir-front/issues/1315)) ([22c34a5](https://github.com/betagouv/agir-front/commit/22c34a5017475ee2246ea9466d6db95dfa3d3b3d))
+* Bump @sentry/vite-plugin from 4.2.0 to 4.3.0 ([#1324](https://github.com/betagouv/agir-front/issues/1324)) ([8b6c4f8](https://github.com/betagouv/agir-front/commit/8b6c4f8b099de6010dbe17685979ad8934ca40e5))
+* Bump @sentry/vue from 10.8.0 to 10.10.0 ([#1327](https://github.com/betagouv/agir-front/issues/1327)) ([d00a717](https://github.com/betagouv/agir-front/commit/d00a717b436514d9ca72e04eb4ed7fcf3db27d4f))
+* Bump actions/setup-node from 4 to 5 ([#1328](https://github.com/betagouv/agir-front/issues/1328)) ([8524951](https://github.com/betagouv/agir-front/commit/85249518c372328aace9b03e0ead3a8cc92122f2))
+* Bump dotenv from 17.2.1 to 17.2.2 ([#1326](https://github.com/betagouv/agir-front/issues/1326)) ([ce9563c](https://github.com/betagouv/agir-front/commit/ce9563c7365283dbd0885b6ea56fb3e559b9d6a2))
+* Bump lighthouse from 12.8.1 to 12.8.2 ([#1312](https://github.com/betagouv/agir-front/issues/1312)) ([f8248bc](https://github.com/betagouv/agir-front/commit/f8248bc3c37a406084e7f42d678f2ca662d6e7b8))
+* Bump lint-staged from 16.1.5 to 16.1.6 ([#1317](https://github.com/betagouv/agir-front/issues/1317)) ([6debc17](https://github.com/betagouv/agir-front/commit/6debc17ac821d5434ef7cf6e545a17358f902e09))
+* Bump vite from 7.1.4 to 7.1.5 ([#1323](https://github.com/betagouv/agir-front/issues/1323)) ([e2f1906](https://github.com/betagouv/agir-front/commit/e2f19068f27b207a2b90787bc46877cbdbe5d45d))
+* Bump vue from 3.5.20 to 3.5.21 ([#1325](https://github.com/betagouv/agir-front/issues/1325)) ([827cfd5](https://github.com/betagouv/agir-front/commit/827cfd52a46b4e16fb0bedad83ff100739cef084))
+
 ## [2.22.0](https://github.com/betagouv/agir-front/compare/v2.21.0...v2.22.0) (2025-09-02)
 
 
