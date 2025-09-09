@@ -9,6 +9,7 @@ import { RecupererAdressePourBarreDeRechercheUsecase } from '@/domaines/logement
 import { Logement } from '@/domaines/logement/recupererInformationLogement.usecase';
 import { sessionAppRawDataStorage } from '@/shell/appRawDataStorage';
 import { AdresseBarreDeRecherche, Coordonnees } from '@/shell/coordonneesType';
+import { utilisateurStore } from '@/store/utilisateur';
 
 export function useAdressePrincipale() {
   const logementRepository = new LogementRepositoryAxios();
@@ -42,6 +43,7 @@ export function useAdressePrincipale() {
     );
     return patcherInformationLogementUsecase.execute(utilisateurId, nouveauLogement).then(() => {
       avecAdressePrivee.value = false;
+      utilisateurStore().utilisateur.possedeUneAdresseComplete = true;
     });
   }
 

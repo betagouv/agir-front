@@ -1,5 +1,6 @@
 import { BarreDeRecherchePresenter } from '@/domaines/logement/ports/barreDeRecherche.presenter';
 import { Adresse } from '@/domaines/logement/recupererAdressePourBarreDeRecherche.usecase';
+import formaterAdresse from '@/shell/formaterAdresseBarreDeRecherche';
 
 export type BarreDeRechercheViewModel = {
   recherche: string;
@@ -25,9 +26,7 @@ export class BarreDeRecherchePresenterImpl implements BarreDeRecherchePresenter 
         latitude: adresse.coordonnees.latitude,
         longitude: adresse.coordonnees.longitude,
       },
-      recherche: adresse.numeroRue
-        ? `${adresse.numeroRue} ${adresse.rue}, ${adresse.commune_label} (${adresse.codePostal})`
-        : '',
+      recherche: adresse.numeroRue ? formaterAdresse(adresse) : '',
       adresse: {
         codePostal: adresse.codePostal,
         numeroRue: adresse.numeroRue,
