@@ -1,7 +1,7 @@
 <template>
   <div v-if="detailConsommations.length > 0">
     <div class="position--relative full-width full-height fr-px-2w fr-py-3w flex flex-center">
-      <Doughnut :data="graphData" :options="graphOptions" ref="chartRef" aria-hidden="true" />
+      <Doughnut ref="chartRef" :data="graphData" :options="graphOptions" aria-hidden="true" />
 
       <p class="texte-au-centre fr-mb-0">
         <span class="display-block text--bold text--3xl fr-mb-1w" v-text="totalConsommation" />
@@ -10,12 +10,13 @@
       </p>
 
       <div
-        aria-hidden="true"
-        v-for="(item, index) in detailConsommations"
+        v-for="(item, index) in detailConsommations.filter(c => c.pourcentageNonFormate >= 1)"
         :key="item.label"
-        class="emoji-bubble"
         :style="positionnerBulle(index, item.color)"
+        aria-hidden="true"
+        class="emoji-bubble"
       >
+        {{ item.pourcentageNonFormate }}
         {{ item.emoji }}
       </div>
     </div>
@@ -24,7 +25,7 @@
   </div>
 
   <div v-else class="fr-p-3w flex flex-center flex-column align-items--center full-height">
-    <p class="text--center" v-if="totalConsommation">
+    <p v-if="totalConsommation" class="text--center">
       <span class="text--bold text--3xl" v-text="totalConsommation" />
       consommés par an
     </p>
@@ -69,17 +70,20 @@
     }
   };
 
-  const graphData = computed<ChartData<'doughnut'>>(() => ({
-    labels: props.detailConsommations.map(c => c.label),
-    datasets: [
-      {
-        data: props.detailConsommations.map(c => c.value),
-        backgroundColor: props.detailConsommations.map(c => c.color),
-        borderRadius: 10,
-        spacing: 2,
-      },
-    ],
-  }));
+  const graphData = computed<ChartData<'doughnut'>>(() => {
+    const filteredData = props.detailConsommations.filter(c => c.pourcentageNonFormate >= 1);
+    return {
+      labels: filteredData.map(c => c.label),
+      datasets: [
+        {
+          data: filteredData.map(c => c.value),
+          backgroundColor: filteredData.map(c => c.color),
+          borderRadius: 10,
+          spacing: 2,
+        },
+      ],
+    };
+  });
 
   const graphOptions: ChartOptions<'doughnut'> = {
     events: [],
