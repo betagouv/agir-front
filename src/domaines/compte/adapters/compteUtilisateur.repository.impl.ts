@@ -40,8 +40,8 @@ export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurReposit
       const response: Response<CompteUtilisateurApiModel> = await axiosInstance.post(`/utilisateurs/send_magic_link`, {
         email: compteUtilisateurACreer.email,
         situation_ngc_id: compteUtilisateurACreer.situationId,
-        source_inscription: compteUtilisateurACreer.situationId ? 'web_ngc' : 'web',
-        referer: compteUtilisateurACreer.referer,
+        source_inscription: 'web',
+        referer: compteUtilisateurACreer.situationId ? 'ngc' : compteUtilisateurACreer.referer,
         referer_keyword: compteUtilisateurACreer.refererKeyword,
       });
       return {
