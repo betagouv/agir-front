@@ -17,6 +17,7 @@ export interface ReponsePossibleViewModel {
 export interface QuestionViewModel {
   id: string;
   libelle: string;
+  sousLibelle?: string;
   type: 'libre' | 'choix_multiple' | 'choix_unique' | 'mosaic_boolean' | 'entier' | 'decimal';
   reponses_possibles: ReponsePossibleViewModel[];
   points: string;

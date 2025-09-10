@@ -21,6 +21,7 @@ export class QuestionViewModelBuilder {
     return builder
       .withId(question.id)
       .withLibelle(question.libelle)
+      .withSousLibelle(question.sousLibelle)
       .withType(question.type)
       .withPoints(question.points)
       .withReponsesPossibles(builder.determineReponsePossibles(question))
@@ -49,6 +50,11 @@ export class QuestionViewModelBuilder {
 
   withLibelle(libelle: string): QuestionViewModelBuilder {
     this.questionViewModel.libelle = libelle;
+    return this;
+  }
+
+  withSousLibelle(sousLibelle?: string): QuestionViewModelBuilder {
+    this.questionViewModel.sousLibelle = sousLibelle;
     return this;
   }
 
