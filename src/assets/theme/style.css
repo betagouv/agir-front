@@ -458,6 +458,10 @@
     border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
+.border-top--bleu {
+    border-top: 2px solid var(--blue-france-sun-113-625);
+}
+
 .border--bottom--grey {
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
