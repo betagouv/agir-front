@@ -5,7 +5,7 @@
         <slot name="custom-card"></slot>
       </section>
       <section v-else :class="cardClasses">
-        <CarteCatalogueAction :action="item" />
+        <CarteCatalogueAction :action="item" :afficher-thematique="afficherThematique" />
       </section>
     </template>
   </div>
@@ -16,14 +16,21 @@
   import CarteCatalogueAction from '@/components/custom/Action/Catalogue/CarteCatalogueAction.vue';
   import { ActionViewModel } from '@/domaines/actions/ports/actions.presenter';
 
-  const props = defineProps<{
-    actions: ActionViewModel[];
-    cardClasses: string;
-    insertCustomCardAt?: number;
-  }>();
+  const props = withDefaults(
+    defineProps<{
+      actions: ActionViewModel[];
+      cardClasses: string;
+      insertCustomCardAt?: number;
+      afficherThematique?: boolean;
+    }>(),
+    {
+      afficherThematique: false,
+    },
+  );
 
   type CustomCard = { isCustom: true };
   type CardItem = ActionViewModel | CustomCard;
+
   function isCustomCard(item: CardItem): item is CustomCard {
     return 'isCustom' in item && item.isCustom;
   }
