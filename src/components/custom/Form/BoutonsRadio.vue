@@ -10,7 +10,7 @@
       class="fr-fieldset__legend--regular fr-fieldset__legend fr-pb-0"
     >
       <slot name="legende">{{ legende }}</slot>
-      <span v-if="description" class="fr-hint-text">{{ description }}</span>
+      <span v-if="description" v-text="description" class="fr-mb-1w fr-mt-1v display-block fr-text--sm text--normal" />
     </legend>
     <div class="fr-grid-row">
       <div v-for="option in options" :key="option.label" :class="`fr-fieldset__element ${col}`">

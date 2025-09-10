@@ -3,6 +3,7 @@
     v-model="reponse"
     :legende="questionViewModel.libelle"
     :name="questionViewModel.id"
+    :description="questionViewModel.sousLibelle"
     :options="
       questionViewModel.reponses_possibles.map(reponsePossible => ({
         label: reponsePossible.label,

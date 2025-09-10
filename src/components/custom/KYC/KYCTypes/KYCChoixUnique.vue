@@ -14,6 +14,7 @@
     col=""
     legende-size="l"
     orientation="vertical"
+    :description="questionViewModel.sousLibelle"
   >
     <template v-slot:legende>
       {{ questionViewModel.libelle }}

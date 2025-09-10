@@ -8,6 +8,7 @@
       cssModifier: 'fr-h4',
     }"
     :unite="questionViewModel.reponses_possibles[0]?.unite"
+    :description="questionViewModel.sousLibelle"
   >
     <template #complement>
       <slot name="complement" />

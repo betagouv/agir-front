@@ -61,6 +61,7 @@
       new QuestionPresenterImpl(
         (viewModel: QuestionViewModel) => {
           questionViewModel.value = viewModel;
+          questionViewModel.value.sousLibelle = 'Ceci est une description';
         },
         () => {},
       ),

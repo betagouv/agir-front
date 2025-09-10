@@ -45,6 +45,7 @@ export interface QuestionMetaData {
 export interface Question {
   id: string;
   libelle: string;
+  sousLibelle?: string;
   type: 'libre' | 'choix_multiple' | 'choix_unique' | 'mosaic_boolean' | 'entier' | 'decimal';
   points: number;
   thematique: ThematiqueQuestion;
