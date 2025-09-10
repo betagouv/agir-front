@@ -14,26 +14,22 @@ export enum RoutePersonnalisationPath {
 }
 const personnalisationRoutes: RouteRecordRaw[] = [];
 
-if (import.meta.env.VITE_ENV === 'dev') {
-  personnalisationRoutes.push({
-    path: RoutePersonnalisationPath.MAPPING_TAG_KYC,
-    name: RoutePersonnalisationName.MAPPING_TAG_KYC,
-    component: PageDictionnaireTags,
-    meta: {
-      title: 'Dictionnaire des tags',
-    },
-  });
-}
+personnalisationRoutes.push({
+  path: RoutePersonnalisationPath.MAPPING_TAG_KYC,
+  name: RoutePersonnalisationName.MAPPING_TAG_KYC,
+  component: PageDictionnaireTags,
+  meta: {
+    title: 'Dictionnaire des tags',
+  },
+});
 
-if (import.meta.env.VITE_ENV === 'dev') {
-  personnalisationRoutes.push({
-    path: RoutePersonnalisationPath.PERSONNALISATION,
-    name: RoutePersonnalisationName.PERSONNALISATION,
-    component: PagePersonnalisation,
-    meta: {
-      title: 'Tester la personnalisation',
-    },
-  });
-}
+personnalisationRoutes.push({
+  path: RoutePersonnalisationPath.PERSONNALISATION,
+  name: RoutePersonnalisationName.PERSONNALISATION,
+  component: PagePersonnalisation,
+  meta: {
+    title: 'Tester la personnalisation',
+  },
+});
 
 export default personnalisationRoutes;
