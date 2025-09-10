@@ -16,9 +16,10 @@ export class CatalogueActionsPresenterImpl extends ActionsPresenterImpl implemen
   }
 
   async presenteCatalogue(catalogueActions: CatalogueActions): Promise<void> {
-    await super.presente(catalogueActions.actions);
+    const actionsTrieParRecommande = catalogueActions.actions.getActionsTrieParRecommande();
+    await super.presente(actionsTrieParRecommande);
     this.filtresCallBack({
-      phraseNombreActions: `${catalogueActions.actions.length} action${catalogueActions.actions.length > 1 ? 's' : ''}`,
+      phraseNombreActions: `${actionsTrieParRecommande.length} action${actionsTrieParRecommande.length > 1 ? 's' : ''}`,
       filtres: catalogueActions.filtres.map(filtre => {
         const label = MenuThematiques.getThematiqueData(filtre.code).labelDansLeMenu ?? filtre.label;
         const emoji = MenuThematiques.getThematiqueData(filtre.code).emoji ?? '';
