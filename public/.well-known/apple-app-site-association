@@ -12,6 +12,26 @@
         "components": [
           {
             "/": "/*"
+          },
+          {
+            "/": "/actions/selection",
+            "exclude": true
+          },
+          {
+            "/": "/mentions-legales",
+            "exclude": true
+          },
+          {
+            "/": "/cgu",
+            "exclude": true
+          },
+          {
+            "/": "/politique-de-confidentialite",
+            "exclude": true
+          },
+          {
+            "/": "/statistiques",
+            "exclude": true
           }
         ]
       }
