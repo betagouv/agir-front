@@ -16,19 +16,33 @@
           </template>
 
           <template #menu-contenu>
-            <InputCheckbox
-              v-if="optionsCheckbox && optionsCheckbox.length > 0"
-              :est-inline="true"
-              :est-small="true"
-              :est-resetable="true"
-              :options="optionsCheckbox"
-              id="tags"
-              @update="updateTags"
-            >
-              <template #label>
-                <span class="fr-text--lg fr-mb-0 text--normal text--bleu display-block">Tags</span>
-              </template>
-            </InputCheckbox>
+            <div>
+              <div class="fr-mb-2w display-block">
+                <input
+                  id="search"
+                  type="search"
+                  class="fr-input fr-input--sm full-width"
+                  v-model="filtreRecherche"
+                  placeholder="Rechercher des tags..."
+                  aria-label="Rechercher des tags"
+                  autocomplete="off"
+                />
+              </div>
+
+              <InputCheckbox
+                v-if="optionsFiltrees.length > 0"
+                :est-inline="true"
+                :est-small="true"
+                :est-resetable="true"
+                :options="optionsFiltrees"
+                id="tags"
+                @update="updateTags"
+              >
+                <template #label>
+                  <span class="fr-text--lg fr-mb-0 text--normal text--bleu display-block">Tags</span>
+                </template>
+              </InputCheckbox>
+            </div>
           </template>
         </CatalogueDropDownMenu>
       </div>
@@ -39,7 +53,7 @@
 </template>
 
 <script setup lang="ts">
-  import { computed } from 'vue';
+  import { computed, ref } from 'vue';
   import CatalogueDropDownMenu from '@/components/custom/Action/Catalogue/CatalogueDropDownMenu.vue';
   import InputCheckbox from '@/components/dsfr/InputCheckbox.vue';
 
@@ -54,6 +68,17 @@
       checked?: boolean;
     }[]
   >('optionsCheckbox', { default: [] });
+
+  const filtreRecherche = ref<string>('');
+
+  const optionsFiltrees = computed(() => {
+    if (!filtreRecherche.value.trim()) {
+      return optionsCheckbox.value;
+    }
+
+    const recherche = filtreRecherche.value.toLowerCase().trim();
+    return optionsCheckbox.value.filter(option => option.label.toLowerCase().includes(recherche));
+  });
 
   function updateTags(selectedTags: string[]) {
     optionsCheckbox.value = optionsCheckbox.value.map(option => ({
