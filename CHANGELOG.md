@@ -1,5 +1,22 @@
 # Changelog
 
+## [2.23.2](https://github.com/betagouv/agir-front/compare/v2.23.1...v2.23.2) (2025-09-10)
+
+
+### 🐛 Corrections de bogues
+
+* **deeplink:** exclure les urls non moible ([#1334](https://github.com/betagouv/agir-front/issues/1334)) ([2801f1b](https://github.com/betagouv/agir-front/commit/2801f1b8f93c813e7668f64842a5bcd944dc6b08))
+
+
+### 👷 Autres changements
+
+* passage de l'info ngc en referer ([#1329](https://github.com/betagouv/agir-front/issues/1329)) ([22d59bf](https://github.com/betagouv/agir-front/commit/22d59bf27072856e0bf752772d4396c923510f64))
+
+
+### 👷 Gestion des dépendances
+
+* Bump vite from 6.3.5 to 7.1.5 ([#1332](https://github.com/betagouv/agir-front/issues/1332)) ([06cbd5f](https://github.com/betagouv/agir-front/commit/06cbd5f93cc8e20829e3e251b3fbc134aeb75a6a))
+
 ## [2.23.1](https://github.com/betagouv/agir-front/compare/v2.23.0...v2.23.1) (2025-09-09)
 
 
