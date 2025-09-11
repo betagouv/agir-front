@@ -141,6 +141,7 @@ describe("Fichier de test du usecase de récupération des données collectivit�
         region: 'Hauts-de-France',
         indicationNombreUtilisateurs: '10',
         indicationAidesEtArticles: `<i>J'agis</i> recense <span class="text--bold">20</span> aides, ainsi que <span class="text--bold">16</span> articles pour vos habitants !`,
+        indicationRatioUtilisateurs: `La collectivité compte <span class="text--bold">10</span> utilisateur(s) inscrit(s) parmi les <span class="text--bold">230</span> utilisateurs.`,
         cartesThematiques: [
           {
             emoji: '👕',
