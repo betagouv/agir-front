@@ -1,5 +1,5 @@
 <template>
-  <CompteSkeleton page-courante="Mon Compte">
+  <CompteSkeleton page-courante="Mon profil">
     <CompteFormulaire v-if="compteUtlisateurViewModel" :compte-utlisateur-view-model="compteUtlisateurViewModel" />
   </CompteSkeleton>
 </template>

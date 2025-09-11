@@ -18,6 +18,13 @@ export enum ClefThematiqueAPI {
   services_societaux = 'services_societaux',
 }
 
+export enum ThematiqueURL {
+  alimentation = 'me-nourrir',
+  transports = 'me-deplacer',
+  consommation = 'consommer',
+  logement = 'me-loger',
+}
+
 export class MenuThematiques {
   static clefsThematiques: ClefThematiqueAPI[] = [
     ClefThematiqueAPI.alimentation,
@@ -32,7 +39,7 @@ export class MenuThematiques {
   private static thematiquesData: Record<ClefThematiqueAPI, Thematique> = {
     [ClefThematiqueAPI.alimentation]: {
       clefTechniqueAPI: 'alimentation',
-      url: 'me-nourrir',
+      url: ThematiqueURL.alimentation,
       labelDansLeMenu: 'Me nourrir',
       imageUrl:
         'https://res.cloudinary.com/dq023imd8/image/upload/t_media_lib_thumb/v1728466523/cuisine_da54797693.svg',
@@ -41,7 +48,7 @@ export class MenuThematiques {
     },
     [ClefThematiqueAPI.transports]: {
       clefTechniqueAPI: 'transport',
-      url: 'me-deplacer',
+      url: ThematiqueURL.transports,
       labelDansLeMenu: 'Me déplacer',
       imageUrl:
         'https://res.cloudinary.com/dq023imd8/image/upload/t_media_lib_thumb/v1728466903/Mobilite_df75aefd09.svg',
@@ -50,7 +57,7 @@ export class MenuThematiques {
     },
     [ClefThematiqueAPI.consommation]: {
       clefTechniqueAPI: 'consommation',
-      url: 'consommer',
+      url: ThematiqueURL.consommation,
       labelDansLeMenu: 'Mes achats',
       imageUrl: 'https://res.cloudinary.com/dq023imd8/image/upload/t_media_lib_thumb/v1728468852/conso_7522b1950d.svg',
       emoji: '👕',
@@ -58,7 +65,7 @@ export class MenuThematiques {
     },
     [ClefThematiqueAPI.logement]: {
       clefTechniqueAPI: 'logement',
-      url: 'me-loger',
+      url: ThematiqueURL.logement,
       labelDansLeMenu: 'Me loger',
       imageUrl: 'https://res.cloudinary.com/dq023imd8/image/upload/t_media_lib_thumb/v1728468978/maison_80242d91f3.svg',
       emoji: '🏠',

@@ -3,7 +3,7 @@ const PageCreationCompte = () => import('@/components/pages/PageCreationCompte.v
 const PageCreationCompteDepuisNGC = () => import('@/components/pages/PageCreationCompteDepuisNGC.vue');
 const PageVerificationAdresseMail = () => import('@/components/pages/PageVerificationAdresseMail.vue');
 const PageCompteMesReponses = () => import('@/components/pages/PageCompteMesReponses.vue');
-const PageCompteLogement = () => import('@/components/pages/PageCompteLogement.vue');
+const PageCompteThematique = () => import('@/components/pages/PageCompteThematique.vue');
 const PagePostCreationCompteEtape1 = () =>
   import('@/components/pages/PagePostCreationCompte/PagePostCreationCompteEtape1.vue');
 const PagePostCreationCompteEtape2 = () =>
@@ -22,7 +22,7 @@ export enum RouteComptePath {
   VALIDATION_COMPTE = '/validation-compte',
   VALIDATION_AUTHENTIFICATION = '/validation-authentification',
   MES_REPONSES = '/compte/mes-reponses',
-  LOGEMENT = '/compte/logement',
+  THEMATIQUE = `/compte/:thematiqueId`,
   POST_CREATION_COMPTE_ETAPE_1 = '/creation-compte/etape-1',
   POST_CREATION_COMPTE_ETAPE_2 = '/creation-compte/etape-2',
   POST_CREATION_COMPTE_ETAPE_3 = '/creation-compte/etape-3',
@@ -38,7 +38,7 @@ const compteRoutes: RouteRecordRaw[] = [
         name: RouteCompteName.MON_COMPTE,
         component: PageCompte,
         meta: {
-          title: 'Mes informations',
+          title: 'Mon profil',
         },
       },
       {
@@ -50,11 +50,11 @@ const compteRoutes: RouteRecordRaw[] = [
         },
       },
       {
-        path: RouteComptePath.LOGEMENT,
-        name: RouteCompteName.LOGEMENT,
-        component: PageCompteLogement,
+        path: RouteComptePath.THEMATIQUE,
+        name: RouteCompteName.THEMATIQUE,
+        component: PageCompteThematique,
         meta: {
-          title: 'Logement',
+          title: 'Mes réponses',
         },
       },
     ],

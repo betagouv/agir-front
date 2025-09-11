@@ -93,7 +93,11 @@
       <h2 class="fr-h2">Mon profil</h2>
       <ul class="fr-mb-3w">
         <li><router-link :to="{ name: RouteCompteName.MON_COMPTE }">Mes informations</router-link></li>
-        <li><router-link :to="{ name: RouteCompteName.LOGEMENT }">Mon logement</router-link></li>
+        <li>
+          <router-link :to="{ name: RouteCompteName.THEMATIQUE, params: { thematiqueId: ThematiqueURL.logement } }"
+            >Mon logement</router-link
+          >
+        </li>
         <li><router-link :to="{ name: RouteCompteName.MES_REPONSES }">Mieux vous connaître</router-link></li>
       </ul>
 
@@ -114,7 +118,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { ClefThematiqueAPI, MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
+  import { ClefThematiqueAPI, MenuThematiques, ThematiqueURL } from '@/domaines/thematiques/MenuThematiques';
   import { RouteCommuneName } from '@/router';
   import { RouteActionsName } from '@/router/actions/routes';
   import { RouteAidesName } from '@/router/aides/routeAidesName';

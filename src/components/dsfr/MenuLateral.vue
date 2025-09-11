@@ -5,23 +5,28 @@
         Ouvrir la navigation
       </button>
       <div class="fr-collapse" id="fr-sidemenu-wrapper">
-        <ul class="fr-sidemenu__list">
-          <li
-            v-for="lien in liens"
-            :key="lien.url"
-            class="fr-sidemenu__item"
-            :class="currentPageName === lien.url && 'fr-sidemenu__item--active'"
-          >
-            <router-link
-              :to="{ name: lien.url }"
-              class="fr-sidemenu__link"
-              target="_self"
-              :aria-current="currentPageName === lien.url ? 'page' : undefined"
+        <template v-for="section in sections">
+          <div class="fr-sidemenu__header" />
+          <p class="fr-sidemenu__title fr-mb-2w" id="sidemenu-title" v-if="section.titre" v-text="section.titre" />
+          <ul class="fr-sidemenu__list fr-mb-2w">
+            <li
+              v-for="lien in section.liens"
+              :key="lien.url"
+              class="fr-sidemenu__item"
+              :class="currentPageName === lien.url && 'fr-sidemenu__item--active'"
             >
-              {{ lien.label }}
-            </router-link>
-          </li>
-        </ul>
+              <router-link
+                :to="{ name: lien.url, params: lien.params }"
+                class="fr-sidemenu__link"
+                target="_self"
+                :aria-current="currentPageName === lien.url ? 'page' : undefined"
+              >
+                <span v-if="lien.icon" aria-hidden="true" class="fr-mr-1w" :class="lien.icon" />
+                {{ lien.label }}
+              </router-link>
+            </li>
+          </ul>
+        </template>
       </div>
     </div>
   </nav>
@@ -32,9 +37,14 @@
   import '@gouvfr/dsfr/dist/component/sidemenu/sidemenu.min.css';
 
   defineProps<{
-    liens: {
-      label: string;
-      url: string;
+    sections: {
+      titre?: string;
+      liens: {
+        label: string;
+        url: string;
+        params?: Record<string, string>;
+        icon?: string;
+      }[];
     }[];
   }>();
 
