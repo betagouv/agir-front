@@ -35,6 +35,7 @@ export class DonneesCollectivitesInseePresenterImpl implements DonneesCollectivi
       ...scope,
       indicationNombreUtilisateurs: this.genererIndicationNombreUtilisateurs(donnees),
       indicationAidesEtArticles: this.genererIndicationAidesEtArticles(donnees),
+      indicationRatioUtilisateurs: this.genererRatioUtilisateurs(donnees),
       cartesThematiques: this.genererCartesThematiques(aides, articles, contenuSupplementaires),
       nombreActifsLocalDernierMois: donnees.nombreActifsLocauxDernierMois,
       nombreInscrits: {
@@ -101,6 +102,13 @@ export class DonneesCollectivitesInseePresenterImpl implements DonneesCollectivi
     const { nombreInscritsLocaux } = donnees;
     if (!nombreInscritsLocaux) return `Aucun utilisateur`;
     return `${nombreInscritsLocaux}`;
+  }
+
+  private genererRatioUtilisateurs(donnees: DonneesCollectivitesINSEE): string {
+    const { nombreInscrits, nombreInscritsLocaux } = donnees;
+    if (!nombreInscritsLocaux)
+      return `La collectivité ne compte <span class="text--bold">aucun</span> utilisateur inscrit parmi les <span class="text--bold">${nombreInscrits}</span> utilisateurs.`;
+    return `La collectivité compte <span class="text--bold">${nombreInscritsLocaux}</span> utilisateur(s) inscrit(s) parmi les <span class="text--bold">${nombreInscrits}</span> utilisateurs.`;
   }
 
   private genererCartesThematiques(

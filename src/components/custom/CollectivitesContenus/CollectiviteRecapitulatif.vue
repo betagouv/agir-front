@@ -3,6 +3,7 @@
     <i>J'agis</i> en quelques chiffres pour <i>{{ collectiviteInseeViewModel.nom }}</i> !
   </h2>
 
+  <p v-html="collectiviteInseeViewModel.indicationRatioUtilisateurs" />
   <p v-html="collectiviteInseeViewModel.indicationAidesEtArticles" />
 
   <div class="fr-grid-row fr-grid-row--gutters fr-mb-2w">
