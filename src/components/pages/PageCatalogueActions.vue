@@ -20,6 +20,7 @@
     <CatalogueActionsComposant
       v-if="actionsViewModel"
       :actions="actionsViewModel"
+      :afficher-thematique="true"
       card-classes="fr-col-12 fr-col-md-3"
     />
   </section>

@@ -7,7 +7,7 @@
         </h3>
         <div class="fr-card__start flex fr-mb-1w">
           <ul class="fr-tags-group">
-            <li>
+            <li v-if="afficherThematique">
               <ThematiqueTag
                 :tag="{
                   label: action.thematiqueTag.label,
@@ -42,9 +42,13 @@
   import ThematiqueTag from '@/components/custom/Thematiques/ThematiqueTag.vue';
   import { ActionViewModel } from '@/domaines/actions/ports/actions.presenter';
 
-  defineProps<{
-    action: ActionViewModel;
-  }>();
+  withDefaults(
+    defineProps<{
+      action: ActionViewModel;
+      afficherThematique: boolean;
+    }>(),
+    { afficherThematique: false },
+  );
 </script>
 
 <style scoped>
