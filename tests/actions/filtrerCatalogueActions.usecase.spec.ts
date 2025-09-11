@@ -8,6 +8,7 @@ import { FiltrerCatalogueActionsUsecase } from '@/domaines/actions/filtrerCatalo
 import { ExplicationsRecommandation } from '@/domaines/actions/explicationsRecommandation';
 import { Filtres, FiltreStatut, FiltreStatutBuilder } from '@/domaines/actions/filtres';
 import { TagThematique } from '@/domaines/thematiques/TagThematique';
+import { ListeActions } from '@/domaines/actions/model/ListeActions';
 
 describe("Fichier de tests concernant la récupération du catalogue d'actions", () => {
   it('Doit filtrer correctement le catalogue actions et les actions quand un utilisateur est connecté', async () => {
@@ -31,7 +32,7 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
     ];
 
     const catalogue: CatalogueActions = {
-      actions,
+      actions: new ListeActions(actions),
       filtres: [
         {
           code: ClefThematiqueAPI.transports,
@@ -121,7 +122,7 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
 
   it('Devrait appeler le repository même sans id utilisateur', async () => {
     const catalogue: CatalogueActions = {
-      actions: [],
+      actions: new ListeActions([]),
       filtres: [],
       consultation: 'tout',
     };
@@ -146,7 +147,7 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
 
   it('doit transmettre les paramètres au repository', async () => {
     const catalogue: CatalogueActions = {
-      actions: [],
+      actions: new ListeActions([]),
       filtres: [],
       consultation: 'tout',
     };

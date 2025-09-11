@@ -7,9 +7,10 @@ import { ActionViewModel } from '@/domaines/actions/ports/actions.presenter';
 import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 import { ExplicationsRecommandation } from '@/domaines/actions/explicationsRecommandation';
 import { TagThematique } from '@/domaines/thematiques/TagThematique';
+import { ListeActions } from '@/domaines/actions/model/ListeActions';
 
 describe("Fichier de tests concernant la récupération du catalogue d'actions", () => {
-  it('Doit presenter le catalogue actions et les actions', async () => {
+  it('Doit presenter le catalogue actions et les actions triées par actions recommandées', async () => {
     // GIVEN
     const actions: Action[] = [
       {
@@ -22,7 +23,9 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
         type: TypeAction.CLASSIQUE,
         dejaVue: false,
         dejaFaite: false,
-        explicationsRecommandations: new ExplicationsRecommandation(false, []),
+        explicationsRecommandations: new ExplicationsRecommandation(true, [
+          { tag: 'economies', labelExplication: 'veut faire des économies' },
+        ]),
         labelCompteur: '0 action réalisée',
         montantMaxEconomiesEnEuros: 10,
         thematique: ClefThematiqueAPI.alimentation,
@@ -38,8 +41,9 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
         type: TypeAction.SIMULATEUR,
         dejaVue: false,
         dejaFaite: false,
-        explicationsRecommandations: new ExplicationsRecommandation(false, [
+        explicationsRecommandations: new ExplicationsRecommandation(true, [
           { tag: 'economies', labelExplication: 'veut faire des économies' },
+          { tag: 'environnement', labelExplication: "sensible à l'environnement" },
         ]),
         labelCompteur: '4 actions personnalisées réalisées',
         montantMaxEconomiesEnEuros: 0,
@@ -72,7 +76,9 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
         type: TypeAction.QUIZZ,
         dejaVue: true,
         dejaFaite: false,
-        explicationsRecommandations: new ExplicationsRecommandation(false, []),
+        explicationsRecommandations: new ExplicationsRecommandation(true, [
+          { tag: 'economies', labelExplication: 'veut faire des économies' },
+        ]),
         labelCompteur: '0 action réalisée',
         montantMaxEconomiesEnEuros: 0,
         thematique: ClefThematiqueAPI.alimentation,
@@ -80,7 +86,7 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
     ];
 
     const catalogue: CatalogueActions = {
-      actions,
+      actions: new ListeActions(actions),
       filtres: [
         {
           code: ClefThematiqueAPI.transports,
@@ -104,9 +110,25 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
     function expectedActions(viewModel: ActionViewModel[]): void {
       expect(viewModel).toStrictEqual<ActionViewModel[]>([
         {
+          aidesDisponibles: undefined,
+          badges: [
+            {
+              color: 'prix-highlight',
+              text: '<span aria-hidden=\"true\">💶</span> 10 € d\'économies',
+            },
+          ],
           code: 'code-action-test',
-          titre: 'Tester une nouvelle <span class="text--bold">recette végétarienne</span>',
+          label: undefined,
           nombreDeParticipants: undefined,
+          thematiqueTag: {
+            label: 'Me nourrir',
+            style: {
+              backgroundColor: '#E3FBAF',
+              color: '#175202',
+              emoji: '🍛',
+            },
+          },
+          titre: 'Tester une nouvelle <span class="text--bold">recette végétarienne</span>',
           url: {
             name: 'action-individuelle',
             params: {
@@ -115,21 +137,30 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
               type: 'classique',
             },
           },
-          badges: [
-            {
-              color: 'prix-highlight',
-              text: '<span aria-hidden="true">💶</span> 10 € d\'économies',
-            },
-          ],
-          label: undefined,
-          aidesDisponibles: undefined,
-          thematiqueTag: {
-            label: 'Me nourrir',
-            style: TagThematique.getTagThematiqueUtilitaire('alimentation'),
-          },
         },
         {
+          aidesDisponibles: '<span class="text--bold">5</span> aides',
+          badges: [
+            {
+              color: 'background--vert-badge text--white',
+              text: '<span aria-hidden="true">💰</span> <span class="text--bold">5</span> aides',
+            },
+            {
+              color: 'background-bleu-light text--bleu',
+              text: 'SIMULATEUR',
+            },
+          ],
           code: 'code-action-test2',
+          label: undefined,
+          nombreDeParticipants: '4 actions personnalisées réalisées',
+          thematiqueTag: {
+            label: 'Me nourrir',
+            style: {
+              backgroundColor: '#E3FBAF',
+              color: '#175202',
+              emoji: '🍛',
+            },
+          },
           titre:
             '<span aria-hidden="true">🍽</span> Tester une nouvelle <span class="text--bold">recette végétarienne</span> 2',
           url: {
@@ -140,23 +171,37 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
               type: 'simulateur',
             },
           },
-          badges: [
-            {
-              text: '<span aria-hidden="true">💰</span> <span class="text--bold">5</span> aides',
-              color: 'background--vert-badge text--white',
-            },
-            { text: 'SIMULATEUR', color: 'background-bleu-light text--bleu' },
-          ],
-          label: { text: 'Recommandé', color: 'background-bleu-light text--bleu' },
-          nombreDeParticipants: '4 actions personnalisées réalisées',
-          aidesDisponibles: '<span class="text--bold">5</span> aides',
-          thematiqueTag: {
-            label: 'Me nourrir',
-            style: TagThematique.getTagThematiqueUtilitaire('alimentation'),
-          },
         },
         {
+          aidesDisponibles: '<span class="text--bold">1</span> aide',
+          badges: [
+            {
+              color: 'background--vert-badge text--white',
+              text: '<span aria-hidden="true">💰</span> <span class="text--bold">1</span> aide',
+            },
+            {
+              color: 'background-bleu-light text--bleu',
+              text: 'BILAN',
+            },
+            {
+              color: 'prix-highlight',
+              text: '<span aria-hidden=\"true\">💶</span> 25 € d\'économies',
+            },
+          ],
           code: 'code-action-test3',
+          label: {
+            color: 'fr-label--vert',
+            text: 'Réalisée',
+          },
+          nombreDeParticipants: undefined,
+          thematiqueTag: {
+            label: 'Me nourrir',
+            style: {
+              backgroundColor: '#E3FBAF',
+              color: '#175202',
+              emoji: '🍛',
+            },
+          },
           titre:
             '<span aria-hidden="true">🍽</span> Tester une nouvelle <span class="text--bold">recette végétarienne</span> 3',
           url: {
@@ -167,30 +212,30 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
               type: 'bilan',
             },
           },
+        },
+        {
+          aidesDisponibles: '<span class="text--bold">1</span> aide',
           badges: [
             {
-              text: '<span aria-hidden="true">💰</span> <span class="text--bold">1</span> aide',
               color: 'background--vert-badge text--white',
+              text: '<span aria-hidden="true">💰</span> <span class="text--bold">1</span> aide',
             },
             {
               color: 'background-bleu-light text--bleu',
-              text: 'BILAN',
-            },
-            {
-              color: 'prix-highlight',
-              text: '<span aria-hidden="true">💶</span> 25 € d\'économies',
+              text: 'QUIZ',
             },
           ],
-          label: { text: 'Réalisée', color: 'fr-label--vert' },
+          code: 'code-action-test4',
+          label: undefined,
           nombreDeParticipants: undefined,
-          aidesDisponibles: '<span class="text--bold">1</span> aide',
           thematiqueTag: {
             label: 'Me nourrir',
-            style: TagThematique.getTagThematiqueUtilitaire('alimentation'),
+            style: {
+              backgroundColor: '#E3FBAF',
+              color: '#175202',
+              emoji: '🍛',
+            },
           },
-        },
-        {
-          code: 'code-action-test4',
           titre:
             '<span aria-hidden="true">🍽</span> Tester une nouvelle <span class="text--bold">recette végétarienne</span> 4',
           url: {
@@ -200,20 +245,6 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
               titre: 'tester-une-nouvelle-recette-vegetarienne-4',
               type: 'quizz',
             },
-          },
-          badges: [
-            {
-              text: '<span aria-hidden="true">💰</span> <span class="text--bold">1</span> aide',
-              color: 'background--vert-badge text--white',
-            },
-            { text: 'QUIZ', color: 'background-bleu-light text--bleu' },
-          ],
-          label: undefined,
-          nombreDeParticipants: undefined,
-          aidesDisponibles: '<span class="text--bold">1</span> aide',
-          thematiqueTag: {
-            label: 'Me nourrir',
-            style: TagThematique.getTagThematiqueUtilitaire('alimentation'),
           },
         },
       ]);
@@ -240,7 +271,7 @@ describe("Fichier de tests concernant la récupération du catalogue d'actions",
 
   it('Devrait appeler le repository même sans id utilisateur', async () => {
     const catalogue: CatalogueActions = {
-      actions: [],
+      actions: new ListeActions([]),
       filtres: [],
       consultation: 'tout',
     };

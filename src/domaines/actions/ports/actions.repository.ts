@@ -1,5 +1,6 @@
 import { ExplicationsRecommandation } from '@/domaines/actions/explicationsRecommandation';
 import { Filtres } from '@/domaines/actions/filtres';
+import { ListeActions } from '@/domaines/actions/model/ListeActions';
 import { Quiz } from '@/domaines/quiz/ports/quiz.repository';
 import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 
@@ -18,7 +19,7 @@ export interface ActionService {
 }
 
 export interface CatalogueActions {
-  actions: Action[];
+  actions: ListeActions;
   filtres: {
     code: ClefThematiqueAPI;
     label: string;
