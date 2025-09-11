@@ -2,7 +2,6 @@ const PageCompte = () => import('@/components/pages/PageCompte.vue');
 const PageCreationCompte = () => import('@/components/pages/PageCreationCompte.vue');
 const PageCreationCompteDepuisNGC = () => import('@/components/pages/PageCreationCompteDepuisNGC.vue');
 const PageVerificationAdresseMail = () => import('@/components/pages/PageVerificationAdresseMail.vue');
-const PageCompteOptionsAvancees = () => import('@/components/pages/PageCompteOptionsAvancees.vue');
 const PageCompteMesReponses = () => import('@/components/pages/PageCompteMesReponses.vue');
 const PageCompteLogement = () => import('@/components/pages/PageCompteLogement.vue');
 const PagePostCreationCompteEtape1 = () =>
@@ -18,7 +17,6 @@ import { RouteCompteName } from '@/router/compte/routeCompteName';
 
 export enum RouteComptePath {
   MON_COMPTE = '/compte/',
-  OPTIONS_AVANCEES = '/compte/options-avancees',
   CREATION_COMPTE = '/creation-compte',
   CREATION_COMPTE_NGC = '/creation-compte/nos-gestes-climat',
   VALIDATION_COMPTE = '/validation-compte',
@@ -41,14 +39,6 @@ const compteRoutes: RouteRecordRaw[] = [
         component: PageCompte,
         meta: {
           title: 'Mes informations',
-        },
-      },
-      {
-        path: RouteComptePath.OPTIONS_AVANCEES,
-        name: RouteCompteName.OPTIONS_AVANCEES,
-        component: PageCompteOptionsAvancees,
-        meta: {
-          title: 'Options avancées',
         },
       },
       {

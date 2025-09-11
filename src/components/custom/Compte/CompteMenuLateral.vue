@@ -4,7 +4,6 @@
       { label: 'Mes informations', url: RouteCompteName.MON_COMPTE },
       { label: 'Mon logement', url: RouteCompteName.LOGEMENT },
       { label: 'Mes réponses', url: RouteCompteName.MES_REPONSES },
-      { label: 'Options avancées', url: RouteCompteName.OPTIONS_AVANCEES },
     ]"
   />
 </template>

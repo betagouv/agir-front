@@ -1,6 +1,5 @@
 export enum RouteCompteName {
   MON_COMPTE = 'mon-compte',
-  OPTIONS_AVANCEES = 'options-avancees',
   MES_REPONSES = 'mes-reponses',
   CREATION_COMPTE = 'creation-compte',
   CREATION_COMPTE_NGC = 'creation-compte-ngc',
