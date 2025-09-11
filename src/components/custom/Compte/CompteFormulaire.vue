@@ -13,7 +13,7 @@
     <form class="fr-mb-0" @submit.prevent="modifierInformation">
       <fieldset aria-labelledby="identité-fieldset-legend" class="fr-mb-1w fr-fieldset fr-px-0 fr-mx-0">
         <legend id="identité-fieldset-legend" class="fr-fieldset__legend fr-px-0 fr-mx-0">
-          <h2 class="fr-h3">Mon identité</h2>
+          <h2 class="fr-h4">Mon identité</h2>
         </legend>
         <div class="fr-mb-3w">
           Adresse email : <strong>{{ profileUtlisateurViewModel.mail }}</strong>
@@ -71,7 +71,7 @@
 
       <fieldset aria-labelledby="donnee-fieldset-legend" class="fr-mb-0 fr-fieldset fr-px-0 fr-mx-0">
         <legend id="donnee-fieldset-legend" class="fr-fieldset__legend fr-px-0 fr-mx-0">
-          <h2 class="fr-h3">Mes revenus</h2>
+          <h2 class="fr-h4">Mes revenus</h2>
         </legend>
         <div class="full-width">
           <CompteFormulaireRevenuFiscal
