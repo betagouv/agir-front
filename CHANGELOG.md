@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.24.0](https://github.com/betagouv/agir-front/compare/v2.23.2...v2.24.0) (2025-09-11)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* afficher les thématiques uniquement dans le catalogue ([#1335](https://github.com/betagouv/agir-front/issues/1335)) ([a1f121c](https://github.com/betagouv/agir-front/commit/a1f121c97f8dd6650da07fdcda28bbb9abc6f6b4))
+* description d'une KYC ([#1337](https://github.com/betagouv/agir-front/issues/1337)) ([ad1fd90](https://github.com/betagouv/agir-front/commit/ad1fd90a3b73d3304e84859cd7b9b5bcbd2f50dc))
+
 ## [2.23.2](https://github.com/betagouv/agir-front/compare/v2.23.1...v2.23.2) (2025-09-10)
 
 
