@@ -40,6 +40,7 @@ export interface CarteThematique {
 export interface DonneesCollectivitesInseeViewModel extends IndicationGeoArticleOuAideViewModel {
   indicationNombreUtilisateurs: string;
   indicationAidesEtArticles: string;
+  indicationRatioUtilisateurs: string;
   cartesThematiques: CarteThematique[];
   nombreActifsLocalDernierMois: number;
   nombreInscrits: {
