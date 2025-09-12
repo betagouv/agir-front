@@ -17,6 +17,7 @@ export type ResultatWWViewModel = {
     label: string;
     value: number;
     pourcentage: string;
+    pourcentageNonFormate: number;
   }[];
 };
 
@@ -42,6 +43,7 @@ export class ResultatWWPresenterImpl implements ResultatWattWatcherPresenter {
         label: this.genererLabel(detail.type),
         value: detail.eur,
         pourcentage: `${Math.round(detail.percent)}%`,
+        pourcentageNonFormate: detail.percent,
       })),
     });
   }
