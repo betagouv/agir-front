@@ -3,6 +3,7 @@
     v-model="reponse"
     :titre="questionViewModel.libelle"
     :est-resetable="true"
+    :description="questionViewModel.sousLibelle"
     :options="
       questionViewModel.reponses_possibles.map(reponsePossible => ({
         id: reponsePossible.id,

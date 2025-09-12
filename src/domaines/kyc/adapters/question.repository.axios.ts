@@ -26,6 +26,7 @@ export interface QuestionApiModel extends QuestionMosaicBooleanApiModel {
   code: string;
   question: string;
   type: 'libre' | 'choix_multiple' | 'choix_unique' | 'mosaic_boolean' | 'entier';
+  sous_titre: string;
   reponse_unique: {
     value: string;
     unite: {
@@ -166,6 +167,7 @@ export class QuestionRepositoryAxios implements QuestionRepository {
     return {
       id: question.code,
       libelle: question.question,
+      sousLibelle: question.sous_titre,
       type: question.type,
       reponses: this.determineReponses(question),
       points: question.points,

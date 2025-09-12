@@ -100,6 +100,7 @@ interface ActionApiModel {
   montant_max_economies_euros: number;
   deja_faite: boolean;
   label_compteur: string;
+  thematique: string;
   explications_recommandation: ExplicationsRecommandationApiModel;
 }
 
@@ -363,6 +364,7 @@ export class ActionsRepositoryAxios implements ActionsRepository {
       montantMaxEconomiesEnEuros: action.montant_max_economies_euros,
       dejaFaite: action.deja_faite,
       labelCompteur: action.label_compteur,
+      thematique: action.thematique as ClefThematiqueAPI,
       explicationsRecommandations: new ExplicationsRecommandation(
         action.explications_recommandation.est_exclu,
         action.explications_recommandation.liste_explications.map(explication => ({

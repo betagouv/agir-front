@@ -19,38 +19,46 @@
         </h1>
         <p>Redonnez vie à vos objets et trouvez les nouveaux en seconde main</p>
 
-        <section
-          class="fr-my-6w background--white fr-px-2w fr-py-3w flex flex-space-between align-items--center flex-wrap gap--small"
-        >
-          <h2 id="recherche-par-adresse-label" class="fr-h4 fr-mb-0">Recherche par adresse</h2>
-          <form class="fr-col-12 fr-col-md-7" @submit.prevent>
-            <BarreDeRechercheAdresse
-              v-model:adresse="adresse"
+        <section class="fr-my-6w background--white fr-px-2w fr-py-3w">
+          <form @submit.prevent>
+            <div class="flex flex-space-between align-items--center flex-wrap gap--small">
+              <h2 id="recherche-par-adresse-label" class="fr-h4 fr-mb-0">Recherche par adresse</h2>
+
+              <div class="fr-col-12 fr-col-md-7">
+                <BarreDeRechercheAdresse
+                  v-model:adresse="adresse"
+                  v-model:coordonnees="coordonnees"
+                  v-model:recherche="recherche"
+                  :on-coordonnees-envoyees="chargerDonneesPourNouvelleAdresse"
+                  :enregistrer-adresse-dans-historique="true"
+                  labelId="recherche-par-adresse-label"
+                />
+              </div>
+            </div>
+
+            <AdressesRecentesComponent
+              ref="adressesRecentesComponent"
               v-model:coordonnees="coordonnees"
               v-model:recherche="recherche"
-              :on-coordonnees-envoyees="chargerDonneesPourNouvelleAdresse"
-              :enregistrer-adresse-dans-historique="true"
-              labelId="recherche-par-adresse-label"
+              :adresse-principale-complete="utilisateurStore().utilisateur.possedeUneAdresseComplete"
+              :on-adresse-recente-selectionnee="lancerRecherche"
+              :on-adresse-residence-principale-selectionnee="lancerRecherche"
+              :on-geolocalisation-selectionne="lancerRecherche"
+            />
+
+            <Callout
+              v-if="avecAdressePrivee && !utilisateurStore().utilisateur.possedeUneAdresseComplete"
+              :button="{
+                text: 'Choisir comme adresse principale',
+                onClick: definirAdressePrincipale,
+              }"
+              :icone-information="false"
+              class="fr-mt-3w full-width"
+              texte="Voulez-vous utiliser cette adresse comme votre adresse principale à l’avenir&nbsp;?"
             />
           </form>
-          <AdressesRecentesComponent
-            ref="adressesRecentesComponent"
-            :adresse-principale-complete="utilisateurStore().utilisateur.possedeUneAdresseComplete"
-            :on-adresse-recente-selectionnee="chercherAvecAdresseRecente"
-            :on-adresse-residence-principale-selectionnee="chercherAvecAdressePrincipale"
-            :on-geolocalisation-selectionne="chercherAvecGeolocalisation"
-          />
-          <Callout
-            v-if="avecAdressePrivee && !utilisateurStore().utilisateur.possedeUneAdresseComplete"
-            :button="{
-              text: 'Choisir comme adresse principale',
-              onClick: definirAdressePrincipale,
-            }"
-            :icone-information="false"
-            class="fr-mt-3w full-width"
-            texte="Voulez-vous utiliser cette adresse comme votre adresse principale à l’avenir&nbsp;?"
-          />
         </section>
+
         <section v-if="viewModel && (viewModel as ServiceRechercheLongueVieAuxObjetsViewModelAvecResultats).favoris">
           <ServiceFavoris
             :services-recherche-favoris-view-model="
@@ -84,8 +92,6 @@
         </section>
       </PageServiceTemplate>
     </ServiceSkeletonConditionnel>
-
-    <ModaleErreurGeolocalisation />
   </div>
 </template>
 
@@ -93,7 +99,6 @@
   import { nextTick, onMounted, ref } from 'vue';
   import { useRouter } from 'vue-router';
   import BarreDeRechercheAdresse from '@/components/custom/Form/BarreDeRechercheAdresse.vue';
-  import ModaleErreurGeolocalisation from '@/components/custom/Modale/ModaleErreurGeolocalisation.vue';
   import PageServiceTemplate from '@/components/custom/Service/PageServiceTemplate.vue';
   import ServiceFavoris from '@/components/custom/Service/ServiceFavoris.vue';
   import ServiceListeCarte from '@/components/custom/Service/ServiceListeCarte.vue';
@@ -104,8 +109,6 @@
   import AdressesRecentesComponent from '@/components/pages/PagesService/AdressesRecentesComponent.vue';
   import { useRechercheService } from '@/composables/service/useRechercheService';
   import { useAdressePrincipale } from '@/composables/useAdressePrincipale';
-  import { useDsfrModale } from '@/composables/useDsfrModale';
-  import { AdresseHistorique } from '@/domaines/adresses/recupererHistoriqueAdresse.usecase';
   import { BarreDeRechercheViewModel } from '@/domaines/logement/adapters/barreDeRecherche.presenter.impl';
   import {
     ServiceRechercheLongueVieAuxObjetsPresenterImpl,
@@ -115,7 +118,6 @@
   import { ServiceRechercheLongueVieAuxObjetsAxios } from '@/domaines/serviceRecherche/longueVieAuxObjets/adapters/serviceRechercheLongueVieAuxObjets.repository.axios';
   import { RecupererServiceLongueVieAuxObjetsUsecase } from '@/domaines/serviceRecherche/longueVieAuxObjets/recupererServiceLongueVieAuxObjets.usecase';
   import { AdresseBarreDeRecherche } from '@/shell/coordonneesType';
-  import { MODALE_GEOLOCALISATION_ID } from '@/shell/modaleGeolocalisationId';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const serviceListeCarte = ref<InstanceType<typeof ServiceListeCarte>>();
@@ -142,8 +144,6 @@
     pageEstEnChargement,
     cartesSontEnChargement,
   } = useRechercheService(lancerRecherche, 'vos_objets');
-
-  const { ouvrirModale: ouvrirModaleErreurGeoloc } = useDsfrModale(MODALE_GEOLOCALISATION_ID);
 
   async function chargerPlusDeCartesEtFocus() {
     const ancienNombreDeResultats = nombreDeResultats.value;
@@ -177,59 +177,11 @@
 
   async function definirAdressePrincipale() {
     await definirAdressePrincipaleComposable(utilisateurStore().utilisateur.id, adresse.value, coordonnees.value);
-    utilisateurStore().utilisateur.possedeUneAdresseComplete = true;
   }
 
   async function chargerDonneesPourNouvelleAdresse() {
     await nextTick();
     avecAdressePrivee.value = true;
-  }
-
-  const chercherAvecAdresseRecente = (adresseRecente: AdresseHistorique) => {
-    coordonnees.value = {
-      latitude: adresseRecente.latitude,
-      longitude: adresseRecente.longitude,
-    };
-    recherche.value = `${adresseRecente.numero_rue} ${adresseRecente.rue} ${adresseRecente.code_postal} ${adresseRecente.commmune}`;
-    lancerRecherche();
-  };
-
-  const chercherAvecAdressePrincipale = async () => {
-    await recupererAdressePourBarreDeRecherche(
-      utilisateurStore().utilisateur.id,
-      async (barreDeRechercheViewModel: BarreDeRechercheViewModel) => {
-        coordonnees.value = barreDeRechercheViewModel.coordonnees;
-        if (barreDeRechercheViewModel.adresse) {
-          const adressePrincipale = barreDeRechercheViewModel.adresse;
-          recherche.value =
-            adressePrincipale.numeroRue && adressePrincipale.rue
-              ? `${adressePrincipale.numeroRue} ${adressePrincipale.rue} ${adressePrincipale.codePostal} ${adressePrincipale.communeLabel}`
-              : `${adressePrincipale.codePostal} ${adressePrincipale.communeLabel}`;
-        }
-        await lancerRecherche();
-      },
-    );
-  };
-
-  function chercherAvecGeolocalisation() {
-    if (!navigator.geolocation) {
-      ouvrirModaleErreurGeoloc();
-      return;
-    }
-
-    navigator.geolocation.getCurrentPosition(
-      position => {
-        coordonnees.value = {
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
-        };
-        recherche.value = 'Ma position actuelle';
-        lancerRecherche();
-      },
-      () => {
-        ouvrirModaleErreurGeoloc();
-      },
-    );
   }
 
   onMounted(async () => {

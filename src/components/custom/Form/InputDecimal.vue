@@ -1,19 +1,21 @@
 <template>
-  <label :class="`fr-label ${label.cssModifier}`" :for="id">
-    {{ label.wording }}
-    <span class="fr-hint-text">Nombre uniquement (décimales autorisées)</span>
-  </label>
+  <div class="fr-mb-1w">
+    <label :class="`fr-label fr-mb-1v ${label.cssModifier}`" :for="id">
+      {{ label.wording }}
+    </label>
+    <span v-if="description" id="description" v-text="description" class="fr-mb-1w display-block fr-text--sm" />
+    <span id="input-format" class="fr-hint-text text--bold">Nombre uniquement (décimales autorisées)</span>
+  </div>
+
   <slot name="complement" />
-  <span v-if="unite" id="unite" class="fr-hint-text fr-sr-only">
-    exprimé en {{ unite.libelleLong ?? unite.abreviation }}</span
-  >
+  <span v-if="unite" id="unite" class="fr-sr-only"> exprimé en {{ unite.libelleLong ?? unite.abreviation }}</span>
 
   <div class="flex align-items--center">
     <input
       :id="id"
       v-model="internalValue"
       :name="id"
-      aria-describedby="unite"
+      :aria-describedby="getAriaDescribedBy"
       class="fr-input fr-col-8 fr-col-md-3"
       inputmode="decimal"
       step="0.01"
@@ -28,7 +30,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { ref, watch } from 'vue';
+  import { computed, ref, watch } from 'vue';
 
   const props = defineProps<{
     id: string;
@@ -36,11 +38,19 @@
     defaultValue?: string;
     unite?: { abreviation: string; libelleLong: string };
     modelValue: string | undefined;
+    description?: string;
   }>();
 
   const emit = defineEmits<{
     (e: 'update:modelValue', value: string): void;
   }>();
+
+  const getAriaDescribedBy = computed(() => {
+    const describedBy = ['input-format'];
+    if (props.description) describedBy.push('description');
+    if (props.unite) describedBy.push('unite');
+    return describedBy.join(' ');
+  });
 
   const internalValue = ref(props.defaultValue || '');
 

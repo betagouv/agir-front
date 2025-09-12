@@ -2,6 +2,7 @@
   <fieldset class="mosaic fr-mb-2w">
     <legend class="fr-h4 full-width">
       <slot name="legende">{{ legende }}</slot>
+      <span v-if="description" v-text="description" class="fr-mb-1w display-block fr-text--sm text--normal" />
     </legend>
     <div class="fr-grid-row fr-grid-row--gutters">
       <label v-for="option in localOptions" :key="option.label" class="fr-col-6 fr-col-md-3 position--relative">
@@ -43,6 +44,7 @@
     legende: string;
     name: string;
     options: Option[];
+    description?: string;
   }>();
 
   const emit = defineEmits<{ (e: 'update:modelValue', value: string[]): void }>();

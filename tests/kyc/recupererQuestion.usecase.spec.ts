@@ -14,6 +14,7 @@ describe('Fichier de tests pour récuperer une question KYC', () => {
     const questionRepository = new MockQuestionRepository({
       id: 'questionId',
       libelle: 'Une question',
+      sousLibelle: 'Un sous libellé pour indiquer plus amples détails',
       type: 'libre',
       points: 10,
       thematique: ThematiqueQuestion.ALIMENTATION,
@@ -40,6 +41,7 @@ describe('Fichier de tests pour récuperer une question KYC', () => {
         nombreTotalDeQuestions: 1,
         id: 'questionId',
         libelle: 'Une question',
+        sousLibelle: 'Un sous libellé pour indiquer plus amples détails',
         type: 'libre',
         reponses_possibles: [],
         points: 'Récoltez vos + 10 points',
@@ -55,6 +57,7 @@ describe('Fichier de tests pour récuperer une question KYC', () => {
     const questionRepository = new MockQuestionRepository({
       id: 'questionId',
       libelle: 'Une question',
+      sousLibelle: 'Un sous libellé pour indiquer plus amples détails',
       type: 'choix_multiple',
       points: 10,
       reponses: {
@@ -98,6 +101,7 @@ describe('Fichier de tests pour récuperer une question KYC', () => {
         nombreTotalDeQuestions: 1,
         id: 'questionId',
         libelle: 'Une question',
+        sousLibelle: 'Un sous libellé pour indiquer plus amples détails',
         type: 'choix_multiple',
         points: 'Récoltez vos + 10 points',
         reponses_possibles: [
@@ -130,6 +134,7 @@ describe('Fichier de tests pour récuperer une question KYC', () => {
     const questionRepository = new MockQuestionRepository({
       id: 'questionId',
       libelle: 'Une question',
+      sousLibelle: 'Un sous libellé pour indiquer plus amples détails',
       type: 'choix_unique',
       points: 10,
       thematique: ThematiqueQuestion.TRANSPORT,
@@ -171,6 +176,7 @@ describe('Fichier de tests pour récuperer une question KYC', () => {
         nombreTotalDeQuestions: 1,
         id: 'questionId',
         libelle: 'Une question',
+        sousLibelle: 'Un sous libellé pour indiquer plus amples détails',
         points: 'Récoltez vos + 10 points',
         type: 'choix_unique',
         reponses_possibles: [
@@ -203,6 +209,7 @@ describe('Fichier de tests pour récuperer une question KYC', () => {
       id: 'questionId',
       libelle: 'Une question',
       type: 'mosaic_boolean',
+      sousLibelle: 'Un sous libellé pour indiquer plus amples détails',
       points: 10,
       thematique: ThematiqueQuestion.TRANSPORT,
       reponses: {
@@ -242,6 +249,7 @@ describe('Fichier de tests pour récuperer une question KYC', () => {
         nombreTotalDeQuestions: 1,
         id: 'questionId',
         libelle: 'Une question',
+        sousLibelle: 'Un sous libellé pour indiquer plus amples détails',
         points: 'Récoltez vos + 10 points',
         type: 'mosaic_boolean',
         reponses_possibles: [

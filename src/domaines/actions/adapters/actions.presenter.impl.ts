@@ -1,5 +1,7 @@
 import { ActionsPresenter, ActionViewModel } from '@/domaines/actions/ports/actions.presenter';
 import { Action, TypeAction } from '@/domaines/actions/ports/actions.repository';
+import { MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
+import { TagThematique } from '@/domaines/thematiques/TagThematique';
 import { RouteActionsName } from '@/router/actions/routes';
 import marked from '@/shell/actionMarkdownToHtml';
 import { buildUrl } from '@/shell/buildUrl';
@@ -30,6 +32,10 @@ export class ActionsPresenterImpl implements ActionsPresenter {
           badges,
           label,
           aidesDisponibles,
+          thematiqueTag: {
+            label: MenuThematiques.getThematiqueData(action.thematique).labelDansLeMenu,
+            style: TagThematique.getTagThematiqueUtilitaire(action.thematique),
+          },
         };
       }),
     );
@@ -107,7 +113,7 @@ export class ActionsPresenterImpl implements ActionsPresenter {
     }
 
     if (action.explicationsRecommandations.estRecommandee()) {
-      return { text: 'Recommandée pour moi', color: 'background-bleu-light text--bleu' };
+      return { text: 'Recommandé', color: 'background-bleu-light text--bleu' };
     }
 
     return undefined;

@@ -40,6 +40,7 @@ export interface Action {
   dejaFaite: boolean;
   labelCompteur: string;
   explicationsRecommandations: ExplicationsRecommandation;
+  thematique: ClefThematiqueAPI;
 }
 
 export interface ActionDetail {
