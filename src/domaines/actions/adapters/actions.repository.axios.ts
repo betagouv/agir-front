@@ -1,6 +1,7 @@
 import { AxiosFactory, intercept40X } from '@/axios.factory';
 import { ExplicationsRecommandation } from '@/domaines/actions/explicationsRecommandation';
 import { Filtres } from '@/domaines/actions/filtres';
+import { ListeActions } from '@/domaines/actions/model/ListeActions';
 import {
   Action,
   ActionDetail,
@@ -152,7 +153,7 @@ export class ActionsRepositoryAxios implements ActionsRepository {
     const response = await axios.get<CatalogueActionsApiModel>(`/utilisateurs/${idUtilisateur}/actions`);
 
     return {
-      actions: response.data.actions.map(this.mapActionApiModelToAction),
+      actions: new ListeActions(response.data.actions.map(this.mapActionApiModelToAction)),
       filtres: response.data.filtres.map(filtre => ({
         code: filtre.code as ClefThematiqueAPI,
         label: filtre.label,
@@ -167,7 +168,7 @@ export class ActionsRepositoryAxios implements ActionsRepository {
     const response = await axios.get<CatalogueActionsApiModel>(`/actions`);
 
     return {
-      actions: response.data.actions.map(this.mapActionApiModelToAction),
+      actions: new ListeActions(response.data.actions.map(this.mapActionApiModelToAction)),
       filtres: response.data.filtres.map(filtre => ({
         code: filtre.code as ClefThematiqueAPI,
         label: filtre.label,
@@ -185,7 +186,7 @@ export class ActionsRepositoryAxios implements ActionsRepository {
     );
 
     return {
-      actions: response.data.actions.map(this.mapActionApiModelToAction),
+      actions: new ListeActions(response.data.actions.map(this.mapActionApiModelToAction)),
       filtres: response.data.filtres.map(filtre => ({
         code: filtre.code as ClefThematiqueAPI,
         label: filtre.label,
@@ -200,7 +201,7 @@ export class ActionsRepositoryAxios implements ActionsRepository {
     const response = await axios.get<CatalogueActionsApiModel>(`/actions?selection=actions_watt_watchers`);
 
     return {
-      actions: response.data.actions.map(this.mapActionApiModelToAction),
+      actions: new ListeActions(response.data.actions.map(this.mapActionApiModelToAction)),
       filtres: response.data.filtres.map(filtre => ({
         code: filtre.code as ClefThematiqueAPI,
         label: filtre.label,
@@ -215,7 +216,7 @@ export class ActionsRepositoryAxios implements ActionsRepository {
     const response = await axios.get<CatalogueActionsApiModel>(`/actions?selection=${selection}`);
 
     return {
-      actions: response.data.actions.map(this.mapActionApiModelToAction),
+      actions: new ListeActions(response.data.actions.map(this.mapActionApiModelToAction)),
       filtres: response.data.filtres.map(filtre => ({
         code: filtre.code as ClefThematiqueAPI,
         label: filtre.label,
@@ -246,7 +247,7 @@ export class ActionsRepositoryAxios implements ActionsRepository {
     const response = await axios.get<CatalogueActionsApiModel>(url, { params });
 
     return {
-      actions: response.data.actions.map(this.mapActionApiModelToAction),
+      actions: new ListeActions(response.data.actions.map(this.mapActionApiModelToAction)),
       filtres: response.data.filtres.map(filtre => ({
         code: filtre.code as ClefThematiqueAPI,
         label: filtre.label,
