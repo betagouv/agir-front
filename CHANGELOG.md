@@ -1,5 +1,20 @@
 # Changelog
 
+## [2.24.0](https://github.com/betagouv/agir-front/compare/v2.23.2...v2.24.0) (2025-09-15)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* afficher les thématiques uniquement dans le catalogue ([#1335](https://github.com/betagouv/agir-front/issues/1335)) ([a1f121c](https://github.com/betagouv/agir-front/commit/a1f121c97f8dd6650da07fdcda28bbb9abc6f6b4))
+* catalogue actions trié par recommandé ([#1336](https://github.com/betagouv/agir-front/issues/1336)) ([1f6f4ea](https://github.com/betagouv/agir-front/commit/1f6f4ea52feb0d85d14021513d4822aba9ca539b))
+* **collectivite:** ajout d'une phrase mentionnant le ratio utilisateur ([#1340](https://github.com/betagouv/agir-front/issues/1340)) ([2d287b8](https://github.com/betagouv/agir-front/commit/2d287b84b8a295c523cabc333af232360c83d2cd))
+* description d'une KYC ([#1337](https://github.com/betagouv/agir-front/issues/1337)) ([ad1fd90](https://github.com/betagouv/agir-front/commit/ad1fd90a3b73d3304e84859cd7b9b5bcbd2f50dc))
+
+
+### 🐛 Corrections de bogues
+
+* ne pas afficher des pictos sur watt watchers quand les consos sont inférieurs à 1% ([#1338](https://github.com/betagouv/agir-front/issues/1338)) ([856fbff](https://github.com/betagouv/agir-front/commit/856fbff336b5b8d809957215490dcba4fb3a47e7))
+
 ## [2.23.2](https://github.com/betagouv/agir-front/compare/v2.23.1...v2.23.2) (2025-09-10)
 
 
