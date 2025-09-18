@@ -7,7 +7,7 @@
           {{ thematique.labelDansLeMenu }}
         </h1>
         <router-link
-          :to="{ name: RouteCompteName.LOGEMENT }"
+          :to="{ name: RouteCompteName.THEMATIQUE, params: { thematiqueId: ThematiqueURL.logement } }"
           class="fr-tag fr-icon-map-pin-2-fill fr-tag--icon-left fr-ml-2w"
           :title="`à ${thematiqueResume.commune}: modifier cette commune`"
         >
@@ -23,7 +23,7 @@
 <script lang="ts" setup>
   import { computed } from 'vue';
   import ListeRaccourcis from '@/components/custom/Thematiques/ListeRaccourcis.vue';
-  import { Thematique } from '@/domaines/thematiques/MenuThematiques';
+  import { Thematique, ThematiqueURL } from '@/domaines/thematiques/MenuThematiques';
   import { ThematiqueResumeViewModel } from '@/domaines/thematiques/ports/thematiqueResume.presenter';
   import { RouteCompteName } from '@/router/compte/routeCompteName';
 

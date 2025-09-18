@@ -1,6 +1,5 @@
 <template>
-  <h1 class="fr-h2">Options avancées</h1>
-  <section class="fr-p-2w fr-mb-2w text--warning border--warning">
+  <section class="fr-p-2w fr-my-5w text--warning border--warning">
     <h2 class="fr-h4 fr-mb-1w text--warning">Supprimer mon compte</h2>
     <p class="fr-mb-1w">
       Vous pouvez à tout moment choisir de supprimer votre compte ainsi que l’ensemble des données qui y sont associées.
