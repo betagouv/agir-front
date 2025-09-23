@@ -13,7 +13,7 @@
     { "type": "ci", "section": "👷 Autres changements", "hidden": false },
     { "type": "tech", "section": "👷 Autres changements", "hidden": false },
     { "type": "refacto", "section": "👷 Autres changements", "hidden": false },
-    { "type": "test", "section": "🧪 Tests", "hidden": true }
+    { "type": "test", "section": "🧪 Tests", "hidden": false }
   ],
   "packages": {
     ".": {

@@ -33,8 +33,8 @@ Le principe est d'isoler la valeur métier du front, et de pouvoir s'abstraire d
 
 ## Mise à jour des dépendances
 
-La CI se charge elle même de mettre à jour les dépendances via Dependabot.
-En général, les MR sont créees automatiquement dans la nuit du lundi au mardi.
+La CI se charge elle-même de mettre à jour les dépendances via Dependabot.
+En général, les MR sont créées automatiquement dans la nuit du lundi au mardi (_dependabot.yml)_.
 
 ## Déploiement
 
@@ -47,7 +47,7 @@ Mode opératoire :
 - Lancer le job `mise-en-production` dans la CI/CD en choisissant le tag correspondant à la MR mergeée
 - Le job se charge de faire le déploiement en production
 
-Attention : les Github Actions nécissitent un token
+Attention : les Github Actions nécessitent un token
 Scalingo ([API Token](https://dashboard.scalingo.com/account/tokens)) qu'il faut mettre dans
 les [secrets du dépôt](https://github.com/betagouv/agir-front/settings/secrets/actions).
 
@@ -55,3 +55,11 @@ les [secrets du dépôt](https://github.com/betagouv/agir-front/settings/secrets
 
 Le projet utilise Matomo pour le tracking et l'analytics.
 Le projet utilise Sentry pour le suivi des erreurs en production et développement.
+
+## Conformité du code
+
+Les commits et les noms de MR suivent la convention [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/).
+Les noms de branches sont précédés par (_tech_, _feature_ ou _fix_)
+
+Le projet utilise Husky pour vérifier la conformité du code (_linting et typescript / vue check_) avant chaque commit.
+Un hook pre-push est également mis en place pour vérifier que les noms de branches sont conformes.
