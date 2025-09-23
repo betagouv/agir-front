@@ -6,7 +6,11 @@
     <h1 id="label-id" class="fr-modal__title">Connexion établie</h1>
     <p class="fr-mb-1w">
       La connexion a été établie avec succès. Dans le futur, pour modifier vos informations, rendez-vous dans
-      <router-link :to="{ name: RouteCompteName.LOGEMENT }" class="fr-link">votre profil.</router-link>
+      <router-link
+        :to="{ name: RouteCompteName.THEMATIQUE, params: { thematiqueId: ThematiqueURL.logement } }"
+        class="fr-link"
+        >votre profil.</router-link
+      >
     </p>
   </div>
   <div class="fr-modal__footer fr-mt-0">
@@ -15,6 +19,7 @@
 </template>
 
 <script lang="ts" setup>
+  import { ThematiqueURL } from '@/domaines/thematiques/MenuThematiques';
   import { RouteCompteName } from '@/router/compte/routeCompteName';
 
   defineProps<{

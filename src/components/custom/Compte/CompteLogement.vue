@@ -1,25 +1,27 @@
 <template>
-  <CompteSkeleton page-courante="Mon Compte - Mon logement">
-    <CompteLogementFormulaire v-if="logementViewModel" :logement-view-model="logementViewModel" />
-  </CompteSkeleton>
+  <CompteLogementFormulaire v-if="logementViewModel" :logement-view-model="logementViewModel" />
 </template>
 
 <script setup lang="ts">
   import { onMounted, ref } from 'vue';
   import CompteLogementFormulaire from '@/components/custom/Compte/CompteLogementFormulaire.vue';
-  import CompteSkeleton from '@/components/custom/Compte/CompteSkeleton.vue';
   import { LogementPresenterImpl } from '@/domaines/logement/adapters/logement.presenter.impl';
   import { LogementRepositoryAxios } from '@/domaines/logement/adapters/logement.repository.axios';
   import { LogementViewModel } from '@/domaines/logement/ports/logement.presenter';
   import { RecupererInformationLogementUseCase } from '@/domaines/logement/recupererInformationLogement.usecase';
+  import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
   import { utilisateurStore } from '@/store/utilisateur';
+
+  defineProps<{
+    clefThematique: ClefThematiqueAPI;
+  }>();
 
   const logementViewModel = ref<LogementViewModel>();
 
-  onMounted(() => {
+  onMounted(async () => {
     const usecase = new RecupererInformationLogementUseCase(new LogementRepositoryAxios());
 
-    usecase.execute(
+    await usecase.execute(
       utilisateurStore().utilisateur.id,
       new LogementPresenterImpl(viewModel => (logementViewModel.value = viewModel)),
     );

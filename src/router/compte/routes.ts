@@ -2,9 +2,8 @@ const PageCompte = () => import('@/components/pages/PageCompte.vue');
 const PageCreationCompte = () => import('@/components/pages/PageCreationCompte.vue');
 const PageCreationCompteDepuisNGC = () => import('@/components/pages/PageCreationCompteDepuisNGC.vue');
 const PageVerificationAdresseMail = () => import('@/components/pages/PageVerificationAdresseMail.vue');
-const PageCompteOptionsAvancees = () => import('@/components/pages/PageCompteOptionsAvancees.vue');
 const PageCompteMesReponses = () => import('@/components/pages/PageCompteMesReponses.vue');
-const PageCompteLogement = () => import('@/components/pages/PageCompteLogement.vue');
+const PageCompteThematique = () => import('@/components/pages/PageCompteThematique.vue');
 const PagePostCreationCompteEtape1 = () =>
   import('@/components/pages/PagePostCreationCompte/PagePostCreationCompteEtape1.vue');
 const PagePostCreationCompteEtape2 = () =>
@@ -18,13 +17,12 @@ import { RouteCompteName } from '@/router/compte/routeCompteName';
 
 export enum RouteComptePath {
   MON_COMPTE = '/compte/',
-  OPTIONS_AVANCEES = '/compte/options-avancees',
   CREATION_COMPTE = '/creation-compte',
   CREATION_COMPTE_NGC = '/creation-compte/nos-gestes-climat',
   VALIDATION_COMPTE = '/validation-compte',
   VALIDATION_AUTHENTIFICATION = '/validation-authentification',
   MES_REPONSES = '/compte/mes-reponses',
-  LOGEMENT = '/compte/logement',
+  THEMATIQUE = `/compte/:thematiqueId`,
   POST_CREATION_COMPTE_ETAPE_1 = '/creation-compte/etape-1',
   POST_CREATION_COMPTE_ETAPE_2 = '/creation-compte/etape-2',
   POST_CREATION_COMPTE_ETAPE_3 = '/creation-compte/etape-3',
@@ -40,15 +38,7 @@ const compteRoutes: RouteRecordRaw[] = [
         name: RouteCompteName.MON_COMPTE,
         component: PageCompte,
         meta: {
-          title: 'Mes informations',
-        },
-      },
-      {
-        path: RouteComptePath.OPTIONS_AVANCEES,
-        name: RouteCompteName.OPTIONS_AVANCEES,
-        component: PageCompteOptionsAvancees,
-        meta: {
-          title: 'Options avancées',
+          title: 'Mon profil',
         },
       },
       {
@@ -60,11 +50,11 @@ const compteRoutes: RouteRecordRaw[] = [
         },
       },
       {
-        path: RouteComptePath.LOGEMENT,
-        name: RouteCompteName.LOGEMENT,
-        component: PageCompteLogement,
+        path: RouteComptePath.THEMATIQUE,
+        name: RouteCompteName.THEMATIQUE,
+        component: PageCompteThematique,
         meta: {
-          title: 'Logement',
+          title: 'Mes réponses',
         },
       },
     ],
