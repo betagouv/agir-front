@@ -54,6 +54,40 @@
           </template>
         </CarteDsfr>
       </div>
+
+      <div class="full-height fr-col-12 fr-col-md-6 fr-pr-md-2w fr-mt-3w">
+        <h2 class="fr-h3 fr-p-0">Réduire ma facture d’énergie</h2>
+
+        <CarteDsfr
+          :horizontal="true"
+          :to="{
+            name: RouteActionsName.ACTION_INDIVIDUELLE,
+            params: {
+              type: TypeAction.SIMULATEUR,
+              id: SimulateursSupportes.WINTER,
+              titre: 'faire-des-economies-sur-ma-facture-d-energie',
+            },
+          }"
+          image="/carte_service_wattwatchers.svg"
+          size="sm"
+          titre="Comprendre ma consommation"
+          variations="shadow"
+        >
+          <template #contenuStart>
+            <ul class="fr-badges-group">
+              <li>
+                <p class="fr-badge fr-badge--info">NOUVEAU</p>
+              </li>
+            </ul>
+          </template>
+          <template #contenuEnd>
+            <p class="fr-card__desc">
+              Découvrez vos postes les plus gourmands en énergie et de nouvelles actions personnalisées pour réduire
+              leur consommation !
+            </p>
+          </template>
+        </CarteDsfr>
+      </div>
     </section>
   </div>
 </template>
