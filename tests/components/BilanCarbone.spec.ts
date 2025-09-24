@@ -113,7 +113,7 @@ describe('BilanCarbone', () => {
       const titre = page.getByRole('heading', { level: 2, name: 'Affinez mon estimation' });
       expect(titre).toBeDefined();
 
-      const carteThematique1 = page.getByRole('link', { name: '🚅 Transports , 9 questions , 100 % Terminé !' });
+      const carteThematique1 = page.getByRole('link', { name: '🚅 Transports, 9 questions, 100 %Terminé !' });
       expect(carteThematique1).toBeDefined();
       expect(carteThematique1).toHaveProperty(
         'title',
@@ -123,7 +123,7 @@ describe('BilanCarbone', () => {
       expect(progressThematique1).toBeDefined();
       expect(progressThematique1.getAttribute('aria-valuenow')).toBe('100');
 
-      const carteThematique2 = page.getByRole('link', { name: '🥦 Alimentation , 6 questions , 33 %' });
+      const carteThematique2 = page.getByRole('link', { name: '🥦 Alimentation, 6 questions, 33 %' });
       expect(carteThematique2).toBeDefined();
       expect(carteThematique2).toHaveProperty(
         'title',
@@ -133,7 +133,7 @@ describe('BilanCarbone', () => {
       expect(progressThematique2).toBeDefined();
       expect(progressThematique2.getAttribute('aria-valuenow')).toBe('33');
 
-      const carteThematique3 = page.getByRole('link', { name: '🏡 Logement , 8 questions , 12 %' });
+      const carteThematique3 = page.getByRole('link', { name: '🏡 Logement, 8 questions, 12 %' });
       expect(carteThematique3).toBeDefined();
       expect(carteThematique3).toHaveProperty(
         'title',
@@ -357,7 +357,7 @@ describe('BilanCarbone', () => {
     });
 
     it('affiche les cartes terminées pour affiner son bilan', () => {
-      const carteThematique1 = page.getByRole('link', { name: '🚅 Transports , 9 questions , 100 % Terminé !' });
+      const carteThematique1 = page.getByRole('link', { name: '🚅 Transports, 9 questions, 100 %Terminé !' });
       expect(carteThematique1).toBeDefined();
       expect(carteThematique1).toHaveProperty(
         'title',
@@ -367,7 +367,7 @@ describe('BilanCarbone', () => {
       expect(progressThematique1).toBeDefined();
       expect(progressThematique1.getAttribute('aria-valuenow')).toBe('100');
 
-      const carteThematique2 = page.getByRole('link', { name: '🥦 Alimentation , 6 questions , 100 % Terminé !' });
+      const carteThematique2 = page.getByRole('link', { name: '🥦 Alimentation, 6 questions, 100 %Terminé !' });
       expect(carteThematique2).toBeDefined();
       expect(carteThematique2).toHaveProperty(
         'title',
@@ -377,7 +377,7 @@ describe('BilanCarbone', () => {
       expect(progressThematique2).toBeDefined();
       expect(progressThematique2.getAttribute('aria-valuenow')).toBe('100');
 
-      const carteThematique3 = page.getByRole('link', { name: '🏡 Logement , 8 questions , 100 % Terminé !' });
+      const carteThematique3 = page.getByRole('link', { name: '🏡 Logement, 8 questions, 100 %Terminé !' });
       expect(carteThematique3).toBeDefined();
       expect(carteThematique3).toHaveProperty(
         'title',
@@ -388,7 +388,7 @@ describe('BilanCarbone', () => {
       expect(progressThematique3.getAttribute('aria-valuenow')).toBe('100');
 
       const carteThematique4 = page.getByRole('link', {
-        name: '🛒 Consommation durable , 8 questions , 100 % Terminé !',
+        name: '🛒 Consommation durable, 8 questions, 100 %Terminé !',
       });
       expect(carteThematique4).toBeDefined();
       expect(carteThematique4).toHaveProperty(
