@@ -1,5 +1,26 @@
 # Changelog
 
+## [2.25.0](https://github.com/betagouv/agir-front/compare/v2.24.0...v2.25.0) (2025-09-24)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* **readme:** conformité du code ([#1351](https://github.com/betagouv/agir-front/issues/1351)) ([e8d6832](https://github.com/betagouv/agir-front/commit/e8d683203fbac9b1fd2e543ce406af79402af2dd))
+
+
+### 👷 Autres changements
+
+* update Readme.md ([#1349](https://github.com/betagouv/agir-front/issues/1349)) ([4666994](https://github.com/betagouv/agir-front/commit/466699441612088485ad5e50bc87d76044b81dc2))
+
+
+### 👷 Gestion des dépendances
+
+* Bump @iframe-resizer/vue from 5.5.5 to 5.5.6 ([#1342](https://github.com/betagouv/agir-front/issues/1342)) ([fbd0178](https://github.com/betagouv/agir-front/commit/fbd0178bbac3d6817dd816e0339d0481c03ed92f))
+* Bump @sentry/vue from 10.10.0 to 10.13.0 ([#1348](https://github.com/betagouv/agir-front/issues/1348)) ([1c9a0f7](https://github.com/betagouv/agir-front/commit/1c9a0f722cd064f0667864441fdd30fd50227400))
+* Bump @types/node from 24.3.0 to 24.5.2 ([#1347](https://github.com/betagouv/agir-front/issues/1347)) ([69e4fb5](https://github.com/betagouv/agir-front/commit/69e4fb56e6b6f445f21c3b5e1c9327084d1843c6))
+* Bump jsdom from 26.1.0 to 27.0.0 ([#1345](https://github.com/betagouv/agir-front/issues/1345)) ([fef84a8](https://github.com/betagouv/agir-front/commit/fef84a8959f73bd19db3ded045918267c79eaaf0))
+* Bump marked from 16.2.1 to 16.3.0 ([#1344](https://github.com/betagouv/agir-front/issues/1344)) ([deee26c](https://github.com/betagouv/agir-front/commit/deee26cffd2fd6ae0a5268b81c61591f4beda19b))
+
 ## [2.24.0](https://github.com/betagouv/agir-front/compare/v2.23.2...v2.24.0) (2025-09-15)
 
 
