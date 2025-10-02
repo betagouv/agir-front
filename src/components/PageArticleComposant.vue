@@ -102,7 +102,7 @@
   import { EvaluerArticleUsecase } from '@/domaines/article/evaluerArticle.usecase';
   import { Article } from '@/domaines/article/recupererArticle.usecase';
   import { RetirerDesFavorisUsecase } from '@/domaines/article/retirerDesFavoris.usecase';
-  import cacherEmojisAuxLecteursDecrans from '@/shell/cacherEmojisAuxLecteursDecrans';
+  import cacherEmojisAuxLecteursDecrans from '@/shell/formatting/cacherEmojisAuxLecteursDecrans';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const props = defineProps<{

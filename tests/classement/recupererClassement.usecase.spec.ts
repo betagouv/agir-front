@@ -5,7 +5,7 @@ import {
 import { ClassementPourcentage, RecupererClassementUsecase } from '@/domaines/classement/recupererClassement.usecase';
 import { ClassementRepositoryMock } from './adapters/classement.repository.mock';
 import { Badge, TypeDeBadge } from '@/domaines/score/ports/score.repository';
-import { NombreAfficheEnFR } from '@/shell/nombreAfficheEnFRBuilder';
+import { NombreAfficheEnFR } from '@/shell/formatting/nombreAfficheEnFRBuilder';
 
 describe('Fichier de test du usecase de chargement du classement', () => {
   it("En donnant l'id d'un utilisateur, doit me retourner son classement", async () => {

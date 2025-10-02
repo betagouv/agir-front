@@ -1,7 +1,7 @@
 import { ArticleRecommande } from '@/domaines/article/ports/article.repository';
 import { ArticlesRecommandesPresenter } from '@/domaines/article/ports/articlesRecommandes.presenter';
 import { RouteArticlePath } from '@/router/articles/routes';
-import { buildUrl } from '@/shell/buildUrl';
+import { buildUrl } from '@/shell/formatting/buildUrl';
 
 export interface ArticleRecommandeViewModel {
   titre: string;

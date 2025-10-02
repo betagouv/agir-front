@@ -16,7 +16,7 @@
 <script lang="ts" setup>
   import { ResultatWWViewModel } from '@/domaines/simulationWattWatchers/adapters/resultatWattWatchers.presenter.impl';
   import { RouteActionsName } from '@/router/actions/routes';
-  import { gererPluriel } from '@/shell/gererPluriel';
+  import { gererPluriel } from '@/shell/formatting/gererPluriel';
 
   defineProps<{ nombreActions: ResultatWWViewModel['nombreActions'] }>();
 </script>

@@ -15,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-  import { trackClick } from '@/shell/matomo';
+  import { trackClick } from '@/shell/tracking/matomo';
 
   const props = defineProps<{
     label: string;

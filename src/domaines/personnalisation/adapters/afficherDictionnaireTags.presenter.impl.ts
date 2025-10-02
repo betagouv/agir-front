@@ -6,7 +6,7 @@ import {
 import { DefinitionTag } from '@/domaines/personnalisation/ports/personnalisation.repository';
 import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 import { RouteActionsName } from '@/router/actions/routes';
-import { buildUrl } from '@/shell/buildUrl';
+import { buildUrl } from '@/shell/formatting/buildUrl';
 
 export class AfficherDictionnaireTagsPresenterImpl implements AfficherDictionnaireTagsPresenter {
   constructor(private dictionnaireTagsViewModel: (dictionnaireTagsViewModel: DictionnaireTagsViewModel) => void) {}

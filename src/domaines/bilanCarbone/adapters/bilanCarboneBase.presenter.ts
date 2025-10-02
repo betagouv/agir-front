@@ -1,4 +1,4 @@
-import { NombreAfficheEnFR, NombreAfficheEnFRBuilder } from '@/shell/nombreAfficheEnFRBuilder';
+import { NombreAfficheEnFR, NombreAfficheEnFRBuilder } from '@/shell/formatting/nombreAfficheEnFRBuilder';
 
 export class BilanCarboneBasePresenter {
   calculPourcentageProgressBar(nombreDeKg: number): number {

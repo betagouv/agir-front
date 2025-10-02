@@ -3,7 +3,7 @@ import { ThematiqueBilanViewModel } from '@/domaines/bilanCarbone/ports/bilanCar
 import { BilanCarboneAccueilPresenter } from '@/domaines/bilanCarbone/ports/bilanCarboneAccueil.presenter';
 import { BilanCarbone } from '@/domaines/bilanCarbone/recupererBilanCarbone.usecase';
 import { ClefThematiqueAPI, MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
-import { NombreAfficheEnFR } from '@/shell/nombreAfficheEnFRBuilder';
+import { NombreAfficheEnFR } from '@/shell/formatting/nombreAfficheEnFRBuilder';
 
 export interface BilanCarboneCompletAccueilViewModel {
   pourcentageProgressBar: number;

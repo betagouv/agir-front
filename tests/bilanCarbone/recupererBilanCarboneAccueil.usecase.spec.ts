@@ -6,7 +6,7 @@ import {
 } from '@/domaines/bilanCarbone/adapters/bilanCarboneAccueil.presenter.impl';
 import { RecupererBilanCarboneAccueilUsecase } from '@/domaines/bilanCarbone/recupererBilanCarboneAccueil.usecase';
 import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
-import { NombreAfficheEnFR } from '@/shell/nombreAfficheEnFRBuilder';
+import { NombreAfficheEnFR } from '@/shell/formatting/nombreAfficheEnFRBuilder';
 
 describe('Fichier de tests concernant le chargement du bilan carbone', () => {
   const bilanCarboneCompletMock = new BilanCarboneRepositoryMock({

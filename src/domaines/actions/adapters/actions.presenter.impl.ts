@@ -4,10 +4,10 @@ import { MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
 import { TagThematique } from '@/domaines/thematiques/TagThematique';
 import { RouteActionsName } from '@/router/actions/routes';
 import marked from '@/shell/actionMarkdownToHtml';
-import { buildUrl } from '@/shell/buildUrl';
-import cacherEmojisAuxLecteursDecrans from '@/shell/cacherEmojisAuxLecteursDecrans';
-import { gererPluriel } from '@/shell/gererPluriel';
-import { MontantAfficheEnFRBuilder } from '@/shell/nombreAfficheEnFRBuilder';
+import { buildUrl } from '@/shell/formatting/buildUrl';
+import cacherEmojisAuxLecteursDecrans from '@/shell/formatting/cacherEmojisAuxLecteursDecrans';
+import { gererPluriel } from '@/shell/formatting/gererPluriel';
+import { MontantAfficheEnFRBuilder } from '@/shell/formatting/nombreAfficheEnFRBuilder';
 
 export class ActionsPresenterImpl implements ActionsPresenter {
   constructor(private readonly viewModel: (viewModel: ActionViewModel[]) => void) {}

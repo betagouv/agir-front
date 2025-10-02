@@ -26,8 +26,8 @@
   import GrilleAidesDUneAction from '@/components/custom/Aides/GrilleAidesDUneAction.vue';
   import InputCheckbox from '@/components/dsfr/InputCheckbox.vue';
   import { AidesViewModel } from '@/domaines/aides/ports/chargementAides.presenter';
-  import cacherEmojisAuxLecteursDecrans from '@/shell/cacherEmojisAuxLecteursDecrans';
-  import { nettoyerEtGarderLettresEtChiffres } from '@/shell/nettoyerEtGarderLettresEtChiffres';
+  import cacherEmojisAuxLecteursDecrans from '@/shell/formatting/cacherEmojisAuxLecteursDecrans';
+  import { nettoyerEtGarderLettresEtChiffres } from '@/shell/formatting/nettoyerEtGarderLettresEtChiffres';
 
   const route = useRoute();
 

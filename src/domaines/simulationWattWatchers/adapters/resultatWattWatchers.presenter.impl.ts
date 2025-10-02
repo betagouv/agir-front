@@ -3,7 +3,7 @@ import {
   ResultatWattWatchers,
   TypeConsommation,
 } from '@/domaines/simulationWattWatchers/recupererConsommation.usecase';
-import { MontantAfficheEnFR, MontantAfficheEnFRBuilder } from '@/shell/nombreAfficheEnFRBuilder';
+import { MontantAfficheEnFR, MontantAfficheEnFRBuilder } from '@/shell/formatting/nombreAfficheEnFRBuilder';
 
 export type ResultatWWViewModel = {
   totalConsommation: MontantAfficheEnFR;

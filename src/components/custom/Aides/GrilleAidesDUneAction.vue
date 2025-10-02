@@ -77,7 +77,7 @@
   import { ActionAideViewModel } from '@/domaines/actions/ports/action.presenter';
   import { RouteAidesName } from '@/router/aides/routeAidesName';
   import { RouteCompteName } from '@/router/compte/routeCompteName';
-  import { trackClick } from '@/shell/matomo';
+  import { trackClick } from '@/shell/tracking/matomo';
   import { utilisateurStore } from '@/store/utilisateur';
 
   defineProps<{

@@ -9,7 +9,7 @@ import {
   MontantAfficheEnFRBuilder,
   NombreAfficheEnFR,
   NombreAfficheEnFRBuilder,
-} from '@/shell/nombreAfficheEnFRBuilder';
+} from '@/shell/formatting/nombreAfficheEnFRBuilder';
 
 export type ResultatSimulationVoitureViewModel = {
   resultatVoitureActuelle: ResultatSimulationVoitureActuelleViewModel;

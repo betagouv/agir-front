@@ -1,8 +1,8 @@
 import { ActionAideViewModel } from '@/domaines/actions/ports/action.presenter';
 import { Aides } from '@/domaines/aides/chargementAides.usecase';
 import { ChargementAidesPresenter } from '@/domaines/aides/ports/chargementAides.presenter';
-import { buildUrl } from '@/shell/buildUrl';
-import { MontantAfficheEnFRBuilder } from '@/shell/nombreAfficheEnFRBuilder';
+import { buildUrl } from '@/shell/formatting/buildUrl';
+import { MontantAfficheEnFRBuilder } from '@/shell/formatting/nombreAfficheEnFRBuilder';
 
 export class AidesPresenterImpl implements ChargementAidesPresenter {
   constructor(private _viewModel: (vm: ActionAideViewModel[]) => void) {}

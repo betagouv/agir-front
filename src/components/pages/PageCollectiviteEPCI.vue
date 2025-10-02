@@ -36,7 +36,7 @@
   import { DonneesCollectivitesInseeViewModel } from '@/domaines/collectivites/ports/donneesCollectivitesInsee.presenter';
   import { RecupererDonneesCollectivitesInsee } from '@/domaines/collectivites/recupererDonneesCollectivitesInsee.usecase';
   import { RouteCollectiviteName } from '@/router/collectivites/routes';
-  import { trackClick } from '@/shell/matomo';
+  import { trackClick } from '@/shell/tracking/matomo';
 
   const route = useRoute();
   const router = useRouter();
