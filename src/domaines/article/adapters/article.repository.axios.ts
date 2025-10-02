@@ -2,7 +2,6 @@ import { AxiosFactory, intercept40X } from '@/axios.factory';
 import { ArticleRecommande, ArticleRepository } from '@/domaines/article/ports/article.repository';
 import { Article } from '@/domaines/article/recupererArticle.usecase';
 import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
-import { InteractionType } from '@/shell/interactionType';
 
 export interface RecommandationApiModel {
   type: string;
@@ -182,7 +181,6 @@ export class ArticleRepositoryAxios implements ArticleRepository {
 
     return response.data.map((apiModel: RecommandationApiModel) => {
       const recommandationPersonnalisee: ArticleRecommande = {
-        type: apiModel.type as InteractionType,
         titre: apiModel.titre,
         clefThematiqueAPI: apiModel.thematique_principale as ClefThematiqueAPI,
         illustrationURL: apiModel.image_url,

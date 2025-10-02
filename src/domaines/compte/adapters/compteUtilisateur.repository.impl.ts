@@ -7,7 +7,6 @@ import {
   CompteUtilisateurRepository,
   SuppressionFranceConnect,
 } from '@/domaines/compte/ports/compteUtilisateur.repository';
-import { RepositoryError } from '@/shell/repositoryError';
 
 interface CompteUtilisateurApiModel {
   id: string;
@@ -86,4 +85,11 @@ export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurReposit
       mot_de_passe: nouveauMotDePasse,
     });
   }
+}
+
+export class RepositoryError {
+  constructor(
+    public code: string,
+    public message: string,
+  ) {}
 }

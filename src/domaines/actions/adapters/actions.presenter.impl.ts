@@ -6,8 +6,8 @@ import { RouteActionsName } from '@/router/actions/routes';
 import marked from '@/shell/actionMarkdownToHtml';
 import { buildUrl } from '@/shell/buildUrl';
 import cacherEmojisAuxLecteursDecrans from '@/shell/cacherEmojisAuxLecteursDecrans';
+import { gererPluriel } from '@/shell/gererPluriel';
 import { MontantAfficheEnFRBuilder } from '@/shell/nombreAfficheEnFRBuilder';
-import { gererPluriel } from '@/shell/pluriel';
 
 export class ActionsPresenterImpl implements ActionsPresenter {
   constructor(private readonly viewModel: (viewModel: ActionViewModel[]) => void) {}

@@ -4,7 +4,7 @@ import {
   SyntheseThematiquesViewModel,
 } from '@/domaines/thematiques/ports/syntheseThematique.presenter';
 import { SyntheseThematiques } from '@/domaines/thematiques/ports/thematiques.repository';
-import { gererPluriel } from '@/shell/pluriel';
+import { gererPluriel } from '@/shell/gererPluriel';
 
 type Bulletpoint = { nombre: number; phrase: { singulier: string; pluriel: string } };
 

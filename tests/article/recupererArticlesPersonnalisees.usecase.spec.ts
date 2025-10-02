@@ -5,7 +5,6 @@ import {
 } from '@/domaines/article/adapters/articlesRecommandes.presenter.impl';
 import { MockArticleRepository } from './adapters/article.repository.mock';
 import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
-import { InteractionType } from '@/shell/interactionType';
 
 describe('Fichier de tests concernant le chargement des articles recommandées', () => {
   it('En donnant un id utilisateur doit charger et mettre en forme les articles personnalisées', async () => {
@@ -16,7 +15,6 @@ describe('Fichier de tests concernant le chargement des articles recommandées',
           idDuContenu: '1',
           illustrationURL: 'illustrationURL',
           titre: 'Article qui doit être en avant',
-          type: InteractionType.ARTICLE,
           clefThematiqueAPI: ClefThematiqueAPI.consommation,
           estLocal: true,
         },
@@ -48,7 +46,6 @@ describe('Fichier de tests concernant le chargement des articles recommandées',
           idDuContenu: '1',
           illustrationURL: 'illustrationURL',
           titre: 'Article qui doit être en avant',
-          type: InteractionType.ARTICLE,
           clefThematiqueAPI: ClefThematiqueAPI.consommation,
           estLocal: false,
         },
