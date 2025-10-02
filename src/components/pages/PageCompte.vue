@@ -16,8 +16,6 @@
     ChargerProfileUtilisateurUsecase,
     ProfileUtilisateurRepositoryAxiosImpl,
   } from '@/domaines/profileUtilisateur/chargerProfileUtilisateur.usecase';
-  import { PublierEvenemntRepositoryAxios } from '@/shell/adapters/publierEvenemnt.repository.axios';
-  import { Evenemement } from '@/shell/ports/publierEvenement.repository';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const compteUtlisateurViewModel = ref<ProfileUtilisateurViewModel | null>(null);
@@ -32,8 +30,5 @@
         compteUtlisateurViewModel.value = viewModel;
       }),
     );
-
-    const publierEvenementRepository = new PublierEvenemntRepositoryAxios();
-    await publierEvenementRepository.publierEvenement(idUtilisateur, Evenemement.COMPTE_CONSULTE);
   });
 </script>
