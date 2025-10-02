@@ -38,7 +38,7 @@
     "vue-router": "4.5.1"
   },
   "devDependencies": {
-    "@playwright/test": "1.55.0",
+    "@playwright/test": "1.55.1",
     "@testing-library/vue": "8.1.0",
     "@types/node": "24.5.2",
     "@typescript-eslint/eslint-plugin": "7.18.0",
