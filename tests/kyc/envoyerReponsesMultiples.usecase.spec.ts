@@ -1,17 +1,14 @@
 import { EnvoyerReponsesMultiplesUsecase } from '@/domaines/kyc/envoyerReponsesMultiples.usecase';
-import { SpyToDoListEventBus } from '../toDoList/adapters/spyTodoListEventBus';
 import { expect } from 'vitest';
-import { ToDoListEvent } from '@/domaines/toDoList/toDoListEventBusImpl';
 import { SpyQuestionRepository } from './adapters/question.repository.spy';
 
 describe("Fichier de tests concernant l'envoie des reponses à une question mosaic", () => {
-  it('Doit envoyer les reponses et publier un evenement TODO_KYC_A_ETE_REPONDU', async () => {
+  it('Doit envoyer les reponses', async () => {
     // GIVEN
     const questionRepository = new SpyQuestionRepository();
-    const spyEventBus = new SpyToDoListEventBus();
 
     // WHEN
-    const usecase = new EnvoyerReponsesMultiplesUsecase(questionRepository, spyEventBus);
+    const usecase = new EnvoyerReponsesMultiplesUsecase(questionRepository);
     await usecase.execute('utilisateurId', 'questionId', [
       {
         code: 'code',
@@ -30,6 +27,5 @@ describe("Fichier de tests concernant l'envoie des reponses à une question mosa
         },
       ],
     });
-    expect(spyEventBus.eventName).toEqual(ToDoListEvent.TODO_KYC_A_ETE_REPONDU);
   });
 });

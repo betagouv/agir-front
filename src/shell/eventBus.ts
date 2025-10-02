@@ -1,7 +1,6 @@
 import { ActionsEvent } from '@/domaines/actions/actions.eventbus';
-import { ToDoListEvent } from '@/domaines/toDoList/toDoListEventBusImpl';
 
-export abstract class EventBus<T extends ToDoListEvent | ActionsEvent> {
+export abstract class EventBus<T extends ActionsEvent> {
   protected abstract eventSubscribers: Record<T, { subscriberName: string; callback: () => void }[]>;
 
   publish(eventName: T): void {

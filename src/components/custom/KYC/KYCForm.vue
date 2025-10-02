@@ -58,7 +58,6 @@
   import { EnvoyerReponseUsecase } from '@/domaines/kyc/envoyerReponse.usecase';
   import { EnvoyerReponsesMultiplesUsecase } from '@/domaines/kyc/envoyerReponsesMultiples.usecase';
   import { PasserUneKYCUsecase } from '@/domaines/kyc/passerUneKYC.usecase';
-  import { ToDoListEventBusImpl } from '@/domaines/toDoList/toDoListEventBusImpl';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const props = defineProps<{ questionViewModel: QuestionViewModel; wordingBouton: string; styleDuTitre?: string }>();
@@ -95,10 +94,7 @@
 
     if (aReponsesPredefinies) {
       const reponseArray = Array.isArray(reponse.value) ? reponse.value : [reponse.value];
-      const envoyerReponsesMultiplesUsecase = new EnvoyerReponsesMultiplesUsecase(
-        new QuestionRepositoryAxios(),
-        ToDoListEventBusImpl.getInstance(),
-      );
+      const envoyerReponsesMultiplesUsecase = new EnvoyerReponsesMultiplesUsecase(new QuestionRepositoryAxios());
       await envoyerReponsesMultiplesUsecase.execute(
         utilisateurStore().utilisateur.id,
         props.questionViewModel.id,
@@ -108,10 +104,7 @@
         })),
       );
     } else {
-      const envoyerReponseUsecase = new EnvoyerReponseUsecase(
-        new QuestionRepositoryAxios(),
-        ToDoListEventBusImpl.getInstance(),
-      );
+      const envoyerReponseUsecase = new EnvoyerReponseUsecase(new QuestionRepositoryAxios());
       await envoyerReponseUsecase.execute(
         utilisateurStore().utilisateur.id,
         props.questionViewModel.id,

@@ -29,7 +29,6 @@
   } from '@/domaines/score/adapters/gamification.presenter.impl';
   import { ScoreRepositoryAxios } from '@/domaines/score/adapters/score.repository.axios';
   import { ChargementScoreUsecase } from '@/domaines/score/chargementScore.usecase';
-  import { ToDoListEventBusImpl } from '@/domaines/toDoList/toDoListEventBusImpl';
   import { RouteClassementName } from '@/router/classement/routes';
   import { utilisateurStore } from '@/store/utilisateur';
 
@@ -39,17 +38,12 @@
   onMounted(() => {
     mettreAJourLeScore();
 
-    ToDoListEventBusImpl.getInstance().subscribeToAllEvents(subscriberName, () => {
-      mettreAJourLeScore();
-    });
-
     ActionsEventBus.getInstance().subscribeToAllEvents(subscriberName, () => {
       mettreAJourLeScore();
     });
   });
 
   onUnmounted(() => {
-    ToDoListEventBusImpl.getInstance().unsubscribeToAllEvents(subscriberName);
     ActionsEventBus.getInstance().unsubscribeToAllEvents(subscriberName);
   });
 

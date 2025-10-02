@@ -1,12 +1,7 @@
 import { QuestionRepository } from '@/domaines/kyc/ports/question.repository';
-import { ToDoListEvent } from '@/domaines/toDoList/toDoListEventBusImpl';
-import { EventBus } from '@/shell/eventBus';
 
 export class EnvoyerReponsesMultiplesUsecase {
-  constructor(
-    private readonly questionRepository: QuestionRepository,
-    private readonly eventBus: EventBus<ToDoListEvent>,
-  ) {}
+  constructor(private readonly questionRepository: QuestionRepository) {}
 
   async execute(
     utilisateurId: string,
@@ -14,6 +9,5 @@ export class EnvoyerReponsesMultiplesUsecase {
     reponses: { code: string; boolean_value: boolean }[],
   ): Promise<void> {
     await this.questionRepository.envoyerReponsesMultiples(utilisateurId, questionId, reponses);
-    this.eventBus.publish(ToDoListEvent.TODO_KYC_A_ETE_REPONDU);
   }
 }
