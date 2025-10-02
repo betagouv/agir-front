@@ -5,6 +5,7 @@ export interface refererStoreState {
   refererKeyword: string;
 }
 
+// Utilisé pour catégoriser les sources de trafic (ex: campagne "widget")
 export const refererStore = defineStore('refererStore', {
   state: (): refererStoreState => ({
     referer: '',
