@@ -10,7 +10,7 @@
             </h1>
             <router-link
               :title="`à ${thematiqueResumeViewModel?.commune}: modifier cette commune`"
-              :to="{ name: RouteCompteName.LOGEMENT }"
+              :to="{ name: RouteCompteName.THEMATIQUE, params: { thematiqueId: ThematiqueURL.logement } }"
               class="fr-tag fr-icon-map-pin-2-fill fr-tag--icon-left fr-ml-2w"
             >
               à {{ thematiqueResumeViewModel?.commune }}
@@ -96,7 +96,12 @@
   import { RecupererDetailThematiqueUsecase } from '@/domaines/actions/recupererDetailThematique.usecase';
   import { ThematiqueResumePresenterImpl } from '@/domaines/thematiques/adapters/thematiqueResume.presenter.impl';
   import { ThematiquesRepositoryAxios } from '@/domaines/thematiques/adapters/thematiques.repository.axios';
-  import { ClefThematiqueAPI, MenuThematiques, Thematique } from '@/domaines/thematiques/MenuThematiques';
+  import {
+    ClefThematiqueAPI,
+    MenuThematiques,
+    Thematique,
+    ThematiqueURL,
+  } from '@/domaines/thematiques/MenuThematiques';
   import { PersonnalisationThematiqueEffectueeUsecase } from '@/domaines/thematiques/personnalisationThematiqueEffectuee.usecase';
   import { ThematiqueResumeViewModel } from '@/domaines/thematiques/ports/thematiqueResume.presenter';
   import { ResetPersonnalisationUsecase } from '@/domaines/thematiques/resetPersonnalisation.usecase';

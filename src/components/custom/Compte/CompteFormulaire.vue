@@ -1,6 +1,6 @@
 <template>
   <section>
-    <h1 class="fr-h2 fr-mb-4w">Mes informations</h1>
+    <h1 class="fr-h2 fr-mb-5w">Mon profil</h1>
     <div id="scroll-to-alerte">
       <Alert
         v-if="alerte.isActive"
@@ -13,7 +13,7 @@
     <form class="fr-mb-0" @submit.prevent="modifierInformation">
       <fieldset aria-labelledby="identité-fieldset-legend" class="fr-mb-1w fr-fieldset fr-px-0 fr-mx-0">
         <legend id="identité-fieldset-legend" class="fr-fieldset__legend fr-px-0 fr-mx-0">
-          <h2 class="fr-h3">Mon identité</h2>
+          <h2 class="fr-h4">Mon identité</h2>
         </legend>
         <div class="fr-mb-3w">
           Adresse email : <strong>{{ profileUtlisateurViewModel.mail }}</strong>
@@ -71,7 +71,7 @@
 
       <fieldset aria-labelledby="donnee-fieldset-legend" class="fr-mb-0 fr-fieldset fr-px-0 fr-mx-0">
         <legend id="donnee-fieldset-legend" class="fr-fieldset__legend fr-px-0 fr-mx-0">
-          <h2 class="fr-h3">Mes données personnelles</h2>
+          <h2 class="fr-h4">Mes revenus</h2>
         </legend>
         <div class="full-width">
           <CompteFormulaireRevenuFiscal
@@ -85,6 +85,8 @@
 
       <AccordeonsRevenu />
 
+      <CompteSuppression />
+
       <CompteFormulaireBoutonEnregistrer />
     </form>
   </section>
@@ -96,6 +98,7 @@
   import AccordeonsRevenu from '@/components/custom/Compte/AccordeonsRevenu.vue';
   import CompteFormulaireBoutonEnregistrer from '@/components/custom/Compte/CompteFormulaireBoutonEnregistrer.vue';
   import CompteFormulaireRevenuFiscal from '@/components/custom/Compte/CompteFormulaireRevenuFiscal.vue';
+  import CompteSuppression from '@/components/custom/Compte/CompteSuppression.vue';
   import InputDateDeNaissance from '@/components/dsfr/InputDateDeNaissance.vue';
   import InputText from '@/components/dsfr/InputText.vue';
   import {
