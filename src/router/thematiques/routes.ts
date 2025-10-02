@@ -4,7 +4,6 @@ const PageThematique = () => import('@/components/pages/PageThematique.vue');
 
 export enum RouteThematiquesName {
   THEMATIQUE = 'thematique',
-  MISSION = 'mission',
 }
 
 export enum RouteThematiquesPath {
