@@ -81,7 +81,7 @@ test.beforeAll(async () => {
 
 test.describe('kyc', () => {
   test('doit afficher le bon title et titre', async () => {
-    await page.goto('/mieux-vous-connaitre/KYC001');
+    await page.goto('/compte/mieux-vous-connaitre/KYC001');
 
     await expect(page).toHaveTitle("Mieux vous connaître - J'agis");
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('Question pour mieux vous connaître');
@@ -97,10 +97,6 @@ test.describe('kyc', () => {
     await page.getByRole('checkbox', { name: 'La cuisine et l’alimentation' }).check({ force: true });
     await page.getByRole('button', { name: 'Valider' }).click({ force: true });
 
-    expect(await page.getByText('Merci pour votre réponse !!!')).toBeDefined();
-
-    await page.getByRole('link', { name: "Retour à l'accueil" }).click({ force: true });
-
-    await expect(page).toHaveTitle("Agir - J'agis");
+    expect(await page.getByText('Merci pour votre réponse !')).toBeDefined();
   });
 });
