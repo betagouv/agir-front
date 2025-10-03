@@ -7,8 +7,8 @@ import {
 } from '@/domaines/aides/ports/chargementAides.presenter';
 import { MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
 import { TagThematique } from '@/domaines/thematiques/TagThematique';
-import { buildUrl } from '@/shell/buildUrl';
-import { MontantAfficheEnFRBuilder } from '@/shell/nombreAfficheEnFRBuilder';
+import { buildUrl } from '@/shell/formatting/buildUrl';
+import { MontantAfficheEnFRBuilder } from '@/shell/formatting/nombreAfficheEnFRBuilder';
 
 export class ChargementAidesPresenterImpl implements ChargementAidesPresenter {
   constructor(private _viewModel: (vm: AidesAvecCouvertureViewModel) => void) {}

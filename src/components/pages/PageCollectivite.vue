@@ -26,7 +26,7 @@
   import CommuniquerSurJagis from '@/components/custom/CollectivitesLanding/CommuniquerSurJagis.vue';
   import ResponsableMobilisationCitoyenne from '@/components/custom/CollectivitesLanding/ResponsableMobilisationCitoyenne.vue';
   import LandingRappelAppCTA from '@/components/custom/Landing/LandingRappelAppCTA.vue';
-  import { trackClick } from '@/shell/matomo';
+  import { trackClick } from '@/shell/tracking/matomo';
 
   interface PriseDeRdv {
     lien: string;

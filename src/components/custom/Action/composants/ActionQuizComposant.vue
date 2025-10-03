@@ -39,7 +39,6 @@
   import { QuizRepositoryAxios } from '@/domaines/quiz/adapters/quiz.repository.axios';
   import { EnvoyerDonneesQuizInteractionUsecase } from '@/domaines/quiz/envoyerDonneesQuizInteraction.usecase';
   import { ArticleDuQuiz } from '@/domaines/quiz/ports/quiz.repository';
-  import { ToDoListEventBusImpl } from '@/domaines/toDoList/toDoListEventBusImpl';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const props = defineProps<{
@@ -66,10 +65,11 @@
       props.question.reponsesPossibles.find(reponsePossible => reponsePossible.value === reponse)?.label ?? reponse;
     estBienRepondu.value = props.question.solution === reponse;
 
-    await new EnvoyerDonneesQuizInteractionUsecase(
-      new QuizRepositoryAxios(),
-      ToDoListEventBusImpl.getInstance(),
-    ).execute(idUtilisateur, props.quizId, estBienRepondu.value ? 100 : 0);
+    await new EnvoyerDonneesQuizInteractionUsecase(new QuizRepositoryAxios()).execute(
+      idUtilisateur,
+      props.quizId,
+      estBienRepondu.value ? 100 : 0,
+    );
 
     await nextTick();
     reponsePElement.value?.focus();

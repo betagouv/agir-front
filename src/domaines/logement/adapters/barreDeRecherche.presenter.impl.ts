@@ -1,6 +1,6 @@
 import { BarreDeRecherchePresenter } from '@/domaines/logement/ports/barreDeRecherche.presenter';
 import { Adresse } from '@/domaines/logement/recupererAdressePourBarreDeRecherche.usecase';
-import formaterAdresse from '@/shell/formaterAdresseBarreDeRecherche';
+import formaterAdresse from '@/shell/formatting/formaterAdresseBarreDeRecherche';
 
 export type BarreDeRechercheViewModel = {
   recherche: string;

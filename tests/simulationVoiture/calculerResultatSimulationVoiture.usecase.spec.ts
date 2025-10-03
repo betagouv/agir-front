@@ -5,7 +5,7 @@ import {
   ResultatSimulationVoitureViewModel,
 } from '@/domaines/simulationVoiture/adapters/resultatSimulationVoiture.presenter.impl';
 import { CalculerResultatSimulationVoitureUsecase } from '@/domaines/simulationVoiture/calculerResultatSimulationVoiture.usecase';
-import { MontantAfficheEnFR, NombreAfficheEnFR } from '@/shell/nombreAfficheEnFRBuilder';
+import { MontantAfficheEnFR, NombreAfficheEnFR } from '@/shell/formatting/nombreAfficheEnFRBuilder';
 
 describe('CalculerResultatSimulationVoitureUsecase', () => {
   it('Renvoie les résultats de simulation correctement', async () => {

@@ -1,6 +1,6 @@
 import { GamificationPresenter } from '@/domaines/score/ports/gamification.presenter';
 import { Gamification } from '@/domaines/score/ports/score.repository';
-import { NombreAfficheEnFR, NombreAfficheEnFRBuilder } from '@/shell/nombreAfficheEnFRBuilder';
+import { NombreAfficheEnFR, NombreAfficheEnFRBuilder } from '@/shell/formatting/nombreAfficheEnFRBuilder';
 
 export type GamificationViewModel = {
   points: NombreAfficheEnFR;

@@ -22,7 +22,7 @@
 
 <script setup lang="ts">
   import { ref, onMounted } from 'vue';
-  import cacherEmojisAuxLecteursDecrans from '@/shell/cacherEmojisAuxLecteursDecrans';
+  import cacherEmojisAuxLecteursDecrans from '@/shell/formatting/cacherEmojisAuxLecteursDecrans';
 
   const props = defineProps<{
     id: string;

@@ -6,7 +6,7 @@ import {
 } from '@/domaines/bilanCarbone/adapters/bilanCarbone.presenter.impl';
 import { beforeEach } from 'vitest';
 import { config } from '@vue/test-utils';
-import { NombreAfficheEnFR } from '@/shell/nombreAfficheEnFRBuilder';
+import { NombreAfficheEnFR } from '@/shell/formatting/nombreAfficheEnFRBuilder';
 
 config.global.stubs = {
   'router-link': {

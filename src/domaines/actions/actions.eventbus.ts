@@ -11,8 +11,8 @@ export class ActionsEventBus extends EventBus<ActionsEvent> {
 
   protected eventSubscribers: Record<ActionsEvent, { subscriberName: string; callback: () => void }[]> = {
     [ActionsEvent.A_ETE_REALISEE]: [],
-    [ActionsEvent.RESET_VU]: [],
     [ActionsEvent.PERSONNALISATION_FAITE]: [],
+    [ActionsEvent.RESET_VU]: [],
   };
 
   private constructor() {

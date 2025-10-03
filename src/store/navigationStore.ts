@@ -13,8 +13,10 @@ export const useNavigationStore = defineStore('navigation', {
     maxHistorique: 5,
     navigationRetour: false,
   }),
+
   actions: {
     addRoute(path: string, name: string, query?: LocationQuery) {
+      // Ne fait rien si on est en mode navigation retour (évite les doubles enregistrements)
       if (this.navigationRetour) {
         this.navigationRetour = false;
         return;
@@ -24,6 +26,7 @@ export const useNavigationStore = defineStore('navigation', {
 
       const dernierePage = this.historiquePage[0];
       if (dernierePage && dernierePage.path === path && dernierePage.name === name) {
+        // On évite les doublons
         return;
       }
 

@@ -44,7 +44,7 @@
 <script lang="ts" setup>
   import { computed, nextTick, ref } from 'vue';
   import ListeCartesActions from '@/components/custom/Action/Catalogue/ListeCartesActions.vue';
-  import BallLoader from '@/components/custom/Thematiques/BallLoader.vue';
+  import BallLoader from '@/components/custom/BallLoader.vue';
   import { ActionViewModel } from '@/domaines/actions/ports/actions.presenter';
   import { ThematiquesRepositoryAxios } from '@/domaines/thematiques/adapters/thematiques.repository.axios';
   import { ClefThematiqueAPI, MenuThematiques } from '@/domaines/thematiques/MenuThematiques';

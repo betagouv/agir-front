@@ -1,13 +1,5 @@
 import { AppRawDataStorage } from '@/shell/appRawDataStorage';
 
-export class Cachable {
-  storage: AppRawDataStorage;
-
-  constructor(protected readonly appRawDataStorage: AppRawDataStorage) {
-    this.storage = appRawDataStorage;
-  }
-}
-
 interface CacheParams {
   key: string;
   storage?: AppRawDataStorage;
@@ -19,7 +11,7 @@ interface CachedItem<T> {
   expiresAt: number;
 }
 
-const TTL_IN_SECONDS = 60 * 5; /* 5 minutes */
+const TTL_IN_SECONDS = 60 * 5;
 
 const missingStorageErrorMessage =
   'Cache cannot be used. To use it, please specify the storage to use :\n' +

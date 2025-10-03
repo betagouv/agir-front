@@ -4,7 +4,7 @@ import {
   ScoreActionQuizViewModel,
   ScoreConfigViewModel,
 } from '@/domaines/quiz/ports/scoreActionQuiz.presenter';
-import { gererPluriel } from '@/shell/pluriel';
+import { gererPluriel } from '@/shell/formatting/gererPluriel';
 
 export class ScoreActionQuizPresenterImpl implements ScoreActionQuizPresenter {
   constructor(private readonly viewModel: (scoreActionQuizViewModel: ScoreActionQuizViewModel) => void) {}

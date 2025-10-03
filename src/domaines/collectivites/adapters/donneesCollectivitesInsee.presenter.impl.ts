@@ -14,7 +14,7 @@ import {
 import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
 import { RouteAidesName } from '@/router/aides/routeAidesName';
 import { RouteArticleName } from '@/router/articles/routes';
-import { buildUrl } from '@/shell/buildUrl';
+import { buildUrl } from '@/shell/formatting/buildUrl';
 
 export class DonneesCollectivitesInseePresenterImpl implements DonneesCollectivitesInseePresenter {
   constructor(private readonly viewModel: (vm: DonneesCollectivitesInseeViewModel) => void) {}

@@ -64,7 +64,7 @@
   import { HistoriqueAdresseRepositoryAxios } from '@/domaines/adresses/adapters/historiqueAdresse.repository.axios';
   import { AjouterHistoriqueAdresseUsecase } from '@/domaines/adresses/ajouterHistoriqueAdresse.usecase';
   import { AdresseBarreDeRecherche, Coordonnees } from '@/shell/coordonneesType';
-  import formaterAdresse from '@/shell/formaterAdresseBarreDeRecherche';
+  import formaterAdresse from '@/shell/formatting/formaterAdresseBarreDeRecherche';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const props = defineProps<{

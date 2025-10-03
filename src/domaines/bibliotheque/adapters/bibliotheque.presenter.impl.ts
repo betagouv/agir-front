@@ -2,7 +2,7 @@ import { Bibliotheque } from '../ports/bibliotheque.repository';
 import { BibliothequePresenter, BibliothequeViewModel } from '@/domaines/bibliotheque/ports/bibliotheque.presenter';
 import { MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
 import { TagStyle, TagThematique } from '@/domaines/thematiques/TagThematique';
-import { buildUrl } from '@/shell/buildUrl';
+import { buildUrl } from '@/shell/formatting/buildUrl';
 
 export class BibliothequePresenterImpl implements BibliothequePresenter {
   constructor(private readonly bibliothequeViewModel: (viewModel: BibliothequeViewModel) => void) {}

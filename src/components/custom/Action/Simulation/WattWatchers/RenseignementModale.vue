@@ -24,8 +24,8 @@
   import ModaleDejaAssocie from '@/components/custom/Action/Simulation/WattWatchers/ModaleDejaAssocie.vue';
   import ModaleEchec from '@/components/custom/Action/Simulation/WattWatchers/ModaleEchec.vue';
   import ModaleSucces from '@/components/custom/Action/Simulation/WattWatchers/ModaleSucces.vue';
+  import BallLoader from '@/components/custom/BallLoader.vue';
   import Modale from '@/components/custom/Modale/Modale.vue';
-  import BallLoader from '@/components/custom/Thematiques/BallLoader.vue';
 
   defineProps<{
     modaleId: string;

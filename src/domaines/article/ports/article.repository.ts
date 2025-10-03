@@ -1,9 +1,7 @@
 import { Article } from '@/domaines/article/recupererArticle.usecase';
 import { ClefThematiqueAPI } from '@/domaines/thematiques/MenuThematiques';
-import { InteractionType } from '@/shell/interactionType';
 
 export interface ArticleRecommande {
-  type: InteractionType;
   titre: string;
   clefThematiqueAPI: ClefThematiqueAPI;
   illustrationURL: string;

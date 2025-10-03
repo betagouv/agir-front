@@ -81,8 +81,8 @@
   import { LogementRepositoryAxios } from '@/domaines/logement/adapters/logement.repository.axios';
   import { RecupererAdressePourBarreDeRechercheUsecase } from '@/domaines/logement/recupererAdressePourBarreDeRecherche.usecase';
   import { Coordonnees } from '@/shell/coordonneesType';
-  import formaterAdresse from '@/shell/formaterAdresseBarreDeRecherche';
-  import { trackClick } from '@/shell/matomo';
+  import formaterAdresse from '@/shell/formatting/formaterAdresseBarreDeRecherche';
+  import { trackClick } from '@/shell/tracking/matomo';
   import { utilisateurStore } from '@/store/utilisateur';
 
   const props = defineProps<{

@@ -28,8 +28,8 @@
 
 <script lang="ts" setup>
   import { onMounted, ref } from 'vue';
+  import CatalogueActionsBarreDeFiltres from '@/components/custom/Action/Catalogue/CatalogueActionsBarreDeFiltres.vue';
   import CatalogueActionsComposant from '@/components/custom/Action/Catalogue/CatalogueActionsComposant.vue';
-  import CatalogueActionsBarreDeFiltres from '@/components/pages/CatalogueActionsBarreDeFiltres.vue';
   import { ActionsRepositoryAxios } from '@/domaines/actions/adapters/actions.repository.axios';
   import { CatalogueActionsPresenterImpl } from '@/domaines/actions/adapters/catalogueActions.presenter.impl';
   import { ActionViewModel } from '@/domaines/actions/ports/actions.presenter';

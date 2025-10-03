@@ -4,8 +4,8 @@ import { RaccourciViewModel } from '@/domaines/thematiques/ports/thematiqueResum
 import { RouteActionsName } from '@/router/actions/routes';
 import { RouteAidesName } from '@/router/aides/routeAidesName';
 import { RouteServiceName } from '@/router/services/routes';
-import { NombreAfficheEnFRBuilder } from '@/shell/nombreAfficheEnFRBuilder';
-import { gererPluriel } from '@/shell/pluriel';
+import { gererPluriel } from '@/shell/formatting/gererPluriel';
+import { NombreAfficheEnFRBuilder } from '@/shell/formatting/nombreAfficheEnFRBuilder';
 
 export class Raccourcis {
   static serviceProximite: RaccourciViewModel = {

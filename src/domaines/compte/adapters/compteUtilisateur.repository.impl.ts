@@ -2,12 +2,10 @@ import { Response } from 'redaxios';
 import { AxiosError, AxiosFactory, intercept40X } from '@/axios.factory';
 import {
   CompteTemporaire,
-  CompteUtilisateur,
   CompteUtilisateurACreer,
   CompteUtilisateurRepository,
   SuppressionFranceConnect,
 } from '@/domaines/compte/ports/compteUtilisateur.repository';
-import { RepositoryError } from '@/shell/repositoryError';
 
 interface CompteUtilisateurApiModel {
   id: string;
@@ -19,20 +17,6 @@ interface CompteUtilisateurApiModel {
 }
 
 export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurRepository {
-  @intercept40X()
-  async getCompteUtilisateur(idUtilisateur: string): Promise<CompteUtilisateur> {
-    const axiosInstance = AxiosFactory.getAxios();
-    const response: Response<CompteUtilisateurApiModel> = await axiosInstance.get(`/utilisateurs/${idUtilisateur}`);
-    return {
-      nom: response.data.nom || '',
-      id: idUtilisateur,
-      mail: response.data.email || '',
-      prenom: response.data.prenom || '',
-      fonctionnalitesDebloquees: response.data.fonctionnalites_debloquees,
-      pseudo: response.data.pseudo || '',
-    };
-  }
-
   async creerCompteUtilisateur(compteUtilisateurACreer: CompteUtilisateurACreer): Promise<CompteTemporaire> {
     try {
       const axiosInstance = AxiosFactory.getAxios();
@@ -86,4 +70,11 @@ export class CompteUtilisateurRepositoryImpl implements CompteUtilisateurReposit
       mot_de_passe: nouveauMotDePasse,
     });
   }
+}
+
+export class RepositoryError {
+  constructor(
+    public code: string,
+    public message: string,
+  ) {}
 }

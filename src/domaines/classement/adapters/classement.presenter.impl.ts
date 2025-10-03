@@ -1,6 +1,6 @@
 import { ClassementPresenter } from '@/domaines/classement/ports/classement.presenter';
 import { Classement, ClassementGlobal, ClassementPourcentage } from '@/domaines/classement/recupererClassement.usecase';
-import { NombreAfficheEnFR, NombreAfficheEnFRBuilder } from '@/shell/nombreAfficheEnFRBuilder';
+import { NombreAfficheEnFR, NombreAfficheEnFRBuilder } from '@/shell/formatting/nombreAfficheEnFRBuilder';
 
 interface ClassementItemViewModel {
   prenom: string;

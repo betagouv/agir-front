@@ -100,7 +100,7 @@
   import { Aide } from '@/domaines/aides/chargementAides.usecase';
   import { MenuThematiques } from '@/domaines/thematiques/MenuThematiques';
   import { TagThematique } from '@/domaines/thematiques/TagThematique';
-  import { MontantAfficheEnFRBuilder } from '@/shell/nombreAfficheEnFRBuilder';
+  import { MontantAfficheEnFRBuilder } from '@/shell/formatting/nombreAfficheEnFRBuilder';
   import { AIDE_TRACKING, trackAide } from '@/shell/tracking/aideTracking';
   import { utilisateurStore } from '@/store/utilisateur';
 

@@ -24,8 +24,6 @@ export type SuppressionFranceConnect = {
 };
 
 export interface CompteUtilisateurRepository {
-  getCompteUtilisateur(idUtilisateur: string): Promise<CompteUtilisateur>;
-
   creerCompteUtilisateur(compteUtilisateurACreer: CompteUtilisateurACreer): Promise<CompteTemporaire>;
 
   supprimerCompteUtilisateur(idUtilisateur: string): Promise<SuppressionFranceConnect>;

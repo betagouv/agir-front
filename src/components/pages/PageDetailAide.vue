@@ -9,8 +9,8 @@
   import { useHead } from '@unhead/vue';
   import { computed, onMounted, ref } from 'vue';
   import { useRoute } from 'vue-router';
+  import AideDetail from '@/components/custom/Aides/AideDetail.vue';
   import BoutonRetourAutomatique from '@/components/custom/BoutonRetourAutomatique.vue';
-  import AideDetail from '@/components/pages/AideDetail.vue';
   import { ChargementAidesAxiosRepository } from '@/domaines/aides/adapters/chargementAides.axios.repository';
   import { Aide } from '@/domaines/aides/chargementAides.usecase';
   import { ConsulterAideEnModeNonConnecteUsecase } from '@/domaines/aides/consulterAideEnModeNonConnecte.usecase';

@@ -10,7 +10,6 @@ export enum PageConformiteType {
   CGU = 'cgu',
   CONFIDENTIALITE = 'confidentialite',
   ACCESSIBILITE = 'accessibilite',
-  CHARTE = 'charte_exp',
 }
 
 export class RecupererPageConformiteUsecase {

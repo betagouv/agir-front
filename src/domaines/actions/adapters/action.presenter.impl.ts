@@ -10,11 +10,11 @@ import {
 } from '@/domaines/actions/ports/action.presenter';
 import { ActionDetail } from '@/domaines/actions/ports/actions.repository';
 import marked from '@/shell/actionMarkdownToHtml';
-import { buildUrl } from '@/shell/buildUrl';
-import cacherEmojisAuxLecteursDecrans from '@/shell/cacherEmojisAuxLecteursDecrans';
-import { nettoyerEtGarderContenuTextuel } from '@/shell/nettoyerEtGarderContenuTextuel';
-import { nettoyerEtGarderLettresEtChiffres } from '@/shell/nettoyerEtGarderLettresEtChiffres';
-import { MontantAfficheEnFRBuilder } from '@/shell/nombreAfficheEnFRBuilder';
+import { buildUrl } from '@/shell/formatting/buildUrl';
+import cacherEmojisAuxLecteursDecrans from '@/shell/formatting/cacherEmojisAuxLecteursDecrans';
+import { nettoyerEtGarderContenuTextuel } from '@/shell/formatting/nettoyerEtGarderContenuTextuel';
+import { nettoyerEtGarderLettresEtChiffres } from '@/shell/formatting/nettoyerEtGarderLettresEtChiffres';
+import { MontantAfficheEnFRBuilder } from '@/shell/formatting/nombreAfficheEnFRBuilder';
 import { SimulateursSupportes } from '@/shell/simulateursSupportes';
 
 export class ActionViewModelBuilder {

@@ -22,8 +22,8 @@
 
 <script setup lang="ts">
   import { nextTick, ref } from 'vue';
+  import BallLoader from '@/components/custom/BallLoader.vue';
   import EnchainementQuestionsKyc from '@/components/custom/KYC/EnchainementQuestionsKyc.vue';
-  import BallLoader from '@/components/custom/Thematiques/BallLoader.vue';
   import CommencerParcours from '@/components/custom/Thematiques/CommencerParcours.vue';
 
   const props = defineProps<{

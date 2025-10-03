@@ -6,7 +6,7 @@ import {
   GamificationViewModel,
 } from '@/domaines/score/adapters/gamification.presenter.impl';
 import { expect } from 'vitest';
-import { NombreAfficheEnFR } from '@/shell/nombreAfficheEnFRBuilder';
+import { NombreAfficheEnFR } from '@/shell/formatting/nombreAfficheEnFRBuilder';
 
 describe('Fichier de test du usecase de chargement du score', () => {
   it('Cas avec score et sans badge', async () => {

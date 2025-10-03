@@ -35,7 +35,6 @@ export enum RouteCommuneName {
 }
 
 enum RouteCommunePath {
-  BETA_FERMEE = '/beta-fermee',
   AUTHENTIFICATION = '/authentification',
   SESSION_EXPIREE = '/session-expiree',
   LOGIN_CALLBACK = '/fc-login-callback',
@@ -129,12 +128,14 @@ const router = createRouter({
       return false;
     }
 
+    // Si la route cible contient une ancre, on défile jusqu'à cet élément avec animation
     if (to.hash) {
       return {
         el: to.hash,
         behavior: 'smooth',
       };
     }
+
     if (savedPosition) {
       return savedPosition;
     } else {
