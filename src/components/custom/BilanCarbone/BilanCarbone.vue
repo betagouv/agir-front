@@ -9,9 +9,9 @@
 </template>
 
 <script lang="ts" setup>
-  import BilanCarboneAFaire from '@/components/pages/BilanCarboneAFaire.vue';
-  import BilanCarboneComplet from '@/components/pages/BilanCarboneComplet.vue';
-  import BilanCarbonePartiel from '@/components/pages/BilanCarbonePartiel.vue';
+  import BilanCarboneAFaire from '@/components/custom/BilanCarbone/BilanCarboneAFaire.vue';
+  import BilanCarboneComplet from '@/components/custom/BilanCarbone/BilanCarboneComplet.vue';
+  import BilanCarbonePartiel from '@/components/custom/BilanCarbone/BilanCarbonePartiel.vue';
   import {
     BilanCarboneAFaireViewModel,
     BilanCarboneCompletViewModel,

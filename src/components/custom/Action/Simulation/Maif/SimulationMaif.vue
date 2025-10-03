@@ -74,8 +74,8 @@
 <script lang="ts" setup>
   import { computed, nextTick, onMounted, ref } from 'vue';
   import MaifRisques from '@/components/custom/Action/Simulation/Maif/MaifRisques.vue';
+  import BallLoader from '@/components/custom/BallLoader.vue';
   import BarreDeRechercheAdresse from '@/components/custom/Form/BarreDeRechercheAdresse.vue';
-  import BallLoader from '@/components/custom/Thematiques/BallLoader.vue';
   import Callout from '@/components/dsfr/Callout.vue';
   import AdressesRecentesComponent from '@/components/pages/PagesService/AdressesRecentesComponent.vue';
   import { useAdressePrincipale } from '@/composables/useAdressePrincipale';

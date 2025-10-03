@@ -85,10 +85,10 @@
   import WidgetAides from '@/components/custom/Aides/WidgetAides.vue';
   import Alert from '@/components/custom/Alert.vue';
   import ParcoursKYCPourRecommandations from '@/components/custom/Thematiques/ParcoursKYCPourRecommandations.vue';
-  import WidgetsServicesAlimentation from '@/components/pages/WidgetsServicesAlimentation.vue';
-  import WidgetsServicesMeDeplacer from '@/components/pages/WidgetsServicesMeDeplacer.vue';
-  import WidgetsServicesMeLoger from '@/components/pages/WidgetsServicesMeLoger.vue';
-  import WidgetsServicesMesAchats from '@/components/pages/WidgetsServicesMesAchats.vue';
+  import WidgetsServicesAlimentation from '@/components/custom/Widgets/WidgetsServicesAlimentation.vue';
+  import WidgetsServicesMeDeplacer from '@/components/custom/Widgets/WidgetsServicesMeDeplacer.vue';
+  import WidgetsServicesMeLoger from '@/components/custom/Widgets/WidgetsServicesMeLoger.vue';
+  import WidgetsServicesMesAchats from '@/components/custom/Widgets/WidgetsServicesMesAchats.vue';
   import { ActionsEventBus } from '@/domaines/actions/actions.eventbus';
   import { ActionsRepositoryAxios } from '@/domaines/actions/adapters/actions.repository.axios';
   import { ActionsDansUneThematiquePresenterImpl } from '@/domaines/actions/adapters/actionsDansUneThematique.presenter.impl';

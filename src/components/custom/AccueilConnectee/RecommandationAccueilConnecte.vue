@@ -23,7 +23,7 @@
   import { onMounted, ref } from 'vue';
   import RecommandationEncartCompletion from '@/components/custom/AccueilConnectee/RecommandationEncartCompletion.vue';
   import ListeCartesActions from '@/components/custom/Action/Catalogue/ListeCartesActions.vue';
-  import BallLoader from '@/components/custom/Thematiques/BallLoader.vue';
+  import BallLoader from '@/components/custom/BallLoader.vue';
   import { AccueilConnecteViewModel } from '@/domaines/accueilConnecte/ports/accueilConnecte.presenter';
   import { ActionsPresenterImpl } from '@/domaines/actions/adapters/actions.presenter.impl';
   import { ActionsRepositoryAxios } from '@/domaines/actions/adapters/actions.repository.axios';

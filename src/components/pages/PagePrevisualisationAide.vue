@@ -8,8 +8,8 @@
 <script lang="ts" setup>
   import { onMounted, ref } from 'vue';
   import { useRoute } from 'vue-router';
+  import AideDetail from '@/components/custom/Aides/AideDetail.vue';
   import BoutonRetour from '@/components/custom/BoutonRetour.vue';
-  import AideDetail from '@/components/pages/AideDetail.vue';
   import { ChargementAidesAxiosRepository } from '@/domaines/aides/adapters/chargementAides.axios.repository';
   import { Aide } from '@/domaines/aides/chargementAides.usecase';
   import { PrevisualiserAideUsecase } from '@/domaines/aides/previsualiserAide.usecase';
