@@ -149,9 +149,3 @@
     }
   }
 </script>
-
-<style scoped>
-  .border-top--bleu {
-    border-top: 2px solid var(--blue-france-sun-113-625);
-  }
-</style>

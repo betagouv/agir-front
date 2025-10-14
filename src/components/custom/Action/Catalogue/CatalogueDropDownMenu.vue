@@ -84,5 +84,12 @@
     position: absolute;
     z-index: 501;
     width: inherit;
+    max-width: 90%;
+  }
+
+  @media screen and (min-width: 48em) {
+    .dropdown-menu {
+      max-width: 30vw;
+    }
   }
 </style>
