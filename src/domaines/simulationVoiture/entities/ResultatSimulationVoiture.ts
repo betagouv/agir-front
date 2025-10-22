@@ -1,3 +1,28 @@
+export class VoitureParam {
+  constructor(
+    private readonly id: string,
+    private readonly nom: string,
+    private readonly valeur: string,
+    private readonly unite?: string,
+  ) {}
+
+  public getId(): string {
+    return this.id;
+  }
+
+  public getNom(): string {
+    return this.nom;
+  }
+
+  public getValeur(): string {
+    return this.valeur;
+  }
+
+  public getUnite(): string | undefined {
+    return this.unite;
+  }
+}
+
 export class Voiture {
   constructor(
     private readonly cout: number,
@@ -5,6 +30,8 @@ export class Voiture {
     private readonly gabarit: string,
     private readonly motorisation: string,
     private readonly carburant: string,
+    private readonly params: VoitureParam[] = [],
+    private readonly isOccasion: boolean,
   ) {}
 
   public getCout(): number {
@@ -26,17 +53,17 @@ export class Voiture {
   public getCarburant(): string {
     return this.carburant;
   }
-}
 
-export class VoitureActuelle extends Voiture {
-  public getDifferenceCountAnnuel(voiture: Voiture): number {
-    return Math.round(voiture.getCout() - this.getCout());
+  public getParams(): VoitureParam[] {
+    return this.params;
   }
 
-  public getPourcentageDifferenceEmission(voiture: Voiture): number {
-    return Math.round(((voiture.getEmpreinte() - this.getEmpreinte()) / this.getEmpreinte()) * 100);
+  public getIsOccasion(): boolean {
+    return this.isOccasion;
   }
 }
+
+export class VoitureActuelle extends Voiture {}
 
 export class VoitureAlternative extends Voiture {
   constructor(
@@ -45,39 +72,96 @@ export class VoitureAlternative extends Voiture {
     gabarit: string,
     motorisation: string,
     carburant: string,
+    est_occasion: boolean,
     private readonly label: string,
+    private readonly differenceEmission: number,
+    private readonly differenceCoutAnnuel: number,
+    private readonly coutAchatNet: number,
+    private readonly prixAchat: number,
+    private readonly valeurReventeVoitureActuelle: number,
+    private readonly montantAides: number,
+    private readonly dureeSeuilRentabilite: number | null,
+    private readonly economiesTotales: number,
   ) {
-    super(cout, empreinte, gabarit, motorisation, carburant);
+    super(cout, empreinte, gabarit, motorisation, carburant, [], est_occasion);
   }
 
   public getLabel(): string {
-    return this.label;
+    return this.label + (this.getIsOccasion() ? " d'occasion" : '');
+  }
+
+  public getDifferenceEmission(): number {
+    return this.differenceEmission;
+  }
+
+  public getDifferenceCoutAnnuel(): number {
+    return this.differenceCoutAnnuel;
+  }
+
+  public getCoutAchatNet(): number {
+    return this.coutAchatNet;
+  }
+
+  public getPrixAchat(): number {
+    return this.prixAchat;
+  }
+
+  public getValeurReventeVoitureActuelle(): number {
+    return this.valeurReventeVoitureActuelle;
+  }
+
+  public getMontantAides(): number {
+    return this.montantAides;
+  }
+
+  public getDureeSeuilRentabilite(): number | null {
+    return this.dureeSeuilRentabilite;
+  }
+
+  public getEconomiesTotales(): number {
+    return this.economiesTotales;
   }
 }
 
 export class ResultatSimulationVoiture {
+  private voituresAlternativeMemeGabarit: VoitureAlternative[] = [];
+
   constructor(
     private readonly voitureActuelle: VoitureActuelle,
     private readonly voituresAlternative: VoitureAlternative[],
-  ) {}
+  ) {
+    // TODO: souhaitons-nous filtrer par rapport au gabarits ?
+    // this.voituresAlternativeMemeGabarit = this.voituresAlternative.filter(
+    //   voiture => voiture.getGabarit() === this.voitureActuelle.getGabarit(),
+    // );
+    this.voituresAlternativeMemeGabarit = this.voituresAlternative;
+  }
 
   public getVoitureActuelle(): VoitureActuelle {
     return this.voitureActuelle;
   }
 
   public getVoitureLaPLusEconomique(): VoitureAlternative {
-    const alternatives = this.getVoituresAlternativesMemeGabarit();
+    return this.voituresAlternativeMemeGabarit.reduce((prev, current) => {
+      const currentSeuil = current.getDureeSeuilRentabilite();
+      const prevSeuil = prev.getDureeSeuilRentabilite();
 
-    return alternatives.reduce((prev, current) => (current.getCout() < prev.getCout() ? current : prev));
+      if (currentSeuil === null) {
+        return prev;
+      }
+      if (prevSeuil === null) {
+        return current;
+      }
+      if (currentSeuil < prevSeuil) {
+        return current;
+      }
+      return prev;
+    });
   }
 
   public getVoitureLaPLusEcologique(): VoitureAlternative {
-    const alternatives = this.getVoituresAlternativesMemeGabarit();
-
-    return alternatives.reduce((prev, current) => (current.getEmpreinte() < prev.getEmpreinte() ? current : prev));
-  }
-
-  private getVoituresAlternativesMemeGabarit(): VoitureAlternative[] {
-    return this.voituresAlternative.filter(voiture => voiture.getGabarit() === this.voitureActuelle.getGabarit());
+    return this.voituresAlternativeMemeGabarit.reduce((prev, current) =>
+      current.getEmpreinte() < prev.getEmpreinte() ? current : prev,
+    );
   }
 }
