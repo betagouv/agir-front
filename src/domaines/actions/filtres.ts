@@ -39,27 +39,29 @@ export class Filtres {
     return !!this.idUtilisateur;
   }
 
-  public buildQueryParams(): Record<string, string | string[]> {
-    const params: Record<string, string | string[]> = {};
+  public buildQueryParams(): URLSearchParams {
+    const params = new URLSearchParams();
 
     if (this.filtresThematiques.length > 0) {
-      params.thematique = this.filtresThematiques;
+      for (const thematique of this.filtresThematiques) {
+        params.append('thematique', thematique);
+      }
     }
 
     if (this.titre) {
-      params.titre = this.titre;
+      params.append('titre', this.titre);
     }
 
     if (this.statut.dejaVu) {
-      params.consultation = 'vu';
+      params.append('consultation', 'vu');
     }
 
     if (this.statut.dejaRealisees) {
-      params.realisation = 'faite';
+      params.append('realisation', 'faite');
     }
 
     if (this.statut.recommandePourMoi) {
-      params.recommandation = 'recommandee';
+      params.append('recommandation', 'recommandee');
     }
 
     return params;
