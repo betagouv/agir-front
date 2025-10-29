@@ -1,5 +1,24 @@
 # Changelog
 
+## [2.26.0](https://github.com/betagouv/agir-front/compare/v2.25.0...v2.26.0) (2025-10-29)
+
+
+### 🐛 Corrections de bogues
+
+* sélections multiple thematique ([#1372](https://github.com/betagouv/agir-front/issues/1372)) ([110cdc6](https://github.com/betagouv/agir-front/commit/110cdc6365d10b3f5f46ead95f4ab54622146c90))
+
+
+### 👷 Gestion des dépendances
+
+* Bump @gouvfr/dsfr from 1.14.1 to 1.14.2 ([#1360](https://github.com/betagouv/agir-front/issues/1360)) ([21c5536](https://github.com/betagouv/agir-front/commit/21c5536a862c8fe31559eaa42f6e09396ab77dca))
+* Bump @unhead/vue from 2.0.14 to 2.0.19 ([#1364](https://github.com/betagouv/agir-front/issues/1364)) ([40297a6](https://github.com/betagouv/agir-front/commit/40297a6a6cb4eaccf9c7e0e13198ff4ee3bd87d7))
+* Bump actions/setup-node from 5 to 6 ([#1366](https://github.com/betagouv/agir-front/issues/1366)) ([fa91c07](https://github.com/betagouv/agir-front/commit/fa91c07335c908d797171a65b96192dc11a426fd))
+* Bump actions/upload-artifact from 4 to 5 ([#1369](https://github.com/betagouv/agir-front/issues/1369)) ([00a6232](https://github.com/betagouv/agir-front/commit/00a62322b9e1175d03213069d8d711bb8539b62a))
+* Bump dotenv from 17.2.2 to 17.2.3 ([#1358](https://github.com/betagouv/agir-front/issues/1358)) ([5511995](https://github.com/betagouv/agir-front/commit/5511995d795c5fd49612dbfd9e541d804b62d1b7))
+* Bump vite from 6.3.6 to 7.1.12 ([#1371](https://github.com/betagouv/agir-front/issues/1371)) ([c848478](https://github.com/betagouv/agir-front/commit/c8484787249163365003c61b3ebaf2ad2f14c113))
+* Bump vite from 7.1.5 to 7.1.12 ([#1368](https://github.com/betagouv/agir-front/issues/1368)) ([679ceb1](https://github.com/betagouv/agir-front/commit/679ceb1fd6e820d92fe2ba7a099c2c72d4165c9d))
+* Bump vue-tsc from 3.0.6 to 3.1.2 ([#1367](https://github.com/betagouv/agir-front/issues/1367)) ([9848cad](https://github.com/betagouv/agir-front/commit/9848cad43a93e1c34b5c7d78a925d24a609b2384))
+
 ## [2.25.0](https://github.com/betagouv/agir-front/compare/v2.24.0...v2.25.0) (2025-10-03)
 
 
