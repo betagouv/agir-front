@@ -20,9 +20,6 @@
       <LandingOnglet />
     </div>
   </section>
-  <section>
-    <LandingRappelAppCTA />
-  </section>
   <section class="fr-py-8w fr-pb-3w background--white">
     <div class="fr-container">
       <div class="fr-col-md-10 fr-mx-auto">
@@ -40,7 +37,6 @@
   import LandingNosSolutions from '@/components/custom/Landing/LandingNosSolutions.vue';
   import LandingOnglet from '@/components/custom/Landing/LandingOnglet.vue';
   import LandingPourquoiAgir from '@/components/custom/Landing/LandingPourquoiAgir.vue';
-  import LandingRappelAppCTA from '@/components/custom/Landing/LandingRappelAppCTA.vue';
 </script>
 
 <style scoped>

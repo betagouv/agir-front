@@ -36,17 +36,12 @@
       </CatalogueActionsComposant>
     </div>
   </section>
-
-  <section class="background--sable fr-mt-5w">
-    <RedirectionMobile />
-  </section>
 </template>
 
 <script lang="ts" setup>
   import { useHead } from '@unhead/vue';
   import { computed, onMounted, ref } from 'vue';
   import { useRouter } from 'vue-router';
-  import RedirectionMobile from '@/components/custom/AccueilConnectee/RedirectionMobile.vue';
   import CatalogueActionsComposant from '@/components/custom/Action/Catalogue/CatalogueActionsComposant.vue';
   import CreationCompteRapideFormulaire from '@/components/custom/CreationCompte/CreationCompteRapideFormulaire.vue';
   import { ActionsRepositoryAxios } from '@/domaines/actions/adapters/actions.repository.axios';

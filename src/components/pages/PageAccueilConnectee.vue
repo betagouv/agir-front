@@ -20,10 +20,6 @@
   <section class="background--olive-clair zindex-3">
     <Raccourcis :commune="accueilConnecteViewModel?.commune" :liste-raccourcis="accueilConnecteViewModel?.raccourcis" />
   </section>
-
-  <section class="background--brown-cafe-creme-main-782">
-    <RedirectionMobile />
-  </section>
 </template>
 
 <script lang="ts" setup>
@@ -32,7 +28,6 @@
   import EmpreinteEcologiqueEncart from '@/components/custom/AccueilConnectee/EmpreinteEcologiqueEncart.vue';
   import Raccourcis from '@/components/custom/AccueilConnectee/Raccourcis.vue';
   import RecommandationAccueilConnecte from '@/components/custom/AccueilConnectee/RecommandationAccueilConnecte.vue';
-  import RedirectionMobile from '@/components/custom/AccueilConnectee/RedirectionMobile.vue';
   import { AccueilConnectePresenterImpl } from '@/domaines/accueilConnecte/adapters/accueilConnecte.presenter.impl';
   import { AccueilConnecteRepositoryAxios } from '@/domaines/accueilConnecte/adapters/accueilConnecte.repository.axios';
   import { AccueilConnecteViewModel } from '@/domaines/accueilConnecte/ports/accueilConnecte.presenter';
