@@ -18,7 +18,6 @@ import { utilisateurStore } from '@/store/utilisateur';
 
 const MagicLinkCallBack = () => import('@/components/pages/PageMagicLinkCallback.vue');
 const Authentification = () => import('@/components/Authentification.vue');
-const Page404 = () => import('@/components/pages/Page404.vue');
 const FranceConnectLogoutCallBack = () => import('@/components/FranceConnectLogoutCallBack.vue');
 const FranceConnectCallBack = () => import('@/components/FranceConnectCallBack.vue');
 const PageAccueil = () => import('@/components/pages/PageAccueil.vue');
@@ -116,7 +115,7 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/:catchAll(.*)',
     name: RouteCommuneName.NOT_FOUND,
-    component: Page404,
+    redirect: { name: RouteCommuneName.ACCUEIL },
   },
 ];
 
@@ -142,6 +141,13 @@ const router = createRouter({
       return { left: 0, top: 0 };
     }
   },
+});
+
+// Rediriger toutes les URLs vers l'Accueil
+router.beforeEach(to => {
+  if (to.name !== RouteCommuneName.ACCUEIL) {
+    return { name: RouteCommuneName.ACCUEIL };
+  }
 });
 
 // Error handling to force refresh the page when a dynamic import fails

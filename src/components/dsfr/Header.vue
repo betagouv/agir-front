@@ -34,46 +34,6 @@
               </router-link>
             </div>
           </div>
-          <div class="fr-header__tools">
-            <div class="fr-header__tools-links">
-              <ul class="fr-btns-group fr-btns-group--lg">
-                <li v-if="!estConnecte">
-                  <router-link
-                    :to="{ name: RouteCommuneName.AUTHENTIFICATION }"
-                    class="fr-btn fr-btn--secondary fr-mr-2w"
-                  >
-                    Je me connecte
-                  </router-link>
-                </li>
-                <li v-if="!estConnecte">
-                  <router-link :to="{ name: RouteCompteName.CREATION_COMPTE }" class="fr-btn fr-btn--primary">
-                    Je crée mon compte
-                  </router-link>
-                </li>
-                <li v-if="doitAfficherLeBoutonSeDeconnecter">
-                  <button
-                    class="fr-btn fr-btn--secondary fr-btn--icon-left fr-icon-logout-box-r-line fr-btn--lg fr-mr-auto"
-                    @click="logout"
-                  >
-                    Se déconnecter
-                  </button>
-                </li>
-                <li v-if="utilisateurStore().utilisateur.onboardingAEteRealise">
-                  <div class="utilisateur">
-                    <router-link
-                      :aria-label="`${pseudoUtilisateur}: accéder à la page du compte`"
-                      :to="{ name: RouteCompteName.MON_COMPTE }"
-                      class="fr-btn fr-mb-0 fr-text--lg"
-                    >
-                      <span aria-hidden="true" class="fr-icon-user-line fr-icon--md fr-mr-1w"></span>
-                      {{ pseudoUtilisateur }}
-                    </router-link>
-                    <ScoreHeader v-if="utilisateurStore().utilisateur.onboardingAEteRealise" />
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </div>
         </div>
       </div>
     </div>
