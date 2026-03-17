@@ -16,7 +16,7 @@
             L'application <i>J’agis</i> est un service proposé par le Secrétariat Général à la Planification Ecologique,
             le Ministère de la Transition écologique, de la Biodiversité, de la Forêt, de la Mer et de la Pêche, et
             l'ADEME. Vous avez une question, une suggestion, un retour à nous faire&nbsp;? Écrivez-nous à
-            <a href="mailto:contact@jagis.beta.gouv.fr">contact@jagis.beta.gouv.fr</a>
+            <a href="mailto:contact@nosgestesclimat.fr">contact@nosgestesclimat</a>
           </p>
           <ul class="fr-footer__content-list">
             <li class="fr-footer__content-item">
