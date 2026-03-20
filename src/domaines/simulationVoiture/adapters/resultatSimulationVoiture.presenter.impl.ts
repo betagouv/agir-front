@@ -1,6 +1,5 @@
 import {
   ResultatSimulationVoiture,
-  VoitureActuelle,
   VoitureAlternative,
 } from '@/domaines/simulationVoiture/entities/ResultatSimulationVoiture';
 import { ResultatSimulationVoiturePresenter } from '@/domaines/simulationVoiture/ports/resultatSimulationVoiture.presenter';
@@ -16,27 +15,42 @@ export type ResultatSimulationVoitureViewModel = {
   resultatVoiturePlusEconomique: ResultatSimulationVoitureProposeeViewModel;
   resultatVoiturePlusEcologique: ResultatSimulationVoitureProposeeViewModel;
 };
+
+export type Hypotheses = {
+  label: string;
+  valeur: string;
+  unite?: string;
+};
+
 export type ResultatSimulationVoitureActuelleViewModel = {
   gabarit: string;
   coutAnnuel: MontantAfficheEnFR;
   emissionAnnuelle: NombreAfficheEnFR;
-  tag: string[];
+  hypotheses: Hypotheses[];
 };
+
 export type ResultatSimulationVoitureProposeeViewModel = {
   typeDeVoiture: string;
-  coutAnnuel: {
-    montant: MontantAfficheEnFR;
+  cout: {
+    coutAchatNet: MontantAfficheEnFR;
+    prixAchat: MontantAfficheEnFR;
+  };
+  economies: {
     difference: number;
     style: string;
     labelDifference: string;
   };
   emission: {
-    montant: NombreAfficheEnFR;
     difference: number;
     style: string;
     labelDifference: string;
   };
-  tag: string[];
+  dureeSeuilRentabilite: {
+    valeur: number | null;
+    unite: string;
+  };
+  economiesTotales: MontantAfficheEnFR | undefined;
+  montantAide: MontantAfficheEnFR | undefined;
 };
 
 export class ResultatSimulationVoiturePresenterImpl implements ResultatSimulationVoiturePresenter {
@@ -52,37 +66,51 @@ export class ResultatSimulationVoiturePresenterImpl implements ResultatSimulatio
         gabarit: voitureActuelle.getGabarit(),
         coutAnnuel: MontantAfficheEnFRBuilder.build(Math.round(voitureActuelle.getCout())),
         emissionAnnuelle: NombreAfficheEnFRBuilder.build(Math.round(voitureActuelle.getEmpreinte())),
-        tag: [voitureActuelle.getCarburant(), voitureActuelle.getMotorisation()].filter(v => v.length > 0),
+        hypotheses: voitureActuelle.getParams().map(param => ({
+          label: param.getNom(),
+          valeur: param.getValeur(),
+          unite: param.getUnite(),
+        })),
       },
-      resultatVoiturePlusEconomique: this.transformeVoitureProposee(voiturePlusEconomique, voitureActuelle),
-      resultatVoiturePlusEcologique: this.transformeVoitureProposee(voiturePlusEcologique, voitureActuelle),
+      resultatVoiturePlusEconomique: this.transformeVoitureProposee(voiturePlusEconomique),
+      resultatVoiturePlusEcologique: this.transformeVoitureProposee(voiturePlusEcologique),
     });
   }
 
-  private transformeVoitureProposee(
-    voiture: VoitureAlternative,
-    voitureActuelle: VoitureActuelle,
-  ): ResultatSimulationVoitureProposeeViewModel {
-    const countAnnuelDifference = voitureActuelle.getDifferenceCountAnnuel(voiture);
-    const pourcentageDifferenceEmission = voitureActuelle.getPourcentageDifferenceEmission(voiture);
+  private transformeVoitureProposee(voiture: VoitureAlternative): ResultatSimulationVoitureProposeeViewModel {
+    const countAnnuelDifference = voiture.getDifferenceCoutAnnuel();
+    const pourcentageDifferenceEmission = voiture.getDifferenceEmission();
+    let dureeSeuilRentabilite = voiture.getDureeSeuilRentabilite();
+    dureeSeuilRentabilite = dureeSeuilRentabilite !== null ? Math.round(dureeSeuilRentabilite) : null;
+    const economiesTotales = voiture.getEconomiesTotales();
+    const montantAide = voiture.getMontantAides();
+    const normalizeDifference = (value: number) => ({
+      difference: value,
+      labelDifference: `${value < 0 ? '+' : '-'}${Math.round(Math.abs(value))}`,
+      style: value > 0 ? 'fr-badge--success' : 'fr-badge--warning',
+    });
+
     return {
       typeDeVoiture: voiture.getLabel(),
-      coutAnnuel: {
-        montant: MontantAfficheEnFRBuilder.build(Math.round(voiture.getCout())),
-        difference: countAnnuelDifference,
-        labelDifference:
-          countAnnuelDifference > 0
-            ? `+${MontantAfficheEnFRBuilder.build(countAnnuelDifference)}`
-            : MontantAfficheEnFRBuilder.build(countAnnuelDifference),
-        style: countAnnuelDifference < 0 ? 'fr-badge--success' : 'fr-badge--warning',
+      cout: {
+        coutAchatNet: MontantAfficheEnFRBuilder.build(voiture.getCoutAchatNet()),
+        prixAchat: MontantAfficheEnFRBuilder.build(voiture.getPrixAchat()),
       },
-      emission: {
-        montant: NombreAfficheEnFRBuilder.build(Math.round(voiture.getEmpreinte())),
-        difference: pourcentageDifferenceEmission,
-        labelDifference: `${pourcentageDifferenceEmission}%`,
-        style: pourcentageDifferenceEmission < 0 ? 'fr-badge--success' : 'fr-badge--warning',
+      economies: normalizeDifference(countAnnuelDifference),
+      emission: normalizeDifference(pourcentageDifferenceEmission),
+      dureeSeuilRentabilite: {
+        valeur: dureeSeuilRentabilite,
+        unite:
+          dureeSeuilRentabilite === null
+            ? ''
+            : dureeSeuilRentabilite > 1
+              ? 'ans'
+              : dureeSeuilRentabilite <= 0
+                ? ''
+                : 'an',
       },
-      tag: [voiture.getCarburant(), voiture.getMotorisation()].filter(v => v.length > 0),
+      economiesTotales: economiesTotales > 0 ? MontantAfficheEnFRBuilder.build(economiesTotales) : undefined,
+      montantAide: montantAide > 0 ? MontantAfficheEnFRBuilder.build(montantAide) : undefined,
     };
   }
 }
