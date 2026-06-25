@@ -8,13 +8,12 @@ import { RouteCoachName } from '@/router/coach/routeCoachName';
 import coachRoutes from '@/router/coach/routes';
 import collectiviteRoutes from '@/router/collectivites/routes';
 import compteRoutes from '@/router/compte/routes';
-import conformiteRoutes from '@/router/conformite/routes';
+import conformiteRoutes, { RouteConformiteName } from '@/router/conformite/routes';
 import kycRoutes from '@/router/kyc/routes';
 import personnalisationRoutes from '@/router/personnalisation/routes';
 import resetRoutes from '@/router/reset/routes';
 import serviceRoutes from '@/router/services/routes';
 import thematiqueRoutes from '@/router/thematiques/routes';
-import { RouteConformiteName } from '@/router/conformite/routes';
 import { utilisateurStore } from '@/store/utilisateur';
 
 const MagicLinkCallBack = () => import('@/components/pages/PageMagicLinkCallback.vue');
