@@ -14,6 +14,7 @@ import personnalisationRoutes from '@/router/personnalisation/routes';
 import resetRoutes from '@/router/reset/routes';
 import serviceRoutes from '@/router/services/routes';
 import thematiqueRoutes from '@/router/thematiques/routes';
+import { RouteConformiteName } from '@/router/conformite/routes';
 import { utilisateurStore } from '@/store/utilisateur';
 
 const MagicLinkCallBack = () => import('@/components/pages/PageMagicLinkCallback.vue');
@@ -143,9 +144,16 @@ const router = createRouter({
   },
 });
 
+const pagesConformiteAutorisees = [
+  RouteConformiteName.ACCESSIBILITE,
+  RouteConformiteName.MENTIONS_LEGALES,
+  RouteConformiteName.CGU,
+  RouteConformiteName.POLITIQUE_DE_CONFIDENTIALITE,
+];
+
 // Rediriger toutes les URLs vers l'Accueil
 router.beforeEach(to => {
-  if (to.name !== RouteCommuneName.ACCUEIL) {
+  if (to.name !== RouteCommuneName.ACCUEIL && !pagesConformiteAutorisees.includes(to.name as string)) {
     return { name: RouteCommuneName.ACCUEIL };
   }
 });
