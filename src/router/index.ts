@@ -152,7 +152,7 @@ const pagesConformiteAutorisees = [
 
 // Rediriger toutes les URLs vers l'Accueil
 router.beforeEach(to => {
-  if (to.name !== RouteCommuneName.ACCUEIL && !pagesConformiteAutorisees.includes(to.name as string)) {
+  if (to.name !== RouteCommuneName.ACCUEIL && !pagesConformiteAutorisees.includes(to.name as RouteConformiteName)) {
     return { name: RouteCommuneName.ACCUEIL };
   }
 });
