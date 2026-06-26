@@ -247,6 +247,7 @@
 
   .header-logo-partenaire {
     height: 2.5rem;
+    width: auto;
     margin-left: 1rem;
   }
 
