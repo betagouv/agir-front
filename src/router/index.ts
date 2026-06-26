@@ -8,7 +8,7 @@ import { RouteCoachName } from '@/router/coach/routeCoachName';
 import coachRoutes from '@/router/coach/routes';
 import collectiviteRoutes from '@/router/collectivites/routes';
 import compteRoutes from '@/router/compte/routes';
-import conformiteRoutes from '@/router/conformite/routes';
+import conformiteRoutes, { RouteConformiteName } from '@/router/conformite/routes';
 import kycRoutes from '@/router/kyc/routes';
 import personnalisationRoutes from '@/router/personnalisation/routes';
 import resetRoutes from '@/router/reset/routes';
@@ -143,9 +143,16 @@ const router = createRouter({
   },
 });
 
+const pagesConformiteAutorisees = [
+  RouteConformiteName.ACCESSIBILITE,
+  RouteConformiteName.MENTIONS_LEGALES,
+  RouteConformiteName.CGU,
+  RouteConformiteName.POLITIQUE_DE_CONFIDENTIALITE,
+];
+
 // Rediriger toutes les URLs vers l'Accueil
 router.beforeEach(to => {
-  if (to.name !== RouteCommuneName.ACCUEIL) {
+  if (to.name !== RouteCommuneName.ACCUEIL && !pagesConformiteAutorisees.includes(to.name as RouteConformiteName)) {
     return { name: RouteCommuneName.ACCUEIL };
   }
 });

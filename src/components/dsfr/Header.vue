@@ -12,6 +12,10 @@
                   <br />Française
                 </p>
               </div>
+
+              <div class="fr-header__operator">
+                <img alt="ADEME" class="fr-responsive-img" src="/logo-ademe.svg" />
+              </div>
               <div class="fr-header__operator">
                 <img alt="J'agis" class="fr-responsive-img" src="/logo-jagis-full.svg" />
               </div>
