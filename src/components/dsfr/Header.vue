@@ -14,8 +14,8 @@
               </div>
               <div class="fr-header__operator">
                 <img alt="J'agis" class="fr-responsive-img" src="/logo-jagis-full.svg" />
-                <img alt="ADEME" src="/logo-ademe.svg" />
-                <img alt="Nos Gestes Climat" src="/logo_ngc.webp" />
+                <img alt="ADEME" class="fr-responsive-img" src="/logo-ademe.svg" />
+                <img alt="Nos Gestes Climat" class="fr-responsive-img" src="/logo_ngc.webp" />
               </div>
               <div class="fr-header__navbar">
                 <button
@@ -239,12 +239,6 @@
 
   .fr-responsive-img {
     height: 4rem;
-  }
-
-  .fr-header__operator img:not(:first-child) {
-    height: 2.5rem;
-    width: auto;
-    margin-left: 1rem;
   }
 
   .fr-header__tools-links .fr-btn--primary {
