@@ -15,6 +15,12 @@
               <div class="fr-header__operator">
                 <img alt="J'agis" class="fr-responsive-img" src="/logo-jagis-full.svg" />
               </div>
+              <div class="fr-header__operator">
+                <img alt="ADEME" class="fr-responsive-img header-logo-partenaire" src="/logo-ademe.svg" />
+              </div>
+              <div class="fr-header__operator">
+                <img alt="Nos Gestes Climat" class="fr-responsive-img header-logo-partenaire" src="/logo-ngc.png" />
+              </div>
               <div class="fr-header__navbar">
                 <button
                   id="button-menu"
@@ -237,6 +243,11 @@
 
   .fr-responsive-img {
     height: 4rem;
+  }
+
+  .header-logo-partenaire {
+    height: 2.5rem;
+    margin-left: 1rem;
   }
 
   .fr-header__tools-links .fr-btn--primary {
