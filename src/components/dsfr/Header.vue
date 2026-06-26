@@ -15,10 +15,8 @@
               <div class="fr-header__operator">
                 <img alt="J'agis" class="fr-responsive-img" src="/logo-jagis-full.svg" />
               </div>
-              <div class="fr-header__operator">
+              <div class="fr-header__logos-partenaires">
                 <img alt="ADEME" class="header-logo-partenaire" src="/logo-ademe.svg" />
-              </div>
-              <div class="fr-header__operator">
                 <img alt="Nos Gestes Climat" class="header-logo-partenaire" src="/logo_ngc.webp" />
               </div>
               <div class="fr-header__navbar">
@@ -249,6 +247,12 @@
     height: 2.5rem;
     width: auto;
     margin-left: 1rem;
+  }
+
+  .fr-header__logos-partenaires {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem;
   }
 
   .fr-header__tools-links .fr-btn--primary {
