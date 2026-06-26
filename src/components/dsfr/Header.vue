@@ -16,10 +16,10 @@
                 <img alt="J'agis" class="fr-responsive-img" src="/logo-jagis-full.svg" />
               </div>
               <div class="fr-header__operator">
-                <img alt="ADEME" class="fr-responsive-img header-logo-partenaire" src="/logo-ademe.svg" />
+                <img alt="ADEME" class="header-logo-partenaire" src="/logo-ademe.svg" />
               </div>
               <div class="fr-header__operator">
-                <img alt="Nos Gestes Climat" class="fr-responsive-img header-logo-partenaire" src="/logo_ngc.webp" />
+                <img alt="Nos Gestes Climat" class="header-logo-partenaire" src="/logo_ngc.webp" />
               </div>
               <div class="fr-header__navbar">
                 <button
