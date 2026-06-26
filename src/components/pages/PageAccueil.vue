@@ -49,5 +49,6 @@
 <style scoped>
 .carte-transition {
   border-bottom: 4px solid var(--grey-50-1000);
+  height: 100%;
 }
 </style>

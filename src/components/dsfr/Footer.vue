@@ -13,7 +13,7 @@
         </div>
         <div class="fr-footer__content">
           <p class="fr-footer__content-desc">
-            L'application <i>J’agis</i> est un service proposé par le Secrétariat Général à la Planification Ecologique,
+            L'application <i>J’agis</i> était un service proposé par le Secrétariat Général à la Planification Ecologique,
             le Ministère de la Transition écologique, de la Biodiversité, de la Forêt, de la Mer et de la Pêche, et
             l'ADEME. Vous avez une question, une suggestion, un retour à nous faire&nbsp;? Écrivez-nous à
             <a href="mailto:contact@nosgestesclimat.fr">contact@nosgestesclimat</a>
