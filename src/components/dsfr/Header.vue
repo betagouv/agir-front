@@ -12,10 +12,12 @@
                   <br />Française
                 </p>
               </div>
+
+              <div class="fr-header__operator">
+                <img alt="ADEME" class="fr-responsive-img" src="/logo-ademe.svg" />
+              </div>
               <div class="fr-header__operator">
                 <img alt="J'agis" class="fr-responsive-img" src="/logo-jagis-full.svg" />
-                <img alt="ADEME" class="fr-responsive-img" src="/logo-ademe.svg" />
-                <img alt="Nos Gestes Climat" class="fr-responsive-img" src="/logo_ngc.webp" />
               </div>
               <div class="fr-header__navbar">
                 <button
