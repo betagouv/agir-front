@@ -33,7 +33,7 @@
               </div>
             </div>
             <div class="fr-header__service">
-              <router-link :to="{ name: estConnecte ? RouteCoachName.ACCUEIL_CONNECTEE : RouteCommuneName.ACCUEIL }">
+              <router-link :to="{ name: RouteCommuneName.ACCUEIL }">
                 <p class="fr-header__service-title">J'agis</p>
               </router-link>
             </div>
@@ -46,7 +46,7 @@
         <button aria-controls="modal-menu" class="fr-btn--close fr-btn" title="Fermer">Fermer</button>
         <div class="fr-header__menu-links"></div>
         <nav id="navigation" aria-label="Menu principal" class="fr-nav" data-fr-js-navigation="true" role="navigation">
-          <ul v-if="utilisateurStore().utilisateur.onboardingAEteRealise" class="fr-nav__list">
+          <ul v-if="false" class="fr-nav__list">
             <li class="fr-nav__item" data-fr-js-navigation-item="true">
               <router-link
                 :aria-current="route.name === RouteCoachName.ACCUEIL_CONNECTEE ? 'page' : null"
