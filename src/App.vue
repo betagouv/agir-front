@@ -27,15 +27,12 @@
   import { computed, onMounted, ref } from 'vue';
   import { NavigationGuardNext, RouteLocationNormalized, useRoute } from 'vue-router';
   import MessageFlash from '@/components/custom/MessageFlash.vue';
-  import DisclaimerGeneral from '@/components/dsfr/DisclaimerGeneral.vue';
   import Footer from '@/components/dsfr/Footer.vue';
   import Header from '@/components/dsfr/Header.vue';
   import HeaderCollectivite from '@/components/dsfr/HeaderCollectivite.vue';
   import router from '@/router';
-  import { RouteCompteName } from '@/router/compte/routeCompteName';
   import useHeadProperties from '@/shell/useHeadProperties';
   import { useNavigationStore } from '@/store/navigationStore';
-  import { utilisateurStore } from '@/store/utilisateur';
 
   const estEnvDeProduction = import.meta.env.VITE_ENV === 'production';
 
@@ -49,7 +46,7 @@
   });
 
   router.beforeEach((to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
-    const { title, estPublique } = to.meta;
+    const { title } = to.meta;
 
     if (title) {
       useHead({ ...useHeadProperties, title: `${title as string}` });
@@ -60,24 +57,7 @@
       navigationStore.addRoute(from.fullPath, from.name as string, from.query);
     }
 
-    const estConnecte = utilisateurStore().utilisateur.id.length > 0;
-    const onboardingTermine = utilisateurStore().utilisateur.onboardingAEteRealise;
-    if (estPublique) {
-      next();
-    } else if (estConnecte && !onboardingTermine) {
-      next({ name: RouteCompteName.POST_CREATION_COMPTE_ETAPE_1 });
-    } else if (estConnecte && onboardingTermine) {
-      next();
-    } else {
-      next({ name: 'authentification' });
-      sessionStorage.setItem('requestedRoute', to.fullPath);
-    }
-  });
-
-  const afficherLeDisclaimer = computed(() => {
-    return (
-      utilisateurStore().utilisateur.onboardingAEteRealise && utilisateurStore().disclaimer.afficherDisclaimerGeneral
-    );
+    next();
   });
 
   const checkVersion = async () => {
