@@ -4,7 +4,6 @@ import aidesRoutes from '@/router/aides/routes';
 import articlesRoutes from '@/router/articles/routes';
 import bilanCarboneRoutes from '@/router/bilanCarbone/routes';
 import classementRoutes from '@/router/classement/routes';
-import { RouteCoachName } from '@/router/coach/routeCoachName';
 import coachRoutes from '@/router/coach/routes';
 import collectiviteRoutes from '@/router/collectivites/routes';
 import compteRoutes from '@/router/compte/routes';
@@ -14,7 +13,6 @@ import personnalisationRoutes from '@/router/personnalisation/routes';
 import resetRoutes from '@/router/reset/routes';
 import serviceRoutes from '@/router/services/routes';
 import thematiqueRoutes from '@/router/thematiques/routes';
-import { utilisateurStore } from '@/store/utilisateur';
 
 const MagicLinkCallBack = () => import('@/components/pages/PageMagicLinkCallback.vue');
 const Authentification = () => import('@/components/Authentification.vue');
@@ -63,11 +61,6 @@ const routes: RouteRecordRaw[] = [
     meta: {
       title: 'La transition écologique à mon échelle',
       estPublique: true,
-    },
-    beforeEnter: () => {
-      if (utilisateurStore().utilisateur.id.length > 0) {
-        router.replace({ name: RouteCoachName.ACCUEIL_CONNECTEE });
-      }
     },
   },
   {
