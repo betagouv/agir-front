@@ -1,5 +1,4 @@
 import { Router } from 'vue-router';
-import { RouteComptePath } from '@/router/compte/routes';
 
 export enum EventBusEvents {
   SESSION_EXPIREE,
@@ -23,11 +22,8 @@ export class NavigationBus {
     this.router = router;
   }
 
-  on(eventName: EventBusEvents) {
-    if (eventName === EventBusEvents.SESSION_EXPIREE) {
-      return this.router?.push({ name: 'session-expiree' });
-    } else if (eventName === EventBusEvents.ONBOARDING) {
-      return this.router?.replace({ path: RouteComptePath.POST_CREATION_COMPTE_ETAPE_1 });
-    }
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  on(_: EventBusEvents) {
+    // Site décommissionné : aucune navigation automatique
   }
 }
