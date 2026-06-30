@@ -1,5 +1,21 @@
 # Changelog
 
+## [2.27.0](https://github.com/betagouv/agir-front/compare/v2.26.0...v2.27.0) (2026-06-30)
+
+
+### ✨ Nouvelles fonctionnalités
+
+* fin de jagis ([#1380](https://github.com/betagouv/agir-front/issues/1380)) ([3e8f841](https://github.com/betagouv/agir-front/commit/3e8f841320b73534bd3084bcb91c0a12b6b67dd3))
+* page de transition J'agis ([#1382](https://github.com/betagouv/agir-front/issues/1382)) ([6960c11](https://github.com/betagouv/agir-front/commit/6960c112d70830c9ff477d1b78db91a24b1a9ac0))
+
+
+### 🐛 Corrections de bogues
+
+* boucle infinie pour les utilisateurs avec session persistée ([#1383](https://github.com/betagouv/agir-front/issues/1383)) ([bf1bd4e](https://github.com/betagouv/agir-front/commit/bf1bd4e286924cb54d705737e78e0ac301e09f44))
+* masquer les éléments liés aux utilisateurs connectés ([#1385](https://github.com/betagouv/agir-front/issues/1385)) ([55afb21](https://github.com/betagouv/agir-front/commit/55afb21a07fa248e208769b53fe2e5e2eea00b3b))
+* neutraliser le NavigationBus pour tuer les boucles résiduelles ([#1384](https://github.com/betagouv/agir-front/issues/1384)) ([e03fab4](https://github.com/betagouv/agir-front/commit/e03fab447506d197c7ff29382c5e03fe3bdde91a))
+* supprimer la logique auth/onboarding du beforeEach ([#1386](https://github.com/betagouv/agir-front/issues/1386)) ([7c133a1](https://github.com/betagouv/agir-front/commit/7c133a1b2829e08319bd1b0635c2f894016754c2))
+
 ## [2.26.0](https://github.com/betagouv/agir-front/compare/v2.25.0...v2.26.0) (2025-10-29)
 
 
